@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.venv*/
+.python-version
+
+# reccmp clone (not tracked)
+tools/reccmp
+
+# Vendored compiler toolchains (too large for git)
+tools/MSVC600/
+tools/VC/
+
+# IDE / tool caches
+.pytest_cache/
+.ruff_cache/
+.claude/
+.opencode/
+
+# Generated output (ephemeral)
+output/
+run_out/
+*.log
+
+# Source files only (exclude binaries in src/)
+src/**
+!src/**/*.c
+!src/**/*.asm
+
+# Target binary bytes (extracted from original DLLs)
+bin/
+
+# Extracted target function bytes (legacy, no longer generated)
+func_0x*.bin
+
+# Docker build context
+docker/__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# original binaries
+original/

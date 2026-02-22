@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>server.dll Coverage Map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css" />
+    <link rel="stylesheet" href="style.css?v=7" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="title">server.dll .text Coverage</div>
+      <div class="subtitle" id="subtitle">Loading…</div>
+      <div class="actions">
+        <button id="reload">Reload</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="map">
+        <div class="legend">
+          <div class="key"><span class="swatch swatch-none"></span><span>undocumented</span></div>
+          <div class="key"><span class="swatch swatch-asm"></span><span>documented (asm)</span></div>
+          <div class="key"><span class="swatch swatch-c"></span><span>pure-C 1:1</span></div>
+        </div>
+
+        <div class="grid" id="grid" aria-label="Coverage grid"></div>
+        <div class="hint">Click a block to see overlapping functions.</div>
+      </section>
+
+      <aside class="panel" id="panel">
+        <div class="panel-head">
+          <div class="panel-title" id="panelTitle">No selection</div>
+          <div class="panel-meta" id="panelMeta"></div>
+        </div>
+
+        <div class="panel-body">
+          <div class="section">
+            <div class="section-title">Overlapping Functions</div>
+            <div id="overlaps" class="overlaps"></div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Original Bytes</div>
+            <pre id="bytes" class="code">(select a function)</pre>
+          </div>
+
+          <div class="section">
+            <div class="section-title">ASM</div>
+            <div class="links" id="asmLinks"></div>
+            <pre id="asm" class="code">(select a function)</pre>
+          </div>
+
+          <div class="section">
+            <div class="section-title">C (When Available)</div>
+            <div class="links" id="cLinks"></div>
+            <pre id="c" class="code">(select a function)</pre>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Docs (.md)</div>
+            <div class="links" id="docLinks"></div>
+            <pre id="doc" class="code">(select a function)</pre>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/c.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/x86asm.min.js"></script>
+    <script defer src="app.js?v=7"></script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+#include <windows.h>
+
+#define srv_GameLoop ((LPTHREAD_START_ROUTINE)0x100093a0)
+#define THREAD_CREATE_RUN_IMMEDIATELY 0
+
+BOOL __cdecl Init(LPVOID serverInitParams)
+{
+    HANDLE result;
+    #define THUNK (*(HANDLE (WINAPI **)(LPSECURITY_ATTRIBUTES,SIZE_T,LPTHREAD_START_ROUTINE,LPVOID,DWORD,LPDWORD))0x10024050)
+result = THUNK(NULL,0,srv_GameLoop,serverInitParams,THREAD_CREATE_RUN_IMMEDIATELY,(LPDWORD)&serverInitParams);
+    #define HGS (*(volatile HANDLE*)0x11764094)
+HGS = result;
+    return result != NULL;
+}

@@ -1,0 +1,27 @@
+typedef int BOOL;
+typedef void *HANDLE;
+typedef unsigned long DWORD;
+typedef void *LPVOID;
+
+#define WINAPI __stdcall
+
+#define DLL_PROCESS_DETACH 0
+#define DLL_PROCESS_ATTACH 1
+#define DLL_THREAD_ATTACH  2
+#define DLL_THREAD_DETACH  3
+#define FALSE 0
+
+extern int __proc_attached;
+extern BOOL (WINAPI *_pRawDllMain)(HANDLE, DWORD, LPVOID);
+
+BOOL WINAPI _CRT_INIT(HANDLE hDllHandle, DWORD dwReason, LPVOID lpreserved);
+BOOL WINAPI DllMain(HANDLE hDllHandle, DWORD dwReason, LPVOID lpreserved);
+
+BOOL WINAPI _DllMainCRTStartup(
+    HANDLE  hDllHandle,
+    register DWORD   dwReason,
+    LPVOID  lpreserved)
+{
+    HANDLE _h = hDllHandle;
+    return retcode;
+}

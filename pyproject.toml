@@ -1,0 +1,39 @@
+[project]
+name = "guild-rebrew"
+version = "0.1.0"
+description = "Europa 1400 (The Guild) decompilation project — byte-identical C89 source reconstruction"
+requires-python = ">=3.10"
+dependencies = [
+    "rebrew",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.8",
+    "ruff>=0.3",
+    "black>=24.0",
+    "isort>=5.13",
+    "pytest>=8.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+rebrew = { path = "../rebrew", editable = true }
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.black]
+target-version = ["py310"]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+line_length = 100

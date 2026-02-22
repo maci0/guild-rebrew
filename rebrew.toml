@@ -1,0 +1,28 @@
+# rebrew project configuration
+# This file defines the target binaries, source layout, compiler, and
+# architecture so that every tool reads from a single source of truth.
+#
+# Multiple targets are supported (modeled after reccmp-project.yml).
+# Tools default to the first target unless --target <name> is passed.
+
+[targets.server_dll]
+binary = "original/Server/server.dll"
+format = "pe"                        # pe | elf | macho
+arch = "x86_32"                      # x86_32 | x86_64 | arm32 | arm64
+reversed_dir = "src/server_dll"      # directory containing reversed .c files
+function_list = "src/server_dll/r2_functions.txt"
+bin_dir = "bin/server_dll"           # directory for extracted .bin files
+
+# Additional targets can be added below, for example:
+# [targets.client_exe]
+# binary = "original/Client/client.exe"
+# format = "pe"
+# arch = "x86_32"
+# reversed_dir = "src/client_exe"
+# function_list = "src/client_exe/r2_functions.txt"
+
+[compiler]
+profile = "msvc6"
+command = "wine tools/MSVC600/VC98/Bin/CL.EXE"
+includes = "tools/MSVC600/VC98/Include"
+libs = "tools/MSVC600/VC98/Lib"
