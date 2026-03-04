@@ -2,11 +2,11 @@
 
 # Reversed Functions Catalog
 
-Total: 499 functions matched (305 exact, 78 reloc, 0 stubs)  
-Coverage: 0.0% of .text section (138429/0 bytes)
+Total: 516 functions matched (306 exact, 94 reloc, 0 stubs)  
+Coverage: 0.0% of .text section (141756/0 bytes)
 
 
-## GAME (212 functions)
+## GAME (229 functions)
 
 | VA | Symbol | Size | Status | Files |
 |---:|--------|-----:|--------|-------|
@@ -110,6 +110,23 @@ Coverage: 0.0% of .text section (138429/0 bytes)
 | 0x1000d8a0 | _ExTransferCurrencyNoKill | 142 | RELOC | DieGildeAddOn/command/command.c |
 | 0x1000d930 | _TradeCommandHandler | 2057 | MATCHING | DieGildeAddOn/command/command.c |
 | 0x1000e140 | _cm_ExecProduction | 993 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000ec00 | _ExCopyEntityData | 901 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000ef90 | _chain_handler_assign_id | 26 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000efb0 | _SetSyncFlags | 122 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f030 | _CmdKillPlayer | 72 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f080 | _AssignSequenceCounter | 26 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f0a0 | _AssignEntityId | 37 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f0d0 | _RemoveLinkedObject | 197 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f1a0 | _chain_handler_record_lookup | 327 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f2f0 | _ExCreateSpecialObject | 172 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f3a0 | _chain_handler_noop | 3 | EXACT | DieGildeAddOn/command/command.c |
+| 0x1000f3b0 | _SetBuildingOwner | 206 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f480 | _SetResidence | 271 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f590 | _SetBuildingUpgrade | 237 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000f680 | _DestroyBuilding | 171 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f730 | _EmployWorkerAtBuilding | 515 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f940 | _call_with_off2 | 22 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f960 | _CmdExecuteOffice | 22 | RELOC | DieGildeAddOn/command/command.c |
 | 0x10010530 | _check_slot_active | 113 | EXACT | DieGildeAddOn/game/friedhof_logic.c |
 | 0x100105b0 | _GetSlotEntry | 352 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010710 | _FindSlotEntryFiltered | 320 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
@@ -145,7 +162,7 @@ Coverage: 0.0% of .text section (138429/0 bytes)
 | 0x10014bf0 | _HandleEntitySync | 163 | MATCHING | DieGildeAddOn/command/lobbycommands.c |
 | 0x10014ca0 | _cm_RouteCommand | 265 | MATCHING | DieGildeAddOn/command/lobbycommands.c |
 | 0x10014db0 | _lb_ExLobbyServerCommand | 373 | MATCHING | DieGildeAddOn/command/lobbycommands.c |
-| 0x10014ee0 | _SearchRecordTable | 69 | MATCHING | DieGildeAddOn/command/lobbycommands.c |
+| 0x10014ee0 | _SearchRecordTable | 69 | RELOC | DieGildeAddOn/command/lobbycommands.c |
 | 0x10014f30 | _FindRecord | 74 | EXACT | DieGildeAddOn/auxillary/plant.c |
 | 0x10014f80 | _find_zone_record | 103 | EXACT | DieGildeAddOn/auxillary/plant.c |
 | 0x10014ff0 | _CheckZoneAvailability | 175 | MATCHING | DieGildeAddOn/auxillary/plant.c |

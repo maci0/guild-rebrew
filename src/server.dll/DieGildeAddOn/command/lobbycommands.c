@@ -533,7 +533,7 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2)
         }
 }
 
-// STATUS: MATCHING
+// STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 69
 // SYMBOL: _SearchRecordTable

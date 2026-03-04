@@ -11,6 +11,11 @@ typedef unsigned char  uchar;
 typedef unsigned short ushort;
 typedef unsigned int   uint;
 typedef unsigned char  byte;
+typedef unsigned char  undefined1;
+
+typedef int bool;
+#define true 1
+#define false 0
 
 /* Forward declarations for missing types */
 typedef struct DISPATCH_OBJ {
@@ -77,6 +82,17 @@ extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
 extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
 extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
 extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
+extern char s_cm_ExAllocThemaPredigt____Execut_1002d184[];
+extern char s_cm_ExSetGebBesitzer____Could_not_1002d214[];
+extern char s_cm_ExSetGebBesitzer____Could_not_1002d1a8[];
+extern char s_cm_ExSetGebBesitzer____Could_not_1002d1e0[];
+extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d298[];
+extern char s_cm_ExSetWohnsitz____Residence_is_1002d240[];
+extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[];
+extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
+extern char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[];
+extern char s_cm_ExEmployWorker____Illegal_geb_1002d33c[];
+extern char s_cm_ExEmployWorker____Illegal_gw__1002d318[];
 
 extern void* g_static_entity_table_358a0;
 extern void* g_entity_table_end;
@@ -103,6 +119,9 @@ extern int g_sequence_counter;
 extern int g_entity_id_start;
 extern char g_relationship_matrix_secondary;
 extern char g_relationship_matrix_primary;
+extern int g_plant_count;
+extern char g_entity_type_table[];
+extern int g_work_building_ptrs;
 
 /* Internal Helpers */
 extern int __cdecl get_field_by_type(char* cmd, int field_id);
@@ -138,6 +157,27 @@ extern char* __cdecl FindSlotById(uint, uint);
 extern int __cdecl CalculateProductionValue(uint, int);
 extern long __cdecl _ftol(void);
 extern int __cdecl entity_accumulate(int);
+extern int __cdecl RemoveLinkedNodeById(int*, int);
+extern char* __cdecl SearchRecordTable(uint);
+extern int __cdecl CheckZoneAvailability(int, uint, uint, uint);
+extern char* __cdecl FindRecord(char*, uint, uint);
+extern void* __cdecl plt_SetPlantMap(int, uint, uint, uint, uint);
+extern void __cdecl AssignBuildingOwner(uchar*, ushort, uint);
+extern void __cdecl table_lookup(uint, int*);
+extern void __cdecl ReportMessage(char*);
+extern void __cdecl SetBuildingWorkerLimits(uchar*);
+extern void __cdecl gm_AllocBuildingDefaults(uchar*);
+extern void __cdecl UpgradeGraveyardField(uint8_t*);
+extern void __cdecl RefreshMarketAvailability(uint);
+extern void __cdecl RemoveEntityLink(int);
+extern ushort* __cdecl NextEntityQueryMatch(void);
+extern char* __cdecl sim_CreateCitizen(char, uint, int, uchar, uchar);
+extern void __cdecl priority_update(char*, char*);
+extern void __cdecl reset_entity_state(char*);
+extern void __cdecl StartEntityQueryByType(uchar*);
+extern void __cdecl QueryEntityBuildingType(int);
+extern uint __cdecl ValidateAndAssignOffice(uint*);
+extern int __cdecl ExecuteOfficeAssignment(char*);
 
 /* 0x1000cb20 */
 // STATUS: MATCHING
@@ -939,4 +979,244 @@ int __cdecl AssignEntityId(int param_1, char *param_2)
   *(DWORD *)(param_1 + 0x14) = DVar1;
   g_entity_id_start = g_entity_id_start + 1;
   return 0;
+}
+
+/* 0x1000f0d0 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 197
+// SYMBOL: _RemoveLinkedObject
+// FUNCTION: SERVER 0x1000f0d0
+int __cdecl RemoveLinkedObject(int param_1,char *param_2)
+{
+  char *pcVar1; ushort *puVar2; int iVar3; void *local_4;
+  pcVar1 = param_2; iVar3 = param_1; if (param_2 != (char *)0x0) *param_2 = '\x02';
+  ResolveEntityById((void **)&param_1,&param_2,&local_4,*(int *)(param_1 + 0x10));
+  if (param_1 == 0) { if (local_4 == (void *)0x0) { if (param_2 == (char *)0x0) return -1; iVar3 = RemoveLinkedNodeById((int *)(param_2 + 0x14),*(int *)(iVar3 + 0x18)); if (iVar3 != 0) return iVar3; goto LAB_1000f181; } iVar3 = *(int *)(iVar3 + 0x18); puVar2 = (ushort *)((int)local_4 + 0x178); }
+  else if (*(int *)(iVar3 + 0x14) == -1) { iVar3 = *(int *)(iVar3 + 0x18); puVar2 = (ushort *)(param_1 + 0x5d); }
+  else { param_2 = (char *)StartEntityQuery(*(int *)(param_1 + 0x5d),2,6,1,*(int *)(iVar3 + 0x14)); if ((ushort *)param_2 == (ushort *)0x0) return -2; iVar3 = *(int *)(iVar3 + 0x18); puVar2 = (ushort *)((int)param_2 + 0x14); }
+  iVar3 = RemoveLinkedNodeById((int *)puVar2,iVar3); if (iVar3 != 0) return iVar3;
+LAB_1000f181:
+  if (pcVar1 != (char *)0x0) *pcVar1 = '\x01';
+  return 0;
+}
+
+/* 0x1000f1a0 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 327
+// SYMBOL: _chain_handler_record_lookup
+// FUNCTION: SERVER 0x1000f1a0
+int __cdecl chain_handler_record_lookup(int param_1,char *param_2)
+{
+  bool bVar1; ushort *puVar2; char *pcVar3; int iVar4; char *pcVar5; char local_1;
+  local_1 = '\x02'; pcVar5 = (char *)0x0; bVar1 = false; *(int *)(param_1 + 0x10) = g_plant_count;
+  puVar2 = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x14));
+  if (puVar2 != (ushort *)0x0) {
+    pcVar3 = SearchRecordTable((uint)*(ushort *)(param_1 + 0x1a));
+    if (((pcVar3 == (char *)0x0) || (*(char *)(param_1 + 0x1c) != '\0')) || (iVar4 = CheckZoneAvailability(*(int *)((int)puVar2 + 0x71),(uint)*(byte *)(param_1 + 0x18),(uint)*(byte *)(param_1 + 0x19),(uint)(byte)pcVar3[0x42]), iVar4 != 0)) bVar1 = true;
+    if (*(char *)(param_1 + 0x1c) == '\0') { if (*(int *)(param_1 + 0x1d) != -1) { pcVar5 = FindRecord(*(char **)((int)puVar2 + 0x71),(uint)*(byte *)(param_1 + 0x18),(uint)*(byte *)(param_1 + 0x19)); if (param_2 == (char *)0x0) return 0; *(char **)(param_2 + 6) = pcVar5; *param_2 = '\x01'; param_2[1] = '\x05'; return 0; } }
+    else { pcVar5 = FindRecord(*(char **)((int)puVar2 + 0x71),(uint)*(byte *)(param_1 + 0x18),(uint)*(byte *)(param_1 + 0x19)); if ((pcVar5 != (char *)0x0) && (*(int *)(pcVar5 + 0x10) != -1)) return 1; }
+    if (bVar1) pcVar5 = (char *)plt_SetPlantMap(*(int *)((int)puVar2 + 0x71),(uint)*(byte *)(param_1 + 0x18),(uint)*(byte *)(param_1 + 0x19),(uint)*(ushort *)(param_1 + 0x1a),(uint)*(byte *)(param_1 + 0x1c));
+    if (pcVar5 != (char *)0x0) { local_1 = '\x01'; *(int *)(pcVar5 + 4) = *(int *)((int)puVar2 + 1); if (*(char *)(param_1 + 0x1c) != '\0') *(int *)(pcVar5 + 0x10) = *(int *)(param_1 + 0x1d); }
+  }
+  if (param_2 != (char *)0x0) { param_2[1] = '\x05'; *param_2 = local_1; *(char **)(param_2 + 6) = pcVar5; }
+  return 0;
+}
+
+/* 0x1000f2f0 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 172
+// SYMBOL: _ExCreateSpecialObject
+// FUNCTION: SERVER 0x1000f2f0
+int __cdecl ExCreateSpecialObject(int param_1,char *param_2)
+{
+  int iVar1; char *pcVar2;
+  *(int *)(param_1 + 0x10) = g_timestamp_0b6c; iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x14)); *(int *)(param_1 + 0x14) = iVar1;
+  pcVar2 = (char*)AllocGameObject(iVar1,0x1b5,1); if (pcVar2 == (char *)0x0) return 1;
+  *(int *)(g_player_slot_0[*(byte *)(param_1 + 3)].padding + 0x264200) = *(int *)(pcVar2 + 2);
+  pcVar2[0x12] = '@'; *(int *)(pcVar2 + 0x1c) = *(int *)(param_1 + 0x18); *(short *)(pcVar2 + 0x20) = *(short *)(param_1 + 0x1c);
+  pcVar2[0x22] = *(char *)(param_1 + 0x1e); pcVar2[0x22] = '\0';
+  LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x40db,s_cm_ExAllocThemaPredigt____Execut_1002d184,1);
+  if (param_2 != (char *)0x0) { *param_2 = '\x01'; param_2[1] = '\x03'; *(char **)(param_2 + 6) = pcVar2; }
+  return 0;
+}
+
+/* 0x1000f3a0 */
+// STATUS: EXACT
+// ORIGIN: GAME
+// SIZE: 3
+// SYMBOL: _chain_handler_noop
+// FUNCTION: SERVER 0x1000f3a0
+int __cdecl chain_handler_noop(void)
+{
+  return 0;
+}
+
+/* 0x1000f3b0 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 206
+// SYMBOL: _SetBuildingOwner
+// FUNCTION: SERVER 0x1000f3b0
+int __cdecl SetBuildingOwner(int param_1,char *param_2)
+{
+  ushort *puVar1; ushort *puVar2; ushort *puVar3; uint line; char *msg;
+  puVar1 = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
+  if (puVar1 == (ushort *)0x0) { msg = s_cm_ExSetGebBesitzer____Could_not_1002d214; line = 0x4972; }
+  else {
+    puVar2 = (ushort *)LookupEntityRecordById(*(int *)(param_1 + 0x18));
+    if ((puVar2 != (ushort *)0x0) || (*(int *)(param_1 + 0x18) == -1)) {
+      puVar3 = (ushort *)LookupEntityRecordById(*(int *)(param_1 + 0x14));
+      if ((puVar3 == (ushort *)0x0) && (*(int *)(param_1 + 0x14) != -1)) { LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x4990,s_cm_ExSetGebBesitzer____Could_not_1002d1a8,1); return 2; }
+      AssignBuildingOwner((uchar *)puVar1,*puVar3,(uint)*puVar2);
+      if (param_2 != (char *)0x0) { *param_2 = '\x02'; param_2[1] = '\0'; param_2[6] = '\0'; param_2[7] = '\0'; param_2[8] = '\0'; param_2[9] = '\0'; }
+      return 0;
+    }
+    msg = s_cm_ExSetGebBesitzer____Could_not_1002d1e0; line = 0x4980;
+  }
+  LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,line,msg,1);
+  return 1;
+}
+
+/* 0x1000f480 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 271
+// SYMBOL: _SetResidence
+// FUNCTION: SERVER 0x1000f480
+int __cdecl SetResidence(int param_1,char *param_2)
+{
+  byte *pbVar1; ushort *puVar2; int iVar3; uint line; char *msg; ushort local_8 [4];
+  puVar2 = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
+  if (puVar2 == (ushort *)0x0) { msg = s_cm_ExSetWohnsitz____Could_not_fi_1002d298; line = 0x49de; }
+  else {
+    iVar3 = LookupEntityRecordById(*(int *)(param_1 + 0x14));
+    if ((iVar3 != 0) || (*(int *)(param_1 + 0x14) == -1)) {
+      if (*(char *)(g_entity_type_table + (uint)(byte)*puVar2 * 0x24d) == '\x01') {
+        table_lookup((uint)(byte)*puVar2,(int *)local_8);
+        if (local_8[0] <= *(byte *)((int)puVar2 + 0x65)) { msg = s_cm_ExSetWohnsitz____Residence_is_1002d240; line = 0x4a08; goto LAB_1000f519; }
+        *(byte *)((int)puVar2 + 0x65) = *(byte *)((int)puVar2 + 0x65) + 1;
+      }
+      pbVar1 = *(byte **)(iVar3 + 0x170);
+      if (((pbVar1 != (byte *)0x0) && (*(char *)(g_entity_type_table + (uint)*pbVar1 * 0x24d) == '\x01')) && (pbVar1[0x65] != 0)) { pbVar1[0x65] = pbVar1[0x65] - 1; }
+      *(ushort **)(iVar3 + 0x170) = puVar2;
+      if (param_2 != (char *)0x0) { *param_2 = '\x01'; param_2[1] = '\0'; param_2[6] = '\0'; param_2[7] = '\0'; param_2[8] = '\0'; param_2[9] = '\0'; }
+      return 0;
+    }
+    msg = s_cm_ExSetWohnsitz____Could_not_fi_1002d268; line = 0x49ec;
+  }
+LAB_1000f519:
+  LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,line,msg,1);
+  return 1;
+}
+
+/* 0x1000f590 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 237
+// SYMBOL: _SetBuildingUpgrade
+// FUNCTION: SERVER 0x1000f590
+int __cdecl SetBuildingUpgrade(int param_1,char *param_2)
+{
+  char *pcVar1; ushort *puVar2; uint uVar3;
+  *(int *)(param_1 + 0x14) = g_timestamp_0b6c;
+  puVar2 = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
+  if (puVar2 == (ushort *)0x0) { LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x4a94, s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec,1); return 1; }
+  uVar3 = (uint)(byte)*puVar2; pcVar1 = (char *)(g_entity_type_table + uVar3 + uVar3 * 0x24c);
+  if ((byte)pcVar1[0x248] <= *(byte *)(g_entity_type_table + uVar3 + 0x247 + uVar3 * 0x24c)) { ReportMessage(s_cm_ExSetGebUpgrade____already_hi_1002d2c0); return 1; }
+  *(byte *)puVar2 = (byte)*puVar2 + 1;
+  *(char *)(puVar2 + 0x2e) = (char)((100 - (char)puVar2[0x2e]) / 2) + (char)puVar2[0x2e];
+  SetBuildingWorkerLimits((uchar *)puVar2); gm_AllocBuildingDefaults((uchar *)puVar2);
+  if (*pcVar1 == '\x1d') { UpgradeGraveyardField((uint8_t *)puVar2); }
+  RefreshMarketAvailability((uint)g_current_season);
+  if (param_2 != (char *)0x0) { *param_2 = '\x02'; param_2[1] = '\0'; param_2[6] = '\0'; param_2[7] = '\0'; param_2[8] = '\0'; param_2[9] = '\0'; }
+  return 0;
+}
+
+/* 0x1000f680 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 171
+// SYMBOL: _DestroyBuilding
+// FUNCTION: SERVER 0x1000f680
+int __cdecl DestroyBuilding(int param_1,char *param_2)
+{
+  ushort *puVar1; ushort *puVar2; int *piVar3;
+  puVar1 = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
+  if (puVar1 != (ushort *)0x0) {
+    puVar2 = (ushort*)StartEntityQuery(0,2,7,4,0x1d);
+    while (puVar2 != (ushort *)0x0) { if (*(int *)(puVar2 + 0xe) == *(int *)((int)puVar1 + 1)) { RemoveEntityLink((int)puVar2); } puVar2 = NextEntityQueryMatch(); }
+    piVar3 = &g_work_building_ptrs;
+    do { if ((ushort *)*piVar3 == puVar1) { *piVar3 = 0; } piVar3 = piVar3 + 0x87; } while ((int)piVar3 < 0x1009ae0c);
+    CleanupBuildingEntity((uchar *)puVar1);
+    if (param_2 != (char *)0x0) { *param_2 = '\x02'; param_2[1] = '\0'; param_2[6] = '\0'; param_2[7] = '\0'; param_2[8] = '\0'; param_2[9] = '\0'; }
+    return 0;
+  }
+  LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x4c32, s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec,1);
+  return 1;
+}
+
+/* 0x1000f730 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 515
+// SYMBOL: _EmployWorkerAtBuilding
+// FUNCTION: SERVER 0x1000f730
+int __stdcall EmployWorkerAtBuilding(int param_1,char *param_2)
+{
+  int random_seed; ushort *building_entity; char *citizen_entity; uint *building_type_ptr; int *extraout_EAX; ushort *workplace_entity; uint log_line; char worker_type;
+  workplace_entity = (ushort *)0x0; *(int *)(param_1 + 0x1f) = g_timestamp_0b6c; random_seed = rand(); *(int *)(param_1 + 0x23) = random_seed; crt_thread_set_alt(random_seed);
+  building_entity = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
+  if (building_entity == (ushort *)0x0) { citizen_entity = s_cm_ExEmployWorker____Illegal_geb_1002d33c; log_line = 0x4d3a;
+LAB_1000f7a9:
+    LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,log_line,citizen_entity,1); return 1;
+  }
+  citizen_entity = (char *)LookupEntityRecordById(*(int *)(param_1 + 0x19));
+  if (*(int *)(param_1 + 0x14) == -1) { if (citizen_entity != (char *)0x0) { workplace_entity = *(ushort **)(citizen_entity + 0x170); goto LAB_1000f7ca; } }
+  else { workplace_entity = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x14)); if (workplace_entity == (ushort *)0x0) { citizen_entity = s_cm_ExEmployWorker____Illegal_gw__1002d318; log_line = 0x4d50; goto LAB_1000f7a9; }
+LAB_1000f7ca:
+    if ((citizen_entity != (char *)0x0) && (*(int *)(citizen_entity + 0x16c) == 0)) goto LAB_1000f7f5;
+  }
+  citizen_entity = sim_CreateCitizen('\x06',(uint)*(byte *)(param_1 + 0x18),0x12,*(uchar *)(param_1 + 0x1e), *(uchar *)(param_1 + 0x1d));
+LAB_1000f7f5:
+  if (citizen_entity != (char *)0x0) {
+    if (*(char *)(param_1 + 0x1d) != '\0') { citizen_entity[0x165] = *(char *)(param_1 + 0x1d); }
+    if (*(char *)(param_1 + 0x1e) == '\0') { citizen_entity[0x164] = '\0'; } else { citizen_entity[0x164] = *(char *)(param_1 + 0x1e); }
+    citizen_entity[2] = *(char *)(param_1 + 0x18); if ((*(int *)(citizen_entity + 0x184) == 0) && (workplace_entity != (ushort *)0x0)) { StartEntityQueryByType((uchar *)workplace_entity); }
+    worker_type = *(char *)(param_1 + 0x1d);
+    if ((((worker_type == '\x02') || (worker_type == '\x01')) || (worker_type == '\x10')) || (((worker_type == '\x0f' || (worker_type == '\x14')) || (worker_type == '\x13')))) { QueryEntityBuildingType((int)citizen_entity); if (*(int*)&extraout_EAX == 0) { AllocGameObject(*(int *)(citizen_entity + 4),0x154,1); } }
+    else { QueryEntityBuildingType((int)citizen_entity); if (*(uint*)&building_type_ptr != 0) { SubObjekt(*(void **)(citizen_entity + 4),*(uint*)&building_type_ptr,1); } }
+    *(ushort **)(citizen_entity + 0x16c) = building_entity; if (workplace_entity != (ushort *)0x0) { priority_update(citizen_entity,(char *)workplace_entity); }
+    citizen_entity[0x174] = '\0'; citizen_entity[0x175] = '\0'; citizen_entity[0x176] = '\0'; citizen_entity[0x177] = '\0'; *(uint *)(citizen_entity + 0x1c8) &= 0xffffdfff;
+    reset_entity_state(citizen_entity); *(int *)(citizen_entity + 0x1b4) = *(int *)((int)building_entity + 0x99); *(int *)(citizen_entity + 0x1b8) = *(int *)((int)building_entity + 0x9d); *(int *)(citizen_entity + 0x1bc) = *(int *)((int)building_entity + 0xa1);
+  }
+  return 0;
+}
+
+/* 0x1000f940 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 22
+// SYMBOL: _call_with_off2
+// FUNCTION: SERVER 0x1000f940
+int __cdecl call_with_off2(void *obj)
+{
+  uint uVar1;
+  uVar1 = ValidateAndAssignOffice((uint *)((int)obj + 0x10));
+  return (uint)(uVar1 == 0);
+}
+
+/* 0x1000f960 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 22
+// SYMBOL: _CmdExecuteOffice
+// FUNCTION: SERVER 0x1000f960
+int __cdecl CmdExecuteOffice(void *param_1, char *param_2)
+{
+  int iVar1;
+  iVar1 = ExecuteOfficeAssignment((char *)((int)param_1 + 0x10));
+  return (uint)(iVar1 == 0);
 }
