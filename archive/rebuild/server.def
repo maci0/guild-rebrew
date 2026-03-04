@@ -1,4 +1,0 @@
-LIBRARY server.dll
-EXPORTS
-    Init @2
-    Exit @1

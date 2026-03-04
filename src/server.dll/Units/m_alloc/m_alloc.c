@@ -1,0 +1,588 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#pragma intrinsic(memset, strcmp, strcpy)
+
+extern void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */;
+extern void __cdecl ReportMessage(char* msg); /* Single arg log? */;
+extern void* __cdecl crt_call_global(int); /* 0x1001a7f7 */;
+extern int DAT_10034624;
+extern int DAT_10034628;
+extern int DAT_1003462c;
+extern int DAT_10034630;
+extern int DAT_10034634;
+extern int DAT_10034638;
+extern void* DAT_10034640;
+extern void __cdecl LogMessageInternal(char* file, int line, char* msg, int level);
+extern void __cdecl FreeHeapBlockWithRuntimeLock(void* ptr);
+extern int DAT_117640b4;
+extern int DAT_117640b0;
+extern int DAT_117640bc;
+extern int DAT_117640b8;
+extern int DAT_117640c0;
+extern int DAT_117640c4;
+extern int DAT_117640a0;
+extern int DAT_117640a4;
+extern int DAT_10028938;
+extern int DAT_1002893c;
+extern int __cdecl func_1001a299(char*, char*, ...);
+extern int __cdecl func_1001aff0(char*, char*);
+extern char* __cdecl func_1001a540(char*, int);
+extern void __cdecl ReportMemoryGroupInfo(int toggle);
+extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* file_and_line);
+extern void __cdecl FreeTrackedHeapBlock(int*);
+
+;
+;
+;
+
+// STATUS: MATCHING
+// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
+// ORIGIN: GAME
+// SIZE: 658
+// SYMBOL: _AllocateTrackedHeapBlock
+// BLOCKER_DELTA: 578
+// ANALYSIS: Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code.
+// FUNCTION: SERVER 0x10006580
+// AllocateTrackedHeapBlock
+
+void* __cdecl AllocateTrackedHeapBlock(unsigned int size, int source)
+{
+	char msgBuf[256];
+	char nameBuf[16];
+	int prev;
+	int group;
+
+	if (DAT_10034640 == 0) {
+		ReportFatalError(
+			"D:\\Develop\\Units\\m_alloc\\m_alloc.c",
+			0x93,
+			"m_alloc() called without prior call to m_init()!"
+		);
+		return 0;
+	}
+	if (size == 0) {
+		return 0;
+	}
+	DAT_10034638 = DAT_10034638 + 1;
+	group = 0x117640a0;
+	if (source != 0) {
+		int nameLen;
+		char* colon;
+		colon = strchr((char*) source, 0x3a);
+		if (colon != 0) {
+			nameLen = (int) (colon - (char*) source) + 1;
+			if (nameLen >= 0x10) {
+				sprintf(msgBuf, "m_alloc_debug: GroupInformation too long: %s", source);
+				ReportMessage(msgBuf);
+			}
+			strncpy(nameBuf, (char*) source, nameLen);
+			nameBuf[nameLen] = '\0';
+			group = 0x117640a0;
+			if (group != 0) {
+				do {
+					if (strcmp(nameBuf, (char*) group) == 0) {
+						if (group != 0) {
+							goto found;
+						}
+						break;
+					}
+					prev = group;
+					group = *(int*) (group + 0x24);
+				} while (group != 0);
+			}
+			group = (int) crt_call_global(0x28);
+			strcpy((char*) group, nameBuf);
+			*(int*) (group + 0x14) = 0;
+			*(int*) (group + 0x10) = 0;
+			*(int*) (group + 0x1c) = 0;
+			*(int*) (group + 0x18) = 0;
+			*(int*) (group + 0x20) = 0;
+			*(int*) (group + 0x24) = 0;
+			*(int*) (prev + 0x24) = group;
+		}
+	}
+found: {
+	void* block;
+	int tmp;
+	*(int*) (group + 0x20) = *(int*) (group + 0x20) + 1;
+	prev = size;
+	block = crt_call_global(size);
+	if (block == 0) {
+		sprintf(nameBuf, "Out of Memory Error: Malloc - Failed %s for %u bytes", source, size);
+		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0xcd, nameBuf);
+		return 0;
+	}
+	memset(block, 0, prev);
+	if (DAT_1003462c < DAT_10034624) {
+		int i;
+		int* slot;
+		i = 0;
+		slot = DAT_10034640;
+		if (DAT_10034624 > 0) {
+			do {
+				if (slot[2] == 0) {
+					break;
+				}
+				slot = slot + 4;
+				i = i + 1;
+			} while (i < DAT_10034624);
+		}
+		slot[2] = (int) block;
+		slot[1] = source;
+		slot[3] = size;
+		*slot = group;
+		DAT_10034628 = DAT_10034628 + size;
+		if (DAT_10034628 > DAT_10034630) {
+			DAT_10034630 = DAT_10034628;
+		}
+		tmp = *(int*) (group + 0x10) + size;
+		*(int*) (group + 0x10) = tmp;
+		if (tmp > *(int*) (group + 0x18)) {
+			*(int*) (group + 0x18) = tmp;
+		}
+		DAT_1003462c = DAT_1003462c + 1;
+		if (DAT_1003462c > DAT_10034634) {
+			DAT_10034634 = DAT_1003462c;
+		}
+		tmp = *(int*) (group + 0x14) + 1;
+		*(int*) (group + 0x14) = tmp;
+		if (tmp > *(int*) (group + 0x1c)) {
+			*(int*) (group + 0x1c) = tmp;
+			return block;
+		}
+	}
+	else {
+		ReportFatalError(
+			"D:\\Develop\\Units\\m_alloc\\m_alloc.c",
+			0xf0,
+			"No more free memory slots...\nCall m_init() with more slots!"
+		);
+	}
+	return block;
+}
+}
+
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 188
+// SYMBOL: _FreeTrackedHeapBlock
+// FUNCTION: SERVER 0x10006820
+// FreeTrackedHeapBlock
+
+void __cdecl FreeTrackedHeapBlock(void* heapBlock)
+{
+	int trackedSize;
+	int* trackingEntry;
+	int blockSize;
+
+	if (heapBlock != (void*) 0) {
+		DAT_10034638 = DAT_10034638 - 1;
+		trackedSize = 0;
+		trackingEntry = DAT_10034640;
+		if (DAT_10034624 > 0) {
+			do {
+				if ((void*) trackingEntry[2] == heapBlock) {
+					break;
+				}
+				trackingEntry = trackingEntry + 4;
+				trackedSize = trackedSize + 1;
+			} while (trackedSize < DAT_10034624);
+		}
+		if (trackedSize == DAT_10034624) {
+			LogMessageInternal(
+				"D:\\Develop\\Units\\m_alloc\\m_alloc.c",
+				0x149,
+				"Memory freed more than once or tried to free non-allocated memory!",
+				1
+			);
+			return;
+		}
+		blockSize = trackingEntry[3];
+		trackingEntry[2] = 0;
+		FreeHeapBlockWithRuntimeLock(heapBlock);
+		DAT_1003462c = DAT_1003462c - 1;
+		*(int*) (*trackingEntry + 0x14) = *(int*) (*trackingEntry + 0x14) - 1;
+		DAT_10034628 = DAT_10034628 - blockSize;
+		*(int*) (*trackingEntry + 0x10) = *(int*) (*trackingEntry + 0x10) - blockSize;
+		if (DAT_10034628 < 0) {
+			ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x17a, "Memory Underflow Error");
+		}
+	}
+}
+
+// STATUS: MATCHING
+// ORIGIN: GAME
+// BLOCKER: comparison direction swap, jump condition swap
+// BLOCKER_DELTA: 141
+// ANALYSIS: Frees memory allocated by AllocateTrackedHeapBlock. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer.
+// SIZE: 162
+// SYMBOL: _InitPacketPool
+// FUNCTION: SERVER 0x100068e0
+// InitPacketPool
+
+void __cdecl InitPacketPool(int param_1)
+{
+	int size;
+	void* buf;
+
+	DAT_10034624 = param_1;
+	size = param_1 * 0x10;
+	DAT_10034628 = 0;
+	DAT_10034630 = 0;
+	DAT_1003462c = 0;
+	DAT_10034634 = 0;
+	buf = malloc(size);
+	DAT_10034640 = buf;
+	memset(buf, 0, (unsigned int) size);
+	DAT_117640b4 = 0;
+	DAT_117640b0 = 0;
+	DAT_117640bc = 0;
+	DAT_117640b8 = 0;
+	DAT_117640c0 = 0;
+	DAT_117640c4 = 0;
+	DAT_117640a0 = DAT_10028938;
+	DAT_117640a4 = DAT_1002893c;
+}
+
+// STATUS: MATCHING
+// ORIGIN: GAME
+// BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
+// BLOCKER_DELTA: 159
+// BLOCKER: zero-extend pattern (xor vs mov)
+// SIZE: 612
+// SYMBOL: _ReportMemoryGroupInfo
+// BLOCKER_DELTA: 586
+// FUNCTION: SERVER 0x10006990
+// ReportMemoryGroupInfo
+
+void __cdecl ReportMemoryGroupInfo(int param_1)
+{
+	char name[16];
+	char buf[1024];
+	char* group;
+	int* slot;
+	int i;
+	char matched;
+
+	if (*(int*) 0x10034628 == 0 && *(int*) 0x1003462c == 0) {
+		func_1001a299(buf, (char*) 0x10028aa0, *(int*) 0x10034634, *(int*) 0x10034630, *(int*) 0x10034630 >> 10);
+	}
+	else {
+		func_1001a299(
+			buf,
+			(char*) 0x10028a2c,
+			*(int*) 0x10034634,
+			*(int*) 0x10034630,
+			*(int*) 0x10034630 >> 10,
+			*(int*) 0x1003462c,
+			*(int*) 0x10034628,
+			*(int*) 0x10034628 >> 10
+		);
+	}
+
+	LogMessageInternal((char*) 0x10028888, 0x1b5, buf, 1);
+	LogMessageInternal((char*) 0x10028888, 0x1b6, (char*) 0x10028a10, 1);
+
+	group = (char*) 0x117640a0;
+
+	if (group == 0) {
+		goto done;
+	}
+
+	do {
+		if (param_1 == 0 || func_1001aff0(group, (char*) param_1) == 0) {
+			matched = 0;
+		}
+		else {
+			matched = 1;
+		}
+
+		if (*(int*) (group + 0x1c) <= 0) {
+			goto next_group;
+		}
+
+		if (*group == '!' && *(int*) (group + 0x14) == 0 && !matched) {
+			goto next_group;
+		}
+
+		if (param_1 != 0 && !matched) {
+			goto next_group;
+		}
+
+		strcpy(name, group);
+
+		{
+			char* p = func_1001a540(name, ':');
+			if (p != 0) {
+				*p = 0;
+			}
+		}
+
+		if (*(int*) (group + 0x10) == 0 && *(int*) (group + 0x14) == 0) {
+			func_1001a299(
+				buf,
+				(char*) 0x100289d4,
+				name,
+				*(int*) (group + 0x18),
+				*(int*) (group + 0x18) >> 10,
+				*(int*) (group + 0x1c),
+				*(int*) (group + 0x20)
+			);
+		}
+		else {
+			func_1001a299(
+				buf,
+				(char*) 0x1002898c,
+				name,
+				*(int*) (group + 0x10),
+				*(int*) (group + 0x18),
+				*(int*) (group + 0x10) >> 10,
+				*(int*) (group + 0x18) >> 10,
+				*(int*) (group + 0x14),
+				*(int*) (group + 0x1c),
+				*(int*) (group + 0x20)
+			);
+		}
+
+		LogMessageInternal((char*) 0x10028888, 0x1cc, buf, 1);
+
+		if (matched) {
+			slot = *(int**) 0x10034640;
+			i = 0;
+			if (*(int*) 0x10034624 > 0) {
+				do {
+					if (slot[2] != 0 && slot[0] == (int) group) {
+						func_1001a299(buf, (char*) 0x10028974, (char*) slot[1], slot[3], slot[3] >> 10);
+						LogMessageInternal((char*) 0x10028888, 0x1d5, buf, 1);
+					}
+					i++;
+					slot += 4;
+				} while (i < *(int*) 0x10034624);
+			}
+			LogMessageInternal((char*) 0x10028888, 0x1d8, (char*) 0x10028958, 1);
+		}
+
+	next_group:
+		group = *(char**) (group + 0x24);
+	} while (group != 0);
+
+done:
+	LogMessageInternal((char*) 0x10028888, 0x1dc, (char*) 0x10028940, 1);
+}
+
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 283
+// SYMBOL: _ShutdownMemoryAllocator
+// FUNCTION: SERVER 0x10006c00
+// ShutdownMemoryAllocator
+
+/* GLOBAL: SERVER 0x10034624 */
+extern int g_array_count;
+/* GLOBAL: SERVER 0x10034628 */
+extern int g_stat1;
+/* GLOBAL: SERVER 0x1003462c */
+extern int g_stat2;
+/* GLOBAL: SERVER 0x10034630 */
+extern int g_stat3;
+/* GLOBAL: SERVER 0x10034634 */
+extern int g_stat4;
+/* GLOBAL: SERVER 0x1003463c */
+extern int g_flag_3c;
+
+struct ArrayItem {
+	int field0;
+	int field4;
+	void* ptr8;
+	int fieldC;
+};
+
+/* GLOBAL: SERVER 0x10034640 */
+extern struct ArrayItem* g_array_ptr;
+
+struct LinkedListNode {
+	char data[0x24];
+	struct LinkedListNode* next;
+};
+
+/* GLOBAL: SERVER 0x117640c4 */
+extern struct LinkedListNode* g_list_head;
+
+/* GLOBAL: SERVER 0x10028b04 */
+extern char g_str_10028b04[];
+/* GLOBAL: SERVER 0x10028aec */
+extern char g_str_10028aec[];
+/* GLOBAL: SERVER 0x10028888 */
+extern char g_str_10028888[];
+
+void __cdecl ShutdownMemoryAllocator(void)
+{
+	char buffer[1024]; /* 0x400 bytes */
+
+	if (g_stat2 != 0 || g_stat1 != 0 || g_flag_3c != 0) {
+		sprintf(buffer, g_str_10028b04, g_stat4, g_stat3, g_stat2, g_stat1);
+		ReportMessage(buffer);
+
+		if (g_flag_3c != 0) {
+			ReportMemoryGroupInfo(0);
+		}
+
+		if (g_array_count > 0) {
+			int i;
+			for (i = 0; i < g_array_count; i++) {
+				if (g_array_ptr[i].ptr8 != 0) {
+					sprintf(buffer, g_str_10028aec, g_array_ptr[i].field4);
+					LogMessageInternal(g_str_10028888, 0x203, buffer, 1);
+					FreeHeapBlockWithRuntimeLock(g_array_ptr[i].ptr8);
+					g_array_ptr[i].ptr8 = 0;
+				}
+			}
+		}
+	}
+
+	g_stat4 = 0;
+	g_stat2 = 0;
+	g_stat3 = 0;
+	g_stat1 = 0;
+	g_array_count = 0;
+
+	{
+		struct LinkedListNode* node = g_list_head;
+		while (node != 0) {
+			struct LinkedListNode* next = node->next;
+			FreeHeapBlockWithRuntimeLock(node);
+			node = next;
+		}
+	}
+
+	FreeHeapBlockWithRuntimeLock(g_array_ptr);
+	g_array_ptr = 0;
+}
+
+// STATUS: MATCHING
+// ORIGIN: GAME
+// BLOCKER: comparison direction swap, instruction folding (lea vs mov)
+// BLOCKER_DELTA: 265
+// SIZE: 270
+// SYMBOL: _pool_alloc
+// FUNCTION: SERVER 0x10006d20
+// pool_alloc
+
+/* GLOBAL: SERVER 0x10028b78 */
+extern char g_str_10028b78[];
+
+/* GLOBAL: SERVER 0x10028b60 */
+extern char g_str_10028b60[];
+
+struct BlockNode {
+	int count;
+	int max;
+	int size;
+	struct BlockNode* next;
+};
+
+void* __cdecl pool_alloc(struct BlockNode** head, int size, int max_items)
+{
+	int aligned_size;
+	struct BlockNode* node;
+
+	if (!head || size <= 0 || max_items <= 0) {
+		return 0;
+	}
+
+	aligned_size = size + 4;
+	if ((size & 3) > 0) {
+		aligned_size += 4 - (size & 3);
+	}
+
+	node = *head;
+	if (!node) {
+		node = (struct BlockNode*) AllocateTrackedHeapBlock(aligned_size * max_items + 0x10, g_str_10028b78);
+		*head = node;
+		node->count = 0;
+		node->max = max_items;
+		node->size = aligned_size;
+		node->next = 0;
+	}
+	else {
+		while (node) {
+			if (node->count < node->max && node->size == aligned_size) {
+				break;
+			}
+			node = node->next;
+		}
+		if (!node) {
+			node = (struct BlockNode*) AllocateTrackedHeapBlock(aligned_size * max_items + 0x10, g_str_10028b60);
+			node->count = 0;
+			node->max = max_items;
+			node->size = aligned_size;
+			node->next = *head;
+			*head = node;
+		}
+	}
+
+	node = *head;
+	if (node->max > 0) {
+		char* ptr = (char*) node + 0x10;
+		int i;
+		for (i = 0; i < node->max; i++) {
+			if (*(int*) ptr == 0) {
+				node->count++;
+				*(struct BlockNode**) ptr = node;
+
+				/* reuse arguments for smaller stack frame & exact match */
+				head = (struct BlockNode**) (ptr + 4);
+				size = aligned_size - 4;
+
+				memset((void*) head, 0, size);
+				return head;
+			}
+			ptr += node->size;
+		}
+	}
+	return 0;
+}
+
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 137
+// SYMBOL: _pool_free
+// FUNCTION: SERVER 0x10006E30
+// pool_free
+
+void __cdecl pool_free(int* param_1, int* param_2)
+{
+	int* header;
+	int* block;
+	int count;
+	int* cur;
+	int* prev;
+
+	header = param_2 - 1;
+	if (header != 0 && (block = (int*) *header, block != 0) && param_2 >= block + 4 &&
+		param_2 < (int*) ((int) block + block[2] * block[1] + 0x10)) {
+		*header = 0;
+		count = *block;
+		count = count - 1;
+		*block = count;
+		if (count == 0) {
+			prev = (int*) *param_1;
+			if (block == prev) {
+				*param_1 = block[3];
+				FreeTrackedHeapBlock(block);
+				return;
+			}
+			while ((cur = (int*) prev[3]) != block) {
+				prev = cur;
+			}
+			prev[3] = block[3];
+			FreeTrackedHeapBlock(block);
+			return;
+		}
+	}
+	else {
+		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x279, "m_pool_free: tried to free invalid address");
+	}
+}

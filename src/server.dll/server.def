@@ -1,0 +1,4 @@
+LIBRARY server
+EXPORTS
+    Exit @1
+    Init @2
