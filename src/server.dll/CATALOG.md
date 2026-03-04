@@ -2,11 +2,11 @@
 
 # Reversed Functions Catalog
 
-Total: 516 functions matched (306 exact, 94 reloc, 0 stubs)  
-Coverage: 0.0% of .text section (141756/0 bytes)
+Total: 520 functions matched (307 exact, 95 reloc, 0 stubs)  
+Coverage: 0.0% of .text section (142351/0 bytes)
 
 
-## GAME (229 functions)
+## GAME (233 functions)
 
 | VA | Symbol | Size | Status | Files |
 |---:|--------|-----:|--------|-------|
@@ -127,6 +127,10 @@ Coverage: 0.0% of .text section (141756/0 bytes)
 | 0x1000f730 | _EmployWorkerAtBuilding | 515 | RELOC | DieGildeAddOn/command/command.c |
 | 0x1000f940 | _call_with_off2 | 22 | RELOC | DieGildeAddOn/command/command.c |
 | 0x1000f960 | _CmdExecuteOffice | 22 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000f980 | _ExCreateCitizenAtBuilding | 335 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000fad0 | _cm_ExKillTransporter | 85 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000fb30 | _CmdCreateBuilding | 153 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000fbd0 | _cond_write | 22 | EXACT | DieGildeAddOn/command/command.c |
 | 0x10010530 | _check_slot_active | 113 | EXACT | DieGildeAddOn/game/friedhof_logic.c |
 | 0x100105b0 | _GetSlotEntry | 352 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010710 | _FindSlotEntryFiltered | 320 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
