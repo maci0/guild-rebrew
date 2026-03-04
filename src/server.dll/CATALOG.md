@@ -2,11 +2,11 @@
 
 # Reversed Functions Catalog
 
-Total: 482 functions matched (303 exact, 70 reloc, 0 stubs)  
-Coverage: 0.0% of .text section (133135/0 bytes)
+Total: 499 functions matched (305 exact, 78 reloc, 0 stubs)  
+Coverage: 0.0% of .text section (138429/0 bytes)
 
 
-## GAME (195 functions)
+## GAME (212 functions)
 
 | VA | Symbol | Size | Status | Files |
 |---:|--------|-----:|--------|-------|
@@ -92,7 +92,24 @@ Coverage: 0.0% of .text section (133135/0 bytes)
 | 0x1000cbd0 | _cm_ChkSellObjekt | 517 | MATCHING | DieGildeAddOn/command/command.c |
 | 0x1000cde0 | _cm_ChkChangeAttribute | 331 | MATCHING | DieGildeAddOn/command/command.c |
 | 0x1000cf30 | _cm_ChkChangeBits | 162 | MATCHING | DieGildeAddOn/command/command.c |
-| 0x1000cfe0 | _cm_ChkSetGebBesitzer | 64 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000cfe0 | _cm_ChkSetGebBesitzer | 86 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000d020 | _cm_ChkOfficeCandidate | 22 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000d040 | _cm_ChkValidateGeneric | 22 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000d060 | _cm_ChkElectionOrTrade | 169 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000d110 | _cm_ChkJoinLeaveElection | 333 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000d260 | _cm_ChkCutsceneReady | 120 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000d2e0 | _validate_command_type | 77 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000d330 | _MarkAndReturn | 14 | EXACT | DieGildeAddOn/command/command.c |
+| 0x1000d340 | _RejectCommand | 6 | EXACT | DieGildeAddOn/command/command.c |
+| 0x1000d350 | _CmdAllocBuilding | 267 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000d460 | _CmdAllocPlayer | 267 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000d570 | _validate_cmd_10_AllocPlayer | 361 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000d6e0 | _cm_ExChangePlayerIdentity | 78 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000d730 | _ExFreeEntity | 180 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000d7f0 | _ExTransferCurrency | 164 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000d8a0 | _ExTransferCurrencyNoKill | 142 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000d930 | _TradeCommandHandler | 2057 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000e140 | _cm_ExecProduction | 993 | MATCHING | DieGildeAddOn/command/command.c |
 | 0x10010530 | _check_slot_active | 113 | EXACT | DieGildeAddOn/game/friedhof_logic.c |
 | 0x100105b0 | _GetSlotEntry | 352 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010710 | _FindSlotEntryFiltered | 320 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
