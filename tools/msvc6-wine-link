@@ -1,0 +1,69 @@
+#!/bin/bash
+# Wine wrapper for MSVC 6.0 LINK.EXE — used as CMAKE_LINKER
+# Translates Unix paths to Wine Z:\ paths and invokes LINK.EXE via Wine.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+MSVC_ROOT="$SCRIPT_DIR/MSVC600/VC98"
+
+export LIB="$(winepath -w "$MSVC_ROOT/Lib" 2>/dev/null || echo "Z:${MSVC_ROOT//\//\\}\\Lib")"
+
+LINK_EXE="$MSVC_ROOT/Bin/LINK.EXE"
+
+# Convert a Unix path to a Wine Z:\ path
+to_wine_path() {
+    local p="$1"
+    if [[ "$p" == /* ]]; then
+        echo "Z:${p//\//\\}"
+    else
+        echo "$p"
+    fi
+}
+
+# Rewrite arguments
+args=()
+for arg in "$@"; do
+    case "$arg" in
+        # /OUT:<path>
+        /OUT:/*)
+            path="${arg#/OUT:}"
+            args+=("/OUT:$(to_wine_path "$path")")
+            ;;
+        # /DEF:<path>
+        /DEF:/*)
+            path="${arg#/DEF:}"
+            args+=("/DEF:$(to_wine_path "$path")")
+            ;;
+        # /LIBPATH:<path>
+        /LIBPATH:/*)
+            path="${arg#/LIBPATH:}"
+            args+=("/LIBPATH:$(to_wine_path "$path")")
+            ;;
+        # /IMPLIB:<path>
+        /IMPLIB:/*)
+            path="${arg#/IMPLIB:}"
+            args+=("/IMPLIB:$(to_wine_path "$path")")
+            ;;
+        # /PDB:<path>
+        /PDB:/*)
+            path="${arg#/PDB:}"
+            args+=("/PDB:$(to_wine_path "$path")")
+            ;;
+        # /MAP:<path>
+        /MAP:/*)
+            path="${arg#/MAP:}"
+            args+=("/MAP:$(to_wine_path "$path")")
+            ;;
+        # .obj files and other absolute paths
+        /home/*|/tmp/*)
+            args+=("$(to_wine_path "$arg")")
+            ;;
+        *)
+            args+=("$arg")
+            ;;
+    esac
+done
+
+wine "$LINK_EXE" "${args[@]}" 2>&1 | tr -d '\r'
+exit "${PIPESTATUS[0]}"

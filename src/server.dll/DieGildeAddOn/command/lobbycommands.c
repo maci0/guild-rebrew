@@ -22,6 +22,7 @@ extern unsigned char g_entity_sync_data[];
 // GHIDRA: SendLobbyPlayerList
 // FUNCTION: SERVER 0x100145e0
 // lb_ExPlayerlist
+// PROTOTYPE: int __cdecl lb_ExPlayerlist(uint * param_1, uchar * param_2)
 
 int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2)
 {
@@ -75,6 +76,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2)
 // BLOCKER_DELTA: 77
 // FUNCTION: SERVER 0x100146c0
 // SendLobbyConfig
+// PROTOTYPE: int __cdecl SendLobbyConfig(uint * param_1, uchar * param_2)
 
 int __cdecl SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
 {
@@ -142,6 +144,7 @@ int __cdecl SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
 
 /* Game function - handles player join request (lobbycommands.c) */
 // BLOCKER_DELTA: 552
+// PROTOTYPE: int __stdcall HandleLobbyCommands(char * player, char * msg)
 
 int __cdecl HandleLobbyCommands(char* player, char* msg)
 {
@@ -276,6 +279,7 @@ do_join:
 // BLOCKER_DELTA: 37
 // FUNCTION: SERVER 0x10014a50
 // broadcast_state_change
+// PROTOTYPE: int __cdecl broadcast_state_change(uint * param_1, uchar * param_2)
 
 int __cdecl broadcast_state_change(unsigned int* param_1, unsigned char* param_2)
 {
@@ -318,6 +322,7 @@ int __cdecl broadcast_state_change(unsigned int* param_1, unsigned char* param_2
 // BLOCKER_DELTA: 49
 // FUNCTION: SERVER 0x10014af0
 // HandleDataTransferCommand
+// PROTOTYPE: int __cdecl HandleDataTransferCommand(uint * param_1, uchar * param_2)
 
 int __cdecl HandleDataTransferCommand(unsigned int* param_1, unsigned char* param_2)
 {
@@ -374,6 +379,7 @@ int __cdecl HandleDataTransferCommand(unsigned int* param_1, unsigned char* para
 // SYMBOL: _HandleEntitySync
 // FUNCTION: SERVER 0x10014bf0
 // HandleEntitySync
+// PROTOTYPE: int __cdecl HandleEntitySync(uint * param_1, uchar * param_2)
 
 int __cdecl HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
 {
@@ -424,6 +430,7 @@ int __cdecl HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
 // NOTE: obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte.
 // FUNCTION: SERVER 0x10014ca0
 // cm_RouteCommand
+// PROTOTYPE: int __cdecl cm_RouteCommand(uint * param_1, uchar * param_2)
 
 int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
 {
@@ -490,6 +497,7 @@ int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
 // ANALYSIS: obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte.
 // FUNCTION: SERVER 0x10014db0
 // lb_ExLobbyServerCommand
+// PROTOTYPE: int __cdecl lb_ExLobbyServerCommand(uint * param_1, int param_2)
 
 int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2)
 {
@@ -531,6 +539,7 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2)
 // SYMBOL: _SearchRecordTable
 // FUNCTION: SERVER 0x10014EE0
 // SearchRecordTable
+// PROTOTYPE: char * __cdecl SearchRecordTable(int record_id)
 
 char* __cdecl SearchRecordTable(int record_id)
 {

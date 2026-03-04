@@ -2,11 +2,11 @@
 
 # Reversed Functions Catalog
 
-Total: 478 functions matched (303 exact, 70 reloc, 0 stubs)  
-Coverage: 0.0% of .text section (132061/0 bytes)
+Total: 482 functions matched (303 exact, 70 reloc, 0 stubs)  
+Coverage: 0.0% of .text section (133135/0 bytes)
 
 
-## GAME (191 functions)
+## GAME (195 functions)
 
 | VA | Symbol | Size | Status | Files |
 |---:|--------|-----:|--------|-------|
@@ -88,7 +88,11 @@ Coverage: 0.0% of .text section (132061/0 bytes)
 | 0x1000c710 | _GetCommandPayloadSize | 752 | MATCHING | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000ca00 | _ProcessEntityChain | 130 | MATCHING | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000ca90 | _get_field_by_type | 130 | EXACT | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000cb20 | _cm_ChkMoveCredits | 171 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000cb20 | _cm_ChkMoveCredits | 171 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000cbd0 | _cm_ChkSellObjekt | 517 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000cde0 | _cm_ChkChangeAttribute | 331 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000cf30 | _cm_ChkChangeBits | 162 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000cfe0 | _cm_ChkSetGebBesitzer | 64 | RELOC | DieGildeAddOn/command/command.c |
 | 0x10010530 | _check_slot_active | 113 | EXACT | DieGildeAddOn/game/friedhof_logic.c |
 | 0x100105b0 | _GetSlotEntry | 352 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010710 | _FindSlotEntryFiltered | 320 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |

@@ -54,6 +54,7 @@ extern float DAT_100257c8;
 // SYMBOL: _check_slot_active
 // FUNCTION: SERVER 0x10010530
 // check_slot_active
+// PROTOTYPE: int __cdecl check_slot_active(char * obj, int idx)
 int __cdecl check_slot_active(char* obj, int idx)
 {
 	if (idx == 0) {
@@ -91,6 +92,7 @@ int __cdecl check_slot_active(char* obj, int idx)
 // BLOCKER_DELTA: 254
 // FUNCTION: SERVER 0x100105b0
 // GetSlotEntry
+// PROTOTYPE: int __cdecl GetSlotEntry(int param_1, int param_2, uchar param_3)
 
 int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 {
@@ -188,6 +190,7 @@ ret_value:
 // BLOCKER_DELTA: 109
 // FUNCTION: SERVER 0x10010710
 // FindSlotEntryFiltered
+// PROTOTYPE: char * __cdecl FindSlotEntryFiltered(char * ctx, uchar * obj, char * start, void * callback, int category)
 
 char* __cdecl FindSlotEntryFiltered(
 	char* ctx,
@@ -285,6 +288,7 @@ char* __cdecl FindSlotEntryFiltered(
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 339
+// PROTOTYPE: int __cdecl SpawnGraveyardEntities(uchar * param_1, int param_2)
 
 int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 {
@@ -356,6 +360,7 @@ int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 // SYMBOL: _AllocGraveyardField
 // FUNCTION: SERVER 0x100109d0
 // AllocGraveyardField
+// PROTOTYPE: int __cdecl AllocGraveyardField(int building_ptr)
 
 #ifdef __clang__
 #define REBREW_NAKED
@@ -698,6 +703,7 @@ int REBREW_NAKED __cdecl AllocGraveyardField(int param_1)
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 539
+// PROTOTYPE: uint __cdecl UpgradeGraveyardField(uint8_t * param_1)
 
 unsigned int UpgradeGraveyardField(unsigned char* param_1)
 {
@@ -819,6 +825,7 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 // SYMBOL: _free_3fields
 // FUNCTION: SERVER 0x10010F50
 // free_3fields
+// PROTOTYPE: void __cdecl free_3fields(char * p)
 
 void __cdecl free_3fields(char* p)
 {
@@ -846,6 +853,7 @@ void __cdecl free_3fields(char* p)
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 462
+// PROTOTYPE: uint __cdecl AssignProductionSlot(int param_1)
 
 unsigned int AssignProductionSlot(int param_1)
 {
@@ -979,6 +987,7 @@ unsigned int AssignProductionSlot(int param_1)
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 456
+// PROTOTYPE: uint __cdecl HireProductionWorker(int param_1)
 
 unsigned int HireProductionWorker(int param_1)
 {
@@ -1058,6 +1067,7 @@ unsigned int HireProductionWorker(int param_1)
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 306
+// PROTOTYPE: uint __cdecl ExtendProductionTime(uint32_t * param_1)
 
 unsigned int ExtendProductionTime(unsigned int* param_1)
 {
@@ -1118,6 +1128,7 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 // ReplaceProductionWorker
 
 // GLOBALS: SERVER 0x1003546c
+// PROTOTYPE: int __cdecl ReplaceProductionWorker(uchar * param_1)
 
 int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl check_slot_active(int param_1, int param_2);
@@ -1269,6 +1280,7 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 // UpdateProductionProgress
 
 // GLOBALS: SERVER 0x1003546c
+// PROTOTYPE: int __cdecl UpdateProductionProgress(uchar * param_1)
 
 int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl check_slot_active(int param_1, int param_2);
@@ -1318,6 +1330,7 @@ int __cdecl UpdateProductionProgress(unsigned char* param_1)
 // ANALYSIS: Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure.
 // FUNCTION: SERVER 0x10011890
 // ValidateEntityAction
+// PROTOTYPE: int __cdecl ValidateEntityAction(uchar * param_1)
 
 int __cdecl ValidateEntityAction(unsigned char* param_1)
 {
@@ -1356,6 +1369,7 @@ int __cdecl ValidateEntityAction(unsigned char* param_1)
 // BLOCKER_DELTA: 639
 // FUNCTION: SERVER 0x10011940
 // MoveSlotEntry
+// PROTOTYPE: uint __cdecl MoveSlotEntry(int param_1)
 
 unsigned int MoveSlotEntry(int param_1)
 {
@@ -1473,6 +1487,7 @@ unsigned int MoveSlotEntry(int param_1)
 // ANALYSIS: Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates.
 // FUNCTION: SERVER 0x10011bf0
 // gv_ExAllocGraveyardWorker
+// PROTOTYPE: uint __stdcall gv_ExAllocGraveyardWorker(int param_1)
 
 unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 {

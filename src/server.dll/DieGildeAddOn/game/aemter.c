@@ -38,6 +38,7 @@ extern void __cdecl InitBuildingTypeTable(void);
 // BLOCKER_DELTA: 196
 // FUNCTION: SERVER 0x1000b1c0
 // ValidateOfficeCandidate
+// PROTOTYPE: int __cdecl ValidateOfficeCandidate(int * param_1)
 
 void* __cdecl LookupEntityRecordById(int entityId);
 
@@ -114,6 +115,7 @@ int __cdecl ValidateOfficeCandidate(int* param_1)
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 400
+// PROTOTYPE: uint __stdcall ValidateAndAssignOffice(uint * param_1)
 
 unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 {
@@ -220,6 +222,7 @@ unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 // SYMBOL: _ValidateCommand
 // FUNCTION: SERVER 0x1000b440
 // ValidateCommand
+// PROTOTYPE: int __cdecl ValidateCommand(char * param_1)
 
 int __cdecl ValidateCommand(char* param_1)
 {
@@ -276,6 +279,7 @@ int __cdecl ValidateCommand(char* param_1)
 /* Game function - entity role/assignment table manager */
 /* Updates a 0x18-byte record table at 0x101de5a0, clears old roles, sets new assignments */
 // BLOCKER_DELTA: 800
+// PROTOTYPE: int __stdcall ExecuteOfficeAssignment(char * param_1)
 
 int __cdecl ExecuteOfficeAssignment(char* param_1)
 {
@@ -553,6 +557,7 @@ final_store:
 // SYMBOL: _find_entity_26
 // FUNCTION: SERVER 0x1000B820
 // find_entity_26
+// PROTOTYPE: void __cdecl find_entity_26(int val)
 
 void __cdecl find_entity_26(int val)
 {
@@ -571,6 +576,7 @@ void __cdecl find_entity_26(int val)
 // SYMBOL: _find_entity_27
 // FUNCTION: SERVER 0x1000B850
 // find_entity_27
+// PROTOTYPE: void __cdecl find_entity_27(int val)
 
 void __cdecl find_entity_27(int val)
 {
@@ -591,6 +597,7 @@ void __cdecl find_entity_27(int val)
 // BLOCKER_DELTA: 205
 // FUNCTION: SERVER 0x1000b880
 // SwapOfficeHolders
+// PROTOTYPE: int __cdecl SwapOfficeHolders(int * param_1)
 
 int __cdecl SwapOfficeHolders(int* param_1)
 {
@@ -658,6 +665,7 @@ int __cdecl SwapOfficeHolders(int* param_1)
 // BLOCKER_DELTA: 146
 // FUNCTION: SERVER 0x1000b990
 // ClearEntityLinks
+// PROTOTYPE: int __stdcall ClearEntityLinks(int param_1)
 
 int __cdecl ClearEntityLinks(int param_1)
 {
@@ -704,6 +712,7 @@ int __cdecl ClearEntityLinks(int param_1)
 // ANALYSIS: Iterates through the command execution tracker table at g_office_secondary_id_base to detach or update a specific entity's links and pending sequence numbers. Used when an entity changes state abruptly or is being removed.
 // FUNCTION: SERVER 0x1000ba30
 // UpdateEntityLinks
+// PROTOTYPE: void __cdecl UpdateEntityLinks(int param_1, int param_2)
 
 void __cdecl UpdateEntityLinks(int param_1, int param_2)
 {

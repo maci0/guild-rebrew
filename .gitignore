@@ -76,3 +76,8 @@ cmake/
 db/
 archive/
 compile_commands.json
+.rebrew
+ghidra_commands.json
+decomp_dump
+diff.json
+uv.lock

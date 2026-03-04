@@ -4,6 +4,7 @@
 // SYMBOL: _SendBroadcastPacket
 // FUNCTION: SERVER 0x10001130
 // SendBroadcastPacket
+// PROTOTYPE: void __cdecl SendBroadcastPacket(int port, char * buf)
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

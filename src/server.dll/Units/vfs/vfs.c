@@ -47,6 +47,7 @@ extern int __cdecl deflateInit2_(char*, int, int, int, int, int, char*, int); /*
 // SYMBOL: _game_getbyte
 // FUNCTION: SERVER 0x10003820
 // game_getbyte
+// PROTOTYPE: uint __cdecl game_getbyte(int * param_1)
 
 unsigned int __cdecl game_getbyte(int* param_1)
 {
@@ -84,6 +85,7 @@ unsigned int __cdecl game_getbyte(int* param_1)
 // SYMBOL: _close_stream
 // FUNCTION: SERVER 0x100038a0
 // close_stream
+// PROTOTYPE: int __cdecl close_stream(void * param_1)
 
 int __cdecl close_stream(void* param_1)
 {
@@ -137,6 +139,7 @@ int __cdecl close_stream(void* param_1)
 // SYMBOL: _flush_stream
 // FUNCTION: SERVER 0x10003b90
 // flush_stream
+// PROTOTYPE: uint __cdecl flush_stream(int param_1, int param_2)
 
 unsigned int __cdecl flush_stream(int param_1, int param_2)
 {
@@ -187,6 +190,7 @@ unsigned int __cdecl flush_stream(int param_1, int param_2)
 // SYMBOL: _flush_and_close_stream
 // FUNCTION: SERVER 0x10003C50
 // read_uint32_be
+// PROTOTYPE: int __cdecl flush_and_close_stream(int param_1)
 
 int __cdecl read_uint32_be(int param_1)
 {
@@ -209,6 +213,7 @@ int __cdecl read_uint32_be(int param_1)
 // SYMBOL: _read_uint32_be
 // FUNCTION: SERVER 0x10003CA0
 // flush_and_close_stream
+// PROTOTYPE: int __cdecl read_uint32_be(int param_1)
 
 int __cdecl flush_and_close_stream(int param_1)
 {
@@ -233,6 +238,7 @@ int __cdecl flush_and_close_stream(int param_1)
 // SYMBOL: _write_uint32_le
 // FUNCTION: SERVER 0x10003CF0
 // write_uint32_le
+// PROTOTYPE: void __cdecl write_uint32_le(int stream, uint value)
 
 void __cdecl write_uint32_le(int stream, unsigned int value)
 {
@@ -254,6 +260,7 @@ void __cdecl write_uint32_le(int stream, unsigned int value)
 // GHIDRA: cleanup_entity
 // FUNCTION: SERVER 0x10008A50
 // destroy_entity
+// PROTOTYPE: int __cdecl destroy_entity(char * entity)
 
 int __cdecl destroy_entity(char* entity)
 {
@@ -276,6 +283,7 @@ int __cdecl destroy_entity(char* entity)
 // BLOCKER_DELTA: 466
 // FUNCTION: SERVER 0x10008a90
 // ReadVfsCompressed
+// PROTOTYPE: int __cdecl ReadVfsCompressed(int param_1, int param_2, uint param_3)
 
 int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 {
@@ -390,6 +398,7 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 // SYMBOL: _cleanup_object
 // FUNCTION: SERVER 0x10008C80
 // cleanup_object
+// PROTOTYPE: int __cdecl cleanup_object(char * obj)
 
 int __cdecl cleanup_object(char* obj)
 {
@@ -524,6 +533,7 @@ int __cdecl CloseVfsStream(void* stream)
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 448
 // ANALYSIS: Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks.
+// PROTOTYPE: uint __cdecl ReadVfsData(uint * arg_8h, int arg_ch, int arg_10h, int arg_14h)
 
 unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_14h)
 {
@@ -636,6 +646,7 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 /* Game function - compression stream initialization */
 /* Parses flag string (R/W/N/Z), allocates pool object, sets up zlib inflate/deflate */
 // BLOCKER_DELTA: 626
+// PROTOTYPE: int __cdecl OpenVfsStream(uchar * param_1, uint param_2, char * param_3)
 
 int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* param_3)
 {

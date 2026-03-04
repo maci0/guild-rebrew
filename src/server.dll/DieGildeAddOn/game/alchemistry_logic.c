@@ -50,6 +50,7 @@ extern dispatch_fn PTR_LAB_1002c5a0[];
 // SYMBOL: _reset_entity_state
 // FUNCTION: SERVER 0x1000BD50
 // reset_entity_state
+// PROTOTYPE: void __cdecl reset_entity_state(char * param_1)
 void* memset(void*, int, unsigned int);
 
 void __cdecl reset_entity_state(char* param_1)
@@ -70,6 +71,7 @@ void __cdecl reset_entity_state(char* param_1)
 // SYMBOL: _check_flag
 // FUNCTION: SERVER 0x1000BDA0
 // check_flag
+// PROTOTYPE: int __cdecl check_flag(char * p)
 
 int __cdecl check_flag(char* p)
 {
@@ -305,6 +307,7 @@ code_r0x1000be9f:
 // SYMBOL: _ApplyColorComponent
 // FUNCTION: SERVER 0x1000c1e0
 // ApplyColorComponent
+// PROTOTYPE: int __cdecl ApplyColorComponent(char * param_1, char * param_2)
 
 int __cdecl ApplyColorComponent(char* param_1, char* param_2)
 {
@@ -332,6 +335,7 @@ int __cdecl ApplyColorComponent(char* param_1, char* param_2)
 // SYMBOL: _AllocateEntitySlot
 // FUNCTION: SERVER 0x1000c280
 // AllocateEntitySlot
+// PROTOTYPE: int __stdcall AllocateEntitySlot(int param_1, int param_2, int param_3)
 
 int __cdecl AllocateEntitySlot(int param_1, int param_2, int param_3)
 {
@@ -367,6 +371,7 @@ int __cdecl AllocateEntitySlot(int param_1, int param_2, int param_3)
 // SYMBOL: _slot_clear_match
 // FUNCTION: SERVER 0x1000C310
 // slot_clear_match
+// PROTOTYPE: int __cdecl slot_clear_match(char * data, char * target, char * src)
 
 int __cdecl slot_clear_match(char* data, char* target, char* src)
 {
@@ -401,6 +406,7 @@ found:
 // SYMBOL: _search_and_set
 // FUNCTION: SERVER 0x1000C380
 // search_and_set
+// PROTOTYPE: int __cdecl search_and_set(SRC * src, TGT * tgt)
 
 int __cdecl search_and_set(SRC* src, TGT* tgt)
 {
@@ -422,6 +428,7 @@ int __cdecl search_and_set(SRC* src, TGT* tgt)
 // BLOCKER_DELTA: 47
 // FUNCTION: SERVER 0x1000c3c0
 // ClampFloatValue
+// PROTOTYPE: int __cdecl ClampFloatValue(int param_1, int param_2)
 
 int __cdecl ClampFloatValue(int param_1, int param_2)
 {
@@ -446,6 +453,7 @@ int __cdecl ClampFloatValue(int param_1, int param_2)
 // SYMBOL: _FireEntityAndCleanup
 // FUNCTION: SERVER 0x1000c420
 // FireEntityAndCleanup
+// PROTOTYPE: int __cdecl FireEntityAndCleanup(int param_1, int * param_2, int param_3)
 
 int __cdecl FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 {
@@ -489,6 +497,7 @@ int __cdecl FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 // BLOCKER_DELTA: 269
 // FUNCTION: SERVER 0x1000c4d0
 // ahm_AllocAhmInfo
+// PROTOTYPE: int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 
 int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void* __cdecl AllocateTrackedHeapBlock(unsigned int allocSize, char* groupTag);
@@ -567,6 +576,7 @@ int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 // SYMBOL: _InitRandomEntity
 // FUNCTION: SERVER 0x1000c600
 // InitRandomEntity
+// PROTOTYPE: char * InitRandomEntity(void)
 
 int __cdecl RandomBelow(unsigned short max);
 
@@ -608,6 +618,7 @@ char* __cdecl InitRandomEntity(void)
 // GHIDRA: find_by_id
 // FUNCTION: SERVER 0x1000c670
 // LookupEntityInTable
+// PROTOTYPE: int * __cdecl LookupEntityInTable(int param_1)
 
 int* __cdecl LookupEntityInTable(int param_1)
 {
@@ -630,6 +641,7 @@ int* __cdecl LookupEntityInTable(int param_1)
 // BLOCKER_DELTA: 55
 // FUNCTION: SERVER 0x1000c6a0
 // QueryEntityBuildingType
+// PROTOTYPE: void __cdecl QueryEntityBuildingType(int param_1)
 
 void __cdecl QueryEntityBuildingType(int param_1)
 {
@@ -667,6 +679,7 @@ void __cdecl QueryEntityBuildingType(int param_1)
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 569
+// PROTOTYPE: int __cdecl GetCommandPayloadSize(uchar * param_1)
 int GetCommandPayloadSize(unsigned char* param_1)
 
 {
@@ -831,6 +844,7 @@ int GetCommandPayloadSize(unsigned char* param_1)
 // ANALYSIS: Iterates through a linked list of CommandPackets generated from a Command 0x05 / 0x06 block. Runs secondary validation handlers from g_entity_chain_handlers. Re-flags commands to 0x01/0x02 status based on success/fail.
 // FUNCTION: SERVER 0x1000ca00
 // ProcessEntityChain
+// PROTOTYPE: int __cdecl ProcessEntityChain(char * param_1)
 
 int __cdecl ProcessEntityChain(char* param_1)
 {
@@ -880,6 +894,7 @@ check_result:
 // SYMBOL: _get_field_by_type
 // FUNCTION: SERVER 0x1000CA90
 // get_field_by_type
+// PROTOTYPE: int __cdecl get_field_by_type(char * p, int type)
 int __cdecl get_field_by_type(char* p, int type)
 {
 	unsigned int idx;

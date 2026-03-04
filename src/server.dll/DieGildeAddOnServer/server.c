@@ -56,6 +56,7 @@ extern unsigned char g_connections[]; /* 0x101deb00 */;
 // GHIDRA: exit_handler
 // FUNCTION: SERVER 0x10009310
 // exit_handler
+// PROTOTYPE: int __stdcall exit_handler(int a, int b, int c)
 int __stdcall exit_handler(int a, int b, int c)
 {
 	return 1;
@@ -68,6 +69,7 @@ int __stdcall exit_handler(int a, int b, int c)
 // ANALYSIS: Create server main thread - called on DLL_PROCESS_ATTACH | Exported function called by the host engine to initialize the game server thread. Creates the core ServerMainThread and returns the handle validity.
 // FUNCTION: SERVER 0x10009320
 // Init
+// PROTOTYPE: int __stdcall Init(LPVOID param)
 
 HANDLE g_thread_handle;
 
@@ -84,6 +86,7 @@ int __cdecl Init(LPVOID param)
 // ANALYSIS: Exported function called by the host engine to shut down the server thread. Sets a global shutdown flag, waits briefly, then forcefully terminates if necessary. | Signal shutdown and wait for thread to exit cleanly | Force terminate if thread doesn't exit within timeout
 // FUNCTION: SERVER 0x10009350
 // Exit
+// PROTOTYPE: void __cdecl Exit(void)
 
 void __cdecl Exit(void)
 {
@@ -107,6 +110,7 @@ void __cdecl Exit(void)
 // ANALYSIS: Core orchestration loop. Phase 1 (Lobby): Loops accepting connections until connected_players == g_max_players and every connected player has the 0x800 ready flag. Then transitions into Phase 2 (Transfer). | PHASE 0: Read game.ini config — server port (default 7531), game path, max players | Initialize server: thread priority, logging, packet pool, game data, listen socket | PHASE 1 — LOBBY: Wait for all players to connect and set ready flag (0x800). Broadcasts server info every 3 seconds. Processes network I/O. Handles disconnect requests (0x1000) and host disconnect (0x400 = terminate). | PHASE 3 — DATA RECEIVE: Wait for host to send savegame data (flag 0x08 cleared when done). Then call RecvGameSavegame to deserialize game state. | PHASE 5 — PLAYER ALLOCATION: Wait for each player to allocate their character entity (flag 0x10 set, cleared when cmd received). | PHASE 6 — GAME LOOP: Main simulation tick. Checks sync flags (0x40=sync data, 0x20=sync ready). Advances game clock, broadcasts sync packets (cmd 0x1E). Processes commands via ProcessAndBroadcastAllCommands. Speed controlled by g_game_speed_value. | PHASE 4 — DATA SEND: Stream savegame to all non-host clients in 128-byte chunks (cmd type 0x09). First sends total size (cmd type 0x08). Clears flag 0x04 when transfer complete per player.
 // FUNCTION: SERVER 0x100093a0
 // ServerMainThread
+// PROTOTYPE: int __stdcall ServerMainThread(void * lpThreadParameter)
 
 int __cdecl ServerMainThread(void* lpThreadParameter)
 {
@@ -584,6 +588,7 @@ cleanup_and_exit:
 // BLOCKER_DELTA: 283
 // FUNCTION: SERVER 0x10009d30
 // srv_Init
+// PROTOTYPE: int srv_Init(void)
 
 int __cdecl srv_Init(void)
 {
@@ -722,6 +727,7 @@ cleanup_wsa:
 // SYMBOL: _CleanupSockets
 // FUNCTION: SERVER 0x1000A010
 // CleanupSockets
+// PROTOTYPE: void CleanupSockets(void)
 
 void __cdecl CleanupSockets(void)
 {
@@ -895,6 +901,7 @@ do_accept:
 // ANALYSIS: Shutdown socket (SD_BOTH) | Close socket handle
 // FUNCTION: SERVER 0x1000a2e0
 // ClosePlayerConnection
+// PROTOTYPE: int __cdecl ClosePlayerConnection(uint * player_slot)
 
 int __cdecl ClosePlayerConnection(unsigned int* player_slot)
 {
@@ -917,6 +924,7 @@ int __cdecl ClosePlayerConnection(unsigned int* player_slot)
 
 /* recv = 0x10024168, GetTickCount = 0x1002405c, WSAGetLastError = 0x10024170 */
 // ANALYSIS: Ingress parser boundary for per-player receive buffer. Validation behavior: handles recv==0 timeout via player_slot[0x54] deadline, treats recv==-1 + WSAEWOULDBLOCK as retry, closes connection on other socket errors. | Stage 1 ingress: ensure first 3 bytes of packet are present (1-byte opcode + 2-byte total length). | Length-driven read: remaining bytes = header.total_length - bytes_received so far. | 0x2733 matches WSAEWOULDBLOCK (non-fatal on nonblocking socket).
+// PROTOTYPE: int __cdecl ReceivePacketHeader(uint * param_1)
 
 int __cdecl ReceivePacketHeader(unsigned int* param_1)
 {
@@ -1001,6 +1009,7 @@ add_and_check:
 
 /* send = 0x10024164, GetTickCount = 0x1002405c, WSAGetLastError = 0x10024170 */
 // ANALYSIS: Send data via socket (Ordinal_19 = send)
+// PROTOTYPE: int __cdecl SendPlayerData(uint * param_1)
 
 int __cdecl SendPlayerData(unsigned int* param_1)
 {
@@ -1192,6 +1201,7 @@ admin_loop:
 // SYMBOL: _ProcessSendData
 // FUNCTION: SERVER 0x1000a860
 // ProcessSendData
+// PROTOTYPE: int ProcessSendData(void)
 
 void* __cdecl memcpy(void*, const void*, unsigned int);
 
@@ -1237,6 +1247,7 @@ int __cdecl ProcessSendData(void)
 // ANALYSIS: Takes a raw command payload, pulls an available CommandPacket struct from incoming_cmd_freelist, populates it, calculates command type via 0x1000c710, and appends it to the tail of incoming_cmd_queue.
 // FUNCTION: SERVER 0x1000A8F0
 // QueueCommandForProcessing
+// PROTOTYPE: int __cdecl QueueCommandForProcessing(int player_slot, char * cmd_data)
 
 void* memcpy(void*, const void*, unsigned int);
 
@@ -1276,6 +1287,7 @@ int __cdecl QueueCommandForProcessing(int player_slot, char* cmd_data)
 // ANALYSIS: Takes a raw command payload, pulls an available CommandPacket struct from outgoing_cmd_freelist, populates it, and appends it to the tail of outgoing_cmd_queue. | Get free command buffer from pool
 // FUNCTION: SERVER 0x1000A9A0
 // QueuePlayerCommand
+// PROTOTYPE: int __cdecl QueuePlayerCommand(int player_slot, char * cmd_data)
 void* memcpy(void*, const void*, unsigned int);
 
 int __cdecl QueuePlayerCommand(int player_slot, char* cmd_data)
@@ -1314,6 +1326,7 @@ int __cdecl QueuePlayerCommand(int player_slot, char* cmd_data)
 // GHIDRA: FreeCommandBuffer
 // FUNCTION: SERVER 0x1000AA50
 // list_unlink_relink
+// PROTOTYPE: void __cdecl list_unlink_relink(char * ctx, char * node)
 void __cdecl list_unlink_relink(char* ctx, char* node)
 {
 	int prev;
@@ -1347,6 +1360,7 @@ void __cdecl list_unlink_relink(char* ctx, char* node)
 // ANALYSIS: Master Command Router. Iterates over every slot's incoming_cmd_queue. Evaluates commands via g_command_handlers. Upon validation, pushes valid commands to the sender's outgoing queue (to acknowledge) and broadcasts them to all other connected players' outgoing queues. Recognizes 0x05/0x06 to batch list and pass to ProcessEntityChain.
 // FUNCTION: SERVER 0x1000aac0
 // cm_ProcessCommandQueue
+// PROTOTYPE: int cm_ProcessCommandQueue(void)
 
 int __cdecl cm_ProcessCommandQueue(void)
 {
@@ -1485,6 +1499,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 // SYMBOL: _LogWinsockError
 // FUNCTION: SERVER 0x1000ad40
 // LogWinsockError
+// PROTOTYPE: void __cdecl LogWinsockError(int param_1)
 
 void __cdecl LogWinsockError(int param_1)
 {
@@ -1642,6 +1657,7 @@ void __cdecl LogWinsockError(int param_1)
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 365
+// PROTOTYPE: void InitBuildingTypeTable(void)
 
 void InitBuildingTypeTable(void)
 {

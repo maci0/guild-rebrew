@@ -46,6 +46,7 @@ extern void __cdecl FreeTrackedHeapBlock(int*);
 // ANALYSIS: Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code.
 // FUNCTION: SERVER 0x10006580
 // AllocateTrackedHeapBlock
+// PROTOTYPE: void * __cdecl AllocateTrackedHeapBlock(uint size, int source)
 
 void* __cdecl AllocateTrackedHeapBlock(unsigned int size, int source)
 {
@@ -170,6 +171,7 @@ found: {
 // SYMBOL: _FreeTrackedHeapBlock
 // FUNCTION: SERVER 0x10006820
 // FreeTrackedHeapBlock
+// PROTOTYPE: void __cdecl FreeTrackedHeapBlock(void * heapBlock)
 
 void __cdecl FreeTrackedHeapBlock(void* heapBlock)
 {
@@ -221,6 +223,7 @@ void __cdecl FreeTrackedHeapBlock(void* heapBlock)
 // SYMBOL: _InitPacketPool
 // FUNCTION: SERVER 0x100068e0
 // InitPacketPool
+// PROTOTYPE: void __cdecl InitPacketPool(int param_1)
 
 void __cdecl InitPacketPool(int param_1)
 {
@@ -256,6 +259,7 @@ void __cdecl InitPacketPool(int param_1)
 // BLOCKER_DELTA: 586
 // FUNCTION: SERVER 0x10006990
 // ReportMemoryGroupInfo
+// PROTOTYPE: void __cdecl ReportMemoryGroupInfo(int param_1)
 
 void __cdecl ReportMemoryGroupInfo(int param_1)
 {
@@ -551,6 +555,7 @@ void* __cdecl pool_alloc(struct BlockNode** head, int size, int max_items)
 // SYMBOL: _pool_free
 // FUNCTION: SERVER 0x10006E30
 // pool_free
+// PROTOTYPE: void __cdecl pool_free(int * param_1, int * param_2)
 
 void __cdecl pool_free(int* param_1, int* param_2)
 {

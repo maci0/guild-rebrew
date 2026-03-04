@@ -57,6 +57,7 @@ extern int ls_ID2Ptr(void);
 // BLOCKER_DELTA: 535
 // FUNCTION: SERVER 0x10012000
 // LoadGraveyardData
+// PROTOTYPE: int __cdecl LoadGraveyardData(int param_1, int param_2)
 
 int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 
@@ -196,6 +197,7 @@ int __cdecl LoadGraveyardData(int param_1, int param_2)
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 199
+// PROTOTYPE: void __cdecl InitNewDynastyEntity(int param_1, int param_2, char * param_3, char * param_4)
 
 void InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4)
 
@@ -263,6 +265,7 @@ void InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4
 // SYMBOL: _ReadVfsDataChecked
 // FUNCTION: SERVER 0x10012440
 // ReadVfsDataChecked
+// PROTOTYPE: int __cdecl ReadVfsDataChecked(void * outBuffer, int elementSize, int elementCount, int streamCtx)
 
 int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx)
 {
@@ -278,6 +281,7 @@ int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCoun
 // ANALYSIS: LoadSavegameHeader: Reads versioned savegame header from VFS stream. Allocates 0xE100 temp buffer, reads format version, player count, map name (32 bytes), timestamps, difficulty, player scores (8 entries for version > 0x10033), savegame description (96 bytes). Returns 1 on success, 0 on read failure.
 // FUNCTION: SERVER 0x10012470
 // LoadSavegameHeader
+// PROTOTYPE: int __stdcall LoadSavegameHeader(int stream, int * header_out)
 
 #ifdef __clang__
 #define REBREW_NAKED
@@ -772,6 +776,7 @@ int REBREW_NAKED __cdecl LoadSavegameHeader(int param_1, char* param_2)
 // LoadExistingEntities
 
 // GLOBALS: SERVER 0x10035450
+// PROTOTYPE: int __cdecl LoadExistingEntities(int param_1)
 
 int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void __cdecl CleanupObjectEntities(void);
@@ -846,6 +851,7 @@ int __cdecl LoadExistingEntities(int param_1)
 // ANALYSIS: LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success.
 // FUNCTION: SERVER 0x100128f0
 // LoadBuildingEntityState
+// PROTOTYPE: uint __stdcall LoadBuildingEntityState(uint param_1)
 
 unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 {
@@ -1084,6 +1090,7 @@ unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 /* Game function - reads entity data records from VFS file */
 // BLOCKER_DELTA: 807
 // ANALYSIS: LoadDynamicEntities: Iterates static entity slots (stride 0xAC), reads: slot index (2b), name (16b), position/state fields. Version-gated skill array (11 or 14 entries). Reads equipment, inventory, extended data. Sets default scale 1.0f for old saves. Returns 1 when past end address 0x1009b761.
+// PROTOTYPE: int __stdcall LoadDynamicEntities(void * file)
 
 int __cdecl LoadDynamicEntities(void* file)
 {
@@ -1582,6 +1589,7 @@ int __cdecl ls_LoadEntities(int param_1)
 // ANALYSIS: LoadTownData: Two phases - (1) per-player building slots (up to 62 buildings per player), (2) town records with name, timestamps, flags, population, wealth, 10 resource pairs, 10 production pairs, 4 tax rates, 4 trade routes, reputation, guild standings, 8 event records, political data. Returns 1 on success.
 // FUNCTION: SERVER 0x10013b10
 // LoadTownData
+// PROTOTYPE: int __stdcall LoadTownData(int file)
 
 int __cdecl LoadTownData(int file)
 {
@@ -1821,6 +1829,7 @@ int __cdecl LoadTownData(int file)
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 430
 // GHIDRA: FixupEntityPointers
+// PROTOTYPE: uint ls_ID2Ptr(void)
 
 unsigned int ls_ID2Ptr(void)
 {
@@ -1944,6 +1953,7 @@ unsigned int ls_ID2Ptr(void)
 // GHIDRA: RecvGameSavegame
 // FUNCTION: SERVER 0x10014260
 // srv_RecvGame
+// PROTOTYPE: int srv_RecvGame(void)
 
 int srv_RecvGame(void)
 {

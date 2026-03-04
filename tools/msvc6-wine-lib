@@ -1,0 +1,40 @@
+#!/bin/bash
+# Wine wrapper for MSVC 6.0 LIB.EXE — used as CMAKE_AR
+# Translates Unix paths to Wine Z:\ paths and invokes LIB.EXE via Wine.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+MSVC_ROOT="$SCRIPT_DIR/MSVC600/VC98"
+
+LIB_EXE="$MSVC_ROOT/Bin/LIB.EXE"
+
+# Convert a Unix path to a Wine Z:\ path
+to_wine_path() {
+    local p="$1"
+    if [[ "$p" == /* ]]; then
+        echo "Z:${p//\//\\}"
+    else
+        echo "$p"
+    fi
+}
+
+# Rewrite arguments
+args=()
+for arg in "$@"; do
+    case "$arg" in
+        /OUT:/*)
+            path="${arg#/OUT:}"
+            args+=("/OUT:$(to_wine_path "$path")")
+            ;;
+        /home/*|/tmp/*)
+            args+=("$(to_wine_path "$arg")")
+            ;;
+        *)
+            args+=("$arg")
+            ;;
+    esac
+done
+
+wine "$LIB_EXE" "${args[@]}" 2>&1 | tr -d '\r'
+exit "${PIPESTATUS[0]}"
