@@ -98,6 +98,7 @@ extern char s_cm_ExAllocCharacter___gm_AllocSp_1002d364[];
 extern char s_cm_ExKillTransporter____invalid_t_1002d3d4[];
 extern char s_cm_ExCreateGeb____Could_not_find_1002d41c[];
 extern char s_cm_ExCreateGeb____failed_1002d400[];
+extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
 
 extern void* g_static_entity_table_358a0;
 extern void* g_entity_table_end;
@@ -131,6 +132,8 @@ extern int g_work_building_ptrs[1];
 extern int g_entity_state_base[1];
 extern float _g_stat_max;
 extern float _g_stat_min;
+extern double _g_stat_min_d;
+extern double _g_stat_max_d;
 
 /* Internal Helpers */
 extern int __cdecl get_field_by_type(char* cmd, int field_id);
@@ -911,6 +914,211 @@ LAB_1000e3e1:
   } while( 1 );
 }
 
+/* 0x1000e530 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 346
+// SYMBOL: _ExMoveObject
+// FUNCTION: SERVER 0x1000e530
+int __cdecl ExMoveObject(int param_1,char *param_2)
+{
+  int iVar1; int iVar2; int iVar3; int *piVar4; int *piVar5; uint line; char *msg; int iVar6; void *pvStack_8; void *pvStack_4;
+  iVar6 = param_1; iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x14)); *(int *)(iVar6 + 0x14) = iVar2;
+  iVar2 = ResolveEntityById(&pvStack_8,(void **)&param_1,&pvStack_4,iVar2);
+  if (iVar2 == 0) { iVar6 = 8; msg = s_cm_ExMoveObjekt___Invalid__quell_1002d024; line = 0x30a1; }
+  else {
+    if (pvStack_8 == (void *)0x0) { if (param_1 == 0) piVar4 = (int *)((int)pvStack_4 + 0x178); else piVar4 = (int *)(param_1 + 0x14); }
+    else piVar4 = (int *)((int)pvStack_8 + 0x5d);
+    iVar2 = get_field_by_type((char *)iVar6,*(int *)(iVar6 + 0x10)); *(int *)(iVar6 + 0x10) = iVar2;
+    iVar2 = ResolveEntityById(&pvStack_8,(void **)&param_1,&pvStack_4,iVar2);
+    if (iVar2 == 0) { iVar6 = 1; msg = s_cm_ExMoveObjekt___Invalid__ziel__1002cff4; line = 0x30bd; }
+    else {
+      if (pvStack_8 == (void *)0x0) { if (param_1 == 0) piVar5 = (int *)((int)pvStack_4 + 0x178); else piVar5 = (int *)(param_1 + 0x14); }
+      else piVar5 = (int *)((int)pvStack_8 + 0x5d);
+      iVar3 = get_field_by_type((char *)iVar6,*(int *)(iVar6 + 0x18)); *(int *)(iVar6 + 0x18) = iVar3;
+      iVar1 = *piVar4; iVar2 = 0;
+      while (param_1 = iVar1, param_1 != 0) {
+        if (*(int *)(param_1 + 2) == iVar3) {
+          if (iVar2 == 0) *piVar4 = *(int *)(param_1 + 0x3f); else *(int *)(iVar2 + 0x3f) = *(int *)(param_1 + 0x3f);
+          if (param_1 != 0) { *(int *)(param_1 + 6) = *(int *)(iVar6 + 0x10); *(int *)(param_1 + 0x3f) = *piVar5; *piVar5 = param_1; if (param_2 != (char *)0x0) *param_2 = '\x01'; return 0; }
+          break;
+        }
+        iVar2 = param_1; iVar1 = *(int *)(param_1 + 0x3f);
+      }
+      iVar6 = 8; msg = s_cm_ExMoveObjekt___Object_not_fou_1002cfc4; line = 0x30f9;
+    }
+  }
+  LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,line,msg,iVar6); return 1;
+}
+
+/* 0x1000e690 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 191
+// SYMBOL: _cm_ExClearLagerslot
+// FUNCTION: SERVER 0x1000e690
+int __cdecl cm_ExClearLagerslot(short *param_1,uchar *param_2)
+{
+  short *psVar1; int iVar2; ushort *puVar3; uint line; char *msg;
+  psVar1 = param_1; iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 8)); *(int *)(psVar1 + 8) = iVar2;
+  iVar2 = ResolveEntityById((void **)0x0,&param_1,(void **)0x0,iVar2);
+  if (iVar2 == 0) { msg = s_cm_ExClearLagerslot___Invalid__L_1002d088; line = 0x314b; }
+  else {
+    if ((*param_1 == 0x2a) || (*param_1 == 0x116)) {
+      puVar3 = (ushort*)StartEntityQuery(*(int *)(param_1 + 10),1,0,(uint)(ushort)psVar1[10]);
+      if (puVar3 == (ushort *)0x0) return 1;
+      if (*(int *)(puVar3 + 7) != 1) return 1;
+      RemoveObjectByType((char **)(param_1 + 10),(uint)(ushort)psVar1[10]);
+      if (param_2 != (uchar *)0x0) *param_2 = '\x01';
+      return 0;
+    }
+    msg = s_cm_ExClearLagerslot___Lager_has_n_1002d054; line = 0x3155;
+  }
+  LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,line,msg,1); return 1;
+}
+
+/* 0x1000e750 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 123
+// SYMBOL: _ExCreateObject
+// FUNCTION: SERVER 0x1000e750
+int __cdecl ExCreateObject(int param_1,char *param_2)
+{
+  int iVar1; char *pcVar2; int *puVar3;
+  *(int *)(param_1 + 0x35) = g_timestamp_0b6c; iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10)); *(int *)(param_1 + 0x10) = iVar1;
+  pcVar2 = (char*)AllocGameObject(iVar1,(uint)*(ushort *)(param_1 + 0x14),1); if (pcVar2 == (char *)0x0) return 1;
+  *(int *)(g_player_slot_0[*(byte *)(param_1 + 3)].data + 0x264200) = *(int *)(pcVar2 + 2);
+  puVar3 = (int *)(param_1 + 0x16); pcVar2 = pcVar2 + 0x1c;
+  for (iVar1 = 7; iVar1 != 0; iVar1 = iVar1 + -1) { *(int *)pcVar2 = *puVar3; puVar3 = puVar3 + 1; pcVar2 = pcVar2 + 4; }
+  *(short *)pcVar2 = *(short *)puVar3; pcVar2[2] = *(char *)((int)puVar3 + 2);
+  if (param_2 != (char *)0x0) *param_2 = '\x01';
+  return 0;
+}
+
+/* 0x1000e7d0 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 242
+// SYMBOL: _ExAccumulateEntityFields
+// FUNCTION: SERVER 0x1000e7d0
+int __cdecl ExAccumulateEntityFields(int param_1,char *param_2)
+{
+  char cVar1; int iVar2; int iVar3; int iVar4; ushort *puVar5; int *piVar6; int *piVar7; uint uVar8; void *pvStack_8; void *pvStack_4;
+  iVar2 = param_1; iVar3 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10));
+  iVar4 = ResolveEntityById((void **)&param_1,&pvStack_8,&pvStack_4,iVar3);
+  if (iVar4 == 0) { LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x31f7, s_cm_ExChangeAttribute___Invalid_I_1002d0b0,1); return 1; }
+  *(int *)(iVar2 + 0x10) = iVar3; if ((param_1 == 0) && (param_1 = (int)pvStack_8, pvStack_8 == (void *)0x0)) param_1 = (int)pvStack_4;
+  uVar8 = 0; piVar6 = (int *)(iVar2 + 0x15);
+  if (*(char *)(iVar2 + 0x14) != '\0') {
+    do {
+      cVar1 = (char)*piVar6; iVar3 = (int)*(char *)((int)piVar6 + 1); puVar5 = (ushort *)((int)piVar6 + 2); piVar6 = piVar6 + 1; piVar7 = (int *)((uint)*puVar5 + param_1);
+      if (cVar1 == '\x01') { for (; iVar3 != 0; iVar3 = iVar3 + -1) { *(char *)piVar7 = (char)*piVar7 + (char)*piVar6; piVar6 = (int *)((int)piVar6 + 1); piVar7 = (int *)((int)piVar7 + 1); } }
+      else if (cVar1 == '\x02') { for (; iVar3 != 0; iVar3 = iVar3 + -1) { iVar4 = *piVar6; piVar6 = (int *)((int)piVar6 + 2); *(short *)piVar7 = (short)*piVar7 + (short)iVar4; piVar7 = (int *)((int)piVar7 + 2); } }
+      else if (cVar1 == '\x04') { for (; iVar3 != 0; iVar3 = iVar3 + -1) { iVar4 = *piVar6; piVar6 = piVar6 + 1; *piVar7 = *piVar7 + iVar4; piVar7 = piVar7 + 1; } }
+      uVar8 = uVar8 + 1;
+    } while (uVar8 < *(byte *)(iVar2 + 0x14));
+  }
+  if (param_2 != (char *)0x0) *param_2 = '\x01';
+  return 0;
+}
+
+/* 0x1000e8d0 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 239
+// SYMBOL: _ExWriteEntityFields
+// FUNCTION: SERVER 0x1000e8d0
+int __cdecl ExWriteEntityFields(int param_1,char *param_2)
+{
+  char cVar1; short uVar2; int uVar3; int iVar4; int iVar5; ushort *puVar6; char *pcVar7; char *pcVar8; uint uVar9; void *pvStack_8; void *pvStack_4;
+  iVar4 = param_1; iVar5 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10)); *(int *)(iVar4 + 0x10) = iVar5;
+  iVar5 = ResolveEntityById((void **)&param_1,&pvStack_8,&pvStack_4,iVar5);
+  if (iVar5 == 0) { LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x32ed, s_cm_ExSetAttribute___Invalid_Id_1002d0d4,1); return 1; }
+  if ((param_1 == 0) && (param_1 = (int)pvStack_8, pvStack_8 == (void *)0x0)) param_1 = (int)pvStack_4;
+  uVar9 = 0; pcVar7 = (char *)(iVar4 + 0x15);
+  if (*(char *)(iVar4 + 0x14) != '\0') {
+    do {
+      cVar1 = *pcVar7; iVar5 = (int)pcVar7[1]; puVar6 = (ushort *)(pcVar7 + 2); pcVar7 = pcVar7 + 4; pcVar8 = (char *)((uint)*puVar6 + param_1);
+      if (cVar1 == '\x01') { for (; iVar5 != 0; iVar5 = iVar5 + -1) { *pcVar8 = *pcVar7; pcVar8 = pcVar8 + 1; pcVar7 = pcVar7 + 1; } }
+      else if (cVar1 == '\x02') { for (; iVar5 != 0; iVar5 = iVar5 + -1) { uVar2 = *(short *)pcVar7; pcVar7 = pcVar7 + 2; *(short *)pcVar8 = uVar2; pcVar8 = pcVar8 + 2; } }
+      else if (cVar1 == '\x04') { for (; iVar5 != 0; iVar5 = iVar5 + -1) { uVar3 = *(int *)pcVar7; pcVar7 = pcVar7 + 4; *(int *)pcVar8 = uVar3; pcVar8 = pcVar8 + 4; } }
+      uVar9 = uVar9 + 1;
+    } while (uVar9 < *(byte *)(iVar4 + 0x14));
+  }
+  if (param_2 != (char *)0x0) *param_2 = '\x01';
+  return 0;
+}
+
+/* 0x1000e9c0 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 214
+// SYMBOL: _ExChangeDesire
+// FUNCTION: SERVER 0x1000e9c0
+int __cdecl ExChangeDesire(uchar *param_1)
+{
+  float fVar1; uchar *puVar2; int iVar3; float *pfVar4; byte *pbVar5; uint uVar6; undefined1 *in_stack_00000008;
+  puVar2 = param_1; iVar3 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10)); *(int *)(puVar2 + 0x10) = iVar3;
+  iVar3 = ResolveEntityById((void **)0x0,(void **)0x0,&param_1,iVar3);
+  if (iVar3 != 0) {
+    uVar6 = 0; pbVar5 = puVar2 + 0x15;
+    if (puVar2[0x14] != '\0') {
+      do {
+        pfVar4 = (float *)(pbVar5 + 1); iVar3 = ((uint)*pbVar5 * 3 + 0x24) * 4; pbVar5 = pbVar5 + 5;
+        *(float *)(param_1 + iVar3) = *pfVar4 + *(float *)(param_1 + iVar3);
+        if ((*(float *)(param_1 + iVar3) < (float)_g_stat_min_d) || (*(float *)(param_1 + iVar3) < (float)_g_stat_max_d)) {
+          if ((float)_g_stat_min_d <= *(float *)(param_1 + iVar3)) fVar1 = *(float *)(param_1 + iVar3); else fVar1 = (float)_g_stat_min_d;
+        }
+        else fVar1 = (float)_g_stat_max_d;
+        *(float *)(param_1 + iVar3) = fVar1; uVar6 = uVar6 + 1;
+      } while (uVar6 < puVar2[0x14]);
+    }
+    if (in_stack_00000008 != (undefined1 *)0x0) *in_stack_00000008 = 1;
+    return 0;
+  }
+  LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x33af, s_cm_ExChangeDesire___Invalid_Id_1002d0f4,1); return 1;
+}
+
+/* 0x1000eaa0 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 208
+// SYMBOL: _ExSetEntityBitmask
+// FUNCTION: SERVER 0x1000eaa0
+int __cdecl ExSetEntityBitmask(int param_1,char *param_2)
+{
+  int iVar1; int iVar2; uint *puVar3; byte bVar4; uint uVar5; void *pvStack_8; void *pvStack_4;
+  iVar1 = param_1; iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10)); *(int *)(iVar1 + 0x10) = iVar2;
+  iVar2 = ResolveEntityById((void **)&param_1,&pvStack_8,&pvStack_4,iVar2);
+  if (iVar2 == 0) { LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x340d, s_cm_ExChangeBits___Invalid_Id_1002d114,1); return 1; }
+  if ((param_1 == 0) && (param_1 = (int)pvStack_8, pvStack_8 == (void *)0x0)) param_1 = (int)pvStack_4;
+  puVar3 = (uint *)(param_1 + *(int *)(iVar1 + 0x14)); iVar2 = *(int *)(iVar1 + 0x18);
+  if (iVar2 == 1) { bVar4 = (byte)*puVar3 & ~*(byte *)(iVar1 + 0x20); *(byte *)puVar3 = bVar4; *(byte *)puVar3 = *(byte *)(iVar1 + 0x1c) | bVar4; }
+  else if (iVar2 == 2) { *(ushort *)puVar3 = (ushort)*puVar3 & ~*(ushort *)(iVar1 + 0x20); *(ushort *)puVar3 = *(ushort *)(iVar1 + 0x1c) | (ushort)*puVar3; }
+  else if (iVar2 == 4) { uVar5 = *puVar3 & ~*(uint *)(iVar1 + 0x20); *puVar3 = uVar5; *puVar3 = *(uint *)(iVar1 + 0x1c) | uVar5; }
+  if (param_2 != (char *)0x0) *param_2 = '\x01';
+  return 0;
+}
+
+/* 0x1000eb70 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 135
+// SYMBOL: _ExSetEntityField
+// FUNCTION: SERVER 0x1000eb70
+int __cdecl ExSetEntityField(int param_1,char *param_2)
+{
+  int iVar1; int iVar2; void *pvStack_8; void *pvStack_4;
+  iVar1 = param_1; iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10)); *(int *)(iVar1 + 0x10) = iVar2;
+  iVar2 = ResolveEntityById(&pvStack_4,&pvStack_8,(void **)&param_1,iVar2);
+  if (iVar2 == 0) { LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x347f, s_cm_ExChangeFloat___Invalid_Id_1002d134,1); return 1; }
+  if ((param_1 == 0) && (param_1 = (int)pvStack_8, pvStack_8 == (void *)0x0)) param_1 = (int)pvStack_4;
+  *(float *)(param_1 + *(int *)(iVar1 + 0x14)) = *(float *)(iVar1 + 0x18) + *(float *)(param_1 + *(int *)(iVar1 + 0x14));
+  if (param_2 != (char *)0x0) *param_2 = '\x01';
+  return 0;
+}
+
 /* 0x1000ec00 */
 // STATUS: RELOC
 // ORIGIN: GAME
@@ -1206,7 +1414,7 @@ LAB_1000f7a9:
   }
   citizen_entity = (char *)LookupEntityRecordById(*(int *)(param_1 + 0x19));
   if (*(int *)(param_1 + 0x14) == -1) { if (citizen_entity != (char *)0x0) { workplace_entity = *(ushort **)(citizen_entity + 0x170); goto LAB_1000f7ca; } }
-  else { workplace_entity = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x14)); if (workplace_entity == (ushort *)0x0) { citizen_entity = s_cm_ExEmployWorker____Illegal_gw__1002d318; log_line = 0x4d50; goto LAB_1000f7a9; }
+  else { workplace_entity = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 1)); if (workplace_entity == (ushort *)0x0) { citizen_entity = s_cm_ExEmployWorker____Illegal_gw__1002d318; log_line = 0x4d50; goto LAB_1000f7a9; }
 LAB_1000f7ca:
     if ((citizen_entity != (char *)0x0) && (*(int *)(citizen_entity + 0x16c) == 0)) goto LAB_1000f7f5;
   }

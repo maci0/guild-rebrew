@@ -2,11 +2,11 @@
 
 # Reversed Functions Catalog
 
-Total: 537 functions matched (309 exact, 105 reloc, 0 stubs)  
-Coverage: 0.0% of .text section (144594/0 bytes)
+Total: 545 functions matched (309 exact, 106 reloc, 0 stubs)  
+Coverage: 0.0% of .text section (146292/0 bytes)
 
 
-## GAME (250 functions)
+## GAME (258 functions)
 
 | VA | Symbol | Size | Status | Files |
 |---:|--------|-----:|--------|-------|
@@ -110,6 +110,14 @@ Coverage: 0.0% of .text section (144594/0 bytes)
 | 0x1000d8a0 | _ExTransferCurrencyNoKill | 142 | RELOC | DieGildeAddOn/command/command.c |
 | 0x1000d930 | _TradeCommandHandler | 2057 | MATCHING | DieGildeAddOn/command/command.c |
 | 0x1000e140 | _cm_ExecProduction | 993 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000e530 | _ExMoveObject | 346 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000e690 | _cm_ExClearLagerslot | 191 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000e750 | _ExCreateObject | 123 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000e7d0 | _ExAccumulateEntityFields | 242 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000e8d0 | _ExWriteEntityFields | 239 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000e9c0 | _ExChangeDesire | 214 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000eaa0 | _ExSetEntityBitmask | 208 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000eb70 | _ExSetEntityField | 135 | MATCHING | DieGildeAddOn/command/command.c |
 | 0x1000ec00 | _ExCopyEntityData | 901 | RELOC | DieGildeAddOn/command/command.c |
 | 0x1000ef90 | _chain_handler_assign_id | 26 | RELOC | DieGildeAddOn/command/command.c |
 | 0x1000efb0 | _SetSyncFlags | 122 | RELOC | DieGildeAddOn/command/command.c |
