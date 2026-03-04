@@ -2,11 +2,11 @@
 
 # Reversed Functions Catalog
 
-Total: 520 functions matched (307 exact, 95 reloc, 0 stubs)  
-Coverage: 0.0% of .text section (142351/0 bytes)
+Total: 537 functions matched (309 exact, 105 reloc, 0 stubs)  
+Coverage: 0.0% of .text section (144594/0 bytes)
 
 
-## GAME (233 functions)
+## GAME (250 functions)
 
 | VA | Symbol | Size | Status | Files |
 |---:|--------|-----:|--------|-------|
@@ -131,6 +131,23 @@ Coverage: 0.0% of .text section (142351/0 bytes)
 | 0x1000fad0 | _cm_ExKillTransporter | 85 | RELOC | DieGildeAddOn/command/command.c |
 | 0x1000fb30 | _CmdCreateBuilding | 153 | MATCHING | DieGildeAddOn/command/command.c |
 | 0x1000fbd0 | _cond_write | 22 | EXACT | DieGildeAddOn/command/command.c |
+| 0x1000fbf0 | _InitDefaultResponse | 25 | EXACT | DieGildeAddOn/command/command.c |
+| 0x1000fc10 | _ElectionOrTradeCommand | 308 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x1000fd50 | _JoinLeaveElection | 445 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000ff10 | _cond_write2 | 22 | EXACT | DieGildeAddOn/command/command.c |
+| 0x1000ff30 | _ValidateEntityLookup | 41 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000ff60 | _CutsceneEntityUpdate | 82 | RELOC | DieGildeAddOn/command/command.c |
+| 0x1000ffc0 | _ModifyEntityHealth | 70 | RELOC | DieGildeAddOn/command/command.c |
+| 0x10010010 | _ModifyEntityStamina | 110 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x10010080 | _ExSimCommand | 22 | RELOC | DieGildeAddOn/command/command.c |
+| 0x100100a0 | _ModifyEntityStat | 159 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x10010140 | _AllocWarEvent | 280 | MATCHING | DieGildeAddOn/command/command.c |
+| 0x10010260 | _DispatchProductionCommand | 161 | RELOC | DieGildeAddOn/command/command.c |
+| 0x100102f0 | _DispatchMoveSlotEntry | 17 | RELOC | DieGildeAddOn/command/command.c |
+| 0x10010310 | _CmdAllocGraveyardWorker | 52 | RELOC | DieGildeAddOn/command/command.c |
+| 0x10010350 | _CmdAllocAlchemist | 52 | RELOC | DieGildeAddOn/command/command.c |
+| 0x10010390 | _SimSpecialAction | 262 | RELOC | DieGildeAddOn/command/command.c |
+| 0x100104a0 | _GetBuildingStatCount | 135 | MATCHING | DieGildeAddOn/command/command.c |
 | 0x10010530 | _check_slot_active | 113 | EXACT | DieGildeAddOn/game/friedhof_logic.c |
 | 0x100105b0 | _GetSlotEntry | 352 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010710 | _FindSlotEntryFiltered | 320 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |

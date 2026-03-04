@@ -30,8 +30,8 @@ typedef struct PlayerSlot {
 } PlayerSlot;
 
 /* Module Globals */
-extern char s_D__Develop_DieGildeAddOn_command_1002d70c[];
 extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
+extern char s_D__Develop_DieGildeAddOn_command_1002d70c[];
 extern char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[];
 extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];
 extern char s_cm_ChkSellObjekt___Invalid__quel_1002c8dc[];
@@ -103,11 +103,12 @@ extern void* g_static_entity_table_358a0;
 extern void* g_entity_table_end;
 extern int g_something_1;
 extern int g_timestamp_0b6c;
-extern char g_static_entity0_entity_id[];
-extern short g_static_entity0_lineage[];
-extern char g_static_entity0_field_60[];
-extern int g_static_entity0_field_54[];
-extern char g_static_entity0_pos_x[];
+extern int g_static_entity0_entity_id[1];
+extern short g_static_entity0_lineage[1];
+extern char g_static_entity0_field_60[1];
+extern int g_static_entity0_field_54[1];
+extern char g_static_entity0_pos_x[1];
+extern char g_static_entity0_owner_id[1];
 extern PlayerSlot g_player_slot_0[8];
 extern char g_currency_type_array;
 extern void* unknown;
@@ -126,8 +127,10 @@ extern char g_relationship_matrix_secondary;
 extern char g_relationship_matrix_primary;
 extern int g_plant_count;
 extern char g_entity_type_table[];
-extern int g_work_building_ptrs;
-extern int g_entity_state_base;
+extern int g_work_building_ptrs[1];
+extern int g_entity_state_base[1];
+extern float _g_stat_max;
+extern float _g_stat_min;
 
 /* Internal Helpers */
 extern int __cdecl get_field_by_type(char* cmd, int field_id);
@@ -185,6 +188,27 @@ extern void __cdecl QueryEntityBuildingType(int);
 extern uint __cdecl ValidateAndAssignOffice(uint*);
 extern int __cdecl ExecuteOfficeAssignment(char*);
 extern void* __cdecl FindRecordById(int);
+extern int __cdecl CheckCutsceneReady(char*);
+extern void __cdecl UpdateEntityLinks(int, int);
+extern int __cdecl SwapOfficeHolders(int*);
+extern void* __cdecl search_table_67(int);
+extern uint __cdecl AssignProductionSlot(int);
+extern uint __cdecl HireProductionWorker(int);
+extern uint __cdecl ExtendProductionTime(uint32_t*);
+extern int __cdecl ReplaceProductionWorker(uchar*);
+extern int __cdecl ActivateGraveyardSection(uchar*);
+extern int __cdecl UpdateProductionProgress(uchar*);
+extern int __cdecl ValidateEntityAction(uchar*);
+extern uint __cdecl MoveSlotEntry(int);
+extern uint __cdecl gv_ExAllocGraveyardWorker(void*);
+extern ushort __cdecl ahm_ExAllocAlchemist(void*);
+extern int __cdecl check_flag(char*);
+extern void __cdecl ClampFloatValue(int, int);
+extern void __cdecl FireEntityAndCleanup(int, int*, int);
+extern void __cdecl ApplyColorComponent(char*, char*);
+extern void __cdecl search_and_set(void*, void*);
+extern void __cdecl AllocateEntitySlot(int, int, int);
+extern void __cdecl slot_clear_match(char*, char*, char*);
 
 /* 0x1000cb20 */
 // STATUS: MATCHING
@@ -571,7 +595,7 @@ int __cdecl CmdAllocPlayer(int param_1, char *param_2)
   uVar3 = CreateEntityFromParents((uint)*(byte *)(param_1 + 0x14),*(int *)(param_1 + 0x15),*(int *)(param_1 + 0x19),(uint)*(ushort *)(param_1 + 0x1d),(int)puVar2);
   uVar3 = uVar3 & 0xffff;
   if (uVar3 == 0xffff) { LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x2897,s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c,1); return 1; }
-  *(int *)(g_player_slot_0[*(byte *)(param_1 + 3)].data + 0x2641f8) = g_static_entity0_entity_id[uVar3 * 0x87];
+  *(int *)(g_player_slot_0[*(byte *)(param_1 + 3)].data + 0x2641f8) = ((int*)g_static_entity0_entity_id)[uVar3 * 0x87];
   if (param_2 != (char *)0x0) { *param_2 = '\x01'; param_2[1] = '\x01'; *(void**)(param_2 + 6) = (void*)((int)g_static_entity_table_358a0 + uVar3 * 0x10e); }
   return 0;
 }
@@ -593,15 +617,15 @@ int __cdecl validate_cmd_10_AllocPlayer(int param_1, char *param_2)
   uVar2 = uVar2 & 0xffff;
   if (uVar2 != 0xffff) {
     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x2917,s_ClientSpieler_erzeugt_1002cbbc,1);
-    *(int *)(g_player_slot_0[*(byte *)(param_1 + 3)].data + 0x2641f8) = g_static_entity0_entity_id[uVar2 * 0x87];
-    strncpy(g_static_entity0_entity_id + uVar2 * 0x87, (char*)param_1 + 0x26, 0x20);
+    *(int *)(g_player_slot_0[*(byte *)(param_1 + 3)].data + 0x2641f8) = ((int*)g_static_entity0_entity_id)[uVar2 * 0x87];
+    strncpy((char*)g_static_entity0_entity_id + uVar2 * 0x87 * 4, (char*)param_1 + 0x26, 0x20);
     psVar3 = GetEntityTableEntry((char*)((int)g_static_entity_table_358a0 + uVar2 * 0x10e));
     if (psVar3 != (short *)0x0) {
-      *psVar3 = g_static_entity0_lineage[uVar2 * 0x87];
-      iVar4 = LookupEntityRecordById(g_static_entity0_field_60[uVar2 * 0x87]);
+      *psVar3 = ((short*)g_static_entity0_lineage)[uVar2 * 0x87];
+      iVar4 = LookupEntityRecordById(((char*)g_static_entity0_field_60)[uVar2 * 0x87]);
     }
-    g_static_entity0_field_54[uVar2 * 0x21c / 4] = *(int *)(param_1 + 0x1f);
-    g_static_entity0_pos_x[uVar2 * 0x21c] = *(char *)(param_1 + 0x24);
+    ((int*)g_static_entity0_field_54)[uVar2 * 0x21c / 4] = *(int *)(param_1 + 0x1f);
+    ((char*)g_static_entity0_pos_x)[uVar2 * 0x21c] = *(char *)(param_1 + 0x24);
     if (param_2 != (char *)0x0) { *param_2 = '\x01'; param_2[1] = '\x01'; *(void**)(param_2 + 6) = (void*)((int)g_static_entity_table_358a0 + uVar2 * 0x10e); }
     return 0;
   }
@@ -899,16 +923,16 @@ int __cdecl ExCopyEntityData(int cmd_ptr,char *response)
   iVar1 = get_field_by_type((char *)cmd_ptr,*(int *)(cmd_ptr + 0x10)); *(int *)(cmd_ptr + 0x10) = iVar1;
   iVar2 = get_field_by_type((char *)cmd_ptr,*(int *)(cmd_ptr + 0x14)); iVar1 = *(int *)(cmd_ptr + 0x1c); *(int *)(cmd_ptr + 0x14) = iVar2;
   if (iVar1 != 4) {
-    uVar6 = 0; piVar8 = (int*)&g_static_entity0_entity_id;
-    while (*piVar8 != iVar2) { piVar8 = piVar8 + 0x87; uVar6 = uVar6 + 1; if ((int *)0x1009aca3 < piVar8) return 1; }
+    uVar6 = 0; piVar8 = (int*)g_static_entity0_entity_id;
+    while (*piVar8 != iVar2) { piVar8 = (int*)((char*)piVar8 + 0x87 * 4); uVar6 = uVar6 + 1; if ((int *)0x1009aca3 < piVar8) return 1; }
     if (0x2ff < uVar6) return 1; if (((short*)g_static_entity_table_358a0)[uVar6 * 0x10e] == -1) return 1;
     if (iVar1 == 3) {
-      iVar1 = *(int *)(uVar6 * 0x21c + 0x10035ab0); piVar8 = (int*)&g_static_entity0_entity_id; puVar7 = &g_relationship_matrix_secondary + uVar6;
-      do { if (*piVar8 != iVar1) { lVar4 = _ftol(); *puVar7 = (char)lVar4; } piVar8 = piVar8 + 0x87; puVar7 = puVar7 + 0x300; } while ((int)piVar8 < 0x1009aca4);
+      iVar1 = *(int *)(uVar6 * 0x21c + 0x10035ab0); piVar8 = (int*)g_static_entity0_entity_id; puVar7 = (undefined1*)&g_relationship_matrix_secondary + uVar6;
+      do { if (*piVar8 != iVar1) { lVar4 = _ftol(); *puVar7 = (char)lVar4; } piVar8 = (int*)((char*)piVar8 + 0x87 * 4); puVar7 = puVar7 + 0x300; } while ((int)piVar8 < 0x1009aca4);
     }
     else {
-      uVar5 = 0; piVar8 = (int*)&g_static_entity0_entity_id;
-      while (*piVar8 != *(int *)(cmd_ptr + 0x10)) { piVar8 = piVar8 + 0x87; uVar5 = uVar5 + 1; if ((int *)0x1009aca3 < piVar8) return 1; }
+      uVar5 = 0; piVar8 = (int*)g_static_entity0_entity_id;
+      while (*piVar8 != *(int *)(cmd_ptr + 0x10)) { piVar8 = (int*)((char*)piVar8 + 0x87 * 4); uVar5 = uVar5 + 1; if ((int *)0x1009aca3 < piVar8) return 1; }
       if ((0x2ff < uVar5) || (((short*)g_static_entity_table_358a0)[uVar5 * 0x10e] == -1)) return 1;
       if (iVar1 == 2) { iVar2 = uVar6 + uVar5 * 0x300; (&g_relationship_matrix_secondary)[iVar2] = 0; iVar1 = *(int *)(cmd_ptr + 0x18) + (int)(char)(&g_relationship_matrix_primary)[iVar2]; if (iVar1 < -0x7f) (&g_relationship_matrix_primary)[iVar2] = 0x81; else if (iVar1 < 0x7f) (&g_relationship_matrix_primary)[iVar2] = (char)iVar1; else (&g_relationship_matrix_primary)[iVar2] = 0x7f; }
       else if (iVar1 == 1) { iVar2 = uVar6 + uVar5 * 0x300; iVar1 = (int)(char)(&g_relationship_matrix_primary)[iVar2] + *(int *)(cmd_ptr + 0x18); if (iVar1 < -0x7f) iVar1 = -0x7f; else if (0x7e < iVar1) iVar1 = 0x7f; (&g_relationship_matrix_primary)[iVar2] = (char)iVar1; if (-1 < *(int *)(cmd_ptr + 0x18)) iVar1 = iVar1 / 2; }
@@ -1070,7 +1094,7 @@ int __cdecl chain_handler_noop(void)
 int __cdecl SetBuildingOwner(int param_1,char *param_2)
 {
   ushort *puVar1; ushort *puVar2; ushort *puVar3; uint line; char *msg;
-  puVar1 = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
+  puVar1 = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
   if (puVar1 == (ushort *)0x0) { msg = s_cm_ExSetGebBesitzer____Could_not_1002d214; line = 0x4972; }
   else {
     puVar2 = (ushort *)LookupEntityRecordById(*(int *)(param_1 + 0x18));
@@ -1096,7 +1120,7 @@ int __cdecl SetBuildingOwner(int param_1,char *param_2)
 int __cdecl SetResidence(int param_1,char *param_2)
 {
   byte *pbVar1; ushort *puVar2; int iVar3; uint line; char *msg; ushort local_8 [4];
-  puVar2 = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
+  puVar2 = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
   if (puVar2 == (ushort *)0x0) { msg = s_cm_ExSetWohnsitz____Could_not_fi_1002d298; line = 0x49de; }
   else {
     iVar3 = LookupEntityRecordById(*(int *)(param_1 + 0x14));
@@ -1129,7 +1153,7 @@ int __cdecl SetBuildingUpgrade(int param_1,char *param_2)
 {
   char *pcVar1; ushort *puVar2; uint uVar3;
   *(int *)(param_1 + 0x14) = g_timestamp_0b6c;
-  puVar2 = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
+  puVar2 = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
   if (puVar2 == (ushort *)0x0) { LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x4a94, s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec,1); return 1; }
   uVar3 = (uint)(byte)*puVar2; pcVar1 = (char *)(g_entity_type_table + uVar3 + uVar3 * 0x24c);
   if ((byte)pcVar1[0x248] <= *(byte *)(g_entity_type_table + uVar3 + 0x247 + uVar3 * 0x24c)) { ReportMessage(s_cm_ExSetGebUpgrade____already_hi_1002d2c0); return 1; }
@@ -1151,12 +1175,12 @@ int __cdecl SetBuildingUpgrade(int param_1,char *param_2)
 int __cdecl DestroyBuilding(int param_1,char *param_2)
 {
   ushort *puVar1; ushort *puVar2; int *piVar3;
-  puVar1 = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
+  puVar1 = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
   if (puVar1 != (ushort *)0x0) {
     puVar2 = (ushort*)StartEntityQuery(0,2,7,4,0x1d);
     while (puVar2 != (ushort *)0x0) { if (*(int *)(puVar2 + 0xe) == *(int *)((int)puVar1 + 1)) { RemoveEntityLink((int)puVar2); } puVar2 = NextEntityQueryMatch(); }
-    piVar3 = &g_work_building_ptrs;
-    do { if ((ushort *)*piVar3 == puVar1) { *piVar3 = 0; } piVar3 = piVar3 + 0x87; } while ((int)piVar3 < 0x1009ae0c);
+    piVar3 = (int*)g_work_building_ptrs;
+    do { if ((ushort *)*piVar3 == puVar1) { *piVar3 = 0; } piVar3 = (int*)((char*)piVar3 + 0x87 * 4); } while ((int)piVar3 < 0x1009ae0c);
     CleanupBuildingEntity((uchar *)puVar1);
     if (param_2 != (char *)0x0) { *param_2 = '\x02'; param_2[1] = '\0'; param_2[6] = '\0'; param_2[7] = '\0'; param_2[8] = '\0'; param_2[9] = '\0'; }
     return 0;
@@ -1175,14 +1199,14 @@ int __stdcall EmployWorkerAtBuilding(int param_1,char *param_2)
 {
   int random_seed; ushort *building_entity; char *citizen_entity; uint *building_type_ptr; int *extraout_EAX; ushort *workplace_entity; uint log_line; char worker_type;
   workplace_entity = (ushort *)0x0; *(int *)(param_1 + 0x1f) = g_timestamp_0b6c; random_seed = rand(); *(int *)(param_1 + 0x23) = random_seed; crt_thread_set_alt(random_seed);
-  building_entity = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
+  building_entity = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x10));
   if (building_entity == (ushort *)0x0) { citizen_entity = s_cm_ExEmployWorker____Illegal_geb_1002d33c; log_line = 0x4d3a;
 LAB_1000f7a9:
     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,log_line,citizen_entity,1); return 1;
   }
   citizen_entity = (char *)LookupEntityRecordById(*(int *)(param_1 + 0x19));
   if (*(int *)(param_1 + 0x14) == -1) { if (citizen_entity != (char *)0x0) { workplace_entity = *(ushort **)(citizen_entity + 0x170); goto LAB_1000f7ca; } }
-  else { workplace_entity = StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x14)); if (workplace_entity == (ushort *)0x0) { citizen_entity = s_cm_ExEmployWorker____Illegal_gw__1002d318; log_line = 0x4d50; goto LAB_1000f7a9; }
+  else { workplace_entity = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x14)); if (workplace_entity == (ushort *)0x0) { citizen_entity = s_cm_ExEmployWorker____Illegal_gw__1002d318; log_line = 0x4d50; goto LAB_1000f7a9; }
 LAB_1000f7ca:
     if ((citizen_entity != (char *)0x0) && (*(int *)(citizen_entity + 0x16c) == 0)) goto LAB_1000f7f5;
   }
@@ -1240,14 +1264,14 @@ int __cdecl ExCreateCitizenAtBuilding(int param_1, char *param_2)
   *(int *)(param_1 + 0x10) = g_timestamp_0b6c; iVar1 = rand(); *(int *)(param_1 + 0x22) = iVar1;
   if (param_2 != (char *)0x0) { *param_2 = '\x02'; param_2[1] = '\x01'; param_2[6] = '\0'; param_2[7] = '\0'; param_2[8] = '\0'; param_2[9] = '\0'; }
   crt_thread_set_alt(*(int *)(param_1 + 0x22));
-  if (*(int *)(param_1 + 0x17) != -1) { iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x17)); *(int *)(param_1 + 0x17) = iVar1; puVar2 = StartFilteredEntitySearch(1,1,iVar1); if (puVar2 == (ushort *)0x0) { msg = s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394; uVar3 = 0x5246; goto LAB_1000fa2c; } }
+  if (*(int *)(param_1 + 0x17) != -1) { iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x17)); *(int *)(param_1 + 0x17) = iVar1; puVar2 = (ushort*)StartFilteredEntitySearch(1,1,iVar1); if (puVar2 == (ushort *)0x0) { msg = s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394; uVar3 = 0x5246; goto LAB_1000fa2c; } }
   uVar3 = CreateEntityFromParents((uint)*(byte *)(param_1 + 0x14),-1,-1,0x14,0); uVar3 = uVar3 & 0xffff;
   if (uVar3 != 0xffff) {
     if (*(int *)(param_1 + 0x1b) != -1) { FindRecordById(*(int *)(param_1 + 0x1b)); }
-    (&g_work_building_ptrs)[uVar3 * 0x87] = 0; (&g_entity_state_base)[uVar3 * 0x21c] = 0xd;
-    if (*(byte *)(param_1 + 0x21) != 0) { AllocGameObject((&g_static_entity0_entity_id)[uVar3 * 0x87],(uint)*(byte *)(param_1 + 0x21),1); }
-    *(int *)(g_player_slot_0[*(byte *)(param_1 + 3)].data + 0x2641f8) = (&g_static_entity0_entity_id)[uVar3 * 0x87];
-    if (param_2 != (char *)0x0) { *param_2 = '\x01'; param_2[1] = '\x01'; *(void **)(param_2 + 6) = (void*)&g_static_entity_table_358a0 + uVar3 * 0x10e; }
+    ((int*)g_work_building_ptrs)[uVar3 * 0x87] = 0; ((int*)g_entity_state_base)[uVar3 * 0x21c] = 0xd;
+    if (*(byte *)(param_1 + 0x21) != 0) { AllocGameObject(*(int*)((char*)g_static_entity0_entity_id + uVar3 * 0x87 * 4),(uint)*(byte *)(param_1 + 0x21),1); }
+    *(int *)(g_player_slot_0[*(byte *)(param_1 + 3)].data + 0x2641f8) = ((int*)g_static_entity0_entity_id)[uVar3 * 0x87];
+    if (param_2 != (char *)0x0) { *param_2 = '\x01'; param_2[1] = '\x01'; *(void **)(param_2 + 6) = (void*)((int)g_static_entity_table_358a0 + uVar3 * 0x10e); }
     return 0;
   }
   msg = s_cm_ExAllocCharacter___gm_AllocSp_1002d364; uVar3 = 0x525a;
@@ -1305,4 +1329,320 @@ int __cdecl cond_write(void *obj, char *buf)
 {
   if (buf != (char *)0x0) { *buf = '\x01'; buf[1] = '\0'; buf[6] = '\0'; buf[7] = '\0'; buf[8] = '\0'; buf[9] = '\0'; }
   return 0;
+}
+
+/* 0x1000fbf0 */
+// STATUS: EXACT
+// ORIGIN: GAME
+// SIZE: 25
+// SYMBOL: _InitDefaultResponse
+// FUNCTION: SERVER 0x1000fbf0
+int __cdecl InitDefaultResponse(int param_1, char *param_2)
+{
+  if (param_2 != (char *)0x0) { *param_2 = '\x01'; param_2[1] = '\x08'; param_2[6] = '\0'; param_2[7] = '\0'; param_2[8] = '\0'; param_2[9] = '\0'; }
+  return 0;
+}
+
+/* 0x1000fc10 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 308
+// SYMBOL: _ElectionOrTradeCommand
+// FUNCTION: SERVER 0x1000fc10
+int __cdecl ElectionOrTradeCommand(int param_1, char *param_2)
+{
+  ushort *puVar1; int iVar2; ushort *puVar3;
+  if (param_2 != (char *)0x0) { *param_2 = '\x02'; param_2[1] = '\0'; param_2[6] = '\0'; param_2[7] = '\0'; param_2[8] = '\0'; param_2[9] = '\0'; }
+  if (*(int *)(param_1 + 0x10) == 0x636c6572) {
+    puVar1 = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x18));
+    if (puVar1 == (ushort *)0x0) return 1;
+    puVar1 = (ushort*)StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
+    if (puVar1 == (ushort *)0x0) return 1;
+    if (g_something_1 - *(int *)(puVar1 + 0x14) < 2) return 1;
+    puVar1[0xe] = 0xffff; puVar1[0xf] = 0xffff; puVar1[0x10] = 0xffff; puVar1[0x11] = 0xffff; puVar1[0x12] = 0xffff; puVar1[0x13] = 0xffff; *(int *)(puVar1 + 0x14) = g_something_1 + -1;
+  }
+  else if (*(int *)(param_1 + 0x10) == 0x62757920) {
+    iVar2 = LookupEntityRecordById(*(int *)(param_1 + 0x14)); if (iVar2 == 0) return 1;
+    puVar1 = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x18)); if (puVar1 == (ushort *)0x0) return 1;
+    puVar1 = (ushort*)StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300); if (puVar1 == (ushort *)0x0) return 1;
+    iVar2 = 0; puVar3 = puVar1 + 0xe;
+    while (*(int *)puVar3 != *(int *)(param_1 + 0x1c)) { iVar2 = iVar2 + 1; puVar3 = puVar3 + 2; if (2 < iVar2) return 1; }
+    if (2 < iVar2) return 1; (puVar1 + iVar2 * 2 + 0xe)[0] = 0xffff; (puVar1 + iVar2 * 2 + 0xe)[1] = 0xffff;
+  }
+  if (param_2 != (char *)0x0) *param_2 = '\x01';
+  return 0;
+}
+
+/* 0x1000fd50 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 445
+// SYMBOL: _JoinLeaveElection
+// FUNCTION: SERVER 0x1000fd50
+int __cdecl JoinLeaveElection(int param_1, char *param_2)
+{
+  ushort uVar1; ushort *puVar2; int iVar3; ushort *puVar4; ushort *puVar5;
+  if (param_2 != (char *)0x0) { *param_2 = '\x02'; param_2[1] = '\0'; param_2[6] = '\0'; param_2[7] = '\0'; param_2[8] = '\0'; param_2[9] = '\0'; }
+  iVar3 = *(int *)(param_1 + 0x10);
+  if (iVar3 == 0x6a6f696e) {
+    puVar2 = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x18));
+    if ((puVar2 != (ushort *)0x0) && (puVar2 = (ushort*)StartEntityQuery(*(int *)((int)puVar2 + 0x5d),2,6,0,0x12d), puVar2 != (ushort *)0x0)) {
+      puVar5 = puVar2 + 0xe; iVar3 = 0; puVar4 = puVar5;
+      do { if (*(int *)puVar4 == *(int *)(param_1 + 0x14)) return 1; iVar3 = iVar3 + 1; puVar4 = puVar4 + 2; } while (iVar3 < 4);
+      iVar3 = 0;
+      do { if (*(int *)puVar5 == -1) { if (3 < iVar3) return 1; if (param_2 != (char *)0x0) *param_2 = '\x01'; *(int *)(puVar2 + iVar3 * 2 + 0xe) = *(int *)(param_1 + 0x14); return 0; } iVar3 = iVar3 + 1; puVar5 = puVar5 + 2; } while (iVar3 < 4);
+    }
+  }
+  else if (iVar3 == 0x6c656176) {
+    puVar2 = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x18));
+    if ((puVar2 != (ushort *)0x0) && (puVar2 = (ushort*)StartEntityQuery(*(int *)((int)puVar2 + 0x5d),2,6,0,0x12d), puVar2 != (ushort *)0x0)) {
+      iVar3 = 0; puVar5 = puVar2 + 0xe;
+      while (*(int *)puVar5 != *(int *)(param_1 + 0x14)) { iVar3 = iVar3 + 1; puVar5 = puVar5 + 2; if (3 < iVar3) return 1; }
+      if (iVar3 < 4) { if (param_2 != (char *)0x0) *param_2 = '\x01'; (puVar2 + iVar3 * 2 + 0xe)[0] = 0xffff; (puVar2 + iVar3 * 2 + 0xe)[1] = 0xffff; return 0; }
+    }
+  }
+  else if ((iVar3 == 0x636c6572) && (puVar2 = (ushort*)StartFilteredEntitySearch(1,1,*(int *)(param_1 + 0x18)), puVar2 != (ushort *)0x0)) {
+    uVar1 = *(ushort *)((int)puVar2 + 0x27);
+    if (uVar1 != 0xffff) {
+      iVar3 = (uint)uVar1 * 0x21c;
+      if ((((iVar3 != -0x100358a0) && (&g_static_entity_table_358a0 + (uint)uVar1 * 0x10e != g_entity_table_end)) && (((char*)g_static_entity0_owner_id)[iVar3] != '\0')) && (((int*)g_entity_state_base)[iVar3] != 0x0f)) return 1;
+    }
+    puVar2 = (ushort*)StartEntityQuery(*(int *)((int)puVar2 + 0x5d),2,6,0,0x12d);
+    if ((puVar2 != (ushort *)0x0) && (param_2 != (char *)0x0)) *param_2 = '\x01';
+  }
+  return 0;
+}
+
+/* 0x1000ff10 */
+// STATUS: EXACT
+// ORIGIN: GAME
+// SIZE: 22
+// SYMBOL: _cond_write2
+// FUNCTION: SERVER 0x1000ff10
+int __cdecl cond_write2(void *obj, char *buf)
+{
+  if (buf != (char *)0x0) { buf[1] = '\0'; buf[6] = '\0'; buf[7] = '\0'; buf[8] = '\0'; buf[9] = '\0'; *buf = '\x01'; }
+  return 0;
+}
+
+/* 0x1000ff30 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 41
+// SYMBOL: _ValidateEntityLookup
+// FUNCTION: SERVER 0x1000ff30
+int __cdecl ValidateEntityLookup(int param_1, char *param_2)
+{
+  int iVar1;
+  if (param_2 != (char *)0x0) { *param_2 = '\x02'; param_2[1] = '\0'; param_2[6] = '\0'; param_2[7] = '\0'; param_2[8] = '\0'; param_2[9] = '\0'; }
+  iVar1 = LookupEntityRecordById(*(int *)(param_1 + 0x10));
+  return (uint)(iVar1 == 0);
+}
+
+/* 0x1000ff60 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 82
+// SYMBOL: _CutsceneEntityUpdate
+// FUNCTION: SERVER 0x1000ff60
+int __cdecl CutsceneEntityUpdate(int param_1, char *param_2)
+{
+  int iVar1; int iVar2; int *piVar3;
+  iVar1 = CheckCutsceneReady((char *)param_1);
+  if (iVar1 != 0) { if (param_2 != (char *)0x0) *param_2 = '\x02'; return 1; }
+  piVar3 = (int *)(param_1 + 0x14); iVar1 = 0x10;
+  do { iVar2 = LookupEntityRecordById(*piVar3); if (iVar2 != 0) { *(int *)(iVar2 + 0x20c) = *(int *)(param_1 + 0x10); } piVar3 = piVar3 + 1; iVar1 = iVar1 + -1; } while (iVar1 != 0);
+  return 0;
+}
+
+/* 0x1000ffc0 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 70
+// SYMBOL: _ModifyEntityHealth
+// FUNCTION: SERVER 0x1000ffc0
+int __cdecl ModifyEntityHealth(int param_1)
+{
+  int iVar1; uint uVar2;
+  iVar1 = LookupEntityRecordById(*(int *)(param_1 + 0x10)); if (iVar1 == 0) return 1;
+  uVar2 = *(int *)(param_1 + 0x14) + *(int *)(iVar1 + 0x194); uVar2 &= ((int)uVar2 < 0) - 1; if (0x31 < (int)uVar2) uVar2 = 0x32;
+  *(uint *)(iVar1 + 0x194) = uVar2; return 0;
+}
+
+/* 0x10010010 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 110
+// SYMBOL: _ModifyEntityStamina
+// FUNCTION: SERVER 0x10010010
+int __cdecl ModifyEntityStamina(int param_1)
+{
+  int iVar1; char cVar2; uint uVar3;
+  iVar1 = LookupEntityRecordById(*(int *)(param_1 + 0x10));
+  if (iVar1 != 0) {
+    uVar3 = *(int *)(param_1 + 0x14) + (uint)*(byte *)(iVar1 + 0x1b1); uVar3 &= ((int)uVar3 < 0) - 1; if (0xfe < (int)uVar3) uVar3 = 0xff;
+    cVar2 = (char)uVar3; *(char *)(iVar1 + 0x1b1) = cVar2; if (cVar2 == '\0') cVar2 = '\0'; *(char *)(iVar1 + 0x1b1) = cVar2;
+    UpdateEntityLinks(iVar1,*(int *)(param_1 + 0x18)); return 0;
+  }
+  return 1;
+}
+
+/* 0x10010080 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 22
+// SYMBOL: _ExSimCommand
+// FUNCTION: SERVER 0x10010080
+int __cdecl ExSimCommand(void * param_1, char * param_2)
+{
+  int iVar1;
+  iVar1 = SwapOfficeHolders((int *)((int)param_1 + 0x10));
+  return (uint)(iVar1 == 0);
+}
+
+/* 0x100100a0 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 159
+// SYMBOL: _ModifyEntityStat
+// FUNCTION: SERVER 0x100100a0
+int __cdecl ModifyEntityStat(int * param_1)
+{
+  int iVar1; float fVar2; int iVar3; long lVar4;
+  iVar3 = LookupEntityRecordById(param_1[4]); if (((iVar3 == 0) || (iVar1 = param_1[5], iVar1 < 0)) || (4 < iVar1)) return 1;
+  fVar2 = (float)(int)(param_1[6] + (uint)*(byte *)(iVar1 + 0x80 + iVar3));
+  if (((_g_stat_max <= fVar2) || (_g_stat_min < fVar2)) && (_g_stat_max <= fVar2)) { lVar4 = _ftol(); *(char *)(iVar1 + 0x80 + iVar3) = (char)lVar4; return 0; }
+  lVar4 = _ftol(); *(char *)(iVar1 + 0x80 + iVar3) = (char)lVar4; return 0;
+}
+
+/* 0x10010140 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 280
+// SYMBOL: _AllocWarEvent
+// FUNCTION: SERVER 0x10010140
+int __cdecl AllocWarEvent(int param_1, char *param_2)
+{
+  void *pvVar1; void *pvVar2; ushort *puVar3; byte bVar4;
+  *(int *)(param_1 + 0x10) = g_timestamp_0b6c;
+  pvVar1 = search_table_67(*(int *)(param_1 + 0x26)); if (pvVar1 == (void *)0x0) return 1;
+  pvVar2 = search_table_67(*(int *)(param_1 + 0x14)); if (pvVar2 == (void *)0x0) return 1;
+  puVar3 = StartEntityQuery(*(int *)((int)pvVar2 + 0x5d),1,0,0xca);
+  do {
+    if (puVar3 == (ushort *)0x0) {
+LAB_100101b7:
+      puVar3 = (ushort *)AllocGameObject(*(int *)((int)pvVar2 + 1),0xca,1); if (puVar3 == (ushort *)0x0) return 1;
+      *(int *)(g_player_slot_0[*(byte *)(param_1 + 3)].data + 0x264200) = *(int *)(puVar3 + 1);
+LAB_100101fa:
+      *(int *)(puVar3 + 0xe) = *(int *)(param_1 + 0x18); *(int *)(puVar3 + 0x10) = *(int *)(param_1 + 0x1c); *(int *)(puVar3 + 0x12) = *(int *)(param_1 + 0x20);
+      puVar3[0x14] = *(ushort *)(param_1 + 0x24); *(int *)(puVar3 + 0x15) = *(int *)(param_1 + 0x26); *(int *)(puVar3 + 0x19) = *(int *)(param_1 + 0x2e);
+      *(undefined1 *)(puVar3 + 0x1b) = *(undefined1 *)(param_1 + 0x32);
+      bVar4 = *(char *)((int)puVar3 + 0x37) + *(char *)(param_1 + 0x33); *(byte *)((int)puVar3 + 0x37) = bVar4;
+      if (100 < bVar4) { *(undefined1 *)((int)puVar3 + 0x37) = 100; return 0; }
+      *(undefined1 *)((int)puVar3 + 0x37) = *(undefined1 *)((int)puVar3 + 0x37); return 0;
+    }
+    if (*(int *)(puVar3 + 0x15) == *(int *)((int)pvVar1 + 1)) { if (puVar3 != (ushort *)0x0) goto LAB_100101fa; goto LAB_100101b7; }
+    puVar3 = NextEntityQueryMatch();
+  } while( 1 );
+}
+
+/* 0x10010260 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 144
+// SYMBOL: _DispatchProductionCommand
+// FUNCTION: SERVER 0x10010260
+int __cdecl DispatchProductionCommand(int param_1, char *param_2)
+{
+  uint32_t *puVar1; int iVar2; uint uVar3;
+  *(int *)(param_1 + 0x27) = g_timestamp_0b6c; iVar2 = rand(); *(int *)(param_1 + 0x2b) = iVar2;
+  puVar1 = (uint32_t *)(param_1 + 0x10);
+  switch(*(int *)(param_1 + 0x10)) {
+  case 0: uVar3 = AssignProductionSlot((int)puVar1); return uVar3;
+  case 1: uVar3 = HireProductionWorker((int)puVar1); return uVar3;
+  case 2: uVar3 = ExtendProductionTime(puVar1); return uVar3;
+  case 3: iVar2 = ReplaceProductionWorker((uchar *)puVar1); return iVar2;
+  case 4: iVar2 = ActivateGraveyardSection((uchar *)puVar1); return iVar2;
+  case 5: iVar2 = UpdateProductionProgress((uchar *)puVar1); return iVar2;
+  case 6: iVar2 = ValidateEntityAction((uchar *)puVar1); return iVar2;
+  default: return -1;
+  }
+}
+
+/* 0x100102f0 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 17
+// SYMBOL: _DispatchMoveSlotEntry
+// FUNCTION: SERVER 0x100102f0
+int __cdecl DispatchMoveSlotEntry(void * param_1, char * param_2)
+{
+  uint uVar1; uVar1 = MoveSlotEntry((int)param_1 + 0x10); return uVar1;
+}
+
+/* 0x10010310 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 52
+// SYMBOL: _CmdAllocGraveyardWorker
+// FUNCTION: SERVER 0x10010310
+int __cdecl CmdAllocGraveyardWorker(int param_1, char *param_2)
+{
+  int val; uint uVar1;
+  *(int *)(param_1 + 0x14) = g_timestamp_0b6c; val = rand(); *(int *)(param_1 + 0x10) = val; crt_thread_set_alt(val);
+  uVar1 = gv_ExAllocGraveyardWorker((void*)(param_1 + 0x10)); return (uVar1 != 0xffff) - 1;
+}
+
+/* 0x10010350 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 52
+// SYMBOL: _CmdAllocAlchemist
+// FUNCTION: SERVER 0x10010350
+int __cdecl CmdAllocAlchemist(int param_1, char *param_2)
+{
+  ushort uVar1; int val;
+  *(int *)(param_1 + 0x14) = g_timestamp_0b6c; val = rand(); *(int *)(param_1 + 0x10) = val; crt_thread_set_alt(val);
+  uVar1 = ahm_ExAllocAlchemist((void*)(param_1 + 0x10)); return (uVar1 != 0xffff) - 1;
+}
+
+/* 0x10010390 */
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 262
+// SYMBOL: _SimSpecialAction
+// FUNCTION: SERVER 0x10010390
+int __cdecl SimSpecialAction(int param_1, char *param_2)
+{
+  void *src; uint uVar1; char *p; int iVar2;
+  p = (char *)LookupEntityRecordById(*(int *)(param_1 + 0x14)); if (p == (char *)0x0) return -1;
+  iVar2 = check_flag(p); if (iVar2 == 0) return -2;
+  uVar1 = *(uint *)(param_1 + 0x10); src = (void *)(param_1 + 0x10);
+  if (uVar1 < 0x61536d54) {
+    if (uVar1 == 0x61536d53) { ClampFloatValue((int)src,*(int *)(*(int *)(p + 0x16c) + 0x65)); return 0; }
+    if (uVar1 == 0x46697245) { FireEntityAndCleanup((int)src,(int*)(*(int *)(p + 0x16c) + 0x65),*(int *)(p + 0x16c)); return 0; }
+    if (uVar1 == 0x61437353) { ApplyColorComponent((char *)src,*(char **)(*(int *)(p + 0x16c) + 0x65)); return 0; }
+    if (uVar1 == 0x61535263) { search_and_set(src,*(void**)(*(int *)(p + 0x16c) + 0x65)); return 0; }
+  }
+  else {
+    if (uVar1 == 0x61616452) { AllocateEntitySlot((int)src,*(int *)(*(int *)(p + 0x16c) + 0x65),*(int *)(p + 0x16c)); return 0; }
+    if (uVar1 == 0x61736452) { slot_clear_match((char *)src,*(char **)(*(char **)(p + 0x16c) + 0x65),*(char **)(p + 0x16c)); return 0; }
+  }
+  return -3;
+}
+
+/* 0x100104a0 */
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 135
+// SYMBOL: _GetBuildingStatCount
+// FUNCTION: SERVER 0x100104a0
+int __cdecl GetBuildingStatCount(uchar *param_1)
+{
+  char cVar1; int iVar2; int iVar3;
+  iVar2 = *(int *)(param_1 + 0x65); cVar1 = *(char *)(g_entity_type_table + (uint)*param_1 * 0x24d + 0x247);
+  if (cVar1 == '\x01') { iVar3 = 8; if (*(char *)(iVar2 + 0x19) == '\x01') return 0xc; }
+  else if (cVar1 == '\x02') { iVar3 = 0xc; if (*(char *)(iVar2 + 0x19) == '\x01') iVar3 = 0x12; if (*(char *)(iVar2 + 0x1a) == '\x01') return iVar3 + 2; }
+  else { iVar3 = 0x10; if (*(char *)(iVar2 + 0x19) == '\x01') iVar3 = 0x18; if (*(char *)(iVar2 + 0x1a) == '\x01') iVar3 = iVar3 + 4; if (*(char *)(iVar2 + 0x1b) == '\x01') iVar3 = iVar3 + 2; }
+  return iVar3;
 }
