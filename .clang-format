@@ -31,6 +31,7 @@ QualifierOrder:
   - const
   - volatile
   - type
+ReflowComments: false
 RemoveSemicolon: true
 SpaceAfterCStyleCast: true
 TabWidth: 4

@@ -5,6 +5,7 @@ db_dir = "db"
 output_dir = "output"
 
 [targets."server.dll"]
+ghidra_program_path = "/server.dll"
 binary = "original/Server/server.dll"
 format = "pe"
 arch = "x86_32"
@@ -37,7 +38,7 @@ command = "wine tools/MSVC600/VC98/Bin/CL.EXE"
 includes = "tools/MSVC600/VC98/Include"
 libs = "tools/MSVC600/VC98/Lib"
 cflags = "/O2 /Gd"
-base_cflags = "/nologo /c /MT"
+base_cflags = "/nologo /c /MT /D \"_WIN32_WINNT=0x0400\""
 timeout = 60
 
 [compiler.cflags_presets]

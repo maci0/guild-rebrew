@@ -1,16 +1,17 @@
 targets:
   SERVER:
     filename: original/Server/server.dll
-    source-root: src/server_dll
+    path: original/Server/server.dll
+    source-root: src/server.dll
     hash:
       sha256: c7ac331f44292657c1fa613608ffd84c9d8ee778e3e7696c7782b37dd6d40ee5
   GOLD:
     filename: original/Europa1400Gold.exe
-    source-root: src/Europa1400Gold
+    source-root: src/Europa1400Gold.exe
     hash:
       sha256: 7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8
   GOLDTL:
     filename: original/Europa1400Gold_TL.exe
-    source-root: src/Europa1400Gold_TL
+    source-root: src/Europa1400Gold_TL.exe
     hash:
       sha256: 6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45

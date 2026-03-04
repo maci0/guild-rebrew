@@ -86,27 +86,74 @@ add_c_warning(parentheses)
 
 if(REBREW_BUILD_SERVER)
   file(GLOB_RECURSE SERVER_SOURCES
-    "src/server_dll/*.c"
+    "src/server.dll/*.c"
   )
 
-  # Exclude non-source files (JSON, txt, md)
   list(FILTER SERVER_SOURCES INCLUDE REGEX "\\.c$")
+  list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt/")
+  list(FILTER SERVER_SOURCES EXCLUDE REGEX "/zlib/")
 
-  add_library(server_dll SHARED ${SERVER_SOURCES})
+  if(NOT MSVC_FOR_DECOMP)
+    set(_MSVC_ONLY_SOURCES
+      "crt_memset.c"
+      "crt_memmove.c"
+      "crt_memmove2.c"
+      "crt_strcmp.c"
+      "crt_strcat.c"
+    )
+    foreach(_f IN LISTS _MSVC_ONLY_SOURCES)
+      list(FILTER SERVER_SOURCES EXCLUDE REGEX "/${_f}$")
+    endforeach()
+  endif()
+
+  set(ZLIB_SOURCES
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/adler32.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/compress.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/crc32.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/deflate.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/gzio.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/infblock.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/infcodes.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/inffast.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/inflate.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/inftrees.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/infutil.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/trees.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/uncompr.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/zutil.c"
+  )
+
+  set(LINK_STUBS "${PROJECT_SOURCE_DIR}/src/link_stubs.c")
+
+  add_library(server_dll SHARED ${SERVER_SOURCES} ${ZLIB_SOURCES} ${LINK_STUBS})
 
   target_include_directories(server_dll PRIVATE
-    "${PROJECT_SOURCE_DIR}/src/server_dll"
+    "${PROJECT_SOURCE_DIR}/src/server.dll"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3"
   )
 
-  # Make sure the output matches the original filename
+  target_link_libraries(server_dll PRIVATE
+    "${PROJECT_SOURCE_DIR}/tools/MSVC600/VC98/Lib/KERNEL32.LIB"
+    "${PROJECT_SOURCE_DIR}/tools/MSVC600/VC98/Lib/USER32.LIB"
+    "${PROJECT_SOURCE_DIR}/tools/MSVC600/VC98/Lib/WS2_32.LIB"
+    "${PROJECT_SOURCE_DIR}/tools/MSVC600/VC98/Lib/WINMM.LIB"
+  )
+
   set_property(TARGET server_dll PROPERTY OUTPUT_NAME "server")
   set_property(TARGET server_dll PROPERTY PREFIX "")
   set_property(TARGET server_dll PROPERTY SUFFIX ".dll")
 
+  target_sources(server_dll PRIVATE "${PROJECT_SOURCE_DIR}/src/server.dll/server.def")
+
+  if(MSVC)
+    foreach(_zsrc IN LISTS ZLIB_SOURCES)
+      set_source_files_properties("${_zsrc}" PROPERTIES COMPILE_FLAGS "/O2")
+    endforeach()
+  endif()
+
   reccmp_add_target(server_dll ID SERVER)
 
   if (MSVC)
-    # C89 mode: disable language extensions warnings, enable all standard warnings
     target_compile_options(server_dll PRIVATE /W3)
 
     if (CMAKE_C_COMPILER_VERSION VERSION_GREATER_EQUAL "15")
@@ -114,7 +161,7 @@ if(REBREW_BUILD_SERVER)
     endif()
   endif()
 
-  message(STATUS "server.dll: ${CMAKE_CURRENT_SOURCE_DIR}/src/server_dll (${SERVER_SOURCES_COUNT} source files)")
+  message(STATUS "server.dll: ${CMAKE_CURRENT_SOURCE_DIR}/src/server.dll (${SERVER_SOURCES_COUNT} source files)")
   list(LENGTH SERVER_SOURCES SERVER_SOURCES_COUNT)
   message(STATUS "server.dll: found ${SERVER_SOURCES_COUNT} source files")
 endif()
@@ -174,19 +221,14 @@ endif()
 # ---------------------------------------------------------------------------
 
 if (MSVC_FOR_DECOMP)
-  # These flags match the confirmed compiler settings from the original build.
-  # GAME code: /O2 /Gd (full optimization, cdecl calling convention)
-  # MSVCRT:    /O1 /Gd (size optimization)
-  # ZLIB:      /O2 /Gd
-
   if(TARGET server_dll)
     set_property(TARGET server_dll PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
   endif()
 
-  set(CMAKE_C_FLAGS "/W3 /D \"WIN32\" /D \"_WINDOWS\"")
+  set(CMAKE_C_FLAGS "/W3 /D \"WIN32\" /D \"_WINDOWS\" /D \"_WIN32_WINNT=0x0400\"")
   set(CMAKE_C_FLAGS_DEBUG "/Gm /Zi /Od /D \"_DEBUG\"")
-  set(CMAKE_C_FLAGS_RELEASE "/O2 /Gd /D \"NDEBUG\"")
-  set(CMAKE_C_FLAGS_RELWITHDEBINFO "/Zi /O2 /Gd /D \"NDEBUG\"")
+  set(CMAKE_C_FLAGS_RELEASE "/D \"NDEBUG\"")
+  set(CMAKE_C_FLAGS_RELWITHDEBINFO "/Zi /D \"NDEBUG\"")
   set(CMAKE_C_FLAGS_MINSIZEREL "/O1 /D \"NDEBUG\"")
 
   set(CMAKE_EXE_LINKER_FLAGS "/machine:I386")
@@ -204,8 +246,37 @@ if (MSVC_FOR_DECOMP)
   set(CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL "/incremental:no")
 
   if(TARGET server_dll)
-    target_link_options(server_dll PRIVATE "/OPT:REF")
+    target_compile_options(server_dll PRIVATE /Z7)
+    target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug")
   endif()
+endif()
+
+# ---------------------------------------------------------------------------
+# Per-file CFLAGS from source annotations (MSVC decompilation builds only)
+# ---------------------------------------------------------------------------
+# Each .c file has a "// CFLAGS: ..." annotation that specifies the exact
+# compiler flags needed to match the original binary. This function reads
+# those annotations and applies them as per-file compile flags.
+
+function(apply_annotation_cflags target)
+  get_target_property(sources ${target} SOURCES)
+  foreach(src IN LISTS sources)
+    file(STRINGS "${src}" cflags_lines REGEX "^// CFLAGS:")
+    if(cflags_lines)
+      list(GET cflags_lines 0 cflags_line)
+      string(REGEX REPLACE "^// CFLAGS: *" "" flags "${cflags_line}")
+      string(REPLACE "/I\"references/" "/I\"${PROJECT_SOURCE_DIR}/references/" flags "${flags}")
+      string(REPLACE "/I..\\\\..\\\\references\\\\" "/I\"${PROJECT_SOURCE_DIR}/references/" flags "${flags}")
+      set_source_files_properties("${src}" PROPERTIES COMPILE_FLAGS "${flags}")
+    else()
+      # Default: GAME functions use /O2 /Gd (matches rebrew-project.toml)
+      set_source_files_properties("${src}" PROPERTIES COMPILE_FLAGS "/O2 /Gd")
+    endif()
+  endforeach()
+endfunction()
+
+if(MSVC_FOR_DECOMP AND TARGET server_dll)
+  apply_annotation_cflags(server_dll)
 endif()
 
 # ---------------------------------------------------------------------------

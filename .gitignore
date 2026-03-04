@@ -6,9 +6,6 @@ __pycache__/
 .venv*/
 .python-version
 
-# reccmp clone (not tracked)
-tools/reccmp
-
 # Vendored compiler toolchains (too large for git)
 tools/MSVC600/
 tools/VC/
@@ -16,18 +13,18 @@ tools/VC/
 # IDE / tool caches
 .pytest_cache/
 .ruff_cache/
-.claude/
+.claude
 .opencode/
+.cache/
+.agents/
+.benchmarks/
 
 # Generated output (ephemeral)
 output/
 run_out/
+build/
 *.log
 
-# Source files only (exclude binaries in src/)
-src/**
-!src/**/*.c
-!src/**/*.asm
 
 # Target binary bytes (extracted from original DLLs)
 bin/
@@ -38,9 +35,44 @@ func_0x*.bin
 # Docker build context
 docker/__pycache__/
 
+# Cognee
+.cognee-data/
+.env.cognee
+
 # OS
 .DS_Store
 Thumbs.db
 
 # original binaries
 original/
+
+# Temp / scratch files from RE workflow
+diff_*.txt
+ga_*.txt
+fix_*.py
+score_*.txt
+flag_sweep_output.txt
+cand.c
+cand_swap.c
+*.obj
+*.c.bak
+*.c.tmp
+
+# Others
+opencode.json
+flirt_sigs/
+.sisyphus/
+
+reccmp-build.yml
+reccmp-user.yml
+reccmp-progress.svg
+reccmp-report.html
+reccmp-summary.json
+reccmp-*-orig.txt
+reccmp-*-recomp.txt
+catalog.json
+.env.temp
+cmake/
+db/
+archive/
+compile_commands.json

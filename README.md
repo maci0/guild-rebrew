@@ -11,18 +11,18 @@ Uses the [rebrew](../rebrew/) toolchain for compiler-in-the-loop decompilation m
 uv sync
 
 # All rebrew CLI tools work from this directory:
-rebrew-next --stats              # overall progress
-rebrew-next --origin GAME -n 10  # next GAME functions to tackle
+rebrew next --stats              # overall progress
+rebrew next --origin GAME -n 10  # next GAME functions to tackle
 ```
 
 ## Decompilation Workflow
 
 ```bash
 # 1. Find a function to work on
-rebrew-next --origin GAME -n 10
+rebrew next --origin GAME -n 10
 
 # 2. Generate a skeleton .c file
-rebrew-skeleton 0x10003DA0
+rebrew skeleton 0x10003DA0
 
 # 3. Write C89 source (see AGENTS.md for rules)
 #    - Declare ALL variables at block top
@@ -30,21 +30,14 @@ rebrew-skeleton 0x10003DA0
 #    - No // comments (use /* */)
 
 # 4. Test your implementation
-rebrew-test src/server_dll/my_func.c --update
+rebrew test src/server.dll/my_func.c
 
-# 5. If near-miss, run the GA to auto-search
-rebrew-match \
-  --cl "wine tools/MSVC600/VC98/Bin/CL.EXE" \
-  --inc "tools/MSVC600/VC98/Include" \
-  --cflags "/nologo /c /O2 /MT /Gd" \
-  --target-exe original/Server/server.dll \
-  --target-va 0x10003DA0 --target-size 160 \
-  --symbol "_my_func" \
-  --seed-c src/server_dll/my_func.c \
-  --out-dir run_out --generations 200 --pop 64 -j 16
+# 5. If near-miss, check the diff and try the GA
+rebrew match -d src/server.dll/my_func.c     # byte diff
+rebrew match src/server.dll/my_func.c -g 200 -p 64 -j 16  # GA search
 
-# 6. Update STATUS in the annotation header based on result
-#    EXACT | RELOC | MATCHING | STUB
+# 6. Promote: test + auto-update STATUS annotation
+rebrew promote src/server.dll/my_func.c
 ```
 
 ## Compiler Flags by Origin
@@ -59,19 +52,27 @@ rebrew-match \
 
 ```
 guild-rebrew/
-├── src/server_dll/       # Reversed C source files (~400 functions)
+├── src/server.dll/       # Reversed C source files (~147 functions)
 ├── original/             # Target binaries (gitignored)
 ├── references/           # Reference source (zlib 1.1.3)
 ├── tools/                # Vendored MSVC6 compiler toolchain
 │   ├── MSVC600/          # CL.EXE, headers, libs
 │   └── VC/               # Additional VC headers/libs
-├── recoverage/           # Coverage web dashboard
+├── db/                   # Coverage data (coverage.db, JSONs)
+├── docs/                 # User stories & workflow docs
 ├── archive/              # Old experiments
-├── rebrew.toml           # Project configuration
+├── rebrew-project.toml           # Project configuration
 ├── reccmp-project.yml    # reccmp configuration
-├── CMakeLists.txt        # CMake build for native compilation
 └── AGENTS.md             # Full project reference
 ```
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [AGENTS.md](AGENTS.md) | Full project reference for AI agents and contributors |
+| [docs/USER_STORIES.md](docs/USER_STORIES.md) | Workspace-specific user stories with workflow diagrams |
+| [handoff.md](handoff.md) | Session handoff context and pending tasks |
 
 ## Targets
 
