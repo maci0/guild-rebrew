@@ -4,9 +4,12 @@
 
 #pragma intrinsic(memset, strcmp, strcpy)
 
-void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */;
-void __cdecl ReportMessage(char* msg); /* Single arg log? */;
-void* __cdecl _callnewh(int); /* 0x1001a7f7 */;
+void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
+;
+void __cdecl ReportMessage(char* msg); /* Single arg log? */
+;
+void* __cdecl _callnewh(int); /* 0x1001a7f7 */
+;
 extern int DAT_10034624;
 extern int DAT_10034628;
 extern int DAT_1003462c;
@@ -27,7 +30,8 @@ extern int DAT_10028938;
 extern int DAT_1002893c;
 void __cdecl ReportMemoryGroupInfo(int toggle);
 void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
-void __cdecl m_FreeTracked(int*);
+void __cdecl m_FreeTracked(void*);
+extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 
 ;
 ;
@@ -42,7 +46,7 @@ void __cdecl m_FreeTracked(int*);
 // FUNCTION: SERVER 0x10006580
 // m_AllocTracked
 
-void* __cdecl m_AllocTracked(unsigned int size, int source)
+void* __cdecl m_AllocTracked(unsigned int size, const char* source)
 {
 	char msgBuf[256];
 	char nameBuf[16];

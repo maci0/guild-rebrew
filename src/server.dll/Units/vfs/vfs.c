@@ -183,10 +183,10 @@ int __cdecl vfs_FlushAndClose(int param_1)
 	int result;
 	int last;
 
-	result = vfs_GetByte(param_1);
-	result = result + (vfs_GetByte(param_1) << 8);
-	result = result + (vfs_GetByte(param_1) << 16);
-	last = vfs_GetByte(param_1);
+	result = vfs_GetByte((int*) param_1);
+	result = result + (vfs_GetByte((int*) param_1) << 8);
+	result = result + (vfs_GetByte((int*) param_1) << 16);
+	last = vfs_GetByte((int*) param_1);
 	if (last == -1) {
 		*(unsigned int*) (param_1 + 0x38) = 0xfffffffd;
 	}
@@ -213,7 +213,7 @@ int __cdecl vfs_ReadUint32BE(int param_1)
 			vfs_WriteUint32LE(*(int*) (param_1 + 0x40), *(unsigned int*) (param_1 + 8));
 		}
 	}
-	return vfs_CloseStream(param_1);
+	return vfs_CloseStream((void*) param_1);
 }
 
 // STATUS: RELOC
@@ -228,7 +228,7 @@ void __cdecl vfs_WriteUint32LE(int stream, unsigned int value)
 
 	i = 4;
 	do {
-		putc(value & 0xff, stream);
+		putc(value & 0xff, (FILE*) stream);
 		value = value >> 8;
 		i = i - 1;
 	} while (i != 0);
@@ -313,10 +313,10 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 					return 0;
 				}
 			}
-			if (fseek(ctx[0x18], ctx[0x1a] + ctx[0xf], 0) != 0) {
+			if (fseek((FILE*) ctx[0x18], ctx[0x1a] + ctx[0xf], 0) != 0) {
 				return -1;
 			}
-			if (fread(*ctx, chunk_size, 1, ctx[0x18]) != 1) {
+			if (fread((void*) *ctx, chunk_size, 1, (FILE*) ctx[0x18]) != 1) {
 				return -1;
 			}
 			ctx[0xf] += chunk_size;
@@ -591,16 +591,16 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 						);
 						return read_count;
 					}
-					result = fread(arg_8h, arg_ch, arg_10h, src_ptr);
+					result = fread(arg_8h, arg_ch, arg_10h, (FILE*) src_ptr);
 				}
 				else {
-					result = ReadVfsCompressed(src_ptr, arg_8h, total_size);
+					result = ReadVfsCompressed((int) src_ptr, (int) arg_8h, total_size);
 					if ((((*(unsigned char*) (arg_14h + 0x13c) & 4) != 0) && (1 < result)) &&
 						((*(unsigned char*) (arg_14h + 0x13c) = *(unsigned char*) (arg_14h + 0x13c) & 0xfb,
 						  *arg_8h == *(unsigned int*) 0x10029450 &&
 							  (*(unsigned int*) ((char*) arg_8h + 4) == *(unsigned int*) 0x10029454)))) {
 						sprintf((char*) &log_ctx, (char*) 0x10029474, arg_14h);
-						LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x5b4, &log_ctx, 1);
+						LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x5b4, (char*) &log_ctx, 1);
 						return result;
 					}
 				}

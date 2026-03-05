@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <string.h>
-#include <windows.h>
 #include <time.h>
+#include <windows.h>
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
+extern char* __cdecl _ctime(const time_t*);
 
-char __cdecl check_memory_protection(void*);
+char __cdecl check_memory_protection(unsigned int);
 char __cdecl AnalyzeInstruction(int, int, int, int*);
 unsigned int __cdecl EmitCrashModuleLine(int*);
 extern void* g_10034614;
 char* __cdecl GetDebugRecordByIndex();
-void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
+void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
 extern int g_severity_table[3];
 extern unsigned int g_log_mode_flags;
 extern int g_console_handle;
@@ -44,7 +45,7 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 {
 	char buf[260];
 	unsigned int written;
-	int stream;
+	FILE* stream;
 	int idx;
 
 	if (flags & 1) {
@@ -59,14 +60,14 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 
 	found:
 		sprintf(buf, "%s\\%s", g_log_buffer, g_log_format_table + idx * 32);
-		stream = fopen(buf, "at");
+		stream = (FILE*) fopen(buf, "at");
 		if (stream != 0) {
 			goto do_write;
 		}
 
 	fallback:
 		sprintf(buf, "%s\\%s", g_log_buffer, "__server.log");
-		stream = fopen(buf, "at");
+		stream = (FILE*) fopen(buf, "at");
 		if (stream == 0) {
 			goto skip;
 		}
@@ -84,8 +85,8 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 	}
 
 	if (flags & 8) {
-		WriteFile(g_log_file_handle, msg, strlen(msg), &written, 0);
-		WriteFile(g_log_file_handle, "\n", 1, &written, 0);
+		WriteFile((HANDLE) g_log_file_handle, msg, strlen(msg), &written, 0);
+		WriteFile((HANDLE) g_log_file_handle, "\n", 1, &written, 0);
 	}
 }
 
@@ -405,7 +406,7 @@ write_nl: {
 	while (nFrames > 0) {
 		pStack++;
 		VirtualQuery((const void*) *pStack, &mbi, 0x1c);
-		instrType = check_memory_protection(mbi.Protect);
+		instrType = check_memory_protection((unsigned int) mbi.Protect);
 		if (!instrType || mbi.RegionSize < 0x1000) {
 			goto next_frame;
 		}
@@ -553,7 +554,8 @@ unsigned int EmitCrashModuleLine(int* param_1)
 				((void (*)(int)) write_func)(param_1[1]);
 				if (debug_record != 0) {
 					((void (*)(int, void*, int, void*, int)) write_func)(param_1[1], &stack_16, 1, &stack_40, 0);
-					((void (*)(int, int*, int, void*, int)) write_func)(param_1[1], debug_record + 1, *debug_record + -1, &stack_60, 0);
+					((void (*)(int, int*, int, void*, int))
+						 write_func)(param_1[1], debug_record + 1, *debug_record + -1, &stack_60, 0);
 				}
 				((void (*)(int, void*, int, void*, int)) write_func)(param_1[1], &stack_48, 2, &stack_40, 0);
 				return 1;
@@ -711,24 +713,24 @@ void InitializeLogAndErrorHandler(
 	stack_return_addr = 0x104;
 	stack_buf_addr = 0x11766100;
 	GetModuleFileNameA(0, module_path, 0);
-	path_end = strrchr(0x11766100, 0x5c);
+	path_end = (unsigned char*) strrchr((const char*) 0x11766100, 0x5c);
 	*path_end = 0;
-	_ctime((time_t*)&stack_ddc);
+	_ctime((const time_t*) &stack_ddc);
 	sprintf((char*) 0x117640e0, (char*) 0x1002735c, &stack_ee4);
 	if ((*(unsigned int*) 0x10034618 & 1) != 0) {
 		format_offset = 0x10027084;
 		do {
 			sprintf((char*) &stack_de0, (char*) 0x100270fc, (char*) 0x11766100);
-			file_handle = (int)fopen((char*)&stack_de0, (char*)0x100270f8);
+			file_handle = (int) fopen((char*) &stack_de0, (char*) 0x100270f8);
 			if (file_handle != 0) {
-				fseek(file_handle, 0, 2);
-				file_size = ftell((FILE*)file_handle);
+				fseek((FILE*) file_handle, 0, 2);
+				file_size = ftell((FILE*) file_handle);
 				if (0x10000 < file_size) {
-					fflush(file_handle);
-					file_handle = (int)fopen((char*)&stack_de0, (char*)0x10027358);
-					fputs(0x1002733c, file_handle);
+					fflush((FILE*) file_handle);
+					file_handle = (int) fopen((char*) &stack_de0, (char*) 0x10027358);
+					fputs((const char*) 0x1002733c, (FILE*) file_handle);
 				}
-				fflush(file_handle);
+				fflush((FILE*) file_handle);
 			}
 			format_offset = format_offset + 0x20;
 		} while (format_offset < 0x100270e4);
@@ -739,7 +741,7 @@ void InitializeLogAndErrorHandler(
 	}
 	log_level_ptr = (unsigned int*) 0x10027078;
 	do {
-		DispatchLogOutput(0x117640e0, *(unsigned int*) 0x10034618, *log_level_ptr);
+		DispatchLogOutput((const char*) 0x117640e0, *(unsigned int*) 0x10034618, *log_level_ptr);
 		log_level_ptr = log_level_ptr + 1;
 	} while (log_level_ptr < (unsigned int*) 0x10027084);
 	return;
@@ -802,7 +804,7 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 	if ((flags & 2) == 0) {
 		return;
 	}
-	dialogResult = MessageBoxA(g_owner_window, &g_log_message_buffer, "Fatal Error! Abort Program?", 0x124);
+	dialogResult = MessageBoxA((HWND) g_owner_window, &g_log_message_buffer, "Fatal Error! Abort Program?", 0x124);
 	if (dialogResult != 6) {
 		return;
 	}
