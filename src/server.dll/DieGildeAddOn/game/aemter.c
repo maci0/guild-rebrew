@@ -44,63 +44,63 @@ void* __cdecl LookupEntityRecordById(int entityId);
 
 int __cdecl ValidateOfficeCandidate(int* param_1)
 {
-	void* entity;
-	char* slot_ptr;
-	int slot_index;
-	int second_index;
+	void* pvVar1;
+	char* pcVar2;
+	int iVar3;
+	int iVar4;
 
-	entity = LookupEntityRecordById(*param_1);
-	if ((entity != (void*) 0) && (*(char*) ((int) entity + 0x168) == '\0')) {
-		slot_index = 0;
-		slot_ptr = &DAT_101de5a0;
+	pvVar1 = LookupEntityRecordById(*param_1);
+	if ((pvVar1 != (void*) 0) && (*(char*) ((int) pvVar1 + 0x168) == '\0')) {
+		iVar3 = 0;
+		pcVar2 = &DAT_101de5a0;
 		do {
-			if (*slot_ptr == (char) param_1[1]) {
-				if (0x1d < slot_index) {
+			if (*pcVar2 == (char) param_1[1]) {
+				if (0x1d < iVar3) {
 					return 0;
 				}
-				if ((&DAT_101de5a4)[slot_index * 6] != -1) {
+				if ((&DAT_101de5a4)[iVar3 * 6] != -1) {
 					return 0;
 				}
-				if ((&DAT_101de5b0)[slot_index * 0x18] != '\x03') {
+				if ((&DAT_101de5b0)[iVar3 * 0x18] != '\x03') {
 					return 0;
 				}
-				if (3 < (int) (&DAT_101de5ac)[slot_index * 6]) {
+				if (3 < (int) (&DAT_101de5ac)[iVar3 * 6]) {
 					return 0;
 				}
-				if (*(char*) ((int) param_1 + 6) != (&DAT_101de5a8)[slot_index * 0x18]) {
+				if (*(char*) ((int) param_1 + 6) != (&DAT_101de5a8)[iVar3 * 0x18]) {
 					return 0;
 				}
 				if (*(char*) ((int) param_1 + 5) != -1) {
-					second_index = 0;
-					slot_ptr = &DAT_101de5a0;
-					while (*slot_ptr != *(char*) ((int) param_1 + 5)) {
-						slot_ptr = slot_ptr + 0x18;
-						second_index = second_index + 1;
-						if (0x101de86f < (int) slot_ptr) {
+					iVar4 = 0;
+					pcVar2 = &DAT_101de5a0;
+					while (*pcVar2 != *(char*) ((int) param_1 + 5)) {
+						pcVar2 = pcVar2 + 0x18;
+						iVar4 = iVar4 + 1;
+						if (0x101de86f < (int) pcVar2) {
 							return 0;
 						}
 					}
-					if (0x1d < second_index) {
+					if (0x1d < iVar4) {
 						return 0;
 					}
-					if ((&DAT_101de5a8)[slot_index * 0x18] != (&DAT_101de5a8)[second_index * 0x18]) {
+					if ((&DAT_101de5a8)[iVar3 * 0x18] != (&DAT_101de5a8)[iVar4 * 0x18]) {
 						return 0;
 					}
-					if ((&DAT_101de5a4)[second_index * 6] != -1) {
+					if ((&DAT_101de5a4)[iVar4 * 6] != -1) {
 						return 0;
 					}
-					if ((&DAT_101de5b0)[second_index * 0x18] != '\x03') {
+					if ((&DAT_101de5b0)[iVar4 * 0x18] != '\x03') {
 						return 0;
 					}
-					if (3 < (int) (&DAT_101de5ac)[second_index * 6]) {
+					if (3 < (int) (&DAT_101de5ac)[iVar4 * 6]) {
 						return 0;
 					}
 				}
 				return 1;
 			}
-			slot_ptr = slot_ptr + 0x18;
-			slot_index = slot_index + 1;
-		} while ((int) slot_ptr < 0x101de870);
+			pcVar2 = pcVar2 + 0x18;
+			iVar3 = iVar3 + 1;
+		} while ((int) pcVar2 < 0x101de870);
 	}
 	return 0;
 }

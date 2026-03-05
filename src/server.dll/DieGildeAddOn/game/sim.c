@@ -23,16 +23,16 @@ extern unsigned char DAT_100358a0;
 
 unsigned int FindAndMatchParents(unsigned int param_1)
 {
-	unsigned short parent_a;
-	unsigned short parent_b;
-	unsigned int rand_val;
-	int* slot_ptr;
-	int count;
-	unsigned int range;
-	int occupied;
-	int attempt;
-	unsigned int attempt2;
-	int thresholds[6];
+	unsigned short uVar1;
+	unsigned short uVar2;
+	unsigned int uVar3;
+	int* piVar4;
+	int iVar5;
+	unsigned int uVar6;
+	int iVar7;
+	int iVar8;
+	unsigned int uStack_20;
+	int aiStack_18[6];
 
 	iVar8 = 0;
 	aiStack_18[0] = 0x60;

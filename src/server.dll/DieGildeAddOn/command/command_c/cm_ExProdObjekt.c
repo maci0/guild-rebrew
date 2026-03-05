@@ -44,18 +44,18 @@ extern char s_cm_ExProdObjekt___Rohstoff_versc_1002cef4[];
 // FUNCTION: SERVER 0x1000e140
 int __cdecl cm_ExecProduction(int msg, char* result)
 {
-	int iVar1;
-	ushort* puVar2;
-	char* pcVar3;
-	int iVar4;
-	ushort* puVar5;
-	long lVar6;
-	short* psVar7;
+	int quantity;
+	ushort* obj_entry;
+	char* recipe;
+	int production_cap;
+	ushort* material_iter;
+	long production_value;
+	short* player_entry;
 	uint line;
-	short* local_10;
-	char* local_c;
-	int local_8;
-	short* local_4;
+	short* lager;
+	char* recipe_def;
+	int saved_quantity;
+	short* owner;
 
 	*(int*)(msg + 0x1a) = g_timestamp_0b6c;
 	iVar1 = get_field_by_type((char*)msg, *(int*)(msg + 0x10));

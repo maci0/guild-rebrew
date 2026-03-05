@@ -230,21 +230,21 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			*((char*) entity + 9) = 0;
 			*(int*) ((char*) entity + 0x1c) = 0x447a0000;
 			{
-				float sum4;
-				float fVar4;
-				float fVar5;
-				sum4 = crt_rand_float();
-				fVar4 = g_100256c8;
+				float rand_f;
+				float scale;
+				float base_val;
+				rand_f = crt_rand_float();
+				scale = g_100256c8;
 				*(int*) ((char*) entity + 0x20) = 0x41400000;
-				*(float*) ((char*) entity + 0x14) = (sum4 * fVar4 + g_100256c4) - g_100256c0;
+				*(float*) ((char*) entity + 0x14) = (rand_f * scale + g_100256c4) - g_100256c0;
 				alloc_result = (unsigned int) crt_ftol();
 				rand_val = (unsigned short) crt_rand_range(alloc_result);
-				fVar5 = *(float*) ((char*) entity + 0x1c) * g_100256b8;
+				base_val = *(float*) ((char*) entity + 0x1c) * g_100256b8;
 				*(int*) ((char*) entity + 0x18) = *(int*) ((char*) entity + 0x1c);
 				col_idx = 0;
 				idx = 0;
 				*(float*) ((char*) entity + 0x10) =
-					(fVar5 + (float) rand_val) - *(float*) ((char*) entity + 0x1c) * g_100256b4;
+					(base_val + (float) rand_val) - *(float*) ((char*) entity + 0x1c) * g_100256b4;
 			}
 			do {
 				rand_val = *entity;
@@ -506,63 +506,63 @@ void* __cdecl AllocateTrackedHeapBlock(unsigned int allocSize, char* groupTag);
 
 int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 {
-	int bVar1;
-	void* pvVar2;
-	int iVar3;
-	unsigned char* outBuffer;
-	unsigned int* puVar4;
-	unsigned int* puVar5;
-	unsigned int local_3c;
-	unsigned char local_38[4];
-	unsigned char local_34;
-	unsigned char local_33;
-	unsigned char local_32;
-	unsigned char local_31[5];
-	unsigned char local_2c[44];
+	int ok;
+	void* alloc_ptr;
+	int i;
+	unsigned char* buf_cursor;
+	unsigned int* src;
+	unsigned int* dst;
+	unsigned int header_id;
+	unsigned char header_data[4];
+	unsigned char field_a;
+	unsigned char field_b;
+	unsigned char field_c;
+	unsigned char field_d[5];
+	unsigned char slot_data[44];
 
-	bVar1 = ReadVfsDataChecked(&local_3c, 4, 1, param_1);
-	if (bVar1 == 0) {
+	ok = ReadVfsDataChecked(&header_id, 4, 1, param_1);
+	if (ok == 0) {
 		return 0;
 	}
-	bVar1 = ReadVfsDataChecked(local_38, 4, 1, param_1);
-	if (bVar1 == 0) {
+	ok = ReadVfsDataChecked(header_data, 4, 1, param_1);
+	if (ok == 0) {
 		return 0;
 	}
-	bVar1 = ReadVfsDataChecked(&local_34, 1, 1, param_1);
-	if (bVar1 == 0) {
+	ok = ReadVfsDataChecked(&field_a, 1, 1, param_1);
+	if (ok == 0) {
 		return 0;
 	}
-	bVar1 = ReadVfsDataChecked(&local_33, 1, 1, param_1);
-	if (bVar1 != 0) {
-		bVar1 = ReadVfsDataChecked(&local_32, 1, 1, param_1);
-		if (bVar1 == 0) {
+	ok = ReadVfsDataChecked(&field_b, 1, 1, param_1);
+	if (ok != 0) {
+		ok = ReadVfsDataChecked(&field_c, 1, 1, param_1);
+		if (ok == 0) {
 			return 0;
 		}
-		bVar1 = ReadVfsDataChecked(local_31, 1, 1, param_1);
-		if (bVar1 != 0) {
-			iVar3 = 0;
-			outBuffer = local_2c;
-			while (bVar1 = ReadVfsDataChecked(outBuffer - 4, 4, 1, param_1), bVar1 != 0) {
-				bVar1 = ReadVfsDataChecked(outBuffer, 4, 1, param_1);
-				if (bVar1 == 0) {
+		ok = ReadVfsDataChecked(field_d, 1, 1, param_1);
+		if (ok != 0) {
+			i = 0;
+			buf_cursor = slot_data;
+			while (ok = ReadVfsDataChecked(buf_cursor - 4, 4, 1, param_1), ok != 0) {
+				ok = ReadVfsDataChecked(buf_cursor, 4, 1, param_1);
+				if (ok == 0) {
 					return 0;
 				}
-				iVar3 = iVar3 + 1;
-				outBuffer = outBuffer + 8;
-				if (5 < iVar3) {
+				i = i + 1;
+				buf_cursor = buf_cursor + 8;
+				if (5 < i) {
 					if (*(int*) (param_2 + 0x65) == 0) {
-						pvVar2 = AllocateTrackedHeapBlock(0x3c, s__ahm_AllocAhmInfo_1002a0f7 + 1);
-						*(void**) (param_2 + 0x65) = pvVar2;
+						alloc_ptr = AllocateTrackedHeapBlock(0x3c, s__ahm_AllocAhmInfo_1002a0f7 + 1);
+						*(void**) (param_2 + 0x65) = alloc_ptr;
 					}
-					puVar4 = &local_3c;
-					puVar5 = *(unsigned int**) (param_2 + 0x65);
-					iVar3 = 0xf;
+					src = &header_id;
+					dst = *(unsigned int**) (param_2 + 0x65);
+					i = 0xf;
 					do {
-						*puVar5 = *puVar4;
-						puVar4 = puVar4 + 1;
-						puVar5 = puVar5 + 1;
-						iVar3 = iVar3 - 1;
-					} while (iVar3 != 0);
+						*dst = *src;
+						src = src + 1;
+						dst = dst + 1;
+						i = i - 1;
+					} while (i != 0);
 					return 1;
 				}
 			}
@@ -685,10 +685,10 @@ void __cdecl QueryEntityBuildingType(int param_1)
 int GetCommandPayloadSize(unsigned char* param_1)
 
 {
-	int iVar1;
-	unsigned char* pentity_id;
-	int iVar3;
-	int iVar4;
+	int entry_size;
+	unsigned char* cursor;
+	int total_size;
+	int count;
 
 	// switch table (103 cases) at 0x1000c864
 	switch (*param_1) {
@@ -759,8 +759,8 @@ int GetCommandPayloadSize(unsigned char* param_1)
 		return 0x39;
 	case 0x16:
 	case 0x17:
-		pentity_id = param_1 + (*param_1 == 0x16 ? 0x15 : 0x15);
-		iVar3 = 0x15;
+		cursor = param_1 + (*param_1 == 0x16 ? 0x15 : 0x15);
+		total_size = 0x15;
 		break;
 	case 0x18:
 		return param_1[0x14] * 5 + 0x15;
@@ -830,12 +830,12 @@ int GetCommandPayloadSize(unsigned char* param_1)
 	case 0x62:
 		return 0x29;
 	}
-	for (iVar4 = param_1[0x14]; iVar4 > 0; iVar4 = iVar4 - 1) {
-		iVar1 = pentity_id[1] * *pentity_id + 4;
-		iVar3 = iVar3 + iVar1;
-		pentity_id = pentity_id + iVar1;
+	for (count = param_1[0x14]; count > 0; count = count - 1) {
+		entry_size = cursor[1] * *cursor + 4;
+		total_size = total_size + entry_size;
+		cursor = cursor + entry_size;
 	}
-	return iVar3;
+	return total_size;
 }
 
 // STATUS: MATCHING
@@ -850,41 +850,41 @@ int GetCommandPayloadSize(unsigned char* param_1)
 
 int __cdecl ProcessEntityChain(char* param_1)
 {
-	char cVar1;
-	int bVar2;
-	int iVar3;
-	unsigned char* pbVar4;
+	char cmd_type;
+	int success;
+	int handler_ret;
+	unsigned char* node;
 
-	bVar2 = 1;
-	pbVar4 = *(unsigned char**) (param_1 + 0x95);
+	success = 1;
+	node = *(unsigned char**) (param_1 + 0x95);
 	do {
-		if (*pbVar4 == 6) {
+		if (*node == 6) {
 			goto check_result;
 		}
-		iVar3 = PTR_LAB_1002c5a0[*pbVar4](pbVar4);
-		if (iVar3 != 0) {
-			bVar2 = 0;
+		handler_ret = PTR_LAB_1002c5a0[*node](node);
+		if (handler_ret != 0) {
+			success = 0;
 		}
-		pbVar4 = *(unsigned char**) (pbVar4 + 0x95);
-	} while (bVar2);
+		node = *(unsigned char**) (node + 0x95);
+	} while (success);
 error_path:
-	cVar1 = *param_1;
-	while (cVar1 != 6) {
+	cmd_type = *param_1;
+	while (cmd_type != 6) {
 		*param_1 = 2;
 		param_1 = *(char**) (param_1 + 0x95);
-		cVar1 = *param_1;
+		cmd_type = *param_1;
 	}
 	*param_1 = 2;
 	return 1;
 check_result:
-	if (!bVar2) {
+	if (!success) {
 		goto error_path;
 	}
 	*param_1 = 1;
-	cVar1 = *param_1;
-	while (cVar1 != 6) {
+	cmd_type = *param_1;
+	while (cmd_type != 6) {
 		param_1 = *(char**) (param_1 + 0x95);
-		cVar1 = *param_1;
+		cmd_type = *param_1;
 	}
 	*param_1 = 1;
 	return 1;
