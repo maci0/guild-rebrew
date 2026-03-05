@@ -1,13 +1,14 @@
+#include "../Units/Error/error.h"
+#include "../Units/m_alloc/m_alloc.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
 #include <winsock2.h>
-#include "../Units/m_alloc/m_alloc.h"
-#include "../Units/Error/error.h"
-
+unsigned int __stdcall timeGetTime(void);
 
 /* Command layer (local externs — server.c uses different signatures) */
-int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+int __cdecl cm_QueuePlayerCommand(int player, unsigned char* data);
 int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
 int __cdecl cm_ProcessCommandQueue(void);
 int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
@@ -35,17 +36,24 @@ void __cdecl RecvGameSavegame(void);
 int __cdecl srv_Init(void);
 int __cdecl AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
 void __cdecl sim_SetSyncParams(int base_addr, unsigned char phase, unsigned int arg3, unsigned int arg4);
-void __cdecl _seterrormode(unsigned int value);
-void __cdecl ShutdownMemoryAllocator(void);
+void __cdecl _seterrormode(int value);
+void __cdecl ShutdownMemoryAllocator();
+int __cdecl gm_Open(char*, char*);
+int __cdecl sub_1001a299(char*, char*);
+int __cdecl CreateListenSocket(int port);
 extern int g_net_socket;
-int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */;
+int __cdecl QueueCommandForProcessing(int conn, unsigned char* pkt); /* 0x1000a8f0 */
+;
+;
 int __cdecl SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
 extern unsigned int g_player_slots;
 short __cdecl get_command_type(char*);
 int __cdecl ahm_ProcessEntityChain(unsigned char* node);
-extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */;
-extern unsigned char g_connections[]; /* 0x101deb00 */;
+extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
+;
+extern unsigned char g_connections[]; /* 0x101deb00 */
+;
 
 ;
 ;
@@ -211,7 +219,7 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 		now_tick = timeGetTime();
 		if ((3000 < now_tick - last_announce_tick) || phase_complete) {
 			*((unsigned char*) startup_cfg_words + 0x27) = (unsigned char) connected_players;
-			SendBroadcastPacket(0x3039, startup_cfg_words);
+			SendBroadcastPacket((unsigned char*) 0x3039, (int) startup_cfg_words);
 			last_announce_tick = timeGetTime();
 		}
 
@@ -604,16 +612,16 @@ int __cdecl srv_Init(void)
 	if (result < 0) {
 		char full_path[512];
 		sub_1001a299(full_path, game_path);
-		LogMessageInternal("Could not open gamefiles path:%s", 1, (int) full_path, 0x3cd);
+		LogMessageInternal("Could not open gamefiles path:%s", 1, (char*) full_path, 0x3cd);
 		return 0;
 	}
 
 	gm_InitEntitySlots();
 	InitBuildingTypeTable();
-	result = CreateListenSocket((void*) 0x11764088);
+	result = CreateListenSocket(*(int*) 0x11764088);
 
 	if (result == -1) {
-		LogMessageInternal("***ERROR: Initialization of Socket failed!", 1, 0x3db, 0);
+		LogMessageInternal("***ERROR: Initialization of Socket failed!", 1, (char*) 0x3db, 0);
 		return 0;
 	}
 
@@ -652,7 +660,7 @@ int __cdecl CreateListenSocket(int port)
 		} while ((int) p < 0x114ffe34);
 	}
 
-	WSAStartup(0x101, wsadata);
+	WSAStartup(0x101, (WSADATA*) wsadata);
 
 	sock = socket(2, 1, 6);
 	if (sock == -1) {
@@ -695,7 +703,7 @@ int __cdecl CreateListenSocket(int port)
 	addr.sin_family = 2;
 	addr.sin_addr.s_addr = 0;
 	addr.sin_port = htons((unsigned short) port);
-	if (bind(sock, &addr, 16) == -1) {
+	if (bind(sock, (const struct sockaddr*) &addr, 16) == -1) {
 		goto close_sock;
 	}
 
@@ -804,7 +812,7 @@ no_more_slots:
 
 do_accept:
 	addrlen = 0x10;
-	new_socket = accept(g_listen_socket, &addr, &addrlen);
+	new_socket = accept(g_listen_socket, (struct sockaddr*) &addr, &addrlen);
 	if (new_socket == -1) {
 		return -1;
 	}
@@ -1097,7 +1105,7 @@ int __cdecl ProcessReceiveData(void)
 				if (status & 0x200) {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x5df, "LOBBY mode", 1);
 					if (*(unsigned char*) (conn + 6) == 0x5f) {
-						if (lb_ExLobbyServerCommand(conn, (unsigned char*) (conn + 6)) == -1) {
+						if (lb_ExLobbyServerCommand(conn, (int) (conn + 6)) == -1) {
 							return -1;
 						}
 						sprintf(logbuf_lo, "status after lb_ExLobbyServerCommand: %i", *conn);
@@ -1113,7 +1121,7 @@ int __cdecl ProcessReceiveData(void)
 						g_download_received = 0;
 						g_download_total_size = conn[10];
 						memset(g_download_slots, 0xff, 32);
-						g_download_buffer = m_AllocTracked(conn[10], "srv_LoadBuf");
+						g_download_buffer = (unsigned int) m_AllocTracked(conn[10], "srv_LoadBuf");
 					}
 					else if (*(unsigned char*) (conn + 6) == 9) {
 						memcpy((void*) (g_download_buffer + g_download_received), conn + 10, 0x80);
@@ -1231,7 +1239,7 @@ int __cdecl ProcessSendData(void)
 
 void* memcpy(void*, const void*, unsigned int);
 
-int __cdecl QueueCommandForProcessing(int player_slot, char* cmd_data)
+int __cdecl QueueCommandForProcessing(int player_slot, unsigned char* cmd_data)
 {
 	char* buf;
 	int tail;
@@ -1268,7 +1276,7 @@ int __cdecl QueueCommandForProcessing(int player_slot, char* cmd_data)
 // cm_QueuePlayerCommand
 void* memcpy(void*, const void*, unsigned int);
 
-int __cdecl cm_QueuePlayerCommand(int player_slot, char* cmd_data)
+int __cdecl cm_QueuePlayerCommand(int player_slot, unsigned char* cmd_data)
 {
 	char* buf;
 	int tail;
@@ -1420,7 +1428,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 					goto advance;
 				}
 				*(unsigned char*) node = 2;
-				result = cm_QueuePlayerCommand(&g_connections[player_idx * 0x264264], node);
+				result = cm_QueuePlayerCommand((int) &g_connections[player_idx * 0x264264], node);
 				if (result != -1) {
 					goto advance;
 				}
@@ -1437,7 +1445,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 			player_idx = (unsigned int) node[3];
 			conn = &g_connections[player_idx * 0x264264];
 			if ((*conn & 1) != 0) {
-				result = cm_QueuePlayerCommand(conn, node);
+				result = cm_QueuePlayerCommand((int) conn, node);
 				if (result == -1) {
 					return -1;
 				}
@@ -1448,7 +1456,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 			conn = &g_connections[0];
 			do {
 				if (i != (unsigned int) node[3] && (*conn & 1) != 0) {
-					result = cm_QueuePlayerCommand(conn, node);
+					result = cm_QueuePlayerCommand((int) conn, node);
 					if (result == -1) {
 						return -1;
 					}

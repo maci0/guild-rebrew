@@ -16,7 +16,7 @@ extern void gm_AddOrAccumulateObject(int, int, int);
 extern char g_100a9820[];
 extern char g_1014d8e0[];
 extern char g_10139820[];
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
+int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_save_version;
 extern int g_1002d4f0;
 extern int g_1002d4f4;
@@ -35,13 +35,13 @@ extern int g_101de454; /* 0x101de454 */
 extern int g_101de55c; /* 0x101de55c */
 ;
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
-extern int gm_ResolveEntityById(int*, int*, int*, int);
+extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
 extern int g_101deae8;
 extern int g_101deac0;
 extern int g_101de560;
 extern int g_save_info[2];
-extern int OpenVfsStream(int, int, int);
+extern int OpenVfsStream(char*, char*, int);
 int ls_LoadSavegameHeader(int, int*);
 int ls_LoadExistingEntities(int);
 int ls_LoadBuildingEntityState(int);
@@ -59,7 +59,7 @@ extern int ls_ID2Ptr(void);
 // FUNCTION: SERVER 0x10012000
 // ls_LoadGraveyardData
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
+int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 
 int __cdecl ls_LoadGraveyardData(int param_1, int param_2)
 {

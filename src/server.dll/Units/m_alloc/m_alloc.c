@@ -129,7 +129,7 @@ found: {
 			} while (i < DAT_10034624);
 		}
 		slot[2] = (int) block;
-		slot[1] = source;
+		slot[1] = (int) source;
 		slot[3] = size;
 		*slot = group;
 		DAT_10034628 = DAT_10034628 + size;

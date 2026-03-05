@@ -492,7 +492,7 @@ unsigned int EmitCrashModuleLine(int* param_1)
 	unsigned char* dbg_base;
 	int write_count;
 	unsigned char* newline_ptr;
-	unsigned char separator[4];
+	unsigned char separator_pad[4];
 	unsigned int format_val_a;
 	unsigned char format_flag_a;
 	unsigned int format_val_b;
@@ -538,7 +538,7 @@ unsigned int EmitCrashModuleLine(int* param_1)
 				}
 				write_count = entry_ptr[3];
 				write_size = 0x10003091;
-				debug_record = GetDebugRecordByIndex();
+				debug_record = (int*) GetDebugRecordByIndex();
 				write_func = (void*) &WriteFile;
 				if (newline_ptr != 0) {
 					dbg_base = (unsigned char*) &stack_20;
@@ -741,7 +741,7 @@ void InitializeLogAndErrorHandler(
 	}
 	log_level_ptr = (unsigned int*) 0x10027078;
 	do {
-		DispatchLogOutput((const char*) 0x117640e0, *(unsigned int*) 0x10034618, *log_level_ptr);
+		DispatchLogOutput((const char*) 0x117640e0, (unsigned char) *(unsigned int*) 0x10034618, *log_level_ptr);
 		log_level_ptr = log_level_ptr + 1;
 	} while (log_level_ptr < (unsigned int*) 0x10027084);
 	return;
@@ -759,7 +759,7 @@ void __cdecl ShutdownLogAndErrorHandler(void)
 
 	p = g_severity_table;
 	do {
-		DispatchLogOutput("Error-Handler closed.\n", g_log_mode_flags, *p);
+		DispatchLogOutput("Error-Handler closed.\n", (unsigned char) g_log_mode_flags, *p);
 		p++;
 	} while ((int) p < (int) (g_severity_table + 3));
 	if (g_log_mode_flags & 8) {
@@ -798,7 +798,7 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 		flags = g_log_mode_flags;
 	}
 	if ((flags & 0xd) != 0) {
-		DispatchLogOutput(&g_log_message_buffer, flags, 1);
+		DispatchLogOutput(&g_log_message_buffer, (unsigned char) flags, 1);
 		flags = g_log_mode_flags;
 	}
 	if ((flags & 2) == 0) {
@@ -858,6 +858,6 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 		else {
 			sprintf(&g_log_message_buffer, "tModule '%s':\tLine:%lu:\t%s", module, line, msg);
 		}
-		DispatchLogOutput(&g_log_message_buffer, g_log_mode_flags, severity);
+		DispatchLogOutput(&g_log_message_buffer, (unsigned char) g_log_mode_flags, severity);
 	}
 }
