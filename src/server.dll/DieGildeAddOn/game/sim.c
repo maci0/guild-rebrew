@@ -3,7 +3,7 @@ extern unsigned short gm_RandomMod(unsigned int);
 unsigned int __cdecl gm_CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 void __cdecl table_lookup(unsigned int a, unsigned short* b);
 extern int DAT_100a8c30;
-unsigned int __cdecl FindAndMatchParents(int param);
+unsigned int __cdecl FindAndMatchParents(unsigned int param);
 extern unsigned char DAT_10035a04;
 extern unsigned char DAT_10035a05;
 extern unsigned char DAT_100358a0;
@@ -45,11 +45,12 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 		rand_roll = candidate_slot1 * 0xf;
 		entity_offset = candidate_slot1 * 0x21c;
 		if (*(int*) (entity_offset + 0x100358a0) == -1) {
-			rand_roll = search_seed * 3 + (search_seed * 3 >> 0x1f & 3U) >> 2;
+			rand_roll = (search_seed * 3 + (search_seed * 3 >> 0x1f & 3U)) >> 2;
 			search_seed = rand_roll;
 		}
 		else if (((5 < *(unsigned int*) (entity_offset + 0x100358a2)) ||
-				  (rand_roll = 0, *(unsigned int*) (entity_offset + 0x100358aa) < *(unsigned int*) (entity_offset + 0x100358c0))) ||
+				  (rand_roll = 0,
+				   *(unsigned int*) (entity_offset + 0x100358aa) < *(unsigned int*) (entity_offset + 0x100358c0))) ||
 				 (rand_roll = 0, *(char*) (entity_offset + 0x100358a8) == '\0')) {
 			candidate_slot1 = 0xffff;
 		}
@@ -66,7 +67,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 			} while (entity_offset != 0);
 			rand_roll = gm_RandomMod(0x100);
 			rand_roll = (rand_roll & 0xffff) + 1;
-			if (rand_roll < prob_thresholds[occupied_count]) {
+			if (rand_roll < (unsigned int) prob_thresholds[occupied_count]) {
 				break;
 			}
 		}
@@ -80,7 +81,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 		candidate_slot2 = gm_RandomMod(search_seed);
 		attempt_count = candidate_slot2 * 0x21c;
 		if (*(int*) (attempt_count + 0x100358a0) == -1) {
-			search_seed = search_seed * 3 + (search_seed * 3 >> 0x1f & 3U) >> 2;
+			search_seed = (search_seed * 3 + (search_seed * 3 >> 0x1f & 3U)) >> 2;
 		}
 		else if (((5 < *(unsigned int*) (attempt_count + 0x100358a2)) ||
 				  (*(unsigned int*) (attempt_count + 0x100358aa) < *(unsigned int*) (attempt_count + 0x100358c0))) ||
@@ -100,7 +101,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 			} while (attempt_count != 0);
 			rand_roll = gm_RandomMod(0x100);
 			rand_roll = (rand_roll & 0xffff) + 1;
-			if (rand_roll < prob_thresholds[entity_offset]) {
+			if (rand_roll < (unsigned int) prob_thresholds[entity_offset]) {
 				break;
 			}
 		}

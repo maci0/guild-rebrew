@@ -42,14 +42,14 @@ extern int g_101deac0;
 extern int g_101de560;
 extern int g_save_info[2];
 extern int OpenVfsStream(char*, char*, int);
-int ls_LoadSavegameHeader(int, int*);
+int ls_LoadSavegameHeader(int, char*);
 int ls_LoadExistingEntities(int);
-int ls_LoadBuildingEntityState(int);
-int ls_LoadDynamicEntities(int);
+unsigned int ls_LoadBuildingEntityState(unsigned int);
+int ls_LoadDynamicEntities(void*);
 int ls_LoadEntities(int);
 int ls_LoadTownData(int);
 extern int amt_fio_LoadAemter(int, int);
-extern int ls_ID2Ptr(void);
+extern unsigned int ls_ID2Ptr(void);
 
 // STATUS: MATCHING
 // BLOCKER: instruction folding (lea vs mov)
@@ -263,7 +263,7 @@ void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* para
 // FUNCTION: SERVER 0x10012440
 // ls_ReadVfsDataChecked
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx)
+int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx)
 {
 	unsigned int result;
 	result = ReadVfsData(outBuffer, elementSize, elementCount, streamCtx);
@@ -406,7 +406,7 @@ int __cdecl ls_LoadSavegameHeader(int param_1, char* param_2)
 
 // GLOBALS: SERVER 0x10035450
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
+int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 void __cdecl gm_CleanupObjectEntities(void);
 
 int __cdecl ls_LoadExistingEntities(int param_1)
