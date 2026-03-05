@@ -1,11 +1,10 @@
 // FUNCTION: SERVER 0x1000eaa0
-// STATUS: STUB
+// STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 208
 // CFLAGS: /O2 /Gd
 // SYMBOL: _ExSetEntityBitmask
-// BLOCKER: jump condition swap
-// BLOCKER_DELTA: 127
+// BLOCKER: param_1 reuse pattern (ResolveEntityById writes through &param_1), switch dec chain offset (case 1 needs leading dec), register allocation (and edx,ecx vs and ecx,edx in case bodies)
 
 #ifdef __clang__
 #pragma clang diagnostic ignored "-Wint-to-pointer-cast"
