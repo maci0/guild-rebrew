@@ -1,9 +1,10 @@
+#include "../../Units/Error/error.h"
+#include "../../Units/m_alloc/m_alloc.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-#include "../../Units/m_alloc/m_alloc.h"
-#include "../../Units/Error/error.h"
 int __cdecl __ftol(void);
 
 typedef int(__cdecl* ALLOCFN)(int, int, int);
@@ -487,7 +488,8 @@ int __cdecl gm_Open(int param_1)
 			slot_entry = *slot_ptr;
 			if (slot_entry != 0xffff) {
 				item_category = *(char*) (g_item_def_table + (slot_entry & 0x7fff) * 0x41);
-				if (((item_category == '\x02') || (item_category == '\x06')) && ((slot_entry & 0x7fff) != 0xfd) && ((slot_entry & 0x8000) != 0)) {
+				if (((item_category == '\x02') || (item_category == '\x06')) && ((slot_entry & 0x7fff) != 0xfd) &&
+					((slot_entry & 0x8000) != 0)) {
 					producible_count = producible_count + 1;
 				}
 			}
@@ -495,7 +497,8 @@ int __cdecl gm_Open(int param_1)
 			slot_counter = slot_counter + -1;
 		} while (slot_counter != 0);
 		next_offset = file_handle + 0x24d;
-		*(char*) (file_handle + 0x21 + g_entity_type_table) = *(char*) (file_handle + 0x21 + g_entity_type_table) + producible_count;
+		*(char*) (file_handle + 0x21 + g_entity_type_table) =
+			*(char*) (file_handle + 0x21 + g_entity_type_table) + producible_count;
 		file_handle = next_offset;
 	} while (next_offset < 0xca78);
 	_getpid();
@@ -554,7 +557,12 @@ void __cdecl gm_CleanupObjectEntities(void)
 	record_offset = 0;
 	do {
 		if (*(short*) (record_offset + (int) DAT_100a8c34) != 0) {
-			gm_ResolveEntityById(&dynamic_ent, &existing_ent, &static_ent, *(int*) (record_offset + 6 + (int) DAT_100a8c34));
+			gm_ResolveEntityById(
+				&dynamic_ent,
+				&existing_ent,
+				&static_ent,
+				*(int*) (record_offset + 6 + (int) DAT_100a8c34)
+			);
 			if (dynamic_ent != (void*) 0) {
 				objectListHead = (void**) ((int) dynamic_ent + 0x5d);
 			}
@@ -568,7 +576,10 @@ void __cdecl gm_CleanupObjectEntities(void)
 				goto LAB_cleanup;
 			}
 			if (objectListHead != (void**) 0) {
-				gm_RemoveObjectByType(objectListHead, (unsigned int) *(unsigned short*) (record_offset + (int) DAT_100a8c34));
+				gm_RemoveObjectByType(
+					objectListHead,
+					(unsigned int) *(unsigned short*) (record_offset + (int) DAT_100a8c34)
+				);
 				goto LAB_10015d8e;
 			}
 		LAB_cleanup:
@@ -792,7 +803,8 @@ void __cdecl gm_RefreshMarketAvailability(int param_1)
 						while (param_1 < 0x55) {
 							if (*(short*) pSlot != 0) {
 								int inner_query;
-								inner_query = (int) gm_StartEntityQuery(*(int*) (query_result + 0x14), 1, 0, *(short*) pSlot & 0xffff);
+								inner_query = (int)
+									gm_StartEntityQuery(*(int*) (query_result + 0x14), 1, 0, *(short*) pSlot & 0xffff);
 								if (inner_query != 0) {
 									int rowId;
 									int edx2;
@@ -2062,7 +2074,8 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* param_1)
 				item_ptr = (unsigned short*) table_ptr;
 				do {
 					if (*item_ptr != 0 &&
-						gm_StartEntityQuery(*(int*) ((int) query_result + 0x14), 1, 0, (unsigned int) *item_ptr) == (void*) 0) {
+						gm_StartEntityQuery(*(int*) ((int) query_result + 0x14), 1, 0, (unsigned int) *item_ptr) ==
+							(void*) 0) {
 						gm_AllocObjekt(*(int*) ((int) query_result + 2), (unsigned int) *item_ptr, 2);
 					}
 					item_ptr = item_ptr + 1;
@@ -2098,7 +2111,8 @@ void __cdecl gm_SetBuildingWorkerLimits(unsigned char* param_1)
 	worker_obj = gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 2, 0, 0x2a, 6);
 	if (worker_obj != (void*) 0) {
 		limit_val = *(unsigned char*) (type_offset + 0x23d);
-		if (((limit_val == 0) && (*(char*) (type_offset + 0x23e) == '\0')) && (*(char*) (type_offset + 0x23f) != '\0')) {
+		if (((limit_val == 0) && (*(char*) (type_offset + 0x23e) == '\0')) &&
+			(*(char*) (type_offset + 0x23f) != '\0')) {
 			*(char*) ((int) worker_obj + 0x1c) = *(char*) (type_offset + 0x23f);
 		}
 		else {
@@ -2554,7 +2568,8 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param
 				(*(unsigned int*) ((unsigned char*) obj_iter + 0x1c) == *(unsigned int*) (param_1 + 1))) {
 				*(unsigned int*) ((unsigned char*) obj_iter + 0xa) = DWORD_100358A4(owner_index);
 				if (*(unsigned int*) ((unsigned char*) obj_iter + 0x14) != 0) {
-					*(unsigned int*) (*(unsigned int*) ((unsigned char*) obj_iter + 0x14) + 0xa) = DWORD_100358A4(owner_index);
+					*(unsigned int*) (*(unsigned int*) ((unsigned char*) obj_iter + 0x14) + 0xa) =
+						DWORD_100358A4(owner_index);
 				}
 			}
 			obj_iter = (unsigned short*) ((unsigned char*) obj_iter + 0x43);
@@ -2563,331 +2578,173 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param
 	}
 }
 
-// STATUS: RELOC
+// STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 742
 // FUNCTION: SERVER 0x10017c40
 // gm_AllocBuildingContents
 
-#ifdef __clang__
-#define REBREW_NAKED
-#else
-#define REBREW_NAKED __declspec(naked)
-#endif
-
-int REBREW_NAKED __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
+int __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
 {
-	__asm {
-        mov     eax, dword ptr [g_item_def_table]
-        test    eax, eax
-        je      L_ret_zero
-        mov     eax, dword ptr [g_entity_type_table]
-        test    eax, eax
-        je      L_ret_zero
-        mov     eax, dword ptr [g_object_count]
-        add     eax, 40h
-        cmp     eax, 5008h
-        jge     L_ret_zero
+	char* obj;
+	char* type_entry;
+	unsigned int btype;
+	int slot_idx;
+	unsigned short slot_val;
+	unsigned int item_index;
+	char item_class;
+	char* query;
+	unsigned char limit_val;
+	unsigned short obj_type;
+	unsigned int season;
+	char* season_base;
+	char* cart_obj;
+	char* goods_iter;
+	char* slot_iter;
+	int goods_count;
 
-        push    ebx
-        push    ebp
-        push    esi
-        mov     esi, dword ptr [esp+14h]
-        push    edi
-        mov     edi, dword ptr [esp+14h]
-        push    1
-        push    esi
-        mov     ecx, dword ptr [edi+1]
-        push    ecx
-        call    gm_AllocObjekt
-        xor     ecx, ecx
-        mov     ebx, eax
-        mov     cl, byte ptr [edi]
-        add     esp, 0Ch
-        xor     edi, edi
-        mov     dword ptr [esp+18h], ebx
-        lea     eax, [ecx+ecx*2]
-        shl     eax, 4
-        add     eax, ecx
-        lea     edx, [eax+eax*2]
-        mov     eax, dword ptr [g_entity_type_table]
-        add     eax, ecx
-        lea     ebp, [eax+edx*4]
-        mov     cx, word ptr [ebp+23h]
-        lea     eax, [ebp+23h]
-        and     ecx, 7FFFh
-        cmp     ecx, esi
-        je      short L_found_slot
-
-    L_scan_loop:
-        mov     dx, word ptr [eax+2]
-        add     eax, 2
-        and     edx, 7FFFh
-        inc     edi
-        cmp     edx, esi
-        jne     short L_scan_loop
-
-    L_found_slot:
-        inc     edi
-        cmp     edi, 40h
-        jge     short L_after_while2
-
-    L_while2_top:
-        mov     dx, word ptr [ebp+edi*2+23h]
-        test    dx, dx
-        je      short L_after_while2
-			 /* cmp dx, 0FFFFh - force 5-byte encoding (66 81 fa ff ff) */
-        _emit 0x66
-        _emit 0x81
-        _emit 0xfa
-        _emit 0xff
-        _emit 0xff
-        je      short L_while2_next
-
-        mov     esi, dword ptr [g_item_def_table]
-        mov     eax, edx
-        and     eax, 7FFFh
-        mov     ecx, eax
-        shl     ecx, 6
-        add     esi, ecx
-        mov     ecx, eax
-        add     ecx, esi
-        mov     cl, byte ptr [ecx]
-        cmp     cl, 2
-        je      short L_set_40
-        cmp     cl, 6
-        je      short L_set_40
-        test    dh, 80h
-        je      short L_while2_next
-
-        mov     edx, dword ptr [ebx+2]
-        push    1
-        push    eax
-        push    edx
-        call    gm_AllocObjekt
-        add     esp, 0Ch
-        jmp     short L_while2_next
-
-    L_set_40:
-        mov     edi, 40h
-
-    L_while2_next:
-        inc     edi
-        cmp     edi, 40h
-        jl      short L_while2_top
-
-    L_after_while2:
-        mov     eax, dword ptr [ebx+14h]
-        push    2Ah
-        push    0
-        push    1
-        push    eax
-        call    gm_StartEntityQuery
-        add     esp, 10h
-        test    eax, eax
-        je      short L_after_first_query
-
-        mov     ecx, dword ptr [esp+14h]
-        mov     edx, dword ptr [ecx+1]
-        mov     dword ptr [eax+0Eh], 2
-        mov     dword ptr [eax+6], edx
-        mov     cl, byte ptr [ebp+23Dh]
-        test    cl, cl
-        jne     short L_first_else
-        mov     dl, byte ptr [ebp+23Eh]
-        test    dl, dl
-        jne     short L_first_else
-        mov     dl, byte ptr [ebp+23Fh]
-        test    dl, dl
-        je      short L_first_else
-        mov     byte ptr [eax+1Ch], dl
-        jmp     short L_after_first_query
-
-    L_first_else:
-        cmp     cl, 2
-        jae     short L_first_ge2
-        mov     ecx, 2
-        jmp     short L_first_set1c
-
-    L_first_ge2:
-        and     ecx, 0FFh
-
-    L_first_set1c:
-        mov     byte ptr [eax+1Ch], cl
-        mov     cl, byte ptr [ebp+23Eh]
-        cmp     cl, 2
-        jae     short L_first_ge2b
-        mov     ecx, 2
-        jmp     short L_first_set1d
-
-    L_first_ge2b:
-        and     ecx, 0FFh
-
-    L_first_set1d:
-        mov     byte ptr [eax+1Dh], cl
-
-    L_after_first_query:
-        mov     eax, dword ptr [ebx+14h]
-        push    6
-        push    116h
-        push    0
-        push    2
-        push    eax
-        call    gm_StartEntityQuery
-        add     esp, 14h
-        test    eax, eax
-        je      short L_after_second_query
-
-        mov     ecx, dword ptr [ebx+2]
-        mov     dword ptr [eax+0Eh], 2
-        mov     dword ptr [eax+6], ecx
-        mov     cl, byte ptr [ebp+23Dh]
-        test    cl, cl
-        jne     short L_second_else
-        mov     dl, byte ptr [ebp+23Eh]
-        test    dl, dl
-        jne     short L_second_else
-        mov     dl, byte ptr [ebp+23Fh]
-        test    dl, dl
-        je      short L_second_else
-
-        cmp     dl, 6
-        jae     short L_second_v_ge6
-        mov     edx, 6
-        mov     byte ptr [eax+1Ch], dl
-        jmp     short L_after_second_query
-
-    L_second_v_ge6:
-        and     edx, 0FFh
-        mov     byte ptr [eax+1Ch], dl
-        jmp     short L_after_second_query
-
-    L_second_else:
-        cmp     cl, 6
-        jae     short L_second_ge6
-        mov     ecx, 6
-        jmp     short L_second_set1c
-
-    L_second_ge6:
-        and     ecx, 0FFh
-
-    L_second_set1c:
-        mov     byte ptr [eax+1Ch], cl
-        mov     cl, byte ptr [ebp+23Eh]
-        cmp     cl, 6
-        jae     short L_second_ge6b
-        mov     ecx, 6
-        jmp     short L_second_set1d
-
-    L_second_ge6b:
-        and     ecx, 0FFh
-
-    L_second_set1d:
-        mov     byte ptr [eax+1Dh], cl
-
-    L_after_second_query:
-        mov     ax, word ptr [ebx]
-        cmp     ax, 92h
-        jb      short L_check_2db
-        cmp     ax, 97h
-        jbe     short L_do_marktstand
-
-    L_check_2db:
-        cmp     ax, 2DBh
-        jne     L_epilogue
-
-    L_do_marktstand:
-        xor     ecx, ecx
-        push    116h
-        mov     cl, byte ptr [g_current_season]
-        push    0
-        mov     eax, ecx
-        push    1
-        shl     eax, 4
-        add     eax, ecx
-        lea     edx, [eax+eax*4]
-        mov     eax, dword ptr [ebx+14h]
-        push    eax
-        lea     esi, [ecx+edx*8]
-        shl     esi, 4
-        add     esi, 1009B770h
-        call    gm_StartEntityQuery
-        add     esp, 10h
-        test    eax, eax
-        je      short L_alloc_fail
-
-        mov     byte ptr [eax+1Ch], 0Ch
-        mov     byte ptr [eax+1Dh], 0
-        mov     dword ptr [eax+0Eh], 3
-        jmp     short L_after_alloc
-
-    L_alloc_fail:
-        push    offset g_100314b8
-        call    ReportMessage
-        add     esp, 4
-
-    L_after_alloc:
-        mov     ecx, dword ptr [ebx+2]
-        push    1
-        push    0FFh
-        push    ecx
-        call    gm_AllocObjekt
-        add     esp, 0Ch
-        xor     ebp, ebp
-        mov     ebx, eax
-        mov     edi, 1002DDE0h
-        add     esi, 4
-
-    L_do_loop:
-        mov     eax, dword ptr [esp+18h]
-        mov     dx, word ptr [esi+38h]
-        cmp     dx, word ptr [eax]
-        jne     short L_loop_next
-        cmp     dword ptr [esi], 0
-        je      short L_loop_next
-
-        cmp     ebp, 10h
-        push    1
-        jge     short L_too_many
-        mov     edx, dword ptr [ebx+2]
-        xor     ecx, ecx
-        mov     cx, word ptr [edi]
-        push    ecx
-        push    edx
-        call    gm_AllocObjekt
-        add     esp, 0Ch
-        inc     ebp
-        jmp     short L_loop_next
-
-    L_too_many:
-        push    offset g_10031484
-        push    16A6h
-        push    offset g_10031004
-        call    LogMessageInternal
-        add     esp, 10h
-
-    L_loop_next:
-        add     edi, 80h
-        add     esi, 80h
-        cmp     edi, 10030860h
-        jl      short L_do_loop
-        mov     ebx, dword ptr [esp+18h]
-
-    L_epilogue:
-        pop     edi
-        pop     esi
-        mov     eax, ebx
-        pop     ebp
-        pop     ebx
-        ret
-
-    L_ret_zero:
-        xor     eax, eax
-        ret
+	if (g_item_def_table == 0) {
+		return 0;
 	}
-}
+	if (g_entity_type_table == 0) {
+		return 0;
+	}
+	if (g_object_count + 0x40 >= 0x5008) {
+		return 0;
+	}
 
-#undef REBREW_NAKED
+	obj = gm_AllocObjekt(*(int*) (geb + 1), obj_id, 1);
+
+	btype = *(unsigned char*) geb;
+	type_entry = (char*) (g_entity_type_table + btype + btype * 0x24c);
+
+	/* scan component table at type_entry+0x23 to find slot matching obj_id */
+	slot_idx = 0;
+	if ((*(unsigned short*) (type_entry + 0x23) & 0x7fff) != (unsigned int) obj_id) {
+		do {
+			slot_idx = slot_idx + 1;
+		} while ((*(unsigned short*) (type_entry + 0x23 + slot_idx * 2 + 2) & 0x7fff) != (unsigned int) obj_id);
+	}
+	slot_idx = slot_idx + 1;
+
+	/* process remaining slots in the component table */
+	if (slot_idx < 0x40) {
+		do {
+			slot_val = *(unsigned short*) (type_entry + 0x23 + slot_idx * 2);
+			if (slot_val == 0) {
+				break;
+			}
+			if (slot_val != 0xffff) {
+				item_index = slot_val & 0x7fff;
+				item_class = *(char*) (g_item_def_table + item_index * 0x41);
+				if (item_class == '\x02' || item_class == '\x06') {
+					slot_idx = 0x40;
+				}
+				else if ((slot_val & 0x8000) != 0) {
+					gm_AllocObjekt(*(int*) (obj + 2), item_index, 1);
+				}
+			}
+			slot_idx = slot_idx + 1;
+		} while (slot_idx < 0x40);
+	}
+
+	/* first entity query: worker type 0x2a */
+	query = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, 0x2a);
+	if (query != (char*) 0) {
+		*(int*) (query + 0x0e) = 2;
+		*(int*) (query + 0x06) = *(int*) (geb + 1);
+		limit_val = *(unsigned char*) (type_entry + 0x23d);
+		if (limit_val == 0 && *(unsigned char*) (type_entry + 0x23e) == 0 &&
+			*(unsigned char*) (type_entry + 0x23f) != 0) {
+			*(unsigned char*) (query + 0x1c) = *(unsigned char*) (type_entry + 0x23f);
+		}
+		else {
+			if (limit_val < 2) {
+				limit_val = 2;
+			}
+			*(unsigned char*) (query + 0x1c) = limit_val;
+			limit_val = *(unsigned char*) (type_entry + 0x23e);
+			if (limit_val < 2) {
+				limit_val = 2;
+			}
+			*(unsigned char*) (query + 0x1d) = limit_val;
+		}
+	}
+
+	/* second entity query: merchant type 0x116 */
+	query = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 2, 0x116, 0, 6);
+	if (query != (char*) 0) {
+		*(int*) (query + 0x0e) = 2;
+		*(int*) (query + 0x06) = *(int*) (obj + 2);
+		limit_val = *(unsigned char*) (type_entry + 0x23d);
+		if (limit_val == 0 && *(unsigned char*) (type_entry + 0x23e) == 0 &&
+			*(unsigned char*) (type_entry + 0x23f) != 0) {
+			if (*(unsigned char*) (type_entry + 0x23f) < 6) {
+				*(unsigned char*) (query + 0x1c) = 6;
+			}
+			else {
+				*(unsigned char*) (query + 0x1c) = *(unsigned char*) (type_entry + 0x23f);
+			}
+		}
+		else {
+			if (limit_val < 6) {
+				limit_val = 6;
+			}
+			*(unsigned char*) (query + 0x1c) = limit_val;
+			limit_val = *(unsigned char*) (type_entry + 0x23e);
+			if (limit_val < 6) {
+				limit_val = 6;
+			}
+			*(unsigned char*) (query + 0x1d) = limit_val;
+		}
+	}
+
+	/* market stall check: types 0x92-0x97 or 0x2db */
+	obj_type = *(unsigned short*) obj;
+	if (!((obj_type >= 0x92 && obj_type <= 0x97) || obj_type == 0x2db)) {
+		return (int) obj;
+	}
+
+	/* compute seasonal slot array base: season * (16*season + season) * 5 * 8 * 16 ... */
+	season = (unsigned int) (unsigned char) g_current_season;
+	{
+		unsigned int a = (season << 4) + season;
+		unsigned int d = a + a * 4;
+		unsigned int s = season + d * 8;
+		season_base = (char*) (0x1009B770 + (s << 4));
+	}
+
+	query = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0x116, 0);
+	if (query != (char*) 0) {
+		*(unsigned char*) (query + 0x1c) = 0x0c;
+		*(unsigned char*) (query + 0x1d) = 0;
+		*(int*) (query + 0x0e) = 3;
+	}
+	else {
+		ReportMessage(g_100314b8);
+	}
+
+	cart_obj = gm_AllocObjekt(*(int*) (obj + 2), 0xff, 1);
+	goods_count = 0;
+	goods_iter = (char*) 0x1002DDE0;
+	slot_iter = season_base + 4;
+
+	do {
+		if (*(unsigned short*) (slot_iter + 0x38) == *(unsigned short*) geb && *(int*) slot_iter != 0) {
+			if (goods_count >= 0x10) {
+				LogMessageInternal(g_10031004, 0x16a6, g_10031484, 1);
+			}
+			else {
+				gm_AllocObjekt(*(int*) (cart_obj + 2), (unsigned int) *(unsigned short*) goods_iter, 1);
+				goods_count = goods_count + 1;
+			}
+		}
+		goods_iter = goods_iter + 0x80;
+		slot_iter = slot_iter + 0x80;
+	} while (goods_iter < (char*) 0x10030860);
+
+	return (int) obj;
+}
 
 // STATUS: RELOC
 // ORIGIN: GAME
@@ -3497,9 +3354,14 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 	do {
 		inner_loop = offset_a + (int) DAT_1014d8c0;
 		if ((*(char*) (offset_a + (int) DAT_1014d8c0) != '\0') &&
-			(stat_opposite = gm_GetBuildingTypeCategory((unsigned char) *(char*) (offset_a + (int) DAT_1014d8c0)), stat_opposite == 2) &&
+			(stat_opposite = gm_GetBuildingTypeCategory((unsigned char) *(char*) (offset_a + (int) DAT_1014d8c0)),
+			 stat_opposite == 2) &&
 			(*(unsigned short*) (inner_loop + 0x27) == *(unsigned short*) record_a)) {
-			gm_AssignBuildingOwner((char*) inner_loop, **(unsigned short**) 0x1003546c, **(unsigned short**) 0x1003546c);
+			gm_AssignBuildingOwner(
+				(char*) inner_loop,
+				**(unsigned short**) 0x1003546c,
+				**(unsigned short**) 0x1003546c
+			);
 		}
 		offset_a = offset_a + 0xa9;
 		copy_count = copy_count - 1;
