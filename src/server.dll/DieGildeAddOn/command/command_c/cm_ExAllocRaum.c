@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d350
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 267
@@ -29,6 +28,7 @@ extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern char s_gm_AllocGebaeude___failed_1002cb34[];
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_B_1002caf0[];
 
+// FUNCTION: SERVER 0x1000d350
 int __cdecl CmdAllocBuilding(int param_1, char* param_2)
 {
 	char* pcVar1;

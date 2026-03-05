@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x100104a0
 // STATUS: MATCHING
 // BLOCKER: instruction folding (lea vs mov)
 // ORIGIN: GAME
@@ -59,6 +58,7 @@ extern char* g_entity_type_table;
  * }
  */
 
+// FUNCTION: SERVER 0x100104a0
 int __cdecl GetBuildingStatCount(uchar* param_1)
 {
 	char cVar1;

@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000fb30
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 153
@@ -69,6 +68,7 @@ extern char s_cm_ExCreateGeb____failed_1002d400[];
 #pragma clang diagnostic ignored "-Wint-to-pointer-cast"
 #endif
 
+// FUNCTION: SERVER 0x1000fb30
 int __cdecl CmdCreateBuilding(int param_1, char* param_2)
 {
 	unsigned short* puVar1;

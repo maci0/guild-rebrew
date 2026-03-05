@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d020
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 22
@@ -25,6 +24,7 @@
 
 extern int __cdecl ValidateOfficeCandidate(int*);
 
+// FUNCTION: SERVER 0x1000d020
 int __cdecl call_with_off(void* obj)
 {
 	int iVar1;

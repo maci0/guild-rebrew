@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000e140
 // STATUS: MATCHING
 // BLOCKER: epilogue tail-merging (3 early-return error blocks merged to shared epilogue -59 bytes), dead store elimination (mov [esp+0x18],ebx before mov [esp+0x18],4), null-check branch layout (inline vs end-of-block), jump condition swap, zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
@@ -42,6 +41,7 @@ extern char s_cm_ExecProduction___Lager_hat_kein_1002cf48[];
 extern char s_cm_ExProdObjekt___Cannot_produce___1002cf1c[];
 extern char s_cm_ExProdObjekt___Rohstoff_versc_1002cef4[];
 
+// FUNCTION: SERVER 0x1000e140
 int __cdecl cm_ExecProduction(int msg, char* result)
 {
 	int iVar1;

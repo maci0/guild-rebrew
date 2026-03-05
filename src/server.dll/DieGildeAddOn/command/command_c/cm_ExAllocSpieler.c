@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d460
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 267
@@ -74,6 +73,7 @@ extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[];
 extern char s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c[];
 
+// FUNCTION: SERVER 0x1000d460
 int __cdecl CmdAllocPlayer(int param_1, char* param_2)
 {
 	int iVar1;

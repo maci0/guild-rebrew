@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000e9c0
 // STATUS: MATCHING
 // BLOCKER: register allocation - target uses only edi, compiler allocates esi+edi for saved param_1 and field writeback address
 // ORIGIN: GAME
@@ -14,6 +13,7 @@ extern double _g_stat_min_d;
 extern double _g_stat_max_d;
 extern char s_cm_ExChangeDesire___Invalid_Id_1002d0f4[];
 
+// FUNCTION: SERVER 0x1000e9c0
 int __cdecl ExChangeDesire(uchar* param_1, uchar* param_2)
 {
 	float fVar1;

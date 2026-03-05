@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000e7d0
 // STATUS: MATCHING
 // BLOCKER: instruction folding (lea vs mov), stack frame choice (push vs sub esp)
 // ORIGIN: GAME
@@ -72,6 +71,7 @@ extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 
 extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
 
+// FUNCTION: SERVER 0x1000e7d0
 int __cdecl ExAccumulateEntityFields(int param_1, char *param_2)
 {
 	signed char cVar1;

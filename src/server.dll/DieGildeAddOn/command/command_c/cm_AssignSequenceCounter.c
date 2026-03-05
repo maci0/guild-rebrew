@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000f080
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 26
@@ -24,6 +23,7 @@
 
 extern int g_sequence_counter;
 
+// FUNCTION: SERVER 0x1000f080
 int __cdecl AssignSequenceCounter(int param_1, char* param_2)
 {
 	*(int*) (param_1 + 0x10) = g_sequence_counter;

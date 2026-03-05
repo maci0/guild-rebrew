@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000f2f0
 // STATUS: MATCHING
 // BLOCKER: register base adjustment (target uses add edi,0x18 and lea ecx,[esi+0x1c] for shorter addressing; MSVC6 folds to base+offset)
 // ORIGIN: GAME
@@ -57,6 +56,7 @@ extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char g_player_slot_0[];
 extern char s_cm_ExAllocThemaPredigt____Execut_1002d184[];
 
+// FUNCTION: SERVER 0x1000f2f0
 int __cdecl ExCreateSpecialObject(int param_1, char* param_2)
 {
 	int iVar1;

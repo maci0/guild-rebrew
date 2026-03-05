@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000fbf0
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 25
@@ -28,6 +27,7 @@
  * }
  */
 
+// FUNCTION: SERVER 0x1000fbf0
 int __cdecl InitDefaultResponse(int param_1, char* param_2)
 {
 	if (param_2 != (char*) 0) {

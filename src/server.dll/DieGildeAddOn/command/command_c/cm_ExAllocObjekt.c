@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000e750
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 123
@@ -51,6 +50,7 @@ extern char* __cdecl AllocGameObject(int, unsigned int, int);
 extern void* __cdecl memcpy(void*, const void*, unsigned int);
 extern char g_player_slot_0[];
 
+// FUNCTION: SERVER 0x1000e750
 int __cdecl ExCreateObject(int param_1, char* param_2)
 {
 	int iVar1;

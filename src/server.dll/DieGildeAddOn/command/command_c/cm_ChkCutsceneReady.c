@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d260
 // STATUS: MATCHING
 // BLOCKER: loop rotation - target uses jl backward jump, compiler generates jge forward + jmp backward
 // ORIGIN: GAME
@@ -51,6 +50,7 @@ extern void __cdecl LogMessageInternal(char*, int, char*, int);
 
 extern char s_cm_ChkCutsceneReady____failed____1002caa8[];
 
+// FUNCTION: SERVER 0x1000d260
 int __cdecl CheckCutsceneReady(char* obj)
 {
 	int entity_ptr;

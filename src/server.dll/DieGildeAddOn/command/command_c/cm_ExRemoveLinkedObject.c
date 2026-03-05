@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000f0d0
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 197
@@ -12,6 +11,7 @@
 extern ushort* __cdecl StartEntityQuery(int, int, int, int, int);
 extern int __cdecl RemoveLinkedNodeById(int*, int);
 
+// FUNCTION: SERVER 0x1000f0d0
 int __cdecl RemoveLinkedObject(int param_1, char *param_2)
 {
 	char *pcVar1;

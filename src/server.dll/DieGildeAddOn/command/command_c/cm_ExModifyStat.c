@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x100100a0
 // STATUS: MATCHING
 // BLOCKER: three-fcom float clamp pattern with shared return paths - compiler generates different branch layout and fcom count
 // ORIGIN: GAME
@@ -51,6 +50,7 @@ extern float _g_stat_min;
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
+// FUNCTION: SERVER 0x100100a0
 int __cdecl ModifyEntityStat(int* param_1)
 {
 	int iVar1;

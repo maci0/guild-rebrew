@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000eb70
 // STATUS: MATCHING
 // BLOCKER: instruction folding (lea vs mov), stack frame choice (push vs sub esp)
 // ORIGIN: GAME
@@ -57,6 +56,7 @@ extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
+// FUNCTION: SERVER 0x1000eb70
 int __cdecl ExSetEntityField(int param_1, char* param_2)
 {
 	int iVar1;

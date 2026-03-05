@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d730
 // STATUS: MATCHING
 // BLOCKER: lea folding (lea esi,[eax+0x10] + mov [esi],ax vs mov [esi+0x10],ax), register allocation (param_1 in esi vs reload from stack), zero-extend register choice (ecx vs eax)
 // BLOCKER_DELTA: 20
@@ -30,6 +29,7 @@ extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 extern char s_Invalid_Id_for_cmdt_FREE_in_cm_E_1002cc5c[];
 extern char s_cm_ExFree____Can_t_free_Objects_1002cc3c[];
 
+// FUNCTION: SERVER 0x1000d730
 int __cdecl ExFreeEntity(int param_1, char *param_2)
 {
 	unsigned int uVar1;

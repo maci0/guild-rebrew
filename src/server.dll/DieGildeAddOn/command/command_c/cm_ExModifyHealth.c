@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000ffc0
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 70
@@ -35,6 +34,7 @@
 
 #include "../command_internal.h"
 
+// FUNCTION: SERVER 0x1000ffc0
 int __cdecl ModifyEntityHealth(int param_1)
 {
 	int iVar1;

@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x100102f0
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 17
@@ -25,6 +24,7 @@
 
 extern int __cdecl MoveSlotEntry(int);
 
+// FUNCTION: SERVER 0x100102f0
 int __cdecl DispatchMoveSlotEntry(void* param_1, char* param_2)
 {
 	int uVar1;

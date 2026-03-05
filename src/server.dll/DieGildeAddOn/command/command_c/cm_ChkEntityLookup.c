@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000ff30
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 41
@@ -33,6 +32,7 @@
 
 #include "../command_internal.h"
 
+// FUNCTION: SERVER 0x1000ff30
 int __cdecl ValidateEntityLookup(int param_1, char* param_2)
 {
 	int iVar1;

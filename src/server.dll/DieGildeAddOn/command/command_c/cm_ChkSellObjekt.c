@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000cbd0
 // STATUS: MATCHING
 // BLOCKER: jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
@@ -22,6 +21,7 @@ extern char s_cm_ChkSellObjekt___Inventory_vol_1002c810[];
 extern char s_cm_ChkSellObjekt___Lager_voll_1002c834[];
 extern char s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8[];
 
+// FUNCTION: SERVER 0x1000cbd0
 int __cdecl CheckSellObject(char* cmd)
 {
 	short sVar1;

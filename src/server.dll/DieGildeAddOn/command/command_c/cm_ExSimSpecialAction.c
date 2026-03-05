@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x10010390
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 262
@@ -74,6 +73,7 @@ extern void __cdecl func_1000c3c0(void*, void*);
 extern void __cdecl func_1000c310(void*, void*, void*);
 extern void __cdecl func_1000c280(void*, void*, void*);
 
+// FUNCTION: SERVER 0x10010390
 int __cdecl SimSpecialAction(int param_1, char* param_2)
 {
 	char* p;

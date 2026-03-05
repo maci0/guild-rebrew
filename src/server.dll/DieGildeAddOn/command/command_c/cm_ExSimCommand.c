@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x10010080
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 22
@@ -25,6 +24,7 @@
 
 extern int __cdecl SwapOfficeHolders(int*);
 
+// FUNCTION: SERVER 0x10010080
 int __cdecl ExSimCommand(void* param_1, char* param_2)
 {
 	int iVar1;

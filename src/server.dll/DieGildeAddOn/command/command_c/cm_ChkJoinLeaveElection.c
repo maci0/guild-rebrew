@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d110
 // STATUS: MATCHING
 // BLOCKER: dead-code elimination removes i>=4 checks inside for-loops (compiler knows i<4), 13B size delta; do-while preserves checks but spills to edi; also register allocation swap (ecx/eax), zero-extend pattern, lea vs add in leave branch
 // BLOCKER_DELTA: 225
@@ -20,6 +19,7 @@ extern void* __cdecl StartEntityQuery(int, int, int, int, int);
 extern int g_1003546c;
 extern char g_100358a0[];
 
+// FUNCTION: SERVER 0x1000d110
 int __cdecl ValidateJoinLeaveElection(int* param_1)
 {
 	int iVar4;

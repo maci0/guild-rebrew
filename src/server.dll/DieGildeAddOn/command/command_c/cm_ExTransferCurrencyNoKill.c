@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d8a0
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 144
@@ -48,6 +47,7 @@ extern void __cdecl SubtractObjectAmountNoKill(int, unsigned int, int);
 extern void __cdecl AddOrAccumulateObject(int, unsigned int, int);
 extern char g_currency_type_array[];
 
+// FUNCTION: SERVER 0x1000d8a0
 int __cdecl ExTransferCurrencyNoKill(int param_1, char* param_2)
 {
 	int iVar1;

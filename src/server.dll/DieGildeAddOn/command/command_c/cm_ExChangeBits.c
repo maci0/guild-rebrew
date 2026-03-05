@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000eaa0
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 208
@@ -69,6 +68,7 @@ extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 
 extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
 
+// FUNCTION: SERVER 0x1000eaa0
 int __cdecl ExSetEntityBitmask(int param_1, char* param_2)
 {
 	int entity_id;

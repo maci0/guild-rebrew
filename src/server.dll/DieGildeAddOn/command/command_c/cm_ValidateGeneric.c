@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d040
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 22
@@ -25,6 +24,7 @@
 
 extern int __cdecl ValidateCommand(char*);
 
+// FUNCTION: SERVER 0x1000d040
 int __cdecl CmdValidateGeneric(void* param_1, char* param_2)
 {
 	int iVar1;

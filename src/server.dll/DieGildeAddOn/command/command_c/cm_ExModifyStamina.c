@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x10010010
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 110
@@ -44,6 +43,7 @@
 
 extern void __cdecl UpdateEntityLinks(int, int);
 
+// FUNCTION: SERVER 0x10010010
 int __cdecl ModifyEntityStamina(int param_1)
 {
 	int iVar1;

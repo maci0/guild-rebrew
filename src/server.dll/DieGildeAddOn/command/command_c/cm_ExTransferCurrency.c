@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d7f0
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 176
@@ -64,6 +63,7 @@ extern unsigned short g_currency_type_array[];
 #pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"
 #endif
 
+// FUNCTION: SERVER 0x1000d7f0
 int __cdecl ExTransferCurrency(int param_1, char* param_2)
 {
 	void* pvVar1;

@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000f480
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 271
@@ -69,6 +68,7 @@ extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d298[];
 extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[];
 extern char s_cm_ExSetWohnsitz____Residence_is_1002d240[];
 
+// FUNCTION: SERVER 0x1000f480
 int __cdecl SetResidence(int param_1, char* param_2)
 {
 	ushort* building;

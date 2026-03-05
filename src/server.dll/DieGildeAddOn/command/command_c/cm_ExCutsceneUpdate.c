@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000ff60
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 82
@@ -49,6 +48,7 @@
 
 extern int __cdecl CheckCutsceneReady(char*);
 
+// FUNCTION: SERVER 0x1000ff60
 int __cdecl CutsceneEntityUpdate(int param_1, char* param_2)
 {
 	int iVar1;

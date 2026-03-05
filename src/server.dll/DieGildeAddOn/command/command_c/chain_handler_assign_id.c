@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000ef90
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 26
@@ -26,6 +25,7 @@
 
 extern int g_mem_pool_overflow_flag;
 
+// FUNCTION: SERVER 0x1000ef90
 int __cdecl chain_handler_assign_id(int param_1, char* param_2)
 {
 	*(int*) (param_1 + 0x10) = g_mem_pool_overflow_flag;

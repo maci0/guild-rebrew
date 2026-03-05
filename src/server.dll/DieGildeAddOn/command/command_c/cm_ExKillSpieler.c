@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000f030
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 72
@@ -35,6 +34,7 @@ extern void __cdecl DeallocEntity(uint, int);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
 
+// FUNCTION: SERVER 0x1000f030
 int __cdecl CmdKillPlayer(int param_1)
 {
 	ushort* puVar1;

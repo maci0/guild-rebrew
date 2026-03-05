@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000cf30
 // STATUS: MATCHING
 // BLOCKER: instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp)
 // ORIGIN: GAME
@@ -60,6 +59,7 @@ extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ChkChangeBits___Invalid_Id_1002ca54[];
 extern char s_cm_ChkChangeBits___Invalid_actio_1002ca04[];
 
+// FUNCTION: SERVER 0x1000cf30
 int __cdecl CheckChangeBits(int param_1, char* param_2)
 {
 	int cmd;

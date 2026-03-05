@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d2e0
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 77
@@ -41,6 +40,7 @@ extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern int __cdecl printf(const char*, ...);
 extern char s_Invalid_Commandtype_in_Execution_1002cacc[];
 
+// FUNCTION: SERVER 0x1000d2e0
 int __cdecl validate_command_type(char* cmd, char* result)
 {
 	char cVar1;

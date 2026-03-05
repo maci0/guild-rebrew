@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d6e0
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 78
@@ -37,6 +36,7 @@ extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ExChangePlayerIdentity___exec_1002cc14[];
 extern char s_cm_ExChangePlayerIdentity___fail_1002cbf0[];
 
+// FUNCTION: SERVER 0x1000d6e0
 int __cdecl cm_ExChangePlayerIdentity(int param_1, char* param_2)
 {
 	int iVar1;

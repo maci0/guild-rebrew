@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000cfe0
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 64
@@ -38,6 +37,7 @@ extern ushort* __cdecl StartFilteredEntitySearch(int, int, int);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74[];
 
+// FUNCTION: SERVER 0x1000cfe0
 int __cdecl find_validate(char* obj)
 {
 	ushort* puVar1;

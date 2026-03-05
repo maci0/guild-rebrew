@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000fad0
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 85
@@ -44,6 +43,7 @@ extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern void __cdecl RemoveEntityLink(int);
 extern char s_cm_ExKillTransporter____invalid_t_1002d3d4[];
 
+// FUNCTION: SERVER 0x1000fad0
 int __cdecl cm_ExKillTransporter(int param_1, char* param_2)
 {
 	void* pvVar1;

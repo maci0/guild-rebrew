@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000f3a0
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 3
@@ -21,6 +20,7 @@
  * }
  */
 
+// FUNCTION: SERVER 0x1000f3a0
 int __cdecl chain_handler_noop(void)
 {
     return 0;

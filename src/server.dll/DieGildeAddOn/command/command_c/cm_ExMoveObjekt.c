@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000e530
 // STATUS: MATCHING
 // BLOCKER: loop rotation (while->cmp duplicated), shared error exit layout, xor edx initialization
 // ORIGIN: GAME
@@ -75,6 +74,7 @@ extern char s_cm_ExMoveObjekt___Invalid__quell_1002d024[];
 extern char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[];
 extern char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[];
 
+// FUNCTION: SERVER 0x1000e530
 int __cdecl ExMoveObject(int param_1, char* param_2)
 {
 	int object_id;

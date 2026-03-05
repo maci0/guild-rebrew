@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000fc10
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 308
@@ -72,6 +71,7 @@ extern void* __cdecl StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl StartEntityQuery(int, int, int, int, int);
 extern int g_10035880;
 
+// FUNCTION: SERVER 0x1000fc10
 int __cdecl ElectionOrTradeCommand(int param_1, char* param_2)
 {
 	void* entity;

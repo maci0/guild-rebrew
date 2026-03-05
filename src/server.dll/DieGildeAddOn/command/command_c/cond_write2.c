@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000ff10
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 22
@@ -28,6 +27,7 @@
  * }
  */
 
+// FUNCTION: SERVER 0x1000ff10
 int __cdecl cond_write2(void* obj, char* buf)
 {
 	if (buf != (char*) 0) {

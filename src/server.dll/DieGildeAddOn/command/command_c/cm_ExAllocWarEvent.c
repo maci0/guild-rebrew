@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x10010140
 // STATUS: MATCHING
 // BLOCKER: lea vs mov for data copy (MSVC6 /O2 folds struct pointers to direct loads), bl register for damage save, identity write epilogue xor+mov pattern
 // ORIGIN: GAME
@@ -88,6 +87,7 @@ extern ushort* __cdecl StartEntityQuery(int, int, int, int);
 extern ushort* __cdecl NextEntityQueryMatch(void);
 extern ushort* __cdecl AllocGameObject(int, int, int);
 
+// FUNCTION: SERVER 0x10010140
 int __cdecl AllocWarEvent(int param_1, char* param_2)
 {
 	void* pvVar1;

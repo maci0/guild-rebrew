@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x10010260
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 144
@@ -64,6 +63,7 @@ extern int __cdecl ActivateGraveyardSection(uchar*);
 extern int __cdecl UpdateProductionProgress(uchar*);
 extern int __cdecl ValidateEntityAction(uchar*);
 
+// FUNCTION: SERVER 0x10010260
 int __cdecl DispatchProductionCommand(int param_1, char* param_2)
 {
 	uint32_t* puVar1;

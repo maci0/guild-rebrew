@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000e690
 // STATUS: MATCHING
 // BLOCKER: register allocation - target uses only esi, compiler allocates esi+edi for saved param_1 copy
 // ORIGIN: GAME
@@ -64,6 +63,7 @@ extern char s_cm_ExClearLagerslot___Lager_has_n_1002d054[];
  * }
  */
 
+// FUNCTION: SERVER 0x1000e690
 int __cdecl cm_ExClearLagerslot(short* param_1, uchar* param_2)
 {
 	short* cmd;

@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000ec00
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 912
@@ -13,6 +12,7 @@ extern int g_static_entity0_entity_id[];
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 
+// FUNCTION: SERVER 0x1000ec00
 int __cdecl ExCopyEntityData(int cmd_ptr, char* response)
 {
 	int iVar1;

@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000f1a0
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 327
@@ -72,6 +71,7 @@ extern char* __cdecl func_100150a0(void*, unsigned int, unsigned int, unsigned i
 
 extern int g_plant_count;
 
+// FUNCTION: SERVER 0x1000f1a0
 int __cdecl chain_handler_record_lookup(int param_1, char* param_2)
 {
 	char status;

@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000f940
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 22
@@ -25,6 +24,7 @@
 
 extern unsigned int __cdecl ValidateAndAssignOffice(unsigned int*);
 
+// FUNCTION: SERVER 0x1000f940
 int __cdecl call_with_off2(void* obj)
 {
 	unsigned int uVar1;

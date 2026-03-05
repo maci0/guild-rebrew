@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d060
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 169
@@ -64,6 +63,7 @@ extern int g_something_1;
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
+// FUNCTION: SERVER 0x1000d060
 int __cdecl ValidateElectionOrTradeCmd(int param_1)
 {
 	ushort* puVar1;

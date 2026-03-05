@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x10010350
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 52
@@ -33,6 +32,7 @@
 
 extern uint __cdecl ahm_ExAllocAlchemist(void*);
 
+// FUNCTION: SERVER 0x10010350
 int __cdecl CmdAllocAlchemist(int param_1, char* param_2)
 {
 	uint uVar1;

@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000d340
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 6
@@ -21,6 +20,7 @@
  * }
  */
 
+// FUNCTION: SERVER 0x1000d340
 int __cdecl RejectCommand(void)
 {
 	return 1;

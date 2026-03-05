@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000efb0
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 122
@@ -46,6 +45,7 @@ extern int _g_game_speed_index;
 extern int g_game_speed_value;
 extern int g_game_speed_table[];
 
+// FUNCTION: SERVER 0x1000efb0
 int __cdecl SetSyncFlags(int param_1, char* param_2)
 {
 	int speed_index;

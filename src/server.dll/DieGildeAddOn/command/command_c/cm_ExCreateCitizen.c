@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000f980
 // STATUS: MATCHING
 // BLOCKER: mov di,ax vs mov edi,eax (16-bit truncation) and lea edx,[edi+addr] vs add edi,addr (7 structural diffs, 99.1% mnemonic)
 // ORIGIN: GAME
@@ -73,6 +72,7 @@ extern void* __cdecl FindRecordById(int);
 extern void* __cdecl AllocGameObject(int, unsigned int, int);
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 
+// FUNCTION: SERVER 0x1000f980
 int __cdecl ExCreateCitizenAtBuilding(int param_1, char* param_2)
 {
 	unsigned short idx16;

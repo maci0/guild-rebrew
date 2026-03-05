@@ -1,4 +1,3 @@
-// FUNCTION: SERVER 0x1000f960
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 22
@@ -25,6 +24,7 @@
 
 extern int __cdecl ExecuteOfficeAssignment(char*);
 
+// FUNCTION: SERVER 0x1000f960
 int __cdecl CmdExecuteOffice(void* param_1, char* param_2)
 {
 	int iVar1;
