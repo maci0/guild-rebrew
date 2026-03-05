@@ -52,25 +52,29 @@ int __cdecl cm_ExSetAttribute(int param_1, char* param_2)
 			srcPtr = srcPtr + 2;
 			dstPtr = (char*) ((uint) * (ushort*) srcPtr + (uint) param_1);
 			srcPtr = srcPtr + 2;
-			if (fieldSize == 1) {
+			fieldSize--;
+			if (fieldSize == 0) {
 				for (; resolveResult != 0; resolveResult--) {
 					*dstPtr = *srcPtr;
 					dstPtr++;
 					srcPtr++;
 				}
 			}
-			else if (fieldSize == 2) {
-				for (; resolveResult != 0; resolveResult--) {
-					*(short*) dstPtr = *(short*) srcPtr;
-					srcPtr += 2;
-					dstPtr += 2;
+			else {
+				fieldSize--;
+				if (fieldSize == 0) {
+					for (; resolveResult != 0; resolveResult--) {
+						*(short*) dstPtr = *(short*) srcPtr;
+						srcPtr += 2;
+						dstPtr += 2;
+					}
 				}
-			}
-			else if (fieldSize == 4) {
-				for (; resolveResult != 0; resolveResult--) {
-					*(int*) dstPtr = *(int*) srcPtr;
-					srcPtr += 4;
-					dstPtr += 4;
+				else if (fieldSize == 2) {
+					for (; resolveResult != 0; resolveResult--) {
+						*(int*) dstPtr = *(int*) srcPtr;
+						srcPtr += 4;
+						dstPtr += 4;
+					}
 				}
 			}
 			fieldIdx++;
