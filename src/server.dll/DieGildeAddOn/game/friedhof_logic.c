@@ -45,6 +45,10 @@ extern float DAT_100257c8;
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 352
+/* Checks if a production slot in a building is active.
+ * Returns non-zero if the slot at the given index has
+ * an assigned worker or active production. */
+
 // FUNCTION: SERVER 0x10010530
 // gv_CheckSlotActive
 int __cdecl gv_CheckSlotActive(char* obj, int idx)
@@ -81,6 +85,10 @@ int __cdecl gv_CheckSlotActive(char* obj, int idx)
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap
 // SIZE: 329
 // BLOCKER_DELTA: 254
+/* Gets a reference to a slot entry in a building's production
+ * table. Returns the slot pointer at the specified index and
+ * sub-type. */
+
 // FUNCTION: SERVER 0x100105b0
 // gv_GetSlotEntry
 
@@ -177,6 +185,10 @@ ret_value:
 // BLOCKER: comparison direction swap, jump condition swap
 // SIZE: 320
 // BLOCKER_DELTA: 109
+/* Finds a slot entry in a building with optional type filtering.
+ * Searches production slots for one matching the given criteria
+ * and returns a pointer to it. */
+
 // FUNCTION: SERVER 0x10010710
 // gv_FindSlotEntryFiltered
 
@@ -270,6 +282,10 @@ char* __cdecl gv_FindSlotEntryFiltered(
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 370
+/* Spawns graveyard entities (workers, resources) for a building.
+ * Initializes the graveyard's active entities based on its
+ * current upgrade level and capacity. */
+
 // FUNCTION: SERVER 0x10010850
 // SpawnGraveyardEntities
 
@@ -350,6 +366,9 @@ int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 // ORIGIN: GAME
 // STATUS: MATCHING
 // SIZE: 832
+/* Allocates a single graveyard production field. Sets up the
+ * field's entity type, worker assignment, and production timer. */
+
 // FUNCTION: SERVER 0x100109d0
 // AllocGraveyardField
 
@@ -580,6 +599,9 @@ cleanup:
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // SIZE: 570
+/* Upgrades a graveyard field to the next tier. Increases
+ * production capacity and unlocks new product types. */
+
 // FUNCTION: SERVER 0x10010d10
 // UpgradeGraveyardField
 
@@ -719,6 +741,9 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 66
+/* Frees 3 consecutive production fields in a building.
+ * Deallocates the field entities and clears their slots. */
+
 // FUNCTION: SERVER 0x10010F50
 // gv_Free3Fields
 
@@ -742,6 +767,10 @@ void __cdecl gv_Free3Fields(char* p)
 // ORIGIN: GAME
 // BLOCKER: instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 525
+/* Assigns a product type to a production slot. Validates the
+ * slot is empty, sets the product ID, and initializes the
+ * production timer. */
+
 // FUNCTION: SERVER 0x10010fa0
 // AssignProductionSlot
 
@@ -882,6 +911,10 @@ unsigned int AssignProductionSlot(int param_1)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
 // SIZE: 501
+/* Hires a worker for a production slot. Links the worker
+ * entity to the building's production slot and starts the
+ * production cycle. */
+
 // FUNCTION: SERVER 0x100111b0
 // HireProductionWorker
 
@@ -968,6 +1001,10 @@ unsigned int HireProductionWorker(int param_1)
 // ORIGIN: GAME
 // BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // SIZE: 390
+/* Extends the production time for an active slot. Adds
+ * additional time to the production timer, adjusting for
+ * worker skill and building efficiency. */
+
 // FUNCTION: SERVER 0x100113b0
 // ExtendProductionTime
 
@@ -1028,6 +1065,10 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 288
+/* Replaces the worker assigned to a production slot.
+ * Unlinks the old worker and assigns a new one while
+ * maintaining production state. */
+
 // FUNCTION: SERVER 0x10011540
 // gv_ReplaceProductionWorker
 
@@ -1087,6 +1128,10 @@ int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 // BLOCKER_DELTA: 273
 // SIZE: 297
 // BLOCKER_DELTA: 39
+/* Activates a graveyard section (tier/wing). Unlocks
+ * additional production slots and enables new capabilities
+ * for the graveyard building. */
+
 // FUNCTION: SERVER 0x10011660
 // ActivateGraveyardSection
 
@@ -1176,6 +1221,10 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 // SIZE: 242
 
 // BLOCKER_DELTA: 96
+/* Updates production progress for active slots. Decrements
+ * timers, checks for completion, and triggers product output
+ * when the production cycle finishes. */
+
 // FUNCTION: SERVER 0x10011790
 // gv_UpdateProductionProgress
 
@@ -1224,6 +1273,10 @@ int __cdecl gv_UpdateProductionProgress(unsigned char* param_1)
 // ORIGIN: GAME
 // SIZE: 164
 // ANALYSIS: Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure.
+/* Validates that an entity action is permitted. Checks
+ * entity state, slot availability, and production rules
+ * before allowing the action to proceed. */
+
 // FUNCTION: SERVER 0x10011890
 // gv_ValidateEntityAction
 
@@ -1261,6 +1314,10 @@ int __cdecl gv_ValidateEntityAction(unsigned char* param_1)
 // ORIGIN: GAME
 // SIZE: 674
 // BLOCKER_DELTA: 639
+/* Moves a slot entry within a building's production table.
+ * Relocates a product or worker from one slot position to
+ * another, updating internal links. */
+
 // FUNCTION: SERVER 0x10011940
 // gv_MoveSlotEntry
 
@@ -1391,6 +1448,9 @@ unsigned int gv_MoveSlotEntry(int param_1)
 // BLOCKER_DELTA: 1021
 // GHIDRA: AllocGraveyardWorker
 // ANALYSIS: Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates.
+/* Allocates a graveyard worker entity. Creates the worker,
+ * assigns to a building, and initializes work schedule. */
+
 // FUNCTION: SERVER 0x10011bf0
 // gv_ExAllocGraveyardWorker
 

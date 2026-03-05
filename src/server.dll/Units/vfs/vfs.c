@@ -31,6 +31,9 @@ int __cdecl ReadVfsCompressed(int, int, unsigned int);
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 114
+/* Reads a single byte from a VFS stream. Advances the read
+ * position and returns the byte value, or error on EOF. */
+
 // FUNCTION: SERVER 0x10003820
 // vfs_GetByte
 
@@ -67,6 +70,9 @@ unsigned int __cdecl vfs_GetByte(int* param_1)
 // BLOCKER_DELTA: 18
 // STATUS: RELOC
 // SIZE: 177
+/* Closes a VFS stream and releases associated resources.
+ * Frees internal buffers and removes from open stream list. */
+
 // FUNCTION: SERVER 0x100038a0
 // vfs_CloseStream
 
@@ -119,6 +125,9 @@ int __cdecl vfs_CloseStream(void* param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 182
+/* Flushes pending write data from a VFS stream buffer to
+ * disk. Takes stream handle and flush mode parameters. */
+
 // FUNCTION: SERVER 0x10003b90
 // vfs_FlushStream
 
@@ -168,6 +177,9 @@ unsigned int __cdecl vfs_FlushStream(int param_1, int param_2)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 77
+/* Reads a 32-bit big-endian integer from the VFS stream and
+ * converts to host byte order. */
+
 // FUNCTION: SERVER 0x10003C50
 // vfs_ReadUint32BE
 
@@ -189,6 +201,9 @@ int __cdecl vfs_FlushAndClose(int param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 65
+/* Flushes a VFS stream and closes it. Combines vfs_FlushStream
+ * and vfs_CloseStream into a single operation. */
+
 // FUNCTION: SERVER 0x10003CA0
 // vfs_FlushAndClose
 
@@ -212,6 +227,8 @@ int __cdecl vfs_ReadUint32BE(int param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 43
+/* Writes a 32-bit little-endian integer to the VFS stream. */
+
 // FUNCTION: SERVER 0x10003CF0
 // vfs_WriteUint32LE
 
@@ -232,6 +249,9 @@ void __cdecl vfs_WriteUint32LE(int stream, unsigned int value)
 // ORIGIN: GAME
 // SIZE: 53
 // GHIDRA: cleanup_entity
+/* Destroys a VFS entity (file/directory node). Frees the
+ * entity's name string and the entity struct itself. */
+
 // FUNCTION: SERVER 0x10008A50
 // vfs_DestroyEntity
 
@@ -253,6 +273,9 @@ int __cdecl vfs_DestroyEntity(char* entity)
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // SIZE: 492
 // BLOCKER_DELTA: 466
+/* Reads compressed (zlib) data from a VFS stream. Decompresses
+ * into the output buffer up to the requested byte count. */
+
 // FUNCTION: SERVER 0x10008a90
 // ReadVfsCompressed
 
@@ -366,6 +389,9 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 129
+/* Cleans up a VFS object by closing its underlying handle,
+ * freeing path strings, and releasing the object struct. */
+
 // FUNCTION: SERVER 0x10008C80
 // vfs_CleanupObject
 
@@ -402,6 +428,10 @@ int __cdecl vfs_CleanupObject(char* obj)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 301
+/* Closes a VFS stream with full cleanup. Handles both
+ * compressed and plain streams, flushing and deallocating
+ * zlib state if needed. */
+
 // FUNCTION: SERVER 0x10008d10
 // CloseVfsStream
 
@@ -494,6 +524,10 @@ int __cdecl CloseVfsStream(void* stream)
 // BLOCKER_DELTA: 257
 // BLOCKER: instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
 // SIZE: 472
+/* Reads raw data from a VFS stream. Low-level read that
+ * handles buffering, refilling, and byte-by-byte reads
+ * for variable-length data. */
+
 // FUNCTION: SERVER 0x10008e40
 // ReadVfsData
 
@@ -611,6 +645,10 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
 // SIZE: 704
+/* Opens a VFS stream for reading or writing. Initializes
+ * compression state (zlib), sets up buffering, and links
+ * the stream into the open stream list. */
+
 // FUNCTION: SERVER 0x10009020
 // OpenVfsStream
 
