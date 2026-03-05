@@ -682,7 +682,7 @@ void InitializeLogAndErrorHandler(
 )
 {
 	unsigned char* path_end;
-	int file_handle;
+	FILE* file_handle;
 	int file_size;
 	unsigned int* log_level_ptr;
 	int format_offset;
@@ -722,16 +722,16 @@ void InitializeLogAndErrorHandler(
 		format_offset = 0x10027084;
 		do {
 			sprintf((char*) &stack_de0, (char*) 0x100270fc, (char*) 0x11766100);
-			file_handle = (int) fopen((char*) &stack_de0, (char*) 0x100270f8);
+			file_handle = fopen((char*) &stack_de0, (char*) 0x100270f8);
 			if (file_handle != 0) {
-				fseek((FILE*) file_handle, 0, 2);
-				file_size = ftell((FILE*) file_handle);
+				fseek(file_handle, 0, 2);
+				file_size = ftell(file_handle);
 				if (0x10000 < file_size) {
-					fflush((FILE*) file_handle);
-					file_handle = (int) fopen((char*) &stack_de0, (char*) 0x10027358);
-					fputs((const char*) 0x1002733c, (FILE*) file_handle);
+					fflush(file_handle);
+					file_handle = fopen((char*) &stack_de0, (char*) 0x10027358);
+					fputs((const char*) 0x1002733c, file_handle);
 				}
-				fflush((FILE*) file_handle);
+				fflush(file_handle);
 			}
 			format_offset = format_offset + 0x20;
 		} while (format_offset < 0x100270e4);

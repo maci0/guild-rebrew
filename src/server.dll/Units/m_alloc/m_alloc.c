@@ -51,7 +51,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* source)
 	char msgBuf[256];
 	char nameBuf[16];
 	int prev;
-	int group;
+	char* group;
 
 	if (DAT_10034640 == 0) {
 		ReportFatalError(
@@ -65,41 +65,41 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* source)
 		return 0;
 	}
 	DAT_10034638 = DAT_10034638 + 1;
-	group = 0x117640a0;
+	group = (char*) 0x117640a0;
 	if (source != 0) {
 		int nameLen;
 		char* colon;
-		colon = strchr((char*) source, 0x3a);
+		colon = strchr(source, 0x3a);
 		if (colon != 0) {
-			nameLen = (int) (colon - (char*) source) + 1;
+			nameLen = (int) (colon - source) + 1;
 			if (nameLen >= 0x10) {
 				sprintf(msgBuf, "m_alloc_debug: GroupInformation too long: %s", source);
 				ReportMessage(msgBuf);
 			}
-			strncpy(nameBuf, (char*) source, nameLen);
+			strncpy(nameBuf, source, nameLen);
 			nameBuf[nameLen] = '\0';
-			group = 0x117640a0;
+			group = (char*) 0x117640a0;
 			if (group != 0) {
 				do {
-					if (strcmp(nameBuf, (char*) group) == 0) {
+					if (strcmp(nameBuf, group) == 0) {
 						if (group != 0) {
 							goto found;
 						}
 						break;
 					}
-					prev = group;
-					group = *(int*) (group + 0x24);
+					prev = (int) group;
+					group = *(char**) (group + 0x24);
 				} while (group != 0);
 			}
-			group = (int) _callnewh(0x28);
-			strcpy((char*) group, nameBuf);
+			group = (char*) _callnewh(0x28);
+			strcpy(group, nameBuf);
 			*(int*) (group + 0x14) = 0;
 			*(int*) (group + 0x10) = 0;
 			*(int*) (group + 0x1c) = 0;
 			*(int*) (group + 0x18) = 0;
 			*(int*) (group + 0x20) = 0;
 			*(int*) (group + 0x24) = 0;
-			*(int*) (prev + 0x24) = group;
+			*(int*) (prev + 0x24) = (int) group;
 		}
 	}
 found: {
@@ -131,7 +131,7 @@ found: {
 		slot[2] = (int) block;
 		slot[1] = (int) source;
 		slot[3] = size;
-		*slot = group;
+		*slot = (int) group;
 		DAT_10034628 = DAT_10034628 + size;
 		if (DAT_10034628 > DAT_10034630) {
 			DAT_10034630 = DAT_10034628;
