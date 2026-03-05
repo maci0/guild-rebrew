@@ -1,5 +1,7 @@
 // FUNCTION: SERVER 0x1000d110
-// STATUS: STUB
+// STATUS: MATCHING
+// BLOCKER: dead-code elimination removes i>=4 checks inside for-loops (compiler knows i<4), 13B size delta; do-while preserves checks but spills to edi; also register allocation swap (ecx/eax), zero-extend pattern, lea vs add in leave branch
+// BLOCKER_DELTA: 225
 // ORIGIN: GAME
 // SIZE: 333
 // CFLAGS: /O2 /Gd
@@ -41,10 +43,10 @@ int __cdecl ValidateJoinLeaveElection(int* param_1)
 				}
 				for (i = 0; i < 4; i++) {
 					if (slots[i] == -1) {
-						if (i < 4) {
-							return 0;
+						if (i >= 4) {
+							return 1;
 						}
-						return 1;
+						return 0;
 					}
 				}
 			}
@@ -60,10 +62,10 @@ int __cdecl ValidateJoinLeaveElection(int* param_1)
 				slots = (int*)((char*)entity + 0x1c);
 				for (i = 0; i < 4; i++) {
 					if (slots[i] == player) {
-						if (i < 4) {
-							return 0;
+						if (i >= 4) {
+							return 1;
 						}
-						return 1;
+						return 0;
 					}
 				}
 				return 1;

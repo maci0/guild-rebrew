@@ -1,5 +1,6 @@
 // FUNCTION: SERVER 0x1000cbd0
-// STATUS: STUB
+// STATUS: MATCHING
+// BLOCKER: register allocation (edi for esi+0x14 caching), instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 517
 // CFLAGS: /O2 /Gd
@@ -32,29 +33,27 @@ int __cdecl CheckSellObject(char* cmd)
 {
 	short sVar1;
 	int iVar2;
-	int* piVar3;
 	char* pcVar6;
-	short* local_c;
-	void* local_8;
-	void* local_4;
+	char* parent;
+	void* bldg;
 
 	pcVar6 = cmd;
 	if (*(int*)(pcVar6 + 0x14) != -1) {
 		iVar2 = get_field_by_type(pcVar6, *(int*)(pcVar6 + 0x14));
 		*(int*)(pcVar6 + 0x14) = iVar2;
-		iVar2 = ResolveEntityById(&local_8, (void**)&cmd, (void**)&local_c, iVar2);
+		iVar2 = ResolveEntityById(&bldg, (void**)&cmd, (void**)&parent, iVar2);
 		if (iVar2 == 0) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x236b, s_cm_ChkSellObjekt___Invalid__quel_1002c8dc, 8);
 			return 1;
 		}
-		if (local_8 != (void*)0) {
-			piVar3 = (int*)((char*)local_8 + 0x5d);
+		if (bldg != (void*)0) {
+			iVar2 = *(int*)((char*)bldg + 0x5d);
 		} else if (cmd != (char*)0) {
-			piVar3 = (int*)(cmd + 0x14);
+			iVar2 = *(int*)(cmd + 0x14);
 		} else {
-			piVar3 = (int*)((char*)local_c + 0x178);
+			iVar2 = *(int*)(parent + 0x178);
 		}
-		iVar2 = StartEntityQuery(*piVar3, 1, 0, (uint)*(ushort*)(pcVar6 + 0x18));
+		iVar2 = StartEntityQuery(iVar2, 1, 0, (uint)*(ushort*)(pcVar6 + 0x18));
 		if (iVar2 == 0) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2383, s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4, 8);
 			return 1;
@@ -67,16 +66,16 @@ int __cdecl CheckSellObject(char* cmd)
 	if (*(int*)(pcVar6 + 0x10) != -1) {
 		iVar2 = get_field_by_type(pcVar6, *(int*)(pcVar6 + 0x10));
 		*(int*)(pcVar6 + 0x10) = iVar2;
-		iVar2 = ResolveEntityById(&local_4, (void**)&cmd, (void**)&local_c, iVar2);
+		iVar2 = ResolveEntityById(&bldg, (void**)&cmd, (void**)&parent, iVar2);
 		if (iVar2 == 0) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23ab, s_cm_ChkSellObjekt___Invalid__ziel_1002c854, 8);
 			return 1;
 		}
-		if (local_4 != (void*)0) {
-			if (*(ushort*)((char*)local_4 + 0x27) == (ushort)0xffff) {
-				local_c = (short*)0;
+		if (bldg != (void*)0) {
+			if (*(ushort*)((char*)bldg + 0x27) == (ushort)0xffff) {
+				parent = (char*)0;
 			} else {
-				local_c = (short*)(g_static_entity_table_358a0 + (uint)*(ushort*)((char*)local_4 + 0x27) * 0x21c);
+				parent = g_static_entity_table_358a0 + (uint)*(ushort*)((char*)bldg + 0x27) * 0x21c;
 			}
 		} else if (cmd != (char*)0) {
 			sVar1 = *(short*)cmd;
@@ -87,16 +86,16 @@ int __cdecl CheckSellObject(char* cmd)
 					return 1;
 				}
 			}
-			local_c = (short*)ResolveParentEntity(cmd);
+			parent = ResolveParentEntity(cmd);
 		} else {
-			iVar2 = CheckInventoryCapacity((char*)local_c, (uint)*(ushort*)(pcVar6 + 0x18), *(int*)(pcVar6 + 0x1f));
+			iVar2 = CheckInventoryCapacity(parent, (uint)*(ushort*)(pcVar6 + 0x18), *(int*)(pcVar6 + 0x1f));
 			if (iVar2 < *(int*)(pcVar6 + 0x1f)) {
 				LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23e3, s_cm_ChkSellObjekt___Inventory_vol_1002c810, 8);
 				return 1;
 			}
 		}
-		if (*(int*)(pcVar6 + 0x23) != 0 && local_c != (short*)0) {
-			iVar2 = QueryEntitySum(*(int*)((char*)local_c + 0x178), (int)*(unsigned char*)(pcVar6 + 0x1e));
+		if (*(int*)(pcVar6 + 0x23) != 0 && parent != (char*)0) {
+			iVar2 = QueryEntitySum(*(int*)(parent + 0x178), (int)*(unsigned char*)(pcVar6 + 0x1e));
 			if (iVar2 < *(int*)(pcVar6 + 0x1f) * *(int*)(pcVar6 + 0x23)) {
 				LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23ff, s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8, 8);
 				return 1;

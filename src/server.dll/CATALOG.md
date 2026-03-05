@@ -2,7 +2,7 @@
 
 # Reversed Functions Catalog
 
-Total: 547 functions matched (311 exact, 109 reloc, 9 stubs)  
+Total: 547 functions matched (311 exact, 108 reloc, 7 stubs)  
 Coverage: 0.0% of .text section (146492/0 bytes)
 
 
@@ -89,14 +89,14 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000ca00 | _ProcessEntityChain | 130 | MATCHING | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000ca90 | _get_field_by_type | 130 | EXACT | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000cb20 | _CheckMoveCredits | 171 | MATCHING | DieGildeAddOn/command/command_recovery/CheckMoveCredits.c |
-| 0x1000cbd0 | _CheckSellObject | 517 | STUB | DieGildeAddOn/command/command_recovery/CheckSellObject.c |
+| 0x1000cbd0 | _CheckSellObject | 517 | MATCHING | DieGildeAddOn/command/command_recovery/CheckSellObject.c |
 | 0x1000cde0 | _CheckChangeAttribute | 331 | MATCHING | DieGildeAddOn/command/command_recovery/CheckChangeAttribute.c |
 | 0x1000cf30 | _CheckChangeBits | 162 | MATCHING | DieGildeAddOn/command/command_recovery/CheckChangeBits.c |
 | 0x1000cfe0 | _find_validate | 86 | RELOC | DieGildeAddOn/command/command_recovery/find_validate.c |
 | 0x1000d020 | _call_with_off | 22 | RELOC | DieGildeAddOn/command/command_recovery/call_with_off.c |
 | 0x1000d040 | _CmdValidateGeneric | 22 | RELOC | DieGildeAddOn/command/command_recovery/CmdValidateGeneric.c |
 | 0x1000d060 | _ValidateElectionOrTradeCmd | 169 | RELOC | DieGildeAddOn/command/command_recovery/ValidateElectionOrTradeCmd.c |
-| 0x1000d110 | _ValidateJoinLeaveElection | 333 | STUB | DieGildeAddOn/command/command_recovery/ValidateJoinLeaveElection.c |
+| 0x1000d110 | _ValidateJoinLeaveElection | 333 | MATCHING | DieGildeAddOn/command/command_recovery/ValidateJoinLeaveElection.c |
 | 0x1000d260 | _CheckCutsceneReady | 120 | MATCHING | DieGildeAddOn/command/command_recovery/CheckCutsceneReady.c |
 | 0x1000d2e0 | _validate_command_type | 77 | RELOC | DieGildeAddOn/command/command_recovery/validate_command_type.c |
 | 0x1000d330 | _MarkAndReturn | 14 | EXACT | DieGildeAddOn/command/command_recovery/MarkAndReturn.c |
@@ -124,7 +124,7 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000f030 | _CmdKillPlayer | 72 | RELOC | DieGildeAddOn/command/command_recovery/CmdKillPlayer.c |
 | 0x1000f080 | _AssignSequenceCounter | 26 | RELOC | DieGildeAddOn/command/command_recovery/AssignSequenceCounter.c |
 | 0x1000f0a0 | _AssignEntityId | 37 | RELOC | DieGildeAddOn/command/command_recovery/AssignEntityId.c |
-| 0x1000f0d0 | _RemoveLinkedObject | 197 | RELOC | DieGildeAddOn/command/command_recovery/RemoveLinkedObject.c |
+| 0x1000f0d0 | _RemoveLinkedObject | 197 | MATCHING | DieGildeAddOn/command/command_recovery/RemoveLinkedObject.c |
 | 0x1000f1a0 | _chain_handler_record_lookup | 327 | RELOC | DieGildeAddOn/command/command_recovery/chain_handler_record_lookup.c |
 | 0x1000f2f0 | _ExCreateSpecialObject | 179 | STUB | DieGildeAddOn/command/command_recovery/ExCreateSpecialObject.c |
 | 0x1000f3a0 | _chain_handler_noop | 3 | EXACT | DieGildeAddOn/command/command_recovery/chain_handler_noop.c |
