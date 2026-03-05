@@ -3,13 +3,27 @@
 #include <string.h>
 #include <windows.h>
 
-typedef struct {
 typedef int(__cdecl* ALLOCFN)(int, int, int);
 
 #pragma intrinsic(memcpy, memset)
 
+typedef struct {
+	char pad[0x24];
+	int(__cdecl* func)(int, int);
+	int field_28;
+} DISPATCH_OBJ;
+
+#pragma pack(push, 1)
+typedef struct {
+	short active;
+	int id;
+	char pad[0x3d];
+} Record;
+#pragma pack(pop)
+
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
-extern char* g_entity_table; /* 0x101de450 */;
+extern char* g_entity_table; /* 0x101de450 */
+;
 extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* tag);
 extern int __cdecl crt_call_extra(char* filename, char* mode);
 extern int __cdecl crt_locked_call4b(void* dest, int elemSize, int count, int stream);
@@ -129,15 +143,24 @@ extern int __cdecl GetOppositeStatIndex(int);
 extern void* __cdecl AddOrAccumulateObject(int, int, int);
 extern int g_citizen_count;
 extern char entity_slot_table[];
-extern float DAT_10025fb8; /* 0x10025fb8 */;
-extern float DAT_10025fb4; /* 0x10025fb4 */;
-extern float DAT_10025fb0; /* 0x10025fb0 */;
-extern float DAT_10025fac; /* 0x10025fac */;
-extern float DAT_10025fa8; /* 0x10025fa8 */;
-extern double DAT_10025fa0; /* 0x10025fa0 */;
-extern float _DAT_100256cc; /* 0x100256cc */;
-extern float DAT_100257c8; /* 0x100257c8 */;
-extern double DAT_100257d0; /* 0x100257d0 */;
+extern float DAT_10025fb8; /* 0x10025fb8 */
+;
+extern float DAT_10025fb4; /* 0x10025fb4 */
+;
+extern float DAT_10025fb0; /* 0x10025fb0 */
+;
+extern float DAT_10025fac; /* 0x10025fac */
+;
+extern float DAT_10025fa8; /* 0x10025fa8 */
+;
+extern double DAT_10025fa0; /* 0x10025fa0 */
+;
+extern float _DAT_100256cc; /* 0x100256cc */
+;
+extern float DAT_100257c8; /* 0x100257c8 */
+;
+extern double DAT_100257d0; /* 0x100257d0 */
+;
 extern double __cdecl CalculateProductionValue(unsigned short, unsigned char);
 extern int __cdecl func_1001b564(void);
 extern char g_type_idx;
@@ -148,9 +171,12 @@ extern int __cdecl compute_slot_val(int);
 extern int __cdecl find_entity_3arg(int, int, int);
 extern int __cdecl compute_entity_val(int, int);
 extern int __cdecl another_entity_val(int);
-extern int __cdecl compute_size(char*, int); /* 0x10019d00 */;
-extern int __cdecl get_msg_field(char*, void*); /* 0x10019cd0 */;
-extern int __cdecl LookupEntityInTable(int); /* 0x1000c670 */;
+extern int __cdecl compute_size(char*, int); /* 0x10019d00 */
+;
+extern int __cdecl get_msg_field(char*, void*); /* 0x10019cd0 */
+;
+extern int __cdecl LookupEntityInTable(int); /* 0x1000c670 */
+;
 extern int __cdecl search_entity(int, int, int);
 extern int __cdecl search_sub(int, int, int, int);
 extern int __cdecl search_sub3(int, int, int);
@@ -161,32 +187,6 @@ extern float _DAT_10025fbc;
 extern double __cdecl RandomFloat01(void);
 extern float _DAT_100256a0;
 extern float _DAT_100256a8;
-
-	char pad[0x24];
-	int(__cdecl* func)(int, int);
-	int field_28;
-} DISPATCH_OBJ;
-
-#pragma pack(push, 1)
-	short active;
-	int id;
-	char pad[0x3d];
-} Record;
-#pragma pack(pop)
-
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
 
 // STATUS: EXACT
 // ORIGIN: GAME

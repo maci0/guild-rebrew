@@ -1,0 +1,70 @@
+// FUNCTION: SERVER 0x1000efb0
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 122
+// CFLAGS: /O2 /Gd
+// SYMBOL: _SetSyncFlags
+
+/*
+ * Ghidra decompilation reference:
+ * /+ WARNING: Globals starting with '_' overlap smaller symbols at the same address * / * / * [rebrew] FUNCTION: RELOC
+ *    Origin: GAME
+ *    Size: 122B
+ *    CFlags: 
+ *    Symbol: _SetSyncFlags
+ *    Files: DieGildeAddOn/command/command.c * /
+ * 
+ * int __cdecl SetSyncFlags(int param_1,char *param_2)
+ * 
+ * {
+ *   if (*(char *)(param_1 + 0x10) == '\x01') {
+ *     g_player_slot_0[*(byte *)(param_1 + 3)].flags =
+ *          g_player_slot_0[*(byte *)(param_1 + 3)].flags | 0x20;
+ *   }
+ *   if (*(char *)(param_1 + 0x10) == '\x0e') {
+ *     g_player_slot_0[*(byte *)(param_1 + 3)].flags =
+ *          g_player_slot_0[*(byte *)(param_1 + 3)].flags | 0x40;
+ *   }
+ *   if (*(char *)(param_1 + 0x10) == '\x12') {
+ *     _g_game_speed_index = *(int *)(param_1 + 0x11);
+ *     if (3 < _g_game_speed_index) {
+ *       _g_game_speed_index = 4;
+ *     }
+ *     g_game_speed_value = *(undefined4 *)(&g_game_speed_table + _g_game_speed_index * 4);
+ *   }
+ *   return 0;
+ * }
+ */
+
+typedef struct player_slot {
+	int flags;
+	char gap_0004[0x264260];
+} player_slot;
+
+extern player_slot g_player_slot_0[];
+extern int _g_game_speed_index;
+extern int g_game_speed_value;
+extern int g_game_speed_table[];
+
+int __cdecl SetSyncFlags(int param_1, char* param_2)
+{
+	int speed_index;
+
+	if (*(char*) (param_1 + 0x10) == '\x01') {
+		g_player_slot_0[*(unsigned char*) (param_1 + 3)].flags =
+			g_player_slot_0[*(unsigned char*) (param_1 + 3)].flags | 0x20;
+	}
+	if (*(char*) (param_1 + 0x10) == '\x0e') {
+		g_player_slot_0[*(unsigned char*) (param_1 + 3)].flags =
+			g_player_slot_0[*(unsigned char*) (param_1 + 3)].flags | 0x40;
+	}
+	if (*(char*) (param_1 + 0x10) == '\x12') {
+		speed_index = *(int*) (param_1 + 0x11);
+		if (4 <= speed_index) {
+			speed_index = 4;
+		}
+		g_game_speed_value = g_game_speed_table[speed_index];
+		_g_game_speed_index = speed_index;
+	}
+	return 0;
+}

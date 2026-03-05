@@ -1,6 +1,20 @@
 #include <stdio.h>
 
 typedef struct {
+	int value;
+	char type;
+	char pad[19];
+} ENT;
+
+#pragma pack(push, 1)
+typedef struct {
+	char key;
+	char pad[3];
+	int entityId;
+	char field8;
+	char rest[15];
+} SlotEntry;
+#pragma pack(pop)
 
 extern SlotEntry DAT_101de5a0[];
 extern int DAT_101de5a4;
@@ -15,20 +29,6 @@ extern unsigned short DAT_10035884;
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 extern void __cdecl InitBuildingTypeTable(void);
-
-	int value;
-	char type;
-	char pad[19];
-} ENT;
-
-#pragma pack(push, 1)
-	char key;
-	char pad[3];
-	int entityId;
-	char field8;
-	char rest[15];
-} SlotEntry;
-#pragma pack(pop)
 
 // STATUS: MATCHING
 // BLOCKER: comparison direction swap, jump condition swap, zero-extend pattern (xor vs mov)

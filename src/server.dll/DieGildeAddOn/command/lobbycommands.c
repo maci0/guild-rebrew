@@ -489,7 +489,7 @@ int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
         return 0;
 }
 
-// STATUS: MATCHING
+// STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 267
 // SYMBOL: _lb_ExLobbyServerCommand

@@ -1,5 +1,3 @@
-typedef struct {
-
 extern unsigned short func_1001a0d0(unsigned int);
 extern unsigned int __cdecl CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 extern int __cdecl get_priority_info(int, int*);
@@ -250,6 +248,7 @@ error:
 // PROTOTYPE: int __cdecl AdvanceGameClock(int * param_1, int param_2, int param_3, int param_4)
 
 #pragma pack(push, 1)
+typedef struct {
 	int days;    /* 0x00 */
 	short hours; /* 0x04 */
 	int minutes; /* 0x06 */

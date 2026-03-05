@@ -1,0 +1,57 @@
+// FUNCTION: SERVER 0x1000f030
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 72
+// CFLAGS: /O2 /Gd
+// SYMBOL: _CmdKillPlayer
+
+/*
+ * Ghidra decompilation reference:
+ * /+ [rebrew] FUNCTION: RELOC
+ *    Origin: GAME
+ *    Size: 72B
+ *    CFlags: 
+ *    Symbol: _CmdKillPlayer
+ *    Files: DieGildeAddOn/command/command.c * / * 
+ * int __cdecl CmdKillPlayer(int param_1)
+ * 
+ * {
+ *   ushort *puVar1;
+ *   
+ *   puVar1 = (ushort *)LookupEntityRecordById(*(int *)(param_1 + 0x10));
+ *   if (puVar1 != (ushort *)0x0) {
+ *     DeallocEntity((uint)*puVar1,*(int *)(param_1 + 0x14));
+ *     return 0;
+ *   }
+ *   LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x397d,
+ *                      s_cm_ExKillSpieler___Could_not_fin_1002d154,1);
+ *   return 0;
+ * }
+ */
+
+typedef unsigned int uint;
+typedef unsigned short ushort;
+
+extern int __cdecl LookupEntityRecordById(int);
+extern void __cdecl DeallocEntity(uint, int);
+extern void __cdecl LogMessageInternal(char*, int, char*, int);
+extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
+extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
+
+int __cdecl CmdKillPlayer(int param_1)
+{
+	ushort* puVar1;
+
+	puVar1 = (ushort*) LookupEntityRecordById(*(int*) (param_1 + 0x10));
+	if (puVar1 != (ushort*) 0x0) {
+		DeallocEntity((uint) *puVar1, *(int*) (param_1 + 0x14));
+		return 0;
+	}
+	LogMessageInternal(
+		s_D__Develop_DieGildeAddOn_command_1002c748,
+		0x397d,
+		s_cm_ExKillSpieler___Could_not_fin_1002d154,
+		1
+	);
+	return 0;
+}

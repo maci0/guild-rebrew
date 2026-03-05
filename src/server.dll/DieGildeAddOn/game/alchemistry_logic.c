@@ -1,6 +1,5 @@
 #include <string.h>
 
-typedef struct {
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
 extern char* g_table;
@@ -30,16 +29,19 @@ extern unsigned short* __cdecl NextEntityQueryMatch(void);
 extern int* __cdecl LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
+typedef struct {
 	int key;
 	int val;
 } PAIR;
 
+typedef struct {
 	char hdr[8];
 	int key;
 	char pad[4];
 	int val;
 } SRC;
 
+typedef struct {
 	char hdr[0xc];
 	PAIR entries[6];
 } TGT;

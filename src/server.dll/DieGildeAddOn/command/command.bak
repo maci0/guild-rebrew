@@ -214,7 +214,7 @@ extern void __cdecl AllocateEntitySlot(int, int, int);
 extern void __cdecl slot_clear_match(char*, char*, char*);
 
 /* 0x1000cb20 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 171
 // SYMBOL: _cm_ChkMoveCredits
@@ -243,7 +243,7 @@ int __cdecl cm_ChkMoveCredits(int param_1, char *param_2)
 }
 
 /* 0x1000cbd0 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 517
 // SYMBOL: _cm_ChkSellObjekt
@@ -294,7 +294,7 @@ LAB_1000cdb7:
 }
 
 /* 0x1000cde0 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 331
 // SYMBOL: _cm_ChkChangeAttribute
@@ -335,7 +335,7 @@ LAB_1000cf11:
 }
 
 /* 0x1000cf30 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 162
 // SYMBOL: _cm_ChkChangeBits
@@ -388,7 +388,7 @@ int __cdecl cm_ChkOfficeCandidate(void *obj)
 }
 
 /* 0x1000d040 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 22
 // SYMBOL: _cm_ChkValidateGeneric
@@ -401,7 +401,7 @@ int __cdecl cm_ChkValidateGeneric(void *param_1, char *param_2)
 }
 
 /* 0x1000d060 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 169
 // SYMBOL: _cm_ChkElectionOrTrade
@@ -433,7 +433,7 @@ int __cdecl cm_ChkElectionOrTrade(int param_1)
 }
 
 /* 0x1000d110 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 333
 // SYMBOL: _cm_ChkJoinLeaveElection
@@ -532,7 +532,7 @@ int __cdecl RejectCommand(void)
 }
 
 /* 0x1000d350 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 267
 // SYMBOL: _CmdAllocBuilding
@@ -576,7 +576,7 @@ LAB_1000d38c:
 }
 
 /* 0x1000d460 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 267
 // SYMBOL: _CmdAllocPlayer
@@ -604,7 +604,7 @@ int __cdecl CmdAllocPlayer(int param_1, char *param_2)
 }
 
 /* 0x1000d570 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 361
 // SYMBOL: _validate_cmd_10_AllocPlayer
@@ -637,7 +637,7 @@ int __cdecl validate_cmd_10_AllocPlayer(int param_1, char *param_2)
 }
 
 /* 0x1000d6e0 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 78
 // SYMBOL: _cm_ExChangePlayerIdentity
@@ -655,7 +655,7 @@ int __cdecl cm_ExChangePlayerIdentity(int param_1, char *param_2)
 }
 
 /* 0x1000d730 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 180
 // SYMBOL: _ExFreeEntity
@@ -739,7 +739,7 @@ int __cdecl ExTransferCurrencyNoKill(int param_1, char *param_2)
 // SIZE: 2057
 // SYMBOL: _TradeCommandHandler
 // FUNCTION: SERVER 0x1000d930
-uint __stdcall TradeCommandHandler(char *param_1, uchar *param_2)
+uint __cdecl TradeCommandHandler(char *param_1, uchar *param_2)
 {
   int iVar1; int resolve_result; char *capacity_check; short *parent_check; ushort *dest_object; int extraout_ECX; char **container_ptr; short *source_owner_entity; int *linked_list_ptr; short *source_dynamic_ref; short *dest_owner_entity; short *resolved_dynamic; short *source_dynamic_entity; char *dest_existing_entity; short *dest_dynamic_entity; short *source_static_entity; char **source_container_ptr; ushort *dest_game_object; void *source_existing_entity; uint weight_fraction; char log_buffer [512]; short entity_type; uint error_code; char obj_category;
   source_owner_entity = (short *)0x0; *(int *)(param_1 + 0x1a) = g_timestamp_0b6c; dest_object = (ushort *)0x0; dest_owner_entity = (short *)0x0; resolved_dynamic = (short *)0x0; dest_game_object = (ushort *)0x0; source_dynamic_entity = (short *)0x0; dest_dynamic_entity = (short *)0x0; source_container_ptr = (char **)0x0; source_existing_entity = (void *)0x0; dest_existing_entity = (char *)0x0; source_static_entity = (short *)0x0;
@@ -857,7 +857,7 @@ sell_error_return:
 }
 
 /* 0x1000e140 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 993
 // SYMBOL: _cm_ExecProduction
@@ -915,7 +915,7 @@ LAB_1000e3e1:
 }
 
 /* 0x1000e530 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 346
 // SYMBOL: _ExMoveObject
@@ -952,7 +952,7 @@ int __cdecl ExMoveObject(int param_1,char *param_2)
 }
 
 /* 0x1000e690 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 191
 // SYMBOL: _cm_ExClearLagerslot
@@ -997,7 +997,7 @@ int __cdecl ExCreateObject(int param_1,char *param_2)
 }
 
 /* 0x1000e7d0 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 242
 // SYMBOL: _ExAccumulateEntityFields
@@ -1024,7 +1024,7 @@ int __cdecl ExAccumulateEntityFields(int param_1,char *param_2)
 }
 
 /* 0x1000e8d0 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 239
 // SYMBOL: _ExWriteEntityFields
@@ -1051,7 +1051,7 @@ int __cdecl ExWriteEntityFields(int param_1,char *param_2)
 }
 
 /* 0x1000e9c0 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 214
 // SYMBOL: _ExChangeDesire
@@ -1081,7 +1081,7 @@ int __cdecl ExChangeDesire(uchar *param_1)
 }
 
 /* 0x1000eaa0 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 208
 // SYMBOL: _ExSetEntityBitmask
@@ -1102,7 +1102,7 @@ int __cdecl ExSetEntityBitmask(int param_1,char *param_2)
 }
 
 /* 0x1000eb70 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 135
 // SYMBOL: _ExSetEntityField
@@ -1120,7 +1120,7 @@ int __cdecl ExSetEntityField(int param_1,char *param_2)
 }
 
 /* 0x1000ec00 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 901
 // SYMBOL: _ExCopyEntityData
@@ -1150,7 +1150,7 @@ int __cdecl ExCopyEntityData(int cmd_ptr,char *response)
 }
 
 /* 0x1000ef90 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 26
 // SYMBOL: _chain_handler_assign_id
@@ -1177,7 +1177,7 @@ int __cdecl SetSyncFlags(int param_1, char *param_2)
 }
 
 /* 0x1000f030 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 72
 // SYMBOL: _CmdKillPlayer
@@ -1205,7 +1205,7 @@ int __cdecl AssignSequenceCounter(int param_1, char *param_2)
 }
 
 /* 0x1000f0a0 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 37
 // SYMBOL: _AssignEntityId
@@ -1221,7 +1221,7 @@ int __cdecl AssignEntityId(int param_1, char *param_2)
 }
 
 /* 0x1000f0d0 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 197
 // SYMBOL: _RemoveLinkedObject
@@ -1241,7 +1241,7 @@ LAB_1000f181:
 }
 
 /* 0x1000f1a0 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 327
 // SYMBOL: _chain_handler_record_lookup
@@ -1264,7 +1264,7 @@ int __cdecl chain_handler_record_lookup(int param_1,char *param_2)
 }
 
 /* 0x1000f2f0 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 172
 // SYMBOL: _ExCreateSpecialObject
@@ -1294,7 +1294,7 @@ int __cdecl chain_handler_noop(void)
 }
 
 /* 0x1000f3b0 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 206
 // SYMBOL: _SetBuildingOwner
@@ -1320,7 +1320,7 @@ int __cdecl SetBuildingOwner(int param_1,char *param_2)
 }
 
 /* 0x1000f480 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 271
 // SYMBOL: _SetResidence
@@ -1352,7 +1352,7 @@ LAB_1000f519:
 }
 
 /* 0x1000f590 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 237
 // SYMBOL: _SetBuildingUpgrade
@@ -1375,7 +1375,7 @@ int __cdecl SetBuildingUpgrade(int param_1,char *param_2)
 }
 
 /* 0x1000f680 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 171
 // SYMBOL: _DestroyBuilding
@@ -1398,12 +1398,12 @@ int __cdecl DestroyBuilding(int param_1,char *param_2)
 }
 
 /* 0x1000f730 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 515
 // SYMBOL: _EmployWorkerAtBuilding
 // FUNCTION: SERVER 0x1000f730
-int __stdcall EmployWorkerAtBuilding(int param_1,char *param_2)
+int __cdecl EmployWorkerAtBuilding(int param_1,char *param_2)
 {
   int random_seed; ushort *building_entity; char *citizen_entity; uint *building_type_ptr; int *extraout_EAX; ushort *workplace_entity; uint log_line; char worker_type;
   workplace_entity = (ushort *)0x0; *(int *)(param_1 + 0x1f) = g_timestamp_0b6c; random_seed = rand(); *(int *)(param_1 + 0x23) = random_seed; crt_thread_set_alt(random_seed);
@@ -1435,7 +1435,7 @@ LAB_1000f7f5:
 }
 
 /* 0x1000f940 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 22
 // SYMBOL: _call_with_off2
@@ -1448,7 +1448,7 @@ int __cdecl call_with_off2(void *obj)
 }
 
 /* 0x1000f960 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 22
 // SYMBOL: _CmdExecuteOffice
@@ -1461,7 +1461,7 @@ int __cdecl CmdExecuteOffice(void *param_1, char *param_2)
 }
 
 /* 0x1000f980 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 335
 // SYMBOL: _ExCreateCitizenAtBuilding
@@ -1488,7 +1488,7 @@ LAB_1000fa2c:
 }
 
 /* 0x1000fad0 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 85
 // SYMBOL: _cm_ExKillTransporter
@@ -1504,7 +1504,7 @@ int __cdecl cm_ExKillTransporter(int param_1, char *param_2)
 }
 
 /* 0x1000fb30 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 153
 // SYMBOL: _CmdCreateBuilding
@@ -1552,7 +1552,7 @@ int __cdecl InitDefaultResponse(int param_1, char *param_2)
 }
 
 /* 0x1000fc10 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 308
 // SYMBOL: _ElectionOrTradeCommand
@@ -1582,7 +1582,7 @@ int __cdecl ElectionOrTradeCommand(int param_1, char *param_2)
 }
 
 /* 0x1000fd50 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 445
 // SYMBOL: _JoinLeaveElection
@@ -1634,7 +1634,7 @@ int __cdecl cond_write2(void *obj, char *buf)
 }
 
 /* 0x1000ff30 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 41
 // SYMBOL: _ValidateEntityLookup
@@ -1648,7 +1648,7 @@ int __cdecl ValidateEntityLookup(int param_1, char *param_2)
 }
 
 /* 0x1000ff60 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 82
 // SYMBOL: _CutsceneEntityUpdate
@@ -1664,7 +1664,7 @@ int __cdecl CutsceneEntityUpdate(int param_1, char *param_2)
 }
 
 /* 0x1000ffc0 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 70
 // SYMBOL: _ModifyEntityHealth
@@ -1678,7 +1678,7 @@ int __cdecl ModifyEntityHealth(int param_1)
 }
 
 /* 0x10010010 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 110
 // SYMBOL: _ModifyEntityStamina
@@ -1696,7 +1696,7 @@ int __cdecl ModifyEntityStamina(int param_1)
 }
 
 /* 0x10010080 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 22
 // SYMBOL: _ExSimCommand
@@ -1709,7 +1709,7 @@ int __cdecl ExSimCommand(void * param_1, char * param_2)
 }
 
 /* 0x100100a0 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 159
 // SYMBOL: _ModifyEntityStat
@@ -1724,7 +1724,7 @@ int __cdecl ModifyEntityStat(int * param_1)
 }
 
 /* 0x10010140 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 280
 // SYMBOL: _AllocWarEvent
@@ -1755,7 +1755,7 @@ LAB_100101fa:
 }
 
 /* 0x10010260 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 144
 // SYMBOL: _DispatchProductionCommand
@@ -1778,7 +1778,7 @@ int __cdecl DispatchProductionCommand(int param_1, char *param_2)
 }
 
 /* 0x100102f0 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 17
 // SYMBOL: _DispatchMoveSlotEntry
@@ -1789,7 +1789,7 @@ int __cdecl DispatchMoveSlotEntry(void * param_1, char * param_2)
 }
 
 /* 0x10010310 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 52
 // SYMBOL: _CmdAllocGraveyardWorker
@@ -1802,7 +1802,7 @@ int __cdecl CmdAllocGraveyardWorker(int param_1, char *param_2)
 }
 
 /* 0x10010350 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 52
 // SYMBOL: _CmdAllocAlchemist
@@ -1815,7 +1815,7 @@ int __cdecl CmdAllocAlchemist(int param_1, char *param_2)
 }
 
 /* 0x10010390 */
-// STATUS: RELOC
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 262
 // SYMBOL: _SimSpecialAction
@@ -1840,7 +1840,7 @@ int __cdecl SimSpecialAction(int param_1, char *param_2)
 }
 
 /* 0x100104a0 */
-// STATUS: MATCHING
+// STATUS: STUB
 // ORIGIN: GAME
 // SIZE: 135
 // SYMBOL: _GetBuildingStatCount
