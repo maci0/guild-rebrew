@@ -643,9 +643,9 @@ int* __cdecl LookupEntityInTable(int param_1)
 // BLOCKER_DELTA: 55
 // FUNCTION: SERVER 0x1000c6a0
 // QueryEntityBuildingType
-// PROTOTYPE: void __cdecl QueryEntityBuildingType(int param_1)
+// PROTOTYPE: int __cdecl QueryEntityBuildingType(int param_1)
 
-void __cdecl QueryEntityBuildingType(int param_1)
+int __cdecl QueryEntityBuildingType(int param_1)
 {
 	unsigned short* entity;
 	int table_entry;
@@ -656,14 +656,14 @@ void __cdecl QueryEntityBuildingType(int param_1)
 			entity = NextEntityQueryMatch();
 			if (entity == (unsigned short*) 0) {
 				LookupEntityInTable(0);
-				return;
+				return 0;
 			}
 		}
 		if (*(int*) (table_entry + 0x58) != 1 && *(int*) (table_entry + 0x58) != 2) {
-			return;
+			return 0;
 		}
 		if (0 < *(int*) ((char*) entity + 0x20)) {
-			return;
+			return 0;
 		}
 	}
 	LookupEntityInTable(0);
@@ -918,4 +918,5 @@ int __cdecl get_field_by_type(char* p, int type)
 		idx = idx + *(unsigned char*) (p + 3);
 		return *(int*) ((char*) 0x10442d08 + idx * 9 * 4);
 	}
+	return 0;
 }

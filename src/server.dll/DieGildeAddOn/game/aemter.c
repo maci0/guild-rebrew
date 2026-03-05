@@ -52,7 +52,7 @@ int __cdecl ValidateOfficeCandidate(int* param_1)
 	entity_rec = LookupEntityRecordById(*param_1);
 	if ((entity_rec != (void*) 0) && (*(char*) ((int) entity_rec + 0x168) == '\0')) {
 		slot_index = 0;
-		slot_ptr = &DAT_101de5a0;
+		slot_ptr = (char*)&DAT_101de5a0;
 		do {
 			if (*slot_ptr == (char) param_1[1]) {
 				if (0x1d < slot_index) {
@@ -72,7 +72,7 @@ int __cdecl ValidateOfficeCandidate(int* param_1)
 				}
 				if (*(char*) ((int) param_1 + 5) != -1) {
 					dep_slot_index = 0;
-					slot_ptr = &DAT_101de5a0;
+					slot_ptr = (char*)&DAT_101de5a0;
 					while (*slot_ptr != *(char*) ((int) param_1 + 5)) {
 						slot_ptr = slot_ptr + 0x18;
 						dep_slot_index = dep_slot_index + 1;
@@ -129,7 +129,7 @@ unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 	unsigned int* role_def_src;
 	unsigned int* role_def_dst;
 	unsigned int role_def_buf[4];
-	int dep_slot_status;
+	int dep_slot_status = 0;
 
 	entity_rec = LookupEntityRecordById(*param_1);
 	if (((entity_rec != 0) && (*entity_rec != -1)) && (*(char*) (entity_rec + 0xb4) == '\0')) {
@@ -301,7 +301,7 @@ int __cdecl ExecuteOfficeAssignment(char* param_1)
 	/* Get owner entity */
 	ent = 0;
 	if (*(int*) (param_1 + 1) != -1) {
-		ent = LookupEntityRecordById(*(int*) (param_1 + 1));
+		ent = (int)LookupEntityRecordById(*(int*) (param_1 + 1));
 		if (ent == 0) {
 			return 0;
 		}
@@ -334,7 +334,7 @@ int __cdecl ExecuteOfficeAssignment(char* param_1)
 	record_off = record_index * 0x18;
 
 	/* Lookup existing owner and clear old role references */
-	old_owner = LookupEntityRecordById(*(int*) (record_off + 0x101de5a4));
+	old_owner = (int)LookupEntityRecordById(*(int*) (record_off + 0x101de5a4));
 	if (old_owner != 0 && *(int*) (old_owner + 4) != *(int*) (param_1 + 1)) {
 		char role;
 		role = *(char*) (record_off + 0x101de5a8);

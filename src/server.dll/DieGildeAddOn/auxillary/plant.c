@@ -107,7 +107,7 @@ int __cdecl CheckZoneAvailability(int param_1, unsigned int param_2, unsigned in
 					index = 0;
 					do {
 						zone_result = find_zone_record(
-							param_1,
+							(char*) param_1,
 							(index - param_4 / 2) + param_2,
 							(row - param_4 / 2) + param_3
 						);

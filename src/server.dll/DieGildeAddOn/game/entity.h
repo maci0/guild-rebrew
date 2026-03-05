@@ -17,7 +17,7 @@ extern void* __cdecl LookupEntityInTable(int id);
 /* Entity Lifecycle */
 extern void __cdecl InitRandomEntity(void* entity);
 extern int __cdecl InitEntityIfValid(void* entity);
-extern void __cdecl DeallocEntity(void* entity);
+extern void __cdecl DeallocEntity(unsigned int index, int param_2);
 extern void __cdecl destroy_entity(void* entity);
 
 /* Chain and Link Processing */
