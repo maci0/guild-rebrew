@@ -44,9 +44,9 @@
 
 #include "../command_internal.h"
 
-extern char* __cdecl gm_AllocObjekt(int, unsigned int, int);
-extern void* __cdecl memcpy(void*, const void*, unsigned int);
+void* __cdecl memcpy(void*, const void*, unsigned int);
 extern char g_player_slot_0[];
+char* __cdecl gm_AllocObjekt(int, int, int);
 
 // FUNCTION: SERVER 0x1000e750
 int __cdecl cm_ExAllocObjekt(int param_1, char* param_2)

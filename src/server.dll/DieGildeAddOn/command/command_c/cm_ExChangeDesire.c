@@ -4,8 +4,8 @@
 // SIZE: 214
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
 
 extern double _g_stat_min_d;
 extern double _g_stat_max_d;

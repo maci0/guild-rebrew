@@ -11,11 +11,11 @@
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
-extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern void* __cdecl gm_StartEntityQuery(int, int, int, int, int);
 
 extern int g_1003546c;
 extern char g_100358a0[];
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // FUNCTION: SERVER 0x1000d110
 int __cdecl cm_ChkJoinLeaveElection(int* param_1)

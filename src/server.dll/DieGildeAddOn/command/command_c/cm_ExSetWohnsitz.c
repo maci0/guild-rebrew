@@ -55,16 +55,16 @@
  */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 extern int g_entity_type_table;
 
-extern ushort* __cdecl gm_StartFilteredEntitySearch(int, ...);
-extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
-extern void __cdecl table_lookup(uint, ushort*);
+void __cdecl table_lookup(uint, ushort*);
 
 extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d298[];
 extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[];
 extern char s_cm_ExSetWohnsitz____Residence_is_1002d240[];
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // FUNCTION: SERVER 0x1000f480
 int __cdecl cm_ExSetWohnsitz(int param_1, char* param_2)

@@ -57,8 +57,8 @@
 */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
 
 extern char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[];
 extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];

@@ -63,13 +63,13 @@
  *     if (uVar1 == 0x61736452) {
  */
 
-extern int __cdecl ahm_CheckFlag(void*);
-extern void __cdecl ahm_SearchAndSet(void*, void*);
-extern void __cdecl ahm_ApplyColorComponent(void*, void*);
-extern void __cdecl ahm_FireEntityAndCleanup(void*, void*, void*);
-extern void __cdecl ahm_ClampFloatValue(void*, void*);
-extern void __cdecl ahm_SlotClearMatch(void*, void*, void*);
-extern void __cdecl ahm_AllocateEntitySlot(void*, void*, void*);
+int __cdecl ahm_CheckFlag(void*);
+void __cdecl ahm_SearchAndSet(void*, void*);
+void __cdecl ahm_ApplyColorComponent(void*, void*);
+void __cdecl ahm_FireEntityAndCleanup(void*, void*, void*);
+void __cdecl ahm_ClampFloatValue(void*, void*);
+void __cdecl ahm_SlotClearMatch(void*, void*, void*);
+void __cdecl ahm_AllocateEntitySlot(void*, void*, void*);
 
 // FUNCTION: SERVER 0x10010390
 int __cdecl cm_ExSimSpecialAction(int param_1, char* param_2)

@@ -28,7 +28,7 @@
 
 #include "../command_internal.h"
 
-extern uint __cdecl ahm_ExAllocAlchemist(void*);
+uint __cdecl ahm_ExAllocAlchemist(void*);
 
 // FUNCTION: SERVER 0x10010350
 int __cdecl cm_ExAllocAlchemist(int param_1, char* param_2)

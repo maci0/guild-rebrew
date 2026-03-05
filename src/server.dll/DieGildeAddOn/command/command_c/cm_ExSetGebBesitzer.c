@@ -3,6 +3,7 @@
 // SIZE: 206
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -60,13 +61,12 @@
  * }
  */
 
-extern ushort* __cdecl gm_StartFilteredEntitySearch(int, ...);
-extern void __cdecl gm_AssignBuildingOwner(char*, uint, uint);
-extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
+void __cdecl gm_AssignBuildingOwner(char*, uint, uint);
 
 extern char s_cm_ExSetGebBesitzer____Could_not_1002d214[];
 extern char s_cm_ExSetGebBesitzer____Could_not_1002d1e0[];
 extern char s_cm_ExSetGebBesitzer____Could_not_1002d1a8[];
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // FUNCTION: SERVER 0x1000f3b0
 int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)

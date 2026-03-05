@@ -2,8 +2,9 @@
 #include "Units/m_alloc/m_alloc.h"
 #include "Units/vfs/vfs.h"
 #include "DieGildeAddOn/game/entity.h"
+#include "Units/Error/error.h"
 
-extern int __cdecl AllocGraveyardField(int);
+int __cdecl AllocGraveyardField(int);
 extern int g_1002576c[];
 extern int g_1002575c[];
 extern void amt_FindEntity26(int);
@@ -14,7 +15,7 @@ extern void gm_AddOrAccumulateObject(int, int, int);
 extern char g_100a9820[];
 extern char g_1014d8e0[];
 extern char g_10139820[];
-extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
+int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 extern int g_save_version;
 extern int g_1002d4f0;
 extern int g_1002d4f4;
@@ -22,15 +23,13 @@ extern char g_1002d4f8;
 extern char g_1002d4fc;
 extern int DAT_100a8c34;
 extern int DAT_10035450;
-extern int __cdecl ls_LoadGraveyardData(int param_1, int param_2);
-extern int __cdecl ahm_AllocAhmInfo(int param_1, int param_2);
+int __cdecl ls_LoadGraveyardData(int param_1, int param_2);
+int __cdecl ahm_AllocAhmInfo(int param_1, int param_2);
 extern int g_file_version;     /* 0x1002d4ec */;
 extern int g_entity_array_ptr; /* 0x1014d8c0 */;
 extern int g_101de454;         /* 0x101de454 */;
 extern int g_101de55c;         /* 0x101de55c */;
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
-extern void LogMessageInternal(const char*, int, const char*, int);
-extern int gm_StartFilteredEntitySearch(int, int, int);
 extern int gm_ResolveEntityById(int*, int*, int*, int);
 extern void gm_EntitySetField(void);
 extern int g_101deae8;
@@ -38,13 +37,12 @@ extern int g_101deac0;
 extern int g_101de560;
 extern int g_save_info[2];
 extern int OpenVfsStream(int, int, int);
-extern int ls_LoadSavegameHeader(int, int*);
-extern void CloseVfsStream(int);
-extern int ls_LoadExistingEntities(int);
-extern int ls_LoadBuildingEntityState(int);
-extern int ls_LoadDynamicEntities(int);
-extern int ls_LoadEntities(int);
-extern int ls_LoadTownData(int);
+int ls_LoadSavegameHeader(int, int*);
+int ls_LoadExistingEntities(int);
+int ls_LoadBuildingEntityState(int);
+int ls_LoadDynamicEntities(int);
+int ls_LoadEntities(int);
+int ls_LoadTownData(int);
 extern int amt_fio_LoadAemter(int, int);
 extern int ls_ID2Ptr(void);
 
@@ -1215,6 +1213,7 @@ int __cdecl ls_LoadDynamicEntities(void* file)
 extern int g_save_version;
 /* GLOBAL: SERVER 0x10035434 */
 extern int g_citizen_count;
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 int __cdecl ls_LoadEntities(int param_1)
 {

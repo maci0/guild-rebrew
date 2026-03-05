@@ -49,7 +49,7 @@
 
 #include "../command_internal.h"
 
-extern void* __cdecl gm_AddOrAccumulateObject(int, unsigned int, int);
+void* __cdecl gm_AddOrAccumulateObject(int, unsigned int, int);
 
 extern unsigned short g_currency_type_array[];
 

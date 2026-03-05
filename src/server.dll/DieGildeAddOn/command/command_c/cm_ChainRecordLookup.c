@@ -61,13 +61,13 @@
  *       pcVar5 = FindRecord(*(char **)((int)puVar2 + 0x71),(uint)*(byte *)(param_1 + 0x18),
  */
 
-extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern char* __cdecl lb_SearchRecordTable(unsigned int);
-extern int __cdecl CheckZoneAvailability(void*, unsigned int, unsigned int, unsigned int);
-extern char* __cdecl FindRecord(void*, unsigned int, unsigned int);
-extern char* __cdecl plt_SetPlantMap(void*, unsigned int, unsigned int, unsigned int, unsigned int);
+char* __cdecl lb_SearchRecordTable(unsigned int);
+int __cdecl CheckZoneAvailability(void*, unsigned int, unsigned int, unsigned int);
+char* __cdecl FindRecord(void*, unsigned int, unsigned int);
+char* __cdecl plt_SetPlantMap(void*, unsigned int, unsigned int, unsigned int, unsigned int);
 
 extern int g_plant_count;
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // FUNCTION: SERVER 0x1000f1a0
 int __cdecl cm_ChainRecordLookup(int param_1, char* param_2)

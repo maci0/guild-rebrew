@@ -4,6 +4,7 @@
 // SIZE: 336
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -64,10 +65,9 @@
  *     }
  */
 
-extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern unsigned int __cdecl gm_CreateEntityFromParents(int, int, int, int, int, int, int, int);
-extern void* __cdecl gm_AllocObjekt(int, unsigned int, int);
-extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
+unsigned int __cdecl gm_CreateEntityFromParents(int, int, int, int, int, int, int, int);
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
+char* __cdecl gm_AllocObjekt(int, int, int);
 
 // FUNCTION: SERVER 0x1000f980
 int __cdecl cm_ExCreateCitizen(int param_1, char* param_2)

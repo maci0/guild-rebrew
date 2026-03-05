@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Units/Error/error.h"
 
 #pragma intrinsic(memset, strcmp, strcpy)
 
-extern void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */;
-extern void __cdecl ReportMessage(char* msg); /* Single arg log? */;
-extern void* __cdecl crt_call_global(int); /* 0x1001a7f7 */;
+void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */;
+void __cdecl ReportMessage(char* msg); /* Single arg log? */;
+void* __cdecl crt_call_global(int); /* 0x1001a7f7 */;
 extern int DAT_10034624;
 extern int DAT_10034628;
 extern int DAT_1003462c;
@@ -14,8 +15,7 @@ extern int DAT_10034630;
 extern int DAT_10034634;
 extern int DAT_10034638;
 extern void* DAT_10034640;
-extern void __cdecl LogMessageInternal(char* file, int line, char* msg, int level);
-extern void __cdecl FreeHeapBlockWithRuntimeLock(void* ptr);
+void __cdecl FreeHeapBlockWithRuntimeLock(void* ptr);
 extern int DAT_117640b4;
 extern int DAT_117640b0;
 extern int DAT_117640bc;
@@ -26,9 +26,9 @@ extern int DAT_117640a0;
 extern int DAT_117640a4;
 extern int DAT_10028938;
 extern int DAT_1002893c;
-extern void __cdecl ReportMemoryGroupInfo(int toggle);
-extern void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
-extern void __cdecl m_FreeTracked(int*);
+void __cdecl ReportMemoryGroupInfo(int toggle);
+void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
+void __cdecl m_FreeTracked(int*);
 
 ;
 ;

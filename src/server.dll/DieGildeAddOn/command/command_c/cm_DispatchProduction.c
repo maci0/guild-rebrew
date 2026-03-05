@@ -53,13 +53,13 @@
 
 typedef unsigned int uint32_t;
 
-extern unsigned int __cdecl AssignProductionSlot(int);
-extern unsigned int __cdecl HireProductionWorker(int);
-extern unsigned int __cdecl ExtendProductionTime(uint32_t*);
-extern int __cdecl gv_ReplaceProductionWorker(uchar*);
-extern int __cdecl ActivateGraveyardSection(uchar*);
-extern int __cdecl gv_UpdateProductionProgress(uchar*);
-extern int __cdecl gv_ValidateEntityAction(uchar*);
+unsigned int __cdecl AssignProductionSlot(int);
+unsigned int __cdecl HireProductionWorker(int);
+unsigned int __cdecl ExtendProductionTime(uint32_t*);
+int __cdecl gv_ReplaceProductionWorker(uchar*);
+int __cdecl ActivateGraveyardSection(uchar*);
+int __cdecl gv_UpdateProductionProgress(uchar*);
+int __cdecl gv_ValidateEntityAction(uchar*);
 
 // FUNCTION: SERVER 0x10010260
 int __cdecl cm_DispatchProduction(int param_1, char* param_2)

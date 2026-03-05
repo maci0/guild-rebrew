@@ -3,15 +3,14 @@
 #include <windows.h>
 #include <time.h>
 
-extern int __cdecl crt_call_extra(char* buf, const char* fmt);
-extern int __cdecl crt_write_check(const char* str, int stream);
-extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
-extern char __cdecl check_memory_protection(void*);
-extern char __cdecl AnalyzeInstruction(int, int, int, int*);
-extern unsigned int __cdecl EmitCrashModuleLine(int*);
+int __cdecl crt_call_extra(char* buf, const char* fmt);
+int __cdecl crt_write_check(const char* str, int stream);
+char __cdecl check_memory_protection(void*);
+char __cdecl AnalyzeInstruction(int, int, int, int*);
+unsigned int __cdecl EmitCrashModuleLine(int*);
 extern void* g_10034614;
-extern char* __cdecl GetDebugRecordByIndex();
-extern void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
+char* __cdecl GetDebugRecordByIndex();
+void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 extern int g_severity_table[3];
 extern unsigned int g_log_mode_flags;
 extern int g_console_handle;
@@ -21,7 +20,7 @@ extern char g_log_message_buffer;
 extern int g_handler_started;
 extern int g_handler_flags;
 extern char g_msg_buf[];
-extern void __cdecl write_log(char*, int, char*);
+void __cdecl write_log(char*, int, char*);
 
 // STATUS: RELOC
 // ORIGIN: GAME

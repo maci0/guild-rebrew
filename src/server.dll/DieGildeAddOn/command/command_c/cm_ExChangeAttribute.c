@@ -5,6 +5,7 @@
 // BLOCKER_DELTA: 25
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -65,7 +66,6 @@
  *       }
  */
 
-extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 
 extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
 

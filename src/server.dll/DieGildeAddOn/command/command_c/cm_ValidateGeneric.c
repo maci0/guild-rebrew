@@ -20,7 +20,7 @@
  * }
  */
 
-extern int __cdecl amt_ValidateCommand(char*);
+int __cdecl amt_ValidateCommand(char*);
 
 // FUNCTION: SERVER 0x1000d040
 int __cdecl cm_ValidateGeneric(void* param_1, char* param_2)

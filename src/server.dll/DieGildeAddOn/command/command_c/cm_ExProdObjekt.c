@@ -16,24 +16,24 @@
  */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 extern char g_empty_string[];
 extern char* g_unknown_1de450;
 extern unsigned char g_current_season;
 
-extern int __cdecl LogMessageInternal(const char*, uint, const char*, int);
-extern short* __cdecl gm_ResolveParentEntity(short*);
-extern void* __cdecl gm_StartEntityQuery(int, int, int, uint);
-extern void __cdecl gm_RemoveObjectByType(char**, uint);
-extern void* __cdecl gm_AllocObjekt(int, uint, int);
-extern double __cdecl gm_CalculateProductionValue(uint, int);
-extern int __cdecl gm_WalkEntityChain(int);
+short* __cdecl gm_ResolveParentEntity(short*);
+double __cdecl gm_CalculateProductionValue(uint, int);
+int __cdecl gm_WalkEntityChain(int);
 
 extern char s_cm_ExecProduction___Invalid__lager_1002cf9c[];
 extern char s_cm_ExecProduction___Lager_has_wron_1002cf74[];
 extern char s_cm_ExecProduction___Lager_hat_kein_1002cf48[];
 extern char s_cm_ExProdObjekt___Cannot_produce___1002cf1c[];
 extern char s_cm_ExProdObjekt___Rohstoff_versc_1002cef4[];
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+char* __cdecl gm_AllocObjekt(int, int, int);
+int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 // FUNCTION: SERVER 0x1000e140
 int __cdecl cm_ExProdObjekt(int msg, char* result)

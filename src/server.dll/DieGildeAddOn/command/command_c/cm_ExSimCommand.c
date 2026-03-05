@@ -20,7 +20,7 @@
  * }
  */
 
-extern int __cdecl amt_SwapOfficeHolders(int*);
+int __cdecl amt_SwapOfficeHolders(int*);
 
 // FUNCTION: SERVER 0x10010080
 int __cdecl cm_ExSimCommand(void* param_1, char* param_2)

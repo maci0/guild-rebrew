@@ -27,8 +27,8 @@
  */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
 
 // FUNCTION: SERVER 0x1000f030

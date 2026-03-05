@@ -4,28 +4,46 @@
 #include <winsock2.h>
 #include "Units/m_alloc/m_alloc.h"
 #include "Units/Error/error.h"
-#include "Units/net/net.h"
-#include "DieGildeAddOn/command/command.h"
-#include "DieGildeAddOn/game/entity.h"
+
+
+/* Command layer (local externs — server.c uses different signatures) */
+int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
+int __cdecl cm_ProcessCommandQueue(void);
+int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
+
+/* Entity lifecycle (local externs) */
+void __cdecl gm_ResetAllEntities(void);
+void __cdecl gm_CleanupAllEntities(void);
+void __cdecl gm_CleanupObjectEntities(void);
+void __cdecl gm_InitEntitySlots(void);
+/* Network functions (local externs — signatures differ from net.h) */
+int __cdecl AcceptConnections(void);
+void __cdecl CleanupSockets(void);
+int __cdecl ProcessReceiveData(void);
+int __cdecl ProcessSendData(void);
+int __cdecl ReceivePacketHeader(unsigned int* param_1);
+int __cdecl SendBroadcastPacket(unsigned char* data, int size);
+void __cdecl LogWinsockError(int param_1);
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
 extern int g_stop_flag;
-extern void __cdecl InitBuildingTypeTable(void);
-extern void __cdecl RecvGameSavegame(void);
-extern int __cdecl srv_Init(void);
-extern int __cdecl AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
-extern void __cdecl sim_SetSyncParams(int base_addr, unsigned char phase, unsigned int arg3, unsigned int arg4);
-extern void __cdecl crt_getptd_set(unsigned int value);
-extern void __cdecl ShutdownMemoryAllocator(void);
+void __cdecl InitBuildingTypeTable(void);
+void __cdecl RecvGameSavegame(void);
+int __cdecl srv_Init(void);
+int __cdecl AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
+void __cdecl sim_SetSyncParams(int base_addr, unsigned char phase, unsigned int arg3, unsigned int arg4);
+void __cdecl crt_getptd_set(unsigned int value);
+void __cdecl ShutdownMemoryAllocator(void);
 extern int g_net_socket;
-extern int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */;
-extern int __cdecl SendPlayerData(unsigned int*);
-extern void __cdecl FreeCommandBuffer(unsigned int*, int);
+int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */;
+int __cdecl SendPlayerData(unsigned int*);
+void __cdecl FreeCommandBuffer(unsigned int*, int);
 extern unsigned int g_player_slots;
-extern short __cdecl get_command_type(char*);
-extern int __cdecl ahm_ProcessEntityChain(unsigned char* node);
+short __cdecl get_command_type(char*);
+int __cdecl ahm_ProcessEntityChain(unsigned char* node);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */;
 extern unsigned char g_connections[]; /* 0x101deb00 */;
 

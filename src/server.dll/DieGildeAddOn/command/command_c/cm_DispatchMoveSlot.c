@@ -20,7 +20,7 @@
  * }
  */
 
-extern int __cdecl gv_MoveSlotEntry(int);
+int __cdecl gv_MoveSlotEntry(int);
 
 // FUNCTION: SERVER 0x100102f0
 int __cdecl cm_DispatchMoveSlot(void* param_1, char* param_2)

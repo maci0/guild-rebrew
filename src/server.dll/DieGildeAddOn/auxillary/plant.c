@@ -1,6 +1,6 @@
 #include "Units/Error/error.h"
-extern int __cdecl find_zone_record(char* base, int x, int y);
-extern int __cdecl lb_SearchRecordTable(int);
+int __cdecl find_zone_record(char* base, int x, int y);
+int __cdecl lb_SearchRecordTable(int);
 extern int DAT_1003540c;
 
 // STATUS: EXACT

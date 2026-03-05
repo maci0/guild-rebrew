@@ -4,15 +4,15 @@
 
 #pragma intrinsic(memset, strcpy)
 
-extern int __cdecl gv_CheckSlotActive(int, int);
+int __cdecl gv_CheckSlotActive(int, int);
 extern char* DAT_100a8c30;
 extern int g_slot_count_cat0[]; /* 0x1002577c */;
 extern int g_slot_count_cat1[]; /* 0x1002578c */;
 extern int g_slot_count_cat2[]; /* 0x1002579c */;
 extern int g_slot_count_cat3[]; /* 0x100257ac */;
-extern int __cdecl cm_GetBuildingStatCount(unsigned char*);
-extern char* __cdecl gv_FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
-extern unsigned int gm_RandomMod(int);
+int __cdecl cm_GetBuildingStatCount(unsigned char*);
+char* __cdecl gv_FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
+unsigned int gm_RandomMod(int);
 extern unsigned int __ftol(void);
 extern int g_entity_type_table;
 extern int g_1002575c[];
@@ -20,20 +20,20 @@ extern int g_1002576c[];
 extern char g_1002d444;
 extern char g_1002d45c;
 extern char g_1002d474;
-extern int AllocGraveyardField(unsigned char*);
-extern void gv_Free3Fields(int);
-extern int __cdecl gm_ResolveEntityById(int* out_slot, int* out_person, int* out_building, int entity_id);
-extern int __cdecl gv_GetSlotEntry(int, int, unsigned char);
+int AllocGraveyardField(unsigned char*);
+void gv_Free3Fields(int);
+int __cdecl gm_ResolveEntityById(int* out_slot, int* out_person, int* out_building, int entity_id);
+int __cdecl gv_GetSlotEntry(int, int, unsigned char);
 extern void gm_SubObjektNoKill(unsigned int, unsigned int, unsigned int);
 extern void gm_AddOrAccumulateObject(unsigned int, unsigned int, unsigned int);
 extern int DAT_1003546c;
 extern short DAT_100358a0;
-extern int __cdecl SpawnGraveyardEntities(void* entity, int action_id);
+int __cdecl SpawnGraveyardEntities(void* entity, int action_id);
 extern int g_entity_table_end;
 extern char* g_action_table_base;
 extern char g_slot_table[];
-extern int __cdecl gm_RandomMod(int);
-extern double __cdecl gm_RandomFloat01(void);
+int __cdecl gm_RandomMod(int);
+double __cdecl gm_RandomFloat01(void);
 extern int DAT_10030b6c;
 extern int DAT_10035434;
 extern unsigned char DAT_10035439;

@@ -5,14 +5,12 @@
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
 extern char* g_table;
-extern int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
-extern int __cdecl gm_RandomMod(int range);
-extern float __cdecl gm_RandomFloat01(void);
-extern int __cdecl crt_ftol(void);
-extern void* __cdecl gm_StartEntityQuery(int, int, int, ...);
-extern int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
-extern void __cdecl gm_AddOrAccumulateObject(int p1, int p2, int p3);
-extern int __cdecl gm_RefreshMarketAvailability(int season);
+int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
+int __cdecl gm_RandomMod(int range);
+float __cdecl gm_RandomFloat01(void);
+int __cdecl crt_ftol(void);
+void __cdecl gm_AddOrAccumulateObject(int p1, int p2, int p3);
+int __cdecl gm_RefreshMarketAvailability(int season);
 extern float fColorScale;
 extern int DAT_10030b6c;
 extern char DAT_10035439;
@@ -21,7 +19,7 @@ extern float DAT_100256a0;
 extern char s__ahm_AllocAhmInfo_1002a0f7[];
 extern double dScaleFactor;
 extern int DAT_1002c050[];
-extern int* __cdecl ahm_LookupEntityInTable(int);
+int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
 typedef struct {
@@ -127,6 +125,8 @@ extern float g_100256ac;
 
 /* GLOBAL: SERVER 0x100256b0 */
 extern float g_100256b0;
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 {

@@ -65,9 +65,9 @@
  *     if (puVar1 == (ushort *)0x0) {
  */
 
-extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern void* __cdecl gm_StartEntityQuery(int, int, int, int, int);
 extern int g_10035880;
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // FUNCTION: SERVER 0x1000fc10
 int __cdecl cm_ExElectionOrTrade(int param_1, char* param_2)

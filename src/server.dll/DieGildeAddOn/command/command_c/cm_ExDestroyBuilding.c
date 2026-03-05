@@ -51,13 +51,13 @@
 */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern ushort* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern ushort* __cdecl gm_StartEntityQuery(int, int, int, int, int);
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
 
 extern int g_work_building_ptrs;
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // FUNCTION: SERVER 0x1000f680
 int __cdecl cm_ExDestroyBuilding(int param_1, char* param_2)

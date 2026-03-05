@@ -1,39 +1,39 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "Units/Error/error.h"
 
-extern int* __cdecl GetErrnoPointer(void);
-extern int __cdecl WriteFileBufferLocked(void*, int, int, int);
-extern void __cdecl FreeHeapBlockWithRuntimeLock(void*);
-extern int __cdecl free_game_subobject(void*);
-extern int __cdecl cleanup_subobject(void*);
-extern int __cdecl compress_block(void*, int);
-extern int __cdecl locked_fwrite(void*, int, int, void*);
-extern int __cdecl game_getbyte(int);
-extern int __cdecl flush_stream(int, int);
-extern void __cdecl write_uint32_le(int, unsigned int);
-extern int __cdecl close_stream(int);
-extern int __cdecl crt_locked_putc(int, int);
-extern void __cdecl entity_cleanup(char*);
+int* __cdecl GetErrnoPointer(void);
+int __cdecl WriteFileBufferLocked(void*, int, int, int);
+void __cdecl FreeHeapBlockWithRuntimeLock(void*);
+int __cdecl free_game_subobject(void*);
+int __cdecl cleanup_subobject(void*);
+int __cdecl compress_block(void*, int);
+int __cdecl locked_fwrite(void*, int, int, void*);
+int __cdecl game_getbyte(int);
+int __cdecl flush_stream(int, int);
+void __cdecl write_uint32_le(int, unsigned int);
+int __cdecl close_stream(int);
+int __cdecl crt_locked_putc(int, int);
+void __cdecl entity_cleanup(char*);
 extern void mem_free(void*);
-extern void __cdecl stream_close(int);
-extern int __cdecl crt_locked_call4b(int stream, unsigned int size, int count, int handle);
-extern int __cdecl crc32_update(int checksum, int buffer, unsigned int size);
-extern int __cdecl inflate(int* ctx, int flag);
-extern void __cdecl free_subobj(void*);
-extern int __cdecl inflateEnd(void* strm);
-extern int __cdecl deflate(void* strm, int flush);
-extern int __cdecl deflateEnd(void* strm);
-extern int __cdecl cleanup_object(char*);
-extern int __cdecl destroy_entity(char*);
-extern int __cdecl read_uint32_be(int);
-extern void __cdecl m_PoolFree(void* pool, void* item);
+void __cdecl stream_close(int);
+int __cdecl crt_locked_call4b(int stream, unsigned int size, int count, int handle);
+int __cdecl crc32_update(int checksum, int buffer, unsigned int size);
+int __cdecl inflate(int* ctx, int flag);
+void __cdecl free_subobj(void*);
+int __cdecl inflateEnd(void* strm);
+int __cdecl deflate(void* strm, int flush);
+int __cdecl deflateEnd(void* strm);
+int __cdecl cleanup_object(char*);
+int __cdecl destroy_entity(char*);
+int __cdecl read_uint32_be(int);
+void __cdecl m_PoolFree(void* pool, void* item);
 extern unsigned int gzread(unsigned int*, unsigned int*, int, int, int, int, int, int, unsigned int);
-extern int ReadVfsCompressed(unsigned int*, unsigned int*, int);
-extern void LogMessageInternal(const char*, int, int*, int);
-extern char* __cdecl m_PoolAlloc(char*, int, int); /* 0x10006d20 */;
-extern int __cdecl inflateInit2_(char*, int, char*, int); /* 0x100057c0 */;
-extern int __cdecl deflateInit2_(char*, int, int, int, int, int, char*, int); /* 0x10001330 */;
+int ReadVfsCompressed(unsigned int*, unsigned int*, int);
+char* __cdecl m_PoolAlloc(char*, int, int); /* 0x10006d20 */;
+int __cdecl inflateInit2_(char*, int, char*, int); /* 0x100057c0 */;
+int __cdecl deflateInit2_(char*, int, int, int, int, int, char*, int); /* 0x10001330 */;
 
 ;
 ;

@@ -30,10 +30,10 @@
  */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern ushort* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74[];
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // FUNCTION: SERVER 0x1000cfe0
 int __cdecl cm_ChkSetGebBesitzer(char* obj)

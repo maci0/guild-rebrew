@@ -5,6 +5,7 @@
 // BLOCKER_DELTA: 155
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -66,7 +67,6 @@
  *       line = 0x30bd;
  */
 
-extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 
 extern char s_cm_ExMoveObjekt___Invalid__quell_1002d024[];
 extern char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[];

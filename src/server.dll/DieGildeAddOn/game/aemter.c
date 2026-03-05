@@ -22,13 +22,13 @@ extern int DAT_101de5a4;
 extern char DAT_101de5a8;
 extern int DAT_101de5ac;
 extern char DAT_101de5b0;
-extern void* __cdecl gm_LookupEntityRecordById(int);
+void* __cdecl gm_LookupEntityRecordById(int);
 extern int DAT_101de5b4[];
 extern ENT g_ents[];
 extern ENT g_ents2[];
 extern unsigned short DAT_10035884;
-extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
-extern void __cdecl InitBuildingTypeTable(void);
+int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
+void __cdecl InitBuildingTypeTable(void);
 
 // STATUS: MATCHING
 // BLOCKER: comparison direction swap, jump condition swap, zero-extend pattern (xor vs mov)

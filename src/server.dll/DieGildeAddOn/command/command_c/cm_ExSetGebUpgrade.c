@@ -51,20 +51,20 @@
  */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 extern int g_entity_type_table;
 extern uchar g_current_season;
 
-extern ushort* __cdecl gm_StartFilteredEntitySearch(int, ...);
-extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
-extern void __cdecl ReportMessage(const char*);
-extern void __cdecl gm_SetBuildingWorkerLimits(uchar*);
-extern void __cdecl gm_AllocBuildingDefaults(uchar*);
-extern void __cdecl UpgradeGraveyardField(uchar*);
-extern void __cdecl gm_RefreshMarketAvailability(uint);
+void __cdecl ReportMessage(const char*);
+void __cdecl gm_SetBuildingWorkerLimits(uchar*);
+void __cdecl gm_AllocBuildingDefaults(uchar*);
+void __cdecl UpgradeGraveyardField(uchar*);
+void __cdecl gm_RefreshMarketAvailability(uint);
 
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 extern char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[];
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // FUNCTION: SERVER 0x1000f590
 int __cdecl cm_ExSetGebUpgrade(int param_1, char* param_2)

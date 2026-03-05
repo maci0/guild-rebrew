@@ -39,7 +39,7 @@
 
 #include "../command_internal.h"
 
-extern void __cdecl amt_UpdateEntityLinks(int, int);
+void __cdecl amt_UpdateEntityLinks(int, int);
 
 // FUNCTION: SERVER 0x10010010
 int __cdecl cm_ExModifyStamina(int param_1)

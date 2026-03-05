@@ -35,8 +35,8 @@
  */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ExKillTransporter____invalid_t_1002d3d4[];
 
 // FUNCTION: SERVER 0x1000fad0

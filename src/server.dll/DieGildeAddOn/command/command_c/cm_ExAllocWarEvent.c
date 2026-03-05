@@ -80,9 +80,9 @@ typedef struct player_slot {
 
 extern player_slot g_player_slot_0[];
 
-extern void* __cdecl gm_SearchTable67(int);
-extern ushort* __cdecl gm_StartEntityQuery(int, int, int, int);
-extern ushort* __cdecl gm_AllocObjekt(int, int, int);
+void* __cdecl gm_SearchTable67(int);
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+char* __cdecl gm_AllocObjekt(int, int, int);
 
 // FUNCTION: SERVER 0x10010140
 int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)

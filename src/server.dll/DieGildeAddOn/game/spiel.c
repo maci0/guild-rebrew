@@ -25,17 +25,17 @@ typedef struct {
 
 extern char* g_entity_table; /* 0x101de450 */
 ;
-extern int __cdecl crt_call_extra(char* filename, char* mode);
-extern int __cdecl crt_locked_call4b(void* dest, int elemSize, int count, int stream);
-extern void __cdecl gm_InitObjektHersteller(void);
-extern void __cdecl gm_InitEntitySlots(void);
-extern int __cdecl crt_getid_set(void);
+int __cdecl crt_call_extra(char* filename, char* mode);
+int __cdecl crt_locked_call4b(void* dest, int elemSize, int count, int stream);
+void __cdecl gm_InitObjektHersteller(void);
+void __cdecl gm_InitEntitySlots(void);
+int __cdecl crt_getid_set(void);
 extern char* g_entity_ptr;
-extern void __cdecl entity_cleanup(char*);
+void __cdecl entity_cleanup(char*);
 extern short* DAT_100a8c34;
 extern int DAT_10035450;
 extern Record* g_records;
-extern void __cdecl free_block(int);
+void __cdecl free_block(int);
 extern int g_data_ptr;
 extern int g_data_ptr2;
 extern int g_data_ptr3;
@@ -46,11 +46,8 @@ extern int DAT_100a8c30;
 extern unsigned char DAT_10035439;
 extern int DAT_1003543c;
 extern char* DAT_101de450;
-extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
-extern void* __cdecl FindNextFilteredEntity(void);
-extern void* __cdecl gm_NextEntityQueryMatch(void);
-extern char* __cdecl gm_AllocObjekt(int, int, int);
+void* __cdecl FindNextFilteredEntity(void);
+void* __cdecl gm_NextEntityQueryMatch(void);
 extern WORD* DAT_10035468;
 extern char DAT_10035454;
 extern char DAT_1003545d;
@@ -66,12 +63,12 @@ extern int* DAT_101398a0;
 extern int* DAT_1013989c;
 extern char* g_array_base;
 extern char g_entity_array[];
-extern void __cdecl free_node(char*);
-extern int __cdecl gm_FreeObjectListRecursive(char**);
-extern void __cdecl gm_NoopRet2(void*);
-extern char* __cdecl gm_AllocateObjectSlot(void);
-extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-extern short* __cdecl gm_ResolveParentEntity(short*);
+void __cdecl free_node(char*);
+int __cdecl gm_FreeObjectListRecursive(char**);
+void __cdecl gm_NoopRet2(void*);
+char* __cdecl gm_AllocateObjectSlot(void);
+int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+short* __cdecl gm_ResolveParentEntity(short*);
 extern int g_item_def_table;
 extern int g_next_object_id;
 extern int g_object_count;
@@ -79,7 +76,6 @@ extern int g_current_year;
 extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[];
 extern char s_gm_AddObjekt____obj____ob_NULL_10031390[];
 extern char s_gm_AddObjekt____Parent_not_found_10031358[];
-extern int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
 extern unsigned char* g_EntityListStart;
 extern unsigned char* g_EntitySearchPtr;
 extern int g_SearchCount;
@@ -92,50 +88,50 @@ extern unsigned short g_FilterVal25;
 extern unsigned short g_FilterVal27;
 extern unsigned char g_FilterVal30;
 extern char* g_array;
-extern void __cdecl gv_Free3Fields(void* param);
+void __cdecl gv_Free3Fields(void* param);
 extern int DAT_10035a0c;
 extern unsigned char DAT_10030861;
-extern char* __cdecl gm_SearchStruct(void);
-extern int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
-extern unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
-extern int __cdecl gm_CheckEntityType(char* geb);
-extern int __cdecl AllocGraveyardField(char* geb);
-extern void __cdecl SpawnGraveyardEntities(char* geb, int param);
-extern void __cdecl gm_SetBuildingWorkerLimits(char* geb);
-extern int __cdecl gm_GetBuildingTypeCategory(int);
-extern void __cdecl gm_AllocBuildingDefaults(char* geb);
+char* __cdecl gm_SearchStruct(void);
+int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
+unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
+int __cdecl gm_CheckEntityType(char* geb);
+int __cdecl AllocGraveyardField(char* geb);
+void __cdecl SpawnGraveyardEntities(char* geb, int param);
+void __cdecl gm_SetBuildingWorkerLimits(char* geb);
+int __cdecl gm_GetBuildingTypeCategory(int);
+void __cdecl gm_AllocBuildingDefaults(char* geb);
 extern char* g_table_a9;
 extern char* dword_100a8c30;
 extern unsigned short* dword_100a8c34;
 extern char* dword_101de450;
-extern char* __cdecl gm_GetMsgField(int);
+char* __cdecl gm_GetMsgField(int);
 extern int g_entity_type_table;
 extern char g_current_season;
 extern char g_10031004[];
 extern char g_10031484[];
 extern char g_100314b8[];
-extern int __cdecl gm_EntityAccumulate(void*);
-extern int __cdecl gm_RemoveLinkedNodeById(int*, int);
-extern void __cdecl amt_ClearEntityLinks(short*);
-extern void __cdecl gm_InitEntityIfValid(void* param_1);
-extern void __cdecl gm_DeallocEntity(int idx, int param);
+int __cdecl gm_EntityAccumulate(void*);
+int __cdecl gm_RemoveLinkedNodeById(int*, int);
+void __cdecl amt_ClearEntityLinks(short*);
+void __cdecl gm_InitEntityIfValid(void* param_1);
+void __cdecl gm_DeallocEntity(int idx, int param);
 extern int DAT_10035434;
 extern int DAT_1003542c;
 extern int DAT_10035430;
 extern char g_entity_base[];
 extern char g_entity_end[];
-extern int __cdecl gm_GetBuildingTypeCategory(int param_1);
-extern int __cdecl gm_MapEntityStatRange(int);
-extern short* __cdecl gm_GetEntityTableEntry(char*);
+int __cdecl gm_GetBuildingTypeCategory(int param_1);
+int __cdecl gm_MapEntityStatRange(int);
+short* __cdecl gm_GetEntityTableEntry(char*);
 extern float DAT_100257bc;
-extern int __cdecl gm_RandomMod(unsigned short range);
+int __cdecl gm_RandomMod(unsigned short range);
 extern char entity_table[];
-extern int __cdecl gm_LookupEntityRecordById(int);
-extern void __cdecl gm_AssignBuildingOwner(char*, unsigned short, unsigned short);
-extern int __cdecl gm_WalkEntityChain(int);
-extern int __cdecl gm_CheckStatLevel(int, int);
-extern int __cdecl gm_GetOppositeStatIndex(int);
-extern void* __cdecl gm_AddOrAccumulateObject(int, int, int);
+int __cdecl gm_LookupEntityRecordById(int);
+void __cdecl gm_AssignBuildingOwner(char*, unsigned short, unsigned short);
+int __cdecl gm_WalkEntityChain(int);
+int __cdecl gm_CheckStatLevel(int, int);
+int __cdecl gm_GetOppositeStatIndex(int);
+void* __cdecl gm_AddOrAccumulateObject(int, int, int);
 extern int g_citizen_count;
 extern char entity_slot_table[];
 extern float DAT_10025fb8; /* 0x10025fb8 */
@@ -156,21 +152,21 @@ extern float DAT_100257c8; /* 0x100257c8 */
 ;
 extern double DAT_100257d0; /* 0x100257d0 */
 ;
-extern double __cdecl gm_CalculateProductionValue(unsigned short, unsigned char);
-extern int __cdecl __ftol(void);
+double __cdecl gm_CalculateProductionValue(unsigned short, unsigned char);
+int __cdecl __ftol(void);
 extern char g_type_idx;
 extern int g_key_table[];
 extern char entity_array[];
-extern int __cdecl gm_SumBuildingProductionValues(char*, int);
-extern int __cdecl gm_EntityQuerySum(int);
-extern int __cdecl compute_size(char*); /* 0x10019d00 */
+int __cdecl gm_SumBuildingProductionValues(char*, int);
+int __cdecl gm_EntityQuerySum(int);
+int __cdecl compute_size(char*); /* 0x10019d00 */
 ;
-extern int __cdecl gm_FindEntityByOwner(char*, char*); /* 0x10019cd0 */
+int __cdecl gm_FindEntityByOwner(char*, char*); /* 0x10019cd0 */
 ;
-extern int __cdecl ahm_LookupEntityInTable(int); /* 0x1000c670 */
+int __cdecl ahm_LookupEntityInTable(int); /* 0x1000c670 */
 ;
 extern float _DAT_10025fbc;
-extern double __cdecl gm_RandomFloat01(void);
+double __cdecl gm_RandomFloat01(void);
 extern float _DAT_100256a0;
 extern float _DAT_100256a8;
 
@@ -4118,6 +4114,10 @@ int __cdecl gm_WalkEntityChain(int raw_idx)
 
 /* GLOBAL: SERVER 0x100358a2 */
 extern unsigned char g_entity_state_base[];
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
+char* __cdecl gm_AllocObjekt(int, int, int);
+int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 /* GLOBAL: SERVER 0x100358a0 */
 

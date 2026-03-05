@@ -41,7 +41,7 @@
 
 #include "../command_internal.h"
 
-extern void __cdecl gm_AddOrAccumulateObject(int, unsigned int, int);
+void __cdecl gm_AddOrAccumulateObject(int, unsigned int, int);
 extern char g_currency_type_array[];
 
 // FUNCTION: SERVER 0x1000d8a0

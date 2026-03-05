@@ -4,10 +4,9 @@
 // SIZE: 517
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern int __cdecl gm_StartEntityQuery(int, int, int, uint);
-extern char* __cdecl gm_ResolveParentEntity(char*);
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
+char* __cdecl gm_ResolveParentEntity(char*);
 
 extern char s_cm_ChkSellObjekt___Invalid__quel_1002c8dc[];
 extern char s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4[];
@@ -16,6 +15,7 @@ extern char s_cm_ChkSellObjekt___Invalid__ziel_1002c854[];
 extern char s_cm_ChkSellObjekt___Inventory_vol_1002c810[];
 extern char s_cm_ChkSellObjekt___Lager_voll_1002c834[];
 extern char s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8[];
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
 // FUNCTION: SERVER 0x1000cbd0
 int __cdecl cm_ChkSellObjekt(char* cmd)

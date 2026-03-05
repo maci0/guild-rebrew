@@ -2,12 +2,12 @@
  */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 extern char g_player_slot_0[];
 
-extern ushort __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
-extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
-extern char* __cdecl strncpy(char*, const char*, unsigned int);
+ushort __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
+char* __cdecl strncpy(char*, const char*, unsigned int);
 
 extern char s_ClientSpieler_erzeugt_1002cbbc[];
 extern char s_gm_AllocSpieler___failed_1002cbd4[];

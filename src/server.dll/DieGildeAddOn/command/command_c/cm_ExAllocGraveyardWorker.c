@@ -27,7 +27,7 @@
 
 #include "../command_internal.h"
 
-extern uint __cdecl gv_ExAllocGraveyardWorker(void*);
+uint __cdecl gv_ExAllocGraveyardWorker(void*);
 
 // FUNCTION: SERVER 0x10010310
 int __cdecl cm_ExAllocGraveyardWorker(int param_1, char* param_2)

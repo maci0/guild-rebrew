@@ -1,13 +1,13 @@
 #include "Units/Error/error.h"
 extern unsigned short gm_RandomMod(unsigned int);
-extern unsigned int __cdecl gm_CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
-extern void __cdecl table_lookup(unsigned int a, unsigned short* b);
+unsigned int __cdecl gm_CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
+void __cdecl table_lookup(unsigned int a, unsigned short* b);
 extern int DAT_100a8c30;
-extern void __cdecl gm_StartEntityQuery(int, int, int, ...);
-extern unsigned int __cdecl FindAndMatchParents(int param);
+unsigned int __cdecl FindAndMatchParents(int param);
 extern unsigned char DAT_10035a04;
 extern unsigned char DAT_10035a05;
 extern unsigned char DAT_100358a0;
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
 // STATUS: MATCHING
 // BLOCKER: instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)

@@ -20,7 +20,7 @@
  * }
  */
 
-extern unsigned int __cdecl ValidateAndAssignOffice(unsigned int*);
+unsigned int __cdecl ValidateAndAssignOffice(unsigned int*);
 
 // FUNCTION: SERVER 0x1000f940
 int __cdecl cm_ExAssignOffice(void* obj)

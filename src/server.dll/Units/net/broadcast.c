@@ -7,8 +7,8 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <winsock.h>
+#include "Units/Error/error.h"
 
-extern void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
 
 void __cdecl SendBroadcastPacket(int port, char* buf)
 {

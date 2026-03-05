@@ -5,13 +5,13 @@
 // BLOCKER_DELTA: 180
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern ushort* __cdecl gm_StartEntityQuery(int, int, int, uint);
-extern void __cdecl gm_RemoveObjectByType(char**, uint);
-extern void __cdecl LogMessageInternal(char*, uint, char*, int);
 
 extern char s_cm_ExClearLagerslot___Invalid__L_1002d088[];
 extern char s_cm_ExClearLagerslot___Lager_has_n_1002d054[];
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 /*
  * Ghidra decompilation reference:

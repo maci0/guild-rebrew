@@ -49,10 +49,10 @@
 
 #include "../command_internal.h"
 
-extern ushort* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern ushort* __cdecl gm_StartEntityQuery(int, int, int, int, int);
 
 extern int g_something_1;
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 #ifdef __clang__
 #pragma clang diagnostic push

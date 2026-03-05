@@ -43,8 +43,8 @@
  */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
 
 extern char s_cm_ChkCutsceneReady____failed____1002caa8[];
 

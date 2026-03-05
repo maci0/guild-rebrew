@@ -47,12 +47,12 @@
 */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern char* __cdecl gm_AllocObjekt(int, unsigned int, int);
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
 
 extern char g_player_slot_0[];
 extern char s_cm_ExAllocThemaPredigt____Execut_1002d184[];
+char* __cdecl gm_AllocObjekt(int, int, int);
 
 // FUNCTION: SERVER 0x1000f2f0
 int __cdecl cm_ExAllocThemaPredigt(int param_1, char* param_2)

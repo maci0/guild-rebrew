@@ -20,7 +20,7 @@
  * }
  */
 
-extern int __cdecl ExecuteOfficeAssignment(char*);
+int __cdecl ExecuteOfficeAssignment(char*);
 
 // FUNCTION: SERVER 0x1000f960
 int __cdecl cm_ExExecuteOffice(void* param_1, char* param_2)

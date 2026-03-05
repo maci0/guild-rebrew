@@ -33,9 +33,9 @@
  */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
-extern int __cdecl printf(const char*, ...);
+int __cdecl printf(const char*, ...);
 extern char s_Invalid_Commandtype_in_Execution_1002cacc[];
 
 // FUNCTION: SERVER 0x1000d2e0

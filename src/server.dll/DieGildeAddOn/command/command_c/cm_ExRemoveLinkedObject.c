@@ -6,8 +6,8 @@
 
 #include "../command_internal.h"
 
-extern ushort* __cdecl gm_StartEntityQuery(int, int, int, int, int);
-extern int __cdecl gm_RemoveLinkedNodeById(int*, int);
+int __cdecl gm_RemoveLinkedNodeById(int*, int);
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
 // FUNCTION: SERVER 0x1000f0d0
 int __cdecl cm_ExRemoveLinkedObject(int param_1, char *param_2)

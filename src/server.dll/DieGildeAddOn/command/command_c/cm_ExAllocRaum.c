@@ -8,6 +8,7 @@
 #endif
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 typedef struct player_slot {
 	char gap_0000[0x2641fc];
@@ -20,8 +21,7 @@ typedef struct copy_12_dwords {
 } copy_12_dwords;
 
 extern player_slot g_player_slot_0[];
-extern char* __cdecl gm_AllocGebaeude(uchar, uint);
-extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
+char* __cdecl gm_AllocGebaeude(uchar, uint);
 
 extern char s_gm_AllocGebaeude___failed_1002cb34[];
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_B_1002caf0[];

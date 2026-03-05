@@ -26,7 +26,7 @@
 typedef unsigned long DWORD;
 
 extern int g_entity_id_start;
-extern __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
+__declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 
 // FUNCTION: SERVER 0x1000f0a0
 int __cdecl cm_AssignEntityId(int param_1, char* param_2)

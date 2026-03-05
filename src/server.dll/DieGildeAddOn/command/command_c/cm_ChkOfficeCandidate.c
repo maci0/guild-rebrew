@@ -20,7 +20,7 @@
  * }
  */
 
-extern int __cdecl amt_ValidateOfficeCandidate(int*);
+int __cdecl amt_ValidateOfficeCandidate(int*);
 
 // FUNCTION: SERVER 0x1000d020
 int __cdecl cm_ChkOfficeCandidate(void* obj)

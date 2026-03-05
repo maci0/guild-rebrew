@@ -47,6 +47,7 @@
  */
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 typedef struct player_slot {
 	char gap_0000[0x2641fc];
@@ -54,8 +55,7 @@ typedef struct player_slot {
 	char gap_264200[0x64];
 } player_slot;
 
-extern char* __cdecl gm_AllocGebaeude(unsigned char, unsigned short);
-extern void __cdecl LogMessageInternal(char*, int, char*, int);
+char* __cdecl gm_AllocGebaeude(unsigned char, unsigned short);
 extern player_slot g_player_slot_0[];
 
 extern char s_cm_ExCreateGeb____Could_not_find_1002d41c[];

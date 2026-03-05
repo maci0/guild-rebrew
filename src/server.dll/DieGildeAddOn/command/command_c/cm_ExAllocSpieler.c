@@ -4,6 +4,7 @@
 // BLOCKER_DELTA: 209
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 #ifdef __clang__
 #pragma clang diagnostic ignored "-Wint-to-pointer-cast"
@@ -64,12 +65,11 @@
  */
 
 extern char g_player_slot_0[];
-extern void* __cdecl gm_StartFilteredEntitySearch(int, ...);
-extern uint __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
-extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
+uint __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[];
 extern char s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c[];
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // FUNCTION: SERVER 0x1000d460
 int __cdecl cm_ExAllocSpieler(int param_1, char* param_2)

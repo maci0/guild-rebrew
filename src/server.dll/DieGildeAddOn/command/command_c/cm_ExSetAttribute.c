@@ -11,8 +11,8 @@
 #endif
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
-extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 
 extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
 

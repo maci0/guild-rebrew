@@ -5,6 +5,7 @@
 // BLOCKER_DELTA: 1962
 
 #include "../command_internal.h"
+#include "Units/Error/error.h"
 
 extern char g_currency_type_array[];
 extern char* g_unknown_1de450;
@@ -21,16 +22,12 @@ extern char g_error_msg_sell_no_source[];
 extern char g_error_msg_sell_no_dest[];
 extern char g_error_msg_sell_failed[];
 
-extern short* __cdecl gm_ResolveParentEntity(short*);
-extern void* __cdecl gm_StartEntityQuery(int, int, int, uint);
-extern int __cdecl compute_size(char*, int);
-extern int __cdecl gm_RemoveObjectWrapper(int, uint);
-extern int __cdecl gm_RemoveObjectByType(char**, uint);
-extern void* __cdecl gm_AddOrAccumulateObject(int, uint, int);
-extern void* __cdecl gm_AllocBuildingContents(char*, uint);
-extern void* __cdecl gm_AllocObjekt(int, uint, int);
-extern int __cdecl LogMessageInternal(const char*, uint, const char*, int);
-extern int __cdecl sprintf(char*, const char*, ...);
+short* __cdecl gm_ResolveParentEntity(short*);
+int __cdecl compute_size(char*, int);
+int __cdecl gm_RemoveObjectWrapper(int, uint);
+void* __cdecl gm_AddOrAccumulateObject(int, uint, int);
+void* __cdecl gm_AllocBuildingContents(char*, uint);
+int __cdecl sprintf(char*, const char*, ...);
 
 extern char s_cm_ExSellObjekt___Invalid__quell_1002cec4[];
 extern char s_cm_ExSellObjekt___Invalid__gm_ev_1002ce90[];
@@ -41,6 +38,9 @@ extern char s_cm_ExSellObjekt___Lager_voll_1002cdac[];
 extern char s_cm_ExSellObjekt___Not_enough_Cre_1002cd78[];
 extern char s_cm_ExSellObjekt____gm_AllocRaum_f_1002ccc0[];
 extern char s_cm_ExSellObjekt____gm_AllocObjek_1002cce8[];
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+char* __cdecl gm_AllocObjekt(int, int, int);
+int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 // FUNCTION: SERVER 0x1000d930
 uint cm_ExSellObjekt(char* param_1, uchar* param_2)
