@@ -14,6 +14,13 @@
 #include "../command_internal.h"
 
 extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
+/* Command handler: applies attribute updates to a game entity.
+ * Resolves the target entity by ID from the command packet (offset 0x10),
+ * then iterates over a list of field descriptors starting at offset 0x15.
+ * Each descriptor contains: fieldSize (1/2/4 bytes), count, and a 16-bit
+ * offset into the entity struct. Copies 'count' elements of the given size
+ * from the command buffer into the entity at the specified offset.
+ * Sets *param_2 = 1 on success (if non-null). Returns 1 on invalid entity ID. */
 
 // FUNCTION: SERVER 0x1000e8d0
 int __cdecl cm_ExSetAttribute(int param_1, char* param_2)
