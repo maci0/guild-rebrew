@@ -457,7 +457,7 @@ int __cdecl Open(int param_1)
 		return -3;
 	}
 	crt_locked_call4b((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
-	fflush((FILE*) file_handle);
+	fflush(file_handle);
 	g_item_def_table = (int) AllocateTrackedHeapBlock(0xb9dc, (const char*) 0x10031140);
 	if (g_item_def_table == 0) {
 		return -4;
@@ -479,7 +479,7 @@ int __cdecl Open(int param_1)
 		return -6;
 	}
 	crt_locked_call4b((void*) g_item_def_table, 0x41, 0x2dc, file_handle);
-	fflush((FILE*) file_handle);
+	fflush(file_handle);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x536, "Open(): gm_InitObjektHersteller", 1);
 	gm_InitObjektHersteller();
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x53a, "Open(): gm_KillAllSpieler", 1);
@@ -4225,8 +4225,8 @@ int __cdecl WalkEntityChain(int raw_idx)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 48
-// SYMBOL: _FindEntityByOwner
-// FUNCTION: SERVER 0x10019C60
+// SYMBOL: _get_msg_field
+// FUNCTION: SERVER 0x10019c60
 // FindEntityByOwner
 
 /* GLOBAL: SERVER 0x100358a2 */
@@ -4234,7 +4234,7 @@ extern unsigned char g_entity_state_base[];
 
 /* GLOBAL: SERVER 0x100358a0 */
 
-char* __cdecl FindEntityByOwner(int param_1)
+char* __cdecl get_msg_field(int param_1)
 {
 	unsigned char* p;
 	int i;
@@ -4261,11 +4261,11 @@ char* __cdecl FindEntityByOwner(int param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 98
-// SYMBOL: _get_msg_field
+// SYMBOL: _FindEntityByOwner
 // FUNCTION: SERVER 0x10019CD0
 // get_msg_field
-// PROTOTYPE: int __cdecl get_msg_field(char* msg, char* pkt)
-int __cdecl get_msg_field(char* msg, char* pkt)
+// PROTOTYPE: char * __cdecl FindEntityByOwner(int param_1)
+int __cdecl FindEntityByOwner(char* msg, char* pkt)
 {
 	unsigned short type;
 

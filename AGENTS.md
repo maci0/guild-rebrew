@@ -92,8 +92,6 @@ One function per file. Annotation header, then externs, then the function:
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 160
-// CFLAGS: /O2 /Gd
-// SYMBOL: _alloc_game_object
 
 typedef unsigned int uint32_t;    /* local typedefs as needed */
 
@@ -107,6 +105,10 @@ int __cdecl alloc_game_object(int param_1)
     return 0;
 }
 ```
+
+The function name and symbol are derived automatically from the C function
+definition (e.g. `alloc_game_object` → symbol `_alloc_game_object`).
+`CFLAGS` is optional — falls back to the target default from `rebrew-project.toml`.
 
 ### Types and Imports
 
@@ -135,7 +137,11 @@ void __declspec(naked) __cdecl local_unwind2(void)
 
 **Markers**: `FUNCTION` (game code), `LIBRARY` (CRT/zlib), `STUB` (incomplete)
 
-**Required fields**: `STATUS`, `ORIGIN`, `SIZE`, `CFLAGS`, `SYMBOL` (leading `_` for `__cdecl`)
+**Required fields**: `STATUS`, `ORIGIN`, `SIZE`
+
+**Derived automatically**: Symbol (from C function def, e.g. `_alloc_game_object`), Prototype
+
+**Optional fields**: `CFLAGS` (falls back to origin preset), `BLOCKER`, `NOTE`, `SOURCE`
 
 **STATUS values**:
 

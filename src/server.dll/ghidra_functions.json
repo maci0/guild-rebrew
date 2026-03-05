@@ -1,0 +1,1097 @@
+[
+  {
+    "va": 268439552,
+    "size": 302,
+    "ghidra_name": "adler32"
+  },
+  {
+    "va": 268439856,
+    "size": 179,
+    "ghidra_name": "SendBroadcastPacket"
+  },
+  {
+    "va": 268440048,
+    "size": 309,
+    "ghidra_name": "crc32_update"
+  },
+  {
+    "va": 268440368,
+    "size": 505,
+    "ghidra_name": "deflateInit2_"
+  },
+  {
+    "va": 268440880,
+    "size": 115,
+    "ghidra_name": "deflateReset"
+  },
+  {
+    "va": 268441008,
+    "size": 685,
+    "ghidra_name": "deflate"
+  },
+  {
+    "va": 268441696,
+    "size": 47,
+    "ghidra_name": "putShortMSB"
+  },
+  {
+    "va": 268441744,
+    "size": 114,
+    "ghidra_name": "flush_pending"
+  },
+  {
+    "va": 268441872,
+    "size": 170,
+    "ghidra_name": "deflateEnd"
+  },
+  {
+    "va": 268442048,
+    "size": 147,
+    "ghidra_name": "lm_init"
+  },
+  {
+    "va": 268442208,
+    "size": 343,
+    "ghidra_name": "deflate_stored"
+  },
+  {
+    "va": 268442560,
+    "size": 290,
+    "ghidra_name": "fill_window"
+  },
+  {
+    "va": 268442864,
+    "size": 113,
+    "ghidra_name": "read_buf"
+  },
+  {
+    "va": 268442992,
+    "size": 813,
+    "ghidra_name": "deflate_fast"
+  },
+  {
+    "va": 268443808,
+    "size": 367,
+    "ghidra_name": "longest_match"
+  },
+  {
+    "va": 268444176,
+    "size": 1066,
+    "ghidra_name": "deflate_slow"
+  },
+  {
+    "va": 268445248,
+    "size": 290,
+    "ghidra_name": "DispatchLogOutput"
+  },
+  {
+    "va": 268445552,
+    "size": 1836,
+    "ghidra_name": "CrashDumpUnhandledExceptionFilter"
+  },
+  {
+    "va": 268447680,
+    "size": 376,
+    "ghidra_name": "EmitCrashModuleLine"
+  },
+  {
+    "va": 268448064,
+    "size": 33,
+    "ghidra_name": "GetDebugRecordByIndex"
+  },
+  {
+    "va": 268448112,
+    "size": 95,
+    "ghidra_name": "check_memory_protection"
+  },
+  {
+    "va": 268448352,
+    "size": 183,
+    "ghidra_name": "AnalyzeInstruction"
+  },
+  {
+    "va": 268448544,
+    "size": 404,
+    "ghidra_name": "InitializeLogAndErrorHandler"
+  },
+  {
+    "va": 268448960,
+    "size": 83,
+    "ghidra_name": "ShutdownLogAndErrorHandler"
+  },
+  {
+    "va": 268449056,
+    "size": 160,
+    "ghidra_name": "ReportFatalError"
+  },
+  {
+    "va": 268449216,
+    "size": 119,
+    "ghidra_name": "ReportMessage"
+  },
+  {
+    "va": 268449344,
+    "size": 132,
+    "ghidra_name": "LogMessageInternal"
+  },
+  {
+    "va": 268449488,
+    "size": 332,
+    "ghidra_name": "check_header"
+  },
+  {
+    "va": 268449824,
+    "size": 114,
+    "ghidra_name": "game_getbyte"
+  },
+  {
+    "va": 268449952,
+    "size": 177,
+    "ghidra_name": "close_stream"
+  },
+  {
+    "va": 268450144,
+    "size": 559,
+    "ghidra_name": "gzread"
+  },
+  {
+    "va": 268450704,
+    "size": 182,
+    "ghidra_name": "flush_stream"
+  },
+  {
+    "va": 268450896,
+    "size": 65,
+    "ghidra_name": "flush_and_close_stream"
+  },
+  {
+    "va": 268450976,
+    "size": 77,
+    "ghidra_name": "read_uint32_be"
+  },
+  {
+    "va": 268451056,
+    "size": 43,
+    "ghidra_name": "write_uint32_le"
+  },
+  {
+    "va": 268451104,
+    "size": 123,
+    "ghidra_name": "inflate_blocks_reset"
+  },
+  {
+    "va": 268451232,
+    "size": 160,
+    "ghidra_name": "alloc_game_object"
+  },
+  {
+    "va": 268451392,
+    "size": 3263,
+    "ghidra_name": "inflate_blocks"
+  },
+  {
+    "va": 268454720,
+    "size": 57,
+    "ghidra_name": "inflate_blocks_free"
+  },
+  {
+    "va": 268454784,
+    "size": 57,
+    "ghidra_name": "alloc_and_init"
+  },
+  {
+    "va": 268454848,
+    "size": 1919,
+    "ghidra_name": "InflateFast"
+  },
+  {
+    "va": 268456816,
+    "size": 20,
+    "ghidra_name": "dispatch_call"
+  },
+  {
+    "va": 268456848,
+    "size": 911,
+    "ghidra_name": "inflate_codes"
+  },
+  {
+    "va": 268457760,
+    "size": 66,
+    "ghidra_name": "inflateReset"
+  },
+  {
+    "va": 268457840,
+    "size": 72,
+    "ghidra_name": "inflateEnd"
+  },
+  {
+    "va": 268457920,
+    "size": 270,
+    "ghidra_name": "inflateInit2_"
+  },
+  {
+    "va": 268458192,
+    "size": 1015,
+    "ghidra_name": "InflateStateMachine"
+  },
+  {
+    "va": 268459264,
+    "size": 163,
+    "ghidra_name": "inflate_trees_bits"
+  },
+  {
+    "va": 268459440,
+    "size": 1225,
+    "ghidra_name": "huft_build"
+  },
+  {
+    "va": 268460672,
+    "size": 393,
+    "ghidra_name": "inflate_trees_dynamic"
+  },
+  {
+    "va": 268461072,
+    "size": 46,
+    "ghidra_name": "inflate_trees_fixed"
+  },
+  {
+    "va": 268461120,
+    "size": 306,
+    "ghidra_name": "inflate_flush"
+  },
+  {
+    "va": 268461440,
+    "size": 658,
+    "ghidra_name": "AllocateTrackedHeapBlock"
+  },
+  {
+    "va": 268462112,
+    "size": 188,
+    "ghidra_name": "FreeTrackedHeapBlock"
+  },
+  {
+    "va": 268462304,
+    "size": 162,
+    "ghidra_name": "InitPacketPool"
+  },
+  {
+    "va": 268462480,
+    "size": 612,
+    "ghidra_name": "ReportMemoryGroupInfo"
+  },
+  {
+    "va": 268463104,
+    "size": 283,
+    "ghidra_name": "ShutdownMemoryAllocator"
+  },
+  {
+    "va": 268463392,
+    "size": 270,
+    "ghidra_name": "pool_alloc"
+  },
+  {
+    "va": 268463664,
+    "size": 137,
+    "ghidra_name": "pool_free"
+  },
+  {
+    "va": 268463808,
+    "size": 108,
+    "ghidra_name": "_tr_init"
+  },
+  {
+    "va": 268463920,
+    "size": 1,
+    "ghidra_name": "tr_static_init"
+  },
+  {
+    "va": 268463936,
+    "size": 102,
+    "ghidra_name": "init_block"
+  },
+  {
+    "va": 268464048,
+    "size": 157,
+    "ghidra_name": "_tr_stored_block"
+  },
+  {
+    "va": 268464208,
+    "size": 597,
+    "ghidra_name": "_tr_align"
+  },
+  {
+    "va": 268464816,
+    "size": 494,
+    "ghidra_name": "_tr_flush_block"
+  },
+  {
+    "va": 268465312,
+    "size": 563,
+    "ghidra_name": "build_tree"
+  },
+  {
+    "va": 268465888,
+    "size": 209,
+    "ghidra_name": "pqdownheap"
+  },
+  {
+    "va": 268466112,
+    "size": 545,
+    "ghidra_name": "gen_bitlen"
+  },
+  {
+    "va": 268466672,
+    "size": 115,
+    "ghidra_name": "gen_codes"
+  },
+  {
+    "va": 268466800,
+    "size": 111,
+    "ghidra_name": "build_bl_tree"
+  },
+  {
+    "va": 268466912,
+    "size": 231,
+    "ghidra_name": "scan_tree"
+  },
+  {
+    "va": 268467152,
+    "size": 613,
+    "ghidra_name": "send_all_trees"
+  },
+  {
+    "va": 268467776,
+    "size": 1397,
+    "ghidra_name": "send_tree"
+  },
+  {
+    "va": 268469184,
+    "size": 1083,
+    "ghidra_name": "compress_block"
+  },
+  {
+    "va": 268470272,
+    "size": 116,
+    "ghidra_name": "set_data_type"
+  },
+  {
+    "va": 268470400,
+    "size": 31,
+    "ghidra_name": "bit_reverse"
+  },
+  {
+    "va": 268470432,
+    "size": 139,
+    "ghidra_name": "bi_flush"
+  },
+  {
+    "va": 268470576,
+    "size": 124,
+    "ghidra_name": "bi_windup"
+  },
+  {
+    "va": 268470704,
+    "size": 151,
+    "ghidra_name": "copy_block"
+  },
+  {
+    "va": 268470864,
+    "size": 53,
+    "ghidra_name": "destroy_entity"
+  },
+  {
+    "va": 268470928,
+    "size": 492,
+    "ghidra_name": "ReadVfsCompressed"
+  },
+  {
+    "va": 268471424,
+    "size": 129,
+    "ghidra_name": "cleanup_object"
+  },
+  {
+    "va": 268471568,
+    "size": 301,
+    "ghidra_name": "CloseVfsStream"
+  },
+  {
+    "va": 268471872,
+    "size": 472,
+    "ghidra_name": "ReadVfsData"
+  },
+  {
+    "va": 268472352,
+    "size": 667,
+    "ghidra_name": "OpenVfsStream"
+  },
+  {
+    "va": 268473056,
+    "size": 19,
+    "ghidra_name": "zcalloc"
+  },
+  {
+    "va": 268473088,
+    "size": 12,
+    "ghidra_name": "free_wrap"
+  },
+  {
+    "va": 268473104,
+    "size": 8,
+    "ghidra_name": "exit_handler"
+  },
+  {
+    "va": 268473120,
+    "size": 42,
+    "ghidra_name": "Init"
+  },
+  {
+    "va": 268473168,
+    "size": 68,
+    "ghidra_name": "Exit"
+  },
+  {
+    "va": 268473248,
+    "size": 2434,
+    "ghidra_name": "ServerMainThread"
+  },
+  {
+    "va": 268475696,
+    "size": 296,
+    "ghidra_name": "srv_Init"
+  },
+  {
+    "va": 268476000,
+    "size": 419,
+    "ghidra_name": "CreateListenSocket"
+  },
+  {
+    "va": 268476432,
+    "size": 112,
+    "ghidra_name": "CleanupSockets"
+  },
+  {
+    "va": 268476544,
+    "size": 600,
+    "ghidra_name": "AcceptConnections"
+  },
+  {
+    "va": 268477152,
+    "size": 96,
+    "ghidra_name": "ClosePlayerConnection"
+  },
+  {
+    "va": 268477248,
+    "size": 336,
+    "ghidra_name": "ReceivePacketHeader"
+  },
+  {
+    "va": 268477584,
+    "size": 211,
+    "ghidra_name": "SendPlayerData"
+  },
+  {
+    "va": 268477808,
+    "size": 750,
+    "ghidra_name": "ProcessReceiveData"
+  },
+  {
+    "va": 268478560,
+    "size": 131,
+    "ghidra_name": "ProcessSendData"
+  },
+  {
+    "va": 268478704,
+    "size": 170,
+    "ghidra_name": "QueueCommandForProcessing"
+  },
+  {
+    "va": 268478880,
+    "size": 170,
+    "ghidra_name": "QueuePlayerCommand"
+  },
+  {
+    "va": 268479056,
+    "size": 97,
+    "ghidra_name": "list_unlink_relink"
+  },
+  {
+    "va": 268479168,
+    "size": 639,
+    "ghidra_name": "cm_ProcessCommandQueue"
+  },
+  {
+    "va": 268479808,
+    "size": 600,
+    "ghidra_name": "LogWinsockError"
+  },
+  {
+    "va": 268480576,
+    "size": 372,
+    "ghidra_name": "InitBuildingTypeTable"
+  },
+  {
+    "va": 268480960,
+    "size": 205,
+    "ghidra_name": "ValidateOfficeCandidate"
+  },
+  {
+    "va": 268481168,
+    "size": 425,
+    "ghidra_name": "ValidateAndAssignOffice"
+  },
+  {
+    "va": 268481600,
+    "size": 133,
+    "ghidra_name": "ValidateCommand"
+  },
+  {
+    "va": 268481744,
+    "size": 836,
+    "ghidra_name": "ExecuteOfficeAssignment"
+  },
+  {
+    "va": 268482592,
+    "size": 42,
+    "ghidra_name": "find_entity_26"
+  },
+  {
+    "va": 268482640,
+    "size": 42,
+    "ghidra_name": "find_entity_27"
+  },
+  {
+    "va": 268482688,
+    "size": 263,
+    "ghidra_name": "SwapOfficeHolders"
+  },
+  {
+    "va": 268482960,
+    "size": 157,
+    "ghidra_name": "ClearEntityLinks"
+  },
+  {
+    "va": 268483120,
+    "size": 179,
+    "ghidra_name": "UpdateEntityLinks"
+  },
+  {
+    "va": 268483312,
+    "size": 606,
+    "ghidra_name": "amt_fio_LoadAemter"
+  },
+  {
+    "va": 268483920,
+    "size": 66,
+    "ghidra_name": "reset_entity_state"
+  },
+  {
+    "va": 268484000,
+    "size": 70,
+    "ghidra_name": "check_flag"
+  },
+  {
+    "va": 268484080,
+    "size": 1002,
+    "ghidra_name": "ahm_ExAllocAlchemist"
+  },
+  {
+    "va": 268485088,
+    "size": 130,
+    "ghidra_name": "ApplyColorComponent"
+  },
+  {
+    "va": 268485248,
+    "size": 130,
+    "ghidra_name": "AllocateEntitySlot"
+  },
+  {
+    "va": 268485392,
+    "size": 110,
+    "ghidra_name": "slot_clear_match"
+  },
+  {
+    "va": 268485504,
+    "size": 51,
+    "ghidra_name": "search_and_set"
+  },
+  {
+    "va": 268485568,
+    "size": 83,
+    "ghidra_name": "ClampFloatValue"
+  },
+  {
+    "va": 268485664,
+    "size": 166,
+    "ghidra_name": "FireEntityAndCleanup"
+  },
+  {
+    "va": 268485840,
+    "size": 295,
+    "ghidra_name": "ahm_AllocAhmInfo"
+  },
+  {
+    "va": 268486144,
+    "size": 109,
+    "ghidra_name": "InitRandomEntity"
+  },
+  {
+    "va": 268486256,
+    "size": 45,
+    "ghidra_name": "LookupEntityInTable"
+  },
+  {
+    "va": 268486304,
+    "size": 102,
+    "ghidra_name": "QueryEntityBuildingType"
+  },
+  {
+    "va": 268486416,
+    "size": 340,
+    "ghidra_name": "GetCommandPayloadSize"
+  },
+  {
+    "va": 268487168,
+    "size": 130,
+    "ghidra_name": "ProcessEntityChain"
+  },
+  {
+    "va": 268487312,
+    "size": 130,
+    "ghidra_name": "get_field_by_type"
+  },
+  {
+    "va": 268487456,
+    "size": 171,
+    "ghidra_name": "CheckMoveCredits"
+  },
+  {
+    "va": 268487632,
+    "size": 517,
+    "ghidra_name": "CheckSellObject"
+  },
+  {
+    "va": 268488160,
+    "size": 331,
+    "ghidra_name": "CheckChangeAttribute"
+  },
+  {
+    "va": 268488496,
+    "size": 162,
+    "ghidra_name": "CheckChangeBits"
+  },
+  {
+    "va": 268488672,
+    "size": 64,
+    "ghidra_name": "find_validate"
+  },
+  {
+    "va": 268488736,
+    "size": 22,
+    "ghidra_name": "cm_ChkOfficeCandidate"
+  },
+  {
+    "va": 268488768,
+    "size": 22,
+    "ghidra_name": "cm_ValidateGeneric"
+  },
+  {
+    "va": 268488800,
+    "size": 169,
+    "ghidra_name": "ValidateElectionOrTradeCmd"
+  },
+  {
+    "va": 268488976,
+    "size": 333,
+    "ghidra_name": "ValidateJoinLeaveElection"
+  },
+  {
+    "va": 268489312,
+    "size": 120,
+    "ghidra_name": "CheckCutsceneReady"
+  },
+  {
+    "va": 268489440,
+    "size": 77,
+    "ghidra_name": "cm_ChkCommandType"
+  },
+  {
+    "va": 268489520,
+    "size": 14,
+    "ghidra_name": "MarkAndReturn"
+  },
+  {
+    "va": 268489536,
+    "size": 6,
+    "ghidra_name": "RejectCommand"
+  },
+  {
+    "va": 268489552,
+    "size": 267,
+    "ghidra_name": "cm_ExAllocRaum"
+  },
+  {
+    "va": 268489824,
+    "size": 267,
+    "ghidra_name": "cm_ExAllocSpieler"
+  },
+  {
+    "va": 268490096,
+    "size": 361,
+    "ghidra_name": "cm_ExAllocClientSpieler"
+  },
+  {
+    "va": 268490464,
+    "size": 78,
+    "ghidra_name": "cm_ExChangePlayerIdentity"
+  },
+  {
+    "va": 268490544,
+    "size": 192,
+    "ghidra_name": "ExFreeEntity"
+  },
+  {
+    "va": 268490736,
+    "size": 176,
+    "ghidra_name": "ExTransferCurrency"
+  },
+  {
+    "va": 268490912,
+    "size": 144,
+    "ghidra_name": "ExTransferCurrencyNoKill"
+  },
+  {
+    "va": 268491056,
+    "size": 2057,
+    "ghidra_name": "TradeCommandHandler"
+  },
+  {
+    "va": 268493120,
+    "size": 993,
+    "ghidra_name": "cm_ExecProduction"
+  },
+  {
+    "va": 268494128,
+    "size": 352,
+    "ghidra_name": "ExMoveObject"
+  },
+  {
+    "va": 268494480,
+    "size": 191,
+    "ghidra_name": "cm_ExClearLagerslot"
+  },
+  {
+    "va": 268494672,
+    "size": 128,
+    "ghidra_name": "ExCreateObject"
+  },
+  {
+    "va": 268494800,
+    "size": 256,
+    "ghidra_name": "ExAccumulateEntityFields"
+  },
+  {
+    "va": 268495056,
+    "size": 240,
+    "ghidra_name": "ExWriteEntityFields"
+  },
+  {
+    "va": 268495296,
+    "size": 214,
+    "ghidra_name": "ExChangeDesire"
+  },
+  {
+    "va": 268495520,
+    "size": 208,
+    "ghidra_name": "ExSetEntityBitmask"
+  },
+  {
+    "va": 268495728,
+    "size": 144,
+    "ghidra_name": "ExSetEntityField"
+  },
+  {
+    "va": 268495872,
+    "size": 912,
+    "ghidra_name": "ExCopyEntityData"
+  },
+  {
+    "va": 268496784,
+    "size": 26,
+    "ghidra_name": "cm_ChainAssignId"
+  },
+  {
+    "va": 268496816,
+    "size": 122,
+    "ghidra_name": "SetSyncFlags"
+  },
+  {
+    "va": 268496944,
+    "size": 72,
+    "ghidra_name": "cm_ExKillSpieler"
+  },
+  {
+    "va": 268497024,
+    "size": 26,
+    "ghidra_name": "AssignSequenceCounter"
+  },
+  {
+    "va": 268497056,
+    "size": 37,
+    "ghidra_name": "AssignEntityId"
+  },
+  {
+    "va": 268497104,
+    "size": 197,
+    "ghidra_name": "RemoveLinkedObject"
+  },
+  {
+    "va": 268497312,
+    "size": 327,
+    "ghidra_name": "cm_ChainRecordLookup"
+  },
+  {
+    "va": 268497648,
+    "size": 176,
+    "ghidra_name": "ExCreateSpecialObject"
+  },
+  {
+    "va": 268497824,
+    "size": 3,
+    "ghidra_name": "cm_ChainNoop"
+  },
+  {
+    "va": 268497840,
+    "size": 206,
+    "ghidra_name": "SetBuildingOwner"
+  },
+  {
+    "va": 268498048,
+    "size": 271,
+    "ghidra_name": "SetResidence"
+  },
+  {
+    "va": 268498320,
+    "size": 237,
+    "ghidra_name": "SetBuildingUpgrade"
+  },
+  {
+    "va": 268498560,
+    "size": 171,
+    "ghidra_name": "DestroyBuilding"
+  },
+  {
+    "va": 268498736,
+    "size": 515,
+    "ghidra_name": "EmployWorkerAtBuilding"
+  },
+  {
+    "va": 268499264,
+    "size": 22,
+    "ghidra_name": "cm_ExAssignOffice"
+  },
+  {
+    "va": 268499296,
+    "size": 22,
+    "ghidra_name": "cm_ExExecuteOffice"
+  },
+  {
+    "va": 268499328,
+    "size": 336,
+    "ghidra_name": "ExCreateCitizenAtBuilding"
+  },
+  {
+    "va": 268499664,
+    "size": 85,
+    "ghidra_name": "cm_ExKillTransporter"
+  },
+  {
+    "va": 268499760,
+    "size": 153,
+    "ghidra_name": "cm_ExCreateGeb"
+  },
+  {
+    "va": 268499920,
+    "size": 22,
+    "ghidra_name": "cm_ExCondWrite"
+  },
+  {
+    "va": 268499952,
+    "size": 25,
+    "ghidra_name": "InitDefaultResponse"
+  },
+  {
+    "va": 268499984,
+    "size": 308,
+    "ghidra_name": "ElectionOrTradeCommand"
+  },
+  {
+    "va": 268500304,
+    "size": 445,
+    "ghidra_name": "JoinLeaveElection"
+  },
+  {
+    "va": 268500752,
+    "size": 22,
+    "ghidra_name": "cm_ExCondWrite2"
+  },
+  {
+    "va": 268500784,
+    "size": 41,
+    "ghidra_name": "ValidateEntityLookup"
+  },
+  {
+    "va": 268500832,
+    "size": 82,
+    "ghidra_name": "CutsceneEntityUpdate"
+  },
+  {
+    "va": 268500928,
+    "size": 70,
+    "ghidra_name": "ModifyEntityHealth"
+  },
+  {
+    "va": 268501008,
+    "size": 110,
+    "ghidra_name": "ModifyEntityStamina"
+  },
+  {
+    "va": 268501120,
+    "size": 22,
+    "ghidra_name": "ExSimCommand"
+  },
+  {
+    "va": 268501152,
+    "size": 159,
+    "ghidra_name": "ModifyEntityStat"
+  },
+  {
+    "va": 268501312,
+    "size": 280,
+    "ghidra_name": "AllocWarEvent"
+  },
+  {
+    "va": 268501600,
+    "size": 114,
+    "ghidra_name": "DispatchProductionCommand"
+  },
+  {
+    "va": 268501744,
+    "size": 17,
+    "ghidra_name": "DispatchMoveSlotEntry"
+  },
+  {
+    "va": 268501776,
+    "size": 52,
+    "ghidra_name": "cm_ExAllocGraveyardWorker"
+  },
+  {
+    "va": 268501840,
+    "size": 52,
+    "ghidra_name": "cm_ExAllocAlchemist"
+  },
+  {
+    "va": 268501904,
+    "size": 262,
+    "ghidra_name": "SimSpecialAction"
+  },
+  {
+    "va": 268502176,
+    "size": 135,
+    "ghidra_name": "GetBuildingStatCount"
+  },
+  {
+    "va": 268502320,
+    "size": 113,
+    "ghidra_name": "check_slot_active"
+  },
+  {
+    "va": 268502448,
+    "size": 329,
+    "ghidra_name": "GetSlotEntry"
+  },
+  {
+    "va": 268502800,
+    "size": 320,
+    "ghidra_name": "FindSlotEntryFiltered"
+  },
+  {
+    "va": 268503120,
+    "size": 370,
+    "ghidra_name": "SpawnGraveyardEntities"
+  },
+  {
+    "va": 268503504,
+    "size": 832,
+    "ghidra_name": "AllocGraveyardField"
+  },
+  {
+    "va": 268504336,
+    "size": 570,
+    "ghidra_name": "UpgradeGraveyardField"
+  },
+  {
+    "va": 268504912,
+    "size": 66,
+    "ghidra_name": "free_3fields"
+  },
+  {
+    "va": 268504992,
+    "size": 525,
+    "ghidra_name": "AssignProductionSlot"
+  },
+  {
+    "va": 268505520,
+    "size": 501,
+    "ghidra_name": "HireProductionWorker"
+  },
+  {
+    "va": 268506032,
+    "size": 390,
+    "ghidra_name": "ExtendProductionTime"
+  },
+  {
+    "va": 268506432,
+    "size": 288,
+    "ghidra_name": "ReplaceProductionWorker"
+  },
+  {
+    "va": 268506720,
+    "size": 297,
+    "ghidra_name": "ActivateGraveyardSection"
+  },
+  {
+    "va": 268507024,
+    "size": 242,
+    "ghidra_name": "UpdateProductionProgress"
+  },
+  {
+    "va": 268507280,
+    "size": 164,
+    "ghidra_name": "ValidateEntityAction"
+  },
+  {
+    "va": 268507456,
+    "size": 674,
+    "ghidra_name": "MoveSlotEntry"
+  },
+  {
+    "va": 268508144,
+    "size": 1040,
+    "ghidra_name": "gv_ExAllocGraveyardWorker"
+  },
+  {
+    "va": 268509184,
+    "size": 728,
+    "ghidra_name": "LoadGraveyardData"
+  },
+  {
+    "va": 268509920,
+    "size": 346,
+    "ghidra_name": "InitNewDynastyEntity"
+  },
+  {
+    "va": 268510272,
+    "size": 37,
+    "ghidra_name": "ReadVfsDataChecked"
+  }
+]
