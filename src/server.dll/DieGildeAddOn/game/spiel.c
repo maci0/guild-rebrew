@@ -457,7 +457,7 @@ int __cdecl Open(int param_1)
 		return -3;
 	}
 	crt_locked_call4b((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
-	fflush(file_handle);
+	fflush((FILE*) file_handle);
 	g_item_def_table = (int) AllocateTrackedHeapBlock(0xb9dc, (const char*) 0x10031140);
 	if (g_item_def_table == 0) {
 		return -4;
@@ -479,7 +479,7 @@ int __cdecl Open(int param_1)
 		return -6;
 	}
 	crt_locked_call4b((void*) g_item_def_table, 0x41, 0x2dc, file_handle);
-	fflush(file_handle);
+	fflush((FILE*) file_handle);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x536, "Open(): gm_InitObjektHersteller", 1);
 	gm_InitObjektHersteller();
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x53a, "Open(): gm_KillAllSpieler", 1);

@@ -12,7 +12,7 @@ extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* tag
 extern void* __cdecl StartEntityQuery(int, int, int, ...);
 extern int __cdecl RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
 extern void __cdecl AddOrAccumulateObject(int p1, int p2, int p3);
-extern void __cdecl RefreshMarketAvailability(int season);
+extern int __cdecl RefreshMarketAvailability(int season);
 extern float fColorScale;
 extern int DAT_10030b6c;
 extern char DAT_10035439;
