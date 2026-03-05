@@ -769,7 +769,7 @@ void __cdecl RefreshMarketAvailability(int param_1)
 	DAT_1003543c = (int) StartFilteredEntitySearch(1, 5, 10);
 	if (DAT_1003543c == 0) {
 		LogMessageInternal((char*) 0x10031004, 0x7cf, (char*) 0x1003122c, 1);
-		return;
+		return 0;
 	}
 
 	{
@@ -786,7 +786,7 @@ void __cdecl RefreshMarketAvailability(int param_1)
 	}
 
 	if (param_1 != DAT_10035439) {
-		return;
+		return 0;
 	}
 
 	/* Clear offset 4 of each of 0x55 slots (stride 0x80) */
@@ -3121,7 +3121,7 @@ void __cdecl DeallocEntity(unsigned int index, int param_2)
 
 	if (param_2 == 0) {
 		sprintf(buffer, g_str_10031500, old_id);
-		return;
+		return 0;
 	}
 
 	if (ent->word0 != 0xFFFF) {
@@ -3651,7 +3651,7 @@ int __cdecl ChangePlayerIdentityImpl(int param_1, int param_2)
 	*(unsigned char*) (buf1 + 0xd) = *(unsigned char*) (record_a + 0xd);
 	*(int*) (buf1 + 0x170) = *(int*) (record_a + 0x170);
 
-	copy_count = MapEntityStatRange((unsigned char) *(unsigned char*) (record_b + 0x164), record_a);
+	copy_count = MapEntityStatRange((unsigned char) *(unsigned char*) (record_b + 0x164));
 	if (copy_count != 0) {
 		offset_a = GetEntityTableEntry(record_a);
 		if (offset_a != 0) {
@@ -4551,7 +4551,7 @@ void __cdecl entity_set_field(void)
 	int sub;
 	entity = search_entity(1, 0, 0x1e);
 	if (!entity) {
-		return;
+		return 0;
 	}
 	do {
 		sub = search_sub(*(int*) (entity + 0x5d), 1, 0, 0xff);

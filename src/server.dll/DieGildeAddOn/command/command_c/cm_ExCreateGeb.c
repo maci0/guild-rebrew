@@ -2,7 +2,7 @@
 // ORIGIN: GAME
 // SIZE: 153
 // CFLAGS: /O2 /Gd
-// SYMBOL: _CmdCreateBuilding
+// SYMBOL: _cm_ExCreateGeb
 
 /*
 // BLOCKER_DELTA: 125

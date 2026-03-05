@@ -2,7 +2,7 @@
 // ORIGIN: GAME
 // SIZE: 52
 // CFLAGS: /O2 /Gd
-// SYMBOL: _CmdAllocGraveyardWorker
+// SYMBOL: _cm_ExAllocGraveyardWorker
 
 /*
  * Ghidra decompilation reference:

@@ -2,7 +2,7 @@
 // ORIGIN: GAME
 // SIZE: 267
 // CFLAGS: /O2 /Gd
-// SYMBOL: _CmdAllocBuilding
+// SYMBOL: _cm_ExAllocRaum
 
 #ifdef __clang__
 #pragma clang diagnostic push

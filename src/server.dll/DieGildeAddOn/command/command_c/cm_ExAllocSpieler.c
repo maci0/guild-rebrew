@@ -2,7 +2,7 @@
 // ORIGIN: GAME
 // SIZE: 267
 // CFLAGS: /O2 /Gd
-// SYMBOL: _CmdAllocPlayer
+// SYMBOL: _cm_ExAllocSpieler
 // BLOCKER_DELTA: 209
 
 #include "../command_internal.h"

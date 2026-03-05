@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
+#include <winsock2.h>
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 

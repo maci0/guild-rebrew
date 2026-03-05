@@ -2,7 +2,7 @@
 // ORIGIN: GAME
 // SIZE: 72
 // CFLAGS: /O2 /Gd
-// SYMBOL: _CmdKillPlayer
+// SYMBOL: _cm_ExKillSpieler
 
 /*
  * Ghidra decompilation reference:
