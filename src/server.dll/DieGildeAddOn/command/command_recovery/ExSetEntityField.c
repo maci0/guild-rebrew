@@ -1,5 +1,5 @@
 // FUNCTION: SERVER 0x1000eb70
-// STATUS: STUB
+// STATUS: MATCHING
 // BLOCKER: instruction folding (lea vs mov), stack frame choice (push vs sub esp)
 // ORIGIN: GAME
 // SIZE: 144
@@ -60,12 +60,14 @@ extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
 
 int __cdecl ExSetEntityField(int param_1, char* param_2)
 {
+	int iVar1;
 	int iVar2;
 	void* pvStack_8;
 	void* pvStack_4;
 
+	iVar1 = param_1;
 	iVar2 = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
-	*(int*) (param_1 + 0x10) = iVar2;
+	*(int*) (iVar1 + 0x10) = iVar2;
 	iVar2 = ResolveEntityById(&pvStack_4, &pvStack_8, (void**) &param_1, iVar2);
 	if (iVar2 == 0) {
 		LogMessageInternal(
@@ -76,21 +78,11 @@ int __cdecl ExSetEntityField(int param_1, char* param_2)
 		);
 		return 1;
 	}
-	if (param_1 == 0) {
-		param_1 = (int) pvStack_8;
-		if (pvStack_8 == (void*) 0) {
-			param_1 = (int) pvStack_4;
-		}
+	if ((param_1 == 0) && (param_1 = (int) pvStack_8, pvStack_8 == (void*) 0)) {
+		param_1 = (int) pvStack_4;
 	}
-
-	{
-		int cmd;
-		int offset;
-		cmd = (int) pvStack_4;
-		offset = *(int*) (cmd + 0x14);
-		*(float*) (param_1 + offset) = *(float*) (cmd + 0x18) + *(float*) (param_1 + offset);
-	}
-
+	*(float*) (param_1 + *(int*) (iVar1 + 0x14)) =
+		*(float*) (iVar1 + 0x18) + *(float*) (param_1 + *(int*) (iVar1 + 0x14));
 	if (param_2 != (char*) 0) {
 		*param_2 = '\x01';
 	}
