@@ -112,14 +112,14 @@ extern char* g_table_a9;
 extern char* dword_100a8c30;
 extern unsigned short* dword_100a8c34;
 extern char* dword_101de450;
-extern char* __cdecl FindEntityByOwner(int);
+extern char* __cdecl get_msg_field(int);
 extern void __cdecl ReportMessage(int);
 extern int g_entity_type_table;
 extern char g_current_season;
 extern char g_10031004[];
 extern char g_10031484[];
 extern char g_100314b8[];
-extern int __cdecl WalkEntityChain(int);
+extern int __cdecl entity_accumulate(void*);
 extern int __cdecl RemoveLinkedNodeById(int*, int);
 extern void __cdecl ClearEntityLinks(short*);
 extern void __cdecl InitEntityIfValid(void* param_1);
@@ -137,7 +137,7 @@ extern int __cdecl random_mod(int range);
 extern char entity_table[];
 extern int __cdecl LookupEntityRecordById(int);
 extern void __cdecl AssignBuildingOwner(char*, unsigned short, unsigned short);
-extern int __cdecl entity_accumulate(int);
+extern int __cdecl WalkEntityChain(int);
 extern int __cdecl CheckStatLevel(int, int);
 extern int __cdecl GetOppositeStatIndex(int);
 extern void* __cdecl AddOrAccumulateObject(int, int, int);
@@ -173,7 +173,7 @@ extern int __cdecl compute_entity_val(int, int);
 extern int __cdecl another_entity_val(int);
 extern int __cdecl compute_size(char*, int); /* 0x10019d00 */
 ;
-extern int __cdecl get_msg_field(char*, void*); /* 0x10019cd0 */
+extern int __cdecl FindEntityByOwner(char*, char*); /* 0x10019cd0 */
 ;
 extern int __cdecl LookupEntityInTable(int); /* 0x1000c670 */
 ;
@@ -2619,7 +2619,7 @@ void __cdecl AssignBuildingOwner(unsigned char* param_1, unsigned short param_2,
 		}
 		iVar7 = param_3;
 		if (((BYTE_100358A2(iVar7) == '\x06') || (BYTE_100358A2(iVar7) == '\a')) &&
-			(iVar4 = FindEntityByOwner(param_1), iVar4 != 0)) {
+			(iVar4 = get_msg_field(param_1), iVar4 != 0)) {
 			*(unsigned char*) (iVar4 + 0x165) = 0;
 			*(unsigned int*) (iVar4 + 0x1b4) = *(unsigned int*) (iVar4 + 0x1b4) & 0xfffffffe;
 			cVar1 = *pcVar6;
@@ -3005,7 +3005,7 @@ void __cdecl RemoveEntityLink(int param_1)
 {
 	int iVar1;
 
-	iVar1 = WalkEntityChain(param_1);
+	iVar1 = entity_accumulate(param_1);
 	if (iVar1 != 0) {
 		RemoveLinkedNodeById(iVar1 + 0x5d, *(int*) (param_1 + 2));
 	}
@@ -3616,7 +3616,7 @@ int __cdecl ChangePlayerIdentityImpl(int param_1, int param_2)
 	} while (iVar10 != 0);
 
 	uVar1 = *(unsigned short*) puVar4;
-	uVar6 = entity_accumulate(uVar1);
+	uVar6 = WalkEntityChain(uVar1);
 
 	puVar7 = LookupEntityRecordById(param_2);
 	if (puVar7 == 0) {
@@ -4175,7 +4175,7 @@ unsigned short __cdecl GetEntityType(short* param_1)
 // WalkEntityChain
 // PROTOTYPE: int __cdecl entity_accumulate(int raw_idx)
 
-int __cdecl WalkEntityChain(void* param_1)
+int __cdecl entity_accumulate(void* param_1)
 {
 	int result;
 	int entity_id;
@@ -4209,7 +4209,7 @@ int __cdecl WalkEntityChain(void* param_1)
 // entity_accumulate
 // PROTOTYPE: int __cdecl WalkEntityChain(void * param_1)
 
-int __cdecl entity_accumulate(int raw_idx)
+int __cdecl WalkEntityChain(int raw_idx)
 {
 	unsigned short idx;
 	int slot;
@@ -4247,7 +4247,7 @@ extern unsigned char g_entity_state_base[];
 
 /* GLOBAL: SERVER 0x100358a0 */
 
-char* __cdecl FindEntityByOwner(int param_1)
+char* __cdecl get_msg_field(int param_1)
 {
 	unsigned char* p;
 	int i;
@@ -4278,7 +4278,7 @@ char* __cdecl FindEntityByOwner(int param_1)
 // FUNCTION: SERVER 0x10019CD0
 // get_msg_field
 // PROTOTYPE: char * __cdecl FindEntityByOwner(int param_1)
-int __cdecl get_msg_field(char* msg, char* pkt)
+int __cdecl FindEntityByOwner(char* msg, char* pkt)
 {
 	unsigned short type;
 

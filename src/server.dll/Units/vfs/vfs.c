@@ -192,7 +192,7 @@ unsigned int __cdecl flush_stream(int param_1, int param_2)
 // read_uint32_be
 // PROTOTYPE: int __cdecl flush_and_close_stream(int param_1)
 
-int __cdecl read_uint32_be(int param_1)
+int __cdecl flush_and_close_stream(int param_1)
 {
 	int result;
 	int last;
@@ -215,7 +215,7 @@ int __cdecl read_uint32_be(int param_1)
 // flush_and_close_stream
 // PROTOTYPE: int __cdecl read_uint32_be(int param_1)
 
-int __cdecl flush_and_close_stream(int param_1)
+int __cdecl read_uint32_be(int param_1)
 {
 	int iVar1;
 
