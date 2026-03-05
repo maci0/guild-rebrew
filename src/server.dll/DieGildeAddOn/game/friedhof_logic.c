@@ -10,8 +10,8 @@ extern int g_slot_count_cat2[]; /* 0x1002579c */;
 extern int g_slot_count_cat3[]; /* 0x100257ac */;
 extern int __cdecl GetBuildingStatCount(unsigned char*);
 extern char* __cdecl FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
-extern unsigned int func_1001a0d0(int);
-extern unsigned int func_1001b564(void);
+extern unsigned int random_mod(int);
+extern unsigned int __ftol(void);
 extern void* __cdecl AllocateTrackedHeapBlock(unsigned int, const char*);
 extern void __cdecl FreeTrackedHeapBlock(void*);
 extern int g_entity_type_table;
@@ -327,24 +327,24 @@ int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 					*(unsigned int*) (slot_entry_ptr + 10) = current_game_tick + 5;
 					skill_index = 0;
 					do {
-						func_1001a0d0(8);
-						rand_skill_byte = func_1001b564();
+						random_mod(8);
+						rand_skill_byte = __ftol();
 						skill_index = skill_index + 1;
 						*(*(char**) (slot_entry_ptr + 0x10) + 0x23 + skill_index) = rand_skill_byte;
 					} while (skill_index < 5);
-					rand_stat_val = func_1001a0d0(9);
+					rand_stat_val = random_mod(9);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x2c) = (rand_stat_val & 0xffff) + 1;
-					rand_stat_val = func_1001a0d0(2);
+					rand_stat_val = random_mod(2);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x30) = (rand_stat_val & 0xffff) + 1;
-					rand_stat_val = func_1001a0d0(0x5e);
+					rand_stat_val = random_mod(0x5e);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x34) = (rand_stat_val & 0xffff) + 1;
-					rand_stat_val = func_1001a0d0(4);
+					rand_stat_val = random_mod(4);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x40) = (*(short*) 0x10035880 - (rand_stat_val & 0xffff)) + -1;
-					rand_stat_val = func_1001a0d0(2);
+					rand_stat_val = random_mod(2);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x38) = rand_stat_val & 0xffff;
-					func_1001a0d0(0x10);
-					func_1001a0d0(0x10);
-					func_1001a0d0(0x10);
+					random_mod(0x10);
+					random_mod(0x10);
+					random_mod(0x10);
 					spawn_count = spawn_count + 1;
 				} while (spawn_count < param_2);
 			}
@@ -1045,7 +1045,7 @@ unsigned int HireProductionWorker(int param_1)
 				*(unsigned int*) (*(unsigned int*) 0x10035439 * 0x2f4 + 0x100a8c94),
 				*(unsigned int*) (cmd_ptr_saved + 0x13)
 			);
-			rand_coin_amount = func_1001b564();
+			rand_coin_amount = __ftol();
 			AddOrAccumulateObject(
 				*(unsigned int*) (*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + 0x100358a4),
 				*(unsigned int*) (*(unsigned int*) 0x10035439 * 0x2f4 + 0x100a8c94),
@@ -1110,7 +1110,7 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 			*(*(unsigned int**) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
 			*(cmd_ptr_saved + 0x13)
 		);
-		rand_coin_amount = func_1001b564();
+		rand_coin_amount = __ftol();
 		AddOrAccumulateObject(
 			*(*(unsigned int**) 0x100358a4 + *(unsigned short*) (building_entity_ptr + 0x27) * 0x21c),
 			*(*(unsigned int**) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),

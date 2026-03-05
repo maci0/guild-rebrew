@@ -12,7 +12,7 @@
  *    CFlags: 
  *    Symbol: _CmdKillPlayer
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl CmdKillPlayer(int param_1)
+ * int __cdecl cm_ExKillSpieler(int param_1)
  * 
  * {
  *   ushort *puVar1;
@@ -35,7 +35,7 @@ extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
 
 // FUNCTION: SERVER 0x1000f030
-int __cdecl CmdKillPlayer(int param_1)
+int __cdecl cm_ExKillSpieler(int param_1)
 {
 	ushort* puVar1;
 

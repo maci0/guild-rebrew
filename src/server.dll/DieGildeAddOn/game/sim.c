@@ -1,4 +1,4 @@
-extern unsigned short func_1001a0d0(unsigned int);
+extern unsigned short random_mod(unsigned int);
 extern unsigned int __cdecl CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 extern int __cdecl get_priority_info(int, int*);
 extern int DAT_100a8c30;
@@ -43,7 +43,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 	prob_thresholds[5] = 0;
 	search_seed = 0x300;
 	do {
-		candidate_slot1 = func_1001a0d0(search_seed);
+		candidate_slot1 = random_mod(search_seed);
 		rand_roll = candidate_slot1 * 0xf;
 		entity_offset = candidate_slot1 * 0x21c;
 		if (*(int*) (entity_offset + 0x100358a0) == -1) {
@@ -66,7 +66,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 				parent_slot_ptr = parent_slot_ptr + 1;
 				entity_offset = entity_offset + -1;
 			} while (entity_offset != 0);
-			rand_roll = func_1001a0d0(0x100);
+			rand_roll = random_mod(0x100);
 			rand_roll = (rand_roll & 0xffff) + 1;
 			if (rand_roll < prob_thresholds[occupied_count]) {
 				break;
@@ -79,7 +79,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 	}
 	attempt2_count = 0;
 	do {
-		candidate_slot2 = func_1001a0d0(search_seed);
+		candidate_slot2 = random_mod(search_seed);
 		attempt_count = candidate_slot2 * 0x21c;
 		if (*(int*) (attempt_count + 0x100358a0) == -1) {
 			search_seed = search_seed * 3 + (search_seed * 3 >> 0x1f & 3U) >> 2;
@@ -100,7 +100,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 				parent_slot_ptr = parent_slot_ptr + 1;
 				attempt_count = attempt_count + -1;
 			} while (attempt_count != 0);
-			rand_roll = func_1001a0d0(0x100);
+			rand_roll = random_mod(0x100);
 			rand_roll = (rand_roll & 0xffff) + 1;
 			if (rand_roll < prob_thresholds[entity_offset]) {
 				break;

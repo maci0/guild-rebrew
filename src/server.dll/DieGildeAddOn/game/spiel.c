@@ -162,7 +162,7 @@ extern float DAT_100257c8; /* 0x100257c8 */
 extern double DAT_100257d0; /* 0x100257d0 */
 ;
 extern double __cdecl CalculateProductionValue(unsigned short, unsigned char);
-extern int __cdecl func_1001b564(void);
+extern int __cdecl __ftol(void);
 extern char g_type_idx;
 extern int __cdecl find_entity(int, int, int, int);
 extern int g_key_table[];
@@ -4108,7 +4108,7 @@ int __declspec(naked) __cdecl EntityQuerySum(int param_1)
 		call CalculateProductionValue
 		fiadd dword ptr [esp + 0xc]
 		add esp, 8
-		call func_1001b564
+		call __ftol
 		mov esi, eax
 		mov dword ptr [esp + 4], esi
 		call NextEntityQueryMatch

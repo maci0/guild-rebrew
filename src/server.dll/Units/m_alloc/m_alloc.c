@@ -26,9 +26,9 @@ extern int DAT_117640a0;
 extern int DAT_117640a4;
 extern int DAT_10028938;
 extern int DAT_1002893c;
-extern int __cdecl func_1001a299(char*, char*, ...);
-extern int __cdecl func_1001aff0(char*, char*);
-extern char* __cdecl func_1001a540(char*, int);
+extern int __cdecl sprintf(char*, char*, ...);
+extern int __cdecl strstr(char*, char*);
+extern char* __cdecl strrchr(char*, int);
 extern void __cdecl ReportMemoryGroupInfo(int toggle);
 extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* file_and_line);
 extern void __cdecl FreeTrackedHeapBlock(int*);
@@ -271,10 +271,10 @@ void __cdecl ReportMemoryGroupInfo(int param_1)
 	char matched;
 
 	if (*(int*) 0x10034628 == 0 && *(int*) 0x1003462c == 0) {
-		func_1001a299(buf, (char*) 0x10028aa0, *(int*) 0x10034634, *(int*) 0x10034630, *(int*) 0x10034630 >> 10);
+		sprintf(buf, (char*) 0x10028aa0, *(int*) 0x10034634, *(int*) 0x10034630, *(int*) 0x10034630 >> 10);
 	}
 	else {
-		func_1001a299(
+		sprintf(
 			buf,
 			(char*) 0x10028a2c,
 			*(int*) 0x10034634,
@@ -296,7 +296,7 @@ void __cdecl ReportMemoryGroupInfo(int param_1)
 	}
 
 	do {
-		if (param_1 == 0 || func_1001aff0(group, (char*) param_1) == 0) {
+		if (param_1 == 0 || strstr(group, (char*) param_1) == 0) {
 			matched = 0;
 		}
 		else {
@@ -318,14 +318,14 @@ void __cdecl ReportMemoryGroupInfo(int param_1)
 		strcpy(name, group);
 
 		{
-			char* p = func_1001a540(name, ':');
+			char* p = strrchr(name, ':');
 			if (p != 0) {
 				*p = 0;
 			}
 		}
 
 		if (*(int*) (group + 0x10) == 0 && *(int*) (group + 0x14) == 0) {
-			func_1001a299(
+			sprintf(
 				buf,
 				(char*) 0x100289d4,
 				name,
@@ -336,7 +336,7 @@ void __cdecl ReportMemoryGroupInfo(int param_1)
 			);
 		}
 		else {
-			func_1001a299(
+			sprintf(
 				buf,
 				(char*) 0x1002898c,
 				name,
@@ -358,7 +358,7 @@ void __cdecl ReportMemoryGroupInfo(int param_1)
 			if (*(int*) 0x10034624 > 0) {
 				do {
 					if (slot[2] != 0 && slot[0] == (int) group) {
-						func_1001a299(buf, (char*) 0x10028974, (char*) slot[1], slot[3], slot[3] >> 10);
+						sprintf(buf, (char*) 0x10028974, (char*) slot[1], slot[3], slot[3] >> 10);
 						LogMessageInternal((char*) 0x10028888, 0x1d5, buf, 1);
 					}
 					i++;

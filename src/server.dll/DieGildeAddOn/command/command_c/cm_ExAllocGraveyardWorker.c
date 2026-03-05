@@ -12,7 +12,7 @@
  *    CFlags: 
  *    Symbol: _CmdAllocGraveyardWorker
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl CmdAllocGraveyardWorker(int param_1,char *param_2)
+ * int __cdecl cm_ExAllocGraveyardWorker(int param_1,char *param_2)
  * 
  * {
  *   int val;
@@ -32,7 +32,7 @@
 extern uint __cdecl gv_ExAllocGraveyardWorker(void*);
 
 // FUNCTION: SERVER 0x10010310
-int __cdecl CmdAllocGraveyardWorker(int param_1, char* param_2)
+int __cdecl cm_ExAllocGraveyardWorker(int param_1, char* param_2)
 {
 	int val;
 	uint alloc_id;

@@ -13,7 +13,7 @@
  *    CFlags: 
  *    Symbol: _CmdCreateBuilding
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl CmdCreateBuilding(int param_1,char *param_2)
+ * int __cdecl cm_ExCreateGeb(int param_1,char *param_2)
  * 
  * {
  *   undefined2 *puVar1;
@@ -69,7 +69,7 @@ extern char s_cm_ExCreateGeb____failed_1002d400[];
 #endif
 
 // FUNCTION: SERVER 0x1000fb30
-int __cdecl CmdCreateBuilding(int param_1, char* param_2)
+int __cdecl cm_ExCreateGeb(int param_1, char* param_2)
 {
 	unsigned short* puVar1;
 	char* pcVar2;

@@ -21,7 +21,7 @@
  *    CFlags: 
  *    Symbol: _CmdAllocPlayer
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl CmdAllocPlayer(int param_1,char *param_2)
+ * int __cdecl cm_ExAllocSpieler(int param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -74,7 +74,7 @@ extern char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[];
 extern char s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c[];
 
 // FUNCTION: SERVER 0x1000d460
-int __cdecl CmdAllocPlayer(int param_1, char* param_2)
+int __cdecl cm_ExAllocSpieler(int param_1, char* param_2)
 {
 	int seed;
 	uint entity_index;

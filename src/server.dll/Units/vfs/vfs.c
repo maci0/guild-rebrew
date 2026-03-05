@@ -17,10 +17,10 @@ extern int __cdecl crt_locked_putc(int, int);
 extern void __cdecl entity_cleanup(char*);
 extern void __cdecl stream_close(int);
 extern void __cdecl mem_free(char*);
-extern int __cdecl func_1001a46e(int handle, int position, int origin);
-extern int __cdecl func_1001aa6a(int stream, unsigned int size, int count, int handle);
+extern int __cdecl fseek(int handle, int position, int origin);
+extern int __cdecl crt_locked_call4b(int stream, unsigned int size, int count, int handle);
 extern int __cdecl crc32_update(int checksum, int buffer, unsigned int size);
-extern int __cdecl func_100058d0(int* ctx, int flag);
+extern int __cdecl inflate(int* ctx, int flag);
 extern void __cdecl free_subobj(void*);
 extern int __cdecl inflateEnd(void* strm);
 extern int __cdecl deflate(void* strm, int flush);
@@ -31,7 +31,7 @@ extern int __cdecl read_uint32_be(int);
 extern void __cdecl pool_free(void* pool, void* item);
 extern unsigned int gzread(unsigned int*, unsigned int*, int, int, int, int, int, int, unsigned int);
 extern int ReadVfsCompressed(unsigned int*, unsigned int*, int);
-extern void func_1001a299(int*, int, int);
+extern void sprintf(int*, int, int);
 extern void LogMessageInternal(const char*, int, int*, int);
 extern char* __cdecl pool_alloc(char*, int, int); /* 0x10006d20 */;
 extern int __cdecl inflateInit2_(char*, int, char*, int); /* 0x100057c0 */;
@@ -335,10 +335,10 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 					return 0;
 				}
 			}
-			if (func_1001a46e(ctx[0x18], ctx[0x1a] + ctx[0xf], 0) != 0) {
+			if (fseek(ctx[0x18], ctx[0x1a] + ctx[0xf], 0) != 0) {
 				return -1;
 			}
-			if (func_1001aa6a(*ctx, chunk_size, 1, ctx[0x18]) != 1) {
+			if (crt_locked_call4b(*ctx, chunk_size, 1, ctx[0x18]) != 1) {
 				return -1;
 			}
 			ctx[0xf] += chunk_size;
@@ -371,7 +371,7 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 		else {
 			old_processed = ctx[6];
 			old_dest = ctx[4];
-			decomp_status = func_100058d0(ctx + 1, 2);
+			decomp_status = inflate(ctx + 1, 2);
 			produced = ctx[6] - old_processed;
 			ctx[0x14] = crc32_update(ctx[0x14], old_dest, produced);
 			ctx[0x17] -= produced;
@@ -572,7 +572,7 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 					if ((stream_flags & 8) != 0) {
 						*(unsigned int**) (arg_14h + 0x10c) = arg_8h;
 						*(int*) (arg_14h + 0x110) = total_size;
-						func_100058d0(stream_ptr, 2);
+						inflate(stream_ptr, 2);
 						return total_size - *(int*) (arg_14h + 0x110);
 					}
 					read_count = (unsigned int) arg_8h * 3 & 3;
@@ -616,7 +616,7 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 						);
 						return read_count;
 					}
-					result = func_1001aa6a(arg_8h, arg_ch, arg_10h, src_ptr);
+					result = crt_locked_call4b(arg_8h, arg_ch, arg_10h, src_ptr);
 				}
 				else {
 					result = ReadVfsCompressed(src_ptr, arg_8h, total_size);
@@ -624,7 +624,7 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 						((*(unsigned char*) (arg_14h + 0x13c) = *(unsigned char*) (arg_14h + 0x13c) & 0xfb,
 						  *arg_8h == *(unsigned int*) 0x10029450 &&
 							  (*(unsigned int*) ((char*) arg_8h + 4) == *(unsigned int*) 0x10029454)))) {
-						func_1001a299(&log_ctx, 0x10029474, arg_14h);
+						sprintf(&log_ctx, 0x10029474, arg_14h);
 						LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x5b4, &log_ctx, 1);
 						return result;
 					}

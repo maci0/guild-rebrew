@@ -12,7 +12,7 @@
  *    CFlags: 
  *    Symbol: _CmdExecuteOffice
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl CmdExecuteOffice(void *param_1,char *param_2)
+ * int __cdecl cm_ExExecuteOffice(void *param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -25,7 +25,7 @@
 extern int __cdecl ExecuteOfficeAssignment(char*);
 
 // FUNCTION: SERVER 0x1000f960
-int __cdecl CmdExecuteOffice(void* param_1, char* param_2)
+int __cdecl cm_ExExecuteOffice(void* param_1, char* param_2)
 {
 	int assignResult;
 

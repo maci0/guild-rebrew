@@ -10,14 +10,14 @@ extern char __cdecl AnalyzeInstruction(int, int, int, int*);
 extern unsigned int __cdecl EmitCrashModuleLine(int*);
 extern void* g_10034614;
 extern char* __cdecl GetDebugRecordByIndex();
-extern unsigned char* func_1001a540(int, int);
+extern unsigned char* strrchr(int, int);
 extern void func_1001a527(void*);
-extern void func_1001a299(int, int, void*);
+extern void sprintf(int, int, void*);
 extern int func_1001a286(void*, int);
-extern void func_1001a46e(int, int, int);
+extern void fseek(int, int, int);
 extern int func_1001a2eb(int);
-extern void func_1001a18a(int);
-extern void func_1001a207(int, int);
+extern void fflush(int);
+extern void fputs(int, int);
 extern void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 extern int g_severity_table[3];
 extern unsigned int g_log_mode_flags;
@@ -733,24 +733,24 @@ void InitializeLogAndErrorHandler(
 	stack_return_addr = 0x104;
 	stack_buf_addr = 0x11766100;
 	GetModuleFileNameA(0, module_path, 0);
-	path_end = func_1001a540(0x11766100, 0x5c);
+	path_end = strrchr(0x11766100, 0x5c);
 	*path_end = 0;
 	func_1001a527(&stack_ddc);
-	func_1001a299(0x117640e0, 0x1002735c, &stack_ee4);
+	sprintf(0x117640e0, 0x1002735c, &stack_ee4);
 	if ((*(unsigned int*) 0x10034618 & 1) != 0) {
 		format_offset = 0x10027084;
 		do {
-			func_1001a299((int) &stack_de0, 0x100270fc, (void*) 0x11766100);
+			sprintf((int) &stack_de0, 0x100270fc, (void*) 0x11766100);
 			file_handle = func_1001a286(&stack_de0, 0x100270f8);
 			if (file_handle != 0) {
-				func_1001a46e(file_handle, 0, 2);
+				fseek(file_handle, 0, 2);
 				file_size = func_1001a2eb(file_handle);
 				if (0x10000 < file_size) {
-					func_1001a18a(file_handle);
+					fflush(file_handle);
 					file_handle = func_1001a286(&stack_de0, 0x10027358);
-					func_1001a207(0x1002733c, file_handle);
+					fputs(0x1002733c, file_handle);
 				}
-				func_1001a18a(file_handle);
+				fflush(file_handle);
 			}
 			format_offset = format_offset + 0x20;
 		} while (format_offset < 0x100270e4);

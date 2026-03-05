@@ -62,7 +62,7 @@ extern int g_entity_type_table;
 
 extern ushort* __cdecl StartFilteredEntitySearch(int, ...);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
-extern void __cdecl func_100151b0(uint, ushort*);
+extern void __cdecl table_lookup(uint, ushort*);
 
 extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d298[];
 extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[];
@@ -101,7 +101,7 @@ int __cdecl SetResidence(int param_1, char* param_2)
 
 	type_id = (uint) * (uchar*) building;
 	if (*(char*) (g_entity_type_table + type_id * 0x24d) == '\x01') {
-		func_100151b0(type_id, caps);
+		table_lookup(type_id, caps);
 		if ((ushort) * (uchar*) ((int) building + 0x65) >= caps[0]) {
 			LogMessageInternal(
 				s_D__Develop_DieGildeAddOn_command_1002c748,

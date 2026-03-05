@@ -551,7 +551,7 @@ void __cdecl free_subobj(void* a)
 {
 }
 
-int __cdecl func_100058d0(int* ctx, int flag)
+int __cdecl inflate(int* ctx, int flag)
 {
 	return 0;
 }
@@ -560,24 +560,24 @@ int __cdecl func_100058d0(int* ctx, int flag)
    search_and_set, ClampFloatValue, FireEntityAndCleanup: defined in alchemistry_logic.c */
 /* plt_SetPlantMap: defined in plant.c */
 
-void __cdecl func_100151b0(unsigned int a, unsigned short* b)
+void __cdecl table_lookup(unsigned int a, unsigned short* b)
 {
 }
 
-void __cdecl func_1001a060(void)
+void __cdecl entity_set_field(void)
 {
 }
 
-unsigned int __cdecl func_1001a0d0(int a)
+unsigned int __cdecl random_mod(int a)
 {
 	return 0;
 }
 
-void __cdecl func_1001a18a(int a)
+void __cdecl fflush(int a)
 {
 }
 
-void __cdecl func_1001a207(int a, int b)
+void __cdecl fputs(int a, int b)
 {
 }
 
@@ -586,7 +586,7 @@ int __cdecl func_1001a286(void* a, int b)
 	return 0;
 }
 
-void __cdecl func_1001a299(int a, int b, void* c)
+void __cdecl sprintf(int a, int b, void* c)
 {
 }
 
@@ -595,7 +595,7 @@ int __cdecl func_1001a2eb(int a)
 	return 0;
 }
 
-void __cdecl func_1001a46e(int a, int b, int c)
+void __cdecl fseek(int a, int b, int c)
 {
 }
 
@@ -603,22 +603,22 @@ void __cdecl func_1001a527(void* a)
 {
 }
 
-unsigned char* __cdecl func_1001a540(int a, int b)
+unsigned char* __cdecl strrchr(int a, int b)
 {
 	return (void*) 0;
 }
 
-int __cdecl func_1001aa6a(int stream, unsigned int size, int count, int handle)
+int __cdecl crt_locked_call4b(int stream, unsigned int size, int count, int handle)
 {
 	return 0;
 }
 
-int __cdecl func_1001aff0(char* a, char* b)
+int __cdecl strstr(char* a, char* b)
 {
 	return 0;
 }
 
-unsigned int __cdecl func_1001b564(void)
+unsigned int __cdecl __ftol(void)
 {
 	return 0;
 }

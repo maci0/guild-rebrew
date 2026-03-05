@@ -5,8 +5,8 @@ extern int g_1002576c[];
 extern int g_1002575c[];
 extern void find_entity_26(int);
 extern void find_entity_27(int);
-extern char func_1001a0d0(int);
-extern unsigned char func_1001b564();
+extern char random_mod(int);
+extern unsigned char __ftol();
 extern void AddOrAccumulateObject(int, int, int);
 extern char g_100a9820[];
 extern char g_1014d8e0[];
@@ -33,7 +33,7 @@ extern unsigned int LookupEntityRecordById(unsigned int);
 extern void LogMessageInternal(const char*, int, const char*, int);
 extern int StartFilteredEntitySearch(int, int, int);
 extern int ResolveEntityById(int*, int*, int*, int);
-extern void func_1001a060(void);
+extern void entity_set_field(void);
 extern int g_101deae8;
 extern int g_101deac0;
 extern int g_101de560;
@@ -223,7 +223,7 @@ void InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4
 		int row_offset = param_3 - g_100a9820;
 		loop_index = 0;
 		do {
-			random_char = func_1001a0d0(0x40);
+			random_char = random_mod(0x40);
 			g_100a9820[row_offset + loop_index] = random_char - 0x20;
 			g_1014d8e0[row_offset + loop_index] = 0;
 			loop_index++;
@@ -247,14 +247,14 @@ void InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4
 	*(int*) (param_4 + 0x18) = 0x447a0000;
 	loop_index = 0;
 	do {
-		func_1001a0d0(0x2a);
-		stat_byte = func_1001b564();
+		random_mod(0x2a);
+		stat_byte = __ftol();
 		*(unsigned char*) (param_4 + loop_index + 0x80) = stat_byte;
 		loop_index = loop_index + 1;
 	} while (loop_index < 5);
 	*(char*) (param_4 + 0xd) = 9;
 	AddOrAccumulateObject(*(int*) (param_4 + 4), *(int*) (*(int*) 0x10035439 * 0x2f4 + 0x100a8c94), 16000000);
-	func_1001a0d0(2);
+	random_mod(2);
 	*(char*) (param_4 + 2) = 3;
 	return;
 }
@@ -1940,7 +1940,7 @@ unsigned int ls_ID2Ptr(void)
 			byte_offset = byte_offset + 0x43;
 		} while (counter < *(int*) 0x10035450);
 	}
-	func_1001a060();
+	entity_set_field();
 	return 1;
 }
 
