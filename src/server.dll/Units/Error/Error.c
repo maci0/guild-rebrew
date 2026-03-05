@@ -100,7 +100,7 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 // FUNCTION: SERVER 0x10002770
 // CrashDumpUnhandledExceptionFilter
 
-int __stdcall CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
+int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	char szModulePath[0x100];
 	char* p;

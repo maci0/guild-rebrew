@@ -3952,10 +3952,12 @@ int __cdecl accumulate_typed2(char* entity)
 // ORIGIN: GAME
 // STATUS: RELOC
 // SIZE: 102
+#define NAKED_FUNC __declspec(naked)
+
 // FUNCTION: SERVER 0x10019a70
 // EntityQuerySum
 
-int __declspec(naked) __cdecl EntityQuerySum(int param_1)
+int NAKED_FUNC __cdecl EntityQuerySum(int param_1)
 {
 	__asm {
 		push ecx

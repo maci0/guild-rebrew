@@ -1177,10 +1177,10 @@ admin_loop:
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 131
+void* __cdecl memcpy(void*, const void*, unsigned int);
+
 // FUNCTION: SERVER 0x1000a860
 // ProcessSendData
-
-void* __cdecl memcpy(void*, const void*, unsigned int);
 
 int __cdecl ProcessSendData(void)
 {

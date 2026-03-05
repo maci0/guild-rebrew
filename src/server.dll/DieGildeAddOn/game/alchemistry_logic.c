@@ -477,11 +477,11 @@ int __cdecl FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 // ORIGIN: GAME
 // SIZE: 295
 // BLOCKER_DELTA: 269
-// FUNCTION: SERVER 0x1000c4d0
-// ahm_AllocAhmInfo
-
 int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void* __cdecl AllocateTrackedHeapBlock(unsigned int allocSize, const char* groupTag);
+
+// FUNCTION: SERVER 0x1000c4d0
+// ahm_AllocAhmInfo
 
 int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 {
