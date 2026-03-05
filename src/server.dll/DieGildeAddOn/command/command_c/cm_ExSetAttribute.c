@@ -10,9 +10,8 @@
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
-#include "../command_internal.h"
 #include "../../../Units/Error/error.h"
-
+#include "../command_internal.h"
 
 extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
 
@@ -29,9 +28,9 @@ int __cdecl cm_ExSetAttribute(int param_1, char* param_2)
 	void* dynEntity;
 
 	cmdBase = param_1;
-	resolveResult = gm_GetFieldByType((char*)param_1, *(int*)(param_1 + 0x10));
-	*(int*)(cmdBase + 0x10) = resolveResult;
-	resolveResult = gm_ResolveEntityById((void**)&param_1, &objectEntity, &dynEntity, resolveResult);
+	resolveResult = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
+	*(int*) (cmdBase + 0x10) = resolveResult;
+	resolveResult = gm_ResolveEntityById((void**) &param_1, &objectEntity, &dynEntity, resolveResult);
 	if (resolveResult == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -41,17 +40,17 @@ int __cdecl cm_ExSetAttribute(int param_1, char* param_2)
 		);
 		return 1;
 	}
-	if ((param_1 == 0) && (param_1 = (int)objectEntity, objectEntity == (void*)0x0)) {
-		param_1 = (int)dynEntity;
+	if ((param_1 == 0) && (param_1 = (int) objectEntity, objectEntity == (void*) 0x0)) {
+		param_1 = (int) dynEntity;
 	}
 	fieldIdx = 0;
-	srcPtr = (char*)(cmdBase + 0x15);
-	if (*(uchar*)(cmdBase + 0x14) != 0) {
+	srcPtr = (char*) (cmdBase + 0x15);
+	if (*(uchar*) (cmdBase + 0x14) != 0) {
 		do {
-			fieldSize = (int)*(signed char*)srcPtr;
-			resolveResult = (int)*(signed char*)(srcPtr + 1);
+			fieldSize = (int) *(signed char*) srcPtr;
+			resolveResult = (int) *(signed char*) (srcPtr + 1);
 			srcPtr = srcPtr + 2;
-			dstPtr = (char*)((uint)*(ushort*)srcPtr + (uint)param_1);
+			dstPtr = (char*) ((uint) * (ushort*) srcPtr + (uint) param_1);
 			srcPtr = srcPtr + 2;
 			if (fieldSize == 1) {
 				for (; resolveResult != 0; resolveResult--) {
@@ -59,23 +58,25 @@ int __cdecl cm_ExSetAttribute(int param_1, char* param_2)
 					dstPtr++;
 					srcPtr++;
 				}
-			} else if (fieldSize == 2) {
+			}
+			else if (fieldSize == 2) {
 				for (; resolveResult != 0; resolveResult--) {
-					*(short*)dstPtr = *(short*)srcPtr;
+					*(short*) dstPtr = *(short*) srcPtr;
 					srcPtr += 2;
 					dstPtr += 2;
 				}
-			} else if (fieldSize == 4) {
+			}
+			else if (fieldSize == 4) {
 				for (; resolveResult != 0; resolveResult--) {
-					*(int*)dstPtr = *(int*)srcPtr;
+					*(int*) dstPtr = *(int*) srcPtr;
 					srcPtr += 4;
 					dstPtr += 4;
 				}
 			}
 			fieldIdx++;
-		} while (fieldIdx < *(uchar*)(cmdBase + 0x14));
+		} while (fieldIdx < *(uchar*) (cmdBase + 0x14));
 	}
-	if (param_2 != (char*)0) {
+	if (param_2 != (char*) 0) {
 		*param_2 = '\x01';
 	}
 	return 0;
