@@ -1009,13 +1009,13 @@ unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 					load_result = ahm_AllocAhmInfo(param_1, (int) esi);
 				}
 				else {
-					int* puVar9;
+					int* ahm_info;
 					if (!ReadVfsDataChecked(esi + 0x65, 0x30, 1, param_1)) {
 						return 0;
 					}
-					puVar9 = (int*) AllocateTrackedHeapBlock(0x3c, (const char*) 0x1002d504);
-					*(int*) (esi + 0x65) = (int) puVar9;
-					*puVar9 = neg1;
+					ahm_info = (int*) AllocateTrackedHeapBlock(0x3c, (const char*) 0x1002d504);
+					*(int*) (esi + 0x65) = (int) ahm_info;
+					*ahm_info = neg1;
 					goto label_10012d72;
 				}
 				if (load_result == 0) {
@@ -1035,14 +1035,14 @@ unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 				}
 			}
 			else {
-				int* puVar2 = (int*) (esi + 0x99);
+				int* state_ptr = (int*) (esi + 0x99);
 				int zero = 0;
-				*puVar2 = zero;
-				*(int*) ((char*) puVar2 + 4) = zero;
-				*(int*) ((char*) puVar2 + 8) = zero;
-				*(int*) ((char*) puVar2 + 0xc) = zero;
+				*state_ptr = zero;
+				*(int*) ((char*) state_ptr + 4) = zero;
+				*(int*) ((char*) state_ptr + 8) = zero;
+				*(int*) ((char*) state_ptr + 0xc) = zero;
 				*(int*) (esi + 0xa5) = neg1;
-				*puVar2 = *puVar2 | 1;
+				*state_ptr = *state_ptr | 1;
 			}
 
 			*(int*) (esi + 0x30) = 0x1388;

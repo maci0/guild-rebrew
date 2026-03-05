@@ -1403,17 +1403,17 @@ unsigned int MoveSlotEntry(int param_1)
 	}
 	field_or_slot_ptr = GetSlotEntry(*(int*) (building_entity_ptr + 0x65), *(int*) (cmd_ptr_saved + 8), (int) *(unsigned char*) (cmd_ptr_saved + 0xc));
 	if ((field_or_slot_ptr != 0) && (*(unsigned short*) (field_or_slot_ptr + 8) == *(unsigned short*) (param_1 + 0x50))) {
-		int iStack_8;
+		int saved_src_slot_entry_ptr;
 
 		src_worker_array_ptr = *(int**) (field_or_slot_ptr + 0x10);
 		src_worker_array_end = *(int*) (*(int*) (cmd_ptr_saved + 8) * 4 + 0x1002574c);
-		iStack_8 = field_or_slot_ptr;
+		saved_src_slot_entry_ptr = field_or_slot_ptr;
 		dst_slot_entry_ptr = FindSlotEntryFiltered(param_1, (int) building_entity_ptr, 0, 0x10010700, *(int*) (cmd_ptr_saved + 0xd));
 		if (dst_slot_entry_ptr != 0) {
 			int* piVar5;
 			int* piVar7;
 			int* piVar8;
-			int iVar9;
+			int word_copy_count;
 			piVar5 = *(int**) (dst_slot_entry_ptr + 0x10);
 			piVar8 = piVar5 + *(int*) (*(int*) (cmd_ptr_saved + 0xd) * 4 + 0x1002574c) * 0x11;
 			src_worker_array_end = (int) (src_worker_array_ptr + src_worker_array_end * 0x11);
@@ -1431,19 +1431,19 @@ unsigned int MoveSlotEntry(int param_1)
 					{
 						int* pSrc = src_worker_array_ptr;
 						int* pDst = piVar5;
-						for (iVar9 = 0x11; iVar9 != 0; iVar9 = iVar9 + -1) {
+						for (word_copy_count = 0x11; word_copy_count != 0; word_copy_count = word_copy_count + -1) {
 							*pDst = *pSrc;
 							pSrc = pSrc + 1;
 							pDst = pDst + 1;
 						}
 					}
 					piVar7 = src_worker_array_ptr;
-					for (iVar9 = 0x11; iVar9 != 0; iVar9 = iVar9 + -1) {
+					for (word_copy_count = 0x11; word_copy_count != 0; word_copy_count = word_copy_count + -1) {
 						*piVar7 = 0;
 						piVar7 = piVar7 + 1;
 					}
 					*src_worker_array_ptr = -1;
-					field_or_slot_ptr = iStack_8;
+					field_or_slot_ptr = saved_src_slot_entry_ptr;
 					if ((int*) src_worker_array_end <= src_worker_array_ptr) {
 						break;
 					}
@@ -1459,17 +1459,17 @@ unsigned int MoveSlotEntry(int param_1)
 			*(unsigned short*) (field_or_slot_ptr + 0xa) = 0xff;
 			*(int*) (cmd_ptr_saved + 0x15) = *(int*) 0x10030b6c;
 			if (0 < *(int*) (cmd_ptr_saved + 0x11)) {
-				unsigned int uVar4;
+				unsigned int scaled_amount;
 				SubtractObjectAmountNoKill(
 					*(unsigned int*) (param_1 + 4),
 					*(unsigned int*) ((unsigned char*) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
 					*(unsigned int*) (cmd_ptr_saved + 0x11)
 				);
-				uVar4 = (unsigned int) ((int) *(int*) (cmd_ptr_saved + 0x11) * ((float*) 0x1002572c)[*(int*) (cmd_ptr_saved + 0xd)]);
+				scaled_amount = (unsigned int) ((int) *(int*) (cmd_ptr_saved + 0x11) * ((float*) 0x1002572c)[*(int*) (cmd_ptr_saved + 0xd)]);
 				AddOrAccumulateObject(
 					*(unsigned int*) ((unsigned char*) 0x100358a4 + *(unsigned short*) (building_entity_ptr + 0x27) * 0x21c),
 					*(unsigned int*) ((unsigned char*) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
-					uVar4
+					scaled_amount
 				);
 			}
 			return 0;
