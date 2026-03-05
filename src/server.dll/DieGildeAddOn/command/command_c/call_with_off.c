@@ -27,8 +27,8 @@ extern int __cdecl ValidateOfficeCandidate(int*);
 // FUNCTION: SERVER 0x1000d020
 int __cdecl call_with_off(void* obj)
 {
-	int iVar1;
+	int result;
 
-	iVar1 = ValidateOfficeCandidate((int*) ((int) obj + 0x10));
-	return iVar1 == 0;
+	result = ValidateOfficeCandidate((int*) ((int) obj + 0x10));
+	return result == 0;
 }

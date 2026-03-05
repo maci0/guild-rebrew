@@ -51,26 +51,26 @@ extern int __cdecl CheckCutsceneReady(char*);
 // FUNCTION: SERVER 0x1000ff60
 int __cdecl CutsceneEntityUpdate(int param_1, char* param_2)
 {
-	int iVar1;
-	int iVar2;
-	int* piVar3;
+	int readyResult;
+	int entityRecord;
+	int* entityIdPtr;
 
-	iVar1 = CheckCutsceneReady((char*) param_1);
-	if (iVar1 != 0) {
+	readyResult = CheckCutsceneReady((char*) param_1);
+	if (readyResult != 0) {
 		if (param_2 != (char*) 0x0) {
 			*param_2 = '\x02';
 		}
 		return 1;
 	}
-	piVar3 = (int*) (param_1 + 0x14);
-	iVar1 = 0x10;
+	entityIdPtr = (int*) (param_1 + 0x14);
+	readyResult = 0x10;
 	do {
-		iVar2 = LookupEntityRecordById(*piVar3);
-		if (iVar2 != 0) {
-			*(int*) (iVar2 + 0x20c) = *(int*) (param_1 + 0x10);
+		entityRecord = LookupEntityRecordById(*entityIdPtr);
+		if (entityRecord != 0) {
+			*(int*) (entityRecord + 0x20c) = *(int*) (param_1 + 0x10);
 		}
-		piVar3 = piVar3 + 1;
-		iVar1 = iVar1 + -1;
-	} while (iVar1 != 0);
+		entityIdPtr = entityIdPtr + 1;
+		readyResult = readyResult + -1;
+	} while (readyResult != 0);
 	return 0;
 }

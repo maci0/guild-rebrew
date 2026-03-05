@@ -77,22 +77,22 @@ extern void __cdecl AllocateEntitySlot(void*, void*, void*);
 int __cdecl SimSpecialAction(int param_1, char* param_2)
 {
 	char* p;
-	uint uVar1;
+	uint action_type;
 	char* src;
-	int iVar2;
+	int flag_ok;
 
 	(void) param_2;
 	p = (char*) LookupEntityRecordById(*(int*) (param_1 + 0x14));
 	if (p == (char*) 0) {
 		return -1;
 	}
-	iVar2 = check_flag(p);
-	if (iVar2 == 0) {
+	flag_ok = check_flag(p);
+	if (flag_ok == 0) {
 		return -2;
 	}
-	uVar1 = *(uint*) (param_1 + 0x10);
+	action_type = *(uint*) (param_1 + 0x10);
 	src = (char*) (param_1 + 0x10);
-	switch (uVar1) {
+	switch (action_type) {
 	case 0x61535263:
 		search_and_set(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
 		return 0;

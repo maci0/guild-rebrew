@@ -53,23 +53,23 @@ extern float _g_stat_min;
 // FUNCTION: SERVER 0x100100a0
 int __cdecl ModifyEntityStat(int* param_1)
 {
-	int iVar1;
-	int iVar3;
-	float fVar2;
+	int stat_index;
+	int entity_record;
+	float new_stat_value;
 
-	iVar3 = LookupEntityRecordById(param_1[4]);
-	if ((iVar3 == 0) || ((iVar1 = param_1[5], iVar1 < 0) || (4 < iVar1))) {
+	entity_record = LookupEntityRecordById(param_1[4]);
+	if ((entity_record == 0) || ((stat_index = param_1[5], stat_index < 0) || (4 < stat_index))) {
 		return 1;
 	}
-	fVar2 = (float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (iVar1 + 0x80 + iVar3));
-	if (fVar2 >= _g_stat_max) {
-		*(char*) (iVar1 + 0x80 + iVar3) = (char) (long) _g_stat_max;
+	new_stat_value = (float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record));
+	if (new_stat_value >= _g_stat_max) {
+		*(char*) (stat_index + 0x80 + entity_record) = (char) (long) _g_stat_max;
 		return 0;
 	}
-	if (fVar2 <= _g_stat_min) {
-		fVar2 = _g_stat_min;
+	if (new_stat_value <= _g_stat_min) {
+		new_stat_value = _g_stat_min;
 	}
-	*(char*) (iVar1 + 0x80 + iVar3) = (char) (long) fVar2;
+	*(char*) (stat_index + 0x80 + entity_record) = (char) (long) new_stat_value;
 	return 0;
 }
 

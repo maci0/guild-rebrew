@@ -66,35 +66,35 @@ extern unsigned short g_currency_type_array[];
 // FUNCTION: SERVER 0x1000d7f0
 int __cdecl ExTransferCurrency(int param_1, char* param_2)
 {
-	void* pvVar1;
-	int iVar2;
+	void* entity_ptr;
+	int field_result;
 
 	*(int*) (param_1 + 0x18) = g_timestamp_0b6c;
 
 	if (*(int*) (param_1 + 0x14) != -1) {
-		pvVar1 = (void*) get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
-		*(void**) (param_1 + 0x14) = pvVar1;
-		iVar2 = SubObjekt(
-			pvVar1,
+		entity_ptr = (void*) get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
+		*(void**) (param_1 + 0x14) = entity_ptr;
+		field_result = SubObjekt(
+			entity_ptr,
 			(unsigned int) *(unsigned short*) ((char*) g_currency_type_array +
 											   (unsigned int) *(unsigned char*) (param_1 + 0x1c) * 0x2f4),
 			*(int*) (param_1 + 0x1d)
 		);
-		if (iVar2 == 0) {
+		if (field_result == 0) {
 			return 1;
 		}
 	}
 
 	if (*(int*) (param_1 + 0x10) != -1) {
-		iVar2 = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
-		*(int*) (param_1 + 0x10) = iVar2;
-		pvVar1 = AddOrAccumulateObject(
-			iVar2,
+		field_result = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+		*(int*) (param_1 + 0x10) = field_result;
+		entity_ptr = AddOrAccumulateObject(
+			field_result,
 			(unsigned int) *(unsigned short*) ((char*) g_currency_type_array +
 											   (unsigned int) *(unsigned char*) (param_1 + 0x1c) * 0x2f4),
 			*(int*) (param_1 + 0x1d)
 		);
-		if (pvVar1 == (void*) 0x0) {
+		if (entity_ptr == (void*) 0x0) {
 			return 1;
 		}
 	}

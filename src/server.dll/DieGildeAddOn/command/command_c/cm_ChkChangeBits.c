@@ -65,13 +65,13 @@ int __cdecl CheckChangeBits(int param_1, char* param_2)
 	int cmd;
 	int field;
 	int ref;
-	void* local_8;
-	void* local_4;
+	void* secondary;
+	void* tertiary;
 
 	cmd = param_1;
 	field = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
 	*(int*) (cmd + 0x10) = field;
-	if (ResolveEntityById((void**) &param_1, &local_8, &local_4, field) == 0) {
+	if (ResolveEntityById((void**) &param_1, &secondary, &tertiary, field) == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x250d,
@@ -83,7 +83,7 @@ int __cdecl CheckChangeBits(int param_1, char* param_2)
 
 	ref = (int) param_2;
 	if (ref == 0) {
-		ref = (int) local_8;
+		ref = (int) secondary;
 		if (ref == 0) {
 			ref = param_1;
 		}

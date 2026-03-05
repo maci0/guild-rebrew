@@ -53,21 +53,21 @@ extern char g_player_slot_0[];
 // FUNCTION: SERVER 0x1000e750
 int __cdecl ExCreateObject(int param_1, char* param_2)
 {
-	int iVar1;
-	char* pcVar2;
+	int field_id;
+	char* game_obj;
 	char* entity;
 	unsigned int slot_idx;
 
 	*(int*) (param_1 + 0x35) = g_timestamp_0b6c;
-	iVar1 = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
-	*(int*) (param_1 + 0x10) = iVar1;
-	pcVar2 = AllocGameObject(iVar1, (unsigned int) *(unsigned short*) (param_1 + 0x14), 1);
-	if (pcVar2 == (char*) 0) {
+	field_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+	*(int*) (param_1 + 0x10) = field_id;
+	game_obj = AllocGameObject(field_id, (unsigned int) *(unsigned short*) (param_1 + 0x14), 1);
+	if (game_obj == (char*) 0) {
 		return 1;
 	}
 	slot_idx = (unsigned int) *(unsigned char*) (param_1 + 3);
-	*(int*) (g_player_slot_0 + slot_idx * 0x264264 + 0x264208) = *(int*) (pcVar2 + 2);
-	entity = pcVar2 + 0x1c;
+	*(int*) (g_player_slot_0 + slot_idx * 0x264264 + 0x264208) = *(int*) (game_obj + 2);
+	entity = game_obj + 0x1c;
 	memcpy(entity, (char*) param_1 + 0x16, 0x1f);
 	if (param_2 != (char*) 0) {
 		*param_2 = '\x01';

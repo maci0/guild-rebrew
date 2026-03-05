@@ -27,7 +27,7 @@ int __cdecl JoinLeaveElection(int param_1, char *param_2)
 	int *p;
 	int i;
 	int cmd;
-	unsigned short uVar1;
+	unsigned short residentIdx;
 
 	if (param_2 != (char *)0) {
 		*param_2 = '\x02';
@@ -101,9 +101,9 @@ int __cdecl JoinLeaveElection(int param_1, char *param_2)
 	if (cmd == 0x636c6572) {
 		entity = (char *)StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
 		if (entity != (char *)0) {
-			uVar1 = *(unsigned short *)(entity + 0x27);
-			if (uVar1 != 0xffff) {
-				resident = (char *)(g_100358a0 + ((((unsigned int)uVar1 * 3) * 5) * 9) * 4);
+			residentIdx = *(unsigned short *)(entity + 0x27);
+			if (residentIdx != 0xffff) {
+				resident = (char *)(g_100358a0 + ((((unsigned int)residentIdx * 3) * 5) * 9) * 4);
 				if (resident != (char *)0 && (int)resident != g_1003546c) {
 					if (*(unsigned char *)(resident + 8) != 0 &&
 						*(unsigned char *)(resident + 2) != 0x0f) {

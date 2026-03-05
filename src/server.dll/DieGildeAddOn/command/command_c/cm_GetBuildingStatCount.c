@@ -61,42 +61,42 @@ extern char* g_entity_type_table;
 // FUNCTION: SERVER 0x100104a0
 int __cdecl GetBuildingStatCount(uchar* param_1)
 {
-	char cVar1;
-	int iVar2;
-	int iVar3;
-	uchar bVar4;
-	char* pcVar5;
+	char building_tier;
+	int upgrade_data;
+	int stat_count;
+	uchar entity_type;
+	char* type_entry;
 
-	bVar4 = *param_1;
-	pcVar5 = g_entity_type_table + (uint) bVar4 * 0x24d;
-	cVar1 = pcVar5[0x247];
-	iVar2 = *(int*) (param_1 + 0x65);
-	if (cVar1 == '\x01') {
-		iVar3 = 8;
-		if (*(uchar*) (iVar2 + 0x19) == (uchar) 1) {
+	entity_type = *param_1;
+	type_entry = g_entity_type_table + (uint) entity_type * 0x24d;
+	building_tier = type_entry[0x247];
+	upgrade_data = *(int*) (param_1 + 0x65);
+	if (building_tier == '\x01') {
+		stat_count = 8;
+		if (*(uchar*) (upgrade_data + 0x19) == (uchar) 1) {
 			return 0xc;
 		}
 	}
-	else if (cVar1 == '\x02') {
-		iVar3 = 0xc;
-		if (*(uchar*) (iVar2 + 0x19) == (uchar) 1) {
-			iVar3 = 0x12;
+	else if (building_tier == '\x02') {
+		stat_count = 0xc;
+		if (*(uchar*) (upgrade_data + 0x19) == (uchar) 1) {
+			stat_count = 0x12;
 		}
-		if (*(uchar*) (iVar2 + 0x1a) == (uchar) 1) {
-			return iVar3 + 2;
+		if (*(uchar*) (upgrade_data + 0x1a) == (uchar) 1) {
+			return stat_count + 2;
 		}
 	}
 	else {
-		iVar3 = 0x10;
-		if (*(uchar*) (iVar2 + 0x19) == (uchar) 1) {
-			iVar3 = 0x18;
+		stat_count = 0x10;
+		if (*(uchar*) (upgrade_data + 0x19) == (uchar) 1) {
+			stat_count = 0x18;
 		}
-		if (*(uchar*) (iVar2 + 0x1a) == (uchar) 1) {
-			iVar3 = iVar3 + 4;
+		if (*(uchar*) (upgrade_data + 0x1a) == (uchar) 1) {
+			stat_count = stat_count + 4;
 		}
-		if (*(uchar*) (iVar2 + 0x1b) == (uchar) 1) {
-			iVar3 = iVar3 + 2;
+		if (*(uchar*) (upgrade_data + 0x1b) == (uchar) 1) {
+			stat_count = stat_count + 2;
 		}
 	}
-	return iVar3;
+	return stat_count;
 }

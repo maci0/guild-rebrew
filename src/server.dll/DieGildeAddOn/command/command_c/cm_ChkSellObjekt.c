@@ -24,44 +24,44 @@ extern char s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8[];
 // FUNCTION: SERVER 0x1000cbd0
 int __cdecl CheckSellObject(char* cmd)
 {
-	short sVar1;
-	int iVar2;
-	char* pcVar6;
+	short obj_type;
+	int result;
+	char* cmd_ptr;
 	char* parent;
 	void* src_bldg;
 	void* dst_bldg;
 
-	pcVar6 = cmd;
-	if (*(int*)(pcVar6 + 0x14) != -1) {
-		iVar2 = get_field_by_type(pcVar6, *(int*)(pcVar6 + 0x14));
-		*(int*)(pcVar6 + 0x14) = iVar2;
-		iVar2 = ResolveEntityById(&src_bldg, (void**)&cmd, (void**)&parent, iVar2);
-		if (iVar2 == 0) {
+	cmd_ptr = cmd;
+	if (*(int*)(cmd_ptr + 0x14) != -1) {
+		result = get_field_by_type(cmd_ptr, *(int*)(cmd_ptr + 0x14));
+		*(int*)(cmd_ptr + 0x14) = result;
+		result = ResolveEntityById(&src_bldg, (void**)&cmd, (void**)&parent, result);
+		if (result == 0) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x236b, s_cm_ChkSellObjekt___Invalid__quel_1002c8dc, 8);
 			return 1;
 		}
 		if (src_bldg != (void*)0) {
-			iVar2 = *(int*)((char*)src_bldg + 0x5d);
+			result = *(int*)((char*)src_bldg + 0x5d);
 		} else if (cmd != (char*)0) {
-			iVar2 = *(int*)(cmd + 0x14);
+			result = *(int*)(cmd + 0x14);
 		} else {
-			iVar2 = *(int*)(parent + 0x178);
+			result = *(int*)(parent + 0x178);
 		}
-		iVar2 = StartEntityQuery(iVar2, 1, 0, (uint)*(ushort*)(pcVar6 + 0x18));
-		if (iVar2 == 0) {
+		result = StartEntityQuery(result, 1, 0, (uint)*(ushort*)(cmd_ptr + 0x18));
+		if (result == 0) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2383, s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4, 8);
 			return 1;
 		}
-		if (*(int*)((char*)iVar2 + 0xe) < *(int*)(pcVar6 + 0x1f)) {
+		if (*(int*)((char*)result + 0xe) < *(int*)(cmd_ptr + 0x1f)) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x238f, s_cm_ChkSellObjekt___Not_enough_Ob_1002c884, 8);
 			return 1;
 		}
 	}
-	if (*(int*)(pcVar6 + 0x10) != -1) {
-		iVar2 = get_field_by_type(pcVar6, *(int*)(pcVar6 + 0x10));
-		*(int*)(pcVar6 + 0x10) = iVar2;
-		iVar2 = ResolveEntityById(&dst_bldg, (void**)&cmd, (void**)&parent, iVar2);
-		if (iVar2 == 0) {
+	if (*(int*)(cmd_ptr + 0x10) != -1) {
+		result = get_field_by_type(cmd_ptr, *(int*)(cmd_ptr + 0x10));
+		*(int*)(cmd_ptr + 0x10) = result;
+		result = ResolveEntityById(&dst_bldg, (void**)&cmd, (void**)&parent, result);
+		if (result == 0) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23ab, s_cm_ChkSellObjekt___Invalid__ziel_1002c854, 8);
 			return 1;
 		}
@@ -72,25 +72,25 @@ int __cdecl CheckSellObject(char* cmd)
 				parent = g_static_entity_table_358a0 + (uint)*(ushort*)((char*)dst_bldg + 0x27) * 0x21c;
 			}
 		} else if (cmd != (char*)0) {
-			sVar1 = *(short*)cmd;
-			if (sVar1 == 0x2a || sVar1 == 0x116 || sVar1 == 0x1dd) {
-				iVar2 = KannObjektHergestellt(cmd, (int)(uint)*(ushort*)(pcVar6 + 0x18), *(int*)(pcVar6 + 0x1f));
-				if (iVar2 < *(int*)(pcVar6 + 0x1f)) {
+			obj_type = *(short*)cmd;
+			if (obj_type == 0x2a || obj_type == 0x116 || obj_type == 0x1dd) {
+				result = KannObjektHergestellt(cmd, (int)(uint)*(ushort*)(cmd_ptr + 0x18), *(int*)(cmd_ptr + 0x1f));
+				if (result < *(int*)(cmd_ptr + 0x1f)) {
 					LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23cd, s_cm_ChkSellObjekt___Lager_voll_1002c834, 8);
 					return 1;
 				}
 			}
 			parent = ResolveParentEntity(cmd);
 		} else {
-			iVar2 = CheckInventoryCapacity(parent, (uint)*(ushort*)(pcVar6 + 0x18), *(int*)(pcVar6 + 0x1f));
-			if (iVar2 < *(int*)(pcVar6 + 0x1f)) {
+			result = CheckInventoryCapacity(parent, (uint)*(ushort*)(cmd_ptr + 0x18), *(int*)(cmd_ptr + 0x1f));
+			if (result < *(int*)(cmd_ptr + 0x1f)) {
 				LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23e3, s_cm_ChkSellObjekt___Inventory_vol_1002c810, 8);
 				return 1;
 			}
 		}
-		if (*(int*)(pcVar6 + 0x23) != 0 && parent != (char*)0) {
-			iVar2 = QueryEntitySum(*(int*)(parent + 0x178), (int)*(unsigned char*)(pcVar6 + 0x1e));
-			if (iVar2 < *(int*)(pcVar6 + 0x1f) * *(int*)(pcVar6 + 0x23)) {
+		if (*(int*)(cmd_ptr + 0x23) != 0 && parent != (char*)0) {
+			result = QueryEntitySum(*(int*)(parent + 0x178), (int)*(unsigned char*)(cmd_ptr + 0x1e));
+			if (result < *(int*)(cmd_ptr + 0x1f) * *(int*)(cmd_ptr + 0x23)) {
 				LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23ff, s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8, 8);
 				return 1;
 			}

@@ -50,24 +50,24 @@ extern char g_currency_type_array[];
 // FUNCTION: SERVER 0x1000d8a0
 int __cdecl ExTransferCurrencyNoKill(int param_1, char* param_2)
 {
-	int iVar1;
+	int field_result;
 
 	*(int*) (param_1 + 0x18) = g_timestamp_0b6c;
 	if (*(int*) (param_1 + 0x14) != -1) {
-		iVar1 = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
-		*(int*) (param_1 + 0x14) = iVar1;
+		field_result = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
+		*(int*) (param_1 + 0x14) = field_result;
 		SubtractObjectAmountNoKill(
-			iVar1,
+			field_result,
 			(unsigned int) *(unsigned short*) (g_currency_type_array +
 											   (unsigned int) *(unsigned char*) (param_1 + 0x1c) * 0x2f4),
 			*(int*) (param_1 + 0x1d)
 		);
 	}
 	if (*(int*) (param_1 + 0x10) != -1) {
-		iVar1 = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
-		*(int*) (param_1 + 0x10) = iVar1;
+		field_result = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+		*(int*) (param_1 + 0x10) = field_result;
 		AddOrAccumulateObject(
-			iVar1,
+			field_result,
 			(unsigned int) *(unsigned short*) (g_currency_type_array +
 											   (unsigned int) *(unsigned char*) (param_1 + 0x1c) * 0x2f4),
 			*(int*) (param_1 + 0x1d)

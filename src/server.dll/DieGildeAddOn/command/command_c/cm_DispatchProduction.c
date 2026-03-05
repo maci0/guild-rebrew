@@ -66,36 +66,36 @@ extern int __cdecl ValidateEntityAction(uchar*);
 // FUNCTION: SERVER 0x10010260
 int __cdecl DispatchProductionCommand(int param_1, char* param_2)
 {
-	uint32_t* puVar1;
-	int iVar2;
-	unsigned int uVar3;
+	uint32_t* data_ptr;
+	int result;
+	unsigned int status;
 
 	*(int*) (param_1 + 0x27) = g_timestamp_0b6c;
-	iVar2 = rand();
-	*(int*) (param_1 + 0x2b) = iVar2;
-	puVar1 = (uint32_t*) (param_1 + 0x10);
+	result = rand();
+	*(int*) (param_1 + 0x2b) = result;
+	data_ptr = (uint32_t*) (param_1 + 0x10);
 	switch (*(int*) (param_1 + 0x10)) {
 	case 0:
-		uVar3 = AssignProductionSlot((int) puVar1);
-		return uVar3;
+		status = AssignProductionSlot((int) data_ptr);
+		return status;
 	case 1:
-		uVar3 = HireProductionWorker((int) puVar1);
-		return uVar3;
+		status = HireProductionWorker((int) data_ptr);
+		return status;
 	case 2:
-		uVar3 = ExtendProductionTime(puVar1);
-		return uVar3;
+		status = ExtendProductionTime(data_ptr);
+		return status;
 	case 3:
-		iVar2 = ReplaceProductionWorker((uchar*) puVar1);
-		return iVar2;
+		result = ReplaceProductionWorker((uchar*) data_ptr);
+		return result;
 	case 4:
-		iVar2 = ActivateGraveyardSection((uchar*) puVar1);
-		return iVar2;
+		result = ActivateGraveyardSection((uchar*) data_ptr);
+		return result;
 	case 5:
-		iVar2 = UpdateProductionProgress((uchar*) puVar1);
-		return iVar2;
+		result = UpdateProductionProgress((uchar*) data_ptr);
+		return result;
 	case 6:
-		iVar2 = ValidateEntityAction((uchar*) puVar1);
-		return iVar2;
+		result = ValidateEntityAction((uchar*) data_ptr);
+		return result;
 	default:
 		return -1;
 	}

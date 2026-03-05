@@ -27,8 +27,8 @@ extern int __cdecl MoveSlotEntry(int);
 // FUNCTION: SERVER 0x100102f0
 int __cdecl DispatchMoveSlotEntry(void* param_1, char* param_2)
 {
-	int uVar1;
+	int result;
 
-	uVar1 = MoveSlotEntry((int) param_1 + 0x10);
-	return uVar1;
+	result = MoveSlotEntry((int) param_1 + 0x10);
+	return result;
 }

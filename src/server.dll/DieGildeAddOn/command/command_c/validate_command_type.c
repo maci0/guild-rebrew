@@ -43,10 +43,10 @@ extern char s_Invalid_Commandtype_in_Execution_1002cacc[];
 // FUNCTION: SERVER 0x1000d2e0
 int __cdecl validate_command_type(char* cmd, char* result)
 {
-	char cVar1;
+	char cmd_type;
 
-	cVar1 = *cmd;
-	if ((((cVar1 != '\0') && (cVar1 != '\x05')) && (cVar1 != '\x06')) && (cVar1 != '\a')) {
+	cmd_type = *cmd;
+	if ((((cmd_type != '\0') && (cmd_type != '\x05')) && (cmd_type != '\x06')) && (cmd_type != '\a')) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x270b,

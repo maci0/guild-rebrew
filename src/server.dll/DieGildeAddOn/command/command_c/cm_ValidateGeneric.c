@@ -27,8 +27,8 @@ extern int __cdecl ValidateCommand(char*);
 // FUNCTION: SERVER 0x1000d040
 int __cdecl CmdValidateGeneric(void* param_1, char* param_2)
 {
-	int iVar1;
+	int validate_result;
 
-	iVar1 = ValidateCommand((char*) ((int) param_1 + 0x10));
-	return iVar1 == 0;
+	validate_result = ValidateCommand((char*) ((int) param_1 + 0x10));
+	return validate_result == 0;
 }

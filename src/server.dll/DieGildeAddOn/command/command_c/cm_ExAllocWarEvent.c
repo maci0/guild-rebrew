@@ -90,10 +90,10 @@ extern ushort* __cdecl AllocGameObject(int, int, int);
 // FUNCTION: SERVER 0x10010140
 int __cdecl AllocWarEvent(int param_1, char* param_2)
 {
-	void* pvVar1;
-	void* pvVar2;
+	void* attacker;
+	void* target;
 	char* evt;
-	uchar bVar4;
+	uchar damage;
 	war_payload* pSrc;
 	war_payload* pDst;
 
@@ -101,22 +101,22 @@ int __cdecl AllocWarEvent(int param_1, char* param_2)
 
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
 
-	pvVar1 = search_table_67(*(int*) (param_1 + 0x26));
-	if (pvVar1 == (void*) 0) {
+	attacker = search_table_67(*(int*) (param_1 + 0x26));
+	if (attacker == (void*) 0) {
 		return 1;
 	}
 
-	pvVar2 = search_table_67(*(int*) (param_1 + 0x14));
-	if (pvVar2 == (void*) 0) {
+	target = search_table_67(*(int*) (param_1 + 0x14));
+	if (target == (void*) 0) {
 		return 1;
 	}
 
-	evt = (char*) StartEntityQuery(*(int*) ((int) pvVar2 + 0x5d), 1, 0, 0xca);
+	evt = (char*) StartEntityQuery(*(int*) ((int) target + 0x5d), 1, 0, 0xca);
 	do {
 		if (evt == (char*) 0) {
 			goto alloc;
 		}
-		if (*(int*) (evt + 0x2a) == *(int*) ((char*) pvVar1 + 1)) {
+		if (*(int*) (evt + 0x2a) == *(int*) ((char*) attacker + 1)) {
 			break;
 		}
 		evt = (char*) NextEntityQueryMatch();
@@ -127,7 +127,7 @@ int __cdecl AllocWarEvent(int param_1, char* param_2)
 	}
 
 alloc:
-	evt = (char*) AllocGameObject(*(int*) ((char*) pvVar2 + 1), 0xca, 1);
+	evt = (char*) AllocGameObject(*(int*) ((char*) target + 1), 0xca, 1);
 	if (evt == (char*) 0) {
 		return 1;
 	}
@@ -137,7 +137,7 @@ alloc:
 docopy:
 	pSrc = (war_payload*) (param_1 + 0x18);
 	pDst = (war_payload*) (evt + 0x1c);
-	bVar4 = *(uchar*) (evt + 0x37);
+	damage = *(uchar*) (evt + 0x37);
 	pDst->field0 = pSrc->field0;
 	pDst->field1 = pSrc->field1;
 	pDst->field2 = pSrc->field2;
@@ -145,9 +145,9 @@ docopy:
 	*(int*) (evt + 0x2a) = *(int*) (param_1 + 0x26);
 	*(int*) (evt + 0x32) = *(int*) (param_1 + 0x2e);
 	*(uchar*) (evt + 0x36) = *(uchar*) (param_1 + 0x32);
-	bVar4 = (uchar) (bVar4 + *(uchar*) (param_1 + 0x33));
-	*(uchar*) (evt + 0x37) = bVar4;
-	if (bVar4 > (uchar) 100) {
+	damage = (uchar) (damage + *(uchar*) (param_1 + 0x33));
+	*(uchar*) (evt + 0x37) = damage;
+	if (damage > (uchar) 100) {
 		*(uchar*) (evt + 0x37) = 100;
 		return 0;
 	}

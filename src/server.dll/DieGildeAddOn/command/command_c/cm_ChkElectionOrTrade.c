@@ -66,31 +66,31 @@ extern int g_something_1;
 // FUNCTION: SERVER 0x1000d060
 int __cdecl ValidateElectionOrTradeCmd(int param_1)
 {
-	ushort* puVar1;
-	int iVar2;
+	ushort* entity;
+	int idx;
 
 	if (*(int*) (param_1 + 0x10) == 0x636c6572) {
-		puVar1 = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
-		if (puVar1 != (ushort*) 0x0) {
-			puVar1 = StartEntityQuery(*(int*) ((int) puVar1 + 0x5d), 2, 6, 0, 300);
-			if (puVar1 != (ushort*) 0x0) {
-				return (int) (g_something_1 - *(int*) (puVar1 + 0x14) <= 1);
+		entity = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
+		if (entity != (ushort*) 0x0) {
+			entity = StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
+			if (entity != (ushort*) 0x0) {
+				return (int) (g_something_1 - *(int*) (entity + 0x14) <= 1);
 			}
 		}
 	}
 	else if (*(int*) (param_1 + 0x10) == 0x62757920) {
-		puVar1 = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
-		if (puVar1 != (ushort*) 0x0) {
-			puVar1 = StartEntityQuery(*(int*) ((int) puVar1 + 0x5d), 2, 6, 0, 300);
-			if (puVar1 != (ushort*) 0x0) {
+		entity = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
+		if (entity != (ushort*) 0x0) {
+			entity = StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
+			if (entity != (ushort*) 0x0) {
 				param_1 = *(int*) (param_1 + 0x1c);
-				iVar2 = 0;
-				while (iVar2 < 3) {
-					if (*(int*) ((int) puVar1 + 0x1c) == param_1) {
+				idx = 0;
+				while (idx < 3) {
+					if (*(int*) ((int) entity + 0x1c) == param_1) {
 						return 0;
 					}
-					iVar2 = iVar2 + 1;
-					puVar1 = puVar1 + 2;
+					idx = idx + 1;
+					entity = entity + 2;
 				}
 			}
 		}

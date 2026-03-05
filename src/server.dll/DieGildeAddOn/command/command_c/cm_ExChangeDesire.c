@@ -16,17 +16,17 @@ extern char s_cm_ExChangeDesire___Invalid_Id_1002d0f4[];
 // FUNCTION: SERVER 0x1000e9c0
 int __cdecl ExChangeDesire(uchar* param_1, uchar* param_2)
 {
-	float fVar1;
-	uchar* puVar2;
-	int iVar3;
-	uchar* pbVar5;
-	uint uVar6;
+	float clamped;
+	uchar* cmd;
+	int resolve_ok;
+	uchar* cursor;
+	uint idx;
 
-	puVar2 = param_1;
-	iVar3 = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
-	*(int*) (puVar2 + 0x10) = iVar3;
-	iVar3 = ResolveEntityById((void**) 0x0, (void**) 0x0, (void**) &param_1, iVar3);
-	if (iVar3 == 0) {
+	cmd = param_1;
+	resolve_ok = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+	*(int*) (cmd + 0x10) = resolve_ok;
+	resolve_ok = ResolveEntityById((void**) 0x0, (void**) 0x0, (void**) &param_1, resolve_ok);
+	if (resolve_ok == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x33af,
@@ -36,27 +36,27 @@ int __cdecl ExChangeDesire(uchar* param_1, uchar* param_2)
 		return 1;
 	}
 
-	uVar6 = 0;
-	pbVar5 = puVar2 + 0x15;
-	if (puVar2[0x14] != '\0') {
+	idx = 0;
+	cursor = cmd + 0x15;
+	if (cmd[0x14] != '\0') {
 		do {
-			iVar3 = ((uint) *pbVar5 * 3 + 0x24) * 4;
-			pbVar5++;
-			*(float*) (param_1 + iVar3) = *(float*) pbVar5 + *(float*) (param_1 + iVar3);
-			pbVar5 = pbVar5 + 4;
-			if (*(float*) (param_1 + iVar3) < _g_stat_min_d ||
-				*(float*) (param_1 + iVar3) < _g_stat_max_d) {
-				if (_g_stat_min_d <= *(float*) (param_1 + iVar3)) {
-					fVar1 = *(float*) (param_1 + iVar3);
+			resolve_ok = ((uint) *cursor * 3 + 0x24) * 4;
+			cursor++;
+			*(float*) (param_1 + resolve_ok) = *(float*) cursor + *(float*) (param_1 + resolve_ok);
+			cursor = cursor + 4;
+			if (*(float*) (param_1 + resolve_ok) < _g_stat_min_d ||
+				*(float*) (param_1 + resolve_ok) < _g_stat_max_d) {
+				if (_g_stat_min_d <= *(float*) (param_1 + resolve_ok)) {
+					clamped = *(float*) (param_1 + resolve_ok);
 				} else {
-					fVar1 = (float) _g_stat_min_d;
+					clamped = (float) _g_stat_min_d;
 				}
 			} else {
-				fVar1 = (float) _g_stat_max_d;
+				clamped = (float) _g_stat_max_d;
 			}
-			*(float*) (param_1 + iVar3) = fVar1;
-			uVar6 = uVar6 + 1;
-		} while (uVar6 < puVar2[0x14]);
+			*(float*) (param_1 + resolve_ok) = clamped;
+			idx = idx + 1;
+		} while (idx < cmd[0x14]);
 	}
 
 	if (param_2 != (uchar*) 0x0) {

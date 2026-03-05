@@ -79,9 +79,9 @@ int __cdecl ValidateJoinLeaveElection(int* param_1)
 			return 1;
 		}
 
-		iVar4 = (int)*(unsigned short*)((char*)entity + 0x27);
-		if (iVar4 != 0xffff) {
-			slots = (int*)(g_100358a0 + (((iVar4 * 3) * 5) * 9) * 4);
+		action = (int)*(unsigned short*)((char*)entity + 0x27);
+		if (action != 0xffff) {
+			slots = (int*)(g_100358a0 + (((action * 3) * 5) * 9) * 4);
 			if (slots != (int*)0 && (int)slots != g_1003546c) {
 				if (*(unsigned char*)((char*)slots + 8) != 0 &&
 					*(unsigned char*)((char*)slots + 2) != 0x0f) {

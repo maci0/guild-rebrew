@@ -76,24 +76,24 @@ extern char s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c[];
 // FUNCTION: SERVER 0x1000d460
 int __cdecl CmdAllocPlayer(int param_1, char* param_2)
 {
-	int iVar1;
-	uint uVar2;
-	int iVar3;
-	char* pcVar5;
+	int seed;
+	uint entity_index;
+	int field_id;
+	char* entity_ptr;
 
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
-	iVar1 = rand();
-	*(int*) (param_1 + 0x26) = iVar1;
-	crt_thread_set_alt(iVar1);
-	iVar1 = *(int*) (param_1 + 0x1f);
-	if (iVar1 == -1) {
-		iVar1 = 0;
+	seed = rand();
+	*(int*) (param_1 + 0x26) = seed;
+	crt_thread_set_alt(seed);
+	seed = *(int*) (param_1 + 0x1f);
+	if (seed == -1) {
+		seed = 0;
 	}
 	else {
-		iVar3 = get_field_by_type((char*) param_1, iVar1);
-		*(int*) (param_1 + 0x1f) = iVar3;
-		iVar1 = (int) StartFilteredEntitySearch(1, 1, iVar3);
-		if (iVar1 == 0) {
+		field_id = get_field_by_type((char*) param_1, seed);
+		*(int*) (param_1 + 0x1f) = field_id;
+		seed = (int) StartFilteredEntitySearch(1, 1, field_id);
+		if (seed == 0) {
 			LogMessageInternal(
 				s_D__Develop_DieGildeAddOn_command_1002c748,
 				0x2889,
@@ -103,18 +103,18 @@ int __cdecl CmdAllocPlayer(int param_1, char* param_2)
 			return 1;
 		}
 	}
-	uVar2 = CreateEntityFromParents(
+	entity_index = CreateEntityFromParents(
 		*(uchar*) (param_1 + 0x14),
 		*(int*) (param_1 + 0x15),
 		*(int*) (param_1 + 0x19),
 		*(ushort*) (param_1 + 0x1d),
-		iVar1,
+		seed,
 		*(uchar*) (param_1 + 0x23),
 		*(uchar*) (param_1 + 0x24),
 		*(uchar*) (param_1 + 0x25)
 	);
-	uVar2 = uVar2 & 0xffff;
-	if (uVar2 == 0xffff) {
+	entity_index = entity_index & 0xffff;
+	if (entity_index == 0xffff) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x2897,
@@ -124,12 +124,12 @@ int __cdecl CmdAllocPlayer(int param_1, char* param_2)
 		return 1;
 	}
 	*(int*) (g_player_slot_0 + (uint) *(uchar*) (param_1 + 3) * 0x264264 + 0x2641f8) =
-		*(int*) (g_static_entity_table_358a0 + uVar2 * 0x21c + 4);
+		*(int*) (g_static_entity_table_358a0 + entity_index * 0x21c + 4);
 	if (param_2 != (char*) 0) {
-		pcVar5 = g_static_entity_table_358a0 + uVar2 * 0x21c;
+		entity_ptr = g_static_entity_table_358a0 + entity_index * 0x21c;
 		*param_2 = '\x01';
 		param_2[1] = '\x01';
-		*(char**) (param_2 + 6) = pcVar5;
+		*(char**) (param_2 + 6) = entity_ptr;
 	}
 	return 0;
 }

@@ -71,8 +71,8 @@ int __cdecl CheckMoveCredits(int param_1, char* param_2)
 	int cmd;
 	int value;
 	int* sum_ptr;
-	void* local_8;
-	void* local_4;
+	void* building;
+	void* area;
 
 	cmd = param_1;
 	if (*(int*) (param_1 + 0x14) == -1) {
@@ -80,7 +80,7 @@ int __cdecl CheckMoveCredits(int param_1, char* param_2)
 	}
 	value = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
 	*(int*) (cmd + 0x14) = value;
-	if (ResolveEntityById((void**) &param_1, &local_8, &local_4, value) == 0) {
+	if (ResolveEntityById((void**) &param_1, &building, &area, value) == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x22f9,
@@ -94,14 +94,14 @@ int __cdecl CheckMoveCredits(int param_1, char* param_2)
 		sum_ptr = (int*) (param_1 + 0x5d);
 	}
 	else {
-		if (local_8 != (void*) 0x0) {
-			sum_ptr = (int*) ((int) local_8 + 0x14);
+		if (building != (void*) 0x0) {
+			sum_ptr = (int*) ((int) building + 0x14);
 		}
 		else if (param_2 != (char*) 0x0) {
 			sum_ptr = (int*) ((int) param_2 + 0x14);
 		}
 		else {
-			sum_ptr = (int*) ((int) local_4 + 0x178);
+			sum_ptr = (int*) ((int) area + 0x178);
 		}
 	}
 

@@ -27,8 +27,8 @@ extern unsigned int __cdecl ValidateAndAssignOffice(unsigned int*);
 // FUNCTION: SERVER 0x1000f940
 int __cdecl call_with_off2(void* obj)
 {
-	unsigned int uVar1;
+	unsigned int result;
 
-	uVar1 = ValidateAndAssignOffice((unsigned int*) ((int) obj + 0x10));
-	return uVar1 == 0;
+	result = ValidateAndAssignOffice((unsigned int*) ((int) obj + 0x10));
+	return result == 0;
 }
