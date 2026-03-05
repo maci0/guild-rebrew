@@ -1,6 +1,5 @@
 // FUNCTION: SERVER 0x10010390
-// STATUS: STUB
-// BLOCKER: comparison direction swap, jump condition swap, zero-extend pattern (xor vs mov)
+// STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 262
 // CFLAGS: /O2 /Gd
@@ -94,33 +93,26 @@ int __cdecl SimSpecialAction(int param_1, char* param_2)
 	}
 	uVar1 = *(uint*) (param_1 + 0x10);
 	src = (char*) (param_1 + 0x10);
-	if (uVar1 < 0x61536d54) {
-		if (uVar1 == 0x61536d53) {
-			func_1000c3c0(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
-			return 0;
-		}
-		if (uVar1 == 0x46697245) {
-			func_1000c420(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
-			return 0;
-		}
-		if (uVar1 == 0x61437353) {
-			func_1000c1e0(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
-			return 0;
-		}
-		if (uVar1 == 0x61535263) {
-			func_1000c380(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
-			return 0;
-		}
+	switch (uVar1) {
+	case 0x61535263:
+		func_1000c380(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
+		return 0;
+	case 0x61536d53:
+		func_1000c3c0(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
+		return 0;
+	case 0x46697245:
+		func_1000c420(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
+		return 0;
+	case 0x61437353:
+		func_1000c1e0(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
+		return 0;
+	case 0x61616452:
+		func_1000c280(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
+		return 0;
+	case 0x61736452:
+		func_1000c310(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
+		return 0;
+	default:
+		return -3;
 	}
-	else {
-		if (uVar1 == 0x61616452) {
-			func_1000c280(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
-			return 0;
-		}
-		if (uVar1 == 0x61736452) {
-			func_1000c310(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
-			return 0;
-		}
-	}
-	return -3;
 }

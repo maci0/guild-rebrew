@@ -89,7 +89,6 @@ int __cdecl CmdAllocPlayer(int param_1, char* param_2)
 	int iVar1;
 	uint uVar2;
 	int iVar3;
-	uint uVar4;
 	char* pcVar5;
 
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
@@ -118,7 +117,7 @@ int __cdecl CmdAllocPlayer(int param_1, char* param_2)
 		(int) *(uchar*) (param_1 + 0x14),
 		*(int*) (param_1 + 0x15),
 		*(int*) (param_1 + 0x19),
-		(int) *(ushort*) (param_1 + 0x1d),
+		*(ushort*) (param_1 + 0x1d),
 		iVar1,
 		(int) *(uchar*) (param_1 + 0x23),
 		(int) *(uchar*) (param_1 + 0x24),
@@ -134,8 +133,8 @@ int __cdecl CmdAllocPlayer(int param_1, char* param_2)
 		);
 		return 1;
 	}
-	uVar4 = (uint) * (uchar*) (param_1 + 3);
-	((int*) g_player_slot_0)[uVar4 * 0x9904 + 0x9907e] = ((int*) g_static_entity_table_358a0)[uVar2 * 0x87 + 1];
+	*(int*) (g_player_slot_0 + (uint) *(uchar*) (param_1 + 3) * 0x264264 + 0x2641f8) =
+		*(int*) (g_static_entity_table_358a0 + uVar2 * 0x21c + 4);
 	if (param_2 != (char*) 0) {
 		pcVar5 = g_static_entity_table_358a0 + uVar2 * 0x21c;
 		*param_2 = '\x01';

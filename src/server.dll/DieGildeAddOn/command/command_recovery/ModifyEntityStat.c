@@ -39,7 +39,6 @@
  */
 
 extern int __cdecl LookupEntityRecordById(int);
-extern long __cdecl _ftol(void);
 extern float _g_stat_max;
 extern float _g_stat_min;
 
@@ -54,7 +53,6 @@ int __cdecl ModifyEntityStat(int* param_1)
 {
 	int iVar1;
 	int iVar3;
-	long lVar4;
 	float fVar2;
 
 	iVar3 = LookupEntityRecordById(param_1[4]);
@@ -62,14 +60,14 @@ int __cdecl ModifyEntityStat(int* param_1)
 		return 1;
 	}
 	fVar2 = (float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (iVar1 + 0x80 + iVar3));
-	if (((_g_stat_max <= fVar2) || (_g_stat_min < fVar2)) && (_g_stat_max <= fVar2)) {
+	if (fVar2 < _g_stat_max) {
+		if (fVar2 <= _g_stat_min) {
+			fVar2 = _g_stat_min;
+		}
+	} else {
 		fVar2 = _g_stat_max;
 	}
-	else if (_g_stat_min >= fVar2) {
-		fVar2 = _g_stat_min;
-	}
-	lVar4 = (long) fVar2;
-	*(char*) (iVar1 + 0x80 + iVar3) = (char) lVar4;
+	*(char*) (iVar1 + 0x80 + iVar3) = (char) (long) fVar2;
 	return 0;
 }
 

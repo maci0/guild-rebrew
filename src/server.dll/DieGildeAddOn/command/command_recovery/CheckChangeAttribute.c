@@ -31,9 +31,9 @@ int __cdecl CheckChangeAttribute(int param_1, char* param_2)
 	void* ent_c;
 	void* base;
 	unsigned int i;
-	char kind;
-	char value;
-	unsigned int offs;
+	int kind;
+	unsigned int value;
+	int* piVar;
 	char* p;
 	char* field;
 	int rec;
@@ -61,17 +61,15 @@ int __cdecl CheckChangeAttribute(int param_1, char* param_2)
 		}
 	}
 
-	p = (char*) (param_1 + 0x15);
+	piVar = (int*) (param_1 + 0x15);
 	i = 0;
 
 	while (i < *(unsigned char*) (param_1 + 0x14)) {
-		kind = *p;
-		value = *(p + 1);
-		p++;
-		p++;
-		offs = *(unsigned short*) p;
-		p += 2;
-		field = (char*) base + offs;
+		kind = (signed char) *(char*) piVar;
+		value = (int) *(signed char*) ((int) piVar + 1);
+		p = (char*) ((unsigned int) *(unsigned short*) ((int) piVar + 2) + (int) base);
+		piVar = piVar + 1;
+		field = p;
 
 		if (ent_c != (void*) 0) {
 			if (field == ((char*) ent_c + 4)) {
@@ -84,7 +82,7 @@ int __cdecl CheckChangeAttribute(int param_1, char* param_2)
 				return 1;
 			}
 			if (field == ((char*) ent_c + 0x5c)) {
-				rec = LookupEntityRecordById(*(int*) p + *(int*) ((char*) ent_c + 0x5c));
+				rec = LookupEntityRecordById(*(int*) piVar + *(int*) ((char*) ent_c + 0x5c));
 				if (rec == 0) {
 					LogMessageInternal(
 						s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -110,17 +108,17 @@ int __cdecl CheckChangeAttribute(int param_1, char* param_2)
 		switch (kind) {
 		case 1:
 			if (value > 0) {
-				p = p + value;
+				piVar = (int*) ((char*) piVar + value);
 			}
 			break;
 		case 2:
 			if (value > 0) {
-				p = p + value * 2;
+				piVar = (int*) ((char*) piVar + value * 2);
 			}
 			break;
 		case 4:
 			if (value > 0) {
-				p = p + value * 4;
+				piVar = (int*) ((char*) piVar + value * 4);
 			}
 			break;
 		}

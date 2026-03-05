@@ -2,7 +2,7 @@
 
 # Reversed Functions Catalog
 
-Total: 547 functions matched (311 exact, 104 reloc, 26 stubs)  
+Total: 547 functions matched (311 exact, 105 reloc, 21 stubs)  
 Coverage: 0.0% of .text section (146492/0 bytes)
 
 
@@ -97,7 +97,7 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000d040 | _CmdValidateGeneric | 22 | RELOC | DieGildeAddOn/command/command_recovery/CmdValidateGeneric.c |
 | 0x1000d060 | _ValidateElectionOrTradeCmd | 169 | RELOC | DieGildeAddOn/command/command_recovery/ValidateElectionOrTradeCmd.c |
 | 0x1000d110 | _ValidateJoinLeaveElection | 333 | STUB | DieGildeAddOn/command/command_recovery/ValidateJoinLeaveElection.c |
-| 0x1000d260 | _CheckCutsceneReady | 120 | STUB | DieGildeAddOn/command/command_recovery/CheckCutsceneReady.c |
+| 0x1000d260 | _CheckCutsceneReady | 120 | MATCHING | DieGildeAddOn/command/command_recovery/CheckCutsceneReady.c |
 | 0x1000d2e0 | _validate_command_type | 77 | RELOC | DieGildeAddOn/command/command_recovery/validate_command_type.c |
 | 0x1000d330 | _MarkAndReturn | 14 | EXACT | DieGildeAddOn/command/command_recovery/MarkAndReturn.c |
 | 0x1000d340 | _RejectCommand | 6 | EXACT | DieGildeAddOn/command/command_recovery/RejectCommand.c |
@@ -117,7 +117,7 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000e8d0 | _ExWriteEntityFields | 240 | STUB | DieGildeAddOn/command/command_recovery/ExWriteEntityFields.c |
 | 0x1000e9c0 | _ExChangeDesire | 214 | STUB | DieGildeAddOn/command/command_recovery/ExChangeDesire.c |
 | 0x1000eaa0 | _ExSetEntityBitmask | 208 | MATCHING | DieGildeAddOn/command/command_recovery/ExSetEntityBitmask.c |
-| 0x1000eb70 | _ExSetEntityField | 1045 | STUB | DieGildeAddOn/command/command_recovery/ExSetEntityField.c |
+| 0x1000eb70 | _ExSetEntityField | 1045 | MATCHING | DieGildeAddOn/command/command_recovery/ExSetEntityField.c |
 | 0x1000ec00 | _ExCopyEntityData | 938 | STUB | DieGildeAddOn/command/command_recovery/ExCopyEntityData.c |
 | 0x1000ef90 | _chain_handler_assign_id | 26 | RELOC | DieGildeAddOn/command/command_recovery/chain_handler_assign_id.c |
 | 0x1000efb0 | _SetSyncFlags | 122 | RELOC | DieGildeAddOn/command/command_recovery/SetSyncFlags.c |
@@ -135,7 +135,7 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000f730 | _EmployWorkerAtBuilding | 515 | STUB | DieGildeAddOn/command/command_recovery/EmployWorkerAtBuilding.c |
 | 0x1000f940 | _call_with_off2 | 22 | RELOC | DieGildeAddOn/command/command_recovery/call_with_off2.c |
 | 0x1000f960 | _CmdExecuteOffice | 22 | RELOC | DieGildeAddOn/command/command_recovery/CmdExecuteOffice.c |
-| 0x1000f980 | _ExCreateCitizenAtBuilding | 336 | STUB | DieGildeAddOn/command/command_recovery/ExCreateCitizenAtBuilding.c |
+| 0x1000f980 | _ExCreateCitizenAtBuilding | 336 | MATCHING | DieGildeAddOn/command/command_recovery/ExCreateCitizenAtBuilding.c |
 | 0x1000fad0 | _cm_ExKillTransporter | 85 | RELOC | DieGildeAddOn/command/command_recovery/cm_ExKillTransporter.c |
 | 0x1000fb30 | _CmdCreateBuilding | 153 | RELOC | DieGildeAddOn/command/command_recovery/CmdCreateBuilding.c |
 | 0x1000fbd0 | _cond_write | 22 | EXACT | DieGildeAddOn/command/command_recovery/cond_write.c |
@@ -154,8 +154,8 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x100102f0 | _DispatchMoveSlotEntry | 17 | RELOC | DieGildeAddOn/command/command_recovery/DispatchMoveSlotEntry.c |
 | 0x10010310 | _CmdAllocGraveyardWorker | 52 | RELOC | DieGildeAddOn/command/command_recovery/CmdAllocGraveyardWorker.c |
 | 0x10010350 | _CmdAllocAlchemist | 52 | RELOC | DieGildeAddOn/command/command_recovery/CmdAllocAlchemist.c |
-| 0x10010390 | _SimSpecialAction | 262 | STUB | DieGildeAddOn/command/command_recovery/SimSpecialAction.c |
-| 0x100104a0 | _GetBuildingStatCount | 135 | STUB | DieGildeAddOn/command/command_recovery/GetBuildingStatCount.c |
+| 0x10010390 | _SimSpecialAction | 262 | RELOC | DieGildeAddOn/command/command_recovery/SimSpecialAction.c |
+| 0x100104a0 | _GetBuildingStatCount | 135 | MATCHING | DieGildeAddOn/command/command_recovery/GetBuildingStatCount.c |
 | 0x10010530 | _check_slot_active | 113 | EXACT | DieGildeAddOn/game/friedhof_logic.c |
 | 0x100105b0 | _GetSlotEntry | 350 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010710 | _FindSlotEntryFiltered | 320 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
