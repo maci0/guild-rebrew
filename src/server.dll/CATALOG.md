@@ -2,8 +2,8 @@
 
 # Reversed Functions Catalog
 
-Total: 546 functions matched (306 exact, 108 reloc, 0 stubs)  
-Coverage: 0.0% of .text section (148070/0 bytes)
+Total: 547 functions matched (307 exact, 108 reloc, 0 stubs)  
+Coverage: 0.0% of .text section (147303/0 bytes)
 
 
 ## GAME (258 functions)
@@ -269,7 +269,7 @@ Coverage: 0.0% of .text section (148070/0 bytes)
 | 0x1001a0f0 | _RandomFloat01 | 22 | RELOC | DieGildeAddOn/game/spiel.c |
 | 0x1001a110 | _RandomQuadratic | 48 | RELOC | DieGildeAddOn/game/spiel.c |
 
-## MSVCRT (236 functions)
+## MSVCRT (237 functions)
 
 | VA | Symbol | Size | Status | Files |
 |---:|--------|-----:|--------|-------|
@@ -285,7 +285,8 @@ Coverage: 0.0% of .text section (148070/0 bytes)
 | 0x1001a46e | _fseek | 44 | EXACT | library_msvc.h |
 | 0x1001a49a | _SeekFileHandleUnlocked | 205 | EXACT | library_msvc.h |
 | 0x1001a540 | _strrchr | 39 | EXACT | library_msvc.h |
-| 0x1001a567 | _time | 220 | EXACT | library_msvc.h |
+| 0x1001a567 | _time | 314 | EXACT | library_msvc.h |
+| 0x1001a681 | _exit | 32 | EXACT | library_msvc.h |
 | 0x1001a692 | __cexit | 15 | EXACT | library_msvc.h |
 | 0x1001a6a1 | _doexit | 209 | EXACT | library_msvc.h |
 | 0x1001a746 | lock_0d | 44 | EXACT | library_msvc.h |
@@ -314,7 +315,7 @@ Coverage: 0.0% of .text section (148070/0 bytes)
 | 0x1001ae20 | _strncpy | 460 | EXACT | library_msvc.h |
 | 0x1001af30 | _strchr | 400 | EXACT | library_msvc.h |
 | 0x1001aff0 | _strstr | 208 | EXACT | library_msvc.h |
-| 0x1001b070 | __fpmath | 204 | EXACT | library_msvc.h |
+| 0x1001b070 | __fpmath | 80 | EXACT | library_msvc.h |
 | 0x1001b088 | init_fptrs | 56 | EXACT | library_msvc.h |
 | 0x1001b0c0 | crt_toupper | 111 | EXACT | library_msvc.h |
 | 0x1001b12f | _toupper | 204 | EXACT | library_msvc.h |
@@ -393,7 +394,7 @@ Coverage: 0.0% of .text section (148070/0 bytes)
 | 0x1001e78e | _ValidateEH3RN | 68 | EXACT | library_msvc.h |
 | 0x1001e7ba | _EH3_save_context | 24 | EXACT | library_msvc.h |
 | 0x1001e7d4 | exsup | 224 | EXACT | library_msvc.h |
-| 0x1001e899 | seh_local_unwind_thunk | 128 | EXACT | library_msvc.h |
+| 0x1001e899 | seh_local_unwind_thunk | 27 | EXACT | library_msvc.h |
 | 0x1001e8b4 | crt_write_wrap | 101 | EXACT | library_msvc.h |
 | 0x1001e919 | __write_lk | 395 | EXACT | library_msvc.h |
 | 0x1001eab0 | _memmove | 821 | EXACT | library_msvc.h |
@@ -407,13 +408,13 @@ Coverage: 0.0% of .text section (148070/0 bytes)
 | 0x1001f20b | __forcdecpt | 90 | EXACT | library_msvc.h |
 | 0x1001f265 | __cropzeros | 164 | EXACT | library_msvc.h |
 | 0x1001f2b3 | __positive | 86 | EXACT | library_msvc.h |
-| 0x1001f2cb | __fassign | 194 | EXACT | library_msvc.h |
+| 0x1001f2cb | __fassign | 62 | EXACT | library_msvc.h |
 | 0x1001f309 | __ecvt | 97 | EXACT | library_msvc.h |
 | 0x1001f36a | __cftoe | 194 | EXACT | library_msvc.h |
 | 0x1001f42c | __fcvt | 85 | EXACT | library_msvc.h |
 | 0x1001f481 | __cftof | 167 | EXACT | library_msvc.h |
 | 0x1001f528 | ___cfltcvt_g | 147 | EXACT | library_msvc.h |
-| 0x1001f5bb | __cfltcvt | 511 | EXACT | library_msvc.h |
+| 0x1001f5bb | __cfltcvt | 118 | EXACT | library_msvc.h |
 | 0x1001f60c | _crt_strcpy_advance | 37 | EXACT | library_msvc.h |
 | 0x1001f631 | ___crtLCMapStringA | 548 | EXACT | library_msvc.h |
 | 0x1001f855 | __isctype | 117 | EXACT | library_msvc.h |
@@ -473,10 +474,10 @@ Coverage: 0.0% of .text section (148070/0 bytes)
 | 0x10021924 | __fptostr | 119 | EXACT | library_msvc.h |
 | 0x1002199b | __fltout2 | 92 | EXACT | library_msvc.h |
 | 0x100219f7 | ___dtold | 191 | EXACT | library_msvc.h |
-| 0x10021aad | __fptrap | 151 | EXACT | library_msvc.h |
+| 0x10021aad | __fptrap | 9 | EXACT | library_msvc.h |
 | 0x10021ac0 | _strcmp | 132 | EXACT | library_msvc.h |
 | 0x10021b50 | _strcspn | 62 | EXACT | library_msvc.h |
-| 0x10021b90 | _strpbrk | 387 | EXACT | library_msvc.h |
+| 0x10021b90 | _strpbrk | 58 | EXACT | library_msvc.h |
 | 0x10021bca | ___crtGetStringTypeA | 329 | EXACT | library_msvc.h |
 | 0x10021d13 | __setmbcp | 429 | EXACT | library_msvc.h |
 | 0x10021ec0 | __crtGetACP_getcodepage | 166 | EXACT | library_msvc.h |
@@ -495,8 +496,8 @@ Coverage: 0.0% of .text section (148070/0 bytes)
 | 0x10022497 | ___ld12cvt | 199 | EXACT | library_msvc.h |
 | 0x1002255e | ___strgtold12 | 1233 | EXACT | library_msvc.h |
 | 0x10022a2f | __ld12cvt | 659 | EXACT | library_msvc.h |
-| 0x10022cd0 | __stricmp | 27 | EXACT | library_msvc.h |
-| 0x10022da0 | __strnicmp | 110 | EXACT | library_msvc.h |
+| 0x10022cd0 | __stricmp | 208 | EXACT | library_msvc.h |
+| 0x10022da0 | __strnicmp | 257 | EXACT | library_msvc.h |
 | 0x10022ea1 | __setmode_lk | 97 | EXACT | library_msvc.h |
 | 0x10022f10 | __allmul | 115 | EXACT | library_msvc.h |
 | 0x10022f29 | __allmul_slow | 90 | EXACT | library_msvc.h |
