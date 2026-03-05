@@ -1072,7 +1072,7 @@ int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 		new_worker_job_type = *(unsigned short*) ((int) new_worker_entity_ptr + 0x50);
 	}
 	slot_entry_ptr =
-		gv_GetSlotEntry(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc), (int) *(char*) (cmd_ptr_saved + 0x10));
+		gv_GetSlotEntry(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc), (unsigned char) *(char*) (cmd_ptr_saved + 0x10));
 	if (slot_entry_ptr == 0) {
 		return -7;
 	}
@@ -1298,7 +1298,7 @@ unsigned int gv_MoveSlotEntry(int param_1)
 	field_or_slot_ptr = gv_GetSlotEntry(
 		*(int*) (building_entity_ptr + 0x65),
 		*(int*) (cmd_ptr_saved + 8),
-		(int) *(unsigned char*) (cmd_ptr_saved + 0xc)
+		(unsigned char) *(unsigned char*) (cmd_ptr_saved + 0xc)
 	);
 	if ((field_or_slot_ptr != 0) &&
 		(*(unsigned short*) (field_or_slot_ptr + 8) == *(unsigned short*) (param_1 + 0x50))) {

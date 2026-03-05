@@ -4,9 +4,9 @@
 #include "../../game_common.h"
 
 /* VFS Functions */
-extern int __cdecl OpenVfsStream(char* path, int mode);
+extern int __cdecl OpenVfsStream(char* path, char* mode, int param3);
 extern int __cdecl CloseVfsStream(int handle);
-extern int __cdecl ReadVfsData(int handle, void* buffer, int size);
+extern unsigned int __cdecl ReadVfsData(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int __cdecl ReadVfsCompressed(int handle, void* buffer, int size);
 
 /* Low-level Stream Functions */

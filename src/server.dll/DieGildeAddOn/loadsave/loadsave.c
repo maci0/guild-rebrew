@@ -204,6 +204,7 @@ void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* para
 	int loop_index;
 	unsigned int* fill_ptr;
 	int var_2h;
+	(void) var_2h;
 	unsigned char stat_byte;
 
 	if (param_1 == 0x15) {
@@ -1510,7 +1511,7 @@ unsigned int ls_ID2Ptr(void)
 		);
 		return 0;
 	}
-	*(unsigned int*) 0x1003543c = gm_StartFilteredEntitySearch(1, 5, 10);
+	*(unsigned int*) 0x1003543c = (unsigned int) gm_StartFilteredEntitySearch(1, 5, 10);
 	if (0x10016 < *(int*) 0x1002d4ec) {
 		ptr_iter = (unsigned int*) 0x10035478;
 		do {
@@ -1526,13 +1527,13 @@ unsigned int ls_ID2Ptr(void)
 				ref_ptr[-1] = 0;
 			}
 			else {
-				gm_ResolveEntityById(ref_ptr - 1, 0, 0, ref_ptr[-1]);
+				gm_ResolveEntityById((void**) (ref_ptr - 1), (void**) 0, (void**) 0, ref_ptr[-1]);
 			}
 			if (*ref_ptr == -1) {
 				*ref_ptr = 0;
 			}
 			else {
-				gm_ResolveEntityById(ref_ptr, 0, 0, *ref_ptr);
+				gm_ResolveEntityById((void**) ref_ptr, (void**) 0, (void**) 0, *ref_ptr);
 			}
 		}
 		ref_ptr = ref_ptr + 0x87;
@@ -1546,8 +1547,12 @@ unsigned int ls_ID2Ptr(void)
 				*(int*) (entity_addr + 0x24) = 0;
 			}
 			if (*(int*) (entity_addr + 6) != -1) {
-				resolve_result =
-					gm_ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, *(int*) (entity_addr + 6));
+				resolve_result = gm_ResolveEntityById(
+					(void**) &dynamic_parent,
+					(void**) &existing_parent,
+					(void**) &static_parent,
+					*(int*) (entity_addr + 6)
+				);
 				if (resolve_result == 0) {
 					LogMessageInternal(
 						"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
@@ -1618,7 +1623,7 @@ int srv_RecvGame(void)
 	int load_status;
 	char* entity_state_ptr;
 
-	file_handle = OpenVfsStream(g_101deae8, g_101deac0, (int) (const char*) 0x1002944c);
+	file_handle = OpenVfsStream((char*) g_101deae8, (char*) g_101deac0, (int) (const char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
@@ -1630,7 +1635,7 @@ int srv_RecvGame(void)
 		g_101de560 = 0;
 		return 0;
 	}
-	ls_LoadSavegameHeader(file_handle, g_save_info);
+	ls_LoadSavegameHeader(file_handle, (char*) g_save_info);
 	if (((g_save_info[1] & 2) == 0) || (0x1005a < g_save_info[0]) || (g_save_info[0] < 0x10013)) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
@@ -1686,7 +1691,7 @@ int srv_RecvGame(void)
 											g_101de560 = 0;
 											return 0;
 										}
-										load_status = ls_LoadDynamicEntities(file_handle);
+										load_status = ls_LoadDynamicEntities((void*) file_handle);
 										if (load_status == 0) {
 											LogMessageInternal(
 												"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
