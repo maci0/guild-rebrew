@@ -176,7 +176,7 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 			return 1;
 		}
 		if (*(int*)(param_1 + 0x23) != 0 && source_owner_entity != (short*)0) {
-			QueryEntitySum(*(int*)(source_owner_entity + 0xbc), (int)*(unsigned char*)(param_1 + 0x1e));
+			QueryEntitySum(*(int*)(source_owner_entity + 0xbc), param_1[0x1e]);
 		}
 	}
 	if (*(int*)(param_1 + 0x10) != -1) {
@@ -226,14 +226,13 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 			dest_owner_entity = source_static_entity;
 			linked_list_ptr = (int*)(source_static_entity + 0xbc);
 		}
-		error_code = (uint)*(ushort*)(param_1 + 0x18);
-		if (*(char*)(unknown + error_code * 0x41) == '\x1d') {
+		if (*(unknown + (uint)*(ushort*)(param_1 + 0x18) * 0x41) == '\x1d') {
 			dest_game_object = (ushort*)0;
 		} else {
-			dest_game_object = (ushort*)StartEntityQuery(*linked_list_ptr, 1, 0, error_code);
+			dest_game_object = (ushort*)StartEntityQuery(*linked_list_ptr, 1, 0, (uint)*(ushort*)(param_1 + 0x18));
 		}
 		if (*(int*)(param_1 + 0x23) != 0 && dest_owner_entity != (short*)0) {
-			resolve_result = QueryEntitySum(*(int*)(dest_owner_entity + 0xbc), (int)*(unsigned char*)(param_1 + 0x1e));
+			resolve_result = QueryEntitySum(*(int*)(dest_owner_entity + 0xbc), param_1[0x1e]);
 			if (resolve_result < *(int*)(param_1 + 0x1f) * *(int*)(param_1 + 0x23)) {
 				capacity_check = s_cm_ExSellObjekt___Not_enough_Cre_1002cd78;
 				error_code = 0x2d4f;
@@ -250,7 +249,7 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 				weight_fraction = (uint)(resolve_result * *(int*)(dest_object + 0xe)) >> 2;
 				iVar1 = FindEntityByOwner((int)source_dynamic_ref, (int)dest_object);
 				source_dynamic_ref = source_dynamic_entity;
-				if ((uint)(iVar1 - (int)weight_fraction) < (uint)*(int*)(param_1 + 0x1f)) {
+				if ((uint)iVar1 - weight_fraction < (uint)*(int*)(param_1 + 0x1f)) {
 					capacity_check = g_error_msg_sell_no_source;
 					error_code = 0x2d79;
 					goto sell_error_return;
@@ -292,21 +291,19 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 	}
 	if (*(int*)(param_1 + 0x14) != -1) {
 		resolve_result = *(int*)(param_1 + 0x1f);
-		iVar1 = *(int*)(dest_object + 7);
-		iVar1 = iVar1 - resolve_result;
+		iVar1 = *(int*)(dest_object + 7) - resolve_result;
 		*(int*)(dest_object + 7) = iVar1;
-		if (iVar1 < 1) {
-			error_code = (uint)*(ushort*)(param_1 + 0x18);
-			obj_category = *(char*)(unknown + error_code * 0x41);
+		if (iVar1 <= 0) {
+			obj_category = *(unknown + (uint)*(ushort*)(param_1 + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
 				if (source_existing_entity == (void*)0) {
 					capacity_check = g_error_msg_sell_no_dest;
 					error_code = 0x2def;
 					goto sell_error_return;
 				}
-				RemoveObjectWrapper((int)source_existing_entity, error_code);
+				RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(param_1 + 0x18));
 			} else {
-				RemoveObjectByType(source_container_ptr, error_code);
+				RemoveObjectByType(source_container_ptr, (uint)*(ushort*)(param_1 + 0x18));
 			}
 		}
 		if (*(int*)(param_1 + 0x23) != 0) {
@@ -337,22 +334,21 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 		if (dest_game_object != (ushort*)0) {
 			*(int*)(dest_game_object + 7) = *(int*)(dest_game_object + 7) + *(int*)(param_1 + 0x1f);
 		} else {
-			error_code = (uint)*(ushort*)(param_1 + 0x18);
-			obj_category = *(char*)(unknown + error_code * 0x41);
+			obj_category = *(unknown + (uint)*(ushort*)(param_1 + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
 				if (dest_existing_entity == (char*)0) {
 					capacity_check = g_error_msg_sell_failed;
 					error_code = 0x2e45;
 					goto sell_error_return;
 				}
-				dest_object = (ushort*)AllocBuildingContents(dest_existing_entity, error_code);
+				dest_object = (ushort*)AllocBuildingContents(dest_existing_entity, (uint)*(ushort*)(param_1 + 0x18));
 				if (dest_object == (ushort*)0) {
 					capacity_check = s_cm_ExSellObjekt____gm_AllocRaum_f_1002ccc0;
 					error_code = 0x2e39;
 					goto sell_error_return;
 				}
 			} else {
-				dest_object = (ushort*)AllocGameObject(*(int*)(param_1 + 0x10), error_code, *(int*)(param_1 + 0x1f));
+				dest_object = (ushort*)AllocGameObject(*(int*)(param_1 + 0x10), (uint)*(ushort*)(param_1 + 0x18), *(int*)(param_1 + 0x1f));
 				if (dest_object == (ushort*)0) {
 					capacity_check = s_cm_ExSellObjekt____gm_AllocObjek_1002cce8;
 					error_code = 0x2e5d;
@@ -360,8 +356,7 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 				}
 				if (dest_dynamic_entity != (short*)0) {
 					*(int*)(dest_object + 7) = *(int*)(dest_object + 7) + 1;
-					capacity_check = unknown + (uint)*(ushort*)(param_1 + 0x18) * 0x41;
-					obj_category = *capacity_check;
+					obj_category = *(unknown + (uint)*(ushort*)(param_1 + 0x18) * 0x41);
 					if ((obj_category == '\x17' || obj_category == '%') &&
 						(*dest_dynamic_entity == 0x2a || *dest_dynamic_entity == 0x116) &&
 						dest_owner_entity != (short*)0 &&

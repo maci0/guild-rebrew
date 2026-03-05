@@ -2,7 +2,7 @@
 
 # Reversed Functions Catalog
 
-Total: 547 functions matched (311 exact, 108 reloc, 7 stubs)  
+Total: 547 functions matched (307 exact, 108 reloc, 3 stubs)  
 Coverage: 0.0% of .text section (147303/0 bytes)
 
 
@@ -28,7 +28,7 @@ Coverage: 0.0% of .text section (147303/0 bytes)
 | 0x10003c50 | _flush_and_close_stream | 65 | MATCHING | Units/vfs/vfs.c |
 | 0x10003ca0 | _read_uint32_be | 77 | MATCHING | Units/vfs/vfs.c |
 | 0x10003cf0 | _write_uint32_le | 43 | RELOC | Units/vfs/vfs.c |
-| 0x10004b80 | _alloc_and_init | 57 | EXACT | DieGildeAddOn/game/spiel.c |
+| 0x10004b80 | _alloc_and_init | 57 | MATCHING | DieGildeAddOn/game/spiel.c |
 | 0x10005370 | _dispatch_call | 20 | EXACT | DieGildeAddOn/game/spiel.c |
 | 0x10006580 | _AllocateTrackedHeapBlock | 658 | MATCHING | Units/m_alloc/m_alloc.c |
 | 0x10006820 | _FreeTrackedHeapBlock | 188 | MATCHING | Units/m_alloc/m_alloc.c |
@@ -43,7 +43,7 @@ Coverage: 0.0% of .text section (147303/0 bytes)
 | 0x10008d10 | _CloseVfsStream | 301 | MATCHING | Units/vfs/vfs.c |
 | 0x10008e40 | _ReadVfsData | 472 | MATCHING | Units/vfs/vfs.c |
 | 0x10009020 | _OpenVfsStream | 723 | MATCHING | Units/vfs/vfs.c |
-| 0x10009310 | _exit_handler@12 | 8 | EXACT | DieGildeAddOnServer/server.c |
+| 0x10009310 | _exit_handler@12 | 8 | MATCHING | DieGildeAddOnServer/server.c |
 | 0x10009320 | _Init | 42 | RELOC | DieGildeAddOnServer/server.c |
 | 0x10009350 | _Exit | 68 | RELOC | DieGildeAddOnServer/server.c |
 | 0x100093a0 | _ServerMainThread | 2434 | MATCHING | DieGildeAddOnServer/server.c |
@@ -72,7 +72,7 @@ Coverage: 0.0% of .text section (147303/0 bytes)
 | 0x1000b990 | _ClearEntityLinks | 157 | MATCHING | DieGildeAddOn/game/aemter.c |
 | 0x1000ba30 | _UpdateEntityLinks | 179 | MATCHING | DieGildeAddOn/game/aemter.c |
 | 0x1000baf0 | _amt_fio_LoadAemter | 606 | MATCHING | DieGildeAddOn/game/aemter.c |
-| 0x1000bd50 | _reset_entity_state | 66 | EXACT | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000bd50 | _reset_entity_state | 66 | MATCHING | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000bda0 | _check_flag | 70 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000bdf0 | _ahm_ExAllocAlchemist | 1002 | MATCHING | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000c1e0 | _ApplyColorComponent | 160 | MATCHING | DieGildeAddOn/game/alchemistry_logic.c |
@@ -105,7 +105,7 @@ Coverage: 0.0% of .text section (147303/0 bytes)
 | 0x1000d460 | _CmdAllocPlayer | 267 | RELOC | DieGildeAddOn/command/command_recovery/CmdAllocPlayer.c |
 | 0x1000d570 | _validate_cmd_10_AllocPlayer | 361 | MATCHING | DieGildeAddOn/command/command_recovery/validate_cmd_10_AllocPlayer.c |
 | 0x1000d6e0 | _cm_ExChangePlayerIdentity | 78 | RELOC | DieGildeAddOn/command/command_recovery/cm_ExChangePlayerIdentity.c |
-| 0x1000d730 | _ExFreeEntity | 192 | STUB | DieGildeAddOn/command/command_recovery/ExFreeEntity.c |
+| 0x1000d730 | _ExFreeEntity | 192 | MATCHING | DieGildeAddOn/command/command_recovery/ExFreeEntity.c |
 | 0x1000d7f0 | _ExTransferCurrency | 176 | RELOC | DieGildeAddOn/command/command_recovery/ExTransferCurrency.c |
 | 0x1000d8a0 | _ExTransferCurrencyNoKill | 144 | RELOC | DieGildeAddOn/command/command_recovery/ExTransferCurrencyNoKill.c |
 | 0x1000d930 | _TradeCommandHandler | 2057 | STUB | DieGildeAddOn/command/command_recovery/TradeCommandHandler.c |
@@ -113,8 +113,8 @@ Coverage: 0.0% of .text section (147303/0 bytes)
 | 0x1000e530 | _ExMoveObject | 352 | MATCHING | DieGildeAddOn/command/command_recovery/ExMoveObject.c |
 | 0x1000e690 | _cm_ExClearLagerslot | 191 | MATCHING | DieGildeAddOn/command/command_recovery/cm_ExClearLagerslot.c |
 | 0x1000e750 | _ExCreateObject | 128 | RELOC | DieGildeAddOn/command/command_recovery/ExCreateObject.c |
-| 0x1000e7d0 | _ExAccumulateEntityFields | 256 | STUB | DieGildeAddOn/command/command_recovery/ExAccumulateEntityFields.c |
-| 0x1000e8d0 | _ExWriteEntityFields | 240 | STUB | DieGildeAddOn/command/command_recovery/ExWriteEntityFields.c |
+| 0x1000e7d0 | _ExAccumulateEntityFields | 256 | MATCHING | DieGildeAddOn/command/command_recovery/ExAccumulateEntityFields.c |
+| 0x1000e8d0 | _ExWriteEntityFields | 240 | MATCHING | DieGildeAddOn/command/command_recovery/ExWriteEntityFields.c |
 | 0x1000e9c0 | _ExChangeDesire | 214 | MATCHING | DieGildeAddOn/command/command_recovery/ExChangeDesire.c |
 | 0x1000eaa0 | _ExSetEntityBitmask | 208 | MATCHING | DieGildeAddOn/command/command_recovery/ExSetEntityBitmask.c |
 | 0x1000eb70 | _ExSetEntityField | 1045 | MATCHING | DieGildeAddOn/command/command_recovery/ExSetEntityField.c |
@@ -126,7 +126,7 @@ Coverage: 0.0% of .text section (147303/0 bytes)
 | 0x1000f0a0 | _AssignEntityId | 37 | RELOC | DieGildeAddOn/command/command_recovery/AssignEntityId.c |
 | 0x1000f0d0 | _RemoveLinkedObject | 197 | MATCHING | DieGildeAddOn/command/command_recovery/RemoveLinkedObject.c |
 | 0x1000f1a0 | _chain_handler_record_lookup | 327 | RELOC | DieGildeAddOn/command/command_recovery/chain_handler_record_lookup.c |
-| 0x1000f2f0 | _ExCreateSpecialObject | 179 | STUB | DieGildeAddOn/command/command_recovery/ExCreateSpecialObject.c |
+| 0x1000f2f0 | _ExCreateSpecialObject | 179 | MATCHING | DieGildeAddOn/command/command_recovery/ExCreateSpecialObject.c |
 | 0x1000f3a0 | _chain_handler_noop | 3 | EXACT | DieGildeAddOn/command/command_recovery/chain_handler_noop.c |
 | 0x1000f3b0 | _SetBuildingOwner | 206 | RELOC | DieGildeAddOn/command/command_recovery/SetBuildingOwner.c |
 | 0x1000f480 | _SetResidence | 271 | RELOC | DieGildeAddOn/command/command_recovery/SetResidence.c |
@@ -156,7 +156,7 @@ Coverage: 0.0% of .text section (147303/0 bytes)
 | 0x10010350 | _CmdAllocAlchemist | 52 | RELOC | DieGildeAddOn/command/command_recovery/CmdAllocAlchemist.c |
 | 0x10010390 | _SimSpecialAction | 262 | RELOC | DieGildeAddOn/command/command_recovery/SimSpecialAction.c |
 | 0x100104a0 | _GetBuildingStatCount | 135 | MATCHING | DieGildeAddOn/command/command_recovery/GetBuildingStatCount.c |
-| 0x10010530 | _check_slot_active | 113 | EXACT | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010530 | _check_slot_active | 113 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
 | 0x100105b0 | _GetSlotEntry | 350 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010710 | _FindSlotEntryFiltered | 320 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010850 | _SpawnGraveyardEntities | 370 | MATCHING | DieGildeAddOn/game/friedhof_logic.c |

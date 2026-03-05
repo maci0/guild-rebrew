@@ -105,7 +105,7 @@ int __cdecl cm_ExecProduction(int msg, char* result)
 			}
 			else {
 				pcVar3 = (char*)FindEntityByOwner((int)local_10, (int)puVar2);
-				if ((int)pcVar3 / (int)(uint)*puVar5 <= iVar1) {
+				if (iVar1 >= (int)pcVar3 / (int)(uint)*puVar5) {
 					pcVar3 = (char*)FindEntityByOwner((int)local_10, (int)puVar2);
 					iVar1 = (int)pcVar3 / (int)(uint)*puVar5;
 				}
@@ -122,7 +122,7 @@ int __cdecl cm_ExecProduction(int msg, char* result)
 		(uint)*(ushort*)(local_c + 0x36) * iVar1
 	);
 	iVar4 = iVar4 / (int)(uint)*(ushort*)(pcVar3 + 0x36);
-	if (iVar4 <= iVar1) {
+	if (iVar1 >= iVar4) {
 		iVar1 = iVar4;
 		local_8 = iVar4;
 	}

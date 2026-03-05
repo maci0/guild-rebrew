@@ -1,10 +1,10 @@
+// FUNCTION: SERVER 0x1000cbd0
+// STATUS: MATCHING
+// BLOCKER: jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 517
 // CFLAGS: /O2 /Gd
 // SYMBOL: _CheckSellObject
-// STATUS: MATCHING
-// BLOCKER: jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
-// FUNCTION: SERVER 0x1000cbd0
 
 typedef unsigned int uint;
 typedef unsigned short ushort;
