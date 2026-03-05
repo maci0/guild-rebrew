@@ -1,17 +1,10 @@
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
+#include "zlib.h"
 
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-/* zlib functions (statically linked) */
-int __cdecl inflate(void*, int);
-int __cdecl inflateEnd(void*);
-int __cdecl deflate(void*, int);
-int __cdecl deflateEnd(void*);
-int __cdecl inflateInit2_(void*, int, const char*, int);
-int __cdecl deflateInit2_(void*, int, int, int, int, int, const char*, int);
 
 int* __cdecl vfs_GetErrnoPtr(void);
 int __cdecl vfs_WriteBufferLocked(void*, int, int, int);
@@ -32,7 +25,7 @@ void __cdecl vfs_FreeSubobj(void*);
 int __cdecl vfs_CleanupObject(char*);
 int __cdecl vfs_DestroyEntity(char*);
 int __cdecl vfs_ReadUint32BE(int);
-extern unsigned int gzread(unsigned int*, unsigned int*, int, int, int, int, int, int, unsigned int);
+
 int __cdecl ReadVfsCompressed(int, int, unsigned int);
 
 // STATUS: MATCHING
@@ -349,7 +342,7 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 		else {
 			old_processed = ctx[6];
 			old_dest = ctx[4];
-			decomp_status = inflate(ctx + 1, 2);
+			decomp_status = inflate((z_stream*) (ctx + 1), 2);
 			produced = ctx[6] - old_processed;
 			ctx[0x14] = vfs_Crc32Update(ctx[0x14], old_dest, produced);
 			ctx[0x17] -= produced;
@@ -432,11 +425,11 @@ int __cdecl CloseVfsStream(void* stream)
 	if ((flags & 0x20) != 0) {
 		if ((flags & 8) != 0) {
 			if ((flags & 1) != 0) {
-				inflateEnd((char*) stream + 0x100);
+				inflateEnd((z_stream*) ((char*) stream + 0x100));
 			}
 			else {
-				deflate((char*) stream + 0x100, 4);
-				deflateEnd((char*) stream + 0x100);
+				deflate((z_stream*) ((char*) stream + 0x100), 4);
+				deflateEnd((z_stream*) ((char*) stream + 0x100));
 				if (*(unsigned int*) ((char*) stream + 0x110) >= 8) {
 					unsigned char* dst;
 					unsigned int val;
@@ -546,7 +539,7 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 					if ((stream_flags & 8) != 0) {
 						*(unsigned int**) (arg_14h + 0x10c) = arg_8h;
 						*(int*) (arg_14h + 0x110) = total_size;
-						inflate(stream_ptr, 2);
+						inflate((z_stream*) stream_ptr, 2);
 						return total_size - *(int*) (arg_14h + 0x110);
 					}
 					read_count = (unsigned int) arg_8h * 3 & 3;
@@ -710,7 +703,7 @@ int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* pa
 
 		{
 			int ret;
-			ret = inflateInit2_(obj + 0x100, -15, (char*) 0x1002706c, 0x38);
+			ret = inflateInit2_((z_stream*) (obj + 0x100), -15, (char*) 0x1002706c, 0x38);
 			if (ret == 0) {
 				goto done;
 			}
@@ -751,7 +744,7 @@ int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* pa
 
 		{
 			volatile int ret;
-			ret = deflateInit2_(obj + 0x100, -1, 8, -15, 8, 0, (char*) 0x1002706c, 0x38);
+			ret = deflateInit2_((z_stream*) (obj + 0x100), -1, 8, -15, 8, 0, (char*) 0x1002706c, 0x38);
 			if (ret == 0) {
 				*(int*) (obj + 0x114) = 10;
 				goto done;
