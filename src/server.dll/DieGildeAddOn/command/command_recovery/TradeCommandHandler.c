@@ -4,7 +4,7 @@
 // SIZE: 2057
 // CFLAGS: /O2 /Gd
 // SYMBOL: _TradeCommandHandler
-// BLOCKER: stack frame size (0x228 vs 0x224), register allocation (edi vs ebx for zero init), error handler push/jmp vs mov/jmp pattern, merged stack cleanup (sprintf+LogMessage), loop rotation / branch layout, comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
+// BLOCKER: stack frame size (0x228 vs 0x224), register allocation (edi vs ebx for zero init), error handler codegen (push/jmp vs mov/jmp), merged stack cleanup, loop rotation / branch layout, comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // BLOCKER_DELTA: 1962
 
 typedef unsigned char uchar;
@@ -16,17 +16,17 @@ extern char g_static_entity_table_358a0[];
 extern char g_currency_type_array[];
 extern char* unknown;
 extern int g_current_season;
+
+typedef struct {
+	unsigned int flags;
+	unsigned int id;
+	unsigned char data[0x26425C];
+} TradePlayerSlot;
+
+extern TradePlayerSlot g_player_slots_base[];
 extern char g_error_msg_sell_no_source[];
 extern char g_error_msg_sell_no_dest[];
 extern char g_error_msg_sell_failed[];
-
-typedef struct {
-	char pad[0x26408];
-	int data;
-	int flags;
-} player_slot;
-
-extern player_slot g_player_slot_0[];
 
 extern int __cdecl get_field_by_type(char*, int);
 extern int __cdecl ResolveEntityById(void**, void**, void**, int);
@@ -368,10 +368,7 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 				}
 			}
 		}
-		error_code = (unsigned char)param_1[3];
-		error_code = ((((error_code << 4) + error_code) << 8) + error_code) << 4;
-		error_code = error_code + (unsigned char)param_1[3];
-		*(int*)((char*)0x10442d08 + error_code * 9 * 4) = *(int*)(dest_object + 1);
+		*(int*)(g_player_slots_base[(unsigned char)param_1[3]].data + 0x264200) = *(int*)(dest_object + 1);
 		if (*(int*)(param_1 + 0x23) != 0 && dest_owner_entity != (short*)0) {
 			SubObjekt(
 				*(void**)(dest_owner_entity + 2),
