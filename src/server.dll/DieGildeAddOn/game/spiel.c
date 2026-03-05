@@ -68,7 +68,7 @@ extern char* g_array_base;
 extern char g_entity_array[];
 void __cdecl free_node(char*);
 int __cdecl gm_FreeObjectListRecursive(char**);
-void __cdecl gm_NoopRet2(void*);
+void __cdecl gm_NoopRet2(void);
 char* __cdecl gm_AllocateObjectSlot(void);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 short* __cdecl gm_ResolveParentEntity(short*);
@@ -97,17 +97,17 @@ extern unsigned char DAT_10030861;
 char* __cdecl gm_SearchStruct(void);
 int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
-int __cdecl gm_CheckEntityType(char* geb);
+int __cdecl gm_CheckEntityType(unsigned char* geb);
 int __cdecl AllocGraveyardField(char* geb);
 void __cdecl SpawnGraveyardEntities(char* geb, int param);
-void __cdecl gm_SetBuildingWorkerLimits(char* geb);
+void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int);
-void __cdecl gm_AllocBuildingDefaults(char* geb);
+void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
 extern char* g_table_a9;
 extern char* dword_100a8c30;
 extern unsigned short* dword_100a8c34;
 extern char* dword_101de450;
-char* __cdecl gm_GetMsgField(int);
+char* __cdecl gm_GetMsgField(int param);
 extern int g_entity_type_table;
 extern char g_current_season;
 extern char g_10031004[];
@@ -117,7 +117,7 @@ int __cdecl gm_EntityAccumulate(void*);
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 void __cdecl amt_ClearEntityLinks(short*);
 void __cdecl gm_InitEntityIfValid(void* param_1);
-void __cdecl gm_DeallocEntity(int idx, int param);
+void __cdecl gm_DeallocEntity(unsigned int idx, int param);
 extern int DAT_10035434;
 extern int DAT_1003542c;
 extern int DAT_10035430;
@@ -130,7 +130,7 @@ extern float DAT_100257bc;
 int __cdecl gm_RandomMod(unsigned short range);
 extern char entity_table[];
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl gm_AssignBuildingOwner(char*, unsigned short, unsigned short);
+void __cdecl gm_AssignBuildingOwner(unsigned char*, unsigned short, unsigned int);
 int __cdecl gm_WalkEntityChain(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
@@ -155,7 +155,7 @@ extern float DAT_100257c8; /* 0x100257c8 */
 ;
 extern double DAT_100257d0; /* 0x100257d0 */
 ;
-double __cdecl gm_CalculateProductionValue(unsigned short, unsigned char);
+double __cdecl gm_CalculateProductionValue(int, int);
 extern char g_type_idx;
 extern int g_key_table[];
 extern char entity_array[];
@@ -440,13 +440,13 @@ int __cdecl gm_Open(int param_1)
 		return -2;
 	}
 	sprintf((char*) path_buf, (char*) 0x1003118c, param_1, (char*) 0x10031194);
-	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
+	file_handle = (int) fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4f5, (char*) 0x10031154, 1);
 		return -3;
 	}
-	fread((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
-	fflush(file_handle);
+	fread((void*) g_entity_type_table, 0x24d, 0x58, (FILE*) file_handle);
+	fflush((FILE*) file_handle);
 	g_item_def_table = (int) m_AllocTracked(0xb9dc, (const char*) 0x10031140);
 	if (g_item_def_table == 0) {
 		return -4;
@@ -457,7 +457,7 @@ int __cdecl gm_Open(int param_1)
 	}
 	memset((void*) g_100a8c34, 0, 0x14f218);
 	sprintf((char*) path_buf, (char*) 0x1003118c, param_1, (char*) 0x10031120);
-	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
+	file_handle = (int) fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
@@ -467,8 +467,8 @@ int __cdecl gm_Open(int param_1)
 		);
 		return -6;
 	}
-	fread((void*) g_item_def_table, 0x41, 0x2dc, file_handle);
-	fflush(file_handle);
+	fread((void*) g_item_def_table, 0x41, 0x2dc, (FILE*) file_handle);
+	fflush((FILE*) file_handle);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x536, "gm_Open(): gm_InitObjektHersteller", 1);
 	gm_InitObjektHersteller();
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x53a, "gm_Open(): gm_KillAllSpieler", 1);
@@ -542,7 +542,7 @@ void __cdecl gm_ResetAllEntities(void)
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
-void __cdecl gm_NoopRet2(int addr);
+void __cdecl gm_NoopRet2(void);
 
 void __cdecl gm_CleanupObjectEntities(void)
 {
@@ -584,7 +584,7 @@ void __cdecl gm_CleanupObjectEntities(void)
 			}
 		LAB_cleanup:
 			pRecord = record_offset + (int) DAT_100a8c34;
-			gm_NoopRet2(pRecord);
+			gm_NoopRet2();
 			*(short*) (record_offset + (int) DAT_100a8c34) = 0;
 			DAT_10035450 = DAT_10035450 + -1;
 		}
@@ -633,7 +633,7 @@ void __cdecl gm_CleanupAllEntities(void)
 	ent = (int) gm_StartFilteredEntitySearch(1, 6);
 	if (ent) {
 		do {
-			gm_CleanupBuildingEntity((unsigned char*) ent);
+			((void(__cdecl*)(unsigned char*)) gm_CleanupBuildingEntity)((unsigned char*) ent);
 			ent = (int) FindNextFilteredEntity();
 		} while (ent);
 	}
@@ -744,7 +744,7 @@ void __cdecl gm_RefreshMarketAvailability(int param_1)
 	DAT_1003543c = (int) gm_StartFilteredEntitySearch(1, 5, 10);
 	if (DAT_1003543c == 0) {
 		LogMessageInternal((char*) 0x10031004, 0x7cf, (char*) 0x1003122c, 1);
-		return 0;
+		return;
 	}
 
 	{
@@ -761,7 +761,7 @@ void __cdecl gm_RefreshMarketAvailability(int param_1)
 	}
 
 	if (param_1 != DAT_10035439) {
-		return 0;
+		return;
 	}
 
 	/* Clear offset 4 of each of 0x55 slots (stride 0x80) */
@@ -1317,9 +1317,9 @@ int __cdecl gm_RemoveLinkedNodeById(int* param_1, int param_2)
 				return -2;
 			}
 			if (*(int*) (curr + 0x14) != 0) {
-				gm_FreeObjectListRecursive((int*) (curr + 0x14));
+				gm_FreeObjectListRecursive((char**) (curr + 0x14));
 			}
-			gm_NoopRet2(curr);
+			gm_NoopRet2();
 			if (count == 0) {
 				*param_1 = *(int*) (curr + 0x3f);
 			}
@@ -1408,7 +1408,8 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 		);
 		return 0;
 	}
-	resolve_result = gm_ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, param_1);
+	resolve_result =
+		gm_ResolveEntityById((void**) &dynamic_parent, (void**) &existing_parent, (void**) &static_parent, param_1);
 	if (resolve_result == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcb8, "gm_AllocObjekt(): Parent not found", 1);
 		return 0;
@@ -1530,13 +1531,18 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 				*(int*) (esi + 0xa) = *(int*) (eax * 4 + 0x100358a4);
 			}
 			else if (existing_parent != 0) {
-				resolve_result = gm_ResolveParentEntity(existing_parent);
+				resolve_result = (int) gm_ResolveParentEntity((short*) existing_parent);
 				*(int*) (esi + 0xa) = *(int*) (resolve_result + 4);
 			}
 			else if (static_parent != 0) {
 				*(int*) (esi + 0xa) = *(int*) ((char*) static_parent + 4);
 			}
-			resolve_result = gm_ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, param_1);
+			resolve_result = gm_ResolveEntityById(
+				(void**) &dynamic_parent,
+				(void**) &existing_parent,
+				(void**) &static_parent,
+				param_1
+			);
 			while (resolve_result != 0 && dynamic_parent == 0) {
 				if (existing_parent != 0) {
 					param_1 = *(int*) ((char*) existing_parent + 6);
@@ -1549,7 +1555,12 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 						1
 					);
 				}
-				resolve_result = gm_ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, param_1);
+				resolve_result = gm_ResolveEntityById(
+					(void**) &dynamic_parent,
+					(void**) &existing_parent,
+					(void**) &static_parent,
+					param_1
+				);
 			}
 			esi[0x28] = 0;
 			esi[0x31] = 2;
@@ -1694,7 +1705,7 @@ int __cdecl gm_SubObjektNoKill(int entity_id, int object_id, int subtract_amount
 	int* container_ptr;
 	int result;
 
-	if (gm_ResolveEntityById(&slot, &person, &building, entity_id) == 0) {
+	if (gm_ResolveEntityById((void**) &slot, (void**) &person, (void**) &building, entity_id) == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\object", 0xe5c, "entity not found", 1);
 		return 0;
 	}
@@ -1712,16 +1723,16 @@ int __cdecl gm_SubObjektNoKill(int entity_id, int object_id, int subtract_amount
 		return 0;
 	}
 
-	result = gm_StartEntityQuery(*container_ptr, 1, 0, object_id);
+	result = (int) gm_StartEntityQuery(*container_ptr, 1, 0, object_id);
 	if (result == 0) {
-		result = gm_AllocObjekt(entity_id, object_id, 1);
+		result = (int) gm_AllocObjekt(entity_id, object_id, 1);
 		*(int*) ((char*) result + 0xe) = 0;
 	}
 
 	*(int*) ((char*) result + 0xe) -= subtract_amount;
 
 	if (*(int*) ((char*) result + 0xe) == 0) {
-		gm_RemoveObjectByType(container_ptr, object_id);
+		gm_RemoveObjectByType((void**) container_ptr, object_id);
 	}
 
 	return 1;
@@ -2040,7 +2051,7 @@ cleanup_loop:
 		entity_scan = entity_scan + 0x87;
 	} while ((int) entity_scan < 0x1009ae0c);
 	if (*(int*) (param_1 + 0x5d) != 0) {
-		gm_FreeObjectListRecursive((int*) (param_1 + 0x5d));
+		gm_FreeObjectListRecursive((char**) (param_1 + 0x5d));
 	}
 	*param_1 = 0;
 	return 0;
@@ -2300,7 +2311,7 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 		case 20:
 		case 21:
 		case 22:
-			temp_result = gm_AllocObjekt(*(int*) (geb + 1), 0x1b5, 1);
+			temp_result = (int) gm_AllocObjekt(*(int*) (geb + 1), 0x1b5, 1);
 			if (temp_result != 0) {
 				*(char*) (temp_result + 0x22) = 0;
 				*(char*) (temp_result + 0x1c) = (char) 0xff;
@@ -2540,19 +2551,19 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param
 	*(unsigned short*) (param_1 + 0x25) = param_2;
 	if (param_3 != 0xffff) {
 		prev_owner = *(unsigned short*) (param_1 + 0x27);
-		if ((prev_owner != 0xffff) && (PTR_10035A10(prev_owner) == param_1)) {
+		if ((prev_owner != 0xffff) && (PTR_10035A10(prev_owner) == (unsigned char**) param_1)) {
 			PTR_10035A10(prev_owner) = 0;
 		}
 		*(unsigned short*) (param_1 + 0x27) = (unsigned short) param_3;
 		if (*type_entry == '\x02') {
-			owner_building = PTR_10035A10(param_3 & 0xffff);
+			owner_building = (unsigned char*) PTR_10035A10(param_3 & 0xffff);
 			if ((owner_building == 0) || (*owner_building <= *param_1)) {
-				PTR_10035A10(param_3 & 0xffff) = param_1;
+				PTR_10035A10(param_3 & 0xffff) = (unsigned char**) param_1;
 			}
 		}
 		owner_index = param_3;
 		if (((BYTE_100358A2(owner_index) == '\x06') || (BYTE_100358A2(owner_index) == '\a')) &&
-			(loop_count = gm_GetMsgField(param_1), loop_count != 0)) {
+			(loop_count = (int) gm_GetMsgField((int) param_1), loop_count != 0)) {
 			*(unsigned char*) (loop_count + 0x165) = 0;
 			*(unsigned int*) (loop_count + 0x1b4) = *(unsigned int*) (loop_count + 0x1b4) & 0xfffffffe;
 			building_class = *type_entry;
@@ -2620,10 +2631,10 @@ int __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
 
 	/* scan component table at type_entry+0x23 to find slot matching obj_id */
 	slot_idx = 0;
-	if ((*(unsigned short*) (type_entry + 0x23) & 0x7fff) != (unsigned int) obj_id) {
+	if ((*(unsigned short*) (type_entry + 0x23) & 0x7fff) != (unsigned short) obj_id) {
 		do {
 			slot_idx = slot_idx + 1;
-		} while ((*(unsigned short*) (type_entry + 0x23 + slot_idx * 2 + 2) & 0x7fff) != (unsigned int) obj_id);
+		} while ((*(unsigned short*) (type_entry + 0x23 + slot_idx * 2 + 2) & 0x7fff) != (unsigned short) obj_id);
 	}
 	slot_idx = slot_idx + 1;
 
@@ -2775,9 +2786,9 @@ void __cdecl gm_RemoveEntityLink(int param_1)
 {
 	int parent_entity;
 
-	parent_entity = gm_EntityAccumulate(param_1);
+	parent_entity = (int) gm_EntityAccumulate((void*) param_1);
 	if (parent_entity != 0) {
-		gm_RemoveLinkedNodeById(parent_entity + 0x5d, *(int*) (param_1 + 2));
+		gm_RemoveLinkedNodeById((int*) (parent_entity + 0x5d), *(int*) (param_1 + 2));
 	}
 }
 
@@ -2884,11 +2895,11 @@ void __cdecl gm_DeallocEntity(unsigned int index, int param_2)
 		gm_InitEntityIfValid(ent);
 		ent->byte2 = 0xF;
 	}
-	gm_FreeObjectListRecursive(&ent->field178);
+	gm_FreeObjectListRecursive((char**) &ent->field178);
 
 	if (param_2 == 0) {
 		sprintf(buffer, g_str_10031500, old_id);
-		return 0;
+		return;
 	}
 
 	if (ent->word0 != 0xFFFF) {
@@ -3029,7 +3040,7 @@ int __cdecl gm_CheckStatLevel(int param_1, int param_2)
 	if (val == param_2) {
 		return (unsigned int) g_entity_type_bytes[idx];
 	}
-	result = gm_GetEntityTableEntry(g_entity_array + idx);
+	result = (int) gm_GetEntityTableEntry(g_entity_array + idx);
 	if (result == 0) {
 		return 0;
 	}
@@ -3265,7 +3276,7 @@ char __cdecl gm_RandomStatModifier(char stat_value)
 		range = 6;
 	}
 
-	return (char) (stat_value + gm_RandomMod(range));
+	return (char) (stat_value + (short) gm_RandomMod(range));
 }
 
 // STATUS: EXACT
@@ -3344,7 +3355,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 	char buf1[0x21c];
 	char buf2[0x21c];
 
-	record_a = gm_LookupEntityRecordById(param_1);
+	record_a = (char*) gm_LookupEntityRecordById(param_1);
 	if (record_a == 0) {
 		return -1;
 	}
@@ -3370,7 +3381,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 	index_a = *(unsigned short*) record_a;
 	chain_value = gm_WalkEntityChain(index_a);
 
-	record_b = gm_LookupEntityRecordById(param_2);
+	record_b = (char*) gm_LookupEntityRecordById(param_2);
 	if (record_b == 0) {
 		return -2;
 	}
@@ -3380,7 +3391,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 		*(unsigned short*) (record_b + 0x50) = *(unsigned short*) (record_a + 0x50);
 	}
 
-	amt_ClearEntityLinks(record_a);
+	amt_ClearEntityLinks((short*) record_a);
 
 	{
 		unsigned char saved_byte2 = *(unsigned char*) (record_a + 2);
@@ -3406,7 +3417,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 
 	copy_count = gm_MapEntityStatRange((unsigned char) *(unsigned char*) (record_b + 0x164));
 	if (copy_count != 0) {
-		offset_a = gm_GetEntityTableEntry(record_a);
+		offset_a = (int) gm_GetEntityTableEntry(record_a);
 		if (offset_a != 0) {
 			inner_loop = gm_CheckStatLevel(*(unsigned short*) record_a, copy_count);
 			if (inner_loop != 0) {
@@ -3512,6 +3523,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 int __cdecl gm_CreateEntityFromParents(int param_1, int param_2, int param_3, int param_4, int param_5)
 {
 	char work_buf[0x41c];
+	(void) work_buf;
 	int var_10;
 	int var_14;
 	int var_18;
@@ -3615,7 +3627,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 			i = 0;
 			do {
 				int bval = (unsigned char) *(record + i + 0x233);
-				modifier += (float) bval * DAT_10025fa8 * DAT_10025fa0;
+				modifier += (float) bval * DAT_10025fa8 * (float) DAT_10025fa0;
 				i++;
 			} while (i < 2);
 		}
@@ -3625,7 +3637,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 
 		{
 			unsigned char entity_type = *(unsigned char*) ent;
-			modifier *= DAT_100257d0;
+			modifier *= (float) DAT_100257d0;
 			intermediate = (float) (base_val * modifier);
 
 			if (entity_type == 0x17) {
@@ -3654,7 +3666,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 					int weight;
 					int div36;
 
-					sub = gm_CalculateProductionValue((int) slot, p2);
+					sub = gm_CalculateProductionValue((int) (unsigned short) slot, p2);
 					weight = (int) *(unsigned short*) (p - 4);
 					div36 = (int) *(unsigned short*) (ent + 0x36);
 					sub *= weight;
@@ -3873,7 +3885,7 @@ unsigned short __cdecl gm_GetEntityType(short* param_1)
 	if (dynamic_ent != (void*) 0) {
 		return *(unsigned short*) ((int) dynamic_ent + 0x27);
 	}
-	return 0xffff;
+	return (short) 0xffff;
 }
 
 // STATUS: MATCHING
@@ -4032,7 +4044,7 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int entity_index, int requested)
 	int count;
 	int is_producer;
 
-	ent = gm_EntityAccumulate(obj);
+	ent = (char*) gm_EntityAccumulate((void*) obj);
 	if (!ent) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
