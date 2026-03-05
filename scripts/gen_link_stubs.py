@@ -168,8 +168,7 @@ def collect_extern_info(src_dir):
                 if not line.startswith("extern"):
                     continue
                 line = re.sub(r"/\*.*?\*/", "", line).strip()
-                if line.endswith(";"):
-                    line = line[:-1].strip()
+                line = line.rstrip("; ").strip()
 
                 info = parse_extern_decl(line)
                 if info and info["name"] not in externs:
@@ -297,6 +296,14 @@ def simplify_type_for_stub(type_str):
         "handler_func": "int",
         "undefined *": "void*",
         "undefined*": "void*",
+        "uint": "unsigned int",
+        "ushort": "unsigned short",
+        "ushort*": "unsigned short*",
+        "uint*": "unsigned int*",
+        "ulong": "unsigned long",
+        "ulong*": "unsigned long*",
+        "uchar": "unsigned char",
+        "uchar*": "unsigned char*",
     }
     for k, v in known_types.items():
         if type_str == k:
@@ -523,6 +530,11 @@ def generate_link_stubs(unresolved_symbols, extern_info):
             params = info["params"] if info["params"] else "(void)"
 
             params = re.sub(r"struct\s+\w+\*", "void*", params)
+            # Simplify non-C89 types in parameters
+            params = re.sub(r'\buint\b', 'unsigned int', params)
+            params = re.sub(r'\bushort\b', 'unsigned short', params)
+            params = re.sub(r'\bulong\b', 'unsigned long', params)
+            params = re.sub(r'\buchar\b', 'unsigned char', params)
             params = ensure_param_names(params)
 
             ret_val = make_return_value(ret_type)

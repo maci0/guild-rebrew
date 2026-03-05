@@ -3,9 +3,9 @@
 
 #include "../../game_common.h"
 #include "../../game_structs.h"
+#include "game.h"
 
 /* Production and Crafting */
-extern int __cdecl gm_InitObjektHersteller(void);
 extern int __cdecl CalculateProductionValue(int object_id);
 extern int __cdecl UpdateProductionProgress(void* building);
 extern void __cdecl ExtendProductionTime(void* building, int added_time);

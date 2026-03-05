@@ -92,6 +92,11 @@ float _DAT_100256a0;
 float _DAT_100256a8;
 float _DAT_100256cc;
 float _DAT_10025fbc;
+int _g_game_speed_index;
+float _g_stat_max;
+double _g_stat_max_d;
+float _g_stat_min;
+double _g_stat_min_d;
 double dScaleFactor;
 char* dword_100a8c30;
 unsigned short* dword_100a8c34;
@@ -111,19 +116,6 @@ float g_100256c8;
 int g_1002575c[1];
 int g_1002576c[1];
 char g_1002a0f8[1];
-char g_1002c748[1];
-char g_1002c7d8[1];
-char g_1002c810[1];
-char g_1002c834[1];
-char g_1002c854[1];
-char g_1002c884[1];
-char g_1002c8b4[1];
-char g_1002c8dc[1];
-char g_1002cef4;
-char g_1002cf1c;
-char g_1002cf48;
-char g_1002cf74;
-char g_1002cf9c;
 char g_1002d444;
 char g_1002d45c;
 char g_1002d474;
@@ -136,28 +128,24 @@ char g_10031004[1];
 char g_10031484[1];
 char g_100314b8[1];
 void* g_10034614;
+int g_1003546c;
+int g_10035880;
 int g_10035884;
 int g_10035888;
 short g_1003588c;
 char g_100358a0[1];
-char g_100358a4;
-char g_10035ab0;
-char g_1009aca0;
-char g_1009aca4;
 int g_1009b764;
 int g_100a8c34;
-char g_100a8c94[1];
 int g_100a8cf8;
-char g_100a9820;
-char g_10139820;
+char g_100a9820[1];
+char g_10139820[1];
 int g_1014d8c0;
-char g_1014d8e0;
+char g_1014d8e0[1];
 int g_101de454;
 int g_101de55c;
 int g_101de560;
 int g_101deac0;
 int g_101deae8;
-char g_10442d08[1];
 unsigned char* g_EntityListStart;
 unsigned char* g_EntitySearchPtr;
 unsigned char g_FilterActive;
@@ -177,13 +165,9 @@ int g_array_count;
 void* g_array_ptr;
 int g_citizen_count;
 unsigned int g_connection_counter;
-short g_connection_table[1];
-int g_connection_table2[1];
 unsigned char g_connections[1];
 int g_console_handle;
-int g_counter_ef90;
-int g_counter_f080;
-int g_counter_f0a0;
+char g_currency_type_array[1];
 unsigned char g_current_season;
 int g_current_year;
 int g_data_ptr;
@@ -197,26 +181,27 @@ unsigned int g_download_slots[8];
 unsigned int g_download_total_size;
 char g_entity_array[1];
 int g_entity_array_ptr;
-char* g_entity_base;
-int g_entity_data[1];
+char g_entity_base[1];
 char g_entity_end[1];
-int g_entity_flags[1];
-unsigned short g_entity_port_table[1];
+int g_entity_id_start;
 char* g_entity_ptr;
-int g_entity_records[1];
 int g_entity_ref_table[1];
-int* g_entity_special;
 unsigned char g_entity_state_base[1];
 unsigned char g_entity_sync_data[1];
 char* g_entity_table;
-void* g_entity_table_end;
+int g_entity_table_end;
 unsigned char g_entity_type_bytes[1];
 int g_entity_type_table;
 int g_ents[1];
 int g_ents2[1];
+char g_error_msg_sell_failed[1];
+char g_error_msg_sell_no_dest[1];
+char g_error_msg_sell_no_source[1];
 int g_file_version;
 int g_flag_3c;
 char* g_game_initialized;
+int g_game_speed_table[1];
+int g_game_speed_value;
 int g_handler_flags;
 int g_handler_started;
 int g_item_def_table;
@@ -229,45 +214,39 @@ char g_log_format_table[1];
 int g_log_level_table[3];
 char g_log_message_buffer;
 unsigned int g_log_mode_flags;
-int g_lookup_table_42d00[1];
+int g_mem_pool_overflow_flag;
 char g_msg_buf[1];
 int g_net_socket;
 int g_next_object_id;
 int g_object_count;
 int g_owner_window;
 int g_panic_callback;
-unsigned int g_player_slot_0;
+int g_plant_count;
+char g_player_slot_0[1];
 unsigned int g_player_slot_field;
-unsigned int g_player_slot_id;
 unsigned int g_player_slot_overflow;
-int g_player_slots[1];
-unsigned int g_player_slots_base;
-int g_player_slots_field4;
+void* g_player_slots;
+int g_player_slots_base[1];
 short g_record_table[1];
 int* g_records;
+char g_relationship_matrix_primary[1];
+char g_relationship_matrix_secondary[1];
 int g_save_info[2];
 int g_save_version;
+int g_sequence_counter;
 int g_severity_table[3];
 char g_slot_array[1];
 int g_slot_count_cat0[1];
 int g_slot_count_cat1[1];
 int g_slot_count_cat2[1];
 int g_slot_count_cat3[1];
-unsigned char g_slot_id;
 char g_slot_table[1];
 int g_some_limit;
-unsigned short g_something_1[1];
-int g_speed_level;
-int g_speed_table[1];
-int g_speed_value;
+int g_something_1;
 int g_stat1;
 int g_stat2;
 int g_stat3;
 int g_stat4;
-float g_stat_max;
-double g_stat_max_d;
-float g_stat_min;
-double g_stat_min_d;
 char g_static_entity_table_358a0[1];
 int g_stop_flag;
 char g_str_10028888[1];
@@ -279,23 +258,88 @@ char g_str_10031500[1];
 char g_str_10031538[1];
 int g_stream_count;
 char g_stream_pool;
-int g_sync_counter;
 char* g_table;
 char* g_table_a9;
-int g_timestamp;
 int g_timestamp_0b6c;
-int g_timestamp_540c;
 char g_type_idx;
-int g_year_5880;
-int pfn_GetTickCount;
+int g_work_building_ptrs;
+char* unknown;
 
 /* String literal globals */
+char s_ClientSpieler_erzeugt_1002cbbc[1] = "";
+char s_D__Develop_DieGildeAddOn_command_1002c748[1] = "";
 char s_D__Develop_DieGildeAddOn_command_1002d70c[1] = "";
 char s_D__Develop_DieGildeAddOn_game_sp_10031004[1] = "";
 char s_Got_lb_ExPlayerlist_1002d6f8[1] = "";
+char s_Invalid_Commandtype_in_Execution_1002cacc[1] = "";
+char s_Invalid_Id_for_cmdt_FREE_in_cm_E_1002cc5c[1] = "";
+char s_Invalid__GI_Id__for_cmdt_ALLOC_B_1002caf0[1] = "";
+char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[1] = "";
 char s__ahm_AllocAhmInfo_1002a0f7[1] = "";
+char s_cm_ChkChangeAttribute___Error_i_1002c9a0[1] = "";
+char s_cm_ChkChangeAttribute___Invalid_I_1002c9e0[1] = "";
+char s_cm_ChkChangeAttribute___Source_obj_1002c958[1] = "";
+char s_cm_ChkChangeAttribute___Target_obj_1002c90c[1] = "";
+char s_cm_ChkChangeBits___Invalid_Id_1002ca54[1] = "";
+char s_cm_ChkChangeBits___Invalid_actio_1002ca04[1] = "";
+char s_cm_ChkCutsceneReady____failed____1002caa8[1] = "";
+char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[1] = "";
+char s_cm_ChkMoveCredits____Not_enough_m_1002c774[1] = "";
+char s_cm_ChkSellObjekt___Invalid__quel_1002c8dc[1] = "";
+char s_cm_ChkSellObjekt___Invalid__ziel_1002c854[1] = "";
+char s_cm_ChkSellObjekt___Inventory_vol_1002c810[1] = "";
+char s_cm_ChkSellObjekt___Lager_voll_1002c834[1] = "";
+char s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4[1] = "";
+char s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8[1] = "";
+char s_cm_ChkSellObjekt___Not_enough_Ob_1002c884[1] = "";
+char s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74[1] = "";
+char s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c[1] = "";
+char s_cm_ExAllocThemaPredigt____Execut_1002d184[1] = "";
+char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[1] = "";
+char s_cm_ExChangeBits___Invalid_Id_1002d114[1] = "";
+char s_cm_ExChangeDesire___Invalid_Id_1002d0f4[1] = "";
+char s_cm_ExChangeFloat___Invalid_Id_1002d134[1] = "";
+char s_cm_ExChangePlayerIdentity___exec_1002cc14[1] = "";
+char s_cm_ExChangePlayerIdentity___fail_1002cbf0[1] = "";
+char s_cm_ExClearLagerslot___Invalid__L_1002d088[1] = "";
+char s_cm_ExClearLagerslot___Lager_has_n_1002d054[1] = "";
+char s_cm_ExCreateGeb____Could_not_find_1002d41c[1] = "";
+char s_cm_ExCreateGeb____failed_1002d400[1] = "";
+char s_cm_ExEmployWorker____Illegal_geb_1002d33c[1] = "";
+char s_cm_ExEmployWorker____Illegal_gw__1002d318[1] = "";
+char s_cm_ExFree____Can_t_free_Objects_1002cc3c[1] = "";
+char s_cm_ExKillSpieler___Could_not_fin_1002d154[1] = "";
+char s_cm_ExKillTransporter____invalid_t_1002d3d4[1] = "";
+char s_cm_ExMoveObjekt___Invalid__quell_1002d024[1] = "";
+char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[1] = "";
+char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[1] = "";
+char s_cm_ExProdObjekt___Cannot_produce___1002cf1c[1] = "";
+char s_cm_ExProdObjekt___Rohstoff_versc_1002cef4[1] = "";
+char s_cm_ExSellObjekt___Invalid__gm_ev_1002ce90[1] = "";
+char s_cm_ExSellObjekt___Invalid__quell_1002cec4[1] = "";
+char s_cm_ExSellObjekt___Invalid__ziel__1002cdcc[1] = "";
+char s_cm_ExSellObjekt___Lager_voll_1002cdac[1] = "";
+char s_cm_ExSellObjekt___Not_enough_Cre_1002cd78[1] = "";
+char s_cm_ExSellObjekt___Not_enough_Obj_1002cdfc[1] = "";
+char s_cm_ExSellObjekt____Object_not_fo_1002ce4c[1] = "";
+char s_cm_ExSellObjekt____gm_AllocObjek_1002cce8[1] = "";
+char s_cm_ExSellObjekt____gm_AllocRaum_f_1002ccc0[1] = "";
+char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[1] = "";
+char s_cm_ExSetGebBesitzer____Could_not_1002d1a8[1] = "";
+char s_cm_ExSetGebBesitzer____Could_not_1002d1e0[1] = "";
+char s_cm_ExSetGebBesitzer____Could_not_1002d214[1] = "";
+char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[1] = "";
+char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[1] = "";
+char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[1] = "";
+char s_cm_ExSetWohnsitz____Could_not_fi_1002d298[1] = "";
+char s_cm_ExSetWohnsitz____Residence_is_1002d240[1] = "";
+char s_cm_ExecProduction___Invalid__lager_1002cf9c[1] = "";
+char s_cm_ExecProduction___Lager_has_wron_1002cf74[1] = "";
+char s_cm_ExecProduction___Lager_hat_kein_1002cf48[1] = "";
 char s_gm_AddObjekt____Parent_not_found_10031358[1] = "";
 char s_gm_AddObjekt____obj____ob_NULL_10031390[1] = "";
+char s_gm_AllocGebaeude___failed_1002cb34[1] = "";
+char s_gm_AllocSpieler___failed_1002cbd4[1] = "";
 char s_invalid_client_state_1002d740[1] = "";
 char s_lb_ExLobbyServerCommand___i_1002d858[1] = "";
 
@@ -307,32 +351,11 @@ int* __cdecl GetErrnoPointer(void)
 	return &stub_errno_val;
 }
 
-extern char* __cdecl AllocGebaeude(int, int);
-
-char* __cdecl gm_AllocGebaeude(int a, int b)
-{
-	return AllocGebaeude(a, b);
-}
-
 extern void __cdecl DeallocEntity(unsigned int, int);
 
 void __cdecl gm_DeallocEntity(unsigned int a, int b)
 {
 	DeallocEntity(a, b);
-}
-
-extern int __cdecl KannObjektHergestellt(char*, int, int);
-
-int __cdecl gm_KannObjektHergestellt(char* a, int b, int c)
-{
-	return KannObjektHergestellt(a, b, c);
-}
-
-extern int __cdecl SubObjekt(void*, unsigned int, int);
-
-int __cdecl gm_SubObjekt(void* a, unsigned int b, int c)
-{
-	return SubObjekt(a, b, c);
 }
 
 extern int __cdecl ServerMainThread(void*);
@@ -343,11 +366,6 @@ int __stdcall thread_proc(void* param)
 }
 
 /* Function stubs */
-int __cdecl FUN_100174d0(void)
-{
-	return 0;
-}
-
 void __cdecl FreeCommandBuffer(unsigned int* a, int b)
 {
 }
@@ -371,21 +389,6 @@ int __cdecl WriteFileBufferLocked(void* a, int b, int c, int d)
 }
 
 int __cdecl another_entity_val(int a)
-{
-	return 0;
-}
-
-int __cdecl assert_log(char* a, int b, char* c, int d)
-{
-	return 0;
-}
-
-int __cdecl check_func(void* a)
-{
-	return 0;
-}
-
-int __cdecl check_func2(void* a)
 {
 	return 0;
 }
@@ -438,7 +441,7 @@ int __cdecl compute_entity_val(int a, int b)
 	return 0;
 }
 
-int __cdecl compute_size(char* obj)
+int __cdecl compute_size(char* a, int b)
 {
 	return 0;
 }
@@ -502,16 +505,12 @@ int __cdecl crt_rand_range(int range)
 	return 0;
 }
 
-int __cdecl crt_write_check(const char* str, int stream)
+int __cdecl crt_thread_set_alt(void)
 {
 	return 0;
 }
 
-void __cdecl debug_log(char* a, int b, char* c, int d)
-{
-}
-
-int __cdecl debug_output(char* a)
+int __cdecl crt_write_check(const char* str, int stream)
 {
 	return 0;
 }
@@ -533,11 +532,6 @@ int __cdecl find_entity_2arg(int a, int b)
 int __cdecl find_entity_3arg(int a, int b, int c)
 {
 	return 0;
-}
-
-void* __cdecl find_obj(int a, int b, int c)
-{
-	return (void*) 0;
 }
 
 void __cdecl free_block(int a)
@@ -562,24 +556,42 @@ int __cdecl func_100058d0(int* ctx, int flag)
 	return 0;
 }
 
-int __cdecl func_10014a50(void)
+int __cdecl func_1000bda0(void* a)
 {
 	return 0;
 }
 
-int __cdecl func_10014af0(void)
+void __cdecl func_1000c1e0(void* a, void* b)
 {
-	return 0;
 }
 
-int __cdecl func_10014bf0(void)
+void __cdecl func_1000c280(void* a, void* b, void* c)
 {
-	return 0;
 }
 
-int __cdecl func_10019cd0(int a, int b)
+void __cdecl func_1000c310(void* a, void* b, void* c)
 {
-	return 0;
+}
+
+void __cdecl func_1000c380(void* a, void* b)
+{
+}
+
+void __cdecl func_1000c3c0(void* a, void* b)
+{
+}
+
+void __cdecl func_1000c420(void* a, void* b, void* c)
+{
+}
+
+char* __cdecl func_100150a0(void* a, unsigned int b, unsigned int c, unsigned int d, unsigned int e)
+{
+	return (void*) 0;
+}
+
+void __cdecl func_100151b0(unsigned int a, unsigned short* b)
+{
 }
 
 void __cdecl func_1001a060(void)
@@ -589,10 +601,6 @@ void __cdecl func_1001a060(void)
 unsigned int __cdecl func_1001a0d0(int a)
 {
 	return 0;
-}
-
-void __cdecl func_1001a150(int a)
-{
 }
 
 void __cdecl func_1001a18a(int a)
@@ -635,21 +643,12 @@ int __cdecl func_1001aa6a(int stream, unsigned int size, int count, int handle)
 	return 0;
 }
 
-void __cdecl func_1001ae20(void* a, void* b, int c)
-{
-}
-
 int __cdecl func_1001aff0(char* a, char* b)
 {
 	return 0;
 }
 
-int __cdecl func_1001b542(void)
-{
-	return 0;
-}
-
-int __cdecl func_1001b564(void)
+unsigned int __cdecl func_1001b564(void)
 {
 	return 0;
 }
@@ -686,15 +685,6 @@ int __cdecl get_priority_info(int a, int* b)
 int __cdecl locked_fwrite(void* a, int b, int c, void* d)
 {
 	return 0;
-}
-
-void __cdecl log_error(char* a, int b, char* c, int d)
-{
-}
-
-void* __cdecl lookup_entity(int a)
-{
-	return (void*) 0;
 }
 
 void __cdecl mem_free(char* a)

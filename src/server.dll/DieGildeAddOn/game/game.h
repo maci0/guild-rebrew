@@ -6,6 +6,5 @@
 
 /* Game Logic Functions */
 extern int __cdecl gm_InitObjektHersteller(void);
-extern int __cdecl reset_all_entities(void);
 
 #endif /* GAME_H */
