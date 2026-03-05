@@ -4,7 +4,7 @@
 // SIZE: 517
 
 #include "../command_internal.h"
-#include "Units/Error/error.h"
+#include "../../../Units/Error/error.h"
 
 char* __cdecl gm_ResolveParentEntity(char*);
 

@@ -2,8 +2,8 @@
 #include <string.h>
 #include <windows.h>
 #include <winsock2.h>
-#include "Units/m_alloc/m_alloc.h"
-#include "Units/Error/error.h"
+#include "../Units/m_alloc/m_alloc.h"
+#include "../Units/Error/error.h"
 
 
 /* Command layer (local externs — server.c uses different signatures) */

@@ -28,7 +28,7 @@
  */
 
 #include "../command_internal.h"
-#include "Units/Error/error.h"
+#include "../../../Units/Error/error.h"
 
 int __cdecl gm_ChangePlayerIdentityImpl(int, int);
 extern char s_cm_ExChangePlayerIdentity___exec_1002cc14[];

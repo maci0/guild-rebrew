@@ -1,6 +1,6 @@
 #include <string.h>
-#include "Units/m_alloc/m_alloc.h"
-#include "Units/Error/error.h"
+#include "../../Units/m_alloc/m_alloc.h"
+#include "../../Units/Error/error.h"
 
 #pragma intrinsic(memset, strcpy)
 

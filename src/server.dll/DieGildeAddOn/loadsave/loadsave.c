@@ -1,8 +1,8 @@
 #include <stdlib.h>
-#include "Units/m_alloc/m_alloc.h"
-#include "Units/vfs/vfs.h"
-#include "DieGildeAddOn/game/entity.h"
-#include "Units/Error/error.h"
+#include "../../Units/m_alloc/m_alloc.h"
+#include "../../Units/vfs/vfs.h"
+#include "../game/entity.h"
+#include "../../Units/Error/error.h"
 
 int __cdecl AllocGraveyardField(int);
 extern int g_1002576c[];

@@ -4,7 +4,7 @@
 // BLOCKER: param_1 reuse pattern (gm_ResolveEntityById writes through &param_1), switch dec chain offset (case 1 needs leading dec), register allocation (and edx,ecx vs and ecx,edx in case bodies)
 
 #include "../command_internal.h"
-#include "Units/Error/error.h"
+#include "../../../Units/Error/error.h"
 
 #ifdef __clang__
 #pragma clang diagnostic ignored "-Wint-to-pointer-cast"

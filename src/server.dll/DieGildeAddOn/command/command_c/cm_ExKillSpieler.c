@@ -27,7 +27,7 @@
  */
 
 #include "../command_internal.h"
-#include "Units/Error/error.h"
+#include "../../../Units/Error/error.h"
 
 extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
 

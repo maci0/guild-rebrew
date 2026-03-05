@@ -1,9 +1,8 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "Units/Error/error.h"
-#include "Units/m_alloc/m_alloc.h"
-#include <zlib.h>
+void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
+void __cdecl m_PoolFree(void* pool, void* item);
 
 int* __cdecl GetErrnoPointer(void);
 int __cdecl WriteFileBufferLocked(void*, int, int, int);
@@ -28,10 +27,6 @@ int __cdecl destroy_entity(char*);
 int __cdecl read_uint32_be(int);
 extern unsigned int gzread(unsigned int*, unsigned int*, int, int, int, int, int, int, unsigned int);
 int ReadVfsCompressed(unsigned int*, unsigned int*, int);
-
-;
-;
-;
 
 // STATUS: MATCHING
 // ORIGIN: GAME
@@ -152,7 +147,7 @@ unsigned unsigned int __cdecl flush_stream(int param_1, int param_2)
 		if (done) {
 			break;
 		}
-		write_result = compress_block((void*)param_1, (int)param_2);
+		write_result = compress_block((void*) param_1, (int) param_2);
 		*(int*) (param_1 + 0x38) = write_result;
 		if (remaining == 0 && write_result == -5) {
 			*(int*) (param_1 + 0x38) = 0;
@@ -532,7 +527,8 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 		src_ptr = (unsigned int*) *stream_ptr;
 		if ((src_ptr != 0) || ((stream_flags & 0x20) != 0)) {
 			total_size = arg_ch * arg_10h;
-			if ((((stream_flags & 0x20) != 0) && ((stream_flags & 8) == 0)) && (*(int*) (arg_14h + 0x104) < total_size)) {
+			if ((((stream_flags & 0x20) != 0) && ((stream_flags & 8) == 0)) &&
+				(*(int*) (arg_14h + 0x104) < total_size)) {
 				total_size = *(int*) (arg_14h + 0x104);
 			}
 			if (total_size == 0) {
@@ -556,7 +552,8 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 							arg_8h = (unsigned int*) ((char*) arg_8h + 1);
 						}
 						tail_bytes = aligned_size & 3;
-						for (aligned_size = aligned_size >> 2; read_count = 0, aligned_size != 0; aligned_size = aligned_size - 1) {
+						for (aligned_size = aligned_size >> 2; read_count = 0, aligned_size != 0;
+							 aligned_size = aligned_size - 1) {
 							*arg_8h = *src_ptr;
 							src_ptr = src_ptr + 1;
 							arg_8h = arg_8h + 1;
@@ -595,7 +592,7 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 						((*(unsigned char*) (arg_14h + 0x13c) = *(unsigned char*) (arg_14h + 0x13c) & 0xfb,
 						  *arg_8h == *(unsigned int*) 0x10029450 &&
 							  (*(unsigned int*) ((char*) arg_8h + 4) == *(unsigned int*) 0x10029454)))) {
-						sprintf((char*)&log_ctx, (char*)0x10029474, arg_14h);
+						sprintf((char*) &log_ctx, (char*) 0x10029474, arg_14h);
 						LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x5b4, &log_ctx, 1);
 						return result;
 					}
@@ -769,7 +766,7 @@ done:
 		flag_byte |= (use_zlib & 1) << 3;
 		*(unsigned char*) (obj + 0x13c) = flag_byte;
 
-		sprintf((char*)obj, (char*) 0x100294a4, param_1, param_2, is_read & 0xff, use_zlib & 0xff);
+		sprintf((char*) obj, (char*) 0x100294a4, param_1, param_2, is_read & 0xff, use_zlib & 0xff);
 	}
 
 	return (int) obj;

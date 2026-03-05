@@ -51,7 +51,7 @@
  */
 
 #include "../command_internal.h"
-#include "Units/Error/error.h"
+#include "../../../Units/Error/error.h"
 
 extern int g_entity_type_table;
 extern uchar g_current_season;
