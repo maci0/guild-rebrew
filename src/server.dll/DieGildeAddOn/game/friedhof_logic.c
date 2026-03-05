@@ -1,18 +1,19 @@
-#include <string.h>
-#include "../../Units/m_alloc/m_alloc.h"
 #include "../../Units/Error/error.h"
+#include "../../Units/m_alloc/m_alloc.h"
+
+#include <string.h>
 
 #pragma intrinsic(memset, strcpy)
 
-int __cdecl gv_CheckSlotActive(int, int);
+int __cdecl gv_CheckSlotActive(char*, int);
 extern char* DAT_100a8c30;
-extern int g_slot_count_cat0[]; /* 0x1002577c */;
-extern int g_slot_count_cat1[]; /* 0x1002578c */;
-extern int g_slot_count_cat2[]; /* 0x1002579c */;
-extern int g_slot_count_cat3[]; /* 0x100257ac */;
+extern int g_slot_count_cat0[]; /* 0x1002577c */
+extern int g_slot_count_cat1[]; /* 0x1002578c */
+extern int g_slot_count_cat2[]; /* 0x1002579c */
+extern int g_slot_count_cat3[]; /* 0x100257ac */
 int __cdecl cm_GetBuildingStatCount(unsigned char*);
 char* __cdecl gv_FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
-unsigned int gm_RandomMod(int);
+int __cdecl gm_RandomMod(int);
 extern unsigned int __ftol(void);
 extern int g_entity_type_table;
 extern int g_1002575c[];
@@ -20,19 +21,19 @@ extern int g_1002576c[];
 extern char g_1002d444;
 extern char g_1002d45c;
 extern char g_1002d474;
-int AllocGraveyardField(unsigned char*);
+int AllocGraveyardField(int);
 void gv_Free3Fields(int);
-int __cdecl gm_ResolveEntityById(int* out_slot, int* out_person, int* out_building, int entity_id);
+int __cdecl gm_ResolveEntityById(void** out_slot, void** out_person, void** out_building, int entity_id);
 int __cdecl gv_GetSlotEntry(int, int, unsigned char);
-extern void gm_SubObjektNoKill(unsigned int, unsigned int, unsigned int);
-extern void gm_AddOrAccumulateObject(unsigned int, unsigned int, unsigned int);
+int __cdecl gm_SubObjektNoKill(int, int, int);
+void* __cdecl gm_AddOrAccumulateObject(int, int, int);
+void __cdecl game_free(void*);
 extern int DAT_1003546c;
 extern short DAT_100358a0;
-int __cdecl SpawnGraveyardEntities(void* entity, int action_id);
+int SpawnGraveyardEntities(unsigned char*, int);
 extern int g_entity_table_end;
 extern char* g_action_table_base;
 extern char g_slot_table[];
-int __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
 extern int DAT_10030b6c;
 extern int DAT_10035434;
@@ -40,11 +41,6 @@ extern unsigned char DAT_10035439;
 extern float DAT_10025680;
 extern float DAT_100257c4;
 extern float DAT_100257c8;
-
-;
-;
-;
-;
 
 // STATUS: MATCHING
 // ORIGIN: GAME
@@ -329,7 +325,8 @@ int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 					rand_stat_val = gm_RandomMod(0x5e);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x34) = (rand_stat_val & 0xffff) + 1;
 					rand_stat_val = gm_RandomMod(4);
-					*(*(char**) (slot_entry_ptr + 0x10) + 0x40) = (*(short*) 0x10035880 - (rand_stat_val & 0xffff)) + -1;
+					*(*(char**) (slot_entry_ptr + 0x10) + 0x40) =
+						(*(short*) 0x10035880 - (rand_stat_val & 0xffff)) + -1;
 					rand_stat_val = gm_RandomMod(2);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x38) = rand_stat_val & 0xffff;
 					gm_RandomMod(0x10);
@@ -707,7 +704,8 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 	entity_type_idx = *param_1;
 	old_field_ptr = *(int*) (param_1 + 0x65);
 	loop_byte_offset = *(int*) 0x100a8c30 + entity_type_idx + entity_type_idx * 0x24c;
-	if ((((*(char*) (*(int*) 0x100a8c30 + entity_type_idx + entity_type_idx * 0x24c) == '\x1d') && (old_field_ptr != 0)) &&
+	if ((((*(char*) (*(int*) 0x100a8c30 + entity_type_idx + entity_type_idx * 0x24c) == '\x1d') &&
+		  (old_field_ptr != 0)) &&
 		 (*(int*) (old_field_ptr + 4) < 3)) &&
 		(*(char*) (loop_byte_offset + 0x247) - *(int*) (old_field_ptr + 4) == 1)) {
 		param_1[0x65] = 0;
@@ -760,11 +758,16 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 			if ((*(int*) (old_field_ptr + 8) != 0) && (slot0_count != 0)) {
 				loop_byte_offset = 0;
 				do {
-					*(int*) (*(int*) (new_field_ptr + 8) + loop_byte_offset) = *(int*) (loop_byte_offset + *(int*) (old_field_ptr + 8));
-					*(int*) (*(int*) (new_field_ptr + 8) + 4 + loop_byte_offset) = *(int*) (loop_byte_offset + 4 + *(int*) (old_field_ptr + 8));
-					*(int*) (*(int*) (new_field_ptr + 8) + 8 + loop_byte_offset) = *(int*) (loop_byte_offset + 8 + *(int*) (old_field_ptr + 8));
-					*(short*) (*(int*) (new_field_ptr + 8) + 10 + loop_byte_offset) = *(short*) (loop_byte_offset + 10 + *(int*) (old_field_ptr + 8));
-					*(char*) (*(int*) (new_field_ptr + 8) + 0xc + loop_byte_offset) = *(char*) (loop_byte_offset + 0xc + *(int*) (old_field_ptr + 8));
+					*(int*) (*(int*) (new_field_ptr + 8) + loop_byte_offset) =
+						*(int*) (loop_byte_offset + *(int*) (old_field_ptr + 8));
+					*(int*) (*(int*) (new_field_ptr + 8) + 4 + loop_byte_offset) =
+						*(int*) (loop_byte_offset + 4 + *(int*) (old_field_ptr + 8));
+					*(int*) (*(int*) (new_field_ptr + 8) + 8 + loop_byte_offset) =
+						*(int*) (loop_byte_offset + 8 + *(int*) (old_field_ptr + 8));
+					*(short*) (*(int*) (new_field_ptr + 8) + 10 + loop_byte_offset) =
+						*(short*) (loop_byte_offset + 10 + *(int*) (old_field_ptr + 8));
+					*(char*) (*(int*) (new_field_ptr + 8) + 0xc + loop_byte_offset) =
+						*(char*) (loop_byte_offset + 0xc + *(int*) (old_field_ptr + 8));
 					loop_byte_offset = loop_byte_offset + 0x14;
 					slot0_count = slot0_count + -1;
 				} while (slot0_count != 0);
@@ -772,11 +775,16 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 			if ((*(int*) (old_field_ptr + 0xc) != 0) && (slot1_count != 0)) {
 				loop_byte_offset = 0;
 				do {
-					*(int*) (loop_byte_offset + *(int*) (new_field_ptr + 0xc)) = *(int*) (loop_byte_offset + *(int*) (old_field_ptr + 0xc));
-					*(int*) (loop_byte_offset + 4 + *(int*) (new_field_ptr + 0xc)) = *(int*) (loop_byte_offset + 4 + *(int*) (old_field_ptr + 0xc));
-					*(int*) (loop_byte_offset + 8 + *(int*) (new_field_ptr + 0xc)) = *(int*) (loop_byte_offset + 8 + *(int*) (old_field_ptr + 0xc));
-					*(short*) (loop_byte_offset + 10 + *(int*) (new_field_ptr + 0xc)) = *(short*) (loop_byte_offset + 10 + *(int*) (old_field_ptr + 0xc));
-					*(char*) (loop_byte_offset + 0xc + *(int*) (new_field_ptr + 0xc)) = *(char*) (loop_byte_offset + 0xc + *(int*) (old_field_ptr + 0xc));
+					*(int*) (loop_byte_offset + *(int*) (new_field_ptr + 0xc)) =
+						*(int*) (loop_byte_offset + *(int*) (old_field_ptr + 0xc));
+					*(int*) (loop_byte_offset + 4 + *(int*) (new_field_ptr + 0xc)) =
+						*(int*) (loop_byte_offset + 4 + *(int*) (old_field_ptr + 0xc));
+					*(int*) (loop_byte_offset + 8 + *(int*) (new_field_ptr + 0xc)) =
+						*(int*) (loop_byte_offset + 8 + *(int*) (old_field_ptr + 0xc));
+					*(short*) (loop_byte_offset + 10 + *(int*) (new_field_ptr + 0xc)) =
+						*(short*) (loop_byte_offset + 10 + *(int*) (old_field_ptr + 0xc));
+					*(char*) (loop_byte_offset + 0xc + *(int*) (new_field_ptr + 0xc)) =
+						*(char*) (loop_byte_offset + 0xc + *(int*) (old_field_ptr + 0xc));
 					loop_byte_offset = loop_byte_offset + 0x14;
 					slot1_count = slot1_count + -1;
 				} while (slot1_count != 0);
@@ -784,11 +792,16 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 			if ((*(int*) (old_field_ptr + 0x10) != 0) && (slot2_count != 0)) {
 				loop_byte_offset = 0;
 				do {
-					*(int*) (loop_byte_offset + *(int*) (new_field_ptr + 0x10)) = *(int*) (loop_byte_offset + *(int*) (old_field_ptr + 0x10));
-					*(int*) (loop_byte_offset + 4 + *(int*) (new_field_ptr + 0x10)) = *(int*) (loop_byte_offset + 4 + *(int*) (old_field_ptr + 0x10));
-					*(int*) (loop_byte_offset + 8 + *(int*) (new_field_ptr + 0x10)) = *(int*) (loop_byte_offset + 8 + *(int*) (old_field_ptr + 0x10));
-					*(short*) (loop_byte_offset + 10 + *(int*) (new_field_ptr + 0x10)) = *(short*) (loop_byte_offset + 10 + *(int*) (old_field_ptr + 0x10));
-					*(char*) (loop_byte_offset + 0xc + *(int*) (new_field_ptr + 0x10)) = *(char*) (loop_byte_offset + 0xc + *(int*) (old_field_ptr + 0x10));
+					*(int*) (loop_byte_offset + *(int*) (new_field_ptr + 0x10)) =
+						*(int*) (loop_byte_offset + *(int*) (old_field_ptr + 0x10));
+					*(int*) (loop_byte_offset + 4 + *(int*) (new_field_ptr + 0x10)) =
+						*(int*) (loop_byte_offset + 4 + *(int*) (old_field_ptr + 0x10));
+					*(int*) (loop_byte_offset + 8 + *(int*) (new_field_ptr + 0x10)) =
+						*(int*) (loop_byte_offset + 8 + *(int*) (old_field_ptr + 0x10));
+					*(short*) (loop_byte_offset + 10 + *(int*) (new_field_ptr + 0x10)) =
+						*(short*) (loop_byte_offset + 10 + *(int*) (old_field_ptr + 0x10));
+					*(char*) (loop_byte_offset + 0xc + *(int*) (new_field_ptr + 0x10)) =
+						*(char*) (loop_byte_offset + 0xc + *(int*) (old_field_ptr + 0x10));
 					loop_byte_offset = loop_byte_offset + 0x14;
 					slot2_count = slot2_count + -1;
 				} while (slot2_count != 0);
@@ -855,7 +868,8 @@ unsigned int AssignProductionSlot(int param_1)
 	worker_slot_capacity = param_1;
 	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
-		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 == *(unsigned int*) 0x1003546c)) {
+		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 ==
+		 *(unsigned int*) 0x1003546c)) {
 		return 0xffffffff;
 	}
 	if (*(*(char**) 0x100a8c30 + *building_entity_ptr * 0x24d) != '\x1d') {
@@ -873,8 +887,13 @@ unsigned int AssignProductionSlot(int param_1)
 	if (param_1 == 0) {
 		return 0xfffffffa;
 	}
-	assignment_loop_idx = gv_GetSlotEntry(assignment_loop_idx, *(int*) (worker_slot_capacity + 0xc), *(int*) (worker_slot_capacity + 0x10));
-	if ((assignment_loop_idx == 0) || (*(unsigned int*) (assignment_loop_idx + 8) != *(unsigned int*) (param_1 + 0x50))) {
+	assignment_loop_idx = gv_GetSlotEntry(
+		assignment_loop_idx,
+		*(int*) (worker_slot_capacity + 0xc),
+		*(int*) (worker_slot_capacity + 0x10)
+	);
+	if ((assignment_loop_idx == 0) ||
+		(*(unsigned int*) (assignment_loop_idx + 8) != *(unsigned int*) (param_1 + 0x50))) {
 		return 0xfffffff9;
 	}
 	slot_worker_array_ptr = *(int**) (assignment_loop_idx + 0x10);
@@ -914,7 +933,9 @@ unsigned int AssignProductionSlot(int param_1)
 	strlen_counter = ~strlen_counter;
 	candidate_record_ptr = (int*) (name_scan_end_ptr + -strlen_counter);
 	slot_worker_array_ptr = best_slot_record_ptr;
-	for (copy_dword_count = strlen_counter >> 2; slot_worker_array_ptr = slot_worker_array_ptr + 1, copy_dword_count != 0; copy_dword_count = copy_dword_count - 1) {
+	for (copy_dword_count = strlen_counter >> 2;
+		 slot_worker_array_ptr = slot_worker_array_ptr + 1, copy_dword_count != 0;
+		 copy_dword_count = copy_dword_count - 1) {
 		*slot_worker_array_ptr = *candidate_record_ptr;
 		candidate_record_ptr = candidate_record_ptr + 1;
 	}
@@ -982,7 +1003,8 @@ unsigned int HireProductionWorker(int param_1)
 	cmd_ptr_saved = param_1;
 	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
-		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 == *(unsigned int*) 0x1003546c)) {
+		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 ==
+		 *(unsigned int*) 0x1003546c)) {
 		return 0xffffffff;
 	}
 	if (*(*(char**) 0x100a8c30 + *building_entity_ptr * 0x24d) != '\x1d') {
@@ -991,7 +1013,8 @@ unsigned int HireProductionWorker(int param_1)
 	if (*(unsigned int*) (building_entity_ptr + 0x65) == 0) {
 		return 0xfffffffd;
 	}
-	slot_or_active_check = gv_CheckSlotActive(*(unsigned int*) (building_entity_ptr + 0x65), *(int*) (cmd_ptr_saved + 0xc));
+	slot_or_active_check =
+		gv_CheckSlotActive(*(unsigned int*) (building_entity_ptr + 0x65), *(int*) (cmd_ptr_saved + 0xc));
 	if (slot_or_active_check == 0) {
 		return 0xfffffffc;
 	}
@@ -1001,7 +1024,8 @@ unsigned int HireProductionWorker(int param_1)
 	}
 	slot_or_active_check = *(int*) (cmd_ptr_saved + 0xc);
 	if ((-1 < slot_or_active_check) && (slot_or_active_check < 4)) {
-		slot_or_active_check = gv_FindSlotEntryFiltered(param_1, building_entity_ptr, 0, 0x10010700, slot_or_active_check);
+		slot_or_active_check =
+			gv_FindSlotEntryFiltered(param_1, building_entity_ptr, 0, 0x10010700, slot_or_active_check);
 		if (slot_or_active_check == 0) {
 			return 0xfffffff9;
 		}
@@ -1107,8 +1131,6 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 // GLOBALS: SERVER 0x1003546c
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-int __cdecl gv_CheckSlotActive(int param_1, int param_2);
-int __cdecl gv_GetSlotEntry(int param_1, int param_2, int param_3);
 
 int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 {
@@ -1146,7 +1168,8 @@ int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 		new_worker_entity_id = *(int*) (cmd_ptr_saved + 4);
 		new_worker_job_type = *(unsigned short*) ((int) new_worker_entity_ptr + 0x50);
 	}
-	slot_entry_ptr = gv_GetSlotEntry(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc), (int) *(char*) (cmd_ptr_saved + 0x10));
+	slot_entry_ptr =
+		gv_GetSlotEntry(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc), (int) *(char*) (cmd_ptr_saved + 0x10));
 	if (slot_entry_ptr == 0) {
 		return -7;
 	}
@@ -1256,8 +1279,6 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 // GLOBALS: SERVER 0x1003546c
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-int __cdecl gv_CheckSlotActive(int param_1, int param_2);
-int __cdecl gv_GetSlotEntry(int param_1, int param_2, int param_3);
 
 int __cdecl gv_UpdateProductionProgress(unsigned char* param_1)
 {
@@ -1356,7 +1377,8 @@ unsigned int gv_MoveSlotEntry(int param_1)
 	}
 	gm_ResolveEntityById((int) &building_entity_ptr, 0, 0, *(int*) (cmd_ptr_saved + 4));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
-		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 == *(unsigned int*) 0x1003546c)) {
+		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 ==
+		 *(unsigned int*) 0x1003546c)) {
 		return 0xffffffff;
 	}
 	if (*(*(char**) 0x100a8c30 + *building_entity_ptr * 0x24d) != '\x1d') {
@@ -1370,14 +1392,20 @@ unsigned int gv_MoveSlotEntry(int param_1)
 	if (field_or_slot_ptr == 0) {
 		return 0xfffffffc;
 	}
-	field_or_slot_ptr = gv_GetSlotEntry(*(int*) (building_entity_ptr + 0x65), *(int*) (cmd_ptr_saved + 8), (int) *(unsigned char*) (cmd_ptr_saved + 0xc));
-	if ((field_or_slot_ptr != 0) && (*(unsigned short*) (field_or_slot_ptr + 8) == *(unsigned short*) (param_1 + 0x50))) {
+	field_or_slot_ptr = gv_GetSlotEntry(
+		*(int*) (building_entity_ptr + 0x65),
+		*(int*) (cmd_ptr_saved + 8),
+		(int) *(unsigned char*) (cmd_ptr_saved + 0xc)
+	);
+	if ((field_or_slot_ptr != 0) &&
+		(*(unsigned short*) (field_or_slot_ptr + 8) == *(unsigned short*) (param_1 + 0x50))) {
 		int saved_src_slot_entry_ptr;
 
 		src_worker_array_ptr = *(int**) (field_or_slot_ptr + 0x10);
 		src_worker_array_end = *(int*) (*(int*) (cmd_ptr_saved + 8) * 4 + 0x1002574c);
 		saved_src_slot_entry_ptr = field_or_slot_ptr;
-		dst_slot_entry_ptr = gv_FindSlotEntryFiltered(param_1, (int) building_entity_ptr, 0, 0x10010700, *(int*) (cmd_ptr_saved + 0xd));
+		dst_slot_entry_ptr =
+			gv_FindSlotEntryFiltered(param_1, (int) building_entity_ptr, 0, 0x10010700, *(int*) (cmd_ptr_saved + 0xd));
 		if (dst_slot_entry_ptr != 0) {
 			int* piVar5;
 			int* piVar7;
@@ -1434,9 +1462,11 @@ unsigned int gv_MoveSlotEntry(int param_1)
 					*(unsigned int*) ((unsigned char*) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
 					*(unsigned int*) (cmd_ptr_saved + 0x11)
 				);
-				scaled_amount = (unsigned int) ((int) *(int*) (cmd_ptr_saved + 0x11) * ((float*) 0x1002572c)[*(int*) (cmd_ptr_saved + 0xd)]);
+				scaled_amount = (unsigned int) ((int) *(int*) (cmd_ptr_saved + 0x11) *
+												((float*) 0x1002572c)[*(int*) (cmd_ptr_saved + 0xd)]);
 				gm_AddOrAccumulateObject(
-					*(unsigned int*) ((unsigned char*) 0x100358a4 + *(unsigned short*) (building_entity_ptr + 0x27) * 0x21c),
+					*(unsigned int*) ((unsigned char*) 0x100358a4 +
+									  *(unsigned short*) (building_entity_ptr + 0x27) * 0x21c),
 					*(unsigned int*) ((unsigned char*) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
 					scaled_amount
 				);
@@ -1496,7 +1526,8 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 	if (entity_slot_byte_offset == 0) {
 		return 0xfffffffc;
 	}
-	production_slot_entry_ptr = gv_GetSlotEntry(slot_scan_idx_or_capacity, *(int*) (param_1 + 0xc), *(unsigned char*) (param_1 + 0x10));
+	production_slot_entry_ptr =
+		gv_GetSlotEntry(slot_scan_idx_or_capacity, *(int*) (param_1 + 0xc), *(unsigned char*) (param_1 + 0x10));
 	if (production_slot_entry_ptr == 0) {
 		return 0xffff;
 	}
@@ -1588,7 +1619,8 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 			*(short*) (entity_slot_byte_offset + 0x100358f0) = 0x7fff;
 			slot_scan_idx_or_capacity = 0;
 			do {
-				*(char*) (slot_scan_idx_or_capacity + 0x80 + (int) new_entity_slot_ptr) = *((char*) matched_production_record + slot_scan_idx_or_capacity + 0x24) >> 1;
+				*(char*) (slot_scan_idx_or_capacity + 0x80 + (int) new_entity_slot_ptr) =
+					*((char*) matched_production_record + slot_scan_idx_or_capacity + 0x24) >> 1;
 				slot_scan_idx_or_capacity = slot_scan_idx_or_capacity + 1;
 			} while (slot_scan_idx_or_capacity < 5);
 			*(char*) (entity_slot_byte_offset + 0x100358a9) = *((char*) matched_production_record + 0x38);
@@ -1624,7 +1656,8 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 					search_loop_idx = 0;
 					production_record_walker = *(int**) (production_slot_entry_ptr + 0x10);
 					do {
-						if (*production_record_walker != -1 && *production_record_walker != *matched_production_record) {
+						if (*production_record_walker != -1 &&
+							*production_record_walker != *matched_production_record) {
 							*(int*) (production_slot_entry_ptr + 4) = *production_record_walker;
 							goto code_r0x10011fcd;
 						}

@@ -41,6 +41,7 @@
 
 #include "../command_internal.h"
 
+void __cdecl gm_SubObjektNoKill(unsigned int, unsigned int, unsigned int);
 void __cdecl gm_AddOrAccumulateObject(int, unsigned int, int);
 extern char g_currency_type_array[];
 

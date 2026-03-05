@@ -50,17 +50,17 @@
  * }
  */
 
-#include "../command_internal.h"
 #include "../../../Units/Error/error.h"
+#include "../command_internal.h"
 
 extern int g_entity_type_table;
 extern uchar g_current_season;
 
-void __cdecl ReportMessage(const char*);
+void __cdecl ReportMessage(char* msg, ...);
 void __cdecl gm_SetBuildingWorkerLimits(uchar*);
 void __cdecl gm_AllocBuildingDefaults(uchar*);
 void __cdecl UpgradeGraveyardField(uchar*);
-void __cdecl gm_RefreshMarketAvailability(uint);
+void __cdecl gm_RefreshMarketAvailability(int);
 
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 extern char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[];
