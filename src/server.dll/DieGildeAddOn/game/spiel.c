@@ -32,7 +32,7 @@ void __cdecl gm_InitEntitySlots(void);
 int __cdecl _getpid(void);
 extern char* g_entity_ptr;
 void __cdecl vfs_EntityCleanup(char*);
-extern short* DAT_100a8c34;
+extern unsigned short* DAT_100a8c34;
 extern int DAT_10035450;
 extern Record* g_records;
 void __cdecl free_block(int);
@@ -41,7 +41,7 @@ extern int g_data_ptr2;
 extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
-extern char* DAT_1014d8c0;
+extern unsigned char* DAT_1014d8c0;
 extern int DAT_100a8c30;
 extern unsigned char DAT_10035439;
 extern int DAT_1003543c;
@@ -952,7 +952,7 @@ char* __cdecl gm_FindSlotById(int param_1, int param_2)
 // FUNCTION: SERVER 0x10016290
 // gm_NextEntityQueryMatch
 
-short __cdecl gm_GetEntityType(void* entity);
+unsigned short __cdecl gm_GetEntityType(short* entity);
 
 void* __cdecl gm_NextEntityQueryMatch(void)
 {
@@ -1111,9 +1111,6 @@ extern int DAT_10035458;
 
 /* GLOBAL: SERVER 0x100a8c38 */
 extern int DAT_100a8c38;
-
-/* GLOBAL: SERVER 0x100a8c34 */
-extern unsigned short* DAT_100a8c34;
 
 /* GLOBAL: SERVER 0x10035468 */
 extern unsigned short* DAT_10035468;
@@ -1906,9 +1903,6 @@ extern int DAT_1003544c;
 
 /* GLOBAL: SERVER 0x10035448 */
 extern char DAT_10035448;
-
-/* GLOBAL: SERVER 0x1014d8c0 */
-extern unsigned char* DAT_1014d8c0;
 
 /* GLOBAL: SERVER 0x10035464 */
 extern unsigned char* DAT_10035464;

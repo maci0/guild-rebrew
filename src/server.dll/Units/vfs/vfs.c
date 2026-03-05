@@ -571,6 +571,9 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 				}
 				if ((stream_flags & 0x10) == 0) {
 					if ((stream_flags & 8) != 0) {
+						/* Decompiler artifact: gzread takes 3 args but Ghidra emits 9 (stack padding) */
+#pragma warning(push)
+#pragma warning(disable : 4020)
 						read_count = gzread(
 							src_ptr,
 							arg_8h,
@@ -582,6 +585,7 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 							in_stack_ffffff28,
 							in_stack_ffffff2c
 						);
+#pragma warning(pop)
 						return read_count;
 					}
 					result = fread(arg_8h, arg_ch, arg_10h, (FILE*) src_ptr);
