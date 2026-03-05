@@ -60,14 +60,12 @@ extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
 
 int __cdecl ExSetEntityField(int param_1, char* param_2)
 {
-	int iVar1;
 	int iVar2;
 	void* pvStack_8;
 	void* pvStack_4;
 
-	iVar1 = param_1;
 	iVar2 = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
-	*(int*) (iVar1 + 0x10) = iVar2;
+	*(int*) (param_1 + 0x10) = iVar2;
 	iVar2 = ResolveEntityById(&pvStack_4, &pvStack_8, (void**) &param_1, iVar2);
 	if (iVar2 == 0) {
 		LogMessageInternal(
@@ -84,8 +82,15 @@ int __cdecl ExSetEntityField(int param_1, char* param_2)
 			param_1 = (int) pvStack_4;
 		}
 	}
-	*(float*) (param_1 + *(int*) (iVar1 + 0x14)) =
-		*(float*) (iVar1 + 0x18) + *(float*) (param_1 + *(int*) (iVar1 + 0x14));
+
+	{
+		int cmd;
+		int offset;
+		cmd = (int) pvStack_4;
+		offset = *(int*) (cmd + 0x14);
+		*(float*) (param_1 + offset) = *(float*) (cmd + 0x18) + *(float*) (param_1 + offset);
+	}
+
 	if (param_2 != (char*) 0) {
 		*param_2 = '\x01';
 	}
