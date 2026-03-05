@@ -413,6 +413,7 @@ int __cdecl gm_Open(int param_1)
 	unsigned short* slot_ptr;
 	int slot_counter;
 	unsigned char path_buf[512];
+	int table_offset;
 
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d3, "gm_Open(): enter", 1);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d6, "gm_Open(): Spieler initialisieren", 1);
@@ -479,11 +480,11 @@ int __cdecl gm_Open(int param_1)
 		"gm_Open(): ---- Das dusselige Datendesign hinbiegen !! -----",
 		1
 	);
-	file_handle = 0;
+	table_offset = 0;
 	do {
 		producible_count = 0;
 		slot_counter = 0x40;
-		slot_ptr = (unsigned short*) (file_handle + 0x23 + g_entity_type_table);
+		slot_ptr = (unsigned short*) (table_offset + 0x23 + g_entity_type_table);
 		do {
 			slot_entry = *slot_ptr;
 			if (slot_entry != 0xffff) {
@@ -496,10 +497,10 @@ int __cdecl gm_Open(int param_1)
 			slot_ptr = slot_ptr + 1;
 			slot_counter = slot_counter + -1;
 		} while (slot_counter != 0);
-		next_offset = file_handle + 0x24d;
-		*(char*) (file_handle + 0x21 + g_entity_type_table) =
-			*(char*) (file_handle + 0x21 + g_entity_type_table) + producible_count;
-		file_handle = next_offset;
+		next_offset = table_offset + 0x24d;
+		*(char*) (table_offset + 0x21 + g_entity_type_table) =
+			*(char*) (table_offset + 0x21 + g_entity_type_table) + producible_count;
+		table_offset = next_offset;
 	} while (next_offset < 0xca78);
 	_getpid();
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x588, "gm_Open(): exit", 1);

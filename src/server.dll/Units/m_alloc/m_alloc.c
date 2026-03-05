@@ -28,7 +28,7 @@ extern int DAT_117640a0;
 extern int DAT_117640a4;
 extern int DAT_10028938;
 extern int DAT_1002893c;
-void __cdecl ReportMemoryGroupInfo(int toggle);
+void __cdecl ReportMemoryGroupInfo(const char* toggle);
 void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 void __cdecl m_FreeTracked(void*);
 extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
@@ -253,7 +253,7 @@ void __cdecl InitPacketPool(int param_1)
 // FUNCTION: SERVER 0x10006990
 // ReportMemoryGroupInfo
 
-void __cdecl ReportMemoryGroupInfo(int param_1)
+void __cdecl ReportMemoryGroupInfo(const char* param_1)
 {
 	char name[16];
 	char buf[1024];
@@ -288,7 +288,7 @@ void __cdecl ReportMemoryGroupInfo(int param_1)
 	}
 
 	do {
-		if (param_1 == 0 || strstr(group, (char*) param_1) == 0) {
+		if (param_1 == 0 || strstr(group, param_1) == 0) {
 			matched = 0;
 		}
 		else {
