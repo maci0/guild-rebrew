@@ -1,6 +1,6 @@
 extern unsigned short random_mod(unsigned int);
 extern unsigned int __cdecl CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
-extern int __cdecl get_priority_info(int, int*);
+extern void __cdecl table_lookup(unsigned int a, unsigned short* b);
 extern int DAT_100a8c30;
 extern void __cdecl StartEntityQuery(int, int, int, ...);
 extern unsigned int __cdecl FindAndMatchParents(int param);
@@ -136,12 +136,12 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 
 void __cdecl priority_update(char* ctx, char* entity)
 {
-	int info[2];
+	unsigned short info[2];
 	unsigned char type;
 	unsigned short prio;
 	char* current;
 	type = *(unsigned char*) entity;
-	get_priority_info((int) type, info);
+	table_lookup((unsigned int) type, info);
 	prio = (unsigned char) *(entity + 0x65);
 	if (prio >= (unsigned short) info[0]) {
 		return;

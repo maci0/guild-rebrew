@@ -35,9 +35,6 @@ extern void __cdecl entity_cleanup(char*);
 extern short* DAT_100a8c34;
 extern int DAT_10035450;
 extern Record* g_records;
-extern int __cdecl find_entity_2arg(int, int);
-extern void __cdecl cleanup_one(int);
-extern int __cdecl get_next_entity(void);
 extern void __cdecl free_block(int);
 extern int g_data_ptr;
 extern int g_data_ptr2;
@@ -164,25 +161,14 @@ extern double DAT_100257d0; /* 0x100257d0 */
 extern double __cdecl CalculateProductionValue(unsigned short, unsigned char);
 extern int __cdecl __ftol(void);
 extern char g_type_idx;
-extern int __cdecl find_entity(int, int, int, int);
-extern int g_key_table[];
-extern char entity_array[];
-extern int __cdecl compute_slot_val(int);
-extern int __cdecl find_entity_3arg(int, int, int);
-extern int __cdecl compute_entity_val(int, int);
-extern int __cdecl another_entity_val(int);
+extern int __cdecl SumBuildingProductionValues(char*, int);
+extern int __cdecl EntityQuerySum(int);
 extern int __cdecl compute_size(char*, int); /* 0x10019d00 */
 ;
 extern int __cdecl FindEntityByOwner(char*, char*); /* 0x10019cd0 */
 ;
 extern int __cdecl LookupEntityInTable(int); /* 0x1000c670 */
 ;
-extern int __cdecl search_entity(int, int, int);
-extern int __cdecl search_sub(int, int, int, int);
-extern int __cdecl search_sub3(int, int, int);
-extern int __cdecl get_next_sub(void);
-extern int __cdecl get_next_outer(void);
-extern int __cdecl rand_gen(void);
 extern float _DAT_10025fbc;
 extern double __cdecl RandomFloat01(void);
 extern float _DAT_100256a0;
@@ -651,11 +637,11 @@ Record* __cdecl FindRecordById(int id)
 void __cdecl cleanup_all_entities(void)
 {
 	int ent;
-	ent = find_entity_2arg(1, 6);
+	ent = (int) StartFilteredEntitySearch(1, 6);
 	if (ent) {
 		do {
-			cleanup_one(ent);
-			ent = get_next_entity();
+			CleanupBuildingEntity((unsigned char*) ent);
+			ent = (int) FindNextFilteredEntity();
 		} while (ent);
 	}
 	if (g_data_ptr) {
@@ -4053,11 +4039,11 @@ int __cdecl accumulate_typed2(char* entity)
 	sum = 0;
 	idx = (unsigned char) g_type_idx;
 	idx = idx * 189;
-	result = find_entity(*(int*) (entity + 0x178), 1, 0, (int) *(unsigned short*) &g_key_table[idx]);
+	result = (int) StartEntityQuery(*(int*) (entity + 0x178), 1, 0, (int) *(unsigned short*) &g_key_table[idx]);
 	if (result) {
 		do {
 			sum += *(int*) (result + 0xe);
-			result = get_next_entity();
+			result = (int) NextEntityQueryMatch();
 		} while (result);
 	}
 	return sum;
@@ -4222,13 +4208,13 @@ int __cdecl WalkEntityChain(int raw_idx)
 	if (*(unsigned short*) slot == 0xFFFF) {
 		return -1;
 	}
-	total = compute_slot_val(slot);
-	ent = find_entity_3arg(1, 3, (int) idx);
+	total = accumulate_typed2((char*) slot);
+	ent = (int) StartFilteredEntitySearch(1, 3, (int) idx);
 	if (ent) {
 		do {
-			total += compute_entity_val(ent, (int) *(signed char*) (ent + 0x5c));
-			total += another_entity_val(ent);
-			ent = get_next_entity();
+			total += SumBuildingProductionValues((char*) ent, (int) *(signed char*) (ent + 0x5c));
+			total += EntityQuerySum(ent);
+			ent = (int) FindNextFilteredEntity();
 		} while (ent);
 	}
 	return total;
@@ -4549,23 +4535,23 @@ void __cdecl entity_set_field(void)
 {
 	int entity;
 	int sub;
-	entity = search_entity(1, 0, 0x1e);
+	entity = (int) StartFilteredEntitySearch(1, 0, 0x1e);
 	if (!entity) {
 		return 0;
 	}
 	do {
-		sub = search_sub(*(int*) (entity + 0x5d), 1, 0, 0xff);
+		sub = (int) StartEntityQuery(*(int*) (entity + 0x5d), 1, 0, 0xff);
 		if (sub) {
-			sub = search_sub3(*(int*) (sub + 0x14), 1, 5);
+			sub = (int) StartEntityQuery(*(int*) (sub + 0x14), 1, 5);
 			if (sub) {
 				do {
 					if (*(int*) (sub + 0xe) != 2) {
 						*(int*) (sub + 0xe) = 2;
 					}
-				} while ((sub = get_next_sub()) != 0);
+				} while ((sub = (int) NextEntityQueryMatch()) != 0);
 			}
 		}
-		entity = get_next_outer();
+		entity = (int) FindNextFilteredEntity();
 	} while (entity);
 }
 
@@ -4581,7 +4567,7 @@ void __cdecl entity_set_field(void)
 int __cdecl random_mod(unsigned short n)
 {
 	if (n) {
-		return rand_gen() % n;
+		return rand() % n;
 	}
 	return 0;
 }

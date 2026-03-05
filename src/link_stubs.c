@@ -247,7 +247,7 @@ int g_stat1;
 int g_stat2;
 int g_stat3;
 int g_stat4;
-char g_static_entity_table_358a0[1];
+int g_static_entity_table_358a0;
 int g_stop_flag;
 char g_str_10028888[1];
 char g_str_10028aec[1];
@@ -384,6 +384,11 @@ void __cdecl RecvGameSavegame(void)
 }
 
 int __cdecl WriteFileBufferLocked(void* a, int b, int c, int d)
+{
+	return 0;
+}
+
+unsigned int __cdecl __ftol(void)
 {
 	return 0;
 }
@@ -551,10 +556,6 @@ void __cdecl free_subobj(void* a)
 {
 }
 
-/* check_flag, ApplyColorComponent, AllocateEntitySlot, slot_clear_match,
-   search_and_set, ClampFloatValue, FireEntityAndCleanup: defined in alchemistry_logic.c */
-/* plt_SetPlantMap: defined in plant.c */
-
 int __cdecl func_1001a286(void* a, int b)
 {
 	return 0;
@@ -567,11 +568,6 @@ int __cdecl func_1001a2eb(int a)
 
 void __cdecl func_1001a527(void* a)
 {
-}
-
-unsigned int __cdecl __ftol(void)
-{
-	return 0;
 }
 
 void __cdecl game_free(void* a)
@@ -588,16 +584,6 @@ int __cdecl get_next_entity(void)
 	return 0;
 }
 
-int __cdecl get_next_outer(void)
-{
-	return 0;
-}
-
-int __cdecl get_next_sub(void)
-{
-	return 0;
-}
-
 int __cdecl get_priority_info(int a, int* b)
 {
 	return 0;
@@ -608,26 +594,11 @@ int __cdecl locked_fwrite(void* a, int b, int c, void* d)
 	return 0;
 }
 
-void __cdecl mem_free(char* a)
+void __cdecl mem_free(void* a)
 {
 }
 
 int __cdecl rand_gen(void)
-{
-	return 0;
-}
-
-int __cdecl search_entity(int a, int b, int c)
-{
-	return 0;
-}
-
-int __cdecl search_sub(int a, int b, int c, int d)
-{
-	return 0;
-}
-
-int __cdecl search_sub3(int a, int b, int c)
 {
 	return 0;
 }
