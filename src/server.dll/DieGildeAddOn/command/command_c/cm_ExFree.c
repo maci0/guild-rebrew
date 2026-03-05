@@ -20,7 +20,6 @@
 
 #include "../command_internal.h"
 
-extern int __cdecl get_field_by_type(char*, unsigned int);
 extern int __cdecl CleanupBuildingEntity(uchar*);
 extern void __cdecl DeallocEntity(unsigned int, int);
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);

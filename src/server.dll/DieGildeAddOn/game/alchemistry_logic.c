@@ -279,11 +279,11 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			*(char*) (*(int*) (target_building + 0x65) + 10) = *(char*) (param_1 + 0xe);
 			*(char*) (*(int*) (target_building + 0x65) + 0xb) = *(char*) (param_1 + 0xf);
 			*(char*) (*(int*) (target_building + 0x65) + 0xc) = *(char*) (param_1 + 0x14);
-			idx = StartEntityQuery(*(int*) (target_building + 0x5d), 2, 6, 0, 0xff);
+			idx = (int) StartEntityQuery(*(int*) (target_building + 0x5d), 2, 6, 0, 0xff);
 			if (idx != 0) {
 				obj_node = *(unsigned short**) (idx + 0x14);
 				while (obj_node != 0) {
-					RemoveObjectByType(idx + 0x14, *obj_node);
+					RemoveObjectByType((void**) (idx + 0x14), *obj_node);
 					obj_node = *(unsigned short**) (idx + 0x14);
 				}
 			}
@@ -502,7 +502,7 @@ int __cdecl FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 // PROTOTYPE: int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 
 int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
-void* __cdecl AllocateTrackedHeapBlock(unsigned int allocSize, char* groupTag);
+void* __cdecl AllocateTrackedHeapBlock(unsigned int allocSize, const char* groupTag);
 
 int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 {
@@ -667,6 +667,7 @@ int __cdecl QueryEntityBuildingType(int param_1)
 		}
 	}
 	LookupEntityInTable(0);
+	return 0;
 }
 
 // STATUS: MATCHING

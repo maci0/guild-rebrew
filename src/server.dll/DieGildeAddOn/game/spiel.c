@@ -100,7 +100,7 @@ extern void __cdecl free_3fields(void* param);
 extern int DAT_10035a0c;
 extern unsigned char DAT_10030861;
 extern char* __cdecl search_struct(void);
-extern int __cdecl AllocBuildingContents(void);
+extern int __cdecl AllocBuildingContents(char* geb, int obj_id);
 extern unsigned short* __cdecl SetupEntityQuery(unsigned char*);
 extern int __cdecl CheckEntityType(char* geb);
 extern int __cdecl AllocGraveyardField(char* geb);
@@ -2438,17 +2438,16 @@ unsigned short* __cdecl SetupEntityQuery(unsigned char* param_1)
 	building = (char*) (DAT_100a8c30 + (unsigned int) *param_1 * 0x24d);
 	result = CheckEntityType(param_1);
 	if (result != 0) {
-		StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 0, 0xfd);
-		return;
+		return (unsigned short*) StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 0, 0xfd);
 	}
 	if (*building == 4) {
-		StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 0, 0x54);
-		return;
+		return (unsigned short*) StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 0, 0x54);
 	}
-	p = StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 4, 2);
+	p = (unsigned short*) StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 4, 2);
 	while (p != (unsigned short*) 0 && *p == 0xfd) {
 		p = NextEntityQueryMatch();
 	}
+	return p;
 }
 
 // STATUS: RELOC
@@ -2658,7 +2657,7 @@ void __cdecl AssignBuildingOwner(unsigned char* param_1, unsigned short param_2,
 #define REBREW_NAKED __declspec(naked)
 #endif
 
-int REBREW_NAKED __cdecl AllocBuildingContents(void)
+int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
 {
 	__asm {
         mov     eax, dword ptr [g_item_def_table]
