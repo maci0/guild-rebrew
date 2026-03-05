@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Units/Error/error.h"
+#include "Units/m_alloc/m_alloc.h"
+#include <zlib.h>
 
 int* __cdecl GetErrnoPointer(void);
 int __cdecl WriteFileBufferLocked(void*, int, int, int);
@@ -20,20 +22,12 @@ extern void mem_free(void*);
 void __cdecl stream_close(int);
 int __cdecl crt_locked_call4b(int stream, unsigned int size, int count, int handle);
 int __cdecl crc32_update(int checksum, int buffer, unsigned int size);
-int __cdecl inflate(int* ctx, int flag);
 void __cdecl free_subobj(void*);
-int __cdecl inflateEnd(void* strm);
-int __cdecl deflate(void* strm, int flush);
-int __cdecl deflateEnd(void* strm);
 int __cdecl cleanup_object(char*);
 int __cdecl destroy_entity(char*);
 int __cdecl read_uint32_be(int);
-void __cdecl m_PoolFree(void* pool, void* item);
 extern unsigned int gzread(unsigned int*, unsigned int*, int, int, int, int, int, int, unsigned int);
 int ReadVfsCompressed(unsigned int*, unsigned int*, int);
-char* __cdecl m_PoolAlloc(char*, int, int); /* 0x10006d20 */;
-int __cdecl inflateInit2_(char*, int, char*, int); /* 0x100057c0 */;
-int __cdecl deflateInit2_(char*, int, int, int, int, int, char*, int); /* 0x10001330 */;
 
 ;
 ;

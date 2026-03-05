@@ -45,4 +45,10 @@ extern char g_static_entity_table_358a0[];
 /* __FILE__ string for LogMessageInternal calls in command.c */
 extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
 
+
+/* Entity query and search (correct signatures from spiel.c definitions) */
+extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
+extern char* __cdecl gm_AllocObjekt(int, int, int);
+extern int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 #endif /* COMMAND_INTERNAL_H */

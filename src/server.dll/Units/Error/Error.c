@@ -2,6 +2,7 @@
 #include <string.h>
 #include <windows.h>
 #include <time.h>
+void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
 
 int __cdecl crt_call_extra(char* buf, const char* fmt);
 int __cdecl crt_write_check(const char* str, int stream);
