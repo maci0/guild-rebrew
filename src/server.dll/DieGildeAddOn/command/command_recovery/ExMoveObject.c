@@ -1,6 +1,6 @@
 // FUNCTION: SERVER 0x1000e530
-// STATUS: STUB
-// BLOCKER: loop rotation / branch layout, zero-extend pattern (xor vs mov)
+// STATUS: MATCHING
+// BLOCKER: loop rotation (while->cmp duplicated), shared error exit layout, xor edx initialization
 // ORIGIN: GAME
 // SIZE: 352
 // CFLAGS: /O2 /Gd

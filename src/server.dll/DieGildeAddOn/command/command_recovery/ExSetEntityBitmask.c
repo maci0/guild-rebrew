@@ -82,8 +82,10 @@ int __cdecl ExSetEntityBitmask(int param_1, char* param_2)
 	void* primary;
 	void* secondary;
 	void* tertiary;
-	char* p;
-	int iVar;
+	uint* p;
+	int size;
+	uchar bVal;
+	uint uVal;
 
 	entity_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
 	*(int*) (param_1 + 0x10) = entity_id;
@@ -106,29 +108,24 @@ int __cdecl ExSetEntityBitmask(int param_1, char* param_2)
 		}
 	}
 
-	p = (char*) primary + *(int*) (param_1 + 0x14);
-	iVar = *(int*) (param_1 + 0x18);
+	p = (uint*) ((int) primary + *(int*) (param_1 + 0x14));
+	size = *(int*) (param_1 + 0x18);
 
-	switch (iVar) {
-	case 1: {
-		uchar bVal;
+	switch (size) {
+	case 1:
 		bVal = *(uchar*) p & ~*(uchar*) (param_1 + 0x20);
 		*(uchar*) p = bVal;
-		*(uchar*) p = bVal | *(uchar*) (param_1 + 0x1c);
+		*(uchar*) p = *(uchar*) (param_1 + 0x1c) | bVal;
 		break;
-	}
-	case 2: {
+	case 2:
 		*(ushort*) p = *(ushort*) p & ~*(ushort*) (param_1 + 0x20);
 		*(ushort*) p = *(ushort*) (param_1 + 0x1c) | *(ushort*) p;
 		break;
-	}
-	case 4: {
-		uint uVal;
-		uVal = *(uint*) p & ~*(uint*) (param_1 + 0x20);
-		*(uint*) p = uVal;
-		*(uint*) p = *(uint*) (param_1 + 0x1c) | uVal;
+	case 4:
+		uVal = *p & ~*(uint*) (param_1 + 0x20);
+		*p = uVal;
+		*p = *(uint*) (param_1 + 0x1c) | uVal;
 		break;
-	}
 	}
 
 	if (param_2 != (char*) 0) {
