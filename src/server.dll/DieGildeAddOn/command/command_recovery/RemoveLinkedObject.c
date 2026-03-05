@@ -19,8 +19,8 @@ int __cdecl RemoveLinkedObject(int param_1, char *param_2)
 
 	pcVar1 = param_2;
 	iVar3 = param_1;
-	if (param_2 != (char *)0x0) {
-		*param_2 = '\x02';
+	if (pcVar1 != (char *)0x0) {
+		*pcVar1 = '\x02';
 	}
 	ResolveEntityById((void **)&param_1, (void **)&param_2, &local_4, *(int *)(iVar3 + 0x10));
 	if (param_1 != 0) {
@@ -29,11 +29,12 @@ int __cdecl RemoveLinkedObject(int param_1, char *param_2)
 			iVar3 = *(int *)(iVar3 + 0x18);
 		} else {
 			param_2 = (char *)StartEntityQuery(*(int *)(param_1 + 0x5d), 2, 6, 1, *(int *)(iVar3 + 0x14));
-			if (param_2 == (char *)0x0) {
-				return -2;
+			if (param_2 != (char *)0x0) {
+				iVar3 = *(int *)(iVar3 + 0x18);
+				puVar2 = (ushort *)((int)param_2 + 0x14);
+				goto LAB_1000f154;
 			}
-			iVar3 = *(int *)(iVar3 + 0x18);
-			puVar2 = (ushort *)((int)param_2 + 0x14);
+			return -2;
 		}
 	} else if (local_4 != (void *)0x0) {
 		iVar3 = *(int *)(iVar3 + 0x18);
@@ -48,6 +49,7 @@ int __cdecl RemoveLinkedObject(int param_1, char *param_2)
 		}
 		goto LAB_1000f181;
 	}
+LAB_1000f154:
 	iVar3 = RemoveLinkedNodeById((int *)puVar2, iVar3);
 	if (iVar3 != 0) {
 		return iVar3;
