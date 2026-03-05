@@ -5,19 +5,14 @@
 extern int __cdecl crt_call_extra(char* buf, const char* fmt);
 extern int __cdecl crt_write_check(const char* str, int stream);
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
-extern char __cdecl check_memory_protection(unsigned int);
+extern char __cdecl check_memory_protection(void*);
 extern char __cdecl AnalyzeInstruction(int, int, int, int*);
 extern unsigned int __cdecl EmitCrashModuleLine(int*);
 extern void* g_10034614;
 extern char* __cdecl GetDebugRecordByIndex();
-extern unsigned char* strrchr(int, int);
 extern void func_1001a527(void*);
-extern void sprintf(int, int, void*);
 extern int func_1001a286(void*, int);
-extern void fseek(int, int, int);
 extern int func_1001a2eb(int);
-extern void fflush(int);
-extern void fputs(int, int);
 extern void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 extern int g_severity_table[3];
 extern unsigned int g_log_mode_flags;
@@ -736,11 +731,11 @@ void InitializeLogAndErrorHandler(
 	path_end = strrchr(0x11766100, 0x5c);
 	*path_end = 0;
 	func_1001a527(&stack_ddc);
-	sprintf(0x117640e0, 0x1002735c, &stack_ee4);
+	sprintf((char*) 0x117640e0, (char*) 0x1002735c, &stack_ee4);
 	if ((*(unsigned int*) 0x10034618 & 1) != 0) {
 		format_offset = 0x10027084;
 		do {
-			sprintf((int) &stack_de0, 0x100270fc, (void*) 0x11766100);
+			sprintf((char*) &stack_de0, (char*) 0x100270fc, (char*) 0x11766100);
 			file_handle = func_1001a286(&stack_de0, 0x100270f8);
 			if (file_handle != 0) {
 				fseek(file_handle, 0, 2);

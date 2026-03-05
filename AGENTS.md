@@ -12,46 +12,51 @@ toolchain. Contains original binaries, ~330 reversed C89 source files in
 uv pip install -e ../rebrew && uv pip install -e ../recoverage
 ```
 
-## Build / Test / Lint Commands
+## Quick Start
 
-Always use `--json` when running these commands as an agent to receive structured, machine-readable output.
+1. `rebrew triage --json` -- assess the binary
+2. `rebrew todo --json` -- get highest ROI action items
+3. `rebrew skeleton 0x<VA>` -- generate `.c` skeleton
+4. Write C89 source matching Ghidra decompilation
+5. `rebrew test src/server.dll/<file>.c --json` -- compile and compare
+6. `rebrew match -d src/server.dll/<file>.c --json` -- inspect diffs
+7. Iterate until RELOC or EXACT match
+8. `rebrew promote src/server.dll/<file>.c --json` -- test + update STATUS
 
-```bash
-# Test a single reversed file (primary workflow command)
-rebrew test src/server.dll/<file>.c --json
+## CLI Tools
 
-# Diff against target binary (side-by-side disassembly)
-rebrew match -d src/server.dll/<file>.c --json
-rebrew match -d --mm src/server.dll/<file>.c --json   # mismatches only
+Use `--json` for structured output (preferred for agents). All tools read `rebrew-project.toml` for compiler paths, target binary, and flags. Global flags: `-v` (verbose), `-q` (quiet) apply to all subcommands.
 
-# Flag sweep (find best compiler flags)
-rebrew match -S src/server.dll/<file>.c --json
+| Command | Use |
+|---------|-----|
+| `rebrew triage --json` | Combined overview: coverage, near-misses, recommendations |
+| `rebrew doctor` | Check toolchain and project health |
+| `rebrew todo --json` | Prioritized action items (compile errors, near misses, new functions) |
+| `rebrew next --json` | Find next function to reverse (sorted by similarity) |
+| `rebrew next --improving --json` | List MATCHING functions sorted by byte delta |
+| `rebrew skeleton 0x<VA>` | Generate C skeleton from address |
+| `rebrew test <file> --json` | Compile and byte-compare against target |
+| `rebrew match --diff-only <file> --json` | Structured byte diff (`-d`) |
+| `rebrew match --flag-sweep-only <file>` | Find best compiler flags for a single function (`-S`) |
+| `rebrew match <file> --json` | Run GA matching engine |
+| `rebrew ga --flag-sweep --json` | Batch flag sweep on all MATCHING functions |
+| `rebrew ga --near-miss --threshold 5` | Batch GA on MATCHING functions with small deltas |
+| `rebrew promote <file> --json` | Test + atomically update STATUS |
+| `rebrew rename <old> <new>` | Rename function and update cross-references |
+| `rebrew status --json` | Coverage progress |
+| `rebrew verify --json` | Bulk verify all reversed files |
+| `rebrew lint --json` | Validate annotations |
+| `rebrew lint --fix <file>` | Auto-fix annotation format |
+| `rebrew data --json` | Inventory globals in .data/.rdata/.bss |
+| `rebrew graph --format summary` | Dependency graph stats and blockers |
+| `rebrew catalog --json` | Generate coverage catalog |
+| `rebrew flirt --json` | FLIRT scan for known library functions |
+| `rebrew extract --json` | Batch extract and disassemble functions |
+| `rebrew asm 0x<VA> --size 128 --json` | Quick offline disassembly |
+| `rebrew sync --push` | Push annotations to Ghidra |
+| `rebrew sync --summary --json` | Preview what would be synced |
+| `clang-format -i --style=file <file>` | Format C source (pre-commit hook runs this automatically) |
 
-# GA matching engine (find best flag/code combination)
-rebrew match src/server.dll/<file>.c -g 200 -p 64 -j 16 --json
-
-# Batch verify all reversed files
-rebrew verify --json
-
-# Lint annotations (checks E001-E017, W001-W015)
-rebrew lint src/server.dll/<file>.c --json
-rebrew lint --fix src/server.dll/<file>.c    # auto-fix annotation format
-
-# Format C source (pre-commit hook runs this automatically)
-clang-format -i --style=file src/server.dll/<file>.c
-
-# Progress / next function to reverse
-rebrew next --stats --json
-rebrew next --origin GAME --json
-
-# Generate skeleton, update catalog
-rebrew skeleton 0x<VA>
-rebrew catalog --json
-```
-
-All tools read `rebrew-project.toml` for compiler paths, target binary, and flags.
-Most tools support `--json` for machine-readable output.
-Global flags: `-v` (verbose), `-q` (quiet) apply to all subcommands.
 
 ## C Source Style (src/server.dll/*.c)
 
@@ -170,31 +175,30 @@ When STATUS is `MATCHING`, add `// BLOCKER:` explaining the remaining diff:
 | `references/zlib-1.1.3/` | Exact zlib version used in server.dll |
 | `rebrew-project.toml` | Single source of truth for all tool config |
 
-## Common Workflow
+## Agent Skills
 
-1. `rebrew next --origin GAME --json` -- pick a function
-2. `rebrew skeleton 0x<VA>` -- generate skeleton `.c` file
-3. Write C89 source matching Ghidra decompilation
-4. `rebrew test src/server.dll/<file>.c --json` -- compile and compare
-5. `rebrew match -d src/server.dll/<file>.c --json` -- inspect diffs
-6. Iterate until RELOC or EXACT match
-7. `rebrew promote src/server.dll/<file>.c --json` -- test + update STATUS
-8. `rebrew catalog --json` -- update catalog
+Detailed workflow instructions are in `.agents/skills/`:
 
-## Knowledge Memory (Cognee MCP)
+| Skill | Use When |
+|-------|----------|
+| `rebrew-intake` | Onboarding a new binary, initial triage |
+| `rebrew-workflow` | End-to-end function reversing workflow |
+| `rebrew-matching` | Flag sweeping, GA engine, diff analysis |
+| `rebrew-data-analysis` | Globals, dispatch tables, BSS debugging |
+| `rebrew-ghidra-sync` | Ghidra push/pull sync via ReVa MCP |
 
-A local Cognee MCP server is available for persistent project knowledge. Use
-the `cognee` tools to store and retrieve discoveries made during reversing.
+## Knowledge Memory (MuninnDB MCP)
 
-**When to store** (`cognify` / `save_interaction`):
+A local MuninnDB MCP server is available for persistent project knowledge. Use
+the `muninn` tools to store and retrieve discoveries made during reversing.
+
+**When to store** (`muninn_remember` / `muninn_remember_batch`):
 - Identified purpose of a global variable (e.g. `g_10030b6c` is the connection pool)
 - Discovered struct layouts or calling conventions
 - Mapped relationships between functions
 - Noted patterns in compiler output or flag behavior
 
-**When to search** (`search`):
+**When to search** (`muninn_recall` / `muninn_find_by_entity`):
 - Before reversing a new function, check if related globals/structs are documented
 - When encountering an unknown global or function reference
 - To recall prior analysis of similar code patterns
-
-**Start the server** (separate terminal): `./scripts/cognee-start.sh`

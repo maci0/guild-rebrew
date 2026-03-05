@@ -1,4 +1,4 @@
-extern int __cdecl find_zone_record(int param_1, unsigned int x, unsigned int y);
+extern int __cdecl find_zone_record(char* base, int x, int y);
 extern int __cdecl SearchRecordTable(int);
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 extern int DAT_1003540c;

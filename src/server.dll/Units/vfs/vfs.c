@@ -16,8 +16,6 @@ extern int __cdecl close_stream(int);
 extern int __cdecl crt_locked_putc(int, int);
 extern void __cdecl entity_cleanup(char*);
 extern void __cdecl stream_close(int);
-extern void __cdecl mem_free(char*);
-extern int __cdecl fseek(int handle, int position, int origin);
 extern int __cdecl crt_locked_call4b(int stream, unsigned int size, int count, int handle);
 extern int __cdecl crc32_update(int checksum, int buffer, unsigned int size);
 extern int __cdecl inflate(int* ctx, int flag);
@@ -31,7 +29,6 @@ extern int __cdecl read_uint32_be(int);
 extern void __cdecl pool_free(void* pool, void* item);
 extern unsigned int gzread(unsigned int*, unsigned int*, int, int, int, int, int, int, unsigned int);
 extern int ReadVfsCompressed(unsigned int*, unsigned int*, int);
-extern void sprintf(int*, int, int);
 extern void LogMessageInternal(const char*, int, int*, int);
 extern char* __cdecl pool_alloc(char*, int, int); /* 0x10006d20 */;
 extern int __cdecl inflateInit2_(char*, int, char*, int); /* 0x100057c0 */;
@@ -624,7 +621,7 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 						((*(unsigned char*) (arg_14h + 0x13c) = *(unsigned char*) (arg_14h + 0x13c) & 0xfb,
 						  *arg_8h == *(unsigned int*) 0x10029450 &&
 							  (*(unsigned int*) ((char*) arg_8h + 4) == *(unsigned int*) 0x10029454)))) {
-						sprintf(&log_ctx, 0x10029474, arg_14h);
+						sprintf((char*)&log_ctx, (char*)0x10029474, arg_14h);
 						LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x5b4, &log_ctx, 1);
 						return result;
 					}
@@ -800,7 +797,7 @@ done:
 		flag_byte |= (use_zlib & 1) << 3;
 		*(unsigned char*) (obj + 0x13c) = flag_byte;
 
-		sprintf(obj, (char*) 0x100294a4, param_1, param_2, is_read & 0xff, use_zlib & 0xff);
+		sprintf((char*)obj, (char*) 0x100294a4, param_1, param_2, is_read & 0xff, use_zlib & 0xff);
 	}
 
 	return (int) obj;
