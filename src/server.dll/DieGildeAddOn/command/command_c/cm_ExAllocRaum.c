@@ -23,8 +23,6 @@ typedef struct copy_12_dwords {
 } copy_12_dwords;
 
 extern player_slot g_player_slot_0[];
-extern char g_static_entity_table_358a0[];
-
 extern char* __cdecl AllocGebaeude(uchar, uint);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 

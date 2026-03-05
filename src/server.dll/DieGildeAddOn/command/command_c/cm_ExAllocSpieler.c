@@ -67,8 +67,6 @@
  */
 
 extern char g_player_slot_0[];
-extern char g_static_entity_table_358a0[];
-
 extern void* __cdecl StartFilteredEntitySearch(int, ...);
 extern uint __cdecl CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);

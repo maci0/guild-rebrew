@@ -9,7 +9,6 @@
 
 #include "../command_internal.h"
 
-extern ushort g_static_entity_table_358a0[];
 extern int g_static_entity0_entity_id[];
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
@@ -139,7 +138,7 @@ skip_modify:
 		if (uVar6 >= 0x300) {
 			return 1;
 		}
-		if (g_static_entity_table_358a0[uVar6 * 0x10e] == (ushort) 0xffff) {
+		if (((ushort*)g_static_entity_table_358a0)[uVar6 * 0x10e] == (ushort) 0xffff) {
 			return 1;
 		}
 		if (ebx_type == 3) {
@@ -165,7 +164,7 @@ skip_modify:
 					return 1;
 				}
 			}
-			if (uVar5 >= 0x300 || g_static_entity_table_358a0[uVar5 * 0x10e] == (ushort) 0xffff) {
+			if (uVar5 >= 0x300 || ((ushort*)g_static_entity_table_358a0)[uVar5 * 0x10e] == (ushort) 0xffff) {
 				return 1;
 			}
 			if (ebx_type == 2) {

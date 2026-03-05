@@ -8,8 +8,6 @@
 
 #include "../command_internal.h"
 
-extern char g_static_entity_table_358a0[];
-
 extern int __cdecl StartEntityQuery(int, int, int, uint);
 extern int __cdecl CheckInventoryCapacity(char*, uint, int);
 extern int __cdecl KannObjektHergestellt(char*, int, int);

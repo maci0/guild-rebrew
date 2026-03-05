@@ -9,7 +9,6 @@
 
 #include "../command_internal.h"
 
-extern char g_static_entity_table_358a0[];
 extern char g_currency_type_array[];
 extern char* unknown;
 extern int g_current_season;
