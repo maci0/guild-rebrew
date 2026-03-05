@@ -1,6 +1,6 @@
 // FUNCTION: SERVER 0x1000d260
-// STATUS: STUB
-// BLOCKER: jump condition swap
+// STATUS: MATCHING
+// BLOCKER: loop rotation - target uses jl backward jump, compiler generates jge forward + jmp backward
 // ORIGIN: GAME
 // SIZE: 120
 // CFLAGS: /O2 /Gd
