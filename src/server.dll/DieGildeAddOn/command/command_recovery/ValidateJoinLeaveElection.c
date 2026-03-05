@@ -22,8 +22,8 @@ int __cdecl ValidateJoinLeaveElection(int* param_1)
 {
 	int iVar4;
 	void* entity;
-	int* slots;
 	int player;
+	int* slots;
 	int i;
 
 	iVar4 = param_1[4];
@@ -34,23 +34,19 @@ int __cdecl ValidateJoinLeaveElection(int* param_1)
 			if (entity != (void*)0) {
 				player = param_1[5];
 				slots = (int*)((char*)entity + 0x1c);
-				i = 0;
-				do {
+				for (i = 0; i < 4; i++) {
 					if (slots[i] == player) {
 						return 1;
 					}
-					i = i + 1;
-				} while (i < 4);
-				i = 0;
-				do {
+				}
+				for (i = 0; i < 4; i++) {
 					if (slots[i] == -1) {
-						if (i >= 4) {
-							return 1;
+						if (i < 4) {
+							return 0;
 						}
-						return 0;
+						return 1;
 					}
-					i = i + 1;
-				} while (i < 4);
+				}
 			}
 		}
 		return 1;
@@ -61,18 +57,15 @@ int __cdecl ValidateJoinLeaveElection(int* param_1)
 			entity = StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
 			if (entity != (void*)0) {
 				player = param_1[5];
-				i = 0;
-				entity = (char*)entity + 0x1c;
-				do {
-					if (*(int*)entity == player) {
-						if (i >= 4) {
-							return 1;
+				slots = (int*)((char*)entity + 0x1c);
+				for (i = 0; i < 4; i++) {
+					if (slots[i] == player) {
+						if (i < 4) {
+							return 0;
 						}
-						return 0;
+						return 1;
 					}
-					i = i + 1;
-					entity = (char*)entity + 4;
-				} while (i < 4);
+				}
 				return 1;
 			}
 		}
@@ -84,9 +77,9 @@ int __cdecl ValidateJoinLeaveElection(int* param_1)
 			return 1;
 		}
 
-		i = (int)*(unsigned short*)((char*)entity + 0x27);
-		if (i != 0xffff) {
-			slots = (int*)(g_100358a0 + (((i * 3) * 5) * 9) * 4);
+		iVar4 = (int)*(unsigned short*)((char*)entity + 0x27);
+		if (iVar4 != 0xffff) {
+			slots = (int*)(g_100358a0 + (((iVar4 * 3) * 5) * 9) * 4);
 			if (slots != (int*)0 && (int)slots != g_1003546c) {
 				if (*(unsigned char*)((char*)slots + 8) != 0 &&
 					*(unsigned char*)((char*)slots + 2) != 0x0f) {

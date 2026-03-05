@@ -2,7 +2,7 @@
 
 # Reversed Functions Catalog
 
-Total: 547 functions matched (311 exact, 105 reloc, 21 stubs)  
+Total: 547 functions matched (311 exact, 109 reloc, 9 stubs)  
 Coverage: 0.0% of .text section (146492/0 bytes)
 
 
@@ -88,10 +88,10 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000c710 | _GetCommandPayloadSize | 752 | MATCHING | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000ca00 | _ProcessEntityChain | 130 | MATCHING | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000ca90 | _get_field_by_type | 130 | EXACT | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000cb20 | _CheckMoveCredits | 171 | STUB | DieGildeAddOn/command/command_recovery/CheckMoveCredits.c |
+| 0x1000cb20 | _CheckMoveCredits | 171 | MATCHING | DieGildeAddOn/command/command_recovery/CheckMoveCredits.c |
 | 0x1000cbd0 | _CheckSellObject | 517 | STUB | DieGildeAddOn/command/command_recovery/CheckSellObject.c |
-| 0x1000cde0 | _CheckChangeAttribute | 331 | STUB | DieGildeAddOn/command/command_recovery/CheckChangeAttribute.c |
-| 0x1000cf30 | _CheckChangeBits | 162 | STUB | DieGildeAddOn/command/command_recovery/CheckChangeBits.c |
+| 0x1000cde0 | _CheckChangeAttribute | 331 | MATCHING | DieGildeAddOn/command/command_recovery/CheckChangeAttribute.c |
+| 0x1000cf30 | _CheckChangeBits | 162 | MATCHING | DieGildeAddOn/command/command_recovery/CheckChangeBits.c |
 | 0x1000cfe0 | _find_validate | 86 | RELOC | DieGildeAddOn/command/command_recovery/find_validate.c |
 | 0x1000d020 | _call_with_off | 22 | RELOC | DieGildeAddOn/command/command_recovery/call_with_off.c |
 | 0x1000d040 | _CmdValidateGeneric | 22 | RELOC | DieGildeAddOn/command/command_recovery/CmdValidateGeneric.c |
@@ -101,9 +101,9 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000d2e0 | _validate_command_type | 77 | RELOC | DieGildeAddOn/command/command_recovery/validate_command_type.c |
 | 0x1000d330 | _MarkAndReturn | 14 | EXACT | DieGildeAddOn/command/command_recovery/MarkAndReturn.c |
 | 0x1000d340 | _RejectCommand | 6 | EXACT | DieGildeAddOn/command/command_recovery/RejectCommand.c |
-| 0x1000d350 | _CmdAllocBuilding | 267 | STUB | DieGildeAddOn/command/command_recovery/CmdAllocBuilding.c |
-| 0x1000d460 | _CmdAllocPlayer | 267 | STUB | DieGildeAddOn/command/command_recovery/CmdAllocPlayer.c |
-| 0x1000d570 | _validate_cmd_10_AllocPlayer | 361 | STUB | DieGildeAddOn/command/command_recovery/validate_cmd_10_AllocPlayer.c |
+| 0x1000d350 | _CmdAllocBuilding | 267 | RELOC | DieGildeAddOn/command/command_recovery/CmdAllocBuilding.c |
+| 0x1000d460 | _CmdAllocPlayer | 267 | RELOC | DieGildeAddOn/command/command_recovery/CmdAllocPlayer.c |
+| 0x1000d570 | _validate_cmd_10_AllocPlayer | 361 | MATCHING | DieGildeAddOn/command/command_recovery/validate_cmd_10_AllocPlayer.c |
 | 0x1000d6e0 | _cm_ExChangePlayerIdentity | 78 | RELOC | DieGildeAddOn/command/command_recovery/cm_ExChangePlayerIdentity.c |
 | 0x1000d730 | _ExFreeEntity | 192 | STUB | DieGildeAddOn/command/command_recovery/ExFreeEntity.c |
 | 0x1000d7f0 | _ExTransferCurrency | 176 | RELOC | DieGildeAddOn/command/command_recovery/ExTransferCurrency.c |
@@ -111,11 +111,11 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000d930 | _TradeCommandHandler | 2057 | STUB | DieGildeAddOn/command/command_recovery/TradeCommandHandler.c |
 | 0x1000e140 | _cm_ExecProduction | 993 | STUB | DieGildeAddOn/command/command_recovery/cm_ExecProduction.c |
 | 0x1000e530 | _ExMoveObject | 352 | MATCHING | DieGildeAddOn/command/command_recovery/ExMoveObject.c |
-| 0x1000e690 | _cm_ExClearLagerslot | 191 | STUB | DieGildeAddOn/command/command_recovery/cm_ExClearLagerslot.c |
+| 0x1000e690 | _cm_ExClearLagerslot | 191 | MATCHING | DieGildeAddOn/command/command_recovery/cm_ExClearLagerslot.c |
 | 0x1000e750 | _ExCreateObject | 128 | RELOC | DieGildeAddOn/command/command_recovery/ExCreateObject.c |
 | 0x1000e7d0 | _ExAccumulateEntityFields | 256 | STUB | DieGildeAddOn/command/command_recovery/ExAccumulateEntityFields.c |
 | 0x1000e8d0 | _ExWriteEntityFields | 240 | STUB | DieGildeAddOn/command/command_recovery/ExWriteEntityFields.c |
-| 0x1000e9c0 | _ExChangeDesire | 214 | STUB | DieGildeAddOn/command/command_recovery/ExChangeDesire.c |
+| 0x1000e9c0 | _ExChangeDesire | 214 | MATCHING | DieGildeAddOn/command/command_recovery/ExChangeDesire.c |
 | 0x1000eaa0 | _ExSetEntityBitmask | 208 | MATCHING | DieGildeAddOn/command/command_recovery/ExSetEntityBitmask.c |
 | 0x1000eb70 | _ExSetEntityField | 1045 | MATCHING | DieGildeAddOn/command/command_recovery/ExSetEntityField.c |
 | 0x1000ec00 | _ExCopyEntityData | 938 | STUB | DieGildeAddOn/command/command_recovery/ExCopyEntityData.c |
@@ -124,7 +124,7 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000f030 | _CmdKillPlayer | 72 | RELOC | DieGildeAddOn/command/command_recovery/CmdKillPlayer.c |
 | 0x1000f080 | _AssignSequenceCounter | 26 | RELOC | DieGildeAddOn/command/command_recovery/AssignSequenceCounter.c |
 | 0x1000f0a0 | _AssignEntityId | 37 | RELOC | DieGildeAddOn/command/command_recovery/AssignEntityId.c |
-| 0x1000f0d0 | _RemoveLinkedObject | 197 | STUB | DieGildeAddOn/command/command_recovery/RemoveLinkedObject.c |
+| 0x1000f0d0 | _RemoveLinkedObject | 197 | RELOC | DieGildeAddOn/command/command_recovery/RemoveLinkedObject.c |
 | 0x1000f1a0 | _chain_handler_record_lookup | 327 | RELOC | DieGildeAddOn/command/command_recovery/chain_handler_record_lookup.c |
 | 0x1000f2f0 | _ExCreateSpecialObject | 179 | STUB | DieGildeAddOn/command/command_recovery/ExCreateSpecialObject.c |
 | 0x1000f3a0 | _chain_handler_noop | 3 | EXACT | DieGildeAddOn/command/command_recovery/chain_handler_noop.c |
@@ -132,7 +132,7 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000f480 | _SetResidence | 271 | RELOC | DieGildeAddOn/command/command_recovery/SetResidence.c |
 | 0x1000f590 | _SetBuildingUpgrade | 237 | RELOC | DieGildeAddOn/command/command_recovery/SetBuildingUpgrade.c |
 | 0x1000f680 | _DestroyBuilding | 171 | RELOC | DieGildeAddOn/command/command_recovery/DestroyBuilding.c |
-| 0x1000f730 | _EmployWorkerAtBuilding | 515 | STUB | DieGildeAddOn/command/command_recovery/EmployWorkerAtBuilding.c |
+| 0x1000f730 | _EmployWorkerAtBuilding | 515 | RELOC | DieGildeAddOn/command/command_recovery/EmployWorkerAtBuilding.c |
 | 0x1000f940 | _call_with_off2 | 22 | RELOC | DieGildeAddOn/command/command_recovery/call_with_off2.c |
 | 0x1000f960 | _CmdExecuteOffice | 22 | RELOC | DieGildeAddOn/command/command_recovery/CmdExecuteOffice.c |
 | 0x1000f980 | _ExCreateCitizenAtBuilding | 336 | MATCHING | DieGildeAddOn/command/command_recovery/ExCreateCitizenAtBuilding.c |
@@ -141,14 +141,14 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x1000fbd0 | _cond_write | 22 | EXACT | DieGildeAddOn/command/command_recovery/cond_write.c |
 | 0x1000fbf0 | _InitDefaultResponse | 25 | EXACT | DieGildeAddOn/command/command_recovery/InitDefaultResponse.c |
 | 0x1000fc10 | _ElectionOrTradeCommand | 308 | RELOC | DieGildeAddOn/command/command_recovery/ElectionOrTradeCommand.c |
-| 0x1000fd50 | _JoinLeaveElection | 445 | STUB | DieGildeAddOn/command/command_recovery/JoinLeaveElection.c |
+| 0x1000fd50 | _JoinLeaveElection | 445 | MATCHING | DieGildeAddOn/command/command_recovery/JoinLeaveElection.c |
 | 0x1000ff10 | _cond_write2 | 22 | EXACT | DieGildeAddOn/command/command_recovery/cond_write2.c |
 | 0x1000ff30 | _ValidateEntityLookup | 41 | RELOC | DieGildeAddOn/command/command_recovery/ValidateEntityLookup.c |
 | 0x1000ff60 | _CutsceneEntityUpdate | 82 | RELOC | DieGildeAddOn/command/command_recovery/CutsceneEntityUpdate.c |
 | 0x1000ffc0 | _ModifyEntityHealth | 70 | RELOC | DieGildeAddOn/command/command_recovery/ModifyEntityHealth.c |
 | 0x10010010 | _ModifyEntityStamina | 110 | RELOC | DieGildeAddOn/command/command_recovery/ModifyEntityStamina.c |
 | 0x10010080 | _ExSimCommand | 22 | RELOC | DieGildeAddOn/command/command_recovery/ExSimCommand.c |
-| 0x100100a0 | _ModifyEntityStat | 159 | STUB | DieGildeAddOn/command/command_recovery/ModifyEntityStat.c |
+| 0x100100a0 | _ModifyEntityStat | 159 | MATCHING | DieGildeAddOn/command/command_recovery/ModifyEntityStat.c |
 | 0x10010140 | _AllocWarEvent | 280 | MATCHING | DieGildeAddOn/command/command_recovery/AllocWarEvent.c |
 | 0x10010260 | _DispatchProductionCommand | 161 | RELOC | DieGildeAddOn/command/command_recovery/DispatchProductionCommand.c |
 | 0x100102f0 | _DispatchMoveSlotEntry | 17 | RELOC | DieGildeAddOn/command/command_recovery/DispatchMoveSlotEntry.c |

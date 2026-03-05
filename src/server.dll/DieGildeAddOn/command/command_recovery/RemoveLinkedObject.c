@@ -1,3 +1,6 @@
+/* STATUS: MATCHING */
+/* BLOCKER: prologue register load ordering, iVar3 register allocation (esi vs ecx) in goto branches */
+/* BLOCKER_DELTA: 132 */
 /* ORIGIN: GAME */
 /* SIZE: 197 */
 /* CFLAGS: /O2 /Gd */
@@ -25,8 +28,8 @@ int __cdecl RemoveLinkedObject(int param_1, char *param_2)
 	ResolveEntityById((void **)&param_1, (void **)&param_2, &local_4, *(int *)(iVar3 + 0x10));
 	if (param_1 != 0) {
 		if (*(int *)(iVar3 + 0x14) == -1) {
-			puVar2 = (ushort *)(param_1 + 0x5d);
 			iVar3 = *(int *)(iVar3 + 0x18);
+			puVar2 = (ushort *)(param_1 + 0x5d);
 		} else {
 			param_2 = (char *)StartEntityQuery(*(int *)(param_1 + 0x5d), 2, 6, 1, *(int *)(iVar3 + 0x14));
 			if (param_2 != (char *)0x0) {
