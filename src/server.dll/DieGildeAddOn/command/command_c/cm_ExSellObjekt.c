@@ -52,7 +52,7 @@ extern char s_cm_ExSellObjekt____gm_AllocObjek_1002cce8[];
 // FUNCTION: SERVER 0x1000d930
 uint TradeCommandHandler(char* param_1, uchar* param_2)
 {
-	int iVar1;
+	int amount;
 	int resolve_result;
 	char* capacity_check;
 	short* parent_check;
@@ -145,8 +145,8 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 		}
 		if (source_dynamic_entity != (short*)0) {
 			resolve_result = *(int*)(param_1 + 0x1f);
-			iVar1 = get_msg_field((int)source_dynamic_entity, (int)dest_object);
-			if (iVar1 < resolve_result) {
+			amount = get_msg_field((int)source_dynamic_entity, (int)dest_object);
+			if (amount < resolve_result) {
 				sprintf(
 					log_buffer,
 					s_cm_ExSellObjekt___Not_enough_Obj_1002cdfc,
@@ -241,9 +241,9 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 			if (parent_check != dest_owner_entity && *(int*)(dest_object + 0xe) != 0) {
 				resolve_result = compute_size((char*)source_dynamic_ref, (int)*(ushort*)dest_object);
 				weight_fraction = (uint)(resolve_result * *(int*)(dest_object + 0xe)) >> 2;
-				iVar1 = get_msg_field((int)source_dynamic_ref, (int)dest_object);
+				amount = get_msg_field((int)source_dynamic_ref, (int)dest_object);
 				source_dynamic_ref = source_dynamic_entity;
-				if ((uint)iVar1 - weight_fraction < (uint)*(int*)(param_1 + 0x1f)) {
+				if ((uint)amount - weight_fraction < (uint)*(int*)(param_1 + 0x1f)) {
 					capacity_check = g_error_msg_sell_no_source;
 					error_code = 0x2d79;
 					goto sell_error_return;
@@ -285,9 +285,9 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 	}
 	if (*(int*)(param_1 + 0x14) != -1) {
 		resolve_result = *(int*)(param_1 + 0x1f);
-		iVar1 = *(int*)(dest_object + 7) - resolve_result;
-		*(int*)(dest_object + 7) = iVar1;
-		if (iVar1 <= 0) {
+		amount = *(int*)(dest_object + 7) - resolve_result;
+		*(int*)(dest_object + 7) = amount;
+		if (amount <= 0) {
 			obj_category = *(unknown + (uint)*(ushort*)(param_1 + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
 				if (source_existing_entity == (void*)0) {

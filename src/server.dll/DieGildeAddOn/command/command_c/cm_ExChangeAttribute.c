@@ -74,72 +74,72 @@ extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
 // FUNCTION: SERVER 0x1000e7d0
 int __cdecl ExAccumulateEntityFields(int param_1, char *param_2)
 {
-	signed char cVar1;
-	int iVar2;
-	int iVar3;
-	int iVar4;
+	signed char elem_size;
+	int msg;
+	int field_id;
+	int resolved;
 	int count;
 	unsigned int offset;
-	char *pcVar7;
-	char *pcVar8;
-	uint uVar9;
-	void *pvStack_8;
-	void *pvStack_4;
+	char *src_ptr;
+	char *dst_ptr;
+	uint iter;
+	void *existing_ref;
+	void *static_ref;
 
-	iVar2 = param_1;
-	iVar3 = get_field_by_type((char *)param_1, *(int *)(param_1 + 0x10));
-	iVar4 = ResolveEntityById((void **)&param_1, &pvStack_8, &pvStack_4, iVar3);
-	if (iVar4 == 0) {
+	msg = param_1;
+	field_id = get_field_by_type((char *)param_1, *(int *)(param_1 + 0x10));
+	resolved = ResolveEntityById((void **)&param_1, &existing_ref, &static_ref, field_id);
+	if (resolved == 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x31f7,
 			s_cm_ExChangeAttribute___Invalid_I_1002d0b0, 1);
 		return 1;
 	}
-	*(int *)(iVar2 + 0x10) = iVar3;
+	*(int *)(msg + 0x10) = field_id;
 	if (param_1 != 0) {
-		iVar4 = param_1;
-	} else if ((iVar4 = (int)pvStack_8, pvStack_8 != (void *)0)) {
-		/* iVar4 already set */
+		resolved = param_1;
+	} else if ((resolved = (int)existing_ref, existing_ref != (void *)0)) {
+		/* resolved already set */
 	} else {
-		iVar4 = (int)pvStack_4;
+		resolved = (int)static_ref;
 	}
-	uVar9 = 0;
-	pcVar7 = (char *)(iVar2 + 0x15);
-	if (*(unsigned char *)(iVar2 + 0x14) != 0) {
+	iter = 0;
+	src_ptr = (char *)(msg + 0x15);
+	if (*(unsigned char *)(msg + 0x14) != 0) {
 		do {
-			cVar1 = *pcVar7;
-			count = (int)(signed char)pcVar7[1];
-			pcVar7 += 2;
-			offset = (unsigned int)*(ushort *)pcVar7;
-			pcVar7 += 2;
-			pcVar8 = (char *)(offset + (uint)iVar4);
-			switch (cVar1) {
+			elem_size = *src_ptr;
+			count = (int)(signed char)src_ptr[1];
+			src_ptr += 2;
+			offset = (unsigned int)*(ushort *)src_ptr;
+			src_ptr += 2;
+			dst_ptr = (char *)(offset + (uint)resolved);
+			switch (elem_size) {
 			case 1:
 				while (count > 0) {
-					*pcVar8 = *pcVar8 + *pcVar7;
-					pcVar7++;
-					pcVar8++;
+					*dst_ptr = *dst_ptr + *src_ptr;
+					src_ptr++;
+					dst_ptr++;
 					count--;
 				}
 				break;
 			case 2:
 				while (count > 0) {
-					*(short *)pcVar8 = (short)(*(short *)pcVar8 + *(short *)pcVar7);
-					pcVar7 += 2;
-					pcVar8 += 2;
+					*(short *)dst_ptr = (short)(*(short *)dst_ptr + *(short *)src_ptr);
+					src_ptr += 2;
+					dst_ptr += 2;
 					count--;
 				}
 				break;
 			case 4:
 				while (count > 0) {
-					*(int *)pcVar8 = *(int *)pcVar8 + *(int *)pcVar7;
-					pcVar7 += 4;
-					pcVar8 += 4;
+					*(int *)dst_ptr = *(int *)dst_ptr + *(int *)src_ptr;
+					src_ptr += 4;
+					dst_ptr += 4;
 					count--;
 				}
 				break;
 			}
-			uVar9++;
-		} while (uVar9 < *(unsigned char *)(iVar2 + 0x14));
+			iter++;
+		} while (iter < *(unsigned char *)(msg + 0x14));
 	}
 	if (param_2 != (char *)0) {
 		*param_2 = '\x01';

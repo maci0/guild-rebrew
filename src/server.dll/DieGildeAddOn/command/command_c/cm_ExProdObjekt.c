@@ -58,10 +58,10 @@ int __cdecl cm_ExecProduction(int msg, char* result)
 	short* owner;
 
 	*(int*)(msg + 0x1a) = g_timestamp_0b6c;
-	iVar1 = get_field_by_type((char*)msg, *(int*)(msg + 0x10));
-	*(int*)(msg + 0x10) = iVar1;
-	iVar1 = ResolveEntityById((void**)0, (void**)&local_10, (void**)0, iVar1);
-	if (iVar1 == 0) {
+	quantity = get_field_by_type((char*)msg, *(int*)(msg + 0x10));
+	*(int*)(msg + 0x10) = quantity;
+	quantity = ResolveEntityById((void**)0, (void**)&lager, (void**)0, quantity);
+	if (quantity == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x2f3b,
@@ -70,7 +70,7 @@ int __cdecl cm_ExecProduction(int msg, char* result)
 		);
 		return 1;
 	}
-	if ((*local_10 != 0x2a) && (*local_10 != 0x116)) {
+	if ((*lager != 0x2a) && (*lager != 0x116)) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x2f53,
@@ -79,8 +79,8 @@ int __cdecl cm_ExecProduction(int msg, char* result)
 		);
 		return 1;
 	}
-	local_4 = ResolveParentEntity(local_10);
-	if (local_4 == (short*)0) {
+	owner = ResolveParentEntity(lager);
+	if (owner == (short*)0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x2f6d,
@@ -89,113 +89,113 @@ int __cdecl cm_ExecProduction(int msg, char* result)
 		);
 		return 1;
 	}
-	iVar1 = *(int*)(msg + 0x16);
-	local_c = unknown + (uint)*(ushort*)(msg + 0x14) * 0x41;
-	local_8 = 4;
-	puVar5 = (ushort*)(local_c + 0x26);
+	quantity = *(int*)(msg + 0x16);
+	recipe_def = unknown + (uint)*(ushort*)(msg + 0x14) * 0x41;
+	saved_quantity = 4;
+	material_iter = (ushort*)(recipe_def + 0x26);
 	do {
-		if (puVar5[4] != 0) {
-			puVar2 = (ushort*)StartEntityQuery(*(int*)(local_10 + 10), 1, 0, (uint)puVar5[4]);
-			if (puVar2 == (ushort*)0) {
-				iVar1 = 0;
+		if (material_iter[4] != 0) {
+			obj_entry = (ushort*)StartEntityQuery(*(int*)(lager + 10), 1, 0, (uint)material_iter[4]);
+			if (obj_entry == (ushort*)0) {
+				quantity = 0;
 			}
 			else {
-				pcVar3 = (char*)get_msg_field((int)local_10, (int)puVar2);
-				if (iVar1 >= (int)pcVar3 / (int)(uint)*puVar5) {
-					pcVar3 = (char*)get_msg_field((int)local_10, (int)puVar2);
-					iVar1 = (int)pcVar3 / (int)(uint)*puVar5;
+				recipe = (char*)get_msg_field((int)lager, (int)obj_entry);
+				if (quantity >= (int)recipe / (int)(uint)*material_iter) {
+					recipe = (char*)get_msg_field((int)lager, (int)obj_entry);
+					quantity = (int)recipe / (int)(uint)*material_iter;
 				}
 			}
 		}
-		puVar5 = puVar5 + 1;
-		local_8 = local_8 + -1;
-	} while (local_8 != 0);
-	pcVar3 = local_c;
-	local_8 = iVar1;
-	iVar4 = KannObjektHergestellt(
-		(char*)local_10,
+		material_iter = material_iter + 1;
+		saved_quantity = saved_quantity + -1;
+	} while (saved_quantity != 0);
+	recipe = recipe_def;
+	saved_quantity = quantity;
+	production_cap = KannObjektHergestellt(
+		(char*)lager,
 		(uint)*(ushort*)(msg + 0x14),
-		(uint)*(ushort*)(local_c + 0x36) * iVar1
+		(uint)*(ushort*)(recipe_def + 0x36) * quantity
 	);
-	iVar4 = iVar4 / (int)(uint)*(ushort*)(pcVar3 + 0x36);
-	if (iVar4 <= iVar1) {
-		iVar1 = iVar4;
-		local_8 = iVar1;
+	production_cap = production_cap / (int)(uint)*(ushort*)(recipe + 0x36);
+	if (production_cap <= quantity) {
+		quantity = production_cap;
+		saved_quantity = quantity;
 	}
-	if (iVar1 == 0) {
-		pcVar3 = s_cm_ExProdObjekt___Cannot_produce___1002cf1c;
+	if (quantity == 0) {
+		recipe = s_cm_ExProdObjekt___Cannot_produce___1002cf1c;
 		line = 0x2fb5;
 	LAB_1000e3e1:
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, line, pcVar3, 1);
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, line, recipe, 1);
 		if (result != (char*)0) {
 			result[1] = '\b';
 		}
 		return 1;
 	}
-	iVar4 = 0;
-	puVar5 = (ushort*)(local_c + 0x2e);
+	production_cap = 0;
+	material_iter = (ushort*)(recipe_def + 0x2e);
 	do {
-		if (*puVar5 != 0) {
-			puVar2 = (ushort*)StartEntityQuery(*(int*)(local_10 + 10), 1, 0, (uint)*puVar5);
-			if (puVar2 == (ushort*)0) {
-				pcVar3 = s_cm_ExProdObjekt___Rohstoff_versc_1002cef4;
+		if (*material_iter != 0) {
+			obj_entry = (ushort*)StartEntityQuery(*(int*)(lager + 10), 1, 0, (uint)*material_iter);
+			if (obj_entry == (ushort*)0) {
+				recipe = s_cm_ExProdObjekt___Rohstoff_versc_1002cef4;
 				line = 0x2fdd;
 				goto LAB_1000e3e1;
 			}
-			*(uint*)(puVar2 + 7) = *(int*)(puVar2 + 7) - (uint)puVar5[-4] * iVar1;
-			pcVar3 = FindSlotById((uint)g_current_season, (uint)*puVar5);
-			if (pcVar3 != (char*)0) {
-				*(uint*)(pcVar3 + 0x14) = *(int*)(pcVar3 + 0x14) + (uint)*(ushort*)(local_c + 0x36) * iVar1;
+			*(uint*)(obj_entry + 7) = *(int*)(obj_entry + 7) - (uint)material_iter[-4] * quantity;
+			recipe = FindSlotById((uint)g_current_season, (uint)*material_iter);
+			if (recipe != (char*)0) {
+				*(uint*)(recipe + 0x14) = *(int*)(recipe + 0x14) + (uint)*(ushort*)(recipe_def + 0x36) * quantity;
 			}
-			if (*(int*)(puVar2 + 7) == 0) {
-				RemoveObjectByType((char**)(local_10 + 10), (uint)*puVar5);
+			if (*(int*)(obj_entry + 7) == 0) {
+				RemoveObjectByType((char**)(lager + 10), (uint)*material_iter);
 			}
 		}
-		iVar4 = iVar4 + 1;
-		puVar5 = puVar5 + 1;
-	} while (iVar4 < 4);
-	puVar5 = (ushort*)StartEntityQuery(*(int*)(local_10 + 10), 1, 0, (uint)*(ushort*)(msg + 0x14));
-	pcVar3 = local_c;
-	if (puVar5 != (ushort*)0) {
-		*(uint*)(puVar5 + 7) = *(int*)(puVar5 + 7) + (uint)*(ushort*)(local_c + 0x36) * iVar1;
+		production_cap = production_cap + 1;
+		material_iter = material_iter + 1;
+	} while (production_cap < 4);
+	material_iter = (ushort*)StartEntityQuery(*(int*)(lager + 10), 1, 0, (uint)*(ushort*)(msg + 0x14));
+	recipe = recipe_def;
+	if (material_iter != (ushort*)0) {
+		*(uint*)(material_iter + 7) = *(int*)(material_iter + 7) + (uint)*(ushort*)(recipe_def + 0x36) * quantity;
 	}
 	else {
-		puVar5 = (ushort*)AllocGameObject(
-			*(int*)(local_10 + 1),
+		material_iter = (ushort*)AllocGameObject(
+			*(int*)(lager + 1),
 			(uint)*(ushort*)(msg + 0x14),
-			(uint)*(ushort*)(local_c + 0x36) * iVar1
+			(uint)*(ushort*)(recipe_def + 0x36) * quantity
 		);
-		if (puVar5 == (ushort*)0) {
+		if (material_iter == (ushort*)0) {
 			if (result != (char*)0) {
 				result[1] = '\x06';
 			}
 			return 1;
 		}
-		if (*local_10 == 0x2a) {
-			*(int*)(puVar5 + 7) = *(int*)(puVar5 + 7) + 1;
+		if (*lager == 0x2a) {
+			*(int*)(material_iter + 7) = *(int*)(material_iter + 7) + 1;
 		}
-		if (((*pcVar3 == '\x17') || (*pcVar3 == '%')) &&
-			((*local_10 == 0x2a || (*local_10 == 0x116))) &&
-			(((char)local_4[1] == '\x06' || ((char)local_4[1] == '\a')))) {
-			*(int*)(puVar5 + 0xe) = 4;
+		if (((*recipe == '\x17') || (*recipe == '%')) &&
+			((*lager == 0x2a || (*lager == 0x116))) &&
+			(((char)owner[1] == '\x06' || ((char)owner[1] == '\a')))) {
+			*(int*)(material_iter + 0xe) = 4;
 		}
 	}
-	lVar6 = (long)(CalculateProductionValue((uint)*(ushort*)(msg + 0x14), 100) * local_8);
-	iVar4 = WalkEntityChain((int)local_10);
-	if (iVar4 != 0) {
-		*(int*)(iVar4 + 0x4d) = *(int*)(iVar4 + 0x4d) + (int)lVar6;
+	production_value = (long)(CalculateProductionValue((uint)*(ushort*)(msg + 0x14), 100) * saved_quantity);
+	production_cap = WalkEntityChain((int)lager);
+	if (production_cap != 0) {
+		*(int*)(production_cap + 0x4d) = *(int*)(production_cap + 0x4d) + (int)production_value;
 	}
-	pcVar3 = FindSlotById((uint)g_current_season, (uint)*(ushort*)(msg + 0x14));
-	if (pcVar3 != (char*)0) {
-		*(uint*)(pcVar3 + 0x10) = *(int*)(pcVar3 + 0x10) + (uint)*(ushort*)(local_c + 0x36) * iVar1;
+	recipe = FindSlotById((uint)g_current_season, (uint)*(ushort*)(msg + 0x14));
+	if (recipe != (char*)0) {
+		*(uint*)(recipe + 0x10) = *(int*)(recipe + 0x10) + (uint)*(ushort*)(recipe_def + 0x36) * quantity;
 	}
-	psVar7 = GetEntityTableEntry((char*)local_4);
-	if (psVar7 != (short*)0) {
-		*(int*)(psVar7 + 0x12) = *(int*)(psVar7 + 0x12) + (int)lVar6;
+	player_entry = GetEntityTableEntry((char*)owner);
+	if (player_entry != (short*)0) {
+		*(int*)(player_entry + 0x12) = *(int*)(player_entry + 0x12) + (int)production_value;
 	}
 	if ((result != (char*)0) && ((*result = '\x01', *(int*)(msg + 0x10) != -1))) {
 		result[1] = '\x03';
-		*(ushort**)(result + 6) = puVar5;
+		*(ushort**)(result + 6) = material_iter;
 	}
 	return 0;
 }

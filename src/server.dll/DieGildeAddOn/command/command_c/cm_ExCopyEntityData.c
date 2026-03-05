@@ -15,11 +15,11 @@ extern char g_relationship_matrix_secondary[];
 // FUNCTION: SERVER 0x1000ec00
 int __cdecl ExCopyEntityData(int cmd_ptr, char* response)
 {
-	int iVar1;
-	int iVar2;
+	int rel_value;
+	int target_field;
 	int ebx_type;
-	uint uVar5;
-	uint uVar6;
+	uint src_slot;
+	uint dst_slot;
 	int threshold_high;
 	int threshold_low;
 	int decay_high;
@@ -35,15 +35,15 @@ int __cdecl ExCopyEntityData(int cmd_ptr, char* response)
 	int owner_id;
 	char* esi_ptr;
 	char* ebx_ptr;
-	char* piVar8;
+	char* scan_ptr;
 	int idx;
 	int temp;
 
-	iVar1 = get_field_by_type((char*) cmd_ptr, *(int*) (cmd_ptr + 0x10));
-	*(int*) (cmd_ptr + 0x10) = iVar1;
-	iVar2 = get_field_by_type((char*) cmd_ptr, *(int*) (cmd_ptr + 0x14));
+	rel_value = get_field_by_type((char*) cmd_ptr, *(int*) (cmd_ptr + 0x10));
+	*(int*) (cmd_ptr + 0x10) = rel_value;
+	target_field = get_field_by_type((char*) cmd_ptr, *(int*) (cmd_ptr + 0x14));
 	ebx_type = *(int*) (cmd_ptr + 0x1c);
-	*(int*) (cmd_ptr + 0x14) = iVar2;
+	*(int*) (cmd_ptr + 0x14) = target_field;
 
 	if (ebx_type == 4) {
 		level = *(uint*) (cmd_ptr + 0x24);
@@ -126,25 +126,25 @@ skip_modify:
 		} while ((int) mat_row < 0x10139820);
 	}
 	else {
-		uVar6 = 0;
-		piVar8 = (char*) 0x100358a4;
-		while (*(int*) piVar8 != iVar2) {
-			piVar8 += 0x21c;
-			uVar6++;
-			if ((uint) piVar8 >= 0x1009aca4) {
+		dst_slot = 0;
+		scan_ptr = (char*) 0x100358a4;
+		while (*(int*) scan_ptr != target_field) {
+			scan_ptr += 0x21c;
+			dst_slot++;
+			if ((uint) scan_ptr >= 0x1009aca4) {
 				return 1;
 			}
 		}
-		if (uVar6 >= 0x300) {
+		if (dst_slot >= 0x300) {
 			return 1;
 		}
-		if (((ushort*)g_static_entity_table_358a0)[uVar6 * 0x10e] == (ushort) 0xffff) {
+		if (((ushort*)g_static_entity_table_358a0)[dst_slot * 0x10e] == (ushort) 0xffff) {
 			return 1;
 		}
 		if (ebx_type == 3) {
-			owner_id = *(int*) (uVar6 * 0x21c + 0x10035ab0);
+			owner_id = *(int*) (dst_slot * 0x21c + 0x10035ab0);
 			esi_ptr = (char*) 0x100358a4;
-			ebx_ptr = (char*) (uVar6 + 0x1014d8e0);
+			ebx_ptr = (char*) (dst_slot + 0x1014d8e0);
 			do {
 				if (*(int*) esi_ptr != owner_id) {
 					temp = (int) (signed char) *ebx_ptr;
@@ -155,66 +155,66 @@ skip_modify:
 			} while ((int) esi_ptr < 0x1009aca4);
 		}
 		else {
-			uVar5 = 0;
-			piVar8 = (char*) 0x100358a4;
-			while (*(int*) piVar8 != *(int*) (cmd_ptr + 0x10)) {
-				piVar8 += 0x21c;
-				uVar5++;
-				if ((uint) piVar8 >= 0x1009aca4) {
+			src_slot = 0;
+			scan_ptr = (char*) 0x100358a4;
+			while (*(int*) scan_ptr != *(int*) (cmd_ptr + 0x10)) {
+				scan_ptr += 0x21c;
+				src_slot++;
+				if ((uint) scan_ptr >= 0x1009aca4) {
 					return 1;
 				}
 			}
-			if (uVar5 >= 0x300 || ((ushort*)g_static_entity_table_358a0)[uVar5 * 0x10e] == (ushort) 0xffff) {
+			if (src_slot >= 0x300 || ((ushort*)g_static_entity_table_358a0)[src_slot * 0x10e] == (ushort) 0xffff) {
 				return 1;
 			}
 			if (ebx_type == 2) {
-				idx = (int) (uVar6 + uVar5 * 0x300);
+				idx = (int) (dst_slot + src_slot * 0x300);
 				g_relationship_matrix_secondary[idx] = 0;
-				iVar1 = *(int*) (cmd_ptr + 0x18) + (int) (signed char) g_relationship_matrix_primary[idx];
-				if (iVar1 < -0x7f) {
+				rel_value = *(int*) (cmd_ptr + 0x18) + (int) (signed char) g_relationship_matrix_primary[idx];
+				if (rel_value < -0x7f) {
 					g_relationship_matrix_primary[idx] = (char) 0x81;
 				}
-				else if (iVar1 < 0x7f) {
-					g_relationship_matrix_primary[idx] = (char) iVar1;
+				else if (rel_value < 0x7f) {
+					g_relationship_matrix_primary[idx] = (char) rel_value;
 				}
 				else {
 					g_relationship_matrix_primary[idx] = 0x7f;
 				}
 			}
 			else if (ebx_type == 1) {
-				idx = (int) (uVar6 + uVar5 * 0x300);
-				iVar1 = (int) (signed char) g_relationship_matrix_primary[idx] + *(int*) (cmd_ptr + 0x18);
-				if (iVar1 < -0x7f) {
-					iVar1 = -0x7f;
+				idx = (int) (dst_slot + src_slot * 0x300);
+				rel_value = (int) (signed char) g_relationship_matrix_primary[idx] + *(int*) (cmd_ptr + 0x18);
+				if (rel_value < -0x7f) {
+					rel_value = -0x7f;
 				}
-				else if (0x7e < iVar1) {
-					iVar1 = 0x7f;
+				else if (0x7e < rel_value) {
+					rel_value = 0x7f;
 				}
-				g_relationship_matrix_primary[idx] = (char) iVar1;
+				g_relationship_matrix_primary[idx] = (char) rel_value;
 				if (-1 < *(int*) (cmd_ptr + 0x18)) {
-					iVar1 = iVar1 / 2;
+					rel_value = rel_value / 2;
 				}
-				iVar2 = (int) (signed char) g_relationship_matrix_secondary[idx] + iVar1;
-				if (iVar2 < -0x7f) {
-					g_relationship_matrix_secondary[(int) (uVar6 + uVar5 * 0x300)] = (char) 0x81;
+				target_field = (int) (signed char) g_relationship_matrix_secondary[idx] + rel_value;
+				if (target_field < -0x7f) {
+					g_relationship_matrix_secondary[(int) (dst_slot + src_slot * 0x300)] = (char) 0x81;
 				}
-				else if (iVar2 < 0x7f) {
-					g_relationship_matrix_secondary[(int) (uVar6 + uVar5 * 0x300)] = (char) iVar2;
+				else if (target_field < 0x7f) {
+					g_relationship_matrix_secondary[(int) (dst_slot + src_slot * 0x300)] = (char) target_field;
 				}
 				else {
-					g_relationship_matrix_secondary[(int) (uVar6 + uVar5 * 0x300)] = 0x7f;
+					g_relationship_matrix_secondary[(int) (dst_slot + src_slot * 0x300)] = 0x7f;
 				}
 			}
 			else if (ebx_type == 0) {
-				idx = (int) (uVar6 + uVar5 * 0x300);
-				iVar1 = (int) (signed char) g_relationship_matrix_primary[idx] + *(int*) (cmd_ptr + 0x18);
-				if (iVar1 < -0x7f) {
-					iVar1 = -0x7f;
+				idx = (int) (dst_slot + src_slot * 0x300);
+				rel_value = (int) (signed char) g_relationship_matrix_primary[idx] + *(int*) (cmd_ptr + 0x18);
+				if (rel_value < -0x7f) {
+					rel_value = -0x7f;
 				}
-				else if (0x7e < iVar1) {
-					iVar1 = 0x7f;
+				else if (0x7e < rel_value) {
+					rel_value = 0x7f;
 				}
-				g_relationship_matrix_primary[idx] = (char) iVar1;
+				g_relationship_matrix_primary[idx] = (char) rel_value;
 			}
 		}
 	}
