@@ -46,6 +46,10 @@
 
 int __cdecl cm_ChkCutsceneReady(char*);
 
+/* Execution handler: updates cutscene state. Dispatches
+ * cutscene-related commands for entity state transitions
+ * during in-game cinematics. */
+
 // FUNCTION: SERVER 0x1000ff60
 int __cdecl cm_ExCutsceneUpdate(int param_1, char* param_2)
 {

@@ -66,6 +66,10 @@
 
 extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
 
+/* Execution handler: modifies bit flags on an entity. Resolves
+ * entity by ID, then sets, clears, or toggles bit fields based
+ * on the command payload's mask and operation. */
+
 // FUNCTION: SERVER 0x1000eaa0
 int __cdecl cm_ExChangeBits(int param_1, char* param_2)
 {

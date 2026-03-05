@@ -20,6 +20,10 @@ extern char s_cm_ExEmployWorker____Illegal_gw__1002d318[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
+/* Execution handler: employs a worker in a building. Resolves
+ * building and worker entities, assigns the worker to the
+ * building's production slot. */
+
 // FUNCTION: SERVER 0x1000f730
 int __cdecl cm_ExEmployWorker(int param_1, char* param_2)
 {

@@ -32,6 +32,10 @@
 
 #include "../command_internal.h"
 
+/* Execution handler: modifies an entity's health value.
+ * Looks up entity by ID at cmd+0x10 and applies the health
+ * delta from the command payload. */
+
 // FUNCTION: SERVER 0x1000ffc0
 int __cdecl cm_ExModifyHealth(int param_1)
 {

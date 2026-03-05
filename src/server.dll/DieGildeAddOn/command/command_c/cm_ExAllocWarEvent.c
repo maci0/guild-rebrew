@@ -84,6 +84,10 @@ void* __cdecl gm_SearchTable67(int);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
+/* Execution handler: allocates a war/battle event entity.
+ * Creates a combat-related game event with attacker/target
+ * references and initializes event parameters. */
+
 // FUNCTION: SERVER 0x10010140
 int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)
 {

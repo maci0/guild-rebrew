@@ -22,6 +22,10 @@
 
 int __cdecl amt_ValidateCommand(char*);
 
+/* Validation handler: generic command validation by delegating
+ * to amt_ValidateCommand with payload at cmd+0x10. Returns 1
+ * if validation failed, 0 on success. */
+
 // FUNCTION: SERVER 0x1000d040
 int __cdecl cm_ValidateGeneric(void* param_1, char* param_2)
 {

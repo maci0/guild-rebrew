@@ -16,6 +16,10 @@ extern char g_100358a0[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+/* Execution handler: processes join/leave actions for elections.
+ * For 'join', finds an empty election slot and assigns the player.
+ * For 'leav', finds the player's slot and clears it. */
+
 // FUNCTION: SERVER 0x1000fd50
 int __cdecl cm_ExJoinLeaveElection(int param_1, char *param_2)
 {

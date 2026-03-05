@@ -30,6 +30,9 @@
 
 uint __cdecl ahm_ExAllocAlchemist(void*);
 
+/* Execution handler: allocates an alchemist entity by delegating
+ * to ahm_ExAllocAlchemist. */
+
 // FUNCTION: SERVER 0x10010350
 int __cdecl cm_ExAllocAlchemist(int param_1, char* param_2)
 {

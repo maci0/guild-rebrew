@@ -42,6 +42,10 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
+/* Execution handler: sells an object (Objekt) from one entity
+ * to another. Handles object type validation, inventory transfers,
+ * production slot updates, and building ownership changes. */
+
 // FUNCTION: SERVER 0x1000d930
 uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 {

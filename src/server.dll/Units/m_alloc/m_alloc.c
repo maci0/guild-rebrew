@@ -43,6 +43,10 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 // SIZE: 658
 // BLOCKER_DELTA: 578
 // ANALYSIS: Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code.
+/* Allocates tracked memory. Wraps HeapAlloc with allocation
+ * tracking: records source location string, updates group
+ * counters, and maintains the allocation list. */
+
 // FUNCTION: SERVER 0x10006580
 // m_AllocTracked
 
@@ -166,6 +170,9 @@ found: {
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 188
+/* Frees tracked memory. Removes the allocation from the
+ * tracking list, updates group counters, and calls HeapFree. */
+
 // FUNCTION: SERVER 0x10006820
 // m_FreeTracked
 
@@ -216,6 +223,9 @@ void __cdecl m_FreeTracked(void* heapBlock)
 // BLOCKER_DELTA: 141
 // ANALYSIS: Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer.
 // SIZE: 162
+/* Initializes the packet memory pool with a fixed number of
+ * pre-allocated blocks for network packet buffering. */
+
 // FUNCTION: SERVER 0x100068e0
 // InitPacketPool
 
@@ -250,6 +260,9 @@ void __cdecl InitPacketPool(int param_1)
 // BLOCKER: zero-extend pattern (xor vs mov)
 // SIZE: 612
 // BLOCKER_DELTA: 586
+/* Reports memory usage statistics for a named allocation group.
+ * Logs count, total bytes, and peak usage to the log system. */
+
 // FUNCTION: SERVER 0x10006990
 // ReportMemoryGroupInfo
 
@@ -371,6 +384,10 @@ done:
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 283
+/* Shuts down the memory allocator. Frees all remaining tracked
+ * allocations, destroys the packet pool, and reports any
+ * memory leaks. */
+
 // FUNCTION: SERVER 0x10006c00
 // ShutdownMemoryAllocator
 
@@ -461,6 +478,10 @@ void __cdecl ShutdownMemoryAllocator(void)
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov)
 // BLOCKER_DELTA: 265
 // SIZE: 270
+/* Allocates a block from the packet pool free list. Falls back
+ * to HeapAlloc if the pool is exhausted. Thread-safe via
+ * critical section. */
+
 // FUNCTION: SERVER 0x10006d20
 // m_PoolAlloc
 
@@ -542,6 +563,9 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 137
+/* Returns a block to the packet pool free list. Adds the block
+ * back to the free chain for reuse. */
+
 // FUNCTION: SERVER 0x10006E30
 // m_PoolFree
 

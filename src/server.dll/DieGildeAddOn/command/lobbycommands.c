@@ -19,6 +19,10 @@ extern unsigned char g_entity_sync_data[];
 // ORIGIN: GAME
 // SIZE: 304
 // GHIDRA: SendLobbyPlayerList
+/* Lobby handler: sends the current player list to a client.
+ * Iterates player slots and writes connection info into the
+ * response packet. */
+
 // FUNCTION: SERVER 0x100145e0
 // lb_ExPlayerlist
 
@@ -71,6 +75,9 @@ int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2)
 // BLOCKER: jump condition swap
 // SIZE: 236
 // BLOCKER_DELTA: 77
+/* Lobby handler: sends the lobby configuration (map, rules,
+ * game settings) to a requesting client. */
+
 // FUNCTION: SERVER 0x100146c0
 // lb_SendLobbyConfig
 
@@ -134,6 +141,10 @@ int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
 // ORIGIN: GAME
 // BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // SIZE: 670
+/* Lobby handler: processes lobby commands like player join,
+ * ready state changes, chat, and game start requests.
+ * Main command dispatcher for the pre-game lobby phase. */
+
 // FUNCTION: SERVER 0x100147b0
 // lb_HandleLobbyCommands
 
@@ -270,6 +281,9 @@ do_join:
 // ORIGIN: GAME
 // SIZE: 157
 // BLOCKER_DELTA: 37
+/* Lobby handler: broadcasts a player state change (join, leave,
+ * ready, name change) to all connected lobby clients. */
+
 // FUNCTION: SERVER 0x10014a50
 // lb_BroadcastStateChange
 
@@ -311,6 +325,9 @@ int __cdecl lb_BroadcastStateChange(unsigned int* param_1, unsigned char* param_
 // ORIGIN: GAME
 // SIZE: 247
 // BLOCKER_DELTA: 49
+/* Lobby handler: handles bulk data transfer for savegame
+ * loading or map data synchronization during lobby phase. */
+
 // FUNCTION: SERVER 0x10014af0
 // lb_HandleDataTransfer
 
@@ -366,6 +383,10 @@ int __cdecl lb_HandleDataTransfer(unsigned int* param_1, unsigned char* param_2)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 163
+/* Lobby handler: synchronizes entity state between server
+ * and clients. Transfers entity data packets during the
+ * game loading/setup phase. */
+
 // FUNCTION: SERVER 0x10014bf0
 // lb_HandleEntitySync
 
@@ -415,6 +436,10 @@ int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
 // SIZE: 265
 // BLOCKER_DELTA: 202
 // NOTE: obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte.
+/* Routes an incoming command packet to the appropriate handler
+ * based on command type. Central dispatch point for all
+ * in-game commands. */
+
 // FUNCTION: SERVER 0x10014ca0
 // cm_RouteCommand
 
@@ -480,6 +505,9 @@ int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
 // SIZE: 267
 // BLOCKER_DELTA: 75
 // ANALYSIS: obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte.
+/* Executes a lobby server command. Dispatches based on the
+ * lobby sub-command type (player list, config, start, etc.). */
+
 // FUNCTION: SERVER 0x10014db0
 // lb_ExLobbyServerCommand
 
@@ -520,6 +548,9 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 69
+/* Searches the record table for a record matching the given
+ * ID. Returns a pointer to the record or NULL if not found. */
+
 // FUNCTION: SERVER 0x10014EE0
 // lb_SearchRecordTable
 

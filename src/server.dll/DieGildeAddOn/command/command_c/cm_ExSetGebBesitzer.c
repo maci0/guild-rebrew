@@ -68,6 +68,10 @@ extern char s_cm_ExSetGebBesitzer____Could_not_1002d1e0[];
 extern char s_cm_ExSetGebBesitzer____Could_not_1002d1a8[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+/* Execution handler: sets the owner (Besitzer) of a building.
+ * Resolves building entity, updates the ownership field, and
+ * handles old/new owner linkage. */
+
 // FUNCTION: SERVER 0x1000f3b0
 int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
 {

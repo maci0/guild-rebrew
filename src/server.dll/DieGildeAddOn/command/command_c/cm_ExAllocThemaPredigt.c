@@ -54,6 +54,9 @@ extern char g_player_slot_0[];
 extern char s_cm_ExAllocThemaPredigt____Execut_1002d184[];
 char* __cdecl gm_AllocObjekt(int, int, int);
 
+/* Execution handler: allocates a sermon theme (Thema Predigt)
+ * for a church/religious building entity. */
+
 // FUNCTION: SERVER 0x1000f2f0
 int __cdecl cm_ExAllocThemaPredigt(int param_1, char* param_2)
 {

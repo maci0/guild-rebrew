@@ -22,6 +22,10 @@
 
 unsigned int __cdecl ValidateAndAssignOffice(unsigned int*);
 
+/* Execution handler: assigns an office position to an entity
+ * by delegating to ValidateAndAssignOffice with the payload
+ * starting at cmd+0x10. */
+
 // FUNCTION: SERVER 0x1000f940
 int __cdecl cm_ExAssignOffice(void* obj)
 {

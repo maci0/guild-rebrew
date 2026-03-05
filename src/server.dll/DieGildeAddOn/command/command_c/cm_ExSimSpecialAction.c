@@ -71,6 +71,11 @@ void __cdecl ahm_ClampFloatValue(void*, void*);
 void __cdecl ahm_SlotClearMatch(void*, void*, void*);
 void __cdecl ahm_AllocateEntitySlot(void*, void*, void*);
 
+/* Execution handler: dispatches special simulation actions
+ * based on a 4-byte action type code. Handles alchemy search
+ * (aSRc), alchemy clamp (aSmS), fire entity (FirE), and
+ * other alchemist-related operations. */
+
 // FUNCTION: SERVER 0x10010390
 int __cdecl cm_ExSimSpecialAction(int param_1, char* param_2)
 {

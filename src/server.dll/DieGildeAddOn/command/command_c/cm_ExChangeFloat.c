@@ -54,6 +54,10 @@ extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
+/* Execution handler: modifies a floating-point attribute on an
+ * entity. Similar to cm_ExChangeAttribute but operates on float
+ * values rather than integers. */
+
 // FUNCTION: SERVER 0x1000eb70
 int __cdecl cm_ExChangeFloat(int param_1, char* param_2)
 {

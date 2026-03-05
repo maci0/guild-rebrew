@@ -26,6 +26,9 @@ void __cdecl write_log(char*, int, char*);
 // ORIGIN: GAME
 // SIZE: 290
 // ANALYSIS: Core logging sink. Takes an output_mask bitfield: bit 0 writes to file (looking up the correct file name via severity in a global table), bit 2 writes to OutputDebugStringA (debugger), bit 3 writes to the allocated Win32 Console using WriteConsoleA.
+/* Dispatches a log message to the configured output handlers
+ * (file, debugger, etc.). Routes based on severity level. */
+
 // FUNCTION: SERVER 0x10002640
 // DispatchLogOutput
 
@@ -96,6 +99,10 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 // SIZE: 1836
 // BLOCKER_DELTA: 1727
 // ANALYSIS: Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride).
+/* Unhandled exception filter for crash dumps. Creates a
+ * minidump file with module info and stack trace when the
+ * process crashes. */
+
 // FUNCTION: SERVER 0x10002770
 // CrashDumpUnhandledExceptionFilter
 
@@ -475,6 +482,9 @@ bad_dbg_free:
 // ORIGIN: GAME
 // BLOCKER: instruction folding (lea vs mov), loop rotation / branch layout
 // SIZE: 376
+/* Emits one line of module information for crash dumps.
+ * Writes module name, base address, and size to the dump file. */
+
 // FUNCTION: SERVER 0x10002fc0
 // EmitCrashModuleLine
 
@@ -572,6 +582,10 @@ unsigned int EmitCrashModuleLine(int* param_1)
 // ORIGIN: GAME
 // STATUS: EXACT
 // SIZE: 33
+/* Walks a variable-length record table to find the nth entry.
+ * Records have varying sizes, so this iterates by record
+ * stride rather than fixed indexing. */
+
 // FUNCTION: SERVER 0x10003140
 // GetDebugRecordByIndex
 
@@ -600,6 +614,9 @@ char* __cdecl GetDebugRecordByIndex(char* param_1, unsigned int param_2)
 // NOTE: Function passes itself to VirtualQuery to check its own code page protection
 // GHIDRA: IsExecutableOrReadableProtect
 // ANALYSIS: Function passes itself to VirtualQuery to check its own code page protection
+/* Checks if a memory page's protection flags indicate it is
+ * readable. Returns 1 if the protection includes read access. */
+
 // FUNCTION: SERVER 0x10003170
 // check_memory_protection
 
@@ -625,6 +642,10 @@ char __cdecl check_memory_protection(unsigned int protect)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 183
+/* Analyzes an x86 instruction at the given address to determine
+ * its length and type. Used by the crash dump handler to decode
+ * the faulting instruction context. */
+
 // FUNCTION: SERVER 0x10003260
 // AnalyzeInstruction
 char __cdecl AnalyzeInstruction(int param_1, int param_2, int param_3, int* param_4)
@@ -668,6 +689,10 @@ char __cdecl AnalyzeInstruction(int param_1, int param_2, int param_3, int* para
 // GHIDRA: DecodePotentialControlTransfer
 // BLOCKER: instruction folding (lea vs mov)
 // SIZE: 404
+/* Initializes the logging and error handling subsystem.
+ * Opens log files, sets up exception handlers, and configures
+ * output severity filters. */
+
 // FUNCTION: SERVER 0x10003320
 // InitializeLogAndErrorHandler
 
@@ -752,6 +777,9 @@ void InitializeLogAndErrorHandler(
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 83
+/* Shuts down the logging and error handling subsystem.
+ * Closes log files and removes exception handlers. */
+
 // FUNCTION: SERVER 0x100034c0
 // ShutdownLogAndErrorHandler
 
@@ -778,6 +806,9 @@ void __cdecl ShutdownLogAndErrorHandler(void)
 // SIZE: 160
 // NOTE: Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()
 // ANALYSIS: Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()
+/* Reports a fatal error with a message, then terminates the
+ * process via _exit(). Does not return. */
+
 // FUNCTION: SERVER 0x10003520
 // ReportFatalError
 __declspec(noreturn) void __cdecl _exit(int);
@@ -817,6 +848,9 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 119
+/* Reports a non-fatal message through the logging system.
+ * Dispatches to DispatchLogOutput with default severity. */
+
 // FUNCTION: SERVER 0x100035C0
 // ReportMessage
 
@@ -841,6 +875,10 @@ void __cdecl ReportMessage(char* msg)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 132
+/* Core logging function: formats and dispatches a log message
+ * with source module path, line number, message text, and
+ * severity level (1=error, 8=info, etc.). */
+
 // FUNCTION: SERVER 0x10003640
 // LogMessageInternal
 

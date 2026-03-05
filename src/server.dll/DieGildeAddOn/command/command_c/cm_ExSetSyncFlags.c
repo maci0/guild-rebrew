@@ -43,6 +43,10 @@ extern int _g_game_speed_index;
 extern int g_game_speed_value;
 extern int g_game_speed_table[];
 
+/* Execution handler: sets synchronization flags on a player slot.
+ * Handles three flag types: 0x01 (sets flag 0x20), 0x0e (sets
+ * flag 0x40), 0x12 (sets game speed from g_game_speed_table). */
+
 // FUNCTION: SERVER 0x1000efb0
 int __cdecl cm_ExSetSyncFlags(int param_1, char* param_2)
 {

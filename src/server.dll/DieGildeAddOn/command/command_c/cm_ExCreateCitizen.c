@@ -69,6 +69,11 @@ unsigned int __cdecl gm_CreateEntityFromParents(int, int, int, int, int, int, in
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
+/* Execution handler: creates a new citizen (Buerger) entity.
+ * Allocates entity memory, sets initial stats, family links,
+ * and home building assignment. Uses random seed for
+ * stat generation via gm_CreateEntityFromParents. */
+
 // FUNCTION: SERVER 0x1000f980
 int __cdecl cm_ExCreateCitizen(int param_1, char* param_2)
 {

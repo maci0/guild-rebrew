@@ -69,6 +69,10 @@
 
 extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
 
+/* Execution handler: modifies a numeric attribute on an entity.
+ * Resolves entity, reads field type/offset/value from the command
+ * payload, then applies the change to the entity's memory. */
+
 // FUNCTION: SERVER 0x1000e7d0
 int __cdecl cm_ExChangeAttribute(int param_1, char *param_2)
 {

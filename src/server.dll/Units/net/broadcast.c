@@ -1,6 +1,9 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 179
+/* Sends a broadcast packet to all connected clients via UDP.
+ * Iterates player slots and transmits the packet data. */
+
 // FUNCTION: SERVER 0x10001130
 // SendBroadcastPacket
 

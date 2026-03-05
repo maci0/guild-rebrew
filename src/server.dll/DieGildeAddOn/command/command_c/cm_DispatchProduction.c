@@ -61,6 +61,13 @@ int __cdecl ActivateGraveyardSection(uchar*);
 int __cdecl gv_UpdateProductionProgress(uchar*);
 int __cdecl gv_ValidateEntityAction(uchar*);
 
+/* Dispatch handler: routes production commands based on the
+ * sub-command type at cmd+0x10. Dispatches to:
+ * 0=AssignProductionSlot, 1=HireProductionWorker,
+ * 2=ExtendProductionTime, 3=ReplaceProductionWorker,
+ * 4=ActivateGraveyardSection, 5=UpdateProductionProgress,
+ * 6=ValidateEntityAction. Stamps timestamp and random seed. */
+
 // FUNCTION: SERVER 0x10010260
 int __cdecl cm_DispatchProduction(int param_1, char* param_2)
 {

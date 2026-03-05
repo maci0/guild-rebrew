@@ -72,6 +72,10 @@ extern char s_cm_ExMoveObjekt___Invalid__quell_1002d024[];
 extern char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[];
 extern char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[];
 
+/* Execution handler: moves an object from one inventory slot
+ * to another. Validates source and destination entities, then
+ * transfers the object via gm_SubObjekt + gm_AddOrAccumulateObject. */
+
 // FUNCTION: SERVER 0x1000e530
 int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
 {

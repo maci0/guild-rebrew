@@ -48,6 +48,10 @@ extern float _g_stat_min;
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
+/* Execution handler: modifies a character stat by index.
+ * Reads entity ID, stat index, and delta from the command
+ * payload. Applies change with clamping via gm_MapEntityStatRange. */
+
 // FUNCTION: SERVER 0x100100a0
 int __cdecl cm_ExModifyStat(int* param_1)
 {

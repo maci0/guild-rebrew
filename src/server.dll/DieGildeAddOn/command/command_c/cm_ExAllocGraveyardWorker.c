@@ -29,6 +29,9 @@
 
 uint __cdecl gv_ExAllocGraveyardWorker(void*);
 
+/* Execution handler: allocates a graveyard worker entity by
+ * delegating to gv_ExAllocGraveyardWorker. */
+
 // FUNCTION: SERVER 0x10010310
 int __cdecl cm_ExAllocGraveyardWorker(int param_1, char* param_2)
 {

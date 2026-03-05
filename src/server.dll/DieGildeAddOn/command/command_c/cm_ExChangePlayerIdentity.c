@@ -34,6 +34,10 @@ int __cdecl gm_ChangePlayerIdentityImpl(int, int);
 extern char s_cm_ExChangePlayerIdentity___exec_1002cc14[];
 extern char s_cm_ExChangePlayerIdentity___fail_1002cbf0[];
 
+/* Execution handler: changes a player's identity by delegating
+ * to gm_ChangePlayerIdentityImpl with the player ID at cmd+0x10
+ * and the new identity at cmd+0x14. */
+
 // FUNCTION: SERVER 0x1000d6e0
 int __cdecl cm_ExChangePlayerIdentity(int param_1, char* param_2)
 {

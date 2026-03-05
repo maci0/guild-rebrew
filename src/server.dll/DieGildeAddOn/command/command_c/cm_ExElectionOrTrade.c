@@ -69,6 +69,10 @@ extern int g_10035880;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+/* Execution handler: processes election or trade transactions.
+ * Handles 'elec' (election) and 'buy ' (trade/purchase)
+ * command types with entity resolution and state updates. */
+
 // FUNCTION: SERVER 0x1000fc10
 int __cdecl cm_ExElectionOrTrade(int param_1, char* param_2)
 {

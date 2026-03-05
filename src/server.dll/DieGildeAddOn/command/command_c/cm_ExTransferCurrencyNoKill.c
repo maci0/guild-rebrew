@@ -45,6 +45,10 @@ void __cdecl gm_SubObjektNoKill(unsigned int, unsigned int, unsigned int);
 void __cdecl gm_AddOrAccumulateObject(int, unsigned int, int);
 extern char g_currency_type_array[];
 
+/* Execution handler: transfers currency without killing the source
+ * object. Like cm_ExTransferCurrency but uses gm_SubObjektNoKill
+ * instead of gm_SubObjekt, preventing entity removal on zero. */
+
 // FUNCTION: SERVER 0x1000d8a0
 int __cdecl cm_ExTransferCurrencyNoKill(int param_1, char* param_2)
 {

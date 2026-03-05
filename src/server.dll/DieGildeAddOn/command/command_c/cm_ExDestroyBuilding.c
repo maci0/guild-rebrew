@@ -59,6 +59,10 @@ extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+/* Execution handler: destroys a building entity. Resolves
+ * building by ID, calls gm_CleanupBuildingEntity to deallocate
+ * contents, and removes it from the game world. */
+
 // FUNCTION: SERVER 0x1000f680
 int __cdecl cm_ExDestroyBuilding(int param_1, char* param_2)
 {

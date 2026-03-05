@@ -60,6 +60,12 @@ extern unsigned short g_currency_type_array[];
 #pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"
 #endif
 
+/* Execution handler: transfers currency between two entities.
+ * Subtracts from source (cmd+0x14) via gm_SubObjekt and adds
+ * to destination (cmd+0x10) via gm_AddOrAccumulateObject.
+ * Currency type is indexed from g_currency_type_array. Returns 1
+ * if subtraction fails (insufficient funds). */
+
 // FUNCTION: SERVER 0x1000d7f0
 int __cdecl cm_ExTransferCurrency(int param_1, char* param_2)
 {

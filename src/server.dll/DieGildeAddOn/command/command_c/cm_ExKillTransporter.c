@@ -39,6 +39,9 @@
 
 extern char s_cm_ExKillTransporter____invalid_t_1002d3d4[];
 
+/* Execution handler: removes a transporter entity. Resolves
+ * entity by ID and deallocates it from the game world. */
+
 // FUNCTION: SERVER 0x1000fad0
 int __cdecl cm_ExKillTransporter(int param_1, char* param_2)
 {

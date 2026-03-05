@@ -41,6 +41,10 @@
 
 void __cdecl amt_UpdateEntityLinks(int, int);
 
+/* Execution handler: modifies an entity's stamina value.
+ * Looks up entity by ID at cmd+0x10 and applies the stamina
+ * delta from the command payload. */
+
 // FUNCTION: SERVER 0x10010010
 int __cdecl cm_ExModifyStamina(int param_1)
 {

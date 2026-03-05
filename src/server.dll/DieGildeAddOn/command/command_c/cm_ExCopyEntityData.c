@@ -10,6 +10,10 @@ extern int g_static_entity0_entity_id[];
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 
+/* Execution handler: copies a block of raw data from the command
+ * payload into a resolved entity's memory. Used for bulk entity
+ * state synchronization across network. */
+
 // FUNCTION: SERVER 0x1000ec00
 int __cdecl cm_ExCopyEntityData(int cmd_ptr, char* response)
 {

@@ -66,6 +66,11 @@ extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 extern char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+/* Execution handler: upgrades a building to the next tier.
+ * Increments the building type byte, recalculates worker limits
+ * via gm_SetBuildingWorkerLimits, and adjusts building quality.
+ * Returns 1 if already at max upgrade level. */
+
 // FUNCTION: SERVER 0x1000f590
 int __cdecl cm_ExSetGebUpgrade(int param_1, char* param_2)
 {

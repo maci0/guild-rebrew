@@ -26,6 +26,10 @@ char* __cdecl gm_AllocGebaeude(uchar, uint);
 extern char s_gm_AllocGebaeude___failed_1002cb34[];
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_B_1002caf0[];
 
+/* Execution handler: allocates a new room/space (Raum) entity.
+ * Resolves entity by ID, calls gm_AllocBuildingDefaults to set
+ * up building defaults, and returns via param_2. */
+
 // FUNCTION: SERVER 0x1000d350
 int __cdecl cm_ExAllocRaum(int param_1, char* param_2)
 {

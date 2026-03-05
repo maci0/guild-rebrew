@@ -48,6 +48,10 @@ void* __cdecl memcpy(void*, const void*, unsigned int);
 extern char g_player_slot_0[];
 char* __cdecl gm_AllocObjekt(int, int, int);
 
+/* Execution handler: allocates a new object in an entity's
+ * inventory via gm_AllocObjekt. Takes entity ID from cmd+0x10
+ * and object parameters from the command payload. */
+
 // FUNCTION: SERVER 0x1000e750
 int __cdecl cm_ExAllocObjekt(int param_1, char* param_2)
 {

@@ -6,6 +6,10 @@ extern int DAT_1003540c;
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 74
+/* Finds a record in a linked table by matching type fields.
+ * Iterates from base pointer, comparing type1/type2 bytes.
+ * Returns pointer to matching record or NULL. */
+
 // FUNCTION: SERVER 0x10014f30
 // FindRecord
 char* __cdecl FindRecord(char* base, unsigned int type1, unsigned int type2)
@@ -30,6 +34,10 @@ char* __cdecl FindRecord(char* base, unsigned int type1, unsigned int type2)
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 103
+/* Finds a zone record by x/y coordinates. Searches linked
+ * records for a matching grid position. Returns record index
+ * or -1 if not found. */
+
 // FUNCTION: SERVER 0x10014F80
 // find_zone_record
 int __cdecl find_zone_record(char* base, int x, int y)
@@ -68,6 +76,10 @@ int __cdecl find_zone_record(char* base, int x, int y)
 // BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // SIZE: 175
 // BLOCKER_DELTA: 170
+/* Checks if a zone is available for planting. Validates
+ * the zone record, checks plant capacity, and verifies
+ * the zone type matches the requested plant type. */
+
 // FUNCTION: SERVER 0x10014ff0
 // CheckZoneAvailability
 
@@ -123,6 +135,10 @@ int __cdecl CheckZoneAvailability(int param_1, unsigned int param_2, unsigned in
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov)
 // SIZE: 257
 // BLOCKER_DELTA: 160
+/* Sets/updates a plant map entry. Creates or modifies a
+ * zone record with the specified plant type and coordinates.
+ * Returns the record pointer on success. */
+
 // FUNCTION: SERVER 0x100150a0
 // plt_SetPlantMap
 
@@ -199,6 +215,9 @@ found:
 // ORIGIN: GAME
 // SIZE: 41
 // GHIDRA: GetStatPair
+/* Simple lookup into a global table by index. Returns value
+ * through out-pointer. Returns 0 if index out of range. */
+
 // FUNCTION: SERVER 0x100151B0
 // table_lookup
 int __cdecl table_lookup(int index, int* out)

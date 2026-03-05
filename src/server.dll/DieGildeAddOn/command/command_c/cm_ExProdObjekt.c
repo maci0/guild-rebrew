@@ -35,6 +35,10 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
+/* Execution handler: produces an object. Processes a production
+ * message with entity lookup, object allocation/deallocation,
+ * and inventory management for crafted goods. */
+
 // FUNCTION: SERVER 0x1000e140
 int __cdecl cm_ExProdObjekt(int msg, char* result)
 {

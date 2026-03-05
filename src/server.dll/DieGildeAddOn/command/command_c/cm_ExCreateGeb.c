@@ -66,6 +66,9 @@ extern char s_cm_ExCreateGeb____failed_1002d400[];
 #pragma clang diagnostic ignored "-Wint-to-pointer-cast"
 #endif
 
+/* Execution handler: creates a new building (Gebaeude) entity
+ * via gm_AllocGebaeude and initializes its owner and type. */
+
 // FUNCTION: SERVER 0x1000fb30
 int __cdecl cm_ExCreateGeb(int param_1, char* param_2)
 {

@@ -31,6 +31,9 @@
 
 extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
 
+/* Execution handler: removes/kills a player entity (Spieler).
+ * Deallocates the player and cleans up associated resources. */
+
 // FUNCTION: SERVER 0x1000f030
 int __cdecl cm_ExKillSpieler(int param_1)
 {

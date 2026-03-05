@@ -71,6 +71,10 @@ extern char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[];
 extern char s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+/* Execution handler: allocates a new player entity (Spieler).
+ * Initializes player structure with defaults, links entity
+ * records, and assigns the initial player state. */
+
 // FUNCTION: SERVER 0x1000d460
 int __cdecl cm_ExAllocSpieler(int param_1, char* param_2)
 {

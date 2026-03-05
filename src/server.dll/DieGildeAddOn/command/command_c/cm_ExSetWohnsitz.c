@@ -66,6 +66,10 @@ extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[];
 extern char s_cm_ExSetWohnsitz____Residence_is_1002d240[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+/* Execution handler: sets a citizen's residence (Wohnsitz).
+ * Resolves building entity and citizen, then assigns the
+ * citizen's home to the specified building. */
+
 // FUNCTION: SERVER 0x1000f480
 int __cdecl cm_ExSetWohnsitz(int param_1, char* param_2)
 {

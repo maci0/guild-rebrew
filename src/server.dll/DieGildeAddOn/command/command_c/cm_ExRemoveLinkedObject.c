@@ -9,6 +9,10 @@
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
+/* Execution handler: removes an object linked to an entity by
+ * node ID. Resolves the parent entity, finds the linked node,
+ * and detaches it from the entity chain. */
+
 // FUNCTION: SERVER 0x1000f0d0
 int __cdecl cm_ExRemoveLinkedObject(int param_1, char *param_2)
 {

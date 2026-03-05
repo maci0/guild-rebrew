@@ -22,6 +22,9 @@
 
 int __cdecl gv_MoveSlotEntry(int);
 
+/* Dispatch handler: routes a move-slot command to
+ * gv_MoveSlotEntry with the payload at cmd+0x10. */
+
 // FUNCTION: SERVER 0x100102f0
 int __cdecl cm_DispatchMoveSlot(void* param_1, char* param_2)
 {

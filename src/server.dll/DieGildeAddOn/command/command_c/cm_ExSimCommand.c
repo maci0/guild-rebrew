@@ -22,6 +22,10 @@
 
 int __cdecl amt_SwapOfficeHolders(int*);
 
+/* Execution handler: processes a simulation command by
+ * delegating to amt_SwapOfficeHolders. Returns 1 if the
+ * swap failed (result == 0), 0 on success. */
+
 // FUNCTION: SERVER 0x10010080
 int __cdecl cm_ExSimCommand(void* param_1, char* param_2)
 {

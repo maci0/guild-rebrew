@@ -13,6 +13,10 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 // BLOCKER: instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 535
+/* Searches for matching parent entities by type and creates
+ * family tree linkages. Used in citizen creation to find
+ * compatible parents for stat inheritance. */
+
 // FUNCTION: SERVER 0x100151e0
 // FindAndMatchParents
 
@@ -128,6 +132,9 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 // STATUS: RELOC
 // SIZE: 83
 // ANALYSIS: Updates priority tracking for dynamic entity dispatch/update lists. Limits simultaneous update weight using GetStatPair constraints.
+/* Updates entity priority/scheduling. Called during simulation
+ * tick to adjust entity processing order based on game state. */
+
 // FUNCTION: SERVER 0x10015400
 // sim_PriorityUpdate
 
@@ -156,6 +163,10 @@ void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 145
+/* Starts an entity query filtered by type byte from param_1.
+ * Dispatches entity iteration across buildings, citizens, or
+ * other entity categories based on the type selector. */
+
 // FUNCTION: SERVER 0x10015460
 // sim_StartEntityQueryByType
 
@@ -189,6 +200,10 @@ void __cdecl sim_StartEntityQueryByType(unsigned char* param_1)
 // BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // BLOCKER_DELTA: 138
 // SIZE: 180
+/* Creates a new citizen entity with initial stats generated
+ * from parent entities. Allocates entity memory, assigns random
+ * stats via gm_CreateEntityFromParents, and links to home. */
+
 // FUNCTION: SERVER 0x10015500
 // sim_CreateCitizen
 
@@ -235,6 +250,10 @@ error:
 // ORIGIN: GAME
 // SIZE: 197
 // BLOCKER_DELTA: 164
+/* Advances the game clock by one tick. Updates day/hour/minute
+ * counters, triggers periodic events (taxes, production cycles),
+ * and notifies connected clients of time changes. */
+
 // FUNCTION: SERVER 0x100155c0
 // AdvanceGameClock
 
@@ -287,6 +306,10 @@ int __cdecl AdvanceGameClock(int* param_1, int param_2, int param_3, int param_4
 // ORIGIN: GAME
 // STATUS: EXACT
 // SIZE: 41
+/* Sets synchronization parameters for the simulation.
+ * Configures tick rate, player count, and timing values
+ * used for network-synchronized game state. */
+
 // FUNCTION: SERVER 0x10015690
 // sim_SetSyncParams
 
