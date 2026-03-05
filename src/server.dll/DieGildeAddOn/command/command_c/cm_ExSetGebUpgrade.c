@@ -18,7 +18,7 @@
  *   uint uVar3;
  *   
  *   *(undefined4 *)(param_1 + 0x14) = g_timestamp_0b6c;
- *   puVar2 = StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
+ *   puVar2 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
  *   if (puVar2 == (ushort *)0x0) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x4a94,
  *                        s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec,1);
@@ -32,12 +32,12 @@
  *   }
  *   *(byte *)puVar2 = (byte)*puVar2 + 1;
  *   *(char *)(puVar2 + 0x2e) = (char)((100 - (char)puVar2[0x2e]) / 2) + (char)puVar2[0x2e];
- *   SetBuildingWorkerLimits((uchar *)puVar2);
+ *   gm_SetBuildingWorkerLimits((uchar *)puVar2);
  *   gm_AllocBuildingDefaults((uchar *)puVar2);
  *   if (*pcVar1 == '\x1d') {
  *     UpgradeGraveyardField((uint8_t *)puVar2);
  *   }
- *   RefreshMarketAvailability((uint)g_current_season);
+ *   gm_RefreshMarketAvailability((uint)g_current_season);
  *   if (param_2 != (char *)0x0) {
  *     *param_2 = '\x02';
  *     param_2[1] = '\0';
@@ -55,13 +55,13 @@
 extern int g_entity_type_table;
 extern uchar g_current_season;
 
-extern ushort* __cdecl StartFilteredEntitySearch(int, ...);
+extern ushort* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern void __cdecl ReportMessage(const char*);
-extern void __cdecl SetBuildingWorkerLimits(uchar*);
+extern void __cdecl gm_SetBuildingWorkerLimits(uchar*);
 extern void __cdecl gm_AllocBuildingDefaults(uchar*);
 extern void __cdecl UpgradeGraveyardField(uchar*);
-extern void __cdecl RefreshMarketAvailability(uint);
+extern void __cdecl gm_RefreshMarketAvailability(uint);
 
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 extern char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[];
@@ -74,7 +74,7 @@ int __cdecl cm_ExSetGebUpgrade(int param_1, char* param_2)
 	char* entry;
 
 	*(int*) (param_1 + 0x14) = g_timestamp_0b6c;
-	building = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x10));
+	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x10));
 	if (building == (ushort*) 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -95,14 +95,14 @@ int __cdecl cm_ExSetGebUpgrade(int param_1, char* param_2)
 	*(uchar*) building = (uchar) (*(uchar*) building + 1);
 	*(char*) (building + 0x2e) = (char) ((100 - (char) building[0x2e]) / 2) + (char) building[0x2e];
 
-	SetBuildingWorkerLimits((uchar*) building);
+	gm_SetBuildingWorkerLimits((uchar*) building);
 	gm_AllocBuildingDefaults((uchar*) building);
 
 	if (*entry == '\x1d') {
 		UpgradeGraveyardField((uchar*) building);
 	}
 
-	RefreshMarketAvailability((uint) g_current_season);
+	gm_RefreshMarketAvailability((uint) g_current_season);
 
 	if (param_2 != (char*) 0) {
 		*param_2 = '\x02';

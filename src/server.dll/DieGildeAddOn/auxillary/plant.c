@@ -1,5 +1,5 @@
 extern int __cdecl find_zone_record(char* base, int x, int y);
-extern int __cdecl SearchRecordTable(int);
+extern int __cdecl lb_SearchRecordTable(int);
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 extern int DAT_1003540c;
 
@@ -133,7 +133,7 @@ int __cdecl plt_SetPlantMap(int param_1, unsigned int param_2, unsigned int para
 	unsigned char* scan_ptr;
 	char* marker_ptr;
 
-	record_ptr = SearchRecordTable(param_4);
+	record_ptr = lb_SearchRecordTable(param_4);
 	if (param_1 == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c",

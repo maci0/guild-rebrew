@@ -5,9 +5,9 @@
 
 extern char g_player_slot_0[];
 
-extern ushort __cdecl CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
+extern ushort __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
-extern short* __cdecl GetEntityTableEntry(char*);
+extern short* __cdecl gm_GetEntityTableEntry(char*);
 extern char* __cdecl strncpy(char*, const char*, unsigned int);
 
 extern char s_ClientSpieler_erzeugt_1002cbbc[];
@@ -16,7 +16,7 @@ extern char s_gm_AllocSpieler___failed_1002cbd4[];
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 361
-// BLOCKER: Register allocation/instruction scheduling difference in CreateEntityFromParents argument setup; target evaluates param_2 boolean first (neg/sbb in eax) then pushes args in different register order. Same-size, semantically equivalent.
+// BLOCKER: Register allocation/instruction scheduling difference in gm_CreateEntityFromParents argument setup; target evaluates param_2 boolean first (neg/sbb in eax) then pushes args in different register order. Same-size, semantically equivalent.
 // FUNCTION: SERVER 0x1000d570
 int __cdecl cm_ExAllocClientSpieler(int param_1, char* param_2)
 {
@@ -31,7 +31,7 @@ int __cdecl cm_ExAllocClientSpieler(int param_1, char* param_2)
 	entity_offset = rand();
 	*(int*) (param_1 + 0x45) = entity_offset;
 	crt_thread_set_alt(*(int*) (param_1 + 0x22));
-	entity_id = (ushort) CreateEntityFromParents(
+	entity_id = (ushort) gm_CreateEntityFromParents(
 		param_2 ? 6 : 7,
 		*(int*) (param_1 + 0x14),
 		*(int*) (param_1 + 0x18),
@@ -52,12 +52,12 @@ int __cdecl cm_ExAllocClientSpieler(int param_1, char* param_2)
 		*(int*) (entity_offset + 0x100358a4);
 	strncpy((char*) (entity_offset + 0x100358d0), (char*) param_1 + 0x25, 0x10);
 	entity_base = (char*) (entity_offset + 0x100358a0);
-	table_entry = GetEntityTableEntry(entity_base);
+	table_entry = gm_GetEntityTableEntry(entity_base);
 	if (table_entry != (short*) 0) {
 		*table_entry = *(short*) (entity_offset + 0x100358f0);
 		strncpy((char*) table_entry + 2, (char*) param_1 + 0x35, 0x10);
 		strncpy((char*) (entity_offset + 0x100358e0), (char*) param_1 + 0x35, 0x10);
-		record = LookupEntityRecordById(*(int*) (entity_offset + 0x10035900));
+		record = gm_LookupEntityRecordById(*(int*) (entity_offset + 0x10035900));
 		if (record != 0) {
 			strncpy((char*) (record + 0x40), (char*) param_1 + 0x35, 0x10);
 		}

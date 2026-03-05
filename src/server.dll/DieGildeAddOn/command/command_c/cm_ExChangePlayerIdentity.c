@@ -15,7 +15,7 @@
  * {
  *   int iVar1;
  *   
- *   iVar1 = ChangePlayerIdentityImpl(*(int *)(param_1 + 0x10),*(int *)(param_1 + 0x14));
+ *   iVar1 = gm_ChangePlayerIdentityImpl(*(int *)(param_1 + 0x10),*(int *)(param_1 + 0x14));
  *   if (-1 < iVar1) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x299d,
  *                        s_cm_ExChangePlayerIdentity___exec_1002cc14,1);
@@ -29,7 +29,7 @@
 
 #include "../command_internal.h"
 
-extern int __cdecl ChangePlayerIdentityImpl(int, int);
+extern int __cdecl gm_ChangePlayerIdentityImpl(int, int);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ExChangePlayerIdentity___exec_1002cc14[];
 extern char s_cm_ExChangePlayerIdentity___fail_1002cbf0[];
@@ -39,7 +39,7 @@ int __cdecl cm_ExChangePlayerIdentity(int param_1, char* param_2)
 {
 	int result;
 
-	result = ChangePlayerIdentityImpl(*(int*) (param_1 + 0x10), *(int*) (param_1 + 0x14));
+	result = gm_ChangePlayerIdentityImpl(*(int*) (param_1 + 0x10), *(int*) (param_1 + 0x14));
 	if (0 <= result) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,

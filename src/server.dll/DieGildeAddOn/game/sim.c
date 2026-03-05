@@ -1,5 +1,5 @@
-extern unsigned short random_mod(unsigned int);
-extern unsigned int __cdecl CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
+extern unsigned short gm_RandomMod(unsigned int);
+extern unsigned int __cdecl gm_CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 extern void __cdecl table_lookup(unsigned int a, unsigned short* b);
 extern int DAT_100a8c30;
 extern void __cdecl gm_StartEntityQuery(int, int, int, ...);
@@ -41,7 +41,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 	prob_thresholds[5] = 0;
 	search_seed = 0x300;
 	do {
-		candidate_slot1 = random_mod(search_seed);
+		candidate_slot1 = gm_RandomMod(search_seed);
 		rand_roll = candidate_slot1 * 0xf;
 		entity_offset = candidate_slot1 * 0x21c;
 		if (*(int*) (entity_offset + 0x100358a0) == -1) {
@@ -64,7 +64,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 				parent_slot_ptr = parent_slot_ptr + 1;
 				entity_offset = entity_offset + -1;
 			} while (entity_offset != 0);
-			rand_roll = random_mod(0x100);
+			rand_roll = gm_RandomMod(0x100);
 			rand_roll = (rand_roll & 0xffff) + 1;
 			if (rand_roll < prob_thresholds[occupied_count]) {
 				break;
@@ -77,7 +77,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 	}
 	attempt2_count = 0;
 	do {
-		candidate_slot2 = random_mod(search_seed);
+		candidate_slot2 = gm_RandomMod(search_seed);
 		attempt_count = candidate_slot2 * 0x21c;
 		if (*(int*) (attempt_count + 0x100358a0) == -1) {
 			search_seed = search_seed * 3 + (search_seed * 3 >> 0x1f & 3U) >> 2;
@@ -98,7 +98,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 				parent_slot_ptr = parent_slot_ptr + 1;
 				attempt_count = attempt_count + -1;
 			} while (attempt_count != 0);
-			rand_roll = random_mod(0x100);
+			rand_roll = gm_RandomMod(0x100);
 			rand_roll = (rand_roll & 0xffff) + 1;
 			if (rand_roll < prob_thresholds[entity_offset]) {
 				break;
@@ -108,7 +108,7 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 		attempt2_count = rand_roll;
 	} while (rand_roll < 0x10);
 	if (candidate_slot2 != 0xffff) {
-		search_seed = CreateEntityFromParents(
+		search_seed = gm_CreateEntityFromParents(
 			0,
 			*(unsigned int*) (candidate_slot1 * 0x21c + 0x100358a4),
 			*(unsigned int*) (candidate_slot2 * 0x21c + 0x100358a4),
@@ -213,7 +213,7 @@ void* __cdecl sim_CreateCitizen(
 	}
 	else {
 		new_entity_slot =
-			CreateEntityFromParents(param_2, -1, -1, param_3, 0, (unsigned int) param_4, (unsigned int) param_5, 2) &
+			gm_CreateEntityFromParents(param_2, -1, -1, param_3, 0, (unsigned int) param_4, (unsigned int) param_5, 2) &
 			0xffff;
 	}
 	if (new_entity_slot == 0xffff) {

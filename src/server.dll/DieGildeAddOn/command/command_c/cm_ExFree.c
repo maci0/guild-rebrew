@@ -18,8 +18,8 @@
 
 #include "../command_internal.h"
 
-extern int __cdecl CleanupBuildingEntity(uchar*);
-extern void __cdecl DeallocEntity(unsigned int, int);
+extern int __cdecl gm_CleanupBuildingEntity(uchar*);
+extern void __cdecl gm_DeallocEntity(unsigned int, int);
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 
 extern char s_Invalid_Id_for_cmdt_FREE_in_cm_E_1002cc5c[];
@@ -42,7 +42,7 @@ int __cdecl cm_ExFree(int param_1, char *param_2)
 		return 1;
 	}
 	if (param_1 != 0) {
-		resolveResult = CleanupBuildingEntity((uchar *)param_1);
+		resolveResult = gm_CleanupBuildingEntity((uchar *)param_1);
 		if (resolveResult != 0) {
 			return 1;
 		}
@@ -52,7 +52,7 @@ int __cdecl cm_ExFree(int param_1, char *param_2)
 		return 1;
 	}
 	else {
-		DeallocEntity((unsigned int)*dynEntity, 1);
+		gm_DeallocEntity((unsigned int)*dynEntity, 1);
 	}
 	if (param_2 != (char *)0x0) {
 		*param_2 = '\x01';

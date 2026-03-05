@@ -15,18 +15,18 @@
  * {
  *   int iVar1;
  *   
- *   iVar1 = ValidateCommand((char *)((int)param_1 + 0x10));
+ *   iVar1 = amt_ValidateCommand((char *)((int)param_1 + 0x10));
  *   return (uint)(iVar1 == 0);
  * }
  */
 
-extern int __cdecl ValidateCommand(char*);
+extern int __cdecl amt_ValidateCommand(char*);
 
 // FUNCTION: SERVER 0x1000d040
 int __cdecl cm_ValidateGeneric(void* param_1, char* param_2)
 {
 	int validate_result;
 
-	validate_result = ValidateCommand((char*) ((int) param_1 + 0x10));
+	validate_result = amt_ValidateCommand((char*) ((int) param_1 + 0x10));
 	return validate_result == 0;
 }

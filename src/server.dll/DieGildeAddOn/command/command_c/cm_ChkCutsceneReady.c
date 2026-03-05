@@ -25,7 +25,7 @@
  *   i = 0;
  *   id_ptr = (int *)(obj + 0x14);
  *   while( true ) {
- *     entity_ptr = LookupEntityRecordById(*id_ptr);
+ *     entity_ptr = gm_LookupEntityRecordById(*id_ptr);
  *     if (((entity_ptr != 0) &&
  *         (((*(char *)(entity_ptr + 2) == '\x06' || (*(char *)(entity_ptr + 2) == '\a')) &&
  *          (*(int *)(entity_ptr + 0x20c) != -1)))) &&
@@ -62,7 +62,7 @@ int __cdecl cm_ChkCutsceneReady(char* obj)
 	i = 0;
 	id_ptr = (int*) (obj + 0x14);
 	for (;;) {
-		entity_ptr = LookupEntityRecordById(*id_ptr);
+		entity_ptr = gm_LookupEntityRecordById(*id_ptr);
 		if (entity_ptr != 0 && (*(char*) (entity_ptr + 2) == '\x06' || *(char*) (entity_ptr + 2) == '\x07') &&
 			*(int*) (entity_ptr + 0x20c) != -1 && *(int*) (entity_ptr + 0x20c) != *(int*) (obj + 0x10)) {
 			break;

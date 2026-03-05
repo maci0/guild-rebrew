@@ -15,13 +15,13 @@
  * {
  *   void *pvVar1;
  *   
- *   pvVar1 = FindRecordById(*(int *)(param_1 + 0x10));
+ *   pvVar1 = gm_FindRecordById(*(int *)(param_1 + 0x10));
  *   if (pvVar1 == (void *)0x0) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x52d8,
  *                        s_cm_ExKillTransporter____invalid_t_1002d3d4,1);
  *     return 1;
  *   }
- *   RemoveEntityLink((int)pvVar1);
+ *   gm_RemoveEntityLink((int)pvVar1);
  *   if (param_2 != (char *)0x0) {
  *     *param_2 = '\x01';
  *     param_2[1] = '\0';
@@ -36,9 +36,9 @@
 
 #include "../command_internal.h"
 
-extern void* __cdecl FindRecordById(int);
+extern void* __cdecl gm_FindRecordById(int);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
-extern void __cdecl RemoveEntityLink(int);
+extern void __cdecl gm_RemoveEntityLink(int);
 extern char s_cm_ExKillTransporter____invalid_t_1002d3d4[];
 
 // FUNCTION: SERVER 0x1000fad0
@@ -46,7 +46,7 @@ int __cdecl cm_ExKillTransporter(int param_1, char* param_2)
 {
 	void* pvVar1;
 
-	pvVar1 = FindRecordById(*(int*) (param_1 + 0x10));
+	pvVar1 = gm_FindRecordById(*(int*) (param_1 + 0x10));
 	if (pvVar1 == (void*) 0x0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -56,7 +56,7 @@ int __cdecl cm_ExKillTransporter(int param_1, char* param_2)
 		);
 		return 1;
 	}
-	RemoveEntityLink((int) pvVar1);
+	gm_RemoveEntityLink((int) pvVar1);
 	if (param_2 != (char*) 0x0) {
 		*param_2 = '\x01';
 		param_2[1] = '\0';

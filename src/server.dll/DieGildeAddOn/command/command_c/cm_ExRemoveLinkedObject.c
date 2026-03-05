@@ -7,7 +7,7 @@
 #include "../command_internal.h"
 
 extern ushort* __cdecl StartEntityQuery(int, int, int, int, int);
-extern int __cdecl RemoveLinkedNodeById(int*, int);
+extern int __cdecl gm_RemoveLinkedNodeById(int*, int);
 
 // FUNCTION: SERVER 0x1000f0d0
 int __cdecl cm_ExRemoveLinkedObject(int param_1, char *param_2)
@@ -45,13 +45,13 @@ int __cdecl cm_ExRemoveLinkedObject(int param_1, char *param_2)
 	if (param_2 == (char *)0x0) {
 		return -1;
 	}
-	result = RemoveLinkedNodeById((int *)((int)param_2 + 0x14), *(int *)(result + 0x18));
+	result = gm_RemoveLinkedNodeById((int *)((int)param_2 + 0x14), *(int *)(result + 0x18));
 	if (result != 0) {
 		return result;
 	}
 	goto LAB_1000f181;
 LAB_1000f154:
-	result = RemoveLinkedNodeById((int *)param_1, nodeId);
+	result = gm_RemoveLinkedNodeById((int *)param_1, nodeId);
 	if (result != 0) {
 		return result;
 	}

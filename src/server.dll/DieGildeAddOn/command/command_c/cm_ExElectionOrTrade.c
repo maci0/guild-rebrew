@@ -37,7 +37,7 @@
  *     param_2[9] = '\0';
  *   }
  *   if (*(int *)(param_1 + 0x10) == 0x636c6572) {
- *     puVar1 = StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
+ *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
  *     if (puVar1 == (ushort *)0x0) {
  *       return 1;
  *     }
@@ -57,15 +57,15 @@
  *     *(int *)(puVar1 + 0x14) = g_something_1 + -1;
  *   }
  *   else if (*(int *)(param_1 + 0x10) == 0x62757920) {
- *     iVar2 = LookupEntityRecordById(*(int *)(param_1 + 0x14));
+ *     iVar2 = gm_LookupEntityRecordById(*(int *)(param_1 + 0x14));
  *     if (iVar2 == 0) {
  *       return 1;
  *     }
- *     puVar1 = StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
+ *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
  *     if (puVar1 == (ushort *)0x0) {
  */
 
-extern void* __cdecl StartFilteredEntitySearch(int, int, int);
+extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl StartEntityQuery(int, int, int, int, int);
 extern int g_10035880;
 
@@ -83,7 +83,7 @@ int __cdecl cm_ExElectionOrTrade(int param_1, char* param_2)
 	}
 
 	if (*(int*) (param_1 + 0x10) == 0x636c6572) {
-		entity = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
+		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
 		if (entity == (void*) 0x0) {
 			return 1;
 		}
@@ -102,11 +102,11 @@ int __cdecl cm_ExElectionOrTrade(int param_1, char* param_2)
 		}
 	}
 	else if (*(int*) (param_1 + 0x10) == 0x62757920) {
-		if (LookupEntityRecordById(*(int*) (param_1 + 0x14)) == 0) {
+		if (gm_LookupEntityRecordById(*(int*) (param_1 + 0x14)) == 0) {
 			return 1;
 		}
 
-		entity = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
+		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
 		if (entity == (void*) 0x0) {
 			return 1;
 		}

@@ -18,10 +18,10 @@
  *   int *piVar3;
  *   
  *                     / * Applies a cutscene identifier (at offset 0x10 of command packet) to up to 16
- *                        linked entities by looking them up via LookupEntityRecordById and modifying
+ *                        linked entities by looking them up via gm_LookupEntityRecordById and modifying
  *                        their 0x20c offset. Used to sync cutscene states across multiple active
  *                        characters. Returns 0 on success. * /
- *   iVar1 = CheckCutsceneReady((char *)param_1);
+ *   iVar1 = cm_ChkCutsceneReady((char *)param_1);
  *   if (iVar1 != 0) {
  *     if (param_2 != (char *)0x0) {
  *       *param_2 = '\x02';
@@ -31,7 +31,7 @@
  *   piVar3 = (int *)(param_1 + 0x14);
  *   iVar1 = 0x10;
  *   do {
- *     iVar2 = LookupEntityRecordById(*piVar3);
+ *     iVar2 = gm_LookupEntityRecordById(*piVar3);
  *     if (iVar2 != 0) {
  *       *(undefined4 *)(iVar2 + 0x20c) = *(undefined4 *)(param_1 + 0x10);
  *     }
@@ -44,7 +44,7 @@
 
 #include "../command_internal.h"
 
-extern int __cdecl CheckCutsceneReady(char*);
+extern int __cdecl cm_ChkCutsceneReady(char*);
 
 // FUNCTION: SERVER 0x1000ff60
 int __cdecl cm_ExCutsceneUpdate(int param_1, char* param_2)
@@ -53,7 +53,7 @@ int __cdecl cm_ExCutsceneUpdate(int param_1, char* param_2)
 	int entityRecord;
 	int* entityIdPtr;
 
-	readyResult = CheckCutsceneReady((char*) param_1);
+	readyResult = cm_ChkCutsceneReady((char*) param_1);
 	if (readyResult != 0) {
 		if (param_2 != (char*) 0x0) {
 			*param_2 = '\x02';
@@ -63,7 +63,7 @@ int __cdecl cm_ExCutsceneUpdate(int param_1, char* param_2)
 	entityIdPtr = (int*) (param_1 + 0x14);
 	readyResult = 0x10;
 	do {
-		entityRecord = LookupEntityRecordById(*entityIdPtr);
+		entityRecord = gm_LookupEntityRecordById(*entityIdPtr);
 		if (entityRecord != 0) {
 			*(int*) (entityRecord + 0x20c) = *(int*) (param_1 + 0x10);
 		}

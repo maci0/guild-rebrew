@@ -18,7 +18,7 @@
  *   int iVar2;
  *   
  *   if (*(int *)(param_1 + 0x10) == 0x636c6572) {
- *     puVar1 = StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
+ *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
  *     if (puVar1 != (ushort *)0x0) {
  *       puVar1 = StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *       if (puVar1 != (ushort *)0x0) {
@@ -27,7 +27,7 @@
  *     }
  *   }
  *   else if (*(int *)(param_1 + 0x10) == 0x62757920) {
- *     puVar1 = StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
+ *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
  *     if (puVar1 != (ushort *)0x0) {
  *       puVar1 = StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *       if (puVar1 != (ushort *)0x0) {
@@ -49,7 +49,7 @@
 
 #include "../command_internal.h"
 
-extern ushort* __cdecl StartFilteredEntitySearch(int, int, int);
+extern ushort* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern ushort* __cdecl StartEntityQuery(int, int, int, int, int);
 
 extern int g_something_1;
@@ -68,7 +68,7 @@ int __cdecl cm_ChkElectionOrTrade(int param_1)
 	int idx;
 
 	if (*(int*) (param_1 + 0x10) == 0x636c6572) {
-		entity = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
+		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
 		if (entity != (ushort*) 0x0) {
 			entity = StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
 			if (entity != (ushort*) 0x0) {
@@ -77,7 +77,7 @@ int __cdecl cm_ChkElectionOrTrade(int param_1)
 		}
 	}
 	else if (*(int*) (param_1 + 0x10) == 0x62757920) {
-		entity = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
+		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
 		if (entity != (ushort*) 0x0) {
 			entity = StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
 			if (entity != (ushort*) 0x0) {

@@ -24,7 +24,7 @@
  *   *(undefined4 *)(param_1 + 0x10) = g_timestamp_0b6c;
  *   iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x14));
  *   *(int *)(param_1 + 0x14) = iVar1;
- *   pcVar2 = AllocGameObject(iVar1,0x1b5,1);
+ *   pcVar2 = gm_AllocObjekt(iVar1,0x1b5,1);
  *   if (pcVar2 == (char *)0x0) {
  *     return 1;
  *   }
@@ -48,7 +48,7 @@
 
 #include "../command_internal.h"
 
-extern char* __cdecl AllocGameObject(int, unsigned int, int);
+extern char* __cdecl gm_AllocObjekt(int, unsigned int, int);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
 
 extern char g_player_slot_0[];
@@ -64,7 +64,7 @@ int __cdecl cm_ExAllocThemaPredigt(int param_1, char* param_2)
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
 	field_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
 	*(int*) (param_1 + 0x14) = field_id;
-	obj = AllocGameObject(field_id, 0x1b5, 1);
+	obj = gm_AllocObjekt(field_id, 0x1b5, 1);
 	if (obj == (char*) 0) {
 		return 1;
 	}

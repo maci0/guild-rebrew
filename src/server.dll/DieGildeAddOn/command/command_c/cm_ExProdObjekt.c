@@ -22,16 +22,16 @@ extern char* g_unknown_1de450;
 extern unsigned char g_current_season;
 
 extern int __cdecl LogMessageInternal(const char*, uint, const char*, int);
-extern short* __cdecl ResolveParentEntity(short*);
+extern short* __cdecl gm_ResolveParentEntity(short*);
 extern void* __cdecl StartEntityQuery(int, int, int, uint);
-extern int __cdecl get_msg_field(int, int);
-extern int __cdecl KannObjektHergestellt(char*, uint, int);
-extern void __cdecl RemoveObjectByType(char**, uint);
-extern char* __cdecl FindSlotById(uint, uint);
-extern void* __cdecl AllocGameObject(int, uint, int);
-extern double __cdecl CalculateProductionValue(uint, int);
-extern int __cdecl WalkEntityChain(int);
-extern short* __cdecl GetEntityTableEntry(char*);
+extern int __cdecl gm_GetMsgField(int, int);
+extern int __cdecl gm_KannObjektHergestellt(char*, uint, int);
+extern void __cdecl gm_RemoveObjectByType(char**, uint);
+extern char* __cdecl gm_FindSlotById(uint, uint);
+extern void* __cdecl gm_AllocObjekt(int, uint, int);
+extern double __cdecl gm_CalculateProductionValue(uint, int);
+extern int __cdecl gm_WalkEntityChain(int);
+extern short* __cdecl gm_GetEntityTableEntry(char*);
 
 extern char s_cm_ExecProduction___Invalid__lager_1002cf9c[];
 extern char s_cm_ExecProduction___Lager_has_wron_1002cf74[];
@@ -77,7 +77,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 		);
 		return 1;
 	}
-	owner = ResolveParentEntity(lager);
+	owner = gm_ResolveParentEntity(lager);
 	if (owner == (short*)0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -98,9 +98,9 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 				quantity = 0;
 			}
 			else {
-				recipe = (char*)get_msg_field((int)lager, (int)obj_entry);
+				recipe = (char*)gm_GetMsgField((int)lager, (int)obj_entry);
 				if (quantity >= (int)recipe / (int)(uint)*material_iter) {
-					recipe = (char*)get_msg_field((int)lager, (int)obj_entry);
+					recipe = (char*)gm_GetMsgField((int)lager, (int)obj_entry);
 					quantity = (int)recipe / (int)(uint)*material_iter;
 				}
 			}
@@ -110,7 +110,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	} while (saved_quantity != 0);
 	recipe = recipe_def;
 	saved_quantity = quantity;
-	production_cap = KannObjektHergestellt(
+	production_cap = gm_KannObjektHergestellt(
 		(char*)lager,
 		(uint)*(ushort*)(msg + 0x14),
 		(uint)*(ushort*)(recipe_def + 0x36) * quantity
@@ -141,12 +141,12 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 				goto LAB_1000e3e1;
 			}
 			*(uint*)(obj_entry + 7) = *(int*)(obj_entry + 7) - (uint)material_iter[-4] * quantity;
-			recipe = FindSlotById((uint)g_current_season, (uint)*material_iter);
+			recipe = gm_FindSlotById((uint)g_current_season, (uint)*material_iter);
 			if (recipe != (char*)0) {
 				*(uint*)(recipe + 0x14) = *(int*)(recipe + 0x14) + (uint)*(ushort*)(recipe_def + 0x36) * quantity;
 			}
 			if (*(int*)(obj_entry + 7) == 0) {
-				RemoveObjectByType((char**)(lager + 10), (uint)*material_iter);
+				gm_RemoveObjectByType((char**)(lager + 10), (uint)*material_iter);
 			}
 		}
 		production_cap = production_cap + 1;
@@ -158,7 +158,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 		*(uint*)(material_iter + 7) = *(int*)(material_iter + 7) + (uint)*(ushort*)(recipe_def + 0x36) * quantity;
 	}
 	else {
-		material_iter = (ushort*)AllocGameObject(
+		material_iter = (ushort*)gm_AllocObjekt(
 			*(int*)(lager + 1),
 			(uint)*(ushort*)(msg + 0x14),
 			(uint)*(ushort*)(recipe_def + 0x36) * quantity
@@ -178,16 +178,16 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 			*(int*)(material_iter + 0xe) = 4;
 		}
 	}
-	production_value = (long)(CalculateProductionValue((uint)*(ushort*)(msg + 0x14), 100) * saved_quantity);
-	production_cap = WalkEntityChain((int)lager);
+	production_value = (long)(gm_CalculateProductionValue((uint)*(ushort*)(msg + 0x14), 100) * saved_quantity);
+	production_cap = gm_WalkEntityChain((int)lager);
 	if (production_cap != 0) {
 		*(int*)(production_cap + 0x4d) = *(int*)(production_cap + 0x4d) + (int)production_value;
 	}
-	recipe = FindSlotById((uint)g_current_season, (uint)*(ushort*)(msg + 0x14));
+	recipe = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(msg + 0x14));
 	if (recipe != (char*)0) {
 		*(uint*)(recipe + 0x10) = *(int*)(recipe + 0x10) + (uint)*(ushort*)(recipe_def + 0x36) * quantity;
 	}
-	player_entry = GetEntityTableEntry((char*)owner);
+	player_entry = gm_GetEntityTableEntry((char*)owner);
 	if (player_entry != (short*)0) {
 		*(int*)(player_entry + 0x12) = *(int*)(player_entry + 0x12) + (int)production_value;
 	}

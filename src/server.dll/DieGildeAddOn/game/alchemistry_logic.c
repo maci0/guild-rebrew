@@ -5,21 +5,21 @@ typedef int(__cdecl* dispatch_fn)(unsigned char*);
 extern char* g_table;
 extern int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
-extern int __cdecl random_mod(int range);
-extern float __cdecl RandomFloat01(void);
+extern int __cdecl gm_RandomMod(int range);
+extern float __cdecl gm_RandomFloat01(void);
 extern int __cdecl crt_ftol(void);
 extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* tag);
 extern void* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
 extern void __cdecl AddOrAccumulateObject(int p1, int p2, int p3);
-extern int __cdecl RefreshMarketAvailability(int season);
+extern int __cdecl gm_RefreshMarketAvailability(int season);
 extern float fColorScale;
 extern int DAT_10030b6c;
 extern char DAT_10035439;
 extern float DAT_100256cc;
 extern float DAT_100256a0;
 extern void* __cdecl gm_LookupEntityRecordById(int entityId);
-extern void __cdecl DeallocEntity(int entity, int param);
+extern void __cdecl gm_DeallocEntity(int entity, int param);
 extern char s__ahm_AllocAhmInfo_1002a0f7[];
 extern double dScaleFactor;
 extern int DAT_1002c050[];
@@ -216,7 +216,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			*(short*) ((char*) entity + 0x50) = 0x7fff;
 			idx = 0;
 			do {
-				rand_char = (char) random_mod(0x40);
+				rand_char = (char) gm_RandomMod(0x40);
 				*((char*) entity + 0x80 + idx) = rand_char + 'T';
 				idx = idx + 1;
 			} while (idx < 5);
@@ -226,12 +226,12 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 				float rand_f;
 				float scale;
 				float base_val;
-				rand_f = RandomFloat01();
+				rand_f = gm_RandomFloat01();
 				scale = g_100256c8;
 				*(int*) ((char*) entity + 0x20) = 0x41400000;
 				*(float*) ((char*) entity + 0x14) = (rand_f * scale + g_100256c4) - g_100256c0;
 				alloc_result = (unsigned int) crt_ftol();
-				rand_val = (unsigned short) random_mod(alloc_result);
+				rand_val = (unsigned short) gm_RandomMod(alloc_result);
 				base_val = *(float*) ((char*) entity + 0x1c) * g_100256b8;
 				*(int*) ((char*) entity + 0x18) = *(int*) ((char*) entity + 0x1c);
 				col_idx = 0;
@@ -241,12 +241,12 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			}
 			do {
 				rand_val = *entity;
-				rand_char = (char) random_mod(0x40);
+				rand_char = (char) gm_RandomMod(0x40);
 				*(char*) (rand_val + idx + 0x100a9820) = rand_char + -0x20;
 				entity_id = *entity;
 				*(char*) (rand_val + idx + 0x1014d8e0) = 0;
 				slot_offset = entity_id * 0x300 + col_idx;
-				rand_char = (char) random_mod(0x40);
+				rand_char = (char) gm_RandomMod(0x40);
 				idx = idx + 0x300;
 				col_idx = col_idx + 1;
 				*(char*) (slot_offset + 0x100a9820) = rand_char + -0x20;
@@ -284,7 +284,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			if (idx != 0) {
 				AddOrAccumulateObject(*(int*) (idx + 2), *(int*) (param_1 + 0x14), 2);
 			}
-			RefreshMarketAvailability((int) g_current_season);
+			gm_RefreshMarketAvailability((int) g_current_season);
 			*(int*) ((char*) entity + 0x1cc) = *(int*) ((char*) entity + 0x1cc) | 4;
 			return *entity;
 		}
@@ -345,7 +345,7 @@ int __cdecl ahm_AllocateEntitySlot(int param_1, int param_2, int param_3)
 			if (query_result != (void*) 0) {
 				AddOrAccumulateObject(*(int*) ((char*) query_result + 2), *(int*) (param_1 + 8), 2);
 			}
-			RefreshMarketAvailability((int) DAT_10035439);
+			gm_RefreshMarketAvailability((int) DAT_10035439);
 			return 1;
 		}
 		i = i + 1;
@@ -467,7 +467,7 @@ int __cdecl ahm_FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 			*param_2 = 0;
 			param_2 = param_2 + 1;
 		}
-		DeallocEntity(*entity, 1);
+		gm_DeallocEntity(*entity, 1);
 		return 1;
 	}
 	return 0;
@@ -477,7 +477,7 @@ int __cdecl ahm_FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 // ORIGIN: GAME
 // SIZE: 295
 // BLOCKER_DELTA: 269
-int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
+int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void* __cdecl AllocateTrackedHeapBlock(unsigned int allocSize, const char* groupTag);
 
 // FUNCTION: SERVER 0x1000c4d0
@@ -499,30 +499,30 @@ int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 	unsigned char field_d[5];
 	unsigned char slot_data[44];
 
-	ok = ReadVfsDataChecked(&header_id, 4, 1, param_1);
+	ok = ls_ReadVfsDataChecked(&header_id, 4, 1, param_1);
 	if (ok == 0) {
 		return 0;
 	}
-	ok = ReadVfsDataChecked(header_data, 4, 1, param_1);
+	ok = ls_ReadVfsDataChecked(header_data, 4, 1, param_1);
 	if (ok == 0) {
 		return 0;
 	}
-	ok = ReadVfsDataChecked(&field_a, 1, 1, param_1);
+	ok = ls_ReadVfsDataChecked(&field_a, 1, 1, param_1);
 	if (ok == 0) {
 		return 0;
 	}
-	ok = ReadVfsDataChecked(&field_b, 1, 1, param_1);
+	ok = ls_ReadVfsDataChecked(&field_b, 1, 1, param_1);
 	if (ok != 0) {
-		ok = ReadVfsDataChecked(&field_c, 1, 1, param_1);
+		ok = ls_ReadVfsDataChecked(&field_c, 1, 1, param_1);
 		if (ok == 0) {
 			return 0;
 		}
-		ok = ReadVfsDataChecked(field_d, 1, 1, param_1);
+		ok = ls_ReadVfsDataChecked(field_d, 1, 1, param_1);
 		if (ok != 0) {
 			i = 0;
 			buf_cursor = slot_data;
-			while (ok = ReadVfsDataChecked(buf_cursor - 4, 4, 1, param_1), ok != 0) {
-				ok = ReadVfsDataChecked(buf_cursor, 4, 1, param_1);
+			while (ok = ls_ReadVfsDataChecked(buf_cursor - 4, 4, 1, param_1), ok != 0) {
+				ok = ls_ReadVfsDataChecked(buf_cursor, 4, 1, param_1);
 				if (ok == 0) {
 					return 0;
 				}

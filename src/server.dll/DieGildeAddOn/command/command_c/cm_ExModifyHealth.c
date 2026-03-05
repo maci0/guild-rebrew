@@ -16,7 +16,7 @@
  *   int iVar1;
  *   uint uVar2;
  *   
- *   iVar1 = LookupEntityRecordById(*(int *)(param_1 + 0x10));
+ *   iVar1 = gm_LookupEntityRecordById(*(int *)(param_1 + 0x10));
  *   if (iVar1 == 0) {
  *     return 1;
  *   }
@@ -38,7 +38,7 @@ int __cdecl cm_ExModifyHealth(int param_1)
 	int entity;
 	uint health;
 
-	entity = LookupEntityRecordById(*(int*) (param_1 + 0x10));
+	entity = gm_LookupEntityRecordById(*(int*) (param_1 + 0x10));
 	if (entity == 0) {
 		return 1;
 	}

@@ -93,7 +93,7 @@ extern unsigned short g_FilterVal27;
 extern unsigned char g_FilterVal30;
 extern char* g_array;
 extern void __cdecl FreeTrackedHeapBlock(void* heapBlock);
-extern void __cdecl free_3fields(void* param);
+extern void __cdecl gv_Free3Fields(void* param);
 extern int DAT_10035a0c;
 extern unsigned char DAT_10030861;
 extern char* __cdecl gm_SearchStruct(void);
@@ -118,7 +118,7 @@ extern char g_10031484[];
 extern char g_100314b8[];
 extern int __cdecl gm_EntityAccumulate(void*);
 extern int __cdecl gm_RemoveLinkedNodeById(int*, int);
-extern void __cdecl ClearEntityLinks(short*);
+extern void __cdecl amt_ClearEntityLinks(short*);
 extern void __cdecl gm_InitEntityIfValid(void* param_1);
 extern void __cdecl gm_DeallocEntity(int idx, int param);
 extern int DAT_10035434;
@@ -2010,7 +2010,7 @@ int __cdecl gm_CleanupBuildingEntity(unsigned char* param_1)
 	case 0x48:
 	case 0x49:
 	case 0x4a:
-		free_3fields(*(void**) (param_1 + 0x65));
+		gv_Free3Fields(*(void**) (param_1 + 0x65));
 		break;
 	case 0x4b:
 	case 0x4c:
@@ -2932,14 +2932,14 @@ void __cdecl gm_RemoveEntityLink(int param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 23
-// ANALYSIS: Checks if the provided entity pointer is valid and active (not -1). If so, it invokes ClearEntityLinks on it to detach it from game world lists before deletion or recycling.
+// ANALYSIS: Checks if the provided entity pointer is valid and active (not -1). If so, it invokes amt_ClearEntityLinks on it to detach it from game world lists before deletion or recycling.
 // FUNCTION: SERVER 0x10017f90
 // gm_InitEntityIfValid
 
 void __cdecl gm_InitEntityIfValid(short* param_1)
 {
 	if (param_1 != (short*) 0 && *(unsigned short*) param_1 != 0xFFFF) {
-		ClearEntityLinks(param_1);
+		amt_ClearEntityLinks(param_1);
 	}
 }
 
@@ -3523,7 +3523,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 		*(unsigned short*) (record_b + 0x50) = *(unsigned short*) (record_a + 0x50);
 	}
 
-	ClearEntityLinks(record_a);
+	amt_ClearEntityLinks(record_a);
 
 	{
 		unsigned char saved_byte2 = *(unsigned char*) (record_a + 2);
@@ -4454,7 +4454,7 @@ void __cdecl gm_EntitySetField(void)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 54
-// GHIDRA: RandomBelow
+// GHIDRA: ahm_RandomBelow
 // FUNCTION: SERVER 0x1001A0D0
 // gm_RandomMod
 

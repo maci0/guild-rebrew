@@ -20,7 +20,7 @@ typedef struct copy_12_dwords {
 } copy_12_dwords;
 
 extern player_slot g_player_slot_0[];
-extern char* __cdecl AllocGebaeude(uchar, uint);
+extern char* __cdecl gm_AllocGebaeude(uchar, uint);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 
 extern char s_gm_AllocGebaeude___failed_1002cb34[];
@@ -58,7 +58,7 @@ int __cdecl cm_ExAllocRaum(int param_1, char* param_2)
 			return 1;
 		}
 	}
-	building = AllocGebaeude(*(uchar*) (param_1 + 0x14), i);
+	building = gm_AllocGebaeude(*(uchar*) (param_1 + 0x14), i);
 	if (building == (char*) 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,

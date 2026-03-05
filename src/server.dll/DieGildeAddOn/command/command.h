@@ -9,7 +9,7 @@ extern int __cdecl QueuePlayerCommand(unsigned int* player, unsigned char* data)
 extern void __cdecl ClosePlayerConnection(char* player_ptr);
 
 /* Search and lookup */
-extern char* __cdecl SearchRecordTable(int record_id);
+extern char* __cdecl lb_SearchRecordTable(int record_id);
 
 /* Lobby commands (lobbycommands.c) */
 extern int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2);

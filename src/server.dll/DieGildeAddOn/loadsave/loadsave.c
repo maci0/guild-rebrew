@@ -3,9 +3,9 @@
 extern int __cdecl AllocGraveyardField(int);
 extern int g_1002576c[];
 extern int g_1002575c[];
-extern void find_entity_26(int);
-extern void find_entity_27(int);
-extern char random_mod(int);
+extern void amt_FindEntity26(int);
+extern void amt_FindEntity27(int);
+extern char gm_RandomMod(int);
 extern unsigned char __ftol();
 extern void AddOrAccumulateObject(int, int, int);
 extern char g_100a9820[];
@@ -22,7 +22,7 @@ extern char g_1002d4f8;
 extern char g_1002d4fc;
 extern int DAT_100a8c34;
 extern int DAT_10035450;
-extern void __cdecl reset_all_entities(void);
+extern void __cdecl gm_ResetAllEntities(void);
 extern int __cdecl ls_LoadGraveyardData(int param_1, int param_2);
 extern int __cdecl ahm_AllocAhmInfo(int param_1, int param_2);
 extern int g_file_version;     /* 0x1002d4ec */;
@@ -33,7 +33,7 @@ extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern void LogMessageInternal(const char*, int, const char*, int);
 extern int gm_StartFilteredEntitySearch(int, int, int);
 extern int gm_ResolveEntityById(int*, int*, int*, int);
-extern void entity_set_field(void);
+extern void gm_EntitySetField(void);
 extern int g_101deae8;
 extern int g_101deac0;
 extern int g_101de560;
@@ -206,11 +206,11 @@ void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* para
 
 	if (param_1 == 0x15) {
 		*(int*) (param_4 + 0x1cc) = *(int*) (param_4 + 0x1cc) | 0x1000;
-		find_entity_26(*(int*) (param_4 + 4));
+		amt_FindEntity26(*(int*) (param_4 + 4));
 	}
 	else {
 		*(int*) (param_4 + 0x1cc) = *(int*) (param_4 + 0x1cc) | 0x2000;
-		find_entity_27(*(int*) (param_4 + 4));
+		amt_FindEntity27(*(int*) (param_4 + 4));
 	}
 	*(unsigned short*) (param_4 + 10) = (unsigned short) param_3;
 	param_3 = g_100a9820;
@@ -219,7 +219,7 @@ void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* para
 		int row_offset = param_3 - g_100a9820;
 		loop_index = 0;
 		do {
-			random_char = random_mod(0x40);
+			random_char = gm_RandomMod(0x40);
 			g_100a9820[row_offset + loop_index] = random_char - 0x20;
 			g_1014d8e0[row_offset + loop_index] = 0;
 			loop_index++;
@@ -243,14 +243,14 @@ void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* para
 	*(int*) (param_4 + 0x18) = 0x447a0000;
 	loop_index = 0;
 	do {
-		random_mod(0x2a);
+		gm_RandomMod(0x2a);
 		stat_byte = __ftol();
 		*(unsigned char*) (param_4 + loop_index + 0x80) = stat_byte;
 		loop_index = loop_index + 1;
 	} while (loop_index < 5);
 	*(char*) (param_4 + 0xd) = 9;
 	AddOrAccumulateObject(*(int*) (param_4 + 4), *(int*) (*(int*) 0x10035439 * 0x2f4 + 0x100a8c94), 16000000);
-	random_mod(2);
+	gm_RandomMod(2);
 	*(char*) (param_4 + 2) = 3;
 	return;
 }
@@ -769,7 +769,7 @@ int REBREW_NAKED __cdecl ls_LoadSavegameHeader(int param_1, char* param_2)
 // GLOBALS: SERVER 0x10035450
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
-void __cdecl CleanupObjectEntities(void);
+void __cdecl gm_CleanupObjectEntities(void);
 
 int __cdecl ls_LoadExistingEntities(int param_1)
 {
@@ -780,7 +780,7 @@ int __cdecl ls_LoadExistingEntities(int param_1)
 	char* record_buf;
 	int byte_offset;
 
-	CleanupObjectEntities();
+	gm_CleanupObjectEntities();
 	read_ok = ls_ReadVfsDataChecked(&entity_count, 4, 1, (void*)param_1);
 	if (read_ok == 0) {
 		return 0;
@@ -852,7 +852,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 	int dummy;
 	register int neg1;
 
-	reset_all_entities();
+	gm_ResetAllEntities();
 
 	if (!ls_ReadVfsDataChecked(&entity_count, 4, 1, (void*)param_1)) {
 		return 0;
@@ -1921,7 +1921,7 @@ unsigned int ls_ID2Ptr(void)
 			byte_offset = byte_offset + 0x43;
 		} while (counter < *(int*) 0x10035450);
 	}
-	entity_set_field();
+	gm_EntitySetField();
 	return 1;
 }
 

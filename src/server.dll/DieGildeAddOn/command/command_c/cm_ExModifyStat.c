@@ -20,7 +20,7 @@
  *   int iVar3;
  *   long lVar4;
  *   
- *   iVar3 = LookupEntityRecordById(param_1[4]);
+ *   iVar3 = gm_LookupEntityRecordById(param_1[4]);
  *   if (((iVar3 == 0) || (iVar1 = param_1[5], iVar1 < 0)) || (4 < iVar1)) {
  *     return 1;
  *   }
@@ -55,7 +55,7 @@ int __cdecl cm_ExModifyStat(int* param_1)
 	int entity_record;
 	float new_stat_value;
 
-	entity_record = LookupEntityRecordById(param_1[4]);
+	entity_record = gm_LookupEntityRecordById(param_1[4]);
 	if ((entity_record == 0) || ((stat_index = param_1[5], stat_index < 0) || (4 < stat_index))) {
 		return 1;
 	}

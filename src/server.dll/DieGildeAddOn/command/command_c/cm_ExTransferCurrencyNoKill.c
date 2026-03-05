@@ -19,7 +19,7 @@
  *   if (*(int *)(param_1 + 0x14) != -1) {
  *     iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x14));
  *     *(int *)(param_1 + 0x14) = iVar1;
- *     SubtractObjectAmountNoKill
+ *     gm_SubObjektNoKill
  *               (iVar1,(uint)*(ushort *)
  *                             (&g_currency_type_array + (uint)*(byte *)(param_1 + 0x1c) * 0x2f4),
  *                *(int *)(param_1 + 0x1d));
@@ -41,7 +41,7 @@
 
 #include "../command_internal.h"
 
-extern void __cdecl SubtractObjectAmountNoKill(int, unsigned int, int);
+extern void __cdecl gm_SubObjektNoKill(int, unsigned int, int);
 extern void __cdecl AddOrAccumulateObject(int, unsigned int, int);
 extern char g_currency_type_array[];
 
@@ -54,7 +54,7 @@ int __cdecl cm_ExTransferCurrencyNoKill(int param_1, char* param_2)
 	if (*(int*) (param_1 + 0x14) != -1) {
 		field_result = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
 		*(int*) (param_1 + 0x14) = field_result;
-		SubtractObjectAmountNoKill(
+		gm_SubObjektNoKill(
 			field_result,
 			(unsigned int) *(unsigned short*) (g_currency_type_array +
 											   (unsigned int) *(unsigned char*) (param_1 + 0x1c) * 0x2f4),

@@ -21,19 +21,19 @@ extern char g_error_msg_sell_no_source[];
 extern char g_error_msg_sell_no_dest[];
 extern char g_error_msg_sell_failed[];
 
-extern short* __cdecl ResolveParentEntity(short*);
+extern short* __cdecl gm_ResolveParentEntity(short*);
 extern void* __cdecl StartEntityQuery(int, int, int, uint);
-extern int __cdecl get_msg_field(int, int);
-extern int __cdecl KannObjektHergestellt(char*, uint, int);
+extern int __cdecl gm_GetMsgField(int, int);
+extern int __cdecl gm_KannObjektHergestellt(char*, uint, int);
 extern int __cdecl CheckInventoryCapacity(char*, uint, int);
-extern char* __cdecl FindSlotById(uint, uint);
+extern char* __cdecl gm_FindSlotById(uint, uint);
 extern int __cdecl compute_size(char*, int);
-extern int __cdecl RemoveObjectWrapper(int, uint);
-extern int __cdecl RemoveObjectByType(char**, uint);
+extern int __cdecl gm_RemoveObjectWrapper(int, uint);
+extern int __cdecl gm_RemoveObjectByType(char**, uint);
 extern void* __cdecl AddOrAccumulateObject(int, uint, int);
-extern void* __cdecl AllocBuildingContents(char*, uint);
-extern void* __cdecl AllocGameObject(int, uint, int);
-extern int __cdecl SubObjekt(void*, uint, int);
+extern void* __cdecl gm_AllocBuildingContents(char*, uint);
+extern void* __cdecl gm_AllocObjekt(int, uint, int);
+extern int __cdecl gm_SubObjekt(void*, uint, int);
 extern int __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern int __cdecl sprintf(char*, const char*, ...);
 
@@ -118,7 +118,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 			}
 			container_ptr = (char**)(resolved_dynamic + 10);
 			source_container_ptr = container_ptr;
-			source_owner_entity = ResolveParentEntity(resolved_dynamic);
+			source_owner_entity = gm_ResolveParentEntity(resolved_dynamic);
 			if (source_owner_entity == (short*)0) {
 				capacity_check = s_cm_ExSellObjekt___Invalid__gm_ev_1002ce90;
 				error_code = 0x2c2f;
@@ -143,7 +143,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 		}
 		if (source_dynamic_entity != (short*)0) {
 			resolve_result = *(int*)(param_1 + 0x1f);
-			amount = get_msg_field((int)source_dynamic_entity, (int)dest_object);
+			amount = gm_GetMsgField((int)source_dynamic_entity, (int)dest_object);
 			if (amount < resolve_result) {
 				sprintf(
 					log_buffer,
@@ -199,7 +199,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 				entity_type == 0x1dc || entity_type == 0x116) {
 				dest_dynamic_entity = resolved_dynamic;
 			LAB_1000dc24:
-				resolve_result = KannObjektHergestellt(
+				resolve_result = gm_KannObjektHergestellt(
 					(char*)resolved_dynamic,
 					(uint)*(ushort*)(param_1 + 0x18),
 					*(int*)(param_1 + 0x1f)
@@ -213,7 +213,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 				goto LAB_1000dc24;
 			}
 			linked_list_ptr = (int*)(resolved_dynamic + 10);
-			dest_owner_entity = ResolveParentEntity(resolved_dynamic);
+			dest_owner_entity = gm_ResolveParentEntity(resolved_dynamic);
 		} else {
 			dest_owner_entity = source_static_entity;
 			linked_list_ptr = (int*)(source_static_entity + 0xbc);
@@ -235,11 +235,11 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 	source_dynamic_ref = source_dynamic_entity;
 	if (source_dynamic_entity != (short*)0) {
 		if (dest_owner_entity != (short*)0) {
-			parent_check = ResolveParentEntity((short*)dest_object);
+			parent_check = gm_ResolveParentEntity((short*)dest_object);
 			if (parent_check != dest_owner_entity && *(int*)(dest_object + 0xe) != 0) {
 				resolve_result = compute_size((char*)source_dynamic_ref, (int)*(ushort*)dest_object);
 				weight_fraction = (uint)(resolve_result * *(int*)(dest_object + 0xe)) >> 2;
-				amount = get_msg_field((int)source_dynamic_ref, (int)dest_object);
+				amount = gm_GetMsgField((int)source_dynamic_ref, (int)dest_object);
 				source_dynamic_ref = source_dynamic_entity;
 				if ((uint)amount - weight_fraction < (uint)*(int*)(param_1 + 0x1f)) {
 					capacity_check = g_error_msg_sell_no_source;
@@ -269,13 +269,13 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 	if (*(int*)(param_1 + 0x23) != 0) {
 		if (dest_dynamic_entity == (short*)0 && resolved_dynamic != (short*)0 &&
 			*resolved_dynamic == 0x1dd) {
-			capacity_check = FindSlotById((uint)g_current_season, (uint)*(ushort*)(param_1 + 0x18));
+			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(param_1 + 0x18));
 			if (capacity_check != (char*)0) {
 				*(int*)(capacity_check + 0x18) = *(int*)(capacity_check + 0x18) + *(int*)(param_1 + 0x1f);
 			}
 		}
 		if (source_dynamic_ref != (short*)0 && *source_dynamic_ref == 0x1dd) {
-			capacity_check = FindSlotById((uint)g_current_season, (uint)*(ushort*)(param_1 + 0x18));
+			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(param_1 + 0x18));
 			if (capacity_check != (char*)0) {
 				*(int*)(capacity_check + 0x1c) = *(int*)(capacity_check + 0x1c) + *(int*)(param_1 + 0x1f);
 			}
@@ -293,9 +293,9 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 					error_code = 0x2def;
 					goto sell_error_return;
 				}
-				RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(param_1 + 0x18));
+				gm_RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(param_1 + 0x18));
 			} else {
-				RemoveObjectByType(source_container_ptr, (uint)*(ushort*)(param_1 + 0x18));
+				gm_RemoveObjectByType(source_container_ptr, (uint)*(ushort*)(param_1 + 0x18));
 			}
 		}
 		if (*(int*)(param_1 + 0x23) != 0) {
@@ -333,14 +333,14 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 					error_code = 0x2e45;
 					goto sell_error_return;
 				}
-				dest_object = (ushort*)AllocBuildingContents(dest_existing_entity, (uint)*(ushort*)(param_1 + 0x18));
+				dest_object = (ushort*)gm_AllocBuildingContents(dest_existing_entity, (uint)*(ushort*)(param_1 + 0x18));
 				if (dest_object == (ushort*)0) {
 					capacity_check = s_cm_ExSellObjekt____gm_AllocRaum_f_1002ccc0;
 					error_code = 0x2e39;
 					goto sell_error_return;
 				}
 			} else {
-				dest_object = (ushort*)AllocGameObject(*(int*)(param_1 + 0x10), (uint)*(ushort*)(param_1 + 0x18), *(int*)(param_1 + 0x1f));
+				dest_object = (ushort*)gm_AllocObjekt(*(int*)(param_1 + 0x10), (uint)*(ushort*)(param_1 + 0x18), *(int*)(param_1 + 0x1f));
 				if (dest_object == (ushort*)0) {
 					capacity_check = s_cm_ExSellObjekt____gm_AllocObjek_1002cce8;
 					error_code = 0x2e5d;
@@ -360,7 +360,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 		}
 		*(int*)(g_player_slots_base[(unsigned char)param_1[3]].data + 0x264200) = *(int*)(dest_object + 1);
 		if (*(int*)(param_1 + 0x23) != 0 && dest_owner_entity != (short*)0) {
-			SubObjekt(
+			gm_SubObjekt(
 				*(void**)(dest_owner_entity + 2),
 				(uint)*(ushort*)(g_currency_type_array + (uint)(unsigned char)param_1[0x1e] * 0x2f4),
 				*(int*)(param_1 + 0x23) * *(int*)(param_1 + 0x1f)

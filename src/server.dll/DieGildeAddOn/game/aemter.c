@@ -27,7 +27,7 @@ extern ENT g_ents[];
 extern ENT g_ents2[];
 extern unsigned short DAT_10035884;
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
-extern int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
+extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 extern void __cdecl InitBuildingTypeTable(void);
 
 // STATUS: MATCHING
@@ -760,7 +760,7 @@ unsigned int __cdecl amt_fio_LoadAemter(int param_1, int param_2)
 		return 0;
 	}
 
-	if (ReadVfsDataChecked(&stored_count, 4, 1, param_1) == 0) {
+	if (ls_ReadVfsDataChecked(&stored_count, 4, 1, param_1) == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\aemter.c",
 			0xe73,
@@ -780,22 +780,22 @@ unsigned int __cdecl amt_fio_LoadAemter(int param_1, int param_2)
 	if (num_entries > 0) {
 		ptr = g_aemter_table;
 		do {
-			if (ReadVfsDataChecked(ptr - 4, 1, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr - 4, 1, 1, param_1) == 0) {
 				goto err_id;
 			}
-			if (ReadVfsDataChecked(ptr, 4, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr, 4, 1, param_1) == 0) {
 				goto err_playerid;
 			}
-			if (ReadVfsDataChecked(ptr + 4, 1, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 4, 1, 1, param_1) == 0) {
 				goto err_amt;
 			}
-			if (ReadVfsDataChecked(ptr + 8, 4, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 8, 4, 1, param_1) == 0) {
 				goto err_pcount;
 			}
-			if (ReadVfsDataChecked(ptr + 0xc, 1, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 0xc, 1, 1, param_1) == 0) {
 				goto err_status;
 			}
-			if (ReadVfsDataChecked(ptr + 0x10, 4, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 0x10, 4, 1, param_1) == 0) {
 				goto err_last;
 			}
 			i++;

@@ -7,7 +7,7 @@
 #include "../command_internal.h"
 
 extern ushort* __cdecl StartEntityQuery(int, int, int, uint);
-extern void __cdecl RemoveObjectByType(char**, uint);
+extern void __cdecl gm_RemoveObjectByType(char**, uint);
 extern void __cdecl LogMessageInternal(char*, uint, char*, int);
 
 extern char s_cm_ExClearLagerslot___Invalid__L_1002d088[];
@@ -47,7 +47,7 @@ extern char s_cm_ExClearLagerslot___Lager_has_n_1002d054[];
  *       if (*(int *)(puVar3 + 7) != 1) {
  *         return 1;
  *       }
- *       RemoveObjectByType((char **)(param_1 + 10),(uint)(ushort)psVar1[10]);
+ *       gm_RemoveObjectByType((char **)(param_1 + 10),(uint)(ushort)psVar1[10]);
  *       if (param_2 != (uchar *)0x0) {
  *         *param_2 = '\x01';
  *       }
@@ -99,7 +99,7 @@ int __cdecl cm_ExClearLagerslot(short* param_1, uchar* param_2)
 		return 1;
 	}
 
-	RemoveObjectByType((char**) (param_1 + 10), (uint) (ushort) cmd[10]);
+	gm_RemoveObjectByType((char**) (param_1 + 10), (uint) (ushort) cmd[10]);
 	if (param_2 != (uchar*) 0x0) {
 		*param_2 = '\x01';
 	}

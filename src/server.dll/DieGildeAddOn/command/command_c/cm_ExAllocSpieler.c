@@ -36,14 +36,14 @@
  *   else {
  *     iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x1f));
  *     *(int *)(param_1 + 0x1f) = iVar1;
- *     puVar2 = StartFilteredEntitySearch(1,1,iVar1);
+ *     puVar2 = gm_StartFilteredEntitySearch(1,1,iVar1);
  *     if (puVar2 == (ushort *)0x0) {
  *       LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x2889,
  *                          s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50,1);
  *       return 1;
  *     }
  *   }
- *   uVar3 = CreateEntityFromParents
+ *   uVar3 = gm_CreateEntityFromParents
  *                     ((uint)*(byte *)(param_1 + 0x14),*(int *)(param_1 + 0x15),
  *                      *(int *)(param_1 + 0x19),(uint)*(ushort *)(param_1 + 0x1d),(int)puVar2);
  *   uVar3 = uVar3 & 0xffff;
@@ -64,8 +64,8 @@
  */
 
 extern char g_player_slot_0[];
-extern void* __cdecl StartFilteredEntitySearch(int, ...);
-extern uint __cdecl CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
+extern void* __cdecl gm_StartFilteredEntitySearch(int, ...);
+extern uint __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[];
@@ -90,7 +90,7 @@ int __cdecl cm_ExAllocSpieler(int param_1, char* param_2)
 	else {
 		field_id = get_field_by_type((char*) param_1, seed);
 		*(int*) (param_1 + 0x1f) = field_id;
-		seed = (int) StartFilteredEntitySearch(1, 1, field_id);
+		seed = (int) gm_StartFilteredEntitySearch(1, 1, field_id);
 		if (seed == 0) {
 			LogMessageInternal(
 				s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -101,7 +101,7 @@ int __cdecl cm_ExAllocSpieler(int param_1, char* param_2)
 			return 1;
 		}
 	}
-	entity_index = CreateEntityFromParents(
+	entity_index = gm_CreateEntityFromParents(
 		*(uchar*) (param_1 + 0x14),
 		*(int*) (param_1 + 0x15),
 		*(int*) (param_1 + 0x19),

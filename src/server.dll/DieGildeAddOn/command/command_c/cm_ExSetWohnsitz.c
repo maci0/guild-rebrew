@@ -20,13 +20,13 @@
  *   char *msg;
  *   ushort local_8 [4];
  *   
- *   puVar2 = StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
+ *   puVar2 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
  *   if (puVar2 == (ushort *)0x0) {
  *     msg = s_cm_ExSetWohnsitz____Could_not_fi_1002d298;
  *     line = 0x49de;
  *   }
  *   else {
- *     iVar3 = LookupEntityRecordById(*(int *)(param_1 + 0x14));
+ *     iVar3 = gm_LookupEntityRecordById(*(int *)(param_1 + 0x14));
  *     if ((iVar3 != 0) || (*(int *)(param_1 + 0x14) == -1)) {
  *       if (*(char *)(g_entity_type_table + (uint)(byte)*puVar2 * 0x24d) == '\x01') {
  *         table_lookup((uint)(byte)*puVar2,(int *)local_8);
@@ -58,7 +58,7 @@
 
 extern int g_entity_type_table;
 
-extern ushort* __cdecl StartFilteredEntitySearch(int, ...);
+extern ushort* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern void __cdecl table_lookup(uint, ushort*);
 
@@ -75,7 +75,7 @@ int __cdecl cm_ExSetWohnsitz(int param_1, char* param_2)
 	uint type_id;
 	ushort caps[4];
 
-	building = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x10));
+	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x10));
 	if (building == (ushort*) 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -86,7 +86,7 @@ int __cdecl cm_ExSetWohnsitz(int param_1, char* param_2)
 		return 1;
 	}
 
-	resident = LookupEntityRecordById(*(int*) (param_1 + 0x14));
+	resident = gm_LookupEntityRecordById(*(int*) (param_1 + 0x14));
 	if ((resident == 0) && (*(int*) (param_1 + 0x14) != -1)) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,

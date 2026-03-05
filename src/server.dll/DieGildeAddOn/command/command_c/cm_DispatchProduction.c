@@ -32,16 +32,16 @@
  *     uVar3 = ExtendProductionTime(puVar1);
  *     return uVar3;
  *   case 3:
- *     iVar2 = ReplaceProductionWorker((uchar *)puVar1);
+ *     iVar2 = gv_ReplaceProductionWorker((uchar *)puVar1);
  *     return iVar2;
  *   case 4:
  *     iVar2 = ActivateGraveyardSection((uchar *)puVar1);
  *     return iVar2;
  *   case 5:
- *     iVar2 = UpdateProductionProgress((uchar *)puVar1);
+ *     iVar2 = gv_UpdateProductionProgress((uchar *)puVar1);
  *     return iVar2;
  *   case 6:
- *     iVar2 = ValidateEntityAction((uchar *)puVar1);
+ *     iVar2 = gv_ValidateEntityAction((uchar *)puVar1);
  *     return iVar2;
  *   default:
  *     return -1;
@@ -56,10 +56,10 @@ typedef unsigned int uint32_t;
 extern unsigned int __cdecl AssignProductionSlot(int);
 extern unsigned int __cdecl HireProductionWorker(int);
 extern unsigned int __cdecl ExtendProductionTime(uint32_t*);
-extern int __cdecl ReplaceProductionWorker(uchar*);
+extern int __cdecl gv_ReplaceProductionWorker(uchar*);
 extern int __cdecl ActivateGraveyardSection(uchar*);
-extern int __cdecl UpdateProductionProgress(uchar*);
-extern int __cdecl ValidateEntityAction(uchar*);
+extern int __cdecl gv_UpdateProductionProgress(uchar*);
+extern int __cdecl gv_ValidateEntityAction(uchar*);
 
 // FUNCTION: SERVER 0x10010260
 int __cdecl cm_DispatchProduction(int param_1, char* param_2)
@@ -83,16 +83,16 @@ int __cdecl cm_DispatchProduction(int param_1, char* param_2)
 		status = ExtendProductionTime(data_ptr);
 		return status;
 	case 3:
-		result = ReplaceProductionWorker((uchar*) data_ptr);
+		result = gv_ReplaceProductionWorker((uchar*) data_ptr);
 		return result;
 	case 4:
 		result = ActivateGraveyardSection((uchar*) data_ptr);
 		return result;
 	case 5:
-		result = UpdateProductionProgress((uchar*) data_ptr);
+		result = gv_UpdateProductionProgress((uchar*) data_ptr);
 		return result;
 	case 6:
-		result = ValidateEntityAction((uchar*) data_ptr);
+		result = gv_ValidateEntityAction((uchar*) data_ptr);
 		return result;
 	default:
 		return -1;

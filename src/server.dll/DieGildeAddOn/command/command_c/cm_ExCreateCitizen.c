@@ -43,31 +43,31 @@
  *   if (*(int *)(param_1 + 0x17) != -1) {
  *     iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x17));
  *     *(int *)(param_1 + 0x17) = iVar1;
- *     puVar2 = StartFilteredEntitySearch(1,1,iVar1);
+ *     puVar2 = gm_StartFilteredEntitySearch(1,1,iVar1);
  *     if (puVar2 == (ushort *)0x0) {
  *       msg = s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394;
  *       uVar3 = 0x5246;
  *       goto LAB_1000fa2c;
  *     }
  *   }
- *   uVar3 = CreateEntityFromParents((uint)*(byte *)(param_1 + 0x14),-1,-1,0x14,0);
+ *   uVar3 = gm_CreateEntityFromParents((uint)*(byte *)(param_1 + 0x14),-1,-1,0x14,0);
  *   uVar3 = uVar3 & 0xffff;
  *   if (uVar3 != 0xffff) {
  *     if (*(int *)(param_1 + 0x1b) != -1) {
- *       FindRecordById(*(int *)(param_1 + 0x1b));
+ *       gm_FindRecordById(*(int *)(param_1 + 0x1b));
  *     }
  *     (&g_work_building_ptrs)[uVar3 * 0x87] = 0;
  *     (&g_entity_state_base)[uVar3 * 0x21c] = 0xd;
  *     if (*(byte *)(param_1 + 0x21) != 0) {
- *       AllocGameObject((&g_static_entity0_entity_id)[uVar3 * 0x87],(uint)*(byte *)(param_1 + 0x21),1)
+ *       gm_AllocObjekt((&g_static_entity0_entity_id)[uVar3 * 0x87],(uint)*(byte *)(param_1 + 0x21),1)
  *       ;
  *     }
  */
 
-extern void* __cdecl StartFilteredEntitySearch(int, int, int);
-extern unsigned int __cdecl CreateEntityFromParents(int, int, int, int, int, int, int, int);
-extern void* __cdecl FindRecordById(int);
-extern void* __cdecl AllocGameObject(int, unsigned int, int);
+extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
+extern unsigned int __cdecl gm_CreateEntityFromParents(int, int, int, int, int, int, int, int);
+extern void* __cdecl gm_FindRecordById(int);
+extern void* __cdecl gm_AllocObjekt(int, unsigned int, int);
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 
 // FUNCTION: SERVER 0x1000f980
@@ -94,13 +94,13 @@ int __cdecl cm_ExCreateCitizen(int param_1, char* param_2)
 	if (*(int*) (param_1 + 0x17) != -1) {
 		parent_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x17));
 		*(int*) (param_1 + 0x17) = parent_id;
-		if (StartFilteredEntitySearch(1, 1, parent_id) == (void*) 0) {
+		if (gm_StartFilteredEntitySearch(1, 1, parent_id) == (void*) 0) {
 			LogMessageInternal((char*) 0x1002c748, 0x5246, (char*) 0x1002d394, 1);
 			return 1;
 		}
 	}
 
-	idx16 = (unsigned short) CreateEntityFromParents(
+	idx16 = (unsigned short) gm_CreateEntityFromParents(
 		(int) *(unsigned char*) (param_1 + 0x14),
 		-1,
 		-1,
@@ -118,7 +118,7 @@ int __cdecl cm_ExCreateCitizen(int param_1, char* param_2)
 	}
 
 	if (*(int*) (param_1 + 0x1b) != -1) {
-		FindRecordById(*(int*) (param_1 + 0x1b));
+		gm_FindRecordById(*(int*) (param_1 + 0x1b));
 	}
 
 	entity_offset = (int) idx * 0x21c;
@@ -126,7 +126,7 @@ int __cdecl cm_ExCreateCitizen(int param_1, char* param_2)
 	*(unsigned char*) (entity_offset + 0x100358a2) = 0x0d;
 
 	if (*(unsigned char*) (param_1 + 0x21) != 0) {
-		AllocGameObject(*(int*) (entity_offset + 0x100358a4), *(unsigned char*) (param_1 + 0x21), 1);
+		gm_AllocObjekt(*(int*) (entity_offset + 0x100358a4), *(unsigned char*) (param_1 + 0x21), 1);
 	}
 
 	slot = (unsigned int) *(unsigned char*) (param_1 + 3);

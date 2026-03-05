@@ -17,9 +17,9 @@
  *   
  *                     / * Command validation handler for changing building ownership
  *                        (ChkSetGebBesitzer). Looks up the building entity using
- *                        StartFilteredEntitySearch, checks its state flags, and validates the command.
+ *                        gm_StartFilteredEntitySearch, checks its state flags, and validates the command.
  *                        Returns 0 if valid. * /
- *   puVar1 = StartFilteredEntitySearch(1,1,*(undefined4 *)(obj + 0x10));
+ *   puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(obj + 0x10));
  *   if ((puVar1 != (ushort *)0x0) && ((puVar1[0x2d] & 2) != 0)) {
  *     return 0;
  *   }
@@ -31,7 +31,7 @@
 
 #include "../command_internal.h"
 
-extern ushort* __cdecl StartFilteredEntitySearch(int, int, int);
+extern ushort* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74[];
 
@@ -40,7 +40,7 @@ int __cdecl cm_ChkSetGebBesitzer(char* obj)
 {
 	ushort* puVar1;
 
-	puVar1 = StartFilteredEntitySearch(1, 1, *(int*) (obj + 0x10));
+	puVar1 = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0x10));
 	if ((puVar1 != (ushort*) 0x0) && ((puVar1[0x2d] & 2) != 0)) {
 		return 0;
 	}

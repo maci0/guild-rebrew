@@ -20,7 +20,7 @@
  *   *(undefined4 *)(param_1 + 0x35) = g_timestamp_0b6c;
  *   iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10));
  *   *(int *)(param_1 + 0x10) = iVar1;
- *   pcVar2 = AllocGameObject(iVar1,(uint)*(ushort *)(param_1 + 0x14),1);
+ *   pcVar2 = gm_AllocObjekt(iVar1,(uint)*(ushort *)(param_1 + 0x14),1);
  *   if (pcVar2 == (char *)0x0) {
  *     return 1;
  *   }
@@ -44,7 +44,7 @@
 
 #include "../command_internal.h"
 
-extern char* __cdecl AllocGameObject(int, unsigned int, int);
+extern char* __cdecl gm_AllocObjekt(int, unsigned int, int);
 extern void* __cdecl memcpy(void*, const void*, unsigned int);
 extern char g_player_slot_0[];
 
@@ -59,7 +59,7 @@ int __cdecl cm_ExAllocObjekt(int param_1, char* param_2)
 	*(int*) (param_1 + 0x35) = g_timestamp_0b6c;
 	field_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
 	*(int*) (param_1 + 0x10) = field_id;
-	game_obj = AllocGameObject(field_id, (unsigned int) *(unsigned short*) (param_1 + 0x14), 1);
+	game_obj = gm_AllocObjekt(field_id, (unsigned int) *(unsigned short*) (param_1 + 0x14), 1);
 	if (game_obj == (char*) 0) {
 		return 1;
 	}

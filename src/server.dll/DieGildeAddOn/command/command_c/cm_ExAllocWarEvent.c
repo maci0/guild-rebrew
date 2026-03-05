@@ -30,11 +30,11 @@
  *   byte bVar4;
  *   
  *   *(undefined4 *)(param_1 + 0x10) = g_timestamp_0b6c;
- *   pvVar1 = search_table_67(*(int *)(param_1 + 0x26));
+ *   pvVar1 = gm_SearchTable67(*(int *)(param_1 + 0x26));
  *   if (pvVar1 == (void *)0x0) {
  *     return 1;
  *   }
- *   pvVar2 = search_table_67(*(int *)(param_1 + 0x14));
+ *   pvVar2 = gm_SearchTable67(*(int *)(param_1 + 0x14));
  *   if (pvVar2 == (void *)0x0) {
  *     return 1;
  *   }
@@ -42,7 +42,7 @@
  *   do {
  *     if (puVar3 == (ushort *)0x0) {
  * LAB_100101b7:
- *       puVar3 = (ushort *)AllocGameObject(*(int *)((int)pvVar2 + 1),0xca,1);
+ *       puVar3 = (ushort *)gm_AllocObjekt(*(int *)((int)pvVar2 + 1),0xca,1);
  *       if (puVar3 == (ushort *)0x0) {
  *         return 1;
  *       }
@@ -80,10 +80,10 @@ typedef struct player_slot {
 
 extern player_slot g_player_slot_0[];
 
-extern void* __cdecl search_table_67(int);
+extern void* __cdecl gm_SearchTable67(int);
 extern ushort* __cdecl StartEntityQuery(int, int, int, int);
-extern ushort* __cdecl NextEntityQueryMatch(void);
-extern ushort* __cdecl AllocGameObject(int, int, int);
+extern ushort* __cdecl gm_NextEntityQueryMatch(void);
+extern ushort* __cdecl gm_AllocObjekt(int, int, int);
 
 // FUNCTION: SERVER 0x10010140
 int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)
@@ -99,12 +99,12 @@ int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)
 
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
 
-	attacker = search_table_67(*(int*) (param_1 + 0x26));
+	attacker = gm_SearchTable67(*(int*) (param_1 + 0x26));
 	if (attacker == (void*) 0) {
 		return 1;
 	}
 
-	target = search_table_67(*(int*) (param_1 + 0x14));
+	target = gm_SearchTable67(*(int*) (param_1 + 0x14));
 	if (target == (void*) 0) {
 		return 1;
 	}
@@ -117,7 +117,7 @@ int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)
 		if (*(int*) (evt + 0x2a) == *(int*) ((char*) attacker + 1)) {
 			break;
 		}
-		evt = (char*) NextEntityQueryMatch();
+		evt = (char*) gm_NextEntityQueryMatch();
 	} while (1);
 
 	if (evt != (char*) 0) {
@@ -125,7 +125,7 @@ int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)
 	}
 
 alloc:
-	evt = (char*) AllocGameObject(*(int*) ((char*) target + 1), 0xca, 1);
+	evt = (char*) gm_AllocObjekt(*(int*) ((char*) target + 1), 0xca, 1);
 	if (evt == (char*) 0) {
 		return 1;
 	}

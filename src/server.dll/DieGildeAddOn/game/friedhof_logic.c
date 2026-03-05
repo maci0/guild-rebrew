@@ -8,9 +8,9 @@ extern int g_slot_count_cat0[]; /* 0x1002577c */;
 extern int g_slot_count_cat1[]; /* 0x1002578c */;
 extern int g_slot_count_cat2[]; /* 0x1002579c */;
 extern int g_slot_count_cat3[]; /* 0x100257ac */;
-extern int __cdecl GetBuildingStatCount(unsigned char*);
+extern int __cdecl cm_GetBuildingStatCount(unsigned char*);
 extern char* __cdecl gv_FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
-extern unsigned int random_mod(int);
+extern unsigned int gm_RandomMod(int);
 extern unsigned int __ftol(void);
 extern void* __cdecl AllocateTrackedHeapBlock(unsigned int, const char*);
 extern void __cdecl FreeTrackedHeapBlock(void*);
@@ -25,7 +25,7 @@ extern void gv_Free3Fields(int);
 extern void __cdecl game_free(void*);
 extern int __cdecl gv_ResolveEntityById(int* out_slot, int* out_person, int* out_building, int entity_id);
 extern int __cdecl gv_GetSlotEntry(int, int, unsigned char);
-extern void SubtractObjectAmountNoKill(unsigned int, unsigned int, unsigned int);
+extern void gm_SubObjektNoKill(unsigned int, unsigned int, unsigned int);
 extern void AddOrAccumulateObject(unsigned int, unsigned int, unsigned int);
 extern int DAT_1003546c;
 extern short DAT_100358a0;
@@ -34,8 +34,8 @@ extern int g_entity_table_end;
 extern char* g_action_table_base;
 extern char g_slot_table[];
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
-extern int __cdecl random_mod(int);
-extern double __cdecl RandomFloat01(void);
+extern int __cdecl gm_RandomMod(int);
+extern double __cdecl gm_RandomFloat01(void);
 extern int DAT_10030b6c;
 extern int DAT_10035434;
 extern unsigned char DAT_10035439;
@@ -228,7 +228,7 @@ char* __cdecl gv_FindSlotEntryFiltered(
 		end = *(char**) (sub_obj + 0x14) + count * 0x14;
 	}
 	else if (category == 0xFF) {
-		count = GetBuildingStatCount(obj);
+		count = cm_GetBuildingStatCount(obj);
 		end = *(char**) (sub_obj + 0x1c) + count * 0x14;
 	}
 	else {
@@ -319,24 +319,24 @@ int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 					*(unsigned int*) (slot_entry_ptr + 10) = current_game_tick + 5;
 					skill_index = 0;
 					do {
-						random_mod(8);
+						gm_RandomMod(8);
 						rand_skill_byte = __ftol();
 						skill_index = skill_index + 1;
 						*(*(char**) (slot_entry_ptr + 0x10) + 0x23 + skill_index) = rand_skill_byte;
 					} while (skill_index < 5);
-					rand_stat_val = random_mod(9);
+					rand_stat_val = gm_RandomMod(9);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x2c) = (rand_stat_val & 0xffff) + 1;
-					rand_stat_val = random_mod(2);
+					rand_stat_val = gm_RandomMod(2);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x30) = (rand_stat_val & 0xffff) + 1;
-					rand_stat_val = random_mod(0x5e);
+					rand_stat_val = gm_RandomMod(0x5e);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x34) = (rand_stat_val & 0xffff) + 1;
-					rand_stat_val = random_mod(4);
+					rand_stat_val = gm_RandomMod(4);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x40) = (*(short*) 0x10035880 - (rand_stat_val & 0xffff)) + -1;
-					rand_stat_val = random_mod(2);
+					rand_stat_val = gm_RandomMod(2);
 					*(*(char**) (slot_entry_ptr + 0x10) + 0x38) = rand_stat_val & 0xffff;
-					random_mod(0x10);
-					random_mod(0x10);
-					random_mod(0x10);
+					gm_RandomMod(0x10);
+					gm_RandomMod(0x10);
+					gm_RandomMod(0x10);
 					spawn_count = spawn_count + 1;
 				} while (spawn_count < param_2);
 			}
@@ -1022,7 +1022,7 @@ unsigned int HireProductionWorker(int param_1)
 			} while (worker_record_count < *(int*) (*(int*) (cmd_ptr_saved + 0xc) * 4 + 0x1002574c));
 		}
 		if (0 < *(int*) (cmd_ptr_saved + 0x13)) {
-			SubtractObjectAmountNoKill(
+			gm_SubObjektNoKill(
 				*(unsigned int*) (param_1 + 4),
 				*(unsigned int*) (*(unsigned int*) 0x10035439 * 0x2f4 + 0x100a8c94),
 				*(unsigned int*) (cmd_ptr_saved + 0x13)
@@ -1085,7 +1085,7 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 	}
 	*(unsigned int*) (slot_entry_ptr + 10) = *(unsigned int*) (slot_entry_ptr + 10) + *(cmd_ptr_saved + 0x11);
 	if (0 < (int) *(cmd_ptr_saved + 0x13)) {
-		SubtractObjectAmountNoKill(
+		gm_SubObjektNoKill(
 			*(param_1 + 4),
 			*(*(unsigned int**) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
 			*(cmd_ptr_saved + 0x13)
@@ -1431,7 +1431,7 @@ unsigned int gv_MoveSlotEntry(int param_1)
 			*(int*) (cmd_ptr_saved + 0x15) = *(int*) 0x10030b6c;
 			if (0 < *(int*) (cmd_ptr_saved + 0x11)) {
 				unsigned int scaled_amount;
-				SubtractObjectAmountNoKill(
+				gm_SubObjektNoKill(
 					*(unsigned int*) (param_1 + 4),
 					*(unsigned int*) ((unsigned char*) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
 					*(unsigned int*) (cmd_ptr_saved + 0x11)
@@ -1597,7 +1597,7 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 			strcpy((char*) (entity_slot_byte_offset + 0x100358d0), (char*) matched_production_record + 4);
 			strcpy((char*) (entity_slot_byte_offset + 0x100358e0), (char*) matched_production_record + 0x14);
 			*(int*) (entity_slot_byte_offset + 0x100358b0) = 0;
-			random_float = RandomFloat01();
+			random_float = gm_RandomFloat01();
 			*(int*) (entity_slot_byte_offset + 0x100358b8) = 0;
 			*(int*) (entity_slot_byte_offset + 0x100358bc) = 0x447a0000;
 			*(int*) (entity_slot_byte_offset + 0x100358c0) = 0;
@@ -1610,11 +1610,11 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 				DAT_10025680 / (float) (random_float * (double) DAT_100257c8 + (double) DAT_100257c4);
 			do {
 				entity_slot_index = *new_entity_slot_ptr;
-				rand_relationship_val = (char) random_mod(0x40);
+				rand_relationship_val = (char) gm_RandomMod(0x40);
 				*(char*) (entity_slot_index + slot_scan_idx_or_capacity + 0x1014d8e0) = 0;
 				*(char*) (entity_slot_index + slot_scan_idx_or_capacity + 0x100a9820) = rand_relationship_val - 0x20;
 				entity_slot_byte_offset = *new_entity_slot_ptr * 0x300 + relationship_loop_idx;
-				rand_relationship_val = (char) random_mod(0x40);
+				rand_relationship_val = (char) gm_RandomMod(0x40);
 				slot_scan_idx_or_capacity = slot_scan_idx_or_capacity + 0x300;
 				relationship_loop_idx = relationship_loop_idx + 1;
 				*(char*) (entity_slot_byte_offset + 0x100a9820) = rand_relationship_val - 0x20;

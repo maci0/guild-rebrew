@@ -88,7 +88,7 @@ int __cdecl cm_ChkChangeAttribute(int param_1, char* param_2)
 				return 1;
 			}
 			if (field == ((char*) ent_c + 0x5c)) {
-				rec = LookupEntityRecordById(*(int*) p + *(int*) ((char*) ent_c + 0x5c));
+				rec = gm_LookupEntityRecordById(*(int*) p + *(int*) ((char*) ent_c + 0x5c));
 				if (rec == 0) {
 					LogMessageInternal(
 						s_D__Develop_DieGildeAddOn_command_1002c748,

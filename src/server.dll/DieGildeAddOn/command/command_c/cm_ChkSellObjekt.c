@@ -7,8 +7,8 @@
 
 extern int __cdecl StartEntityQuery(int, int, int, uint);
 extern int __cdecl CheckInventoryCapacity(char*, uint, int);
-extern int __cdecl KannObjektHergestellt(char*, int, int);
-extern char* __cdecl ResolveParentEntity(char*);
+extern int __cdecl gm_KannObjektHergestellt(char*, int, int);
+extern char* __cdecl gm_ResolveParentEntity(char*);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
 
 extern char s_cm_ChkSellObjekt___Invalid__quel_1002c8dc[];
@@ -72,13 +72,13 @@ int __cdecl cm_ChkSellObjekt(char* cmd)
 		} else if (cmd != (char*)0) {
 			obj_type = *(short*)cmd;
 			if (obj_type == 0x2a || obj_type == 0x116 || obj_type == 0x1dd) {
-				result = KannObjektHergestellt(cmd, (int)(uint)*(ushort*)(cmd_ptr + 0x18), *(int*)(cmd_ptr + 0x1f));
+				result = gm_KannObjektHergestellt(cmd, (int)(uint)*(ushort*)(cmd_ptr + 0x18), *(int*)(cmd_ptr + 0x1f));
 				if (result < *(int*)(cmd_ptr + 0x1f)) {
 					LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23cd, s_cm_ChkSellObjekt___Lager_voll_1002c834, 8);
 					return 1;
 				}
 			}
-			parent = ResolveParentEntity(cmd);
+			parent = gm_ResolveParentEntity(cmd);
 		} else {
 			result = CheckInventoryCapacity(parent, (uint)*(ushort*)(cmd_ptr + 0x18), *(int*)(cmd_ptr + 0x1f));
 			if (result < *(int*)(cmd_ptr + 0x1f)) {

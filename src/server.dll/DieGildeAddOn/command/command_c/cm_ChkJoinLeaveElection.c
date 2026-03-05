@@ -11,7 +11,7 @@
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
-extern void* __cdecl StartFilteredEntitySearch(int, int, int);
+extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl StartEntityQuery(int, int, int, int, int);
 
 extern int g_1003546c;
@@ -28,7 +28,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* param_1)
 
 	action = param_1[4];
 	if (action == 0x6a6f696e) {
-		entity = StartFilteredEntitySearch(1, 1, param_1[6]);
+		entity = gm_StartFilteredEntitySearch(1, 1, param_1[6]);
 		if (entity != (void*)0) {
 			entity = StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
 			if (entity != (void*)0) {
@@ -52,7 +52,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* param_1)
 		return 1;
 	}
 	else if (action == 0x6c656176) {
-		entity = StartFilteredEntitySearch(1, 1, param_1[6]);
+		entity = gm_StartFilteredEntitySearch(1, 1, param_1[6]);
 		if (entity != (void*)0) {
 			entity = StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
 			if (entity != (void*)0) {
@@ -72,7 +72,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* param_1)
 		return 1;
 	}
 	else if (action == 0x636c6572) {
-		entity = StartFilteredEntitySearch(1, 1, param_1[6]);
+		entity = gm_StartFilteredEntitySearch(1, 1, param_1[6]);
 		if (entity == (void*)0) {
 			return 1;
 		}

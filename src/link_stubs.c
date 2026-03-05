@@ -264,7 +264,7 @@ char* g_table_a9;
 int g_timestamp_0b6c;
 char g_type_idx;
 int g_work_building_ptrs;
-char* unknown;
+char* g_unknown_1de450;
 
 /* String literal globals */
 char s_ClientSpieler_erzeugt_1002cbbc[1] = "";
@@ -352,12 +352,6 @@ int* __cdecl GetErrnoPointer(void)
 	return &stub_errno_val;
 }
 
-extern void __cdecl DeallocEntity(unsigned int, int);
-
-void __cdecl gm_DeallocEntity(unsigned int a, int b)
-{
-	DeallocEntity(a, b);
-}
 
 extern int __cdecl ServerMainThread(void*);
 

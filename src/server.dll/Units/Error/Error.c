@@ -170,7 +170,7 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 		}
 	}
 
-	/* Open the .dbg file */
+	/* gm_Open the .dbg file */
 	hDbgFile = CreateFileA(szModulePath, 0x80000000, 1, 0, 3, 0x80, 0);
 	hCrashLog = (void*) -1;
 	frameInfo[1] = (int) hCrashLog;
@@ -198,7 +198,7 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 		goto bad_dbg_free;
 	}
 
-	/* Open crash log for append */
+	/* gm_Open crash log for append */
 	hCrashLog = CreateFileA((const char*) 0x10027318, 0x40000000, 0, 0, 4, 0x80, 0);
 	frameInfo[1] = (int) hCrashLog;
 

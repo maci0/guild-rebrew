@@ -10,7 +10,7 @@
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
-extern void* __cdecl StartFilteredEntitySearch(int, int, int);
+extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl StartEntityQuery(int, int, int, int, int);
 
 extern int g_1003546c;
@@ -36,7 +36,7 @@ int __cdecl cm_ExJoinLeaveElection(int param_1, char *param_2)
 	cmd = *(int *)(param_1 + 0x10);
 
 	if (cmd == 0x6a6f696e) {
-		entity = (char *)StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
+		entity = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
 		if (entity != (char *)0 &&
 			(entity = (char *)StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d),
 			 entity != (char *)0)) {
@@ -72,7 +72,7 @@ int __cdecl cm_ExJoinLeaveElection(int param_1, char *param_2)
 	}
 
 	if (cmd == 0x6c656176) {
-		entity = (char *)StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
+		entity = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
 		if (entity != (char *)0 &&
 			(entity = (char *)StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d),
 			 entity != (char *)0)) {
@@ -97,7 +97,7 @@ int __cdecl cm_ExJoinLeaveElection(int param_1, char *param_2)
 	}
 
 	if (cmd == 0x636c6572) {
-		entity = (char *)StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
+		entity = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
 		if (entity != (char *)0) {
 			residentIdx = *(unsigned short *)(entity + 0x27);
 			if (residentIdx != 0xffff) {

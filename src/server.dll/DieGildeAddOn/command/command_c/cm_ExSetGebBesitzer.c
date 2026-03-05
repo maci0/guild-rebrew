@@ -27,21 +27,21 @@
  *   uint line;
  *   char *msg;
  *   
- *   puVar1 = StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
+ *   puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
  *   if (puVar1 == (ushort *)0x0) {
  *     msg = s_cm_ExSetGebBesitzer____Could_not_1002d214;
  *     line = 0x4972;
  *   }
  *   else {
- *     puVar2 = (ushort *)LookupEntityRecordById(*(int *)(param_1 + 0x18));
+ *     puVar2 = (ushort *)gm_LookupEntityRecordById(*(int *)(param_1 + 0x18));
  *     if ((puVar2 != (ushort *)0x0) || (*(int *)(param_1 + 0x18) == -1)) {
- *       puVar3 = (ushort *)LookupEntityRecordById(*(int *)(param_1 + 0x14));
+ *       puVar3 = (ushort *)gm_LookupEntityRecordById(*(int *)(param_1 + 0x14));
  *       if ((puVar3 == (ushort *)0x0) && (*(int *)(param_1 + 0x14) != -1)) {
  *         LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x4990,
  *                            s_cm_ExSetGebBesitzer____Could_not_1002d1a8,1);
  *         return 2;
  *       }
- *       AssignBuildingOwner((uchar *)puVar1,*puVar3,(uint)*puVar2);
+ *       gm_AssignBuildingOwner((uchar *)puVar1,*puVar3,(uint)*puVar2);
  *       if (param_2 != (char *)0x0) {
  *         *param_2 = '\x02';
  *         param_2[1] = '\0';
@@ -60,8 +60,8 @@
  * }
  */
 
-extern ushort* __cdecl StartFilteredEntitySearch(int, ...);
-extern void __cdecl AssignBuildingOwner(char*, uint, uint);
+extern ushort* __cdecl gm_StartFilteredEntitySearch(int, ...);
+extern void __cdecl gm_AssignBuildingOwner(char*, uint, uint);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 
 extern char s_cm_ExSetGebBesitzer____Could_not_1002d214[];
@@ -77,7 +77,7 @@ int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
 	uint old_owner_value;
 	uint new_owner_value;
 
-	building = StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x10));
+	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x10));
 	if (building == (ushort*) 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -88,7 +88,7 @@ int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
 		return 1;
 	}
 
-	old_owner = (ushort*) LookupEntityRecordById(*(int*) (param_1 + 0x18));
+	old_owner = (ushort*) gm_LookupEntityRecordById(*(int*) (param_1 + 0x18));
 	if ((old_owner == (ushort*) 0) && (*(int*) (param_1 + 0x18) != -1)) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -99,7 +99,7 @@ int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
 		return 1;
 	}
 
-	new_owner = (ushort*) LookupEntityRecordById(*(int*) (param_1 + 0x14));
+	new_owner = (ushort*) gm_LookupEntityRecordById(*(int*) (param_1 + 0x14));
 	if ((new_owner == (ushort*) 0) && (*(int*) (param_1 + 0x14) != -1)) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -112,7 +112,7 @@ int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
 
 	old_owner_value = *(ushort*) old_owner;
 	new_owner_value = *(ushort*) new_owner;
-	AssignBuildingOwner((char*) building, new_owner_value, old_owner_value);
+	gm_AssignBuildingOwner((char*) building, new_owner_value, old_owner_value);
 
 	if (param_2 != (char*) 0) {
 		*param_2 = '\x02';

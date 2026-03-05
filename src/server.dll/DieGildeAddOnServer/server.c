@@ -21,11 +21,11 @@ extern int __cdecl srv_Init(void);
 extern int __cdecl AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
 extern int __cdecl cm_ProcessCommandQueue(void);
 extern void __cdecl FreeTrackedHeapBlock(void* ptr);
-extern void __cdecl SetSyncParams(int base_addr, unsigned char phase, unsigned int arg3, unsigned int arg4);
+extern void __cdecl sim_SetSyncParams(int base_addr, unsigned char phase, unsigned int arg3, unsigned int arg4);
 extern void __cdecl crt_getptd_set(unsigned int value);
-extern void __cdecl reset_all_entities(void);
-extern void __cdecl CleanupObjectEntities(void);
-extern void __cdecl cleanup_all_entities(void);
+extern void __cdecl gm_ResetAllEntities(void);
+extern void __cdecl gm_CleanupObjectEntities(void);
+extern void __cdecl gm_CleanupAllEntities(void);
 extern void __cdecl ShutdownMemoryAllocator(void);
 extern void __cdecl ShutdownLogAndErrorHandler(void);
 extern int g_net_socket;
@@ -544,7 +544,7 @@ send_start_commands:
 			} while ((char*) player_slot < (char*) 0x114ffe20);
 
 			*(unsigned int*) 0x10035880 = *(unsigned int*) 0x10035880 + 1;
-			SetSyncParams(0x10035880, 6, 0, 0);
+			sim_SetSyncParams(0x10035880, 6, 0, 0);
 		}
 
 		sync_timer = *(unsigned int*) 0x101deaf0;
@@ -594,7 +594,7 @@ int __cdecl srv_Init(void)
 
 	lstrcpyA(game_path, "\\project\\DieGilde\\game\\");
 	lstrcpyA(data_path, "data\\");
-	result = Open(game_path, data_path);
+	result = gm_Open(game_path, data_path);
 
 	if (result < 0) {
 		char full_path[512];
@@ -603,7 +603,7 @@ int __cdecl srv_Init(void)
 		return 0;
 	}
 
-	InitEntitySlots();
+	gm_InitEntitySlots();
 	InitBuildingTypeTable();
 	result = CreateListenSocket((void*) 0x11764088);
 
@@ -730,10 +730,10 @@ void __cdecl CleanupSockets(void)
 	shutdown(g_net_socket, 2);
 	closesocket(g_net_socket);
 	WSACleanup();
-	InitEntitySlots();
-	reset_all_entities();
-	CleanupObjectEntities();
-	cleanup_all_entities();
+	gm_InitEntitySlots();
+	gm_ResetAllEntities();
+	gm_CleanupObjectEntities();
+	gm_CleanupAllEntities();
 	ShutdownMemoryAllocator();
 	ShutdownLogAndErrorHandler();
 }
@@ -1573,7 +1573,7 @@ void __cdecl LogWinsockError(int param_1)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x781,
-			"WSAEINVAL: The socket has not been bound with bind, or an g_unknown_1de450 flag was specified, or MSG_OOB was "
+			"WSAEINVAL: The socket has not been bound with bind, or an unknown flag was specified, or MSG_OOB was "
 			"specified for a socket with SO_OOBINLINE enabled or (for byte stream sockets only) len was zero or "
 			"negative.",
 			1
