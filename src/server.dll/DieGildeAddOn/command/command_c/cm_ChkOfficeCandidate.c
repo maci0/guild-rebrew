@@ -22,6 +22,10 @@
 
 int __cdecl amt_ValidateOfficeCandidate(int*);
 
+/* Validation handler: delegates to amt_ValidateOfficeCandidate
+ * to check if the entity at cmd+0x10 is eligible for an office.
+ * Returns 1 if invalid, 0 if valid. */
+
 // FUNCTION: SERVER 0x1000d020
 int __cdecl cm_ChkOfficeCandidate(void* obj)
 {

@@ -69,6 +69,11 @@ char* __cdecl plt_SetPlantMap(void*, unsigned int, unsigned int, unsigned int, u
 extern int g_plant_count;
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+/* Chain handler: performs a record/zone lookup for a filtered entity.
+ * Searches the plant record table, checks zone availability, and
+ * optionally creates new plant map entries via plt_SetPlantMap.
+ * Writes the found record pointer and status byte into *param_2. */
+
 // FUNCTION: SERVER 0x1000f1a0
 int __cdecl cm_ChainRecordLookup(int param_1, char* param_2)
 {

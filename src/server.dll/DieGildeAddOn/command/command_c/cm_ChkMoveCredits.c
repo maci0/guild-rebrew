@@ -63,6 +63,10 @@
 extern char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[];
 extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];
 
+/* Validation handler: resolves entity by ID and checks if a
+ * credit (currency) transfer is valid. Returns 1 on invalid
+ * entity, otherwise validates the transfer amount. */
+
 // FUNCTION: SERVER 0x1000cb20
 int __cdecl cm_ChkMoveCredits(int param_1, char* param_2)
 {

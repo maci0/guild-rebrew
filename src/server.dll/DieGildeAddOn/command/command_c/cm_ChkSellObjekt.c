@@ -17,6 +17,11 @@ extern char s_cm_ChkSellObjekt___Lager_voll_1002c834[];
 extern char s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
+/* Validation handler: checks preconditions for selling an object.
+ * Resolves source/destination entities, verifies entity types
+ * match, and checks inventory capacity. Logs error on invalid ID
+ * or type mismatch. */
+
 // FUNCTION: SERVER 0x1000cbd0
 int __cdecl cm_ChkSellObjekt(char* cmd)
 {

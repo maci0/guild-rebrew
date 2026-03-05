@@ -28,6 +28,10 @@ typedef unsigned long DWORD;
 extern int g_entity_id_start;
 __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 
+/* Assigns the next sequential entity ID to the command packet at
+ * offset 0x10, records a timestamp at 0x14, then increments the
+ * global ID counter. Used when creating new game entities. */
+
 // FUNCTION: SERVER 0x1000f0a0
 int __cdecl cm_AssignEntityId(int param_1, char* param_2)
 {

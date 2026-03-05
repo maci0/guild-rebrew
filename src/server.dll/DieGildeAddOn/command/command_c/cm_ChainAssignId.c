@@ -23,6 +23,9 @@
 
 extern int g_mem_pool_overflow_flag;
 
+/* Chain handler: assigns the next global memory pool ID to the command
+ * packet at offset 0x10 and increments the counter. */
+
 // FUNCTION: SERVER 0x1000ef90
 int __cdecl cm_ChainAssignId(int param_1, char* param_2)
 {

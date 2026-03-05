@@ -38,6 +38,10 @@
 int __cdecl printf(const char*, ...);
 extern char s_Invalid_Commandtype_in_Execution_1002cacc[];
 
+/* Validation handler: checks that the first byte of the command
+ * is a valid command type (0x00, 0x05, 0x06, or 0x07). Logs
+ * error and returns 1 for invalid types. */
+
 // FUNCTION: SERVER 0x1000d2e0
 int __cdecl cm_ChkCommandType(char* cmd, char* result)
 {

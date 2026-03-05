@@ -57,6 +57,10 @@
 extern char s_cm_ChkChangeBits___Invalid_Id_1002ca54[];
 extern char s_cm_ChkChangeBits___Invalid_actio_1002ca04[];
 
+/* Validation handler: resolves entity by ID from the command
+ * packet's field type info. Logs and rejects if entity ID is
+ * invalid. Used as precondition check for bit-field changes. */
+
 // FUNCTION: SERVER 0x1000cf30
 int __cdecl cm_ChkChangeBits(int param_1, char* param_2)
 {

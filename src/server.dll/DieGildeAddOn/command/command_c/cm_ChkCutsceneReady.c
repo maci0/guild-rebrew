@@ -48,6 +48,11 @@
 
 extern char s_cm_ChkCutsceneReady____failed____1002caa8[];
 
+/* Validation handler: checks if up to 16 entities referenced
+ * by IDs in the command payload are all in cutscene-ready state
+ * (entity type 0x06 or 0x07). Returns 0 when all are ready,
+ * 1 if any entity is missing or not ready. */
+
 // FUNCTION: SERVER 0x1000d260
 int __cdecl cm_ChkCutsceneReady(char* obj)
 {

@@ -28,6 +28,10 @@ typedef struct {
 } AttrEntry;
 #pragma pack(pop)
 
+/* Validation handler: resolves entity by ID and validates each
+ * attribute field descriptor (kind/value/offset) in the command
+ * payload. Returns 1 on invalid entity ID. */
+
 // FUNCTION: SERVER 0x1000cde0
 int __cdecl cm_ChkChangeAttribute(int param_1, char* param_2)
 {

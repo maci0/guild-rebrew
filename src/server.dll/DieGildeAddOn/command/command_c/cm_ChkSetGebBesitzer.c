@@ -35,6 +35,10 @@
 extern char s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+/* Validation handler: checks if a building (Gebaeude) can have
+ * its owner set. Verifies the entity exists and has bit 1 of
+ * field 0x2d set. Logs error and returns 1 on failure. */
+
 // FUNCTION: SERVER 0x1000cfe0
 int __cdecl cm_ChkSetGebBesitzer(char* obj)
 {

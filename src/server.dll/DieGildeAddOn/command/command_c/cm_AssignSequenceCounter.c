@@ -21,6 +21,9 @@
 
 extern int g_sequence_counter;
 
+/* Assigns the current global sequence counter to the command packet
+ * at offset 0x10 and increments it. Used for ordering commands. */
+
 // FUNCTION: SERVER 0x1000f080
 int __cdecl cm_AssignSequenceCounter(int param_1, char* param_2)
 {

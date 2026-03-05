@@ -61,6 +61,10 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
+/* Validation handler: checks preconditions for election ('elec')
+ * or trade ('buy ') commands by resolving the entity and
+ * verifying timing constraints against g_something_1. */
+
 // FUNCTION: SERVER 0x1000d060
 int __cdecl cm_ChkElectionOrTrade(int param_1)
 {

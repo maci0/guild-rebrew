@@ -17,6 +17,11 @@ extern char g_100358a0[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
+/* Validation handler: checks preconditions for joining or
+ * leaving an election. For 'join', verifies player isn't already
+ * in the election slots and an empty slot exists. For 'leav',
+ * verifies the player is actually in a slot. */
+
 // FUNCTION: SERVER 0x1000d110
 int __cdecl cm_ChkJoinLeaveElection(int* param_1)
 {

@@ -2,7 +2,6 @@
 // ORIGIN: GAME
 // SIZE: 3
 
-
 /*
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: EXACT
@@ -18,8 +17,10 @@
  * }
  */
 
+/* Chain handler: no-op stub that always returns 0. */
+
 // FUNCTION: SERVER 0x1000f3a0
 int __cdecl cm_ChainNoop(void)
 {
-    return 0;
+	return 0;
 }

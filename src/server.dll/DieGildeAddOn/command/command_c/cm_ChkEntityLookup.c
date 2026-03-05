@@ -30,6 +30,10 @@
 
 #include "../command_internal.h"
 
+/* Validation handler: looks up an entity by ID from offset 0x10
+ * of the command. Returns 1 (fail) if no entity found, 0 on
+ * success. Clears param_2[1] if result buffer is non-null. */
+
 // FUNCTION: SERVER 0x1000ff30
 int __cdecl cm_ChkEntityLookup(int param_1, char* param_2)
 {
