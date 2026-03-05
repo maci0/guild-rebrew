@@ -195,10 +195,6 @@
 // LIBRARY: SERVER 0x10008800
 // set_data_type
 
-// SIZE: 31
-// LIBRARY: SERVER 0x10008880
-// bit_reverse
-
 // SIZE: 139
 // LIBRARY: SERVER 0x100088a0
 // bi_flush
@@ -214,9 +210,5 @@
 // SIZE: 19
 // LIBRARY: SERVER 0x100092e0
 // zcalloc
-
-// SIZE: 12
-// LIBRARY: SERVER 0x10009300
-// free_wrap
 
 #endif

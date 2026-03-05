@@ -478,10 +478,6 @@
 // LIBRARY: SERVER 0x1002246A
 // ___shr_12
 
-// SIZE: 199
-// LIBRARY: SERVER 0x10022497
-// __ld12cvt
-
 // SIZE: 1185
 // LIBRARY: SERVER 0x1002255E
 // ___strgtold12
@@ -521,5 +517,435 @@
 // SIZE: 40
 // LIBRARY: SERVER 0x10023812
 // __strdup
+
+
+// --- CRT internal functions (custom Ghidra names, no PDB symbols) ---
+
+// SIZE: 78
+// LIBRARY: SERVER 0x1001A207
+// _fputs
+
+// SIZE: 49
+// LIBRARY: SERVER 0x1001A255
+// _crt_locked_read
+
+// SIZE: 141
+// LIBRARY: SERVER 0x1001A49A
+// _SeekFileHandleUnlocked
+
+// SIZE: 163
+// LIBRARY: SERVER 0x1001A6A1
+// _doexit
+
+// SIZE: 9
+// LIBRARY: SERVER 0x1001A746
+// lock_0d
+
+// SIZE: 9
+// LIBRARY: SERVER 0x1001A74F
+// unlock_0d
+
+// SIZE: 26
+// LIBRARY: SERVER 0x1001A758
+// _initterm
+
+// SIZE: 115
+// LIBRARY: SERVER 0x1001A772
+// _dosmaperr
+
+// SIZE: 9
+// LIBRARY: SERVER 0x1001A89C
+// unlock_09a
+
+// SIZE: 9
+// LIBRARY: SERVER 0x1001A8FB
+// unlock_09b
+
+// SIZE: 47
+// LIBRARY: SERVER 0x1001A931
+// _crt_locked_call4a
+
+// SIZE: 9
+// LIBRARY: SERVER 0x1001ABEB
+// unlock_09c
+
+// SIZE: 9
+// LIBRARY: SERVER 0x1001AC43
+// unlock_09d
+
+// SIZE: 47
+// LIBRARY: SERVER 0x1001AC70
+// __alloca_probe
+
+// SIZE: 9
+// LIBRARY: SERVER 0x1001AD29
+// signal_lock
+
+// SIZE: 164
+// LIBRARY: SERVER 0x1001AD32
+// __flsall
+
+// SIZE: 56
+// LIBRARY: SERVER 0x1001B088
+// init_fptrs
+
+// SIZE: 111
+// LIBRARY: SERVER 0x1001B0C0
+// crt_toupper
+
+// SIZE: 664
+// LIBRARY: SERVER 0x1001B200
+// _memmove2
+
+// SIZE: 13
+// LIBRARY: SERVER 0x1001B535
+// set_errno
+
+// SIZE: 9
+// LIBRARY: SERVER 0x1001B757
+// unlock_09e
+
+// SIZE: 11
+// LIBRARY: SERVER 0x1001B8A5
+// _unlock_9
+
+// SIZE: 47
+// LIBRARY: SERVER 0x1001BB60
+// _lock_stream
+
+// SIZE: 47
+// LIBRARY: SERVER 0x1001BBB2
+// _unlock_stream
+
+// SIZE: 43
+// LIBRARY: SERVER 0x1001BCE4
+// _free_buf
+
+// SIZE: 42
+// LIBRARY: SERVER 0x1001BD9C
+// crt_cond_cleanup
+
+// SIZE: 53
+// LIBRARY: SERVER 0x1001C8DC
+// _write_char
+
+// SIZE: 49
+// LIBRARY: SERVER 0x1001C911
+// _write_multi_char
+
+// SIZE: 56
+// LIBRARY: SERVER 0x1001C942
+// _write_string
+
+// SIZE: 13
+// LIBRARY: SERVER 0x1001C97A
+// _stream_read_dword
+
+// SIZE: 16
+// LIBRARY: SERVER 0x1001C987
+// _stream_read_qword
+
+// SIZE: 14
+// LIBRARY: SERVER 0x1001C997
+// _stream_read_word
+
+// SIZE: 84
+// LIBRARY: SERVER 0x1001CB61
+// _ioterm
+
+// SIZE: 202
+// LIBRARY: SERVER 0x1001CC8D
+// _asctime
+
+// SIZE: 40
+// LIBRARY: SERVER 0x1001CD57
+// _format_digits
+
+// SIZE: 352
+// LIBRARY: SERVER 0x1001CD7F
+// _localtime
+
+// SIZE: 41
+// LIBRARY: SERVER 0x1001CFA1
+// crt_delete_cs
+
+// SIZE: 108
+// LIBRARY: SERVER 0x1001CFCA
+// crt_delete_locks
+
+// SIZE: 30
+// LIBRARY: SERVER 0x1001D100
+// crt_close_handle
+
+// SIZE: 19
+// LIBRARY: SERVER 0x1001D11E
+// set_vtable
+
+// SIZE: 27
+// LIBRARY: SERVER 0x1001D238
+// crt_gfunc_call
+
+// SIZE: 45
+// LIBRARY: SERVER 0x1001D253
+// crt_get_osver
+
+// SIZE: 93
+// LIBRARY: SERVER 0x1001D3C8
+// crt_heap_init
+
+// SIZE: 43
+// LIBRARY: SERVER 0x1001D515
+// crt_find_entry
+
+// SIZE: 86
+// LIBRARY: SERVER 0x1001E158
+// __sbh_decommit_pages
+
+// SIZE: 69
+// LIBRARY: SERVER 0x1001E2C7
+// update_page_entry
+
+// SIZE: 34
+// LIBRARY: SERVER 0x1001E704
+// _seh_filter
+
+// SIZE: 35
+// LIBRARY: SERVER 0x1001E78E
+// _ValidateEH3RN
+
+// SIZE: 24
+// LIBRARY: SERVER 0x1001E7BA
+// _EH3_save_context
+
+// SIZE: 197
+// LIBRARY: SERVER 0x1001E7D4
+// exsup
+
+// SIZE: 27
+// LIBRARY: SERVER 0x1001E899
+// seh_local_unwind_thunk
+
+// SIZE: 101
+// LIBRARY: SERVER 0x1001E8B4
+// crt_write_wrap
+
+// SIZE: 101
+// LIBRARY: SERVER 0x1001EEC1
+// _crt_lseek_wrap
+
+// SIZE: 147
+// LIBRARY: SERVER 0x1001F0FF
+// crt_commit
+
+// SIZE: 18
+// LIBRARY: SERVER 0x1001F192
+// crt_const_call
+
+// SIZE: 62
+// LIBRARY: SERVER 0x1001F1A4
+// ___IsNonwritableInCurrentImage
+
+// SIZE: 41
+// LIBRARY: SERVER 0x1001F1E2
+// __IsProcessorFeaturePresent
+
+// SIZE: 97
+// LIBRARY: SERVER 0x1001F309
+// __ecvt
+
+// SIZE: 85
+// LIBRARY: SERVER 0x1001F42C
+// __fcvt
+
+// SIZE: 147
+// LIBRARY: SERVER 0x1001F528
+// ___cfltcvt_g
+
+// SIZE: 37
+// LIBRARY: SERVER 0x1001F60C
+// _crt_strcpy_advance
+
+// SIZE: 7
+// LIBRARY: SERVER 0x1001F8D0
+// CopyCString
+
+// SIZE: 436
+// LIBRARY: SERVER 0x1001FB12
+// _parse_cmdline
+
+// SIZE: 57
+// LIBRARY: SERVER 0x1001FDF8
+// crt_runtime_error
+
+// SIZE: 9
+// LIBRARY: SERVER 0x1002001D
+// unlock_09f
+
+// SIZE: 9
+// LIBRARY: SERVER 0x100200A6
+// unlock_09g
+
+// SIZE: 127
+// LIBRARY: SERVER 0x100202E1
+// free_osfhnd
+
+// SIZE: 34
+// LIBRARY: SERVER 0x10020401
+// slot_unlock
+
+// SIZE: 41
+// LIBRARY: SERVER 0x10020423
+// slot_check_flag
+
+// SIZE: 68
+// LIBRARY: SERVER 0x1002071B
+// crt_buf_alloc
+
+// SIZE: 46
+// LIBRARY: SERVER 0x10020915
+// crt_once_init
+
+// SIZE: 33
+// LIBRARY: SERVER 0x10020BCA
+// _crt_locked_call
+
+// SIZE: 428
+// LIBRARY: SERVER 0x10020BEB
+// __isindst_lk
+
+// SIZE: 320
+// LIBRARY: SERVER 0x10020D97
+// cvtdate
+
+// SIZE: 266
+// LIBRARY: SERVER 0x10020ED7
+// _gmtime_lk
+
+// SIZE: 23
+// LIBRARY: SERVER 0x10020FE1
+// call_with_zero
+
+// SIZE: 517
+// LIBRARY: SERVER 0x10020FF8
+// _strtoxl
+
+// SIZE: 22
+// LIBRARY: SERVER 0x100212CD
+// clear_bit_call
+
+// SIZE: 146
+// LIBRARY: SERVER 0x100212E3
+// crt_cvt_osflag
+
+// SIZE: 137
+// LIBRARY: SERVER 0x10021375
+// _abstract_cw
+
+// SIZE: 111
+// LIBRARY: SERVER 0x100213FE
+// crt_tolower_wrapper
+
+// SIZE: 73
+// LIBRARY: SERVER 0x10021538
+// _check_bits_clear
+
+// SIZE: 86
+// LIBRARY: SERVER 0x10021581
+// set_bit_range
+
+// SIZE: 140
+// LIBRARY: SERVER 0x100215D7
+// ___sbh_dealloc_bitmap
+
+// SIZE: 27
+// LIBRARY: SERVER 0x10021663
+// copy_3dwords
+
+// SIZE: 12
+// LIBRARY: SERVER 0x1002167E
+// zero_12bytes
+
+// SIZE: 27
+// LIBRARY: SERVER 0x1002168A
+// check_all_zero
+
+// SIZE: 141
+// LIBRARY: SERVER 0x100216A5
+// ___sbh_bitmap_shift
+
+// SIZE: 22
+// LIBRARY: SERVER 0x1002189E
+// wrapper_ctx1
+
+// SIZE: 22
+// LIBRARY: SERVER 0x100218B4
+// wrapper_ctx2
+
+// SIZE: 74
+// LIBRARY: SERVER 0x10021EC0
+// __crtGetACP_getcodepage
+
+// SIZE: 51
+// LIBRARY: SERVER 0x10021F0A
+// code_translate
+
+// SIZE: 41
+// LIBRARY: SERVER 0x10021F3D
+// CrtIoInfoInit
+
+// SIZE: 389
+// LIBRARY: SERVER 0x10021F66
+// _setSBUpLow
+
+// SIZE: 28
+// LIBRARY: SERVER 0x100220EB
+// _crt_cinit_once
+
+// SIZE: 137
+// LIBRARY: SERVER 0x10022107
+// __crtLoadWinAPI
+
+// SIZE: 33
+// LIBRARY: SERVER 0x100223BD
+// overflow_add
+
+// SIZE: 208
+// LIBRARY: SERVER 0x10022CD0
+// __stricmp
+
+// SIZE: 27
+// LIBRARY: SERVER 0x10022F29
+// __allmul_slow
+
+// SIZE: 110
+// LIBRARY: SERVER 0x10022F83
+// __wenvsetup
+
+// SIZE: 124
+// LIBRARY: SERVER 0x10023211
+// _mantold_shl
+
+// SIZE: 88
+// LIBRARY: SERVER 0x100236BC
+// _crt_env_search
+
+// SIZE: 103
+// LIBRARY: SERVER 0x10023714
+// _copy_environ
+
+
+// --- zlib internal functions (custom Ghidra names, not in PDB) ---
+
+// SIZE: 31
+// LIBRARY: SERVER 0x10008880
+// bit_reverse
+
+// SIZE: 12
+// LIBRARY: SERVER 0x10009300
+// free_wrap
+
+// SIZE: 199
+// LIBRARY: SERVER 0x10022497
+// ___ld12cvt
 
 #endif
