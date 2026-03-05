@@ -3,14 +3,14 @@
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
 extern char* g_table;
-extern int __cdecl ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
+extern int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern int __cdecl random_mod(int range);
 extern float __cdecl RandomFloat01(void);
 extern int __cdecl crt_ftol(void);
 extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* tag);
-extern void* __cdecl StartEntityQuery(int, int, int, ...);
-extern int __cdecl RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
+extern void* __cdecl gm_StartEntityQuery(int, int, int, ...);
+extern int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
 extern void __cdecl AddOrAccumulateObject(int p1, int p2, int p3);
 extern int __cdecl RefreshMarketAvailability(int season);
 extern float fColorScale;
@@ -18,12 +18,12 @@ extern int DAT_10030b6c;
 extern char DAT_10035439;
 extern float DAT_100256cc;
 extern float DAT_100256a0;
-extern void* __cdecl LookupEntityRecordById(int entityId);
+extern void* __cdecl gm_LookupEntityRecordById(int entityId);
 extern void __cdecl DeallocEntity(int entity, int param);
 extern char s__ahm_AllocAhmInfo_1002a0f7[];
 extern double dScaleFactor;
 extern int DAT_1002c050[];
-extern unsigned short* __cdecl NextEntityQueryMatch(void);
+extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 extern int* __cdecl LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
@@ -48,10 +48,10 @@ typedef struct {
 // ORIGIN: GAME
 // SIZE: 130
 // FUNCTION: SERVER 0x1000BD50
-// reset_entity_state
+// ahm_ResetEntityState
 void* memset(void*, int, unsigned int);
 
-void __cdecl reset_entity_state(char* param_1)
+void __cdecl ahm_ResetEntityState(char* param_1)
 {
 	unsigned int* ptr;
 
@@ -67,9 +67,9 @@ void __cdecl reset_entity_state(char* param_1)
 // STATUS: RELOC
 // SIZE: 70
 // FUNCTION: SERVER 0x1000BDA0
-// check_flag
+// ahm_CheckFlag
 
-int __cdecl check_flag(char* p)
+int __cdecl ahm_CheckFlag(char* p)
 {
 	unsigned char idx;
 	char* sub;
@@ -147,7 +147,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 	unsigned char* target_building;
 	int col_idx;
 
-	ResolveEntityById((void**) &target_building, 0, 0, *(int*) (param_1 + 8));
+	gm_ResolveEntityById((void**) &target_building, 0, 0, *(int*) (param_1 + 8));
 	if (target_building == 0) {
 		err_msg = "ahm_ExAllocAlchemist: cant find target geb...";
 		alloc_result = 0x449;
@@ -272,11 +272,11 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			*(char*) (*(int*) (target_building + 0x65) + 10) = *(char*) (param_1 + 0xe);
 			*(char*) (*(int*) (target_building + 0x65) + 0xb) = *(char*) (param_1 + 0xf);
 			*(char*) (*(int*) (target_building + 0x65) + 0xc) = *(char*) (param_1 + 0x14);
-			idx = (int) StartEntityQuery(*(int*) (target_building + 0x5d), 2, 6, 0, 0xff);
+			idx = (int) gm_StartEntityQuery(*(int*) (target_building + 0x5d), 2, 6, 0, 0xff);
 			if (idx != 0) {
 				obj_node = *(unsigned short**) (idx + 0x14);
 				while (obj_node != 0) {
-					RemoveObjectByType((void**) (idx + 0x14), *obj_node);
+					gm_RemoveObjectByType((void**) (idx + 0x14), *obj_node);
 					obj_node = *(unsigned short**) (idx + 0x14);
 				}
 			}
@@ -300,9 +300,9 @@ code_r0x1000be9f:
 // ORIGIN: GAME
 // SIZE: 160
 // FUNCTION: SERVER 0x1000c1e0
-// ApplyColorComponent
+// ahm_ApplyColorComponent
 
-int __cdecl ApplyColorComponent(char* param_1, char* param_2)
+int __cdecl ahm_ApplyColorComponent(char* param_1, char* param_2)
 {
 	switch (*(int*) (param_1 + 8)) {
 	case 0:
@@ -326,9 +326,9 @@ int __cdecl ApplyColorComponent(char* param_1, char* param_2)
 // ORIGIN: GAME
 // SIZE: 130
 // FUNCTION: SERVER 0x1000c280
-// AllocateEntitySlot
+// ahm_AllocateEntitySlot
 
-int __cdecl AllocateEntitySlot(int param_1, int param_2, int param_3)
+int __cdecl ahm_AllocateEntitySlot(int param_1, int param_2, int param_3)
 {
 	int* slot_ptr;
 	void* query_result;
@@ -338,7 +338,7 @@ int __cdecl AllocateEntitySlot(int param_1, int param_2, int param_3)
 	slot_ptr = (int*) (param_2 + 0xc);
 	do {
 		if (*slot_ptr == 0) {
-			query_result = StartEntityQuery(*(int*) (param_3 + 0x5d), 2, 6, 0, 0xff);
+			query_result = gm_StartEntityQuery(*(int*) (param_3 + 0x5d), 2, 6, 0, 0xff);
 			*(int*) (param_1 + 0x14) = DAT_10030b6c;
 			*(int*) (param_2 + 0xc + i * 8) = *(int*) (param_1 + 8);
 			*(int*) (param_2 + 0x10 + i * 8) = *(int*) (param_1 + 0x10);
@@ -360,9 +360,9 @@ int __cdecl AllocateEntitySlot(int param_1, int param_2, int param_3)
 // BLOCKER_DELTA: 110
 // SIZE: 110
 // FUNCTION: SERVER 0x1000C310
-// slot_clear_match
+// ahm_SlotClearMatch
 
-int __cdecl slot_clear_match(char* data, char* target, char* src)
+int __cdecl ahm_SlotClearMatch(char* data, char* target, char* src)
 {
 	int i;
 	char* slot_ptr;
@@ -380,9 +380,9 @@ int __cdecl slot_clear_match(char* data, char* target, char* src)
 	}
 	return 0;
 found:
-	ent = (int) StartEntityQuery(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
+	ent = (int) gm_StartEntityQuery(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
 	if (ent) {
-		RemoveObjectByType((void**) (ent + 0x14), *(unsigned int*) (data + 8));
+		gm_RemoveObjectByType((void**) (ent + 0x14), *(unsigned int*) (data + 8));
 	}
 	*(int*) (target + i * 8 + 0xc) = 0;
 	*(int*) (target + i * 8 + 0x10) = 0;
@@ -393,9 +393,9 @@ found:
 // ORIGIN: GAME
 // SIZE: 51
 // FUNCTION: SERVER 0x1000C380
-// search_and_set
+// ahm_SearchAndSet
 
-int __cdecl search_and_set(SRC* src, TGT* tgt)
+int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 {
 	int i;
 	for (i = 0; i < 6; i++) {
@@ -413,9 +413,9 @@ int __cdecl search_and_set(SRC* src, TGT* tgt)
 // SIZE: 83
 // BLOCKER_DELTA: 47
 // FUNCTION: SERVER 0x1000c3c0
-// ClampFloatValue
+// ahm_ClampFloatValue
 
-int __cdecl ClampFloatValue(int param_1, int param_2)
+int __cdecl ahm_ClampFloatValue(int param_1, int param_2)
 {
 	float sum;
 
@@ -436,18 +436,18 @@ int __cdecl ClampFloatValue(int param_1, int param_2)
 // ORIGIN: GAME
 // SIZE: 166
 // FUNCTION: SERVER 0x1000c420
-// FireEntityAndCleanup
+// ahm_FireEntityAndCleanup
 
-int __cdecl FireEntityAndCleanup(int param_1, int* param_2, int param_3)
+int __cdecl ahm_FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 {
 	unsigned short* entity;
 	void* query_result;
 	unsigned int* slot_iter;
 	int count;
 
-	entity = (unsigned short*) LookupEntityRecordById(*param_2);
+	entity = (unsigned short*) gm_LookupEntityRecordById(*param_2);
 	if (entity != (unsigned short*) 0) {
-		query_result = StartEntityQuery(*(int*) (param_3 + 0x5d), 2, 6, 0, 0xff);
+		query_result = gm_StartEntityQuery(*(int*) (param_3 + 0x5d), 2, 6, 0, 0xff);
 		*(int*) (entity + 0xb8) = 0;
 		*(int*) (entity + 0xb6) = 0;
 		slot_iter = (unsigned int*) (param_2 + 3);
@@ -455,7 +455,7 @@ int __cdecl FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 		do {
 			if (*slot_iter != 0) {
 				if (query_result != (void*) 0) {
-					RemoveObjectByType((void**) ((int) query_result + 0x14), *slot_iter);
+					gm_RemoveObjectByType((void**) ((int) query_result + 0x14), *slot_iter);
 				}
 				*slot_iter = 0;
 				slot_iter[1] = 0;
@@ -555,11 +555,11 @@ int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 // ORIGIN: GAME
 // SIZE: 109
 // FUNCTION: SERVER 0x1000c600
-// InitRandomEntity
+// ahm_InitRandomEntity
 
-int __cdecl RandomBelow(unsigned short max);
+int __cdecl ahm_RandomBelow(unsigned short max);
 
-char* __cdecl InitRandomEntity(void)
+char* __cdecl ahm_InitRandomEntity(void)
 {
 	unsigned int idx;
 	int tries;
@@ -567,7 +567,7 @@ char* __cdecl InitRandomEntity(void)
 	int i;
 	int offset;
 
-	idx = (unsigned short) RandomBelow(0x20);
+	idx = (unsigned short) ahm_RandomBelow(0x20);
 	tries = 0x20;
 	do {
 		if (*(char*) (0x1002a2c2 + idx * 0xf4) == '\0') {
@@ -623,10 +623,10 @@ int __cdecl QueryEntityBuildingType(int param_1)
 	unsigned short* entity;
 	int table_entry;
 
-	entity = StartEntityQuery(*(int*) (param_1 + 0x178), 1, 5);
+	entity = gm_StartEntityQuery(*(int*) (param_1 + 0x178), 1, 5);
 	if (entity != (unsigned short*) 0) {
 		while (table_entry = (int) LookupEntityInTable(*entity), table_entry == 0) {
-			entity = NextEntityQueryMatch();
+			entity = gm_NextEntityQueryMatch();
 			if (entity == (unsigned short*) 0) {
 				LookupEntityInTable(0);
 				return 0;

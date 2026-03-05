@@ -21,7 +21,7 @@ extern int DAT_101de5a4;
 extern char DAT_101de5a8;
 extern int DAT_101de5ac;
 extern char DAT_101de5b0;
-extern void* __cdecl LookupEntityRecordById(int);
+extern void* __cdecl amt_LookupEntityRecordById(int);
 extern int DAT_101de5b4[];
 extern ENT g_ents[];
 extern ENT g_ents2[];
@@ -36,18 +36,18 @@ extern void __cdecl InitBuildingTypeTable(void);
 // SIZE: 205
 // BLOCKER_DELTA: 196
 // FUNCTION: SERVER 0x1000b1c0
-// ValidateOfficeCandidate
+// amt_ValidateOfficeCandidate
 
-void* __cdecl LookupEntityRecordById(int entityId);
+void* __cdecl amt_LookupEntityRecordById(int entityId);
 
-int __cdecl ValidateOfficeCandidate(int* param_1)
+int __cdecl amt_ValidateOfficeCandidate(int* param_1)
 {
 	void* entity_rec;
 	char* slot_ptr;
 	int slot_index;
 	int dep_slot_index;
 
-	entity_rec = LookupEntityRecordById(*param_1);
+	entity_rec = amt_LookupEntityRecordById(*param_1);
 	if ((entity_rec != (void*) 0) && (*(char*) ((int) entity_rec + 0x168) == '\0')) {
 		slot_index = 0;
 		slot_ptr = (char*)&DAT_101de5a0;
@@ -127,7 +127,7 @@ unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 	unsigned int role_def_buf[4];
 	int dep_slot_status = 0;
 
-	entity_rec = LookupEntityRecordById(*param_1);
+	entity_rec = amt_LookupEntityRecordById(*param_1);
 	if (((entity_rec != 0) && (*entity_rec != -1)) && (*(char*) (entity_rec + 0xb4) == '\0')) {
 		slot_index = 0;
 		slot_ptr = (char*) 0x101de5a0;
@@ -216,9 +216,9 @@ unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 // ORIGIN: GAME
 // SIZE: 133
 // FUNCTION: SERVER 0x1000b440
-// ValidateCommand
+// amt_ValidateCommand
 
-int __cdecl ValidateCommand(char* param_1)
+int __cdecl amt_ValidateCommand(char* param_1)
 {
 	char* slot_ptr;
 	void* entity_rec;
@@ -244,13 +244,13 @@ int __cdecl ValidateCommand(char* param_1)
 			return 0;
 		}
 		if (*(int*) (param_1 + 7) != -1) {
-			entity_rec = LookupEntityRecordById(*(int*) (param_1 + 7));
+			entity_rec = amt_LookupEntityRecordById(*(int*) (param_1 + 7));
 			if (entity_rec == (void*) 0) {
 				return 0;
 			}
 		}
 		if (*(int*) (param_1 + 1) != -1) {
-			entity_rec = LookupEntityRecordById(*(int*) (param_1 + 1));
+			entity_rec = amt_LookupEntityRecordById(*(int*) (param_1 + 1));
 			if (entity_rec == (void*) 0) {
 				return 0;
 			}
@@ -263,7 +263,7 @@ int __cdecl ValidateCommand(char* param_1)
 // ORIGIN: GAME
 // BLOCKER: jump condition swap
 // BLOCKER_DELTA: 119
-// ANALYSIS: Iterates through a fixed validation table at g_office_table looking for a matching command_type. Once found, verifies conditions including checking if entity_ids in the payload actually map to existing objects using LookupEntityRecordById. Returns 1 if valid, 0 if invalid.
+// ANALYSIS: Iterates through a fixed validation table at g_office_table looking for a matching command_type. Once found, verifies conditions including checking if entity_ids in the payload actually map to existing objects using amt_LookupEntityRecordById. Returns 1 if valid, 0 if invalid.
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // SIZE: 836
 // FUNCTION: SERVER 0x1000b4d0
@@ -285,7 +285,7 @@ int __cdecl ExecuteOfficeAssignment(char* param_1)
 
 	/* Validate associated entity if present */
 	if (*(int*) (param_1 + 7) != -1) {
-		if (LookupEntityRecordById(*(int*) (param_1 + 7)) == 0) {
+		if (amt_LookupEntityRecordById(*(int*) (param_1 + 7)) == 0) {
 			return 0;
 		}
 	}
@@ -293,7 +293,7 @@ int __cdecl ExecuteOfficeAssignment(char* param_1)
 	/* Get owner entity */
 	ent = 0;
 	if (*(int*) (param_1 + 1) != -1) {
-		ent = (int)LookupEntityRecordById(*(int*) (param_1 + 1));
+		ent = (int)amt_LookupEntityRecordById(*(int*) (param_1 + 1));
 		if (ent == 0) {
 			return 0;
 		}
@@ -326,7 +326,7 @@ int __cdecl ExecuteOfficeAssignment(char* param_1)
 	record_off = record_index * 0x18;
 
 	/* Lookup existing owner and clear old role references */
-	old_owner = (int)LookupEntityRecordById(*(int*) (record_off + 0x101de5a4));
+	old_owner = (int)amt_LookupEntityRecordById(*(int*) (record_off + 0x101de5a4));
 	if (old_owner != 0 && *(int*) (old_owner + 4) != *(int*) (param_1 + 1)) {
 		char role;
 		role = *(char*) (record_off + 0x101de5a8);
@@ -547,9 +547,9 @@ final_store:
 // STATUS: RELOC
 // SIZE: 42
 // FUNCTION: SERVER 0x1000B820
-// find_entity_26
+// amt_FindEntity26
 
-void __cdecl find_entity_26(int val)
+void __cdecl amt_FindEntity26(int val)
 {
 	unsigned int i;
 	for (i = 0x29; i != 0; i--) {
@@ -564,9 +564,9 @@ void __cdecl find_entity_26(int val)
 // ORIGIN: GAME
 // SIZE: 42
 // FUNCTION: SERVER 0x1000B850
-// find_entity_27
+// amt_FindEntity27
 
-void __cdecl find_entity_27(int val)
+void __cdecl amt_FindEntity27(int val)
 {
 	unsigned int i;
 	for (i = 0x29; i != 0; i--) {
@@ -583,9 +583,9 @@ void __cdecl find_entity_27(int val)
 // SIZE: 263
 // BLOCKER_DELTA: 205
 // FUNCTION: SERVER 0x1000b880
-// SwapOfficeHolders
+// amt_SwapOfficeHolders
 
-int __cdecl SwapOfficeHolders(int* param_1)
+int __cdecl amt_SwapOfficeHolders(int* param_1)
 {
 	int saved_entity_id;
 	void* requester_rec;
@@ -595,7 +595,7 @@ int __cdecl SwapOfficeHolders(int* param_1)
 	int slot_index_a;
 	int slot_index_b;
 
-	requester_rec = LookupEntityRecordById(*param_1);
+	requester_rec = amt_LookupEntityRecordById(*param_1);
 	if (requester_rec == (void*) 0) {
 		return 0;
 	}
@@ -614,7 +614,7 @@ int __cdecl SwapOfficeHolders(int* param_1)
 	if (slot_scan == (SlotEntry*) 0) {
 		return 0;
 	}
-	entity_rec_a = LookupEntityRecordById(DAT_101de5a0[slot_index_a].entityId);
+	entity_rec_a = amt_LookupEntityRecordById(DAT_101de5a0[slot_index_a].entityId);
 	if (entity_rec_a == (void*) 0) {
 		return 0;
 	}
@@ -630,7 +630,7 @@ int __cdecl SwapOfficeHolders(int* param_1)
 	if (slot_scan == (SlotEntry*) 0) {
 		return 0;
 	}
-	entity_rec_b = LookupEntityRecordById(DAT_101de5a0[slot_index_b].entityId);
+	entity_rec_b = amt_LookupEntityRecordById(DAT_101de5a0[slot_index_b].entityId);
 	if (entity_rec_b == (void*) 0) {
 		return 0;
 	}
@@ -649,9 +649,9 @@ int __cdecl SwapOfficeHolders(int* param_1)
 // SIZE: 157
 // BLOCKER_DELTA: 146
 // FUNCTION: SERVER 0x1000b990
-// ClearEntityLinks
+// amt_ClearEntityLinks
 
-int __cdecl ClearEntityLinks(int param_1)
+int __cdecl amt_ClearEntityLinks(int param_1)
 {
 	int result;
 	int* p;
@@ -694,9 +694,9 @@ int __cdecl ClearEntityLinks(int param_1)
 // BLOCKER_DELTA: 178
 // ANALYSIS: Iterates through the command execution tracker table at g_office_secondary_id_base to detach or update a specific entity's links and pending sequence numbers. Used when an entity changes state abruptly or is being removed.
 // FUNCTION: SERVER 0x1000ba30
-// UpdateEntityLinks
+// amt_UpdateEntityLinks
 
-void __cdecl UpdateEntityLinks(int param_1, int param_2)
+void __cdecl amt_UpdateEntityLinks(int param_1, int param_2)
 {
 	unsigned short player_count;
 	int* slot_scan;

@@ -87,10 +87,10 @@ extern char s_incorrect_data_check_10027548[21]; /* 0x10027548, 21 bytes */
 extern char s_incorrect_header_check_10027560[23]; /* 0x10027560, 23 bytes */
 extern char s_invalid_window_size_10027578[20]; /* 0x10027578, 20 bytes */
 extern char s_unknown_compression_method_1002758c[27]; /* 0x1002758C, 27 bytes */
-extern unsigned char fixed_bl[4]; /* 0x100275A8, 4 bytes */
-extern unsigned char fixed_bd[4]; /* 0x100275AC, 4 bytes */
-extern unsigned char fixed_tl[1]; /* 0x100275B0, 1 bytes */
-extern unsigned char fixed_td[1]; /* 0x100285B0, 1 bytes */
+extern unsigned char g_fixed_bl[4]; /* 0x100275A8, 4 bytes */
+extern unsigned char g_fixed_bd[4]; /* 0x100275AC, 4 bytes */
+extern unsigned char g_fixed_tl[1]; /* 0x100275B0, 1 bytes */
+extern unsigned char g_fixed_td[1]; /* 0x100285B0, 1 bytes */
 extern char s_incomplete_dynamic_bit_lengths_t_100286b0[36]; /* 0x100286B0, 36 bytes */
 extern char s_oversubscribed_dynamic_bit_lengt_100286d4[40]; /* 0x100286D4, 40 bytes */
 extern char s_incomplete_literal_length_tree_100286fc[31]; /* 0x100286FC, 31 bytes */
@@ -629,7 +629,7 @@ extern unsigned char g_query_result_ids[1]; /* 0x101398A0, 1 bytes */
 extern unsigned char g_1014d8c0[4]; /* 0x1014D8C0, 4 bytes */
 extern unsigned char g_relationship_matrix_secondary[1]; /* 0x1014D8E0, 1 bytes */
 extern unsigned char g_production_lookup[4]; /* 0x101DD8E0, 4 bytes */
-extern unsigned char unknown[4]; /* 0x101DE450, 4 bytes */
+extern unsigned char g_unknown_1de450[4]; /* 0x101DE450, 4 bytes */
 extern unsigned char g_plant_count[4]; /* 0x101DE454, 4 bytes */
 extern unsigned char g_savegame_version_loaded[4]; /* 0x101DE460, 4 bytes */
 extern unsigned char g_game_mode_flags[1]; /* 0x101DE464, 1 bytes */

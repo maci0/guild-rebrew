@@ -8,7 +8,7 @@
  * Common extern declarations shared by command handler .c files.
  * Only includes functions/globals with IDENTICAL signatures across all usage.
  * Functions with per-file signature variations (LogMessageInternal,
- * AllocGameObject, StartEntityQuery, etc.) must remain declared locally.
+ * gm_AllocObjekt, gm_StartEntityQuery, etc.) must remain declared locally.
  *
  * NOTE: game_structs.h provides PlayerSlot with data at offset 8.
  * Files that define local player_slot/TradePlayerSlot structs with custom
@@ -17,8 +17,8 @@
 
 /* Entity resolution and lookup */
 extern int __cdecl get_field_by_type(char*, int);
-extern int __cdecl ResolveEntityById(void**, void**, void**, int);
-extern int __cdecl LookupEntityRecordById(int);
+extern int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
+extern int __cdecl gm_LookupEntityRecordById(int);
 extern int __cdecl QueryEntitySum(int, int);
 
 /* CRT / thread */

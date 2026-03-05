@@ -18,7 +18,7 @@
 #include "../command_internal.h"
 
 extern char g_empty_string[];
-extern char* unknown;
+extern char* g_unknown_1de450;
 extern unsigned char g_current_season;
 
 extern int __cdecl LogMessageInternal(const char*, uint, const char*, int);
@@ -88,7 +88,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 		return 1;
 	}
 	quantity = *(int*)(msg + 0x16);
-	recipe_def = unknown + (uint)*(ushort*)(msg + 0x14) * 0x41;
+	recipe_def = g_unknown_1de450 + (uint)*(ushort*)(msg + 0x14) * 0x41;
 	saved_quantity = 4;
 	material_iter = (ushort*)(recipe_def + 0x26);
 	do {

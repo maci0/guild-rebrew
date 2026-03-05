@@ -2,7 +2,7 @@ extern unsigned short random_mod(unsigned int);
 extern unsigned int __cdecl CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 extern void __cdecl table_lookup(unsigned int a, unsigned short* b);
 extern int DAT_100a8c30;
-extern void __cdecl StartEntityQuery(int, int, int, ...);
+extern void __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern unsigned int __cdecl FindAndMatchParents(int param);
 extern void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
 extern unsigned char DAT_10035a04;
@@ -128,9 +128,9 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 // SIZE: 83
 // ANALYSIS: Updates priority tracking for dynamic entity dispatch/update lists. Limits simultaneous update weight using GetStatPair constraints.
 // FUNCTION: SERVER 0x10015400
-// priority_update
+// sim_PriorityUpdate
 
-void __cdecl priority_update(char* ctx, char* entity)
+void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 {
 	unsigned short info[2];
 	unsigned char type;
@@ -156,9 +156,9 @@ void __cdecl priority_update(char* ctx, char* entity)
 // ORIGIN: GAME
 // SIZE: 145
 // FUNCTION: SERVER 0x10015460
-// StartEntityQueryByType
+// sim_StartEntityQueryByType
 
-void __cdecl StartEntityQueryByType(unsigned char* param_1)
+void __cdecl sim_StartEntityQueryByType(unsigned char* param_1)
 {
 	char entity_kind;
 	int owner;
@@ -166,19 +166,19 @@ void __cdecl StartEntityQueryByType(unsigned char* param_1)
 	entity_kind = *(char*) (DAT_100a8c30 + (unsigned int) *param_1 * 0x24d);
 	owner = *(int*) (param_1 + 0x5d);
 	if (entity_kind == '\x01') {
-		StartEntityQuery(owner, 1, 0, 0x12);
+		gm_StartEntityQuery(owner, 1, 0, 0x12);
 		return;
 	}
 	if (entity_kind == '\x02') {
-		StartEntityQuery(owner, 1, 0, 0x13);
+		gm_StartEntityQuery(owner, 1, 0, 0x13);
 		return;
 	}
 	if (entity_kind == '\x1d') {
-		StartEntityQuery(owner, 1, 0, 0xfd);
+		gm_StartEntityQuery(owner, 1, 0, 0xfd);
 		return;
 	}
 	if (entity_kind == '\x16') {
-		StartEntityQuery(owner, 1, 0, 0x120);
+		gm_StartEntityQuery(owner, 1, 0, 0x120);
 	}
 	return;
 }
@@ -287,9 +287,9 @@ int __cdecl AdvanceGameClock(int* param_1, int param_2, int param_3, int param_4
 // STATUS: EXACT
 // SIZE: 41
 // FUNCTION: SERVER 0x10015690
-// SetSyncParams
+// sim_SetSyncParams
 
-void __cdecl SetSyncParams(int param_1, unsigned char param_2, unsigned int param_3, unsigned int param_4)
+void __cdecl sim_SetSyncParams(int param_1, unsigned char param_2, unsigned int param_3, unsigned int param_4)
 {
 	*(unsigned int*) (param_1 + 10) = param_4 & 0xff;
 	*(unsigned short*) (param_1 + 4) = (unsigned short) param_2;

@@ -1573,7 +1573,7 @@ void __cdecl LogWinsockError(int param_1)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x781,
-			"WSAEINVAL: The socket has not been bound with bind, or an unknown flag was specified, or MSG_OOB was "
+			"WSAEINVAL: The socket has not been bound with bind, or an g_unknown_1de450 flag was specified, or MSG_OOB was "
 			"specified for a socket with SO_OOBINLINE enabled or (for byte stream sockets only) len was zero or "
 			"negative.",
 			1

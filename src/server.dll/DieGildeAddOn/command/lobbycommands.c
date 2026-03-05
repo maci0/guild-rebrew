@@ -72,9 +72,9 @@ int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2)
 // SIZE: 236
 // BLOCKER_DELTA: 77
 // FUNCTION: SERVER 0x100146c0
-// SendLobbyConfig
+// lb_SendLobbyConfig
 
-int __cdecl SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
+int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
 {
         PlayerSlot* slot_ptr;
         unsigned int value;
@@ -271,9 +271,9 @@ do_join:
 // SIZE: 157
 // BLOCKER_DELTA: 37
 // FUNCTION: SERVER 0x10014a50
-// broadcast_state_change
+// lb_BroadcastStateChange
 
-int __cdecl broadcast_state_change(unsigned int* param_1, unsigned char* param_2)
+int __cdecl lb_BroadcastStateChange(unsigned int* param_1, unsigned char* param_2)
 {
         int queue_result;
         unsigned int* player_slot;
@@ -312,9 +312,9 @@ int __cdecl broadcast_state_change(unsigned int* param_1, unsigned char* param_2
 // SIZE: 247
 // BLOCKER_DELTA: 49
 // FUNCTION: SERVER 0x10014af0
-// HandleDataTransferCommand
+// lb_HandleDataTransfer
 
-int __cdecl HandleDataTransferCommand(unsigned int* param_1, unsigned char* param_2)
+int __cdecl lb_HandleDataTransfer(unsigned int* param_1, unsigned char* param_2)
 {
         int queue_result;
         unsigned int* slot_iter;
@@ -367,9 +367,9 @@ int __cdecl HandleDataTransferCommand(unsigned int* param_1, unsigned char* para
 // ORIGIN: GAME
 // SIZE: 163
 // FUNCTION: SERVER 0x10014bf0
-// HandleEntitySync
+// lb_HandleEntitySync
 
-int __cdecl HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
+int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
 {
         unsigned int* slot_ptr;
         unsigned int target_id;
@@ -495,19 +495,19 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2)
                 cmd_result = lb_ExPlayerlist(param_1, (unsigned char*) param_2);
                 return cmd_result;
         case 1:
-                cmd_result = SendLobbyConfig(param_1, (unsigned char*) param_2);
+                cmd_result = lb_SendLobbyConfig(param_1, (unsigned char*) param_2);
                 return cmd_result;
         case 2:
                 cmd_result = HandleLobbyCommands((char*)param_1, (char*) param_2);
                 return cmd_result;
         case 3:
-                cmd_result = broadcast_state_change(param_1, (unsigned char*) param_2);
+                cmd_result = lb_BroadcastStateChange(param_1, (unsigned char*) param_2);
                 return cmd_result;
         case 4:
-                cmd_result = HandleDataTransferCommand(param_1, (unsigned char*) param_2);
+                cmd_result = lb_HandleDataTransfer(param_1, (unsigned char*) param_2);
                 return cmd_result;
         case 5:
-                cmd_result = HandleEntitySync(param_1, (unsigned char*) param_2);
+                cmd_result = lb_HandleEntitySync(param_1, (unsigned char*) param_2);
                 return cmd_result;
         case 6:
                 cmd_result = cm_RouteCommand(param_1, (unsigned char*) param_2);
@@ -521,9 +521,9 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2)
 // ORIGIN: GAME
 // SIZE: 69
 // FUNCTION: SERVER 0x10014EE0
-// SearchRecordTable
+// lb_SearchRecordTable
 
-char* __cdecl SearchRecordTable(int record_id)
+char* __cdecl lb_SearchRecordTable(int record_id)
 {
         unsigned int val;
         int idx;

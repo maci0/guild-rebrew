@@ -7,7 +7,7 @@
 #include "../command_internal.h"
 
 extern char g_currency_type_array[];
-extern char* unknown;
+extern char* g_unknown_1de450;
 extern int g_current_season;
 
 typedef struct {
@@ -218,7 +218,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 			dest_owner_entity = source_static_entity;
 			linked_list_ptr = (int*)(source_static_entity + 0xbc);
 		}
-		if (*(unknown + (uint)*(ushort*)(param_1 + 0x18) * 0x41) == '\x1d') {
+		if (*(g_unknown_1de450 + (uint)*(ushort*)(param_1 + 0x18) * 0x41) == '\x1d') {
 			dest_game_object = (ushort*)0;
 		} else {
 			dest_game_object = (ushort*)StartEntityQuery(*linked_list_ptr, 1, 0, (uint)*(ushort*)(param_1 + 0x18));
@@ -286,7 +286,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 		amount = *(int*)(dest_object + 7) - resolve_result;
 		*(int*)(dest_object + 7) = amount;
 		if (amount <= 0) {
-			obj_category = *(unknown + (uint)*(ushort*)(param_1 + 0x18) * 0x41);
+			obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(param_1 + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
 				if (source_existing_entity == (void*)0) {
 					capacity_check = g_error_msg_sell_no_dest;
@@ -326,7 +326,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 		if (dest_game_object != (ushort*)0) {
 			*(int*)(dest_game_object + 7) = *(int*)(dest_game_object + 7) + *(int*)(param_1 + 0x1f);
 		} else {
-			obj_category = *(unknown + (uint)*(ushort*)(param_1 + 0x18) * 0x41);
+			obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(param_1 + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
 				if (dest_existing_entity == (char*)0) {
 					capacity_check = g_error_msg_sell_failed;
@@ -348,7 +348,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 				}
 				if (dest_dynamic_entity != (short*)0) {
 					*(int*)(dest_object + 7) = *(int*)(dest_object + 7) + 1;
-					obj_category = *(unknown + (uint)*(ushort*)(param_1 + 0x18) * 0x41);
+					obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(param_1 + 0x18) * 0x41);
 					if ((obj_category == '\x17' || obj_category == '%') &&
 						(*dest_dynamic_entity == 0x2a || *dest_dynamic_entity == 0x116) &&
 						dest_owner_entity != (short*)0 &&

@@ -2,14 +2,14 @@
 
 #pragma intrinsic(memset, strcpy)
 
-extern int __cdecl check_slot_active(int, int);
+extern int __cdecl gv_CheckSlotActive(int, int);
 extern char* DAT_100a8c30;
 extern int g_slot_count_cat0[]; /* 0x1002577c */;
 extern int g_slot_count_cat1[]; /* 0x1002578c */;
 extern int g_slot_count_cat2[]; /* 0x1002579c */;
 extern int g_slot_count_cat3[]; /* 0x100257ac */;
 extern int __cdecl GetBuildingStatCount(unsigned char*);
-extern char* __cdecl FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
+extern char* __cdecl gv_FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
 extern unsigned int random_mod(int);
 extern unsigned int __ftol(void);
 extern void* __cdecl AllocateTrackedHeapBlock(unsigned int, const char*);
@@ -21,10 +21,10 @@ extern char g_1002d444;
 extern char g_1002d45c;
 extern char g_1002d474;
 extern int AllocGraveyardField(unsigned char*);
-extern void free_3fields(int);
+extern void gv_Free3Fields(int);
 extern void __cdecl game_free(void*);
-extern int __cdecl ResolveEntityById(int* out_slot, int* out_person, int* out_building, int entity_id);
-extern int __cdecl GetSlotEntry(int, int, unsigned char);
+extern int __cdecl gv_ResolveEntityById(int* out_slot, int* out_person, int* out_building, int entity_id);
+extern int __cdecl gv_GetSlotEntry(int, int, unsigned char);
 extern void SubtractObjectAmountNoKill(unsigned int, unsigned int, unsigned int);
 extern void AddOrAccumulateObject(unsigned int, unsigned int, unsigned int);
 extern int DAT_1003546c;
@@ -52,8 +52,8 @@ extern float DAT_100257c8;
 // ORIGIN: GAME
 // SIZE: 352
 // FUNCTION: SERVER 0x10010530
-// check_slot_active
-int __cdecl check_slot_active(char* obj, int idx)
+// gv_CheckSlotActive
+int __cdecl gv_CheckSlotActive(char* obj, int idx)
 {
 	if (idx == 0) {
 		if (*(int*) (obj + 8) && *(obj + 0x18)) {
@@ -88,9 +88,9 @@ int __cdecl check_slot_active(char* obj, int idx)
 // SIZE: 329
 // BLOCKER_DELTA: 254
 // FUNCTION: SERVER 0x100105b0
-// GetSlotEntry
+// gv_GetSlotEntry
 
-int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
+int __cdecl gv_GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 {
 	int graveyard_tier;
 	int base;
@@ -103,7 +103,7 @@ int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 	}
 
 	if (param_2 == 0) {
-		if (check_slot_active(param_1, 0) == 0) {
+		if (gv_CheckSlotActive(param_1, 0) == 0) {
 			goto ret_zero;
 		}
 		graveyard_tier = *(int*) (param_1 + 4);
@@ -120,7 +120,7 @@ int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 		goto ret_value;
 	}
 	if (param_2 == 1) {
-		if (check_slot_active(param_1, 1) == 0) {
+		if (gv_CheckSlotActive(param_1, 1) == 0) {
 			goto ret_zero;
 		}
 		graveyard_tier = *(int*) (param_1 + 4);
@@ -137,7 +137,7 @@ int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 		goto ret_value;
 	}
 	if (param_2 == 2) {
-		if (check_slot_active(param_1, 2) == 0) {
+		if (gv_CheckSlotActive(param_1, 2) == 0) {
 			goto ret_zero;
 		}
 		graveyard_tier = *(int*) (param_1 + 4);
@@ -154,7 +154,7 @@ int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 		goto ret_value;
 	}
 	if (param_2 == 3) {
-		if (check_slot_active(param_1, 3) == 0) {
+		if (gv_CheckSlotActive(param_1, 3) == 0) {
 			goto ret_zero;
 		}
 		graveyard_tier = *(int*) (param_1 + 4);
@@ -184,9 +184,9 @@ ret_value:
 // SIZE: 320
 // BLOCKER_DELTA: 109
 // FUNCTION: SERVER 0x10010710
-// FindSlotEntryFiltered
+// gv_FindSlotEntryFiltered
 
-char* __cdecl FindSlotEntryFiltered(
+char* __cdecl gv_FindSlotEntryFiltered(
 	char* ctx,
 	unsigned char* obj,
 	char* start,
@@ -206,7 +206,7 @@ char* __cdecl FindSlotEntryFiltered(
 	sub_obj = *(char**) (obj + 0x65);
 
 	if (category != 0xFF) {
-		if (!check_slot_active(sub_obj, category)) {
+		if (!gv_CheckSlotActive(sub_obj, category)) {
 			return 0;
 		}
 	}
@@ -305,7 +305,7 @@ int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 			spawn_count = 0;
 			if (0 < param_2) {
 				do {
-					slot_entry_ptr = FindSlotEntryFiltered(0, param_1, 0, 0x10010700, 0);
+					slot_entry_ptr = gv_FindSlotEntryFiltered(0, param_1, 0, 0x10010700, 0);
 					if (slot_entry_ptr == 0) {
 						return spawn_count;
 					}
@@ -799,7 +799,7 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 			*(char*) (new_field_ptr + 0x19) = *(char*) (old_field_ptr + 0x19);
 			*(char*) (new_field_ptr + 0x1a) = *(char*) (old_field_ptr + 0x1a);
 			*(char*) (new_field_ptr + 0x1b) = *(char*) (old_field_ptr + 0x1b);
-			free_3fields(old_field_ptr);
+			gv_Free3Fields(old_field_ptr);
 			return *(unsigned int*) (param_1 + 0x65);
 		}
 		*(unsigned int*) (param_1 + 0x65) = old_field_ptr;
@@ -811,9 +811,9 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 // ORIGIN: GAME
 // SIZE: 66
 // FUNCTION: SERVER 0x10010F50
-// free_3fields
+// gv_Free3Fields
 
-void __cdecl free_3fields(char* p)
+void __cdecl gv_Free3Fields(char* p)
 {
 	if (!p) {
 		return;
@@ -855,7 +855,7 @@ unsigned int AssignProductionSlot(int param_1)
 	unsigned char* building_entity_ptr;
 
 	worker_slot_capacity = param_1;
-	ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
+	gv_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
 		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 == *(unsigned int*) 0x1003546c)) {
 		return 0xffffffff;
@@ -867,15 +867,15 @@ unsigned int AssignProductionSlot(int param_1)
 	if (assignment_loop_idx == 0) {
 		return 0xfffffffd;
 	}
-	slot_category_check = check_slot_active(assignment_loop_idx, *(int*) (worker_slot_capacity + 0xc));
+	slot_category_check = gv_CheckSlotActive(assignment_loop_idx, *(int*) (worker_slot_capacity + 0xc));
 	if (slot_category_check == 0) {
 		return 0xfffffffc;
 	}
-	ResolveEntityById(0, 0, (int*) &param_1, *(unsigned int*) (worker_slot_capacity + 4));
+	gv_ResolveEntityById(0, 0, (int*) &param_1, *(unsigned int*) (worker_slot_capacity + 4));
 	if (param_1 == 0) {
 		return 0xfffffffa;
 	}
-	assignment_loop_idx = GetSlotEntry(assignment_loop_idx, *(int*) (worker_slot_capacity + 0xc), *(int*) (worker_slot_capacity + 0x10));
+	assignment_loop_idx = gv_GetSlotEntry(assignment_loop_idx, *(int*) (worker_slot_capacity + 0xc), *(int*) (worker_slot_capacity + 0x10));
 	if ((assignment_loop_idx == 0) || (*(unsigned int*) (assignment_loop_idx + 8) != *(unsigned int*) (param_1 + 0x50))) {
 		return 0xfffffff9;
 	}
@@ -982,7 +982,7 @@ unsigned int HireProductionWorker(int param_1)
 	unsigned char* building_entity_ptr;
 
 	cmd_ptr_saved = param_1;
-	ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
+	gv_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
 		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 == *(unsigned int*) 0x1003546c)) {
 		return 0xffffffff;
@@ -993,17 +993,17 @@ unsigned int HireProductionWorker(int param_1)
 	if (*(unsigned int*) (building_entity_ptr + 0x65) == 0) {
 		return 0xfffffffd;
 	}
-	slot_or_active_check = check_slot_active(*(unsigned int*) (building_entity_ptr + 0x65), *(int*) (cmd_ptr_saved + 0xc));
+	slot_or_active_check = gv_CheckSlotActive(*(unsigned int*) (building_entity_ptr + 0x65), *(int*) (cmd_ptr_saved + 0xc));
 	if (slot_or_active_check == 0) {
 		return 0xfffffffc;
 	}
-	ResolveEntityById(0, 0, (int*) &param_1, *(unsigned int*) (cmd_ptr_saved + 4));
+	gv_ResolveEntityById(0, 0, (int*) &param_1, *(unsigned int*) (cmd_ptr_saved + 4));
 	if (param_1 == 0) {
 		return 0xfffffffa;
 	}
 	slot_or_active_check = *(int*) (cmd_ptr_saved + 0xc);
 	if ((-1 < slot_or_active_check) && (slot_or_active_check < 4)) {
-		slot_or_active_check = FindSlotEntryFiltered(param_1, building_entity_ptr, 0, 0x10010700, slot_or_active_check);
+		slot_or_active_check = gv_FindSlotEntryFiltered(param_1, building_entity_ptr, 0, 0x10010700, slot_or_active_check);
 		if (slot_or_active_check == 0) {
 			return 0xfffffff9;
 		}
@@ -1058,7 +1058,7 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 	unsigned char* building_entity_ptr;
 
 	cmd_ptr_saved = param_1;
-	ResolveEntityById(&building_entity_ptr, 0, 0, *(param_1 + 8));
+	gv_ResolveEntityById(&building_entity_ptr, 0, 0, *(param_1 + 8));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
 		((*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0) ==
 		 *(unsigned int*) 0x1003546c)) {
@@ -1071,15 +1071,15 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 	if (slot_entry_ptr == 0) {
 		return 0xfffffffd;
 	}
-	slot_active_result = check_slot_active(slot_entry_ptr, *(cmd_ptr_saved + 0xc));
+	slot_active_result = gv_CheckSlotActive(slot_entry_ptr, *(cmd_ptr_saved + 0xc));
 	if (slot_active_result == 0) {
 		return 0xfffffffc;
 	}
-	ResolveEntityById(0, 0, (int*) &param_1, *(cmd_ptr_saved + 4));
+	gv_ResolveEntityById(0, 0, (int*) &param_1, *(cmd_ptr_saved + 4));
 	if (param_1 == 0) {
 		return 0xfffffffa;
 	}
-	slot_entry_ptr = GetSlotEntry(slot_entry_ptr, *(cmd_ptr_saved + 0xc), *(cmd_ptr_saved + 0x10));
+	slot_entry_ptr = gv_GetSlotEntry(slot_entry_ptr, *(cmd_ptr_saved + 0xc), *(cmd_ptr_saved + 0x10));
 	if (slot_entry_ptr == 0) {
 		return 0xfffffff9;
 	}
@@ -1104,15 +1104,15 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 // ORIGIN: GAME
 // SIZE: 288
 // FUNCTION: SERVER 0x10011540
-// ReplaceProductionWorker
+// gv_ReplaceProductionWorker
 
 // GLOBALS: SERVER 0x1003546c
 
-int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-int __cdecl check_slot_active(int param_1, int param_2);
-int __cdecl GetSlotEntry(int param_1, int param_2, int param_3);
+int __cdecl gv_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+int __cdecl gv_CheckSlotActive(int param_1, int param_2);
+int __cdecl gv_GetSlotEntry(int param_1, int param_2, int param_3);
 
-int __cdecl ReplaceProductionWorker(unsigned char* param_1)
+int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 {
 	unsigned char* cmd_ptr_saved;
 	int slot_active_result;
@@ -1124,7 +1124,7 @@ int __cdecl ReplaceProductionWorker(unsigned char* param_1)
 	new_worker_entity_id = -1;
 	new_worker_job_type = 0xffff;
 	cmd_ptr_saved = param_1;
-	ResolveEntityById((void**) &param_1, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
+	gv_ResolveEntityById((void**) &param_1, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
 	if (((param_1 == (unsigned char*) 0) || (*(unsigned short*) (param_1 + 0x27) == 0xffff)) ||
 		((char*) &DAT_100358a0 + (unsigned int) *(unsigned short*) (param_1 + 0x27) * 0x10e == (char*) DAT_1003546c)) {
 		return -1;
@@ -1136,19 +1136,19 @@ int __cdecl ReplaceProductionWorker(unsigned char* param_1)
 	if (slot_entry_ptr == 0) {
 		return -3;
 	}
-	slot_active_result = check_slot_active(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc));
+	slot_active_result = gv_CheckSlotActive(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc));
 	if (slot_active_result == 0) {
 		return -4;
 	}
 	if (*(int*) (cmd_ptr_saved + 4) != -1) {
-		ResolveEntityById((void**) 0, (void**) 0, &new_worker_entity_ptr, *(int*) (cmd_ptr_saved + 4));
+		gv_ResolveEntityById((void**) 0, (void**) 0, &new_worker_entity_ptr, *(int*) (cmd_ptr_saved + 4));
 		if (new_worker_entity_ptr == (void*) 0) {
 			return -6;
 		}
 		new_worker_entity_id = *(int*) (cmd_ptr_saved + 4);
 		new_worker_job_type = *(unsigned short*) ((int) new_worker_entity_ptr + 0x50);
 	}
-	slot_entry_ptr = GetSlotEntry(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc), (int) *(char*) (cmd_ptr_saved + 0x10));
+	slot_entry_ptr = gv_GetSlotEntry(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc), (int) *(char*) (cmd_ptr_saved + 0x10));
 	if (slot_entry_ptr == 0) {
 		return -7;
 	}
@@ -1180,7 +1180,7 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 	void* entity;
 	void* target_entity;
 
-	ResolveEntityById((int*) &entity, 0, 0, *(int*) (param_1 + 8));
+	gv_ResolveEntityById((int*) &entity, 0, 0, *(int*) (param_1 + 8));
 	if (entity != 0) {
 		if (*(unsigned short*) ((char*) entity + 0x27) != 0xFFFF) {
 			unsigned int slot_val;
@@ -1200,7 +1200,7 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 					return -3;
 				}
 
-				ResolveEntityById(0, 0, (int*) &target_entity, *(int*) (param_1 + 4));
+				gv_ResolveEntityById(0, 0, (int*) &target_entity, *(int*) (param_1 + 4));
 				if (target_entity == 0) {
 					return -6;
 				}
@@ -1253,15 +1253,15 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 
 // BLOCKER_DELTA: 96
 // FUNCTION: SERVER 0x10011790
-// UpdateProductionProgress
+// gv_UpdateProductionProgress
 
 // GLOBALS: SERVER 0x1003546c
 
-int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-int __cdecl check_slot_active(int param_1, int param_2);
-int __cdecl GetSlotEntry(int param_1, int param_2, int param_3);
+int __cdecl gv_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+int __cdecl gv_CheckSlotActive(int param_1, int param_2);
+int __cdecl gv_GetSlotEntry(int param_1, int param_2, int param_3);
 
-int __cdecl UpdateProductionProgress(unsigned char* param_1)
+int __cdecl gv_UpdateProductionProgress(unsigned char* param_1)
 {
 	unsigned char* cmd_ptr_saved;
 	int slot_active_result;
@@ -1269,7 +1269,7 @@ int __cdecl UpdateProductionProgress(unsigned char* param_1)
 	unsigned int new_progress_value;
 
 	cmd_ptr_saved = param_1;
-	ResolveEntityById((void**) &param_1, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
+	gv_ResolveEntityById((void**) &param_1, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
 	if (((param_1 == (unsigned char*) 0) || (*(unsigned short*) (param_1 + 0x27) == 0xffff)) ||
 		((char*) &DAT_100358a0 + (unsigned int) *(unsigned short*) (param_1 + 0x27) * 0x10e == (char*) DAT_1003546c)) {
 		return -1;
@@ -1281,11 +1281,11 @@ int __cdecl UpdateProductionProgress(unsigned char* param_1)
 	if (slot_entry_ptr == 0) {
 		return -3;
 	}
-	slot_active_result = check_slot_active(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc));
+	slot_active_result = gv_CheckSlotActive(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc));
 	if (slot_active_result == 0) {
 		return -4;
 	}
-	slot_entry_ptr = GetSlotEntry(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc), cmd_ptr_saved[0x10]);
+	slot_entry_ptr = gv_GetSlotEntry(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc), cmd_ptr_saved[0x10]);
 	if (slot_entry_ptr == 0) {
 		return -7;
 	}
@@ -1303,16 +1303,16 @@ int __cdecl UpdateProductionProgress(unsigned char* param_1)
 // SIZE: 164
 // ANALYSIS: Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure.
 // FUNCTION: SERVER 0x10011890
-// ValidateEntityAction
+// gv_ValidateEntityAction
 
-int __cdecl ValidateEntityAction(unsigned char* param_1)
+int __cdecl gv_ValidateEntityAction(unsigned char* param_1)
 {
 	void* entity;
 	unsigned int slot_val;
 	unsigned char type_byte;
 	int result;
 
-	ResolveEntityById((int*) &entity, 0, 0, *(int*) (param_1 + 8));
+	gv_ResolveEntityById((int*) &entity, 0, 0, *(int*) (param_1 + 8));
 	if (entity != 0) {
 		if (*(unsigned short*) ((char*) entity + 0x27) != 0xFFFF) {
 			slot_val = (unsigned int) *(unsigned short*) ((char*) entity + 0x27);
@@ -1340,9 +1340,9 @@ int __cdecl ValidateEntityAction(unsigned char* param_1)
 // SIZE: 674
 // BLOCKER_DELTA: 639
 // FUNCTION: SERVER 0x10011940
-// MoveSlotEntry
+// gv_MoveSlotEntry
 
-unsigned int MoveSlotEntry(int param_1)
+unsigned int gv_MoveSlotEntry(int param_1)
 {
 	int* src_worker_array_ptr;
 	int cmd_ptr_saved;
@@ -1352,11 +1352,11 @@ unsigned int MoveSlotEntry(int param_1)
 	int dst_slot_entry_ptr;
 
 	cmd_ptr_saved = param_1;
-	ResolveEntityById(0, 0, &param_1, *(int*) cmd_ptr_saved);
+	gv_ResolveEntityById(0, 0, &param_1, *(int*) cmd_ptr_saved);
 	if (param_1 == 0) {
 		return 0xfffffffa;
 	}
-	ResolveEntityById((int) &building_entity_ptr, 0, 0, *(int*) (cmd_ptr_saved + 4));
+	gv_ResolveEntityById((int) &building_entity_ptr, 0, 0, *(int*) (cmd_ptr_saved + 4));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
 		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 == *(unsigned int*) 0x1003546c)) {
 		return 0xffffffff;
@@ -1368,18 +1368,18 @@ unsigned int MoveSlotEntry(int param_1)
 	if (field_or_slot_ptr == 0) {
 		return 0xfffffffd;
 	}
-	field_or_slot_ptr = check_slot_active(field_or_slot_ptr, *(int*) (cmd_ptr_saved + 8));
+	field_or_slot_ptr = gv_CheckSlotActive(field_or_slot_ptr, *(int*) (cmd_ptr_saved + 8));
 	if (field_or_slot_ptr == 0) {
 		return 0xfffffffc;
 	}
-	field_or_slot_ptr = GetSlotEntry(*(int*) (building_entity_ptr + 0x65), *(int*) (cmd_ptr_saved + 8), (int) *(unsigned char*) (cmd_ptr_saved + 0xc));
+	field_or_slot_ptr = gv_GetSlotEntry(*(int*) (building_entity_ptr + 0x65), *(int*) (cmd_ptr_saved + 8), (int) *(unsigned char*) (cmd_ptr_saved + 0xc));
 	if ((field_or_slot_ptr != 0) && (*(unsigned short*) (field_or_slot_ptr + 8) == *(unsigned short*) (param_1 + 0x50))) {
 		int saved_src_slot_entry_ptr;
 
 		src_worker_array_ptr = *(int**) (field_or_slot_ptr + 0x10);
 		src_worker_array_end = *(int*) (*(int*) (cmd_ptr_saved + 8) * 4 + 0x1002574c);
 		saved_src_slot_entry_ptr = field_or_slot_ptr;
-		dst_slot_entry_ptr = FindSlotEntryFiltered(param_1, (int) building_entity_ptr, 0, 0x10010700, *(int*) (cmd_ptr_saved + 0xd));
+		dst_slot_entry_ptr = gv_FindSlotEntryFiltered(param_1, (int) building_entity_ptr, 0, 0x10010700, *(int*) (cmd_ptr_saved + 0xd));
 		if (dst_slot_entry_ptr != 0) {
 			int* piVar5;
 			int* piVar7;
@@ -1482,7 +1482,7 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 		return 0xfffffffa;
 	}
 	search_loop_idx = 0;
-	ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
+	gv_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
 	if (building_entity_ptr == 0 || *(unsigned short*) (building_entity_ptr + 0x27) == 0xffff ||
 		*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + (int) &DAT_100358a0 == DAT_1003546c) {
 		return 0xffffffff;
@@ -1494,11 +1494,11 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 	if (slot_scan_idx_or_capacity == 0) {
 		return 0xfffffffd;
 	}
-	entity_slot_byte_offset = check_slot_active(slot_scan_idx_or_capacity, *(int*) (param_1 + 0xc));
+	entity_slot_byte_offset = gv_CheckSlotActive(slot_scan_idx_or_capacity, *(int*) (param_1 + 0xc));
 	if (entity_slot_byte_offset == 0) {
 		return 0xfffffffc;
 	}
-	production_slot_entry_ptr = GetSlotEntry(slot_scan_idx_or_capacity, *(int*) (param_1 + 0xc), *(unsigned char*) (param_1 + 0x10));
+	production_slot_entry_ptr = gv_GetSlotEntry(slot_scan_idx_or_capacity, *(int*) (param_1 + 0xc), *(unsigned char*) (param_1 + 0x10));
 	if (production_slot_entry_ptr == 0) {
 		return 0xffff;
 	}

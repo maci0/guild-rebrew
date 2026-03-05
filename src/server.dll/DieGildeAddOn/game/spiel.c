@@ -28,7 +28,7 @@ extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* tag
 extern int __cdecl crt_call_extra(char* filename, char* mode);
 extern int __cdecl crt_locked_call4b(void* dest, int elemSize, int count, int stream);
 extern void __cdecl gm_InitObjektHersteller(void);
-extern void __cdecl InitEntitySlots(void);
+extern void __cdecl gm_InitEntitySlots(void);
 extern int __cdecl crt_getid_set(void);
 extern char* g_entity_ptr;
 extern void __cdecl entity_cleanup(char*);
@@ -46,11 +46,11 @@ extern int DAT_100a8c30;
 extern unsigned char DAT_10035439;
 extern int DAT_1003543c;
 extern char* DAT_101de450;
-extern unsigned short* __cdecl StartFilteredEntitySearch(int, ...);
-extern unsigned short* __cdecl StartEntityQuery(int, int, int, ...);
+extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
+extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern void* __cdecl FindNextFilteredEntity(void);
-extern void* __cdecl NextEntityQueryMatch(void);
-extern char* __cdecl AllocGameObject(int, int, int);
+extern void* __cdecl gm_NextEntityQueryMatch(void);
+extern char* __cdecl gm_AllocObjekt(int, int, int);
 extern WORD* DAT_10035468;
 extern char DAT_10035454;
 extern char DAT_1003545d;
@@ -67,11 +67,11 @@ extern int* DAT_1013989c;
 extern char* g_array_base;
 extern char g_entity_array[];
 extern void __cdecl free_node(char*);
-extern int __cdecl FreeObjectListRecursive(char**);
-extern void __cdecl noop_ret2(void*);
-extern char* __cdecl AllocateObjectSlot(void);
-extern int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-extern short* __cdecl ResolveParentEntity(short*);
+extern int __cdecl gm_FreeObjectListRecursive(char**);
+extern void __cdecl gm_NoopRet2(void*);
+extern char* __cdecl gm_AllocateObjectSlot(void);
+extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+extern short* __cdecl gm_ResolveParentEntity(short*);
 extern int g_item_def_table;
 extern int g_next_object_id;
 extern int g_object_count;
@@ -79,7 +79,7 @@ extern int g_current_year;
 extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[];
 extern char s_gm_AddObjekt____obj____ob_NULL_10031390[];
 extern char s_gm_AddObjekt____Parent_not_found_10031358[];
-extern int __cdecl RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
+extern int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
 extern unsigned char* g_EntityListStart;
 extern unsigned char* g_EntitySearchPtr;
 extern int g_SearchCount;
@@ -96,47 +96,47 @@ extern void __cdecl FreeTrackedHeapBlock(void* heapBlock);
 extern void __cdecl free_3fields(void* param);
 extern int DAT_10035a0c;
 extern unsigned char DAT_10030861;
-extern char* __cdecl search_struct(void);
-extern int __cdecl AllocBuildingContents(char* geb, int obj_id);
-extern unsigned short* __cdecl SetupEntityQuery(unsigned char*);
-extern int __cdecl CheckEntityType(char* geb);
+extern char* __cdecl gm_SearchStruct(void);
+extern int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
+extern unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
+extern int __cdecl gm_CheckEntityType(char* geb);
 extern int __cdecl AllocGraveyardField(char* geb);
 extern void __cdecl SpawnGraveyardEntities(char* geb, int param);
-extern void __cdecl SetBuildingWorkerLimits(char* geb);
-extern int __cdecl GetBuildingTypeCategory(int);
+extern void __cdecl gm_SetBuildingWorkerLimits(char* geb);
+extern int __cdecl gm_GetBuildingTypeCategory(int);
 extern void __cdecl gm_AllocBuildingDefaults(char* geb);
 extern char* g_table_a9;
 extern char* dword_100a8c30;
 extern unsigned short* dword_100a8c34;
 extern char* dword_101de450;
-extern char* __cdecl get_msg_field(int);
+extern char* __cdecl gm_GetMsgField(int);
 extern void __cdecl ReportMessage(int);
 extern int g_entity_type_table;
 extern char g_current_season;
 extern char g_10031004[];
 extern char g_10031484[];
 extern char g_100314b8[];
-extern int __cdecl entity_accumulate(void*);
-extern int __cdecl RemoveLinkedNodeById(int*, int);
+extern int __cdecl gm_EntityAccumulate(void*);
+extern int __cdecl gm_RemoveLinkedNodeById(int*, int);
 extern void __cdecl ClearEntityLinks(short*);
-extern void __cdecl InitEntityIfValid(void* param_1);
+extern void __cdecl gm_InitEntityIfValid(void* param_1);
 extern void __cdecl gm_DeallocEntity(int idx, int param);
 extern int DAT_10035434;
 extern int DAT_1003542c;
 extern int DAT_10035430;
 extern char g_entity_base[];
 extern char g_entity_end[];
-extern int __cdecl GetBuildingTypeCategory(int param_1);
-extern int __cdecl MapEntityStatRange(int);
-extern short* __cdecl GetEntityTableEntry(char*);
+extern int __cdecl gm_GetBuildingTypeCategory(int param_1);
+extern int __cdecl gm_MapEntityStatRange(int);
+extern short* __cdecl gm_GetEntityTableEntry(char*);
 extern float DAT_100257bc;
-extern int __cdecl random_mod(unsigned short range);
+extern int __cdecl gm_RandomMod(unsigned short range);
 extern char entity_table[];
-extern int __cdecl LookupEntityRecordById(int);
-extern void __cdecl AssignBuildingOwner(char*, unsigned short, unsigned short);
-extern int __cdecl WalkEntityChain(int);
-extern int __cdecl CheckStatLevel(int, int);
-extern int __cdecl GetOppositeStatIndex(int);
+extern int __cdecl gm_LookupEntityRecordById(int);
+extern void __cdecl gm_AssignBuildingOwner(char*, unsigned short, unsigned short);
+extern int __cdecl gm_WalkEntityChain(int);
+extern int __cdecl gm_CheckStatLevel(int, int);
+extern int __cdecl gm_GetOppositeStatIndex(int);
 extern void* __cdecl AddOrAccumulateObject(int, int, int);
 extern int g_citizen_count;
 extern char entity_slot_table[];
@@ -158,21 +158,21 @@ extern float DAT_100257c8; /* 0x100257c8 */
 ;
 extern double DAT_100257d0; /* 0x100257d0 */
 ;
-extern double __cdecl CalculateProductionValue(unsigned short, unsigned char);
+extern double __cdecl gm_CalculateProductionValue(unsigned short, unsigned char);
 extern int __cdecl __ftol(void);
 extern char g_type_idx;
 extern int g_key_table[];
 extern char entity_array[];
-extern int __cdecl SumBuildingProductionValues(char*, int);
-extern int __cdecl EntityQuerySum(int);
+extern int __cdecl gm_SumBuildingProductionValues(char*, int);
+extern int __cdecl gm_EntityQuerySum(int);
 extern int __cdecl compute_size(char*); /* 0x10019d00 */
 ;
-extern int __cdecl FindEntityByOwner(char*, char*); /* 0x10019cd0 */
+extern int __cdecl gm_FindEntityByOwner(char*, char*); /* 0x10019cd0 */
 ;
 extern int __cdecl LookupEntityInTable(int); /* 0x1000c670 */
 ;
 extern float _DAT_10025fbc;
-extern double __cdecl RandomFloat01(void);
+extern double __cdecl gm_RandomFloat01(void);
 extern float _DAT_100256a0;
 extern float _DAT_100256a8;
 
@@ -200,9 +200,9 @@ void* __cdecl alloc_and_init(char a, char b, int c, int d, char* ctx)
 // ORIGIN: GAME
 // SIZE: 20
 // FUNCTION: SERVER 0x10005370
-// dispatch_call
+// gm_DispatchCall
 
-int __cdecl dispatch_call(int param, DISPATCH_OBJ* obj)
+int __cdecl gm_DispatchCall(int param, DISPATCH_OBJ* obj)
 {
 	return obj->func(obj->field_28, param);
 }
@@ -386,7 +386,7 @@ void __cdecl gm_InitObjektHersteller(void)
 // GHIDRA: InitGameWorld
 // ANALYSIS: InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure.
 // FUNCTION: SERVER 0x10015950
-// Open
+// gm_Open
 
 /* GLOBAL: SERVER 0x100a8c30 */
 extern int g_entity_type_table;
@@ -404,7 +404,7 @@ extern int g_1009b764;
 /* GLOBAL: SERVER 0x1002dde0 */
 extern int g_1002dde0;
 
-int __cdecl Open(int param_1)
+int __cdecl gm_Open(int param_1)
 {
 	unsigned int* src_player_ptr;
 	unsigned int* dst_player_ptr;
@@ -418,8 +418,8 @@ int __cdecl Open(int param_1)
 	int slot_counter;
 	unsigned char path_buf[512];
 
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d3, "Open(): enter", 1);
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d6, "Open(): Spieler initialisieren", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d3, "gm_Open(): enter", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d6, "gm_Open(): Spieler initialisieren", 1);
 	src_player_ptr = (unsigned int*) &g_100a8cf8;
 	dst_player_ptr = (unsigned int*) &g_1009b764;
 	do {
@@ -432,7 +432,7 @@ int __cdecl Open(int param_1)
 		src_player_ptr = src_player_ptr + 0xbd;
 		dst_player_ptr = dst_player_ptr + 0xaa4;
 	} while ((unsigned int) src_player_ptr < 0x100a9bbc);
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e3, "Open(): Gebaeude-Daten", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e3, "gm_Open(): Gebaeude-Daten", 1);
 	g_entity_type_table = (int) AllocateTrackedHeapBlock(0xca78, (const char*) 0x100311d8);
 	if (g_entity_type_table == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e8, "Memory could not be allocated!", 1);
@@ -473,14 +473,14 @@ int __cdecl Open(int param_1)
 	}
 	crt_locked_call4b((void*) g_item_def_table, 0x41, 0x2dc, file_handle);
 	fflush(file_handle);
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x536, "Open(): gm_InitObjektHersteller", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x536, "gm_Open(): gm_InitObjektHersteller", 1);
 	gm_InitObjektHersteller();
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x53a, "Open(): gm_KillAllSpieler", 1);
-	InitEntitySlots();
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x53a, "gm_Open(): gm_KillAllSpieler", 1);
+	gm_InitEntitySlots();
 	LogMessageInternal(
 		"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
 		0x53e,
-		"Open(): ---- Das dusselige Datendesign hinbiegen !! -----",
+		"gm_Open(): ---- Das dusselige Datendesign hinbiegen !! -----",
 		1
 	);
 	file_handle = 0;
@@ -504,7 +504,7 @@ int __cdecl Open(int param_1)
 		file_handle = next_offset;
 	} while (next_offset < 0xca78);
 	crt_getid_set();
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x588, "Open(): exit", 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x588, "gm_Open(): exit", 1);
 	return 0;
 }
 
@@ -512,9 +512,9 @@ int __cdecl Open(int param_1)
 // SIZE: 57
 // STATUS: RELOC
 // FUNCTION: SERVER 0x10015CB0
-// reset_all_entities
+// gm_ResetAllEntities
 
-void __cdecl reset_all_entities(void)
+void __cdecl gm_ResetAllEntities(void)
 {
 	int i;
 	char* p;
@@ -540,13 +540,13 @@ void __cdecl reset_all_entities(void)
 // SIZE: 194
 // BLOCKER_DELTA: 88
 // FUNCTION: SERVER 0x10015cf0
-// CleanupObjectEntities
+// gm_CleanupObjectEntities
 
-int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-int __cdecl RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
-void __cdecl noop_ret2(int addr);
+int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
+void __cdecl gm_NoopRet2(int addr);
 
-void __cdecl CleanupObjectEntities(void)
+void __cdecl gm_CleanupObjectEntities(void)
 {
 	void** objectListHead;
 	int record_offset;
@@ -559,7 +559,7 @@ void __cdecl CleanupObjectEntities(void)
 	record_offset = 0;
 	do {
 		if (*(short*) (record_offset + (int) DAT_100a8c34) != 0) {
-			ResolveEntityById(&dynamic_ent, &existing_ent, &static_ent, *(int*) (record_offset + 6 + (int) DAT_100a8c34));
+			gm_ResolveEntityById(&dynamic_ent, &existing_ent, &static_ent, *(int*) (record_offset + 6 + (int) DAT_100a8c34));
 			if (dynamic_ent != (void*) 0) {
 				objectListHead = (void**) ((int) dynamic_ent + 0x5d);
 			}
@@ -573,12 +573,12 @@ void __cdecl CleanupObjectEntities(void)
 				goto LAB_cleanup;
 			}
 			if (objectListHead != (void**) 0) {
-				RemoveObjectByType(objectListHead, (unsigned int) *(unsigned short*) (record_offset + (int) DAT_100a8c34));
+				gm_RemoveObjectByType(objectListHead, (unsigned int) *(unsigned short*) (record_offset + (int) DAT_100a8c34));
 				goto LAB_10015d8e;
 			}
 		LAB_cleanup:
 			pRecord = record_offset + (int) DAT_100a8c34;
-			noop_ret2(pRecord);
+			gm_NoopRet2(pRecord);
 			*(short*) (record_offset + (int) DAT_100a8c34) = 0;
 			DAT_10035450 = DAT_10035450 + -1;
 		}
@@ -596,9 +596,9 @@ void __cdecl CleanupObjectEntities(void)
 // ORIGIN: GAME
 // SIZE: 55
 // FUNCTION: SERVER 0x10015dc0
-// FindRecordById
+// gm_FindRecordById
 
-Record* __cdecl FindRecordById(int id)
+Record* __cdecl gm_FindRecordById(int id)
 {
 	int i;
 	Record* p;
@@ -619,15 +619,15 @@ Record* __cdecl FindRecordById(int id)
 // ORIGIN: GAME
 // SIZE: 135
 // FUNCTION: SERVER 0x10015E00
-// cleanup_all_entities
+// gm_CleanupAllEntities
 
-void __cdecl cleanup_all_entities(void)
+void __cdecl gm_CleanupAllEntities(void)
 {
 	int ent;
-	ent = (int) StartFilteredEntitySearch(1, 6);
+	ent = (int) gm_StartFilteredEntitySearch(1, 6);
 	if (ent) {
 		do {
-			CleanupBuildingEntity((unsigned char*) ent);
+			gm_CleanupBuildingEntity((unsigned char*) ent);
 			ent = (int) FindNextFilteredEntity();
 		} while (ent);
 	}
@@ -653,9 +653,9 @@ void __cdecl cleanup_all_entities(void)
 // ORIGIN: GAME
 // SIZE: 211
 // FUNCTION: SERVER 0x10015e90
-// ResolveEntityById
+// gm_ResolveEntityById
 
-int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
+int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
 {
 	short* entity_slot;
 	char* dynamic_entity;
@@ -719,9 +719,9 @@ int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr
 // BLOCKER_DELTA: 449
 // ANALYSIS: Refreshes market availability table (85 entries of 0x80 bytes each). Scans all buildings for producible items, marks ingredients as available, then auto-allocates missing market objects. Also counts special resource types (0x92-0x97, 0x2db) in the town market.
 // FUNCTION: SERVER 0x10015f70
-// RefreshMarketAvailability
+// gm_RefreshMarketAvailability
 
-void __cdecl RefreshMarketAvailability(int param_1)
+void __cdecl gm_RefreshMarketAvailability(int param_1)
 {
 	int base;
 	int resource_types[8];
@@ -735,7 +735,7 @@ void __cdecl RefreshMarketAvailability(int param_1)
 	resource_types[6] = 0x2db;
 	resource_types[7] = 0;
 
-	DAT_1003543c = (int) StartFilteredEntitySearch(1, 5, 10);
+	DAT_1003543c = (int) gm_StartFilteredEntitySearch(1, 5, 10);
 	if (DAT_1003543c == 0) {
 		LogMessageInternal((char*) 0x10031004, 0x7cf, (char*) 0x1003122c, 1);
 		return 0;
@@ -774,7 +774,7 @@ void __cdecl RefreshMarketAvailability(int param_1)
 	/* First major loop: iterate filtered entities */
 	{
 		int entity_ptr;
-		entity_ptr = (int) StartFilteredEntitySearch(1, 6);
+		entity_ptr = (int) gm_StartFilteredEntitySearch(1, 6);
 		if (entity_ptr != 0) {
 			do {
 				int byteVal;
@@ -789,7 +789,7 @@ void __cdecl RefreshMarketAvailability(int param_1)
 				ecx2 = ecx2 + ecx2 * 2;
 				if (*(char*) (edi + ecx2 * 4) != '\n') {
 					int query_result;
-					query_result = (int) StartEntityQuery(*(int*) (entity_ptr + 0x5d), 1, 0, 0xff);
+					query_result = (int) gm_StartEntityQuery(*(int*) (entity_ptr + 0x5d), 1, 0, 0xff);
 					param_1 = 0;
 					if (query_result != 0) {
 						int pSlot;
@@ -797,7 +797,7 @@ void __cdecl RefreshMarketAvailability(int param_1)
 						while (param_1 < 0x55) {
 							if (*(short*) pSlot != 0) {
 								int inner_query;
-								inner_query = (int) StartEntityQuery(*(int*) (query_result + 0x14), 1, 0, *(short*) pSlot & 0xffff);
+								inner_query = (int) gm_StartEntityQuery(*(int*) (query_result + 0x14), 1, 0, *(short*) pSlot & 0xffff);
 								if (inner_query != 0) {
 									int rowId;
 									int edx2;
@@ -851,17 +851,17 @@ void __cdecl RefreshMarketAvailability(int param_1)
 			{
 				int ax;
 				ax = *(short*) (esi + 0x3c) & 0xffff;
-				outer_query = (int) StartEntityQuery(*(int*) (inner_query + 0x5d), 1, 0, ax);
+				outer_query = (int) gm_StartEntityQuery(*(int*) (inner_query + 0x5d), 1, 0, ax);
 				if (outer_query != 0) {
-					edi = (int) StartEntityQuery(*(int*) (outer_query + 0x14), 1, 0, 0xff);
+					edi = (int) gm_StartEntityQuery(*(int*) (outer_query + 0x14), 1, 0, 0xff);
 					if (*(int*) (esi + 4) != 0) {
 						int edx;
 						int cx;
 						edx = *(int*) (edi + 0x14);
 						cx = *(short*) esi & 0xffff;
-						inner_query = (int) StartEntityQuery(edx, 1, 0, cx);
+						inner_query = (int) gm_StartEntityQuery(edx, 1, 0, cx);
 						if (inner_query == 0) {
-							AllocGameObject(*(int*) (edi + 2), *(short*) esi & 0xffff, 1);
+							gm_AllocObjekt(*(int*) (edi + 2), *(short*) esi & 0xffff, 1);
 						}
 					}
 				}
@@ -883,16 +883,16 @@ void __cdecl RefreshMarketAvailability(int param_1)
 			int count_query;
 			int uCount;
 			uCount = 0;
-			outer_query = (int) StartEntityQuery(*(int*) (DAT_1003543c + 0x5d), 1, 0, resource_id);
+			outer_query = (int) gm_StartEntityQuery(*(int*) (DAT_1003543c + 0x5d), 1, 0, resource_id);
 			if (outer_query != 0) {
-				inner_query = (int) StartEntityQuery(*(int*) (outer_query + 0x14), 1, 0, 0xff);
+				inner_query = (int) gm_StartEntityQuery(*(int*) (outer_query + 0x14), 1, 0, 0xff);
 				if (inner_query != 0) {
-					count_query = (int) StartEntityQuery(*(int*) (inner_query + 0x14), 1, 5);
+					count_query = (int) gm_StartEntityQuery(*(int*) (inner_query + 0x14), 1, 5);
 					while (count_query != 0) {
 						uCount++;
-						count_query = (int) NextEntityQueryMatch();
+						count_query = (int) gm_NextEntityQueryMatch();
 					}
-					count_query = (int) StartEntityQuery(*(int*) (outer_query + 0x14), 1, 4, 0x11);
+					count_query = (int) gm_StartEntityQuery(*(int*) (outer_query + 0x14), 1, 4, 0x11);
 					if (count_query != 0) {
 						if ((*(unsigned char*) (count_query + 0x1c) & 0xff) != uCount) {
 							*(unsigned char*) (count_query + 0x1c) = (unsigned char) uCount;
@@ -911,12 +911,12 @@ void __cdecl RefreshMarketAvailability(int param_1)
 // SIZE: 72
 // BLOCKER_DELTA: 64
 // FUNCTION: SERVER 0x10016240
-// FindSlotById
+// gm_FindSlotById
 
 /* GLOBAL: SERVER 0x1009b770 */
 extern char g_slot_array[];
 
-char* __cdecl FindSlotById(int param_1, int param_2)
+char* __cdecl gm_FindSlotById(int param_1, int param_2)
 {
 	int base_offset;
 	char* ptr;
@@ -941,11 +941,11 @@ char* __cdecl FindSlotById(int param_1, int param_2)
 // BLOCKER_DELTA: 452
 // ANALYSIS: Apply active query filters (id/type/owner/group) to current candidate.
 // FUNCTION: SERVER 0x10016290
-// NextEntityQueryMatch
+// gm_NextEntityQueryMatch
 
-short __cdecl GetEntityType(void* entity);
+short __cdecl gm_GetEntityType(void* entity);
 
-void* __cdecl NextEntityQueryMatch(void)
+void* __cdecl gm_NextEntityQueryMatch(void)
 {
 	WORD* candidate_ptr;
 	short entity_type_result;
@@ -1006,7 +1006,7 @@ void* __cdecl NextEntityQueryMatch(void)
 				if (filter_type_cache != -1) {
 					candidate_ptr = DAT_10035468;
 					DAT_10035468 = scan_ptr;
-					entity_type_result = GetEntityType(candidate_ptr);
+					entity_type_result = gm_GetEntityType(candidate_ptr);
 					stack_depth = DAT_100a8c38;
 					filter_type_cache = DAT_10030b9c;
 					if (entity_type_result != DAT_10030b9c) {
@@ -1075,7 +1075,7 @@ void* __cdecl NextEntityQueryMatch(void)
 // BLOCKER_DELTA: 307
 // ANALYSIS: Parse vararg criteria tuples for entity query filtering.
 // FUNCTION: SERVER 0x10016460
-// StartEntityQuery
+// gm_StartEntityQuery
 
 /* GLOBAL: SERVER 0x101de450 */
 /* GLOBAL: SERVER 0x10030b94 */
@@ -1109,7 +1109,7 @@ extern unsigned short* DAT_100a8c34;
 /* GLOBAL: SERVER 0x10035468 */
 extern unsigned short* DAT_10035468;
 
-unsigned short* __cdecl StartEntityQuery(int param_1, int param_2, int param_3, ...)
+unsigned short* __cdecl gm_StartEntityQuery(int param_1, int param_2, int param_3, ...)
 {
 	int* arg_ptr;
 	int i;
@@ -1185,13 +1185,13 @@ unsigned short* __cdecl StartEntityQuery(int param_1, int param_2, int param_3, 
 		}
 
 		DAT_10035468 = DAT_100a8c34;
-		return NextEntityQueryMatch();
+		return gm_NextEntityQueryMatch();
 	}
 
 check_container:
 	if (param_1 != 0) {
 		DAT_10035468 = DAT_100a8c34;
-		return NextEntityQueryMatch();
+		return gm_NextEntityQueryMatch();
 	}
 
 	return (unsigned short*) 0;
@@ -1202,9 +1202,9 @@ check_container:
 // SIZE: 37
 // ANALYSIS: Walks the primary linked list of object allocations starting at g_existing_entities (a global pointer array). Looks for the first slot with an active flag == 0. Stops searching after 0x5007 (20487) slots. Returns pointer to the slot or NULL if full. | Scan fixed object pool and return first free slot.
 // FUNCTION: SERVER 0x100165A0
-// AllocateObjectSlot
+// gm_AllocateObjectSlot
 
-char* __cdecl AllocateObjectSlot(void)
+char* __cdecl gm_AllocateObjectSlot(void)
 {
 	char* p;
 	char* result;
@@ -1231,9 +1231,9 @@ char* __cdecl AllocateObjectSlot(void)
 // ORIGIN: GAME
 // SIZE: 155
 // FUNCTION: SERVER 0x100165d0
-// RemoveObjectByType
+// gm_RemoveObjectByType
 
-int __cdecl RemoveObjectByType(char** objectListHead, unsigned int objectTypeId)
+int __cdecl gm_RemoveObjectByType(char** objectListHead, unsigned int objectTypeId)
 {
 	char* prevNode;
 	char* currentNode;
@@ -1260,7 +1260,7 @@ int __cdecl RemoveObjectByType(char** objectListHead, unsigned int objectTypeId)
 		return -2;
 	}
 	if (*(int*) (currentNode + 0x14) != 0) {
-		FreeObjectListRecursive((char**) (currentNode + 0x14));
+		gm_FreeObjectListRecursive((char**) (currentNode + 0x14));
 	}
 	free_node(currentNode);
 	if (nodeIndex == 0) {
@@ -1281,8 +1281,8 @@ int __cdecl RemoveObjectByType(char** objectListHead, unsigned int objectTypeId)
 // ANALYSIS: Linear search by object type id within sibling linked list.
 // SIZE: 1
 // FUNCTION: SERVER 0x10016670
-// noop_ret2
-void __cdecl noop_ret2(void)
+// gm_NoopRet2
+void __cdecl gm_NoopRet2(void)
 {
 }
 
@@ -1290,9 +1290,9 @@ void __cdecl noop_ret2(void)
 // ORIGIN: GAME
 // SIZE: 139
 // FUNCTION: SERVER 0x10016680
-// RemoveLinkedNodeById
+// gm_RemoveLinkedNodeById
 
-int __cdecl RemoveLinkedNodeById(int* param_1, int param_2)
+int __cdecl gm_RemoveLinkedNodeById(int* param_1, int param_2)
 {
 	char* prev;
 	char* curr;
@@ -1310,9 +1310,9 @@ int __cdecl RemoveLinkedNodeById(int* param_1, int param_2)
 				return -2;
 			}
 			if (*(int*) (curr + 0x14) != 0) {
-				FreeObjectListRecursive((int*) (curr + 0x14));
+				gm_FreeObjectListRecursive((int*) (curr + 0x14));
 			}
-			noop_ret2(curr);
+			gm_NoopRet2(curr);
 			if (count == 0) {
 				*param_1 = *(int*) (curr + 0x3f);
 			}
@@ -1339,9 +1339,9 @@ int __cdecl RemoveLinkedNodeById(int* param_1, int param_2)
 // BLOCKER_DELTA: 106
 // SIZE: 66
 // FUNCTION: SERVER 0x10016710
-// FreeObjectListRecursive
+// gm_FreeObjectListRecursive
 
-int __cdecl FreeObjectListRecursive(char** head_ptr)
+int __cdecl gm_FreeObjectListRecursive(char** head_ptr)
 {
 	char* node;
 	if (!head_ptr) {
@@ -1354,7 +1354,7 @@ int __cdecl FreeObjectListRecursive(char** head_ptr)
 	do {
 		*head_ptr = *(char**) (node + 0x3f);
 		if (*(int*) (node + 0x14)) {
-			FreeObjectListRecursive((char**) (node + 0x14));
+			gm_FreeObjectListRecursive((char**) (node + 0x14));
 		}
 		free_node(node);
 		node = *head_ptr;
@@ -1367,11 +1367,11 @@ int __cdecl FreeObjectListRecursive(char** head_ptr)
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 1392
 // BLOCKER_DELTA: 1278
-// ANALYSIS: High-level entity allocation wrapper. Resolves the parent_id using ResolveEntityById to find the appropriate entity list head. Allocates a new object slot using AllocateObjectSlot. Inserts the new object into the parent's linked list and initializes basic fields (type, id from global g_next_entity_id, parent pointer).
+// ANALYSIS: High-level entity allocation wrapper. Resolves the parent_id using gm_ResolveEntityById to find the appropriate entity list head. Allocates a new object slot using gm_AllocateObjectSlot. Inserts the new object into the parent's linked list and initializes basic fields (type, id from global g_next_entity_id, parent pointer).
 // FUNCTION: SERVER 0x10016760
-// AllocGameObject
+// gm_AllocObjekt
 
-char* __cdecl AllocGameObject(int param_1, int param_2, int param_3)
+char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 {
 	int dynamic_parent;
 	int existing_parent;
@@ -1401,7 +1401,7 @@ char* __cdecl AllocGameObject(int param_1, int param_2, int param_3)
 		);
 		return 0;
 	}
-	resolve_result = ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, param_1);
+	resolve_result = gm_ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, param_1);
 	if (resolve_result == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcb8, "gm_AllocObjekt(): Parent not found", 1);
 		return 0;
@@ -1425,7 +1425,7 @@ char* __cdecl AllocGameObject(int param_1, int param_2, int param_3)
 				last_node = resolve_result;
 				resolve_result = *(int*) (last_node + 0x3f);
 			} while (resolve_result != 0);
-			esi = AllocateObjectSlot();
+			esi = gm_AllocateObjectSlot();
 			if (esi == 0) {
 				LogMessageInternal(
 					"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
@@ -1438,7 +1438,7 @@ char* __cdecl AllocGameObject(int param_1, int param_2, int param_3)
 			*(int*) (last_node + 0x3f) = (int) esi;
 		}
 		else {
-			esi = AllocateObjectSlot();
+			esi = gm_AllocateObjectSlot();
 			if (esi == 0) {
 				LogMessageInternal(
 					"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
@@ -1523,13 +1523,13 @@ char* __cdecl AllocGameObject(int param_1, int param_2, int param_3)
 				*(int*) (esi + 0xa) = *(int*) (eax * 4 + 0x100358a4);
 			}
 			else if (existing_parent != 0) {
-				resolve_result = ResolveParentEntity(existing_parent);
+				resolve_result = gm_ResolveParentEntity(existing_parent);
 				*(int*) (esi + 0xa) = *(int*) (resolve_result + 4);
 			}
 			else if (static_parent != 0) {
 				*(int*) (esi + 0xa) = *(int*) ((char*) static_parent + 4);
 			}
-			resolve_result = ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, param_1);
+			resolve_result = gm_ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, param_1);
 			while (resolve_result != 0 && dynamic_parent == 0) {
 				if (existing_parent != 0) {
 					param_1 = *(int*) ((char*) existing_parent + 6);
@@ -1542,7 +1542,7 @@ char* __cdecl AllocGameObject(int param_1, int param_2, int param_3)
 						1
 					);
 				}
-				resolve_result = ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, param_1);
+				resolve_result = gm_ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, param_1);
 			}
 			esi[0x28] = 0;
 			esi[0x31] = 2;
@@ -1554,7 +1554,7 @@ char* __cdecl AllocGameObject(int param_1, int param_2, int param_3)
 			}
 			{
 				char* child_obj;
-				child_obj = AllocGameObject(*(int*) (esi + 2), 0x1dd, 1);
+				child_obj = gm_AllocObjekt(*(int*) (esi + 2), 0x1dd, 1);
 				*(int*) (child_obj + 0xe) = (int) (*(unsigned short*) esi) - 0x133;
 				child_obj[0x1c] = *(unsigned char*) esi - 0x33;
 			}
@@ -1600,7 +1600,7 @@ void* __cdecl AddOrAccumulateObject(int parent_id, int type_id, int amount)
 		);
 		return (void*) 0;
 	}
-	lookupStatus = ResolveEntityById(&dynamicParent, &existingObject, &staticParent, parent_id);
+	lookupStatus = gm_ResolveEntityById(&dynamicParent, &existingObject, &staticParent, parent_id);
 	if (lookupStatus == 0) {
 		sprintf(logBuffer, s_gm_AddObjekt____Parent_not_found_10031358, type_id, amount);
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0xdfd, logBuffer, 8);
@@ -1618,9 +1618,9 @@ void* __cdecl AddOrAccumulateObject(int parent_id, int type_id, int amount)
 	else {
 		return (void*) 0;
 	}
-	existingObject = StartEntityQuery(*childListHead, 1, 0, type_id);
+	existingObject = gm_StartEntityQuery(*childListHead, 1, 0, type_id);
 	if (existingObject == (void*) 0) {
-		allocatedObject = AllocGameObject(parent_id, type_id, amount);
+		allocatedObject = gm_AllocObjekt(parent_id, type_id, amount);
 		return allocatedObject;
 	}
 	*(int*) ((int) existingObject + 0xe) = *(int*) ((int) existingObject + 0xe) + amount;
@@ -1632,9 +1632,9 @@ void* __cdecl AddOrAccumulateObject(int parent_id, int type_id, int amount)
 // SIZE: 186
 // GHIDRA: SubtractObjectFromOwner
 // FUNCTION: SERVER 0x10016de0
-// SubObjekt
+// gm_SubObjekt
 
-int __cdecl SubObjekt(void* param_1, unsigned int param_2, int param_3)
+int __cdecl gm_SubObjekt(void* param_1, unsigned int param_2, int param_3)
 {
 	unsigned int objectTypeId;
 	int resolve_result;
@@ -1642,10 +1642,10 @@ int __cdecl SubObjekt(void* param_1, unsigned int param_2, int param_3)
 	void* dynamic_ent;
 	void* static_ent;
 
-	resolve_result = ResolveEntityById(&dynamic_ent, (void**) &param_1, &static_ent, (int) param_1);
+	resolve_result = gm_ResolveEntityById(&dynamic_ent, (void**) &param_1, &static_ent, (int) param_1);
 	objectTypeId = param_2;
 	if (resolve_result == 0) {
-		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xe2d, "SubObjekt(): Parent not found", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xe2d, "gm_SubObjekt(): Parent not found", 1);
 	}
 	else {
 		if (dynamic_ent != (void*) 0) {
@@ -1660,11 +1660,11 @@ int __cdecl SubObjekt(void* param_1, unsigned int param_2, int param_3)
 			}
 			objectListHead = (void**) ((int) static_ent + 0x178);
 		}
-		param_1 = StartEntityQuery((int) *objectListHead, 1, 0, param_2);
+		param_1 = gm_StartEntityQuery((int) *objectListHead, 1, 0, param_2);
 		if (param_1 != (void*) 0 && *(int*) ((int) param_1 + 0xe) >= param_3) {
 			*(int*) ((int) param_1 + 0xe) = *(int*) ((int) param_1 + 0xe) - param_3;
 			if (*(int*) ((int) param_1 + 0xe) <= 0) {
-				RemoveObjectByType(objectListHead, objectTypeId);
+				gm_RemoveObjectByType(objectListHead, objectTypeId);
 			}
 			return 1;
 		}
@@ -1677,9 +1677,9 @@ int __cdecl SubObjekt(void* param_1, unsigned int param_2, int param_3)
 // SIZE: 211
 // ANALYSIS: Decrease tracked amount; delete entry if it reaches zero.
 // FUNCTION: SERVER 0x10016ea0
-// SubtractObjectAmountNoKill
+// gm_SubObjektNoKill
 
-int __cdecl SubtractObjectAmountNoKill(int entity_id, int object_id, int subtract_amount)
+int __cdecl gm_SubObjektNoKill(int entity_id, int object_id, int subtract_amount)
 {
 	int person;
 	int slot;
@@ -1687,7 +1687,7 @@ int __cdecl SubtractObjectAmountNoKill(int entity_id, int object_id, int subtrac
 	int* container_ptr;
 	int result;
 
-	if (ResolveEntityById(&slot, &person, &building, entity_id) == 0) {
+	if (gm_ResolveEntityById(&slot, &person, &building, entity_id) == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\object", 0xe5c, "entity not found", 1);
 		return 0;
 	}
@@ -1705,16 +1705,16 @@ int __cdecl SubtractObjectAmountNoKill(int entity_id, int object_id, int subtrac
 		return 0;
 	}
 
-	result = StartEntityQuery(*container_ptr, 1, 0, object_id);
+	result = gm_StartEntityQuery(*container_ptr, 1, 0, object_id);
 	if (result == 0) {
-		result = AllocGameObject(entity_id, object_id, 1);
+		result = gm_AllocObjekt(entity_id, object_id, 1);
 		*(int*) ((char*) result + 0xe) = 0;
 	}
 
 	*(int*) ((char*) result + 0xe) -= subtract_amount;
 
 	if (*(int*) ((char*) result + 0xe) == 0) {
-		RemoveObjectByType(container_ptr, object_id);
+		gm_RemoveObjectByType(container_ptr, object_id);
 	}
 
 	return 1;
@@ -1855,7 +1855,7 @@ MATCH:
 // SIZE: 267
 // BLOCKER_DELTA: 229
 // FUNCTION: SERVER 0x100170e0
-// StartFilteredEntitySearch
+// gm_StartFilteredEntitySearch
 
 /* GLOBAL: SERVER 0x100a8c30 */
 extern int DAT_100a8c30;
@@ -1893,7 +1893,7 @@ extern unsigned char* DAT_1014d8c0;
 /* GLOBAL: SERVER 0x10035464 */
 extern unsigned char* DAT_10035464;
 
-unsigned short* __cdecl StartFilteredEntitySearch(int param_1, ...)
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int param_1, ...)
 {
 	int* arg_ptr;
 	int i;
@@ -1961,9 +1961,9 @@ unsigned short* __cdecl StartFilteredEntitySearch(int param_1, ...)
 // ORIGIN: GAME
 // SIZE: 39
 // FUNCTION: SERVER 0x10017210
-// search_struct
+// gm_SearchStruct
 
-char* __cdecl search_struct(void)
+char* __cdecl gm_SearchStruct(void)
 {
 	char* p;
 	char* end;
@@ -1985,11 +1985,11 @@ char* __cdecl search_struct(void)
 // ORIGIN: GAME
 // SIZE: 240
 // FUNCTION: SERVER 0x10017240
-// CleanupBuildingEntity
+// gm_CleanupBuildingEntity
 
 /* DAT_10035a0c: base of entity array, stride 0x21c (0x87 dwords), 768 entries */
 
-int __cdecl CleanupBuildingEntity(unsigned char* param_1)
+int __cdecl gm_CleanupBuildingEntity(unsigned char* param_1)
 {
 	int* entity_scan;
 
@@ -2033,7 +2033,7 @@ cleanup_loop:
 		entity_scan = entity_scan + 0x87;
 	} while ((int) entity_scan < 0x1009ae0c);
 	if (*(int*) (param_1 + 0x5d) != 0) {
-		FreeObjectListRecursive((int*) (param_1 + 0x5d));
+		gm_FreeObjectListRecursive((int*) (param_1 + 0x5d));
 	}
 	*param_1 = 0;
 	return 0;
@@ -2056,19 +2056,19 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* param_1)
 	table_ptr = &DAT_10030861;
 	do {
 		if (*param_1 == *(table_ptr - 1)) {
-			query_result = StartEntityQuery(*(int*) (param_1 + 0x5d), 2, 6, 0, 0xff);
+			query_result = gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 2, 6, 0, 0xff);
 			if (query_result != (void*) 0) {
 				goto do_inner;
 			}
-			query_result = AllocGameObject(*(int*) (param_1 + 1), 0xff, 1);
+			query_result = gm_AllocObjekt(*(int*) (param_1 + 1), 0xff, 1);
 			if (query_result != (void*) 0) {
 			do_inner:
 				inner_count = 10;
 				item_ptr = (unsigned short*) table_ptr;
 				do {
 					if (*item_ptr != 0 &&
-						StartEntityQuery(*(int*) ((int) query_result + 0x14), 1, 0, (unsigned int) *item_ptr) == (void*) 0) {
-						AllocGameObject(*(int*) ((int) query_result + 2), (unsigned int) *item_ptr, 2);
+						gm_StartEntityQuery(*(int*) ((int) query_result + 0x14), 1, 0, (unsigned int) *item_ptr) == (void*) 0) {
+						gm_AllocObjekt(*(int*) ((int) query_result + 2), (unsigned int) *item_ptr, 2);
 					}
 					item_ptr = item_ptr + 1;
 					inner_count = inner_count - 1;
@@ -2091,16 +2091,16 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* param_1)
 // ORIGIN: GAME
 // SIZE: 202
 // FUNCTION: SERVER 0x10017400
-// SetBuildingWorkerLimits
+// gm_SetBuildingWorkerLimits
 
-void __cdecl SetBuildingWorkerLimits(unsigned char* param_1)
+void __cdecl gm_SetBuildingWorkerLimits(unsigned char* param_1)
 {
 	void* worker_obj;
 	unsigned char limit_val;
 	int type_offset;
 
 	type_offset = DAT_100a8c30 + (unsigned int) *param_1 * 0x24d;
-	worker_obj = StartEntityQuery(*(int*) (param_1 + 0x5d), 2, 0, 0x2a, 6);
+	worker_obj = gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 2, 0, 0x2a, 6);
 	if (worker_obj != (void*) 0) {
 		limit_val = *(unsigned char*) (type_offset + 0x23d);
 		if (((limit_val == 0) && (*(char*) (type_offset + 0x23e) == '\0')) && (*(char*) (type_offset + 0x23f) != '\0')) {
@@ -2118,7 +2118,7 @@ void __cdecl SetBuildingWorkerLimits(unsigned char* param_1)
 			*(char*) ((int) worker_obj + 0x1d) = limit_val;
 		}
 	}
-	worker_obj = StartEntityQuery(*(int*) (param_1 + 0x5d), 2, 0, 0x116, 6);
+	worker_obj = gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 2, 0, 0x116, 6);
 	if (((worker_obj != (void*) 0) && (*(char*) (type_offset + 0x23d) == '\0')) &&
 		((*(char*) (type_offset + 0x23e) == '\0' && (*(char*) (type_offset + 0x23f) != '\0')))) {
 		*(char*) ((int) worker_obj + 0x1c) = *(char*) (type_offset + 0x23f);
@@ -2132,7 +2132,7 @@ void __cdecl SetBuildingWorkerLimits(unsigned char* param_1)
 // GHIDRA: gm_AllocGebaeude
 // BLOCKER_DELTA: 1007
 // FUNCTION: SERVER 0x100174d0
-// AllocGebaeude
+// gm_AllocGebaeude
 
 /* GLOBAL: SERVER 0x100a8c30 */
 extern int g_entity_type_table;
@@ -2152,7 +2152,7 @@ extern int g_10035888;
 /* GLOBAL: SERVER 0x1003588c */
 extern short g_1003588c;
 
-char* __cdecl AllocGebaeude(int param_1, int param_2)
+char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 {
 	char buf[0x400];
 	char* pDest;
@@ -2167,13 +2167,13 @@ char* __cdecl AllocGebaeude(int param_1, int param_2)
 		return 0;
 	}
 	var_4 = 0;
-	geb = search_struct();
+	geb = gm_SearchStruct();
 	temp_result = g_entity_type_table;
 	if (geb == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
 			0x10cb,
-			"AllocGebaeude(): geb overflow HELP !!!!!!",
+			"gm_AllocGebaeude(): geb overflow HELP !!!!!!",
 			1
 		);
 		return 0;
@@ -2230,10 +2230,10 @@ char* __cdecl AllocGebaeude(int param_1, int param_2)
 				if ((comp_entry & 0x8000) != 0) {
 					if (item_class == '\x02' || item_class == '\x06') {
 						var_4 = 1;
-						AllocBuildingContents(geb, item_index);
+						gm_AllocBuildingContents(geb, item_index);
 					}
 					else if (var_4 == 0) {
-						AllocGameObject(*(int*) (geb + 1), item_index, 1);
+						gm_AllocObjekt(*(int*) (geb + 1), item_index, 1);
 					}
 				}
 			}
@@ -2242,22 +2242,22 @@ char* __cdecl AllocGebaeude(int param_1, int param_2)
 		} while (param_1 < 0x40);
 	}
 	{
-		short* product_iter = (short*) StartEntityQuery(*(int*) (geb + 0x5d), 1, 4, 2);
+		short* product_iter = (short*) gm_StartEntityQuery(*(int*) (geb + 0x5d), 1, 4, 2);
 		while (product_iter != 0) {
 			if (*product_iter != 0xfd) {
 				*(short*) (geb + 0x29) = *product_iter;
 				break;
 			}
-			product_iter = NextEntityQueryMatch();
+			product_iter = gm_NextEntityQueryMatch();
 		}
 	}
 	{
-		unsigned short* setup_result = SetupEntityQuery(geb);
+		unsigned short* setup_result = gm_SetupEntityQuery(geb);
 		if (setup_result != 0) {
 			*(short*) (geb + 0x29) = *(short*) setup_result;
 		}
 	}
-	temp_result = CheckEntityType(geb);
+	temp_result = gm_CheckEntityType(geb);
 	if (temp_result != 0) {
 		*(int*) (geb + 0x30) = 0x1388;
 	}
@@ -2291,7 +2291,7 @@ char* __cdecl AllocGebaeude(int param_1, int param_2)
 		case 20:
 		case 21:
 		case 22:
-			temp_result = AllocGameObject(*(int*) (geb + 1), 0x1b5, 1);
+			temp_result = gm_AllocObjekt(*(int*) (geb + 1), 0x1b5, 1);
 			if (temp_result != 0) {
 				*(char*) (temp_result + 0x22) = 0;
 				*(char*) (temp_result + 0x1c) = (char) 0xff;
@@ -2349,8 +2349,8 @@ char* __cdecl AllocGebaeude(int param_1, int param_2)
 	if (*geb == 0x26) {
 		*(short*) (geb + 0x29) = 0x10e;
 	}
-	SetBuildingWorkerLimits(geb);
-	GetBuildingTypeCategory(*(unsigned char*) geb);
+	gm_SetBuildingWorkerLimits(geb);
+	gm_GetBuildingTypeCategory(*(unsigned char*) geb);
 	gm_AllocBuildingDefaults(geb);
 	return geb;
 }
@@ -2359,26 +2359,26 @@ char* __cdecl AllocGebaeude(int param_1, int param_2)
 // ORIGIN: GAME
 // SIZE: 145
 // FUNCTION: SERVER 0x10017910
-// SetupEntityQuery
+// gm_SetupEntityQuery
 
-unsigned short* __cdecl SetupEntityQuery(unsigned char* param_1)
+unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* param_1)
 {
 	char* building;
 	int result;
 	unsigned short* p;
 
-	GetBuildingTypeCategory((int) *param_1);
+	gm_GetBuildingTypeCategory((int) *param_1);
 	building = (char*) (DAT_100a8c30 + (unsigned int) *param_1 * 0x24d);
-	result = CheckEntityType(param_1);
+	result = gm_CheckEntityType(param_1);
 	if (result != 0) {
-		return (unsigned short*) StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 0, 0xfd);
+		return (unsigned short*) gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 0, 0xfd);
 	}
 	if (*building == 4) {
-		return (unsigned short*) StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 0, 0x54);
+		return (unsigned short*) gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 0, 0x54);
 	}
-	p = (unsigned short*) StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 4, 2);
+	p = (unsigned short*) gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 4, 2);
 	while (p != (unsigned short*) 0 && *p == 0xfd) {
-		p = NextEntityQueryMatch();
+		p = gm_NextEntityQueryMatch();
 	}
 	return p;
 }
@@ -2387,9 +2387,9 @@ unsigned short* __cdecl SetupEntityQuery(unsigned char* param_1)
 // ORIGIN: GAME
 // SIZE: 192
 // FUNCTION: SERVER 0x100179b0
-// GetBuildingTypeCategory
+// gm_GetBuildingTypeCategory
 
-int __cdecl GetBuildingTypeCategory(int param_1)
+int __cdecl gm_GetBuildingTypeCategory(int param_1)
 {
 	switch (*(unsigned char*) (DAT_100a8c30 + param_1 * 0x24d)) {
 	case 0xb:
@@ -2438,9 +2438,9 @@ int __cdecl GetBuildingTypeCategory(int param_1)
 // ORIGIN: GAME
 // SIZE: 62
 // FUNCTION: SERVER 0x10017A70
-// search_table_67
+// gm_SearchTable67
 
-void* __cdecl search_table_67(int id)
+void* __cdecl gm_SearchTable67(int id)
 {
 	char* p;
 	int i;
@@ -2463,9 +2463,9 @@ void* __cdecl search_table_67(int id)
 // STATUS: RELOC
 // SIZE: 74
 // FUNCTION: SERVER 0x10017AB0
-// CheckEntityType
+// gm_CheckEntityType
 
-int __cdecl CheckEntityType(unsigned char* entity_ptr)
+int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
 {
 	__asm {
 		mov eax, dword ptr [esp + 4]
@@ -2511,13 +2511,13 @@ int __cdecl CheckEntityType(unsigned char* entity_ptr)
 // ORIGIN: GAME
 // SIZE: 320
 // FUNCTION: SERVER 0x10017b00
-// AssignBuildingOwner
+// gm_AssignBuildingOwner
 
 #define PTR_10035A10(idx) (*(unsigned char***) (((idx) * 0x21c) + 0x10035a10))
 #define BYTE_100358A2(idx) (*(unsigned char*) (((idx) * 0x21c) + 0x100358a2))
 #define DWORD_100358A4(idx) (*(unsigned int*) (((idx) * 0x21c) + 0x100358a4))
 
-void __cdecl AssignBuildingOwner(unsigned char* param_1, unsigned short param_2, unsigned int param_3)
+void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param_2, unsigned int param_3)
 {
 	char building_class;
 	unsigned short prev_owner;
@@ -2543,7 +2543,7 @@ void __cdecl AssignBuildingOwner(unsigned char* param_1, unsigned short param_2,
 		}
 		owner_index = param_3;
 		if (((BYTE_100358A2(owner_index) == '\x06') || (BYTE_100358A2(owner_index) == '\a')) &&
-			(loop_count = get_msg_field(param_1), loop_count != 0)) {
+			(loop_count = gm_GetMsgField(param_1), loop_count != 0)) {
 			*(unsigned char*) (loop_count + 0x165) = 0;
 			*(unsigned int*) (loop_count + 0x1b4) = *(unsigned int*) (loop_count + 0x1b4) & 0xfffffffe;
 			building_class = *type_entry;
@@ -2572,7 +2572,7 @@ void __cdecl AssignBuildingOwner(unsigned char* param_1, unsigned short param_2,
 // ORIGIN: GAME
 // SIZE: 742
 // FUNCTION: SERVER 0x10017c40
-// AllocBuildingContents
+// gm_AllocBuildingContents
 
 #ifdef __clang__
 #define REBREW_NAKED
@@ -2580,7 +2580,7 @@ void __cdecl AssignBuildingOwner(unsigned char* param_1, unsigned short param_2,
 #define REBREW_NAKED __declspec(naked)
 #endif
 
-int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
+int REBREW_NAKED __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
 {
 	__asm {
         mov     eax, dword ptr [g_item_def_table]
@@ -2604,7 +2604,7 @@ int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
         push    esi
         mov     ecx, dword ptr [edi+1]
         push    ecx
-        call    AllocGameObject
+        call    gm_AllocObjekt
         xor     ecx, ecx
         mov     ebx, eax
         mov     cl, byte ptr [edi]
@@ -2669,7 +2669,7 @@ int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
         push    1
         push    eax
         push    edx
-        call    AllocGameObject
+        call    gm_AllocObjekt
         add     esp, 0Ch
         jmp     short L_while2_next
 
@@ -2687,7 +2687,7 @@ int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
         push    0
         push    1
         push    eax
-        call    StartEntityQuery
+        call    gm_StartEntityQuery
         add     esp, 10h
         test    eax, eax
         je      short L_after_first_query
@@ -2738,7 +2738,7 @@ int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
         push    0
         push    2
         push    eax
-        call    StartEntityQuery
+        call    gm_StartEntityQuery
         add     esp, 14h
         test    eax, eax
         je      short L_after_second_query
@@ -2816,7 +2816,7 @@ int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
         lea     esi, [ecx+edx*8]
         shl     esi, 4
         add     esi, 1009B770h
-        call    StartEntityQuery
+        call    gm_StartEntityQuery
         add     esp, 10h
         test    eax, eax
         je      short L_alloc_fail
@@ -2836,7 +2836,7 @@ int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
         push    1
         push    0FFh
         push    ecx
-        call    AllocGameObject
+        call    gm_AllocObjekt
         add     esp, 0Ch
         xor     ebp, ebp
         mov     ebx, eax
@@ -2859,7 +2859,7 @@ int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
         mov     cx, word ptr [edi]
         push    ecx
         push    edx
-        call    AllocGameObject
+        call    gm_AllocObjekt
         add     esp, 0Ch
         inc     ebp
         jmp     short L_loop_next
@@ -2899,13 +2899,13 @@ int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
 // SIZE: 35
 // GHIDRA: call_compare
 // FUNCTION: SERVER 0x10017f30
-// RemoveObjectWrapper
+// gm_RemoveObjectWrapper
 
-int __cdecl RemoveObjectWrapper(int param_1, unsigned int param_2)
+int __cdecl gm_RemoveObjectWrapper(int param_1, unsigned int param_2)
 {
 	int remove_result;
 
-	remove_result = RemoveObjectByType((void**) (param_1 + 0x5d), param_2);
+	remove_result = gm_RemoveObjectByType((void**) (param_1 + 0x5d), param_2);
 	if (remove_result == -2) {
 		return -3;
 	}
@@ -2917,15 +2917,15 @@ int __cdecl RemoveObjectWrapper(int param_1, unsigned int param_2)
 // SIZE: 36
 // GHIDRA: find_and_process
 // FUNCTION: SERVER 0x10017f60
-// RemoveEntityLink
+// gm_RemoveEntityLink
 
-void __cdecl RemoveEntityLink(int param_1)
+void __cdecl gm_RemoveEntityLink(int param_1)
 {
 	int parent_entity;
 
-	parent_entity = entity_accumulate(param_1);
+	parent_entity = gm_EntityAccumulate(param_1);
 	if (parent_entity != 0) {
-		RemoveLinkedNodeById(parent_entity + 0x5d, *(int*) (param_1 + 2));
+		gm_RemoveLinkedNodeById(parent_entity + 0x5d, *(int*) (param_1 + 2));
 	}
 }
 
@@ -2934,9 +2934,9 @@ void __cdecl RemoveEntityLink(int param_1)
 // SIZE: 23
 // ANALYSIS: Checks if the provided entity pointer is valid and active (not -1). If so, it invokes ClearEntityLinks on it to detach it from game world lists before deletion or recycling.
 // FUNCTION: SERVER 0x10017f90
-// InitEntityIfValid
+// gm_InitEntityIfValid
 
-void __cdecl InitEntityIfValid(short* param_1)
+void __cdecl gm_InitEntityIfValid(short* param_1)
 {
 	if (param_1 != (short*) 0 && *(unsigned short*) param_1 != 0xFFFF) {
 		ClearEntityLinks(param_1);
@@ -2949,7 +2949,7 @@ void __cdecl InitEntityIfValid(short* param_1)
 // BLOCKER_DELTA: 267
 // GHIDRA: gm_DeallocEntity
 // FUNCTION: SERVER 0x10017fb0
-// DeallocEntity
+// gm_DeallocEntity
 
 /* EntityStruct — stride 0x21c (540 bytes), 768 entries at g_entity_array (0x100358a0)
  * Field map derived from EXE cross-reference (Europa1400Gold_TL.exe):
@@ -2966,7 +2966,7 @@ void __cdecl InitEntityIfValid(short* param_1)
  *   +0x1C (4)  scale             float (init 1000.0)
  *   +0x20 (4)  rotation          float
  *   +0x25 (2)  owner_index
- *   +0x27 (2)  parent_index      Used in ResolveParentEntity
+ *   +0x27 (2)  parent_index      Used in gm_ResolveParentEntity
  *   +0x28 (2)  season_born       Set to g_current_year on alloc
  *   +0x50 (2)  max_hp            Init 0x7FFF
  *   +0x5C (32) ref_table[8]      Reference IDs (init -1)
@@ -2975,7 +2975,7 @@ void __cdecl InitEntityIfValid(short* param_1)
  *   +0x164(1)  age
  *   +0x16C(4)  home_building
  *   +0x170(4)  current_building
- *   +0x178(1)  linked_list_head  Free list for FreeObjectListRecursive
+ *   +0x178(1)  linked_list_head  Free list for gm_FreeObjectListRecursive
  *   +0x18C(4)  target_id         Init -1
  *   +0x190(4)  ai_state          Init 4
  *   +0x1CC(4)  entity_flags      Bitfield
@@ -3014,7 +3014,7 @@ extern char g_str_10031500[];
 /* GLOBAL: SERVER 0x10031538 */
 extern char g_str_10031538[];
 
-void __cdecl DeallocEntity(unsigned int index, int param_2)
+void __cdecl gm_DeallocEntity(unsigned int index, int param_2)
 {
 	struct EntityStruct* ent;
 	int old_id;
@@ -3029,10 +3029,10 @@ void __cdecl DeallocEntity(unsigned int index, int param_2)
 	else {
 		ent->byte8 = 0;
 		ent->word28 = g_something_1[0];
-		InitEntityIfValid(ent);
+		gm_InitEntityIfValid(ent);
 		ent->byte2 = 0xF;
 	}
-	FreeObjectListRecursive(&ent->field178);
+	gm_FreeObjectListRecursive(&ent->field178);
 
 	if (param_2 == 0) {
 		sprintf(buffer, g_str_10031500, old_id);
@@ -3075,9 +3075,9 @@ void __cdecl DeallocEntity(unsigned int index, int param_2)
 // ORIGIN: GAME
 // SIZE: 81
 // FUNCTION: SERVER 0x100180D0
-// InitEntitySlots
+// gm_InitEntitySlots
 
-void __cdecl InitEntitySlots(void)
+void __cdecl gm_InitEntitySlots(void)
 {
 	int i;
 	char* ptr;
@@ -3102,12 +3102,12 @@ void __cdecl InitEntitySlots(void)
 // ORIGIN: GAME
 // SIZE: 32
 // FUNCTION: SERVER 0x10018130
-// is_in_range
+// gm_IsInRange
 
-int __cdecl is_in_range(int x)
+int __cdecl gm_IsInRange(int x)
 {
 	int r;
-	r = GetBuildingTypeCategory(x);
+	r = gm_GetBuildingTypeCategory(x);
 	if (r >= 10 && r <= 14) {
 		return 0;
 	}
@@ -3118,8 +3118,8 @@ int __cdecl is_in_range(int x)
 // ORIGIN: GAME
 // SIZE: 70
 // FUNCTION: SERVER 0x10018150
-// EntityClassCheck
-int __cdecl EntityClassCheck(int type)
+// gm_EntityClassCheck
+int __cdecl gm_EntityClassCheck(int type)
 {
 	switch (type) {
 	case 5:
@@ -3159,25 +3159,25 @@ int __cdecl EntityClassCheck(int type)
 // ORIGIN: GAME
 // SIZE: 87
 // FUNCTION: SERVER 0x100181a0
-// CheckStatLevel
+// gm_CheckStatLevel
 
 /* GLOBAL: SERVER 0x10035a04 */
 extern unsigned char g_entity_type_bytes[];
 
 /* GLOBAL: SERVER 0x100358a0 */
 
-int __cdecl CheckStatLevel(int param_1, int param_2)
+int __cdecl gm_CheckStatLevel(int param_1, int param_2)
 {
 	int idx;
 	int val;
 	int result;
 
 	idx = param_1 * 0x21c;
-	val = MapEntityStatRange((int) g_entity_type_bytes[idx]);
+	val = gm_MapEntityStatRange((int) g_entity_type_bytes[idx]);
 	if (val == param_2) {
 		return (unsigned int) g_entity_type_bytes[idx];
 	}
-	result = GetEntityTableEntry(g_entity_array + idx);
+	result = gm_GetEntityTableEntry(g_entity_array + idx);
 	if (result == 0) {
 		return 0;
 	}
@@ -3188,9 +3188,9 @@ int __cdecl CheckStatLevel(int param_1, int param_2)
 // ORIGIN: GAME
 // SIZE: 304
 // FUNCTION: SERVER 0x10018200
-// MapEntityStatRange
+// gm_MapEntityStatRange
 
-int __cdecl MapEntityStatRange(int param_1)
+int __cdecl gm_MapEntityStatRange(int param_1)
 {
 	switch (param_1) {
 	case 0:
@@ -3313,7 +3313,7 @@ int __cdecl MapEntityStatRange(int param_1)
 // ORIGIN: GAME
 // SIZE: 276
 // FUNCTION: SERVER 0x10018330
-// GetOppositeStatIndex
+// gm_GetOppositeStatIndex
 
 /*
  * Mirrors/reverses the position of an index within its group of 6.
@@ -3321,7 +3321,7 @@ int __cdecl MapEntityStatRange(int param_1)
  *   groupStart -> groupStart+5, groupStart+1 -> groupStart+4, etc.
  * Returns 0 if the index doesn't belong to any known group.
  */
-int __cdecl GetOppositeStatIndex(int param_1)
+int __cdecl gm_GetOppositeStatIndex(int param_1)
 {
 	int result;
 
@@ -3394,15 +3394,15 @@ int __cdecl GetOppositeStatIndex(int param_1)
 // ORIGIN: GAME
 // SIZE: 78
 // FUNCTION: SERVER 0x10018450
-// RandomStatModifier
+// gm_RandomStatModifier
 
-char __cdecl RandomStatModifier(char stat_value)
+char __cdecl gm_RandomStatModifier(char stat_value)
 {
 	int range;
 	int masked;
 
 	if (stat_value == 0) {
-		return (char) (random_mod(0x2a) + 0x15);
+		return (char) (gm_RandomMod(0x2a) + 0x15);
 	}
 
 	masked = (int) stat_value & 0xFF;
@@ -3413,15 +3413,15 @@ char __cdecl RandomStatModifier(char stat_value)
 		range = 6;
 	}
 
-	return (char) (stat_value + random_mod(range));
+	return (char) (stat_value + gm_RandomMod(range));
 }
 
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 56
 // FUNCTION: SERVER 0x100184A0
-// LookupEntityRecordById
-int __cdecl LookupEntityRecordById(int search_id)
+// gm_LookupEntityRecordById
+int __cdecl gm_LookupEntityRecordById(int search_id)
 {
 	char* p;
 	int i;
@@ -3445,9 +3445,9 @@ int __cdecl LookupEntityRecordById(int search_id)
 // NOTE: duplicate bounds check needed for correct register allocation
 // ANALYSIS: duplicate bounds check needed for correct register allocation
 // FUNCTION: SERVER 0x100184e0
-// GetEntityTableEntry
+// gm_GetEntityTableEntry
 
-short* __cdecl GetEntityTableEntry(char* param)
+short* __cdecl gm_GetEntityTableEntry(char* param)
 {
 	char type;
 	int table_index;
@@ -3471,9 +3471,9 @@ short* __cdecl GetEntityTableEntry(char* param)
 // SIZE: 800
 // BLOCKER_DELTA: 695
 // FUNCTION: SERVER 0x10018530
-// ChangePlayerIdentityImpl
+// gm_ChangePlayerIdentityImpl
 
-int __cdecl ChangePlayerIdentityImpl(int param_1, int param_2)
+int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 {
 	char* record_b;
 	unsigned short index_b;
@@ -3492,7 +3492,7 @@ int __cdecl ChangePlayerIdentityImpl(int param_1, int param_2)
 	char buf1[0x21c];
 	char buf2[0x21c];
 
-	record_a = LookupEntityRecordById(param_1);
+	record_a = gm_LookupEntityRecordById(param_1);
 	if (record_a == 0) {
 		return -1;
 	}
@@ -3502,18 +3502,18 @@ int __cdecl ChangePlayerIdentityImpl(int param_1, int param_2)
 	do {
 		inner_loop = offset_a + (int) DAT_1014d8c0;
 		if ((*(char*) (offset_a + (int) DAT_1014d8c0) != '\0') &&
-			(stat_opposite = GetBuildingTypeCategory((unsigned char) *(char*) (offset_a + (int) DAT_1014d8c0)), stat_opposite == 2) &&
+			(stat_opposite = gm_GetBuildingTypeCategory((unsigned char) *(char*) (offset_a + (int) DAT_1014d8c0)), stat_opposite == 2) &&
 			(*(unsigned short*) (inner_loop + 0x27) == *(unsigned short*) record_a)) {
-			AssignBuildingOwner((char*) inner_loop, **(unsigned short**) 0x1003546c, **(unsigned short**) 0x1003546c);
+			gm_AssignBuildingOwner((char*) inner_loop, **(unsigned short**) 0x1003546c, **(unsigned short**) 0x1003546c);
 		}
 		offset_a = offset_a + 0xa9;
 		copy_count = copy_count - 1;
 	} while (copy_count != 0);
 
 	index_a = *(unsigned short*) record_a;
-	chain_value = WalkEntityChain(index_a);
+	chain_value = gm_WalkEntityChain(index_a);
 
-	record_b = LookupEntityRecordById(param_2);
+	record_b = gm_LookupEntityRecordById(param_2);
 	if (record_b == 0) {
 		return -2;
 	}
@@ -3547,14 +3547,14 @@ int __cdecl ChangePlayerIdentityImpl(int param_1, int param_2)
 	*(unsigned char*) (buf1 + 0xd) = *(unsigned char*) (record_a + 0xd);
 	*(int*) (buf1 + 0x170) = *(int*) (record_a + 0x170);
 
-	copy_count = MapEntityStatRange((unsigned char) *(unsigned char*) (record_b + 0x164));
+	copy_count = gm_MapEntityStatRange((unsigned char) *(unsigned char*) (record_b + 0x164));
 	if (copy_count != 0) {
-		offset_a = GetEntityTableEntry(record_a);
+		offset_a = gm_GetEntityTableEntry(record_a);
 		if (offset_a != 0) {
-			inner_loop = CheckStatLevel(*(unsigned short*) record_a, copy_count);
+			inner_loop = gm_CheckStatLevel(*(unsigned short*) record_a, copy_count);
 			if (inner_loop != 0) {
-				stat_opposite = GetOppositeStatIndex((unsigned char) *(unsigned char*) (record_b + 0x164));
-				inner_loop = GetOppositeStatIndex(inner_loop);
+				stat_opposite = gm_GetOppositeStatIndex((unsigned char) *(unsigned char*) (record_b + 0x164));
+				inner_loop = gm_GetOppositeStatIndex(inner_loop);
 				if (inner_loop < stat_opposite) {
 					*(unsigned char*) (offset_a + copy_count + 0x74) = *(unsigned char*) (record_b + 0x164);
 				}
@@ -3650,9 +3650,9 @@ int __cdecl ChangePlayerIdentityImpl(int param_1, int param_2)
 // ORIGIN: GAME
 // SIZE: 3689
 // FUNCTION: SERVER 0x10018850
-// CreateEntityFromParents
+// gm_CreateEntityFromParents
 
-int __cdecl CreateEntityFromParents(int param_1, int param_2, int param_3, int param_4, int param_5)
+int __cdecl gm_CreateEntityFromParents(int param_1, int param_2, int param_3, int param_4, int param_5)
 {
 	char work_buf[0x41c];
 	int var_10;
@@ -3678,21 +3678,21 @@ int __cdecl CreateEntityFromParents(int param_1, int param_2, int param_3, int p
 // ORIGIN: GAME
 // SIZE: 81
 // FUNCTION: SERVER 0x100196c0
-// QueryEntitySum
+// gm_QueryEntitySum
 
-int __cdecl QueryEntitySum(int param_1, unsigned int param_2)
+int __cdecl gm_QueryEntitySum(int param_1, unsigned int param_2)
 {
 	short* ent;
 	int total;
 
 	total = 0;
-	ent = StartEntityQuery(param_1, 1, 4, 9);
+	ent = gm_StartEntityQuery(param_1, 1, 4, 9);
 	if (ent != (short*) 0) {
 		do {
 			if (*(short*) (entity_slot_table + (param_2 & 0xff) * 0x2f4) == *ent) {
 				total = total + *(int*) (ent + 7);
 			}
-			ent = NextEntityQueryMatch();
+			ent = gm_NextEntityQueryMatch();
 		} while (ent != (short*) 0);
 	}
 	return total;
@@ -3703,7 +3703,7 @@ int __cdecl QueryEntitySum(int param_1, unsigned int param_2)
 // BLOCKER: instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 396
 // FUNCTION: SERVER 0x10019720
-// CalculateProductionValue
+// gm_CalculateProductionValue
 
 /* Game function - recursive entity value calculation with FPU math */
 /* Accesses g_entity_table (0x101de450), calls crt_ftol and itself recursively */
@@ -3711,7 +3711,7 @@ int __cdecl QueryEntitySum(int param_1, unsigned int param_2)
 // BLOCKER_DELTA: 288
 // ANALYSIS: Recursive production value calculator. Computes the base value of an object type by looking up prototype data (stride 0x41), applying worker skill bonuses from building prototypes, and recursively summing ingredient costs (up to 4 ingredients). Caches result at proto_entry+0x38. Applies quality and production multipliers.
 
-double __cdecl CalculateProductionValue(int entity_index, int param2)
+double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 {
 	char* ent;
 	int cached;
@@ -3797,7 +3797,7 @@ double __cdecl CalculateProductionValue(int entity_index, int param2)
 					int weight;
 					int div36;
 
-					sub = CalculateProductionValue((int) slot, p2);
+					sub = gm_CalculateProductionValue((int) slot, p2);
 					weight = (int) *(unsigned short*) (p - 4);
 					div36 = (int) *(unsigned short*) (ent + 0x36);
 					sub *= weight;
@@ -3822,13 +3822,13 @@ double __cdecl CalculateProductionValue(int entity_index, int param2)
 // ORIGIN: GAME
 // SIZE: 355
 // FUNCTION: SERVER 0x100198b0
-// SumBuildingProductionValues
+// gm_SumBuildingProductionValues
 
 /* Game function - entity query stat accumulator */
-/* Iterates entity references in a record, calls CalculateProductionValue for each, accumulates results */
+/* Iterates entity references in a record, calls gm_CalculateProductionValue for each, accumulates results */
 // BLOCKER_DELTA: 308
 
-int __cdecl SumBuildingProductionValues(char* obj, int param2)
+int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 {
 	int running_sum;
 	char* record;
@@ -3866,13 +3866,13 @@ int __cdecl SumBuildingProductionValues(char* obj, int param2)
 				goto loop_bottom;
 			}
 
-			query = StartEntityQuery(*(int*) (obj + 0x5d), 1, 0, ent_idx);
+			query = gm_StartEntityQuery(*(int*) (obj + 0x5d), 1, 0, ent_idx);
 			if (!query) {
 				goto loop_bottom;
 			}
 
 			running_sum =
-				(int) (CalculateProductionValue(*(unsigned short*) query, *(unsigned char*) ((char*) query + 0x12)) +
+				(int) (gm_CalculateProductionValue(*(unsigned short*) query, *(unsigned char*) ((char*) query + 0x12)) +
 					   running_sum);
 
 			if (i < 0x3f) {
@@ -3892,9 +3892,9 @@ int __cdecl SumBuildingProductionValues(char* obj, int param2)
 
 			{
 				void* sub_query;
-				sub_query = StartEntityQuery(*(int*) ((char*) query + 0x14), 1, 0, ent_idx);
+				sub_query = gm_StartEntityQuery(*(int*) ((char*) query + 0x14), 1, 0, ent_idx);
 				if (sub_query) {
-					running_sum = (int) (CalculateProductionValue(
+					running_sum = (int) (gm_CalculateProductionValue(
 											 *(unsigned short*) sub_query,
 											 *(unsigned char*) ((char*) sub_query + 0x12)
 										 ) +
@@ -3929,9 +3929,9 @@ int __cdecl SumBuildingProductionValues(char* obj, int param2)
 // ORIGIN: GAME
 // SIZE: 74
 // FUNCTION: SERVER 0x10019A20
-// accumulate_typed2
+// gm_AccumulateTyped2
 
-int __cdecl accumulate_typed2(char* entity)
+int __cdecl gm_AccumulateTyped2(char* entity)
 {
 	int sum;
 	int result;
@@ -3939,11 +3939,11 @@ int __cdecl accumulate_typed2(char* entity)
 	sum = 0;
 	idx = (unsigned char) g_type_idx;
 	idx = idx * 189;
-	result = (int) StartEntityQuery(*(int*) (entity + 0x178), 1, 0, (int) *(unsigned short*) &g_key_table[idx]);
+	result = (int) gm_StartEntityQuery(*(int*) (entity + 0x178), 1, 0, (int) *(unsigned short*) &g_key_table[idx]);
 	if (result) {
 		do {
 			sum += *(int*) (result + 0xe);
-			result = (int) NextEntityQueryMatch();
+			result = (int) gm_NextEntityQueryMatch();
 		} while (result);
 	}
 	return sum;
@@ -3955,9 +3955,9 @@ int __cdecl accumulate_typed2(char* entity)
 #define NAKED_FUNC __declspec(naked)
 
 // FUNCTION: SERVER 0x10019a70
-// EntityQuerySum
+// gm_EntityQuerySum
 
-int NAKED_FUNC __cdecl EntityQuerySum(int param_1)
+int NAKED_FUNC __cdecl gm_EntityQuerySum(int param_1)
 {
 	__asm {
 		push ecx
@@ -3971,7 +3971,7 @@ int NAKED_FUNC __cdecl EntityQuerySum(int param_1)
 		push 2
 		push ecx
 		mov dword ptr [esp + 0x18], esi
-		call StartEntityQuery
+		call gm_StartEntityQuery
 		add esp, 0x14
 		test eax, eax
 		je L_done
@@ -3979,7 +3979,7 @@ int NAKED_FUNC __cdecl EntityQuerySum(int param_1)
 		push 5
 		push 1
 		push edx
-		call StartEntityQuery
+		call gm_StartEntityQuery
 		add esp, 0xc
 		test eax, eax
 		je L_done
@@ -3990,13 +3990,13 @@ int NAKED_FUNC __cdecl EntityQuerySum(int param_1)
 		mov dx, word ptr [eax]
 		push ecx
 		push edx
-		call CalculateProductionValue
+		call gm_CalculateProductionValue
 		fiadd dword ptr [esp + 0xc]
 		add esp, 8
 		call __ftol
 		mov esi, eax
 		mov dword ptr [esp + 4], esi
-		call NextEntityQueryMatch
+		call gm_NextEntityQueryMatch
 		test eax, eax
 		jne L_loop
 
@@ -4012,13 +4012,13 @@ int NAKED_FUNC __cdecl EntityQuerySum(int param_1)
 // ORIGIN: GAME
 // SIZE: 82
 // FUNCTION: SERVER 0x10019ae0
-// ResolveParentEntity
+// gm_ResolveParentEntity
 
-short* __cdecl ResolveParentEntity(short* param_1)
+short* __cdecl gm_ResolveParentEntity(short* param_1)
 {
 	void* dynamic_ent;
 
-	ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &param_1, *(int*) (param_1 + 5));
+	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &param_1, *(int*) (param_1 + 5));
 	if (param_1 == (short*) 0) {
 		if (dynamic_ent != (void*) 0 && *(unsigned short*) ((int) dynamic_ent + 0x27) != 0xffff) {
 			return (short*) (entity_array + (unsigned int) *(unsigned short*) ((int) dynamic_ent + 0x27) * 0x21c);
@@ -4032,13 +4032,13 @@ short* __cdecl ResolveParentEntity(short* param_1)
 // ORIGIN: GAME
 // SIZE: 62
 // FUNCTION: SERVER 0x10019b40
-// GetEntityType
+// gm_GetEntityType
 
-unsigned short __cdecl GetEntityType(short* param_1)
+unsigned short __cdecl gm_GetEntityType(short* param_1)
 {
 	void* dynamic_ent;
 
-	ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &param_1, *(int*) (param_1 + 5));
+	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &param_1, *(int*) (param_1 + 5));
 	if (param_1 != (short*) 0) {
 		return *param_1;
 	}
@@ -4052,9 +4052,9 @@ unsigned short __cdecl GetEntityType(short* param_1)
 // ORIGIN: GAME
 // SIZE: 124
 // FUNCTION: SERVER 0x10019b80
-// WalkEntityChain
+// gm_WalkEntityChain
 
-int __cdecl entity_accumulate(void* param_1)
+int __cdecl gm_EntityAccumulate(void* param_1)
 {
 	int result;
 	int entity_id;
@@ -4063,7 +4063,7 @@ int __cdecl entity_accumulate(void* param_1)
 
 	entity_id = *(int*) ((int) param_1 + 6);
 	while (entity_id != -1) {
-		result = ResolveEntityById((void**) &param_1, &static_ent, &existing_ent, entity_id);
+		result = gm_ResolveEntityById((void**) &param_1, &static_ent, &existing_ent, entity_id);
 		if (result == 0) {
 			return 0;
 		}
@@ -4084,9 +4084,9 @@ int __cdecl entity_accumulate(void* param_1)
 // ORIGIN: GAME
 // SIZE: 83
 // FUNCTION: SERVER 0x10019BE0
-// entity_accumulate
+// gm_EntityAccumulate
 
-int __cdecl WalkEntityChain(int raw_idx)
+int __cdecl gm_WalkEntityChain(int raw_idx)
 {
 	unsigned short idx;
 	int slot;
@@ -4100,12 +4100,12 @@ int __cdecl WalkEntityChain(int raw_idx)
 	if (*(unsigned short*) slot == 0xFFFF) {
 		return -1;
 	}
-	total = accumulate_typed2((char*) slot);
-	ent = (int) StartFilteredEntitySearch(1, 3, (int) idx);
+	total = gm_AccumulateTyped2((char*) slot);
+	ent = (int) gm_StartFilteredEntitySearch(1, 3, (int) idx);
 	if (ent) {
 		do {
-			total += SumBuildingProductionValues((char*) ent, (int) *(signed char*) (ent + 0x5c));
-			total += EntityQuerySum(ent);
+			total += gm_SumBuildingProductionValues((char*) ent, (int) *(signed char*) (ent + 0x5c));
+			total += gm_EntityQuerySum(ent);
 			ent = (int) FindNextFilteredEntity();
 		} while (ent);
 	}
@@ -4116,14 +4116,14 @@ int __cdecl WalkEntityChain(int raw_idx)
 // ORIGIN: GAME
 // SIZE: 48
 // FUNCTION: SERVER 0x10019c60
-// FindEntityByOwner
+// gm_FindEntityByOwner
 
 /* GLOBAL: SERVER 0x100358a2 */
 extern unsigned char g_entity_state_base[];
 
 /* GLOBAL: SERVER 0x100358a0 */
 
-char* __cdecl get_msg_field(int param_1)
+char* __cdecl gm_GetMsgField(int param_1)
 {
 	unsigned char* p;
 	int i;
@@ -4151,8 +4151,8 @@ char* __cdecl get_msg_field(int param_1)
 // ORIGIN: GAME
 // SIZE: 98
 // FUNCTION: SERVER 0x10019CD0
-// get_msg_field
-int __cdecl FindEntityByOwner(char* msg, char* pkt)
+// gm_GetMsgField
+int __cdecl gm_FindEntityByOwner(char* msg, char* pkt)
 {
 	unsigned short type;
 
@@ -4181,13 +4181,13 @@ int __cdecl compute_size(char* pkt)
 // BLOCKER: comparison direction swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 407
 // FUNCTION: SERVER 0x10019d30
-// KannObjektHergestellt
+// gm_KannObjektHergestellt
 
 /* Game function - checks production capacity and entity slot availability */
 // BLOCKER_DELTA: 93
 // GHIDRA: gm_KannObjektHergestellt
 
-int __cdecl KannObjektHergestellt(char* obj, int entity_index, int requested)
+int __cdecl gm_KannObjektHergestellt(char* obj, int entity_index, int requested)
 {
 	char* ent;
 	int category;
@@ -4200,24 +4200,24 @@ int __cdecl KannObjektHergestellt(char* obj, int entity_index, int requested)
 	int count;
 	int is_producer;
 
-	ent = entity_accumulate(obj);
+	ent = gm_EntityAccumulate(obj);
 	if (!ent) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
 			0x31de,
-			"KannObjektHergestellt(): pCObjekt==NULL",
+			"gm_KannObjektHergestellt(): pCObjekt==NULL",
 			1
 		);
 		return 0;
 	}
 
-	category = GetBuildingTypeCategory((unsigned char) *ent);
+	category = gm_GetBuildingTypeCategory((unsigned char) *ent);
 	is_cat2 = (category == 2);
 	max_size = compute_size(obj);
 
-	query = StartEntityQuery(*(int*) (obj + 0x14), 1, 0, entity_index);
+	query = gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, entity_index);
 	if (query) {
-		used = FindEntityByOwner(obj, query);
+		used = gm_FindEntityByOwner(obj, query);
 		remaining = max_size - used;
 		if (remaining > requested) {
 			goto return_requested;
@@ -4241,7 +4241,7 @@ int __cdecl KannObjektHergestellt(char* obj, int entity_index, int requested)
 
 	if (*(unsigned short*) obj == 0x2a) {
 		count = 0;
-		query = StartEntityQuery(*(int*) (obj + 0x14), 1, 5);
+		query = gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 5);
 		while (query) {
 			int result_id;
 			char* result_ent;
@@ -4284,7 +4284,7 @@ int __cdecl KannObjektHergestellt(char* obj, int entity_index, int requested)
 		do_count:
 			count++;
 		skip_count:
-			query = NextEntityQueryMatch();
+			query = gm_NextEntityQueryMatch();
 		}
 
 		if (is_producer) {
@@ -4300,10 +4300,10 @@ int __cdecl KannObjektHergestellt(char* obj, int entity_index, int requested)
 	}
 	else {
 		count = 0;
-		query = StartEntityQuery(*(int*) (obj + 0x14), 1, 5);
+		query = gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 5);
 		while (query) {
 			count++;
-			query = NextEntityQueryMatch();
+			query = gm_NextEntityQueryMatch();
 		}
 		if (count >= (unsigned char) obj[0x1c]) {
 			return 0;
@@ -4321,12 +4321,12 @@ return_requested:
 // ORIGIN: GAME
 // SIZE: 395
 // FUNCTION: SERVER 0x10019ed0
-// CheckInventoryCapacity
+// gm_CheckInventoryCapacity
 
 /* Game function - computes available entity slots (capped at 3) */
 // BLOCKER_DELTA: 364
 
-int __cdecl CheckInventoryCapacity(char* obj, int entity_index, int requested)
+int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested)
 {
 	char* table;
 	unsigned char entity_type;
@@ -4386,7 +4386,7 @@ int __cdecl CheckInventoryCapacity(char* obj, int entity_index, int requested)
 		return available;
 	}
 
-	query = StartEntityQuery(*(int*) (obj + 0x178), 1, 0, entity_index);
+	query = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 0, entity_index);
 	if (query) {
 		count = *(int*) ((char*) query + 0xe);
 		LookupEntityInTable(entity_index);
@@ -4397,7 +4397,7 @@ int __cdecl CheckInventoryCapacity(char* obj, int entity_index, int requested)
 		available = requested;
 	}
 	else {
-		query = StartEntityQuery(*(int*) (obj + 0x178), 1, 5);
+		query = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 5);
 		count = 0;
 		while (query) {
 			int result_id;
@@ -4408,7 +4408,7 @@ int __cdecl CheckInventoryCapacity(char* obj, int entity_index, int requested)
 			if (*result_ent != 9) {
 				count++;
 			}
-			query = NextEntityQueryMatch();
+			query = gm_NextEntityQueryMatch();
 		}
 		if (count >= 6) {
 			available = 3;
@@ -4425,26 +4425,26 @@ int __cdecl CheckInventoryCapacity(char* obj, int entity_index, int requested)
 // ORIGIN: GAME
 // SIZE: 97
 // FUNCTION: SERVER 0x1001A060
-// entity_set_field
+// gm_EntitySetField
 
-void __cdecl entity_set_field(void)
+void __cdecl gm_EntitySetField(void)
 {
 	int entity;
 	int sub;
-	entity = (int) StartFilteredEntitySearch(1, 0, 0x1e);
+	entity = (int) gm_StartFilteredEntitySearch(1, 0, 0x1e);
 	if (!entity) {
 		return;
 	}
 	do {
-		sub = (int) StartEntityQuery(*(int*) (entity + 0x5d), 1, 0, 0xff);
+		sub = (int) gm_StartEntityQuery(*(int*) (entity + 0x5d), 1, 0, 0xff);
 		if (sub) {
-			sub = (int) StartEntityQuery(*(int*) (sub + 0x14), 1, 5);
+			sub = (int) gm_StartEntityQuery(*(int*) (sub + 0x14), 1, 5);
 			if (sub) {
 				do {
 					if (*(int*) (sub + 0xe) != 2) {
 						*(int*) (sub + 0xe) = 2;
 					}
-				} while ((sub = (int) NextEntityQueryMatch()) != 0);
+				} while ((sub = (int) gm_NextEntityQueryMatch()) != 0);
 			}
 		}
 		entity = (int) FindNextFilteredEntity();
@@ -4456,9 +4456,9 @@ void __cdecl entity_set_field(void)
 // SIZE: 54
 // GHIDRA: RandomBelow
 // FUNCTION: SERVER 0x1001A0D0
-// random_mod
+// gm_RandomMod
 
-int __cdecl random_mod(unsigned short n)
+int __cdecl gm_RandomMod(unsigned short n)
 {
 	if (n) {
 		return rand() % n;
@@ -4470,9 +4470,9 @@ int __cdecl random_mod(unsigned short n)
 // ORIGIN: GAME
 // SIZE: 22
 // FUNCTION: SERVER 0x1001a0f0
-// RandomFloat01
+// gm_RandomFloat01
 
-double __cdecl RandomFloat01(void)
+double __cdecl gm_RandomFloat01(void)
 {
 	return (double) rand() * (double) _DAT_10025fbc;
 }
@@ -4481,13 +4481,13 @@ double __cdecl RandomFloat01(void)
 // ORIGIN: GAME
 // SIZE: 48
 // FUNCTION: SERVER 0x1001a110
-// RandomQuadratic
+// gm_RandomQuadratic
 
-float __cdecl RandomQuadratic(void)
+float __cdecl gm_RandomQuadratic(void)
 {
 	float rand_val;
 
-	rand_val = (float) RandomFloat01();
+	rand_val = (float) gm_RandomFloat01();
 	rand_val = (rand_val + rand_val) - _DAT_100256a0;
 	if (rand_val < _DAT_100256cc) {
 		return _DAT_100256a8 * rand_val * rand_val;
