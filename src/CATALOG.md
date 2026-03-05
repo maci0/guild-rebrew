@@ -10,7 +10,7 @@ Coverage: 92.6% of .text section (136577/147456 bytes)
 |-----|------|------|--------|-------|-------|------|
 | 0x10001130 | 179B | SendBroadcastPacket | _SendBroadcastPacket |  | FUNCTION/RELOC | server.dll/Units/net/broadcast.c |
 | 0x10002640 | 290B | DispatchLogOutput | _DispatchLogOutput |  | FUNCTION/RELOC | server.dll/Units/Error/Error.c |
-| 0x10002770 | 1836B | CrashDumpUnhandledExceptionFilter@4 | _CrashDumpUnhandledExceptionFilter@4 |  | FUNCTION/MATCHING | server.dll/Units/Error/Error.c |
+| 0x10002770 | 1836B | CrashDumpUnhandledExceptionFilter | _CrashDumpUnhandledExceptionFilter |  | FUNCTION/MATCHING | server.dll/Units/Error/Error.c |
 | 0x10002FC0 | 376B | EmitCrashModuleLine | _EmitCrashModuleLine |  | FUNCTION/MATCHING | server.dll/Units/Error/Error.c |
 | 0x10003140 | 33B | GetDebugRecordByIndex | _GetDebugRecordByIndex |  | FUNCTION/EXACT | server.dll/Units/Error/Error.c |
 | 0x10003170 | 240B | check_memory_protection | _check_memory_protection |  | FUNCTION/RELOC | server.dll/Units/Error/Error.c |
