@@ -34,7 +34,7 @@ extern int g_entity_table_end;
 extern char* g_action_table_base;
 extern char g_slot_table[];
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
-extern int __cdecl crt_rand_range(int);
+extern int __cdecl random_mod(int);
 extern double __cdecl RandomFloat01(void);
 extern int DAT_10030b6c;
 extern int DAT_10035434;
@@ -1641,11 +1641,11 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 				DAT_10025680 / (float) (random_float * (double) DAT_100257c8 + (double) DAT_100257c4);
 			do {
 				entity_slot_index = *new_entity_slot_ptr;
-				rand_relationship_val = (char) crt_rand_range(0x40);
+				rand_relationship_val = (char) random_mod(0x40);
 				*(char*) (entity_slot_index + slot_scan_idx_or_capacity + 0x1014d8e0) = 0;
 				*(char*) (entity_slot_index + slot_scan_idx_or_capacity + 0x100a9820) = rand_relationship_val - 0x20;
 				entity_slot_byte_offset = *new_entity_slot_ptr * 0x300 + relationship_loop_idx;
-				rand_relationship_val = (char) crt_rand_range(0x40);
+				rand_relationship_val = (char) random_mod(0x40);
 				slot_scan_idx_or_capacity = slot_scan_idx_or_capacity + 0x300;
 				relationship_loop_idx = relationship_loop_idx + 1;
 				*(char*) (entity_slot_byte_offset + 0x100a9820) = rand_relationship_val - 0x20;

@@ -130,7 +130,7 @@ extern int __cdecl classify(int);
 extern int __cdecl MapEntityStatRange(int);
 extern short* __cdecl GetEntityTableEntry(char*);
 extern float DAT_100257bc;
-extern int __cdecl random_mod(int range);
+extern int __cdecl random_mod(unsigned short range);
 extern char entity_table[];
 extern int __cdecl LookupEntityRecordById(int);
 extern void __cdecl AssignBuildingOwner(char*, unsigned short, unsigned short);
@@ -161,6 +161,8 @@ extern double DAT_100257d0; /* 0x100257d0 */
 extern double __cdecl CalculateProductionValue(unsigned short, unsigned char);
 extern int __cdecl __ftol(void);
 extern char g_type_idx;
+extern int g_key_table[];
+extern char entity_array[];
 extern int __cdecl SumBuildingProductionValues(char*, int);
 extern int __cdecl EntityQuerySum(int);
 extern int __cdecl compute_size(char*, int); /* 0x10019d00 */
@@ -4537,7 +4539,7 @@ void __cdecl entity_set_field(void)
 	int sub;
 	entity = (int) StartFilteredEntitySearch(1, 0, 0x1e);
 	if (!entity) {
-		return 0;
+		return;
 	}
 	do {
 		sub = (int) StartEntityQuery(*(int*) (entity + 0x5d), 1, 0, 0xff);

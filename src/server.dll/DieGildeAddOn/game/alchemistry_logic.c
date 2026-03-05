@@ -5,8 +5,8 @@ typedef int(__cdecl* dispatch_fn)(unsigned char*);
 extern char* g_table;
 extern int __cdecl ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
-extern int __cdecl crt_rand_range(int range);
-extern float __cdecl crt_rand_float(void);
+extern int __cdecl random_mod(int range);
+extern float __cdecl RandomFloat01(void);
 extern int __cdecl crt_ftol(void);
 extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* tag);
 extern void* __cdecl StartEntityQuery(int, int, int, ...);
@@ -223,7 +223,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			*(short*) ((char*) entity + 0x50) = 0x7fff;
 			idx = 0;
 			do {
-				rand_char = (char) crt_rand_range(0x40);
+				rand_char = (char) random_mod(0x40);
 				*((char*) entity + 0x80 + idx) = rand_char + 'T';
 				idx = idx + 1;
 			} while (idx < 5);
@@ -233,12 +233,12 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 				float rand_f;
 				float scale;
 				float base_val;
-				rand_f = crt_rand_float();
+				rand_f = RandomFloat01();
 				scale = g_100256c8;
 				*(int*) ((char*) entity + 0x20) = 0x41400000;
 				*(float*) ((char*) entity + 0x14) = (rand_f * scale + g_100256c4) - g_100256c0;
 				alloc_result = (unsigned int) crt_ftol();
-				rand_val = (unsigned short) crt_rand_range(alloc_result);
+				rand_val = (unsigned short) random_mod(alloc_result);
 				base_val = *(float*) ((char*) entity + 0x1c) * g_100256b8;
 				*(int*) ((char*) entity + 0x18) = *(int*) ((char*) entity + 0x1c);
 				col_idx = 0;
@@ -248,12 +248,12 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			}
 			do {
 				rand_val = *entity;
-				rand_char = (char) crt_rand_range(0x40);
+				rand_char = (char) random_mod(0x40);
 				*(char*) (rand_val + idx + 0x100a9820) = rand_char + -0x20;
 				entity_id = *entity;
 				*(char*) (rand_val + idx + 0x1014d8e0) = 0;
 				slot_offset = entity_id * 0x300 + col_idx;
-				rand_char = (char) crt_rand_range(0x40);
+				rand_char = (char) random_mod(0x40);
 				idx = idx + 0x300;
 				col_idx = col_idx + 1;
 				*(char*) (slot_offset + 0x100a9820) = rand_char + -0x20;
