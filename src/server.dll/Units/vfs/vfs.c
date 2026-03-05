@@ -15,6 +15,7 @@ extern void __cdecl write_uint32_le(int, unsigned int);
 extern int __cdecl close_stream(int);
 extern int __cdecl crt_locked_putc(int, int);
 extern void __cdecl entity_cleanup(char*);
+extern void mem_free(void*);
 extern void __cdecl stream_close(int);
 extern int __cdecl crt_locked_call4b(int stream, unsigned int size, int count, int handle);
 extern int __cdecl crc32_update(int checksum, int buffer, unsigned int size);
@@ -136,9 +137,9 @@ int __cdecl close_stream(void* param_1)
 // SYMBOL: _flush_stream
 // FUNCTION: SERVER 0x10003b90
 // flush_stream
-// PROTOTYPE: uint __cdecl flush_stream(int param_1, int param_2)
+// PROTOTYPE: uunsigned int __cdecl flush_stream(int param_1, int param_2)
 
-unsigned int __cdecl flush_stream(int param_1, int param_2)
+unsigned unsigned int __cdecl flush_stream(int param_1, int param_2)
 {
 	int done;
 	int write_result;
@@ -152,7 +153,7 @@ unsigned int __cdecl flush_stream(int param_1, int param_2)
 	do {
 		remaining = 0x4000 - *(int*) (param_1 + 0x10);
 		if (remaining != 0) {
-			write_result = locked_fwrite(*(int*) (param_1 + 0x48), 1, remaining, *(int*) (param_1 + 0x40));
+			write_result = locked_fwrite(*(void**) (param_1 + 0x48), 1, remaining, *(void**) (param_1 + 0x40));
 			if (write_result != remaining) {
 				*(int*) (param_1 + 0x38) = -1;
 				return (unsigned int) -1;
@@ -163,7 +164,7 @@ unsigned int __cdecl flush_stream(int param_1, int param_2)
 		if (done) {
 			break;
 		}
-		write_result = compress_block(param_1, param_2);
+		write_result = compress_block((void*)param_1, (int)param_2);
 		*(int*) (param_1 + 0x38) = write_result;
 		if (remaining == 0 && write_result == -5) {
 			*(int*) (param_1 + 0x38) = 0;
