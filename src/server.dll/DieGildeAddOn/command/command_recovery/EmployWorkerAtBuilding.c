@@ -1,9 +1,9 @@
-/* ORIGIN: GAME */
-/* SIZE: 515 */
-/* CFLAGS: /O2 /Gd */
-/* SYMBOL: _EmployWorkerAtBuilding */
-/* STATUS: RELOC */
-/* FUNCTION: SERVER 0x1000f730 */
+// FUNCTION: SERVER 0x1000f730
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 515
+// CFLAGS: /O2 /Gd
+// SYMBOL: _EmployWorkerAtBuilding
 
 typedef unsigned int uint;
 typedef unsigned short ushort;

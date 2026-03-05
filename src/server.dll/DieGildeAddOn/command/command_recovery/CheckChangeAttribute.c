@@ -1,11 +1,11 @@
-/* STATUS: MATCHING */
-/* ORIGIN: GAME */
-/* SIZE: 331 */
-/* CFLAGS: /O2 /Gd */
-/* BLOCKER: struct field access scheduling (inc;inc vs lea+add pattern) */
-/* BLOCKER_DELTA: 14 */
-/* SYMBOL: _CheckChangeAttribute */
-/* FUNCTION: SERVER 0x1000cde0 */
+// FUNCTION: SERVER 0x1000cde0
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 331
+// CFLAGS: /O2 /Gd
+// SYMBOL: _CheckChangeAttribute
+// BLOCKER: struct field access scheduling (inc;inc vs lea+add pattern)
+// BLOCKER_DELTA: 14
 
 #ifdef __clang__
 #pragma clang diagnostic push

@@ -1,9 +1,9 @@
-/* STATUS: MATCHING */
-/* ORIGIN: GAME */
-/* SIZE: 197 */
-/* CFLAGS: /O2 /Gd */
-/* SYMBOL: _RemoveLinkedObject */
-/* FUNCTION: SERVER 0x1000f0d0 */
+// FUNCTION: SERVER 0x1000f0d0
+// STATUS: MATCHING
+// ORIGIN: GAME
+// SIZE: 197
+// CFLAGS: /O2 /Gd
+// SYMBOL: _RemoveLinkedObject
 // BLOCKER: prologue register pre-load ordering, instruction folding (lea vs mov), jump condition swap, nodeId register allocation (esi vs ecx)
 // BLOCKER_DELTA: 176
 

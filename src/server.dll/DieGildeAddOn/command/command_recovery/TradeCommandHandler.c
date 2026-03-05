@@ -1,9 +1,11 @@
 // FUNCTION: SERVER 0x1000d930
-// STATUS: STUB
+// STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 2057
 // CFLAGS: /O2 /Gd
 // SYMBOL: _TradeCommandHandler
+// BLOCKER: stack frame size (0x228 vs 0x224), register allocation (edi vs ebx for zero init), error handler push/jmp vs mov/jmp pattern, merged stack cleanup (sprintf+LogMessage), loop rotation / branch layout, comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
+// BLOCKER_DELTA: 1962
 
 typedef unsigned char uchar;
 typedef unsigned short ushort;
@@ -366,7 +368,10 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 				}
 			}
 		}
-		*(int*)(g_player_slot_0[(unsigned char)param_1[3]].data + 0x264200) = *(int*)(dest_object + 1);
+		error_code = (unsigned char)param_1[3];
+		error_code = ((((error_code << 4) + error_code) << 8) + error_code) << 4;
+		error_code = error_code + (unsigned char)param_1[3];
+		*(int*)((char*)0x10442d08 + error_code * 9 * 4) = *(int*)(dest_object + 1);
 		if (*(int*)(param_1 + 0x23) != 0 && dest_owner_entity != (short*)0) {
 			SubObjekt(
 				*(void**)(dest_owner_entity + 2),

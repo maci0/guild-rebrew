@@ -1,9 +1,11 @@
 // FUNCTION: SERVER 0x1000ec00
-// STATUS: STUB
+// STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 912
 // CFLAGS: /O2 /Gd
 // SYMBOL: _ExCopyEntityData
+// BLOCKER: register allocation (esi vs edi for cmd_ptr, ebp vs ebx for outer_ent), branch condition inversion (jle/jge vs jg/jl in clamping), dead code elimination (inner nested if level>0 check optimized away), loop structure (while entity search vs do-while with inlined return), return 1 epilogue sharing (candidate shares one exit, target inlines two)
+// BLOCKER_DELTA: 121
 
 typedef unsigned int uint;
 typedef unsigned short ushort;
@@ -50,47 +52,37 @@ int __cdecl ExCopyEntityData(int cmd_ptr, char* response)
 	if (ebx_type == 4) {
 		level = *(uint*) (cmd_ptr + 0x24);
 
-		if (level <= 0) {
-			threshold_high = 0x64;
-			threshold_low = -75;
-			decay_high = -5;
-			decay_low = 11;
+		if (level > 0 && level < (uint) ebx_type) {
+			if (level == 3) {
+				threshold_high = 0x37;
+				threshold_low = -105;
+				decay_high = -16;
+				decay_low = 5;
+			}
+			else if (level == 2) {
+				threshold_high = 0x46;
+				threshold_low = -95;
+				decay_high = -12;
+				decay_low = 7;
+			}
+			else if (level == 1) {
+				threshold_high = 0x55;
+				threshold_low = -85;
+				decay_high = -8;
+				decay_low = 9;
+			}
+			else {
+				threshold_high = 0x64;
+				threshold_low = -75;
+				decay_high = -5;
+				decay_low = 11;
+			}
 		}
 		else if (level >= (uint) ebx_type) {
 			threshold_high = 0x28;
 			threshold_low = -115;
 			decay_high = -20;
 			decay_low = 3;
-		}
-		else if (level <= 0) {
-			threshold_high = 0x64;
-			threshold_low = -75;
-			decay_high = -5;
-			decay_low = 11;
-		}
-		else if (level == (uint) ebx_type) {
-			threshold_high = 0x28;
-			threshold_low = -115;
-			decay_high = -20;
-			decay_low = 3;
-		}
-		else if (level == 3) {
-			threshold_high = 0x37;
-			threshold_low = -105;
-			decay_high = -16;
-			decay_low = 5;
-		}
-		else if (level == 2) {
-			threshold_high = 0x46;
-			threshold_low = -95;
-			decay_high = -12;
-			decay_low = 7;
-		}
-		else if (level == 1) {
-			threshold_high = 0x55;
-			threshold_low = -85;
-			decay_high = -8;
-			decay_low = 9;
 		}
 		else {
 			threshold_high = 0x64;
@@ -108,8 +100,8 @@ int __cdecl ExCopyEntityData(int cmd_ptr, char* response)
 			do {
 				val = (int) (signed char) mat_row[inner_idx];
 				if (outer_idx != inner_idx &&
-					*(short*) outer_ent != (short) -1 &&
-					*(short*) inner_ent != (short) -1) {
+					*(ushort*) outer_ent != (ushort) 0xffff &&
+					*(ushort*) inner_ent != (ushort) 0xffff) {
 					if (val > threshold_high) {
 						delta = decay_high;
 					}

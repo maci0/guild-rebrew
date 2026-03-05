@@ -2,7 +2,7 @@
 
 # Reversed Functions Catalog
 
-Total: 547 functions matched (307 exact, 108 reloc, 3 stubs)  
+Total: 547 functions matched (307 exact, 108 reloc, 0 stubs)  
 Coverage: 0.0% of .text section (147303/0 bytes)
 
 
@@ -108,8 +108,8 @@ Coverage: 0.0% of .text section (147303/0 bytes)
 | 0x1000d730 | _ExFreeEntity | 192 | MATCHING | DieGildeAddOn/command/command_recovery/ExFreeEntity.c |
 | 0x1000d7f0 | _ExTransferCurrency | 176 | RELOC | DieGildeAddOn/command/command_recovery/ExTransferCurrency.c |
 | 0x1000d8a0 | _ExTransferCurrencyNoKill | 144 | RELOC | DieGildeAddOn/command/command_recovery/ExTransferCurrencyNoKill.c |
-| 0x1000d930 | _TradeCommandHandler | 2057 | STUB | DieGildeAddOn/command/command_recovery/TradeCommandHandler.c |
-| 0x1000e140 | _cm_ExecProduction | 993 | STUB | DieGildeAddOn/command/command_recovery/cm_ExecProduction.c |
+| 0x1000d930 | _TradeCommandHandler | 2057 | MATCHING | DieGildeAddOn/command/command_recovery/TradeCommandHandler.c |
+| 0x1000e140 | _cm_ExecProduction | 993 | MATCHING | DieGildeAddOn/command/command_recovery/cm_ExecProduction.c |
 | 0x1000e530 | _ExMoveObject | 352 | MATCHING | DieGildeAddOn/command/command_recovery/ExMoveObject.c |
 | 0x1000e690 | _cm_ExClearLagerslot | 191 | MATCHING | DieGildeAddOn/command/command_recovery/cm_ExClearLagerslot.c |
 | 0x1000e750 | _ExCreateObject | 128 | RELOC | DieGildeAddOn/command/command_recovery/ExCreateObject.c |
@@ -118,7 +118,7 @@ Coverage: 0.0% of .text section (147303/0 bytes)
 | 0x1000e9c0 | _ExChangeDesire | 214 | MATCHING | DieGildeAddOn/command/command_recovery/ExChangeDesire.c |
 | 0x1000eaa0 | _ExSetEntityBitmask | 208 | MATCHING | DieGildeAddOn/command/command_recovery/ExSetEntityBitmask.c |
 | 0x1000eb70 | _ExSetEntityField | 1045 | MATCHING | DieGildeAddOn/command/command_recovery/ExSetEntityField.c |
-| 0x1000ec00 | _ExCopyEntityData | 938 | STUB | DieGildeAddOn/command/command_recovery/ExCopyEntityData.c |
+| 0x1000ec00 | _ExCopyEntityData | 938 | MATCHING | DieGildeAddOn/command/command_recovery/ExCopyEntityData.c |
 | 0x1000ef90 | _chain_handler_assign_id | 26 | RELOC | DieGildeAddOn/command/command_recovery/chain_handler_assign_id.c |
 | 0x1000efb0 | _SetSyncFlags | 122 | RELOC | DieGildeAddOn/command/command_recovery/SetSyncFlags.c |
 | 0x1000f030 | _CmdKillPlayer | 72 | RELOC | DieGildeAddOn/command/command_recovery/CmdKillPlayer.c |

@@ -1,12 +1,13 @@
 // FUNCTION: SERVER 0x1000e140
-// STATUS: STUB
+// STATUS: MATCHING
+// BLOCKER: jump condition swap, zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 993
 // CFLAGS: /O2 /Gd
 // SYMBOL: _cm_ExecProduction
 
 /*
-// BLOCKER_DELTA: 884
+// BLOCKER_DELTA: 922
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
@@ -122,9 +123,9 @@ int __cdecl cm_ExecProduction(int msg, char* result)
 		(uint)*(ushort*)(local_c + 0x36) * iVar1
 	);
 	iVar4 = iVar4 / (int)(uint)*(ushort*)(pcVar3 + 0x36);
-	if (iVar1 >= iVar4) {
+	if (iVar4 <= iVar1) {
 		iVar1 = iVar4;
-		local_8 = iVar4;
+		local_8 = iVar1;
 	}
 	if (iVar1 == 0) {
 		pcVar3 = s_cm_ExProdObjekt___Cannot_produce___1002cf1c;

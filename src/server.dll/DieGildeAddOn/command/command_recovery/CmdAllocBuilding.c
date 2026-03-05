@@ -1,9 +1,9 @@
-/* ORIGIN: GAME */
-/* SIZE: 267 */
-/* CFLAGS: /O2 /Gd */
-/* SYMBOL: _CmdAllocBuilding */
-/* STATUS: RELOC */
-/* FUNCTION: SERVER 0x1000d350 */
+// FUNCTION: SERVER 0x1000d350
+// STATUS: RELOC
+// ORIGIN: GAME
+// SIZE: 267
+// CFLAGS: /O2 /Gd
+// SYMBOL: _CmdAllocBuilding
 
 #ifdef __clang__
 #pragma clang diagnostic push
