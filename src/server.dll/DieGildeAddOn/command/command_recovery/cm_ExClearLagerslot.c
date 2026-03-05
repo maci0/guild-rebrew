@@ -1,6 +1,6 @@
 // FUNCTION: SERVER 0x1000e690
-// STATUS: STUB
-// BLOCKER: zero-extend pattern (xor vs mov)
+// STATUS: MATCHING
+// BLOCKER: register allocation - target uses only esi, compiler allocates esi+edi for saved param_1 copy
 // ORIGIN: GAME
 // SIZE: 191
 // CFLAGS: /O2 /Gd
