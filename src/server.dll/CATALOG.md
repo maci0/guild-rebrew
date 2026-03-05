@@ -3,7 +3,7 @@
 # Reversed Functions Catalog
 
 Total: 547 functions matched (311 exact, 108 reloc, 7 stubs)  
-Coverage: 0.0% of .text section (146492/0 bytes)
+Coverage: 0.0% of .text section (147303/0 bytes)
 
 
 ## GAME (258 functions)
@@ -525,7 +525,7 @@ Coverage: 0.0% of .text section (146492/0 bytes)
 | 0x10001a60 | ??? | 343 | EXACT | library_zlib.h |
 | 0x10001bc0 | ??? | 290 | EXACT | library_zlib.h |
 | 0x10001cf0 | ??? | 113 | EXACT | library_zlib.h |
-| 0x10001d70 | ??? | 2 | EXACT | library_zlib.h |
+| 0x10001d70 | ??? | 813 | EXACT | library_zlib.h |
 | 0x100020a0 | ??? | 367 | EXACT | library_zlib.h |
 | 0x10002210 | ??? | 1066 | EXACT | library_zlib.h |
 | 0x100036d0 | ??? | 332 | EXACT | library_zlib.h |

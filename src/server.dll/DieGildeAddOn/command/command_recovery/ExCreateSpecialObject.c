@@ -59,6 +59,8 @@ int __cdecl ExCreateSpecialObject(int param_1, char* param_2)
 {
 	int iVar1;
 	char* pcVar2;
+	char* src;
+	char* dst;
 
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
 	iVar1 = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
@@ -70,9 +72,11 @@ int __cdecl ExCreateSpecialObject(int param_1, char* param_2)
 	*(int*) (g_player_slot_0 + (unsigned int) *(unsigned char*) (param_1 + 3) * 0x264264 + 0x264200) =
 		*(int*) (pcVar2 + 2);
 	pcVar2[0x12] = '@';
-	*(int*) (pcVar2 + 0x1c) = *(int*) (param_1 + 0x18);
-	*(unsigned short*) (pcVar2 + 0x20) = *(unsigned short*) (param_1 + 0x1c);
-	pcVar2[0x22] = *(char*) (param_1 + 0x1e);
+	param_1 += 0x18;
+	dst = pcVar2 + 0x1c;
+	*(int*) dst = *(int*) param_1;
+	*(unsigned short*) (dst + 4) = *(unsigned short*) (param_1 + 4);
+	dst[6] = *(char*) (param_1 + 6);
 	pcVar2[0x22] = '\0';
 	LogMessageInternal(
 		s_D__Develop_DieGildeAddOn_command_1002c748,
