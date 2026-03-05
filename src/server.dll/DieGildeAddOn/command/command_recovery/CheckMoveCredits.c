@@ -1,5 +1,5 @@
 // FUNCTION: SERVER 0x1000cb20
-// STATUS: STUB
+// STATUS: MATCHING
 // BLOCKER: jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 171

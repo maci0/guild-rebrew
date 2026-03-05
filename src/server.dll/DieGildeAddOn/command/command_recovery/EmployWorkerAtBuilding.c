@@ -2,7 +2,7 @@
 /* SIZE: 515 */
 /* CFLAGS: /O2 /Gd */
 /* SYMBOL: _EmployWorkerAtBuilding */
-/* STATUS: STUB */
+/* STATUS: RELOC */
 /* FUNCTION: SERVER 0x1000f730 */
 
 typedef unsigned int uint;
@@ -39,9 +39,7 @@ int EmployWorkerAtBuilding(int param_1, char* param_2)
 	char* citizen_entity;
 	int* building_type_ptr;
 	ushort* workplace_entity;
-	uint log_line;
 	char worker_type;
-	const char* log_msg;
 
 	workplace_entity = (ushort*) 0;
 	*(int*) (param_1 + 0x1f) = g_timestamp_0b6c;
@@ -50,22 +48,22 @@ int EmployWorkerAtBuilding(int param_1, char* param_2)
 	crt_thread_set_alt(random_seed);
 	building_entity = (ushort*) StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x10));
 	if (building_entity == (ushort*) 0) {
-		log_msg = s_cm_ExEmployWorker____Illegal_geb_1002d33c;
-		log_line = 0x4d3a;
-		goto error_log;
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x4d3a,
+			s_cm_ExEmployWorker____Illegal_geb_1002d33c, 1);
+		return 1;
 	}
 	citizen_entity = (char*) LookupEntityRecordById(*(int*) (param_1 + 0x19));
-	if (*(int*) (param_1 + 0x14) == -1) {
-		if (citizen_entity != (char*) 0) {
-			workplace_entity = *(ushort**) (citizen_entity + 0x170);
+	if (*(int*) (param_1 + 0x14) != -1) {
+		workplace_entity = (ushort*) StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x14));
+		if (workplace_entity == (ushort*) 0) {
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x4d50,
+				s_cm_ExEmployWorker____Illegal_gw__1002d318, 1);
+			return 1;
 		}
 	}
 	else {
-		workplace_entity = (ushort*) StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x14));
-		if (workplace_entity == (ushort*) 0) {
-			log_msg = s_cm_ExEmployWorker____Illegal_gw__1002d318;
-			log_line = 0x4d50;
-			goto error_log;
+		if (citizen_entity != (char*) 0) {
+			workplace_entity = *(ushort**) (citizen_entity + 0x170);
 		}
 	}
 
@@ -132,8 +130,4 @@ int EmployWorkerAtBuilding(int param_1, char* param_2)
 		*(char**) (param_2 + 6) = citizen_entity;
 	}
 	return 0;
-
-error_log:
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, log_line, log_msg, 1);
-	return 1;
 }

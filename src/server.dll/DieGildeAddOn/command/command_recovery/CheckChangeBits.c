@@ -1,5 +1,5 @@
 // FUNCTION: SERVER 0x1000cf30
-// STATUS: STUB
+// STATUS: MATCHING
 // BLOCKER: instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp)
 // ORIGIN: GAME
 // SIZE: 162
