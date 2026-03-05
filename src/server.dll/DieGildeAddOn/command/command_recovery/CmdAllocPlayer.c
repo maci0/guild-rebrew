@@ -1,6 +1,5 @@
 // FUNCTION: SERVER 0x1000d460
-// STATUS: STUB
-// BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
+// STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 267
 // CFLAGS: /O2 /Gd
@@ -77,7 +76,7 @@ extern int __cdecl rand(void);
 extern void __cdecl crt_thread_set_alt(int);
 extern int __cdecl get_field_by_type(char*, int);
 extern void* __cdecl StartFilteredEntitySearch(int, ...);
-extern uint __cdecl CreateEntityFromParents(int, int, int, int, int, int, int, int);
+extern uint __cdecl CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 
 extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
@@ -114,14 +113,14 @@ int __cdecl CmdAllocPlayer(int param_1, char* param_2)
 		}
 	}
 	uVar2 = CreateEntityFromParents(
-		(int) *(uchar*) (param_1 + 0x14),
+		*(uchar*) (param_1 + 0x14),
 		*(int*) (param_1 + 0x15),
 		*(int*) (param_1 + 0x19),
 		*(ushort*) (param_1 + 0x1d),
 		iVar1,
-		(int) *(uchar*) (param_1 + 0x23),
-		(int) *(uchar*) (param_1 + 0x24),
-		(int) *(uchar*) (param_1 + 0x25)
+		*(uchar*) (param_1 + 0x23),
+		*(uchar*) (param_1 + 0x24),
+		*(uchar*) (param_1 + 0x25)
 	);
 	uVar2 = uVar2 & 0xffff;
 	if (uVar2 == 0xffff) {

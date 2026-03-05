@@ -1,7 +1,9 @@
-/* STATUS: STUB */
+/* STATUS: MATCHING */
 /* ORIGIN: GAME */
 /* SIZE: 331 */
 /* CFLAGS: /O2 /Gd */
+/* BLOCKER: struct field access scheduling (inc;inc vs lea+add pattern) */
+/* BLOCKER_DELTA: 14 */
 /* SYMBOL: _CheckChangeAttribute */
 /* FUNCTION: SERVER 0x1000cde0 */
 
@@ -23,6 +25,14 @@ extern char s_cm_ChkChangeAttribute___Error_i_1002c9a0[];
 extern char s_cm_ChkChangeAttribute___Source_obj_1002c958[];
 extern char s_cm_ChkChangeAttribute___Target_obj_1002c90c[];
 
+#pragma pack(push, 1)
+typedef struct {
+	signed char kind;
+	signed char value;
+	unsigned short offs;
+} AttrEntry;
+#pragma pack(pop)
+
 int __cdecl CheckChangeAttribute(int param_1, char* param_2)
 {
 	int id;
@@ -33,7 +43,7 @@ int __cdecl CheckChangeAttribute(int param_1, char* param_2)
 	unsigned int i;
 	int kind;
 	unsigned int value;
-	int* piVar;
+	AttrEntry* entry;
 	char* p;
 	char* field;
 	int rec;
@@ -61,15 +71,15 @@ int __cdecl CheckChangeAttribute(int param_1, char* param_2)
 		}
 	}
 
-	piVar = (int*) (param_1 + 0x15);
+	p = (char*) (param_1 + 0x15);
 	i = 0;
 
 	while (i < *(unsigned char*) (param_1 + 0x14)) {
-		kind = (signed char) *(char*) piVar;
-		value = (int) *(signed char*) ((int) piVar + 1);
-		p = (char*) ((unsigned int) *(unsigned short*) ((int) piVar + 2) + (int) base);
-		piVar = piVar + 1;
-		field = p;
+		entry = (AttrEntry*) p;
+		kind = entry->kind;
+		value = entry->value;
+		p = (char*) (entry + 1);
+		field = (char*) base + entry->offs;
 
 		if (ent_c != (void*) 0) {
 			if (field == ((char*) ent_c + 4)) {
@@ -82,7 +92,7 @@ int __cdecl CheckChangeAttribute(int param_1, char* param_2)
 				return 1;
 			}
 			if (field == ((char*) ent_c + 0x5c)) {
-				rec = LookupEntityRecordById(*(int*) piVar + *(int*) ((char*) ent_c + 0x5c));
+				rec = LookupEntityRecordById(*(int*) p + *(int*) ((char*) ent_c + 0x5c));
 				if (rec == 0) {
 					LogMessageInternal(
 						s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -108,17 +118,17 @@ int __cdecl CheckChangeAttribute(int param_1, char* param_2)
 		switch (kind) {
 		case 1:
 			if (value > 0) {
-				piVar = (int*) ((char*) piVar + value);
+				p = p + value;
 			}
 			break;
 		case 2:
 			if (value > 0) {
-				piVar = (int*) ((char*) piVar + value * 2);
+				p = p + value * 2;
 			}
 			break;
 		case 4:
 			if (value > 0) {
-				piVar = (int*) ((char*) piVar + value * 4);
+				p = p + value * 4;
 			}
 			break;
 		}

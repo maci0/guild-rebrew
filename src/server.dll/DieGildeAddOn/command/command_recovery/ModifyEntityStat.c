@@ -1,5 +1,6 @@
 // FUNCTION: SERVER 0x100100a0
-// STATUS: STUB
+// STATUS: MATCHING
+// BLOCKER: three-fcom float clamp pattern with shared return paths - compiler generates different branch layout and fcom count
 // ORIGIN: GAME
 // SIZE: 159
 // CFLAGS: /O2 /Gd
@@ -60,12 +61,12 @@ int __cdecl ModifyEntityStat(int* param_1)
 		return 1;
 	}
 	fVar2 = (float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (iVar1 + 0x80 + iVar3));
-	if (fVar2 < _g_stat_max) {
-		if (fVar2 <= _g_stat_min) {
-			fVar2 = _g_stat_min;
-		}
-	} else {
-		fVar2 = _g_stat_max;
+	if (fVar2 >= _g_stat_max) {
+		*(char*) (iVar1 + 0x80 + iVar3) = (char) (long) _g_stat_max;
+		return 0;
+	}
+	if (fVar2 <= _g_stat_min) {
+		fVar2 = _g_stat_min;
 	}
 	*(char*) (iVar1 + 0x80 + iVar3) = (char) (long) fVar2;
 	return 0;
