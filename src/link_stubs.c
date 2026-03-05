@@ -556,39 +556,9 @@ int __cdecl func_100058d0(int* ctx, int flag)
 	return 0;
 }
 
-int __cdecl func_1000bda0(void* a)
-{
-	return 0;
-}
-
-void __cdecl func_1000c1e0(void* a, void* b)
-{
-}
-
-void __cdecl func_1000c280(void* a, void* b, void* c)
-{
-}
-
-void __cdecl func_1000c310(void* a, void* b, void* c)
-{
-}
-
-void __cdecl func_1000c380(void* a, void* b)
-{
-}
-
-void __cdecl func_1000c3c0(void* a, void* b)
-{
-}
-
-void __cdecl func_1000c420(void* a, void* b, void* c)
-{
-}
-
-char* __cdecl func_100150a0(void* a, unsigned int b, unsigned int c, unsigned int d, unsigned int e)
-{
-	return (void*) 0;
-}
+/* check_flag, ApplyColorComponent, AllocateEntitySlot, slot_clear_match,
+   search_and_set, ClampFloatValue, FireEntityAndCleanup: defined in alchemistry_logic.c */
+/* plt_SetPlantMap: defined in plant.c */
 
 void __cdecl func_100151b0(unsigned int a, unsigned short* b)
 {

@@ -67,7 +67,7 @@ extern void* __cdecl StartFilteredEntitySearch(int, int, int);
 extern char* __cdecl SearchRecordTable(unsigned int);
 extern int __cdecl CheckZoneAvailability(void*, unsigned int, unsigned int, unsigned int);
 extern char* __cdecl FindRecord(void*, unsigned int, unsigned int);
-extern char* __cdecl func_100150a0(void*, unsigned int, unsigned int, unsigned int, unsigned int);
+extern char* __cdecl plt_SetPlantMap(void*, unsigned int, unsigned int, unsigned int, unsigned int);
 
 extern int g_plant_count;
 
@@ -125,7 +125,7 @@ int __cdecl chain_handler_record_lookup(int param_1, char* param_2)
 		}
 
 		if (needs_create != 0) {
-			found = func_100150a0(
+			found = plt_SetPlantMap(
 				*(void**) ((char*) entity + 0x71),
 				*(unsigned char*) (param_1 + 0x18),
 				*(unsigned char*) (param_1 + 0x19),

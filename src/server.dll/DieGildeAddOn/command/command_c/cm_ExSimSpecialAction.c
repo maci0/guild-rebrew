@@ -65,13 +65,13 @@
  *     if (uVar1 == 0x61736452) {
  */
 
-extern int __cdecl func_1000bda0(void*);
-extern void __cdecl func_1000c380(void*, void*);
-extern void __cdecl func_1000c1e0(void*, void*);
-extern void __cdecl func_1000c420(void*, void*, void*);
-extern void __cdecl func_1000c3c0(void*, void*);
-extern void __cdecl func_1000c310(void*, void*, void*);
-extern void __cdecl func_1000c280(void*, void*, void*);
+extern int __cdecl check_flag(void*);
+extern void __cdecl search_and_set(void*, void*);
+extern void __cdecl ApplyColorComponent(void*, void*);
+extern void __cdecl FireEntityAndCleanup(void*, void*, void*);
+extern void __cdecl ClampFloatValue(void*, void*);
+extern void __cdecl slot_clear_match(void*, void*, void*);
+extern void __cdecl AllocateEntitySlot(void*, void*, void*);
 
 // FUNCTION: SERVER 0x10010390
 int __cdecl SimSpecialAction(int param_1, char* param_2)
@@ -86,7 +86,7 @@ int __cdecl SimSpecialAction(int param_1, char* param_2)
 	if (p == (char*) 0) {
 		return -1;
 	}
-	iVar2 = func_1000bda0(p);
+	iVar2 = check_flag(p);
 	if (iVar2 == 0) {
 		return -2;
 	}
@@ -94,22 +94,22 @@ int __cdecl SimSpecialAction(int param_1, char* param_2)
 	src = (char*) (param_1 + 0x10);
 	switch (uVar1) {
 	case 0x61535263:
-		func_1000c380(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
+		search_and_set(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
 		return 0;
 	case 0x61536d53:
-		func_1000c3c0(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
+		ClampFloatValue(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
 		return 0;
 	case 0x46697245:
-		func_1000c420(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
+		FireEntityAndCleanup(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
 		return 0;
 	case 0x61437353:
-		func_1000c1e0(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
+		ApplyColorComponent(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
 		return 0;
 	case 0x61616452:
-		func_1000c280(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
+		AllocateEntitySlot(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
 		return 0;
 	case 0x61736452:
-		func_1000c310(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
+		slot_clear_match(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
 		return 0;
 	default:
 		return -3;
