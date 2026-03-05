@@ -52,7 +52,7 @@ extern unsigned char g_connections[]; /* 0x101deb00 */;
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 170
-// SYMBOL: _exit_handler@12
+// SYMBOL: exit_handler
 // GHIDRA: exit_handler
 // FUNCTION: SERVER 0x10009310
 // exit_handler
@@ -1245,6 +1245,7 @@ int __cdecl ProcessSendData(void)
 // SIZE: 170
 // SYMBOL: _QueueCommandForProcessing
 // ANALYSIS: Takes a raw command payload, pulls an available CommandPacket struct from incoming_cmd_freelist, populates it, calculates command type via 0x1000c710, and appends it to the tail of incoming_cmd_queue.
+// SYMBOL: _QueueCommandForProcessing
 // FUNCTION: SERVER 0x1000A8F0
 // QueueCommandForProcessing
 // PROTOTYPE: int __cdecl QueueCommandForProcessing(int player_slot, char * cmd_data)
@@ -1285,6 +1286,7 @@ int __cdecl QueueCommandForProcessing(int player_slot, char* cmd_data)
 // SIZE: 170
 // SYMBOL: _QueuePlayerCommand
 // ANALYSIS: Takes a raw command payload, pulls an available CommandPacket struct from outgoing_cmd_freelist, populates it, and appends it to the tail of outgoing_cmd_queue. | Get free command buffer from pool
+// SYMBOL: _QueuePlayerCommand
 // FUNCTION: SERVER 0x1000A9A0
 // QueuePlayerCommand
 // PROTOTYPE: int __cdecl QueuePlayerCommand(int player_slot, char * cmd_data)

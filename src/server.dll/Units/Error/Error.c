@@ -96,9 +96,10 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 // STATUS: MATCHING
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 1836
-// SYMBOL: _CrashDumpUnhandledExceptionFilter@4
+// SYMBOL: _CrashDumpUnhandledExceptionFilter@4@4
 // BLOCKER_DELTA: 1727
 // ANALYSIS: Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride).
+// SYMBOL: _CrashDumpUnhandledExceptionFilter@4
 // FUNCTION: SERVER 0x10002770
 // CrashDumpUnhandledExceptionFilter
 // PROTOTYPE: int __stdcall CrashDumpUnhandledExceptionFilter(undefined exceptionPointers)

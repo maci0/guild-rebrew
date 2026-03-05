@@ -47,7 +47,7 @@ typedef struct {
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 130
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // FUNCTION: SERVER 0x1000BD50
 // reset_entity_state
 // PROTOTYPE: void __cdecl reset_entity_state(char * param_1)
@@ -68,7 +68,7 @@ void __cdecl reset_entity_state(char* param_1)
 // ORIGIN: GAME
 // STATUS: RELOC
 // SIZE: 70
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // FUNCTION: SERVER 0x1000BDA0
 // check_flag
 // PROTOTYPE: int __cdecl check_flag(char * p)
@@ -91,7 +91,7 @@ int __cdecl check_flag(char* p)
 // STATUS: MATCHING
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
 // SIZE: 1002
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // BLOCKER_DELTA: 935
 // ANALYSIS: Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error.
 // FUNCTION: SERVER 0x1000bdf0
@@ -304,7 +304,7 @@ code_r0x1000be9f:
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 160
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // FUNCTION: SERVER 0x1000c1e0
 // ApplyColorComponent
 // PROTOTYPE: int __cdecl ApplyColorComponent(char * param_1, char * param_2)
@@ -332,7 +332,7 @@ int __cdecl ApplyColorComponent(char* param_1, char* param_2)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 130
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // FUNCTION: SERVER 0x1000c280
 // AllocateEntitySlot
 // PROTOTYPE: int __stdcall AllocateEntitySlot(int param_1, int param_2, int param_3)
@@ -368,7 +368,7 @@ int __cdecl AllocateEntitySlot(int param_1, int param_2, int param_3)
 // BLOCKER: instruction folding (lea vs mov)
 // BLOCKER_DELTA: 110
 // SIZE: 110
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // FUNCTION: SERVER 0x1000C310
 // slot_clear_match
 // PROTOTYPE: int __cdecl slot_clear_match(char * data, char * target, char * src)
@@ -403,7 +403,7 @@ found:
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 51
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // FUNCTION: SERVER 0x1000C380
 // search_and_set
 // PROTOTYPE: int __cdecl search_and_set(SRC * src, TGT * tgt)
@@ -424,7 +424,7 @@ int __cdecl search_and_set(SRC* src, TGT* tgt)
 // ORIGIN: GAME
 // BLOCKER: jump condition swap
 // SIZE: 83
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // BLOCKER_DELTA: 47
 // FUNCTION: SERVER 0x1000c3c0
 // ClampFloatValue
@@ -450,7 +450,7 @@ int __cdecl ClampFloatValue(int param_1, int param_2)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 166
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // FUNCTION: SERVER 0x1000c420
 // FireEntityAndCleanup
 // PROTOTYPE: int __cdecl FireEntityAndCleanup(int param_1, int * param_2, int param_3)
@@ -493,7 +493,7 @@ int __cdecl FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 295
-// SYMBOL: _memset
+// SYMBOL: _ahm_AllocAhmInfo
 // BLOCKER_DELTA: 269
 // FUNCTION: SERVER 0x1000c4d0
 // ahm_AllocAhmInfo
@@ -573,7 +573,7 @@ int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 109
-// SYMBOL: _memset
+// SYMBOL: _InitRandomEntity
 // FUNCTION: SERVER 0x1000c600
 // InitRandomEntity
 // PROTOTYPE: char * InitRandomEntity(void)
@@ -614,7 +614,7 @@ char* __cdecl InitRandomEntity(void)
 // BLOCKER: instruction folding (lea vs mov), jump condition swap
 // BLOCKER_DELTA: 72
 // SIZE: 45
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // GHIDRA: find_by_id
 // FUNCTION: SERVER 0x1000c670
 // LookupEntityInTable
@@ -637,7 +637,7 @@ int* __cdecl LookupEntityInTable(int param_1)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, jump condition swap
 // SIZE: 102
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // BLOCKER_DELTA: 55
 // FUNCTION: SERVER 0x1000c6a0
 // QueryEntityBuildingType
@@ -672,7 +672,7 @@ int __cdecl QueryEntityBuildingType(int param_1)
 // ORIGIN: GAME
 // BLOCKER: loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 752
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // FUNCTION: SERVER 0x1000c710
 // GetCommandPayloadSize
 
@@ -840,7 +840,7 @@ int GetCommandPayloadSize(unsigned char* param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 130
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // BLOCKER_DELTA: 83
 // ANALYSIS: Iterates through a linked list of CommandPackets generated from a Command 0x05 / 0x06 block. Runs secondary validation handlers from g_entity_chain_handlers. Re-flags commands to 0x01/0x02 status based on success/fail.
 // FUNCTION: SERVER 0x1000ca00
@@ -892,7 +892,7 @@ check_result:
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 130
-// SYMBOL: _memset
+// SYMBOL: _reset_entity_state
 // FUNCTION: SERVER 0x1000CA90
 // get_field_by_type
 // PROTOTYPE: int __cdecl get_field_by_type(char * p, int type)

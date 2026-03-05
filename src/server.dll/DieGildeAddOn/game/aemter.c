@@ -34,7 +34,7 @@ extern void __cdecl InitBuildingTypeTable(void);
 // BLOCKER: comparison direction swap, jump condition swap, zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 205
-// SYMBOL: _LookupEntityRecordById
+// SYMBOL: _ValidateOfficeCandidate
 // BLOCKER_DELTA: 196
 // FUNCTION: SERVER 0x1000b1c0
 // ValidateOfficeCandidate
