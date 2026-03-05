@@ -46,18 +46,12 @@
  * }
 */
 
-typedef struct player_slot {
-	char gap_0000[0x264200];
-	int data;
-	char gap_264204[0x60];
-} player_slot;
-
 extern int __cdecl get_field_by_type(char*, int);
 extern char* __cdecl AllocGameObject(int, unsigned int, int);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
 
 extern int g_timestamp_0b6c;
-extern player_slot g_player_slot_0[];
+extern char g_player_slot_0[];
 extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
 extern char s_cm_ExAllocThemaPredigt____Execut_1002d184[];
 
@@ -73,7 +67,8 @@ int __cdecl ExCreateSpecialObject(int param_1, char* param_2)
 	if (pcVar2 == (char*) 0) {
 		return 1;
 	}
-	g_player_slot_0[*(unsigned char*) (param_1 + 3)].data = *(int*) (pcVar2 + 2);
+	*(int*) (g_player_slot_0 + (unsigned int) *(unsigned char*) (param_1 + 3) * 0x264264 + 0x264200) =
+		*(int*) (pcVar2 + 2);
 	pcVar2[0x12] = '@';
 	*(int*) (pcVar2 + 0x1c) = *(int*) (param_1 + 0x18);
 	*(unsigned short*) (pcVar2 + 0x20) = *(unsigned short*) (param_1 + 0x1c);
