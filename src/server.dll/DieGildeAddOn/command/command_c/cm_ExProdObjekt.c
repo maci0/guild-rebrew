@@ -26,13 +26,13 @@ extern unsigned char g_current_season;
 extern int __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern short* __cdecl ResolveParentEntity(short*);
 extern void* __cdecl StartEntityQuery(int, int, int, uint);
-extern int __cdecl FindEntityByOwner(int, int);
+extern int __cdecl get_msg_field(int, int);
 extern int __cdecl KannObjektHergestellt(char*, uint, int);
 extern void __cdecl RemoveObjectByType(char**, uint);
 extern char* __cdecl FindSlotById(uint, uint);
 extern void* __cdecl AllocGameObject(int, uint, int);
 extern double __cdecl CalculateProductionValue(uint, int);
-extern int __cdecl entity_accumulate(int);
+extern int __cdecl WalkEntityChain(int);
 extern short* __cdecl GetEntityTableEntry(char*);
 
 extern char s_cm_ExecProduction___Invalid__lager_1002cf9c[];
@@ -100,9 +100,9 @@ int __cdecl cm_ExecProduction(int msg, char* result)
 				iVar1 = 0;
 			}
 			else {
-				pcVar3 = (char*)FindEntityByOwner((int)local_10, (int)puVar2);
+				pcVar3 = (char*)get_msg_field((int)local_10, (int)puVar2);
 				if (iVar1 >= (int)pcVar3 / (int)(uint)*puVar5) {
-					pcVar3 = (char*)FindEntityByOwner((int)local_10, (int)puVar2);
+					pcVar3 = (char*)get_msg_field((int)local_10, (int)puVar2);
 					iVar1 = (int)pcVar3 / (int)(uint)*puVar5;
 				}
 			}
@@ -181,7 +181,7 @@ int __cdecl cm_ExecProduction(int msg, char* result)
 		}
 	}
 	lVar6 = (long)(CalculateProductionValue((uint)*(ushort*)(msg + 0x14), 100) * local_8);
-	iVar4 = entity_accumulate((int)local_10);
+	iVar4 = WalkEntityChain((int)local_10);
 	if (iVar4 != 0) {
 		*(int*)(iVar4 + 0x4d) = *(int*)(iVar4 + 0x4d) + (int)lVar6;
 	}

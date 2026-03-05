@@ -27,7 +27,7 @@ extern int __cdecl deflate(void* strm, int flush);
 extern int __cdecl deflateEnd(void* strm);
 extern int __cdecl cleanup_object(char*);
 extern int __cdecl destroy_entity(char*);
-extern int __cdecl flush_and_close_stream(int);
+extern int __cdecl read_uint32_be(int);
 extern void __cdecl pool_free(void* pool, void* item);
 extern unsigned int gzread(unsigned int*, unsigned int*, int, int, int, int, int, int, unsigned int);
 extern int ReadVfsCompressed(unsigned int*, unsigned int*, int);
@@ -506,7 +506,7 @@ int __cdecl CloseVfsStream(void* stream)
 			}
 			else {
 				if ((flags & 8) != 0) {
-					flush_and_close_stream((int) fp);
+					read_uint32_be((int) fp);
 				}
 				else {
 					fflush(fp);

@@ -4315,7 +4315,7 @@ int __cdecl KannObjektHergestellt(char* obj, int entity_index, int requested)
 	int count;
 	int is_producer;
 
-	ent = WalkEntityChain(obj);
+	ent = entity_accumulate(obj);
 	if (!ent) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
@@ -4332,7 +4332,7 @@ int __cdecl KannObjektHergestellt(char* obj, int entity_index, int requested)
 
 	query = StartEntityQuery(*(int*) (obj + 0x14), 1, 0, entity_index);
 	if (query) {
-		used = get_msg_field(obj, query);
+		used = FindEntityByOwner(obj, query);
 		remaining = max_size - used;
 		if (remaining > requested) {
 			goto return_requested;

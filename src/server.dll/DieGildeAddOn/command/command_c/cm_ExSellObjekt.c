@@ -25,7 +25,7 @@ extern char g_error_msg_sell_failed[];
 
 extern short* __cdecl ResolveParentEntity(short*);
 extern void* __cdecl StartEntityQuery(int, int, int, uint);
-extern int __cdecl FindEntityByOwner(int, int);
+extern int __cdecl get_msg_field(int, int);
 extern int __cdecl KannObjektHergestellt(char*, uint, int);
 extern int __cdecl CheckInventoryCapacity(char*, uint, int);
 extern char* __cdecl FindSlotById(uint, uint);
@@ -145,7 +145,7 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 		}
 		if (source_dynamic_entity != (short*)0) {
 			resolve_result = *(int*)(param_1 + 0x1f);
-			iVar1 = FindEntityByOwner((int)source_dynamic_entity, (int)dest_object);
+			iVar1 = get_msg_field((int)source_dynamic_entity, (int)dest_object);
 			if (iVar1 < resolve_result) {
 				sprintf(
 					log_buffer,
@@ -241,7 +241,7 @@ uint TradeCommandHandler(char* param_1, uchar* param_2)
 			if (parent_check != dest_owner_entity && *(int*)(dest_object + 0xe) != 0) {
 				resolve_result = compute_size((char*)source_dynamic_ref, (int)*(ushort*)dest_object);
 				weight_fraction = (uint)(resolve_result * *(int*)(dest_object + 0xe)) >> 2;
-				iVar1 = FindEntityByOwner((int)source_dynamic_ref, (int)dest_object);
+				iVar1 = get_msg_field((int)source_dynamic_ref, (int)dest_object);
 				source_dynamic_ref = source_dynamic_entity;
 				if ((uint)iVar1 - weight_fraction < (uint)*(int*)(param_1 + 0x1f)) {
 					capacity_check = g_error_msg_sell_no_source;

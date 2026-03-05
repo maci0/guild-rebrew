@@ -22,7 +22,7 @@ extern void __cdecl destroy_entity(void* entity);
 
 /* Chain and Link Processing */
 extern void __cdecl ProcessEntityChain(void);
-extern void __cdecl WalkEntityChain(void* start_node);
+extern int __cdecl WalkEntityChain(int raw_idx);
 extern void __cdecl ClearEntityLinks(void* entity);
 extern void __cdecl UpdateEntityLinks(void* entity);
 
