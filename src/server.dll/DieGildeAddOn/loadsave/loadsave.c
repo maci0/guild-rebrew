@@ -233,10 +233,10 @@ void InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4
 	*(int*) (param_4 + 0x50) = 0x7fff;
 	*(int*) (param_4 + 0x7c) = 0;
 	*(int*) (param_4 + 0x58) = 0;
-	puVar4 = (unsigned int*) (param_4 + 0x5c);
-	for (iVar3 = 8; iVar3 != 0; iVar3 = iVar3 + -1) {
-		*puVar4 = 0xffffffff;
-		puVar4 = puVar4 + 1;
+	fill_ptr = (unsigned int*) (param_4 + 0x5c);
+	for (loop_index = 8; loop_index != 0; loop_index = loop_index + -1) {
+		*fill_ptr = 0xffffffff;
+		fill_ptr = fill_ptr + 1;
 	}
 	*(int*) (param_4 + 0x170) = 0;
 	*(int*) (param_4 + 0x16c) = 0;
@@ -245,13 +245,13 @@ void InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4
 	*(int*) (param_4 + 0x20) = 0x41400000;
 	*(int*) (param_4 + 0x10) = 0x43a50000;
 	*(int*) (param_4 + 0x18) = 0x447a0000;
-	iVar3 = 0;
+	loop_index = 0;
 	do {
 		func_1001a0d0(0x2a);
-		uVar2 = func_1001b564();
-		*(unsigned char*) (param_4 + iVar3 + 0x80) = uVar2;
-		iVar3 = iVar3 + 1;
-	} while (iVar3 < 5);
+		stat_byte = func_1001b564();
+		*(unsigned char*) (param_4 + loop_index + 0x80) = stat_byte;
+		loop_index = loop_index + 1;
+	} while (loop_index < 5);
 	*(char*) (param_4 + 0xd) = 9;
 	AddOrAccumulateObject(*(int*) (param_4 + 4), *(int*) (*(int*) 0x10035439 * 0x2f4 + 0x100a8c94), 16000000);
 	func_1001a0d0(2);
@@ -783,61 +783,61 @@ void __cdecl CleanupObjectEntities(void);
 
 int __cdecl LoadExistingEntities(int param_1)
 {
-	int bVar1;
-	int iVar3;
-	int local_4;
+	int read_ok;
+	int entity_index;
+	int entity_count;
 	int base;
-	char* outBuffer;
-	int iVar2;
+	char* record_buf;
+	int byte_offset;
 
 	CleanupObjectEntities();
-	bVar1 = ReadVfsDataChecked(&local_4, 4, 1, param_1);
-	if (bVar1 == 0) {
+	read_ok = ReadVfsDataChecked(&entity_count, 4, 1, param_1);
+	if (read_ok == 0) {
 		return 0;
 	}
-	iVar3 = 0;
-	if (0 < local_4) {
+	entity_index = 0;
+	if (0 < entity_count) {
 		base = DAT_100a8c34;
-		iVar2 = 0;
+		byte_offset = 0;
 		do {
-			outBuffer = (char*) (base + iVar2);
-			bVar1 = ReadVfsDataChecked(outBuffer, 2, 1, param_1);
-			if (bVar1 == 0) {
+			record_buf = (char*) (base + byte_offset);
+			read_ok = ReadVfsDataChecked(record_buf, 2, 1, param_1);
+			if (read_ok == 0) {
 				return 0;
 			}
-			bVar1 = ReadVfsDataChecked(outBuffer + 2, 4, 1, param_1);
-			if (bVar1 == 0) {
+			read_ok = ReadVfsDataChecked(record_buf + 2, 4, 1, param_1);
+			if (read_ok == 0) {
 				return 0;
 			}
-			bVar1 = ReadVfsDataChecked(outBuffer + 6, 4, 1, param_1);
-			if (bVar1 == 0) {
+			read_ok = ReadVfsDataChecked(record_buf + 6, 4, 1, param_1);
+			if (read_ok == 0) {
 				return 0;
 			}
-			bVar1 = ReadVfsDataChecked(outBuffer + 10, 4, 1, param_1);
-			if (bVar1 == 0) {
+			read_ok = ReadVfsDataChecked(record_buf + 10, 4, 1, param_1);
+			if (read_ok == 0) {
 				return 0;
 			}
-			bVar1 = ReadVfsDataChecked(outBuffer + 0xe, 4, 1, param_1);
-			if (bVar1 == 0) {
+			read_ok = ReadVfsDataChecked(record_buf + 0xe, 4, 1, param_1);
+			if (read_ok == 0) {
 				return 0;
 			}
-			bVar1 = ReadVfsDataChecked(outBuffer + 0x12, 1, 1, param_1);
-			if (bVar1 == 0) {
+			read_ok = ReadVfsDataChecked(record_buf + 0x12, 1, 1, param_1);
+			if (read_ok == 0) {
 				return 0;
 			}
-			bVar1 = ReadVfsDataChecked(outBuffer + 0x13, 1, 1, param_1);
-			if (bVar1 == 0) {
+			read_ok = ReadVfsDataChecked(record_buf + 0x13, 1, 1, param_1);
+			if (read_ok == 0) {
 				return 0;
 			}
-			bVar1 = ReadVfsDataChecked(outBuffer + 0x1c, 0x1f, 1, param_1);
-			if (bVar1 == 0) {
+			read_ok = ReadVfsDataChecked(record_buf + 0x1c, 0x1f, 1, param_1);
+			if (read_ok == 0) {
 				return 0;
 			}
-			iVar3 = iVar3 + 1;
-			iVar2 = iVar2 + 0x43;
-		} while (iVar3 < local_4);
+			entity_index = entity_index + 1;
+			byte_offset = byte_offset + 0x43;
+		} while (entity_index < entity_count);
 	}
-	DAT_10035450 = local_4;
+	DAT_10035450 = entity_count;
 	return 1;
 }
 
@@ -855,10 +855,10 @@ int __cdecl LoadExistingEntities(int param_1)
 
 unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 {
-	int iStack_8;
-	int iStack_c;
+	int entity_count;
+	int current_index;
 	char* esi;
-	int iVar6;
+	int load_result;
 	int* ebx;
 	unsigned int offset;
 	int dummy;
@@ -866,12 +866,12 @@ unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 
 	reset_all_entities();
 
-	if (!ReadVfsDataChecked(&iStack_8, 4, 1, param_1)) {
+	if (!ReadVfsDataChecked(&entity_count, 4, 1, param_1)) {
 		return 0;
 	}
 
-	iStack_c = 0;
-	if (0 < iStack_8) {
+	current_index = 0;
+	if (0 < entity_count) {
 		offset = 0;
 		neg1 = -1;
 		do {
@@ -959,39 +959,39 @@ unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 
 			if (esi[0] == 0x1e) {
 				*(int*) (esi + 0x71) = (int) AllocateTrackedHeapBlock(0x600, (const char*) 0x1002d510);
-				iVar6 = 0;
+				load_result = 0;
 				do {
-					if (!ReadVfsDataChecked((void*) (iVar6 + *(int*) (esi + 0x71)), 4, 1, param_1)) {
+					if (!ReadVfsDataChecked((void*) (load_result + *(int*) (esi + 0x71)), 4, 1, param_1)) {
 						return 0;
 					}
-					if (!ReadVfsDataChecked((void*) (iVar6 + 4 + *(int*) (esi + 0x71)), 4, 1, param_1)) {
+					if (!ReadVfsDataChecked((void*) (load_result + 4 + *(int*) (esi + 0x71)), 4, 1, param_1)) {
 						return 0;
 					}
-					if (!ReadVfsDataChecked((void*) (iVar6 + 8 + *(int*) (esi + 0x71)), 1, 1, param_1)) {
+					if (!ReadVfsDataChecked((void*) (load_result + 8 + *(int*) (esi + 0x71)), 1, 1, param_1)) {
 						return 0;
 					}
-					if (!ReadVfsDataChecked((void*) (iVar6 + 9 + *(int*) (esi + 0x71)), 1, 1, param_1)) {
+					if (!ReadVfsDataChecked((void*) (load_result + 9 + *(int*) (esi + 0x71)), 1, 1, param_1)) {
 						return 0;
 					}
-					if (!ReadVfsDataChecked((void*) (iVar6 + 0xa + *(int*) (esi + 0x71)), 2, 1, param_1)) {
+					if (!ReadVfsDataChecked((void*) (load_result + 0xa + *(int*) (esi + 0x71)), 2, 1, param_1)) {
 						return 0;
 					}
-					if (!ReadVfsDataChecked((void*) (iVar6 + 0x10 + *(int*) (esi + 0x71)), 4, 1, param_1)) {
+					if (!ReadVfsDataChecked((void*) (load_result + 0x10 + *(int*) (esi + 0x71)), 4, 1, param_1)) {
 						return 0;
 					}
-					if (!ReadVfsDataChecked((void*) (iVar6 + 0xc + *(int*) (esi + 0x71)), 1, 1, param_1)) {
+					if (!ReadVfsDataChecked((void*) (load_result + 0xc + *(int*) (esi + 0x71)), 1, 1, param_1)) {
 						return 0;
 					}
-					if (!ReadVfsDataChecked((void*) (iVar6 + 0xd + *(int*) (esi + 0x71)), 1, 1, param_1)) {
+					if (!ReadVfsDataChecked((void*) (load_result + 0xd + *(int*) (esi + 0x71)), 1, 1, param_1)) {
 						return 0;
 					}
-					iVar6 += 0x18;
-					*(int*) (iVar6 - 4 + *(int*) (esi + 0x71)) = 0;
-				} while (iVar6 < 0x600);
+					load_result += 0x18;
+					*(int*) (load_result - 4 + *(int*) (esi + 0x71)) = 0;
+				} while (load_result < 0x600);
 			}
 			else if (esi[0] == 0x48 || esi[0] == 0x49 || esi[0] == 0x4a) {
 				if (g_file_version >= 0x10047) {
-					iVar6 = LoadGraveyardData(param_1, (int) esi);
+					load_result = LoadGraveyardData(param_1, (int) esi);
 				}
 				else {
 					if (!ReadVfsDataChecked(esi + 0x65, 0x30, 1, param_1)) {
@@ -1000,13 +1000,13 @@ unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 					*(int*) (esi + 0x65) = AllocGraveyardField((int) esi);
 					goto label_10012d72;
 				}
-				if (iVar6 == 0) {
+				if (load_result == 0) {
 					return 0;
 				}
 			}
 			else if (esi[0] == 0x4b || esi[0] == 0x4c || esi[0] == 0x4d) {
 				if (g_file_version >= 0x10049) {
-					iVar6 = ahm_AllocAhmInfo(param_1, (int) esi);
+					load_result = ahm_AllocAhmInfo(param_1, (int) esi);
 				}
 				else {
 					int* puVar9;
@@ -1018,7 +1018,7 @@ unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 					*puVar9 = neg1;
 					goto label_10012d72;
 				}
-				if (iVar6 == 0) {
+				if (load_result == 0) {
 					return 0;
 				}
 			}
@@ -1047,9 +1047,9 @@ unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 
 			*(int*) (esi + 0x30) = 0x1388;
 			*(int*) (esi + 0x95) = neg1;
-			iStack_c++;
+			current_index++;
 			offset += 0xa9;
-		} while (iStack_c < iStack_8);
+		} while (current_index < entity_count);
 	}
 
 	if (!ReadVfsDataChecked(&g_101de454, 4, 1, param_1)) {
@@ -1058,22 +1058,22 @@ unsigned int __cdecl LoadBuildingEntityState(unsigned int param_1)
 
 	g_101de55c = (int) realloc((void*) g_101de55c, g_101de454 * 0x60);
 
-	iVar6 = 0;
+	load_result = 0;
 	if (g_101de454 > 0) {
-		iStack_c = 0;
+		current_index = 0;
 		do {
-			if (!ReadVfsDataChecked((void*) (iStack_c + g_101de55c), 0x40, 1, param_1)) {
+			if (!ReadVfsDataChecked((void*) (current_index + g_101de55c), 0x40, 1, param_1)) {
 				return 0;
 			}
-			if (!ReadVfsDataChecked((void*) (iStack_c + 0x40 + g_101de55c), 0x10, 1, param_1)) {
+			if (!ReadVfsDataChecked((void*) (current_index + 0x40 + g_101de55c), 0x10, 1, param_1)) {
 				return 0;
 			}
-			if (!ReadVfsDataChecked((void*) (iStack_c + 0x50 + g_101de55c), 0x10, 1, param_1)) {
+			if (!ReadVfsDataChecked((void*) (current_index + 0x50 + g_101de55c), 0x10, 1, param_1)) {
 				return 0;
 			}
-			iVar6++;
-			iStack_c += 0x60;
-		} while (iVar6 < g_101de454);
+			load_result++;
+			current_index += 0x60;
+		} while (load_result < g_101de454);
 	}
 
 	return 1;
@@ -1234,348 +1234,348 @@ extern int g_citizen_count;
 
 int __cdecl ls_LoadEntities(int param_1)
 {
-	int iVar1;
-	int iVar2;
-	int iVar3;
-	unsigned short uStack_c;
-	int iStack_8;
-	int uStack_4;
+	int stream;
+	int read_result;
+	int inner_result;
+	unsigned short entity_slot;
+	int entity_index;
+	int ref_value;
 
-	iVar1 = param_1;
-	iVar2 = ReadVfsDataChecked((void*) &uStack_c, 2, 1, param_1);
-	if (iVar2 == 0) {
+	stream = param_1;
+	read_result = ReadVfsDataChecked((void*) &entity_slot, 2, 1, param_1);
+	if (read_result == 0) {
 		return 0;
 	}
-	iVar2 = ReadVfsDataChecked((void*) &param_1, 4, 1, iVar1);
-	if (iVar2 == 0) {
+	read_result = ReadVfsDataChecked((void*) &param_1, 4, 1, stream);
+	if (read_result == 0) {
 		return 0;
 	}
 	g_citizen_count = param_1;
-	iVar2 = ReadVfsDataChecked((void*) 0x10035470, 4, 1, iVar1);
-	if (iVar2 == 0) {
+	read_result = ReadVfsDataChecked((void*) 0x10035470, 4, 1, stream);
+	if (read_result == 0) {
 		return 0;
 	}
-	iVar2 = ReadVfsDataChecked((void*) 0x10035474, 4, 1, iVar1);
-	if (iVar2 == 0) {
+	read_result = ReadVfsDataChecked((void*) 0x10035474, 4, 1, stream);
+	if (read_result == 0) {
 		return 0;
 	}
 	if (g_save_version > 0x10016) {
-		iVar2 = (int) 0x10035478;
+		read_result = (int) 0x10035478;
 		do {
-			iVar3 = ReadVfsDataChecked((void*) iVar2, 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) read_result, 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar2 = iVar2 + 4;
-		} while (iVar2 < (int) 0x10035498);
+			read_result = read_result + 4;
+		} while (read_result < (int) 0x10035498);
 	}
-	iStack_8 = 0;
+	entity_index = 0;
 	if (0 < param_1) {
 		do {
-			iVar2 = ReadVfsDataChecked((void*) &uStack_c, 2, 1, iVar1);
-			if (iVar2 == 0) {
+			read_result = ReadVfsDataChecked((void*) &entity_slot, 2, 1, stream);
+			if (read_result == 0) {
 				return 0;
 			}
-			iVar2 = (uStack_c & 0xffff) * 0x21c;
-			*(unsigned short*) (iVar2 + 0x100358a0) = uStack_c;
+			read_result = (entity_slot & 0xffff) * 0x21c;
+			*(unsigned short*) (read_result + 0x100358a0) = entity_slot;
 			if (g_save_version < 0x1003e) {
-				*(int*) (iVar2 + 0x10035aac) = -1;
+				*(int*) (read_result + 0x10035aac) = -1;
 			}
 			else {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035aac), 4, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035aac), 4, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358a2), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358a2), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358a4), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358a4), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358a8), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358a8), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358a9), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358a9), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358aa), 2, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358aa), 2, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358ac), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358ac), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358ad), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358ad), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358b0), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358b0), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358b4), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358b4), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358b8), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358b8), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358bc), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358bc), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358c0), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358c0), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358c4), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358c4), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
 			if (g_save_version > 0x1003a) {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358c8), 2, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358c8), 2, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358cc), 4, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358cc), 4, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358d0), 0x10, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358d0), 0x10, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
 			if (g_save_version > 0x10030) {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358e0), 0x10, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358e0), 0x10, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358f0), 2, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358f0), 2, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358f4), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358f4), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358f8), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358f8), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x100358fc), 0x20, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x100358fc), 0x20, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
 			if (g_save_version > 0x10023) {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x1003591c), 4, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x1003591c), 4, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035920), 5, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035920), 5, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035928), 0xa8, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035928), 0xa8, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a04), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a04), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a05), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a05), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a06), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a06), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a07), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a07), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a08), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a08), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a09), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a09), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			*(int*) (iVar2 + 0x10035a0c) = 0;
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a0c), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			*(int*) (read_result + 0x10035a0c) = 0;
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a0c), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			*(int*) (iVar2 + 0x10035a10) = 0;
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a10), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			*(int*) (read_result + 0x10035a10) = 0;
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a10), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
 			if (g_save_version < 0x10020) {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a14), 2, 1, iVar1);
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a14), 2, 1, stream);
 			}
 			else {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a14), 4, 1, iVar1);
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a14), 4, 1, stream);
 			}
-			if (iVar3 == 0) {
+			if (inner_result == 0) {
 				return 0;
 			}
-			*(int*) (iVar2 + 0x10035a1c) = 0;
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a1c), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			*(int*) (read_result + 0x10035a1c) = 0;
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a1c), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a20), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a20), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a2c), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a2c), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a30), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a30), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
 			if (g_save_version < 0x1003e) {
-				*(int*) (iVar2 + 0x10035a30) = 4;
+				*(int*) (read_result + 0x10035a30) = 4;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a34), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a34), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a38), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a38), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a3c), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a3c), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a40), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a40), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a44), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a44), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a48), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a48), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a4c), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a4c), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a50), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a50), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a51), 1, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a51), 1, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a54), 0x10, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a54), 0x10, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a68), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a68), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
 			if (g_save_version < 0x10049) {
-				*(int*) (iVar2 + 0x10035a6c) = 0;
+				*(int*) (read_result + 0x10035a6c) = 0;
 			}
 			else {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a6c), 4, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a6c), 4, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a70), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a70), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a74), 0x10, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a74), 0x10, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a84), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a84), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a88), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a88), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a8c), 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a8c), 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
 			if (g_save_version > 0x10029) {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a90), 4, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a90), 4, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
 			}
 			if (g_save_version > 0x10020) {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a65), 1, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a65), 1, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
 			}
-			iVar3 = ReadVfsDataChecked((void*) &uStack_4, 4, 1, iVar1);
-			if (iVar3 == 0) {
+			inner_result = ReadVfsDataChecked((void*) &ref_value, 4, 1, stream);
+			if (inner_result == 0) {
 				return 0;
 			}
-			*(int*) (iVar2 + 0x10035a24) = uStack_4;
+			*(int*) (read_result + 0x10035a24) = ref_value;
 			if (g_save_version > 0x10020) {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035a94), 0x18, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035a94), 0x18, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
 			}
 			if (g_save_version > 0x10035) {
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035ab0), 4, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035ab0), 4, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035ab4), 1, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035ab4), 1, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035ab5), 1, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035ab5), 1, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035ab6), 1, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035ab6), 1, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
-				iVar3 = ReadVfsDataChecked((void*) (iVar2 + 0x10035ab7), 1, 1, iVar1);
-				if (iVar3 == 0) {
+				inner_result = ReadVfsDataChecked((void*) (read_result + 0x10035ab7), 1, 1, stream);
+				if (inner_result == 0) {
 					return 0;
 				}
-				iVar2 = ReadVfsDataChecked((void*) (iVar2 + 0x10035ab8), 1, 1, iVar1);
-				if (iVar2 == 0) {
+				read_result = ReadVfsDataChecked((void*) (read_result + 0x10035ab8), 1, 1, stream);
+				if (read_result == 0) {
 					return 0;
 				}
 			}
-			iStack_8 = iStack_8 + 1;
-		} while (iStack_8 < param_1);
+			entity_index = entity_index + 1;
+		} while (entity_index < param_1);
 	}
 	return 1;
 }
@@ -1833,17 +1833,17 @@ int __cdecl LoadTownData(int file)
 
 unsigned int ls_ID2Ptr(void)
 {
-	int iVar1;
-	int iVar2;
-	unsigned int uVar3;
-	int iVar4;
-	int iVar5;
-	unsigned int* puVar6;
-	int* piVar7;
-	int iVar8;
-	int iStack_c;
-	int iStack_8;
-	int iStack_4;
+	int entity_addr;
+	int chain_node;
+	unsigned int lookup_result;
+	int resolve_result;
+	int counter;
+	unsigned int* ptr_iter;
+	int* ref_ptr;
+	int byte_offset;
+	int dynamic_parent;
+	int existing_parent;
+	int static_parent;
 
 	*(unsigned int*) 0x1003546c = LookupEntityRecordById(*(unsigned int*) 0x1003546c);
 	if (*(unsigned int*) 0x1003546c == 0) {
@@ -1857,42 +1857,42 @@ unsigned int ls_ID2Ptr(void)
 	}
 	*(unsigned int*) 0x1003543c = StartFilteredEntitySearch(1, 5, 10);
 	if (0x10016 < *(int*) 0x1002d4ec) {
-		puVar6 = (unsigned int*) 0x10035478;
+		ptr_iter = (unsigned int*) 0x10035478;
 		do {
-			uVar3 = LookupEntityRecordById(*puVar6);
-			*puVar6 = uVar3;
-			puVar6 = puVar6 + 1;
-		} while (puVar6 < (unsigned int*) 0x10035498);
+			lookup_result = LookupEntityRecordById(*ptr_iter);
+			*ptr_iter = lookup_result;
+			ptr_iter = ptr_iter + 1;
+		} while (ptr_iter < (unsigned int*) 0x10035498);
 	}
-	piVar7 = (int*) 0x10035a10;
+	ref_ptr = (int*) 0x10035a10;
 	do {
-		if (piVar7[-0x5c] != -1) {
-			if (piVar7[-1] == -1) {
-				piVar7[-1] = 0;
+		if (ref_ptr[-0x5c] != -1) {
+			if (ref_ptr[-1] == -1) {
+				ref_ptr[-1] = 0;
 			}
 			else {
-				ResolveEntityById(piVar7 - 1, 0, 0, piVar7[-1]);
+				ResolveEntityById(ref_ptr - 1, 0, 0, ref_ptr[-1]);
 			}
-			if (*piVar7 == -1) {
-				*piVar7 = 0;
+			if (*ref_ptr == -1) {
+				*ref_ptr = 0;
 			}
 			else {
-				ResolveEntityById(piVar7, 0, 0, *piVar7);
+				ResolveEntityById(ref_ptr, 0, 0, *ref_ptr);
 			}
 		}
-		piVar7 = piVar7 + 0x87;
-	} while (piVar7 < (int*) 0x1009ae10);
-	iVar5 = 0;
+		ref_ptr = ref_ptr + 0x87;
+	} while (ref_ptr < (int*) 0x1009ae10);
+	counter = 0;
 	if (0 < *(int*) 0x10035450) {
-		iVar8 = 0;
+		byte_offset = 0;
 		do {
-			iVar1 = iVar8 + *(int*) 0x100a8c34;
-			if (*(char*) (*(int*) 0x101de450 + *(int*) (iVar8 + *(int*) 0x100a8c34) * 0x41) == '\x1d') {
-				*(int*) (iVar1 + 0x24) = 0;
+			entity_addr = byte_offset + *(int*) 0x100a8c34;
+			if (*(char*) (*(int*) 0x101de450 + *(int*) (byte_offset + *(int*) 0x100a8c34) * 0x41) == '\x1d') {
+				*(int*) (entity_addr + 0x24) = 0;
 			}
-			if (*(int*) (iVar1 + 6) != -1) {
-				iVar4 = ResolveEntityById(&iStack_c, &iStack_8, &iStack_4, *(int*) (iVar1 + 6));
-				if (iVar4 == 0) {
+			if (*(int*) (entity_addr + 6) != -1) {
+				resolve_result = ResolveEntityById(&dynamic_parent, &existing_parent, &static_parent, *(int*) (entity_addr + 6));
+				if (resolve_result == 0) {
 					LogMessageInternal(
 						"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
 						0x1050,
@@ -1900,45 +1900,45 @@ unsigned int ls_ID2Ptr(void)
 						1
 					);
 				}
-				else if (iStack_c == 0) {
-					if (iStack_8 == 0) {
-						iVar4 = *(int*) (iStack_4 + 0x178);
-						if (iVar4 != 0) {
-							for (iVar2 = *(int*) (iVar4 + 0x3f); iVar2 != 0; iVar2 = *(int*) (iVar2 + 0x3f)) {
-								iVar4 = iVar2;
+				else if (dynamic_parent == 0) {
+					if (existing_parent == 0) {
+						resolve_result = *(int*) (static_parent + 0x178);
+						if (resolve_result != 0) {
+							for (chain_node = *(int*) (resolve_result + 0x3f); chain_node != 0; chain_node = *(int*) (chain_node + 0x3f)) {
+								resolve_result = chain_node;
 							}
 							goto code_r0x10014236;
 						}
-						*(int*) (iStack_4 + 0x178) = iVar1;
+						*(int*) (static_parent + 0x178) = entity_addr;
 					}
 					else {
-						iVar4 = *(int*) (iStack_8 + 0x14);
-						if (iVar4 == 0) {
-							*(int*) (iStack_8 + 0x14) = iVar1;
+						resolve_result = *(int*) (existing_parent + 0x14);
+						if (resolve_result == 0) {
+							*(int*) (existing_parent + 0x14) = entity_addr;
 						}
 						else {
-							for (iVar2 = *(int*) (iVar4 + 0x3f); iVar2 != 0; iVar2 = *(int*) (iVar2 + 0x3f)) {
-								iVar4 = iVar2;
+							for (chain_node = *(int*) (resolve_result + 0x3f); chain_node != 0; chain_node = *(int*) (chain_node + 0x3f)) {
+								resolve_result = chain_node;
 							}
 						code_r0x10014236:
-							*(int*) (iVar4 + 0x3f) = iVar1;
+							*(int*) (resolve_result + 0x3f) = entity_addr;
 						}
 					}
 				}
 				else {
-					iVar4 = *(int*) (iStack_c + 0x5d);
-					if (iVar4 != 0) {
-						for (iVar2 = *(int*) (iVar4 + 0x3f); iVar2 != 0; iVar2 = *(int*) (iVar2 + 0x3f)) {
-							iVar4 = iVar2;
+					resolve_result = *(int*) (dynamic_parent + 0x5d);
+					if (resolve_result != 0) {
+						for (chain_node = *(int*) (resolve_result + 0x3f); chain_node != 0; chain_node = *(int*) (chain_node + 0x3f)) {
+							resolve_result = chain_node;
 						}
 						goto code_r0x10014236;
 					}
-					*(int*) (iStack_c + 0x5d) = iVar1;
+					*(int*) (dynamic_parent + 0x5d) = entity_addr;
 				}
 			}
-			iVar5 = iVar5 + 1;
-			iVar8 = iVar8 + 0x43;
-		} while (iVar5 < *(int*) 0x10035450);
+			counter = counter + 1;
+			byte_offset = byte_offset + 0x43;
+		} while (counter < *(int*) 0x10035450);
 	}
 	func_1001a060();
 	return 1;
@@ -1957,12 +1957,12 @@ unsigned int ls_ID2Ptr(void)
 
 int srv_RecvGame(void)
 {
-	int iVar1;
-	int iVar2;
-	char* pcVar4;
+	int file_handle;
+	int load_status;
+	char* entity_state_ptr;
 
-	iVar1 = OpenVfsStream(g_101deae8, g_101deac0, (int) (const char*) 0x1002944c);
-	if (iVar1 == 0) {
+	file_handle = OpenVfsStream(g_101deae8, g_101deac0, (int) (const char*) 0x1002944c);
+	if (file_handle == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
 			0x11fe,
@@ -1973,7 +1973,7 @@ int srv_RecvGame(void)
 		g_101de560 = 0;
 		return 0;
 	}
-	LoadSavegameHeader(iVar1, g_save_info);
+	LoadSavegameHeader(file_handle, g_save_info);
 	if (((g_save_info[1] & 2) == 0) || (0x1005a < g_save_info[0]) || (g_save_info[0] < 0x10013)) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
@@ -1981,116 +1981,116 @@ int srv_RecvGame(void)
 			"srv_RecvGame(): Can\'t load Counter",
 			1
 		);
-		CloseVfsStream(iVar1);
+		CloseVfsStream(file_handle);
 		FreeTrackedHeapBlock((void*) g_101de560);
 		g_101de560 = 0;
 		return 0;
 	}
 	*(int*) 0x1003546c = 0;
-	iVar2 = ReadVfsDataChecked((void*) 0x10030b6c, 4, 1, iVar1);
-	if (iVar2 != 0) {
-		iVar2 = ReadVfsDataChecked((void*) 0x1176408c, 4, 1, iVar1);
-		if (iVar2 != 0) {
-			iVar2 = ReadVfsDataChecked((void*) 0x10035880, 0xe, 1, iVar1);
-			if (iVar2 != 0) {
-				iVar2 = ReadVfsDataChecked((void*) 0x10035439, 1, 1, iVar1);
-				if (iVar2 != 0) {
-					iVar2 = ReadVfsDataChecked((void*) 0x1003546c, 4, 1, iVar1);
-					if (iVar2 != 0) {
-						iVar2 = ReadVfsDataChecked((void*) 0x1003542c, 4, 1, iVar1);
-						if (iVar2 != 0) {
-							iVar2 = ReadVfsDataChecked((void*) 0x10035430, 4, 1, iVar1);
-							if (iVar2 != 0) {
-								iVar2 = ReadVfsDataChecked((void*) 0x10035434, 4, 1, iVar1);
-								if (iVar2 != 0) {
-									ReadVfsDataChecked((void*) 0x10035440, 4, 1, iVar1);
-									ReadVfsDataChecked((void*) 0x101de580, 0x18, 1, iVar1);
+	load_status = ReadVfsDataChecked((void*) 0x10030b6c, 4, 1, file_handle);
+	if (load_status != 0) {
+		load_status = ReadVfsDataChecked((void*) 0x1176408c, 4, 1, file_handle);
+		if (load_status != 0) {
+			load_status = ReadVfsDataChecked((void*) 0x10035880, 0xe, 1, file_handle);
+			if (load_status != 0) {
+				load_status = ReadVfsDataChecked((void*) 0x10035439, 1, 1, file_handle);
+				if (load_status != 0) {
+					load_status = ReadVfsDataChecked((void*) 0x1003546c, 4, 1, file_handle);
+					if (load_status != 0) {
+						load_status = ReadVfsDataChecked((void*) 0x1003542c, 4, 1, file_handle);
+						if (load_status != 0) {
+							load_status = ReadVfsDataChecked((void*) 0x10035430, 4, 1, file_handle);
+							if (load_status != 0) {
+								load_status = ReadVfsDataChecked((void*) 0x10035434, 4, 1, file_handle);
+								if (load_status != 0) {
+									ReadVfsDataChecked((void*) 0x10035440, 4, 1, file_handle);
+									ReadVfsDataChecked((void*) 0x101de580, 0x18, 1, file_handle);
 									if (g_save_version >= 0x10030) {
-										ReadVfsDataChecked((void*) 0x10030b70, 4, 1, iVar1);
+										ReadVfsDataChecked((void*) 0x10030b70, 4, 1, file_handle);
 									}
 									if (g_save_version >= 0x1003d) {
-										ReadVfsDataChecked((void*) 0x10035408, 4, 1, iVar1);
+										ReadVfsDataChecked((void*) 0x10035408, 4, 1, file_handle);
 									}
 									else {
 										*(int*) 0x10035408 = 1000000;
 									}
-									iVar2 = LoadExistingEntities(iVar1);
-									if (iVar2 != 0) {
-										iVar2 = LoadBuildingEntityState(iVar1);
-										if (iVar2 == 0) {
+									load_status = LoadExistingEntities(file_handle);
+									if (load_status != 0) {
+										load_status = LoadBuildingEntityState(file_handle);
+										if (load_status == 0) {
 											LogMessageInternal(
 												"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
 												0x123d,
 												"LoadGame(): Can\'t load Buildings",
 												1
 											);
-											CloseVfsStream(iVar1);
+											CloseVfsStream(file_handle);
 											FreeTrackedHeapBlock((void*) g_101de560);
 											g_101de560 = 0;
 											return 0;
 										}
-										iVar2 = LoadDynamicEntities(iVar1);
-										if (iVar2 == 0) {
+										load_status = LoadDynamicEntities(file_handle);
+										if (load_status == 0) {
 											LogMessageInternal(
 												"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
 												0x1246,
 												"srv_RecvGame(): Can\'t load Dynasties",
 												1
 											);
-											CloseVfsStream(iVar1);
+											CloseVfsStream(file_handle);
 											FreeTrackedHeapBlock((void*) g_101de560);
 											g_101de560 = 0;
 											return 0;
 										}
-										iVar2 = ls_LoadEntities(iVar1);
-										if (iVar2 == 0) {
+										load_status = ls_LoadEntities(file_handle);
+										if (load_status == 0) {
 											LogMessageInternal(
 												"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
 												0x124f,
 												"srv_RecvGame(): Can\'t load Players",
 												1
 											);
-											CloseVfsStream(iVar1);
+											CloseVfsStream(file_handle);
 											FreeTrackedHeapBlock((void*) g_101de560);
 											g_101de560 = 0;
 											return 0;
 										}
-										pcVar4 = (char*) 0x100358a2;
+										entity_state_ptr = (char*) 0x100358a2;
 										do {
-											if (*(unsigned short*) (pcVar4 - 2) != 0xffff && *pcVar4 == '\x06') {
-												*pcVar4 = '\x05';
+											if (*(unsigned short*) (entity_state_ptr - 2) != 0xffff && *entity_state_ptr == '\x06') {
+												*entity_state_ptr = '\x05';
 											}
-											pcVar4 = pcVar4 + 0x21c;
-										} while ((int) pcVar4 < (int) 0x1009aca2);
-										iVar2 = LoadTownData(iVar1);
-										if (iVar2 == 0) {
+											entity_state_ptr = entity_state_ptr + 0x21c;
+										} while ((int) entity_state_ptr < (int) 0x1009aca2);
+										load_status = LoadTownData(file_handle);
+										if (load_status == 0) {
 											LogMessageInternal(
 												"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
 												0x125b,
 												"srv_RecvGame(): Can\'t load Towns",
 												1
 											);
-											CloseVfsStream(iVar1);
+											CloseVfsStream(file_handle);
 											FreeTrackedHeapBlock((void*) g_101de560);
 											g_101de560 = 0;
 											return 0;
 										}
 										if (g_save_version >= 0x10045) {
-											iVar2 = amt_fio_LoadAemter(iVar1, g_save_version);
-											if (iVar2 == 0) {
+											load_status = amt_fio_LoadAemter(file_handle, g_save_version);
+											if (load_status == 0) {
 												LogMessageInternal(
 													"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
 													0x1266,
 													"srv_RecvGame(): Can\'t load Aemter",
 													1
 												);
-												CloseVfsStream(iVar1);
+												CloseVfsStream(file_handle);
 												return 0;
 											}
 										}
-										iVar2 = ls_ID2Ptr();
-										if (iVar2 != 0) {
-											CloseVfsStream(iVar1);
+										load_status = ls_ID2Ptr();
+										if (load_status != 0) {
+											CloseVfsStream(file_handle);
 											return 1;
 										}
 										LogMessageInternal(
@@ -2099,7 +2099,7 @@ int srv_RecvGame(void)
 											"srv_RecvGame(): Can\'t convert IDs to Pointers",
 											1
 										);
-										CloseVfsStream(iVar1);
+										CloseVfsStream(file_handle);
 										FreeTrackedHeapBlock((void*) g_101de560);
 										g_101de560 = 0;
 										return 0;
@@ -2110,7 +2110,7 @@ int srv_RecvGame(void)
 										"srv_RecvGame(): Can\'t load Objects",
 										1
 									);
-									CloseVfsStream(iVar1);
+									CloseVfsStream(file_handle);
 									FreeTrackedHeapBlock((void*) g_101de560);
 									g_101de560 = 0;
 									return 0;
@@ -2128,7 +2128,7 @@ int srv_RecvGame(void)
 		"srv_RecvGame(): Can\'t load Counter",
 		1
 	);
-	CloseVfsStream(iVar1);
+	CloseVfsStream(file_handle);
 	FreeTrackedHeapBlock((void*) g_101de560);
 	g_101de560 = 0;
 	return 0;
