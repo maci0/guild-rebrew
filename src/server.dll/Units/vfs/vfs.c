@@ -1,8 +1,17 @@
+#include "../../Units/Error/error.h"
+#include "../../Units/m_alloc/m_alloc.h"
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
-void __cdecl m_PoolFree(void* pool, void* item);
+
+/* zlib functions (statically linked) */
+int __cdecl inflate(void*, int);
+int __cdecl inflateEnd(void*);
+int __cdecl deflate(void*, int);
+int __cdecl deflateEnd(void*);
+int __cdecl inflateInit2_(void*, int, const char*, int);
+int __cdecl deflateInit2_(void*, int, int, int, int, int, const char*, int);
 
 int* __cdecl vfs_GetErrnoPtr(void);
 int __cdecl vfs_WriteBufferLocked(void*, int, int, int);
@@ -11,10 +20,10 @@ int __cdecl vfs_FreeGameSubobject(void*);
 int __cdecl vfs_CleanupSubobject(void*);
 int __cdecl vfs_CompressBlock(void*, int);
 int __cdecl vfs_LockedFwrite(void*, int, int, void*);
-int __cdecl vfs_GetByte(int);
-int __cdecl vfs_FlushStream(int, int);
+unsigned int __cdecl vfs_GetByte(int*);
+unsigned int __cdecl vfs_FlushStream(int, int);
 void __cdecl vfs_WriteUint32LE(int, unsigned int);
-int __cdecl vfs_CloseStream(int);
+int __cdecl vfs_CloseStream(void*);
 void __cdecl vfs_EntityCleanup(char*);
 extern void mem_free(void*);
 void __cdecl vfs_StreamClose(int);
@@ -24,7 +33,7 @@ int __cdecl vfs_CleanupObject(char*);
 int __cdecl vfs_DestroyEntity(char*);
 int __cdecl vfs_ReadUint32BE(int);
 extern unsigned int gzread(unsigned int*, unsigned int*, int, int, int, int, int, int, unsigned int);
-int ReadVfsCompressed(unsigned int*, unsigned int*, int);
+int __cdecl ReadVfsCompressed(int, int, unsigned int);
 
 // STATUS: MATCHING
 // ORIGIN: GAME
@@ -120,7 +129,7 @@ int __cdecl vfs_CloseStream(void* param_1)
 // FUNCTION: SERVER 0x10003b90
 // vfs_FlushStream
 
-unsigned unsigned int __cdecl vfs_FlushStream(int param_1, int param_2)
+unsigned int __cdecl vfs_FlushStream(int param_1, int param_2)
 {
 	int done;
 	int write_result;
