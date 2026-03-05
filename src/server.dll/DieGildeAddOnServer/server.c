@@ -1661,32 +1661,32 @@ void __cdecl LogWinsockError(int param_1)
 
 void InitBuildingTypeTable(void)
 {
-	unsigned int* puVar1;
-	char cVar2;
-	int iVar3;
+	unsigned int* table_ptr;
+	char type_index;
+	int count;
 
-	puVar1 = (unsigned int*) 0x101de5a0;
-	for (iVar3 = 0; iVar3 != 0; iVar3 = iVar3 + -1) {
-		*puVar1 = 0;
-		puVar1 = puVar1 + 1;
+	table_ptr = (unsigned int*) 0x101de5a0;
+	for (count = 0; count != 0; count = count + -1) {
+		*table_ptr = 0;
+		table_ptr = table_ptr + 1;
 	}
-	for (iVar3 = 0xfc; iVar3 != 0; iVar3 = iVar3 + -1) {
-		*puVar1 = 0;
-		puVar1 = puVar1 + 1;
+	for (count = 0xfc; count != 0; count = count + -1) {
+		*table_ptr = 0;
+		table_ptr = table_ptr + 1;
 	}
-	for (iVar3 = 0; iVar3 != 0; iVar3 = iVar3 + -1) {
-		*puVar1 = 0;
-		puVar1 = puVar1 + 1;
+	for (count = 0; count != 0; count = count + -1) {
+		*table_ptr = 0;
+		table_ptr = table_ptr + 1;
 	}
-	cVar2 = '\0';
-	puVar1 = (unsigned int*) 0x101de5a4;
+	type_index = '\0';
+	table_ptr = (unsigned int*) 0x101de5a4;
 	do {
-		*(((char*) puVar1) - 1) = cVar2;
-		*puVar1 = 0xffffffff;
-		puVar1[4] = 0xffffffff;
-		puVar1 = (unsigned int*) (((char*) puVar1) + 0x18);
-		cVar2 = cVar2 + '\x01';
-	} while ((char*) puVar1 < (char*) 0x101de994);
+		*(((char*) table_ptr) - 1) = type_index;
+		*table_ptr = 0xffffffff;
+		table_ptr[4] = 0xffffffff;
+		table_ptr = (unsigned int*) (((char*) table_ptr) + 0x18);
+		type_index = type_index + '\x01';
+	} while ((char*) table_ptr < (char*) 0x101de994);
 
 	*(unsigned char*) 0x101de5d8 = 2;
 	*(unsigned char*) 0x101de5a8 = 1;

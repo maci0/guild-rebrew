@@ -51,18 +51,18 @@ extern int __cdecl deflateInit2_(char*, int, int, int, int, int, char*, int); /*
 
 unsigned int __cdecl game_getbyte(int* param_1)
 {
-	int* piVar2;
-	int iVar3;
+	int* errno_ptr;
+	int bytes_read;
 
 	if (param_1[0xf] != 0) {
 		return (unsigned int) -1;
 	}
 	if (param_1[1] == 0) {
-		piVar2 = GetErrnoPointer();
-		*piVar2 = 0;
-		iVar3 = WriteFileBufferLocked((void*) param_1[0x11], 1, 0x4000, param_1[0x10]);
-		param_1[1] = iVar3;
-		if (iVar3 == 0) {
+		errno_ptr = GetErrnoPointer();
+		*errno_ptr = 0;
+		bytes_read = WriteFileBufferLocked((void*) param_1[0x11], 1, 0x4000, param_1[0x10]);
+		param_1[1] = bytes_read;
+		if (bytes_read == 0) {
 			param_1[0xf] = 1;
 			if ((*(unsigned char*) (param_1[0x10] + 0xc) & 0x20) != 0) {
 				param_1[0xe] = -1;
@@ -72,9 +72,9 @@ unsigned int __cdecl game_getbyte(int* param_1)
 		param_1[0] = param_1[0x11];
 	}
 	param_1[1] = param_1[1] - 1;
-	iVar3 = (unsigned char) *(unsigned char*) param_1[0];
+	bytes_read = (unsigned char) *(unsigned char*) param_1[0];
 	param_1[0] = param_1[0] + 1;
-	return (unsigned int) iVar3;
+	return (unsigned int) bytes_read;
 }
 
 // ORIGIN: GAME
@@ -89,8 +89,8 @@ unsigned int __cdecl game_getbyte(int* param_1)
 
 int __cdecl close_stream(void* param_1)
 {
-	int iVar1;
-	int* piVar2;
+	int close_result;
+	int* errno_ptr;
 	int result;
 
 	result = 0;
@@ -109,10 +109,10 @@ int __cdecl close_stream(void* param_1)
 		}
 	}
 	if (*(FILE**) ((int) param_1 + 0x40) != 0) {
-		iVar1 = fclose(*(FILE**) ((int) param_1 + 0x40));
-		if (iVar1 != 0) {
-			piVar2 = GetErrnoPointer();
-			if (*piVar2 != 0x1d) {
+		close_result = fclose(*(FILE**) ((int) param_1 + 0x40));
+		if (close_result != 0) {
+			errno_ptr = GetErrnoPointer();
+			if (*errno_ptr != 0x1d) {
 				result = -1;
 			}
 		}
@@ -144,8 +144,8 @@ int __cdecl close_stream(void* param_1)
 unsigned int __cdecl flush_stream(int param_1, int param_2)
 {
 	int done;
-	int iVar2;
-	int iVar3;
+	int write_result;
+	int remaining;
 
 	done = 0;
 	if (param_1 == 0 || *(char*) (param_1 + 0x5c) != 'w') {
@@ -153,10 +153,10 @@ unsigned int __cdecl flush_stream(int param_1, int param_2)
 	}
 	*(int*) (param_1 + 4) = 0;
 	do {
-		iVar3 = 0x4000 - *(int*) (param_1 + 0x10);
-		if (iVar3 != 0) {
-			iVar2 = locked_fwrite(*(int*) (param_1 + 0x48), 1, iVar3, *(int*) (param_1 + 0x40));
-			if (iVar2 != iVar3) {
+		remaining = 0x4000 - *(int*) (param_1 + 0x10);
+		if (remaining != 0) {
+			write_result = locked_fwrite(*(int*) (param_1 + 0x48), 1, remaining, *(int*) (param_1 + 0x40));
+			if (write_result != remaining) {
 				*(int*) (param_1 + 0x38) = -1;
 				return (unsigned int) -1;
 			}
@@ -166,9 +166,9 @@ unsigned int __cdecl flush_stream(int param_1, int param_2)
 		if (done) {
 			break;
 		}
-		iVar2 = compress_block(param_1, param_2);
-		*(int*) (param_1 + 0x38) = iVar2;
-		if (iVar3 == 0 && iVar2 == -5) {
+		write_result = compress_block(param_1, param_2);
+		*(int*) (param_1 + 0x38) = write_result;
+		if (remaining == 0 && write_result == -5) {
 			*(int*) (param_1 + 0x38) = 0;
 		}
 		if (*(int*) (param_1 + 0x10) == 0 && *(int*) (param_1 + 0x38) != 1) {
@@ -217,14 +217,14 @@ int __cdecl flush_and_close_stream(int param_1)
 
 int __cdecl read_uint32_be(int param_1)
 {
-	int iVar1;
+	int flush_result;
 
 	if (param_1 == 0) {
 		return -2;
 	}
 	if (*(char*) (param_1 + 0x5c) == 'w') {
-		iVar1 = flush_stream(param_1, 4);
-		if (iVar1 == 0) {
+		flush_result = flush_stream(param_1, 4);
+		if (flush_result == 0) {
 			write_uint32_le(*(int*) (param_1 + 0x40), *(unsigned int*) (param_1 + 0x4c));
 			write_uint32_le(*(int*) (param_1 + 0x40), *(unsigned int*) (param_1 + 8));
 		}
@@ -537,14 +537,14 @@ int __cdecl CloseVfsStream(void* stream)
 
 unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_14h)
 {
-	int* piVar1;
-	unsigned char uVar2;
-	unsigned int uVar3;
-	int iVar4;
-	unsigned int uVar5;
-	unsigned int uVar6;
-	unsigned int* arg_14h_00;
-	int var_10ch;
+	int* stream_ptr;
+	unsigned char stream_flags;
+	unsigned int read_count;
+	int copy_iter;
+	unsigned int aligned_size;
+	unsigned int tail_bytes;
+	unsigned int* src_ptr;
+	int log_ctx;
 	int in_stack_ffffff08 = 0;
 	int in_stack_ffffff0c = 0;
 	int in_stack_ffffff10 = 0;
@@ -552,59 +552,59 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 	int in_stack_ffffff1c = 0;
 	int in_stack_ffffff28 = 0;
 	unsigned int in_stack_ffffff2c = 0;
-	int var_8h;
-	int var_4h;
+	int total_size;
+	int result;
 
-	var_4h = -1;
-	if ((arg_14h != 0) && (uVar2 = *(unsigned char*) (arg_14h + 0x13c), (uVar2 & 1) != 0)) {
-		piVar1 = (int*) (arg_14h + 0x100);
-		arg_14h_00 = (unsigned int*) *piVar1;
-		if ((arg_14h_00 != 0) || ((uVar2 & 0x20) != 0)) {
-			var_8h = arg_ch * arg_10h;
-			if ((((uVar2 & 0x20) != 0) && ((uVar2 & 8) == 0)) && (*(int*) (arg_14h + 0x104) < var_8h)) {
-				var_8h = *(int*) (arg_14h + 0x104);
+	result = -1;
+	if ((arg_14h != 0) && (stream_flags = *(unsigned char*) (arg_14h + 0x13c), (stream_flags & 1) != 0)) {
+		stream_ptr = (int*) (arg_14h + 0x100);
+		src_ptr = (unsigned int*) *stream_ptr;
+		if ((src_ptr != 0) || ((stream_flags & 0x20) != 0)) {
+			total_size = arg_ch * arg_10h;
+			if ((((stream_flags & 0x20) != 0) && ((stream_flags & 8) == 0)) && (*(int*) (arg_14h + 0x104) < total_size)) {
+				total_size = *(int*) (arg_14h + 0x104);
 			}
-			if (var_8h == 0) {
+			if (total_size == 0) {
 				return 0;
 			}
 			if (arg_8h != 0) {
-				if ((uVar2 & 0x20) != 0) {
-					if ((uVar2 & 8) != 0) {
+				if ((stream_flags & 0x20) != 0) {
+					if ((stream_flags & 8) != 0) {
 						*(unsigned int**) (arg_14h + 0x10c) = arg_8h;
-						*(int*) (arg_14h + 0x110) = var_8h;
-						func_100058d0(piVar1, 2);
-						return var_8h - *(int*) (arg_14h + 0x110);
+						*(int*) (arg_14h + 0x110) = total_size;
+						func_100058d0(stream_ptr, 2);
+						return total_size - *(int*) (arg_14h + 0x110);
 					}
-					uVar3 = (unsigned int) arg_8h * 3 & 3;
-					uVar5 = var_8h - uVar3;
-					uVar6 = uVar5;
-					if (uVar5 != 0 && uVar3 <= (unsigned int) var_8h) {
-						for (; uVar3 != 0; uVar3 = uVar3 - 1) {
-							*(unsigned char*) arg_8h = *(unsigned char*) arg_14h_00;
-							arg_14h_00 = (unsigned int*) ((char*) arg_14h_00 + 1);
+					read_count = (unsigned int) arg_8h * 3 & 3;
+					aligned_size = total_size - read_count;
+					tail_bytes = aligned_size;
+					if (aligned_size != 0 && read_count <= (unsigned int) total_size) {
+						for (; read_count != 0; read_count = read_count - 1) {
+							*(unsigned char*) arg_8h = *(unsigned char*) src_ptr;
+							src_ptr = (unsigned int*) ((char*) src_ptr + 1);
 							arg_8h = (unsigned int*) ((char*) arg_8h + 1);
 						}
-						uVar6 = uVar5 & 3;
-						for (uVar5 = uVar5 >> 2; uVar3 = 0, uVar5 != 0; uVar5 = uVar5 - 1) {
-							*arg_8h = *arg_14h_00;
-							arg_14h_00 = arg_14h_00 + 1;
+						tail_bytes = aligned_size & 3;
+						for (aligned_size = aligned_size >> 2; read_count = 0, aligned_size != 0; aligned_size = aligned_size - 1) {
+							*arg_8h = *src_ptr;
+							src_ptr = src_ptr + 1;
 							arg_8h = arg_8h + 1;
 						}
 					}
-					for (iVar4 = uVar3 + uVar6; iVar4 != 0; iVar4 = iVar4 + -1) {
-						*(unsigned char*) arg_8h = *(unsigned char*) arg_14h_00;
-						arg_14h_00 = (unsigned int*) ((char*) arg_14h_00 + 1);
+					for (copy_iter = read_count + tail_bytes; copy_iter != 0; copy_iter = copy_iter + -1) {
+						*(unsigned char*) arg_8h = *(unsigned char*) src_ptr;
+						src_ptr = (unsigned int*) ((char*) src_ptr + 1);
 						arg_8h = (unsigned int*) ((char*) arg_8h + 1);
 					}
-					*piVar1 = *piVar1 + var_8h;
-					*(int*) (arg_14h + 0x104) = *(int*) (arg_14h + 0x104) - var_8h;
-					*(int*) (arg_14h + 0x108) = *(int*) (arg_14h + 0x108) + var_8h;
-					return var_8h;
+					*stream_ptr = *stream_ptr + total_size;
+					*(int*) (arg_14h + 0x104) = *(int*) (arg_14h + 0x104) - total_size;
+					*(int*) (arg_14h + 0x108) = *(int*) (arg_14h + 0x108) + total_size;
+					return total_size;
 				}
-				if ((uVar2 & 0x10) == 0) {
-					if ((uVar2 & 8) != 0) {
-						uVar3 = gzread(
-							arg_14h_00,
+				if ((stream_flags & 0x10) == 0) {
+					if ((stream_flags & 8) != 0) {
+						read_count = gzread(
+							src_ptr,
 							arg_8h,
 							in_stack_ffffff08,
 							in_stack_ffffff0c,
@@ -614,25 +614,25 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 							in_stack_ffffff28,
 							in_stack_ffffff2c
 						);
-						return uVar3;
+						return read_count;
 					}
-					var_4h = func_1001aa6a(arg_8h, arg_ch, arg_10h, arg_14h_00);
+					result = func_1001aa6a(arg_8h, arg_ch, arg_10h, src_ptr);
 				}
 				else {
-					var_4h = ReadVfsCompressed(arg_14h_00, arg_8h, var_8h);
-					if ((((*(unsigned char*) (arg_14h + 0x13c) & 4) != 0) && (1 < var_4h)) &&
+					result = ReadVfsCompressed(src_ptr, arg_8h, total_size);
+					if ((((*(unsigned char*) (arg_14h + 0x13c) & 4) != 0) && (1 < result)) &&
 						((*(unsigned char*) (arg_14h + 0x13c) = *(unsigned char*) (arg_14h + 0x13c) & 0xfb,
 						  *arg_8h == *(unsigned int*) 0x10029450 &&
 							  (*(unsigned int*) ((char*) arg_8h + 4) == *(unsigned int*) 0x10029454)))) {
-						func_1001a299(&var_10ch, 0x10029474, arg_14h);
-						LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x5b4, &var_10ch, 1);
-						return var_4h;
+						func_1001a299(&log_ctx, 0x10029474, arg_14h);
+						LogMessageInternal("D:\\Develop\\Units\\vfs\\vfs.c", 0x5b4, &log_ctx, 1);
+						return result;
 					}
 				}
 			}
 		}
 	}
-	return var_4h;
+	return result;
 }
 
 // STATUS: MATCHING

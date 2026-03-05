@@ -63,43 +63,43 @@ int __cdecl ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCoun
 
 int __cdecl LoadGraveyardData(int param_1, int param_2)
 {
-	int iVar1;
+	int field_base;
 	int ret;
 	int ptr;
 	int edi;
 	int i;
 
-	iVar1 = AllocGraveyardField(param_2);
-	if (iVar1 == 0) {
+	field_base = AllocGraveyardField(param_2);
+	if (field_base == 0) {
 		return 0;
 	}
-	ret = ReadVfsDataChecked((void*) iVar1, 4, 1, param_1);
+	ret = ReadVfsDataChecked((void*) field_base, 4, 1, param_1);
 	if (ret == 0) {
 		return 0;
 	}
-	ret = ReadVfsDataChecked((void*) (iVar1 + 4), 4, 1, param_1);
+	ret = ReadVfsDataChecked((void*) (field_base + 4), 4, 1, param_1);
 	if (ret == 0) {
 		return 0;
 	}
-	ret = ReadVfsDataChecked((void*) (iVar1 + 0x18), 1, 1, param_1);
+	ret = ReadVfsDataChecked((void*) (field_base + 0x18), 1, 1, param_1);
 	if (ret == 0) {
 		return 0;
 	}
-	ret = ReadVfsDataChecked((void*) (iVar1 + 0x19), 1, 1, param_1);
+	ret = ReadVfsDataChecked((void*) (field_base + 0x19), 1, 1, param_1);
 	if (ret == 0) {
 		return 0;
 	}
-	ret = ReadVfsDataChecked((void*) (iVar1 + 0x1a), 1, 1, param_1);
+	ret = ReadVfsDataChecked((void*) (field_base + 0x1a), 1, 1, param_1);
 	if (ret == 0) {
 		return 0;
 	}
-	ret = ReadVfsDataChecked((void*) (iVar1 + 0x1b), 1, 1, param_1);
+	ret = ReadVfsDataChecked((void*) (field_base + 0x1b), 1, 1, param_1);
 	if (ret == 0) {
 		return 0;
 	}
-	ptr = *(int*) (iVar1 + 0x20);
+	ptr = *(int*) (field_base + 0x20);
 	i = 0;
-	if (0 < g_1002576c[*(int*) (iVar1 + 4)]) {
+	if (0 < g_1002576c[*(int*) (field_base + 4)]) {
 		edi = ptr + 0x14;
 		do {
 			ret = ReadVfsDataChecked((void*) ptr, 4, 1, param_1);
@@ -145,11 +145,11 @@ int __cdecl LoadGraveyardData(int param_1, int param_2)
 			i = i + 1;
 			ptr = ptr + 0x44;
 			edi = edi + 0x44;
-		} while (i < g_1002576c[*(int*) (iVar1 + 4)]);
+		} while (i < g_1002576c[*(int*) (field_base + 4)]);
 	}
-	ptr = *(int*) (iVar1 + 0x1c);
+	ptr = *(int*) (field_base + 0x1c);
 	i = 0;
-	if (0 < g_1002575c[*(int*) (iVar1 + 4)]) {
+	if (0 < g_1002575c[*(int*) (field_base + 4)]) {
 		edi = ptr + 8;
 		do {
 			ret = ReadVfsDataChecked((void*) ptr, 4, 1, param_1);
@@ -178,9 +178,9 @@ int __cdecl LoadGraveyardData(int param_1, int param_2)
 			}
 			ptr = ptr + 0x14;
 			i = i + 1;
-			*(int*) (edi + 8) = *(int*) (iVar1 + 0x20) + param_2 * 0x44;
+			*(int*) (edi + 8) = *(int*) (field_base + 0x20) + param_2 * 0x44;
 			edi = edi + 0x14;
-		} while (i < g_1002575c[*(int*) (iVar1 + 4)]);
+		} while (i < g_1002575c[*(int*) (field_base + 4)]);
 	}
 	return 1;
 }
@@ -202,11 +202,11 @@ int __cdecl LoadGraveyardData(int param_1, int param_2)
 void InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4)
 
 {
-	char cVar1;
-	int iVar3;
-	unsigned int* puVar4;
+	char random_char;
+	int loop_index;
+	unsigned int* fill_ptr;
 	int var_2h;
-	unsigned char uVar2;
+	unsigned char stat_byte;
 
 	if (param_1 == 0x15) {
 		*(int*) (param_4 + 0x1cc) = *(int*) (param_4 + 0x1cc) | 0x1000;
@@ -221,13 +221,13 @@ void InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4
 	*(char*) (param_4 + 0xc) = 0;
 	do {
 		int row_offset = param_3 - g_100a9820;
-		iVar3 = 0;
+		loop_index = 0;
 		do {
-			cVar1 = func_1001a0d0(0x40);
-			g_100a9820[row_offset + iVar3] = cVar1 - 0x20;
-			g_1014d8e0[row_offset + iVar3] = 0;
-			iVar3++;
-		} while (iVar3 < 0x300);
+			random_char = func_1001a0d0(0x40);
+			g_100a9820[row_offset + loop_index] = random_char - 0x20;
+			g_1014d8e0[row_offset + loop_index] = 0;
+			loop_index++;
+		} while (loop_index < 0x300);
 		param_3 += 0x300;
 	} while (param_3 < g_10139820);
 	*(int*) (param_4 + 0x50) = 0x7fff;

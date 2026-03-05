@@ -26,10 +26,10 @@ extern unsigned char g_entity_sync_data[];
 
 int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2)
 {
-        int iVar1;
-        unsigned int* puVar2;
-        unsigned int* puVar3;
-        unsigned int local_24[9];
+        int counter;
+        unsigned int* src_ptr;
+        unsigned int* dst_ptr;
+        unsigned int player_list[9];
 
         if ((*param_1 & 0x6000) != 0) {
                 LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x244, s_invalid_client_state_1002d740, 1);
@@ -39,29 +39,29 @@ int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2)
                 }
                 return 0;
         }
-        puVar2 = local_24;
-        for (iVar1 = 9; iVar1 != 0; iVar1 = iVar1 + -1) {
-                *puVar2 = 0;
-                puVar2 = puVar2 + 1;
+        src_ptr = player_list;
+        for (counter = 9; counter != 0; counter = counter + -1) {
+                *src_ptr = 0;
+                src_ptr = src_ptr + 1;
         }
-        local_24[0] = 0;
-        puVar2 = (unsigned int*)g_player_slots_base;
+        player_list[0] = 0;
+        src_ptr = (unsigned int*)g_player_slots_base;
         do {
-                if (((*puVar2 & 1) != 0) && ((*puVar2 & 0x200) != 0)) {
-                        local_24[local_24[0] + 1] = puVar2[1];
-                        local_24[0] = local_24[0] + 1;
+                if (((*src_ptr & 1) != 0) && ((*src_ptr & 0x200) != 0)) {
+                        player_list[player_list[0] + 1] = src_ptr[1];
+                        player_list[0] = player_list[0] + 1;
                 }
-                puVar2 = puVar2 + 0x99099;
-        } while (puVar2 < (unsigned int*)g_player_slots);
-        puVar2 = local_24;
-        puVar3 = (unsigned int*) (param_2 + 0x14);
-        for (iVar1 = 9; iVar1 != 0; iVar1 = iVar1 + -1) {
-                *puVar3 = *puVar2;
-                puVar2 = puVar2 + 1;
-                puVar3 = puVar3 + 1;
+                src_ptr = src_ptr + 0x99099;
+        } while (src_ptr < (unsigned int*)g_player_slots);
+        src_ptr = player_list;
+        dst_ptr = (unsigned int*) (param_2 + 0x14);
+        for (counter = 9; counter != 0; counter = counter + -1) {
+                *dst_ptr = *src_ptr;
+                src_ptr = src_ptr + 1;
+                dst_ptr = dst_ptr + 1;
         }
-        iVar1 = QueuePlayerCommand(param_1, param_2);
-        if (iVar1 == -1) {
+        counter = QueuePlayerCommand(param_1, param_2);
+        if (counter == -1) {
                 return -1;
         }
         LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 600, s_Got_lb_ExPlayerlist_1002d6f8, 1);
@@ -283,14 +283,14 @@ do_join:
 
 int __cdecl broadcast_state_change(unsigned int* param_1, unsigned char* param_2)
 {
-        int iVar1;
+        int queue_result;
         unsigned int* player_slot;
 
         if ((*param_1 & 0x6000) != 0) {
                 LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command", 0x2fc, "invalid client state", 1);
                 *param_2 = 2;
-                iVar1 = QueuePlayerCommand(param_1, param_2);
-                if (iVar1 == -1) {
+                queue_result = QueuePlayerCommand(param_1, param_2);
+                if (queue_result == -1) {
                         return -1;
                 }
                 return 0;
@@ -326,9 +326,9 @@ int __cdecl broadcast_state_change(unsigned int* param_1, unsigned char* param_2
 
 int __cdecl HandleDataTransferCommand(unsigned int* param_1, unsigned char* param_2)
 {
-        int iVar1;
-        unsigned int* puVar2;
-        unsigned int* pSrc;
+        int queue_result;
+        unsigned int* slot_iter;
+        unsigned int* transfer_data;
 
         if ((*param_1 & 0x6000) != 0) {
                 LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x31d, s_invalid_client_state_1002d740, 1);
@@ -346,30 +346,30 @@ int __cdecl HandleDataTransferCommand(unsigned int* param_1, unsigned char* para
                 return 0;
         }
         {
-                pSrc = (unsigned int*) (param_2 + 0x14);
-                puVar2 = (unsigned int*)g_player_slots_base;
-                while (((*puVar2 & 1) == 0 || ((*puVar2 & 0x200) == 0)) || (puVar2 == param_1) ||
-                           (puVar2[0x99086] != pSrc[3])) {
-                        puVar2 = (unsigned int*)((char*)puVar2 + 0x264264);
-                        if (puVar2 >= (unsigned int*)g_player_slots) {
+                transfer_data = (unsigned int*) (param_2 + 0x14);
+                slot_iter = (unsigned int*)g_player_slots_base;
+                while (((*slot_iter & 1) == 0 || ((*slot_iter & 0x200) == 0)) || (slot_iter == param_1) ||
+                           (slot_iter[0x99086] != transfer_data[3])) {
+                        slot_iter = (unsigned int*)((char*)slot_iter + 0x264264);
+                        if (slot_iter >= (unsigned int*)g_player_slots) {
                                 goto do_transfer;
                         }
                 }
-                pSrc[3] = param_1[0x99086];
+                transfer_data[3] = param_1[0x99086];
         do_transfer:
-                pSrc[1] = param_1[0x99084];
-                memcpy((char*)param_1 + 0x26420c, pSrc, 0x57);
+                transfer_data[1] = param_1[0x99084];
+                memcpy((char*)param_1 + 0x26420c, transfer_data, 0x57);
         }
-        puVar2 = (unsigned int*)g_player_slots_base;
+        slot_iter = (unsigned int*)g_player_slots_base;
         do {
-                if (((*puVar2 & 1) != 0) && ((*puVar2 & 0x200) != 0)) {
-                        iVar1 = QueuePlayerCommand(puVar2, param_2);
-                        if (iVar1 == -1) {
+                if (((*slot_iter & 1) != 0) && ((*slot_iter & 0x200) != 0)) {
+                        queue_result = QueuePlayerCommand(slot_iter, param_2);
+                        if (queue_result == -1) {
                                 return -1;
                         }
                 }
-                puVar2 = (unsigned int*)((char*)puVar2 + 0x264264);
-        } while (puVar2 < (unsigned int*)g_player_slots);
+                slot_iter = (unsigned int*)((char*)slot_iter + 0x264264);
+        } while (slot_iter < (unsigned int*)g_player_slots);
         return 0;
 }
 
@@ -434,42 +434,42 @@ int __cdecl HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
 
 int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
 {
-        int iVar1;
-        int* piVar2;
-        int iVar3;
+        int slot_index;
+        int* id_ptr;
+        int queue_result;
         unsigned int* player_slot;
 
         if ((*param_1 & 0x6000) != 0) {
                 LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x37b, s_invalid_client_state_1002d740, 1);
                 *param_2 = 2;
-                iVar1 = QueuePlayerCommand(param_1, param_2);
-                if (iVar1 == -1) {
+                slot_index = QueuePlayerCommand(param_1, param_2);
+                if (slot_index == -1) {
                         return -1;
                 }
                 return 0;
         }
         if (*(int*) (param_2 + 0x18) != 0) {
-                iVar1 = 0;
-                piVar2 = (int*)&g_player_slots_base[0].id;
-                while (*piVar2 != *(int*) (param_2 + 0x18)) {
-                        piVar2 = (int*)((char*)piVar2 + 0x264264);
-                        iVar1 = iVar1 + 1;
-                        if (piVar2 > (int*)((char*)g_player_slots + 4)) {
+                slot_index = 0;
+                id_ptr = (int*)&g_player_slots_base[0].id;
+                while (*id_ptr != *(int*) (param_2 + 0x18)) {
+                        id_ptr = (int*)((char*)id_ptr + 0x264264);
+                        slot_index = slot_index + 1;
+                        if (id_ptr > (int*)((char*)g_player_slots + 4)) {
                                 *param_2 = 2;
-                                iVar3 = QueuePlayerCommand(param_1, param_2);
-                                if (iVar3 == -1) {
+                                queue_result = QueuePlayerCommand(param_1, param_2);
+                                if (queue_result == -1) {
                                         return -1;
                                 }
                                 return 0;
                         }
                 }
-                iVar3 = QueuePlayerCommand((unsigned int*)&g_player_slots_base[iVar1], param_2);
-                if (iVar3 == -1) {
+                queue_result = QueuePlayerCommand((unsigned int*)&g_player_slots_base[slot_index], param_2);
+                if (queue_result == -1) {
                         return -1;
                 }
-                if (g_player_slots_base[iVar1].id != param_1[1]) {
-                        iVar1 = QueuePlayerCommand(param_1, param_2);
-                        if (iVar1 == -1) {
+                if (g_player_slots_base[slot_index].id != param_1[1]) {
+                        slot_index = QueuePlayerCommand(param_1, param_2);
+                        if (slot_index == -1) {
                                 return -1;
                         }
                 }
@@ -478,8 +478,8 @@ int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
                 player_slot = (unsigned int*)g_player_slots_base;
                 do {
                         if (((*player_slot & 1) != 0) && ((*player_slot & 0x200) != 0)) {
-                                iVar1 = QueuePlayerCommand(player_slot, param_2);
-                                if (iVar1 == -1) {
+                                slot_index = QueuePlayerCommand(player_slot, param_2);
+                                if (slot_index == -1) {
                                         return -1;
                                 }
                         }
@@ -501,33 +501,33 @@ int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
 
 int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2)
 {
-        int uVar1;
-        char local_80[128];
+        int cmd_result;
+        char log_buf[128];
 
-        sprintf(local_80, s_lb_ExLobbyServerCommand___i_1002d858, (unsigned int) *(unsigned char*) (param_2 + 0x10));
-        LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x3a5, local_80, 1);
+        sprintf(log_buf, s_lb_ExLobbyServerCommand___i_1002d858, (unsigned int) *(unsigned char*) (param_2 + 0x10));
+        LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x3a5, log_buf, 1);
         switch (*(unsigned int*) (param_2 + 0x10)) {
         case 0:
-                uVar1 = lb_ExPlayerlist(param_1, (unsigned char*) param_2);
-                return uVar1;
+                cmd_result = lb_ExPlayerlist(param_1, (unsigned char*) param_2);
+                return cmd_result;
         case 1:
-                uVar1 = SendLobbyConfig(param_1, (unsigned char*) param_2);
-                return uVar1;
+                cmd_result = SendLobbyConfig(param_1, (unsigned char*) param_2);
+                return cmd_result;
         case 2:
-                uVar1 = HandleLobbyCommands((char*)param_1, (char*) param_2);
-                return uVar1;
+                cmd_result = HandleLobbyCommands((char*)param_1, (char*) param_2);
+                return cmd_result;
         case 3:
-                uVar1 = broadcast_state_change(param_1, (unsigned char*) param_2);
-                return uVar1;
+                cmd_result = broadcast_state_change(param_1, (unsigned char*) param_2);
+                return cmd_result;
         case 4:
-                uVar1 = HandleDataTransferCommand(param_1, (unsigned char*) param_2);
-                return uVar1;
+                cmd_result = HandleDataTransferCommand(param_1, (unsigned char*) param_2);
+                return cmd_result;
         case 5:
-                uVar1 = HandleEntitySync(param_1, (unsigned char*) param_2);
-                return uVar1;
+                cmd_result = HandleEntitySync(param_1, (unsigned char*) param_2);
+                return cmd_result;
         case 6:
-                uVar1 = cm_RouteCommand(param_1, (unsigned char*) param_2);
-                return uVar1;
+                cmd_result = cm_RouteCommand(param_1, (unsigned char*) param_2);
+                return cmd_result;
         default:
                 return 1;
         }

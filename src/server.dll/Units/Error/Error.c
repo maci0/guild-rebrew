@@ -496,20 +496,20 @@ bad_dbg_free:
 
 unsigned int EmitCrashModuleLine(int* param_1)
 {
-	void* pcVar1;
-	unsigned int uVar2;
-	int* piVar3;
-	int* piVar4;
-	int* piStack_3c;
-	int iStack_38;
-	unsigned char* puStack_34;
-	int iStack_30;
-	unsigned char* puStack_18;
-	unsigned char auStack_14[4];
-	unsigned int uStack_10;
-	unsigned char uStack_c;
-	unsigned int uStack_8;
-	unsigned char uStack_4;
+	void* write_func;
+	unsigned int record_idx;
+	int* debug_record;
+	int* entry_ptr;
+	int* write_buf_ptr;
+	int write_size;
+	unsigned char* dbg_base;
+	int write_count;
+	unsigned char* newline_ptr;
+	unsigned char separator[4];
+	unsigned int format_val_a;
+	unsigned char format_flag_a;
+	unsigned int format_val_b;
+	unsigned char format_flag_b;
 
 	int stack_48;
 	int stack_20;
@@ -518,63 +518,63 @@ unsigned int EmitCrashModuleLine(int* param_1)
 	int stack_60;
 	int stack_8;
 
-	puStack_34 = (unsigned char*) param_1[0];
-	piVar4 = (int*) (*(int*) (puStack_34 + 0xc) + 0x10 + (int) puStack_34);
-	uVar2 = 0;
-	if (*(unsigned int*) (puStack_34 + 8) != 0) {
+	dbg_base = (unsigned char*) param_1[0];
+	entry_ptr = (int*) (*(int*) (dbg_base + 0xc) + 0x10 + (int) dbg_base);
+	record_idx = 0;
+	if (*(unsigned int*) (dbg_base + 8) != 0) {
 		do {
-			if ((piVar4[1] <= param_1[2]) && (param_1[2] <= piVar4[2])) {
-				uStack_c = *(unsigned char*) 0x10027338;
-				uStack_10 = *(unsigned int*) 0x10027334;
-				uStack_4 = *(unsigned char*) 0x10027330;
-				uStack_8 = *(unsigned int*) 0x1002732c;
-				puStack_18 = 0;
+			if ((entry_ptr[1] <= param_1[2]) && (param_1[2] <= entry_ptr[2])) {
+				format_flag_a = *(unsigned char*) 0x10027338;
+				format_val_a = *(unsigned int*) 0x10027334;
+				format_flag_b = *(unsigned char*) 0x10027330;
+				format_val_b = *(unsigned int*) 0x1002732c;
+				newline_ptr = 0;
 				if (param_1[4] == 0) {
-					param_1[4] = piVar4[1];
+					param_1[4] = entry_ptr[1];
 				}
 				else if (param_1[4] == param_1[3]) {
-					param_1[4] = piVar4[1];
+					param_1[4] = entry_ptr[1];
 					param_1[6] = param_1[6] + 1;
 				}
 				else {
-					puStack_18 = (unsigned char*) &stack_16;
+					newline_ptr = (unsigned char*) &stack_16;
 					if ((param_1[5] == 0) || (1 < param_1[6])) {
 						if (*(char*) 0x1003461c == '\0') {
 							return 0;
 						}
 					}
 					else {
-						puStack_18 = (unsigned char*) &stack_8;
-						param_1[4] = piVar4[1];
+						newline_ptr = (unsigned char*) &stack_8;
+						param_1[4] = entry_ptr[1];
 						param_1[5] = param_1[5] + -1;
 					}
 				}
-				iStack_30 = piVar4[3];
-				iStack_38 = 0x10003091;
-				piVar3 = GetDebugRecordByIndex();
-				pcVar1 = (void*) &WriteFile;
-				if (puStack_18 != 0) {
-					puStack_34 = (unsigned char*) &stack_20;
-					iStack_30 = 0;
-					iStack_38 = 4;
-					piStack_3c = (int*) puStack_18;
-					((void (*)(int)) pcVar1)(param_1[1]);
+				write_count = entry_ptr[3];
+				write_size = 0x10003091;
+				debug_record = GetDebugRecordByIndex();
+				write_func = (void*) &WriteFile;
+				if (newline_ptr != 0) {
+					dbg_base = (unsigned char*) &stack_20;
+					write_count = 0;
+					write_size = 4;
+					write_buf_ptr = (int*) newline_ptr;
+					((void (*)(int)) write_func)(param_1[1]);
 				}
-				puStack_34 = (unsigned char*) &stack_20;
-				iStack_30 = 0;
-				iStack_38 = *piVar4 + -1;
-				piStack_3c = piVar4 + 4;
-				((void (*)(int)) pcVar1)(param_1[1]);
-				if (piVar3 != 0) {
-					((void (*)(int, void*, int, void*, int)) pcVar1)(param_1[1], &stack_16, 1, &stack_40, 0);
-					((void (*)(int, int*, int, void*, int)) pcVar1)(param_1[1], piVar3 + 1, *piVar3 + -1, &stack_60, 0);
+				dbg_base = (unsigned char*) &stack_20;
+				write_count = 0;
+				write_size = *entry_ptr + -1;
+				write_buf_ptr = entry_ptr + 4;
+				((void (*)(int)) write_func)(param_1[1]);
+				if (debug_record != 0) {
+					((void (*)(int, void*, int, void*, int)) write_func)(param_1[1], &stack_16, 1, &stack_40, 0);
+					((void (*)(int, int*, int, void*, int)) write_func)(param_1[1], debug_record + 1, *debug_record + -1, &stack_60, 0);
 				}
-				((void (*)(int, void*, int, void*, int)) pcVar1)(param_1[1], &stack_48, 2, &stack_40, 0);
+				((void (*)(int, void*, int, void*, int)) write_func)(param_1[1], &stack_48, 2, &stack_40, 0);
 				return 1;
 			}
-			uVar2 = uVar2 + 1;
-			piVar4 = (int*) ((char*) piVar4 + *piVar4 + 0x10);
-		} while (uVar2 < *(unsigned int*) (puStack_34 + 8));
+			record_idx = record_idx + 1;
+			entry_ptr = (int*) ((char*) entry_ptr + *entry_ptr + 0x10);
+		} while (record_idx < *(unsigned int*) (dbg_base + 8));
 	}
 	return 0;
 }
@@ -700,17 +700,17 @@ void InitializeLogAndErrorHandler(
 	unsigned int param_4
 )
 {
-	unsigned char* puVar1;
-	int arg_8h;
-	int iVar2;
-	unsigned int* puVar3;
-	int iVar4;
-	unsigned int uStack_224;
-	unsigned int uStack_220;
-	unsigned int uStack_21c;
-	unsigned char* puStack_218;
-	unsigned char auStack_11c[24];
-	unsigned char auStack_104[260];
+	unsigned char* path_end;
+	int file_handle;
+	int file_size;
+	unsigned int* log_level_ptr;
+	int format_offset;
+	unsigned int stack_buf_addr;
+	unsigned int stack_return_addr;
+	unsigned int stack_param;
+	unsigned char* stack_ptr;
+	unsigned char window_title[24];
+	unsigned char module_path[260];
 
 	int stack_efc;
 	int stack_ddc;
@@ -724,46 +724,46 @@ void InitializeLogAndErrorHandler(
 	*(unsigned int*) 0x117660e0 = param_3;
 
 	SetUnhandledExceptionFilter(0);
-	puStack_218 = (unsigned char*) 0x10003375;
+	stack_ptr = (unsigned char*) 0x10003375;
 	time(0);
-	puStack_218 = (unsigned char*) &stack_efc;
-	uStack_21c = param_3;
-	uStack_220 = 0x10003390;
-	GetWindowTextA(0, auStack_11c, 0);
-	uStack_220 = 0x104;
-	uStack_224 = 0x11766100;
-	GetModuleFileNameA(0, auStack_104, 0);
-	puVar1 = func_1001a540(0x11766100, 0x5c);
-	*puVar1 = 0;
+	stack_ptr = (unsigned char*) &stack_efc;
+	stack_param = param_3;
+	stack_return_addr = 0x10003390;
+	GetWindowTextA(0, window_title, 0);
+	stack_return_addr = 0x104;
+	stack_buf_addr = 0x11766100;
+	GetModuleFileNameA(0, module_path, 0);
+	path_end = func_1001a540(0x11766100, 0x5c);
+	*path_end = 0;
 	func_1001a527(&stack_ddc);
 	func_1001a299(0x117640e0, 0x1002735c, &stack_ee4);
 	if ((*(unsigned int*) 0x10034618 & 1) != 0) {
-		iVar4 = 0x10027084;
+		format_offset = 0x10027084;
 		do {
 			func_1001a299((int) &stack_de0, 0x100270fc, (void*) 0x11766100);
-			arg_8h = func_1001a286(&stack_de0, 0x100270f8);
-			if (arg_8h != 0) {
-				func_1001a46e(arg_8h, 0, 2);
-				iVar2 = func_1001a2eb(arg_8h);
-				if (0x10000 < iVar2) {
-					func_1001a18a(arg_8h);
-					arg_8h = func_1001a286(&stack_de0, 0x10027358);
-					func_1001a207(0x1002733c, arg_8h);
+			file_handle = func_1001a286(&stack_de0, 0x100270f8);
+			if (file_handle != 0) {
+				func_1001a46e(file_handle, 0, 2);
+				file_size = func_1001a2eb(file_handle);
+				if (0x10000 < file_size) {
+					func_1001a18a(file_handle);
+					file_handle = func_1001a286(&stack_de0, 0x10027358);
+					func_1001a207(0x1002733c, file_handle);
 				}
-				func_1001a18a(arg_8h);
+				func_1001a18a(file_handle);
 			}
-			iVar4 = iVar4 + 0x20;
-		} while (iVar4 < 0x100270e4);
+			format_offset = format_offset + 0x20;
+		} while (format_offset < 0x100270e4);
 	}
 	if ((*(unsigned int*) 0x10034618 & 8) != 0) {
 		AllocConsole();
 		*(void**) 0x11766204 = GetStdHandle(0xfffffff5);
 	}
-	puVar3 = (unsigned int*) 0x10027078;
+	log_level_ptr = (unsigned int*) 0x10027078;
 	do {
-		DispatchLogOutput(0x117640e0, *(unsigned int*) 0x10034618, *puVar3);
-		puVar3 = puVar3 + 1;
-	} while (puVar3 < (unsigned int*) 0x10027084);
+		DispatchLogOutput(0x117640e0, *(unsigned int*) 0x10034618, *log_level_ptr);
+		log_level_ptr = log_level_ptr + 1;
+	} while (log_level_ptr < (unsigned int*) 0x10027084);
 	return;
 }
 
