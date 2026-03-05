@@ -140,166 +140,166 @@ extern float g_100256b0;
 
 unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 {
-	unsigned short* puVar1;
-	unsigned short uVar2;
-	unsigned short* puVar3;
-	char cVar6;
-	unsigned short uVar7;
-	int iVar9;
-	int iVar10;
-	int iVar11;
-	unsigned int* puVar13;
-	unsigned int uVar15;
-	char* pcVar16;
-	unsigned char* puStack_8;
-	int iStack_4;
+	unsigned short* entity;
+	unsigned short entity_id;
+	unsigned short* obj_node;
+	char rand_char;
+	unsigned short rand_val;
+	int slot_offset;
+	int scan_addr;
+	int idx;
+	unsigned int* clear_ptr;
+	unsigned int alloc_result;
+	char* err_msg;
+	unsigned char* target_building;
+	int col_idx;
 
-	ResolveEntityById((void**) &puStack_8, 0, 0, *(int*) (param_1 + 8));
-	if (puStack_8 == 0) {
-		pcVar16 = "ahm_ExAllocAlchemist: cant find target geb...";
-		uVar15 = 0x449;
+	ResolveEntityById((void**) &target_building, 0, 0, *(int*) (param_1 + 8));
+	if (target_building == 0) {
+		err_msg = "ahm_ExAllocAlchemist: cant find target geb...";
+		alloc_result = 0x449;
 	}
 	else {
-		if (*(char*) (g_entity_type_table + *puStack_8 * 0x24d) == '\x1e') {
-			iVar11 = 0;
-			iVar10 = 0x100358a0;
+		if (*(char*) (g_entity_type_table + *target_building * 0x24d) == '\x1e') {
+			idx = 0;
+			scan_addr = 0x100358a0;
 			do {
-				if (*(short*) iVar10 == -1) {
+				if (*(short*) scan_addr == -1) {
 					break;
 				}
-				iVar10 = iVar10 + 0x21c;
-				iVar11 = iVar11 + 1;
-			} while (iVar10 < 0x1009aca0);
-			if (iVar11 == 0x300) {
-				iVar11 = 0;
-				pcVar16 = (char*) 0x100358a2;
+				scan_addr = scan_addr + 0x21c;
+				idx = idx + 1;
+			} while (scan_addr < 0x1009aca0);
+			if (idx == 0x300) {
+				idx = 0;
+				err_msg = (char*) 0x100358a2;
 				do {
-					if (*pcVar16 == '\x0f') {
+					if (*err_msg == '\x0f') {
 						break;
 					}
-					pcVar16 = pcVar16 + 0x21c;
-					iVar11 = iVar11 + 1;
-				} while (pcVar16 < (char*) 0x1009aca2);
-				if (iVar11 == 0x300) {
-					pcVar16 = "ahm_ExAllocAlchemist: array overflow...";
-					uVar15 = 0x45d;
+					err_msg = err_msg + 0x21c;
+					idx = idx + 1;
+				} while (err_msg < (char*) 0x1009aca2);
+				if (idx == 0x300) {
+					err_msg = "ahm_ExAllocAlchemist: array overflow...";
+					alloc_result = 0x45d;
 					goto code_r0x1000be9f;
 				}
 			}
-			iVar10 = iVar11 * 0x21c;
-			if (*(char*) (iVar10 + 0x100358a2) == '\x0f') {
+			scan_addr = idx * 0x21c;
+			if (*(char*) (scan_addr + 0x100358a2) == '\x0f') {
 				g_citizen_count = g_citizen_count + -1;
 			}
-			puVar1 = (unsigned short*) (iVar10 + 0x100358a0);
-			memset(puVar1, 0, 0x21c);
-			*puVar1 = 0xffff;
-			*(int*) (iVar10 + 0x100358a4) = -1;
-			memset((char*) (iVar10 + 0x100358fc), 0xff, 0x20);
+			entity = (unsigned short*) (scan_addr + 0x100358a0);
+			memset(entity, 0, 0x21c);
+			*entity = 0xffff;
+			*(int*) (scan_addr + 0x100358a4) = -1;
+			memset((char*) (scan_addr + 0x100358fc), 0xff, 0x20);
 			g_citizen_count = g_citizen_count + 1;
-			*puVar1 = (unsigned short) iVar11;
-			*(int*) ((char*) puVar1 + 0x170) = (int) puStack_8;
-			*(int*) ((char*) puVar1 + 0x16c) = (int) puStack_8;
-			*((char*) puVar1 + 2) = 0;
-			*(int*) ((char*) puVar1 + 4) = g_next_object_id;
+			*entity = (unsigned short) idx;
+			*(int*) ((char*) entity + 0x170) = (int) target_building;
+			*(int*) ((char*) entity + 0x16c) = (int) target_building;
+			*((char*) entity + 2) = 0;
+			*(int*) ((char*) entity + 4) = g_next_object_id;
 			g_next_object_id = g_next_object_id + 1;
-			*(int*) ((char*) puVar1 + 0x1f0) = 0;
-			*(int*) ((char*) puVar1 + 0x210) = -1;
-			*((char*) puVar1 + 0x215) = 0;
-			*((char*) puVar1 + 0x216) = 0;
-			*((char*) puVar1 + 0x217) = 0;
-			*((unsigned char*) puVar1 + 0x218) = 1;
-			*(int*) ((char*) puVar1 + 0x1e4) = 0x3f800000;
-			*((char*) puVar1 + 8) = 100;
-			*(short*) ((char*) puVar1 + 0xa) = (unsigned char) *(char*) (param_1 + 0x10);
-			*((char*) puVar1 + 0x164) = 0x52;
-			*((char*) puVar1 + 0x166) = 0;
-			*((char*) puVar1 + 0x165) = 0;
-			*(int*) ((char*) puVar1 + 0x1f4) = 0;
-			*(int*) ((char*) puVar1 + 0x190) = 4;
-			*(int*) ((char*) puVar1 + 0x194) = 0;
-			*((char*) puVar1 + 0xd) = 1;
-			*(int*) ((char*) puVar1 + 0x18c) = -1;
-			*(int*) ((char*) puVar1 + 0x20c) = -1;
-			*(short*) ((char*) puVar1 + 0x50) = 0x7fff;
-			iVar11 = 0;
+			*(int*) ((char*) entity + 0x1f0) = 0;
+			*(int*) ((char*) entity + 0x210) = -1;
+			*((char*) entity + 0x215) = 0;
+			*((char*) entity + 0x216) = 0;
+			*((char*) entity + 0x217) = 0;
+			*((unsigned char*) entity + 0x218) = 1;
+			*(int*) ((char*) entity + 0x1e4) = 0x3f800000;
+			*((char*) entity + 8) = 100;
+			*(short*) ((char*) entity + 0xa) = (unsigned char) *(char*) (param_1 + 0x10);
+			*((char*) entity + 0x164) = 0x52;
+			*((char*) entity + 0x166) = 0;
+			*((char*) entity + 0x165) = 0;
+			*(int*) ((char*) entity + 0x1f4) = 0;
+			*(int*) ((char*) entity + 0x190) = 4;
+			*(int*) ((char*) entity + 0x194) = 0;
+			*((char*) entity + 0xd) = 1;
+			*(int*) ((char*) entity + 0x18c) = -1;
+			*(int*) ((char*) entity + 0x20c) = -1;
+			*(short*) ((char*) entity + 0x50) = 0x7fff;
+			idx = 0;
 			do {
-				cVar6 = (char) crt_rand_range(0x40);
-				*((char*) puVar1 + 0x80 + iVar11) = cVar6 + 'T';
-				iVar11 = iVar11 + 1;
-			} while (iVar11 < 5);
-			*((char*) puVar1 + 9) = 0;
-			*(int*) ((char*) puVar1 + 0x1c) = 0x447a0000;
+				rand_char = (char) crt_rand_range(0x40);
+				*((char*) entity + 0x80 + idx) = rand_char + 'T';
+				idx = idx + 1;
+			} while (idx < 5);
+			*((char*) entity + 9) = 0;
+			*(int*) ((char*) entity + 0x1c) = 0x447a0000;
 			{
-				float fVar14;
+				float sum4;
 				float fVar4;
 				float fVar5;
-				fVar14 = crt_rand_float();
+				sum4 = crt_rand_float();
 				fVar4 = g_100256c8;
-				*(int*) ((char*) puVar1 + 0x20) = 0x41400000;
-				*(float*) ((char*) puVar1 + 0x14) = (fVar14 * fVar4 + g_100256c4) - g_100256c0;
-				uVar15 = (unsigned int) crt_ftol();
-				uVar7 = (unsigned short) crt_rand_range(uVar15);
-				fVar5 = *(float*) ((char*) puVar1 + 0x1c) * g_100256b8;
-				*(int*) ((char*) puVar1 + 0x18) = *(int*) ((char*) puVar1 + 0x1c);
-				iStack_4 = 0;
-				iVar11 = 0;
-				*(float*) ((char*) puVar1 + 0x10) =
-					(fVar5 + (float) uVar7) - *(float*) ((char*) puVar1 + 0x1c) * g_100256b4;
+				*(int*) ((char*) entity + 0x20) = 0x41400000;
+				*(float*) ((char*) entity + 0x14) = (sum4 * fVar4 + g_100256c4) - g_100256c0;
+				alloc_result = (unsigned int) crt_ftol();
+				rand_val = (unsigned short) crt_rand_range(alloc_result);
+				fVar5 = *(float*) ((char*) entity + 0x1c) * g_100256b8;
+				*(int*) ((char*) entity + 0x18) = *(int*) ((char*) entity + 0x1c);
+				col_idx = 0;
+				idx = 0;
+				*(float*) ((char*) entity + 0x10) =
+					(fVar5 + (float) rand_val) - *(float*) ((char*) entity + 0x1c) * g_100256b4;
 			}
 			do {
-				uVar7 = *puVar1;
-				cVar6 = (char) crt_rand_range(0x40);
-				*(char*) (uVar7 + iVar11 + 0x100a9820) = cVar6 + -0x20;
-				uVar2 = *puVar1;
-				*(char*) (uVar7 + iVar11 + 0x1014d8e0) = 0;
-				iVar9 = uVar2 * 0x300 + iStack_4;
-				cVar6 = (char) crt_rand_range(0x40);
-				iVar11 = iVar11 + 0x300;
-				iStack_4 = iStack_4 + 1;
-				*(char*) (iVar9 + 0x100a9820) = cVar6 + -0x20;
-				*(char*) (iVar9 + 0x1014d8e0) = 0;
-			} while (iVar11 < 0x90000);
-			if (*(int*) (puStack_8 + 0x65) == 0) {
-				uVar15 = (unsigned int) AllocateTrackedHeapBlock(0x3c, g_1002a0f8);
-				*(unsigned int*) (puStack_8 + 0x65) = uVar15;
+				rand_val = *entity;
+				rand_char = (char) crt_rand_range(0x40);
+				*(char*) (rand_val + idx + 0x100a9820) = rand_char + -0x20;
+				entity_id = *entity;
+				*(char*) (rand_val + idx + 0x1014d8e0) = 0;
+				slot_offset = entity_id * 0x300 + col_idx;
+				rand_char = (char) crt_rand_range(0x40);
+				idx = idx + 0x300;
+				col_idx = col_idx + 1;
+				*(char*) (slot_offset + 0x100a9820) = rand_char + -0x20;
+				*(char*) (slot_offset + 0x1014d8e0) = 0;
+			} while (idx < 0x90000);
+			if (*(int*) (target_building + 0x65) == 0) {
+				alloc_result = (unsigned int) AllocateTrackedHeapBlock(0x3c, g_1002a0f8);
+				*(unsigned int*) (target_building + 0x65) = alloc_result;
 			}
-			puVar13 = *(unsigned int**) (puStack_8 + 0x65);
-			for (iVar11 = 0xf; iVar11 != 0; iVar11 = iVar11 + -1) {
-				*puVar13 = 0;
-				puVar13 = puVar13 + 1;
+			clear_ptr = *(unsigned int**) (target_building + 0x65);
+			for (idx = 0xf; idx != 0; idx = idx + -1) {
+				*clear_ptr = 0;
+				clear_ptr = clear_ptr + 1;
 			}
-			**(int**) (puStack_8 + 0x65) = *(int*) ((char*) puVar1 + 4);
+			**(int**) (target_building + 0x65) = *(int*) ((char*) entity + 4);
 			{
 				int tmp;
 				tmp = *(char*) (param_1 + 0xf);
-				*(float*) (*(int*) (puStack_8 + 0x65) + 4) = (tmp * g_100256ac + g_100256a0) * g_100256b0;
+				*(float*) (*(int*) (target_building + 0x65) + 4) = (tmp * g_100256ac + g_100256a0) * g_100256b0;
 			}
-			*(char*) (*(int*) (puStack_8 + 0x65) + 8) = *(char*) (param_1 + 0xc);
-			*(char*) (*(int*) (puStack_8 + 0x65) + 9) = *(char*) (param_1 + 0xd);
-			*(char*) (*(int*) (puStack_8 + 0x65) + 10) = *(char*) (param_1 + 0xe);
-			*(char*) (*(int*) (puStack_8 + 0x65) + 0xb) = *(char*) (param_1 + 0xf);
-			*(char*) (*(int*) (puStack_8 + 0x65) + 0xc) = *(char*) (param_1 + 0x14);
-			iVar11 = StartEntityQuery(*(int*) (puStack_8 + 0x5d), 2, 6, 0, 0xff);
-			if (iVar11 != 0) {
-				puVar3 = *(unsigned short**) (iVar11 + 0x14);
-				while (puVar3 != 0) {
-					RemoveObjectByType(iVar11 + 0x14, *puVar3);
-					puVar3 = *(unsigned short**) (iVar11 + 0x14);
+			*(char*) (*(int*) (target_building + 0x65) + 8) = *(char*) (param_1 + 0xc);
+			*(char*) (*(int*) (target_building + 0x65) + 9) = *(char*) (param_1 + 0xd);
+			*(char*) (*(int*) (target_building + 0x65) + 10) = *(char*) (param_1 + 0xe);
+			*(char*) (*(int*) (target_building + 0x65) + 0xb) = *(char*) (param_1 + 0xf);
+			*(char*) (*(int*) (target_building + 0x65) + 0xc) = *(char*) (param_1 + 0x14);
+			idx = StartEntityQuery(*(int*) (target_building + 0x5d), 2, 6, 0, 0xff);
+			if (idx != 0) {
+				obj_node = *(unsigned short**) (idx + 0x14);
+				while (obj_node != 0) {
+					RemoveObjectByType(idx + 0x14, *obj_node);
+					obj_node = *(unsigned short**) (idx + 0x14);
 				}
 			}
-			*(int*) (*(int*) (puStack_8 + 0x65) + 0x10) = *(int*) (param_1 + 0x20);
-			if (iVar11 != 0) {
-				AddOrAccumulateObject(*(int*) (iVar11 + 2), *(int*) (param_1 + 0x14), 2);
+			*(int*) (*(int*) (target_building + 0x65) + 0x10) = *(int*) (param_1 + 0x20);
+			if (idx != 0) {
+				AddOrAccumulateObject(*(int*) (idx + 2), *(int*) (param_1 + 0x14), 2);
 			}
 			RefreshMarketAvailability((int) g_current_season);
-			*(int*) ((char*) puVar1 + 0x1cc) = *(int*) ((char*) puVar1 + 0x1cc) | 4;
-			return *puVar1;
+			*(int*) ((char*) entity + 0x1cc) = *(int*) ((char*) entity + 0x1cc) | 4;
+			return *entity;
 		}
-		pcVar16 = "ahm_ExAllocAlchemist: wrong type of target geb...";
-		uVar15 = 0x451;
+		err_msg = "ahm_ExAllocAlchemist: wrong type of target geb...";
+		alloc_result = 0x451;
 	}
 code_r0x1000be9f:
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", uVar15, pcVar16, 1);
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c", alloc_result, err_msg, 1);
 	return 0xffff;
 }
 
@@ -341,27 +341,27 @@ int __cdecl ApplyColorComponent(char* param_1, char* param_2)
 
 int __cdecl AllocateEntitySlot(int param_1, int param_2, int param_3)
 {
-	int* piVar1;
-	void* pvVar2;
-	int iVar3;
+	int* slot_ptr;
+	void* query_result;
+	int i;
 
-	iVar3 = 0;
-	piVar1 = (int*) (param_2 + 0xc);
+	i = 0;
+	slot_ptr = (int*) (param_2 + 0xc);
 	do {
-		if (*piVar1 == 0) {
-			pvVar2 = StartEntityQuery(*(int*) (param_3 + 0x5d), 2, 6, 0, 0xff);
+		if (*slot_ptr == 0) {
+			query_result = StartEntityQuery(*(int*) (param_3 + 0x5d), 2, 6, 0, 0xff);
 			*(int*) (param_1 + 0x14) = DAT_10030b6c;
-			*(int*) (param_2 + 0xc + iVar3 * 8) = *(int*) (param_1 + 8);
-			*(int*) (param_2 + 0x10 + iVar3 * 8) = *(int*) (param_1 + 0x10);
-			if (pvVar2 != (void*) 0) {
-				AddOrAccumulateObject(*(int*) ((char*) pvVar2 + 2), *(int*) (param_1 + 8), 2);
+			*(int*) (param_2 + 0xc + i * 8) = *(int*) (param_1 + 8);
+			*(int*) (param_2 + 0x10 + i * 8) = *(int*) (param_1 + 0x10);
+			if (query_result != (void*) 0) {
+				AddOrAccumulateObject(*(int*) ((char*) query_result + 2), *(int*) (param_1 + 8), 2);
 			}
 			RefreshMarketAvailability((int) DAT_10035439);
 			return 1;
 		}
-		iVar3 = iVar3 + 1;
-		piVar1 = piVar1 + 2;
-	} while (iVar3 < 6);
+		i = i + 1;
+		slot_ptr = slot_ptr + 2;
+	} while (i < 6);
 	return 0;
 }
 
@@ -434,15 +434,15 @@ int __cdecl search_and_set(SRC* src, TGT* tgt)
 
 int __cdecl ClampFloatValue(int param_1, int param_2)
 {
-	float fVar1;
+	float sum;
 
-	fVar1 = *(float*) (param_1 + 0x10) + *(float*) (param_2 + 4);
-	if (fVar1 > DAT_100256cc) {
-		if (fVar1 >= DAT_100256a0) {
+	sum = *(float*) (param_1 + 0x10) + *(float*) (param_2 + 4);
+	if (sum > DAT_100256cc) {
+		if (sum >= DAT_100256a0) {
 			*(float*) (param_2 + 4) = DAT_100256a0;
 			return 1;
 		}
-		*(float*) (param_2 + 4) = fVar1;
+		*(float*) (param_2 + 4) = sum;
 		return 1;
 	}
 	*(float*) (param_2 + 4) = DAT_100256cc;
@@ -459,34 +459,34 @@ int __cdecl ClampFloatValue(int param_1, int param_2)
 
 int __cdecl FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 {
-	unsigned short* puVar1;
-	void* pvVar2;
-	unsigned int* puVar3;
-	int iVar4;
+	unsigned short* entity;
+	void* query_result;
+	unsigned int* slot_iter;
+	int count;
 
-	puVar1 = (unsigned short*) LookupEntityRecordById(*param_2);
-	if (puVar1 != (unsigned short*) 0) {
-		pvVar2 = StartEntityQuery(*(int*) (param_3 + 0x5d), 2, 6, 0, 0xff);
-		*(int*) (puVar1 + 0xb8) = 0;
-		*(int*) (puVar1 + 0xb6) = 0;
-		puVar3 = (unsigned int*) (param_2 + 3);
-		iVar4 = 6;
+	entity = (unsigned short*) LookupEntityRecordById(*param_2);
+	if (entity != (unsigned short*) 0) {
+		query_result = StartEntityQuery(*(int*) (param_3 + 0x5d), 2, 6, 0, 0xff);
+		*(int*) (entity + 0xb8) = 0;
+		*(int*) (entity + 0xb6) = 0;
+		slot_iter = (unsigned int*) (param_2 + 3);
+		count = 6;
 		do {
-			if (*puVar3 != 0) {
-				if (pvVar2 != (void*) 0) {
-					RemoveObjectByType((void**) ((int) pvVar2 + 0x14), *puVar3);
+			if (*slot_iter != 0) {
+				if (query_result != (void*) 0) {
+					RemoveObjectByType((void**) ((int) query_result + 0x14), *slot_iter);
 				}
-				*puVar3 = 0;
-				puVar3[1] = 0;
+				*slot_iter = 0;
+				slot_iter[1] = 0;
 			}
-			puVar3 = puVar3 + 2;
-			iVar4 = iVar4 - 1;
-		} while (iVar4 != 0);
-		for (iVar4 = 0xf; iVar4 != 0; iVar4--) {
+			slot_iter = slot_iter + 2;
+			count = count - 1;
+		} while (count != 0);
+		for (count = 0xf; count != 0; count--) {
 			*param_2 = 0;
 			param_2 = param_2 + 1;
 		}
-		DeallocEntity(*puVar1, 1);
+		DeallocEntity(*entity, 1);
 		return 1;
 	}
 	return 0;
@@ -647,22 +647,22 @@ int* __cdecl LookupEntityInTable(int param_1)
 
 void __cdecl QueryEntityBuildingType(int param_1)
 {
-	unsigned short* puVar1;
-	int iVar2;
+	unsigned short* entity;
+	int table_entry;
 
-	puVar1 = StartEntityQuery(*(int*) (param_1 + 0x178), 1, 5);
-	if (puVar1 != (unsigned short*) 0) {
-		while (iVar2 = (int) LookupEntityInTable(*puVar1), iVar2 == 0) {
-			puVar1 = NextEntityQueryMatch();
-			if (puVar1 == (unsigned short*) 0) {
+	entity = StartEntityQuery(*(int*) (param_1 + 0x178), 1, 5);
+	if (entity != (unsigned short*) 0) {
+		while (table_entry = (int) LookupEntityInTable(*entity), table_entry == 0) {
+			entity = NextEntityQueryMatch();
+			if (entity == (unsigned short*) 0) {
 				LookupEntityInTable(0);
 				return;
 			}
 		}
-		if (*(int*) (iVar2 + 0x58) != 1 && *(int*) (iVar2 + 0x58) != 2) {
+		if (*(int*) (table_entry + 0x58) != 1 && *(int*) (table_entry + 0x58) != 2) {
 			return;
 		}
-		if (0 < *(int*) ((char*) puVar1 + 0x20)) {
+		if (0 < *(int*) ((char*) entity + 0x20)) {
 			return;
 		}
 	}
@@ -686,7 +686,7 @@ int GetCommandPayloadSize(unsigned char* param_1)
 
 {
 	int iVar1;
-	unsigned char* puVar2;
+	unsigned char* pentity_id;
 	int iVar3;
 	int iVar4;
 
@@ -759,7 +759,7 @@ int GetCommandPayloadSize(unsigned char* param_1)
 		return 0x39;
 	case 0x16:
 	case 0x17:
-		puVar2 = param_1 + (*param_1 == 0x16 ? 0x15 : 0x15);
+		pentity_id = param_1 + (*param_1 == 0x16 ? 0x15 : 0x15);
 		iVar3 = 0x15;
 		break;
 	case 0x18:
@@ -831,9 +831,9 @@ int GetCommandPayloadSize(unsigned char* param_1)
 		return 0x29;
 	}
 	for (iVar4 = param_1[0x14]; iVar4 > 0; iVar4 = iVar4 - 1) {
-		iVar1 = puVar2[1] * *puVar2 + 4;
+		iVar1 = pentity_id[1] * *pentity_id + 4;
 		iVar3 = iVar3 + iVar1;
-		puVar2 = puVar2 + iVar1;
+		pentity_id = pentity_id + iVar1;
 	}
 	return iVar3;
 }
