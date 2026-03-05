@@ -347,7 +347,7 @@ char s_lb_ExLobbyServerCommand___i_1002d858[1] = "";
 /* Special forwarding stubs */
 static int stub_errno_val = 0;
 
-int* __cdecl GetErrnoPointer(void)
+int* __cdecl vfs_GetErrnoPtr(void)
 {
 	return &stub_errno_val;
 }
@@ -365,7 +365,7 @@ void __cdecl FreeCommandBuffer(unsigned int* a, int b)
 {
 }
 
-void __cdecl FreeHeapBlockWithRuntimeLock(void* ptr)
+void __cdecl m_FreeHeapLocked(void* ptr)
 {
 }
 
@@ -378,23 +378,23 @@ void __cdecl RecvGameSavegame(void)
 {
 }
 
-int __cdecl WriteFileBufferLocked(void* a, int b, int c, int d)
+int __cdecl vfs_WriteBufferLocked(void* a, int b, int c, int d)
 {
 	return 0;
 }
 
 
-int __cdecl cleanup_subobject(void* a)
+int __cdecl vfs_CleanupSubobject(void* a)
 {
 	return 0;
 }
 
-int __cdecl compress_block(void* a, int b)
+int __cdecl vfs_CompressBlock(void* a, int b)
 {
 	return 0;
 }
 
-int __cdecl crc32_update(int checksum, int buffer, unsigned int size)
+int __cdecl vfs_Crc32Update(int checksum, int buffer, unsigned int size)
 {
 	return 0;
 }
@@ -423,7 +423,7 @@ int __cdecl crt_locked_putc(int a, int b)
 
 
 
-void __cdecl entity_cleanup(char* a)
+void __cdecl vfs_EntityCleanup(char* a)
 {
 }
 
@@ -431,7 +431,7 @@ void __cdecl free_block(int a)
 {
 }
 
-int __cdecl free_game_subobject(void* a)
+int __cdecl vfs_FreeGameSubobject(void* a)
 {
 	return 0;
 }
@@ -440,7 +440,7 @@ void __cdecl free_node(char* a)
 {
 }
 
-void __cdecl free_subobj(void* a)
+void __cdecl vfs_FreeSubobj(void* a)
 {
 }
 
@@ -453,7 +453,7 @@ short __cdecl get_command_type(char* a)
 	return 0;
 }
 
-int __cdecl locked_fwrite(void* a, int b, int c, void* d)
+int __cdecl vfs_LockedFwrite(void* a, int b, int c, void* d)
 {
 	return 0;
 }
@@ -462,7 +462,7 @@ void __cdecl mem_free(void* a)
 {
 }
 
-void __cdecl stream_close(int a)
+void __cdecl vfs_StreamClose(int a)
 {
 }
 

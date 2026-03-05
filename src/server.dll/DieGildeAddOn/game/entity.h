@@ -18,7 +18,7 @@ extern void* __cdecl gm_LookupEntityInTable(int id);
 extern void __cdecl ahm_InitRandomEntity(void* entity);
 extern int __cdecl gm_InitEntityIfValid(void* entity);
 extern void __cdecl gm_DeallocEntity(unsigned int index, int param_2);
-extern void __cdecl destroy_entity(void* entity);
+extern void __cdecl vfs_DestroyEntity(void* entity);
 
 /* Chain and Link Processing */
 extern void __cdecl gm_ProcessEntityChain(void);

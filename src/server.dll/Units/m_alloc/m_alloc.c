@@ -14,7 +14,7 @@ extern int DAT_10034630;
 extern int DAT_10034634;
 extern int DAT_10034638;
 extern void* DAT_10034640;
-void __cdecl FreeHeapBlockWithRuntimeLock(void* ptr);
+void __cdecl m_FreeHeapLocked(void* ptr);
 extern int DAT_117640b4;
 extern int DAT_117640b0;
 extern int DAT_117640bc;
@@ -195,7 +195,7 @@ void __cdecl m_FreeTracked(void* heapBlock)
 		}
 		blockSize = trackingEntry[3];
 		trackingEntry[2] = 0;
-		FreeHeapBlockWithRuntimeLock(heapBlock);
+		m_FreeHeapLocked(heapBlock);
 		DAT_1003462c = DAT_1003462c - 1;
 		*(int*) (*trackingEntry + 0x14) = *(int*) (*trackingEntry + 0x14) - 1;
 		DAT_10034628 = DAT_10034628 - blockSize;
@@ -426,7 +426,7 @@ void __cdecl ShutdownMemoryAllocator(void)
 				if (g_array_ptr[i].ptr8 != 0) {
 					sprintf(buffer, g_str_10028aec, g_array_ptr[i].field4);
 					LogMessageInternal(g_str_10028888, 0x203, buffer, 1);
-					FreeHeapBlockWithRuntimeLock(g_array_ptr[i].ptr8);
+					m_FreeHeapLocked(g_array_ptr[i].ptr8);
 					g_array_ptr[i].ptr8 = 0;
 				}
 			}
@@ -443,12 +443,12 @@ void __cdecl ShutdownMemoryAllocator(void)
 		struct LinkedListNode* node = g_list_head;
 		while (node != 0) {
 			struct LinkedListNode* next = node->next;
-			FreeHeapBlockWithRuntimeLock(node);
+			m_FreeHeapLocked(node);
 			node = next;
 		}
 	}
 
-	FreeHeapBlockWithRuntimeLock(g_array_ptr);
+	m_FreeHeapLocked(g_array_ptr);
 	g_array_ptr = 0;
 }
 

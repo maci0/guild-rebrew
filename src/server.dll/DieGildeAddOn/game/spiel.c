@@ -30,7 +30,7 @@ void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
 int __cdecl _getpid(void);
 extern char* g_entity_ptr;
-void __cdecl entity_cleanup(char*);
+void __cdecl vfs_EntityCleanup(char*);
 extern short* DAT_100a8c34;
 extern int DAT_10035450;
 extern Record* g_records;
@@ -516,7 +516,7 @@ void __cdecl gm_ResetAllEntities(void)
 	for (i = 0; i < 0x100; i++) {
 		p = g_entity_ptr + i * 0xa9;
 		if (*p != 0) {
-			entity_cleanup(p);
+			vfs_EntityCleanup(p);
 		}
 	}
 	{

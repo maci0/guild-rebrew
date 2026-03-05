@@ -145,6 +145,8 @@ compiled directly into it or loaded from a separate DLL not captured here.
 Every exported/named function carries a **module prefix** identifying its
 subsystem:
 
+### Game Logic Modules
+
 | Prefix | Module       | Source File              | Domain                          |
 |--------|--------------|--------------------------|---------------------------------|
 | `cm_`  | Command      | `command.c`              | Command validation & execution  |
@@ -153,6 +155,26 @@ subsystem:
 | `ahm_` | Alchemy      | `alchemistry_logic.c`    | Alchemy subsystem               |
 | `gv_`  | Graveyard    | `friedhof_logic.c`       | Graveyard subsystem             |
 | `sim_` | Simulation   | `sim.c`                  | Citizen simulation              |
+| `amt_` | Offices      | `aemter.c`               | Office / election system        |
+| `ls_`  | LoadSave     | `loadsave.c`             | Save/load serialization         |
+| `plt_` | Plant        | `plant.c`                | Zone/record lookup, vegetation  |
+
+### Infrastructure Modules (`Units/`)
+
+| Prefix | Module       | Source File              | Domain                          |
+|--------|--------------|--------------------------|---------------------------------|
+| `m_`   | Memory       | `m_alloc.c`              | Tracked heap alloc, pool alloc  |
+| `vfs_` | VFS          | `vfs.c`                  | Virtual file system, streams    |
+| `srv_` | Server       | `server.c`               | Server lifecycle, main loop     |
+
+### Standard Library Functions
+
+Standard CRT functions (`fopen`, `fread`, `putc`, `srand`, `rand`, etc.)
+are used directly with proper `#include` headers — no `extern` declarations
+needed.
+
+The compiler intrinsic `__ftol` (float-to-long) is statically linked and
+requires a forward declaration where used.
 
 Small static helpers within a module may omit the prefix (they were `static`
 in the original source and not visible across translation units).

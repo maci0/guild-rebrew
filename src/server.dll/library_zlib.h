@@ -8,7 +8,7 @@
 // SIZE: 302
 
 // LIBRARY: SERVER 0x100011f0
-// crc32_update
+// vfs_Crc32Update
 // SIZE: 309
 
 // LIBRARY: SERVER 0x10001330
@@ -188,7 +188,7 @@
 // SIZE: 1397
 
 // LIBRARY: SERVER 0x100083c0
-// compress_block
+// vfs_CompressBlock
 // SIZE: 1083
 
 // LIBRARY: SERVER 0x10008800

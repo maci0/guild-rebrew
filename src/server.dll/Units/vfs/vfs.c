@@ -4,25 +4,25 @@
 void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
 void __cdecl m_PoolFree(void* pool, void* item);
 
-int* __cdecl GetErrnoPointer(void);
-int __cdecl WriteFileBufferLocked(void*, int, int, int);
-void __cdecl FreeHeapBlockWithRuntimeLock(void*);
-int __cdecl free_game_subobject(void*);
-int __cdecl cleanup_subobject(void*);
-int __cdecl compress_block(void*, int);
-int __cdecl locked_fwrite(void*, int, int, void*);
-int __cdecl game_getbyte(int);
-int __cdecl flush_stream(int, int);
-void __cdecl write_uint32_le(int, unsigned int);
-int __cdecl close_stream(int);
-void __cdecl entity_cleanup(char*);
+int* __cdecl vfs_GetErrnoPtr(void);
+int __cdecl vfs_WriteBufferLocked(void*, int, int, int);
+void __cdecl m_FreeHeapLocked(void*);
+int __cdecl vfs_FreeGameSubobject(void*);
+int __cdecl vfs_CleanupSubobject(void*);
+int __cdecl vfs_CompressBlock(void*, int);
+int __cdecl vfs_LockedFwrite(void*, int, int, void*);
+int __cdecl vfs_GetByte(int);
+int __cdecl vfs_FlushStream(int, int);
+void __cdecl vfs_WriteUint32LE(int, unsigned int);
+int __cdecl vfs_CloseStream(int);
+void __cdecl vfs_EntityCleanup(char*);
 extern void mem_free(void*);
-void __cdecl stream_close(int);
-int __cdecl crc32_update(int checksum, int buffer, unsigned int size);
-void __cdecl free_subobj(void*);
-int __cdecl cleanup_object(char*);
-int __cdecl destroy_entity(char*);
-int __cdecl read_uint32_be(int);
+void __cdecl vfs_StreamClose(int);
+int __cdecl vfs_Crc32Update(int checksum, int buffer, unsigned int size);
+void __cdecl vfs_FreeSubobj(void*);
+int __cdecl vfs_CleanupObject(char*);
+int __cdecl vfs_DestroyEntity(char*);
+int __cdecl vfs_ReadUint32BE(int);
 extern unsigned int gzread(unsigned int*, unsigned int*, int, int, int, int, int, int, unsigned int);
 int ReadVfsCompressed(unsigned int*, unsigned int*, int);
 
@@ -30,9 +30,9 @@ int ReadVfsCompressed(unsigned int*, unsigned int*, int);
 // ORIGIN: GAME
 // SIZE: 114
 // FUNCTION: SERVER 0x10003820
-// game_getbyte
+// vfs_GetByte
 
-unsigned int __cdecl game_getbyte(int* param_1)
+unsigned int __cdecl vfs_GetByte(int* param_1)
 {
 	int* errno_ptr;
 	int bytes_read;
@@ -41,9 +41,9 @@ unsigned int __cdecl game_getbyte(int* param_1)
 		return (unsigned int) -1;
 	}
 	if (param_1[1] == 0) {
-		errno_ptr = GetErrnoPointer();
+		errno_ptr = vfs_GetErrnoPtr();
 		*errno_ptr = 0;
-		bytes_read = WriteFileBufferLocked((void*) param_1[0x11], 1, 0x4000, param_1[0x10]);
+		bytes_read = vfs_WriteBufferLocked((void*) param_1[0x11], 1, 0x4000, param_1[0x10]);
 		param_1[1] = bytes_read;
 		if (bytes_read == 0) {
 			param_1[0xf] = 1;
@@ -66,9 +66,9 @@ unsigned int __cdecl game_getbyte(int* param_1)
 // STATUS: RELOC
 // SIZE: 177
 // FUNCTION: SERVER 0x100038a0
-// close_stream
+// vfs_CloseStream
 
-int __cdecl close_stream(void* param_1)
+int __cdecl vfs_CloseStream(void* param_1)
 {
 	int close_result;
 	int* errno_ptr;
@@ -79,20 +79,20 @@ int __cdecl close_stream(void* param_1)
 		return -2;
 	}
 	if (*(void**) ((int) param_1 + 0x50) != 0) {
-		FreeHeapBlockWithRuntimeLock(*(void**) ((int) param_1 + 0x50));
+		m_FreeHeapLocked(*(void**) ((int) param_1 + 0x50));
 	}
 	if (*(int*) ((int) param_1 + 0x1c) != 0) {
 		if (*(char*) ((int) param_1 + 0x5c) == 'w') {
-			result = free_game_subobject(param_1);
+			result = vfs_FreeGameSubobject(param_1);
 		}
 		else if (*(char*) ((int) param_1 + 0x5c) == 'r') {
-			result = cleanup_subobject(param_1);
+			result = vfs_CleanupSubobject(param_1);
 		}
 	}
 	if (*(FILE**) ((int) param_1 + 0x40) != 0) {
 		close_result = fclose(*(FILE**) ((int) param_1 + 0x40));
 		if (close_result != 0) {
-			errno_ptr = GetErrnoPointer();
+			errno_ptr = vfs_GetErrnoPtr();
 			if (*errno_ptr != 0x1d) {
 				result = -1;
 			}
@@ -102,15 +102,15 @@ int __cdecl close_stream(void* param_1)
 		result = *(int*) ((int) param_1 + 0x38);
 	}
 	if (*(void**) ((int) param_1 + 0x44) != 0) {
-		FreeHeapBlockWithRuntimeLock(*(void**) ((int) param_1 + 0x44));
+		m_FreeHeapLocked(*(void**) ((int) param_1 + 0x44));
 	}
 	if (*(void**) ((int) param_1 + 0x48) != 0) {
-		FreeHeapBlockWithRuntimeLock(*(void**) ((int) param_1 + 0x48));
+		m_FreeHeapLocked(*(void**) ((int) param_1 + 0x48));
 	}
 	if (*(void**) ((int) param_1 + 0x54) != 0) {
-		FreeHeapBlockWithRuntimeLock(*(void**) ((int) param_1 + 0x54));
+		m_FreeHeapLocked(*(void**) ((int) param_1 + 0x54));
 	}
-	FreeHeapBlockWithRuntimeLock(param_1);
+	m_FreeHeapLocked(param_1);
 	return result;
 }
 
@@ -118,9 +118,9 @@ int __cdecl close_stream(void* param_1)
 // ORIGIN: GAME
 // SIZE: 182
 // FUNCTION: SERVER 0x10003b90
-// flush_stream
+// vfs_FlushStream
 
-unsigned unsigned int __cdecl flush_stream(int param_1, int param_2)
+unsigned unsigned int __cdecl vfs_FlushStream(int param_1, int param_2)
 {
 	int done;
 	int write_result;
@@ -134,7 +134,7 @@ unsigned unsigned int __cdecl flush_stream(int param_1, int param_2)
 	do {
 		remaining = 0x4000 - *(int*) (param_1 + 0x10);
 		if (remaining != 0) {
-			write_result = locked_fwrite(*(void**) (param_1 + 0x48), 1, remaining, *(void**) (param_1 + 0x40));
+			write_result = vfs_LockedFwrite(*(void**) (param_1 + 0x48), 1, remaining, *(void**) (param_1 + 0x40));
 			if (write_result != remaining) {
 				*(int*) (param_1 + 0x38) = -1;
 				return (unsigned int) -1;
@@ -145,7 +145,7 @@ unsigned unsigned int __cdecl flush_stream(int param_1, int param_2)
 		if (done) {
 			break;
 		}
-		write_result = compress_block((void*) param_1, (int) param_2);
+		write_result = vfs_CompressBlock((void*) param_1, (int) param_2);
 		*(int*) (param_1 + 0x38) = write_result;
 		if (remaining == 0 && write_result == -5) {
 			*(int*) (param_1 + 0x38) = 0;
@@ -167,17 +167,17 @@ unsigned unsigned int __cdecl flush_stream(int param_1, int param_2)
 // ORIGIN: GAME
 // SIZE: 77
 // FUNCTION: SERVER 0x10003C50
-// read_uint32_be
+// vfs_ReadUint32BE
 
-int __cdecl flush_and_close_stream(int param_1)
+int __cdecl vfs_FlushAndClose(int param_1)
 {
 	int result;
 	int last;
 
-	result = game_getbyte(param_1);
-	result = result + (game_getbyte(param_1) << 8);
-	result = result + (game_getbyte(param_1) << 16);
-	last = game_getbyte(param_1);
+	result = vfs_GetByte(param_1);
+	result = result + (vfs_GetByte(param_1) << 8);
+	result = result + (vfs_GetByte(param_1) << 16);
+	last = vfs_GetByte(param_1);
 	if (last == -1) {
 		*(unsigned int*) (param_1 + 0x38) = 0xfffffffd;
 	}
@@ -188,9 +188,9 @@ int __cdecl flush_and_close_stream(int param_1)
 // ORIGIN: GAME
 // SIZE: 65
 // FUNCTION: SERVER 0x10003CA0
-// flush_and_close_stream
+// vfs_FlushAndClose
 
-int __cdecl read_uint32_be(int param_1)
+int __cdecl vfs_ReadUint32BE(int param_1)
 {
 	int flush_result;
 
@@ -198,22 +198,22 @@ int __cdecl read_uint32_be(int param_1)
 		return -2;
 	}
 	if (*(char*) (param_1 + 0x5c) == 'w') {
-		flush_result = flush_stream(param_1, 4);
+		flush_result = vfs_FlushStream(param_1, 4);
 		if (flush_result == 0) {
-			write_uint32_le(*(int*) (param_1 + 0x40), *(unsigned int*) (param_1 + 0x4c));
-			write_uint32_le(*(int*) (param_1 + 0x40), *(unsigned int*) (param_1 + 8));
+			vfs_WriteUint32LE(*(int*) (param_1 + 0x40), *(unsigned int*) (param_1 + 0x4c));
+			vfs_WriteUint32LE(*(int*) (param_1 + 0x40), *(unsigned int*) (param_1 + 8));
 		}
 	}
-	return close_stream(param_1);
+	return vfs_CloseStream(param_1);
 }
 
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 43
 // FUNCTION: SERVER 0x10003CF0
-// write_uint32_le
+// vfs_WriteUint32LE
 
-void __cdecl write_uint32_le(int stream, unsigned int value)
+void __cdecl vfs_WriteUint32LE(int stream, unsigned int value)
 {
 	int i;
 
@@ -231,17 +231,17 @@ void __cdecl write_uint32_le(int stream, unsigned int value)
 // SIZE: 53
 // GHIDRA: cleanup_entity
 // FUNCTION: SERVER 0x10008A50
-// destroy_entity
+// vfs_DestroyEntity
 
-int __cdecl destroy_entity(char* entity)
+int __cdecl vfs_DestroyEntity(char* entity)
 {
 	if (!entity) {
 		return -102;
 	}
 	if (*(int*) (entity + 0x7c)) {
-		entity_cleanup(entity);
+		vfs_EntityCleanup(entity);
 	}
-	stream_close(*(int*) entity);
+	vfs_StreamClose(*(int*) entity);
 	mem_free(entity);
 	return 0;
 }
@@ -328,7 +328,7 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 					j++;
 				} while (j < copy_count);
 			}
-			ctx[0x14] = crc32_update(ctx[0x14], ctx[4], copy_count);
+			ctx[0x14] = vfs_Crc32Update(ctx[0x14], ctx[4], copy_count);
 			ctx[0x17] -= copy_count;
 			ctx[2] -= copy_count;
 			ctx[5] -= copy_count;
@@ -342,7 +342,7 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 			old_dest = ctx[4];
 			decomp_status = inflate(ctx + 1, 2);
 			produced = ctx[6] - old_processed;
-			ctx[0x14] = crc32_update(ctx[0x14], old_dest, produced);
+			ctx[0x14] = vfs_Crc32Update(ctx[0x14], old_dest, produced);
 			ctx[0x17] -= produced;
 			bytes_read += produced;
 			if (decomp_status == 1) {
@@ -365,9 +365,9 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 // ORIGIN: GAME
 // SIZE: 129
 // FUNCTION: SERVER 0x10008C80
-// cleanup_object
+// vfs_CleanupObject
 
-int __cdecl cleanup_object(char* obj)
+int __cdecl vfs_CleanupObject(char* obj)
 {
 	char* sub;
 	int result;
@@ -389,7 +389,7 @@ int __cdecl cleanup_object(char* obj)
 	}
 	*(int*) sub = 0;
 	if (*(int*) (sub + 0x40)) {
-		free_subobj(sub + 4);
+		vfs_FreeSubobj(sub + 4);
 	}
 	*(int*) (sub + 0x40) = 0;
 	free(sub);
@@ -467,12 +467,12 @@ int __cdecl CloseVfsStream(void* stream)
 		fp = *(void**) ((char*) stream + 0x100);
 		if (fp != 0) {
 			if ((flags & 1) != 0 && (flags & 0x10) != 0) {
-				cleanup_object(fp);
-				destroy_entity(fp);
+				vfs_CleanupObject(fp);
+				vfs_DestroyEntity(fp);
 			}
 			else {
 				if ((flags & 8) != 0) {
-					read_uint32_be((int) fp);
+					vfs_ReadUint32BE((int) fp);
 				}
 				else {
 					fflush(fp);
@@ -738,7 +738,7 @@ int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* pa
 		*(int*) (obj + 0x120) = 0;
 		*(int*) (obj + 0x124) = 0;
 
-		*(int*) (obj + 0x138) = crc32_update(0, 0, 0);
+		*(int*) (obj + 0x138) = vfs_Crc32Update(0, 0, 0);
 
 		{
 			volatile int ret;
