@@ -20,6 +20,19 @@ extern int __cdecl gm_GetFieldByType(char*, int);
 extern int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 extern int __cdecl gm_LookupEntityRecordById(int);
 extern int __cdecl gm_QueryEntitySum(int, int);
+extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
+extern char* __cdecl gm_FindSlotById(unsigned int, unsigned int);
+
+/* Entity management */
+extern int __cdecl gm_SubObjekt(void*, unsigned int, int);
+extern int __cdecl gm_CleanupBuildingEntity(unsigned char*);
+extern void __cdecl gm_RemoveEntityLink(int);
+extern void __cdecl gm_DeallocEntity(unsigned int, int);
+extern int __cdecl gm_CheckInventoryCapacity(char*, unsigned int, int);
+extern int __cdecl gm_KannObjektHergestellt(char*, unsigned int, int);
+extern int __cdecl gm_GetMsgField(int, int);
+extern short* __cdecl gm_GetEntityTableEntry(char*);
+extern void* __cdecl gm_FindRecordById(int);
 
 /* CRT / thread */
 extern int __cdecl rand(void);
