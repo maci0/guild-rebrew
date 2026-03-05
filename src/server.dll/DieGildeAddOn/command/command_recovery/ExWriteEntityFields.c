@@ -1,9 +1,11 @@
 // FUNCTION: SERVER 0x1000e8d0
-// STATUS: STUB
+// STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 239
 // CFLAGS: /O2 /Gd
 // SYMBOL: _ExWriteEntityFields
+// BLOCKER: instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
+// BLOCKER_DELTA: 226
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -24,12 +26,12 @@ extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
 
 int __cdecl ExWriteEntityFields(int param_1, char* param_2)
 {
-	char cVar1;
+	int cVar1;
+	int iVar4;
 	int iVar5;
 	char* pcVar7;
 	char* pcVar8;
 	uint uVar9;
-	int iVar4;
 	void* pvStack_8;
 	void* pvStack_4;
 
@@ -46,24 +48,18 @@ int __cdecl ExWriteEntityFields(int param_1, char* param_2)
 		);
 		return 1;
 	}
-	if (param_1 != 0) {
-		iVar5 = param_1;
-	} else {
-		iVar5 = (int)pvStack_8;
-		if (pvStack_8 == (void*)0) {
-			iVar5 = (int)pvStack_4;
-		}
+	if ((param_1 == 0) && (param_1 = (int)pvStack_8, pvStack_8 == (void*)0x0)) {
+		param_1 = (int)pvStack_4;
 	}
 	uVar9 = 0;
 	pcVar7 = (char*)(iVar4 + 0x15);
 	if (*(uchar*)(iVar4 + 0x14) != 0) {
 		do {
-			cVar1 = *pcVar7;
-			iVar5 = (int)(signed char)pcVar7[1];
+			cVar1 = (int)*(signed char*)pcVar7;
+			iVar5 = (int)*(signed char*)(pcVar7 + 1);
 			pcVar7 = pcVar7 + 2;
-			pcVar8 = (char*)((uint)*(ushort*)pcVar7 + iVar5);
+			pcVar8 = (char*)((uint)*(ushort*)pcVar7 + (uint)param_1);
 			pcVar7 = pcVar7 + 2;
-			pcVar8 = (char*)((uint)*(ushort*)(pcVar7 - 2) + iVar5);
 			if (cVar1 == 1) {
 				for (; iVar5 != 0; iVar5--) {
 					*pcVar8 = *pcVar7;

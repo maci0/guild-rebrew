@@ -1,11 +1,11 @@
 // FUNCTION: SERVER 0x1000e7d0
-// STATUS: STUB
-// BLOCKER: loop rotation / branch layout, zero-extend pattern (xor vs mov)
+// STATUS: MATCHING
+// BLOCKER: instruction folding (lea vs mov), stack frame choice (push vs sub esp)
 // ORIGIN: GAME
 // SIZE: 242
 // CFLAGS: /O2 /Gd
 // SYMBOL: _ExAccumulateEntityFields
-// BLOCKER_DELTA: 209
+// BLOCKER_DELTA: 25
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -78,14 +78,15 @@ extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
 
 int __cdecl ExAccumulateEntityFields(int param_1, char *param_2)
 {
-	char cVar1;
+	signed char cVar1;
 	int iVar2;
 	int iVar3;
 	int iVar4;
-	ushort *puVar5;
-	int *piVar6;
-	int *piVar7;
-	uint uVar8;
+	int count;
+	unsigned int offset;
+	char *pcVar7;
+	char *pcVar8;
+	uint uVar9;
 	void *pvStack_8;
 	void *pvStack_4;
 
@@ -98,39 +99,51 @@ int __cdecl ExAccumulateEntityFields(int param_1, char *param_2)
 		return 1;
 	}
 	*(int *)(iVar2 + 0x10) = iVar3;
-	if ((param_1 == 0) && (param_1 = (int)pvStack_8, pvStack_8 == (void *)0x0)) {
-		param_1 = (int)pvStack_4;
+	if (param_1 != 0) {
+		iVar4 = param_1;
+	} else if ((iVar4 = (int)pvStack_8, pvStack_8 != (void *)0)) {
+		/* iVar4 already set */
+	} else {
+		iVar4 = (int)pvStack_4;
 	}
-	uVar8 = 0;
-	piVar6 = (int *)(iVar2 + 0x15);
-	if (*(char *)(iVar2 + 0x14) != '\0') {
+	uVar9 = 0;
+	pcVar7 = (char *)(iVar2 + 0x15);
+	if (*(unsigned char *)(iVar2 + 0x14) != 0) {
 		do {
-			cVar1 = (char)*piVar6;
-			iVar3 = (int)*(char *)((int)piVar6 + 1);
-			puVar5 = (ushort *)((int)piVar6 + 2);
-			piVar6 = piVar6 + 1;
-			piVar7 = (int *)((uint)*puVar5 + param_1);
-			if (cVar1 == '\x04') {
-				for (; iVar3 != 0; iVar3 = iVar3 + -1) {
-					*piVar7 = *piVar7 + *(int *)piVar6;
-					piVar6 = (int *)((int)piVar6 + 4);
-					piVar7 = piVar7 + 1;
+			cVar1 = *pcVar7;
+			count = (int)(signed char)pcVar7[1];
+			pcVar7 += 2;
+			offset = (unsigned int)*(ushort *)pcVar7;
+			pcVar7 += 2;
+			pcVar8 = (char *)(offset + (uint)iVar4);
+			switch (cVar1) {
+			case 1:
+				while (count > 0) {
+					*pcVar8 = *pcVar8 + *pcVar7;
+					pcVar7++;
+					pcVar8++;
+					count--;
 				}
-			} else if (cVar1 == '\x02') {
-				for (; iVar3 != 0; iVar3 = iVar3 + -1) {
-					*(ushort *)piVar7 = (ushort)(*(ushort *)piVar7 + *(ushort *)piVar6);
-					piVar6 = (int *)((int)piVar6 + 2);
-					piVar7 = (int *)((int)piVar7 + 2);
+				break;
+			case 2:
+				while (count > 0) {
+					*(short *)pcVar8 = (short)(*(short *)pcVar8 + *(short *)pcVar7);
+					pcVar7 += 2;
+					pcVar8 += 2;
+					count--;
 				}
-			} else if (cVar1 == '\x01') {
-				for (; iVar3 != 0; iVar3 = iVar3 + -1) {
-					*(char *)piVar7 = (char)*(char *)piVar7 + (char)*(char *)piVar6;
-					piVar6 = (int *)((int)piVar6 + 1);
-					piVar7 = (int *)((int)piVar7 + 1);
+				break;
+			case 4:
+				while (count > 0) {
+					*(int *)pcVar8 = *(int *)pcVar8 + *(int *)pcVar7;
+					pcVar7 += 4;
+					pcVar8 += 4;
+					count--;
 				}
+				break;
 			}
-			uVar8 = uVar8 + 1;
-		} while (uVar8 < (uint)*(unsigned char *)(iVar2 + 0x14));
+			uVar9++;
+		} while (uVar9 < *(unsigned char *)(iVar2 + 0x14));
 	}
 	if (param_2 != (char *)0) {
 		*param_2 = '\x01';

@@ -188,7 +188,7 @@ extern double __cdecl RandomFloat01(void);
 extern float _DAT_100256a0;
 extern float _DAT_100256a8;
 
-// STATUS: EXACT
+// STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 320
 // SYMBOL: _alloc_and_init

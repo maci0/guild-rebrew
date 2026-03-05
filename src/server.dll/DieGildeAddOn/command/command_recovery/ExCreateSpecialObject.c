@@ -7,7 +7,7 @@
 // SYMBOL: _ExCreateSpecialObject
 
 /*
-// BLOCKER_DELTA: 114
+ * BLOCKER_DELTA: 114
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
@@ -59,7 +59,6 @@ int __cdecl ExCreateSpecialObject(int param_1, char* param_2)
 {
 	int iVar1;
 	char* pcVar2;
-	char* src;
 	char* dst;
 
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
@@ -69,14 +68,13 @@ int __cdecl ExCreateSpecialObject(int param_1, char* param_2)
 	if (pcVar2 == (char*) 0) {
 		return 1;
 	}
+	dst = pcVar2 + 0x1c;
 	*(int*) (g_player_slot_0 + (unsigned int) *(unsigned char*) (param_1 + 3) * 0x264264 + 0x264200) =
 		*(int*) (pcVar2 + 2);
 	pcVar2[0x12] = '@';
-	param_1 += 0x18;
-	dst = pcVar2 + 0x1c;
-	*(int*) dst = *(int*) param_1;
-	*(unsigned short*) (dst + 4) = *(unsigned short*) (param_1 + 4);
-	dst[6] = *(char*) (param_1 + 6);
+	*(int*) dst = *(int*) (param_1 + 0x18);
+	*(unsigned short*) (dst + 4) = *(unsigned short*) (param_1 + 0x1c);
+	dst[6] = *(char*) (param_1 + 0x1e);
 	pcVar2[0x22] = '\0';
 	LogMessageInternal(
 		s_D__Develop_DieGildeAddOn_command_1002c748,

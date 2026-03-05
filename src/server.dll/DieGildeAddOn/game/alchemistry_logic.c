@@ -46,7 +46,7 @@ typedef struct {
 	PAIR entries[6];
 } TGT;
 
-// STATUS: EXACT
+// STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 130
 // SYMBOL: _reset_entity_state

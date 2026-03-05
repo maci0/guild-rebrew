@@ -48,7 +48,7 @@ extern float DAT_100257c8;
 ;
 ;
 
-// STATUS: EXACT
+// STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 352
 // SYMBOL: _check_slot_active

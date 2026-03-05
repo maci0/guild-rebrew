@@ -49,7 +49,7 @@ extern unsigned char g_connections[]; /* 0x101deb00 */;
 ;
 ;
 
-// STATUS: EXACT
+// STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 170
 // SYMBOL: _exit_handler@12
