@@ -708,7 +708,7 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 			*(char*) (new_field_ptr + 0x19) = *(char*) (old_field_ptr + 0x19);
 			*(char*) (new_field_ptr + 0x1a) = *(char*) (old_field_ptr + 0x1a);
 			*(char*) (new_field_ptr + 0x1b) = *(char*) (old_field_ptr + 0x1b);
-			gv_Free3Fields(old_field_ptr);
+			gv_Free3Fields((char*) old_field_ptr);
 			return *(unsigned int*) (param_1 + 0x65);
 		}
 		*(unsigned int*) (param_1 + 0x65) = old_field_ptr;
@@ -922,7 +922,7 @@ unsigned int HireProductionWorker(int param_1)
 	}
 	slot_or_active_check = *(int*) (cmd_ptr_saved + 0xc);
 	if ((-1 < slot_or_active_check) && (slot_or_active_check < 4)) {
-		slot_or_active_check = gv_FindSlotEntryFiltered(
+		slot_or_active_check = (int) gv_FindSlotEntryFiltered(
 			(char*) param_1,
 			building_entity_ptr,
 			(char*) 0,
@@ -1004,7 +1004,7 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 	if (param_1 == 0) {
 		return 0xfffffffa;
 	}
-	slot_entry_ptr = gv_GetSlotEntry(slot_entry_ptr, *(cmd_ptr_saved + 0xc), *(cmd_ptr_saved + 0x10));
+	slot_entry_ptr = gv_GetSlotEntry(slot_entry_ptr, *(cmd_ptr_saved + 0xc), (unsigned char) *(cmd_ptr_saved + 0x10));
 	if (slot_entry_ptr == 0) {
 		return 0xfffffff9;
 	}
@@ -1059,7 +1059,7 @@ int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 	if (slot_entry_ptr == 0) {
 		return -3;
 	}
-	slot_active_result = gv_CheckSlotActive(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc));
+	slot_active_result = gv_CheckSlotActive((char*) slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc));
 	if (slot_active_result == 0) {
 		return -4;
 	}
@@ -1203,7 +1203,7 @@ int __cdecl gv_UpdateProductionProgress(unsigned char* param_1)
 	if (slot_entry_ptr == 0) {
 		return -3;
 	}
-	slot_active_result = gv_CheckSlotActive(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc));
+	slot_active_result = gv_CheckSlotActive((char*) slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc));
 	if (slot_active_result == 0) {
 		return -4;
 	}
@@ -1307,7 +1307,7 @@ unsigned int gv_MoveSlotEntry(int param_1)
 		src_worker_array_ptr = *(int**) (field_or_slot_ptr + 0x10);
 		src_worker_array_end = *(int*) (*(int*) (cmd_ptr_saved + 8) * 4 + 0x1002574c);
 		saved_src_slot_entry_ptr = field_or_slot_ptr;
-		dst_slot_entry_ptr = gv_FindSlotEntryFiltered(
+		dst_slot_entry_ptr = (int) gv_FindSlotEntryFiltered(
 			(char*) param_1,
 			(unsigned char*) building_entity_ptr,
 			(char*) 0,

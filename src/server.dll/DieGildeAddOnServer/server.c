@@ -8,7 +8,7 @@
 unsigned int __stdcall timeGetTime(void);
 
 /* Command layer (local externs — server.c uses different signatures) */
-int __cdecl cm_QueuePlayerCommand(int player, unsigned char* data);
+int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
 int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
 int __cdecl cm_ProcessCommandQueue(void);
 int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
@@ -42,7 +42,7 @@ int __cdecl gm_Open(char*, char*);
 int __cdecl sub_1001a299(char*, char*);
 int __cdecl CreateListenSocket(int port);
 extern int g_net_socket;
-int __cdecl QueueCommandForProcessing(int conn, unsigned char* pkt); /* 0x1000a8f0 */
+int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 ;
 ;
 int __cdecl SendPlayerData(unsigned int*);
@@ -1239,20 +1239,20 @@ int __cdecl ProcessSendData(void)
 
 void* memcpy(void*, const void*, unsigned int);
 
-int __cdecl QueueCommandForProcessing(int player_slot, unsigned char* cmd_data)
+int __cdecl QueueCommandForProcessing(unsigned int* player_slot, unsigned char* cmd_data)
 {
 	char* buf;
 	int tail;
 
-	buf = *(char**) (player_slot + 0x2641f8);
+	buf = *(char**) ((int) player_slot + 0x2641f8);
 	if (buf == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x671, "Commandbuffer full!", 1);
 		return -1;
 	}
-	*(int*) (player_slot + 0x2641f8) = *(int*) (buf + 0x95);
+	*(int*) ((int) player_slot + 0x2641f8) = *(int*) (buf + 0x95);
 	memcpy(buf, cmd_data, 0x99);
 	*(short*) (buf + 1) = get_command_type(buf);
-	tail = *(int*) (player_slot + 0x2641f0);
+	tail = *(int*) ((int) player_slot + 0x2641f0);
 	if (tail != 0) {
 		while (*(int*) (tail + 0x95) != 0) {
 			tail = *(int*) (tail + 0x95);
@@ -1264,7 +1264,7 @@ int __cdecl QueueCommandForProcessing(int player_slot, unsigned char* cmd_data)
 	}
 	*(int*) (buf + 0x91) = 0;
 	*(int*) (buf + 0x95) = 0;
-	*(char**) (player_slot + 0x2641f0) = buf;
+	*(char**) ((int) player_slot + 0x2641f0) = buf;
 	return 0;
 }
 
@@ -1276,20 +1276,20 @@ int __cdecl QueueCommandForProcessing(int player_slot, unsigned char* cmd_data)
 // cm_QueuePlayerCommand
 void* memcpy(void*, const void*, unsigned int);
 
-int __cdecl cm_QueuePlayerCommand(int player_slot, unsigned char* cmd_data)
+int __cdecl cm_QueuePlayerCommand(unsigned int* player_slot, unsigned char* cmd_data)
 {
 	char* buf;
 	int tail;
 
-	buf = *(char**) (player_slot + 0x2641fc);
+	buf = *(char**) ((int) player_slot + 0x2641fc);
 	if (buf == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x6b0, "Commandbuffer full!", 1);
 		return -1;
 	}
-	*(int*) (player_slot + 0x2641fc) = *(int*) (buf + 0x95);
+	*(int*) ((int) player_slot + 0x2641fc) = *(int*) (buf + 0x95);
 	memcpy(buf, cmd_data, 0x99);
 	*(short*) (buf + 1) = get_command_type(buf);
-	tail = *(int*) (player_slot + 0x2641f4);
+	tail = *(int*) ((int) player_slot + 0x2641f4);
 	if (tail != 0) {
 		while (*(int*) (tail + 0x95) != 0) {
 			tail = *(int*) (tail + 0x95);
@@ -1301,7 +1301,7 @@ int __cdecl cm_QueuePlayerCommand(int player_slot, unsigned char* cmd_data)
 	}
 	*(int*) (buf + 0x91) = 0;
 	*(int*) (buf + 0x95) = 0;
-	*(char**) (player_slot + 0x2641f4) = buf;
+	*(char**) ((int) player_slot + 0x2641f4) = buf;
 	return 0;
 }
 

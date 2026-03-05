@@ -493,6 +493,7 @@ unsigned int EmitCrashModuleLine(int* param_1)
 	int write_count;
 	unsigned char* newline_ptr;
 	unsigned char separator_pad[4];
+	(void) separator_pad;
 	unsigned int format_val_a;
 	unsigned char format_flag_a;
 	unsigned int format_val_b;
