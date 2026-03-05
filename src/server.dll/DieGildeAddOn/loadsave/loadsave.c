@@ -204,8 +204,8 @@ void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* para
 	int loop_index;
 	unsigned int* fill_ptr;
 	int var_2h;
-	(void) var_2h;
 	unsigned char stat_byte;
+	(void) var_2h;
 
 	if (param_1 == 0x15) {
 		*(int*) (param_4 + 0x1cc) = *(int*) (param_4 + 0x1cc) | 0x1000;

@@ -47,6 +47,7 @@ extern unsigned char DAT_10035439;
 extern int DAT_1003543c;
 extern char* DAT_101de450;
 void* __cdecl FindNextFilteredEntity(void);
+int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -3262,7 +3263,7 @@ int __cdecl gm_GetOppositeStatIndex(int param_1)
 
 char __cdecl gm_RandomStatModifier(char stat_value)
 {
-	int range;
+	unsigned short range;
 	int masked;
 
 	if (stat_value == 0) {
@@ -3524,7 +3525,6 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 int __cdecl gm_CreateEntityFromParents(int param_1, int param_2, int param_3, int param_4, int param_5)
 {
 	char work_buf[0x41c];
-	(void) work_buf;
 	int var_10;
 	int var_14;
 	int var_18;
@@ -3532,6 +3532,8 @@ int __cdecl gm_CreateEntityFromParents(int param_1, int param_2, int param_3, in
 	int var_20;
 	int var_24;
 	int var_28;
+
+	(void) work_buf;
 
 	var_10 = 0;
 	var_14 = 0;

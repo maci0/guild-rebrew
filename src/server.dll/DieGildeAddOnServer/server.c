@@ -1428,7 +1428,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 					goto advance;
 				}
 				*(unsigned char*) node = 2;
-				result = cm_QueuePlayerCommand((int) &g_connections[player_idx * 0x264264], node);
+				result = cm_QueuePlayerCommand((unsigned int*) &g_connections[player_idx * 0x264264], node);
 				if (result != -1) {
 					goto advance;
 				}
@@ -1445,7 +1445,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 			player_idx = (unsigned int) node[3];
 			conn = &g_connections[player_idx * 0x264264];
 			if ((*conn & 1) != 0) {
-				result = cm_QueuePlayerCommand((int) conn, node);
+				result = cm_QueuePlayerCommand((unsigned int*) conn, node);
 				if (result == -1) {
 					return -1;
 				}
@@ -1456,7 +1456,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 			conn = &g_connections[0];
 			do {
 				if (i != (unsigned int) node[3] && (*conn & 1) != 0) {
-					result = cm_QueuePlayerCommand((int) conn, node);
+					result = cm_QueuePlayerCommand((unsigned int*) conn, node);
 					if (result == -1) {
 						return -1;
 					}
