@@ -6,8 +6,6 @@
 #include "../command_internal.h"
 
 extern int __cdecl gm_StartEntityQuery(int, int, int, uint);
-extern int __cdecl gm_CheckInventoryCapacity(char*, uint, int);
-extern int __cdecl gm_KannObjektHergestellt(char*, int, int);
 extern char* __cdecl gm_ResolveParentEntity(char*);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
 

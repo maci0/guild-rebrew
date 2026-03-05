@@ -26,7 +26,7 @@ extern void __cdecl game_free(void*);
 extern int __cdecl gm_ResolveEntityById(int* out_slot, int* out_person, int* out_building, int entity_id);
 extern int __cdecl gv_GetSlotEntry(int, int, unsigned char);
 extern void gm_SubObjektNoKill(unsigned int, unsigned int, unsigned int);
-extern void AddOrAccumulateObject(unsigned int, unsigned int, unsigned int);
+extern void gm_AddOrAccumulateObject(unsigned int, unsigned int, unsigned int);
 extern int DAT_1003546c;
 extern short DAT_100358a0;
 extern int __cdecl SpawnGraveyardEntities(void* entity, int action_id);
@@ -1028,7 +1028,7 @@ unsigned int HireProductionWorker(int param_1)
 				*(unsigned int*) (cmd_ptr_saved + 0x13)
 			);
 			rand_coin_amount = __ftol();
-			AddOrAccumulateObject(
+			gm_AddOrAccumulateObject(
 				*(unsigned int*) (*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + 0x100358a4),
 				*(unsigned int*) (*(unsigned int*) 0x10035439 * 0x2f4 + 0x100a8c94),
 				rand_coin_amount
@@ -1091,7 +1091,7 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 			*(cmd_ptr_saved + 0x13)
 		);
 		rand_coin_amount = __ftol();
-		AddOrAccumulateObject(
+		gm_AddOrAccumulateObject(
 			*(*(unsigned int**) 0x100358a4 + *(unsigned short*) (building_entity_ptr + 0x27) * 0x21c),
 			*(*(unsigned int**) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
 			rand_coin_amount
@@ -1437,7 +1437,7 @@ unsigned int gv_MoveSlotEntry(int param_1)
 					*(unsigned int*) (cmd_ptr_saved + 0x11)
 				);
 				scaled_amount = (unsigned int) ((int) *(int*) (cmd_ptr_saved + 0x11) * ((float*) 0x1002572c)[*(int*) (cmd_ptr_saved + 0xd)]);
-				AddOrAccumulateObject(
+				gm_AddOrAccumulateObject(
 					*(unsigned int*) ((unsigned char*) 0x100358a4 + *(unsigned short*) (building_entity_ptr + 0x27) * 0x21c),
 					*(unsigned int*) ((unsigned char*) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
 					scaled_amount

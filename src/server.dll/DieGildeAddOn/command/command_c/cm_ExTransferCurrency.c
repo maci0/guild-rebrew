@@ -31,7 +31,7 @@
  *   if (*(int *)(param_1 + 0x10) != -1) {
  *     iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
  *     *(int *)(param_1 + 0x10) = iVar2;
- *     pvVar1 = AddOrAccumulateObject
+ *     pvVar1 = gm_AddOrAccumulateObject
  *                        (iVar2,(uint)*(ushort *)
  *                                      (&g_currency_type_array +
  *                                      (uint)*(byte *)(param_1 + 0x1c) * 0x2f4),
@@ -49,8 +49,7 @@
 
 #include "../command_internal.h"
 
-extern int __cdecl gm_SubObjekt(void*, unsigned int, int);
-extern void* __cdecl AddOrAccumulateObject(int, unsigned int, int);
+extern void* __cdecl gm_AddOrAccumulateObject(int, unsigned int, int);
 
 extern unsigned short g_currency_type_array[];
 
@@ -86,7 +85,7 @@ int __cdecl cm_ExTransferCurrency(int param_1, char* param_2)
 	if (*(int*) (param_1 + 0x10) != -1) {
 		field_result = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
 		*(int*) (param_1 + 0x10) = field_result;
-		entity_ptr = AddOrAccumulateObject(
+		entity_ptr = gm_AddOrAccumulateObject(
 			field_result,
 			(unsigned int) *(unsigned short*) ((char*) g_currency_type_array +
 											   (unsigned int) *(unsigned char*) (param_1 + 0x1c) * 0x2f4),

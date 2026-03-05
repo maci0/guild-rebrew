@@ -24,14 +24,10 @@ extern unsigned char g_current_season;
 extern int __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern short* __cdecl gm_ResolveParentEntity(short*);
 extern void* __cdecl gm_StartEntityQuery(int, int, int, uint);
-extern int __cdecl gm_GetMsgField(int, int);
-extern int __cdecl gm_KannObjektHergestellt(char*, uint, int);
 extern void __cdecl gm_RemoveObjectByType(char**, uint);
-extern char* __cdecl gm_FindSlotById(uint, uint);
 extern void* __cdecl gm_AllocObjekt(int, uint, int);
 extern double __cdecl gm_CalculateProductionValue(uint, int);
 extern int __cdecl gm_WalkEntityChain(int);
-extern short* __cdecl gm_GetEntityTableEntry(char*);
 
 extern char s_cm_ExecProduction___Invalid__lager_1002cf9c[];
 extern char s_cm_ExecProduction___Lager_has_wron_1002cf74[];

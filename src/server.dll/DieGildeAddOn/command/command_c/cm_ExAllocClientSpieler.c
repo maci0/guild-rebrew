@@ -7,7 +7,6 @@ extern char g_player_slot_0[];
 
 extern ushort __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
-extern short* __cdecl gm_GetEntityTableEntry(char*);
 extern char* __cdecl strncpy(char*, const char*, unsigned int);
 
 extern char s_ClientSpieler_erzeugt_1002cbbc[];

@@ -12,9 +12,8 @@ extern void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern int __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern char* __cdecl sim_CreateCitizen(char, uint, int, uchar, uchar, ushort*);
 extern void __cdecl sim_StartEntityQueryByType(uchar*);
-extern int* __cdecl QueryEntityBuildingType(int);
+extern int* __cdecl ahm_QueryEntityBuildingType(int);
 extern void* __cdecl gm_AllocObjekt(int, uint, int);
-extern int __cdecl gm_SubObjekt(void*, uint, int);
 extern int __cdecl sim_PriorityUpdate(char*, char*);
 extern int __cdecl ahm_ResetEntityState(char*);
 
@@ -92,13 +91,13 @@ int __cdecl cm_ExEmployWorker(int param_1, char* param_2)
 	worker_type = *(char*) (param_1 + 0x1d);
 	if (worker_type == '\x02' || worker_type == '\x01' || worker_type == '\x10' ||
 		worker_type == '\x0f' || worker_type == '\x14' || worker_type == '\x13') {
-		building_type_ptr = QueryEntityBuildingType((int) citizen_entity);
+		building_type_ptr = ahm_QueryEntityBuildingType((int) citizen_entity);
 		if (*building_type_ptr == 0) {
 			gm_AllocObjekt(*(int*) (citizen_entity + 4), 0x154, 1);
 		}
 	}
 	else {
-		building_type_ptr = QueryEntityBuildingType((int) citizen_entity);
+		building_type_ptr = ahm_QueryEntityBuildingType((int) citizen_entity);
 		if (*building_type_ptr != 0) {
 			gm_SubObjekt(*(void**) (citizen_entity + 4), (uint) *building_type_ptr, 1);
 		}

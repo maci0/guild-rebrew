@@ -11,7 +11,7 @@ extern int __cdecl crt_ftol(void);
 extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* tag);
 extern void* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
-extern void __cdecl AddOrAccumulateObject(int p1, int p2, int p3);
+extern void __cdecl gm_AddOrAccumulateObject(int p1, int p2, int p3);
 extern int __cdecl gm_RefreshMarketAvailability(int season);
 extern float fColorScale;
 extern int DAT_10030b6c;
@@ -24,7 +24,7 @@ extern char s__ahm_AllocAhmInfo_1002a0f7[];
 extern double dScaleFactor;
 extern int DAT_1002c050[];
 extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-extern int* __cdecl LookupEntityInTable(int);
+extern int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
 typedef struct {
@@ -282,7 +282,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			}
 			*(int*) (*(int*) (target_building + 0x65) + 0x10) = *(int*) (param_1 + 0x20);
 			if (idx != 0) {
-				AddOrAccumulateObject(*(int*) (idx + 2), *(int*) (param_1 + 0x14), 2);
+				gm_AddOrAccumulateObject(*(int*) (idx + 2), *(int*) (param_1 + 0x14), 2);
 			}
 			gm_RefreshMarketAvailability((int) g_current_season);
 			*(int*) ((char*) entity + 0x1cc) = *(int*) ((char*) entity + 0x1cc) | 4;
@@ -343,7 +343,7 @@ int __cdecl ahm_AllocateEntitySlot(int param_1, int param_2, int param_3)
 			*(int*) (param_2 + 0xc + i * 8) = *(int*) (param_1 + 8);
 			*(int*) (param_2 + 0x10 + i * 8) = *(int*) (param_1 + 0x10);
 			if (query_result != (void*) 0) {
-				AddOrAccumulateObject(*(int*) ((char*) query_result + 2), *(int*) (param_1 + 8), 2);
+				gm_AddOrAccumulateObject(*(int*) ((char*) query_result + 2), *(int*) (param_1 + 8), 2);
 			}
 			gm_RefreshMarketAvailability((int) DAT_10035439);
 			return 1;
@@ -595,9 +595,9 @@ char* __cdecl ahm_InitRandomEntity(void)
 // SIZE: 45
 // GHIDRA: find_by_id
 // FUNCTION: SERVER 0x1000c670
-// LookupEntityInTable
+// ahm_LookupEntityInTable
 
-int* __cdecl LookupEntityInTable(int param_1)
+int* __cdecl ahm_LookupEntityInTable(int param_1)
 {
 	int i;
 	int* p;
@@ -616,19 +616,19 @@ int* __cdecl LookupEntityInTable(int param_1)
 // SIZE: 102
 // BLOCKER_DELTA: 55
 // FUNCTION: SERVER 0x1000c6a0
-// QueryEntityBuildingType
+// ahm_QueryEntityBuildingType
 
-int __cdecl QueryEntityBuildingType(int param_1)
+int __cdecl ahm_QueryEntityBuildingType(int param_1)
 {
 	unsigned short* entity;
 	int table_entry;
 
 	entity = gm_StartEntityQuery(*(int*) (param_1 + 0x178), 1, 5);
 	if (entity != (unsigned short*) 0) {
-		while (table_entry = (int) LookupEntityInTable(*entity), table_entry == 0) {
+		while (table_entry = (int) ahm_LookupEntityInTable(*entity), table_entry == 0) {
 			entity = gm_NextEntityQueryMatch();
 			if (entity == (unsigned short*) 0) {
-				LookupEntityInTable(0);
+				ahm_LookupEntityInTable(0);
 				return 0;
 			}
 		}
@@ -639,7 +639,7 @@ int __cdecl QueryEntityBuildingType(int param_1)
 			return 0;
 		}
 	}
-	LookupEntityInTable(0);
+	ahm_LookupEntityInTable(0);
 	return 0;
 }
 
@@ -816,9 +816,9 @@ int GetCommandPayloadSize(unsigned char* param_1)
 // BLOCKER_DELTA: 83
 // ANALYSIS: Iterates through a linked list of CommandPackets generated from a Command 0x05 / 0x06 block. Runs secondary validation handlers from g_entity_chain_handlers. Re-flags commands to 0x01/0x02 status based on success/fail.
 // FUNCTION: SERVER 0x1000ca00
-// ProcessEntityChain
+// ahm_ProcessEntityChain
 
-int __cdecl ProcessEntityChain(char* param_1)
+int __cdecl ahm_ProcessEntityChain(char* param_1)
 {
 	char cmd_type;
 	int success;

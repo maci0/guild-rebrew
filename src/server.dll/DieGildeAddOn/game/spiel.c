@@ -137,7 +137,7 @@ extern void __cdecl gm_AssignBuildingOwner(char*, unsigned short, unsigned short
 extern int __cdecl gm_WalkEntityChain(int);
 extern int __cdecl gm_CheckStatLevel(int, int);
 extern int __cdecl gm_GetOppositeStatIndex(int);
-extern void* __cdecl AddOrAccumulateObject(int, int, int);
+extern void* __cdecl gm_AddOrAccumulateObject(int, int, int);
 extern int g_citizen_count;
 extern char entity_slot_table[];
 extern float DAT_10025fb8; /* 0x10025fb8 */
@@ -169,7 +169,7 @@ extern int __cdecl compute_size(char*); /* 0x10019d00 */
 ;
 extern int __cdecl gm_FindEntityByOwner(char*, char*); /* 0x10019cd0 */
 ;
-extern int __cdecl LookupEntityInTable(int); /* 0x1000c670 */
+extern int __cdecl ahm_LookupEntityInTable(int); /* 0x1000c670 */
 ;
 extern float _DAT_10025fbc;
 extern double __cdecl gm_RandomFloat01(void);
@@ -180,9 +180,9 @@ extern float _DAT_100256a8;
 // ORIGIN: GAME
 // SIZE: 320
 // FUNCTION: SERVER 0x10004B80
-// alloc_and_init
+// gm_AllocAndInit
 
-void* __cdecl alloc_and_init(char a, char b, int c, int d, char* ctx)
+void* __cdecl gm_AllocAndInit(char a, char b, int c, int d, char* ctx)
 {
 	char* p;
 	p = (char*) ((ALLOCFN) (*(int*) (ctx + 0x20)))(*(int*) (ctx + 0x28), 1, 0x1c);
@@ -1579,9 +1579,9 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 // ORIGIN: GAME
 // SIZE: 272
 // FUNCTION: SERVER 0x10016cd0
-// AddOrAccumulateObject
+// gm_AddOrAccumulateObject
 
-void* __cdecl AddOrAccumulateObject(int parent_id, int type_id, int amount)
+void* __cdecl gm_AddOrAccumulateObject(int parent_id, int type_id, int amount)
 {
 	int lookupStatus;
 	int* childListHead;
@@ -3634,7 +3634,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 	for (pNode = *(char**) (buf2 + 0x178); pNode != 0; pNode = *(char**) (pNode + 0x3f)) {
 		index_b = *(unsigned short*) pNode;
 		if (index_b != 0 && *(DAT_101de450 + (int) index_b * 0x41) == '\t') {
-			AddOrAccumulateObject(*(int*) (buf1 + 4), (int) index_b, *(int*) (pNode + 0xe));
+			gm_AddOrAccumulateObject(*(int*) (buf1 + 4), (int) index_b, *(int*) (pNode + 0xe));
 		}
 	}
 
@@ -4373,7 +4373,7 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 	}
 
 	if (obj[2] == 6 || obj[2] == 7) {
-		if (LookupEntityInTable(entity_index)) {
+		if (ahm_LookupEntityInTable(entity_index)) {
 			return available;
 		}
 	}
@@ -4389,7 +4389,7 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 	query = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 0, entity_index);
 	if (query) {
 		count = *(int*) ((char*) query + 0xe);
-		LookupEntityInTable(entity_index);
+		ahm_LookupEntityInTable(entity_index);
 		if (count + requested > 3) {
 			available = 3 - count;
 			return (available < 0) ? 0 : available;

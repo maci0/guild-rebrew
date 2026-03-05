@@ -66,7 +66,6 @@
 
 extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern unsigned int __cdecl gm_CreateEntityFromParents(int, int, int, int, int, int, int, int);
-extern void* __cdecl gm_FindRecordById(int);
 extern void* __cdecl gm_AllocObjekt(int, unsigned int, int);
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 

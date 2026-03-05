@@ -23,17 +23,12 @@ extern char g_error_msg_sell_failed[];
 
 extern short* __cdecl gm_ResolveParentEntity(short*);
 extern void* __cdecl gm_StartEntityQuery(int, int, int, uint);
-extern int __cdecl gm_GetMsgField(int, int);
-extern int __cdecl gm_KannObjektHergestellt(char*, uint, int);
-extern int __cdecl gm_CheckInventoryCapacity(char*, uint, int);
-extern char* __cdecl gm_FindSlotById(uint, uint);
 extern int __cdecl compute_size(char*, int);
 extern int __cdecl gm_RemoveObjectWrapper(int, uint);
 extern int __cdecl gm_RemoveObjectByType(char**, uint);
-extern void* __cdecl AddOrAccumulateObject(int, uint, int);
+extern void* __cdecl gm_AddOrAccumulateObject(int, uint, int);
 extern void* __cdecl gm_AllocBuildingContents(char*, uint);
 extern void* __cdecl gm_AllocObjekt(int, uint, int);
-extern int __cdecl gm_SubObjekt(void*, uint, int);
 extern int __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern int __cdecl sprintf(char*, const char*, ...);
 
@@ -299,7 +294,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 			}
 		}
 		if (*(int*)(param_1 + 0x23) != 0) {
-			AddOrAccumulateObject(
+			gm_AddOrAccumulateObject(
 				*(int*)(source_owner_entity + 2),
 				(uint)*(ushort*)(g_currency_type_array + (uint)(unsigned char)param_1[0x1e] * 0x2f4),
 				*(int*)(param_1 + 0x23) * *(int*)(param_1 + 0x1f)

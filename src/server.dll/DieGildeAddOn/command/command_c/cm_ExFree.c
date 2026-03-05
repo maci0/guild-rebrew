@@ -18,8 +18,6 @@
 
 #include "../command_internal.h"
 
-extern int __cdecl gm_CleanupBuildingEntity(uchar*);
-extern void __cdecl gm_DeallocEntity(unsigned int, int);
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 
 extern char s_Invalid_Id_for_cmdt_FREE_in_cm_E_1002cc5c[];

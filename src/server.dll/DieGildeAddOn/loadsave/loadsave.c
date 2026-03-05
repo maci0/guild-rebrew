@@ -7,7 +7,7 @@ extern void amt_FindEntity26(int);
 extern void amt_FindEntity27(int);
 extern char gm_RandomMod(int);
 extern unsigned char __ftol();
-extern void AddOrAccumulateObject(int, int, int);
+extern void gm_AddOrAccumulateObject(int, int, int);
 extern char g_100a9820[];
 extern char g_1014d8e0[];
 extern char g_10139820[];
@@ -249,7 +249,7 @@ void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* para
 		loop_index = loop_index + 1;
 	} while (loop_index < 5);
 	*(char*) (param_4 + 0xd) = 9;
-	AddOrAccumulateObject(*(int*) (param_4 + 4), *(int*) (*(int*) 0x10035439 * 0x2f4 + 0x100a8c94), 16000000);
+	gm_AddOrAccumulateObject(*(int*) (param_4 + 4), *(int*) (*(int*) 0x10035439 * 0x2f4 + 0x100a8c94), 16000000);
 	gm_RandomMod(2);
 	*(char*) (param_4 + 2) = 3;
 	return;

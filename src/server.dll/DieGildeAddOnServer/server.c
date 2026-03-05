@@ -38,7 +38,7 @@ extern int __cdecl SendPlayerData(unsigned int*);
 extern void __cdecl FreeCommandBuffer(unsigned int*, int);
 extern unsigned int g_player_slots;
 extern short __cdecl get_command_type(char*);
-extern int __cdecl ProcessEntityChain(unsigned char* node);
+extern int __cdecl ahm_ProcessEntityChain(unsigned char* node);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */;
 extern unsigned char g_connections[]; /* 0x101deb00 */;
 
@@ -1327,7 +1327,7 @@ void __cdecl list_unlink_relink(char* ctx, char* node)
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 639
 // BLOCKER_DELTA: 567
-// ANALYSIS: Master Command Router. Iterates over every slot's incoming_cmd_queue. Evaluates commands via g_command_handlers. Upon validation, pushes valid commands to the sender's outgoing queue (to acknowledge) and broadcasts them to all other connected players' outgoing queues. Recognizes 0x05/0x06 to batch list and pass to ProcessEntityChain.
+// ANALYSIS: Master Command Router. Iterates over every slot's incoming_cmd_queue. Evaluates commands via g_command_handlers. Upon validation, pushes valid commands to the sender's outgoing queue (to acknowledge) and broadcasts them to all other connected players' outgoing queues. Recognizes 0x05/0x06 to batch list and pass to ahm_ProcessEntityChain.
 // FUNCTION: SERVER 0x1000aac0
 // cm_ProcessCommandQueue
 
@@ -1359,7 +1359,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 				if (*(unsigned char*) node != 6) {
 					goto advance;
 				}
-				result = ProcessEntityChain(type5);
+				result = ahm_ProcessEntityChain(type5);
 				if (result == 0) {
 					valid = 0;
 				}

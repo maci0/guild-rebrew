@@ -36,9 +36,7 @@
 
 #include "../command_internal.h"
 
-extern void* __cdecl gm_FindRecordById(int);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
-extern void __cdecl gm_RemoveEntityLink(int);
 extern char s_cm_ExKillTransporter____invalid_t_1002d3d4[];
 
 // FUNCTION: SERVER 0x1000fad0

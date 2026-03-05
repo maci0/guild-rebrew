@@ -54,9 +54,6 @@
 
 extern ushort* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern ushort* __cdecl gm_StartEntityQuery(int, int, int, int, int);
-extern ushort* __cdecl gm_NextEntityQueryMatch(void);
-extern void __cdecl gm_RemoveEntityLink(int);
-extern int __cdecl gm_CleanupBuildingEntity(uchar*);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
 
 extern int g_work_building_ptrs;

@@ -28,7 +28,6 @@
 
 #include "../command_internal.h"
 
-extern void __cdecl gm_DeallocEntity(uint, int);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
 

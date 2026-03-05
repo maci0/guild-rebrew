@@ -82,7 +82,6 @@ extern player_slot g_player_slot_0[];
 
 extern void* __cdecl gm_SearchTable67(int);
 extern ushort* __cdecl gm_StartEntityQuery(int, int, int, int);
-extern ushort* __cdecl gm_NextEntityQueryMatch(void);
 extern ushort* __cdecl gm_AllocObjekt(int, int, int);
 
 // FUNCTION: SERVER 0x10010140
