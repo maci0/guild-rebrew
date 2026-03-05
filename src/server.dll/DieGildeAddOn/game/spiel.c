@@ -4225,8 +4225,8 @@ int __cdecl WalkEntityChain(int raw_idx)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 48
-// SYMBOL: _get_msg_field
-// FUNCTION: SERVER 0x10019c60
+// SYMBOL: _FindEntityByOwner
+// FUNCTION: SERVER 0x10019C60
 // FindEntityByOwner
 
 /* GLOBAL: SERVER 0x100358a2 */
@@ -4234,7 +4234,7 @@ extern unsigned char g_entity_state_base[];
 
 /* GLOBAL: SERVER 0x100358a0 */
 
-char* __cdecl get_msg_field(int param_1)
+char* __cdecl FindEntityByOwner(int param_1)
 {
 	unsigned char* p;
 	int i;
@@ -4261,11 +4261,11 @@ char* __cdecl get_msg_field(int param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 98
-// SYMBOL: _FindEntityByOwner
+// SYMBOL: _get_msg_field
 // FUNCTION: SERVER 0x10019CD0
 // get_msg_field
-// PROTOTYPE: char * __cdecl FindEntityByOwner(int param_1)
-int __cdecl FindEntityByOwner(char* msg, char* pkt)
+// PROTOTYPE: int __cdecl get_msg_field(char* msg, char* pkt)
+int __cdecl get_msg_field(char* msg, char* pkt)
 {
 	unsigned short type;
 
