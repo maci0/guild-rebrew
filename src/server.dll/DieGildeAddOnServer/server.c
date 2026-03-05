@@ -23,12 +23,11 @@ extern int __cdecl cm_ProcessCommandQueue(void);
 extern void __cdecl FreeTrackedHeapBlock(void* ptr);
 extern void __cdecl SetSyncParams(int base_addr, unsigned char phase, unsigned int arg3, unsigned int arg4);
 extern void __cdecl crt_getptd_set(unsigned int value);
-extern void __cdecl cleanup_game1(void);
-extern void __cdecl cleanup_game2(void);
-extern void __cdecl cleanup_game3(void);
-extern void __cdecl cleanup_game4(void);
-extern void __cdecl cleanup_game5(void);
-extern void __cdecl cleanup_game6(void);
+extern void __cdecl reset_all_entities(void);
+extern void __cdecl CleanupObjectEntities(void);
+extern void __cdecl cleanup_all_entities(void);
+extern void __cdecl ShutdownMemoryAllocator(void);
+extern void __cdecl ShutdownLogAndErrorHandler(void);
 extern int g_net_socket;
 extern void __cdecl LogWinsockError(int error_code);
 extern int __cdecl ReceivePacketHeader(unsigned int* conn); /* 0x1000a340 */;
@@ -744,12 +743,12 @@ void __cdecl CleanupSockets(void)
 	shutdown(g_net_socket, 2);
 	closesocket(g_net_socket);
 	WSACleanup();
-	cleanup_game1();
-	cleanup_game2();
-	cleanup_game3();
-	cleanup_game4();
-	cleanup_game5();
-	cleanup_game6();
+	InitEntitySlots();
+	reset_all_entities();
+	CleanupObjectEntities();
+	cleanup_all_entities();
+	ShutdownMemoryAllocator();
+	ShutdownLogAndErrorHandler();
 }
 
 // STATUS: MATCHING

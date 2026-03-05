@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
+#include <time.h>
 
 extern int __cdecl crt_call_extra(char* buf, const char* fmt);
 extern int __cdecl crt_write_check(const char* str, int stream);

@@ -16,8 +16,6 @@ extern void __cdecl RefreshMarketAvailability(int season);
 extern float fColorScale;
 extern int DAT_10030b6c;
 extern char DAT_10035439;
-extern int __cdecl create_entity(int, int, int, int, int);
-extern void __cdecl setup_entity(int, int);
 extern float DAT_100256cc;
 extern float DAT_100256a0;
 extern void* __cdecl LookupEntityRecordById(int entityId);
@@ -393,9 +391,9 @@ int __cdecl slot_clear_match(char* data, char* target, char* src)
 	}
 	return 0;
 found:
-	ent = create_entity(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
+	ent = (int) StartEntityQuery(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
 	if (ent) {
-		setup_entity(ent + 0x14, *(int*) (data + 8));
+		RemoveObjectByType((void**) (ent + 0x14), *(unsigned int*) (data + 8));
 	}
 	*(int*) (target + i * 8 + 0xc) = 0;
 	*(int*) (target + i * 8 + 0x10) = 0;

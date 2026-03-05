@@ -126,7 +126,7 @@ extern int DAT_1003542c;
 extern int DAT_10035430;
 extern char g_entity_base[];
 extern char g_entity_end[];
-extern int __cdecl classify(int);
+extern int __cdecl GetBuildingTypeCategory(int param_1);
 extern int __cdecl MapEntityStatRange(int);
 extern short* __cdecl GetEntityTableEntry(char*);
 extern float DAT_100257bc;
@@ -165,7 +165,7 @@ extern int g_key_table[];
 extern char entity_array[];
 extern int __cdecl SumBuildingProductionValues(char*, int);
 extern int __cdecl EntityQuerySum(int);
-extern int __cdecl compute_size(char*, int); /* 0x10019d00 */
+extern int __cdecl compute_size(char*); /* 0x10019d00 */
 ;
 extern int __cdecl FindEntityByOwner(char*, char*); /* 0x10019cd0 */
 ;
@@ -3184,7 +3184,7 @@ void __cdecl InitEntitySlots(void)
 int __cdecl is_in_range(int x)
 {
 	int r;
-	r = classify(x);
+	r = GetBuildingTypeCategory(x);
 	if (r >= 10 && r <= 14) {
 		return 0;
 	}
@@ -4276,6 +4276,19 @@ int __cdecl FindEntityByOwner(char* msg, char* pkt)
 	return *(int*) (pkt + 0xe);
 }
 
+int __cdecl compute_size(char* pkt)
+{
+	int iVar1;
+	iVar1 = *(int*) (pkt + 0xe);
+	if (*(short*) pkt == 0x1dd) {
+		return (iVar1 + 2) * 5;
+	}
+	if (iVar1 == 3) {
+		return 0x50;
+	}
+	return iVar1 * 0x14;
+}
+
 // STATUS: MATCHING
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
@@ -4315,7 +4328,7 @@ int __cdecl KannObjektHergestellt(char* obj, int entity_index, int requested)
 
 	category = GetBuildingTypeCategory((unsigned char) *ent);
 	is_cat2 = (category == 2);
-	max_size = compute_size(obj, entity_index);
+	max_size = compute_size(obj);
 
 	query = StartEntityQuery(*(int*) (obj + 0x14), 1, 0, entity_index);
 	if (query) {

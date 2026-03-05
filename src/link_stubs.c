@@ -92,6 +92,7 @@ float _DAT_100256a0;
 float _DAT_100256a8;
 float _DAT_100256cc;
 float _DAT_10025fbc;
+int _ctime;
 int _g_game_speed_index;
 float _g_stat_max;
 double _g_stat_max_d;
@@ -393,44 +394,6 @@ unsigned int __cdecl __ftol(void)
 	return 0;
 }
 
-int __cdecl another_entity_val(int a)
-{
-	return 0;
-}
-
-int __cdecl classify(int a)
-{
-	return 0;
-}
-
-void __cdecl cleanup_game1(void)
-{
-}
-
-void __cdecl cleanup_game2(void)
-{
-}
-
-void __cdecl cleanup_game3(void)
-{
-}
-
-void __cdecl cleanup_game4(void)
-{
-}
-
-void __cdecl cleanup_game5(void)
-{
-}
-
-void __cdecl cleanup_game6(void)
-{
-}
-
-void __cdecl cleanup_one(int a)
-{
-}
-
 int __cdecl cleanup_subobject(void* a)
 {
 	return 0;
@@ -441,27 +404,7 @@ int __cdecl compress_block(void* a, int b)
 	return 0;
 }
 
-int __cdecl compute_entity_val(int a, int b)
-{
-	return 0;
-}
-
-int __cdecl compute_size(char* a, int b)
-{
-	return 0;
-}
-
-int __cdecl compute_slot_val(int a)
-{
-	return 0;
-}
-
 int __cdecl crc32_update(int checksum, int buffer, unsigned int size)
-{
-	return 0;
-}
-
-int __cdecl create_entity(int a, int b, int c, int d, int e)
 {
 	return 0;
 }
@@ -500,16 +443,6 @@ int __cdecl crt_locked_putc(int a, int b)
 	return 0;
 }
 
-float __cdecl crt_rand_float(void)
-{
-	return 0.0f;
-}
-
-int __cdecl crt_rand_range(int range)
-{
-	return 0;
-}
-
 int __cdecl crt_thread_set_alt(void)
 {
 	return 0;
@@ -522,21 +455,6 @@ int __cdecl crt_write_check(const char* str, int stream)
 
 void __cdecl entity_cleanup(char* a)
 {
-}
-
-int __cdecl find_entity(int a, int b, int c, int d)
-{
-	return 0;
-}
-
-int __cdecl find_entity_2arg(int a, int b)
-{
-	return 0;
-}
-
-int __cdecl find_entity_3arg(int a, int b, int c)
-{
-	return 0;
 }
 
 void __cdecl free_block(int a)
@@ -556,35 +474,11 @@ void __cdecl free_subobj(void* a)
 {
 }
 
-int __cdecl func_1001a286(void* a, int b)
-{
-	return 0;
-}
-
-int __cdecl func_1001a2eb(int a)
-{
-	return 0;
-}
-
-void __cdecl func_1001a527(void* a)
-{
-}
-
 void __cdecl game_free(void* a)
 {
 }
 
 short __cdecl get_command_type(char* a)
-{
-	return 0;
-}
-
-int __cdecl get_next_entity(void)
-{
-	return 0;
-}
-
-int __cdecl get_priority_info(int a, int* b)
 {
 	return 0;
 }
@@ -595,15 +489,6 @@ int __cdecl locked_fwrite(void* a, int b, int c, void* d)
 }
 
 void __cdecl mem_free(void* a)
-{
-}
-
-int __cdecl rand_gen(void)
-{
-	return 0;
-}
-
-void __cdecl setup_entity(int a, int b)
 {
 }
 
