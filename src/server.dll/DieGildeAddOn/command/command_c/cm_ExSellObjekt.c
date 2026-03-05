@@ -48,7 +48,7 @@ extern char s_cm_ExSellObjekt____gm_AllocRaum_f_1002ccc0[];
 extern char s_cm_ExSellObjekt____gm_AllocObjek_1002cce8[];
 
 // FUNCTION: SERVER 0x1000d930
-uint TradeCommandHandler(char* param_1, uchar* param_2)
+uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 {
 	int amount;
 	int resolve_result;

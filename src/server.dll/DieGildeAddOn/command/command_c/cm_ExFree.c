@@ -26,7 +26,7 @@ extern char s_Invalid_Id_for_cmdt_FREE_in_cm_E_1002cc5c[];
 extern char s_cm_ExFree____Can_t_free_Objects_1002cc3c[];
 
 // FUNCTION: SERVER 0x1000d730
-int __cdecl ExFreeEntity(int param_1, char *param_2)
+int __cdecl cm_ExFree(int param_1, char *param_2)
 {
 	unsigned int fieldId;
 	int resolveResult;

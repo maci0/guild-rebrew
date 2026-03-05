@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _ModifyEntityStamina
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ModifyEntityStamina(int param_1)
+ * int __cdecl cm_ExModifyStamina(int param_1)
  * 
  * {
  *   int iVar1;
@@ -42,7 +42,7 @@
 extern void __cdecl UpdateEntityLinks(int, int);
 
 // FUNCTION: SERVER 0x10010010
-int __cdecl ModifyEntityStamina(int param_1)
+int __cdecl cm_ExModifyStamina(int param_1)
 {
 	int entity;
 	unsigned int stamina;

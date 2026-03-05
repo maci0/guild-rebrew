@@ -16,7 +16,7 @@ extern char* g_entity_type_table;
  *    CFlags: 
  *    Symbol: _GetBuildingStatCount
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl GetBuildingStatCount(uchar *param_1)
+ * int __cdecl cm_GetBuildingStatCount(uchar *param_1)
  * 
  * {
  *   char cVar1;
@@ -57,7 +57,7 @@ extern char* g_entity_type_table;
  */
 
 // FUNCTION: SERVER 0x100104a0
-int __cdecl GetBuildingStatCount(uchar* param_1)
+int __cdecl cm_GetBuildingStatCount(uchar* param_1)
 {
 	char building_tier;
 	int upgrade_data;

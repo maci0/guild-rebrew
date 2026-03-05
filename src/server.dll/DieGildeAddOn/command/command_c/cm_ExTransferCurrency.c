@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _ExTransferCurrency
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ExTransferCurrency(int param_1,char *param_2)
+ * int __cdecl cm_ExTransferCurrency(int param_1,char *param_2)
  * 
  * {
  *   void *pvVar1;
@@ -62,7 +62,7 @@ extern unsigned short g_currency_type_array[];
 #endif
 
 // FUNCTION: SERVER 0x1000d7f0
-int __cdecl ExTransferCurrency(int param_1, char* param_2)
+int __cdecl cm_ExTransferCurrency(int param_1, char* param_2)
 {
 	void* entity_ptr;
 	int field_result;

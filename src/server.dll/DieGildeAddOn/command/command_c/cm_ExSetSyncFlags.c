@@ -11,7 +11,7 @@
  *    Symbol: _SetSyncFlags
  *    Files: DieGildeAddOn/command/command.c * /
  * 
- * int __cdecl SetSyncFlags(int param_1,char *param_2)
+ * int __cdecl cm_ExSetSyncFlags(int param_1,char *param_2)
  * 
  * {
  *   if (*(char *)(param_1 + 0x10) == '\x01') {
@@ -44,7 +44,7 @@ extern int g_game_speed_value;
 extern int g_game_speed_table[];
 
 // FUNCTION: SERVER 0x1000efb0
-int __cdecl SetSyncFlags(int param_1, char* param_2)
+int __cdecl cm_ExSetSyncFlags(int param_1, char* param_2)
 {
 	int speed_index;
 

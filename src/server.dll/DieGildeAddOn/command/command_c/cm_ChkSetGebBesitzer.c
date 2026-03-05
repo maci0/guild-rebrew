@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _find_validate
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl find_validate(char *obj)
+ * int __cdecl cm_ChkSetGebBesitzer(char *obj)
  * 
  * {
  *   ushort *puVar1;
@@ -36,7 +36,7 @@ extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74[];
 
 // FUNCTION: SERVER 0x1000cfe0
-int __cdecl find_validate(char* obj)
+int __cdecl cm_ChkSetGebBesitzer(char* obj)
 {
 	ushort* puVar1;
 

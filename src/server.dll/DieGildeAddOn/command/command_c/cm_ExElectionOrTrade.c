@@ -21,7 +21,7 @@
  *    CFlags: 
  *    Symbol: _ElectionOrTradeCommand
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ElectionOrTradeCommand(int param_1,char *param_2)
+ * int __cdecl cm_ExElectionOrTrade(int param_1,char *param_2)
  * 
  * {
  *   ushort *puVar1;
@@ -70,7 +70,7 @@ extern void* __cdecl StartEntityQuery(int, int, int, int, int);
 extern int g_10035880;
 
 // FUNCTION: SERVER 0x1000fc10
-int __cdecl ElectionOrTradeCommand(int param_1, char* param_2)
+int __cdecl cm_ExElectionOrTrade(int param_1, char* param_2)
 {
 	void* entity;
 	int target;

@@ -19,7 +19,7 @@
  *    CFlags: 
  *    Symbol: _SimSpecialAction
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl SimSpecialAction(int param_1,char *param_2)
+ * int __cdecl cm_ExSimSpecialAction(int param_1,char *param_2)
  * 
  * {
  *   SRC *src;
@@ -72,7 +72,7 @@ extern void __cdecl slot_clear_match(void*, void*, void*);
 extern void __cdecl AllocateEntitySlot(void*, void*, void*);
 
 // FUNCTION: SERVER 0x10010390
-int __cdecl SimSpecialAction(int param_1, char* param_2)
+int __cdecl cm_ExSimSpecialAction(int param_1, char* param_2)
 {
 	char* p;
 	uint action_type;

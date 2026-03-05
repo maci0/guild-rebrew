@@ -18,7 +18,7 @@
  *    CFlags: 
  *    Symbol: _SetBuildingOwner
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl SetBuildingOwner(int param_1,char *param_2)
+ * int __cdecl cm_ExSetGebBesitzer(int param_1,char *param_2)
  * 
  * {
  *   ushort *puVar1;
@@ -69,7 +69,7 @@ extern char s_cm_ExSetGebBesitzer____Could_not_1002d1e0[];
 extern char s_cm_ExSetGebBesitzer____Could_not_1002d1a8[];
 
 // FUNCTION: SERVER 0x1000f3b0
-int __cdecl SetBuildingOwner(int param_1, char* param_2)
+int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
 {
 	ushort* building;
 	ushort* old_owner;

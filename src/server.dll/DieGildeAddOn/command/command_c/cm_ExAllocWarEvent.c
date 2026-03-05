@@ -21,7 +21,7 @@
  *    CFlags: 
  *    Symbol: _AllocWarEvent
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl AllocWarEvent(int param_1,char *param_2)
+ * int __cdecl cm_ExAllocWarEvent(int param_1,char *param_2)
  * 
  * {
  *   void *pvVar1;
@@ -86,7 +86,7 @@ extern ushort* __cdecl NextEntityQueryMatch(void);
 extern ushort* __cdecl AllocGameObject(int, int, int);
 
 // FUNCTION: SERVER 0x10010140
-int __cdecl AllocWarEvent(int param_1, char* param_2)
+int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)
 {
 	void* attacker;
 	void* target;

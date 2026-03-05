@@ -11,7 +11,7 @@
  *    CFlags: 
  *    Symbol: _ValidateElectionOrTradeCmd
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ValidateElectionOrTradeCmd(int param_1)
+ * int __cdecl cm_ChkElectionOrTrade(int param_1)
  * 
  * {
  *   ushort *puVar1;
@@ -62,7 +62,7 @@ extern int g_something_1;
 #endif
 
 // FUNCTION: SERVER 0x1000d060
-int __cdecl ValidateElectionOrTradeCmd(int param_1)
+int __cdecl cm_ChkElectionOrTrade(int param_1)
 {
 	ushort* entity;
 	int idx;

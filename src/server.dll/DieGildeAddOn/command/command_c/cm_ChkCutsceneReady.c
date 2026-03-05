@@ -12,7 +12,7 @@
  *    CFlags: 
  *    Symbol: _CheckCutsceneReady
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl CheckCutsceneReady(char *obj)
+ * int __cdecl cm_ChkCutsceneReady(char *obj)
  * 
  * {
  *   int entity_ptr;
@@ -49,7 +49,7 @@ extern void __cdecl LogMessageInternal(char*, int, char*, int);
 extern char s_cm_ChkCutsceneReady____failed____1002caa8[];
 
 // FUNCTION: SERVER 0x1000d260
-int __cdecl CheckCutsceneReady(char* obj)
+int __cdecl cm_ChkCutsceneReady(char* obj)
 {
 	int entity_ptr;
 	int* id_ptr;

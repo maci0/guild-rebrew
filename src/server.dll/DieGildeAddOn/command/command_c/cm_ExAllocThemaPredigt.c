@@ -15,7 +15,7 @@
  * causes esi/edi register allocation swap. Dead store preserved via
  * dst pointer alias hiding (dst[6] vs pcVar2[0x22]).
  *
- * int __cdecl ExCreateSpecialObject(int param_1,char *param_2)
+ * int __cdecl cm_ExAllocThemaPredigt(int param_1,char *param_2)
  *
  * {
  *   int iVar1;
@@ -55,7 +55,7 @@ extern char g_player_slot_0[];
 extern char s_cm_ExAllocThemaPredigt____Execut_1002d184[];
 
 // FUNCTION: SERVER 0x1000f2f0
-int __cdecl ExCreateSpecialObject(int param_1, char* param_2)
+int __cdecl cm_ExAllocThemaPredigt(int param_1, char* param_2)
 {
 	int field_id;
 	char* obj;

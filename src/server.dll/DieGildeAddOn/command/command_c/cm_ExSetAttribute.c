@@ -17,7 +17,7 @@ extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
 
 // FUNCTION: SERVER 0x1000e8d0
-int __cdecl ExWriteEntityFields(int param_1, char* param_2)
+int __cdecl cm_ExSetAttribute(int param_1, char* param_2)
 {
 	int fieldSize;
 	int cmdBase;

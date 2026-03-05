@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _AssignEntityId
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl AssignEntityId(int param_1,char *param_2)
+ * int __cdecl cm_AssignEntityId(int param_1,char *param_2)
  * 
  * {
  *   DWORD DVar1;
@@ -29,7 +29,7 @@ extern int g_entity_id_start;
 extern __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 
 // FUNCTION: SERVER 0x1000f0a0
-int __cdecl AssignEntityId(int param_1, char* param_2)
+int __cdecl cm_AssignEntityId(int param_1, char* param_2)
 {
 	DWORD DVar1;
 

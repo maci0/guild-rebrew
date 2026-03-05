@@ -17,7 +17,7 @@ extern int g_1003546c;
 extern char g_100358a0[];
 
 // FUNCTION: SERVER 0x1000fd50
-int __cdecl JoinLeaveElection(int param_1, char *param_2)
+int __cdecl cm_ExJoinLeaveElection(int param_1, char *param_2)
 {
 	char *entity;
 	char *resident;

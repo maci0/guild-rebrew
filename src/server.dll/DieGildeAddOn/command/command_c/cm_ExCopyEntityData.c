@@ -11,7 +11,7 @@ extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 
 // FUNCTION: SERVER 0x1000ec00
-int __cdecl ExCopyEntityData(int cmd_ptr, char* response)
+int __cdecl cm_ExCopyEntityData(int cmd_ptr, char* response)
 {
 	int rel_value;
 	int target_field;

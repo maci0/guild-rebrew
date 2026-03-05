@@ -12,7 +12,7 @@
  *    CFlags: 
  *    Symbol: _ExSetEntityField
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ExSetEntityField(int param_1,char *param_2)
+ * int __cdecl cm_ExChangeFloat(int param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -55,7 +55,7 @@ extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
 #endif
 
 // FUNCTION: SERVER 0x1000eb70
-int __cdecl ExSetEntityField(int param_1, char* param_2)
+int __cdecl cm_ExChangeFloat(int param_1, char* param_2)
 {
 	int cmd;
 	int resolve_ok;

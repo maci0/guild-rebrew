@@ -20,7 +20,7 @@ extern char s_cm_ChkSellObjekt___Lager_voll_1002c834[];
 extern char s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8[];
 
 // FUNCTION: SERVER 0x1000cbd0
-int __cdecl CheckSellObject(char* cmd)
+int __cdecl cm_ChkSellObjekt(char* cmd)
 {
 	short obj_type;
 	int result;

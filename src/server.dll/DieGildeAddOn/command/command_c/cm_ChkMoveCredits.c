@@ -12,7 +12,7 @@
  *    CFlags: 
  *    Symbol: _CheckMoveCredits
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl CheckMoveCredits(int param_1,char *param_2)
+ * int __cdecl cm_ChkMoveCredits(int param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -64,7 +64,7 @@ extern char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[];
 extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];
 
 // FUNCTION: SERVER 0x1000cb20
-int __cdecl CheckMoveCredits(int param_1, char* param_2)
+int __cdecl cm_ChkMoveCredits(int param_1, char* param_2)
 {
 	int cmd;
 	int value;

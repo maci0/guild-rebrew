@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _SetResidence
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl SetResidence(int param_1,char *param_2)
+ * int __cdecl cm_ExSetWohnsitz(int param_1,char *param_2)
  * 
  * {
  *   byte *pbVar1;
@@ -67,7 +67,7 @@ extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[];
 extern char s_cm_ExSetWohnsitz____Residence_is_1002d240[];
 
 // FUNCTION: SERVER 0x1000f480
-int __cdecl SetResidence(int param_1, char* param_2)
+int __cdecl cm_ExSetWohnsitz(int param_1, char* param_2)
 {
 	ushort* building;
 	int resident;

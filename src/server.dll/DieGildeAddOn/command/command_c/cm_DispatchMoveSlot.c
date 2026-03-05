@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _DispatchMoveSlotEntry
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl DispatchMoveSlotEntry(void *param_1,char *param_2)
+ * int __cdecl cm_DispatchMoveSlot(void *param_1,char *param_2)
  * 
  * {
  *   uint uVar1;
@@ -23,7 +23,7 @@
 extern int __cdecl MoveSlotEntry(int);
 
 // FUNCTION: SERVER 0x100102f0
-int __cdecl DispatchMoveSlotEntry(void* param_1, char* param_2)
+int __cdecl cm_DispatchMoveSlot(void* param_1, char* param_2)
 {
 	int result;
 

@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _ExTransferCurrencyNoKill
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ExTransferCurrencyNoKill(int param_1,char *param_2)
+ * int __cdecl cm_ExTransferCurrencyNoKill(int param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -46,7 +46,7 @@ extern void __cdecl AddOrAccumulateObject(int, unsigned int, int);
 extern char g_currency_type_array[];
 
 // FUNCTION: SERVER 0x1000d8a0
-int __cdecl ExTransferCurrencyNoKill(int param_1, char* param_2)
+int __cdecl cm_ExTransferCurrencyNoKill(int param_1, char* param_2)
 {
 	int field_result;
 

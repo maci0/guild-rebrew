@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _SetBuildingUpgrade
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl SetBuildingUpgrade(int param_1,char *param_2)
+ * int __cdecl cm_ExSetGebUpgrade(int param_1,char *param_2)
  * 
  * {
  *   char *pcVar1;
@@ -67,7 +67,7 @@ extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 extern char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[];
 
 // FUNCTION: SERVER 0x1000f590
-int __cdecl SetBuildingUpgrade(int param_1, char* param_2)
+int __cdecl cm_ExSetGebUpgrade(int param_1, char* param_2)
 {
 	ushort* building;
 	uint type_id;

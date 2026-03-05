@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _DestroyBuilding
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl DestroyBuilding(int param_1,char *param_2)
+ * int __cdecl cm_ExDestroyBuilding(int param_1,char *param_2)
  * 
  * {
  *   ushort *puVar1;
@@ -63,7 +63,7 @@ extern int g_work_building_ptrs;
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 
 // FUNCTION: SERVER 0x1000f680
-int __cdecl DestroyBuilding(int param_1, char* param_2)
+int __cdecl cm_ExDestroyBuilding(int param_1, char* param_2)
 {
 	ushort* puVar1;
 	ushort* puVar2;

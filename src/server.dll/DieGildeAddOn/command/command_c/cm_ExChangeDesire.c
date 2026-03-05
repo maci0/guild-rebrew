@@ -12,7 +12,7 @@ extern double _g_stat_max_d;
 extern char s_cm_ExChangeDesire___Invalid_Id_1002d0f4[];
 
 // FUNCTION: SERVER 0x1000e9c0
-int __cdecl ExChangeDesire(uchar* param_1, uchar* param_2)
+int __cdecl cm_ExChangeDesire(uchar* param_1, uchar* param_2)
 {
 	float clamped;
 	uchar* cmd;

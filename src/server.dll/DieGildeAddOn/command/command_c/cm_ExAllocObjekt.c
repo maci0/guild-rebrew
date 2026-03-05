@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _ExCreateObject
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ExCreateObject(int param_1,char *param_2)
+ * int __cdecl cm_ExAllocObjekt(int param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -49,7 +49,7 @@ extern void* __cdecl memcpy(void*, const void*, unsigned int);
 extern char g_player_slot_0[];
 
 // FUNCTION: SERVER 0x1000e750
-int __cdecl ExCreateObject(int param_1, char* param_2)
+int __cdecl cm_ExAllocObjekt(int param_1, char* param_2)
 {
 	int field_id;
 	char* game_obj;

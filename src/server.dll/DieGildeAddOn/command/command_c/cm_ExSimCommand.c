@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _ExSimCommand
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ExSimCommand(void *param_1,char *param_2)
+ * int __cdecl cm_ExSimCommand(void *param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -23,7 +23,7 @@
 extern int __cdecl SwapOfficeHolders(int*);
 
 // FUNCTION: SERVER 0x10010080
-int __cdecl ExSimCommand(void* param_1, char* param_2)
+int __cdecl cm_ExSimCommand(void* param_1, char* param_2)
 {
 	int swap_result;
 

@@ -18,7 +18,7 @@ extern int g_1003546c;
 extern char g_100358a0[];
 
 // FUNCTION: SERVER 0x1000d110
-int __cdecl ValidateJoinLeaveElection(int* param_1)
+int __cdecl cm_ChkJoinLeaveElection(int* param_1)
 {
 	int action;
 	void* entity;

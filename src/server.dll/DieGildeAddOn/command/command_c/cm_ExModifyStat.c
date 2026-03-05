@@ -12,7 +12,7 @@
  *    Symbol: _ModifyEntityStat
  *    Files: DieGildeAddOn/command/command.c * /
  * 
- * int __cdecl ModifyEntityStat(int *param_1)
+ * int __cdecl cm_ExModifyStat(int *param_1)
  * 
  * {
  *   int iVar1;
@@ -49,7 +49,7 @@ extern float _g_stat_min;
 #endif
 
 // FUNCTION: SERVER 0x100100a0
-int __cdecl ModifyEntityStat(int* param_1)
+int __cdecl cm_ExModifyStat(int* param_1)
 {
 	int stat_index;
 	int entity_record;

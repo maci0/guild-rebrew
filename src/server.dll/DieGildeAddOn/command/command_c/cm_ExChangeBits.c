@@ -18,7 +18,7 @@
  *    CFlags: 
  *    Symbol: _ExSetEntityBitmask
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ExSetEntityBitmask(int param_1,char *param_2)
+ * int __cdecl cm_ExChangeBits(int param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -67,7 +67,7 @@ extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
 
 // FUNCTION: SERVER 0x1000eaa0
-int __cdecl ExSetEntityBitmask(int param_1, char* param_2)
+int __cdecl cm_ExChangeBits(int param_1, char* param_2)
 {
 	int entity_id;
 	int ok;

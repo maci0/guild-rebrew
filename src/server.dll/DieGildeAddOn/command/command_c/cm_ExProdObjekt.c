@@ -12,7 +12,7 @@
  *    CFlags:
  *    Symbol: _cm_ExecProduction
  *    Files: DieGildeAddOn/command/command.c * / *
- * int __cdecl cm_ExecProduction(int msg,char *result)
+ * int __cdecl cm_ExProdObjekt(int msg,char *result)
  */
 
 #include "../command_internal.h"
@@ -40,7 +40,7 @@ extern char s_cm_ExProdObjekt___Cannot_produce___1002cf1c[];
 extern char s_cm_ExProdObjekt___Rohstoff_versc_1002cef4[];
 
 // FUNCTION: SERVER 0x1000e140
-int __cdecl cm_ExecProduction(int msg, char* result)
+int __cdecl cm_ExProdObjekt(int msg, char* result)
 {
 	int quantity;
 	ushort* obj_entry;

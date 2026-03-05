@@ -21,7 +21,7 @@
  *    CFlags: 
  *    Symbol: _ExAccumulateEntityFields
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ExAccumulateEntityFields(int param_1,char *param_2)
+ * int __cdecl cm_ExChangeAttribute(int param_1,char *param_2)
  * 
  * {
  *   char cVar1;
@@ -70,7 +70,7 @@ extern void __cdecl LogMessageInternal(const char*, uint, const char*, int);
 extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
 
 // FUNCTION: SERVER 0x1000e7d0
-int __cdecl ExAccumulateEntityFields(int param_1, char *param_2)
+int __cdecl cm_ExChangeAttribute(int param_1, char *param_2)
 {
 	signed char elem_size;
 	int msg;

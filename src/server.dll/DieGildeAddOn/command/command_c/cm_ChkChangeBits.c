@@ -12,7 +12,7 @@
  *    CFlags: 
  *    Symbol: _CheckChangeBits
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl CheckChangeBits(int param_1,char *param_2)
+ * int __cdecl cm_ChkChangeBits(int param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -58,7 +58,7 @@ extern char s_cm_ChkChangeBits___Invalid_Id_1002ca54[];
 extern char s_cm_ChkChangeBits___Invalid_actio_1002ca04[];
 
 // FUNCTION: SERVER 0x1000cf30
-int __cdecl CheckChangeBits(int param_1, char* param_2)
+int __cdecl cm_ChkChangeBits(int param_1, char* param_2)
 {
 	int cmd;
 	int field;

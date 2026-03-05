@@ -20,7 +20,7 @@
  *    CFlags: 
  *    Symbol: _ExCreateCitizenAtBuilding
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ExCreateCitizenAtBuilding(int param_1,char *param_2)
+ * int __cdecl cm_ExCreateCitizen(int param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -71,7 +71,7 @@ extern void* __cdecl AllocGameObject(int, unsigned int, int);
 extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 
 // FUNCTION: SERVER 0x1000f980
-int __cdecl ExCreateCitizenAtBuilding(int param_1, char* param_2)
+int __cdecl cm_ExCreateCitizen(int param_1, char* param_2)
 {
 	unsigned short idx16;
 	unsigned int idx;

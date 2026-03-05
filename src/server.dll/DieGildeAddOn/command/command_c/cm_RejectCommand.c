@@ -11,7 +11,7 @@
  *    Symbol: _RejectCommand
  *    Files: DieGildeAddOn/command/command.c * /
  * 
- * int RejectCommand(void)
+ * int cm_RejectCommand(void)
  * 
  * {
  *   return 1;
@@ -19,7 +19,7 @@
  */
 
 // FUNCTION: SERVER 0x1000d340
-int __cdecl RejectCommand(void)
+int __cdecl cm_RejectCommand(void)
 {
 	return 1;
 }

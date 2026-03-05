@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _CutsceneEntityUpdate
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl CutsceneEntityUpdate(int param_1,char *param_2)
+ * int __cdecl cm_ExCutsceneUpdate(int param_1,char *param_2)
  * 
  * {
  *   int iVar1;
@@ -47,7 +47,7 @@
 extern int __cdecl CheckCutsceneReady(char*);
 
 // FUNCTION: SERVER 0x1000ff60
-int __cdecl CutsceneEntityUpdate(int param_1, char* param_2)
+int __cdecl cm_ExCutsceneUpdate(int param_1, char* param_2)
 {
 	int readyResult;
 	int entityRecord;

@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _DispatchProductionCommand
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl DispatchProductionCommand(int param_1,char *param_2)
+ * int __cdecl cm_DispatchProduction(int param_1,char *param_2)
  * 
  * {
  *   uint32_t *puVar1;
@@ -62,7 +62,7 @@ extern int __cdecl UpdateProductionProgress(uchar*);
 extern int __cdecl ValidateEntityAction(uchar*);
 
 // FUNCTION: SERVER 0x10010260
-int __cdecl DispatchProductionCommand(int param_1, char* param_2)
+int __cdecl cm_DispatchProduction(int param_1, char* param_2)
 {
 	uint32_t* data_ptr;
 	int result;

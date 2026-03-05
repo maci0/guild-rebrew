@@ -10,7 +10,7 @@
  *    CFlags: 
  *    Symbol: _ModifyEntityHealth
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl ModifyEntityHealth(int param_1)
+ * int __cdecl cm_ExModifyHealth(int param_1)
  * 
  * {
  *   int iVar1;
@@ -33,7 +33,7 @@
 #include "../command_internal.h"
 
 // FUNCTION: SERVER 0x1000ffc0
-int __cdecl ModifyEntityHealth(int param_1)
+int __cdecl cm_ExModifyHealth(int param_1)
 {
 	int entity;
 	uint health;
