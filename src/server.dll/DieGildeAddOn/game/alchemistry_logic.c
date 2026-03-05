@@ -1,6 +1,7 @@
 #include <string.h>
 #include "../../Units/m_alloc/m_alloc.h"
 #include "../../Units/Error/error.h"
+int __cdecl __ftol(void);
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
@@ -8,7 +9,6 @@ extern char* g_table;
 int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
 int __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl crt_ftol(void);
 void __cdecl gm_AddOrAccumulateObject(int p1, int p2, int p3);
 int __cdecl gm_RefreshMarketAvailability(int season);
 extern float fColorScale;
@@ -227,7 +227,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 				scale = g_100256c8;
 				*(int*) ((char*) entity + 0x20) = 0x41400000;
 				*(float*) ((char*) entity + 0x14) = (rand_f * scale + g_100256c4) - g_100256c0;
-				alloc_result = (unsigned int) crt_ftol();
+				alloc_result = (unsigned int) __ftol();
 				rand_val = (unsigned short) gm_RandomMod(alloc_result);
 				base_val = *(float*) ((char*) entity + 0x1c) * g_100256b8;
 				*(int*) ((char*) entity + 0x18) = *(int*) ((char*) entity + 0x1c);

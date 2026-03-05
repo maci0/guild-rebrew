@@ -6,7 +6,7 @@
 
 void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */;
 void __cdecl ReportMessage(char* msg); /* Single arg log? */;
-void* __cdecl crt_call_global(int); /* 0x1001a7f7 */;
+void* __cdecl _callnewh(int); /* 0x1001a7f7 */;
 extern int DAT_10034624;
 extern int DAT_10034628;
 extern int DAT_1003462c;
@@ -87,7 +87,7 @@ void* __cdecl m_AllocTracked(unsigned int size, int source)
 					group = *(int*) (group + 0x24);
 				} while (group != 0);
 			}
-			group = (int) crt_call_global(0x28);
+			group = (int) _callnewh(0x28);
 			strcpy((char*) group, nameBuf);
 			*(int*) (group + 0x14) = 0;
 			*(int*) (group + 0x10) = 0;
@@ -103,7 +103,7 @@ found: {
 	int tmp;
 	*(int*) (group + 0x20) = *(int*) (group + 0x20) + 1;
 	prev = size;
-	block = crt_call_global(size);
+	block = _callnewh(size);
 	if (block == 0) {
 		sprintf(nameBuf, "Out of Memory Error: Malloc - Failed %s for %u bytes", source, size);
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0xcd, nameBuf);

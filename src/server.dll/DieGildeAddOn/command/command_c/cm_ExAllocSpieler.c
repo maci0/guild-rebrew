@@ -30,7 +30,7 @@
  *   *(undefined4 *)(param_1 + 0x10) = g_timestamp_0b6c;
  *   iVar1 = rand();
  *   *(int *)(param_1 + 0x26) = iVar1;
- *   crt_thread_set_alt(iVar1);
+ *   srand(iVar1);
  *   if (*(int *)(param_1 + 0x1f) == -1) {
  *     puVar2 = (ushort *)0x0;
  *   }
@@ -82,7 +82,7 @@ int __cdecl cm_ExAllocSpieler(int param_1, char* param_2)
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
 	seed = rand();
 	*(int*) (param_1 + 0x26) = seed;
-	crt_thread_set_alt(seed);
+	srand(seed);
 	seed = *(int*) (param_1 + 0x1f);
 	if (seed == -1) {
 		seed = 0;

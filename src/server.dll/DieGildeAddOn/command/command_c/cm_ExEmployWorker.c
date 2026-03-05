@@ -34,7 +34,7 @@ int __cdecl cm_ExEmployWorker(int param_1, char* param_2)
 	*(int*) (param_1 + 0x1f) = g_timestamp_0b6c;
 	random_seed = rand();
 	*(int*) (param_1 + 0x23) = random_seed;
-	crt_thread_set_alt(random_seed);
+	srand(random_seed);
 	building_entity = (ushort*) gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x10));
 	if (building_entity == (ushort*) 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x4d3a,

@@ -4,8 +4,6 @@
 #include <time.h>
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
 
-int __cdecl crt_call_extra(char* buf, const char* fmt);
-int __cdecl crt_write_check(const char* str, int stream);
 char __cdecl check_memory_protection(void*);
 char __cdecl AnalyzeInstruction(int, int, int, int*);
 unsigned int __cdecl EmitCrashModuleLine(int*);
@@ -61,21 +59,21 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 
 	found:
 		sprintf(buf, "%s\\%s", g_log_buffer, g_log_format_table + idx * 32);
-		stream = crt_call_extra(buf, "at");
+		stream = fopen(buf, "at");
 		if (stream != 0) {
 			goto do_write;
 		}
 
 	fallback:
 		sprintf(buf, "%s\\%s", g_log_buffer, "__server.log");
-		stream = crt_call_extra(buf, "at");
+		stream = fopen(buf, "at");
 		if (stream == 0) {
 			goto skip;
 		}
 
 	do_write:
-		crt_write_check(msg, stream);
-		crt_write_check("\n", stream);
+		fputs(msg, stream);
+		fputs("\n", stream);
 		fflush(stream);
 	skip:;
 	}

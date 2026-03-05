@@ -3,6 +3,7 @@
 
 #include "../../game_common.h"
 #include "../../game_structs.h"
+#include <stdlib.h>
 
 /*
  * Common extern declarations shared by command handler .c files.
@@ -35,8 +36,6 @@ extern short* __cdecl gm_GetEntityTableEntry(char*);
 extern void* __cdecl gm_FindRecordById(int);
 
 /* CRT / thread */
-extern int __cdecl rand(void);
-extern void __cdecl crt_thread_set_alt(int);
 
 /* Common globals */
 extern int g_timestamp_0b6c;

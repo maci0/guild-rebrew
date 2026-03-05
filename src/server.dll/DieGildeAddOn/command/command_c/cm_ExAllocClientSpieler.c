@@ -29,7 +29,7 @@ int __cdecl cm_ExAllocClientSpieler(int param_1, char* param_2)
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
 	entity_offset = rand();
 	*(int*) (param_1 + 0x45) = entity_offset;
-	crt_thread_set_alt(*(int*) (param_1 + 0x22));
+	srand(*(int*) (param_1 + 0x22));
 	entity_id = (ushort) gm_CreateEntityFromParents(
 		param_2 ? 6 : 7,
 		*(int*) (param_1 + 0x14),

@@ -4,7 +4,7 @@
 // Not compiled - annotation-only markers for reccmp matching
 
 // LIBRARY: SERVER 0x1001A140
-// crt_getid_set
+// _getpid
 // SIZE: 14
 
 // LIBRARY: SERVER 0x1001A18A
@@ -55,7 +55,7 @@
 // SIZE: 266
 
 // LIBRARY: SERVER 0x1001AA6A
-// crt_locked_call4b
+// fread
 // SIZE: 47
 
 // LIBRARY: SERVER 0x1001AA99

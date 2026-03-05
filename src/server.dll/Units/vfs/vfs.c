@@ -15,11 +15,9 @@ int __cdecl game_getbyte(int);
 int __cdecl flush_stream(int, int);
 void __cdecl write_uint32_le(int, unsigned int);
 int __cdecl close_stream(int);
-int __cdecl crt_locked_putc(int, int);
 void __cdecl entity_cleanup(char*);
 extern void mem_free(void*);
 void __cdecl stream_close(int);
-int __cdecl crt_locked_call4b(int stream, unsigned int size, int count, int handle);
 int __cdecl crc32_update(int checksum, int buffer, unsigned int size);
 void __cdecl free_subobj(void*);
 int __cdecl cleanup_object(char*);
@@ -221,7 +219,7 @@ void __cdecl write_uint32_le(int stream, unsigned int value)
 
 	i = 4;
 	do {
-		crt_locked_putc(value & 0xff, stream);
+		putc(value & 0xff, stream);
 		value = value >> 8;
 		i = i - 1;
 	} while (i != 0);
@@ -309,7 +307,7 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 			if (fseek(ctx[0x18], ctx[0x1a] + ctx[0xf], 0) != 0) {
 				return -1;
 			}
-			if (crt_locked_call4b(*ctx, chunk_size, 1, ctx[0x18]) != 1) {
+			if (fread(*ctx, chunk_size, 1, ctx[0x18]) != 1) {
 				return -1;
 			}
 			ctx[0xf] += chunk_size;
@@ -584,7 +582,7 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 						);
 						return read_count;
 					}
-					result = crt_locked_call4b(arg_8h, arg_ch, arg_10h, src_ptr);
+					result = fread(arg_8h, arg_ch, arg_10h, src_ptr);
 				}
 				else {
 					result = ReadVfsCompressed(src_ptr, arg_8h, total_size);

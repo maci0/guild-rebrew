@@ -383,10 +383,6 @@ int __cdecl WriteFileBufferLocked(void* a, int b, int c, int d)
 	return 0;
 }
 
-unsigned int __cdecl __ftol(void)
-{
-	return 0;
-}
 
 int __cdecl cleanup_subobject(void* a)
 {
@@ -403,49 +399,29 @@ int __cdecl crc32_update(int checksum, int buffer, unsigned int size)
 	return 0;
 }
 
-int __cdecl crt_call_extra(char* filename, char* mode)
-{
-	return 0;
-}
 
-void* __cdecl crt_call_global(int a)
+void* __cdecl _callnewh(int a)
 {
 	return (void*) 0;
 }
 
-int __cdecl crt_ftol(void)
+
+int __cdecl _getpid(void)
 {
 	return 0;
 }
 
-int __cdecl crt_getid_set(void)
-{
-	return 0;
-}
-
-void __cdecl crt_getptd_set(unsigned int value)
+void __cdecl _seterrormode(unsigned int value)
 {
 }
 
-int __cdecl crt_locked_call4b(void* dest, int elemSize, int count, int stream)
-{
-	return 0;
-}
 
 int __cdecl crt_locked_putc(int a, int b)
 {
 	return 0;
 }
 
-int __cdecl crt_thread_set_alt(void)
-{
-	return 0;
-}
 
-int __cdecl crt_write_check(const char* str, int stream)
-{
-	return 0;
-}
 
 void __cdecl entity_cleanup(char* a)
 {
@@ -499,3 +475,8 @@ void __cdecl write_log(char* a, int b, char* c)
 {
 }
 
+
+int __cdecl __ftol(void)
+{
+	return 0;
+}

@@ -4,6 +4,7 @@
 #include <windows.h>
 #include "../../Units/m_alloc/m_alloc.h"
 #include "../../Units/Error/error.h"
+int __cdecl __ftol(void);
 
 typedef int(__cdecl* ALLOCFN)(int, int, int);
 
@@ -25,11 +26,9 @@ typedef struct {
 
 extern char* g_entity_table; /* 0x101de450 */
 ;
-int __cdecl crt_call_extra(char* filename, char* mode);
-int __cdecl crt_locked_call4b(void* dest, int elemSize, int count, int stream);
 void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
-int __cdecl crt_getid_set(void);
+int __cdecl _getpid(void);
 extern char* g_entity_ptr;
 void __cdecl entity_cleanup(char*);
 extern short* DAT_100a8c34;
@@ -156,7 +155,6 @@ extern float DAT_100257c8; /* 0x100257c8 */
 extern double DAT_100257d0; /* 0x100257d0 */
 ;
 double __cdecl gm_CalculateProductionValue(unsigned short, unsigned char);
-int __cdecl __ftol(void);
 extern char g_type_idx;
 extern int g_key_table[];
 extern char entity_array[];
@@ -441,12 +439,12 @@ int __cdecl gm_Open(int param_1)
 		return -2;
 	}
 	sprintf((char*) path_buf, (char*) 0x1003118c, param_1, (char*) 0x10031194);
-	file_handle = crt_call_extra((char*) path_buf, (char*) 0x1002944c);
+	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4f5, (char*) 0x10031154, 1);
 		return -3;
 	}
-	crt_locked_call4b((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
+	fread((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
 	fflush(file_handle);
 	g_item_def_table = (int) m_AllocTracked(0xb9dc, (const char*) 0x10031140);
 	if (g_item_def_table == 0) {
@@ -458,7 +456,7 @@ int __cdecl gm_Open(int param_1)
 	}
 	memset((void*) g_100a8c34, 0, 0x14f218);
 	sprintf((char*) path_buf, (char*) 0x1003118c, param_1, (char*) 0x10031120);
-	file_handle = crt_call_extra((char*) path_buf, (char*) 0x1002944c);
+	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
@@ -468,7 +466,7 @@ int __cdecl gm_Open(int param_1)
 		);
 		return -6;
 	}
-	crt_locked_call4b((void*) g_item_def_table, 0x41, 0x2dc, file_handle);
+	fread((void*) g_item_def_table, 0x41, 0x2dc, file_handle);
 	fflush(file_handle);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x536, "gm_Open(): gm_InitObjektHersteller", 1);
 	gm_InitObjektHersteller();
@@ -500,7 +498,7 @@ int __cdecl gm_Open(int param_1)
 		*(char*) (file_handle + 0x21 + g_entity_type_table) = *(char*) (file_handle + 0x21 + g_entity_type_table) + producible_count;
 		file_handle = next_offset;
 	} while (next_offset < 0xca78);
-	crt_getid_set();
+	_getpid();
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x588, "gm_Open(): exit", 1);
 	return 0;
 }
@@ -3703,7 +3701,7 @@ int __cdecl gm_QueryEntitySum(int param_1, unsigned int param_2)
 // gm_CalculateProductionValue
 
 /* Game function - recursive entity value calculation with FPU math */
-/* Accesses g_entity_table (0x101de450), calls crt_ftol and itself recursively */
+/* Accesses g_entity_table (0x101de450), calls __ftol and itself recursively */
 /* Computes weighted entity stat values with caching in field_0x38 */
 // BLOCKER_DELTA: 288
 // ANALYSIS: Recursive production value calculator. Computes the base value of an object type by looking up prototype data (stride 0x41), applying worker skill bonuses from building prototypes, and recursively summing ingredient costs (up to 4 ingredients). Caches result at proto_entry+0x38. Applies quality and production multipliers.
