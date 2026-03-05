@@ -22,18 +22,18 @@ extern char s_gm_AllocSpieler___failed_1002cbd4[];
 // FUNCTION: SERVER 0x1000d570
 int __cdecl validate_cmd_10_AllocPlayer(int param_1, char* param_2)
 {
-	ushort sVar1;
-	uint uVar2;
-	int iVar1;
-	int iVar4;
-	short* psVar3;
+	ushort entity_id;
+	uint entity_id_uint;
+	int entity_offset;
+	int record;
+	short* table_entry;
 	char* entity_base;
 
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
-	iVar1 = rand();
-	*(int*) (param_1 + 0x45) = iVar1;
+	entity_offset = rand();
+	*(int*) (param_1 + 0x45) = entity_offset;
 	crt_thread_set_alt(*(int*) (param_1 + 0x22));
-	sVar1 = (ushort) CreateEntityFromParents(
+	entity_id = (ushort) CreateEntityFromParents(
 		param_2 ? 6 : 7,
 		*(int*) (param_1 + 0x14),
 		*(int*) (param_1 + 0x18),
@@ -43,29 +43,29 @@ int __cdecl validate_cmd_10_AllocPlayer(int param_1, char* param_2)
 		0,
 		(uint)*(uchar*) (param_1 + 0x23)
 	);
-	uVar2 = sVar1;
-	if (uVar2 == 0xffff) {
+	entity_id_uint = entity_id;
+	if (entity_id_uint == 0xffff) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x290f, s_gm_AllocSpieler___failed_1002cbd4, 1);
 		return 1;
 	}
 	LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2917, s_ClientSpieler_erzeugt_1002cbbc, 1);
-	iVar1 = uVar2 * 0x21c;
+	entity_offset = entity_id_uint * 0x21c;
 	*(int*) (g_player_slot_0 + (uint)*(uchar*) (param_1 + 3) * 0x264264 + 0x2641f8) =
-		*(int*) (iVar1 + 0x100358a4);
-	strncpy((char*) (iVar1 + 0x100358d0), (char*) param_1 + 0x25, 0x10);
-	entity_base = (char*) (iVar1 + 0x100358a0);
-	psVar3 = GetEntityTableEntry(entity_base);
-	if (psVar3 != (short*) 0) {
-		*psVar3 = *(short*) (iVar1 + 0x100358f0);
-		strncpy((char*) psVar3 + 2, (char*) param_1 + 0x35, 0x10);
-		strncpy((char*) (iVar1 + 0x100358e0), (char*) param_1 + 0x35, 0x10);
-		iVar4 = LookupEntityRecordById(*(int*) (iVar1 + 0x10035900));
-		if (iVar4 != 0) {
-			strncpy((char*) (iVar4 + 0x40), (char*) param_1 + 0x35, 0x10);
+		*(int*) (entity_offset + 0x100358a4);
+	strncpy((char*) (entity_offset + 0x100358d0), (char*) param_1 + 0x25, 0x10);
+	entity_base = (char*) (entity_offset + 0x100358a0);
+	table_entry = GetEntityTableEntry(entity_base);
+	if (table_entry != (short*) 0) {
+		*table_entry = *(short*) (entity_offset + 0x100358f0);
+		strncpy((char*) table_entry + 2, (char*) param_1 + 0x35, 0x10);
+		strncpy((char*) (entity_offset + 0x100358e0), (char*) param_1 + 0x35, 0x10);
+		record = LookupEntityRecordById(*(int*) (entity_offset + 0x10035900));
+		if (record != 0) {
+			strncpy((char*) (record + 0x40), (char*) param_1 + 0x35, 0x10);
 		}
 	}
-	*(int*) (iVar1 + 0x100358f4) = *(int*) (param_1 + 0x1f);
-	*(char*) (iVar1 + 0x100358ac) = *(char*) (param_1 + 0x24);
+	*(int*) (entity_offset + 0x100358f4) = *(int*) (param_1 + 0x1f);
+	*(char*) (entity_offset + 0x100358ac) = *(char*) (param_1 + 0x24);
 	if (param_2 != (char*) 0) {
 		*param_2 = '\x01';
 		param_2[1] = '\x01';

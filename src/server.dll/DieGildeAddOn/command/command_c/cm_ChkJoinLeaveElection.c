@@ -22,14 +22,14 @@ extern char g_100358a0[];
 // FUNCTION: SERVER 0x1000d110
 int __cdecl ValidateJoinLeaveElection(int* param_1)
 {
-	int iVar4;
+	int action;
 	void* entity;
 	int player;
 	int* slots;
 	int i;
 
-	iVar4 = param_1[4];
-	if (iVar4 == 0x6a6f696e) {
+	action = param_1[4];
+	if (action == 0x6a6f696e) {
 		entity = StartFilteredEntitySearch(1, 1, param_1[6]);
 		if (entity != (void*)0) {
 			entity = StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
@@ -53,7 +53,7 @@ int __cdecl ValidateJoinLeaveElection(int* param_1)
 		}
 		return 1;
 	}
-	else if (iVar4 == 0x6c656176) {
+	else if (action == 0x6c656176) {
 		entity = StartFilteredEntitySearch(1, 1, param_1[6]);
 		if (entity != (void*)0) {
 			entity = StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
@@ -73,7 +73,7 @@ int __cdecl ValidateJoinLeaveElection(int* param_1)
 		}
 		return 1;
 	}
-	else if (iVar4 == 0x636c6572) {
+	else if (action == 0x636c6572) {
 		entity = StartFilteredEntitySearch(1, 1, param_1[6]);
 		if (entity == (void*)0) {
 			return 1;

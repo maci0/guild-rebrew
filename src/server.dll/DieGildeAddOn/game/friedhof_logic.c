@@ -96,7 +96,7 @@ int __cdecl check_slot_active(char* obj, int idx)
 
 int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 {
-	int iVar1;
+	int graveyard_tier;
 	int base;
 
 	if (*(int*) (param_1 + 4) < 1) {
@@ -110,14 +110,14 @@ int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 		if (check_slot_active(param_1, 0) == 0) {
 			goto ret_zero;
 		}
-		iVar1 = *(int*) (param_1 + 4);
-		if (iVar1 == 1 && param_3 >= 8) {
+		graveyard_tier = *(int*) (param_1 + 4);
+		if (graveyard_tier == 1 && param_3 >= 8) {
 			goto ret_zero;
 		}
-		if (iVar1 == 2 && param_3 >= 0xc) {
+		if (graveyard_tier == 2 && param_3 >= 0xc) {
 			goto ret_zero;
 		}
-		if (iVar1 == 3 && param_3 >= 0x10) {
+		if (graveyard_tier == 3 && param_3 >= 0x10) {
 			goto ret_zero;
 		}
 		base = *(int*) (param_1 + 8);
@@ -127,14 +127,14 @@ int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 		if (check_slot_active(param_1, 1) == 0) {
 			goto ret_zero;
 		}
-		iVar1 = *(int*) (param_1 + 4);
-		if (iVar1 == 1 && param_3 >= 4) {
+		graveyard_tier = *(int*) (param_1 + 4);
+		if (graveyard_tier == 1 && param_3 >= 4) {
 			goto ret_zero;
 		}
-		if (iVar1 == 2 && param_3 >= 6) {
+		if (graveyard_tier == 2 && param_3 >= 6) {
 			goto ret_zero;
 		}
-		if (iVar1 == 3 && param_3 >= 8) {
+		if (graveyard_tier == 3 && param_3 >= 8) {
 			goto ret_zero;
 		}
 		base = *(int*) (param_1 + 0xc);
@@ -144,14 +144,14 @@ int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 		if (check_slot_active(param_1, 2) == 0) {
 			goto ret_zero;
 		}
-		iVar1 = *(int*) (param_1 + 4);
-		if (iVar1 == 1) {
+		graveyard_tier = *(int*) (param_1 + 4);
+		if (graveyard_tier == 1) {
 			goto ret_zero;
 		}
-		if (iVar1 == 2 && param_3 >= 2) {
+		if (graveyard_tier == 2 && param_3 >= 2) {
 			goto ret_zero;
 		}
-		if (iVar1 == 3 && param_3 >= 4) {
+		if (graveyard_tier == 3 && param_3 >= 4) {
 			goto ret_zero;
 		}
 		base = *(int*) (param_1 + 0x10);
@@ -161,14 +161,14 @@ int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 		if (check_slot_active(param_1, 3) == 0) {
 			goto ret_zero;
 		}
-		iVar1 = *(int*) (param_1 + 4);
-		if (iVar1 == 1) {
+		graveyard_tier = *(int*) (param_1 + 4);
+		if (graveyard_tier == 1) {
 			goto ret_zero;
 		}
-		if (iVar1 == 2) {
+		if (graveyard_tier == 2) {
 			goto ret_zero;
 		}
-		if (iVar1 == 3 && param_3 >= 2) {
+		if (graveyard_tier == 3 && param_3 >= 2) {
 			goto ret_zero;
 		}
 		base = *(int*) (param_1 + 0x14);
@@ -292,63 +292,63 @@ char* __cdecl FindSlotEntryFiltered(
 
 int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 {
-	unsigned char uVar1;
-	unsigned int uVar2;
-	short iVar3;
-	unsigned char uVar4;
-	int iVar5;
-	unsigned int uVar6;
-	int iVar7;
-	int iVar8;
-	char* pcVar;
-	char cVar;
+	unsigned char building_tier;
+	unsigned int new_entity_id;
+	short current_game_tick;
+	unsigned char rand_skill_byte;
+	int slot_entry_ptr;
+	unsigned int rand_stat_val;
+	int spawn_count;
+	int skill_index;
+	char* entity_type_entry;
+	char entity_class_byte;
 
-	uVar6 = *param_1;
-	pcVar = *(char**) 0x100a8c30 + uVar6 + uVar6 * 0x24c;
-	cVar = *pcVar;
+	rand_stat_val = *param_1;
+	entity_type_entry = *(char**) 0x100a8c30 + rand_stat_val + rand_stat_val * 0x24c;
+	entity_class_byte = *entity_type_entry;
 
-	if (cVar == '\x1d') {
-		uVar1 = *(unsigned char*) (pcVar + 0x247);
-		if (uVar1 != 0 && uVar1 < 4) {
-			iVar7 = 0;
+	if (entity_class_byte == '\x1d') {
+		building_tier = *(unsigned char*) (entity_type_entry + 0x247);
+		if (building_tier != 0 && building_tier < 4) {
+			spawn_count = 0;
 			if (0 < param_2) {
 				do {
-					iVar5 = FindSlotEntryFiltered(0, param_1, 0, 0x10010700, 0);
-					if (iVar5 == 0) {
-						return iVar7;
+					slot_entry_ptr = FindSlotEntryFiltered(0, param_1, 0, 0x10010700, 0);
+					if (slot_entry_ptr == 0) {
+						return spawn_count;
 					}
-					*(*(unsigned int**) (iVar5 + 0x10)) = *(unsigned int*) 0x10030b6c;
+					*(*(unsigned int**) (slot_entry_ptr + 0x10)) = *(unsigned int*) 0x10030b6c;
 					*(unsigned int*) 0x10030b6c = *(unsigned int*) 0x10030b6c + 1;
-					uVar2 = *(*(unsigned int**) (iVar5 + 0x10));
-					*(unsigned int*) (iVar5 + 8) = 0x7fff;
-					*(unsigned int*) (iVar5 + 4) = uVar2;
-					iVar3 = *(short*) 0x10035880;
-					*(unsigned int*) (iVar5 + 0xc) = 0xff;
-					*(unsigned int*) (iVar5 + 10) = iVar3 + 5;
-					iVar8 = 0;
+					new_entity_id = *(*(unsigned int**) (slot_entry_ptr + 0x10));
+					*(unsigned int*) (slot_entry_ptr + 8) = 0x7fff;
+					*(unsigned int*) (slot_entry_ptr + 4) = new_entity_id;
+					current_game_tick = *(short*) 0x10035880;
+					*(unsigned int*) (slot_entry_ptr + 0xc) = 0xff;
+					*(unsigned int*) (slot_entry_ptr + 10) = current_game_tick + 5;
+					skill_index = 0;
 					do {
 						func_1001a0d0(8);
-						uVar4 = func_1001b564();
-						iVar8 = iVar8 + 1;
-						*(*(char**) (iVar5 + 0x10) + 0x23 + iVar8) = uVar4;
-					} while (iVar8 < 5);
-					uVar6 = func_1001a0d0(9);
-					*(*(char**) (iVar5 + 0x10) + 0x2c) = (uVar6 & 0xffff) + 1;
-					uVar6 = func_1001a0d0(2);
-					*(*(char**) (iVar5 + 0x10) + 0x30) = (uVar6 & 0xffff) + 1;
-					uVar6 = func_1001a0d0(0x5e);
-					*(*(char**) (iVar5 + 0x10) + 0x34) = (uVar6 & 0xffff) + 1;
-					uVar6 = func_1001a0d0(4);
-					*(*(char**) (iVar5 + 0x10) + 0x40) = (*(short*) 0x10035880 - (uVar6 & 0xffff)) + -1;
-					uVar6 = func_1001a0d0(2);
-					*(*(char**) (iVar5 + 0x10) + 0x38) = uVar6 & 0xffff;
+						rand_skill_byte = func_1001b564();
+						skill_index = skill_index + 1;
+						*(*(char**) (slot_entry_ptr + 0x10) + 0x23 + skill_index) = rand_skill_byte;
+					} while (skill_index < 5);
+					rand_stat_val = func_1001a0d0(9);
+					*(*(char**) (slot_entry_ptr + 0x10) + 0x2c) = (rand_stat_val & 0xffff) + 1;
+					rand_stat_val = func_1001a0d0(2);
+					*(*(char**) (slot_entry_ptr + 0x10) + 0x30) = (rand_stat_val & 0xffff) + 1;
+					rand_stat_val = func_1001a0d0(0x5e);
+					*(*(char**) (slot_entry_ptr + 0x10) + 0x34) = (rand_stat_val & 0xffff) + 1;
+					rand_stat_val = func_1001a0d0(4);
+					*(*(char**) (slot_entry_ptr + 0x10) + 0x40) = (*(short*) 0x10035880 - (rand_stat_val & 0xffff)) + -1;
+					rand_stat_val = func_1001a0d0(2);
+					*(*(char**) (slot_entry_ptr + 0x10) + 0x38) = rand_stat_val & 0xffff;
 					func_1001a0d0(0x10);
 					func_1001a0d0(0x10);
 					func_1001a0d0(0x10);
-					iVar7 = iVar7 + 1;
-				} while (iVar7 < param_2);
+					spawn_count = spawn_count + 1;
+				} while (spawn_count < param_2);
 			}
-			return iVar7;
+			return spawn_count;
 		}
 	}
 	return 0;

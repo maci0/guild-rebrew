@@ -21,20 +21,20 @@ extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
 // FUNCTION: SERVER 0x1000e8d0
 int __cdecl ExWriteEntityFields(int param_1, char* param_2)
 {
-	int cVar1;
-	int iVar4;
-	int iVar5;
-	char* pcVar7;
-	char* pcVar8;
-	uint uVar9;
-	void* pvStack_8;
-	void* pvStack_4;
+	int fieldSize;
+	int cmdBase;
+	int resolveResult;
+	char* srcPtr;
+	char* dstPtr;
+	uint fieldIdx;
+	void* objectEntity;
+	void* dynEntity;
 
-	iVar4 = param_1;
-	iVar5 = get_field_by_type((char*)param_1, *(int*)(param_1 + 0x10));
-	*(int*)(iVar4 + 0x10) = iVar5;
-	iVar5 = ResolveEntityById((void**)&param_1, &pvStack_8, &pvStack_4, iVar5);
-	if (iVar5 == 0) {
+	cmdBase = param_1;
+	resolveResult = get_field_by_type((char*)param_1, *(int*)(param_1 + 0x10));
+	*(int*)(cmdBase + 0x10) = resolveResult;
+	resolveResult = ResolveEntityById((void**)&param_1, &objectEntity, &dynEntity, resolveResult);
+	if (resolveResult == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x32ed,
@@ -43,39 +43,39 @@ int __cdecl ExWriteEntityFields(int param_1, char* param_2)
 		);
 		return 1;
 	}
-	if ((param_1 == 0) && (param_1 = (int)pvStack_8, pvStack_8 == (void*)0x0)) {
-		param_1 = (int)pvStack_4;
+	if ((param_1 == 0) && (param_1 = (int)objectEntity, objectEntity == (void*)0x0)) {
+		param_1 = (int)dynEntity;
 	}
-	uVar9 = 0;
-	pcVar7 = (char*)(iVar4 + 0x15);
-	if (*(uchar*)(iVar4 + 0x14) != 0) {
+	fieldIdx = 0;
+	srcPtr = (char*)(cmdBase + 0x15);
+	if (*(uchar*)(cmdBase + 0x14) != 0) {
 		do {
-			cVar1 = (int)*(signed char*)pcVar7;
-			iVar5 = (int)*(signed char*)(pcVar7 + 1);
-			pcVar7 = pcVar7 + 2;
-			pcVar8 = (char*)((uint)*(ushort*)pcVar7 + (uint)param_1);
-			pcVar7 = pcVar7 + 2;
-			if (cVar1 == 1) {
-				for (; iVar5 != 0; iVar5--) {
-					*pcVar8 = *pcVar7;
-					pcVar8++;
-					pcVar7++;
+			fieldSize = (int)*(signed char*)srcPtr;
+			resolveResult = (int)*(signed char*)(srcPtr + 1);
+			srcPtr = srcPtr + 2;
+			dstPtr = (char*)((uint)*(ushort*)srcPtr + (uint)param_1);
+			srcPtr = srcPtr + 2;
+			if (fieldSize == 1) {
+				for (; resolveResult != 0; resolveResult--) {
+					*dstPtr = *srcPtr;
+					dstPtr++;
+					srcPtr++;
 				}
-			} else if (cVar1 == 2) {
-				for (; iVar5 != 0; iVar5--) {
-					*(short*)pcVar8 = *(short*)pcVar7;
-					pcVar7 += 2;
-					pcVar8 += 2;
+			} else if (fieldSize == 2) {
+				for (; resolveResult != 0; resolveResult--) {
+					*(short*)dstPtr = *(short*)srcPtr;
+					srcPtr += 2;
+					dstPtr += 2;
 				}
-			} else if (cVar1 == 4) {
-				for (; iVar5 != 0; iVar5--) {
-					*(int*)pcVar8 = *(int*)pcVar7;
-					pcVar7 += 4;
-					pcVar8 += 4;
+			} else if (fieldSize == 4) {
+				for (; resolveResult != 0; resolveResult--) {
+					*(int*)dstPtr = *(int*)srcPtr;
+					srcPtr += 4;
+					dstPtr += 4;
 				}
 			}
-			uVar9++;
-		} while (uVar9 < *(uchar*)(iVar4 + 0x14));
+			fieldIdx++;
+		} while (fieldIdx < *(uchar*)(cmdBase + 0x14));
 	}
 	if (param_2 != (char*)0) {
 		*param_2 = '\x01';

@@ -44,63 +44,63 @@ void* __cdecl LookupEntityRecordById(int entityId);
 
 int __cdecl ValidateOfficeCandidate(int* param_1)
 {
-	void* pvVar1;
-	char* pcVar2;
-	int iVar3;
-	int iVar4;
+	void* entity_rec;
+	char* slot_ptr;
+	int slot_index;
+	int dep_slot_index;
 
-	pvVar1 = LookupEntityRecordById(*param_1);
-	if ((pvVar1 != (void*) 0) && (*(char*) ((int) pvVar1 + 0x168) == '\0')) {
-		iVar3 = 0;
-		pcVar2 = &DAT_101de5a0;
+	entity_rec = LookupEntityRecordById(*param_1);
+	if ((entity_rec != (void*) 0) && (*(char*) ((int) entity_rec + 0x168) == '\0')) {
+		slot_index = 0;
+		slot_ptr = &DAT_101de5a0;
 		do {
-			if (*pcVar2 == (char) param_1[1]) {
-				if (0x1d < iVar3) {
+			if (*slot_ptr == (char) param_1[1]) {
+				if (0x1d < slot_index) {
 					return 0;
 				}
-				if ((&DAT_101de5a4)[iVar3 * 6] != -1) {
+				if ((&DAT_101de5a4)[slot_index * 6] != -1) {
 					return 0;
 				}
-				if ((&DAT_101de5b0)[iVar3 * 0x18] != '\x03') {
+				if ((&DAT_101de5b0)[slot_index * 0x18] != '\x03') {
 					return 0;
 				}
-				if (3 < (int) (&DAT_101de5ac)[iVar3 * 6]) {
+				if (3 < (int) (&DAT_101de5ac)[slot_index * 6]) {
 					return 0;
 				}
-				if (*(char*) ((int) param_1 + 6) != (&DAT_101de5a8)[iVar3 * 0x18]) {
+				if (*(char*) ((int) param_1 + 6) != (&DAT_101de5a8)[slot_index * 0x18]) {
 					return 0;
 				}
 				if (*(char*) ((int) param_1 + 5) != -1) {
-					iVar4 = 0;
-					pcVar2 = &DAT_101de5a0;
-					while (*pcVar2 != *(char*) ((int) param_1 + 5)) {
-						pcVar2 = pcVar2 + 0x18;
-						iVar4 = iVar4 + 1;
-						if (0x101de86f < (int) pcVar2) {
+					dep_slot_index = 0;
+					slot_ptr = &DAT_101de5a0;
+					while (*slot_ptr != *(char*) ((int) param_1 + 5)) {
+						slot_ptr = slot_ptr + 0x18;
+						dep_slot_index = dep_slot_index + 1;
+						if (0x101de86f < (int) slot_ptr) {
 							return 0;
 						}
 					}
-					if (0x1d < iVar4) {
+					if (0x1d < dep_slot_index) {
 						return 0;
 					}
-					if ((&DAT_101de5a8)[iVar3 * 0x18] != (&DAT_101de5a8)[iVar4 * 0x18]) {
+					if ((&DAT_101de5a8)[slot_index * 0x18] != (&DAT_101de5a8)[dep_slot_index * 0x18]) {
 						return 0;
 					}
-					if ((&DAT_101de5a4)[iVar4 * 6] != -1) {
+					if ((&DAT_101de5a4)[dep_slot_index * 6] != -1) {
 						return 0;
 					}
-					if ((&DAT_101de5b0)[iVar4 * 0x18] != '\x03') {
+					if ((&DAT_101de5b0)[dep_slot_index * 0x18] != '\x03') {
 						return 0;
 					}
-					if (3 < (int) (&DAT_101de5ac)[iVar4 * 6]) {
+					if (3 < (int) (&DAT_101de5ac)[dep_slot_index * 6]) {
 						return 0;
 					}
 				}
 				return 1;
 			}
-			pcVar2 = pcVar2 + 0x18;
-			iVar3 = iVar3 + 1;
-		} while ((int) pcVar2 < 0x101de870);
+			slot_ptr = slot_ptr + 0x18;
+			slot_index = slot_index + 1;
+		} while ((int) slot_ptr < 0x101de870);
 	}
 	return 0;
 }
@@ -119,99 +119,99 @@ int __cdecl ValidateOfficeCandidate(int* param_1)
 
 unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 {
-	unsigned char uVar1;
-	unsigned char uVar2;
-	short* piVar3;
-	char* pcVar4;
-	int iVar5;
-	int iVar6;
-	int iVar7;
-	unsigned int* puVar8;
-	unsigned int* puVar9;
-	unsigned int auStack_18[4];
-	int iStack_8;
+	unsigned char requested_role;
+	unsigned char slot_role;
+	short* entity_rec;
+	char* slot_ptr;
+	int copy_count;
+	int slot_index;
+	int dep_slot_offset;
+	unsigned int* role_def_src;
+	unsigned int* role_def_dst;
+	unsigned int role_def_buf[4];
+	int dep_slot_status;
 
-	piVar3 = LookupEntityRecordById(*param_1);
-	if (((piVar3 != 0) && (*piVar3 != -1)) && (*(char*) (piVar3 + 0xb4) == '\0')) {
-		iVar6 = 0;
-		pcVar4 = (char*) 0x101de5a0;
+	entity_rec = LookupEntityRecordById(*param_1);
+	if (((entity_rec != 0) && (*entity_rec != -1)) && (*(char*) (entity_rec + 0xb4) == '\0')) {
+		slot_index = 0;
+		slot_ptr = (char*) 0x101de5a0;
 		do {
-			if (*pcVar4 == *(char*) (param_1 + 1)) {
-				if (0x1d < iVar6) {
+			if (*slot_ptr == *(char*) (param_1 + 1)) {
+				if (0x1d < slot_index) {
 					return 0;
 				}
-				uVar1 = *(unsigned char*) (param_1 + 6);
-				iVar6 = iVar6 * 0x18;
-				uVar2 = *(unsigned char*) (iVar6 + 0x101de5a8);
-				if (uVar1 != uVar2) {
+				requested_role = *(unsigned char*) (param_1 + 6);
+				slot_index = slot_index * 0x18;
+				slot_role = *(unsigned char*) (slot_index + 0x101de5a8);
+				if (requested_role != slot_role) {
 					return 0;
 				}
 				if (*(int*) (param_1 + 5) == -1) {
-					if (*(int*) (iVar6 + 0x101de5a4) != -1) {
+					if (*(int*) (slot_index + 0x101de5a4) != -1) {
 						return 0;
 					}
-					if (*(char*) (iVar6 + 0x101de5b0) != '\x03') {
+					if (*(char*) (slot_index + 0x101de5b0) != '\x03') {
 						return 0;
 					}
-					if (3 < *(int*) (iVar6 + 0x101de5ac)) {
+					if (3 < *(int*) (slot_index + 0x101de5ac)) {
 						return 0;
 					}
-					*(unsigned char*) (piVar3 + 0xb4) = uVar1;
-					*(int*) (iVar6 + 0x101de5ac) = *(int*) (iVar6 + 0x101de5ac) + 1;
+					*(unsigned char*) (entity_rec + 0xb4) = requested_role;
+					*(int*) (slot_index + 0x101de5ac) = *(int*) (slot_index + 0x101de5ac) + 1;
 					return 1;
 				}
-				iVar7 = 0;
-				pcVar4 = (char*) 0x101de5a0;
-				while (*pcVar4 != *(char*) (param_1 + 5)) {
-					pcVar4 = pcVar4 + 0x18;
-					iVar7 = iVar7 + 1;
-					if ((char*) 0x101de86f < pcVar4) {
+				dep_slot_offset = 0;
+				slot_ptr = (char*) 0x101de5a0;
+				while (*slot_ptr != *(char*) (param_1 + 5)) {
+					slot_ptr = slot_ptr + 0x18;
+					dep_slot_offset = dep_slot_offset + 1;
+					if ((char*) 0x101de86f < slot_ptr) {
 						return 0;
 					}
 				}
-				if (0x1d < iVar7) {
+				if (0x1d < dep_slot_offset) {
 					return 0;
 				}
-				iVar7 = iVar7 * 0x18;
-				if (uVar2 != *(unsigned char*) (iVar7 + 0x101de5a8)) {
+				dep_slot_offset = dep_slot_offset * 0x18;
+				if (slot_role != *(unsigned char*) (dep_slot_offset + 0x101de5a8)) {
 					return 0;
 				}
-				puVar8 = (unsigned int*) (uVar2 * 0x18 + 0x10029bb8);
-				puVar9 = auStack_18;
-				for (iVar5 = 6; iVar5 != 0; iVar5 = iVar5 + -1) {
-					*puVar9 = *puVar8;
-					puVar8 = puVar8 + 1;
-					puVar9 = puVar9 + 1;
+				role_def_src = (unsigned int*) (slot_role * 0x18 + 0x10029bb8);
+				role_def_dst = role_def_buf;
+				for (copy_count = 6; copy_count != 0; copy_count = copy_count + -1) {
+					*role_def_dst = *role_def_src;
+					role_def_src = role_def_src + 1;
+					role_def_dst = role_def_dst + 1;
 				}
-				if (auStack_18[0] != uVar1) {
+				if (role_def_buf[0] != requested_role) {
 					return 0;
 				}
-				if (iStack_8 == 0) {
+				if (dep_slot_status == 0) {
 					return 0;
 				}
-				if (*(int*) (iVar6 + 0x101de5a4) != -1) {
+				if (*(int*) (slot_index + 0x101de5a4) != -1) {
 					return 0;
 				}
-				if (*(char*) (iVar6 + 0x101de5b0) != '\x03') {
+				if (*(char*) (slot_index + 0x101de5b0) != '\x03') {
 					return 0;
 				}
-				if (3 < *(int*) (iVar6 + 0x101de5ac)) {
+				if (3 < *(int*) (slot_index + 0x101de5ac)) {
 					return 0;
 				}
-				if (*(int*) (iVar7 + 0x101de5a4) != -1) {
+				if (*(int*) (dep_slot_offset + 0x101de5a4) != -1) {
 					return 0;
 				}
-				if (3 < *(int*) (iVar7 + 0x101de5ac)) {
+				if (3 < *(int*) (dep_slot_offset + 0x101de5ac)) {
 					return 0;
 				}
-				*(unsigned char*) (piVar3 + 0xb4) = uVar1;
-				*(int*) (iVar6 + 0x101de5ac) = *(int*) (iVar6 + 0x101de5ac) + 1;
-				*(int*) (iVar7 + 0x101de5ac) = *(int*) (iVar7 + 0x101de5ac) + 1;
+				*(unsigned char*) (entity_rec + 0xb4) = requested_role;
+				*(int*) (slot_index + 0x101de5ac) = *(int*) (slot_index + 0x101de5ac) + 1;
+				*(int*) (dep_slot_offset + 0x101de5ac) = *(int*) (dep_slot_offset + 0x101de5ac) + 1;
 				return 1;
 			}
-			pcVar4 = pcVar4 + 0x18;
-			iVar6 = iVar6 + 1;
-		} while (pcVar4 < (char*) 0x101de870);
+			slot_ptr = slot_ptr + 0x18;
+			slot_index = slot_index + 1;
+		} while (slot_ptr < (char*) 0x101de870);
 	}
 	return 0;
 }
@@ -226,38 +226,38 @@ unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 
 int __cdecl ValidateCommand(char* param_1)
 {
-	char* pcVar1;
-	void* pvVar2;
-	int iVar3;
+	char* slot_ptr;
+	void* entity_rec;
+	int slot_index;
 
 	if (param_1[6] != -1) {
-		iVar3 = 0;
-		pcVar1 = (char*) DAT_101de5a0;
-		while (*pcVar1 != *param_1) {
-			pcVar1 = pcVar1 + 0x18;
-			iVar3 = iVar3 + 1;
-			if ((int) pcVar1 >= (int) 0x101de990) {
+		slot_index = 0;
+		slot_ptr = (char*) DAT_101de5a0;
+		while (*slot_ptr != *param_1) {
+			slot_ptr = slot_ptr + 0x18;
+			slot_index = slot_index + 1;
+			if ((int) slot_ptr >= (int) 0x101de990) {
 				return 0;
 			}
 		}
-		if (iVar3 >= 0x2a) {
+		if (slot_index >= 0x2a) {
 			return 0;
 		}
-		if ((&DAT_101de5b0)[iVar3 * 0x18] != 1) {
+		if ((&DAT_101de5b0)[slot_index * 0x18] != 1) {
 			return 0;
 		}
-		if (DAT_101de5b4[iVar3 * 6] != -1) {
+		if (DAT_101de5b4[slot_index * 6] != -1) {
 			return 0;
 		}
 		if (*(int*) (param_1 + 7) != -1) {
-			pvVar2 = LookupEntityRecordById(*(int*) (param_1 + 7));
-			if (pvVar2 == (void*) 0) {
+			entity_rec = LookupEntityRecordById(*(int*) (param_1 + 7));
+			if (entity_rec == (void*) 0) {
 				return 0;
 			}
 		}
 		if (*(int*) (param_1 + 1) != -1) {
-			pvVar2 = LookupEntityRecordById(*(int*) (param_1 + 1));
-			if (pvVar2 == (void*) 0) {
+			entity_rec = LookupEntityRecordById(*(int*) (param_1 + 1));
+			if (entity_rec == (void*) 0) {
 				return 0;
 			}
 		}
@@ -601,59 +601,59 @@ void __cdecl find_entity_27(int val)
 
 int __cdecl SwapOfficeHolders(int* param_1)
 {
-	int uVar1;
-	void* pvVar2;
-	SlotEntry* pcVar3;
-	void* pvVar4;
-	void* pvVar5;
-	int iVar6;
-	int iVar7;
+	int saved_entity_id;
+	void* requester_rec;
+	SlotEntry* slot_scan;
+	void* entity_rec_a;
+	void* entity_rec_b;
+	int slot_index_a;
+	int slot_index_b;
 
-	pvVar2 = LookupEntityRecordById(*param_1);
-	if (pvVar2 == (void*) 0) {
+	requester_rec = LookupEntityRecordById(*param_1);
+	if (requester_rec == (void*) 0) {
 		return 0;
 	}
-	if (*(int*) ((int) pvVar2 + 0x194) < *(int*) ((int) param_1 + 6)) {
+	if (*(int*) ((int) requester_rec + 0x194) < *(int*) ((int) param_1 + 6)) {
 		return 0;
 	}
-	iVar6 = 0;
-	pcVar3 = DAT_101de5a0;
-	while (pcVar3->key != (char) param_1[1]) {
-		pcVar3 = pcVar3 + 1;
-		iVar6 = iVar6 + 1;
-		if ((int) pcVar3 > 0x101de86f) {
+	slot_index_a = 0;
+	slot_scan = DAT_101de5a0;
+	while (slot_scan->key != (char) param_1[1]) {
+		slot_scan = slot_scan + 1;
+		slot_index_a = slot_index_a + 1;
+		if ((int) slot_scan > 0x101de86f) {
 			return 0;
 		}
 	}
-	if (pcVar3 == (SlotEntry*) 0) {
+	if (slot_scan == (SlotEntry*) 0) {
 		return 0;
 	}
-	pvVar4 = LookupEntityRecordById(DAT_101de5a0[iVar6].entityId);
-	if (pvVar4 == (void*) 0) {
+	entity_rec_a = LookupEntityRecordById(DAT_101de5a0[slot_index_a].entityId);
+	if (entity_rec_a == (void*) 0) {
 		return 0;
 	}
-	iVar7 = 0;
-	pcVar3 = DAT_101de5a0;
-	while (pcVar3->key != *(char*) ((int) param_1 + 5)) {
-		pcVar3 = pcVar3 + 1;
-		iVar7 = iVar7 + 1;
-		if ((int) pcVar3 > 0x101de86f) {
+	slot_index_b = 0;
+	slot_scan = DAT_101de5a0;
+	while (slot_scan->key != *(char*) ((int) param_1 + 5)) {
+		slot_scan = slot_scan + 1;
+		slot_index_b = slot_index_b + 1;
+		if ((int) slot_scan > 0x101de86f) {
 			return 0;
 		}
 	}
-	if (pcVar3 == (SlotEntry*) 0) {
+	if (slot_scan == (SlotEntry*) 0) {
 		return 0;
 	}
-	pvVar5 = LookupEntityRecordById(DAT_101de5a0[iVar7].entityId);
-	if (pvVar5 == (void*) 0) {
+	entity_rec_b = LookupEntityRecordById(DAT_101de5a0[slot_index_b].entityId);
+	if (entity_rec_b == (void*) 0) {
 		return 0;
 	}
-	*(char*) ((int) pvVar4 + 0x166) = DAT_101de5a0[iVar7].field8;
-	*(char*) ((int) pvVar5 + 0x166) = DAT_101de5a0[iVar6].field8;
-	uVar1 = DAT_101de5a0[iVar6].entityId;
-	DAT_101de5a0[iVar6].entityId = DAT_101de5a0[iVar7].entityId;
-	DAT_101de5a0[iVar7].entityId = uVar1;
-	*(int*) ((int) pvVar2 + 0x194) = *(int*) ((int) pvVar2 + 0x194) - *(int*) ((int) param_1 + 6);
+	*(char*) ((int) entity_rec_a + 0x166) = DAT_101de5a0[slot_index_b].field8;
+	*(char*) ((int) entity_rec_b + 0x166) = DAT_101de5a0[slot_index_a].field8;
+	saved_entity_id = DAT_101de5a0[slot_index_a].entityId;
+	DAT_101de5a0[slot_index_a].entityId = DAT_101de5a0[slot_index_b].entityId;
+	DAT_101de5a0[slot_index_b].entityId = saved_entity_id;
+	*(int*) ((int) requester_rec + 0x194) = *(int*) ((int) requester_rec + 0x194) - *(int*) ((int) param_1 + 6);
 	return 1;
 }
 
@@ -716,32 +716,32 @@ int __cdecl ClearEntityLinks(int param_1)
 
 void __cdecl UpdateEntityLinks(int param_1, int param_2)
 {
-	unsigned short uVar1;
-	int* piVar2;
+	unsigned short player_count;
+	int* slot_scan;
 
-	uVar1 = DAT_10035884;
-	piVar2 = (int*) 0x101de5b4;
+	player_count = DAT_10035884;
+	slot_scan = (int*) 0x101de5b4;
 	do {
-		if (piVar2[-4] == *(int*) (param_1 + 4) && param_2 != 0) {
-			piVar2[-4] = -1;
-			*piVar2 = -1;
-			*(char*) (piVar2 + -1) = (char) ((uVar1 > 0xb) + 3);
-			piVar2[-2] = 0;
+		if (slot_scan[-4] == *(int*) (param_1 + 4) && param_2 != 0) {
+			slot_scan[-4] = -1;
+			*slot_scan = -1;
+			*(char*) (slot_scan + -1) = (char) ((player_count > 0xb) + 3);
+			slot_scan[-2] = 0;
 		}
-		else if (*piVar2 == *(int*) (param_1 + 4)) {
-			*piVar2 = -1;
-			*(char*) (piVar2 + -1) = 1;
+		else if (*slot_scan == *(int*) (param_1 + 4)) {
+			*slot_scan = -1;
+			*(char*) (slot_scan + -1) = 1;
 		}
-		piVar2 = piVar2 + 6;
-	} while ((int) piVar2 < 0x101de9a4);
+		slot_scan = slot_scan + 6;
+	} while ((int) slot_scan < 0x101de9a4);
 	if (*(char*) (param_1 + 0x168) != '\0') {
-		piVar2 = (int*) 0x101de5ac;
+		slot_scan = (int*) 0x101de5ac;
 		do {
-			if ((char) piVar2[-1] == *(char*) (param_1 + 0x168) && *piVar2 > 0) {
-				*piVar2 = *piVar2 - 1;
+			if ((char) slot_scan[-1] == *(char*) (param_1 + 0x168) && *slot_scan > 0) {
+				*slot_scan = *slot_scan - 1;
 			}
-			piVar2 = piVar2 + 6;
-		} while ((int) piVar2 < 0x101de99c);
+			slot_scan = slot_scan + 6;
+		} while ((int) slot_scan < 0x101de99c);
 	}
 	if (param_2 != 0) {
 		*(char*) (param_1 + 0x166) = 0;

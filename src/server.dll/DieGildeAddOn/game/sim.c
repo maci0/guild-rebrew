@@ -34,95 +34,95 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 	unsigned int attempt2_count;
 	int prob_thresholds[6];
 
-	iVar8 = 0;
-	aiStack_18[0] = 0x60;
-	aiStack_18[1] = 0x4b;
-	aiStack_18[2] = 0x28;
-	aiStack_18[3] = 0x17;
-	aiStack_18[4] = 9;
-	aiStack_18[5] = 0;
-	uVar6 = 0x300;
+	attempt_count = 0;
+	prob_thresholds[0] = 0x60;
+	prob_thresholds[1] = 0x4b;
+	prob_thresholds[2] = 0x28;
+	prob_thresholds[3] = 0x17;
+	prob_thresholds[4] = 9;
+	prob_thresholds[5] = 0;
+	search_seed = 0x300;
 	do {
-		uVar1 = func_1001a0d0(uVar6);
-		uVar3 = uVar1 * 0xf;
-		iVar5 = uVar1 * 0x21c;
-		if (*(int*) (iVar5 + 0x100358a0) == -1) {
-			uVar3 = uVar6 * 3 + (uVar6 * 3 >> 0x1f & 3U) >> 2;
-			uVar6 = uVar3;
+		candidate_slot1 = func_1001a0d0(search_seed);
+		rand_roll = candidate_slot1 * 0xf;
+		entity_offset = candidate_slot1 * 0x21c;
+		if (*(int*) (entity_offset + 0x100358a0) == -1) {
+			rand_roll = search_seed * 3 + (search_seed * 3 >> 0x1f & 3U) >> 2;
+			search_seed = rand_roll;
 		}
-		else if (((5 < *(unsigned int*) (iVar5 + 0x100358a2)) ||
-				  (uVar3 = 0, *(unsigned int*) (iVar5 + 0x100358aa) < *(unsigned int*) (iVar5 + 0x100358c0))) ||
-				 (uVar3 = 0, *(char*) (iVar5 + 0x100358a8) == '\0')) {
-			uVar1 = 0xffff;
+		else if (((5 < *(unsigned int*) (entity_offset + 0x100358a2)) ||
+				  (rand_roll = 0, *(unsigned int*) (entity_offset + 0x100358aa) < *(unsigned int*) (entity_offset + 0x100358c0))) ||
+				 (rand_roll = 0, *(char*) (entity_offset + 0x100358a8) == '\0')) {
+			candidate_slot1 = 0xffff;
 		}
 		else {
-			piVar4 = (int*) (iVar5 + 0x10035908);
-			iVar7 = 0;
-			iVar5 = 5;
+			parent_slot_ptr = (int*) (entity_offset + 0x10035908);
+			occupied_count = 0;
+			entity_offset = 5;
 			do {
-				if (*piVar4 != -1) {
-					iVar7 = iVar7 + 1;
+				if (*parent_slot_ptr != -1) {
+					occupied_count = occupied_count + 1;
 				}
-				piVar4 = piVar4 + 1;
-				iVar5 = iVar5 + -1;
-			} while (iVar5 != 0);
-			uVar3 = func_1001a0d0(0x100);
-			uVar3 = (uVar3 & 0xffff) + 1;
-			if (uVar3 < aiStack_18[iVar7]) {
+				parent_slot_ptr = parent_slot_ptr + 1;
+				entity_offset = entity_offset + -1;
+			} while (entity_offset != 0);
+			rand_roll = func_1001a0d0(0x100);
+			rand_roll = (rand_roll & 0xffff) + 1;
+			if (rand_roll < prob_thresholds[occupied_count]) {
 				break;
 			}
 		}
-		iVar8 = iVar8 + 1;
-	} while (iVar8 < 0x10);
-	if (uVar1 == 0xffff) {
-		return uVar3 & 0xffff0000;
+		attempt_count = attempt_count + 1;
+	} while (attempt_count < 0x10);
+	if (candidate_slot1 == 0xffff) {
+		return rand_roll & 0xffff0000;
 	}
-	uStack_20 = 0;
+	attempt2_count = 0;
 	do {
-		uVar2 = func_1001a0d0(uVar6);
-		iVar8 = uVar2 * 0x21c;
-		if (*(int*) (iVar8 + 0x100358a0) == -1) {
-			uVar6 = uVar6 * 3 + (uVar6 * 3 >> 0x1f & 3U) >> 2;
+		candidate_slot2 = func_1001a0d0(search_seed);
+		attempt_count = candidate_slot2 * 0x21c;
+		if (*(int*) (attempt_count + 0x100358a0) == -1) {
+			search_seed = search_seed * 3 + (search_seed * 3 >> 0x1f & 3U) >> 2;
 		}
-		else if (((5 < *(unsigned int*) (iVar8 + 0x100358a2)) ||
-				  (*(unsigned int*) (iVar8 + 0x100358aa) < *(unsigned int*) (iVar8 + 0x100358c0))) ||
-				 (*(char*) (iVar8 + 0x100358a8) == '\0')) {
-			uVar2 = 0xffff;
+		else if (((5 < *(unsigned int*) (attempt_count + 0x100358a2)) ||
+				  (*(unsigned int*) (attempt_count + 0x100358aa) < *(unsigned int*) (attempt_count + 0x100358c0))) ||
+				 (*(char*) (attempt_count + 0x100358a8) == '\0')) {
+			candidate_slot2 = 0xffff;
 		}
 		else {
-			piVar4 = (int*) (iVar8 + 0x10035908);
-			iVar5 = 0;
-			iVar8 = 5;
+			parent_slot_ptr = (int*) (attempt_count + 0x10035908);
+			entity_offset = 0;
+			attempt_count = 5;
 			do {
-				if (*piVar4 != -1) {
-					iVar5 = iVar5 + 1;
+				if (*parent_slot_ptr != -1) {
+					entity_offset = entity_offset + 1;
 				}
-				piVar4 = piVar4 + 1;
-				iVar8 = iVar8 + -1;
-			} while (iVar8 != 0);
-			uVar3 = func_1001a0d0(0x100);
-			uVar3 = (uVar3 & 0xffff) + 1;
-			if (uVar3 < aiStack_18[iVar5]) {
+				parent_slot_ptr = parent_slot_ptr + 1;
+				attempt_count = attempt_count + -1;
+			} while (attempt_count != 0);
+			rand_roll = func_1001a0d0(0x100);
+			rand_roll = (rand_roll & 0xffff) + 1;
+			if (rand_roll < prob_thresholds[entity_offset]) {
 				break;
 			}
 		}
-		uVar3 = uStack_20 + 1;
-		uStack_20 = uVar3;
-	} while (uVar3 < 0x10);
-	if (uVar2 != 0xffff) {
-		uVar6 = CreateEntityFromParents(
+		rand_roll = attempt2_count + 1;
+		attempt2_count = rand_roll;
+	} while (rand_roll < 0x10);
+	if (candidate_slot2 != 0xffff) {
+		search_seed = CreateEntityFromParents(
 			0,
-			*(unsigned int*) (uVar1 * 0x21c + 0x100358a4),
-			*(unsigned int*) (uVar2 * 0x21c + 0x100358a4),
+			*(unsigned int*) (candidate_slot1 * 0x21c + 0x100358a4),
+			*(unsigned int*) (candidate_slot2 * 0x21c + 0x100358a4),
 			param_1,
 			0,
 			0,
 			0,
 			2
 		);
-		return uVar6;
+		return search_seed;
 	}
-	return uVar3 & 0xffff0000;
+	return rand_roll & 0xffff0000;
 }
 
 // ORIGIN: GAME
@@ -166,24 +166,24 @@ void __cdecl priority_update(char* ctx, char* entity)
 
 void __cdecl StartEntityQueryByType(unsigned char* param_1)
 {
-	char cVar1;
+	char entity_kind;
 	int owner;
 
-	cVar1 = *(char*) (DAT_100a8c30 + (unsigned int) *param_1 * 0x24d);
+	entity_kind = *(char*) (DAT_100a8c30 + (unsigned int) *param_1 * 0x24d);
 	owner = *(int*) (param_1 + 0x5d);
-	if (cVar1 == '\x01') {
+	if (entity_kind == '\x01') {
 		StartEntityQuery(owner, 1, 0, 0x12);
 		return;
 	}
-	if (cVar1 == '\x02') {
+	if (entity_kind == '\x02') {
 		StartEntityQuery(owner, 1, 0, 0x13);
 		return;
 	}
-	if (cVar1 == '\x1d') {
+	if (entity_kind == '\x1d') {
 		StartEntityQuery(owner, 1, 0, 0xfd);
 		return;
 	}
-	if (cVar1 == '\x16') {
+	if (entity_kind == '\x16') {
 		StartEntityQuery(owner, 1, 0, 0x120);
 	}
 	return;
@@ -207,27 +207,27 @@ void* __cdecl sim_CreateCitizen(
 	unsigned char param_5
 )
 {
-	unsigned int uVar1;
+	unsigned int new_entity_slot;
 
 	if ((param_1 & 1) != 0) {
-		uVar1 = FindAndMatchParents(param_3) & 0xffff;
-		if (uVar1 == 0xffff) {
+		new_entity_slot = FindAndMatchParents(param_3) & 0xffff;
+		if (new_entity_slot == 0xffff) {
 			goto error;
 		}
 		if ((param_1 & 2) != 0) {
-			(&DAT_10035a05)[uVar1 * 0x21c] = param_5;
-			(&DAT_10035a04)[uVar1 * 0x21c] = param_4;
+			(&DAT_10035a05)[new_entity_slot * 0x21c] = param_5;
+			(&DAT_10035a04)[new_entity_slot * 0x21c] = param_4;
 		}
 	}
 	else {
-		uVar1 =
+		new_entity_slot =
 			CreateEntityFromParents(param_2, -1, -1, param_3, 0, (unsigned int) param_4, (unsigned int) param_5, 2) &
 			0xffff;
 	}
-	if (uVar1 == 0xffff) {
+	if (new_entity_slot == 0xffff) {
 		goto error;
 	}
-	return &DAT_100358a0 + uVar1 * 0x21c;
+	return &DAT_100358a0 + new_entity_slot * 0x21c;
 error:
 	LogMessageInternal(
 		"D:\\Develop\\DieGildeAddOn\\game\\sim.c",
@@ -258,39 +258,39 @@ typedef struct {
 
 int __cdecl AdvanceGameClock(int* param_1, int param_2, int param_3, int param_4)
 {
-	int iVar1;
-	unsigned int uVar2;
-	unsigned int uVar3;
+	int minutes_carry;
+	unsigned int day_carry;
+	unsigned int total_hours;
 
 	param_4 = param_4 + *(int*) ((int) param_1 + 10);
 	*(int*) ((int) param_1 + 6) = *(int*) ((int) param_1 + 6) + param_4 / 0x3c;
 	*(int*) ((int) param_1 + 10) = param_4 % 0x3c;
 	param_3 = *(int*) ((int) param_1 + 6) + param_3;
 	*(short*) (param_1 + 1) = *(short*) (param_1 + 1) + (short) (param_3 / 0x3c);
-	iVar1 = param_3 / 0x3c;
+	minutes_carry = param_3 / 0x3c;
 	*(int*) ((int) param_1 + 6) = param_3 % 0x3c;
-	uVar3 = (unsigned int) *(unsigned short*) (param_1 + 1) + param_2;
-	if (0x17 < (int) uVar3) {
-		uVar2 = uVar3 / 0x18;
-		uVar3 = uVar3 % 0x18;
+	total_hours = (unsigned int) *(unsigned short*) (param_1 + 1) + param_2;
+	if (0x17 < (int) total_hours) {
+		day_carry = total_hours / 0x18;
+		total_hours = total_hours % 0x18;
 		do {
-			iVar1 = *param_1 + 1;
-			uVar2 = uVar2 - 1;
-			*param_1 = iVar1;
-		} while (uVar2 != 0);
+			minutes_carry = *param_1 + 1;
+			day_carry = day_carry - 1;
+			*param_1 = minutes_carry;
+		} while (day_carry != 0);
 	}
-	if ((int) uVar3 < 0) {
-		uVar2 = (0x17 - uVar3) / 0x18;
-		iVar1 = uVar3 + uVar2 * 0x18;
+	if ((int) total_hours < 0) {
+		day_carry = (0x17 - total_hours) / 0x18;
+		minutes_carry = total_hours + day_carry * 0x18;
 		do {
-			uVar2 = uVar2 - 1;
+			day_carry = day_carry - 1;
 			*param_1 = *param_1 + -1;
-		} while (uVar2 != 0);
-		*(short*) (param_1 + 1) = (short) iVar1;
-		return iVar1;
+		} while (day_carry != 0);
+		*(short*) (param_1 + 1) = (short) minutes_carry;
+		return minutes_carry;
 	}
-	*(short*) (param_1 + 1) = (short) uVar3;
-	return iVar1;
+	*(short*) (param_1 + 1) = (short) total_hours;
+	return minutes_carry;
 }
 
 // ORIGIN: GAME

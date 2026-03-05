@@ -37,18 +37,18 @@
 // FUNCTION: SERVER 0x1000ffc0
 int __cdecl ModifyEntityHealth(int param_1)
 {
-	int iVar1;
-	uint uVar2;
+	int entity;
+	uint health;
 
-	iVar1 = LookupEntityRecordById(*(int*) (param_1 + 0x10));
-	if (iVar1 == 0) {
+	entity = LookupEntityRecordById(*(int*) (param_1 + 0x10));
+	if (entity == 0) {
 		return 1;
 	}
-	uVar2 = *(int*) (param_1 + 0x14) + *(int*) (iVar1 + 0x194);
-	uVar2 = uVar2 & ((int) uVar2 < 0) - 1;
-	if ((int) uVar2 >= 0x32) {
-		uVar2 = 0x32;
+	health = *(int*) (param_1 + 0x14) + *(int*) (entity + 0x194);
+	health = health & ((int) health < 0) - 1;
+	if ((int) health >= 0x32) {
+		health = 0x32;
 	}
-	*(uint*) (iVar1 + 0x194) = uVar2;
+	*(uint*) (entity + 0x194) = health;
 	return 0;
 }

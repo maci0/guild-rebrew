@@ -46,26 +46,26 @@ extern void __cdecl UpdateEntityLinks(int, int);
 // FUNCTION: SERVER 0x10010010
 int __cdecl ModifyEntityStamina(int param_1)
 {
-	int iVar1;
-	unsigned int uVar3;
+	int entity;
+	unsigned int stamina;
 
-	iVar1 = LookupEntityRecordById(*(int*) (param_1 + 0x10));
-	if (iVar1 == 0) {
+	entity = LookupEntityRecordById(*(int*) (param_1 + 0x10));
+	if (entity == 0) {
 		return 1;
 	}
-	uVar3 = *(int*) (param_1 + 0x14) + (unsigned int) *(unsigned char*) (iVar1 + 0x1b1);
-	uVar3 = uVar3 & ((int) uVar3 < 0) - 1;
-	if ((int) uVar3 >= 0xff) {
-		uVar3 = 0xff;
+	stamina = *(int*) (param_1 + 0x14) + (unsigned int) *(unsigned char*) (entity + 0x1b1);
+	stamina = stamina & ((int) stamina < 0) - 1;
+	if ((int) stamina >= 0xff) {
+		stamina = 0xff;
 	}
-	*(char*) (iVar1 + 0x1b1) = (char) uVar3;
-	if ((unsigned char) uVar3 > '\0') {
-		uVar3 = uVar3 & 0xff;
+	*(char*) (entity + 0x1b1) = (char) stamina;
+	if ((unsigned char) stamina > '\0') {
+		stamina = stamina & 0xff;
 	}
 	else {
-		uVar3 = 0;
+		stamina = 0;
 	}
-	*(char*) (iVar1 + 0x1b1) = (char) uVar3;
-	UpdateEntityLinks(iVar1, *(int*) (param_1 + 0x18));
+	*(char*) (entity + 0x1b1) = (char) stamina;
+	UpdateEntityLinks(entity, *(int*) (param_1 + 0x18));
 	return 0;
 }
