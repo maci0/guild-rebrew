@@ -1,5 +1,5 @@
 // FUNCTION: SERVER 0x100104a0
-// STATUS: STUB
+// STATUS: MATCHING
 // BLOCKER: instruction folding (lea vs mov)
 // ORIGIN: GAME
 // SIZE: 135
