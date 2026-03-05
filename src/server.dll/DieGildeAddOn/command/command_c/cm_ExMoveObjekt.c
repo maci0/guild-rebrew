@@ -37,9 +37,9 @@
  *   void *pvStack_4;
  *   
  *   iVar6 = param_1;
- *   iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x14));
+ *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x14));
  *   *(int *)(iVar6 + 0x14) = iVar2;
- *   iVar2 = ResolveEntityById(&pvStack_8,(void **)&param_1,&pvStack_4,iVar2);
+ *   iVar2 = gm_ResolveEntityById(&pvStack_8,(void **)&param_1,&pvStack_4,iVar2);
  *   if (iVar2 == 0) {
  *     iVar6 = 8;
  *     msg = s_cm_ExMoveObjekt___Invalid__quell_1002d024;
@@ -57,9 +57,9 @@
  *     else {
  *       piVar4 = (int *)((int)pvStack_8 + 0x5d);
  *     }
- *     iVar2 = get_field_by_type((char *)iVar6,*(int *)(iVar6 + 0x10));
+ *     iVar2 = gm_GetFieldByType((char *)iVar6,*(int *)(iVar6 + 0x10));
  *     *(int *)(iVar6 + 0x10) = iVar2;
- *     iVar2 = ResolveEntityById(&pvStack_8,(void **)&param_1,&pvStack_4,iVar2);
+ *     iVar2 = gm_ResolveEntityById(&pvStack_8,(void **)&param_1,&pvStack_4,iVar2);
  *     if (iVar2 == 0) {
  *       iVar6 = 1;
  *       msg = s_cm_ExMoveObjekt___Invalid__ziel__1002cff4;
@@ -83,9 +83,9 @@ int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
 	int* dst_list;
 	int prev;
 
-	object_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
+	object_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x14));
 	*(int*) (param_1 + 0x14) = object_id;
-	if (ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
+	if (gm_ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x30a1,
@@ -105,9 +105,9 @@ int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
 		src_list = (int*) ((char*) ent_c + 0x178);
 	}
 
-	object_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+	object_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
 	*(int*) (param_1 + 0x10) = object_id;
-	if (ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
+	if (gm_ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x30bd,
@@ -127,7 +127,7 @@ int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
 		dst_list = (int*) ((char*) ent_c + 0x178);
 	}
 
-	object_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x18));
+	object_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x18));
 	*(int*) (param_1 + 0x18) = object_id;
 
 	prev = 0;

@@ -22,10 +22,10 @@ extern char g_error_msg_sell_no_dest[];
 extern char g_error_msg_sell_failed[];
 
 extern short* __cdecl gm_ResolveParentEntity(short*);
-extern void* __cdecl StartEntityQuery(int, int, int, uint);
+extern void* __cdecl gm_StartEntityQuery(int, int, int, uint);
 extern int __cdecl gm_GetMsgField(int, int);
 extern int __cdecl gm_KannObjektHergestellt(char*, uint, int);
-extern int __cdecl CheckInventoryCapacity(char*, uint, int);
+extern int __cdecl gm_CheckInventoryCapacity(char*, uint, int);
 extern char* __cdecl gm_FindSlotById(uint, uint);
 extern int __cdecl compute_size(char*, int);
 extern int __cdecl gm_RemoveObjectWrapper(int, uint);
@@ -87,9 +87,9 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 	dest_existing_entity = (char*)0;
 	source_static_entity = (short*)0;
 	if (*(int*)(param_1 + 0x14) != -1) {
-		resolve_result = get_field_by_type(param_1, *(int*)(param_1 + 0x14));
+		resolve_result = gm_GetFieldByType(param_1, *(int*)(param_1 + 0x14));
 		*(int*)(param_1 + 0x14) = resolve_result;
-		resolve_result = ResolveEntityById(
+		resolve_result = gm_ResolveEntityById(
 			&source_existing_entity,
 			(void**)&resolved_dynamic,
 			(void**)&source_static_entity,
@@ -129,7 +129,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 			container_ptr = (char**)(source_static_entity + 0xbc);
 			source_container_ptr = container_ptr;
 		}
-		dest_object = (ushort*)StartEntityQuery((int)*container_ptr, 1, 0, (uint)*(ushort*)(param_1 + 0x18));
+		dest_object = (ushort*)gm_StartEntityQuery((int)*container_ptr, 1, 0, (uint)*(ushort*)(param_1 + 0x18));
 		if (dest_object == (ushort*)0) {
 			sprintf(
 				log_buffer,
@@ -168,13 +168,13 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 			return 1;
 		}
 		if (*(int*)(param_1 + 0x23) != 0 && source_owner_entity != (short*)0) {
-			QueryEntitySum(*(int*)(source_owner_entity + 0xbc), param_1[0x1e]);
+			gm_QueryEntitySum(*(int*)(source_owner_entity + 0xbc), param_1[0x1e]);
 		}
 	}
 	if (*(int*)(param_1 + 0x10) != -1) {
-		resolve_result = get_field_by_type(param_1, *(int*)(param_1 + 0x10));
+		resolve_result = gm_GetFieldByType(param_1, *(int*)(param_1 + 0x10));
 		*(int*)(param_1 + 0x10) = resolve_result;
-		resolve_result = ResolveEntityById(
+		resolve_result = gm_ResolveEntityById(
 			(void**)&dest_existing_entity,
 			(void**)&resolved_dynamic,
 			(void**)&source_static_entity,
@@ -221,10 +221,10 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 		if (*(g_unknown_1de450 + (uint)*(ushort*)(param_1 + 0x18) * 0x41) == '\x1d') {
 			dest_game_object = (ushort*)0;
 		} else {
-			dest_game_object = (ushort*)StartEntityQuery(*linked_list_ptr, 1, 0, (uint)*(ushort*)(param_1 + 0x18));
+			dest_game_object = (ushort*)gm_StartEntityQuery(*linked_list_ptr, 1, 0, (uint)*(ushort*)(param_1 + 0x18));
 		}
 		if (*(int*)(param_1 + 0x23) != 0 && dest_owner_entity != (short*)0) {
-			resolve_result = QueryEntitySum(*(int*)(dest_owner_entity + 0xbc), param_1[0x1e]);
+			resolve_result = gm_QueryEntitySum(*(int*)(dest_owner_entity + 0xbc), param_1[0x1e]);
 			if (resolve_result < *(int*)(param_1 + 0x1f) * *(int*)(param_1 + 0x23)) {
 				capacity_check = s_cm_ExSellObjekt___Not_enough_Cre_1002cd78;
 				error_code = 0x2d4f;
@@ -255,7 +255,7 @@ uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 			dest_existing_entity == (char*)0 &&
 			dest_dynamic_entity == (short*)0 &&
 			resolved_dynamic == (short*)0) {
-			resolve_result = CheckInventoryCapacity(
+			resolve_result = gm_CheckInventoryCapacity(
 				(char*)dest_owner_entity,
 				(uint)*(ushort*)(param_1 + 0x18),
 				*(int*)(param_1 + 0x1f)

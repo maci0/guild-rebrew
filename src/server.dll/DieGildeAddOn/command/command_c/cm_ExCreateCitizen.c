@@ -41,7 +41,7 @@
  *   }
  *   crt_thread_set_alt(*(int *)(param_1 + 0x22));
  *   if (*(int *)(param_1 + 0x17) != -1) {
- *     iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x17));
+ *     iVar1 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x17));
  *     *(int *)(param_1 + 0x17) = iVar1;
  *     puVar2 = gm_StartFilteredEntitySearch(1,1,iVar1);
  *     if (puVar2 == (ushort *)0x0) {
@@ -92,7 +92,7 @@ int __cdecl cm_ExCreateCitizen(int param_1, char* param_2)
 	crt_thread_set_alt(*(int*) (param_1 + 0x22));
 
 	if (*(int*) (param_1 + 0x17) != -1) {
-		parent_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x17));
+		parent_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x17));
 		*(int*) (param_1 + 0x17) = parent_id;
 		if (gm_StartFilteredEntitySearch(1, 1, parent_id) == (void*) 0) {
 			LogMessageInternal((char*) 0x1002c748, 0x5246, (char*) 0x1002d394, 1);

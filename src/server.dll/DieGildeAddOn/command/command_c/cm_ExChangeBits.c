@@ -1,7 +1,7 @@
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 208
-// BLOCKER: param_1 reuse pattern (ResolveEntityById writes through &param_1), switch dec chain offset (case 1 needs leading dec), register allocation (and edx,ecx vs and ecx,edx in case bodies)
+// BLOCKER: param_1 reuse pattern (gm_ResolveEntityById writes through &param_1), switch dec chain offset (case 1 needs leading dec), register allocation (and edx,ecx vs and ecx,edx in case bodies)
 
 #include "../command_internal.h"
 
@@ -30,9 +30,9 @@
  *   void *pvStack_4;
  *   
  *   iVar1 = param_1;
- *   iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10));
+ *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
  *   *(int *)(iVar1 + 0x10) = iVar2;
- *   iVar2 = ResolveEntityById((void **)&param_1,&pvStack_8,&pvStack_4,iVar2);
+ *   iVar2 = gm_ResolveEntityById((void **)&param_1,&pvStack_8,&pvStack_4,iVar2);
  *   if (iVar2 == 0) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x340d,
  *                        s_cm_ExChangeBits___Invalid_Id_1002d114,1);
@@ -79,10 +79,10 @@ int __cdecl cm_ExChangeBits(int param_1, char* param_2)
 	uchar bVal;
 	uint uVal;
 
-	entity_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+	entity_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
 	*(int*) (param_1 + 0x10) = entity_id;
 
-	ok = ResolveEntityById(&primary, &secondary, &tertiary, entity_id);
+	ok = gm_ResolveEntityById(&primary, &secondary, &tertiary, entity_id);
 	if (ok == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,

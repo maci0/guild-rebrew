@@ -22,7 +22,7 @@
  *   char *pcVar2;
  *
  *   *(undefined4 *)(param_1 + 0x10) = g_timestamp_0b6c;
- *   iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x14));
+ *   iVar1 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x14));
  *   *(int *)(param_1 + 0x14) = iVar1;
  *   pcVar2 = gm_AllocObjekt(iVar1,0x1b5,1);
  *   if (pcVar2 == (char *)0x0) {
@@ -62,7 +62,7 @@ int __cdecl cm_ExAllocThemaPredigt(int param_1, char* param_2)
 	char* dst;
 
 	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
-	field_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
+	field_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x14));
 	*(int*) (param_1 + 0x14) = field_id;
 	obj = gm_AllocObjekt(field_id, 0x1b5, 1);
 	if (obj == (char*) 0) {

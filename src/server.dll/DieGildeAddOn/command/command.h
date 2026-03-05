@@ -5,16 +5,16 @@
 #include "../../game_structs.h"
 
 /* Common command module declarations */
-extern int __cdecl QueuePlayerCommand(unsigned int* player, unsigned char* data);
-extern void __cdecl ClosePlayerConnection(char* player_ptr);
+extern int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+extern void __cdecl cm_ClosePlayerConnection(char* player_ptr);
 
 /* Search and lookup */
 extern char* __cdecl lb_SearchRecordTable(int record_id);
 
 /* Lobby commands (lobbycommands.c) */
 extern int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2);
-extern int __cdecl SendLobbyConfig(unsigned int* param_1, unsigned char* param_2);
-extern int __cdecl HandleLobbyCommands(char* player, char* msg);
+extern int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2);
+extern int __cdecl lb_HandleLobbyCommands(char* player, char* msg);
 extern int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2);
 
 /* Validation functions (command.c) */

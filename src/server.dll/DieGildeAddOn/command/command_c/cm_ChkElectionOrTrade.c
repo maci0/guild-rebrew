@@ -20,7 +20,7 @@
  *   if (*(int *)(param_1 + 0x10) == 0x636c6572) {
  *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
  *     if (puVar1 != (ushort *)0x0) {
- *       puVar1 = StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
+ *       puVar1 = gm_StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *       if (puVar1 != (ushort *)0x0) {
  *         return (uint)(g_something_1 - *(int *)(puVar1 + 0x14) < 2);
  *       }
@@ -29,7 +29,7 @@
  *   else if (*(int *)(param_1 + 0x10) == 0x62757920) {
  *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
  *     if (puVar1 != (ushort *)0x0) {
- *       puVar1 = StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
+ *       puVar1 = gm_StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *       if (puVar1 != (ushort *)0x0) {
  *         iVar2 = 0;
  *         puVar1 = puVar1 + 0xe;
@@ -50,7 +50,7 @@
 #include "../command_internal.h"
 
 extern ushort* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern ushort* __cdecl StartEntityQuery(int, int, int, int, int);
+extern ushort* __cdecl gm_StartEntityQuery(int, int, int, int, int);
 
 extern int g_something_1;
 
@@ -70,7 +70,7 @@ int __cdecl cm_ChkElectionOrTrade(int param_1)
 	if (*(int*) (param_1 + 0x10) == 0x636c6572) {
 		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
 		if (entity != (ushort*) 0x0) {
-			entity = StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
+			entity = gm_StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
 			if (entity != (ushort*) 0x0) {
 				return (int) (g_something_1 - *(int*) (entity + 0x14) <= 1);
 			}
@@ -79,7 +79,7 @@ int __cdecl cm_ChkElectionOrTrade(int param_1)
 	else if (*(int*) (param_1 + 0x10) == 0x62757920) {
 		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
 		if (entity != (ushort*) 0x0) {
-			entity = StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
+			entity = gm_StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
 			if (entity != (ushort*) 0x0) {
 				param_1 = *(int*) (param_1 + 0x1c);
 				idx = 0;

@@ -8,7 +8,7 @@
  * Ghidra decompilation is BROKEN (sizeInBytes=1).
  * Reverse engineered from target disassembly via rebrew asm.
  *
- * Blocker details: Only the first 20 bytes differ (prologue + get_field_by_type
+ * Blocker details: Only the first 20 bytes differ (prologue + gm_GetFieldByType
  * call setup). The compiler uses lea esi,[eax+0x10] to precompute the store
  * address instead of keeping param_1 in esi and using [esi+0x10] displacement.
  * It also chooses ecx for zero-extend instead of eax, and reorders the sub esp
@@ -34,9 +34,9 @@ int __cdecl cm_ExFree(int param_1, char *param_2)
 	ushort *dynEntity;
 
 	resolveResult = param_1;
-	fieldId = get_field_by_type((char *)resolveResult, (unsigned int)*(ushort *)(resolveResult + 0x10));
+	fieldId = gm_GetFieldByType((char *)resolveResult, (unsigned int)*(ushort *)(resolveResult + 0x10));
 	*(short *)(resolveResult + 0x10) = (short)fieldId;
-	resolveResult = ResolveEntityById((void **)&param_1, &objectEntity, &dynEntity, fieldId & 0xffff);
+	resolveResult = gm_ResolveEntityById((void **)&param_1, &objectEntity, &dynEntity, fieldId & 0xffff);
 	if (resolveResult == 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2a09, s_Invalid_Id_for_cmdt_FREE_in_cm_E_1002cc5c, 1);
 		return 1;

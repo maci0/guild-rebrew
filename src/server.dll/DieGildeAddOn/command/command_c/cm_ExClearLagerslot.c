@@ -6,7 +6,7 @@
 
 #include "../command_internal.h"
 
-extern ushort* __cdecl StartEntityQuery(int, int, int, uint);
+extern ushort* __cdecl gm_StartEntityQuery(int, int, int, uint);
 extern void __cdecl gm_RemoveObjectByType(char**, uint);
 extern void __cdecl LogMessageInternal(char*, uint, char*, int);
 
@@ -31,16 +31,16 @@ extern char s_cm_ExClearLagerslot___Lager_has_n_1002d054[];
  *   char *msg;
  *   
  *   psVar1 = param_1;
- *   iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 8));
+ *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 8));
  *   *(int *)(psVar1 + 8) = iVar2;
- *   iVar2 = ResolveEntityById((void **)0x0,&param_1,(void **)0x0,iVar2);
+ *   iVar2 = gm_ResolveEntityById((void **)0x0,&param_1,(void **)0x0,iVar2);
  *   if (iVar2 == 0) {
  *     msg = s_cm_ExClearLagerslot___Invalid__L_1002d088;
  *     line = 0x314b;
  *   }
  *   else {
  *     if ((*param_1 == 0x2a) || (*param_1 == 0x116)) {
- *       puVar3 = StartEntityQuery(*(int *)(param_1 + 10),1,0,(uint)(ushort)psVar1[10]);
+ *       puVar3 = gm_StartEntityQuery(*(int *)(param_1 + 10),1,0,(uint)(ushort)psVar1[10]);
  *       if (puVar3 == (ushort *)0x0) {
  *         return 1;
  *       }
@@ -69,9 +69,9 @@ int __cdecl cm_ExClearLagerslot(short* param_1, uchar* param_2)
 	ushort* query;
 
 	cmd = param_1;
-	field = get_field_by_type((char*) param_1, *(int*) (param_1 + 8));
+	field = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 8));
 	*(int*) (cmd + 8) = field;
-	if (ResolveEntityById((void**) 0x0, (void**) &param_1, (void**) 0x0, field) == 0) {
+	if (gm_ResolveEntityById((void**) 0x0, (void**) &param_1, (void**) 0x0, field) == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x314b,
@@ -91,7 +91,7 @@ int __cdecl cm_ExClearLagerslot(short* param_1, uchar* param_2)
 		return 1;
 	}
 
-	query = StartEntityQuery(*(int*) (param_1 + 10), 1, 0, (uint) (ushort) cmd[10]);
+	query = gm_StartEntityQuery(*(int*) (param_1 + 10), 1, 0, (uint) (ushort) cmd[10]);
 	if (query == (ushort*) 0x0) {
 		return 1;
 	}

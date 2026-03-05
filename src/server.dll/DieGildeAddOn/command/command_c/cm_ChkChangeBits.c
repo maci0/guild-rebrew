@@ -24,9 +24,9 @@
  *   void *local_4;
  *   
  *   iVar1 = param_1;
- *   iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10));
+ *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
  *   *(int *)(iVar1 + 0x10) = iVar2;
- *   iVar2 = ResolveEntityById((void **)&param_1,&local_4,&local_8,iVar2);
+ *   iVar2 = gm_ResolveEntityById((void **)&param_1,&local_4,&local_8,iVar2);
  *   if (iVar2 == 0) {
  *     msg = s_cm_ChkChangeBits___Invalid_Id_1002ca54;
  *     line = 0x250d;
@@ -67,9 +67,9 @@ int __cdecl cm_ChkChangeBits(int param_1, char* param_2)
 	void* tertiary;
 
 	cmd = param_1;
-	field = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+	field = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
 	*(int*) (cmd + 0x10) = field;
-	if (ResolveEntityById((void**) &param_1, &secondary, &tertiary, field) == 0) {
+	if (gm_ResolveEntityById((void**) &param_1, &secondary, &tertiary, field) == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x250d,

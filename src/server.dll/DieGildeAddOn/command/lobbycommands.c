@@ -32,7 +32,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2)
         if ((*param_1 & 0x6000) != 0) {
                 LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x244, s_invalid_client_state_1002d740, 1);
                 *param_2 = 2;
-                if (QueuePlayerCommand(param_1, param_2) == -1) {
+                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
                         return -1;
                 }
                 return 0;
@@ -58,7 +58,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2)
                 src_ptr = src_ptr + 1;
                 dst_ptr = dst_ptr + 1;
         }
-        counter = QueuePlayerCommand(param_1, param_2);
+        counter = cm_QueuePlayerCommand(param_1, param_2);
         if (counter == -1) {
                 return -1;
         }
@@ -83,7 +83,7 @@ int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
         if (*param_1 & 0x6000) {
                 LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command", 0x264, "invalid client state", 1);
                 *param_2 = 2;
-                if (QueuePlayerCommand(param_1, param_2) == -1) {
+                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
                         return -1;
                 }
                 return 0;
@@ -91,7 +91,7 @@ int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
 
         if (param_1[1] != *(unsigned int*) (param_2 + 0x14)) {
                 *param_2 = 2;
-                if (QueuePlayerCommand(param_1, param_2) == -1) {
+                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
                         return -1;
                 }
                 return 0;
@@ -101,7 +101,7 @@ int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
         if (value > 1) {
                 LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command", 0x279, "value too large", 1);
                 *param_2 = 2;
-                if (QueuePlayerCommand(param_1, param_2) == -1) {
+                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
                         return -1;
                 }
                 return 0;
@@ -119,7 +119,7 @@ int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
         do {
                 slot_flags = slot_ptr->flags;
                 if ((slot_flags & 1) && (slot_flags & 0x200)) {
-                        if (QueuePlayerCommand((unsigned int*)slot_ptr, param_2) == -1) {
+                        if (cm_QueuePlayerCommand((unsigned int*)slot_ptr, param_2) == -1) {
                                 return -1;
                         }
                 }
@@ -135,12 +135,12 @@ int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
 // BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // SIZE: 670
 // FUNCTION: SERVER 0x100147b0
-// HandleLobbyCommands
+// lb_HandleLobbyCommands
 
 /* Game function - handles player join request (lobbycommands.c) */
 // BLOCKER_DELTA: 552
 
-int __cdecl HandleLobbyCommands(char* player, char* msg)
+int __cdecl lb_HandleLobbyCommands(char* player, char* msg)
 {
         int slots[8];
         char buf[0x100];
@@ -164,7 +164,7 @@ int __cdecl HandleLobbyCommands(char* player, char* msg)
 
         LogMessageInternal((char*) 0x1002d70c, line, (char*) 0x1002d740, 1);
         *msg = 2;
-        result = QueuePlayerCommand((unsigned int*)player, (unsigned char*)msg);
+        result = cm_QueuePlayerCommand((unsigned int*)player, (unsigned char*)msg);
         return (result != -1) - 1;
 
 main_logic:
@@ -182,10 +182,10 @@ main_logic:
         if (count >= *(int*) 0x11764084) {
                 LogMessageInternal((char*) 0x1002d70c, 0x2b1, (char*) 0x1002d848, 1);
                 *msg = 2;
-                if (QueuePlayerCommand((unsigned int*)player, (unsigned char*)msg) == -1) {
+                if (cm_QueuePlayerCommand((unsigned int*)player, (unsigned char*)msg) == -1) {
                         return -1;
                 }
-                ClosePlayerConnection(player);
+                cm_ClosePlayerConnection(player);
                 return 0;
         }
 
@@ -252,7 +252,7 @@ do_join:
         do {
                 flags = *(int*) p;
                 if ((flags & 1) && (flags & 0x200)) {
-                        if (QueuePlayerCommand((unsigned int*)p, (unsigned char*)msg) == -1) {
+                        if (cm_QueuePlayerCommand((unsigned int*)p, (unsigned char*)msg) == -1) {
                                 return -1;
                         }
                 }
@@ -281,7 +281,7 @@ int __cdecl lb_BroadcastStateChange(unsigned int* param_1, unsigned char* param_
         if ((*param_1 & 0x6000) != 0) {
                 LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command", 0x2fc, "invalid client state", 1);
                 *param_2 = 2;
-                queue_result = QueuePlayerCommand(param_1, param_2);
+                queue_result = cm_QueuePlayerCommand(param_1, param_2);
                 if (queue_result == -1) {
                         return -1;
                 }
@@ -298,7 +298,7 @@ int __cdecl lb_BroadcastStateChange(unsigned int* param_1, unsigned char* param_
         player_slot = (unsigned int*)g_player_slots_base;
         do {
                 if ((*player_slot & 1) != 0 && (*player_slot & 0x200) != 0) {
-                        if (QueuePlayerCommand(player_slot, param_2) == -1) {
+                        if (cm_QueuePlayerCommand(player_slot, param_2) == -1) {
                                 return -1;
                         }
                 }
@@ -323,14 +323,14 @@ int __cdecl lb_HandleDataTransfer(unsigned int* param_1, unsigned char* param_2)
         if ((*param_1 & 0x6000) != 0) {
                 LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x31d, s_invalid_client_state_1002d740, 1);
                 *param_2 = 2;
-                if (QueuePlayerCommand(param_1, param_2) == -1) {
+                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
                         return -1;
                 }
                 return 0;
         }
         if (param_1[1] != *(unsigned int*) (param_2 + 0x14)) {
                 *param_2 = 2;
-                if (QueuePlayerCommand(param_1, param_2) == -1) {
+                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
                         return -1;
                 }
                 return 0;
@@ -353,7 +353,7 @@ int __cdecl lb_HandleDataTransfer(unsigned int* param_1, unsigned char* param_2)
         slot_iter = (unsigned int*)g_player_slots_base;
         do {
                 if (((*slot_iter & 1) != 0) && ((*slot_iter & 0x200) != 0)) {
-                        queue_result = QueuePlayerCommand(slot_iter, param_2);
+                        queue_result = cm_QueuePlayerCommand(slot_iter, param_2);
                         if (queue_result == -1) {
                                 return -1;
                         }
@@ -379,7 +379,7 @@ int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
         if (*param_1 & 0x6000) {
                 LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command", 0x354, "invalid client state", 1);
                 *param_2 = 2;
-                result = QueuePlayerCommand(param_1, param_2);
+                result = cm_QueuePlayerCommand(param_1, param_2);
                 return (result != -1) - 1;
         }
 
@@ -391,7 +391,7 @@ int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
                 i++;
                 if (slot_ptr >= (unsigned int*)((char*)g_player_slots + 4)) {
                         *param_2 = 2;
-                        result = QueuePlayerCommand(param_1, param_2);
+                        result = cm_QueuePlayerCommand(param_1, param_2);
                         return (result != -1) - 1;
                 }
         }
@@ -405,7 +405,7 @@ int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
                 memcpy(param_2 + 0x14, &g_entity_sync_data[off * 4], 0x57);
         }
 
-        result = QueuePlayerCommand(param_1, param_2);
+        result = cm_QueuePlayerCommand(param_1, param_2);
         return (result != -1) - 1;
 }
 
@@ -428,7 +428,7 @@ int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
         if ((*param_1 & 0x6000) != 0) {
                 LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x37b, s_invalid_client_state_1002d740, 1);
                 *param_2 = 2;
-                slot_index = QueuePlayerCommand(param_1, param_2);
+                slot_index = cm_QueuePlayerCommand(param_1, param_2);
                 if (slot_index == -1) {
                         return -1;
                 }
@@ -442,19 +442,19 @@ int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
                         slot_index = slot_index + 1;
                         if (id_ptr > (int*)((char*)g_player_slots + 4)) {
                                 *param_2 = 2;
-                                queue_result = QueuePlayerCommand(param_1, param_2);
+                                queue_result = cm_QueuePlayerCommand(param_1, param_2);
                                 if (queue_result == -1) {
                                         return -1;
                                 }
                                 return 0;
                         }
                 }
-                queue_result = QueuePlayerCommand((unsigned int*)&g_player_slots_base[slot_index], param_2);
+                queue_result = cm_QueuePlayerCommand((unsigned int*)&g_player_slots_base[slot_index], param_2);
                 if (queue_result == -1) {
                         return -1;
                 }
                 if (g_player_slots_base[slot_index].id != param_1[1]) {
-                        slot_index = QueuePlayerCommand(param_1, param_2);
+                        slot_index = cm_QueuePlayerCommand(param_1, param_2);
                         if (slot_index == -1) {
                                 return -1;
                         }
@@ -464,7 +464,7 @@ int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
                 player_slot = (unsigned int*)g_player_slots_base;
                 do {
                         if (((*player_slot & 1) != 0) && ((*player_slot & 0x200) != 0)) {
-                                slot_index = QueuePlayerCommand(player_slot, param_2);
+                                slot_index = cm_QueuePlayerCommand(player_slot, param_2);
                                 if (slot_index == -1) {
                                         return -1;
                                 }
@@ -498,7 +498,7 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2)
                 cmd_result = lb_SendLobbyConfig(param_1, (unsigned char*) param_2);
                 return cmd_result;
         case 2:
-                cmd_result = HandleLobbyCommands((char*)param_1, (char*) param_2);
+                cmd_result = lb_HandleLobbyCommands((char*)param_1, (char*) param_2);
                 return cmd_result;
         case 3:
                 cmd_result = lb_BroadcastStateChange(param_1, (unsigned char*) param_2);

@@ -44,10 +44,10 @@ int __cdecl cm_ChkChangeAttribute(int param_1, char* param_2)
 	char* field;
 	int rec;
 
-	id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+	id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
 	*(int*) (param_1 + 0x10) = id;
 
-	if (ResolveEntityById(&ent_a, &ent_b, &ent_c, id) == 0) {
+	if (gm_ResolveEntityById(&ent_a, &ent_b, &ent_c, id) == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x243d,

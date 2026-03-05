@@ -19,7 +19,7 @@
  *   
  *   puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
  *   if (puVar1 != (ushort *)0x0) {
- *     puVar2 = StartEntityQuery(0,2,7,4,0x1d);
+ *     puVar2 = gm_StartEntityQuery(0,2,7,4,0x1d);
  *     while (puVar2 != (ushort *)0x0) {
  *       if (*(int *)(puVar2 + 0xe) == *(int *)((int)puVar1 + 1)) {
  *         gm_RemoveEntityLink((int)puVar2);
@@ -53,7 +53,7 @@
 #include "../command_internal.h"
 
 extern ushort* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern ushort* __cdecl StartEntityQuery(int, int, int, int, int);
+extern ushort* __cdecl gm_StartEntityQuery(int, int, int, int, int);
 extern ushort* __cdecl gm_NextEntityQueryMatch(void);
 extern void __cdecl gm_RemoveEntityLink(int);
 extern int __cdecl gm_CleanupBuildingEntity(uchar*);
@@ -80,7 +80,7 @@ int __cdecl cm_ExDestroyBuilding(int param_1, char* param_2)
 		return 1;
 	}
 
-	puVar2 = StartEntityQuery(0, 2, 7, 4, 0x1d);
+	puVar2 = gm_StartEntityQuery(0, 2, 7, 4, 0x1d);
 	while (puVar2 != (ushort*) 0x0) {
 		if (*(int*) (puVar2 + 0xe) == *(int*) ((int) puVar1 + 1)) {
 			gm_RemoveEntityLink((int) puVar2);

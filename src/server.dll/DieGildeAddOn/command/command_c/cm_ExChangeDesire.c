@@ -21,9 +21,9 @@ int __cdecl cm_ExChangeDesire(uchar* param_1, uchar* param_2)
 	uint idx;
 
 	cmd = param_1;
-	resolve_ok = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+	resolve_ok = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
 	*(int*) (cmd + 0x10) = resolve_ok;
-	resolve_ok = ResolveEntityById((void**) 0x0, (void**) 0x0, (void**) &param_1, resolve_ok);
+	resolve_ok = gm_ResolveEntityById((void**) 0x0, (void**) 0x0, (void**) &param_1, resolve_ok);
 	if (resolve_ok == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,

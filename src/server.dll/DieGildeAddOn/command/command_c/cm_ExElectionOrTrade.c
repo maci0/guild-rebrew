@@ -41,7 +41,7 @@
  *     if (puVar1 == (ushort *)0x0) {
  *       return 1;
  *     }
- *     puVar1 = StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
+ *     puVar1 = gm_StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *     if (puVar1 == (ushort *)0x0) {
  *       return 1;
  *     }
@@ -66,7 +66,7 @@
  */
 
 extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern void* __cdecl StartEntityQuery(int, int, int, int, int);
+extern void* __cdecl gm_StartEntityQuery(int, int, int, int, int);
 extern int g_10035880;
 
 // FUNCTION: SERVER 0x1000fc10
@@ -87,7 +87,7 @@ int __cdecl cm_ExElectionOrTrade(int param_1, char* param_2)
 		if (entity == (void*) 0x0) {
 			return 1;
 		}
-		entity = StartEntityQuery(*(int*) ((char*) entity + 0x5d), 2, 6, 0, 0x12c);
+		entity = gm_StartEntityQuery(*(int*) ((char*) entity + 0x5d), 2, 6, 0, 0x12c);
 		if (entity == (void*) 0x0) {
 			return 1;
 		}
@@ -110,7 +110,7 @@ int __cdecl cm_ExElectionOrTrade(int param_1, char* param_2)
 		if (entity == (void*) 0x0) {
 			return 1;
 		}
-		entity = StartEntityQuery(*(int*) ((char*) entity + 0x5d), 2, 6, 0, 0x12c);
+		entity = gm_StartEntityQuery(*(int*) ((char*) entity + 0x5d), 2, 6, 0, 0x12c);
 		if (entity == (void*) 0x0) {
 			return 1;
 		}

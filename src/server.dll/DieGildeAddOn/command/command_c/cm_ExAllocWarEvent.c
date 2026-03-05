@@ -38,7 +38,7 @@
  *   if (pvVar2 == (void *)0x0) {
  *     return 1;
  *   }
- *   puVar3 = StartEntityQuery(*(int *)((int)pvVar2 + 0x5d),1,0,0xca);
+ *   puVar3 = gm_StartEntityQuery(*(int *)((int)pvVar2 + 0x5d),1,0,0xca);
  *   do {
  *     if (puVar3 == (ushort *)0x0) {
  * LAB_100101b7:
@@ -81,7 +81,7 @@ typedef struct player_slot {
 extern player_slot g_player_slot_0[];
 
 extern void* __cdecl gm_SearchTable67(int);
-extern ushort* __cdecl StartEntityQuery(int, int, int, int);
+extern ushort* __cdecl gm_StartEntityQuery(int, int, int, int);
 extern ushort* __cdecl gm_NextEntityQueryMatch(void);
 extern ushort* __cdecl gm_AllocObjekt(int, int, int);
 
@@ -109,7 +109,7 @@ int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)
 		return 1;
 	}
 
-	evt = (char*) StartEntityQuery(*(int*) ((int) target + 0x5d), 1, 0, 0xca);
+	evt = (char*) gm_StartEntityQuery(*(int*) ((int) target + 0x5d), 1, 0, 0xca);
 	do {
 		if (evt == (char*) 0) {
 			goto alloc;

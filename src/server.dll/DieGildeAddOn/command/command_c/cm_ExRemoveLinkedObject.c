@@ -6,7 +6,7 @@
 
 #include "../command_internal.h"
 
-extern ushort* __cdecl StartEntityQuery(int, int, int, int, int);
+extern ushort* __cdecl gm_StartEntityQuery(int, int, int, int, int);
 extern int __cdecl gm_RemoveLinkedNodeById(int*, int);
 
 // FUNCTION: SERVER 0x1000f0d0
@@ -22,14 +22,14 @@ int __cdecl cm_ExRemoveLinkedObject(int param_1, char *param_2)
 	if (param_2 != (char *)0x0) {
 		*param_2 = '\x02';
 	}
-	ResolveEntityById((void **)&param_1, (void **)&param_2, &dynEntity, *(int *)(result + 0x10));
+	gm_ResolveEntityById((void **)&param_1, (void **)&param_2, &dynEntity, *(int *)(result + 0x10));
 	if (param_1 != 0) {
 		if (*(int *)(result + 0x14) == -1) {
 			nodeId = *(int *)(result + 0x18);
 			param_1 = param_1 + 0x5d;
 			goto LAB_1000f154;
 		}
-		param_2 = (char *)StartEntityQuery(*(int *)(param_1 + 0x5d), 2, 6, 1, *(int *)(result + 0x14));
+		param_2 = (char *)gm_StartEntityQuery(*(int *)(param_1 + 0x5d), 2, 6, 1, *(int *)(result + 0x14));
 		if (param_2 == (char *)0x0) {
 			return -2;
 		}

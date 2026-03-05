@@ -21,9 +21,9 @@
  *   void *pvStack_4;
  *   
  *   iVar1 = param_1;
- *   iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10));
+ *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
  *   *(int *)(iVar1 + 0x10) = iVar2;
- *   iVar2 = ResolveEntityById(&pvStack_4,&pvStack_8,(void **)&param_1,iVar2);
+ *   iVar2 = gm_ResolveEntityById(&pvStack_4,&pvStack_8,(void **)&param_1,iVar2);
  *   if (iVar2 == 0) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x347f,
  *                        s_cm_ExChangeFloat___Invalid_Id_1002d134,1);
@@ -63,9 +63,9 @@ int __cdecl cm_ExChangeFloat(int param_1, char* param_2)
 	void* primary;
 
 	cmd = param_1;
-	resolve_ok = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+	resolve_ok = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
 	*(int*) (cmd + 0x10) = resolve_ok;
-	resolve_ok = ResolveEntityById(&primary, &secondary, (void**) &param_1, resolve_ok);
+	resolve_ok = gm_ResolveEntityById(&primary, &secondary, (void**) &param_1, resolve_ok);
 	if (resolve_ok == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,

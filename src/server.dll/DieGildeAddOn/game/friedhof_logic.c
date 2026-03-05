@@ -23,7 +23,7 @@ extern char g_1002d474;
 extern int AllocGraveyardField(unsigned char*);
 extern void gv_Free3Fields(int);
 extern void __cdecl game_free(void*);
-extern int __cdecl gv_ResolveEntityById(int* out_slot, int* out_person, int* out_building, int entity_id);
+extern int __cdecl gm_ResolveEntityById(int* out_slot, int* out_person, int* out_building, int entity_id);
 extern int __cdecl gv_GetSlotEntry(int, int, unsigned char);
 extern void gm_SubObjektNoKill(unsigned int, unsigned int, unsigned int);
 extern void AddOrAccumulateObject(unsigned int, unsigned int, unsigned int);
@@ -855,7 +855,7 @@ unsigned int AssignProductionSlot(int param_1)
 	unsigned char* building_entity_ptr;
 
 	worker_slot_capacity = param_1;
-	gv_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
+	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
 		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 == *(unsigned int*) 0x1003546c)) {
 		return 0xffffffff;
@@ -871,7 +871,7 @@ unsigned int AssignProductionSlot(int param_1)
 	if (slot_category_check == 0) {
 		return 0xfffffffc;
 	}
-	gv_ResolveEntityById(0, 0, (int*) &param_1, *(unsigned int*) (worker_slot_capacity + 4));
+	gm_ResolveEntityById(0, 0, (int*) &param_1, *(unsigned int*) (worker_slot_capacity + 4));
 	if (param_1 == 0) {
 		return 0xfffffffa;
 	}
@@ -982,7 +982,7 @@ unsigned int HireProductionWorker(int param_1)
 	unsigned char* building_entity_ptr;
 
 	cmd_ptr_saved = param_1;
-	gv_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
+	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
 		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 == *(unsigned int*) 0x1003546c)) {
 		return 0xffffffff;
@@ -997,7 +997,7 @@ unsigned int HireProductionWorker(int param_1)
 	if (slot_or_active_check == 0) {
 		return 0xfffffffc;
 	}
-	gv_ResolveEntityById(0, 0, (int*) &param_1, *(unsigned int*) (cmd_ptr_saved + 4));
+	gm_ResolveEntityById(0, 0, (int*) &param_1, *(unsigned int*) (cmd_ptr_saved + 4));
 	if (param_1 == 0) {
 		return 0xfffffffa;
 	}
@@ -1058,7 +1058,7 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 	unsigned char* building_entity_ptr;
 
 	cmd_ptr_saved = param_1;
-	gv_ResolveEntityById(&building_entity_ptr, 0, 0, *(param_1 + 8));
+	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(param_1 + 8));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
 		((*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0) ==
 		 *(unsigned int*) 0x1003546c)) {
@@ -1075,7 +1075,7 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 	if (slot_active_result == 0) {
 		return 0xfffffffc;
 	}
-	gv_ResolveEntityById(0, 0, (int*) &param_1, *(cmd_ptr_saved + 4));
+	gm_ResolveEntityById(0, 0, (int*) &param_1, *(cmd_ptr_saved + 4));
 	if (param_1 == 0) {
 		return 0xfffffffa;
 	}
@@ -1108,7 +1108,7 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 
 // GLOBALS: SERVER 0x1003546c
 
-int __cdecl gv_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(int param_1, int param_2);
 int __cdecl gv_GetSlotEntry(int param_1, int param_2, int param_3);
 
@@ -1124,7 +1124,7 @@ int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 	new_worker_entity_id = -1;
 	new_worker_job_type = 0xffff;
 	cmd_ptr_saved = param_1;
-	gv_ResolveEntityById((void**) &param_1, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
+	gm_ResolveEntityById((void**) &param_1, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
 	if (((param_1 == (unsigned char*) 0) || (*(unsigned short*) (param_1 + 0x27) == 0xffff)) ||
 		((char*) &DAT_100358a0 + (unsigned int) *(unsigned short*) (param_1 + 0x27) * 0x10e == (char*) DAT_1003546c)) {
 		return -1;
@@ -1141,7 +1141,7 @@ int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 		return -4;
 	}
 	if (*(int*) (cmd_ptr_saved + 4) != -1) {
-		gv_ResolveEntityById((void**) 0, (void**) 0, &new_worker_entity_ptr, *(int*) (cmd_ptr_saved + 4));
+		gm_ResolveEntityById((void**) 0, (void**) 0, &new_worker_entity_ptr, *(int*) (cmd_ptr_saved + 4));
 		if (new_worker_entity_ptr == (void*) 0) {
 			return -6;
 		}
@@ -1180,7 +1180,7 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 	void* entity;
 	void* target_entity;
 
-	gv_ResolveEntityById((int*) &entity, 0, 0, *(int*) (param_1 + 8));
+	gm_ResolveEntityById((int*) &entity, 0, 0, *(int*) (param_1 + 8));
 	if (entity != 0) {
 		if (*(unsigned short*) ((char*) entity + 0x27) != 0xFFFF) {
 			unsigned int slot_val;
@@ -1200,7 +1200,7 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 					return -3;
 				}
 
-				gv_ResolveEntityById(0, 0, (int*) &target_entity, *(int*) (param_1 + 4));
+				gm_ResolveEntityById(0, 0, (int*) &target_entity, *(int*) (param_1 + 4));
 				if (target_entity == 0) {
 					return -6;
 				}
@@ -1257,7 +1257,7 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 
 // GLOBALS: SERVER 0x1003546c
 
-int __cdecl gv_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(int param_1, int param_2);
 int __cdecl gv_GetSlotEntry(int param_1, int param_2, int param_3);
 
@@ -1269,7 +1269,7 @@ int __cdecl gv_UpdateProductionProgress(unsigned char* param_1)
 	unsigned int new_progress_value;
 
 	cmd_ptr_saved = param_1;
-	gv_ResolveEntityById((void**) &param_1, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
+	gm_ResolveEntityById((void**) &param_1, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
 	if (((param_1 == (unsigned char*) 0) || (*(unsigned short*) (param_1 + 0x27) == 0xffff)) ||
 		((char*) &DAT_100358a0 + (unsigned int) *(unsigned short*) (param_1 + 0x27) * 0x10e == (char*) DAT_1003546c)) {
 		return -1;
@@ -1312,7 +1312,7 @@ int __cdecl gv_ValidateEntityAction(unsigned char* param_1)
 	unsigned char type_byte;
 	int result;
 
-	gv_ResolveEntityById((int*) &entity, 0, 0, *(int*) (param_1 + 8));
+	gm_ResolveEntityById((int*) &entity, 0, 0, *(int*) (param_1 + 8));
 	if (entity != 0) {
 		if (*(unsigned short*) ((char*) entity + 0x27) != 0xFFFF) {
 			slot_val = (unsigned int) *(unsigned short*) ((char*) entity + 0x27);
@@ -1352,11 +1352,11 @@ unsigned int gv_MoveSlotEntry(int param_1)
 	int dst_slot_entry_ptr;
 
 	cmd_ptr_saved = param_1;
-	gv_ResolveEntityById(0, 0, &param_1, *(int*) cmd_ptr_saved);
+	gm_ResolveEntityById(0, 0, &param_1, *(int*) cmd_ptr_saved);
 	if (param_1 == 0) {
 		return 0xfffffffa;
 	}
-	gv_ResolveEntityById((int) &building_entity_ptr, 0, 0, *(int*) (cmd_ptr_saved + 4));
+	gm_ResolveEntityById((int) &building_entity_ptr, 0, 0, *(int*) (cmd_ptr_saved + 4));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
 		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 == *(unsigned int*) 0x1003546c)) {
 		return 0xffffffff;
@@ -1482,7 +1482,7 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 		return 0xfffffffa;
 	}
 	search_loop_idx = 0;
-	gv_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
+	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
 	if (building_entity_ptr == 0 || *(unsigned short*) (building_entity_ptr + 0x27) == 0xffff ||
 		*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + (int) &DAT_100358a0 == DAT_1003546c) {
 		return 0xffffffff;

@@ -16,10 +16,10 @@
  */
 
 /* Entity resolution and lookup */
-extern int __cdecl get_field_by_type(char*, int);
+extern int __cdecl gm_GetFieldByType(char*, int);
 extern int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 extern int __cdecl gm_LookupEntityRecordById(int);
-extern int __cdecl QueryEntitySum(int, int);
+extern int __cdecl gm_QueryEntitySum(int, int);
 
 /* CRT / thread */
 extern int __cdecl rand(void);

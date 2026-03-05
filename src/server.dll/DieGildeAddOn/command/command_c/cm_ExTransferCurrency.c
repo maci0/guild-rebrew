@@ -18,7 +18,7 @@
  *   
  *   *(undefined4 *)(param_1 + 0x18) = g_timestamp_0b6c;
  *   if (*(int *)(param_1 + 0x14) != -1) {
- *     pvVar1 = (void *)get_field_by_type((char *)param_1,*(int *)(param_1 + 0x14));
+ *     pvVar1 = (void *)gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x14));
  *     *(void **)(param_1 + 0x14) = pvVar1;
  *     iVar2 = gm_SubObjekt(pvVar1,(uint)*(ushort *)
  *                                     (&g_currency_type_array +
@@ -29,7 +29,7 @@
  *     }
  *   }
  *   if (*(int *)(param_1 + 0x10) != -1) {
- *     iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10));
+ *     iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
  *     *(int *)(param_1 + 0x10) = iVar2;
  *     pvVar1 = AddOrAccumulateObject
  *                        (iVar2,(uint)*(ushort *)
@@ -70,7 +70,7 @@ int __cdecl cm_ExTransferCurrency(int param_1, char* param_2)
 	*(int*) (param_1 + 0x18) = g_timestamp_0b6c;
 
 	if (*(int*) (param_1 + 0x14) != -1) {
-		entity_ptr = (void*) get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
+		entity_ptr = (void*) gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x14));
 		*(void**) (param_1 + 0x14) = entity_ptr;
 		field_result = gm_SubObjekt(
 			entity_ptr,
@@ -84,7 +84,7 @@ int __cdecl cm_ExTransferCurrency(int param_1, char* param_2)
 	}
 
 	if (*(int*) (param_1 + 0x10) != -1) {
-		field_result = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+		field_result = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
 		*(int*) (param_1 + 0x10) = field_result;
 		entity_ptr = AddOrAccumulateObject(
 			field_result,

@@ -12,8 +12,8 @@ extern int __cdecl AcceptConnections(void);
 extern void __cdecl InitBuildingTypeTable(void);
 extern int __cdecl ProcessReceiveData(void);
 extern int __cdecl ProcessSendData(void);
-extern int __cdecl ClosePlayerConnection(unsigned int* player_slot);
-extern int __cdecl QueuePlayerCommand(unsigned int* player_slot, unsigned char* cmd_data);
+extern int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
+extern int __cdecl cm_QueuePlayerCommand(unsigned int* player_slot, unsigned char* cmd_data);
 extern void __cdecl SendBroadcastPacket(int port, void* config_data);
 extern void __cdecl RecvGameSavegame(void);
 extern void __cdecl CleanupSockets(void);
@@ -232,7 +232,7 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 					line = 0x176;
 					goto log_error_and_cleanup;
 				}
-				ClosePlayerConnection(player_slot);
+				cm_ClosePlayerConnection(player_slot);
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 		} while ((char*) player_slot < (char*) 0x114ffe20);
@@ -273,7 +273,7 @@ send_start_commands:
 		if (*player_slot != 0) {
 			cmd_buffer_primary[0] = 4;
 			*(unsigned int*) (cmd_buffer_primary + 0x10) = (unsigned int) ((((*player_slot & 8) != 0) ? 0 : 1) + 1);
-			if (QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
+			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 				goto cleanup_and_exit;
 			}
 
@@ -281,7 +281,7 @@ send_start_commands:
 			*(unsigned int*) (cmd_buffer_primary + 9) = (unsigned int) i;
 			cmd_buffer_primary[0x10] = 7;
 			i = i + 1;
-			if (QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
+			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 				goto cleanup_and_exit;
 			}
 		}
@@ -330,7 +330,7 @@ send_start_commands:
 					if (*transfer_progress == 0xffffffff) {
 						cmd_buffer_primary[0] = 8;
 						*(unsigned int*) (cmd_buffer_primary + 0x10) = *(unsigned int*) 0x101deac0;
-						if (QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
+						if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 							goto cleanup_and_exit;
 						}
 						*transfer_progress = 0;
@@ -345,7 +345,7 @@ send_start_commands:
 							payload_src = payload_src + 1;
 						}
 
-						if (QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
+						if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 							LogMessageInternal((char*) 0x100298b0, 0x228, (char*) 0x100297e4, 1);
 						}
 						else {
@@ -426,7 +426,7 @@ send_start_commands:
 	do {
 		if ((*player_slot & 1) != 0) {
 			cmd_buffer_secondary[0] = 4;
-			if (QueuePlayerCommand(player_slot, cmd_buffer_secondary) == -1) {
+			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_secondary) == -1) {
 				goto cleanup_and_exit;
 			}
 		}
@@ -469,7 +469,7 @@ send_start_commands:
 			if ((*player_slot != 0) && ((*player_slot & 0x40) != 0)) {
 				LogMessageInternal((char*) 0x100298b0, 0x2ce, (char*) 0x100297a0, 1);
 				*player_slot = *player_slot & 0xffffffbf;
-				if (QueuePlayerCommand(player_slot, (unsigned char*) ((char*) player_slot + 0x264154)) == -1) {
+				if (cm_QueuePlayerCommand(player_slot, (unsigned char*) ((char*) player_slot + 0x264154)) == -1) {
 					goto cleanup_and_exit;
 				}
 			}
@@ -519,7 +519,7 @@ send_start_commands:
 				*(unsigned int*) (cmd_buffer_primary + 0x10) = *(unsigned int*) 0x10035880;
 				*(unsigned int*) (cmd_buffer_primary + 0x18) = *(unsigned int*) 0x10035888;
 				*(unsigned short*) (cmd_buffer_primary + 0x1c) = *(unsigned short*) 0x1003588c;
-				if (QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
+				if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 					goto cleanup_and_exit;
 				}
 			}
@@ -535,7 +535,7 @@ send_start_commands:
 					if (phase_complete) {
 						phase_complete = 0;
 					}
-					if (QueuePlayerCommand(player_slot, cmd_buffer_secondary) == -1) {
+					if (cm_QueuePlayerCommand(player_slot, cmd_buffer_secondary) == -1) {
 						goto cleanup_and_exit;
 					}
 					*(int*) 0x11764090 = 0;
@@ -885,9 +885,9 @@ do_accept:
 // SIZE: 96
 // ANALYSIS: Shutdown socket (SD_BOTH) | Close socket handle
 // FUNCTION: SERVER 0x1000a2e0
-// ClosePlayerConnection
+// cm_ClosePlayerConnection
 
-int __cdecl ClosePlayerConnection(unsigned int* player_slot)
+int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot)
 {
 	shutdown(player_slot[5], 2);
 	closesocket(player_slot[5]);
@@ -932,7 +932,7 @@ int __cdecl ReceivePacketHeader(unsigned int* param_1)
 		tick = GetTickCount();
 		if (*(unsigned int*) ((char*) param_1 + 0x150) < tick) {
 			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x52a, "Connection timed out.\n", 1);
-			ClosePlayerConnection(param_1);
+			cm_ClosePlayerConnection(param_1);
 			return -1;
 		}
 		return 0;
@@ -955,7 +955,7 @@ add_and_check:
 		tick = GetTickCount();
 		if (*(unsigned int*) ((char*) param_1 + 0x150) < tick) {
 			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x552, "Connection timed out.\n", 1);
-			ClosePlayerConnection(param_1);
+			cm_ClosePlayerConnection(param_1);
 			return -1;
 		}
 		return 0;
@@ -967,7 +967,7 @@ add_and_check:
 			return 0;
 		}
 		LogWinsockError(wsa_err);
-		ClosePlayerConnection(param_1);
+		cm_ClosePlayerConnection(param_1);
 		return -1;
 	}
 
@@ -1011,7 +1011,7 @@ int __cdecl SendPlayerData(unsigned int* param_1)
 		tick = GetTickCount();
 		if (param_1[84] < tick) {
 			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\online", 0x58f, "send timeout", 1);
-			ClosePlayerConnection(param_1);
+			cm_ClosePlayerConnection(param_1);
 			return -1;
 		}
 	}
@@ -1019,7 +1019,7 @@ int __cdecl SendPlayerData(unsigned int* param_1)
 		if (WSAGetLastError() == 0x2733) {
 			return 0;
 		}
-		ClosePlayerConnection(param_1);
+		cm_ClosePlayerConnection(param_1);
 		return -1;
 	}
 	else if (result > 0) {
@@ -1082,7 +1082,7 @@ int __cdecl ProcessReceiveData(void)
 					if (*(unsigned char*) (conn + 6) == 3) {
 						conn[0xb] = conn[1];
 						conn[0xc] = 2 - ((*conn & 0x400) != 0);
-						if (QueuePlayerCommand(conn, (unsigned char*) (conn + 6)) == -1) {
+						if (cm_QueuePlayerCommand(conn, (unsigned char*) (conn + 6)) == -1) {
 							return -1;
 						}
 					}
@@ -1125,7 +1125,7 @@ int __cdecl ProcessReceiveData(void)
 					LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x609, logbuf_hi, 1);
 					*conn = *conn & 0xffffff7f;
 					pktbuf[0] = 2;
-					if (QueuePlayerCommand(conn, pktbuf) == -1) {
+					if (cm_QueuePlayerCommand(conn, pktbuf) == -1) {
 						return -1;
 					}
 					goto done_inner;
@@ -1164,8 +1164,8 @@ admin_loop:
 	}
 	if ((*(unsigned char*) 0x114ffe20 & 0x80) != 0) {
 		pktbuf[0] = 2;
-		QueuePlayerCommand((unsigned int*) 0x114ffe20, pktbuf);
-		ClosePlayerConnection((unsigned int*) 0x114ffe20);
+		cm_QueuePlayerCommand((unsigned int*) 0x114ffe20, pktbuf);
+		cm_ClosePlayerConnection((unsigned int*) 0x114ffe20);
 		return 0;
 	}
 	if ((*(unsigned char*) 0x114ffe20 & 1) != 0) {
@@ -1260,10 +1260,10 @@ int __cdecl QueueCommandForProcessing(int player_slot, char* cmd_data)
 // SIZE: 170
 // ANALYSIS: Takes a raw command payload, pulls an available CommandPacket struct from outgoing_cmd_freelist, populates it, and appends it to the tail of outgoing_cmd_queue. | Get free command buffer from pool
 // FUNCTION: SERVER 0x1000A9A0
-// QueuePlayerCommand
+// cm_QueuePlayerCommand
 void* memcpy(void*, const void*, unsigned int);
 
-int __cdecl QueuePlayerCommand(int player_slot, char* cmd_data)
+int __cdecl cm_QueuePlayerCommand(int player_slot, char* cmd_data)
 {
 	char* buf;
 	int tail;
@@ -1415,7 +1415,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 					goto advance;
 				}
 				*(unsigned char*) node = 2;
-				result = QueuePlayerCommand(&g_connections[player_idx * 0x264264], node);
+				result = cm_QueuePlayerCommand(&g_connections[player_idx * 0x264264], node);
 				if (result != -1) {
 					goto advance;
 				}
@@ -1432,7 +1432,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 			player_idx = (unsigned int) node[3];
 			conn = &g_connections[player_idx * 0x264264];
 			if ((*conn & 1) != 0) {
-				result = QueuePlayerCommand(conn, node);
+				result = cm_QueuePlayerCommand(conn, node);
 				if (result == -1) {
 					return -1;
 				}
@@ -1443,7 +1443,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 			conn = &g_connections[0];
 			do {
 				if (i != (unsigned int) node[3] && (*conn & 1) != 0) {
-					result = QueuePlayerCommand(conn, node);
+					result = cm_QueuePlayerCommand(conn, node);
 					if (result == -1) {
 						return -1;
 					}

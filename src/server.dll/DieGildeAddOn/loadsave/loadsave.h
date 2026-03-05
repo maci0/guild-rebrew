@@ -5,16 +5,16 @@
 #include "../../game_structs.h"
 
 /* Savegame Header */
-extern int __cdecl LoadSavegameHeader(char* filename, void* header);
+extern int __cdecl ls_LoadSavegameHeader(char* filename, void* header);
 
 /* Persistence for Game Modules */
-extern int __cdecl LoadTownData(int handle);
-extern int __cdecl LoadGraveyardData(int handle);
-extern int __cdecl LoadBuildingEntityState(int handle);
+extern int __cdecl ls_LoadTownData(int handle);
+extern int __cdecl ls_LoadGraveyardData(int handle);
+extern int __cdecl ls_LoadBuildingEntityState(int handle);
 
 /* Entity state restoration */
-extern int __cdecl LoadExistingEntities(int handle);
-extern int __cdecl LoadDynamicEntities(int handle);
+extern int __cdecl ls_LoadExistingEntities(int handle);
+extern int __cdecl ls_LoadDynamicEntities(int handle);
 
 /* ID mapping */
 extern void* __cdecl ls_ID2Ptr(int id);

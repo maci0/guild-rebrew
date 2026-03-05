@@ -11,7 +11,7 @@
 #endif
 
 extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern void* __cdecl StartEntityQuery(int, int, int, int, int);
+extern void* __cdecl gm_StartEntityQuery(int, int, int, int, int);
 
 extern int g_1003546c;
 extern char g_100358a0[];
@@ -38,7 +38,7 @@ int __cdecl cm_ExJoinLeaveElection(int param_1, char *param_2)
 	if (cmd == 0x6a6f696e) {
 		entity = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
 		if (entity != (char *)0 &&
-			(entity = (char *)StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d),
+			(entity = (char *)gm_StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d),
 			 entity != (char *)0)) {
 			slots = (int *)(entity + 0x1c);
 			i = 0;
@@ -74,7 +74,7 @@ int __cdecl cm_ExJoinLeaveElection(int param_1, char *param_2)
 	if (cmd == 0x6c656176) {
 		entity = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
 		if (entity != (char *)0 &&
-			(entity = (char *)StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d),
+			(entity = (char *)gm_StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d),
 			 entity != (char *)0)) {
 			i = 0;
 			p = (int *)(entity + 0x1c);
@@ -110,7 +110,7 @@ int __cdecl cm_ExJoinLeaveElection(int param_1, char *param_2)
 				}
 			}
 
-			entity = (char *)StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d);
+			entity = (char *)gm_StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d);
 			if (entity != (char *)0) {
 				if (param_2 != (char *)0) {
 					*param_2 = '\x01';

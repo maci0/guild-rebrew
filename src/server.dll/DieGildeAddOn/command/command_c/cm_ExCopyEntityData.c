@@ -37,9 +37,9 @@ int __cdecl cm_ExCopyEntityData(int cmd_ptr, char* response)
 	int idx;
 	int temp;
 
-	rel_value = get_field_by_type((char*) cmd_ptr, *(int*) (cmd_ptr + 0x10));
+	rel_value = gm_GetFieldByType((char*) cmd_ptr, *(int*) (cmd_ptr + 0x10));
 	*(int*) (cmd_ptr + 0x10) = rel_value;
-	target_field = get_field_by_type((char*) cmd_ptr, *(int*) (cmd_ptr + 0x14));
+	target_field = gm_GetFieldByType((char*) cmd_ptr, *(int*) (cmd_ptr + 0x14));
 	ebx_type = *(int*) (cmd_ptr + 0x1c);
 	*(int*) (cmd_ptr + 0x14) = target_field;
 

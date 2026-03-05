@@ -28,9 +28,9 @@
  *   if (*(int *)(param_1 + 0x14) == -1) {
  *     return 0;
  *   }
- *   iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x14));
+ *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x14));
  *   *(int *)(iVar1 + 0x14) = iVar2;
- *   iVar2 = ResolveEntityById((void **)&param_1,&local_8,&local_4,iVar2);
+ *   iVar2 = gm_ResolveEntityById((void **)&param_1,&local_8,&local_4,iVar2);
  *   if (iVar2 == 0) {
  *     msg = s_cm_ChkMoveCredits____Invalid__qu_1002c7a4;
  *     line = 0x22f9;
@@ -47,7 +47,7 @@
  *     else {
  *       piVar3 = (int *)(param_1 + 0x5d);
  *     }
- *     iVar2 = QueryEntitySum(*piVar3,CONCAT31((int3)((uint)extraout_ECX >> 8),
+ *     iVar2 = gm_QueryEntitySum(*piVar3,CONCAT31((int3)((uint)extraout_ECX >> 8),
  *                                             *(undefined1 *)(iVar1 + 0x1c)));
  *     if (-1 < iVar2 - *(int *)(iVar1 + 0x1d)) {
  *       return 0;
@@ -76,9 +76,9 @@ int __cdecl cm_ChkMoveCredits(int param_1, char* param_2)
 	if (*(int*) (param_1 + 0x14) == -1) {
 		return 0;
 	}
-	value = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
+	value = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x14));
 	*(int*) (cmd + 0x14) = value;
-	if (ResolveEntityById((void**) &param_1, &building, &area, value) == 0) {
+	if (gm_ResolveEntityById((void**) &param_1, &building, &area, value) == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x22f9,
@@ -103,7 +103,7 @@ int __cdecl cm_ChkMoveCredits(int param_1, char* param_2)
 		}
 	}
 
-	value = QueryEntitySum(*sum_ptr, (unsigned int) *(unsigned char*) (cmd + 0x1c));
+	value = gm_QueryEntitySum(*sum_ptr, (unsigned int) *(unsigned char*) (cmd + 0x1c));
 	if (value - *(int*) (cmd + 0x1d) >= 0) {
 		return 0;
 	}

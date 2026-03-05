@@ -12,7 +12,7 @@
 #endif
 
 extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern void* __cdecl StartEntityQuery(int, int, int, int, int);
+extern void* __cdecl gm_StartEntityQuery(int, int, int, int, int);
 
 extern int g_1003546c;
 extern char g_100358a0[];
@@ -30,7 +30,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* param_1)
 	if (action == 0x6a6f696e) {
 		entity = gm_StartFilteredEntitySearch(1, 1, param_1[6]);
 		if (entity != (void*)0) {
-			entity = StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
+			entity = gm_StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
 			if (entity != (void*)0) {
 				player = param_1[5];
 				slots = (int*)((char*)entity + 0x1c);
@@ -54,7 +54,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* param_1)
 	else if (action == 0x6c656176) {
 		entity = gm_StartFilteredEntitySearch(1, 1, param_1[6]);
 		if (entity != (void*)0) {
-			entity = StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
+			entity = gm_StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
 			if (entity != (void*)0) {
 				player = param_1[5];
 				slots = (int*)((char*)entity + 0x1c);
@@ -88,7 +88,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* param_1)
 			}
 		}
 
-		entity = StartEntityQuery(*(int*)((char*)entity + 0x5d), 2, 6, 0, 0x12d);
+		entity = gm_StartEntityQuery(*(int*)((char*)entity + 0x5d), 2, 6, 0, 0x12d);
 		return entity == (void*)0;
 	}
 

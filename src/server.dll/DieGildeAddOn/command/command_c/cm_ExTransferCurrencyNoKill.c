@@ -17,7 +17,7 @@
  *   
  *   *(undefined4 *)(param_1 + 0x18) = g_timestamp_0b6c;
  *   if (*(int *)(param_1 + 0x14) != -1) {
- *     iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x14));
+ *     iVar1 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x14));
  *     *(int *)(param_1 + 0x14) = iVar1;
  *     gm_SubObjektNoKill
  *               (iVar1,(uint)*(ushort *)
@@ -25,7 +25,7 @@
  *                *(int *)(param_1 + 0x1d));
  *   }
  *   if (*(int *)(param_1 + 0x10) != -1) {
- *     iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x10));
+ *     iVar1 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
  *     *(int *)(param_1 + 0x10) = iVar1;
  *     AddOrAccumulateObject
  *               (iVar1,(uint)*(ushort *)
@@ -52,7 +52,7 @@ int __cdecl cm_ExTransferCurrencyNoKill(int param_1, char* param_2)
 
 	*(int*) (param_1 + 0x18) = g_timestamp_0b6c;
 	if (*(int*) (param_1 + 0x14) != -1) {
-		field_result = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
+		field_result = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x14));
 		*(int*) (param_1 + 0x14) = field_result;
 		gm_SubObjektNoKill(
 			field_result,
@@ -62,7 +62,7 @@ int __cdecl cm_ExTransferCurrencyNoKill(int param_1, char* param_2)
 		);
 	}
 	if (*(int*) (param_1 + 0x10) != -1) {
-		field_result = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+		field_result = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
 		*(int*) (param_1 + 0x10) = field_result;
 		AddOrAccumulateObject(
 			field_result,

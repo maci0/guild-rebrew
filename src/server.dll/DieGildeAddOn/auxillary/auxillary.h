@@ -4,14 +4,14 @@
 #include "../../game_common.h"
 
 /* Record and Zone Lookup */
-extern void* __cdecl FindRecord(int id);
-extern void* __cdecl find_zone_record(int zone_id);
-extern int __cdecl CheckZoneAvailability(int zone_id, int type);
+extern void* __cdecl plt_FindRecord(int id);
+extern void* __cdecl plt_FindZoneRecord(int zone_id);
+extern int __cdecl plt_CheckZoneAvailability(int zone_id, int type);
 
 /* Plant and Environment */
 extern void __cdecl plt_SetPlantMap(void* map_data);
 
 /* Low-level table utilities */
-extern void* __cdecl table_lookup(int index);
+extern void* __cdecl plt_TableLookup(int index);
 
 #endif /* AUXILLARY_H */

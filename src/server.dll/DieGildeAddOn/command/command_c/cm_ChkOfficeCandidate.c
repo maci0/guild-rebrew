@@ -15,18 +15,18 @@
  * {
  *   int iVar1;
  *   
- *   iVar1 = ValidateOfficeCandidate((int *)((int)obj + 0x10));
+ *   iVar1 = amt_ValidateOfficeCandidate((int *)((int)obj + 0x10));
  *   return (uint)(iVar1 == 0);
  * }
  */
 
-extern int __cdecl ValidateOfficeCandidate(int*);
+extern int __cdecl amt_ValidateOfficeCandidate(int*);
 
 // FUNCTION: SERVER 0x1000d020
 int __cdecl cm_ChkOfficeCandidate(void* obj)
 {
 	int result;
 
-	result = ValidateOfficeCandidate((int*) ((int) obj + 0x10));
+	result = amt_ValidateOfficeCandidate((int*) ((int) obj + 0x10));
 	return result == 0;
 }

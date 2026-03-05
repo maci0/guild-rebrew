@@ -557,7 +557,7 @@ int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 // FUNCTION: SERVER 0x1000c600
 // ahm_InitRandomEntity
 
-int __cdecl ahm_RandomBelow(unsigned short max);
+int __cdecl RandomBelow(unsigned short max);
 
 char* __cdecl ahm_InitRandomEntity(void)
 {
@@ -567,7 +567,7 @@ char* __cdecl ahm_InitRandomEntity(void)
 	int i;
 	int offset;
 
-	idx = (unsigned short) ahm_RandomBelow(0x20);
+	idx = (unsigned short) RandomBelow(0x20);
 	tries = 0x20;
 	do {
 		if (*(char*) (0x1002a2c2 + idx * 0xf4) == '\0') {
@@ -864,8 +864,8 @@ check_result:
 // ORIGIN: GAME
 // SIZE: 130
 // FUNCTION: SERVER 0x1000CA90
-// get_field_by_type
-int __cdecl get_field_by_type(char* p, int type)
+// gm_GetFieldByType
+int __cdecl gm_GetFieldByType(char* p, int type)
 {
 	unsigned int idx;
 	if (type == -2) {

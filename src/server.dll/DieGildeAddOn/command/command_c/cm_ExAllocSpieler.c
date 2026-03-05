@@ -34,7 +34,7 @@
  *     puVar2 = (ushort *)0x0;
  *   }
  *   else {
- *     iVar1 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x1f));
+ *     iVar1 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x1f));
  *     *(int *)(param_1 + 0x1f) = iVar1;
  *     puVar2 = gm_StartFilteredEntitySearch(1,1,iVar1);
  *     if (puVar2 == (ushort *)0x0) {
@@ -88,7 +88,7 @@ int __cdecl cm_ExAllocSpieler(int param_1, char* param_2)
 		seed = 0;
 	}
 	else {
-		field_id = get_field_by_type((char*) param_1, seed);
+		field_id = gm_GetFieldByType((char*) param_1, seed);
 		*(int*) (param_1 + 0x1f) = field_id;
 		seed = (int) gm_StartFilteredEntitySearch(1, 1, field_id);
 		if (seed == 0) {
