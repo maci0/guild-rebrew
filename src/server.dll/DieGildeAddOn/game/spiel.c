@@ -3807,62 +3807,33 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 }
 
 // ORIGIN: GAME
-// STATUS: RELOC
+// STATUS: MATCHING
 // SIZE: 102
-#define NAKED_FUNC __declspec(naked)
 
 // FUNCTION: SERVER 0x10019a70
 // gm_EntityQuerySum
 
-int NAKED_FUNC __cdecl gm_EntityQuerySum(int param_1)
+int __cdecl gm_EntityQuerySum(int param_1)
 {
-	__asm {
-		push ecx
-		mov eax, dword ptr [esp + 8]
-		push esi
-		xor esi, esi
-		push 0x2a
-		mov ecx, dword ptr [eax + 0x5d]
-		push esi
-		push 6
-		push 2
-		push ecx
-		mov dword ptr [esp + 0x18], esi
-		call gm_StartEntityQuery
-		add esp, 0x14
-		test eax, eax
-		je L_done
-		mov edx, dword ptr [eax + 0x14]
-		push 5
-		push 1
-		push edx
-		call gm_StartEntityQuery
-		add esp, 0xc
-		test eax, eax
-		je L_done
+	int sum;
+	char* entity;
+	char* sub;
 
-	L_loop:
-		mov cl, byte ptr [eax + 0x12]
-		xor edx, edx
-		mov dx, word ptr [eax]
-		push ecx
-		push edx
-		call gm_CalculateProductionValue
-		fiadd dword ptr [esp + 0xc]
-		add esp, 8
-		call __ftol
-		mov esi, eax
-		mov dword ptr [esp + 4], esi
-		call gm_NextEntityQueryMatch
-		test eax, eax
-		jne L_loop
-
-	L_done:
-		mov eax, esi
-		pop esi
-		pop ecx
-		ret
+	sum = 0;
+	entity = (char*) gm_StartEntityQuery(*(int*) ((char*) param_1 + 0x5d), 2, 0, 0x2a, 6);
+	if (entity == (char*) 0) {
+		return sum;
 	}
+	sub = (char*) gm_StartEntityQuery(*(int*) (entity + 0x14), 1, 5);
+	if (sub == (char*) 0) {
+		return sum;
+	}
+	do {
+		sum =
+			(int) (gm_CalculateProductionValue(*(unsigned short*) sub, *(unsigned char*) (sub + 0x12)) + (double) sum);
+		sub = (char*) gm_NextEntityQueryMatch();
+	} while (sub != (char*) 0);
+	return sum;
 }
 
 // STATUS: RELOC

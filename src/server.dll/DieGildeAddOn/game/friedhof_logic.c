@@ -342,341 +342,233 @@ int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 }
 
 // ORIGIN: GAME
-// STATUS: RELOC
+// STATUS: MATCHING
 // SIZE: 832
 // FUNCTION: SERVER 0x100109d0
 // AllocGraveyardField
 
-#ifdef __clang__
-#define REBREW_NAKED
-#else
-#define REBREW_NAKED __declspec(naked)
-#endif
-
-int REBREW_NAKED __cdecl AllocGraveyardField(int param_1)
+int __cdecl AllocGraveyardField(int param_1)
 {
-	__asm {
-        mov     eax, dword ptr [esp+4]
-        xor     ecx, ecx
-        push    ebx
-        push    ebp
-        mov     cl, byte ptr [eax]
-        push    esi
-        push    edi
-        lea     eax, [ecx+ecx*2]
-        shl     eax, 4
-        add     eax, ecx
-        lea     edx, [eax+eax*2]
-        mov     eax, dword ptr [g_entity_type_table]
-        add     eax, ecx
-        lea     ebp, [eax+edx*4]
-        mov     al, byte ptr [eax+edx*4]
-        cmp     al, 1Dh
-        jne     L_ret_zero
-        mov     al, byte ptr [ebp+247h]
-        cmp     al, 1
-        jb      L_ret_zero
-        cmp     al, 3
-        ja      L_ret_zero
+	unsigned int btype;
+	char* type_entry;
+	unsigned char tier;
+	char* result;
+	char* slot_1c;
+	char* slot_20;
+	int slot_1c_size;
+	int slot_20_size;
+	int i;
+	char* eax_ptr;
+	char* ecx_ptr;
 
-        push    offset g_1002d474
-        push    24h
-        call    m_AllocTracked
-        mov     esi, eax
-        xor     ebx, ebx
-        add     esp, 8
-        cmp     esi, ebx
-        je      L_ret_zero
-
-        mov     ecx, 9
-        xor     eax, eax
-        mov     edi, esi
-        push    offset g_1002d45c
-        rep stosd
-        mov     ecx, dword ptr [esp+18h]
-        mov     edx, dword ptr [ecx+1]
-        xor     ecx, ecx
-        mov     dword ptr [esi], edx
-        mov     al, byte ptr [ebp+247h]
-        mov     dword ptr [esi+4], eax
-        mov     cl, byte ptr [ebp+247h]
-        mov     eax, dword ptr [g_1002575c + ecx*4]
-        lea     edx, [eax+eax*4]
-        shl     edx, 2
-        push    edx
-        call    m_AllocTracked
-        mov     edi, eax
-        add     esp, 8
-        cmp     edi, ebx
-        mov     dword ptr [esi+1Ch], edi
-        je      short L_cleanup
-
-        xor     eax, eax
-        push    offset g_1002d444
-        mov     al, byte ptr [ebp+247h]
-        mov     eax, dword ptr [g_1002575c + eax*4]
-        lea     ecx, [eax+eax*4]
-        xor     eax, eax
-        shl     ecx, 2
-        mov     edx, ecx
-        shr     ecx, 2
-        rep stosd
-        mov     ecx, edx
-        and     ecx, 3
-        rep stosb
-        xor     eax, eax
-        mov     al, byte ptr [ebp+247h]
-        mov     eax, dword ptr [g_1002576c + eax*4]
-        mov     ecx, eax
-        shl     ecx, 4
-        add     ecx, eax
-        shl     ecx, 2
-        push    ecx
-        call    m_AllocTracked
-        mov     edi, eax
-        add     esp, 8
-        cmp     edi, ebx
-        mov     dword ptr [esi+20h], edi
-        jne     short L_init_slots
-
-    L_cleanup:
-        mov     eax, dword ptr [esi+1Ch]
-        cmp     eax, ebx
-        je      short L_check_20
-        push    eax
-        call    m_FreeTracked
-        add     esp, 4
-        mov     dword ptr [esi+1Ch], ebx
-
-    L_check_20:
-        mov     eax, dword ptr [esi+20h]
-        cmp     eax, ebx
-        je      short L_free_result
-        push    eax
-        call    m_FreeTracked
-        add     esp, 4
-        mov     dword ptr [esi+20h], ebx
-
-    L_free_result:
-        push    esi
-        call    m_FreeTracked
-        add     esp, 4
-
-    L_ret_zero:
-        pop     edi
-        pop     esi
-        pop     ebp
-        xor     eax, eax
-        pop     ebx
-        ret
-
-    L_init_slots:
-        xor     edx, edx
-        mov     dl, byte ptr [ebp+247h]
-        mov     eax, dword ptr [g_1002576c + edx*4]
-        mov     ecx, eax
-        shl     ecx, 4
-        add     ecx, eax
-        xor     eax, eax
-        shl     ecx, 2
-        mov     edx, ecx
-        shr     ecx, 2
-        rep stosd
-        mov     ecx, edx
-        and     ecx, 3
-        rep stosb
-
-        xor     ecx, ecx
-        xor     eax, eax
-        mov     cl, byte ptr [ebp+247h]
-        or      edi, 0FFFFFFFFh
-        cmp     dword ptr [g_1002576c + ecx*4], ebx
-        jle     short L_after_init
-
-        xor     ecx, ecx
-    L_init_loop:
-        mov     edx, dword ptr [esi+20h]
-        inc     eax
-        mov     dword ptr [ecx+edx], edi
-        xor     edx, edx
-        mov     dl, byte ptr [ebp+247h]
-        add     ecx, 44h
-        cmp     eax, dword ptr [g_1002576c + edx*4]
-        jl      short L_init_loop
-
-    L_after_init:
-        mov     edx, dword ptr [esi+4]
-        mov     eax, dword ptr [esi+1Ch]
-        mov     ecx, dword ptr [esi+20h]
-        cmp     edx, 1
-        mov     dword ptr [esi+8], eax
-        mov     byte ptr [esi+18h], 1
-        mov     byte ptr [esi+19h], bl
-        mov     byte ptr [esi+1Ah], bl
-        mov     byte ptr [esi+1Bh], bl
-        jne     short L_not_type1
-
-        lea     edx, [eax+0A0h]
-        mov     dword ptr [esi+10h], ebx
-        mov     dword ptr [esi+0Ch], edx
-        mov     dword ptr [esi+14h], ebx
-        mov     ebp, 8
-        mov     edx, 0FFFFh
-
-    L_t1_loop1:
-        mov     dword ptr [eax], ebx
-        mov     dword ptr [eax+10h], ecx
-        mov     dword ptr [eax+4], edi
-        mov     word ptr [eax+8], dx
-        add     ecx, 44h
-        add     eax, 14h
-        dec     ebp
-        jne     short L_t1_loop1
-
-        mov     ebp, 4
-
-    L_t1_loop2:
-        mov     dword ptr [eax], 1
-        mov     dword ptr [eax+10h], ecx
-        mov     dword ptr [eax+4], edi
-        mov     word ptr [eax+8], dx
-        add     ecx, 88h
-        add     eax, 14h
-        dec     ebp
-        jne     short L_t1_loop2
-
-        mov     eax, dword ptr [esp+14h]
-        pop     edi
-        mov     dword ptr [eax+65h], esi
-        mov     eax, esi
-        pop     esi
-        pop     ebp
-        pop     ebx
-        ret
-
-    L_not_type1:
-        cmp     edx, 2
-        jne     L_type3
-
-        lea     edx, [eax+0F0h]
-        mov     dword ptr [esi+14h], ebx
-        mov     dword ptr [esi+0Ch], edx
-        lea     edx, [eax+168h]
-        mov     dword ptr [esi+10h], edx
-        mov     ebp, 0Ch
-        mov     edx, 0FFFFh
-
-    L_t2_loop1:
-        mov     dword ptr [eax], ebx
-        mov     dword ptr [eax+10h], ecx
-        mov     dword ptr [eax+4], edi
-        mov     word ptr [eax+8], dx
-        add     ecx, 44h
-        add     eax, 14h
-        dec     ebp
-        jne     short L_t2_loop1
-
-        mov     ebp, 6
-
-    L_t2_loop2:
-        mov     dword ptr [eax], 1
-        mov     dword ptr [eax+10h], ecx
-        mov     dword ptr [eax+4], edi
-        mov     word ptr [eax+8], dx
-        add     ecx, 88h
-        add     eax, 14h
-        dec     ebp
-        jne     short L_t2_loop2
-
-        mov     ebp, 2
-
-    L_t2_loop3:
-        mov     dword ptr [eax], 2
-        mov     dword ptr [eax+10h], ecx
-        mov     dword ptr [eax+4], edi
-        mov     word ptr [eax+8], dx
-        add     ecx, 110h
-        add     eax, 14h
-        dec     ebp
-        jne     short L_t2_loop3
-
-        mov     eax, dword ptr [esp+14h]
-        pop     edi
-        mov     dword ptr [eax+65h], esi
-        mov     eax, esi
-        pop     esi
-        pop     ebp
-        pop     ebx
-        ret
-
-    L_type3:
-        lea     edx, [eax+140h]
-        mov     ebp, 10h
-        mov     dword ptr [esi+0Ch], edx
-        lea     edx, [eax+1E0h]
-        mov     dword ptr [esi+10h], edx
-        lea     edx, [eax+230h]
-        mov     dword ptr [esi+14h], edx
-        mov     edx, 0FFFFh
-
-    L_t3_loop1:
-        mov     dword ptr [eax], ebx
-        mov     dword ptr [eax+10h], ecx
-        mov     dword ptr [eax+4], edi
-        mov     word ptr [eax+8], dx
-        add     ecx, 44h
-        add     eax, 14h
-        dec     ebp
-        jne     short L_t3_loop1
-
-        mov     ebp, 8
-
-    L_t3_loop2:
-        mov     dword ptr [eax], 1
-        mov     dword ptr [eax+10h], ecx
-        mov     dword ptr [eax+4], edi
-        mov     word ptr [eax+8], dx
-        add     ecx, 88h
-        add     eax, 14h
-        dec     ebp
-        jne     short L_t3_loop2
-
-        mov     ebp, 4
-
-    L_t3_loop3:
-        mov     dword ptr [eax], 2
-        mov     dword ptr [eax+10h], ecx
-        mov     dword ptr [eax+4], edi
-        mov     word ptr [eax+8], dx
-        add     ecx, 110h
-        add     eax, 14h
-        dec     ebp
-        jne     short L_t3_loop3
-
-        mov     ebp, 2
-
-    L_t3_loop4:
-        mov     dword ptr [eax], 3
-        mov     dword ptr [eax+10h], ecx
-        mov     dword ptr [eax+4], edi
-        mov     word ptr [eax+8], dx
-        add     ecx, 220h
-        add     eax, 14h
-        dec     ebp
-        jne     short L_t3_loop4
-
-        mov     eax, dword ptr [esp+14h]
-        pop     edi
-        mov     dword ptr [eax+65h], esi
-        mov     eax, esi
-        pop     esi
-        pop     ebp
-        pop     ebx
-        ret
+	btype = *(unsigned char*) param_1;
+	type_entry = (char*) (g_entity_type_table + btype + btype * 0x24c);
+	if (*type_entry != '\x1d') {
+		return 0;
 	}
-}
+	tier = *(unsigned char*) (type_entry + 0x247);
+	if (tier < 1 || tier > 3) {
+		return 0;
+	}
 
-#undef REBREW_NAKED
+	result = (char*) m_AllocTracked(0x24, &g_1002d474);
+	if (result == (char*) 0) {
+		return 0;
+	}
+
+	/* zero-fill the 0x24-byte struct (9 dwords) */
+	{
+		int* fill = (int*) result;
+		for (i = 9; i != 0; i--) {
+			*fill = 0;
+			fill = fill + 1;
+		}
+	}
+
+	*(int*) result = *(int*) (param_1 + 1);
+	*(int*) (result + 4) = (unsigned int) *(unsigned char*) (type_entry + 0x247);
+
+	/* allocate slot_1c: g_1002575c[tier] * 0x14 bytes */
+	slot_1c_size = g_1002575c[*(unsigned char*) (type_entry + 0x247)] * 0x14;
+	slot_1c = (char*) m_AllocTracked(slot_1c_size, &g_1002d45c);
+	*(int*) (result + 0x1c) = (int) slot_1c;
+	if (slot_1c == (char*) 0) {
+		goto cleanup;
+	}
+
+	/* zero-fill slot_1c */
+	{
+		int total = g_1002575c[*(unsigned char*) (type_entry + 0x247)] * 0x14;
+		int dwords = total >> 2;
+		int rem = total & 3;
+		int* dp = (int*) slot_1c;
+		char* bp;
+		for (i = dwords; i != 0; i--) {
+			*dp = 0;
+			dp = dp + 1;
+		}
+		bp = (char*) dp;
+		for (i = rem; i != 0; i--) {
+			*bp = 0;
+			bp = bp + 1;
+		}
+	}
+
+	/* allocate slot_20: g_1002576c[tier] * 0x44 bytes */
+	slot_20_size = g_1002576c[*(unsigned char*) (type_entry + 0x247)] * 0x44;
+	slot_20 = (char*) m_AllocTracked(slot_20_size, &g_1002d444);
+	*(int*) (result + 0x20) = (int) slot_20;
+	if (slot_20 == (char*) 0) {
+		goto cleanup;
+	}
+
+	/* zero-fill slot_20 */
+	{
+		int total = g_1002576c[*(unsigned char*) (type_entry + 0x247)] * 0x44;
+		int dwords = total >> 2;
+		int rem = total & 3;
+		int* dp = (int*) slot_20;
+		char* bp;
+		for (i = dwords; i != 0; i--) {
+			*dp = 0;
+			dp = dp + 1;
+		}
+		bp = (char*) dp;
+		for (i = rem; i != 0; i--) {
+			*bp = 0;
+			bp = bp + 1;
+		}
+	}
+
+	/* init slot_20 entries: set first dword of each 0x44-byte entry to -1 */
+	if (g_1002576c[*(unsigned char*) (type_entry + 0x247)] > 0) {
+		int offset = 0;
+		i = 0;
+		do {
+			*(int*) (*(int*) (result + 0x20) + offset) = -1;
+			i = i + 1;
+			offset = offset + 0x44;
+		} while (i < g_1002576c[*(unsigned char*) (type_entry + 0x247)]);
+	}
+
+	/* set up struct fields and category pointers */
+	eax_ptr = (char*) *(int*) (result + 0x1c);
+	ecx_ptr = (char*) *(int*) (result + 0x20);
+	*(int*) (result + 8) = (int) eax_ptr;
+	*(char*) (result + 0x18) = 1;
+	*(char*) (result + 0x19) = 0;
+	*(char*) (result + 0x1a) = 0;
+	*(char*) (result + 0x1b) = 0;
+
+	if (*(int*) (result + 4) == 1) {
+		/* Tier 1: 8 category-0 slots (stride 0x44), 4 category-1 slots (stride 0x88) */
+		*(int*) (result + 0x10) = 0;
+		*(int*) (result + 0x0c) = (int) (eax_ptr + 0xa0);
+		*(int*) (result + 0x14) = 0;
+		for (i = 8; i != 0; i--) {
+			*(int*) eax_ptr = 0;
+			*(int*) (eax_ptr + 0x10) = (int) ecx_ptr;
+			*(int*) (eax_ptr + 4) = -1;
+			*(unsigned short*) (eax_ptr + 8) = 0xffff;
+			ecx_ptr = ecx_ptr + 0x44;
+			eax_ptr = eax_ptr + 0x14;
+		}
+		for (i = 4; i != 0; i--) {
+			*(int*) eax_ptr = 1;
+			*(int*) (eax_ptr + 0x10) = (int) ecx_ptr;
+			*(int*) (eax_ptr + 4) = -1;
+			*(unsigned short*) (eax_ptr + 8) = 0xffff;
+			ecx_ptr = ecx_ptr + 0x88;
+			eax_ptr = eax_ptr + 0x14;
+		}
+		*(int*) (param_1 + 0x65) = (int) result;
+		return (int) result;
+	}
+
+	if (*(int*) (result + 4) == 2) {
+		/* Tier 2: 12 cat-0 (0x44), 6 cat-1 (0x88), 2 cat-2 (0x110) */
+		*(int*) (result + 0x14) = 0;
+		*(int*) (result + 0x0c) = (int) (eax_ptr + 0xf0);
+		*(int*) (result + 0x10) = (int) (eax_ptr + 0x168);
+		for (i = 0xc; i != 0; i--) {
+			*(int*) eax_ptr = 0;
+			*(int*) (eax_ptr + 0x10) = (int) ecx_ptr;
+			*(int*) (eax_ptr + 4) = -1;
+			*(unsigned short*) (eax_ptr + 8) = 0xffff;
+			ecx_ptr = ecx_ptr + 0x44;
+			eax_ptr = eax_ptr + 0x14;
+		}
+		for (i = 6; i != 0; i--) {
+			*(int*) eax_ptr = 1;
+			*(int*) (eax_ptr + 0x10) = (int) ecx_ptr;
+			*(int*) (eax_ptr + 4) = -1;
+			*(unsigned short*) (eax_ptr + 8) = 0xffff;
+			ecx_ptr = ecx_ptr + 0x88;
+			eax_ptr = eax_ptr + 0x14;
+		}
+		for (i = 2; i != 0; i--) {
+			*(int*) eax_ptr = 2;
+			*(int*) (eax_ptr + 0x10) = (int) ecx_ptr;
+			*(int*) (eax_ptr + 4) = -1;
+			*(unsigned short*) (eax_ptr + 8) = 0xffff;
+			ecx_ptr = ecx_ptr + 0x110;
+			eax_ptr = eax_ptr + 0x14;
+		}
+		*(int*) (param_1 + 0x65) = (int) result;
+		return (int) result;
+	}
+
+	/* Tier 3: 16 cat-0 (0x44), 8 cat-1 (0x88), 4 cat-2 (0x110), 2 cat-3 (0x220) */
+	*(int*) (result + 0x0c) = (int) (eax_ptr + 0x140);
+	*(int*) (result + 0x10) = (int) (eax_ptr + 0x1e0);
+	*(int*) (result + 0x14) = (int) (eax_ptr + 0x230);
+	for (i = 0x10; i != 0; i--) {
+		*(int*) eax_ptr = 0;
+		*(int*) (eax_ptr + 0x10) = (int) ecx_ptr;
+		*(int*) (eax_ptr + 4) = -1;
+		*(unsigned short*) (eax_ptr + 8) = 0xffff;
+		ecx_ptr = ecx_ptr + 0x44;
+		eax_ptr = eax_ptr + 0x14;
+	}
+	for (i = 8; i != 0; i--) {
+		*(int*) eax_ptr = 1;
+		*(int*) (eax_ptr + 0x10) = (int) ecx_ptr;
+		*(int*) (eax_ptr + 4) = -1;
+		*(unsigned short*) (eax_ptr + 8) = 0xffff;
+		ecx_ptr = ecx_ptr + 0x88;
+		eax_ptr = eax_ptr + 0x14;
+	}
+	for (i = 4; i != 0; i--) {
+		*(int*) eax_ptr = 2;
+		*(int*) (eax_ptr + 0x10) = (int) ecx_ptr;
+		*(int*) (eax_ptr + 4) = -1;
+		*(unsigned short*) (eax_ptr + 8) = 0xffff;
+		ecx_ptr = ecx_ptr + 0x110;
+		eax_ptr = eax_ptr + 0x14;
+	}
+	for (i = 2; i != 0; i--) {
+		*(int*) eax_ptr = 3;
+		*(int*) (eax_ptr + 0x10) = (int) ecx_ptr;
+		*(int*) (eax_ptr + 4) = -1;
+		*(unsigned short*) (eax_ptr + 8) = 0xffff;
+		ecx_ptr = ecx_ptr + 0x220;
+		eax_ptr = eax_ptr + 0x14;
+	}
+	*(int*) (param_1 + 0x65) = (int) result;
+	return (int) result;
+
+cleanup:
+	if (*(int*) (result + 0x1c) != 0) {
+		m_FreeTracked((void*) *(int*) (result + 0x1c));
+		*(int*) (result + 0x1c) = 0;
+	}
+	if (*(int*) (result + 0x20) != 0) {
+		m_FreeTracked((void*) *(int*) (result + 0x20));
+		*(int*) (result + 0x20) = 0;
+	}
+	m_FreeTracked(result);
+	return 0;
+}
 
 // STATUS: MATCHING
 // ORIGIN: GAME
