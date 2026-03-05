@@ -6,10 +6,8 @@ extern int DAT_1003540c;
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 74
-// SYMBOL: _FindRecord
 // FUNCTION: SERVER 0x10014f30
 // FindRecord
-// PROTOTYPE: char * __cdecl FindRecord(char * base, uint type1, uint type2)
 char* __cdecl FindRecord(char* base, unsigned int type1, unsigned int type2)
 {
 	int i;
@@ -32,10 +30,8 @@ char* __cdecl FindRecord(char* base, unsigned int type1, unsigned int type2)
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 103
-// SYMBOL: _find_zone_record
 // FUNCTION: SERVER 0x10014F80
 // find_zone_record
-// PROTOTYPE: int __cdecl find_zone_record(char * base, int x, int y)
 int __cdecl find_zone_record(char* base, int x, int y)
 {
 	int i;
@@ -71,11 +67,9 @@ int __cdecl find_zone_record(char* base, int x, int y)
 // STATUS: MATCHING
 // BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // SIZE: 175
-// SYMBOL: _CheckZoneAvailability
 // BLOCKER_DELTA: 170
 // FUNCTION: SERVER 0x10014ff0
 // CheckZoneAvailability
-// PROTOTYPE: int __cdecl CheckZoneAvailability(int param_1, uint param_2, uint param_3, int param_4)
 
 int __cdecl CheckZoneAvailability(int param_1, unsigned int param_2, unsigned int param_3, int param_4)
 {
@@ -128,11 +122,9 @@ int __cdecl CheckZoneAvailability(int param_1, unsigned int param_2, unsigned in
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov)
 // SIZE: 257
-// SYMBOL: _plt_SetPlantMap
 // BLOCKER_DELTA: 160
 // FUNCTION: SERVER 0x100150a0
 // plt_SetPlantMap
-// PROTOTYPE: int __cdecl plt_SetPlantMap(int param_1, uint param_2, uint param_3, int param_4, int param_5)
 
 int __cdecl plt_SetPlantMap(int param_1, unsigned int param_2, unsigned int param_3, int param_4, int param_5)
 {
@@ -206,11 +198,9 @@ found:
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 41
-// SYMBOL: _table_lookup
 // GHIDRA: GetStatPair
 // FUNCTION: SERVER 0x100151B0
 // table_lookup
-// PROTOTYPE: int __cdecl table_lookup(int index, int * out)
 int __cdecl table_lookup(int index, int* out)
 {
 	if (index >= 0x58) {

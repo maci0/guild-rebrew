@@ -2,8 +2,6 @@
 // BLOCKER: register allocation - target uses only esi, compiler allocates esi+edi for saved param_1 copy
 // ORIGIN: GAME
 // SIZE: 191
-// CFLAGS: /O2 /Gd
-// SYMBOL: _cm_ExClearLagerslot
 // BLOCKER_DELTA: 180
 
 #include "../command_internal.h"

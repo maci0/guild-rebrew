@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 327
-// CFLAGS: /O2 /Gd
-// SYMBOL: _cm_ChainRecordLookup
 
 #ifdef __clang__
 #pragma clang diagnostic push

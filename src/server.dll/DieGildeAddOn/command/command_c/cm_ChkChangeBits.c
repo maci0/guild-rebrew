@@ -2,8 +2,6 @@
 // BLOCKER: instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp)
 // ORIGIN: GAME
 // SIZE: 162
-// CFLAGS: /O2 /Gd
-// SYMBOL: _CheckChangeBits
 
 /*
 // BLOCKER_DELTA: 152

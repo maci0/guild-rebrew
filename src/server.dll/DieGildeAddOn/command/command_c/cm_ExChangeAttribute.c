@@ -2,8 +2,6 @@
 // BLOCKER: instruction folding (lea vs mov), stack frame choice (push vs sub esp)
 // ORIGIN: GAME
 // SIZE: 242
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ExAccumulateEntityFields
 // BLOCKER_DELTA: 25
 
 #include "../command_internal.h"

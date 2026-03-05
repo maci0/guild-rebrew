@@ -2,8 +2,6 @@
 // BLOCKER: jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 171
-// CFLAGS: /O2 /Gd
-// SYMBOL: _CheckMoveCredits
 
 /*
 // BLOCKER_DELTA: 165

@@ -2,8 +2,6 @@
 // BLOCKER: jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 517
-// CFLAGS: /O2 /Gd
-// SYMBOL: _CheckSellObject
 
 #include "../command_internal.h"
 

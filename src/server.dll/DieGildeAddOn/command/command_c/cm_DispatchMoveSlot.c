@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 17
-// CFLAGS: /O2 /Gd
-// SYMBOL: _DispatchMoveSlotEntry
 
 /*
  * Ghidra decompilation reference:

@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 85
-// CFLAGS: /O2 /Gd
-// SYMBOL: _cm_ExKillTransporter
 
 /*
  * Ghidra decompilation reference:

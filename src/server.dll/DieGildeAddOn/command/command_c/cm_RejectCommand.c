@@ -1,8 +1,6 @@
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 6
-// CFLAGS: /O2 /Gd
-// SYMBOL: _RejectCommand
 
 /*
  * Ghidra decompilation reference:

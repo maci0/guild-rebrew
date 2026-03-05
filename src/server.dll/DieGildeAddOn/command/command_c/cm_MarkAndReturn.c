@@ -1,8 +1,6 @@
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 14
-// CFLAGS: /O2 /Gd
-// SYMBOL: _MarkAndReturn
 
 /*
  * Ghidra decompilation reference:

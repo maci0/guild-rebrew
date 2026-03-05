@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 206
-// CFLAGS: /O2 /Gd
-// SYMBOL: _SetBuildingOwner
 
 #include "../command_internal.h"
 

@@ -2,8 +2,6 @@
 // BLOCKER: loop rotation (while->cmp duplicated), shared error exit layout, xor edx initialization
 // ORIGIN: GAME
 // SIZE: 352
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ExMoveObject
 // BLOCKER_DELTA: 155
 
 #include "../command_internal.h"

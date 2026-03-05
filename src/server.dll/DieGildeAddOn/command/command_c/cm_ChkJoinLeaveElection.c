@@ -3,8 +3,6 @@
 // BLOCKER_DELTA: 225
 // ORIGIN: GAME
 // SIZE: 333
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ValidateJoinLeaveElection
 
 #ifdef __clang__
 #pragma clang diagnostic push

@@ -26,7 +26,6 @@ extern void __cdecl write_log(char*, int, char*);
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 290
-// SYMBOL: _DispatchLogOutput
 // ANALYSIS: Core logging sink. Takes an output_mask bitfield: bit 0 writes to file (looking up the correct file name via severity in a global table), bit 2 writes to OutputDebugStringA (debugger), bit 3 writes to the allocated Win32 Console using WriteConsoleA.
 // FUNCTION: SERVER 0x10002640
 // DispatchLogOutput
@@ -96,13 +95,10 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 // STATUS: MATCHING
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 1836
-// SYMBOL: _CrashDumpUnhandledExceptionFilter@4@4
 // BLOCKER_DELTA: 1727
 // ANALYSIS: Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride).
-// SYMBOL: _CrashDumpUnhandledExceptionFilter@4
 // FUNCTION: SERVER 0x10002770
 // CrashDumpUnhandledExceptionFilter
-// PROTOTYPE: int __stdcall CrashDumpUnhandledExceptionFilter(undefined exceptionPointers)
 
 int __stdcall CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
@@ -480,13 +476,11 @@ bad_dbg_free:
 // ORIGIN: GAME
 // BLOCKER: instruction folding (lea vs mov), loop rotation / branch layout
 // SIZE: 376
-// SYMBOL: _EmitCrashModuleLine
 // FUNCTION: SERVER 0x10002fc0
 // EmitCrashModuleLine
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 370
-// PROTOTYPE: uint __cdecl EmitCrashModuleLine(int * param_1)
 
 unsigned int EmitCrashModuleLine(int* param_1)
 {
@@ -576,12 +570,10 @@ unsigned int EmitCrashModuleLine(int* param_1)
 // ORIGIN: GAME
 // STATUS: EXACT
 // SIZE: 33
-// SYMBOL: _GetDebugRecordByIndex
 // FUNCTION: SERVER 0x10003140
 // GetDebugRecordByIndex
 
 /* Variable-length record accessor - walks a record table to find the nth entry */
-// PROTOTYPE: char * __cdecl GetDebugRecordByIndex(char * param_1, uint param_2)
 
 char* __cdecl GetDebugRecordByIndex(char* param_1, unsigned int param_2)
 {
@@ -603,13 +595,11 @@ char* __cdecl GetDebugRecordByIndex(char* param_1, unsigned int param_2)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 240
-// SYMBOL: _check_memory_protection
 // NOTE: Function passes itself to VirtualQuery to check its own code page protection
 // GHIDRA: IsExecutableOrReadableProtect
 // ANALYSIS: Function passes itself to VirtualQuery to check its own code page protection
 // FUNCTION: SERVER 0x10003170
 // check_memory_protection
-// PROTOTYPE: char __cdecl check_memory_protection(uint protect)
 
 char __cdecl check_memory_protection(unsigned int protect)
 {
@@ -633,10 +623,8 @@ char __cdecl check_memory_protection(unsigned int protect)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 183
-// SYMBOL: _AnalyzeInstruction
 // FUNCTION: SERVER 0x10003260
 // AnalyzeInstruction
-// PROTOTYPE: char __cdecl AnalyzeInstruction(int param_1, int param_2, int param_3, int * param_4)
 char __cdecl AnalyzeInstruction(int param_1, int param_2, int param_3, int* param_4)
 {
 	*param_4 = 0;
@@ -678,14 +666,12 @@ char __cdecl AnalyzeInstruction(int param_1, int param_2, int param_3, int* para
 // GHIDRA: DecodePotentialControlTransfer
 // BLOCKER: instruction folding (lea vs mov)
 // SIZE: 404
-// SYMBOL: _InitializeLogAndErrorHandler
 // FUNCTION: SERVER 0x10003320
 // InitializeLogAndErrorHandler
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 386
 // ANALYSIS: Initialization routine for the server's telemetry. Registers the CrashDumpUnhandledExceptionFilter. Allocates a console if requested via flags. Truncates log files (__server.log, gilde_server.log) if they exceed 64KB (0x10000 bytes) and seeds them with a startup banner. | If file logging is enabled, validate/rotate server log targets.
-// PROTOTYPE: void __cdecl InitializeLogAndErrorHandler(uint param_1, uint param_2, uint param_3, uint param_4)
 
 void InitializeLogAndErrorHandler(
 	unsigned int param_1,
@@ -764,10 +750,8 @@ void InitializeLogAndErrorHandler(
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 83
-// SYMBOL: _ShutdownLogAndErrorHandler
 // FUNCTION: SERVER 0x100034c0
 // ShutdownLogAndErrorHandler
-// PROTOTYPE: void ShutdownLogAndErrorHandler(void)
 
 void __cdecl ShutdownLogAndErrorHandler(void)
 {
@@ -791,11 +775,9 @@ void __cdecl ShutdownLogAndErrorHandler(void)
 // ORIGIN: GAME
 // SIZE: 160
 // NOTE: Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()
-// SYMBOL: _ReportFatalError
 // ANALYSIS: Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()
 // FUNCTION: SERVER 0x10003520
 // ReportFatalError
-// PROTOTYPE: void __cdecl ReportFatalError(char * modulePath, uint lineNumber, char * message)
 __declspec(noreturn) void __cdecl _exit(int);
 
 void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* message)
@@ -833,10 +815,8 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 119
-// SYMBOL: _ReportMessage
 // FUNCTION: SERVER 0x100035C0
 // ReportMessage
-// PROTOTYPE: void __cdecl ReportMessage(char * msg)
 
 void __cdecl ReportMessage(char* msg)
 {
@@ -859,10 +839,8 @@ void __cdecl ReportMessage(char* msg)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 132
-// SYMBOL: _LogMessageInternal
 // FUNCTION: SERVER 0x10003640
 // LogMessageInternal
-// PROTOTYPE: void __cdecl LogMessageInternal(char * module, uint line, char * msg, int severity)
 
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity)
 {

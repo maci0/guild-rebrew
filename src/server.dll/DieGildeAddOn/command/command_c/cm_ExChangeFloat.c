@@ -2,8 +2,6 @@
 // BLOCKER: instruction folding (lea vs mov), stack frame choice (push vs sub esp)
 // ORIGIN: GAME
 // SIZE: 144
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ExSetEntityField
 
 /*
 // BLOCKER_DELTA: 126

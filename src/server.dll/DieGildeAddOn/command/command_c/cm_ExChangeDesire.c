@@ -2,8 +2,6 @@
 // BLOCKER: register allocation - target uses only edi, compiler allocates esi+edi for saved param_1 and field writeback address
 // ORIGIN: GAME
 // SIZE: 214
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ExChangeDesire
 
 #include "../command_internal.h"
 

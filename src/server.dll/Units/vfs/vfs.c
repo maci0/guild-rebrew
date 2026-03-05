@@ -42,10 +42,8 @@ extern int __cdecl deflateInit2_(char*, int, int, int, int, int, char*, int); /*
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 114
-// SYMBOL: _game_getbyte
 // FUNCTION: SERVER 0x10003820
 // game_getbyte
-// PROTOTYPE: uint __cdecl game_getbyte(int * param_1)
 
 unsigned int __cdecl game_getbyte(int* param_1)
 {
@@ -80,10 +78,8 @@ unsigned int __cdecl game_getbyte(int* param_1)
 // BLOCKER_DELTA: 18
 // STATUS: RELOC
 // SIZE: 177
-// SYMBOL: _close_stream
 // FUNCTION: SERVER 0x100038a0
 // close_stream
-// PROTOTYPE: int __cdecl close_stream(void * param_1)
 
 int __cdecl close_stream(void* param_1)
 {
@@ -134,10 +130,8 @@ int __cdecl close_stream(void* param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 182
-// SYMBOL: _flush_stream
 // FUNCTION: SERVER 0x10003b90
 // flush_stream
-// PROTOTYPE: uunsigned int __cdecl flush_stream(int param_1, int param_2)
 
 unsigned unsigned int __cdecl flush_stream(int param_1, int param_2)
 {
@@ -185,10 +179,8 @@ unsigned unsigned int __cdecl flush_stream(int param_1, int param_2)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 77
-// SYMBOL: _flush_and_close_stream
 // FUNCTION: SERVER 0x10003C50
 // read_uint32_be
-// PROTOTYPE: int __cdecl flush_and_close_stream(int param_1)
 
 int __cdecl flush_and_close_stream(int param_1)
 {
@@ -208,10 +200,8 @@ int __cdecl flush_and_close_stream(int param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 65
-// SYMBOL: _read_uint32_be
 // FUNCTION: SERVER 0x10003CA0
 // flush_and_close_stream
-// PROTOTYPE: int __cdecl read_uint32_be(int param_1)
 
 int __cdecl read_uint32_be(int param_1)
 {
@@ -233,10 +223,8 @@ int __cdecl read_uint32_be(int param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 43
-// SYMBOL: _write_uint32_le
 // FUNCTION: SERVER 0x10003CF0
 // write_uint32_le
-// PROTOTYPE: void __cdecl write_uint32_le(int stream, uint value)
 
 void __cdecl write_uint32_le(int stream, unsigned int value)
 {
@@ -254,11 +242,9 @@ void __cdecl write_uint32_le(int stream, unsigned int value)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 53
-// SYMBOL: _destroy_entity
 // GHIDRA: cleanup_entity
 // FUNCTION: SERVER 0x10008A50
 // destroy_entity
-// PROTOTYPE: int __cdecl destroy_entity(char * entity)
 
 int __cdecl destroy_entity(char* entity)
 {
@@ -277,11 +263,9 @@ int __cdecl destroy_entity(char* entity)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // SIZE: 492
-// SYMBOL: _ReadVfsCompressed
 // BLOCKER_DELTA: 466
 // FUNCTION: SERVER 0x10008a90
 // ReadVfsCompressed
-// PROTOTYPE: int __cdecl ReadVfsCompressed(int param_1, int param_2, uint param_3)
 
 int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 {
@@ -393,10 +377,8 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 129
-// SYMBOL: _cleanup_object
 // FUNCTION: SERVER 0x10008C80
 // cleanup_object
-// PROTOTYPE: int __cdecl cleanup_object(char * obj)
 
 int __cdecl cleanup_object(char* obj)
 {
@@ -431,7 +413,6 @@ int __cdecl cleanup_object(char* obj)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 301
-// SYMBOL: _CloseVfsStream
 // FUNCTION: SERVER 0x10008d10
 // CloseVfsStream
 
@@ -524,14 +505,12 @@ int __cdecl CloseVfsStream(void* stream)
 // BLOCKER_DELTA: 257
 // BLOCKER: instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
 // SIZE: 472
-// SYMBOL: _ReadVfsData
 // FUNCTION: SERVER 0x10008e40
 // ReadVfsData
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 448
 // ANALYSIS: Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks.
-// PROTOTYPE: uint __cdecl ReadVfsData(uint * arg_8h, int arg_ch, int arg_10h, int arg_14h)
 
 unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_14h)
 {
@@ -637,14 +616,12 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
 // SIZE: 704
-// SYMBOL: _OpenVfsStream
 // FUNCTION: SERVER 0x10009020
 // OpenVfsStream
 
 /* Game function - compression stream initialization */
 /* Parses flag string (R/W/N/Z), allocates pool object, sets up zlib inflate/deflate */
 // BLOCKER_DELTA: 626
-// PROTOTYPE: int __cdecl OpenVfsStream(uchar * param_1, uint param_2, char * param_3)
 
 int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* param_3)
 {

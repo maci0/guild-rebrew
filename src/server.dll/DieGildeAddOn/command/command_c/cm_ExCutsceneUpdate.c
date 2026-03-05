@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 82
-// CFLAGS: /O2 /Gd
-// SYMBOL: _CutsceneEntityUpdate
 
 /*
  * Ghidra decompilation reference:

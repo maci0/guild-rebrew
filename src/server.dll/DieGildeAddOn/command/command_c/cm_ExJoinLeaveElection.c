@@ -2,8 +2,6 @@
 // BLOCKER: register allocation (4 callee-saved regs vs target 3), loop body hoisting, comparison direction swap
 // ORIGIN: GAME
 // SIZE: 445
-// CFLAGS: /O2 /Gd
-// SYMBOL: _JoinLeaveElection
 
 #ifdef __clang__
 #pragma clang diagnostic push

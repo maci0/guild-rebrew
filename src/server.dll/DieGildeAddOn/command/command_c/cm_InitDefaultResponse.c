@@ -1,8 +1,6 @@
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 25
-// CFLAGS: /O2 /Gd
-// SYMBOL: _InitDefaultResponse
 
 /*
  * Ghidra decompilation reference:

@@ -1,8 +1,6 @@
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 239
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ExWriteEntityFields
 // BLOCKER: instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // BLOCKER_DELTA: 226
 

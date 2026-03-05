@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 70
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ModifyEntityHealth
 
 /*
  * Ghidra decompilation reference:

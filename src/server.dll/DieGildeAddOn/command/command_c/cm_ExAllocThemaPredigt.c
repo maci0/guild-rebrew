@@ -2,8 +2,6 @@
 // BLOCKER: register base adjustment (target uses add edi,0x18 and lea ecx,[esi+0x1c] for shorter addressing; MSVC6 folds to base+offset)
 // ORIGIN: GAME
 // SIZE: 172
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ExCreateSpecialObject
 
 /*
  * BLOCKER_DELTA: 4

@@ -1,8 +1,6 @@
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 331
-// CFLAGS: /O2 /Gd
-// SYMBOL: _CheckChangeAttribute
 // BLOCKER: struct field access scheduling (inc;inc vs lea+add pattern)
 // BLOCKER_DELTA: 14
 

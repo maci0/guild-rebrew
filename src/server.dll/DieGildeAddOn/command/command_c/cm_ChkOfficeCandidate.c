@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 22
-// CFLAGS: /O2 /Gd
-// SYMBOL: _cm_ChkOfficeCandidate
 
 /*
  * Ghidra decompilation reference:

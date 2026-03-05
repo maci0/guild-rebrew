@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 41
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ValidateEntityLookup
 
 /*
  * Ghidra decompilation reference:

@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 515
-// CFLAGS: /O2 /Gd
-// SYMBOL: _EmployWorkerAtBuilding
 
 #include "../command_internal.h"
 

@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 78
-// CFLAGS: /O2 /Gd
-// SYMBOL: _cm_ExChangePlayerIdentity
 
 /*
  * Ghidra decompilation reference:

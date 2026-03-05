@@ -51,10 +51,8 @@ extern float DAT_100257c8;
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 352
-// SYMBOL: _check_slot_active
 // FUNCTION: SERVER 0x10010530
 // check_slot_active
-// PROTOTYPE: int __cdecl check_slot_active(char * obj, int idx)
 int __cdecl check_slot_active(char* obj, int idx)
 {
 	if (idx == 0) {
@@ -88,11 +86,9 @@ int __cdecl check_slot_active(char* obj, int idx)
 // STATUS: MATCHING
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap
 // SIZE: 329
-// SYMBOL: _GetSlotEntry
 // BLOCKER_DELTA: 254
 // FUNCTION: SERVER 0x100105b0
 // GetSlotEntry
-// PROTOTYPE: int __cdecl GetSlotEntry(int param_1, int param_2, uchar param_3)
 
 int __cdecl GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 {
@@ -186,11 +182,9 @@ ret_value:
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, jump condition swap
 // SIZE: 320
-// SYMBOL: _FindSlotEntryFiltered
 // BLOCKER_DELTA: 109
 // FUNCTION: SERVER 0x10010710
 // FindSlotEntryFiltered
-// PROTOTYPE: char * __cdecl FindSlotEntryFiltered(char * ctx, uchar * obj, char * start, void * callback, int category)
 
 char* __cdecl FindSlotEntryFiltered(
 	char* ctx,
@@ -282,13 +276,11 @@ char* __cdecl FindSlotEntryFiltered(
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 370
-// SYMBOL: _SpawnGraveyardEntities
 // FUNCTION: SERVER 0x10010850
 // SpawnGraveyardEntities
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 339
-// PROTOTYPE: int __cdecl SpawnGraveyardEntities(uchar * param_1, int param_2)
 
 int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 {
@@ -357,10 +349,8 @@ int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 // ORIGIN: GAME
 // STATUS: RELOC
 // SIZE: 832
-// SYMBOL: _AllocGraveyardField
 // FUNCTION: SERVER 0x100109d0
 // AllocGraveyardField
-// PROTOTYPE: int __cdecl AllocGraveyardField(int building_ptr)
 
 #ifdef __clang__
 #define REBREW_NAKED
@@ -697,13 +687,11 @@ int REBREW_NAKED __cdecl AllocGraveyardField(int param_1)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // SIZE: 570
-// SYMBOL: _UpgradeGraveyardField
 // FUNCTION: SERVER 0x10010d10
 // UpgradeGraveyardField
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 539
-// PROTOTYPE: uint __cdecl UpgradeGraveyardField(uint8_t * param_1)
 
 unsigned int UpgradeGraveyardField(unsigned char* param_1)
 {
@@ -822,10 +810,8 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 66
-// SYMBOL: _free_3fields
 // FUNCTION: SERVER 0x10010F50
 // free_3fields
-// PROTOTYPE: void __cdecl free_3fields(char * p)
 
 void __cdecl free_3fields(char* p)
 {
@@ -847,13 +833,11 @@ void __cdecl free_3fields(char* p)
 // ORIGIN: GAME
 // BLOCKER: instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 525
-// SYMBOL: _AssignProductionSlot
 // FUNCTION: SERVER 0x10010fa0
 // AssignProductionSlot
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 462
-// PROTOTYPE: uint __cdecl AssignProductionSlot(int param_1)
 
 unsigned int AssignProductionSlot(int param_1)
 {
@@ -981,13 +965,11 @@ unsigned int AssignProductionSlot(int param_1)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
 // SIZE: 501
-// SYMBOL: _HireProductionWorker
 // FUNCTION: SERVER 0x100111b0
 // HireProductionWorker
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 456
-// PROTOTYPE: uint __cdecl HireProductionWorker(int param_1)
 
 unsigned int HireProductionWorker(int param_1)
 {
@@ -1061,13 +1043,11 @@ unsigned int HireProductionWorker(int param_1)
 // ORIGIN: GAME
 // BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // SIZE: 390
-// SYMBOL: _ExtendProductionTime
 // FUNCTION: SERVER 0x100113b0
 // ExtendProductionTime
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 306
-// PROTOTYPE: uint __cdecl ExtendProductionTime(uint32_t * param_1)
 
 unsigned int ExtendProductionTime(unsigned int* param_1)
 {
@@ -1123,12 +1103,10 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 288
-// SYMBOL: _ReplaceProductionWorker
 // FUNCTION: SERVER 0x10011540
 // ReplaceProductionWorker
 
 // GLOBALS: SERVER 0x1003546c
-// PROTOTYPE: int __cdecl ReplaceProductionWorker(uchar * param_1)
 
 int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl check_slot_active(int param_1, int param_2);
@@ -1184,7 +1162,6 @@ int __cdecl ReplaceProductionWorker(unsigned char* param_1)
 // GLOBALS: SERVER 0x100a8c30
 // BLOCKER_DELTA: 273
 // SIZE: 297
-// SYMBOL: _ActivateGraveyardSection
 // BLOCKER_DELTA: 39
 // FUNCTION: SERVER 0x10011660
 // ActivateGraveyardSection
@@ -1273,14 +1250,12 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 // ORIGIN: GAME
 // BLOCKER: zero-extend pattern (xor vs mov)
 // SIZE: 242
-// SYMBOL: _UpdateProductionProgress
 
 // BLOCKER_DELTA: 96
 // FUNCTION: SERVER 0x10011790
 // UpdateProductionProgress
 
 // GLOBALS: SERVER 0x1003546c
-// PROTOTYPE: int __cdecl UpdateProductionProgress(uchar * param_1)
 
 int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl check_slot_active(int param_1, int param_2);
@@ -1326,11 +1301,9 @@ int __cdecl UpdateProductionProgress(unsigned char* param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 164
-// SYMBOL: _ValidateEntityAction
 // ANALYSIS: Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure.
 // FUNCTION: SERVER 0x10011890
 // ValidateEntityAction
-// PROTOTYPE: int __cdecl ValidateEntityAction(uchar * param_1)
 
 int __cdecl ValidateEntityAction(unsigned char* param_1)
 {
@@ -1365,11 +1338,9 @@ int __cdecl ValidateEntityAction(unsigned char* param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 674
-// SYMBOL: _MoveSlotEntry
 // BLOCKER_DELTA: 639
 // FUNCTION: SERVER 0x10011940
 // MoveSlotEntry
-// PROTOTYPE: uint __cdecl MoveSlotEntry(int param_1)
 
 unsigned int MoveSlotEntry(int param_1)
 {
@@ -1481,13 +1452,11 @@ unsigned int MoveSlotEntry(int param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 1040
-// SYMBOL: _gv_ExAllocGraveyardWorker
 // BLOCKER_DELTA: 1021
 // GHIDRA: AllocGraveyardWorker
 // ANALYSIS: Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates.
 // FUNCTION: SERVER 0x10011bf0
 // gv_ExAllocGraveyardWorker
-// PROTOTYPE: uint __stdcall gv_ExAllocGraveyardWorker(int param_1)
 
 unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 {

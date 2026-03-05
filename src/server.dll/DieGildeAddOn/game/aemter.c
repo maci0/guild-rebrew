@@ -34,11 +34,9 @@ extern void __cdecl InitBuildingTypeTable(void);
 // BLOCKER: comparison direction swap, jump condition swap, zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 205
-// SYMBOL: _ValidateOfficeCandidate
 // BLOCKER_DELTA: 196
 // FUNCTION: SERVER 0x1000b1c0
 // ValidateOfficeCandidate
-// PROTOTYPE: int __cdecl ValidateOfficeCandidate(int * param_1)
 
 void* __cdecl LookupEntityRecordById(int entityId);
 
@@ -109,13 +107,11 @@ int __cdecl ValidateOfficeCandidate(int* param_1)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
 // SIZE: 425
-// SYMBOL: _LookupEntityRecordById
 // FUNCTION: SERVER 0x1000b290
 // ValidateAndAssignOffice
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 400
-// PROTOTYPE: uint __stdcall ValidateAndAssignOffice(uint * param_1)
 
 unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 {
@@ -219,10 +215,8 @@ unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 133
-// SYMBOL: _LookupEntityRecordById
 // FUNCTION: SERVER 0x1000b440
 // ValidateCommand
-// PROTOTYPE: int __cdecl ValidateCommand(char * param_1)
 
 int __cdecl ValidateCommand(char* param_1)
 {
@@ -272,14 +266,12 @@ int __cdecl ValidateCommand(char* param_1)
 // ANALYSIS: Iterates through a fixed validation table at g_office_table looking for a matching command_type. Once found, verifies conditions including checking if entity_ids in the payload actually map to existing objects using LookupEntityRecordById. Returns 1 if valid, 0 if invalid.
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // SIZE: 836
-// SYMBOL: _LookupEntityRecordById
 // FUNCTION: SERVER 0x1000b4d0
 // ExecuteOfficeAssignment
 
 /* Game function - entity role/assignment table manager */
 /* Updates a 0x18-byte record table at 0x101de5a0, clears old roles, sets new assignments */
 // BLOCKER_DELTA: 800
-// PROTOTYPE: int __stdcall ExecuteOfficeAssignment(char * param_1)
 
 int __cdecl ExecuteOfficeAssignment(char* param_1)
 {
@@ -554,10 +546,8 @@ final_store:
 // ORIGIN: GAME
 // STATUS: RELOC
 // SIZE: 42
-// SYMBOL: _LookupEntityRecordById
 // FUNCTION: SERVER 0x1000B820
 // find_entity_26
-// PROTOTYPE: void __cdecl find_entity_26(int val)
 
 void __cdecl find_entity_26(int val)
 {
@@ -573,10 +563,8 @@ void __cdecl find_entity_26(int val)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 42
-// SYMBOL: _LookupEntityRecordById
 // FUNCTION: SERVER 0x1000B850
 // find_entity_27
-// PROTOTYPE: void __cdecl find_entity_27(int val)
 
 void __cdecl find_entity_27(int val)
 {
@@ -593,11 +581,9 @@ void __cdecl find_entity_27(int val)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap
 // SIZE: 263
-// SYMBOL: _LookupEntityRecordById
 // BLOCKER_DELTA: 205
 // FUNCTION: SERVER 0x1000b880
 // SwapOfficeHolders
-// PROTOTYPE: int __cdecl SwapOfficeHolders(int * param_1)
 
 int __cdecl SwapOfficeHolders(int* param_1)
 {
@@ -661,11 +647,9 @@ int __cdecl SwapOfficeHolders(int* param_1)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, zero-extend pattern (xor vs mov)
 // SIZE: 157
-// SYMBOL: _LookupEntityRecordById
 // BLOCKER_DELTA: 146
 // FUNCTION: SERVER 0x1000b990
 // ClearEntityLinks
-// PROTOTYPE: int __stdcall ClearEntityLinks(int param_1)
 
 int __cdecl ClearEntityLinks(int param_1)
 {
@@ -707,12 +691,10 @@ int __cdecl ClearEntityLinks(int param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 179
-// SYMBOL: _LookupEntityRecordById
 // BLOCKER_DELTA: 178
 // ANALYSIS: Iterates through the command execution tracker table at g_office_secondary_id_base to detach or update a specific entity's links and pending sequence numbers. Used when an entity changes state abruptly or is being removed.
 // FUNCTION: SERVER 0x1000ba30
 // UpdateEntityLinks
-// PROTOTYPE: void __cdecl UpdateEntityLinks(int param_1, int param_2)
 
 void __cdecl UpdateEntityLinks(int param_1, int param_2)
 {
@@ -754,7 +736,6 @@ void __cdecl UpdateEntityLinks(int param_1, int param_2)
 // ORIGIN: GAME
 // BLOCKER: instruction folding (lea vs mov)
 // SIZE: 606
-// SYMBOL: _LookupEntityRecordById
 // BLOCKER_DELTA: 407
 // GHIDRA: LoadOfficeData
 // FUNCTION: SERVER 0x1000baf0

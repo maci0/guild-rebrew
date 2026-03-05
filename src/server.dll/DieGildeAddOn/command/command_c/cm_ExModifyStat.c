@@ -2,8 +2,6 @@
 // BLOCKER: three-fcom float clamp pattern with shared return paths - compiler generates different branch layout and fcom count
 // ORIGIN: GAME
 // SIZE: 159
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ModifyEntityStat
 
 /*
  * Ghidra decompilation reference:

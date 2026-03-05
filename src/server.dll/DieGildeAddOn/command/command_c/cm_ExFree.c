@@ -3,8 +3,6 @@
 // BLOCKER_DELTA: 20
 // ORIGIN: GAME
 // SIZE: 180
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ExFreeEntity
 
 /*
  * Ghidra decompilation is BROKEN (sizeInBytes=1).

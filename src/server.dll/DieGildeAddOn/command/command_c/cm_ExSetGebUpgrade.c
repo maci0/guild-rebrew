@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 237
-// CFLAGS: /O2 /Gd
-// SYMBOL: _SetBuildingUpgrade
 
 /*
  * Ghidra decompilation reference:

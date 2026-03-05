@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 171
-// CFLAGS: /O2 /Gd
-// SYMBOL: _DestroyBuilding
 
 /*
  * Ghidra decompilation reference:

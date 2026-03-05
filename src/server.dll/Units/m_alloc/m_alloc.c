@@ -38,12 +38,10 @@ extern void __cdecl FreeTrackedHeapBlock(int*);
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 658
-// SYMBOL: _AllocateTrackedHeapBlock
 // BLOCKER_DELTA: 578
 // ANALYSIS: Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code.
 // FUNCTION: SERVER 0x10006580
 // AllocateTrackedHeapBlock
-// PROTOTYPE: void * __cdecl AllocateTrackedHeapBlock(uint size, int source)
 
 void* __cdecl AllocateTrackedHeapBlock(unsigned int size, int source)
 {
@@ -165,10 +163,8 @@ found: {
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 188
-// SYMBOL: _FreeTrackedHeapBlock
 // FUNCTION: SERVER 0x10006820
 // FreeTrackedHeapBlock
-// PROTOTYPE: void __cdecl FreeTrackedHeapBlock(void * heapBlock)
 
 void __cdecl FreeTrackedHeapBlock(void* heapBlock)
 {
@@ -217,10 +213,8 @@ void __cdecl FreeTrackedHeapBlock(void* heapBlock)
 // BLOCKER_DELTA: 141
 // ANALYSIS: Frees memory allocated by AllocateTrackedHeapBlock. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer.
 // SIZE: 162
-// SYMBOL: _InitPacketPool
 // FUNCTION: SERVER 0x100068e0
 // InitPacketPool
-// PROTOTYPE: void __cdecl InitPacketPool(int param_1)
 
 void __cdecl InitPacketPool(int param_1)
 {
@@ -252,11 +246,9 @@ void __cdecl InitPacketPool(int param_1)
 // BLOCKER_DELTA: 159
 // BLOCKER: zero-extend pattern (xor vs mov)
 // SIZE: 612
-// SYMBOL: _ReportMemoryGroupInfo
 // BLOCKER_DELTA: 586
 // FUNCTION: SERVER 0x10006990
 // ReportMemoryGroupInfo
-// PROTOTYPE: void __cdecl ReportMemoryGroupInfo(int param_1)
 
 void __cdecl ReportMemoryGroupInfo(int param_1)
 {
@@ -376,7 +368,6 @@ done:
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 283
-// SYMBOL: _ShutdownMemoryAllocator
 // FUNCTION: SERVER 0x10006c00
 // ShutdownMemoryAllocator
 
@@ -467,7 +458,6 @@ void __cdecl ShutdownMemoryAllocator(void)
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov)
 // BLOCKER_DELTA: 265
 // SIZE: 270
-// SYMBOL: _pool_alloc
 // FUNCTION: SERVER 0x10006d20
 // pool_alloc
 
@@ -549,10 +539,8 @@ void* __cdecl pool_alloc(struct BlockNode** head, int size, int max_items)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 137
-// SYMBOL: _pool_free
 // FUNCTION: SERVER 0x10006E30
 // pool_free
-// PROTOTYPE: void __cdecl pool_free(int * param_1, int * param_2)
 
 void __cdecl pool_free(int* param_1, int* param_2)
 {

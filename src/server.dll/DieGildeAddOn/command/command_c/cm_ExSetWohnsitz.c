@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 271
-// CFLAGS: /O2 /Gd
-// SYMBOL: _SetResidence
 
 /*
  * Ghidra decompilation reference:

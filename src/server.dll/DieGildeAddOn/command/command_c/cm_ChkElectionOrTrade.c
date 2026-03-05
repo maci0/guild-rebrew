@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 169
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ValidateElectionOrTradeCmd
 
 /*
 // BLOCKER_DELTA: 137

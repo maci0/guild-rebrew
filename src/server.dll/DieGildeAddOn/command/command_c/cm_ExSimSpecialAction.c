@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 262
-// CFLAGS: /O2 /Gd
-// SYMBOL: _SimSpecialAction
 // BLOCKER_DELTA: 205
 
 #include "../command_internal.h"

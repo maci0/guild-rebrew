@@ -1,8 +1,6 @@
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 3
-// CFLAGS: /O2 /Gd
-// SYMBOL: _cm_ChainNoop
 
 
 /*

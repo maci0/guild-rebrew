@@ -2,8 +2,6 @@
 // BLOCKER: loop rotation - target uses jl backward jump, compiler generates jge forward + jmp backward
 // ORIGIN: GAME
 // SIZE: 120
-// CFLAGS: /O2 /Gd
-// SYMBOL: _CheckCutsceneReady
 
 /*
 // BLOCKER_DELTA: 41

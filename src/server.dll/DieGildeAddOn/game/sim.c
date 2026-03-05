@@ -13,13 +13,11 @@ extern unsigned char DAT_100358a0;
 // BLOCKER: instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // ORIGIN: GAME
 // SIZE: 535
-// SYMBOL: _FindAndMatchParents
 // FUNCTION: SERVER 0x100151e0
 // FindAndMatchParents
 
 /* Auto-generated Ghidra decompilation */
 // BLOCKER_DELTA: 469
-// PROTOTYPE: uint __cdecl FindAndMatchParents(uint param_1)
 
 unsigned int FindAndMatchParents(unsigned int param_1)
 {
@@ -128,11 +126,9 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 // ORIGIN: GAME
 // STATUS: RELOC
 // SIZE: 83
-// SYMBOL: _priority_update
 // ANALYSIS: Updates priority tracking for dynamic entity dispatch/update lists. Limits simultaneous update weight using GetStatPair constraints.
 // FUNCTION: SERVER 0x10015400
 // priority_update
-// PROTOTYPE: void __cdecl priority_update(char * ctx, char * entity)
 
 void __cdecl priority_update(char* ctx, char* entity)
 {
@@ -159,10 +155,8 @@ void __cdecl priority_update(char* ctx, char* entity)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 145
-// SYMBOL: _StartEntityQueryByType
 // FUNCTION: SERVER 0x10015460
 // StartEntityQueryByType
-// PROTOTYPE: void __cdecl StartEntityQueryByType(uchar * param_1)
 
 void __cdecl StartEntityQueryByType(unsigned char* param_1)
 {
@@ -194,10 +188,8 @@ void __cdecl StartEntityQueryByType(unsigned char* param_1)
 // BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // BLOCKER_DELTA: 138
 // SIZE: 180
-// SYMBOL: _sim_CreateCitizen
 // FUNCTION: SERVER 0x10015500
 // sim_CreateCitizen
-// PROTOTYPE: void * __cdecl sim_CreateCitizen(uchar param_1, int param_2, int param_3, uchar param_4, uchar param_5)
 
 void* __cdecl sim_CreateCitizen(
 	unsigned char param_1,
@@ -241,11 +233,9 @@ error:
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 197
-// SYMBOL: _AdvanceGameClock
 // BLOCKER_DELTA: 164
 // FUNCTION: SERVER 0x100155c0
 // AdvanceGameClock
-// PROTOTYPE: int __cdecl AdvanceGameClock(int * param_1, int param_2, int param_3, int param_4)
 
 #pragma pack(push, 1)
 typedef struct {
@@ -296,10 +286,8 @@ int __cdecl AdvanceGameClock(int* param_1, int param_2, int param_3, int param_4
 // ORIGIN: GAME
 // STATUS: EXACT
 // SIZE: 41
-// SYMBOL: _SetSyncParams
 // FUNCTION: SERVER 0x10015690
 // SetSyncParams
-// PROTOTYPE: void __cdecl SetSyncParams(int param_1, uchar param_2, uint param_3, uint param_4)
 
 void __cdecl SetSyncParams(int param_1, unsigned char param_2, unsigned int param_3, unsigned int param_4)
 {

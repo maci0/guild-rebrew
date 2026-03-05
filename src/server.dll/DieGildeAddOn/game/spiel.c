@@ -179,10 +179,8 @@ extern float _DAT_100256a8;
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 320
-// SYMBOL: _alloc_and_init
 // FUNCTION: SERVER 0x10004B80
 // alloc_and_init
-// PROTOTYPE: void * __cdecl alloc_and_init(char a, char b, int c, int d, char * ctx)
 
 void* __cdecl alloc_and_init(char a, char b, int c, int d, char* ctx)
 {
@@ -201,10 +199,8 @@ void* __cdecl alloc_and_init(char a, char b, int c, int d, char* ctx)
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 20
-// SYMBOL: _dispatch_call
 // FUNCTION: SERVER 0x10005370
 // dispatch_call
-// PROTOTYPE: int __cdecl dispatch_call(int param, DISPATCH_OBJ * obj)
 
 int __cdecl dispatch_call(int param, DISPATCH_OBJ* obj)
 {
@@ -215,14 +211,12 @@ int __cdecl dispatch_call(int param, DISPATCH_OBJ* obj)
 // STATUS: MATCHING
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
 // SIZE: 642
-// SYMBOL: _gm_InitObjektHersteller
 // FUNCTION: SERVER 0x100156c0
 // gm_InitObjektHersteller
 
 /* Game function - gm_InitObjektHersteller (initialize object manufacturers) */
 // BLOCKER_DELTA: 575
 // GHIDRA: InitProductionTable
-// PROTOTYPE: void gm_InitObjektHersteller(void)
 
 void __cdecl gm_InitObjektHersteller(void)
 {
@@ -388,7 +382,6 @@ void __cdecl gm_InitObjektHersteller(void)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap
 // SIZE: 861
-// SYMBOL: _Open
 // BLOCKER_DELTA: 333
 // GHIDRA: InitGameWorld
 // ANALYSIS: InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure.
@@ -518,10 +511,8 @@ int __cdecl Open(int param_1)
 // ORIGIN: GAME
 // SIZE: 57
 // STATUS: RELOC
-// SYMBOL: _reset_all_entities
 // FUNCTION: SERVER 0x10015CB0
 // reset_all_entities
-// PROTOTYPE: void reset_all_entities(void)
 
 void __cdecl reset_all_entities(void)
 {
@@ -547,11 +538,9 @@ void __cdecl reset_all_entities(void)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap
 // SIZE: 194
-// SYMBOL: _CleanupObjectEntities
 // BLOCKER_DELTA: 88
 // FUNCTION: SERVER 0x10015cf0
 // CleanupObjectEntities
-// PROTOTYPE: void CleanupObjectEntities(void)
 
 int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
@@ -606,10 +595,8 @@ void __cdecl CleanupObjectEntities(void)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 55
-// SYMBOL: _FindRecordById
 // FUNCTION: SERVER 0x10015dc0
 // FindRecordById
-// PROTOTYPE: void * __cdecl FindRecordById(int id)
 
 Record* __cdecl FindRecordById(int id)
 {
@@ -631,10 +618,8 @@ Record* __cdecl FindRecordById(int id)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 135
-// SYMBOL: _cleanup_all_entities
 // FUNCTION: SERVER 0x10015E00
 // cleanup_all_entities
-// PROTOTYPE: void cleanup_all_entities(void)
 
 void __cdecl cleanup_all_entities(void)
 {
@@ -667,10 +652,8 @@ void __cdecl cleanup_all_entities(void)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 211
-// SYMBOL: _ResolveEntityById
 // FUNCTION: SERVER 0x10015e90
 // ResolveEntityById
-// PROTOTYPE: int __cdecl ResolveEntityById(void * * dynamic, void * * existing, void * * static_ptr, int entity_id)
 
 int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
 {
@@ -733,12 +716,10 @@ int __cdecl ResolveEntityById(void** dynamic, void** existing, void** static_ptr
 // ANALYSIS: Takes an entity_id (often from a packet) and searches through three global entity collections (dynamic objects, existing/world objects, and static/static structures). Returns 1, 2, or 3 depending on which collection it was found in, and sets the corresponding output pointer.
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 714
-// SYMBOL: _RefreshMarketAvailability
 // BLOCKER_DELTA: 449
 // ANALYSIS: Refreshes market availability table (85 entries of 0x80 bytes each). Scans all buildings for producible items, marks ingredients as available, then auto-allocates missing market objects. Also counts special resource types (0x92-0x97, 0x2db) in the town market.
 // FUNCTION: SERVER 0x10015f70
 // RefreshMarketAvailability
-// PROTOTYPE: void __stdcall RefreshMarketAvailability(int param_1)
 
 void __cdecl RefreshMarketAvailability(int param_1)
 {
@@ -928,7 +909,6 @@ void __cdecl RefreshMarketAvailability(int param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 72
-// SYMBOL: _FindSlotById
 // BLOCKER_DELTA: 64
 // FUNCTION: SERVER 0x10016240
 // FindSlotById
@@ -958,12 +938,10 @@ char* __cdecl FindSlotById(int param_1, int param_2)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 464
-// SYMBOL: _NextEntityQueryMatch
 // BLOCKER_DELTA: 452
 // ANALYSIS: Apply active query filters (id/type/owner/group) to current candidate.
 // FUNCTION: SERVER 0x10016290
 // NextEntityQueryMatch
-// PROTOTYPE: void * NextEntityQueryMatch(void)
 
 short __cdecl GetEntityType(void* entity);
 
@@ -1094,7 +1072,6 @@ void* __cdecl NextEntityQueryMatch(void)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
 // SIZE: 320
-// SYMBOL: _StartEntityQuery
 // BLOCKER_DELTA: 307
 // ANALYSIS: Parse vararg criteria tuples for entity query filtering.
 // FUNCTION: SERVER 0x10016460
@@ -1223,11 +1200,9 @@ check_container:
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 37
-// SYMBOL: _AllocateObjectSlot
 // ANALYSIS: Walks the primary linked list of object allocations starting at g_existing_entities (a global pointer array). Looks for the first slot with an active flag == 0. Stops searching after 0x5007 (20487) slots. Returns pointer to the slot or NULL if full. | Scan fixed object pool and return first free slot.
 // FUNCTION: SERVER 0x100165A0
 // AllocateObjectSlot
-// PROTOTYPE: char * AllocateObjectSlot(void)
 
 char* __cdecl AllocateObjectSlot(void)
 {
@@ -1255,10 +1230,8 @@ char* __cdecl AllocateObjectSlot(void)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 155
-// SYMBOL: _RemoveObjectByType
 // FUNCTION: SERVER 0x100165d0
 // RemoveObjectByType
-// PROTOTYPE: int __cdecl RemoveObjectByType(char * * objectListHead, uint objectTypeId)
 
 int __cdecl RemoveObjectByType(char** objectListHead, unsigned int objectTypeId)
 {
@@ -1307,10 +1280,8 @@ int __cdecl RemoveObjectByType(char** objectListHead, unsigned int objectTypeId)
 // BLOCKER_DELTA: 95
 // ANALYSIS: Linear search by object type id within sibling linked list.
 // SIZE: 1
-// SYMBOL: _noop_ret2
 // FUNCTION: SERVER 0x10016670
 // noop_ret2
-// PROTOTYPE: void noop_ret2(void)
 void __cdecl noop_ret2(void)
 {
 }
@@ -1318,10 +1289,8 @@ void __cdecl noop_ret2(void)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 139
-// SYMBOL: _RemoveLinkedNodeById
 // FUNCTION: SERVER 0x10016680
 // RemoveLinkedNodeById
-// PROTOTYPE: int __cdecl RemoveLinkedNodeById(int * param_1, int param_2)
 
 int __cdecl RemoveLinkedNodeById(int* param_1, int param_2)
 {
@@ -1369,10 +1338,8 @@ int __cdecl RemoveLinkedNodeById(int* param_1, int param_2)
 // BLOCKER: zero-extend pattern (xor vs mov)
 // BLOCKER_DELTA: 106
 // SIZE: 66
-// SYMBOL: _FreeObjectListRecursive
 // FUNCTION: SERVER 0x10016710
 // FreeObjectListRecursive
-// PROTOTYPE: int __cdecl FreeObjectListRecursive(char * * head_ptr)
 
 int __cdecl FreeObjectListRecursive(char** head_ptr)
 {
@@ -1399,12 +1366,10 @@ int __cdecl FreeObjectListRecursive(char** head_ptr)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 1392
-// SYMBOL: _AllocGameObject
 // BLOCKER_DELTA: 1278
 // ANALYSIS: High-level entity allocation wrapper. Resolves the parent_id using ResolveEntityById to find the appropriate entity list head. Allocates a new object slot using AllocateObjectSlot. Inserts the new object into the parent's linked list and initializes basic fields (type, id from global g_next_entity_id, parent pointer).
 // FUNCTION: SERVER 0x10016760
 // AllocGameObject
-// PROTOTYPE: char * __cdecl AllocGameObject(int param_1, int param_2, int param_3)
 
 char* __cdecl AllocGameObject(int param_1, int param_2, int param_3)
 {
@@ -1613,10 +1578,8 @@ char* __cdecl AllocGameObject(int param_1, int param_2, int param_3)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 272
-// SYMBOL: _AddOrAccumulateObject
 // FUNCTION: SERVER 0x10016cd0
 // AddOrAccumulateObject
-// PROTOTYPE: void * __cdecl AddOrAccumulateObject(int parent_id, int type_id, int amount)
 
 void* __cdecl AddOrAccumulateObject(int parent_id, int type_id, int amount)
 {
@@ -1667,11 +1630,9 @@ void* __cdecl AddOrAccumulateObject(int parent_id, int type_id, int amount)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 186
-// SYMBOL: _SubObjekt
 // GHIDRA: SubtractObjectFromOwner
 // FUNCTION: SERVER 0x10016de0
 // SubObjekt
-// PROTOTYPE: int __cdecl SubObjekt(void * param_1, uint param_2, int param_3)
 
 int __cdecl SubObjekt(void* param_1, unsigned int param_2, int param_3)
 {
@@ -1714,11 +1675,9 @@ int __cdecl SubObjekt(void* param_1, unsigned int param_2, int param_3)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 211
-// SYMBOL: _SubtractObjectAmountNoKill
 // ANALYSIS: Decrease tracked amount; delete entry if it reaches zero.
 // FUNCTION: SERVER 0x10016ea0
 // SubtractObjectAmountNoKill
-// PROTOTYPE: int __cdecl SubtractObjectAmountNoKill(int entity_id, int object_id, int subtract_amount)
 
 int __cdecl SubtractObjectAmountNoKill(int entity_id, int object_id, int subtract_amount)
 {
@@ -1764,11 +1723,9 @@ int __cdecl SubtractObjectAmountNoKill(int entity_id, int object_id, int subtrac
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 346
-// SYMBOL: _FindNextFilteredEntity
 // BLOCKER_DELTA: 324
 // FUNCTION: SERVER 0x10016f80
 // FindNextFilteredEntity
-// PROTOTYPE: void * FindNextFilteredEntity(void)
 
 void* __cdecl FindNextFilteredEntity(void)
 {
@@ -1896,7 +1853,6 @@ MATCH:
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 267
-// SYMBOL: _StartFilteredEntitySearch
 // BLOCKER_DELTA: 229
 // FUNCTION: SERVER 0x100170e0
 // StartFilteredEntitySearch
@@ -2004,10 +1960,8 @@ unsigned short* __cdecl StartFilteredEntitySearch(int param_1, ...)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 39
-// SYMBOL: _search_struct
 // FUNCTION: SERVER 0x10017210
 // search_struct
-// PROTOTYPE: char * search_struct(void)
 
 char* __cdecl search_struct(void)
 {
@@ -2030,12 +1984,10 @@ char* __cdecl search_struct(void)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 240
-// SYMBOL: _CleanupBuildingEntity
 // FUNCTION: SERVER 0x10017240
 // CleanupBuildingEntity
 
 /* DAT_10035a0c: base of entity array, stride 0x21c (0x87 dwords), 768 entries */
-// PROTOTYPE: int __cdecl CleanupBuildingEntity(uchar * param_1)
 
 int __cdecl CleanupBuildingEntity(unsigned char* param_1)
 {
@@ -2090,11 +2042,9 @@ cleanup_loop:
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 207
-// SYMBOL: _gm_AllocBuildingDefaults
 // GHIDRA: InitBuildingDefaultItems
 // FUNCTION: SERVER 0x10017330
 // gm_AllocBuildingDefaults
-// PROTOTYPE: void __cdecl gm_AllocBuildingDefaults(uchar * param_1)
 
 void __cdecl gm_AllocBuildingDefaults(unsigned char* param_1)
 {
@@ -2140,10 +2090,8 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 202
-// SYMBOL: _SetBuildingWorkerLimits
 // FUNCTION: SERVER 0x10017400
 // SetBuildingWorkerLimits
-// PROTOTYPE: void __cdecl SetBuildingWorkerLimits(uchar * param_1)
 
 void __cdecl SetBuildingWorkerLimits(unsigned char* param_1)
 {
@@ -2181,7 +2129,6 @@ void __cdecl SetBuildingWorkerLimits(unsigned char* param_1)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
 // SIZE: 1088
-// SYMBOL: _AllocGebaeude
 // GHIDRA: gm_AllocGebaeude
 // BLOCKER_DELTA: 1007
 // FUNCTION: SERVER 0x100174d0
@@ -2411,10 +2358,8 @@ char* __cdecl AllocGebaeude(int param_1, int param_2)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 145
-// SYMBOL: _SetupEntityQuery
 // FUNCTION: SERVER 0x10017910
 // SetupEntityQuery
-// PROTOTYPE: ushort * __cdecl SetupEntityQuery(uchar * param_1)
 
 unsigned short* __cdecl SetupEntityQuery(unsigned char* param_1)
 {
@@ -2441,10 +2386,8 @@ unsigned short* __cdecl SetupEntityQuery(unsigned char* param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 192
-// SYMBOL: _GetBuildingTypeCategory
 // FUNCTION: SERVER 0x100179b0
 // GetBuildingTypeCategory
-// PROTOTYPE: int __cdecl GetBuildingTypeCategory(int param_1)
 
 int __cdecl GetBuildingTypeCategory(int param_1)
 {
@@ -2494,10 +2437,8 @@ int __cdecl GetBuildingTypeCategory(int param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 62
-// SYMBOL: _search_table_67
 // FUNCTION: SERVER 0x10017A70
 // search_table_67
-// PROTOTYPE: void * __cdecl search_table_67(int id)
 
 void* __cdecl search_table_67(int id)
 {
@@ -2521,10 +2462,8 @@ void* __cdecl search_table_67(int id)
 // ORIGIN: GAME
 // STATUS: RELOC
 // SIZE: 74
-// SYMBOL: _CheckEntityType
 // FUNCTION: SERVER 0x10017AB0
 // CheckEntityType
-// PROTOTYPE: int __cdecl CheckEntityType(uchar * entity_ptr)
 
 int __cdecl CheckEntityType(unsigned char* entity_ptr)
 {
@@ -2571,10 +2510,8 @@ int __cdecl CheckEntityType(unsigned char* entity_ptr)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 320
-// SYMBOL: _AssignBuildingOwner
 // FUNCTION: SERVER 0x10017b00
 // AssignBuildingOwner
-// PROTOTYPE: void __cdecl AssignBuildingOwner(uchar * param_1, ushort param_2, uint param_3)
 
 #define PTR_10035A10(idx) (*(unsigned char***) (((idx) * 0x21c) + 0x10035a10))
 #define BYTE_100358A2(idx) (*(unsigned char*) (((idx) * 0x21c) + 0x100358a2))
@@ -2634,10 +2571,8 @@ void __cdecl AssignBuildingOwner(unsigned char* param_1, unsigned short param_2,
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 742
-// SYMBOL: _AllocBuildingContents
 // FUNCTION: SERVER 0x10017c40
 // AllocBuildingContents
-// PROTOTYPE: int __cdecl AllocBuildingContents(char * geb, int obj_id)
 
 #ifdef __clang__
 #define REBREW_NAKED
@@ -2962,11 +2897,9 @@ int REBREW_NAKED __cdecl AllocBuildingContents(char* geb, int obj_id)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 35
-// SYMBOL: _RemoveObjectWrapper
 // GHIDRA: call_compare
 // FUNCTION: SERVER 0x10017f30
 // RemoveObjectWrapper
-// PROTOTYPE: int __cdecl RemoveObjectWrapper(int param_1, uint param_2)
 
 int __cdecl RemoveObjectWrapper(int param_1, unsigned int param_2)
 {
@@ -2982,11 +2915,9 @@ int __cdecl RemoveObjectWrapper(int param_1, unsigned int param_2)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 36
-// SYMBOL: _RemoveEntityLink
 // GHIDRA: find_and_process
 // FUNCTION: SERVER 0x10017f60
 // RemoveEntityLink
-// PROTOTYPE: void __cdecl RemoveEntityLink(int param_1)
 
 void __cdecl RemoveEntityLink(int param_1)
 {
@@ -3001,11 +2932,9 @@ void __cdecl RemoveEntityLink(int param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 23
-// SYMBOL: _InitEntityIfValid
 // ANALYSIS: Checks if the provided entity pointer is valid and active (not -1). If so, it invokes ClearEntityLinks on it to detach it from game world lists before deletion or recycling.
 // FUNCTION: SERVER 0x10017f90
 // InitEntityIfValid
-// PROTOTYPE: void __cdecl InitEntityIfValid(short * param_1)
 
 void __cdecl InitEntityIfValid(short* param_1)
 {
@@ -3017,14 +2946,12 @@ void __cdecl InitEntityIfValid(short* param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 278
-// SYMBOL: _DeallocEntity
 // BLOCKER_DELTA: 267
 // GHIDRA: gm_DeallocEntity
 // FUNCTION: SERVER 0x10017fb0
 // DeallocEntity
 
 /* EntityStruct — stride 0x21c (540 bytes), 768 entries at g_entity_array (0x100358a0)
-// PROTOTYPE: void __cdecl DeallocEntity(uint index, int param_2)
  * Field map derived from EXE cross-reference (Europa1400Gold_TL.exe):
  *   +0x00 (2)  entity_index      Self-index in array (0xFFFF = free slot)
  *   +0x02 (1)  entity_state      0x0F = dead/free, 0x06/0x07 = active types
@@ -3147,10 +3074,8 @@ void __cdecl DeallocEntity(unsigned int index, int param_2)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 81
-// SYMBOL: _InitEntitySlots
 // FUNCTION: SERVER 0x100180D0
 // InitEntitySlots
-// PROTOTYPE: void InitEntitySlots(void)
 
 void __cdecl InitEntitySlots(void)
 {
@@ -3176,10 +3101,8 @@ void __cdecl InitEntitySlots(void)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 32
-// SYMBOL: _is_in_range
 // FUNCTION: SERVER 0x10018130
 // is_in_range
-// PROTOTYPE: int __cdecl is_in_range(int x)
 
 int __cdecl is_in_range(int x)
 {
@@ -3194,10 +3117,8 @@ int __cdecl is_in_range(int x)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 70
-// SYMBOL: _EntityClassCheck
 // FUNCTION: SERVER 0x10018150
 // EntityClassCheck
-// PROTOTYPE: int __cdecl EntityClassCheck(int type)
 int __cdecl EntityClassCheck(int type)
 {
 	switch (type) {
@@ -3237,7 +3158,6 @@ int __cdecl EntityClassCheck(int type)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 87
-// SYMBOL: _CheckStatLevel
 // FUNCTION: SERVER 0x100181a0
 // CheckStatLevel
 
@@ -3267,10 +3187,8 @@ int __cdecl CheckStatLevel(int param_1, int param_2)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 304
-// SYMBOL: _MapEntityStatRange
 // FUNCTION: SERVER 0x10018200
 // MapEntityStatRange
-// PROTOTYPE: int __cdecl MapEntityStatRange(int param_1)
 
 int __cdecl MapEntityStatRange(int param_1)
 {
@@ -3394,12 +3312,10 @@ int __cdecl MapEntityStatRange(int param_1)
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 276
-// SYMBOL: _GetOppositeStatIndex
 // FUNCTION: SERVER 0x10018330
 // GetOppositeStatIndex
 
 /*
-// PROTOTYPE: int __cdecl GetOppositeStatIndex(int param_1)
  * Mirrors/reverses the position of an index within its group of 6.
  * Each group of 6 consecutive values gets its position flipped:
  *   groupStart -> groupStart+5, groupStart+1 -> groupStart+4, etc.
@@ -3477,10 +3393,8 @@ int __cdecl GetOppositeStatIndex(int param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 78
-// SYMBOL: _RandomStatModifier
 // FUNCTION: SERVER 0x10018450
 // RandomStatModifier
-// PROTOTYPE: char __cdecl RandomStatModifier(char stat_value)
 
 char __cdecl RandomStatModifier(char stat_value)
 {
@@ -3505,10 +3419,8 @@ char __cdecl RandomStatModifier(char stat_value)
 // STATUS: EXACT
 // ORIGIN: GAME
 // SIZE: 56
-// SYMBOL: _LookupEntityRecordById
 // FUNCTION: SERVER 0x100184A0
 // LookupEntityRecordById
-// PROTOTYPE: int __cdecl LookupEntityRecordById(int search_id)
 int __cdecl LookupEntityRecordById(int search_id)
 {
 	char* p;
@@ -3530,12 +3442,10 @@ int __cdecl LookupEntityRecordById(int search_id)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 66
-// SYMBOL: _GetEntityTableEntry
 // NOTE: duplicate bounds check needed for correct register allocation
 // ANALYSIS: duplicate bounds check needed for correct register allocation
 // FUNCTION: SERVER 0x100184e0
 // GetEntityTableEntry
-// PROTOTYPE: short * __cdecl GetEntityTableEntry(char * param)
 
 short* __cdecl GetEntityTableEntry(char* param)
 {
@@ -3559,11 +3469,9 @@ short* __cdecl GetEntityTableEntry(char* param)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 800
-// SYMBOL: _ChangePlayerIdentityImpl
 // BLOCKER_DELTA: 695
 // FUNCTION: SERVER 0x10018530
 // ChangePlayerIdentityImpl
-// PROTOTYPE: int __stdcall ChangePlayerIdentityImpl(int param_1, int param_2)
 
 int __cdecl ChangePlayerIdentityImpl(int param_1, int param_2)
 {
@@ -3741,10 +3649,8 @@ int __cdecl ChangePlayerIdentityImpl(int param_1, int param_2)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 3689
-// SYMBOL: _CreateEntityFromParents
 // FUNCTION: SERVER 0x10018850
 // CreateEntityFromParents
-// PROTOTYPE: int __cdecl CreateEntityFromParents(int param_1, int param_2, int param_3, int param_4, int param_5)
 
 int __cdecl CreateEntityFromParents(int param_1, int param_2, int param_3, int param_4, int param_5)
 {
@@ -3771,10 +3677,8 @@ int __cdecl CreateEntityFromParents(int param_1, int param_2, int param_3, int p
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 81
-// SYMBOL: _QueryEntitySum
 // FUNCTION: SERVER 0x100196c0
 // QueryEntitySum
-// PROTOTYPE: int __cdecl QueryEntitySum(int param_1, uint param_2)
 
 int __cdecl QueryEntitySum(int param_1, unsigned int param_2)
 {
@@ -3798,7 +3702,6 @@ int __cdecl QueryEntitySum(int param_1, unsigned int param_2)
 // ORIGIN: GAME
 // BLOCKER: instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 396
-// SYMBOL: _CalculateProductionValue
 // FUNCTION: SERVER 0x10019720
 // CalculateProductionValue
 
@@ -3807,7 +3710,6 @@ int __cdecl QueryEntitySum(int param_1, unsigned int param_2)
 /* Computes weighted entity stat values with caching in field_0x38 */
 // BLOCKER_DELTA: 288
 // ANALYSIS: Recursive production value calculator. Computes the base value of an object type by looking up prototype data (stride 0x41), applying worker skill bonuses from building prototypes, and recursively summing ingredient costs (up to 4 ingredients). Caches result at proto_entry+0x38. Applies quality and production multipliers.
-// PROTOTYPE: double __stdcall CalculateProductionValue(int entity_index, int param2)
 
 double __cdecl CalculateProductionValue(int entity_index, int param2)
 {
@@ -3919,14 +3821,12 @@ double __cdecl CalculateProductionValue(int entity_index, int param2)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 355
-// SYMBOL: _SumBuildingProductionValues
 // FUNCTION: SERVER 0x100198b0
 // SumBuildingProductionValues
 
 /* Game function - entity query stat accumulator */
 /* Iterates entity references in a record, calls CalculateProductionValue for each, accumulates results */
 // BLOCKER_DELTA: 308
-// PROTOTYPE: int __cdecl SumBuildingProductionValues(char * obj, int param2)
 
 int __cdecl SumBuildingProductionValues(char* obj, int param2)
 {
@@ -4028,10 +3928,8 @@ int __cdecl SumBuildingProductionValues(char* obj, int param2)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 74
-// SYMBOL: _accumulate_typed2
 // FUNCTION: SERVER 0x10019A20
 // accumulate_typed2
-// PROTOTYPE: int __cdecl accumulate_typed2(char * entity)
 
 int __cdecl accumulate_typed2(char* entity)
 {
@@ -4054,10 +3952,8 @@ int __cdecl accumulate_typed2(char* entity)
 // ORIGIN: GAME
 // STATUS: RELOC
 // SIZE: 102
-// SYMBOL: _EntityQuerySum
 // FUNCTION: SERVER 0x10019a70
 // EntityQuerySum
-// PROTOTYPE: int __cdecl EntityQuerySum(int param_1)
 
 int __declspec(naked) __cdecl EntityQuerySum(int param_1)
 {
@@ -4113,10 +4009,8 @@ int __declspec(naked) __cdecl EntityQuerySum(int param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 82
-// SYMBOL: _ResolveParentEntity
 // FUNCTION: SERVER 0x10019ae0
 // ResolveParentEntity
-// PROTOTYPE: short * __cdecl ResolveParentEntity(short * param_1)
 
 short* __cdecl ResolveParentEntity(short* param_1)
 {
@@ -4135,10 +4029,8 @@ short* __cdecl ResolveParentEntity(short* param_1)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 62
-// SYMBOL: _GetEntityType
 // FUNCTION: SERVER 0x10019b40
 // GetEntityType
-// PROTOTYPE: ushort __cdecl GetEntityType(short * param_1)
 
 unsigned short __cdecl GetEntityType(short* param_1)
 {
@@ -4157,10 +4049,8 @@ unsigned short __cdecl GetEntityType(short* param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 124
-// SYMBOL: _entity_accumulate
 // FUNCTION: SERVER 0x10019b80
 // WalkEntityChain
-// PROTOTYPE: int __cdecl entity_accumulate(int raw_idx)
 
 int __cdecl entity_accumulate(void* param_1)
 {
@@ -4191,10 +4081,8 @@ int __cdecl entity_accumulate(void* param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 83
-// SYMBOL: _WalkEntityChain
 // FUNCTION: SERVER 0x10019BE0
 // entity_accumulate
-// PROTOTYPE: int __cdecl WalkEntityChain(void * param_1)
 
 int __cdecl WalkEntityChain(int raw_idx)
 {
@@ -4225,7 +4113,6 @@ int __cdecl WalkEntityChain(int raw_idx)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 48
-// SYMBOL: _get_msg_field
 // FUNCTION: SERVER 0x10019c60
 // FindEntityByOwner
 
@@ -4261,10 +4148,8 @@ char* __cdecl get_msg_field(int param_1)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 98
-// SYMBOL: _FindEntityByOwner
 // FUNCTION: SERVER 0x10019CD0
 // get_msg_field
-// PROTOTYPE: char * __cdecl FindEntityByOwner(int param_1)
 int __cdecl FindEntityByOwner(char* msg, char* pkt)
 {
 	unsigned short type;
@@ -4293,14 +4178,12 @@ int __cdecl compute_size(char* pkt)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
 // SIZE: 407
-// SYMBOL: _KannObjektHergestellt
 // FUNCTION: SERVER 0x10019d30
 // KannObjektHergestellt
 
 /* Game function - checks production capacity and entity slot availability */
 // BLOCKER_DELTA: 93
 // GHIDRA: gm_KannObjektHergestellt
-// PROTOTYPE: int __cdecl KannObjektHergestellt(char * obj, int entity_index, int requested)
 
 int __cdecl KannObjektHergestellt(char* obj, int entity_index, int requested)
 {
@@ -4435,13 +4318,11 @@ return_requested:
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 395
-// SYMBOL: _CheckInventoryCapacity
 // FUNCTION: SERVER 0x10019ed0
 // CheckInventoryCapacity
 
 /* Game function - computes available entity slots (capped at 3) */
 // BLOCKER_DELTA: 364
-// PROTOTYPE: int __cdecl CheckInventoryCapacity(char * obj, int entity_index, int requested)
 
 int __cdecl CheckInventoryCapacity(char* obj, int entity_index, int requested)
 {
@@ -4541,10 +4422,8 @@ int __cdecl CheckInventoryCapacity(char* obj, int entity_index, int requested)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 97
-// SYMBOL: _entity_set_field
 // FUNCTION: SERVER 0x1001A060
 // entity_set_field
-// PROTOTYPE: void __cdecl entity_set_field(void)
 
 void __cdecl entity_set_field(void)
 {
@@ -4573,11 +4452,9 @@ void __cdecl entity_set_field(void)
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 54
-// SYMBOL: _random_mod
 // GHIDRA: RandomBelow
 // FUNCTION: SERVER 0x1001A0D0
 // random_mod
-// PROTOTYPE: int __cdecl random_mod(ushort n)
 
 int __cdecl random_mod(unsigned short n)
 {
@@ -4590,10 +4467,8 @@ int __cdecl random_mod(unsigned short n)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 22
-// SYMBOL: _RandomFloat01
 // FUNCTION: SERVER 0x1001a0f0
 // RandomFloat01
-// PROTOTYPE: double RandomFloat01(void)
 
 double __cdecl RandomFloat01(void)
 {
@@ -4603,10 +4478,8 @@ double __cdecl RandomFloat01(void)
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 48
-// SYMBOL: _RandomQuadratic
 // FUNCTION: SERVER 0x1001a110
 // RandomQuadratic
-// PROTOTYPE: float RandomQuadratic(void)
 
 float __cdecl RandomQuadratic(void)
 {

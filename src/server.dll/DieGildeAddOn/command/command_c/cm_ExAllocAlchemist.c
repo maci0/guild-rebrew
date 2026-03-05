@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 52
-// CFLAGS: /O2 /Gd
-// SYMBOL: _cm_ExAllocAlchemist
 
 /*
  * Ghidra decompilation reference:

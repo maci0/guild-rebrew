@@ -1,8 +1,6 @@
 // STATUS: RELOC
 // ORIGIN: GAME
 // SIZE: 308
-// CFLAGS: /O2 /Gd
-// SYMBOL: _ElectionOrTradeCommand
 // BLOCKER_DELTA: 209
 
 #include "../command_internal.h"

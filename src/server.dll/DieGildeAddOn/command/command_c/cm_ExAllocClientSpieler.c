@@ -16,9 +16,7 @@ extern char s_gm_AllocSpieler___failed_1002cbd4[];
 // STATUS: MATCHING
 // ORIGIN: GAME
 // SIZE: 361
-// CFLAGS: /O2 /Gd
 // BLOCKER: Register allocation/instruction scheduling difference in CreateEntityFromParents argument setup; target evaluates param_2 boolean first (neg/sbb in eax) then pushes args in different register order. Same-size, semantically equivalent.
-// SYMBOL: _cm_ExAllocClientSpieler
 // FUNCTION: SERVER 0x1000d570
 int __cdecl cm_ExAllocClientSpieler(int param_1, char* param_2)
 {
