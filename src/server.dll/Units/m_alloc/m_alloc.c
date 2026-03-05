@@ -27,8 +27,8 @@ extern int DAT_117640a4;
 extern int DAT_10028938;
 extern int DAT_1002893c;
 extern void __cdecl ReportMemoryGroupInfo(int toggle);
-extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* file_and_line);
-extern void __cdecl FreeTrackedHeapBlock(int*);
+extern void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
+extern void __cdecl m_FreeTracked(int*);
 
 ;
 ;
@@ -41,9 +41,9 @@ extern void __cdecl FreeTrackedHeapBlock(int*);
 // BLOCKER_DELTA: 578
 // ANALYSIS: Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code.
 // FUNCTION: SERVER 0x10006580
-// AllocateTrackedHeapBlock
+// m_AllocTracked
 
-void* __cdecl AllocateTrackedHeapBlock(unsigned int size, int source)
+void* __cdecl m_AllocTracked(unsigned int size, int source)
 {
 	char msgBuf[256];
 	char nameBuf[16];
@@ -164,9 +164,9 @@ found: {
 // ORIGIN: GAME
 // SIZE: 188
 // FUNCTION: SERVER 0x10006820
-// FreeTrackedHeapBlock
+// m_FreeTracked
 
-void __cdecl FreeTrackedHeapBlock(void* heapBlock)
+void __cdecl m_FreeTracked(void* heapBlock)
 {
 	int trackedSize;
 	int* trackingEntry;
@@ -211,7 +211,7 @@ void __cdecl FreeTrackedHeapBlock(void* heapBlock)
 // ORIGIN: GAME
 // BLOCKER: comparison direction swap, jump condition swap
 // BLOCKER_DELTA: 141
-// ANALYSIS: Frees memory allocated by AllocateTrackedHeapBlock. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer.
+// ANALYSIS: Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer.
 // SIZE: 162
 // FUNCTION: SERVER 0x100068e0
 // InitPacketPool
@@ -459,7 +459,7 @@ void __cdecl ShutdownMemoryAllocator(void)
 // BLOCKER_DELTA: 265
 // SIZE: 270
 // FUNCTION: SERVER 0x10006d20
-// pool_alloc
+// m_PoolAlloc
 
 /* GLOBAL: SERVER 0x10028b78 */
 extern char g_str_10028b78[];
@@ -474,7 +474,7 @@ struct BlockNode {
 	struct BlockNode* next;
 };
 
-void* __cdecl pool_alloc(struct BlockNode** head, int size, int max_items)
+void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 {
 	int aligned_size;
 	struct BlockNode* node;
@@ -490,7 +490,7 @@ void* __cdecl pool_alloc(struct BlockNode** head, int size, int max_items)
 
 	node = *head;
 	if (!node) {
-		node = (struct BlockNode*) AllocateTrackedHeapBlock(aligned_size * max_items + 0x10, g_str_10028b78);
+		node = (struct BlockNode*) m_AllocTracked(aligned_size * max_items + 0x10, g_str_10028b78);
 		*head = node;
 		node->count = 0;
 		node->max = max_items;
@@ -505,7 +505,7 @@ void* __cdecl pool_alloc(struct BlockNode** head, int size, int max_items)
 			node = node->next;
 		}
 		if (!node) {
-			node = (struct BlockNode*) AllocateTrackedHeapBlock(aligned_size * max_items + 0x10, g_str_10028b60);
+			node = (struct BlockNode*) m_AllocTracked(aligned_size * max_items + 0x10, g_str_10028b60);
 			node->count = 0;
 			node->max = max_items;
 			node->size = aligned_size;
@@ -540,9 +540,9 @@ void* __cdecl pool_alloc(struct BlockNode** head, int size, int max_items)
 // ORIGIN: GAME
 // SIZE: 137
 // FUNCTION: SERVER 0x10006E30
-// pool_free
+// m_PoolFree
 
-void __cdecl pool_free(int* param_1, int* param_2)
+void __cdecl m_PoolFree(int* param_1, int* param_2)
 {
 	int* header;
 	int* block;
@@ -561,14 +561,14 @@ void __cdecl pool_free(int* param_1, int* param_2)
 			prev = (int*) *param_1;
 			if (block == prev) {
 				*param_1 = block[3];
-				FreeTrackedHeapBlock(block);
+				m_FreeTracked(block);
 				return;
 			}
 			while ((cur = (int*) prev[3]) != block) {
 				prev = cur;
 			}
 			prev[3] = block[3];
-			FreeTrackedHeapBlock(block);
+			m_FreeTracked(block);
 			return;
 		}
 	}

@@ -1,4 +1,6 @@
 #include <string.h>
+#include "Units/m_alloc/m_alloc.h"
+#include "Units/Error/error.h"
 
 #pragma intrinsic(memset, strcpy)
 
@@ -12,8 +14,6 @@ extern int __cdecl cm_GetBuildingStatCount(unsigned char*);
 extern char* __cdecl gv_FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
 extern unsigned int gm_RandomMod(int);
 extern unsigned int __ftol(void);
-extern void* __cdecl AllocateTrackedHeapBlock(unsigned int, const char*);
-extern void __cdecl FreeTrackedHeapBlock(void*);
 extern int g_entity_type_table;
 extern int g_1002575c[];
 extern int g_1002576c[];
@@ -22,7 +22,6 @@ extern char g_1002d45c;
 extern char g_1002d474;
 extern int AllocGraveyardField(unsigned char*);
 extern void gv_Free3Fields(int);
-extern void __cdecl game_free(void*);
 extern int __cdecl gm_ResolveEntityById(int* out_slot, int* out_person, int* out_building, int entity_id);
 extern int __cdecl gv_GetSlotEntry(int, int, unsigned char);
 extern void gm_SubObjektNoKill(unsigned int, unsigned int, unsigned int);
@@ -33,7 +32,6 @@ extern int __cdecl SpawnGraveyardEntities(void* entity, int action_id);
 extern int g_entity_table_end;
 extern char* g_action_table_base;
 extern char g_slot_table[];
-extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
 extern int __cdecl gm_RandomMod(int);
 extern double __cdecl gm_RandomFloat01(void);
 extern int DAT_10030b6c;
@@ -386,7 +384,7 @@ int REBREW_NAKED __cdecl AllocGraveyardField(int param_1)
 
         push    offset g_1002d474
         push    24h
-        call    AllocateTrackedHeapBlock
+        call    m_AllocTracked
         mov     esi, eax
         xor     ebx, ebx
         add     esp, 8
@@ -409,7 +407,7 @@ int REBREW_NAKED __cdecl AllocGraveyardField(int param_1)
         lea     edx, [eax+eax*4]
         shl     edx, 2
         push    edx
-        call    AllocateTrackedHeapBlock
+        call    m_AllocTracked
         mov     edi, eax
         add     esp, 8
         cmp     edi, ebx
@@ -437,7 +435,7 @@ int REBREW_NAKED __cdecl AllocGraveyardField(int param_1)
         add     ecx, eax
         shl     ecx, 2
         push    ecx
-        call    AllocateTrackedHeapBlock
+        call    m_AllocTracked
         mov     edi, eax
         add     esp, 8
         cmp     edi, ebx
@@ -449,7 +447,7 @@ int REBREW_NAKED __cdecl AllocGraveyardField(int param_1)
         cmp     eax, ebx
         je      short L_check_20
         push    eax
-        call    FreeTrackedHeapBlock
+        call    m_FreeTracked
         add     esp, 4
         mov     dword ptr [esi+1Ch], ebx
 
@@ -458,13 +456,13 @@ int REBREW_NAKED __cdecl AllocGraveyardField(int param_1)
         cmp     eax, ebx
         je      short L_free_result
         push    eax
-        call    FreeTrackedHeapBlock
+        call    m_FreeTracked
         add     esp, 4
         mov     dword ptr [esi+20h], ebx
 
     L_free_result:
         push    esi
-        call    FreeTrackedHeapBlock
+        call    m_FreeTracked
         add     esp, 4
 
     L_ret_zero:

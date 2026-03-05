@@ -27,11 +27,11 @@ extern int __cdecl deflateEnd(void* strm);
 extern int __cdecl cleanup_object(char*);
 extern int __cdecl destroy_entity(char*);
 extern int __cdecl read_uint32_be(int);
-extern void __cdecl pool_free(void* pool, void* item);
+extern void __cdecl m_PoolFree(void* pool, void* item);
 extern unsigned int gzread(unsigned int*, unsigned int*, int, int, int, int, int, int, unsigned int);
 extern int ReadVfsCompressed(unsigned int*, unsigned int*, int);
 extern void LogMessageInternal(const char*, int, int*, int);
-extern char* __cdecl pool_alloc(char*, int, int); /* 0x10006d20 */;
+extern char* __cdecl m_PoolAlloc(char*, int, int); /* 0x10006d20 */;
 extern int __cdecl inflateInit2_(char*, int, char*, int); /* 0x100057c0 */;
 extern int __cdecl deflateInit2_(char*, int, int, int, int, int, char*, int); /* 0x10001330 */;
 
@@ -495,7 +495,7 @@ int __cdecl CloseVfsStream(void* stream)
 	}
 
 	g_stream_count--;
-	pool_free(&g_stream_pool, stream);
+	m_PoolFree(&g_stream_pool, stream);
 	return result;
 }
 
@@ -674,7 +674,7 @@ int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* pa
 		}
 	}
 
-	obj = pool_alloc((char*) 0x10034670, 0x140, 0x10);
+	obj = m_PoolAlloc((char*) 0x10034670, 0x140, 0x10);
 	{
 		unsigned char flags;
 		flags = *(unsigned char*) (obj + 0x13c);
@@ -762,7 +762,7 @@ int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* pa
 	}
 
 fail:
-	pool_free((char*) 0x10034670, obj);
+	m_PoolFree((char*) 0x10034670, obj);
 	return 0;
 
 done:

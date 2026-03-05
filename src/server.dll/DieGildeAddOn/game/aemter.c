@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "Units/Error/error.h"
 
 typedef struct {
 	int value;
@@ -26,7 +27,6 @@ extern int DAT_101de5b4[];
 extern ENT g_ents[];
 extern ENT g_ents2[];
 extern unsigned short DAT_10035884;
-extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 extern void __cdecl InitBuildingTypeTable(void);
 

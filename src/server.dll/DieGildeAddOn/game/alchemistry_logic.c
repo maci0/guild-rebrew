@@ -1,14 +1,14 @@
 #include <string.h>
+#include "Units/m_alloc/m_alloc.h"
+#include "Units/Error/error.h"
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
 extern char* g_table;
 extern int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
-extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern int __cdecl gm_RandomMod(int range);
 extern float __cdecl gm_RandomFloat01(void);
 extern int __cdecl crt_ftol(void);
-extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* tag);
 extern void* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
 extern void __cdecl gm_AddOrAccumulateObject(int p1, int p2, int p3);
@@ -18,12 +18,9 @@ extern int DAT_10030b6c;
 extern char DAT_10035439;
 extern float DAT_100256cc;
 extern float DAT_100256a0;
-extern void* __cdecl gm_LookupEntityRecordById(int entityId);
-extern void __cdecl gm_DeallocEntity(int entity, int param);
 extern char s__ahm_AllocAhmInfo_1002a0f7[];
 extern double dScaleFactor;
 extern int DAT_1002c050[];
-extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 extern int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
@@ -253,7 +250,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 				*(char*) (slot_offset + 0x1014d8e0) = 0;
 			} while (idx < 0x90000);
 			if (*(int*) (target_building + 0x65) == 0) {
-				alloc_result = (unsigned int) AllocateTrackedHeapBlock(0x3c, g_1002a0f8);
+				alloc_result = (unsigned int) m_AllocTracked(0x3c, g_1002a0f8);
 				*(unsigned int*) (target_building + 0x65) = alloc_result;
 			}
 			clear_ptr = *(unsigned int**) (target_building + 0x65);
@@ -478,7 +475,7 @@ int __cdecl ahm_FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 // SIZE: 295
 // BLOCKER_DELTA: 269
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
-void* __cdecl AllocateTrackedHeapBlock(unsigned int allocSize, const char* groupTag);
+void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 
 // FUNCTION: SERVER 0x1000c4d0
 // ahm_AllocAhmInfo
@@ -530,7 +527,7 @@ int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 				buf_cursor = buf_cursor + 8;
 				if (5 < i) {
 					if (*(int*) (param_2 + 0x65) == 0) {
-						alloc_ptr = AllocateTrackedHeapBlock(0x3c, s__ahm_AllocAhmInfo_1002a0f7 + 1);
+						alloc_ptr = m_AllocTracked(0x3c, s__ahm_AllocAhmInfo_1002a0f7 + 1);
 						*(void**) (param_2 + 0x65) = alloc_ptr;
 					}
 					src = &header_id;

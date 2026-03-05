@@ -2,38 +2,25 @@
 #include <string.h>
 #include <windows.h>
 #include <winsock2.h>
+#include "Units/m_alloc/m_alloc.h"
+#include "Units/Error/error.h"
+#include "Units/net/net.h"
+#include "DieGildeAddOn/command/command.h"
+#include "DieGildeAddOn/game/entity.h"
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
 extern int g_stop_flag;
-extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
-extern int __cdecl AcceptConnections(void);
 extern void __cdecl InitBuildingTypeTable(void);
-extern int __cdecl ProcessReceiveData(void);
-extern int __cdecl ProcessSendData(void);
-extern int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
-extern int __cdecl cm_QueuePlayerCommand(unsigned int* player_slot, unsigned char* cmd_data);
-extern void __cdecl SendBroadcastPacket(int port, void* config_data);
 extern void __cdecl RecvGameSavegame(void);
-extern void __cdecl CleanupSockets(void);
 extern int __cdecl srv_Init(void);
 extern int __cdecl AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
-extern int __cdecl cm_ProcessCommandQueue(void);
-extern void __cdecl FreeTrackedHeapBlock(void* ptr);
 extern void __cdecl sim_SetSyncParams(int base_addr, unsigned char phase, unsigned int arg3, unsigned int arg4);
 extern void __cdecl crt_getptd_set(unsigned int value);
-extern void __cdecl gm_ResetAllEntities(void);
-extern void __cdecl gm_CleanupObjectEntities(void);
-extern void __cdecl gm_CleanupAllEntities(void);
 extern void __cdecl ShutdownMemoryAllocator(void);
-extern void __cdecl ShutdownLogAndErrorHandler(void);
 extern int g_net_socket;
-extern void __cdecl LogWinsockError(int error_code);
-extern int __cdecl ReceivePacketHeader(unsigned int* conn); /* 0x1000a340 */;
 extern int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */;
-extern int __cdecl lb_ExLobbyServerCommand(unsigned int* conn, unsigned char* pkt); /* 0x10014db0 */;
-extern int __cdecl AllocateTrackedHeapBlock(unsigned int size, char* name); /* 0x10006580 */;
 extern int __cdecl SendPlayerData(unsigned int*);
 extern void __cdecl FreeCommandBuffer(unsigned int*, int);
 extern unsigned int g_player_slots;
@@ -384,7 +371,7 @@ send_start_commands:
 		} while ((char*) player_slot < (char*) 0x114ffe20);
 	}
 
-	FreeTrackedHeapBlock(*(void**) 0x101deae8);
+	m_FreeTracked(*(void**) 0x101deae8);
 	*(void**) 0x101deae8 = (void*) 0;
 	*(unsigned int*) 0x101deac0 = 0;
 
@@ -1108,7 +1095,7 @@ int __cdecl ProcessReceiveData(void)
 						g_download_received = 0;
 						g_download_total_size = conn[10];
 						memset(g_download_slots, 0xff, 32);
-						g_download_buffer = AllocateTrackedHeapBlock(conn[10], "srv_LoadBuf");
+						g_download_buffer = m_AllocTracked(conn[10], "srv_LoadBuf");
 					}
 					else if (*(unsigned char*) (conn + 6) == 9) {
 						memcpy((void*) (g_download_buffer + g_download_received), conn + 10, 0x80);

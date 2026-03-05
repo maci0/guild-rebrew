@@ -1,4 +1,7 @@
 #include <stdlib.h>
+#include "Units/m_alloc/m_alloc.h"
+#include "Units/vfs/vfs.h"
+#include "DieGildeAddOn/game/entity.h"
 
 extern int __cdecl AllocGraveyardField(int);
 extern int g_1002576c[];
@@ -11,9 +14,6 @@ extern void gm_AddOrAccumulateObject(int, int, int);
 extern char g_100a9820[];
 extern char g_1014d8e0[];
 extern char g_10139820[];
-extern unsigned int __cdecl ReadVfsData(void*, int, int, int);
-extern void* __cdecl AllocateTrackedHeapBlock(unsigned int allocSize, const char* groupTag);
-extern void __cdecl FreeTrackedHeapBlock(void*);
 extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 extern int g_save_version;
 extern int g_1002d4f0;
@@ -22,7 +22,6 @@ extern char g_1002d4f8;
 extern char g_1002d4fc;
 extern int DAT_100a8c34;
 extern int DAT_10035450;
-extern void __cdecl gm_ResetAllEntities(void);
 extern int __cdecl ls_LoadGraveyardData(int param_1, int param_2);
 extern int __cdecl ahm_AllocAhmInfo(int param_1, int param_2);
 extern int g_file_version;     /* 0x1002d4ec */;
@@ -291,7 +290,7 @@ int REBREW_NAKED __cdecl ls_LoadSavegameHeader(int param_1, char* param_2)
         push    edi
         push    offset g_1002d4fc
         push    0E100h
-        call    AllocateTrackedHeapBlock
+        call    m_AllocTracked
         mov     esi, dword ptr [esp+20h]
         mov     edi, dword ptr [esp+24h]
         push    esi
@@ -677,7 +676,7 @@ int REBREW_NAKED __cdecl ls_LoadSavegameHeader(int param_1, char* param_2)
         test    ebx, ebx
         je      short L_check_version
         push    ebx
-        call    FreeTrackedHeapBlock
+        call    m_FreeTracked
         add     esp, 4
 
     L_check_version:
@@ -946,7 +945,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 			}
 
 			if (esi[0] == 0x1e) {
-				*(int*) (esi + 0x71) = (int) AllocateTrackedHeapBlock(0x600, (const char*) 0x1002d510);
+				*(int*) (esi + 0x71) = (int) m_AllocTracked(0x600, (const char*) 0x1002d510);
 				load_result = 0;
 				do {
 					if (!ls_ReadVfsDataChecked((void*) (load_result + *(int*) (esi + 0x71)), 4, 1, (void*)param_1)) {
@@ -1001,7 +1000,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*)param_1)) {
 						return 0;
 					}
-					ahm_info = (int*) AllocateTrackedHeapBlock(0x3c, (const char*) 0x1002d504);
+					ahm_info = (int*) m_AllocTracked(0x3c, (const char*) 0x1002d504);
 					*(int*) (esi + 0x65) = (int) ahm_info;
 					*ahm_info = neg1;
 					goto label_10012d72;
@@ -1948,7 +1947,7 @@ int srv_RecvGame(void)
 			"ls_RecvGame(): Can\'t open File",
 			1
 		);
-		FreeTrackedHeapBlock((void*) g_101de560);
+		m_FreeTracked((void*) g_101de560);
 		g_101de560 = 0;
 		return 0;
 	}
@@ -1961,7 +1960,7 @@ int srv_RecvGame(void)
 			1
 		);
 		CloseVfsStream(file_handle);
-		FreeTrackedHeapBlock((void*) g_101de560);
+		m_FreeTracked((void*) g_101de560);
 		g_101de560 = 0;
 		return 0;
 	}
@@ -2004,7 +2003,7 @@ int srv_RecvGame(void)
 												1
 											);
 											CloseVfsStream(file_handle);
-											FreeTrackedHeapBlock((void*) g_101de560);
+											m_FreeTracked((void*) g_101de560);
 											g_101de560 = 0;
 											return 0;
 										}
@@ -2017,7 +2016,7 @@ int srv_RecvGame(void)
 												1
 											);
 											CloseVfsStream(file_handle);
-											FreeTrackedHeapBlock((void*) g_101de560);
+											m_FreeTracked((void*) g_101de560);
 											g_101de560 = 0;
 											return 0;
 										}
@@ -2030,7 +2029,7 @@ int srv_RecvGame(void)
 												1
 											);
 											CloseVfsStream(file_handle);
-											FreeTrackedHeapBlock((void*) g_101de560);
+											m_FreeTracked((void*) g_101de560);
 											g_101de560 = 0;
 											return 0;
 										}
@@ -2050,7 +2049,7 @@ int srv_RecvGame(void)
 												1
 											);
 											CloseVfsStream(file_handle);
-											FreeTrackedHeapBlock((void*) g_101de560);
+											m_FreeTracked((void*) g_101de560);
 											g_101de560 = 0;
 											return 0;
 										}
@@ -2079,7 +2078,7 @@ int srv_RecvGame(void)
 											1
 										);
 										CloseVfsStream(file_handle);
-										FreeTrackedHeapBlock((void*) g_101de560);
+										m_FreeTracked((void*) g_101de560);
 										g_101de560 = 0;
 										return 0;
 									}
@@ -2090,7 +2089,7 @@ int srv_RecvGame(void)
 										1
 									);
 									CloseVfsStream(file_handle);
-									FreeTrackedHeapBlock((void*) g_101de560);
+									m_FreeTracked((void*) g_101de560);
 									g_101de560 = 0;
 									return 0;
 								}
@@ -2108,7 +2107,7 @@ int srv_RecvGame(void)
 		1
 	);
 	CloseVfsStream(file_handle);
-	FreeTrackedHeapBlock((void*) g_101de560);
+	m_FreeTracked((void*) g_101de560);
 	g_101de560 = 0;
 	return 0;
 }

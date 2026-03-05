@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include "Units/m_alloc/m_alloc.h"
+#include "Units/Error/error.h"
 
 typedef int(__cdecl* ALLOCFN)(int, int, int);
 
@@ -21,10 +23,8 @@ typedef struct {
 } Record;
 #pragma pack(pop)
 
-extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern char* g_entity_table; /* 0x101de450 */
 ;
-extern void* __cdecl AllocateTrackedHeapBlock(unsigned int size, const char* tag);
 extern int __cdecl crt_call_extra(char* filename, char* mode);
 extern int __cdecl crt_locked_call4b(void* dest, int elemSize, int count, int stream);
 extern void __cdecl gm_InitObjektHersteller(void);
@@ -92,7 +92,6 @@ extern unsigned short g_FilterVal25;
 extern unsigned short g_FilterVal27;
 extern unsigned char g_FilterVal30;
 extern char* g_array;
-extern void __cdecl FreeTrackedHeapBlock(void* heapBlock);
 extern void __cdecl gv_Free3Fields(void* param);
 extern int DAT_10035a0c;
 extern unsigned char DAT_10030861;
@@ -110,7 +109,6 @@ extern char* dword_100a8c30;
 extern unsigned short* dword_100a8c34;
 extern char* dword_101de450;
 extern char* __cdecl gm_GetMsgField(int);
-extern void __cdecl ReportMessage(int);
 extern int g_entity_type_table;
 extern char g_current_season;
 extern char g_10031004[];
@@ -433,12 +431,12 @@ int __cdecl gm_Open(int param_1)
 		dst_player_ptr = dst_player_ptr + 0xaa4;
 	} while ((unsigned int) src_player_ptr < 0x100a9bbc);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e3, "gm_Open(): Gebaeude-Daten", 1);
-	g_entity_type_table = (int) AllocateTrackedHeapBlock(0xca78, (const char*) 0x100311d8);
+	g_entity_type_table = (int) m_AllocTracked(0xca78, (const char*) 0x100311d8);
 	if (g_entity_type_table == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e8, "Memory could not be allocated!", 1);
 		return -1;
 	}
-	g_1014d8c0 = (int) AllocateTrackedHeapBlock(0xa900, (const char*) 0x100311a0);
+	g_1014d8c0 = (int) m_AllocTracked(0xa900, (const char*) 0x100311a0);
 	memset((void*) g_1014d8c0, 0, 0xa900);
 	if (g_1014d8c0 == 0) {
 		return -2;
@@ -451,11 +449,11 @@ int __cdecl gm_Open(int param_1)
 	}
 	crt_locked_call4b((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
 	fflush(file_handle);
-	g_item_def_table = (int) AllocateTrackedHeapBlock(0xb9dc, (const char*) 0x10031140);
+	g_item_def_table = (int) m_AllocTracked(0xb9dc, (const char*) 0x10031140);
 	if (g_item_def_table == 0) {
 		return -4;
 	}
-	g_100a8c34 = (int) AllocateTrackedHeapBlock(0x14f218, (const char*) 0x1003112c);
+	g_100a8c34 = (int) m_AllocTracked(0x14f218, (const char*) 0x1003112c);
 	if (g_100a8c34 == 0) {
 		return -5;
 	}
@@ -2002,7 +2000,7 @@ int __cdecl gm_CleanupBuildingEntity(unsigned char* param_1)
 	switch (*param_1) {
 	case 0x1e:
 		if (*(void**) (param_1 + 0x71) != (void*) 0) {
-			FreeTrackedHeapBlock(*(void**) (param_1 + 0x71));
+			m_FreeTracked(*(void**) (param_1 + 0x71));
 			*(int*) (param_1 + 0x71) = 0;
 		}
 		*(int*) (param_1 + 0x71) = 0;
@@ -2015,7 +2013,7 @@ int __cdecl gm_CleanupBuildingEntity(unsigned char* param_1)
 	case 0x4b:
 	case 0x4c:
 	case 0x4d:
-		FreeTrackedHeapBlock(*(void**) (param_1 + 0x65));
+		m_FreeTracked(*(void**) (param_1 + 0x65));
 		break;
 	default:
 		goto cleanup_loop;
@@ -2301,7 +2299,7 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 			break;
 		case 30: {
 			unsigned int plant_map;
-			plant_map = (unsigned int) AllocateTrackedHeapBlock(0x600, "f3_gm:PlantMap");
+			plant_map = (unsigned int) m_AllocTracked(0x600, "f3_gm:PlantMap");
 			*(unsigned int*) (geb + 0x71) = plant_map;
 			temp_result = 0;
 			do {
@@ -2337,7 +2335,7 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 		case 75:
 		case 76:
 		case 77: {
-			int* ahm_block = (int*) AllocateTrackedHeapBlock(0x3c, "AHM_INFO");
+			int* ahm_block = (int*) m_AllocTracked(0x3c, "AHM_INFO");
 			*(int*) (geb + 0x65) = (int) ahm_block;
 			*ahm_block = -1;
 			break;
