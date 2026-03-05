@@ -1,0 +1,179 @@
+// FUNCTION: SERVER 0x1000e530
+// STATUS: MATCHING
+// BLOCKER: loop rotation (while->cmp duplicated), shared error exit layout, xor edx initialization
+// ORIGIN: GAME
+// SIZE: 352
+// CFLAGS: /O2 /Gd
+// SYMBOL: _ExMoveObject
+// BLOCKER_DELTA: 155
+
+#include "../command_internal.h"
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wint-to-pointer-cast"
+#pragma clang diagnostic ignored "-Wpointer-to-int-cast"
+#pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
+#endif
+
+/*
+// BLOCKER_DELTA: 165
+ * Ghidra decompilation reference:
+ * /+ [rebrew] FUNCTION: MATCHING
+ *    Origin: GAME
+ *    Size: 346B
+ *    CFlags: 
+ *    Symbol: _ExMoveObject
+ *    Files: DieGildeAddOn/command/command.c * / * 
+ * int __cdecl ExMoveObject(int param_1,char *param_2)
+ * 
+ * {
+ *   int iVar1;
+ *   int iVar2;
+ *   int iVar3;
+ *   int *piVar4;
+ *   int *piVar5;
+ *   uint line;
+ *   char *msg;
+ *   int iVar6;
+ *   void *pvStack_8;
+ *   void *pvStack_4;
+ *   
+ *   iVar6 = param_1;
+ *   iVar2 = get_field_by_type((char *)param_1,*(int *)(param_1 + 0x14));
+ *   *(int *)(iVar6 + 0x14) = iVar2;
+ *   iVar2 = ResolveEntityById(&pvStack_8,(void **)&param_1,&pvStack_4,iVar2);
+ *   if (iVar2 == 0) {
+ *     iVar6 = 8;
+ *     msg = s_cm_ExMoveObjekt___Invalid__quell_1002d024;
+ *     line = 0x30a1;
+ *   }
+ *   else {
+ *     if (pvStack_8 == (void *)0x0) {
+ *       if (param_1 == 0) {
+ *         piVar4 = (int *)((int)pvStack_4 + 0x178);
+ *       }
+ *       else {
+ *         piVar4 = (int *)(param_1 + 0x14);
+ *       }
+ *     }
+ *     else {
+ *       piVar4 = (int *)((int)pvStack_8 + 0x5d);
+ *     }
+ *     iVar2 = get_field_by_type((char *)iVar6,*(int *)(iVar6 + 0x10));
+ *     *(int *)(iVar6 + 0x10) = iVar2;
+ *     iVar2 = ResolveEntityById(&pvStack_8,(void **)&param_1,&pvStack_4,iVar2);
+ *     if (iVar2 == 0) {
+ *       iVar6 = 1;
+ *       msg = s_cm_ExMoveObjekt___Invalid__ziel__1002cff4;
+ *       line = 0x30bd;
+ */
+
+extern void __cdecl LogMessageInternal(char*, unsigned int, char*, int);
+
+extern char s_cm_ExMoveObjekt___Invalid__quell_1002d024[];
+extern char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[];
+extern char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[];
+
+int __cdecl ExMoveObject(int param_1, char* param_2)
+{
+	int object_id;
+	void* ent_a;
+	void* ent_c;
+	int entity_or_node;
+	int* src_list;
+	int* dst_list;
+	int prev;
+
+	object_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x14));
+	*(int*) (param_1 + 0x14) = object_id;
+	if (ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
+		LogMessageInternal(
+			s_D__Develop_DieGildeAddOn_command_1002c748,
+			0x30a1,
+			s_cm_ExMoveObjekt___Invalid__quell_1002d024,
+			8
+		);
+		return 1;
+	}
+
+	if (ent_a != (void*) 0x0) {
+		src_list = (int*) ((char*) ent_a + 0x5d);
+	}
+	else if (entity_or_node != 0) {
+		src_list = (int*) (entity_or_node + 0x14);
+	}
+	else {
+		src_list = (int*) ((char*) ent_c + 0x178);
+	}
+
+	object_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x10));
+	*(int*) (param_1 + 0x10) = object_id;
+	if (ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
+		LogMessageInternal(
+			s_D__Develop_DieGildeAddOn_command_1002c748,
+			0x30bd,
+			s_cm_ExMoveObjekt___Invalid__ziel__1002cff4,
+			1
+		);
+		return 1;
+	}
+
+	if (ent_a != (void*) 0x0) {
+		dst_list = (int*) ((char*) ent_a + 0x5d);
+	}
+	else if (entity_or_node != 0) {
+		dst_list = (int*) (entity_or_node + 0x14);
+	}
+	else {
+		dst_list = (int*) ((char*) ent_c + 0x178);
+	}
+
+	object_id = get_field_by_type((char*) param_1, *(int*) (param_1 + 0x18));
+	*(int*) (param_1 + 0x18) = object_id;
+
+	prev = 0;
+	entity_or_node = *src_list;
+	if (entity_or_node == 0) {
+		goto object_not_found;
+	}
+
+	while (*(int*) (entity_or_node + 2) != object_id) {
+		prev = entity_or_node;
+		entity_or_node = *(int*) (entity_or_node + 0x3f);
+		if (entity_or_node != 0) {
+			continue;
+		}
+		goto object_not_found;
+	}
+
+	if (prev == 0) {
+		*src_list = *(int*) (entity_or_node + 0x3f);
+	}
+	else {
+		*(int*) (prev + 0x3f) = *(int*) (entity_or_node + 0x3f);
+	}
+
+	if (entity_or_node == 0) {
+		goto object_not_found;
+	}
+
+	*(int*) (entity_or_node + 6) = *(int*) (param_1 + 0x10);
+	*(int*) (entity_or_node + 0x3f) = *dst_list;
+	*dst_list = entity_or_node;
+
+	if (param_2 != (char*) 0x0) {
+		*param_2 = '\x01';
+	}
+
+	return 0;
+
+object_not_found:
+	LogMessageInternal(
+		s_D__Develop_DieGildeAddOn_command_1002c748,
+		0x30f9,
+		s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4,
+		8
+	);
+	return 1;
+}
