@@ -352,7 +352,6 @@ int* __cdecl vfs_GetErrnoPtr(void)
 	return &stub_errno_val;
 }
 
-
 extern int __cdecl ServerMainThread(void*);
 
 int __stdcall thread_proc(void* param)
@@ -383,7 +382,6 @@ int __cdecl vfs_WriteBufferLocked(void* a, int b, int c, int d)
 	return 0;
 }
 
-
 int __cdecl vfs_CleanupSubobject(void* a)
 {
 	return 0;
@@ -399,12 +397,10 @@ int __cdecl vfs_Crc32Update(int checksum, int buffer, unsigned int size)
 	return 0;
 }
 
-
 void* __cdecl _callnewh(int a)
 {
 	return (void*) 0;
 }
-
 
 int __cdecl _getpid(void)
 {
@@ -415,13 +411,10 @@ void __cdecl _seterrormode(unsigned int value)
 {
 }
 
-
 int __cdecl crt_locked_putc(int a, int b)
 {
 	return 0;
 }
-
-
 
 void __cdecl vfs_EntityCleanup(char* a)
 {
@@ -458,10 +451,6 @@ int __cdecl vfs_LockedFwrite(void* a, int b, int c, void* d)
 	return 0;
 }
 
-void __cdecl mem_free(void* a)
-{
-}
-
 void __cdecl vfs_StreamClose(int a)
 {
 }
@@ -474,7 +463,6 @@ int __cdecl sub_1001a299(void)
 void __cdecl write_log(char* a, int b, char* c)
 {
 }
-
 
 int __cdecl __ftol(void)
 {

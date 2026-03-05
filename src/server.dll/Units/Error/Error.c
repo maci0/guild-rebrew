@@ -493,7 +493,6 @@ unsigned int EmitCrashModuleLine(int* param_1)
 	int write_count;
 	unsigned char* newline_ptr;
 	unsigned char separator_pad[4];
-	(void) separator_pad;
 	unsigned int format_val_a;
 	unsigned char format_flag_a;
 	unsigned int format_val_b;
@@ -505,6 +504,8 @@ unsigned int EmitCrashModuleLine(int* param_1)
 	int stack_16;
 	int stack_60;
 	int stack_8;
+
+	(void) separator_pad;
 
 	dbg_base = (unsigned char*) param_1[0];
 	entry_ptr = (int*) (*(int*) (dbg_base + 0xc) + 0x10 + (int) dbg_base);

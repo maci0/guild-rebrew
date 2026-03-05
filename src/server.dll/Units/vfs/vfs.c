@@ -18,7 +18,7 @@ unsigned int __cdecl vfs_FlushStream(int, int);
 void __cdecl vfs_WriteUint32LE(int, unsigned int);
 int __cdecl vfs_CloseStream(void*);
 void __cdecl vfs_EntityCleanup(char*);
-extern void mem_free(void*);
+
 void __cdecl vfs_StreamClose(int);
 int __cdecl vfs_Crc32Update(int checksum, int buffer, unsigned int size);
 void __cdecl vfs_FreeSubobj(void*);
@@ -244,7 +244,7 @@ int __cdecl vfs_DestroyEntity(char* entity)
 		vfs_EntityCleanup(entity);
 	}
 	vfs_StreamClose(*(int*) entity);
-	mem_free(entity);
+	free(entity);
 	return 0;
 }
 
