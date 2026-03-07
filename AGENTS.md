@@ -14,48 +14,46 @@ uv pip install -e ../rebrew && uv pip install -e ../recoverage
 
 ## Quick Start
 
-1. `rebrew triage --json` -- assess the binary
-2. `rebrew todo --json` -- get highest ROI action items
-3. `rebrew skeleton 0x<VA>` -- generate `.c` skeleton
-4. Write C89 source matching Ghidra decompilation
-5. `rebrew test src/server.dll/<file>.c --json` -- compile and compare
-6. `rebrew match -d src/server.dll/<file>.c --json` -- inspect diffs
-7. Iterate until RELOC or EXACT match
-8. `rebrew promote src/server.dll/<file>.c --json` -- test + update STATUS
+1. `rebrew todo --json` — pick highest ROI action item
+2. `rebrew skeleton 0x<VA>` — generate `.c` skeleton
+3. Write C89 source matching Ghidra decompilation
+4. `rebrew test src/server.dll/<file>.c` — compile and compare (auto-updates STATUS)
+5. `rebrew diff src/server.dll/<file>.c --json` — inspect byte diffs
+6. Iterate until RELOC or EXACT — `rebrew test` promotes automatically
 
 ## CLI Tools
 
-Use `--json` for structured output (preferred for agents). All tools read `rebrew-project.toml` for compiler paths, target binary, and flags. Global flags: `-v` (verbose), `-q` (quiet) apply to all subcommands.
+Use `--json` for structured output (preferred for agents). All tools read `rebrew-project.toml`.
 
 | Command | Use |
 |---------|-----|
-| `rebrew triage --json` | Combined overview: coverage, near-misses, recommendations |
-| `rebrew doctor` | Check toolchain and project health |
 | `rebrew todo --json` | Prioritized action items (compile errors, near misses, new functions) |
-| `rebrew next --json` | Find next function to reverse (sorted by similarity) |
-| `rebrew next --improving --json` | List MATCHING functions sorted by byte delta |
+| `rebrew doctor` | Check toolchain and project health |
 | `rebrew skeleton 0x<VA>` | Generate C skeleton from address |
-| `rebrew test <file> --json` | Compile and byte-compare against target |
-| `rebrew match --diff-only <file> --json` | Structured byte diff (`-d`) |
-| `rebrew match --flag-sweep-only <file>` | Find best compiler flags for a single function (`-S`) |
+| `rebrew test <file>` | Compile + byte-compare; auto-updates STATUS in sidecar |
+| `rebrew test <file> --no-promote` | Compile + compare without updating STATUS |
+| `rebrew diff <file> --json` | Structured byte diff (`--mm` for structural diffs only) |
+| `rebrew diff <file> --fix-blocker` | Auto-write BLOCKER to sidecar from diff |
 | `rebrew match <file> --json` | Run GA matching engine |
-| `rebrew ga --flag-sweep --json` | Batch flag sweep on all MATCHING functions |
-| `rebrew ga --near-miss --threshold 5` | Batch GA on MATCHING functions with small deltas |
-| `rebrew promote <file> --json` | Test + atomically update STATUS |
+| `rebrew ga --near-miss --threshold 5` | Batch GA on near-miss functions |
 | `rebrew rename <old> <new>` | Rename function and update cross-references |
-| `rebrew status --json` | Coverage progress |
 | `rebrew verify --json` | Bulk verify all reversed files |
 | `rebrew lint --json` | Validate annotations |
 | `rebrew lint --fix <file>` | Auto-fix annotation format |
 | `rebrew data --json` | Inventory globals in .data/.rdata/.bss |
 | `rebrew graph --format summary` | Dependency graph stats and blockers |
+| `rebrew graph --cu-map --json` | Infer compilation unit boundaries |
 | `rebrew catalog --json` | Generate coverage catalog |
+| `rebrew catalog db` | Build SQLite coverage database |
 | `rebrew flirt --json` | FLIRT scan for known library functions |
 | `rebrew extract --json` | Batch extract and disassemble functions |
-| `rebrew asm 0x<VA> --size 128 --json` | Quick offline disassembly |
+| `rebrew asm 0x<VA> --size 128` | Quick offline disassembly (hex dump) |
+| `rebrew asm 0x<VA> --format nasm` | NASM-reassembleable source |
 | `rebrew sync --push` | Push annotations to Ghidra |
 | `rebrew sync --summary --json` | Preview what would be synced |
-| `clang-format -i --style=file <file>` | Format C source (pre-commit hook runs this automatically) |
+| `clang-format -i --style=file <file>` | Format C source (pre-commit hook runs automatically) |
+
+> [!IMPORTANT]
 
 
 ## C Source Style (src/server.dll/*.c)
@@ -85,8 +83,8 @@ Use `--json` for structured output (preferred for agents). All tools read `rebre
 
 ### File Structure
 
-One function per file. The `.c` file contains only the `// FUNCTION:` marker and
-the C source — all volatile metadata lives in `rebrew-functions.toml`:
+One function per file. The `.c` file contains **only** the `// FUNCTION:` marker and
+the C source — all volatile metadata lives in `rebrew-function.toml`:
 
 ```c
 /* Brief prose description of what the function does. */
@@ -107,7 +105,7 @@ int __cdecl alloc_game_object(int param_1)
 }
 ```
 
-`rebrew-functions.toml` (in the same directory, managed by CLI tools):
+`rebrew-function.toml` (in the same directory, managed by CLI tools):
 
 ```toml
 ["SERVER.0x10003da0"]
@@ -115,8 +113,7 @@ size = 160
 status = "RELOC"
 ```
 
-The function name and symbol are derived automatically from the C function
-definition (e.g. `alloc_game_object` → symbol `_alloc_game_object`).
+The function name and symbol are derived automatically from the C function definition.
 `CFLAGS` is optional — falls back to the target default from `rebrew-project.toml`.
 
 ### Types and Imports
@@ -141,10 +138,10 @@ Only the `// FUNCTION:` marker line stays in `.c`:
 
 **Derived automatically**: Symbol (from C function def, e.g. `_alloc_game_object`), Prototype
 
-### In `rebrew-functions.toml` (sidecar — managed by CLI tools)
+### In `rebrew-function.toml` (sidecar — managed by CLI tools)
 
 > [!CAUTION]
-> Never manually edit `rebrew-functions.toml`. It is managed by `rebrew promote`,
+> Never manually edit `rebrew-function.toml`. It is managed by `rebrew test`,
 > `rebrew match`, `rebrew sync`, etc. Manual edits will be lost.
 
 **Required sidecar fields**: `status`, `size`
@@ -158,7 +155,6 @@ Only the `// FUNCTION:` marker line stays in `.c`:
 | `EXACT` | Byte-for-byte identical to target |
 | `RELOC` | Identical after masking relocations (typical best) |
 | `MATCHING` | Close but structural diffs remain |
-| `MATCHING_RELOC` | Very close, 1-5 byte diffs |
 | `STUB` | Far off or placeholder |
 
 **Origin / compiler flags** — configured in `rebrew-project.toml`, not per-function annotations.
@@ -194,7 +190,7 @@ note    = "optional description"
 
 ## Diff Output
 
-`rebrew match --diff-only` markers: `==` identical, `~~` relocation diff only,
+`rebrew diff` markers: `==` identical, `~~` relocation diff only,
 `**` structural mismatch. Use `--mm` to show only `**` lines.
 
 ## Key Directories
@@ -202,8 +198,8 @@ note    = "optional description"
 | Path | Contents |
 |------|----------|
 | `src/server.dll/` | Reversed C89 source files |
-| `src/server.dll/rebrew-functions.toml` | Function metadata (status, size, blocker, …) — shared by all subdirs |
-| `src/server.dll/rebrew-data.toml` | Data/global metadata (size, section, note) — shared by all subdirs |
+| `src/server.dll/rebrew-function.toml` | Function metadata (status, size, blocker, …) |
+| `src/server.dll/rebrew-data.toml` | Data/global metadata (size, section, note) |
 | `original/Server/server.dll` | Target binary (DO NOT MODIFY) |
 | `tools/MSVC600/VC98/` | MSVC6 compiler toolchain (via Wine) |
 | `references/zlib-1.1.3/` | Exact zlib version used in server.dll |
