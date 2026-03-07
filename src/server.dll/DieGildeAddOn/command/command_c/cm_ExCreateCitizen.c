@@ -1,7 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: mov di,ax vs mov edi,eax (16-bit truncation) and lea edx,[edi+addr] vs add edi,addr (7 structural diffs, 99.1% mnemonic)
-// ORIGIN: GAME
-// SIZE: 336
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"

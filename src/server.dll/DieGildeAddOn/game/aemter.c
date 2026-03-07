@@ -30,11 +30,6 @@ extern unsigned short DAT_10035884;
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void __cdecl InitBuildingTypeTable(void);
 
-// STATUS: MATCHING
-// BLOCKER: comparison direction swap, jump condition swap, zero-extend pattern (xor vs mov)
-// ORIGIN: GAME
-// SIZE: 205
-// BLOCKER_DELTA: 196
 /* Validates if an entity is eligible for an office position.
  * Checks entity type, existing office holdings, and eligibility
  * requirements. Returns 0 on success, non-zero on failure. */
@@ -107,10 +102,6 @@ int __cdecl amt_ValidateOfficeCandidate(int* param_1)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
-// SIZE: 425
 /* Validates preconditions and assigns an office to an entity.
  * Performs eligibility checks, then updates the office holder
  * table and entity links. */
@@ -119,7 +110,6 @@ int __cdecl amt_ValidateOfficeCandidate(int* param_1)
 // ValidateAndAssignOffice
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 400
 
 unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 {
@@ -220,9 +210,6 @@ unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 133
 /* Validates a generic office command string. Parses the command
  * buffer and checks that the referenced entities and office
  * type are valid. Returns 0 if valid. */
@@ -271,13 +258,6 @@ int __cdecl amt_ValidateCommand(char* param_1)
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: jump condition swap
-// BLOCKER_DELTA: 119
-// ANALYSIS: Iterates through a fixed validation table at g_office_table looking for a matching command_type. Once found, verifies conditions including checking if entity_ids in the payload actually map to existing objects using gm_LookupEntityRecordById. Returns 1 if valid, 0 if invalid.
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
-// SIZE: 836
 /* Executes an office assignment. Updates the office holder table,
  * assigns benefits and duties to the new holder, and notifies
  * the game state of the change. */
@@ -287,7 +267,6 @@ int __cdecl amt_ValidateCommand(char* param_1)
 
 /* Game function - entity role/assignment table manager */
 /* Updates a 0x18-byte record table at 0x101de5a0, clears old roles, sets new assignments */
-// BLOCKER_DELTA: 800
 
 int __cdecl ExecuteOfficeAssignment(char* param_1)
 {
@@ -559,9 +538,6 @@ final_store:
 	return 1;
 }
 
-// ORIGIN: GAME
-// STATUS: RELOC
-// SIZE: 42
 /* Searches for an entity with type 0x26 (specific entity class)
  * matching the given value. Used for office-related lookups. */
 
@@ -579,9 +555,6 @@ void __cdecl amt_FindEntity26(int val)
 	}
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 42
 /* Searches for an entity with type 0x27 (specific entity class)
  * matching the given value. Used for office-related lookups. */
 
@@ -599,11 +572,6 @@ void __cdecl amt_FindEntity27(int val)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap
-// SIZE: 263
-// BLOCKER_DELTA: 205
 /* Swaps two office holders. Exchanges position assignments
  * between the entities referenced in the param array. Returns 0
  * on success, or non-zero if the swap is invalid. */
@@ -669,11 +637,6 @@ int __cdecl amt_SwapOfficeHolders(int* param_1)
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, zero-extend pattern (xor vs mov)
-// SIZE: 157
-// BLOCKER_DELTA: 146
 /* Clears all entity links for an office position. Removes
  * the holder and resets associated entity references. */
 
@@ -717,11 +680,6 @@ int __cdecl amt_ClearEntityLinks(int param_1)
 	return result;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 179
-// BLOCKER_DELTA: 178
-// ANALYSIS: Iterates through the command execution tracker table at g_office_secondary_id_base to detach or update a specific entity's links and pending sequence numbers. Used when an entity changes state abruptly or is being removed.
 /* Updates entity links for an office assignment. Sets up
  * the bidirectional references between the office slot and
  * the entity holding it. */
@@ -765,12 +723,6 @@ void __cdecl amt_UpdateEntityLinks(int param_1, int param_2)
 	*(char*) (param_1 + 0x168) = 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov)
-// SIZE: 606
-// BLOCKER_DELTA: 407
-// GHIDRA: LoadOfficeData
 /* File I/O loader for office data (Aemter). Reads office
  * holder assignments from a save file via VFS and populates
  * the runtime office tables. */
@@ -778,7 +730,7 @@ void __cdecl amt_UpdateEntityLinks(int param_1, int param_2)
 // FUNCTION: SERVER 0x1000baf0
 // amt_fio_LoadAemter
 
-/* GLOBAL: SERVER 0x101de5a4 */
+// DATA: SERVER 0x101de5a4
 extern char g_aemter_table[];
 
 unsigned int __cdecl amt_fio_LoadAemter(int param_1, int param_2)

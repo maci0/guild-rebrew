@@ -1,8 +1,3 @@
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 912
-// BLOCKER: register allocation (esi vs edi for cmd_ptr, ebp vs ebx for outer_ent), branch condition inversion (jle/jge vs jg/jl in clamping), dead code elimination (inner nested if level>0 check optimized away), loop structure (while entity search vs do-while with inlined return), return 1 epilogue sharing (candidate shares one exit, target inlines two)
-// BLOCKER_DELTA: 121
 
 #include "../command_internal.h"
 

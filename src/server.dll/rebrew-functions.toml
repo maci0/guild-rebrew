@@ -1,0 +1,1290 @@
+["SERVER.0x10001130"]
+size = 179
+status = "RELOC"
+
+["SERVER.0x10002640"]
+size = 290
+status = "RELOC"
+analysis = "Core logging sink. Takes an output_mask bitfield: bit 0 writes to file (looking up the correct file name via severity in a global table), bit 2 writes to OutputDebugStringA (debugger), bit 3 writes to the allocated Win32 Console using WriteConsoleA."
+
+["SERVER.0x10002770"]
+size = 1836
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+blocker_delta = 1727
+analysis = "Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride)."
+
+["SERVER.0x10002fc0"]
+size = 376
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), loop rotation / branch layout"
+
+["SERVER.0x10003140"]
+size = 33
+status = "EXACT"
+blocker_delta = 370
+
+["SERVER.0x10003170"]
+size = 240
+status = "RELOC"
+note = "Function passes itself to VirtualQuery to check its own code page protection"
+ghidra = "IsExecutableOrReadableProtect"
+analysis = "Function passes itself to VirtualQuery to check its own code page protection"
+
+["SERVER.0x10003260"]
+size = 183
+status = "MATCHING"
+
+["SERVER.0x10003320"]
+size = 404
+status = "MATCHING"
+blocker = "comparison direction swap, zero-extend pattern (xor vs mov) | instruction folding (lea vs mov)"
+blocker_delta = 83
+ghidra = "DecodePotentialControlTransfer"
+
+["SERVER.0x100034c0"]
+size = 83
+status = "RELOC"
+blocker_delta = 386
+analysis = "Initialization routine for the server's telemetry. Registers the CrashDumpUnhandledExceptionFilter. Allocates a console if requested via flags. Truncates log files (__server.log, gilde_server.log) if they exceed 64KB (0x10000 bytes) and seeds them with a startup banner. | If file logging is enabled, validate/rotate server log targets."
+
+["SERVER.0x10003520"]
+size = 160
+status = "RELOC"
+note = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()"
+analysis = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()"
+
+["SERVER.0x100035c0"]
+size = 119
+status = "RELOC"
+
+["SERVER.0x10003640"]
+size = 132
+status = "RELOC"
+
+["SERVER.0x10003820"]
+size = 114
+status = "MATCHING"
+
+["SERVER.0x100038a0"]
+size = 177
+status = "RELOC"
+blocker = "zero-extend pattern (xor vs mov)"
+blocker_delta = 18
+
+["SERVER.0x10003b90"]
+size = 182
+status = "RELOC"
+
+["SERVER.0x10003c50"]
+size = 77
+status = "MATCHING"
+
+["SERVER.0x10003ca0"]
+size = 65
+status = "MATCHING"
+
+["SERVER.0x10003cf0"]
+size = 43
+status = "RELOC"
+
+["SERVER.0x10004b80"]
+size = 320
+status = "MATCHING"
+
+["SERVER.0x10005370"]
+size = 20
+status = "EXACT"
+
+["SERVER.0x10006580"]
+size = 658
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+blocker_delta = 578
+analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
+
+["SERVER.0x10006820"]
+size = 188
+status = "MATCHING"
+
+["SERVER.0x100068e0"]
+size = 162
+status = "MATCHING"
+blocker = "comparison direction swap, jump condition swap"
+blocker_delta = 141
+analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
+
+["SERVER.0x10006990"]
+size = 612
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
+blocker_delta = 586
+
+["SERVER.0x10006c00"]
+size = 283
+status = "MATCHING"
+
+["SERVER.0x10006d20"]
+size = 270
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov)"
+blocker_delta = 265
+
+["SERVER.0x10006e30"]
+size = 137
+status = "MATCHING"
+
+["SERVER.0x10008a50"]
+size = 53
+status = "RELOC"
+ghidra = "cleanup_entity"
+
+["SERVER.0x10008a90"]
+size = 492
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
+blocker_delta = 466
+
+["SERVER.0x10008c80"]
+size = 129
+status = "RELOC"
+
+["SERVER.0x10008d10"]
+size = 301
+status = "MATCHING"
+
+["SERVER.0x10008e40"]
+size = 472
+status = "MATCHING"
+blocker = "jump condition swap, loop rotation / branch layout | instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+blocker_delta = 257
+
+["SERVER.0x10009020"]
+size = 704
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+blocker_delta = 626
+analysis = "Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks."
+
+["SERVER.0x10009310"]
+size = 170
+status = "MATCHING"
+ghidra = "exit_handler"
+
+["SERVER.0x10009320"]
+size = 42
+status = "RELOC"
+analysis = "Create server main thread - called on DLL_PROCESS_ATTACH | Exported function called by the host engine to initialize the game server thread. Creates the core ServerMainThread and returns the handle validity."
+
+["SERVER.0x10009350"]
+size = 68
+status = "RELOC"
+analysis = "Exported function called by the host engine to shut down the server thread. Sets a global shutdown flag, waits briefly, then forcefully terminates if necessary. | Signal shutdown and wait for thread to exit cleanly | Force terminate if thread doesn't exit within timeout"
+
+["SERVER.0x100093a0"]
+size = 2434
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+blocker_delta = 2223
+analysis = "Core orchestration loop. Phase 1 (Lobby): Loops accepting connections until connected_players == g_max_players and every connected player has the 0x800 ready flag. Then transitions into Phase 2 (Transfer). | PHASE 0: Read game.ini config — server port (default 7531), game path, max players | Initialize server: thread priority, logging, packet pool, game data, listen socket | PHASE 1 — LOBBY: Wait for all players to connect and set ready flag (0x800). Broadcasts server info every 3 seconds. Processes network I/O. Handles disconnect requests (0x1000) and host disconnect (0x400 = terminate). | PHASE 3 — DATA RECEIVE: Wait for host to send savegame data (flag 0x08 cleared when done). Then call RecvGameSavegame to deserialize game state. | PHASE 5 — PLAYER ALLOCATION: Wait for each player to allocate their character entity (flag 0x10 set, cleared when cmd received). | PHASE 6 — GAME LOOP: Main simulation tick. Checks sync flags (0x40=sync data, 0x20=sync ready). Advances game clock, broadcasts sync packets (cmd 0x1E). Processes commands via ProcessAndBroadcastAllCommands. Speed controlled by g_game_speed_value. | PHASE 4 — DATA SEND: Stream savegame to all non-host clients in 128-byte chunks (cmd type 0x09). First sends total size (cmd type 0x08). Clears flag 0x04 when transfer complete per player."
+
+["SERVER.0x10009d30"]
+size = 296
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov)"
+blocker_delta = 283
+
+["SERVER.0x10009e60"]
+size = 419
+status = "RELOC"
+
+["SERVER.0x1000a010"]
+size = 112
+status = "RELOC"
+analysis = "Initialize all player slots to disconnected state, then create TCP listen socket with SO_REUSEADDR, 128KB send/recv buffers, non-blocking mode, bind to port, and listen with backlog 5"
+
+["SERVER.0x1000a080"]
+size = 600
+status = "MATCHING"
+blocker_delta = 542
+analysis = "Iterates over g_player_slots looking for an empty slot. If one is found, calls Ordinal_1 (accept()) to accept a new connection, configures the socket, initializes the slot structures (receive_buffer, send_buffer), and flags it as a newly connected player."
+
+["SERVER.0x1000a2e0"]
+size = 96
+status = "RELOC"
+analysis = "Shutdown socket (SD_BOTH) | Close socket handle"
+
+["SERVER.0x1000a340"]
+size = 336
+status = "MATCHING"
+
+["SERVER.0x1000a490"]
+size = 211
+status = "RELOC"
+analysis = "Ingress parser boundary for per-player receive buffer. Validation behavior: handles recv==0 timeout via player_slot[0x54] deadline, treats recv==-1 + WSAEWOULDBLOCK as retry, closes connection on other socket errors. | Stage 1 ingress: ensure first 3 bytes of packet are present (1-byte opcode + 2-byte total length). | Length-driven read: remaining bytes = header.total_length - bytes_received so far. | 0x2733 matches WSAEWOULDBLOCK (non-fatal on nonblocking socket)."
+
+["SERVER.0x1000a570"]
+size = 750
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout"
+blocker_delta = 453
+analysis = "Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09)."
+
+["SERVER.0x1000a860"]
+size = 131
+status = "MATCHING"
+
+["SERVER.0x1000a8f0"]
+size = 170
+status = "RELOC"
+blocker = "loop rotation / branch layout"
+blocker_delta = 70
+analysis = "Takes a raw command payload, pulls an available CommandPacket struct from incoming_cmd_freelist, populates it, calculates command type via 0x1000c710, and appends it to the tail of incoming_cmd_queue."
+
+["SERVER.0x1000a9a0"]
+size = 170
+status = "RELOC"
+analysis = "Takes a raw command payload, pulls an available CommandPacket struct from outgoing_cmd_freelist, populates it, and appends it to the tail of outgoing_cmd_queue. | Get free command buffer from pool"
+
+["SERVER.0x1000aa50"]
+size = 97
+status = "EXACT"
+ghidra = "FreeCommandBuffer"
+
+["SERVER.0x1000aac0"]
+size = 639
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+blocker_delta = 567
+analysis = "Master Command Router. Iterates over every slot's incoming_cmd_queue. Evaluates commands via g_command_handlers. Upon validation, pushes valid commands to the sender's outgoing queue (to acknowledge) and broadcasts them to all other connected players' outgoing queues. Recognizes 0x05/0x06 to batch list and pass to ahm_ProcessEntityChain."
+
+["SERVER.0x1000ad40"]
+size = 768
+status = "RELOC"
+
+["SERVER.0x1000b040"]
+size = 372
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
+blocker_delta = 365
+
+["SERVER.0x1000b1c0"]
+size = 205
+status = "MATCHING"
+blocker = "comparison direction swap, jump condition swap, zero-extend pattern (xor vs mov)"
+blocker_delta = 196
+
+["SERVER.0x1000b290"]
+size = 425
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+
+["SERVER.0x1000b440"]
+size = 133
+status = "MATCHING"
+blocker_delta = 400
+
+["SERVER.0x1000b4d0"]
+size = 836
+status = "MATCHING"
+blocker = "jump condition swap | comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
+blocker_delta = 119
+analysis = "Iterates through a fixed validation table at g_office_table looking for a matching command_type. Once found, verifies conditions including checking if entity_ids in the payload actually map to existing objects using gm_LookupEntityRecordById. Returns 1 if valid, 0 if invalid."
+
+["SERVER.0x1000b820"]
+size = 42
+status = "RELOC"
+blocker_delta = 800
+
+["SERVER.0x1000b850"]
+size = 42
+status = "RELOC"
+
+["SERVER.0x1000b880"]
+size = 263
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap"
+blocker_delta = 205
+
+["SERVER.0x1000b990"]
+size = 157
+status = "MATCHING"
+blocker = "comparison direction swap, zero-extend pattern (xor vs mov)"
+blocker_delta = 146
+
+["SERVER.0x1000ba30"]
+size = 179
+status = "MATCHING"
+blocker_delta = 178
+analysis = "Iterates through the command execution tracker table at g_office_secondary_id_base to detach or update a specific entity's links and pending sequence numbers. Used when an entity changes state abruptly or is being removed."
+
+["SERVER.0x1000baf0"]
+size = 606
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov)"
+blocker_delta = 407
+ghidra = "LoadOfficeData"
+
+["SERVER.0x1000bd50"]
+size = 130
+status = "MATCHING"
+
+["SERVER.0x1000bda0"]
+size = 70
+status = "RELOC"
+
+["SERVER.0x1000bdf0"]
+size = 1002
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+blocker_delta = 935
+analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
+
+["SERVER.0x1000c1e0"]
+size = 160
+status = "MATCHING"
+
+["SERVER.0x1000c280"]
+size = 130
+status = "MATCHING"
+
+["SERVER.0x1000c310"]
+size = 110
+status = "RELOC"
+blocker = "instruction folding (lea vs mov)"
+blocker_delta = 110
+
+["SERVER.0x1000c380"]
+size = 51
+status = "EXACT"
+
+["SERVER.0x1000c3c0"]
+size = 83
+status = "MATCHING"
+blocker = "jump condition swap"
+blocker_delta = 47
+
+["SERVER.0x1000c420"]
+size = 166
+status = "RELOC"
+
+["SERVER.0x1000c4d0"]
+size = 295
+status = "MATCHING"
+blocker_delta = 269
+
+["SERVER.0x1000c600"]
+size = 109
+status = "MATCHING"
+
+["SERVER.0x1000c670"]
+size = 45
+status = "RELOC"
+blocker = "instruction folding (lea vs mov), jump condition swap"
+blocker_delta = 72
+ghidra = "find_by_id"
+
+["SERVER.0x1000c6a0"]
+size = 102
+status = "MATCHING"
+blocker = "comparison direction swap, jump condition swap"
+blocker_delta = 55
+
+["SERVER.0x1000c710"]
+size = 752
+status = "MATCHING"
+blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+
+["SERVER.0x1000ca00"]
+size = 130
+status = "MATCHING"
+blocker_delta = 83
+analysis = "Iterates through a linked list of CommandPackets generated from a Command 0x05 / 0x06 block. Runs secondary validation handlers from g_entity_chain_handlers. Re-flags commands to 0x01/0x02 status based on success/fail."
+
+["SERVER.0x1000ca90"]
+size = 130
+status = "EXACT"
+
+["SERVER.0x1000cb20"]
+size = 171
+status = "MATCHING"
+blocker = "jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
+blocker_delta = 165
+
+["SERVER.0x1000cbd0"]
+size = 517
+status = "MATCHING"
+blocker = "jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
+
+["SERVER.0x1000cde0"]
+size = 331
+status = "MATCHING"
+blocker = "struct field access scheduling (inc;inc vs lea+add pattern)"
+blocker_delta = 14
+
+["SERVER.0x1000cf30"]
+size = 162
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp)"
+blocker_delta = 152
+
+["SERVER.0x1000cfe0"]
+size = 64
+status = "RELOC"
+
+["SERVER.0x1000d020"]
+size = 22
+status = "RELOC"
+
+["SERVER.0x1000d040"]
+size = 22
+status = "RELOC"
+
+["SERVER.0x1000d060"]
+size = 169
+status = "RELOC"
+blocker_delta = 137
+
+["SERVER.0x1000d110"]
+size = 333
+status = "MATCHING"
+blocker = "dead-code elimination removes i>=4 checks inside for-loops (compiler knows i<4), 13B size delta; do-while preserves checks but spills to edi; also register allocation swap (ecx/eax), zero-extend pattern, lea vs add in leave branch"
+blocker_delta = 225
+
+["SERVER.0x1000d260"]
+size = 120
+status = "MATCHING"
+blocker = "loop rotation - target uses jl backward jump, compiler generates jge forward + jmp backward"
+blocker_delta = 41
+
+["SERVER.0x1000d2e0"]
+size = 77
+status = "RELOC"
+
+["SERVER.0x1000d330"]
+size = 14
+status = "EXACT"
+
+["SERVER.0x1000d340"]
+size = 6
+status = "EXACT"
+
+["SERVER.0x1000d350"]
+size = 267
+status = "RELOC"
+
+["SERVER.0x1000d460"]
+size = 267
+status = "RELOC"
+blocker_delta = 209
+
+["SERVER.0x1000d570"]
+size = 361
+status = "MATCHING"
+blocker = "Register allocation/instruction scheduling difference in gm_CreateEntityFromParents argument setup; target evaluates param_2 boolean first (neg/sbb in eax) then pushes args in different register order. Same-size, semantically equivalent."
+
+["SERVER.0x1000d6e0"]
+size = 78
+status = "RELOC"
+
+["SERVER.0x1000d730"]
+size = 180
+status = "MATCHING"
+blocker = "lea folding (lea esi,[eax+0x10] + mov [esi],ax vs mov [esi+0x10],ax), register allocation (param_1 in esi vs reload from stack), zero-extend register choice (ecx vs eax)"
+blocker_delta = 20
+
+["SERVER.0x1000d7f0"]
+size = 176
+status = "RELOC"
+
+["SERVER.0x1000d8a0"]
+size = 144
+status = "RELOC"
+
+["SERVER.0x1000d930"]
+size = 2057
+status = "MATCHING"
+blocker = "stack frame size (0x228 vs 0x224), register allocation (edi vs ebx for zero init), error handler codegen (push/jmp vs mov/jmp), merged stack cleanup, loop rotation / branch layout, comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
+blocker_delta = 1962
+
+["SERVER.0x1000e140"]
+size = 993
+status = "MATCHING"
+blocker = "epilogue tail-merging (3 early-return error blocks merged to shared epilogue -59 bytes), dead store elimination (mov [esp+0x18],ebx before mov [esp+0x18],4), null-check branch layout (inline vs end-of-block), jump condition swap, zero-extend pattern (xor vs mov)"
+blocker_delta = 922
+
+["SERVER.0x1000e530"]
+size = 352
+status = "MATCHING"
+blocker = "loop rotation (while->cmp duplicated), shared error exit layout, xor edx initialization"
+blocker_delta = 165
+
+["SERVER.0x1000e690"]
+size = 191
+status = "MATCHING"
+blocker = "register allocation - target uses only esi, compiler allocates esi+edi for saved param_1 copy"
+blocker_delta = 180
+
+["SERVER.0x1000e750"]
+size = 123
+status = "RELOC"
+
+["SERVER.0x1000e7d0"]
+size = 242
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), stack frame choice (push vs sub esp)"
+blocker_delta = 210
+
+["SERVER.0x1000e8d0"]
+size = 239
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
+blocker_delta = 226
+
+["SERVER.0x1000e9c0"]
+size = 214
+status = "MATCHING"
+blocker = "register allocation - target uses only edi, compiler allocates esi+edi for saved param_1 and field writeback address"
+
+["SERVER.0x1000eaa0"]
+size = 208
+status = "MATCHING"
+blocker = "param_1 reuse pattern (gm_ResolveEntityById writes through &param_1), switch dec chain offset (case 1 needs leading dec), register allocation (and edx,ecx vs and ecx,edx in case bodies)"
+
+["SERVER.0x1000eb70"]
+size = 144
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), stack frame choice (push vs sub esp)"
+blocker_delta = 126
+
+["SERVER.0x1000ec00"]
+size = 912
+status = "MATCHING"
+blocker = "register allocation (esi vs edi for cmd_ptr, ebp vs ebx for outer_ent), branch condition inversion (jle/jge vs jg/jl in clamping), dead code elimination (inner nested if level>0 check optimized away), loop structure (while entity search vs do-while with inlined return), return 1 epilogue sharing (candidate shares one exit, target inlines two)"
+blocker_delta = 121
+
+["SERVER.0x1000ef90"]
+size = 26
+status = "RELOC"
+
+["SERVER.0x1000efb0"]
+size = 122
+status = "RELOC"
+
+["SERVER.0x1000f030"]
+size = 72
+status = "RELOC"
+
+["SERVER.0x1000f080"]
+size = 26
+status = "RELOC"
+
+["SERVER.0x1000f0a0"]
+size = 37
+status = "RELOC"
+
+["SERVER.0x1000f0d0"]
+size = 197
+status = "MATCHING"
+blocker = "prologue register pre-load ordering, instruction folding (lea vs mov), jump condition swap, nodeId register allocation (esi vs ecx)"
+blocker_delta = 176
+
+["SERVER.0x1000f1a0"]
+size = 327
+status = "RELOC"
+
+["SERVER.0x1000f2f0"]
+size = 172
+status = "MATCHING"
+blocker = "register base adjustment (target uses add edi,0x18 and lea ecx,[esi+0x1c] for shorter addressing; MSVC6 folds to base+offset)"
+
+["SERVER.0x1000f3a0"]
+size = 3
+status = "EXACT"
+
+["SERVER.0x1000f3b0"]
+size = 206
+status = "RELOC"
+blocker_delta = 81
+
+["SERVER.0x1000f480"]
+size = 271
+status = "RELOC"
+
+["SERVER.0x1000f590"]
+size = 237
+status = "RELOC"
+
+["SERVER.0x1000f680"]
+size = 171
+status = "RELOC"
+
+["SERVER.0x1000f730"]
+size = 515
+status = "RELOC"
+
+["SERVER.0x1000f940"]
+size = 22
+status = "RELOC"
+
+["SERVER.0x1000f960"]
+size = 22
+status = "RELOC"
+
+["SERVER.0x1000f980"]
+size = 336
+status = "MATCHING"
+blocker = "mov di,ax vs mov edi,eax (16-bit truncation) and lea edx,[edi+addr] vs add edi,addr (7 structural diffs, 99.1% mnemonic)"
+
+["SERVER.0x1000fad0"]
+size = 85
+status = "RELOC"
+
+["SERVER.0x1000fb30"]
+size = 153
+status = "RELOC"
+blocker_delta = 125
+
+["SERVER.0x1000fbd0"]
+size = 22
+status = "EXACT"
+
+["SERVER.0x1000fbf0"]
+size = 25
+status = "EXACT"
+
+["SERVER.0x1000fc10"]
+size = 308
+status = "RELOC"
+blocker_delta = 209
+
+["SERVER.0x1000fd50"]
+size = 445
+status = "MATCHING"
+blocker = "register allocation (4 callee-saved regs vs target 3), loop body hoisting, comparison direction swap"
+
+["SERVER.0x1000ff10"]
+size = 22
+status = "EXACT"
+
+["SERVER.0x1000ff30"]
+size = 41
+status = "RELOC"
+
+["SERVER.0x1000ff60"]
+size = 82
+status = "RELOC"
+
+["SERVER.0x1000ffc0"]
+size = 70
+status = "RELOC"
+
+["SERVER.0x10010010"]
+size = 110
+status = "RELOC"
+
+["SERVER.0x10010080"]
+size = 22
+status = "RELOC"
+
+["SERVER.0x100100a0"]
+size = 159
+status = "MATCHING"
+blocker = "three-fcom float clamp pattern with shared return paths - compiler generates different branch layout and fcom count"
+
+["SERVER.0x10010140"]
+size = 280
+status = "MATCHING"
+blocker = "lea vs mov for data copy (MSVC6 /O2 folds struct pointers to direct loads), bl register for damage save, identity write epilogue xor+mov pattern"
+blocker_delta = 106
+
+["SERVER.0x10010260"]
+size = 144
+status = "RELOC"
+
+["SERVER.0x100102f0"]
+size = 17
+status = "RELOC"
+
+["SERVER.0x10010310"]
+size = 52
+status = "RELOC"
+
+["SERVER.0x10010350"]
+size = 52
+status = "RELOC"
+
+["SERVER.0x10010390"]
+size = 262
+status = "RELOC"
+blocker_delta = 215
+
+["SERVER.0x100104a0"]
+size = 135
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov)"
+blocker_delta = 98
+
+["SERVER.0x10010530"]
+size = 352
+status = "MATCHING"
+
+["SERVER.0x100105b0"]
+size = 329
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap"
+blocker_delta = 254
+
+["SERVER.0x10010710"]
+size = 320
+status = "MATCHING"
+blocker = "comparison direction swap, jump condition swap"
+blocker_delta = 109
+
+["SERVER.0x10010850"]
+size = 370
+status = "MATCHING"
+
+["SERVER.0x100109d0"]
+size = 832
+status = "MATCHING"
+blocker_delta = 339
+
+["SERVER.0x10010d10"]
+size = 570
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
+
+["SERVER.0x10010f50"]
+size = 66
+status = "RELOC"
+blocker_delta = 539
+
+["SERVER.0x10010fa0"]
+size = 525
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+
+["SERVER.0x100111b0"]
+size = 501
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+blocker_delta = 462
+
+["SERVER.0x100113b0"]
+size = 390
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
+blocker_delta = 456
+
+["SERVER.0x10011540"]
+size = 288
+status = "MATCHING"
+blocker_delta = 306
+
+["SERVER.0x10011660"]
+size = 297
+status = "RELOC"
+blocker_delta = 39
+globals = "SERVER 0x100a8c30"
+
+["SERVER.0x10011790"]
+size = 242
+status = "MATCHING"
+blocker = "zero-extend pattern (xor vs mov)"
+blocker_delta = 96
+
+["SERVER.0x10011890"]
+size = 164
+status = "RELOC"
+analysis = "Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure."
+globals = "SERVER 0x1003546c"
+
+["SERVER.0x10011940"]
+size = 674
+status = "MATCHING"
+blocker_delta = 639
+
+["SERVER.0x10011bf0"]
+size = 1040
+status = "MATCHING"
+blocker_delta = 1021
+ghidra = "AllocGraveyardWorker"
+analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
+
+["SERVER.0x10012000"]
+size = 728
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov)"
+blocker_delta = 535
+
+["SERVER.0x100122e0"]
+size = 346
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), jump condition swap"
+
+["SERVER.0x10012440"]
+size = 37
+status = "RELOC"
+blocker_delta = 199
+
+["SERVER.0x10012470"]
+size = 857
+status = "MATCHING"
+analysis = "ls_LoadSavegameHeader: Reads versioned savegame header from VFS stream. Allocates 0xE100 temp buffer, reads format version, player count, map name (32 bytes), timestamps, difficulty, player scores (8 entries for version > 0x10033), savegame description (96 bytes). Returns 1 on success, 0 on read failure."
+
+["SERVER.0x100127d0"]
+size = 282
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+
+["SERVER.0x100128f0"]
+size = 1463
+status = "MATCHING"
+blocker_delta = 1390
+analysis = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
+globals = "SERVER 0x100a8c34"
+
+["SERVER.0x10012eb0"]
+size = 884
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout"
+
+["SERVER.0x10013230"]
+size = 2268
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout"
+blocker_delta = 2053
+ghidra = "LoadStaticEntities"
+analysis = "Deserializes all static entities from savegame stream. Reads entity count, landmark pointers, then loops reading 70+ fields per entity with version-gated sections (g_save_format_version). Entity data at g_static_entities array, stride 0x21C bytes. Returns 1 on success, 0 on read failure."
+
+["SERVER.0x10013b10"]
+size = 1361
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp)"
+blocker_delta = 1327
+analysis = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 62 buildings per player), (2) town records with name, timestamps, flags, population, wealth, 10 resource pairs, 10 production pairs, 4 tax rates, 4 trade routes, reputation, guild standings, 8 event records, political data. Returns 1 on success."
+
+["SERVER.0x10014070"]
+size = 491
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+
+["SERVER.0x10014260"]
+size = 892
+status = "MATCHING"
+blocker = "comparison direction swap, jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+blocker_delta = 533
+ghidra = "RecvGameSavegame"
+
+["SERVER.0x100145e0"]
+size = 304
+status = "RELOC"
+ghidra = "SendLobbyPlayerList"
+
+["SERVER.0x100146c0"]
+size = 236
+status = "MATCHING"
+blocker = "jump condition swap"
+blocker_delta = 77
+
+["SERVER.0x100147b0"]
+size = 670
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
+
+["SERVER.0x10014a50"]
+size = 157
+status = "MATCHING"
+blocker_delta = 37
+
+["SERVER.0x10014af0"]
+size = 247
+status = "MATCHING"
+blocker_delta = 49
+
+["SERVER.0x10014bf0"]
+size = 163
+status = "MATCHING"
+
+["SERVER.0x10014ca0"]
+size = 265
+status = "MATCHING"
+blocker = "comparison direction swap, jump condition swap, zero-extend pattern (xor vs mov)"
+blocker_delta = 202
+note = "obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte."
+
+["SERVER.0x10014db0"]
+size = 267
+status = "RELOC"
+blocker_delta = 75
+analysis = "obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte."
+
+["SERVER.0x10014ee0"]
+size = 69
+status = "RELOC"
+
+["SERVER.0x10014f30"]
+size = 74
+status = "EXACT"
+
+["SERVER.0x10014f80"]
+size = 103
+status = "EXACT"
+
+["SERVER.0x10014ff0"]
+size = 175
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
+blocker_delta = 170
+
+["SERVER.0x100150a0"]
+size = 257
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov)"
+blocker_delta = 160
+
+["SERVER.0x100151b0"]
+size = 41
+status = "EXACT"
+ghidra = "GetStatPair"
+
+["SERVER.0x100151e0"]
+size = 535
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+
+["SERVER.0x10015400"]
+size = 83
+status = "RELOC"
+blocker_delta = 469
+analysis = "Updates priority tracking for dynamic entity dispatch/update lists. Limits simultaneous update weight using GetStatPair constraints."
+
+["SERVER.0x10015460"]
+size = 145
+status = "MATCHING"
+
+["SERVER.0x10015500"]
+size = 180
+status = "RELOC"
+blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
+blocker_delta = 138
+
+["SERVER.0x100155c0"]
+size = 197
+status = "MATCHING"
+blocker_delta = 164
+
+["SERVER.0x10015690"]
+size = 41
+status = "EXACT"
+
+["SERVER.0x100156c0"]
+size = 642
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+
+["SERVER.0x10015950"]
+size = 861
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap"
+blocker_delta = 333
+ghidra = "InitGameWorld"
+analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
+
+["SERVER.0x10015cb0"]
+size = 57
+status = "RELOC"
+
+["SERVER.0x10015cf0"]
+size = 194
+status = "MATCHING"
+blocker = "comparison direction swap"
+blocker_delta = 88
+
+["SERVER.0x10015dc0"]
+size = 55
+status = "RELOC"
+
+["SERVER.0x10015e00"]
+size = 135
+status = "RELOC"
+
+["SERVER.0x10015e90"]
+size = 211
+status = "MATCHING"
+
+["SERVER.0x10015f70"]
+size = 714
+status = "MATCHING"
+blocker = "comparison direction swap, jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov) | comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+blocker_delta = 449
+analysis = "Refreshes market availability table (85 entries of 0x80 bytes each). Scans all buildings for producible items, marks ingredients as available, then auto-allocates missing market objects. Also counts special resource types (0x92-0x97, 0x2db) in the town market."
+
+["SERVER.0x10016240"]
+size = 72
+status = "MATCHING"
+blocker_delta = 64
+
+["SERVER.0x10016290"]
+size = 464
+status = "MATCHING"
+blocker_delta = 452
+analysis = "Apply active query filters (id/type/owner/group) to current candidate."
+
+["SERVER.0x10016460"]
+size = 320
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
+blocker_delta = 307
+analysis = "Parse vararg criteria tuples for entity query filtering."
+
+["SERVER.0x100165a0"]
+size = 37
+status = "RELOC"
+analysis = "Walks the primary linked list of object allocations starting at g_existing_entities (a global pointer array). Looks for the first slot with an active flag == 0. Stops searching after 0x5007 (20487) slots. Returns pointer to the slot or NULL if full. | Scan fixed object pool and return first free slot."
+
+["SERVER.0x100165d0"]
+size = 155
+status = "MATCHING"
+
+["SERVER.0x10016670"]
+size = 1
+status = "EXACT"
+blocker = "jump condition swap, zero-extend pattern (xor vs mov)"
+blocker_delta = 95
+analysis = "Linear search by object type id within sibling linked list."
+
+["SERVER.0x10016680"]
+size = 139
+status = "MATCHING"
+
+["SERVER.0x10016710"]
+size = 66
+status = "RELOC"
+blocker = "zero-extend pattern (xor vs mov)"
+blocker_delta = 106
+
+["SERVER.0x10016760"]
+size = 1392
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+blocker_delta = 1278
+analysis = "High-level entity allocation wrapper. Resolves the parent_id using gm_ResolveEntityById to find the appropriate entity list head. Allocates a new object slot using gm_AllocateObjectSlot. Inserts the new object into the parent's linked list and initializes basic fields (type, id from global g_next_entity_id, parent pointer)."
+
+["SERVER.0x10016cd0"]
+size = 272
+status = "RELOC"
+
+["SERVER.0x10016de0"]
+size = 186
+status = "RELOC"
+ghidra = "SubtractObjectFromOwner"
+
+["SERVER.0x10016ea0"]
+size = 211
+status = "MATCHING"
+analysis = "Decrease tracked amount; delete entry if it reaches zero."
+
+["SERVER.0x10016f80"]
+size = 346
+status = "MATCHING"
+blocker_delta = 324
+
+["SERVER.0x100170e0"]
+size = 267
+status = "MATCHING"
+blocker_delta = 229
+
+["SERVER.0x10017210"]
+size = 39
+status = "RELOC"
+
+["SERVER.0x10017240"]
+size = 240
+status = "RELOC"
+
+["SERVER.0x10017330"]
+size = 207
+status = "RELOC"
+ghidra = "InitBuildingDefaultItems"
+
+["SERVER.0x10017400"]
+size = 202
+status = "MATCHING"
+
+["SERVER.0x100174d0"]
+size = 1088
+status = "MATCHING"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
+blocker_delta = 1007
+ghidra = "gm_AllocGebaeude"
+
+["SERVER.0x10017910"]
+size = 145
+status = "RELOC"
+
+["SERVER.0x100179b0"]
+size = 192
+status = "RELOC"
+
+["SERVER.0x10017a70"]
+size = 62
+status = "RELOC"
+
+["SERVER.0x10017ab0"]
+size = 74
+status = "RELOC"
+
+["SERVER.0x10017b00"]
+size = 320
+status = "RELOC"
+
+["SERVER.0x10017c40"]
+size = 742
+status = "MATCHING"
+
+["SERVER.0x10017f30"]
+size = 35
+status = "RELOC"
+ghidra = "call_compare"
+
+["SERVER.0x10017f60"]
+size = 36
+status = "RELOC"
+ghidra = "find_and_process"
+
+["SERVER.0x10017f90"]
+size = 23
+status = "RELOC"
+analysis = "Checks if the provided entity pointer is valid and active (not -1). If so, it invokes amt_ClearEntityLinks on it to detach it from game world lists before deletion or recycling."
+
+["SERVER.0x10017fb0"]
+size = 278
+status = "MATCHING"
+blocker_delta = 267
+ghidra = "gm_DeallocEntity"
+
+["SERVER.0x100180d0"]
+size = 81
+status = "RELOC"
+
+["SERVER.0x10018130"]
+size = 32
+status = "RELOC"
+
+["SERVER.0x10018150"]
+size = 70
+status = "RELOC"
+
+["SERVER.0x100181a0"]
+size = 87
+status = "RELOC"
+
+["SERVER.0x10018200"]
+size = 304
+status = "RELOC"
+
+["SERVER.0x10018330"]
+size = 276
+status = "EXACT"
+
+["SERVER.0x10018450"]
+size = 78
+status = "MATCHING"
+
+["SERVER.0x100184a0"]
+size = 56
+status = "EXACT"
+
+["SERVER.0x100184e0"]
+size = 66
+status = "RELOC"
+note = "duplicate bounds check needed for correct register allocation"
+analysis = "duplicate bounds check needed for correct register allocation"
+
+["SERVER.0x10018530"]
+size = 800
+status = "MATCHING"
+blocker_delta = 695
+
+["SERVER.0x10018850"]
+size = 3689
+status = "MATCHING"
+
+["SERVER.0x100196c0"]
+size = 81
+status = "RELOC"
+
+["SERVER.0x10019720"]
+size = 396
+status = "MATCHING"
+blocker = "instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+
+["SERVER.0x100198b0"]
+size = 355
+status = "MATCHING"
+blocker_delta = 288
+analysis = "Recursive production value calculator. Computes the base value of an object type by looking up prototype data (stride 0x41), applying worker skill bonuses from building prototypes, and recursively summing ingredient costs (up to 4 ingredients). Caches result at proto_entry+0x38. Applies quality and production multipliers."
+
+["SERVER.0x10019a20"]
+size = 74
+status = "RELOC"
+blocker_delta = 308
+
+["SERVER.0x10019a70"]
+size = 102
+status = "MATCHING"
+
+["SERVER.0x10019ae0"]
+size = 82
+status = "RELOC"
+
+["SERVER.0x10019b40"]
+size = 62
+status = "RELOC"
+
+["SERVER.0x10019b80"]
+size = 124
+status = "MATCHING"
+
+["SERVER.0x10019be0"]
+size = 83
+status = "MATCHING"
+
+["SERVER.0x10019c60"]
+size = 48
+status = "MATCHING"
+
+["SERVER.0x10019cd0"]
+size = 98
+status = "MATCHING"
+
+["SERVER.0x10019d30"]
+size = 407
+status = "MATCHING"
+blocker = "comparison direction swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+
+["SERVER.0x10019ed0"]
+size = 395
+status = "MATCHING"
+blocker_delta = 93
+ghidra = "gm_KannObjektHergestellt"
+
+["SERVER.0x1001a060"]
+size = 97
+status = "RELOC"
+blocker_delta = 364
+
+["SERVER.0x1001a0d0"]
+size = 54
+status = "MATCHING"
+ghidra = "ahm_RandomBelow"
+
+["SERVER.0x1001a0f0"]
+size = 22
+status = "RELOC"
+
+["SERVER.0x1001a110"]
+size = 48
+status = "RELOC"

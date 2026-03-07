@@ -62,10 +62,6 @@ extern unsigned char g_connections[]; /* 0x101deb00 */
 ;
 ;
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 170
-// GHIDRA: exit_handler
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 
@@ -76,10 +72,6 @@ int __stdcall exit_handler(int a, int b, int c)
 	return 1;
 }
 
-// ORIGIN: GAME
-// STATUS: RELOC
-// SIZE: 42
-// ANALYSIS: Create server main thread - called on DLL_PROCESS_ATTACH | Exported function called by the host engine to initialize the game server thread. Creates the core ServerMainThread and returns the handle validity.
 /* Server initialization: creates the main server thread
  * and stores its handle in g_thread_handle. */
 
@@ -94,10 +86,6 @@ int __cdecl Init(LPVOID param)
 	return g_thread_handle != 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 68
-// ANALYSIS: Exported function called by the host engine to shut down the server thread. Sets a global shutdown flag, waits briefly, then forcefully terminates if necessary. | Signal shutdown and wait for thread to exit cleanly | Force terminate if thread doesn't exit within timeout
 /* Server shutdown: signals the main thread to stop,
  * waits for it to complete, and closes the handle. */
 
@@ -117,12 +105,6 @@ void __cdecl Exit(void)
 	CloseHandle(g_thread_handle);
 }
 
-// ORIGIN: GAME
-// STATUS: MATCHING
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 2434
-// BLOCKER_DELTA: 2223
-// ANALYSIS: Core orchestration loop. Phase 1 (Lobby): Loops accepting connections until connected_players == g_max_players and every connected player has the 0x800 ready flag. Then transitions into Phase 2 (Transfer). | PHASE 0: Read game.ini config — server port (default 7531), game path, max players | Initialize server: thread priority, logging, packet pool, game data, listen socket | PHASE 1 — LOBBY: Wait for all players to connect and set ready flag (0x800). Broadcasts server info every 3 seconds. Processes network I/O. Handles disconnect requests (0x1000) and host disconnect (0x400 = terminate). | PHASE 3 — DATA RECEIVE: Wait for host to send savegame data (flag 0x08 cleared when done). Then call RecvGameSavegame to deserialize game state. | PHASE 5 — PLAYER ALLOCATION: Wait for each player to allocate their character entity (flag 0x10 set, cleared when cmd received). | PHASE 6 — GAME LOOP: Main simulation tick. Checks sync flags (0x40=sync data, 0x20=sync ready). Advances game clock, broadcasts sync packets (cmd 0x1E). Processes commands via ProcessAndBroadcastAllCommands. Speed controlled by g_game_speed_value. | PHASE 4 — DATA SEND: Stream savegame to all non-host clients in 128-byte chunks (cmd type 0x09). First sends total size (cmd type 0x08). Clears flag 0x04 when transfer complete per player.
 /* Main server thread entry point. Runs the game loop:
  * initializes systems, accepts connections, processes
  * commands, advances simulation, and handles I/O. */
@@ -598,11 +580,6 @@ cleanup_and_exit:
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov)
-// SIZE: 296
-// BLOCKER_DELTA: 283
 /* Initializes server subsystems: memory allocator, logging,
  * network sockets, game data tables, and entity pools. */
 
@@ -644,9 +621,6 @@ int __cdecl srv_Init(void)
 	return 1;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 419
 /* Creates the TCP listen socket for accepting client
  * connections. Calls WSAStartup, socket(), bind(), listen(). */
 
@@ -657,9 +631,8 @@ int __cdecl srv_Init(void)
 /* socket = 0x10024180, setsockopt = 0x10024184, ioctlsocket = 0x1002416c */
 /* htons = 0x1002418c, bind = 0x10024190, listen = 0x10024160 */
 /* closesocket = 0x10024198, shutdown = 0x10024174 */
-// ANALYSIS: Initialize all player slots to disconnected state, then create TCP listen socket with SO_REUSEADDR, 128KB send/recv buffers, non-blocking mode, bind to port, and listen with backlog 5
 
-/* GLOBAL: SERVER 0x101deb14 */
+// DATA: SERVER 0x101deb14
 extern unsigned int g_player_slot_field;
 
 int __cdecl CreateListenSocket(int port)
@@ -742,9 +715,6 @@ cleanup_wsa:
 	return -1;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 112
 /* Cleans up all network sockets. Closes client connections,
  * the listen socket, and calls WSACleanup. */
 
@@ -773,11 +743,6 @@ void __cdecl CleanupSockets(void)
 	ShutdownLogAndErrorHandler();
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 600
-// BLOCKER_DELTA: 542
-// ANALYSIS: Iterates over g_player_slots looking for an empty slot. If one is found, calls Ordinal_1 (accept()) to accept a new connection, configures the socket, initializes the slot structures (receive_buffer, send_buffer), and flags it as a newly connected player.
 /* Accepts new client connections using select() + accept().
  * Assigns connected clients to player slots and configures
  * socket options (TCP_NODELAY, timeouts). */
@@ -787,16 +752,16 @@ void __cdecl CleanupSockets(void)
 
 /* accept = 0x1002415c, setsockopt = 0x10024184, GetTickCount = 0x1002405c */
 
-/* GLOBAL: SERVER 0x101deaec - listen socket */
+// DATA: SERVER 0x101deaec
 extern int g_listen_socket;
 
-/* GLOBAL: SERVER 0x101deb00 - first player slot (stride 0x264264 bytes) */
+// DATA: SERVER 0x101deb00
 extern unsigned int g_player_slot_0;
 
-/* GLOBAL: SERVER 0x114ffe20 - overflow slot */
+// DATA: SERVER 0x114ffe20
 extern unsigned int g_player_slot_overflow;
 
-/* GLOBAL: SERVER 0x1003467c - connection counter */
+// DATA: SERVER 0x1003467c
 extern unsigned int g_connection_counter;
 
 int __cdecl AcceptConnections(void)
@@ -919,10 +884,6 @@ do_accept:
 	return new_socket;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 96
-// ANALYSIS: Shutdown socket (SD_BOTH) | Close socket handle
 /* Closes a specific player's network connection. Shuts down
  * the socket, clears the player slot, and broadcasts the
  * disconnect to other players. */
@@ -942,9 +903,6 @@ int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 336
 /* Receives a packet header from a client socket. Reads the
  * fixed-size header, validates it, and returns the packet
  * size. Handles partial reads and disconnects. */
@@ -953,7 +911,6 @@ int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot)
 // ReceivePacketHeader
 
 /* recv = 0x10024168, GetTickCount = 0x1002405c, WSAGetLastError = 0x10024170 */
-// ANALYSIS: Ingress parser boundary for per-player receive buffer. Validation behavior: handles recv==0 timeout via player_slot[0x54] deadline, treats recv==-1 + WSAEWOULDBLOCK as retry, closes connection on other socket errors. | Stage 1 ingress: ensure first 3 bytes of packet are present (1-byte opcode + 2-byte total length). | Length-driven read: remaining bytes = header.total_length - bytes_received so far. | 0x2733 matches WSAEWOULDBLOCK (non-fatal on nonblocking socket).
 
 int __cdecl ReceivePacketHeader(unsigned int* param_1)
 {
@@ -1029,9 +986,6 @@ add_and_check:
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 211
 /* Sends queued data to a client socket. Transmits buffered
  * outgoing packets with retry logic for partial sends. */
 
@@ -1039,7 +993,6 @@ add_and_check:
 // SendPlayerData
 
 /* send = 0x10024164, GetTickCount = 0x1002405c, WSAGetLastError = 0x10024170 */
-// ANALYSIS: Send data via socket (Ordinal_19 = send)
 
 int __cdecl SendPlayerData(unsigned int* param_1)
 {
@@ -1086,12 +1039,6 @@ int __cdecl SendPlayerData(unsigned int* param_1)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout
-// SIZE: 750
-// BLOCKER_DELTA: 453
-// ANALYSIS: Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09).
 /* Processes received network data from all connected clients.
  * Reads incoming packets, reassembles fragmented data, and
  * dispatches complete commands for processing. */
@@ -1099,13 +1046,13 @@ int __cdecl SendPlayerData(unsigned int* param_1)
 // FUNCTION: SERVER 0x1000a570
 // ProcessReceiveData
 
-/* GLOBAL: SERVER 0x101deac0 */
+// DATA: SERVER 0x101deac0
 extern unsigned int g_download_total_size;
-/* GLOBAL: SERVER 0x101deac4 */
+// DATA: SERVER 0x101deac4
 extern unsigned int g_download_received;
-/* GLOBAL: SERVER 0x101deac8 */
+// DATA: SERVER 0x101deac8
 extern unsigned int g_download_slots[8];
-/* GLOBAL: SERVER 0x101deae8 */
+// DATA: SERVER 0x101deae8
 extern unsigned int g_download_buffer;
 
 int __cdecl ProcessReceiveData(void)
@@ -1228,9 +1175,6 @@ admin_loop:
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 131
 void* __cdecl memcpy(void*, const void*, unsigned int);
 
 /* Processes the outgoing send queue. Iterates connected
@@ -1271,13 +1215,6 @@ int __cdecl ProcessSendData(void)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// BLOCKER: loop rotation / branch layout
-// BLOCKER_DELTA: 70
-// ANALYSIS: Iterates over g_player_slots. If a slot is connected, calls SendPlayerData. Next, if there are pending commands in outgoing_cmd_queue, copies them down into the local send_buffer, frees the command from the queue using FreeCommandBuffer, clears the flag indicating pending commands, and calls SendPlayerData again.
-// SIZE: 170
-// ANALYSIS: Takes a raw command payload, pulls an available CommandPacket struct from incoming_cmd_freelist, populates it, calculates command type via 0x1000c710, and appends it to the tail of incoming_cmd_queue.
 /* Queues a command packet for server-side processing.
  * Copies the packet into the command queue buffer via memcpy. */
 
@@ -1315,10 +1252,6 @@ int __cdecl QueueCommandForProcessing(unsigned int* player_slot, unsigned char* 
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 170
-// ANALYSIS: Takes a raw command payload, pulls an available CommandPacket struct from outgoing_cmd_freelist, populates it, and appends it to the tail of outgoing_cmd_queue. | Get free command buffer from pool
 /* Queues a player command for processing. Wraps the command
  * with player slot info and adds to the processing queue. */
 
@@ -1355,10 +1288,6 @@ int __cdecl cm_QueuePlayerCommand(unsigned int* player_slot, unsigned char* cmd_
 	return 0;
 }
 
-// STATUS: EXACT
-// ORIGIN: GAME
-// SIZE: 97
-// GHIDRA: FreeCommandBuffer
 /* Unlinks a node from its current position in a doubly-linked
  * list and relinks it at the head. Used for LRU ordering. */
 
@@ -1388,12 +1317,6 @@ void __cdecl list_unlink_relink(char* ctx, char* node)
 	*(int*) (ctx + 0x2641fc) = (int) node;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 639
-// BLOCKER_DELTA: 567
-// ANALYSIS: Master Command Router. Iterates over every slot's incoming_cmd_queue. Evaluates commands via g_command_handlers. Upon validation, pushes valid commands to the sender's outgoing queue (to acknowledge) and broadcasts them to all other connected players' outgoing queues. Recognizes 0x05/0x06 to batch list and pass to ahm_ProcessEntityChain.
 /* Processes all queued commands in order. Dequeues each
  * command, dispatches to the appropriate Chk*/Ex* handler
  * pair, and writes response data back to clients. */
@@ -1532,9 +1455,6 @@ int __cdecl cm_ProcessCommandQueue(void)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 768
 /* Logs a Winsock error by error code. Maps WSA error codes
  * to human-readable strings and passes to the log system. */
 
@@ -1687,10 +1607,6 @@ void __cdecl LogWinsockError(int param_1)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
-// SIZE: 372
 /* Initializes the building type lookup table. Loads building
  * definitions (costs, capacities, upgrade paths) from game
  * data into the runtime type table. */
@@ -1699,7 +1615,6 @@ void __cdecl LogWinsockError(int param_1)
 // InitBuildingTypeTable
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 365
 
 void InitBuildingTypeTable(void)
 {

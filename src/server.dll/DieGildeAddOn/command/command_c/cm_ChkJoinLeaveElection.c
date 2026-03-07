@@ -1,8 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: dead-code elimination removes i>=4 checks inside for-loops (compiler knows i<4), 13B size delta; do-while preserves checks but spills to edi; also register allocation swap (ecx/eax), zero-extend pattern, lea vs add in leave branch
-// BLOCKER_DELTA: 225
-// ORIGIN: GAME
-// SIZE: 333
 
 #ifdef __clang__
 #pragma clang diagnostic push

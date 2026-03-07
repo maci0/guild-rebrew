@@ -1,7 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: three-fcom float clamp pattern with shared return paths - compiler generates different branch layout and fcom count
-// ORIGIN: GAME
-// SIZE: 159
 
 /*
  * Ghidra decompilation reference:

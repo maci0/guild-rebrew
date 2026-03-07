@@ -28,9 +28,6 @@ int __cdecl vfs_ReadUint32BE(int);
 
 int __cdecl ReadVfsCompressed(int, int, unsigned int);
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 114
 /* Reads a single byte from a VFS stream. Advances the read
  * position and returns the byte value, or error on EOF. */
 
@@ -65,11 +62,6 @@ unsigned int __cdecl vfs_GetByte(int* param_1)
 	return (unsigned int) bytes_read;
 }
 
-// ORIGIN: GAME
-// BLOCKER: zero-extend pattern (xor vs mov)
-// BLOCKER_DELTA: 18
-// STATUS: RELOC
-// SIZE: 177
 /* Closes a VFS stream and releases associated resources.
  * Frees internal buffers and removes from open stream list. */
 
@@ -122,9 +114,6 @@ int __cdecl vfs_CloseStream(void* param_1)
 	return result;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 182
 /* Flushes pending write data from a VFS stream buffer to
  * disk. Takes stream handle and flush mode parameters. */
 
@@ -174,9 +163,6 @@ unsigned int __cdecl vfs_FlushStream(int param_1, int param_2)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 77
 /* Reads a 32-bit big-endian integer from the VFS stream and
  * converts to host byte order. */
 
@@ -198,9 +184,6 @@ int __cdecl vfs_FlushAndClose(int param_1)
 	return (last << 24) + result;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 65
 /* Flushes a VFS stream and closes it. Combines vfs_FlushStream
  * and vfs_CloseStream into a single operation. */
 
@@ -224,9 +207,6 @@ int __cdecl vfs_ReadUint32BE(int param_1)
 	return vfs_CloseStream((void*) param_1);
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 43
 /* Writes a 32-bit little-endian integer to the VFS stream. */
 
 // FUNCTION: SERVER 0x10003CF0
@@ -245,10 +225,6 @@ void __cdecl vfs_WriteUint32LE(int stream, unsigned int value)
 	return;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 53
-// GHIDRA: cleanup_entity
 /* Destroys a VFS entity (file/directory node). Frees the
  * entity's name string and the entity struct itself. */
 
@@ -268,11 +244,6 @@ int __cdecl vfs_DestroyEntity(char* entity)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
-// SIZE: 492
-// BLOCKER_DELTA: 466
 /* Reads compressed (zlib) data from a VFS stream. Decompresses
  * into the output buffer up to the requested byte count. */
 
@@ -386,9 +357,6 @@ int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
 	return bytes_read;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 129
 /* Cleans up a VFS object by closing its underlying handle,
  * freeing path strings, and releasing the object struct. */
 
@@ -425,9 +393,6 @@ int __cdecl vfs_CleanupObject(char* obj)
 	return result;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 301
 /* Closes a VFS stream with full cleanup. Handles both
  * compressed and plain streams, flushing and deallocating
  * zlib state if needed. */
@@ -435,10 +400,10 @@ int __cdecl vfs_CleanupObject(char* obj)
 // FUNCTION: SERVER 0x10008d10
 // CloseVfsStream
 
-/* GLOBAL: SERVER 0x10034678 */
+// DATA: SERVER 0x10034678
 extern int g_stream_count;
 
-/* GLOBAL: SERVER 0x10034670 */
+// DATA: SERVER 0x10034670
 extern char g_stream_pool;
 
 int __cdecl CloseVfsStream(void* stream)
@@ -518,12 +483,6 @@ int __cdecl CloseVfsStream(void* stream)
 	return result;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: jump condition swap, loop rotation / branch layout
-// BLOCKER_DELTA: 257
-// BLOCKER: instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
-// SIZE: 472
 /* Reads raw data from a VFS stream. Low-level read that
  * handles buffering, refilling, and byte-by-byte reads
  * for variable-length data. */
@@ -532,8 +491,6 @@ int __cdecl CloseVfsStream(void* stream)
 // ReadVfsData
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 448
-// ANALYSIS: Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks.
 
 unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_14h)
 {
@@ -641,10 +598,6 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 	return result;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
-// SIZE: 704
 /* Opens a VFS stream for reading or writing. Initializes
  * compression state (zlib), sets up buffering, and links
  * the stream into the open stream list. */
@@ -654,7 +607,6 @@ unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_
 
 /* Game function - compression stream initialization */
 /* Parses flag string (R/W/N/Z), allocates pool object, sets up zlib inflate/deflate */
-// BLOCKER_DELTA: 626
 
 int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* param_3)
 {

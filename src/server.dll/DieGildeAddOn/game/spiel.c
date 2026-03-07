@@ -173,9 +173,6 @@ double __cdecl gm_RandomFloat01(void);
 extern float _DAT_100256a0;
 extern float _DAT_100256a8;
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 320
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */
 
@@ -196,9 +193,6 @@ void* __cdecl gm_AllocAndInit(char a, char b, int c, int d, char* ctx)
 	return p;
 }
 
-// STATUS: EXACT
-// ORIGIN: GAME
-// SIZE: 20
 /* Dispatches a function call through a callback table. Central
  * dispatch mechanism for game system callbacks. */
 
@@ -210,10 +204,6 @@ int __cdecl gm_DispatchCall(int param, DISPATCH_OBJ* obj)
 	return obj->func(obj->field_28, param);
 }
 
-// ORIGIN: GAME
-// STATUS: MATCHING
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
-// SIZE: 642
 /* Initializes the object production (Hersteller) system.
  * Loads product definitions, recipes, and production chain
  * data from game files. */
@@ -222,8 +212,6 @@ int __cdecl gm_DispatchCall(int param, DISPATCH_OBJ* obj)
 // gm_InitObjektHersteller
 
 /* Game function - gm_InitObjektHersteller (initialize object manufacturers) */
-// BLOCKER_DELTA: 575
-// GHIDRA: InitProductionTable
 
 void __cdecl gm_InitObjektHersteller(void)
 {
@@ -385,13 +373,6 @@ void __cdecl gm_InitObjektHersteller(void)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap
-// SIZE: 861
-// BLOCKER_DELTA: 333
-// GHIDRA: InitGameWorld
-// ANALYSIS: InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure.
 /* Opens/initializes the game world. Loads map data, entity
  * tables, building type definitions, and sets up the
  * simulation state. Central game world init function. */
@@ -399,20 +380,20 @@ void __cdecl gm_InitObjektHersteller(void)
 // FUNCTION: SERVER 0x10015950
 // gm_Open
 
-/* GLOBAL: SERVER 0x100a8c30 */
+// DATA: SERVER 0x100a8c30
 extern int g_entity_type_table;
-/* GLOBAL: SERVER 0x1014d8c0 */
+// DATA: SERVER 0x1014d8c0
 extern int g_1014d8c0;
-/* GLOBAL: SERVER 0x101de450 */
+// DATA: SERVER 0x101de450
 extern int g_item_def_table;
-/* GLOBAL: SERVER 0x100a8c34 */
+// DATA: SERVER 0x100a8c34
 extern int g_100a8c34;
 
-/* GLOBAL: SERVER 0x100a8cf8 */
+// DATA: SERVER 0x100a8cf8
 extern int g_100a8cf8;
-/* GLOBAL: SERVER 0x1009b764 */
+// DATA: SERVER 0x1009b764
 extern int g_1009b764;
-/* GLOBAL: SERVER 0x1002dde0 */
+// DATA: SERVER 0x1002dde0
 extern int g_1002dde0;
 
 int __cdecl gm_Open(int param_1)
@@ -522,9 +503,6 @@ int __cdecl gm_Open(int param_1)
 	return 0;
 }
 
-// ORIGIN: GAME
-// SIZE: 57
-// STATUS: RELOC
 /* Resets all entities to initial state. Walks the entity
  * tables and clears all active entities without deallocation. */
 
@@ -551,11 +529,6 @@ void __cdecl gm_ResetAllEntities(void)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap
-// SIZE: 194
-// BLOCKER_DELTA: 88
 /* Cleans up object entities. Frees inventory objects and
  * linked item chains from all active entities. */
 
@@ -620,9 +593,6 @@ void __cdecl gm_CleanupObjectEntities(void)
 	}
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 55
 /* Finds a record in the entity table by ID. Searches the
  * global entity records for a matching entity ID. Returns
  * pointer or NULL. */
@@ -647,9 +617,6 @@ Record* __cdecl gm_FindRecordById(int id)
 	return (Record*) 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 135
 /* Cleans up all entities. Complete teardown of all game
  * entities including buildings, citizens, and objects. */
 
@@ -684,9 +651,6 @@ void __cdecl gm_CleanupAllEntities(void)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 211
 /* Resolves an entity by ID to up to three pointers:
  * primary entity, object entity, and dynamic entity.
  * Returns non-zero on success. Core entity resolution API. */
@@ -748,15 +712,6 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// BLOCKER_DELTA: 136
-// ANALYSIS: Takes an entity_id (often from a packet) and searches through three global entity collections (dynamic objects, existing/world objects, and static/static structures). Returns 1, 2, or 3 depending on which collection it was found in, and sets the corresponding output pointer.
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 714
-// BLOCKER_DELTA: 449
-// ANALYSIS: Refreshes market availability table (85 entries of 0x80 bytes each). Scans all buildings for producible items, marks ingredients as available, then auto-allocates missing market objects. Also counts special resource types (0x92-0x97, 0x2db) in the town market.
 /* Refreshes market availability. Recalculates which goods
  * are available for trade based on current building production
  * and inventory states. */
@@ -950,17 +905,13 @@ void __cdecl gm_RefreshMarketAvailability(int param_1)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 72
-// BLOCKER_DELTA: 64
 /* Finds a slot by ID in the entity slot table. Returns
  * the slot pointer or NULL if not found. */
 
 // FUNCTION: SERVER 0x10016240
 // gm_FindSlotById
 
-/* GLOBAL: SERVER 0x1009b770 */
+// DATA: SERVER 0x1009b770
 extern char g_slot_array[];
 
 char* __cdecl gm_FindSlotById(int param_1, int param_2)
@@ -982,11 +933,6 @@ char* __cdecl gm_FindSlotById(int param_1, int param_2)
 	return (char*) 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 464
-// BLOCKER_DELTA: 452
-// ANALYSIS: Apply active query filters (id/type/owner/group) to current candidate.
 /* Returns the next matching entity from an active query.
  * Advances the query iterator and returns the next entity
  * that matches the query criteria. */
@@ -1119,12 +1065,6 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 	return matched_ent;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
-// SIZE: 320
-// BLOCKER_DELTA: 307
-// ANALYSIS: Parse vararg criteria tuples for entity query filtering.
 /* Starts a new entity query with type, filter, and range
  * parameters. Initializes the query state for iteration
  * via gm_NextEntityQueryMatch. Variadic args for filters. */
@@ -1132,33 +1072,33 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 // FUNCTION: SERVER 0x10016460
 // gm_StartEntityQuery
 
-/* GLOBAL: SERVER 0x101de450 */
-/* GLOBAL: SERVER 0x10030b94 */
-/* GLOBAL: SERVER 0x10030b98 */
-/* GLOBAL: SERVER 0x10030b9c */
+// DATA: SERVER 0x101de450
+// DATA: SERVER 0x10030b94
+// DATA: SERVER 0x10030b98
+// DATA: SERVER 0x10030b9c
 
-/* GLOBAL: SERVER 0x10030b9e */
+// DATA: SERVER 0x10030b9e
 extern char DAT_10030b9e;
 
-/* GLOBAL: SERVER 0x1003545e */
+// DATA: SERVER 0x1003545e
 extern char DAT_1003545e;
 
-/* GLOBAL: SERVER 0x1003545c */
+// DATA: SERVER 0x1003545c
 extern char DAT_1003545c;
 
-/* GLOBAL: SERVER 0x1003545d */
+// DATA: SERVER 0x1003545d
 extern char DAT_1003545d;
 
-/* GLOBAL: SERVER 0x10035454 */
+// DATA: SERVER 0x10035454
 extern char DAT_10035454;
 
-/* GLOBAL: SERVER 0x10035458 */
+// DATA: SERVER 0x10035458
 extern int DAT_10035458;
 
-/* GLOBAL: SERVER 0x100a8c38 */
+// DATA: SERVER 0x100a8c38
 extern int DAT_100a8c38;
 
-/* GLOBAL: SERVER 0x10035468 */
+// DATA: SERVER 0x10035468
 extern unsigned short* DAT_10035468;
 
 unsigned short* __cdecl gm_StartEntityQuery(int param_1, int param_2, int param_3, ...)
@@ -1249,10 +1189,6 @@ check_container:
 	return (unsigned short*) 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 37
-// ANALYSIS: Walks the primary linked list of object allocations starting at g_existing_entities (a global pointer array). Looks for the first slot with an active flag == 0. Stops searching after 0x5007 (20487) slots. Returns pointer to the slot or NULL if full. | Scan fixed object pool and return first free slot.
 /* Allocates an object slot in an entity's inventory.
  * Finds the next free slot and returns its index. */
 
@@ -1282,9 +1218,6 @@ char* __cdecl gm_AllocateObjectSlot(void)
 	return result;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 155
 /* Removes an object from an entity by type. Searches the
  * entity's inventory for an object matching the type and
  * removes it. */
@@ -1333,12 +1266,6 @@ int __cdecl gm_RemoveObjectByType(char** objectListHead, unsigned int objectType
 	return 0;
 }
 
-// STATUS: EXACT
-// ORIGIN: GAME
-// BLOCKER: jump condition swap, zero-extend pattern (xor vs mov)
-// BLOCKER_DELTA: 95
-// ANALYSIS: Linear search by object type id within sibling linked list.
-// SIZE: 1
 /* No-op function that returns 2. Used as a placeholder
  * in function/callback tables. */
 
@@ -1348,9 +1275,6 @@ void __cdecl gm_NoopRet2(void)
 {
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 139
 /* Removes a linked node from an entity's chain by node ID.
  * Unlinks the node and frees its memory. */
 
@@ -1398,11 +1322,6 @@ int __cdecl gm_RemoveLinkedNodeById(int* param_1, int param_2)
 	return -2;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// BLOCKER: zero-extend pattern (xor vs mov)
-// BLOCKER_DELTA: 106
-// SIZE: 66
 /* Recursively frees an object list. Walks the linked list
  * of objects and deallocates each one. */
 
@@ -1430,12 +1349,6 @@ int __cdecl gm_FreeObjectListRecursive(char** head_ptr)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 1392
-// BLOCKER_DELTA: 1278
-// ANALYSIS: High-level entity allocation wrapper. Resolves the parent_id using gm_ResolveEntityById to find the appropriate entity list head. Allocates a new object slot using gm_AllocateObjectSlot. Inserts the new object into the parent's linked list and initializes basic fields (type, id from global g_next_entity_id, parent pointer).
 /* Allocates a new object in an entity's inventory. Creates
  * the object entry, sets type/quantity, and links it into
  * the entity's object chain. */
@@ -1658,9 +1571,6 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 	return esi;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 272
 /* Adds or accumulates an object. If an object of the same
  * type exists, increments its quantity; otherwise allocates
  * a new object slot. */
@@ -1714,10 +1624,6 @@ void* __cdecl gm_AddOrAccumulateObject(int parent_id, int type_id, int amount)
 	return existingObject;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 186
-// GHIDRA: SubtractObjectFromOwner
 /* Subtracts quantity from an object. If quantity reaches zero,
  * the object is removed and deallocated (killed). Returns 0
  * if insufficient quantity. */
@@ -1763,10 +1669,6 @@ int __cdecl gm_SubObjekt(void* param_1, unsigned int param_2, int param_3)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 211
-// ANALYSIS: Decrease tracked amount; delete entry if it reaches zero.
 /* Subtracts quantity without killing the object when it
  * reaches zero. The object slot remains even at zero quantity.
  * Used for transferring where the slot should persist. */
@@ -1815,10 +1717,6 @@ int __cdecl gm_SubObjektNoKill(int entity_id, int object_id, int subtract_amount
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 346
-// BLOCKER_DELTA: 324
 /* Finds the next entity matching filter criteria. Used
  * internally by entity query iteration. Advances past
  * non-matching entities. */
@@ -1949,10 +1847,6 @@ MATCH:
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 267
-// BLOCKER_DELTA: 229
 /* Starts a filtered entity search. Variadic filter
  * parameters specify entity class, type, and owner
  * constraints. Returns first matching entity. */
@@ -1960,37 +1854,37 @@ MATCH:
 // FUNCTION: SERVER 0x100170e0
 // gm_StartFilteredEntitySearch
 
-/* GLOBAL: SERVER 0x100a8c30 */
+// DATA: SERVER 0x100a8c30
 extern int DAT_100a8c30;
 
-/* GLOBAL: SERVER 0x10030b8c */
+// DATA: SERVER 0x10030b8c
 extern short DAT_10030b8c;
 
-/* GLOBAL: SERVER 0x10030b8e */
+// DATA: SERVER 0x10030b8e
 extern short DAT_10030b8e;
 
-/* GLOBAL: SERVER 0x10030b84 */
+// DATA: SERVER 0x10030b84
 extern char DAT_10030b84;
 
-/* GLOBAL: SERVER 0x10030b88 */
+// DATA: SERVER 0x10030b88
 extern int DAT_10030b88;
 
-/* GLOBAL: SERVER 0x10030b90 */
+// DATA: SERVER 0x10030b90
 extern char DAT_10030b90;
 
-/* GLOBAL: SERVER 0x10035444 */
+// DATA: SERVER 0x10035444
 extern char* DAT_10035444;
 
-/* GLOBAL: SERVER 0x10035449 */
+// DATA: SERVER 0x10035449
 extern char DAT_10035449;
 
-/* GLOBAL: SERVER 0x1003544c */
+// DATA: SERVER 0x1003544c
 extern int DAT_1003544c;
 
-/* GLOBAL: SERVER 0x10035448 */
+// DATA: SERVER 0x10035448
 extern char DAT_10035448;
 
-/* GLOBAL: SERVER 0x10035464 */
+// DATA: SERVER 0x10035464
 extern unsigned char* DAT_10035464;
 
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int param_1, ...)
@@ -2057,9 +1951,6 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int param_1, ...)
 	return FindNextFilteredEntity();
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 39
 /* Searches a structure/record table for a matching entry.
  * Linear search by comparison field. */
 
@@ -2084,9 +1975,6 @@ char* __cdecl gm_SearchStruct(void)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 240
 /* Cleans up a building entity. Frees all contained entities
  * (workers, inventory, production slots) and resets the
  * building to an empty state. */
@@ -2146,10 +2034,6 @@ cleanup_loop:
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 207
-// GHIDRA: InitBuildingDefaultItems
 /* Allocates default values for a building entity. Sets up
  * initial worker capacity, production slots, and storage
  * based on building type. */
@@ -2199,9 +2083,6 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* param_1)
 	} while ((int) table_ptr < 0x10030b6a);
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 202
 /* Sets worker limits for a building based on its type and
  * upgrade level. Reads from the building type table. */
 
@@ -2241,12 +2122,6 @@ void __cdecl gm_SetBuildingWorkerLimits(unsigned char* param_1)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
-// SIZE: 1088
-// GHIDRA: gm_AllocGebaeude
-// BLOCKER_DELTA: 1007
 /* Allocates a new building (Gebaeude) entity. Creates the
  * building struct, sets type, initializes production and
  * storage, and links to the town. */
@@ -2254,22 +2129,22 @@ void __cdecl gm_SetBuildingWorkerLimits(unsigned char* param_1)
 // FUNCTION: SERVER 0x100174d0
 // gm_AllocGebaeude
 
-/* GLOBAL: SERVER 0x100a8c30 */
+// DATA: SERVER 0x100a8c30
 extern int g_entity_type_table;
 
-/* GLOBAL: SERVER 0x10030b6c */
+// DATA: SERVER 0x10030b6c
 extern int g_next_object_id;
 
-/* GLOBAL: SERVER 0x101de450 */
+// DATA: SERVER 0x101de450
 extern int g_item_def_table;
 
-/* GLOBAL: SERVER 0x10035880 */
+// DATA: SERVER 0x10035880
 extern int g_current_year;
-/* GLOBAL: SERVER 0x10035884 */
+// DATA: SERVER 0x10035884
 extern int g_10035884;
-/* GLOBAL: SERVER 0x10035888 */
+// DATA: SERVER 0x10035888
 extern int g_10035888;
-/* GLOBAL: SERVER 0x1003588c */
+// DATA: SERVER 0x1003588c
 extern short g_1003588c;
 
 char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
@@ -2475,9 +2350,6 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 	return geb;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 145
 /* Sets up an entity query with specific parameters. Configures
  * the query state machine for iterating filtered results. */
 
@@ -2506,9 +2378,6 @@ unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* param_1)
 	return p;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 192
 /* Returns the category of a building type. Maps a building
  * type ID to its category (production, storage, service, etc.). */
 
@@ -2560,9 +2429,6 @@ int __cdecl gm_GetBuildingTypeCategory(int param_1)
 	}
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 62
 /* Searches a specific entity table (type 0x67) for a matching
  * entry. Used for specialized entity lookups. */
 
@@ -2588,9 +2454,6 @@ void* __cdecl gm_SearchTable67(int id)
 	return 0;
 }
 
-// ORIGIN: GAME
-// STATUS: RELOC
-// SIZE: 74
 /* Checks if an entity's type matches the expected class.
  * Returns non-zero if the entity type field matches. */
 
@@ -2639,9 +2502,6 @@ int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
 	}
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 320
 /* Assigns a building owner. Updates the building's owner
  * field and maintains the owner-to-building linkage in
  * both directions. */
@@ -2705,9 +2565,6 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 742
 /* Allocates building contents (workers, inventory items).
  * Populates a building's slots with initial entities based
  * on the building type definition. */
@@ -2877,10 +2734,6 @@ int __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
 	return (int) obj;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 35
-// GHIDRA: call_compare
 /* Wrapper around gm_RemoveObjectByType. Provides a simpler
  * removal interface without filtering. */
 
@@ -2898,10 +2751,6 @@ int __cdecl gm_RemoveObjectWrapper(int param_1, unsigned int param_2)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 36
-// GHIDRA: find_and_process
 /* Removes a link from an entity. Clears a specific entity
  * reference field, breaking the association. */
 
@@ -2918,10 +2767,6 @@ void __cdecl gm_RemoveEntityLink(int param_1)
 	}
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 23
-// ANALYSIS: Checks if the provided entity pointer is valid and active (not -1). If so, it invokes amt_ClearEntityLinks on it to detach it from game world lists before deletion or recycling.
 /* Initializes an entity if it exists. Validates the entity
  * pointer, then sets default field values. No-op on NULL. */
 
@@ -2935,11 +2780,6 @@ void __cdecl gm_InitEntityIfValid(short* param_1)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 278
-// BLOCKER_DELTA: 267
-// GHIDRA: gm_DeallocEntity
 /* Deallocates an entity completely. Frees all linked objects,
  * removes from entity tables, and releases memory. */
 
@@ -2994,19 +2834,19 @@ struct EntityStruct {
 	char pad179[0x21c - 0x179];
 };
 
-/* GLOBAL: SERVER 0x10035880 */
+// DATA: SERVER 0x10035880
 extern unsigned short g_something_1[1];
-/* GLOBAL: SERVER 0x100358a0 */
-/* GLOBAL: SERVER 0x10035434 */
+// DATA: SERVER 0x100358a0
+// DATA: SERVER 0x10035434
 extern int g_citizen_count;
-/* GLOBAL: SERVER 0x1009acfc */
+// DATA: SERVER 0x1009acfc
 extern int g_some_limit;
-/* GLOBAL: SERVER 0x100358fc */
+// DATA: SERVER 0x100358fc
 extern int g_entity_ref_table[1];
 
-/* GLOBAL: SERVER 0x10031500 */
+// DATA: SERVER 0x10031500
 extern char g_str_10031500[];
-/* GLOBAL: SERVER 0x10031538 */
+// DATA: SERVER 0x10031538
 extern char g_str_10031538[];
 
 void __cdecl gm_DeallocEntity(unsigned int index, int param_2)
@@ -3066,9 +2906,6 @@ void __cdecl gm_DeallocEntity(unsigned int index, int param_2)
 	}
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 81
 /* Initializes entity slots to default/empty values. Zeros
  * link fields and sets capacity counters. */
 
@@ -3096,9 +2933,6 @@ void __cdecl gm_InitEntitySlots(void)
 	DAT_10035430 = 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 32
 /* Checks if a value is within a range [min, max]. Returns
  * non-zero if within bounds. */
 
@@ -3115,9 +2949,6 @@ int __cdecl gm_IsInRange(int x)
 	return 2;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 70
 /* Checks if an entity type is of a specific class. Returns
  * non-zero if the type matches the expected entity class. */
 
@@ -3159,19 +2990,16 @@ int __cdecl gm_EntityClassCheck(int type)
 	}
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 87
 /* Checks if an entity's stat is at or above a threshold.
  * Used for skill/ability requirement checks. */
 
 // FUNCTION: SERVER 0x100181a0
 // gm_CheckStatLevel
 
-/* GLOBAL: SERVER 0x10035a04 */
+// DATA: SERVER 0x10035a04
 extern unsigned char g_entity_type_bytes[];
 
-/* GLOBAL: SERVER 0x100358a0 */
+// DATA: SERVER 0x100358a0
 
 int __cdecl gm_CheckStatLevel(int param_1, int param_2)
 {
@@ -3191,9 +3019,6 @@ int __cdecl gm_CheckStatLevel(int param_1, int param_2)
 	return (unsigned int) *(unsigned char*) (result + 0x74 + param_2);
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 304
 /* Maps and clamps an entity stat value to a valid range.
  * Applies min/max bounds and any stat modifiers. */
 
@@ -3319,9 +3144,6 @@ int __cdecl gm_MapEntityStatRange(int param_1)
 	}
 }
 
-// STATUS: EXACT
-// ORIGIN: GAME
-// SIZE: 276
 /* Returns the opposite stat index for paired stats.
  * E.g., maps strength to weakness, charisma to shyness.
  * Used for character stat balancing. */
@@ -3404,9 +3226,6 @@ int __cdecl gm_GetOppositeStatIndex(int param_1)
 	return result;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 78
 /* Generates a random stat modifier. Produces a random
  * delta value for stat variation during entity creation
  * or level-up events. */
@@ -3434,9 +3253,6 @@ char __cdecl gm_RandomStatModifier(char stat_value)
 	return (char) (stat_value + (short) gm_RandomMod(range));
 }
 
-// STATUS: EXACT
-// ORIGIN: GAME
-// SIZE: 56
 /* Looks up an entity record by its integer ID. Searches
  * the global entity table and returns a pointer to the
  * matching entity, or 0 if not found. */
@@ -3461,11 +3277,6 @@ int __cdecl gm_LookupEntityRecordById(int search_id)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 66
-// NOTE: duplicate bounds check needed for correct register allocation
-// ANALYSIS: duplicate bounds check needed for correct register allocation
 /* Gets a pointer to an entity's type table entry.
  * Indexes into g_entity_type_table by the entity's type byte. */
 
@@ -3491,10 +3302,6 @@ short* __cdecl gm_GetEntityTableEntry(char* param)
 	return (short*) 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 800
-// BLOCKER_DELTA: 695
 /* Implementation of player identity change. Swaps player
  * entity identity between two IDs, updating all back-
  * references in buildings and citizens. */
@@ -3680,9 +3487,6 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 	return (int) index_a;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 3689
 /* Creates a new entity from parent entities. Generates
  * inherited stats by blending parent attributes with random
  * variation. Core genetic system for citizen creation. */
@@ -3714,9 +3518,6 @@ int __cdecl gm_CreateEntityFromParents(int param_1, int param_2, int param_3, in
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 81
 /* Queries the sum of a specific field across entities
  * matching a filter. Used for aggregate calculations
  * like total production or population counts. */
@@ -3742,10 +3543,6 @@ int __cdecl gm_QueryEntitySum(int param_1, unsigned int param_2)
 	return total;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 396
 /* Calculates the production value for a building. Sums
  * worker skill, building quality, and recipe bonuses to
  * determine output rate. */
@@ -3756,8 +3553,6 @@ int __cdecl gm_QueryEntitySum(int param_1, unsigned int param_2)
 /* Game function - recursive entity value calculation with FPU math */
 /* Accesses g_entity_table (0x101de450), calls __ftol and itself recursively */
 /* Computes weighted entity stat values with caching in field_0x38 */
-// BLOCKER_DELTA: 288
-// ANALYSIS: Recursive production value calculator. Computes the base value of an object type by looking up prototype data (stride 0x41), applying worker skill bonuses from building prototypes, and recursively summing ingredient costs (up to 4 ingredients). Caches result at proto_entry+0x38. Applies quality and production multipliers.
 
 double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 {
@@ -3866,9 +3661,6 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 355
 /* Sums production values across all buildings of a type.
  * Aggregates daily/weekly output for economic reporting. */
 
@@ -3877,7 +3669,6 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 
 /* Game function - entity query stat accumulator */
 /* Iterates entity references in a record, calls gm_CalculateProductionValue for each, accumulates results */
-// BLOCKER_DELTA: 308
 
 int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 {
@@ -3976,9 +3767,6 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 	}
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 74
 /* Accumulates a typed value (type 2) across entities.
  * Specialized aggregation for specific entity field types. */
 
@@ -4003,9 +3791,6 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 	return sum;
 }
 
-// ORIGIN: GAME
-// STATUS: MATCHING
-// SIZE: 102
 
 /* Runs an entity query and sums a field across all results.
  * Combines query iteration with field accumulation. */
@@ -4036,9 +3821,6 @@ int __cdecl gm_EntityQuerySum(int param_1)
 	return sum;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 82
 /* Resolves a parent entity reference. Follows entity chain
  * links to find the parent. Returns parent pointer. */
 
@@ -4059,9 +3841,6 @@ short* __cdecl gm_ResolveParentEntity(short* param_1)
 	return param_1;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 62
 /* Gets the type (class) of an entity as an unsigned short.
  * Reads from the entity's type field. */
 
@@ -4082,9 +3861,6 @@ unsigned short __cdecl gm_GetEntityType(short* param_1)
 	return (short) 0xffff;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 124
 /* Walks an entity chain, calling a callback for each node.
  * Traverses linked entity lists for processing. */
 
@@ -4117,9 +3893,6 @@ int __cdecl gm_EntityAccumulate(void* param_1)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 83
 /* Accumulates values along an entity chain. Walks linked
  * entities and sums a specified field. */
 
@@ -4152,23 +3925,20 @@ int __cdecl gm_WalkEntityChain(int raw_idx)
 	return total;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 48
 /* Finds an entity by its owner. Searches for an entity
  * whose owner field matches the given ID. */
 
 // FUNCTION: SERVER 0x10019c60
 // gm_FindEntityByOwner
 
-/* GLOBAL: SERVER 0x100358a2 */
+// DATA: SERVER 0x100358a2
 extern unsigned char g_entity_state_base[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
-/* GLOBAL: SERVER 0x100358a0 */
+// DATA: SERVER 0x100358a0
 
 char* __cdecl gm_GetMsgField(int param_1)
 {
@@ -4194,9 +3964,6 @@ char* __cdecl gm_GetMsgField(int param_1)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 98
 /* Gets a message field from a command packet. Reads a
  * specific field from the packet's payload section. */
 
@@ -4226,10 +3993,6 @@ int __cdecl compute_size(char* pkt)
 	return iVar1 * 0x14;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 407
 /* Checks if an object can be produced (Kann Objekt Hergestellt).
  * Validates recipe requirements, ingredient availability,
  * worker skills, and building capability. */
@@ -4238,8 +4001,6 @@ int __cdecl compute_size(char* pkt)
 // gm_KannObjektHergestellt
 
 /* Game function - checks production capacity and entity slot availability */
-// BLOCKER_DELTA: 93
-// GHIDRA: gm_KannObjektHergestellt
 
 int __cdecl gm_KannObjektHergestellt(char* obj, int entity_index, int requested)
 {
@@ -4371,9 +4132,6 @@ return_requested:
 	return requested;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 395
 /* Checks inventory capacity. Verifies whether an entity's
  * inventory has room for additional objects of a given type. */
 
@@ -4381,7 +4139,6 @@ return_requested:
 // gm_CheckInventoryCapacity
 
 /* Game function - computes available entity slots (capped at 3) */
-// BLOCKER_DELTA: 364
 
 int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested)
 {
@@ -4478,9 +4235,6 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 	return (available < 0) ? 0 : available;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 97
 /* Sets a field value on an entity. Writes a value at the
  * specified offset into the entity structure. */
 
@@ -4511,10 +4265,6 @@ void __cdecl gm_EntitySetField(void)
 	} while (entity);
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 54
-// GHIDRA: ahm_RandomBelow
 /* Returns a random integer in [0, max). Uses the game's
  * internal random number generator for deterministic
  * simulation results. */
@@ -4530,9 +4280,6 @@ int __cdecl gm_RandomMod(unsigned short n)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 22
 /* Returns a random float in [0.0, 1.0). Converts the
  * integer RNG output to a normalized float value. */
 
@@ -4544,9 +4291,6 @@ double __cdecl gm_RandomFloat01(void)
 	return (double) rand() * (double) _DAT_10025fbc;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 48
 /* Returns a random value with quadratic distribution.
  * Produces values biased toward lower numbers. Used for
  * stat rolls and probability curves. */

@@ -51,11 +51,6 @@ int ls_LoadTownData(int);
 extern int amt_fio_LoadAemter(int, int);
 extern unsigned int ls_ID2Ptr(void);
 
-// STATUS: MATCHING
-// BLOCKER: instruction folding (lea vs mov)
-// ORIGIN: GAME
-// SIZE: 728
-// BLOCKER_DELTA: 535
 /* Loads graveyard-specific data from a save file. Reads
  * production slots, worker assignments, and field states
  * for graveyard buildings. */
@@ -189,10 +184,6 @@ int __cdecl ls_LoadGraveyardData(int param_1, int param_2)
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), jump condition swap
-// SIZE: 346
 /* Initializes a new dynasty entity during save loading.
  * Creates the dynasty's family tree root and initial
  * member entities with default stats. */
@@ -203,7 +194,6 @@ int __cdecl ls_LoadGraveyardData(int param_1, int param_2)
 /* TODO: Add extern declarations for globals and called functions */
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 199
 
 void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4)
 
@@ -266,9 +256,6 @@ void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* para
 	return;
 }
 
-// ORIGIN: GAME
-// STATUS: RELOC
-// SIZE: 37
 /* Reads VFS data with error checking. Wraps the VFS read
  * call and returns 0 on success, non-zero on failure. */
 
@@ -282,10 +269,6 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 	return result > 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 857
-// ANALYSIS: ls_LoadSavegameHeader: Reads versioned savegame header from VFS stream. Allocates 0xE100 temp buffer, reads format version, player count, map name (32 bytes), timestamps, difficulty, player scores (8 entries for version > 0x10033), savegame description (96 bytes). Returns 1 on success, 0 on read failure.
 /* Loads the savegame header block. Reads version info,
  * map name, player count, and game settings from the
  * save file stream. */
@@ -413,10 +396,6 @@ int __cdecl ls_LoadSavegameHeader(int param_1, char* param_2)
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
-// SIZE: 282
 /* Loads existing entities from a save file. Reads entity
  * records in bulk and links them into the runtime entity
  * tables. */
@@ -424,7 +403,6 @@ int __cdecl ls_LoadSavegameHeader(int param_1, char* param_2)
 // FUNCTION: SERVER 0x100127d0
 // ls_LoadExistingEntities
 
-// GLOBALS: SERVER 0x10035450
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 void __cdecl gm_CleanupObjectEntities(void);
@@ -489,13 +467,6 @@ int __cdecl ls_LoadExistingEntities(int param_1)
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// GLOBALS: SERVER 0x100a8c34
-// BLOCKER_DELTA: 274
-// SIZE: 1463
-// BLOCKER_DELTA: 1390
-// ANALYSIS: ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success.
 /* Loads building entity state from a save file. Reads
  * building type, owner, upgrade level, and production
  * state for each building entity. */
@@ -764,10 +735,6 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout
-// SIZE: 884
 /* Loads dynamic (non-building) entities from a save file.
  * Reads citizens, objects, and transient game entities. */
 
@@ -775,8 +742,6 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 // ls_LoadDynamicEntities
 
 /* Game function - reads entity data records from VFS file */
-// BLOCKER_DELTA: 807
-// ANALYSIS: ls_LoadDynamicEntities: Iterates static entity slots (stride 0xAC), reads: slot index (2b), name (16b), position/state fields. Version-gated skill array (11 or 14 entries). Reads equipment, inventory, extended data. Sets default scale 1.0f for old saves. Returns 1 when past end address 0x1009b761.
 
 int __cdecl ls_LoadDynamicEntities(void* file)
 {
@@ -902,13 +867,6 @@ int __cdecl ls_LoadDynamicEntities(void* file)
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout
-// SIZE: 2268
-// BLOCKER_DELTA: 2053
-// GHIDRA: LoadStaticEntities
-// ANALYSIS: Deserializes all static entities from savegame stream. Reads entity count, landmark pointers, then loops reading 70+ fields per entity with version-gated sections (g_save_format_version). Entity data at g_static_entities array, stride 0x21C bytes. Returns 1 on success, 0 on read failure.
 /* Master entity loader: orchestrates loading all entity
  * types from a save file in the correct order (buildings
  * first, then citizens, then objects). */
@@ -916,9 +874,9 @@ int __cdecl ls_LoadDynamicEntities(void* file)
 // FUNCTION: SERVER 0x10013230
 // ls_LoadEntities
 
-/* GLOBAL: SERVER 0x1002d4ec */
+// DATA: SERVER 0x1002d4ec
 extern int g_save_version;
-/* GLOBAL: SERVER 0x10035434 */
+// DATA: SERVER 0x10035434
 extern int g_citizen_count;
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
@@ -1270,12 +1228,6 @@ int __cdecl ls_LoadEntities(int param_1)
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp)
-// SIZE: 1361
-// BLOCKER_DELTA: 1327
-// ANALYSIS: ls_LoadTownData: Two phases - (1) per-player building slots (up to 62 buildings per player), (2) town records with name, timestamps, flags, population, wealth, 10 resource pairs, 10 production pairs, 4 tax rates, 4 trade routes, reputation, guild standings, 8 event records, political data. Returns 1 on success.
 /* Loads town-level data from a save file. Reads town name,
  * treasury, population, building counts, and political
  * state (offices, elections). */
@@ -1510,10 +1462,6 @@ int __cdecl ls_LoadTownData(int file)
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 491
 /* Converts an entity ID to a runtime pointer. Searches the
  * entity tables for a matching ID and returns the memory
  * address. Used during save loading to resolve references. */
@@ -1522,8 +1470,6 @@ int __cdecl ls_LoadTownData(int file)
 // ls_ID2Ptr
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 430
-// GHIDRA: FixupEntityPointers
 
 unsigned int ls_ID2Ptr(void)
 {
@@ -1646,12 +1592,6 @@ unsigned int ls_ID2Ptr(void)
 	return 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 892
-// BLOCKER_DELTA: 533
-// GHIDRA: RecvGameSavegame
 /* Receives and loads a complete game state from a client.
  * Called during lobby-to-game transition to receive the
  * savegame data stream and initialize the game world. */

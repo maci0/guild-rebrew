@@ -1,6 +1,3 @@
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 327
 
 #ifdef __clang__
 #pragma clang diagnostic push

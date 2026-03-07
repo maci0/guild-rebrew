@@ -1,7 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)
-// ORIGIN: GAME
-// SIZE: 517
 
 #include "../../../Units/Error/error.h"
 #include "../command_internal.h"

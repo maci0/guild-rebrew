@@ -9,10 +9,6 @@ extern unsigned char DAT_10035a05;
 extern unsigned char DAT_100358a0;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
-// STATUS: MATCHING
-// BLOCKER: instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// ORIGIN: GAME
-// SIZE: 535
 /* Searches for matching parent entities by type and creates
  * family tree linkages. Used in citizen creation to find
  * compatible parents for stat inheritance. */
@@ -21,7 +17,6 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 // FindAndMatchParents
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 469
 
 unsigned int FindAndMatchParents(unsigned int param_1)
 {
@@ -128,10 +123,6 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 	return rand_roll & 0xffff0000;
 }
 
-// ORIGIN: GAME
-// STATUS: RELOC
-// SIZE: 83
-// ANALYSIS: Updates priority tracking for dynamic entity dispatch/update lists. Limits simultaneous update weight using GetStatPair constraints.
 /* Updates entity priority/scheduling. Called during simulation
  * tick to adjust entity processing order based on game state. */
 
@@ -160,9 +151,6 @@ void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 	*(unsigned char*) (entity + 0x65) += 1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 145
 /* Starts an entity query filtered by type byte from param_1.
  * Dispatches entity iteration across buildings, citizens, or
  * other entity categories based on the type selector. */
@@ -195,11 +183,6 @@ void __cdecl sim_StartEntityQueryByType(unsigned char* param_1)
 	return;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
-// BLOCKER_DELTA: 138
-// SIZE: 180
 /* Creates a new citizen entity with initial stats generated
  * from parent entities. Allocates entity memory, assigns random
  * stats via gm_CreateEntityFromParents, and links to home. */
@@ -246,10 +229,6 @@ error:
 	return (void*) 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 197
-// BLOCKER_DELTA: 164
 /* Advances the game clock by one tick. Updates day/hour/minute
  * counters, triggers periodic events (taxes, production cycles),
  * and notifies connected clients of time changes. */
@@ -303,9 +282,6 @@ int __cdecl AdvanceGameClock(int* param_1, int param_2, int param_3, int param_4
 	return minutes_carry;
 }
 
-// ORIGIN: GAME
-// STATUS: EXACT
-// SIZE: 41
 /* Sets synchronization parameters for the simulation.
  * Configures tick rate, player count, and timing values
  * used for network-synchronized game state. */

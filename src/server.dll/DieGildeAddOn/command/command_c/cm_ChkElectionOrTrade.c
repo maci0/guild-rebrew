@@ -1,9 +1,5 @@
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 169
 
 /*
-// BLOCKER_DELTA: 137
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME

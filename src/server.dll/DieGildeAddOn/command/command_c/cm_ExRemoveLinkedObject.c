@@ -1,8 +1,3 @@
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 197
-// BLOCKER: prologue register pre-load ordering, instruction folding (lea vs mov), jump condition swap, nodeId register allocation (esi vs ecx)
-// BLOCKER_DELTA: 176
 
 #include "../command_internal.h"
 

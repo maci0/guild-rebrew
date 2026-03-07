@@ -42,9 +42,6 @@ extern float DAT_10025680;
 extern float DAT_100257c4;
 extern float DAT_100257c8;
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 352
 /* Checks if a production slot in a building is active.
  * Returns non-zero if the slot at the given index has
  * an assigned worker or active production. */
@@ -80,11 +77,6 @@ int __cdecl gv_CheckSlotActive(char* obj, int idx)
 	return 1;
 }
 
-// ORIGIN: GAME
-// STATUS: MATCHING
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap
-// SIZE: 329
-// BLOCKER_DELTA: 254
 /* Gets a reference to a slot entry in a building's production
  * table. Returns the slot pointer at the specified index and
  * sub-type. */
@@ -180,11 +172,6 @@ ret_value:
 	return base + (unsigned int) param_3 * 0x14;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, jump condition swap
-// SIZE: 320
-// BLOCKER_DELTA: 109
 /* Finds a slot entry in a building with optional type filtering.
  * Searches production slots for one matching the given criteria
  * and returns a pointer to it. */
@@ -279,9 +266,6 @@ char* __cdecl gv_FindSlotEntryFiltered(
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 370
 /* Spawns graveyard entities (workers, resources) for a building.
  * Initializes the graveyard's active entities based on its
  * current upgrade level and capacity. */
@@ -290,7 +274,6 @@ char* __cdecl gv_FindSlotEntryFiltered(
 // SpawnGraveyardEntities
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 339
 
 int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 {
@@ -363,9 +346,6 @@ int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 	return 0;
 }
 
-// ORIGIN: GAME
-// STATUS: MATCHING
-// SIZE: 832
 /* Allocates a single graveyard production field. Sets up the
  * field's entity type, worker assignment, and production timer. */
 
@@ -595,10 +575,6 @@ cleanup:
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
-// SIZE: 570
 /* Upgrades a graveyard field to the next tier. Increases
  * production capacity and unlocks new product types. */
 
@@ -606,7 +582,6 @@ cleanup:
 // UpgradeGraveyardField
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 539
 
 unsigned int UpgradeGraveyardField(unsigned char* param_1)
 {
@@ -738,9 +713,6 @@ unsigned int UpgradeGraveyardField(unsigned char* param_1)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 66
 /* Frees 3 consecutive production fields in a building.
  * Deallocates the field entities and clears their slots. */
 
@@ -763,10 +735,6 @@ void __cdecl gv_Free3Fields(char* p)
 	game_free(p);
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 525
 /* Assigns a product type to a production slot. Validates the
  * slot is empty, sets the product ID, and initializes the
  * production timer. */
@@ -775,7 +743,6 @@ void __cdecl gv_Free3Fields(char* p)
 // AssignProductionSlot
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 462
 
 unsigned int AssignProductionSlot(int param_1)
 {
@@ -907,10 +874,6 @@ unsigned int AssignProductionSlot(int param_1)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
-// SIZE: 501
 /* Hires a worker for a production slot. Links the worker
  * entity to the building's production slot and starts the
  * production cycle. */
@@ -919,7 +882,6 @@ unsigned int AssignProductionSlot(int param_1)
 // HireProductionWorker
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 456
 
 unsigned int HireProductionWorker(int param_1)
 {
@@ -997,10 +959,6 @@ unsigned int HireProductionWorker(int param_1)
 	return 0xfffffffb;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
-// SIZE: 390
 /* Extends the production time for an active slot. Adds
  * additional time to the production timer, adjusting for
  * worker skill and building efficiency. */
@@ -1009,7 +967,6 @@ unsigned int HireProductionWorker(int param_1)
 // ExtendProductionTime
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 306
 
 unsigned int ExtendProductionTime(unsigned int* param_1)
 {
@@ -1062,9 +1019,6 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 288
 /* Replaces the worker assigned to a production slot.
  * Unlinks the old worker and assigns a new one while
  * maintaining production state. */
@@ -1072,7 +1026,6 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 // FUNCTION: SERVER 0x10011540
 // gv_ReplaceProductionWorker
 
-// GLOBALS: SERVER 0x1003546c
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
@@ -1122,12 +1075,6 @@ int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// GLOBALS: SERVER 0x100a8c30
-// BLOCKER_DELTA: 273
-// SIZE: 297
-// BLOCKER_DELTA: 39
 /* Activates a graveyard section (tier/wing). Unlocks
  * additional production slots and enables new capabilities
  * for the graveyard building. */
@@ -1135,13 +1082,13 @@ int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 // FUNCTION: SERVER 0x10011660
 // ActivateGraveyardSection
 
-/* GLOBAL: SERVER 0x1003546c */
+// DATA: SERVER 0x1003546c
 extern int g_entity_table_end;
 
-/* GLOBAL: SERVER 0x100a8c30 */
+// DATA: SERVER 0x100a8c30
 extern char* g_action_table_base;
 
-/* GLOBAL: SERVER 0x100358a0 */
+// DATA: SERVER 0x100358a0
 extern char g_slot_table[];
 
 int __cdecl ActivateGraveyardSection(unsigned char* param_1)
@@ -1215,12 +1162,7 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 	return -1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: zero-extend pattern (xor vs mov)
-// SIZE: 242
 
-// BLOCKER_DELTA: 96
 /* Updates production progress for active slots. Decrements
  * timers, checks for completion, and triggers product output
  * when the production cycle finishes. */
@@ -1228,7 +1170,6 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 // FUNCTION: SERVER 0x10011790
 // gv_UpdateProductionProgress
 
-// GLOBALS: SERVER 0x1003546c
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
@@ -1269,10 +1210,6 @@ int __cdecl gv_UpdateProductionProgress(unsigned char* param_1)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 164
-// ANALYSIS: Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure.
 /* Validates that an entity action is permitted. Checks
  * entity state, slot availability, and production rules
  * before allowing the action to proceed. */
@@ -1310,10 +1247,6 @@ int __cdecl gv_ValidateEntityAction(unsigned char* param_1)
 	return -1;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 674
-// BLOCKER_DELTA: 639
 /* Moves a slot entry within a building's production table.
  * Relocates a product or worker from one slot position to
  * another, updating internal links. */
@@ -1442,12 +1375,6 @@ unsigned int gv_MoveSlotEntry(int param_1)
 	return 0xfffffff9;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 1040
-// BLOCKER_DELTA: 1021
-// GHIDRA: AllocGraveyardWorker
-// ANALYSIS: Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates.
 /* Allocates a graveyard worker entity. Creates the worker,
  * assigns to a building, and initializes work schedule. */
 

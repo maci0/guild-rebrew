@@ -1,7 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: register allocation (4 callee-saved regs vs target 3), loop body hoisting, comparison direction swap
-// ORIGIN: GAME
-// SIZE: 445
 
 #ifdef __clang__
 #pragma clang diagnostic push

@@ -1,10 +1,5 @@
-// STATUS: MATCHING
-// BLOCKER: loop rotation - target uses jl backward jump, compiler generates jge forward + jmp backward
-// ORIGIN: GAME
-// SIZE: 120
 
 /*
-// BLOCKER_DELTA: 41
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME

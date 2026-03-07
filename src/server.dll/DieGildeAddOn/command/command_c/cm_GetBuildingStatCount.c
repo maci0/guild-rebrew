@@ -1,8 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: instruction folding (lea vs mov)
-// ORIGIN: GAME
-// SIZE: 135
-// BLOCKER_DELTA: 98
 
 #include "../command_internal.h"
 

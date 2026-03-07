@@ -1,8 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: register allocation - target uses only esi, compiler allocates esi+edi for saved param_1 copy
-// ORIGIN: GAME
-// SIZE: 191
-// BLOCKER_DELTA: 180
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"

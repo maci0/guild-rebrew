@@ -1,10 +1,5 @@
-// STATUS: MATCHING
-// BLOCKER: instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp)
-// ORIGIN: GAME
-// SIZE: 162
 
 /*
-// BLOCKER_DELTA: 152
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME

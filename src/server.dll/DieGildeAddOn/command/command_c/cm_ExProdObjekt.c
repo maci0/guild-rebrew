@@ -1,10 +1,5 @@
-// STATUS: MATCHING
-// BLOCKER: epilogue tail-merging (3 early-return error blocks merged to shared epilogue -59 bytes), dead store elimination (mov [esp+0x18],ebx before mov [esp+0x18],4), null-check branch layout (inline vs end-of-block), jump condition swap, zero-extend pattern (xor vs mov)
-// ORIGIN: GAME
-// SIZE: 993
 
 /*
-// BLOCKER_DELTA: 922
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME

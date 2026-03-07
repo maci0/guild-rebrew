@@ -37,12 +37,6 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 ;
 ;
 
-// STATUS: MATCHING
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// ORIGIN: GAME
-// SIZE: 658
-// BLOCKER_DELTA: 578
-// ANALYSIS: Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code.
 /* Allocates tracked memory. Wraps HeapAlloc with allocation
  * tracking: records source location string, updates group
  * counters, and maintains the allocation list. */
@@ -167,9 +161,6 @@ found: {
 }
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 188
 /* Frees tracked memory. Removes the allocation from the
  * tracking list, updates group counters, and calls HeapFree. */
 
@@ -217,12 +208,6 @@ void __cdecl m_FreeTracked(void* heapBlock)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, jump condition swap
-// BLOCKER_DELTA: 141
-// ANALYSIS: Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer.
-// SIZE: 162
 /* Initializes the packet memory pool with a fixed number of
  * pre-allocated blocks for network packet buffering. */
 
@@ -253,13 +238,6 @@ void __cdecl InitPacketPool(int param_1)
 	DAT_117640a4 = DAT_1002893c;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
-// BLOCKER_DELTA: 159
-// BLOCKER: zero-extend pattern (xor vs mov)
-// SIZE: 612
-// BLOCKER_DELTA: 586
 /* Reports memory usage statistics for a named allocation group.
  * Logs count, total bytes, and peak usage to the log system. */
 
@@ -381,9 +359,6 @@ done:
 	LogMessageInternal((char*) 0x10028888, 0x1dc, (char*) 0x10028940, 1);
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 283
 /* Shuts down the memory allocator. Frees all remaining tracked
  * allocations, destroys the packet pool, and reports any
  * memory leaks. */
@@ -391,17 +366,17 @@ done:
 // FUNCTION: SERVER 0x10006c00
 // ShutdownMemoryAllocator
 
-/* GLOBAL: SERVER 0x10034624 */
+// DATA: SERVER 0x10034624
 extern int g_array_count;
-/* GLOBAL: SERVER 0x10034628 */
+// DATA: SERVER 0x10034628
 extern int g_stat1;
-/* GLOBAL: SERVER 0x1003462c */
+// DATA: SERVER 0x1003462c
 extern int g_stat2;
-/* GLOBAL: SERVER 0x10034630 */
+// DATA: SERVER 0x10034630
 extern int g_stat3;
-/* GLOBAL: SERVER 0x10034634 */
+// DATA: SERVER 0x10034634
 extern int g_stat4;
-/* GLOBAL: SERVER 0x1003463c */
+// DATA: SERVER 0x1003463c
 extern int g_flag_3c;
 
 struct ArrayItem {
@@ -411,7 +386,7 @@ struct ArrayItem {
 	int fieldC;
 };
 
-/* GLOBAL: SERVER 0x10034640 */
+// DATA: SERVER 0x10034640
 extern struct ArrayItem* g_array_ptr;
 
 struct LinkedListNode {
@@ -419,14 +394,14 @@ struct LinkedListNode {
 	struct LinkedListNode* next;
 };
 
-/* GLOBAL: SERVER 0x117640c4 */
+// DATA: SERVER 0x117640c4
 extern struct LinkedListNode* g_list_head;
 
-/* GLOBAL: SERVER 0x10028b04 */
+// DATA: SERVER 0x10028b04
 extern char g_str_10028b04[];
-/* GLOBAL: SERVER 0x10028aec */
+// DATA: SERVER 0x10028aec
 extern char g_str_10028aec[];
-/* GLOBAL: SERVER 0x10028888 */
+// DATA: SERVER 0x10028888
 extern char g_str_10028888[];
 
 void __cdecl ShutdownMemoryAllocator(void)
@@ -473,11 +448,6 @@ void __cdecl ShutdownMemoryAllocator(void)
 	g_array_ptr = 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov)
-// BLOCKER_DELTA: 265
-// SIZE: 270
 /* Allocates a block from the packet pool free list. Falls back
  * to HeapAlloc if the pool is exhausted. Thread-safe via
  * critical section. */
@@ -485,10 +455,10 @@ void __cdecl ShutdownMemoryAllocator(void)
 // FUNCTION: SERVER 0x10006d20
 // m_PoolAlloc
 
-/* GLOBAL: SERVER 0x10028b78 */
+// DATA: SERVER 0x10028b78
 extern char g_str_10028b78[];
 
-/* GLOBAL: SERVER 0x10028b60 */
+// DATA: SERVER 0x10028b60
 extern char g_str_10028b60[];
 
 struct BlockNode {
@@ -560,9 +530,6 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 137
 /* Returns a block to the packet pool free list. Adds the block
  * back to the free chain for reuse. */
 

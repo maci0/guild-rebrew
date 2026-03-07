@@ -1,6 +1,3 @@
-// STATUS: EXACT
-// ORIGIN: GAME
-// SIZE: 14
 
 /*
  * Ghidra decompilation reference:

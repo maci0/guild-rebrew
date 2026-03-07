@@ -1,0 +1,308 @@
+["SERVER.0x1003467c"]
+note = "connection counter"
+name = "g_connection_counter"
+section = ".data"
+
+["SERVER.0x101deaec"]
+note = "listen socket"
+name = "g_listen_socket"
+section = ".data"
+
+["SERVER.0x101deb00"]
+note = "first player slot (stride 0x264264 bytes)"
+name = "g_player_slot_0"
+section = ".data"
+
+["SERVER.0x114ffe20"]
+note = "overflow slot"
+name = "g_player_slot_overflow"
+section = ".data"
+
+["SERVER.0x101deb14"]
+name = "g_player_slot_field"
+section = ".data"
+
+["SERVER.0x101deac0"]
+name = "g_download_total_size"
+section = ".data"
+
+["SERVER.0x101deac4"]
+name = "g_download_received"
+section = ".data"
+
+["SERVER.0x101deac8"]
+name = "g_download_slots"
+section = ".data"
+
+["SERVER.0x101deae8"]
+name = "g_download_buffer"
+section = ".data"
+
+["SERVER.0x101de5a4"]
+name = "g_aemter_table"
+section = ".data"
+
+["SERVER.0x100a8c30"]
+name = "g_entity_type_table"
+section = ".data"
+
+["SERVER.0x10030b6c"]
+name = "g_next_object_id"
+section = ".data"
+
+["SERVER.0x10035434"]
+name = "g_citizen_count"
+section = ".data"
+
+["SERVER.0x10035439"]
+name = "g_current_season"
+section = ".data"
+
+["SERVER.0x1002a0f8"]
+name = "g_1002a0f8"
+section = ".data"
+
+["SERVER.0x100256b4"]
+name = "g_100256b4"
+section = ".rdata"
+
+["SERVER.0x100256b8"]
+name = "g_100256b8"
+section = ".rdata"
+
+["SERVER.0x100256c0"]
+name = "g_100256c0"
+section = ".rdata"
+
+["SERVER.0x100256c4"]
+name = "g_100256c4"
+section = ".rdata"
+
+["SERVER.0x100256c8"]
+name = "g_100256c8"
+section = ".rdata"
+
+["SERVER.0x100256a0"]
+name = "g_100256a0"
+section = ".rdata"
+
+["SERVER.0x100256ac"]
+name = "g_100256ac"
+section = ".rdata"
+
+["SERVER.0x100256b0"]
+name = "g_100256b0"
+section = ".rdata"
+
+["SERVER.0x1003546c"]
+name = "g_entity_table_end"
+section = ".data"
+
+["SERVER.0x100358a0"]
+name = "g_slot_table"
+section = ".data"
+
+["SERVER.0x1014d8c0"]
+name = "g_1014d8c0"
+section = ".data"
+
+["SERVER.0x101de450"]
+name = "g_item_def_table"
+section = ".data"
+
+["SERVER.0x100a8c34"]
+name = "g_100a8c34"
+section = ".data"
+
+["SERVER.0x100a8cf8"]
+name = "g_100a8cf8"
+section = ".data"
+
+["SERVER.0x1009b764"]
+name = "g_1009b764"
+section = ".data"
+
+["SERVER.0x1002dde0"]
+name = "g_1002dde0"
+section = ".data"
+
+["SERVER.0x1009b770"]
+name = "g_slot_array"
+section = ".data"
+
+["SERVER.0x10030b98"]
+section = ".data"
+
+["SERVER.0x10030b9e"]
+section = ".data"
+
+["SERVER.0x1003545e"]
+section = ".data"
+
+["SERVER.0x1003545c"]
+section = ".data"
+
+["SERVER.0x1003545d"]
+section = ".data"
+
+["SERVER.0x10035454"]
+section = ".data"
+
+["SERVER.0x10035458"]
+section = ".data"
+
+["SERVER.0x100a8c38"]
+section = ".data"
+
+["SERVER.0x10035468"]
+section = ".data"
+
+["SERVER.0x10030b8c"]
+section = ".data"
+
+["SERVER.0x10030b8e"]
+section = ".data"
+
+["SERVER.0x10030b84"]
+section = ".data"
+
+["SERVER.0x10030b88"]
+section = ".data"
+
+["SERVER.0x10030b90"]
+section = ".data"
+
+["SERVER.0x10035444"]
+section = ".data"
+
+["SERVER.0x10035449"]
+section = ".data"
+
+["SERVER.0x1003544c"]
+section = ".data"
+
+["SERVER.0x10035448"]
+section = ".data"
+
+["SERVER.0x10035464"]
+section = ".data"
+
+["SERVER.0x10035880"]
+name = "g_current_year"
+section = ".data"
+
+["SERVER.0x10035884"]
+name = "g_10035884"
+section = ".data"
+
+["SERVER.0x10035888"]
+name = "g_10035888"
+section = ".data"
+
+["SERVER.0x1003588c"]
+name = "g_1003588c"
+section = ".data"
+
+["SERVER.0x1009acfc"]
+name = "g_some_limit"
+section = ".data"
+
+["SERVER.0x100358fc"]
+name = "g_entity_ref_table"
+section = ".data"
+
+["SERVER.0x10031500"]
+name = "g_str_10031500"
+section = ".data"
+
+["SERVER.0x10031538"]
+name = "g_str_10031538"
+section = ".data"
+
+["SERVER.0x10035a04"]
+name = "g_entity_type_bytes"
+section = ".data"
+
+["SERVER.0x100358a2"]
+name = "g_entity_state_base"
+section = ".data"
+
+["SERVER.0x1002d4ec"]
+name = "g_save_version"
+section = ".data"
+
+["SERVER.0x11766100"]
+name = "g_log_buffer"
+section = ".data"
+
+["SERVER.0x11766204"]
+name = "g_log_file_handle"
+section = ".data"
+
+["SERVER.0x10027078"]
+name = "g_log_level_table"
+section = ".data"
+
+["SERVER.0x10027084"]
+name = "g_log_format_table"
+section = ".data"
+
+["SERVER.0x10034624"]
+name = "g_array_count"
+section = ".data"
+
+["SERVER.0x10034628"]
+name = "g_stat1"
+section = ".data"
+
+["SERVER.0x1003462c"]
+name = "g_stat2"
+section = ".data"
+
+["SERVER.0x10034630"]
+name = "g_stat3"
+section = ".data"
+
+["SERVER.0x10034634"]
+name = "g_stat4"
+section = ".data"
+
+["SERVER.0x1003463c"]
+name = "g_flag_3c"
+section = ".data"
+
+["SERVER.0x10034640"]
+name = "g_array_ptr"
+section = ".data"
+
+["SERVER.0x117640c4"]
+name = "g_list_head"
+section = ".data"
+
+["SERVER.0x10028b04"]
+name = "g_str_10028b04"
+section = ".data"
+
+["SERVER.0x10028aec"]
+name = "g_str_10028aec"
+section = ".data"
+
+["SERVER.0x10028888"]
+name = "g_str_10028888"
+section = ".data"
+
+["SERVER.0x10028b78"]
+name = "g_str_10028b78"
+section = ".data"
+
+["SERVER.0x10028b60"]
+name = "g_str_10028b60"
+section = ".data"
+
+["SERVER.0x10034678"]
+name = "g_stream_count"
+section = ".data"
+
+["SERVER.0x10034670"]
+name = "g_stream_pool"
+section = ".data"

@@ -1,6 +1,3 @@
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 206
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
@@ -11,7 +8,6 @@
 #endif
 
 /*
-// BLOCKER_DELTA: 81
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME

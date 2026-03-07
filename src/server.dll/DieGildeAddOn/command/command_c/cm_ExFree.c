@@ -1,8 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: lea folding (lea esi,[eax+0x10] + mov [esi],ax vs mov [esi+0x10],ax), register allocation (param_1 in esi vs reload from stack), zero-extend register choice (ecx vs eax)
-// BLOCKER_DELTA: 20
-// ORIGIN: GAME
-// SIZE: 180
 
 /*
  * Ghidra decompilation is BROKEN (sizeInBytes=1).

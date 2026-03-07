@@ -1,8 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: instruction folding (lea vs mov), stack frame choice (push vs sub esp)
-// ORIGIN: GAME
-// SIZE: 242
-// BLOCKER_DELTA: 25
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
@@ -14,7 +9,6 @@
 #endif
 
 /*
-// BLOCKER_DELTA: 210
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME

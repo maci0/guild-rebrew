@@ -1,8 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: loop rotation (while->cmp duplicated), shared error exit layout, xor edx initialization
-// ORIGIN: GAME
-// SIZE: 352
-// BLOCKER_DELTA: 155
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
@@ -15,7 +10,6 @@
 #endif
 
 /*
-// BLOCKER_DELTA: 165
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME

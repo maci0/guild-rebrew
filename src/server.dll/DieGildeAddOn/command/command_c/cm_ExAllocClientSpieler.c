@@ -12,10 +12,6 @@ char* __cdecl strncpy(char*, const char*, unsigned int);
 extern char s_ClientSpieler_erzeugt_1002cbbc[];
 extern char s_gm_AllocSpieler___failed_1002cbd4[];
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 361
-// BLOCKER: Register allocation/instruction scheduling difference in gm_CreateEntityFromParents argument setup; target evaluates param_2 boolean first (neg/sbb in eax) then pushes args in different register order. Same-size, semantically equivalent.
 /* Execution handler: allocates a client-side player entity.
  * Similar to cm_ExAllocSpieler but for client-connected players,
  * updating player slot flags and setting connection state. */

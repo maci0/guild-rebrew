@@ -43,9 +43,6 @@ typedef struct {
 	PAIR entries[6];
 } TGT;
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 130
 /* Resets an alchemy entity to its initial state by zeroing
  * out its operational fields via memset. */
 
@@ -65,9 +62,6 @@ void __cdecl ahm_ResetEntityState(char* param_1)
 	}
 }
 
-// ORIGIN: GAME
-// STATUS: RELOC
-// SIZE: 70
 /* Checks an alchemy-related flag on an entity. Returns non-zero
  * if the entity is in the correct state for alchemy operations. */
 
@@ -88,12 +82,6 @@ int __cdecl ahm_CheckFlag(char* p)
 	return 0;
 }
 
-// ORIGIN: GAME
-// STATUS: MATCHING
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)
-// SIZE: 1002
-// BLOCKER_DELTA: 935
-// ANALYSIS: Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error.
 /* Allocates and initializes an alchemist entity. Sets up
  * the alchemist's inventory, recipe knowledge, and links
  * to the employing building. */
@@ -101,43 +89,43 @@ int __cdecl ahm_CheckFlag(char* p)
 // FUNCTION: SERVER 0x1000bdf0
 // ahm_ExAllocAlchemist
 
-/* GLOBAL: SERVER 0x100a8c30 */
+// DATA: SERVER 0x100a8c30
 extern int g_entity_type_table;
 
-/* GLOBAL: SERVER 0x10030b6c */
+// DATA: SERVER 0x10030b6c
 extern int g_next_object_id;
 
-/* GLOBAL: SERVER 0x10035434 */
+// DATA: SERVER 0x10035434
 extern int g_citizen_count;
 
-/* GLOBAL: SERVER 0x10035439 */
+// DATA: SERVER 0x10035439
 extern unsigned char g_current_season;
 
-/* GLOBAL: SERVER 0x1002a0f8 */
+// DATA: SERVER 0x1002a0f8
 extern char g_1002a0f8[];
 
-/* GLOBAL: SERVER 0x100256b4 */
+// DATA: SERVER 0x100256b4
 extern float g_100256b4;
 
-/* GLOBAL: SERVER 0x100256b8 */
+// DATA: SERVER 0x100256b8
 extern float g_100256b8;
 
-/* GLOBAL: SERVER 0x100256c0 */
+// DATA: SERVER 0x100256c0
 extern float g_100256c0;
 
-/* GLOBAL: SERVER 0x100256c4 */
+// DATA: SERVER 0x100256c4
 extern float g_100256c4;
 
-/* GLOBAL: SERVER 0x100256c8 */
+// DATA: SERVER 0x100256c8
 extern float g_100256c8;
 
-/* GLOBAL: SERVER 0x100256a0 */
+// DATA: SERVER 0x100256a0
 extern float g_100256a0;
 
-/* GLOBAL: SERVER 0x100256ac */
+// DATA: SERVER 0x100256ac
 extern float g_100256ac;
 
-/* GLOBAL: SERVER 0x100256b0 */
+// DATA: SERVER 0x100256b0
 extern float g_100256b0;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
@@ -307,9 +295,6 @@ code_r0x1000be9f:
 	return 0xffff;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 160
 /* Applies a color component value during alchemy processing.
  * Modifies the entity's recipe color mix based on ingredient
  * properties. */
@@ -337,9 +322,6 @@ int __cdecl ahm_ApplyColorComponent(char* param_1, char* param_2)
 	}
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 130
 /* Allocates an entity slot in the alchemy system. Finds a
  * free slot in the entity table and initializes it with the
  * given parameters. */
@@ -373,11 +355,6 @@ int __cdecl ahm_AllocateEntitySlot(int param_1, int param_2, int param_3)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov)
-// BLOCKER_DELTA: 110
-// SIZE: 110
 /* Clears a slot if it matches a target value. Used during
  * alchemy cleanup to remove specific entity references. */
 
@@ -411,9 +388,6 @@ found:
 	return 1;
 }
 
-// STATUS: EXACT
-// ORIGIN: GAME
-// SIZE: 51
 /* Searches for a value and sets it in the target. Used for
  * alchemy recipe ingredient matching and assignment. */
 
@@ -432,11 +406,6 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: jump condition swap
-// SIZE: 83
-// BLOCKER_DELTA: 47
 /* Clamps a floating-point alchemy value to valid bounds.
  * Prevents stat overflow/underflow during recipe processing. */
 
@@ -460,9 +429,6 @@ int __cdecl ahm_ClampFloatValue(int param_1, int param_2)
 	return 1;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 166
 /* Fires (activates) an alchemy entity and cleans up the
  * processing state. Finalizes the recipe output and resets
  * the alchemist for the next batch. */
@@ -505,10 +471,6 @@ int __cdecl ahm_FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 295
-// BLOCKER_DELTA: 269
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 
@@ -586,9 +548,6 @@ int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 109
 /* Initializes an alchemy entity with randomized properties.
  * Uses RandomBelow for stat variation within allowed ranges. */
 
@@ -626,12 +585,6 @@ char* __cdecl ahm_InitRandomEntity(void)
 	return (char*) 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), jump condition swap
-// BLOCKER_DELTA: 72
-// SIZE: 45
-// GHIDRA: find_by_id
 /* Looks up an alchemy entity in the global table by ID.
  * Returns pointer to the entity's table entry. */
 
@@ -651,11 +604,6 @@ int* __cdecl ahm_LookupEntityInTable(int param_1)
 	return (int*) 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, jump condition swap
-// SIZE: 102
-// BLOCKER_DELTA: 55
 /* Queries what building type an alchemy entity belongs to.
  * Returns the building type category for alchemy purposes. */
 
@@ -687,10 +635,6 @@ int __cdecl ahm_QueryEntityBuildingType(int param_1)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 752
 /* Calculates the payload size of a command packet based on
  * the command type and field count. Used for buffer allocation
  * and validation. */
@@ -701,7 +645,6 @@ int __cdecl ahm_QueryEntityBuildingType(int param_1)
 /* TODO: Add extern declarations for globals and called functions */
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 569
 int GetCommandPayloadSize(unsigned char* param_1)
 
 {
@@ -858,11 +801,6 @@ int GetCommandPayloadSize(unsigned char* param_1)
 	return total_size;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 130
-// BLOCKER_DELTA: 83
-// ANALYSIS: Iterates through a linked list of CommandPackets generated from a Command 0x05 / 0x06 block. Runs secondary validation handlers from g_entity_chain_handlers. Re-flags commands to 0x01/0x02 status based on success/fail.
 /* Processes an alchemy entity chain. Iterates linked alchemy
  * entities and applies processing steps (mixing, timing,
  * completion checks). */
@@ -912,9 +850,6 @@ check_result:
 	return 1;
 }
 
-// STATUS: EXACT
-// ORIGIN: GAME
-// SIZE: 130
 /* Resolves a field value by type from a command packet.
  * Performs entity ID resolution through the global entity
  * tables. Returns the resolved value or 0 on failure. */

@@ -1,8 +1,3 @@
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 2057
-// BLOCKER: stack frame size (0x228 vs 0x224), register allocation (edi vs ebx for zero init), error handler codegen (push/jmp vs mov/jmp), merged stack cleanup, loop rotation / branch layout, comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)
-// BLOCKER_DELTA: 1962
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"

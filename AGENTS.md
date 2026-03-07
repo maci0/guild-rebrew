@@ -85,13 +85,14 @@ Use `--json` for structured output (preferred for agents). All tools read `rebre
 
 ### File Structure
 
-One function per file. Annotation header, then externs, then the function:
+One function per file. The `.c` file contains only the `// FUNCTION:` marker and
+the C source — all volatile metadata lives in `rebrew-functions.toml`:
 
 ```c
+/* Brief prose description of what the function does. */
+
 // FUNCTION: SERVER 0x10003da0
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 160
+// alloc_game_object
 
 typedef unsigned int uint32_t;    /* local typedefs as needed */
 
@@ -106,6 +107,14 @@ int __cdecl alloc_game_object(int param_1)
 }
 ```
 
+`rebrew-functions.toml` (in the same directory, managed by CLI tools):
+
+```toml
+["SERVER.0x10003da0"]
+size = 160
+status = "RELOC"
+```
+
 The function name and symbol are derived automatically from the C function
 definition (e.g. `alloc_game_object` → symbol `_alloc_game_object`).
 `CFLAGS` is optional — falls back to the target default from `rebrew-project.toml`.
@@ -118,53 +127,70 @@ definition (e.g. `alloc_game_object` → symbol `_alloc_game_object`).
 - Win32 imports: `__declspec(dllimport)` with `__stdcall`
 - Use `#pragma intrinsic(memset)` when compiler must emit inline `rep stosd`
 
-### Inline Assembly
-
-CRT functions that can't compile from C use `__declspec(naked)` with `__asm {}`:
-
-```c
-void __declspec(naked) __cdecl local_unwind2(void)
-{
-    __asm {
-        push ebx
-        /* ... */
-        ret
-    }
-}
-```
-
 ## Annotation Reference
+
+### In the `.c` file
+
+Only the `// FUNCTION:` marker line stays in `.c`:
+
+```
+// FUNCTION: SERVER 0xVA
+```
 
 **Markers**: `FUNCTION` (game code), `LIBRARY` (CRT/zlib), `STUB` (incomplete)
 
-**Required fields**: `STATUS`, `ORIGIN`, `SIZE`
-
 **Derived automatically**: Symbol (from C function def, e.g. `_alloc_game_object`), Prototype
 
-**Optional fields**: `CFLAGS` (falls back to origin preset), `BLOCKER`, `NOTE`, `SOURCE`
+### In `rebrew-functions.toml` (sidecar — managed by CLI tools)
 
-**STATUS values**:
+> [!CAUTION]
+> Never manually edit `rebrew-functions.toml`. It is managed by `rebrew promote`,
+> `rebrew match`, `rebrew sync`, etc. Manual edits will be lost.
+
+**Required sidecar fields**: `status`, `size`
+
+**Optional sidecar fields**: `cflags`, `blocker`, `blocker_delta`, `ghidra`, `analysis`, `note`, `source`
+
+**`status` values**:
 
 | Status | Meaning |
 |--------|---------|
 | `EXACT` | Byte-for-byte identical to target |
 | `RELOC` | Identical after masking relocations (typical best) |
-| `MATCHING` | Close but structural diffs remain (add `BLOCKER` line) |
+| `MATCHING` | Close but structural diffs remain |
 | `MATCHING_RELOC` | Very close, 1-5 byte diffs |
 | `STUB` | Far off or placeholder |
 
-When STATUS is `MATCHING`, add `// BLOCKER:` explaining the remaining diff:
-```c
-// BLOCKER: register allocation - target uses ebx/esi/edi, compiler picks differently
-```
-
-**Compiler flags by origin** (base `/nologo /c /MT` always prepended):
+**Origin / compiler flags** — configured in `rebrew-project.toml`, not per-function annotations.
+Default `cflags` presets (base `/nologo /c /MT` always prepended):
 
 | Origin | CFLAGS | Notes |
 |--------|--------|-------|
 | GAME | `/O2 /Gd` | Full optimization, cdecl default |
 | MSVCRT | `/O1` | Size optimization |
 | ZLIB | `/O2` | Full optimization |
+
+### Data / Global annotations
+
+`.c` file retains only the marker and declaration:
+
+```c
+// DATA: SERVER 0xVA
+
+extern int g_some_global;
+```
+
+Metadata lives in `rebrew-data.toml` (same directory, auto-managed):
+
+```toml
+["SERVER.0xVA"]
+size    = 4
+section = ".bss"
+note    = "optional description"
+```
+
+> [!CAUTION]
+> Never manually edit `rebrew-data.toml`. It is managed by `rebrew data`, `rebrew sync`, etc.
 
 ## Diff Output
 
@@ -175,7 +201,9 @@ When STATUS is `MATCHING`, add `// BLOCKER:` explaining the remaining diff:
 
 | Path | Contents |
 |------|----------|
-| `src/server.dll/*.c` | Reversed C89 source files (one function each) |
+| `src/server.dll/` | Reversed C89 source files |
+| `src/server.dll/rebrew-functions.toml` | Function metadata (status, size, blocker, …) — shared by all subdirs |
+| `src/server.dll/rebrew-data.toml` | Data/global metadata (size, section, note) — shared by all subdirs |
 | `original/Server/server.dll` | Target binary (DO NOT MODIFY) |
 | `tools/MSVC600/VC98/` | MSVC6 compiler toolchain (via Wine) |
 | `references/zlib-1.1.3/` | Exact zlib version used in server.dll |

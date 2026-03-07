@@ -22,26 +22,22 @@ extern int g_handler_flags;
 extern char g_msg_buf[];
 void __cdecl write_log(char*, int, char*);
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 290
-// ANALYSIS: Core logging sink. Takes an output_mask bitfield: bit 0 writes to file (looking up the correct file name via severity in a global table), bit 2 writes to OutputDebugStringA (debugger), bit 3 writes to the allocated Win32 Console using WriteConsoleA.
 /* Dispatches a log message to the configured output handlers
  * (file, debugger, etc.). Routes based on severity level. */
 
 // FUNCTION: SERVER 0x10002640
 // DispatchLogOutput
 
-/* GLOBAL: SERVER 0x11766100 */
+// DATA: SERVER 0x11766100
 extern char g_log_buffer[256];
 
-/* GLOBAL: SERVER 0x11766204 */
+// DATA: SERVER 0x11766204
 extern int g_log_file_handle;
 
-/* GLOBAL: SERVER 0x10027078 */
+// DATA: SERVER 0x10027078
 extern int g_log_level_table[3];
 
-/* GLOBAL: SERVER 0x10027084 */
+// DATA: SERVER 0x10027084
 extern char g_log_format_table[];
 
 void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
@@ -93,12 +89,6 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 	}
 }
 
-// ORIGIN: GAME
-// STATUS: MATCHING
-// BLOCKER: comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)
-// SIZE: 1836
-// BLOCKER_DELTA: 1727
-// ANALYSIS: Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride).
 /* Unhandled exception filter for crash dumps. Creates a
  * minidump file with module info and stack trace when the
  * process crashes. */
@@ -478,10 +468,6 @@ bad_dbg_free:
 	goto no_dbg;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: instruction folding (lea vs mov), loop rotation / branch layout
-// SIZE: 376
 /* Emits one line of module information for crash dumps.
  * Writes module name, base address, and size to the dump file. */
 
@@ -489,7 +475,6 @@ bad_dbg_free:
 // EmitCrashModuleLine
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 370
 
 unsigned int EmitCrashModuleLine(int* param_1)
 {
@@ -579,9 +564,6 @@ unsigned int EmitCrashModuleLine(int* param_1)
 	return 0;
 }
 
-// ORIGIN: GAME
-// STATUS: EXACT
-// SIZE: 33
 /* Walks a variable-length record table to find the nth entry.
  * Records have varying sizes, so this iterates by record
  * stride rather than fixed indexing. */
@@ -608,12 +590,6 @@ char* __cdecl GetDebugRecordByIndex(char* param_1, unsigned int param_2)
 	return 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 240
-// NOTE: Function passes itself to VirtualQuery to check its own code page protection
-// GHIDRA: IsExecutableOrReadableProtect
-// ANALYSIS: Function passes itself to VirtualQuery to check its own code page protection
 /* Checks if a memory page's protection flags indicate it is
  * readable. Returns 1 if the protection includes read access. */
 
@@ -639,9 +615,6 @@ char __cdecl check_memory_protection(unsigned int protect)
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// SIZE: 183
 /* Analyzes an x86 instruction at the given address to determine
  * its length and type. Used by the crash dump handler to decode
  * the faulting instruction context. */
@@ -682,13 +655,6 @@ char __cdecl AnalyzeInstruction(int param_1, int param_2, int param_3, int* para
 	return 0;
 }
 
-// STATUS: MATCHING
-// ORIGIN: GAME
-// BLOCKER: comparison direction swap, zero-extend pattern (xor vs mov)
-// BLOCKER_DELTA: 83
-// GHIDRA: DecodePotentialControlTransfer
-// BLOCKER: instruction folding (lea vs mov)
-// SIZE: 404
 /* Initializes the logging and error handling subsystem.
  * Opens log files, sets up exception handlers, and configures
  * output severity filters. */
@@ -697,8 +663,6 @@ char __cdecl AnalyzeInstruction(int param_1, int param_2, int param_3, int* para
 // InitializeLogAndErrorHandler
 
 /* Auto-generated Ghidra decompilation */
-// BLOCKER_DELTA: 386
-// ANALYSIS: Initialization routine for the server's telemetry. Registers the CrashDumpUnhandledExceptionFilter. Allocates a console if requested via flags. Truncates log files (__server.log, gilde_server.log) if they exceed 64KB (0x10000 bytes) and seeds them with a startup banner. | If file logging is enabled, validate/rotate server log targets.
 
 void InitializeLogAndErrorHandler(
 	unsigned int param_1,
@@ -774,9 +738,6 @@ void InitializeLogAndErrorHandler(
 	return;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 83
 /* Shuts down the logging and error handling subsystem.
  * Closes log files and removes exception handlers. */
 
@@ -801,11 +762,6 @@ void __cdecl ShutdownLogAndErrorHandler(void)
 	g_log_mode_flags = 0;
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 160
-// NOTE: Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()
-// ANALYSIS: Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()
 /* Reports a fatal error with a message, then terminates the
  * process via _exit(). Does not return. */
 
@@ -845,9 +801,6 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 	_exit(0xf);
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 119
 /* Reports a non-fatal message through the logging system.
  * Dispatches to DispatchLogOutput with default severity. */
 
@@ -872,9 +825,6 @@ void __cdecl ReportMessage(char* msg)
 	}
 }
 
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 132
 /* Core logging function: formats and dispatches a log message
  * with source module path, line number, message text, and
  * severity level (1=error, 8=info, etc.). */

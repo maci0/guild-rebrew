@@ -1,0 +1,1097 @@
+[
+  {
+    "va": 268439552,
+    "size": 302,
+    "tool_name": "adler32"
+  },
+  {
+    "va": 268439856,
+    "size": 179,
+    "tool_name": "SendBroadcastPacket"
+  },
+  {
+    "va": 268440048,
+    "size": 309,
+    "tool_name": "crc32_update"
+  },
+  {
+    "va": 268440368,
+    "size": 505,
+    "tool_name": "deflateInit2_"
+  },
+  {
+    "va": 268440880,
+    "size": 115,
+    "tool_name": "deflateReset"
+  },
+  {
+    "va": 268441008,
+    "size": 685,
+    "tool_name": "deflate"
+  },
+  {
+    "va": 268441696,
+    "size": 47,
+    "tool_name": "putShortMSB"
+  },
+  {
+    "va": 268441744,
+    "size": 114,
+    "tool_name": "flush_pending"
+  },
+  {
+    "va": 268441872,
+    "size": 170,
+    "tool_name": "deflateEnd"
+  },
+  {
+    "va": 268442048,
+    "size": 147,
+    "tool_name": "lm_init"
+  },
+  {
+    "va": 268442208,
+    "size": 343,
+    "tool_name": "deflate_stored"
+  },
+  {
+    "va": 268442560,
+    "size": 290,
+    "tool_name": "fill_window"
+  },
+  {
+    "va": 268442864,
+    "size": 113,
+    "tool_name": "read_buf"
+  },
+  {
+    "va": 268442992,
+    "size": 813,
+    "tool_name": "deflate_fast"
+  },
+  {
+    "va": 268443808,
+    "size": 367,
+    "tool_name": "longest_match"
+  },
+  {
+    "va": 268444176,
+    "size": 1066,
+    "tool_name": "deflate_slow"
+  },
+  {
+    "va": 268445248,
+    "size": 290,
+    "tool_name": "DispatchLogOutput"
+  },
+  {
+    "va": 268445552,
+    "size": 1836,
+    "tool_name": "CrashDumpUnhandledExceptionFilter"
+  },
+  {
+    "va": 268447680,
+    "size": 376,
+    "tool_name": "EmitCrashModuleLine"
+  },
+  {
+    "va": 268448064,
+    "size": 33,
+    "tool_name": "GetDebugRecordByIndex"
+  },
+  {
+    "va": 268448112,
+    "size": 95,
+    "tool_name": "check_memory_protection"
+  },
+  {
+    "va": 268448352,
+    "size": 183,
+    "tool_name": "AnalyzeInstruction"
+  },
+  {
+    "va": 268448544,
+    "size": 404,
+    "tool_name": "InitializeLogAndErrorHandler"
+  },
+  {
+    "va": 268448960,
+    "size": 83,
+    "tool_name": "ShutdownLogAndErrorHandler"
+  },
+  {
+    "va": 268449056,
+    "size": 160,
+    "tool_name": "ReportFatalError"
+  },
+  {
+    "va": 268449216,
+    "size": 119,
+    "tool_name": "ReportMessage"
+  },
+  {
+    "va": 268449344,
+    "size": 132,
+    "tool_name": "LogMessageInternal"
+  },
+  {
+    "va": 268449488,
+    "size": 332,
+    "tool_name": "check_header"
+  },
+  {
+    "va": 268449824,
+    "size": 114,
+    "tool_name": "game_getbyte"
+  },
+  {
+    "va": 268449952,
+    "size": 177,
+    "tool_name": "close_stream"
+  },
+  {
+    "va": 268450144,
+    "size": 559,
+    "tool_name": "gzread"
+  },
+  {
+    "va": 268450704,
+    "size": 182,
+    "tool_name": "flush_stream"
+  },
+  {
+    "va": 268450896,
+    "size": 65,
+    "tool_name": "flush_and_close_stream"
+  },
+  {
+    "va": 268450976,
+    "size": 77,
+    "tool_name": "read_uint32_be"
+  },
+  {
+    "va": 268451056,
+    "size": 43,
+    "tool_name": "write_uint32_le"
+  },
+  {
+    "va": 268451104,
+    "size": 123,
+    "tool_name": "inflate_blocks_reset"
+  },
+  {
+    "va": 268451232,
+    "size": 160,
+    "tool_name": "alloc_game_object"
+  },
+  {
+    "va": 268451392,
+    "size": 3263,
+    "tool_name": "inflate_blocks"
+  },
+  {
+    "va": 268454720,
+    "size": 57,
+    "tool_name": "inflate_blocks_free"
+  },
+  {
+    "va": 268454784,
+    "size": 57,
+    "tool_name": "alloc_and_init"
+  },
+  {
+    "va": 268454848,
+    "size": 1919,
+    "tool_name": "InflateFast"
+  },
+  {
+    "va": 268456816,
+    "size": 20,
+    "tool_name": "dispatch_call"
+  },
+  {
+    "va": 268456848,
+    "size": 911,
+    "tool_name": "inflate_codes"
+  },
+  {
+    "va": 268457760,
+    "size": 66,
+    "tool_name": "inflateReset"
+  },
+  {
+    "va": 268457840,
+    "size": 72,
+    "tool_name": "inflateEnd"
+  },
+  {
+    "va": 268457920,
+    "size": 270,
+    "tool_name": "inflateInit2_"
+  },
+  {
+    "va": 268458192,
+    "size": 1015,
+    "tool_name": "InflateStateMachine"
+  },
+  {
+    "va": 268459264,
+    "size": 163,
+    "tool_name": "inflate_trees_bits"
+  },
+  {
+    "va": 268459440,
+    "size": 1225,
+    "tool_name": "huft_build"
+  },
+  {
+    "va": 268460672,
+    "size": 393,
+    "tool_name": "inflate_trees_dynamic"
+  },
+  {
+    "va": 268461072,
+    "size": 46,
+    "tool_name": "inflate_trees_fixed"
+  },
+  {
+    "va": 268461120,
+    "size": 306,
+    "tool_name": "inflate_flush"
+  },
+  {
+    "va": 268461440,
+    "size": 658,
+    "tool_name": "AllocateTrackedHeapBlock"
+  },
+  {
+    "va": 268462112,
+    "size": 188,
+    "tool_name": "FreeTrackedHeapBlock"
+  },
+  {
+    "va": 268462304,
+    "size": 162,
+    "tool_name": "InitPacketPool"
+  },
+  {
+    "va": 268462480,
+    "size": 612,
+    "tool_name": "ReportMemoryGroupInfo"
+  },
+  {
+    "va": 268463104,
+    "size": 283,
+    "tool_name": "ShutdownMemoryAllocator"
+  },
+  {
+    "va": 268463392,
+    "size": 270,
+    "tool_name": "pool_alloc"
+  },
+  {
+    "va": 268463664,
+    "size": 137,
+    "tool_name": "pool_free"
+  },
+  {
+    "va": 268463808,
+    "size": 108,
+    "tool_name": "_tr_init"
+  },
+  {
+    "va": 268463920,
+    "size": 1,
+    "tool_name": "tr_static_init"
+  },
+  {
+    "va": 268463936,
+    "size": 102,
+    "tool_name": "init_block"
+  },
+  {
+    "va": 268464048,
+    "size": 157,
+    "tool_name": "_tr_stored_block"
+  },
+  {
+    "va": 268464208,
+    "size": 597,
+    "tool_name": "_tr_align"
+  },
+  {
+    "va": 268464816,
+    "size": 494,
+    "tool_name": "_tr_flush_block"
+  },
+  {
+    "va": 268465312,
+    "size": 563,
+    "tool_name": "build_tree"
+  },
+  {
+    "va": 268465888,
+    "size": 209,
+    "tool_name": "pqdownheap"
+  },
+  {
+    "va": 268466112,
+    "size": 545,
+    "tool_name": "gen_bitlen"
+  },
+  {
+    "va": 268466672,
+    "size": 115,
+    "tool_name": "gen_codes"
+  },
+  {
+    "va": 268466800,
+    "size": 111,
+    "tool_name": "build_bl_tree"
+  },
+  {
+    "va": 268466912,
+    "size": 231,
+    "tool_name": "scan_tree"
+  },
+  {
+    "va": 268467152,
+    "size": 613,
+    "tool_name": "send_all_trees"
+  },
+  {
+    "va": 268467776,
+    "size": 1397,
+    "tool_name": "send_tree"
+  },
+  {
+    "va": 268469184,
+    "size": 1083,
+    "tool_name": "compress_block"
+  },
+  {
+    "va": 268470272,
+    "size": 116,
+    "tool_name": "set_data_type"
+  },
+  {
+    "va": 268470400,
+    "size": 31,
+    "tool_name": "bit_reverse"
+  },
+  {
+    "va": 268470432,
+    "size": 139,
+    "tool_name": "bi_flush"
+  },
+  {
+    "va": 268470576,
+    "size": 124,
+    "tool_name": "bi_windup"
+  },
+  {
+    "va": 268470704,
+    "size": 151,
+    "tool_name": "copy_block"
+  },
+  {
+    "va": 268470864,
+    "size": 53,
+    "tool_name": "destroy_entity"
+  },
+  {
+    "va": 268470928,
+    "size": 492,
+    "tool_name": "ReadVfsCompressed"
+  },
+  {
+    "va": 268471424,
+    "size": 129,
+    "tool_name": "cleanup_object"
+  },
+  {
+    "va": 268471568,
+    "size": 301,
+    "tool_name": "CloseVfsStream"
+  },
+  {
+    "va": 268471872,
+    "size": 472,
+    "tool_name": "ReadVfsData"
+  },
+  {
+    "va": 268472352,
+    "size": 667,
+    "tool_name": "OpenVfsStream"
+  },
+  {
+    "va": 268473056,
+    "size": 19,
+    "tool_name": "zcalloc"
+  },
+  {
+    "va": 268473088,
+    "size": 12,
+    "tool_name": "free_wrap"
+  },
+  {
+    "va": 268473104,
+    "size": 8,
+    "tool_name": "exit_handler"
+  },
+  {
+    "va": 268473120,
+    "size": 42,
+    "tool_name": "Init"
+  },
+  {
+    "va": 268473168,
+    "size": 68,
+    "tool_name": "Exit"
+  },
+  {
+    "va": 268473248,
+    "size": 2434,
+    "tool_name": "ServerMainThread"
+  },
+  {
+    "va": 268475696,
+    "size": 296,
+    "tool_name": "srv_Init"
+  },
+  {
+    "va": 268476000,
+    "size": 419,
+    "tool_name": "CreateListenSocket"
+  },
+  {
+    "va": 268476432,
+    "size": 112,
+    "tool_name": "CleanupSockets"
+  },
+  {
+    "va": 268476544,
+    "size": 600,
+    "tool_name": "AcceptConnections"
+  },
+  {
+    "va": 268477152,
+    "size": 96,
+    "tool_name": "ClosePlayerConnection"
+  },
+  {
+    "va": 268477248,
+    "size": 336,
+    "tool_name": "ReceivePacketHeader"
+  },
+  {
+    "va": 268477584,
+    "size": 211,
+    "tool_name": "SendPlayerData"
+  },
+  {
+    "va": 268477808,
+    "size": 750,
+    "tool_name": "ProcessReceiveData"
+  },
+  {
+    "va": 268478560,
+    "size": 131,
+    "tool_name": "ProcessSendData"
+  },
+  {
+    "va": 268478704,
+    "size": 170,
+    "tool_name": "QueueCommandForProcessing"
+  },
+  {
+    "va": 268478880,
+    "size": 170,
+    "tool_name": "QueuePlayerCommand"
+  },
+  {
+    "va": 268479056,
+    "size": 97,
+    "tool_name": "list_unlink_relink"
+  },
+  {
+    "va": 268479168,
+    "size": 639,
+    "tool_name": "cm_ProcessCommandQueue"
+  },
+  {
+    "va": 268479808,
+    "size": 600,
+    "tool_name": "LogWinsockError"
+  },
+  {
+    "va": 268480576,
+    "size": 372,
+    "tool_name": "InitBuildingTypeTable"
+  },
+  {
+    "va": 268480960,
+    "size": 205,
+    "tool_name": "ValidateOfficeCandidate"
+  },
+  {
+    "va": 268481168,
+    "size": 425,
+    "tool_name": "ValidateAndAssignOffice"
+  },
+  {
+    "va": 268481600,
+    "size": 133,
+    "tool_name": "ValidateCommand"
+  },
+  {
+    "va": 268481744,
+    "size": 836,
+    "tool_name": "ExecuteOfficeAssignment"
+  },
+  {
+    "va": 268482592,
+    "size": 42,
+    "tool_name": "find_entity_26"
+  },
+  {
+    "va": 268482640,
+    "size": 42,
+    "tool_name": "find_entity_27"
+  },
+  {
+    "va": 268482688,
+    "size": 263,
+    "tool_name": "SwapOfficeHolders"
+  },
+  {
+    "va": 268482960,
+    "size": 157,
+    "tool_name": "ClearEntityLinks"
+  },
+  {
+    "va": 268483120,
+    "size": 179,
+    "tool_name": "UpdateEntityLinks"
+  },
+  {
+    "va": 268483312,
+    "size": 606,
+    "tool_name": "amt_fio_LoadAemter"
+  },
+  {
+    "va": 268483920,
+    "size": 66,
+    "tool_name": "reset_entity_state"
+  },
+  {
+    "va": 268484000,
+    "size": 70,
+    "tool_name": "check_flag"
+  },
+  {
+    "va": 268484080,
+    "size": 1002,
+    "tool_name": "ahm_ExAllocAlchemist"
+  },
+  {
+    "va": 268485088,
+    "size": 130,
+    "tool_name": "ApplyColorComponent"
+  },
+  {
+    "va": 268485248,
+    "size": 130,
+    "tool_name": "AllocateEntitySlot"
+  },
+  {
+    "va": 268485392,
+    "size": 110,
+    "tool_name": "slot_clear_match"
+  },
+  {
+    "va": 268485504,
+    "size": 51,
+    "tool_name": "search_and_set"
+  },
+  {
+    "va": 268485568,
+    "size": 83,
+    "tool_name": "ClampFloatValue"
+  },
+  {
+    "va": 268485664,
+    "size": 166,
+    "tool_name": "FireEntityAndCleanup"
+  },
+  {
+    "va": 268485840,
+    "size": 295,
+    "tool_name": "ahm_AllocAhmInfo"
+  },
+  {
+    "va": 268486144,
+    "size": 109,
+    "tool_name": "InitRandomEntity"
+  },
+  {
+    "va": 268486256,
+    "size": 45,
+    "tool_name": "LookupEntityInTable"
+  },
+  {
+    "va": 268486304,
+    "size": 102,
+    "tool_name": "QueryEntityBuildingType"
+  },
+  {
+    "va": 268486416,
+    "size": 340,
+    "tool_name": "GetCommandPayloadSize"
+  },
+  {
+    "va": 268487168,
+    "size": 130,
+    "tool_name": "ProcessEntityChain"
+  },
+  {
+    "va": 268487312,
+    "size": 130,
+    "tool_name": "get_field_by_type"
+  },
+  {
+    "va": 268487456,
+    "size": 171,
+    "tool_name": "CheckMoveCredits"
+  },
+  {
+    "va": 268487632,
+    "size": 517,
+    "tool_name": "CheckSellObject"
+  },
+  {
+    "va": 268488160,
+    "size": 331,
+    "tool_name": "CheckChangeAttribute"
+  },
+  {
+    "va": 268488496,
+    "size": 162,
+    "tool_name": "CheckChangeBits"
+  },
+  {
+    "va": 268488672,
+    "size": 64,
+    "tool_name": "find_validate"
+  },
+  {
+    "va": 268488736,
+    "size": 22,
+    "tool_name": "cm_ChkOfficeCandidate"
+  },
+  {
+    "va": 268488768,
+    "size": 22,
+    "tool_name": "cm_ValidateGeneric"
+  },
+  {
+    "va": 268488800,
+    "size": 169,
+    "tool_name": "ValidateElectionOrTradeCmd"
+  },
+  {
+    "va": 268488976,
+    "size": 333,
+    "tool_name": "ValidateJoinLeaveElection"
+  },
+  {
+    "va": 268489312,
+    "size": 120,
+    "tool_name": "CheckCutsceneReady"
+  },
+  {
+    "va": 268489440,
+    "size": 77,
+    "tool_name": "cm_ChkCommandType"
+  },
+  {
+    "va": 268489520,
+    "size": 14,
+    "tool_name": "MarkAndReturn"
+  },
+  {
+    "va": 268489536,
+    "size": 6,
+    "tool_name": "RejectCommand"
+  },
+  {
+    "va": 268489552,
+    "size": 267,
+    "tool_name": "cm_ExAllocRaum"
+  },
+  {
+    "va": 268489824,
+    "size": 267,
+    "tool_name": "cm_ExAllocSpieler"
+  },
+  {
+    "va": 268490096,
+    "size": 361,
+    "tool_name": "cm_ExAllocClientSpieler"
+  },
+  {
+    "va": 268490464,
+    "size": 78,
+    "tool_name": "cm_ExChangePlayerIdentity"
+  },
+  {
+    "va": 268490544,
+    "size": 192,
+    "tool_name": "ExFreeEntity"
+  },
+  {
+    "va": 268490736,
+    "size": 176,
+    "tool_name": "ExTransferCurrency"
+  },
+  {
+    "va": 268490912,
+    "size": 144,
+    "tool_name": "ExTransferCurrencyNoKill"
+  },
+  {
+    "va": 268491056,
+    "size": 2057,
+    "tool_name": "TradeCommandHandler"
+  },
+  {
+    "va": 268493120,
+    "size": 993,
+    "tool_name": "cm_ExecProduction"
+  },
+  {
+    "va": 268494128,
+    "size": 352,
+    "tool_name": "ExMoveObject"
+  },
+  {
+    "va": 268494480,
+    "size": 191,
+    "tool_name": "cm_ExClearLagerslot"
+  },
+  {
+    "va": 268494672,
+    "size": 128,
+    "tool_name": "ExCreateObject"
+  },
+  {
+    "va": 268494800,
+    "size": 256,
+    "tool_name": "ExAccumulateEntityFields"
+  },
+  {
+    "va": 268495056,
+    "size": 240,
+    "tool_name": "ExWriteEntityFields"
+  },
+  {
+    "va": 268495296,
+    "size": 214,
+    "tool_name": "ExChangeDesire"
+  },
+  {
+    "va": 268495520,
+    "size": 208,
+    "tool_name": "ExSetEntityBitmask"
+  },
+  {
+    "va": 268495728,
+    "size": 144,
+    "tool_name": "ExSetEntityField"
+  },
+  {
+    "va": 268495872,
+    "size": 912,
+    "tool_name": "ExCopyEntityData"
+  },
+  {
+    "va": 268496784,
+    "size": 26,
+    "tool_name": "cm_ChainAssignId"
+  },
+  {
+    "va": 268496816,
+    "size": 122,
+    "tool_name": "SetSyncFlags"
+  },
+  {
+    "va": 268496944,
+    "size": 72,
+    "tool_name": "cm_ExKillSpieler"
+  },
+  {
+    "va": 268497024,
+    "size": 26,
+    "tool_name": "AssignSequenceCounter"
+  },
+  {
+    "va": 268497056,
+    "size": 37,
+    "tool_name": "AssignEntityId"
+  },
+  {
+    "va": 268497104,
+    "size": 197,
+    "tool_name": "RemoveLinkedObject"
+  },
+  {
+    "va": 268497312,
+    "size": 327,
+    "tool_name": "cm_ChainRecordLookup"
+  },
+  {
+    "va": 268497648,
+    "size": 176,
+    "tool_name": "ExCreateSpecialObject"
+  },
+  {
+    "va": 268497824,
+    "size": 3,
+    "tool_name": "cm_ChainNoop"
+  },
+  {
+    "va": 268497840,
+    "size": 206,
+    "tool_name": "SetBuildingOwner"
+  },
+  {
+    "va": 268498048,
+    "size": 271,
+    "tool_name": "SetResidence"
+  },
+  {
+    "va": 268498320,
+    "size": 237,
+    "tool_name": "SetBuildingUpgrade"
+  },
+  {
+    "va": 268498560,
+    "size": 171,
+    "tool_name": "DestroyBuilding"
+  },
+  {
+    "va": 268498736,
+    "size": 515,
+    "tool_name": "EmployWorkerAtBuilding"
+  },
+  {
+    "va": 268499264,
+    "size": 22,
+    "tool_name": "cm_ExAssignOffice"
+  },
+  {
+    "va": 268499296,
+    "size": 22,
+    "tool_name": "cm_ExExecuteOffice"
+  },
+  {
+    "va": 268499328,
+    "size": 336,
+    "tool_name": "ExCreateCitizenAtBuilding"
+  },
+  {
+    "va": 268499664,
+    "size": 85,
+    "tool_name": "cm_ExKillTransporter"
+  },
+  {
+    "va": 268499760,
+    "size": 153,
+    "tool_name": "cm_ExCreateGeb"
+  },
+  {
+    "va": 268499920,
+    "size": 22,
+    "tool_name": "cm_ExCondWrite"
+  },
+  {
+    "va": 268499952,
+    "size": 25,
+    "tool_name": "InitDefaultResponse"
+  },
+  {
+    "va": 268499984,
+    "size": 308,
+    "tool_name": "ElectionOrTradeCommand"
+  },
+  {
+    "va": 268500304,
+    "size": 445,
+    "tool_name": "JoinLeaveElection"
+  },
+  {
+    "va": 268500752,
+    "size": 22,
+    "tool_name": "cm_ExCondWrite2"
+  },
+  {
+    "va": 268500784,
+    "size": 41,
+    "tool_name": "ValidateEntityLookup"
+  },
+  {
+    "va": 268500832,
+    "size": 82,
+    "tool_name": "CutsceneEntityUpdate"
+  },
+  {
+    "va": 268500928,
+    "size": 70,
+    "tool_name": "ModifyEntityHealth"
+  },
+  {
+    "va": 268501008,
+    "size": 110,
+    "tool_name": "ModifyEntityStamina"
+  },
+  {
+    "va": 268501120,
+    "size": 22,
+    "tool_name": "ExSimCommand"
+  },
+  {
+    "va": 268501152,
+    "size": 159,
+    "tool_name": "ModifyEntityStat"
+  },
+  {
+    "va": 268501312,
+    "size": 280,
+    "tool_name": "AllocWarEvent"
+  },
+  {
+    "va": 268501600,
+    "size": 114,
+    "tool_name": "DispatchProductionCommand"
+  },
+  {
+    "va": 268501744,
+    "size": 17,
+    "tool_name": "DispatchMoveSlotEntry"
+  },
+  {
+    "va": 268501776,
+    "size": 52,
+    "tool_name": "cm_ExAllocGraveyardWorker"
+  },
+  {
+    "va": 268501840,
+    "size": 52,
+    "tool_name": "cm_ExAllocAlchemist"
+  },
+  {
+    "va": 268501904,
+    "size": 262,
+    "tool_name": "SimSpecialAction"
+  },
+  {
+    "va": 268502176,
+    "size": 135,
+    "tool_name": "GetBuildingStatCount"
+  },
+  {
+    "va": 268502320,
+    "size": 113,
+    "tool_name": "check_slot_active"
+  },
+  {
+    "va": 268502448,
+    "size": 329,
+    "tool_name": "GetSlotEntry"
+  },
+  {
+    "va": 268502800,
+    "size": 320,
+    "tool_name": "FindSlotEntryFiltered"
+  },
+  {
+    "va": 268503120,
+    "size": 370,
+    "tool_name": "SpawnGraveyardEntities"
+  },
+  {
+    "va": 268503504,
+    "size": 832,
+    "tool_name": "AllocGraveyardField"
+  },
+  {
+    "va": 268504336,
+    "size": 570,
+    "tool_name": "UpgradeGraveyardField"
+  },
+  {
+    "va": 268504912,
+    "size": 66,
+    "tool_name": "free_3fields"
+  },
+  {
+    "va": 268504992,
+    "size": 525,
+    "tool_name": "AssignProductionSlot"
+  },
+  {
+    "va": 268505520,
+    "size": 501,
+    "tool_name": "HireProductionWorker"
+  },
+  {
+    "va": 268506032,
+    "size": 390,
+    "tool_name": "ExtendProductionTime"
+  },
+  {
+    "va": 268506432,
+    "size": 288,
+    "tool_name": "ReplaceProductionWorker"
+  },
+  {
+    "va": 268506720,
+    "size": 297,
+    "tool_name": "ActivateGraveyardSection"
+  },
+  {
+    "va": 268507024,
+    "size": 242,
+    "tool_name": "UpdateProductionProgress"
+  },
+  {
+    "va": 268507280,
+    "size": 164,
+    "tool_name": "ValidateEntityAction"
+  },
+  {
+    "va": 268507456,
+    "size": 674,
+    "tool_name": "MoveSlotEntry"
+  },
+  {
+    "va": 268508144,
+    "size": 1040,
+    "tool_name": "gv_ExAllocGraveyardWorker"
+  },
+  {
+    "va": 268509184,
+    "size": 728,
+    "tool_name": "LoadGraveyardData"
+  },
+  {
+    "va": 268509920,
+    "size": 346,
+    "tool_name": "InitNewDynastyEntity"
+  },
+  {
+    "va": 268510272,
+    "size": 37,
+    "tool_name": "ReadVfsDataChecked"
+  }
+]

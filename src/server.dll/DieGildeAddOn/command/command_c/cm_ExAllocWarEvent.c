@@ -1,7 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: lea vs mov for data copy (MSVC6 /O2 folds struct pointers to direct loads), bl register for damage save, identity write epilogue xor+mov pattern
-// ORIGIN: GAME
-// SIZE: 280
 
 #include "../command_internal.h"
 
@@ -13,7 +9,6 @@
 #endif
 
 /*
-// BLOCKER_DELTA: 106
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME

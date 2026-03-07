@@ -1,7 +1,3 @@
-// STATUS: MATCHING
-// BLOCKER: register allocation - target uses only edi, compiler allocates esi+edi for saved param_1 and field writeback address
-// ORIGIN: GAME
-// SIZE: 214
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"

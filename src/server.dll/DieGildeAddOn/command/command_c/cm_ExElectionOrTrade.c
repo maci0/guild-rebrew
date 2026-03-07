@@ -1,7 +1,3 @@
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 308
-// BLOCKER_DELTA: 209
 
 #include "../command_internal.h"
 
@@ -13,7 +9,6 @@
 #endif
 
 /*
-// BLOCKER_DELTA: 209
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME

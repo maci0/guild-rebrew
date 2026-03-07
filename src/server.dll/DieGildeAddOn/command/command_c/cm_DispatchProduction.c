@@ -1,6 +1,3 @@
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 144
 
 /*
  * Ghidra decompilation reference:

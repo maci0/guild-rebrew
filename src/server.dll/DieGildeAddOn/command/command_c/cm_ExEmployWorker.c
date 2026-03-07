@@ -1,6 +1,3 @@
-// STATUS: RELOC
-// ORIGIN: GAME
-// SIZE: 515
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
