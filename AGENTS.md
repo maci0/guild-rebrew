@@ -35,25 +35,26 @@ Use `--json` for structured output (preferred for agents). All tools read `rebre
 | `rebrew diff <file> --json` | Structured byte diff (`--mm` for structural diffs only) |
 | `rebrew diff <file> --fix-blocker` | Auto-write BLOCKER to sidecar from diff |
 | `rebrew match <file> --json` | Run GA matching engine |
-| `rebrew ga --near-miss --threshold 5` | Batch GA on near-miss functions |
+| `rebrew match --all --near-miss --threshold 5` | Batch GA on near-miss functions |
 | `rebrew rename <old> <new>` | Rename function and update cross-references |
 | `rebrew verify --json` | Bulk verify all reversed files |
+| `rebrew verify --compare --json` | Compare against last saved report, detect regressions |
 | `rebrew lint --json` | Validate annotations |
-| `rebrew lint --fix <file>` | Auto-fix annotation format |
+| `rebrew lint --fix` | Auto-fix annotation format |
 | `rebrew data --json` | Inventory globals in .data/.rdata/.bss |
 | `rebrew graph --format summary` | Dependency graph stats and blockers |
 | `rebrew graph --cu-map --json` | Infer compilation unit boundaries |
-| `rebrew catalog --json` | Generate coverage catalog |
-| `rebrew catalog db` | Build SQLite coverage database |
+| `rebrew catalog --data-json` | Write `db/data_<target>.json` (input for build-db) |
+| `rebrew catalog --json` | Print catalog summary to stdout |
 | `rebrew flirt --json` | FLIRT scan for known library functions |
 | `rebrew extract --json` | Batch extract and disassemble functions |
 | `rebrew asm 0x<VA> --size 128` | Quick offline disassembly (hex dump) |
 | `rebrew asm 0x<VA> --format nasm` | NASM-reassembleable source |
+| `rebrew prove <file>` | Prove MATCHING function is semantically equivalent (optional angr dep) |
+| `rebrew binsync-export ./out` | Export annotations to BinSync state directory |
 | `rebrew sync --push` | Push annotations to Ghidra |
 | `rebrew sync --summary --json` | Preview what would be synced |
 | `clang-format -i --style=file <file>` | Format C source (pre-commit hook runs automatically) |
-
-> [!IMPORTANT]
 
 
 ## C Source Style (src/server.dll/*.c)
