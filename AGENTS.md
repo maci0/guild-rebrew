@@ -30,10 +30,10 @@ Use `--json` for structured output (preferred for agents). All tools read `rebre
 | `rebrew todo --json` | Prioritized action items (compile errors, near misses, new functions) |
 | `rebrew doctor` | Check toolchain and project health |
 | `rebrew skeleton 0x<VA>` | Generate C skeleton from address |
-| `rebrew test <file>` | Compile + byte-compare; auto-updates STATUS in sidecar |
+| `rebrew test <file>` | Compile + byte-compare; auto-updates STATUS in metadata |
 | `rebrew test <file> --no-promote` | Compile + compare without updating STATUS |
 | `rebrew diff <file> --json` | Structured byte diff (`--mm` for structural diffs only) |
-| `rebrew diff <file> --fix-blocker` | Auto-write BLOCKER to sidecar from diff |
+| `rebrew diff <file> --fix-blocker` | Auto-write BLOCKER to metadata from diff |
 | `rebrew match <file> --json` | Run GA matching engine |
 | `rebrew match --all --near-miss --threshold 5` | Batch GA on near-miss functions |
 | `rebrew rename <old> <new>` | Rename function and update cross-references |
@@ -139,15 +139,15 @@ Only the `// FUNCTION:` marker line stays in `.c`:
 
 **Derived automatically**: Symbol (from C function def, e.g. `_alloc_game_object`), Prototype
 
-### In `rebrew-function.toml` (sidecar — managed by CLI tools)
+### In `rebrew-function.toml` (metadata — managed by CLI tools)
 
 > [!CAUTION]
 > Never manually edit `rebrew-function.toml`. It is managed by `rebrew test`,
 > `rebrew match`, `rebrew sync`, etc. Manual edits will be lost.
 
-**Required sidecar fields**: `status`, `size`
+**Required metadata fields**: `status`, `size`
 
-**Optional sidecar fields**: `cflags`, `blocker`, `blocker_delta`, `ghidra`, `analysis`, `note`, `source`
+**Optional metadata fields**: `cflags`, `blocker`, `blocker_delta`, `ghidra`, `analysis`, `note`, `source`
 
 **`status` values**:
 
