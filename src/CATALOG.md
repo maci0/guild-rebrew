@@ -10,121 +10,121 @@ Coverage: 92.6% of .text section (136577/147456 bytes)
 |-----|------|------|--------|-------|-------|------|
 | 0x10001130 | 179B | SendBroadcastPacket | _SendBroadcastPacket |  | FUNCTION/RELOC | server.dll/Units/net/broadcast.c |
 | 0x10002640 | 290B | DispatchLogOutput | _DispatchLogOutput |  | FUNCTION/RELOC | server.dll/Units/Error/Error.c |
-| 0x10002770 | 1836B | CrashDumpUnhandledExceptionFilter | _CrashDumpUnhandledExceptionFilter |  | FUNCTION/MATCHING | server.dll/Units/Error/Error.c |
-| 0x10002FC0 | 376B | EmitCrashModuleLine | _EmitCrashModuleLine |  | FUNCTION/MATCHING | server.dll/Units/Error/Error.c |
+| 0x10002770 | 1836B | CrashDumpUnhandledExceptionFilter | _CrashDumpUnhandledExceptionFilter |  | FUNCTION/NEAR_MATCH | server.dll/Units/Error/Error.c |
+| 0x10002FC0 | 376B | EmitCrashModuleLine | _EmitCrashModuleLine |  | FUNCTION/NEAR_MATCH | server.dll/Units/Error/Error.c |
 | 0x10003140 | 33B | GetDebugRecordByIndex | _GetDebugRecordByIndex |  | FUNCTION/EXACT | server.dll/Units/Error/Error.c |
 | 0x10003170 | 240B | check_memory_protection | _check_memory_protection |  | FUNCTION/RELOC | server.dll/Units/Error/Error.c |
-| 0x10003260 | 183B | AnalyzeInstruction | _AnalyzeInstruction |  | FUNCTION/MATCHING | server.dll/Units/Error/Error.c |
-| 0x10003320 | 404B | InitializeLogAndErrorHandler | _InitializeLogAndErrorHandler |  | FUNCTION/MATCHING | server.dll/Units/Error/Error.c |
+| 0x10003260 | 183B | AnalyzeInstruction | _AnalyzeInstruction |  | FUNCTION/NEAR_MATCH | server.dll/Units/Error/Error.c |
+| 0x10003320 | 404B | InitializeLogAndErrorHandler | _InitializeLogAndErrorHandler |  | FUNCTION/NEAR_MATCH | server.dll/Units/Error/Error.c |
 | 0x100034C0 | 83B | ShutdownLogAndErrorHandler | _ShutdownLogAndErrorHandler |  | FUNCTION/RELOC | server.dll/Units/Error/Error.c |
 | 0x10003520 | 160B | ReportFatalError | _ReportFatalError |  | FUNCTION/RELOC | server.dll/Units/Error/Error.c |
 | 0x100035C0 | 119B | ReportMessage | _ReportMessage |  | FUNCTION/RELOC | server.dll/Units/Error/Error.c |
 | 0x10003640 | 132B | LogMessageInternal | _LogMessageInternal |  | FUNCTION/RELOC | server.dll/Units/Error/Error.c |
-| 0x10003820 | 114B | game_getbyte | _game_getbyte |  | FUNCTION/MATCHING | server.dll/Units/vfs/vfs.c |
+| 0x10003820 | 114B | game_getbyte | _game_getbyte |  | FUNCTION/NEAR_MATCH | server.dll/Units/vfs/vfs.c |
 | 0x100038A0 | 177B | close_stream | _close_stream |  | FUNCTION/RELOC | server.dll/Units/vfs/vfs.c |
 | 0x10003B90 | 182B | flush_stream | _flush_stream |  | FUNCTION/RELOC | server.dll/Units/vfs/vfs.c |
-| 0x10003C50 | 77B | flush_and_close_stream | _flush_and_close_stream |  | FUNCTION/MATCHING | server.dll/Units/vfs/vfs.c |
-| 0x10003CA0 | 65B | read_uint32_be | _read_uint32_be |  | FUNCTION/MATCHING | server.dll/Units/vfs/vfs.c |
+| 0x10003C50 | 77B | flush_and_close_stream | _flush_and_close_stream |  | FUNCTION/NEAR_MATCH | server.dll/Units/vfs/vfs.c |
+| 0x10003CA0 | 65B | read_uint32_be | _read_uint32_be |  | FUNCTION/NEAR_MATCH | server.dll/Units/vfs/vfs.c |
 | 0x10003CF0 | 43B | write_uint32_le | _write_uint32_le |  | FUNCTION/RELOC | server.dll/Units/vfs/vfs.c |
-| 0x10004B80 | 320B | alloc_and_init | _alloc_and_init |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10004B80 | 320B | alloc_and_init | _alloc_and_init |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10005370 | 20B | dispatch_call | _dispatch_call |  | FUNCTION/EXACT | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10006580 | 658B | AllocateTrackedHeapBlock | _AllocateTrackedHeapBlock |  | FUNCTION/MATCHING | server.dll/Units/m_alloc/m_alloc.c |
-| 0x10006820 | 188B | FreeTrackedHeapBlock | _FreeTrackedHeapBlock |  | FUNCTION/MATCHING | server.dll/Units/m_alloc/m_alloc.c |
-| 0x100068E0 | 162B | InitPacketPool | _InitPacketPool |  | FUNCTION/MATCHING | server.dll/Units/m_alloc/m_alloc.c |
-| 0x10006990 | 612B | ReportMemoryGroupInfo | _ReportMemoryGroupInfo |  | FUNCTION/MATCHING | server.dll/Units/m_alloc/m_alloc.c |
-| 0x10006C00 | 283B | ShutdownMemoryAllocator | _ShutdownMemoryAllocator |  | FUNCTION/MATCHING | server.dll/Units/m_alloc/m_alloc.c |
-| 0x10006D20 | 270B | pool_alloc | _pool_alloc |  | FUNCTION/MATCHING | server.dll/Units/m_alloc/m_alloc.c |
-| 0x10006E30 | 137B | pool_free | _pool_free |  | FUNCTION/MATCHING | server.dll/Units/m_alloc/m_alloc.c |
+| 0x10006580 | 658B | AllocateTrackedHeapBlock | _AllocateTrackedHeapBlock |  | FUNCTION/NEAR_MATCH | server.dll/Units/m_alloc/m_alloc.c |
+| 0x10006820 | 188B | FreeTrackedHeapBlock | _FreeTrackedHeapBlock |  | FUNCTION/NEAR_MATCH | server.dll/Units/m_alloc/m_alloc.c |
+| 0x100068E0 | 162B | InitPacketPool | _InitPacketPool |  | FUNCTION/NEAR_MATCH | server.dll/Units/m_alloc/m_alloc.c |
+| 0x10006990 | 612B | ReportMemoryGroupInfo | _ReportMemoryGroupInfo |  | FUNCTION/NEAR_MATCH | server.dll/Units/m_alloc/m_alloc.c |
+| 0x10006C00 | 283B | ShutdownMemoryAllocator | _ShutdownMemoryAllocator |  | FUNCTION/NEAR_MATCH | server.dll/Units/m_alloc/m_alloc.c |
+| 0x10006D20 | 270B | pool_alloc | _pool_alloc |  | FUNCTION/NEAR_MATCH | server.dll/Units/m_alloc/m_alloc.c |
+| 0x10006E30 | 137B | pool_free | _pool_free |  | FUNCTION/NEAR_MATCH | server.dll/Units/m_alloc/m_alloc.c |
 | 0x10008A50 | 53B | destroy_entity | _destroy_entity |  | FUNCTION/RELOC | server.dll/Units/vfs/vfs.c |
-| 0x10008A90 | 492B | ReadVfsCompressed | _ReadVfsCompressed |  | FUNCTION/MATCHING | server.dll/Units/vfs/vfs.c |
+| 0x10008A90 | 492B | ReadVfsCompressed | _ReadVfsCompressed |  | FUNCTION/NEAR_MATCH | server.dll/Units/vfs/vfs.c |
 | 0x10008C80 | 129B | cleanup_object | _cleanup_object |  | FUNCTION/RELOC | server.dll/Units/vfs/vfs.c |
-| 0x10008D10 | 301B | CloseVfsStream | _CloseVfsStream |  | FUNCTION/MATCHING | server.dll/Units/vfs/vfs.c |
-| 0x10008E40 | 472B | ReadVfsData | _ReadVfsData |  | FUNCTION/MATCHING | server.dll/Units/vfs/vfs.c |
-| 0x10009020 | 704B | OpenVfsStream | _OpenVfsStream |  | FUNCTION/MATCHING | server.dll/Units/vfs/vfs.c |
-| 0x10009310 | 170B | exit_handler@12 | _exit_handler@12 |  | FUNCTION/MATCHING | server.dll/DieGildeAddOnServer/server.c |
+| 0x10008D10 | 301B | CloseVfsStream | _CloseVfsStream |  | FUNCTION/NEAR_MATCH | server.dll/Units/vfs/vfs.c |
+| 0x10008E40 | 472B | ReadVfsData | _ReadVfsData |  | FUNCTION/NEAR_MATCH | server.dll/Units/vfs/vfs.c |
+| 0x10009020 | 704B | OpenVfsStream | _OpenVfsStream |  | FUNCTION/NEAR_MATCH | server.dll/Units/vfs/vfs.c |
+| 0x10009310 | 170B | exit_handler@12 | _exit_handler@12 |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOnServer/server.c |
 | 0x10009320 | 42B | Init | _Init |  | FUNCTION/RELOC | server.dll/DieGildeAddOnServer/server.c |
 | 0x10009350 | 68B | Exit | _Exit |  | FUNCTION/RELOC | server.dll/DieGildeAddOnServer/server.c |
-| 0x100093A0 | 2434B | ServerMainThread | _ServerMainThread |  | FUNCTION/MATCHING | server.dll/DieGildeAddOnServer/server.c |
-| 0x10009D30 | 296B | srv_Init | _srv_Init |  | FUNCTION/MATCHING | server.dll/DieGildeAddOnServer/server.c |
+| 0x100093A0 | 2434B | ServerMainThread | _ServerMainThread |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOnServer/server.c |
+| 0x10009D30 | 296B | srv_Init | _srv_Init |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOnServer/server.c |
 | 0x10009E60 | 419B | CreateListenSocket | _CreateListenSocket |  | FUNCTION/RELOC | server.dll/DieGildeAddOnServer/server.c |
 | 0x1000A010 | 112B | CleanupSockets | _CleanupSockets |  | FUNCTION/RELOC | server.dll/DieGildeAddOnServer/server.c |
-| 0x1000A080 | 600B | AcceptConnections | _AcceptConnections |  | FUNCTION/MATCHING | server.dll/DieGildeAddOnServer/server.c |
+| 0x1000A080 | 600B | AcceptConnections | _AcceptConnections |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOnServer/server.c |
 | 0x1000A2E0 | 96B | ClosePlayerConnection | _ClosePlayerConnection |  | FUNCTION/RELOC | server.dll/DieGildeAddOnServer/server.c |
-| 0x1000A340 | 336B | ReceivePacketHeader | _ReceivePacketHeader |  | FUNCTION/MATCHING | server.dll/DieGildeAddOnServer/server.c |
+| 0x1000A340 | 336B | ReceivePacketHeader | _ReceivePacketHeader |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOnServer/server.c |
 | 0x1000A490 | 211B | SendPlayerData | _SendPlayerData |  | FUNCTION/RELOC | server.dll/DieGildeAddOnServer/server.c |
-| 0x1000A570 | 750B | ProcessReceiveData | _ProcessReceiveData |  | FUNCTION/MATCHING | server.dll/DieGildeAddOnServer/server.c |
-| 0x1000A860 | 131B | ProcessSendData | _ProcessSendData |  | FUNCTION/MATCHING | server.dll/DieGildeAddOnServer/server.c |
+| 0x1000A570 | 750B | ProcessReceiveData | _ProcessReceiveData |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOnServer/server.c |
+| 0x1000A860 | 131B | ProcessSendData | _ProcessSendData |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOnServer/server.c |
 | 0x1000A8F0 | 170B | QueueCommandForProcessing | _QueueCommandForProcessing |  | FUNCTION/RELOC | server.dll/DieGildeAddOnServer/server.c |
 | 0x1000A9A0 | 170B | QueuePlayerCommand | _QueuePlayerCommand |  | FUNCTION/RELOC | server.dll/DieGildeAddOnServer/server.c |
 | 0x1000AA50 | 97B | list_unlink_relink | _list_unlink_relink |  | FUNCTION/EXACT | server.dll/DieGildeAddOnServer/server.c |
-| 0x1000AAC0 | 639B | cm_ProcessCommandQueue | _cm_ProcessCommandQueue |  | FUNCTION/MATCHING | server.dll/DieGildeAddOnServer/server.c |
+| 0x1000AAC0 | 639B | cm_ProcessCommandQueue | _cm_ProcessCommandQueue |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOnServer/server.c |
 | 0x1000AD40 | 768B | LogWinsockError | _LogWinsockError |  | FUNCTION/RELOC | server.dll/DieGildeAddOnServer/server.c |
-| 0x1000B040 | 372B | InitBuildingTypeTable | _InitBuildingTypeTable |  | FUNCTION/MATCHING | server.dll/DieGildeAddOnServer/server.c |
-| 0x1000B1C0 | 205B | ValidateOfficeCandidate | _ValidateOfficeCandidate |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/aemter.c |
-| 0x1000B290 | 425B | ValidateAndAssignOffice | _ValidateAndAssignOffice |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/aemter.c |
-| 0x1000B440 | 133B | ValidateCommand | _ValidateCommand |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/aemter.c |
-| 0x1000B4D0 | 836B | ExecuteOfficeAssignment | _ExecuteOfficeAssignment |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/aemter.c |
+| 0x1000B040 | 372B | InitBuildingTypeTable | _InitBuildingTypeTable |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOnServer/server.c |
+| 0x1000B1C0 | 205B | ValidateOfficeCandidate | _ValidateOfficeCandidate |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/aemter.c |
+| 0x1000B290 | 425B | ValidateAndAssignOffice | _ValidateAndAssignOffice |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/aemter.c |
+| 0x1000B440 | 133B | ValidateCommand | _ValidateCommand |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/aemter.c |
+| 0x1000B4D0 | 836B | ExecuteOfficeAssignment | _ExecuteOfficeAssignment |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/aemter.c |
 | 0x1000B820 | 42B | find_entity_26 | _find_entity_26 |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/aemter.c |
 | 0x1000B850 | 42B | find_entity_27 | _find_entity_27 |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/aemter.c |
-| 0x1000B880 | 263B | SwapOfficeHolders | _SwapOfficeHolders |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/aemter.c |
-| 0x1000B990 | 157B | ClearEntityLinks | _ClearEntityLinks |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/aemter.c |
-| 0x1000BA30 | 179B | UpdateEntityLinks | _UpdateEntityLinks |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/aemter.c |
-| 0x1000BAF0 | 606B | amt_fio_LoadAemter | _amt_fio_LoadAemter |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/aemter.c |
-| 0x1000BD50 | 130B | reset_entity_state | _reset_entity_state |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000B880 | 263B | SwapOfficeHolders | _SwapOfficeHolders |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/aemter.c |
+| 0x1000B990 | 157B | ClearEntityLinks | _ClearEntityLinks |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/aemter.c |
+| 0x1000BA30 | 179B | UpdateEntityLinks | _UpdateEntityLinks |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/aemter.c |
+| 0x1000BAF0 | 606B | amt_fio_LoadAemter | _amt_fio_LoadAemter |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/aemter.c |
+| 0x1000BD50 | 130B | reset_entity_state | _reset_entity_state |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000BDA0 | 70B | check_flag | _check_flag |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000BDF0 | 1002B | ahm_ExAllocAlchemist | _ahm_ExAllocAlchemist |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000C1E0 | 160B | ApplyColorComponent | _ApplyColorComponent |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000C280 | 130B | AllocateEntitySlot | _AllocateEntitySlot |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000BDF0 | 1002B | ahm_ExAllocAlchemist | _ahm_ExAllocAlchemist |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C1E0 | 160B | ApplyColorComponent | _ApplyColorComponent |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C280 | 130B | AllocateEntitySlot | _AllocateEntitySlot |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000C310 | 110B | slot_clear_match | _slot_clear_match |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000C380 | 51B | search_and_set | _search_and_set |  | FUNCTION/EXACT | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000C3C0 | 83B | ClampFloatValue | _ClampFloatValue |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C3C0 | 83B | ClampFloatValue | _ClampFloatValue |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000C420 | 166B | FireEntityAndCleanup | _FireEntityAndCleanup |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000C4D0 | 295B | ahm_AllocAhmInfo | _ahm_AllocAhmInfo |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000C600 | 109B | InitRandomEntity | _InitRandomEntity |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C4D0 | 295B | ahm_AllocAhmInfo | _ahm_AllocAhmInfo |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C600 | 109B | InitRandomEntity | _InitRandomEntity |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000C670 | 45B | LookupEntityInTable | _LookupEntityInTable |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000C6A0 | 102B | QueryEntityBuildingType | _QueryEntityBuildingType |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000C710 | 752B | GetCommandPayloadSize | _GetCommandPayloadSize |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000CA00 | 130B | ProcessEntityChain | _ProcessEntityChain |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C6A0 | 102B | QueryEntityBuildingType | _QueryEntityBuildingType |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C710 | 752B | GetCommandPayloadSize | _GetCommandPayloadSize |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000CA00 | 130B | ProcessEntityChain | _ProcessEntityChain |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000CA90 | 130B | get_field_by_type | _get_field_by_type |  | FUNCTION/EXACT | server.dll/DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000CB20 | 171B | CheckMoveCredits | _CheckMoveCredits | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ChkMoveCredits.c |
-| 0x1000CBD0 | 517B | CheckSellObject | _CheckSellObject | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ChkSellObjekt.c |
-| 0x1000CDE0 | 331B | CheckChangeAttribute | _CheckChangeAttribute | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ChkChangeAttribute.c |
-| 0x1000CF30 | 162B | CheckChangeBits | _CheckChangeBits | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ChkChangeBits.c |
+| 0x1000CB20 | 171B | CheckMoveCredits | _CheckMoveCredits | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ChkMoveCredits.c |
+| 0x1000CBD0 | 517B | CheckSellObject | _CheckSellObject | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ChkSellObjekt.c |
+| 0x1000CDE0 | 331B | CheckChangeAttribute | _CheckChangeAttribute | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ChkChangeAttribute.c |
+| 0x1000CF30 | 162B | CheckChangeBits | _CheckChangeBits | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ChkChangeBits.c |
 | 0x1000CFE0 | 64B | find_validate | _find_validate | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ChkSetGebBesitzer.c |
 | 0x1000D020 | 22B | cm_ChkOfficeCandidate | _call_with_off | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ChkOfficeCandidate.c |
 | 0x1000D040 | 22B | cm_ValidateGeneric | _CmdValidateGeneric | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ValidateGeneric.c |
 | 0x1000D060 | 169B | ValidateElectionOrTradeCmd | _ValidateElectionOrTradeCmd | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ChkElectionOrTrade.c |
-| 0x1000D110 | 333B | ValidateJoinLeaveElection | _ValidateJoinLeaveElection | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ChkJoinLeaveElection.c |
-| 0x1000D260 | 120B | CheckCutsceneReady | _CheckCutsceneReady | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ChkCutsceneReady.c |
+| 0x1000D110 | 333B | ValidateJoinLeaveElection | _ValidateJoinLeaveElection | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ChkJoinLeaveElection.c |
+| 0x1000D260 | 120B | CheckCutsceneReady | _CheckCutsceneReady | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ChkCutsceneReady.c |
 | 0x1000D2E0 | 77B | cm_ChkCommandType | _validate_command_type | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ChkCommandType.c |
 | 0x1000D330 | 14B | MarkAndReturn | _MarkAndReturn | /O2 /Gd | FUNCTION/EXACT | server.dll/DieGildeAddOn/command/command_c/cm_MarkAndReturn.c |
 | 0x1000D340 | 6B | RejectCommand | _RejectCommand | /O2 /Gd | FUNCTION/EXACT | server.dll/DieGildeAddOn/command/command_c/cm_RejectCommand.c |
 | 0x1000D350 | 267B | cm_ExAllocRaum | _CmdAllocBuilding | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocRaum.c |
 | 0x1000D460 | 267B | cm_ExAllocSpieler | _CmdAllocPlayer | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocSpieler.c |
-| 0x1000D570 | 361B | cm_ExAllocClientSpieler | _validate_cmd_10_AllocPlayer | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocClientSpieler.c |
+| 0x1000D570 | 361B | cm_ExAllocClientSpieler | _validate_cmd_10_AllocPlayer | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocClientSpieler.c |
 | 0x1000D6E0 | 78B | cm_ExChangePlayerIdentity | _cm_ExChangePlayerIdentity | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExChangePlayerIdentity.c |
-| 0x1000D730 | 180B | ExFreeEntity | _ExFreeEntity | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExFree.c |
+| 0x1000D730 | 180B | ExFreeEntity | _ExFreeEntity | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExFree.c |
 | 0x1000D7F0 | 176B | ExTransferCurrency | _ExTransferCurrency | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExTransferCurrency.c |
 | 0x1000D8A0 | 144B | ExTransferCurrencyNoKill | _ExTransferCurrencyNoKill | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExTransferCurrencyNoKill.c |
-| 0x1000D930 | 2057B | TradeCommandHandler | _TradeCommandHandler | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c |
-| 0x1000E140 | 993B | cm_ExecProduction | _cm_ExecProduction | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExProdObjekt.c |
-| 0x1000E530 | 352B | ExMoveObject | _ExMoveObject | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExMoveObjekt.c |
-| 0x1000E690 | 191B | cm_ExClearLagerslot | _cm_ExClearLagerslot | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExClearLagerslot.c |
+| 0x1000D930 | 2057B | TradeCommandHandler | _TradeCommandHandler | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c |
+| 0x1000E140 | 993B | cm_ExecProduction | _cm_ExecProduction | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExProdObjekt.c |
+| 0x1000E530 | 352B | ExMoveObject | _ExMoveObject | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExMoveObjekt.c |
+| 0x1000E690 | 191B | cm_ExClearLagerslot | _cm_ExClearLagerslot | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExClearLagerslot.c |
 | 0x1000E750 | 123B | ExCreateObject | _ExCreateObject | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocObjekt.c |
-| 0x1000E7D0 | 242B | ExAccumulateEntityFields | _ExAccumulateEntityFields | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExChangeAttribute.c |
-| 0x1000E8D0 | 239B | ExWriteEntityFields | _ExWriteEntityFields | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExSetAttribute.c |
-| 0x1000E9C0 | 214B | ExChangeDesire | _ExChangeDesire | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExChangeDesire.c |
-| 0x1000EAA0 | 208B | ExSetEntityBitmask | _ExSetEntityBitmask | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExChangeBits.c |
-| 0x1000EB70 | 144B | ExSetEntityField | _ExSetEntityField | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExChangeFloat.c |
-| 0x1000EC00 | 912B | ExCopyEntityData | _ExCopyEntityData | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c |
+| 0x1000E7D0 | 242B | ExAccumulateEntityFields | _ExAccumulateEntityFields | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExChangeAttribute.c |
+| 0x1000E8D0 | 239B | ExWriteEntityFields | _ExWriteEntityFields | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExSetAttribute.c |
+| 0x1000E9C0 | 214B | ExChangeDesire | _ExChangeDesire | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExChangeDesire.c |
+| 0x1000EAA0 | 208B | ExSetEntityBitmask | _ExSetEntityBitmask | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExChangeBits.c |
+| 0x1000EB70 | 144B | ExSetEntityField | _ExSetEntityField | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExChangeFloat.c |
+| 0x1000EC00 | 912B | ExCopyEntityData | _ExCopyEntityData | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c |
 | 0x1000EF90 | 26B | cm_ChainAssignId | _chain_handler_assign_id | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ChainAssignId.c |
 | 0x1000EFB0 | 122B | SetSyncFlags | _SetSyncFlags | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExSetSyncFlags.c |
 | 0x1000F030 | 72B | cm_ExKillSpieler | _CmdKillPlayer | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExKillSpieler.c |
 | 0x1000F080 | 26B | AssignSequenceCounter | _AssignSequenceCounter | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_AssignSequenceCounter.c |
 | 0x1000F0A0 | 37B | AssignEntityId | _AssignEntityId | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_AssignEntityId.c |
-| 0x1000F0D0 | 197B | RemoveLinkedObject | _RemoveLinkedObject | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExRemoveLinkedObject.c |
+| 0x1000F0D0 | 197B | RemoveLinkedObject | _RemoveLinkedObject | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExRemoveLinkedObject.c |
 | 0x1000F1A0 | 327B | cm_ChainRecordLookup | _chain_handler_record_lookup | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ChainRecordLookup.c |
-| 0x1000F2F0 | 172B | ExCreateSpecialObject | _ExCreateSpecialObject | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocThemaPredigt.c |
+| 0x1000F2F0 | 172B | ExCreateSpecialObject | _ExCreateSpecialObject | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocThemaPredigt.c |
 | 0x1000F3A0 | 3B | cm_ChainNoop | _chain_handler_noop | /O2 /Gd | FUNCTION/EXACT | server.dll/DieGildeAddOn/command/command_c/cm_ChainNoop.c |
 | 0x1000F3B0 | 206B | SetBuildingOwner | _SetBuildingOwner | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExSetGebBesitzer.c |
 | 0x1000F480 | 271B | SetResidence | _SetResidence | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExSetWohnsitz.c |
@@ -133,101 +133,101 @@ Coverage: 92.6% of .text section (136577/147456 bytes)
 | 0x1000F730 | 515B | EmployWorkerAtBuilding | _EmployWorkerAtBuilding | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExEmployWorker.c |
 | 0x1000F940 | 22B | cm_ExAssignOffice | _call_with_off2 | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExAssignOffice.c |
 | 0x1000F960 | 22B | cm_ExExecuteOffice | _CmdExecuteOffice | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExExecuteOffice.c |
-| 0x1000F980 | 336B | ExCreateCitizenAtBuilding | _ExCreateCitizenAtBuilding | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExCreateCitizen.c |
+| 0x1000F980 | 336B | ExCreateCitizenAtBuilding | _ExCreateCitizenAtBuilding | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExCreateCitizen.c |
 | 0x1000FAD0 | 85B | cm_ExKillTransporter | _cm_ExKillTransporter | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExKillTransporter.c |
 | 0x1000FB30 | 153B | cm_ExCreateGeb | _CmdCreateBuilding | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExCreateGeb.c |
 | 0x1000FBD0 | 22B | cm_ExCondWrite | _cond_write | /O2 /Gd | FUNCTION/EXACT | server.dll/DieGildeAddOn/command/command_c/cm_ExCondWrite.c |
 | 0x1000FBF0 | 25B | InitDefaultResponse | _InitDefaultResponse | /O2 /Gd | FUNCTION/EXACT | server.dll/DieGildeAddOn/command/command_c/cm_InitDefaultResponse.c |
 | 0x1000FC10 | 308B | ElectionOrTradeCommand | _ElectionOrTradeCommand | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExElectionOrTrade.c |
-| 0x1000FD50 | 445B | JoinLeaveElection | _JoinLeaveElection | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExJoinLeaveElection.c |
+| 0x1000FD50 | 445B | JoinLeaveElection | _JoinLeaveElection | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExJoinLeaveElection.c |
 | 0x1000FF10 | 22B | cm_ExCondWrite2 | _cond_write2 | /O2 /Gd | FUNCTION/EXACT | server.dll/DieGildeAddOn/command/command_c/cm_ExCondWrite2.c |
 | 0x1000FF30 | 41B | ValidateEntityLookup | _ValidateEntityLookup | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ChkEntityLookup.c |
 | 0x1000FF60 | 82B | CutsceneEntityUpdate | _CutsceneEntityUpdate | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExCutsceneUpdate.c |
 | 0x1000FFC0 | 70B | ModifyEntityHealth | _ModifyEntityHealth | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExModifyHealth.c |
 | 0x10010010 | 110B | ModifyEntityStamina | _ModifyEntityStamina | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExModifyStamina.c |
 | 0x10010080 | 22B | ExSimCommand | _ExSimCommand | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExSimCommand.c |
-| 0x100100A0 | 159B | ModifyEntityStat | _ModifyEntityStat | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExModifyStat.c |
-| 0x10010140 | 280B | AllocWarEvent | _AllocWarEvent | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocWarEvent.c |
+| 0x100100A0 | 159B | ModifyEntityStat | _ModifyEntityStat | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExModifyStat.c |
+| 0x10010140 | 280B | AllocWarEvent | _AllocWarEvent | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocWarEvent.c |
 | 0x10010260 | 144B | DispatchProductionCommand | _DispatchProductionCommand | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_DispatchProduction.c |
 | 0x100102F0 | 17B | DispatchMoveSlotEntry | _DispatchMoveSlotEntry | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_DispatchMoveSlot.c |
 | 0x10010310 | 52B | cm_ExAllocGraveyardWorker | _CmdAllocGraveyardWorker | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocGraveyardWorker.c |
 | 0x10010350 | 52B | cm_ExAllocAlchemist | _CmdAllocAlchemist | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExAllocCharacter.c |
 | 0x10010390 | 262B | SimSpecialAction | _SimSpecialAction | /O2 /Gd | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/command_c/cm_ExSimSpecialAction.c |
-| 0x100104A0 | 135B | GetBuildingStatCount | _GetBuildingStatCount | /O2 /Gd | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/command_c/cm_GetBuildingStatCount.c |
-| 0x10010530 | 352B | check_slot_active | _check_slot_active |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x100105B0 | 329B | GetSlotEntry | _GetSlotEntry |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x10010710 | 320B | FindSlotEntryFiltered | _FindSlotEntryFiltered |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x10010850 | 370B | SpawnGraveyardEntities | _SpawnGraveyardEntities |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x100104A0 | 135B | GetBuildingStatCount | _GetBuildingStatCount | /O2 /Gd | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/command_c/cm_GetBuildingStatCount.c |
+| 0x10010530 | 352B | check_slot_active | _check_slot_active |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x100105B0 | 329B | GetSlotEntry | _GetSlotEntry |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010710 | 320B | FindSlotEntryFiltered | _FindSlotEntryFiltered |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010850 | 370B | SpawnGraveyardEntities | _SpawnGraveyardEntities |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
 | 0x100109D0 | 832B | AllocGraveyardField | _AllocGraveyardField |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x10010D10 | 570B | UpgradeGraveyardField | _UpgradeGraveyardField |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010D10 | 570B | UpgradeGraveyardField | _UpgradeGraveyardField |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010F50 | 66B | free_3fields | _free_3fields |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x10010FA0 | 525B | AssignProductionSlot | _AssignProductionSlot |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x100111B0 | 501B | HireProductionWorker | _HireProductionWorker |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x100113B0 | 390B | ExtendProductionTime | _ExtendProductionTime |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x10011540 | 288B | ReplaceProductionWorker | _ReplaceProductionWorker |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010FA0 | 525B | AssignProductionSlot | _AssignProductionSlot |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x100111B0 | 501B | HireProductionWorker | _HireProductionWorker |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x100113B0 | 390B | ExtendProductionTime | _ExtendProductionTime |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x10011540 | 288B | ReplaceProductionWorker | _ReplaceProductionWorker |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
 | 0x10011660 | 297B | ActivateGraveyardSection | _ActivateGraveyardSection |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x10011790 | 242B | UpdateProductionProgress | _UpdateProductionProgress |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x10011790 | 242B | UpdateProductionProgress | _UpdateProductionProgress |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
 | 0x10011890 | 164B | ValidateEntityAction | _ValidateEntityAction |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x10011940 | 674B | MoveSlotEntry | _MoveSlotEntry |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x10011BF0 | 1040B | gv_ExAllocGraveyardWorker | _gv_ExAllocGraveyardWorker |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/friedhof_logic.c |
-| 0x10012000 | 728B | LoadGraveyardData | _LoadGraveyardData |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/loadsave/loadsave.c |
-| 0x100122E0 | 346B | InitNewDynastyEntity | _InitNewDynastyEntity |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/loadsave/loadsave.c |
+| 0x10011940 | 674B | MoveSlotEntry | _MoveSlotEntry |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x10011BF0 | 1040B | gv_ExAllocGraveyardWorker | _gv_ExAllocGraveyardWorker |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/friedhof_logic.c |
+| 0x10012000 | 728B | LoadGraveyardData | _LoadGraveyardData |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/loadsave/loadsave.c |
+| 0x100122E0 | 346B | InitNewDynastyEntity | _InitNewDynastyEntity |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/loadsave/loadsave.c |
 | 0x10012440 | 37B | ReadVfsDataChecked | _ReadVfsDataChecked |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/loadsave/loadsave.c |
 | 0x10012470 | 857B | LoadSavegameHeader | _LoadSavegameHeader |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/loadsave/loadsave.c |
-| 0x100127D0 | 282B | LoadExistingEntities | _LoadExistingEntities |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/loadsave/loadsave.c |
-| 0x100128F0 | 1463B | LoadBuildingEntityState | _LoadBuildingEntityState |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/loadsave/loadsave.c |
-| 0x10012EB0 | 884B | LoadDynamicEntities | _LoadDynamicEntities |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/loadsave/loadsave.c |
-| 0x10013230 | 2268B | ls_LoadEntities | _ls_LoadEntities |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/loadsave/loadsave.c |
-| 0x10013B10 | 1361B | LoadTownData | _LoadTownData |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/loadsave/loadsave.c |
-| 0x10014070 | 491B | ls_ID2Ptr | _ls_ID2Ptr |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/loadsave/loadsave.c |
-| 0x10014260 | 892B | srv_RecvGame | _srv_RecvGame |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/loadsave/loadsave.c |
+| 0x100127D0 | 282B | LoadExistingEntities | _LoadExistingEntities |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/loadsave/loadsave.c |
+| 0x100128F0 | 1463B | LoadBuildingEntityState | _LoadBuildingEntityState |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/loadsave/loadsave.c |
+| 0x10012EB0 | 884B | LoadDynamicEntities | _LoadDynamicEntities |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/loadsave/loadsave.c |
+| 0x10013230 | 2268B | ls_LoadEntities | _ls_LoadEntities |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/loadsave/loadsave.c |
+| 0x10013B10 | 1361B | LoadTownData | _LoadTownData |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/loadsave/loadsave.c |
+| 0x10014070 | 491B | ls_ID2Ptr | _ls_ID2Ptr |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/loadsave/loadsave.c |
+| 0x10014260 | 892B | srv_RecvGame | _srv_RecvGame |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/loadsave/loadsave.c |
 | 0x100145E0 | 304B | lb_ExPlayerlist | _lb_ExPlayerlist |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/lobbycommands.c |
-| 0x100146C0 | 236B | SendLobbyConfig | _SendLobbyConfig |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/lobbycommands.c |
-| 0x100147B0 | 670B | HandleLobbyCommands | _HandleLobbyCommands |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/lobbycommands.c |
-| 0x10014A50 | 157B | broadcast_state_change | _broadcast_state_change |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/lobbycommands.c |
-| 0x10014AF0 | 247B | HandleDataTransferCommand | _HandleDataTransferCommand |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/lobbycommands.c |
-| 0x10014BF0 | 163B | HandleEntitySync | _HandleEntitySync |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/lobbycommands.c |
-| 0x10014CA0 | 265B | cm_RouteCommand | _cm_RouteCommand |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/command/lobbycommands.c |
+| 0x100146C0 | 236B | SendLobbyConfig | _SendLobbyConfig |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/lobbycommands.c |
+| 0x100147B0 | 670B | HandleLobbyCommands | _HandleLobbyCommands |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/lobbycommands.c |
+| 0x10014A50 | 157B | broadcast_state_change | _broadcast_state_change |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/lobbycommands.c |
+| 0x10014AF0 | 247B | HandleDataTransferCommand | _HandleDataTransferCommand |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/lobbycommands.c |
+| 0x10014BF0 | 163B | HandleEntitySync | _HandleEntitySync |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/lobbycommands.c |
+| 0x10014CA0 | 265B | cm_RouteCommand | _cm_RouteCommand |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/command/lobbycommands.c |
 | 0x10014DB0 | 267B | lb_ExLobbyServerCommand | _lb_ExLobbyServerCommand |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/lobbycommands.c |
 | 0x10014EE0 | 69B | SearchRecordTable | _SearchRecordTable |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/command/lobbycommands.c |
 | 0x10014F30 | 74B | FindRecord | _FindRecord |  | FUNCTION/EXACT | server.dll/DieGildeAddOn/auxillary/plant.c |
 | 0x10014F80 | 103B | find_zone_record | _find_zone_record |  | FUNCTION/EXACT | server.dll/DieGildeAddOn/auxillary/plant.c |
-| 0x10014FF0 | 175B | CheckZoneAvailability | _CheckZoneAvailability |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/auxillary/plant.c |
-| 0x100150A0 | 257B | plt_SetPlantMap | _plt_SetPlantMap |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/auxillary/plant.c |
+| 0x10014FF0 | 175B | CheckZoneAvailability | _CheckZoneAvailability |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/auxillary/plant.c |
+| 0x100150A0 | 257B | plt_SetPlantMap | _plt_SetPlantMap |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/auxillary/plant.c |
 | 0x100151B0 | 41B | table_lookup | _table_lookup |  | FUNCTION/EXACT | server.dll/DieGildeAddOn/auxillary/plant.c |
-| 0x100151E0 | 535B | FindAndMatchParents | _FindAndMatchParents |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/sim.c |
+| 0x100151E0 | 535B | FindAndMatchParents | _FindAndMatchParents |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/sim.c |
 | 0x10015400 | 83B | priority_update | _priority_update |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/sim.c |
-| 0x10015460 | 145B | StartEntityQueryByType | _StartEntityQueryByType |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/sim.c |
+| 0x10015460 | 145B | StartEntityQueryByType | _StartEntityQueryByType |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/sim.c |
 | 0x10015500 | 180B | sim_CreateCitizen | _sim_CreateCitizen |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/sim.c |
-| 0x100155C0 | 197B | AdvanceGameClock | _AdvanceGameClock |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/sim.c |
+| 0x100155C0 | 197B | AdvanceGameClock | _AdvanceGameClock |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/sim.c |
 | 0x10015690 | 41B | SetSyncParams | _SetSyncParams |  | FUNCTION/EXACT | server.dll/DieGildeAddOn/game/sim.c |
-| 0x100156C0 | 642B | gm_InitObjektHersteller | _gm_InitObjektHersteller |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10015950 | 861B | Open | _Open |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x100156C0 | 642B | gm_InitObjektHersteller | _gm_InitObjektHersteller |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10015950 | 861B | Open | _Open |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10015CB0 | 57B | reset_all_entities | _reset_all_entities |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10015CF0 | 194B | CleanupObjectEntities | _CleanupObjectEntities |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10015CF0 | 194B | CleanupObjectEntities | _CleanupObjectEntities |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10015DC0 | 55B | FindRecordById | _FindRecordById |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10015E00 | 135B | cleanup_all_entities | _cleanup_all_entities |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10015E90 | 211B | ResolveEntityById | _ResolveEntityById |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10015F70 | 714B | RefreshMarketAvailability | _RefreshMarketAvailability |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10016240 | 72B | FindSlotById | _FindSlotById |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10016290 | 464B | NextEntityQueryMatch | _NextEntityQueryMatch |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10016460 | 320B | StartEntityQuery | _StartEntityQuery |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10015E90 | 211B | ResolveEntityById | _ResolveEntityById |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10015F70 | 714B | RefreshMarketAvailability | _RefreshMarketAvailability |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10016240 | 72B | FindSlotById | _FindSlotById |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10016290 | 464B | NextEntityQueryMatch | _NextEntityQueryMatch |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10016460 | 320B | StartEntityQuery | _StartEntityQuery |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x100165A0 | 37B | AllocateObjectSlot | _AllocateObjectSlot |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x100165D0 | 155B | RemoveObjectByType | _RemoveObjectByType |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x100165D0 | 155B | RemoveObjectByType | _RemoveObjectByType |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10016670 | 1B | noop_ret2 | _noop_ret2 |  | FUNCTION/EXACT | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10016680 | 139B | RemoveLinkedNodeById | _RemoveLinkedNodeById |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10016680 | 139B | RemoveLinkedNodeById | _RemoveLinkedNodeById |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10016710 | 66B | FreeObjectListRecursive | _FreeObjectListRecursive |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10016760 | 1392B | AllocGameObject | _AllocGameObject |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10016760 | 1392B | AllocGameObject | _AllocGameObject |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10016CD0 | 272B | AddOrAccumulateObject | _AddOrAccumulateObject |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10016DE0 | 186B | SubObjekt | _SubObjekt |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10016EA0 | 211B | SubtractObjectAmountNoKill | _SubtractObjectAmountNoKill |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10016F80 | 346B | FindNextFilteredEntity | _FindNextFilteredEntity |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x100170E0 | 267B | StartFilteredEntitySearch | _StartFilteredEntitySearch |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10016EA0 | 211B | SubtractObjectAmountNoKill | _SubtractObjectAmountNoKill |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10016F80 | 346B | FindNextFilteredEntity | _FindNextFilteredEntity |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x100170E0 | 267B | StartFilteredEntitySearch | _StartFilteredEntitySearch |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10017210 | 39B | search_struct | _search_struct |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10017240 | 240B | CleanupBuildingEntity | _CleanupBuildingEntity |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10017330 | 207B | gm_AllocBuildingDefaults | _gm_AllocBuildingDefaults |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10017400 | 202B | SetBuildingWorkerLimits | _SetBuildingWorkerLimits |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x100174D0 | 1088B | AllocGebaeude | _AllocGebaeude |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10017400 | 202B | SetBuildingWorkerLimits | _SetBuildingWorkerLimits |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x100174D0 | 1088B | AllocGebaeude | _AllocGebaeude |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10017910 | 145B | SetupEntityQuery | _SetupEntityQuery |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x100179B0 | 192B | GetBuildingTypeCategory | _GetBuildingTypeCategory |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10017A70 | 62B | search_table_67 | _search_table_67 |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
@@ -237,33 +237,33 @@ Coverage: 92.6% of .text section (136577/147456 bytes)
 | 0x10017F30 | 35B | RemoveObjectWrapper | _RemoveObjectWrapper |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10017F60 | 36B | RemoveEntityLink | _RemoveEntityLink |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10017F90 | 23B | InitEntityIfValid | _InitEntityIfValid |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10017FB0 | 278B | DeallocEntity | _DeallocEntity |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10017FB0 | 278B | DeallocEntity | _DeallocEntity |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x100180D0 | 81B | InitEntitySlots | _InitEntitySlots |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10018130 | 32B | is_in_range | _is_in_range |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10018150 | 70B | EntityClassCheck | _EntityClassCheck |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x100181A0 | 87B | CheckStatLevel | _CheckStatLevel |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10018200 | 304B | MapEntityStatRange | _MapEntityStatRange |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10018330 | 276B | GetOppositeStatIndex | _GetOppositeStatIndex |  | FUNCTION/EXACT | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10018450 | 78B | RandomStatModifier | _RandomStatModifier |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10018450 | 78B | RandomStatModifier | _RandomStatModifier |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x100184A0 | 56B | LookupEntityRecordById | _LookupEntityRecordById |  | FUNCTION/EXACT | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x100184E0 | 66B | GetEntityTableEntry | _GetEntityTableEntry |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10018530 | 800B | ChangePlayerIdentityImpl | _ChangePlayerIdentityImpl |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10018850 | 3689B | CreateEntityFromParents | _CreateEntityFromParents |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10018530 | 800B | ChangePlayerIdentityImpl | _ChangePlayerIdentityImpl |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10018850 | 3689B | CreateEntityFromParents | _CreateEntityFromParents |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x100196C0 | 81B | QueryEntitySum | _QueryEntitySum |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10019720 | 396B | CalculateProductionValue | _CalculateProductionValue |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x100198B0 | 355B | SumBuildingProductionValues | _SumBuildingProductionValues |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10019720 | 396B | CalculateProductionValue | _CalculateProductionValue |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x100198B0 | 355B | SumBuildingProductionValues | _SumBuildingProductionValues |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10019A20 | 74B | accumulate_typed2 | _accumulate_typed2 |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10019A70 | 102B | EntityQuerySum | _EntityQuerySum |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10019AE0 | 82B | ResolveParentEntity | _ResolveParentEntity |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x10019B40 | 62B | GetEntityType | _GetEntityType |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10019B80 | 124B | entity_accumulate | _entity_accumulate |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10019BE0 | 83B | WalkEntityChain | _WalkEntityChain |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10019C60 | 48B | get_msg_field | _get_msg_field |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10019CD0 | 98B | FindEntityByOwner | _FindEntityByOwner |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10019D30 | 407B | KannObjektHergestellt | _KannObjektHergestellt |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x10019ED0 | 395B | CheckInventoryCapacity | _CheckInventoryCapacity |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10019B80 | 124B | entity_accumulate | _entity_accumulate |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10019BE0 | 83B | WalkEntityChain | _WalkEntityChain |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10019C60 | 48B | get_msg_field | _get_msg_field |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10019CD0 | 98B | FindEntityByOwner | _FindEntityByOwner |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10019D30 | 407B | KannObjektHergestellt | _KannObjektHergestellt |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x10019ED0 | 395B | CheckInventoryCapacity | _CheckInventoryCapacity |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x1001A060 | 97B | entity_set_field | _entity_set_field |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
-| 0x1001A0D0 | 54B | random_mod | _random_mod |  | FUNCTION/MATCHING | server.dll/DieGildeAddOn/game/spiel.c |
+| 0x1001A0D0 | 54B | random_mod | _random_mod |  | FUNCTION/NEAR_MATCH | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x1001A0F0 | 22B | RandomFloat01 | _RandomFloat01 |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 | 0x1001A110 | 48B | RandomQuadratic | _RandomQuadratic |  | FUNCTION/RELOC | server.dll/DieGildeAddOn/game/spiel.c |
 

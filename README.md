@@ -11,15 +11,15 @@ Uses the [rebrew](../rebrew/) toolchain for compiler-in-the-loop decompilation m
 uv sync
 
 # All rebrew CLI tools work from this directory:
-rebrew next --stats              # overall progress
-rebrew next --origin GAME -n 10  # next GAME functions to tackle
+rebrew todo --json               # prioritized action items
+rebrew todo -c start-function --json  # only new functions to start
 ```
 
 ## Decompilation Workflow
 
 ```bash
 # 1. Find a function to work on
-rebrew next --origin GAME -n 10
+rebrew todo --json
 
 # 2. Generate a skeleton .c file
 rebrew skeleton 0x10003DA0
@@ -29,15 +29,15 @@ rebrew skeleton 0x10003DA0
 #    - No for(int i=...) — declare int i; separately
 #    - No // comments (use /* */)
 
-# 4. Test your implementation
+# 4. Test your implementation (auto-updates STATUS)
 rebrew test src/server.dll/my_func.c
 
 # 5. If near-miss, check the diff and try the GA
-rebrew match -d src/server.dll/my_func.c     # byte diff
-rebrew match src/server.dll/my_func.c -g 200 -p 64 -j 16  # GA search
+rebrew diff src/server.dll/my_func.c --mm   # structural diffs only
+rebrew match src/server.dll/my_func.c --generations 200 --pop-size 64 -j 16  # GA search
 
-# 6. Promote: test + auto-update STATUS annotation
-rebrew promote src/server.dll/my_func.c
+# 6. Single-file flag sweep
+rebrew match src/server.dll/my_func.c --flag-sweep-only
 ```
 
 ## Compiler Flags by Origin

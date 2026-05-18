@@ -3,6 +3,7 @@ name = "Europa 1400: The Guild"
 jobs = 8
 db_dir = "db"
 output_dir = "output"
+default_target = "server.dll"
 
 [targets."server.dll"]
 ghidra_program_path = "/server.dll"
@@ -13,24 +14,11 @@ marker = "SERVER"
 reversed_dir = "src/server.dll"
 function_list = "src/server.dll/functions.txt"
 bin_dir = "bin/server.dll"
-origins = ["GAME", "ZLIB", "MSVCRT"]
-game_range_end = 0x10019000
 iat_thunks = [
     0x1001A160, 0x1001A166, 0x1001A16C, 0x1001A172,
     0x1001A178, 0x1001A17E, 0x1001A184, 0x10023840,
 ]
 dll_exports = { 0x10009320 = "Init", 0x10009350 = "Exit" }
-zlib_vas = [
-    0x10001000, 0x10001330, 0x10001530, 0x10001860, 0x10001890,
-    0x100057C0, 0x100058D0, 0x10004BC0, 0x10005390, 0x100015B0,
-    0x10005D00, 0x10005DB0, 0x10006280, 0x10006EC0, 0x10006FB0,
-    0x10007050,     0x100092E0, 0x10009300,
-    0x10003960,
-]
-
-[targets."server.dll".cflags_presets]
-ZLIB = "/O3"
-NEW_PRESET = "/O0"
 
 [compiler]
 profile = "msvc6"
