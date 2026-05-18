@@ -1318,7 +1318,7 @@ void __cdecl list_unlink_relink(char* ctx, char* node)
 }
 
 /* Processes all queued commands in order. Dequeues each
- * command, dispatches to the appropriate Chk*/Ex* handler
+ * command, dispatches to the appropriate Chk/Ex handler
  * pair, and writes response data back to clients. */
 
 // FUNCTION: SERVER 0x1000aac0
