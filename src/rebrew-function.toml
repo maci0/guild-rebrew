@@ -795,8 +795,7 @@ analysis = "ls_LoadSavegameHeader: Reads versioned savegame header from VFS stre
 
 ["SERVER.0x100127d0"]
 size = 282
-status = "STUB"
-blocker = "instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+status = "RELOC"
 
 ["SERVER.0x100128f0"]
 size = 1463
@@ -832,7 +831,7 @@ blocker = "comparison direction swap, instruction folding (lea vs mov), jump con
 
 ["SERVER.0x10014260"]
 size = 892
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker = "comparison direction swap, jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 blocker_delta = 533
 ghidra = "RecvGameSavegame"
@@ -1027,7 +1026,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "NEAR_MATCHING"
+status = "STUB"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]

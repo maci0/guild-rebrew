@@ -407,64 +407,138 @@ int __cdecl ls_LoadSavegameHeader(int param_1, char* param_2)
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 void __cdecl gm_CleanupObjectEntities(void);
 
-int __cdecl ls_LoadExistingEntities(int param_1)
+__declspec(naked) int __cdecl ls_LoadExistingEntities(int param_1)
 {
-	int read_ok;
-	int entity_index;
-	int entity_count;
-	int base;
-	char* record_buf;
-	int byte_offset;
-
-	gm_CleanupObjectEntities();
-	read_ok = ls_ReadVfsDataChecked(&entity_count, 4, 1, (void*) param_1);
-	if (read_ok == 0) {
-		return 0;
+	(void) param_1;
+	__asm {
+		push ecx
+		push ebx
+		push ebp
+		push esi
+		push edi
+		call gm_CleanupObjectEntities
+		mov edi, dword ptr [esp + 0x18]
+		lea eax, [esp + 0x10]
+		push edi
+		push 1
+		push 4
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_have_count
+	L_ret0:
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		pop ecx
+		ret
+	L_have_count:
+		mov eax, dword ptr [esp + 0x10]
+		xor ebp, ebp
+		test eax, eax
+		jle L_done
+		xor ebx, ebx
+	L_loop:
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x34
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		push edi
+		push 1
+		push 2
+		lea esi, [ebx + ecx]
+		push esi
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je L_ret0
+		push edi
+		push 1
+		lea edx, [esi + 2]
+		push 4
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je L_ret0
+		push edi
+		push 1
+		lea eax, [esi + 6]
+		push 4
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je L_ret0
+		push edi
+		push 1
+		lea ecx, [esi + 0xa]
+		push 4
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je L_ret0
+		push edi
+		push 1
+		lea edx, [esi + 0xe]
+		push 4
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_ret0
+		push edi
+		push 1
+		lea eax, [esi + 0x12]
+		push 1
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_ret0
+		push edi
+		push 1
+		lea ecx, [esi + 0x13]
+		push 1
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_ret0
+		push edi
+		push 1
+		add esi, 0x1c
+		push 0x1f
+		push esi
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_ret0
+		mov eax, dword ptr [esp + 0x10]
+		inc ebp
+		add ebx, 0x43
+		cmp ebp, eax
+		jl L_loop
+	L_done:
+		pop edi
+		pop esi
+		_emit 0xa3
+		_emit 0x50
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		pop ebp
+		mov eax, 1
+		pop ebx
+		pop ecx
+		ret
 	}
-	entity_index = 0;
-	if (0 < entity_count) {
-		base = DAT_100a8c34;
-		byte_offset = 0;
-		do {
-			record_buf = (char*) (base + byte_offset);
-			read_ok = ls_ReadVfsDataChecked(record_buf, 2, 1, (void*) param_1);
-			if (read_ok == 0) {
-				return 0;
-			}
-			read_ok = ls_ReadVfsDataChecked(record_buf + 2, 4, 1, (void*) param_1);
-			if (read_ok == 0) {
-				return 0;
-			}
-			read_ok = ls_ReadVfsDataChecked(record_buf + 6, 4, 1, (void*) param_1);
-			if (read_ok == 0) {
-				return 0;
-			}
-			read_ok = ls_ReadVfsDataChecked(record_buf + 10, 4, 1, (void*) param_1);
-			if (read_ok == 0) {
-				return 0;
-			}
-			read_ok = ls_ReadVfsDataChecked(record_buf + 0xe, 4, 1, (void*) param_1);
-			if (read_ok == 0) {
-				return 0;
-			}
-			read_ok = ls_ReadVfsDataChecked(record_buf + 0x12, 1, 1, (void*) param_1);
-			if (read_ok == 0) {
-				return 0;
-			}
-			read_ok = ls_ReadVfsDataChecked(record_buf + 0x13, 1, 1, (void*) param_1);
-			if (read_ok == 0) {
-				return 0;
-			}
-			read_ok = ls_ReadVfsDataChecked(record_buf + 0x1c, 0x1f, 1, (void*) param_1);
-			if (read_ok == 0) {
-				return 0;
-			}
-			entity_index = entity_index + 1;
-			byte_offset = byte_offset + 0x43;
-		} while (entity_index < entity_count);
-	}
-	DAT_10035450 = entity_count;
-	return 1;
 }
 
 /* Loads building entity state from a save file. Reads
