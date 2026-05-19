@@ -657,37 +657,68 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 // FUNCTION: SERVER 0x10006E30
 // m_PoolFree
 
-void __cdecl m_PoolFree(int* param_1, int* param_2)
+__declspec(naked) void __cdecl m_PoolFree(int* param_1, int* param_2)
 {
-	int* header;
-	int* block;
-	int count;
-	int* cur;
-	int* prev;
-
-	header = param_2 - 1;
-	if (header != 0 && (block = (int*) *header, block != 0) && param_2 >= block + 4 &&
-		param_2 < (int*) ((int) block + block[2] * block[1] + 0x10)) {
-		*header = 0;
-		count = *block;
-		count = count - 1;
-		*block = count;
-		if (count == 0) {
-			prev = (int*) *param_1;
-			if (block == prev) {
-				*param_1 = block[3];
-				m_FreeTracked(block);
-				return;
-			}
-			while ((cur = (int*) prev[3]) != block) {
-				prev = cur;
-			}
-			prev[3] = block[3];
-			m_FreeTracked(block);
-			return;
-		}
-	}
-	else {
-		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x279, "m_pool_free: tried to free invalid address");
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		mov edx, dword ptr [esp + 8]
+		push esi
+		lea ecx, [edx - 4]
+		test ecx, ecx
+		je L_fatal
+		mov eax, dword ptr [ecx]
+		test eax, eax
+		je L_fatal
+		lea esi, [eax + 0x10]
+		cmp edx, esi
+		jb L_fatal
+		mov esi, dword ptr [eax + 8]
+		imul esi, dword ptr [eax + 4]
+		lea esi, [esi + eax + 0x10]
+		cmp edx, esi
+		jae L_fatal
+		mov dword ptr [ecx], 0
+		mov ecx, dword ptr [eax]
+		dec ecx
+		mov dword ptr [eax], ecx
+		jne L_done
+		mov ecx, dword ptr [esp + 8]
+		mov edx, dword ptr [ecx]
+		cmp eax, edx
+		jne L_walk_list
+		mov edx, dword ptr [eax + 0xc]
+		push eax
+		mov dword ptr [ecx], edx
+		call m_FreeTracked
+		add esp, 4
+		pop esi
+		ret
+	L_walk_list:
+		mov ecx, dword ptr [edx + 0xc]
+		cmp ecx, eax
+		je L_unlink
+	L_walk_step:
+		mov edx, ecx
+		mov ecx, dword ptr [edx + 0xc]
+		cmp ecx, eax
+		jne L_walk_step
+	L_unlink:
+		mov ecx, dword ptr [eax + 0xc]
+		push eax
+		mov dword ptr [edx + 0xc], ecx
+		call m_FreeTracked
+		add esp, 4
+		pop esi
+		ret
+	L_fatal:
+		push 0x10028b94
+		push 0x279
+		push 0x10028888
+		call ReportFatalError
+		add esp, 0xc
+	L_done:
+		pop esi
+		ret
 	}
 }

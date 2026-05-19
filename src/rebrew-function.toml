@@ -128,7 +128,7 @@ blocker_delta = 265
 
 ["SERVER.0x10006e30"]
 size = 137
-status = "NEAR_MATCHING"
+status = "RELOC"
 
 ["SERVER.0x10008a50"]
 size = 53
