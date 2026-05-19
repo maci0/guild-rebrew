@@ -527,8 +527,7 @@ blocker_delta = 226
 
 ["SERVER.0x1000e9c0"]
 size = 214
-status = "STUB"
-blocker = "register allocation - target uses only edi, compiler allocates esi+edi for saved param_1 and field writeback address"
+status = "RELOC"
 
 ["SERVER.0x1000eaa0"]
 size = 208
