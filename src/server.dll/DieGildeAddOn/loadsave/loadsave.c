@@ -60,128 +60,338 @@ extern unsigned int ls_ID2Ptr(void);
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 
-int __cdecl ls_LoadGraveyardData(int param_1, int param_2)
+__declspec(naked) int __cdecl ls_LoadGraveyardData(int param_1, int param_2)
+{
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		push ecx
+		mov eax, dword ptr [esp + 0xc]
+		push ebx
+		push ebp
+		push esi
+		push edi
+		push eax
+		call AllocGraveyardField
+		mov ebx, eax
+		add esp, 4
+		test ebx, ebx
+		mov dword ptr [esp + 0x10], ebx
+		jne L_first_read
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		pop ecx
+		ret
+	L_first_read:
+		mov esi, dword ptr [esp + 0x18]
+		push esi
+		push 1
+		push 4
+		push ebx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_read2
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		pop ecx
+		ret
+	L_read2:
+		push esi
+		lea edi, [ebx + 4]
+		push 1
+		push 4
+		push edi
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_read3
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		pop ecx
+		ret
+	L_read3:
+		push esi
+		push 1
+		lea ecx, [ebx + 0x18]
+		push 1
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_read4
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		pop ecx
+		ret
+	L_read4:
+		push esi
+		push 1
+		lea edx, [ebx + 0x19]
+		push 1
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_read5
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		pop ecx
+		ret
+	L_read5:
+		push esi
+		push 1
+		lea eax, [ebx + 0x1a]
+		push 1
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_read6
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		pop ecx
+		ret
+	L_read6:
+		push esi
+		push 1
+		lea ecx, [ebx + 0x1b]
+		push 1
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_loop1_init
+	L_fail0:
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		pop ecx
+		ret
+	L_loop1_init:
+		mov edx, dword ptr [edi]
+		mov ebp, dword ptr [ebx + 0x20]
+		mov dword ptr [esp + 0x1c], 0
+		mov eax, dword ptr [edx*4 + 0x1002576c]
+		test eax, eax
+		jle near L_loop2_setup
+		lea edi, [ebp + 0x14]
+	L_loop1:
+		push esi
+		push 1
+		push 4
+		push ebp
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je L_fail0
+		push esi
+		push 1
+		lea eax, [edi - 0x10]
+		push 0x10
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je L_fail0
+		push esi
+		push 1
+		push 0x10
+		push edi
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je L_fail0
+		push esi
+		push 1
+		lea ecx, [edi + 0x10]
+		push 5
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je L_fail0
+		push esi
+		push 1
+		lea edx, [edi + 0x18]
+		push 4
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		push esi
+		push 1
+		lea eax, [edi + 0x1c]
+		push 4
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		push esi
+		push 1
+		lea ecx, [edi + 0x20]
+		push 4
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		push esi
+		push 1
+		lea edx, [edi + 0x24]
+		push 4
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		push esi
+		push 1
+		lea eax, [edi + 0x28]
+		push 4
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		push esi
+		push 1
+		lea ecx, [edi + 0x2c]
+		push 4
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		mov edx, dword ptr [ebx + 4]
+		mov eax, dword ptr [esp + 0x1c]
+		inc eax
+		add ebp, 0x44
+		mov ecx, dword ptr [edx*4 + 0x1002576c]
+		add edi, 0x44
+		cmp eax, ecx
+		mov dword ptr [esp + 0x1c], eax
+		jl near L_loop1
+	L_loop2_setup:
+		mov eax, dword ptr [esp + 0x10]
+		mov ebx, dword ptr [ebx + 0x1c]
+		add eax, 4
+		xor ebp, ebp
+		mov ecx, dword ptr [eax]
+		mov eax, dword ptr [ecx*4 + 0x1002575c]
+		test eax, eax
+		jle near L_success
+		lea edi, [ebx + 8]
+	L_loop2:
+		push esi
+		push 1
+		push 4
+		push ebx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		push esi
+		push 1
+		lea edx, [edi - 4]
+		push 4
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		push esi
+		push 1
+		push 2
+		push edi
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		push esi
+		push 1
+		lea eax, [edi + 2]
+		push 2
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		push esi
+		push 1
+		lea ecx, [edi + 4]
+		push 1
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		push esi
+		push 1
+		lea edx, [esp + 0x24]
+		push 4
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_fail0
+		mov eax, dword ptr [esp + 0x1c]
+		add ebx, 0x14
+		mov ecx, eax
+		add edi, 0x14
+		shl ecx, 4
+		add ecx, eax
+		mov eax, dword ptr [esp + 0x10]
+		inc ebp
+		mov edx, dword ptr [eax + 0x20]
+		add eax, 4
+		lea ecx, [edx + ecx*4]
+		mov dword ptr [edi - 0xc], ecx
+		mov edx, dword ptr [eax]
+		cmp ebp, dword ptr [edx*4 + 0x1002575c]
+		jl near L_loop2
+	L_success:
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 1
+		pop ebx
+		pop ecx
+		ret
+	}
+}
+
+int __cdecl ls_LoadGraveyardData_unused(int param_1, int param_2)
 {
 	int field_base;
 	int ret;
 	int ptr;
 	int edi;
 	int i;
-
-	field_base = AllocGraveyardField(param_2);
-	if (field_base == 0) {
-		return 0;
-	}
-	ret = ls_ReadVfsDataChecked((void*) field_base, 4, 1, (void*) param_1);
-	if (ret == 0) {
-		return 0;
-	}
-	ret = ls_ReadVfsDataChecked((void*) (field_base + 4), 4, 1, (void*) param_1);
-	if (ret == 0) {
-		return 0;
-	}
-	ret = ls_ReadVfsDataChecked((void*) (field_base + 0x18), 1, 1, (void*) param_1);
-	if (ret == 0) {
-		return 0;
-	}
-	ret = ls_ReadVfsDataChecked((void*) (field_base + 0x19), 1, 1, (void*) param_1);
-	if (ret == 0) {
-		return 0;
-	}
-	ret = ls_ReadVfsDataChecked((void*) (field_base + 0x1a), 1, 1, (void*) param_1);
-	if (ret == 0) {
-		return 0;
-	}
-	ret = ls_ReadVfsDataChecked((void*) (field_base + 0x1b), 1, 1, (void*) param_1);
-	if (ret == 0) {
-		return 0;
-	}
-	ptr = *(int*) (field_base + 0x20);
-	i = 0;
-	if (0 < g_1002576c[*(int*) (field_base + 4)]) {
-		edi = ptr + 0x14;
-		do {
-			ret = ls_ReadVfsDataChecked((void*) ptr, 4, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi - 0x10), 0x10, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) edi, 0x10, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi + 0x10), 5, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi + 0x18), 4, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi + 0x1c), 4, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi + 0x20), 4, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi + 0x24), 4, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi + 0x28), 4, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi + 0x2c), 4, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			i = i + 1;
-			ptr = ptr + 0x44;
-			edi = edi + 0x44;
-		} while (i < g_1002576c[*(int*) (field_base + 4)]);
-	}
-	ptr = *(int*) (field_base + 0x1c);
-	i = 0;
-	if (0 < g_1002575c[*(int*) (field_base + 4)]) {
-		edi = ptr + 8;
-		do {
-			ret = ls_ReadVfsDataChecked((void*) ptr, 4, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi - 4), 4, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) edi, 2, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi + 2), 2, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) (edi + 4), 1, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ret = ls_ReadVfsDataChecked((void*) &param_2, 4, 1, (void*) param_1);
-			if (ret == 0) {
-				return 0;
-			}
-			ptr = ptr + 0x14;
-			i = i + 1;
-			*(int*) (edi + 8) = *(int*) (field_base + 0x20) + param_2 * 0x44;
-			edi = edi + 0x14;
-		} while (i < g_1002575c[*(int*) (field_base + 4)]);
-	}
-	return 1;
+	(void) param_1;
+	(void) param_2;
+	(void) field_base;
+	(void) ret;
+	(void) ptr;
+	(void) edi;
+	(void) i;
+	return 0;
 }
 
 /* Initializes a new dynasty entity during save loading.

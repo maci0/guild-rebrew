@@ -733,9 +733,7 @@ analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent b
 
 ["SERVER.0x10012000"]
 size = 728
-status = "STUB"
-blocker = "instruction folding (lea vs mov)"
-blocker_delta = 535
+status = "RELOC"
 
 ["SERVER.0x100122e0"]
 size = 346
