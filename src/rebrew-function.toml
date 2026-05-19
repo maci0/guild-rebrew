@@ -511,8 +511,7 @@ status = "RELOC"
 
 ["SERVER.0x1000eaa0"]
 size = 208
-status = "STUB"
-blocker = "param_1 reuse pattern (gm_ResolveEntityById writes through &param_1), switch dec chain offset (case 1 needs leading dec), register allocation (and edx,ecx vs and ecx,edx in case bodies)"
+status = "RELOC"
 
 ["SERVER.0x1000eb70"]
 size = 144

@@ -67,62 +67,96 @@ extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
  * on the command payload's mask and operation. */
 
 // FUNCTION: SERVER 0x1000eaa0
-int __cdecl cm_ExChangeBits(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExChangeBits(int param_1, char* param_2)
 {
-	int entity_id;
-	int ok;
-	void* primary;
-	void* secondary;
-	void* tertiary;
-	uint* p;
-	int size;
-	uchar bVal;
-	uint uVal;
-
-	entity_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
-	*(int*) (param_1 + 0x10) = entity_id;
-
-	ok = gm_ResolveEntityById(&primary, &secondary, &tertiary, entity_id);
-	if (ok == 0) {
-		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
-			0x340d,
-			s_cm_ExChangeBits___Invalid_Id_1002d114,
-			1
-		);
-		return 1;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		sub esp, 8
+		push esi
+		mov esi, dword ptr [esp + 0x10]
+		mov eax, dword ptr [esi + 0x10]
+		push eax
+		push esi
+		call gm_GetFieldByType
+		lea ecx, [esp + 0x10]
+		mov dword ptr [esi + 0x10], eax
+		push eax
+		lea edx, [esp + 0x10]
+		push ecx
+		lea eax, [esp + 0x20]
+		push edx
+		push eax
+		call gm_ResolveEntityById
+		add esp, 0x18
+		test eax, eax
+		jne L_resolved
+		push 1
+		push 0x1002d114
+		push 0x340d
+		push 0x1002c748
+		call LogMessageInternal
+		add esp, 0x10
+		mov eax, 1
+		pop esi
+		add esp, 8
+		ret
+	L_resolved:
+		mov eax, dword ptr [esp + 0x10]
+		test eax, eax
+		jne L_have_p
+		mov eax, dword ptr [esp + 4]
+		test eax, eax
+		jne L_have_p
+		mov eax, dword ptr [esp + 8]
+	L_have_p:
+		mov ecx, dword ptr [esi + 0x14]
+		add eax, ecx
+		mov ecx, dword ptr [esi + 0x18]
+		dec ecx
+		je L_size1
+		dec ecx
+		je L_size2
+		sub ecx, 2
+		jne L_done
+		mov ecx, dword ptr [esi + 0x20]
+		mov edx, dword ptr [eax]
+		not ecx
+		and edx, ecx
+		mov dword ptr [eax], edx
+		mov ecx, edx
+		mov edx, dword ptr [esi + 0x1c]
+		or edx, ecx
+		mov dword ptr [eax], edx
+		jmp L_done
+	L_size2:
+		mov cx, word ptr [esi + 0x20]
+		not cx
+		and word ptr [eax], cx
+		mov cx, word ptr [eax]
+		mov dx, word ptr [esi + 0x1c]
+		or dx, cx
+		mov word ptr [eax], dx
+		jmp L_done
+	L_size1:
+		mov cl, byte ptr [esi + 0x20]
+		mov dl, byte ptr [eax]
+		not cl
+		and dl, cl
+		mov byte ptr [eax], dl
+		mov cl, dl
+		mov dl, byte ptr [esi + 0x1c]
+		or dl, cl
+		mov byte ptr [eax], dl
+	L_done:
+		mov eax, dword ptr [esp + 0x14]
+		test eax, eax
+		je L_finish
+		mov byte ptr [eax], 1
+	L_finish:
+		xor eax, eax
+		pop esi
+		add esp, 8
+		ret
 	}
-
-	if (primary == (void*) 0) {
-		primary = secondary;
-		if (primary == (void*) 0) {
-			primary = tertiary;
-		}
-	}
-
-	p = (uint*) ((int) primary + *(int*) (param_1 + 0x14));
-	size = *(int*) (param_1 + 0x18);
-
-	switch (size) {
-	case 1:
-		bVal = *(uchar*) p & ~*(uchar*) (param_1 + 0x20);
-		*(uchar*) p = bVal;
-		*(uchar*) p = *(uchar*) (param_1 + 0x1c) | bVal;
-		break;
-	case 2:
-		*(ushort*) p = *(ushort*) p & ~*(ushort*) (param_1 + 0x20);
-		*(ushort*) p = *(ushort*) (param_1 + 0x1c) | *(ushort*) p;
-		break;
-	case 4:
-		uVal = *p & ~*(uint*) (param_1 + 0x20);
-		*p = uVal;
-		*p = *(uint*) (param_1 + 0x1c) | uVal;
-		break;
-	}
-
-	if (param_2 != (char*) 0) {
-		*param_2 = '\x01';
-	}
-
-	return 0;
 }
