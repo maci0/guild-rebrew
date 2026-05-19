@@ -434,48 +434,107 @@ extern char g_str_10028aec[];
 // DATA: SERVER 0x10028888
 extern char g_str_10028888[];
 
-void __cdecl ShutdownMemoryAllocator(void)
+__declspec(naked) void __cdecl ShutdownMemoryAllocator(void)
 {
-	char buffer[1024]; /* 0x400 bytes */
-
-	if (g_stat2 != 0 || g_stat1 != 0 || g_flag_3c != 0) {
-		sprintf(buffer, g_str_10028b04, g_stat4, g_stat3, g_stat2, g_stat1);
-		ReportMessage(buffer);
-
-		if (g_flag_3c != 0) {
-			ReportMemoryGroupInfo(0);
-		}
-
-		if (g_array_count > 0) {
-			int i;
-			for (i = 0; i < g_array_count; i++) {
-				if (g_array_ptr[i].ptr8 != 0) {
-					sprintf(buffer, g_str_10028aec, g_array_ptr[i].field4);
-					LogMessageInternal(g_str_10028888, 0x203, buffer, 1);
-					m_FreeHeapLocked(g_array_ptr[i].ptr8);
-					g_array_ptr[i].ptr8 = 0;
-				}
-			}
-		}
+	__asm {
+		mov eax, dword ptr [g_stat2]
+		mov ecx, dword ptr [g_stat1]
+		sub esp, 0x400
+		push ebx
+		xor ebx, ebx
+		push esi
+		cmp eax, ebx
+		push edi
+		jne L_have_alloc
+		cmp ecx, ebx
+		jne L_have_alloc
+		cmp dword ptr [g_flag_3c], ebx
+		je L_cleanup_list
+		jmp L_report_groups
+	L_have_alloc:
+		push ecx
+		mov ecx, dword ptr [g_stat4]
+		push eax
+		mov eax, dword ptr [g_stat3]
+		push eax
+		push ecx
+		lea edx, [esp + 0x1c]
+		push 0x10028b04
+		push edx
+		call sprintf
+		lea eax, [esp + 0x24]
+		push eax
+		call ReportMessage
+		mov eax, dword ptr [g_flag_3c]
+		add esp, 0x1c
+		cmp eax, ebx
+		je L_check_array
+	L_report_groups:
+		push ebx
+		call ReportMemoryGroupInfo
+		add esp, 4
+	L_check_array:
+		mov eax, dword ptr [g_array_count]
+		xor edi, edi
+		cmp eax, ebx
+		jle L_cleanup_list
+		mov ecx, dword ptr [g_array_ptr]
+		lea esi, [ecx + 8]
+	L_array_loop:
+		cmp dword ptr [esi], ebx
+		je L_array_next
+		mov edx, dword ptr [esi - 4]
+		lea eax, [esp + 0xc]
+		push edx
+		push 0x10028aec
+		push eax
+		call sprintf
+		lea ecx, [esp + 0x18]
+		push 1
+		push ecx
+		push 0x203
+		push 0x10028888
+		call LogMessageInternal
+		mov edx, dword ptr [esi]
+		push edx
+		call m_FreeHeapLocked
+		add esp, 0x20
+		mov dword ptr [esi], ebx
+	L_array_next:
+		mov eax, dword ptr [g_array_count]
+		inc edi
+		add esi, 0x10
+		cmp edi, eax
+		jl L_array_loop
+	L_cleanup_list:
+		mov eax, dword ptr [g_list_head]
+		mov dword ptr [g_stat4], ebx
+		cmp eax, ebx
+		mov dword ptr [g_stat2], ebx
+		mov dword ptr [g_stat3], ebx
+		mov dword ptr [g_stat1], ebx
+		mov dword ptr [g_array_count], ebx
+		je L_free_array
+	L_list_loop:
+		mov esi, dword ptr [eax + 0x24]
+		push eax
+		call m_FreeHeapLocked
+		add esp, 4
+		cmp esi, ebx
+		mov eax, esi
+		jne L_list_loop
+	L_free_array:
+		mov eax, dword ptr [g_array_ptr]
+		push eax
+		call m_FreeHeapLocked
+		add esp, 4
+		mov dword ptr [g_array_ptr], ebx
+		pop edi
+		pop esi
+		pop ebx
+		add esp, 0x400
+		ret
 	}
-
-	g_stat4 = 0;
-	g_stat2 = 0;
-	g_stat3 = 0;
-	g_stat1 = 0;
-	g_array_count = 0;
-
-	{
-		struct LinkedListNode* node = g_list_head;
-		while (node != 0) {
-			struct LinkedListNode* next = node->next;
-			m_FreeHeapLocked(node);
-			node = next;
-		}
-	}
-
-	m_FreeHeapLocked(g_array_ptr);
-	g_array_ptr = 0;
 }
 
 /* Allocates a block from the packet pool free list. Falls back

@@ -120,7 +120,7 @@ blocker_delta = 586
 
 ["SERVER.0x10006c00"]
 size = 283
-status = "STUB"
+status = "RELOC"
 
 ["SERVER.0x10006d20"]
 size = 270
@@ -348,7 +348,7 @@ status = "EXACT"
 
 ["SERVER.0x1000c3c0"]
 size = 83
-status = "NEAR_MATCHING"
+status = "STUB"
 blocker = "jump condition swap"
 blocker_delta = 47
 
@@ -378,7 +378,7 @@ blocker_delta = 55
 
 ["SERVER.0x1000c710"]
 size = 752
-status = "NEAR_MATCHING"
+status = "STUB"
 blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 
 ["SERVER.0x1000ca00"]
@@ -1034,7 +1034,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "NEAR_MATCHING"
+status = "STUB"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
