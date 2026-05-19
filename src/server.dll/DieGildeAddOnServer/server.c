@@ -200,14 +200,13 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 
 		if (connected_players == *(unsigned int*) 0x11764084) {
 			phase_complete = 1;
-			player_slot = (unsigned int*) 0x101deb00;
-			do {
+			for (player_slot = (unsigned int*) 0x101deb00; (char*) player_slot < (char*) 0x114ffe20;
+				player_slot = (unsigned int*) ((char*) player_slot + 0x264264)) {
 				if ((*player_slot != 0) && ((*player_slot & 0x800) == 0)) {
 					phase_complete = 0;
 					goto lobby_check_announce;
 				}
-				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-			} while ((char*) player_slot < (char*) 0x114ffe20);
+			}
 			LogMessageInternal((char*) 0x100298b0, 0x14e, (char*) 0x10029890, 1);
 		}
 
