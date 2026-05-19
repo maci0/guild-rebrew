@@ -1047,22 +1047,18 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 
 	g_101de55c = (int) realloc((void*) g_101de55c, g_101de454 * 0x60);
 
-	load_result = 0;
-	if (g_101de454 > 0) {
-		current_index = 0;
-		do {
-			if (!ls_ReadVfsDataChecked((void*) (current_index + g_101de55c), 0x40, 1, (void*) param_1)) {
-				return 0;
-			}
-			if (!ls_ReadVfsDataChecked((void*) (current_index + 0x40 + g_101de55c), 0x10, 1, (void*) param_1)) {
-				return 0;
-			}
-			if (!ls_ReadVfsDataChecked((void*) (current_index + 0x50 + g_101de55c), 0x10, 1, (void*) param_1)) {
-				return 0;
-			}
-			load_result++;
-			current_index += 0x60;
-		} while (load_result < g_101de454);
+	current_index = 0;
+	for (load_result = 0; load_result < g_101de454; load_result++) {
+		if (!ls_ReadVfsDataChecked((void*) (current_index + g_101de55c), 0x40, 1, (void*) param_1)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked((void*) (current_index + 0x40 + g_101de55c), 0x10, 1, (void*) param_1)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked((void*) (current_index + 0x50 + g_101de55c), 0x10, 1, (void*) param_1)) {
+			return 0;
+		}
+		current_index += 0x60;
 	}
 
 	return 1;
