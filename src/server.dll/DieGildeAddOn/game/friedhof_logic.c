@@ -1175,55 +1175,187 @@ unsigned int HireProductionWorker(int param_1)
 
 /* Auto-generated Ghidra decompilation */
 
-unsigned int ExtendProductionTime(unsigned int* param_1)
+__declspec(naked) unsigned int ExtendProductionTime(unsigned int* param_1)
 {
-	unsigned int* cmd_ptr_saved;
-	int slot_active_result;
-	int slot_entry_ptr;
-	unsigned int rand_coin_amount;
-	unsigned char* building_entity_ptr;
-
-	cmd_ptr_saved = param_1;
-	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(param_1 + 8));
-	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
-		((*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0) ==
-		 *(unsigned int*) 0x1003546c)) {
-		return 0xffffffff;
+	(void) param_1;
+	__asm {
+		push ecx
+		push esi
+		mov esi, dword ptr [esp + 0xc]
+		push edi
+		lea ecx, [esp + 8]
+		mov eax, dword ptr [esi + 8]
+		push eax
+		push 0
+		push 0
+		push ecx
+		call gm_ResolveEntityById
+		mov edx, dword ptr [esp + 0x18]
+		add esp, 0x10
+		test edx, edx
+		je near L_ret_neg1
+		mov ax, word ptr [edx + 0x27]
+		cmp ax, 0xffff
+		je near L_ret_neg1
+		and eax, 0xffff
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea eax, [eax + eax*8]
+		lea ecx, [eax*4 + 0x100358a0]
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		cmp ecx, eax
+		je near L_ret_neg1
+		xor ecx, ecx
+		_emit 0x8b
+		_emit 0x3d
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		mov cl, byte ptr [edx]
+		add edi, ecx
+		lea eax, [ecx + ecx*2]
+		shl eax, 4
+		add eax, ecx
+		lea eax, [eax + eax*2]
+		cmp byte ptr [edi + eax*4], 0x1d
+		je L_action_ok
+		pop edi
+		mov eax, 0xfffffffe
+		pop esi
+		pop ecx
+		ret
+	L_action_ok:
+		mov edi, dword ptr [edx + 0x65]
+		test edi, edi
+		jne L_have_slot
+		pop edi
+		mov eax, 0xfffffffd
+		pop esi
+		pop ecx
+		ret
+	L_have_slot:
+		mov ecx, dword ptr [esi + 0xc]
+		push ecx
+		push edi
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		jne L_slot_ok
+		pop edi
+		mov eax, 0xfffffffc
+		pop esi
+		pop ecx
+		ret
+	L_slot_ok:
+		mov edx, dword ptr [esi + 4]
+		lea eax, [esp + 0x10]
+		push edx
+		push eax
+		push 0
+		push 0
+		call gm_ResolveEntityById
+		mov eax, dword ptr [esp + 0x20]
+		add esp, 0x10
+		test eax, eax
+		jne L_have_p1
+		pop edi
+		mov eax, 0xfffffffa
+		pop esi
+		pop ecx
+		ret
+	L_have_p1:
+		mov cl, byte ptr [esi + 0x10]
+		mov edx, dword ptr [esi + 0xc]
+		push ecx
+		push edx
+		push edi
+		call gv_GetSlotEntry
+		add esp, 0xc
+		test eax, eax
+		jne L_have_entry
+		pop edi
+		mov eax, 0xfffffff9
+		pop esi
+		pop ecx
+		ret
+	L_have_entry:
+		mov cx, word ptr [esi + 0x11]
+		add word ptr [eax + 0xa], cx
+		mov eax, dword ptr [esi + 0x13]
+		test eax, eax
+		jle L_ret0
+		xor ecx, ecx
+		push eax
+		_emit 0x8a
+		_emit 0x0d
+		_emit 0x39
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		mov eax, ecx
+		shl eax, 6
+		sub eax, ecx
+		mov ecx, dword ptr [esp + 0x14]
+		lea edx, [eax + eax*2]
+		xor eax, eax
+		mov ax, word ptr [edx*4 + 0x100a8c94]
+		mov edx, dword ptr [ecx + 4]
+		push eax
+		push edx
+		call gm_SubObjektNoKill
+		fild dword ptr [esi + 0x13]
+		mov eax, dword ptr [esi + 0xc]
+		_emit 0xd8
+		_emit 0x0c
+		_emit 0x85
+		_emit 0x2c
+		_emit 0x57
+		_emit 0x02
+		_emit 0x10
+		call __ftol
+		xor ecx, ecx
+		push eax
+		_emit 0x8a
+		_emit 0x0d
+		_emit 0x39
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		xor edx, edx
+		mov eax, ecx
+		shl eax, 6
+		sub eax, ecx
+		lea ecx, [eax + eax*2]
+		xor eax, eax
+		mov dx, word ptr [ecx*4 + 0x100a8c94]
+		mov ecx, dword ptr [esp + 0x18]
+		push edx
+		mov ax, word ptr [ecx + 0x27]
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea edx, [eax + eax*8]
+		mov eax, dword ptr [edx*4 + 0x100358a4]
+		push eax
+		call gm_AddOrAccumulateObject
+		add esp, 0x18
+	L_ret0:
+		pop edi
+		xor eax, eax
+		pop esi
+		pop ecx
+		ret
+	L_ret_neg1:
+		pop edi
+		or eax, 0xffffffff
+		pop esi
+		pop ecx
+		ret
 	}
-	if (*(*(char**) 0x100a8c30 + *building_entity_ptr * 0x24d) != '\x1d') {
-		return 0xfffffffe;
-	}
-	slot_entry_ptr = *(unsigned int*) (building_entity_ptr + 0x65);
-	if (slot_entry_ptr == 0) {
-		return 0xfffffffd;
-	}
-	slot_active_result = gv_CheckSlotActive((char*) slot_entry_ptr, *(cmd_ptr_saved + 0xc));
-	if (slot_active_result == 0) {
-		return 0xfffffffc;
-	}
-	gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &param_1, *(cmd_ptr_saved + 4));
-	if (param_1 == 0) {
-		return 0xfffffffa;
-	}
-	slot_entry_ptr = gv_GetSlotEntry(slot_entry_ptr, *(cmd_ptr_saved + 0xc), (unsigned char) *(cmd_ptr_saved + 0x10));
-	if (slot_entry_ptr == 0) {
-		return 0xfffffff9;
-	}
-	*(unsigned int*) (slot_entry_ptr + 10) = *(unsigned int*) (slot_entry_ptr + 10) + *(cmd_ptr_saved + 0x11);
-	if (0 < (int) *(cmd_ptr_saved + 0x13)) {
-		gm_SubObjektNoKill(
-			*(param_1 + 4),
-			*(*(unsigned int**) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
-			*(cmd_ptr_saved + 0x13)
-		);
-		rand_coin_amount = __ftol();
-		gm_AddOrAccumulateObject(
-			*(*(unsigned int**) 0x100358a4 + *(unsigned short*) (building_entity_ptr + 0x27) * 0x21c),
-			*(*(unsigned int**) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
-			rand_coin_amount
-		);
-	}
-	return 0;
 }
 
 /* Replaces the worker assigned to a production slot.
