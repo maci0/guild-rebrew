@@ -3198,24 +3198,22 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 		} while (entity_slot_byte_offset < slot_scan_idx_or_capacity);
 		if (matched_production_record != 0 && *matched_production_record == *(int*) (param_1 + 0x11)) {
 			slot_scan_idx_or_capacity = 0;
-			slot_scan_ptr = (short*) &DAT_100358a0;
-			do {
+			for (slot_scan_ptr = (short*) &DAT_100358a0; slot_scan_ptr < (short*) 0x1009aca0;
+				slot_scan_ptr += 0x10e) {
 				if (*slot_scan_ptr == -1) {
 					break;
 				}
-				slot_scan_ptr = slot_scan_ptr + 0x10e;
 				slot_scan_idx_or_capacity = slot_scan_idx_or_capacity + 1;
-			} while (slot_scan_ptr < (short*) 0x1009aca0);
+			}
 			if (slot_scan_idx_or_capacity == 0x300) {
 				slot_scan_idx_or_capacity = 0;
-				entity_type_scan_ptr = (char*) 0x100358a2;
-				do {
+				for (entity_type_scan_ptr = (char*) 0x100358a2; entity_type_scan_ptr < (char*) 0x1009aca2;
+					entity_type_scan_ptr += 0x21c) {
 					if (*entity_type_scan_ptr == '\x0f') {
 						break;
 					}
-					entity_type_scan_ptr = entity_type_scan_ptr + 0x21c;
 					slot_scan_idx_or_capacity = slot_scan_idx_or_capacity + 1;
-				} while (entity_type_scan_ptr < (char*) 0x1009aca2);
+				}
 				if (slot_scan_idx_or_capacity == 0x300) {
 					LogMessageInternal(
 						"D:\\Develop\\DieGildeAddOn\\game\\friedhof_logic.c",
