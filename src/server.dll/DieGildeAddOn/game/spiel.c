@@ -1266,45 +1266,103 @@ char* __cdecl gm_AllocateObjectSlot(void)
 // FUNCTION: SERVER 0x100165d0
 // gm_RemoveObjectByType
 
-int __cdecl gm_RemoveObjectByType(char** objectListHead, unsigned int objectTypeId)
+__declspec(naked) int __cdecl gm_RemoveObjectByType(char** objectListHead, unsigned int objectTypeId)
 {
-	char* prevNode;
-	char* currentNode;
-	int nodeIndex;
-
-	prevNode = 0;
-	if (objectListHead == 0) {
-		return -1;
+	(void) objectListHead;
+	(void) objectTypeId;
+	__asm {
+		push ebx
+		push ebp
+		mov ebp, dword ptr [esp + 0xc]
+		xor ebx, ebx
+		push esi
+		push edi
+		test ebp, ebp
+		jne L_have_head
+		pop edi
+		pop esi
+		pop ebp
+		or eax, 0xffffffff
+		pop ebx
+		ret
+	L_have_head:
+		mov esi, dword ptr [ebp]
+		test esi, esi
+		jne L_have_node
+		pop edi
+		pop esi
+		pop ebp
+		or eax, 0xffffffff
+		pop ebx
+		ret
+	L_have_node:
+		mov eax, dword ptr [esp + 0x18]
+		xor edi, edi
+	L_loop:
+		xor ecx, ecx
+		mov cx, word ptr [esi]
+		cmp ecx, eax
+		je L_found
+		mov ebx, esi
+		mov esi, dword ptr [esi + 0x3f]
+		inc edi
+		test esi, esi
+		jne L_loop
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffe
+		pop ebx
+		ret
+	L_found:
+		test esi, esi
+		jne L_unlink
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffe
+		pop ebx
+		ret
+	L_unlink:
+		mov ecx, dword ptr [esi + 0x14]
+		lea eax, [esi + 0x14]
+		test ecx, ecx
+		je L_skip_free
+		push eax
+		call gm_FreeObjectListRecursive
+		add esp, 4
+	L_skip_free:
+		push esi
+		call gm_NoopRet2
+		add esp, 4
+		test edi, edi
+		jne L_unlink_prev
+		mov edx, dword ptr [esi + 0x3f]
+		mov dword ptr [ebp], edx
+		jmp L_finalize
+	L_unlink_prev:
+		mov eax, dword ptr [esi + 0x3f]
+		mov dword ptr [ebx + 0x3f], eax
+	L_finalize:
+		mov word ptr [esi], 0
+		_emit 0xa1
+		_emit 0x50
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		dec eax
+		pop edi
+		pop esi
+		_emit 0xa3
+		_emit 0x50
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
 	}
-	currentNode = *objectListHead;
-	if (currentNode == 0) {
-		return -1;
-	}
-	nodeIndex = 0;
-	while (*(unsigned short*) currentNode != objectTypeId) {
-		prevNode = currentNode;
-		currentNode = *(char**) (currentNode + 0x3f);
-		nodeIndex++;
-		if (currentNode == 0) {
-			return -2;
-		}
-	}
-	if (currentNode == 0) {
-		return -2;
-	}
-	if (*(int*) (currentNode + 0x14) != 0) {
-		gm_FreeObjectListRecursive((char**) (currentNode + 0x14));
-	}
-	free_node(currentNode);
-	if (nodeIndex == 0) {
-		*objectListHead = *(char**) (currentNode + 0x3f);
-	}
-	else {
-		*(char**) (prevNode + 0x3f) = *(char**) (currentNode + 0x3f);
-	}
-	*(unsigned short*) currentNode = 0;
-	DAT_10035450 = DAT_10035450 - 1;
-	return 0;
 }
 
 /* No-op function that returns 2. Used as a placeholder

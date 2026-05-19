@@ -978,7 +978,7 @@ analysis = "Walks the primary linked list of object allocations starting at g_ex
 
 ["SERVER.0x100165d0"]
 size = 155
-status = "STUB"
+status = "RELOC"
 
 ["SERVER.0x10016670"]
 size = 1
