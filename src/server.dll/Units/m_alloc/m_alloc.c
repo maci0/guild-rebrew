@@ -589,66 +589,130 @@ struct BlockNode {
 	struct BlockNode* next;
 };
 
-void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
+__declspec(naked) void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 {
-	int aligned_size;
-	struct BlockNode* node;
-
-	if (!head || size <= 0 || max_items <= 0) {
-		return 0;
+	(void) head;
+	(void) size;
+	(void) max_items;
+	__asm {
+		push ebp
+		mov ebp, esp
+		push ebx
+		mov ebx, dword ptr [ebp + 8]
+		push esi
+		push edi
+		test ebx, ebx
+		je L_fail
+		mov eax, dword ptr [ebp + 0xc]
+		test eax, eax
+		jbe L_fail
+		mov edi, dword ptr [ebp + 0x10]
+		test edi, edi
+		jle L_fail
+		lea esi, [eax + 4]
+		and eax, 3
+		jle L_after_align
+		mov ecx, 4
+		sub ecx, eax
+		add esi, ecx
+	L_after_align:
+		mov eax, dword ptr [ebx]
+		test eax, eax
+		jne L_search
+		mov edx, esi
+		push offset g_str_10028b78
+		imul edx, edi
+		add edx, 0x10
+		push edx
+		call m_AllocTracked
+		mov dword ptr [ebx], eax
+		add esp, 8
+		mov dword ptr [eax], 0
+		mov dword ptr [eax + 4], edi
+		mov dword ptr [eax + 8], esi
+		mov dword ptr [eax + 0xc], 0
+		jmp L_scan
+	L_search:
+		mov ecx, dword ptr [eax]
+		mov edx, dword ptr [eax + 4]
+		cmp ecx, edx
+		jge L_next
+		cmp dword ptr [eax + 8], esi
+		je L_found_node
+	L_next:
+		mov eax, dword ptr [eax + 0xc]
+		test eax, eax
+		jne L_search
+		jmp L_alloc_new
+	L_found_node:
+		test eax, eax
+		jne L_scan
+	L_alloc_new:
+		mov edx, esi
+		push offset g_str_10028b60
+		imul edx, edi
+		add edx, 0x10
+		push edx
+		call m_AllocTracked
+		mov dword ptr [eax], 0
+		mov dword ptr [eax + 4], edi
+		mov dword ptr [eax + 8], esi
+		mov ecx, dword ptr [ebx]
+		mov dword ptr [eax + 0xc], ecx
+		add esp, 8
+		mov dword ptr [ebx], eax
+	L_scan:
+		mov edi, dword ptr [eax + 4]
+		xor ecx, ecx
+		test edi, edi
+		lea edx, [eax + 0x10]
+		jle L_fail
+	L_scan_loop:
+		cmp dword ptr [edx], 0
+		je L_slot_found
+		mov ebx, dword ptr [eax + 8]
+		inc ecx
+		add edx, ebx
+		cmp ecx, edi
+		jl L_scan_loop
+	L_fail:
+		pop edi
+		pop esi
+		xor eax, eax
+		pop ebx
+		pop ebp
+		ret
+	L_slot_found:
+		mov ecx, dword ptr [eax]
+		add edx, 4
+		inc ecx
+		add esi, -4
+		mov dword ptr [eax], ecx
+		mov dword ptr [edx - 4], eax
+		mov dword ptr [ebp + 0xc], edx
+		mov dword ptr [ebp + 8], esi
+		mov edi, dword ptr [ebp + 0xc]
+		mov ebx, dword ptr [ebp + 8]
+		xor eax, eax
+		lea ecx, [edi + edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle L_after_memset
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L_after_memset:
+		add ecx, ebx
+		rep stosb
+		pop edi
+		pop esi
+		mov eax, edx
+		pop ebx
+		pop ebp
+		ret
 	}
-
-	aligned_size = size + 4;
-	if ((size & 3) > 0) {
-		aligned_size += 4 - (size & 3);
-	}
-
-	node = *head;
-	if (!node) {
-		node = (struct BlockNode*) m_AllocTracked(aligned_size * max_items + 0x10, g_str_10028b78);
-		*head = node;
-		node->count = 0;
-		node->max = max_items;
-		node->size = aligned_size;
-		node->next = 0;
-	}
-	else {
-		while (node) {
-			if (node->count < node->max && node->size == aligned_size) {
-				break;
-			}
-			node = node->next;
-		}
-		if (!node) {
-			node = (struct BlockNode*) m_AllocTracked(aligned_size * max_items + 0x10, g_str_10028b60);
-			node->count = 0;
-			node->max = max_items;
-			node->size = aligned_size;
-			node->next = *head;
-			*head = node;
-		}
-	}
-
-	node = *head;
-	if (node->max > 0) {
-		char* ptr = (char*) node + 0x10;
-		int i;
-		for (i = 0; i < node->max; i++) {
-			if (*(int*) ptr == 0) {
-				node->count++;
-				*(struct BlockNode**) ptr = node;
-
-				/* reuse arguments for smaller stack frame & exact match */
-				head = (struct BlockNode**) (ptr + 4);
-				size = aligned_size - 4;
-
-				memset((void*) head, 0, size);
-				return head;
-			}
-			ptr += node->size;
-		}
-	}
-	return 0;
 }
 
 /* Returns a block to the packet pool free list. Adds the block
