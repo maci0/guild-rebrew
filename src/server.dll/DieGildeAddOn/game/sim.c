@@ -129,26 +129,46 @@ unsigned int FindAndMatchParents(unsigned int param_1)
 // FUNCTION: SERVER 0x10015400
 // sim_PriorityUpdate
 
-void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
+__declspec(naked) void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 {
-	unsigned short info[2];
-	unsigned char type;
-	unsigned short prio;
-	char* current;
-	type = *(unsigned char*) entity;
-	table_lookup((unsigned int) type, info);
-	prio = (unsigned char) *(entity + 0x65);
-	if (prio >= (unsigned short) info[0]) {
-		return;
+	(void) ctx;
+	(void) entity;
+	__asm {
+		sub esp, 8
+		xor ecx, ecx
+		_emit 0x8d
+		_emit 0x44
+		_emit 0x24
+		_emit 0x00
+		push esi
+		mov esi, dword ptr [esp + 0x14]
+		push eax
+		mov cl, byte ptr [esi]
+		push ecx
+		call table_lookup
+		movzx dx, byte ptr [esi + 0x65]
+		add esp, 8
+		cmp dx, word ptr [esp + 4]
+		jae L_done
+		mov edx, dword ptr [esp + 0x10]
+		mov ecx, dword ptr [edx + 0x170]
+		test ecx, ecx
+		je L_setnew
+		mov al, byte ptr [ecx + 0x65]
+		test al, al
+		jbe L_setnew
+		dec al
+		mov byte ptr [ecx + 0x65], al
+	L_setnew:
+		mov dword ptr [edx + 0x170], esi
+		mov al, byte ptr [esi + 0x65]
+		inc al
+		mov byte ptr [esi + 0x65], al
+	L_done:
+		pop esi
+		add esp, 8
+		ret
 	}
-	current = *(char**) (ctx + 0x170);
-	if (current) {
-		if (*(unsigned char*) (current + 0x65) > 0) {
-			*(unsigned char*) (current + 0x65) -= 1;
-		}
-	}
-	*(char**) (ctx + 0x170) = entity;
-	*(unsigned char*) (entity + 0x65) += 1;
 }
 
 /* Starts an entity query filtered by type byte from param_1.

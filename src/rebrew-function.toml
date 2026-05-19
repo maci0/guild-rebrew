@@ -949,8 +949,7 @@ blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation 
 
 ["SERVER.0x10015400"]
 size = 83
-status = "STUB"
-blocker_delta = 469
+status = "RELOC"
 analysis = "Updates priority tracking for dynamic entity dispatch/update lists. Limits simultaneous update weight using GetStatPair constraints."
 
 ["SERVER.0x10015460"]
