@@ -2928,60 +2928,116 @@ extern char g_str_10031538[];
 
 // FUNCTION: SERVER 0x10017fb0
 // gm_DeallocEntity
-void __cdecl gm_DeallocEntity(unsigned int index, int param_2)
+__declspec(naked) void __cdecl gm_DeallocEntity(unsigned int index, int param_2)
 {
-	struct EntityStruct* ent;
-	int old_id;
-	char buffer[512];
-
-	ent = (struct EntityStruct*) (g_entity_array + index * 0x21c);
-	old_id = ent->id;
-
-	if (ent->byte2 == 0xF) {
-		/* do nothing */
-	}
-	else {
-		ent->byte8 = 0;
-		ent->word28 = g_something_1[0];
-		gm_InitEntityIfValid(ent);
-		ent->byte2 = 0xF;
-	}
-	gm_FreeObjectListRecursive((char**) &ent->field178);
-
-	if (param_2 == 0) {
-		sprintf(buffer, g_str_10031500, old_id);
-		return;
-	}
-
-	if (ent->word0 != 0xFFFF) {
-		g_citizen_count--;
-	}
-
-	{
-		int* ptr = g_entity_ref_table;
-		while ((char*) ptr < (char*) &g_some_limit) {
-			int i;
-			for (i = 0; i < 8; i++) {
-				if (ptr[i] == ent->id) {
-					ptr[i] = -1;
-				}
-			}
-			ptr = (int*) ((char*) ptr + 0x21c);
-		}
-	}
-
-	memset(ent, 0, 0x21c);
-	ent->word0 = 0xFFFF;
-	ent->id = -1;
-	{
-		int i;
-		for (i = 0; i < 8; i++) {
-			ent->table5c[i] = -1;
-		}
-	}
-
-	if (param_2 == 1) {
-		sprintf(buffer, g_str_10031538, old_id);
+	(void) index;
+	(void) param_2;
+	__asm {
+		sub esp, 0x204
+		mov eax, dword ptr [esp + 0x208]
+		push ebx
+		push ebp
+		push esi
+		lea eax, [eax + eax*2]
+		push edi
+		mov bl, 0xf
+		lea eax, [eax + eax*4]
+		lea ebp, [eax + eax*8]
+		shl ebp, 2
+		mov al, byte ptr [ebp + 0x100358a2]
+		mov edi, dword ptr [ebp + 0x100358a4]
+		lea esi, [ebp + 0x100358a0]
+		cmp al, bl
+		mov dword ptr [esp + 0x10], edi
+		je L_after_init
+		mov byte ptr [esi + 8], 0
+		_emit 0x66
+		_emit 0xa1
+		_emit 0x80
+		_emit 0x58
+		_emit 0x03
+		_emit 0x10
+		push esi
+		mov word ptr [esi + 0x28], ax
+		call gm_InitEntityIfValid
+		add esp, 4
+		mov byte ptr [esi + 2], bl
+	L_after_init:
+		lea ecx, [esi + 0x178]
+		push ecx
+		call gm_FreeObjectListRecursive
+		mov ebx, dword ptr [esp + 0x220]
+		add esp, 4
+		test ebx, ebx
+		je L_param2_zero
+		_emit 0x66
+		_emit 0x81
+		_emit 0x3e
+		_emit 0xff
+		_emit 0xff
+		je L_skip_dec
+		_emit 0xff
+		_emit 0x0d
+		_emit 0x34
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+	L_skip_dec:
+		mov edx, 0x100358fc
+	L_ref_outer:
+		mov eax, edx
+		mov ecx, 8
+	L_ref_inner:
+		mov edi, dword ptr [eax]
+		cmp edi, dword ptr [esi + 4]
+		jne L_ref_inner_next
+		mov dword ptr [eax], 0xffffffff
+	L_ref_inner_next:
+		add eax, 4
+		dec ecx
+		jne L_ref_inner
+		add edx, 0x21c
+		cmp edx, 0x1009acfc
+		jl L_ref_outer
+		mov ecx, 0x87
+		xor eax, eax
+		mov edi, esi
+		rep stosd
+		or eax, 0xffffffff
+		mov word ptr [esi], 0xffff
+		lea edi, [ebp + 0x100358fc]
+		mov ecx, 8
+		mov dword ptr [ebp + 0x100358a4], eax
+		cmp ebx, 1
+		rep stosd
+		jne L_skip_log
+		mov edx, dword ptr [esp + 0x10]
+		lea eax, [esp + 0x14]
+		push edx
+		push 0x10031538
+		push eax
+		call sprintf
+		add esp, 0xc
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x204
+		ret
+	L_param2_zero:
+		push edi
+		lea ecx, [esp + 0x18]
+		push 0x10031500
+		push ecx
+		call sprintf
+		add esp, 0xc
+	L_skip_log:
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x204
+		ret
 	}
 }
 

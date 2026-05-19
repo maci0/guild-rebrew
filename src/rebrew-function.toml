@@ -1028,7 +1028,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "STUB"
+status = "NEAR_MATCHING"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
@@ -1106,8 +1106,7 @@ analysis = "Checks if the provided entity pointer is valid and active (not -1). 
 
 ["SERVER.0x10017fb0"]
 size = 278
-status = "STUB"
-blocker_delta = 267
+status = "RELOC"
 ghidra = "gm_DeallocEntity"
 
 ["SERVER.0x100180d0"]
