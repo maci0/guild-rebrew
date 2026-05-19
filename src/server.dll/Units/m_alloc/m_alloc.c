@@ -399,16 +399,12 @@ void __cdecl ReportMemoryGroupInfo(const char* param_1)
 
 		if (matched) {
 			slot = *(int**) 0x10034640;
-			i = 0;
-			if (*(int*) 0x10034624 > 0) {
-				do {
-					if (slot[2] != 0 && slot[0] == (int) group) {
-						sprintf(buf, (char*) 0x10028974, (char*) slot[1], slot[3], slot[3] >> 10);
-						LogMessageInternal((char*) 0x10028888, 0x1d5, buf, 1);
-					}
-					i++;
-					slot += 4;
-				} while (i < *(int*) 0x10034624);
+			for (i = 0; i < *(int*) 0x10034624; i++) {
+				if (slot[2] != 0 && slot[0] == (int) group) {
+					sprintf(buf, (char*) 0x10028974, (char*) slot[1], slot[3], slot[3] >> 10);
+					LogMessageInternal((char*) 0x10028888, 0x1d5, buf, 1);
+				}
+				slot += 4;
 			}
 			LogMessageInternal((char*) 0x10028888, 0x1d8, (char*) 0x10028958, 1);
 		}
