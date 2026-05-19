@@ -543,9 +543,7 @@ blocker = "param_1 reuse pattern (gm_ResolveEntityById writes through &param_1),
 
 ["SERVER.0x1000eb70"]
 size = 144
-status = "STUB"
-blocker = "instruction folding (lea vs mov), stack frame choice (push vs sub esp)"
-blocker_delta = 126
+status = "RELOC"
 
 ["SERVER.0x1000ec00"]
 size = 912
