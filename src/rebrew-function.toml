@@ -861,8 +861,7 @@ ghidra = "GetStatPair"
 
 ["SERVER.0x100151e0"]
 size = 535
-status = "STUB"
-blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+status = "RELOC"
 
 ["SERVER.0x10015400"]
 size = 83
@@ -1158,7 +1157,7 @@ status = "EXACT"
 
 ["SERVER.0x10019d30"]
 size = 407
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker = "comparison direction swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 
 ["SERVER.0x10019ed0"]

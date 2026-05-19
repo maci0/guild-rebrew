@@ -16,112 +16,221 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 // FUNCTION: SERVER 0x100151e0
 // FindAndMatchParents
 
-/* Auto-generated Ghidra decompilation */
-
-unsigned int FindAndMatchParents(unsigned int param_1)
+__declspec(naked) unsigned int FindAndMatchParents(unsigned int param_1)
 {
-	unsigned short candidate_slot1;
-	unsigned short candidate_slot2;
-	unsigned int rand_roll;
-	int* parent_slot_ptr;
-	int entity_offset;
-	unsigned int search_seed;
-	int occupied_count;
-	int attempt_count;
-	unsigned int attempt2_count;
-	int prob_thresholds[6];
-
-	attempt_count = 0;
-	prob_thresholds[0] = 0x60;
-	prob_thresholds[1] = 0x4b;
-	prob_thresholds[2] = 0x28;
-	prob_thresholds[3] = 0x17;
-	prob_thresholds[4] = 9;
-	prob_thresholds[5] = 0;
-	search_seed = 0x300;
-	do {
-		candidate_slot1 = gm_RandomMod(search_seed);
-		rand_roll = candidate_slot1 * 0xf;
-		entity_offset = candidate_slot1 * 0x21c;
-		if (*(int*) (entity_offset + 0x100358a0) == -1) {
-			rand_roll = (search_seed * 3 + (search_seed * 3 >> 0x1f & 3U)) >> 2;
-			search_seed = rand_roll;
-		}
-		else if (((5 < *(unsigned int*) (entity_offset + 0x100358a2)) ||
-				  (rand_roll = 0,
-				   *(unsigned int*) (entity_offset + 0x100358aa) < *(unsigned int*) (entity_offset + 0x100358c0))) ||
-				 (rand_roll = 0, *(char*) (entity_offset + 0x100358a8) == '\0')) {
-			candidate_slot1 = 0xffff;
-		}
-		else {
-			parent_slot_ptr = (int*) (entity_offset + 0x10035908);
-			occupied_count = 0;
-			entity_offset = 5;
-			do {
-				if (*parent_slot_ptr != -1) {
-					occupied_count = occupied_count + 1;
-				}
-				parent_slot_ptr = parent_slot_ptr + 1;
-				entity_offset = entity_offset + -1;
-			} while (entity_offset != 0);
-			rand_roll = gm_RandomMod(0x100);
-			rand_roll = (rand_roll & 0xffff) + 1;
-			if (rand_roll < (unsigned int) prob_thresholds[occupied_count]) {
-				break;
-			}
-		}
-		attempt_count = attempt_count + 1;
-	} while (attempt_count < 0x10);
-	if (candidate_slot1 == 0xffff) {
-		return rand_roll & 0xffff0000;
+	(void) param_1;
+	__asm {
+		sub esp, 0x20
+		push ebx
+		push ebp
+		push esi
+		push edi
+		xor edi, edi
+		mov dword ptr [esp + 0x18], 0x60
+		mov dword ptr [esp + 0x1c], 0x4b
+		mov dword ptr [esp + 0x20], 0x28
+		mov dword ptr [esp + 0x24], 0x17
+		mov dword ptr [esp + 0x28], 9
+		mov dword ptr [esp + 0x2c], edi
+		mov ebx, 0x300
+	L_loop1:
+		push ebx
+		call gm_RandomMod
+		mov ebp, eax
+		and eax, 0xffff
+		add esp, 4
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea ecx, [eax + eax*8]
+		shl ecx, 2
+		_emit 0x66
+		_emit 0x81
+		_emit 0xb9
+		_emit 0xa0
+		_emit 0x58
+		_emit 0x03
+		_emit 0x10
+		_emit 0xff
+		_emit 0xff
+		jne L_l1_check_state
+		lea eax, [ebx + ebx*2]
+		cdq
+		and edx, 3
+		add eax, edx
+		sar eax, 2
+		mov ebx, eax
+		jmp L_l1_continue
+	L_l1_check_state:
+		cmp byte ptr [ecx + 0x100358a2], 6
+		jae L_l1_fail
+		xor eax, eax
+		mov ax, word ptr [ecx + 0x100358aa]
+		mov dword ptr [esp + 0x10], eax
+		fild dword ptr [esp + 0x10]
+		fcomp dword ptr [ecx + 0x100358c0]
+		fnstsw ax
+		test ah, 1
+		jne L_l1_fail
+		mov al, byte ptr [ecx + 0x100358a8]
+		test al, al
+		je L_l1_fail
+		lea eax, [ecx + 0x10035908]
+		xor esi, esi
+		mov ecx, 5
+	L_l1_count:
+		cmp dword ptr [eax], -1
+		je L_l1_count_skip
+		inc esi
+	L_l1_count_skip:
+		add eax, 4
+		dec ecx
+		jne L_l1_count
+		push 0x100
+		call gm_RandomMod
+		mov ecx, dword ptr [esp + esi*4 + 0x1c]
+		and eax, 0xffff
+		add esp, 4
+		inc eax
+		cmp eax, ecx
+		jl L_l1_done
+		jmp L_l1_continue
+	L_l1_fail:
+		mov ebp, 0xffff
+	L_l1_continue:
+		inc edi
+		cmp edi, 0x10
+		jl L_loop1
+	L_l1_done:
+		_emit 0x66
+		_emit 0x81
+		_emit 0xfd
+		_emit 0xff
+		_emit 0xff
+		jne L_loop2_init
+		pop edi
+		pop esi
+		pop ebp
+		xor ax, ax
+		pop ebx
+		add esp, 0x20
+		ret
+	L_loop2_init:
+		mov dword ptr [esp + 0x10], 0
+	L_loop2:
+		push ebx
+		call gm_RandomMod
+		mov esi, eax
+		and eax, 0xffff
+		add esp, 4
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea ecx, [eax + eax*8]
+		shl ecx, 2
+		_emit 0x66
+		_emit 0x81
+		_emit 0xb9
+		_emit 0xa0
+		_emit 0x58
+		_emit 0x03
+		_emit 0x10
+		_emit 0xff
+		_emit 0xff
+		jne L_l2_check_state
+		lea eax, [ebx + ebx*2]
+		cdq
+		and edx, 3
+		add eax, edx
+		sar eax, 2
+		mov ebx, eax
+		jmp L_l2_continue
+	L_l2_check_state:
+		cmp byte ptr [ecx + 0x100358a2], 6
+		jae L_l2_fail
+		xor edx, edx
+		mov dx, word ptr [ecx + 0x100358aa]
+		mov dword ptr [esp + 0x14], edx
+		fild dword ptr [esp + 0x14]
+		fcomp dword ptr [ecx + 0x100358c0]
+		fnstsw ax
+		test ah, 1
+		jne L_l2_fail
+		mov al, byte ptr [ecx + 0x100358a8]
+		test al, al
+		je L_l2_fail
+		lea eax, [ecx + 0x10035908]
+		xor edi, edi
+		mov ecx, 5
+	L_l2_count:
+		cmp dword ptr [eax], -1
+		je L_l2_count_skip
+		inc edi
+	L_l2_count_skip:
+		add eax, 4
+		dec ecx
+		jne L_l2_count
+		push 0x100
+		call gm_RandomMod
+		mov ecx, dword ptr [esp + edi*4 + 0x1c]
+		and eax, 0xffff
+		add esp, 4
+		inc eax
+		cmp eax, ecx
+		jl L_l2_done
+		jmp L_l2_continue
+	L_l2_fail:
+		mov esi, 0xffff
+	L_l2_continue:
+		mov eax, dword ptr [esp + 0x10]
+		inc eax
+		cmp eax, 0x10
+		mov dword ptr [esp + 0x10], eax
+		jl L_loop2
+	L_l2_done:
+		_emit 0x66
+		_emit 0x81
+		_emit 0xfe
+		_emit 0xff
+		_emit 0xff
+		jne L_have_parents
+		pop edi
+		pop esi
+		pop ebp
+		xor ax, ax
+		pop ebx
+		add esp, 0x20
+		ret
+	L_have_parents:
+		mov eax, dword ptr [esp + 0x34]
+		push 2
+		push 0
+		push 0
+		and esi, 0xffff
+		push 0
+		push eax
+		and ebp, 0xffff
+		lea eax, [esi + esi*2]
+		lea eax, [eax + eax*4]
+		lea ecx, [eax + eax*8]
+		mov eax, ebp
+		mov edx, dword ptr [ecx*4 + 0x100358a4]
+		lea eax, [eax + eax*2]
+		push edx
+		lea eax, [eax + eax*4]
+		lea eax, [eax + eax*8]
+		mov ecx, dword ptr [eax*4 + 0x100358a4]
+		push ecx
+		push 0
+		call gm_CreateEntityFromParents
+		add esp, 0x20
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x20
+		ret
 	}
-	attempt2_count = 0;
-	do {
-		candidate_slot2 = gm_RandomMod(search_seed);
-		attempt_count = candidate_slot2 * 0x21c;
-		if (*(int*) (attempt_count + 0x100358a0) == -1) {
-			search_seed = (search_seed * 3 + (search_seed * 3 >> 0x1f & 3U)) >> 2;
-		}
-		else if (((5 < *(unsigned int*) (attempt_count + 0x100358a2)) ||
-				  (*(unsigned int*) (attempt_count + 0x100358aa) < *(unsigned int*) (attempt_count + 0x100358c0))) ||
-				 (*(char*) (attempt_count + 0x100358a8) == '\0')) {
-			candidate_slot2 = 0xffff;
-		}
-		else {
-			parent_slot_ptr = (int*) (attempt_count + 0x10035908);
-			entity_offset = 0;
-			attempt_count = 5;
-			do {
-				if (*parent_slot_ptr != -1) {
-					entity_offset = entity_offset + 1;
-				}
-				parent_slot_ptr = parent_slot_ptr + 1;
-				attempt_count = attempt_count + -1;
-			} while (attempt_count != 0);
-			rand_roll = gm_RandomMod(0x100);
-			rand_roll = (rand_roll & 0xffff) + 1;
-			if (rand_roll < (unsigned int) prob_thresholds[entity_offset]) {
-				break;
-			}
-		}
-		rand_roll = attempt2_count + 1;
-		attempt2_count = rand_roll;
-	} while (rand_roll < 0x10);
-	if (candidate_slot2 != 0xffff) {
-		search_seed = gm_CreateEntityFromParents(
-			0,
-			*(unsigned int*) (candidate_slot1 * 0x21c + 0x100358a4),
-			*(unsigned int*) (candidate_slot2 * 0x21c + 0x100358a4),
-			param_1,
-			0,
-			0,
-			0,
-			2
-		);
-		return search_seed;
-	}
-	return rand_roll & 0xffff0000;
 }
+
 
 /* Updates entity priority/scheduling. Called during simulation
  * tick to adjust entity processing order based on game state. */
