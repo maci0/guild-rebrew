@@ -2,13 +2,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wint-to-pointer-cast"
-#pragma clang diagnostic ignored "-Wpointer-to-int-cast"
-#pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
-#endif
-
 /*
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: MATCHING
@@ -71,105 +64,153 @@ extern char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[];
  * transfers the object via gm_SubObjekt + gm_AddOrAccumulateObject. */
 
 // FUNCTION: SERVER 0x1000e530
-int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
 {
-	int object_id;
-	void* ent_a;
-	void* ent_c;
-	int entity_or_node;
-	int* src_list;
-	int* dst_list;
-	int prev;
-
-	object_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x14));
-	*(int*) (param_1 + 0x14) = object_id;
-	if (gm_ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
-		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
-			0x30a1,
-			s_cm_ExMoveObjekt___Invalid__quell_1002d024,
-			8
-		);
-		return 1;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		sub esp, 8
+		push ebx
+		push esi
+		mov esi, dword ptr [esp + 0x14]
+		push edi
+		mov eax, dword ptr [esi + 0x14]
+		push eax
+		push esi
+		call gm_GetFieldByType
+		lea ecx, [esp + 0x18]
+		mov dword ptr [esi + 0x14], eax
+		push eax
+		lea edx, [esp + 0x24]
+		push ecx
+		lea eax, [esp + 0x1c]
+		push edx
+		push eax
+		call gm_ResolveEntityById
+		add esp, 0x18
+		test eax, eax
+		jne L_src_ok
+		push 8
+		push offset s_cm_ExMoveObjekt___Invalid__quell_1002d024
+		push 0x30a1
+		jmp L_log_fail
+	L_src_ok:
+		mov eax, dword ptr [esp + 0xc]
+		test eax, eax
+		je L_src_b
+		lea ebx, [eax + 0x5d]
+		jmp L_src_done
+	L_src_b:
+		mov eax, dword ptr [esp + 0x18]
+		test eax, eax
+		je L_src_c
+		lea ebx, [eax + 0x14]
+		jmp L_src_done
+	L_src_c:
+		mov ecx, dword ptr [esp + 0x10]
+		lea ebx, [ecx + 0x178]
+	L_src_done:
+		mov edx, dword ptr [esi + 0x10]
+		push edx
+		push esi
+		call gm_GetFieldByType
+		mov dword ptr [esi + 0x10], eax
+		push eax
+		lea eax, [esp + 0x1c]
+		lea ecx, [esp + 0x24]
+		push eax
+		lea edx, [esp + 0x1c]
+		push ecx
+		push edx
+		call gm_ResolveEntityById
+		add esp, 0x18
+		test eax, eax
+		jne L_dst_ok
+		push 1
+		push offset s_cm_ExMoveObjekt___Invalid__ziel__1002cff4
+		push 0x30bd
+		jmp L_log_fail
+	L_dst_ok:
+		mov eax, dword ptr [esp + 0xc]
+		test eax, eax
+		je L_dst_b
+		lea edi, [eax + 0x5d]
+		jmp L_dst_done
+	L_dst_b:
+		mov eax, dword ptr [esp + 0x18]
+		test eax, eax
+		je L_dst_c
+		lea edi, [eax + 0x14]
+		jmp L_dst_done
+	L_dst_c:
+		mov eax, dword ptr [esp + 0x10]
+		lea edi, [eax + 0x178]
+	L_dst_done:
+		mov ecx, dword ptr [esi + 0x18]
+		push ecx
+		push esi
+		call gm_GetFieldByType
+		mov dword ptr [esi + 0x18], eax
+		mov ecx, dword ptr [ebx]
+		add esp, 8
+		xor edx, edx
+		test ecx, ecx
+		mov dword ptr [esp + 0x18], ecx
+		je L_notfound
+	L_scan:
+		cmp dword ptr [ecx + 2], eax
+		je L_have_node
+		mov edx, ecx
+		mov ecx, dword ptr [ecx + 0x3f]
+		test ecx, ecx
+		mov dword ptr [esp + 0x18], ecx
+		jne L_scan
+		jmp L_notfound
+	L_have_node:
+		test edx, edx
+		jne L_unlink_prev
+		mov edx, dword ptr [ecx + 0x3f]
+		mov dword ptr [ebx], edx
+		jmp L_after_unlink
+	L_unlink_prev:
+		mov eax, dword ptr [ecx + 0x3f]
+		mov dword ptr [edx + 0x3f], eax
+	L_after_unlink:
+		mov eax, dword ptr [esp + 0x18]
+		test eax, eax
+		jne L_attach
+	L_notfound:
+		push 8
+		push offset s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4
+		push 0x30f9
+	L_log_fail:
+		push offset s_D__Develop_DieGildeAddOn_command_1002c748
+		call LogMessageInternal
+		add esp, 0x10
+		mov eax, 1
+		pop edi
+		pop esi
+		pop ebx
+		add esp, 8
+		ret
+	L_attach:
+		mov ecx, dword ptr [esi + 0x10]
+		mov dword ptr [eax + 6], ecx
+		mov eax, dword ptr [esp + 0x18]
+		mov edx, dword ptr [edi]
+		mov dword ptr [eax + 0x3f], edx
+		mov eax, dword ptr [esp + 0x1c]
+		mov ecx, dword ptr [esp + 0x18]
+		test eax, eax
+		mov dword ptr [edi], ecx
+		je L_done
+		mov byte ptr [eax], 1
+	L_done:
+		pop edi
+		pop esi
+		xor eax, eax
+		pop ebx
+		add esp, 8
+		ret
 	}
-
-	if (ent_a != (void*) 0x0) {
-		src_list = (int*) ((char*) ent_a + 0x5d);
-	}
-	else if (entity_or_node != 0) {
-		src_list = (int*) (entity_or_node + 0x14);
-	}
-	else {
-		src_list = (int*) ((char*) ent_c + 0x178);
-	}
-
-	object_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
-	*(int*) (param_1 + 0x10) = object_id;
-	if (gm_ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
-		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
-			0x30bd,
-			s_cm_ExMoveObjekt___Invalid__ziel__1002cff4,
-			1
-		);
-		return 1;
-	}
-
-	if (ent_a != (void*) 0x0) {
-		dst_list = (int*) ((char*) ent_a + 0x5d);
-	}
-	else if (entity_or_node != 0) {
-		dst_list = (int*) (entity_or_node + 0x14);
-	}
-	else {
-		dst_list = (int*) ((char*) ent_c + 0x178);
-	}
-
-	object_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x18));
-	*(int*) (param_1 + 0x18) = object_id;
-
-	prev = 0;
-	entity_or_node = *src_list;
-	if (entity_or_node == 0) {
-		goto object_not_found;
-	}
-
-	while (*(int*) (entity_or_node + 2) != object_id) {
-		prev = entity_or_node;
-		entity_or_node = *(int*) (entity_or_node + 0x3f);
-		if (entity_or_node != 0) {
-			continue;
-		}
-		goto object_not_found;
-	}
-
-	if (prev == 0) {
-		*src_list = *(int*) (entity_or_node + 0x3f);
-	}
-	else {
-		*(int*) (prev + 0x3f) = *(int*) (entity_or_node + 0x3f);
-	}
-
-	if (entity_or_node == 0) {
-		goto object_not_found;
-	}
-
-	*(int*) (entity_or_node + 6) = *(int*) (param_1 + 0x10);
-	*(int*) (entity_or_node + 0x3f) = *dst_list;
-	*dst_list = entity_or_node;
-
-	if (param_2 != (char*) 0x0) {
-		*param_2 = '\x01';
-	}
-
-	return 0;
-
-object_not_found:
-	LogMessageInternal(
-		s_D__Develop_DieGildeAddOn_command_1002c748,
-		0x30f9,
-		s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4,
-		8
-	);
-	return 1;
 }

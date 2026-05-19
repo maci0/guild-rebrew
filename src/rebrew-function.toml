@@ -473,9 +473,7 @@ blocker_delta = 922
 
 ["SERVER.0x1000e530"]
 size = 352
-status = "STUB"
-blocker = "loop rotation (while->cmp duplicated), shared error exit layout, xor edx initialization"
-blocker_delta = 165
+status = "RELOC"
 
 ["SERVER.0x1000e690"]
 size = 191
