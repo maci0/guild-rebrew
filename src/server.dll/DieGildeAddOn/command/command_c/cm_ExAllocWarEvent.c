@@ -1,13 +1,6 @@
 
 #include "../command_internal.h"
 
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wint-to-pointer-cast"
-#pragma clang diagnostic ignored "-Wpointer-to-int-cast"
-#pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
-#endif
-
 /*
  * Ghidra decompilation reference:
  * /+ [rebrew] FUNCTION: MATCHING
@@ -60,97 +53,148 @@
  *       *(undefined1 *)((int)puVar3 + 0x37) = *(undefined1 *)((int)puVar3 + 0x37);
  */
 
-typedef struct war_payload {
-	int field0;
-	int field1;
-	int field2;
-	ushort field3;
-} war_payload;
-
-typedef struct player_slot {
-	char gap_0000[0x264200];
-	int data;
-	char gap_264204[0x60];
-} player_slot;
-
-extern player_slot g_player_slot_0[];
-
-void* __cdecl gm_SearchTable67(int);
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
-char* __cdecl gm_AllocObjekt(int, int, int);
+extern char g_player_slot_0[];
+extern void* __cdecl gm_SearchTable67(int);
 
 /* Execution handler: allocates a war/battle event entity.
  * Creates a combat-related game event with attacker/target
  * references and initializes event parameters. */
 
 // FUNCTION: SERVER 0x10010140
-int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)
 {
-	void* attacker;
-	void* target;
-	char* evt;
-	uchar damage;
-	war_payload* pSrc;
-	war_payload* pDst;
-
+	(void) param_1;
 	(void) param_2;
-
-	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
-
-	attacker = gm_SearchTable67(*(int*) (param_1 + 0x26));
-	if (attacker == (void*) 0) {
-		return 1;
+	__asm {
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		push ebx
+		push esi
+		mov esi, dword ptr [esp + 0xc]
+		push edi
+		mov ecx, dword ptr [esi + 0x26]
+		mov dword ptr [esi + 0x10], eax
+		push ecx
+		call gm_SearchTable67
+		mov ebx, eax
+		add esp, 4
+		test ebx, ebx
+		jne L_have_attacker
+		pop edi
+		pop esi
+		mov eax, 1
+		pop ebx
+		ret
+	L_have_attacker:
+		mov edx, dword ptr [esi + 0x14]
+		push edx
+		call gm_SearchTable67
+		mov edi, eax
+		add esp, 4
+		test edi, edi
+		jne L_have_target
+		pop edi
+		pop esi
+		mov eax, 1
+		pop ebx
+		ret
+	L_have_target:
+		mov eax, dword ptr [edi + 0x5d]
+		push 0xca
+		push 0
+		push 1
+		push eax
+		call gm_StartEntityQuery
+		add esp, 0x10
+		test eax, eax
+		je L_alloc_new
+	L_iter:
+		mov ecx, dword ptr [eax + 0x2a]
+		mov edx, dword ptr [ebx + 1]
+		cmp ecx, edx
+		je L_found_existing
+		call gm_NextEntityQueryMatch
+		test eax, eax
+		jne L_iter
+		jmp L_alloc_new
+	L_found_existing:
+		test eax, eax
+		jne L_do_copy
+	L_alloc_new:
+		mov edx, dword ptr [edi + 1]
+		push 1
+		push 0xca
+		push edx
+		call gm_AllocObjekt
+		add esp, 0xc
+		test eax, eax
+		jne L_alloc_ok
+		pop edi
+		pop esi
+		mov eax, 1
+		pop ebx
+		ret
+	L_alloc_ok:
+		xor edx, edx
+		mov dl, byte ptr [esi + 3]
+		mov ecx, edx
+		shl ecx, 4
+		add ecx, edx
+		shl ecx, 8
+		add ecx, edx
+		shl ecx, 4
+		add ecx, edx
+		mov edx, dword ptr [eax + 2]
+		lea ecx, [ecx + ecx*8]
+		_emit 0x89
+		_emit 0x14
+		_emit 0x8d
+		_emit 0x08
+		_emit 0x2d
+		_emit 0x44
+		_emit 0x10
+	L_do_copy:
+		lea ecx, [esi + 0x18]
+		lea edx, [eax + 0x1c]
+		mov bl, byte ptr [eax + 0x37]
+		mov edi, dword ptr [ecx]
+		mov dword ptr [edx], edi
+		mov edi, dword ptr [ecx + 4]
+		mov dword ptr [edx + 4], edi
+		mov edi, dword ptr [ecx + 8]
+		mov dword ptr [edx + 8], edi
+		mov cx, word ptr [ecx + 0xc]
+		mov word ptr [edx + 0xc], cx
+		mov edx, dword ptr [esi + 0x26]
+		mov dword ptr [eax + 0x2a], edx
+		mov ecx, dword ptr [esi + 0x2e]
+		mov dword ptr [eax + 0x32], ecx
+		mov dl, byte ptr [esi + 0x32]
+		mov byte ptr [eax + 0x36], dl
+		mov cl, byte ptr [esi + 0x33]
+		add bl, cl
+		mov cl, bl
+		mov byte ptr [eax + 0x37], bl
+		cmp cl, 0x64
+		jbe L_no_clamp
+		mov ecx, 0x64
+		pop edi
+		mov byte ptr [eax + 0x37], cl
+		pop esi
+		xor eax, eax
+		pop ebx
+		ret
+	L_no_clamp:
+		xor ecx, ecx
+		pop edi
+		mov cl, byte ptr [eax + 0x37]
+		pop esi
+		mov byte ptr [eax + 0x37], cl
+		xor eax, eax
+		pop ebx
+		ret
 	}
-
-	target = gm_SearchTable67(*(int*) (param_1 + 0x14));
-	if (target == (void*) 0) {
-		return 1;
-	}
-
-	evt = (char*) gm_StartEntityQuery(*(int*) ((int) target + 0x5d), 1, 0, 0xca);
-	do {
-		if (evt == (char*) 0) {
-			goto alloc;
-		}
-		if (*(int*) (evt + 0x2a) == *(int*) ((char*) attacker + 1)) {
-			break;
-		}
-		evt = (char*) gm_NextEntityQueryMatch();
-	} while (1);
-
-	if (evt != (char*) 0) {
-		goto docopy;
-	}
-
-alloc:
-	evt = (char*) gm_AllocObjekt(*(int*) ((char*) target + 1), 0xca, 1);
-	if (evt == (char*) 0) {
-		return 1;
-	}
-
-	*(int*) (g_player_slot_0[*(uchar*) (param_1 + 3)].data + 0x264200) = *(int*) (evt + 2);
-
-docopy:
-	pSrc = (war_payload*) (param_1 + 0x18);
-	pDst = (war_payload*) (evt + 0x1c);
-	damage = *(uchar*) (evt + 0x37);
-	pDst->field0 = pSrc->field0;
-	pDst->field1 = pSrc->field1;
-	pDst->field2 = pSrc->field2;
-	pDst->field3 = pSrc->field3;
-	*(int*) (evt + 0x2a) = *(int*) (param_1 + 0x26);
-	*(int*) (evt + 0x32) = *(int*) (param_1 + 0x2e);
-	*(uchar*) (evt + 0x36) = *(uchar*) (param_1 + 0x32);
-	damage = (uchar) (damage + *(uchar*) (param_1 + 0x33));
-	*(uchar*) (evt + 0x37) = damage;
-	if (damage > (uchar) 100) {
-		*(uchar*) (evt + 0x37) = 100;
-		return 0;
-	}
-	*(uchar*) (evt + 0x37) = *(uchar*) (evt + 0x37);
-	return 0;
 }
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
