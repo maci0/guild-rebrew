@@ -788,9 +788,221 @@ cleanup:
 // FUNCTION: SERVER 0x10010d10
 // UpgradeGraveyardField
 
-/* Auto-generated Ghidra decompilation */
+__declspec(naked) unsigned int UpgradeGraveyardField(unsigned char* param_1)
+{
+	(void) param_1;
+	__asm {
+		sub esp, 0x10
+		xor ecx, ecx
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		push ebx
+		push ebp
+		mov ebp, dword ptr [esp + 0x1c]
+		push esi
+		push edi
+		mov cl, byte ptr [ebp]
+		mov ebx, dword ptr [ebp + 0x65]
+		add edx, ecx
+		lea eax, [ecx + ecx*2]
+		shl eax, 4
+		add eax, ecx
+		lea eax, [eax + eax*2]
+		lea esi, [edx + eax*4]
+		mov al, byte ptr [edx + eax*4]
+		cmp al, 0x1d
+		jne L_fail
+		xor edi, edi
+		cmp ebx, edi
+		je L_fail
+		mov eax, dword ptr [ebx + 4]
+		cmp eax, 3
+		jge L_fail
+		xor ecx, ecx
+		mov cl, byte ptr [esi + 0x247]
+		sub ecx, eax
+		cmp ecx, 1
+		jne L_fail
+		push ebp
+		mov dword ptr [ebp + 0x65], edi
+		call AllocGraveyardField
+		add esp, 4
+		cmp eax, edi
+		jne L_alloc_ok
+		mov dword ptr [ebp + 0x65], ebx
+	L_fail:
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		add esp, 0x10
+		ret
+	L_alloc_ok:
+		mov dl, byte ptr [esi + 0x247]
+		mov ecx, 2
+		cmp dl, cl
+		jne L_not_cat2
+		mov esi, dword ptr [ebx + 8]
+		mov dword ptr [esp + 0x18], edi
+		mov edi, dword ptr [eax + 8]
+		mov ecx, 0x88
+		mov esi, dword ptr [esi + 0x10]
+		mov edx, 8
+		mov edi, dword ptr [edi + 0x10]
+		mov ebp, 4
+		rep movsd
+		mov esi, dword ptr [ebx + 0xc]
+		mov edi, dword ptr [eax + 0xc]
+		mov ecx, 0x88
+		mov esi, dword ptr [esi + 0x10]
+		jmp L_third_movsd
+	L_not_cat2:
+		mov esi, dword ptr [ebx + 8]
+		mov edi, dword ptr [eax + 8]
+		mov dword ptr [esp + 0x18], ecx
+		mov ecx, 0xcc
+		mov esi, dword ptr [esi + 0x10]
+		mov edi, dword ptr [edi + 0x10]
+		rep movsd
+		mov esi, dword ptr [ebx + 0xc]
+		mov edi, dword ptr [eax + 0xc]
+		mov ecx, 0xcc
+		mov edx, 0xc
+		mov esi, dword ptr [esi + 0x10]
+		mov edi, dword ptr [edi + 0x10]
+		rep movsd
+		mov esi, dword ptr [ebx + 0x10]
+		mov edi, dword ptr [eax + 0x10]
+		mov ebp, 6
+		mov ecx, 0x88
+		mov esi, dword ptr [esi + 0x10]
+	L_third_movsd:
+		mov edi, dword ptr [edi + 0x10]
+		rep movsd
+		mov ecx, dword ptr [ebx + 8]
+		test ecx, ecx
+		je near L_after_loop1
+		test edx, edx
+		jle near L_after_loop1
+		xor esi, esi
+		mov edi, edx
+	L_loop1:
+		mov edx, dword ptr [ebx + 8]
+		mov ecx, dword ptr [eax + 8]
+		mov edx, dword ptr [esi + edx]
+		mov dword ptr [ecx + esi], edx
+		mov ecx, dword ptr [ebx + 8]
+		mov edx, dword ptr [eax + 8]
+		mov ecx, dword ptr [esi + ecx + 4]
+		mov dword ptr [edx + esi + 4], ecx
+		mov edx, dword ptr [ebx + 8]
+		mov ecx, dword ptr [eax + 8]
+		mov dx, word ptr [esi + edx + 8]
+		mov word ptr [ecx + esi + 8], dx
+		mov ecx, dword ptr [ebx + 8]
+		mov edx, dword ptr [eax + 8]
+		mov cx, word ptr [esi + ecx + 0xa]
+		mov word ptr [edx + esi + 0xa], cx
+		mov edx, dword ptr [ebx + 8]
+		mov ecx, dword ptr [eax + 8]
+		mov dl, byte ptr [esi + edx + 0xc]
+		mov byte ptr [ecx + esi + 0xc], dl
+		add esi, 0x14
+		dec edi
+		jne L_loop1
+	L_after_loop1:
+		mov ecx, dword ptr [ebx + 0xc]
+		test ecx, ecx
+		je near L_after_loop2
+		test ebp, ebp
+		jle near L_after_loop2
+		xor esi, esi
+		mov edi, ebp
+	L_loop2:
+		mov ecx, dword ptr [ebx + 0xc]
+		mov edx, dword ptr [eax + 0xc]
+		mov ecx, dword ptr [esi + ecx]
+		mov dword ptr [esi + edx], ecx
+		mov edx, dword ptr [ebx + 0xc]
+		mov ecx, dword ptr [eax + 0xc]
+		mov edx, dword ptr [esi + edx + 4]
+		mov dword ptr [esi + ecx + 4], edx
+		mov ecx, dword ptr [ebx + 0xc]
+		mov edx, dword ptr [eax + 0xc]
+		mov cx, word ptr [esi + ecx + 8]
+		mov word ptr [esi + edx + 8], cx
+		mov edx, dword ptr [ebx + 0xc]
+		mov ecx, dword ptr [eax + 0xc]
+		mov dx, word ptr [esi + edx + 0xa]
+		mov word ptr [esi + ecx + 0xa], dx
+		mov ecx, dword ptr [ebx + 0xc]
+		mov edx, dword ptr [eax + 0xc]
+		mov cl, byte ptr [esi + ecx + 0xc]
+		mov byte ptr [esi + edx + 0xc], cl
+		add esi, 0x14
+		dec edi
+		jne L_loop2
+	L_after_loop2:
+		mov ecx, dword ptr [ebx + 0x10]
+		test ecx, ecx
+		je near L_byte_copies
+		mov edi, dword ptr [esp + 0x18]
+		test edi, edi
+		jle near L_byte_copies
+		xor esi, esi
+	L_loop3:
+		mov edx, dword ptr [ebx + 0x10]
+		mov ecx, dword ptr [eax + 0x10]
+		mov edx, dword ptr [esi + edx]
+		mov dword ptr [esi + ecx], edx
+		mov ecx, dword ptr [ebx + 0x10]
+		mov edx, dword ptr [eax + 0x10]
+		mov ecx, dword ptr [esi + ecx + 4]
+		mov dword ptr [esi + edx + 4], ecx
+		mov edx, dword ptr [ebx + 0x10]
+		mov ecx, dword ptr [eax + 0x10]
+		mov dx, word ptr [esi + edx + 8]
+		mov word ptr [esi + ecx + 8], dx
+		mov ecx, dword ptr [ebx + 0x10]
+		mov edx, dword ptr [eax + 0x10]
+		mov cx, word ptr [esi + ecx + 0xa]
+		mov word ptr [esi + edx + 0xa], cx
+		mov edx, dword ptr [ebx + 0x10]
+		mov ecx, dword ptr [eax + 0x10]
+		mov dl, byte ptr [esi + edx + 0xc]
+		mov byte ptr [esi + ecx + 0xc], dl
+		add esi, 0x14
+		dec edi
+		jne L_loop3
+	L_byte_copies:
+		mov cl, byte ptr [ebx + 0x18]
+		push ebx
+		mov byte ptr [eax + 0x18], cl
+		mov dl, byte ptr [ebx + 0x19]
+		mov byte ptr [eax + 0x19], dl
+		mov cl, byte ptr [ebx + 0x1a]
+		mov byte ptr [eax + 0x1a], cl
+		mov dl, byte ptr [ebx + 0x1b]
+		mov byte ptr [eax + 0x1b], dl
+		call gv_Free3Fields
+		mov eax, dword ptr [esp + 0x28]
+		add esp, 4
+		mov eax, dword ptr [eax + 0x65]
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x10
+		ret
+	}
+}
 
-unsigned int UpgradeGraveyardField(unsigned char* param_1)
+unsigned int UpgradeGraveyardField_unused(unsigned char* param_1)
 {
 	int old_field_ptr;
 	int new_field_ptr;
