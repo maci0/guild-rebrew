@@ -354,7 +354,7 @@ status = "EXACT"
 
 ["SERVER.0x1000c3c0"]
 size = 83
-status = "NEAR_MATCHING"
+status = "STUB"
 blocker = "jump condition swap"
 blocker_delta = 47
 
@@ -384,7 +384,7 @@ blocker_delta = 55
 
 ["SERVER.0x1000c710"]
 size = 752
-status = "NEAR_MATCHING"
+status = "STUB"
 blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 
 ["SERVER.0x1000ca00"]
@@ -481,9 +481,7 @@ status = "RELOC"
 
 ["SERVER.0x1000d730"]
 size = 192
-status = "STUB"
-blocker = "lea folding (lea esi,[eax+0x10] + mov [esi],ax vs mov [esi+0x10],ax), register allocation (param_1 in esi vs reload from stack), zero-extend register choice (ecx vs eax)"
-blocker_delta = 20
+status = "RELOC"
 
 ["SERVER.0x1000d7f0"]
 size = 176
@@ -1066,7 +1064,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "NEAR_MATCHING"
+status = "STUB"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]

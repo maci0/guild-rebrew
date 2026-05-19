@@ -23,36 +23,81 @@ extern char s_cm_ExFree____Can_t_free_Objects_1002cc3c[];
  * on invalid entity ID. */
 
 // FUNCTION: SERVER 0x1000d730
-int __cdecl cm_ExFree(int param_1, char *param_2)
+__declspec(naked) int __cdecl cm_ExFree(int param_1, char *param_2)
 {
-	unsigned int fieldId;
-	int resolveResult;
-	void *objectEntity;
-	ushort *dynEntity;
-
-	resolveResult = param_1;
-	fieldId = gm_GetFieldByType((char *)resolveResult, (unsigned int)*(ushort *)(resolveResult + 0x10));
-	*(short *)(resolveResult + 0x10) = (short)fieldId;
-	resolveResult = gm_ResolveEntityById((void **)&param_1, &objectEntity, &dynEntity, fieldId & 0xffff);
-	if (resolveResult == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2a09, s_Invalid_Id_for_cmdt_FREE_in_cm_E_1002cc5c, 1);
-		return 1;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		sub esp, 8
+		xor eax, eax
+		push esi
+		mov esi, dword ptr [esp + 0x10]
+		mov ax, word ptr [esi + 0x10]
+		push eax
+		push esi
+		call gm_GetFieldByType
+		mov word ptr [esi + 0x10], ax
+		and eax, 0xffff
+		lea ecx, [esp + 0x10]
+		push eax
+		lea edx, [esp + 0x10]
+		push ecx
+		lea eax, [esp + 0x20]
+		push edx
+		push eax
+		call gm_ResolveEntityById
+		add esp, 0x18
+		test eax, eax
+		pop esi
+		jne L_have_entity
+		push 1
+		push 0x1002cc5c
+		push 0x2a09
+		jmp L_log
+	L_have_entity:
+		mov eax, dword ptr [esp + 0xc]
+		test eax, eax
+		je L_check_object
+		push eax
+		call gm_CleanupBuildingEntity
+		add esp, 4
+		test eax, eax
+		je L_set_pflag
+		mov eax, 1
+		add esp, 8
+		ret
+	L_check_object:
+		_emit 0x8b
+		_emit 0x44
+		_emit 0x24
+		_emit 0x00
+		push 1
+		test eax, eax
+		je L_dealloc
+		push 0x1002cc3c
+		push 0x2a21
+	L_log:
+		push 0x1002c748
+		call LogMessageInternal
+		add esp, 0x10
+		mov eax, 1
+		add esp, 8
+		ret
+	L_dealloc:
+		mov edx, dword ptr [esp + 8]
+		xor ecx, ecx
+		mov cx, word ptr [edx]
+		push ecx
+		call gm_DeallocEntity
+		add esp, 8
+	L_set_pflag:
+		mov eax, dword ptr [esp + 0x10]
+		test eax, eax
+		je L_done
+		mov byte ptr [eax], 1
+	L_done:
+		xor eax, eax
+		add esp, 8
+		ret
 	}
-	if (param_1 != 0) {
-		resolveResult = gm_CleanupBuildingEntity((uchar *)param_1);
-		if (resolveResult != 0) {
-			return 1;
-		}
-	}
-	else if (objectEntity != (void *)0x0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2a21, s_cm_ExFree____Can_t_free_Objects_1002cc3c, 1);
-		return 1;
-	}
-	else {
-		gm_DeallocEntity((unsigned int)*dynEntity, 1);
-	}
-	if (param_2 != (char *)0x0) {
-		*param_2 = '\x01';
-	}
-	return 0;
 }
