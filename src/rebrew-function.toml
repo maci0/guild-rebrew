@@ -553,8 +553,7 @@ status = "RELOC"
 
 ["SERVER.0x1000f2f0"]
 size = 176
-status = "STUB"
-blocker = "register base adjustment (target uses add edi,0x18 and lea ecx,[esi+0x1c] for shorter addressing; MSVC6 folds to base+offset)"
+status = "RELOC"
 
 ["SERVER.0x1000f3a0"]
 size = 3
