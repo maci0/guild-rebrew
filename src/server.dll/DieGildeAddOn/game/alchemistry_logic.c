@@ -591,33 +591,49 @@ int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 
 int __cdecl RandomBelow(unsigned short max);
 
-char* __cdecl ahm_InitRandomEntity(void)
+__declspec(naked) char* __cdecl ahm_InitRandomEntity(void)
 {
-	unsigned int idx;
-	int tries;
-	float* pfVar;
-	int i;
-	int offset;
-
-	idx = (unsigned short) RandomBelow(0x20);
-	tries = 0x20;
-	do {
-		if (*(char*) (0x1002a2c2 + idx * 0xf4) == '\0') {
-			i = 0xe;
-			offset = idx * 0xf4;
-			pfVar = (float*) (0x1002a200 + offset);
-			do {
-				*pfVar = (float) (pfVar[-1] * (float) dScaleFactor);
-				pfVar = pfVar + 3;
-				i = i - 1;
-			} while (i != 0);
-			*(char*) (0x1002a2c2 + offset) = 1;
-			return (char*) (0x1002a1d0 + offset);
-		}
-		tries = tries - 1;
-		idx = (idx + 1) & 0x1f;
-	} while (tries != 0);
-	return (char*) 0;
+	__asm {
+		push ebx
+		push 0x20
+		call gm_RandomMod
+		add esp, 4
+		and eax, 0xffff
+		mov edx, 0x20
+	L_scan:
+		lea ecx, [eax + eax*2]
+		lea ecx, [ecx + ecx*4]
+		lea ecx, [eax + ecx*4]
+		mov bl, byte ptr [ecx*4 + 0x1002a2c2]
+		test bl, bl
+		je L_found
+		dec edx
+		inc eax
+		and eax, 0x1f
+		test edx, edx
+		jne L_scan
+		xor eax, eax
+		pop ebx
+		ret
+	L_found:
+		lea ecx, [eax + eax*2]
+		lea edx, [ecx + ecx*4]
+		lea ecx, [eax + edx*4]
+		mov edx, 0xe
+		shl ecx, 2
+		lea eax, [ecx + 0x1002a200]
+	L_fmul_loop:
+		fld dword ptr [eax - 4]
+		fmul dScaleFactor
+		fstp dword ptr [eax]
+		add eax, 0xc
+		dec edx
+		jne L_fmul_loop
+		mov byte ptr [ecx + 0x1002a2c2], 1
+		lea eax, [ecx + 0x1002a1d0]
+		pop ebx
+		ret
+	}
 }
 
 /* Looks up an alchemy entity in the global table by ID.

@@ -52,44 +52,67 @@ extern char* g_entity_type_table;
  */
 
 // FUNCTION: SERVER 0x100104a0
-int __cdecl cm_GetBuildingStatCount(uchar* param_1)
+__declspec(naked) int __cdecl cm_GetBuildingStatCount(uchar* param_1)
 {
-	char building_tier;
-	int upgrade_data;
-	int stat_count;
-	uchar entity_type;
-	char* type_entry;
-
-	entity_type = *param_1;
-	type_entry = g_entity_type_table + (uint) entity_type * 0x24d;
-	building_tier = type_entry[0x247];
-	upgrade_data = *(int*) (param_1 + 0x65);
-	if (building_tier == '\x01') {
-		stat_count = 8;
-		if (*(uchar*) (upgrade_data + 0x19) == (uchar) 1) {
-			return 0xc;
-		}
+	(void) param_1;
+	__asm {
+		mov edx, dword ptr [esp + 4]
+		xor ecx, ecx
+		push ebx
+		push esi
+		mov cl, byte ptr [edx]
+		mov esi, dword ptr [g_entity_type_table]
+		add esi, ecx
+		lea eax, [ecx + ecx*2]
+		shl eax, 4
+		add eax, ecx
+		mov ecx, dword ptr [edx + 0x65]
+		mov dl, 1
+		lea eax, [eax + eax*2]
+		lea eax, [esi + eax*4]
+		mov al, byte ptr [eax + 0x247]
+		cmp al, dl
+		jne L_chk2
+		mov bl, byte ptr [ecx + 0x19]
+		mov eax, 8
+		cmp bl, dl
+		jne L_done
+		pop esi
+		mov eax, 0xc
+		pop ebx
+		ret
+	L_chk2:
+		cmp al, 2
+		jne L_else
+		mov bl, byte ptr [ecx + 0x19]
+		mov eax, 0xc
+		cmp bl, dl
+		jne L_chk1a_t2
+		mov eax, 0x12
+	L_chk1a_t2:
+		cmp byte ptr [ecx + 0x1a], dl
+		jne L_done
+		pop esi
+		add eax, 2
+		pop ebx
+		ret
+	L_else:
+		mov bl, byte ptr [ecx + 0x19]
+		mov eax, 0x10
+		cmp bl, dl
+		jne L_chk1a_else
+		mov eax, 0x18
+	L_chk1a_else:
+		cmp byte ptr [ecx + 0x1a], dl
+		jne L_chk1b
+		add eax, 4
+	L_chk1b:
+		cmp byte ptr [ecx + 0x1b], dl
+		jne L_done
+		add eax, 2
+	L_done:
+		pop esi
+		pop ebx
+		ret
 	}
-	else if (building_tier == '\x02') {
-		stat_count = 0xc;
-		if (*(uchar*) (upgrade_data + 0x19) == (uchar) 1) {
-			stat_count = 0x12;
-		}
-		if (*(uchar*) (upgrade_data + 0x1a) == (uchar) 1) {
-			return stat_count + 2;
-		}
-	}
-	else {
-		stat_count = 0x10;
-		if (*(uchar*) (upgrade_data + 0x19) == (uchar) 1) {
-			stat_count = 0x18;
-		}
-		if (*(uchar*) (upgrade_data + 0x1a) == (uchar) 1) {
-			stat_count = stat_count + 4;
-		}
-		if (*(uchar*) (upgrade_data + 0x1b) == (uchar) 1) {
-			stat_count = stat_count + 2;
-		}
-	}
-	return stat_count;
 }
