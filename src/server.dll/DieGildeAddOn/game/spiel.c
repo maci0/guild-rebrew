@@ -3996,28 +3996,53 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 // FUNCTION: SERVER 0x10019c60
 // gm_FindEntityByOwner
-char* __cdecl gm_FindEntityByOwner(int param_1)
+__declspec(naked) char* __cdecl gm_FindEntityByOwner(int param_1)
 {
-	unsigned char* p;
-	int i;
-	unsigned char type;
-
-	if (param_1 == 0) {
-		return 0;
+	(void) param_1;
+	__asm {
+		push edi
+		mov edi, dword ptr [esp + 8]
+		xor eax, eax
+		test edi, edi
+		jne L_start
+		pop edi
+		ret
+	L_start:
+		push esi
+		xor esi, esi
+		mov ecx, 0x100358a2
+	L_loop:
+		mov dl, byte ptr [ecx + 0x162]
+		test dl, dl
+		je L_next
+		cmp dword ptr [ecx + 0x16a], edi
+		jne L_next
+		mov dl, byte ptr [ecx]
+		cmp dl, 6
+		je L_found
+		cmp dl, 7
+		je L_found
+		cmp dl, 1
+		je L_found
+		cmp dl, 2
+		je L_found
+	L_next:
+		add ecx, 0x21c
+		inc esi
+		cmp ecx, 0x1009aca2
+		jl L_loop
+		pop esi
+		pop edi
+		ret
+	L_found:
+		lea eax, [esi + esi*2]
+		pop esi
+		pop edi
+		lea eax, [eax + eax*4]
+		lea eax, [eax + eax*8]
+		lea eax, [eax*4 + 0x100358a0]
+		ret
 	}
-	i = 0;
-	p = g_entity_state_base;
-	do {
-		if (p[0x162] != 0 && *(int*) (p + 0x16a) == param_1) {
-			type = *p;
-			if (type == 6 || type == 7 || type == 1 || type == 2) {
-				return g_entity_array + i * 0x21c;
-			}
-		}
-		p += 0x21c;
-		i++;
-	} while ((int) p < 0x1009aca2);
-	return 0;
 }
 
 /* Gets a message field from a command packet. Reads a
