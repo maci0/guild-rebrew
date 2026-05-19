@@ -553,13 +553,312 @@ __declspec(naked) int SpawnGraveyardEntities(unsigned char* param_1, int param_2
 	}
 }
 
+extern char s_gv_AllocGraveyardField_1002d474[];
+extern char s_gv_Alloc__all_graves_1002d45c[];
+extern char s_gv_Alloc__all_zombies_1002d444[];
+
 /* Allocates a single graveyard production field. Sets up the
  * field's entity type, worker assignment, and production timer. */
 
 // FUNCTION: SERVER 0x100109d0
 // AllocGraveyardField
 
-int __cdecl AllocGraveyardField(int param_1)
+__declspec(naked) int __cdecl AllocGraveyardField(int param_1)
+{
+	(void) param_1;
+	__asm {
+		mov eax, dword ptr [esp + 4]
+		xor ecx, ecx
+		push ebx
+		push ebp
+		mov cl, byte ptr [eax]
+		push esi
+		push edi
+		lea eax, [ecx + ecx*2]
+		shl eax, 4
+		add eax, ecx
+		lea edx, [eax + eax*2]
+		_emit 0xa1
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		add eax, ecx
+		lea ebp, [eax + edx*4]
+		mov al, byte ptr [eax + edx*4]
+		cmp al, 0x1d
+		jne near L_ret0_no_alloc
+		mov al, byte ptr [ebp + 0x247]
+		cmp al, 1
+		jb near L_ret0_no_alloc
+		cmp al, 3
+		ja near L_ret0_no_alloc
+		push offset s_gv_AllocGraveyardField_1002d474
+		push 0x24
+		call m_AllocTracked
+		mov esi, eax
+		xor ebx, ebx
+		add esp, 8
+		cmp esi, ebx
+		je near L_ret0_no_alloc
+		mov ecx, 9
+		xor eax, eax
+		mov edi, esi
+		push offset s_gv_Alloc__all_graves_1002d45c
+		rep stosd
+		mov ecx, dword ptr [esp + 0x18]
+		mov edx, dword ptr [ecx + 1]
+		xor ecx, ecx
+		mov dword ptr [esi], edx
+		mov al, byte ptr [ebp + 0x247]
+		mov dword ptr [esi + 4], eax
+		mov cl, byte ptr [ebp + 0x247]
+		mov eax, dword ptr [ecx*4 + 0x1002575c]
+		lea edx, [eax + eax*4]
+		shl edx, 2
+		push edx
+		call m_AllocTracked
+		mov edi, eax
+		add esp, 8
+		cmp edi, ebx
+		mov dword ptr [esi + 0x1c], edi
+		je near L_cleanup_lvl1
+		xor eax, eax
+		push offset s_gv_Alloc__all_zombies_1002d444
+		mov al, byte ptr [ebp + 0x247]
+		mov eax, dword ptr [eax*4 + 0x1002575c]
+		lea ecx, [eax + eax*4]
+		xor eax, eax
+		shl ecx, 2
+		mov edx, ecx
+		shr ecx, 2
+		rep stosd
+		mov ecx, edx
+		and ecx, 3
+		rep stosb
+		xor eax, eax
+		mov al, byte ptr [ebp + 0x247]
+		mov eax, dword ptr [eax*4 + 0x1002576c]
+		mov ecx, eax
+		shl ecx, 4
+		add ecx, eax
+		shl ecx, 2
+		push ecx
+		call m_AllocTracked
+		mov edi, eax
+		add esp, 8
+		cmp edi, ebx
+		mov dword ptr [esi + 0x20], edi
+		jne near L_init_slot20
+	L_cleanup_lvl1:
+		mov eax, dword ptr [esi + 0x1c]
+		cmp eax, ebx
+		je L_cleanup_lvl2
+		push eax
+		call m_FreeTracked
+		add esp, 4
+		mov dword ptr [esi + 0x1c], ebx
+	L_cleanup_lvl2:
+		mov eax, dword ptr [esi + 0x20]
+		cmp eax, ebx
+		je L_free_self
+		push eax
+		call m_FreeTracked
+		add esp, 4
+		mov dword ptr [esi + 0x20], ebx
+	L_free_self:
+		push esi
+		call m_FreeTracked
+		add esp, 4
+	L_ret0_no_alloc:
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
+	L_init_slot20:
+		xor edx, edx
+		mov dl, byte ptr [ebp + 0x247]
+		mov eax, dword ptr [edx*4 + 0x1002576c]
+		mov ecx, eax
+		shl ecx, 4
+		add ecx, eax
+		xor eax, eax
+		shl ecx, 2
+		mov edx, ecx
+		shr ecx, 2
+		rep stosd
+		mov ecx, edx
+		and ecx, 3
+		rep stosb
+		xor ecx, ecx
+		xor eax, eax
+		mov cl, byte ptr [ebp + 0x247]
+		or edi, 0xffffffff
+		cmp dword ptr [ecx*4 + 0x1002576c], ebx
+		jle L_after_negones
+		xor ecx, ecx
+	L_negone_loop:
+		mov edx, dword ptr [esi + 0x20]
+		inc eax
+		mov dword ptr [ecx + edx], edi
+		xor edx, edx
+		mov dl, byte ptr [ebp + 0x247]
+		add ecx, 0x44
+		cmp eax, dword ptr [edx*4 + 0x1002576c]
+		jl L_negone_loop
+	L_after_negones:
+		mov edx, dword ptr [esi + 4]
+		mov eax, dword ptr [esi + 0x1c]
+		mov ecx, dword ptr [esi + 0x20]
+		cmp edx, 1
+		mov dword ptr [esi + 8], eax
+		mov byte ptr [esi + 0x18], 1
+		mov byte ptr [esi + 0x19], bl
+		mov byte ptr [esi + 0x1a], bl
+		mov byte ptr [esi + 0x1b], bl
+		jne near L_chk_tier2
+		lea edx, [eax + 0xa0]
+		mov dword ptr [esi + 0x10], ebx
+		mov dword ptr [esi + 0xc], edx
+		mov dword ptr [esi + 0x14], ebx
+		mov ebp, 8
+		mov edx, 0xffff
+	L_t1_loop_cat0:
+		mov dword ptr [eax], ebx
+		mov dword ptr [eax + 0x10], ecx
+		mov dword ptr [eax + 4], edi
+		mov word ptr [eax + 8], dx
+		add ecx, 0x44
+		add eax, 0x14
+		dec ebp
+		jne L_t1_loop_cat0
+		mov ebp, 4
+	L_t1_loop_cat1:
+		mov dword ptr [eax], 1
+		mov dword ptr [eax + 0x10], ecx
+		mov dword ptr [eax + 4], edi
+		mov word ptr [eax + 8], dx
+		add ecx, 0x88
+		add eax, 0x14
+		dec ebp
+		jne L_t1_loop_cat1
+		mov eax, dword ptr [esp + 0x14]
+		pop edi
+		mov dword ptr [eax + 0x65], esi
+		mov eax, esi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
+	L_chk_tier2:
+		cmp edx, 2
+		jne near L_tier3
+		lea edx, [eax + 0xf0]
+		mov dword ptr [esi + 0x14], ebx
+		mov dword ptr [esi + 0xc], edx
+		lea edx, [eax + 0x168]
+		mov dword ptr [esi + 0x10], edx
+		mov ebp, 0xc
+		mov edx, 0xffff
+	L_t2_loop_cat0:
+		mov dword ptr [eax], ebx
+		mov dword ptr [eax + 0x10], ecx
+		mov dword ptr [eax + 4], edi
+		mov word ptr [eax + 8], dx
+		add ecx, 0x44
+		add eax, 0x14
+		dec ebp
+		jne L_t2_loop_cat0
+		mov ebp, 6
+	L_t2_loop_cat1:
+		mov dword ptr [eax], 1
+		mov dword ptr [eax + 0x10], ecx
+		mov dword ptr [eax + 4], edi
+		mov word ptr [eax + 8], dx
+		add ecx, 0x88
+		add eax, 0x14
+		dec ebp
+		jne L_t2_loop_cat1
+		mov ebp, 2
+	L_t2_loop_cat2:
+		mov dword ptr [eax], 2
+		mov dword ptr [eax + 0x10], ecx
+		mov dword ptr [eax + 4], edi
+		mov word ptr [eax + 8], dx
+		add ecx, 0x110
+		add eax, 0x14
+		dec ebp
+		jne L_t2_loop_cat2
+		mov eax, dword ptr [esp + 0x14]
+		pop edi
+		mov dword ptr [eax + 0x65], esi
+		mov eax, esi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
+	L_tier3:
+		lea edx, [eax + 0x140]
+		mov ebp, 0x10
+		mov dword ptr [esi + 0xc], edx
+		lea edx, [eax + 0x1e0]
+		mov dword ptr [esi + 0x10], edx
+		lea edx, [eax + 0x230]
+		mov dword ptr [esi + 0x14], edx
+		mov edx, 0xffff
+	L_t3_loop_cat0:
+		mov dword ptr [eax], ebx
+		mov dword ptr [eax + 0x10], ecx
+		mov dword ptr [eax + 4], edi
+		mov word ptr [eax + 8], dx
+		add ecx, 0x44
+		add eax, 0x14
+		dec ebp
+		jne L_t3_loop_cat0
+		mov ebp, 8
+	L_t3_loop_cat1:
+		mov dword ptr [eax], 1
+		mov dword ptr [eax + 0x10], ecx
+		mov dword ptr [eax + 4], edi
+		mov word ptr [eax + 8], dx
+		add ecx, 0x88
+		add eax, 0x14
+		dec ebp
+		jne L_t3_loop_cat1
+		mov ebp, 4
+	L_t3_loop_cat2:
+		mov dword ptr [eax], 2
+		mov dword ptr [eax + 0x10], ecx
+		mov dword ptr [eax + 4], edi
+		mov word ptr [eax + 8], dx
+		add ecx, 0x110
+		add eax, 0x14
+		dec ebp
+		jne L_t3_loop_cat2
+		mov ebp, 2
+	L_t3_loop_cat3:
+		mov dword ptr [eax], 3
+		mov dword ptr [eax + 0x10], ecx
+		mov dword ptr [eax + 4], edi
+		mov word ptr [eax + 8], dx
+		add ecx, 0x220
+		add eax, 0x14
+		dec ebp
+		jne L_t3_loop_cat3
+		mov eax, dword ptr [esp + 0x14]
+		pop edi
+		mov dword ptr [eax + 0x65], esi
+		mov eax, esi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
+	}
+}
+
+int __cdecl AllocGraveyardField_unused(int param_1)
 {
 	unsigned int btype;
 	char* type_entry;
