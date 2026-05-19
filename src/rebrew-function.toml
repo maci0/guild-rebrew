@@ -268,9 +268,7 @@ blocker_delta = 365
 
 ["SERVER.0x1000b1c0"]
 size = 205
-status = "STUB"
-blocker = "comparison direction swap, jump condition swap, zero-extend pattern (xor vs mov)"
-blocker_delta = 196
+status = "RELOC"
 
 ["SERVER.0x1000b290"]
 size = 425

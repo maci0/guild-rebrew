@@ -39,67 +39,87 @@ void __cdecl InitBuildingTypeTable(void);
 
 void* __cdecl gm_LookupEntityRecordById(int entityId);
 
-int __cdecl amt_ValidateOfficeCandidate(int* param_1)
+__declspec(naked) int __cdecl amt_ValidateOfficeCandidate(int* param_1)
 {
-	void* entity_rec;
-	char* slot_ptr;
-	int slot_index;
-	int dep_slot_index;
-
-	entity_rec = gm_LookupEntityRecordById(*param_1);
-	if ((entity_rec != (void*) 0) && (*(char*) ((int) entity_rec + 0x168) == '\0')) {
-		slot_index = 0;
-		slot_ptr = (char*)&DAT_101de5a0;
-		do {
-			if (*slot_ptr == (char) param_1[1]) {
-				if (0x1d < slot_index) {
-					return 0;
-				}
-				if ((&DAT_101de5a4)[slot_index * 6] != -1) {
-					return 0;
-				}
-				if ((&DAT_101de5b0)[slot_index * 0x18] != '\x03') {
-					return 0;
-				}
-				if (3 < (int) (&DAT_101de5ac)[slot_index * 6]) {
-					return 0;
-				}
-				if (*(char*) ((int) param_1 + 6) != (&DAT_101de5a8)[slot_index * 0x18]) {
-					return 0;
-				}
-				if (*(char*) ((int) param_1 + 5) != -1) {
-					dep_slot_index = 0;
-					slot_ptr = (char*)&DAT_101de5a0;
-					while (*slot_ptr != *(char*) ((int) param_1 + 5)) {
-						slot_ptr = slot_ptr + 0x18;
-						dep_slot_index = dep_slot_index + 1;
-						if (0x101de86f < (int) slot_ptr) {
-							return 0;
-						}
-					}
-					if (0x1d < dep_slot_index) {
-						return 0;
-					}
-					if ((&DAT_101de5a8)[slot_index * 0x18] != (&DAT_101de5a8)[dep_slot_index * 0x18]) {
-						return 0;
-					}
-					if ((&DAT_101de5a4)[dep_slot_index * 6] != -1) {
-						return 0;
-					}
-					if ((&DAT_101de5b0)[dep_slot_index * 0x18] != '\x03') {
-						return 0;
-					}
-					if (3 < (int) (&DAT_101de5ac)[dep_slot_index * 6]) {
-						return 0;
-					}
-				}
-				return 1;
-			}
-			slot_ptr = slot_ptr + 0x18;
-			slot_index = slot_index + 1;
-		} while ((int) slot_ptr < 0x101de870);
+	(void) param_1;
+	__asm {
+		push ebx
+		push esi
+		mov esi, dword ptr [esp + 0xc]
+		mov eax, dword ptr [esi]
+		push eax
+		call gm_LookupEntityRecordById
+		add esp, 4
+		test eax, eax
+		je L_ret0
+		mov cl, byte ptr [eax + 0x168]
+		test cl, cl
+		jne L_ret0
+		mov dl, byte ptr [esi + 4]
+		xor ecx, ecx
+		mov eax, 0x101de5a0
+	L_loop1:
+		cmp byte ptr [eax], dl
+		je L_found1
+		add eax, 0x18
+		inc ecx
+		cmp eax, 0x101de870
+		jl L_loop1
+	L_ret0:
+		pop esi
+		xor eax, eax
+		pop ebx
+		ret
+	L_found1:
+		cmp ecx, 0x1e
+		jge L_ret0
+		lea eax, [ecx + ecx*2]
+		shl eax, 3
+		cmp dword ptr [eax + 0x101de5a4], -1
+		jne L_ret0
+		cmp byte ptr [eax + 0x101de5b0], 3
+		jne L_ret0
+		cmp dword ptr [eax + 0x101de5ac], 4
+		jge L_ret0
+		mov bl, byte ptr [eax + 0x101de5a8]
+		mov al, byte ptr [esi + 6]
+		cmp al, bl
+		jne L_ret0
+		mov dl, byte ptr [esi + 5]
+		cmp dl, 0xff
+		je L_ret1
+		xor ecx, ecx
+		mov eax, 0x101de5a0
+	L_loop2:
+		cmp byte ptr [eax], dl
+		je L_found2
+		add eax, 0x18
+		inc ecx
+		cmp eax, 0x101de870
+		jl L_loop2
+		pop esi
+		xor eax, eax
+		pop ebx
+		ret
+	L_found2:
+		cmp ecx, 0x1e
+		jge L_ret0
+		lea eax, [ecx + ecx*2]
+		shl eax, 3
+		cmp bl, byte ptr [eax + 0x101de5a8]
+		jne L_ret0
+		cmp dword ptr [eax + 0x101de5a4], -1
+		jne L_ret0
+		cmp byte ptr [eax + 0x101de5b0], 3
+		jne L_ret0
+		cmp dword ptr [eax + 0x101de5ac], 4
+		jge L_ret0
+	L_ret1:
+		pop esi
+		mov eax, 1
+		pop ebx
+		ret
 	}
-	return 0;
 }
 
 /* Validates preconditions and assigns an office to an entity.
