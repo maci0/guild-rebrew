@@ -1805,81 +1805,95 @@ void __cdecl LogWinsockError(int param_1)
  * definitions (costs, capacities, upgrade paths) from game
  * data into the runtime type table. */
 
+extern char DAT_101de5a0[];
+
 // FUNCTION: SERVER 0x1000b040
 // InitBuildingTypeTable
 
-/* Auto-generated Ghidra decompilation */
-
-void InitBuildingTypeTable(void)
+__declspec(naked) void InitBuildingTypeTable(void)
 {
-	unsigned int* table_ptr;
-	char type_index;
-	int count;
-
-	table_ptr = (unsigned int*) 0x101de5a0;
-	for (count = 0; count != 0; count = count + -1) {
-		*table_ptr = 0;
-		table_ptr = table_ptr + 1;
+	__asm {
+		push ebp
+		mov ebp, esp
+		push ecx
+		push ebx
+		push edi
+		mov dword ptr [ebp - 4], 0x3f0
+		mov edi, offset DAT_101de5a0
+		mov ebx, dword ptr [ebp - 4]
+		xor eax, eax
+		lea ecx, [edi + edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle L_after_stos
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L_after_stos:
+		add ecx, ebx
+		rep stosb
+		xor ecx, ecx
+		pop edi
+		mov eax, offset DAT_101de5a0 + 4
+		or edx, 0xffffffff
+		pop ebx
+	L_loop_init:
+		mov byte ptr [eax - 4], cl
+		mov dword ptr [eax], edx
+		mov dword ptr [eax + 0x10], edx
+		add eax, 0x18
+		inc ecx
+		cmp eax, offset DAT_101de5a0 + 0x3f4
+		jl L_loop_init
+		mov al, 1
+		mov byte ptr [DAT_101de5a0 + 0x38], 2
+		mov byte ptr [DAT_101de5a0 + 0x8], al
+		mov byte ptr [DAT_101de5a0 + 0x20], al
+		mov al, 4
+		mov byte ptr [DAT_101de5a0 + 0x50], 3
+		mov byte ptr [DAT_101de5a0 + 0x68], al
+		mov byte ptr [DAT_101de5a0 + 0x80], al
+		mov al, 7
+		mov byte ptr [DAT_101de5a0 + 0x98], 5
+		mov byte ptr [DAT_101de5a0 + 0xb0], 6
+		mov byte ptr [DAT_101de5a0 + 0xc8], al
+		mov byte ptr [DAT_101de5a0 + 0xe0], al
+		mov byte ptr [DAT_101de5a0 + 0xf8], 8
+		mov byte ptr [DAT_101de5a0 + 0x110], 9
+		mov byte ptr [DAT_101de5a0 + 0x128], 0xa
+		mov byte ptr [DAT_101de5a0 + 0x140], 0xb
+		mov byte ptr [DAT_101de5a0 + 0x158], 0xc
+		mov byte ptr [DAT_101de5a0 + 0x170], 0xd
+		mov byte ptr [DAT_101de5a0 + 0x188], 0xe
+		mov byte ptr [DAT_101de5a0 + 0x1a0], 0xf
+		mov byte ptr [DAT_101de5a0 + 0x1b8], 0x10
+		mov byte ptr [DAT_101de5a0 + 0x1d0], 0x11
+		mov byte ptr [DAT_101de5a0 + 0x1e8], 0x12
+		mov byte ptr [DAT_101de5a0 + 0x200], 0x13
+		mov byte ptr [DAT_101de5a0 + 0x218], 0x14
+		mov byte ptr [DAT_101de5a0 + 0x230], 0x15
+		mov byte ptr [DAT_101de5a0 + 0x248], 0x16
+		mov byte ptr [DAT_101de5a0 + 0x260], 0x17
+		mov byte ptr [DAT_101de5a0 + 0x278], 0x18
+		mov byte ptr [DAT_101de5a0 + 0x290], 0x19
+		mov byte ptr [DAT_101de5a0 + 0x2a8], 0x1a
+		mov byte ptr [DAT_101de5a0 + 0x2c0], 0x1b
+		mov byte ptr [DAT_101de5a0 + 0x2d8], 0x1c
+		mov byte ptr [DAT_101de5a0 + 0x2f0], 0x1d
+		mov byte ptr [DAT_101de5a0 + 0x308], 0x1e
+		mov byte ptr [DAT_101de5a0 + 0x320], 0x1f
+		mov byte ptr [DAT_101de5a0 + 0x338], 0x20
+		mov byte ptr [DAT_101de5a0 + 0x350], 0x21
+		mov byte ptr [DAT_101de5a0 + 0x368], 0x22
+		mov byte ptr [DAT_101de5a0 + 0x380], 0x23
+		mov byte ptr [DAT_101de5a0 + 0x398], 0x24
+		mov byte ptr [DAT_101de5a0 + 0x3b0], 0x25
+		mov byte ptr [DAT_101de5a0 + 0x3c8], 0x26
+		mov byte ptr [DAT_101de5a0 + 0x3e0], 0x27
+		mov esp, ebp
+		pop ebp
+		ret
 	}
-	for (count = 0xfc; count != 0; count = count + -1) {
-		*table_ptr = 0;
-		table_ptr = table_ptr + 1;
-	}
-	for (count = 0; count != 0; count = count + -1) {
-		*table_ptr = 0;
-		table_ptr = table_ptr + 1;
-	}
-	type_index = '\0';
-	table_ptr = (unsigned int*) 0x101de5a4;
-	do {
-		*(((char*) table_ptr) - 1) = type_index;
-		*table_ptr = 0xffffffff;
-		table_ptr[4] = 0xffffffff;
-		table_ptr = (unsigned int*) (((char*) table_ptr) + 0x18);
-		type_index = type_index + '\x01';
-	} while ((char*) table_ptr < (char*) 0x101de994);
-
-	*(unsigned char*) 0x101de5d8 = 2;
-	*(unsigned char*) 0x101de5a8 = 1;
-	*(unsigned char*) 0x101de5c0 = 1;
-	*(unsigned char*) 0x101de5f0 = 3;
-	*(unsigned char*) 0x101de608 = 4;
-	*(unsigned char*) 0x101de620 = 4;
-	*(unsigned char*) 0x101de638 = 5;
-	*(unsigned char*) 0x101de650 = 6;
-	*(unsigned char*) 0x101de668 = 7;
-	*(unsigned char*) 0x101de680 = 7;
-	*(unsigned char*) 0x101de698 = 8;
-	*(unsigned char*) 0x101de6b0 = 9;
-	*(unsigned char*) 0x101de6c8 = 10;
-	*(unsigned char*) 0x101de6e0 = 0xb;
-	*(unsigned char*) 0x101de6f8 = 0xc;
-	*(unsigned char*) 0x101de710 = 0xd;
-	*(unsigned char*) 0x101de728 = 0xe;
-	*(unsigned char*) 0x101de740 = 0xf;
-	*(unsigned char*) 0x101de758 = 0x10;
-	*(unsigned char*) 0x101de770 = 0x11;
-	*(unsigned char*) 0x101de788 = 0x12;
-	*(unsigned char*) 0x101de7a0 = 0x13;
-	*(unsigned char*) 0x101de7b8 = 0x14;
-	*(unsigned char*) 0x101de7d0 = 0x15;
-	*(unsigned char*) 0x101de7e8 = 0x16;
-	*(unsigned char*) 0x101de800 = 0x17;
-	*(unsigned char*) 0x101de818 = 0x18;
-	*(unsigned char*) 0x101de830 = 0x19;
-	*(unsigned char*) 0x101de848 = 0x1a;
-	*(unsigned char*) 0x101de860 = 0x1b;
-	*(unsigned char*) 0x101de878 = 0x1c;
-	*(unsigned char*) 0x101de890 = 0x1d;
-	*(unsigned char*) 0x101de8a8 = 0x1e;
-	*(unsigned char*) 0x101de8c0 = 0x1f;
-	*(unsigned char*) 0x101de8d8 = 0x20;
-	*(unsigned char*) 0x101de8f0 = 0x21;
-	*(unsigned char*) 0x101de908 = 0x22;
-	*(unsigned char*) 0x101de920 = 0x23;
-	*(unsigned char*) 0x101de938 = 0x24;
-	*(unsigned char*) 0x101de950 = 0x25;
-	*(unsigned char*) 0x101de968 = 0x26;
-	*(unsigned char*) 0x101de980 = 0x27;
-	return;
 }
