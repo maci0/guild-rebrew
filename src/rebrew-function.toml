@@ -645,8 +645,7 @@ status = "RELOC"
 
 ["SERVER.0x100100a0"]
 size = 159
-status = "STUB"
-blocker = "three-fcom float clamp pattern with shared return paths - compiler generates different branch layout and fcom count"
+status = "RELOC"
 
 ["SERVER.0x10010140"]
 size = 280

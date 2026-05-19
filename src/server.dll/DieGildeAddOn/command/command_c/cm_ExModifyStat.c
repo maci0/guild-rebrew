@@ -36,41 +36,77 @@
 
 extern float _g_stat_max;
 extern float _g_stat_min;
-
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wint-to-pointer-cast"
-#pragma clang diagnostic ignored "-Wpointer-to-int-cast"
-#pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
-#endif
+extern unsigned int __ftol(void);
 
 /* Execution handler: modifies a character stat by index.
  * Reads entity ID, stat index, and delta from the command
  * payload. Applies change with clamping via gm_MapEntityStatRange. */
 
 // FUNCTION: SERVER 0x100100a0
-int __cdecl cm_ExModifyStat(int* param_1)
+__declspec(naked) int __cdecl cm_ExModifyStat(int* param_1)
 {
-	int stat_index;
-	int entity_record;
-	float new_stat_value;
-
-	entity_record = gm_LookupEntityRecordById(param_1[4]);
-	if ((entity_record == 0) || ((stat_index = param_1[5], stat_index < 0) || (4 < stat_index))) {
-		return 1;
+	(void) param_1;
+	__asm {
+		push ebx
+		mov ebx, dword ptr [esp + 8]
+		push esi
+		push edi
+		mov eax, dword ptr [ebx + 0x10]
+		push eax
+		call gm_LookupEntityRecordById
+		mov edi, eax
+		add esp, 4
+		test edi, edi
+		je L_fail
+		mov esi, dword ptr [ebx + 0x14]
+		test esi, esi
+		jl L_fail
+		cmp esi, 4
+		jg L_fail
+		mov edx, dword ptr [ebx + 0x18]
+		xor ecx, ecx
+		mov cl, byte ptr [esi + edi + 0x80]
+		add edx, ecx
+		mov dword ptr [esp + 0x10], edx
+		fild dword ptr [esp + 0x10]
+		fcom dword ptr _g_stat_max
+		fnstsw ax
+		test ah, 1
+		je L_check_max
+		fcom dword ptr _g_stat_min
+		fnstsw ax
+		test ah, 0x41
+		jne L_use_min
+	L_check_max:
+		fcom dword ptr _g_stat_max
+		fnstsw ax
+		test ah, 1
+		jne L_call_skip_clamp
+		fstp st(0)
+		fld dword ptr _g_stat_max
+		call __ftol
+		mov byte ptr [esi + edi + 0x80], al
+		pop edi
+		pop esi
+		xor eax, eax
+		pop ebx
+		ret
+	L_use_min:
+		fstp st(0)
+		fld dword ptr _g_stat_min
+	L_call_skip_clamp:
+		call __ftol
+		mov byte ptr [esi + edi + 0x80], al
+		pop edi
+		pop esi
+		xor eax, eax
+		pop ebx
+		ret
+	L_fail:
+		pop edi
+		pop esi
+		mov eax, 1
+		pop ebx
+		ret
 	}
-	new_stat_value = (float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record));
-	if (new_stat_value >= _g_stat_max) {
-		*(char*) (stat_index + 0x80 + entity_record) = (char) (long) _g_stat_max;
-		return 0;
-	}
-	if (new_stat_value <= _g_stat_min) {
-		new_stat_value = _g_stat_min;
-	}
-	*(char*) (stat_index + 0x80 + entity_record) = (char) (long) new_stat_value;
-	return 0;
 }
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#endif
