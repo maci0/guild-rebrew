@@ -993,6 +993,7 @@ status = "RELOC"
 ["SERVER.0x100174d0"]
 size = 1088
 status = "STUB"
+cflags = "/O2 /Oy- /Gd"
 blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
 blocker_delta = 1007
 ghidra = "gm_AllocGebaeude"
