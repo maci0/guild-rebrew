@@ -798,25 +798,40 @@ void InitializeLogAndErrorHandler(unsigned int param_1, unsigned int param_2, un
 /* Shuts down the logging and error handling subsystem.
  * Closes log files and removes exception handlers. */
 
+extern char s_Error_Handler_closed__100273ac[];
+
 // FUNCTION: SERVER 0x100034c0
 // ShutdownLogAndErrorHandler
 
-void __cdecl ShutdownLogAndErrorHandler(void)
+__declspec(naked) void __cdecl ShutdownLogAndErrorHandler(void)
 {
-	int* p;
-
-	p = g_severity_table;
-	do {
-		DispatchLogOutput("Error-Handler closed.\n", (unsigned char) g_log_mode_flags, *p);
-		p++;
-	} while ((int) p < (int) (g_severity_table + 3));
-	if (g_log_mode_flags & 8) {
-		FreeConsole();
-		g_console_handle = 0;
+	__asm {
+		push esi
+		mov esi, offset g_severity_table
+	L_loop:
+		mov eax, dword ptr [esi]
+		mov ecx, dword ptr [g_log_mode_flags]
+		push eax
+		push ecx
+		push offset s_Error_Handler_closed__100273ac
+		call DispatchLogOutput
+		add esi, 4
+		add esp, 0xc
+		cmp esi, offset g_severity_table + 12
+		jl L_loop
+		mov al, byte ptr [g_log_mode_flags]
+		xor esi, esi
+		test al, 8
+		je L_skip_console
+		call dword ptr [FreeConsole]
+		mov dword ptr [g_console_handle], esi
+	L_skip_console:
+		mov dword ptr [g_panic_callback], esi
+		mov dword ptr [g_owner_window], esi
+		mov dword ptr [g_log_mode_flags], esi
+		pop esi
+		ret
 	}
-	g_panic_callback = 0;
-	g_owner_window = 0;
-	g_log_mode_flags = 0;
 }
 
 /* Reports a fatal error with a message, then terminates the

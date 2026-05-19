@@ -307,6 +307,7 @@ char s_cm_ExClearLagerslot___Lager_has_n_1002d054[1] = "";
 char s_cm_ExCreateGeb____Could_not_find_1002d41c[1] = "";
 char s_cm_ExCreateGeb____failed_1002d400[1] = "";
 char s_cm_ExEmployWorker____Illegal_geb_1002d33c[1] = "";
+char s_Error_Handler_closed__100273ac[1] = "";
 char s_cm_ExEmployWorker____Illegal_gw__1002d318[1] = "";
 char s_cm_ExFree____Can_t_free_Objects_1002cc3c[1] = "";
 char s_cm_ExKillSpieler___Could_not_fin_1002d154[1] = "";

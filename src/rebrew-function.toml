@@ -44,8 +44,7 @@ ghidra = "DecodePotentialControlTransfer"
 
 ["SERVER.0x100034c0"]
 size = 83
-status = "STUB"
-blocker_delta = 386
+status = "RELOC"
 analysis = "Initialization routine for the server's telemetry. Registers the CrashDumpUnhandledExceptionFilter. Allocates a console if requested via flags. Truncates log files (__server.log, gilde_server.log) if they exceed 64KB (0x10000 bytes) and seeds them with a startup banner. | If file logging is enabled, validate/rotate server log targets."
 
 ["SERVER.0x10003520"]
@@ -365,9 +364,7 @@ ghidra = "find_by_id"
 
 ["SERVER.0x1000c6a0"]
 size = 102
-status = "STUB"
-blocker = "comparison direction swap, jump condition swap"
-blocker_delta = 55
+status = "RELOC"
 
 ["SERVER.0x1000c710"]
 size = 752

@@ -746,29 +746,56 @@ int* __cdecl ahm_LookupEntityInTable(int param_1)
 // FUNCTION: SERVER 0x1000c6a0
 // ahm_QueryEntityBuildingType
 
-int __cdecl ahm_QueryEntityBuildingType(int param_1)
+__declspec(naked) int __cdecl ahm_QueryEntityBuildingType(int param_1)
 {
-	unsigned short* entity;
-	int table_entry;
-
-	entity = gm_StartEntityQuery(*(int*) (param_1 + 0x178), 1, 5);
-	if (entity != (unsigned short*) 0) {
-		while (table_entry = (int) ahm_LookupEntityInTable(*entity), table_entry == 0) {
-			entity = gm_NextEntityQueryMatch();
-			if (entity == (unsigned short*) 0) {
-				ahm_LookupEntityInTable(0);
-				return 0;
-			}
-		}
-		if (*(int*) (table_entry + 0x58) != 1 && *(int*) (table_entry + 0x58) != 2) {
-			return 0;
-		}
-		if (0 < *(int*) ((char*) entity + 0x20)) {
-			return 0;
-		}
+	(void) param_1;
+	__asm {
+		mov eax, dword ptr [esp + 4]
+		push esi
+		push 5
+		push 1
+		mov ecx, dword ptr [eax + 0x178]
+		push ecx
+		call gm_StartEntityQuery
+		mov esi, eax
+		add esp, 0xc
+		test esi, esi
+		je L_fail
+	L_loop:
+		xor edx, edx
+		mov dx, word ptr [esi]
+		push edx
+		call ahm_LookupEntityInTable
+		add esp, 4
+		test eax, eax
+		jne L_check_type
+		call gm_NextEntityQueryMatch
+		mov esi, eax
+		test esi, esi
+		jne L_loop
+		push eax
+		call ahm_LookupEntityInTable
+		add esp, 4
+		pop esi
+		ret
+	L_check_type:
+		mov ecx, dword ptr [eax + 0x58]
+		cmp ecx, 1
+		je L_check_count
+		cmp ecx, 2
+		jne L_ret
+	L_check_count:
+		mov ecx, dword ptr [esi + 0x20]
+		test ecx, ecx
+		jg L_ret
+	L_fail:
+		push 0
+		call ahm_LookupEntityInTable
+		add esp, 4
+	L_ret:
+		pop esi
+		ret
 	}
-	ahm_LookupEntityInTable(0);
-	return 0;
 }
 
 /* Calculates the payload size of a command packet based on
