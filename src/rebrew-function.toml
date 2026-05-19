@@ -75,12 +75,12 @@ size = 182
 status = "RELOC"
 
 ["SERVER.0x10003c50"]
-size = 77
+size = 65
 status = "RELOC"
 
 ["SERVER.0x10003ca0"]
-size = 65
-status = "NEAR_MATCHING"
+size = 77
+status = "RELOC"
 
 ["SERVER.0x10003cf0"]
 size = 43
@@ -349,8 +349,6 @@ status = "STUB"
 ["SERVER.0x1000c310"]
 size = 110
 status = "RELOC"
-blocker = "instruction folding (lea vs mov)"
-blocker_delta = 110
 
 ["SERVER.0x1000c380"]
 size = 51
@@ -378,8 +376,6 @@ status = "STUB"
 ["SERVER.0x1000c670"]
 size = 45
 status = "RELOC"
-blocker = "instruction folding (lea vs mov), jump condition swap"
-blocker_delta = 72
 ghidra = "find_by_id"
 
 ["SERVER.0x1000c6a0"]
@@ -1126,7 +1122,7 @@ status = "RELOC"
 
 ["SERVER.0x10017ab0"]
 size = 74
-status = "NEAR_MATCHING"
+status = "RELOC"
 
 ["SERVER.0x10017b00"]
 size = 320
@@ -1237,12 +1233,12 @@ size = 62
 status = "RELOC"
 
 ["SERVER.0x10019b80"]
-size = 124
-status = "NEAR_MATCHING"
+size = 83
+status = "RELOC"
 
 ["SERVER.0x10019be0"]
-size = 83
-status = "NEAR_MATCHING"
+size = 124
+status = "RELOC"
 
 ["SERVER.0x10019c60"]
 size = 48

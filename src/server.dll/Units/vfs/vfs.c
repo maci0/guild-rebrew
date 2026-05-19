@@ -25,6 +25,7 @@ void __cdecl vfs_FreeSubobj(void*);
 int __cdecl vfs_CleanupObject(char*);
 int __cdecl vfs_DestroyEntity(char*);
 int __cdecl vfs_ReadUint32BE(int);
+int __cdecl vfs_FlushAndClose(int);
 
 int __cdecl ReadVfsCompressed(int, int, unsigned int);
 
@@ -169,7 +170,7 @@ unsigned int __cdecl vfs_FlushStream(int param_1, int param_2)
 // FUNCTION: SERVER 0x10003C50
 // vfs_ReadUint32BE
 
-int __cdecl vfs_FlushAndClose(int param_1)
+int __cdecl vfs_ReadUint32BE(int param_1)
 {
 	int result;
 	int last;
@@ -190,7 +191,7 @@ int __cdecl vfs_FlushAndClose(int param_1)
 // FUNCTION: SERVER 0x10003CA0
 // vfs_FlushAndClose
 
-int __cdecl vfs_ReadUint32BE(int param_1)
+int __cdecl vfs_FlushAndClose(int param_1)
 {
 	int flush_result;
 

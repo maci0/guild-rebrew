@@ -2461,8 +2461,9 @@ void* __cdecl gm_SearchTable67(int id)
 // FUNCTION: SERVER 0x10017AB0
 // gm_CheckEntityType
 
-int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
+__declspec(naked) int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
 {
+	(void) entity_ptr;
 	__asm {
 		mov eax, dword ptr [esp + 4]
 		test eax, eax
@@ -3864,7 +3865,7 @@ unsigned short __cdecl gm_GetEntityType(short* param_1)
  * Traverses linked entity lists for processing. */
 
 // FUNCTION: SERVER 0x10019b80
-// gm_WalkEntityChain
+// gm_EntityAccumulate
 
 int __cdecl gm_EntityAccumulate(void* param_1)
 {
@@ -3896,7 +3897,7 @@ int __cdecl gm_EntityAccumulate(void* param_1)
  * entities and sums a specified field. */
 
 // FUNCTION: SERVER 0x10019BE0
-// gm_EntityAccumulate
+// gm_WalkEntityChain
 
 int __cdecl gm_WalkEntityChain(int raw_idx)
 {

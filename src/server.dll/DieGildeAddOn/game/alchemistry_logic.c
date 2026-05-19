@@ -858,23 +858,24 @@ check_result:
 // gm_GetFieldByType
 int __cdecl gm_GetFieldByType(char* p, int type)
 {
+	unsigned int b;
 	unsigned int idx;
 	if (type == -2) {
-		idx = *(unsigned char*) (p + 3);
-		idx = ((((idx << 4) + idx) << 8) + idx) << 4;
-		idx = idx + *(unsigned char*) (p + 3);
+		b = *(unsigned char*) (p + 3);
+		idx = ((((b << 4) + b) << 8) + b) << 4;
+		idx = idx + b;
 		return *(int*) ((char*) 0x10442d00 + idx * 9 * 4);
 	}
 	if (type == -3) {
-		idx = *(unsigned char*) (p + 3);
-		idx = ((((idx << 4) + idx) << 8) + idx) << 4;
-		idx = idx + *(unsigned char*) (p + 3);
+		b = *(unsigned char*) (p + 3);
+		idx = ((((b << 4) + b) << 8) + b) << 4;
+		idx = idx + b;
 		return *(int*) ((char*) 0x10442d04 + idx * 9 * 4);
 	}
 	if (type == -4) {
-		idx = *(unsigned char*) (p + 3);
-		idx = ((((idx << 4) + idx) << 8) + idx) << 4;
-		idx = idx + *(unsigned char*) (p + 3);
+		b = *(unsigned char*) (p + 3);
+		idx = ((((b << 4) + b) << 8) + b) << 4;
+		idx = idx + b;
 		return *(int*) ((char*) 0x10442d08 + idx * 9 * 4);
 	}
 	return 0;
