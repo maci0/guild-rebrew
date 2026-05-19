@@ -31,7 +31,7 @@ int DAT_10030b88;
 short DAT_10030b8c;
 short DAT_10030b8e;
 char DAT_10030b90;
-short DAT_10030b94;
+int DAT_10030b94;
 int DAT_10030b98;
 short DAT_10030b9c;
 char DAT_10030b9e;
