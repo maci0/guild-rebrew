@@ -743,8 +743,7 @@ blocker_delta = 535
 
 ["SERVER.0x100122e0"]
 size = 346
-status = "STUB"
-blocker = "instruction folding (lea vs mov), jump condition swap"
+status = "RELOC"
 
 ["SERVER.0x10012440"]
 size = 37

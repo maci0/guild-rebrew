@@ -191,69 +191,124 @@ int __cdecl ls_LoadGraveyardData(int param_1, int param_2)
 // FUNCTION: SERVER 0x100122e0
 // ls_InitNewDynastyEntity
 
-/* TODO: Add extern declarations for globals and called functions */
-
-/* Auto-generated Ghidra decompilation */
-
-void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4)
-
+__declspec(naked) void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4)
 {
-	char random_char;
-	int loop_index;
-	unsigned int* fill_ptr;
-	int var_2h;
-	unsigned char stat_byte;
-	(void) var_2h;
-
-	if (param_1 == 0x15) {
-		*(int*) (param_4 + 0x1cc) = *(int*) (param_4 + 0x1cc) | 0x1000;
-		amt_FindEntity26(*(int*) (param_4 + 4));
+	(void) param_1;
+	(void) param_2;
+	(void) param_3;
+	(void) param_4;
+	__asm {
+		mov eax, dword ptr [esp + 4]
+		push ebp
+		mov ebp, dword ptr [esp + 0x14]
+		cmp eax, 0x15
+		push esi
+		jne L_not_15
+		mov edx, dword ptr [ebp + 0x1cc]
+		mov eax, dword ptr [ebp + 4]
+		or dh, 0x10
+		push eax
+		mov dword ptr [ebp + 0x1cc], edx
+		call amt_FindEntity26
+		jmp L_after_amt
+	L_not_15:
+		mov esi, dword ptr [ebp + 0x1cc]
+		mov ecx, dword ptr [ebp + 4]
+		or esi, 0x2000
+		push ecx
+		mov dword ptr [ebp + 0x1cc], esi
+		call amt_FindEntity27
+	L_after_amt:
+		mov dx, word ptr [esp + 0x18]
+		add esp, 4
+		mov word ptr [ebp + 0xa], dx
+		mov dword ptr [esp + 0x14], 0x100a9820
+		push ebx
+		xor ebx, ebx
+		push edi
+		mov byte ptr [ebp + 0xc], bl
+	L_outer_body:
+		mov edi, dword ptr [esp + 0x1c]
+		xor esi, esi
+		sub edi, 0x100a9820
+	L_inner_loop:
+		push 0x40
+		call gm_RandomMod
+		sub al, 0x20
+		add esp, 4
+		mov byte ptr [edi + esi + 0x100a9820], al
+		mov byte ptr [edi + esi + 0x1014d8e0], bl
+		inc esi
+		cmp esi, 0x300
+		jl L_inner_loop
+		mov eax, dword ptr [esp + 0x1c]
+		add eax, 0x300
+		cmp eax, 0x10139820
+		mov dword ptr [esp + 0x1c], eax
+		jl L_outer_body
+		lea edi, [ebp + 0x5c]
+		mov ecx, 8
+		or eax, 0xffffffff
+		mov word ptr [ebp + 0x50], 0x7fff
+		mov dword ptr [ebp + 0x7c], ebx
+		mov byte ptr [ebp + 0x58], bl
+		rep stosd
+		mov eax, 0x447a0000
+		mov dword ptr [ebp + 0x170], ebx
+		mov dword ptr [ebp + 0x16c], ebx
+		pop edi
+		mov dword ptr [ebp + 0x1c], eax
+		mov dword ptr [ebp + 0x14], 0x3f800000
+		mov dword ptr [ebp + 0x20], 0x41400000
+		mov dword ptr [ebp + 0x10], 0x43a50000
+		mov dword ptr [ebp + 0x18], eax
+		xor esi, esi
+		pop ebx
+	L_stat_loop:
+		push 0x2a
+		call gm_RandomMod
+		and eax, 0xffff
+		add esp, 4
+		mov dword ptr [esp + 0x14], eax
+		fild dword ptr [esp + 0x14]
+		_emit 0xd8
+		_emit 0x05
+		_emit 0x08
+		_emit 0x58
+		_emit 0x02
+		_emit 0x10
+		call __ftol
+		mov byte ptr [esi + ebp + 0x80], al
+		inc esi
+		cmp esi, 5
+		jl L_stat_loop
+		xor ecx, ecx
+		mov byte ptr [ebp + 0xd], 9
+		_emit 0x8a
+		_emit 0x0d
+		_emit 0x39
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		mov edx, dword ptr [ebp + 4]
+		mov eax, ecx
+		push 0xf42400
+		shl eax, 6
+		sub eax, ecx
+		xor ecx, ecx
+		lea eax, [eax + eax*2]
+		mov cx, word ptr [eax*4 + 0x100a8c94]
+		push ecx
+		push edx
+		call gm_AddOrAccumulateObject
+		push 2
+		call gm_RandomMod
+		add esp, 0x10
+		mov byte ptr [ebp + 2], 3
+		pop esi
+		pop ebp
+		ret
 	}
-	else {
-		*(int*) (param_4 + 0x1cc) = *(int*) (param_4 + 0x1cc) | 0x2000;
-		amt_FindEntity27(*(int*) (param_4 + 4));
-	}
-	*(unsigned short*) (param_4 + 10) = (unsigned short) param_3;
-	param_3 = g_100a9820;
-	*(char*) (param_4 + 0xc) = 0;
-	do {
-		int row_offset = param_3 - g_100a9820;
-		loop_index = 0;
-		do {
-			random_char = gm_RandomMod(0x40);
-			g_100a9820[row_offset + loop_index] = random_char - 0x20;
-			g_1014d8e0[row_offset + loop_index] = 0;
-			loop_index++;
-		} while (loop_index < 0x300);
-		param_3 += 0x300;
-	} while (param_3 < g_10139820);
-	*(int*) (param_4 + 0x50) = 0x7fff;
-	*(int*) (param_4 + 0x7c) = 0;
-	*(int*) (param_4 + 0x58) = 0;
-	fill_ptr = (unsigned int*) (param_4 + 0x5c);
-	for (loop_index = 8; loop_index != 0; loop_index = loop_index + -1) {
-		*fill_ptr = 0xffffffff;
-		fill_ptr = fill_ptr + 1;
-	}
-	*(int*) (param_4 + 0x170) = 0;
-	*(int*) (param_4 + 0x16c) = 0;
-	*(int*) (param_4 + 0x1c) = 0x447a0000;
-	*(int*) (param_4 + 0x14) = 0x3f800000;
-	*(int*) (param_4 + 0x20) = 0x41400000;
-	*(int*) (param_4 + 0x10) = 0x43a50000;
-	*(int*) (param_4 + 0x18) = 0x447a0000;
-	loop_index = 0;
-	do {
-		gm_RandomMod(0x2a);
-		stat_byte = __ftol();
-		*(unsigned char*) (param_4 + loop_index + 0x80) = stat_byte;
-		loop_index = loop_index + 1;
-	} while (loop_index < 5);
-	*(char*) (param_4 + 0xd) = 9;
-	gm_AddOrAccumulateObject(*(int*) (param_4 + 4), *(int*) (*(int*) 0x10035439 * 0x2f4 + 0x100a8c94), 16000000);
-	gm_RandomMod(2);
-	*(char*) (param_4 + 2) = 3;
-	return;
 }
 
 /* Reads VFS data with error checking. Wraps the VFS read
