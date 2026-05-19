@@ -63,55 +63,76 @@ extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];
  * entity, otherwise validates the transfer amount. */
 
 // FUNCTION: SERVER 0x1000cb20
-int __cdecl cm_ChkMoveCredits(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ChkMoveCredits(int param_1, char* param_2)
 {
-	int cmd;
-	int value;
-	int* sum_ptr;
-	void* building;
-	void* area;
-
-	cmd = param_1;
-	if (*(int*) (param_1 + 0x14) == -1) {
-		return 0;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		sub esp, 8
+		push esi
+		mov esi, dword ptr [esp + 0x10]
+		mov eax, dword ptr [esi + 0x14]
+		cmp eax, -1
+		je L_ret0
+		push eax
+		push esi
+		call gm_GetFieldByType
+		mov dword ptr [esi + 0x14], eax
+		push eax
+		lea eax, [esp + 0x14]
+		lea ecx, [esp + 0x10]
+		push eax
+		lea edx, [esp + 0x20]
+		push ecx
+		push edx
+		call gm_ResolveEntityById
+		add esp, 0x18
+		test eax, eax
+		jne L_resolved
+		push 1
+		push 0x1002c7a4
+		push 0x22f9
+		jmp L_log
+	L_resolved:
+		mov eax, dword ptr [esp + 0x10]
+		test eax, eax
+		je L_no_p1
+		add eax, 0x5d
+		jmp L_have_sum
+	L_no_p1:
+		mov eax, dword ptr [esp + 4]
+		test eax, eax
+		je L_use_area
+		add eax, 0x14
+		jmp L_have_sum
+	L_use_area:
+		mov eax, dword ptr [esp + 8]
+		add eax, 0x178
+	L_have_sum:
+		mov cl, byte ptr [esi + 0x1c]
+		mov edx, dword ptr [eax]
+		push ecx
+		push edx
+		call gm_QueryEntitySum
+		mov ecx, dword ptr [esi + 0x1d]
+		add esp, 8
+		sub eax, ecx
+		jns L_ret0
+		push 1
+		push 0x1002c774
+		push 0x231b
+	L_log:
+		push 0x1002c748
+		call LogMessageInternal
+		add esp, 0x10
+		mov eax, 1
+		pop esi
+		add esp, 8
+		ret
+	L_ret0:
+		xor eax, eax
+		pop esi
+		add esp, 8
+		ret
 	}
-	value = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x14));
-	*(int*) (cmd + 0x14) = value;
-	if (gm_ResolveEntityById((void**) &param_1, &building, &area, value) == 0) {
-		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
-			0x22f9,
-			s_cm_ChkMoveCredits____Invalid__qu_1002c7a4,
-			1
-		);
-		return 1;
-	}
-
-	if (param_1 != 0) {
-		sum_ptr = (int*) (param_1 + 0x5d);
-	}
-	else {
-		if (building != (void*) 0x0) {
-			sum_ptr = (int*) ((int) building + 0x14);
-		}
-		else if (param_2 != (char*) 0x0) {
-			sum_ptr = (int*) ((int) param_2 + 0x14);
-		}
-		else {
-			sum_ptr = (int*) ((int) area + 0x178);
-		}
-	}
-
-	value = gm_QueryEntitySum(*sum_ptr, (unsigned int) *(unsigned char*) (cmd + 0x1c));
-	if (value - *(int*) (cmd + 0x1d) >= 0) {
-		return 0;
-	}
-
-	LogMessageInternal(
-		s_D__Develop_DieGildeAddOn_command_1002c748,
-		0x231b,
-		s_cm_ChkMoveCredits____Not_enough_m_1002c774,
-		1
-	);
-	return 1;
 }
