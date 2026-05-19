@@ -4009,13 +4009,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 		int* pDst;
 		int* pSrc;
 
-		pSrc = (int*) record_b;
-		pDst = (int*) buf1;
-		for (copy_count = 0x87; copy_count != 0; copy_count--) {
-			*pDst = *pSrc;
-			pSrc++;
-			pDst++;
-		}
+		memcpy(buf1, record_b, 0x21c);
 
 		*(int*) (buf1 + 4) = *(int*) (record_a + 4);
 		*(unsigned char*) (buf1 + 2) = saved_byte2;
@@ -4047,40 +4041,16 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 	}
 
 	saved_id = *(int*) (record_b + 4);
-	{
-		int* pDst = (int*) buf2;
-		int* pSrc = (int*) record_a;
-		for (copy_count = 0x87; copy_count != 0; copy_count--) {
-			*pDst = *pSrc;
-			pSrc++;
-			pDst++;
-		}
-	}
+	memcpy(buf2, record_a, 0x21c);
 	*(int*) (buf2 + 4) = saved_id;
 	*(unsigned short*) buf2 = *(unsigned short*) record_b;
 	*(unsigned char*) (buf2 + 2) = 9;
 
 	offset_a = (int) index_a * 0x21c;
-	{
-		int* pDst = (int*) (offset_a + 0x100358a0);
-		int* pSrc = (int*) buf1;
-		for (copy_count = 0x87; copy_count != 0; copy_count--) {
-			*pDst = *pSrc;
-			pSrc++;
-			pDst++;
-		}
-	}
+	memcpy((char*) (offset_a + 0x100358a0), buf1, 0x21c);
 
 	copy_count = (int) index_b * 0x21c;
-	{
-		int* pDst = (int*) (copy_count + 0x100358a0);
-		int* pSrc = (int*) buf2;
-		for (inner_loop = 0x87; inner_loop != 0; inner_loop--) {
-			*pDst = *pSrc;
-			pSrc++;
-			pDst++;
-		}
-	}
+	memcpy((char*) (copy_count + 0x100358a0), buf2, 0x21c);
 
 	for (inner_loop = *(int*) (offset_a + 0x10035a18); inner_loop != 0; inner_loop = *(int*) (inner_loop + 0x3f)) {
 		*(int*) (inner_loop + 6) = *(int*) (offset_a + 0x100358a4);
