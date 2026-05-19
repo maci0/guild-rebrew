@@ -103,7 +103,7 @@ analysis = "Custom memory allocator wrapping malloc with extensive usage trackin
 
 ["SERVER.0x10006820"]
 size = 188
-status = "STUB"
+status = "RELOC"
 
 ["SERVER.0x100068e0"]
 size = 162

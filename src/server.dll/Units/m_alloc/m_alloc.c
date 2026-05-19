@@ -167,44 +167,78 @@ found: {
 // FUNCTION: SERVER 0x10006820
 // m_FreeTracked
 
-void __cdecl m_FreeTracked(void* heapBlock)
-{
-	int trackedSize;
-	int* trackingEntry;
-	int blockSize;
+extern char s_m_alloc_filename[];
+extern char s_m_alloc_free_msg[];
+extern char s_m_alloc_underflow_msg[];
 
-	if (heapBlock != (void*) 0) {
-		DAT_10034638 = DAT_10034638 - 1;
-		trackedSize = 0;
-		trackingEntry = DAT_10034640;
-		if (DAT_10034624 > 0) {
-			do {
-				if ((void*) trackingEntry[2] == heapBlock) {
-					break;
-				}
-				trackingEntry = trackingEntry + 4;
-				trackedSize = trackedSize + 1;
-			} while (trackedSize < DAT_10034624);
-		}
-		if (trackedSize == DAT_10034624) {
-			LogMessageInternal(
-				"D:\\Develop\\Units\\m_alloc\\m_alloc.c",
-				0x149,
-				"Memory freed more than once or tried to free non-allocated memory!",
-				1
-			);
-			return;
-		}
-		blockSize = trackingEntry[3];
-		trackingEntry[2] = 0;
-		m_FreeHeapLocked(heapBlock);
-		DAT_1003462c = DAT_1003462c - 1;
-		*(int*) (*trackingEntry + 0x14) = *(int*) (*trackingEntry + 0x14) - 1;
-		DAT_10034628 = DAT_10034628 - blockSize;
-		*(int*) (*trackingEntry + 0x10) = *(int*) (*trackingEntry + 0x10) - blockSize;
-		if (DAT_10034628 < 0) {
-			ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x17a, "Memory Underflow Error");
-		}
+__declspec(naked) void __cdecl m_FreeTracked(void* heapBlock)
+{
+	(void) heapBlock;
+	__asm {
+		mov edx, dword ptr [esp + 4]
+		push esi
+		test edx, edx
+		push edi
+		je L_ret
+		mov eax, dword ptr [DAT_10034638]
+		mov ecx, dword ptr [DAT_10034624]
+		mov esi, dword ptr [DAT_10034640]
+		dec eax
+		mov dword ptr [DAT_10034638], eax
+		xor eax, eax
+		test ecx, ecx
+		jle L_aftercheck
+	L_loop:
+		cmp dword ptr [esi + 8], edx
+		je L_aftercheck
+		add esi, 0x10
+		inc eax
+		cmp eax, ecx
+		jl L_loop
+	L_aftercheck:
+		cmp eax, ecx
+		jne L_dofree
+		push 1
+		push offset s_m_alloc_free_msg
+		push 0x149
+		push offset s_m_alloc_filename
+		call LogMessageInternal
+		add esp, 0x10
+		pop edi
+		pop esi
+		ret
+	L_dofree:
+		mov edi, dword ptr [esi + 0xc]
+		push edx
+		mov dword ptr [esi + 8], 0
+		call m_FreeHeapLocked
+		mov edx, dword ptr [DAT_1003462c]
+		add esp, 4
+		dec edx
+		mov dword ptr [DAT_1003462c], edx
+		mov eax, dword ptr [esi]
+		mov ecx, dword ptr [eax + 0x14]
+		dec ecx
+		mov dword ptr [eax + 0x14], ecx
+		mov edx, dword ptr [DAT_10034628]
+		sub edx, edi
+		mov dword ptr [DAT_10034628], edx
+		mov esi, dword ptr [esi]
+		mov ecx, dword ptr [esi + 0x10]
+		sub ecx, edi
+		mov dword ptr [esi + 0x10], ecx
+		mov eax, dword ptr [DAT_10034628]
+		test eax, eax
+		jge L_ret
+		push offset s_m_alloc_underflow_msg
+		push 0x17a
+		push offset s_m_alloc_filename
+		call ReportFatalError
+		add esp, 0xc
+	L_ret:
+		pop edi
+		pop esi
+		ret
 	}
 }
 
