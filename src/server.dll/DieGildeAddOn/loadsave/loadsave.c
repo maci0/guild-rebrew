@@ -1241,14 +1241,12 @@ int __cdecl ls_LoadEntities(int param_1)
 		return 0;
 	}
 	if (g_save_version > 0x10016) {
-		read_result = (int) 0x10035478;
-		do {
+		for (read_result = (int) 0x10035478; read_result < (int) 0x10035498; read_result += 4) {
 			inner_result = ls_ReadVfsDataChecked((void*) read_result, 4, 1, (void*) stream);
 			if (inner_result == 0) {
 				return 0;
 			}
-			read_result = read_result + 4;
-		} while (read_result < (int) 0x10035498);
+		}
 	}
 	entity_index = 0;
 	if (0 < param_1) {
