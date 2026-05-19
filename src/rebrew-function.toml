@@ -576,8 +576,7 @@ status = "RELOC"
 
 ["SERVER.0x1000f980"]
 size = 336
-status = "STUB"
-blocker = "mov di,ax vs mov edi,eax (16-bit truncation) and lea edx,[edi+addr] vs add edi,addr (7 structural diffs, 99.1% mnemonic)"
+status = "RELOC"
 
 ["SERVER.0x1000fad0"]
 size = 85
