@@ -320,75 +320,170 @@ char* __cdecl gv_FindSlotEntryFiltered(char* ctx, unsigned char* obj, char* star
 
 /* Auto-generated Ghidra decompilation */
 
-int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
+__declspec(naked) int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
 {
-	unsigned char building_tier;
-	unsigned int new_entity_id;
-	short current_game_tick;
-	unsigned char rand_skill_byte;
-	int slot_entry_ptr;
-	unsigned int rand_stat_val;
-	int spawn_count;
-	int skill_index;
-	char* entity_type_entry;
-	char entity_class_byte;
-
-	rand_stat_val = *param_1;
-	entity_type_entry = *(char**) 0x100a8c30 + rand_stat_val + rand_stat_val * 0x24c;
-	entity_class_byte = *entity_type_entry;
-
-	if (entity_class_byte == '\x1d') {
-		building_tier = *(unsigned char*) (entity_type_entry + 0x247);
-		if (building_tier != 0 && building_tier < 4) {
-			spawn_count = 0;
-			if (0 < param_2) {
-				do {
-					slot_entry_ptr = (int) gv_FindSlotEntryFiltered(
-						(char*) 0,
-						param_1,
-						(char*) 0,
-						(int(__cdecl*)(char*, char*)) 0x10010700,
-						0
-					);
-					if (slot_entry_ptr == 0) {
-						return spawn_count;
-					}
-					*(*(unsigned int**) (slot_entry_ptr + 0x10)) = *(unsigned int*) 0x10030b6c;
-					*(unsigned int*) 0x10030b6c = *(unsigned int*) 0x10030b6c + 1;
-					new_entity_id = *(*(unsigned int**) (slot_entry_ptr + 0x10));
-					*(unsigned int*) (slot_entry_ptr + 8) = 0x7fff;
-					*(unsigned int*) (slot_entry_ptr + 4) = new_entity_id;
-					current_game_tick = *(short*) 0x10035880;
-					*(unsigned int*) (slot_entry_ptr + 0xc) = 0xff;
-					*(unsigned int*) (slot_entry_ptr + 10) = current_game_tick + 5;
-					skill_index = 0;
-					do {
-						gm_RandomMod(8);
-						rand_skill_byte = __ftol();
-						skill_index = skill_index + 1;
-						*(*(char**) (slot_entry_ptr + 0x10) + 0x23 + skill_index) = rand_skill_byte;
-					} while (skill_index < 5);
-					rand_stat_val = gm_RandomMod(9);
-					*(*(char**) (slot_entry_ptr + 0x10) + 0x2c) = (rand_stat_val & 0xffff) + 1;
-					rand_stat_val = gm_RandomMod(2);
-					*(*(char**) (slot_entry_ptr + 0x10) + 0x30) = (rand_stat_val & 0xffff) + 1;
-					rand_stat_val = gm_RandomMod(0x5e);
-					*(*(char**) (slot_entry_ptr + 0x10) + 0x34) = (rand_stat_val & 0xffff) + 1;
-					rand_stat_val = gm_RandomMod(4);
-					*(*(char**) (slot_entry_ptr + 0x10) + 0x40) =
-						(*(short*) 0x10035880 - (rand_stat_val & 0xffff)) + -1;
-					rand_stat_val = gm_RandomMod(2);
-					*(*(char**) (slot_entry_ptr + 0x10) + 0x38) = rand_stat_val & 0xffff;
-					gm_RandomMod(0x10);
-					gm_RandomMod(0x10);
-					gm_RandomMod(0x10);
-					spawn_count = spawn_count + 1;
-				} while (spawn_count < param_2);
-			}
-			return spawn_count;
-		}
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		mov eax, dword ptr [esp + 4]
+		xor ecx, ecx
+		push ebx
+		push ebp
+		mov cl, byte ptr [eax]
+		push esi
+		push edi
+		lea eax, [ecx + ecx*2]
+		shl eax, 4
+		add eax, ecx
+		lea edx, [eax + eax*2]
+		_emit 0xa1
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		add eax, ecx
+		mov cl, byte ptr [eax + edx*4]
+		lea eax, [eax + edx*4]
+		cmp cl, 0x1d
+		jne near L_ret0
+		mov al, byte ptr [eax + 0x247]
+		cmp al, 1
+		jb near L_ret0
+		cmp al, 3
+		ja near L_ret0
+		mov ebx, dword ptr [esp + 0x18]
+		xor ebp, ebp
+		test ebx, ebx
+		jle near L_done
+	L_spawn_loop:
+		mov ecx, dword ptr [esp + 0x14]
+		push 0
+		push 0x10010700
+		push 0
+		push ecx
+		push 0
+		call gv_FindSlotEntryFiltered
+		mov esi, eax
+		add esp, 0x14
+		test esi, esi
+		je near L_done
+		mov edx, dword ptr [esi + 0x10]
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		mov dword ptr [edx], eax
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		inc eax
+		_emit 0xa3
+		_emit 0x6c
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		mov ecx, dword ptr [esi + 0x10]
+		mov edx, dword ptr [ecx]
+		mov word ptr [esi + 8], 0x7fff
+		mov dword ptr [esi + 4], edx
+		_emit 0xa1
+		_emit 0x80
+		_emit 0x58
+		_emit 0x03
+		_emit 0x10
+		add eax, 5
+		mov byte ptr [esi + 0xc], 0xff
+		mov word ptr [esi + 0xa], ax
+		xor edi, edi
+	L_skill_loop:
+		push 8
+		call gm_RandomMod
+		and eax, 0xffff
+		add esp, 4
+		mov dword ptr [esp + 0x18], eax
+		fild dword ptr [esp + 0x18]
+		_emit 0xd8
+		_emit 0x0d
+		_emit 0xc0
+		_emit 0x57
+		_emit 0x02
+		_emit 0x10
+		_emit 0xd8
+		_emit 0x05
+		_emit 0xbc
+		_emit 0x57
+		_emit 0x02
+		_emit 0x10
+		call __ftol
+		mov ecx, dword ptr [esi + 0x10]
+		inc edi
+		cmp edi, 5
+		mov byte ptr [ecx + edi + 0x23], al
+		jl L_skill_loop
+		push 9
+		call gm_RandomMod
+		mov edx, dword ptr [esi + 0x10]
+		and eax, 0xffff
+		inc eax
+		push 2
+		mov dword ptr [edx + 0x2c], eax
+		call gm_RandomMod
+		mov ecx, dword ptr [esi + 0x10]
+		and eax, 0xffff
+		inc eax
+		push 0x5e
+		mov dword ptr [ecx + 0x30], eax
+		call gm_RandomMod
+		mov edx, dword ptr [esi + 0x10]
+		and eax, 0xffff
+		inc eax
+		push 4
+		mov dword ptr [edx + 0x34], eax
+		call gm_RandomMod
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x80
+		_emit 0x58
+		_emit 0x03
+		_emit 0x10
+		mov edx, dword ptr [esi + 0x10]
+		and eax, 0xffff
+		push 2
+		sub ecx, eax
+		dec ecx
+		mov dword ptr [edx + 0x40], ecx
+		call gm_RandomMod
+		mov ecx, dword ptr [esi + 0x10]
+		and eax, 0xffff
+		push 0x10
+		mov dword ptr [ecx + 0x38], eax
+		call gm_RandomMod
+		push 0x10
+		call gm_RandomMod
+		push 0x10
+		call gm_RandomMod
+		add esp, 0x20
+		inc ebp
+		cmp ebp, ebx
+		jl near L_spawn_loop
+	L_done:
+		pop edi
+		mov eax, ebp
+		pop esi
+		pop ebp
+		pop ebx
+		ret
+	L_ret0:
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
 	}
-	return 0;
 }
 
 /* Allocates a single graveyard production field. Sets up the
