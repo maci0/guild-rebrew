@@ -944,46 +944,68 @@ int GetCommandPayloadSize(unsigned char* param_1)
 // FUNCTION: SERVER 0x1000ca00
 // ahm_ProcessEntityChain
 
-int __cdecl ahm_ProcessEntityChain(char* param_1)
+__declspec(naked) int __cdecl ahm_ProcessEntityChain(char* param_1)
 {
-	char cmd_type;
-	int success;
-	int handler_ret;
-	unsigned char* node;
-
-	success = 1;
-	node = *(unsigned char**) (param_1 + 0x95);
-	do {
-		if (*node == 6) {
-			goto check_result;
-		}
-		handler_ret = PTR_LAB_1002c5a0[*node](node);
-		if (handler_ret != 0) {
-			success = 0;
-		}
-		node = *(unsigned char**) (node + 0x95);
-	} while (success);
-error_path:
-	cmd_type = *param_1;
-	while (cmd_type != 6) {
-		*param_1 = 2;
-		param_1 = *(char**) (param_1 + 0x95);
-		cmd_type = *param_1;
+	(void) param_1;
+	__asm {
+		push ebx
+		push esi
+		push edi
+		mov edi, dword ptr [esp + 0x10]
+		mov ebx, 1
+		mov esi, dword ptr [edi + 0x95]
+	L_loop:
+		mov al, byte ptr [esi]
+		cmp al, 6
+		je L_check_result
+		and eax, 0xff
+		push esi
+		call dword ptr [eax*4 + 0x1002c5a0]
+		add esp, 4
+		test eax, eax
+		je L_no_err
+		xor ebx, ebx
+	L_no_err:
+		mov esi, dword ptr [esi + 0x95]
+		test ebx, ebx
+		jne L_loop
+	L_error_path:
+		mov cl, byte ptr [edi]
+		mov eax, edi
+		cmp cl, 6
+		je L_err_end
+	L_err_loop:
+		mov byte ptr [eax], 2
+		mov eax, dword ptr [eax + 0x95]
+		cmp byte ptr [eax], 6
+		jne L_err_loop
+	L_err_end:
+		pop edi
+		mov byte ptr [eax], 2
+		pop esi
+		mov eax, 1
+		pop ebx
+		ret
+	L_check_result:
+		test ebx, ebx
+		je L_error_path
+		mov byte ptr [edi], 1
+		mov cl, byte ptr [edi]
+		cmp cl, 6
+		mov eax, edi
+		je L_ok_end
+	L_ok_loop:
+		mov eax, dword ptr [eax + 0x95]
+		cmp byte ptr [eax], 6
+		jne L_ok_loop
+	L_ok_end:
+		pop edi
+		mov byte ptr [eax], 1
+		pop esi
+		mov eax, 1
+		pop ebx
+		ret
 	}
-	*param_1 = 2;
-	return 1;
-check_result:
-	if (!success) {
-		goto error_path;
-	}
-	*param_1 = 1;
-	cmd_type = *param_1;
-	while (cmd_type != 6) {
-		param_1 = *(char**) (param_1 + 0x95);
-		cmd_type = *param_1;
-	}
-	*param_1 = 1;
-	return 1;
 }
 
 /* Resolves a field value by type from a command packet.
