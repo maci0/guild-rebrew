@@ -740,8 +740,7 @@ blocker_delta = 456
 
 ["SERVER.0x10011540"]
 size = 288
-status = "STUB"
-blocker_delta = 306
+status = "RELOC"
 
 ["SERVER.0x10011660"]
 size = 297

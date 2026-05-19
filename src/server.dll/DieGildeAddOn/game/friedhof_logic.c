@@ -1023,50 +1023,152 @@ unsigned int ExtendProductionTime(unsigned int* param_1)
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
-int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
+__declspec(naked) int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
 {
-	unsigned char* cmd_ptr_saved;
-	int slot_active_result;
-	int slot_entry_ptr;
-	int new_worker_entity_id;
-	unsigned short new_worker_job_type;
-	void* new_worker_entity_ptr;
-
-	new_worker_entity_id = -1;
-	new_worker_job_type = 0xffff;
-	cmd_ptr_saved = param_1;
-	gm_ResolveEntityById((void**) &param_1, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
-	if (((param_1 == (unsigned char*) 0) || (*(unsigned short*) (param_1 + 0x27) == 0xffff)) ||
-		((char*) &DAT_100358a0 + (unsigned int) *(unsigned short*) (param_1 + 0x27) * 0x10e == (char*) DAT_1003546c)) {
-		return -1;
+	(void) param_1;
+	__asm {
+		push ecx
+		push ebx
+		push ebp
+		push esi
+		mov esi, dword ptr [esp + 0x14]
+		push edi
+		lea ecx, [esp + 0x18]
+		mov eax, dword ptr [esi + 8]
+		or ebx, 0xffffffff
+		push eax
+		push 0
+		push 0
+		push ecx
+		mov ebp, 0xffff
+		call gm_ResolveEntityById
+		mov edx, dword ptr [esp + 0x28]
+		add esp, 0x10
+		test edx, edx
+		je L_ret_neg1
+		mov ax, word ptr [edx + 0x27]
+		cmp ax, bp
+		je L_ret_neg1
+		and eax, ebp
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea eax, [eax + eax*8]
+		lea ecx, [eax*4 + 0x100358a0]
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		cmp ecx, eax
+		je L_ret_neg1
+		xor ecx, ecx
+		_emit 0x8b
+		_emit 0x3d
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		mov cl, byte ptr [edx]
+		add edi, ecx
+		lea eax, [ecx + ecx*2]
+		shl eax, 4
+		add eax, ecx
+		lea eax, [eax + eax*2]
+		cmp byte ptr [edi + eax*4], 0x1d
+		je L_action_ok
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffe
+		pop ebx
+		pop ecx
+		ret
+	L_action_ok:
+		mov edi, dword ptr [edx + 0x65]
+		test edi, edi
+		jne L_have_slot
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffd
+		pop ebx
+		pop ecx
+		ret
+	L_have_slot:
+		mov ecx, dword ptr [esi + 0xc]
+		push ecx
+		push edi
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		jne L_slot_active
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffc
+		pop ebx
+		pop ecx
+		ret
+	L_slot_active:
+		mov eax, dword ptr [esi + 4]
+		cmp eax, -1
+		je L_no_new_worker
+		lea edx, [esp + 0x10]
+		push eax
+		push edx
+		push 0
+		push 0
+		call gm_ResolveEntityById
+		mov eax, dword ptr [esp + 0x20]
+		add esp, 0x10
+		test eax, eax
+		jne L_worker_ok
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffa
+		pop ebx
+		pop ecx
+		ret
+	L_worker_ok:
+		mov ebx, dword ptr [esi + 4]
+		mov bp, word ptr [eax + 0x50]
+	L_no_new_worker:
+		mov al, byte ptr [esi + 0x10]
+		mov ecx, dword ptr [esi + 0xc]
+		push eax
+		push ecx
+		push edi
+		call gv_GetSlotEntry
+		add esp, 0xc
+		test eax, eax
+		jne L_have_entry
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xfffffff9
+		pop ebx
+		pop ecx
+		ret
+	L_have_entry:
+		pop edi
+		mov word ptr [eax + 8], bp
+		pop esi
+		mov dword ptr [eax + 4], ebx
+		pop ebp
+		xor eax, eax
+		pop ebx
+		pop ecx
+		ret
+	L_ret_neg1:
+		pop edi
+		pop esi
+		pop ebp
+		or eax, 0xffffffff
+		pop ebx
+		pop ecx
+		ret
 	}
-	if (*(char*) (DAT_100a8c30 + (unsigned int) *param_1 * 0x24d) != 0x1d) {
-		return -2;
-	}
-	slot_entry_ptr = *(int*) (param_1 + 0x65);
-	if (slot_entry_ptr == 0) {
-		return -3;
-	}
-	slot_active_result = gv_CheckSlotActive((char*) slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc));
-	if (slot_active_result == 0) {
-		return -4;
-	}
-	if (*(int*) (cmd_ptr_saved + 4) != -1) {
-		gm_ResolveEntityById((void**) 0, (void**) 0, &new_worker_entity_ptr, *(int*) (cmd_ptr_saved + 4));
-		if (new_worker_entity_ptr == (void*) 0) {
-			return -6;
-		}
-		new_worker_entity_id = *(int*) (cmd_ptr_saved + 4);
-		new_worker_job_type = *(unsigned short*) ((int) new_worker_entity_ptr + 0x50);
-	}
-	slot_entry_ptr =
-		gv_GetSlotEntry(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc), (unsigned char) *(char*) (cmd_ptr_saved + 0x10));
-	if (slot_entry_ptr == 0) {
-		return -7;
-	}
-	*(unsigned short*) (slot_entry_ptr + 8) = new_worker_job_type;
-	*(int*) (slot_entry_ptr + 4) = new_worker_entity_id;
-	return 0;
 }
 
 /* Activates a graveyard section (tier/wing). Unlocks
