@@ -414,9 +414,7 @@ blocker_delta = 137
 
 ["SERVER.0x1000d110"]
 size = 333
-status = "STUB"
-blocker = "dead-code elimination removes i>=4 checks inside for-loops (compiler knows i<4), 13B size delta; do-while preserves checks but spills to edi; also register allocation swap (ecx/eax), zero-extend pattern, lea vs add in leave branch"
-blocker_delta = 225
+status = "RELOC"
 
 ["SERVER.0x1000d260"]
 size = 120

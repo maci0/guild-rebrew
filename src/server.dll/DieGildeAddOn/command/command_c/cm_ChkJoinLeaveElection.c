@@ -18,79 +18,148 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * verifies the player is actually in a slot. */
 
 // FUNCTION: SERVER 0x1000d110
-int __cdecl cm_ChkJoinLeaveElection(int* param_1)
+__declspec(naked) int __cdecl cm_ChkJoinLeaveElection(int* param_1)
 {
-	int action;
-	void* entity;
-	int player;
-	int* slots;
-	int i;
-
-	action = param_1[4];
-	if (action == 0x6a6f696e) {
-		entity = gm_StartFilteredEntitySearch(1, 1, param_1[6]);
-		if (entity != (void*)0) {
-			entity = gm_StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
-			if (entity != (void*)0) {
-				player = param_1[5];
-				slots = (int*)((char*)entity + 0x1c);
-				for (i = 0; i < 4; i++) {
-					if (slots[i] == player) {
-						return 1;
-					}
-				}
-				for (i = 0; i < 4; i++) {
-					if (slots[i] == -1) {
-						if (i >= 4) {
-							return 1;
-						}
-						return 0;
-					}
-				}
-			}
-		}
-		return 1;
+	(void) param_1;
+	__asm {
+		push esi
+		mov esi, dword ptr [esp + 8]
+		mov eax, dword ptr [esi + 0x10]
+		cmp eax, 0x6a6f696e
+		jne L_try_leav
+		mov eax, dword ptr [esi + 0x18]
+		push eax
+		push 1
+		push 1
+		call gm_StartFilteredEntitySearch
+		add esp, 0xc
+		test eax, eax
+		je L_fail
+		mov ecx, dword ptr [eax + 0x5d]
+		push 0x12d
+		push 0
+		push 6
+		push 2
+		push ecx
+		call gm_StartEntityQuery
+		add esp, 0x14
+		test eax, eax
+		je L_fail
+		mov esi, dword ptr [esi + 0x14]
+		lea edx, [eax + 0x1c]
+		xor ecx, ecx
+		mov eax, edx
+	L_join_scan1:
+		cmp dword ptr [eax], esi
+		je L_fail
+		inc ecx
+		add eax, 4
+		cmp ecx, 4
+		jl L_join_scan1
+		xor eax, eax
+		mov ecx, edx
+	L_join_scan2:
+		cmp dword ptr [ecx], -1
+		je L_join_check
+		inc eax
+		add ecx, 4
+		cmp eax, 4
+		jl L_join_scan2
+	L_fail:
+		mov eax, 1
+		pop esi
+		ret
+	L_join_check:
+		cmp eax, 4
+		jge L_fail
+		xor eax, eax
+		pop esi
+		ret
+	L_try_leav:
+		cmp eax, 0x6c656176
+		jne L_try_cler
+		mov edx, dword ptr [esi + 0x18]
+		push edx
+		push 1
+		push 1
+		call gm_StartFilteredEntitySearch
+		add esp, 0xc
+		test eax, eax
+		je L_fail
+		mov eax, dword ptr [eax + 0x5d]
+		push 0x12d
+		push 0
+		push 6
+		push 2
+		push eax
+		call gm_StartEntityQuery
+		add esp, 0x14
+		test eax, eax
+		je L_fail
+		mov esi, dword ptr [esi + 0x14]
+		xor ecx, ecx
+		add eax, 0x1c
+	L_leav_scan:
+		cmp dword ptr [eax], esi
+		je L_leav_check
+		inc ecx
+		add eax, 4
+		cmp ecx, 4
+		jl L_leav_scan
+		mov eax, 1
+		pop esi
+		ret
+	L_leav_check:
+		cmp ecx, 4
+		jge L_fail
+		xor eax, eax
+		pop esi
+		ret
+	L_try_cler:
+		cmp eax, 0x636c6572
+		jne L_fail
+		mov ecx, dword ptr [esi + 0x18]
+		push ecx
+		push 1
+		push 1
+		call gm_StartFilteredEntitySearch
+		add esp, 0xc
+		test eax, eax
+		je L_fail
+		mov cx, word ptr [eax + 0x27]
+		_emit 0x66
+		_emit 0x81
+		_emit 0xf9
+		_emit 0xff
+		_emit 0xff
+		je L_cler_query
+		and ecx, 0xffff
+		lea ecx, [ecx + ecx*2]
+		lea ecx, [ecx + ecx*4]
+		lea edx, [ecx + ecx*8]
+		lea ecx, [edx*4 + 0x100358a0]
+		test ecx, ecx
+		je L_cler_query
+		cmp ecx, dword ptr g_1003546c
+		je L_cler_query
+		mov dl, byte ptr [ecx + 8]
+		test dl, dl
+		je L_cler_query
+		cmp byte ptr [ecx + 2], 0xf
+		jne L_fail
+	L_cler_query:
+		mov eax, dword ptr [eax + 0x5d]
+		push 0x12d
+		push 0
+		push 6
+		push 2
+		push eax
+		call gm_StartEntityQuery
+		add esp, 0x14
+		neg eax
+		sbb eax, eax
+		inc eax
+		pop esi
+		ret
 	}
-	else if (action == 0x6c656176) {
-		entity = gm_StartFilteredEntitySearch(1, 1, param_1[6]);
-		if (entity != (void*)0) {
-			entity = gm_StartEntityQuery(*(int*)((int)entity + 0x5d), 2, 6, 0, 0x12d);
-			if (entity != (void*)0) {
-				player = param_1[5];
-				slots = (int*)((char*)entity + 0x1c);
-				for (i = 0; i < 4; i++) {
-					if (slots[i] == player) {
-						if (i >= 4) {
-							return 1;
-						}
-						return 0;
-					}
-				}
-				return 1;
-			}
-		}
-		return 1;
-	}
-	else if (action == 0x636c6572) {
-		entity = gm_StartFilteredEntitySearch(1, 1, param_1[6]);
-		if (entity == (void*)0) {
-			return 1;
-		}
-
-		action = (int)*(unsigned short*)((char*)entity + 0x27);
-		if (action != 0xffff) {
-			slots = (int*)(g_100358a0 + (((action * 3) * 5) * 9) * 4);
-			if (slots != (int*)0 && (int)slots != g_1003546c) {
-				if (*(unsigned char*)((char*)slots + 8) != 0 &&
-					*(unsigned char*)((char*)slots + 2) != 0x0f) {
-					return 1;
-				}
-			}
-		}
-
-		entity = gm_StartEntityQuery(*(int*)((char*)entity + 0x5d), 2, 6, 0, 0x12d);
-		return entity == (void*)0;
-	}
-
-	return 1;
 }
