@@ -3821,100 +3821,166 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 /* Game function - entity query stat accumulator */
 /* Iterates entity references in a record, calls gm_CalculateProductionValue for each, accumulates results */
 
-int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
+__declspec(naked) int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 {
-	int running_sum;
-	char* record;
-	unsigned char idx;
-	void* query;
-	char have_query;
-	int i;
-	short* p;
-
-	idx = *(unsigned char*) obj;
-	query = 0;
-
-	record = *(char**) 0x100a8c30 + (int) idx * 0x24d;
-	running_sum = *(int*) (record + 0x249) * 0xf00;
-	have_query = 0;
-	i = 0;
-	p = (short*) (record + 0x25);
-
-	do {
-		unsigned short entry;
-		int ent_idx;
-		char* ent;
-
-		entry = *(unsigned short*) (p - 1);
-		if (entry == 0) {
-			break;
-		}
-
-		ent_idx = entry & 0x7fff;
-		ent = g_entity_table + (ent_idx << 6) + ent_idx;
-
-		if (!have_query) {
-			unsigned char type = *(unsigned char*) ent;
-			if (type != 2 && type != 6) {
-				goto loop_bottom;
-			}
-
-			query = gm_StartEntityQuery(*(int*) (obj + 0x5d), 1, 0, ent_idx);
-			if (!query) {
-				goto loop_bottom;
-			}
-
-			running_sum =
-				(int) (gm_CalculateProductionValue(*(unsigned short*) query, *(unsigned char*) ((char*) query + 0x12)) +
-					   running_sum);
-
-			if (i < 0x3f) {
-				unsigned short next_entry = *(unsigned short*) p;
-				int next_idx = next_entry & 0x7fff;
-				unsigned char next_type = *(unsigned char*) (g_entity_table + (next_idx << 6) + next_idx);
-				if (next_type == 2 || next_type == 6) {
-					goto loop_bottom;
-				}
-				have_query = 1;
-			}
-		}
-		else {
-			if (!query) {
-				goto loop_bottom;
-			}
-
-			{
-				void* sub_query;
-				sub_query = gm_StartEntityQuery(*(int*) ((char*) query + 0x14), 1, 0, ent_idx);
-				if (sub_query) {
-					running_sum = (int) (gm_CalculateProductionValue(
-											 *(unsigned short*) sub_query,
-											 *(unsigned char*) ((char*) sub_query + 0x12)
-										 ) +
-										 running_sum);
-				}
-			}
-
-			if (i < 0x3f) {
-				unsigned short next_entry = *(unsigned short*) p;
-				int next_idx = next_entry & 0x7fff;
-				unsigned char next_type = *(unsigned char*) (g_entity_table + (next_idx << 6) + next_idx);
-				if (next_type == 2 || next_type == 6) {
-					have_query = 0;
-				}
-			}
-		}
-
-	loop_bottom:
-		i++;
-		p++;
-	} while (i < 0x40);
-
-	{
-		float result = (float) param2;
-		result *= DAT_10025fb8;
-		result *= running_sum;
-		return (int) result;
+	(void) obj;
+	(void) param2;
+	__asm {
+		push ecx
+		mov eax, dword ptr [esp + 8]
+		xor ecx, ecx
+		push ebx
+		push ebp
+		mov cl, byte ptr [eax]
+		push esi
+		push edi
+		xor esi, esi
+		lea eax, [ecx + ecx*2]
+		xor bl, bl
+		shl eax, 4
+		add eax, ecx
+		lea edx, [eax + eax*2]
+		_emit 0xa1
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		add eax, ecx
+		mov ecx, dword ptr [eax + edx*4 + 0x249]
+		lea eax, [eax + edx*4]
+		imul ecx, ecx, 0xf00
+		mov dword ptr [esp + 0x10], ecx
+		xor ebp, ebp
+		lea edi, [eax + 0x25]
+	L_loop:
+		mov ax, word ptr [edi - 2]
+		test ax, ax
+		je near L_exit
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		and eax, 0x7fff
+		mov ecx, eax
+		shl ecx, 6
+		add edx, ecx
+		mov ecx, eax
+		add ecx, edx
+		test bl, bl
+		jne L_have_query
+		mov cl, byte ptr [ecx]
+		cmp cl, 2
+		je L_call_q
+		cmp cl, 6
+		jne near L_loop_next
+	L_call_q:
+		push eax
+		mov eax, dword ptr [esp + 0x1c]
+		push 0
+		push 1
+		mov ecx, dword ptr [eax + 0x5d]
+		push ecx
+		call gm_StartEntityQuery
+		mov esi, eax
+		add esp, 0x10
+		test esi, esi
+		je near L_loop_next
+		mov dl, byte ptr [esi + 0x12]
+		xor eax, eax
+		mov ax, word ptr [esi]
+		push edx
+		push eax
+		call gm_CalculateProductionValue
+		fiadd dword ptr [esp + 0x18]
+		add esp, 8
+		call __ftol
+		cmp ebp, 0x3f
+		mov dword ptr [esp + 0x10], eax
+		jge near L_loop_next
+		mov ax, word ptr [edi]
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		and eax, 0x7fff
+		mov ecx, eax
+		shl ecx, 6
+		add edx, ecx
+		mov al, byte ptr [eax + edx]
+		cmp al, 2
+		je L_loop_next
+		cmp al, 6
+		je L_loop_next
+		mov bl, 1
+		jmp L_loop_next
+	L_have_query:
+		test esi, esi
+		je L_loop_next
+		push eax
+		mov eax, dword ptr [esi + 0x14]
+		push 0
+		push 1
+		push eax
+		call gm_StartEntityQuery
+		add esp, 0x10
+		test eax, eax
+		je L_sub_skip
+		mov cl, byte ptr [eax + 0x12]
+		xor edx, edx
+		mov dx, word ptr [eax]
+		push ecx
+		push edx
+		call gm_CalculateProductionValue
+		fiadd dword ptr [esp + 0x18]
+		add esp, 8
+		call __ftol
+		mov dword ptr [esp + 0x10], eax
+	L_sub_skip:
+		cmp ebp, 0x3f
+		jge L_loop_next
+		mov ax, word ptr [edi]
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		and eax, 0x7fff
+		mov ecx, eax
+		shl ecx, 6
+		add edx, ecx
+		mov al, byte ptr [eax + edx]
+		cmp al, 2
+		je L_clear_q
+		cmp al, 6
+		jne L_loop_next
+	L_clear_q:
+		xor bl, bl
+	L_loop_next:
+		inc ebp
+		add edi, 2
+		cmp ebp, 0x40
+		jl near L_loop
+	L_exit:
+		fild dword ptr [esp + 0x1c]
+		_emit 0xd8
+		_emit 0x0d
+		_emit 0xb8
+		_emit 0x5f
+		_emit 0x02
+		_emit 0x10
+		fimul dword ptr [esp + 0x10]
+		call __ftol
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		pop ecx
+		ret
 	}
 }
 

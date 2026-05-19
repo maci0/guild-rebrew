@@ -1023,7 +1023,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "STUB"
+status = "NEAR_MATCHING"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
@@ -1162,8 +1162,7 @@ blocker = "instruction folding (lea vs mov), loop rotation / branch layout, zero
 
 ["SERVER.0x100198b0"]
 size = 355
-status = "STUB"
-blocker_delta = 288
+status = "RELOC"
 analysis = "Recursive production value calculator. Computes the base value of an object type by looking up prototype data (stride 0x41), applying worker skill bonuses from building prototypes, and recursively summing ingredient costs (up to 4 ingredients). Caches result at proto_entry+0x38. Applies quality and production multipliers."
 
 ["SERVER.0x10019a20"]
