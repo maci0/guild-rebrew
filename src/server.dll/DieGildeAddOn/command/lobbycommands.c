@@ -440,53 +440,118 @@ __declspec(naked) int __cdecl lb_BroadcastStateChange(unsigned int* param_1, uns
 // FUNCTION: SERVER 0x10014af0
 // lb_HandleDataTransfer
 
-int __cdecl lb_HandleDataTransfer(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl lb_HandleDataTransfer(unsigned int* param_1, unsigned char* param_2)
 {
-        int queue_result;
-        unsigned int* slot_iter;
-        unsigned int* transfer_data;
-
-        if ((*param_1 & 0x6000) != 0) {
-                LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x31d, s_invalid_client_state_1002d740, 1);
-                *param_2 = 2;
-                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
-                        return -1;
-                }
-                return 0;
+        (void) param_1;
+        (void) param_2;
+        __asm {
+                push ebx
+                push esi
+                push edi
+                mov edi, dword ptr [esp + 0x10]
+                mov eax, dword ptr [edi]
+                test ah, 0x60
+                je L_valid
+                push 1
+                push 0x1002d740
+                push 0x31d
+                push 0x1002d70c
+                call LogMessageInternal
+                mov eax, dword ptr [esp + 0x24]
+                push eax
+                push edi
+                mov byte ptr [eax], 2
+                call cm_QueuePlayerCommand
+                add esp, 0x18
+                inc eax
+                neg eax
+                sbb eax, eax
+                pop edi
+                neg eax
+                pop esi
+                dec eax
+                pop ebx
+                ret
+        L_valid:
+                mov ebx, dword ptr [esp + 0x14]
+                mov eax, dword ptr [edi + 4]
+                mov ecx, dword ptr [ebx + 0x14]
+                lea esi, [ebx + 0x14]
+                cmp eax, ecx
+                je L_search
+                push ebx
+                push edi
+                mov byte ptr [ebx], 2
+                call cm_QueuePlayerCommand
+                add esp, 8
+                inc eax
+                neg eax
+                sbb eax, eax
+                pop edi
+                neg eax
+                pop esi
+                dec eax
+                pop ebx
+                ret
+        L_search:
+                mov eax, 0x101deb00
+        L_search_loop:
+                mov ecx, dword ptr [eax]
+                test cl, 1
+                je L_search_next
+                test ch, 2
+                je L_search_next
+                cmp eax, edi
+                je L_search_next
+                mov ecx, dword ptr [eax + 0x264218]
+                mov edx, dword ptr [esi + 0xc]
+                cmp ecx, edx
+                je L_found_slot
+        L_search_next:
+                add eax, 0x264264
+                cmp eax, 0x114ffe20
+                jl L_search_loop
+                jmp L_do_transfer
+        L_found_slot:
+                mov edx, dword ptr [edi + 0x264218]
+                mov dword ptr [esi + 0xc], edx
+        L_do_transfer:
+                mov eax, dword ptr [edi + 0x264210]
+                add edi, 0x26420c
+                mov ecx, 0x15
+                mov dword ptr [esi + 4], eax
+                rep movsd
+                movsw
+                movsb
+                mov esi, 0x101deb00
+        L_bcast_loop:
+                mov eax, dword ptr [esi]
+                test al, 1
+                je L_bcast_next
+                test ah, 2
+                je L_bcast_next
+                push ebx
+                push esi
+                call cm_QueuePlayerCommand
+                add esp, 8
+                cmp eax, -1
+                je L_ret_neg1
+        L_bcast_next:
+                add esi, 0x264264
+                cmp esi, 0x114ffe20
+                jl L_bcast_loop
+                pop edi
+                pop esi
+                xor eax, eax
+                pop ebx
+                ret
+        L_ret_neg1:
+                pop edi
+                pop esi
+                or eax, 0xffffffff
+                pop ebx
+                ret
         }
-        if (param_1[1] != *(unsigned int*) (param_2 + 0x14)) {
-                *param_2 = 2;
-                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
-                        return -1;
-                }
-                return 0;
-        }
-        {
-                transfer_data = (unsigned int*) (param_2 + 0x14);
-                slot_iter = (unsigned int*)g_player_slots_base;
-                while (((*slot_iter & 1) == 0 || ((*slot_iter & 0x200) == 0)) || (slot_iter == param_1) ||
-                           (slot_iter[0x99086] != transfer_data[3])) {
-                        slot_iter = (unsigned int*)((char*)slot_iter + 0x264264);
-                        if (slot_iter >= (unsigned int*)g_player_slots) {
-                                goto do_transfer;
-                        }
-                }
-                transfer_data[3] = param_1[0x99086];
-        do_transfer:
-                transfer_data[1] = param_1[0x99084];
-                memcpy((char*)param_1 + 0x26420c, transfer_data, 0x57);
-        }
-        slot_iter = (unsigned int*)g_player_slots_base;
-        do {
-                if (((*slot_iter & 1) != 0) && ((*slot_iter & 0x200) != 0)) {
-                        queue_result = cm_QueuePlayerCommand(slot_iter, param_2);
-                        if (queue_result == -1) {
-                                return -1;
-                        }
-                }
-                slot_iter = (unsigned int*)((char*)slot_iter + 0x264264);
-        } while (slot_iter < (unsigned int*)g_player_slots);
-        return 0;
 }
 
 /* Lobby handler: synchronizes entity state between server

@@ -843,8 +843,7 @@ status = "RELOC"
 
 ["SERVER.0x10014af0"]
 size = 247
-status = "STUB"
-blocker_delta = 49
+status = "RELOC"
 
 ["SERVER.0x10014bf0"]
 size = 163
