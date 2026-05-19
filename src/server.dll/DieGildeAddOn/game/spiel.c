@@ -3312,24 +3312,40 @@ int __cdecl gm_GetOppositeStatIndex(int param_1)
 // FUNCTION: SERVER 0x10018450
 // gm_RandomStatModifier
 
-char __cdecl gm_RandomStatModifier(char stat_value)
+__declspec(naked) char __cdecl gm_RandomStatModifier(char stat_value)
 {
-	unsigned short range;
-	int masked;
-
-	if (stat_value == 0) {
-		return (char) (gm_RandomMod(0x2a) + 0x15);
+	(void) stat_value;
+	__asm {
+		push ebx
+		mov bl, byte ptr [esp + 8]
+		test bl, bl
+		jne L_nonzero
+		push 0x2a
+		call gm_RandomMod
+		add esp, 4
+		add al, 0x15
+		pop ebx
+		ret
+	L_nonzero:
+		mov eax, dword ptr [esp + 8]
+		and eax, 0xff
+		mov dword ptr [esp + 8], eax
+		fild dword ptr [esp + 8]
+		fcomp DAT_100257bc
+		fnstsw ax
+		test ah, 1
+		mov eax, 0xb
+		je L_call
+		mov eax, 6
+	L_call:
+		push eax
+		call gm_RandomMod
+		add esp, 4
+		add bl, al
+		mov al, bl
+		pop ebx
+		ret
 	}
-
-	masked = (int) stat_value & 0xFF;
-	if ((float) masked >= DAT_100257bc) {
-		range = 0xb;
-	}
-	else {
-		range = 6;
-	}
-
-	return (char) (stat_value + (short) gm_RandomMod(range));
 }
 
 /* Looks up an entity record by its integer ID. Searches

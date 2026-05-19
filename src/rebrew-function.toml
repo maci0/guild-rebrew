@@ -1036,7 +1036,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "STUB"
+status = "NEAR_MATCHING"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
@@ -1144,7 +1144,7 @@ status = "EXACT"
 
 ["SERVER.0x10018450"]
 size = 78
-status = "STUB"
+status = "RELOC"
 
 ["SERVER.0x100184a0"]
 size = 56
