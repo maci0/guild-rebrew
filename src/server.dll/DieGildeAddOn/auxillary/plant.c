@@ -72,51 +72,100 @@ int __cdecl find_zone_record(char* base, int x, int y)
 // FUNCTION: SERVER 0x10014ff0
 // CheckZoneAvailability
 
-int __cdecl CheckZoneAvailability(int param_1, unsigned int param_2, unsigned int param_3, int param_4)
+__declspec(naked) int __cdecl CheckZoneAvailability(int param_1, unsigned int param_2, unsigned int param_3, int param_4)
 {
-	int has_free_slot;
-	unsigned char* entry_ptr;
-	int zone_result;
-	int index;
-	int row;
-
-	has_free_slot = 0;
-	index = 0;
-	entry_ptr = (unsigned char*) (param_1 + 8);
-	do {
-		if (entry_ptr[5] == 0xff) {
-			has_free_slot = 1;
-		}
-		else if (*entry_ptr == param_2 && entry_ptr[1] == param_3) {
-			return 0;
-		}
-		index = index + 1;
-		entry_ptr = entry_ptr + 0x18;
-		if (0x3f < index) {
-			if (!has_free_slot) {
-				return 0;
-			}
-			row = 0;
-			if (param_4 > 0) {
-				do {
-					index = 0;
-					do {
-						zone_result = find_zone_record(
-							(char*) param_1,
-							(index - param_4 / 2) + param_2,
-							(row - param_4 / 2) + param_3
-						);
-						if (zone_result != 0) {
-							return 0;
-						}
-						index = index + 1;
-					} while (index < param_4);
-					row = row + 1;
-				} while (row < param_4);
-			}
-			return 1;
-		}
-	} while (1);
+	(void) param_1;
+	(void) param_2;
+	(void) param_3;
+	(void) param_4;
+	__asm {
+		push ecx
+		mov eax, dword ptr [esp + 8]
+		push ebx
+		push ebp
+		push esi
+		xor esi, esi
+		xor ecx, ecx
+		add eax, 8
+		push edi
+		or dl, 0xff
+	L_scan_loop:
+		cmp byte ptr [eax + 5], dl
+		jne L_check_match
+		mov esi, 1
+		jmp L_advance
+	L_check_match:
+		mov edi, dword ptr [esp + 0x1c]
+		xor ebx, ebx
+		mov bl, byte ptr [eax]
+		cmp ebx, edi
+		jne L_advance
+		mov edi, dword ptr [esp + 0x20]
+		xor ebx, ebx
+		mov bl, byte ptr [eax + 1]
+		cmp ebx, edi
+		je L_ret0
+	L_advance:
+		inc ecx
+		add eax, 0x18
+		cmp ecx, 0x40
+		jl L_scan_loop
+		test esi, esi
+		jne L_inner
+	L_ret0:
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		pop ecx
+		ret
+	L_inner:
+		mov ebp, dword ptr [esp + 0x24]
+		mov dword ptr [esp + 0x10], 0
+		test ebp, ebp
+		jle L_done
+	L_outer_loop:
+		mov eax, ebp
+		mov ecx, dword ptr [esp + 0x10]
+		cdq
+		sub eax, edx
+		mov edx, dword ptr [esp + 0x20]
+		mov esi, eax
+		xor edi, edi
+		sar esi, 1
+		sub ecx, esi
+		lea ebx, [ecx + edx]
+	L_inner_loop:
+		mov edx, dword ptr [esp + 0x1c]
+		mov ecx, dword ptr [esp + 0x18]
+		mov eax, edi
+		push ebx
+		sub eax, esi
+		add eax, edx
+		push eax
+		push ecx
+		call find_zone_record
+		add esp, 0xc
+		test eax, eax
+		jne L_ret0
+		inc edi
+		cmp edi, ebp
+		jl L_inner_loop
+		mov eax, dword ptr [esp + 0x10]
+		inc eax
+		cmp eax, ebp
+		mov dword ptr [esp + 0x10], eax
+		jl L_outer_loop
+	L_done:
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 1
+		pop ebx
+		pop ecx
+		ret
+	}
 }
 
 /* Sets/updates a plant map entry. Creates or modifies a

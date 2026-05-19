@@ -910,9 +910,7 @@ status = "EXACT"
 
 ["SERVER.0x10014ff0"]
 size = 175
-status = "STUB"
-blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
-blocker_delta = 170
+status = "RELOC"
 
 ["SERVER.0x100150a0"]
 size = 257
