@@ -846,7 +846,7 @@ ghidra = "RecvGameSavegame"
 
 ["SERVER.0x100145e0"]
 size = 209
-status = "STUB"
+status = "RELOC"
 ghidra = "SendLobbyPlayerList"
 
 ["SERVER.0x100146c0"]
