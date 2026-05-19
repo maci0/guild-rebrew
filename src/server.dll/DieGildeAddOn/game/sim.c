@@ -190,13 +190,7 @@ void __cdecl sim_StartEntityQueryByType(unsigned char* param_1)
 // FUNCTION: SERVER 0x10015500
 // sim_CreateCitizen
 
-void* __cdecl sim_CreateCitizen(
-	unsigned char param_1,
-	int param_2,
-	int param_3,
-	unsigned char param_4,
-	unsigned char param_5
-)
+void* __cdecl sim_CreateCitizen(unsigned char param_1, int param_2, int param_3, unsigned char param_4, unsigned char param_5)
 {
 	unsigned int new_entity_slot;
 

@@ -66,6 +66,7 @@ extern int DAT_100a8c38;
 extern int* DAT_101398a0;
 extern int* DAT_1013989c;
 extern char* g_array_base;
+// DATA: SERVER 0x100358a0
 extern char g_entity_array[];
 void __cdecl free_node(char*);
 int __cdecl gm_FreeObjectListRecursive(char**);
@@ -2780,12 +2781,6 @@ void __cdecl gm_InitEntityIfValid(short* param_1)
 	}
 }
 
-/* Deallocates an entity completely. Frees all linked objects,
- * removes from entity tables, and releases memory. */
-
-// FUNCTION: SERVER 0x10017fb0
-// gm_DeallocEntity
-
 /* EntityStruct — stride 0x21c (540 bytes), 768 entries at g_entity_array (0x100358a0)
  * Field map derived from EXE cross-reference (Europa1400Gold_TL.exe):
  *   +0x00 (2)  entity_index      Self-index in array (0xFFFF = free slot)
@@ -2836,7 +2831,6 @@ struct EntityStruct {
 
 // DATA: SERVER 0x10035880
 extern unsigned short g_something_1[1];
-// DATA: SERVER 0x100358a0
 // DATA: SERVER 0x10035434
 extern int g_citizen_count;
 // DATA: SERVER 0x1009acfc
@@ -2849,6 +2843,11 @@ extern char g_str_10031500[];
 // DATA: SERVER 0x10031538
 extern char g_str_10031538[];
 
+/* Deallocates an entity completely. Frees all linked objects,
+ * removes from entity tables, and releases memory. */
+
+// FUNCTION: SERVER 0x10017fb0
+// gm_DeallocEntity
 void __cdecl gm_DeallocEntity(unsigned int index, int param_2)
 {
 	struct EntityStruct* ent;

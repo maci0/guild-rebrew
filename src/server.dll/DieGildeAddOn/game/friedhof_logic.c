@@ -179,13 +179,7 @@ ret_value:
 // FUNCTION: SERVER 0x10010710
 // gv_FindSlotEntryFiltered
 
-char* __cdecl gv_FindSlotEntryFiltered(
-	char* ctx,
-	unsigned char* obj,
-	char* start,
-	int(__cdecl* callback)(char*, char*),
-	int category
-)
+char* __cdecl gv_FindSlotEntryFiltered(char* ctx, unsigned char* obj, char* start, int(__cdecl* callback)(char*, char*), int category)
 {
 	unsigned int type_idx;
 	char* sub_obj;

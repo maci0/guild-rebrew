@@ -664,12 +664,7 @@ char __cdecl AnalyzeInstruction(int param_1, int param_2, int param_3, int* para
 
 /* Auto-generated Ghidra decompilation */
 
-void InitializeLogAndErrorHandler(
-	unsigned int param_1,
-	unsigned int param_2,
-	unsigned int param_3,
-	unsigned int param_4
-)
+void InitializeLogAndErrorHandler(unsigned int param_1, unsigned int param_2, unsigned int param_3, unsigned int param_4)
 {
 	unsigned char* path_end;
 	FILE* file_handle;

@@ -37,7 +37,7 @@ status = "STUB"
 
 ["SERVER.0x10003320"]
 size = 404
-status = "COMPILE_ERROR"
+status = "STUB"
 blocker = "comparison direction swap, zero-extend pattern (xor vs mov) | instruction folding (lea vs mov)"
 blocker_delta = 83
 ghidra = "DecodePotentialControlTransfer"
@@ -64,29 +64,27 @@ status = "STUB"
 
 ["SERVER.0x10003820"]
 size = 114
-status = "COMPILE_ERROR"
+status = "NEAR_MATCHING"
 
 ["SERVER.0x100038a0"]
 size = 177
-status = "COMPILE_ERROR"
-blocker = "zero-extend pattern (xor vs mov)"
-blocker_delta = 18
+status = "RELOC"
 
 ["SERVER.0x10003b90"]
 size = 182
-status = "COMPILE_ERROR"
+status = "RELOC"
 
 ["SERVER.0x10003c50"]
 size = 77
-status = "COMPILE_ERROR"
+status = "RELOC"
 
 ["SERVER.0x10003ca0"]
 size = 65
-status = "COMPILE_ERROR"
+status = "NEAR_MATCHING"
 
 ["SERVER.0x10003cf0"]
 size = 43
-status = "COMPILE_ERROR"
+status = "RELOC"
 
 ["SERVER.0x10004b80"]
 size = 320
@@ -136,32 +134,32 @@ status = "NEAR_MATCHING"
 
 ["SERVER.0x10008a50"]
 size = 53
-status = "COMPILE_ERROR"
+status = "RELOC"
 ghidra = "cleanup_entity"
 
 ["SERVER.0x10008a90"]
 size = 492
-status = "COMPILE_ERROR"
+status = "STUB"
 blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
 blocker_delta = 466
 
 ["SERVER.0x10008c80"]
 size = 129
-status = "COMPILE_ERROR"
+status = "RELOC"
 
 ["SERVER.0x10008d10"]
 size = 301
-status = "COMPILE_ERROR"
+status = "STUB"
 
 ["SERVER.0x10008e40"]
 size = 472
-status = "COMPILE_ERROR"
+status = "STUB"
 blocker = "jump condition swap, loop rotation / branch layout | instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
 blocker_delta = 257
 
 ["SERVER.0x10009020"]
 size = 704
-status = "COMPILE_ERROR"
+status = "STUB"
 blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
 blocker_delta = 626
 analysis = "Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks."
@@ -737,7 +735,7 @@ blocker_delta = 254
 
 ["SERVER.0x10010710"]
 size = 320
-status = "COMPILE_ERROR"
+status = "NEAR_MATCHING"
 blocker = "comparison direction swap, jump condition swap"
 blocker_delta = 109
 
@@ -966,9 +964,7 @@ status = "STUB"
 
 ["SERVER.0x10015500"]
 size = 180
-status = "COMPILE_ERROR"
-blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
-blocker_delta = 138
+status = "RELOC"
 
 ["SERVER.0x100155c0"]
 size = 197
@@ -1051,8 +1047,6 @@ status = "STUB"
 ["SERVER.0x10016670"]
 size = 1
 status = "EXACT"
-blocker = "jump condition swap, zero-extend pattern (xor vs mov)"
-blocker_delta = 95
 analysis = "Linear search by object type id within sibling linked list."
 
 ["SERVER.0x10016680"]
@@ -1062,8 +1056,6 @@ status = "STUB"
 ["SERVER.0x10016710"]
 size = 66
 status = "RELOC"
-blocker = "zero-extend pattern (xor vs mov)"
-blocker_delta = 106
 
 ["SERVER.0x10016760"]
 size = 1392
@@ -1161,7 +1153,7 @@ analysis = "Checks if the provided entity pointer is valid and active (not -1). 
 
 ["SERVER.0x10017fb0"]
 size = 278
-status = "COMPILE_ERROR"
+status = "STUB"
 blocker_delta = 267
 ghidra = "gm_DeallocEntity"
 
