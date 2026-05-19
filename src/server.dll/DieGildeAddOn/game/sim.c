@@ -178,29 +178,77 @@ __declspec(naked) void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 // FUNCTION: SERVER 0x10015460
 // sim_StartEntityQueryByType
 
-void __cdecl sim_StartEntityQueryByType(unsigned char* param_1)
+__declspec(naked) void __cdecl sim_StartEntityQueryByType(unsigned char* param_1)
 {
-	char entity_kind;
-	int owner;
-
-	entity_kind = *(char*) (DAT_100a8c30 + (unsigned int) *param_1 * 0x24d);
-	owner = *(int*) (param_1 + 0x5d);
-	if (entity_kind == '\x01') {
-		gm_StartEntityQuery(owner, 1, 0, 0x12);
-		return;
+	(void) param_1;
+	__asm {
+		push esi
+		mov esi, dword ptr [esp + 8]
+		xor edx, edx
+		push edi
+		mov dl, byte ptr [esi]
+		mov edi, dword ptr [DAT_100a8c30]
+		add edi, edx
+		xor eax, eax
+		lea ecx, [edx + edx*2]
+		shl ecx, 4
+		add ecx, edx
+		lea ecx, [ecx + ecx*2]
+		lea ecx, [edi + ecx*4]
+		mov cl, byte ptr [ecx]
+		cmp cl, 1
+		jne L_chk2
+		mov edx, dword ptr [esi + 0x5d]
+		push 0x12
+		push eax
+		push 1
+		push edx
+		call gm_StartEntityQuery
+		add esp, 0x10
+		pop edi
+		pop esi
+		ret
+	L_chk2:
+		cmp cl, 2
+		jne L_chk1d
+		mov eax, dword ptr [esi + 0x5d]
+		push 0x13
+		push 0
+		push 1
+		push eax
+		call gm_StartEntityQuery
+		add esp, 0x10
+		pop edi
+		pop esi
+		ret
+	L_chk1d:
+		cmp cl, 0x1d
+		jne L_chk16
+		mov ecx, dword ptr [esi + 0x5d]
+		push 0xfd
+		push 0
+		push 1
+		push ecx
+		call gm_StartEntityQuery
+		add esp, 0x10
+		pop edi
+		pop esi
+		ret
+	L_chk16:
+		cmp cl, 0x16
+		jne L_ret
+		mov edx, dword ptr [esi + 0x5d]
+		push 0x120
+		push 0
+		push 1
+		push edx
+		call gm_StartEntityQuery
+		add esp, 0x10
+	L_ret:
+		pop edi
+		pop esi
+		ret
 	}
-	if (entity_kind == '\x02') {
-		gm_StartEntityQuery(owner, 1, 0, 0x13);
-		return;
-	}
-	if (entity_kind == '\x1d') {
-		gm_StartEntityQuery(owner, 1, 0, 0xfd);
-		return;
-	}
-	if (entity_kind == '\x16') {
-		gm_StartEntityQuery(owner, 1, 0, 0x120);
-	}
-	return;
 }
 
 /* Creates a new citizen entity with initial stats generated

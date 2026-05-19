@@ -312,8 +312,7 @@ blocker_delta = 146
 
 ["SERVER.0x1000ba30"]
 size = 179
-status = "STUB"
-blocker_delta = 178
+status = "RELOC"
 analysis = "Iterates through the command execution tracker table at g_office_secondary_id_base to detach or update a specific entity's links and pending sequence numbers. Used when an entity changes state abruptly or is being removed."
 
 ["SERVER.0x1000baf0"]
@@ -954,7 +953,7 @@ analysis = "Updates priority tracking for dynamic entity dispatch/update lists. 
 
 ["SERVER.0x10015460"]
 size = 145
-status = "STUB"
+status = "RELOC"
 
 ["SERVER.0x10015500"]
 size = 180

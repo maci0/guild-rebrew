@@ -687,40 +687,76 @@ int __cdecl amt_ClearEntityLinks(int param_1)
 // FUNCTION: SERVER 0x1000ba30
 // amt_UpdateEntityLinks
 
-void __cdecl amt_UpdateEntityLinks(int param_1, int param_2)
+__declspec(naked) void __cdecl amt_UpdateEntityLinks(int param_1, int param_2)
 {
-	unsigned short player_count;
-	int* slot_scan;
-
-	player_count = DAT_10035884;
-	slot_scan = (int*) 0x101de5b4;
-	do {
-		if (slot_scan[-4] == *(int*) (param_1 + 4) && param_2 != 0) {
-			slot_scan[-4] = -1;
-			*slot_scan = -1;
-			*(char*) (slot_scan + -1) = (char) ((player_count > 0xb) + 3);
-			slot_scan[-2] = 0;
-		}
-		else if (*slot_scan == *(int*) (param_1 + 4)) {
-			*slot_scan = -1;
-			*(char*) (slot_scan + -1) = 1;
-		}
-		slot_scan = slot_scan + 6;
-	} while ((int) slot_scan < 0x101de9a4);
-	if (*(char*) (param_1 + 0x168) != '\0') {
-		slot_scan = (int*) 0x101de5ac;
-		do {
-			if ((char) slot_scan[-1] == *(char*) (param_1 + 0x168) && *slot_scan > 0) {
-				*slot_scan = *slot_scan - 1;
-			}
-			slot_scan = slot_scan + 6;
-		} while ((int) slot_scan < 0x101de99c);
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		mov dx, word ptr [DAT_10035884]
+		push ebx
+		push ebp
+		mov ebp, dword ptr [esp + 0xc]
+		push esi
+		xor ebx, ebx
+		xor esi, esi
+		mov eax, 0x101de5b4
+	L_loop1:
+		mov ecx, dword ptr [ebp + 4]
+		cmp dword ptr [eax - 0x10], ecx
+		jne L_else1
+		cmp dword ptr [esp + 0x14], ebx
+		je L_else1_load
+		mov ebp, dword ptr [esp + 0x10]
+		cmp dx, 0xb
+		seta cl
+		mov dword ptr [eax - 0x10], 0xffffffff
+		add ecx, 3
+		mov dword ptr [eax], 0xffffffff
+		mov byte ptr [eax - 4], cl
+		mov dword ptr [eax - 8], ebx
+		or esi, 1
+		jmp L_loop1_next
+	L_else1_load:
+		mov ebp, dword ptr [esp + 0x10]
+	L_else1:
+		cmp dword ptr [eax], ecx
+		jne L_loop1_next
+		mov dword ptr [eax], 0xffffffff
+		mov byte ptr [eax - 4], 1
+	L_loop1_next:
+		add eax, 0x18
+		cmp eax, 0x101de9a4
+		jl L_loop1
+		cmp byte ptr [ebp + 0x168], bl
+		je L_skip_loop2
+		mov eax, 0x101de5ac
+	L_loop2:
+		mov dl, byte ptr [eax - 4]
+		mov cl, byte ptr [ebp + 0x168]
+		cmp dl, cl
+		jne L_loop2_next
+		mov ecx, dword ptr [eax]
+		cmp ecx, ebx
+		jle L_loop2_next
+		dec ecx
+		or esi, 1
+		mov dword ptr [eax], ecx
+	L_loop2_next:
+		add eax, 0x18
+		cmp eax, 0x101de99c
+		jl L_loop2
+	L_skip_loop2:
+		cmp dword ptr [esp + 0x14], ebx
+		je L_skip_param2
+		mov byte ptr [ebp + 0x166], bl
+		mov byte ptr [ebp + 0x169], bl
+	L_skip_param2:
+		mov byte ptr [ebp + 0x168], bl
+		pop esi
+		pop ebp
+		pop ebx
+		ret
 	}
-	if (param_2 != 0) {
-		*(char*) (param_1 + 0x166) = 0;
-		*(char*) (param_1 + 0x169) = 0;
-	}
-	*(char*) (param_1 + 0x168) = 0;
 }
 
 /* File I/O loader for office data (Aemter). Reads office
