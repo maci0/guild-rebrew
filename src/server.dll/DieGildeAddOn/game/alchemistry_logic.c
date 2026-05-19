@@ -304,18 +304,23 @@ code_r0x1000be9f:
 
 int __cdecl ahm_ApplyColorComponent(char* param_1, char* param_2)
 {
+	float val;
 	switch (*(int*) (param_1 + 8)) {
 	case 0:
-		*(unsigned char*) (param_2 + 8) = (unsigned char) (int) (*(float*) (param_1 + 0x10) * fColorScale);
+		val = *(float*) (param_1 + 0x10);
+		*(unsigned char*) (param_2 + 8) = (unsigned char) (int) (val * fColorScale);
 		return 1;
 	case 1:
-		*(unsigned char*) (param_2 + 9) = (unsigned char) (int) (*(float*) (param_1 + 0x10) * fColorScale);
+		val = *(float*) (param_1 + 0x10);
+		*(unsigned char*) (param_2 + 9) = (unsigned char) (int) (val * fColorScale);
 		return 1;
 	case 2:
-		*(unsigned char*) (param_2 + 0xa) = (unsigned char) (int) (*(float*) (param_1 + 0x10) * fColorScale);
+		val = *(float*) (param_1 + 0x10);
+		*(unsigned char*) (param_2 + 0xa) = (unsigned char) (int) (val * fColorScale);
 		return 1;
 	case 3:
-		*(unsigned char*) (param_2 + 0xb) = (unsigned char) (int) (*(float*) (param_1 + 0x10) * fColorScale);
+		val = *(float*) (param_1 + 0x10);
+		*(unsigned char*) (param_2 + 0xb) = (unsigned char) (int) (val * fColorScale);
 		return 1;
 	default:
 		return 0;

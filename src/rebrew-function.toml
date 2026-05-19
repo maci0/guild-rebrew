@@ -310,7 +310,7 @@ analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves
 
 ["SERVER.0x1000c1e0"]
 size = 160
-status = "NEAR_MATCHING"
+status = "RELOC"
 
 ["SERVER.0x1000c280"]
 size = 130
