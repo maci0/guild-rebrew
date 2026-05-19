@@ -342,7 +342,7 @@ status = "EXACT"
 
 ["SERVER.0x1000c3c0"]
 size = 83
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker = "jump condition swap"
 blocker_delta = 47
 
@@ -352,8 +352,7 @@ status = "RELOC"
 
 ["SERVER.0x1000c4d0"]
 size = 295
-status = "STUB"
-blocker_delta = 269
+status = "RELOC"
 
 ["SERVER.0x1000c600"]
 size = 109
@@ -372,7 +371,7 @@ blocker_delta = 55
 
 ["SERVER.0x1000c710"]
 size = 752
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 
 ["SERVER.0x1000ca00"]

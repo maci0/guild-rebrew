@@ -515,72 +515,157 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 // FUNCTION: SERVER 0x1000c4d0
 // ahm_AllocAhmInfo
 
-int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
+__declspec(naked) int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
 {
-	int ok;
-	void* alloc_ptr;
-	int i;
-	unsigned char* buf_cursor;
-	unsigned int* src;
-	unsigned int* dst;
-	unsigned int header_id;
-	unsigned char header_data[4];
-	unsigned char field_a;
-	unsigned char field_b;
-	unsigned char field_c;
-	unsigned char field_d[5];
-	unsigned char slot_data[44];
-
-	ok = ls_ReadVfsDataChecked(&header_id, 4, 1, param_1);
-	if (ok == 0) {
-		return 0;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		sub esp, 0x3c
+		_emit 0x8d
+		_emit 0x44
+		_emit 0x24
+		_emit 0x00
+		push ebx
+		push esi
+		push edi
+		mov edi, dword ptr [esp + 0x4c]
+		push edi
+		push 1
+		push 4
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_n1
+	L_ret0:
+		pop edi
+		pop esi
+		pop ebx
+		add esp, 0x3c
+		ret
+	L_n1:
+		push edi
+		push 1
+		lea ecx, [esp + 0x18]
+		push 4
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_n2
+		pop edi
+		pop esi
+		pop ebx
+		add esp, 0x3c
+		ret
+	L_n2:
+		push edi
+		push 1
+		lea edx, [esp + 0x1c]
+		push 1
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_n3
+		pop edi
+		pop esi
+		pop ebx
+		add esp, 0x3c
+		ret
+	L_n3:
+		push edi
+		push 1
+		lea eax, [esp + 0x1d]
+		push 1
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_n4
+		pop edi
+		pop esi
+		pop ebx
+		add esp, 0x3c
+		ret
+	L_n4:
+		push edi
+		push 1
+		lea ecx, [esp + 0x1e]
+		push 1
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_n5
+		pop edi
+		pop esi
+		pop ebx
+		add esp, 0x3c
+		ret
+	L_n5:
+		push edi
+		push 1
+		lea edx, [esp + 0x1f]
+		push 1
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_loop_init
+	L_xor_ret0:
+		pop edi
+		pop esi
+		xor eax, eax
+		pop ebx
+		add esp, 0x3c
+		ret
+	L_loop_init:
+		xor ebx, ebx
+		lea esi, [esp + 0x1c]
+	L_loop:
+		push edi
+		push 1
+		lea eax, [esi - 4]
+		push 4
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je L_xor_ret0
+		push edi
+		push 1
+		push 4
+		push esi
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je L_xor_ret0
+		inc ebx
+		add esi, 8
+		cmp ebx, 6
+		jl L_loop
+		mov edi, dword ptr [esp + 0x50]
+		mov eax, dword ptr [edi + 0x65]
+		test eax, eax
+		jne L_have_buf
+		push 0x1002a0f8
+		push 0x3c
+		call m_AllocTracked
+		add esp, 8
+		mov dword ptr [edi + 0x65], eax
+	L_have_buf:
+		mov edi, dword ptr [edi + 0x65]
+		mov ecx, 0xf
+		lea esi, [esp + 0xc]
+		mov eax, 1
+		rep movsd
+		pop edi
+		pop esi
+		pop ebx
+		add esp, 0x3c
+		ret
 	}
-	ok = ls_ReadVfsDataChecked(header_data, 4, 1, param_1);
-	if (ok == 0) {
-		return 0;
-	}
-	ok = ls_ReadVfsDataChecked(&field_a, 1, 1, param_1);
-	if (ok == 0) {
-		return 0;
-	}
-	ok = ls_ReadVfsDataChecked(&field_b, 1, 1, param_1);
-	if (ok != 0) {
-		ok = ls_ReadVfsDataChecked(&field_c, 1, 1, param_1);
-		if (ok == 0) {
-			return 0;
-		}
-		ok = ls_ReadVfsDataChecked(field_d, 1, 1, param_1);
-		if (ok != 0) {
-			i = 0;
-			buf_cursor = slot_data;
-			while (ok = ls_ReadVfsDataChecked(buf_cursor - 4, 4, 1, param_1), ok != 0) {
-				ok = ls_ReadVfsDataChecked(buf_cursor, 4, 1, param_1);
-				if (ok == 0) {
-					return 0;
-				}
-				i = i + 1;
-				buf_cursor = buf_cursor + 8;
-				if (5 < i) {
-					if (*(int*) (param_2 + 0x65) == 0) {
-						alloc_ptr = m_AllocTracked(0x3c, s__ahm_AllocAhmInfo_1002a0f7 + 1);
-						*(void**) (param_2 + 0x65) = alloc_ptr;
-					}
-					src = &header_id;
-					dst = *(unsigned int**) (param_2 + 0x65);
-					i = 0xf;
-					do {
-						*dst = *src;
-						src = src + 1;
-						dst = dst + 1;
-						i = i - 1;
-					} while (i != 0);
-					return 1;
-				}
-			}
-		}
-		return 0;
-	}
-	return 0;
 }
 
 /* Initializes an alchemy entity with randomized properties.
