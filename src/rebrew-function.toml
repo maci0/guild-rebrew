@@ -967,8 +967,7 @@ analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
 size = 346
-status = "STUB"
-blocker_delta = 324
+status = "EXACT"
 
 ["SERVER.0x100170e0"]
 size = 304

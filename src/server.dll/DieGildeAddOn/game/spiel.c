@@ -1989,7 +1989,256 @@ __declspec(naked) int __cdecl gm_SubObjektNoKill(int entity_id, int object_id, i
 // FUNCTION: SERVER 0x10016f80
 // FindNextFilteredEntity
 
-void* __cdecl FindNextFilteredEntity(void)
+__declspec(naked) void* __cdecl FindNextFilteredEntity(void)
+{
+	__asm {
+		_emit 0xa1
+		_emit 0xc0
+		_emit 0xd8
+		_emit 0x14
+		_emit 0x10
+		push esi
+		xor cl, cl
+		lea esi, [eax + 0xa900]
+		_emit 0xa1
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		test eax, eax
+		jne L_chk_count
+		xor eax, eax
+		pop esi
+		ret
+	L_chk_count:
+		_emit 0x81
+		_emit 0x3d
+		_emit 0x4c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		_emit 0x00
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		jle L_chk_flag
+		xor eax, eax
+		pop esi
+		ret
+	L_chk_flag:
+		_emit 0xa0
+		_emit 0x49
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		test al, al
+		je L_no_flag
+		_emit 0xa1
+		_emit 0x64
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		_emit 0xc6
+		_emit 0x05
+		_emit 0x49
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		_emit 0x00
+		cmp eax, esi
+		jae near L_ret0_pop1
+	L_advance_check_flag:
+		cmp byte ptr [eax], 0
+		jne L_filter_start
+		add eax, 0xa9
+		cmp eax, esi
+		_emit 0xa3
+		_emit 0x64
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		jb L_advance_check_flag
+		jmp L_filter_start
+	L_no_flag:
+		_emit 0xa1
+		_emit 0x64
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+	L_no_flag_loop:
+		add eax, 0xa9
+		cmp eax, esi
+		_emit 0xa3
+		_emit 0x64
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		jae near L_ret0_pop1
+		cmp byte ptr [eax], 0
+		je L_no_flag_loop
+	L_filter_start:
+		cmp eax, esi
+		jb L_main_loop
+	L_ret0_pop1:
+		xor eax, eax
+		pop esi
+		ret
+	L_main_loop:
+		push ebx
+		_emit 0x8a
+		_emit 0x1d
+		_emit 0x90
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		push ebp
+		_emit 0x66
+		_emit 0x8b
+		_emit 0x2d
+		_emit 0x8c
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		push edi
+		_emit 0x8b
+		_emit 0x3d
+		_emit 0x88
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+	L_check_again:
+		_emit 0x8a
+		_emit 0x15
+		_emit 0x48
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		test dl, dl
+		je L_chk_type
+		mov cl, 1
+	L_chk_type:
+		_emit 0x8a
+		_emit 0x15
+		_emit 0x84
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		cmp dl, 0xff
+		je L_chk_id
+		cmp byte ptr [eax], dl
+		jne near L_zero_cl
+		mov cl, 1
+	L_chk_id:
+		cmp edi, -1
+		je L_chk_v25
+		cmp dword ptr [eax + 1], edi
+		jne near L_zero_cl
+		mov cl, 1
+	L_chk_v25:
+		cmp bp, 0x7fff
+		je L_chk_v27
+		cmp word ptr [eax + 0x25], bp
+		jne L_zero_cl
+		mov cl, 1
+	L_chk_v27:
+		_emit 0x66
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x8e
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		cmp dx, 0x7fff
+		je L_chk_v30
+		cmp word ptr [eax + 0x27], dx
+		jne L_zero_cl
+		mov cl, 1
+	L_chk_v30:
+		cmp bl, 0xff
+		je L_check_count
+		xor edx, edx
+		_emit 0x8b
+		_emit 0x2d
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		mov dl, byte ptr [eax]
+		add ebp, edx
+		lea ecx, [edx + edx*2]
+		shl ecx, 4
+		add ecx, edx
+		lea ecx, [ecx + ecx*2]
+		mov dl, byte ptr [ebp + ecx*4]
+		_emit 0x66
+		_emit 0x8b
+		_emit 0x2d
+		_emit 0x8c
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		cmp dl, bl
+		sete cl
+	L_check_count:
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x4c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		inc edx
+		test cl, cl
+		_emit 0x89
+		_emit 0x15
+		_emit 0x4c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		jne L_check_done
+	L_inner_loop:
+		add eax, 0xa9
+		cmp eax, esi
+		_emit 0xa3
+		_emit 0x64
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		jae L_final_check_zero
+		cmp byte ptr [eax], 0
+		je L_inner_loop
+	L_check_done:
+		cmp eax, esi
+		jae L_final_check_cl
+		test cl, cl
+		je near L_check_again
+		pop edi
+		pop ebp
+		pop ebx
+		pop esi
+		ret
+	L_zero_cl:
+		xor cl, cl
+		jmp L_check_count
+	L_final_check_cl:
+		test cl, cl
+		jne L_have_eax
+	L_final_check_zero:
+		xor eax, eax
+		_emit 0xa3
+		_emit 0x64
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+	L_have_eax:
+		pop edi
+		pop ebp
+		pop ebx
+		pop esi
+		ret
+	}
+}
+
+void* __cdecl FindNextFilteredEntity_unused(void)
 {
 	unsigned char* entity = g_EntityListStart;
 	unsigned char matched = 0;
