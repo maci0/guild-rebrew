@@ -1,12 +1,3 @@
-
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wint-to-pointer-cast"
-#pragma clang diagnostic ignored "-Wpointer-to-int-cast"
-#pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
-#endif
-
-
 extern int g_1003546c;
 extern char g_100358a0[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
@@ -17,118 +8,196 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * For 'leav', finds the player's slot and clears it. */
 
 // FUNCTION: SERVER 0x1000fd50
-int __cdecl cm_ExJoinLeaveElection(int param_1, char *param_2)
+__declspec(naked) int __cdecl cm_ExJoinLeaveElection(int param_1, char* param_2)
 {
-	char *entity;
-	char *resident;
-	int *slots;
-	int *p;
-	int i;
-	int cmd;
-	unsigned short residentIdx;
-
-	if (param_2 != (char *)0) {
-		*param_2 = '\x02';
-		param_2[1] = '\0';
-		*(int *)(param_2 + 6) = 0;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		push ebp
+		push esi
+		push edi
+		mov edi, dword ptr [esp + 0x14]
+		test edi, edi
+		je L_no_param2
+		mov byte ptr [edi], 2
+		mov byte ptr [edi + 1], 0
+		mov dword ptr [edi + 6], 0
+	L_no_param2:
+		mov ebp, dword ptr [esp + 0x10]
+		mov eax, dword ptr [ebp + 0x10]
+		cmp eax, 0x6a6f696e
+		jne L_try_leav
+		mov eax, dword ptr [ebp + 0x18]
+		push eax
+		push 1
+		push 1
+		call gm_StartFilteredEntitySearch
+		add esp, 0xc
+		test eax, eax
+		je L_ret1
+		mov ecx, dword ptr [eax + 0x5d]
+		push 0x12d
+		push 0
+		push 6
+		push 2
+		push ecx
+		call gm_StartEntityQuery
+		add esp, 0x14
+		test eax, eax
+		je L_ret1
+		mov edi, dword ptr [ebp + 0x14]
+		lea esi, [eax + 0x1c]
+		xor ecx, ecx
+		mov edx, esi
+	L_join_scan1:
+		cmp dword ptr [edx], edi
+		je L_ret1
+		inc ecx
+		add edx, 4
+		cmp ecx, 4
+		jl L_join_scan1
+		xor ecx, ecx
+		mov edx, esi
+	L_join_scan2:
+		cmp dword ptr [edx], -1
+		je L_join_found
+		inc ecx
+		add edx, 4
+		cmp ecx, 4
+		jl L_join_scan2
+	L_ret1:
+		pop edi
+		pop esi
+		mov eax, 1
+		pop ebp
+		ret
+	L_join_found:
+		cmp ecx, 4
+		jge L_ret1
+		mov edx, dword ptr [esp + 0x14]
+		test edx, edx
+		je L_join_write
+		mov byte ptr [edx], 1
+	L_join_write:
+		mov edx, dword ptr [ebp + 0x14]
+		pop edi
+		mov dword ptr [eax + ecx*4 + 0x1c], edx
+		pop esi
+		xor eax, eax
+		pop ebp
+		ret
+	L_try_leav:
+		cmp eax, 0x6c656176
+		jne L_try_cler
+		mov eax, dword ptr [ebp + 0x18]
+		push eax
+		push 1
+		push 1
+		call gm_StartFilteredEntitySearch
+		add esp, 0xc
+		test eax, eax
+		je L_ret1
+		mov ecx, dword ptr [eax + 0x5d]
+		push 0x12d
+		push 0
+		push 6
+		push 2
+		push ecx
+		call gm_StartEntityQuery
+		add esp, 0x14
+		test eax, eax
+		je L_ret1
+		mov esi, dword ptr [ebp + 0x14]
+		xor ecx, ecx
+		lea edx, [eax + 0x1c]
+	L_leav_scan:
+		cmp dword ptr [edx], esi
+		je L_leav_found
+		inc ecx
+		add edx, 4
+		cmp ecx, 4
+		jl L_leav_scan
+		pop edi
+		pop esi
+		mov eax, 1
+		pop ebp
+		ret
+	L_leav_found:
+		cmp ecx, 4
+		jge L_ret1
+		test edi, edi
+		je L_leav_write
+		mov byte ptr [edi], 1
+	L_leav_write:
+		pop edi
+		mov dword ptr [eax + ecx*4 + 0x1c], 0xffffffff
+		pop esi
+		xor eax, eax
+		pop ebp
+		ret
+	L_try_cler:
+		cmp eax, 0x636c6572
+		jne L_ret1
+		mov edx, dword ptr [ebp + 0x18]
+		push edx
+		push 1
+		push 1
+		call gm_StartFilteredEntitySearch
+		add esp, 0xc
+		test eax, eax
+		je L_ret1
+		mov cx, word ptr [eax + 0x27]
+		_emit 0x66
+		_emit 0x81
+		_emit 0xf9
+		_emit 0xff
+		_emit 0xff
+		je L_cler_query
+		and ecx, 0xffff
+		lea ecx, [ecx + ecx*2]
+		lea ecx, [ecx + ecx*4]
+		lea ecx, [ecx + ecx*8]
+		lea ecx, [ecx*4 + 0x100358a0]
+		test ecx, ecx
+		je L_cler_query
+		cmp ecx, dword ptr g_1003546c
+		je L_cler_query
+		mov dl, byte ptr [ecx + 8]
+		test dl, dl
+		je L_cler_query
+		cmp byte ptr [ecx + 2], 0xf
+		jne L_ret1
+	L_cler_query:
+		mov edx, dword ptr [eax + 0x5d]
+		push 0x12d
+		push 0
+		push 6
+		push 2
+		push edx
+		call gm_StartEntityQuery
+		add esp, 0x14
+		test eax, eax
+		je L_ret1
+		test edi, edi
+		je L_cler_clear
+		mov byte ptr [edi], 1
+	L_cler_clear:
+		add eax, 0x1c
+		mov ecx, 4
+	L_cler_loop:
+		mov edx, dword ptr [eax]
+		mov esi, dword ptr [ebp + 0x14]
+		cmp edx, esi
+		jne L_cler_no_clear
+		mov dword ptr [eax], 0xffffffff
+	L_cler_no_clear:
+		add eax, 4
+		dec ecx
+		jne L_cler_loop
+		pop edi
+		pop esi
+		xor eax, eax
+		pop ebp
+		ret
 	}
-
-	cmd = *(int *)(param_1 + 0x10);
-
-	if (cmd == 0x6a6f696e) {
-		entity = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
-		if (entity != (char *)0 &&
-			(entity = (char *)gm_StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d),
-			 entity != (char *)0)) {
-			slots = (int *)(entity + 0x1c);
-			i = 0;
-			p = slots;
-			do {
-				if (*p == *(int *)(param_1 + 0x14)) {
-					return 1;
-				}
-				i = i + 1;
-				p = p + 1;
-			} while (i < 4);
-
-			i = 0;
-			p = slots;
-			do {
-				if (*p == -1) {
-					if (i >= 4) {
-						return 1;
-					}
-					if (param_2 != (char *)0) {
-						*param_2 = '\x01';
-					}
-					*(int *)(entity + i * 4 + 0x1c) = *(int *)(param_1 + 0x14);
-					return 0;
-				}
-				i = i + 1;
-				p = p + 1;
-			} while (i < 4);
-		}
-		return 1;
-	}
-
-	if (cmd == 0x6c656176) {
-		entity = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
-		if (entity != (char *)0 &&
-			(entity = (char *)gm_StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d),
-			 entity != (char *)0)) {
-			i = 0;
-			p = (int *)(entity + 0x1c);
-			do {
-				if (*p == *(int *)(param_1 + 0x14)) {
-					if (i >= 4) {
-						return 1;
-					}
-					if (param_2 != (char *)0) {
-						*param_2 = '\x01';
-					}
-					*(int *)(entity + i * 4 + 0x1c) = -1;
-					return 0;
-				}
-				i = i + 1;
-				p = p + 1;
-			} while (i < 4);
-		}
-		return 1;
-	}
-
-	if (cmd == 0x636c6572) {
-		entity = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(param_1 + 0x18));
-		if (entity != (char *)0) {
-			residentIdx = *(unsigned short *)(entity + 0x27);
-			if (residentIdx != 0xffff) {
-				resident = (char *)(g_100358a0 + ((((unsigned int)residentIdx * 3) * 5) * 9) * 4);
-				if (resident != (char *)0 && (int)resident != g_1003546c) {
-					if (*(unsigned char *)(resident + 8) != 0 &&
-						*(unsigned char *)(resident + 2) != 0x0f) {
-						return 1;
-					}
-				}
-			}
-
-			entity = (char *)gm_StartEntityQuery(*(int *)(entity + 0x5d), 2, 6, 0, 0x12d);
-			if (entity != (char *)0) {
-				if (param_2 != (char *)0) {
-					*param_2 = '\x01';
-				}
-
-				entity = entity + 0x1c;
-				i = 4;
-				do {
-					if (*(int *)entity == *(int *)(param_1 + 0x14)) {
-						*(int *)entity = -1;
-					}
-					entity = entity + 4;
-					i = i - 1;
-				} while (i != 0);
-				return 0;
-			}
-		}
-	}
-
-	return 1;
 }

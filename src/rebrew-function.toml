@@ -599,8 +599,7 @@ blocker_delta = 209
 
 ["SERVER.0x1000fd50"]
 size = 445
-status = "STUB"
-blocker = "register allocation (4 callee-saved regs vs target 3), loop body hoisting, comparison direction swap"
+status = "RELOC"
 
 ["SERVER.0x1000ff10"]
 size = 22
