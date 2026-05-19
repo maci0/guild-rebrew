@@ -714,6 +714,7 @@ status = "RELOC"
 ["SERVER.0x10011bf0"]
 size = 1040
 status = "STUB"
+cflags = "/O2 /Oy- /Gd"
 blocker_delta = 1021
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
@@ -773,7 +774,7 @@ status = "RELOC"
 
 ["SERVER.0x10014260"]
 size = 892
-status = "NEAR_MATCHING"
+status = "STUB"
 blocker = "comparison direction swap, jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 blocker_delta = 533
 ghidra = "RecvGameSavegame"
