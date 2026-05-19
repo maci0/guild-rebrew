@@ -1639,9 +1639,8 @@ int __cdecl cm_ProcessCommandQueue(void)
 	unsigned char* conn;
 	unsigned int i;
 
-	slot = (unsigned int*) 0x10442cf0;
-
-	do {
+	for (slot = (unsigned int*) 0x10442cf0; (unsigned int) slot < 0x11764010;
+		slot = (unsigned int*) ((unsigned char*) slot + 0x264264)) {
 		node = (unsigned char*) slot[0];
 		type5 = 0;
 
@@ -1751,8 +1750,7 @@ int __cdecl cm_ProcessCommandQueue(void)
 			node = next_save;
 		}
 
-		slot = (unsigned int*) ((unsigned char*) slot + 0x264264);
-	} while ((unsigned int) slot < 0x11764010);
+	}
 
 	return 0;
 }
