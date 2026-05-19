@@ -147,7 +147,6 @@ found: {
 		*(int*) (group + 0x14) = tmp;
 		if (tmp > *(int*) (group + 0x1c)) {
 			*(int*) (group + 0x1c) = tmp;
-			return block;
 		}
 	}
 	else {
