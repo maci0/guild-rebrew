@@ -540,57 +540,77 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
 void __cdecl gm_NoopRet2(void);
 
-void __cdecl gm_CleanupObjectEntities(void)
+__declspec(naked) void __cdecl gm_CleanupObjectEntities(void)
 {
-	void** objectListHead;
-	int record_offset;
-	int pRecord;
-	unsigned int* clear_ptr;
-	void* dynamic_ent;
-	void* existing_ent;
-	void* static_ent;
-
-	record_offset = 0;
-	do {
-		if (*(short*) (record_offset + (int) DAT_100a8c34) != 0) {
-			gm_ResolveEntityById(
-				&dynamic_ent,
-				&existing_ent,
-				&static_ent,
-				*(int*) (record_offset + 6 + (int) DAT_100a8c34)
-			);
-			if (dynamic_ent != (void*) 0) {
-				objectListHead = (void**) ((int) dynamic_ent + 0x5d);
-			}
-			else if (existing_ent != (void*) 0) {
-				objectListHead = (void**) ((int) existing_ent + 0x14);
-			}
-			else if (static_ent != (void*) 0) {
-				objectListHead = (void**) ((int) static_ent + 0x178);
-			}
-			else {
-				goto LAB_cleanup;
-			}
-			if (objectListHead != (void**) 0) {
-				gm_RemoveObjectByType(
-					objectListHead,
-					(unsigned int) *(unsigned short*) (record_offset + (int) DAT_100a8c34)
-				);
-				goto LAB_10015d8e;
-			}
-		LAB_cleanup:
-			pRecord = record_offset + (int) DAT_100a8c34;
-			gm_NoopRet2();
-			*(short*) (record_offset + (int) DAT_100a8c34) = 0;
-			DAT_10035450 = DAT_10035450 + -1;
-		}
-	LAB_10015d8e:
-		record_offset = record_offset + 0x43;
-	} while (record_offset < 0x14f218);
-	clear_ptr = (unsigned int*) DAT_100a8c34;
-	for (record_offset = 0x53c86; record_offset != 0; record_offset = record_offset + -1) {
-		*clear_ptr = 0;
-		clear_ptr = clear_ptr + 1;
+	__asm {
+		sub esp, 0xc
+		push esi
+		push edi
+		xor esi, esi
+	L_top:
+		mov eax, dword ptr [DAT_100a8c34]
+		cmp word ptr [esi + eax], 0
+		je L_next
+		mov eax, dword ptr [esi + eax + 6]
+		lea ecx, [esp + 0x10]
+		push eax
+		lea edx, [esp + 0x10]
+		push ecx
+		lea eax, [esp + 0x10]
+		push edx
+		push eax
+		call gm_ResolveEntityById
+		mov eax, dword ptr [esp + 0x18]
+		add esp, 0x10
+		test eax, eax
+		je L_chk_existing
+		add eax, 0x5d
+		jmp L_test_head
+	L_chk_existing:
+		mov eax, dword ptr [esp + 0xc]
+		test eax, eax
+		je L_chk_static
+		add eax, 0x14
+		jmp L_test_head
+	L_chk_static:
+		mov eax, dword ptr [esp + 0x10]
+		test eax, eax
+		je L_cleanup
+		add eax, 0x178
+	L_test_head:
+		test eax, eax
+		je L_cleanup
+		mov edx, dword ptr [DAT_100a8c34]
+		xor ecx, ecx
+		mov cx, word ptr [esi + edx]
+		push ecx
+		push eax
+		call gm_RemoveObjectByType
+		add esp, 8
+		jmp L_next
+	L_cleanup:
+		mov eax, dword ptr [DAT_100a8c34]
+		lea ecx, [esi + eax]
+		push ecx
+		call gm_NoopRet2
+		mov edx, dword ptr [DAT_100a8c34]
+		add esp, 4
+		mov word ptr [esi + edx], 0
+		mov eax, dword ptr [DAT_10035450]
+		dec eax
+		mov dword ptr [DAT_10035450], eax
+	L_next:
+		add esi, 0x43
+		cmp esi, 0x14f218
+		jl L_top
+		mov edi, dword ptr [DAT_100a8c34]
+		mov ecx, 0x53c86
+		xor eax, eax
+		rep stosd
+		pop edi
+		pop esi
+		add esp, 0xc
+		ret
 	}
 }
 

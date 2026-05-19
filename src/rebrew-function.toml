@@ -967,9 +967,7 @@ status = "RELOC"
 
 ["SERVER.0x10015cf0"]
 size = 194
-status = "STUB"
-blocker = "comparison direction swap"
-blocker_delta = 88
+status = "RELOC"
 
 ["SERVER.0x10015dc0"]
 size = 55
@@ -1047,7 +1045,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "STUB"
+status = "NEAR_MATCHING"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
