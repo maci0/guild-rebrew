@@ -745,6 +745,7 @@ status = "RELOC"
 ["SERVER.0x100128f0"]
 size = 1463
 status = "STUB"
+cflags = "/O2 /Oy- /Gd"
 blocker_delta = 1390
 analysis = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 globals = "SERVER 0x100a8c34"
