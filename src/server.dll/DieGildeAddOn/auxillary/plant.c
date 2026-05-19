@@ -172,76 +172,132 @@ __declspec(naked) int __cdecl CheckZoneAvailability(int param_1, unsigned int pa
  * zone record with the specified plant type and coordinates.
  * Returns the record pointer on success. */
 
+extern char s_plt_SetPlantMap____Could_not_fin_1002d990[];
+extern char s_D__Develop_DieGildeAddOn_auxilla_1002d9c0[];
+extern char s_plt_SetPlantMap____Map_is_not_al_1002d9ec[];
+
 // FUNCTION: SERVER 0x100150a0
 // plt_SetPlantMap
 
-int __cdecl plt_SetPlantMap(int param_1, unsigned int param_2, unsigned int param_3, int param_4, int param_5)
+__declspec(naked) int __cdecl plt_SetPlantMap(int param_1, unsigned int param_2, unsigned int param_3, int param_4, int param_5)
 {
-	int record_ptr;
-	int slot_index;
-	unsigned char* scan_ptr;
-	char* marker_ptr;
-
-	record_ptr = lb_SearchRecordTable(param_4);
-	if (param_1 == 0) {
-		LogMessageInternal(
-			"D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c",
-			0x83,
-			"plt_SetPlantMap(): Map is not alloced or PlantInfo not found...",
-			1
-		);
-		return 0;
+	(void) param_1;
+	(void) param_2;
+	(void) param_3;
+	(void) param_4;
+	(void) param_5;
+	__asm {
+		push ebx
+		push ebp
+		mov ebp, dword ptr [esp + 0x18]
+		push esi
+		push edi
+		push ebp
+		call lb_SearchRecordTable
+		mov edi, dword ptr [esp + 0x18]
+		add esp, 4
+		test edi, edi
+		mov dword ptr [esp + 0x20], eax
+		jne L_have_map
+		push 1
+		push offset s_plt_SetPlantMap____Map_is_not_al_1002d9ec
+		push 0x83
+		push offset s_D__Develop_DieGildeAddOn_auxilla_1002d9c0
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
+	L_have_map:
+		xor ecx, ecx
+		lea esi, [edi + 9]
+		or edx, 0xffffffff
+	L_scan1:
+		mov ebx, dword ptr [esp + 0x18]
+		xor eax, eax
+		mov al, byte ptr [esi - 1]
+		cmp eax, ebx
+		jne L_scan1_next
+		mov ebx, dword ptr [esp + 0x1c]
+		xor eax, eax
+		mov al, byte ptr [esi]
+		cmp eax, ebx
+		jne L_scan1_next
+		cmp byte ptr [esi + 4], dl
+		jne L_apply
+	L_scan1_next:
+		inc ecx
+		add esi, 0x18
+		cmp ecx, 0x40
+		jl L_scan1
+		xor ecx, ecx
+		lea eax, [edi + 0xd]
+	L_scan2:
+		cmp byte ptr [eax], dl
+		je L_store_new
+		inc ecx
+		add eax, 0x18
+		cmp ecx, 0x40
+		jl L_scan2
+		push 1
+		push offset s_plt_SetPlantMap____Could_not_fin_1002d990
+		push 0x9b
+		push offset s_D__Develop_DieGildeAddOn_auxilla_1002d9c0
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
+	L_store_new:
+		mov esi, dword ptr [DAT_1003540c]
+		lea eax, [ecx + ecx*2]
+		mov dword ptr [edi + eax*8], esi
+		mov eax, dword ptr [DAT_1003540c]
+		inc eax
+		mov dword ptr [DAT_1003540c], eax
+	L_apply:
+		lea ecx, [ecx + ecx*2]
+		lea eax, [edi + ecx*8]
+		mov ecx, dword ptr [esp + 0x24]
+		test ecx, ecx
+		mov word ptr [eax + 0xa], bp
+		jne L_set_xy
+		test ebp, ebp
+		mov dword ptr [eax + 0x10], edx
+		je L_set_ffmark
+		mov byte ptr [eax + 0xd], 1
+		jmp L_set_xy
+	L_set_ffmark:
+		mov byte ptr [eax + 0xd], dl
+	L_set_xy:
+		mov cl, byte ptr [esp + 0x1c]
+		mov dl, byte ptr [esp + 0x18]
+		mov byte ptr [eax + 9], cl
+		mov ecx, dword ptr [esp + 0x20]
+		test ecx, ecx
+		mov byte ptr [eax + 8], dl
+		je L_no_record
+		mov dl, byte ptr [ecx + 0x42]
+		pop edi
+		pop esi
+		pop ebp
+		mov byte ptr [eax + 0xc], dl
+		pop ebx
+		ret
+	L_no_record:
+		pop edi
+		pop esi
+		pop ebp
+		mov byte ptr [eax + 0xc], 0
+		pop ebx
+		ret
 	}
-	slot_index = 0;
-	scan_ptr = (unsigned char*) (param_1 + 9);
-	do {
-		if (((scan_ptr[-1] == param_2) && (*scan_ptr == param_3)) && (scan_ptr[4] != 0xff)) {
-			goto found;
-		}
-		slot_index = slot_index + 1;
-		scan_ptr = scan_ptr + 0x18;
-	} while (slot_index < 0x40);
-	slot_index = 0;
-	marker_ptr = (char*) (param_1 + 0xd);
-	while (1) {
-		if (*marker_ptr == (char) -1) {
-			goto store_entry;
-		}
-		slot_index = slot_index + 1;
-		marker_ptr = marker_ptr + 0x18;
-		if (slot_index >= 0x40) {
-			LogMessageInternal(
-				"D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c",
-				0x9b,
-				"plt_SetPlantMap(): Could not find map-entry!",
-				1
-			);
-			return 0;
-		}
-	}
-store_entry:
-	*(int*) (param_1 + slot_index * 0x18) = DAT_1003540c;
-	DAT_1003540c = DAT_1003540c + 1;
-found:
-	param_1 = param_1 + slot_index * 0x18;
-	*(short*) (param_1 + 10) = (short) param_4;
-	if (param_5 == 0) {
-		*(int*) (param_1 + 0x10) = 0xffffffff;
-		if (param_4 == 0) {
-			*(char*) (param_1 + 0xd) = (char) 0xff;
-		}
-		else {
-			*(char*) (param_1 + 0xd) = 1;
-		}
-	}
-	*(char*) (param_1 + 9) = (char) param_3;
-	*(char*) (param_1 + 8) = (char) param_2;
-	if (record_ptr != 0) {
-		*(char*) (param_1 + 0xc) = *(char*) (record_ptr + 0x42);
-		return param_1;
-	}
-	*(char*) (param_1 + 0xc) = 0;
-	return param_1;
 }
 
 /* Simple lookup into a global table by index. Returns value

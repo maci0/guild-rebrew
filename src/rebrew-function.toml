@@ -865,9 +865,7 @@ status = "RELOC"
 
 ["SERVER.0x100150a0"]
 size = 257
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov)"
-blocker_delta = 160
+status = "RELOC"
 
 ["SERVER.0x100151b0"]
 size = 41
