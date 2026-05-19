@@ -387,9 +387,7 @@ blocker = "jump condition swap, loop rotation / branch layout, stack frame choic
 
 ["SERVER.0x1000cde0"]
 size = 331
-status = "STUB"
-blocker = "struct field access scheduling (inc;inc vs lea+add pattern)"
-blocker_delta = 14
+status = "RELOC"
 
 ["SERVER.0x1000cf30"]
 size = 162
