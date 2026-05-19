@@ -1157,8 +1157,7 @@ status = "RELOC"
 
 ["SERVER.0x10019720"]
 size = 396
-status = "STUB"
-blocker = "instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+status = "RELOC"
 
 ["SERVER.0x100198b0"]
 size = 355

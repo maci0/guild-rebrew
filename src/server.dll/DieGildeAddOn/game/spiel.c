@@ -3705,110 +3705,208 @@ int __cdecl gm_QueryEntitySum(int param_1, unsigned int param_2)
 /* Accesses g_entity_table (0x101de450), calls __ftol and itself recursively */
 /* Computes weighted entity stat values with caching in field_0x38 */
 
-double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
+__declspec(naked) double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 {
-	char* ent;
-	int cached;
-
-	ent = g_entity_table + (entity_index << 6) + entity_index;
-	cached = *(int*) (ent + 0x38);
-
-	if (cached != 0) {
-		int shifted = cached << 5;
-		int masked = param2 & 0xff;
-		float result = (float) shifted;
-		result *= masked;
-		result *= DAT_10025fb8;
-		if (*(unsigned char*) (ent + 0x21) == 3) {
-			result *= DAT_10025fb4;
-		}
-		return result;
-	}
-
-	{
-		unsigned int field_22;
-		unsigned short field_36;
-		int divisor;
-		int idx;
-		double base_val;
-		float modifier;
-		float intermediate;
-
-		field_22 = *(unsigned int*) (ent + 0x22);
-		field_36 = *(unsigned short*) (ent + 0x36);
-		divisor = (int) field_36 + (field_36 == 0);
-
-		base_val = (double) field_22;
-		idx = *(int*) (entity_index * 4 + 0x101dd8e0);
-		base_val /= divisor;
-
-		if (idx != 0) {
-			char* record;
-			int i;
-
-			record = *(char**) 0x100a8c30 + idx * 0x24d;
-			modifier = _DAT_100256cc;
-
-			i = 0;
-			do {
-				int bval = (unsigned char) *(record + i + 0x233);
-				modifier += (float) bval * DAT_10025fa8 * (float) DAT_10025fa0;
-				i++;
-			} while (i < 2);
-		}
-		else {
-			modifier = DAT_100257c8;
-		}
-
-		{
-			unsigned char entity_type = *(unsigned char*) ent;
-			modifier *= (float) DAT_100257d0;
-			intermediate = (float) (base_val * modifier);
-
-			if (entity_type == 0x17) {
-				return intermediate * DAT_10025fb0;
-			}
-		}
-
-		{
-			float accum;
-			int j;
-			short* p;
-			int p2;
-
-			p2 = param2;
-			accum = intermediate;
-			p = (short*) (ent + 0x2e);
-			j = 0;
-
-			do {
-				unsigned short slot = *(unsigned short*) p;
-				if (slot == 0) {
-					break;
-				}
-				if (slot != 0xffff) {
-					double sub;
-					int weight;
-					int div36;
-
-					sub = gm_CalculateProductionValue((int) (unsigned short) slot, p2);
-					weight = (int) *(unsigned short*) (p - 4);
-					div36 = (int) *(unsigned short*) (ent + 0x36);
-					sub *= weight;
-					sub /= div36;
-					accum += (float) sub;
-				}
-				j++;
-				p++;
-			} while (j < 4);
-
-			{
-				int int_val = (int) (accum * DAT_10025fac);
-				int masked = p2 & 0xff;
-				*(int*) (ent + 0x38) = int_val;
-				return (float) masked * intermediate * DAT_10025fb8 * DAT_10025fb0;
-			}
-		}
+	(void) entity_index;
+	(void) param2;
+	__asm {
+		mov ecx, dword ptr [esp + 4]
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		sub esp, 8
+		mov eax, ecx
+		shl eax, 6
+		push ebx
+		push esi
+		add edx, eax
+		mov esi, ecx
+		add esi, edx
+		xor ebx, ebx
+		mov eax, dword ptr [esi + 0x38]
+		cmp eax, ebx
+		je L_compute
+		shl eax, 5
+		mov dword ptr [esp + 0x14], eax
+		mov eax, dword ptr [esp + 0x18]
+		fild dword ptr [esp + 0x14]
+		and eax, 0xff
+		mov dword ptr [esp + 0x18], eax
+		mov al, byte ptr [esi + 0x21]
+		fimul dword ptr [esp + 0x18]
+		cmp al, 3
+		_emit 0xd8
+		_emit 0x0d
+		_emit 0xb8
+		_emit 0x5f
+		_emit 0x02
+		_emit 0x10
+		jne near L_pop_done
+		_emit 0xd8
+		_emit 0x0d
+		_emit 0xb4
+		_emit 0x5f
+		_emit 0x02
+		_emit 0x10
+		pop esi
+		pop ebx
+		add esp, 8
+		ret
+	L_compute:
+		mov edx, dword ptr [esi + 0x22]
+		mov ax, word ptr [esi + 0x36]
+		mov dword ptr [esp + 8], edx
+		xor edx, edx
+		cmp ax, bx
+		mov dword ptr [esp + 0xc], ebx
+		sete dl
+		and eax, 0xffff
+		add edx, eax
+		mov eax, dword ptr [ecx*4 + 0x101dd8e0]
+		fild qword ptr [esp + 8]
+		lea ecx, [eax + eax*2]
+		mov dword ptr [esp + 0x14], edx
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		fidiv dword ptr [esp + 0x14]
+		shl ecx, 4
+		add ecx, eax
+		add edx, eax
+		cmp eax, ebx
+		lea ecx, [ecx + ecx*2]
+		lea ecx, [edx + ecx*4]
+		je L_no_record
+		_emit 0xd9
+		_emit 0x05
+		_emit 0xcc
+		_emit 0x56
+		_emit 0x02
+		_emit 0x10
+		xor eax, eax
+	L_mod_loop:
+		xor edx, edx
+		mov dl, byte ptr [ecx + eax + 0x233]
+		inc eax
+		mov dword ptr [esp + 0x14], edx
+		cmp eax, 2
+		fild dword ptr [esp + 0x14]
+		_emit 0xd8
+		_emit 0x0d
+		_emit 0xa8
+		_emit 0x5f
+		_emit 0x02
+		_emit 0x10
+		_emit 0xdc
+		_emit 0x0d
+		_emit 0xa0
+		_emit 0x5f
+		_emit 0x02
+		_emit 0x10
+		fxch st(1)
+		faddp st(1), st
+		jl L_mod_loop
+		jmp L_have_mod
+	L_no_record:
+		_emit 0xd9
+		_emit 0x05
+		_emit 0xc8
+		_emit 0x57
+		_emit 0x02
+		_emit 0x10
+	L_have_mod:
+		_emit 0xdc
+		_emit 0x0d
+		_emit 0xd0
+		_emit 0x57
+		_emit 0x02
+		_emit 0x10
+		fxch st(1)
+		cmp byte ptr [esi], 0x17
+		fmulp st(1), st
+		fstp dword ptr [esp + 0x14]
+		jne L_recurse
+		fld dword ptr [esp + 0x14]
+		_emit 0xd8
+		_emit 0x0d
+		_emit 0xb0
+		_emit 0x5f
+		_emit 0x02
+		_emit 0x10
+		pop esi
+		pop ebx
+		add esp, 8
+		ret
+	L_recurse:
+		push ebp
+		mov ebp, dword ptr [esp + 0x1c]
+		push edi
+		lea edi, [esi + 0x2e]
+	L_rec_loop:
+		mov ax, word ptr [edi]
+		test ax, ax
+		je L_rec_done
+		cmp ax, 0xffff
+		je L_rec_next
+		and eax, 0xffff
+		push ebp
+		push eax
+		call gm_CalculateProductionValue
+		xor eax, eax
+		add esp, 8
+		mov ax, word ptr [edi - 8]
+		xor ecx, ecx
+		mov cx, word ptr [esi + 0x36]
+		mov dword ptr [esp + 0x20], eax
+		fimul dword ptr [esp + 0x20]
+		mov dword ptr [esp + 0x20], ecx
+		fidiv dword ptr [esp + 0x20]
+		fadd dword ptr [esp + 0x1c]
+		fstp dword ptr [esp + 0x1c]
+	L_rec_next:
+		inc ebx
+		add edi, 2
+		cmp ebx, 4
+		jl L_rec_loop
+	L_rec_done:
+		fld dword ptr [esp + 0x1c]
+		_emit 0xd8
+		_emit 0x0d
+		_emit 0xac
+		_emit 0x5f
+		_emit 0x02
+		_emit 0x10
+		call __ftol
+		and ebp, 0xff
+		pop edi
+		mov dword ptr [esp + 0x1c], ebp
+		mov dword ptr [esi + 0x38], eax
+		fild dword ptr [esp + 0x1c]
+		pop ebp
+		fmul dword ptr [esp + 0x14]
+		_emit 0xd8
+		_emit 0x0d
+		_emit 0xb8
+		_emit 0x5f
+		_emit 0x02
+		_emit 0x10
+		_emit 0xd8
+		_emit 0x0d
+		_emit 0xb0
+		_emit 0x5f
+		_emit 0x02
+		_emit 0x10
+	L_pop_done:
+		pop esi
+		pop ebx
+		add esp, 8
+		ret
 	}
 }
 
