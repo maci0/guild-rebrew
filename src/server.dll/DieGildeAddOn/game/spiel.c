@@ -1302,45 +1302,84 @@ void __cdecl gm_NoopRet2(void)
 // FUNCTION: SERVER 0x10016680
 // gm_RemoveLinkedNodeById
 
-int __cdecl gm_RemoveLinkedNodeById(int* param_1, int param_2)
+__declspec(naked) int __cdecl gm_RemoveLinkedNodeById(int* param_1, int param_2)
 {
-	char* prev;
-	char* curr;
-	int count;
-
-	prev = (char*) 0;
-	curr = (char*) *param_1;
-	if (curr == (char*) 0) {
-		return -1;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		push ebx
+		push ebp
+		mov ebp, dword ptr [esp + 0xc]
+		push esi
+		xor ebx, ebx
+		push edi
+		mov esi, dword ptr [ebp]
+		test esi, esi
+		jne L_loopstart
+		pop edi
+		pop esi
+		pop ebp
+		or eax, 0xffffffff
+		pop ebx
+		ret
+	L_loopstart:
+		mov eax, dword ptr [esp + 0x18]
+		xor edi, edi
+	L_loop:
+		cmp dword ptr [esi + 2], eax
+		je L_found
+		mov ebx, esi
+		mov esi, dword ptr [esi + 0x3f]
+		inc edi
+		test esi, esi
+		jne L_loop
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffe
+		pop ebx
+		ret
+	L_found:
+		test esi, esi
+		jne L_doremove
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffe
+		pop ebx
+		ret
+	L_doremove:
+		mov ecx, dword ptr [esi + 0x14]
+		lea eax, [esi + 0x14]
+		test ecx, ecx
+		je L_skipfree
+		push eax
+		call gm_FreeObjectListRecursive
+		add esp, 4
+	L_skipfree:
+		push esi
+		call gm_NoopRet2
+		add esp, 4
+		test edi, edi
+		jne L_unlinkprev
+		mov eax, dword ptr [esi + 0x3f]
+		mov dword ptr [ebp], eax
+		jmp L_finish
+	L_unlinkprev:
+		mov ecx, dword ptr [esi + 0x3f]
+		mov dword ptr [ebx + 0x3f], ecx
+	L_finish:
+		mov word ptr [esi], 0
+		mov eax, dword ptr [DAT_10035450]
+		dec eax
+		pop edi
+		pop esi
+		mov dword ptr [DAT_10035450], eax
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
 	}
-	count = 0;
-	do {
-		if (*(int*) (curr + 2) == param_2) {
-			if (curr == (char*) 0) {
-				return -2;
-			}
-			if (*(int*) (curr + 0x14) != 0) {
-				gm_FreeObjectListRecursive((char**) (curr + 0x14));
-			}
-			gm_NoopRet2();
-			if (count == 0) {
-				*param_1 = *(int*) (curr + 0x3f);
-			}
-			else {
-				*(int*) (prev + 0x3f) = *(int*) (curr + 0x3f);
-			}
-			*(short*) curr = 0;
-			DAT_10035450 = DAT_10035450 - 1;
-			return 0;
-		}
-		prev = curr;
-		curr = *(char**) (curr + 0x3f);
-		count = count + 1;
-		if (curr == (char*) 0) {
-			return -2;
-		}
-	} while (1);
-	return -2;
 }
 
 /* Recursively frees an object list. Walks the linked list
