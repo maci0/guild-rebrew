@@ -882,7 +882,7 @@ blocker_delta = 49
 
 ["SERVER.0x10014bf0"]
 size = 163
-status = "STUB"
+status = "RELOC"
 
 ["SERVER.0x10014ca0"]
 size = 265

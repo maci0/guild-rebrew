@@ -365,44 +365,82 @@ int __cdecl lb_HandleDataTransfer(unsigned int* param_1, unsigned char* param_2)
 // FUNCTION: SERVER 0x10014bf0
 // lb_HandleEntitySync
 
-int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
 {
-        unsigned int* slot_ptr;
-        unsigned int target_id;
-        int i;
-        int result;
-
-        if (*param_1 & 0x6000) {
-                LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command", 0x354, "invalid client state", 1);
-                *param_2 = 2;
-                result = cm_QueuePlayerCommand(param_1, param_2);
-                return (result != -1) - 1;
+        (void) param_1;
+        (void) param_2;
+        __asm {
+                push ebx
+                mov ebx, dword ptr [esp + 8]
+                push esi
+                mov eax, dword ptr [ebx]
+                push edi
+                test ah, 0x60
+                je L_valid
+                push 1
+                push 0x1002d740
+                push 0x354
+                push 0x1002d70c
+                call LogMessageInternal
+                mov eax, dword ptr [esp + 0x24]
+                push eax
+                push ebx
+                mov byte ptr [eax], 2
+                call cm_QueuePlayerCommand
+                add esp, 0x18
+                inc eax
+                neg eax
+                sbb eax, eax
+                pop edi
+                neg eax
+                pop esi
+                dec eax
+                pop ebx
+                ret
+        L_valid:
+                mov edx, dword ptr [esp + 0x14]
+                xor ecx, ecx
+                mov eax, 0x101deb04
+                mov esi, dword ptr [edx + 0x14]
+                lea edi, [edx + 0x14]
+        L_loop:
+                cmp dword ptr [eax], esi
+                je L_found
+                add eax, 0x264264
+                inc ecx
+                cmp eax, 0x114ffe24
+                jl L_loop
+                mov byte ptr [edx], 2
+        L_qpc_only:
+                push edx
+                push ebx
+                call cm_QueuePlayerCommand
+                add esp, 8
+                inc eax
+                neg eax
+                sbb eax, eax
+                pop edi
+                neg eax
+                pop esi
+                dec eax
+                pop ebx
+                ret
+        L_found:
+                mov eax, ecx
+                shl eax, 4
+                add eax, ecx
+                shl eax, 8
+                add eax, ecx
+                shl eax, 4
+                add eax, ecx
+                mov ecx, 0x15
+                lea eax, [eax + eax*8]
+                lea esi, [eax*4 + 0x10442d0c]
+                rep movsd
+                movsw
+                movsb
+                jmp L_qpc_only
         }
-
-        target_id = *(unsigned int*) (param_2 + 0x14);
-        slot_ptr = &g_player_slots_base[0].id;
-        i = 0;
-        while (*slot_ptr != target_id) {
-                slot_ptr = (unsigned int*) ((char*) slot_ptr + 0x264264);
-                i++;
-                if (slot_ptr >= (unsigned int*)((char*)g_player_slots + 4)) {
-                        *param_2 = 2;
-                        result = cm_QueuePlayerCommand(param_1, param_2);
-                        return (result != -1) - 1;
-                }
-        }
-
-        {
-                int off;
-                off = (i << 4) + i;
-                off = (off << 8) + i;
-                off = (off << 4) + i;
-                off = off * 9;
-                memcpy(param_2 + 0x14, &g_entity_sync_data[off * 4], 0x57);
-        }
-
-        result = cm_QueuePlayerCommand(param_1, param_2);
-        return (result != -1) - 1;
 }
 
 /* Routes an incoming command packet to the appropriate handler
