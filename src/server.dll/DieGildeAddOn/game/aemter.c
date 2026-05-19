@@ -961,13 +961,257 @@ __declspec(naked) void __cdecl amt_UpdateEntityLinks(int param_1, int param_2)
  * holder assignments from a save file via VFS and populates
  * the runtime office tables. */
 
+extern char s_amt_fio_LoadAemter____Can_t_load_1002a0c8[];
+extern char s_D__Develop_DieGildeAddOn_game_ae_1002a0a0[];
+extern char s_amt_fio_LoadAemter____count_read_1002a06c[];
+extern char s_amt_fio_LoadAemter____Can_t_load_1002a048[];
+extern char s_amt_fio_LoadAemter____Can_t_load_1002a01c[];
+extern char s_amt_fio_LoadAemter____Can_t_load_10029ff4[];
+extern char s_amt_fio_LoadAemter____Can_t_load_10029fcc[];
+extern char s_amt_fio_LoadAemter____Can_t_load_10029fa4[];
+extern char s_amt_fio_LoadAemter____Can_t_load_10029f78[];
+extern int __cdecl sprintf(char*, const char*, ...);
+
 // FUNCTION: SERVER 0x1000baf0
 // amt_fio_LoadAemter
+
+__declspec(naked) unsigned int __cdecl amt_fio_LoadAemter(int param_1, int param_2)
+{
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		sub esp, 0x104
+		xor eax, eax
+		push ebx
+		push ebp
+		push esi
+		push edi
+		cmp dword ptr [esp + 0x11c], 0x10051
+		setl al
+		dec eax
+		and eax, 5
+		add eax, 0x25
+		mov ebp, eax
+		call InitBuildingTypeTable
+		mov edi, dword ptr [esp + 0x118]
+		test edi, edi
+		jne L_have_handle
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		add esp, 0x104
+		ret
+	L_have_handle:
+		push edi
+		push 1
+		lea ecx, [esp + 0x18]
+		push 4
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		jne L_count_ok
+		push 1
+		push offset s_amt_fio_LoadAemter____Can_t_load_1002a0c8
+		push 0xe73
+		push offset s_D__Develop_DieGildeAddOn_game_ae_1002a0a0
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x104
+		ret
+	L_count_ok:
+		mov eax, dword ptr [esp + 0x10]
+		cmp eax, ebp
+		je L_loop_init
+		push 0x2a
+		push eax
+		lea edx, [esp + 0x1c]
+		push offset s_amt_fio_LoadAemter____count_read_1002a06c
+		push edx
+		call sprintf
+		lea eax, [esp + 0x24]
+		push 1
+		push eax
+		push 0xe7c
+		push offset s_D__Develop_DieGildeAddOn_game_ae_1002a0a0
+		call LogMessageInternal
+		add esp, 0x20
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x104
+		ret
+	L_loop_init:
+		xor ebx, ebx
+		test ebp, ebp
+		jbe near L_done
+		mov esi, 0x101de5a4
+	L_loop:
+		push edi
+		push 1
+		lea ecx, [esi - 4]
+		push 1
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_err_id
+		push edi
+		push 1
+		push 4
+		push esi
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_err_playerid
+		push edi
+		push 1
+		lea edx, [esi + 4]
+		push 1
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_err_amt
+		push edi
+		push 1
+		lea eax, [esi + 8]
+		push 4
+		push eax
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_err_pcount
+		push edi
+		push 1
+		lea ecx, [esi + 0xc]
+		push 1
+		push ecx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_err_status
+		push edi
+		push 1
+		lea edx, [esi + 0x10]
+		push 4
+		push edx
+		call ls_ReadVfsDataChecked
+		add esp, 0x10
+		test eax, eax
+		je near L_err_last
+		inc ebx
+		add esi, 0x18
+		cmp ebx, ebp
+		jb near L_loop
+	L_done:
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 1
+		pop ebx
+		add esp, 0x104
+		ret
+	L_err_id:
+		push 1
+		push offset s_amt_fio_LoadAemter____Can_t_load_1002a048
+		push 0xe82
+		push offset s_D__Develop_DieGildeAddOn_game_ae_1002a0a0
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x104
+		ret
+	L_err_playerid:
+		push 1
+		push offset s_amt_fio_LoadAemter____Can_t_load_1002a01c
+		push 0xe83
+		push offset s_D__Develop_DieGildeAddOn_game_ae_1002a0a0
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x104
+		ret
+	L_err_amt:
+		push 1
+		push offset s_amt_fio_LoadAemter____Can_t_load_10029ff4
+		push 0xe84
+		push offset s_D__Develop_DieGildeAddOn_game_ae_1002a0a0
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x104
+		ret
+	L_err_pcount:
+		push 1
+		push offset s_amt_fio_LoadAemter____Can_t_load_10029fcc
+		push 0xe85
+		push offset s_D__Develop_DieGildeAddOn_game_ae_1002a0a0
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x104
+		ret
+	L_err_status:
+		push 1
+		push offset s_amt_fio_LoadAemter____Can_t_load_10029fa4
+		push 0xe86
+		push offset s_D__Develop_DieGildeAddOn_game_ae_1002a0a0
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x104
+		ret
+	L_err_last:
+		push 1
+		push offset s_amt_fio_LoadAemter____Can_t_load_10029f78
+		push 0xe87
+		push offset s_D__Develop_DieGildeAddOn_game_ae_1002a0a0
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x104
+		ret
+	}
+}
 
 // DATA: SERVER 0x101de5a4
 extern char g_aemter_table[];
 
-unsigned int __cdecl amt_fio_LoadAemter(int param_1, int param_2)
+unsigned int __cdecl amt_fio_LoadAemter_unused(int param_1, int param_2)
 {
 	unsigned int num_entries;
 	unsigned int i;

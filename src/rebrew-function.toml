@@ -298,9 +298,7 @@ analysis = "Iterates through the command execution tracker table at g_office_sec
 
 ["SERVER.0x1000baf0"]
 size = 606
-status = "STUB"
-blocker = "instruction folding (lea vs mov)"
-blocker_delta = 407
+status = "RELOC"
 ghidra = "LoadOfficeData"
 
 ["SERVER.0x1000bd50"]
