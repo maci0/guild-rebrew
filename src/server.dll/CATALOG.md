@@ -1,6 +1,6 @@
 # Reversed Functions Catalog
 
-Total: 547/530 functions cataloged (306 exact, 102 reloc-normalized, 125 stubs)  
+Total: 547/530 functions cataloged (311 exact, 104 reloc-normalized, 120 stubs)  
 Coverage: 98.0% of .text section (138602/141382 bytes)
 
 
@@ -47,7 +47,7 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x10003DA0 | 160B | inflate_blocks_new | inflate_blocks_new |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10003E40 | 3385B | inflate_blocks | inflate_blocks |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10004B40 | 57B | inflate_blocks_free | inflate_blocks_free |  | LIBRARY/EXACT | library_zlib.h |
-| 0x10004B80 | 320B | gm_AllocAndInit | _gm_AllocAndInit |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
+| 0x10004B80 | 57B | gm_AllocAndInit | _gm_AllocAndInit |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
 | 0x10004BC0 | 1988B | inflate_fast | inflate_fast |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10005370 | 20B | gm_DispatchCall | _gm_DispatchCall |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
 | 0x10005390 | 911B | inflate_codes | inflate_codes |  | LIBRARY/EXACT | library_zlib.h |
@@ -95,7 +95,7 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x10009020 | 704B | OpenVfsStream | _OpenVfsStream |  | FUNCTION/STUB | Units/vfs/vfs.c |
 | 0x100092E0 | 19B | zcalloc | zcalloc |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10009300 | 12B | free_wrap | free_wrap |  | LIBRARY/EXACT | library_msvc.h |
-| 0x10009310 | 170B | exit_handler | _exit_handler@12 |  | FUNCTION/STUB | DieGildeAddOnServer/server.c |
+| 0x10009310 | 8B | exit_handler | _exit_handler@12 |  | FUNCTION/EXACT | DieGildeAddOnServer/server.c |
 | 0x10009320 | 42B | Init | _Init |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
 | 0x10009350 | 68B | Exit | _Exit |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
 | 0x100093A0 | 2434B | ServerMainThread | _ServerMainThread |  | FUNCTION/STUB | DieGildeAddOnServer/server.c |
@@ -124,7 +124,7 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x1000B990 | 157B | amt_ClearEntityLinks | _amt_ClearEntityLinks |  | FUNCTION/STUB | DieGildeAddOn/game/aemter.c |
 | 0x1000BA30 | 179B | amt_UpdateEntityLinks | _amt_UpdateEntityLinks |  | FUNCTION/STUB | DieGildeAddOn/game/aemter.c |
 | 0x1000BAF0 | 606B | amt_fio_LoadAemter | _amt_fio_LoadAemter |  | FUNCTION/STUB | DieGildeAddOn/game/aemter.c |
-| 0x1000BD50 | 130B | ahm_ResetEntityState | _ahm_ResetEntityState |  | FUNCTION/STUB | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000BD50 | 66B | ahm_ResetEntityState | _ahm_ResetEntityState |  | FUNCTION/EXACT | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000BDA0 | 70B | ahm_CheckFlag | _ahm_CheckFlag |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000BDF0 | 1002B | ahm_ExAllocAlchemist | _ahm_ExAllocAlchemist |  | FUNCTION/STUB | DieGildeAddOn/game/alchemistry_logic.c |
 | 0x1000C1E0 | 160B | ahm_ApplyColorComponent | _ahm_ApplyColorComponent |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/game/alchemistry_logic.c |
@@ -157,16 +157,16 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x1000D460 | 267B | cm_ExAllocSpieler | _cm_ExAllocSpieler |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocSpieler.c |
 | 0x1000D570 | 361B | cm_ExAllocClientSpieler | _cm_ExAllocClientSpieler |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/command/command_c/cm_ExAllocClientSpieler.c |
 | 0x1000D6E0 | 78B | cm_ExChangePlayerIdentity | _cm_ExChangePlayerIdentity |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExChangePlayerIdentity.c |
-| 0x1000D730 | 180B | cm_ExFree | _cm_ExFree |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExFree.c |
+| 0x1000D730 | 192B | cm_ExFree | _cm_ExFree |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExFree.c |
 | 0x1000D7F0 | 176B | cm_ExTransferCurrency | _cm_ExTransferCurrency |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExTransferCurrency.c |
 | 0x1000D8A0 | 144B | cm_ExTransferCurrencyNoKill | _cm_ExTransferCurrencyNoKill |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExTransferCurrencyNoKill.c |
 | 0x1000D930 | 2057B | cm_ExSellObjekt | _cm_ExSellObjekt |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExSellObjekt.c |
 | 0x1000E140 | 993B | cm_ExProdObjekt | _cm_ExProdObjekt |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExProdObjekt.c |
 | 0x1000E530 | 352B | cm_ExMoveObjekt | _cm_ExMoveObjekt |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExMoveObjekt.c |
 | 0x1000E690 | 191B | cm_ExClearLagerslot | _cm_ExClearLagerslot |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExClearLagerslot.c |
-| 0x1000E750 | 123B | cm_ExAllocObjekt | _cm_ExAllocObjekt |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocObjekt.c |
-| 0x1000E7D0 | 242B | cm_ExChangeAttribute | _cm_ExChangeAttribute |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExChangeAttribute.c |
-| 0x1000E8D0 | 239B | cm_ExSetAttribute | _cm_ExSetAttribute |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExSetAttribute.c |
+| 0x1000E750 | 128B | cm_ExAllocObjekt | _cm_ExAllocObjekt |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocObjekt.c |
+| 0x1000E7D0 | 256B | cm_ExChangeAttribute | _cm_ExChangeAttribute |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExChangeAttribute.c |
+| 0x1000E8D0 | 240B | cm_ExSetAttribute | _cm_ExSetAttribute |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExSetAttribute.c |
 | 0x1000E9C0 | 214B | cm_ExChangeDesire | _cm_ExChangeDesire |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExChangeDesire.c |
 | 0x1000EAA0 | 208B | cm_ExChangeBits | _cm_ExChangeBits |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExChangeBits.c |
 | 0x1000EB70 | 144B | cm_ExChangeFloat | _cm_ExChangeFloat |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExChangeFloat.c |
@@ -178,7 +178,7 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x1000F0A0 | 37B | cm_AssignEntityId | _cm_AssignEntityId |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_AssignEntityId.c |
 | 0x1000F0D0 | 197B | cm_ExRemoveLinkedObject | _cm_ExRemoveLinkedObject |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExRemoveLinkedObject.c |
 | 0x1000F1A0 | 327B | cm_ChainRecordLookup | _cm_ChainRecordLookup |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChainRecordLookup.c |
-| 0x1000F2F0 | 172B | cm_ExAllocThemaPredigt | _cm_ExAllocThemaPredigt |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExAllocThemaPredigt.c |
+| 0x1000F2F0 | 176B | cm_ExAllocThemaPredigt | _cm_ExAllocThemaPredigt |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_ExAllocThemaPredigt.c |
 | 0x1000F3A0 | 3B | cm_ChainNoop | _cm_ChainNoop |  | FUNCTION/EXACT | DieGildeAddOn/command/command_c/cm_ChainNoop.c |
 | 0x1000F3B0 | 206B | cm_ExSetGebBesitzer | _cm_ExSetGebBesitzer |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExSetGebBesitzer.c |
 | 0x1000F480 | 271B | cm_ExSetWohnsitz | _cm_ExSetWohnsitz |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExSetWohnsitz.c |
@@ -208,7 +208,7 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x10010350 | 52B | cm_ExAllocAlchemist | _cm_ExAllocAlchemist |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocAlchemist.c |
 | 0x10010390 | 262B | cm_ExSimSpecialAction | _cm_ExSimSpecialAction |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExSimSpecialAction.c |
 | 0x100104A0 | 135B | cm_GetBuildingStatCount | _cm_GetBuildingStatCount |  | FUNCTION/STUB | DieGildeAddOn/command/command_c/cm_GetBuildingStatCount.c |
-| 0x10010530 | 352B | gv_CheckSlotActive | _gv_CheckSlotActive |  | FUNCTION/STUB | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010530 | 113B | gv_CheckSlotActive | _gv_CheckSlotActive |  | FUNCTION/EXACT | DieGildeAddOn/game/friedhof_logic.c |
 | 0x100105B0 | 329B | gv_GetSlotEntry | _gv_GetSlotEntry |  | FUNCTION/STUB | DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010710 | 320B | gv_FindSlotEntryFiltered | _gv_FindSlotEntryFiltered |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/game/friedhof_logic.c |
 | 0x10010850 | 370B | SpawnGraveyardEntities | _SpawnGraveyardEntities |  | FUNCTION/STUB | DieGildeAddOn/game/friedhof_logic.c |
@@ -235,14 +235,14 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x10013B10 | 1361B | ls_LoadTownData | _ls_LoadTownData |  | FUNCTION/STUB | DieGildeAddOn/loadsave/loadsave.c |
 | 0x10014070 | 491B | ls_ID2Ptr | _ls_ID2Ptr |  | FUNCTION/STUB | DieGildeAddOn/loadsave/loadsave.c |
 | 0x10014260 | 892B | srv_RecvGame | _srv_RecvGame |  | FUNCTION/STUB | DieGildeAddOn/loadsave/loadsave.c |
-| 0x100145E0 | 304B | lb_ExPlayerlist | _lb_ExPlayerlist |  | FUNCTION/STUB | DieGildeAddOn/command/lobbycommands.c |
+| 0x100145E0 | 209B | lb_ExPlayerlist | _lb_ExPlayerlist |  | FUNCTION/STUB | DieGildeAddOn/command/lobbycommands.c |
 | 0x100146C0 | 236B | lb_SendLobbyConfig | _lb_SendLobbyConfig |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/command/lobbycommands.c |
 | 0x100147B0 | 670B | lb_HandleLobbyCommands | _lb_HandleLobbyCommands |  | FUNCTION/STUB | DieGildeAddOn/command/lobbycommands.c |
 | 0x10014A50 | 157B | lb_BroadcastStateChange | _lb_BroadcastStateChange |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/command/lobbycommands.c |
 | 0x10014AF0 | 247B | lb_HandleDataTransfer | _lb_HandleDataTransfer |  | FUNCTION/STUB | DieGildeAddOn/command/lobbycommands.c |
 | 0x10014BF0 | 163B | lb_HandleEntitySync | _lb_HandleEntitySync |  | FUNCTION/STUB | DieGildeAddOn/command/lobbycommands.c |
 | 0x10014CA0 | 265B | cm_RouteCommand | _cm_RouteCommand |  | FUNCTION/STUB | DieGildeAddOn/command/lobbycommands.c |
-| 0x10014DB0 | 267B | lb_ExLobbyServerCommand | _lb_ExLobbyServerCommand |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/command/lobbycommands.c |
+| 0x10014DB0 | 304B | lb_ExLobbyServerCommand | _lb_ExLobbyServerCommand |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
 | 0x10014EE0 | 69B | lb_SearchRecordTable | _lb_SearchRecordTable |  | FUNCTION/STUB | DieGildeAddOn/command/lobbycommands.c |
 | 0x10014F30 | 74B | FindRecord | _FindRecord |  | FUNCTION/EXACT | DieGildeAddOn/auxillary/plant.c |
 | 0x10014F80 | 103B | find_zone_record | _find_zone_record |  | FUNCTION/EXACT | DieGildeAddOn/auxillary/plant.c |
@@ -274,9 +274,9 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x10016760 | 1392B | gm_AllocObjekt | _gm_AllocObjekt |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
 | 0x10016CD0 | 272B | gm_AddOrAccumulateObject | _gm_AddOrAccumulateObject |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10016DE0 | 186B | gm_SubObjekt | _gm_SubObjekt |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10016EA0 | 211B | gm_SubObjektNoKill | _gm_SubObjektNoKill |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/game/spiel.c |
+| 0x10016EA0 | 211B | gm_SubObjektNoKill | _gm_SubObjektNoKill |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
 | 0x10016F80 | 346B | FindNextFilteredEntity | _FindNextFilteredEntity |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
-| 0x100170E0 | 267B | gm_StartFilteredEntitySearch | _gm_StartFilteredEntitySearch |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
+| 0x100170E0 | 304B | gm_StartFilteredEntitySearch | _gm_StartFilteredEntitySearch |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
 | 0x10017210 | 39B | gm_SearchStruct | _gm_SearchStruct |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10017240 | 240B | gm_CleanupBuildingEntity | _gm_CleanupBuildingEntity |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10017330 | 207B | gm_AllocBuildingDefaults | _gm_AllocBuildingDefaults |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
@@ -312,12 +312,12 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x10019B40 | 62B | gm_GetEntityType | _gm_GetEntityType |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10019B80 | 83B | gm_EntityAccumulate | _gm_EntityAccumulate |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10019BE0 | 124B | gm_WalkEntityChain | _gm_WalkEntityChain |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019C60 | 48B | gm_FindEntityByOwner | _gm_FindEntityByOwner |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
-| 0x10019CD0 | 98B | gm_GetMsgField | _gm_GetMsgField |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
+| 0x10019C60 | 98B | gm_FindEntityByOwner | _gm_FindEntityByOwner |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
+| 0x10019CD0 | 48B | gm_GetMsgField | _gm_GetMsgField |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
 | 0x10019D30 | 407B | gm_KannObjektHergestellt | _gm_KannObjektHergestellt |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
 | 0x10019ED0 | 395B | gm_CheckInventoryCapacity | _gm_CheckInventoryCapacity |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
 | 0x1001A060 | 97B | gm_EntitySetField | _gm_EntitySetField |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
-| 0x1001A0D0 | 54B | gm_RandomMod | _gm_RandomMod |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
+| 0x1001A0D0 | 32B | gm_RandomMod | _gm_RandomMod |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x1001A0F0 | 22B | gm_RandomFloat01 | _gm_RandomFloat01 |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x1001A110 | 48B | gm_RandomQuadratic | _gm_RandomQuadratic |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x1001A140 | 14B | getpid | _getpid |  | LIBRARY/EXACT | library_msvc.h |
