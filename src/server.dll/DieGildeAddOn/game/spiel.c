@@ -278,16 +278,15 @@ void __cdecl gm_InitObjektHersteller(void)
 		prev_type = entity_type;
 
 		if (byte_offset < 0xca78) {
-			int idx = record_index;
+			int idx;
 			char* scan = record;
-			do {
+			for (idx = record_index; idx < 0x58; idx++) {
 				if (*(unsigned char*) scan != (unsigned char) entity_type) {
 					break;
 				}
 				run_length++;
-				idx++;
 				scan += 0x24d;
-			} while (idx < 0x58);
+			}
 		}
 		goto after_branch;
 
@@ -328,16 +327,15 @@ void __cdecl gm_InitObjektHersteller(void)
 					consec = 0;
 
 					if (mfr_start < 0x58) {
-						int j = mfr_start;
+						int j;
 						char* scan = mfr_record;
-						do {
+						for (j = mfr_start; j < 0x58; j++) {
 							if (*(unsigned char*) scan != (unsigned char) mfr_type) {
 								break;
 							}
 							consec++;
-							j++;
 							scan += 0x24d;
-						} while (j < 0x58);
+						}
 					}
 
 					new_val = mfr_start + (consec * same_count) / run_length;
