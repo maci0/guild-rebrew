@@ -1075,7 +1075,7 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 	}
 
 	if ((DAT_10035454 != '\0') && (DAT_10035454 = '\0', DAT_1003545d != '\0') &&
-		(*(int*) ((int) DAT_10035468 + 10) != 0)) {
+		(*(int*) ((int) DAT_10035468 + 0x14) != 0)) {
 		*(int*) (&DAT_101398a0 + DAT_100a8c38 * 4) = *(int*) (DAT_10035468 + 10);
 		DAT_100a8c38 = DAT_100a8c38 + 1;
 	}
