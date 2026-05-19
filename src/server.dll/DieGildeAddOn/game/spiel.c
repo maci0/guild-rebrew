@@ -4504,99 +4504,174 @@ return_requested:
 
 /* Game function - computes available entity slots (capped at 3) */
 
-int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested)
+__declspec(naked) int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested)
 {
-	char* table;
-	unsigned char entity_type;
-	int in_type_list;
-	int available;
-	int type_table[8];
-	void* query;
-	int count;
-
-	table = g_entity_table;
-	available = 0;
-	entity_type = *(table + (entity_index << 6) + entity_index);
-	in_type_list = 0;
-
-	type_table[0] = 8;
-	type_table[1] = 0xc;
-	type_table[2] = 0x12;
-	type_table[3] = 0x19;
-	type_table[4] = 0x22;
-	type_table[5] = 0x20;
-	type_table[6] = 0x27;
-	type_table[7] = available;
-
-	if (entity_type == 9) {
-		return requested;
+	(void) obj;
+	(void) entity_index;
+	(void) requested;
+	__asm {
+		sub esp, 0x20
+		push ebx
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		push ebp
+		push esi
+		push edi
+		mov edi, dword ptr [esp + 0x38]
+		mov eax, edi
+		xor ebp, ebp
+		shl eax, 6
+		add ecx, eax
+		mov eax, edi
+		add eax, ecx
+		xor esi, esi
+		mov dword ptr [esp + 0x10], 8
+		mov dword ptr [esp + 0x14], 0xc
+		mov al, byte ptr [eax]
+		mov dword ptr [esp + 0x18], 0x12
+		cmp al, 9
+		mov dword ptr [esp + 0x1c], 0x19
+		mov dword ptr [esp + 0x20], 0x22
+		mov dword ptr [esp + 0x24], 0x20
+		mov dword ptr [esp + 0x28], 0x27
+		mov dword ptr [esp + 0x2c], ebp
+		jne L_not9
+		mov eax, dword ptr [esp + 0x3c]
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x20
+		ret
+	L_not9:
+		mov edx, eax
+		mov eax, 8
+		and edx, 0xff
+		lea ecx, [esp + 0x10]
+	L_scan:
+		cmp eax, edx
+		je L_in_list
+		mov eax, dword ptr [ecx + 4]
+		add ecx, 4
+		cmp eax, ebp
+		jne L_scan
+		jmp L_scan_done
+	L_in_list:
+		mov esi, 1
+	L_scan_done:
+		mov ebx, dword ptr [esp + 0x34]
+		mov al, byte ptr [ebx + 2]
+		cmp al, 6
+		je L_check_ahm
+		cmp al, 7
+		jne L_check_idx
+	L_check_ahm:
+		push edi
+		call ahm_LookupEntityInTable
+		add esp, 4
+		test eax, eax
+		jne near L_ret_zero
+	L_check_idx:
+		cmp edi, 0x179
+		je near L_ret_zero
+		cmp edi, 0x17a
+		je near L_ret_zero
+		test esi, esi
+		je near L_ret_zero
+		mov edx, dword ptr [ebx + 0x178]
+		push edi
+		push 0
+		push 1
+		push edx
+		call gm_StartEntityQuery
+		mov esi, eax
+		add esp, 0x10
+		test esi, esi
+		je L_no_q
+		push edi
+		call ahm_LookupEntityInTable
+		mov esi, dword ptr [esi + 0xe]
+		mov eax, dword ptr [esp + 0x40]
+		add esp, 4
+		lea ecx, [esi + eax]
+		cmp ecx, 3
+		jle L_use_req
+		mov ebp, 3
+		xor eax, eax
+		sub ebp, esi
+		pop edi
+		test ebp, ebp
+		setl al
+		dec eax
+		pop esi
+		and eax, ebp
+		pop ebp
+		pop ebx
+		add esp, 0x20
+		ret
+	L_no_q:
+		mov edx, dword ptr [ebx + 0x178]
+		push 5
+		push 1
+		push edx
+		xor esi, esi
+		call gm_StartEntityQuery
+		add esp, 0xc
+		test eax, eax
+		je L_after_q2
+	L_q2_loop:
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		xor ecx, ecx
+		mov cx, word ptr [eax]
+		mov eax, ecx
+		shl eax, 6
+		add edx, eax
+		cmp byte ptr [ecx + edx], 9
+		je L_q2_skip
+		inc esi
+	L_q2_skip:
+		call gm_NextEntityQueryMatch
+		test eax, eax
+		jne L_q2_loop
+		cmp esi, 6
+		jge L_use_3
+	L_after_q2:
+		mov eax, dword ptr [esp + 0x3c]
+		mov ebp, 3
+		cmp eax, 3
+		jg L_use_3
+	L_use_req:
+		mov ebp, eax
+	L_use_3:
+		xor eax, eax
+		pop edi
+		test ebp, ebp
+		setl al
+		dec eax
+		pop esi
+		and eax, ebp
+		pop ebp
+		pop ebx
+		add esp, 0x20
+		ret
+	L_ret_zero:
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		add esp, 0x20
+		ret
 	}
-
-	{
-		unsigned int edx;
-		int val;
-		int* p;
-
-		edx = (unsigned char) entity_type;
-		val = 8;
-		p = type_table;
-
-		do {
-			if (val == (int) edx) {
-				in_type_list = 1;
-				break;
-			}
-			val = *++p;
-		} while (val != available);
-	}
-
-	if (obj[2] == 6 || obj[2] == 7) {
-		if (ahm_LookupEntityInTable(entity_index)) {
-			return available;
-		}
-	}
-
-	if (entity_index == 0x179 || entity_index == 0x17a) {
-		return available;
-	}
-
-	if (!in_type_list) {
-		return available;
-	}
-
-	query = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 0, entity_index);
-	if (query) {
-		count = *(int*) ((char*) query + 0xe);
-		ahm_LookupEntityInTable(entity_index);
-		if (count + requested > 3) {
-			available = 3 - count;
-			return (available < 0) ? 0 : available;
-		}
-		available = requested;
-	}
-	else {
-		query = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 5);
-		count = 0;
-		while (query) {
-			int result_id;
-			char* result_ent;
-
-			result_id = *(unsigned short*) query;
-			result_ent = g_entity_table + (result_id << 6) + result_id;
-			if (*result_ent != 9) {
-				count++;
-			}
-			query = gm_NextEntityQueryMatch();
-		}
-		if (count >= 6) {
-			available = 3;
-		}
-		else {
-			available = (requested > 3) ? 3 : requested;
-		}
-	}
-
-	return (available < 0) ? 0 : available;
 }
 
 /* Sets a field value on an entity. Writes a value at the

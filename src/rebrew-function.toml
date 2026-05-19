@@ -1023,7 +1023,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "STUB"
+status = "NEAR_MATCHING"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
@@ -1204,8 +1204,7 @@ blocker = "comparison direction swap, loop rotation / branch layout, zero-extend
 
 ["SERVER.0x10019ed0"]
 size = 395
-status = "STUB"
-blocker_delta = 93
+status = "RELOC"
 ghidra = "gm_KannObjektHergestellt"
 
 ["SERVER.0x1001a060"]
