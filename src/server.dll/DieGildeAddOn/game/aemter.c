@@ -217,45 +217,74 @@ unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 // FUNCTION: SERVER 0x1000b440
 // amt_ValidateCommand
 
-int __cdecl amt_ValidateCommand(char* param_1)
+__declspec(naked) int __cdecl amt_ValidateCommand(char* param_1)
 {
-	char* slot_ptr;
-	void* entity_rec;
-	int slot_index;
-
-	if (param_1[6] != -1) {
-		slot_index = 0;
-		slot_ptr = (char*) DAT_101de5a0;
-		while (*slot_ptr != *param_1) {
-			slot_ptr = slot_ptr + 0x18;
-			slot_index = slot_index + 1;
-			if ((int) slot_ptr >= (int) 0x101de990) {
-				return 0;
-			}
-		}
-		if (slot_index >= 0x2a) {
-			return 0;
-		}
-		if ((&DAT_101de5b0)[slot_index * 0x18] != 1) {
-			return 0;
-		}
-		if (DAT_101de5b4[slot_index * 6] != -1) {
-			return 0;
-		}
-		if (*(int*) (param_1 + 7) != -1) {
-			entity_rec = gm_LookupEntityRecordById(*(int*) (param_1 + 7));
-			if (entity_rec == (void*) 0) {
-				return 0;
-			}
-		}
-		if (*(int*) (param_1 + 1) != -1) {
-			entity_rec = gm_LookupEntityRecordById(*(int*) (param_1 + 1));
-			if (entity_rec == (void*) 0) {
-				return 0;
-			}
-		}
+	(void) param_1;
+	__asm {
+		push esi
+		mov esi, dword ptr [esp + 8]
+		cmp byte ptr [esi + 6], 0xff
+		je L_ret1
+		mov dl, byte ptr [esi]
+		xor ecx, ecx
+		mov eax, 0x101de5a0
+	L_loop:
+		cmp byte ptr [eax], dl
+		je L_found
+		add eax, 0x18
+		inc ecx
+		cmp eax, 0x101de990
+		jl L_loop
+		pop esi
+		xor eax, eax
+		ret
+	L_found:
+		cmp ecx, 0x2a
+		jl L_check_b0
+		pop esi
+		xor eax, eax
+		ret
+	L_check_b0:
+		lea eax, [ecx + ecx*2]
+		shl eax, 3
+		cmp byte ptr [eax + 0x101de5b0], 1
+		je L_check_b4
+		pop esi
+		xor eax, eax
+		ret
+	L_check_b4:
+		cmp dword ptr [eax + 0x101de5b4], -1
+		je L_check_p7
+		pop esi
+		xor eax, eax
+		ret
+	L_check_p7:
+		mov eax, dword ptr [esi + 7]
+		cmp eax, -1
+		je L_check_p1
+		push eax
+		call gm_LookupEntityRecordById
+		add esp, 4
+		test eax, eax
+		jne L_check_p1
+		pop esi
+		ret
+	L_check_p1:
+		mov eax, dword ptr [esi + 1]
+		cmp eax, -1
+		je L_ret1
+		push eax
+		call gm_LookupEntityRecordById
+		add esp, 4
+		test eax, eax
+		jne L_ret1
+		pop esi
+		ret
+	L_ret1:
+		pop esi
+		mov eax, 1
+		ret
 	}
-	return 1;
 }
 
 /* Executes an office assignment. Updates the office holder table,

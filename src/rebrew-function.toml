@@ -279,8 +279,7 @@ blocker = "comparison direction swap, instruction folding (lea vs mov), jump con
 
 ["SERVER.0x1000b440"]
 size = 133
-status = "STUB"
-blocker_delta = 400
+status = "RELOC"
 
 ["SERVER.0x1000b4d0"]
 size = 836
