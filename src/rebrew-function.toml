@@ -186,9 +186,7 @@ analysis = "Core orchestration loop. Phase 1 (Lobby): Loops accepting connection
 
 ["SERVER.0x10009d30"]
 size = 296
-status = "STUB"
-blocker = "instruction folding (lea vs mov)"
-blocker_delta = 283
+status = "RELOC"
 
 ["SERVER.0x10009e60"]
 size = 419
@@ -233,8 +231,6 @@ status = "STUB"
 ["SERVER.0x1000a8f0"]
 size = 170
 status = "RELOC"
-blocker = "loop rotation / branch layout"
-blocker_delta = 70
 analysis = "Takes a raw command payload, pulls an available CommandPacket struct from incoming_cmd_freelist, populates it, calculates command type via 0x1000c710, and appends it to the tail of incoming_cmd_queue."
 
 ["SERVER.0x1000a9a0"]

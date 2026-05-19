@@ -41,6 +41,7 @@ void __cdecl ShutdownMemoryAllocator();
 int __cdecl gm_Open(char*, char*);
 int __cdecl sub_1001a299(char*, char*);
 int __cdecl CreateListenSocket(int port);
+void __cdecl InitPacketPool(int);
 extern int g_net_socket;
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 ;
@@ -586,39 +587,136 @@ cleanup_and_exit:
 // FUNCTION: SERVER 0x10009d30
 // srv_Init
 
-int __cdecl srv_Init(void)
+__declspec(naked) int __cdecl srv_Init(void)
 {
-	char game_path[260];
-	char data_path[260];
-	int result;
-	DWORD tick_count;
-	char format_buf[32];
-
-	tick_count = GetTickCount();
-	SetThreadPriorityBoost(GetCurrentThread(), 2);
-	wsprintfA(format_buf, "%c%c%c", 3, 0, 0);
-
-	lstrcpyA(game_path, "\\project\\DieGilde\\game\\");
-	lstrcpyA(data_path, "data\\");
-	result = gm_Open(game_path, data_path);
-
-	if (result < 0) {
-		char full_path[512];
-		sub_1001a299(full_path, game_path);
-		LogMessageInternal("Could not open gamefiles path:%s", 1, (char*) full_path, 0x3cd);
-		return 0;
+	__asm {
+		sub esp, 0x504
+		push ebx
+		push esi
+		push edi
+		_emit 0xff
+		_emit 0x15
+		_emit 0x6c
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		push 2
+		push eax
+		_emit 0xff
+		_emit 0x15
+		_emit 0x68
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		push 3
+		push 0
+		push 0
+		push 0x1000a010
+		call InitializeLogAndErrorHandler
+		push 0x7fa6
+		call InitPacketPool
+		mov edi, 0x10029594
+		or ecx, 0xffffffff
+		xor eax, eax
+		lea edx, [esp + 0x20]
+		repne scasb
+		not ecx
+		sub edi, ecx
+		mov eax, ecx
+		mov esi, edi
+		mov edi, edx
+		lea edx, [esp + 0x20]
+		shr ecx, 2
+		rep movsd
+		mov ecx, eax
+		xor eax, eax
+		and ecx, 3
+		rep movsb
+		mov edi, 0x10029998
+		or ecx, 0xffffffff
+		repne scasb
+		not ecx
+		sub edi, ecx
+		mov esi, edi
+		mov ebx, ecx
+		mov edi, edx
+		or ecx, 0xffffffff
+		repne scasb
+		mov ecx, ebx
+		dec edi
+		shr ecx, 2
+		rep movsd
+		mov ecx, ebx
+		lea eax, [esp + 0x20]
+		and ecx, 3
+		push eax
+		rep movsb
+		call gm_Open
+		add esp, 0x18
+		test eax, eax
+		pop edi
+		pop esi
+		pop ebx
+		jge L_gm_ok
+		_emit 0x8d
+		_emit 0x4c
+		_emit 0x24
+		_emit 0x00
+		lea edx, [esp + 0x104]
+		push ecx
+		push 0x10029974
+		push edx
+		call sprintf
+		lea eax, [esp + 0x110]
+		push 1
+		push eax
+		push 0x3cd
+		push 0x100298b0
+		call LogMessageInternal
+		add esp, 0x1c
+		add esp, 1284
+		ret
+	L_gm_ok:
+		call gm_InitEntitySlots
+		call InitBuildingTypeTable
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x88
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		push ecx
+		call CreateListenSocket
+		add esp, 4
+		cmp eax, -1
+		_emit 0xa3
+		_emit 0xec
+		_emit 0xea
+		_emit 0x1d
+		_emit 0x10
+		jne L_socket_ok
+		push 1
+		push 0x10029948
+		push 0x3db
+		push 0x100298b0
+		call LogMessageInternal
+		add esp, 0x10
+		add esp, 1284
+		ret
+	L_socket_ok:
+		_emit 0xc7
+		_emit 0x05
+		_emit 0x90
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		add esp, 1284
+		ret
 	}
-
-	gm_InitEntitySlots();
-	InitBuildingTypeTable();
-	result = CreateListenSocket(*(int*) 0x11764088);
-
-	if (result == -1) {
-		LogMessageInternal("***ERROR: Initialization of Socket failed!", 1, (char*) 0x3db, 0);
-		return 0;
-	}
-
-	return 1;
 }
 
 /* Creates the TCP listen socket for accepting client
