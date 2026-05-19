@@ -107,9 +107,7 @@ status = "RELOC"
 
 ["SERVER.0x100068e0"]
 size = 162
-status = "STUB"
-blocker = "comparison direction swap, jump condition swap"
-blocker_delta = 141
+status = "RELOC"
 analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
 
 ["SERVER.0x10006990"]

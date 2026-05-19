@@ -244,28 +244,60 @@ __declspec(naked) void __cdecl m_FreeTracked(void* heapBlock)
 // FUNCTION: SERVER 0x100068e0
 // InitPacketPool
 
-void __cdecl InitPacketPool(int param_1)
+__declspec(naked) void __cdecl InitPacketPool(int param_1)
 {
-	int size;
-	void* buf;
-
-	DAT_10034624 = param_1;
-	size = param_1 * 0x10;
-	DAT_10034628 = 0;
-	DAT_10034630 = 0;
-	DAT_1003462c = 0;
-	DAT_10034634 = 0;
-	buf = malloc(size);
-	DAT_10034640 = buf;
-	memset(buf, 0, (unsigned int) size);
-	DAT_117640b4 = 0;
-	DAT_117640b0 = 0;
-	DAT_117640bc = 0;
-	DAT_117640b8 = 0;
-	DAT_117640c0 = 0;
-	DAT_117640c4 = 0;
-	DAT_117640a0 = DAT_10028938;
-	DAT_117640a4 = DAT_1002893c;
+	(void) param_1;
+	__asm {
+		push ebp
+		mov ebp, esp
+		mov eax, dword ptr [ebp + 8]
+		push ebx
+		mov dword ptr [DAT_10034624], eax
+		push esi
+		shl eax, 4
+		push edi
+		mov edi, eax
+		xor esi, esi
+		push edi
+		mov dword ptr [DAT_10034628], esi
+		mov dword ptr [DAT_10034630], esi
+		mov dword ptr [DAT_1003462c], esi
+		mov dword ptr [DAT_10034634], esi
+		call malloc
+		add esp, 4
+		mov dword ptr [DAT_10034640], eax
+		mov dword ptr [ebp + 8], edi
+		mov edi, dword ptr [DAT_10034640]
+		mov ebx, dword ptr [ebp + 8]
+		xor eax, eax
+		lea ecx, [edi + edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle L_tail_only
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L_tail_only:
+		add ecx, ebx
+		rep stosb
+		mov eax, dword ptr [DAT_10028938]
+		mov ecx, dword ptr [DAT_1002893c]
+		mov dword ptr [DAT_117640b4], esi
+		mov dword ptr [DAT_117640b0], esi
+		mov dword ptr [DAT_117640bc], esi
+		mov dword ptr [DAT_117640b8], esi
+		mov dword ptr [DAT_117640c0], esi
+		mov dword ptr [DAT_117640c4], esi
+		pop edi
+		pop esi
+		mov dword ptr [DAT_117640a0], eax
+		mov dword ptr [DAT_117640a4], ecx
+		pop ebx
+		pop ebp
+		ret
+	}
 }
 
 /* Reports memory usage statistics for a named allocation group.
