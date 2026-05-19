@@ -329,30 +329,65 @@ int __cdecl ahm_ApplyColorComponent(char* param_1, char* param_2)
 // FUNCTION: SERVER 0x1000c280
 // ahm_AllocateEntitySlot
 
-int __cdecl ahm_AllocateEntitySlot(int param_1, int param_2, int param_3)
+__declspec(naked) int __cdecl ahm_AllocateEntitySlot(int param_1, int param_2, int param_3)
 {
-	int* slot_ptr;
-	void* query_result;
-	int i;
-
-	i = 0;
-	slot_ptr = (int*) (param_2 + 0xc);
-	do {
-		if (*slot_ptr == 0) {
-			query_result = gm_StartEntityQuery(*(int*) (param_3 + 0x5d), 2, 6, 0, 0xff);
-			*(int*) (param_1 + 0x14) = DAT_10030b6c;
-			*(int*) (param_2 + 0xc + i * 8) = *(int*) (param_1 + 8);
-			*(int*) (param_2 + 0x10 + i * 8) = *(int*) (param_1 + 0x10);
-			if (query_result != (void*) 0) {
-				gm_AddOrAccumulateObject(*(int*) ((char*) query_result + 2), *(int*) (param_1 + 8), 2);
-			}
-			gm_RefreshMarketAvailability((int) DAT_10035439);
-			return 1;
-		}
-		i = i + 1;
-		slot_ptr = slot_ptr + 2;
-	} while (i < 6);
-	return 0;
+	(void) param_1;
+	(void) param_2;
+	(void) param_3;
+	__asm {
+		push esi
+		push edi
+		mov edi, dword ptr [esp + 0x10]
+		xor esi, esi
+		lea eax, [edi + 0xc]
+	L_loop:
+		cmp dword ptr [eax], 0
+		je L_alloc
+		inc esi
+		add eax, 8
+		cmp esi, 6
+		jl L_loop
+		pop edi
+		xor eax, eax
+		pop esi
+		ret
+	L_alloc:
+		mov eax, dword ptr [esp + 0x14]
+		push 0xff
+		push 0
+		push 6
+		mov ecx, dword ptr [eax + 0x5d]
+		push 2
+		push ecx
+		call gm_StartEntityQuery
+		mov ecx, dword ptr [esp + 0x20]
+		mov edx, dword ptr [DAT_10030b6c]
+		add esp, 0x14
+		mov dword ptr [ecx + 0x14], edx
+		mov edx, dword ptr [ecx + 8]
+		mov dword ptr [edi + esi*8 + 0xc], edx
+		mov edx, dword ptr [ecx + 0x10]
+		test eax, eax
+		mov dword ptr [edi + esi*8 + 0x10], edx
+		je L_skip_add
+		mov ecx, dword ptr [ecx + 8]
+		mov edx, dword ptr [eax + 2]
+		push 2
+		push ecx
+		push edx
+		call gm_AddOrAccumulateObject
+		add esp, 0xc
+	L_skip_add:
+		xor eax, eax
+		mov al, byte ptr [DAT_10035439]
+		push eax
+		call gm_RefreshMarketAvailability
+		add esp, 4
+		mov eax, 1
+		pop edi
+		pop esi
+		ret
+	}
 }
 
 /* Clears a slot if it matches a target value. Used during
