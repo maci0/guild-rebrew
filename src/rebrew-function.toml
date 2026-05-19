@@ -303,9 +303,7 @@ blocker_delta = 205
 
 ["SERVER.0x1000b990"]
 size = 157
-status = "STUB"
-blocker = "comparison direction swap, zero-extend pattern (xor vs mov)"
-blocker_delta = 146
+status = "RELOC"
 
 ["SERVER.0x1000ba30"]
 size = 179

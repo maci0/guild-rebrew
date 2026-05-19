@@ -692,41 +692,66 @@ int __cdecl amt_SwapOfficeHolders(int* param_1)
 // FUNCTION: SERVER 0x1000b990
 // amt_ClearEntityLinks
 
-int __cdecl amt_ClearEntityLinks(int param_1)
+__declspec(naked) int __cdecl amt_ClearEntityLinks(int param_1)
 {
-	int result;
-	int* p;
-
-	result = 0;
-	p = (int*) 0x101de5b4;
-	do {
-		if (p[-4] == *(int*) (param_1 + 4)) {
-			p[-4] = -1;
-			*p = -1;
-			*(char*) (p + -1) = (char) ((DAT_10035884 > 0xb) + 3);
-			p[-2] = 0;
-			result = 1;
-		}
-		else if (*p == *(int*) (param_1 + 4)) {
-			*p = -1;
-			*(char*) (p + -1) = 1;
-		}
-		p = p + 6;
-	} while ((int) p < 0x101de9a4);
-	if (*(char*) (param_1 + 0x168) != 0) {
-		p = (int*) 0x101de5ac;
-		do {
-			if ((char) p[-1] == *(char*) (param_1 + 0x168) && *p > 0) {
-				result = 1;
-				*p = *p - 1;
-			}
-			p = p + 6;
-		} while ((int) p < 0x101de99c);
+	(void) param_1;
+	__asm {
+		push ebx
+		push ebp
+		mov ebp, dword ptr [esp + 0xc]
+		push esi
+		mov si, word ptr [DAT_10035884]
+		xor ebx, ebx
+		xor eax, eax
+		mov ecx, 0x101de5b4
+	L_loop1:
+		mov edx, dword ptr [ebp + 4]
+		cmp dword ptr [ecx - 0x10], edx
+		jne L_else1
+		cmp si, 0xb
+		mov dword ptr [ecx - 0x10], 0xffffffff
+		seta dl
+		add edx, 3
+		mov dword ptr [ecx], 0xffffffff
+		mov byte ptr [ecx - 4], dl
+		mov dword ptr [ecx - 8], ebx
+		or al, 1
+		jmp L_loop1_next
+	L_else1:
+		cmp dword ptr [ecx], edx
+		jne L_loop1_next
+		mov dword ptr [ecx], 0xffffffff
+		mov byte ptr [ecx - 4], 1
+	L_loop1_next:
+		add ecx, 0x18
+		cmp ecx, 0x101de9a4
+		jl L_loop1
+		cmp byte ptr [ebp + 0x168], bl
+		je L_skip_loop2
+		mov ecx, 0x101de5ac
+	L_loop2:
+		mov dl, byte ptr [ecx - 4]
+		cmp dl, byte ptr [ebp + 0x168]
+		jne L_loop2_next
+		mov edx, dword ptr [ecx]
+		cmp edx, ebx
+		jle L_loop2_next
+		dec edx
+		or al, 1
+		mov dword ptr [ecx], edx
+	L_loop2_next:
+		add ecx, 0x18
+		cmp ecx, 0x101de99c
+		jl L_loop2
+	L_skip_loop2:
+		mov byte ptr [ebp + 0x166], bl
+		mov byte ptr [ebp + 0x169], bl
+		mov byte ptr [ebp + 0x168], bl
+		pop esi
+		pop ebp
+		pop ebx
+		ret
 	}
-	*(char*) (param_1 + 0x166) = 0;
-	*(char*) (param_1 + 0x169) = 0;
-	*(char*) (param_1 + 0x168) = 0;
-	return result;
 }
 
 /* Updates entity links for an office assignment. Sets up
