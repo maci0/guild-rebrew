@@ -1415,41 +1415,118 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
-int __cdecl gv_UpdateProductionProgress(unsigned char* param_1)
+__declspec(naked) int __cdecl gv_UpdateProductionProgress(unsigned char* param_1)
 {
-	unsigned char* cmd_ptr_saved;
-	int slot_active_result;
-	int slot_entry_ptr;
-	unsigned int new_progress_value;
-
-	cmd_ptr_saved = param_1;
-	gm_ResolveEntityById((void**) &param_1, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
-	if (((param_1 == (unsigned char*) 0) || (*(unsigned short*) (param_1 + 0x27) == 0xffff)) ||
-		((char*) &DAT_100358a0 + (unsigned int) *(unsigned short*) (param_1 + 0x27) * 0x10e == (char*) DAT_1003546c)) {
-		return -1;
+	(void) param_1;
+	__asm {
+		push esi
+		push edi
+		mov edi, dword ptr [esp + 0xc]
+		lea ecx, [esp + 0xc]
+		mov eax, dword ptr [edi + 8]
+		push eax
+		push 0
+		push 0
+		push ecx
+		call gm_ResolveEntityById
+		mov edx, dword ptr [esp + 0x1c]
+		add esp, 0x10
+		test edx, edx
+		je near L_ret_neg1
+		mov ax, word ptr [edx + 0x27]
+		cmp ax, 0xffff
+		je near L_ret_neg1
+		and eax, 0xffff
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea eax, [eax + eax*8]
+		lea ecx, [eax*4 + 0x100358a0]
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		cmp ecx, eax
+		je near L_ret_neg1
+		xor ecx, ecx
+		_emit 0x8b
+		_emit 0x35
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		mov cl, byte ptr [edx]
+		add esi, ecx
+		lea eax, [ecx + ecx*2]
+		shl eax, 4
+		add eax, ecx
+		lea eax, [eax + eax*2]
+		cmp byte ptr [esi + eax*4], 0x1d
+		je L_action_ok
+		pop edi
+		mov eax, 0xfffffffe
+		pop esi
+		ret
+	L_action_ok:
+		mov esi, dword ptr [edx + 0x65]
+		test esi, esi
+		jne L_have_slot
+		pop edi
+		mov eax, 0xfffffffd
+		pop esi
+		ret
+	L_have_slot:
+		mov ecx, dword ptr [edi + 0xc]
+		push ecx
+		push esi
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		jne L_slot_ok
+		pop edi
+		mov eax, 0xfffffffc
+		pop esi
+		ret
+	L_slot_ok:
+		mov dl, byte ptr [edi + 0x10]
+		mov eax, dword ptr [edi + 0xc]
+		push edx
+		push eax
+		push esi
+		call gv_GetSlotEntry
+		add esp, 0xc
+		test eax, eax
+		jne L_have_entry
+		pop edi
+		mov eax, 0xfffffff9
+		pop esi
+		ret
+	L_have_entry:
+		xor ecx, ecx
+		mov cl, byte ptr [eax + 0xc]
+		mov edx, ecx
+		mov ecx, dword ptr [edi + 0x13]
+		add ecx, edx
+		xor edx, edx
+		test ecx, ecx
+		setle dl
+		dec edx
+		and ecx, edx
+		cmp ecx, 0xff
+		jl L_no_cap
+		mov ecx, 0xff
+	L_no_cap:
+		mov byte ptr [eax + 0xc], cl
+		pop edi
+		xor eax, eax
+		pop esi
+		ret
+	L_ret_neg1:
+		pop edi
+		or eax, 0xffffffff
+		pop esi
+		ret
 	}
-	if (*(char*) (DAT_100a8c30 + (unsigned int) *param_1 * 0x24d) != 0x1d) {
-		return -2;
-	}
-	slot_entry_ptr = *(int*) (param_1 + 0x65);
-	if (slot_entry_ptr == 0) {
-		return -3;
-	}
-	slot_active_result = gv_CheckSlotActive((char*) slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc));
-	if (slot_active_result == 0) {
-		return -4;
-	}
-	slot_entry_ptr = gv_GetSlotEntry(slot_entry_ptr, *(int*) (cmd_ptr_saved + 0xc), cmd_ptr_saved[0x10]);
-	if (slot_entry_ptr == 0) {
-		return -7;
-	}
-	new_progress_value = *(int*) (cmd_ptr_saved + 0x13) + (unsigned int) *(unsigned char*) (slot_entry_ptr + 0xc);
-	new_progress_value = new_progress_value & ((int) new_progress_value <= 0) - 1;
-	if ((int) new_progress_value >= 0xff) {
-		new_progress_value = 0xff;
-	}
-	*(char*) (slot_entry_ptr + 0xc) = (char) new_progress_value;
-	return 0;
 }
 
 /* Validates that an entity action is permitted. Checks
