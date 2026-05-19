@@ -686,8 +686,7 @@ blocker_delta = 539
 
 ["SERVER.0x10010fa0"]
 size = 525
-status = "STUB"
-blocker = "instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+status = "RELOC"
 
 ["SERVER.0x100111b0"]
 size = 501

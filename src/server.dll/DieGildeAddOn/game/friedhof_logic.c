@@ -1161,9 +1161,239 @@ void __cdecl gv_Free3Fields(char* p)
 // FUNCTION: SERVER 0x10010fa0
 // AssignProductionSlot
 
-/* Auto-generated Ghidra decompilation */
+__declspec(naked) unsigned int AssignProductionSlot(int param_1)
+{
+	(void) param_1;
+	__asm {
+		push ecx
+		push ebx
+		push esi
+		mov esi, dword ptr [esp + 0x10]
+		push edi
+		lea ecx, [esp + 0xc]
+		mov eax, dword ptr [esi + 8]
+		push eax
+		push 0
+		push 0
+		push ecx
+		call gm_ResolveEntityById
+		mov edx, dword ptr [esp + 0x1c]
+		add esp, 0x10
+		test edx, edx
+		je near L_neg1
+		mov ax, word ptr [edx + 0x27]
+		cmp ax, 0xffff
+		je near L_neg1
+		and eax, 0xffff
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea eax, [eax + eax*8]
+		lea ecx, [eax*4 + 0x100358a0]
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		cmp ecx, eax
+		je near L_neg1
+		xor ecx, ecx
+		_emit 0x8b
+		_emit 0x3d
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		mov cl, byte ptr [edx]
+		add edi, ecx
+		lea eax, [ecx + ecx*2]
+		shl eax, 4
+		add eax, ecx
+		lea eax, [eax + eax*2]
+		cmp byte ptr [edi + eax*4], 0x1d
+		je L_chk_field65
+		pop edi
+		pop esi
+		mov eax, 0xfffffffe
+		pop ebx
+		pop ecx
+		ret
+	L_chk_field65:
+		mov edi, dword ptr [edx + 0x65]
+		test edi, edi
+		jne L_call_check
+		pop edi
+		pop esi
+		mov eax, 0xfffffffd
+		pop ebx
+		pop ecx
+		ret
+	L_call_check:
+		mov ecx, dword ptr [esi + 0xc]
+		push ecx
+		push edi
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		jne L_resolve2
+		pop edi
+		pop esi
+		mov eax, 0xfffffffc
+		pop ebx
+		pop ecx
+		ret
+	L_resolve2:
+		mov edx, dword ptr [esi + 4]
+		lea eax, [esp + 0x14]
+		push edx
+		push eax
+		push 0
+		push 0
+		call gm_ResolveEntityById
+		mov eax, dword ptr [esp + 0x24]
+		add esp, 0x10
+		test eax, eax
+		jne L_get_slot
+		pop edi
+		pop esi
+		mov eax, 0xfffffffa
+		pop ebx
+		pop ecx
+		ret
+	L_get_slot:
+		mov cl, byte ptr [esi + 0x10]
+		mov edx, dword ptr [esi + 0xc]
+		push ecx
+		push edx
+		push edi
+		call gv_GetSlotEntry
+		add esp, 0xc
+		test eax, eax
+		je near L_neg7
+		mov ebx, dword ptr [esp + 0x14]
+		mov cx, word ptr [eax + 8]
+		cmp cx, word ptr [ebx + 0x50]
+		jne near L_neg7
+		mov edi, dword ptr [eax + 0x10]
+		mov eax, dword ptr [esi + 0xc]
+		xor ecx, ecx
+		push ebp
+		mov esi, dword ptr [eax*4 + 0x1002574c]
+		mov edx, edi
+		test esi, esi
+		jle L_after_loop
+		mov eax, edi
+	L_search_loop:
+		cmp dword ptr [edx], -1
+		je L_after_loop
+		cmp dword ptr [eax], -1
+		je L_set_edx_ecx
+		mov ebp, dword ptr [edx + 0x40]
+		cmp ebp, dword ptr [eax + 0x40]
+		jle L_inc_loop
+		mov edx, eax
+	L_inc_loop:
+		inc ecx
+		add eax, 0x44
+		cmp ecx, esi
+		jl L_search_loop
+		jmp L_after_loop
+	L_set_edx_ecx:
+		mov edx, ecx
+		shl edx, 4
+		add edx, ecx
+		lea edx, [edi + edx*4]
+	L_after_loop:
+		mov eax, dword ptr [ebx + 4]
+		lea ebx, [edx + 4]
+		mov dword ptr [edx], eax
+		mov ecx, dword ptr [esp + 0x18]
+		xor eax, eax
+		pop ebp
+		lea edi, [ecx + 0x30]
+		or ecx, 0xffffffff
+		repne scasb
+		not ecx
+		sub edi, ecx
+		mov eax, ecx
+		mov esi, edi
+		mov edi, ebx
+		lea ebx, [edx + 0x14]
+		shr ecx, 2
+		rep movsd
+		mov ecx, eax
+		xor eax, eax
+		and ecx, 3
+		rep movsb
+		mov ecx, dword ptr [esp + 0x14]
+		lea edi, [ecx + 0x40]
+		or ecx, 0xffffffff
+		repne scasb
+		not ecx
+		sub edi, ecx
+		mov eax, ecx
+		mov esi, edi
+		mov edi, ebx
+		shr ecx, 2
+		rep movsd
+		mov ecx, eax
+		lea eax, [edx + 0x24]
+		and ecx, 3
+		rep movsb
+		mov ecx, dword ptr [esp + 0x14]
+		pop edi
+		add ecx, 0x80
+		mov esi, dword ptr [ecx]
+		mov dword ptr [eax], esi
+		pop esi
+		mov cl, byte ptr [ecx + 4]
+		pop ebx
+		mov byte ptr [eax + 4], cl
+		mov ecx, dword ptr [esp + 8]
+		xor eax, eax
+		mov al, byte ptr [ecx + 0x167]
+		mov dword ptr [edx + 0x2c], eax
+		mov ecx, dword ptr [esp + 8]
+		xor eax, eax
+		mov al, byte ptr [ecx + 0xd]
+		mov dword ptr [edx + 0x30], eax
+		mov ecx, dword ptr [esp + 8]
+		xor eax, eax
+		mov al, byte ptr [ecx + 0x164]
+		mov dword ptr [edx + 0x34], eax
+		mov ecx, dword ptr [esp + 8]
+		xor eax, eax
+		mov al, byte ptr [ecx + 9]
+		mov dword ptr [edx + 0x38], eax
+		_emit 0xa1
+		_emit 0x80
+		_emit 0x58
+		_emit 0x03
+		_emit 0x10
+		mov dword ptr [edx + 0x40], eax
+		mov ecx, dword ptr [esp + 8]
+		mov eax, dword ptr [ecx + 0x18c]
+		mov dword ptr [edx + 0x3c], eax
+		xor eax, eax
+		pop ecx
+		ret
+	L_neg7:
+		pop edi
+		pop esi
+		mov eax, 0xfffffff9
+		pop ebx
+		pop ecx
+		ret
+	L_neg1:
+		pop edi
+		pop esi
+		or eax, 0xffffffff
+		pop ebx
+		pop ecx
+		ret
+	}
+}
 
-unsigned int AssignProductionSlot(int param_1)
+unsigned int AssignProductionSlot_unused(int param_1)
 {
 	char str_scan_char;
 	int worker_slot_capacity;
