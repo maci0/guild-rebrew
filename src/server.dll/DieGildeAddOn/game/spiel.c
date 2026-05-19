@@ -56,7 +56,7 @@ extern WORD* DAT_10035468;
 extern char DAT_10035454;
 extern char DAT_1003545d;
 extern int DAT_10035458;
-extern short DAT_10030b94;
+extern int DAT_10030b94;
 extern int DAT_10030b98;
 extern short DAT_10030b9c;
 extern char DAT_10030b9e;
