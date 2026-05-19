@@ -2421,11 +2421,12 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int param_1, ...)
 	DAT_10035448 = 0;
 
 	if (param_1 > 0) {
-		arg_ptr = &param_1 + 1;
+		arg_ptr = &param_1;
 
 		for (i = param_1; i > 0; i--) {
 			unsigned char ftype;
 
+			arg_ptr++;
 			ftype = *(unsigned char*) arg_ptr;
 			switch (ftype) {
 			case 0:
