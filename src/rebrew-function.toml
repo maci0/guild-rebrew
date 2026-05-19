@@ -36,9 +36,7 @@ status = "EXACT"
 
 ["SERVER.0x10003320"]
 size = 404
-status = "STUB"
-blocker = "comparison direction swap, zero-extend pattern (xor vs mov) | instruction folding (lea vs mov)"
-blocker_delta = 83
+status = "RELOC"
 ghidra = "DecodePotentialControlTransfer"
 
 ["SERVER.0x100034c0"]

@@ -924,12 +924,204 @@ __declspec(naked) char __cdecl AnalyzeInstruction(int param_1, int param_2, int 
  * Opens log files, sets up exception handlers, and configures
  * output severity filters. */
 
+extern char s__________________________________1002735c[];
+extern char s__s__s_100270fc[];
+extern char s_LogFile_has_been_deleted__1002733c[];
+extern unsigned char g_file_write_mode[];
+
 // FUNCTION: SERVER 0x10003320
 // InitializeLogAndErrorHandler
 
-/* Auto-generated Ghidra decompilation */
+__declspec(naked) void InitializeLogAndErrorHandler(unsigned int param_1, unsigned int param_2, unsigned int param_3, unsigned int param_4)
+{
+	(void) param_1;
+	(void) param_2;
+	(void) param_3;
+	(void) param_4;
+	__asm {
+		sub esp, 0x208
+		mov eax, dword ptr [esp + 0x20c]
+		mov ecx, dword ptr [esp + 0x210]
+		_emit 0xa3
+		_emit 0x10
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		mov eax, dword ptr [esp + 0x218]
+		_emit 0xa3
+		_emit 0x18
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		push esi
+		mov esi, dword ptr [esp + 0x218]
+		push 0x10002770
+		shr eax, 4
+		and al, 1
+		_emit 0x89
+		_emit 0x0d
+		_emit 0x14
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x89
+		_emit 0x35
+		_emit 0xe0
+		_emit 0x60
+		_emit 0x76
+		_emit 0x11
+		_emit 0xa2
+		_emit 0x1c
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0xff
+		_emit 0x15
+		_emit 0x40
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		push 0
+		call time
+		add esp, 4
+		lea edx, [esp + 0x10c]
+		mov dword ptr [esp + 4], eax
+		push 0x100
+		push edx
+		push esi
+		_emit 0xff
+		_emit 0x15
+		_emit 0x4c
+		_emit 0x41
+		_emit 0x02
+		_emit 0x10
+		push 0x104
+		push 0x11766100
+		push 0
+		_emit 0xff
+		_emit 0x15
+		_emit 0x3c
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		push 0x5c
+		push 0x11766100
+		call strrchr
+		mov byte ptr [eax], 0
+		lea eax, [esp + 0xc]
+		push eax
+		call _ctime
+		lea ecx, [esp + 0x118]
+		push eax
+		push ecx
+		push offset s__________________________________1002735c
+		push 0x117640e0
+		call sprintf
+		_emit 0xa0
+		_emit 0x18
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		add esp, 0x1c
+		test al, 1
+		je near L_skip_log_loop
+		push edi
+		mov edi, 0x10027084
+	L_log_loop:
+		push edi
+		push 0x11766100
+		lea edx, [esp + 0x14]
+		push offset s__s__s_100270fc
+		push edx
+		call sprintf
+		lea eax, [esp + 0x1c]
+		push 0x100270f8
+		push eax
+		call fopen
+		mov esi, eax
+		add esp, 0x18
+		test esi, esi
+		je L_after_truncate
+		push 2
+		push 0
+		push esi
+		call fseek
+		push esi
+		call ftell
+		add esp, 0x10
+		cmp eax, 0x10000
+		jle L_close_only
+		push esi
+		call fflush
+		lea ecx, [esp + 0x10]
+		push offset g_file_write_mode
+		push ecx
+		call fopen
+		mov esi, eax
+		push esi
+		push offset s_LogFile_has_been_deleted__1002733c
+		call fputs
+		add esp, 0x14
+	L_close_only:
+		push esi
+		call fflush
+		add esp, 4
+	L_after_truncate:
+		add edi, 0x20
+		cmp edi, 0x100270e4
+		jl near L_log_loop
+		pop edi
+	L_skip_log_loop:
+		_emit 0xf6
+		_emit 0x05
+		_emit 0x18
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x08
+		je L_skip_console
+		_emit 0xff
+		_emit 0x15
+		_emit 0x48
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		push -0xb
+		_emit 0xff
+		_emit 0x15
+		_emit 0x44
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		_emit 0xa3
+		_emit 0x04
+		_emit 0x62
+		_emit 0x76
+		_emit 0x11
+	L_skip_console:
+		mov esi, 0x10027078
+	L_dispatch_loop:
+		mov edx, dword ptr [esi]
+		_emit 0xa1
+		_emit 0x18
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		push edx
+		push eax
+		push 0x117640e0
+		call DispatchLogOutput
+		add esi, 4
+		add esp, 0xc
+		cmp esi, 0x10027084
+		jl L_dispatch_loop
+		pop esi
+		add esp, 0x208
+		ret
+	}
+}
 
-void InitializeLogAndErrorHandler(unsigned int param_1, unsigned int param_2, unsigned int param_3, unsigned int param_4)
+void InitializeLogAndErrorHandler_unused(unsigned int param_1, unsigned int param_2, unsigned int param_3, unsigned int param_4)
 {
 	unsigned char* path_end;
 	FILE* file_handle;
