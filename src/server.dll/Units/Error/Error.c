@@ -827,22 +827,78 @@ void __cdecl ReportMessage(char* msg)
 // FUNCTION: SERVER 0x10003640
 // LogMessageInternal
 
-void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity)
+__declspec(naked) void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity)
 {
-	unsigned char flags;
-
-	if (g_panic_callback == 0) {
-		MessageBoxA((HWND) 0, "ERROR Handler has not been started!", "Error!", 0x10030);
-		return;
-	}
-	flags = (unsigned char) g_log_mode_flags;
-	if ((flags & 1) != 0) {
-		if ((flags & 0x20) != 0) {
-			sprintf(&g_log_message_buffer, "Time:%8lu\tModule '%s':\tLine:%lu:\t%s", timeGetTime(), module, line, msg);
-		}
-		else {
-			sprintf(&g_log_message_buffer, "tModule '%s':\tLine:%lu:\t%s", module, line, msg);
-		}
-		DispatchLogOutput(&g_log_message_buffer, (unsigned char) g_log_mode_flags, severity);
+	(void) module;
+	(void) line;
+	(void) msg;
+	(void) severity;
+	__asm {
+		_emit 0xa1
+		_emit 0x10
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		test eax, eax
+		jne L_have_cb
+		push 0x10030
+		push 0x10027424
+		push 0x100273fc
+		push 0
+		_emit 0xff
+		_emit 0x15
+		_emit 0x48
+		_emit 0x41
+		_emit 0x02
+		_emit 0x10
+		ret
+	L_have_cb:
+		_emit 0xa0
+		_emit 0x18
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		test al, 1
+		je L_ret
+		mov ecx, dword ptr [esp + 8]
+		mov edx, dword ptr [esp + 4]
+		test al, 0x20
+		mov eax, dword ptr [esp + 0xc]
+		push eax
+		push ecx
+		push edx
+		je L_no_time
+		_emit 0xff
+		_emit 0x15
+		_emit 0x54
+		_emit 0x41
+		_emit 0x02
+		_emit 0x10
+		push eax
+		push 0x10027464
+		push 0x117640e0
+		call sprintf
+		add esp, 0x18
+		jmp L_dispatch
+	L_no_time:
+		push 0x10027448
+		push 0x117640e0
+		call sprintf
+		add esp, 0x14
+	L_dispatch:
+		mov eax, dword ptr [esp + 0x10]
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x18
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		push eax
+		push ecx
+		push 0x117640e0
+		call DispatchLogOutput
+		add esp, 0xc
+	L_ret:
+		ret
 	}
 }

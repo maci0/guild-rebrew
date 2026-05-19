@@ -44,7 +44,7 @@ ghidra = "DecodePotentialControlTransfer"
 
 ["SERVER.0x100034c0"]
 size = 83
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker_delta = 386
 analysis = "Initialization routine for the server's telemetry. Registers the CrashDumpUnhandledExceptionFilter. Allocates a console if requested via flags. Truncates log files (__server.log, gilde_server.log) if they exceed 64KB (0x10000 bytes) and seeds them with a startup banner. | If file logging is enabled, validate/rotate server log targets."
 
@@ -60,7 +60,7 @@ status = "RELOC"
 
 ["SERVER.0x10003640"]
 size = 132
-status = "STUB"
+status = "RELOC"
 
 ["SERVER.0x10003820"]
 size = 114
@@ -342,7 +342,7 @@ status = "EXACT"
 
 ["SERVER.0x1000c3c0"]
 size = 83
-status = "NEAR_MATCHING"
+status = "STUB"
 blocker = "jump condition swap"
 blocker_delta = 47
 
@@ -371,7 +371,7 @@ blocker_delta = 55
 
 ["SERVER.0x1000c710"]
 size = 752
-status = "NEAR_MATCHING"
+status = "STUB"
 blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 
 ["SERVER.0x1000ca00"]
