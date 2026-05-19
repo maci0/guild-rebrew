@@ -617,16 +617,12 @@ int __cdecl ls_LoadSavegameHeader(int param_1, char* param_2)
 			*(int*) (param_2 + 0x74) = -1;
 		}
 		if (g_save_version >= 0x10034) {
-			i = 0;
-			{
-				char* score_ptr = param_2 + 0x78;
-				do {
-					if (!ls_ReadVfsDataChecked(score_ptr, 4, 1, (void*) param_1)) {
-						return 0;
-					}
-					i = i + 1;
-					score_ptr = score_ptr + 4;
-				} while (i < 8);
+			char* score_ptr = param_2 + 0x78;
+			for (i = 0; i < 8; i++) {
+				if (!ls_ReadVfsDataChecked(score_ptr, 4, 1, (void*) param_1)) {
+					return 0;
+				}
+				score_ptr = score_ptr + 4;
 			}
 			ebx = *(char**) &ebx;
 		}
