@@ -87,8 +87,8 @@ size = 43
 status = "RELOC"
 
 ["SERVER.0x10004b80"]
-size = 320
-status = "STUB"
+size = 57
+status = "EXACT"
 
 ["SERVER.0x10005370"]
 size = 20
@@ -165,8 +165,8 @@ blocker_delta = 626
 analysis = "Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks."
 
 ["SERVER.0x10009310"]
-size = 170
-status = "STUB"
+size = 8
+status = "EXACT"
 ghidra = "exit_handler"
 
 ["SERVER.0x10009320"]
@@ -324,8 +324,8 @@ blocker_delta = 407
 ghidra = "LoadOfficeData"
 
 ["SERVER.0x1000bd50"]
-size = 130
-status = "STUB"
+size = 66
+status = "EXACT"
 
 ["SERVER.0x1000bda0"]
 size = 70
@@ -482,7 +482,7 @@ size = 78
 status = "RELOC"
 
 ["SERVER.0x1000d730"]
-size = 180
+size = 192
 status = "STUB"
 blocker = "lea folding (lea esi,[eax+0x10] + mov [esi],ax vs mov [esi+0x10],ax), register allocation (param_1 in esi vs reload from stack), zero-extend register choice (ecx vs eax)"
 blocker_delta = 20
@@ -520,17 +520,17 @@ blocker = "register allocation - target uses only esi, compiler allocates esi+ed
 blocker_delta = 180
 
 ["SERVER.0x1000e750"]
-size = 123
+size = 128
 status = "RELOC"
 
 ["SERVER.0x1000e7d0"]
-size = 242
+size = 256
 status = "STUB"
 blocker = "instruction folding (lea vs mov), stack frame choice (push vs sub esp)"
 blocker_delta = 210
 
 ["SERVER.0x1000e8d0"]
-size = 239
+size = 240
 status = "STUB"
 blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
 blocker_delta = 226
@@ -588,7 +588,7 @@ size = 327
 status = "RELOC"
 
 ["SERVER.0x1000f2f0"]
-size = 172
+size = 176
 status = "STUB"
 blocker = "register base adjustment (target uses add edi,0x18 and lea ecx,[esi+0x1c] for shorter addressing; MSVC6 folds to base+offset)"
 
@@ -720,8 +720,8 @@ blocker = "instruction folding (lea vs mov)"
 blocker_delta = 98
 
 ["SERVER.0x10010530"]
-size = 352
-status = "STUB"
+size = 113
+status = "EXACT"
 
 ["SERVER.0x100105b0"]
 size = 329
@@ -872,7 +872,7 @@ blocker_delta = 533
 ghidra = "RecvGameSavegame"
 
 ["SERVER.0x100145e0"]
-size = 304
+size = 209
 status = "STUB"
 ghidra = "SendLobbyPlayerList"
 
@@ -909,9 +909,8 @@ blocker_delta = 202
 note = "obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte."
 
 ["SERVER.0x10014db0"]
-size = 267
-status = "NEAR_MATCHING"
-blocker_delta = 75
+size = 304
+status = "RELOC"
 analysis = "obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte."
 
 ["SERVER.0x10014ee0"]
@@ -1071,7 +1070,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "NEAR_MATCHING"
+status = "STUB"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
@@ -1080,7 +1079,7 @@ status = "STUB"
 blocker_delta = 324
 
 ["SERVER.0x100170e0"]
-size = 267
+size = 304
 status = "STUB"
 blocker_delta = 229
 
