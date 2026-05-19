@@ -16,8 +16,7 @@ analysis = "Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15
 
 ["SERVER.0x10002fc0"]
 size = 376
-status = "STUB"
-blocker = "instruction folding (lea vs mov), loop rotation / branch layout"
+status = "RELOC"
 
 ["SERVER.0x10003140"]
 size = 33

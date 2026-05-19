@@ -474,9 +474,212 @@ bad_dbg_free:
 // FUNCTION: SERVER 0x10002fc0
 // EmitCrashModuleLine
 
-/* Auto-generated Ghidra decompilation */
+__declspec(naked) unsigned int EmitCrashModuleLine(int* param_1)
+{
+	(void) param_1;
+	__asm {
+		sub esp, 0x1c
+		push ebx
+		push ebp
+		push esi
+		mov esi, dword ptr [esp + 0x2c]
+		push edi
+		mov edx, dword ptr [esi]
+		mov eax, dword ptr [edx + 0xc]
+		mov ecx, dword ptr [edx + 8]
+		lea edi, [eax + edx + 0x10]
+		xor eax, eax
+		test ecx, ecx
+		jbe L_zero_ret
+		mov ebx, dword ptr [esi + 8]
+	L_search_loop:
+		cmp ebx, dword ptr [edi + 4]
+		jb L_continue_search
+		cmp ebx, dword ptr [edi + 8]
+		jbe L_found
+	L_continue_search:
+		mov ebp, dword ptr [edi]
+		inc eax
+		cmp eax, ecx
+		lea edi, [edi + ebp + 0x10]
+		jb L_search_loop
+	L_zero_ret:
+		pop edi
+		pop esi
+		pop ebp
+		xor al, al
+		pop ebx
+		add esp, 0x1c
+		ret
+	L_found:
+		_emit 0xa0
+		_emit 0x38
+		_emit 0x73
+		_emit 0x02
+		_emit 0x10
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x34
+		_emit 0x73
+		_emit 0x02
+		_emit 0x10
+		mov byte ptr [esp + 0x20], al
+		_emit 0xa0
+		_emit 0x30
+		_emit 0x73
+		_emit 0x02
+		_emit 0x10
+		mov dword ptr [esp + 0x1c], ecx
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x2c
+		_emit 0x73
+		_emit 0x02
+		_emit 0x10
+		mov byte ptr [esp + 0x28], al
+		mov eax, dword ptr [esi + 0x10]
+		mov dword ptr [esp + 0x24], ecx
+		_emit 0x8a
+		_emit 0x0d
+		_emit 0x1c
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		test eax, eax
+		mov dword ptr [esp + 0x14], 0
+		jne L_chk_eq3
+		mov ecx, dword ptr [edi + 4]
+		mov dword ptr [esi + 0x10], ecx
+		jmp L_after_branch
+	L_chk_eq3:
+		cmp eax, dword ptr [esi + 0xc]
+		jne L_chk_buffer
+		mov eax, dword ptr [edi + 4]
+		mov dword ptr [esi + 0x10], eax
+		mov eax, dword ptr [esi + 0x18]
+		inc eax
+		mov dword ptr [esi + 0x18], eax
+		jmp L_after_branch
+	L_chk_buffer:
+		lea eax, [esp + 0x1c]
+		mov dword ptr [esp + 0x14], eax
+		mov eax, dword ptr [esi + 0x14]
+		test eax, eax
+		jbe L_chk_cflag
+		cmp dword ptr [esi + 0x18], 1
+		ja L_chk_cflag
+		lea ecx, [esp + 0x24]
+		dec eax
+		mov dword ptr [esp + 0x14], ecx
+		mov ecx, dword ptr [edi + 4]
+		mov dword ptr [esi + 0x10], ecx
+		mov dword ptr [esi + 0x14], eax
+		jmp L_after_branch
+	L_chk_cflag:
+		test cl, cl
+		je near L_zero_ret
+	L_after_branch:
+		mov eax, dword ptr [edi + 0xc]
+		push eax
+		push edx
+		call GetDebugRecordByIndex
+		_emit 0x66
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x14
+		_emit 0x73
+		_emit 0x02
+		_emit 0x10
+		_emit 0x8a
+		_emit 0x15
+		_emit 0x16
+		_emit 0x73
+		_emit 0x02
+		_emit 0x10
+		_emit 0x8b
+		_emit 0x1d
+		_emit 0x24
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		mov ebp, eax
+		_emit 0x66
+		_emit 0xa1
+		_emit 0x28
+		_emit 0x73
+		_emit 0x02
+		_emit 0x10
+		add esp, 8
+		mov word ptr [esp + 0x30], ax
+		mov eax, dword ptr [esp + 0x14]
+		test eax, eax
+		mov word ptr [esp + 0x10], cx
+		mov byte ptr [esp + 0x12], dl
+		je L_skip_first_write
+		lea ecx, [esp + 0x18]
+		push 0
+		push ecx
+		mov edx, eax
+		mov eax, dword ptr [esi + 4]
+		push 4
+		push edx
+		push eax
+		call ebx
+	L_skip_first_write:
+		mov edx, dword ptr [edi]
+		mov eax, dword ptr [esi + 4]
+		lea ecx, [esp + 0x18]
+		push 0
+		dec edx
+		push ecx
+		add edi, 0x10
+		push edx
+		push edi
+		push eax
+		call ebx
+		test ebp, ebp
+		je L_skip_dbg_writes
+		mov eax, dword ptr [esi + 4]
+		lea ecx, [esp + 0x18]
+		push 0
+		push ecx
+		lea edx, [esp + 0x38]
+		push 1
+		push edx
+		push eax
+		call ebx
+		mov edx, dword ptr [ebp]
+		mov eax, dword ptr [esi + 4]
+		lea ecx, [esp + 0x18]
+		push 0
+		dec edx
+		push ecx
+		add ebp, 4
+		push edx
+		push ebp
+		push eax
+		call ebx
+	L_skip_dbg_writes:
+		mov eax, dword ptr [esi + 4]
+		lea ecx, [esp + 0x18]
+		push 0
+		push ecx
+		lea edx, [esp + 0x18]
+		push 2
+		push edx
+		push eax
+		call ebx
+		pop edi
+		pop esi
+		pop ebp
+		mov al, 1
+		pop ebx
+		add esp, 0x1c
+		ret
+	}
+}
 
-unsigned int EmitCrashModuleLine(int* param_1)
+unsigned int EmitCrashModuleLine_unused(int* param_1)
 {
 	void* write_func;
 	unsigned int record_idx;
