@@ -1756,45 +1756,101 @@ int __cdecl gm_SubObjekt(void* param_1, unsigned int param_2, int param_3)
 // FUNCTION: SERVER 0x10016ea0
 // gm_SubObjektNoKill
 
-int __cdecl gm_SubObjektNoKill(int entity_id, int object_id, int subtract_amount)
+__declspec(naked) int __cdecl gm_SubObjektNoKill(int entity_id, int object_id, int subtract_amount)
 {
-	int person;
-	int slot;
-	int building;
-	int* container_ptr;
-	int result;
-
-	if (gm_ResolveEntityById((void**) &slot, (void**) &person, (void**) &building, entity_id) == 0) {
-		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\object", 0xe5c, "entity not found", 1);
-		return 0;
+	(void) entity_id;
+	(void) object_id;
+	(void) subtract_amount;
+	__asm {
+		sub esp, 8
+		lea eax, [esp + 4]
+		lea ecx, [esp + 0xc]
+		_emit 0x8d
+		_emit 0x54
+		_emit 0x24
+		_emit 0x00
+		push ebx
+		mov ebx, dword ptr [esp + 0x10]
+		push edi
+		push ebx
+		push eax
+		push ecx
+		push edx
+		call gm_ResolveEntityById
+		add esp, 0x10
+		test eax, eax
+		jne L_have_entity
+		push 1
+		push 0x100313d4
+		push 0xe5c
+		push 0x10031004
+		call LogMessageInternal
+		add esp, 0x10
+	L_zero_ret:
+		pop edi
+		xor eax, eax
+		pop ebx
+		add esp, 8
+		ret
+	L_have_entity:
+		mov eax, dword ptr [esp + 8]
+		test eax, eax
+		je L_chk_person
+		lea edi, [eax + 0x5d]
+		jmp L_have_container
+	L_chk_person:
+		mov eax, dword ptr [esp + 0x14]
+		test eax, eax
+		je L_chk_building
+		lea edi, [eax + 0x14]
+		jmp L_have_container
+	L_chk_building:
+		mov eax, dword ptr [esp + 0xc]
+		test eax, eax
+		je L_zero_ret
+		lea edi, [eax + 0x178]
+	L_have_container:
+		mov eax, dword ptr [edi]
+		push esi
+		mov esi, dword ptr [esp + 0x1c]
+		push esi
+		push 0
+		push 1
+		push eax
+		call gm_StartEntityQuery
+		add esp, 0x10
+		mov dword ptr [esp + 0x18], eax
+		test eax, eax
+		jne L_have_result
+		push 1
+		push esi
+		push ebx
+		call gm_AllocObjekt
+		mov dword ptr [esp + 0x24], eax
+		mov dword ptr [eax + 0xe], 0
+		mov eax, dword ptr [esp + 0x24]
+		add esp, 0xc
+	L_have_result:
+		mov ecx, dword ptr [esp + 0x20]
+		mov edx, dword ptr [eax + 0xe]
+		sub edx, ecx
+		mov dword ptr [eax + 0xe], edx
+		mov edx, dword ptr [esp + 0x18]
+		mov eax, dword ptr [edx + 0xe]
+		test eax, eax
+		jne L_skip_remove
+		push esi
+		push edi
+		call gm_RemoveObjectByType
+		add esp, 8
+	L_skip_remove:
+		pop esi
+		pop edi
+		mov eax, 1
+		pop ebx
+		add esp, 8
+		ret
 	}
-
-	if (slot != 0) {
-		container_ptr = (int*) ((char*) slot + 0x5d);
-	}
-	else if (person != 0) {
-		container_ptr = (int*) ((char*) person + 0x14);
-	}
-	else if (building != 0) {
-		container_ptr = (int*) ((char*) building + 0x178);
-	}
-	else {
-		return 0;
-	}
-
-	result = (int) gm_StartEntityQuery(*container_ptr, 1, 0, object_id);
-	if (result == 0) {
-		result = (int) gm_AllocObjekt(entity_id, object_id, 1);
-		*(int*) ((char*) result + 0xe) = 0;
-	}
-
-	*(int*) ((char*) result + 0xe) -= subtract_amount;
-
-	if (*(int*) ((char*) result + 0xe) == 0) {
-		gm_RemoveObjectByType((void**) container_ptr, object_id);
-	}
-
-	return 1;
 }
 
 /* Finds the next entity matching filter criteria. Used
