@@ -937,8 +937,7 @@ status = "RELOC"
 
 ["SERVER.0x100155c0"]
 size = 197
-status = "STUB"
-blocker_delta = 164
+status = "EXACT"
 
 ["SERVER.0x10015690"]
 size = 41

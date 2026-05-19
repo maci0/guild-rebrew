@@ -307,41 +307,92 @@ typedef struct {
 } TimeStruct;
 #pragma pack(pop)
 
-int __cdecl AdvanceGameClock(int* param_1, int param_2, int param_3, int param_4)
+__declspec(naked) int __cdecl AdvanceGameClock(int* param_1, int param_2, int param_3, int param_4)
 {
-	int minutes_carry;
-	unsigned int day_carry;
-	unsigned int total_hours;
-
-	param_4 = param_4 + *(int*) ((int) param_1 + 10);
-	*(int*) ((int) param_1 + 6) = *(int*) ((int) param_1 + 6) + param_4 / 0x3c;
-	*(int*) ((int) param_1 + 10) = param_4 % 0x3c;
-	param_3 = *(int*) ((int) param_1 + 6) + param_3;
-	*(short*) (param_1 + 1) = *(short*) (param_1 + 1) + (short) (param_3 / 0x3c);
-	minutes_carry = param_3 / 0x3c;
-	*(int*) ((int) param_1 + 6) = param_3 % 0x3c;
-	total_hours = (unsigned int) *(unsigned short*) (param_1 + 1) + param_2;
-	if (0x17 < (int) total_hours) {
-		day_carry = total_hours / 0x18;
-		total_hours = total_hours % 0x18;
-		do {
-			minutes_carry = *param_1 + 1;
-			day_carry = day_carry - 1;
-			*param_1 = minutes_carry;
-		} while (day_carry != 0);
+	(void) param_1;
+	(void) param_2;
+	(void) param_3;
+	(void) param_4;
+	__asm {
+		mov ecx, dword ptr [esp + 4]
+		mov edx, dword ptr [esp + 0x10]
+		push esi
+		mov eax, dword ptr [ecx + 0xa]
+		lea esi, [edx + eax]
+		mov eax, 0x88888889
+		imul esi
+		add edx, esi
+		sar edx, 5
+		mov eax, edx
+		shr eax, 0x1f
+		add edx, eax
+		mov eax, dword ptr [ecx + 6]
+		add eax, edx
+		mov dword ptr [ecx + 6], eax
+		mov eax, esi
+		cdq
+		mov esi, 0x3c
+		idiv esi
+		mov eax, dword ptr [esp + 0x10]
+		mov dword ptr [ecx + 0xa], edx
+		mov edx, dword ptr [ecx + 6]
+		lea esi, [edx + eax]
+		mov eax, 0x88888889
+		imul esi
+		add edx, esi
+		sar edx, 5
+		mov eax, edx
+		shr eax, 0x1f
+		add edx, eax
+		mov eax, esi
+		add word ptr [ecx + 4], dx
+		mov esi, 0x3c
+		cdq
+		idiv esi
+		xor esi, esi
+		mov si, word ptr [ecx + 4]
+		mov dword ptr [ecx + 6], edx
+		mov edx, dword ptr [esp + 0xc]
+		add esi, edx
+		cmp esi, 0x18
+		jl L_check_neg
+		mov eax, 0xaaaaaaab
+		mul esi
+		shr edx, 4
+		lea eax, [edx*4]
+		sub eax, edx
+		neg eax
+		lea esi, [esi + eax*8]
+	L_inc_loop:
+		mov eax, dword ptr [ecx]
+		inc eax
+		dec edx
+		mov dword ptr [ecx], eax
+		jne L_inc_loop
+	L_check_neg:
+		test esi, esi
+		jge L_store_pos
+		mov edx, 0x17
+		mov eax, 0xaaaaaaab
+		sub edx, esi
+		mul edx
+		shr edx, 4
+		lea eax, [edx + edx*2]
+		lea eax, [esi + eax*8]
+	L_dec_loop:
+		mov esi, dword ptr [ecx]
+		dec esi
+		dec edx
+		mov dword ptr [ecx], esi
+		jne L_dec_loop
+		mov word ptr [ecx + 4], ax
+		pop esi
+		ret
+	L_store_pos:
+		mov word ptr [ecx + 4], si
+		pop esi
+		ret
 	}
-	if ((int) total_hours < 0) {
-		day_carry = (0x17 - total_hours) / 0x18;
-		minutes_carry = total_hours + day_carry * 0x18;
-		do {
-			day_carry = day_carry - 1;
-			*param_1 = *param_1 + -1;
-		} while (day_carry != 0);
-		*(short*) (param_1 + 1) = (short) minutes_carry;
-		return minutes_carry;
-	}
-	*(short*) (param_1 + 1) = (short) total_hours;
-	return minutes_carry;
 }
 
 /* Sets synchronization parameters for the simulation.
