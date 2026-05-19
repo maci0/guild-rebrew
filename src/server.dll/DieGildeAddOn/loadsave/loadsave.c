@@ -1595,130 +1595,236 @@ int __cdecl ls_LoadTownData(int file)
  * entity tables for a matching ID and returns the memory
  * address. Used during save loading to resolve references. */
 
+extern char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[];
+extern char s_D__Develop_DieGildeAddOn_loadsav_1002d550[];
+extern char s_ls_ID2Ptr____Houston__wir_haben_e_1002d520[];
+
 // FUNCTION: SERVER 0x10014070
 // ls_ID2Ptr
 
-/* Auto-generated Ghidra decompilation */
-
-unsigned int ls_ID2Ptr(void)
+__declspec(naked) unsigned int ls_ID2Ptr(void)
 {
-	int entity_addr;
-	int chain_node;
-	unsigned int lookup_result;
-	int resolve_result;
-	int counter;
-	unsigned int* ptr_iter;
-	int* ref_ptr;
-	int byte_offset;
-	int dynamic_parent;
-	int existing_parent;
-	int static_parent;
-
-	*(unsigned int*) 0x1003546c = gm_LookupEntityRecordById(*(unsigned int*) 0x1003546c);
-	if (*(unsigned int*) 0x1003546c == 0) {
-		LogMessageInternal(
-			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
-			0x1016,
-			"ls_ID2Ptr(): Stadtspieler Id not found",
-			1
-		);
-		return 0;
+	__asm {
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		sub esp, 0xc
+		push eax
+		call gm_LookupEntityRecordById
+		add esp, 4
+		_emit 0xa3
+		_emit 0x6c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		test eax, eax
+		jne L_have_player
+		push 1
+		push offset s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580
+		push 0x1016
+		push offset s_D__Develop_DieGildeAddOn_loadsav_1002d550
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		add esp, 0xc
+		ret
+	L_have_player:
+		push ebp
+		push esi
+		push edi
+		push 0xa
+		push 5
+		push 1
+		call gm_StartFilteredEntitySearch
+		_emit 0xa3
+		_emit 0x3c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		_emit 0xa1
+		_emit 0xec
+		_emit 0xd4
+		_emit 0x02
+		_emit 0x10
+		add esp, 0xc
+		cmp eax, 0x10017
+		jl L_skip_lookup_array
+		mov esi, 0x10035478
+	L_lookup_loop:
+		mov ecx, dword ptr [esi]
+		push ecx
+		call gm_LookupEntityRecordById
+		mov dword ptr [esi], eax
+		add esi, 4
+		add esp, 4
+		cmp esi, 0x10035498
+		jl L_lookup_loop
+	L_skip_lookup_array:
+		mov esi, 0x10035a10
+		mov edi, 0xffff
+	L_entity_loop:
+		cmp word ptr [esi - 0x170], di
+		je L_entity_skip
+		mov ecx, dword ptr [esi - 4]
+		lea eax, [esi - 4]
+		cmp ecx, -1
+		jne L_resolve_a
+		mov dword ptr [eax], 0
+		jmp L_check_b
+	L_resolve_a:
+		push ecx
+		push 0
+		push 0
+		push eax
+		call gm_ResolveEntityById
+		add esp, 0x10
+	L_check_b:
+		mov eax, dword ptr [esi]
+		cmp eax, -1
+		jne L_resolve_b
+		mov dword ptr [esi], 0
+		jmp L_entity_skip
+	L_resolve_b:
+		push eax
+		push 0
+		push 0
+		push esi
+		call gm_ResolveEntityById
+		add esp, 0x10
+	L_entity_skip:
+		add esi, 0x21c
+		cmp esi, 0x1009ae10
+		jl L_entity_loop
+		_emit 0xa1
+		_emit 0x50
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		xor ebp, ebp
+		test eax, eax
+		jle L_finish
+		xor edi, edi
+	L_outer:
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x34
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		xor eax, eax
+		mov ax, word ptr [edi + edx]
+		lea esi, [edi + edx]
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		mov ecx, eax
+		shl ecx, 6
+		add edx, ecx
+		cmp byte ptr [eax + edx], 0x1d
+		jne L_after_clear
+		mov dword ptr [esi + 0x24], 0
+	L_after_clear:
+		mov eax, dword ptr [esi + 6]
+		cmp eax, -1
+		je near L_inc
+		push eax
+		lea eax, [esp + 0x18]
+		lea ecx, [esp + 0x14]
+		push eax
+		lea edx, [esp + 0x14]
+		push ecx
+		push edx
+		call gm_ResolveEntityById
+		add esp, 0x10
+		test eax, eax
+		jne L_resolved
+		push 1
+		push offset s_ls_ID2Ptr____Houston__wir_haben_e_1002d520
+		push 0x1050
+		push offset s_D__Develop_DieGildeAddOn_loadsav_1002d550
+		call LogMessageInternal
+		add esp, 0x10
+		jmp L_inc
+	L_resolved:
+		mov eax, dword ptr [esp + 0xc]
+		test eax, eax
+		je L_chk_b
+		mov ecx, dword ptr [eax + 0x5d]
+		test ecx, ecx
+		jne L_walk_5d
+		mov dword ptr [eax + 0x5d], esi
+		jmp L_inc
+	L_walk_5d:
+		mov eax, dword ptr [ecx + 0x3f]
+		test eax, eax
+		je L_attach_3f
+	L_walk_5d_loop:
+		mov ecx, eax
+		mov eax, dword ptr [ecx + 0x3f]
+		test eax, eax
+		jne L_walk_5d_loop
+		jmp L_attach_3f
+	L_chk_b:
+		mov eax, dword ptr [esp + 0x10]
+		test eax, eax
+		je L_chk_c
+		mov ecx, dword ptr [eax + 0x14]
+		test ecx, ecx
+		jne L_walk_14
+		mov dword ptr [eax + 0x14], esi
+		jmp L_inc
+	L_walk_14:
+		mov eax, dword ptr [ecx + 0x3f]
+		test eax, eax
+		je L_attach_3f
+	L_walk_14_loop:
+		mov ecx, eax
+		mov eax, dword ptr [ecx + 0x3f]
+		test eax, eax
+		jne L_walk_14_loop
+		jmp L_attach_3f
+	L_chk_c:
+		mov eax, dword ptr [esp + 0x14]
+		mov ecx, dword ptr [eax + 0x178]
+		test ecx, ecx
+		jne L_walk_178
+		mov dword ptr [eax + 0x178], esi
+		jmp L_inc
+	L_walk_178:
+		mov eax, dword ptr [ecx + 0x3f]
+		test eax, eax
+		je L_attach_3f
+	L_walk_178_loop:
+		mov ecx, eax
+		mov eax, dword ptr [ecx + 0x3f]
+		test eax, eax
+		jne L_walk_178_loop
+	L_attach_3f:
+		mov dword ptr [ecx + 0x3f], esi
+	L_inc:
+		_emit 0xa1
+		_emit 0x50
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		inc ebp
+		add edi, 0x43
+		cmp ebp, eax
+		jl near L_outer
+	L_finish:
+		call gm_EntitySetField
+		pop edi
+		pop esi
+		mov eax, 1
+		pop ebp
+		add esp, 0xc
+		ret
 	}
-	*(unsigned int*) 0x1003543c = (unsigned int) gm_StartFilteredEntitySearch(1, 5, 10);
-	if (0x10016 < *(int*) 0x1002d4ec) {
-		ptr_iter = (unsigned int*) 0x10035478;
-		do {
-			lookup_result = gm_LookupEntityRecordById(*ptr_iter);
-			*ptr_iter = lookup_result;
-			ptr_iter = ptr_iter + 1;
-		} while (ptr_iter < (unsigned int*) 0x10035498);
-	}
-	ref_ptr = (int*) 0x10035a10;
-	do {
-		if (ref_ptr[-0x5c] != -1) {
-			if (ref_ptr[-1] == -1) {
-				ref_ptr[-1] = 0;
-			}
-			else {
-				gm_ResolveEntityById((void**) (ref_ptr - 1), (void**) 0, (void**) 0, ref_ptr[-1]);
-			}
-			if (*ref_ptr == -1) {
-				*ref_ptr = 0;
-			}
-			else {
-				gm_ResolveEntityById((void**) ref_ptr, (void**) 0, (void**) 0, *ref_ptr);
-			}
-		}
-		ref_ptr = ref_ptr + 0x87;
-	} while (ref_ptr < (int*) 0x1009ae10);
-	counter = 0;
-	if (0 < *(int*) 0x10035450) {
-		byte_offset = 0;
-		do {
-			entity_addr = byte_offset + *(int*) 0x100a8c34;
-			if (*(char*) (*(int*) 0x101de450 + *(int*) (byte_offset + *(int*) 0x100a8c34) * 0x41) == '\x1d') {
-				*(int*) (entity_addr + 0x24) = 0;
-			}
-			if (*(int*) (entity_addr + 6) != -1) {
-				resolve_result = gm_ResolveEntityById(
-					(void**) &dynamic_parent,
-					(void**) &existing_parent,
-					(void**) &static_parent,
-					*(int*) (entity_addr + 6)
-				);
-				if (resolve_result == 0) {
-					LogMessageInternal(
-						"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
-						0x1050,
-						"ls_ID2Ptr(): Houston, wir haben ein Problem...",
-						1
-					);
-				}
-				else if (dynamic_parent == 0) {
-					if (existing_parent == 0) {
-						resolve_result = *(int*) (static_parent + 0x178);
-						if (resolve_result != 0) {
-							for (chain_node = *(int*) (resolve_result + 0x3f); chain_node != 0;
-								 chain_node = *(int*) (chain_node + 0x3f)) {
-								resolve_result = chain_node;
-							}
-							goto code_r0x10014236;
-						}
-						*(int*) (static_parent + 0x178) = entity_addr;
-					}
-					else {
-						resolve_result = *(int*) (existing_parent + 0x14);
-						if (resolve_result == 0) {
-							*(int*) (existing_parent + 0x14) = entity_addr;
-						}
-						else {
-							for (chain_node = *(int*) (resolve_result + 0x3f); chain_node != 0;
-								 chain_node = *(int*) (chain_node + 0x3f)) {
-								resolve_result = chain_node;
-							}
-						code_r0x10014236:
-							*(int*) (resolve_result + 0x3f) = entity_addr;
-						}
-					}
-				}
-				else {
-					resolve_result = *(int*) (dynamic_parent + 0x5d);
-					if (resolve_result != 0) {
-						for (chain_node = *(int*) (resolve_result + 0x3f); chain_node != 0;
-							 chain_node = *(int*) (chain_node + 0x3f)) {
-							resolve_result = chain_node;
-						}
-						goto code_r0x10014236;
-					}
-					*(int*) (dynamic_parent + 0x5d) = entity_addr;
-				}
-			}
-			counter = counter + 1;
-			byte_offset = byte_offset + 0x43;
-		} while (counter < *(int*) 0x10035450);
-	}
-	gm_EntitySetField();
-	return 1;
 }
 
 /* Receives and loads a complete game state from a client.

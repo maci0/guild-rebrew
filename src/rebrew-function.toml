@@ -788,12 +788,11 @@ analysis = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 6
 
 ["SERVER.0x10014070"]
 size = 491
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+status = "RELOC"
 
 ["SERVER.0x10014260"]
 size = 892
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker = "comparison direction swap, jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 blocker_delta = 533
 ghidra = "RecvGameSavegame"
