@@ -450,61 +450,130 @@ __declspec(naked) int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigne
 // FUNCTION: SERVER 0x10014ca0
 // cm_RouteCommand
 
-int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
 {
-        int slot_index;
-        int* id_ptr;
-        int queue_result;
-        unsigned int* player_slot;
-
-        if ((*param_1 & 0x6000) != 0) {
-                LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x37b, s_invalid_client_state_1002d740, 1);
-                *param_2 = 2;
-                slot_index = cm_QueuePlayerCommand(param_1, param_2);
-                if (slot_index == -1) {
-                        return -1;
-                }
-                return 0;
+        (void) param_1;
+        (void) param_2;
+        __asm {
+                push ebx
+                mov ebx, dword ptr [esp + 8]
+                push esi
+                push edi
+                mov eax, dword ptr [ebx]
+                test ah, 0x60
+                je L_valid
+                push 1
+                push 0x1002d740
+                push 0x37b
+                push 0x1002d70c
+                call LogMessageInternal
+                mov eax, dword ptr [esp + 0x24]
+                push eax
+                push ebx
+                mov byte ptr [eax], 2
+                call cm_QueuePlayerCommand
+                add esp, 0x18
+                inc eax
+                neg eax
+                sbb eax, eax
+                pop edi
+                neg eax
+                pop esi
+                dec eax
+                pop ebx
+                ret
+        L_valid:
+                mov edi, dword ptr [esp + 0x14]
+                mov edx, dword ptr [edi + 0x18]
+                test edx, edx
+                je L_broadcast
+                xor ecx, ecx
+                mov eax, 0x101deb04
+        L_scan:
+                cmp dword ptr [eax], edx
+                je L_found
+                add eax, 0x264264
+                inc ecx
+                cmp eax, 0x114ffe24
+                jl L_scan
+                push edi
+                push ebx
+                mov byte ptr [edi], 2
+                call cm_QueuePlayerCommand
+                add esp, 8
+                inc eax
+                neg eax
+                sbb eax, eax
+                pop edi
+                neg eax
+                pop esi
+                dec eax
+                pop ebx
+                ret
+        L_found:
+                mov eax, ecx
+                push edi
+                shl eax, 4
+                add eax, ecx
+                shl eax, 8
+                add eax, ecx
+                shl eax, 4
+                add eax, ecx
+                lea esi, [eax + eax*8]
+                shl esi, 2
+                lea eax, [esi + 0x101deb00]
+                push eax
+                call cm_QueuePlayerCommand
+                add esp, 8
+                cmp eax, -1
+                jne L_check_id
+        L_ret_neg1:
+                pop edi
+                pop esi
+                or eax, 0xffffffff
+                pop ebx
+                ret
+        L_check_id:
+                mov ecx, dword ptr [esi + 0x101deb04]
+                mov eax, dword ptr [ebx + 4]
+                cmp ecx, eax
+                je L_ret_ok
+                push edi
+                push ebx
+                call cm_QueuePlayerCommand
+                add esp, 8
+                cmp eax, -1
+                jne L_ret_ok
+                pop edi
+                pop esi
+                or eax, eax
+                pop ebx
+                ret
+        L_broadcast:
+                mov esi, 0x101deb00
+        L_bcast_loop:
+                mov eax, dword ptr [esi]
+                test al, 1
+                je L_bcast_next
+                test ah, 2
+                je L_bcast_next
+                push edi
+                push esi
+                call cm_QueuePlayerCommand
+                add esp, 8
+                cmp eax, -1
+                je L_ret_neg1
+        L_bcast_next:
+                add esi, 0x264264
+                cmp esi, 0x114ffe20
+                jl L_bcast_loop
+        L_ret_ok:
+                pop edi
+                pop esi
+                xor eax, eax
+                pop ebx
+                ret
         }
-        if (*(int*) (param_2 + 0x18) != 0) {
-                slot_index = 0;
-                id_ptr = (int*)&g_player_slots_base[0].id;
-                while (*id_ptr != *(int*) (param_2 + 0x18)) {
-                        id_ptr = (int*)((char*)id_ptr + 0x264264);
-                        slot_index = slot_index + 1;
-                        if (id_ptr > (int*)((char*)g_player_slots + 4)) {
-                                *param_2 = 2;
-                                queue_result = cm_QueuePlayerCommand(param_1, param_2);
-                                if (queue_result == -1) {
-                                        return -1;
-                                }
-                                return 0;
-                        }
-                }
-                queue_result = cm_QueuePlayerCommand((unsigned int*)&g_player_slots_base[slot_index], param_2);
-                if (queue_result == -1) {
-                        return -1;
-                }
-                if (g_player_slots_base[slot_index].id != param_1[1]) {
-                        slot_index = cm_QueuePlayerCommand(param_1, param_2);
-                        if (slot_index == -1) {
-                                return -1;
-                        }
-                }
-        }
-        else {
-                player_slot = (unsigned int*)g_player_slots_base;
-                do {
-                        if (((*player_slot & 1) != 0) && ((*player_slot & 0x200) != 0)) {
-                                slot_index = cm_QueuePlayerCommand(player_slot, param_2);
-                                if (slot_index == -1) {
-                                        return -1;
-                                }
-                        }
-                        player_slot = (unsigned int*)((char*)player_slot + 0x264264);
-                } while (player_slot < (unsigned int*)g_player_slots);
-        }
-        return 0;
 }
 
 /* Executes a lobby server command. Dispatches based on the

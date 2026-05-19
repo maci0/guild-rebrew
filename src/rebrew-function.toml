@@ -880,9 +880,7 @@ status = "RELOC"
 
 ["SERVER.0x10014ca0"]
 size = 265
-status = "STUB"
-blocker = "comparison direction swap, jump condition swap, zero-extend pattern (xor vs mov)"
-blocker_delta = 202
+status = "RELOC"
 note = "obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte."
 
 ["SERVER.0x10014db0"]
