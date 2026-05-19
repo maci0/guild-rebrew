@@ -945,7 +945,7 @@ status = "RELOC"
 
 ["SERVER.0x10015e90"]
 size = 211
-status = "STUB"
+status = "EXACT"
 
 ["SERVER.0x10015f70"]
 size = 714

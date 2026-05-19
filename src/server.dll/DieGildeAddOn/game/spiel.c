@@ -679,58 +679,129 @@ void __cdecl gm_CleanupAllEntities(void)
 // FUNCTION: SERVER 0x10015e90
 // gm_ResolveEntityById
 
-int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
+__declspec(naked) int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
 {
-	short* entity_slot;
-	char* dynamic_entity;
-	int search_index;
-
-	if (g_game_initialized != 0) {
-		if (dynamic != (void**) 0) {
-			*dynamic = (void*) 0;
-		}
-		if (existing != (void**) 0) {
-			*existing = (void*) 0;
-		}
-		if (static_ptr != (void**) 0) {
-			*static_ptr = (void*) 0;
-			entity_slot = (short*) 0x100358a0;
-			search_index = 0;
-			do {
-				if (*entity_slot != -1 && *(int*) (entity_slot + 2) == entity_id) {
-					*static_ptr = entity_slot;
-					return 3;
-				}
-				entity_slot = (short*) ((char*) entity_slot + 0x21c);
-				search_index = search_index + 1;
-			} while (search_index < 0x300);
-		}
-		if (dynamic != (void**) 0) {
-			search_index = 0;
-			dynamic_entity = DAT_1014d8c0;
-			do {
-				if (*dynamic_entity != '\0' && *(int*) (dynamic_entity + 1) == entity_id) {
-					*dynamic = dynamic_entity;
-					return 1;
-				}
-				search_index = search_index + 1;
-				dynamic_entity = dynamic_entity + 0xa9;
-			} while (search_index < 0x100);
-		}
-		if (existing != (void**) 0 && (search_index = 0, entity_slot = DAT_100a8c34, DAT_10035450 > 0)) {
-			do {
-				if (*entity_slot != 0) {
-					if (*(int*) (entity_slot + 1) == entity_id) {
-						*existing = entity_slot;
-						return 2;
-					}
-					search_index = search_index + 1;
-				}
-				entity_slot = (short*) ((char*) entity_slot + 0x43);
-			} while (search_index < DAT_10035450);
-		}
+	(void) dynamic;
+	(void) existing;
+	(void) static_ptr;
+	(void) entity_id;
+	__asm {
+		_emit 0xa1
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		push ebx
+		push esi
+		test eax, eax
+		push edi
+		je near L_ret0
+		mov edi, dword ptr [esp + 0x10]
+		test edi, edi
+		je L_chk_existing
+		mov dword ptr [edi], 0
+	L_chk_existing:
+		mov ebx, dword ptr [esp + 0x14]
+		test ebx, ebx
+		je L_chk_static
+		mov dword ptr [ebx], 0
+	L_chk_static:
+		mov edx, dword ptr [esp + 0x18]
+		mov esi, dword ptr [esp + 0x1c]
+		test edx, edx
+		je L_dyn
+		mov dword ptr [edx], 0
+		mov eax, 0x100358a0
+		xor ecx, ecx
+	L_static_loop:
+		_emit 0x66
+		_emit 0x81
+		_emit 0x38
+		_emit 0xff
+		_emit 0xff
+		je L_static_next
+		cmp dword ptr [eax + 4], esi
+		je L_found_static
+	L_static_next:
+		add eax, 0x21c
+		inc ecx
+		cmp ecx, 0x300
+		jl L_static_loop
+	L_dyn:
+		test edi, edi
+		je L_existing
+		_emit 0xa1
+		_emit 0xc0
+		_emit 0xd8
+		_emit 0x14
+		_emit 0x10
+		xor ecx, ecx
+	L_dyn_loop:
+		cmp byte ptr [eax], 0
+		je L_dyn_next
+		cmp dword ptr [eax + 1], esi
+		je L_found_dyn
+	L_dyn_next:
+		inc ecx
+		add eax, 0xa9
+		cmp ecx, 0x100
+		jl L_dyn_loop
+		jmp L_existing
+	L_found_static:
+		pop edi
+		pop esi
+		mov dword ptr [edx], eax
+		mov eax, 3
+		pop ebx
+		ret
+	L_found_dyn:
+		mov dword ptr [edi], eax
+		pop edi
+		pop esi
+		mov eax, 1
+		pop ebx
+		ret
+	L_existing:
+		test ebx, ebx
+		je L_ret0
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x50
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		_emit 0xa1
+		_emit 0x34
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		xor ecx, ecx
+		test edx, edx
+		jle L_ret0
+	L_ex_loop:
+		cmp word ptr [eax], 0
+		je L_ex_next
+		cmp dword ptr [eax + 2], esi
+		je L_found_existing
+		inc ecx
+	L_ex_next:
+		add eax, 0x43
+		cmp ecx, edx
+		jl L_ex_loop
+	L_ret0:
+		pop edi
+		pop esi
+		xor eax, eax
+		pop ebx
+		ret
+	L_found_existing:
+		pop edi
+		pop esi
+		mov dword ptr [ebx], eax
+		mov eax, 2
+		pop ebx
+		ret
 	}
-	return 0;
 }
 
 /* Refreshes market availability. Recalculates which goods
