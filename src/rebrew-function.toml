@@ -297,9 +297,7 @@ status = "RELOC"
 
 ["SERVER.0x1000b880"]
 size = 263
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap"
-blocker_delta = 205
+status = "RELOC"
 
 ["SERVER.0x1000b990"]
 size = 157

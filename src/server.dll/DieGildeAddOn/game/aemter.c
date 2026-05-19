@@ -628,62 +628,140 @@ void __cdecl amt_FindEntity27(int val)
 // FUNCTION: SERVER 0x1000b880
 // amt_SwapOfficeHolders
 
-int __cdecl amt_SwapOfficeHolders(int* param_1)
+__declspec(naked) int __cdecl amt_SwapOfficeHolders(int* param_1)
 {
-	int saved_entity_id;
-	void* requester_rec;
-	SlotEntry* slot_scan;
-	void* entity_rec_a;
-	void* entity_rec_b;
-	int slot_index_a;
-	int slot_index_b;
-
-	requester_rec = gm_LookupEntityRecordById(*param_1);
-	if (requester_rec == (void*) 0) {
-		return 0;
+	(void) param_1;
+	__asm {
+		push ebx
+		mov ebx, dword ptr [esp + 8]
+		push ebp
+		push esi
+		mov eax, dword ptr [ebx]
+		push edi
+		push eax
+		call gm_LookupEntityRecordById
+		add esp, 4
+		mov dword ptr [esp + 0x14], eax
+		test eax, eax
+		jne L_have_req
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
+	L_have_req:
+		mov ecx, dword ptr [eax + 0x194]
+		mov eax, dword ptr [ebx + 6]
+		cmp ecx, eax
+		jge L_scan_a
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
+	L_scan_a:
+		mov dl, byte ptr [ebx + 4]
+		xor ecx, ecx
+		mov eax, 0x101de5a0
+	L_loop_a:
+		cmp byte ptr [eax], dl
+		je L_found_a
+		add eax, 0x18
+		inc ecx
+		cmp eax, 0x101de870
+		jl L_loop_a
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
+	L_found_a:
+		lea edx, [ecx + ecx*2]
+		lea edi, [edx*8 + 0x101de5a0]
+		test edi, edi
+		jne L_have_a
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
+	L_have_a:
+		mov eax, dword ptr [edi + 4]
+		push eax
+		call gm_LookupEntityRecordById
+		mov ebp, eax
+		add esp, 4
+		test ebp, ebp
+		jne L_scan_b
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
+	L_scan_b:
+		mov dl, byte ptr [ebx + 5]
+		xor ecx, ecx
+		mov eax, 0x101de5a0
+	L_loop_b:
+		cmp byte ptr [eax], dl
+		je L_found_b
+		add eax, 0x18
+		inc ecx
+		cmp eax, 0x101de870
+		jl L_loop_b
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
+	L_found_b:
+		lea ecx, [ecx + ecx*2]
+		lea esi, [ecx*8 + 0x101de5a0]
+		test esi, esi
+		jne L_have_b
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
+	L_have_b:
+		mov edx, dword ptr [esi + 4]
+		push edx
+		call gm_LookupEntityRecordById
+		add esp, 4
+		test eax, eax
+		jne L_do_swap
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
+	L_do_swap:
+		mov cl, byte ptr [esi + 8]
+		mov byte ptr [ebp + 0x166], cl
+		mov dl, byte ptr [edi + 8]
+		mov byte ptr [eax + 0x166], dl
+		mov ecx, dword ptr [esi + 4]
+		mov eax, dword ptr [edi + 4]
+		mov dword ptr [edi + 4], ecx
+		mov dword ptr [esi + 4], eax
+		mov eax, dword ptr [esp + 0x14]
+		mov edx, dword ptr [ebx + 6]
+		pop edi
+		mov ecx, dword ptr [eax + 0x194]
+		pop esi
+		sub ecx, edx
+		pop ebp
+		mov dword ptr [eax + 0x194], ecx
+		mov eax, 1
+		pop ebx
+		ret
 	}
-	if (*(int*) ((int) requester_rec + 0x194) < *(int*) ((int) param_1 + 6)) {
-		return 0;
-	}
-	slot_index_a = 0;
-	slot_scan = DAT_101de5a0;
-	while (slot_scan->key != (char) param_1[1]) {
-		slot_scan = slot_scan + 1;
-		slot_index_a = slot_index_a + 1;
-		if ((int) slot_scan > 0x101de86f) {
-			return 0;
-		}
-	}
-	if (slot_scan == (SlotEntry*) 0) {
-		return 0;
-	}
-	entity_rec_a = gm_LookupEntityRecordById(DAT_101de5a0[slot_index_a].entityId);
-	if (entity_rec_a == (void*) 0) {
-		return 0;
-	}
-	slot_index_b = 0;
-	slot_scan = DAT_101de5a0;
-	while (slot_scan->key != *(char*) ((int) param_1 + 5)) {
-		slot_scan = slot_scan + 1;
-		slot_index_b = slot_index_b + 1;
-		if ((int) slot_scan > 0x101de86f) {
-			return 0;
-		}
-	}
-	if (slot_scan == (SlotEntry*) 0) {
-		return 0;
-	}
-	entity_rec_b = gm_LookupEntityRecordById(DAT_101de5a0[slot_index_b].entityId);
-	if (entity_rec_b == (void*) 0) {
-		return 0;
-	}
-	*(char*) ((int) entity_rec_a + 0x166) = DAT_101de5a0[slot_index_b].field8;
-	*(char*) ((int) entity_rec_b + 0x166) = DAT_101de5a0[slot_index_a].field8;
-	saved_entity_id = DAT_101de5a0[slot_index_a].entityId;
-	DAT_101de5a0[slot_index_a].entityId = DAT_101de5a0[slot_index_b].entityId;
-	DAT_101de5a0[slot_index_b].entityId = saved_entity_id;
-	*(int*) ((int) requester_rec + 0x194) = *(int*) ((int) requester_rec + 0x194) - *(int*) ((int) param_1 + 6);
-	return 1;
 }
 
 /* Clears all entity links for an office position. Removes
