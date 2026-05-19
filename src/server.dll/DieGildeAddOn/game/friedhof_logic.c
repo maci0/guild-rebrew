@@ -1088,9 +1088,225 @@ unsigned int AssignProductionSlot(int param_1)
 // FUNCTION: SERVER 0x100111b0
 // HireProductionWorker
 
-/* Auto-generated Ghidra decompilation */
+__declspec(naked) unsigned int HireProductionWorker(int param_1)
+{
+	(void) param_1;
+	__asm {
+		push ecx
+		push esi
+		mov esi, dword ptr [esp + 0xc]
+		push edi
+		lea ecx, [esp + 8]
+		mov eax, dword ptr [esi + 8]
+		push eax
+		push 0
+		push 0
+		push ecx
+		call gm_ResolveEntityById
+		mov edx, dword ptr [esp + 0x18]
+		add esp, 0x10
+		test edx, edx
+		je near L_neg1
+		mov ax, word ptr [edx + 0x27]
+		cmp ax, 0xffff
+		je near L_neg1
+		and eax, 0xffff
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea eax, [eax + eax*8]
+		lea ecx, [eax*4 + 0x100358a0]
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		cmp ecx, eax
+		je near L_neg1
+		xor ecx, ecx
+		_emit 0x8b
+		_emit 0x3d
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		mov cl, byte ptr [edx]
+		add edi, ecx
+		lea eax, [ecx + ecx*2]
+		shl eax, 4
+		add eax, ecx
+		lea eax, [eax + eax*2]
+		cmp byte ptr [edi + eax*4], 0x1d
+		je L_chk_field65
+		pop edi
+		mov eax, 0xfffffffe
+		pop esi
+		pop ecx
+		ret
+	L_chk_field65:
+		mov edx, dword ptr [edx + 0x65]
+		test edx, edx
+		jne L_call_check
+		pop edi
+		mov eax, 0xfffffffd
+		pop esi
+		pop ecx
+		ret
+	L_call_check:
+		mov ecx, dword ptr [esi + 0xc]
+		push ecx
+		push edx
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		jne L_resolve2
+		pop edi
+		mov eax, 0xfffffffc
+		pop esi
+		pop ecx
+		ret
+	L_resolve2:
+		mov edx, dword ptr [esi + 4]
+		lea eax, [esp + 0x10]
+		push edx
+		push eax
+		push 0
+		push 0
+		call gm_ResolveEntityById
+		mov ecx, dword ptr [esp + 0x20]
+		add esp, 0x10
+		test ecx, ecx
+		jne L_check_idx
+		pop edi
+		mov eax, 0xfffffffa
+		pop esi
+		pop ecx
+		ret
+	L_check_idx:
+		mov eax, dword ptr [esi + 0xc]
+		test eax, eax
+		jl near L_negb
+		cmp eax, 3
+		jg near L_negb
+		mov edx, dword ptr [esp + 8]
+		push eax
+		push 0x10010700
+		push 0
+		push edx
+		push ecx
+		call gv_FindSlotEntryFiltered
+		add esp, 0x14
+		test eax, eax
+		jne L_have_slot
+		pop edi
+		mov eax, 0xfffffff9
+		pop esi
+		pop ecx
+		ret
+	L_have_slot:
+		mov ecx, dword ptr [esp + 0x10]
+		mov edx, dword ptr [ecx + 4]
+		mov dword ptr [eax + 4], edx
+		mov ecx, dword ptr [esp + 0x10]
+		mov dx, word ptr [ecx + 0x50]
+		mov word ptr [eax + 8], dx
+		mov cx, word ptr [esi + 0x11]
+		_emit 0x66
+		_emit 0x03
+		_emit 0x0d
+		_emit 0x80
+		_emit 0x58
+		_emit 0x03
+		_emit 0x10
+		mov byte ptr [eax + 0xc], 0xff
+		mov word ptr [eax + 0xa], cx
+		mov edx, dword ptr [esi + 0xc]
+		xor ecx, ecx
+		mov edi, dword ptr [edx*4 + 0x1002574c]
+		test edi, edi
+		jle L_skip_reset
+		xor edx, edx
+	L_reset_loop:
+		mov edi, dword ptr [eax + 0x10]
+		inc ecx
+		mov dword ptr [edi + edx], 0xffffffff
+		mov edi, dword ptr [esi + 0xc]
+		add edx, 0x44
+		cmp ecx, dword ptr [edi*4 + 0x1002574c]
+		jl L_reset_loop
+	L_skip_reset:
+		mov eax, dword ptr [esi + 0x13]
+		test eax, eax
+		jle L_finish
+		xor ecx, ecx
+		push eax
+		_emit 0x8a
+		_emit 0x0d
+		_emit 0x39
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		mov edx, dword ptr [esp + 0x14]
+		mov eax, ecx
+		shl eax, 6
+		sub eax, ecx
+		xor ecx, ecx
+		lea eax, [eax + eax*2]
+		mov cx, word ptr [eax*4 + 0x100a8c94]
+		mov eax, dword ptr [edx + 4]
+		push ecx
+		push eax
+		call gm_SubObjektNoKill
+		fild dword ptr [esi + 0x13]
+		mov ecx, dword ptr [esi + 0xc]
+		fmul dword ptr [ecx*4 + 0x1002572c]
+		call __ftol
+		xor ecx, ecx
+		push eax
+		_emit 0x8a
+		_emit 0x0d
+		_emit 0x39
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		mov eax, ecx
+		shl eax, 6
+		sub eax, ecx
+		mov ecx, dword ptr [esp + 0x18]
+		lea edx, [eax + eax*2]
+		xor eax, eax
+		mov ax, word ptr [edx*4 + 0x100a8c94]
+		push eax
+		xor eax, eax
+		mov ax, word ptr [ecx + 0x27]
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea edx, [eax + eax*8]
+		mov eax, dword ptr [edx*4 + 0x100358a4]
+		push eax
+		call gm_AddOrAccumulateObject
+		add esp, 0x18
+	L_finish:
+		pop edi
+		xor eax, eax
+		pop esi
+		pop ecx
+		ret
+	L_negb:
+		pop edi
+		mov eax, 0xfffffffb
+		pop esi
+		pop ecx
+		ret
+	L_neg1:
+		pop edi
+		or eax, 0xffffffff
+		pop esi
+		pop ecx
+		ret
+	}
+}
 
-unsigned int HireProductionWorker(int param_1)
+unsigned int HireProductionWorker_unused(int param_1)
 {
 	int cmd_ptr_saved;
 	int slot_or_active_check;

@@ -693,9 +693,7 @@ blocker = "instruction folding (lea vs mov), loop rotation / branch layout, zero
 
 ["SERVER.0x100111b0"]
 size = 501
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
-blocker_delta = 462
+status = "RELOC"
 
 ["SERVER.0x100113b0"]
 size = 390
