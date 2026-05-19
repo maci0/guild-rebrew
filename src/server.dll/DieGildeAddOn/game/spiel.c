@@ -2776,10 +2776,9 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 	}
 	pDest = geb + 0x65;
 	memset(pDest, 0, 0x30);
-	param_1 = 0;
 	{
 		unsigned short* comp_iter = (unsigned short*) (base + 0x23);
-		do {
+		for (param_1 = 0; param_1 < 0x40; param_1++) {
 			unsigned short comp_entry = *comp_iter;
 			if (comp_entry == 0) {
 				break;
@@ -2801,8 +2800,7 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 				}
 			}
 			comp_iter = comp_iter + 1;
-			param_1 = param_1 + 1;
-		} while (param_1 < 0x40);
+		}
 	}
 	{
 		short* product_iter = (short*) gm_StartEntityQuery(*(int*) (geb + 0x5d), 1, 4, 2);
