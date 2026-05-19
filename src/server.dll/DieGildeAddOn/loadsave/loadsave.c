@@ -1677,25 +1677,21 @@ int __cdecl ls_LoadTownData(int file)
 			return 0;
 		}
 
-		i = 0;
 		inner = ptr + 0x1c;
-		do {
+		for (i = 0; i < 10; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 8, 1, (void*) file)) {
 				return 0;
 			}
-			i++;
 			inner += 8;
-		} while (i < 10);
+		}
 
-		i = 0;
 		inner = base + 0xb4;
-		do {
+		for (i = 0; i < 10; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 8, 1, (void*) file)) {
 				return 0;
 			}
-			i++;
 			inner += 8;
-		} while (i < 10);
+		}
 
 		if (!ls_ReadVfsDataChecked(base + 0x104, 1, 1, (void*) file)) {
 			return 0;
@@ -1704,53 +1700,45 @@ int __cdecl ls_LoadTownData(int file)
 			return 0;
 		}
 
-		i = 0;
 		inner = base + 0x108;
-		do {
+		for (i = 0; i < 4; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 4, 1, (void*) file)) {
 				return 0;
 			}
-			i++;
 			inner += 4;
-		} while (i < 4);
+		}
 
-		i = 0;
 		inner = base + 0x118;
-		do {
+		for (i = 0; i < 4; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 4, 1, (void*) file)) {
 				return 0;
 			}
-			i++;
 			inner += 4;
-		} while (i < 4);
+		}
 
 		if (!ls_ReadVfsDataChecked(base + 0x128, 4, 1, (void*) file)) {
 			return 0;
 		}
 
-		i = 0;
 		inner = base + 0x12c;
-		do {
+		for (i = 0; i < 0xb; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 1, 1, (void*) file)) {
 				return 0;
 			}
-			i++;
 			inner++;
-		} while (i < 0xb);
+		}
 
 		if (!ls_ReadVfsDataChecked(base + 0x137, 1, 1, (void*) file)) {
 			return 0;
 		}
 
-		i = 0;
 		inner = base + 0x138;
-		do {
+		for (i = 0; i < 7; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 1, 1, (void*) file)) {
 				return 0;
 			}
-			i++;
 			inner++;
-		} while (i < 7);
+		}
 
 		if (!ls_ReadVfsDataChecked(base + 0x13f, 1, 1, (void*) file)) {
 			return 0;
@@ -1765,15 +1753,13 @@ int __cdecl ls_LoadTownData(int file)
 			return 0;
 		}
 
-		i = 0;
 		inner = base + 0x144;
-		do {
+		for (i = 0; i < 8; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 0x12, 1, (void*) file)) {
 				return 0;
 			}
-			i++;
 			inner += 0x12;
-		} while (i < 8);
+		}
 
 		if (!ls_ReadVfsDataChecked(base + 0x1d4, 4, 1, (void*) file)) {
 			return 0;
