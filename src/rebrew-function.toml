@@ -693,9 +693,7 @@ status = "RELOC"
 
 ["SERVER.0x10010710"]
 size = 320
-status = "NEAR_MATCHING"
-blocker = "comparison direction swap, jump condition swap"
-blocker_delta = 109
+status = "RELOC"
 
 ["SERVER.0x10010850"]
 size = 370

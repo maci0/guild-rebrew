@@ -230,85 +230,152 @@ __declspec(naked) int __cdecl gv_GetSlotEntry(int param_1, int param_2, unsigned
 // FUNCTION: SERVER 0x10010710
 // gv_FindSlotEntryFiltered
 
-char* __cdecl gv_FindSlotEntryFiltered(char* ctx, unsigned char* obj, char* start, int(__cdecl* callback)(char*, char*), int category)
+__declspec(naked) char* __cdecl gv_FindSlotEntryFiltered(char* ctx, unsigned char* obj, char* start, int(__cdecl* callback)(char*, char*), int category)
 {
-	unsigned int type_idx;
-	char* sub_obj;
-	char* entry;
-	int count;
-	char* base;
-	char* end;
-
-	type_idx = (unsigned int) *obj;
-	entry = DAT_100a8c30 + type_idx * 0x24d;
-	sub_obj = *(char**) (obj + 0x65);
-
-	if (category != 0xFF) {
-		if (!gv_CheckSlotActive(sub_obj, category)) {
-			return 0;
-		}
+	(void) ctx;
+	(void) obj;
+	(void) start;
+	(void) callback;
+	(void) category;
+	__asm {
+		push ebx
+		push ebp
+		mov ebp, dword ptr [esp + 0x10]
+		xor ecx, ecx
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		mov ebx, dword ptr [esp + 0x1c]
+		mov cl, byte ptr [ebp]
+		push esi
+		add edx, ecx
+		push edi
+		lea eax, [ecx + ecx*2]
+		mov edi, dword ptr [ebp + 0x65]
+		shl eax, 4
+		add eax, ecx
+		cmp ebx, 0xff
+		lea eax, [eax + eax*2]
+		lea esi, [edx + eax*4]
+		je L_skip_active
+		push ebx
+		push edi
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		je near L_ret0
+	L_skip_active:
+		test ebx, ebx
+		jne L_cat1
+		xor eax, eax
+		mov edx, dword ptr [edi + 8]
+		mov al, byte ptr [esi + 0x247]
+		mov eax, dword ptr [eax*4 + 0x1002577c]
+		lea ecx, [eax + eax*4]
+		lea ebp, [edx + ecx*4]
+		jmp L_have_end
+	L_cat1:
+		cmp ebx, 1
+		jne L_cat2
+		xor eax, eax
+		mov edx, dword ptr [edi + 0xc]
+		mov al, byte ptr [esi + 0x247]
+		mov eax, dword ptr [eax*4 + 0x1002578c]
+		lea ecx, [eax + eax*4]
+		lea ebp, [edx + ecx*4]
+		jmp L_have_end
+	L_cat2:
+		cmp ebx, 2
+		jne L_cat3
+		xor eax, eax
+		mov edx, dword ptr [edi + 0x10]
+		mov al, byte ptr [esi + 0x247]
+		mov eax, dword ptr [eax*4 + 0x1002579c]
+		lea ecx, [eax + eax*4]
+		lea ebp, [edx + ecx*4]
+		jmp L_have_end
+	L_cat3:
+		cmp ebx, 3
+		jne L_catff
+		xor eax, eax
+		mov edx, dword ptr [edi + 0x14]
+		mov al, byte ptr [esi + 0x247]
+		mov eax, dword ptr [eax*4 + 0x100257ac]
+		lea ecx, [eax + eax*4]
+		lea ebp, [edx + ecx*4]
+		jmp L_have_end
+	L_catff:
+		cmp ebx, 0xff
+		jne L_ret0
+		push ebp
+		call cm_GetBuildingStatCount
+		mov ecx, dword ptr [edi + 0x1c]
+		lea eax, [eax + eax*4]
+		add esp, 4
+		lea ebp, [ecx + eax*4]
+	L_have_end:
+		mov esi, dword ptr [esp + 0x1c]
+		test esi, esi
+		jne L_have_start
+		test ebx, ebx
+		jne L_bs_chk1
+		mov esi, dword ptr [edi + 8]
+		jmp L_chk_end
+	L_bs_chk1:
+		cmp ebx, 1
+		jne L_bs_chk2
+		mov esi, dword ptr [edi + 0xc]
+		jmp L_chk_end
+	L_bs_chk2:
+		cmp ebx, 2
+		jne L_bs_chk3
+		mov esi, dword ptr [edi + 0x10]
+		jmp L_chk_end
+	L_bs_chk3:
+		cmp ebx, 3
+		jne L_bs_else
+		mov esi, dword ptr [edi + 0x14]
+		jmp L_chk_end
+	L_bs_else:
+		mov esi, dword ptr [edi + 0x1c]
+		jmp L_chk_end
+	L_have_start:
+		add esi, 0x14
+	L_chk_end:
+		cmp esi, ebp
+		jae L_ret0
+		mov edi, dword ptr [esp + 0x20]
+		mov ebx, dword ptr [esp + 0x14]
+	L_cb_loop:
+		test edi, edi
+		je L_have_match
+		push esi
+		push ebx
+		call edi
+		add esp, 8
+		test eax, eax
+		jne L_have_match
+		add esi, 0x14
+		cmp esi, ebp
+		jb L_cb_loop
+	L_ret0:
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
+	L_have_match:
+		mov eax, esi
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
 	}
-
-	if (category == 0) {
-		count = g_slot_count_cat0[(unsigned char) entry[0x247]];
-		end = *(char**) (sub_obj + 8) + count * 0x14;
-	}
-	else if (category == 1) {
-		count = g_slot_count_cat1[(unsigned char) entry[0x247]];
-		end = *(char**) (sub_obj + 0xc) + count * 0x14;
-	}
-	else if (category == 2) {
-		count = g_slot_count_cat2[(unsigned char) entry[0x247]];
-		end = *(char**) (sub_obj + 0x10) + count * 0x14;
-	}
-	else if (category == 3) {
-		count = g_slot_count_cat3[(unsigned char) entry[0x247]];
-		end = *(char**) (sub_obj + 0x14) + count * 0x14;
-	}
-	else if (category == 0xFF) {
-		count = cm_GetBuildingStatCount(obj);
-		end = *(char**) (sub_obj + 0x1c) + count * 0x14;
-	}
-	else {
-		return 0;
-	}
-
-	if (start == 0) {
-		if (category == 0) {
-			base = *(char**) (sub_obj + 8);
-		}
-		else if (category == 1) {
-			base = *(char**) (sub_obj + 0xc);
-		}
-		else if (category == 2) {
-			base = *(char**) (sub_obj + 0x10);
-		}
-		else if (category == 3) {
-			base = *(char**) (sub_obj + 0x14);
-		}
-		else {
-			base = *(char**) (sub_obj + 0x1c);
-		}
-	}
-	else {
-		base = start + 0x14;
-	}
-
-	if ((unsigned int) base >= (unsigned int) end) {
-		return 0;
-	}
-
-	do {
-		if (callback == 0) {
-			return base;
-		}
-		if (callback(ctx, base)) {
-			return base;
-		}
-		base += 0x14;
-	} while ((unsigned int) base < (unsigned int) end);
-
-	return 0;
 }
 
 /* Spawns graveyard entities (workers, resources) for a building.
