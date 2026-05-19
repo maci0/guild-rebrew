@@ -836,9 +836,7 @@ ghidra = "SendLobbyPlayerList"
 
 ["SERVER.0x100146c0"]
 size = 236
-status = "NEAR_MATCHING"
-blocker = "jump condition swap"
-blocker_delta = 77
+status = "RELOC"
 
 ["SERVER.0x100147b0"]
 size = 670

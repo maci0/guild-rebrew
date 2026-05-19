@@ -114,60 +114,110 @@ __declspec(naked) int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned ch
 // FUNCTION: SERVER 0x100146c0
 // lb_SendLobbyConfig
 
-int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
 {
-        PlayerSlot* slot_ptr;
-        unsigned int value;
-        unsigned int slot_flags;
-
-        if (*param_1 & 0x6000) {
-                LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command", 0x264, "invalid client state", 1);
-                *param_2 = 2;
-                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
-                        return -1;
-                }
-                return 0;
+        (void) param_1;
+        (void) param_2;
+        __asm {
+                push esi
+                mov esi, dword ptr [esp + 8]
+                push edi
+                mov eax, dword ptr [esi]
+                test ah, 0x60
+                je L_pkt_ok
+                push 1
+                push 0x1002d740
+                push 0x264
+                push 0x1002d70c
+                call LogMessageInternal
+                mov eax, dword ptr [esp + 0x20]
+                push eax
+                mov byte ptr [eax], 2
+                jmp L_q_and_long_ret
+        L_pkt_ok:
+                mov edi, dword ptr [esp + 0x10]
+                mov ecx, dword ptr [esi + 4]
+                cmp ecx, dword ptr [edi + 0x14]
+                je L_match
+                push edi
+                push esi
+                mov byte ptr [edi], 2
+                call cm_QueuePlayerCommand
+                add esp, 8
+                inc eax
+                neg eax
+                sbb eax, eax
+                pop edi
+                neg eax
+                dec eax
+                pop esi
+                ret
+        L_match:
+                mov ecx, dword ptr [edi + 0x18]
+                cmp ecx, 1
+                jbe L_value_ok
+                push 1
+                push 0x1002d774
+                push 0x279
+                push 0x1002d70c
+                call LogMessageInternal
+                mov byte ptr [edi], 2
+                push edi
+        L_q_and_long_ret:
+                push esi
+                call cm_QueuePlayerCommand
+                add esp, 0x18
+                inc eax
+                neg eax
+                sbb eax, eax
+                pop edi
+                neg eax
+                dec eax
+                pop esi
+                ret
+        L_value_ok:
+                test ecx, ecx
+                mov dword ptr [esi + 0x264210], ecx
+                je L_clear_flag
+                or ah, 8
+                jmp L_after_flag
+        L_clear_flag:
+                and ah, 0xf7
+        L_after_flag:
+                mov dword ptr [esi], eax
+                mov esi, 0x101deb00
+        L_loop:
+                mov eax, dword ptr [esi]
+                test al, 1
+                je L_next
+                test ah, 2
+                je L_next
+                push edi
+                push esi
+                call cm_QueuePlayerCommand
+                add esp, 8
+                cmp eax, -1
+                je L_ret_neg1
+        L_next:
+                add esi, 0x264264
+                cmp esi, 0x114ffe20
+                jl L_loop
+                push 1
+                push 0x1002d758
+                push 0x28c
+                push 0x1002d70c
+                call LogMessageInternal
+                add esp, 0x10
+                xor eax, eax
+                pop edi
+                pop esi
+                ret
+        L_ret_neg1:
+                pop edi
+                or eax, 0xffffffff
+                pop esi
+                ret
         }
-
-        if (param_1[1] != *(unsigned int*) (param_2 + 0x14)) {
-                *param_2 = 2;
-                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
-                        return -1;
-                }
-                return 0;
-        }
-
-        value = *(unsigned int*) (param_2 + 0x18);
-        if (value > 1) {
-                LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command", 0x279, "value too large", 1);
-                *param_2 = 2;
-                if (cm_QueuePlayerCommand(param_1, param_2) == -1) {
-                        return -1;
-                }
-                return 0;
-        }
-
-        *(unsigned int*) ((char*) param_1 + 0x264210) = value;
-        if (value != 0) {
-                *param_1 |= 0x800;
-        }
-        else {
-                *param_1 &= ~0x800;
-        }
-
-        slot_ptr = g_player_slots_base;
-        do {
-                slot_flags = slot_ptr->flags;
-                if ((slot_flags & 1) && (slot_flags & 0x200)) {
-                        if (cm_QueuePlayerCommand((unsigned int*)slot_ptr, param_2) == -1) {
-                                return -1;
-                        }
-                }
-                slot_ptr++;
-        } while (slot_ptr < (PlayerSlot*)g_player_slots);
-
-        LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command", 0x28c, "broadcast complete", 1);
-        return 0;
 }
 
 /* Lobby handler: processes lobby commands like player join,
