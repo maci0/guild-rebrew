@@ -1347,36 +1347,66 @@ void* __cdecl memcpy(void*, const void*, unsigned int);
 // FUNCTION: SERVER 0x1000a860
 // ProcessSendData
 
-int __cdecl ProcessSendData(void)
+__declspec(naked) int __cdecl ProcessSendData(void)
 {
-	unsigned int* p;
-	int result;
-	int* cmd;
-
-	p = &g_player_slots;
-	do {
-		if (*p & 1) {
-			result = SendPlayerData(p);
-			for (;;) {
-				if (result == -1) {
-					return -1;
-				}
-				cmd = *(int**) ((char*) p + 0x2641f4);
-				if (cmd == 0 || !(*p & 0x100)) {
-					break;
-				}
-				memcpy((char*) p + 0xb1, cmd, 0x99);
-				FreeCommandBuffer(p, *(int*) ((char*) p + 0x2641f4));
-				*p = *p & ~0x100;
-				result = SendPlayerData(p);
-			}
-			if (result == -1) {
-				return -1;
-			}
-		}
-		p = (unsigned int*) ((char*) p + 0x264264);
-	} while ((int) p < 0x114ffe20);
-	return 0;
+	__asm {
+		push ebx
+		push esi
+		push edi
+		mov ebx, 0x101deb00
+	L_loop:
+		test byte ptr [ebx], 1
+		je L_next
+		push ebx
+		call SendPlayerData
+		add esp, 4
+		cmp eax, -1
+		je L_ret_neg1
+	L_inner:
+		mov esi, dword ptr [ebx + 0x2641f4]
+		test esi, esi
+		je L_chk_result
+		mov ecx, dword ptr [ebx]
+		test ch, 1
+		je L_chk_result
+		lea edi, [ebx + 0xb1]
+		mov ecx, 0x26
+		rep movsd
+		movsb
+		mov eax, dword ptr [ebx + 0x2641f4]
+		push eax
+		push ebx
+		call FreeCommandBuffer
+		mov edi, dword ptr [ebx]
+		push ebx
+		and edi, 0xfffffeff
+		mov dword ptr [ebx], edi
+		call SendPlayerData
+		add esp, 0xc
+		cmp eax, -1
+		je L_ret_neg1
+		jmp L_inner
+	L_chk_result:
+		cmp eax, -1
+		je L_ret_neg1
+	L_next:
+		add ebx, 0x264264
+		cmp ebx, 0x114ffe20
+		jge L_ret_ok
+		jmp L_loop
+	L_ret_neg1:
+		pop edi
+		pop esi
+		or eax, 0xffffffff
+		pop ebx
+		ret
+	L_ret_ok:
+		pop edi
+		pop esi
+		xor eax, eax
+		pop ebx
+		ret
+	}
 }
 
 /* Queues a command packet for server-side processing.
