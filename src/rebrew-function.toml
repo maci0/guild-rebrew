@@ -1035,7 +1035,7 @@ ghidra = "InitBuildingDefaultItems"
 
 ["SERVER.0x10017400"]
 size = 202
-status = "STUB"
+status = "RELOC"
 
 ["SERVER.0x100174d0"]
 size = 1088

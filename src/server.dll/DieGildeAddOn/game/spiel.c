@@ -2354,36 +2354,91 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* param_1)
 // FUNCTION: SERVER 0x10017400
 // gm_SetBuildingWorkerLimits
 
-void __cdecl gm_SetBuildingWorkerLimits(unsigned char* param_1)
+__declspec(naked) void __cdecl gm_SetBuildingWorkerLimits(unsigned char* param_1)
 {
-	void* worker_obj;
-	unsigned char limit_val;
-	int type_offset;
-
-	type_offset = DAT_100a8c30 + (unsigned int) *param_1 * 0x24d;
-	worker_obj = gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 2, 0, 0x2a, 6);
-	if (worker_obj != (void*) 0) {
-		limit_val = *(unsigned char*) (type_offset + 0x23d);
-		if (((limit_val == 0) && (*(char*) (type_offset + 0x23e) == '\0')) &&
-			(*(char*) (type_offset + 0x23f) != '\0')) {
-			*(char*) ((int) worker_obj + 0x1c) = *(char*) (type_offset + 0x23f);
-		}
-		else {
-			if (limit_val < 2) {
-				limit_val = 2;
-			}
-			*(char*) ((int) worker_obj + 0x1c) = limit_val;
-			limit_val = *(unsigned char*) (type_offset + 0x23e);
-			if (limit_val < 2) {
-				limit_val = 2;
-			}
-			*(char*) ((int) worker_obj + 0x1d) = limit_val;
-		}
-	}
-	worker_obj = gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 2, 0, 0x116, 6);
-	if (((worker_obj != (void*) 0) && (*(char*) (type_offset + 0x23d) == '\0')) &&
-		((*(char*) (type_offset + 0x23e) == '\0' && (*(char*) (type_offset + 0x23f) != '\0')))) {
-		*(char*) ((int) worker_obj + 0x1c) = *(char*) (type_offset + 0x23f);
+	(void) param_1;
+	__asm {
+		push esi
+		push edi
+		mov edi, dword ptr [esp + 0xc]
+		xor ecx, ecx
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		push 6
+		mov cl, byte ptr [edi]
+		push 0x2a
+		add edx, ecx
+		push 0
+		lea eax, [ecx + ecx*2]
+		push 2
+		shl eax, 4
+		add eax, ecx
+		lea eax, [eax + eax*2]
+		lea esi, [edx + eax*4]
+		mov eax, dword ptr [edi + 0x5d]
+		push eax
+		call gm_StartEntityQuery
+		add esp, 0x14
+		test eax, eax
+		je L_second
+		mov cl, byte ptr [esi + 0x23d]
+		test cl, cl
+		jne L_else
+		mov dl, byte ptr [esi + 0x23e]
+		test dl, dl
+		jne L_else
+		mov dl, byte ptr [esi + 0x23f]
+		test dl, dl
+		je L_else
+		mov byte ptr [eax + 0x1c], dl
+		jmp L_second
+	L_else:
+		cmp cl, 2
+		jae L_keep_cl
+		mov ecx, 2
+		jmp L_store_1c
+	L_keep_cl:
+		and ecx, 0xff
+	L_store_1c:
+		mov byte ptr [eax + 0x1c], cl
+		mov cl, byte ptr [esi + 0x23e]
+		cmp cl, 2
+		jae L_keep_cl2
+		mov ecx, 2
+		jmp L_store_1d
+	L_keep_cl2:
+		and ecx, 0xff
+	L_store_1d:
+		mov byte ptr [eax + 0x1d], cl
+	L_second:
+		mov ecx, dword ptr [edi + 0x5d]
+		push 6
+		push 0x116
+		push 0
+		push 2
+		push ecx
+		call gm_StartEntityQuery
+		add esp, 0x14
+		test eax, eax
+		je L_done
+		mov cl, byte ptr [esi + 0x23d]
+		test cl, cl
+		jne L_done
+		mov cl, byte ptr [esi + 0x23e]
+		test cl, cl
+		jne L_done
+		mov cl, byte ptr [esi + 0x23f]
+		test cl, cl
+		je L_done
+		mov byte ptr [eax + 0x1c], cl
+	L_done:
+		pop edi
+		pop esi
+		ret
 	}
 }
 
