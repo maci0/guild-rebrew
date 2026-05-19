@@ -915,23 +915,43 @@ void __cdecl gm_RefreshMarketAvailability(int param_1)
 // DATA: SERVER 0x1009b770
 extern char g_slot_array[];
 
-char* __cdecl gm_FindSlotById(int param_1, int param_2)
+__declspec(naked) char* __cdecl gm_FindSlotById(int param_1, int param_2)
 {
-	int base_offset;
-	char* ptr;
-	int i;
-
-	base_offset = param_1 * 10896;
-	ptr = g_slot_array + base_offset;
-	i = 0;
-	do {
-		if (*(unsigned short*) ptr == param_2) {
-			return g_slot_array + base_offset + (i << 7);
-		}
-		i = i + 1;
-		ptr = ptr + 0x80;
-	} while (i < 0x55);
-	return (char*) 0;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		mov edx, dword ptr [esp + 4]
+		xor ecx, ecx
+		mov eax, edx
+		push esi
+		shl eax, 4
+		add eax, edx
+		mov esi, dword ptr [esp + 0xc]
+		push edi
+		lea eax, [eax + eax*4]
+		lea edx, [edx + eax*8]
+		shl edx, 4
+		lea eax, [edx + 0x1009b770]
+	L_loop:
+		xor edi, edi
+		mov di, word ptr [eax]
+		cmp edi, esi
+		je L_found
+		inc ecx
+		add eax, 0x80
+		cmp ecx, 0x55
+		jl L_loop
+		pop edi
+		xor eax, eax
+		pop esi
+		ret
+	L_found:
+		shl ecx, 7
+		pop edi
+		pop esi
+		lea eax, [ecx + edx + 0x1009b770]
+		ret
+	}
 }
 
 /* Returns the next matching entity from an active query.

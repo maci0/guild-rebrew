@@ -50,7 +50,7 @@ analysis = "Initialization routine for the server's telemetry. Registers the Cra
 
 ["SERVER.0x10003520"]
 size = 160
-status = "RELOC"
+status = "STUB"
 note = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()"
 analysis = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()"
 
@@ -60,7 +60,7 @@ status = "RELOC"
 
 ["SERVER.0x10003640"]
 size = 132
-status = "STUB"
+status = "RELOC"
 
 ["SERVER.0x10003820"]
 size = 114
@@ -1014,8 +1014,7 @@ analysis = "Refreshes market availability table (85 entries of 0x80 bytes each).
 
 ["SERVER.0x10016240"]
 size = 72
-status = "STUB"
-blocker_delta = 64
+status = "EXACT"
 
 ["SERVER.0x10016290"]
 size = 464
@@ -1070,7 +1069,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "STUB"
+status = "NEAR_MATCHING"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
