@@ -109,7 +109,6 @@ extern char* g_table_a9;
 extern char* dword_100a8c30;
 extern unsigned short* dword_100a8c34;
 extern char* dword_101de450;
-char* __cdecl gm_GetMsgField(int param);
 extern int g_entity_type_table;
 extern char g_current_season;
 extern char g_10031004[];
@@ -165,7 +164,8 @@ int __cdecl gm_SumBuildingProductionValues(char*, int);
 int __cdecl gm_EntityQuerySum(int);
 int __cdecl compute_size(char*); /* 0x10019d00 */
 ;
-int __cdecl gm_FindEntityByOwner(char*, char*); /* 0x10019cd0 */
+char* __cdecl gm_FindEntityByOwner(int); /* 0x10019c60 */
+int __cdecl gm_GetMsgField(char*, char*); /* 0x10019cd0 */
 ;
 int __cdecl ahm_LookupEntityInTable(int); /* 0x1000c670 */
 ;
@@ -2541,7 +2541,7 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param
 		}
 		owner_index = param_3;
 		if (((BYTE_100358A2(owner_index) == '\x06') || (BYTE_100358A2(owner_index) == '\a')) &&
-			(loop_count = (int) gm_GetMsgField((int) param_1), loop_count != 0)) {
+			(loop_count = (int) gm_FindEntityByOwner((int) param_1), loop_count != 0)) {
 			*(unsigned char*) (loop_count + 0x165) = 0;
 			*(unsigned int*) (loop_count + 0x1b4) = *(unsigned int*) (loop_count + 0x1b4) & 0xfffffffe;
 			building_class = *type_entry;
@@ -3925,12 +3925,6 @@ int __cdecl gm_WalkEntityChain(int raw_idx)
 	return total;
 }
 
-/* Finds an entity by its owner. Searches for an entity
- * whose owner field matches the given ID. */
-
-// FUNCTION: SERVER 0x10019c60
-// gm_FindEntityByOwner
-
 // DATA: SERVER 0x100358a2
 extern unsigned char g_entity_state_base[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
@@ -3938,9 +3932,12 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
-// DATA: SERVER 0x100358a0
+/* Finds an entity by its owner. Searches for an entity
+ * whose owner field matches the given ID. */
 
-char* __cdecl gm_GetMsgField(int param_1)
+// FUNCTION: SERVER 0x10019c60
+// gm_FindEntityByOwner
+char* __cdecl gm_FindEntityByOwner(int param_1)
 {
 	unsigned char* p;
 	int i;
@@ -3969,7 +3966,7 @@ char* __cdecl gm_GetMsgField(int param_1)
 
 // FUNCTION: SERVER 0x10019CD0
 // gm_GetMsgField
-int __cdecl gm_FindEntityByOwner(char* msg, char* pkt)
+int __cdecl gm_GetMsgField(char* msg, char* pkt)
 {
 	unsigned short type;
 
@@ -4032,7 +4029,7 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int entity_index, int requested)
 
 	query = gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, entity_index);
 	if (query) {
-		used = gm_FindEntityByOwner(obj, query);
+		used = gm_GetMsgField(obj, (char*) query);
 		remaining = max_size - used;
 		if (remaining > requested) {
 			goto return_requested;

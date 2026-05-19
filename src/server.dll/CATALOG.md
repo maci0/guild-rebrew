@@ -1,6 +1,6 @@
 # Reversed Functions Catalog
 
-Total: 547/530 functions cataloged (306 exact, 101 reloc-normalized, 122 stubs)  
+Total: 547/530 functions cataloged (306 exact, 102 reloc-normalized, 125 stubs)  
 Coverage: 98.0% of .text section (138602/141382 bytes)
 
 
@@ -31,17 +31,17 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x10003170 | 240B | check_memory_protection | _check_memory_protection |  | FUNCTION/RELOC | Units/Error/Error.c |
 | 0x10003260 | 183B | AnalyzeInstruction | _AnalyzeInstruction |  | FUNCTION/STUB | Units/Error/Error.c |
 | 0x10003320 | 404B | InitializeLogAndErrorHandler | _InitializeLogAndErrorHandler |  | FUNCTION/STUB | Units/Error/Error.c |
-| 0x100034C0 | 83B | ShutdownLogAndErrorHandler | _ShutdownLogAndErrorHandler |  | FUNCTION/NEAR_MATCHING | Units/Error/Error.c |
+| 0x100034C0 | 83B | ShutdownLogAndErrorHandler | _ShutdownLogAndErrorHandler |  | FUNCTION/STUB | Units/Error/Error.c |
 | 0x10003520 | 160B | ReportFatalError | _ReportFatalError |  | FUNCTION/RELOC | Units/Error/Error.c |
 | 0x100035C0 | 119B | ReportMessage | _ReportMessage |  | FUNCTION/RELOC | Units/Error/Error.c |
-| 0x10003640 | 132B | LogMessageInternal | _LogMessageInternal |  | FUNCTION/NEAR_MATCHING | Units/Error/Error.c |
+| 0x10003640 | 132B | LogMessageInternal | _LogMessageInternal |  | FUNCTION/STUB | Units/Error/Error.c |
 | 0x100036D0 | 332B | check_header | check_header |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10003820 | 114B | vfs_GetByte | _vfs_GetByte |  | FUNCTION/NEAR_MATCHING | Units/vfs/vfs.c |
 | 0x100038A0 | 177B | vfs_CloseStream | _vfs_CloseStream |  | FUNCTION/RELOC | Units/vfs/vfs.c |
 | 0x10003960 | 559B | gzread | gzread |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10003B90 | 182B | vfs_FlushStream | _vfs_FlushStream |  | FUNCTION/RELOC | Units/vfs/vfs.c |
-| 0x10003C50 | 77B | vfs_FlushAndClose | _vfs_FlushAndClose |  | FUNCTION/RELOC | Units/vfs/vfs.c |
-| 0x10003CA0 | 65B | vfs_ReadUint32BE | _vfs_ReadUint32BE |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10003C50 | 65B | vfs_ReadUint32BE | _vfs_ReadUint32BE |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10003CA0 | 77B | vfs_FlushAndClose | _vfs_FlushAndClose |  | FUNCTION/RELOC | Units/vfs/vfs.c |
 | 0x10003CF0 | 43B | vfs_WriteUint32LE | _vfs_WriteUint32LE |  | FUNCTION/RELOC | Units/vfs/vfs.c |
 | 0x10003D20 | 123B | inflate_blocks_reset | inflate_blocks_reset |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10003DA0 | 160B | inflate_blocks_new | inflate_blocks_new |  | LIBRARY/EXACT | library_zlib.h |
@@ -291,7 +291,7 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x10017F30 | 35B | gm_RemoveObjectWrapper | _gm_RemoveObjectWrapper |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10017F60 | 36B | gm_RemoveEntityLink | _gm_RemoveEntityLink |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10017F90 | 23B | gm_InitEntityIfValid | _gm_InitEntityIfValid |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017FB0 | 278B | gm_DeallocEntity | _gm_DeallocEntity |  | FUNCTION/COMPILE_ERROR | DieGildeAddOn/game/spiel.c |
+| 0x10017FB0 | 278B | gm_DeallocEntity | _gm_DeallocEntity |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
 | 0x100180D0 | 81B | gm_InitEntitySlots | _gm_InitEntitySlots |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10018130 | 32B | gm_IsInRange | _gm_IsInRange |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10018150 | 70B | gm_EntityClassCheck | _gm_EntityClassCheck |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
@@ -310,10 +310,10 @@ Coverage: 98.0% of .text section (138602/141382 bytes)
 | 0x10019A70 | 102B | gm_EntityQuerySum | _gm_EntityQuerySum |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
 | 0x10019AE0 | 82B | gm_ResolveParentEntity | _gm_ResolveParentEntity |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10019B40 | 62B | gm_GetEntityType | _gm_GetEntityType |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019B80 | 124B | gm_EntityAccumulate | _gm_EntityAccumulate |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/game/spiel.c |
-| 0x10019BE0 | 83B | gm_WalkEntityChain | _gm_WalkEntityChain |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019B80 | 83B | gm_EntityAccumulate | _gm_EntityAccumulate |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019BE0 | 124B | gm_WalkEntityChain | _gm_WalkEntityChain |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10019C60 | 48B | gm_FindEntityByOwner | _gm_FindEntityByOwner |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
-| 0x10019CD0 | 98B | gm_FindEntityByOwner | _gm_FindEntityByOwner |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
+| 0x10019CD0 | 98B | gm_GetMsgField | _gm_GetMsgField |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
 | 0x10019D30 | 407B | gm_KannObjektHergestellt | _gm_KannObjektHergestellt |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
 | 0x10019ED0 | 395B | gm_CheckInventoryCapacity | _gm_CheckInventoryCapacity |  | FUNCTION/STUB | DieGildeAddOn/game/spiel.c |
 | 0x1001A060 | 97B | gm_EntitySetField | _gm_EntitySetField |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |

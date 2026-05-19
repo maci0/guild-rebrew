@@ -1071,7 +1071,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "STUB"
+status = "NEAR_MATCHING"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
@@ -1241,12 +1241,12 @@ size = 124
 status = "RELOC"
 
 ["SERVER.0x10019c60"]
-size = 48
+size = 98
 status = "STUB"
 
 ["SERVER.0x10019cd0"]
-size = 98
-status = "STUB"
+size = 48
+status = "EXACT"
 
 ["SERVER.0x10019d30"]
 size = 407
@@ -1265,8 +1265,8 @@ status = "RELOC"
 blocker_delta = 364
 
 ["SERVER.0x1001a0d0"]
-size = 54
-status = "STUB"
+size = 32
+status = "RELOC"
 ghidra = "ahm_RandomBelow"
 
 ["SERVER.0x1001a0f0"]
