@@ -146,9 +146,7 @@ status = "RELOC"
 
 ["SERVER.0x10008e40"]
 size = 472
-status = "STUB"
-blocker = "jump condition swap, loop rotation / branch layout | instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
-blocker_delta = 257
+status = "RELOC"
 
 ["SERVER.0x10009020"]
 size = 704

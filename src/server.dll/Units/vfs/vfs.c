@@ -786,12 +786,215 @@ __declspec(naked) int __cdecl CloseVfsStream(void* stream)
  * handles buffering, refilling, and byte-by-byte reads
  * for variable-length data. */
 
+extern char s_D__Develop_Units_vfs_vfs_c_10029458[];
+extern char s_vfs__gz_compressed_file____s___i_10029474[];
+
 // FUNCTION: SERVER 0x10008e40
 // ReadVfsData
 
-/* Auto-generated Ghidra decompilation */
+__declspec(naked) unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_14h)
+{
+	(void) arg_8h;
+	(void) arg_ch;
+	(void) arg_10h;
+	(void) arg_14h;
+	__asm {
+		push ebp
+		mov ebp, esp
+		sub esp, 0x10c
+		push ebx
+		push esi
+		push edi
+		mov edi, dword ptr [ebp + 0x14]
+		test edi, edi
+		mov dword ptr [ebp - 4], 0xffffffff
+		je near L_finalize
+		mov cl, byte ptr [edi + 0x13c]
+		test cl, 1
+		je near L_finalize
+		lea eax, [edi + 0x100]
+		mov dword ptr [ebp - 0xc], eax
+		mov eax, dword ptr [eax]
+		test eax, eax
+		jne L_have_src
+		test cl, 0x20
+		je near L_finalize
+	L_have_src:
+		mov esi, dword ptr [ebp + 0xc]
+		mov dl, cl
+		imul esi, dword ptr [ebp + 0x10]
+		and dl, 0x20
+		mov dword ptr [ebp - 8], esi
+		je L_after_clamp
+		test cl, 8
+		jne L_after_clamp
+		mov ebx, dword ptr [edi + 0x104]
+		cmp ebx, esi
+		jae L_after_clamp
+		mov dword ptr [ebp - 8], ebx
+		mov esi, ebx
+	L_after_clamp:
+		test esi, esi
+		jne L_have_size
+		mov dword ptr [ebp - 4], esi
+		mov eax, esi
+		pop edi
+		pop esi
+		pop ebx
+		mov esp, ebp
+		pop ebp
+		ret
+	L_have_size:
+		mov ebx, dword ptr [ebp + 8]
+		test ebx, ebx
+		je near L_finalize
+		test dl, dl
+		je near L_not_20
+		test cl, 8
+		je L_mem_copy_path
+		mov eax, dword ptr [ebp - 0xc]
+		push 2
+		push eax
+		mov dword ptr [edi + 0x10c], ebx
+		mov dword ptr [edi + 0x110], esi
+		call inflate
+		mov eax, dword ptr [edi + 0x110]
+		add esp, 8
+		sub esi, eax
+		mov dword ptr [ebp - 4], esi
+		mov eax, esi
+		pop edi
+		pop esi
+		pop ebx
+		mov esp, ebp
+		pop ebp
+		ret
+	L_mem_copy_path:
+		mov dword ptr [ebp + 0x10], eax
+		mov edi, dword ptr [ebp + 8]
+		mov esi, dword ptr [ebp + 0x10]
+		mov ebx, dword ptr [ebp - 8]
+		lea ecx, [edi + edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle L_skip_first_movsb
+		rep movsb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep movsd
+	L_skip_first_movsb:
+		add ecx, ebx
+		rep movsb
+		mov ecx, dword ptr [ebp - 0xc]
+		mov eax, dword ptr [ebp - 8]
+		mov dword ptr [ebp - 4], eax
+		mov edi, dword ptr [ecx]
+		add edi, eax
+		mov dword ptr [ecx], edi
+		mov ecx, dword ptr [ebp + 0x14]
+		pop edi
+		mov esi, dword ptr [ecx + 0x104]
+		mov edx, dword ptr [ecx + 0x108]
+		sub esi, eax
+		add edx, eax
+		mov dword ptr [ecx + 0x104], esi
+		pop esi
+		mov dword ptr [ecx + 0x108], edx
+		pop ebx
+		mov esp, ebp
+		pop ebp
+		ret
+	L_not_20:
+		test cl, 0x10
+		je L_chk_compressed
+		push esi
+		push ebx
+		push eax
+		call ReadVfsCompressed
+		mov dword ptr [ebp - 4], eax
+		mov al, byte ptr [edi + 0x13c]
+		add esp, 0xc
+		test al, 4
+		je near L_finalize
+		cmp dword ptr [ebp - 4], 2
+		jb near L_finalize
+		and al, 0xfb
+		xor ecx, ecx
+		mov byte ptr [edi + 0x13c], al
+		mov cl, byte ptr [ebx]
+		_emit 0x3b
+		_emit 0x0d
+		_emit 0x50
+		_emit 0x94
+		_emit 0x02
+		_emit 0x10
+		jne near L_finalize
+		_emit 0xa1
+		_emit 0x54
+		_emit 0x94
+		_emit 0x02
+		_emit 0x10
+		xor edx, edx
+		mov dl, byte ptr [ebx + 1]
+		cmp edx, eax
+		jne near L_finalize
+		push edi
+		lea eax, [ebp - 0x10c]
+		push offset s_vfs__gz_compressed_file____s___i_10029474
+		push eax
+		call sprintf
+		lea ecx, [ebp - 0x10c]
+		push 1
+		push ecx
+		push 0x5b4
+		push offset s_D__Develop_Units_vfs_vfs_c_10029458
+		call LogMessageInternal
+		mov eax, dword ptr [ebp - 4]
+		add esp, 0x1c
+		pop edi
+		pop esi
+		pop ebx
+		mov esp, ebp
+		pop ebp
+		ret
+	L_chk_compressed:
+		test cl, 8
+		je L_fread_path
+		push esi
+		push ebx
+		push eax
+		call gzread
+		add esp, 0xc
+		mov dword ptr [ebp - 4], eax
+		pop edi
+		pop esi
+		pop ebx
+		mov esp, ebp
+		pop ebp
+		ret
+	L_fread_path:
+		mov edx, dword ptr [ebp + 0x10]
+		push eax
+		mov eax, dword ptr [ebp + 0xc]
+		push edx
+		push eax
+		push ebx
+		call fread
+		add esp, 0x10
+		mov dword ptr [ebp - 4], eax
+	L_finalize:
+		mov eax, dword ptr [ebp - 4]
+		pop edi
+		pop esi
+		pop ebx
+		mov esp, ebp
+		pop ebp
+		ret
+	}
+}
 
-unsigned int ReadVfsData(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_14h)
+unsigned int ReadVfsData_unused(unsigned int* arg_8h, int arg_ch, int arg_10h, int arg_14h)
 {
 	int* stream_ptr;
 	unsigned char stream_flags;

@@ -328,6 +328,8 @@ char s_amt_fio_LoadAemter____Can_t_load_1002a0c8[1] = "";
 char s_No_more_Slots_for_new_Connection_100299c8[1] = "";
 char s_D__Develop_DieGildeAddOnServer_s_100298b0[1] = "";
 char s_New_Connection_from__li__li__li__100299a0[1] = "";
+char s_D__Develop_Units_vfs_vfs_c_10029458[1] = "";
+char s_vfs__gz_compressed_file____s___i_10029474[1] = "";
 char s_cm_ExAllocCharacter___gm_AllocSp_1002d364[1] = "";
 unsigned char g_static_entity0_entity_id[4];
 char s_cm_ExEmployWorker____Illegal_gw__1002d318[1] = "";
