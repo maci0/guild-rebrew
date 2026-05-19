@@ -134,9 +134,7 @@ ghidra = "cleanup_entity"
 
 ["SERVER.0x10008a90"]
 size = 492
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
-blocker_delta = 466
+status = "RELOC"
 
 ["SERVER.0x10008c80"]
 size = 129

@@ -279,7 +279,233 @@ int __cdecl vfs_DestroyEntity(char* entity)
 // FUNCTION: SERVER 0x10008a90
 // ReadVfsCompressed
 
-int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
+__declspec(naked) int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
+{
+	(void) param_1;
+	(void) param_2;
+	(void) param_3;
+	__asm {
+		sub esp, 8
+		mov eax, dword ptr [esp + 0xc]
+		push ebx
+		push ebp
+		push esi
+		test eax, eax
+		push edi
+		mov dword ptr [esp + 0x14], 0
+		mov dword ptr [esp + 0x10], 0
+		jne L_have_param1
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xffffff9a
+		pop ebx
+		add esp, 8
+		ret
+	L_have_param1:
+		mov esi, dword ptr [eax + 0x7c]
+		test esi, esi
+		jne L_have_ctx
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xffffff9a
+		pop ebx
+		add esp, 8
+		ret
+	L_have_ctx:
+		cmp dword ptr [esi], 0
+		jne L_chk_param3
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, 0xffffff9c
+		pop ebx
+		add esp, 8
+		ret
+	L_chk_param3:
+		mov ecx, dword ptr [esp + 0x24]
+		test ecx, ecx
+		jne L_proceed
+	L_ret_bytes_read:
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		add esp, 8
+		ret
+	L_proceed:
+		mov eax, dword ptr [esp + 0x20]
+		mov dword ptr [esi + 0x14], ecx
+		mov dword ptr [esi + 0x10], eax
+		mov eax, dword ptr [esi + 0x5c]
+		cmp ecx, eax
+		jbe L_skip_clamp
+		mov dword ptr [esi + 0x14], eax
+	L_skip_clamp:
+		mov eax, dword ptr [esi + 0x14]
+		test eax, eax
+		jbe near L_finalize_ret
+	L_loop:
+		mov eax, dword ptr [esi + 8]
+		test eax, eax
+		jne L_after_read
+		mov eax, dword ptr [esi + 0x58]
+		test eax, eax
+		jbe L_after_read
+		mov edi, 0x4000
+		cmp eax, edi
+		jae L_chunk_ok
+		mov edi, eax
+		test edi, edi
+		je near L_ret_bytes_read
+	L_chunk_ok:
+		mov ecx, dword ptr [esi + 0x68]
+		mov eax, dword ptr [esi + 0x3c]
+		mov edx, dword ptr [esi + 0x60]
+		add ecx, eax
+		push 0
+		push ecx
+		push edx
+		call fseek
+		add esp, 0xc
+		test eax, eax
+		jne near L_neg1
+		mov eax, dword ptr [esi + 0x60]
+		mov ecx, dword ptr [esi]
+		push eax
+		push 1
+		push edi
+		push ecx
+		call fread
+		add esp, 0x10
+		cmp eax, 1
+		jne near L_neg1
+		mov ecx, dword ptr [esi + 0x3c]
+		mov eax, dword ptr [esi + 0x58]
+		mov edx, dword ptr [esi]
+		add ecx, edi
+		sub eax, edi
+		mov dword ptr [esi + 0x3c], ecx
+		mov dword ptr [esi + 0x58], eax
+		mov dword ptr [esi + 4], edx
+		mov dword ptr [esi + 8], edi
+	L_after_read:
+		mov eax, dword ptr [esi + 0x64]
+		test eax, eax
+		jne L_inflate_path
+		mov eax, dword ptr [esi + 0x14]
+		mov edi, dword ptr [esi + 8]
+		cmp eax, edi
+		jae L_use_edi
+		mov edi, eax
+	L_use_edi:
+		xor eax, eax
+		test edi, edi
+		jbe L_after_copy
+	L_copy_loop:
+		mov ecx, dword ptr [esi + 4]
+		mov edx, dword ptr [esi + 0x10]
+		mov cl, byte ptr [ecx + eax]
+		mov byte ptr [edx + eax], cl
+		inc eax
+		cmp eax, edi
+		jb L_copy_loop
+	L_after_copy:
+		mov edx, dword ptr [esi + 0x10]
+		mov eax, dword ptr [esi + 0x50]
+		push edi
+		push edx
+		push eax
+		call vfs_Crc32Update
+		mov ecx, dword ptr [esi + 0x5c]
+		mov ebp, dword ptr [esi + 0x14]
+		mov ebx, dword ptr [esi + 0x10]
+		mov edx, dword ptr [esi + 4]
+		mov dword ptr [esi + 0x50], eax
+		mov eax, dword ptr [esi + 8]
+		sub ecx, edi
+		sub eax, edi
+		mov dword ptr [esi + 0x5c], ecx
+		mov ecx, dword ptr [esi + 0x18]
+		mov dword ptr [esi + 8], eax
+		mov eax, dword ptr [esp + 0x1c]
+		add esp, 0xc
+		sub ebp, edi
+		add ebx, edi
+		add edx, edi
+		add ecx, edi
+		add eax, edi
+		mov dword ptr [esi + 0x14], ebp
+		mov dword ptr [esi + 0x10], ebx
+		mov dword ptr [esi + 4], edx
+		mov dword ptr [esi + 0x18], ecx
+		mov dword ptr [esp + 0x10], eax
+		jmp L_loop_test
+	L_inflate_path:
+		mov ebx, dword ptr [esi + 0x18]
+		mov ebp, dword ptr [esi + 0x10]
+		lea ecx, [esi + 4]
+		push 2
+		push ecx
+		call inflate
+		mov edi, dword ptr [esi + 0x18]
+		mov edx, dword ptr [esi + 0x50]
+		sub edi, ebx
+		mov dword ptr [esp + 0x1c], eax
+		push edi
+		push ebp
+		push edx
+		call vfs_Crc32Update
+		mov ebx, dword ptr [esi + 0x5c]
+		mov edx, dword ptr [esp + 0x24]
+		mov dword ptr [esi + 0x50], eax
+		mov eax, dword ptr [esp + 0x28]
+		add esp, 0x14
+		sub ebx, edi
+		add edx, edi
+		cmp eax, 1
+		mov dword ptr [esi + 0x5c], ebx
+		mov dword ptr [esp + 0x10], edx
+		je near L_finalize_ret
+		test eax, eax
+		jne near L_ret_param_status
+	L_loop_test:
+		mov eax, dword ptr [esi + 0x14]
+		test eax, eax
+		ja near L_loop
+		mov eax, dword ptr [esp + 0x14]
+		test eax, eax
+		jne L_ret_param_status
+	L_finalize_ret:
+		mov eax, dword ptr [esp + 0x10]
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 8
+		ret
+	L_neg1:
+		pop edi
+		pop esi
+		pop ebp
+		or eax, 0xffffffff
+		pop ebx
+		add esp, 8
+		ret
+	L_ret_param_status:
+		mov eax, dword ptr [esp + 0x14]
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 8
+		ret
+	}
+}
+
+int __cdecl ReadVfsCompressed_unused(int param_1, int param_2, unsigned int param_3)
 {
 	int* ctx;
 	int bytes_read;
