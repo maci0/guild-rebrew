@@ -511,9 +511,7 @@ status = "RELOC"
 
 ["SERVER.0x1000e7d0"]
 size = 256
-status = "STUB"
-blocker = "instruction folding (lea vs mov), stack frame choice (push vs sub esp)"
-blocker_delta = 210
+status = "RELOC"
 
 ["SERVER.0x1000e8d0"]
 size = 240

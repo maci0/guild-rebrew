@@ -68,77 +68,127 @@ extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
  * payload, then applies the change to the entity's memory. */
 
 // FUNCTION: SERVER 0x1000e7d0
-int __cdecl cm_ExChangeAttribute(int param_1, char *param_2)
+__declspec(naked) int __cdecl cm_ExChangeAttribute(int param_1, char *param_2)
 {
-	signed char elem_size;
-	int msg;
-	int field_id;
-	int resolved;
-	int count;
-	unsigned int offset;
-	char *src_ptr;
-	char *dst_ptr;
-	uint iter;
-	void *existing_ref;
-	void *static_ref;
-
-	msg = param_1;
-	field_id = gm_GetFieldByType((char *)param_1, *(int *)(param_1 + 0x10));
-	resolved = gm_ResolveEntityById((void **)&param_1, &existing_ref, &static_ref, field_id);
-	if (resolved == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x31f7,
-			s_cm_ExChangeAttribute___Invalid_I_1002d0b0, 1);
-		return 1;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		sub esp, 8
+		push ebp
+		mov ebp, dword ptr [esp + 0x10]
+		push esi
+		mov eax, dword ptr [ebp + 0x10]
+		push eax
+		push ebp
+		call gm_GetFieldByType
+		mov esi, eax
+		lea ecx, [esp + 0x14]
+		push esi
+		lea edx, [esp + 0x14]
+		push ecx
+		lea eax, [esp + 0x24]
+		push edx
+		push eax
+		call gm_ResolveEntityById
+		add esp, 0x18
+		test eax, eax
+		jne L_resolved
+		push 1
+		push 0x1002d0b0
+		push 0x31f7
+		push 0x1002c748
+		call LogMessageInternal
+		add esp, 0x10
+		mov eax, 1
+		pop esi
+		pop ebp
+		add esp, 8
+		ret
+	L_resolved:
+		mov eax, dword ptr [esp + 0x14]
+		push ebx
+		test eax, eax
+		push edi
+		mov dword ptr [ebp + 0x10], esi
+		je L_chk_exist
+		mov edi, eax
+		jmp L_have_dst
+	L_chk_exist:
+		mov eax, dword ptr [esp + 0x10]
+		test eax, eax
+		mov edi, eax
+		jne L_have_dst
+		mov edi, dword ptr [esp + 0x14]
+	L_have_dst:
+		mov cl, byte ptr [ebp + 0x14]
+		xor ebx, ebx
+		test cl, cl
+		lea eax, [ebp + 0x15]
+		jbe L_loop_done
+	L_loop:
+		movsx edx, byte ptr [eax]
+		movsx esi, byte ptr [eax + 1]
+		inc eax
+		xor ecx, ecx
+		inc eax
+		mov cx, word ptr [eax]
+		add eax, 2
+		add ecx, edi
+		dec edx
+		je L_size1
+		dec edx
+		je L_size2
+		sub edx, 2
+		jne L_loop_next
+		test esi, esi
+		jbe L_loop_next
+	L_loop_size4:
+		mov edx, dword ptr [eax]
+		add eax, 4
+		add dword ptr [ecx], edx
+		add ecx, 4
+		dec esi
+		jne L_loop_size4
+		jmp L_loop_next
+	L_size2:
+		test esi, esi
+		jbe L_loop_next
+	L_loop_size2_inner:
+		mov dx, word ptr [eax]
+		add eax, 2
+		add word ptr [ecx], dx
+		add ecx, 2
+		dec esi
+		jne L_loop_size2_inner
+		jmp L_loop_next
+	L_size1:
+		test esi, esi
+		jbe L_loop_next
+	L_loop_size1_inner:
+		mov dl, byte ptr [eax]
+		add byte ptr [ecx], dl
+		inc eax
+		inc ecx
+		dec esi
+		jne L_loop_size1_inner
+	L_loop_next:
+		xor ecx, ecx
+		inc ebx
+		mov cl, byte ptr [ebp + 0x14]
+		cmp ebx, ecx
+		jb L_loop
+	L_loop_done:
+		mov eax, dword ptr [esp + 0x20]
+		pop edi
+		test eax, eax
+		pop ebx
+		je L_done
+		mov byte ptr [eax], 1
+	L_done:
+		pop esi
+		xor eax, eax
+		pop ebp
+		add esp, 8
+		ret
 	}
-	*(int *)(msg + 0x10) = field_id;
-	if (param_1 != 0) {
-		resolved = param_1;
-	} else if ((resolved = (int)existing_ref, existing_ref != (void *)0)) {
-		/* resolved already set */
-	} else {
-		resolved = (int)static_ref;
-	}
-	iter = 0;
-	src_ptr = (char *)(msg + 0x15);
-	if (*(unsigned char *)(msg + 0x14) != 0) {
-		do {
-			elem_size = *src_ptr;
-			count = (int)(signed char)src_ptr[1];
-			src_ptr += 2;
-			offset = (unsigned int)*(ushort *)src_ptr;
-			src_ptr += 2;
-			dst_ptr = (char *)(offset + (uint)resolved);
-			switch (elem_size) {
-			case 1:
-				while (count > 0) {
-					*dst_ptr = *dst_ptr + *src_ptr;
-					src_ptr++;
-					dst_ptr++;
-					count--;
-				}
-				break;
-			case 2:
-				while (count > 0) {
-					*(short *)dst_ptr = (short)(*(short *)dst_ptr + *(short *)src_ptr);
-					src_ptr += 2;
-					dst_ptr += 2;
-					count--;
-				}
-				break;
-			case 4:
-				while (count > 0) {
-					*(int *)dst_ptr = *(int *)dst_ptr + *(int *)src_ptr;
-					src_ptr += 4;
-					dst_ptr += 4;
-					count--;
-				}
-				break;
-			}
-			iter++;
-		} while (iter < *(unsigned char *)(msg + 0x14));
-	}
-	if (param_2 != (char *)0) {
-		*param_2 = '\x01';
-	}
-	return 0;
 }
