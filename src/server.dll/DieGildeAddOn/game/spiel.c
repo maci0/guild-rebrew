@@ -110,7 +110,7 @@ extern char* dword_100a8c30;
 extern unsigned short* dword_100a8c34;
 extern char* dword_101de450;
 extern int g_entity_type_table;
-extern char g_current_season;
+extern unsigned char g_current_season;
 extern char g_10031004[];
 extern char g_10031484[];
 extern char g_100314b8[];
