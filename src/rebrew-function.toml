@@ -847,8 +847,7 @@ blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
 
 ["SERVER.0x10014a50"]
 size = 157
-status = "NEAR_MATCHING"
-blocker_delta = 37
+status = "RELOC"
 
 ["SERVER.0x10014af0"]
 size = 247

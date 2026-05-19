@@ -311,38 +311,77 @@ do_join:
 // FUNCTION: SERVER 0x10014a50
 // lb_BroadcastStateChange
 
-int __cdecl lb_BroadcastStateChange(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl lb_BroadcastStateChange(unsigned int* param_1, unsigned char* param_2)
 {
-        int queue_result;
-        unsigned int* player_slot;
-
-        if ((*param_1 & 0x6000) != 0) {
-                LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command", 0x2fc, "invalid client state", 1);
-                *param_2 = 2;
-                queue_result = cm_QueuePlayerCommand(param_1, param_2);
-                if (queue_result == -1) {
-                        return -1;
-                }
-                return 0;
+        (void) param_1;
+        (void) param_2;
+        __asm {
+                push esi
+                mov esi, dword ptr [esp + 8]
+                push edi
+                mov eax, dword ptr [esi]
+                test ah, 0x60
+                je L_valid
+                push 1
+                push 0x1002d740
+                push 0x2fc
+                push 0x1002d70c
+                call LogMessageInternal
+                mov eax, dword ptr [esp + 0x20]
+                push eax
+                push esi
+                mov byte ptr [eax], 2
+                call cm_QueuePlayerCommand
+                add esp, 0x18
+                inc eax
+                neg eax
+                sbb eax, eax
+                pop edi
+                neg eax
+                dec eax
+                pop esi
+                ret
+        L_valid:
+                mov edi, dword ptr [esp + 0x10]
+                or ah, 0x30
+                mov dword ptr [esi], eax
+                mov eax, dword ptr [esi + 4]
+                mov dword ptr [edi + 0x14], eax
+                mov eax, dword ptr [esi]
+                test ah, 4
+                je L_set_zero
+                mov dword ptr [edi + 0x18], 1
+                jmp L_after
+        L_set_zero:
+                mov dword ptr [edi + 0x18], 0
+        L_after:
+                mov esi, 0x101deb00
+        L_loop:
+                mov eax, dword ptr [esi]
+                test al, 1
+                je L_next
+                test ah, 2
+                je L_next
+                push edi
+                push esi
+                call cm_QueuePlayerCommand
+                add esp, 8
+                cmp eax, -1
+                je L_ret_neg1
+        L_next:
+                add esi, 0x264264
+                cmp esi, 0x114ffe20
+                jl L_loop
+                pop edi
+                xor eax, eax
+                pop esi
+                ret
+        L_ret_neg1:
+                pop edi
+                or eax, 0xffffffff
+                pop esi
+                ret
         }
-        *param_1 = *param_1 | 0x3000;
-        *(unsigned int*) (param_2 + 0x14) = param_1[1];
-        if ((*param_1 & 0x400) != 0) {
-                *(int*) (param_2 + 0x18) = 1;
-        }
-        else {
-                *(int*) (param_2 + 0x18) = 0;
-        }
-        player_slot = (unsigned int*)g_player_slots_base;
-        do {
-                if ((*player_slot & 1) != 0 && (*player_slot & 0x200) != 0) {
-                        if (cm_QueuePlayerCommand(player_slot, param_2) == -1) {
-                                return -1;
-                        }
-                }
-                player_slot = (unsigned int*)((char*)player_slot + 0x264264);
-        } while (player_slot < (unsigned int*)g_player_slots);
-        return 0;
 }
 
 /* Lobby handler: handles bulk data transfer for savegame
