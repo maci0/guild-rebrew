@@ -1107,7 +1107,7 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 
 			if (DAT_10030b94 == 0x7fff) {
 				if (DAT_10030b98 != -1) {
-					if (*(int*) ((int) DAT_10035468 + 1) != DAT_10030b98) {
+					if (*(int*) (DAT_10035468 + 1) != DAT_10030b98) {
 						goto LAB_10016382;
 					}
 					is_match = 1;
