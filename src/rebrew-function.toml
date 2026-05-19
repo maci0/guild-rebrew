@@ -428,9 +428,7 @@ blocker_delta = 225
 
 ["SERVER.0x1000d260"]
 size = 120
-status = "NEAR_MATCHING"
-blocker = "loop rotation - target uses jl backward jump, compiler generates jge forward + jmp backward"
-blocker_delta = 41
+status = "RELOC"
 
 ["SERVER.0x1000d2e0"]
 size = 77
