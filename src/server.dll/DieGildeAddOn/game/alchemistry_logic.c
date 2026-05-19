@@ -447,21 +447,39 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 // FUNCTION: SERVER 0x1000c3c0
 // ahm_ClampFloatValue
 
-int __cdecl ahm_ClampFloatValue(int param_1, int param_2)
+__declspec(naked) int __cdecl ahm_ClampFloatValue(int param_1, int param_2)
 {
-	float sum;
-
-	sum = *(float*) (param_1 + 0x10) + *(float*) (param_2 + 4);
-	if (sum > DAT_100256cc) {
-		if (sum >= DAT_100256a0) {
-			*(float*) (param_2 + 4) = DAT_100256a0;
-			return 1;
-		}
-		*(float*) (param_2 + 4) = sum;
-		return 1;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		mov eax, dword ptr [esp + 4]
+		mov ecx, dword ptr [esp + 8]
+		fld dword ptr [eax + 0x10]
+		fadd dword ptr [ecx + 4]
+		fcom dword ptr DAT_100256cc
+		fnstsw ax
+		test ah, 0x41
+		jne L_below_min
+		fcom dword ptr DAT_100256a0
+		fnstsw ax
+		test ah, 1
+		je L_above_max
+		fstp dword ptr [ecx + 4]
+		mov eax, 1
+		ret
+	L_below_min:
+		fstp st(0)
+		fld dword ptr DAT_100256cc
+		mov eax, 1
+		fstp dword ptr [ecx + 4]
+		ret
+	L_above_max:
+		fstp st(0)
+		fld dword ptr DAT_100256a0
+		mov eax, 1
+		fstp dword ptr [ecx + 4]
+		ret
 	}
-	*(float*) (param_2 + 4) = DAT_100256cc;
-	return 1;
 }
 
 /* Fires (activates) an alchemy entity and cleans up the

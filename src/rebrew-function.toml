@@ -341,9 +341,7 @@ status = "EXACT"
 
 ["SERVER.0x1000c3c0"]
 size = 83
-status = "STUB"
-blocker = "jump condition swap"
-blocker_delta = 47
+status = "RELOC"
 
 ["SERVER.0x1000c420"]
 size = 166
