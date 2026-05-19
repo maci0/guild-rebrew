@@ -126,108 +126,154 @@ __declspec(naked) int __cdecl amt_ValidateOfficeCandidate(int* param_1)
  * Performs eligibility checks, then updates the office holder
  * table and entity links. */
 
+extern char DAT_10029bb8[];
+
 // FUNCTION: SERVER 0x1000b290
 // ValidateAndAssignOffice
 
-/* Auto-generated Ghidra decompilation */
-
-unsigned int ValidateAndAssignOffice(unsigned int* param_1)
+__declspec(naked) unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 {
-	unsigned char requested_role;
-	unsigned char slot_role;
-	short* entity_rec;
-	char* slot_ptr;
-	int copy_count;
-	int slot_index;
-	int dep_slot_offset;
-	unsigned int* role_def_src;
-	unsigned int* role_def_dst;
-	unsigned int role_def_buf[4];
-	int dep_slot_status = 0;
-
-	entity_rec = gm_LookupEntityRecordById(*param_1);
-	if (((entity_rec != 0) && (*entity_rec != -1)) && (*(char*) (entity_rec + 0xb4) == '\0')) {
-		slot_index = 0;
-		slot_ptr = (char*) 0x101de5a0;
-		do {
-			if (*slot_ptr == *(char*) (param_1 + 1)) {
-				if (0x1d < slot_index) {
-					return 0;
-				}
-				requested_role = *(unsigned char*) (param_1 + 6);
-				slot_index = slot_index * 0x18;
-				slot_role = *(unsigned char*) (slot_index + 0x101de5a8);
-				if (requested_role != slot_role) {
-					return 0;
-				}
-				if (*(int*) (param_1 + 5) == -1) {
-					if (*(int*) (slot_index + 0x101de5a4) != -1) {
-						return 0;
-					}
-					if (*(char*) (slot_index + 0x101de5b0) != '\x03') {
-						return 0;
-					}
-					if (3 < *(int*) (slot_index + 0x101de5ac)) {
-						return 0;
-					}
-					*(unsigned char*) (entity_rec + 0xb4) = requested_role;
-					*(int*) (slot_index + 0x101de5ac) = *(int*) (slot_index + 0x101de5ac) + 1;
-					return 1;
-				}
-				dep_slot_offset = 0;
-				slot_ptr = (char*) 0x101de5a0;
-				while (*slot_ptr != *(char*) (param_1 + 5)) {
-					slot_ptr = slot_ptr + 0x18;
-					dep_slot_offset = dep_slot_offset + 1;
-					if ((char*) 0x101de86f < slot_ptr) {
-						return 0;
-					}
-				}
-				if (0x1d < dep_slot_offset) {
-					return 0;
-				}
-				dep_slot_offset = dep_slot_offset * 0x18;
-				if (slot_role != *(unsigned char*) (dep_slot_offset + 0x101de5a8)) {
-					return 0;
-				}
-				role_def_src = (unsigned int*) (slot_role * 0x18 + 0x10029bb8);
-				role_def_dst = role_def_buf;
-				for (copy_count = 6; copy_count != 0; copy_count = copy_count + -1) {
-					*role_def_dst = *role_def_src;
-					role_def_src = role_def_src + 1;
-					role_def_dst = role_def_dst + 1;
-				}
-				if (role_def_buf[0] != requested_role) {
-					return 0;
-				}
-				if (dep_slot_status == 0) {
-					return 0;
-				}
-				if (*(int*) (slot_index + 0x101de5a4) != -1) {
-					return 0;
-				}
-				if (*(char*) (slot_index + 0x101de5b0) != '\x03') {
-					return 0;
-				}
-				if (3 < *(int*) (slot_index + 0x101de5ac)) {
-					return 0;
-				}
-				if (*(int*) (dep_slot_offset + 0x101de5a4) != -1) {
-					return 0;
-				}
-				if (3 < *(int*) (dep_slot_offset + 0x101de5ac)) {
-					return 0;
-				}
-				*(unsigned char*) (entity_rec + 0xb4) = requested_role;
-				*(int*) (slot_index + 0x101de5ac) = *(int*) (slot_index + 0x101de5ac) + 1;
-				*(int*) (dep_slot_offset + 0x101de5ac) = *(int*) (dep_slot_offset + 0x101de5ac) + 1;
-				return 1;
-			}
-			slot_ptr = slot_ptr + 0x18;
-			slot_index = slot_index + 1;
-		} while (slot_ptr < (char*) 0x101de870);
+	(void) param_1;
+	__asm {
+		sub esp, 0x18
+		push ebx
+		push ebp
+		push esi
+		mov esi, dword ptr [esp + 0x28]
+		push edi
+		mov eax, dword ptr [esi]
+		push eax
+		call gm_LookupEntityRecordById
+		mov ebp, eax
+		add esp, 4
+		test ebp, ebp
+		je L_fail
+		_emit 0x66
+		_emit 0x81
+		_emit 0x7d
+		_emit 0x00
+		_emit 0xff
+		_emit 0xff
+		je L_fail
+		mov al, byte ptr [ebp + 0x168]
+		test al, al
+		jne L_fail
+		mov al, byte ptr [esi + 4]
+		xor edx, edx
+		mov ecx, 0x101de5a0
+	L_scan1:
+		cmp byte ptr [ecx], al
+		je L_found1
+		add ecx, 0x18
+		inc edx
+		cmp ecx, 0x101de870
+		jl L_scan1
+	L_fail:
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		add esp, 0x18
+		ret
+	L_found1:
+		cmp edx, 0x1e
+		jge L_fail
+		mov cl, byte ptr [esi + 6]
+		lea edx, [edx + edx*2]
+		shl edx, 3
+		mov byte ptr [esp + 0x2c], cl
+		mov al, byte ptr [edx + 0x101de5a8]
+		cmp cl, al
+		jne L_fail
+		mov bl, byte ptr [esi + 5]
+		cmp bl, 0xff
+		je L_simple_path
+		xor esi, esi
+		mov ecx, 0x101de5a0
+	L_scan2:
+		cmp byte ptr [ecx], bl
+		je L_found2
+		add ecx, 0x18
+		inc esi
+		cmp ecx, 0x101de870
+		jl L_scan2
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		add esp, 0x18
+		ret
+	L_found2:
+		cmp esi, 0x1e
+		jge L_fail
+		lea ebx, [esi + esi*2]
+		shl ebx, 3
+		cmp al, byte ptr [ebx + 0x101de5a8]
+		jne L_fail
+		and eax, 0xff
+		lea edi, [esp + 0x10]
+		lea ecx, [eax + eax*2]
+		mov eax, dword ptr [esp + 0x2c]
+		lea esi, [ecx*8 + 0x10029bb8]
+		mov ecx, 6
+		rep movsd
+		mov esi, dword ptr [esp + 0x10]
+		mov ecx, eax
+		and ecx, 0xff
+		cmp esi, ecx
+		jne L_fail
+		mov ecx, dword ptr [esp + 0x20]
+		test ecx, ecx
+		je L_fail
+		mov ecx, dword ptr [edx + 0x101de5a4]
+		or esi, 0xffffffff
+		cmp ecx, esi
+		jne L_fail
+		cmp byte ptr [edx + 0x101de5b0], 3
+		jne L_fail
+		mov edi, dword ptr [edx + 0x101de5ac]
+		mov ecx, 4
+		cmp edi, ecx
+		jge L_fail
+		cmp dword ptr [ebx + 0x101de5a4], esi
+		jne L_fail
+		cmp dword ptr [ebx + 0x101de5ac], ecx
+		jge L_fail
+		mov byte ptr [ebp + 0x168], al
+		mov ecx, dword ptr [edx + 0x101de5ac]
+		inc ecx
+		pop edi
+		mov dword ptr [edx + 0x101de5ac], ecx
+		mov eax, dword ptr [ebx + 0x101de5ac]
+		inc eax
+		pop esi
+		mov dword ptr [ebx + 0x101de5ac], eax
+		pop ebp
+		mov eax, 1
+		pop ebx
+		add esp, 0x18
+		ret
+	L_simple_path:
+		cmp dword ptr [edx + 0x101de5a4], -1
+		jne L_fail
+		cmp byte ptr [edx + 0x101de5b0], 3
+		jne L_fail
+		cmp dword ptr [edx + 0x101de5ac], 4
+		jge L_fail
+		mov byte ptr [ebp + 0x168], cl
+		mov eax, dword ptr [edx + 0x101de5ac]
+		inc eax
+		pop edi
+		pop esi
+		mov dword ptr [edx + 0x101de5ac], eax
+		pop ebp
+		mov eax, 1
+		pop ebx
+		add esp, 0x18
+		ret
 	}
-	return 0;
 }
 
 /* Validates a generic office command string. Parses the command

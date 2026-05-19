@@ -261,8 +261,7 @@ status = "RELOC"
 
 ["SERVER.0x1000b290"]
 size = 425
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+status = "RELOC"
 
 ["SERVER.0x1000b440"]
 size = 133
