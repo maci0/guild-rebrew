@@ -33,7 +33,7 @@ analysis = "Function passes itself to VirtualQuery to check its own code page pr
 
 ["SERVER.0x10003260"]
 size = 183
-status = "STUB"
+status = "EXACT"
 
 ["SERVER.0x10003320"]
 size = 404
