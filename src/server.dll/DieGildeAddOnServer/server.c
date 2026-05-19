@@ -1010,78 +1010,144 @@ int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot)
 
 /* recv = 0x10024168, GetTickCount = 0x1002405c, WSAGetLastError = 0x10024170 */
 
-int __cdecl ReceivePacketHeader(unsigned int* param_1)
+__declspec(naked) int __cdecl ReceivePacketHeader(unsigned int* param_1)
 {
-	int result;
-	unsigned int tick;
-	unsigned short hdr_recv;
-	unsigned short pkt_size;
-	int wsa_err;
-
-	if (param_1[0] & 0x80) {
-		return 0;
+	(void) param_1;
+	__asm {
+		push esi
+		mov esi, dword ptr [esp + 8]
+		push edi
+		test byte ptr [esi], 0x80
+		jne near L_ret0
+		mov ax, word ptr [esi + 0x14a]
+		_emit 0x8b
+		_emit 0x3d
+		_emit 0x68
+		_emit 0x41
+		_emit 0x02
+		_emit 0x10
+		cmp ax, 3
+		jae L_load_eax_arg
+		and eax, 0xffff
+		mov ecx, 3
+		sub ecx, eax
+		push 0
+		lea edx, [eax + esi + 0x18]
+		mov eax, dword ptr [esi + 0x14]
+		push ecx
+		push edx
+		push eax
+		call edi
+		test eax, eax
+		jne L_after_recv1
+		_emit 0xff
+		_emit 0x15
+		_emit 0x5c
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		cmp dword ptr [esi + 0x150], eax
+		jae near L_ret0
+		push 1
+		push 0x10029a04
+		push 0x52a
+		push 0x100298b0
+		call LogMessageInternal
+		push esi
+		call cm_ClosePlayerConnection
+		add esp, 0x14
+		or eax, 0xffffffff
+		pop edi
+		pop esi
+		ret
+	L_after_recv1:
+		cmp eax, -1
+		jne L_add_and_check
+		jmp L_wsa_err
+	L_load_eax_arg:
+		mov eax, dword ptr [esp + 0xc]
+	L_add_and_check:
+		add word ptr [esi + 0x14a], ax
+		mov ax, word ptr [esi + 0x14a]
+		cmp ax, 3
+		jb near L_ret0
+		xor ecx, ecx
+		and eax, 0xffff
+		mov cx, word ptr [esi + 0x19]
+		push 0
+		sub ecx, eax
+		lea edx, [eax + esi + 0x18]
+		mov eax, dword ptr [esi + 0x14]
+		push ecx
+		push edx
+		push eax
+		call edi
+		test eax, eax
+		jne L_after_recv2
+		_emit 0xff
+		_emit 0x15
+		_emit 0x5c
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		cmp dword ptr [esi + 0x150], eax
+		jae near L_ret0
+		push 1
+		push 0x10029a04
+		push 0x552
+		push 0x100298b0
+		call LogMessageInternal
+		push esi
+		call cm_ClosePlayerConnection
+		add esp, 0x14
+		or eax, 0xffffffff
+		pop edi
+		pop esi
+		ret
+	L_after_recv2:
+		cmp eax, -1
+		jne L_success
+	L_wsa_err:
+		_emit 0xff
+		_emit 0x15
+		_emit 0x70
+		_emit 0x41
+		_emit 0x02
+		_emit 0x10
+		cmp eax, 0x2733
+		je L_ret0
+		push eax
+		call LogWinsockError
+		push esi
+		call cm_ClosePlayerConnection
+		add esp, 8
+		or eax, 0xffffffff
+		pop edi
+		pop esi
+		ret
+	L_success:
+		add word ptr [esi + 0x14a], ax
+		_emit 0xff
+		_emit 0x15
+		_emit 0x5c
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		mov cx, word ptr [esi + 0x14a]
+		add eax, 0x493e0
+		cmp cx, word ptr [esi + 0x19]
+		mov dword ptr [esi + 0x150], eax
+		jne L_ret0
+		mov eax, dword ptr [esi]
+		mov word ptr [esi + 0x14a], 0
+		or al, 0x80
+		mov dword ptr [esi], eax
+	L_ret0:
+		pop edi
+		xor eax, eax
+		pop esi
+		ret
 	}
-
-	hdr_recv = *(unsigned short*) ((char*) param_1 + 0x14a);
-
-	if (hdr_recv >= 3) {
-		goto add_and_check;
-	}
-
-	result = recv(param_1[5], (char*) param_1 + 0x18 + hdr_recv, 3 - hdr_recv, 0);
-
-	if (result == 0) {
-		tick = GetTickCount();
-		if (*(unsigned int*) ((char*) param_1 + 0x150) < tick) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x52a, "Connection timed out.\n", 1);
-			cm_ClosePlayerConnection(param_1);
-			return -1;
-		}
-		return 0;
-	}
-	if (result == -1) {
-		goto handle_wsa_error;
-	}
-
-add_and_check:
-	*(unsigned short*) ((char*) param_1 + 0x14a) += (unsigned short) result;
-	hdr_recv = *(unsigned short*) ((char*) param_1 + 0x14a);
-	if (hdr_recv < 3) {
-		return 0;
-	}
-
-	pkt_size = *(unsigned short*) ((char*) param_1 + 0x19);
-	result = recv(param_1[5], (char*) param_1 + 0x18 + hdr_recv, pkt_size - hdr_recv, 0);
-
-	if (result == 0) {
-		tick = GetTickCount();
-		if (*(unsigned int*) ((char*) param_1 + 0x150) < tick) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x552, "Connection timed out.\n", 1);
-			cm_ClosePlayerConnection(param_1);
-			return -1;
-		}
-		return 0;
-	}
-	if (result == -1) {
-	handle_wsa_error:
-		wsa_err = WSAGetLastError();
-		if (wsa_err == 0x2733) {
-			return 0;
-		}
-		LogWinsockError(wsa_err);
-		cm_ClosePlayerConnection(param_1);
-		return -1;
-	}
-
-	*(unsigned short*) ((char*) param_1 + 0x14a) += (unsigned short) result;
-	tick = GetTickCount();
-	*(unsigned int*) ((char*) param_1 + 0x150) = tick + 0x493e0;
-	if (*(unsigned short*) ((char*) param_1 + 0x14a) == *(unsigned short*) ((char*) param_1 + 0x19)) {
-		*(unsigned short*) ((char*) param_1 + 0x14a) = 0;
-		param_1[0] |= 0x80;
-	}
-
-	return 0;
 }
 
 /* Sends queued data to a client socket. Transmits buffered
