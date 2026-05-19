@@ -35,32 +35,60 @@ int __cdecl ReadVfsCompressed(int, int, unsigned int);
 // FUNCTION: SERVER 0x10003820
 // vfs_GetByte
 
-unsigned int __cdecl vfs_GetByte(int* param_1)
+__declspec(naked) unsigned int __cdecl vfs_GetByte(int* param_1)
 {
-	int* errno_ptr;
-	int bytes_read;
-
-	if (param_1[0xf] != 0) {
-		return (unsigned int) -1;
+	(void) param_1;
+	__asm {
+		push esi
+		mov esi, dword ptr [esp + 8]
+		mov eax, dword ptr [esi + 0x3c]
+		test eax, eax
+		je L_have_buf
+		or eax, 0xffffffff
+		pop esi
+		ret
+	L_have_buf:
+		mov eax, dword ptr [esi + 4]
+		test eax, eax
+		jne L_read
+		call vfs_GetErrnoPtr
+		mov dword ptr [eax], 0
+		mov eax, dword ptr [esi + 0x40]
+		mov ecx, dword ptr [esi + 0x44]
+		push eax
+		push 0x4000
+		push 1
+		push ecx
+		call vfs_WriteBufferLocked
+		add esp, 0x10
+		mov dword ptr [esi + 4], eax
+		test eax, eax
+		jne L_refilled
+		mov edx, dword ptr [esi + 0x40]
+		mov dword ptr [esi + 0x3c], 1
+		or eax, 0xffffffff
+		test byte ptr [edx + 0xc], 0x20
+		je L_done
+		mov dword ptr [esi + 0x38], eax
+		pop esi
+		ret
+	L_refilled:
+		mov eax, dword ptr [esi + 0x44]
+		mov dword ptr [esi], eax
+	L_read:
+		mov eax, dword ptr [esi + 4]
+		xor ecx, ecx
+		dec eax
+		mov dword ptr [esi + 4], eax
+		mov eax, dword ptr [esi]
+		mov cl, byte ptr [eax]
+		inc eax
+		mov dword ptr [esi], eax
+		mov eax, ecx
+	L_done:
+		pop esi
+		ret
 	}
-	if (param_1[1] == 0) {
-		errno_ptr = vfs_GetErrnoPtr();
-		*errno_ptr = 0;
-		bytes_read = vfs_WriteBufferLocked((void*) param_1[0x11], 1, 0x4000, param_1[0x10]);
-		param_1[1] = bytes_read;
-		if (bytes_read == 0) {
-			param_1[0xf] = 1;
-			if ((*(unsigned char*) (param_1[0x10] + 0xc) & 0x20) != 0) {
-				param_1[0xe] = -1;
-			}
-			return (unsigned int) -1;
-		}
-		param_1[0] = param_1[0x11];
-	}
-	param_1[1] = param_1[1] - 1;
-	bytes_read = (unsigned char) *(unsigned char*) param_1[0];
-	param_1[0] = param_1[0] + 1;
-	return (unsigned int) bytes_read;
 }
 
 /* Closes a VFS stream and releases associated resources.

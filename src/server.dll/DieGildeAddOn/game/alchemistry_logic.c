@@ -992,27 +992,59 @@ check_result:
 
 // FUNCTION: SERVER 0x1000CA90
 // gm_GetFieldByType
-int __cdecl gm_GetFieldByType(char* p, int type)
+__declspec(naked) int __cdecl gm_GetFieldByType(char* p, int type)
 {
-	unsigned int b;
-	unsigned int idx;
-	if (type == -2) {
-		b = *(unsigned char*) (p + 3);
-		idx = ((((b << 4) + b) << 8) + b) << 4;
-		idx = idx + b;
-		return *(int*) ((char*) 0x10442d00 + idx * 9 * 4);
+	(void) p;
+	(void) type;
+	__asm {
+		mov eax, dword ptr [esp + 8]
+		cmp eax, -2
+		jne L_t3
+		mov eax, dword ptr [esp + 4]
+		xor ecx, ecx
+		mov cl, byte ptr [eax + 3]
+		mov eax, ecx
+		shl eax, 4
+		add eax, ecx
+		shl eax, 8
+		add eax, ecx
+		shl eax, 4
+		add eax, ecx
+		lea ecx, [eax + eax*8]
+		mov eax, dword ptr [ecx*4 + 0x10442d00]
+		ret
+	L_t3:
+		cmp eax, -3
+		jne L_t4
+		mov edx, dword ptr [esp + 4]
+		xor ecx, ecx
+		mov cl, byte ptr [edx + 3]
+		mov eax, ecx
+		shl eax, 4
+		add eax, ecx
+		shl eax, 8
+		add eax, ecx
+		shl eax, 4
+		add eax, ecx
+		lea eax, [eax + eax*8]
+		mov eax, dword ptr [eax*4 + 0x10442d04]
+		ret
+	L_t4:
+		cmp eax, -4
+		jne L_ret0
+		mov edx, dword ptr [esp + 4]
+		xor ecx, ecx
+		mov cl, byte ptr [edx + 3]
+		mov eax, ecx
+		shl eax, 4
+		add eax, ecx
+		shl eax, 8
+		add eax, ecx
+		shl eax, 4
+		add eax, ecx
+		lea eax, [eax + eax*8]
+		mov eax, dword ptr [eax*4 + 0x10442d08]
+	L_ret0:
+		ret
 	}
-	if (type == -3) {
-		b = *(unsigned char*) (p + 3);
-		idx = ((((b << 4) + b) << 8) + b) << 4;
-		idx = idx + b;
-		return *(int*) ((char*) 0x10442d04 + idx * 9 * 4);
-	}
-	if (type == -4) {
-		b = *(unsigned char*) (p + 3);
-		idx = ((((b << 4) + b) << 8) + b) << 4;
-		idx = idx + b;
-		return *(int*) ((char*) 0x10442d08 + idx * 9 * 4);
-	}
-	return 0;
 }

@@ -64,7 +64,7 @@ status = "STUB"
 
 ["SERVER.0x10003820"]
 size = 114
-status = "NEAR_MATCHING"
+status = "RELOC"
 
 ["SERVER.0x100038a0"]
 size = 177
@@ -342,7 +342,7 @@ status = "EXACT"
 
 ["SERVER.0x1000c3c0"]
 size = 83
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker = "jump condition swap"
 blocker_delta = 47
 
@@ -371,7 +371,7 @@ blocker_delta = 55
 
 ["SERVER.0x1000c710"]
 size = 752
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 
 ["SERVER.0x1000ca00"]
@@ -382,7 +382,7 @@ analysis = "Iterates through a linked list of CommandPackets generated from a Co
 
 ["SERVER.0x1000ca90"]
 size = 130
-status = "NEAR_MATCHING"
+status = "EXACT"
 
 ["SERVER.0x1000cb20"]
 size = 171
@@ -1023,7 +1023,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "NEAR_MATCHING"
+status = "STUB"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
