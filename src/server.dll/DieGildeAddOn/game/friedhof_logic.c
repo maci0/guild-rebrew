@@ -3229,19 +3229,10 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 				DAT_10035434 = DAT_10035434 - 1;
 			}
 			new_entity_slot_ptr = (unsigned short*) (entity_slot_byte_offset + (int) &DAT_100358a0);
-			slot_clear_ptr = new_entity_slot_ptr;
-			for (clear_loop_counter = 0x87; clear_loop_counter != 0; clear_loop_counter = clear_loop_counter - 1) {
-				slot_clear_ptr[0] = 0;
-				slot_clear_ptr[1] = 0;
-				slot_clear_ptr = slot_clear_ptr + 2;
-			}
+			memset(new_entity_slot_ptr, 0, 0x21c);
 			*new_entity_slot_ptr = 0xffff;
 			*(int*) (entity_slot_byte_offset + 0x100358a4) = (int) 0xffffffff;
-			relationship_array_ptr = (unsigned int*) (entity_slot_byte_offset + 0x100358fc);
-			for (clear_loop_counter = 8; clear_loop_counter != 0; clear_loop_counter = clear_loop_counter - 1) {
-				*relationship_array_ptr = 0xffffffff;
-				relationship_array_ptr = relationship_array_ptr + 1;
-			}
+			memset((char*) (entity_slot_byte_offset + 0x100358fc), 0xff, 0x20);
 			*(unsigned char**) (entity_slot_byte_offset + 0x10035a10) = building_entity_ptr;
 			*(unsigned char**) (entity_slot_byte_offset + 0x10035a0c) = building_entity_ptr;
 			DAT_10035434 = DAT_10035434 + 1;
