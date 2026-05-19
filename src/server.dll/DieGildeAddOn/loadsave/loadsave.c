@@ -915,8 +915,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 
 			if (esi[0] == 0x1e) {
 				*(int*) (esi + 0x71) = (int) m_AllocTracked(0x600, (const char*) 0x1002d510);
-				load_result = 0;
-				do {
+				for (load_result = 0; load_result < 0x600; load_result += 0x18) {
 					if (!ls_ReadVfsDataChecked((void*) (load_result + *(int*) (esi + 0x71)), 4, 1, (void*) param_1)) {
 						return 0;
 					}
@@ -976,9 +975,8 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 						)) {
 						return 0;
 					}
-					load_result += 0x18;
-					*(int*) (load_result - 4 + *(int*) (esi + 0x71)) = 0;
-				} while (load_result < 0x600);
+					*(int*) (load_result + 0x14 + *(int*) (esi + 0x71)) = 0;
+				}
 			}
 			else if (esi[0] == 0x48 || esi[0] == 0x49 || esi[0] == 0x4a) {
 				if (g_file_version >= 0x10047) {
