@@ -453,8 +453,7 @@ blocker_delta = 209
 
 ["SERVER.0x1000d570"]
 size = 361
-status = "NEAR_MATCHING"
-blocker = "Register allocation/instruction scheduling difference in gm_CreateEntityFromParents argument setup; target evaluates param_2 boolean first (neg/sbb in eax) then pushes args in different register order. Same-size, semantically equivalent."
+status = "RELOC"
 
 ["SERVER.0x1000d6e0"]
 size = 78

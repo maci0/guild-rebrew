@@ -17,56 +17,141 @@ extern char s_gm_AllocSpieler___failed_1002cbd4[];
  * updating player slot flags and setting connection state. */
 
 // FUNCTION: SERVER 0x1000d570
-int __cdecl cm_ExAllocClientSpieler(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExAllocClientSpieler(int param_1, char* param_2)
 {
-	ushort entity_id;
-	uint entity_id_uint;
-	int entity_offset;
-	int record;
-	short* table_entry;
-	char* entity_base;
-
-	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
-	entity_offset = rand();
-	*(int*) (param_1 + 0x45) = entity_offset;
-	srand(*(int*) (param_1 + 0x22));
-	entity_id = (ushort) gm_CreateEntityFromParents(
-		param_2 ? 6 : 7,
-		*(int*) (param_1 + 0x14),
-		*(int*) (param_1 + 0x18),
-		*(ushort*) (param_1 + 0x1c),
-		0,
-		(uint)*(uchar*) (param_1 + 0x1e),
-		0,
-		(uint)*(uchar*) (param_1 + 0x23)
-	);
-	entity_id_uint = entity_id;
-	if (entity_id_uint == 0xffff) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x290f, s_gm_AllocSpieler___failed_1002cbd4, 1);
-		return 1;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		push ebx
+		push esi
+		push edi
+		mov edi, dword ptr [esp + 0x10]
+		mov dword ptr [edi + 0x10], eax
+		call rand
+		mov ecx, dword ptr [edi + 0x22]
+		mov dword ptr [edi + 0x45], eax
+		push ecx
+		call srand
+		mov ebx, dword ptr [esp + 0x18]
+		mov eax, ebx
+		neg eax
+		sbb eax, eax
+		xor edx, edx
+		mov dl, byte ptr [edi + 0x23]
+		xor ecx, ecx
+		mov cl, byte ptr [edi + 0x1e]
+		push edx
+		mov dx, word ptr [edi + 0x1c]
+		push 0
+		push ecx
+		mov ecx, dword ptr [edi + 0x18]
+		push 0
+		push edx
+		mov edx, dword ptr [edi + 0x14]
+		add eax, 7
+		push ecx
+		push edx
+		push eax
+		call gm_CreateEntityFromParents
+		mov si, ax
+		add esp, 0x24
+		and esi, 0xffff
+		cmp esi, 0xffff
+		jne L_ok
+		push 1
+		push 0x1002cbd4
+		push 0x290f
+		push 0x1002c748
+		call LogMessageInternal
+		add esp, 0x10
+		mov eax, 1
+		pop edi
+		pop esi
+		pop ebx
+		ret
+	L_ok:
+		push ebp
+		push 1
+		push 0x1002cbbc
+		push 0x2917
+		push 0x1002c748
+		call LogMessageInternal
+		lea eax, [esi + esi*2]
+		xor ecx, ecx
+		mov cl, byte ptr [edi + 3]
+		lea edx, [edi + 0x25]
+		lea eax, [eax + eax*4]
+		push 0x10
+		push edx
+		lea esi, [eax + eax*8]
+		mov eax, ecx
+		shl eax, 4
+		add eax, ecx
+		shl eax, 8
+		add eax, ecx
+		shl eax, 4
+		add eax, ecx
+		shl esi, 2
+		lea eax, [eax + eax*8]
+		mov ecx, dword ptr [esi + 0x100358a4]
+		mov dword ptr [eax*4 + 0x10442d00], ecx
+		lea eax, [esi + 0x100358d0]
+		push eax
+		call strncpy
+		lea ebp, [esi + 0x100358a0]
+		push ebp
+		call gm_GetEntityTableEntry
+		add esp, 0x20
+		test eax, eax
+		je L_skip_table
+		mov cx, word ptr [esi + 0x100358f0]
+		lea ebx, [edi + 0x35]
+		mov word ptr [eax], cx
+		push 0x10
+		add eax, 2
+		push ebx
+		push eax
+		call strncpy
+		push 0x10
+		lea edx, [esi + 0x100358e0]
+		push ebx
+		push edx
+		call strncpy
+		mov eax, dword ptr [esi + 0x10035900]
+		push eax
+		call gm_LookupEntityRecordById
+		add esp, 0x1c
+		test eax, eax
+		je L_skip_record
+		push 0x10
+		add eax, 0x40
+		push ebx
+		push eax
+		call strncpy
+		add esp, 0xc
+	L_skip_record:
+		mov ebx, dword ptr [esp + 0x18]
+	L_skip_table:
+		mov ecx, dword ptr [edi + 0x1f]
+		mov dword ptr [esi + 0x100358f4], ecx
+		mov dl, byte ptr [edi + 0x24]
+		test ebx, ebx
+		mov byte ptr [esi + 0x100358ac], dl
+		je L_done
+		mov byte ptr [ebx], 1
+		mov byte ptr [ebx + 1], 1
+		mov dword ptr [ebx + 6], ebp
+	L_done:
+		pop ebp
+		pop edi
+		pop esi
+		xor eax, eax
+		pop ebx
+		ret
 	}
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2917, s_ClientSpieler_erzeugt_1002cbbc, 1);
-	entity_offset = entity_id_uint * 0x21c;
-	*(int*) (g_player_slot_0 + (uint)*(uchar*) (param_1 + 3) * 0x264264 + 0x2641f8) =
-		*(int*) (entity_offset + 0x100358a4);
-	strncpy((char*) (entity_offset + 0x100358d0), (char*) param_1 + 0x25, 0x10);
-	entity_base = (char*) (entity_offset + 0x100358a0);
-	table_entry = gm_GetEntityTableEntry(entity_base);
-	if (table_entry != (short*) 0) {
-		*table_entry = *(short*) (entity_offset + 0x100358f0);
-		strncpy((char*) table_entry + 2, (char*) param_1 + 0x35, 0x10);
-		strncpy((char*) (entity_offset + 0x100358e0), (char*) param_1 + 0x35, 0x10);
-		record = gm_LookupEntityRecordById(*(int*) (entity_offset + 0x10035900));
-		if (record != 0) {
-			strncpy((char*) (record + 0x40), (char*) param_1 + 0x35, 0x10);
-		}
-	}
-	*(int*) (entity_offset + 0x100358f4) = *(int*) (param_1 + 0x1f);
-	*(char*) (entity_offset + 0x100358ac) = *(char*) (param_1 + 0x24);
-	if (param_2 != (char*) 0) {
-		*param_2 = '\x01';
-		param_2[1] = '\x01';
-		*(char**) (param_2 + 6) = entity_base;
-	}
-	return 0;
 }
