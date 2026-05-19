@@ -562,9 +562,7 @@ status = "RELOC"
 
 ["SERVER.0x1000f0d0"]
 size = 197
-status = "STUB"
-blocker = "prologue register pre-load ordering, instruction folding (lea vs mov), jump condition swap, nodeId register allocation (esi vs ecx)"
-blocker_delta = 176
+status = "RELOC"
 
 ["SERVER.0x1000f1a0"]
 size = 327
@@ -1049,7 +1047,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "NEAR_MATCHING"
+status = "STUB"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
