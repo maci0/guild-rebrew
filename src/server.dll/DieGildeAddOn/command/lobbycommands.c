@@ -515,25 +515,36 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2)
 // FUNCTION: SERVER 0x10014EE0
 // lb_SearchRecordTable
 
-char* __cdecl lb_SearchRecordTable(int record_id)
+__declspec(naked) char* __cdecl lb_SearchRecordTable(int record_id)
 {
-        unsigned int val;
-        int idx;
-        char* ptr;
-
-        val = (unsigned short) g_record_table[0];
-        idx = 0;
-        if ((short) val == 0) {
-                return 0;
+        (void) record_id;
+        __asm {
+                mov eax, dword ptr [g_record_table]
+                xor edx, edx
+                test ax, ax
+                push esi
+                je L_notfound
+                mov esi, dword ptr [esp + 8]
+                mov ecx, offset g_record_table
+        L_loop:
+                and eax, 0xffff
+                cmp eax, esi
+                je L_found
+                mov ax, word ptr [ecx + 0x46]
+                add ecx, 0x46
+                inc edx
+                test ax, ax
+                jne L_loop
+        L_notfound:
+                xor eax, eax
+                pop esi
+                ret
+        L_found:
+                lea eax, [edx*8]
+                pop esi
+                sub eax, edx
+                lea eax, [eax + eax*4]
+                lea eax, [eax*2 + g_record_table]
+                ret
         }
-        ptr = (char*) g_record_table;
-        do {
-                if (val == (unsigned int) record_id) {
-                        return (char*) g_record_table + idx * 70;
-                }
-                val = *(unsigned short*) (ptr + 70);
-                ptr += 70;
-                idx++;
-        } while ((short) val != 0);
-        return 0;
 }

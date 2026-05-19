@@ -50,7 +50,7 @@ analysis = "Initialization routine for the server's telemetry. Registers the Cra
 
 ["SERVER.0x10003520"]
 size = 160
-status = "STUB"
+status = "RELOC"
 note = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()"
 analysis = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()"
 
@@ -60,7 +60,7 @@ status = "RELOC"
 
 ["SERVER.0x10003640"]
 size = 132
-status = "RELOC"
+status = "STUB"
 
 ["SERVER.0x10003820"]
 size = 114
@@ -915,7 +915,7 @@ analysis = "obj includes 28B jump table after code (296B obj vs 267B PE). Code m
 
 ["SERVER.0x10014ee0"]
 size = 69
-status = "STUB"
+status = "RELOC"
 
 ["SERVER.0x10014f30"]
 size = 74
@@ -1069,7 +1069,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "NEAR_MATCHING"
+status = "STUB"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
