@@ -1577,8 +1577,7 @@ int __cdecl ls_LoadTownData(int file)
 		}
 	}
 
-	ptr = (char*) 0x1009b768;
-	do {
+	for (ptr = (char*) 0x1009b768; ptr < (char*) 0x100a8c38; ptr += 0x2a90) {
 		if (!ls_ReadVfsDataChecked(ptr - 8, 4, 1, (void*) file)) {
 			return 0;
 		}
@@ -1634,8 +1633,7 @@ int __cdecl ls_LoadTownData(int file)
 			} while (i < count);
 		}
 
-		ptr += 0x2a90;
-	} while (ptr < (char*) 0x100a8c38);
+	}
 
 	ptr = (char*) 0x100a8c88;
 	do {
