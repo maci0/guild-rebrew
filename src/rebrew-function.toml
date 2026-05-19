@@ -691,9 +691,7 @@ status = "EXACT"
 
 ["SERVER.0x100105b0"]
 size = 329
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap"
-blocker_delta = 254
+status = "RELOC"
 
 ["SERVER.0x10010710"]
 size = 320

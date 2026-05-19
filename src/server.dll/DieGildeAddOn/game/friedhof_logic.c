@@ -84,92 +84,143 @@ int __cdecl gv_CheckSlotActive(char* obj, int idx)
 // FUNCTION: SERVER 0x100105b0
 // gv_GetSlotEntry
 
-int __cdecl gv_GetSlotEntry(int param_1, int param_2, unsigned char param_3)
+__declspec(naked) int __cdecl gv_GetSlotEntry(int param_1, int param_2, unsigned char param_3)
 {
-	int graveyard_tier;
-	int base;
-
-	if (*(int*) (param_1 + 4) < 1) {
-		goto ret_zero;
+	(void) param_1;
+	(void) param_2;
+	(void) param_3;
+	__asm {
+		push esi
+		mov esi, dword ptr [esp + 8]
+		mov eax, dword ptr [esi + 4]
+		cmp eax, 1
+		jl near L_ret0
+		cmp eax, 3
+		jg near L_ret0
+		mov eax, dword ptr [esp + 0xc]
+		test eax, eax
+		jne L_cat1
+		push eax
+		push esi
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		je near L_ret0
+		mov ecx, dword ptr [esi + 4]
+		mov eax, dword ptr [esp + 0x10]
+		cmp ecx, 1
+		jne L_chk2_cat0
+		cmp al, 8
+		jae near L_ret0
+	L_chk2_cat0:
+		cmp ecx, 2
+		jne L_chk3_cat0
+		cmp al, 0xc
+		jae near L_ret0
+	L_chk3_cat0:
+		cmp ecx, 3
+		jne L_emit_cat0
+		cmp al, 0x10
+		jae near L_ret0
+	L_emit_cat0:
+		mov ecx, dword ptr [esi + 8]
+		and eax, 0xff
+		pop esi
+		lea eax, [eax + eax*4]
+		lea eax, [ecx + eax*4]
+		ret
+	L_cat1:
+		cmp eax, 1
+		jne L_cat2
+		push eax
+		push esi
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		je near L_ret0
+		mov ecx, dword ptr [esi + 4]
+		mov eax, dword ptr [esp + 0x10]
+		cmp ecx, 1
+		jne L_chk2_cat1
+		cmp al, 4
+		jae near L_ret0
+	L_chk2_cat1:
+		cmp ecx, 2
+		jne L_chk3_cat1
+		cmp al, 6
+		jae near L_ret0
+	L_chk3_cat1:
+		cmp ecx, 3
+		jne L_emit_cat1
+		cmp al, 8
+		jae near L_ret0
+	L_emit_cat1:
+		and eax, 0xff
+		lea edx, [eax + eax*4]
+		mov eax, dword ptr [esi + 0xc]
+		pop esi
+		lea eax, [eax + edx*4]
+		ret
+	L_cat2:
+		cmp eax, 2
+		jne L_cat3
+		push eax
+		push esi
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		je L_ret0
+		mov ecx, dword ptr [esi + 4]
+		cmp ecx, 1
+		je L_ret0
+		mov eax, dword ptr [esp + 0x10]
+		cmp ecx, 2
+		jne L_chk3_cat2
+		cmp al, 2
+		jae L_ret0
+	L_chk3_cat2:
+		cmp ecx, 3
+		jne L_emit_cat2
+		cmp al, 4
+		jae L_ret0
+	L_emit_cat2:
+		mov edx, dword ptr [esi + 0x10]
+		and eax, 0xff
+		pop esi
+		lea ecx, [eax + eax*4]
+		lea eax, [edx + ecx*4]
+		ret
+	L_cat3:
+		cmp eax, 3
+		jne L_ret0
+		push eax
+		push esi
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		je L_ret0
+		mov eax, dword ptr [esi + 4]
+		cmp eax, 1
+		je L_ret0
+		cmp eax, 2
+		je L_ret0
+		cmp eax, 3
+		mov eax, dword ptr [esp + 0x10]
+		jne L_emit_cat3
+		cmp al, 2
+		jae L_ret0
+	L_emit_cat3:
+		mov ecx, dword ptr [esi + 0x14]
+		and eax, 0xff
+		pop esi
+		lea eax, [eax + eax*4]
+		lea eax, [ecx + eax*4]
+		ret
+	L_ret0:
+		xor eax, eax
+		pop esi
+		ret
 	}
-	if (*(int*) (param_1 + 4) > 3) {
-		goto ret_zero;
-	}
-
-	if (param_2 == 0) {
-		if (gv_CheckSlotActive((char*) param_1, 0) == 0) {
-			goto ret_zero;
-		}
-		graveyard_tier = *(int*) (param_1 + 4);
-		if (graveyard_tier == 1 && param_3 >= 8) {
-			goto ret_zero;
-		}
-		if (graveyard_tier == 2 && param_3 >= 0xc) {
-			goto ret_zero;
-		}
-		if (graveyard_tier == 3 && param_3 >= 0x10) {
-			goto ret_zero;
-		}
-		base = *(int*) (param_1 + 8);
-		goto ret_value;
-	}
-	if (param_2 == 1) {
-		if (gv_CheckSlotActive((char*) param_1, 1) == 0) {
-			goto ret_zero;
-		}
-		graveyard_tier = *(int*) (param_1 + 4);
-		if (graveyard_tier == 1 && param_3 >= 4) {
-			goto ret_zero;
-		}
-		if (graveyard_tier == 2 && param_3 >= 6) {
-			goto ret_zero;
-		}
-		if (graveyard_tier == 3 && param_3 >= 8) {
-			goto ret_zero;
-		}
-		base = *(int*) (param_1 + 0xc);
-		goto ret_value;
-	}
-	if (param_2 == 2) {
-		if (gv_CheckSlotActive((char*) param_1, 2) == 0) {
-			goto ret_zero;
-		}
-		graveyard_tier = *(int*) (param_1 + 4);
-		if (graveyard_tier == 1) {
-			goto ret_zero;
-		}
-		if (graveyard_tier == 2 && param_3 >= 2) {
-			goto ret_zero;
-		}
-		if (graveyard_tier == 3 && param_3 >= 4) {
-			goto ret_zero;
-		}
-		base = *(int*) (param_1 + 0x10);
-		goto ret_value;
-	}
-	if (param_2 == 3) {
-		if (gv_CheckSlotActive((char*) param_1, 3) == 0) {
-			goto ret_zero;
-		}
-		graveyard_tier = *(int*) (param_1 + 4);
-		if (graveyard_tier == 1) {
-			goto ret_zero;
-		}
-		if (graveyard_tier == 2) {
-			goto ret_zero;
-		}
-		if (graveyard_tier == 3 && param_3 >= 2) {
-			goto ret_zero;
-		}
-		base = *(int*) (param_1 + 0x14);
-		goto ret_value;
-	}
-
-ret_zero:
-	return 0;
-
-ret_value:
-	return base + (unsigned int) param_3 * 0x14;
 }
 
 /* Finds a slot entry in a building with optional type filtering.
