@@ -379,8 +379,7 @@ status = "RELOC"
 
 ["SERVER.0x1000cbd0"]
 size = 517
-status = "STUB"
-blocker = "jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
+status = "RELOC"
 
 ["SERVER.0x1000cde0"]
 size = 331
