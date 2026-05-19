@@ -263,6 +263,7 @@ status = "RELOC"
 ["SERVER.0x1000b4d0"]
 size = 836
 status = "STUB"
+cflags = "/O2 /Oy- /Gd"
 blocker = "jump condition swap | comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
 blocker_delta = 119
 analysis = "Iterates through a fixed validation table at g_office_table looking for a matching command_type. Once found, verifies conditions including checking if entity_ids in the payload actually map to existing objects using gm_LookupEntityRecordById. Returns 1 if valid, 0 if invalid."
