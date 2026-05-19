@@ -167,10 +167,6 @@ found: {
 // FUNCTION: SERVER 0x10006820
 // m_FreeTracked
 
-extern char s_m_alloc_filename[];
-extern char s_m_alloc_free_msg[];
-extern char s_m_alloc_underflow_msg[];
-
 __declspec(naked) void __cdecl m_FreeTracked(void* heapBlock)
 {
 	(void) heapBlock;
@@ -199,9 +195,9 @@ __declspec(naked) void __cdecl m_FreeTracked(void* heapBlock)
 		cmp eax, ecx
 		jne L_dofree
 		push 1
-		push offset s_m_alloc_free_msg
+		push 0x100288f8
 		push 0x149
-		push offset s_m_alloc_filename
+		push 0x10028888
 		call LogMessageInternal
 		add esp, 0x10
 		pop edi
@@ -230,9 +226,9 @@ __declspec(naked) void __cdecl m_FreeTracked(void* heapBlock)
 		mov eax, dword ptr [DAT_10034628]
 		test eax, eax
 		jge L_ret
-		push offset s_m_alloc_underflow_msg
+		push 0x100288e0
 		push 0x17a
-		push offset s_m_alloc_filename
+		push 0x10028888
 		call ReportFatalError
 		add esp, 0xc
 	L_ret:
