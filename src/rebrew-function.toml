@@ -517,9 +517,7 @@ blocker_delta = 210
 
 ["SERVER.0x1000e8d0"]
 size = 240
-status = "STUB"
-blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
-blocker_delta = 226
+status = "RELOC"
 
 ["SERVER.0x1000e9c0"]
 size = 214
@@ -1045,7 +1043,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "NEAR_MATCHING"
+status = "STUB"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]

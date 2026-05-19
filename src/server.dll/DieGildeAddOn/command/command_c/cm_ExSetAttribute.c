@@ -18,72 +18,125 @@ extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
  * Sets *param_2 = 1 on success (if non-null). Returns 1 on invalid entity ID. */
 
 // FUNCTION: SERVER 0x1000e8d0
-int __cdecl cm_ExSetAttribute(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExSetAttribute(int param_1, char* param_2)
 {
-	int fieldSize;
-	int cmdBase;
-	int resolveResult;
-	char* srcPtr;
-	char* dstPtr;
-	uint fieldIdx;
-	void* objectEntity;
-	void* dynEntity;
-
-	cmdBase = param_1;
-	resolveResult = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
-	*(int*) (cmdBase + 0x10) = resolveResult;
-	resolveResult = gm_ResolveEntityById((void**) &param_1, &objectEntity, &dynEntity, resolveResult);
-	if (resolveResult == 0) {
-		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
-			0x32ed,
-			s_cm_ExSetAttribute___Invalid_Id_1002d0d4,
-			1
-		);
-		return 1;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		sub esp, 8
+		push ebp
+		mov ebp, dword ptr [esp + 0x10]
+		mov eax, dword ptr [ebp + 0x10]
+		push eax
+		push ebp
+		call gm_GetFieldByType
+		lea ecx, [esp + 0x10]
+		mov dword ptr [ebp + 0x10], eax
+		push eax
+		lea edx, [esp + 0x10]
+		push ecx
+		lea eax, [esp + 0x20]
+		push edx
+		push eax
+		call gm_ResolveEntityById
+		add esp, 0x18
+		test eax, eax
+		jne L_resolved
+		push 1
+		push 0x1002d0d4
+		push 0x32ed
+		push 0x1002c748
+		call LogMessageInternal
+		add esp, 0x10
+		mov eax, 1
+		pop ebp
+		add esp, 8
+		ret
+	L_resolved:
+		mov eax, dword ptr [esp + 0x10]
+		push ebx
+		test eax, eax
+		push edi
+		je L_chk_obj
+		mov edi, eax
+		jmp L_have_p1
+	L_chk_obj:
+		mov eax, dword ptr [esp + 0xc]
+		test eax, eax
+		mov edi, eax
+		jne L_have_p1
+		mov edi, dword ptr [esp + 0x10]
+	L_have_p1:
+		mov cl, byte ptr [ebp + 0x14]
+		xor ebx, ebx
+		test cl, cl
+		lea eax, [ebp + 0x15]
+		jbe L_loop_done
+		push esi
+	L_loop:
+		movsx edx, byte ptr [eax]
+		movsx esi, byte ptr [eax + 1]
+		inc eax
+		xor ecx, ecx
+		inc eax
+		mov cx, word ptr [eax]
+		add eax, 2
+		add ecx, edi
+		dec edx
+		je L_size1
+		dec edx
+		je L_size2
+		sub edx, 2
+		jne L_loop_next
+		test esi, esi
+		jbe L_loop_next
+	L_loop_size4:
+		mov edx, dword ptr [eax]
+		add eax, 4
+		mov dword ptr [ecx], edx
+		add ecx, 4
+		dec esi
+		jne L_loop_size4
+		jmp L_loop_next
+	L_size2:
+		test esi, esi
+		jbe L_loop_next
+	L_loop_size2_inner:
+		mov dx, word ptr [eax]
+		add eax, 2
+		mov word ptr [ecx], dx
+		add ecx, 2
+		dec esi
+		jne L_loop_size2_inner
+		jmp L_loop_next
+	L_size1:
+		test esi, esi
+		jbe L_loop_next
+	L_loop_size1_inner:
+		mov dl, byte ptr [eax]
+		mov byte ptr [ecx], dl
+		inc ecx
+		inc eax
+		dec esi
+		jne L_loop_size1_inner
+	L_loop_next:
+		xor ecx, ecx
+		inc ebx
+		mov cl, byte ptr [ebp + 0x14]
+		cmp ebx, ecx
+		jb L_loop
+		pop esi
+	L_loop_done:
+		mov eax, dword ptr [esp + 0x1c]
+		pop edi
+		test eax, eax
+		pop ebx
+		je L_done
+		mov byte ptr [eax], 1
+	L_done:
+		xor eax, eax
+		pop ebp
+		add esp, 8
+		ret
 	}
-	if ((param_1 == 0) && (param_1 = (int) objectEntity, objectEntity == (void*) 0x0)) {
-		param_1 = (int) dynEntity;
-	}
-	fieldIdx = 0;
-	srcPtr = (char*) (cmdBase + 0x15);
-	if (*(uchar*) (cmdBase + 0x14) != 0) {
-		do {
-			fieldSize = (int) *(signed char*) srcPtr;
-			resolveResult = (int) *(signed char*) (srcPtr + 1);
-			srcPtr = srcPtr + 2;
-			dstPtr = (char*) ((uint) * (ushort*) srcPtr + (uint) param_1);
-			srcPtr = srcPtr + 2;
-			fieldSize--;
-			if (fieldSize == 0) {
-				for (; resolveResult != 0; resolveResult--) {
-					*dstPtr = *srcPtr;
-					dstPtr++;
-					srcPtr++;
-				}
-			}
-			else {
-				fieldSize--;
-				if (fieldSize == 0) {
-					for (; resolveResult != 0; resolveResult--) {
-						*(short*) dstPtr = *(short*) srcPtr;
-						srcPtr += 2;
-						dstPtr += 2;
-					}
-				}
-				else if (fieldSize == 2) {
-					for (; resolveResult != 0; resolveResult--) {
-						*(int*) dstPtr = *(int*) srcPtr;
-						srcPtr += 4;
-						dstPtr += 4;
-					}
-				}
-			}
-			fieldIdx++;
-		} while (fieldIdx < *(uchar*) (cmdBase + 0x14));
-	}
-	if (param_2 != (char*) 0) {
-		*param_2 = '\x01';
-	}
-	return 0;
 }
