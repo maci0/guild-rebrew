@@ -4,7 +4,7 @@
 
 extern char g_currency_type_array[];
 extern char* g_unknown_1de450;
-extern int g_current_season;
+extern unsigned char g_current_season;
 
 typedef struct {
 	unsigned int flags;
