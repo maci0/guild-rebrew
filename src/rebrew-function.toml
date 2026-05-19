@@ -196,8 +196,7 @@ analysis = "Initialize all player slots to disconnected state, then create TCP l
 
 ["SERVER.0x1000a080"]
 size = 600
-status = "STUB"
-blocker_delta = 542
+status = "RELOC"
 analysis = "Iterates over g_player_slots looking for an empty slot. If one is found, calls Ordinal_1 (accept()) to accept a new connection, configures the socket, initializes the slot structures (receive_buffer, send_buffer), and flags it as a newly connected player."
 
 ["SERVER.0x1000a2e0"]
@@ -786,7 +785,7 @@ status = "RELOC"
 
 ["SERVER.0x10014260"]
 size = 892
-status = "NEAR_MATCHING"
+status = "STUB"
 blocker = "comparison direction swap, jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 blocker_delta = 533
 ghidra = "RecvGameSavegame"

@@ -862,124 +862,233 @@ extern unsigned int g_player_slot_overflow;
 // DATA: SERVER 0x1003467c
 extern unsigned int g_connection_counter;
 
-int __cdecl AcceptConnections(void)
+extern char s_No_more_Slots_for_new_Connection_100299c8[];
+extern char s_D__Develop_DieGildeAddOnServer_s_100298b0[];
+extern char s_New_Connection_from__li__li__li__100299a0[];
+extern int __cdecl sprintf(char*, const char*, ...);
+
+__declspec(naked) int __cdecl AcceptConnections(void)
 {
-	char logbuf[0x100];
-	struct sockaddr_in addr;
-	int addrlen;
-	int optval;
-	int new_socket;
-	unsigned int* slot;
-	int slot_index;
-
-	if (g_listen_socket == -1) {
-		return -1;
+	__asm {
+		_emit 0xa1
+		_emit 0xec
+		_emit 0xea
+		_emit 0x1d
+		_emit 0x10
+		sub esp, 0x118
+		cmp eax, -1
+		push ebx
+		push ebp
+		push esi
+		jne L_have_socket
+		pop esi
+		pop ebp
+		or eax, 0xffffffff
+		pop ebx
+		add esp, 0x118
+		ret
+	L_have_socket:
+		xor ebp, ebp
+		mov eax, 0x101deb00
+	L_find_loop:
+		cmp dword ptr [eax], 0
+		je L_found_slot
+		add eax, 0x264264
+		inc ebp
+		cmp eax, 0x114ffe20
+		jge L_no_slots
+		jmp L_find_loop
+	L_found_slot:
+		mov eax, ebp
+		shl eax, 4
+		add eax, ebp
+		shl eax, 8
+		add eax, ebp
+		shl eax, 4
+		add eax, ebp
+		lea eax, [eax + eax*8]
+		lea esi, [eax*4 + 0x101deb00]
+		test esi, esi
+		jne L_do_accept
+	L_no_slots:
+		push 1
+		push offset s_No_more_Slots_for_new_Connection_100299c8
+		push 0x495
+		push offset s_D__Develop_DieGildeAddOnServer_s_100298b0
+		call LogMessageInternal
+		_emit 0xa1
+		_emit 0x20
+		_emit 0xfe
+		_emit 0x4f
+		_emit 0x11
+		add esp, 0x10
+		test eax, eax
+		jne L_ret_neg1
+		mov esi, 0x114ffe20
+	L_do_accept:
+		_emit 0xa1
+		_emit 0xec
+		_emit 0xea
+		_emit 0x1d
+		_emit 0x10
+		lea ecx, [esp + 0x10]
+		lea edx, [esp + 0x14]
+		push ecx
+		push edx
+		push eax
+		mov dword ptr [esp + 0x1c], 0x10
+		_emit 0xff
+		_emit 0x15
+		_emit 0x5c
+		_emit 0x41
+		_emit 0x02
+		_emit 0x10
+		mov ebx, eax
+		cmp ebx, -1
+		jne L_have_new_socket
+	L_ret_neg1:
+		pop esi
+		pop ebp
+		or eax, 0xffffffff
+		pop ebx
+		add esp, 0x118
+		ret
+	L_have_new_socket:
+		push edi
+		_emit 0x8b
+		_emit 0x3d
+		_emit 0x84
+		_emit 0x41
+		_emit 0x02
+		_emit 0x10
+		lea ecx, [esp + 0x10]
+		push 4
+		push ecx
+		push 0x1002
+		push 0xffff
+		push ebx
+		mov dword ptr [esp + 0x24], 0x10000
+		call edi
+		lea edx, [esp + 0x10]
+		push 4
+		push edx
+		push 0x1001
+		push 0xffff
+		push ebx
+		mov dword ptr [esp + 0x24], 0x10000
+		call edi
+		_emit 0xa1
+		_emit 0x7c
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		lea edx, [esi + 0x26420c]
+		inc eax
+		mov ecx, 0x15
+		_emit 0xa3
+		_emit 0x7c
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		mov dword ptr [esi + 4], eax
+		xor eax, eax
+		mov edi, edx
+		mov dword ptr [esi], 0x2103
+		rep stosd
+		stosw
+		stosb
+		mov eax, dword ptr [esi + 4]
+		xor edi, edi
+		cmp ebp, edi
+		mov dword ptr [edx], eax
+		jne L_skip_or400
+		mov eax, dword ptr [esi]
+		or ah, 4
+		mov dword ptr [esi], eax
+	L_skip_or400:
+		mov dword ptr [esi + 0x14], ebx
+		mov word ptr [esi + 0x14a], di
+		mov word ptr [esi + 0x14c], di
+		mov word ptr [esi + 0x14e], 0x19
+		_emit 0xff
+		_emit 0x15
+		_emit 0x5c
+		_emit 0x40
+		_emit 0x02
+		_emit 0x10
+		add eax, 0x493e0
+		xor ecx, ecx
+		mov dword ptr [esi + 0x150], eax
+	L_init_loop:
+		mov eax, ecx
+		shl eax, 4
+		add eax, ecx
+		lea edx, [esi + eax*8]
+		add eax, edx
+		cmp ecx, edi
+		mov byte ptr [eax + 0x154], 0
+		mov byte ptr [eax + 0x132154], 0
+		jne L_not_first
+		mov dword ptr [esi + 0x1e5], edi
+		mov dword ptr [esi + 0x1321e5], edi
+		jmp L_set_e9
+	L_not_first:
+		lea edx, [eax + 0xbb]
+		cmp ecx, 0x1fff
+		mov dword ptr [eax + 0x1e5], edx
+		lea edx, [eax + 0x1320bb]
+		mov dword ptr [eax + 0x1321e5], edx
+		jge L_set_e9_zero
+	L_set_e9:
+		lea edx, [eax + 0x1ed]
+		mov dword ptr [eax + 0x1e9], edx
+		lea edx, [eax + 0x1321ed]
+		mov dword ptr [eax + 0x1321e9], edx
+		jmp L_init_next
+	L_set_e9_zero:
+		mov dword ptr [eax + 0x1e9], edi
+		mov dword ptr [eax + 0x1321e9], edi
+	L_init_next:
+		inc ecx
+		cmp ecx, 0x2000
+		jl L_init_loop
+		mov edx, dword ptr [esp + 0x1f]
+		lea eax, [esi + 0x154]
+		lea ecx, [esi + 0x132154]
+		mov dword ptr [esi + 0x2641f8], eax
+		mov eax, dword ptr [esp + 0x1e]
+		and edx, 0xff
+		mov dword ptr [esi + 0x2641fc], ecx
+		mov ecx, dword ptr [esp + 0x1d]
+		push edx
+		mov edx, dword ptr [esp + 0x20]
+		and eax, 0xff
+		and ecx, 0xff
+		push eax
+		and edx, 0xff
+		push ecx
+		push edx
+		lea eax, [esp + 0x38]
+		push offset s_New_Connection_from__li__li__li__100299a0
+		push eax
+		mov dword ptr [esi + 0x2641f0], edi
+		mov dword ptr [esi + 0x2641f4], edi
+		call sprintf
+		lea ecx, [esp + 0x40]
+		push 1
+		push ecx
+		push 0x4e1
+		push offset s_D__Develop_DieGildeAddOnServer_s_100298b0
+		call LogMessageInternal
+		add esp, 0x28
+		mov eax, ebx
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		add esp, 0x118
+		ret
 	}
-
-	slot_index = 0;
-	{
-		unsigned int* p = &g_player_slot_0;
-		while (*p != 0) {
-			p = (unsigned int*) ((char*) p + 0x264264);
-			slot_index++;
-			if ((int) p >= (int) &g_player_slot_overflow) {
-				goto no_more_slots;
-			}
-		}
-		slot = &g_player_slot_0 + (unsigned int) slot_index * 0x99099;
-	}
-	if (slot) {
-		goto do_accept;
-	}
-
-no_more_slots:
-	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x495, "No more Slots for new Connections!\n", 1);
-	if (g_player_slot_overflow != 0) {
-		return -1;
-	}
-	slot = &g_player_slot_overflow;
-
-do_accept:
-	addrlen = 0x10;
-	new_socket = accept(g_listen_socket, (struct sockaddr*) &addr, &addrlen);
-	if (new_socket == -1) {
-		return -1;
-	}
-
-	optval = 0x10000;
-	setsockopt(new_socket, 0xffff, 0x1002, (const char*) &optval, 4);
-	optval = 0x10000;
-	setsockopt(new_socket, 0xffff, 0x1001, (const char*) &optval, 4);
-
-	g_connection_counter++;
-	slot[1] = g_connection_counter;
-
-	memset((char*) slot + 0x26420c, 0, 87);
-	*(unsigned int*) ((char*) slot + 0x26420c) = g_connection_counter;
-
-	slot[0] = 0x2103;
-	if (slot_index == 0) {
-		slot[0] |= 0x400;
-	}
-	slot[5] = (unsigned int) new_socket;
-	*(unsigned short*) ((char*) slot + 0x14a) = 0;
-	*(unsigned short*) ((char*) slot + 0x14c) = 0;
-	*(unsigned short*) ((char*) slot + 0x14e) = 0x19;
-	slot[0x54] = GetTickCount() + 0x493e0;
-
-	{
-		int i;
-		for (i = 0; i < 0x2000; i++) {
-			unsigned char* e;
-			int tmp;
-			tmp = i;
-			tmp <<= 4;
-			tmp += i;
-			e = (unsigned char*) slot + (unsigned int) tmp * 8 + tmp;
-
-			e[0x154] = 0;
-			e[0x132154] = 0;
-
-			if (i == 0) {
-				*(unsigned int*) (e + 0x1e5) = 0;
-				*(unsigned int*) (e + 0x1321e5) = 0;
-				*(unsigned int*) (e + 0x1e9) = (unsigned int) (e + 0x1ed);
-				*(unsigned int*) (e + 0x1321e9) = (unsigned int) (e + 0x1321ed);
-			}
-			else {
-				*(unsigned int*) (e + 0x1e5) = (unsigned int) (e + 0xbb);
-				*(unsigned int*) (e + 0x1321e5) = (unsigned int) (e + 0x1320bb);
-				if (i < 0x1fff) {
-					*(unsigned int*) (e + 0x1e9) = (unsigned int) (e + 0x1ed);
-					*(unsigned int*) (e + 0x1321e9) = (unsigned int) (e + 0x1321ed);
-				}
-				else {
-					*(unsigned int*) (e + 0x1e9) = 0;
-					*(unsigned int*) (e + 0x1321e9) = 0;
-				}
-			}
-		}
-	}
-
-	*(unsigned int**) ((char*) slot + 0x2641f8) = (unsigned int*) ((char*) slot + 0x154);
-	*(unsigned int**) ((char*) slot + 0x2641fc) = (unsigned int*) ((char*) slot + 0x132154);
-	*(unsigned int*) ((char*) slot + 0x2641f0) = 0;
-	*(unsigned int*) ((char*) slot + 0x2641f4) = 0;
-
-	{
-		unsigned char* ip = (unsigned char*) &addr.sin_addr;
-		sprintf(
-			logbuf,
-			"New Connection from %li.%li.%li.%li\n",
-			(unsigned int) ip[0],
-			(unsigned int) ip[1],
-			(unsigned int) ip[2],
-			(unsigned int) ip[3]
-		);
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x4e1, logbuf, 1);
-	}
-
-	return new_socket;
 }
 
 /* Closes a specific player's network connection. Shuts down
