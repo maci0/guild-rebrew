@@ -1157,8 +1157,7 @@ status = "EXACT"
 
 ["SERVER.0x10019d30"]
 size = 407
-status = "NEAR_MATCHING"
-blocker = "comparison direction swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+status = "RELOC"
 
 ["SERVER.0x10019ed0"]
 size = 395

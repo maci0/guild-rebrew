@@ -312,6 +312,7 @@ char s_plt_SetPlantMap____Could_not_fin_1002d990[1] = "";
 char s_D__Develop_DieGildeAddOn_auxilla_1002d9c0[1] = "";
 char s_plt_SetPlantMap____Map_is_not_al_1002d9ec[1] = "";
 char s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394[1] = "";
+char s_gm_KannObjektHergestellt___pCObj_10031628[1] = "";
 char s_cm_ExAllocCharacter___gm_AllocSp_1002d364[1] = "";
 unsigned char g_static_entity0_entity_id[4];
 char s_cm_ExEmployWorker____Illegal_gw__1002d318[1] = "";

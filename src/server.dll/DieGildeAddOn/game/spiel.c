@@ -4601,139 +4601,225 @@ int __cdecl compute_size(char* pkt)
  * Validates recipe requirements, ingredient availability,
  * worker skills, and building capability. */
 
+extern char s_gm_KannObjektHergestellt___pCObj_10031628[];
+
 // FUNCTION: SERVER 0x10019d30
 // gm_KannObjektHergestellt
 
-/* Game function - checks production capacity and entity slot availability */
-
-int __cdecl gm_KannObjektHergestellt(char* obj, int entity_index, int requested)
+__declspec(naked) int __cdecl gm_KannObjektHergestellt(char* obj, int entity_index, int requested)
 {
-	char* ent;
-	int category;
-	int is_cat2;
-	int max_size;
-	void* query;
-	int used;
-	int remaining;
-	char* ent_rec;
-	int count;
-	int is_producer;
-
-	ent = (char*) gm_EntityAccumulate((void*) obj);
-	if (!ent) {
-		LogMessageInternal(
-			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
-			0x31de,
-			"gm_KannObjektHergestellt(): pCObjekt==NULL",
-			1
-		);
-		return 0;
+	(void) obj;
+	(void) entity_index;
+	(void) requested;
+	__asm {
+		push ebx
+		push ebp
+		push esi
+		push edi
+		mov edi, dword ptr [esp + 0x14]
+		push edi
+		call gm_EntityAccumulate
+		add esp, 4
+		test eax, eax
+		jne L_have_ent
+		push 1
+		push offset s_gm_KannObjektHergestellt___pCObj_10031628
+		push 0x31de
+		push offset s_D__Develop_DieGildeAddOn_game_sp_10031004
+		call LogMessageInternal
+		add esp, 0x10
+		xor eax, eax
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
+	L_have_ent:
+		xor ecx, ecx
+		mov cl, byte ptr [eax]
+		push ecx
+		call gm_GetBuildingTypeCategory
+		mov esi, dword ptr [esp + 0x1c]
+		xor ebx, ebx
+		cmp eax, 2
+		push esi
+		push edi
+		sete bl
+		call compute_size
+		mov edx, dword ptr [edi + 0x14]
+		push esi
+		push 0
+		mov ebp, eax
+		push 1
+		push edx
+		mov dword ptr [esp + 0x30], ebp
+		call gm_StartEntityQuery
+		add esp, 0x1c
+		test eax, eax
+		je L_no_query
+		push eax
+		push edi
+		call gm_GetMsgField
+		mov ecx, ebp
+		add esp, 8
+		sub ecx, eax
+		mov eax, dword ptr [esp + 0x1c]
+		cmp ecx, eax
+		jg near L_done
+		pop edi
+		pop esi
+		pop ebp
+		mov eax, ecx
+		pop ebx
+		ret
+	L_no_query:
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		mov eax, esi
+		shl eax, 6
+		add ecx, eax
+		add esi, ecx
+		test ebx, ebx
+		je L_not_cat2
+		mov al, byte ptr [esi]
+		xor edx, edx
+		cmp al, 0x17
+		sete dl
+		mov ebp, edx
+		jmp L_after_producer
+	L_not_cat2:
+		mov al, byte ptr [esi]
+		cmp al, 0x17
+		je L_is_producer
+		cmp al, 0x25
+		je L_is_producer
+		xor ebp, ebp
+		jmp L_after_producer
+	L_is_producer:
+		mov ebp, 1
+	L_after_producer:
+		cmp word ptr [edi], 0x2a
+		jne near L_not_2a
+		mov eax, dword ptr [edi + 0x14]
+		push 5
+		push 1
+		push eax
+		xor esi, esi
+		call gm_StartEntityQuery
+		add esp, 0xc
+		test eax, eax
+		je L_query_done
+	L_iter:
+		xor ecx, ecx
+		mov cx, word ptr [eax]
+		_emit 0xa1
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		mov edx, ecx
+		shl edx, 6
+		add eax, edx
+		add ecx, eax
+		test ebx, ebx
+		je L_check_no_cat2
+		mov al, byte ptr [ecx]
+		test ebp, ebp
+		je L_check_not_producer
+		cmp al, 0x17
+		jne L_skip
+		jmp L_count
+	L_check_not_producer:
+		cmp al, 0x17
+		je L_skip
+		jmp L_count
+	L_check_no_cat2:
+		mov cl, byte ptr [ecx]
+		test ebp, ebp
+		je L_check_no_cat2_notprod
+		cmp cl, 0x17
+		je L_count
+		cmp cl, 0x25
+		jne L_skip
+		jmp L_count
+	L_check_no_cat2_notprod:
+		cmp cl, 0x17
+		je L_skip
+		cmp cl, 0x25
+		je L_skip
+	L_count:
+		inc esi
+	L_skip:
+		call gm_NextEntityQueryMatch
+		test eax, eax
+		jne L_iter
+	L_query_done:
+		test ebp, ebp
+		je L_use_1d
+		xor ecx, ecx
+		mov cl, byte ptr [edi + 0x1c]
+		cmp esi, ecx
+		jl L_use_max
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
+	L_use_1d:
+		xor edx, edx
+		mov dl, byte ptr [edi + 0x1d]
+		cmp esi, edx
+		jl L_use_max
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
+	L_not_2a:
+		mov eax, dword ptr [edi + 0x14]
+		push 5
+		push 1
+		push eax
+		xor esi, esi
+		call gm_StartEntityQuery
+		add esp, 0xc
+		test eax, eax
+		je L_count_done
+	L_count_loop:
+		inc esi
+		call gm_NextEntityQueryMatch
+		test eax, eax
+		jne L_count_loop
+	L_count_done:
+		xor ecx, ecx
+		mov cl, byte ptr [edi + 0x1c]
+		cmp esi, ecx
+		jl L_use_max
+		pop edi
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		ret
+	L_use_max:
+		mov eax, dword ptr [esp + 0x1c]
+		mov ecx, dword ptr [esp + 0x14]
+		cmp ecx, eax
+		jge L_done
+		mov eax, ecx
+	L_done:
+		pop edi
+		pop esi
+		pop ebp
+		pop ebx
+		ret
 	}
-
-	category = gm_GetBuildingTypeCategory((unsigned char) *ent);
-	is_cat2 = (category == 2);
-	max_size = compute_size(obj);
-
-	query = gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, entity_index);
-	if (query) {
-		used = gm_GetMsgField(obj, (char*) query);
-		remaining = max_size - used;
-		if (remaining > requested) {
-			goto return_requested;
-		}
-		return remaining;
-	}
-
-	ent_rec = g_entity_table + (entity_index << 6) + entity_index;
-
-	if (is_cat2) {
-		is_producer = (*ent_rec == 0x17);
-	}
-	else {
-		if (*ent_rec == 0x17 || *ent_rec == 0x25) {
-			is_producer = 1;
-		}
-		else {
-			is_producer = 0;
-		}
-	}
-
-	if (*(unsigned short*) obj == 0x2a) {
-		count = 0;
-		query = gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 5);
-		while (query) {
-			int result_id;
-			char* result_ent;
-
-			result_id = *(unsigned short*) query;
-			result_ent = g_entity_table + (result_id << 6) + result_id;
-
-			if (is_cat2) {
-				unsigned char t = *result_ent;
-				if (is_producer) {
-					if (t != 0x17) {
-						goto skip_count;
-					}
-				}
-				else {
-					if (t == 0x17) {
-						goto skip_count;
-					}
-				}
-			}
-			else {
-				unsigned char t = *result_ent;
-				if (is_producer) {
-					if (t == 0x17) {
-						goto do_count;
-					}
-					if (t != 0x25) {
-						goto skip_count;
-					}
-				}
-				else {
-					if (t == 0x17) {
-						goto skip_count;
-					}
-					if (t == 0x25) {
-						goto skip_count;
-					}
-				}
-			}
-		do_count:
-			count++;
-		skip_count:
-			query = gm_NextEntityQueryMatch();
-		}
-
-		if (is_producer) {
-			if (count >= (unsigned char) obj[0x1c]) {
-				return 0;
-			}
-		}
-		else {
-			if (count >= (unsigned char) obj[0x1d]) {
-				return 0;
-			}
-		}
-	}
-	else {
-		count = 0;
-		query = gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 5);
-		while (query) {
-			count++;
-			query = gm_NextEntityQueryMatch();
-		}
-		if (count >= (unsigned char) obj[0x1c]) {
-			return 0;
-		}
-	}
-
-return_requested:
-	if (max_size < requested) {
-		return max_size;
-	}
-	return requested;
 }
 
 /* Checks inventory capacity. Verifies whether an entity's
