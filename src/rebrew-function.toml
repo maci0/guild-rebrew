@@ -711,8 +711,7 @@ globals = "SERVER 0x1003546c"
 
 ["SERVER.0x10011940"]
 size = 674
-status = "STUB"
-blocker_delta = 639
+status = "RELOC"
 
 ["SERVER.0x10011bf0"]
 size = 1040

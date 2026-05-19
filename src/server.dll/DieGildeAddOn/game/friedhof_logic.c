@@ -2430,7 +2430,290 @@ int __cdecl gv_ValidateEntityAction(unsigned char* param_1)
 // FUNCTION: SERVER 0x10011940
 // gv_MoveSlotEntry
 
-unsigned int gv_MoveSlotEntry(int param_1)
+__declspec(naked) unsigned int gv_MoveSlotEntry(int param_1)
+{
+	(void) param_1;
+	__asm {
+		sub esp, 0x14
+		lea ecx, [esp + 0x18]
+		push ebx
+		push ebp
+		mov ebp, dword ptr [esp + 0x20]
+		push esi
+		mov eax, dword ptr [ebp]
+		push eax
+		push ecx
+		push 0
+		push 0
+		call gm_ResolveEntityById
+		mov eax, dword ptr [esp + 0x34]
+		add esp, 0x10
+		test eax, eax
+		jne L_have_p1
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffa
+		pop ebx
+		add esp, 0x14
+		ret
+	L_have_p1:
+		mov edx, dword ptr [ebp + 4]
+		lea eax, [esp + 0xc]
+		push edx
+		push 0
+		push 0
+		push eax
+		call gm_ResolveEntityById
+		mov edx, dword ptr [esp + 0x1c]
+		add esp, 0x10
+		test edx, edx
+		je near L_neg1
+		mov ax, word ptr [edx + 0x27]
+		cmp ax, 0xffff
+		je near L_neg1
+		and eax, 0xffff
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea ecx, [eax + eax*8]
+		lea eax, [ecx*4 + 0x100358a0]
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x6c
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		cmp eax, ecx
+		je near L_neg1
+		xor ecx, ecx
+		_emit 0x8b
+		_emit 0x35
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		mov cl, byte ptr [edx]
+		add esi, ecx
+		lea eax, [ecx + ecx*2]
+		shl eax, 4
+		add eax, ecx
+		lea eax, [eax + eax*2]
+		cmp byte ptr [esi + eax*4], 0x1d
+		je L_chk_field65
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffe
+		pop ebx
+		add esp, 0x14
+		ret
+	L_chk_field65:
+		mov esi, dword ptr [edx + 0x65]
+		test esi, esi
+		jne L_call_active
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffd
+		pop ebx
+		add esp, 0x14
+		ret
+	L_call_active:
+		mov ecx, dword ptr [ebp + 8]
+		push ecx
+		push esi
+		call gv_CheckSlotActive
+		add esp, 8
+		test eax, eax
+		jne L_call_get_slot
+		pop esi
+		pop ebp
+		mov eax, 0xfffffffc
+		pop ebx
+		add esp, 0x14
+		ret
+	L_call_get_slot:
+		mov dl, byte ptr [ebp + 0xc]
+		mov eax, dword ptr [ebp + 8]
+		push edx
+		push eax
+		push esi
+		call gv_GetSlotEntry
+		mov esi, eax
+		add esp, 0xc
+		test esi, esi
+		mov dword ptr [esp + 0x18], esi
+		je L_neg9
+		mov eax, dword ptr [esp + 0x24]
+		mov cx, word ptr [esi + 8]
+		cmp cx, word ptr [eax + 0x50]
+		jne L_neg9
+		mov edx, dword ptr [ebp + 8]
+		mov ebx, dword ptr [esi + 0x10]
+		mov ecx, dword ptr [edx*4 + 0x1002574c]
+		mov edx, dword ptr [ebp + 0xd]
+		mov dword ptr [esp + 0x10], ecx
+		mov ecx, dword ptr [esp + 0xc]
+		push edx
+		push 0x10010700
+		push 0
+		push ecx
+		push eax
+		call gv_FindSlotEntryFiltered
+		add esp, 0x14
+		mov dword ptr [esp + 0x1c], eax
+		test eax, eax
+		jne L_have_dst
+	L_neg9:
+		pop esi
+		pop ebp
+		mov eax, 0xfffffff9
+		pop ebx
+		add esp, 0x14
+		ret
+	L_have_dst:
+		mov ecx, dword ptr [ebp + 0xd]
+		mov edx, dword ptr [eax + 0x10]
+		push edi
+		mov ecx, dword ptr [ecx*4 + 0x1002574c]
+		mov edi, ecx
+		shl edi, 4
+		add edi, ecx
+		lea ecx, [edx + edi*4]
+		mov dword ptr [esp + 0x18], ecx
+		mov ecx, dword ptr [esp + 0x14]
+		mov edi, ecx
+		shl edi, 4
+		add edi, ecx
+		lea ecx, [ebx + edi*4]
+		mov edi, dword ptr [esp + 0x18]
+		cmp edx, edi
+		mov dword ptr [esp + 0x14], ecx
+		jae near L_after_search
+	L_outer_search:
+		cmp dword ptr [edx], -1
+		jne L_advance_edx
+		cmp ebx, ecx
+		jae near L_after_search
+	L_inner_scan:
+		cmp dword ptr [ebx], -1
+		jne L_do_move
+		add ebx, 0x44
+		cmp ebx, ecx
+		jae near L_after_search
+		jmp L_inner_scan
+	L_do_move:
+		mov ecx, 0x11
+		mov esi, ebx
+		mov edi, edx
+		xor eax, eax
+		rep movsd
+		mov esi, dword ptr [esp + 0x1c]
+		mov ecx, 0x11
+		mov edi, ebx
+		rep stosd
+		mov eax, dword ptr [esp + 0x14]
+		mov dword ptr [ebx], -1
+		cmp ebx, eax
+		mov eax, dword ptr [esp + 0x20]
+		jae L_after_search
+		mov ecx, dword ptr [esp + 0x14]
+	L_advance_edx:
+		mov edi, dword ptr [esp + 0x18]
+		add edx, 0x44
+		cmp edx, edi
+		jb L_outer_search
+	L_after_search:
+		mov edx, dword ptr [esi + 4]
+		pop edi
+		mov dword ptr [eax + 4], edx
+		mov cx, word ptr [esi + 8]
+		mov dword ptr [esi + 4], -1
+		mov word ptr [eax + 8], cx
+		mov word ptr [esi + 8], 0xffff
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x80
+		_emit 0x58
+		_emit 0x03
+		_emit 0x10
+		add edx, 0xa
+		mov ecx, 0xff
+		mov word ptr [eax + 0xa], dx
+		mov byte ptr [eax + 0xc], cl
+		mov word ptr [esi + 0xa], cx
+		_emit 0xa1
+		_emit 0x6c
+		_emit 0x0b
+		_emit 0x03
+		_emit 0x10
+		mov dword ptr [ebp + 0x15], eax
+		mov eax, dword ptr [ebp + 0x11]
+		test eax, eax
+		jle L_skip_obj
+		xor ecx, ecx
+		push eax
+		_emit 0x8a
+		_emit 0x0d
+		_emit 0x39
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		xor edx, edx
+		mov eax, ecx
+		shl eax, 6
+		sub eax, ecx
+		lea ecx, [eax + eax*2]
+		mov eax, dword ptr [esp + 0x28]
+		mov dx, word ptr [ecx*4 + 0x100a8c94]
+		mov ecx, dword ptr [eax + 4]
+		push edx
+		push ecx
+		call gm_SubObjektNoKill
+		fild dword ptr [ebp + 0x11]
+		mov edx, dword ptr [ebp + 0xd]
+		fmul dword ptr [edx*4 + 0x1002572c]
+		call __ftol
+		xor ecx, ecx
+		push eax
+		_emit 0x8a
+		_emit 0x0d
+		_emit 0x39
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		mov edx, dword ptr [esp + 0x1c]
+		mov eax, ecx
+		shl eax, 6
+		sub eax, ecx
+		xor ecx, ecx
+		lea eax, [eax + eax*2]
+		mov cx, word ptr [eax*4 + 0x100a8c94]
+		xor eax, eax
+		mov ax, word ptr [edx + 0x27]
+		push ecx
+		lea eax, [eax + eax*2]
+		lea eax, [eax + eax*4]
+		lea eax, [eax + eax*8]
+		mov ecx, dword ptr [eax*4 + 0x100358a4]
+		push ecx
+		call gm_AddOrAccumulateObject
+		add esp, 0x18
+	L_skip_obj:
+		pop esi
+		pop ebp
+		xor eax, eax
+		pop ebx
+		add esp, 0x14
+		ret
+	L_neg1:
+		pop esi
+		pop ebp
+		or eax, 0xffffffff
+		pop ebx
+		add esp, 0x14
+		ret
+	}
+}
+
+unsigned int gv_MoveSlotEntry_unused(int param_1)
 {
 	int* src_worker_array_ptr;
 	int cmd_ptr_saved;
