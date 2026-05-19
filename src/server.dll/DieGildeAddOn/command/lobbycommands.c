@@ -259,14 +259,12 @@ int __cdecl lb_HandleLobbyCommands(char* player, char* msg)
 main_logic:
         /* Count active players */
         count = 0;
-        p = (char*) g_player_slots_base;
-        do {
+        for (p = (char*) g_player_slots_base; p < (char*)g_player_slots; p += 0x264264) {
                 flags = *(int*) p;
                 if ((flags & 1) && (flags & 0x200) && !(flags & 0x2000)) {
                         count++;
                 }
-                p += 0x264264;
-        } while (p < (char*)g_player_slots);
+        }
 
         if (count >= *(int*) 0x11764084) {
                 LogMessageInternal((char*) 0x1002d70c, 0x2b1, (char*) 0x1002d848, 1);
@@ -279,15 +277,13 @@ main_logic:
         }
 
         /* Find matching player by game ID */
-        p = (char*) g_player_slots_base;
         *(int*) (msg + 0x18) = 0;
-        do {
+        for (p = (char*) g_player_slots_base; p < (char*)g_player_slots; p += 0x264264) {
                 flags = *(int*) p;
                 if ((flags & 1) && (flags & 0x200) && p != player && *(int*) (p + 0x264218) == *(int*) (msg + 0x20)) {
                         goto found_match;
                 }
-                p += 0x264264;
-        } while (p < (char*)g_player_slots);
+        }
         goto do_join;
 
 found_match:
@@ -295,18 +291,14 @@ found_match:
         memset(slots, 0, sizeof(slots));
 
         /* Mark used slots */
-        {
-                p = (char*) g_player_slots_base;
-                do {
-                        flags = *(int*) p;
-                        if ((flags & 1) && (flags & 0x200) && p != player) {
-                                int slot_id = *(int*) (p + 0x264218);
-                                if (slot_id >= 0 && slot_id < 8) {
-                                        slots[slot_id] = 1;
-                                }
+        for (p = (char*) g_player_slots_base; p < (char*)g_player_slots; p += 0x264264) {
+                flags = *(int*) p;
+                if ((flags & 1) && (flags & 0x200) && p != player) {
+                        int slot_id = *(int*) (p + 0x264218);
+                        if (slot_id >= 0 && slot_id < 8) {
+                                slots[slot_id] = 1;
                         }
-                        p += 0x264264;
-                } while (p < (char*)g_player_slots);
+                }
         }
 
         /* Find first empty slot */
