@@ -125,9 +125,8 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 		}
 		return 1;
 	}
-	production_cap = 0;
 	material_iter = (ushort*)(recipe_def + 0x2e);
-	do {
+	for (production_cap = 0; production_cap < 4; production_cap++) {
 		if (*material_iter != 0) {
 			obj_entry = (ushort*)gm_StartEntityQuery(*(int*)(lager + 10), 1, 0, (uint)*material_iter);
 			if (obj_entry == (ushort*)0) {
@@ -144,9 +143,8 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 				gm_RemoveObjectByType((char**)(lager + 10), (uint)*material_iter);
 			}
 		}
-		production_cap = production_cap + 1;
 		material_iter = material_iter + 1;
-	} while (production_cap < 4);
+	}
 	material_iter = (ushort*)gm_StartEntityQuery(*(int*)(lager + 10), 1, 0, (uint)*(ushort*)(msg + 0x14));
 	recipe = recipe_def;
 	if (material_iter != (ushort*)0) {
