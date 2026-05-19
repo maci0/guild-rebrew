@@ -674,7 +674,6 @@ status = "RELOC"
 ["SERVER.0x10010f50"]
 size = 66
 status = "RELOC"
-blocker_delta = 539
 
 ["SERVER.0x10010fa0"]
 size = 525
@@ -695,7 +694,6 @@ status = "RELOC"
 ["SERVER.0x10011660"]
 size = 297
 status = "RELOC"
-blocker_delta = 39
 globals = "SERVER 0x100a8c30"
 
 ["SERVER.0x10011790"]
