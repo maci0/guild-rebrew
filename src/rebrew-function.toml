@@ -305,6 +305,7 @@ status = "RELOC"
 ["SERVER.0x1000bdf0"]
 size = 1002
 status = "STUB"
+cflags = "/O2 /Oy- /Gd"
 blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
 blocker_delta = 935
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
