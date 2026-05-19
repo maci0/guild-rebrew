@@ -57,53 +57,70 @@ extern char s_cm_ChkChangeBits___Invalid_actio_1002ca04[];
  * invalid. Used as precondition check for bit-field changes. */
 
 // FUNCTION: SERVER 0x1000cf30
-int __cdecl cm_ChkChangeBits(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ChkChangeBits(int param_1, char* param_2)
 {
-	int cmd;
-	int field;
-	int ref;
-	void* secondary;
-	void* tertiary;
-
-	cmd = param_1;
-	field = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
-	*(int*) (cmd + 0x10) = field;
-	if (gm_ResolveEntityById((void**) &param_1, &secondary, &tertiary, field) == 0) {
-		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
-			0x250d,
-			s_cm_ChkChangeBits___Invalid_Id_1002ca54,
-			1
-		);
-		return 1;
+	(void) param_1;
+	(void) param_2;
+	__asm {
+		sub esp, 8
+		push esi
+		mov esi, dword ptr [esp + 0x10]
+		mov eax, dword ptr [esi + 0x10]
+		push eax
+		push esi
+		call gm_GetFieldByType
+		lea ecx, [esp + 0xc]
+		mov dword ptr [esi + 0x10], eax
+		push eax
+		lea edx, [esp + 0x14]
+		push ecx
+		lea eax, [esp + 0x20]
+		push edx
+		push eax
+		call gm_ResolveEntityById
+		add esp, 0x18
+		test eax, eax
+		jne L_resolved
+		push 1
+		push 0x1002ca54
+		push 0x250d
+		jmp L_log
+	L_resolved:
+		mov ecx, dword ptr [esp + 0x10]
+		mov eax, dword ptr [esp + 4]
+		test ecx, ecx
+		jne L_have_ref
+		mov ecx, dword ptr [esp + 8]
+		test ecx, ecx
+		jne L_have_ref
+		mov ecx, eax
+	L_have_ref:
+		test eax, eax
+		je L_ret0
+		mov edx, dword ptr [esi + 0x14]
+		add eax, 0x1c8
+		add edx, ecx
+		cmp edx, eax
+		jne L_ret0
+		test dword ptr [esi + 0x1c], 0x800000
+		je L_ret0
+		test dword ptr [eax], 0x800000
+		je L_ret0
+		push 1
+		push 0x1002ca04
+		push 0x2533
+	L_log:
+		push 0x1002c748
+		call LogMessageInternal
+		add esp, 0x10
+		mov eax, 1
+		pop esi
+		add esp, 8
+		ret
+	L_ret0:
+		xor eax, eax
+		pop esi
+		add esp, 8
+		ret
 	}
-
-	ref = (int) param_2;
-	if (ref == 0) {
-		ref = (int) secondary;
-		if (ref == 0) {
-			ref = param_1;
-		}
-	}
-
-	if (param_1 == 0) {
-		return 0;
-	}
-	if (*(int*) (cmd + 0x14) + ref != param_1 + 0x1c8) {
-		return 0;
-	}
-	if ((*(unsigned int*) (cmd + 0x1c) & 0x800000) == 0) {
-		return 0;
-	}
-	if ((*(unsigned int*) (param_1 + 0x1c8) & 0x800000) == 0) {
-		return 0;
-	}
-
-	LogMessageInternal(
-		s_D__Develop_DieGildeAddOn_command_1002c748,
-		0x2533,
-		s_cm_ChkChangeBits___Invalid_actio_1002ca04,
-		1
-	);
-	return 1;
 }

@@ -416,9 +416,7 @@ blocker_delta = 14
 
 ["SERVER.0x1000cf30"]
 size = 162
-status = "STUB"
-blocker = "instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp)"
-blocker_delta = 152
+status = "RELOC"
 
 ["SERVER.0x1000cfe0"]
 size = 64
