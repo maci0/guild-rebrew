@@ -16,9 +16,9 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 // FUNCTION: SERVER 0x100151e0
 // FindAndMatchParents
 
-__declspec(naked) unsigned int FindAndMatchParents(unsigned int param_1)
+__declspec(naked) unsigned int FindAndMatchParents(unsigned int arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		sub esp, 0x20
 		push ebx
@@ -280,16 +280,16 @@ __declspec(naked) void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 	}
 }
 
-/* Starts an entity query filtered by type byte from param_1.
+/* Starts an entity query filtered by type byte from arg1.
  * Dispatches entity iteration across buildings, citizens, or
  * other entity categories based on the type selector. */
 
 // FUNCTION: SERVER 0x10015460
 // sim_StartEntityQueryByType
 
-__declspec(naked) void __cdecl sim_StartEntityQueryByType(unsigned char* param_1)
+__declspec(naked) void __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push esi
 		mov esi, dword ptr [esp + 8]
@@ -367,23 +367,23 @@ __declspec(naked) void __cdecl sim_StartEntityQueryByType(unsigned char* param_1
 // FUNCTION: SERVER 0x10015500
 // sim_CreateCitizen
 
-void* __cdecl sim_CreateCitizen(unsigned char param_1, int param_2, int param_3, unsigned char param_4, unsigned char param_5)
+void* __cdecl sim_CreateCitizen(unsigned char arg1, int arg2, int arg3, unsigned char arg4, unsigned char arg5)
 {
 	unsigned int new_entity_slot;
 
-	if ((param_1 & 1) != 0) {
-		new_entity_slot = FindAndMatchParents(param_3) & 0xffff;
+	if ((arg1 & 1) != 0) {
+		new_entity_slot = FindAndMatchParents(arg3) & 0xffff;
 		if (new_entity_slot == 0xffff) {
 			goto error;
 		}
-		if ((param_1 & 2) != 0) {
-			(&DAT_10035a05)[new_entity_slot * 0x21c] = param_5;
-			(&DAT_10035a04)[new_entity_slot * 0x21c] = param_4;
+		if ((arg1 & 2) != 0) {
+			(&DAT_10035a05)[new_entity_slot * 0x21c] = arg5;
+			(&DAT_10035a04)[new_entity_slot * 0x21c] = arg4;
 		}
 	}
 	else {
 		new_entity_slot =
-			gm_CreateEntityFromParents(param_2, -1, -1, param_3, 0, (unsigned int) param_4, (unsigned int) param_5, 2) &
+			gm_CreateEntityFromParents(arg2, -1, -1, arg3, 0, (unsigned int) arg4, (unsigned int) arg5, 2) &
 			0xffff;
 	}
 	if (new_entity_slot == 0xffff) {
@@ -417,12 +417,12 @@ typedef struct {
 } TimeStruct;
 #pragma pack(pop)
 
-__declspec(naked) int __cdecl AdvanceGameClock(int* param_1, int param_2, int param_3, int param_4)
+__declspec(naked) int __cdecl AdvanceGameClock(int* arg1, int arg2, int arg3, int arg4)
 {
-	(void) param_1;
-	(void) param_2;
-	(void) param_3;
-	(void) param_4;
+	(void) arg1;
+	(void) arg2;
+	(void) arg3;
+	(void) arg4;
 	__asm {
 		mov ecx, dword ptr [esp + 4]
 		mov edx, dword ptr [esp + 0x10]
@@ -512,9 +512,9 @@ __declspec(naked) int __cdecl AdvanceGameClock(int* param_1, int param_2, int pa
 // FUNCTION: SERVER 0x10015690
 // sim_SetSyncParams
 
-void __cdecl sim_SetSyncParams(int param_1, unsigned char param_2, unsigned int param_3, unsigned int param_4)
+void __cdecl sim_SetSyncParams(int arg1, unsigned char arg2, unsigned int arg3, unsigned int arg4)
 {
-	*(unsigned int*) (param_1 + 10) = param_4 & 0xff;
-	*(unsigned short*) (param_1 + 4) = (unsigned short) param_2;
-	*(unsigned int*) (param_1 + 6) = param_3 & 0xff;
+	*(unsigned int*) (arg1 + 10) = arg4 & 0xff;
+	*(unsigned short*) (arg1 + 4) = (unsigned short) arg2;
+	*(unsigned int*) (arg1 + 6) = arg3 & 0xff;
 }

@@ -334,11 +334,11 @@ int __cdecl ahm_ApplyColorComponent(char* color_cmd, char* target)
 // FUNCTION: SERVER 0x1000c280
 // ahm_AllocateEntitySlot
 
-__declspec(naked) int __cdecl ahm_AllocateEntitySlot(int cmd_payload, int param_2, int param_3)
+__declspec(naked) int __cdecl ahm_AllocateEntitySlot(int cmd_payload, int arg2, int arg3)
 {
 	(void) cmd_payload;
-	(void) param_2;
-	(void) param_3;
+	(void) arg2;
+	(void) arg3;
 	__asm {
 		push esi
 		push edi
@@ -452,10 +452,10 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 // FUNCTION: SERVER 0x1000c3c0
 // ahm_ClampFloatValue
 
-__declspec(naked) int __cdecl ahm_ClampFloatValue(int cmd_payload, int param_2)
+__declspec(naked) int __cdecl ahm_ClampFloatValue(int cmd_payload, int arg2)
 {
 	(void) cmd_payload;
-	(void) param_2;
+	(void) arg2;
 	__asm {
 		mov eax, dword ptr [esp + 4]
 		mov ecx, dword ptr [esp + 8]
@@ -539,10 +539,10 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 // FUNCTION: SERVER 0x1000c4d0
 // ahm_AllocAhmInfo
 
-__declspec(naked) int __cdecl ahm_AllocAhmInfo(int cmd_payload, int param_2)
+__declspec(naked) int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
 {
 	(void) cmd_payload;
-	(void) param_2;
+	(void) arg2;
 	__asm {
 		sub esp, 0x3c
 		_emit 0x8d

@@ -119,14 +119,14 @@ extern char g_100314b8[];
 int __cdecl gm_EntityAccumulate(void*);
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 void __cdecl amt_ClearEntityLinks(short*);
-void __cdecl gm_InitEntityIfValid(void* param_1);
+void __cdecl gm_InitEntityIfValid(void* arg1);
 void __cdecl gm_DeallocEntity(unsigned int idx, int param);
 extern int DAT_10035434;
 extern int DAT_1003542c;
 extern int DAT_10035430;
 extern char g_entity_base[];
 extern char g_entity_end[];
-int __cdecl gm_GetBuildingTypeCategory(int param_1);
+int __cdecl gm_GetBuildingTypeCategory(int arg1);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
 extern float DAT_100257bc;
@@ -534,10 +534,10 @@ __declspec(naked) int __cdecl gm_ResolveEntityById(void** dynamic, void** existi
 // DATA: SERVER 0x1009b770
 extern char g_slot_array[];
 
-__declspec(naked) char* __cdecl gm_FindSlotById(int param_1, int param_2)
+__declspec(naked) char* __cdecl gm_FindSlotById(int arg1, int arg2)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) arg1;
+	(void) arg2;
 	__asm {
 		mov edx, dword ptr [esp + 4]
 		xor ecx, ecx
@@ -748,10 +748,10 @@ void __cdecl gm_NoopRet2(void)
 // FUNCTION: SERVER 0x10016680
 // gm_RemoveLinkedNodeById
 
-__declspec(naked) int __cdecl gm_RemoveLinkedNodeById(int* param_1, int param_2)
+__declspec(naked) int __cdecl gm_RemoveLinkedNodeById(int* arg1, int arg2)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) arg1;
+	(void) arg2;
 	__asm {
 		push ebx
 		push ebp
@@ -915,7 +915,7 @@ void* __cdecl gm_AddOrAccumulateObject(int parent_id, int type_id, int amount)
 // FUNCTION: SERVER 0x10016de0
 // gm_SubObjekt
 
-int __cdecl gm_SubObjekt(void* param_1, unsigned int param_2, int param_3)
+int __cdecl gm_SubObjekt(void* arg1, unsigned int arg2, int arg3)
 {
 	unsigned int objectTypeId;
 	int resolve_result;
@@ -923,8 +923,8 @@ int __cdecl gm_SubObjekt(void* param_1, unsigned int param_2, int param_3)
 	void* dynamic_ent;
 	void* static_ent;
 
-	resolve_result = gm_ResolveEntityById(&dynamic_ent, (void**) &param_1, &static_ent, (int) param_1);
-	objectTypeId = param_2;
+	resolve_result = gm_ResolveEntityById(&dynamic_ent, (void**) &arg1, &static_ent, (int) arg1);
+	objectTypeId = arg2;
 	if (resolve_result == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xe2d, "gm_SubObjekt(): Parent not found", 1);
 	}
@@ -932,8 +932,8 @@ int __cdecl gm_SubObjekt(void* param_1, unsigned int param_2, int param_3)
 		if (dynamic_ent != (void*) 0) {
 			objectListHead = (void**) ((int) dynamic_ent + 0x5d);
 		}
-		else if (param_1 != (void*) 0) {
-			objectListHead = (void**) ((int) param_1 + 0x14);
+		else if (arg1 != (void*) 0) {
+			objectListHead = (void**) ((int) arg1 + 0x14);
 		}
 		else {
 			if (static_ent == (void*) 0) {
@@ -941,10 +941,10 @@ int __cdecl gm_SubObjekt(void* param_1, unsigned int param_2, int param_3)
 			}
 			objectListHead = (void**) ((int) static_ent + 0x178);
 		}
-		param_1 = gm_StartEntityQuery((int) *objectListHead, 1, 0, param_2);
-		if (param_1 != (void*) 0 && *(int*) ((int) param_1 + 0xe) >= param_3) {
-			*(int*) ((int) param_1 + 0xe) = *(int*) ((int) param_1 + 0xe) - param_3;
-			if (*(int*) ((int) param_1 + 0xe) <= 0) {
+		arg1 = gm_StartEntityQuery((int) *objectListHead, 1, 0, arg2);
+		if (arg1 != (void*) 0 && *(int*) ((int) arg1 + 0xe) >= arg3) {
+			*(int*) ((int) arg1 + 0xe) = *(int*) ((int) arg1 + 0xe) - arg3;
+			if (*(int*) ((int) arg1 + 0xe) <= 0) {
 				gm_RemoveObjectByType(objectListHead, objectTypeId);
 			}
 			return 1;
@@ -1503,53 +1503,53 @@ char* __cdecl gm_SearchStruct(void)
 
 /* DAT_10035a0c: base of entity array, stride 0x21c (0x87 dwords), 768 entries */
 
-int __cdecl gm_CleanupBuildingEntity(unsigned char* param_1)
+int __cdecl gm_CleanupBuildingEntity(unsigned char* arg1)
 {
 	int* entity_scan;
 
-	if (param_1 == (unsigned char*) 0) {
+	if (arg1 == (unsigned char*) 0) {
 		return -1;
 	}
-	if (*param_1 == 0) {
+	if (*arg1 == 0) {
 		return -2;
 	}
-	switch (*param_1) {
+	switch (*arg1) {
 	case 0x1e:
-		if (*(void**) (param_1 + 0x71) != (void*) 0) {
-			m_FreeTracked(*(void**) (param_1 + 0x71));
-			*(int*) (param_1 + 0x71) = 0;
+		if (*(void**) (arg1 + 0x71) != (void*) 0) {
+			m_FreeTracked(*(void**) (arg1 + 0x71));
+			*(int*) (arg1 + 0x71) = 0;
 		}
-		*(int*) (param_1 + 0x71) = 0;
+		*(int*) (arg1 + 0x71) = 0;
 		goto cleanup_loop;
 	case 0x48:
 	case 0x49:
 	case 0x4a:
-		gv_Free3Fields(*(void**) (param_1 + 0x65));
+		gv_Free3Fields(*(void**) (arg1 + 0x65));
 		break;
 	case 0x4b:
 	case 0x4c:
 	case 0x4d:
-		m_FreeTracked(*(void**) (param_1 + 0x65));
+		m_FreeTracked(*(void**) (arg1 + 0x65));
 		break;
 	default:
 		goto cleanup_loop;
 	}
-	*(int*) (param_1 + 0x65) = 0;
+	*(int*) (arg1 + 0x65) = 0;
 cleanup_loop:
 	entity_scan = &DAT_10035a0c;
 	do {
-		if ((unsigned char*) entity_scan[1] == param_1) {
+		if ((unsigned char*) entity_scan[1] == arg1) {
 			entity_scan[1] = 0;
 		}
-		if ((unsigned char*) *entity_scan == param_1) {
+		if ((unsigned char*) *entity_scan == arg1) {
 			*entity_scan = 0;
 		}
 		entity_scan = entity_scan + 0x87;
 	} while ((int) entity_scan < 0x1009ae0c);
-	if (*(int*) (param_1 + 0x5d) != 0) {
-		gm_FreeObjectListRecursive((char**) (param_1 + 0x5d));
+	if (*(int*) (arg1 + 0x5d) != 0) {
+		gm_FreeObjectListRecursive((char**) (arg1 + 0x5d));
 	}
-	*param_1 = 0;
+	*arg1 = 0;
 	return 0;
 }
 
@@ -1560,7 +1560,7 @@ cleanup_loop:
 // FUNCTION: SERVER 0x10017330
 // gm_AllocBuildingDefaults
 
-void __cdecl gm_AllocBuildingDefaults(unsigned char* param_1)
+void __cdecl gm_AllocBuildingDefaults(unsigned char* arg1)
 {
 	void* query_result;
 	int inner_count;
@@ -1569,12 +1569,12 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* param_1)
 
 	table_ptr = &DAT_10030861;
 	do {
-		if (*param_1 == *(table_ptr - 1)) {
-			query_result = gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 2, 6, 0, 0xff);
+		if (*arg1 == *(table_ptr - 1)) {
+			query_result = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 2, 6, 0, 0xff);
 			if (query_result != (void*) 0) {
 				goto do_inner;
 			}
-			query_result = gm_AllocObjekt(*(int*) (param_1 + 1), 0xff, 1);
+			query_result = gm_AllocObjekt(*(int*) (arg1 + 1), 0xff, 1);
 			if (query_result != (void*) 0) {
 			do_inner:
 				inner_count = 10;
@@ -1608,9 +1608,9 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* param_1)
 // FUNCTION: SERVER 0x10017400
 // gm_SetBuildingWorkerLimits
 
-__declspec(naked) void __cdecl gm_SetBuildingWorkerLimits(unsigned char* param_1)
+__declspec(naked) void __cdecl gm_SetBuildingWorkerLimits(unsigned char* arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push esi
 		push edi
@@ -1718,7 +1718,7 @@ extern int g_10035888;
 // DATA: SERVER 0x1003588c
 extern short g_1003588c;
 
-char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
+char* __cdecl gm_AllocGebaeude(int arg1, int arg2)
 {
 	char buf[0x400];
 	char* pDest;
@@ -1744,8 +1744,8 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 		);
 		return 0;
 	}
-	gebType = param_1 & 0xff;
-	*geb = (char) param_1;
+	gebType = arg1 & 0xff;
+	*geb = (char) arg1;
 	base = temp_result + gebType * 0x24d;
 
 	sprintf(buf, "----->GebID= %i GebProt= %i", g_next_object_id, gebType);
@@ -1753,7 +1753,7 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 
 	*(int*) (geb + 1) = g_next_object_id;
 	g_next_object_id = g_next_object_id + 1;
-	owner_id = (short) param_2;
+	owner_id = (short) arg2;
 	*(short*) (geb + 0x25) = owner_id;
 	*(short*) (geb + 0x27) = owner_id;
 	*(int*) (geb + 0x3d) = 0x64;
@@ -1781,7 +1781,7 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 	memset(pDest, 0, 0x30);
 	{
 		unsigned short* comp_iter = (unsigned short*) (base + 0x23);
-		for (param_1 = 0; param_1 < 0x40; param_1++) {
+		for (arg1 = 0; arg1 < 0x40; arg1++) {
 			unsigned short comp_entry = *comp_iter;
 			if (comp_entry == 0) {
 				break;
@@ -1836,7 +1836,7 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 			*(int*) (geb + 0x71) = g_10035888;
 			*(short*) (geb + 0x75) = g_1003588c;
 			if (owner_id != -1) {
-				*(int*) (geb + 0x65) = *(int*) ((unsigned short) param_2 * 0x21c + 0x100358a4);
+				*(int*) (geb + 0x65) = *(int*) ((unsigned short) arg2 * 0x21c + 0x100358a4);
 				break;
 			}
 			/* fall through */
@@ -1925,22 +1925,22 @@ char* __cdecl gm_AllocGebaeude(int param_1, int param_2)
 // FUNCTION: SERVER 0x10017910
 // gm_SetupEntityQuery
 
-unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* param_1)
+unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* arg1)
 {
 	char* building;
 	int result;
 	unsigned short* p;
 
-	gm_GetBuildingTypeCategory((int) *param_1);
-	building = (char*) (DAT_100a8c30 + (unsigned int) *param_1 * 0x24d);
-	result = gm_CheckEntityType(param_1);
+	gm_GetBuildingTypeCategory((int) *arg1);
+	building = (char*) (DAT_100a8c30 + (unsigned int) *arg1 * 0x24d);
+	result = gm_CheckEntityType(arg1);
 	if (result != 0) {
-		return (unsigned short*) gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 0, 0xfd);
+		return (unsigned short*) gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0xfd);
 	}
 	if (*building == 4) {
-		return (unsigned short*) gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 0, 0x54);
+		return (unsigned short*) gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x54);
 	}
-	p = (unsigned short*) gm_StartEntityQuery(*(int*) (param_1 + 0x5d), 1, 4, 2);
+	p = (unsigned short*) gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 4, 2);
 	while (p != (unsigned short*) 0 && *p == 0xfd) {
 		p = gm_NextEntityQueryMatch();
 	}
@@ -1953,9 +1953,9 @@ unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* param_1)
 // FUNCTION: SERVER 0x100179b0
 // gm_GetBuildingTypeCategory
 
-int __cdecl gm_GetBuildingTypeCategory(int param_1)
+int __cdecl gm_GetBuildingTypeCategory(int arg1)
 {
-	switch (*(unsigned char*) (DAT_100a8c30 + param_1 * 0x24d)) {
+	switch (*(unsigned char*) (DAT_100a8c30 + arg1 * 0x24d)) {
 	case 0xb:
 	case 0xc:
 	case 0xd:
@@ -2083,7 +2083,7 @@ __declspec(naked) int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
 #define BYTE_100358A2(idx) (*(unsigned char*) (((idx) * 0x21c) + 0x100358a2))
 #define DWORD_100358A4(idx) (*(unsigned int*) (((idx) * 0x21c) + 0x100358a4))
 
-void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param_2, unsigned int param_3)
+void __cdecl gm_AssignBuildingOwner(unsigned char* arg1, unsigned short arg2, unsigned int arg3)
 {
 	char building_class;
 	unsigned short prev_owner;
@@ -2093,23 +2093,23 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param
 	char* type_entry;
 	int owner_index;
 
-	type_entry = dword_100a8c30 + *param_1 * 0x24d;
-	*(unsigned short*) (param_1 + 0x25) = param_2;
-	if (param_3 != 0xffff) {
-		prev_owner = *(unsigned short*) (param_1 + 0x27);
-		if ((prev_owner != 0xffff) && (PTR_10035A10(prev_owner) == (unsigned char**) param_1)) {
+	type_entry = dword_100a8c30 + *arg1 * 0x24d;
+	*(unsigned short*) (arg1 + 0x25) = arg2;
+	if (arg3 != 0xffff) {
+		prev_owner = *(unsigned short*) (arg1 + 0x27);
+		if ((prev_owner != 0xffff) && (PTR_10035A10(prev_owner) == (unsigned char**) arg1)) {
 			PTR_10035A10(prev_owner) = 0;
 		}
-		*(unsigned short*) (param_1 + 0x27) = (unsigned short) param_3;
+		*(unsigned short*) (arg1 + 0x27) = (unsigned short) arg3;
 		if (*type_entry == '\x02') {
-			owner_building = (unsigned char*) PTR_10035A10(param_3 & 0xffff);
-			if ((owner_building == 0) || (*owner_building <= *param_1)) {
-				PTR_10035A10(param_3 & 0xffff) = (unsigned char**) param_1;
+			owner_building = (unsigned char*) PTR_10035A10(arg3 & 0xffff);
+			if ((owner_building == 0) || (*owner_building <= *arg1)) {
+				PTR_10035A10(arg3 & 0xffff) = (unsigned char**) arg1;
 			}
 		}
-		owner_index = param_3;
+		owner_index = arg3;
 		if (((BYTE_100358A2(owner_index) == '\x06') || (BYTE_100358A2(owner_index) == '\a')) &&
-			(loop_count = (int) gm_FindEntityByOwner((int) param_1), loop_count != 0)) {
+			(loop_count = (int) gm_FindEntityByOwner((int) arg1), loop_count != 0)) {
 			*(unsigned char*) (loop_count + 0x165) = 0;
 			*(unsigned int*) (loop_count + 0x1b4) = *(unsigned int*) (loop_count + 0x1b4) & 0xfffffffe;
 			building_class = *type_entry;
@@ -2122,7 +2122,7 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param
 		do {
 			if (((*(unsigned short*) obj_iter != 0) &&
 				 (*(dword_101de450 + *(unsigned short*) obj_iter * 0x41) == '\x1d')) &&
-				(*(unsigned int*) ((unsigned char*) obj_iter + 0x1c) == *(unsigned int*) (param_1 + 1))) {
+				(*(unsigned int*) ((unsigned char*) obj_iter + 0x1c) == *(unsigned int*) (arg1 + 1))) {
 				*(unsigned int*) ((unsigned char*) obj_iter + 0xa) = DWORD_100358A4(owner_index);
 				if (*(unsigned int*) ((unsigned char*) obj_iter + 0x14) != 0) {
 					*(unsigned int*) (*(unsigned int*) ((unsigned char*) obj_iter + 0x14) + 0xa) =
@@ -2142,11 +2142,11 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param
 // FUNCTION: SERVER 0x10017f30
 // gm_RemoveObjectWrapper
 
-int __cdecl gm_RemoveObjectWrapper(int param_1, unsigned int param_2)
+int __cdecl gm_RemoveObjectWrapper(int arg1, unsigned int arg2)
 {
 	int remove_result;
 
-	remove_result = gm_RemoveObjectByType((void**) (param_1 + 0x5d), param_2);
+	remove_result = gm_RemoveObjectByType((void**) (arg1 + 0x5d), arg2);
 	if (remove_result == -2) {
 		return -3;
 	}
@@ -2159,13 +2159,13 @@ int __cdecl gm_RemoveObjectWrapper(int param_1, unsigned int param_2)
 // FUNCTION: SERVER 0x10017f60
 // gm_RemoveEntityLink
 
-void __cdecl gm_RemoveEntityLink(int param_1)
+void __cdecl gm_RemoveEntityLink(int arg1)
 {
 	int parent_entity;
 
-	parent_entity = (int) gm_EntityAccumulate((void*) param_1);
+	parent_entity = (int) gm_EntityAccumulate((void*) arg1);
 	if (parent_entity != 0) {
-		gm_RemoveLinkedNodeById((int*) (parent_entity + 0x5d), *(int*) (param_1 + 2));
+		gm_RemoveLinkedNodeById((int*) (parent_entity + 0x5d), *(int*) (arg1 + 2));
 	}
 }
 
@@ -2175,10 +2175,10 @@ void __cdecl gm_RemoveEntityLink(int param_1)
 // FUNCTION: SERVER 0x10017f90
 // gm_InitEntityIfValid
 
-void __cdecl gm_InitEntityIfValid(short* param_1)
+void __cdecl gm_InitEntityIfValid(short* arg1)
 {
-	if (param_1 != (short*) 0 && *(unsigned short*) param_1 != 0xFFFF) {
-		amt_ClearEntityLinks(param_1);
+	if (arg1 != (short*) 0 && *(unsigned short*) arg1 != 0xFFFF) {
+		amt_ClearEntityLinks(arg1);
 	}
 }
 
@@ -2249,10 +2249,10 @@ extern char g_str_10031538[];
 
 // FUNCTION: SERVER 0x10017fb0
 // gm_DeallocEntity
-__declspec(naked) void __cdecl gm_DeallocEntity(unsigned int index, int param_2)
+__declspec(naked) void __cdecl gm_DeallocEntity(unsigned int index, int arg2)
 {
 	(void) index;
-	(void) param_2;
+	(void) arg2;
 	__asm {
 		sub esp, 0x204
 		mov eax, dword ptr [esp + 0x208]
@@ -2457,22 +2457,22 @@ extern unsigned char g_entity_type_bytes[];
 
 // DATA: SERVER 0x100358a0
 
-int __cdecl gm_CheckStatLevel(int param_1, int param_2)
+int __cdecl gm_CheckStatLevel(int arg1, int arg2)
 {
 	int idx;
 	int val;
 	int result;
 
-	idx = param_1 * 0x21c;
+	idx = arg1 * 0x21c;
 	val = gm_MapEntityStatRange((int) g_entity_type_bytes[idx]);
-	if (val == param_2) {
+	if (val == arg2) {
 		return (unsigned int) g_entity_type_bytes[idx];
 	}
 	result = (int) gm_GetEntityTableEntry(g_entity_array + idx);
 	if (result == 0) {
 		return 0;
 	}
-	return (unsigned int) *(unsigned char*) (result + 0x74 + param_2);
+	return (unsigned int) *(unsigned char*) (result + 0x74 + arg2);
 }
 
 /* Maps and clamps an entity stat value to a valid range.
@@ -2481,9 +2481,9 @@ int __cdecl gm_CheckStatLevel(int param_1, int param_2)
 // FUNCTION: SERVER 0x10018200
 // gm_MapEntityStatRange
 
-int __cdecl gm_MapEntityStatRange(int param_1)
+int __cdecl gm_MapEntityStatRange(int arg1)
 {
-	switch (param_1) {
+	switch (arg1) {
 	case 0:
 		return 0;
 	case 1:
@@ -2613,71 +2613,71 @@ int __cdecl gm_MapEntityStatRange(int param_1)
  *   groupStart -> groupStart+5, groupStart+1 -> groupStart+4, etc.
  * Returns 0 if the index doesn't belong to any known group.
  */
-int __cdecl gm_GetOppositeStatIndex(int param_1)
+int __cdecl gm_GetOppositeStatIndex(int arg1)
 {
 	int result;
 
 	result = 0;
 
 	/* Group 1-6 (section A, row 1) */
-	if ((param_1 >= 1) && (param_1 <= 6)) {
-		return 7 - param_1;
+	if ((arg1 >= 1) && (arg1 <= 6)) {
+		return 7 - arg1;
 	}
 	/* Group 7-12 (section A, row 2) */
-	if ((param_1 >= 7) && (param_1 <= 12)) {
-		return 13 - param_1;
+	if ((arg1 >= 7) && (arg1 <= 12)) {
+		return 13 - arg1;
 	}
 	/* Group 34-39 (section B, row 1) */
-	if ((param_1 >= 34) && (param_1 <= 39)) {
-		return 40 - param_1;
+	if ((arg1 >= 34) && (arg1 <= 39)) {
+		return 40 - arg1;
 	}
 	/* Group 40-45 (section B, row 2) */
-	if ((param_1 >= 40) && (param_1 <= 45)) {
-		return 46 - param_1;
+	if ((arg1 >= 40) && (arg1 <= 45)) {
+		return 46 - arg1;
 	}
 	/* Group 46-51 (section B, row 3) */
-	if ((param_1 >= 46) && (param_1 <= 51)) {
-		return 52 - param_1;
+	if ((arg1 >= 46) && (arg1 <= 51)) {
+		return 52 - arg1;
 	}
 	/* Group 58-63 (section B, row 5) */
-	if ((param_1 >= 58) && (param_1 <= 63)) {
-		return 64 - param_1;
+	if ((arg1 >= 58) && (arg1 <= 63)) {
+		return 64 - arg1;
 	}
 	/* Group 64-69 (section B, row 6) */
-	if ((param_1 >= 64) && (param_1 <= 69)) {
-		return 70 - param_1;
+	if ((arg1 >= 64) && (arg1 <= 69)) {
+		return 70 - arg1;
 	}
 	/* Group 70-75 (section B, row 7) */
-	if ((param_1 >= 70) && (param_1 <= 75)) {
-		return 76 - param_1;
+	if ((arg1 >= 70) && (arg1 <= 75)) {
+		return 76 - arg1;
 	}
 	/* Group 13-18 (section A, row 3) */
-	if ((param_1 >= 13) && (param_1 <= 18)) {
-		return 19 - param_1;
+	if ((arg1 >= 13) && (arg1 <= 18)) {
+		return 19 - arg1;
 	}
 	/* Group 52-57 (section B, row 4) */
-	if ((param_1 >= 52) && (param_1 <= 57)) {
-		return 58 - param_1;
+	if ((arg1 >= 52) && (arg1 <= 57)) {
+		return 58 - arg1;
 	}
 	/* Group 25-30 (section A, row 5) */
-	if ((param_1 >= 25) && (param_1 <= 30)) {
-		return 31 - param_1;
+	if ((arg1 >= 25) && (arg1 <= 30)) {
+		return 31 - arg1;
 	}
 	/* Group 19-24 (section A, row 4) */
-	if ((param_1 >= 19) && (param_1 <= 24)) {
-		return 25 - param_1;
+	if ((arg1 >= 19) && (arg1 <= 24)) {
+		return 25 - arg1;
 	}
 	/* Group 76-81 (section C, row 1) */
-	if ((param_1 >= 76) && (param_1 <= 81)) {
-		return 82 - param_1;
+	if ((arg1 >= 76) && (arg1 <= 81)) {
+		return 82 - arg1;
 	}
 	/* Group 89-94 (section C, row 3) */
-	if ((param_1 >= 89) && (param_1 <= 94)) {
-		return 95 - param_1;
+	if ((arg1 >= 89) && (arg1 <= 94)) {
+		return 95 - arg1;
 	}
 	/* Group 83-88 (section C, row 2) */
-	if ((param_1 >= 83) && (param_1 <= 88)) {
-		result = 89 - param_1;
+	if ((arg1 >= 83) && (arg1 <= 88)) {
+		result = 89 - arg1;
 	}
 	return result;
 }
@@ -2781,16 +2781,16 @@ short* __cdecl gm_GetEntityTableEntry(char* param)
 // FUNCTION: SERVER 0x100196c0
 // gm_QueryEntitySum
 
-int __cdecl gm_QueryEntitySum(int param_1, unsigned int param_2)
+int __cdecl gm_QueryEntitySum(int arg1, unsigned int arg2)
 {
 	short* ent;
 	int total;
 
 	total = 0;
-	ent = gm_StartEntityQuery(param_1, 1, 4, 9);
+	ent = gm_StartEntityQuery(arg1, 1, 4, 9);
 	if (ent != (short*) 0) {
 		do {
-			if (*(short*) (entity_slot_table + (param_2 & 0xff) * 0x2f4) == *ent) {
+			if (*(short*) (entity_slot_table + (arg2 & 0xff) * 0x2f4) == *ent) {
 				total = total + *(int*) (ent + 7);
 			}
 			ent = gm_NextEntityQueryMatch();
@@ -3218,9 +3218,9 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 // FUNCTION: SERVER 0x10019a70
 // gm_EntityQuerySum
 
-__declspec(naked) int __cdecl gm_EntityQuerySum(int param_1)
+__declspec(naked) int __cdecl gm_EntityQuerySum(int arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push ecx
 		mov eax, dword ptr [esp + 8]
@@ -3274,18 +3274,18 @@ __declspec(naked) int __cdecl gm_EntityQuerySum(int param_1)
 // FUNCTION: SERVER 0x10019ae0
 // gm_ResolveParentEntity
 
-short* __cdecl gm_ResolveParentEntity(short* param_1)
+short* __cdecl gm_ResolveParentEntity(short* arg1)
 {
 	void* dynamic_ent;
 
-	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &param_1, *(int*) (param_1 + 5));
-	if (param_1 == (short*) 0) {
+	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &arg1, *(int*) (arg1 + 5));
+	if (arg1 == (short*) 0) {
 		if (dynamic_ent != (void*) 0 && *(unsigned short*) ((int) dynamic_ent + 0x27) != 0xffff) {
 			return (short*) (entity_array + (unsigned int) *(unsigned short*) ((int) dynamic_ent + 0x27) * 0x21c);
 		}
-		param_1 = (short*) 0;
+		arg1 = (short*) 0;
 	}
-	return param_1;
+	return arg1;
 }
 
 /* Gets the type (class) of an entity as an unsigned short.
@@ -3294,13 +3294,13 @@ short* __cdecl gm_ResolveParentEntity(short* param_1)
 // FUNCTION: SERVER 0x10019b40
 // gm_GetEntityType
 
-unsigned short __cdecl gm_GetEntityType(short* param_1)
+unsigned short __cdecl gm_GetEntityType(short* arg1)
 {
 	void* dynamic_ent;
 
-	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &param_1, *(int*) (param_1 + 5));
-	if (param_1 != (short*) 0) {
-		return *param_1;
+	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &arg1, *(int*) (arg1 + 5));
+	if (arg1 != (short*) 0) {
+		return *arg1;
 	}
 	if (dynamic_ent != (void*) 0) {
 		return *(unsigned short*) ((int) dynamic_ent + 0x27);
@@ -3314,21 +3314,21 @@ unsigned short __cdecl gm_GetEntityType(short* param_1)
 // FUNCTION: SERVER 0x10019b80
 // gm_EntityAccumulate
 
-int __cdecl gm_EntityAccumulate(void* param_1)
+int __cdecl gm_EntityAccumulate(void* arg1)
 {
 	int result;
 	int entity_id;
 	void* existing_ent;
 	void* static_ent;
 
-	entity_id = *(int*) ((int) param_1 + 6);
+	entity_id = *(int*) ((int) arg1 + 6);
 	while (entity_id != -1) {
-		result = gm_ResolveEntityById((void**) &param_1, &static_ent, &existing_ent, entity_id);
+		result = gm_ResolveEntityById((void**) &arg1, &static_ent, &existing_ent, entity_id);
 		if (result == 0) {
 			return 0;
 		}
-		if (param_1 != (void*) 0) {
-			return (int) param_1;
+		if (arg1 != (void*) 0) {
+			return (int) arg1;
 		}
 		if (existing_ent != (void*) 0) {
 			return 0;
@@ -3384,9 +3384,9 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 // FUNCTION: SERVER 0x10019c60
 // gm_FindEntityByOwner
-__declspec(naked) char* __cdecl gm_FindEntityByOwner(int param_1)
+__declspec(naked) char* __cdecl gm_FindEntityByOwner(int arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push edi
 		mov edi, dword ptr [esp + 8]

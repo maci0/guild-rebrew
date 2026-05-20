@@ -41,9 +41,9 @@ void __cdecl InitBuildingTypeTable(void);
 
 void* __cdecl gm_LookupEntityRecordById(int entityId);
 
-__declspec(naked) int __cdecl amt_ValidateOfficeCandidate(int* param_1)
+__declspec(naked) int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push ebx
 		push esi
@@ -133,9 +133,9 @@ extern char DAT_10029bb8[];
 // FUNCTION: SERVER 0x1000b290
 // ValidateAndAssignOffice
 
-__declspec(naked) unsigned int ValidateAndAssignOffice(unsigned int* param_1)
+__declspec(naked) unsigned int ValidateAndAssignOffice(unsigned int* arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		sub esp, 0x18
 		push ebx
@@ -285,9 +285,9 @@ __declspec(naked) unsigned int ValidateAndAssignOffice(unsigned int* param_1)
 // FUNCTION: SERVER 0x1000b440
 // amt_ValidateCommand
 
-__declspec(naked) int __cdecl amt_ValidateCommand(char* param_1)
+__declspec(naked) int __cdecl amt_ValidateCommand(char* arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push esi
 		mov esi, dword ptr [esp + 8]
@@ -397,9 +397,9 @@ void __cdecl amt_FindEntity27(int val)
 // FUNCTION: SERVER 0x1000b880
 // amt_SwapOfficeHolders
 
-__declspec(naked) int __cdecl amt_SwapOfficeHolders(int* param_1)
+__declspec(naked) int __cdecl amt_SwapOfficeHolders(int* arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push ebx
 		mov ebx, dword ptr [esp + 8]
@@ -539,9 +539,9 @@ __declspec(naked) int __cdecl amt_SwapOfficeHolders(int* param_1)
 // FUNCTION: SERVER 0x1000b990
 // amt_ClearEntityLinks
 
-__declspec(naked) int __cdecl amt_ClearEntityLinks(int param_1)
+__declspec(naked) int __cdecl amt_ClearEntityLinks(int arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push ebx
 		push ebp
@@ -608,10 +608,10 @@ __declspec(naked) int __cdecl amt_ClearEntityLinks(int param_1)
 // FUNCTION: SERVER 0x1000ba30
 // amt_UpdateEntityLinks
 
-__declspec(naked) void __cdecl amt_UpdateEntityLinks(int param_1, int param_2)
+__declspec(naked) void __cdecl amt_UpdateEntityLinks(int arg1, int arg2)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) arg1;
+	(void) arg2;
 	__asm {
 		mov dx, word ptr [DAT_10035884]
 		push ebx
@@ -698,10 +698,10 @@ extern int __cdecl sprintf(char*, const char*, ...);
 // FUNCTION: SERVER 0x1000baf0
 // amt_fio_LoadAemter
 
-__declspec(naked) unsigned int __cdecl amt_fio_LoadAemter(int param_1, int param_2)
+__declspec(naked) unsigned int __cdecl amt_fio_LoadAemter(int arg1, int arg2)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) arg1;
+	(void) arg2;
 	__asm {
 		sub esp, 0x104
 		xor eax, eax
@@ -934,7 +934,7 @@ __declspec(naked) unsigned int __cdecl amt_fio_LoadAemter(int param_1, int param
 // DATA: SERVER 0x101de5a4
 extern char g_aemter_table[];
 
-unsigned int __cdecl amt_fio_LoadAemter_unused(int param_1, int param_2)
+unsigned int __cdecl amt_fio_LoadAemter_unused(int arg1, int arg2)
 {
 	unsigned int num_entries;
 	unsigned int i;
@@ -942,15 +942,15 @@ unsigned int __cdecl amt_fio_LoadAemter_unused(int param_1, int param_2)
 	unsigned int stored_count;
 	char buf[256];
 
-	num_entries = (((unsigned int) (param_2 < 0x10051) - 1) & 5) + 0x25;
+	num_entries = (((unsigned int) (arg2 < 0x10051) - 1) & 5) + 0x25;
 
 	InitBuildingTypeTable();
 
-	if (param_1 == 0) {
+	if (arg1 == 0) {
 		return 0;
 	}
 
-	if (ls_ReadVfsDataChecked(&stored_count, 4, 1, param_1) == 0) {
+	if (ls_ReadVfsDataChecked(&stored_count, 4, 1, arg1) == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\aemter.c",
 			0xe73,
@@ -970,22 +970,22 @@ unsigned int __cdecl amt_fio_LoadAemter_unused(int param_1, int param_2)
 	if (num_entries > 0) {
 		ptr = g_aemter_table;
 		do {
-			if (ls_ReadVfsDataChecked(ptr - 4, 1, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr - 4, 1, 1, arg1) == 0) {
 				goto err_id;
 			}
-			if (ls_ReadVfsDataChecked(ptr, 4, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr, 4, 1, arg1) == 0) {
 				goto err_playerid;
 			}
-			if (ls_ReadVfsDataChecked(ptr + 4, 1, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 4, 1, 1, arg1) == 0) {
 				goto err_amt;
 			}
-			if (ls_ReadVfsDataChecked(ptr + 8, 4, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 8, 4, 1, arg1) == 0) {
 				goto err_pcount;
 			}
-			if (ls_ReadVfsDataChecked(ptr + 0xc, 1, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 0xc, 1, 1, arg1) == 0) {
 				goto err_status;
 			}
-			if (ls_ReadVfsDataChecked(ptr + 0x10, 4, 1, param_1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 0x10, 4, 1, arg1) == 0) {
 				goto err_last;
 			}
 			i++;
