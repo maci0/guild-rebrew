@@ -1054,15 +1054,15 @@ status = "RELOC"
 
 ["SERVER.0x10018150"]
 size = 70
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100181a0"]
 size = 87
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10018200"]
 size = 304
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10018330"]
 size = 276
@@ -1078,7 +1078,7 @@ status = "EXACT"
 
 ["SERVER.0x100184e0"]
 size = 66
-status = "RELOC"
+status = "PROVEN"
 note = "duplicate bounds check needed for correct register allocation"
 analysis = "duplicate bounds check needed for correct register allocation"
 
@@ -1093,11 +1093,11 @@ status = "STUB"
 
 ["SERVER.0x100196c0"]
 size = 81
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10019720"]
 size = 396
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100198b0"]
 size = 355
@@ -1115,11 +1115,11 @@ status = "RELOC"
 
 ["SERVER.0x10019ae0"]
 size = 82
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10019b40"]
 size = 62
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10019b80"]
 size = 83
@@ -1127,7 +1127,7 @@ status = "RELOC"
 
 ["SERVER.0x10019be0"]
 size = 124
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10019c60"]
 size = 98
@@ -1143,7 +1143,7 @@ status = "RELOC"
 
 ["SERVER.0x10019ed0"]
 size = 395
-status = "RELOC"
+status = "PROVEN"
 ghidra = "gm_KannObjektHergestellt"
 
 ["SERVER.0x1001a060"]
