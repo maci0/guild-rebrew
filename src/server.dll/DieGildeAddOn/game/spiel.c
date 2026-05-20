@@ -2083,7 +2083,7 @@ __declspec(naked) int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
 #define BYTE_100358A2(idx) (*(unsigned char*) (((idx) * 0x21c) + 0x100358a2))
 #define DWORD_100358A4(idx) (*(unsigned int*) (((idx) * 0x21c) + 0x100358a4))
 
-void __cdecl gm_AssignBuildingOwner(unsigned char* arg1, unsigned short arg2, unsigned int arg3)
+void __cdecl gm_AssignBuildingOwner(unsigned char* building, unsigned short new_owner, unsigned int owner_slot)
 {
 	char building_class;
 	unsigned short prev_owner;
@@ -2093,23 +2093,23 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* arg1, unsigned short arg2, un
 	char* type_entry;
 	int owner_index;
 
-	type_entry = dword_100a8c30 + *arg1 * 0x24d;
-	*(unsigned short*) (arg1 + 0x25) = arg2;
-	if (arg3 != 0xffff) {
-		prev_owner = *(unsigned short*) (arg1 + 0x27);
-		if ((prev_owner != 0xffff) && (PTR_10035A10(prev_owner) == (unsigned char**) arg1)) {
+	type_entry = dword_100a8c30 + *building * 0x24d;
+	*(unsigned short*) (building + 0x25) = new_owner;
+	if (owner_slot != 0xffff) {
+		prev_owner = *(unsigned short*) (building + 0x27);
+		if ((prev_owner != 0xffff) && (PTR_10035A10(prev_owner) == (unsigned char**) building)) {
 			PTR_10035A10(prev_owner) = 0;
 		}
-		*(unsigned short*) (arg1 + 0x27) = (unsigned short) arg3;
+		*(unsigned short*) (building + 0x27) = (unsigned short) owner_slot;
 		if (*type_entry == '\x02') {
-			owner_building = (unsigned char*) PTR_10035A10(arg3 & 0xffff);
-			if ((owner_building == 0) || (*owner_building <= *arg1)) {
-				PTR_10035A10(arg3 & 0xffff) = (unsigned char**) arg1;
+			owner_building = (unsigned char*) PTR_10035A10(owner_slot & 0xffff);
+			if ((owner_building == 0) || (*owner_building <= *building)) {
+				PTR_10035A10(owner_slot & 0xffff) = (unsigned char**) building;
 			}
 		}
-		owner_index = arg3;
+		owner_index = owner_slot;
 		if (((BYTE_100358A2(owner_index) == '\x06') || (BYTE_100358A2(owner_index) == '\a')) &&
-			(loop_count = (int) gm_FindEntityByOwner((int) arg1), loop_count != 0)) {
+			(loop_count = (int) gm_FindEntityByOwner((int) building), loop_count != 0)) {
 			*(unsigned char*) (loop_count + 0x165) = 0;
 			*(unsigned int*) (loop_count + 0x1b4) = *(unsigned int*) (loop_count + 0x1b4) & 0xfffffffe;
 			building_class = *type_entry;
@@ -2122,7 +2122,7 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* arg1, unsigned short arg2, un
 		do {
 			if (((*(unsigned short*) obj_iter != 0) &&
 				 (*(dword_101de450 + *(unsigned short*) obj_iter * 0x41) == '\x1d')) &&
-				(*(unsigned int*) ((unsigned char*) obj_iter + 0x1c) == *(unsigned int*) (arg1 + 1))) {
+				(*(unsigned int*) ((unsigned char*) obj_iter + 0x1c) == *(unsigned int*) (building + 1))) {
 				*(unsigned int*) ((unsigned char*) obj_iter + 0xa) = DWORD_100358A4(owner_index);
 				if (*(unsigned int*) ((unsigned char*) obj_iter + 0x14) != 0) {
 					*(unsigned int*) (*(unsigned int*) ((unsigned char*) obj_iter + 0x14) + 0xa) =
