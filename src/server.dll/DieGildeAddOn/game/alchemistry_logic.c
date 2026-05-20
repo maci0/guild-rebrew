@@ -53,14 +53,14 @@ typedef struct {
 // ahm_ResetEntityState
 void* memset(void*, int, unsigned int);
 
-void __cdecl ahm_ResetEntityState(char* param_1)
+void __cdecl ahm_ResetEntityState(char* entity)
 {
 	unsigned int* ptr;
 
-	if ((param_1[2] == 1 || param_1[2] == 2) && param_1[0x164] != 0) {
-		ptr = (unsigned int*) (param_1 + 0x1b4);
+	if ((entity[2] == 1 || entity[2] == 2) && entity[0x164] != 0) {
+		ptr = (unsigned int*) (entity + 0x1b4);
 		memset(ptr, 0, 16);
-		*(unsigned int*) (param_1 + 0x1c0) = 0xffffffff;
+		*(unsigned int*) (entity + 0x1c0) = 0xffffffff;
 		*ptr = *ptr | 1;
 	}
 }
