@@ -30,6 +30,7 @@
  * }
  */
 
+// SIZE 0x264264
 typedef struct player_slot {
 	int flags;
 	char gap_0004[0x264260];

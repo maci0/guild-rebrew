@@ -2486,7 +2486,6 @@ extern int g_entity_table_end;
 // DATA: SERVER 0x100a8c30
 extern char* g_action_table_base;
 
-// DATA: SERVER 0x100358a0
 extern char g_slot_table[];
 
 int __cdecl ActivateGraveyardSection(unsigned char* param_1)

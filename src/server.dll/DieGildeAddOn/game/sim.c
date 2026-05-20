@@ -408,6 +408,7 @@ error:
 // AdvanceGameClock
 
 #pragma pack(push, 1)
+// SIZE 0xe
 typedef struct {
 	int days;    /* 0x00 */
 	short hours; /* 0x04 */

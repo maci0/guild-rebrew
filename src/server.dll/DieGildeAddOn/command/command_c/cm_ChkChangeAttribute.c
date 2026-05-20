@@ -16,6 +16,7 @@ extern char s_cm_ChkChangeAttribute___Source_obj_1002c958[];
 extern char s_cm_ChkChangeAttribute___Target_obj_1002c90c[];
 
 #pragma pack(push, 1)
+// SIZE 0x4
 typedef struct {
 	signed char kind;
 	signed char value;

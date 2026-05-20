@@ -26,11 +26,13 @@ extern int DAT_1002c050[];
 int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
+// SIZE 0x8
 typedef struct {
 	int key;
 	int val;
 } PAIR;
 
+// SIZE 0x14
 typedef struct {
 	char hdr[8];
 	int key;
@@ -38,6 +40,7 @@ typedef struct {
 	int val;
 } SRC;
 
+// SIZE 0x3c
 typedef struct {
 	char hdr[0xc];
 	PAIR entries[6];

@@ -250,11 +250,11 @@ status = "RELOC"
 
 ["SERVER.0x1000b1c0"]
 size = 205
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000b290"]
 size = 425
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000b440"]
 size = 133
@@ -279,7 +279,7 @@ status = "RELOC"
 
 ["SERVER.0x1000b880"]
 size = 263
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000b990"]
 size = 157
@@ -292,7 +292,7 @@ analysis = "Iterates through the command execution tracker table at g_office_sec
 
 ["SERVER.0x1000baf0"]
 size = 606
-status = "RELOC"
+status = "PROVEN"
 ghidra = "LoadOfficeData"
 
 ["SERVER.0x1000bd50"]
@@ -301,7 +301,7 @@ status = "EXACT"
 
 ["SERVER.0x1000bda0"]
 size = 70
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000bdf0"]
 size = 1002
@@ -313,15 +313,15 @@ analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves
 
 ["SERVER.0x1000c1e0"]
 size = 160
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000c280"]
 size = 130
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000c310"]
 size = 110
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000c380"]
 size = 51
@@ -329,15 +329,15 @@ status = "EXACT"
 
 ["SERVER.0x1000c3c0"]
 size = 83
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000c420"]
 size = 166
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000c4d0"]
 size = 295
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000c600"]
 size = 109
@@ -345,7 +345,7 @@ status = "RELOC"
 
 ["SERVER.0x1000c670"]
 size = 45
-status = "RELOC"
+status = "PROVEN"
 ghidra = "find_by_id"
 
 ["SERVER.0x1000c6a0"]
@@ -445,7 +445,7 @@ status = "RELOC"
 
 ["SERVER.0x1000d8a0"]
 size = 144
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000d930"]
 size = 2057
@@ -646,7 +646,7 @@ blocker_delta = 215
 
 ["SERVER.0x100104a0"]
 size = 135
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010530"]
 size = 113
@@ -654,23 +654,23 @@ status = "EXACT"
 
 ["SERVER.0x100105b0"]
 size = 329
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010710"]
 size = 320
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010850"]
 size = 370
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100109d0"]
 size = 832
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010d10"]
 size = 570
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010f50"]
 size = 66
@@ -678,38 +678,38 @@ status = "RELOC"
 
 ["SERVER.0x10010fa0"]
 size = 525
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100111b0"]
 size = 501
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100113b0"]
 size = 390
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10011540"]
 size = 288
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10011660"]
 size = 297
-status = "RELOC"
+status = "PROVEN"
 globals = "SERVER 0x100a8c30"
 
 ["SERVER.0x10011790"]
 size = 242
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10011890"]
 size = 164
-status = "RELOC"
+status = "PROVEN"
 analysis = "Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure."
 globals = "SERVER 0x1003546c"
 
 ["SERVER.0x10011940"]
 size = 674
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10011bf0"]
 size = 1040
@@ -796,7 +796,7 @@ blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
 
 ["SERVER.0x10014a50"]
 size = 157
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10014af0"]
 size = 247
@@ -818,7 +818,7 @@ analysis = "obj includes 28B jump table after code (296B obj vs 267B PE). Code m
 
 ["SERVER.0x10014ee0"]
 size = 69
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10014f30"]
 size = 74
@@ -852,7 +852,7 @@ analysis = "Updates priority tracking for dynamic entity dispatch/update lists. 
 
 ["SERVER.0x10015460"]
 size = 145
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10015500"]
 size = 180
@@ -889,11 +889,11 @@ status = "RELOC"
 
 ["SERVER.0x10015dc0"]
 size = 55
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10015e00"]
 size = 135
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10015e90"]
 size = 211
@@ -925,12 +925,12 @@ analysis = "Parse vararg criteria tuples for entity query filtering."
 
 ["SERVER.0x100165a0"]
 size = 37
-status = "RELOC"
+status = "PROVEN"
 analysis = "Walks the primary linked list of object allocations starting at g_existing_entities (a global pointer array). Looks for the first slot with an active flag == 0. Stops searching after 0x5007 (20487) slots. Returns pointer to the slot or NULL if full. | Scan fixed object pool and return first free slot."
 
 ["SERVER.0x100165d0"]
 size = 155
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10016670"]
 size = 1
@@ -939,11 +939,11 @@ analysis = "Linear search by object type id within sibling linked list."
 
 ["SERVER.0x10016680"]
 size = 139
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10016710"]
 size = 66
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10016760"]
 size = 1392
@@ -954,7 +954,7 @@ analysis = "High-level entity allocation wrapper. Resolves the parent_id using g
 
 ["SERVER.0x10016cd0"]
 size = 272
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10016de0"]
 size = 186
@@ -963,7 +963,7 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "RELOC"
+status = "PROVEN"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
@@ -977,11 +977,11 @@ blocker_delta = 229
 
 ["SERVER.0x10017210"]
 size = 39
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10017240"]
 size = 240
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10017330"]
 size = 207
@@ -1006,19 +1006,19 @@ status = "RELOC"
 
 ["SERVER.0x100179b0"]
 size = 192
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10017a70"]
 size = 62
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10017ab0"]
 size = 74
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10017b00"]
 size = 320
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10017c40"]
 size = 742

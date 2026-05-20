@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../../Units/Error/error.h"
 
+// SIZE 0x18
 typedef struct {
 	int value;
 	char type;
@@ -8,6 +9,7 @@ typedef struct {
 } ENT;
 
 #pragma pack(push, 1)
+// SIZE 0x18
 typedef struct {
 	char key;
 	char pad[3];

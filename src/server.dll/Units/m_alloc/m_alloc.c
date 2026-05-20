@@ -436,6 +436,7 @@ extern int g_stat4;
 // DATA: SERVER 0x1003463c
 extern int g_flag_3c;
 
+// SIZE 0x10
 struct ArrayItem {
 	int field0;
 	int field4;
@@ -446,6 +447,7 @@ struct ArrayItem {
 // DATA: SERVER 0x10034640
 extern struct ArrayItem* g_array_ptr;
 
+// SIZE 0x28
 struct LinkedListNode {
 	char data[0x24];
 	struct LinkedListNode* next;

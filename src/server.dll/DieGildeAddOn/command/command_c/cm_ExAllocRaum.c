@@ -7,12 +7,14 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// SIZE 0x264264
 typedef struct player_slot {
 	char gap_0000[0x2641fc];
 	int data;
 	char gap_264200[0x64];
 } player_slot;
 
+// SIZE 0x30
 typedef struct copy_12_dwords {
 	uint data[12];
 } copy_12_dwords;

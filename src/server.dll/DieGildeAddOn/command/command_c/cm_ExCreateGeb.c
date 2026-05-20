@@ -45,6 +45,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// SIZE 0x264264
 typedef struct player_slot {
 	char gap_0000[0x2641fc];
 	int data;
