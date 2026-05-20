@@ -2488,12 +2488,12 @@ extern char* g_action_table_base;
 
 extern char g_slot_table[];
 
-int __cdecl ActivateGraveyardSection(unsigned char* arg1)
+int __cdecl ActivateGraveyardSection(unsigned char* cmd_payload)
 {
 	void* entity;
 	void* target_entity;
 
-	gm_ResolveEntityById((void**) &entity, (void**) 0, (void**) 0, *(int*) (arg1 + 8));
+	gm_ResolveEntityById((void**) &entity, (void**) 0, (void**) 0, *(int*) (cmd_payload + 8));
 	if (entity != 0) {
 		if (*(unsigned short*) ((char*) entity + 0x27) != 0xFFFF) {
 			unsigned int slot_val;
@@ -2513,12 +2513,12 @@ int __cdecl ActivateGraveyardSection(unsigned char* arg1)
 					return -3;
 				}
 
-				gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &target_entity, *(int*) (arg1 + 4));
+				gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &target_entity, *(int*) (cmd_payload + 4));
 				if (target_entity == 0) {
 					return -6;
 				}
 
-				action_type = *(int*) (arg1 + 0xc);
+				action_type = *(int*) (cmd_payload + 0xc);
 				if (action_type == 3) {
 					if (*(int*) ((char*) field + 0x14) == 0) {
 						goto fail;
