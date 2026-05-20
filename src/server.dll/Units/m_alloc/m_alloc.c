@@ -121,9 +121,9 @@ __declspec(naked) void __cdecl m_FreeTracked(void* heapBlock)
 // FUNCTION: SERVER 0x100068e0
 // InitPacketPool
 
-__declspec(naked) void __cdecl InitPacketPool(int param_1)
+__declspec(naked) void __cdecl InitPacketPool(int pool_id)
 {
-	(void) param_1;
+	(void) pool_id;
 	__asm {
 		push ebp
 		mov ebp, esp
@@ -478,10 +478,10 @@ __declspec(naked) void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, i
 // FUNCTION: SERVER 0x10006E30
 // m_PoolFree
 
-__declspec(naked) void __cdecl m_PoolFree(int* param_1, int* param_2)
+__declspec(naked) void __cdecl m_PoolFree(int* pool, int* block)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) pool;
+	(void) block;
 	__asm {
 		mov edx, dword ptr [esp + 8]
 		push esi
