@@ -44,7 +44,7 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 // STUB: SERVER 0x10006990
 // ReportMemoryGroupInfo
 
-void __cdecl ReportMemoryGroupInfo(const char* param_1)
+void __cdecl ReportMemoryGroupInfo(const char* filter)
 {
 	char name[16];
 	char buf[1024];
@@ -79,7 +79,7 @@ void __cdecl ReportMemoryGroupInfo(const char* param_1)
 	}
 
 	do {
-		if (param_1 == 0 || strstr(group, param_1) == 0) {
+		if (filter == 0 || strstr(group, filter) == 0) {
 			matched = 0;
 		}
 		else {
@@ -94,7 +94,7 @@ void __cdecl ReportMemoryGroupInfo(const char* param_1)
 			goto next_group;
 		}
 
-		if (param_1 != 0 && !matched) {
+		if (filter != 0 && !matched) {
 			goto next_group;
 		}
 
