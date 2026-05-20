@@ -49,7 +49,7 @@ extern float DAT_100257c8;
 // STUB: SERVER 0x10011bf0
 // gv_ExAllocGraveyardWorker
 
-unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
+unsigned int __cdecl gv_ExAllocGraveyardWorker(int cmd_payload)
 {
 	unsigned short* new_entity_slot_ptr;
 	unsigned short entity_slot_index;
@@ -69,11 +69,11 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 	unsigned char* building_entity_ptr;
 	int production_slot_entry_ptr;
 
-	if (*(int*) (param_1 + 0x15) != 0x1b && *(int*) (param_1 + 0x15) != 0x1c) {
+	if (*(int*) (cmd_payload + 0x15) != 0x1b && *(int*) (cmd_payload + 0x15) != 0x1c) {
 		return 0xfffffffa;
 	}
 	search_loop_idx = 0;
-	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
+	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (cmd_payload + 8));
 	if (building_entity_ptr == 0 || *(unsigned short*) (building_entity_ptr + 0x27) == 0xffff ||
 		*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + (int) &DAT_100358a0 == DAT_1003546c) {
 		return 0xffffffff;
@@ -85,28 +85,28 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 	if (slot_scan_idx_or_capacity == 0) {
 		return 0xfffffffd;
 	}
-	entity_slot_byte_offset = gv_CheckSlotActive((char*) slot_scan_idx_or_capacity, *(int*) (param_1 + 0xc));
+	entity_slot_byte_offset = gv_CheckSlotActive((char*) slot_scan_idx_or_capacity, *(int*) (cmd_payload + 0xc));
 	if (entity_slot_byte_offset == 0) {
 		return 0xfffffffc;
 	}
 	production_slot_entry_ptr =
-		gv_GetSlotEntry(slot_scan_idx_or_capacity, *(int*) (param_1 + 0xc), *(unsigned char*) (param_1 + 0x10));
+		gv_GetSlotEntry(slot_scan_idx_or_capacity, *(int*) (cmd_payload + 0xc), *(unsigned char*) (cmd_payload + 0x10));
 	if (production_slot_entry_ptr == 0) {
 		return 0xffff;
 	}
 	entity_slot_byte_offset = 0;
-	slot_scan_idx_or_capacity = *(int*) (*(int*) (param_1 + 0xc) * 4 + 0x1002574c);
+	slot_scan_idx_or_capacity = *(int*) (*(int*) (cmd_payload + 0xc) * 4 + 0x1002574c);
 	if (0 < slot_scan_idx_or_capacity) {
 		production_record_walker = *(int**) (production_slot_entry_ptr + 0x10);
 		do {
 			matched_production_record = production_record_walker;
-			if (*matched_production_record == *(int*) (param_1 + 0x11)) {
+			if (*matched_production_record == *(int*) (cmd_payload + 0x11)) {
 				break;
 			}
 			entity_slot_byte_offset = entity_slot_byte_offset + 1;
 			production_record_walker = matched_production_record + 0x11;
 		} while (entity_slot_byte_offset < slot_scan_idx_or_capacity);
-		if (matched_production_record != 0 && *matched_production_record == *(int*) (param_1 + 0x11)) {
+		if (matched_production_record != 0 && *matched_production_record == *(int*) (cmd_payload + 0x11)) {
 			slot_scan_idx_or_capacity = 0;
 			for (slot_scan_ptr = (short*) &DAT_100358a0; slot_scan_ptr < (short*) 0x1009aca0;
 				slot_scan_ptr += 0x10e) {
@@ -161,7 +161,7 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 			*(short*) (entity_slot_byte_offset + 0x100358aa) = 0x10;
 			*(char*) (entity_slot_byte_offset + 0x10035a04) = 0;
 			*(char*) (entity_slot_byte_offset + 0x10035a06) = 0;
-			*(char*) (entity_slot_byte_offset + 0x10035a05) = *(char*) (param_1 + 0x15);
+			*(char*) (entity_slot_byte_offset + 0x10035a05) = *(char*) (cmd_payload + 0x15);
 			*(int*) (entity_slot_byte_offset + 0x10035a94) = 0;
 			*(int*) (entity_slot_byte_offset + 0x10035a30) = 4;
 			*(int*) (entity_slot_byte_offset + 0x10035a34) = 0;
@@ -203,7 +203,7 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)
 				*(char*) (entity_slot_byte_offset + 0x1014d8e0) = 0;
 			} while (slot_scan_idx_or_capacity < 0x90000);
 			if (*matched_production_record == *(int*) (production_slot_entry_ptr + 4)) {
-				slot_scan_idx_or_capacity = *(int*) (*(int*) (param_1 + 0xc) * 4 + 0x1002574c);
+				slot_scan_idx_or_capacity = *(int*) (*(int*) (cmd_payload + 0xc) * 4 + 0x1002574c);
 				if (0 < slot_scan_idx_or_capacity) {
 					search_loop_idx = 0;
 					production_record_walker = *(int**) (production_slot_entry_ptr + 0x10);
