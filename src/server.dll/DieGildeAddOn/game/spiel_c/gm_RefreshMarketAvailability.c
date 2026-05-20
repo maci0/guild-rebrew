@@ -1,0 +1,262 @@
+#include "../../../Units/Error/error.h"
+#include "../../../Units/m_alloc/m_alloc.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <windows.h>
+int __cdecl __ftol(void);
+
+typedef int(__cdecl* ALLOCFN)(int, int, int);
+
+#pragma intrinsic(memcpy, memset)
+
+// SIZE 0x2c
+typedef struct {
+	char pad[0x24];
+	int(__cdecl* func)(int, int);
+	int field_28;
+} DISPATCH_OBJ;
+
+#pragma pack(push, 1)
+// SIZE 0x43
+typedef struct {
+	short active;
+	int id;
+	char pad[0x3d];
+} Record;
+#pragma pack(pop)
+
+extern char* g_entity_table; /* 0x101de450 */
+;
+void __cdecl gm_InitObjektHersteller(void);
+void __cdecl gm_InitEntitySlots(void);
+int __cdecl _getpid(void);
+extern char* g_entity_ptr;
+void __cdecl vfs_EntityCleanup(char*);
+extern unsigned short* DAT_100a8c34;
+extern int DAT_10035450;
+extern Record* g_records;
+void __cdecl free_block(int);
+extern int g_data_ptr;
+extern int g_data_ptr2;
+extern int g_data_ptr3;
+extern int g_data_ptr4;
+extern char* g_game_initialized;
+extern unsigned char* DAT_1014d8c0;
+extern int DAT_100a8c30;
+extern unsigned char DAT_10035439;
+extern int DAT_1003543c;
+extern char* DAT_101de450;
+void* __cdecl FindNextFilteredEntity(void);
+int __cdecl gm_CleanupBuildingEntity(unsigned char*);
+void* __cdecl gm_NextEntityQueryMatch(void);
+unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
+char* __cdecl gm_AllocObjekt(int, int, int);
+extern WORD* DAT_10035468;
+extern char DAT_10035454;
+extern char DAT_1003545d;
+extern int DAT_10035458;
+extern int DAT_10030b94;
+extern int DAT_10030b98;
+extern short DAT_10030b9c;
+extern char DAT_10030b9e;
+extern char DAT_1003545c;
+extern char DAT_1003545e;
+extern int DAT_100a8c38;
+extern int* DAT_101398a0;
+extern int* DAT_1013989c;
+extern char* g_array_base;
+
+// STUB: SERVER 0x10015f70
+// gm_RefreshMarketAvailability
+
+void __cdecl gm_RefreshMarketAvailability(int param_1)
+{
+	int base;
+	int resource_types[8];
+
+	resource_types[0] = 0x92;
+	resource_types[1] = 0x93;
+	resource_types[2] = 0x94;
+	resource_types[3] = 0x95;
+	resource_types[4] = 0x96;
+	resource_types[5] = 0x97;
+	resource_types[6] = 0x2db;
+	resource_types[7] = 0;
+
+	DAT_1003543c = (int) gm_StartFilteredEntitySearch(1, 5, 10);
+	if (DAT_1003543c == 0) {
+		LogMessageInternal((char*) 0x10031004, 0x7cf, (char*) 0x1003122c, 1);
+		return;
+	}
+
+	{
+		int ecx;
+		int eax;
+		ecx = param_1;
+		eax = ecx;
+		eax = eax << 4;
+		eax = eax + ecx;
+		eax = eax + eax * 4;
+		base = ecx + eax * 8;
+		base = base << 4;
+		base = base + 0x1009b770;
+	}
+
+	if (param_1 != DAT_10035439) {
+		return;
+	}
+
+	/* Clear offset 4 of each of 0x55 slots (stride 0x80) */
+	{
+		int ptr;
+		int cnt;
+		ptr = base + 4;
+		cnt = 0x55;
+		do {
+			*(int*) ptr = 0;
+			ptr += 0x80;
+			cnt--;
+		} while (cnt != 0);
+	}
+
+	/* First major loop: iterate filtered entities */
+	{
+		int entity_ptr;
+		entity_ptr = (int) gm_StartFilteredEntitySearch(1, 6);
+		if (entity_ptr != 0) {
+			do {
+				int byteVal;
+				int edi;
+				int ecx2;
+				byteVal = *(unsigned char*) entity_ptr;
+				edi = DAT_100a8c30;
+				edi += byteVal;
+				ecx2 = byteVal + byteVal * 2;
+				ecx2 = ecx2 << 4;
+				ecx2 = ecx2 + byteVal;
+				ecx2 = ecx2 + ecx2 * 2;
+				if (*(char*) (edi + ecx2 * 4) != '\n') {
+					int query_result;
+					query_result = (int) gm_StartEntityQuery(*(int*) (entity_ptr + 0x5d), 1, 0, 0xff);
+					param_1 = 0;
+					if (query_result != 0) {
+						int pSlot;
+						pSlot = base;
+						while (param_1 < 0x55) {
+							if (*(short*) pSlot != 0) {
+								int inner_query;
+								inner_query = (int)
+									gm_StartEntityQuery(*(int*) (query_result + 0x14), 1, 0, *(short*) pSlot & 0xffff);
+								if (inner_query != 0) {
+									int rowId;
+									int edx2;
+									int pOuter;
+									int pInner;
+									int outerCount;
+									int pInnerCount;
+									*(int*) (pSlot + 4) = 1;
+									rowId = *(short*) pSlot & 0xffff;
+									edx2 = *(int*) DAT_101de450;
+									edx2 = edx2 + (rowId << 6);
+									edx2 = edx2 + rowId;
+									pOuter = base;
+									outerCount = 0x55;
+									do {
+										pInner = edx2 + 0x2e;
+										pInnerCount = 4;
+										do {
+											if (*(short*) pOuter == *(short*) pInner) {
+												*(int*) (pOuter + 4) = 1;
+											}
+											pInner += 2;
+											pInnerCount--;
+										} while (pInnerCount != 0);
+										pOuter += 0x80;
+										outerCount--;
+									} while (outerCount != 0);
+								}
+							}
+							param_1++;
+							pSlot += 0x80;
+						}
+					}
+				}
+				entity_ptr = (int) FindNextFilteredEntity();
+			} while (entity_ptr != 0);
+		}
+	}
+
+	/* Second major loop: 0x55 iterations over base array */
+	{
+		int query_result;
+		int esi;
+		query_result = 0x55;
+		esi = base;
+		do {
+			int inner_query;
+			int outer_query;
+			int edi;
+			inner_query = DAT_1003543c;
+			{
+				int ax;
+				ax = *(short*) (esi + 0x3c) & 0xffff;
+				outer_query = (int) gm_StartEntityQuery(*(int*) (inner_query + 0x5d), 1, 0, ax);
+				if (outer_query != 0) {
+					edi = (int) gm_StartEntityQuery(*(int*) (outer_query + 0x14), 1, 0, 0xff);
+					if (*(int*) (esi + 4) != 0) {
+						int edx;
+						int cx;
+						edx = *(int*) (edi + 0x14);
+						cx = *(short*) esi & 0xffff;
+						inner_query = (int) gm_StartEntityQuery(edx, 1, 0, cx);
+						if (inner_query == 0) {
+							gm_AllocObjekt(*(int*) (edi + 2), *(short*) esi & 0xffff, 1);
+						}
+					}
+				}
+			}
+			esi += 0x80;
+			query_result--;
+		} while (query_result != 0);
+	}
+
+	/* Third loop: iterate over resource_types array */
+	{
+		int resource_id;
+		int* pArr;
+		resource_id = 0x92;
+		pArr = &resource_types[0];
+		do {
+			int inner_query;
+			int outer_query;
+			int count_query;
+			int uCount;
+			uCount = 0;
+			outer_query = (int) gm_StartEntityQuery(*(int*) (DAT_1003543c + 0x5d), 1, 0, resource_id);
+			if (outer_query != 0) {
+				inner_query = (int) gm_StartEntityQuery(*(int*) (outer_query + 0x14), 1, 0, 0xff);
+				if (inner_query != 0) {
+					count_query = (int) gm_StartEntityQuery(*(int*) (inner_query + 0x14), 1, 5);
+					while (count_query != 0) {
+						uCount++;
+						count_query = (int) gm_NextEntityQueryMatch();
+					}
+					count_query = (int) gm_StartEntityQuery(*(int*) (outer_query + 0x14), 1, 4, 0x11);
+					if (count_query != 0) {
+						if ((*(unsigned char*) (count_query + 0x1c) & 0xff) != uCount) {
+							*(unsigned char*) (count_query + 0x1c) = (unsigned char) uCount;
+						}
+					}
+				}
+			}
+			pArr = pArr + 1;
+			resource_id = *pArr;
+		} while (resource_id != 0);
+	}
+}
+
+/* Finds a slot by ID in the entity slot table. Returns
+ * the slot pointer or NULL if not found. */
