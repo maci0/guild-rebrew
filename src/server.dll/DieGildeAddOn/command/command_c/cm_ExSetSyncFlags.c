@@ -8,19 +8,19 @@
  *    Symbol: _SetSyncFlags
  *    Files: DieGildeAddOn/command/command.c * /
  * 
- * int __cdecl cm_ExSetSyncFlags(int param_1,char *param_2)
+ * int __cdecl cm_ExSetSyncFlags(int cmd,char *result)
  * 
  * {
- *   if (*(char *)(param_1 + 0x10) == '\x01') {
- *     g_player_slot_0[*(byte *)(param_1 + 3)].flags =
- *          g_player_slot_0[*(byte *)(param_1 + 3)].flags | 0x20;
+ *   if (*(char *)(cmd + 0x10) == '\x01') {
+ *     g_player_slot_0[*(byte *)(cmd + 3)].flags =
+ *          g_player_slot_0[*(byte *)(cmd + 3)].flags | 0x20;
  *   }
- *   if (*(char *)(param_1 + 0x10) == '\x0e') {
- *     g_player_slot_0[*(byte *)(param_1 + 3)].flags =
- *          g_player_slot_0[*(byte *)(param_1 + 3)].flags | 0x40;
+ *   if (*(char *)(cmd + 0x10) == '\x0e') {
+ *     g_player_slot_0[*(byte *)(cmd + 3)].flags =
+ *          g_player_slot_0[*(byte *)(cmd + 3)].flags | 0x40;
  *   }
- *   if (*(char *)(param_1 + 0x10) == '\x12') {
- *     _g_game_speed_index = *(int *)(param_1 + 0x11);
+ *   if (*(char *)(cmd + 0x10) == '\x12') {
+ *     _g_game_speed_index = *(int *)(cmd + 0x11);
  *     if (3 < _g_game_speed_index) {
  *       _g_game_speed_index = 4;
  *     }
@@ -46,20 +46,20 @@ extern int g_game_speed_table[];
  * flag 0x40), 0x12 (sets game speed from g_game_speed_table). */
 
 // FUNCTION: SERVER 0x1000efb0
-int __cdecl cm_ExSetSyncFlags(int param_1, char* param_2)
+int __cdecl cm_ExSetSyncFlags(int cmd, char* result)
 {
 	int speed_index;
 
-	if (*(char*) (param_1 + 0x10) == '\x01') {
-		g_player_slot_0[*(unsigned char*) (param_1 + 3)].flags =
-			g_player_slot_0[*(unsigned char*) (param_1 + 3)].flags | 0x20;
+	if (*(char*) (cmd + 0x10) == '\x01') {
+		g_player_slot_0[*(unsigned char*) (cmd + 3)].flags =
+			g_player_slot_0[*(unsigned char*) (cmd + 3)].flags | 0x20;
 	}
-	if (*(char*) (param_1 + 0x10) == '\x0e') {
-		g_player_slot_0[*(unsigned char*) (param_1 + 3)].flags =
-			g_player_slot_0[*(unsigned char*) (param_1 + 3)].flags | 0x40;
+	if (*(char*) (cmd + 0x10) == '\x0e') {
+		g_player_slot_0[*(unsigned char*) (cmd + 3)].flags =
+			g_player_slot_0[*(unsigned char*) (cmd + 3)].flags | 0x40;
 	}
-	if (*(char*) (param_1 + 0x10) == '\x12') {
-		speed_index = *(int*) (param_1 + 0x11);
+	if (*(char*) (cmd + 0x10) == '\x12') {
+		speed_index = *(int*) (cmd + 0x11);
 		if (4 <= speed_index) {
 			speed_index = 4;
 		}
