@@ -17,10 +17,10 @@ extern char s_gm_AllocSpieler___failed_1002cbd4[];
  * updating player slot flags and setting connection state. */
 
 // FUNCTION: SERVER 0x1000d570
-__declspec(naked) int __cdecl cm_ExAllocClientSpieler(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		_emit 0xa1
 		_emit 0x6c

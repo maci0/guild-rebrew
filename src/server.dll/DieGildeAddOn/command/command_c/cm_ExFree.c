@@ -23,10 +23,10 @@ extern char s_cm_ExFree____Can_t_free_Objects_1002cc3c[];
  * on invalid entity ID. */
 
 // FUNCTION: SERVER 0x1000d730
-__declspec(naked) int __cdecl cm_ExFree(int param_1, char *param_2)
+__declspec(naked) int __cdecl cm_ExFree(int cmd, char *result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		sub esp, 8
 		xor eax, eax

@@ -9,10 +9,10 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
  * and detaches it from the entity chain. */
 
 // FUNCTION: SERVER 0x1000f0d0
-__declspec(naked) int __cdecl cm_ExRemoveLinkedObject(int param_1, char *param_2)
+__declspec(naked) int __cdecl cm_ExRemoveLinkedObject(int cmd, char *result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		push ecx
 		push esi

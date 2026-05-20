@@ -29,10 +29,10 @@ typedef struct {
  * payload. Returns 1 on invalid entity ID. */
 
 // FUNCTION: SERVER 0x1000cde0
-__declspec(naked) int __cdecl cm_ChkChangeAttribute(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ChkChangeAttribute(int cmd, char* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		sub esp, 0x10
 		push ebx

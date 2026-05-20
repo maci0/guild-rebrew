@@ -61,10 +61,10 @@ extern void* __cdecl gm_SearchTable67(int);
  * references and initializes event parameters. */
 
 // FUNCTION: SERVER 0x10010140
-__declspec(naked) int __cdecl cm_ExAllocWarEvent(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		_emit 0xa1
 		_emit 0x6c
