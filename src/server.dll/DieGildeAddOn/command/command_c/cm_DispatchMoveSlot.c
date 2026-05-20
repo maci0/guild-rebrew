@@ -23,10 +23,11 @@ int __cdecl gv_MoveSlotEntry(int);
  * gv_MoveSlotEntry with the payload at cmd+0x10. */
 
 // FUNCTION: SERVER 0x100102f0
-int __cdecl cm_DispatchMoveSlot(void* param_1, char* param_2)
+int __cdecl cm_DispatchMoveSlot(void* cmd, char* result_buf)
 {
-	int result;
+	int rc;
 
-	result = gv_MoveSlotEntry((int) param_1 + 0x10);
-	return result;
+	(void) result_buf;
+	rc = gv_MoveSlotEntry((int) cmd + 0x10);
+	return rc;
 }
