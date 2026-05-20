@@ -130,7 +130,7 @@ extern float g_100256b0;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
-unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
+unsigned short __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 {
 	unsigned short* entity;
 	unsigned short entity_id;
@@ -146,7 +146,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 	unsigned char* target_building;
 	int col_idx;
 
-	gm_ResolveEntityById((void**) &target_building, 0, 0, *(int*) (param_1 + 8));
+	gm_ResolveEntityById((void**) &target_building, 0, 0, *(int*) (cmd_payload + 8));
 	if (target_building == 0) {
 		err_msg = "ahm_ExAllocAlchemist: cant find target geb...";
 		alloc_result = 0x449;
@@ -202,7 +202,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			*((unsigned char*) entity + 0x218) = 1;
 			*(int*) ((char*) entity + 0x1e4) = 0x3f800000;
 			*((char*) entity + 8) = 100;
-			*(short*) ((char*) entity + 0xa) = (unsigned char) *(char*) (param_1 + 0x10);
+			*(short*) ((char*) entity + 0xa) = (unsigned char) *(char*) (cmd_payload + 0x10);
 			*((char*) entity + 0x164) = 0x52;
 			*((char*) entity + 0x166) = 0;
 			*((char*) entity + 0x165) = 0;
@@ -263,14 +263,14 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 			**(int**) (target_building + 0x65) = *(int*) ((char*) entity + 4);
 			{
 				int tmp;
-				tmp = *(char*) (param_1 + 0xf);
+				tmp = *(char*) (cmd_payload + 0xf);
 				*(float*) (*(int*) (target_building + 0x65) + 4) = (tmp * g_100256ac + g_100256a0) * g_100256b0;
 			}
-			*(char*) (*(int*) (target_building + 0x65) + 8) = *(char*) (param_1 + 0xc);
-			*(char*) (*(int*) (target_building + 0x65) + 9) = *(char*) (param_1 + 0xd);
-			*(char*) (*(int*) (target_building + 0x65) + 10) = *(char*) (param_1 + 0xe);
-			*(char*) (*(int*) (target_building + 0x65) + 0xb) = *(char*) (param_1 + 0xf);
-			*(char*) (*(int*) (target_building + 0x65) + 0xc) = *(char*) (param_1 + 0x14);
+			*(char*) (*(int*) (target_building + 0x65) + 8) = *(char*) (cmd_payload + 0xc);
+			*(char*) (*(int*) (target_building + 0x65) + 9) = *(char*) (cmd_payload + 0xd);
+			*(char*) (*(int*) (target_building + 0x65) + 10) = *(char*) (cmd_payload + 0xe);
+			*(char*) (*(int*) (target_building + 0x65) + 0xb) = *(char*) (cmd_payload + 0xf);
+			*(char*) (*(int*) (target_building + 0x65) + 0xc) = *(char*) (cmd_payload + 0x14);
 			idx = (int) gm_StartEntityQuery(*(int*) (target_building + 0x5d), 2, 6, 0, 0xff);
 			if (idx != 0) {
 				obj_node = *(unsigned short**) (idx + 0x14);
@@ -279,9 +279,9 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
 					obj_node = *(unsigned short**) (idx + 0x14);
 				}
 			}
-			*(int*) (*(int*) (target_building + 0x65) + 0x10) = *(int*) (param_1 + 0x20);
+			*(int*) (*(int*) (target_building + 0x65) + 0x10) = *(int*) (cmd_payload + 0x20);
 			if (idx != 0) {
-				gm_AddOrAccumulateObject(*(int*) (idx + 2), *(int*) (param_1 + 0x14), 2);
+				gm_AddOrAccumulateObject(*(int*) (idx + 2), *(int*) (cmd_payload + 0x14), 2);
 			}
 			gm_RefreshMarketAvailability((int) g_current_season);
 			*(int*) ((char*) entity + 0x1cc) = *(int*) ((char*) entity + 0x1cc) | 4;
@@ -334,9 +334,9 @@ int __cdecl ahm_ApplyColorComponent(char* color_cmd, char* target)
 // FUNCTION: SERVER 0x1000c280
 // ahm_AllocateEntitySlot
 
-__declspec(naked) int __cdecl ahm_AllocateEntitySlot(int param_1, int param_2, int param_3)
+__declspec(naked) int __cdecl ahm_AllocateEntitySlot(int cmd_payload, int param_2, int param_3)
 {
-	(void) param_1;
+	(void) cmd_payload;
 	(void) param_2;
 	(void) param_3;
 	__asm {
@@ -452,9 +452,9 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 // FUNCTION: SERVER 0x1000c3c0
 // ahm_ClampFloatValue
 
-__declspec(naked) int __cdecl ahm_ClampFloatValue(int param_1, int param_2)
+__declspec(naked) int __cdecl ahm_ClampFloatValue(int cmd_payload, int param_2)
 {
-	(void) param_1;
+	(void) cmd_payload;
 	(void) param_2;
 	__asm {
 		mov eax, dword ptr [esp + 4]
@@ -539,9 +539,9 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 // FUNCTION: SERVER 0x1000c4d0
 // ahm_AllocAhmInfo
 
-__declspec(naked) int __cdecl ahm_AllocAhmInfo(int param_1, int param_2)
+__declspec(naked) int __cdecl ahm_AllocAhmInfo(int cmd_payload, int param_2)
 {
-	(void) param_1;
+	(void) cmd_payload;
 	(void) param_2;
 	__asm {
 		sub esp, 0x3c
@@ -770,9 +770,9 @@ int* __cdecl ahm_LookupEntityInTable(int entity_id)
 // FUNCTION: SERVER 0x1000c6a0
 // ahm_QueryEntityBuildingType
 
-__declspec(naked) int __cdecl ahm_QueryEntityBuildingType(int param_1)
+__declspec(naked) int __cdecl ahm_QueryEntityBuildingType(int cmd_payload)
 {
-	(void) param_1;
+	(void) cmd_payload;
 	__asm {
 		mov eax, dword ptr [esp + 4]
 		push esi
@@ -829,9 +829,9 @@ __declspec(naked) int __cdecl ahm_QueryEntityBuildingType(int param_1)
 // FUNCTION: SERVER 0x1000ca00
 // ahm_ProcessEntityChain
 
-__declspec(naked) int __cdecl ahm_ProcessEntityChain(char* param_1)
+__declspec(naked) int __cdecl ahm_ProcessEntityChain(char* cmd_payload)
 {
-	(void) param_1;
+	(void) cmd_payload;
 	__asm {
 		push ebx
 		push esi
