@@ -934,7 +934,7 @@ __declspec(naked) unsigned int __cdecl amt_fio_LoadAemter(int arg1, int arg2)
 // DATA: SERVER 0x101de5a4
 extern char g_aemter_table[];
 
-unsigned int __cdecl amt_fio_LoadAemter_unused(int arg1, int arg2)
+unsigned int __cdecl amt_fio_LoadAemter_unused(int stream_handle, int version)
 {
 	unsigned int num_entries;
 	unsigned int i;
@@ -942,15 +942,15 @@ unsigned int __cdecl amt_fio_LoadAemter_unused(int arg1, int arg2)
 	unsigned int stored_count;
 	char buf[256];
 
-	num_entries = (((unsigned int) (arg2 < 0x10051) - 1) & 5) + 0x25;
+	num_entries = (((unsigned int) (version < 0x10051) - 1) & 5) + 0x25;
 
 	InitBuildingTypeTable();
 
-	if (arg1 == 0) {
+	if (stream_handle == 0) {
 		return 0;
 	}
 
-	if (ls_ReadVfsDataChecked(&stored_count, 4, 1, arg1) == 0) {
+	if (ls_ReadVfsDataChecked(&stored_count, 4, 1, stream_handle) == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\aemter.c",
 			0xe73,
@@ -970,22 +970,22 @@ unsigned int __cdecl amt_fio_LoadAemter_unused(int arg1, int arg2)
 	if (num_entries > 0) {
 		ptr = g_aemter_table;
 		do {
-			if (ls_ReadVfsDataChecked(ptr - 4, 1, 1, arg1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr - 4, 1, 1, stream_handle) == 0) {
 				goto err_id;
 			}
-			if (ls_ReadVfsDataChecked(ptr, 4, 1, arg1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr, 4, 1, stream_handle) == 0) {
 				goto err_playerid;
 			}
-			if (ls_ReadVfsDataChecked(ptr + 4, 1, 1, arg1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 4, 1, 1, stream_handle) == 0) {
 				goto err_amt;
 			}
-			if (ls_ReadVfsDataChecked(ptr + 8, 4, 1, arg1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 8, 4, 1, stream_handle) == 0) {
 				goto err_pcount;
 			}
-			if (ls_ReadVfsDataChecked(ptr + 0xc, 1, 1, arg1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 0xc, 1, 1, stream_handle) == 0) {
 				goto err_status;
 			}
-			if (ls_ReadVfsDataChecked(ptr + 0x10, 4, 1, arg1) == 0) {
+			if (ls_ReadVfsDataChecked(ptr + 0x10, 4, 1, stream_handle) == 0) {
 				goto err_last;
 			}
 			i++;
