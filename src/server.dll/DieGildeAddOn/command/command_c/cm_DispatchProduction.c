@@ -66,17 +66,19 @@ int __cdecl gv_ValidateEntityAction(uchar*);
  * 6=ValidateEntityAction. Stamps timestamp and random seed. */
 
 // FUNCTION: SERVER 0x10010260
-int __cdecl cm_DispatchProduction(int param_1, char* param_2)
+int __cdecl cm_DispatchProduction(int cmd, char* result)
 {
 	uint32_t* data_ptr;
-	int result;
+	int rc;
 	unsigned int status;
 
-	*(int*) (param_1 + 0x27) = g_timestamp_0b6c;
-	result = rand();
-	*(int*) (param_1 + 0x2b) = result;
-	data_ptr = (uint32_t*) (param_1 + 0x10);
-	switch (*(int*) (param_1 + 0x10)) {
+	(void) result;
+
+	*(int*) (cmd + 0x27) = g_timestamp_0b6c;
+	rc = rand();
+	*(int*) (cmd + 0x2b) = rc;
+	data_ptr = (uint32_t*) (cmd + 0x10);
+	switch (*(int*) (cmd + 0x10)) {
 	case 0:
 		status = AssignProductionSlot((int) data_ptr);
 		return status;
@@ -87,17 +89,17 @@ int __cdecl cm_DispatchProduction(int param_1, char* param_2)
 		status = ExtendProductionTime(data_ptr);
 		return status;
 	case 3:
-		result = gv_ReplaceProductionWorker((uchar*) data_ptr);
-		return result;
+		rc = gv_ReplaceProductionWorker((uchar*) data_ptr);
+		return rc;
 	case 4:
-		result = ActivateGraveyardSection((uchar*) data_ptr);
-		return result;
+		rc = ActivateGraveyardSection((uchar*) data_ptr);
+		return rc;
 	case 5:
-		result = gv_UpdateProductionProgress((uchar*) data_ptr);
-		return result;
+		rc = gv_UpdateProductionProgress((uchar*) data_ptr);
+		return rc;
 	case 6:
-		result = gv_ValidateEntityAction((uchar*) data_ptr);
-		return result;
+		rc = gv_ValidateEntityAction((uchar*) data_ptr);
+		return rc;
 	default:
 		return -1;
 	}
