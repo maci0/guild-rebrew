@@ -1700,9 +1700,6 @@ __declspec(naked) void __cdecl gm_SetBuildingWorkerLimits(unsigned char* param_1
  * building struct, sets type, initializes production and
  * storage, and links to the town. */
 
-// STUB: SERVER 0x100174d0
-// gm_AllocGebaeude
-
 // DATA: SERVER 0x100a8c30
 extern int g_entity_type_table;
 
