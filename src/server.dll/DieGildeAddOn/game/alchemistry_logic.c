@@ -89,9 +89,6 @@ int __cdecl ahm_CheckFlag(char* p)
  * the alchemist's inventory, recipe knowledge, and links
  * to the employing building. */
 
-// STUB: SERVER 0x1000bdf0
-// ahm_ExAllocAlchemist
-
 // DATA: SERVER 0x100a8c30
 extern int g_entity_type_table;
 
