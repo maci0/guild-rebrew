@@ -24,8 +24,8 @@ extern char g_1002d4f8;
 extern char g_1002d4fc;
 extern int DAT_100a8c34;
 extern int DAT_10035450;
-int __cdecl ls_LoadGraveyardData(int param_1, int param_2);
-int __cdecl ahm_AllocAhmInfo(int param_1, int param_2);
+int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
+int __cdecl ahm_AllocAhmInfo(int building, int slot);
 extern int g_file_version; /* 0x1002d4ec */
 ;
 extern int g_entity_array_ptr; /* 0x1014d8c0 */
