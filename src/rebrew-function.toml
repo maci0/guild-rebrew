@@ -715,6 +715,7 @@ status = "PROVEN"
 size = 1040
 status = "STUB"
 cflags = "/O2 /Oy- /Gd"
+blocker = "register allocation (ebp callee-save not used), instruction folding (lea vs mov), loop rotation / branch layout, comparison direction swap"
 blocker_delta = 1021
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
@@ -745,6 +746,7 @@ status = "RELOC"
 size = 1463
 status = "STUB"
 cflags = "/O2 /Oy- /Gd"
+blocker = "register allocation, loop rotation / branch layout, jump condition swap, sequential VFS read patterns"
 blocker_delta = 1390
 analysis = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 globals = "SERVER 0x100a8c34"
@@ -913,6 +915,7 @@ status = "EXACT"
 ["SERVER.0x10016290"]
 size = 464
 status = "STUB"
+blocker = "complex goto-laden control flow, register allocation, jump condition swap, multiple back-to-back labels"
 blocker_delta = 452
 analysis = "Apply active query filters (id/type/owner/group) to current candidate."
 
@@ -973,6 +976,7 @@ status = "EXACT"
 ["SERVER.0x100170e0"]
 size = 304
 status = "STUB"
+blocker = "register allocation (edx vs ecx for zero), instruction folding (cl reg vs imm 0xff), store reordering"
 blocker_delta = 229
 
 ["SERVER.0x10017210"]
@@ -1023,6 +1027,7 @@ status = "PROVEN"
 ["SERVER.0x10017c40"]
 size = 742
 status = "STUB"
+blocker = "MSVC shrink-wrap not applied (push regs before checks vs target after), 3 early-return paths not deferred"
 
 ["SERVER.0x10017f30"]
 size = 35
@@ -1085,11 +1090,13 @@ analysis = "duplicate bounds check needed for correct register allocation"
 ["SERVER.0x10018530"]
 size = 800
 status = "STUB"
+blocker = "SIB byte register-order swap ([edi+ecx] vs [ecx+edi]), reg-alloc choice for index/base"
 blocker_delta = 695
 
 ["SERVER.0x10018850"]
 size = 3689
 status = "STUB"
+blocker = "function body not yet decompiled — only stub returns 0; target is 3689B"
 
 ["SERVER.0x100196c0"]
 size = 81

@@ -1184,11 +1184,6 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 // STUB: SERVER 0x10016460
 // gm_StartEntityQuery
 
-// DATA: SERVER 0x101de450
-// DATA: SERVER 0x10030b94
-// DATA: SERVER 0x10030b98
-// DATA: SERVER 0x10030b9c
-
 // DATA: SERVER 0x10030b9e
 extern char DAT_10030b9e;
 
