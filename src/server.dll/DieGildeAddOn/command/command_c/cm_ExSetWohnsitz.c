@@ -7,7 +7,7 @@
  *    CFlags: 
  *    Symbol: _SetResidence
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl cm_ExSetWohnsitz(int param_1,char *param_2)
+ * int __cdecl cm_ExSetWohnsitz(int cmd,char *result)
  * 
  * {
  *   byte *pbVar1;
@@ -17,14 +17,14 @@
  *   char *msg;
  *   ushort local_8 [4];
  *   
- *   puVar2 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
+ *   puVar2 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x10));
  *   if (puVar2 == (ushort *)0x0) {
  *     msg = s_cm_ExSetWohnsitz____Could_not_fi_1002d298;
  *     line = 0x49de;
  *   }
  *   else {
- *     iVar3 = gm_LookupEntityRecordById(*(int *)(param_1 + 0x14));
- *     if ((iVar3 != 0) || (*(int *)(param_1 + 0x14) == -1)) {
+ *     iVar3 = gm_LookupEntityRecordById(*(int *)(cmd + 0x14));
+ *     if ((iVar3 != 0) || (*(int *)(cmd + 0x14) == -1)) {
  *       if (*(char *)(g_entity_type_table + (uint)(byte)*puVar2 * 0x24d) == '\x01') {
  *         table_lookup((uint)(byte)*puVar2,(int *)local_8);
  *         if (local_8[0] <= *(byte *)((int)puVar2 + 0x65)) {
@@ -41,13 +41,13 @@
  *         pbVar1[0x65] = pbVar1[0x65] - 1;
  *       }
  *       *(ushort **)(iVar3 + 0x170) = puVar2;
- *       if (param_2 != (char *)0x0) {
- *         *param_2 = '\x01';
- *         param_2[1] = '\0';
- *         param_2[6] = '\0';
- *         param_2[7] = '\0';
- *         param_2[8] = '\0';
- *         param_2[9] = '\0';
+ *       if (result != (char *)0x0) {
+ *         *result = '\x01';
+ *         result[1] = '\0';
+ *         result[6] = '\0';
+ *         result[7] = '\0';
+ *         result[8] = '\0';
+ *         result[9] = '\0';
  *       }
  */
 
@@ -68,7 +68,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * citizen's home to the specified building. */
 
 // FUNCTION: SERVER 0x1000f480
-int __cdecl cm_ExSetWohnsitz(int param_1, char* param_2)
+int __cdecl cm_ExSetWohnsitz(int cmd, char* result)
 {
 	ushort* building;
 	int resident;
@@ -76,7 +76,7 @@ int __cdecl cm_ExSetWohnsitz(int param_1, char* param_2)
 	uint type_id;
 	ushort caps[4];
 
-	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x10));
+	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building == (ushort*) 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -87,8 +87,8 @@ int __cdecl cm_ExSetWohnsitz(int param_1, char* param_2)
 		return 1;
 	}
 
-	resident = gm_LookupEntityRecordById(*(int*) (param_1 + 0x14));
-	if ((resident == 0) && (*(int*) (param_1 + 0x14) != -1)) {
+	resident = gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
+	if ((resident == 0) && (*(int*) (cmd + 0x14) != -1)) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x49ec,
@@ -121,10 +121,10 @@ int __cdecl cm_ExSetWohnsitz(int param_1, char* param_2)
 
 	*(ushort**) (resident + 0x170) = building;
 
-	if (param_2 != (char*) 0) {
-		*param_2 = '\x01';
-		param_2[1] = '\0';
-		*(int*) (param_2 + 6) = 0;
+	if (result != (char*) 0) {
+		*result = '\x01';
+		result[1] = '\0';
+		*(int*) (result + 6) = 0;
 	}
 
 	return 0;
