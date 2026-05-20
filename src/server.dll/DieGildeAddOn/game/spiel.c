@@ -2781,37 +2781,6 @@ short* __cdecl gm_GetEntityTableEntry(char* param)
  * entity identity between two IDs, updating all back-
  * references in buildings and citizens. */
 
-// STUB: SERVER 0x10018850
-// gm_CreateEntityFromParents
-
-int __cdecl gm_CreateEntityFromParents(int param_1, int param_2, int param_3, int param_4, int param_5)
-{
-	char work_buf[0x41c];
-	int var_10;
-	int var_14;
-	int var_18;
-	int var_1c;
-	int var_20;
-	int var_24;
-	int var_28;
-
-	(void) work_buf;
-
-	var_10 = 0;
-	var_14 = 0;
-	var_18 = 0;
-	var_1c = 0;
-	var_20 = 0;
-	var_24 = 0;
-	var_28 = 0;
-
-	return 0;
-}
-
-/* Queries the sum of a specific field across entities
- * matching a filter. Used for aggregate calculations
- * like total production or population counts. */
-
 // FUNCTION: SERVER 0x100196c0
 // gm_QueryEntitySum
 
