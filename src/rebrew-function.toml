@@ -813,7 +813,7 @@ note = "obj includes 28B jump table after code (296B obj vs 267B PE). Code match
 
 ["SERVER.0x10014db0"]
 size = 304
-status = "RELOC"
+status = "PROVEN"
 analysis = "obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte."
 
 ["SERVER.0x10014ee0"]
