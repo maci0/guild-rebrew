@@ -72,7 +72,7 @@ extern char* g_array_base;
 // STUB: SERVER 0x10016460
 // gm_StartEntityQuery
 
-unsigned short* __cdecl gm_StartEntityQuery(int param_1, int param_2, int param_3, ...)
+unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int first_arg, ...)
 {
 	int* arg_ptr;
 	int i;
@@ -97,10 +97,10 @@ unsigned short* __cdecl gm_StartEntityQuery(int param_1, int param_2, int param_
 	DAT_10035458 = 0;
 	DAT_100a8c38 = 0;
 
-	if (param_2 > 0) {
-		arg_ptr = &param_3;
+	if (arg_count > 0) {
+		arg_ptr = &first_arg;
 
-		for (i = param_2; i > 0; i--) {
+		for (i = arg_count; i > 0; i--) {
 			unsigned char ftype;
 
 			ftype = *(unsigned char*) arg_ptr;
@@ -152,7 +152,7 @@ unsigned short* __cdecl gm_StartEntityQuery(int param_1, int param_2, int param_
 	}
 
 check_container:
-	if (param_1 != 0) {
+	if (container_id != 0) {
 		DAT_10035468 = DAT_100a8c34;
 		return gm_NextEntityQueryMatch();
 	}
