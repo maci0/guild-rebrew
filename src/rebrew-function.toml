@@ -975,9 +975,7 @@ status = "EXACT"
 
 ["SERVER.0x100170e0"]
 size = 304
-status = "STUB"
-blocker = "register allocation (edx vs ecx for zero), instruction folding (cl reg vs imm 0xff), store reordering"
-blocker_delta = 229
+status = "PROVEN"
 
 ["SERVER.0x10017210"]
 size = 39

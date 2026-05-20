@@ -2247,9 +2247,6 @@ MATCH:
  * parameters specify entity class, type, and owner
  * constraints. Returns first matching entity. */
 
-// STUB: SERVER 0x100170e0
-// gm_StartFilteredEntitySearch
-
 // DATA: SERVER 0x100a8c30
 extern int DAT_100a8c30;
 
@@ -2282,74 +2279,6 @@ extern char DAT_10035448;
 
 // DATA: SERVER 0x10035464
 extern unsigned char* DAT_10035464;
-
-unsigned short* __cdecl gm_StartFilteredEntitySearch(int param_1, ...)
-{
-	int* arg_ptr;
-	int i;
-
-	if (DAT_100a8c30 == 0) {
-		return (unsigned short*) 0;
-	}
-
-	DAT_10030b8c = 0x7fff;
-	DAT_10030b8e = 0x7fff;
-	DAT_10030b84 = (char) 0xff;
-	DAT_10030b88 = -1;
-	DAT_10030b90 = (char) 0xff;
-	DAT_10035444 = 0;
-	DAT_10035449 = 1;
-	DAT_1003544c = 0;
-	DAT_10035448 = 0;
-
-	if (param_1 > 0) {
-		arg_ptr = &param_1;
-
-		for (i = param_1; i > 0; i--) {
-			unsigned char ftype;
-
-			arg_ptr++;
-			ftype = *(unsigned char*) arg_ptr;
-			switch (ftype) {
-			case 0:
-				DAT_10030b84 = *(char*) (arg_ptr + 1);
-				arg_ptr++;
-				break;
-			case 1:
-				DAT_10030b88 = *(arg_ptr + 1);
-				arg_ptr++;
-				break;
-			case 2:
-				strcpy(DAT_10035444, *(char**) (arg_ptr + 1));
-				arg_ptr++;
-				break;
-			case 3:
-				DAT_10030b8c = *(short*) (arg_ptr + 1);
-				arg_ptr++;
-				break;
-			case 4:
-				DAT_10030b8e = *(short*) (arg_ptr + 1);
-				arg_ptr++;
-				break;
-			case 5:
-				DAT_10030b90 = *(char*) (arg_ptr + 1);
-				arg_ptr++;
-				break;
-			case 6:
-				DAT_10035448 = 1;
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
-	DAT_10035464 = DAT_1014d8c0;
-	return FindNextFilteredEntity();
-}
-
-/* Searches a structure/record table for a matching entry.
- * Linear search by comparison field. */
 
 // FUNCTION: SERVER 0x10017210
 // gm_SearchStruct
