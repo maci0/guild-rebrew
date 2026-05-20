@@ -24,10 +24,12 @@ int __cdecl amt_SwapOfficeHolders(int*);
  * swap failed (result == 0), 0 on success. */
 
 // FUNCTION: SERVER 0x10010080
-int __cdecl cm_ExSimCommand(void* param_1, char* param_2)
+int __cdecl cm_ExSimCommand(void* cmd, char* result)
 {
 	int swap_result;
 
-	swap_result = amt_SwapOfficeHolders((int*) ((int) param_1 + 0x10));
+	(void) result;
+
+	swap_result = amt_SwapOfficeHolders((int*) ((int) cmd + 0x10));
 	return (unsigned int) (swap_result == 0);
 }
