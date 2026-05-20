@@ -54,10 +54,10 @@ extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
  * values rather than integers. */
 
 // FUNCTION: SERVER 0x1000eb70
-__declspec(naked) int __cdecl cm_ExChangeFloat(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExChangeFloat(int cmd, char* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		sub esp, 8
 		push esi

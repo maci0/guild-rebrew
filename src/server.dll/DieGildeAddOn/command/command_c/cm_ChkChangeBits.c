@@ -57,10 +57,10 @@ extern char s_cm_ChkChangeBits___Invalid_actio_1002ca04[];
  * invalid. Used as precondition check for bit-field changes. */
 
 // FUNCTION: SERVER 0x1000cf30
-__declspec(naked) int __cdecl cm_ChkChangeBits(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ChkChangeBits(int cmd, char* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		sub esp, 8
 		push esi

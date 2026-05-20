@@ -18,10 +18,10 @@ extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
  * Sets *param_2 = 1 on success (if non-null). Returns 1 on invalid entity ID. */
 
 // FUNCTION: SERVER 0x1000e8d0
-__declspec(naked) int __cdecl cm_ExSetAttribute(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExSetAttribute(int cmd, char* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		sub esp, 8
 		push ebp

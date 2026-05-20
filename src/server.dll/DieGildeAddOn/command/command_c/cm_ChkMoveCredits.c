@@ -63,10 +63,10 @@ extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];
  * entity, otherwise validates the transfer amount. */
 
 // FUNCTION: SERVER 0x1000cb20
-__declspec(naked) int __cdecl cm_ChkMoveCredits(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		sub esp, 8
 		push esi
