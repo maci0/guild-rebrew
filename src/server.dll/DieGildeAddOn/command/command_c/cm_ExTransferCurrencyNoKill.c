@@ -7,30 +7,30 @@
  *    CFlags: 
  *    Symbol: _ExTransferCurrencyNoKill
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl cm_ExTransferCurrencyNoKill(int param_1,char *param_2)
+ * int __cdecl cm_ExTransferCurrencyNoKill(int cmd,char *result)
  * 
  * {
  *   int iVar1;
  *   
- *   *(undefined4 *)(param_1 + 0x18) = g_timestamp_0b6c;
- *   if (*(int *)(param_1 + 0x14) != -1) {
- *     iVar1 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x14));
- *     *(int *)(param_1 + 0x14) = iVar1;
+ *   *(undefined4 *)(cmd + 0x18) = g_timestamp_0b6c;
+ *   if (*(int *)(cmd + 0x14) != -1) {
+ *     iVar1 = gm_GetFieldByType((char *)cmd,*(int *)(cmd + 0x14));
+ *     *(int *)(cmd + 0x14) = iVar1;
  *     gm_SubObjektNoKill
  *               (iVar1,(uint)*(ushort *)
- *                             (&g_currency_type_array + (uint)*(byte *)(param_1 + 0x1c) * 0x2f4),
- *                *(int *)(param_1 + 0x1d));
+ *                             (&g_currency_type_array + (uint)*(byte *)(cmd + 0x1c) * 0x2f4),
+ *                *(int *)(cmd + 0x1d));
  *   }
- *   if (*(int *)(param_1 + 0x10) != -1) {
- *     iVar1 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
- *     *(int *)(param_1 + 0x10) = iVar1;
+ *   if (*(int *)(cmd + 0x10) != -1) {
+ *     iVar1 = gm_GetFieldByType((char *)cmd,*(int *)(cmd + 0x10));
+ *     *(int *)(cmd + 0x10) = iVar1;
  *     gm_AddOrAccumulateObject
  *               (iVar1,(uint)*(ushort *)
- *                             (&g_currency_type_array + (uint)*(byte *)(param_1 + 0x1c) * 0x2f4),
- *                *(int *)(param_1 + 0x1d));
+ *                             (&g_currency_type_array + (uint)*(byte *)(cmd + 0x1c) * 0x2f4),
+ *                *(int *)(cmd + 0x1d));
  *   }
- *   if (param_2 != (char *)0x0) {
- *     *param_2 = '\x01';
+ *   if (result != (char *)0x0) {
+ *     *result = '\x01';
  *   }
  *   return 0;
  * }
@@ -47,33 +47,33 @@ extern char g_currency_type_array[];
  * instead of gm_SubObjekt, preventing entity removal on zero. */
 
 // FUNCTION: SERVER 0x1000d8a0
-int __cdecl cm_ExTransferCurrencyNoKill(int param_1, char* param_2)
+int __cdecl cm_ExTransferCurrencyNoKill(int cmd, char* result)
 {
 	int field_result;
 
-	*(int*) (param_1 + 0x18) = g_timestamp_0b6c;
-	if (*(int*) (param_1 + 0x14) != -1) {
-		field_result = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x14));
-		*(int*) (param_1 + 0x14) = field_result;
+	*(int*) (cmd + 0x18) = g_timestamp_0b6c;
+	if (*(int*) (cmd + 0x14) != -1) {
+		field_result = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
+		*(int*) (cmd + 0x14) = field_result;
 		gm_SubObjektNoKill(
 			field_result,
 			(unsigned int) *(unsigned short*) (g_currency_type_array +
-											   (unsigned int) *(unsigned char*) (param_1 + 0x1c) * 0x2f4),
-			*(int*) (param_1 + 0x1d)
+											   (unsigned int) *(unsigned char*) (cmd + 0x1c) * 0x2f4),
+			*(int*) (cmd + 0x1d)
 		);
 	}
-	if (*(int*) (param_1 + 0x10) != -1) {
-		field_result = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
-		*(int*) (param_1 + 0x10) = field_result;
+	if (*(int*) (cmd + 0x10) != -1) {
+		field_result = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
+		*(int*) (cmd + 0x10) = field_result;
 		gm_AddOrAccumulateObject(
 			field_result,
 			(unsigned int) *(unsigned short*) (g_currency_type_array +
-											   (unsigned int) *(unsigned char*) (param_1 + 0x1c) * 0x2f4),
-			*(int*) (param_1 + 0x1d)
+											   (unsigned int) *(unsigned char*) (cmd + 0x1c) * 0x2f4),
+			*(int*) (cmd + 0x1d)
 		);
 	}
-	if (param_2 != (char*) 0) {
-		*param_2 = '\x01';
+	if (result != (char*) 0) {
+		*result = '\x01';
 	}
 	return 0;
 }
