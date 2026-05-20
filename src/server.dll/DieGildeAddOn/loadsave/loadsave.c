@@ -63,10 +63,10 @@ extern unsigned int ls_ID2Ptr(void);
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 
-__declspec(naked) int __cdecl ls_LoadGraveyardData(int param_1, int param_2)
+__declspec(naked) int __cdecl ls_LoadGraveyardData(int arg1, int arg2)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) arg1;
+	(void) arg2;
 	__asm {
 		push ecx
 		mov eax, dword ptr [esp + 0xc]
@@ -380,15 +380,15 @@ __declspec(naked) int __cdecl ls_LoadGraveyardData(int param_1, int param_2)
 	}
 }
 
-int __cdecl ls_LoadGraveyardData_unused(int param_1, int param_2)
+int __cdecl ls_LoadGraveyardData_unused(int arg1, int arg2)
 {
 	int field_base;
 	int ret;
 	int ptr;
 	int edi;
 	int i;
-	(void) param_1;
-	(void) param_2;
+	(void) arg1;
+	(void) arg2;
 	(void) field_base;
 	(void) ret;
 	(void) ptr;
@@ -404,12 +404,12 @@ int __cdecl ls_LoadGraveyardData_unused(int param_1, int param_2)
 // FUNCTION: SERVER 0x100122e0
 // ls_InitNewDynastyEntity
 
-__declspec(naked) void ls_InitNewDynastyEntity(int param_1, int param_2, char* param_3, char* param_4)
+__declspec(naked) void ls_InitNewDynastyEntity(int arg1, int arg2, char* arg3, char* arg4)
 {
-	(void) param_1;
-	(void) param_2;
-	(void) param_3;
-	(void) param_4;
+	(void) arg1;
+	(void) arg2;
+	(void) arg3;
+	(void) arg4;
 	__asm {
 		mov eax, dword ptr [esp + 4]
 		push ebp
@@ -548,9 +548,9 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 void __cdecl gm_CleanupObjectEntities(void);
 
-__declspec(naked) int __cdecl ls_LoadExistingEntities(int param_1)
+__declspec(naked) int __cdecl ls_LoadExistingEntities(int arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push ecx
 		push ebx
@@ -692,7 +692,7 @@ extern int g_save_version;
 extern int g_citizen_count;
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
-int __cdecl ls_LoadEntities(int param_1)
+int __cdecl ls_LoadEntities(int arg1)
 {
 	int stream;
 	int read_result;
@@ -701,16 +701,16 @@ int __cdecl ls_LoadEntities(int param_1)
 	int entity_index;
 	int ref_value;
 
-	stream = param_1;
-	read_result = ls_ReadVfsDataChecked((void*) &entity_slot, 2, 1, (void*) param_1);
+	stream = arg1;
+	read_result = ls_ReadVfsDataChecked((void*) &entity_slot, 2, 1, (void*) arg1);
 	if (read_result == 0) {
 		return 0;
 	}
-	read_result = ls_ReadVfsDataChecked((void*) &param_1, 4, 1, (void*) stream);
+	read_result = ls_ReadVfsDataChecked((void*) &arg1, 4, 1, (void*) stream);
 	if (read_result == 0) {
 		return 0;
 	}
-	g_citizen_count = param_1;
+	g_citizen_count = arg1;
 	read_result = ls_ReadVfsDataChecked((void*) 0x10035470, 4, 1, (void*) stream);
 	if (read_result == 0) {
 		return 0;
@@ -728,7 +728,7 @@ int __cdecl ls_LoadEntities(int param_1)
 		}
 	}
 	entity_index = 0;
-	if (0 < param_1) {
+	if (0 < arg1) {
 		do {
 			read_result = ls_ReadVfsDataChecked((void*) &entity_slot, 2, 1, (void*) stream);
 			if (read_result == 0) {
@@ -1033,7 +1033,7 @@ int __cdecl ls_LoadEntities(int param_1)
 				}
 			}
 			entity_index = entity_index + 1;
-		} while (entity_index < param_1);
+		} while (entity_index < arg1);
 	}
 	return 1;
 }
