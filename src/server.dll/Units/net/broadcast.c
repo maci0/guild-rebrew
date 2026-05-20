@@ -10,6 +10,7 @@
 #include "../Error/error.h"
 
 
+// SIZE 0x10 — struct sockaddr_in (Winsock system struct)
 void __cdecl SendBroadcastPacket(int port, char* buf)
 {
 	SOCKET s;

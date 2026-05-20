@@ -732,6 +732,7 @@ __declspec(naked) int __cdecl srv_Init(void)
 // DATA: SERVER 0x101deb14
 extern unsigned int g_player_slot_field;
 
+// SIZE 0x10 — struct sockaddr_in (Winsock system struct)
 int __cdecl CreateListenSocket(int port)
 {
 	char wsadata[0x190];
