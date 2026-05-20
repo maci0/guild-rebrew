@@ -302,25 +302,25 @@ code_r0x1000be9f:
 // FUNCTION: SERVER 0x1000c1e0
 // ahm_ApplyColorComponent
 
-int __cdecl ahm_ApplyColorComponent(char* param_1, char* param_2)
+int __cdecl ahm_ApplyColorComponent(char* color_cmd, char* target)
 {
 	float val;
-	switch (*(int*) (param_1 + 8)) {
+	switch (*(int*) (color_cmd + 8)) {
 	case 0:
-		val = *(float*) (param_1 + 0x10);
-		*(unsigned char*) (param_2 + 8) = (unsigned char) (int) (val * fColorScale);
+		val = *(float*) (color_cmd + 0x10);
+		*(unsigned char*) (target + 8) = (unsigned char) (int) (val * fColorScale);
 		return 1;
 	case 1:
-		val = *(float*) (param_1 + 0x10);
-		*(unsigned char*) (param_2 + 9) = (unsigned char) (int) (val * fColorScale);
+		val = *(float*) (color_cmd + 0x10);
+		*(unsigned char*) (target + 9) = (unsigned char) (int) (val * fColorScale);
 		return 1;
 	case 2:
-		val = *(float*) (param_1 + 0x10);
-		*(unsigned char*) (param_2 + 0xa) = (unsigned char) (int) (val * fColorScale);
+		val = *(float*) (color_cmd + 0x10);
+		*(unsigned char*) (target + 0xa) = (unsigned char) (int) (val * fColorScale);
 		return 1;
 	case 3:
-		val = *(float*) (param_1 + 0x10);
-		*(unsigned char*) (param_2 + 0xb) = (unsigned char) (int) (val * fColorScale);
+		val = *(float*) (color_cmd + 0x10);
+		*(unsigned char*) (target + 0xb) = (unsigned char) (int) (val * fColorScale);
 		return 1;
 	default:
 		return 0;
