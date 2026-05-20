@@ -2691,14 +2691,14 @@ __declspec(naked) int __cdecl gv_UpdateProductionProgress(unsigned char* arg1)
 // FUNCTION: SERVER 0x10011890
 // gv_ValidateEntityAction
 
-int __cdecl gv_ValidateEntityAction(unsigned char* arg1)
+int __cdecl gv_ValidateEntityAction(unsigned char* cmd_payload)
 {
 	void* entity;
 	unsigned int slot_val;
 	unsigned char type_byte;
 	int result;
 
-	gm_ResolveEntityById((void**) &entity, (void**) 0, (void**) 0, *(int*) (arg1 + 8));
+	gm_ResolveEntityById((void**) &entity, (void**) 0, (void**) 0, *(int*) (cmd_payload + 8));
 	if (entity != 0) {
 		if (*(unsigned short*) ((char*) entity + 0x27) != 0xFFFF) {
 			slot_val = (unsigned int) *(unsigned short*) ((char*) entity + 0x27);
@@ -2710,7 +2710,7 @@ int __cdecl gv_ValidateEntityAction(unsigned char* arg1)
 				if (*(int*) ((char*) entity + 0x65) == 0) {
 					return -3;
 				}
-				result = SpawnGraveyardEntities(entity, *(int*) (arg1 + 0x13));
+				result = SpawnGraveyardEntities(entity, *(int*) (cmd_payload + 0x13));
 				if (result > 0) {
 					return 0;
 				}
