@@ -85,7 +85,7 @@ extern unsigned char* DAT_1014d8c0;
 // FUNCTION: SERVER 0x100170e0
 // gm_StartFilteredEntitySearch
 
-unsigned short* __cdecl gm_StartFilteredEntitySearch(int param_1, ...)
+unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 {
 	int* arg_ptr;
 	int i;
@@ -104,10 +104,10 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int param_1, ...)
 	DAT_1003544c = 0;
 	DAT_10035448 = 0;
 
-	if (param_1 > 0) {
-		arg_ptr = &param_1;
+	if (arg_count > 0) {
+		arg_ptr = &arg_count;
 
-		for (i = param_1; i > 0; i--) {
+		for (i = arg_count; i > 0; i--) {
 			unsigned char ftype;
 
 			arg_ptr++;
