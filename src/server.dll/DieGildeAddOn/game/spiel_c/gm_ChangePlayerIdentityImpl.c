@@ -72,7 +72,7 @@ extern char* g_array_base;
 // STUB: SERVER 0x10018530
 // gm_ChangePlayerIdentityImpl
 
-int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
+int __cdecl gm_ChangePlayerIdentityImpl(int player_id, int new_identity)
 {
 	char* record_b;
 	unsigned short index_b;
@@ -91,7 +91,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 	char buf1[0x21c];
 	char buf2[0x21c];
 
-	record_a = (char*) gm_LookupEntityRecordById(param_1);
+	record_a = (char*) gm_LookupEntityRecordById(player_id);
 	if (record_a == 0) {
 		return -1;
 	}
@@ -117,7 +117,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 	index_a = *(unsigned short*) record_a;
 	chain_value = gm_WalkEntityChain(index_a);
 
-	record_b = (char*) gm_LookupEntityRecordById(param_2);
+	record_b = (char*) gm_LookupEntityRecordById(new_identity);
 	if (record_b == 0) {
 		return -2;
 	}
@@ -192,11 +192,11 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
 		copy_count = 8;
 		ref_scan = outer_scan;
 		do {
-			if (*ref_scan == param_1) {
-				*ref_scan = param_2;
+			if (*ref_scan == player_id) {
+				*ref_scan = new_identity;
 			}
-			else if (*ref_scan == param_2) {
-				*ref_scan = param_1;
+			else if (*ref_scan == new_identity) {
+				*ref_scan = player_id;
 			}
 			ref_scan = ref_scan + 1;
 			copy_count = copy_count - 1;
