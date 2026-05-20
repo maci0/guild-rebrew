@@ -14,7 +14,7 @@
  *    CFlags: 
  *    Symbol: _SimSpecialAction
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl cm_ExSimSpecialAction(int param_1,char *param_2)
+ * int __cdecl cm_ExSimSpecialAction(int cmd,char *result)
  * 
  * {
  *   SRC *src;
@@ -22,7 +22,7 @@
  *   char *p;
  *   int iVar2;
  *   
- *   p = (char *)gm_LookupEntityRecordById(*(int *)(param_1 + 0x14));
+ *   p = (char *)gm_LookupEntityRecordById(*(int *)(cmd + 0x14));
  *   if (p == (char *)0x0) {
  *     return -1;
  *   }
@@ -30,8 +30,8 @@
  *   if (iVar2 == 0) {
  *     return -2;
  *   }
- *   uVar1 = *(uint *)(param_1 + 0x10);
- *   src = (SRC *)(param_1 + 0x10);
+ *   uVar1 = *(uint *)(cmd + 0x10);
+ *   src = (SRC *)(cmd + 0x10);
  *   if (uVar1 < 0x61536d54) {
  *     if (uVar1 == 0x61536d53) {
  *       ahm_ClampFloatValue((int)src,*(int *)(*(int *)(p + 0x16c) + 0x65));
@@ -72,15 +72,15 @@ void __cdecl ahm_AllocateEntitySlot(void*, void*, void*);
  * other alchemist-related operations. */
 
 // FUNCTION: SERVER 0x10010390
-int __cdecl cm_ExSimSpecialAction(int param_1, char* param_2)
+int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
 {
 	char* p;
 	uint action_type;
 	char* src;
 	int flag_ok;
 
-	(void) param_2;
-	p = (char*) gm_LookupEntityRecordById(*(int*) (param_1 + 0x14));
+	(void) result;
+	p = (char*) gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
 	if (p == (char*) 0) {
 		return -1;
 	}
@@ -88,8 +88,8 @@ int __cdecl cm_ExSimSpecialAction(int param_1, char* param_2)
 	if (flag_ok == 0) {
 		return -2;
 	}
-	action_type = *(uint*) (param_1 + 0x10);
-	src = (char*) (param_1 + 0x10);
+	action_type = *(uint*) (cmd + 0x10);
+	src = (char*) (cmd + 0x10);
 	switch (action_type) {
 	case 0x61535263:
 		ahm_SearchAndSet(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
