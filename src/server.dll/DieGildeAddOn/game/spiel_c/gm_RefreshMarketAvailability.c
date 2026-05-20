@@ -72,7 +72,7 @@ extern char* g_array_base;
 // STUB: SERVER 0x10015f70
 // gm_RefreshMarketAvailability
 
-void __cdecl gm_RefreshMarketAvailability(int param_1)
+void __cdecl gm_RefreshMarketAvailability(int season)
 {
 	int base;
 	int resource_types[8];
@@ -95,7 +95,7 @@ void __cdecl gm_RefreshMarketAvailability(int param_1)
 	{
 		int ecx;
 		int eax;
-		ecx = param_1;
+		ecx = season;
 		eax = ecx;
 		eax = eax << 4;
 		eax = eax + ecx;
@@ -105,7 +105,7 @@ void __cdecl gm_RefreshMarketAvailability(int param_1)
 		base = base + 0x1009b770;
 	}
 
-	if (param_1 != DAT_10035439) {
+	if (season != DAT_10035439) {
 		return;
 	}
 
@@ -141,11 +141,11 @@ void __cdecl gm_RefreshMarketAvailability(int param_1)
 				if (*(char*) (edi + ecx2 * 4) != '\n') {
 					int query_result;
 					query_result = (int) gm_StartEntityQuery(*(int*) (entity_ptr + 0x5d), 1, 0, 0xff);
-					param_1 = 0;
+					season = 0;
 					if (query_result != 0) {
 						int pSlot;
 						pSlot = base;
-						while (param_1 < 0x55) {
+						while (season < 0x55) {
 							if (*(short*) pSlot != 0) {
 								int inner_query;
 								inner_query = (int)
@@ -179,7 +179,7 @@ void __cdecl gm_RefreshMarketAvailability(int param_1)
 									} while (outerCount != 0);
 								}
 							}
-							param_1++;
+							season++;
 							pSlot += 0x80;
 						}
 					}
