@@ -354,7 +354,7 @@ status = "RELOC"
 
 ["SERVER.0x1000c710"]
 size = 752
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 
 ["SERVER.0x1000ca00"]
@@ -872,7 +872,7 @@ blocker = "comparison direction swap, instruction folding (lea vs mov), jump con
 
 ["SERVER.0x10015950"]
 size = 861
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap"
 blocker_delta = 333
 ghidra = "InitGameWorld"
