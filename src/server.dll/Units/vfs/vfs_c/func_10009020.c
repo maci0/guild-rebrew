@@ -38,7 +38,7 @@ int __cdecl ReadVfsCompressed(int, int, unsigned int);
 /* Game function - compression stream initialization */
 /* Parses flag string (R/W/N/Z), allocates pool object, sets up zlib inflate/deflate */
 
-int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* param_3)
+int __cdecl OpenVfsStream(unsigned char* buf, unsigned int size, char* mode_flags)
 {
 	char is_read;
 	char use_zlib;
@@ -49,11 +49,11 @@ int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* pa
 	has_mode = 1;
 	is_read = 1;
 
-	if (param_1 == 0) {
+	if (buf == 0) {
 		return 0;
 	}
 
-	if (param_2 == 0) {
+	if (size == 0) {
 		return 0;
 	}
 
@@ -61,7 +61,7 @@ int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* pa
 		char* p;
 		char c;
 
-		p = param_3;
+		p = mode_flags;
 		c = *p;
 		while (c != 0) {
 			int ch;
@@ -99,8 +99,8 @@ int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* pa
 
 	if (is_read) {
 		if (has_mode) {
-			if (param_2 > 0xa && (unsigned int) param_1[0] == *(unsigned int*) 0x10029450 &&
-				(unsigned int) param_1[1] == *(unsigned int*) 0x10029454) {
+			if (size > 0xa && (unsigned int) buf[0] == *(unsigned int*) 0x10029450 &&
+				(unsigned int) buf[1] == *(unsigned int*) 0x10029454) {
 				use_zlib = 1;
 				goto setup_inflate;
 			}
@@ -112,14 +112,14 @@ int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* pa
 			}
 		}
 
-		*(int*) (obj + 0x100) = (int) param_1;
-		*(int*) (obj + 0x104) = (int) param_2;
+		*(int*) (obj + 0x100) = (int) buf;
+		*(int*) (obj + 0x104) = (int) size;
 		*(int*) (obj + 0x108) = 0;
 		goto done;
 
 	setup_inflate:
-		*(int*) (obj + 0x100) = (int) (param_1 + 10);
-		*(int*) (obj + 0x104) = (int) param_2 - 10;
+		*(int*) (obj + 0x100) = (int) (buf + 10);
+		*(int*) (obj + 0x104) = (int) size - 10;
 		*(int*) (obj + 0x10c) = 0;
 		*(int*) (obj + 0x110) = 0;
 		*(int*) (obj + 0x120) = 0;
@@ -136,31 +136,31 @@ int __cdecl OpenVfsStream(unsigned char* param_1, unsigned int param_2, char* pa
 	}
 	else {
 		if (!use_zlib) {
-			*(int*) (obj + 0x10c) = (int) param_1;
-			*(int*) (obj + 0x110) = (int) param_2;
+			*(int*) (obj + 0x10c) = (int) buf;
+			*(int*) (obj + 0x110) = (int) size;
 			*(int*) (obj + 0x114) = 0;
 			goto done;
 		}
 
-		if (param_2 <= 0x11) {
+		if (size <= 0x11) {
 			goto fail;
 		}
 
-		param_1[0] = *(unsigned char*) 0x10029450;
-		param_1[1] = *(unsigned char*) 0x10029454;
-		param_1[2] = 8;
-		param_1[8] = 0;
-		param_1[7] = 0;
-		param_1[6] = 0;
-		param_1[5] = 0;
-		param_1[4] = 0;
-		param_1[3] = 0;
-		param_1[9] = 0xb;
+		buf[0] = *(unsigned char*) 0x10029450;
+		buf[1] = *(unsigned char*) 0x10029454;
+		buf[2] = 8;
+		buf[8] = 0;
+		buf[7] = 0;
+		buf[6] = 0;
+		buf[5] = 0;
+		buf[4] = 0;
+		buf[3] = 0;
+		buf[9] = 0xb;
 
 		*(int*) (obj + 0x100) = 0;
 		*(int*) (obj + 0x104) = 0;
-		*(int*) (obj + 0x10c) = (int) (param_1 + 10);
-		*(int*) (obj + 0x110) = (int) param_2 - 10;
+		*(int*) (obj + 0x10c) = (int) (buf + 10);
+		*(int*) (obj + 0x110) = (int) size - 10;
 		*(int*) (obj + 0x120) = 0;
 		*(int*) (obj + 0x124) = 0;
 
@@ -190,7 +190,7 @@ done:
 		flag_byte |= (use_zlib & 1) << 3;
 		*(unsigned char*) (obj + 0x13c) = flag_byte;
 
-		sprintf((char*) obj, (char*) 0x100294a4, param_1, param_2, is_read & 0xff, use_zlib & 0xff);
+		sprintf((char*) obj, (char*) 0x100294a4, buf, size, is_read & 0xff, use_zlib & 0xff);
 	}
 
 	return (int) obj;
