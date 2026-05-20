@@ -12,43 +12,43 @@ extern void __cdecl cm_ClosePlayerConnection(char* player_ptr);
 extern char* __cdecl lb_SearchRecordTable(int record_id);
 
 /* Lobby commands (lobbycommands.c) */
-extern int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2);
-extern int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2);
+extern int __cdecl lb_ExPlayerlist(unsigned int* cmd, unsigned char* result);
+extern int __cdecl lb_SendLobbyConfig(unsigned int* cmd, unsigned char* result);
 extern int __cdecl lb_HandleLobbyCommands(char* player, char* msg);
-extern int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2);
+extern int __cdecl lb_ExLobbyServerCommand(unsigned int* cmd, int result);
 
 /* Validation functions (command.c) */
-extern int __cdecl cm_ChkMoveCredits(void* param_1, void* param_2);
-extern int __cdecl cm_ChkSellObjekt(void* param_1, void* param_2);
-extern int __cdecl cm_ChkChangeAttribute(void* param_1, void* param_2);
-extern int __cdecl cm_ChkChangeBits(void* param_1, void* param_2);
-extern int __cdecl cm_ChkSetGebBesitzer(void* param_1, void* param_2);
-extern int __cdecl cm_ChkCutsceneReady(void* param_1, void* param_2);
+extern int __cdecl cm_ChkMoveCredits(void* cmd, void* result);
+extern int __cdecl cm_ChkSellObjekt(void* cmd, void* result);
+extern int __cdecl cm_ChkChangeAttribute(void* cmd, void* result);
+extern int __cdecl cm_ChkChangeBits(void* cmd, void* result);
+extern int __cdecl cm_ChkSetGebBesitzer(void* cmd, void* result);
+extern int __cdecl cm_ChkCutsceneReady(void* cmd, void* result);
 
 /* Execution functions (command.c) */
-extern int __cdecl cm_ExecCommand(void* param_1, void* param_2);
-extern int __cdecl cm_ExAllocRaum(void* param_1, void* param_2);
-extern int __cdecl cm_ExAllocObjekt(void* param_1, void* param_2);
-extern int __cdecl cm_ExAllocSpieler(void* param_1, void* param_2);
-extern int __cdecl cm_ExChangePlayerIdentity(void* param_1, void* param_2);
-extern int __cdecl cm_ExFree(void* param_1, void* param_2);
-extern int __cdecl cm_ExSellObjekt(void* param_1, void* param_2);
-extern int __cdecl cm_ExProdObjekt(void* param_1, void* param_2);
-extern int __cdecl cm_ExMoveObjekt(void* param_1, void* param_2);
-extern int __cdecl cm_ExClearLagerslot(void* param_1, void* param_2);
-extern int __cdecl cm_ExChangeAttribute(void* param_1, void* param_2);
-extern int __cdecl cm_ExSetAttribute(void* param_1, void* param_2);
-extern int __cdecl cm_ExChangeDesire(void* param_1, void* param_2);
-extern int __cdecl cm_ExChangeBits(void* param_1, void* param_2);
-extern int __cdecl cm_ExChangeFloat(void* param_1, void* param_2);
-extern int __cdecl cm_ExKillSpieler(void* param_1, void* param_2);
-extern int __cdecl cm_ExAllocThemaPredigt(void* param_1, void* param_2);
-extern int __cdecl cm_ExSetGebBesitzer(void* param_1, void* param_2);
-extern int __cdecl cm_ExSetWohnsitz(void* param_1, void* param_2);
-extern int __cdecl cm_ExSetGebUpgrade(void* param_1, void* param_2);
-extern int __cdecl cm_ExEmployWorker(void* param_1, void* param_2);
-extern int __cdecl cm_ExAllocCharacter(void* param_1, void* param_2);
-extern int __cdecl cm_ExKillTransporter(void* param_1, void* param_2);
-extern int __cdecl cm_ExCreateGeb(void* param_1, void* param_2);
+extern int __cdecl cm_ExecCommand(void* cmd, void* result);
+extern int __cdecl cm_ExAllocRaum(void* cmd, void* result);
+extern int __cdecl cm_ExAllocObjekt(void* cmd, void* result);
+extern int __cdecl cm_ExAllocSpieler(void* cmd, void* result);
+extern int __cdecl cm_ExChangePlayerIdentity(void* cmd, void* result);
+extern int __cdecl cm_ExFree(void* cmd, void* result);
+extern int __cdecl cm_ExSellObjekt(void* cmd, void* result);
+extern int __cdecl cm_ExProdObjekt(void* cmd, void* result);
+extern int __cdecl cm_ExMoveObjekt(void* cmd, void* result);
+extern int __cdecl cm_ExClearLagerslot(void* cmd, void* result);
+extern int __cdecl cm_ExChangeAttribute(void* cmd, void* result);
+extern int __cdecl cm_ExSetAttribute(void* cmd, void* result);
+extern int __cdecl cm_ExChangeDesire(void* cmd, void* result);
+extern int __cdecl cm_ExChangeBits(void* cmd, void* result);
+extern int __cdecl cm_ExChangeFloat(void* cmd, void* result);
+extern int __cdecl cm_ExKillSpieler(void* cmd, void* result);
+extern int __cdecl cm_ExAllocThemaPredigt(void* cmd, void* result);
+extern int __cdecl cm_ExSetGebBesitzer(void* cmd, void* result);
+extern int __cdecl cm_ExSetWohnsitz(void* cmd, void* result);
+extern int __cdecl cm_ExSetGebUpgrade(void* cmd, void* result);
+extern int __cdecl cm_ExEmployWorker(void* cmd, void* result);
+extern int __cdecl cm_ExAllocCharacter(void* cmd, void* result);
+extern int __cdecl cm_ExKillTransporter(void* cmd, void* result);
+extern int __cdecl cm_ExCreateGeb(void* cmd, void* result);
 
 #endif /* COMMAND_H */
