@@ -2457,22 +2457,22 @@ extern unsigned char g_entity_type_bytes[];
 
 // DATA: SERVER 0x100358a0
 
-int __cdecl gm_CheckStatLevel(int arg1, int arg2)
+int __cdecl gm_CheckStatLevel(int entity_idx, int stat_id)
 {
 	int idx;
 	int val;
 	int result;
 
-	idx = arg1 * 0x21c;
+	idx = entity_idx * 0x21c;
 	val = gm_MapEntityStatRange((int) g_entity_type_bytes[idx]);
-	if (val == arg2) {
+	if (val == stat_id) {
 		return (unsigned int) g_entity_type_bytes[idx];
 	}
 	result = (int) gm_GetEntityTableEntry(g_entity_array + idx);
 	if (result == 0) {
 		return 0;
 	}
-	return (unsigned int) *(unsigned char*) (result + 0x74 + arg2);
+	return (unsigned int) *(unsigned char*) (result + 0x74 + stat_id);
 }
 
 /* Maps and clamps an entity stat value to a valid range.
