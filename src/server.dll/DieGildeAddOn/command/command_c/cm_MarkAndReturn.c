@@ -18,10 +18,11 @@
  */
 
 // FUNCTION: SERVER 0x1000d330
-int __cdecl cm_MarkAndReturn(int param_1, char* param_2)
+int __cdecl cm_MarkAndReturn(int cmd, char* result)
 {
-	if (param_2 != (char*) 0x0) {
-		*param_2 = '\x01';
+	(void) cmd;
+	if (result != (char*) 0x0) {
+		*result = '\x01';
 	}
 	return 0;
 }
