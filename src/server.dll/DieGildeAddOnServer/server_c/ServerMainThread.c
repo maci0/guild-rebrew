@@ -25,7 +25,7 @@ int __cdecl ProcessReceiveData(void);
 int __cdecl ProcessSendData(void);
 int __cdecl ReceivePacketHeader(unsigned int* param_1);
 int __cdecl SendBroadcastPacket(unsigned char* data, int size);
-void __cdecl LogWinsockError(int param_1);
+void __cdecl LogWinsockError(int err_code);
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 

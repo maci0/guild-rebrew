@@ -25,7 +25,7 @@ int __cdecl ProcessReceiveData(void);
 int __cdecl ProcessSendData(void);
 int __cdecl ReceivePacketHeader(unsigned int* param_1);
 int __cdecl SendBroadcastPacket(unsigned char* data, int size);
-void __cdecl LogWinsockError(int param_1);
+void __cdecl LogWinsockError(int err_code);
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
@@ -1026,11 +1026,11 @@ void __cdecl list_unlink_relink(char* ctx, char* node)
 // FUNCTION: SERVER 0x1000ad40
 // LogWinsockError
 
-void __cdecl LogWinsockError(int param_1)
+void __cdecl LogWinsockError(int err_code)
 {
 	char buf[256];
 
-	switch (param_1) {
+	switch (err_code) {
 	case 0x276d:
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x769, "WSANOTINITIALISED", 1);
 		return;
@@ -1166,7 +1166,7 @@ void __cdecl LogWinsockError(int param_1)
 		);
 		return;
 	default:
-		sprintf(buf, "Unbekannter WinsockError %d", param_1);
+		sprintf(buf, "Unbekannter WinsockError %d", err_code);
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x789, buf, 1);
 		return;
 	}
