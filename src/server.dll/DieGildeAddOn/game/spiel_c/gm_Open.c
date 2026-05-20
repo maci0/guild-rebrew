@@ -80,7 +80,7 @@ extern int g_1002dde0;
 // FUNCTION: SERVER 0x10015950
 // gm_Open
 
-int __cdecl gm_Open(int param_1)
+int __cdecl gm_Open(int map_id)
 {
 	unsigned int* src_player_ptr;
 	unsigned int* dst_player_ptr;
@@ -120,7 +120,7 @@ int __cdecl gm_Open(int param_1)
 	if (g_1014d8c0 == 0) {
 		return -2;
 	}
-	sprintf((char*) path_buf, (char*) 0x1003118c, param_1, (char*) 0x10031194);
+	sprintf((char*) path_buf, (char*) 0x1003118c, map_id, (char*) 0x10031194);
 	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4f5, (char*) 0x10031154, 1);
@@ -137,7 +137,7 @@ int __cdecl gm_Open(int param_1)
 		return -5;
 	}
 	memset((void*) g_100a8c34, 0, 0x14f218);
-	sprintf((char*) path_buf, (char*) 0x1003118c, param_1, (char*) 0x10031120);
+	sprintf((char*) path_buf, (char*) 0x1003118c, map_id, (char*) 0x10031120);
 	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal(
