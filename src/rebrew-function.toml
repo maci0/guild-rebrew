@@ -4,7 +4,7 @@ status = "RELOC"
 
 ["SERVER.0x10002640"]
 size = 290
-status = "RELOC"
+status = "PROVEN"
 analysis = "Core logging sink. Takes an output_mask bitfield: bit 0 writes to file (looking up the correct file name via severity in a global table), bit 2 writes to OutputDebugStringA (debugger), bit 3 writes to the allocated Win32 Console using WriteConsoleA."
 
 ["SERVER.0x10002770"]
@@ -16,7 +16,7 @@ analysis = "Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15
 
 ["SERVER.0x10002fc0"]
 size = 376
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10003140"]
 size = 33
@@ -41,18 +41,18 @@ ghidra = "DecodePotentialControlTransfer"
 
 ["SERVER.0x100034c0"]
 size = 83
-status = "RELOC"
+status = "PROVEN"
 analysis = "Initialization routine for the server's telemetry. Registers the CrashDumpUnhandledExceptionFilter. Allocates a console if requested via flags. Truncates log files (__server.log, gilde_server.log) if they exceed 64KB (0x10000 bytes) and seeds them with a startup banner. | If file logging is enabled, validate/rotate server log targets."
 
 ["SERVER.0x10003520"]
 size = 160
-status = "RELOC"
+status = "PROVEN"
 note = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()"
 analysis = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()"
 
 ["SERVER.0x100035c0"]
 size = 119
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10003640"]
 size = 132
@@ -60,27 +60,27 @@ status = "RELOC"
 
 ["SERVER.0x10003820"]
 size = 114
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100038a0"]
 size = 177
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10003b90"]
 size = 182
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10003c50"]
 size = 65
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10003ca0"]
 size = 77
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10003cf0"]
 size = 43
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10004b80"]
 size = 57
@@ -100,11 +100,11 @@ analysis = "Custom memory allocator wrapping malloc with extensive usage trackin
 
 ["SERVER.0x10006820"]
 size = 188
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100068e0"]
 size = 162
-status = "RELOC"
+status = "PROVEN"
 analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
 
 ["SERVER.0x10006990"]
@@ -115,36 +115,36 @@ blocker_delta = 586
 
 ["SERVER.0x10006c00"]
 size = 283
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10006d20"]
 size = 270
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10006e30"]
 size = 137
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10008a50"]
 size = 53
-status = "RELOC"
+status = "PROVEN"
 ghidra = "cleanup_entity"
 
 ["SERVER.0x10008a90"]
 size = 492
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10008c80"]
 size = 129
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10008d10"]
 size = 301
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10008e40"]
 size = 472
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10009020"]
 size = 704
@@ -165,7 +165,7 @@ analysis = "Create server main thread - called on DLL_PROCESS_ATTACH | Exported 
 
 ["SERVER.0x10009350"]
 size = 68
-status = "RELOC"
+status = "PROVEN"
 analysis = "Exported function called by the host engine to shut down the server thread. Sets a global shutdown flag, waits briefly, then forcefully terminates if necessary. | Signal shutdown and wait for thread to exit cleanly | Force terminate if thread doesn't exit within timeout"
 
 ["SERVER.0x100093a0"]
@@ -185,17 +185,17 @@ status = "RELOC"
 
 ["SERVER.0x1000a010"]
 size = 112
-status = "RELOC"
+status = "PROVEN"
 analysis = "Initialize all player slots to disconnected state, then create TCP listen socket with SO_REUSEADDR, 128KB send/recv buffers, non-blocking mode, bind to port, and listen with backlog 5"
 
 ["SERVER.0x1000a080"]
 size = 600
-status = "RELOC"
+status = "PROVEN"
 analysis = "Iterates over g_player_slots looking for an empty slot. If one is found, calls Ordinal_1 (accept()) to accept a new connection, configures the socket, initializes the slot structures (receive_buffer, send_buffer), and flags it as a newly connected player."
 
 ["SERVER.0x1000a2e0"]
 size = 96
-status = "RELOC"
+status = "PROVEN"
 analysis = "Shutdown socket (SD_BOTH) | Close socket handle"
 
 ["SERVER.0x1000a340"]
@@ -216,16 +216,16 @@ analysis = "Iterates over g_player_slots. If a slot is connected, loops calling 
 
 ["SERVER.0x1000a860"]
 size = 131
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000a8f0"]
 size = 170
-status = "RELOC"
+status = "PROVEN"
 analysis = "Takes a raw command payload, pulls an available CommandPacket struct from incoming_cmd_freelist, populates it, calculates command type via 0x1000c710, and appends it to the tail of incoming_cmd_queue."
 
 ["SERVER.0x1000a9a0"]
 size = 170
-status = "RELOC"
+status = "PROVEN"
 analysis = "Takes a raw command payload, pulls an available CommandPacket struct from outgoing_cmd_freelist, populates it, and appends it to the tail of outgoing_cmd_queue. | Get free command buffer from pool"
 
 ["SERVER.0x1000aa50"]
@@ -242,7 +242,7 @@ analysis = "Master Command Router. Iterates over every slot's incoming_cmd_queue
 
 ["SERVER.0x1000ad40"]
 size = 768
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000b040"]
 size = 372
@@ -350,7 +350,7 @@ ghidra = "find_by_id"
 
 ["SERVER.0x1000c6a0"]
 size = 102
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000c710"]
 size = 752
@@ -368,7 +368,7 @@ status = "EXACT"
 
 ["SERVER.0x1000cb20"]
 size = 171
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000cbd0"]
 size = 517
@@ -380,7 +380,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000cf30"]
 size = 162
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000cfe0"]
 size = 64
@@ -388,11 +388,11 @@ status = "PROVEN"
 
 ["SERVER.0x1000d020"]
 size = 22
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000d040"]
 size = 22
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000d060"]
 size = 169
@@ -424,8 +424,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000d460"]
 size = 267
-status = "RELOC"
-blocker_delta = 209
+status = "PROVEN"
 
 ["SERVER.0x1000d570"]
 size = 361
@@ -437,11 +436,11 @@ status = "PROVEN"
 
 ["SERVER.0x1000d730"]
 size = 192
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000d7f0"]
 size = 176
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000d8a0"]
 size = 144
@@ -485,11 +484,11 @@ status = "PROVEN"
 
 ["SERVER.0x1000eaa0"]
 size = 208
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000eb70"]
 size = 144
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000ec00"]
 size = 912
@@ -527,7 +526,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000f2f0"]
 size = 176
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000f3a0"]
 size = 3
@@ -535,12 +534,11 @@ status = "EXACT"
 
 ["SERVER.0x1000f3b0"]
 size = 206
-status = "RELOC"
-blocker_delta = 81
+status = "PROVEN"
 
 ["SERVER.0x1000f480"]
 size = 271
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000f590"]
 size = 237
@@ -552,28 +550,27 @@ status = "PROVEN"
 
 ["SERVER.0x1000f730"]
 size = 515
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000f940"]
 size = 22
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000f960"]
 size = 22
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000f980"]
 size = 336
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000fad0"]
 size = 85
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000fb30"]
 size = 153
-status = "RELOC"
-blocker_delta = 125
+status = "PROVEN"
 
 ["SERVER.0x1000fbd0"]
 size = 22
@@ -597,7 +594,7 @@ status = "EXACT"
 
 ["SERVER.0x1000ff30"]
 size = 41
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000ff60"]
 size = 82
@@ -605,15 +602,15 @@ status = "PROVEN"
 
 ["SERVER.0x1000ffc0"]
 size = 70
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010010"]
 size = 110
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010080"]
 size = 22
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100100a0"]
 size = 159
@@ -621,7 +618,7 @@ status = "PROVEN"
 
 ["SERVER.0x10010140"]
 size = 280
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010260"]
 size = 144
@@ -629,20 +626,19 @@ status = "PROVEN"
 
 ["SERVER.0x100102f0"]
 size = 17
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010310"]
 size = 52
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010350"]
 size = 52
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010390"]
 size = 262
-status = "RELOC"
-blocker_delta = 215
+status = "PROVEN"
 
 ["SERVER.0x100104a0"]
 size = 135
@@ -674,7 +670,7 @@ status = "PROVEN"
 
 ["SERVER.0x10010f50"]
 size = 66
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010fa0"]
 size = 525
@@ -722,7 +718,7 @@ analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent b
 
 ["SERVER.0x10012000"]
 size = 728
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100122e0"]
 size = 346
@@ -730,7 +726,7 @@ status = "RELOC"
 
 ["SERVER.0x10012440"]
 size = 37
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10012470"]
 size = 857
@@ -739,7 +735,7 @@ analysis = "ls_LoadSavegameHeader: Reads versioned savegame header from VFS stre
 
 ["SERVER.0x100127d0"]
 size = 282
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100128f0"]
 size = 1463
@@ -772,7 +768,7 @@ analysis = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 6
 
 ["SERVER.0x10014070"]
 size = 491
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10014260"]
 size = 892
@@ -781,12 +777,12 @@ ghidra = "RecvGameSavegame"
 
 ["SERVER.0x100145e0"]
 size = 209
-status = "RELOC"
+status = "PROVEN"
 ghidra = "SendLobbyPlayerList"
 
 ["SERVER.0x100146c0"]
 size = 236
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100147b0"]
 size = 670
@@ -799,15 +795,15 @@ status = "PROVEN"
 
 ["SERVER.0x10014af0"]
 size = 247
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10014bf0"]
 size = 163
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10014ca0"]
 size = 265
-status = "RELOC"
+status = "PROVEN"
 note = "obj includes 28B jump table after code (296B obj vs 267B PE). Code matches byte-for-byte."
 
 ["SERVER.0x10014db0"]
@@ -846,7 +842,7 @@ status = "RELOC"
 
 ["SERVER.0x10015400"]
 size = 83
-status = "RELOC"
+status = "PROVEN"
 analysis = "Updates priority tracking for dynamic entity dispatch/update lists. Limits simultaneous update weight using GetStatPair constraints."
 
 ["SERVER.0x10015460"]
@@ -855,7 +851,7 @@ status = "PROVEN"
 
 ["SERVER.0x10015500"]
 size = 180
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100155c0"]
 size = 197
@@ -958,7 +954,7 @@ status = "PROVEN"
 
 ["SERVER.0x10016de0"]
 size = 186
-status = "RELOC"
+status = "PROVEN"
 ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
@@ -989,7 +985,7 @@ ghidra = "InitBuildingDefaultItems"
 
 ["SERVER.0x10017400"]
 size = 202
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100174d0"]
 size = 1088
@@ -1001,7 +997,7 @@ ghidra = "gm_AllocGebaeude"
 
 ["SERVER.0x10017910"]
 size = 145
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100179b0"]
 size = 192
@@ -1026,22 +1022,22 @@ blocker = "MSVC shrink-wrap not applied (push regs before checks vs target after
 
 ["SERVER.0x10017f30"]
 size = 35
-status = "RELOC"
+status = "PROVEN"
 ghidra = "call_compare"
 
 ["SERVER.0x10017f60"]
 size = 36
-status = "RELOC"
+status = "PROVEN"
 ghidra = "find_and_process"
 
 ["SERVER.0x10017f90"]
 size = 23
-status = "RELOC"
+status = "PROVEN"
 analysis = "Checks if the provided entity pointer is valid and active (not -1). If so, it invokes amt_ClearEntityLinks on it to detach it from game world lists before deletion or recycling."
 
 ["SERVER.0x10017fb0"]
 size = 278
-status = "RELOC"
+status = "PROVEN"
 ghidra = "gm_DeallocEntity"
 
 ["SERVER.0x100180d0"]
@@ -1050,7 +1046,7 @@ status = "RELOC"
 
 ["SERVER.0x10018130"]
 size = 32
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10018150"]
 size = 70
@@ -1070,7 +1066,7 @@ status = "EXACT"
 
 ["SERVER.0x10018450"]
 size = 78
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x100184a0"]
 size = 56
@@ -1103,17 +1099,16 @@ status = "PROVEN"
 
 ["SERVER.0x100198b0"]
 size = 355
-status = "RELOC"
+status = "PROVEN"
 analysis = "Recursive production value calculator. Computes the base value of an object type by looking up prototype data (stride 0x41), applying worker skill bonuses from building prototypes, and recursively summing ingredient costs (up to 4 ingredients). Caches result at proto_entry+0x38. Applies quality and production multipliers."
 
 ["SERVER.0x10019a20"]
 size = 74
-status = "RELOC"
-blocker_delta = 308
+status = "PROVEN"
 
 ["SERVER.0x10019a70"]
 size = 102
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10019ae0"]
 size = 82
@@ -1125,7 +1120,7 @@ status = "PROVEN"
 
 ["SERVER.0x10019b80"]
 size = 83
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10019be0"]
 size = 124
@@ -1141,7 +1136,7 @@ status = "EXACT"
 
 ["SERVER.0x10019d30"]
 size = 407
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10019ed0"]
 size = 395
@@ -1150,18 +1145,17 @@ ghidra = "gm_KannObjektHergestellt"
 
 ["SERVER.0x1001a060"]
 size = 97
-status = "RELOC"
-blocker_delta = 364
+status = "PROVEN"
 
 ["SERVER.0x1001a0d0"]
 size = 32
-status = "RELOC"
+status = "PROVEN"
 ghidra = "ahm_RandomBelow"
 
 ["SERVER.0x1001a0f0"]
 size = 22
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1001a110"]
 size = 48
-status = "RELOC"
+status = "PROVEN"
