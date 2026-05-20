@@ -50,26 +50,26 @@ char* __cdecl gm_AllocObjekt(int, int, int);
  * and object parameters from the command payload. */
 
 // FUNCTION: SERVER 0x1000e750
-int __cdecl cm_ExAllocObjekt(int param_1, char* param_2)
+int __cdecl cm_ExAllocObjekt(int cmd, char* result)
 {
 	int field_id;
 	char* game_obj;
 	char* entity;
 	unsigned int slot_idx;
 
-	*(int*) (param_1 + 0x35) = g_timestamp_0b6c;
-	field_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
-	*(int*) (param_1 + 0x10) = field_id;
-	game_obj = gm_AllocObjekt(field_id, (unsigned int) *(unsigned short*) (param_1 + 0x14), 1);
+	*(int*) (cmd + 0x35) = g_timestamp_0b6c;
+	field_id = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
+	*(int*) (cmd + 0x10) = field_id;
+	game_obj = gm_AllocObjekt(field_id, (unsigned int) *(unsigned short*) (cmd + 0x14), 1);
 	if (game_obj == (char*) 0) {
 		return 1;
 	}
-	slot_idx = (unsigned int) *(unsigned char*) (param_1 + 3);
+	slot_idx = (unsigned int) *(unsigned char*) (cmd + 3);
 	*(int*) (g_player_slot_0 + slot_idx * 0x264264 + 0x264208) = *(int*) (game_obj + 2);
 	entity = game_obj + 0x1c;
-	memcpy(entity, (char*) param_1 + 0x16, 0x1f);
-	if (param_2 != (char*) 0) {
-		*param_2 = '\x01';
+	memcpy(entity, (char*) cmd + 0x16, 0x1f);
+	if (result != (char*) 0) {
+		*result = '\x01';
 	}
 	return 0;
 }
