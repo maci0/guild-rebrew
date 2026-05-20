@@ -32,13 +32,13 @@ extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
  * Deallocates the player and cleans up associated resources. */
 
 // FUNCTION: SERVER 0x1000f030
-int __cdecl cm_ExKillSpieler(int param_1)
+int __cdecl cm_ExKillSpieler(int cmd)
 {
-	ushort* puVar1;
+	ushort* entity;
 
-	puVar1 = (ushort*) gm_LookupEntityRecordById(*(int*) (param_1 + 0x10));
-	if (puVar1 != (ushort*) 0x0) {
-		gm_DeallocEntity((uint) *puVar1, *(int*) (param_1 + 0x14));
+	entity = (ushort*) gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
+	if (entity != (ushort*) 0x0) {
+		gm_DeallocEntity((uint) *entity, *(int*) (cmd + 0x14));
 		return 0;
 	}
 	LogMessageInternal(
