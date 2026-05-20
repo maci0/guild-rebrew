@@ -305,7 +305,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000bdf0"]
 size = 1002
-status = "STUB"
+status = "COMPILE_ERROR"
 cflags = "/O2 /Oy- /Gd"
 blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
 blocker_delta = 935
@@ -722,15 +722,15 @@ analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent b
 
 ["SERVER.0x10012000"]
 size = 728
-status = "RELOC"
+status = "COMPILE_ERROR"
 
 ["SERVER.0x100122e0"]
 size = 346
-status = "RELOC"
+status = "COMPILE_ERROR"
 
 ["SERVER.0x10012440"]
 size = 37
-status = "RELOC"
+status = "COMPILE_ERROR"
 blocker_delta = 199
 
 ["SERVER.0x10012470"]
@@ -740,7 +740,7 @@ analysis = "ls_LoadSavegameHeader: Reads versioned savegame header from VFS stre
 
 ["SERVER.0x100127d0"]
 size = 282
-status = "RELOC"
+status = "COMPILE_ERROR"
 
 ["SERVER.0x100128f0"]
 size = 1463
@@ -758,7 +758,7 @@ blocker = "comparison direction swap, instruction folding (lea vs mov), jump con
 
 ["SERVER.0x10013230"]
 size = 2268
-status = "STUB"
+status = "COMPILE_ERROR"
 blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout"
 blocker_delta = 2053
 ghidra = "LoadStaticEntities"
@@ -773,7 +773,7 @@ analysis = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 6
 
 ["SERVER.0x10014070"]
 size = 491
-status = "RELOC"
+status = "COMPILE_ERROR"
 
 ["SERVER.0x10014260"]
 size = 892
@@ -994,7 +994,7 @@ status = "RELOC"
 
 ["SERVER.0x100174d0"]
 size = 1088
-status = "STUB"
+status = "COMPILE_ERROR"
 cflags = "/O2 /Oy- /Gd"
 blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
 blocker_delta = 1007
