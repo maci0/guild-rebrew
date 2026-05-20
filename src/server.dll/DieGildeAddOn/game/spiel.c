@@ -1503,53 +1503,53 @@ char* __cdecl gm_SearchStruct(void)
 
 /* DAT_10035a0c: base of entity array, stride 0x21c (0x87 dwords), 768 entries */
 
-int __cdecl gm_CleanupBuildingEntity(unsigned char* arg1)
+int __cdecl gm_CleanupBuildingEntity(unsigned char* building)
 {
 	int* entity_scan;
 
-	if (arg1 == (unsigned char*) 0) {
+	if (building == (unsigned char*) 0) {
 		return -1;
 	}
-	if (*arg1 == 0) {
+	if (*building == 0) {
 		return -2;
 	}
-	switch (*arg1) {
+	switch (*building) {
 	case 0x1e:
-		if (*(void**) (arg1 + 0x71) != (void*) 0) {
-			m_FreeTracked(*(void**) (arg1 + 0x71));
-			*(int*) (arg1 + 0x71) = 0;
+		if (*(void**) (building + 0x71) != (void*) 0) {
+			m_FreeTracked(*(void**) (building + 0x71));
+			*(int*) (building + 0x71) = 0;
 		}
-		*(int*) (arg1 + 0x71) = 0;
+		*(int*) (building + 0x71) = 0;
 		goto cleanup_loop;
 	case 0x48:
 	case 0x49:
 	case 0x4a:
-		gv_Free3Fields(*(void**) (arg1 + 0x65));
+		gv_Free3Fields(*(void**) (building + 0x65));
 		break;
 	case 0x4b:
 	case 0x4c:
 	case 0x4d:
-		m_FreeTracked(*(void**) (arg1 + 0x65));
+		m_FreeTracked(*(void**) (building + 0x65));
 		break;
 	default:
 		goto cleanup_loop;
 	}
-	*(int*) (arg1 + 0x65) = 0;
+	*(int*) (building + 0x65) = 0;
 cleanup_loop:
 	entity_scan = &DAT_10035a0c;
 	do {
-		if ((unsigned char*) entity_scan[1] == arg1) {
+		if ((unsigned char*) entity_scan[1] == building) {
 			entity_scan[1] = 0;
 		}
-		if ((unsigned char*) *entity_scan == arg1) {
+		if ((unsigned char*) *entity_scan == building) {
 			*entity_scan = 0;
 		}
 		entity_scan = entity_scan + 0x87;
 	} while ((int) entity_scan < 0x1009ae0c);
-	if (*(int*) (arg1 + 0x5d) != 0) {
-		gm_FreeObjectListRecursive((char**) (arg1 + 0x5d));
+	if (*(int*) (building + 0x5d) != 0) {
+		gm_FreeObjectListRecursive((char**) (building + 0x5d));
 	}
-	*arg1 = 0;
+	*building = 0;
 	return 0;
 }
 
