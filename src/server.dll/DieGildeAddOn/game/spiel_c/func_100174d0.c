@@ -72,9 +72,9 @@ extern char* g_array_base;
 // STUB: SERVER 0x100174d0
 // gm_AllocGebaeude
 
-int __cdecl gm_AllocGebaeude(int param_1, int param_2)
+int __cdecl gm_AllocGebaeude(int building_type, int location_id)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) building_type;
+	(void) location_id;
 	return 0;
 }
