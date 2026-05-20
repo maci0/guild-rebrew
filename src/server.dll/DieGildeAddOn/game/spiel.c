@@ -126,7 +126,7 @@ extern int DAT_1003542c;
 extern int DAT_10035430;
 extern char g_entity_base[];
 extern char g_entity_end[];
-int __cdecl gm_GetBuildingTypeCategory(int arg1);
+int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
 extern float DAT_100257bc;
@@ -1925,22 +1925,22 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 // FUNCTION: SERVER 0x10017910
 // gm_SetupEntityQuery
 
-unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* arg1)
+unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* entity)
 {
-	char* building;
+	char* type_entry;
 	int result;
 	unsigned short* p;
 
-	gm_GetBuildingTypeCategory((int) *arg1);
-	building = (char*) (DAT_100a8c30 + (unsigned int) *arg1 * 0x24d);
-	result = gm_CheckEntityType(arg1);
+	gm_GetBuildingTypeCategory((int) *entity);
+	type_entry = (char*) (DAT_100a8c30 + (unsigned int) *entity * 0x24d);
+	result = gm_CheckEntityType(entity);
 	if (result != 0) {
-		return (unsigned short*) gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0xfd);
+		return (unsigned short*) gm_StartEntityQuery(*(int*) (entity + 0x5d), 1, 0, 0xfd);
 	}
-	if (*building == 4) {
-		return (unsigned short*) gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x54);
+	if (*type_entry == 4) {
+		return (unsigned short*) gm_StartEntityQuery(*(int*) (entity + 0x5d), 1, 0, 0x54);
 	}
-	p = (unsigned short*) gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 4, 2);
+	p = (unsigned short*) gm_StartEntityQuery(*(int*) (entity + 0x5d), 1, 4, 2);
 	while (p != (unsigned short*) 0 && *p == 0xfd) {
 		p = gm_NextEntityQueryMatch();
 	}
