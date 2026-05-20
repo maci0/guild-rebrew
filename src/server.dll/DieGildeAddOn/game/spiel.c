@@ -1560,7 +1560,7 @@ cleanup_loop:
 // FUNCTION: SERVER 0x10017330
 // gm_AllocBuildingDefaults
 
-void __cdecl gm_AllocBuildingDefaults(unsigned char* arg1)
+void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 {
 	void* query_result;
 	int inner_count;
@@ -1569,12 +1569,12 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* arg1)
 
 	table_ptr = &DAT_10030861;
 	do {
-		if (*arg1 == *(table_ptr - 1)) {
-			query_result = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 2, 6, 0, 0xff);
+		if (*building == *(table_ptr - 1)) {
+			query_result = gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 6, 0, 0xff);
 			if (query_result != (void*) 0) {
 				goto do_inner;
 			}
-			query_result = gm_AllocObjekt(*(int*) (arg1 + 1), 0xff, 1);
+			query_result = gm_AllocObjekt(*(int*) (building + 1), 0xff, 1);
 			if (query_result != (void*) 0) {
 			do_inner:
 				inner_count = 10;
