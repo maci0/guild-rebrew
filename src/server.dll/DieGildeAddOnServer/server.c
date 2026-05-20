@@ -794,27 +794,27 @@ __declspec(naked) int __cdecl ReceivePacketHeader(unsigned int* param_1)
 
 /* send = 0x10024164, GetTickCount = 0x1002405c, WSAGetLastError = 0x10024170 */
 
-int __cdecl SendPlayerData(unsigned int* param_1)
+int __cdecl SendPlayerData(unsigned int* conn)
 {
 	int result;
 	unsigned int tick;
 
-	if (param_1[0] & 0x100) {
+	if (conn[0] & 0x100) {
 		return 0;
 	}
 
 	result = send(
-		param_1[5],
-		(const char*) param_1 + 0xb1 + *(unsigned short*) ((char*) param_1 + 0x14c),
-		*(unsigned short*) ((char*) param_1 + 0xb2) - *(unsigned short*) ((char*) param_1 + 0x14c),
+		conn[5],
+		(const char*) conn + 0xb1 + *(unsigned short*) ((char*) conn + 0x14c),
+		*(unsigned short*) ((char*) conn + 0xb2) - *(unsigned short*) ((char*) conn + 0x14c),
 		0
 	);
 
 	if (result == 0) {
 		tick = GetTickCount();
-		if (param_1[84] < tick) {
+		if (conn[84] < tick) {
 			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\online", 0x58f, "send timeout", 1);
-			cm_ClosePlayerConnection(param_1);
+			cm_ClosePlayerConnection(conn);
 			return -1;
 		}
 	}
@@ -822,17 +822,17 @@ int __cdecl SendPlayerData(unsigned int* param_1)
 		if (WSAGetLastError() == 0x2733) {
 			return 0;
 		}
-		cm_ClosePlayerConnection(param_1);
+		cm_ClosePlayerConnection(conn);
 		return -1;
 	}
 	else if (result > 0) {
-		*(unsigned short*) ((char*) param_1 + 0x14c) += (unsigned short) result;
+		*(unsigned short*) ((char*) conn + 0x14c) += (unsigned short) result;
 		tick = GetTickCount();
-		*(unsigned int*) ((char*) param_1 + 0x150) = tick + 0x493e0;
-		if (*(unsigned short*) ((char*) param_1 + 0x14c) == *(unsigned short*) ((char*) param_1 + 0xb2)) {
-			param_1[0] = param_1[0];
-			*(unsigned short*) ((char*) param_1 + 0x14c) = 0;
-			param_1[0] |= 0x100;
+		*(unsigned int*) ((char*) conn + 0x150) = tick + 0x493e0;
+		if (*(unsigned short*) ((char*) conn + 0x14c) == *(unsigned short*) ((char*) conn + 0xb2)) {
+			conn[0] = conn[0];
+			*(unsigned short*) ((char*) conn + 0x14c) = 0;
+			conn[0] |= 0x100;
 		}
 	}
 
