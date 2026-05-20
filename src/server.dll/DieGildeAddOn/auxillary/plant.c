@@ -72,12 +72,12 @@ int __cdecl find_zone_record(char* base, int x, int y)
 // FUNCTION: SERVER 0x10014ff0
 // CheckZoneAvailability
 
-__declspec(naked) int __cdecl CheckZoneAvailability(int param_1, unsigned int param_2, unsigned int param_3, int param_4)
+__declspec(naked) int __cdecl CheckZoneAvailability(int zone_table, unsigned int x, unsigned int y, int zone_type)
 {
-	(void) param_1;
-	(void) param_2;
-	(void) param_3;
-	(void) param_4;
+	(void) zone_table;
+	(void) x;
+	(void) y;
+	(void) zone_type;
 	__asm {
 		push ecx
 		mov eax, dword ptr [esp + 8]
@@ -179,13 +179,13 @@ extern char s_plt_SetPlantMap____Map_is_not_al_1002d9ec[];
 // FUNCTION: SERVER 0x100150a0
 // plt_SetPlantMap
 
-__declspec(naked) int __cdecl plt_SetPlantMap(int param_1, unsigned int param_2, unsigned int param_3, int param_4, int param_5)
+__declspec(naked) int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, unsigned int y, int zone_type, int extra)
 {
-	(void) param_1;
-	(void) param_2;
-	(void) param_3;
-	(void) param_4;
-	(void) param_5;
+	(void) zone_table;
+	(void) x;
+	(void) y;
+	(void) zone_type;
+	(void) extra;
 	__asm {
 		push ebx
 		push ebp
