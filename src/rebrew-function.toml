@@ -735,7 +735,7 @@ blocker_delta = 199
 
 ["SERVER.0x10012470"]
 size = 857
-status = "NEAR_MATCHING"
+status = "PROVEN"
 analysis = "ls_LoadSavegameHeader: Reads versioned savegame header from VFS stream. Allocates 0xE100 temp buffer, reads format version, player count, map name (32 bytes), timestamps, difficulty, player scores (8 entries for version > 0x10033), savegame description (96 bytes). Returns 1 on success, 0 on read failure."
 
 ["SERVER.0x100127d0"]
