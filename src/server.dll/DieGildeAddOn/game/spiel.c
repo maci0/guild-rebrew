@@ -915,7 +915,7 @@ void* __cdecl gm_AddOrAccumulateObject(int parent_id, int type_id, int amount)
 // FUNCTION: SERVER 0x10016de0
 // gm_SubObjekt
 
-int __cdecl gm_SubObjekt(void* arg1, unsigned int arg2, int arg3)
+int __cdecl gm_SubObjekt(void* parent_id, unsigned int obj_type, int count)
 {
 	unsigned int objectTypeId;
 	int resolve_result;
@@ -923,8 +923,8 @@ int __cdecl gm_SubObjekt(void* arg1, unsigned int arg2, int arg3)
 	void* dynamic_ent;
 	void* static_ent;
 
-	resolve_result = gm_ResolveEntityById(&dynamic_ent, (void**) &arg1, &static_ent, (int) arg1);
-	objectTypeId = arg2;
+	resolve_result = gm_ResolveEntityById(&dynamic_ent, (void**) &parent_id, &static_ent, (int) parent_id);
+	objectTypeId = obj_type;
 	if (resolve_result == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xe2d, "gm_SubObjekt(): Parent not found", 1);
 	}
@@ -932,8 +932,8 @@ int __cdecl gm_SubObjekt(void* arg1, unsigned int arg2, int arg3)
 		if (dynamic_ent != (void*) 0) {
 			objectListHead = (void**) ((int) dynamic_ent + 0x5d);
 		}
-		else if (arg1 != (void*) 0) {
-			objectListHead = (void**) ((int) arg1 + 0x14);
+		else if (parent_id != (void*) 0) {
+			objectListHead = (void**) ((int) parent_id + 0x14);
 		}
 		else {
 			if (static_ent == (void*) 0) {
@@ -941,10 +941,10 @@ int __cdecl gm_SubObjekt(void* arg1, unsigned int arg2, int arg3)
 			}
 			objectListHead = (void**) ((int) static_ent + 0x178);
 		}
-		arg1 = gm_StartEntityQuery((int) *objectListHead, 1, 0, arg2);
-		if (arg1 != (void*) 0 && *(int*) ((int) arg1 + 0xe) >= arg3) {
-			*(int*) ((int) arg1 + 0xe) = *(int*) ((int) arg1 + 0xe) - arg3;
-			if (*(int*) ((int) arg1 + 0xe) <= 0) {
+		parent_id = gm_StartEntityQuery((int) *objectListHead, 1, 0, obj_type);
+		if (parent_id != (void*) 0 && *(int*) ((int) parent_id + 0xe) >= count) {
+			*(int*) ((int) parent_id + 0xe) = *(int*) ((int) parent_id + 0xe) - count;
+			if (*(int*) ((int) parent_id + 0xe) <= 0) {
 				gm_RemoveObjectByType(objectListHead, objectTypeId);
 			}
 			return 1;
