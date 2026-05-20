@@ -42,7 +42,7 @@ void __cdecl InitBuildingTypeTable(void);
 /* Game function - entity role/assignment table manager */
 /* Updates a 0x18-byte record table at 0x101de5a0, clears old roles, sets new assignments */
 
-int __cdecl ExecuteOfficeAssignment(char* param_1)
+int __cdecl ExecuteOfficeAssignment(char* cmd_payload)
 {
 	int iStack;
 	int ent;
@@ -53,16 +53,16 @@ int __cdecl ExecuteOfficeAssignment(char* param_1)
 	iStack = -1;
 
 	/* Validate associated entity if present */
-	if (*(int*) (param_1 + 7) != -1) {
-		if (gm_LookupEntityRecordById(*(int*) (param_1 + 7)) == 0) {
+	if (*(int*) (cmd_payload + 7) != -1) {
+		if (gm_LookupEntityRecordById(*(int*) (cmd_payload + 7)) == 0) {
 			return 0;
 		}
 	}
 
 	/* Get owner entity */
 	ent = 0;
-	if (*(int*) (param_1 + 1) != -1) {
-		ent = (int)gm_LookupEntityRecordById(*(int*) (param_1 + 1));
+	if (*(int*) (cmd_payload + 1) != -1) {
+		ent = (int)gm_LookupEntityRecordById(*(int*) (cmd_payload + 1));
 		if (ent == 0) {
 			return 0;
 		}
@@ -73,7 +73,7 @@ int __cdecl ExecuteOfficeAssignment(char* param_1)
 	{
 		char type;
 		record_index = 0;
-		type = *param_1;
+		type = *cmd_payload;
 
 		{
 			char* ptr;
@@ -96,7 +96,7 @@ int __cdecl ExecuteOfficeAssignment(char* param_1)
 
 	/* Lookup existing owner and clear old role references */
 	old_owner = (int)gm_LookupEntityRecordById(*(int*) (record_off + 0x101de5a4));
-	if (old_owner != 0 && *(int*) (old_owner + 4) != *(int*) (param_1 + 1)) {
+	if (old_owner != 0 && *(int*) (old_owner + 4) != *(int*) (cmd_payload + 1)) {
 		char role;
 		role = *(char*) (record_off + 0x101de5a8);
 
@@ -303,9 +303,9 @@ after_old_clear:
 
 final_store:
 	*(int*) (record_off + 0x101de5a4) = iStack;
-	*(int*) (record_off + 0x101de5b4) = *(int*) (param_1 + 7);
-	*(char*) (record_off + 0x101de5b0) = param_1[5];
-	if (param_1[5] == 3) {
+	*(int*) (record_off + 0x101de5b4) = *(int*) (cmd_payload + 7);
+	*(char*) (record_off + 0x101de5b0) = cmd_payload[5];
+	if (cmd_payload[5] == 3) {
 		*(int*) (record_off + 0x101de5ac) = 0;
 	}
 
