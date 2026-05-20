@@ -2142,11 +2142,11 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* arg1, unsigned short arg2, un
 // FUNCTION: SERVER 0x10017f30
 // gm_RemoveObjectWrapper
 
-int __cdecl gm_RemoveObjectWrapper(int arg1, unsigned int arg2)
+int __cdecl gm_RemoveObjectWrapper(int entity_record, unsigned int obj_type)
 {
 	int remove_result;
 
-	remove_result = gm_RemoveObjectByType((void**) (arg1 + 0x5d), arg2);
+	remove_result = gm_RemoveObjectByType((void**) (entity_record + 0x5d), obj_type);
 	if (remove_result == -2) {
 		return -3;
 	}
@@ -2159,13 +2159,13 @@ int __cdecl gm_RemoveObjectWrapper(int arg1, unsigned int arg2)
 // FUNCTION: SERVER 0x10017f60
 // gm_RemoveEntityLink
 
-void __cdecl gm_RemoveEntityLink(int arg1)
+void __cdecl gm_RemoveEntityLink(int entity)
 {
 	int parent_entity;
 
-	parent_entity = (int) gm_EntityAccumulate((void*) arg1);
+	parent_entity = (int) gm_EntityAccumulate((void*) entity);
 	if (parent_entity != 0) {
-		gm_RemoveLinkedNodeById((int*) (parent_entity + 0x5d), *(int*) (arg1 + 2));
+		gm_RemoveLinkedNodeById((int*) (parent_entity + 0x5d), *(int*) (entity + 2));
 	}
 }
 
@@ -2175,10 +2175,10 @@ void __cdecl gm_RemoveEntityLink(int arg1)
 // FUNCTION: SERVER 0x10017f90
 // gm_InitEntityIfValid
 
-void __cdecl gm_InitEntityIfValid(short* arg1)
+void __cdecl gm_InitEntityIfValid(short* entity)
 {
-	if (arg1 != (short*) 0 && *(unsigned short*) arg1 != 0xFFFF) {
-		amt_ClearEntityLinks(arg1);
+	if (entity != (short*) 0 && *(unsigned short*) entity != 0xFFFF) {
+		amt_ClearEntityLinks(entity);
 	}
 }
 
