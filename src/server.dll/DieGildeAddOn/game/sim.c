@@ -367,23 +367,23 @@ __declspec(naked) void __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
 // FUNCTION: SERVER 0x10015500
 // sim_CreateCitizen
 
-void* __cdecl sim_CreateCitizen(unsigned char arg1, int arg2, int arg3, unsigned char arg4, unsigned char arg5)
+void* __cdecl sim_CreateCitizen(unsigned char flags, int citizen_type, int parent_id, unsigned char stat_a, unsigned char stat_b)
 {
 	unsigned int new_entity_slot;
 
-	if ((arg1 & 1) != 0) {
-		new_entity_slot = FindAndMatchParents(arg3) & 0xffff;
+	if ((flags & 1) != 0) {
+		new_entity_slot = FindAndMatchParents(parent_id) & 0xffff;
 		if (new_entity_slot == 0xffff) {
 			goto error;
 		}
-		if ((arg1 & 2) != 0) {
-			(&DAT_10035a05)[new_entity_slot * 0x21c] = arg5;
-			(&DAT_10035a04)[new_entity_slot * 0x21c] = arg4;
+		if ((flags & 2) != 0) {
+			(&DAT_10035a05)[new_entity_slot * 0x21c] = stat_b;
+			(&DAT_10035a04)[new_entity_slot * 0x21c] = stat_a;
 		}
 	}
 	else {
 		new_entity_slot =
-			gm_CreateEntityFromParents(arg2, -1, -1, arg3, 0, (unsigned int) arg4, (unsigned int) arg5, 2) &
+			gm_CreateEntityFromParents(citizen_type, -1, -1, parent_id, 0, (unsigned int) stat_a, (unsigned int) stat_b, 2) &
 			0xffff;
 	}
 	if (new_entity_slot == 0xffff) {
