@@ -51,3 +51,9 @@ typedef struct {
 
 // STUB: SERVER 0x1000bdf0
 // ahm_ExAllocAlchemist
+
+unsigned short __cdecl ahm_ExAllocAlchemist(int param_1)
+{
+	(void) param_1;
+	return 0;
+}

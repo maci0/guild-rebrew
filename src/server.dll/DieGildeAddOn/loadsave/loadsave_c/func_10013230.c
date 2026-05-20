@@ -57,3 +57,9 @@ extern unsigned int ls_ID2Ptr(void);
 
 // STUB: SERVER 0x10013230
 // ls_LoadEntities
+
+int __cdecl ls_LoadEntities(int ctx)
+{
+	(void) ctx;
+	return 0;
+}
