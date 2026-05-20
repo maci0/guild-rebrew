@@ -751,13 +751,13 @@ __declspec(naked) char* __cdecl ahm_InitRandomEntity(void)
 // FUNCTION: SERVER 0x1000c670
 // ahm_LookupEntityInTable
 
-int* __cdecl ahm_LookupEntityInTable(int param_1)
+int* __cdecl ahm_LookupEntityInTable(int entity_id)
 {
 	int i;
 	int* p;
 
 	for (i = 0, p = DAT_1002c050; (int) p < (int) (DAT_1002c050 + 0x17 * 10); p += 0x17, i++) {
-		if (*p == param_1) {
+		if (*p == entity_id) {
 			return DAT_1002c050 + i * 0x17;
 		}
 	}
