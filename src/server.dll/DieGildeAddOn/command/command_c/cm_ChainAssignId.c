@@ -24,9 +24,10 @@ extern int g_mem_pool_overflow_flag;
  * packet at offset 0x10 and increments the counter. */
 
 // FUNCTION: SERVER 0x1000ef90
-int __cdecl cm_ChainAssignId(int param_1, char* param_2)
+int __cdecl cm_ChainAssignId(int cmd, char* result)
 {
-	*(int*) (param_1 + 0x10) = g_mem_pool_overflow_flag;
+	(void) result;
+	*(int*) (cmd + 0x10) = g_mem_pool_overflow_flag;
 	g_mem_pool_overflow_flag = g_mem_pool_overflow_flag + 1;
 	return 0;
 }
