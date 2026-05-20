@@ -7,7 +7,7 @@
  *    CFlags: 
  *    Symbol: _CutsceneEntityUpdate
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl cm_ExCutsceneUpdate(int param_1,char *param_2)
+ * int __cdecl cm_ExCutsceneUpdate(int cmd,char *result)
  * 
  * {
  *   int iVar1;
@@ -18,19 +18,19 @@
  *                        linked entities by looking them up via gm_LookupEntityRecordById and modifying
  *                        their 0x20c offset. Used to sync cutscene states across multiple active
  *                        characters. Returns 0 on success. * /
- *   iVar1 = cm_ChkCutsceneReady((char *)param_1);
+ *   iVar1 = cm_ChkCutsceneReady((char *)cmd);
  *   if (iVar1 != 0) {
- *     if (param_2 != (char *)0x0) {
- *       *param_2 = '\x02';
+ *     if (result != (char *)0x0) {
+ *       *result = '\x02';
  *     }
  *     return 1;
  *   }
- *   piVar3 = (int *)(param_1 + 0x14);
+ *   piVar3 = (int *)(cmd + 0x14);
  *   iVar1 = 0x10;
  *   do {
  *     iVar2 = gm_LookupEntityRecordById(*piVar3);
  *     if (iVar2 != 0) {
- *       *(undefined4 *)(iVar2 + 0x20c) = *(undefined4 *)(param_1 + 0x10);
+ *       *(undefined4 *)(iVar2 + 0x20c) = *(undefined4 *)(cmd + 0x10);
  *     }
  *     piVar3 = piVar3 + 1;
  *     iVar1 = iVar1 + -1;
@@ -48,25 +48,25 @@ int __cdecl cm_ChkCutsceneReady(char*);
  * during in-game cinematics. */
 
 // FUNCTION: SERVER 0x1000ff60
-int __cdecl cm_ExCutsceneUpdate(int param_1, char* param_2)
+int __cdecl cm_ExCutsceneUpdate(int cmd, char* result)
 {
 	int readyResult;
 	int entityRecord;
 	int* entityIdPtr;
 
-	readyResult = cm_ChkCutsceneReady((char*) param_1);
+	readyResult = cm_ChkCutsceneReady((char*) cmd);
 	if (readyResult != 0) {
-		if (param_2 != (char*) 0x0) {
-			*param_2 = '\x02';
+		if (result != (char*) 0x0) {
+			*result = '\x02';
 		}
 		return 1;
 	}
-	entityIdPtr = (int*) (param_1 + 0x14);
+	entityIdPtr = (int*) (cmd + 0x14);
 	readyResult = 0x10;
 	do {
 		entityRecord = gm_LookupEntityRecordById(*entityIdPtr);
 		if (entityRecord != 0) {
-			*(int*) (entityRecord + 0x20c) = *(int*) (param_1 + 0x10);
+			*(int*) (entityRecord + 0x20c) = *(int*) (cmd + 0x10);
 		}
 		entityIdPtr = entityIdPtr + 1;
 		readyResult = readyResult + -1;
