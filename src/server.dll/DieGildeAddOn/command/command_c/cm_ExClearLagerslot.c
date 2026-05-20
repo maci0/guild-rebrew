@@ -57,10 +57,10 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  */
 
 // FUNCTION: SERVER 0x1000e690
-__declspec(naked) int __cdecl cm_ExClearLagerslot(short* param_1, uchar* param_2)
+__declspec(naked) int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		push esi
 		mov esi, dword ptr [esp + 8]

@@ -43,9 +43,9 @@ extern unsigned int __ftol(void);
  * payload. Applies change with clamping via gm_MapEntityStatRange. */
 
 // FUNCTION: SERVER 0x100100a0
-__declspec(naked) int __cdecl cm_ExModifyStat(int* param_1)
+__declspec(naked) int __cdecl cm_ExModifyStat(int* cmd)
 {
-	(void) param_1;
+	(void) cmd;
 	__asm {
 		push ebx
 		mov ebx, dword ptr [esp + 8]

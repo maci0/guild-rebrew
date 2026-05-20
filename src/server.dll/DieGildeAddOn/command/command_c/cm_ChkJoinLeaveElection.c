@@ -18,9 +18,9 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * verifies the player is actually in a slot. */
 
 // FUNCTION: SERVER 0x1000d110
-__declspec(naked) int __cdecl cm_ChkJoinLeaveElection(int* param_1)
+__declspec(naked) int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 {
-	(void) param_1;
+	(void) cmd;
 	__asm {
 		push esi
 		mov esi, dword ptr [esp + 8]

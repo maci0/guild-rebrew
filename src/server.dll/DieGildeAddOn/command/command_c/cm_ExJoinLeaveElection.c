@@ -8,10 +8,10 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * For 'leav', finds the player's slot and clears it. */
 
 // FUNCTION: SERVER 0x1000fd50
-__declspec(naked) int __cdecl cm_ExJoinLeaveElection(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExJoinLeaveElection(int cmd, char* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		push ebp
 		push esi

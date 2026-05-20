@@ -12,10 +12,10 @@ extern char s_cm_ExChangeDesire___Invalid_Id_1002d0f4[];
  * or sets an absolute value to the desire field. */
 
 // FUNCTION: SERVER 0x1000e9c0
-__declspec(naked) int __cdecl cm_ExChangeDesire(uchar* param_1, uchar* param_2)
+__declspec(naked) int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		push edi
 		mov edi, dword ptr [esp + 8]

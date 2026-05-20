@@ -52,9 +52,9 @@ extern char* g_entity_type_table;
  */
 
 // FUNCTION: SERVER 0x100104a0
-__declspec(naked) int __cdecl cm_GetBuildingStatCount(uchar* param_1)
+__declspec(naked) int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 {
-	(void) param_1;
+	(void) cmd;
 	__asm {
 		mov edx, dword ptr [esp + 4]
 		xor ecx, ecx

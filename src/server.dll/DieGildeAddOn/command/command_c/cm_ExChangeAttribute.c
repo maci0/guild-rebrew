@@ -68,7 +68,7 @@ extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
  * payload, then applies the change to the entity's memory. */
 
 // FUNCTION: SERVER 0x1000e7d0
-__declspec(naked) int __cdecl cm_ExChangeAttribute(int param_1, char *param_2)
+__declspec(naked) int __cdecl cm_ExChangeAttribute(int cmd, char *result)
 {
 	(void) cmd;
 	(void) result;
