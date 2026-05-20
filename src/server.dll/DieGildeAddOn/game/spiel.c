@@ -2481,9 +2481,9 @@ int __cdecl gm_CheckStatLevel(int entity_idx, int stat_id)
 // FUNCTION: SERVER 0x10018200
 // gm_MapEntityStatRange
 
-int __cdecl gm_MapEntityStatRange(int arg1)
+int __cdecl gm_MapEntityStatRange(int stat_id)
 {
-	switch (arg1) {
+	switch (stat_id) {
 	case 0:
 		return 0;
 	case 1:
@@ -2613,71 +2613,71 @@ int __cdecl gm_MapEntityStatRange(int arg1)
  *   groupStart -> groupStart+5, groupStart+1 -> groupStart+4, etc.
  * Returns 0 if the index doesn't belong to any known group.
  */
-int __cdecl gm_GetOppositeStatIndex(int arg1)
+int __cdecl gm_GetOppositeStatIndex(int stat_id)
 {
 	int result;
 
 	result = 0;
 
 	/* Group 1-6 (section A, row 1) */
-	if ((arg1 >= 1) && (arg1 <= 6)) {
-		return 7 - arg1;
+	if ((stat_id >= 1) && (stat_id <= 6)) {
+		return 7 - stat_id;
 	}
 	/* Group 7-12 (section A, row 2) */
-	if ((arg1 >= 7) && (arg1 <= 12)) {
-		return 13 - arg1;
+	if ((stat_id >= 7) && (stat_id <= 12)) {
+		return 13 - stat_id;
 	}
 	/* Group 34-39 (section B, row 1) */
-	if ((arg1 >= 34) && (arg1 <= 39)) {
-		return 40 - arg1;
+	if ((stat_id >= 34) && (stat_id <= 39)) {
+		return 40 - stat_id;
 	}
 	/* Group 40-45 (section B, row 2) */
-	if ((arg1 >= 40) && (arg1 <= 45)) {
-		return 46 - arg1;
+	if ((stat_id >= 40) && (stat_id <= 45)) {
+		return 46 - stat_id;
 	}
 	/* Group 46-51 (section B, row 3) */
-	if ((arg1 >= 46) && (arg1 <= 51)) {
-		return 52 - arg1;
+	if ((stat_id >= 46) && (stat_id <= 51)) {
+		return 52 - stat_id;
 	}
 	/* Group 58-63 (section B, row 5) */
-	if ((arg1 >= 58) && (arg1 <= 63)) {
-		return 64 - arg1;
+	if ((stat_id >= 58) && (stat_id <= 63)) {
+		return 64 - stat_id;
 	}
 	/* Group 64-69 (section B, row 6) */
-	if ((arg1 >= 64) && (arg1 <= 69)) {
-		return 70 - arg1;
+	if ((stat_id >= 64) && (stat_id <= 69)) {
+		return 70 - stat_id;
 	}
 	/* Group 70-75 (section B, row 7) */
-	if ((arg1 >= 70) && (arg1 <= 75)) {
-		return 76 - arg1;
+	if ((stat_id >= 70) && (stat_id <= 75)) {
+		return 76 - stat_id;
 	}
 	/* Group 13-18 (section A, row 3) */
-	if ((arg1 >= 13) && (arg1 <= 18)) {
-		return 19 - arg1;
+	if ((stat_id >= 13) && (stat_id <= 18)) {
+		return 19 - stat_id;
 	}
 	/* Group 52-57 (section B, row 4) */
-	if ((arg1 >= 52) && (arg1 <= 57)) {
-		return 58 - arg1;
+	if ((stat_id >= 52) && (stat_id <= 57)) {
+		return 58 - stat_id;
 	}
 	/* Group 25-30 (section A, row 5) */
-	if ((arg1 >= 25) && (arg1 <= 30)) {
-		return 31 - arg1;
+	if ((stat_id >= 25) && (stat_id <= 30)) {
+		return 31 - stat_id;
 	}
 	/* Group 19-24 (section A, row 4) */
-	if ((arg1 >= 19) && (arg1 <= 24)) {
-		return 25 - arg1;
+	if ((stat_id >= 19) && (stat_id <= 24)) {
+		return 25 - stat_id;
 	}
 	/* Group 76-81 (section C, row 1) */
-	if ((arg1 >= 76) && (arg1 <= 81)) {
-		return 82 - arg1;
+	if ((stat_id >= 76) && (stat_id <= 81)) {
+		return 82 - stat_id;
 	}
 	/* Group 89-94 (section C, row 3) */
-	if ((arg1 >= 89) && (arg1 <= 94)) {
-		return 95 - arg1;
+	if ((stat_id >= 89) && (stat_id <= 94)) {
+		return 95 - stat_id;
 	}
 	/* Group 83-88 (section C, row 2) */
-	if ((arg1 >= 83) && (arg1 <= 88)) {
-		result = 89 - arg1;
+	if ((stat_id >= 83) && (stat_id <= 88)) {
+		result = 89 - stat_id;
 	}
 	return result;
 }
@@ -2781,16 +2781,16 @@ short* __cdecl gm_GetEntityTableEntry(char* param)
 // FUNCTION: SERVER 0x100196c0
 // gm_QueryEntitySum
 
-int __cdecl gm_QueryEntitySum(int arg1, unsigned int arg2)
+int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 {
 	short* ent;
 	int total;
 
 	total = 0;
-	ent = gm_StartEntityQuery(arg1, 1, 4, 9);
+	ent = gm_StartEntityQuery(entity, 1, 4, 9);
 	if (ent != (short*) 0) {
 		do {
-			if (*(short*) (entity_slot_table + (arg2 & 0xff) * 0x2f4) == *ent) {
+			if (*(short*) (entity_slot_table + (obj_type & 0xff) * 0x2f4) == *ent) {
 				total = total + *(int*) (ent + 7);
 			}
 			ent = gm_NextEntityQueryMatch();
@@ -3274,18 +3274,18 @@ __declspec(naked) int __cdecl gm_EntityQuerySum(int arg1)
 // FUNCTION: SERVER 0x10019ae0
 // gm_ResolveParentEntity
 
-short* __cdecl gm_ResolveParentEntity(short* arg1)
+short* __cdecl gm_ResolveParentEntity(short* entity)
 {
 	void* dynamic_ent;
 
-	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &arg1, *(int*) (arg1 + 5));
-	if (arg1 == (short*) 0) {
+	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &entity, *(int*) (entity + 5));
+	if (entity == (short*) 0) {
 		if (dynamic_ent != (void*) 0 && *(unsigned short*) ((int) dynamic_ent + 0x27) != 0xffff) {
 			return (short*) (entity_array + (unsigned int) *(unsigned short*) ((int) dynamic_ent + 0x27) * 0x21c);
 		}
-		arg1 = (short*) 0;
+		entity = (short*) 0;
 	}
-	return arg1;
+	return entity;
 }
 
 /* Gets the type (class) of an entity as an unsigned short.
@@ -3294,13 +3294,13 @@ short* __cdecl gm_ResolveParentEntity(short* arg1)
 // FUNCTION: SERVER 0x10019b40
 // gm_GetEntityType
 
-unsigned short __cdecl gm_GetEntityType(short* arg1)
+unsigned short __cdecl gm_GetEntityType(short* entity)
 {
 	void* dynamic_ent;
 
-	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &arg1, *(int*) (arg1 + 5));
-	if (arg1 != (short*) 0) {
-		return *arg1;
+	gm_ResolveEntityById(&dynamic_ent, (void**) 0, (void**) &entity, *(int*) (entity + 5));
+	if (entity != (short*) 0) {
+		return *entity;
 	}
 	if (dynamic_ent != (void*) 0) {
 		return *(unsigned short*) ((int) dynamic_ent + 0x27);
@@ -3314,21 +3314,21 @@ unsigned short __cdecl gm_GetEntityType(short* arg1)
 // FUNCTION: SERVER 0x10019b80
 // gm_EntityAccumulate
 
-int __cdecl gm_EntityAccumulate(void* arg1)
+int __cdecl gm_EntityAccumulate(void* entity)
 {
 	int result;
 	int entity_id;
 	void* existing_ent;
 	void* static_ent;
 
-	entity_id = *(int*) ((int) arg1 + 6);
+	entity_id = *(int*) ((int) entity + 6);
 	while (entity_id != -1) {
-		result = gm_ResolveEntityById((void**) &arg1, &static_ent, &existing_ent, entity_id);
+		result = gm_ResolveEntityById((void**) &entity, &static_ent, &existing_ent, entity_id);
 		if (result == 0) {
 			return 0;
 		}
-		if (arg1 != (void*) 0) {
-			return (int) arg1;
+		if (entity != (void*) 0) {
+			return (int) entity;
 		}
 		if (existing_ent != (void*) 0) {
 			return 0;
