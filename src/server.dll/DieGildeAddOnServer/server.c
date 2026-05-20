@@ -23,7 +23,7 @@ int __cdecl AcceptConnections(void);
 void __cdecl CleanupSockets(void);
 int __cdecl ProcessReceiveData(void);
 int __cdecl ProcessSendData(void);
-int __cdecl ReceivePacketHeader(unsigned int* param_1);
+int __cdecl ReceivePacketHeader(unsigned int* conn);
 int __cdecl SendBroadcastPacket(unsigned char* data, int size);
 void __cdecl LogWinsockError(int err_code);
 
@@ -646,9 +646,9 @@ int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot)
 
 /* recv = 0x10024168, GetTickCount = 0x1002405c, WSAGetLastError = 0x10024170 */
 
-__declspec(naked) int __cdecl ReceivePacketHeader(unsigned int* param_1)
+__declspec(naked) int __cdecl ReceivePacketHeader(unsigned int* conn)
 {
-	(void) param_1;
+	(void) conn;
 	__asm {
 		push esi
 		mov esi, dword ptr [esp + 8]
