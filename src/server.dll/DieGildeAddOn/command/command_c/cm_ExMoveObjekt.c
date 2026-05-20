@@ -64,10 +64,10 @@ extern char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[];
  * transfers the object via gm_SubObjekt + gm_AddOrAccumulateObject. */
 
 // FUNCTION: SERVER 0x1000e530
-__declspec(naked) int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
+__declspec(naked) int __cdecl cm_ExMoveObjekt(int cmd, char* result)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) cmd;
+	(void) result;
 	__asm {
 		sub esp, 8
 		push ebx
