@@ -27,22 +27,22 @@ extern char s_Invalid__GI_Id__for_cmdt_ALLOC_B_1002caf0[];
 
 /* Execution handler: allocates a new room/space (Raum) entity.
  * Resolves entity by ID, calls gm_AllocBuildingDefaults to set
- * up building defaults, and returns via param_2. */
+ * up building defaults, and returns via result. */
 
 // FUNCTION: SERVER 0x1000d350
-int __cdecl cm_ExAllocRaum(int param_1, char* param_2)
+int __cdecl cm_ExAllocRaum(int cmd, char* result)
 {
 	char* building;
 	int field_id;
 	int i;
 
-	*(int*) (param_1 + 0x10) = g_timestamp_0b6c;
-	if (*(int*) (param_1 + 0x16) == -1) {
+	*(int*) (cmd + 0x10) = g_timestamp_0b6c;
+	if (*(int*) (cmd + 0x16) == -1) {
 		i = 0xffff;
 	}
 	else {
-		field_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x16));
-		*(int*) (param_1 + 0x16) = field_id;
+		field_id = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x16));
+		*(int*) (cmd + 0x16) = field_id;
 		i = 0;
 		while ((ushort) i < 0x300) {
 			if (*(ushort*) (g_static_entity_table_358a0 + (uint)(ushort) i * 0x21c) != (ushort) 0xffff &&
@@ -61,7 +61,7 @@ int __cdecl cm_ExAllocRaum(int param_1, char* param_2)
 			return 1;
 		}
 	}
-	building = gm_AllocGebaeude(*(uchar*) (param_1 + 0x14), i);
+	building = gm_AllocGebaeude(*(uchar*) (cmd + 0x14), i);
 	if (building == (char*) 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -71,15 +71,15 @@ int __cdecl cm_ExAllocRaum(int param_1, char* param_2)
 		);
 		return 1;
 	}
-	g_player_slot_0[(uint) *(uchar*) (param_1 + 3)].data = *(int*) (building + 1);
-	*(ushort*) (building + 0x5a) = *(ushort*) (param_1 + 0x1a);
-	if (*(int*) (param_1 + 0x1c) != 0) {
-		*(copy_12_dwords*) (building + 0x65) = *(copy_12_dwords*) (param_1 + 0x20);
+	g_player_slot_0[(uint) *(uchar*) (cmd + 3)].data = *(int*) (building + 1);
+	*(ushort*) (building + 0x5a) = *(ushort*) (cmd + 0x1a);
+	if (*(int*) (cmd + 0x1c) != 0) {
+		*(copy_12_dwords*) (building + 0x65) = *(copy_12_dwords*) (cmd + 0x20);
 	}
-	if (param_2 != (char*) 0) {
-		*param_2 = '\x01';
-		param_2[1] = '\x02';
-		*(char**) (param_2 + 6) = building;
+	if (result != (char*) 0) {
+		*result = '\x01';
+		result[1] = '\x02';
+		*(char**) (result + 6) = building;
 	}
 	return 0;
 }
