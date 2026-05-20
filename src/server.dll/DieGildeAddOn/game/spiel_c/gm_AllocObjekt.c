@@ -80,7 +80,7 @@ extern short* gm_ResolveParentEntity(short*);
 // STUB: SERVER 0x10016760
 // gm_AllocObjekt
 
-char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
+char* __cdecl gm_AllocObjekt(int parent_id, int obj_type, int count)
 {
 	int dynamic_parent;
 	int existing_parent;
@@ -100,7 +100,7 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 	if (g_item_def_table == 0) {
 		return 0;
 	}
-	if (param_1 == -1) {
+	if (parent_id == -1) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",
 			0xcb2,
@@ -111,7 +111,7 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 		return 0;
 	}
 	resolve_result =
-		gm_ResolveEntityById((void**) &dynamic_parent, (void**) &existing_parent, (void**) &static_parent, param_1);
+		gm_ResolveEntityById((void**) &dynamic_parent, (void**) &existing_parent, (void**) &static_parent, parent_id);
 	if (resolve_result == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcb8, "gm_AllocObjekt(): Parent not found", 1);
 		return 0;
@@ -161,9 +161,9 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 			*edi = (int) esi;
 		}
 	}
-	item_def_ptr = (char*) (g_item_def_table + param_2 * 0x41);
-	*(short*) esi = (short) param_2;
-	sprintf(buf, "----->ObjID= %i ObjProt= %i", g_next_object_id, param_2 & 0xffff);
+	item_def_ptr = (char*) (g_item_def_table + obj_type * 0x41);
+	*(short*) esi = (short) obj_type;
+	sprintf(buf, "----->ObjID= %i ObjProt= %i", g_next_object_id, obj_type & 0xffff);
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xcee, buf, 8);
 	*(int*) (esi + 2) = g_next_object_id;
 	g_next_object_id = g_next_object_id + 1;
@@ -176,8 +176,8 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 	else if (static_parent != 0) {
 		*(int*) (esi + 0xa) = *(int*) ((char*) static_parent + 4);
 	}
-	*(int*) (esi + 6) = param_1;
-	*(int*) (esi + 0xe) = param_3;
+	*(int*) (esi + 6) = parent_id;
+	*(int*) (esi + 0xe) = count;
 	esi[0x12] = 0x64;
 	esi[0x13] = 0;
 	*(int*) (esi + 0x14) = 0;
@@ -185,8 +185,8 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 	g_object_count = g_object_count + 1;
 	ebx = esi + 0x1c;
 	memset(ebx, 0, 31);
-	if (param_2 > 0x160) {
-		switch (param_2) {
+	if (obj_type > 0x160) {
+		switch (obj_type) {
 		case 0x174:
 		case 0x176:
 			*(int*) (esi + 0x20) = 6;
@@ -201,11 +201,11 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 			break;
 		}
 	}
-	else if (param_2 == 0x160) {
+	else if (obj_type == 0x160) {
 		*(int*) (esi + 0x20) = 0xf;
 	}
 	else {
-		switch (param_2) {
+		switch (obj_type) {
 		case 0xb8:
 			*ebx = 6;
 			break;
@@ -243,11 +243,11 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 				(void**) &dynamic_parent,
 				(void**) &existing_parent,
 				(void**) &static_parent,
-				param_1
+				parent_id
 			);
 			while (resolve_result != 0 && dynamic_parent == 0) {
 				if (existing_parent != 0) {
-					param_1 = *(int*) ((char*) existing_parent + 6);
+					parent_id = *(int*) ((char*) existing_parent + 6);
 				}
 				else if (static_parent != 0) {
 					LogMessageInternal(
@@ -261,7 +261,7 @@ char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
 					(void**) &dynamic_parent,
 					(void**) &existing_parent,
 					(void**) &static_parent,
-					param_1
+					parent_id
 				);
 			}
 			esi[0x28] = 0;
