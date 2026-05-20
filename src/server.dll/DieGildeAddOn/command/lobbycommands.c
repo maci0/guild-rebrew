@@ -644,34 +644,34 @@ __declspec(naked) int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned ch
 // FUNCTION: SERVER 0x10014db0
 // lb_ExLobbyServerCommand
 
-int __cdecl lb_ExLobbyServerCommand(unsigned int* param_1, int param_2)
+int __cdecl lb_ExLobbyServerCommand(unsigned int* conn, int cmd)
 {
         int cmd_result;
         char log_buf[128];
 
-        sprintf(log_buf, s_lb_ExLobbyServerCommand___i_1002d858, (unsigned int) *(unsigned char*) (param_2 + 0x10));
+        sprintf(log_buf, s_lb_ExLobbyServerCommand___i_1002d858, (unsigned int) *(unsigned char*) (cmd + 0x10));
         LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002d70c, 0x3a5, log_buf, 1);
-        switch (*(unsigned int*) (param_2 + 0x10)) {
+        switch (*(unsigned int*) (cmd + 0x10)) {
         case 0:
-                cmd_result = lb_ExPlayerlist(param_1, (unsigned char*) param_2);
+                cmd_result = lb_ExPlayerlist(conn, (unsigned char*) cmd);
                 return cmd_result;
         case 1:
-                cmd_result = lb_SendLobbyConfig(param_1, (unsigned char*) param_2);
+                cmd_result = lb_SendLobbyConfig(conn, (unsigned char*) cmd);
                 return cmd_result;
         case 2:
-                cmd_result = lb_HandleLobbyCommands((char*)param_1, (char*) param_2);
+                cmd_result = lb_HandleLobbyCommands((char*)conn, (char*) cmd);
                 return cmd_result;
         case 3:
-                cmd_result = lb_BroadcastStateChange(param_1, (unsigned char*) param_2);
+                cmd_result = lb_BroadcastStateChange(conn, (unsigned char*) cmd);
                 return cmd_result;
         case 4:
-                cmd_result = lb_HandleDataTransfer(param_1, (unsigned char*) param_2);
+                cmd_result = lb_HandleDataTransfer(conn, (unsigned char*) cmd);
                 return cmd_result;
         case 5:
-                cmd_result = lb_HandleEntitySync(param_1, (unsigned char*) param_2);
+                cmd_result = lb_HandleEntitySync(conn, (unsigned char*) cmd);
                 return cmd_result;
         case 6:
-                cmd_result = cm_RouteCommand(param_1, (unsigned char*) param_2);
+                cmd_result = cm_RouteCommand(conn, (unsigned char*) cmd);
                 return cmd_result;
         default:
                 return 1;
