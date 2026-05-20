@@ -494,19 +494,20 @@ __declspec(naked) int __cdecl ahm_ClampFloatValue(int param_1, int param_2)
 // FUNCTION: SERVER 0x1000c420
 // ahm_FireEntityAndCleanup
 
-int __cdecl ahm_FireEntityAndCleanup(int param_1, int* param_2, int param_3)
+int __cdecl ahm_FireEntityAndCleanup(int cmd, int* entity_id_ptr, int parent_record)
 {
 	unsigned short* entity;
 	void* query_result;
 	unsigned int* slot_iter;
 	int count;
 
-	entity = (unsigned short*) gm_LookupEntityRecordById(*param_2);
+	(void) cmd;
+	entity = (unsigned short*) gm_LookupEntityRecordById(*entity_id_ptr);
 	if (entity != (unsigned short*) 0) {
-		query_result = gm_StartEntityQuery(*(int*) (param_3 + 0x5d), 2, 6, 0, 0xff);
+		query_result = gm_StartEntityQuery(*(int*) (parent_record + 0x5d), 2, 6, 0, 0xff);
 		*(int*) (entity + 0xb8) = 0;
 		*(int*) (entity + 0xb6) = 0;
-		slot_iter = (unsigned int*) (param_2 + 3);
+		slot_iter = (unsigned int*) (entity_id_ptr + 3);
 		count = 6;
 		do {
 			if (*slot_iter != 0) {
@@ -520,8 +521,8 @@ int __cdecl ahm_FireEntityAndCleanup(int param_1, int* param_2, int param_3)
 			count = count - 1;
 		} while (count != 0);
 		for (count = 0xf; count != 0; count--) {
-			*param_2 = 0;
-			param_2 = param_2 + 1;
+			*entity_id_ptr = 0;
+			entity_id_ptr = entity_id_ptr + 1;
 		}
 		gm_DeallocEntity(*entity, 1);
 		return 1;
