@@ -35,9 +35,9 @@ int __cdecl ReadVfsCompressed(int, int, unsigned int);
 // FUNCTION: SERVER 0x10003820
 // vfs_GetByte
 
-__declspec(naked) unsigned int __cdecl vfs_GetByte(int* param_1)
+__declspec(naked) unsigned int __cdecl vfs_GetByte(int* stream)
 {
-	(void) param_1;
+	(void) stream;
 	__asm {
 		push esi
 		mov esi, dword ptr [esp + 8]
@@ -97,29 +97,29 @@ __declspec(naked) unsigned int __cdecl vfs_GetByte(int* param_1)
 // FUNCTION: SERVER 0x100038a0
 // vfs_CloseStream
 
-int __cdecl vfs_CloseStream(void* param_1)
+int __cdecl vfs_CloseStream(void* stream)
 {
 	int close_result;
 	int* errno_ptr;
 	int result;
 
 	result = 0;
-	if (param_1 == 0) {
+	if (stream == 0) {
 		return -2;
 	}
-	if (*(void**) ((int) param_1 + 0x50) != 0) {
-		m_FreeHeapLocked(*(void**) ((int) param_1 + 0x50));
+	if (*(void**) ((int) stream + 0x50) != 0) {
+		m_FreeHeapLocked(*(void**) ((int) stream + 0x50));
 	}
-	if (*(int*) ((int) param_1 + 0x1c) != 0) {
-		if (*(char*) ((int) param_1 + 0x5c) == 'w') {
-			result = vfs_FreeGameSubobject(param_1);
+	if (*(int*) ((int) stream + 0x1c) != 0) {
+		if (*(char*) ((int) stream + 0x5c) == 'w') {
+			result = vfs_FreeGameSubobject(stream);
 		}
-		else if (*(char*) ((int) param_1 + 0x5c) == 'r') {
-			result = vfs_CleanupSubobject(param_1);
+		else if (*(char*) ((int) stream + 0x5c) == 'r') {
+			result = vfs_CleanupSubobject(stream);
 		}
 	}
-	if (*(FILE**) ((int) param_1 + 0x40) != 0) {
-		close_result = fclose(*(FILE**) ((int) param_1 + 0x40));
+	if (*(FILE**) ((int) stream + 0x40) != 0) {
+		close_result = fclose(*(FILE**) ((int) stream + 0x40));
 		if (close_result != 0) {
 			errno_ptr = vfs_GetErrnoPtr();
 			if (*errno_ptr != 0x1d) {
@@ -127,19 +127,19 @@ int __cdecl vfs_CloseStream(void* param_1)
 			}
 		}
 	}
-	if (*(int*) ((int) param_1 + 0x38) < 0) {
-		result = *(int*) ((int) param_1 + 0x38);
+	if (*(int*) ((int) stream + 0x38) < 0) {
+		result = *(int*) ((int) stream + 0x38);
 	}
-	if (*(void**) ((int) param_1 + 0x44) != 0) {
-		m_FreeHeapLocked(*(void**) ((int) param_1 + 0x44));
+	if (*(void**) ((int) stream + 0x44) != 0) {
+		m_FreeHeapLocked(*(void**) ((int) stream + 0x44));
 	}
-	if (*(void**) ((int) param_1 + 0x48) != 0) {
-		m_FreeHeapLocked(*(void**) ((int) param_1 + 0x48));
+	if (*(void**) ((int) stream + 0x48) != 0) {
+		m_FreeHeapLocked(*(void**) ((int) stream + 0x48));
 	}
-	if (*(void**) ((int) param_1 + 0x54) != 0) {
-		m_FreeHeapLocked(*(void**) ((int) param_1 + 0x54));
+	if (*(void**) ((int) stream + 0x54) != 0) {
+		m_FreeHeapLocked(*(void**) ((int) stream + 0x54));
 	}
-	m_FreeHeapLocked(param_1);
+	m_FreeHeapLocked(stream);
 	return result;
 }
 
@@ -149,45 +149,45 @@ int __cdecl vfs_CloseStream(void* param_1)
 // FUNCTION: SERVER 0x10003b90
 // vfs_FlushStream
 
-unsigned int __cdecl vfs_FlushStream(int param_1, int param_2)
+unsigned int __cdecl vfs_FlushStream(int stream, int dest)
 {
 	int done;
 	int write_result;
 	int remaining;
 
 	done = 0;
-	if (param_1 == 0 || *(char*) (param_1 + 0x5c) != 'w') {
+	if (stream == 0 || *(char*) (stream + 0x5c) != 'w') {
 		return 0xFFFFFFFE;
 	}
-	*(int*) (param_1 + 4) = 0;
+	*(int*) (stream + 4) = 0;
 	do {
-		remaining = 0x4000 - *(int*) (param_1 + 0x10);
+		remaining = 0x4000 - *(int*) (stream + 0x10);
 		if (remaining != 0) {
-			write_result = vfs_LockedFwrite(*(void**) (param_1 + 0x48), 1, remaining, *(void**) (param_1 + 0x40));
+			write_result = vfs_LockedFwrite(*(void**) (stream + 0x48), 1, remaining, *(void**) (stream + 0x40));
 			if (write_result != remaining) {
-				*(int*) (param_1 + 0x38) = -1;
+				*(int*) (stream + 0x38) = -1;
 				return (unsigned int) -1;
 			}
-			*(int*) (param_1 + 0x10) = 0x4000;
-			*(int*) (param_1 + 0x0c) = *(int*) (param_1 + 0x48);
+			*(int*) (stream + 0x10) = 0x4000;
+			*(int*) (stream + 0x0c) = *(int*) (stream + 0x48);
 		}
 		if (done) {
 			break;
 		}
-		write_result = vfs_CompressBlock((void*) param_1, (int) param_2);
-		*(int*) (param_1 + 0x38) = write_result;
+		write_result = vfs_CompressBlock((void*) stream, (int) dest);
+		*(int*) (stream + 0x38) = write_result;
 		if (remaining == 0 && write_result == -5) {
-			*(int*) (param_1 + 0x38) = 0;
+			*(int*) (stream + 0x38) = 0;
 		}
-		if (*(int*) (param_1 + 0x10) == 0 && *(int*) (param_1 + 0x38) != 1) {
+		if (*(int*) (stream + 0x10) == 0 && *(int*) (stream + 0x38) != 1) {
 			done = 0;
 		}
 		else {
 			done = 1;
 		}
-	} while (*(int*) (param_1 + 0x38) == 0 || *(int*) (param_1 + 0x38) == 1);
-	if (*(unsigned int*) (param_1 + 0x38) != 1) {
-		return *(unsigned int*) (param_1 + 0x38);
+	} while (*(int*) (stream + 0x38) == 0 || *(int*) (stream + 0x38) == 1);
+	if (*(unsigned int*) (stream + 0x38) != 1) {
+		return *(unsigned int*) (stream + 0x38);
 	}
 	return 0;
 }
@@ -198,17 +198,17 @@ unsigned int __cdecl vfs_FlushStream(int param_1, int param_2)
 // FUNCTION: SERVER 0x10003C50
 // vfs_ReadUint32BE
 
-int __cdecl vfs_ReadUint32BE(int param_1)
+int __cdecl vfs_ReadUint32BE(int stream)
 {
 	int result;
 	int last;
 
-	result = vfs_GetByte((int*) param_1);
-	result = result + (vfs_GetByte((int*) param_1) << 8);
-	result = result + (vfs_GetByte((int*) param_1) << 16);
-	last = vfs_GetByte((int*) param_1);
+	result = vfs_GetByte((int*) stream);
+	result = result + (vfs_GetByte((int*) stream) << 8);
+	result = result + (vfs_GetByte((int*) stream) << 16);
+	last = vfs_GetByte((int*) stream);
 	if (last == -1) {
-		*(unsigned int*) (param_1 + 0x38) = 0xfffffffd;
+		*(unsigned int*) (stream + 0x38) = 0xfffffffd;
 	}
 	return (last << 24) + result;
 }
@@ -219,21 +219,21 @@ int __cdecl vfs_ReadUint32BE(int param_1)
 // FUNCTION: SERVER 0x10003CA0
 // vfs_FlushAndClose
 
-int __cdecl vfs_FlushAndClose(int param_1)
+int __cdecl vfs_FlushAndClose(int stream)
 {
 	int flush_result;
 
-	if (param_1 == 0) {
+	if (stream == 0) {
 		return -2;
 	}
-	if (*(char*) (param_1 + 0x5c) == 'w') {
-		flush_result = vfs_FlushStream(param_1, 4);
+	if (*(char*) (stream + 0x5c) == 'w') {
+		flush_result = vfs_FlushStream(stream, 4);
 		if (flush_result == 0) {
-			vfs_WriteUint32LE(*(int*) (param_1 + 0x40), *(unsigned int*) (param_1 + 0x4c));
-			vfs_WriteUint32LE(*(int*) (param_1 + 0x40), *(unsigned int*) (param_1 + 8));
+			vfs_WriteUint32LE(*(int*) (stream + 0x40), *(unsigned int*) (stream + 0x4c));
+			vfs_WriteUint32LE(*(int*) (stream + 0x40), *(unsigned int*) (stream + 8));
 		}
 	}
-	return vfs_CloseStream((void*) param_1);
+	return vfs_CloseStream((void*) stream);
 }
 
 /* Writes a 32-bit little-endian integer to the VFS stream. */
@@ -279,11 +279,11 @@ int __cdecl vfs_DestroyEntity(char* entity)
 // FUNCTION: SERVER 0x10008a90
 // ReadVfsCompressed
 
-__declspec(naked) int __cdecl ReadVfsCompressed(int param_1, int param_2, unsigned int param_3)
+__declspec(naked) int __cdecl ReadVfsCompressed(int stream, int dest, unsigned int size)
 {
-	(void) param_1;
-	(void) param_2;
-	(void) param_3;
+	(void) stream;
+	(void) dest;
+	(void) size;
 	__asm {
 		sub esp, 8
 		mov eax, dword ptr [esp + 0xc]
@@ -505,7 +505,7 @@ __declspec(naked) int __cdecl ReadVfsCompressed(int param_1, int param_2, unsign
 	}
 }
 
-int __cdecl ReadVfsCompressed_unused(int param_1, int param_2, unsigned int param_3)
+int __cdecl ReadVfsCompressed_unused(int stream, int dest, unsigned int size)
 {
 	int* ctx;
 	int bytes_read;
@@ -520,11 +520,11 @@ int __cdecl ReadVfsCompressed_unused(int param_1, int param_2, unsigned int para
 	bytes_read = 0;
 	decomp_status = 0;
 
-	if (param_1 == 0) {
+	if (stream == 0) {
 		return -0x66;
 	}
 
-	ctx = *(int**) (param_1 + 0x7c);
+	ctx = *(int**) (stream + 0x7c);
 	if (ctx == 0) {
 		return -0x66;
 	}
@@ -532,13 +532,13 @@ int __cdecl ReadVfsCompressed_unused(int param_1, int param_2, unsigned int para
 		return -100;
 	}
 
-	if (param_3 == 0) {
+	if (size == 0) {
 		return 0;
 	}
 
-	ctx[5] = param_3;
-	ctx[4] = param_2;
-	if ((unsigned int) ctx[0x17] < param_3) {
+	ctx[5] = size;
+	ctx[4] = dest;
+	if ((unsigned int) ctx[0x17] < size) {
 		ctx[5] = ctx[0x17];
 	}
 
