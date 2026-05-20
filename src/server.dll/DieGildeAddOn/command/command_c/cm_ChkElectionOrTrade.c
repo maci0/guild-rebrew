@@ -7,14 +7,14 @@
  *    CFlags: 
  *    Symbol: _ValidateElectionOrTradeCmd
  *    Files: DieGildeAddOn/command/command.c * / * 
- * int __cdecl cm_ChkElectionOrTrade(int param_1)
+ * int __cdecl cm_ChkElectionOrTrade(int cmd)
  * 
  * {
  *   ushort *puVar1;
  *   int iVar2;
  *   
- *   if (*(int *)(param_1 + 0x10) == 0x636c6572) {
- *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
+ *   if (*(int *)(cmd + 0x10) == 0x636c6572) {
+ *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x18));
  *     if (puVar1 != (ushort *)0x0) {
  *       puVar1 = gm_StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *       if (puVar1 != (ushort *)0x0) {
@@ -22,15 +22,15 @@
  *       }
  *     }
  *   }
- *   else if (*(int *)(param_1 + 0x10) == 0x62757920) {
- *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x18));
+ *   else if (*(int *)(cmd + 0x10) == 0x62757920) {
+ *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x18));
  *     if (puVar1 != (ushort *)0x0) {
  *       puVar1 = gm_StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *       if (puVar1 != (ushort *)0x0) {
  *         iVar2 = 0;
  *         puVar1 = puVar1 + 0xe;
  *         do {
- *           if (*(int *)puVar1 == *(int *)(param_1 + 0x1c)) {
+ *           if (*(int *)puVar1 == *(int *)(cmd + 0x1c)) {
  *             return 0;
  *           }
  *           iVar2 = iVar2 + 1;
@@ -62,13 +62,13 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * verifying timing constraints against g_something_1. */
 
 // FUNCTION: SERVER 0x1000d060
-int __cdecl cm_ChkElectionOrTrade(int param_1)
+int __cdecl cm_ChkElectionOrTrade(int cmd)
 {
 	ushort* entity;
 	int idx;
 
-	if (*(int*) (param_1 + 0x10) == 0x636c6572) {
-		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
+	if (*(int*) (cmd + 0x10) == 0x636c6572) {
+		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x18));
 		if (entity != (ushort*) 0x0) {
 			entity = gm_StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
 			if (entity != (ushort*) 0x0) {
@@ -76,15 +76,15 @@ int __cdecl cm_ChkElectionOrTrade(int param_1)
 			}
 		}
 	}
-	else if (*(int*) (param_1 + 0x10) == 0x62757920) {
-		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x18));
+	else if (*(int*) (cmd + 0x10) == 0x62757920) {
+		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x18));
 		if (entity != (ushort*) 0x0) {
 			entity = gm_StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
 			if (entity != (ushort*) 0x0) {
-				param_1 = *(int*) (param_1 + 0x1c);
+				cmd = *(int*) (cmd + 0x1c);
 				idx = 0;
 				while (idx < 3) {
-					if (*(int*) ((int) entity + 0x1c) == param_1) {
+					if (*(int*) ((int) entity + 0x1c) == cmd) {
 						return 0;
 					}
 					idx = idx + 1;
