@@ -683,9 +683,6 @@ __declspec(naked) int __cdecl ls_LoadExistingEntities(int param_1)
  * building type, owner, upgrade level, and production
  * state for each building entity. */
 
-// STUB: SERVER 0x10013230
-// ls_LoadEntities
-
 // DATA: SERVER 0x1002d4ec
 extern int g_save_version;
 // DATA: SERVER 0x10035434
