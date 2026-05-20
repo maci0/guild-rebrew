@@ -23,12 +23,13 @@
  */
 
 // FUNCTION: SERVER 0x1000fbf0
-int __cdecl cm_InitDefaultResponse(int param_1, char* param_2)
+int __cdecl cm_InitDefaultResponse(int cmd, char* result)
 {
-	if (param_2 != (char*) 0) {
-		*param_2 = 1;
-		param_2[1] = 8;
-		*(int*) (param_2 + 6) = 0;
+	(void) cmd;
+	if (result != (char*) 0) {
+		*result = 1;
+		result[1] = 8;
+		*(int*) (result + 6) = 0;
 	}
 	return 0;
 }
