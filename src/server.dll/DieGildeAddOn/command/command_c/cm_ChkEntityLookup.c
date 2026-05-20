@@ -32,15 +32,15 @@
  * success. Clears param_2[1] if result buffer is non-null. */
 
 // FUNCTION: SERVER 0x1000ff30
-int __cdecl cm_ChkEntityLookup(int param_1, char* param_2)
+int __cdecl cm_ChkEntityLookup(int cmd, char* result)
 {
 	int found;
 
-	if (param_2 != (char*) 0x0) {
-		*param_2 = '\x02';
-		param_2[1] = '\0';
-		*(int*) (param_2 + 6) = 0;
+	if (result != (char*) 0x0) {
+		*result = '\x02';
+		result[1] = '\0';
+		*(int*) (result + 6) = 0;
 	}
-	found = gm_LookupEntityRecordById(*(int*) (param_1 + 0x10));
+	found = gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
 	return (unsigned int) (found == 0);
 }
