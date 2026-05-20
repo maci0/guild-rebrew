@@ -69,7 +69,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * handles old/new owner linkage. */
 
 // FUNCTION: SERVER 0x1000f3b0
-int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
+int __cdecl cm_ExSetGebBesitzer(int cmd, char* result)
 {
 	ushort* building;
 	ushort* old_owner;
@@ -77,7 +77,7 @@ int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
 	uint old_owner_value;
 	uint new_owner_value;
 
-	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (param_1 + 0x10));
+	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building == (ushort*) 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -88,8 +88,8 @@ int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
 		return 1;
 	}
 
-	old_owner = (ushort*) gm_LookupEntityRecordById(*(int*) (param_1 + 0x18));
-	if ((old_owner == (ushort*) 0) && (*(int*) (param_1 + 0x18) != -1)) {
+	old_owner = (ushort*) gm_LookupEntityRecordById(*(int*) (cmd + 0x18));
+	if ((old_owner == (ushort*) 0) && (*(int*) (cmd + 0x18) != -1)) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x4980,
@@ -99,8 +99,8 @@ int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
 		return 1;
 	}
 
-	new_owner = (ushort*) gm_LookupEntityRecordById(*(int*) (param_1 + 0x14));
-	if ((new_owner == (ushort*) 0) && (*(int*) (param_1 + 0x14) != -1)) {
+	new_owner = (ushort*) gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
+	if ((new_owner == (ushort*) 0) && (*(int*) (cmd + 0x14) != -1)) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x4990,
@@ -114,10 +114,10 @@ int __cdecl cm_ExSetGebBesitzer(int param_1, char* param_2)
 	new_owner_value = *(ushort*) new_owner;
 	gm_AssignBuildingOwner((char*) building, new_owner_value, old_owner_value);
 
-	if (param_2 != (char*) 0) {
-		*param_2 = '\x02';
-		param_2[1] = '\0';
-		*(int*) (param_2 + 6) = 0;
+	if (result != (char*) 0) {
+		*result = '\x02';
+		result[1] = '\0';
+		*(int*) (result + 6) = 0;
 	}
 	return 0;
 }
