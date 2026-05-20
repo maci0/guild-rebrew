@@ -876,9 +876,6 @@ void* __cdecl gm_NextEntityQueryMatch(void)
  * parameters. Initializes the query state for iteration
  * via gm_NextEntityQueryMatch. Variadic args for filters. */
 
-// STUB: SERVER 0x10016460
-// gm_StartEntityQuery
-
 // DATA: SERVER 0x10030b9e
 extern char DAT_10030b9e;
 
@@ -902,97 +899,6 @@ extern int DAT_100a8c38;
 
 // DATA: SERVER 0x10035468
 extern unsigned short* DAT_10035468;
-
-unsigned short* __cdecl gm_StartEntityQuery(int param_1, int param_2, int param_3, ...)
-{
-	int* arg_ptr;
-	int i;
-	unsigned char flag1;
-	unsigned char flag2;
-
-	if (DAT_101de450 == 0) {
-		return (unsigned short*) 0;
-	}
-
-	flag1 = 0;
-	flag2 = 0;
-
-	DAT_10030b94 = 0x7fff;
-	DAT_10030b98 = -1;
-	DAT_10030b9c = (short) 0xffff;
-	DAT_10030b9e = (char) 0xff;
-	DAT_1003545e = 0;
-	DAT_1003545c = flag1;
-	DAT_1003545d = flag2;
-	DAT_10035454 = 1;
-	DAT_10035458 = 0;
-	DAT_100a8c38 = 0;
-
-	if (param_2 > 0) {
-		arg_ptr = &param_3;
-
-		for (i = param_2; i > 0; i--) {
-			unsigned char ftype;
-
-			ftype = *(unsigned char*) arg_ptr;
-			switch (ftype) {
-			case 0:
-				arg_ptr++;
-				DAT_10030b94 = *(unsigned short*) arg_ptr;
-				break;
-			case 1:
-				DAT_10030b98 = *(arg_ptr + 1);
-				arg_ptr++;
-				break;
-			case 2:
-				DAT_10030b9c = *(short*) (arg_ptr + 1);
-				arg_ptr++;
-				break;
-			case 3:
-				DAT_10030b9e = *(char*) (arg_ptr + 1);
-				arg_ptr++;
-				break;
-			case 4:
-				DAT_1003545e = 1;
-				break;
-			case 5:
-				flag2 = 1;
-				break;
-			case 6:
-				flag1 = 1;
-				break;
-			case 7:
-				break;
-			}
-		}
-
-		DAT_1003545c = flag1;
-		DAT_1003545d = flag2;
-
-		if (flag1 == 0) {
-			goto check_container;
-		}
-
-		if (flag2 != 0) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\objekte", 0xb66, "query flags conflict", 1);
-			return (unsigned short*) 0;
-		}
-
-		DAT_10035468 = DAT_100a8c34;
-		return gm_NextEntityQueryMatch();
-	}
-
-check_container:
-	if (param_1 != 0) {
-		DAT_10035468 = DAT_100a8c34;
-		return gm_NextEntityQueryMatch();
-	}
-
-	return (unsigned short*) 0;
-}
-
-/* Allocates an object slot in an entity's inventory.
- * Finds the next free slot and returns its index. */
 
 // FUNCTION: SERVER 0x100165A0
 // gm_AllocateObjectSlot
