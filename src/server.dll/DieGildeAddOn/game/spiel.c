@@ -1718,7 +1718,7 @@ extern int g_10035888;
 // DATA: SERVER 0x1003588c
 extern short g_1003588c;
 
-char* __cdecl gm_AllocGebaeude(int arg1, int arg2)
+char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 {
 	char buf[0x400];
 	char* pDest;
@@ -1744,8 +1744,8 @@ char* __cdecl gm_AllocGebaeude(int arg1, int arg2)
 		);
 		return 0;
 	}
-	gebType = arg1 & 0xff;
-	*geb = (char) arg1;
+	gebType = building_type & 0xff;
+	*geb = (char) building_type;
 	base = temp_result + gebType * 0x24d;
 
 	sprintf(buf, "----->GebID= %i GebProt= %i", g_next_object_id, gebType);
@@ -1753,7 +1753,7 @@ char* __cdecl gm_AllocGebaeude(int arg1, int arg2)
 
 	*(int*) (geb + 1) = g_next_object_id;
 	g_next_object_id = g_next_object_id + 1;
-	owner_id = (short) arg2;
+	owner_id = (short) location_id;
 	*(short*) (geb + 0x25) = owner_id;
 	*(short*) (geb + 0x27) = owner_id;
 	*(int*) (geb + 0x3d) = 0x64;
@@ -1781,7 +1781,7 @@ char* __cdecl gm_AllocGebaeude(int arg1, int arg2)
 	memset(pDest, 0, 0x30);
 	{
 		unsigned short* comp_iter = (unsigned short*) (base + 0x23);
-		for (arg1 = 0; arg1 < 0x40; arg1++) {
+		for (building_type = 0; building_type < 0x40; building_type++) {
 			unsigned short comp_entry = *comp_iter;
 			if (comp_entry == 0) {
 				break;
@@ -1836,7 +1836,7 @@ char* __cdecl gm_AllocGebaeude(int arg1, int arg2)
 			*(int*) (geb + 0x71) = g_10035888;
 			*(short*) (geb + 0x75) = g_1003588c;
 			if (owner_id != -1) {
-				*(int*) (geb + 0x65) = *(int*) ((unsigned short) arg2 * 0x21c + 0x100358a4);
+				*(int*) (geb + 0x65) = *(int*) ((unsigned short) location_id * 0x21c + 0x100358a4);
 				break;
 			}
 			/* fall through */
