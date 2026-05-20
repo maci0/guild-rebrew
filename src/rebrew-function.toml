@@ -777,9 +777,7 @@ status = "RELOC"
 
 ["SERVER.0x10014260"]
 size = 892
-status = "STUB"
-blocker = "comparison direction swap, jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 533
+status = "PROVEN"
 ghidra = "RecvGameSavegame"
 
 ["SERVER.0x100145e0"]
