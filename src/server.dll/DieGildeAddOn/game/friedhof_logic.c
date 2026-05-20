@@ -84,11 +84,11 @@ int __cdecl gv_CheckSlotActive(char* obj, int idx)
 // FUNCTION: SERVER 0x100105b0
 // gv_GetSlotEntry
 
-__declspec(naked) int __cdecl gv_GetSlotEntry(int param_1, int param_2, unsigned char param_3)
+__declspec(naked) int __cdecl gv_GetSlotEntry(int arg1, int arg2, unsigned char arg3)
 {
-	(void) param_1;
-	(void) param_2;
-	(void) param_3;
+	(void) arg1;
+	(void) arg2;
+	(void) arg3;
 	__asm {
 		push esi
 		mov esi, dword ptr [esp + 8]
@@ -387,10 +387,10 @@ __declspec(naked) char* __cdecl gv_FindSlotEntryFiltered(char* ctx, unsigned cha
 
 /* Auto-generated Ghidra decompilation */
 
-__declspec(naked) int SpawnGraveyardEntities(unsigned char* param_1, int param_2)
+__declspec(naked) int SpawnGraveyardEntities(unsigned char* arg1, int arg2)
 {
-	(void) param_1;
-	(void) param_2;
+	(void) arg1;
+	(void) arg2;
 	__asm {
 		mov eax, dword ptr [esp + 4]
 		xor ecx, ecx
@@ -563,9 +563,9 @@ extern char s_gv_Alloc__all_zombies_1002d444[];
 // FUNCTION: SERVER 0x100109d0
 // AllocGraveyardField
 
-__declspec(naked) int __cdecl AllocGraveyardField(int param_1)
+__declspec(naked) int __cdecl AllocGraveyardField(int arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		mov eax, dword ptr [esp + 4]
 		xor ecx, ecx
@@ -858,7 +858,7 @@ __declspec(naked) int __cdecl AllocGraveyardField(int param_1)
 	}
 }
 
-int __cdecl AllocGraveyardField_unused(int param_1)
+int __cdecl AllocGraveyardField_unused(int arg1)
 {
 	unsigned int btype;
 	char* type_entry;
@@ -872,7 +872,7 @@ int __cdecl AllocGraveyardField_unused(int param_1)
 	char* eax_ptr;
 	char* ecx_ptr;
 
-	btype = *(unsigned char*) param_1;
+	btype = *(unsigned char*) arg1;
 	type_entry = (char*) (g_entity_type_table + btype + btype * 0x24c);
 	if (*type_entry != '\x1d') {
 		return 0;
@@ -896,7 +896,7 @@ int __cdecl AllocGraveyardField_unused(int param_1)
 		}
 	}
 
-	*(int*) result = *(int*) (param_1 + 1);
+	*(int*) result = *(int*) (arg1 + 1);
 	*(int*) (result + 4) = (unsigned int) *(unsigned char*) (type_entry + 0x247);
 
 	/* allocate slot_1c: g_1002575c[tier] * 0x14 bytes */
@@ -992,7 +992,7 @@ int __cdecl AllocGraveyardField_unused(int param_1)
 			ecx_ptr = ecx_ptr + 0x88;
 			eax_ptr = eax_ptr + 0x14;
 		}
-		*(int*) (param_1 + 0x65) = (int) result;
+		*(int*) (arg1 + 0x65) = (int) result;
 		return (int) result;
 	}
 
@@ -1025,7 +1025,7 @@ int __cdecl AllocGraveyardField_unused(int param_1)
 			ecx_ptr = ecx_ptr + 0x110;
 			eax_ptr = eax_ptr + 0x14;
 		}
-		*(int*) (param_1 + 0x65) = (int) result;
+		*(int*) (arg1 + 0x65) = (int) result;
 		return (int) result;
 	}
 
@@ -1065,7 +1065,7 @@ int __cdecl AllocGraveyardField_unused(int param_1)
 		ecx_ptr = ecx_ptr + 0x220;
 		eax_ptr = eax_ptr + 0x14;
 	}
-	*(int*) (param_1 + 0x65) = (int) result;
+	*(int*) (arg1 + 0x65) = (int) result;
 	return (int) result;
 
 cleanup:
@@ -1087,9 +1087,9 @@ cleanup:
 // FUNCTION: SERVER 0x10010d10
 // UpgradeGraveyardField
 
-__declspec(naked) unsigned int UpgradeGraveyardField(unsigned char* param_1)
+__declspec(naked) unsigned int UpgradeGraveyardField(unsigned char* arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		sub esp, 0x10
 		xor ecx, ecx
@@ -1301,7 +1301,7 @@ __declspec(naked) unsigned int UpgradeGraveyardField(unsigned char* param_1)
 	}
 }
 
-unsigned int UpgradeGraveyardField_unused(unsigned char* param_1)
+unsigned int UpgradeGraveyardField_unused(unsigned char* arg1)
 {
 	int old_field_ptr;
 	int new_field_ptr;
@@ -1314,18 +1314,18 @@ unsigned int UpgradeGraveyardField_unused(unsigned char* param_1)
 	unsigned int* dst_slot_dword_ptr;
 	int slot2_count;
 
-	entity_type_idx = *param_1;
-	old_field_ptr = *(int*) (param_1 + 0x65);
+	entity_type_idx = *arg1;
+	old_field_ptr = *(int*) (arg1 + 0x65);
 	loop_byte_offset = *(int*) 0x100a8c30 + entity_type_idx + entity_type_idx * 0x24c;
 	if ((((*(char*) (*(int*) 0x100a8c30 + entity_type_idx + entity_type_idx * 0x24c) == '\x1d') &&
 		  (old_field_ptr != 0)) &&
 		 (*(int*) (old_field_ptr + 4) < 3)) &&
 		(*(char*) (loop_byte_offset + 0x247) - *(int*) (old_field_ptr + 4) == 1)) {
-		param_1[0x65] = 0;
-		param_1[0x66] = 0;
-		param_1[0x67] = 0;
-		param_1[0x68] = 0;
-		new_field_ptr = AllocGraveyardField((int) param_1);
+		arg1[0x65] = 0;
+		arg1[0x66] = 0;
+		arg1[0x67] = 0;
+		arg1[0x68] = 0;
+		new_field_ptr = AllocGraveyardField((int) arg1);
 		if (new_field_ptr != 0) {
 			if (*(char*) (loop_byte_offset + 0x247) == '\x02') {
 				slot2_count = 0;
@@ -1424,9 +1424,9 @@ unsigned int UpgradeGraveyardField_unused(unsigned char* param_1)
 			*(char*) (new_field_ptr + 0x1a) = *(char*) (old_field_ptr + 0x1a);
 			*(char*) (new_field_ptr + 0x1b) = *(char*) (old_field_ptr + 0x1b);
 			gv_Free3Fields((char*) old_field_ptr);
-			return *(unsigned int*) (param_1 + 0x65);
+			return *(unsigned int*) (arg1 + 0x65);
 		}
-		*(unsigned int*) (param_1 + 0x65) = old_field_ptr;
+		*(unsigned int*) (arg1 + 0x65) = old_field_ptr;
 	}
 	return 0;
 }
@@ -1460,9 +1460,9 @@ void __cdecl gv_Free3Fields(char* p)
 // FUNCTION: SERVER 0x10010fa0
 // AssignProductionSlot
 
-__declspec(naked) unsigned int AssignProductionSlot(int param_1)
+__declspec(naked) unsigned int AssignProductionSlot(int arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push ecx
 		push ebx
@@ -1692,7 +1692,7 @@ __declspec(naked) unsigned int AssignProductionSlot(int param_1)
 	}
 }
 
-unsigned int AssignProductionSlot_unused(int param_1)
+unsigned int AssignProductionSlot_unused(int arg1)
 {
 	char str_scan_char;
 	int worker_slot_capacity;
@@ -1707,8 +1707,8 @@ unsigned int AssignProductionSlot_unused(int param_1)
 	char* name_scan_end_ptr;
 	unsigned char* building_entity_ptr;
 
-	worker_slot_capacity = param_1;
-	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
+	worker_slot_capacity = arg1;
+	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (arg1 + 8));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
 		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 ==
 		 *(unsigned int*) 0x1003546c)) {
@@ -1725,8 +1725,8 @@ unsigned int AssignProductionSlot_unused(int param_1)
 	if (slot_category_check == 0) {
 		return 0xfffffffc;
 	}
-	gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &param_1, *(unsigned int*) (worker_slot_capacity + 4));
-	if (param_1 == 0) {
+	gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &arg1, *(unsigned int*) (worker_slot_capacity + 4));
+	if (arg1 == 0) {
 		return 0xfffffffa;
 	}
 	assignment_loop_idx = gv_GetSlotEntry(
@@ -1735,7 +1735,7 @@ unsigned int AssignProductionSlot_unused(int param_1)
 		(unsigned char) *(int*) (worker_slot_capacity + 0x10)
 	);
 	if ((assignment_loop_idx == 0) ||
-		(*(unsigned int*) (assignment_loop_idx + 8) != *(unsigned int*) (param_1 + 0x50))) {
+		(*(unsigned int*) (assignment_loop_idx + 8) != *(unsigned int*) (arg1 + 0x50))) {
 		return 0xfffffff9;
 	}
 	slot_worker_array_ptr = *(int**) (assignment_loop_idx + 0x10);
@@ -1759,9 +1759,9 @@ unsigned int AssignProductionSlot_unused(int param_1)
 			candidate_record_ptr = candidate_record_ptr + 0x11;
 		} while (assignment_loop_idx < worker_slot_capacity);
 	}
-	*best_slot_record_ptr = *(unsigned int*) (param_1 + 4);
+	*best_slot_record_ptr = *(unsigned int*) (arg1 + 4);
 	strlen_counter = 0xffffffff;
-	name_scan_ptr = (char*) (param_1 + 0x30);
+	name_scan_ptr = (char*) (arg1 + 0x30);
 	do {
 		name_scan_end_ptr = name_scan_ptr;
 		if (strlen_counter == 0) {
@@ -1787,7 +1787,7 @@ unsigned int AssignProductionSlot_unused(int param_1)
 		slot_worker_array_ptr = slot_worker_array_ptr + 1;
 	}
 	strlen_counter = 0xffffffff;
-	name_scan_ptr = (char*) (param_1 + 0x40);
+	name_scan_ptr = (char*) (arg1 + 0x40);
 	do {
 		name_scan_end_ptr = name_scan_ptr;
 		if (strlen_counter == 0) {
@@ -1811,14 +1811,14 @@ unsigned int AssignProductionSlot_unused(int param_1)
 		slot_worker_array_ptr = slot_worker_array_ptr + 1;
 		candidate_record_ptr = candidate_record_ptr + 1;
 	}
-	best_slot_record_ptr[9] = *(unsigned int*) (param_1 + 0x80);
-	*(best_slot_record_ptr + 10) = *(unsigned int*) (param_1 + 0x84);
-	best_slot_record_ptr[0xb] = *(unsigned int*) (param_1 + 0x167);
-	best_slot_record_ptr[0xc] = *(unsigned int*) (param_1 + 0xd);
-	best_slot_record_ptr[0xd] = *(unsigned int*) (param_1 + 0x164);
-	best_slot_record_ptr[0xe] = *(unsigned int*) (param_1 + 9);
+	best_slot_record_ptr[9] = *(unsigned int*) (arg1 + 0x80);
+	*(best_slot_record_ptr + 10) = *(unsigned int*) (arg1 + 0x84);
+	best_slot_record_ptr[0xb] = *(unsigned int*) (arg1 + 0x167);
+	best_slot_record_ptr[0xc] = *(unsigned int*) (arg1 + 0xd);
+	best_slot_record_ptr[0xd] = *(unsigned int*) (arg1 + 0x164);
+	best_slot_record_ptr[0xe] = *(unsigned int*) (arg1 + 9);
 	best_slot_record_ptr[0x10] = *(unsigned int*) 0x10035880;
-	best_slot_record_ptr[0xf] = *(unsigned int*) (param_1 + 0x18c);
+	best_slot_record_ptr[0xf] = *(unsigned int*) (arg1 + 0x18c);
 	return 0;
 }
 
@@ -1829,9 +1829,9 @@ unsigned int AssignProductionSlot_unused(int param_1)
 // FUNCTION: SERVER 0x100111b0
 // HireProductionWorker
 
-__declspec(naked) unsigned int HireProductionWorker(int param_1)
+__declspec(naked) unsigned int HireProductionWorker(int arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push ecx
 		push esi
@@ -2047,7 +2047,7 @@ __declspec(naked) unsigned int HireProductionWorker(int param_1)
 	}
 }
 
-unsigned int HireProductionWorker_unused(int param_1)
+unsigned int HireProductionWorker_unused(int arg1)
 {
 	int cmd_ptr_saved;
 	int slot_or_active_check;
@@ -2057,8 +2057,8 @@ unsigned int HireProductionWorker_unused(int param_1)
 	int worker_record_offset;
 	unsigned char* building_entity_ptr;
 
-	cmd_ptr_saved = param_1;
-	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (param_1 + 8));
+	cmd_ptr_saved = arg1;
+	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (arg1 + 8));
 	if (((building_entity_ptr == 0) || (*(unsigned short*) (building_entity_ptr + 0x27) == 0xffff)) ||
 		(*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + *(unsigned int*) 0x100358a0 ==
 		 *(unsigned int*) 0x1003546c)) {
@@ -2075,14 +2075,14 @@ unsigned int HireProductionWorker_unused(int param_1)
 	if (slot_or_active_check == 0) {
 		return 0xfffffffc;
 	}
-	gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &param_1, *(unsigned int*) (cmd_ptr_saved + 4));
-	if (param_1 == 0) {
+	gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &arg1, *(unsigned int*) (cmd_ptr_saved + 4));
+	if (arg1 == 0) {
 		return 0xfffffffa;
 	}
 	slot_or_active_check = *(int*) (cmd_ptr_saved + 0xc);
 	if ((-1 < slot_or_active_check) && (slot_or_active_check < 4)) {
 		slot_or_active_check = (int) gv_FindSlotEntryFiltered(
-			(char*) param_1,
+			(char*) arg1,
 			building_entity_ptr,
 			(char*) 0,
 			(int(__cdecl*)(char*, char*)) 0x10010700,
@@ -2091,8 +2091,8 @@ unsigned int HireProductionWorker_unused(int param_1)
 		if (slot_or_active_check == 0) {
 			return 0xfffffff9;
 		}
-		*(unsigned int*) (slot_or_active_check + 4) = *(unsigned int*) (param_1 + 4);
-		*(unsigned int*) (slot_or_active_check + 8) = *(unsigned int*) (param_1 + 0x50);
+		*(unsigned int*) (slot_or_active_check + 4) = *(unsigned int*) (arg1 + 4);
+		*(unsigned int*) (slot_or_active_check + 8) = *(unsigned int*) (arg1 + 0x50);
 		hire_deadline_tick = *(short*) (cmd_ptr_saved + 0x11) + *(short*) 0x10035880;
 		*(unsigned char*) (slot_or_active_check + 0xc) = 0xff;
 		*(short*) (slot_or_active_check + 10) = hire_deadline_tick;
@@ -2107,7 +2107,7 @@ unsigned int HireProductionWorker_unused(int param_1)
 		}
 		if (0 < *(int*) (cmd_ptr_saved + 0x13)) {
 			gm_SubObjektNoKill(
-				*(unsigned int*) (param_1 + 4),
+				*(unsigned int*) (arg1 + 4),
 				*(unsigned int*) (*(unsigned int*) 0x10035439 * 0x2f4 + 0x100a8c94),
 				*(unsigned int*) (cmd_ptr_saved + 0x13)
 			);
@@ -2132,9 +2132,9 @@ unsigned int HireProductionWorker_unused(int param_1)
 
 /* Auto-generated Ghidra decompilation */
 
-__declspec(naked) unsigned int ExtendProductionTime(unsigned int* param_1)
+__declspec(naked) unsigned int ExtendProductionTime(unsigned int* arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push ecx
 		push esi
@@ -2325,9 +2325,9 @@ __declspec(naked) unsigned int ExtendProductionTime(unsigned int* param_1)
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
-__declspec(naked) int __cdecl gv_ReplaceProductionWorker(unsigned char* param_1)
+__declspec(naked) int __cdecl gv_ReplaceProductionWorker(unsigned char* arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push ecx
 		push ebx
@@ -2488,12 +2488,12 @@ extern char* g_action_table_base;
 
 extern char g_slot_table[];
 
-int __cdecl ActivateGraveyardSection(unsigned char* param_1)
+int __cdecl ActivateGraveyardSection(unsigned char* arg1)
 {
 	void* entity;
 	void* target_entity;
 
-	gm_ResolveEntityById((void**) &entity, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
+	gm_ResolveEntityById((void**) &entity, (void**) 0, (void**) 0, *(int*) (arg1 + 8));
 	if (entity != 0) {
 		if (*(unsigned short*) ((char*) entity + 0x27) != 0xFFFF) {
 			unsigned int slot_val;
@@ -2513,12 +2513,12 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 					return -3;
 				}
 
-				gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &target_entity, *(int*) (param_1 + 4));
+				gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &target_entity, *(int*) (arg1 + 4));
 				if (target_entity == 0) {
 					return -6;
 				}
 
-				action_type = *(int*) (param_1 + 0xc);
+				action_type = *(int*) (arg1 + 0xc);
 				if (action_type == 3) {
 					if (*(int*) ((char*) field + 0x14) == 0) {
 						goto fail;
@@ -2570,9 +2570,9 @@ int __cdecl ActivateGraveyardSection(unsigned char* param_1)
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
-__declspec(naked) int __cdecl gv_UpdateProductionProgress(unsigned char* param_1)
+__declspec(naked) int __cdecl gv_UpdateProductionProgress(unsigned char* arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		push esi
 		push edi
@@ -2691,14 +2691,14 @@ __declspec(naked) int __cdecl gv_UpdateProductionProgress(unsigned char* param_1
 // FUNCTION: SERVER 0x10011890
 // gv_ValidateEntityAction
 
-int __cdecl gv_ValidateEntityAction(unsigned char* param_1)
+int __cdecl gv_ValidateEntityAction(unsigned char* arg1)
 {
 	void* entity;
 	unsigned int slot_val;
 	unsigned char type_byte;
 	int result;
 
-	gm_ResolveEntityById((void**) &entity, (void**) 0, (void**) 0, *(int*) (param_1 + 8));
+	gm_ResolveEntityById((void**) &entity, (void**) 0, (void**) 0, *(int*) (arg1 + 8));
 	if (entity != 0) {
 		if (*(unsigned short*) ((char*) entity + 0x27) != 0xFFFF) {
 			slot_val = (unsigned int) *(unsigned short*) ((char*) entity + 0x27);
@@ -2710,7 +2710,7 @@ int __cdecl gv_ValidateEntityAction(unsigned char* param_1)
 				if (*(int*) ((char*) entity + 0x65) == 0) {
 					return -3;
 				}
-				result = SpawnGraveyardEntities(entity, *(int*) (param_1 + 0x13));
+				result = SpawnGraveyardEntities(entity, *(int*) (arg1 + 0x13));
 				if (result > 0) {
 					return 0;
 				}
@@ -2728,9 +2728,9 @@ int __cdecl gv_ValidateEntityAction(unsigned char* param_1)
 // FUNCTION: SERVER 0x10011940
 // gv_MoveSlotEntry
 
-__declspec(naked) unsigned int gv_MoveSlotEntry(int param_1)
+__declspec(naked) unsigned int gv_MoveSlotEntry(int arg1)
 {
-	(void) param_1;
+	(void) arg1;
 	__asm {
 		sub esp, 0x14
 		lea ecx, [esp + 0x18]
@@ -3011,7 +3011,7 @@ __declspec(naked) unsigned int gv_MoveSlotEntry(int param_1)
 	}
 }
 
-unsigned int gv_MoveSlotEntry_unused(int param_1)
+unsigned int gv_MoveSlotEntry_unused(int arg1)
 {
 	int* src_worker_array_ptr;
 	int cmd_ptr_saved;
@@ -3020,9 +3020,9 @@ unsigned int gv_MoveSlotEntry_unused(int param_1)
 	int src_worker_array_end;
 	int dst_slot_entry_ptr;
 
-	cmd_ptr_saved = param_1;
-	gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &param_1, *(int*) cmd_ptr_saved);
-	if (param_1 == 0) {
+	cmd_ptr_saved = arg1;
+	gm_ResolveEntityById((void**) 0, (void**) 0, (void**) &arg1, *(int*) cmd_ptr_saved);
+	if (arg1 == 0) {
 		return 0xfffffffa;
 	}
 	gm_ResolveEntityById((void**) &building_entity_ptr, (void**) 0, (void**) 0, *(int*) (cmd_ptr_saved + 4));
@@ -3048,14 +3048,14 @@ unsigned int gv_MoveSlotEntry_unused(int param_1)
 		(unsigned char) *(unsigned char*) (cmd_ptr_saved + 0xc)
 	);
 	if ((field_or_slot_ptr != 0) &&
-		(*(unsigned short*) (field_or_slot_ptr + 8) == *(unsigned short*) (param_1 + 0x50))) {
+		(*(unsigned short*) (field_or_slot_ptr + 8) == *(unsigned short*) (arg1 + 0x50))) {
 		int saved_src_slot_entry_ptr;
 
 		src_worker_array_ptr = *(int**) (field_or_slot_ptr + 0x10);
 		src_worker_array_end = *(int*) (*(int*) (cmd_ptr_saved + 8) * 4 + 0x1002574c);
 		saved_src_slot_entry_ptr = field_or_slot_ptr;
 		dst_slot_entry_ptr = (int) gv_FindSlotEntryFiltered(
-			(char*) param_1,
+			(char*) arg1,
 			(unsigned char*) building_entity_ptr,
 			(char*) 0,
 			(int(__cdecl*)(char*, char*)) 0x10010700,
@@ -3113,7 +3113,7 @@ unsigned int gv_MoveSlotEntry_unused(int param_1)
 			if (0 < *(int*) (cmd_ptr_saved + 0x11)) {
 				unsigned int scaled_amount;
 				gm_SubObjektNoKill(
-					*(unsigned int*) (param_1 + 4),
+					*(unsigned int*) (arg1 + 4),
 					*(unsigned int*) ((unsigned char*) 0x100a8c94 + *(unsigned int*) 0x10035439 * 0x2f4),
 					*(unsigned int*) (cmd_ptr_saved + 0x11)
 				);
