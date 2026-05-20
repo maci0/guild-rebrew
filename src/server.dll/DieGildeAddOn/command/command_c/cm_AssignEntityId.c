@@ -30,13 +30,15 @@ __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
  * global ID counter. Used when creating new game entities. */
 
 // FUNCTION: SERVER 0x1000f0a0
-int __cdecl cm_AssignEntityId(int param_1, char* param_2)
+int __cdecl cm_AssignEntityId(int cmd, char* result)
 {
-	DWORD DVar1;
+	DWORD timestamp;
 
-	*(int*) (param_1 + 0x10) = g_entity_id_start;
-	DVar1 = timeGetTime();
-	*(DWORD*) (param_1 + 0x14) = DVar1;
+	(void) result;
+
+	*(int*) (cmd + 0x10) = g_entity_id_start;
+	timestamp = timeGetTime();
+	*(DWORD*) (cmd + 0x14) = timestamp;
 	g_entity_id_start = g_entity_id_start + 1;
 	return 0;
 }
