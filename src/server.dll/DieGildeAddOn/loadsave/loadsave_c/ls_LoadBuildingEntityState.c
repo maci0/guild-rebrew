@@ -58,7 +58,7 @@ extern unsigned int ls_ID2Ptr(void);
 // STUB: SERVER 0x100128f0
 // ls_LoadBuildingEntityState
 
-unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
+unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 {
 	int entity_count;
 	int current_index;
@@ -71,7 +71,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 
 	gm_ResetAllEntities();
 
-	if (!ls_ReadVfsDataChecked(&entity_count, 4, 1, (void*) param_1)) {
+	if (!ls_ReadVfsDataChecked(&entity_count, 4, 1, (void*) stream_ctx)) {
 		return 0;
 	}
 
@@ -82,97 +82,97 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 		do {
 			esi = (char*) (offset + g_entity_array_ptr);
 
-			if (!ls_ReadVfsDataChecked(esi, 1, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi, 1, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x01, 4, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x01, 4, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x05, 0x20, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x05, 0x20, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x25, 2, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x25, 2, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x27, 2, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x27, 2, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x29, 2, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x29, 2, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x2b, 4, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x2b, 4, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x2f, 1, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x2f, 1, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x34, 1, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x34, 1, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x35, 4, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x35, 4, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x39, 4, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x39, 4, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x3d, 4, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x3d, 4, 1, (void*) stream_ctx)) {
 				return 0;
 			}
 
 			ebx = (int*) (esi + 0x41);
-			if (!ls_ReadVfsDataChecked(ebx, 4, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(ebx, 4, 1, (void*) stream_ctx)) {
 				return 0;
 			}
 			if (*ebx > 4) {
 				*ebx = 2;
 			}
 
-			if (!ls_ReadVfsDataChecked(esi + 0x45, 4, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x45, 4, 1, (void*) stream_ctx)) {
 				return 0;
 			}
 
 			if (g_file_version >= 0x10028) {
-				if (!ls_ReadVfsDataChecked(esi + 0x49, 4, 1, (void*) param_1)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x49, 4, 1, (void*) stream_ctx)) {
 					return 0;
 				}
 			}
 
 			if (g_file_version < 0x10032) {
-				if (!ls_ReadVfsDataChecked(&dummy, 4, 1, (void*) param_1)) {
+				if (!ls_ReadVfsDataChecked(&dummy, 4, 1, (void*) stream_ctx)) {
 					return 0;
 				}
 			}
 
 			if (g_file_version >= 0x10057) {
-				if (!ls_ReadVfsDataChecked(esi + 0x4d, 4, 1, (void*) param_1)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x4d, 4, 1, (void*) stream_ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(esi + 0x51, 4, 1, (void*) param_1)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x51, 4, 1, (void*) stream_ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(esi + 0x55, 4, 1, (void*) param_1)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x55, 4, 1, (void*) stream_ctx)) {
 					return 0;
 				}
 			}
 
-			if (!ls_ReadVfsDataChecked(esi + 0x5a, 2, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x5a, 2, 1, (void*) stream_ctx)) {
 				return 0;
 			}
-			if (!ls_ReadVfsDataChecked(esi + 0x5c, 1, 1, (void*) param_1)) {
+			if (!ls_ReadVfsDataChecked(esi + 0x5c, 1, 1, (void*) stream_ctx)) {
 				return 0;
 			}
 
 			if (esi[0] == 0x1e) {
 				*(int*) (esi + 0x71) = (int) m_AllocTracked(0x600, (const char*) 0x1002d510);
 				for (load_result = 0; load_result < 0x600; load_result += 0x18) {
-					if (!ls_ReadVfsDataChecked((void*) (load_result + *(int*) (esi + 0x71)), 4, 1, (void*) param_1)) {
+					if (!ls_ReadVfsDataChecked((void*) (load_result + *(int*) (esi + 0x71)), 4, 1, (void*) stream_ctx)) {
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
 							(void*) (load_result + 4 + *(int*) (esi + 0x71)),
 							4,
 							1,
-							(void*) param_1
+							(void*) stream_ctx
 						)) {
 						return 0;
 					}
@@ -180,7 +180,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 							(void*) (load_result + 8 + *(int*) (esi + 0x71)),
 							1,
 							1,
-							(void*) param_1
+							(void*) stream_ctx
 						)) {
 						return 0;
 					}
@@ -188,7 +188,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 							(void*) (load_result + 9 + *(int*) (esi + 0x71)),
 							1,
 							1,
-							(void*) param_1
+							(void*) stream_ctx
 						)) {
 						return 0;
 					}
@@ -196,7 +196,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 							(void*) (load_result + 0xa + *(int*) (esi + 0x71)),
 							2,
 							1,
-							(void*) param_1
+							(void*) stream_ctx
 						)) {
 						return 0;
 					}
@@ -204,7 +204,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 							(void*) (load_result + 0x10 + *(int*) (esi + 0x71)),
 							4,
 							1,
-							(void*) param_1
+							(void*) stream_ctx
 						)) {
 						return 0;
 					}
@@ -212,7 +212,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 							(void*) (load_result + 0xc + *(int*) (esi + 0x71)),
 							1,
 							1,
-							(void*) param_1
+							(void*) stream_ctx
 						)) {
 						return 0;
 					}
@@ -220,7 +220,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 							(void*) (load_result + 0xd + *(int*) (esi + 0x71)),
 							1,
 							1,
-							(void*) param_1
+							(void*) stream_ctx
 						)) {
 						return 0;
 					}
@@ -229,10 +229,10 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 			}
 			else if (esi[0] == 0x48 || esi[0] == 0x49 || esi[0] == 0x4a) {
 				if (g_file_version >= 0x10047) {
-					load_result = ls_LoadGraveyardData(param_1, (int) esi);
+					load_result = ls_LoadGraveyardData(stream_ctx, (int) esi);
 				}
 				else {
-					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) param_1)) {
+					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) stream_ctx)) {
 						return 0;
 					}
 					*(int*) (esi + 0x65) = AllocGraveyardField((int) esi);
@@ -244,11 +244,11 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 			}
 			else if (esi[0] == 0x4b || esi[0] == 0x4c || esi[0] == 0x4d) {
 				if (g_file_version >= 0x10049) {
-					load_result = ahm_AllocAhmInfo(param_1, (int) esi);
+					load_result = ahm_AllocAhmInfo(stream_ctx, (int) esi);
 				}
 				else {
 					int* ahm_info;
-					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) param_1)) {
+					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) stream_ctx)) {
 						return 0;
 					}
 					ahm_info = (int*) m_AllocTracked(0x3c, (const char*) 0x1002d504);
@@ -261,14 +261,14 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 				}
 			}
 			else {
-				if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) param_1)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) stream_ctx)) {
 					return 0;
 				}
 			}
 
 		label_10012d72:
 			if (g_file_version >= 0x10043) {
-				if (!ls_ReadVfsDataChecked(esi + 0x99, 0x10, 1, (void*) param_1)) {
+				if (!ls_ReadVfsDataChecked(esi + 0x99, 0x10, 1, (void*) stream_ctx)) {
 					return 0;
 				}
 			}
@@ -290,7 +290,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 		} while (current_index < entity_count);
 	}
 
-	if (!ls_ReadVfsDataChecked(&g_101de454, 4, 1, (void*) param_1)) {
+	if (!ls_ReadVfsDataChecked(&g_101de454, 4, 1, (void*) stream_ctx)) {
 		return 0;
 	}
 
@@ -298,13 +298,13 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 
 	current_index = 0;
 	for (load_result = 0; load_result < g_101de454; load_result++) {
-		if (!ls_ReadVfsDataChecked((void*) (current_index + g_101de55c), 0x40, 1, (void*) param_1)) {
+		if (!ls_ReadVfsDataChecked((void*) (current_index + g_101de55c), 0x40, 1, (void*) stream_ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked((void*) (current_index + 0x40 + g_101de55c), 0x10, 1, (void*) param_1)) {
+		if (!ls_ReadVfsDataChecked((void*) (current_index + 0x40 + g_101de55c), 0x10, 1, (void*) stream_ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked((void*) (current_index + 0x50 + g_101de55c), 0x10, 1, (void*) param_1)) {
+		if (!ls_ReadVfsDataChecked((void*) (current_index + 0x50 + g_101de55c), 0x10, 1, (void*) stream_ctx)) {
 			return 0;
 		}
 		current_index += 0x60;
