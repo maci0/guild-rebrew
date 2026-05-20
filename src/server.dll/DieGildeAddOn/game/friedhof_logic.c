@@ -858,7 +858,7 @@ __declspec(naked) int __cdecl AllocGraveyardField(int arg1)
 	}
 }
 
-int __cdecl AllocGraveyardField_unused(int arg1)
+int __cdecl AllocGraveyardField_unused(int building)
 {
 	unsigned int btype;
 	char* type_entry;
@@ -872,7 +872,7 @@ int __cdecl AllocGraveyardField_unused(int arg1)
 	char* eax_ptr;
 	char* ecx_ptr;
 
-	btype = *(unsigned char*) arg1;
+	btype = *(unsigned char*) building;
 	type_entry = (char*) (g_entity_type_table + btype + btype * 0x24c);
 	if (*type_entry != '\x1d') {
 		return 0;
@@ -896,7 +896,7 @@ int __cdecl AllocGraveyardField_unused(int arg1)
 		}
 	}
 
-	*(int*) result = *(int*) (arg1 + 1);
+	*(int*) result = *(int*) (building + 1);
 	*(int*) (result + 4) = (unsigned int) *(unsigned char*) (type_entry + 0x247);
 
 	/* allocate slot_1c: g_1002575c[tier] * 0x14 bytes */
@@ -992,7 +992,7 @@ int __cdecl AllocGraveyardField_unused(int arg1)
 			ecx_ptr = ecx_ptr + 0x88;
 			eax_ptr = eax_ptr + 0x14;
 		}
-		*(int*) (arg1 + 0x65) = (int) result;
+		*(int*) (building + 0x65) = (int) result;
 		return (int) result;
 	}
 
@@ -1025,7 +1025,7 @@ int __cdecl AllocGraveyardField_unused(int arg1)
 			ecx_ptr = ecx_ptr + 0x110;
 			eax_ptr = eax_ptr + 0x14;
 		}
-		*(int*) (arg1 + 0x65) = (int) result;
+		*(int*) (building + 0x65) = (int) result;
 		return (int) result;
 	}
 
@@ -1065,7 +1065,7 @@ int __cdecl AllocGraveyardField_unused(int arg1)
 		ecx_ptr = ecx_ptr + 0x220;
 		eax_ptr = eax_ptr + 0x14;
 	}
-	*(int*) (arg1 + 0x65) = (int) result;
+	*(int*) (building + 0x65) = (int) result;
 	return (int) result;
 
 cleanup:
