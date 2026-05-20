@@ -86,7 +86,7 @@ int __cdecl ahm_CheckFlag(char* p)
  * the alchemist's inventory, recipe knowledge, and links
  * to the employing building. */
 
-// FUNCTION: SERVER 0x1000bdf0
+// STUB: SERVER 0x1000bdf0
 // ahm_ExAllocAlchemist
 
 // DATA: SERVER 0x100a8c30
@@ -825,7 +825,7 @@ __declspec(naked) int __cdecl ahm_QueryEntityBuildingType(int param_1)
  * the command type and field count. Used for buffer allocation
  * and validation. */
 
-// FUNCTION: SERVER 0x1000c710
+// STUB: SERVER 0x1000c710
 // GetCommandPayloadSize
 
 /* TODO: Add extern declarations for globals and called functions */

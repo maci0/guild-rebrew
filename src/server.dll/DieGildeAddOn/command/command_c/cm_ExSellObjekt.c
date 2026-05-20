@@ -6,6 +6,7 @@ extern char g_currency_type_array[];
 extern char* g_unknown_1de450;
 extern unsigned char g_current_season;
 
+// SIZE 0x264264
 typedef struct {
 	unsigned int flags;
 	unsigned int id;
@@ -41,7 +42,7 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * to another. Handles object type validation, inventory transfers,
  * production slot updates, and building ownership changes. */
 
-// FUNCTION: SERVER 0x1000d930
+// STUB: SERVER 0x1000d930
 uint cm_ExSellObjekt(char* param_1, uchar* param_2)
 {
 	int amount;

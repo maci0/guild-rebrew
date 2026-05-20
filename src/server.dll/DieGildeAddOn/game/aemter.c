@@ -357,7 +357,7 @@ __declspec(naked) int __cdecl amt_ValidateCommand(char* param_1)
  * assigns benefits and duties to the new holder, and notifies
  * the game state of the change. */
 
-// FUNCTION: SERVER 0x1000b4d0
+// STUB: SERVER 0x1000b4d0
 // ExecuteOfficeAssignment
 
 /* Game function - entity role/assignment table manager */

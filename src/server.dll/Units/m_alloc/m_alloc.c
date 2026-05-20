@@ -41,7 +41,7 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
  * tracking: records source location string, updates group
  * counters, and maintains the allocation list. */
 
-// FUNCTION: SERVER 0x10006580
+// STUB: SERVER 0x10006580
 // m_AllocTracked
 
 void* __cdecl m_AllocTracked(unsigned int size, const char* source)
@@ -302,7 +302,7 @@ __declspec(naked) void __cdecl InitPacketPool(int param_1)
 /* Reports memory usage statistics for a named allocation group.
  * Logs count, total bytes, and peak usage to the log system. */
 
-// FUNCTION: SERVER 0x10006990
+// STUB: SERVER 0x10006990
 // ReportMemoryGroupInfo
 
 void __cdecl ReportMemoryGroupInfo(const char* param_1)

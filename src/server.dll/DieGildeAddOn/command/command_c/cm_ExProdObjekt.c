@@ -34,7 +34,7 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * message with entity lookup, object allocation/deallocation,
  * and inventory management for crafted goods. */
 
-// FUNCTION: SERVER 0x1000e140
+// STUB: SERVER 0x1000e140
 int __cdecl cm_ExProdObjekt(int msg, char* result)
 {
 	int quantity;

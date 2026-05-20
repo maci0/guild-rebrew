@@ -1104,7 +1104,7 @@ unsigned int ReadVfsData_unused(unsigned int* arg_8h, int arg_ch, int arg_10h, i
  * compression state (zlib), sets up buffering, and links
  * the stream into the open stream list. */
 
-// FUNCTION: SERVER 0x10009020
+// STUB: SERVER 0x10009020
 // OpenVfsStream
 
 /* Game function - compression stream initialization */

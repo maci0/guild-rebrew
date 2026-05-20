@@ -209,7 +209,7 @@ int __cdecl gm_DispatchCall(int param, DISPATCH_OBJ* obj)
  * Loads product definitions, recipes, and production chain
  * data from game files. */
 
-// FUNCTION: SERVER 0x100156c0
+// STUB: SERVER 0x100156c0
 // gm_InitObjektHersteller
 
 /* Game function - gm_InitObjektHersteller (initialize object manufacturers) */
@@ -806,7 +806,7 @@ __declspec(naked) int __cdecl gm_ResolveEntityById(void** dynamic, void** existi
  * are available for trade based on current building production
  * and inventory states. */
 
-// FUNCTION: SERVER 0x10015f70
+// STUB: SERVER 0x10015f70
 // gm_RefreshMarketAvailability
 
 void __cdecl gm_RefreshMarketAvailability(int param_1)
@@ -1047,7 +1047,7 @@ __declspec(naked) char* __cdecl gm_FindSlotById(int param_1, int param_2)
  * Advances the query iterator and returns the next entity
  * that matches the query criteria. */
 
-// FUNCTION: SERVER 0x10016290
+// STUB: SERVER 0x10016290
 // gm_NextEntityQueryMatch
 
 unsigned short __cdecl gm_GetEntityType(short* entity);
@@ -1179,7 +1179,7 @@ void* __cdecl gm_NextEntityQueryMatch(void)
  * parameters. Initializes the query state for iteration
  * via gm_NextEntityQueryMatch. Variadic args for filters. */
 
-// FUNCTION: SERVER 0x10016460
+// STUB: SERVER 0x10016460
 // gm_StartEntityQuery
 
 // DATA: SERVER 0x101de450
@@ -1560,7 +1560,7 @@ int __cdecl gm_FreeObjectListRecursive(char** head_ptr)
  * the object entry, sets type/quantity, and links it into
  * the entity's object chain. */
 
-// FUNCTION: SERVER 0x10016760
+// STUB: SERVER 0x10016760
 // gm_AllocObjekt
 
 char* __cdecl gm_AllocObjekt(int param_1, int param_2, int param_3)
@@ -2363,7 +2363,7 @@ MATCH:
  * parameters specify entity class, type, and owner
  * constraints. Returns first matching entity. */
 
-// FUNCTION: SERVER 0x100170e0
+// STUB: SERVER 0x100170e0
 // gm_StartFilteredEntitySearch
 
 // DATA: SERVER 0x100a8c30
@@ -2694,7 +2694,7 @@ __declspec(naked) void __cdecl gm_SetBuildingWorkerLimits(unsigned char* param_1
  * building struct, sets type, initializes production and
  * storage, and links to the town. */
 
-// FUNCTION: SERVER 0x100174d0
+// STUB: SERVER 0x100174d0
 // gm_AllocGebaeude
 
 // DATA: SERVER 0x100a8c30
@@ -3136,7 +3136,7 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* param_1, unsigned short param
  * Populates a building's slots with initial entities based
  * on the building type definition. */
 
-// FUNCTION: SERVER 0x10017c40
+// STUB: SERVER 0x10017c40
 // gm_AllocBuildingContents
 
 int __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
@@ -3943,7 +3943,7 @@ short* __cdecl gm_GetEntityTableEntry(char* param)
  * entity identity between two IDs, updating all back-
  * references in buildings and citizens. */
 
-// FUNCTION: SERVER 0x10018530
+// STUB: SERVER 0x10018530
 // gm_ChangePlayerIdentityImpl
 
 int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
@@ -4098,7 +4098,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int param_1, int param_2)
  * inherited stats by blending parent attributes with random
  * variation. Core genetic system for citizen creation. */
 
-// FUNCTION: SERVER 0x10018850
+// STUB: SERVER 0x10018850
 // gm_CreateEntityFromParents
 
 int __cdecl gm_CreateEntityFromParents(int param_1, int param_2, int param_3, int param_4, int param_5)

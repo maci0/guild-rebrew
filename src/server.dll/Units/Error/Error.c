@@ -93,7 +93,7 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
  * minidump file with module info and stack trace when the
  * process crashes. */
 
-// FUNCTION: SERVER 0x10002770
+// STUB: SERVER 0x10002770
 // CrashDumpUnhandledExceptionFilter
 
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)

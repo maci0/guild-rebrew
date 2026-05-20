@@ -3136,7 +3136,7 @@ unsigned int gv_MoveSlotEntry_unused(int param_1)
 /* Allocates a graveyard worker entity. Creates the worker,
  * assigns to a building, and initializes work schedule. */
 
-// FUNCTION: SERVER 0x10011bf0
+// STUB: SERVER 0x10011bf0
 // gv_ExAllocGraveyardWorker
 
 unsigned int __cdecl gv_ExAllocGraveyardWorker(int param_1)

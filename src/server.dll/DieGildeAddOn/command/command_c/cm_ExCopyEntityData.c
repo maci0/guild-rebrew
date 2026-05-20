@@ -9,7 +9,7 @@ extern char g_relationship_matrix_secondary[];
  * payload into a resolved entity's memory. Used for bulk entity
  * state synchronization across network. */
 
-// FUNCTION: SERVER 0x1000ec00
+// STUB: SERVER 0x1000ec00
 int __cdecl cm_ExCopyEntityData(int cmd_ptr, char* response)
 {
 	int rel_value;

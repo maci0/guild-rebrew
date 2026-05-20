@@ -224,7 +224,7 @@ __declspec(naked) int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned
  * ready state changes, chat, and game start requests.
  * Main command dispatcher for the pre-game lobby phase. */
 
-// FUNCTION: SERVER 0x100147b0
+// STUB: SERVER 0x100147b0
 // lb_HandleLobbyCommands
 
 /* Game function - handles player join request (lobbycommands.c) */

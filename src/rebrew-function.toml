@@ -461,7 +461,7 @@ blocker_delta = 922
 
 ["SERVER.0x1000e530"]
 size = 352
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000e690"]
 size = 191
@@ -477,7 +477,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000e8d0"]
 size = 240
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000e9c0"]
 size = 214
@@ -503,11 +503,11 @@ status = "PROVEN"
 
 ["SERVER.0x1000efb0"]
 size = 122
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000f030"]
 size = 72
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000f080"]
 size = 26
@@ -519,7 +519,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000f0d0"]
 size = 197
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000f1a0"]
 size = 327
@@ -544,11 +544,11 @@ status = "RELOC"
 
 ["SERVER.0x1000f590"]
 size = 237
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000f680"]
 size = 171
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000f730"]
 size = 515
@@ -585,12 +585,11 @@ status = "EXACT"
 
 ["SERVER.0x1000fc10"]
 size = 308
-status = "RELOC"
-blocker_delta = 209
+status = "PROVEN"
 
 ["SERVER.0x1000fd50"]
 size = 445
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000ff10"]
 size = 22
@@ -602,7 +601,7 @@ status = "RELOC"
 
 ["SERVER.0x1000ff60"]
 size = 82
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000ffc0"]
 size = 70
@@ -618,7 +617,7 @@ status = "RELOC"
 
 ["SERVER.0x100100a0"]
 size = 159
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10010140"]
 size = 280

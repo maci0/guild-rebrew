@@ -110,7 +110,7 @@ void __cdecl Exit(void)
  * initializes systems, accepts connections, processes
  * commands, advances simulation, and handles I/O. */
 
-// FUNCTION: SERVER 0x100093a0
+// STUB: SERVER 0x100093a0
 // ServerMainThread
 
 int __cdecl ServerMainThread(void* lpThreadParameter)
@@ -1315,7 +1315,7 @@ int __cdecl SendPlayerData(unsigned int* param_1)
  * Reads incoming packets, reassembles fragmented data, and
  * dispatches complete commands for processing. */
 
-// FUNCTION: SERVER 0x1000a570
+// STUB: SERVER 0x1000a570
 // ProcessReceiveData
 
 // DATA: SERVER 0x101deac0
@@ -1623,7 +1623,7 @@ void __cdecl list_unlink_relink(char* ctx, char* node)
  * command, dispatches to the appropriate Chk/Ex handler
  * pair, and writes response data back to clients. */
 
-// FUNCTION: SERVER 0x1000aac0
+// STUB: SERVER 0x1000aac0
 // cm_ProcessCommandQueue
 
 int __cdecl cm_ProcessCommandQueue(void)

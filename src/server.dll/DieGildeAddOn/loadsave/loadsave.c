@@ -806,7 +806,7 @@ __declspec(naked) int __cdecl ls_LoadExistingEntities(int param_1)
  * building type, owner, upgrade level, and production
  * state for each building entity. */
 
-// FUNCTION: SERVER 0x100128f0
+// STUB: SERVER 0x100128f0
 // ls_LoadBuildingEntityState
 
 unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
@@ -1067,7 +1067,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int param_1)
 /* Loads dynamic (non-building) entities from a save file.
  * Reads citizens, objects, and transient game entities. */
 
-// FUNCTION: SERVER 0x10012eb0
+// STUB: SERVER 0x10012eb0
 // ls_LoadDynamicEntities
 
 /* Game function - reads entity data records from VFS file */
@@ -1200,7 +1200,7 @@ int __cdecl ls_LoadDynamicEntities(void* file)
  * types from a save file in the correct order (buildings
  * first, then citizens, then objects). */
 
-// FUNCTION: SERVER 0x10013230
+// STUB: SERVER 0x10013230
 // ls_LoadEntities
 
 // DATA: SERVER 0x1002d4ec
@@ -1559,7 +1559,7 @@ int __cdecl ls_LoadEntities(int param_1)
  * treasury, population, building counts, and political
  * state (offices, elections). */
 
-// FUNCTION: SERVER 0x10013b10
+// STUB: SERVER 0x10013b10
 // ls_LoadTownData
 
 int __cdecl ls_LoadTownData(int file)
@@ -2013,7 +2013,7 @@ __declspec(naked) unsigned int ls_ID2Ptr(void)
  * Called during lobby-to-game transition to receive the
  * savegame data stream and initialize the game world. */
 
-// FUNCTION: SERVER 0x10014260
+// STUB: SERVER 0x10014260
 // srv_RecvGame
 
 int srv_RecvGame(void)
