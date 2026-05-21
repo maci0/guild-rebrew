@@ -17,12 +17,7 @@ extern int g_stat3;
 extern int g_stat4;
 extern int g_alloc_counter;
 extern void* g_array_ptr;
-void __cdecl m_FreeHeapLocked(void* ptr);
-void __cdecl ReportMemoryGroupInfo(const char* toggle);
 void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
-void __cdecl m_FreeTracked(void*);
-extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
-
 ;
 ;
 ;

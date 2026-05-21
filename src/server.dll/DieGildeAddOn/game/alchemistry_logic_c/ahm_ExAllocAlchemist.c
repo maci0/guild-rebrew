@@ -11,14 +11,10 @@ int __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl gm_AddOrAccumulateObject(int p1, int p2, int p3);
 int __cdecl gm_RefreshMarketAvailability(int season);
-int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl gm_DeallocEntity(unsigned int index, int param);
-void* __cdecl gm_NextEntityQueryMatch(void);
 extern float fColorScale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
 extern double dScaleFactor;
-int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
 extern int g_entity_type_table;

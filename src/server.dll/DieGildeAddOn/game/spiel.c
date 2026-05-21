@@ -29,10 +29,7 @@ typedef struct {
 
 extern char* g_entity_table; /* 0x101de450 */
 ;
-void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
-int __cdecl _getpid(void);
-void __cdecl vfs_EntityCleanup(char*);
 extern unsigned short* g_query_base;
 extern int g_query_limit;
 extern Record* g_records;

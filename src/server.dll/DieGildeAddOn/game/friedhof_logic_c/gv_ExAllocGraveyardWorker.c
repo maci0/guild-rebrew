@@ -11,7 +11,6 @@ extern int g_slot_count_cat0[]; /* 0x1002577c */
 extern int g_slot_count_cat1[]; /* 0x1002578c */
 extern int g_slot_count_cat2[]; /* 0x1002579c */
 extern int g_slot_count_cat3[]; /* 0x100257ac */
-int __cdecl cm_GetBuildingStatCount(unsigned char*);
 char* __cdecl gv_FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
 int __cdecl gm_RandomMod(int);
 extern unsigned int __ftol(void);
@@ -19,9 +18,6 @@ int AllocGraveyardField(int);
 void gv_Free3Fields(char*);
 int __cdecl gm_ResolveEntityById(void** out_slot, void** out_person, void** out_building, int entity_id);
 int __cdecl gv_GetSlotEntry(int, int, unsigned char);
-int __cdecl gm_SubObjektNoKill(int, int, int);
-void* __cdecl gm_AddOrAccumulateObject(int, int, int);
-void __cdecl game_free(void*);
 extern int g_entity_table_end;
 extern char* g_slot_table;
 int SpawnGraveyardEntities(unsigned char*, int);

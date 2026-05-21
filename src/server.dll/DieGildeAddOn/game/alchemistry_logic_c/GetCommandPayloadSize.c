@@ -1,19 +1,8 @@
 #include <string.h>
-int __cdecl __ftol(void);
-
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
-int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
-int __cdecl gm_RandomMod(int range);
-float __cdecl gm_RandomFloat01(void);
-void __cdecl gm_AddOrAccumulateObject(int p1, int p2, int p3);
-int __cdecl gm_RefreshMarketAvailability(int season);
-int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl gm_DeallocEntity(unsigned int index, int param);
-void* __cdecl gm_NextEntityQueryMatch(void);
 extern float fColorScale;
 extern double dScaleFactor;
-int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
 // SIZE 0x8

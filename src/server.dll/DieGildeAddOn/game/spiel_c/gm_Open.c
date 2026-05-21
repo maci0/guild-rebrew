@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-int __cdecl __ftol(void);
-
 typedef int(__cdecl* ALLOCFN)(int, int, int);
 
 #pragma intrinsic(memcpy, memset)
@@ -32,17 +30,8 @@ extern char* g_entity_table; /* 0x101de450 */
 void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
 int __cdecl _getpid(void);
-void __cdecl vfs_EntityCleanup(char*);
-void __cdecl free_block(int);
 extern int g_entity_type_table;
 extern char* g_item_def_table;
-void* __cdecl FindNextFilteredEntity(void);
-int __cdecl gm_CleanupBuildingEntity(unsigned char*);
-void* __cdecl gm_NextEntityQueryMatch(void);
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
-unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-char* __cdecl gm_AllocObjekt(int, int, int);
-
 extern int g_1014d8c0;
 extern int g_100a8c34;
 extern int g_100a8cf8;

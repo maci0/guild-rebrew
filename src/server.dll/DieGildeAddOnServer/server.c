@@ -10,9 +10,6 @@ unsigned int __stdcall timeGetTime(void);
 /* Command layer (local externs — server.c uses different signatures) */
 int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
 int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
-int __cdecl cm_ProcessCommandQueue(void);
-int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
-
 /* Entity lifecycle (local externs) */
 void __cdecl gm_ResetAllEntities(void);
 void __cdecl gm_CleanupAllEntities(void);
@@ -21,10 +18,8 @@ void __cdecl gm_InitEntitySlots(void);
 /* Network functions (local externs — signatures differ from net.h) */
 int __cdecl AcceptConnections(void);
 void __cdecl CleanupSockets(void);
-int __cdecl ProcessReceiveData(void);
 int __cdecl ProcessSendData(void);
 int __cdecl ReceivePacketHeader(unsigned int* conn);
-int __cdecl SendBroadcastPacket(unsigned char* data, int size);
 void __cdecl LogWinsockError(int err_code);
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
@@ -32,14 +27,9 @@ typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 extern DWORD WINAPI thread_proc(LPVOID);
 extern int g_stop_flag;
 void __cdecl InitBuildingTypeTable(void);
-void __cdecl RecvGameSavegame(void);
 int __cdecl srv_Init(void);
-int __cdecl AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
-void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10);
-void __cdecl _seterrormode(int value);
 void __cdecl ShutdownMemoryAllocator();
 int __cdecl gm_Open(char*, char*);
-int __cdecl sub_1001a299(char*, char*);
 int __cdecl CreateListenSocket(int port);
 void __cdecl InitPacketPool(int);
 extern int g_net_socket;
@@ -49,7 +39,6 @@ int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /
 int __cdecl SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
 short __cdecl get_command_type(char*);
-int __cdecl ahm_ProcessEntityChain(unsigned char* node);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 ;
 extern unsigned char g_connections[]; /* 0x101deb00 */

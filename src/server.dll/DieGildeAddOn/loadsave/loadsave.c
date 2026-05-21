@@ -14,7 +14,6 @@ extern void gm_AddOrAccumulateObject(int, int, int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_save_version;
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
-int __cdecl ahm_AllocAhmInfo(int building, int slot);
 extern int g_file_version; /* 0x1002d4ec */
 ;
 extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */

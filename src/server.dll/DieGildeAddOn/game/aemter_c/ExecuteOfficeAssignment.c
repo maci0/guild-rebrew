@@ -25,9 +25,6 @@ typedef struct {
 
 extern OfficeSlot g_office_slots[];
 void* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
-void __cdecl InitBuildingTypeTable(void);
-
 /* Validates if an entity is eligible for an office position.
  * Checks entity type, existing office holdings, and eligibility
  * requirements. Returns 0 on success, non-zero on failure. */

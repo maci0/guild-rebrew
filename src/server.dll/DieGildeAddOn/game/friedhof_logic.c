@@ -30,8 +30,6 @@ void __cdecl game_free(void*);
 extern int g_entity_table_end;
 extern char* g_slot_table;
 int SpawnGraveyardEntities(unsigned char*, int);
-double __cdecl gm_RandomFloat01(void);
-
 /* Checks if a production slot in a building is active.
  * Returns non-zero if the slot at the given index has
  * an assigned worker or active production. */
