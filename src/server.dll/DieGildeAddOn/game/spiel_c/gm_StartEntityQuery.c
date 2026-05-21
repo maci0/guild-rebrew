@@ -34,7 +34,7 @@ void __cdecl gm_InitEntitySlots(void);
 int __cdecl _getpid(void);
 extern char* g_entity_ptr;
 void __cdecl vfs_EntityCleanup(char*);
-extern unsigned short* DAT_100a8c34;
+extern unsigned short* g_query_base;
 extern int DAT_10035450;
 extern Record* g_records;
 void __cdecl free_block(int);
@@ -43,10 +43,10 @@ extern int g_data_ptr2;
 extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
-extern unsigned char* DAT_1014d8c0;
+extern unsigned char* g_entity_array_ptr;
 extern int g_entity_type_table;
 extern unsigned char g_current_season;
-extern int DAT_1003543c;
+extern int g_active_player_count;
 extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
@@ -54,19 +54,19 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
-extern WORD* DAT_10035468;
-extern char DAT_10035454;
-extern char DAT_1003545d;
-extern int DAT_10035458;
-extern int DAT_10030b94;
-extern int DAT_10030b98;
-extern short DAT_10030b9c;
-extern char DAT_10030b9e;
-extern char DAT_1003545c;
-extern char DAT_1003545e;
-extern int DAT_100a8c38;
-extern int* DAT_101398a0;
-extern int* DAT_1013989c;
+extern WORD* g_query_cursor;
+extern char g_query_active;
+extern char g_query_flag2;
+extern int g_query_count;
+extern int g_query_filter_max_id;
+extern int g_query_filter_owner;
+extern short g_query_filter_type;
+extern char g_query_filter_state;
+extern char g_query_flag1;
+extern char g_query_flag3;
+extern int g_query_match_count;
+extern int* g_dispatch_table_b;
+extern int* g_dispatch_table_a;
 extern char* g_array_base;
 
 // STUB: SERVER 0x10016460
@@ -86,16 +86,16 @@ unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int
 	flag1 = 0;
 	flag2 = 0;
 
-	DAT_10030b94 = 0x7fff;
-	DAT_10030b98 = -1;
-	DAT_10030b9c = (short) 0xffff;
-	DAT_10030b9e = (char) 0xff;
-	DAT_1003545e = 0;
-	DAT_1003545c = flag1;
-	DAT_1003545d = flag2;
-	DAT_10035454 = 1;
-	DAT_10035458 = 0;
-	DAT_100a8c38 = 0;
+	g_query_filter_max_id = 0x7fff;
+	g_query_filter_owner = -1;
+	g_query_filter_type = (short) 0xffff;
+	g_query_filter_state = (char) 0xff;
+	g_query_flag3 = 0;
+	g_query_flag1 = flag1;
+	g_query_flag2 = flag2;
+	g_query_active = 1;
+	g_query_count = 0;
+	g_query_match_count = 0;
 
 	if (arg_count > 0) {
 		arg_ptr = &first_arg;
@@ -107,22 +107,22 @@ unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int
 			switch (ftype) {
 			case 0:
 				arg_ptr++;
-				DAT_10030b94 = *(unsigned short*) arg_ptr;
+				g_query_filter_max_id = *(unsigned short*) arg_ptr;
 				break;
 			case 1:
-				DAT_10030b98 = *(arg_ptr + 1);
+				g_query_filter_owner = *(arg_ptr + 1);
 				arg_ptr++;
 				break;
 			case 2:
-				DAT_10030b9c = *(short*) (arg_ptr + 1);
+				g_query_filter_type = *(short*) (arg_ptr + 1);
 				arg_ptr++;
 				break;
 			case 3:
-				DAT_10030b9e = *(char*) (arg_ptr + 1);
+				g_query_filter_state = *(char*) (arg_ptr + 1);
 				arg_ptr++;
 				break;
 			case 4:
-				DAT_1003545e = 1;
+				g_query_flag3 = 1;
 				break;
 			case 5:
 				flag2 = 1;
@@ -135,8 +135,8 @@ unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int
 			}
 		}
 
-		DAT_1003545c = flag1;
-		DAT_1003545d = flag2;
+		g_query_flag1 = flag1;
+		g_query_flag2 = flag2;
 
 		if (flag1 == 0) {
 			goto check_container;
@@ -147,13 +147,13 @@ unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int
 			return (unsigned short*) 0;
 		}
 
-		DAT_10035468 = DAT_100a8c34;
+		g_query_cursor = g_query_base;
 		return gm_NextEntityQueryMatch();
 	}
 
 check_container:
 	if (container_id != 0) {
-		DAT_10035468 = DAT_100a8c34;
+		g_query_cursor = g_query_base;
 		return gm_NextEntityQueryMatch();
 	}
 

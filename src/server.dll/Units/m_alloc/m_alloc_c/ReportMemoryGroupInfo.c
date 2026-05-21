@@ -15,7 +15,7 @@ extern int g_stat1;
 extern int g_stat2;
 extern int g_stat3;
 extern int g_stat4;
-extern int DAT_10034638;
+extern int g_alloc_counter;
 extern void* g_array_ptr;
 void __cdecl m_FreeHeapLocked(void* ptr);
 extern int DAT_117640b4;

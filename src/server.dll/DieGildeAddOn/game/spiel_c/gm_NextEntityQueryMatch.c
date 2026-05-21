@@ -34,7 +34,7 @@ void __cdecl gm_InitEntitySlots(void);
 int __cdecl _getpid(void);
 extern char* g_entity_ptr;
 void __cdecl vfs_EntityCleanup(char*);
-extern unsigned short* DAT_100a8c34;
+extern unsigned short* g_query_base;
 extern int DAT_10035450;
 extern Record* g_records;
 void __cdecl free_block(int);
@@ -43,10 +43,10 @@ extern int g_data_ptr2;
 extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
-extern unsigned char* DAT_1014d8c0;
+extern unsigned char* g_entity_array_ptr;
 extern int g_entity_type_table;
 extern unsigned char g_current_season;
-extern int DAT_1003543c;
+extern int g_active_player_count;
 extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
@@ -54,19 +54,19 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
-extern WORD* DAT_10035468;
-extern char DAT_10035454;
-extern char DAT_1003545d;
-extern int DAT_10035458;
-extern int DAT_10030b94;
-extern int DAT_10030b98;
-extern short DAT_10030b9c;
-extern char DAT_10030b9e;
-extern char DAT_1003545c;
-extern char DAT_1003545e;
-extern int DAT_100a8c38;
-extern int* DAT_101398a0;
-extern int* DAT_1013989c;
+extern WORD* g_query_cursor;
+extern char g_query_active;
+extern char g_query_flag2;
+extern int g_query_count;
+extern int g_query_filter_max_id;
+extern int g_query_filter_owner;
+extern short g_query_filter_type;
+extern char g_query_filter_state;
+extern char g_query_flag1;
+extern char g_query_flag3;
+extern int g_query_match_count;
+extern int* g_dispatch_table_b;
+extern int* g_dispatch_table_a;
 extern char* g_array_base;
 
 // STUB: SERVER 0x10016290
@@ -86,24 +86,24 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 	int is_match;
 	WORD entry_val;
 
-	current = DAT_10035468;
+	current = g_query_cursor;
 	matched_ent = (unsigned short*) 0x0;
 	is_match = 0;
 
-	if (DAT_10035468 == (WORD*) 0x0) {
+	if (g_query_cursor == (WORD*) 0x0) {
 		return (void*) 0x0;
 	}
 
-	if ((DAT_10035454 != '\0') && (DAT_10035454 = '\0', DAT_1003545d != '\0') &&
-		(*(int*) ((int) DAT_10035468 + 10) != 0)) {
-		*(int*) (&DAT_101398a0 + DAT_100a8c38 * 4) = *(int*) (DAT_10035468 + 10);
-		DAT_100a8c38 = DAT_100a8c38 + 1;
+	if ((g_query_active != '\0') && (g_query_active = '\0', g_query_flag2 != '\0') &&
+		(*(int*) ((int) g_query_cursor + 10) != 0)) {
+		*(int*) (&g_dispatch_table_b + g_query_match_count * 4) = *(int*) (g_query_cursor + 10);
+		g_query_match_count = g_query_match_count + 1;
 	}
 
-	stack_depth = DAT_100a8c38;
-	filter_type_cache = DAT_10030b9c;
+	stack_depth = g_query_match_count;
+	filter_type_cache = g_query_filter_type;
 
-	if (DAT_10035458 < DAT_10035450) {
+	if (g_query_count < DAT_10035450) {
 		do {
 			if (current == (WORD*) 0x0) {
 				return matched_ent;
@@ -113,43 +113,43 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 			}
 			entry_val = *current;
 			candidate_ptr = current;
-			scan_ptr = DAT_10035468;
+			scan_ptr = g_query_cursor;
 
-			while (DAT_10035468 = candidate_ptr, entry_val == 0) {
-				scan_ptr = (unsigned short*) ((int) DAT_10035468 + 0x43);
+			while (g_query_cursor = candidate_ptr, entry_val == 0) {
+				scan_ptr = (unsigned short*) ((int) g_query_cursor + 0x43);
 				entry_val = *scan_ptr;
 				candidate_ptr = scan_ptr;
 			}
 
-			if (DAT_1003545e != '\0') {
+			if (g_query_flag3 != '\0') {
 				is_match = 1;
 			}
 
-			if (DAT_10030b94 == 0x7fff) {
-				if (DAT_10030b98 != -1) {
-					if (*(int*) (DAT_10035468 + 1) != DAT_10030b98) {
+			if (g_query_filter_max_id == 0x7fff) {
+				if (g_query_filter_owner != -1) {
+					if (*(int*) (g_query_cursor + 1) != g_query_filter_owner) {
 						goto LAB_10016382;
 					}
 					is_match = 1;
 				}
 				if (filter_type_cache != -1) {
-					candidate_ptr = DAT_10035468;
-					DAT_10035468 = scan_ptr;
+					candidate_ptr = g_query_cursor;
+					g_query_cursor = scan_ptr;
 					entity_type_result = gm_GetEntityType(candidate_ptr);
-					stack_depth = DAT_100a8c38;
-					filter_type_cache = DAT_10030b9c;
-					if (entity_type_result != DAT_10030b9c) {
+					stack_depth = g_query_match_count;
+					filter_type_cache = g_query_filter_type;
+					if (entity_type_result != g_query_filter_type) {
 						is_match = 0;
 						goto LAB_100163bc;
 					}
 					is_match = 1;
 				}
-				if (DAT_10030b9e != -1) {
-					is_match = *(char*) (g_game_initialized + (unsigned int) *DAT_10035468 * 0x41) == DAT_10030b9e;
+				if (g_query_filter_state != -1) {
+					is_match = *(char*) (g_game_initialized + (unsigned int) *g_query_cursor * 0x41) == g_query_filter_state;
 				}
 			}
 			else {
-				if (*DAT_10035468 == DAT_10030b94) {
+				if (*g_query_cursor == g_query_filter_max_id) {
 					is_match = 1;
 					goto check_filters;
 				}
@@ -158,40 +158,40 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 			}
 		LAB_100163bc:
 		check_filters:
-			if (DAT_1003545c == '\0') {
+			if (g_query_flag1 == '\0') {
 				if (is_match) {
-					matched_ent = DAT_10035468;
+					matched_ent = g_query_cursor;
 				}
-				current = *(unsigned short**) ((int) DAT_10035468 + 0x3f);
-				DAT_10035468 = current;
+				current = *(unsigned short**) ((int) g_query_cursor + 0x3f);
+				g_query_cursor = current;
 				if (current == (WORD*) 0x0) {
-					if ((DAT_1003545d != '\0') && (stack_depth != 0)) {
-						current = *(unsigned short**) (&DAT_1013989c + stack_depth * 4);
+					if ((g_query_flag2 != '\0') && (stack_depth != 0)) {
+						current = *(unsigned short**) (&g_dispatch_table_a + stack_depth * 4);
 						stack_depth = stack_depth - 1;
-						DAT_10035468 = current;
-						DAT_100a8c38 = stack_depth;
+						g_query_cursor = current;
+						g_query_match_count = stack_depth;
 						if (*(int*) (current + 10) != 0) {
-							*(int*) (&DAT_101398a0 + stack_depth * 4) = *(int*) (current + 10);
+							*(int*) (&g_dispatch_table_b + stack_depth * 4) = *(int*) (current + 10);
 							goto LAB_1001643e;
 						}
 					}
 				}
-				else if ((*(int*) (current + 10) != 0) && (DAT_1003545d != '\0')) {
-					*(int*) (&DAT_101398a0 + stack_depth * 4) = *(int*) (current + 10);
+				else if ((*(int*) (current + 10) != 0) && (g_query_flag2 != '\0')) {
+					*(int*) (&g_dispatch_table_b + stack_depth * 4) = *(int*) (current + 10);
 				LAB_1001643e:
 					stack_depth = stack_depth + 1;
-					DAT_100a8c38 = stack_depth;
+					g_query_match_count = stack_depth;
 				}
 			}
 			else {
 				if (is_match) {
-					matched_ent = DAT_10035468;
+					matched_ent = g_query_cursor;
 				}
-				current = (unsigned short*) ((int) DAT_10035468 + 0x43);
-				DAT_10035458 = DAT_10035458 + 1;
-				DAT_10035468 = current;
+				current = (unsigned short*) ((int) g_query_cursor + 0x43);
+				g_query_count = g_query_count + 1;
+				g_query_cursor = current;
 			}
-		} while (DAT_10035458 < DAT_10035450);
+		} while (g_query_count < DAT_10035450);
 	}
 
 	return matched_ent;

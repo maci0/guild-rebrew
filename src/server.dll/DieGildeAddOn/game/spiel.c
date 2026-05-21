@@ -34,7 +34,7 @@ void __cdecl gm_InitEntitySlots(void);
 int __cdecl _getpid(void);
 extern char* g_entity_ptr;
 void __cdecl vfs_EntityCleanup(char*);
-extern unsigned short* DAT_100a8c34;
+extern unsigned short* g_query_base;
 extern int DAT_10035450;
 extern Record* g_records;
 void __cdecl free_block(int);
@@ -43,10 +43,10 @@ extern int g_data_ptr2;
 extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
-extern unsigned char* DAT_1014d8c0;
+extern unsigned char* g_entity_array_ptr;
 extern int g_entity_type_table;
 extern unsigned char g_current_season;
-extern int DAT_1003543c;
+extern int g_active_player_count;
 extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
@@ -54,19 +54,19 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
-extern WORD* DAT_10035468;
-extern char DAT_10035454;
-extern char DAT_1003545d;
-extern int DAT_10035458;
-extern int DAT_10030b94;
-extern int DAT_10030b98;
-extern short DAT_10030b9c;
-extern char DAT_10030b9e;
-extern char DAT_1003545c;
-extern char DAT_1003545e;
-extern int DAT_100a8c38;
-extern int* DAT_101398a0;
-extern int* DAT_1013989c;
+extern unsigned short* g_query_cursor;
+extern char g_query_active;
+extern char g_query_flag2;
+extern int g_query_count;
+extern int g_query_filter_max_id;
+extern int g_query_filter_owner;
+extern short g_query_filter_type;
+extern char g_query_filter_state;
+extern char g_query_flag1;
+extern char g_query_flag3;
+extern int g_query_match_count;
+extern int* g_dispatch_table_b;
+extern int* g_dispatch_table_a;
 extern char* g_array_base;
 // DATA: SERVER 0x100358a0
 extern char g_entity_array[];
@@ -262,7 +262,7 @@ __declspec(naked) void __cdecl gm_CleanupObjectEntities(void)
 		push edi
 		xor esi, esi
 	L_top:
-		mov eax, dword ptr [DAT_100a8c34]
+		mov eax, dword ptr [g_query_base]
 		cmp word ptr [esi + eax], 0
 		je L_next
 		mov eax, dword ptr [esi + eax + 6]
@@ -294,7 +294,7 @@ __declspec(naked) void __cdecl gm_CleanupObjectEntities(void)
 	L_test_head:
 		test eax, eax
 		je L_cleanup
-		mov edx, dword ptr [DAT_100a8c34]
+		mov edx, dword ptr [g_query_base]
 		xor ecx, ecx
 		mov cx, word ptr [esi + edx]
 		push ecx
@@ -303,11 +303,11 @@ __declspec(naked) void __cdecl gm_CleanupObjectEntities(void)
 		add esp, 8
 		jmp L_next
 	L_cleanup:
-		mov eax, dword ptr [DAT_100a8c34]
+		mov eax, dword ptr [g_query_base]
 		lea ecx, [esi + eax]
 		push ecx
 		call gm_NoopRet2
-		mov edx, dword ptr [DAT_100a8c34]
+		mov edx, dword ptr [g_query_base]
 		add esp, 4
 		mov word ptr [esi + edx], 0
 		mov eax, dword ptr [DAT_10035450]
@@ -317,7 +317,7 @@ __declspec(naked) void __cdecl gm_CleanupObjectEntities(void)
 		add esi, 0x43
 		cmp esi, 0x14f218
 		jl L_top
-		mov edi, dword ptr [DAT_100a8c34]
+		mov edi, dword ptr [g_query_base]
 		mov ecx, 0x53c86
 		xor eax, eax
 		rep stosd
@@ -572,28 +572,20 @@ __declspec(naked) char* __cdecl gm_FindSlotById(int arg1, int arg2)
  * that matches the query criteria. */
 
 // DATA: SERVER 0x10030b9e
-extern char DAT_10030b9e;
 
 // DATA: SERVER 0x1003545e
-extern char DAT_1003545e;
 
 // DATA: SERVER 0x1003545c
-extern char DAT_1003545c;
 
 // DATA: SERVER 0x1003545d
-extern char DAT_1003545d;
 
 // DATA: SERVER 0x10035454
-extern char DAT_10035454;
 
 // DATA: SERVER 0x10035458
-extern int DAT_10035458;
 
 // DATA: SERVER 0x100a8c38
-extern int DAT_100a8c38;
 
 // DATA: SERVER 0x10035468
-extern unsigned short* DAT_10035468;
 
 // FUNCTION: SERVER 0x100165A0
 // gm_AllocateObjectSlot
@@ -1464,7 +1456,7 @@ extern int DAT_1003544c;
 extern char DAT_10035448;
 
 // DATA: SERVER 0x10035464
-extern unsigned char* DAT_10035464;
+extern unsigned char* g_query_filter_base;
 
 // FUNCTION: SERVER 0x10017210
 // gm_SearchStruct

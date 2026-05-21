@@ -115,8 +115,9 @@ section = ".data"
 type = "char*"
 
 ["SERVER.0x1014d8c0"]
-name = "g_1014d8c0"
+name = "g_entity_array_ptr"
 section = ".data"
+type = "unsigned char*"
 
 ["SERVER.0x101de450"]
 name = "g_item_def_table"
@@ -124,8 +125,9 @@ section = ".data"
 type = "char*"
 
 ["SERVER.0x100a8c34"]
-name = "g_100a8c34"
+name = "g_query_base"
 section = ".data"
+type = "unsigned short*"
 
 ["SERVER.0x100a8cf8"]
 name = "g_100a8cf8"
@@ -146,30 +148,48 @@ type = "char*"
 
 ["SERVER.0x10030b98"]
 section = ".data"
+name = "g_query_filter_owner"
+type = "int"
 
 ["SERVER.0x10030b9e"]
 section = ".data"
+name = "g_query_filter_state"
+type = "char"
 
 ["SERVER.0x1003545e"]
 section = ".data"
+name = "g_query_flag3"
+type = "char"
 
 ["SERVER.0x1003545c"]
 section = ".data"
+name = "g_query_flag1"
+type = "char"
 
 ["SERVER.0x1003545d"]
 section = ".data"
+name = "g_query_flag2"
+type = "char"
 
 ["SERVER.0x10035454"]
 section = ".data"
+name = "g_query_active"
+type = "char"
 
 ["SERVER.0x10035458"]
 section = ".data"
+name = "g_query_count"
+type = "int"
 
 ["SERVER.0x100a8c38"]
 section = ".data"
+name = "g_query_match_count"
+type = "int"
 
 ["SERVER.0x10035468"]
 section = ".data"
+name = "g_query_cursor"
+type = "unsigned short*"
 
 ["SERVER.0x10030b8c"]
 section = ".data"
@@ -200,6 +220,8 @@ section = ".data"
 
 ["SERVER.0x10035464"]
 section = ".data"
+name = "g_query_filter_base"
+type = "unsigned char*"
 
 ["SERVER.0x10035880"]
 name = "g_current_year"
@@ -340,3 +362,27 @@ type = "int"
 name = "g_stream_pool"
 section = ".data"
 type = "char"
+
+["SERVER.0x10030b94"]
+name = "g_query_filter_max_id"
+type = "int"
+
+["SERVER.0x10030b9c"]
+name = "g_query_filter_type"
+type = "short"
+
+["SERVER.0x1003543c"]
+name = "g_active_player_count"
+type = "int"
+
+["SERVER.0x101398a0"]
+name = "g_dispatch_table_b"
+type = "int*"
+
+["SERVER.0x1013989c"]
+name = "g_dispatch_table_a"
+type = "int*"
+
+["SERVER.0x10034638"]
+name = "g_alloc_counter"
+type = "int"

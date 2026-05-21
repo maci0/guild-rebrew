@@ -15,7 +15,7 @@ extern int g_stat1;
 extern int g_stat2;
 extern int g_stat3;
 extern int g_stat4;
-extern int DAT_10034638;
+extern int g_alloc_counter;
 extern void* g_array_ptr;
 void __cdecl m_FreeHeapLocked(void* ptr);
 extern int DAT_117640b4;
@@ -62,7 +62,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* source)
 	if (size == 0) {
 		return 0;
 	}
-	DAT_10034638 = DAT_10034638 + 1;
+	g_alloc_counter = g_alloc_counter + 1;
 	group = (char*) 0x117640a0;
 	if (source != 0) {
 		int nameLen;

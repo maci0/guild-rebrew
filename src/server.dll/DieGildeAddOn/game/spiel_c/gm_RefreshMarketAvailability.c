@@ -34,7 +34,7 @@ void __cdecl gm_InitEntitySlots(void);
 int __cdecl _getpid(void);
 extern char* g_entity_ptr;
 void __cdecl vfs_EntityCleanup(char*);
-extern unsigned short* DAT_100a8c34;
+extern unsigned short* g_query_base;
 extern int DAT_10035450;
 extern Record* g_records;
 void __cdecl free_block(int);
@@ -43,10 +43,10 @@ extern int g_data_ptr2;
 extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
-extern unsigned char* DAT_1014d8c0;
+extern unsigned char* g_entity_array_ptr;
 extern int g_entity_type_table;
 extern unsigned char g_current_season;
-extern int DAT_1003543c;
+extern int g_active_player_count;
 extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
@@ -54,19 +54,19 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
-extern WORD* DAT_10035468;
-extern char DAT_10035454;
-extern char DAT_1003545d;
-extern int DAT_10035458;
-extern int DAT_10030b94;
-extern int DAT_10030b98;
-extern short DAT_10030b9c;
-extern char DAT_10030b9e;
-extern char DAT_1003545c;
-extern char DAT_1003545e;
-extern int DAT_100a8c38;
-extern int* DAT_101398a0;
-extern int* DAT_1013989c;
+extern WORD* g_query_cursor;
+extern char g_query_active;
+extern char g_query_flag2;
+extern int g_query_count;
+extern int g_query_filter_max_id;
+extern int g_query_filter_owner;
+extern short g_query_filter_type;
+extern char g_query_filter_state;
+extern char g_query_flag1;
+extern char g_query_flag3;
+extern int g_query_match_count;
+extern int* g_dispatch_table_b;
+extern int* g_dispatch_table_a;
 extern char* g_array_base;
 
 // STUB: SERVER 0x10015f70
@@ -86,8 +86,8 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 	resource_types[6] = 0x2db;
 	resource_types[7] = 0;
 
-	DAT_1003543c = (int) gm_StartFilteredEntitySearch(1, 5, 10);
-	if (DAT_1003543c == 0) {
+	g_active_player_count = (int) gm_StartFilteredEntitySearch(1, 5, 10);
+	if (g_active_player_count == 0) {
 		LogMessageInternal((char*) 0x10031004, 0x7cf, (char*) 0x1003122c, 1);
 		return;
 	}
@@ -199,7 +199,7 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 			int inner_query;
 			int outer_query;
 			int edi;
-			inner_query = DAT_1003543c;
+			inner_query = g_active_player_count;
 			{
 				int ax;
 				ax = *(short*) (esi + 0x3c) & 0xffff;
@@ -235,7 +235,7 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 			int count_query;
 			int uCount;
 			uCount = 0;
-			outer_query = (int) gm_StartEntityQuery(*(int*) (DAT_1003543c + 0x5d), 1, 0, resource_id);
+			outer_query = (int) gm_StartEntityQuery(*(int*) (g_active_player_count + 0x5d), 1, 0, resource_id);
 			if (outer_query != 0) {
 				inner_query = (int) gm_StartEntityQuery(*(int*) (outer_query + 0x14), 1, 0, 0xff);
 				if (inner_query != 0) {

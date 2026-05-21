@@ -15,7 +15,7 @@ extern int g_stat1;
 extern int g_stat2;
 extern int g_stat3;
 extern int g_stat4;
-extern int DAT_10034638;
+extern int g_alloc_counter;
 extern void* g_array_ptr;
 void __cdecl m_FreeHeapLocked(void* ptr);
 extern int DAT_117640b4;
@@ -53,11 +53,11 @@ __declspec(naked) void __cdecl m_FreeTracked(void* heapBlock)
 		test edx, edx
 		push edi
 		je L_ret
-		mov eax, dword ptr [DAT_10034638]
+		mov eax, dword ptr [g_alloc_counter]
 		mov ecx, dword ptr [g_array_count]
 		mov esi, dword ptr [g_array_ptr]
 		dec eax
-		mov dword ptr [DAT_10034638], eax
+		mov dword ptr [g_alloc_counter], eax
 		xor eax, eax
 		test ecx, ecx
 		jle L_aftercheck
