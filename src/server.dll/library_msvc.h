@@ -28,6 +28,9 @@
 // _strrchr
 // SIZE: 39
 
+// LIBRARY: SERVER 0x1001A527
+// _ctime
+
 // LIBRARY: SERVER 0x1001A567
 // _time
 
@@ -97,6 +100,12 @@
 // LIBRARY: SERVER 0x1001B12F
 // _toupper
 // SIZE: 204
+
+// LIBRARY: SERVER 0x1001A150
+// _srand
+
+// LIBRARY: SERVER 0x1001B535
+// _srand_impl
 
 // LIBRARY: SERVER 0x1001B542
 // _rand
