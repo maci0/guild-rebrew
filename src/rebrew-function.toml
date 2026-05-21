@@ -352,8 +352,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000c710"]
 size = 752
-status = "NEAR_MATCHING"
-blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+status = "PROVEN"
 
 ["SERVER.0x1000ca00"]
 size = 130
