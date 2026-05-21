@@ -1,5 +1,4 @@
 extern int g_1003546c;
-extern char g_100358a0[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 

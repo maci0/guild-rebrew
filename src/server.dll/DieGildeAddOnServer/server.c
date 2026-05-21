@@ -48,7 +48,6 @@ int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /
 ;
 int __cdecl SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
-extern unsigned int g_player_slots;
 short __cdecl get_command_type(char*);
 int __cdecl ahm_ProcessEntityChain(unsigned char* node);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
@@ -378,16 +377,12 @@ void __cdecl CleanupSockets(void)
 /* accept = 0x1002415c, setsockopt = 0x10024184, GetTickCount = 0x1002405c */
 
 // DATA: SERVER 0x101deaec
-extern int g_listen_socket;
 
 // DATA: SERVER 0x101deb00
-extern unsigned int g_player_slot_0;
 
 // DATA: SERVER 0x114ffe20
-extern unsigned int g_player_slot_overflow;
 
 // DATA: SERVER 0x1003467c
-extern unsigned int g_connection_counter;
 
 extern char s_No_more_Slots_for_new_Connection_100299c8[];
 extern char s_D__Develop_DieGildeAddOnServer_s_100298b0[];
@@ -844,13 +839,10 @@ int __cdecl SendPlayerData(unsigned int* conn)
  * dispatches complete commands for processing. */
 
 // DATA: SERVER 0x101deac0
-extern unsigned int g_download_total_size;
 // DATA: SERVER 0x101deac4
-extern unsigned int g_download_received;
 // DATA: SERVER 0x101deac8
 extern unsigned int g_download_slots[8];
 // DATA: SERVER 0x101deae8
-extern unsigned int g_download_buffer;
 
 // FUNCTION: SERVER 0x1000a860
 // ProcessSendData

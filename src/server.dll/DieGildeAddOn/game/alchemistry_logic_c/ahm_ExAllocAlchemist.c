@@ -6,7 +6,6 @@ int __cdecl __ftol(void);
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
-extern char* g_table;
 int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
 int __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomFloat01(void);
@@ -18,10 +17,7 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 extern float fColorScale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
-extern float g_float_const_cc;
-extern float g_float_const_a0;
 extern double dScaleFactor;
-extern int g_alchemy_entity_table[];
 int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 

@@ -34,18 +34,7 @@ void __cdecl gm_InitEntitySlots(void);
 int __cdecl _getpid(void);
 void __cdecl vfs_EntityCleanup(char*);
 extern unsigned short* g_query_base;
-extern int g_query_limit;
-extern Record* g_records;
 void __cdecl free_block(int);
-extern int g_data_ptr;
-extern int g_data_ptr2;
-extern int g_data_ptr3;
-extern int g_data_ptr4;
-extern char* g_game_initialized;
-extern unsigned char* g_entity_ptr;
-extern int g_entity_type_table;
-extern unsigned char g_current_season;
-extern int g_active_player_count;
 extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
@@ -64,9 +53,6 @@ extern char g_query_filter_state;
 extern char g_query_flag1;
 extern char g_query_flag3;
 extern int g_query_match_count;
-extern int* g_dispatch_table_b;
-extern int* g_dispatch_table_a;
-extern char* g_array_base;
 
 // STUB: SERVER 0x10016460
 // gm_StartEntityQuery

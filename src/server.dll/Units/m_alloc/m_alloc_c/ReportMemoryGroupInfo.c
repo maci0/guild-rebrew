@@ -10,24 +10,7 @@ void __cdecl ReportMessage(char* msg); /* Single arg log? */
 ;
 void* __cdecl _callnewh(int); /* 0x1001a7f7 */
 ;
-extern int g_array_count;
-extern int g_stat1;
-extern int g_stat2;
-extern int g_stat3;
-extern int g_stat4;
-extern int g_alloc_counter;
-extern void* g_array_ptr;
 void __cdecl m_FreeHeapLocked(void* ptr);
-extern int g_alloc_root_count;
-extern int g_alloc_root_size_total;
-extern int g_alloc_root_count_max;
-extern int g_alloc_root_size_max;
-extern int g_alloc_root_field_20;
-extern int g_list_head;
-extern int g_alloc_root_name;
-extern int g_alloc_root_name_4;
-extern int g_default_group_name;
-extern int g_default_group_name_4;
 void __cdecl ReportMemoryGroupInfo(const char* toggle);
 void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 void __cdecl m_FreeTracked(void*);

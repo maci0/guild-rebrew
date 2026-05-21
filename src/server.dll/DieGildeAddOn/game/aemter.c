@@ -112,7 +112,6 @@ __declspec(naked) int __cdecl amt_ValidateOfficeCandidate(int* arg1)
  * Performs eligibility checks, then updates the office holder
  * table and entity links. */
 
-extern char g_str_29bb8[];
 
 // FUNCTION: SERVER 0x1000b290
 // ValidateAndAssignOffice

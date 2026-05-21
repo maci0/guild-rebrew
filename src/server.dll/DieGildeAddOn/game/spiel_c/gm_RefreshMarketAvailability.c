@@ -33,16 +33,7 @@ void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
 int __cdecl _getpid(void);
 void __cdecl vfs_EntityCleanup(char*);
-extern unsigned short* g_query_base;
-extern int g_query_limit;
-extern Record* g_records;
 void __cdecl free_block(int);
-extern int g_data_ptr;
-extern int g_data_ptr2;
-extern int g_data_ptr3;
-extern int g_data_ptr4;
-extern char* g_game_initialized;
-extern unsigned char* g_entity_ptr;
 extern int g_entity_type_table;
 extern unsigned char g_current_season;
 extern int g_active_player_count;
@@ -53,20 +44,6 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
-extern unsigned short* g_query_cursor;
-extern char g_query_active;
-extern char g_query_flag2;
-extern int g_query_count;
-extern int g_query_filter_max_id;
-extern int g_query_filter_owner;
-extern short g_query_filter_type;
-extern char g_query_filter_state;
-extern char g_query_flag1;
-extern char g_query_flag3;
-extern int g_query_match_count;
-extern int* g_dispatch_table_b;
-extern int* g_dispatch_table_a;
-extern char* g_array_base;
 
 // STUB: SERVER 0x10015f70
 // gm_RefreshMarketAvailability

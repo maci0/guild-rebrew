@@ -41,11 +41,8 @@ extern int g_data_ptr;
 extern int g_data_ptr2;
 extern int g_data_ptr3;
 extern int g_data_ptr4;
-extern char* g_game_initialized;
 extern unsigned char* g_entity_ptr;
 extern int g_entity_type_table;
-extern unsigned char g_current_season;
-extern int g_active_player_count;
 extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
@@ -53,19 +50,6 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
-extern unsigned short* g_query_cursor;
-extern char g_query_active;
-extern char g_query_flag2;
-extern int g_query_count;
-extern int g_query_filter_max_id;
-extern int g_query_filter_owner;
-extern short g_query_filter_type;
-extern char g_query_filter_state;
-extern char g_query_flag1;
-extern char g_query_flag3;
-extern int g_query_match_count;
-extern int* g_dispatch_table_b;
-extern int* g_dispatch_table_a;
 extern char* g_array_base;
 // DATA: SERVER 0x100358a0
 extern char g_entity_array[];
@@ -76,7 +60,6 @@ char* __cdecl gm_AllocateObjectSlot(void);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 short* __cdecl gm_ResolveParentEntity(short*);
 extern int g_next_object_id;
-extern int g_object_count;
 extern int g_current_year;
 extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[];
 extern char s_gm_AddObjekt____obj____ob_NULL_10031390[];
@@ -109,9 +92,6 @@ extern char* g_table_a9;
 extern char* dword_100a8c30;
 extern unsigned short* dword_100a8c34;
 extern char* dword_101de450;
-extern char g_10031004[];
-extern char g_10031484[];
-extern char g_100314b8[];
 int __cdecl gm_EntityAccumulate(void*);
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 void __cdecl amt_ClearEntityLinks(short*);
@@ -208,17 +188,12 @@ int __cdecl gm_DispatchCall(int param, DISPATCH_OBJ* obj)
 
 // DATA: SERVER 0x100a8c30
 // DATA: SERVER 0x1014d8c0
-extern int g_1014d8c0;
 // DATA: SERVER 0x101de450
 // DATA: SERVER 0x100a8c34
-extern int g_100a8c34;
 
 // DATA: SERVER 0x100a8cf8
-extern int g_100a8cf8;
 // DATA: SERVER 0x1009b764
-extern int g_1009b764;
 // DATA: SERVER 0x1002dde0
-extern int g_1002dde0;
 
 // FUNCTION: SERVER 0x10015CB0
 // gm_ResetAllEntities
@@ -523,7 +498,6 @@ __declspec(naked) int __cdecl gm_ResolveEntityById(void** dynamic, void** existi
 // gm_FindSlotById
 
 // DATA: SERVER 0x1009b770
-extern char g_slot_array[];
 
 __declspec(naked) char* __cdecl gm_FindSlotById(int arg1, int arg2)
 {
@@ -1426,34 +1400,24 @@ MATCH:
 // DATA: SERVER 0x100a8c30
 
 // DATA: SERVER 0x10030b8c
-extern short g_query_filter_extra2;
 
 // DATA: SERVER 0x10030b8e
-extern short g_query_filter_extra3;
 
 // DATA: SERVER 0x10030b84
-extern char g_filter_extra5;
 
 // DATA: SERVER 0x10030b88
-extern int g_query_filter_extra1;
 
 // DATA: SERVER 0x10030b90
-extern char g_query_filter_extra4;
 
 // DATA: SERVER 0x10035444
-extern char* g_dynasty_field_44;
 
 // DATA: SERVER 0x10035449
-extern char g_dynasty_field_49;
 
 // DATA: SERVER 0x1003544c
-extern int g_dynasty_field_4c;
 
 // DATA: SERVER 0x10035448
-extern char g_dynasty_field_48;
 
 // DATA: SERVER 0x10035464
-extern unsigned char* g_query_filter_base;
 
 // FUNCTION: SERVER 0x10017210
 // gm_SearchStruct
@@ -2212,14 +2176,11 @@ struct EntityStruct {
 extern unsigned short g_something_1[1];
 // DATA: SERVER 0x10035434
 // DATA: SERVER 0x1009acfc
-extern int g_some_limit;
 // DATA: SERVER 0x100358fc
 extern int g_entity_ref_table[1];
 
 // DATA: SERVER 0x10031500
-extern char g_str_10031500[];
 // DATA: SERVER 0x10031538
-extern char g_str_10031538[];
 
 /* Deallocates an entity completely. Frees all linked objects,
  * removes from entity tables, and releases memory. */
@@ -3350,7 +3311,6 @@ int __cdecl gm_WalkEntityChain(int raw_idx)
 }
 
 // DATA: SERVER 0x100358a2
-extern unsigned char g_entity_state_base[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);

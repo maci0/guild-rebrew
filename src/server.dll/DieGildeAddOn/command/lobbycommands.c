@@ -9,9 +9,7 @@ extern char s_lb_ExLobbyServerCommand___i_1002d858[];
 
 /* Module-specific globals with complex types */
 extern PlayerSlot g_player_slots_base[8];
-extern void* g_player_slots;
 extern short g_record_table[];
-extern unsigned char g_entity_sync_data[];
 
 /* Lobby handler: sends the current player list to a client.
  * Iterates player slots and writes connection info into the

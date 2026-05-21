@@ -656,10 +656,8 @@ int __cdecl vfs_CleanupObject(char* obj)
 // CloseVfsStream
 
 // DATA: SERVER 0x10034678
-extern int g_stream_count;
 
 // DATA: SERVER 0x10034670
-extern char g_stream_pool;
 
 __declspec(naked) int __cdecl CloseVfsStream(void* stream)
 {

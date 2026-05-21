@@ -210,11 +210,8 @@ struct LinkedListNode {
 // DATA: SERVER 0x117640c4
 
 // DATA: SERVER 0x10028b04
-extern char g_str_10028b04[];
 // DATA: SERVER 0x10028aec
-extern char g_str_10028aec[];
 // DATA: SERVER 0x10028888
-extern char g_str_10028888[];
 
 __declspec(naked) void __cdecl ShutdownMemoryAllocator(void)
 {

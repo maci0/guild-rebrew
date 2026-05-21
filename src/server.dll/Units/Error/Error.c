@@ -8,7 +8,6 @@ extern char* __cdecl _ctime(const time_t*);
 char __cdecl check_memory_protection(unsigned int);
 char __cdecl AnalyzeInstruction(int, int, int, int*);
 unsigned int __cdecl EmitCrashModuleLine(int*);
-extern void* g_10034614;
 char* __cdecl GetDebugRecordByIndex();
 void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
 extern int g_severity_table[3];

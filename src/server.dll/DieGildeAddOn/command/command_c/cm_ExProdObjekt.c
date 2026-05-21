@@ -13,7 +13,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern char g_empty_string[];
 extern char* g_unknown_1de450;
 extern unsigned char g_current_season;
 

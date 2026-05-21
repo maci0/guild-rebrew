@@ -24,11 +24,7 @@ typedef struct {
 #pragma pack(pop)
 
 extern OfficeSlot g_office_slots[];
-extern int g_aemter_table;
 void* __cdecl gm_LookupEntityRecordById(int);
-extern ENT g_ents[];
-extern ENT g_ents2[];
-extern unsigned short g_default_value_b;
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void __cdecl InitBuildingTypeTable(void);
 

@@ -30,7 +30,6 @@ void __cdecl LogWinsockError(int err_code);
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
-extern int g_stop_flag;
 void __cdecl InitBuildingTypeTable(void);
 void __cdecl RecvGameSavegame(void);
 int __cdecl srv_Init(void);
@@ -42,13 +41,11 @@ int __cdecl gm_Open(char*, char*);
 int __cdecl sub_1001a299(char*, char*);
 int __cdecl CreateListenSocket(int port);
 void __cdecl InitPacketPool(int);
-extern int g_net_socket;
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 ;
 ;
 int __cdecl SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
-extern unsigned int g_player_slots;
 short __cdecl get_command_type(char*);
 int __cdecl ahm_ProcessEntityChain(unsigned char* node);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */

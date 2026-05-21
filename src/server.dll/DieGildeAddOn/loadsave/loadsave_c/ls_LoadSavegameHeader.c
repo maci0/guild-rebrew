@@ -6,23 +6,17 @@
 #include <stdlib.h>
 
 int __cdecl AllocGraveyardField(int);
-extern int g_1002576c[];
-extern int g_1002575c[];
 extern void amt_FindEntity26(int);
 extern void amt_FindEntity27(int);
 extern char gm_RandomMod(int);
 extern unsigned char __ftol();
 extern void gm_AddOrAccumulateObject(int, int, int);
-extern char g_100a9820[];
-extern char g_1014d8e0[];
-extern char g_10139820[];
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_save_version;
 extern int g_1002d4f0;
 extern int g_1002d4f4;
 extern char g_1002d4f8;
 extern char g_1002d4fc;
-extern int g_query_limit;
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 int __cdecl ahm_AllocAhmInfo(int building, int slot);
 extern int g_file_version; /* 0x1002d4ec */
@@ -36,9 +30,6 @@ extern int g_101de55c; /* 0x101de55c */
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
-extern int g_101deae8;
-extern int g_101deac0;
-extern int g_101de560;
 extern int g_save_info[2];
 extern int OpenVfsStream(char*, char*, int);
 int ls_LoadSavegameHeader(int, char*);

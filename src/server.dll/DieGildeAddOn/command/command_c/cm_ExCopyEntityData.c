@@ -1,7 +1,6 @@
 
 #include "../command_internal.h"
 
-extern int g_static_entity0_entity_id[];
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 

@@ -4,7 +4,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern char g_player_slot_0[];
 
 ushort __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 char* __cdecl strncpy(char*, const char*, unsigned int);
