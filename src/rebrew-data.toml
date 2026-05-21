@@ -211,6 +211,8 @@ type = "short"
 
 ["SERVER.0x10030b84"]
 section = ".data"
+name = "g_filter_extra5"
+type = "char"
 
 ["SERVER.0x10030b88"]
 section = ".data"
@@ -229,9 +231,13 @@ type = "int"
 
 ["SERVER.0x10035449"]
 section = ".data"
+name = "g_dynasty_field_49"
+type = "char"
 
 ["SERVER.0x1003544c"]
 section = ".data"
+name = "g_dynasty_field_4c"
+type = "int"
 
 ["SERVER.0x10035448"]
 section = ".data"
@@ -452,4 +458,48 @@ type = "int"
 
 ["SERVER.0x1003540c"]
 name = "g_dynamic_count"
+type = "int"
+
+["SERVER.0x1002c050"]
+name = "g_alchemy_entity_table"
+type = "int"
+
+["SERVER.0x10028938"]
+name = "g_default_group_name"
+type = "char"
+
+["SERVER.0x1002893c"]
+name = "g_default_group_name_4"
+type = "int"
+
+["SERVER.0x117640a4"]
+name = "g_alloc_root_name_4"
+type = "int"
+
+["SERVER.0x10035478"]
+name = "g_save_extra_field"
+type = "int"
+
+["SERVER.0x10025680"]
+name = "g_gv_const_5680"
+type = "float"
+
+["SERVER.0x100257c4"]
+name = "g_gv_const_57c4"
+type = "float"
+
+["SERVER.0x100257c8"]
+name = "g_gv_const_57c8"
+type = "float"
+
+["SERVER.0x10035a0c"]
+name = "g_query_state_a0c"
+type = "int"
+
+["SERVER.0x10035470"]
+name = "g_save_extra_70"
+type = "int"
+
+["SERVER.0x10035474"]
+name = "g_save_extra_74"
 type = "int"

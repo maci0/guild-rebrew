@@ -95,7 +95,7 @@ extern unsigned short g_FilterVal27;
 extern unsigned char g_FilterVal30;
 extern char* g_array;
 void __cdecl gv_Free3Fields(void* param);
-extern int DAT_10035a0c;
+extern int g_query_state_a0c;
 extern unsigned char DAT_10030861;
 char* __cdecl gm_SearchStruct(void);
 int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
@@ -150,7 +150,7 @@ extern double DAT_10025fa0; /* 0x10025fa0 */
 ;
 extern float _DAT_100256cc; /* 0x100256cc */
 ;
-extern float DAT_100257c8; /* 0x100257c8 */
+extern float g_gv_const_57c8; /* 0x100257c8 */
 ;
 extern double DAT_100257d0; /* 0x100257d0 */
 ;
@@ -1435,7 +1435,7 @@ extern short g_query_filter_extra2;
 extern short g_query_filter_extra3;
 
 // DATA: SERVER 0x10030b84
-extern char DAT_10030b84;
+extern char g_filter_extra5;
 
 // DATA: SERVER 0x10030b88
 extern int g_query_filter_extra1;
@@ -1447,10 +1447,10 @@ extern char g_query_filter_extra4;
 extern char* g_dynasty_field_44;
 
 // DATA: SERVER 0x10035449
-extern char DAT_10035449;
+extern char g_dynasty_field_49;
 
 // DATA: SERVER 0x1003544c
-extern int DAT_1003544c;
+extern int g_dynasty_field_4c;
 
 // DATA: SERVER 0x10035448
 extern char g_dynasty_field_48;
@@ -1486,7 +1486,7 @@ char* __cdecl gm_SearchStruct(void)
 // FUNCTION: SERVER 0x10017240
 // gm_CleanupBuildingEntity
 
-/* DAT_10035a0c: base of entity array, stride 0x21c (0x87 dwords), 768 entries */
+/* g_query_state_a0c: base of entity array, stride 0x21c (0x87 dwords), 768 entries */
 
 int __cdecl gm_CleanupBuildingEntity(unsigned char* building)
 {
@@ -1521,7 +1521,7 @@ int __cdecl gm_CleanupBuildingEntity(unsigned char* building)
 	}
 	*(int*) (building + 0x65) = 0;
 cleanup_loop:
-	entity_scan = &DAT_10035a0c;
+	entity_scan = &g_query_state_a0c;
 	do {
 		if ((unsigned char*) entity_scan[1] == building) {
 			entity_scan[1] = 0;

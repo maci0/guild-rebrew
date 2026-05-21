@@ -22,7 +22,7 @@ extern float g_float_const_cc;
 extern float g_float_const_a0;
 extern char s__ahm_AllocAhmInfo_1002a0f7[];
 extern double dScaleFactor;
-extern int DAT_1002c050[];
+extern int g_alchemy_entity_table[];
 int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 

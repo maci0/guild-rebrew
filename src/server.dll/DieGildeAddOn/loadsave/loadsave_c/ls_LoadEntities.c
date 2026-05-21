@@ -52,9 +52,9 @@ extern int amt_fio_LoadAemter(int, int);
 extern unsigned int ls_ID2Ptr(void);
 
 extern int g_citizen_count;
-extern int DAT_10035470;
-extern int DAT_10035474;
-extern int DAT_10035478;
+extern int g_save_extra_70;
+extern int g_save_extra_74;
+extern int g_save_extra_field;
 
 /* Loads graveyard-specific data from a save file. Reads
  * production slots, worker assignments, and field states
@@ -79,16 +79,16 @@ int __cdecl ls_LoadEntities(int ctx)
 		return 0;
 	}
 	g_citizen_count = header_field;
-	if (ls_ReadVfsDataChecked(&DAT_10035470, 4, 1, (void*) ctx) == 0) {
+	if (ls_ReadVfsDataChecked(&g_save_extra_70, 4, 1, (void*) ctx) == 0) {
 		return 0;
 	}
-	if (ls_ReadVfsDataChecked(&DAT_10035474, 4, 1, (void*) ctx) == 0) {
+	if (ls_ReadVfsDataChecked(&g_save_extra_74, 4, 1, (void*) ctx) == 0) {
 		return 0;
 	}
 
 	if (g_file_version >= 0x10017) {
-		int* p = &DAT_10035478;
-		while ((int) p < (int) &DAT_10035478 + 0x20) {
+		int* p = &g_save_extra_field;
+		while ((int) p < (int) &g_save_extra_field + 0x20) {
 			if (ls_ReadVfsDataChecked(p, 4, 1, (void*) ctx) == 0) {
 				return 0;
 			}

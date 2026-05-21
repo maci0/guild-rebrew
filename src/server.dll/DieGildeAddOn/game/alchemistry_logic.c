@@ -22,7 +22,7 @@ extern float g_float_const_cc;
 extern float g_float_const_a0;
 extern char s__ahm_AllocAhmInfo_1002a0f7[];
 extern double dScaleFactor;
-extern int DAT_1002c050[];
+extern int g_alchemy_entity_table[];
 int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
@@ -754,9 +754,9 @@ int* __cdecl ahm_LookupEntityInTable(int entity_id)
 	int i;
 	int* p;
 
-	for (i = 0, p = DAT_1002c050; (int) p < (int) (DAT_1002c050 + 0x17 * 10); p += 0x17, i++) {
+	for (i = 0, p = g_alchemy_entity_table; (int) p < (int) (g_alchemy_entity_table + 0x17 * 10); p += 0x17, i++) {
 		if (*p == entity_id) {
-			return DAT_1002c050 + i * 0x17;
+			return g_alchemy_entity_table + i * 0x17;
 		}
 	}
 	return (int*) 0;

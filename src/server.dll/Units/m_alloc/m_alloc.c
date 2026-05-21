@@ -25,9 +25,9 @@ extern int g_alloc_root_size_max;
 extern int g_alloc_root_field_20;
 extern int g_list_head;
 extern int g_alloc_root_name;
-extern int DAT_117640a4;
-extern int DAT_10028938;
-extern int DAT_1002893c;
+extern int g_alloc_root_name_4;
+extern int g_default_group_name;
+extern int g_default_group_name_4;
 void __cdecl ReportMemoryGroupInfo(const char* toggle);
 void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 void __cdecl m_FreeTracked(void*);
@@ -159,8 +159,8 @@ __declspec(naked) void __cdecl InitPacketPool(int pool_id)
 	L_tail_only:
 		add ecx, ebx
 		rep stosb
-		mov eax, dword ptr [DAT_10028938]
-		mov ecx, dword ptr [DAT_1002893c]
+		mov eax, dword ptr [g_default_group_name]
+		mov ecx, dword ptr [g_default_group_name_4]
 		mov dword ptr [g_alloc_root_count], esi
 		mov dword ptr [g_alloc_root_size_total], esi
 		mov dword ptr [g_alloc_root_count_max], esi
@@ -170,7 +170,7 @@ __declspec(naked) void __cdecl InitPacketPool(int pool_id)
 		pop edi
 		pop esi
 		mov dword ptr [g_alloc_root_name], eax
-		mov dword ptr [DAT_117640a4], ecx
+		mov dword ptr [g_alloc_root_name_4], ecx
 		pop ebx
 		pop ebp
 		ret

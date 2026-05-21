@@ -35,9 +35,9 @@ double __cdecl gm_RandomFloat01(void);
 extern int g_next_object_id;
 extern int g_citizen_count;
 extern unsigned char g_current_season;
-extern float DAT_10025680;
-extern float DAT_100257c4;
-extern float DAT_100257c8;
+extern float g_gv_const_5680;
+extern float g_gv_const_57c4;
+extern float g_gv_const_57c8;
 
 /* Checks if a production slot in a building is active.
  * Returns non-zero if the slot at the given index has

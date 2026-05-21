@@ -35,9 +35,9 @@ double __cdecl gm_RandomFloat01(void);
 extern int g_next_object_id;
 extern int g_citizen_count;
 extern unsigned char g_current_season;
-extern float DAT_10025680;
-extern float DAT_100257c4;
-extern float DAT_100257c8;
+extern float g_gv_const_5680;
+extern float g_gv_const_57c4;
+extern float g_gv_const_57c8;
 
 /* Checks if a production slot in a building is active.
  * Returns non-zero if the slot at the given index has
@@ -186,7 +186,7 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int cmd_payload)
 			relationship_loop_idx = 0;
 			slot_scan_idx_or_capacity = 0;
 			*(float*) (entity_slot_byte_offset + 0x100358b4) =
-				DAT_10025680 / (float) (random_float * (double) DAT_100257c8 + (double) DAT_100257c4);
+				g_gv_const_5680 / (float) (random_float * (double) g_gv_const_57c8 + (double) g_gv_const_57c4);
 			do {
 				entity_slot_index = *new_entity_slot_ptr;
 				rand_relationship_val = (char) gm_RandomMod(0x40);
