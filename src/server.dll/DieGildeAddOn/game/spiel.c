@@ -96,7 +96,7 @@ extern unsigned char g_FilterVal30;
 extern char* g_array;
 void __cdecl gv_Free3Fields(void* param);
 extern int g_query_state_a0c;
-extern unsigned char DAT_10030861;
+extern unsigned char g_byte_table_30861;
 char* __cdecl gm_SearchStruct(void);
 int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
@@ -119,14 +119,14 @@ void __cdecl amt_ClearEntityLinks(short*);
 void __cdecl gm_InitEntityIfValid(void* arg1);
 void __cdecl gm_DeallocEntity(unsigned int idx, int param);
 extern int g_citizen_count;
-extern int DAT_1003542c;
-extern int DAT_10035430;
+extern int g_dynasty_field_2c;
+extern int g_dynasty_generation_counter;
 extern char g_entity_base[];
 extern char g_entity_end[];
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
-extern float DAT_100257bc;
+extern float g_const_57bc;
 int __cdecl gm_RandomMod(unsigned short range);
 extern char entity_table[];
 int __cdecl gm_LookupEntityRecordById(int);
@@ -136,23 +136,23 @@ int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
 extern char entity_slot_table[];
-extern float DAT_10025fb8; /* 0x10025fb8 */
+extern float g_const_5fb8; /* 0x10025fb8 */
 ;
-extern float DAT_10025fb4; /* 0x10025fb4 */
+extern float g_const_5fb4; /* 0x10025fb4 */
 ;
-extern float DAT_10025fb0; /* 0x10025fb0 */
+extern float g_const_5fb0; /* 0x10025fb0 */
 ;
-extern float DAT_10025fac; /* 0x10025fac */
+extern float g_const_5fac; /* 0x10025fac */
 ;
-extern float DAT_10025fa8; /* 0x10025fa8 */
+extern float g_const_5fa8; /* 0x10025fa8 */
 ;
-extern double DAT_10025fa0; /* 0x10025fa0 */
+extern double g_const_5fa0; /* 0x10025fa0 */
 ;
-extern float _DAT_100256cc; /* 0x100256cc */
+extern float g_float_const_cc; /* 0x100256cc */
 ;
 extern float g_gv_const_57c8; /* 0x100257c8 */
 ;
-extern double DAT_100257d0; /* 0x100257d0 */
+extern double g_const_57d0; /* 0x100257d0 */
 ;
 double __cdecl gm_CalculateProductionValue(int, int);
 extern char g_type_idx;
@@ -167,10 +167,10 @@ int __cdecl gm_GetMsgField(char*, char*); /* 0x10019cd0 */
 ;
 int __cdecl ahm_LookupEntityInTable(int); /* 0x1000c670 */
 ;
-extern float _DAT_10025fbc;
+extern float g_const_5fbc;
 double __cdecl gm_RandomFloat01(void);
-extern float _DAT_100256a0;
-extern float _DAT_100256a8;
+extern float g_float_const_a0;
+extern float g_float_const_a8;
 
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */
@@ -1552,7 +1552,7 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 	unsigned short* item_ptr;
 	unsigned char* table_ptr;
 
-	table_ptr = &DAT_10030861;
+	table_ptr = &g_byte_table_30861;
 	do {
 		if (*building == *(table_ptr - 1)) {
 			query_result = gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 6, 0, 0xff);
@@ -2365,8 +2365,8 @@ void __cdecl gm_InitEntitySlots(void)
 	} while ((int) ptr < (int) g_entity_end);
 
 	g_citizen_count = 0;
-	DAT_1003542c = 0;
-	DAT_10035430 = 0;
+	g_dynasty_field_2c = 0;
+	g_dynasty_generation_counter = 0;
 }
 
 /* Checks if a value is within a range [min, max]. Returns
@@ -2688,7 +2688,7 @@ __declspec(naked) char __cdecl gm_RandomStatModifier(char stat_value)
 		and eax, 0xff
 		mov dword ptr [esp + 8], eax
 		fild dword ptr [esp + 8]
-		fcomp DAT_100257bc
+		fcomp g_const_57bc
 		fnstsw ax
 		test ah, 1
 		mov eax, 0xb
@@ -3898,7 +3898,7 @@ int __cdecl gm_RandomMod(unsigned short n)
 
 double __cdecl gm_RandomFloat01(void)
 {
-	return (double) rand() * (double) _DAT_10025fbc;
+	return (double) rand() * (double) g_const_5fbc;
 }
 
 /* Returns a random value with quadratic distribution.
@@ -3913,9 +3913,9 @@ float __cdecl gm_RandomQuadratic(void)
 	float rand_val;
 
 	rand_val = (float) gm_RandomFloat01();
-	rand_val = (rand_val + rand_val) - _DAT_100256a0;
-	if (rand_val < _DAT_100256cc) {
-		return _DAT_100256a8 * rand_val * rand_val;
+	rand_val = (rand_val + rand_val) - g_float_const_a0;
+	if (rand_val < g_float_const_cc) {
+		return g_float_const_a8 * rand_val * rand_val;
 	}
-	return _DAT_100256a0 * rand_val * rand_val;
+	return g_float_const_a0 * rand_val * rand_val;
 }

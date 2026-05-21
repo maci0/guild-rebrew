@@ -503,3 +503,59 @@ type = "int"
 ["SERVER.0x10035474"]
 name = "g_save_extra_74"
 type = "int"
+
+["SERVER.0x10030861"]
+name = "g_byte_table_30861"
+type = "unsigned char"
+
+["SERVER.0x1003542c"]
+name = "g_dynasty_field_2c"
+type = "int"
+
+["SERVER.0x10035430"]
+name = "g_dynasty_generation_counter"
+type = "int"
+
+["SERVER.0x10035a05"]
+name = "g_stat_b_array"
+type = "char"
+
+["SERVER.0x10025fa0"]
+name = "g_const_5fa0"
+type = "float"
+
+["SERVER.0x10025fa8"]
+name = "g_const_5fa8"
+type = "float"
+
+["SERVER.0x10025fac"]
+name = "g_const_5fac"
+type = "float"
+
+["SERVER.0x10025fb0"]
+name = "g_const_5fb0"
+type = "float"
+
+["SERVER.0x10025fb4"]
+name = "g_const_5fb4"
+type = "float"
+
+["SERVER.0x10025fb8"]
+name = "g_const_5fb8"
+type = "float"
+
+["SERVER.0x10025fbc"]
+name = "g_const_5fbc"
+type = "float"
+
+["SERVER.0x100257bc"]
+name = "g_const_57bc"
+type = "float"
+
+["SERVER.0x100257d0"]
+name = "g_const_57d0"
+type = "float"
+
+["SERVER.0x10029bb8"]
+name = "g_str_29bb8"
+type = "char"

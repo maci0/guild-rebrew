@@ -5,7 +5,7 @@ void __cdecl table_lookup(unsigned int a, unsigned short* b);
 extern int g_entity_type_table;
 unsigned int __cdecl FindAndMatchParents(unsigned int param);
 extern unsigned char g_entity_type_bytes;
-extern unsigned char DAT_10035a05;
+extern unsigned char g_stat_b_array;
 extern unsigned char g_slot_table;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
@@ -377,7 +377,7 @@ void* __cdecl sim_CreateCitizen(unsigned char flags, int citizen_type, int paren
 			goto error;
 		}
 		if ((flags & 2) != 0) {
-			(&DAT_10035a05)[new_entity_slot * 0x21c] = stat_b;
+			(&g_stat_b_array)[new_entity_slot * 0x21c] = stat_b;
 			(&g_entity_type_bytes)[new_entity_slot * 0x21c] = stat_a;
 		}
 	}
