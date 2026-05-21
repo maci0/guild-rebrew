@@ -123,7 +123,7 @@ section = ".data"
 type = "char*"
 
 ["SERVER.0x1014d8c0"]
-name = "g_entity_array_ptr"
+name = "g_entity_ptr"
 section = ".data"
 type = "unsigned char*"
 
