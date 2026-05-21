@@ -2,21 +2,25 @@
 note = "connection counter"
 name = "g_connection_counter"
 section = ".data"
+type = "int"
 
 ["SERVER.0x101deaec"]
 note = "listen socket"
 name = "g_listen_socket"
 section = ".data"
+type = "int"
 
 ["SERVER.0x101deb00"]
 note = "first player slot (stride 0x264264 bytes)"
 name = "g_player_slot_0"
 section = ".data"
+type = "unsigned int"
 
 ["SERVER.0x114ffe20"]
 note = "overflow slot"
 name = "g_player_slot_overflow"
 section = ".data"
+type = "unsigned int"
 
 ["SERVER.0x101deb14"]
 name = "g_player_slot_field"
@@ -71,6 +75,7 @@ type = "unsigned char"
 ["SERVER.0x1002a0f8"]
 name = "g_1002a0f8"
 section = ".data"
+type = "char"
 
 ["SERVER.0x100256b4"]
 name = "g_float_const_b4"
@@ -140,14 +145,17 @@ type = "unsigned short*"
 ["SERVER.0x100a8cf8"]
 name = "g_100a8cf8"
 section = ".data"
+type = "unsigned int"
 
 ["SERVER.0x1009b764"]
 name = "g_1009b764"
 section = ".data"
+type = "unsigned int"
 
 ["SERVER.0x1002dde0"]
 name = "g_1002dde0"
 section = ".data"
+type = "int"
 
 ["SERVER.0x1009b770"]
 name = "g_slot_array"
@@ -282,10 +290,12 @@ type = "int"
 ["SERVER.0x10031500"]
 name = "g_str_10031500"
 section = ".data"
+type = "char"
 
 ["SERVER.0x10031538"]
 name = "g_str_10031538"
 section = ".data"
+type = "char"
 
 ["SERVER.0x10035a04"]
 name = "g_entity_type_bytes"
@@ -365,22 +375,27 @@ type = "int"
 ["SERVER.0x10028b04"]
 name = "g_str_10028b04"
 section = ".data"
+type = "char"
 
 ["SERVER.0x10028aec"]
 name = "g_str_10028aec"
 section = ".data"
+type = "char"
 
 ["SERVER.0x10028888"]
 name = "g_str_10028888"
 section = ".data"
+type = "char"
 
 ["SERVER.0x10028b78"]
 name = "g_str_10028b78"
 section = ".data"
+type = "char"
 
 ["SERVER.0x10028b60"]
 name = "g_str_10028b60"
 section = ".data"
+type = "char"
 
 ["SERVER.0x10034678"]
 name = "g_stream_count"
