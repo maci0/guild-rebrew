@@ -569,3 +569,87 @@ section = ".data"
 name = "g_entity_end"
 type = "unsigned char"
 section = ".data"
+
+["SERVER.0x1002415c"]
+name = "__imp__accept@12"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024160"]
+name = "__imp__listen@8"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024164"]
+name = "__imp__send@16"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024168"]
+name = "__imp__recv@16"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002416c"]
+name = "__imp__inet_addr@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024170"]
+name = "__imp__WSAGetLastError@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024174"]
+name = "__imp__shutdown@8"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024178"]
+name = "__imp__WSACleanup@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002417c"]
+name = "__imp__WSAStartup@8"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024180"]
+name = "__imp__socket@12"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024184"]
+name = "__imp__setsockopt@20"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024188"]
+name = "__imp__htonl@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002418c"]
+name = "__imp__htons@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024190"]
+name = "__imp__bind@12"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024194"]
+name = "__imp__sendto@24"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024198"]
+name = "__imp__closesocket@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100313fc"]
+name = "$SG18890"
+type = "char"
