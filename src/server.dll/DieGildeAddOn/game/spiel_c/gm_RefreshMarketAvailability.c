@@ -44,10 +44,10 @@ extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
 extern unsigned char* DAT_1014d8c0;
-extern int DAT_100a8c30;
-extern unsigned char DAT_10035439;
+extern int g_entity_type_table;
+extern unsigned char g_current_season;
 extern int DAT_1003543c;
-extern char* DAT_101de450;
+extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -105,7 +105,7 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 		base = base + 0x1009b770;
 	}
 
-	if (season != DAT_10035439) {
+	if (season != g_current_season) {
 		return;
 	}
 
@@ -132,7 +132,7 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 				int edi;
 				int ecx2;
 				byteVal = *(unsigned char*) entity_ptr;
-				edi = DAT_100a8c30;
+				edi = g_entity_type_table;
 				edi += byteVal;
 				ecx2 = byteVal + byteVal * 2;
 				ecx2 = ecx2 << 4;
@@ -159,7 +159,7 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 									int pInnerCount;
 									*(int*) (pSlot + 4) = 1;
 									rowId = *(short*) pSlot & 0xffff;
-									edx2 = *(int*) DAT_101de450;
+									edx2 = *(int*) g_item_def_table;
 									edx2 = edx2 + (rowId << 6);
 									edx2 = edx2 + rowId;
 									pOuter = base;

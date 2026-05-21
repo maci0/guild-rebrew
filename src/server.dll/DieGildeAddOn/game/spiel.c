@@ -44,10 +44,10 @@ extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
 extern unsigned char* DAT_1014d8c0;
-extern int DAT_100a8c30;
-extern unsigned char DAT_10035439;
+extern int g_entity_type_table;
+extern unsigned char g_current_season;
 extern int DAT_1003543c;
-extern char* DAT_101de450;
+extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -76,7 +76,6 @@ void __cdecl gm_NoopRet2(void);
 char* __cdecl gm_AllocateObjectSlot(void);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 short* __cdecl gm_ResolveParentEntity(short*);
-extern int g_item_def_table;
 extern int g_next_object_id;
 extern int g_object_count;
 extern int g_current_year;
@@ -111,8 +110,6 @@ extern char* g_table_a9;
 extern char* dword_100a8c30;
 extern unsigned short* dword_100a8c34;
 extern char* dword_101de450;
-extern int g_entity_type_table;
-extern unsigned char g_current_season;
 extern char g_10031004[];
 extern char g_10031484[];
 extern char g_100314b8[];
@@ -121,7 +118,7 @@ int __cdecl gm_RemoveLinkedNodeById(int*, int);
 void __cdecl amt_ClearEntityLinks(short*);
 void __cdecl gm_InitEntityIfValid(void* arg1);
 void __cdecl gm_DeallocEntity(unsigned int idx, int param);
-extern int DAT_10035434;
+extern int g_citizen_count;
 extern int DAT_1003542c;
 extern int DAT_10035430;
 extern char g_entity_base[];
@@ -138,7 +135,6 @@ int __cdecl gm_WalkEntityChain(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
-extern int g_citizen_count;
 extern char entity_slot_table[];
 extern float DAT_10025fb8; /* 0x10025fb8 */
 ;
@@ -212,11 +208,9 @@ int __cdecl gm_DispatchCall(int param, DISPATCH_OBJ* obj)
  * data from game files. */
 
 // DATA: SERVER 0x100a8c30
-extern int g_entity_type_table;
 // DATA: SERVER 0x1014d8c0
 extern int g_1014d8c0;
 // DATA: SERVER 0x101de450
-extern int g_item_def_table;
 // DATA: SERVER 0x100a8c34
 extern int g_100a8c34;
 
@@ -1441,7 +1435,6 @@ MATCH:
  * constraints. Returns first matching entity. */
 
 // DATA: SERVER 0x100a8c30
-extern int DAT_100a8c30;
 
 // DATA: SERVER 0x10030b8c
 extern short DAT_10030b8c;
@@ -1701,16 +1694,12 @@ __declspec(naked) void __cdecl gm_SetBuildingWorkerLimits(unsigned char* arg1)
  * storage, and links to the town. */
 
 // DATA: SERVER 0x100a8c30
-extern int g_entity_type_table;
 
 // DATA: SERVER 0x10030b6c
-extern int g_next_object_id;
 
 // DATA: SERVER 0x101de450
-extern int g_item_def_table;
 
 // DATA: SERVER 0x10035880
-extern int g_current_year;
 // DATA: SERVER 0x10035884
 extern int g_10035884;
 // DATA: SERVER 0x10035888
@@ -1932,7 +1921,7 @@ unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* entity)
 	unsigned short* p;
 
 	gm_GetBuildingTypeCategory((int) *entity);
-	type_entry = (char*) (DAT_100a8c30 + (unsigned int) *entity * 0x24d);
+	type_entry = (char*) (g_entity_type_table + (unsigned int) *entity * 0x24d);
 	result = gm_CheckEntityType(entity);
 	if (result != 0) {
 		return (unsigned short*) gm_StartEntityQuery(*(int*) (entity + 0x5d), 1, 0, 0xfd);
@@ -1955,7 +1944,7 @@ unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* entity)
 
 int __cdecl gm_GetBuildingTypeCategory(int arg1)
 {
-	switch (*(unsigned char*) (DAT_100a8c30 + arg1 * 0x24d)) {
+	switch (*(unsigned char*) (g_entity_type_table + arg1 * 0x24d)) {
 	case 0xb:
 	case 0xc:
 	case 0xd:
@@ -2040,7 +2029,7 @@ __declspec(naked) int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
 
 	L_nonnull:
 		xor ecx, ecx
-		mov edx, dword ptr [DAT_100a8c30]
+		mov edx, dword ptr [g_entity_type_table]
 		mov cl, byte ptr [eax]
 		add edx, ecx
 		lea eax, [ecx + ecx * 2]
@@ -2233,7 +2222,6 @@ struct EntityStruct {
 // DATA: SERVER 0x10035880
 extern unsigned short g_something_1[1];
 // DATA: SERVER 0x10035434
-extern int g_citizen_count;
 // DATA: SERVER 0x1009acfc
 extern int g_some_limit;
 // DATA: SERVER 0x100358fc
@@ -2384,7 +2372,7 @@ void __cdecl gm_InitEntitySlots(void)
 		ptr = ptr + 0xAC;
 	} while ((int) ptr < (int) g_entity_end);
 
-	DAT_10035434 = 0;
+	g_citizen_count = 0;
 	DAT_1003542c = 0;
 	DAT_10035430 = 0;
 }

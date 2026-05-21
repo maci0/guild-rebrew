@@ -44,10 +44,10 @@ extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
 extern unsigned char* DAT_1014d8c0;
-extern int DAT_100a8c30;
-extern unsigned char DAT_10035439;
+extern int g_entity_type_table;
+extern unsigned char g_current_season;
 extern int DAT_1003543c;
-extern char* DAT_101de450;
+extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -69,7 +69,6 @@ extern int* DAT_101398a0;
 extern int* DAT_1013989c;
 extern char* g_array_base;
 
-extern int DAT_100a8c30;
 extern short DAT_10030b8c;
 extern short DAT_10030b8e;
 extern char DAT_10030b84;
@@ -90,7 +89,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 	int* arg_ptr;
 	int i;
 
-	if (DAT_100a8c30 == 0) {
+	if (g_entity_type_table == 0) {
 		return (unsigned short*) 0;
 	}
 

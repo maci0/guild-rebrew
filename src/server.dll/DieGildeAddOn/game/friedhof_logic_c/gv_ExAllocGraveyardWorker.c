@@ -6,7 +6,7 @@
 #pragma intrinsic(memset, strcpy)
 
 int __cdecl gv_CheckSlotActive(char*, int);
-extern char* DAT_100a8c30;
+extern int g_entity_type_table;
 extern int g_slot_count_cat0[]; /* 0x1002577c */
 extern int g_slot_count_cat1[]; /* 0x1002578c */
 extern int g_slot_count_cat2[]; /* 0x1002579c */
@@ -15,7 +15,6 @@ int __cdecl cm_GetBuildingStatCount(unsigned char*);
 char* __cdecl gv_FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
 int __cdecl gm_RandomMod(int);
 extern unsigned int __ftol(void);
-extern int g_entity_type_table;
 extern int g_1002575c[];
 extern int g_1002576c[];
 extern char g_1002d444;
@@ -28,16 +27,14 @@ int __cdecl gv_GetSlotEntry(int, int, unsigned char);
 int __cdecl gm_SubObjektNoKill(int, int, int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
 void __cdecl game_free(void*);
-extern int DAT_1003546c;
-extern short DAT_100358a0;
-int SpawnGraveyardEntities(unsigned char*, int);
 extern int g_entity_table_end;
+extern char* g_slot_table;
+int SpawnGraveyardEntities(unsigned char*, int);
 extern char* g_action_table_base;
-extern char g_slot_table[];
 double __cdecl gm_RandomFloat01(void);
-extern int DAT_10030b6c;
-extern int DAT_10035434;
-extern unsigned char DAT_10035439;
+extern int g_next_object_id;
+extern int g_citizen_count;
+extern unsigned char g_current_season;
 extern float DAT_10025680;
 extern float DAT_100257c4;
 extern float DAT_100257c8;
@@ -75,10 +72,10 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int cmd_payload)
 	search_loop_idx = 0;
 	gm_ResolveEntityById(&building_entity_ptr, 0, 0, *(unsigned int*) (cmd_payload + 8));
 	if (building_entity_ptr == 0 || *(unsigned short*) (building_entity_ptr + 0x27) == 0xffff ||
-		*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + (int) &DAT_100358a0 == DAT_1003546c) {
+		*(unsigned short*) (building_entity_ptr + 0x27) * 0x21c + (int) &g_slot_table == g_entity_table_end) {
 		return 0xffffffff;
 	}
-	if (*(char*) (DAT_100a8c30 + (unsigned int) *building_entity_ptr * 0x24d) != '\x1d') {
+	if (*(char*) (g_entity_type_table + (unsigned int) *building_entity_ptr * 0x24d) != '\x1d') {
 		return 0xfffffffe;
 	}
 	slot_scan_idx_or_capacity = *(int*) (building_entity_ptr + 0x65);
@@ -108,7 +105,7 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int cmd_payload)
 		} while (entity_slot_byte_offset < slot_scan_idx_or_capacity);
 		if (matched_production_record != 0 && *matched_production_record == *(int*) (cmd_payload + 0x11)) {
 			slot_scan_idx_or_capacity = 0;
-			for (slot_scan_ptr = (short*) &DAT_100358a0; slot_scan_ptr < (short*) 0x1009aca0;
+			for (slot_scan_ptr = (short*) &g_slot_table; slot_scan_ptr < (short*) 0x1009aca0;
 				slot_scan_ptr += 0x10e) {
 				if (*slot_scan_ptr == -1) {
 					break;
@@ -136,18 +133,18 @@ unsigned int __cdecl gv_ExAllocGraveyardWorker(int cmd_payload)
 			}
 			entity_slot_byte_offset = slot_scan_idx_or_capacity * 0x21c;
 			if (*(char*) (entity_slot_byte_offset + 0x100358a2) == '\x0f') {
-				DAT_10035434 = DAT_10035434 - 1;
+				g_citizen_count = g_citizen_count - 1;
 			}
-			new_entity_slot_ptr = (unsigned short*) (entity_slot_byte_offset + (int) &DAT_100358a0);
+			new_entity_slot_ptr = (unsigned short*) (entity_slot_byte_offset + (int) &g_slot_table);
 			memset(new_entity_slot_ptr, 0, 0x21c);
 			*new_entity_slot_ptr = 0xffff;
 			*(int*) (entity_slot_byte_offset + 0x100358a4) = (int) 0xffffffff;
 			memset((char*) (entity_slot_byte_offset + 0x100358fc), 0xff, 0x20);
 			*(unsigned char**) (entity_slot_byte_offset + 0x10035a10) = building_entity_ptr;
 			*(unsigned char**) (entity_slot_byte_offset + 0x10035a0c) = building_entity_ptr;
-			DAT_10035434 = DAT_10035434 + 1;
-			*(int*) (entity_slot_byte_offset + 0x100358a4) = DAT_10030b6c;
-			DAT_10030b6c = DAT_10030b6c + 1;
+			g_citizen_count = g_citizen_count + 1;
+			*(int*) (entity_slot_byte_offset + 0x100358a4) = g_next_object_id;
+			g_next_object_id = g_next_object_id + 1;
 			*new_entity_slot_ptr = (unsigned short) slot_scan_idx_or_capacity;
 			*(char*) (entity_slot_byte_offset + 0x100358a2) = 0x14;
 			*(int*) (entity_slot_byte_offset + 0x10035a90) = 0;

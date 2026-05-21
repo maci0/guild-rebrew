@@ -6,7 +6,7 @@
 #pragma intrinsic(memset, strcpy)
 
 int __cdecl gv_CheckSlotActive(char*, int);
-extern char* DAT_100a8c30;
+extern int g_entity_type_table;
 extern int g_slot_count_cat0[]; /* 0x1002577c */
 extern int g_slot_count_cat1[]; /* 0x1002578c */
 extern int g_slot_count_cat2[]; /* 0x1002579c */
@@ -15,7 +15,6 @@ int __cdecl cm_GetBuildingStatCount(unsigned char*);
 char* __cdecl gv_FindSlotEntryFiltered(char*, unsigned char*, char*, int(__cdecl*)(char*, char*), int);
 int __cdecl gm_RandomMod(int);
 extern unsigned int __ftol(void);
-extern int g_entity_type_table;
 extern int g_1002575c[];
 extern int g_1002576c[];
 extern char g_1002d444;
@@ -28,16 +27,14 @@ int __cdecl gv_GetSlotEntry(int, int, unsigned char);
 int __cdecl gm_SubObjektNoKill(int, int, int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
 void __cdecl game_free(void*);
-extern int DAT_1003546c;
-extern short DAT_100358a0;
-int SpawnGraveyardEntities(unsigned char*, int);
 extern int g_entity_table_end;
+extern char* g_slot_table;
+int SpawnGraveyardEntities(unsigned char*, int);
 extern char* g_action_table_base;
-extern char g_slot_table[];
 double __cdecl gm_RandomFloat01(void);
-extern int DAT_10030b6c;
-extern int DAT_10035434;
-extern unsigned char DAT_10035439;
+extern int g_next_object_id;
+extern int g_citizen_count;
+extern unsigned char g_current_season;
 extern float DAT_10025680;
 extern float DAT_100257c4;
 extern float DAT_100257c8;
@@ -2481,12 +2478,10 @@ __declspec(naked) int __cdecl gv_ReplaceProductionWorker(unsigned char* arg1)
 // ActivateGraveyardSection
 
 // DATA: SERVER 0x1003546c
-extern int g_entity_table_end;
 
 // DATA: SERVER 0x100a8c30
 extern char* g_action_table_base;
 
-extern char g_slot_table[];
 
 int __cdecl ActivateGraveyardSection(unsigned char* cmd_payload)
 {

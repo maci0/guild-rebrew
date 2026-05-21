@@ -10,20 +10,20 @@ void __cdecl ReportMessage(char* msg); /* Single arg log? */
 ;
 void* __cdecl _callnewh(int); /* 0x1001a7f7 */
 ;
-extern int DAT_10034624;
-extern int DAT_10034628;
-extern int DAT_1003462c;
-extern int DAT_10034630;
-extern int DAT_10034634;
+extern int g_array_count;
+extern int g_stat1;
+extern int g_stat2;
+extern int g_stat3;
+extern int g_stat4;
 extern int DAT_10034638;
-extern void* DAT_10034640;
+extern void* g_array_ptr;
 void __cdecl m_FreeHeapLocked(void* ptr);
 extern int DAT_117640b4;
 extern int DAT_117640b0;
 extern int DAT_117640bc;
 extern int DAT_117640b8;
 extern int DAT_117640c0;
-extern int DAT_117640c4;
+extern int g_list_head;
 extern int DAT_117640a0;
 extern int DAT_117640a4;
 extern int DAT_10028938;

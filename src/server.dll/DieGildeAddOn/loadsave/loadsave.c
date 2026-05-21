@@ -687,7 +687,6 @@ __declspec(naked) int __cdecl ls_LoadExistingEntities(int arg1)
  * state for each building entity. */
 
 // DATA: SERVER 0x1002d4ec
-extern int g_save_version;
 // DATA: SERVER 0x10035434
 extern int g_citizen_count;
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);

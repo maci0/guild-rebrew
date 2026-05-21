@@ -16,8 +16,8 @@ int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_DeallocEntity(unsigned int index, int param);
 void* __cdecl gm_NextEntityQueryMatch(void);
 extern float fColorScale;
-extern int DAT_10030b6c;
-extern char DAT_10035439;
+extern int g_next_object_id;
+extern char g_current_season;
 extern float DAT_100256cc;
 extern float DAT_100256a0;
 extern char s__ahm_AllocAhmInfo_1002a0f7[];
@@ -26,8 +26,8 @@ extern int DAT_1002c050[];
 int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
-extern int DAT_100a8c30;
-extern int DAT_10035434;
+extern int g_entity_type_table;
+extern int g_citizen_count;
 extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
 void* __cdecl m_AllocTracked(unsigned int size, const char* source);
@@ -85,7 +85,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	}
 
 	building_type = (unsigned char) *building_record;
-	if (*((char*) (DAT_100a8c30 + building_type + building_type * 0x24c)) != 0x1e) {
+	if (*((char*) (g_entity_type_table + building_type + building_type * 0x24c)) != 0x1e) {
 		LogMessageInternal((char*) 0x1002a10c, 0x451, (char*) 0x1002a168, 1);
 		return 0xffff;
 	}
@@ -111,7 +111,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 
 found_slot:
 	if (*(char*) (0x100358a2 + slot_index * 0x21c) == 0xf) {
-		DAT_10035434 = DAT_10035434 - 1;
+		g_citizen_count = g_citizen_count - 1;
 	}
 
 	slot = (char*) (0x100358a0 + slot_index * 0x21c);
@@ -121,13 +121,13 @@ found_slot:
 
 	memset(slot + 0x5c, 0, 0x20);
 
-	DAT_10035434 = DAT_10035434 + 1;
+	g_citizen_count = g_citizen_count + 1;
 	*(unsigned short*) slot = (unsigned short) slot_index;
 	*(int*) (slot + 0x170) = cmd_payload;
 	*(int*) (slot + 0x16c) = cmd_payload;
-	*(int*) (slot + 4) = DAT_10030b6c;
+	*(int*) (slot + 4) = g_next_object_id;
 	*(char*) (slot + 2) = 0;
-	DAT_10030b6c = DAT_10030b6c + 1;
+	g_next_object_id = g_next_object_id + 1;
 
 	*(int*) (slot + 0x1f0) = 0;
 	*(int*) (slot + 0x210) = -1;
@@ -250,7 +250,7 @@ found_slot:
 		);
 	}
 
-	gm_RefreshMarketAvailability((int) (unsigned char) DAT_10035439);
+	gm_RefreshMarketAvailability((int) (unsigned char) g_current_season);
 	*(int*) (slot + 0x1cc) = *(int*) (slot + 0x1cc) | 4;
 
 	return (unsigned short) *(short*) slot;

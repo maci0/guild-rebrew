@@ -10,20 +10,20 @@ void __cdecl ReportMessage(char* msg); /* Single arg log? */
 ;
 void* __cdecl _callnewh(int); /* 0x1001a7f7 */
 ;
-extern int DAT_10034624;
-extern int DAT_10034628;
-extern int DAT_1003462c;
-extern int DAT_10034630;
-extern int DAT_10034634;
+extern int g_array_count;
+extern int g_stat1;
+extern int g_stat2;
+extern int g_stat3;
+extern int g_stat4;
 extern int DAT_10034638;
-extern void* DAT_10034640;
+extern void* g_array_ptr;
 void __cdecl m_FreeHeapLocked(void* ptr);
 extern int DAT_117640b4;
 extern int DAT_117640b0;
 extern int DAT_117640bc;
 extern int DAT_117640b8;
 extern int DAT_117640c0;
-extern int DAT_117640c4;
+extern int g_list_head;
 extern int DAT_117640a0;
 extern int DAT_117640a4;
 extern int DAT_10028938;
@@ -54,8 +54,8 @@ __declspec(naked) void __cdecl m_FreeTracked(void* heapBlock)
 		push edi
 		je L_ret
 		mov eax, dword ptr [DAT_10034638]
-		mov ecx, dword ptr [DAT_10034624]
-		mov esi, dword ptr [DAT_10034640]
+		mov ecx, dword ptr [g_array_count]
+		mov esi, dword ptr [g_array_ptr]
 		dec eax
 		mov dword ptr [DAT_10034638], eax
 		xor eax, eax
@@ -85,22 +85,22 @@ __declspec(naked) void __cdecl m_FreeTracked(void* heapBlock)
 		push edx
 		mov dword ptr [esi + 8], 0
 		call m_FreeHeapLocked
-		mov edx, dword ptr [DAT_1003462c]
+		mov edx, dword ptr [g_stat2]
 		add esp, 4
 		dec edx
-		mov dword ptr [DAT_1003462c], edx
+		mov dword ptr [g_stat2], edx
 		mov eax, dword ptr [esi]
 		mov ecx, dword ptr [eax + 0x14]
 		dec ecx
 		mov dword ptr [eax + 0x14], ecx
-		mov edx, dword ptr [DAT_10034628]
+		mov edx, dword ptr [g_stat1]
 		sub edx, edi
-		mov dword ptr [DAT_10034628], edx
+		mov dword ptr [g_stat1], edx
 		mov esi, dword ptr [esi]
 		mov ecx, dword ptr [esi + 0x10]
 		sub ecx, edi
 		mov dword ptr [esi + 0x10], ecx
-		mov eax, dword ptr [DAT_10034628]
+		mov eax, dword ptr [g_stat1]
 		test eax, eax
 		jge L_ret
 		push 0x100288e0
@@ -129,22 +129,22 @@ __declspec(naked) void __cdecl InitPacketPool(int pool_id)
 		mov ebp, esp
 		mov eax, dword ptr [ebp + 8]
 		push ebx
-		mov dword ptr [DAT_10034624], eax
+		mov dword ptr [g_array_count], eax
 		push esi
 		shl eax, 4
 		push edi
 		mov edi, eax
 		xor esi, esi
 		push edi
-		mov dword ptr [DAT_10034628], esi
-		mov dword ptr [DAT_10034630], esi
-		mov dword ptr [DAT_1003462c], esi
-		mov dword ptr [DAT_10034634], esi
+		mov dword ptr [g_stat1], esi
+		mov dword ptr [g_stat3], esi
+		mov dword ptr [g_stat2], esi
+		mov dword ptr [g_stat4], esi
 		call malloc
 		add esp, 4
-		mov dword ptr [DAT_10034640], eax
+		mov dword ptr [g_array_ptr], eax
 		mov dword ptr [ebp + 8], edi
-		mov edi, dword ptr [DAT_10034640]
+		mov edi, dword ptr [g_array_ptr]
 		mov ebx, dword ptr [ebp + 8]
 		xor eax, eax
 		lea ecx, [edi + edi*2]
@@ -166,7 +166,7 @@ __declspec(naked) void __cdecl InitPacketPool(int pool_id)
 		mov dword ptr [DAT_117640bc], esi
 		mov dword ptr [DAT_117640b8], esi
 		mov dword ptr [DAT_117640c0], esi
-		mov dword ptr [DAT_117640c4], esi
+		mov dword ptr [g_list_head], esi
 		pop edi
 		pop esi
 		mov dword ptr [DAT_117640a0], eax
@@ -184,15 +184,10 @@ __declspec(naked) void __cdecl InitPacketPool(int pool_id)
 // ShutdownMemoryAllocator
 
 // DATA: SERVER 0x10034624
-extern int g_array_count;
 // DATA: SERVER 0x10034628
-extern int g_stat1;
 // DATA: SERVER 0x1003462c
-extern int g_stat2;
 // DATA: SERVER 0x10034630
-extern int g_stat3;
 // DATA: SERVER 0x10034634
-extern int g_stat4;
 // DATA: SERVER 0x1003463c
 extern int g_flag_3c;
 
@@ -205,7 +200,6 @@ struct ArrayItem {
 };
 
 // DATA: SERVER 0x10034640
-extern struct ArrayItem* g_array_ptr;
 
 // SIZE 0x28
 struct LinkedListNode {
@@ -214,7 +208,6 @@ struct LinkedListNode {
 };
 
 // DATA: SERVER 0x117640c4
-extern struct LinkedListNode* g_list_head;
 
 // DATA: SERVER 0x10028b04
 extern char g_str_10028b04[];

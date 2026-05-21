@@ -2,11 +2,11 @@
 extern unsigned short gm_RandomMod(unsigned int);
 unsigned int __cdecl gm_CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 void __cdecl table_lookup(unsigned int a, unsigned short* b);
-extern int DAT_100a8c30;
+extern int g_entity_type_table;
 unsigned int __cdecl FindAndMatchParents(unsigned int param);
-extern unsigned char DAT_10035a04;
+extern unsigned char g_entity_type_bytes;
 extern unsigned char DAT_10035a05;
-extern unsigned char DAT_100358a0;
+extern unsigned char g_slot_table;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
 /* Searches for matching parent entities by type and creates
@@ -296,7 +296,7 @@ __declspec(naked) void __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
 		xor edx, edx
 		push edi
 		mov dl, byte ptr [esi]
-		mov edi, dword ptr [DAT_100a8c30]
+		mov edi, dword ptr [g_entity_type_table]
 		add edi, edx
 		xor eax, eax
 		lea ecx, [edx + edx*2]
@@ -378,7 +378,7 @@ void* __cdecl sim_CreateCitizen(unsigned char flags, int citizen_type, int paren
 		}
 		if ((flags & 2) != 0) {
 			(&DAT_10035a05)[new_entity_slot * 0x21c] = stat_b;
-			(&DAT_10035a04)[new_entity_slot * 0x21c] = stat_a;
+			(&g_entity_type_bytes)[new_entity_slot * 0x21c] = stat_a;
 		}
 	}
 	else {
@@ -389,7 +389,7 @@ void* __cdecl sim_CreateCitizen(unsigned char flags, int citizen_type, int paren
 	if (new_entity_slot == 0xffff) {
 		goto error;
 	}
-	return &DAT_100358a0 + new_entity_slot * 0x21c;
+	return &g_slot_table + new_entity_slot * 0x21c;
 error:
 	LogMessageInternal(
 		"D:\\Develop\\DieGildeAddOn\\game\\sim.c",

@@ -10,20 +10,20 @@ void __cdecl ReportMessage(char* msg); /* Single arg log? */
 ;
 void* __cdecl _callnewh(int); /* 0x1001a7f7 */
 ;
-extern int DAT_10034624;
-extern int DAT_10034628;
-extern int DAT_1003462c;
-extern int DAT_10034630;
-extern int DAT_10034634;
+extern int g_array_count;
+extern int g_stat1;
+extern int g_stat2;
+extern int g_stat3;
+extern int g_stat4;
 extern int DAT_10034638;
-extern void* DAT_10034640;
+extern void* g_array_ptr;
 void __cdecl m_FreeHeapLocked(void* ptr);
 extern int DAT_117640b4;
 extern int DAT_117640b0;
 extern int DAT_117640bc;
 extern int DAT_117640b8;
 extern int DAT_117640c0;
-extern int DAT_117640c4;
+extern int g_list_head;
 extern int DAT_117640a0;
 extern int DAT_117640a4;
 extern int DAT_10028938;
@@ -51,7 +51,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* source)
 	int prev;
 	char* group;
 
-	if (DAT_10034640 == 0) {
+	if (g_array_ptr == 0) {
 		ReportFatalError(
 			"D:\\Develop\\Units\\m_alloc\\m_alloc.c",
 			0x93,
@@ -112,36 +112,36 @@ found: {
 		return 0;
 	}
 	memset(block, 0, prev);
-	if (DAT_1003462c < DAT_10034624) {
+	if (g_stat2 < g_array_count) {
 		int i;
 		int* slot;
 		i = 0;
-		slot = DAT_10034640;
-		if (DAT_10034624 > 0) {
+		slot = g_array_ptr;
+		if (g_array_count > 0) {
 			do {
 				if (slot[2] == 0) {
 					break;
 				}
 				slot = slot + 4;
 				i = i + 1;
-			} while (i < DAT_10034624);
+			} while (i < g_array_count);
 		}
 		slot[2] = (int) block;
 		slot[1] = (int) source;
 		slot[3] = size;
 		*slot = (int) group;
-		DAT_10034628 = DAT_10034628 + size;
-		if (DAT_10034628 > DAT_10034630) {
-			DAT_10034630 = DAT_10034628;
+		g_stat1 = g_stat1 + size;
+		if (g_stat1 > g_stat3) {
+			g_stat3 = g_stat1;
 		}
 		tmp = *(int*) (group + 0x10) + size;
 		*(int*) (group + 0x10) = tmp;
 		if (tmp > *(int*) (group + 0x18)) {
 			*(int*) (group + 0x18) = tmp;
 		}
-		DAT_1003462c = DAT_1003462c + 1;
-		if (DAT_1003462c > DAT_10034634) {
-			DAT_10034634 = DAT_1003462c;
+		g_stat2 = g_stat2 + 1;
+		if (g_stat2 > g_stat4) {
+			g_stat4 = g_stat2;
 		}
 		tmp = *(int*) (group + 0x14) + 1;
 		*(int*) (group + 0x14) = tmp;

@@ -44,10 +44,10 @@ extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
 extern unsigned char* DAT_1014d8c0;
-extern int DAT_100a8c30;
-extern unsigned char DAT_10035439;
+extern int g_entity_type_table;
+extern unsigned char g_current_season;
 extern int DAT_1003543c;
-extern char* DAT_101de450;
+extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -207,7 +207,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int player_id, int new_identity)
 
 	for (pNode = *(char**) (buf2 + 0x178); pNode != 0; pNode = *(char**) (pNode + 0x3f)) {
 		index_b = *(unsigned short*) pNode;
-		if (index_b != 0 && *(DAT_101de450 + (int) index_b * 0x41) == '\t') {
+		if (index_b != 0 && *(g_item_def_table + (int) index_b * 0x41) == '\t') {
 			gm_AddOrAccumulateObject(*(int*) (buf1 + 4), (int) index_b, *(int*) (pNode + 0xe));
 		}
 	}

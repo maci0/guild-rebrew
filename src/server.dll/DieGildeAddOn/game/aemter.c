@@ -20,7 +20,7 @@ typedef struct {
 #pragma pack(pop)
 
 extern SlotEntry DAT_101de5a0[];
-extern int DAT_101de5a4;
+extern int g_aemter_table;
 extern char DAT_101de5a8;
 extern int DAT_101de5ac;
 extern char DAT_101de5b0;
@@ -932,7 +932,6 @@ __declspec(naked) unsigned int __cdecl amt_fio_LoadAemter(int arg1, int arg2)
 }
 
 // DATA: SERVER 0x101de5a4
-extern char g_aemter_table[];
 
 unsigned int __cdecl amt_fio_LoadAemter_unused(int stream_handle, int version)
 {

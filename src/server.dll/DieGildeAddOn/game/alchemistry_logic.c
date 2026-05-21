@@ -16,8 +16,8 @@ int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_DeallocEntity(unsigned int index, int param);
 void* __cdecl gm_NextEntityQueryMatch(void);
 extern float fColorScale;
-extern int DAT_10030b6c;
-extern char DAT_10035439;
+extern int g_next_object_id;
+extern unsigned char g_current_season;
 extern float DAT_100256cc;
 extern float DAT_100256a0;
 extern char s__ahm_AllocAhmInfo_1002a0f7[];
@@ -93,13 +93,11 @@ int __cdecl ahm_CheckFlag(char* p)
 extern int g_entity_type_table;
 
 // DATA: SERVER 0x10030b6c
-extern int g_next_object_id;
 
 // DATA: SERVER 0x10035434
 extern int g_citizen_count;
 
 // DATA: SERVER 0x10035439
-extern unsigned char g_current_season;
 
 // DATA: SERVER 0x1002a0f8
 extern char g_1002a0f8[];
@@ -366,7 +364,7 @@ __declspec(naked) int __cdecl ahm_AllocateEntitySlot(int cmd_payload, int arg2, 
 		push ecx
 		call gm_StartEntityQuery
 		mov ecx, dword ptr [esp + 0x20]
-		mov edx, dword ptr [DAT_10030b6c]
+		mov edx, dword ptr [g_next_object_id]
 		add esp, 0x14
 		mov dword ptr [ecx + 0x14], edx
 		mov edx, dword ptr [ecx + 8]
@@ -384,7 +382,7 @@ __declspec(naked) int __cdecl ahm_AllocateEntitySlot(int cmd_payload, int arg2, 
 		add esp, 0xc
 	L_skip_add:
 		xor eax, eax
-		mov al, byte ptr [DAT_10035439]
+		mov al, byte ptr [g_current_season]
 		push eax
 		call gm_RefreshMarketAvailability
 		add esp, 4

@@ -20,7 +20,7 @@ typedef struct {
 #pragma pack(pop)
 
 extern SlotEntry DAT_101de5a0[];
-extern int DAT_101de5a4;
+extern int g_aemter_table;
 extern char DAT_101de5a8;
 extern int DAT_101de5ac;
 extern char DAT_101de5b0;

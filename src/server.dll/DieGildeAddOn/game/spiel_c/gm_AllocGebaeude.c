@@ -44,10 +44,10 @@ extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
 extern unsigned char* DAT_1014d8c0;
-extern int DAT_100a8c30;
-extern unsigned char DAT_10035439;
+extern int g_entity_type_table;
+extern unsigned char g_current_season;
 extern int DAT_1003543c;
-extern char* DAT_101de450;
+extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -68,7 +68,7 @@ extern int DAT_100a8c38;
 extern int* DAT_101398a0;
 extern int* DAT_1013989c;
 extern char* g_array_base;
-extern int DAT_10030b6c;
+extern int g_next_object_id;
 char* __cdecl gm_SearchStruct(void);
 int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
@@ -94,7 +94,7 @@ int __cdecl gm_AllocGebaeude(int building_type, int location_id)
 	short item;
 	unsigned short* qres;
 
-	if (DAT_100a8c30 == 0) {
+	if (g_entity_type_table == 0) {
 		return 0;
 	}
 
@@ -107,14 +107,14 @@ int __cdecl gm_AllocGebaeude(int building_type, int location_id)
 
 	*slot = (char) building_type;
 	btype = building_type & 0xff;
-	info_record = (char*) (DAT_100a8c30 + btype + btype * 0x24c);
+	info_record = (char*) (g_entity_type_table + btype + btype * 0x24c);
 
-	counter = DAT_10030b6c;
+	counter = g_next_object_id;
 	sprintf(path_buf, (char*) 0x10031438, btype, counter);
 	LogMessageInternal((char*) 0x10031004, 0x10d8, path_buf, 8);
 
-	*(int*) (slot + 1) = DAT_10030b6c;
-	DAT_10030b6c = DAT_10030b6c + 1;
+	*(int*) (slot + 1) = g_next_object_id;
+	g_next_object_id = g_next_object_id + 1;
 	*(short*) (slot + 0x25) = (short) location_id;
 	*(short*) (slot + 0x27) = (short) location_id;
 	*(int*) (slot + 0x3d) = 0x64;
@@ -153,7 +153,7 @@ int __cdecl gm_AllocGebaeude(int building_type, int location_id)
 		}
 
 		item_type = (int) (unsigned short) item & 0x7fff;
-		category = *(DAT_101de450 + item_type * 0x41);
+		category = *(g_item_def_table + item_type * 0x41);
 
 		if (category == 2 || category == 6) {
 			has_producer = 1;

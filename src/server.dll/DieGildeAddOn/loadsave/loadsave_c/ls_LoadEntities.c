@@ -51,7 +51,7 @@ int ls_LoadTownData(int);
 extern int amt_fio_LoadAemter(int, int);
 extern unsigned int ls_ID2Ptr(void);
 
-extern int DAT_10035434;
+extern int g_citizen_count;
 extern int DAT_10035470;
 extern int DAT_10035474;
 extern int DAT_10035478;
@@ -78,7 +78,7 @@ int __cdecl ls_LoadEntities(int ctx)
 	if (ls_ReadVfsDataChecked(&header_field, 4, 1, (void*) ctx) == 0) {
 		return 0;
 	}
-	DAT_10035434 = header_field;
+	g_citizen_count = header_field;
 	if (ls_ReadVfsDataChecked(&DAT_10035470, 4, 1, (void*) ctx) == 0) {
 		return 0;
 	}
