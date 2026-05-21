@@ -17,7 +17,6 @@ extern int g_next_object_id;
 extern unsigned char g_current_season;
 extern float g_float_const_cc;
 extern float g_float_const_a0;
-extern char s__ahm_AllocAhmInfo_1002a0f7[];
 extern double dScaleFactor;
 extern int g_alchemy_entity_table[];
 int* __cdecl ahm_LookupEntityInTable(int);

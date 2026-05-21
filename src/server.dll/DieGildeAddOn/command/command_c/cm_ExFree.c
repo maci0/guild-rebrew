@@ -15,8 +15,6 @@
 #include "../../../Units/Error/error.h"
 
 
-extern char s_Invalid_Id_for_cmdt_FREE_in_cm_E_1002cc5c[];
-extern char s_cm_ExFree____Can_t_free_Objects_1002cc3c[];
 
 /* Execution handler: frees/deallocates a game entity. Resolves
  * entity by ID and removes it from the game world. Logs error

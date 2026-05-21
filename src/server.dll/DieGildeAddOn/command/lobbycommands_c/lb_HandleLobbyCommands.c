@@ -4,10 +4,6 @@
 #include "../../../Units/Error/error.h"
 
 /* Module-specific external strings and data */
-extern char s_D__Develop_DieGildeAddOn_command_1002d70c[];
-extern char s_invalid_client_state_1002d740[];
-extern char s_Got_lb_ExPlayerlist_1002d6f8[];
-extern char s_lb_ExLobbyServerCommand___i_1002d858[];
 
 /* Module-specific globals with complex types */
 extern PlayerSlot g_player_slots_base[8];

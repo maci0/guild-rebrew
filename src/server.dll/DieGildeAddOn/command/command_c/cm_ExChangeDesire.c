@@ -5,7 +5,6 @@
 
 extern double _g_stat_min_d;
 extern double _g_stat_max_d;
-extern char s_cm_ExChangeDesire___Invalid_Id_1002d0f4[];
 
 /* Execution handler: modifies a character's desire/need stat.
  * Reads entity and stat index from the command, applies a delta

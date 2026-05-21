@@ -9,8 +9,6 @@ extern char g_player_slot_0[];
 ushort __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 char* __cdecl strncpy(char*, const char*, unsigned int);
 
-extern char s_ClientSpieler_erzeugt_1002cbbc[];
-extern char s_gm_AllocSpieler___failed_1002cbd4[];
 
 /* Execution handler: allocates a client-side player entity.
  * Similar to cm_ExAllocSpieler but for client-connected players,

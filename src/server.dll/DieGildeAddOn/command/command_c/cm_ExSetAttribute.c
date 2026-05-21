@@ -8,7 +8,6 @@
 #include "../../../Units/Error/error.h"
 #include "../command_internal.h"
 
-extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
 /* Command handler: applies attribute updates to a game entity.
  * Resolves the target entity by ID from the command packet (offset 0x10),
  * then iterates over a list of field descriptors starting at offset 0x15.

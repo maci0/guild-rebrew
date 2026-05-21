@@ -272,6 +272,3 @@ int __cdecl ls_LoadTownData(int file)
  * entity tables for a matching ID and returns the memory
  * address. Used during save loading to resolve references. */
 
-extern char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[];
-extern char s_D__Develop_DieGildeAddOn_loadsav_1002d550[];
-extern char s_ls_ID2Ptr____Houston__wir_haben_e_1002d520[];
