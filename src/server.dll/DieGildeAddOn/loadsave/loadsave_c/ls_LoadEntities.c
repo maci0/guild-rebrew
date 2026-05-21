@@ -60,7 +60,7 @@ extern int DAT_10035478;
  * production slots, worker assignments, and field states
  * for graveyard buildings. */
 
-// STUB: SERVER 0x10013230
+// FUNCTION: SERVER 0x10013230
 // ls_LoadEntities
 
 int __cdecl ls_LoadEntities(int ctx)
