@@ -63,12 +63,12 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 // FUNCTION: SERVER 0x1000f680
 int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 {
-	ushort* puVar1;
-	ushort* puVar2;
-	int* piVar3;
+	ushort* building;
+	ushort* match;
+	int* slot_scan;
 
-	puVar1 = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
-	if (puVar1 == (ushort*) 0x0) {
+	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
+	if (building == (ushort*) 0x0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x4c32,
@@ -78,23 +78,23 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 		return 1;
 	}
 
-	puVar2 = gm_StartEntityQuery(0, 2, 7, 4, 0x1d);
-	while (puVar2 != (ushort*) 0x0) {
-		if (*(int*) (puVar2 + 0xe) == *(int*) ((int) puVar1 + 1)) {
-			gm_RemoveEntityLink((int) puVar2);
+	match = gm_StartEntityQuery(0, 2, 7, 4, 0x1d);
+	while (match != (ushort*) 0x0) {
+		if (*(int*) (match + 0xe) == *(int*) ((int) building + 1)) {
+			gm_RemoveEntityLink((int) match);
 		}
-		puVar2 = gm_NextEntityQueryMatch();
+		match = gm_NextEntityQueryMatch();
 	}
 
-	piVar3 = &g_work_building_ptrs;
+	slot_scan = &g_work_building_ptrs;
 	do {
-		if ((ushort*) *piVar3 == puVar1) {
-			*piVar3 = 0;
+		if ((ushort*) *slot_scan == building) {
+			*slot_scan = 0;
 		}
-		piVar3 = piVar3 + 0x87;
-	} while ((int) piVar3 < 0x1009ae0c);
+		slot_scan = slot_scan + 0x87;
+	} while ((int) slot_scan < 0x1009ae0c);
 
-	gm_CleanupBuildingEntity((uchar*) puVar1);
+	gm_CleanupBuildingEntity((uchar*) building);
 
 	if (result != (char*) 0x0) {
 		*result = '\x02';

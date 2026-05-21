@@ -39,10 +39,10 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 // FUNCTION: SERVER 0x1000cfe0
 int __cdecl cm_ChkSetGebBesitzer(char* obj)
 {
-	ushort* puVar1;
+	ushort* building;
 
-	puVar1 = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0x10));
-	if ((puVar1 != (ushort*) 0x0) && ((puVar1[0x2d] & 2) != 0)) {
+	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0x10));
+	if ((building != (ushort*) 0x0) && ((building[0x2d] & 2) != 0)) {
 		return 0;
 	}
 	LogMessageInternal(

@@ -49,7 +49,7 @@ typedef struct {
 // FUNCTION: SERVER 0x1000c710
 // GetCommandPayloadSize
 
-int GetCommandPayloadSize(unsigned char* param_1)
+int GetCommandPayloadSize(unsigned char* cmd_payload)
 
 {
 	int entry_size;
@@ -58,7 +58,7 @@ int GetCommandPayloadSize(unsigned char* param_1)
 	int count;
 
 	// switch table (103 cases) at 0x1000c864
-	switch (*param_1) {
+	switch (*cmd_payload) {
 	case 3:
 	case 0x13:
 	case 0x1a:
@@ -126,11 +126,11 @@ int GetCommandPayloadSize(unsigned char* param_1)
 		return 0x39;
 	case 0x16:
 	case 0x17:
-		cursor = param_1 + (*param_1 == 0x16 ? 0x15 : 0x15);
+		cursor = cmd_payload + (*cmd_payload == 0x16 ? 0x15 : 0x15);
 		total_size = 0x15;
 		break;
 	case 0x18:
-		return param_1[0x14] * 5 + 0x15;
+		return cmd_payload[0x14] * 5 + 0x15;
 	case 0x19:
 	case 0x53:
 		return 0x24;
@@ -140,7 +140,7 @@ int GetCommandPayloadSize(unsigned char* param_1)
 	case 0x1d:
 		return 0x5f;
 	case 0x20:
-		return (-(param_1[0x10] != '\x0e') & 0x7c) + 0x11;
+		return (-(cmd_payload[0x10] != '\x0e') & 0x7c) + 0x11;
 	case 0x22:
 		return 0x3d;
 	case 0x2d:
@@ -197,7 +197,7 @@ int GetCommandPayloadSize(unsigned char* param_1)
 	case 0x62:
 		return 0x29;
 	}
-	for (count = param_1[0x14]; count > 0; count = count - 1) {
+	for (count = cmd_payload[0x14]; count > 0; count = count - 1) {
 		entry_size = cursor[1] * *cursor + 4;
 		total_size = total_size + entry_size;
 		cursor = cursor + entry_size;

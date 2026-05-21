@@ -3057,15 +3057,15 @@ unsigned int gv_MoveSlotEntry_unused(int arg1)
 			*(int*) (cmd_ptr_saved + 0xd)
 		);
 		if (dst_slot_entry_ptr != 0) {
-			int* piVar5;
-			int* piVar7;
-			int* piVar8;
+			int* dst_worker_ptr;
+			int* clear_ptr;
+			int* dst_worker_end;
 			int word_copy_count;
-			piVar5 = *(int**) (dst_slot_entry_ptr + 0x10);
-			piVar8 = piVar5 + *(int*) (*(int*) (cmd_ptr_saved + 0xd) * 4 + 0x1002574c) * 0x11;
+			dst_worker_ptr = *(int**) (dst_slot_entry_ptr + 0x10);
+			dst_worker_end = dst_worker_ptr + *(int*) (*(int*) (cmd_ptr_saved + 0xd) * 4 + 0x1002574c) * 0x11;
 			src_worker_array_end = (int) (src_worker_array_ptr + src_worker_array_end * 0x11);
-			for (; piVar5 < piVar8; piVar5 = piVar5 + 0x11) {
-				if (*piVar5 == -1) {
+			for (; dst_worker_ptr < dst_worker_end; dst_worker_ptr = dst_worker_ptr + 0x11) {
+				if (*dst_worker_ptr == -1) {
 					while (1) {
 						if ((int*) src_worker_array_end <= src_worker_array_ptr) {
 							goto code_r0x10011b0d;
@@ -3077,17 +3077,17 @@ unsigned int gv_MoveSlotEntry_unused(int arg1)
 					}
 					{
 						int* pSrc = src_worker_array_ptr;
-						int* pDst = piVar5;
+						int* pDst = dst_worker_ptr;
 						for (word_copy_count = 0x11; word_copy_count != 0; word_copy_count = word_copy_count + -1) {
 							*pDst = *pSrc;
 							pSrc = pSrc + 1;
 							pDst = pDst + 1;
 						}
 					}
-					piVar7 = src_worker_array_ptr;
+					clear_ptr = src_worker_array_ptr;
 					for (word_copy_count = 0x11; word_copy_count != 0; word_copy_count = word_copy_count + -1) {
-						*piVar7 = 0;
-						piVar7 = piVar7 + 1;
+						*clear_ptr = 0;
+						clear_ptr = clear_ptr + 1;
 					}
 					*src_worker_array_ptr = -1;
 					field_or_slot_ptr = saved_src_slot_entry_ptr;

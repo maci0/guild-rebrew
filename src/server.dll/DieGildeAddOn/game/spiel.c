@@ -3431,15 +3431,15 @@ int __cdecl gm_GetMsgField(char* msg, char* pkt)
 
 int __cdecl compute_size(char* pkt)
 {
-	int iVar1;
-	iVar1 = *(int*) (pkt + 0xe);
+	int count;
+	count = *(int*) (pkt + 0xe);
 	if (*(short*) pkt == 0x1dd) {
-		return (iVar1 + 2) * 5;
+		return (count + 2) * 5;
 	}
-	if (iVar1 == 3) {
+	if (count == 3) {
 		return 0x50;
 	}
-	return iVar1 * 0x14;
+	return count * 0x14;
 }
 
 /* Checks if an object can be produced (Kann Objekt Hergestellt).

@@ -69,11 +69,11 @@ extern char s_cm_ExCreateGeb____failed_1002d400[];
 // FUNCTION: SERVER 0x1000fb30
 int __cdecl cm_ExCreateGeb(int cmd, char* result)
 {
-	unsigned short* puVar1;
-	char* pcVar2;
+	unsigned short* owner_record;
+	char* building;
 
-	puVar1 = (unsigned short*) gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
-	if (puVar1 == (unsigned short*) 0) {
+	owner_record = (unsigned short*) gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
+	if (owner_record == (unsigned short*) 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x5386,
@@ -84,17 +84,17 @@ int __cdecl cm_ExCreateGeb(int cmd, char* result)
 	}
 
 	*(int*) (cmd + 0x14) = g_timestamp_0b6c;
-	pcVar2 = gm_AllocGebaeude(*(unsigned char*) (cmd + 0x18), *puVar1);
-	if (pcVar2 == (char*) 0) {
+	building = gm_AllocGebaeude(*(unsigned char*) (cmd + 0x18), *owner_record);
+	if (building == (char*) 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x539e, s_cm_ExCreateGeb____failed_1002d400, 1);
 		return 1;
 	}
 
-	g_player_slot_0[(unsigned int) *(unsigned char*) (cmd + 3)].data = *(int*) (pcVar2 + 1);
+	g_player_slot_0[(unsigned int) *(unsigned char*) (cmd + 3)].data = *(int*) (building + 1);
 	if (result != (char*) 0) {
 		*result = '\x01';
 		result[1] = '\x02';
-		*(char**) (result + 6) = pcVar2;
+		*(char**) (result + 6) = building;
 	}
 
 	return 0;
