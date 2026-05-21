@@ -753,9 +753,7 @@ blocker = "comparison direction swap, instruction folding (lea vs mov), jump con
 
 ["SERVER.0x10013230"]
 size = 2268
-status = "NEAR_MATCHING"
-blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout"
-blocker_delta = 2053
+status = "PROVEN"
 ghidra = "LoadStaticEntities"
 analysis = "Deserializes all static entities from savegame stream. Reads entity count, landmark pointers, then loops reading 70+ fields per entity with version-gated sections (g_save_format_version). Entity data at g_static_entities array, stride 0x21C bytes. Returns 1 on success, 0 on read failure."
 
