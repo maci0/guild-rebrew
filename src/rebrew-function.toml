@@ -35,7 +35,7 @@ status = "EXACT"
 
 ["SERVER.0x10003320"]
 size = 404
-status = "RELOC"
+status = "PROVEN"
 ghidra = "DecodePotentialControlTransfer"
 
 ["SERVER.0x100034c0"]
@@ -180,7 +180,7 @@ status = "PROVEN"
 
 ["SERVER.0x10009e60"]
 size = 419
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000a010"]
 size = 112
@@ -401,7 +401,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000d260"]
 size = 120
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000d2e0"]
 size = 77
