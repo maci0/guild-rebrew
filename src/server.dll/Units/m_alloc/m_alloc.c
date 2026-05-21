@@ -18,13 +18,13 @@ extern int g_stat4;
 extern int g_alloc_counter;
 extern void* g_array_ptr;
 void __cdecl m_FreeHeapLocked(void* ptr);
-extern int DAT_117640b4;
-extern int DAT_117640b0;
-extern int DAT_117640bc;
-extern int DAT_117640b8;
-extern int DAT_117640c0;
+extern int g_alloc_root_count;
+extern int g_alloc_root_size_total;
+extern int g_alloc_root_count_max;
+extern int g_alloc_root_size_max;
+extern int g_alloc_root_field_20;
 extern int g_list_head;
-extern int DAT_117640a0;
+extern int g_alloc_root_name;
 extern int DAT_117640a4;
 extern int DAT_10028938;
 extern int DAT_1002893c;
@@ -161,15 +161,15 @@ __declspec(naked) void __cdecl InitPacketPool(int pool_id)
 		rep stosb
 		mov eax, dword ptr [DAT_10028938]
 		mov ecx, dword ptr [DAT_1002893c]
-		mov dword ptr [DAT_117640b4], esi
-		mov dword ptr [DAT_117640b0], esi
-		mov dword ptr [DAT_117640bc], esi
-		mov dword ptr [DAT_117640b8], esi
-		mov dword ptr [DAT_117640c0], esi
+		mov dword ptr [g_alloc_root_count], esi
+		mov dword ptr [g_alloc_root_size_total], esi
+		mov dword ptr [g_alloc_root_count_max], esi
+		mov dword ptr [g_alloc_root_size_max], esi
+		mov dword ptr [g_alloc_root_field_20], esi
 		mov dword ptr [g_list_head], esi
 		pop edi
 		pop esi
-		mov dword ptr [DAT_117640a0], eax
+		mov dword ptr [g_alloc_root_name], eax
 		mov dword ptr [DAT_117640a4], ecx
 		pop ebx
 		pop ebp

@@ -35,7 +35,7 @@ int __cdecl _getpid(void);
 extern char* g_entity_ptr;
 void __cdecl vfs_EntityCleanup(char*);
 extern unsigned short* g_query_base;
-extern int DAT_10035450;
+extern int g_query_limit;
 extern Record* g_records;
 void __cdecl free_block(int);
 extern int g_data_ptr;
@@ -310,9 +310,9 @@ __declspec(naked) void __cdecl gm_CleanupObjectEntities(void)
 		mov edx, dword ptr [g_query_base]
 		add esp, 4
 		mov word ptr [esi + edx], 0
-		mov eax, dword ptr [DAT_10035450]
+		mov eax, dword ptr [g_query_limit]
 		dec eax
-		mov dword ptr [DAT_10035450], eax
+		mov dword ptr [g_query_limit], eax
 	L_next:
 		add esi, 0x43
 		cmp esi, 0x14f218
@@ -802,11 +802,11 @@ __declspec(naked) int __cdecl gm_RemoveLinkedNodeById(int* arg1, int arg2)
 		mov dword ptr [ebx + 0x3f], ecx
 	L_finish:
 		mov word ptr [esi], 0
-		mov eax, dword ptr [DAT_10035450]
+		mov eax, dword ptr [g_query_limit]
 		dec eax
 		pop edi
 		pop esi
-		mov dword ptr [DAT_10035450], eax
+		mov dword ptr [g_query_limit], eax
 		pop ebp
 		xor eax, eax
 		pop ebx
@@ -1429,22 +1429,22 @@ MATCH:
 // DATA: SERVER 0x100a8c30
 
 // DATA: SERVER 0x10030b8c
-extern short DAT_10030b8c;
+extern short g_query_filter_extra2;
 
 // DATA: SERVER 0x10030b8e
-extern short DAT_10030b8e;
+extern short g_query_filter_extra3;
 
 // DATA: SERVER 0x10030b84
 extern char DAT_10030b84;
 
 // DATA: SERVER 0x10030b88
-extern int DAT_10030b88;
+extern int g_query_filter_extra1;
 
 // DATA: SERVER 0x10030b90
-extern char DAT_10030b90;
+extern char g_query_filter_extra4;
 
 // DATA: SERVER 0x10035444
-extern char* DAT_10035444;
+extern char* g_dynasty_field_44;
 
 // DATA: SERVER 0x10035449
 extern char DAT_10035449;
@@ -1453,7 +1453,7 @@ extern char DAT_10035449;
 extern int DAT_1003544c;
 
 // DATA: SERVER 0x10035448
-extern char DAT_10035448;
+extern char g_dynasty_field_48;
 
 // DATA: SERVER 0x10035464
 extern unsigned char* g_query_filter_base;

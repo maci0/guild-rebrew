@@ -35,7 +35,7 @@ int __cdecl _getpid(void);
 extern char* g_entity_ptr;
 void __cdecl vfs_EntityCleanup(char*);
 extern unsigned short* g_query_base;
-extern int DAT_10035450;
+extern int g_query_limit;
 extern Record* g_records;
 void __cdecl free_block(int);
 extern int g_data_ptr;

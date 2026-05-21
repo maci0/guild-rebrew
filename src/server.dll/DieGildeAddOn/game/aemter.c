@@ -19,7 +19,7 @@ typedef struct {
 } SlotEntry;
 #pragma pack(pop)
 
-extern SlotEntry DAT_101de5a0[];
+extern SlotEntry g_office_slots[];
 extern int g_aemter_table;
 extern char DAT_101de5a8;
 extern int DAT_101de5ac;
@@ -28,7 +28,7 @@ void* __cdecl gm_LookupEntityRecordById(int);
 extern int DAT_101de5b4[];
 extern ENT g_ents[];
 extern ENT g_ents2[];
-extern unsigned short DAT_10035884;
+extern unsigned short g_default_value_b;
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void __cdecl InitBuildingTypeTable(void);
 
@@ -547,7 +547,7 @@ __declspec(naked) int __cdecl amt_ClearEntityLinks(int arg1)
 		push ebp
 		mov ebp, dword ptr [esp + 0xc]
 		push esi
-		mov si, word ptr [DAT_10035884]
+		mov si, word ptr [g_default_value_b]
 		xor ebx, ebx
 		xor eax, eax
 		mov ecx, 0x101de5b4
@@ -613,7 +613,7 @@ __declspec(naked) void __cdecl amt_UpdateEntityLinks(int arg1, int arg2)
 	(void) arg1;
 	(void) arg2;
 	__asm {
-		mov dx, word ptr [DAT_10035884]
+		mov dx, word ptr [g_default_value_b]
 		push ebx
 		push ebp
 		mov ebp, dword ptr [esp + 0xc]

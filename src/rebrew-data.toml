@@ -73,36 +73,44 @@ name = "g_1002a0f8"
 section = ".data"
 
 ["SERVER.0x100256b4"]
-name = "g_100256b4"
+name = "g_float_const_b4"
 section = ".rdata"
+type = "float"
 
 ["SERVER.0x100256b8"]
-name = "g_100256b8"
+name = "g_float_const_b8"
 section = ".rdata"
+type = "float"
 
 ["SERVER.0x100256c0"]
-name = "g_100256c0"
+name = "g_float_const_c0"
 section = ".rdata"
+type = "float"
 
 ["SERVER.0x100256c4"]
-name = "g_100256c4"
+name = "g_float_const_c4"
 section = ".rdata"
+type = "float"
 
 ["SERVER.0x100256c8"]
-name = "g_100256c8"
+name = "g_float_const_c8"
 section = ".rdata"
+type = "float"
 
 ["SERVER.0x100256a0"]
-name = "g_100256a0"
+name = "g_float_const_a0"
 section = ".rdata"
+type = "float"
 
 ["SERVER.0x100256ac"]
-name = "g_100256ac"
+name = "g_float_const_ac"
 section = ".rdata"
+type = "float"
 
 ["SERVER.0x100256b0"]
-name = "g_100256b0"
+name = "g_float_const_b0"
 section = ".rdata"
+type = "float"
 
 ["SERVER.0x1003546c"]
 name = "g_entity_table_end"
@@ -193,21 +201,31 @@ type = "unsigned short*"
 
 ["SERVER.0x10030b8c"]
 section = ".data"
+name = "g_query_filter_extra2"
+type = "int"
 
 ["SERVER.0x10030b8e"]
 section = ".data"
+name = "g_query_filter_extra3"
+type = "short"
 
 ["SERVER.0x10030b84"]
 section = ".data"
 
 ["SERVER.0x10030b88"]
 section = ".data"
+name = "g_query_filter_extra1"
+type = "int"
 
 ["SERVER.0x10030b90"]
 section = ".data"
+name = "g_query_filter_extra4"
+type = "int"
 
 ["SERVER.0x10035444"]
 section = ".data"
+name = "g_dynasty_field_44"
+type = "int"
 
 ["SERVER.0x10035449"]
 section = ".data"
@@ -217,6 +235,8 @@ section = ".data"
 
 ["SERVER.0x10035448"]
 section = ".data"
+name = "g_dynasty_field_48"
+type = "int"
 
 ["SERVER.0x10035464"]
 section = ".data"
@@ -229,16 +249,19 @@ section = ".data"
 type = "int"
 
 ["SERVER.0x10035884"]
-name = "g_10035884"
+name = "g_default_value_b"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10035888"]
-name = "g_10035888"
+name = "g_default_value_c"
 section = ".data"
+type = "int"
 
 ["SERVER.0x1003588c"]
-name = "g_1003588c"
+name = "g_default_value_d"
 section = ".data"
+type = "short"
 
 ["SERVER.0x1009acfc"]
 name = "g_some_limit"
@@ -385,4 +408,48 @@ type = "int*"
 
 ["SERVER.0x10034638"]
 name = "g_alloc_counter"
+type = "int"
+
+["SERVER.0x10035450"]
+name = "g_query_limit"
+type = "int"
+
+["SERVER.0x101de5a0"]
+name = "g_office_slots"
+type = "char*"
+
+["SERVER.0x100256bc"]
+name = "g_float_const_bc"
+type = "float"
+
+["SERVER.0x100256cc"]
+name = "g_float_const_cc"
+type = "float"
+
+["SERVER.0x117640a0"]
+name = "g_alloc_root_name"
+type = "char"
+
+["SERVER.0x117640b0"]
+name = "g_alloc_root_size_total"
+type = "int"
+
+["SERVER.0x117640b4"]
+name = "g_alloc_root_count"
+type = "int"
+
+["SERVER.0x117640b8"]
+name = "g_alloc_root_size_max"
+type = "int"
+
+["SERVER.0x117640bc"]
+name = "g_alloc_root_count_max"
+type = "int"
+
+["SERVER.0x117640c0"]
+name = "g_alloc_root_field_20"
+type = "int"
+
+["SERVER.0x1003540c"]
+name = "g_dynamic_count"
 type = "int"

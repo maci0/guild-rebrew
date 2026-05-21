@@ -1176,7 +1176,7 @@ void __cdecl LogWinsockError(int err_code)
  * definitions (costs, capacities, upgrade paths) from game
  * data into the runtime type table. */
 
-extern char DAT_101de5a0[];
+extern char g_office_slots[];
 
 // FUNCTION: SERVER 0x1000b040
 // InitBuildingTypeTable
@@ -1190,7 +1190,7 @@ __declspec(naked) void InitBuildingTypeTable(void)
 		push ebx
 		push edi
 		mov dword ptr [ebp - 4], 0x3f0
-		mov edi, offset DAT_101de5a0
+		mov edi, offset g_office_slots
 		mov ebx, dword ptr [ebp - 4]
 		xor eax, eax
 		lea ecx, [edi + edi*2]
@@ -1207,7 +1207,7 @@ __declspec(naked) void InitBuildingTypeTable(void)
 		rep stosb
 		xor ecx, ecx
 		pop edi
-		mov eax, offset DAT_101de5a0 + 4
+		mov eax, offset g_office_slots + 4
 		or edx, 0xffffffff
 		pop ebx
 	L_loop_init:
@@ -1216,53 +1216,53 @@ __declspec(naked) void InitBuildingTypeTable(void)
 		mov dword ptr [eax + 0x10], edx
 		add eax, 0x18
 		inc ecx
-		cmp eax, offset DAT_101de5a0 + 0x3f4
+		cmp eax, offset g_office_slots + 0x3f4
 		jl L_loop_init
 		mov al, 1
-		mov byte ptr [DAT_101de5a0 + 0x38], 2
-		mov byte ptr [DAT_101de5a0 + 0x8], al
-		mov byte ptr [DAT_101de5a0 + 0x20], al
+		mov byte ptr [g_office_slots + 0x38], 2
+		mov byte ptr [g_office_slots + 0x8], al
+		mov byte ptr [g_office_slots + 0x20], al
 		mov al, 4
-		mov byte ptr [DAT_101de5a0 + 0x50], 3
-		mov byte ptr [DAT_101de5a0 + 0x68], al
-		mov byte ptr [DAT_101de5a0 + 0x80], al
+		mov byte ptr [g_office_slots + 0x50], 3
+		mov byte ptr [g_office_slots + 0x68], al
+		mov byte ptr [g_office_slots + 0x80], al
 		mov al, 7
-		mov byte ptr [DAT_101de5a0 + 0x98], 5
-		mov byte ptr [DAT_101de5a0 + 0xb0], 6
-		mov byte ptr [DAT_101de5a0 + 0xc8], al
-		mov byte ptr [DAT_101de5a0 + 0xe0], al
-		mov byte ptr [DAT_101de5a0 + 0xf8], 8
-		mov byte ptr [DAT_101de5a0 + 0x110], 9
-		mov byte ptr [DAT_101de5a0 + 0x128], 0xa
-		mov byte ptr [DAT_101de5a0 + 0x140], 0xb
-		mov byte ptr [DAT_101de5a0 + 0x158], 0xc
-		mov byte ptr [DAT_101de5a0 + 0x170], 0xd
-		mov byte ptr [DAT_101de5a0 + 0x188], 0xe
-		mov byte ptr [DAT_101de5a0 + 0x1a0], 0xf
-		mov byte ptr [DAT_101de5a0 + 0x1b8], 0x10
-		mov byte ptr [DAT_101de5a0 + 0x1d0], 0x11
-		mov byte ptr [DAT_101de5a0 + 0x1e8], 0x12
-		mov byte ptr [DAT_101de5a0 + 0x200], 0x13
-		mov byte ptr [DAT_101de5a0 + 0x218], 0x14
-		mov byte ptr [DAT_101de5a0 + 0x230], 0x15
-		mov byte ptr [DAT_101de5a0 + 0x248], 0x16
-		mov byte ptr [DAT_101de5a0 + 0x260], 0x17
-		mov byte ptr [DAT_101de5a0 + 0x278], 0x18
-		mov byte ptr [DAT_101de5a0 + 0x290], 0x19
-		mov byte ptr [DAT_101de5a0 + 0x2a8], 0x1a
-		mov byte ptr [DAT_101de5a0 + 0x2c0], 0x1b
-		mov byte ptr [DAT_101de5a0 + 0x2d8], 0x1c
-		mov byte ptr [DAT_101de5a0 + 0x2f0], 0x1d
-		mov byte ptr [DAT_101de5a0 + 0x308], 0x1e
-		mov byte ptr [DAT_101de5a0 + 0x320], 0x1f
-		mov byte ptr [DAT_101de5a0 + 0x338], 0x20
-		mov byte ptr [DAT_101de5a0 + 0x350], 0x21
-		mov byte ptr [DAT_101de5a0 + 0x368], 0x22
-		mov byte ptr [DAT_101de5a0 + 0x380], 0x23
-		mov byte ptr [DAT_101de5a0 + 0x398], 0x24
-		mov byte ptr [DAT_101de5a0 + 0x3b0], 0x25
-		mov byte ptr [DAT_101de5a0 + 0x3c8], 0x26
-		mov byte ptr [DAT_101de5a0 + 0x3e0], 0x27
+		mov byte ptr [g_office_slots + 0x98], 5
+		mov byte ptr [g_office_slots + 0xb0], 6
+		mov byte ptr [g_office_slots + 0xc8], al
+		mov byte ptr [g_office_slots + 0xe0], al
+		mov byte ptr [g_office_slots + 0xf8], 8
+		mov byte ptr [g_office_slots + 0x110], 9
+		mov byte ptr [g_office_slots + 0x128], 0xa
+		mov byte ptr [g_office_slots + 0x140], 0xb
+		mov byte ptr [g_office_slots + 0x158], 0xc
+		mov byte ptr [g_office_slots + 0x170], 0xd
+		mov byte ptr [g_office_slots + 0x188], 0xe
+		mov byte ptr [g_office_slots + 0x1a0], 0xf
+		mov byte ptr [g_office_slots + 0x1b8], 0x10
+		mov byte ptr [g_office_slots + 0x1d0], 0x11
+		mov byte ptr [g_office_slots + 0x1e8], 0x12
+		mov byte ptr [g_office_slots + 0x200], 0x13
+		mov byte ptr [g_office_slots + 0x218], 0x14
+		mov byte ptr [g_office_slots + 0x230], 0x15
+		mov byte ptr [g_office_slots + 0x248], 0x16
+		mov byte ptr [g_office_slots + 0x260], 0x17
+		mov byte ptr [g_office_slots + 0x278], 0x18
+		mov byte ptr [g_office_slots + 0x290], 0x19
+		mov byte ptr [g_office_slots + 0x2a8], 0x1a
+		mov byte ptr [g_office_slots + 0x2c0], 0x1b
+		mov byte ptr [g_office_slots + 0x2d8], 0x1c
+		mov byte ptr [g_office_slots + 0x2f0], 0x1d
+		mov byte ptr [g_office_slots + 0x308], 0x1e
+		mov byte ptr [g_office_slots + 0x320], 0x1f
+		mov byte ptr [g_office_slots + 0x338], 0x20
+		mov byte ptr [g_office_slots + 0x350], 0x21
+		mov byte ptr [g_office_slots + 0x368], 0x22
+		mov byte ptr [g_office_slots + 0x380], 0x23
+		mov byte ptr [g_office_slots + 0x398], 0x24
+		mov byte ptr [g_office_slots + 0x3b0], 0x25
+		mov byte ptr [g_office_slots + 0x3c8], 0x26
+		mov byte ptr [g_office_slots + 0x3e0], 0x27
 		mov esp, ebp
 		pop ebp
 		ret

@@ -19,7 +19,7 @@ typedef struct {
 } SlotEntry;
 #pragma pack(pop)
 
-extern SlotEntry DAT_101de5a0[];
+extern SlotEntry g_office_slots[];
 extern int g_aemter_table;
 extern char DAT_101de5a8;
 extern int DAT_101de5ac;
@@ -28,7 +28,7 @@ void* __cdecl gm_LookupEntityRecordById(int);
 extern int DAT_101de5b4[];
 extern ENT g_ents[];
 extern ENT g_ents2[];
-extern unsigned short DAT_10035884;
+extern unsigned short g_default_value_b;
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void __cdecl InitBuildingTypeTable(void);
 

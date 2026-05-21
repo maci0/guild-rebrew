@@ -18,8 +18,8 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 extern float fColorScale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
-extern float DAT_100256cc;
-extern float DAT_100256a0;
+extern float g_float_const_cc;
+extern float g_float_const_a0;
 extern char s__ahm_AllocAhmInfo_1002a0f7[];
 extern double dScaleFactor;
 extern int DAT_1002c050[];
@@ -459,11 +459,11 @@ __declspec(naked) int __cdecl ahm_ClampFloatValue(int cmd_payload, int arg2)
 		mov ecx, dword ptr [esp + 8]
 		fld dword ptr [eax + 0x10]
 		fadd dword ptr [ecx + 4]
-		fcom dword ptr DAT_100256cc
+		fcom dword ptr g_float_const_cc
 		fnstsw ax
 		test ah, 0x41
 		jne L_below_min
-		fcom dword ptr DAT_100256a0
+		fcom dword ptr g_float_const_a0
 		fnstsw ax
 		test ah, 1
 		je L_above_max
@@ -472,13 +472,13 @@ __declspec(naked) int __cdecl ahm_ClampFloatValue(int cmd_payload, int arg2)
 		ret
 	L_below_min:
 		fstp st(0)
-		fld dword ptr DAT_100256cc
+		fld dword ptr g_float_const_cc
 		mov eax, 1
 		fstp dword ptr [ecx + 4]
 		ret
 	L_above_max:
 		fstp st(0)
-		fld dword ptr DAT_100256a0
+		fld dword ptr g_float_const_a0
 		mov eax, 1
 		fstp dword ptr [ecx + 4]
 		ret

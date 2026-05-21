@@ -1,7 +1,7 @@
 #include "../../Units/Error/error.h"
 int __cdecl find_zone_record(char* base, int x, int y);
 int __cdecl lb_SearchRecordTable(int);
-extern int DAT_1003540c;
+extern int g_dynamic_count;
 
 /* Finds a record in a linked table by matching type fields.
  * Iterates from base pointer, comparing type1/type2 bytes.
@@ -255,12 +255,12 @@ __declspec(naked) int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, un
 		pop ebx
 		ret
 	L_store_new:
-		mov esi, dword ptr [DAT_1003540c]
+		mov esi, dword ptr [g_dynamic_count]
 		lea eax, [ecx + ecx*2]
 		mov dword ptr [edi + eax*8], esi
-		mov eax, dword ptr [DAT_1003540c]
+		mov eax, dword ptr [g_dynamic_count]
 		inc eax
-		mov dword ptr [DAT_1003540c], eax
+		mov dword ptr [g_dynamic_count], eax
 	L_apply:
 		lea ecx, [ecx + ecx*2]
 		lea eax, [edi + ecx*8]

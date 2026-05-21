@@ -35,7 +35,7 @@ int __cdecl _getpid(void);
 extern char* g_entity_ptr;
 void __cdecl vfs_EntityCleanup(char*);
 extern unsigned short* g_query_base;
-extern int DAT_10035450;
+extern int g_query_limit;
 extern Record* g_records;
 void __cdecl free_block(int);
 extern int g_data_ptr;
@@ -69,15 +69,15 @@ extern int* g_dispatch_table_b;
 extern int* g_dispatch_table_a;
 extern char* g_array_base;
 
-extern short DAT_10030b8c;
-extern short DAT_10030b8e;
+extern short g_query_filter_extra2;
+extern short g_query_filter_extra3;
 extern char DAT_10030b84;
-extern int DAT_10030b88;
-extern char DAT_10030b90;
-extern char* DAT_10035444;
+extern int g_query_filter_extra1;
+extern char g_query_filter_extra4;
+extern char* g_dynasty_field_44;
 extern char DAT_10035449;
 extern int DAT_1003544c;
-extern char DAT_10035448;
+extern char g_dynasty_field_48;
 extern unsigned char* g_query_filter_base;
 
 // FUNCTION: SERVER 0x100170e0
@@ -92,15 +92,15 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 		return (unsigned short*) 0;
 	}
 
-	DAT_10030b8c = 0x7fff;
-	DAT_10030b8e = 0x7fff;
+	g_query_filter_extra2 = 0x7fff;
+	g_query_filter_extra3 = 0x7fff;
 	DAT_10030b84 = (char) 0xff;
-	DAT_10030b88 = -1;
-	DAT_10030b90 = (char) 0xff;
-	DAT_10035444 = 0;
+	g_query_filter_extra1 = -1;
+	g_query_filter_extra4 = (char) 0xff;
+	g_dynasty_field_44 = 0;
 	DAT_10035449 = 1;
 	DAT_1003544c = 0;
-	DAT_10035448 = 0;
+	g_dynasty_field_48 = 0;
 
 	if (arg_count > 0) {
 		arg_ptr = &arg_count;
@@ -116,27 +116,27 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 				arg_ptr++;
 				break;
 			case 1:
-				DAT_10030b88 = *(arg_ptr + 1);
+				g_query_filter_extra1 = *(arg_ptr + 1);
 				arg_ptr++;
 				break;
 			case 2:
-				strcpy(DAT_10035444, *(char**) (arg_ptr + 1));
+				strcpy(g_dynasty_field_44, *(char**) (arg_ptr + 1));
 				arg_ptr++;
 				break;
 			case 3:
-				DAT_10030b8c = *(short*) (arg_ptr + 1);
+				g_query_filter_extra2 = *(short*) (arg_ptr + 1);
 				arg_ptr++;
 				break;
 			case 4:
-				DAT_10030b8e = *(short*) (arg_ptr + 1);
+				g_query_filter_extra3 = *(short*) (arg_ptr + 1);
 				arg_ptr++;
 				break;
 			case 5:
-				DAT_10030b90 = *(char*) (arg_ptr + 1);
+				g_query_filter_extra4 = *(char*) (arg_ptr + 1);
 				arg_ptr++;
 				break;
 			case 6:
-				DAT_10035448 = 1;
+				g_dynasty_field_48 = 1;
 				break;
 			default:
 				break;

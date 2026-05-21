@@ -35,7 +35,7 @@ int __cdecl _getpid(void);
 extern char* g_entity_ptr;
 void __cdecl vfs_EntityCleanup(char*);
 extern unsigned short* g_query_base;
-extern int DAT_10035450;
+extern int g_query_limit;
 extern Record* g_records;
 void __cdecl free_block(int);
 extern int g_data_ptr;
@@ -103,7 +103,7 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 	stack_depth = g_query_match_count;
 	filter_type_cache = g_query_filter_type;
 
-	if (g_query_count < DAT_10035450) {
+	if (g_query_count < g_query_limit) {
 		do {
 			if (current == (WORD*) 0x0) {
 				return matched_ent;
@@ -191,7 +191,7 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 				g_query_count = g_query_count + 1;
 				g_query_cursor = current;
 			}
-		} while (g_query_count < DAT_10035450);
+		} while (g_query_count < g_query_limit);
 	}
 
 	return matched_ent;
