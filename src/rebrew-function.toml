@@ -199,11 +199,11 @@ analysis = "Shutdown socket (SD_BOTH) | Close socket handle"
 
 ["SERVER.0x1000a340"]
 size = 336
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000a490"]
 size = 211
-status = "RELOC"
+status = "PROVEN"
 analysis = "Ingress parser boundary for per-player receive buffer. Validation behavior: handles recv==0 timeout via player_slot[0x54] deadline, treats recv==-1 + WSAEWOULDBLOCK as retry, closes connection on other socket errors. | Stage 1 ingress: ensure first 3 bytes of packet are present (1-byte opcode + 2-byte total length). | Length-driven read: remaining bytes = header.total_length - bytes_received so far. | 0x2733 matches WSAEWOULDBLOCK (non-fatal on nonblocking socket)."
 
 ["SERVER.0x1000a570"]
@@ -871,7 +871,7 @@ analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.da
 
 ["SERVER.0x10015cb0"]
 size = 57
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10015cf0"]
 size = 194
