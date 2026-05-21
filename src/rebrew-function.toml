@@ -1,6 +1,6 @@
 ["SERVER.0x10001130"]
 size = 179
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10002640"]
 size = 290
@@ -245,7 +245,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000b040"]
 size = 372
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000b1c0"]
 size = 205
@@ -285,7 +285,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000ba30"]
 size = 179
-status = "RELOC"
+status = "PROVEN"
 analysis = "Iterates through the command execution tracker table at g_office_secondary_id_base to detach or update a specific entity's links and pending sequence numbers. Used when an entity changes state abruptly or is being removed."
 
 ["SERVER.0x1000baf0"]
@@ -875,7 +875,7 @@ status = "PROVEN"
 
 ["SERVER.0x10015cf0"]
 size = 194
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10015dc0"]
 size = 55
@@ -975,7 +975,7 @@ status = "PROVEN"
 
 ["SERVER.0x10017330"]
 size = 207
-status = "RELOC"
+status = "PROVEN"
 ghidra = "InitBuildingDefaultItems"
 
 ["SERVER.0x10017400"]
@@ -1037,7 +1037,7 @@ ghidra = "gm_DeallocEntity"
 
 ["SERVER.0x100180d0"]
 size = 81
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10018130"]
 size = 32
