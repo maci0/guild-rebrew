@@ -269,11 +269,11 @@ analysis = "Iterates through a fixed validation table at g_office_table looking 
 
 ["SERVER.0x1000b820"]
 size = 42
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000b850"]
 size = 42
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000b880"]
 size = 263
@@ -281,7 +281,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000b990"]
 size = 157
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000ba30"]
 size = 179
