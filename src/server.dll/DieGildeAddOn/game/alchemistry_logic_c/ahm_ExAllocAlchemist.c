@@ -17,7 +17,7 @@ void __cdecl gm_DeallocEntity(unsigned int index, int param);
 void* __cdecl gm_NextEntityQueryMatch(void);
 extern float fColorScale;
 extern int g_next_object_id;
-extern char g_current_season;
+extern unsigned char g_current_season;
 extern float g_float_const_cc;
 extern float g_float_const_a0;
 extern char s__ahm_AllocAhmInfo_1002a0f7[];

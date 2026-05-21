@@ -1,7 +1,7 @@
 
 #include "../command_internal.h"
 
-extern char* g_entity_type_table;
+extern int g_entity_type_table;
 
 /*
  * Ghidra decompilation reference:

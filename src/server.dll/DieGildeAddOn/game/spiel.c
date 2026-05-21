@@ -43,7 +43,7 @@ extern int g_data_ptr2;
 extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
-extern unsigned char* g_entity_array_ptr;
+extern unsigned char* g_entity_ptr;
 extern int g_entity_type_table;
 extern unsigned char g_current_season;
 extern int g_active_player_count;

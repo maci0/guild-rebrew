@@ -28,7 +28,7 @@ int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 int __cdecl ahm_AllocAhmInfo(int building, int slot);
 extern int g_file_version; /* 0x1002d4ec */
 ;
-extern int g_entity_array_ptr; /* 0x1014d8c0 */
+extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
 ;
 extern int g_101de454; /* 0x101de454 */
 ;

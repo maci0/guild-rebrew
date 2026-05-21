@@ -43,7 +43,7 @@ extern int g_data_ptr2;
 extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern char* g_game_initialized;
-extern unsigned char* g_entity_array_ptr;
+extern unsigned char* g_entity_ptr;
 extern int g_entity_type_table;
 extern unsigned char g_current_season;
 extern int g_active_player_count;
@@ -54,7 +54,7 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
-extern WORD* g_query_cursor;
+extern unsigned short* g_query_cursor;
 extern char g_query_active;
 extern char g_query_flag2;
 extern int g_query_count;
@@ -144,7 +144,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 		}
 	}
 
-	g_query_filter_base = g_entity_array_ptr;
+	g_query_filter_base = g_entity_ptr;
 	return (unsigned short*) FindNextFilteredEntity();
 }
 

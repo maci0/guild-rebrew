@@ -4,7 +4,7 @@ unsigned int __cdecl gm_CreateEntityFromParents(int p1, int p2, int p3, int p4, 
 void __cdecl table_lookup(unsigned int a, unsigned short* b);
 extern int g_entity_type_table;
 unsigned int __cdecl FindAndMatchParents(unsigned int param);
-extern unsigned char g_entity_type_bytes;
+extern char g_entity_type_bytes;
 extern unsigned char g_stat_b_array;
 extern unsigned char g_slot_table;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
