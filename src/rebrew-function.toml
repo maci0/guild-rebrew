@@ -176,7 +176,7 @@ analysis = "Core orchestration loop. Phase 1 (Lobby): Loops accepting connection
 
 ["SERVER.0x10009d30"]
 size = 296
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10009e60"]
 size = 419
@@ -833,7 +833,7 @@ ghidra = "GetStatPair"
 
 ["SERVER.0x100151e0"]
 size = 535
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10015400"]
 size = 83
