@@ -591,7 +591,7 @@ type = "void*"
 section = ".idata"
 
 ["SERVER.0x1002416c"]
-name = "__imp__inet_addr@4"
+name = "__imp__ioctlsocket@12"
 type = "void*"
 section = ".idata"
 
@@ -983,3 +983,28 @@ section = ".idata"
 name = "__imp__timeGetTime@0"
 type = "void*"
 section = ".idata"
+
+["SERVER.0x1002735c"]
+name = "s__________________________________1002735c"
+type = "char"
+section = ".data"
+
+["SERVER.0x100270fc"]
+name = "s__s__s_100270fc"
+type = "char"
+section = ".data"
+
+["SERVER.0x10027358"]
+name = "g_file_write_mode"
+type = "unsigned char"
+section = ".data"
+
+["SERVER.0x100270f8"]
+name = "g_file_append_mode"
+type = "unsigned char"
+section = ".data"
+
+["SERVER.0x1002733c"]
+name = "s_LogFile_has_been_deleted__1002733c"
+type = "char"
+section = ".data"

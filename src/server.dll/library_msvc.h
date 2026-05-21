@@ -31,6 +31,9 @@
 // LIBRARY: SERVER 0x1001A527
 // _ctime
 
+// LIBRARY: SERVER 0x1001A2EB
+// _fopen
+
 // LIBRARY: SERVER 0x1001A567
 // _time
 

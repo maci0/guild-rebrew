@@ -813,7 +813,7 @@ int __cdecl SendPlayerData(unsigned int* conn)
 	if (result == 0) {
 		tick = GetTickCount();
 		if (conn[84] < tick) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\online", 0x58f, "send timeout", 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x58f, "Connection timed out.", 1);
 			cm_ClosePlayerConnection(conn);
 			return -1;
 		}
