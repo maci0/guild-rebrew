@@ -373,7 +373,6 @@ __declspec(naked) char* __cdecl gv_FindSlotEntryFiltered(char* ctx, unsigned cha
 // FUNCTION: SERVER 0x10010850
 // SpawnGraveyardEntities
 
-/* Auto-generated Ghidra decompilation */
 
 __declspec(naked) int SpawnGraveyardEntities(unsigned char* arg1, int arg2)
 {
@@ -2118,7 +2117,6 @@ unsigned int HireProductionWorker_unused(int arg1)
 // FUNCTION: SERVER 0x100113b0
 // ExtendProductionTime
 
-/* Auto-generated Ghidra decompilation */
 
 __declspec(naked) unsigned int ExtendProductionTime(unsigned int* arg1)
 {
