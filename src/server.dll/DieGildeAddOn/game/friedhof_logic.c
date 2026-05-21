@@ -30,7 +30,6 @@ void __cdecl game_free(void*);
 extern int g_entity_table_end;
 extern char* g_slot_table;
 int SpawnGraveyardEntities(unsigned char*, int);
-extern char* g_action_table_base;
 double __cdecl gm_RandomFloat01(void);
 extern int g_next_object_id;
 extern int g_citizen_count;
