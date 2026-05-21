@@ -45,7 +45,6 @@
 
 #include "../command_internal.h"
 
-
 extern int g_something_1;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);

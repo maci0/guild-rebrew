@@ -9,7 +9,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-
 extern char s_cm_ChkChangeAttribute___Invalid_I_1002c9e0[];
 extern char s_cm_ChkChangeAttribute___Error_i_1002c9a0[];
 extern char s_cm_ChkChangeAttribute___Source_obj_1002c958[];

@@ -26,7 +26,6 @@ typedef struct {
 #pragma pack(pop)
 
 extern char* g_entity_table; /* 0x101de450 */
-;
 extern unsigned char* g_entity_ptr;
 extern char* g_item_def_table;
 // STUB: SERVER 0x10018530

@@ -39,7 +39,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-
 extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
 
 #ifdef __clang__

@@ -45,7 +45,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-
 extern char g_player_slot_0[];
 extern char s_cm_ExAllocThemaPredigt____Execut_1002d184[];
 char* __cdecl gm_AllocObjekt(int, int, int);

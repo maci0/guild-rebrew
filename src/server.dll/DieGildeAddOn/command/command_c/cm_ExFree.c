@@ -14,8 +14,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-
-
 /* Execution handler: frees/deallocates a game entity. Resolves
  * entity by ID and removes it from the game world. Logs error
  * on invalid entity ID. */

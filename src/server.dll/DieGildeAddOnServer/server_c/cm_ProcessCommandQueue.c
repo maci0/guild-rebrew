@@ -16,21 +16,9 @@ typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-;
-;
 int __cdecl ahm_ProcessEntityChain(unsigned char* node);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
-;
 extern unsigned char g_connections[]; /* 0x101deb00 */
-;
-
-;
-;
-;
-;
-;
-;
-
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 

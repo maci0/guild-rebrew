@@ -26,7 +26,6 @@ typedef struct {
 #pragma pack(pop)
 
 extern char* g_entity_table; /* 0x101de450 */
-;
 extern char* g_item_def_table;
 char* __cdecl gm_AllocObjekt(int, int, int);
 

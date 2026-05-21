@@ -48,7 +48,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-
 extern char s_cm_ChkChangeBits___Invalid_Id_1002ca54[];
 extern char s_cm_ChkChangeBits___Invalid_actio_1002ca04[];
 

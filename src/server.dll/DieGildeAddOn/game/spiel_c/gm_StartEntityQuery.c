@@ -26,7 +26,6 @@ typedef struct {
 #pragma pack(pop)
 
 extern char* g_entity_table; /* 0x101de450 */
-;
 extern unsigned short* g_query_base;
 extern char* g_item_def_table;
 void* __cdecl gm_NextEntityQueryMatch(void);

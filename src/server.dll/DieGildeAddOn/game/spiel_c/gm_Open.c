@@ -26,7 +26,6 @@ typedef struct {
 #pragma pack(pop)
 
 extern char* g_entity_table; /* 0x101de450 */
-;
 void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
 int __cdecl _getpid(void);

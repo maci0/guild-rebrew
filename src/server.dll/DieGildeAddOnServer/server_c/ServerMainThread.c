@@ -27,20 +27,8 @@ int __cdecl AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10);
 void __cdecl _seterrormode(int value);
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-;
-;
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
-;
 extern unsigned char g_connections[]; /* 0x101deb00 */
-;
-
-;
-;
-;
-;
-;
-;
-
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 

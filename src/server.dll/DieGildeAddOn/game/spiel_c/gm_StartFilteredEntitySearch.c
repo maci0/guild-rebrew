@@ -26,7 +26,6 @@ typedef struct {
 #pragma pack(pop)
 
 extern char* g_entity_table; /* 0x101de450 */
-;
 extern unsigned char* g_entity_ptr;
 extern int g_entity_type_table;
 void* __cdecl FindNextFilteredEntity(void);

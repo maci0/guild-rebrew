@@ -2310,7 +2310,6 @@ __declspec(naked) unsigned int ExtendProductionTime(unsigned int* arg1)
 // FUNCTION: SERVER 0x10011540
 // gv_ReplaceProductionWorker
 
-
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
 __declspec(naked) int __cdecl gv_ReplaceProductionWorker(unsigned char* arg1)
@@ -2473,7 +2472,6 @@ __declspec(naked) int __cdecl gv_ReplaceProductionWorker(unsigned char* arg1)
 // DATA: SERVER 0x100a8c30
 extern char* g_action_table_base;
 
-
 int __cdecl ActivateGraveyardSection(unsigned char* cmd_payload)
 {
 	void* entity;
@@ -2545,15 +2543,12 @@ int __cdecl ActivateGraveyardSection(unsigned char* cmd_payload)
 	return -1;
 }
 
-
 /* Updates production progress for active slots. Decrements
  * timers, checks for completion, and triggers product output
  * when the production cycle finishes. */
 
 // FUNCTION: SERVER 0x10011790
 // gv_UpdateProductionProgress
-
-
 
 __declspec(naked) int __cdecl gv_UpdateProductionProgress(unsigned char* arg1)
 {

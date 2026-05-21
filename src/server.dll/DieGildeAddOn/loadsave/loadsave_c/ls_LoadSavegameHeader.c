@@ -17,13 +17,9 @@ extern int g_1002d4f4;
 extern char g_1002d4f8;
 extern char g_1002d4fc;
 extern int g_file_version; /* 0x1002d4ec */
-;
 extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
-;
 extern int g_101de454; /* 0x101de454 */
-;
 extern int g_101de55c; /* 0x101de55c */
-;
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);

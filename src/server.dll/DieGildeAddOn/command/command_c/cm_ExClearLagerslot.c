@@ -2,7 +2,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-
 extern char s_cm_ExClearLagerslot___Invalid__L_1002d088[];
 extern char s_cm_ExClearLagerslot___Lager_has_n_1002d054[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);

@@ -59,7 +59,6 @@
  *   }
  */
 
-
 extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
 
 /* Execution handler: modifies bit flags on an entity. Resolves

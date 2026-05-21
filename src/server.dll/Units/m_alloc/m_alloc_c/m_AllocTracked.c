@@ -5,11 +5,8 @@
 #pragma intrinsic(memset, strcmp, strcpy)
 
 void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
-;
 void __cdecl ReportMessage(char* msg); /* Single arg log? */
-;
 void* __cdecl _callnewh(int); /* 0x1001a7f7 */
-;
 extern int g_array_count;
 extern int g_stat1;
 extern int g_stat2;
@@ -18,10 +15,6 @@ extern int g_stat4;
 extern int g_alloc_counter;
 extern void* g_array_ptr;
 void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
-;
-;
-;
-
 /* Allocates tracked memory. Wraps HeapAlloc with allocation
  * tracking: records source location string, updates group
  * counters, and maintains the allocation list. */

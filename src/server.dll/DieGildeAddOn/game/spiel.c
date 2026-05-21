@@ -28,7 +28,6 @@ typedef struct {
 #pragma pack(pop)
 
 extern char* g_entity_table; /* 0x101de450 */
-;
 void __cdecl gm_InitEntitySlots(void);
 extern unsigned short* g_query_base;
 extern int g_query_limit;
@@ -113,23 +112,14 @@ int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
 extern char entity_slot_table[];
 extern float g_const_5fb8; /* 0x10025fb8 */
-;
 extern float g_const_5fb4; /* 0x10025fb4 */
-;
 extern float g_const_5fb0; /* 0x10025fb0 */
-;
 extern float g_const_5fac; /* 0x10025fac */
-;
 extern float g_const_5fa8; /* 0x10025fa8 */
-;
 extern double g_const_5fa0; /* 0x10025fa0 */
-;
 extern float g_float_const_cc; /* 0x100256cc */
-;
 extern float g_gv_const_57c8; /* 0x100257c8 */
-;
 extern double g_const_57d0; /* 0x100257d0 */
-;
 double __cdecl gm_CalculateProductionValue(int, int);
 extern char g_type_idx;
 extern int g_key_table[];
@@ -137,12 +127,9 @@ extern char entity_array[];
 int __cdecl gm_SumBuildingProductionValues(char*, int);
 int __cdecl gm_EntityQuerySum(int);
 int __cdecl compute_size(char*); /* 0x10019d00 */
-;
 char* __cdecl gm_FindEntityByOwner(int); /* 0x10019c60 */
 int __cdecl gm_GetMsgField(char*, char*); /* 0x10019cd0 */
-;
 int __cdecl ahm_LookupEntityInTable(int); /* 0x1000c670 */
-;
 extern float g_const_5fbc;
 double __cdecl gm_RandomFloat01(void);
 extern float g_float_const_a0;
@@ -3145,7 +3132,6 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 	}
 	return sum;
 }
-
 
 /* Runs an entity query and sums a field across all results.
  * Combines query iteration with field accumulation. */

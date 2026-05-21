@@ -15,13 +15,9 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 extern int g_save_version;
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 extern int g_file_version; /* 0x1002d4ec */
-;
 extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
-;
 extern int g_101de454; /* 0x101de454 */
-;
 extern int g_101de55c; /* 0x101de55c */
-;
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
@@ -45,7 +41,6 @@ extern unsigned int ls_ID2Ptr(void);
 
 // FUNCTION: SERVER 0x10012000
 // ls_LoadGraveyardData
-
 
 __declspec(naked) int __cdecl ls_LoadGraveyardData(int arg1, int arg2)
 {
@@ -527,7 +522,6 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 
 // FUNCTION: SERVER 0x100127d0
 // ls_LoadExistingEntities
-
 
 void __cdecl gm_CleanupObjectEntities(void);
 

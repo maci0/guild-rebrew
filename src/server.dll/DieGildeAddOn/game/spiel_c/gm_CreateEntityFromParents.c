@@ -26,7 +26,6 @@ typedef struct {
 #pragma pack(pop)
 
 extern char* g_entity_table; /* 0x101de450 */
-;
 // STUB: SERVER 0x10018850
 // gm_CreateEntityFromParents
 

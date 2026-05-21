@@ -5,17 +5,10 @@
 #pragma intrinsic(memset, strcmp, strcpy)
 
 void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
-;
 void __cdecl ReportMessage(char* msg); /* Single arg log? */
-;
 void* __cdecl _callnewh(int); /* 0x1001a7f7 */
-;
 void __cdecl ReportMemoryGroupInfo(const char* toggle);
 extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
-
-;
-;
-;
 
 /* Allocates tracked memory. Wraps HeapAlloc with allocation
  * tracking: records source location string, updates group

@@ -54,7 +54,6 @@
  *       line = 0x30bd;
  */
 
-
 extern char s_cm_ExMoveObjekt___Invalid__quell_1002d024[];
 extern char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[];
 extern char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[];

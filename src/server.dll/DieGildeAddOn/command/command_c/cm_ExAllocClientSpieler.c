@@ -4,10 +4,8 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-
 ushort __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 char* __cdecl strncpy(char*, const char*, unsigned int);
-
 
 /* Execution handler: allocates a client-side player entity.
  * Similar to cm_ExAllocSpieler but for client-connected players,

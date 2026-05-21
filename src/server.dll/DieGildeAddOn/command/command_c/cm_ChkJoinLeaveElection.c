@@ -6,7 +6,6 @@
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
-
 extern int g_1003546c;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);

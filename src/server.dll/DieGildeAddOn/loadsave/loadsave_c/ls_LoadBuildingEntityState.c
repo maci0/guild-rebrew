@@ -15,13 +15,9 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 int __cdecl ahm_AllocAhmInfo(int building, int slot);
 extern int g_file_version; /* 0x1002d4ec */
-;
 extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
-;
 extern int g_101de454; /* 0x101de454 */
-;
 extern int g_101de55c; /* 0x101de55c */
-;
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);

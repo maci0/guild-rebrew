@@ -231,7 +231,6 @@ __declspec(naked) unsigned int FindAndMatchParents(unsigned int arg1)
 	}
 }
 
-
 /* Updates entity priority/scheduling. Called during simulation
  * tick to adjust entity processing order based on game state. */
 

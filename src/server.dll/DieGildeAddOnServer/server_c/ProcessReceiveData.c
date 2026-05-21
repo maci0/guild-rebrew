@@ -20,20 +20,8 @@ typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-;
-;
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
-;
 extern unsigned char g_connections[]; /* 0x101deb00 */
-;
-
-;
-;
-;
-;
-;
-;
-
 extern unsigned int g_download_total_size;
 extern unsigned int g_download_received;
 extern unsigned int g_download_slots[8];

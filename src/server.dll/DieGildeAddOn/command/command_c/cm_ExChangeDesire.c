@@ -2,7 +2,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-
 extern double _g_stat_min_d;
 extern double _g_stat_max_d;
 

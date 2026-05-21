@@ -34,23 +34,11 @@ int __cdecl CreateListenSocket(int port);
 void __cdecl InitPacketPool(int);
 extern int g_net_socket;
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-;
-;
 int __cdecl SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
 short __cdecl get_command_type(char*);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
-;
 extern unsigned char g_connections[]; /* 0x101deb00 */
-;
-
-;
-;
-;
-;
-;
-;
-
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 
