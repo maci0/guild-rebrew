@@ -299,14 +299,14 @@ int __cdecl CreateListenSocket(int port)
 	/* SO_SNDBUF */
 	optval = 0x20000;
 	if (setsockopt(sock, 0xFFFF, 0x1002, (const char*) &optval, 4) == -1) {
-		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\online", 0x424, "setsockopt sndbuf failed", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x424, "Can't set SO_SNDBUF on Socket", 1);
 		goto close_sock;
 	}
 
 	/* SO_RCVBUF */
 	optval = 0x20000;
 	if (setsockopt(sock, 0xFFFF, 0x1001, (const char*) &optval, 4) == -1) {
-		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\online", 0x42b, "setsockopt rcvbuf failed", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x42b, "Can't set SO_RCVBUF on Socket", 1);
 		goto close_sock;
 	}
 

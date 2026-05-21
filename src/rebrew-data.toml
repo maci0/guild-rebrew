@@ -653,3 +653,333 @@ section = ".idata"
 ["SERVER.0x100313fc"]
 name = "$SG18890"
 type = "char"
+
+["SERVER.0x10024000"]
+name = "__imp__GetLocalTime@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024004"]
+name = "__imp__OutputDebugStringA@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024008"]
+name = "__imp__UnhandledExceptionFilter@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002400c"]
+name = "__imp__VirtualFree@12"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024010"]
+name = "__imp__CloseHandle@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024014"]
+name = "__imp__ReadProcessMemory@20"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024018"]
+name = "__imp__VirtualQuery@12"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002401c"]
+name = "__imp__GetTimeFormatA@24"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024020"]
+name = "__imp__GetDateFormatA@24"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024024"]
+name = "__imp__WriteFile@20"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024028"]
+name = "__imp__SetFilePointer@16"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002402c"]
+name = "__imp__GetCurrentProcess@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024030"]
+name = "__imp__VirtualAlloc@16"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024034"]
+name = "__imp__ReadFile@20"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024038"]
+name = "__imp__CreateFileA@28"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002403c"]
+name = "__imp__GetModuleFileNameA@12"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024040"]
+name = "__imp__SetUnhandledExceptionFilter@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024044"]
+name = "__imp__GetStdHandle@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024048"]
+name = "__imp__AllocConsole@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002404c"]
+name = "__imp__FreeConsole@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024050"]
+name = "__imp__CreateThread@24"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024054"]
+name = "__imp__TerminateThread@8"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024058"]
+name = "__imp__Sleep@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002405c"]
+name = "__imp__GetTickCount@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024060"]
+name = "__imp__GetPrivateProfileStringA@24"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024064"]
+name = "__imp__GetPrivateProfileIntA@16"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024068"]
+name = "__imp__SetThreadPriority@8"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002406c"]
+name = "__imp__GetCurrentThread@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024070"]
+name = "__imp__GetStartupInfoA@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024074"]
+name = "__imp__HeapFree@12"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024078"]
+name = "__imp__LCMapStringW@24"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024088"]
+name = "__imp__SetEndOfFile@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002408c"]
+name = "__imp__LoadLibraryA@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024090"]
+name = "__imp__GetOEMCP@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024094"]
+name = "__imp__GetACP@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024098"]
+name = "__imp__GetStringTypeW@16"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002409c"]
+name = "__imp__GetStringTypeA@20"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240a0"]
+name = "__imp__GetCPInfo@8"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240c4"]
+name = "__imp__ExitProcess@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240cc"]
+name = "__imp__HeapAlloc@12"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240d0"]
+name = "__imp__TlsSetValue@8"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240d4"]
+name = "__imp__InterlockedDecrement@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240d8"]
+name = "__imp__InterlockedIncrement@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240dc"]
+name = "__imp__GetLastError@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240e0"]
+name = "__imp__HeapReAlloc@16"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240e4"]
+name = "__imp__GetCommandLineA@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240e8"]
+name = "__imp__GetVersion@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240ec"]
+name = "__imp__EnterCriticalSection@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240f0"]
+name = "__imp__LeaveCriticalSection@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x100240f4"]
+name = "__imp__InitializeCriticalSection@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024104"]
+name = "__imp__DeleteCriticalSection@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024108"]
+name = "__imp__GetCurrentThreadId@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002410c"]
+name = "__imp__HeapDestroy@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024110"]
+name = "__imp__TlsAlloc@0"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024114"]
+name = "__imp__TlsFree@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024118"]
+name = "__imp__SetLastError@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002411c"]
+name = "__imp__TlsGetValue@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024124"]
+name = "__imp__RtlUnwind@16"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002412c"]
+name = "__imp__FlushFileBuffers@4"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024130"]
+name = "__imp__HeapCreate@12"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024134"]
+name = "__imp__MultiByteToWideChar@24"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024138"]
+name = "__imp__GetProcAddress@8"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x1002413c"]
+name = "__imp__WideCharToMultiByte@32"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024140"]
+name = "__imp__LCMapStringA@24"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024148"]
+name = "__imp__MessageBoxA@16"
+type = "void*"
+section = ".idata"
+
+["SERVER.0x10024154"]
+name = "__imp__timeGetTime@0"
+type = "void*"
+section = ".idata"
