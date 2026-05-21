@@ -72,7 +72,7 @@ extern char* g_array_base;
 // STUB: SERVER 0x10018850
 // gm_CreateEntityFromParents
 
-int __cdecl gm_CreateEntityFromParents(int param_1, int param_2, int param_3, int param_4, int param_5)
+int __cdecl gm_CreateEntityFromParents(int father_id, int mother_id, int gender, int entity_type, int location)
 {
 	char work_buf[0x41c];
 	int var_10;

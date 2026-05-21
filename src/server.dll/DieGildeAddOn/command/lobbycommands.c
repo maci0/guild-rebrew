@@ -22,10 +22,10 @@ extern unsigned char g_entity_sync_data[];
 // FUNCTION: SERVER 0x100145e0
 // lb_ExPlayerlist
 
-__declspec(naked) int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl lb_ExPlayerlist(unsigned int* player, unsigned char* msg)
 {
-        (void) param_1;
-        (void) param_2;
+        (void) player;
+        (void) msg;
         __asm {
                 sub esp, 0x24
                 push ebx
@@ -114,10 +114,10 @@ __declspec(naked) int __cdecl lb_ExPlayerlist(unsigned int* param_1, unsigned ch
 // FUNCTION: SERVER 0x100146c0
 // lb_SendLobbyConfig
 
-__declspec(naked) int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 {
-        (void) param_1;
-        (void) param_2;
+        (void) player;
+        (void) msg;
         __asm {
                 push esi
                 mov esi, dword ptr [esp + 8]
@@ -227,10 +227,10 @@ __declspec(naked) int __cdecl lb_SendLobbyConfig(unsigned int* param_1, unsigned
 // FUNCTION: SERVER 0x10014a50
 // lb_BroadcastStateChange
 
-__declspec(naked) int __cdecl lb_BroadcastStateChange(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl lb_BroadcastStateChange(unsigned int* player, unsigned char* msg)
 {
-        (void) param_1;
-        (void) param_2;
+        (void) player;
+        (void) msg;
         __asm {
                 push esi
                 mov esi, dword ptr [esp + 8]
@@ -306,10 +306,10 @@ __declspec(naked) int __cdecl lb_BroadcastStateChange(unsigned int* param_1, uns
 // FUNCTION: SERVER 0x10014af0
 // lb_HandleDataTransfer
 
-__declspec(naked) int __cdecl lb_HandleDataTransfer(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl lb_HandleDataTransfer(unsigned int* player, unsigned char* msg)
 {
-        (void) param_1;
-        (void) param_2;
+        (void) player;
+        (void) msg;
         __asm {
                 push ebx
                 push esi
@@ -429,8 +429,8 @@ __declspec(naked) int __cdecl lb_HandleDataTransfer(unsigned int* param_1, unsig
 
 __declspec(naked) int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
 {
-        (void) param_1;
-        (void) param_2;
+        (void) player;
+        (void) msg;
         __asm {
                 push ebx
                 mov ebx, dword ptr [esp + 8]
@@ -514,8 +514,8 @@ __declspec(naked) int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigne
 
 __declspec(naked) int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
 {
-        (void) param_1;
-        (void) param_2;
+        (void) player;
+        (void) msg;
         __asm {
                 push ebx
                 mov ebx, dword ptr [esp + 8]

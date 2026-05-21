@@ -193,7 +193,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			if (entity_type == 0x2a || entity_type == 0x1db ||
 				entity_type == 0x1dc || entity_type == 0x116) {
 				dest_dynamic_entity = resolved_dynamic;
-			LAB_1000dc24:
+			check_producible:
 				resolve_result = gm_KannObjektHergestellt(
 					(char*)resolved_dynamic,
 					(uint)*(ushort*)(cmd + 0x18),
@@ -205,7 +205,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 					goto sell_error_return;
 				}
 			} else if (entity_type == 0x1dd) {
-				goto LAB_1000dc24;
+				goto check_producible;
 			}
 			linked_list_ptr = (int*)(resolved_dynamic + 10);
 			dest_owner_entity = gm_ResolveParentEntity(resolved_dynamic);
@@ -242,10 +242,10 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 					goto sell_error_return;
 				}
 			}
-			goto LAB_1000dd58;
+			goto finalize_transfer;
 		}
 	} else {
-	LAB_1000dd58:
+	finalize_transfer:
 		if (dest_owner_entity != (short*)0 &&
 			dest_existing_entity == (char*)0 &&
 			dest_dynamic_entity == (short*)0 &&
