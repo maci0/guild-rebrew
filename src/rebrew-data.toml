@@ -21,42 +21,52 @@ section = ".data"
 ["SERVER.0x101deb14"]
 name = "g_player_slot_field"
 section = ".data"
+type = "unsigned int"
 
 ["SERVER.0x101deac0"]
 name = "g_download_total_size"
 section = ".data"
+type = "unsigned int"
 
 ["SERVER.0x101deac4"]
 name = "g_download_received"
 section = ".data"
+type = "unsigned int"
 
 ["SERVER.0x101deac8"]
 name = "g_download_slots"
 section = ".data"
+type = "int"
 
 ["SERVER.0x101deae8"]
 name = "g_download_buffer"
 section = ".data"
+type = "unsigned int"
 
 ["SERVER.0x101de5a4"]
 name = "g_aemter_table"
 section = ".data"
+type = "int"
 
 ["SERVER.0x100a8c30"]
 name = "g_entity_type_table"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10030b6c"]
 name = "g_next_object_id"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10035434"]
 name = "g_citizen_count"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10035439"]
 name = "g_current_season"
 section = ".data"
+type = "unsigned char"
 
 ["SERVER.0x1002a0f8"]
 name = "g_1002a0f8"
@@ -97,10 +107,12 @@ section = ".rdata"
 ["SERVER.0x1003546c"]
 name = "g_entity_table_end"
 section = ".data"
+type = "int"
 
 ["SERVER.0x100358a0"]
 name = "g_slot_table"
 section = ".data"
+type = "char*"
 
 ["SERVER.0x1014d8c0"]
 name = "g_1014d8c0"
@@ -109,6 +121,7 @@ section = ".data"
 ["SERVER.0x101de450"]
 name = "g_item_def_table"
 section = ".data"
+type = "char*"
 
 ["SERVER.0x100a8c34"]
 name = "g_100a8c34"
@@ -129,6 +142,7 @@ section = ".data"
 ["SERVER.0x1009b770"]
 name = "g_slot_array"
 section = ".data"
+type = "char*"
 
 ["SERVER.0x10030b98"]
 section = ".data"
@@ -190,6 +204,7 @@ section = ".data"
 ["SERVER.0x10035880"]
 name = "g_current_year"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10035884"]
 name = "g_10035884"
@@ -206,10 +221,12 @@ section = ".data"
 ["SERVER.0x1009acfc"]
 name = "g_some_limit"
 section = ".data"
+type = "int"
 
 ["SERVER.0x100358fc"]
 name = "g_entity_ref_table"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10031500"]
 name = "g_str_10031500"
@@ -222,62 +239,77 @@ section = ".data"
 ["SERVER.0x10035a04"]
 name = "g_entity_type_bytes"
 section = ".data"
+type = "char"
 
 ["SERVER.0x100358a2"]
 name = "g_entity_state_base"
 section = ".data"
+type = "char"
 
 ["SERVER.0x1002d4ec"]
 name = "g_save_version"
 section = ".data"
+type = "int"
 
 ["SERVER.0x11766100"]
 name = "g_log_buffer"
 section = ".data"
+type = "char"
 
 ["SERVER.0x11766204"]
 name = "g_log_file_handle"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10027078"]
 name = "g_log_level_table"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10027084"]
 name = "g_log_format_table"
 section = ".data"
+type = "char"
 
 ["SERVER.0x10034624"]
 name = "g_array_count"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10034628"]
 name = "g_stat1"
 section = ".data"
+type = "int"
 
 ["SERVER.0x1003462c"]
 name = "g_stat2"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10034630"]
 name = "g_stat3"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10034634"]
 name = "g_stat4"
 section = ".data"
+type = "int"
 
 ["SERVER.0x1003463c"]
 name = "g_flag_3c"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10034640"]
 name = "g_array_ptr"
 section = ".data"
+type = "void*"
 
 ["SERVER.0x117640c4"]
 name = "g_list_head"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10028b04"]
 name = "g_str_10028b04"
@@ -302,7 +334,9 @@ section = ".data"
 ["SERVER.0x10034678"]
 name = "g_stream_count"
 section = ".data"
+type = "int"
 
 ["SERVER.0x10034670"]
 name = "g_stream_pool"
 section = ".data"
+type = "char"

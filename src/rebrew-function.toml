@@ -21,7 +21,6 @@ status = "PROVEN"
 ["SERVER.0x10003140"]
 size = 33
 status = "EXACT"
-blocker_delta = 370
 
 ["SERVER.0x10003170"]
 size = 240
@@ -271,7 +270,6 @@ analysis = "Iterates through a fixed validation table at g_office_table looking 
 ["SERVER.0x1000b820"]
 size = 42
 status = "RELOC"
-blocker_delta = 800
 
 ["SERVER.0x1000b850"]
 size = 42
