@@ -21,11 +21,7 @@ typedef struct {
 
 extern SlotEntry g_office_slots[];
 extern int g_aemter_table;
-extern char DAT_101de5a8;
-extern int DAT_101de5ac;
-extern char DAT_101de5b0;
 void* __cdecl gm_LookupEntityRecordById(int);
-extern int DAT_101de5b4[];
 extern ENT g_ents[];
 extern ENT g_ents2[];
 extern unsigned short g_default_value_b;
