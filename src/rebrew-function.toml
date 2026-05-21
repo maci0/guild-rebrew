@@ -753,7 +753,7 @@ blocker = "comparison direction swap, instruction folding (lea vs mov), jump con
 
 ["SERVER.0x10013230"]
 size = 2268
-status = "STUB"
+status = "NEAR_MATCHING"
 blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout"
 blocker_delta = 2053
 ghidra = "LoadStaticEntities"
