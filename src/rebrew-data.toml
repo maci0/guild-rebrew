@@ -559,3 +559,13 @@ type = "float"
 ["SERVER.0x10029bb8"]
 name = "g_str_29bb8"
 type = "char"
+
+["SERVER.0x1009aca0"]
+name = "g_entity_base"
+type = "unsigned char"
+section = ".data"
+
+["SERVER.0x1009b760"]
+name = "g_entity_end"
+type = "unsigned char"
+section = ".data"
