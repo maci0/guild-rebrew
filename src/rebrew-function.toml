@@ -24,7 +24,7 @@ status = "EXACT"
 
 ["SERVER.0x10003170"]
 size = 240
-status = "RELOC"
+status = "PROVEN"
 note = "Function passes itself to VirtualQuery to check its own code page protection"
 ghidra = "IsExecutableOrReadableProtect"
 analysis = "Function passes itself to VirtualQuery to check its own code page protection"
@@ -55,7 +55,7 @@ status = "PROVEN"
 
 ["SERVER.0x10003640"]
 size = 132
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10003820"]
 size = 114
@@ -159,7 +159,7 @@ ghidra = "exit_handler"
 
 ["SERVER.0x10009320"]
 size = 42
-status = "RELOC"
+status = "PROVEN"
 analysis = "Create server main thread - called on DLL_PROCESS_ATTACH | Exported function called by the host engine to initialize the game server thread. Creates the core ServerMainThread and returns the handle validity."
 
 ["SERVER.0x10009350"]
@@ -257,7 +257,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000b440"]
 size = 133
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000b4d0"]
 size = 836
@@ -339,7 +339,7 @@ status = "PROVEN"
 
 ["SERVER.0x1000c600"]
 size = 109
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x1000c670"]
 size = 45
