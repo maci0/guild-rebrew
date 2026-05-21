@@ -8,18 +8,6 @@ typedef struct {
 	char pad[19];
 } ENT;
 
-#pragma pack(push, 1)
-// SIZE 0x18
-typedef struct {
-	char key;
-	char pad[3];
-	int entityId;
-	char field8;
-	char rest[15];
-} SlotEntry;
-#pragma pack(pop)
-
-extern SlotEntry g_office_slots[];
 extern int g_aemter_table;
 void* __cdecl gm_LookupEntityRecordById(int);
 extern ENT g_ents[];
