@@ -863,9 +863,7 @@ blocker = "comparison direction swap, instruction folding (lea vs mov), jump con
 
 ["SERVER.0x10015950"]
 size = 861
-status = "NEAR_MATCHING"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap"
-blocker_delta = 333
+status = "PROVEN"
 ghidra = "InitGameWorld"
 analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
 
