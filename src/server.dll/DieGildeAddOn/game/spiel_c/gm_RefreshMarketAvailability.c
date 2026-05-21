@@ -10,12 +10,6 @@ typedef int(__cdecl* ALLOCFN)(int, int, int);
 #pragma intrinsic(memcpy, memset)
 
 // SIZE 0x2c
-typedef struct {
-	char pad[0x24];
-	int(__cdecl* func)(int, int);
-	int field_28;
-} DISPATCH_OBJ;
-
 #pragma pack(push, 1)
 // SIZE 0x43
 typedef struct {

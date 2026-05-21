@@ -1,12 +1,6 @@
 #include "../../../Units/Error/error.h"
 
 // SIZE 0x18
-typedef struct {
-	int value;
-	char type;
-	char pad[19];
-} ENT;
-
 #pragma pack(push, 1)
 // SIZE 0x18
 typedef struct {

@@ -30,13 +30,6 @@ typedef struct {
 } PAIR;
 
 // SIZE 0x14
-typedef struct {
-	char hdr[8];
-	int key;
-	char pad[4];
-	int val;
-} SRC;
-
 // SIZE 0x3c
 typedef struct {
 	char hdr[0xc];

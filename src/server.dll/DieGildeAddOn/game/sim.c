@@ -408,12 +408,6 @@ error:
 
 #pragma pack(push, 1)
 // SIZE 0xe
-typedef struct {
-	int days;    /* 0x00 */
-	short hours; /* 0x04 */
-	int minutes; /* 0x06 */
-	int seconds; /* 0x0a */
-} TimeStruct;
 #pragma pack(pop)
 
 __declspec(naked) int __cdecl AdvanceGameClock(int* arg1, int arg2, int arg3, int arg4)
