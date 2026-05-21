@@ -2,7 +2,6 @@
 #include "../../Units/m_alloc/m_alloc.h"
 #include "zlib.h"
 
-#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -4,8 +4,6 @@
 
 #include <ctype.h>
 #include <stdio.h>
-#include <stdlib.h>
-
 int __cdecl vfs_Crc32Update(int checksum, int buffer, unsigned int size);
 /* Reads a single byte from a VFS stream. Advances the read
  * position and returns the byte value, or error on EOF. */

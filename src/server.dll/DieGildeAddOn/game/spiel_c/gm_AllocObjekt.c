@@ -2,9 +2,7 @@
 #include "../../../Units/m_alloc/m_alloc.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <windows.h>
 typedef int(__cdecl* ALLOCFN)(int, int, int);
 
 #pragma intrinsic(memcpy, memset)

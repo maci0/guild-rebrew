@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include <time.h>
 #include <windows.h>
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
