@@ -12,11 +12,11 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 208B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ExSetEntityBitmask
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExChangeBits(int param_1,char *param_2)
- * 
+ *
  * {
  *   int iVar1;
  *   int iVar2;
@@ -25,7 +25,7 @@
  *   uint uVar5;
  *   void *pvStack_8;
  *   void *pvStack_4;
- *   
+ *
  *   iVar1 = param_1;
  *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
  *   *(int *)(iVar1 + 0x10) = iVar2;

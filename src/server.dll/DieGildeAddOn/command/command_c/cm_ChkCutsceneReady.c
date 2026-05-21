@@ -4,16 +4,16 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 120B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _CheckCutsceneReady
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ChkCutsceneReady(char *obj)
- * 
+ *
  * {
  *   int entity_ptr;
  *   int *id_ptr;
  *   int i;
- *   
+ *
  *   if (*(int *)(obj + 0x10) == -1) {
  *     return 1;
  *   }

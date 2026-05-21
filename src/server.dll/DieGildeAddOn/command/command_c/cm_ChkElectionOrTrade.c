@@ -4,15 +4,15 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 169B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ValidateElectionOrTradeCmd
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ChkElectionOrTrade(int cmd)
- * 
+ *
  * {
  *   ushort *puVar1;
  *   int iVar2;
- *   
+ *
  *   if (*(int *)(cmd + 0x10) == 0x636c6572) {
  *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x18));
  *     if (puVar1 != (ushort *)0x0) {

@@ -4,11 +4,11 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 26B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _AssignSequenceCounter
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_AssignSequenceCounter(int param_1,char *param_2)
- * 
+ *
  * {
  *   *(int *)(param_1 + 0x10) = g_sequence_counter;
  *   g_sequence_counter = g_sequence_counter + 1;

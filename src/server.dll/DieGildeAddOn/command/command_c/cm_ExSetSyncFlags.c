@@ -4,12 +4,12 @@
  * /+ WARNING: Globals starting with '_' overlap smaller symbols at the same address * / * / * [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 122B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _SetSyncFlags
  *    Files: DieGildeAddOn/command/command.c * /
- * 
+ *
  * int __cdecl cm_ExSetSyncFlags(int cmd,char *result)
- * 
+ *
  * {
  *   if (*(char *)(cmd + 0x10) == '\x01') {
  *     g_player_slot_0[*(byte *)(cmd + 3)].flags =

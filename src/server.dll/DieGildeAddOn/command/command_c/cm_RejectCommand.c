@@ -4,12 +4,12 @@
  * /+ WARNING: Unknown calling convention -- yet parameter storage is locked * / * / * [rebrew] FUNCTION: EXACT
  *    Origin: GAME
  *    Size: 6B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _RejectCommand
  *    Files: DieGildeAddOn/command/command.c * /
- * 
+ *
  * int cm_RejectCommand(void)
- * 
+ *
  * {
  *   return 1;
  * }

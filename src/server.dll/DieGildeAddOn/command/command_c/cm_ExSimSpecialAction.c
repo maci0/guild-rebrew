@@ -11,17 +11,17 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 262B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _SimSpecialAction
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExSimSpecialAction(int cmd,char *result)
- * 
+ *
  * {
  *   SRC *src;
  *   uint uVar1;
  *   char *p;
  *   int iVar2;
- *   
+ *
  *   p = (char *)gm_LookupEntityRecordById(*(int *)(cmd + 0x14));
  *   if (p == (char *)0x0) {
  *     return -1;

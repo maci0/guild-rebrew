@@ -12,16 +12,16 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 267B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _CmdAllocPlayer
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExAllocSpieler(int cmd,char *result)
- * 
+ *
  * {
  *   int iVar1;
  *   ushort *puVar2;
  *   uint uVar3;
- *   
+ *
  *   *(undefined4 *)(cmd + 0x10) = g_timestamp_0b6c;
  *   iVar1 = rand();
  *   *(int *)(cmd + 0x26) = iVar1;

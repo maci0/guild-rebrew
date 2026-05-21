@@ -4,14 +4,14 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 142B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ExTransferCurrencyNoKill
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExTransferCurrencyNoKill(int cmd,char *result)
- * 
+ *
  * {
  *   int iVar1;
- *   
+ *
  *   *(undefined4 *)(cmd + 0x18) = g_timestamp_0b6c;
  *   if (*(int *)(cmd + 0x14) != -1) {
  *     iVar1 = gm_GetFieldByType((char *)cmd,*(int *)(cmd + 0x14));

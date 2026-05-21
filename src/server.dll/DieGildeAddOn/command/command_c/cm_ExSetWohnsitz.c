@@ -4,11 +4,11 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 271B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _SetResidence
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExSetWohnsitz(int cmd,char *result)
- * 
+ *
  * {
  *   byte *pbVar1;
  *   ushort *puVar2;
@@ -16,7 +16,7 @@
  *   uint line;
  *   char *msg;
  *   ushort local_8 [4];
- *   
+ *
  *   puVar2 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x10));
  *   if (puVar2 == (ushort *)0x0) {
  *     msg = s_cm_ExSetWohnsitz____Could_not_fi_1002d298;

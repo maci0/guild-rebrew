@@ -4,15 +4,15 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 164B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ExTransferCurrency
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExTransferCurrency(int cmd,char *result)
- * 
+ *
  * {
  *   void *pvVar1;
  *   int iVar2;
- *   
+ *
  *   *(undefined4 *)(cmd + 0x18) = g_timestamp_0b6c;
  *   if (*(int *)(cmd + 0x14) != -1) {
  *     pvVar1 = (void *)gm_GetFieldByType((char *)cmd,*(int *)(cmd + 0x14));

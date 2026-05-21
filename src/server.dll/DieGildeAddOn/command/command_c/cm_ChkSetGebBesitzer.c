@@ -4,14 +4,14 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 64B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _find_validate
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ChkSetGebBesitzer(char *obj)
- * 
+ *
  * {
  *   ushort *puVar1;
- *   
+ *
  *                     / * Command validation handler for changing building ownership
  *                        (ChkSetGebBesitzer). Looks up the building entity using
  *                        gm_StartFilteredEntitySearch, checks its state flags, and validates the command.

@@ -7,11 +7,11 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 346B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ExMoveObject
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExMoveObjekt(int param_1,char *param_2)
- * 
+ *
  * {
  *   int iVar1;
  *   int iVar2;
@@ -23,7 +23,7 @@
  *   int iVar6;
  *   void *pvStack_8;
  *   void *pvStack_4;
- *   
+ *
  *   iVar6 = param_1;
  *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x14));
  *   *(int *)(iVar6 + 0x14) = iVar2;

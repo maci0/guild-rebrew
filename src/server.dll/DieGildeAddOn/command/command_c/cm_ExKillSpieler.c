@@ -4,14 +4,14 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 72B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _CmdKillPlayer
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExKillSpieler(int param_1)
- * 
+ *
  * {
  *   ushort *puVar1;
- *   
+ *
  *   puVar1 = (ushort *)gm_LookupEntityRecordById(*(int *)(param_1 + 0x10));
  *   if (puVar1 != (ushort *)0x0) {
  *     gm_DeallocEntity((uint)*puVar1,*(int *)(param_1 + 0x14));

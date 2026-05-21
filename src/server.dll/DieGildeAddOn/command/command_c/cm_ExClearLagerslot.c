@@ -12,18 +12,18 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 191B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _cm_ExClearLagerslot
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExClearLagerslot(short *param_1,uchar *param_2)
- * 
+ *
  * {
  *   short *psVar1;
  *   int iVar2;
  *   ushort *puVar3;
  *   uint line;
  *   char *msg;
- *   
+ *
  *   psVar1 = param_1;
  *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 8));
  *   *(int *)(psVar1 + 8) = iVar2;

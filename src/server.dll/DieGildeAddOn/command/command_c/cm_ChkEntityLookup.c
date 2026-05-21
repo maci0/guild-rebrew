@@ -4,14 +4,14 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 41B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ValidateEntityLookup
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ChkEntityLookup(int param_1,char *param_2)
- * 
+ *
  * {
  *   int iVar1;
- *   
+ *
  *   if (param_2 != (char *)0x0) {
  *     *param_2 = '\x02';
  *     param_2[1] = '\0';

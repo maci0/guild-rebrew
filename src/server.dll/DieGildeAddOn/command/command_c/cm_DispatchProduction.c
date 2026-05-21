@@ -4,16 +4,16 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 144B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _DispatchProductionCommand
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_DispatchProduction(int param_1,char *param_2)
- * 
+ *
  * {
  *   uint32_t *puVar1;
  *   int iVar2;
  *   uint uVar3;
- *   
+ *
  *   *(undefined4 *)(param_1 + 0x27) = g_timestamp_0b6c;
  *   iVar2 = rand();
  *   *(int *)(param_1 + 0x2b) = iVar2;

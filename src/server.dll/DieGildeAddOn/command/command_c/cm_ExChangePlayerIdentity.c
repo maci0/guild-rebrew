@@ -4,14 +4,14 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 78B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _cm_ExChangePlayerIdentity
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExChangePlayerIdentity(int param_1,char *param_2)
- * 
+ *
  * {
  *   int iVar1;
- *   
+ *
  *   iVar1 = gm_ChangePlayerIdentityImpl(*(int *)(param_1 + 0x10),*(int *)(param_1 + 0x14));
  *   if (-1 < iVar1) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x299d,

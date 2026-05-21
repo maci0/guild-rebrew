@@ -4,11 +4,11 @@
  * /+ [rebrew] FUNCTION: EXACT
  *    Origin: GAME
  *    Size: 22B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _cond_write
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExCondWrite(void *obj,char *buf)
- * 
+ *
  * {
  *   if (buf != (char *)0x0) {
  *     *buf = '\x01';

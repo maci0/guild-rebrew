@@ -13,11 +13,11 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 242B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ExAccumulateEntityFields
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExChangeAttribute(int param_1,char *param_2)
- * 
+ *
  * {
  *   char cVar1;
  *   int iVar2;
@@ -29,7 +29,7 @@
  *   uint uVar8;
  *   void *pvStack_8;
  *   void *pvStack_4;
- *   
+ *
  *   iVar2 = param_1;
  *   iVar3 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
  *   iVar4 = gm_ResolveEntityById((void **)&param_1,&pvStack_8,&pvStack_4,iVar3);

@@ -22,9 +22,9 @@ typedef unsigned char  byte;
 typedef unsigned short ush;
 typedef unsigned long  uLong;
 
-/* 
+/*
  * Wrapper for auto-generated types.h to avoid conflicts with windows.h.
- * Since we can't edit types.h, we use preprocessor defines to skip its 
+ * Since we can't edit types.h, we use preprocessor defines to skip its
  * redundant definitions of standard types.
  */
 #define _CONTEXT _SKIP_CONTEXT
@@ -39,7 +39,7 @@ typedef unsigned long  uLong;
 #define _CPINFO _SKIP_CPINFO
 #define _SYSTEMTIME _SKIP_SYSTEMTIME
 
-/* 
+/*
  * Note: types.h must be included relatively from the source file.
  * We don't include it here to avoid complex path issues in common header.
  */

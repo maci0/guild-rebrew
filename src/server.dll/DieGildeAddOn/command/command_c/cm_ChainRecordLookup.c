@@ -11,11 +11,11 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 327B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _chain_handler_record_lookup
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ChainRecordLookup(int cmd,char *result)
- * 
+ *
  * {
  *   bool bVar1;
  *   ushort *puVar2;
@@ -23,7 +23,7 @@
  *   int iVar4;
  *   char *pcVar5;
  *   char local_1;
- *   
+ *
  *                     / * Entity chain handler that performs a record search using
  *                        FindRecord/lb_SearchRecordTable based on entity IDs passed in the payload.
  *                        Conditionally calls FUN_100150a0 depending on flags. Used for syncing

@@ -4,14 +4,14 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 77B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _validate_command_type
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ChkCommandType(char *cmd,char *result)
- * 
+ *
  * {
  *   char cVar1;
- *   
+ *
  *                     / * Validation handler for generic structural commands (Command Types 0x00, 0x05,
  *                        0x06, 0x07). Allows basic network/sync structural packets to pass without
  *                        side effects. Returns 0 on success. * /

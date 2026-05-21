@@ -4,16 +4,16 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 171B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _DestroyBuilding
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExDestroyBuilding(int cmd,char *result)
- * 
+ *
  * {
  *   ushort *puVar1;
  *   ushort *puVar2;
  *   int *piVar3;
- *   
+ *
  *   puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x10));
  *   if (puVar1 != (ushort *)0x0) {
  *     puVar2 = gm_StartEntityQuery(0,2,7,4,0x1d);

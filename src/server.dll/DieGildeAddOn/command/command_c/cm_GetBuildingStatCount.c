@@ -8,16 +8,16 @@ extern int g_entity_type_table;
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 135B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _GetBuildingStatCount
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_GetBuildingStatCount(uchar *param_1)
- * 
+ *
  * {
  *   char cVar1;
  *   int iVar2;
  *   int iVar3;
- *   
+ *
  *   iVar2 = *(int *)(param_1 + 0x65);
  *   cVar1 = *(char *)(g_entity_type_table + (uint)*param_1 * 0x24d + 0x247);
  *   if (cVar1 == '\x01') {

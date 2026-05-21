@@ -6,17 +6,17 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 280B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _AllocWarEvent
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExAllocWarEvent(int param_1,char *param_2)
- * 
+ *
  * {
  *   void *pvVar1;
  *   void *pvVar2;
  *   ushort *puVar3;
  *   byte bVar4;
- *   
+ *
  *   *(undefined4 *)(param_1 + 0x10) = g_timestamp_0b6c;
  *   pvVar1 = gm_SearchTable67(*(int *)(param_1 + 0x26));
  *   if (pvVar1 == (void *)0x0) {

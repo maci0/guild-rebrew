@@ -4,17 +4,17 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 153B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _CmdCreateBuilding
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExCreateGeb(int cmd,char *result)
- * 
+ *
  * {
  *   undefined2 *puVar1;
  *   undefined2 extraout_var;
  *   uint line;
  *   char *pcVar2;
- *   
+ *
  *   puVar1 = (undefined2 *)gm_LookupEntityRecordById(*(int *)(cmd + 0x10));
  *   if (puVar1 == (undefined2 *)0x0) {
  *     pcVar2 = s_cm_ExCreateGeb____Could_not_find_1002d41c;

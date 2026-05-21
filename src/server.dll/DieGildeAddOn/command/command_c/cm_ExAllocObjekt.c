@@ -4,16 +4,16 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 123B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ExCreateObject
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExAllocObjekt(int param_1,char *param_2)
- * 
+ *
  * {
  *   int iVar1;
  *   char *pcVar2;
  *   undefined4 *puVar3;
- *   
+ *
  *   *(undefined4 *)(param_1 + 0x35) = g_timestamp_0b6c;
  *   iVar1 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
  *   *(int *)(param_1 + 0x10) = iVar1;

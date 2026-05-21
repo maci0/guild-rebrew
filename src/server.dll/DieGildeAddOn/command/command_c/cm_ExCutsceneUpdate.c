@@ -4,16 +4,16 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 82B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _CutsceneEntityUpdate
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExCutsceneUpdate(int cmd,char *result)
- * 
+ *
  * {
  *   int iVar1;
  *   int iVar2;
  *   int *piVar3;
- *   
+ *
  *                     / * Applies a cutscene identifier (at offset 0x10 of command packet) to up to 16
  *                        linked entities by looking them up via gm_LookupEntityRecordById and modifying
  *                        their 0x20c offset. Used to sync cutscene states across multiple active

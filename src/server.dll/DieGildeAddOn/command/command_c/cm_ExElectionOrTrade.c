@@ -13,16 +13,16 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 308B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ElectionOrTradeCommand
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExElectionOrTrade(int cmd,char *result)
- * 
+ *
  * {
  *   ushort *puVar1;
  *   int iVar2;
  *   ushort *puVar3;
- *   
+ *
  *   if (result != (char *)0x0) {
  *     *result = '\x02';
  *     result[1] = '\0';

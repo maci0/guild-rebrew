@@ -4,14 +4,14 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 22B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _call_with_off2
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExAssignOffice(void *obj)
- * 
+ *
  * {
  *   uint uVar1;
- *   
+ *
  *   uVar1 = ValidateAndAssignOffice((uint *)((int)obj + 0x10));
  *   return (uint)(uVar1 == 0);
  * }

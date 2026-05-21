@@ -4,11 +4,11 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 26B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _chain_handler_assign_id
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ChainAssignId(int param_1,char *param_2)
- * 
+ *
  * {
  *                     / * Entity chain handler that assigns the next global ID (from
  *                        g_mem_pool_overflow_flag) to the packet payload. * /

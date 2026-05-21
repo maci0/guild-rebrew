@@ -4,14 +4,14 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 85B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _cm_ExKillTransporter
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExKillTransporter(int cmd,char *result)
- * 
+ *
  * {
  *   void *pvVar1;
- *   
+ *
  *   pvVar1 = gm_FindRecordById(*(int *)(cmd + 0x10));
  *   if (pvVar1 == (void *)0x0) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x52d8,

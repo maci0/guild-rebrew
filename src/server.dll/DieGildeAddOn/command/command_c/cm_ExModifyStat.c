@@ -4,18 +4,18 @@
  * /+ WARNING: Globals starting with '_' overlap smaller symbols at the same address * / * / * [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 159B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ModifyEntityStat
  *    Files: DieGildeAddOn/command/command.c * /
- * 
+ *
  * int __cdecl cm_ExModifyStat(int *param_1)
- * 
+ *
  * {
  *   int iVar1;
  *   float fVar2;
  *   int iVar3;
  *   long lVar4;
- *   
+ *
  *   iVar3 = gm_LookupEntityRecordById(param_1[4]);
  *   if (((iVar3 == 0) || (iVar1 = param_1[5], iVar1 < 0)) || (4 < iVar1)) {
  *     return 1;

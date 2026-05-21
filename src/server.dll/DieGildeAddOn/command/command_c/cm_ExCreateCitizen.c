@@ -7,17 +7,17 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 335B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ExCreateCitizenAtBuilding
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExCreateCitizen(int param_1,char *param_2)
- * 
+ *
  * {
  *   int iVar1;
  *   ushort *puVar2;
  *   uint uVar3;
  *   char *msg;
- *   
+ *
  *   *(undefined4 *)(param_1 + 0x10) = g_timestamp_0b6c;
  *   iVar1 = rand();
  *   *(int *)(param_1 + 0x22) = iVar1;

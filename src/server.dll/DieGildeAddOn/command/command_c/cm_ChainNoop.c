@@ -4,11 +4,11 @@
  * /+ [rebrew] FUNCTION: EXACT
  *    Origin: GAME
  *    Size: 3B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _chain_handler_noop
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ChainNoop(void)
- * 
+ *
  * {
  *   return 0;
  * }

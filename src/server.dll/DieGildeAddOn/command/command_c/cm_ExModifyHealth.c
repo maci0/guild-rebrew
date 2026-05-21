@@ -4,15 +4,15 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 70B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ModifyEntityHealth
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExModifyHealth(int cmd)
- * 
+ *
  * {
  *   int iVar1;
  *   uint uVar2;
- *   
+ *
  *   iVar1 = gm_LookupEntityRecordById(*(int *)(cmd + 0x10));
  *   if (iVar1 == 0) {
  *     return 1;

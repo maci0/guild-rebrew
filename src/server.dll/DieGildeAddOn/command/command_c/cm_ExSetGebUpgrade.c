@@ -4,16 +4,16 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 237B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _SetBuildingUpgrade
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExSetGebUpgrade(int param_1,char *result)
- * 
+ *
  * {
  *   char *pcVar1;
  *   ushort *puVar2;
  *   uint uVar3;
- *   
+ *
  *   *(undefined4 *)(param_1 + 0x14) = g_timestamp_0b6c;
  *   puVar2 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
  *   if (puVar2 == (ushort *)0x0) {

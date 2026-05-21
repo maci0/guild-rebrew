@@ -4,14 +4,14 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 37B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _AssignEntityId
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_AssignEntityId(int param_1,char *param_2)
- * 
+ *
  * {
  *   DWORD DVar1;
- *   
+ *
  *   *(int *)(param_1 + 0x10) = g_entity_id_start;
  *   DVar1 = timeGetTime();
  *   *(DWORD *)(param_1 + 0x14) = DVar1;

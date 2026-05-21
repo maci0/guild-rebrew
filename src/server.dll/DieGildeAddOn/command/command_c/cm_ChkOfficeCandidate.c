@@ -4,14 +4,14 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 22B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _call_with_off
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ChkOfficeCandidate(void *obj)
- * 
+ *
  * {
  *   int iVar1;
- *   
+ *
  *   iVar1 = amt_ValidateOfficeCandidate((int *)((int)obj + 0x10));
  *   return (uint)(iVar1 == 0);
  * }

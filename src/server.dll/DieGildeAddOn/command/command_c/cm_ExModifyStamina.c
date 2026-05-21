@@ -4,16 +4,16 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 110B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _ModifyEntityStamina
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExModifyStamina(int cmd)
- * 
+ *
  * {
  *   int iVar1;
  *   char cVar2;
  *   uint uVar3;
- *   
+ *
  *   iVar1 = gm_LookupEntityRecordById(*(int *)(cmd + 0x10));
  *   if (iVar1 != 0) {
  *     uVar3 = *(int *)(cmd + 0x14) + (uint)*(byte *)(iVar1 + 0x1b1);

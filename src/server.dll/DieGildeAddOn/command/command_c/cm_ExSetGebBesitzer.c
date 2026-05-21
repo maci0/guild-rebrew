@@ -12,18 +12,18 @@
  * /+ [rebrew] FUNCTION: RELOC
  *    Origin: GAME
  *    Size: 206B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _SetBuildingOwner
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ExSetGebBesitzer(int param_1,char *param_2)
- * 
+ *
  * {
  *   ushort *puVar1;
  *   ushort *puVar2;
  *   ushort *puVar3;
  *   uint line;
  *   char *msg;
- *   
+ *
  *   puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
  *   if (puVar1 == (ushort *)0x0) {
  *     msg = s_cm_ExSetGebBesitzer____Could_not_1002d214;

@@ -4,11 +4,11 @@
  * /+ [rebrew] FUNCTION: MATCHING
  *    Origin: GAME
  *    Size: 162B
- *    CFlags: 
+ *    CFlags:
  *    Symbol: _CheckChangeBits
- *    Files: DieGildeAddOn/command/command.c * / * 
+ *    Files: DieGildeAddOn/command/command.c * / *
  * int __cdecl cm_ChkChangeBits(int param_1,char *param_2)
- * 
+ *
  * {
  *   int iVar1;
  *   int iVar2;
@@ -17,7 +17,7 @@
  *   char *msg;
  *   void *local_8;
  *   void *local_4;
- *   
+ *
  *   iVar1 = param_1;
  *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x10));
  *   *(int *)(iVar1 + 0x10) = iVar2;
