@@ -231,7 +231,7 @@ void __cdecl gm_ResetAllEntities(void)
 	for (i = 0; i < 0x100; i++) {
 		p = g_entity_ptr + i * 0xa9;
 		if (*p != 0) {
-			vfs_EntityCleanup(p);
+			gm_CleanupBuildingEntity((unsigned char*) p);
 		}
 	}
 	{
