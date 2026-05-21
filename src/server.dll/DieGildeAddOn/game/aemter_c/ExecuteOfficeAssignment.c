@@ -11,21 +11,21 @@ typedef struct {
 #pragma pack(push, 1)
 // SIZE 0x18
 typedef struct {
-	char key;
-	char pad[3];
+	char type;
+	char pad0[3];
 	int entityId;
-	char field8;
-	char rest[15];
-} SlotEntry;
+	char role;
+	char pad1[3];
+	int count;
+	char state;
+	char pad2[3];
+	int assignmentId;
+} OfficeSlot;
 #pragma pack(pop)
 
-extern SlotEntry g_office_slots[];
+extern OfficeSlot g_office_slots[];
 extern int g_aemter_table;
-extern char DAT_101de5a8;
-extern int DAT_101de5ac;
-extern char DAT_101de5b0;
 void* __cdecl gm_LookupEntityRecordById(int);
-extern int DAT_101de5b4[];
 extern ENT g_ents[];
 extern ENT g_ents2[];
 extern unsigned short g_default_value_b;
@@ -95,10 +95,10 @@ int __cdecl ExecuteOfficeAssignment(char* cmd_payload)
 	record_off = record_index * 0x18;
 
 	/* Lookup existing owner and clear old role references */
-	old_owner = (int)gm_LookupEntityRecordById(*(int*) (record_off + 0x101de5a4));
+	old_owner = (int)gm_LookupEntityRecordById(g_office_slots[record_index].entityId);
 	if (old_owner != 0 && *(int*) (old_owner + 4) != *(int*) (cmd_payload + 1)) {
 		char role;
-		role = *(char*) (record_off + 0x101de5a8);
+		role = g_office_slots[record_index].role;
 
 		if (*(char*) (old_owner + 0x166) == role) {
 			*(char*) (old_owner + 0x166) = 0;
@@ -134,7 +134,7 @@ after_old_clear:
 
 	{
 		unsigned char role_byte;
-		role_byte = *(unsigned char*) (record_off + 0x101de5a8);
+		role_byte = (unsigned char) g_office_slots[record_index].role;
 
 		if (role_byte <= 0x1b) {
 			/* Small role path */
@@ -156,10 +156,10 @@ after_old_clear:
 				{
 					int off;
 					off = j * 0x18;
-					*(int*) (off + 0x101de5a4) = -1;
-					*(int*) (off + 0x101de5b4) = -1;
-					*(char*) (off + 0x101de5b0) = 4;
-					*(int*) (off + 0x101de5ac) = 0;
+					g_office_slots[j].entityId = -1;
+					g_office_slots[j].assignmentId = -1;
+					g_office_slots[j].state = 4;
+					g_office_slots[j].count = 0;
 				}
 			}
 
@@ -168,7 +168,7 @@ after_old_clear:
 			{
 				unsigned char new_role;
 				unsigned char old_role;
-				new_role = *(unsigned char*) (record_off + 0x101de5a8);
+				new_role = (unsigned char) g_office_slots[record_index].role;
 				old_role = *(unsigned char*) (ent + 0x166);
 
 				if (*(unsigned char*) ((unsigned int) new_role * 0x18 + 0x10029bc0) >=
@@ -179,7 +179,7 @@ after_old_clear:
 
 			{
 				char new_role;
-				new_role = *(char*) (record_off + 0x101de5a8);
+				new_role = g_office_slots[record_index].role;
 				if (*(char*) (ent + 0x168) == new_role) {
 					*(char*) (ent + 0x168) = 0;
 				}
@@ -189,7 +189,7 @@ after_old_clear:
 			/* Set flags based on role */
 			{
 				unsigned char role_val;
-				role_val = *(unsigned char*) (record_off + 0x101de5a8);
+				role_val = (unsigned char) g_office_slots[record_index].role;
 
 				if (role_val == 0x0f) {
 					*(int*) (ent + 0x1cc) = *(int*) (ent + 0x1cc) | 0x40;
@@ -205,7 +205,7 @@ after_old_clear:
 			/* Check role's count property */
 			{
 				unsigned char role_val;
-				role_val = *(unsigned char*) (record_off + 0x101de5a8);
+				role_val = (unsigned char) g_office_slots[record_index].role;
 
 				if (*(int*) ((unsigned int) role_val * 0x18 + 0x10029bc8) != 0) {
 					int k;
@@ -215,17 +215,14 @@ after_old_clear:
 
 					while (1) {
 						if (*scan == role_val && k != record_index) {
-							int off;
-							off = k * 0x18;
-
-							if (*(char*) (off + 0x101de5b0) == 3) {
+							if (g_office_slots[k].state == 3) {
 								int cnt;
-								cnt = *(int*) (off + 0x101de5ac);
+								cnt = g_office_slots[k].count;
 								if (cnt != 0) {
 									cnt--;
-									*(int*) (off + 0x101de5ac) = cnt;
+									g_office_slots[k].count = cnt;
 									if (cnt == 0) {
-										*(char*) (off + 0x101de5b0) = 4;
+										g_office_slots[k].state = 4;
 									}
 								}
 							}
@@ -256,7 +253,7 @@ after_old_clear:
 				} while (scan < (int*) 0x101de91c);
 			}
 
-			*(char*) (ent + 0x169) = *(char*) (record_off + 0x101de5a8);
+			*(char*) (ent + 0x169) = g_office_slots[record_index].role;
 			goto final_store;
 		}
 
@@ -272,7 +269,7 @@ after_old_clear:
 
 			{
 				char role_ch;
-				role_ch = *(char*) (record_off + 0x101de5a8);
+				role_ch = g_office_slots[record_index].role;
 
 				if (role_ch == 0x23) {
 					mask = 0x4000;
@@ -302,11 +299,11 @@ after_old_clear:
 	}
 
 final_store:
-	*(int*) (record_off + 0x101de5a4) = iStack;
-	*(int*) (record_off + 0x101de5b4) = *(int*) (cmd_payload + 7);
-	*(char*) (record_off + 0x101de5b0) = cmd_payload[5];
+	g_office_slots[record_index].entityId = iStack;
+	g_office_slots[record_index].assignmentId = *(int*) (cmd_payload + 7);
+	g_office_slots[record_index].state = cmd_payload[5];
 	if (cmd_payload[5] == 3) {
-		*(int*) (record_off + 0x101de5ac) = 0;
+		g_office_slots[record_index].count = 0;
 	}
 
 	return 1;
