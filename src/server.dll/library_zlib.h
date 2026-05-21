@@ -1,4 +1,4 @@
-#ifdef 0
+#if 0
 // zlib 1.1.3 library symbols for SERVER
 // These functions come from references/zlib-1.1.3/ (compiled into server.dll)
 // Not compiled - annotation-only markers for reccmp matching
