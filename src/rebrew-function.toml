@@ -719,7 +719,7 @@ status = "PROVEN"
 
 ["SERVER.0x100122e0"]
 size = 346
-status = "RELOC"
+status = "PROVEN"
 
 ["SERVER.0x10012440"]
 size = 37
