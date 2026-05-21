@@ -249,9 +249,7 @@ void __cdecl gm_ResetAllEntities(void)
 // FUNCTION: SERVER 0x10015cf0
 // gm_CleanupObjectEntities
 
-int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
-void __cdecl gm_NoopRet2(void);
 
 __declspec(naked) void __cdecl gm_CleanupObjectEntities(void)
 {

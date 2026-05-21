@@ -60,7 +60,6 @@ extern unsigned int ls_ID2Ptr(void);
 // FUNCTION: SERVER 0x10012000
 // ls_LoadGraveyardData
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 
 __declspec(naked) int __cdecl ls_LoadGraveyardData(int arg1, int arg2)
 {
@@ -544,7 +543,6 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 // ls_LoadExistingEntities
 
 
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 void __cdecl gm_CleanupObjectEntities(void);
 
 __declspec(naked) int __cdecl ls_LoadExistingEntities(int arg1)

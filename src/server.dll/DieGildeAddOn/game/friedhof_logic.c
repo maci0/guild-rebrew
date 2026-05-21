@@ -2562,7 +2562,6 @@ int __cdecl ActivateGraveyardSection(unsigned char* cmd_payload)
 // gv_UpdateProductionProgress
 
 
-int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
 __declspec(naked) int __cdecl gv_UpdateProductionProgress(unsigned char* arg1)
 {
