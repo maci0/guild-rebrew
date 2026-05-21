@@ -1705,7 +1705,7 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 	char* pDest;
 	unsigned int gebType;
 	int base;
-	int var_4;
+	int has_producer;
 	char* geb;
 	int temp_result;
 	short owner_id;
@@ -1713,7 +1713,7 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 	if (g_entity_type_table == 0) {
 		return 0;
 	}
-	var_4 = 0;
+	has_producer = 0;
 	geb = gm_SearchStruct();
 	temp_result = g_entity_type_table;
 	if (geb == 0) {
@@ -1771,14 +1771,14 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 				unsigned int item_index = comp_entry & 0x7fff;
 				char item_class = *(char*) (g_item_def_table + item_index * 0x41);
 				if (item_class == '\x02' || item_class == '\x06') {
-					var_4 = 1;
+					has_producer = 1;
 				}
 				if ((comp_entry & 0x8000) != 0) {
 					if (item_class == '\x02' || item_class == '\x06') {
-						var_4 = 1;
+						has_producer = 1;
 						gm_AllocBuildingContents(geb, item_index);
 					}
-					else if (var_4 == 0) {
+					else if (has_producer == 0) {
 						gm_AllocObjekt(*(int*) (geb + 1), item_index, 1);
 					}
 				}

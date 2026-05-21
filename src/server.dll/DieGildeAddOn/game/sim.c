@@ -512,9 +512,9 @@ __declspec(naked) int __cdecl AdvanceGameClock(int* arg1, int arg2, int arg3, in
 // FUNCTION: SERVER 0x10015690
 // sim_SetSyncParams
 
-void __cdecl sim_SetSyncParams(int arg1, unsigned char arg2, unsigned int arg3, unsigned int arg4)
+void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10)
 {
-	*(unsigned int*) (arg1 + 10) = arg4 & 0xff;
-	*(unsigned short*) (arg1 + 4) = (unsigned short) arg2;
-	*(unsigned int*) (arg1 + 6) = arg3 & 0xff;
+	*(unsigned int*) (target + 10) = field_10 & 0xff;
+	*(unsigned short*) (target + 4) = (unsigned short) type_id;
+	*(unsigned int*) (target + 6) = field_6 & 0xff;
 }

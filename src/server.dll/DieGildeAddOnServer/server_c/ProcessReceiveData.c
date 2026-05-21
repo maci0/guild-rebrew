@@ -35,7 +35,7 @@ void __cdecl InitBuildingTypeTable(void);
 void __cdecl RecvGameSavegame(void);
 int __cdecl srv_Init(void);
 int __cdecl AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
-void __cdecl sim_SetSyncParams(int base_addr, unsigned char phase, unsigned int arg3, unsigned int arg4);
+void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10);
 void __cdecl _seterrormode(int value);
 void __cdecl ShutdownMemoryAllocator();
 int __cdecl gm_Open(char*, char*);
