@@ -22,7 +22,6 @@ extern int g_1002d4f0;
 extern int g_1002d4f4;
 extern char g_1002d4f8;
 extern char g_1002d4fc;
-extern int g_query_base;
 extern int g_query_limit;
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 int __cdecl ahm_AllocAhmInfo(int building, int slot);

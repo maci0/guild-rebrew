@@ -51,7 +51,7 @@
 #include "../command_internal.h"
 
 extern int g_entity_type_table;
-extern uchar g_current_season;
+extern unsigned char g_current_season;
 
 void __cdecl ReportMessage(char* msg, ...);
 void __cdecl gm_SetBuildingWorkerLimits(uchar*);
