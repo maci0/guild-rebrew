@@ -1,571 +1,583 @@
-<!-- AUTO-GENERATED FILE — DO NOT EDIT. Regenerate with: rebrew build-db -->
-
 # Reversed Functions Catalog
 
-Total: 559 functions matched (330 exact, 192 reloc, 26 stubs)  
-Coverage: 98.4% of .text section (139172/141382 bytes)
+Total: 561/530 functions cataloged (332 exact, 192 reloc-normalized, 4 near-matching, 26 stubs)  
+Coverage: 98.1% of .text section (138738/141382 bytes)
 
 
-## SERVER (559 functions)
+## SERVER (562 functions)
 
-| VA | Symbol | Size | Status | Files |
-|---:|--------|-----:|--------|-------|
-| 0x10001000 | adler32 | 302 | EXACT | library_zlib.h |
-| 0x10001130 | _SendBroadcastPacket | 179 | RELOC | Units/net/broadcast.c |
-| 0x100011f0 | vfs_Crc32Update | 309 | EXACT | library_zlib.h |
-| 0x10001330 | deflateInit2_ | 505 | EXACT | library_zlib.h |
-| 0x10001530 | deflateReset | 115 | EXACT | library_zlib.h |
-| 0x100015b0 | deflate | 685 | EXACT | library_zlib.h |
-| 0x10001860 | putShortMSB | 47 | EXACT | library_zlib.h |
-| 0x10001890 | flush_pending | 114 | EXACT | library_zlib.h |
-| 0x10001910 | deflateEnd | 170 | EXACT | library_zlib.h |
-| 0x100019c0 | lm_init | 147 | EXACT | library_zlib.h |
-| 0x10001a60 | deflate_stored | 343 | EXACT | library_zlib.h |
-| 0x10001bc0 | fill_window | 290 | EXACT | library_zlib.h |
-| 0x10001cf0 | read_buf | 113 | EXACT | library_zlib.h |
-| 0x10001d70 | deflate_fast | 813 | EXACT | library_zlib.h |
-| 0x100020a0 | longest_match | 367 | EXACT | library_zlib.h |
-| 0x10002210 | deflate_slow | 1066 | EXACT | library_zlib.h |
-| 0x10002640 | _DispatchLogOutput | 290 | RELOC | Units/Error/Error.c |
-| 0x10002770 | _CrashDumpUnhandledExceptionFilter@4 | 2115 | STUB | Units/Error/Error_c/CrashDumpUnhandledExceptionFilter.c |
-| 0x10002fc0 | _EmitCrashModuleLine | 376 | RELOC | Units/Error/Error.c |
-| 0x10003140 | _GetDebugRecordByIndex | 33 | EXACT | Units/Error/Error.c |
-| 0x10003170 | _check_memory_protection | 240 | RELOC | Units/Error/Error.c |
-| 0x10003260 | _AnalyzeInstruction | 183 | EXACT | Units/Error/Error.c |
-| 0x10003320 | _InitializeLogAndErrorHandler | 404 | RELOC | Units/Error/Error.c |
-| 0x100034c0 | _ShutdownLogAndErrorHandler | 83 | RELOC | Units/Error/Error.c |
-| 0x10003520 | _ReportFatalError | 160 | RELOC | Units/Error/Error.c |
-| 0x100035c0 | _ReportMessage | 119 | RELOC | Units/Error/Error.c |
-| 0x10003640 | _LogMessageInternal | 132 | RELOC | Units/Error/Error.c |
-| 0x100036d0 | check_header | 332 | EXACT | library_zlib.h |
-| 0x10003820 | _vfs_GetByte | 114 | RELOC | Units/vfs/vfs.c |
-| 0x100038a0 | _vfs_CloseStream | 177 | RELOC | Units/vfs/vfs.c |
-| 0x10003960 | gzread | 559 | EXACT | library_zlib.h |
-| 0x10003b90 | _vfs_FlushStream | 182 | RELOC | Units/vfs/vfs.c |
-| 0x10003c50 | _vfs_ReadUint32BE | 65 | RELOC | Units/vfs/vfs.c |
-| 0x10003ca0 | _vfs_FlushAndClose | 77 | RELOC | Units/vfs/vfs.c |
-| 0x10003cf0 | _vfs_WriteUint32LE | 43 | RELOC | Units/vfs/vfs.c |
-| 0x10003d20 | inflate_blocks_reset | 123 | EXACT | library_zlib.h |
-| 0x10003da0 | inflate_blocks_new | 160 | EXACT | library_zlib.h |
-| 0x10003e40 | inflate_blocks | 3328 | EXACT | library_zlib.h |
-| 0x10004b40 | inflate_blocks_free | 57 | EXACT | library_zlib.h |
-| 0x10004b80 | _gm_AllocAndInit | 57 | EXACT | DieGildeAddOn/game/spiel.c |
-| 0x10004bc0 | inflate_fast | 1968 | EXACT | library_zlib.h |
-| 0x10005370 | _gm_DispatchCall | 20 | EXACT | DieGildeAddOn/game/spiel.c |
-| 0x10005390 | inflate_codes | 911 | EXACT | library_zlib.h |
-| 0x10005720 | inflateReset | 66 | EXACT | library_zlib.h |
-| 0x10005770 | inflateEnd | 72 | EXACT | library_zlib.h |
-| 0x100057c0 | inflateInit2_ | 270 | EXACT | library_zlib.h |
-| 0x100058d0 | inflate | 1072 | EXACT | library_zlib.h |
-| 0x10005d00 | inflate_trees_bits | 163 | EXACT | library_zlib.h |
-| 0x10005db0 | huft_build | 1225 | EXACT | library_zlib.h |
-| 0x10006280 | inflate_trees_dynamic | 393 | EXACT | library_zlib.h |
-| 0x10006410 | inflate_trees_fixed | 46 | EXACT | library_zlib.h |
-| 0x10006440 | inflate_flush | 306 | EXACT | library_zlib.h |
-| 0x10006580 | _m_AllocTracked | 658 | STUB | Units/m_alloc/m_alloc_c/m_AllocTracked.c |
-| 0x10006820 | _m_FreeTracked | 188 | RELOC | Units/m_alloc/m_alloc.c |
-| 0x100068e0 | _InitPacketPool | 162 | RELOC | Units/m_alloc/m_alloc.c |
-| 0x10006990 | _ReportMemoryGroupInfo | 612 | STUB | Units/m_alloc/m_alloc_c/ReportMemoryGroupInfo.c |
-| 0x10006c00 | _ShutdownMemoryAllocator | 283 | RELOC | Units/m_alloc/m_alloc.c |
-| 0x10006d20 | _m_PoolAlloc | 270 | RELOC | Units/m_alloc/m_alloc.c |
-| 0x10006e30 | _m_PoolFree | 137 | RELOC | Units/m_alloc/m_alloc.c |
-| 0x10006ec0 | _tr_init | 108 | EXACT | library_zlib.h |
-| 0x10006f30 | tr_static_init | 1 | EXACT | library_zlib.h |
-| 0x10006f40 | init_block | 102 | EXACT | library_zlib.h |
-| 0x10006fb0 | _tr_stored_block | 157 | EXACT | library_zlib.h |
-| 0x10007050 | _tr_align | 597 | EXACT | library_zlib.h |
-| 0x100072b0 | _tr_flush_block | 494 | EXACT | library_zlib.h |
-| 0x100074a0 | build_tree | 563 | EXACT | library_zlib.h |
-| 0x100076e0 | pqdownheap | 209 | EXACT | library_zlib.h |
-| 0x100077c0 | gen_bitlen | 545 | EXACT | library_zlib.h |
-| 0x100079f0 | gen_codes | 115 | EXACT | library_zlib.h |
-| 0x10007a70 | build_bl_tree | 111 | EXACT | library_zlib.h |
-| 0x10007ae0 | scan_tree | 231 | EXACT | library_zlib.h |
-| 0x10007bd0 | send_all_trees | 613 | EXACT | library_zlib.h |
-| 0x10007e40 | send_tree | 1397 | EXACT | library_zlib.h |
-| 0x100083c0 | vfs_CompressBlock | 1083 | EXACT | library_zlib.h |
-| 0x10008800 | set_data_type | 116 | EXACT | library_zlib.h |
-| 0x10008880 | bit_reverse | 31 | EXACT | library_msvc.h |
-| 0x100088a0 | bi_flush | 139 | EXACT | library_zlib.h |
-| 0x10008930 | bi_windup | 124 | EXACT | library_zlib.h |
-| 0x100089b0 | copy_block | 151 | EXACT | library_zlib.h |
-| 0x10008a50 | _vfs_DestroyEntity | 53 | RELOC | Units/vfs/vfs.c |
-| 0x10008a90 | _ReadVfsCompressed | 492 | RELOC | Units/vfs/vfs.c |
-| 0x10008c80 | _vfs_CleanupObject | 129 | RELOC | Units/vfs/vfs.c |
-| 0x10008d10 | _CloseVfsStream | 301 | RELOC | Units/vfs/vfs.c |
-| 0x10008e40 | _ReadVfsData | 472 | RELOC | Units/vfs/vfs.c |
-| 0x10009020 | _OpenVfsStream | 704 | STUB | Units/vfs/vfs_c/OpenVfsStream.c |
-| 0x100092e0 | zcalloc | 19 | EXACT | library_zlib.h |
-| 0x10009300 | free_wrap | 12 | EXACT | library_msvc.h |
-| 0x10009310 | _exit_handler@12 | 8 | EXACT | DieGildeAddOnServer/server.c |
-| 0x10009320 | _Init | 42 | RELOC | DieGildeAddOnServer/server.c |
-| 0x10009350 | _Exit | 68 | RELOC | DieGildeAddOnServer/server.c |
-| 0x100093a0 | _ServerMainThread | 2434 | STUB | DieGildeAddOnServer/server_c/ServerMainThread.c |
-| 0x10009d30 | _srv_Init | 296 | RELOC | DieGildeAddOnServer/server.c |
-| 0x10009e60 | _CreateListenSocket | 419 | NEAR_MATCHING | DieGildeAddOnServer/server.c |
-| 0x1000a010 | _CleanupSockets | 112 | NEAR_MATCHING | DieGildeAddOnServer/server.c |
-| 0x1000a080 | _AcceptConnections | 600 | RELOC | DieGildeAddOnServer/server.c |
-| 0x1000a2e0 | _cm_ClosePlayerConnection | 96 | RELOC | DieGildeAddOnServer/server.c |
-| 0x1000a340 | _ReceivePacketHeader | 336 | RELOC | DieGildeAddOnServer/server.c |
-| 0x1000a490 | _SendPlayerData | 211 | RELOC | DieGildeAddOnServer/server.c |
-| 0x1000a570 | _ProcessReceiveData | 750 | STUB | DieGildeAddOnServer/server_c/ProcessReceiveData.c |
-| 0x1000a860 | _ProcessSendData | 131 | RELOC | DieGildeAddOnServer/server.c |
-| 0x1000a8f0 | _QueueCommandForProcessing | 170 | RELOC | DieGildeAddOnServer/server.c |
-| 0x1000a9a0 | _cm_QueuePlayerCommand | 170 | RELOC | DieGildeAddOnServer/server.c |
-| 0x1000aa50 | _list_unlink_relink | 97 | EXACT | DieGildeAddOnServer/server.c |
-| 0x1000aac0 | _cm_ProcessCommandQueue | 639 | STUB | DieGildeAddOnServer/server_c/cm_ProcessCommandQueue.c |
-| 0x1000ad40 | _LogWinsockError | 768 | RELOC | DieGildeAddOnServer/server.c |
-| 0x1000b040 | _InitBuildingTypeTable | 372 | RELOC | DieGildeAddOnServer/server.c |
-| 0x1000b1c0 | _amt_ValidateOfficeCandidate | 205 | RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000b290 | _ValidateAndAssignOffice | 425 | RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000b440 | _amt_ValidateCommand | 133 | RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000b4d0 | _ExecuteOfficeAssignment | 836 | STUB | DieGildeAddOn/game/aemter_c/ExecuteOfficeAssignment.c |
-| 0x1000b820 | _amt_FindEntity26 | 42 | RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000b850 | _amt_FindEntity27 | 42 | RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000b880 | _amt_SwapOfficeHolders | 263 | RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000b990 | _amt_ClearEntityLinks | 157 | RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000ba30 | _amt_UpdateEntityLinks | 179 | RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000baf0 | _amt_fio_LoadAemter | 606 | RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000bd50 | _ahm_ResetEntityState | 66 | EXACT | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000bda0 | _ahm_CheckFlag | 70 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000bdf0 | _ahm_ExAllocAlchemist | 1002 | STUB | DieGildeAddOn/game/alchemistry_logic_c/ahm_ExAllocAlchemist.c |
-| 0x1000c1e0 | _ahm_ApplyColorComponent | 160 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000c280 | _ahm_AllocateEntitySlot | 130 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000c310 | _ahm_SlotClearMatch | 110 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000c380 | _ahm_SearchAndSet | 51 | EXACT | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000c3c0 | _ahm_ClampFloatValue | 83 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000c420 | _ahm_FireEntityAndCleanup | 166 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000c4d0 | _ahm_AllocAhmInfo | 295 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000c600 | _ahm_InitRandomEntity | 109 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000c670 | _ahm_LookupEntityInTable | 45 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000c6a0 | _ahm_QueryEntityBuildingType | 102 | RELOC | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000c710 | _GetCommandPayloadSize | 752 | NEAR_MATCHING | DieGildeAddOn/game/alchemistry_logic_c/GetCommandPayloadSize.c |
-| 0x1000ca00 | _ahm_ProcessEntityChain | 130 | EXACT | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000ca90 | _gm_GetFieldByType | 130 | EXACT | DieGildeAddOn/game/alchemistry_logic.c |
-| 0x1000cb20 | _cm_ChkMoveCredits | 171 | RELOC | DieGildeAddOn/command/command_c/cm_ChkMoveCredits.c |
-| 0x1000cbd0 | _cm_ChkSellObjekt | 517 | RELOC | DieGildeAddOn/command/command_c/cm_ChkSellObjekt.c |
-| 0x1000cde0 | _cm_ChkChangeAttribute | 331 | RELOC | DieGildeAddOn/command/command_c/cm_ChkChangeAttribute.c |
-| 0x1000cf30 | _cm_ChkChangeBits | 162 | RELOC | DieGildeAddOn/command/command_c/cm_ChkChangeBits.c |
-| 0x1000cfe0 | _cm_ChkSetGebBesitzer | 64 | RELOC | DieGildeAddOn/command/command_c/cm_ChkSetGebBesitzer.c |
-| 0x1000d020 | _cm_ChkOfficeCandidate | 22 | RELOC | DieGildeAddOn/command/command_c/cm_ChkOfficeCandidate.c |
-| 0x1000d040 | _cm_ValidateGeneric | 22 | RELOC | DieGildeAddOn/command/command_c/cm_ValidateGeneric.c |
-| 0x1000d060 | _cm_ChkElectionOrTrade | 169 | RELOC | DieGildeAddOn/command/command_c/cm_ChkElectionOrTrade.c |
-| 0x1000d110 | _cm_ChkJoinLeaveElection | 333 | RELOC | DieGildeAddOn/command/command_c/cm_ChkJoinLeaveElection.c |
-| 0x1000d260 | _cm_ChkCutsceneReady | 120 | RELOC | DieGildeAddOn/command/command_c/cm_ChkCutsceneReady.c |
-| 0x1000d2e0 | _cm_ChkCommandType | 77 | RELOC | DieGildeAddOn/command/command_c/cm_ChkCommandType.c |
-| 0x1000d330 | _cm_MarkAndReturn | 14 | EXACT | DieGildeAddOn/command/command_c/cm_MarkAndReturn.c |
-| 0x1000d340 | _cm_RejectCommand | 6 | EXACT | DieGildeAddOn/command/command_c/cm_RejectCommand.c |
-| 0x1000d350 | _cm_ExAllocRaum | 267 | RELOC | DieGildeAddOn/command/command_c/cm_ExAllocRaum.c |
-| 0x1000d460 | _cm_ExAllocSpieler | 267 | RELOC | DieGildeAddOn/command/command_c/cm_ExAllocSpieler.c |
-| 0x1000d570 | _cm_ExAllocClientSpieler | 361 | RELOC | DieGildeAddOn/command/command_c/cm_ExAllocClientSpieler.c |
-| 0x1000d6e0 | _cm_ExChangePlayerIdentity | 78 | RELOC | DieGildeAddOn/command/command_c/cm_ExChangePlayerIdentity.c |
-| 0x1000d730 | _cm_ExFree | 192 | RELOC | DieGildeAddOn/command/command_c/cm_ExFree.c |
-| 0x1000d7f0 | _cm_ExTransferCurrency | 176 | RELOC | DieGildeAddOn/command/command_c/cm_ExTransferCurrency.c |
-| 0x1000d8a0 | _cm_ExTransferCurrencyNoKill | 144 | RELOC | DieGildeAddOn/command/command_c/cm_ExTransferCurrencyNoKill.c |
-| 0x1000d930 | _cm_ExSellObjekt | 2057 | STUB | DieGildeAddOn/command/command_c/cm_ExSellObjekt.c |
-| 0x1000e140 | _cm_ExProdObjekt | 993 | STUB | DieGildeAddOn/command/command_c/cm_ExProdObjekt.c |
-| 0x1000e530 | _cm_ExMoveObjekt | 352 | RELOC | DieGildeAddOn/command/command_c/cm_ExMoveObjekt.c |
-| 0x1000e690 | _cm_ExClearLagerslot | 191 | RELOC | DieGildeAddOn/command/command_c/cm_ExClearLagerslot.c |
-| 0x1000e750 | _cm_ExAllocObjekt | 128 | RELOC | DieGildeAddOn/command/command_c/cm_ExAllocObjekt.c |
-| 0x1000e7d0 | _cm_ExChangeAttribute | 256 | RELOC | DieGildeAddOn/command/command_c/cm_ExChangeAttribute.c |
-| 0x1000e8d0 | _cm_ExSetAttribute | 240 | RELOC | DieGildeAddOn/command/command_c/cm_ExSetAttribute.c |
-| 0x1000e9c0 | _cm_ExChangeDesire | 214 | RELOC | DieGildeAddOn/command/command_c/cm_ExChangeDesire.c |
-| 0x1000eaa0 | _cm_ExChangeBits | 208 | RELOC | DieGildeAddOn/command/command_c/cm_ExChangeBits.c |
-| 0x1000eb70 | _cm_ExChangeFloat | 144 | RELOC | DieGildeAddOn/command/command_c/cm_ExChangeFloat.c |
-| 0x1000ec00 | _cm_ExCopyEntityData | 912 | STUB | DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c |
-| 0x1000ef90 | _cm_ChainAssignId | 26 | RELOC | DieGildeAddOn/command/command_c/cm_ChainAssignId.c |
-| 0x1000efb0 | _cm_ExSetSyncFlags | 122 | RELOC | DieGildeAddOn/command/command_c/cm_ExSetSyncFlags.c |
-| 0x1000f030 | _cm_ExKillSpieler | 72 | RELOC | DieGildeAddOn/command/command_c/cm_ExKillSpieler.c |
-| 0x1000f080 | _cm_AssignSequenceCounter | 26 | RELOC | DieGildeAddOn/command/command_c/cm_AssignSequenceCounter.c |
-| 0x1000f0a0 | _cm_AssignEntityId | 37 | RELOC | DieGildeAddOn/command/command_c/cm_AssignEntityId.c |
-| 0x1000f0d0 | _cm_ExRemoveLinkedObject | 197 | RELOC | DieGildeAddOn/command/command_c/cm_ExRemoveLinkedObject.c |
-| 0x1000f1a0 | _cm_ChainRecordLookup | 327 | RELOC | DieGildeAddOn/command/command_c/cm_ChainRecordLookup.c |
-| 0x1000f2f0 | _cm_ExAllocThemaPredigt | 176 | RELOC | DieGildeAddOn/command/command_c/cm_ExAllocThemaPredigt.c |
-| 0x1000f3a0 | _cm_ChainNoop | 3 | EXACT | DieGildeAddOn/command/command_c/cm_ChainNoop.c |
-| 0x1000f3b0 | _cm_ExSetGebBesitzer | 206 | RELOC | DieGildeAddOn/command/command_c/cm_ExSetGebBesitzer.c |
-| 0x1000f480 | _cm_ExSetWohnsitz | 271 | RELOC | DieGildeAddOn/command/command_c/cm_ExSetWohnsitz.c |
-| 0x1000f590 | _cm_ExSetGebUpgrade | 237 | RELOC | DieGildeAddOn/command/command_c/cm_ExSetGebUpgrade.c |
-| 0x1000f680 | _cm_ExDestroyBuilding | 171 | RELOC | DieGildeAddOn/command/command_c/cm_ExDestroyBuilding.c |
-| 0x1000f730 | _cm_ExEmployWorker | 515 | RELOC | DieGildeAddOn/command/command_c/cm_ExEmployWorker.c |
-| 0x1000f940 | _cm_ExAssignOffice | 22 | RELOC | DieGildeAddOn/command/command_c/cm_ExAssignOffice.c |
-| 0x1000f960 | _cm_ExExecuteOffice | 22 | RELOC | DieGildeAddOn/command/command_c/cm_ExExecuteOffice.c |
-| 0x1000f980 | _cm_ExCreateCitizen | 336 | RELOC | DieGildeAddOn/command/command_c/cm_ExCreateCitizen.c |
-| 0x1000fad0 | _cm_ExKillTransporter | 85 | RELOC | DieGildeAddOn/command/command_c/cm_ExKillTransporter.c |
-| 0x1000fb30 | _cm_ExCreateGeb | 153 | RELOC | DieGildeAddOn/command/command_c/cm_ExCreateGeb.c |
-| 0x1000fbd0 | _cm_ExCondWrite | 22 | EXACT | DieGildeAddOn/command/command_c/cm_ExCondWrite.c |
-| 0x1000fbf0 | _cm_InitDefaultResponse | 25 | EXACT | DieGildeAddOn/command/command_c/cm_InitDefaultResponse.c |
-| 0x1000fc10 | _cm_ExElectionOrTrade | 308 | RELOC | DieGildeAddOn/command/command_c/cm_ExElectionOrTrade.c |
-| 0x1000fd50 | _cm_ExJoinLeaveElection | 445 | RELOC | DieGildeAddOn/command/command_c/cm_ExJoinLeaveElection.c |
-| 0x1000ff10 | _cm_ExCondWrite2 | 22 | EXACT | DieGildeAddOn/command/command_c/cm_ExCondWrite2.c |
-| 0x1000ff30 | _cm_ChkEntityLookup | 41 | RELOC | DieGildeAddOn/command/command_c/cm_ChkEntityLookup.c |
-| 0x1000ff60 | _cm_ExCutsceneUpdate | 82 | RELOC | DieGildeAddOn/command/command_c/cm_ExCutsceneUpdate.c |
-| 0x1000ffc0 | _cm_ExModifyHealth | 70 | RELOC | DieGildeAddOn/command/command_c/cm_ExModifyHealth.c |
-| 0x10010010 | _cm_ExModifyStamina | 110 | RELOC | DieGildeAddOn/command/command_c/cm_ExModifyStamina.c |
-| 0x10010080 | _cm_ExSimCommand | 22 | RELOC | DieGildeAddOn/command/command_c/cm_ExSimCommand.c |
-| 0x100100a0 | _cm_ExModifyStat | 159 | RELOC | DieGildeAddOn/command/command_c/cm_ExModifyStat.c |
-| 0x10010140 | _cm_ExAllocWarEvent | 280 | RELOC | DieGildeAddOn/command/command_c/cm_ExAllocWarEvent.c |
-| 0x10010260 | _cm_DispatchProduction | 144 | RELOC | DieGildeAddOn/command/command_c/cm_DispatchProduction.c |
-| 0x100102f0 | _cm_DispatchMoveSlot | 17 | RELOC | DieGildeAddOn/command/command_c/cm_DispatchMoveSlot.c |
-| 0x10010310 | _cm_ExAllocGraveyardWorker | 52 | RELOC | DieGildeAddOn/command/command_c/cm_ExAllocGraveyardWorker.c |
-| 0x10010350 | _cm_ExAllocAlchemist | 52 | RELOC | DieGildeAddOn/command/command_c/cm_ExAllocAlchemist.c |
-| 0x10010390 | _cm_ExSimSpecialAction | 262 | RELOC | DieGildeAddOn/command/command_c/cm_ExSimSpecialAction.c |
-| 0x100104a0 | _cm_GetBuildingStatCount | 135 | RELOC | DieGildeAddOn/command/command_c/cm_GetBuildingStatCount.c |
-| 0x10010530 | _gv_CheckSlotActive | 113 | EXACT | DieGildeAddOn/game/friedhof_logic.c |
-| 0x100105b0 | _gv_GetSlotEntry | 350 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10010710 | _gv_FindSlotEntryFiltered | 320 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10010850 | _SpawnGraveyardEntities | 370 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x100109d0 | _AllocGraveyardField | 832 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10010d10 | _UpgradeGraveyardField | 570 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10010f50 | _gv_Free3Fields | 66 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10010fa0 | _AssignProductionSlot | 525 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x100111b0 | _HireProductionWorker | 501 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x100113b0 | _ExtendProductionTime | 390 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10011540 | _gv_ReplaceProductionWorker | 288 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10011660 | _ActivateGraveyardSection | 297 | SIZE_MISMATCH | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10011790 | _gv_UpdateProductionProgress | 242 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10011890 | _gv_ValidateEntityAction | 164 | SIZE_MISMATCH | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10011940 | _gv_MoveSlotEntry | 674 | RELOC | DieGildeAddOn/game/friedhof_logic.c |
-| 0x10011bf0 | _gv_ExAllocGraveyardWorker | 1040 | STUB | DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c |
-| 0x10012000 | _ls_LoadGraveyardData | 728 | RELOC | DieGildeAddOn/loadsave/loadsave.c |
-| 0x100122e0 | _ls_InitNewDynastyEntity | 346 | RELOC | DieGildeAddOn/loadsave/loadsave.c |
-| 0x10012440 | _ls_ReadVfsDataChecked | 37 | RELOC | DieGildeAddOn/loadsave/loadsave.c |
-| 0x10012470 | _ls_LoadSavegameHeader | 857 | PROVEN | DieGildeAddOn/loadsave/loadsave_c/ls_LoadSavegameHeader.c |
-| 0x100127d0 | _ls_LoadExistingEntities | 282 | RELOC | DieGildeAddOn/loadsave/loadsave.c |
-| 0x100128f0 | _ls_LoadBuildingEntityState | 1463 | STUB | DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c |
-| 0x10012eb0 | _ls_LoadDynamicEntities | 884 | STUB | DieGildeAddOn/loadsave/loadsave_c/ls_LoadDynamicEntities.c |
-| 0x10013230 | _ls_LoadEntities | 2268 | NEAR_MATCHING | DieGildeAddOn/loadsave/loadsave_c/ls_LoadEntities.c |
-| 0x10013b10 | _ls_LoadTownData | 1361 | STUB | DieGildeAddOn/loadsave/loadsave_c/ls_LoadTownData.c |
-| 0x10014070 | _ls_ID2Ptr | 491 | RELOC | DieGildeAddOn/loadsave/loadsave.c |
-| 0x10014260 | _srv_RecvGame | 892 | PROVEN | DieGildeAddOn/loadsave/loadsave_c/srv_RecvGame.c |
-| 0x100145e0 | _lb_ExPlayerlist | 209 | RELOC | DieGildeAddOn/command/lobbycommands.c |
-| 0x100146c0 | _lb_SendLobbyConfig | 236 | RELOC | DieGildeAddOn/command/lobbycommands.c |
-| 0x100147b0 | _lb_HandleLobbyCommands | 670 | STUB | DieGildeAddOn/command/lobbycommands_c/lb_HandleLobbyCommands.c |
-| 0x10014a50 | _lb_BroadcastStateChange | 157 | RELOC | DieGildeAddOn/command/lobbycommands.c |
-| 0x10014af0 | _lb_HandleDataTransfer | 247 | RELOC | DieGildeAddOn/command/lobbycommands.c |
-| 0x10014bf0 | _lb_HandleEntitySync | 163 | RELOC | DieGildeAddOn/command/lobbycommands.c |
-| 0x10014ca0 | _cm_RouteCommand | 265 | RELOC | DieGildeAddOn/command/lobbycommands.c |
-| 0x10014db0 | _lb_ExLobbyServerCommand | 304 | RELOC | DieGildeAddOn/command/lobbycommands.c |
-| 0x10014ee0 | _lb_SearchRecordTable | 69 | RELOC | DieGildeAddOn/command/lobbycommands.c |
-| 0x10014f30 | _FindRecord | 74 | EXACT | DieGildeAddOn/auxillary/plant.c |
-| 0x10014f80 | _find_zone_record | 103 | EXACT | DieGildeAddOn/auxillary/plant.c |
-| 0x10014ff0 | _CheckZoneAvailability | 175 | RELOC | DieGildeAddOn/auxillary/plant.c |
-| 0x100150a0 | _plt_SetPlantMap | 257 | RELOC | DieGildeAddOn/auxillary/plant.c |
-| 0x100151b0 | _table_lookup | 41 | EXACT | DieGildeAddOn/auxillary/plant.c |
-| 0x100151e0 | _FindAndMatchParents | 535 | RELOC | DieGildeAddOn/game/sim.c |
-| 0x10015400 | _sim_PriorityUpdate | 83 | RELOC | DieGildeAddOn/game/sim.c |
-| 0x10015460 | _sim_StartEntityQueryByType | 145 | RELOC | DieGildeAddOn/game/sim.c |
-| 0x10015500 | _sim_CreateCitizen | 180 | RELOC | DieGildeAddOn/game/sim.c |
-| 0x100155c0 | _AdvanceGameClock | 197 | EXACT | DieGildeAddOn/game/sim.c |
-| 0x10015690 | _sim_SetSyncParams | 41 | EXACT | DieGildeAddOn/game/sim.c |
-| 0x100156c0 | _gm_InitObjektHersteller | 642 | STUB | DieGildeAddOn/game/spiel_c/gm_InitObjektHersteller.c |
-| 0x10015950 | _gm_Open | 861 | SIZE_MISMATCH | DieGildeAddOn/game/spiel_c/gm_Open.c |
-| 0x10015cb0 | _gm_ResetAllEntities | 57 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10015cf0 | _gm_CleanupObjectEntities | 194 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10015dc0 | _gm_FindRecordById | 55 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10015e00 | _gm_CleanupAllEntities | 135 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10015e90 | _gm_ResolveEntityById | 211 | EXACT | DieGildeAddOn/game/spiel.c |
-| 0x10015f70 | _gm_RefreshMarketAvailability | 714 | STUB | DieGildeAddOn/game/spiel_c/gm_RefreshMarketAvailability.c |
-| 0x10016240 | _gm_FindSlotById | 72 | EXACT | DieGildeAddOn/game/spiel.c |
-| 0x10016290 | _gm_NextEntityQueryMatch | 464 | STUB | DieGildeAddOn/game/spiel_c/gm_NextEntityQueryMatch.c |
-| 0x10016460 | _gm_StartEntityQuery | 320 | STUB | DieGildeAddOn/game/spiel_c/gm_StartEntityQuery.c |
-| 0x100165a0 | _gm_AllocateObjectSlot | 37 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x100165d0 | _gm_RemoveObjectByType | 155 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10016670 | _gm_NoopRet2 | 1 | EXACT | DieGildeAddOn/game/spiel.c |
-| 0x10016680 | _gm_RemoveLinkedNodeById | 139 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10016710 | _gm_FreeObjectListRecursive | 66 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10016760 | _gm_AllocObjekt | 1392 | STUB | DieGildeAddOn/game/spiel_c/gm_AllocObjekt.c |
-| 0x10016cd0 | _gm_AddOrAccumulateObject | 272 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10016de0 | _gm_SubObjekt | 186 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10016ea0 | _gm_SubObjektNoKill | 211 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10016f80 | _FindNextFilteredEntity | 346 | EXACT | DieGildeAddOn/game/spiel.c |
-| 0x100170e0 | _gm_StartFilteredEntitySearch | 304 | PROVEN | DieGildeAddOn/game/spiel_c/gm_StartFilteredEntitySearch.c |
-| 0x10017210 | _gm_SearchStruct | 39 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017240 | _gm_CleanupBuildingEntity | 240 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017330 | _gm_AllocBuildingDefaults | 207 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017400 | _gm_SetBuildingWorkerLimits | 202 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x100174d0 | _gm_AllocGebaeude | 1088 | STUB | DieGildeAddOn/game/spiel_c/gm_AllocGebaeude.c |
-| 0x10017910 | _gm_SetupEntityQuery | 145 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x100179b0 | _gm_GetBuildingTypeCategory | 192 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017a70 | _gm_SearchTable67 | 62 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017ab0 | _gm_CheckEntityType | 74 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017b00 | _gm_AssignBuildingOwner | 320 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017c40 | _gm_AllocBuildingContents | 742 | STUB | DieGildeAddOn/game/spiel_c/gm_AllocBuildingContents.c |
-| 0x10017f30 | _gm_RemoveObjectWrapper | 35 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017f60 | _gm_RemoveEntityLink | 36 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017f90 | _gm_InitEntityIfValid | 23 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10017fb0 | _gm_DeallocEntity | 278 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x100180d0 | _gm_InitEntitySlots | 81 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10018130 | _gm_IsInRange | 32 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10018150 | _gm_EntityClassCheck | 70 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x100181a0 | _gm_CheckStatLevel | 87 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10018200 | _gm_MapEntityStatRange | 304 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10018330 | _gm_GetOppositeStatIndex | 276 | EXACT | DieGildeAddOn/game/spiel.c |
-| 0x10018450 | _gm_RandomStatModifier | 78 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x100184a0 | _gm_LookupEntityRecordById | 56 | EXACT | DieGildeAddOn/game/spiel.c |
-| 0x100184e0 | _gm_GetEntityTableEntry | 66 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10018530 | _gm_ChangePlayerIdentityImpl | 800 | STUB | DieGildeAddOn/game/spiel_c/gm_ChangePlayerIdentityImpl.c |
-| 0x10018850 | _gm_CreateEntityFromParents | 3689 | STUB | DieGildeAddOn/game/spiel_c/gm_CreateEntityFromParents.c |
-| 0x100196c0 | _gm_QueryEntitySum | 81 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019720 | _gm_CalculateProductionValue | 396 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x100198b0 | _gm_SumBuildingProductionValues | 355 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019a20 | _gm_AccumulateTyped2 | 74 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019a70 | _gm_EntityQuerySum | 102 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019ae0 | _gm_ResolveParentEntity | 82 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019b40 | _gm_GetEntityType | 62 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019b80 | _gm_EntityAccumulate | 83 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019be0 | _gm_WalkEntityChain | 124 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019c60 | _gm_FindEntityByOwner | 98 | EXACT | DieGildeAddOn/game/spiel.c |
-| 0x10019cd0 | _gm_GetMsgField | 48 | EXACT | DieGildeAddOn/game/spiel.c |
-| 0x10019d30 | _gm_KannObjektHergestellt | 407 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10019ed0 | _gm_CheckInventoryCapacity | 395 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x1001a060 | _gm_EntitySetField | 97 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x1001a0d0 | _gm_RandomMod | 32 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x1001a0f0 | _gm_RandomFloat01 | 22 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x1001a110 | _gm_RandomQuadratic | 48 | RELOC | DieGildeAddOn/game/spiel.c |
-| 0x1001a140 | _getpid | 14 | EXACT | library_msvc.h |
-| 0x1001a150 | _srand | 12 | EXACT | library_msvc.h |
-| 0x1001a160 | _closesocket@4 | 6 | EXACT | library_winsock.h |
-| 0x1001a166 | _sendto@24 | 6 | EXACT | library_winsock.h |
-| 0x1001a16c | _bind@12 | 6 | EXACT | library_winsock.h |
-| 0x1001a172 | _htons@4 | 6 | EXACT | library_winsock.h |
-| 0x1001a178 | _htonl@4 | 6 | EXACT | library_winsock.h |
-| 0x1001a17e | _setsockopt@20 | 6 | EXACT | library_winsock.h |
-| 0x1001a184 | _socket@12 | 6 | EXACT | library_winsock.h |
-| 0x1001a18a | _fflush | 49 | EXACT | library_msvc.h |
-| 0x1001a1bb | __fclose_lk | 76 | EXACT | library_msvc.h |
-| 0x1001a207 | _fputs | 78 | EXACT | library_msvc.h |
-| 0x1001a255 | _crt_locked_read | 49 | EXACT | library_msvc.h |
-| 0x1001a299 | _sprintf | 82 | EXACT | library_msvc.h |
-| 0x1001a2eb | _fopen | 34 | EXACT | library_msvc.h |
-| 0x1001a30d | _ftell | 353 | EXACT | library_msvc.h |
-| 0x1001a46e | _fseek | 44 | EXACT | library_msvc.h |
-| 0x1001a49a | _SeekFileHandleUnlocked | 141 | EXACT | library_msvc.h |
-| 0x1001a527 | _ctime | 25 | EXACT | library_msvc.h |
-| 0x1001a540 | _strrchr | 39 | EXACT | library_msvc.h |
-| 0x1001a567 | _time | 220 | EXACT | library_msvc.h |
-| 0x1001a670 | _exit | 17 | SIZE_MISMATCH | exit.c |
-| 0x1001a681 | _exit | 17 | EXACT | library_msvc.h |
-| 0x1001a692 | __cexit | 15 | EXACT | library_msvc.h |
-| 0x1001a6a1 | _doexit | 165 | EXACT | library_msvc.h |
-| 0x1001a746 | lock_0d | 9 | EXACT | library_msvc.h |
-| 0x1001a74f | unlock_0d | 9 | EXACT | library_msvc.h |
-| 0x1001a758 | _initterm | 26 | EXACT | library_msvc.h |
-| 0x1001a772 | _dosmaperr | 115 | EXACT | library_msvc.h |
-| 0x1001a7e5 | __errno | 9 | EXACT | library_msvc.h |
-| 0x1001a7ee | ___doserrno | 9 | EXACT | library_msvc.h |
-| 0x1001a809 | __nh_malloc | 44 | EXACT | library_msvc.h |
-| 0x1001a835 | _malloc | 252 | EXACT | library_msvc.h |
-| 0x1001a89c | unlock_09a | 95 | EXACT | library_msvc.h |
-| 0x1001a8fb | unlock_09b | 54 | EXACT | library_msvc.h |
-| 0x1001a931 | _crt_locked_call4a | 47 | EXACT | library_msvc.h |
-| 0x1001a960 | _fwrite | 266 | EXACT | library_msvc.h |
-| 0x1001aa6a | fread | 47 | EXACT | library_msvc.h |
-| 0x1001aa99 | _fread | 232 | EXACT | library_msvc.h |
-| 0x1001ab81 | _free | 233 | EXACT | library_msvc.h |
-| 0x1001abeb | unlock_09c | 88 | EXACT | library_msvc.h |
-| 0x1001ac43 | unlock_09d | 45 | EXACT | library_msvc.h |
-| 0x1001ac70 | __alloca_probe | 47 | EXACT | library_msvc.h |
-| 0x1001ac9f | _fclose | 46 | EXACT | library_msvc.h |
-| 0x1001accd | __flush | 92 | EXACT | library_msvc.h |
-| 0x1001ad29 | signal_lock | 9 | EXACT | library_msvc.h |
-| 0x1001ad32 | __flsall | 164 | EXACT | library_msvc.h |
-| 0x1001add6 | crt_locked_putc | 59 | EXACT | library_msvc.h |
-| 0x1001ae20 | _strncpy | 272 | EXACT | library_msvc.h |
-| 0x1001af30 | _strchr | 192 | EXACT | library_msvc.h |
-| 0x1001aff0 | _strstr | 128 | EXACT | library_msvc.h |
-| 0x1001b070 | __fpmath | 24 | EXACT | library_msvc.h |
-| 0x1001b088 | init_fptrs | 56 | EXACT | library_msvc.h |
-| 0x1001b0c0 | crt_toupper | 111 | EXACT | library_msvc.h |
-| 0x1001b12f | _toupper | 204 | EXACT | library_msvc.h |
-| 0x1001b200 | _memmove2 | 821 | EXACT | library_msvc.h |
-| 0x1001b535 | _srand_impl | 13 | EXACT | library_msvc.h, library_msvc.h |
-| 0x1001b542 | _rand | 34 | EXACT | library_msvc.h |
-| 0x1001b564 | __ftol | 39 | EXACT | library_msvc.h |
-| 0x1001b58b | _printf | 65 | EXACT | library_msvc.h |
-| 0x1001b5cc | _realloc | 815 | EXACT | library_msvc.h |
-| 0x1001b757 | unlock_09e | 334 | EXACT | library_msvc.h |
-| 0x1001b8a5 | _unlock_9 | 86 | EXACT | library_msvc.h |
-| 0x1001b8fb | __CRT_INIT@12 | 217 | EXACT | library_msvc.h |
-| 0x1001b9d4 | __DllMainCRTStartup@12 | 157 | EXACT | library_msvc.h |
-| 0x1001ba71 | __amsg_exit | 51 | EXACT | library_msvc.h |
-| 0x1001baa4 | __ioterm | 188 | EXACT | library_msvc.h |
-| 0x1001bb60 | _lock_stream | 47 | EXACT | library_msvc.h |
-| 0x1001bb8f | __lock_file | 35 | EXACT | library_msvc.h |
-| 0x1001bbb2 | _unlock_stream | 47 | EXACT | library_msvc.h |
-| 0x1001bbe1 | __unlock_file | 35 | EXACT | library_msvc.h |
-| 0x1001bc04 | __close | 93 | EXACT | library_msvc.h |
-| 0x1001bc61 | __free_osfhnd | 131 | EXACT | library_msvc.h |
-| 0x1001bce4 | _free_buf | 43 | EXACT | library_msvc.h |
-| 0x1001bd0f | __stbuf | 141 | EXACT | library_msvc.h |
-| 0x1001bd9c | crt_cond_cleanup | 42 | EXACT | library_msvc.h |
-| 0x1001bdd0 | _strlen | 123 | EXACT | library_msvc.h |
-| 0x1001be4b | __openfile | 368 | EXACT | library_msvc.h |
-| 0x1001bfbb | __getstream | 200 | EXACT | library_msvc.h |
-| 0x1001c083 | __flsbuf | 280 | EXACT | library_msvc.h |
-| 0x1001c19b | __output | 1857 | EXACT | library_msvc.h |
-| 0x1001c8dc | _write_char | 53 | EXACT | library_msvc.h |
-| 0x1001c911 | _write_multi_char | 49 | EXACT | library_msvc.h |
-| 0x1001c942 | _write_string | 56 | EXACT | library_msvc.h |
-| 0x1001c97a | _stream_read_dword | 13 | EXACT | library_msvc.h |
-| 0x1001c987 | _stream_read_qword | 16 | EXACT | library_msvc.h |
-| 0x1001c997 | _stream_read_word | 14 | EXACT | library_msvc.h |
-| 0x1001c9a5 | __ioinit | 444 | EXACT | library_msvc.h |
-| 0x1001cb61 | _ioterm | 84 | EXACT | library_msvc.h |
-| 0x1001cbb5 | __lseek | 101 | EXACT | library_msvc.h |
-| 0x1001cc1a | __lseek_lk | 115 | EXACT | library_msvc.h |
-| 0x1001cc8d | _asctime | 202 | EXACT | library_msvc.h |
-| 0x1001cd57 | _format_digits | 40 | EXACT | library_msvc.h |
-| 0x1001cd7f | _localtime | 352 | EXACT | library_msvc.h |
-| 0x1001cedf | ___loctotime_t | 194 | EXACT | library_msvc.h |
-| 0x1001cfa1 | crt_delete_cs | 41 | EXACT | library_msvc.h |
-| 0x1001cfca | crt_delete_locks | 108 | EXACT | library_msvc.h |
-| 0x1001d036 | __lock | 97 | EXACT | library_msvc.h |
-| 0x1001d097 | __unlock | 21 | EXACT | library_msvc.h |
-| 0x1001d0ac | __mtinit | 84 | EXACT | library_msvc.h |
-| 0x1001d100 | crt_close_handle | 30 | EXACT | library_msvc.h |
-| 0x1001d11e | set_vtable | 19 | EXACT | library_msvc.h |
-| 0x1001d131 | __getptd | 103 | EXACT | library_msvc.h |
-| 0x1001d198 | __freeptd | 160 | EXACT | library_msvc.h |
-| 0x1001d238 | crt_gfunc_call | 27 | EXACT | library_msvc.h |
-| 0x1001d253 | crt_get_osver | 45 | EXACT | library_msvc.h |
-| 0x1001d280 | ___heap_select | 328 | EXACT | library_msvc.h |
-| 0x1001d3c8 | crt_heap_init | 93 | EXACT | library_msvc.h |
-| 0x1001d425 | __heap_term | 168 | EXACT | library_msvc.h |
-| 0x1001d4cd | ___sbh_heap_init | 72 | EXACT | library_msvc.h |
-| 0x1001d515 | crt_find_entry | 43 | EXACT | library_msvc.h |
-| 0x1001d540 | ___sbh_free_block | 809 | EXACT | library_msvc.h |
-| 0x1001d869 | ___sbh_alloc_block | 777 | EXACT | library_msvc.h |
-| 0x1001db72 | ___sbh_alloc_new_region | 177 | EXACT | library_msvc.h |
-| 0x1001dc23 | ___sbh_alloc_new_group | 251 | EXACT | library_msvc.h |
-| 0x1001dd1e | ___sbh_resize_block | 758 | EXACT | library_msvc.h |
-| 0x1001e014 | ___old_sbh_new_region | 324 | EXACT | library_msvc.h |
-| 0x1001e158 | __sbh_decommit_pages | 86 | EXACT | library_msvc.h |
-| 0x1001e1ae | ___old_sbh_decommit_pages | 194 | EXACT | library_msvc.h |
-| 0x1001e270 | ___old_sbh_find_block | 87 | EXACT | library_msvc.h |
-| 0x1001e2c7 | update_page_entry | 69 | EXACT | library_msvc.h |
-| 0x1001e30c | ___old_sbh_alloc_block | 520 | EXACT | library_msvc.h |
-| 0x1001e514 | ___old_sbh_alloc_block_from_page | 292 | EXACT | library_msvc.h |
-| 0x1001e638 | ___old_sbh_resize_block | 169 | EXACT | library_msvc.h |
-| 0x1001e6e4 | __except_handler3 | 32 | EXACT | library_msvc.h |
-| 0x1001e704 | _seh_filter | 34 | EXACT | library_msvc.h |
-| 0x1001e726 | __local_unwind2 | 104 | EXACT | library_msvc.h |
-| 0x1001e78e | _ValidateEH3RN | 44 | EXACT | library_msvc.h |
-| 0x1001e7ba | _EH3_save_context | 24 | EXACT | library_msvc.h |
-| 0x1001e7d4 | exsup | 197 | EXACT | library_msvc.h |
-| 0x1001e899 | seh_local_unwind_thunk | 27 | EXACT | library_msvc.h |
-| 0x1001e8b4 | crt_write_wrap | 101 | EXACT | library_msvc.h |
-| 0x1001e919 | __write_lk | 395 | EXACT | library_msvc.h |
-| 0x1001eab0 | _memmove | 821 | EXACT | library_msvc.h |
-| 0x1001ede5 | __filbuf | 220 | EXACT | library_msvc.h |
-| 0x1001eec1 | _crt_lseek_wrap | 101 | EXACT | library_msvc.h |
-| 0x1001ef26 | __read_lk | 473 | EXACT | library_msvc.h |
-| 0x1001f0ff | crt_commit | 147 | EXACT | library_msvc.h |
-| 0x1001f192 | crt_const_call | 18 | EXACT | library_msvc.h |
-| 0x1001f1a4 | ___IsNonwritableInCurrentImage | 62 | EXACT | library_msvc.h |
-| 0x1001f1e2 | __IsProcessorFeaturePresent | 131 | EXACT | library_msvc.h |
-| 0x1001f20b | __forcdecpt | 90 | EXACT | library_msvc.h |
-| 0x1001f265 | __cropzeros | 78 | EXACT | library_msvc.h |
-| 0x1001f2b3 | __positive | 24 | EXACT | library_msvc.h |
-| 0x1001f2cb | __fassign | 62 | EXACT | library_msvc.h |
-| 0x1001f309 | __ecvt | 97 | EXACT | library_msvc.h |
-| 0x1001f36a | __cftoe | 194 | EXACT | library_msvc.h |
-| 0x1001f42c | __fcvt | 85 | EXACT | library_msvc.h |
-| 0x1001f481 | __cftof | 167 | EXACT | library_msvc.h |
-| 0x1001f528 | ___cfltcvt_g | 147 | EXACT | library_msvc.h |
-| 0x1001f5bb | __cfltcvt | 81 | EXACT | library_msvc.h |
-| 0x1001f60c | _crt_strcpy_advance | 37 | EXACT | library_msvc.h |
-| 0x1001f631 | ___crtLCMapStringA | 548 | EXACT | library_msvc.h |
-| 0x1001f855 | __isctype | 117 | EXACT | library_msvc.h |
-| 0x1001f8d0 | CopyCString | 16 | EXACT | library_msvc.h |
-| 0x1001f8e0 | _strcat | 224 | EXACT | library_msvc.h |
-| 0x1001f9c0 | __setenvp | 185 | EXACT | library_msvc.h |
-| 0x1001fa79 | __setargv | 153 | EXACT | library_msvc.h |
-| 0x1001fb12 | _parse_cmdline | 436 | EXACT | library_msvc.h |
-| 0x1001fcc6 | ___crtGetEnvironmentStringsA | 306 | EXACT | library_msvc.h |
-| 0x1001fdf8 | crt_runtime_error | 57 | EXACT | library_msvc.h |
-| 0x1001fe31 | __NMSG_WRITE | 339 | EXACT | library_msvc.h |
-| 0x1001ff84 | _calloc | 317 | EXACT | library_msvc.h |
-| 0x1002001d | unlock_09f | 137 | EXACT | library_msvc.h |
-| 0x100200a6 | unlock_09g | 27 | EXACT | library_msvc.h |
-| 0x100200c1 | __fcloseall | 129 | EXACT | library_msvc.h |
-| 0x10020142 | __alloc_osfhnd | 291 | EXACT | library_msvc.h |
-| 0x10020265 | __open_osfhandle | 124 | EXACT | library_msvc.h |
-| 0x100202e1 | free_osfhnd | 127 | EXACT | library_msvc.h |
-| 0x10020360 | __get_osfhandle | 66 | EXACT | library_msvc.h |
-| 0x100203a2 | __lock_fhandle | 95 | EXACT | library_msvc.h |
-| 0x10020401 | slot_unlock | 34 | EXACT | library_msvc.h |
-| 0x10020423 | slot_check_flag | 41 | EXACT | library_msvc.h |
-| 0x1002044c | __sopen | 719 | EXACT | library_msvc.h |
-| 0x1002071b | crt_buf_alloc | 68 | EXACT | library_msvc.h |
-| 0x1002075f | _wctomb | 89 | EXACT | library_msvc.h |
-| 0x100207b8 | __wctomb_lk | 105 | EXACT | library_msvc.h |
-| 0x10020830 | __aulldiv | 104 | EXACT | library_msvc.h |
-| 0x100208a0 | __aullrem | 117 | EXACT | library_msvc.h |
-| 0x10020915 | crt_once_init | 46 | EXACT | library_msvc.h |
-| 0x10020943 | __tzset | 647 | EXACT | library_msvc.h |
-| 0x10020bca | _crt_locked_call | 33 | EXACT | library_msvc.h |
-| 0x10020beb | __isindst_lk | 428 | EXACT | library_msvc.h |
-| 0x10020d97 | cvtdate | 320 | EXACT | library_msvc.h |
-| 0x10020ed7 | _gmtime_lk | 266 | EXACT | library_msvc.h |
-| 0x10020fe1 | call_with_zero | 23 | EXACT | library_msvc.h |
-| 0x10020ff8 | _strtoxl | 517 | EXACT | library_msvc.h |
-| 0x10021200 | _strncmp | 56 | EXACT | library_msvc.h |
-| 0x10021240 | _memset | 88 | EXACT | library_msvc.h |
-| 0x10021298 | __controlfp | 53 | EXACT | library_msvc.h |
-| 0x100212cd | clear_bit_call | 22 | EXACT | library_msvc.h |
-| 0x100212e3 | crt_cvt_osflag | 146 | EXACT | library_msvc.h |
-| 0x10021375 | _abstract_cw | 137 | EXACT | library_msvc.h |
-| 0x100213fe | crt_tolower_wrapper | 111 | EXACT | library_msvc.h |
-| 0x1002146d | __tolower | 203 | EXACT | library_msvc.h |
-| 0x10021538 | _check_bits_clear | 73 | EXACT | library_msvc.h |
-| 0x10021581 | set_bit_range | 86 | EXACT | library_msvc.h |
-| 0x100215d7 | ___sbh_dealloc_bitmap | 140 | EXACT | library_msvc.h |
-| 0x10021663 | copy_3dwords | 27 | EXACT | library_msvc.h |
-| 0x1002167e | zero_12bytes | 12 | EXACT | library_msvc.h |
-| 0x1002168a | check_all_zero | 27 | EXACT | library_msvc.h |
-| 0x100216a5 | ___sbh_bitmap_shift | 141 | EXACT | library_msvc.h |
-| 0x10021732 | __ld12tod | 364 | EXACT | library_msvc.h |
-| 0x1002189e | wrapper_ctx1 | 22 | EXACT | library_msvc.h |
-| 0x100218b4 | wrapper_ctx2 | 22 | EXACT | library_msvc.h |
-| 0x100218ca | __atodbl | 45 | EXACT | library_msvc.h |
-| 0x100218f7 | __atoldbl | 45 | EXACT | library_msvc.h |
-| 0x10021924 | __fptostr | 119 | EXACT | library_msvc.h |
-| 0x1002199b | __fltout2 | 92 | EXACT | library_msvc.h |
-| 0x100219f7 | ___dtold | 182 | EXACT | library_msvc.h |
-| 0x10021aad | __fptrap | 9 | EXACT | library_msvc.h |
-| 0x10021ac0 | _strcmp | 132 | EXACT | library_msvc.h |
-| 0x10021b50 | _strcspn | 62 | EXACT | library_msvc.h |
-| 0x10021b90 | _strpbrk | 58 | EXACT | library_msvc.h |
-| 0x10021bca | ___crtGetStringTypeA | 329 | EXACT | library_msvc.h |
-| 0x10021d13 | __setmbcp | 429 | EXACT | library_msvc.h |
-| 0x10021ec0 | __crtGetACP_getcodepage | 74 | EXACT | library_msvc.h |
-| 0x10021f0a | code_translate | 51 | EXACT | library_msvc.h |
-| 0x10021f3d | CrtIoInfoInit | 41 | EXACT | library_msvc.h |
-| 0x10021f66 | _setSBUpLow | 389 | EXACT | library_msvc.h |
-| 0x100220eb | _crt_cinit_once | 28 | EXACT | library_msvc.h |
-| 0x10022107 | __crtLoadWinAPI | 137 | EXACT | library_msvc.h |
-| 0x10022190 | __chsize_lk | 293 | EXACT | library_msvc.h |
-| 0x100222b5 | _atoi | 139 | EXACT | library_msvc.h |
-| 0x10022340 | _getenv | 125 | EXACT | library_msvc.h |
-| 0x100223bd | overflow_add | 33 | EXACT | library_msvc.h |
-| 0x100223de | ___add_12 | 94 | EXACT | library_msvc.h |
-| 0x1002243c | ___shl_12 | 46 | EXACT | library_msvc.h |
-| 0x1002246a | ___shr_12 | 45 | EXACT | library_msvc.h |
-| 0x10022497 | ___ld12cvt | 199 | EXACT | library_msvc.h |
-| 0x1002255e | ___strgtold12 | 1233 | EXACT | library_msvc.h |
-| 0x10022a2f | __ld12cvt | 659 | EXACT | library_msvc.h |
-| 0x10022cd0 | __stricmp | 208 | EXACT | library_msvc.h |
-| 0x10022da0 | __strnicmp | 257 | EXACT | library_msvc.h |
-| 0x10022ea1 | __setmode_lk | 97 | EXACT | library_msvc.h |
-| 0x10022f10 | __allmul | 25 | EXACT | library_msvc.h |
-| 0x10022f29 | __allmul_slow | 27 | EXACT | library_msvc.h |
-| 0x10022f44 | __mbsnbicoll | 63 | EXACT | library_msvc.h |
-| 0x10022f83 | __wenvsetup | 110 | EXACT | library_msvc.h |
-| 0x10023211 | _mantold_shl | 124 | EXACT | library_msvc.h |
-| 0x1002328d | ___crtCompareStringA | 637 | EXACT | library_msvc.h |
-| 0x10023535 | ___crtsetenv | 391 | EXACT | library_msvc.h |
-| 0x100236bc | _crt_env_search | 88 | EXACT | library_msvc.h |
-| 0x10023714 | _copy_environ | 103 | EXACT | library_msvc.h |
-| 0x1002377b | __mbschr | 151 | EXACT | library_msvc.h |
-| 0x10023812 | __strdup | 43 | EXACT | library_msvc.h |
-| 0x10023840 | RtlUnwind | 6 | EXACT | library_imports.h |
+| VA | Size | Name | Symbol | Flags | Match | File |
+|-----|------|------|--------|-------|-------|------|
+| 0x10001000 | 302B | adler32 | adler32 |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10001130 | 179B | SendBroadcastPacket | _SendBroadcastPacket |  | FUNCTION/RELOC | Units/net/broadcast.c |
+| 0x100011F0 | 309B | vfs_Crc32Update | vfs_Crc32Update |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10001330 | 505B | deflateInit2_ | deflateInit2_ |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10001530 | 115B | deflateReset | deflateReset |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100015B0 | 685B | deflate | deflate |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10001860 | 47B | putShortMSB | putShortMSB |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10001890 | 114B | flush_pending | flush_pending |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10001910 | 170B | deflateEnd | deflateEnd |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100019C0 | 147B | lm_init | lm_init |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10001A60 | 343B | deflate_stored | deflate_stored |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10001BC0 | 290B | fill_window | fill_window |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10001CF0 | 113B | read_buf | read_buf |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10001D70 | 813B | deflate_fast | deflate_fast |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100020A0 | 367B | longest_match | longest_match |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10002210 | 1066B | deflate_slow | deflate_slow |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10002640 | 290B | DispatchLogOutput | _DispatchLogOutput |  | FUNCTION/RELOC | Units/Error/Error.c |
+| 0x10002770 | 1836B | CrashDumpUnhandledExceptionFilter | _CrashDumpUnhandledExceptionFilter@4 |  | STUB/STUB | Units/Error/Error_c/CrashDumpUnhandledExceptionFilter.c |
+| 0x10002FC0 | 376B | EmitCrashModuleLine | _EmitCrashModuleLine |  | FUNCTION/RELOC | Units/Error/Error.c |
+| 0x10003140 | 33B | GetDebugRecordByIndex | _GetDebugRecordByIndex |  | FUNCTION/EXACT | Units/Error/Error.c |
+| 0x10003170 | 240B | check_memory_protection | _check_memory_protection |  | FUNCTION/RELOC | Units/Error/Error.c |
+| 0x10003260 | 183B | AnalyzeInstruction | _AnalyzeInstruction |  | FUNCTION/EXACT | Units/Error/Error.c |
+| 0x10003320 | 404B | InitializeLogAndErrorHandler | _InitializeLogAndErrorHandler |  | FUNCTION/RELOC | Units/Error/Error.c |
+| 0x100034C0 | 83B | ShutdownLogAndErrorHandler | _ShutdownLogAndErrorHandler |  | FUNCTION/RELOC | Units/Error/Error.c |
+| 0x10003520 | 160B | ReportFatalError | _ReportFatalError |  | FUNCTION/RELOC | Units/Error/Error.c |
+| 0x100035C0 | 119B | ReportMessage | _ReportMessage |  | FUNCTION/RELOC | Units/Error/Error.c |
+| 0x10003640 | 132B | LogMessageInternal | _LogMessageInternal |  | FUNCTION/RELOC | Units/Error/Error.c |
+| 0x100036D0 | 332B | check_header | check_header |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10003820 | 114B | vfs_GetByte | _vfs_GetByte |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x100038A0 | 177B | vfs_CloseStream | _vfs_CloseStream |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10003960 | 559B | gzread | gzread |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10003B90 | 182B | vfs_FlushStream | _vfs_FlushStream |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10003C50 | 65B | vfs_ReadUint32BE | _vfs_ReadUint32BE |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10003CA0 | 77B | vfs_FlushAndClose | _vfs_FlushAndClose |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10003CF0 | 43B | vfs_WriteUint32LE | _vfs_WriteUint32LE |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10003D20 | 123B | inflate_blocks_reset | inflate_blocks_reset |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10003DA0 | 160B | inflate_blocks_new | inflate_blocks_new |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10003E40 | 3385B | inflate_blocks | inflate_blocks |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10004B40 | 57B | inflate_blocks_free | inflate_blocks_free |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10004B80 | 57B | gm_AllocAndInit | _gm_AllocAndInit |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
+| 0x10004BC0 | 1988B | inflate_fast | inflate_fast |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10005370 | 20B | gm_DispatchCall | _gm_DispatchCall |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
+| 0x10005390 | 911B | inflate_codes | inflate_codes |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10005720 | 66B | inflateReset | inflateReset |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10005770 | 72B | inflateEnd | inflateEnd |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100057C0 | 270B | inflateInit2_ | inflateInit2_ |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100058D0 | 1072B | inflate | inflate |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10005D00 | 163B | inflate_trees_bits | inflate_trees_bits |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10005DB0 | 1225B | huft_build | huft_build |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10006280 | 393B | inflate_trees_dynamic | inflate_trees_dynamic |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10006410 | 46B | inflate_trees_fixed | inflate_trees_fixed |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10006440 | 306B | inflate_flush | inflate_flush |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10006580 | 658B | m_AllocTracked | _m_AllocTracked | /O2 /Oy- /Gd | STUB/STUB | Units/m_alloc/m_alloc_c/m_AllocTracked.c |
+| 0x10006820 | 188B | m_FreeTracked | _m_FreeTracked |  | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
+| 0x100068E0 | 162B | InitPacketPool | _InitPacketPool |  | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
+| 0x10006990 | 612B | ReportMemoryGroupInfo | _ReportMemoryGroupInfo |  | STUB/STUB | Units/m_alloc/m_alloc_c/ReportMemoryGroupInfo.c |
+| 0x10006C00 | 283B | ShutdownMemoryAllocator | _ShutdownMemoryAllocator |  | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
+| 0x10006D20 | 270B | m_PoolAlloc | _m_PoolAlloc |  | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
+| 0x10006E30 | 137B | m_PoolFree | _m_PoolFree |  | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
+| 0x10006EC0 | 108B | tr_init | _tr_init |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10006F30 | 1B | tr_static_init | tr_static_init |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10006F40 | 102B | init_block | init_block |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10006FB0 | 157B | tr_stored_block | _tr_stored_block |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10007050 | 597B | tr_align | _tr_align |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100072B0 | 494B | tr_flush_block | _tr_flush_block |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100074A0 | 563B | build_tree | build_tree |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100076E0 | 209B | pqdownheap | pqdownheap |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100077C0 | 545B | gen_bitlen | gen_bitlen |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100079F0 | 115B | gen_codes | gen_codes |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10007A70 | 111B | build_bl_tree | build_bl_tree |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10007AE0 | 231B | scan_tree | scan_tree |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10007BD0 | 613B | send_all_trees | send_all_trees |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10007E40 | 1397B | send_tree | send_tree |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100083C0 | 1083B | vfs_CompressBlock | vfs_CompressBlock |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10008800 | 116B | set_data_type | set_data_type |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10008880 | 31B | bit_reverse | bit_reverse |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100088A0 | 139B | bi_flush | bi_flush |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10008930 | 124B | bi_windup | bi_windup |  | LIBRARY/EXACT | library_zlib.h |
+| 0x100089B0 | 151B | copy_block | copy_block |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10008A50 | 53B | vfs_DestroyEntity | _vfs_DestroyEntity |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10008A90 | 492B | ReadVfsCompressed | _ReadVfsCompressed |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10008C80 | 129B | vfs_CleanupObject | _vfs_CleanupObject |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10008D10 | 301B | CloseVfsStream | _CloseVfsStream |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10008E40 | 472B | ReadVfsData | _ReadVfsData |  | FUNCTION/RELOC | Units/vfs/vfs.c |
+| 0x10009020 | 704B | OpenVfsStream | _OpenVfsStream |  | STUB/STUB | Units/vfs/vfs_c/OpenVfsStream.c |
+| 0x100092E0 | 19B | zcalloc | zcalloc |  | LIBRARY/EXACT | library_zlib.h |
+| 0x10009300 | 12B | free_wrap | free_wrap |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10009310 | 8B | exit_handler | _exit_handler@12 |  | FUNCTION/EXACT | DieGildeAddOnServer/server.c |
+| 0x10009320 | 42B | Init | _Init |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x10009350 | 68B | Exit | _Exit |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x100093A0 | 2434B | ServerMainThread | _ServerMainThread |  | STUB/STUB | DieGildeAddOnServer/server_c/ServerMainThread.c |
+| 0x10009D30 | 296B | srv_Init | _srv_Init |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x10009E60 | 419B | CreateListenSocket | _CreateListenSocket |  | FUNCTION/NEAR_MATCHING | DieGildeAddOnServer/server.c |
+| 0x1000A010 | 112B | CleanupSockets | _CleanupSockets |  | FUNCTION/NEAR_MATCHING | DieGildeAddOnServer/server.c |
+| 0x1000A080 | 600B | AcceptConnections | _AcceptConnections |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x1000A2E0 | 96B | cm_ClosePlayerConnection | _cm_ClosePlayerConnection |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x1000A340 | 336B | ReceivePacketHeader | _ReceivePacketHeader |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x1000A490 | 211B | SendPlayerData | _SendPlayerData |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x1000A570 | 750B | ProcessReceiveData | _ProcessReceiveData |  | STUB/STUB | DieGildeAddOnServer/server_c/ProcessReceiveData.c |
+| 0x1000A860 | 131B | ProcessSendData | _ProcessSendData |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x1000A8F0 | 170B | QueueCommandForProcessing | _QueueCommandForProcessing |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x1000A9A0 | 170B | cm_QueuePlayerCommand | _cm_QueuePlayerCommand |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x1000AA50 | 97B | list_unlink_relink | _list_unlink_relink |  | FUNCTION/EXACT | DieGildeAddOnServer/server.c |
+| 0x1000AAC0 | 639B | cm_ProcessCommandQueue | _cm_ProcessCommandQueue |  | STUB/STUB | DieGildeAddOnServer/server_c/cm_ProcessCommandQueue.c |
+| 0x1000AD40 | 768B | LogWinsockError | _LogWinsockError |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x1000B040 | 372B | InitBuildingTypeTable | _InitBuildingTypeTable |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
+| 0x1000B1C0 | 205B | amt_ValidateOfficeCandidate | _amt_ValidateOfficeCandidate |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
+| 0x1000B290 | 425B | ValidateAndAssignOffice | _ValidateAndAssignOffice |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
+| 0x1000B440 | 133B | amt_ValidateCommand | _amt_ValidateCommand |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
+| 0x1000B4D0 | 836B | ExecuteOfficeAssignment | _ExecuteOfficeAssignment | /O2 /Oy- /Gd | STUB/STUB | DieGildeAddOn/game/aemter_c/ExecuteOfficeAssignment.c |
+| 0x1000B820 | 42B | amt_FindEntity26 | _amt_FindEntity26 |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
+| 0x1000B850 | 42B | amt_FindEntity27 | _amt_FindEntity27 |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
+| 0x1000B880 | 263B | amt_SwapOfficeHolders | _amt_SwapOfficeHolders |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
+| 0x1000B990 | 157B | amt_ClearEntityLinks | _amt_ClearEntityLinks |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
+| 0x1000BA30 | 179B | amt_UpdateEntityLinks | _amt_UpdateEntityLinks |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
+| 0x1000BAF0 | 606B | amt_fio_LoadAemter | _amt_fio_LoadAemter |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
+| 0x1000BD50 | 66B | ahm_ResetEntityState | _ahm_ResetEntityState |  | FUNCTION/EXACT | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000BDA0 | 70B | ahm_CheckFlag | _ahm_CheckFlag |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000BDF0 | 1002B | ahm_ExAllocAlchemist | _ahm_ExAllocAlchemist | /O2 /Oy- /Gd | STUB/STUB | DieGildeAddOn/game/alchemistry_logic_c/ahm_ExAllocAlchemist.c |
+| 0x1000C1E0 | 160B | ahm_ApplyColorComponent | _ahm_ApplyColorComponent |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C280 | 130B | ahm_AllocateEntitySlot | _ahm_AllocateEntitySlot |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C310 | 110B | ahm_SlotClearMatch | _ahm_SlotClearMatch |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C380 | 51B | ahm_SearchAndSet | _ahm_SearchAndSet |  | FUNCTION/EXACT | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C3C0 | 83B | ahm_ClampFloatValue | _ahm_ClampFloatValue |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C420 | 166B | ahm_FireEntityAndCleanup | _ahm_FireEntityAndCleanup |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C4D0 | 295B | ahm_AllocAhmInfo | _ahm_AllocAhmInfo |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C600 | 109B | ahm_InitRandomEntity | _ahm_InitRandomEntity |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C670 | 45B | ahm_LookupEntityInTable | _ahm_LookupEntityInTable |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C6A0 | 102B | ahm_QueryEntityBuildingType | _ahm_QueryEntityBuildingType |  | FUNCTION/RELOC | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000C710 | 752B | GetCommandPayloadSize | _GetCommandPayloadSize |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/game/alchemistry_logic_c/GetCommandPayloadSize.c |
+| 0x1000CA00 | 130B | ahm_ProcessEntityChain | _ahm_ProcessEntityChain |  | FUNCTION/EXACT | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000CA90 | 130B | gm_GetFieldByType | _gm_GetFieldByType |  | FUNCTION/EXACT | DieGildeAddOn/game/alchemistry_logic.c |
+| 0x1000CB20 | 171B | cm_ChkMoveCredits | _cm_ChkMoveCredits |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkMoveCredits.c |
+| 0x1000CBD0 | 517B | cm_ChkSellObjekt | _cm_ChkSellObjekt |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkSellObjekt.c |
+| 0x1000CDE0 | 331B | cm_ChkChangeAttribute | _cm_ChkChangeAttribute |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkChangeAttribute.c |
+| 0x1000CF30 | 162B | cm_ChkChangeBits | _cm_ChkChangeBits |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkChangeBits.c |
+| 0x1000CFE0 | 64B | cm_ChkSetGebBesitzer | _cm_ChkSetGebBesitzer |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkSetGebBesitzer.c |
+| 0x1000D020 | 22B | cm_ChkOfficeCandidate | _cm_ChkOfficeCandidate |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkOfficeCandidate.c |
+| 0x1000D040 | 22B | cm_ValidateGeneric | _cm_ValidateGeneric |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ValidateGeneric.c |
+| 0x1000D060 | 169B | cm_ChkElectionOrTrade | _cm_ChkElectionOrTrade |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkElectionOrTrade.c |
+| 0x1000D110 | 333B | cm_ChkJoinLeaveElection | _cm_ChkJoinLeaveElection |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkJoinLeaveElection.c |
+| 0x1000D260 | 120B | cm_ChkCutsceneReady | _cm_ChkCutsceneReady |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkCutsceneReady.c |
+| 0x1000D2E0 | 77B | cm_ChkCommandType | _cm_ChkCommandType |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkCommandType.c |
+| 0x1000D330 | 14B | cm_MarkAndReturn | _cm_MarkAndReturn |  | FUNCTION/EXACT | DieGildeAddOn/command/command_c/cm_MarkAndReturn.c |
+| 0x1000D340 | 6B | cm_RejectCommand | _cm_RejectCommand |  | FUNCTION/EXACT | DieGildeAddOn/command/command_c/cm_RejectCommand.c |
+| 0x1000D350 | 267B | cm_ExAllocRaum | _cm_ExAllocRaum |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocRaum.c |
+| 0x1000D460 | 267B | cm_ExAllocSpieler | _cm_ExAllocSpieler |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocSpieler.c |
+| 0x1000D570 | 361B | cm_ExAllocClientSpieler | _cm_ExAllocClientSpieler |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocClientSpieler.c |
+| 0x1000D6E0 | 78B | cm_ExChangePlayerIdentity | _cm_ExChangePlayerIdentity |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExChangePlayerIdentity.c |
+| 0x1000D730 | 192B | cm_ExFree | _cm_ExFree |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExFree.c |
+| 0x1000D7F0 | 176B | cm_ExTransferCurrency | _cm_ExTransferCurrency |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExTransferCurrency.c |
+| 0x1000D8A0 | 144B | cm_ExTransferCurrencyNoKill | _cm_ExTransferCurrencyNoKill |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExTransferCurrencyNoKill.c |
+| 0x1000D930 | 2057B | cm_ExSellObjekt | _cm_ExSellObjekt |  | STUB/STUB | DieGildeAddOn/command/command_c/cm_ExSellObjekt.c |
+| 0x1000E140 | 993B | cm_ExProdObjekt | _cm_ExProdObjekt |  | STUB/STUB | DieGildeAddOn/command/command_c/cm_ExProdObjekt.c |
+| 0x1000E530 | 352B | cm_ExMoveObjekt | _cm_ExMoveObjekt |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExMoveObjekt.c |
+| 0x1000E690 | 191B | cm_ExClearLagerslot | _cm_ExClearLagerslot |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExClearLagerslot.c |
+| 0x1000E750 | 128B | cm_ExAllocObjekt | _cm_ExAllocObjekt |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocObjekt.c |
+| 0x1000E7D0 | 256B | cm_ExChangeAttribute | _cm_ExChangeAttribute |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExChangeAttribute.c |
+| 0x1000E8D0 | 240B | cm_ExSetAttribute | _cm_ExSetAttribute |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExSetAttribute.c |
+| 0x1000E9C0 | 214B | cm_ExChangeDesire | _cm_ExChangeDesire |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExChangeDesire.c |
+| 0x1000EAA0 | 208B | cm_ExChangeBits | _cm_ExChangeBits |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExChangeBits.c |
+| 0x1000EB70 | 144B | cm_ExChangeFloat | _cm_ExChangeFloat |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExChangeFloat.c |
+| 0x1000EC00 | 912B | cm_ExCopyEntityData | _cm_ExCopyEntityData |  | STUB/STUB | DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c |
+| 0x1000EF90 | 26B | cm_ChainAssignId | _cm_ChainAssignId |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChainAssignId.c |
+| 0x1000EFB0 | 122B | cm_ExSetSyncFlags | _cm_ExSetSyncFlags |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExSetSyncFlags.c |
+| 0x1000F030 | 72B | cm_ExKillSpieler | _cm_ExKillSpieler |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExKillSpieler.c |
+| 0x1000F080 | 26B | cm_AssignSequenceCounter | _cm_AssignSequenceCounter |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_AssignSequenceCounter.c |
+| 0x1000F0A0 | 37B | cm_AssignEntityId | _cm_AssignEntityId |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_AssignEntityId.c |
+| 0x1000F0D0 | 197B | cm_ExRemoveLinkedObject | _cm_ExRemoveLinkedObject |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExRemoveLinkedObject.c |
+| 0x1000F1A0 | 327B | cm_ChainRecordLookup | _cm_ChainRecordLookup |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChainRecordLookup.c |
+| 0x1000F2F0 | 176B | cm_ExAllocThemaPredigt | _cm_ExAllocThemaPredigt |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocThemaPredigt.c |
+| 0x1000F3A0 | 3B | cm_ChainNoop | _cm_ChainNoop |  | FUNCTION/EXACT | DieGildeAddOn/command/command_c/cm_ChainNoop.c |
+| 0x1000F3B0 | 206B | cm_ExSetGebBesitzer | _cm_ExSetGebBesitzer |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExSetGebBesitzer.c |
+| 0x1000F480 | 271B | cm_ExSetWohnsitz | _cm_ExSetWohnsitz |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExSetWohnsitz.c |
+| 0x1000F590 | 237B | cm_ExSetGebUpgrade | _cm_ExSetGebUpgrade |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExSetGebUpgrade.c |
+| 0x1000F680 | 171B | cm_ExDestroyBuilding | _cm_ExDestroyBuilding |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExDestroyBuilding.c |
+| 0x1000F730 | 515B | cm_ExEmployWorker | _cm_ExEmployWorker |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExEmployWorker.c |
+| 0x1000F940 | 22B | cm_ExAssignOffice | _cm_ExAssignOffice |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAssignOffice.c |
+| 0x1000F960 | 22B | cm_ExExecuteOffice | _cm_ExExecuteOffice |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExExecuteOffice.c |
+| 0x1000F980 | 336B | cm_ExCreateCitizen | _cm_ExCreateCitizen |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExCreateCitizen.c |
+| 0x1000FAD0 | 85B | cm_ExKillTransporter | _cm_ExKillTransporter |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExKillTransporter.c |
+| 0x1000FB30 | 153B | cm_ExCreateGeb | _cm_ExCreateGeb |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExCreateGeb.c |
+| 0x1000FBD0 | 22B | cm_ExCondWrite | _cm_ExCondWrite |  | FUNCTION/EXACT | DieGildeAddOn/command/command_c/cm_ExCondWrite.c |
+| 0x1000FBF0 | 25B | cm_InitDefaultResponse | _cm_InitDefaultResponse |  | FUNCTION/EXACT | DieGildeAddOn/command/command_c/cm_InitDefaultResponse.c |
+| 0x1000FC10 | 308B | cm_ExElectionOrTrade | _cm_ExElectionOrTrade |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExElectionOrTrade.c |
+| 0x1000FD50 | 445B | cm_ExJoinLeaveElection | _cm_ExJoinLeaveElection |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExJoinLeaveElection.c |
+| 0x1000FF10 | 22B | cm_ExCondWrite2 | _cm_ExCondWrite2 |  | FUNCTION/EXACT | DieGildeAddOn/command/command_c/cm_ExCondWrite2.c |
+| 0x1000FF30 | 41B | cm_ChkEntityLookup | _cm_ChkEntityLookup |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ChkEntityLookup.c |
+| 0x1000FF60 | 82B | cm_ExCutsceneUpdate | _cm_ExCutsceneUpdate |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExCutsceneUpdate.c |
+| 0x1000FFC0 | 70B | cm_ExModifyHealth | _cm_ExModifyHealth |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExModifyHealth.c |
+| 0x10010010 | 110B | cm_ExModifyStamina | _cm_ExModifyStamina |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExModifyStamina.c |
+| 0x10010080 | 22B | cm_ExSimCommand | _cm_ExSimCommand |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExSimCommand.c |
+| 0x100100A0 | 159B | cm_ExModifyStat | _cm_ExModifyStat |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExModifyStat.c |
+| 0x10010140 | 280B | cm_ExAllocWarEvent | _cm_ExAllocWarEvent |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocWarEvent.c |
+| 0x10010260 | 144B | cm_DispatchProduction | _cm_DispatchProduction |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_DispatchProduction.c |
+| 0x100102F0 | 17B | cm_DispatchMoveSlot | _cm_DispatchMoveSlot |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_DispatchMoveSlot.c |
+| 0x10010310 | 52B | cm_ExAllocGraveyardWorker | _cm_ExAllocGraveyardWorker |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocGraveyardWorker.c |
+| 0x10010350 | 52B | cm_ExAllocAlchemist | _cm_ExAllocAlchemist |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocAlchemist.c |
+| 0x10010390 | 262B | cm_ExSimSpecialAction | _cm_ExSimSpecialAction |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExSimSpecialAction.c |
+| 0x100104A0 | 135B | cm_GetBuildingStatCount | _cm_GetBuildingStatCount |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_GetBuildingStatCount.c |
+| 0x10010530 | 113B | gv_CheckSlotActive | _gv_CheckSlotActive |  | FUNCTION/EXACT | DieGildeAddOn/game/friedhof_logic.c |
+| 0x100105B0 | 329B | gv_GetSlotEntry | _gv_GetSlotEntry |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010710 | 320B | gv_FindSlotEntryFiltered | _gv_FindSlotEntryFiltered |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010850 | 370B | SpawnGraveyardEntities | _SpawnGraveyardEntities |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x100109D0 | 832B | AllocGraveyardField | _AllocGraveyardField |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010D10 | 570B | UpgradeGraveyardField | _UpgradeGraveyardField |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010F50 | 66B | gv_Free3Fields | _gv_Free3Fields |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10010FA0 | 525B | AssignProductionSlot | _AssignProductionSlot |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x100111B0 | 501B | HireProductionWorker | _HireProductionWorker |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x100113B0 | 390B | ExtendProductionTime | _ExtendProductionTime |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10011540 | 288B | gv_ReplaceProductionWorker | _gv_ReplaceProductionWorker |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10011660 | 297B | ActivateGraveyardSection | _ActivateGraveyardSection |  | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10011790 | 242B | gv_UpdateProductionProgress | _gv_UpdateProductionProgress |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10011890 | 164B | gv_ValidateEntityAction | _gv_ValidateEntityAction |  | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10011940 | 674B | gv_MoveSlotEntry | _gv_MoveSlotEntry |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic.c |
+| 0x10011BF0 | 1040B | gv_ExAllocGraveyardWorker | _gv_ExAllocGraveyardWorker | /O2 /Oy- /Gd | STUB/STUB | DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c |
+| 0x10012000 | 728B | ls_LoadGraveyardData | _ls_LoadGraveyardData |  | FUNCTION/RELOC | DieGildeAddOn/loadsave/loadsave.c |
+| 0x100122E0 | 346B | ls_InitNewDynastyEntity | _ls_InitNewDynastyEntity |  | FUNCTION/RELOC | DieGildeAddOn/loadsave/loadsave.c |
+| 0x10012440 | 37B | ls_ReadVfsDataChecked | _ls_ReadVfsDataChecked |  | FUNCTION/RELOC | DieGildeAddOn/loadsave/loadsave.c |
+| 0x10012470 | 857B | ls_LoadSavegameHeader | _ls_LoadSavegameHeader |  | FUNCTION/PROVEN | DieGildeAddOn/loadsave/loadsave_c/ls_LoadSavegameHeader.c |
+| 0x100127D0 | 282B | ls_LoadExistingEntities | _ls_LoadExistingEntities |  | FUNCTION/RELOC | DieGildeAddOn/loadsave/loadsave.c |
+| 0x100128F0 | 1463B | ls_LoadBuildingEntityState | _ls_LoadBuildingEntityState | /O2 /Oy- /Gd | STUB/STUB | DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c |
+| 0x10012EB0 | 884B | ls_LoadDynamicEntities | _ls_LoadDynamicEntities |  | STUB/STUB | DieGildeAddOn/loadsave/loadsave_c/ls_LoadDynamicEntities.c |
+| 0x10013230 | 2268B | ls_LoadEntities | _ls_LoadEntities |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/loadsave/loadsave_c/ls_LoadEntities.c |
+| 0x10013B10 | 1361B | ls_LoadTownData | _ls_LoadTownData |  | STUB/STUB | DieGildeAddOn/loadsave/loadsave_c/ls_LoadTownData.c |
+| 0x10014070 | 491B | ls_ID2Ptr | _ls_ID2Ptr |  | FUNCTION/RELOC | DieGildeAddOn/loadsave/loadsave.c |
+| 0x10014260 | 892B | srv_RecvGame | _srv_RecvGame |  | FUNCTION/PROVEN | DieGildeAddOn/loadsave/loadsave_c/srv_RecvGame.c |
+| 0x100145E0 | 209B | lb_ExPlayerlist | _lb_ExPlayerlist |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
+| 0x100146C0 | 236B | lb_SendLobbyConfig | _lb_SendLobbyConfig |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
+| 0x100147B0 | 670B | lb_HandleLobbyCommands | _lb_HandleLobbyCommands |  | STUB/STUB | DieGildeAddOn/command/lobbycommands_c/lb_HandleLobbyCommands.c |
+| 0x10014A50 | 157B | lb_BroadcastStateChange | _lb_BroadcastStateChange |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
+| 0x10014AF0 | 247B | lb_HandleDataTransfer | _lb_HandleDataTransfer |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
+| 0x10014BF0 | 163B | lb_HandleEntitySync | _lb_HandleEntitySync |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
+| 0x10014CA0 | 265B | cm_RouteCommand | _cm_RouteCommand |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
+| 0x10014DB0 | 304B | lb_ExLobbyServerCommand | _lb_ExLobbyServerCommand |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
+| 0x10014EE0 | 69B | lb_SearchRecordTable | _lb_SearchRecordTable |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
+| 0x10014F30 | 74B | FindRecord | _FindRecord |  | FUNCTION/EXACT | DieGildeAddOn/auxillary/plant.c |
+| 0x10014F80 | 103B | find_zone_record | _find_zone_record |  | FUNCTION/EXACT | DieGildeAddOn/auxillary/plant.c |
+| 0x10014FF0 | 175B | CheckZoneAvailability | _CheckZoneAvailability |  | FUNCTION/RELOC | DieGildeAddOn/auxillary/plant.c |
+| 0x100150A0 | 257B | plt_SetPlantMap | _plt_SetPlantMap |  | FUNCTION/RELOC | DieGildeAddOn/auxillary/plant.c |
+| 0x100151B0 | 41B | table_lookup | _table_lookup |  | FUNCTION/EXACT | DieGildeAddOn/auxillary/plant.c |
+| 0x100151E0 | 535B | FindAndMatchParents | _FindAndMatchParents |  | FUNCTION/RELOC | DieGildeAddOn/game/sim.c |
+| 0x10015400 | 83B | sim_PriorityUpdate | _sim_PriorityUpdate |  | FUNCTION/RELOC | DieGildeAddOn/game/sim.c |
+| 0x10015460 | 145B | sim_StartEntityQueryByType | _sim_StartEntityQueryByType |  | FUNCTION/RELOC | DieGildeAddOn/game/sim.c |
+| 0x10015500 | 180B | sim_CreateCitizen | _sim_CreateCitizen |  | FUNCTION/RELOC | DieGildeAddOn/game/sim.c |
+| 0x100155C0 | 197B | AdvanceGameClock | _AdvanceGameClock |  | FUNCTION/EXACT | DieGildeAddOn/game/sim.c |
+| 0x10015690 | 41B | sim_SetSyncParams | _sim_SetSyncParams |  | FUNCTION/EXACT | DieGildeAddOn/game/sim.c |
+| 0x100156C0 | 642B | gm_InitObjektHersteller | _gm_InitObjektHersteller |  | STUB/STUB | DieGildeAddOn/game/spiel_c/gm_InitObjektHersteller.c |
+| 0x10015950 | 861B | gm_Open | _gm_Open |  | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/spiel_c/gm_Open.c |
+| 0x10015CB0 | 57B | gm_ResetAllEntities | _gm_ResetAllEntities |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10015CF0 | 194B | gm_CleanupObjectEntities | _gm_CleanupObjectEntities |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10015DC0 | 55B | gm_FindRecordById | _gm_FindRecordById |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10015E00 | 135B | gm_CleanupAllEntities | _gm_CleanupAllEntities |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10015E90 | 211B | gm_ResolveEntityById | _gm_ResolveEntityById |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
+| 0x10015F70 | 714B | gm_RefreshMarketAvailability | _gm_RefreshMarketAvailability |  | STUB/STUB | DieGildeAddOn/game/spiel_c/gm_RefreshMarketAvailability.c |
+| 0x10016240 | 72B | gm_FindSlotById | _gm_FindSlotById |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
+| 0x10016290 | 464B | gm_NextEntityQueryMatch | _gm_NextEntityQueryMatch |  | STUB/STUB | DieGildeAddOn/game/spiel_c/gm_NextEntityQueryMatch.c |
+| 0x10016460 | 320B | gm_StartEntityQuery | _gm_StartEntityQuery |  | STUB/STUB | DieGildeAddOn/game/spiel_c/gm_StartEntityQuery.c |
+| 0x100165A0 | 37B | gm_AllocateObjectSlot | _gm_AllocateObjectSlot |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x100165D0 | 155B | gm_RemoveObjectByType | _gm_RemoveObjectByType |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10016670 | 1B | gm_NoopRet2 | _gm_NoopRet2 |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
+| 0x10016680 | 139B | gm_RemoveLinkedNodeById | _gm_RemoveLinkedNodeById |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10016710 | 66B | gm_FreeObjectListRecursive | _gm_FreeObjectListRecursive |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10016760 | 1392B | gm_AllocObjekt | _gm_AllocObjekt |  | STUB/STUB | DieGildeAddOn/game/spiel_c/gm_AllocObjekt.c |
+| 0x10016CD0 | 272B | gm_AddOrAccumulateObject | _gm_AddOrAccumulateObject |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10016DE0 | 186B | gm_SubObjekt | _gm_SubObjekt |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10016EA0 | 211B | gm_SubObjektNoKill | _gm_SubObjektNoKill |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10016F80 | 346B | FindNextFilteredEntity | _FindNextFilteredEntity |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
+| 0x100170E0 | 304B | gm_StartFilteredEntitySearch | _gm_StartFilteredEntitySearch |  | FUNCTION/PROVEN | DieGildeAddOn/game/spiel_c/gm_StartFilteredEntitySearch.c |
+| 0x10017210 | 39B | gm_SearchStruct | _gm_SearchStruct |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10017240 | 240B | gm_CleanupBuildingEntity | _gm_CleanupBuildingEntity |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10017330 | 207B | gm_AllocBuildingDefaults | _gm_AllocBuildingDefaults |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10017400 | 202B | gm_SetBuildingWorkerLimits | _gm_SetBuildingWorkerLimits |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x100174D0 | 1088B | gm_AllocGebaeude | _gm_AllocGebaeude | /O2 /Oy- /Gd | STUB/STUB | DieGildeAddOn/game/spiel_c/gm_AllocGebaeude.c |
+| 0x10017910 | 145B | gm_SetupEntityQuery | _gm_SetupEntityQuery |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x100179B0 | 192B | gm_GetBuildingTypeCategory | _gm_GetBuildingTypeCategory |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10017A70 | 62B | gm_SearchTable67 | _gm_SearchTable67 |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10017AB0 | 74B | gm_CheckEntityType | _gm_CheckEntityType |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10017B00 | 320B | gm_AssignBuildingOwner | _gm_AssignBuildingOwner |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10017C40 | 742B | gm_AllocBuildingContents | _gm_AllocBuildingContents |  | STUB/STUB | DieGildeAddOn/game/spiel_c/gm_AllocBuildingContents.c |
+| 0x10017F30 | 35B | gm_RemoveObjectWrapper | _gm_RemoveObjectWrapper |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10017F60 | 36B | gm_RemoveEntityLink | _gm_RemoveEntityLink |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10017F90 | 23B | gm_InitEntityIfValid | _gm_InitEntityIfValid |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10017FB0 | 278B | gm_DeallocEntity | _gm_DeallocEntity |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x100180D0 | 81B | gm_InitEntitySlots | _gm_InitEntitySlots |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10018130 | 32B | gm_IsInRange | _gm_IsInRange |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10018150 | 70B | gm_EntityClassCheck | _gm_EntityClassCheck |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x100181A0 | 87B | gm_CheckStatLevel | _gm_CheckStatLevel |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10018200 | 304B | gm_MapEntityStatRange | _gm_MapEntityStatRange |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10018330 | 276B | gm_GetOppositeStatIndex | _gm_GetOppositeStatIndex |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
+| 0x10018450 | 78B | gm_RandomStatModifier | _gm_RandomStatModifier |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x100184A0 | 56B | gm_LookupEntityRecordById | _gm_LookupEntityRecordById |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
+| 0x100184E0 | 66B | gm_GetEntityTableEntry | _gm_GetEntityTableEntry |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10018530 | 800B | gm_ChangePlayerIdentityImpl | _gm_ChangePlayerIdentityImpl |  | STUB/STUB | DieGildeAddOn/game/spiel_c/gm_ChangePlayerIdentityImpl.c |
+| 0x10018850 | 3689B | gm_CreateEntityFromParents | _gm_CreateEntityFromParents |  | STUB/STUB | DieGildeAddOn/game/spiel_c/gm_CreateEntityFromParents.c |
+| 0x100196C0 | 81B | gm_QueryEntitySum | _gm_QueryEntitySum |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019720 | 396B | gm_CalculateProductionValue | _gm_CalculateProductionValue |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x100198B0 | 355B | gm_SumBuildingProductionValues | _gm_SumBuildingProductionValues |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019A20 | 74B | gm_AccumulateTyped2 | _gm_AccumulateTyped2 |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019A70 | 102B | gm_EntityQuerySum | _gm_EntityQuerySum |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019AE0 | 82B | gm_ResolveParentEntity | _gm_ResolveParentEntity |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019B40 | 62B | gm_GetEntityType | _gm_GetEntityType |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019B80 | 83B | gm_EntityAccumulate | _gm_EntityAccumulate |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019BE0 | 124B | gm_WalkEntityChain | _gm_WalkEntityChain |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019C60 | 98B | gm_FindEntityByOwner | _gm_FindEntityByOwner |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
+| 0x10019CD0 | 48B | gm_GetMsgField | _gm_GetMsgField |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel.c |
+| 0x10019D30 | 407B | gm_KannObjektHergestellt | _gm_KannObjektHergestellt |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x10019ED0 | 395B | gm_CheckInventoryCapacity | _gm_CheckInventoryCapacity |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x1001A060 | 97B | gm_EntitySetField | _gm_EntitySetField |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x1001A0D0 | 32B | gm_RandomMod | _gm_RandomMod |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x1001A0F0 | 22B | gm_RandomFloat01 | _gm_RandomFloat01 |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x1001A110 | 48B | gm_RandomQuadratic | _gm_RandomQuadratic |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
+| 0x1001A140 | 14B | getpid | _getpid |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A150 | 0B | srand | _srand |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A160 | 0B | closesocket@4 | _closesocket@4 |  | LIBRARY/EXACT | library_winsock.h |
+| 0x1001A166 | 0B | sendto@24 | _sendto@24 |  | LIBRARY/EXACT | library_winsock.h |
+| 0x1001A16C | 0B | bind@12 | _bind@12 |  | LIBRARY/EXACT | library_winsock.h |
+| 0x1001A172 | 0B | htons@4 | _htons@4 |  | LIBRARY/EXACT | library_winsock.h |
+| 0x1001A178 | 0B | htonl@4 | _htonl@4 |  | LIBRARY/EXACT | library_winsock.h |
+| 0x1001A17E | 0B | setsockopt@20 | _setsockopt@20 |  | LIBRARY/EXACT | library_winsock.h |
+| 0x1001A184 | 0B | socket@12 | _socket@12 |  | LIBRARY/EXACT | library_winsock.h |
+| 0x1001A18A | 0B | fflush | _fflush |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A1BB | 0B | fclose_lk | __fclose_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A207 | 78B | fputs | _fputs |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A255 | 49B | crt_locked_read | _crt_locked_read |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A299 | 0B | sprintf | _sprintf |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A2EB | 0B | fopen | _fopen |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A30D | 353B | ftell | _ftell |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A46E | 44B | fseek | _fseek |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A49A | 141B | SeekFileHandleUnlocked | _SeekFileHandleUnlocked |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A527 | 0B | ctime | _ctime |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A540 | 39B | strrchr | _strrchr |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A567 | 0B | time | _time |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A670 | 17B | exit | _exit |  | FUNCTION/SIZE_MISMATCH | exit.c |
+| 0x1001A681 | 17B | exit | _exit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A692 | 0B | cexit | __cexit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A6A1 | 163B | doexit | _doexit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A746 | 9B | lock_0d | lock_0d |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A74F | 9B | unlock_0d | unlock_0d |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A758 | 26B | initterm | _initterm |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A772 | 115B | dosmaperr | _dosmaperr |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A7E5 | 0B | errno | __errno |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A7EE | 0B | doserrno | ___doserrno |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A809 | 0B | nh_malloc | __nh_malloc |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A835 | 0B | malloc | _malloc |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A89C | 9B | unlock_09a | unlock_09a |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A8FB | 9B | unlock_09b | unlock_09b |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A931 | 47B | crt_locked_call4a | _crt_locked_call4a |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A960 | 266B | fwrite | _fwrite |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AA6A | 47B | fread | fread |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AA99 | 232B | fread | _fread |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AB81 | 215B | free | _free |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001ABEB | 9B | unlock_09c | unlock_09c |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AC43 | 9B | unlock_09d | unlock_09d |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AC70 | 47B | alloca_probe | __alloca_probe |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AC9F | 46B | fclose | _fclose |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001ACCD | 92B | flush | __flush |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AD29 | 9B | signal_lock | signal_lock |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AD32 | 164B | flsall | __flsall |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001ADD6 | 59B | crt_locked_putc | crt_locked_putc |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AE20 | 254B | strncpy | _strncpy |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AF30 | 193B | strchr | _strchr |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AFF0 | 128B | strstr | _strstr |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B070 | 23B | fpmath | __fpmath |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B088 | 56B | init_fptrs | init_fptrs |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B0C0 | 111B | crt_toupper | crt_toupper |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B12F | 204B | toupper | _toupper |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B200 | 664B | memmove2 | _memmove2 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B535 | 0B | srand_impl | _srand_impl |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B535 | 13B | set_errno | set_errno |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B542 | 34B | rand | _rand |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B564 | 39B | ftol | __ftol |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B58B | 65B | printf | _printf |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B5CC | 781B | realloc | _realloc |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B757 | 9B | unlock_09e | unlock_09e |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B8A5 | 11B | unlock_9 | _unlock_9 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B8FB | 217B | CRT_INIT@12 | __CRT_INIT@12 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B9D4 | 157B | DllMainCRTStartup@12 | __DllMainCRTStartup@12 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BA71 | 48B | amsg_exit | __amsg_exit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BAA4 | 168B | ioterm | __ioterm |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BB60 | 47B | lock_stream | _lock_stream |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BB8F | 35B | lock_file | __lock_file |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BBB2 | 47B | unlock_stream | _unlock_stream |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BBE1 | 35B | unlock_file | __unlock_file |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BC04 | 93B | close | __close |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BC61 | 131B | free_osfhnd | __free_osfhnd |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BCE4 | 43B | free_buf | _free_buf |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BD0F | 141B | stbuf | __stbuf |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BD9C | 42B | crt_cond_cleanup | crt_cond_cleanup |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BDD0 | 123B | strlen | _strlen |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BE4B | 368B | openfile | __openfile |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BFBB | 200B | getstream | __getstream |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001C083 | 280B | flsbuf | __flsbuf |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001C19B | 1825B | output | __output |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001C8DC | 53B | write_char | _write_char |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001C911 | 49B | write_multi_char | _write_multi_char |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001C942 | 56B | write_string | _write_string |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001C97A | 13B | stream_read_dword | _stream_read_dword |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001C987 | 16B | stream_read_qword | _stream_read_qword |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001C997 | 14B | stream_read_word | _stream_read_word |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001C9A5 | 444B | ioinit | __ioinit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CB61 | 84B | ioterm | _ioterm |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CBB5 | 101B | lseek | __lseek |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CC1A | 115B | lseek_lk | __lseek_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CC8D | 202B | asctime | _asctime |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CD57 | 40B | format_digits | _format_digits |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CD7F | 352B | localtime | _localtime |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CEDF | 194B | loctotime_t | ___loctotime_t |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CFA1 | 41B | crt_delete_cs | crt_delete_cs |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CFCA | 108B | crt_delete_locks | crt_delete_locks |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D036 | 97B | lock | __lock |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D097 | 21B | unlock | __unlock |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D0AC | 84B | mtinit | __mtinit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D100 | 30B | crt_close_handle | crt_close_handle |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D11E | 19B | set_vtable | set_vtable |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D131 | 103B | getptd | __getptd |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D198 | 160B | freeptd | __freeptd |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D238 | 27B | crt_gfunc_call | crt_gfunc_call |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D253 | 45B | crt_get_osver | crt_get_osver |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D280 | 328B | heap_select | ___heap_select |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D3C8 | 93B | crt_heap_init | crt_heap_init |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D425 | 168B | heap_term | __heap_term |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D4CD | 72B | sbh_heap_init | ___sbh_heap_init |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D515 | 43B | crt_find_entry | crt_find_entry |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D540 | 809B | sbh_free_block | ___sbh_free_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D869 | 777B | sbh_alloc_block | ___sbh_alloc_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001DB72 | 177B | sbh_alloc_new_region | ___sbh_alloc_new_region |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001DC23 | 251B | sbh_alloc_new_group | ___sbh_alloc_new_group |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001DD1E | 758B | sbh_resize_block | ___sbh_resize_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E014 | 324B | old_sbh_new_region | ___old_sbh_new_region |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E158 | 86B | sbh_decommit_pages | __sbh_decommit_pages |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E1AE | 194B | old_sbh_decommit_pages | ___old_sbh_decommit_pages |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E270 | 87B | old_sbh_find_block | ___old_sbh_find_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E2C7 | 69B | update_page_entry | update_page_entry |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E30C | 520B | old_sbh_alloc_block | ___old_sbh_alloc_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E514 | 292B | old_sbh_alloc_block_from_page | ___old_sbh_alloc_block_from_page |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E638 | 169B | old_sbh_resize_block | ___old_sbh_resize_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E6E4 | 32B | except_handler3 | __except_handler3 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E704 | 34B | seh_filter | _seh_filter |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E726 | 104B | local_unwind2 | __local_unwind2 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E78E | 35B | ValidateEH3RN | _ValidateEH3RN |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E7BA | 24B | EH3_save_context | _EH3_save_context |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E7D4 | 197B | exsup | exsup |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E899 | 27B | seh_local_unwind_thunk | seh_local_unwind_thunk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E8B4 | 101B | crt_write_wrap | crt_write_wrap |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E919 | 395B | write_lk | __write_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001EAB0 | 664B | memmove | _memmove |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001EDE5 | 220B | filbuf | __filbuf |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001EEC1 | 101B | crt_lseek_wrap | _crt_lseek_wrap |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001EF26 | 473B | read_lk | __read_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F0FF | 147B | crt_commit | crt_commit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F192 | 18B | crt_const_call | crt_const_call |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F1A4 | 62B | IsNonwritableInCurrentImage | ___IsNonwritableInCurrentImage |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F1E2 | 41B | IsProcessorFeaturePresent | __IsProcessorFeaturePresent |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F20B | 90B | forcdecpt | __forcdecpt |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F265 | 78B | cropzeros | __cropzeros |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F2B3 | 24B | positive | __positive |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F2CB | 62B | fassign | __fassign |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F309 | 97B | ecvt | __ecvt |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F36A | 194B | cftoe | __cftoe |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F42C | 85B | fcvt | __fcvt |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F481 | 167B | cftof | __cftof |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F528 | 147B | cfltcvt_g | ___cfltcvt_g |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F5BB | 81B | cfltcvt | __cfltcvt |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F60C | 37B | crt_strcpy_advance | _crt_strcpy_advance |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F631 | 511B | crtLCMapStringA | ___crtLCMapStringA |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F855 | 117B | isctype | __isctype |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F8D0 | 7B | CopyCString | CopyCString |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F8E0 | 224B | strcat | _strcat |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F9C0 | 185B | setenvp | __setenvp |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FA79 | 153B | setargv | __setargv |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FB12 | 436B | parse_cmdline | _parse_cmdline |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FCC6 | 306B | crtGetEnvironmentStringsA | ___crtGetEnvironmentStringsA |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FDF8 | 57B | crt_runtime_error | crt_runtime_error |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FE31 | 339B | NMSG_WRITE | __NMSG_WRITE |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FF84 | 289B | calloc | _calloc |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002001D | 9B | unlock_09f | unlock_09f |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100200A6 | 9B | unlock_09g | unlock_09g |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100200C1 | 129B | fcloseall | __fcloseall |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020142 | 291B | alloc_osfhnd | __alloc_osfhnd |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020265 | 124B | open_osfhandle | __open_osfhandle |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100202E1 | 127B | free_osfhnd | free_osfhnd |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020360 | 66B | get_osfhandle | __get_osfhandle |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100203A2 | 95B | lock_fhandle | __lock_fhandle |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020401 | 34B | slot_unlock | slot_unlock |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020423 | 41B | slot_check_flag | slot_check_flag |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002044C | 719B | sopen | __sopen |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002071B | 68B | crt_buf_alloc | crt_buf_alloc |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002075F | 89B | wctomb | _wctomb |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100207B8 | 105B | wctomb_lk | __wctomb_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020830 | 104B | aulldiv | __aulldiv |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100208A0 | 117B | aullrem | __aullrem |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020915 | 46B | crt_once_init | crt_once_init |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020943 | 647B | tzset | __tzset |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020BCA | 33B | crt_locked_call | _crt_locked_call |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020BEB | 428B | isindst_lk | __isindst_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020D97 | 320B | cvtdate | cvtdate |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020ED7 | 266B | gmtime_lk | _gmtime_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020FE1 | 23B | call_with_zero | call_with_zero |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020FF8 | 517B | strtoxl | _strtoxl |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021200 | 56B | strncmp | _strncmp |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021240 | 88B | memset | _memset |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021298 | 53B | controlfp | __controlfp |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100212CD | 22B | clear_bit_call | clear_bit_call |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100212E3 | 146B | crt_cvt_osflag | crt_cvt_osflag |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021375 | 137B | abstract_cw | _abstract_cw |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100213FE | 111B | crt_tolower_wrapper | crt_tolower_wrapper |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002146D | 203B | tolower | __tolower |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021538 | 73B | check_bits_clear | _check_bits_clear |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021581 | 86B | set_bit_range | set_bit_range |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100215D7 | 140B | sbh_dealloc_bitmap | ___sbh_dealloc_bitmap |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021663 | 27B | copy_3dwords | copy_3dwords |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002167E | 12B | zero_12bytes | zero_12bytes |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002168A | 27B | check_all_zero | check_all_zero |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100216A5 | 141B | sbh_bitmap_shift | ___sbh_bitmap_shift |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021732 | 364B | ld12tod | __ld12tod |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002189E | 22B | wrapper_ctx1 | wrapper_ctx1 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100218B4 | 22B | wrapper_ctx2 | wrapper_ctx2 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100218CA | 45B | atodbl | __atodbl |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100218F7 | 45B | atoldbl | __atoldbl |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021924 | 119B | fptostr | __fptostr |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002199B | 92B | fltout2 | __fltout2 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100219F7 | 182B | dtold | ___dtold |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021AAD | 9B | fptrap | __fptrap |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021AC0 | 129B | strcmp | _strcmp |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021B50 | 62B | strcspn | _strcspn |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021B90 | 58B | strpbrk | _strpbrk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021BCA | 318B | crtGetStringTypeA | ___crtGetStringTypeA |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021D13 | 429B | setmbcp | __setmbcp |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021EC0 | 74B | crtGetACP_getcodepage | __crtGetACP_getcodepage |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021EDA | 0B | GetOEMCP | GetOEMCP |  | LIBRARY/EXACT | library_imports.h |
+| 0x10021EEF | 0B | GetACP | GetACP |  | LIBRARY/EXACT | library_imports.h |
+| 0x10021F0A | 51B | code_translate | code_translate |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021F3D | 41B | CrtIoInfoInit | CrtIoInfoInit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021F66 | 389B | setSBUpLow | _setSBUpLow |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100220EB | 28B | crt_cinit_once | _crt_cinit_once |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022107 | 137B | crtLoadWinAPI | __crtLoadWinAPI |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022190 | 293B | chsize_lk | __chsize_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100222B5 | 139B | atoi | _atoi |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022340 | 125B | getenv | _getenv |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100223BD | 33B | overflow_add | overflow_add |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100223DE | 94B | add_12 | ___add_12 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002243C | 46B | shl_12 | ___shl_12 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002246A | 45B | shr_12 | ___shr_12 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022497 | 199B | ld12cvt | ___ld12cvt |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002255E | 1185B | strgtold12 | ___strgtold12 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022A2F | 659B | ld12cvt | __ld12cvt |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022CD0 | 208B | stricmp | __stricmp |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022DA0 | 257B | strnicmp | __strnicmp |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022EA1 | 110B | setmode_lk | __setmode_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022F10 | 25B | allmul | __allmul |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022F29 | 27B | allmul_slow | __allmul_slow |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022F44 | 63B | mbsnbicoll | __mbsnbicoll |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022F83 | 110B | wenvsetup | __wenvsetup |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10023211 | 124B | mantold_shl | _mantold_shl |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002328D | 597B | crtCompareStringA | ___crtCompareStringA |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10023535 | 150B | crtsetenv | ___crtsetenv |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100236BC | 88B | crt_env_search | _crt_env_search |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10023714 | 103B | copy_environ | _copy_environ |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1002377B | 100B | mbschr | __mbschr |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10023812 | 40B | strdup | __strdup |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10023840 | 0B | RtlUnwind | RtlUnwind |  | LIBRARY/EXACT | library_imports.h |
+
+## Unmatched Functions (6 remaining)
+
+| VA | Size | Name |
+|-----|------|---------|
+| 0x10019D00 | 39B | fcn.10019d00 |
+| 0x1001A286 | 19B | fcn.1001a286 |
+| 0x1001A643 | 45B | fcn.1001a643 |
+| 0x1001A7F7 | 18B | fcn.1001a7f7 |
+| 0x10022FF1 | 544B | fcn.10022ff1 |
+| 0x1002350A | 43B | fcn.1002350a |
