@@ -81,3 +81,6 @@ ghidra_commands.json
 decomp_dump
 diff.json
 uv.lock
+
+# Vendored tool binaries (re-downloadable)
+tools/ghidra-cli

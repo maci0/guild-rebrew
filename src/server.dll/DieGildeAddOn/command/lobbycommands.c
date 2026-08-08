@@ -422,7 +422,7 @@ __declspec(naked) int __cdecl lb_HandleDataTransfer(unsigned int* player, unsign
 // FUNCTION: SERVER 0x10014bf0
 // lb_HandleEntitySync
 
-__declspec(naked) int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl lb_HandleEntitySync(unsigned int* player, unsigned char* msg)
 {
         (void) player;
         (void) msg;
@@ -507,7 +507,7 @@ __declspec(naked) int __cdecl lb_HandleEntitySync(unsigned int* param_1, unsigne
 // FUNCTION: SERVER 0x10014ca0
 // cm_RouteCommand
 
-__declspec(naked) int __cdecl cm_RouteCommand(unsigned int* param_1, unsigned char* param_2)
+__declspec(naked) int __cdecl cm_RouteCommand(unsigned int* player, unsigned char* msg)
 {
         (void) player;
         (void) msg;
