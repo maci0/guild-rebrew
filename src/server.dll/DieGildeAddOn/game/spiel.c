@@ -2320,7 +2320,7 @@ void __cdecl gm_InitEntitySlots(void)
 int __cdecl gm_IsInRange(int x)
 {
 	int r;
-	r = gm_GetBuildingTypeCategory(x);
+	r = gm_MapEntityStatRange(x);
 	if (r >= 10 && r <= 14) {
 		return 0;
 	}
