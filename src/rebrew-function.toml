@@ -1080,6 +1080,7 @@ blocker_delta = 695
 ["SERVER.0x10018850"]
 size = 3689
 status = "STUB"
+blocker = "large stub: 1056 structural diffs vs target, 0 exact bytes; needs full re-decompilation"
 
 ["SERVER.0x100196c0"]
 size = 81
