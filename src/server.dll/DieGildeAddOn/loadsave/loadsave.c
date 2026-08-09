@@ -663,8 +663,6 @@ __declspec(naked) int __cdecl ls_LoadExistingEntities(int arg1)
  * building type, owner, upgrade level, and production
  * state for each building entity. */
 
-// DATA: SERVER 0x1002d4ec
-// DATA: SERVER 0x10035434
 extern int g_citizen_count;
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 

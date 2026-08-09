@@ -170,7 +170,6 @@ int __cdecl gm_DispatchCall(int param, DISPATCH_OBJ* obj)
  * Loads product definitions, recipes, and production chain
  * data from game files. */
 
-// DATA: SERVER 0x100a8c30
 // DATA: SERVER 0x1014d8c0
 // DATA: SERVER 0x101de450
 // DATA: SERVER 0x100a8c34
@@ -1381,8 +1380,6 @@ MATCH:
  * parameters specify entity class, type, and owner
  * constraints. Returns first matching entity. */
 
-// DATA: SERVER 0x100a8c30
-
 // DATA: SERVER 0x10030b8c
 
 // DATA: SERVER 0x10030b8e
@@ -1630,13 +1627,6 @@ __declspec(naked) void __cdecl gm_SetBuildingWorkerLimits(unsigned char* arg1)
  * building struct, sets type, initializes production and
  * storage, and links to the town. */
 
-// DATA: SERVER 0x100a8c30
-
-// DATA: SERVER 0x10030b6c
-
-// DATA: SERVER 0x101de450
-
-// DATA: SERVER 0x10035880
 // DATA: SERVER 0x10035884
 extern int g_10035884;
 // DATA: SERVER 0x10035888
@@ -2158,7 +2148,6 @@ struct EntityStruct {
 
 // DATA: SERVER 0x10035880
 extern unsigned short g_something_1[1];
-// DATA: SERVER 0x10035434
 // DATA: SERVER 0x1009acfc
 // DATA: SERVER 0x100358fc
 extern int g_entity_ref_table[1];
@@ -2376,8 +2365,6 @@ int __cdecl gm_EntityClassCheck(int type)
 
 // DATA: SERVER 0x10035a04
 extern unsigned char g_entity_type_bytes[];
-
-// DATA: SERVER 0x100358a0
 
 int __cdecl gm_CheckStatLevel(int entity_idx, int stat_id)
 {

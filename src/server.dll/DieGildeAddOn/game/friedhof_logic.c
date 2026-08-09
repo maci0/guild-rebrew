@@ -2467,7 +2467,6 @@ __declspec(naked) int __cdecl gv_ReplaceProductionWorker(unsigned char* arg1)
 
 // DATA: SERVER 0x1003546c
 
-// DATA: SERVER 0x100a8c30
 extern char* g_action_table_base;
 
 int __cdecl ActivateGraveyardSection(unsigned char* cmd_payload)
