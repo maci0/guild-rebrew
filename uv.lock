@@ -1557,6 +1557,8 @@ dependencies = [
 requires-dist = [
     { name = "bottle", specifier = ">=0.12" },
     { name = "brotli", specifier = ">=1.1" },
+    { name = "capstone", marker = "extra == 'capstone'", specifier = ">=5.0" },
+    { name = "pygments", marker = "extra == 'pygments'", specifier = ">=2.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "rcssmin", specifier = ">=1.1" },
     { name = "rich", specifier = ">=13.0" },
@@ -1564,7 +1566,7 @@ requires-dist = [
     { name = "typer", specifier = ">=0.9" },
     { name = "zstandard", specifier = ">=0.22" },
 ]
-provides-extras = ["dev"]
+provides-extras = ["dev", "capstone", "pygments"]
 
 [[package]]
 name = "rich"

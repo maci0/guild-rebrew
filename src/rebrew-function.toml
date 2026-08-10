@@ -181,10 +181,11 @@ status = "RELOC"
 ["SERVER.0x10009e60"]
 size = 419
 status = "NEAR_MATCHING"
+blocker = "NEAR_MATCHING — RELOC (87% of delta)"
 
 ["SERVER.0x1000a010"]
 size = 112
-status = "NEAR_MATCHING"
+status = "PROVEN"
 analysis = "Initialize all player slots to disconnected state, then create TCP listen socket with SO_REUSEADDR, 128KB send/recv buffers, non-blocking mode, bind to port, and listen with backlog 5"
 
 ["SERVER.0x1000a080"]
@@ -353,6 +354,7 @@ status = "RELOC"
 ["SERVER.0x1000c710"]
 size = 752
 status = "NEAR_MATCHING"
+blocker = "NEAR_MATCHING — STRUCTURAL (94% of delta) — try: mut_swap_if_else, mut_guard_clause, mut_hoist_return, mut_sink_return, mut_return_to_goto"
 
 ["SERVER.0x1000ca00"]
 size = 130
@@ -687,7 +689,7 @@ status = "RELOC"
 
 ["SERVER.0x10011660"]
 size = 297
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 globals = "SERVER 0x100a8c30"
 
 ["SERVER.0x10011790"]
@@ -753,6 +755,7 @@ size = 2268
 status = "NEAR_MATCHING"
 ghidra = "LoadStaticEntities"
 analysis = "Deserializes all static entities from savegame stream. Reads entity count, landmark pointers, then loops reading 70+ fields per entity with version-gated sections (g_save_format_version). Entity data at g_static_entities array, stride 0x21C bytes. Returns 1 on success, 0 on read failure."
+blocker = "NEAR_MATCHING — RELOC (85% of delta)"
 
 ["SERVER.0x10013b10"]
 size = 1361
@@ -1196,3 +1199,6 @@ source = "TZSET.C:374"
 ["SERVER.0x1001a670"]
 status = "SIZE_MISMATCH"
 size = 17
+
+["SERVER.0xdeadbeef"]
+status = "SIZE_MISMATCH"
