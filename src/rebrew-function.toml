@@ -701,6 +701,7 @@ size = 164
 status = "SIZE_MISMATCH"
 analysis = "Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure."
 globals = "SERVER 0x1003546c"
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=0 vs 4294967294"
 
 ["SERVER.0x10011940"]
 size = 674
