@@ -84,3 +84,4 @@ uv.lock
 
 # Vendored tool binaries (re-downloadable)
 tools/ghidra-cli
+rebrew-function.toml.lock
