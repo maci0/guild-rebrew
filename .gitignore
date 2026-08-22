@@ -32,9 +32,6 @@ bin/
 # Extracted target function bytes (legacy, no longer generated)
 func_0x*.bin
 
-# Docker build context
-docker/__pycache__/
-
 # Cognee
 .cognee-data/
 .env.cognee
