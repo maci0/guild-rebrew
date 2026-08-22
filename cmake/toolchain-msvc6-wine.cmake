@@ -39,10 +39,6 @@ set(CMAKE_C_COMPILER_WORKS TRUE CACHE BOOL "" FORCE)
 # 32-bit target
 set(CMAKE_SIZEOF_VOID_P 4 CACHE STRING "" FORCE)
 
-# --- Standard include / lib paths (set in wrapper, but also helpful here) ---
-set(_msvc_root "${_tools_dir}/MSVC600/VC98")
-set(CMAKE_C_STANDARD_INCLUDE_DIRECTORIES "${_msvc_root}/Include")
-
 # --- MSVC-style output ---
 set(CMAKE_C_OUTPUT_EXTENSION ".obj")
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
@@ -53,8 +49,8 @@ set(CMAKE_IMPORT_LIBRARY_PREFIX "")
 set(CMAKE_IMPORT_LIBRARY_SUFFIX ".lib")
 set(CMAKE_EXECUTABLE_SUFFIX ".exe")
 
-# --- Prevent CMake from searching host paths ---
-set(CMAKE_FIND_ROOT_PATH "${_msvc_root}")
+# --- Prevent CMake from searching host paths (no local MSVC tree anymore;
+# the toolchain ships inside the docker image) ---
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)

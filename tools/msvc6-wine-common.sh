@@ -61,7 +61,8 @@ msvc_docker_run() {
             --user "$(id -u):$(id -g)" \
             -e WINEPREFIX="$MSVC_WINEPREFIX" \
             -e XDG_CACHE_HOME="$MSVC_WINEPREFIX/xdg-cache" \
-            -e "LIB=Z:${MSVC_PROJECT_ROOT//\//\\}\\tools\\MSVC600\\VC98\\Lib" \
+            -e "INCLUDE=Z:\\opt\\msvc6.0\\VC98\\Include" \
+            -e "LIB=Z:\\opt\\msvc6.0\\VC98\\Lib" \
             -v "$MSVC_PROJECT_ROOT:$MSVC_PROJECT_ROOT" \
             -v "$MSVC_WINEPREFIX:$MSVC_WINEPREFIX" \
             -w "$PWD" \

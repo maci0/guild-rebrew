@@ -162,11 +162,13 @@ if(REBREW_BUILD_SERVER)
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3"
   )
 
+  # System import libs resolve inside the toolchain image via LIB
+  # (Z:\opt\msvc6.0\VC98\Lib); WS2_32/WINMM are not in CMake's default set.
   target_link_libraries(server_dll PRIVATE
-    "${PROJECT_SOURCE_DIR}/tools/MSVC600/VC98/Lib/KERNEL32.LIB"
-    "${PROJECT_SOURCE_DIR}/tools/MSVC600/VC98/Lib/USER32.LIB"
-    "${PROJECT_SOURCE_DIR}/tools/MSVC600/VC98/Lib/WS2_32.LIB"
-    "${PROJECT_SOURCE_DIR}/tools/MSVC600/VC98/Lib/WINMM.LIB"
+    KERNEL32.lib
+    USER32.lib
+    WS2_32.lib
+    WINMM.lib
   )
 
   set_property(TARGET server_dll PROPERTY OUTPUT_NAME "server")
