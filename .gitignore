@@ -6,10 +6,6 @@ __pycache__/
 .venv*/
 .python-version
 
-# Vendored compiler toolchains (too large for git)
-tools/MSVC600/
-tools/VC/
-
 # IDE / tool caches
 .pytest_cache/
 .ruff_cache/
@@ -67,15 +63,11 @@ reccmp-*-orig.txt
 reccmp-*-recomp.txt
 catalog.json
 .env.temp
-cmake/
 db/
 archive/
 compile_commands.json
 .rebrew
-ghidra_commands.json
-decomp_dump
 diff.json
-uv.lock
 
 # Vendored tool binaries (re-downloadable)
 tools/ghidra-cli
