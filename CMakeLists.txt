@@ -129,14 +129,28 @@ if(REBREW_BUILD_SERVER)
   set(LINK_STUBS "${PROJECT_SOURCE_DIR}/src/link_stubs.c")
 
   # Order objects by original function VA (fixes reccmp "0 aligned"; drops
-  # zlib files absent from the original). See scripts/order_sources.py.
+  # zlib files absent from the original). The --first-va table supplies the
+  # zlib files' first-function VAs (they have no // FUNCTION: markers); the
+  # --exclude list drops files absent from the original server.dll.
   execute_process(
-    COMMAND python3 "${PROJECT_SOURCE_DIR}/scripts/order_sources.py" ${SERVER_SOURCES} ${ZLIB_SOURCES}
+    COMMAND rebrew order-sources ${SERVER_SOURCES} ${ZLIB_SOURCES}
+      --first-va adler32.c=0x10001000
+      --first-va crc32.c=0x100011f0
+      --first-va deflate.c=0x10001330
+      --first-va infblock.c=0x10003d20
+      --first-va inflate.c=0x10005720
+      --first-va inftrees.c=0x10005d00
+      --first-va infutil.c=0x10006440
+      --first-va trees.c=0x10006ec0
+      --first-va trees2.c=0x10008800
+      --first-va zutil.c=0x100092e0
+      --exclude gzio.c --exclude inffast.c --exclude infcodes.c
+      --exclude compress.c --exclude uncompr.c
     OUTPUT_VARIABLE ORDERED_SOURCES
     OUTPUT_STRIP_TRAILING_WHITESPACE
     RESULT_VARIABLE ORDER_RC)
   if(NOT ORDER_RC EQUAL 0)
-    message(FATAL_ERROR "order_sources.py failed")
+    message(FATAL_ERROR "rebrew order-sources failed")
   endif()
   string(REPLACE "\n" ";" SERVER_SOURCES "${ORDERED_SOURCES}")
 
@@ -151,7 +165,7 @@ if(REBREW_BUILD_SERVER)
   # Link the .data gap TU next: it declares the raw .data bytes our game TUs
   # do not emit (original [0x3000:0xe000]), so the raw link's .data rsz reaches
   # 0xe000 and the section-derived header fields fall out of the link.
-  set(_DATA_GAP "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/data_gap.c")
+  set(_DATA_GAP "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/data_restore.c")
   list(REMOVE_ITEM SERVER_SOURCES "${_DATA_GAP}")
   list(INSERT SERVER_SOURCES 1 "${_DATA_GAP}")
 
