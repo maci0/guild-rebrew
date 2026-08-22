@@ -1,69 +1,21 @@
 #!/bin/bash
-# Wine wrapper for MSVC 6.0 CL.EXE — used as CMAKE_C_COMPILER
-# Translates Unix paths to Wine Z:\ paths and invokes CL.EXE via Wine.
-
+# Docker wrapper for MSVC 6.0 CL.EXE — used as CMAKE_C_COMPILER.
+# Runs CL.EXE inside the rebrew/msvc:6.0-win32 docker image (wine inside).
 set -euo pipefail
-
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-MSVC_ROOT="$SCRIPT_DIR/MSVC600/VC98"
+. "$SCRIPT_DIR/msvc6-wine-common.sh"
 
-# Set INCLUDE and LIB for CL.EXE
-export WINEPATH="$(winepath -w "$MSVC_ROOT/Bin" 2>/dev/null || echo "Z:${MSVC_ROOT//\//\\}\\Bin")"
-export INCLUDE="$(winepath -w "$MSVC_ROOT/Include" 2>/dev/null || echo "Z:${MSVC_ROOT//\//\\}\\Include")"
-export LIB="$(winepath -w "$MSVC_ROOT/Lib" 2>/dev/null || echo "Z:${MSVC_ROOT//\//\\}\\Lib")"
-
-CL_EXE="$MSVC_ROOT/Bin/CL.EXE"
-
-# Convert a Unix path to a Wine Z:\ path
-to_wine_path() {
-    local p="$1"
-    # Only convert absolute Unix paths
-    if [[ "$p" == /* ]]; then
-        echo "Z:${p//\//\\}"
-    else
-        echo "$p"
-    fi
-}
-
-# Rewrite arguments: translate paths in flags CL.EXE cares about
 args=()
 for arg in "$@"; do
     case "$arg" in
-        # /I<dir> — include path
-        /I/*)
-            dir="${arg#/I}"
-            args+=("/I$(to_wine_path "$dir")")
-            ;;
-        # /Fo<path> — object output
-        /Fo/*)
-            path="${arg#/Fo}"
-            args+=("/Fo$(to_wine_path "$path")")
-            ;;
-        # /Fd<path> — PDB output
-        /Fd/*)
-            path="${arg#/Fd}"
-            args+=("/Fd$(to_wine_path "$path")")
-            ;;
-        # /Fe<path> — executable output
-        /Fe/*)
-            path="${arg#/Fe}"
-            args+=("/Fe$(to_wine_path "$path")")
-            ;;
-        # /Fp<path> — precompiled header
-        /Fp/*)
-            path="${arg#/Fp}"
-            args+=("/Fp$(to_wine_path "$path")")
-            ;;
-        # Source files and other absolute paths
-        /home/*|/tmp/*)
-            args+=("$(to_wine_path "$arg")")
-            ;;
-        *)
-            args+=("$arg")
-            ;;
+        /I*) dir="${arg#/I}"; [[ "$dir" == /* ]] && dir="$(msvc_to_w "$dir")"; args+=("/I$dir") ;;
+        /Fo*) p="${arg#/Fo}"; [[ "$p" == *".obj"* ]] && { [[ "$p" == /* ]] && p="$(msvc_to_w "$p")" || { [[ "$p" == *.obj ]] && p="$(msvc_to_w "$(pwd)/$p")"; }; }; args+=("/Fo$p") ;;
+        /Fd*) p="${arg#/Fd}"; [[ "$p" == /* ]] && p="$(msvc_to_w "$p")" || { [[ -n "$p" && "$p" != "-" ]] && p="$(msvc_to_w "$(pwd)/$p")"; }; args+=("/Fd$p") ;;
+        /Fe*) p="${arg#/Fe}"; [[ "$p" == /* ]] && p="$(msvc_to_w "$p")"; args+=("/Fe$p") ;;
+        /Fp*) p="${arg#/Fp}"; [[ "$p" == /* ]] && p="$(msvc_to_w "$p")"; args+=("/Fp$p") ;;
+        /*.c|/*.cpp|/*.cc|/*.cxx) args+=("$(msvc_to_w "$arg")") ;;
+        /home/*|/tmp/*|/gamatcher/*) args+=("$(msvc_to_w "$arg")") ;;
+        *) args+=("$arg") ;;
     esac
 done
-
-# Run CL.EXE via Wine, strip \r from output so CMake can parse it
-wine "$CL_EXE" "${args[@]}" 2>&1 | tr -d '\r'
-exit "${PIPESTATUS[0]}"
+msvc_docker_run CL.EXE "${args[@]}"

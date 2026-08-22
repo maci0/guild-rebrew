@@ -1,4 +1,13 @@
-# CMake toolchain file for MSVC 6.0 via Wine
+# CMake toolchain file for MSVC 6.0 via the rebrew docker image
+#
+# CL.EXE / LINK.EXE / LIB.EXE run inside rebrew/msvc:6.0-win32 (wine inside
+# the image) through the tools/msvc6-wine-{cl,link,lib} wrappers; the host
+# never calls the MSVC binaries directly.  The wrappers same-path mount the
+# project root into the container, so absolute paths in the command line
+# resolve identically inside it.
+#
+# Requirements: the docker image must be built first:
+#   rebrew toolchain build msvc6     (or: rebrew toolchain pull msvc6)
 #
 # Usage:
 #   cmake -B build --toolchain cmake/toolchain-msvc6-wine.cmake -DCMAKE_BUILD_TYPE=Release

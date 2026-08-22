@@ -1,5 +1,6 @@
 #!/bin/bash
-# Build server.dll using MSVC6 via Wine
+# Build server.dll using MSVC6 via the rebrew docker image
+# (rebrew/msvc:6.0-win32 — wine inside; run `rebrew toolchain build msvc6` first).
 #
 # Usage: ./build-win.sh [options]
 #   -j, --jobs N    Number of parallel jobs (default: 8)

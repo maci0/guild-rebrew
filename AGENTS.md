@@ -5,7 +5,8 @@
 ## Project
 
 - **Target**: `server.dll` (pe, x86_32)
-- **Compiler**: msvc6 (`wine tools/MSVC600/VC98/Bin/CL.EXE`)
+- **Compiler**: msvc6 (docker image `rebrew/msvc:6.0-win32` — wine inside; the
+  CMake build runs it through `tools/msvc6-wine-{cl,link,lib}`)
 - **Language**: C89 — follow compiler constraints below
 - **Config**: `rebrew-project.toml` (all tools read from here)
 
@@ -88,7 +89,9 @@ relocations) > `NEAR_MATCHING` (close) > `STUB` (incomplete)
 - **Comments in code**: use `/* */` only (C89). `//` is used exclusively for annotation headers
 - **Symbol decoration**: `_func` for `__cdecl`, `_func@N` for `__stdcall`
 - **No `/GS`** (buffer security), no `__declspec(noinline)`
-- **Execution**: all CL.EXE/LINK.EXE calls go through Wine
+- **Execution**: all CL.EXE/LINK.EXE calls run through the docker image
+  (`rebrew/msvc:6.0-win32`); build it with `rebrew toolchain build msvc6`
+  before `cmake --build`
 
 ## Agent Skills
 
