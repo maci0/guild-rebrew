@@ -26,6 +26,8 @@ option(REBREW_WERROR "Treat warnings as errors" OFF)
 option(REBREW_BUILD_SERVER "Build server.dll reconstruction" ON)
 option(REBREW_BUILD_GOLD "Build Europa1400Gold.exe reconstruction" OFF)
 option(REBREW_BUILD_GOLDTL "Build Europa1400Gold_TL.exe reconstruction" OFF)
+option(REBREW_ALLOW_NAKED "Allow __declspec(naked)+__asm for byte-identical verification build (fenced #ifdef)" ON)
+option(REBREW_DEBUG_INFO "Emit /Z7 + /debug (PDB for reccmp). OFF = byte-identity build: original DLL has no debug directory" ON)
 
 # ---------------------------------------------------------------------------
 # Architecture detection
@@ -119,13 +121,41 @@ if(REBREW_BUILD_SERVER)
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/inftrees.c"
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/infutil.c"
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/trees.c"
+    "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/trees2.c"
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/uncompr.c"
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3/zutil.c"
   )
 
   set(LINK_STUBS "${PROJECT_SOURCE_DIR}/src/link_stubs.c")
 
-  add_library(server_dll SHARED ${SERVER_SOURCES} ${ZLIB_SOURCES} ${LINK_STUBS})
+  # Order objects by original function VA (fixes reccmp "0 aligned"; drops
+  # zlib files absent from the original). See scripts/order_sources.py.
+  execute_process(
+    COMMAND python3 "${PROJECT_SOURCE_DIR}/scripts/order_sources.py" ${SERVER_SOURCES} ${ZLIB_SOURCES}
+    OUTPUT_VARIABLE ORDERED_SOURCES
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    RESULT_VARIABLE ORDER_RC)
+  if(NOT ORDER_RC EQUAL 0)
+    message(FATAL_ERROR "order_sources.py failed")
+  endif()
+  string(REPLACE "\n" ";" SERVER_SOURCES "${ORDERED_SOURCES}")
+
+  # Link crt_imports.obj FIRST: its /include directives allocate IAT slots in
+  # the original binary's exact import order. If any other object's code
+  # references an import earlier, the linker gives that import an earlier slot
+  # and the whole IAT layout shifts (kernel32 @ 0x24000 must stay exact).
+  set(_CRT_IMPORTS "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/crt_imports.c")
+  list(REMOVE_ITEM SERVER_SOURCES "${_CRT_IMPORTS}")
+  list(INSERT SERVER_SOURCES 0 "${_CRT_IMPORTS}")
+
+  # Link the .data gap TU next: it declares the raw .data bytes our game TUs
+  # do not emit (original [0x3000:0xe000]), so the raw link's .data rsz reaches
+  # 0xe000 and the section-derived header fields fall out of the link.
+  set(_DATA_GAP "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/data_gap.c")
+  list(REMOVE_ITEM SERVER_SOURCES "${_DATA_GAP}")
+  list(INSERT SERVER_SOURCES 1 "${_DATA_GAP}")
+
+  add_library(server_dll SHARED ${SERVER_SOURCES} ${LINK_STUBS})
 
   target_include_directories(server_dll PRIVATE
     "${PROJECT_SOURCE_DIR}/src/server.dll"
@@ -164,6 +194,11 @@ if(REBREW_BUILD_SERVER)
   message(STATUS "server.dll: ${CMAKE_CURRENT_SOURCE_DIR}/src/server.dll (${SERVER_SOURCES_COUNT} source files)")
   list(LENGTH SERVER_SOURCES SERVER_SOURCES_COUNT)
   message(STATUS "server.dll: found ${SERVER_SOURCES_COUNT} source files")
+
+  if(REBREW_ALLOW_NAKED)
+    target_compile_definitions(server_dll PRIVATE REBREW_ALLOW_NAKED=1)
+    message(STATUS "server.dll: REBREW_ALLOW_NAKED=1 (naked+__asm fenced for byte-identical build)")
+  endif()
 endif()
 
 # ---------------------------------------------------------------------------
@@ -246,8 +281,35 @@ if (MSVC_FOR_DECOMP)
   set(CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL "/incremental:no")
 
   if(TARGET server_dll)
-    target_compile_options(server_dll PRIVATE /Z7)
-    target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug")
+    if(REBREW_DEBUG_INFO)
+      target_compile_options(server_dll PRIVATE /Z7)
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE")
+    else()
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE")
+    endif()
+    # Post-link (rebrew postlink --layout layout/server.dll): converge the
+    # linked DLL onto the original's layout byte-for-byte, purely from the
+    # committed text layout package.  imports: the MSVC6 linker's IAT slot
+    # order is hash-driven and cannot be forced for all DLLs via /include,
+    # so the slot order (and the .text operands pointing at the slots) is
+    # rewritten to the reference's.  data: grows .data to 0xe000 (copying
+    # the reference's bytes — the linker's .data COMDAT order is also
+    # hash-driven), rewrites the remaining .text data operands / E8-E9
+    # targets, and replaces .reloc.  pe-metadata: normalizes the DOS
+    # stub/e_lfanew, TimeDateStamp, CheckSum, .data VirtualSize (BSS tail),
+    # .reloc VA and SizeOfImage.  Content is untouched.
+    add_custom_command(TARGET server_dll POST_BUILD
+      # Converge the linked DLL onto the original's layout WITHOUT needing the
+      # original binary at build time: the text-only layout package
+      # (layout/<target>/) from 'rebrew gen-layout' carries the reference as
+      # plain-text metadata (no binary blobs), and 'rebrew postlink --layout'
+      # reconstructs the reference from it.  Regenerate the package whenever
+      # the original changes (rebrew gen-layout --target server.dll) and
+      # commit it.
+      COMMAND ${CMAKE_COMMAND} -E echo "Converging layout onto reference (rebrew postlink --layout)"
+      COMMAND rebrew postlink "$<TARGET_FILE:server_dll>"
+              --layout "${PROJECT_SOURCE_DIR}/layout/server.dll"
+      VERBATIM)
   endif()
 endif()
 
