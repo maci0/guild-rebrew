@@ -51,7 +51,6 @@ cand_swap.c
 *.c.tmp
 
 # Others
-flirt_sigs/
 .sisyphus/
 
 reccmp-build.yml
