@@ -6,6 +6,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * For 'join', finds an empty election slot and assigns the player.
  * For 'leav', finds the player's slot and clears it. */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000fd50
 __declspec(naked) int __cdecl cm_ExJoinLeaveElection(int cmd, char* result)
 {

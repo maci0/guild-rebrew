@@ -101,8 +101,8 @@ def get_unresolved_symbols_from_build():
 
     # Temporarily remove link_stubs from CMake
     modified = cmake_content.replace(
-        "add_library(server_dll SHARED ${SERVER_SOURCES} ${ZLIB_SOURCES} ${LINK_STUBS})",
-        "add_library(server_dll SHARED ${SERVER_SOURCES} ${ZLIB_SOURCES})",
+        "add_library(server_dll SHARED ${SERVER_SOURCES} ${LINK_STUBS})",
+        "add_library(server_dll SHARED ${SERVER_SOURCES})",
     )
 
     if modified == cmake_content:
@@ -268,6 +268,33 @@ def parse_extern_decl(decl):
             }
 
     return None
+
+
+def _type_size(t):
+    """Byte size of a simplified stub type (used for BSS accounting)."""
+    t = t.strip()
+    if t in ("double",):
+        return 8
+    if t in ("char", "unsigned char", "signed char", "bool"):
+        return 1
+    if t in ("short", "unsigned short", "wchar_t"):
+        return 2
+    if "*" in t or t in ("int", "unsigned int", "long", "unsigned long",
+                         "float", "void*", "int*", "short*", "char*", "unsigned char*"):
+        return 4
+    return 4
+
+
+def _type_align(t):
+    """Alignment of a simplified stub type (linker COMDAT alignment)."""
+    t = t.strip()
+    if t in ("double",):
+        return 8
+    if t in ("char", "unsigned char", "signed char", "bool"):
+        return 1
+    if t in ("short", "unsigned short", "wchar_t"):
+        return 2
+    return 4
 
 
 def simplify_type_for_stub(type_str):
@@ -478,24 +505,129 @@ def generate_link_stubs(unresolved_symbols, extern_info):
                 globals_list.append(name)
 
     # --- Emit global variables ---
+    # All stubs are zero-initialized (non-tentative) so MSVC6 emits them into
+    # the object's .bss -> PE .data VirtualSize with raw=0, deterministically.
+    # A single tail pad then grows .data VS to the original's 0x174059c
+    # (measured against the current initialized raw, see _CURRENT_INIT_RAW).
+    # The running offset tracks the linker's per-symbol alignment so the tail
+    # is sized exactly (VS = raw + aligned stub bytes + tail).
     lines.append("/* Global variable stubs */")
+    lines.append("#include <time.h>")
+    lines.append("")
+    bss_off = 0x3000  # initialized raw precedes these stubs in .data (see _CURRENT_INIT_RAW)
     for name in sorted(globals_list):
         info = extern_info.get(name)
         if info:
             var_type = simplify_type_for_stub(info["type"])
             if info["is_array"]:
-                size = info["array_size"] or "1"
-                lines.append(f"{var_type} {name}[{size}];")
+                size = int(info["array_size"] or "1", 0)
+                lines.append(f"{var_type} {name}[{size}] = {{0}};")
+                align = _type_align(var_type)
             else:
-                if name == "pfn_GetTickCount":
-                    lines.append(f"{var_type} {name} = 0;")
-                else:
-                    lines.append(f"{var_type} {name};")
+                size = _type_size(var_type)
+                lines.append(f"{var_type} {name} = 0;")
+                align = _type_align(var_type)
         else:
-            # Fallback: int for unknown globals
-            lines.append(f"int {name};")
+            size, align = 4, 4
+            lines.append(f"int {name} = 0;")
+        bss_off = (bss_off + align - 1) & ~(align - 1)
+        bss_off += size
 
+    # Big BSS arrays declared `extern TYPE x[]` in the sources.  They must be
+    # DEFINED non-tentatively: tentative defs become COMMON weak symbols the
+    # linker parks at the END of .data, and code that folds a struct offset
+    # into the symbol base (e.g. g_player_slot_0[i].data -> base + 0x2641fc)
+    # then lands beyond the postlink rewrite range, breaking byte identity.
+    # Sizes here are the real slot strides so the packed layout matches the
+    # original's BSS region addresses closely enough for the operand rewrite.
+    BSS_ARRAYS = [
+        ("g_player_slot_0", 0x264264),
+        ("g_player_slot_field", 4),
+        ("g_player_slot_overflow", 0x264264),
+    ]
+    if BSS_ARRAYS:
+        lines.append("/* Big BSS arrays (non-tentative; see BSS_ARRAYS) */")
+        for _name, _size in BSS_ARRAYS:
+            lines.append(f"char {_name}[0x{_size:x}] = {{0}};")
+            bss_off = (bss_off + 1 - 1) & ~0  # char: 1-aligned
+            bss_off += _size
+        lines.append("")
     lines.append("")
+
+    # --- BSS padding to match original .data VirtualSize ---
+    # Original .data covers 0x10027000 .. 0x1176759c (VS 0x174059c).
+    # Huge sparse gaps (BSS) must be represented as uninitialized data in
+    # .data so VS grows but SizeOfRawData stays ~0xE000.  MSVC puts
+    # uninitialized globals in .bss by default; "#pragma bss_seg(\".data\")"
+    # forces them into .data's BSS (no extra section, proper VS).
+    # Sizes are derived from rebrew-data.toml gaps; intermediate small
+    # gaps are collapsed into a single pad per large hole.
+    try:
+        import tomllib as _toml
+        _toml_path = PROJECT_ROOT / "src" / "rebrew-data.toml"
+        if _toml_path.exists():
+            with open(_toml_path, "rb") as _f:
+                _db = _toml.load(_f)
+            _data_items = []
+            for _k, _v in _db.items():
+                if _v.get("section") == ".data":
+                    try:
+                        _addr = int(_k.split(".")[1], 16)
+                    except Exception:
+                        continue
+                    _data_items.append((_addr, _v.get("name", ""), _v.get("type", "int")))
+            _data_items.sort()
+            # type size helper for current symbol
+            def _tsz(t):
+                t = t.strip()
+                if t in ("double",): return 8
+                if t in ("int", "unsigned int", "float", "char*", "void*", "unsigned char*", "unsigned short*", "int*", "short*"): return 4
+                if t in ("short", "unsigned short"): return 2
+                if t in ("char", "unsigned char"): return 1
+                if "*" in t: return 4
+                return 4
+            # emit pads for gaps > 0x1000
+            _pads = []
+            for _i in range(len(_data_items)-1):
+                _cur_addr, _cur_name, _cur_type = _data_items[_i]
+                _nxt_addr = _data_items[_i+1][0]
+                # estimate cur size = type size (arrays in toml are scalar char placeholders)
+                _cur_sz = _tsz(_cur_type)
+                # if two symbols share same addr (overlap) skip
+                if _nxt_addr <= _cur_addr:
+                    continue
+                _gap = _nxt_addr - (_cur_addr + _cur_sz)
+                if _gap > 0x1000:
+                    _pads.append((_cur_addr, _nxt_addr, _gap))
+            # tail pad to original .data end
+            _orig_data_base = 0x10027000
+            _orig_data_vs = 0x174059c
+            _orig_end = _orig_data_base + _orig_data_vs  # 0x1176759c
+            if _data_items:
+                _last_addr, _last_name, _last_type = _data_items[-1]
+                _last_sz = _tsz(_last_type)
+                _tail = _orig_end - (_last_addr + _last_sz)
+                if _tail > 0:
+                    _pads.append((_last_addr, _orig_end, _tail))
+            # Emit the BSS tail pad as zero-init (-> .bss, raw=0, grows VS).
+            # Sized so .data VirtualSize lands exactly on the original's
+            # 0x174059c.  The model offset (bss_off, starting at the assumed
+            # 0x3000 raw) differs from the linker's actual placement by a
+            # stable amount — the .data gap TU (crt_region/data_gap.c, linked
+            # first) now carries the raw to 0xe000, plus per-symbol alignment
+            # and the CRT <common> tail.  _BSS_CALIBRATION absorbs it and was
+            # calibrated against the verified byte-identical build (tail
+            # 0x1269f30).  RE-CALIBRATE after any regeneration: relink raw
+            # and adjust so .data VS reads 0x174059c.
+            _BSS_CALIBRATION = -0xB0DC
+            _bss_tail = _orig_data_vs - bss_off + _BSS_CALIBRATION
+            if _bss_tail > 0:
+                lines.append("/* BSS tail pad: grows .data VS to the original's 0x174059c */")
+                lines.append(f"unsigned char g_bss_tail[0x{_bss_tail:x}] = {{0}};")
+                lines.append("")
+    except Exception as _e:
+        lines.append(f"/* BSS pad generation failed: {_e} */")
+        lines.append("")
 
     # --- Emit string literal globals ---
     if string_globals:
@@ -558,6 +690,24 @@ def generate_link_stubs(unresolved_symbols, extern_info):
     return "\n".join(lines) + "\n"
 
 
+def load_library_symbols():
+    """Return the set of decorated symbol names tagged 'library' in the
+    functions CSV. These are satisfied by the static CRT lib (LIBCMT) — the
+    linker pulls the members naturally; stubbing them would shadow the lib."""
+    library_symbols = set()
+    csv_path = PROJECT_ROOT / "db" / "server.dll_functions.csv"
+    if not csv_path.exists():
+        return library_symbols
+    for line in csv_path.read_text().splitlines():
+        parts = line.split("|")
+        if len(parts) >= 5 and parts[3] == "library":
+            if parts[2]:
+                library_symbols.add(parts[2])
+            if parts[1]:
+                library_symbols.add(parts[1])
+    return library_symbols
+
+
 def main():
     parser = argparse.ArgumentParser(description="Generate link_stubs.c from unresolved symbols")
     parser.add_argument(
@@ -582,6 +732,29 @@ def main():
 
     if not unresolved:
         print("No unresolved symbols found. Is the build configured correctly?", file=sys.stderr)
+        sys.exit(1)
+
+    # Filter out CRT library symbols — LIBCMT provides them (do not stub).
+    # Exceptions: library-tagged symbols the LIB does not actually provide
+    # (zlib wrappers implemented in game code).
+    KEEP_STUB_EXCEPTIONS = {"_vfs_Crc32Update"}
+    library_symbols = load_library_symbols()
+    stubbed = set()
+    skipped = set()
+    for sym in unresolved:
+        if (sym in KEEP_STUB_EXCEPTIONS or
+                demangle_cdecl(sym) in KEEP_STUB_EXCEPTIONS):
+            stubbed.add(sym)
+        elif sym in library_symbols or demangle_cdecl(sym) in library_symbols:
+            skipped.add(sym)
+        else:
+            stubbed.add(sym)
+    if skipped:
+        print(f"Skipping {len(skipped)} library symbols (provided by LIBCMT)", file=sys.stderr)
+    unresolved = sorted(stubbed)
+
+    if not unresolved:
+        print("All unresolved symbols are library symbols.", file=sys.stderr)
         sys.exit(1)
 
     print(f"Found {len(unresolved)} unresolved symbols", file=sys.stderr)

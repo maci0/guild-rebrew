@@ -46,9 +46,9 @@ int __cdecl cm_ChkSetGebBesitzer(char* obj)
 		return 0;
 	}
 	LogMessageInternal(
-		s_D__Develop_DieGildeAddOn_command_1002c748,
+		"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 		0x256b,
-		s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74,
+		"cm_ChkSetGebBesitzer() Invalid Id or inavlid status",
 		1
 	);
 	return 1;

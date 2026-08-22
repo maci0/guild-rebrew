@@ -53,9 +53,9 @@ int __cdecl cm_ExAllocRaum(int cmd, char* result)
 		}
 		if ((ushort) i >= 0x300) {
 			LogMessageInternal(
-				s_D__Develop_DieGildeAddOn_command_1002c748,
+				"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 				0x280b,
-				s_Invalid__GI_Id__for_cmdt_ALLOC_B_1002caf0,
+				"Invalid 'eigentuemer_id' for cmdt_ALLOC_OBJEKT in cm_ExecCommand()",
 				1
 			);
 			return 1;
@@ -64,9 +64,9 @@ int __cdecl cm_ExAllocRaum(int cmd, char* result)
 	building = gm_AllocGebaeude(*(uchar*) (cmd + 0x14), i);
 	if (building == (char*) 0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x2817,
-			s_gm_AllocGebaeude___failed_1002cb34,
+			"gm_AllocGebaeude() failed",
 			1
 		);
 		return 1;

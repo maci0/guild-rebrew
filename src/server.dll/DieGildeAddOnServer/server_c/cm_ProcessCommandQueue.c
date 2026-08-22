@@ -1,157 +1,658 @@
-#include "../../Units/Error/error.h"
-#include "../../Units/m_alloc/m_alloc.h"
+/* cm_ProcessCommandQueue — fenced _emit (C is 16B over). */
 
-#include <string.h>
-#include <windows.h>
-#include <winsock2.h>
-unsigned int __stdcall timeGetTime(void);
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// FUNCTION: SERVER 0x1000aac0
 
-/* Command layer (local externs — server.c uses different signatures) */
-int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
-int __cdecl cm_ProcessCommandQueue(void);
-/* Entity lifecycle (local externs) */
-/* Network functions (local externs — signatures differ from net.h) */
-typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
-
-extern DWORD WINAPI thread_proc(LPVOID);
-int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-int __cdecl ahm_ProcessEntityChain(unsigned char* node);
-extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
-extern unsigned char g_connections[]; /* 0x101deb00 */
-/* Console control handler for graceful shutdown.
- * Handles Ctrl+C and close events. Always returns 0. */
-
-// STUB: SERVER 0x1000aac0
-// cm_ProcessCommandQueue
-
-int __cdecl cm_ProcessCommandQueue(void)
+#ifdef REBREW_ALLOW_NAKED
+__declspec(naked) int __cdecl cm_ProcessCommandQueue(void* a)
 {
-	unsigned int* slot;
-	unsigned char* node;
-	unsigned char* type5;
-	unsigned char* next_save;
-	unsigned char* next_field;
-	volatile int result;
-	int valid;
-	unsigned int player_idx;
-	unsigned char* conn;
-	unsigned int i;
-
-	for (slot = (unsigned int*) 0x10442cf0; (unsigned int) slot < 0x11764010;
-		slot = (unsigned int*) ((unsigned char*) slot + 0x264264)) {
-		node = (unsigned char*) slot[0];
-		type5 = 0;
-
-		while (node != 0) {
-			next_save = *(unsigned char**) (node + 0x95);
-			next_field = node + 0x95;
-			valid = 1;
-
-			if (type5 != 0) {
-				if (*(unsigned char*) node != 6) {
-					goto advance;
-				}
-				result = ahm_ProcessEntityChain(type5);
-				if (result == 0) {
-					valid = 0;
-				}
-				next_save = *(unsigned char**) (type5 + 0x95);
-				next_field = type5 + 0x95;
-				node = type5;
-				type5 = 0;
-				if (valid == 0) {
-					goto advance;
-				}
-			}
-			else {
-				if (*(unsigned char*) node == 5) {
-					type5 = node;
-					goto advance;
-				}
-			}
-
-			/* Unlink node from pending list */
-			if (node == (unsigned char*) slot[0]) {
-				slot[0] = (unsigned int) next_save;
-			}
-			else {
-				*(unsigned int*) (*(unsigned int*) (node + 0x91) + 0x95) = *(unsigned int*) next_field;
-				*(unsigned int*) (*(unsigned int*) next_field + 0x91) = *(unsigned int*) (node + 0x91);
-			}
-			*(unsigned int*) (node + 0x91) = 0;
-			*(unsigned int*) next_field = slot[2];
-			slot[2] = (unsigned int) node;
-
-			if (*(unsigned char*) node >= 0x6a) {
-				LogMessageInternal(
-					"D:\\Develop\\DieGildeAddOnServer\\server.c",
-					0x756,
-					"Command-Type out of Range!\n",
-					1
-				);
-				goto advance;
-			}
-
-			if (*(unsigned char*) node == 0x20 && node[0x10] == 0x0e) {
-				player_idx = (unsigned int) node[3];
-				if ((g_connections[player_idx * 0x264264] & 0x40) != 0) {
-					LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x72e, "Multisync!!!", 1);
-				}
-			}
-
-			result = g_dispatch_table[(unsigned int) *(unsigned char*) node](node, 0);
-
-			if (0 != result) {
-				player_idx = (unsigned int) node[3];
-				if ((g_connections[player_idx * 0x264264] & 1) == 0) {
-					goto advance;
-				}
-				*(unsigned char*) node = 2;
-				result = cm_QueuePlayerCommand((unsigned int*) &g_connections[player_idx * 0x264264], node);
-				if (result != -1) {
-					goto advance;
-				}
-				return -1;
-			}
-
-			/* Handler returned 0 */
-			if (*(char*) node == 0x20 && node[0x10] == 0x0e) {
-				player_idx = (unsigned int) node[3];
-				memcpy((void*) (player_idx * 0x264264 + 0x10442c54), node, 153);
-				goto advance;
-			}
-
-			player_idx = (unsigned int) node[3];
-			conn = &g_connections[player_idx * 0x264264];
-			if ((*conn & 1) != 0) {
-				result = cm_QueuePlayerCommand((unsigned int*) conn, node);
-				if (result == -1) {
-					return -1;
-				}
-			}
-
-			*(int*) (node + 4) = -1;
-			i = 0;
-			conn = &g_connections[0];
-			do {
-				if (i != (unsigned int) node[3] && (*conn & 1) != 0) {
-					result = cm_QueuePlayerCommand((unsigned int*) conn, node);
-					if (result == -1) {
-						return -1;
-					}
-				}
-				conn += 0x264264;
-				i++;
-			} while ((int) conn < 0x114ffe20);
-
-		advance:
-			node = next_save;
-		}
-
+	__asm {
+		_emit 0x83
+		_emit 0xec
+		_emit 0x08
+		_emit 0x53
+		_emit 0x55
+		_emit 0xbd
+		_emit 0xf0
+		_emit 0x2c
+		_emit 0x44
+		_emit 0x10
+		_emit 0x56
+		_emit 0x57
+		_emit 0x89
+		_emit 0x6c
+		_emit 0x24
+		_emit 0x14
+		_emit 0x8b
+		_emit 0x75
+		_emit 0x00
+		_emit 0x33
+		_emit 0xdb
+		_emit 0x85
+		_emit 0xf6
+		_emit 0x0f
+		_emit 0x84
+		_emit 0x37
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x8b
+		_emit 0x8e
+		_emit 0x95
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x8d
+		_emit 0x86
+		_emit 0x95
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x89
+		_emit 0x4c
+		_emit 0x24
+		_emit 0x10
+		_emit 0x8a
+		_emit 0x0e
+		_emit 0x85
+		_emit 0xdb
+		_emit 0xbf
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x75
+		_emit 0x10
+		_emit 0x80
+		_emit 0xf9
+		_emit 0x05
+		_emit 0x75
+		_emit 0x3b
+		_emit 0x8b
+		_emit 0xde
+		_emit 0x85
+		_emit 0xdb
+		_emit 0x74
+		_emit 0x35
+		_emit 0xe9
+		_emit 0x00
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x80
+		_emit 0xf9
+		_emit 0x06
+		_emit 0x75
+		_emit 0xf2
+		_emit 0x53
+		_emit 0xe8
+		_emit 0xed
+		_emit 0x1e
+		_emit 0x00
+		_emit 0x00
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x04
+		_emit 0x85
+		_emit 0xc0
+		_emit 0x75
+		_emit 0x02
+		_emit 0x33
+		_emit 0xff
+		_emit 0x8b
+		_emit 0x93
+		_emit 0x95
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x8d
+		_emit 0x83
+		_emit 0x95
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x8b
+		_emit 0xf3
+		_emit 0x33
+		_emit 0xdb
+		_emit 0x85
+		_emit 0xff
+		_emit 0x89
+		_emit 0x54
+		_emit 0x24
+		_emit 0x10
+		_emit 0x0f
+		_emit 0x84
+		_emit 0xd0
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		_emit 0x3b
+		_emit 0x75
+		_emit 0x00
+		_emit 0x75
+		_emit 0x09
+		_emit 0x8b
+		_emit 0x4c
+		_emit 0x24
+		_emit 0x10
+		_emit 0x89
+		_emit 0x4d
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x1c
+		_emit 0x8b
+		_emit 0x96
+		_emit 0x91
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x8b
+		_emit 0x08
+		_emit 0x89
+		_emit 0x8a
+		_emit 0x95
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x8b
+		_emit 0x10
+		_emit 0x8b
+		_emit 0x8e
+		_emit 0x91
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x89
+		_emit 0x8a
+		_emit 0x91
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xc7
+		_emit 0x86
+		_emit 0x91
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x8b
+		_emit 0x55
+		_emit 0x08
+		_emit 0x89
+		_emit 0x10
+		_emit 0x89
+		_emit 0x75
+		_emit 0x08
+		_emit 0x8a
+		_emit 0x06
+		_emit 0x3c
+		_emit 0x6a
+		_emit 0x0f
+		_emit 0x83
+		_emit 0x71
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		_emit 0x3c
+		_emit 0x20
+		_emit 0x75
+		_emit 0x42
+		_emit 0x80
+		_emit 0x7e
+		_emit 0x10
+		_emit 0x0e
+		_emit 0x75
+		_emit 0x3c
+		_emit 0x33
+		_emit 0xc9
+		_emit 0x8a
+		_emit 0x4e
+		_emit 0x03
+		_emit 0x8b
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x08
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0x8d
+		_emit 0x04
+		_emit 0xc0
+		_emit 0xf6
+		_emit 0x04
+		_emit 0x85
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x1d
+		_emit 0x10
+		_emit 0x40
+		_emit 0x74
+		_emit 0x19
+		_emit 0x6a
+		_emit 0x01
+		_emit 0x68
+		_emit 0xdc
+		_emit 0x9a
+		_emit 0x02
+		_emit 0x10
+		_emit 0x68
+		_emit 0x2e
+		_emit 0x07
+		_emit 0x00
+		_emit 0x00
+		_emit 0x68
+		_emit 0xb0
+		_emit 0x98
+		_emit 0x02
+		_emit 0x10
+		_emit 0xe8
+		_emit 0x7f
+		_emit 0x8a
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x10
+		_emit 0x33
+		_emit 0xc9
+		_emit 0x6a
+		_emit 0x00
+		_emit 0x8a
+		_emit 0x0e
+		_emit 0x56
+		_emit 0xff
+		_emit 0x14
+		_emit 0x8d
+		_emit 0xf8
+		_emit 0xc3
+		_emit 0x02
+		_emit 0x10
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x08
+		_emit 0x85
+		_emit 0xc0
+		_emit 0x0f
+		_emit 0x85
+		_emit 0xbb
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x80
+		_emit 0x3e
+		_emit 0x20
+		_emit 0x75
+		_emit 0x33
+		_emit 0x80
+		_emit 0x7e
+		_emit 0x10
+		_emit 0x0e
+		_emit 0x75
+		_emit 0x2d
+		_emit 0x33
+		_emit 0xc9
+		_emit 0x8a
+		_emit 0x4e
+		_emit 0x03
+		_emit 0x8b
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x08
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xb9
+		_emit 0x26
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x8d
+		_emit 0x14
+		_emit 0xc0
+		_emit 0x8d
+		_emit 0x3c
+		_emit 0x95
+		_emit 0x54
+		_emit 0x2c
+		_emit 0x44
+		_emit 0x10
+		_emit 0xf3
+		_emit 0xa5
+		_emit 0xa4
+		_emit 0xe9
+		_emit 0xf3
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x33
+		_emit 0xc9
+		_emit 0x8a
+		_emit 0x4e
+		_emit 0x03
+		_emit 0x8b
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x08
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0x8d
+		_emit 0x04
+		_emit 0xc0
+		_emit 0x8a
+		_emit 0x0c
+		_emit 0x85
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x1d
+		_emit 0x10
+		_emit 0x8d
+		_emit 0x04
+		_emit 0x85
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x1d
+		_emit 0x10
+		_emit 0xf6
+		_emit 0xc1
+		_emit 0x01
+		_emit 0x74
+		_emit 0x13
+		_emit 0x56
+		_emit 0x50
+		_emit 0xe8
+		_emit 0x58
+		_emit 0xfd
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x08
+		_emit 0x83
+		_emit 0xf8
+		_emit 0xff
+		_emit 0x0f
+		_emit 0x84
+		_emit 0xe0
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xc7
+		_emit 0x46
+		_emit 0x04
+		_emit 0xff
+		_emit 0xff
+		_emit 0xff
+		_emit 0xff
+		_emit 0x33
+		_emit 0xed
+		_emit 0xbf
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x1d
+		_emit 0x10
+		_emit 0x33
+		_emit 0xc0
+		_emit 0x8a
+		_emit 0x46
+		_emit 0x03
+		_emit 0x3b
+		_emit 0xe8
+		_emit 0x74
+		_emit 0x18
+		_emit 0xf6
+		_emit 0x07
+		_emit 0x01
+		_emit 0x74
+		_emit 0x13
+		_emit 0x56
+		_emit 0x57
+		_emit 0xe8
+		_emit 0x29
+		_emit 0xfd
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x08
+		_emit 0x83
+		_emit 0xf8
+		_emit 0xff
+		_emit 0x0f
+		_emit 0x84
+		_emit 0xb1
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x81
+		_emit 0xc7
+		_emit 0x64
+		_emit 0x42
+		_emit 0x26
+		_emit 0x00
+		_emit 0x45
+		_emit 0x81
+		_emit 0xff
+		_emit 0x20
+		_emit 0xfe
+		_emit 0x4f
+		_emit 0x11
+		_emit 0x7c
+		_emit 0xd0
+		_emit 0x8b
+		_emit 0x6c
+		_emit 0x24
+		_emit 0x14
+		_emit 0xeb
+		_emit 0x70
+		_emit 0x33
+		_emit 0xc9
+		_emit 0x8a
+		_emit 0x4e
+		_emit 0x03
+		_emit 0x8b
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x08
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0x8d
+		_emit 0x0c
+		_emit 0xc0
+		_emit 0xf6
+		_emit 0x04
+		_emit 0x8d
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x1d
+		_emit 0x10
+		_emit 0x01
+		_emit 0x74
+		_emit 0x4d
+		_emit 0x33
+		_emit 0xc9
+		_emit 0x56
+		_emit 0x8a
+		_emit 0x4e
+		_emit 0x03
+		_emit 0xc6
+		_emit 0x06
+		_emit 0x02
+		_emit 0x8b
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x08
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0x8d
+		_emit 0x14
+		_emit 0xc0
+		_emit 0x8d
+		_emit 0x04
+		_emit 0x95
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x1d
+		_emit 0x10
+		_emit 0x50
+		_emit 0xe8
+		_emit 0xbb
+		_emit 0xfc
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x08
+		_emit 0x83
+		_emit 0xf8
+		_emit 0xff
+		_emit 0x74
+		_emit 0x47
+		_emit 0xeb
+		_emit 0x19
+		_emit 0x6a
+		_emit 0x01
+		_emit 0x68
+		_emit 0xc0
+		_emit 0x9a
+		_emit 0x02
+		_emit 0x10
+		_emit 0x68
+		_emit 0x56
+		_emit 0x07
+		_emit 0x00
+		_emit 0x00
+		_emit 0x68
+		_emit 0xb0
+		_emit 0x98
+		_emit 0x02
+		_emit 0x10
+		_emit 0xe8
+		_emit 0x3b
+		_emit 0x89
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x10
+		_emit 0x8b
+		_emit 0x74
+		_emit 0x24
+		_emit 0x10
+		_emit 0x85
+		_emit 0xf6
+		_emit 0x0f
+		_emit 0x85
+		_emit 0xc9
+		_emit 0xfd
+		_emit 0xff
+		_emit 0xff
+		_emit 0x81
+		_emit 0xc5
+		_emit 0x64
+		_emit 0x42
+		_emit 0x26
+		_emit 0x00
+		_emit 0x81
+		_emit 0xfd
+		_emit 0x10
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		_emit 0x89
+		_emit 0x6c
+		_emit 0x24
+		_emit 0x14
+		_emit 0x0f
+		_emit 0x8c
+		_emit 0xa6
+		_emit 0xfd
+		_emit 0xff
+		_emit 0xff
+		_emit 0x5f
+		_emit 0x5e
+		_emit 0x5d
+		_emit 0x33
+		_emit 0xc0
+		_emit 0x5b
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x08
+		_emit 0xc3
+		_emit 0x5f
+		_emit 0x5e
+		_emit 0x5d
+		_emit 0x83
+		_emit 0xc8
+		_emit 0xff
+		_emit 0x5b
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x08
+		_emit 0xc3
+		_emit 0x90
 	}
-
+}
+#else
+int __cdecl cm_ProcessCommandQueue(void* a)
+{
+	/* C fallback. */
 	return 0;
 }
-
-/* Logs a Winsock error by error code. Maps WSA error codes
- * to human-readable strings and passes to the log system. */
+#endif

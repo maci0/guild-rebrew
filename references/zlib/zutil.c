@@ -26,10 +26,14 @@ const char *z_errmsg[10] = {
 ""};
 
 
+/* stripped: not present in original DLL */
+#if 0
 const char * ZEXPORT zlibVersion()
 {
     return ZLIB_VERSION;
 }
+#endif
+
 
 #ifdef DEBUG
 
@@ -49,11 +53,15 @@ void z_error (m)
 /* exported to allow conversion of error code to string for compress() and
  * uncompress()
  */
+/* stripped: not present in original DLL */
+#if 0
 const char * ZEXPORT zError(err)
     int err;
 {
     return ERR_MSG(err);
 }
+#endif
+
 
 
 #ifndef HAVE_MEMCPY
@@ -210,14 +218,18 @@ voidpf zcalloc (opaque, items, size)
     unsigned items;
     unsigned size;
 {
-    if (opaque) items += size - size; /* make compiler happy */
-    return (voidpf)calloc(items, size);
+    /* The game's zlib build routes zcalloc through the nh_malloc thunk
+     * (0x1001a7f7) and zcfree through CRT free (0x1001ab81) directly,
+     * matching the original server.dll bytes. */
+    extern void* __cdecl nh_malloc_thunk(unsigned int size);
+    return (voidpf) nh_malloc_thunk(items * size);
 }
 
 void  zcfree (opaque, ptr)
     voidpf opaque;
     voidpf ptr;
 {
+    extern void __cdecl free(void*);
     free(ptr);
     if (opaque) return; /* make compiler happy */
 }

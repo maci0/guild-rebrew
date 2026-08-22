@@ -39,16 +39,16 @@ int __cdecl cm_ExEmployWorker(int cmd, char* result)
 	srand(random_seed);
 	building_entity = (ushort*) gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building_entity == (ushort*) 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x4d3a,
-			s_cm_ExEmployWorker____Illegal_geb_1002d33c, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x4d3a,
+			"cm_ExEmployWorker(): Illegal geb_id!", 1);
 		return 1;
 	}
 	citizen_entity = (char*) gm_LookupEntityRecordById(*(int*) (cmd + 0x19));
 	if (*(int*) (cmd + 0x14) != -1) {
 		workplace_entity = (ushort*) gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x14));
 		if (workplace_entity == (ushort*) 0) {
-			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x4d50,
-				s_cm_ExEmployWorker____Illegal_gw__1002d318, 1);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x4d50,
+				"cm_ExEmployWorker(): Illegal gw_id!", 1);
 			return 1;
 		}
 	}

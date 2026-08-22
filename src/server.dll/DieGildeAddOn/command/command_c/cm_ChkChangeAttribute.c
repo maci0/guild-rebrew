@@ -9,10 +9,10 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern char s_cm_ChkChangeAttribute___Invalid_I_1002c9e0[];
-extern char s_cm_ChkChangeAttribute___Error_i_1002c9a0[];
-extern char s_cm_ChkChangeAttribute___Source_obj_1002c958[];
-extern char s_cm_ChkChangeAttribute___Target_obj_1002c90c[];
+char s_cm_ChkChangeAttribute___Invalid_I_1002c9e0[] = "cm_ChkChangeAttribute() Invalid Id";
+char s_cm_ChkChangeAttribute___Error_i_1002c9a0[] = "cm_ChkChangeAttribute() Invalid action on player <<Change ID>>";
+char s_cm_ChkChangeAttribute___Source_obj_1002c958[] = "cm_ChkChangeAttribute() Invalid action on player <<ID does not exist>>";
+char s_cm_ChkChangeAttribute___Target_obj_1002c90c[] = "cm_ChkChangeAttribute() Invalid action on player <<PartnerID already set>>";
 
 #pragma pack(push, 1)
 // SIZE 0x4

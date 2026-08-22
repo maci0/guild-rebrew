@@ -47,9 +47,9 @@ int __cdecl cm_ExKillTransporter(int cmd, char* result)
 	record = gm_FindRecordById(*(int*) (cmd + 0x10));
 	if (record == (void*) 0x0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x52d8,
-			s_cm_ExKillTransporter____invalid_t_1002d3d4,
+			"cm_ExKillTransporter(): invalid trans->id",
 			1
 		);
 		return 1;

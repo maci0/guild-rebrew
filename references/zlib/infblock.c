@@ -9,15 +9,23 @@
 #include "infcodes.h"
 #include "infutil.h"
 
+/* The game's zlib build routes the CODES-branch ZFREE through the engine's
+ * dispatch helper (gm_DispatchCall(param, obj) == obj->fn24(obj->field28,
+ * param)); the pristine zfree indirect call is replaced.  Matches the
+ * original server.dll codegen (verified byte-for-byte). */
+extern int __cdecl gm_DispatchCall(int param, void* obj);
+
 struct inflate_codes_state {int dummy;}; /* for buggy compilers */
 
 /* simplify the use of the inflate_huft type with some defines */
 #define exop word.what.Exop
 #define bits word.what.Bits
 
-/* Table for deflate from PKZIP's appnote.txt. */
+/* Table for deflate from PKZIP's appnote.txt.  The original binary carries a
+ * trailing 0xffff0000 dword after the 19 entries (never indexed — the code
+ * only walks border[0..18]); we reproduce it so .rdata matches byte-for-byte. */
 local const uInt border[] = { /* Order of the bit length code lengths */
-        16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15};
+        16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15, 0xffff0000};
 
 /*
    Notes beyond the 1.93a appnote.txt:
@@ -75,7 +83,7 @@ uLongf *c;
   if (s->mode == BTREE || s->mode == DTREE)
     ZFREE(z, s->sub.trees.blens);
   if (s->mode == CODES)
-    inflate_codes_free(s->sub.decode.codes, z);
+    gm_DispatchCall(s->sub.decode.codes, z);
   s->mode = TYPE;
   s->bitk = 0;
   s->bitb = 0;
@@ -117,6 +125,8 @@ uInt w;
 }
 
 
+/* stripped: dumped as infblock_dump.c */
+#if 0
 int inflate_blocks(s, z, r)
 inflate_blocks_statef *s;
 z_streamp z;
@@ -158,7 +168,7 @@ int r;
             inflate_huft *tl, *td;
 
             inflate_trees_fixed(&bl, &bd, &tl, &td, z);
-            s->sub.decode.codes = inflate_codes_new(bl, bd, tl, td, z);
+            s->sub.decode.codes = (inflate_codes_statef *)ZALLOC(z, 1, 0x40);
             if (s->sub.decode.codes == Z_NULL)
             {
               r = Z_MEM_ERROR;
@@ -322,7 +332,7 @@ int r;
           LEAVE
         }
         Tracev((stderr, "inflate:       trees ok\n"));
-        if ((c = inflate_codes_new(bl, bd, tl, td, z)) == Z_NULL)
+        if ((c = (inflate_codes_statef *)ZALLOC(z, 1, 0x40)) == Z_NULL)
         {
           r = Z_MEM_ERROR;
           LEAVE
@@ -335,7 +345,7 @@ int r;
       if ((r = inflate_codes(s, z, r)) != Z_STREAM_END)
         return inflate_flush(s, z, r);
       r = Z_OK;
-      inflate_codes_free(s->sub.decode.codes, z);
+      ZFREE(z, s->sub.decode.codes);
       LOAD
       Tracev((stderr, "inflate:       codes end, %lu total out\n",
               z->total_out + (q >= s->read ? q - s->read :
@@ -362,8 +372,11 @@ int r;
       LEAVE
   }
 }
+#endif
 
 
+/* stripped: dumped */
+#if 0
 int inflate_blocks_free(s, z)
 inflate_blocks_statef *s;
 z_streamp z;
@@ -375,8 +388,12 @@ z_streamp z;
   Tracev((stderr, "inflate:   blocks freed\n"));
   return Z_OK;
 }
+#endif
 
 
+
+/* stripped: not present in original DLL */
+#if 0
 void inflate_set_dictionary(s, d, n)
 inflate_blocks_statef *s;
 const Bytef *d;
@@ -385,8 +402,12 @@ uInt  n;
   zmemcpy(s->window, d, n);
   s->read = s->write = s->window + n;
 }
+#endif
 
 
+
+/* stripped: inflate_blocks_sync_point not present in original DLL */
+#if 0
 /* Returns true if inflate is currently at the end of a block generated
  * by Z_SYNC_FLUSH or Z_FULL_FLUSH. 
  * IN assertion: s != Z_NULL
@@ -396,3 +417,5 @@ inflate_blocks_statef *s;
 {
   return s->mode == LENS;
 }
+#endif
+

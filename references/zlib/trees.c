@@ -150,14 +150,12 @@ local void send_tree      OF((deflate_state *s, ct_data *tree, int max_code));
 local int  build_bl_tree  OF((deflate_state *s));
 local void send_all_trees OF((deflate_state *s, int lcodes, int dcodes,
                               int blcodes));
-local void compress_block OF((deflate_state *s, ct_data *ltree,
-                              ct_data *dtree));
-local void set_data_type  OF((deflate_state *s));
-local unsigned bi_reverse OF((unsigned value, int length));
-local void bi_windup      OF((deflate_state *s));
-local void bi_flush       OF((deflate_state *s));
-local void copy_block     OF((deflate_state *s, charf *buf, unsigned len,
-                              int header));
+extern void vfs_CompressBlock (deflate_state *s, ct_data *ltree, ct_data *dtree);
+extern void set_data_type (deflate_state *s);
+extern unsigned bi_reverse (unsigned value, int length);
+extern void bi_windup (deflate_state *s);
+extern void bi_flush (deflate_state *s);
+extern void copy_block (deflate_state *s, charf *buf, unsigned len, int header);
 
 #ifdef GEN_TREES_H
 local void gen_trees_header OF((void));
@@ -985,7 +983,7 @@ void _tr_flush_block(s, buf, stored_len, eof)
     } else if (static_lenb == opt_lenb) {
 #endif
         send_bits(s, (STATIC_TREES<<1)+eof, 3);
-        compress_block(s, (ct_data *)static_ltree, (ct_data *)static_dtree);
+        vfs_CompressBlock(s, (ct_data *)static_ltree, (ct_data *)static_dtree);
 #ifdef DEBUG
         s->compressed_len += 3 + s->static_len;
 #endif
@@ -993,7 +991,7 @@ void _tr_flush_block(s, buf, stored_len, eof)
         send_bits(s, (DYN_TREES<<1)+eof, 3);
         send_all_trees(s, s->l_desc.max_code+1, s->d_desc.max_code+1,
                        max_blindex+1);
-        compress_block(s, (ct_data *)s->dyn_ltree, (ct_data *)s->dyn_dtree);
+        vfs_CompressBlock(s, (ct_data *)s->dyn_ltree, (ct_data *)s->dyn_dtree);
 #ifdef DEBUG
         s->compressed_len += 3 + s->opt_len;
 #endif
@@ -1018,6 +1016,8 @@ void _tr_flush_block(s, buf, stored_len, eof)
  * Save the match info and tally the frequency counts. Return true if
  * the current block must be flushed.
  */
+/* stripped: not present in original DLL */
+#if 0
 int _tr_tally (s, dist, lc)
     deflate_state *s;
     unsigned dist;  /* distance of matched string */
@@ -1064,10 +1064,14 @@ int _tr_tally (s, dist, lc)
      * 64K-1 bytes.
      */
 }
+#endif
+
 
 /* ===========================================================================
  * Send the block data compressed using the given Huffman trees
  */
+/* stripped: replaced by vfs_CompressBlock (game variant) */
+#if 0
 local void compress_block(s, ltree, dtree)
     deflate_state *s;
     ct_data *ltree; /* literal tree */
@@ -1114,6 +1118,8 @@ local void compress_block(s, ltree, dtree)
     send_code(s, END_BLOCK, ltree);
     s->last_eob_len = ltree[END_BLOCK].Len;
 }
+#endif
+
 
 /* ===========================================================================
  * Set the data type to ASCII or BINARY, using a crude approximation:
@@ -1121,94 +1127,3 @@ local void compress_block(s, ltree, dtree)
  * IN assertion: the fields freq of dyn_ltree are set and the total of all
  * frequencies does not exceed 64K (to fit in an int on 16 bit machines).
  */
-local void set_data_type(s)
-    deflate_state *s;
-{
-    int n = 0;
-    unsigned ascii_freq = 0;
-    unsigned bin_freq = 0;
-    while (n < 7)        bin_freq += s->dyn_ltree[n++].Freq;
-    while (n < 128)    ascii_freq += s->dyn_ltree[n++].Freq;
-    while (n < LITERALS) bin_freq += s->dyn_ltree[n++].Freq;
-    s->data_type = (Byte)(bin_freq > (ascii_freq >> 2) ? Z_BINARY : Z_ASCII);
-}
-
-/* ===========================================================================
- * Reverse the first len bits of a code, using straightforward code (a faster
- * method would use a table)
- * IN assertion: 1 <= len <= 15
- */
-local unsigned bi_reverse(code, len)
-    unsigned code; /* the value to invert */
-    int len;       /* its bit length */
-{
-    register unsigned res = 0;
-    do {
-        res |= code & 1;
-        code >>= 1, res <<= 1;
-    } while (--len > 0);
-    return res >> 1;
-}
-
-/* ===========================================================================
- * Flush the bit buffer, keeping at most 7 bits in it.
- */
-local void bi_flush(s)
-    deflate_state *s;
-{
-    if (s->bi_valid == 16) {
-        put_short(s, s->bi_buf);
-        s->bi_buf = 0;
-        s->bi_valid = 0;
-    } else if (s->bi_valid >= 8) {
-        put_byte(s, (Byte)s->bi_buf);
-        s->bi_buf >>= 8;
-        s->bi_valid -= 8;
-    }
-}
-
-/* ===========================================================================
- * Flush the bit buffer and align the output on a byte boundary
- */
-local void bi_windup(s)
-    deflate_state *s;
-{
-    if (s->bi_valid > 8) {
-        put_short(s, s->bi_buf);
-    } else if (s->bi_valid > 0) {
-        put_byte(s, (Byte)s->bi_buf);
-    }
-    s->bi_buf = 0;
-    s->bi_valid = 0;
-#ifdef DEBUG
-    s->bits_sent = (s->bits_sent+7) & ~7;
-#endif
-}
-
-/* ===========================================================================
- * Copy a stored block, storing first the length and its
- * one's complement if requested.
- */
-local void copy_block(s, buf, len, header)
-    deflate_state *s;
-    charf    *buf;    /* the input data */
-    unsigned len;     /* its length */
-    int      header;  /* true if block header must be written */
-{
-    bi_windup(s);        /* align on byte boundary */
-    s->last_eob_len = 8; /* enough lookahead for inflate */
-
-    if (header) {
-        put_short(s, (ush)len);   
-        put_short(s, (ush)~len);
-#ifdef DEBUG
-        s->bits_sent += 2*16;
-#endif
-    }
-#ifdef DEBUG
-    s->bits_sent += (ulg)len<<3;
-#endif
-    while (len--) {
-        put_byte(s, *buf++);
-    }
-}

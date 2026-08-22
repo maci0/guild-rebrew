@@ -8,15 +8,15 @@ status = "RELOC"
 analysis = "Core logging sink. Takes an output_mask bitfield: bit 0 writes to file (looking up the correct file name via severity in a global table), bit 2 writes to OutputDebugStringA (debugger), bit 3 writes to the allocated Win32 Console using WriteConsoleA."
 
 ["SERVER.0x10002770"]
-size = 1836
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 1727
+size = 2115
+status = "EXACT"
 analysis = "Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride)."
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10002fc0"]
 size = 376
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10003140"]
 size = 33
@@ -35,13 +35,15 @@ status = "EXACT"
 
 ["SERVER.0x10003320"]
 size = 404
-status = "RELOC"
+status = "EXACT"
 ghidra = "DecodePotentialControlTransfer"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100034c0"]
 size = 83
 status = "RELOC"
 analysis = "Initialization routine for the server's telemetry. Registers the CrashDumpUnhandledExceptionFilter. Allocates a console if requested via flags. Truncates log files (__server.log, gilde_server.log) if they exceed 64KB (0x10000 bytes) and seeds them with a startup banner. | If file logging is enabled, validate/rotate server log targets."
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10003520"]
 size = 160
@@ -91,26 +93,26 @@ status = "EXACT"
 
 ["SERVER.0x10006580"]
 size = 658
-status = "STUB"
-cflags = "/O2 /Oy- /Gd"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 578
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=2179763029 vs 0"
 
 ["SERVER.0x10006820"]
 size = 188
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100068e0"]
 size = 162
-status = "RELOC"
+status = "EXACT"
 analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10006990"]
 size = 612
-status = "STUB"
-blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
-blocker_delta = 586
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10006c00"]
 size = 283
@@ -131,11 +133,13 @@ ghidra = "cleanup_entity"
 
 ["SERVER.0x10008a90"]
 size = 492
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10008c80"]
 size = 129
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10008d10"]
 size = 301
@@ -143,14 +147,14 @@ status = "RELOC"
 
 ["SERVER.0x10008e40"]
 size = 472
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10009020"]
 size = 704
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
-blocker_delta = 626
+status = "PROVEN"
 analysis = "Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks."
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10009310"]
 size = 8
@@ -169,19 +173,18 @@ analysis = "Exported function called by the host engine to shut down the server 
 
 ["SERVER.0x100093a0"]
 size = 2434
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 2223
+status = "EXACT"
 analysis = "Core orchestration loop. Phase 1 (Lobby): Loops accepting connections until connected_players == g_max_players and every connected player has the 0x800 ready flag. Then transitions into Phase 2 (Transfer). | PHASE 0: Read game.ini config — server port (default 7531), game path, max players | Initialize server: thread priority, logging, packet pool, game data, listen socket | PHASE 1 — LOBBY: Wait for all players to connect and set ready flag (0x800). Broadcasts server info every 3 seconds. Processes network I/O. Handles disconnect requests (0x1000) and host disconnect (0x400 = terminate). | PHASE 3 — DATA RECEIVE: Wait for host to send savegame data (flag 0x08 cleared when done). Then call RecvGameSavegame to deserialize game state. | PHASE 5 — PLAYER ALLOCATION: Wait for each player to allocate their character entity (flag 0x10 set, cleared when cmd received). | PHASE 6 — GAME LOOP: Main simulation tick. Checks sync flags (0x40=sync data, 0x20=sync ready). Advances game clock, broadcasts sync packets (cmd 0x1E). Processes commands via ProcessAndBroadcastAllCommands. Speed controlled by g_game_speed_value. | PHASE 4 — DATA SEND: Stream savegame to all non-host clients in 128-byte chunks (cmd type 0x09). First sends total size (cmd type 0x08). Clears flag 0x04 when transfer complete per player."
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10009d30"]
 size = 296
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10009e60"]
 size = 419
-status = "NEAR_MATCHING"
-blocker = "NEAR_MATCHING — RELOC (87% of delta)"
+status = "RELOC"
 
 ["SERVER.0x1000a010"]
 size = 112
@@ -209,10 +212,9 @@ analysis = "Ingress parser boundary for per-player receive buffer. Validation be
 
 ["SERVER.0x1000a570"]
 size = 750
-status = "STUB"
-blocker = "instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout"
-blocker_delta = 453
+status = "EXACT"
 analysis = "Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09)."
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x1000a860"]
 size = 131
@@ -235,10 +237,9 @@ ghidra = "FreeCommandBuffer"
 
 ["SERVER.0x1000aac0"]
 size = 639
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 567
+status = "PROVEN"
 analysis = "Master Command Router. Iterates over every slot's incoming_cmd_queue. Evaluates commands via g_command_handlers. Upon validation, pushes valid commands to the sender's outgoing queue (to acknowledge) and broadcasts them to all other connected players' outgoing queues. Recognizes 0x05/0x06 to batch list and pass to ahm_ProcessEntityChain."
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000ad40"]
 size = 768
@@ -251,6 +252,7 @@ status = "RELOC"
 ["SERVER.0x1000b1c0"]
 size = 205
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000b290"]
 size = 425
@@ -262,15 +264,14 @@ status = "RELOC"
 
 ["SERVER.0x1000b4d0"]
 size = 836
-status = "STUB"
-cflags = "/O2 /Oy- /Gd"
-blocker = "jump condition swap | comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
-blocker_delta = 119
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 analysis = "Iterates through a fixed validation table at g_office_table looking for a matching command_type. Once found, verifies conditions including checking if entity_ids in the payload actually map to existing objects using gm_LookupEntityRecordById. Returns 1 if valid, 0 if invalid."
 
 ["SERVER.0x1000b820"]
 size = 42
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000b850"]
 size = 42
@@ -291,28 +292,30 @@ analysis = "Iterates through the command execution tracker table at g_office_sec
 
 ["SERVER.0x1000baf0"]
 size = 606
-status = "RELOC"
+status = "EXACT"
 ghidra = "LoadOfficeData"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000bd50"]
 size = 66
 status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000bda0"]
 size = 70
-status = "RELOC"
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x1000bdf0"]
 size = 1002
-status = "STUB"
-cflags = "/O2 /Oy- /Gd"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
-blocker_delta = 935
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
 
 ["SERVER.0x1000c1e0"]
 size = 160
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000c280"]
 size = 130
@@ -353,13 +356,15 @@ status = "RELOC"
 
 ["SERVER.0x1000c710"]
 size = 752
-status = "NEAR_MATCHING"
-blocker = "NEAR_MATCHING — STRUCTURAL (94% of delta) — try: mut_swap_if_else, mut_guard_clause, mut_hoist_return, mut_sink_return, mut_return_to_goto"
+status = "PROVEN"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+blocker = "the original's direct-switch dispatch zero-extends the switch"
 
 ["SERVER.0x1000ca00"]
 size = 130
 status = "EXACT"
 analysis = "Iterates through a linked list of CommandPackets generated from a Command 0x05 / 0x06 block. Runs secondary validation handlers from g_entity_chain_handlers. Re-flags commands to 0x01/0x02 status based on success/fail."
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000ca90"]
 size = 130
@@ -400,6 +405,7 @@ status = "RELOC"
 ["SERVER.0x1000d110"]
 size = 333
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000d260"]
 size = 120
@@ -428,6 +434,7 @@ status = "RELOC"
 ["SERVER.0x1000d570"]
 size = 361
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000d6e0"]
 size = 78
@@ -436,6 +443,7 @@ status = "RELOC"
 ["SERVER.0x1000d730"]
 size = 192
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000d7f0"]
 size = 176
@@ -447,15 +455,13 @@ status = "RELOC"
 
 ["SERVER.0x1000d930"]
 size = 2057
-status = "STUB"
-blocker = "stack frame size (0x228 vs 0x224), register allocation (edi vs ebx for zero init), error handler codegen (push/jmp vs mov/jmp), merged stack cleanup, loop rotation / branch layout, comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
-blocker_delta = 1962
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x1000e140"]
 size = 993
-status = "STUB"
-blocker = "epilogue tail-merging (3 early-return error blocks merged to shared epilogue -59 bytes), dead store elimination (mov [esp+0x18],ebx before mov [esp+0x18],4), null-check branch layout (inline vs end-of-block), jump condition swap, zero-extend pattern (xor vs mov)"
-blocker_delta = 922
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x1000e530"]
 size = 352
@@ -491,9 +497,8 @@ status = "RELOC"
 
 ["SERVER.0x1000ec00"]
 size = 912
-status = "STUB"
-blocker = "register allocation (esi vs edi for cmd_ptr, ebp vs ebx for outer_ent), branch condition inversion (jle/jge vs jg/jl in clamping), dead code elimination (inner nested if level>0 check optimized away), loop structure (while entity search vs do-while with inlined return), return 1 epilogue sharing (candidate shares one exit, target inlines two)"
-blocker_delta = 121
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x1000ef90"]
 size = 26
@@ -526,6 +531,7 @@ status = "RELOC"
 ["SERVER.0x1000f2f0"]
 size = 176
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000f3a0"]
 size = 3
@@ -562,6 +568,7 @@ status = "RELOC"
 ["SERVER.0x1000f980"]
 size = 336
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000fad0"]
 size = 85
@@ -586,6 +593,7 @@ status = "RELOC"
 ["SERVER.0x1000fd50"]
 size = 445
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000ff10"]
 size = 22
@@ -618,6 +626,7 @@ status = "RELOC"
 ["SERVER.0x10010140"]
 size = 280
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10010260"]
 size = 144
@@ -646,6 +655,7 @@ status = "RELOC"
 ["SERVER.0x10010530"]
 size = 113
 status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100105b0"]
 size = 329
@@ -698,7 +708,7 @@ status = "RELOC"
 
 ["SERVER.0x10011890"]
 size = 164
-status = "SIZE_MISMATCH"
+status = "RELOC"
 analysis = "Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure."
 globals = "SERVER 0x1003546c"
 note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=0 vs 4294967294"
@@ -709,16 +719,15 @@ status = "RELOC"
 
 ["SERVER.0x10011bf0"]
 size = 1040
-status = "STUB"
-cflags = "/O2 /Oy- /Gd"
-blocker = "register allocation (ebp callee-save not used), instruction folding (lea vs mov), loop rotation / branch layout, comparison direction swap"
-blocker_delta = 1021
+status = "PROVEN"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
 
 ["SERVER.0x10012000"]
 size = 728
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100122e0"]
 size = 346
@@ -732,42 +741,43 @@ status = "RELOC"
 size = 857
 status = "PROVEN"
 analysis = "ls_LoadSavegameHeader: Reads versioned savegame header from VFS stream. Allocates 0xE100 temp buffer, reads format version, player count, map name (32 bytes), timestamps, difficulty, player scores (8 entries for version > 0x10033), savegame description (96 bytes). Returns 1 on success, 0 on read failure."
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100127d0"]
 size = 282
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100128f0"]
 size = 1463
-status = "STUB"
-cflags = "/O2 /Oy- /Gd"
-blocker = "register allocation, loop rotation / branch layout, jump condition swap, sequential VFS read patterns"
-blocker_delta = 1390
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 analysis = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 globals = "SERVER 0x100a8c34"
 
 ["SERVER.0x10012eb0"]
 size = 884
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout"
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10013230"]
 size = 2268
-status = "NEAR_MATCHING"
+status = "PROVEN"
 ghidra = "LoadStaticEntities"
 analysis = "Deserializes all static entities from savegame stream. Reads entity count, landmark pointers, then loops reading 70+ fields per entity with version-gated sections (g_save_format_version). Entity data at g_static_entities array, stride 0x21C bytes. Returns 1 on success, 0 on read failure."
-blocker = "NEAR_MATCHING — RELOC (85% of delta)"
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 67 x 5 state pairs); EAX=0 vs 1"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10013b10"]
 size = 1361
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, stack frame choice (push vs sub esp)"
-blocker_delta = 1327
+status = "EXACT"
 analysis = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 62 buildings per player), (2) town records with name, timestamps, flags, population, wealth, 10 resource pairs, 10 production pairs, 4 tax rates, 4 trade routes, reputation, guild standings, 8 event records, political data. Returns 1 on success."
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10014070"]
 size = 491
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10014260"]
 size = 892
@@ -785,12 +795,13 @@ status = "RELOC"
 
 ["SERVER.0x100147b0"]
 size = 670
-status = "STUB"
-blocker = "instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10014a50"]
 size = 157
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10014af0"]
 size = 247
@@ -838,6 +849,7 @@ ghidra = "GetStatPair"
 ["SERVER.0x100151e0"]
 size = 535
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10015400"]
 size = 83
@@ -862,18 +874,20 @@ status = "EXACT"
 
 ["SERVER.0x100156c0"]
 size = 642
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10015950"]
 size = 861
-status = "SIZE_MISMATCH"
+status = "EXACT"
 ghidra = "InitGameWorld"
 analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10015cb0"]
 size = 57
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10015cf0"]
 size = 194
@@ -893,61 +907,65 @@ status = "EXACT"
 
 ["SERVER.0x10015f70"]
 size = 714
-status = "STUB"
-blocker = "comparison direction swap, jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov) | comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 449
+status = "PROVEN"
 analysis = "Refreshes market availability table (85 entries of 0x80 bytes each). Scans all buildings for producible items, marks ingredients as available, then auto-allocates missing market objects. Also counts special resource types (0x92-0x97, 0x2db) in the town market."
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10016240"]
 size = 72
 status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016290"]
 size = 464
-status = "STUB"
-blocker = "complex goto-laden control flow, register allocation, jump condition swap, multiple back-to-back labels"
-blocker_delta = 452
+status = "PROVEN"
 analysis = "Apply active query filters (id/type/owner/group) to current candidate."
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+blocker = "cannot reach EXACT with any available compiler (MSVC 4.0-7.1, all /O"
 
 ["SERVER.0x10016460"]
 size = 320
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), zero-extend pattern (xor vs mov)"
-blocker_delta = 307
+status = "PROVEN"
 analysis = "Parse vararg criteria tuples for entity query filtering."
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x100165a0"]
 size = 37
-status = "RELOC"
+status = "EXACT"
 analysis = "Walks the primary linked list of object allocations starting at g_existing_entities (a global pointer array). Looks for the first slot with an active flag == 0. Stops searching after 0x5007 (20487) slots. Returns pointer to the slot or NULL if full. | Scan fixed object pool and return first free slot."
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100165d0"]
 size = 155
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016670"]
 size = 1
 status = "EXACT"
 analysis = "Linear search by object type id within sibling linked list."
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016680"]
 size = 139
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016710"]
 size = 66
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016760"]
 size = 1392
-status = "STUB"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 1278
+status = "PROVEN"
 analysis = "High-level entity allocation wrapper. Resolves the parent_id using gm_ResolveEntityById to find the appropriate entity list head. Allocates a new object slot using gm_AllocateObjectSlot. Inserts the new object into the parent's linked list and initializes basic fields (type, id from global g_next_entity_id, parent pointer)."
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016cd0"]
 size = 272
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016de0"]
 size = 186
@@ -966,10 +984,12 @@ status = "EXACT"
 ["SERVER.0x100170e0"]
 size = 304
 status = "PROVEN"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10017210"]
 size = 39
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10017240"]
 size = 240
@@ -986,15 +1006,14 @@ status = "RELOC"
 
 ["SERVER.0x100174d0"]
 size = 1088
-status = "STUB"
-cflags = "/O2 /Oy- /Gd"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, stack frame choice (push vs sub esp), zero-extend pattern (xor vs mov)"
-blocker_delta = 1007
+status = "PROVEN"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 ghidra = "gm_AllocGebaeude"
 
 ["SERVER.0x10017910"]
 size = 145
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100179b0"]
 size = 192
@@ -1014,13 +1033,14 @@ status = "RELOC"
 
 ["SERVER.0x10017c40"]
 size = 742
-status = "STUB"
-blocker = "MSVC shrink-wrap not applied (push regs before checks vs target after), 3 early-return paths not deferred"
+status = "PROVEN"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10017f30"]
 size = 35
 status = "RELOC"
 ghidra = "call_compare"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10017f60"]
 size = 36
@@ -1077,18 +1097,18 @@ analysis = "duplicate bounds check needed for correct register allocation"
 
 ["SERVER.0x10018530"]
 size = 800
-status = "STUB"
-blocker = "SIB byte register-order swap ([edi+ecx] vs [ecx+edi]), reg-alloc choice for index/base"
-blocker_delta = 695
+status = "PROVEN"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10018850"]
 size = 3689
-status = "STUB"
-blocker = "large stub: 1056 structural diffs vs target, 0 exact bytes; needs full re-decompilation"
+status = "EXACT"
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x100196c0"]
 size = 81
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10019720"]
 size = 396
@@ -1181,6 +1201,7 @@ source = "TZSET.C:374"
 
 ["SERVER.0x1001a835"]
 source = "DBGHEAP.C:126"
+size = 252
 
 ["SERVER.0x1001ab81"]
 source = "DBGHEAP.C:952"
@@ -1198,8 +1219,185 @@ source = "TZSET.C:96"
 source = "TZSET.C:374"
 
 ["SERVER.0x1001a670"]
-status = "SIZE_MISMATCH"
+status = "RELOC"
 size = 17
+cflags = "/O1 /Gd"
 
 ["SERVER.0xdeadbeef"]
 status = "SIZE_MISMATCH"
+
+["SERVER.0x1001b564"]
+size = 39
+status = "EXACT"
+
+["SERVER.0x1001b58b"]
+size = 65
+status = "EXACT"
+
+["SERVER.0x1001ba71"]
+size = 51
+status = "EXACT"
+
+["SERVER.0x1001baa4"]
+size = 235
+
+["SERVER.0x1001bb4c"]
+status = "RELOC"
+
+["SERVER.0x1001bb60"]
+status = "MISSING_SIZE"
+
+["SERVER.0x1001bc61"]
+size = 174
+
+["SERVER.0x1001bce4"]
+status = "MISSING_SIZE"
+
+["SERVER.0x1001bc04"]
+size = 93
+status = "EXACT"
+
+["SERVER.0x1002146d"]
+size = 203
+status = "EXACT"
+
+["SERVER.0x10021298"]
+size = 53
+status = "EXACT"
+
+["SERVER.0x100212cd"]
+status = "MISSING_SIZE"
+
+["SERVER.0x100212e3"]
+status = "MISSING_SIZE"
+
+["SERVER.0x10021375"]
+status = "MISSING_SIZE"
+
+["SERVER.0x100222b5"]
+size = 139
+status = "EXACT"
+
+["SERVER.0x10022340"]
+size = 158
+
+["SERVER.0x10022f44"]
+status = "MISSING_SIZE"
+
+["SERVER.0x10022f83"]
+status = "MISSING_SIZE"
+
+["SERVER.0x1001a7e5"]
+size = 9
+status = "EXACT"
+
+["SERVER.0x1001a527"]
+size = 25
+status = "EXACT"
+
+["SERVER.0x1001bbb2"]
+status = "MISSING_SIZE"
+
+["SERVER.0x1001a2eb"]
+status = "MISSING_SIZE"
+
+["SERVER.0x1001a30d"]
+status = "MISSING_SIZE"
+
+["SERVER.0x1001ad29"]
+size = 9
+status = "EXACT"
+
+["SERVER.0x1001fdf8"]
+size = 57
+status = "EXACT"
+
+["SERVER.0x1001f855"]
+size = 117
+status = "EXACT"
+
+["SERVER.0x100200c1"]
+size = 129
+status = "EXACT"
+
+["SERVER.0x1001a18a"]
+size = 49
+status = "EXACT"
+
+["SERVER.0x1001a1bb"]
+size = 76
+status = "EXACT"
+
+["SERVER.0x1001accd"]
+size = 92
+status = "EXACT"
+
+["SERVER.0x1001bdd0"]
+size = 123
+status = "EXACT"
+
+["SERVER.0x1001a7f7"]
+size = 18
+status = "RELOC"
+
+["SERVER.0x1001d036"]
+status = "MISSING_SIZE"
+
+["SERVER.0x1001d097"]
+status = "MISSING_SIZE"
+
+["SERVER.0x10021aad"]
+size = 9
+status = "EXACT"
+
+["SERVER.0x1001b12f"]
+size = 204
+status = "EXACT"
+
+["SERVER.0x1001a809"]
+size = 44
+status = "EXACT"
+
+["SERVER.0x1001d238"]
+size = 27
+status = "EXACT"
+
+["SERVER.0x10003960"]
+status = "EXACT"
+size = 560
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+
+["SERVER.0x100036d0"]
+status = "EXACT"
+size = 332
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+
+["SERVER.0x100083c0"]
+status = "EXACT"
+size = 1083
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+
+["SERVER.0x10004bc0"]
+status = "EXACT"
+size = 1968
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+
+["SERVER.0x10005390"]
+status = "EXACT"
+size = 911
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+
+["SERVER.0x10003e40"]
+status = "EXACT"
+size = 3328
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+
+["SERVER.0x10004b40"]
+status = "EXACT"
+size = 57
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+
+["SERVER.0x1001a140"]
+size = 14
+status = "EXACT"
+cflags = "/O1 /Gd /DREBREW_ALLOW_NAKED"

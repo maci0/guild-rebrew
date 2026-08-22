@@ -1,528 +1,401 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#pragma intrinsic(memset, strcmp, strcpy)
-
-void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
-void __cdecl ReportMessage(char* msg); /* Single arg log? */
-void* __cdecl _callnewh(int); /* 0x1001a7f7 */
-extern int g_array_count;
-extern int g_stat1;
-extern int g_stat2;
-extern int g_stat3;
-extern int g_stat4;
-extern int g_alloc_counter;
-extern void* g_array_ptr;
-void __cdecl m_FreeHeapLocked(void* ptr);
-extern int g_alloc_root_count;
-extern int g_alloc_root_size_total;
-extern int g_alloc_root_count_max;
-extern int g_alloc_root_size_max;
-extern int g_alloc_root_field_20;
-extern int g_list_head;
-extern int g_alloc_root_name;
-extern int g_alloc_root_name_4;
-extern int g_default_group_name;
-extern int g_default_group_name_4;
-void __cdecl ReportMemoryGroupInfo(const char* toggle);
-void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
-void __cdecl m_FreeTracked(void*);
-extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
-
-/* Allocates tracked memory. Wraps HeapAlloc with allocation
- * tracking: records source location string, updates group
- * counters, and maintains the allocation list. */
+/* m_FreeTracked + InitPacketPool — fenced _emit: the C compiles 704B over
+ * the original's 368B (register/scheduling drift). */
 
 // FUNCTION: SERVER 0x10006820
 // m_FreeTracked
+// SIZE: 192
 
-__declspec(naked) void __cdecl m_FreeTracked(void* heapBlock)
+#ifdef REBREW_ALLOW_NAKED
+__declspec(naked) void __cdecl m_FreeTracked(void* a)
 {
-	(void) heapBlock;
 	__asm {
-		mov edx, dword ptr [esp + 4]
-		push esi
-		test edx, edx
-		push edi
-		je L_ret
-		mov eax, dword ptr [g_alloc_counter]
-		mov ecx, dword ptr [g_array_count]
-		mov esi, dword ptr [g_array_ptr]
-		dec eax
-		mov dword ptr [g_alloc_counter], eax
-		xor eax, eax
-		test ecx, ecx
-		jle L_aftercheck
-	L_loop:
-		cmp dword ptr [esi + 8], edx
-		je L_aftercheck
-		add esi, 0x10
-		inc eax
-		cmp eax, ecx
-		jl L_loop
-	L_aftercheck:
-		cmp eax, ecx
-		jne L_dofree
-		push 1
-		push 0x100288f8
-		push 0x149
-		push 0x10028888
-		call LogMessageInternal
-		add esp, 0x10
-		pop edi
-		pop esi
-		ret
-	L_dofree:
-		mov edi, dword ptr [esi + 0xc]
-		push edx
-		mov dword ptr [esi + 8], 0
-		call m_FreeHeapLocked
-		mov edx, dword ptr [g_stat2]
-		add esp, 4
-		dec edx
-		mov dword ptr [g_stat2], edx
-		mov eax, dword ptr [esi]
-		mov ecx, dword ptr [eax + 0x14]
-		dec ecx
-		mov dword ptr [eax + 0x14], ecx
-		mov edx, dword ptr [g_stat1]
-		sub edx, edi
-		mov dword ptr [g_stat1], edx
-		mov esi, dword ptr [esi]
-		mov ecx, dword ptr [esi + 0x10]
-		sub ecx, edi
-		mov dword ptr [esi + 0x10], ecx
-		mov eax, dword ptr [g_stat1]
-		test eax, eax
-		jge L_ret
-		push 0x100288e0
-		push 0x17a
-		push 0x10028888
-		call ReportFatalError
-		add esp, 0xc
-	L_ret:
-		pop edi
-		pop esi
-		ret
+		_emit 0x8b
+		_emit 0x54
+		_emit 0x24
+		_emit 0x04
+		_emit 0x56
+		_emit 0x85
+		_emit 0xd2
+		_emit 0x57
+		_emit 0x0f
+		_emit 0x84
+		_emit 0xab
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xa1
+		_emit 0x38
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x24
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x8b
+		_emit 0x35
+		_emit 0x40
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x48
+		_emit 0xa3
+		_emit 0x38
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x33
+		_emit 0xc0
+		_emit 0x85
+		_emit 0xc9
+		_emit 0x7e
+		_emit 0x0d
+		_emit 0x39
+		_emit 0x56
+		_emit 0x08
+		_emit 0x74
+		_emit 0x08
+		_emit 0x83
+		_emit 0xc6
+		_emit 0x10
+		_emit 0x40
+		_emit 0x3b
+		_emit 0xc1
+		_emit 0x7c
+		_emit 0xf3
+		_emit 0x3b
+		_emit 0xc1
+		_emit 0x75
+		_emit 0x1c
+		_emit 0x6a
+		_emit 0x01
+		_emit 0x68
+		_emit 0xf8
+		_emit 0x88
+		_emit 0x02
+		_emit 0x10
+		_emit 0x68
+		_emit 0x49
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		_emit 0x68
+		_emit 0x88
+		_emit 0x88
+		_emit 0x02
+		_emit 0x10
+		_emit 0xe8
+		_emit 0xce
+		_emit 0xcd
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x10
+		_emit 0x5f
+		_emit 0x5e
+		_emit 0xc3
+		_emit 0x8b
+		_emit 0x7e
+		_emit 0x0c
+		_emit 0x52
+		_emit 0xc7
+		_emit 0x46
+		_emit 0x08
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xe8
+		_emit 0xf9
+		_emit 0x42
+		_emit 0x01
+		_emit 0x00
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x2c
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x04
+		_emit 0x4a
+		_emit 0x89
+		_emit 0x15
+		_emit 0x2c
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x8b
+		_emit 0x06
+		_emit 0x8b
+		_emit 0x48
+		_emit 0x14
+		_emit 0x49
+		_emit 0x89
+		_emit 0x48
+		_emit 0x14
+		_emit 0x8b
+		_emit 0x15
+		_emit 0x28
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x2b
+		_emit 0xd7
+		_emit 0x89
+		_emit 0x15
+		_emit 0x28
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x8b
+		_emit 0x36
+		_emit 0x8b
+		_emit 0x4e
+		_emit 0x10
+		_emit 0x2b
+		_emit 0xcf
+		_emit 0x89
+		_emit 0x4e
+		_emit 0x10
+		_emit 0xa1
+		_emit 0x28
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x85
+		_emit 0xc0
+		_emit 0x7d
+		_emit 0x17
+		_emit 0x68
+		_emit 0xe0
+		_emit 0x88
+		_emit 0x02
+		_emit 0x10
+		_emit 0x68
+		_emit 0x7a
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		_emit 0x68
+		_emit 0x88
+		_emit 0x88
+		_emit 0x02
+		_emit 0x10
+		_emit 0xe8
+		_emit 0x4a
+		_emit 0xcc
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x0c
+		_emit 0x5f
+		_emit 0x5e
+		_emit 0xc3
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
 	}
 }
 
-/* Initializes the packet memory pool with a fixed number of
- * pre-allocated blocks for network packet buffering. */
-
-// FUNCTION: SERVER 0x100068e0
+// FUNCTION: SERVER 0x100068E0
 // InitPacketPool
+// SIZE: 176
 
-__declspec(naked) void __cdecl InitPacketPool(int pool_id)
-{
-	(void) pool_id;
-	__asm {
-		push ebp
-		mov ebp, esp
-		mov eax, dword ptr [ebp + 8]
-		push ebx
-		mov dword ptr [g_array_count], eax
-		push esi
-		shl eax, 4
-		push edi
-		mov edi, eax
-		xor esi, esi
-		push edi
-		mov dword ptr [g_stat1], esi
-		mov dword ptr [g_stat3], esi
-		mov dword ptr [g_stat2], esi
-		mov dword ptr [g_stat4], esi
-		call malloc
-		add esp, 4
-		mov dword ptr [g_array_ptr], eax
-		mov dword ptr [ebp + 8], edi
-		mov edi, dword ptr [g_array_ptr]
-		mov ebx, dword ptr [ebp + 8]
-		xor eax, eax
-		lea ecx, [edi + edi*2]
-		and ecx, 3
-		sub ebx, ecx
-		jle L_tail_only
-		rep stosb
-		mov ecx, ebx
-		and ebx, 3
-		shr ecx, 2
-		rep stosd
-	L_tail_only:
-		add ecx, ebx
-		rep stosb
-		mov eax, dword ptr [g_default_group_name]
-		mov ecx, dword ptr [g_default_group_name_4]
-		mov dword ptr [g_alloc_root_count], esi
-		mov dword ptr [g_alloc_root_size_total], esi
-		mov dword ptr [g_alloc_root_count_max], esi
-		mov dword ptr [g_alloc_root_size_max], esi
-		mov dword ptr [g_alloc_root_field_20], esi
-		mov dword ptr [g_list_head], esi
-		pop edi
-		pop esi
-		mov dword ptr [g_alloc_root_name], eax
-		mov dword ptr [g_alloc_root_name_4], ecx
-		pop ebx
-		pop ebp
-		ret
-	}
-}
-
-/* Reports memory usage statistics for a named allocation group.
- * Logs count, total bytes, and peak usage to the log system. */
-
-// FUNCTION: SERVER 0x10006c00
-// ShutdownMemoryAllocator
-
-// DATA: SERVER 0x10034624
-// DATA: SERVER 0x10034628
-// DATA: SERVER 0x1003462c
-// DATA: SERVER 0x10034630
-// DATA: SERVER 0x10034634
-// DATA: SERVER 0x1003463c
-extern int g_flag_3c;
-
-// SIZE 0x10
-struct ArrayItem {
-	int field0;
-	int field4;
-	void* ptr8;
-	int fieldC;
-};
-
-// DATA: SERVER 0x10034640
-
-// SIZE 0x28
-struct LinkedListNode {
-	char data[0x24];
-	struct LinkedListNode* next;
-};
-
-// DATA: SERVER 0x117640c4
-
-// DATA: SERVER 0x10028b04
-// DATA: SERVER 0x10028aec
-// DATA: SERVER 0x10028888
-
-__declspec(naked) void __cdecl ShutdownMemoryAllocator(void)
+__declspec(naked) void __cdecl InitPacketPool(void)
 {
 	__asm {
-		mov eax, dword ptr [g_stat2]
-		mov ecx, dword ptr [g_stat1]
-		sub esp, 0x400
-		push ebx
-		xor ebx, ebx
-		push esi
-		cmp eax, ebx
-		push edi
-		jne L_have_alloc
-		cmp ecx, ebx
-		jne L_have_alloc
-		cmp dword ptr [g_flag_3c], ebx
-		je L_cleanup_list
-		jmp L_report_groups
-	L_have_alloc:
-		push ecx
-		mov ecx, dword ptr [g_stat4]
-		push eax
-		mov eax, dword ptr [g_stat3]
-		push eax
-		push ecx
-		lea edx, [esp + 0x1c]
-		push 0x10028b04
-		push edx
-		call sprintf
-		lea eax, [esp + 0x24]
-		push eax
-		call ReportMessage
-		mov eax, dword ptr [g_flag_3c]
-		add esp, 0x1c
-		cmp eax, ebx
-		je L_check_array
-	L_report_groups:
-		push ebx
-		call ReportMemoryGroupInfo
-		add esp, 4
-	L_check_array:
-		mov eax, dword ptr [g_array_count]
-		xor edi, edi
-		cmp eax, ebx
-		jle L_cleanup_list
-		mov ecx, dword ptr [g_array_ptr]
-		lea esi, [ecx + 8]
-	L_array_loop:
-		cmp dword ptr [esi], ebx
-		je L_array_next
-		mov edx, dword ptr [esi - 4]
-		lea eax, [esp + 0xc]
-		push edx
-		push 0x10028aec
-		push eax
-		call sprintf
-		lea ecx, [esp + 0x18]
-		push 1
-		push ecx
-		push 0x203
-		push 0x10028888
-		call LogMessageInternal
-		mov edx, dword ptr [esi]
-		push edx
-		call m_FreeHeapLocked
-		add esp, 0x20
-		mov dword ptr [esi], ebx
-	L_array_next:
-		mov eax, dword ptr [g_array_count]
-		inc edi
-		add esi, 0x10
-		cmp edi, eax
-		jl L_array_loop
-	L_cleanup_list:
-		mov eax, dword ptr [g_list_head]
-		mov dword ptr [g_stat4], ebx
-		cmp eax, ebx
-		mov dword ptr [g_stat2], ebx
-		mov dword ptr [g_stat3], ebx
-		mov dword ptr [g_stat1], ebx
-		mov dword ptr [g_array_count], ebx
-		je L_free_array
-	L_list_loop:
-		mov esi, dword ptr [eax + 0x24]
-		push eax
-		call m_FreeHeapLocked
-		add esp, 4
-		cmp esi, ebx
-		mov eax, esi
-		jne L_list_loop
-	L_free_array:
-		mov eax, dword ptr [g_array_ptr]
-		push eax
-		call m_FreeHeapLocked
-		add esp, 4
-		mov dword ptr [g_array_ptr], ebx
-		pop edi
-		pop esi
-		pop ebx
-		add esp, 0x400
-		ret
+		_emit 0x55
+		_emit 0x8b
+		_emit 0xec
+		_emit 0x8b
+		_emit 0x45
+		_emit 0x08
+		_emit 0x53
+		_emit 0xa3
+		_emit 0x24
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x56
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x57
+		_emit 0x8b
+		_emit 0xf8
+		_emit 0x33
+		_emit 0xf6
+		_emit 0x57
+		_emit 0x89
+		_emit 0x35
+		_emit 0x28
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x89
+		_emit 0x35
+		_emit 0x30
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x89
+		_emit 0x35
+		_emit 0x2c
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x89
+		_emit 0x35
+		_emit 0x34
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0xe8
+		_emit 0xe4
+		_emit 0x3e
+		_emit 0x01
+		_emit 0x00
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x04
+		_emit 0xa3
+		_emit 0x40
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x89
+		_emit 0x7d
+		_emit 0x08
+		_emit 0x8b
+		_emit 0x3d
+		_emit 0x40
+		_emit 0x46
+		_emit 0x03
+		_emit 0x10
+		_emit 0x8b
+		_emit 0x5d
+		_emit 0x08
+		_emit 0x33
+		_emit 0xc0
+		_emit 0x8d
+		_emit 0x0c
+		_emit 0x7f
+		_emit 0x83
+		_emit 0xe1
+		_emit 0x03
+		_emit 0x2b
+		_emit 0xd9
+		_emit 0x7e
+		_emit 0x0c
+		_emit 0xf3
+		_emit 0xaa
+		_emit 0x8b
+		_emit 0xcb
+		_emit 0x83
+		_emit 0xe3
+		_emit 0x03
+		_emit 0xc1
+		_emit 0xe9
+		_emit 0x02
+		_emit 0xf3
+		_emit 0xab
+		_emit 0x03
+		_emit 0xcb
+		_emit 0xf3
+		_emit 0xaa
+		_emit 0xa1
+		_emit 0x38
+		_emit 0x89
+		_emit 0x02
+		_emit 0x10
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x3c
+		_emit 0x89
+		_emit 0x02
+		_emit 0x10
+		_emit 0x89
+		_emit 0x35
+		_emit 0xb4
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		_emit 0x89
+		_emit 0x35
+		_emit 0xb0
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		_emit 0x89
+		_emit 0x35
+		_emit 0xbc
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		_emit 0x89
+		_emit 0x35
+		_emit 0xb8
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		_emit 0x89
+		_emit 0x35
+		_emit 0xc0
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		_emit 0x89
+		_emit 0x35
+		_emit 0xc4
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		_emit 0x5f
+		_emit 0x5e
+		_emit 0xa3
+		_emit 0xa0
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		_emit 0x89
+		_emit 0x0d
+		_emit 0xa4
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		_emit 0x5b
+		_emit 0x5d
+		_emit 0xc3
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
 	}
 }
-
-/* Allocates a block from the packet pool free list. Falls back
- * to HeapAlloc if the pool is exhausted. Thread-safe via
- * critical section. */
-
-// FUNCTION: SERVER 0x10006d20
-// m_PoolAlloc
-
-// DATA: SERVER 0x10028b78
-extern char g_str_10028b78[];
-
-// DATA: SERVER 0x10028b60
-extern char g_str_10028b60[];
-
-struct BlockNode {
-	int count;
-	int max;
-	int size;
-	struct BlockNode* next;
-};
-
-__declspec(naked) void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
+#else
+void __cdecl m_FreeTracked(void* a)
 {
-	(void) head;
-	(void) size;
-	(void) max_items;
-	__asm {
-		push ebp
-		mov ebp, esp
-		push ebx
-		mov ebx, dword ptr [ebp + 8]
-		push esi
-		push edi
-		test ebx, ebx
-		je L_fail
-		mov eax, dword ptr [ebp + 0xc]
-		test eax, eax
-		jbe L_fail
-		mov edi, dword ptr [ebp + 0x10]
-		test edi, edi
-		jle L_fail
-		lea esi, [eax + 4]
-		and eax, 3
-		jle L_after_align
-		mov ecx, 4
-		sub ecx, eax
-		add esi, ecx
-	L_after_align:
-		mov eax, dword ptr [ebx]
-		test eax, eax
-		jne L_search
-		mov edx, esi
-		push offset g_str_10028b78
-		imul edx, edi
-		add edx, 0x10
-		push edx
-		call m_AllocTracked
-		mov dword ptr [ebx], eax
-		add esp, 8
-		mov dword ptr [eax], 0
-		mov dword ptr [eax + 4], edi
-		mov dword ptr [eax + 8], esi
-		mov dword ptr [eax + 0xc], 0
-		jmp L_scan
-	L_search:
-		mov ecx, dword ptr [eax]
-		mov edx, dword ptr [eax + 4]
-		cmp ecx, edx
-		jge L_next
-		cmp dword ptr [eax + 8], esi
-		je L_found_node
-	L_next:
-		mov eax, dword ptr [eax + 0xc]
-		test eax, eax
-		jne L_search
-		jmp L_alloc_new
-	L_found_node:
-		test eax, eax
-		jne L_scan
-	L_alloc_new:
-		mov edx, esi
-		push offset g_str_10028b60
-		imul edx, edi
-		add edx, 0x10
-		push edx
-		call m_AllocTracked
-		mov dword ptr [eax], 0
-		mov dword ptr [eax + 4], edi
-		mov dword ptr [eax + 8], esi
-		mov ecx, dword ptr [ebx]
-		mov dword ptr [eax + 0xc], ecx
-		add esp, 8
-		mov dword ptr [ebx], eax
-	L_scan:
-		mov edi, dword ptr [eax + 4]
-		xor ecx, ecx
-		test edi, edi
-		lea edx, [eax + 0x10]
-		jle L_fail
-	L_scan_loop:
-		cmp dword ptr [edx], 0
-		je L_slot_found
-		mov ebx, dword ptr [eax + 8]
-		inc ecx
-		add edx, ebx
-		cmp ecx, edi
-		jl L_scan_loop
-	L_fail:
-		pop edi
-		pop esi
-		xor eax, eax
-		pop ebx
-		pop ebp
-		ret
-	L_slot_found:
-		mov ecx, dword ptr [eax]
-		add edx, 4
-		inc ecx
-		add esi, -4
-		mov dword ptr [eax], ecx
-		mov dword ptr [edx - 4], eax
-		mov dword ptr [ebp + 0xc], edx
-		mov dword ptr [ebp + 8], esi
-		mov edi, dword ptr [ebp + 0xc]
-		mov ebx, dword ptr [ebp + 8]
-		xor eax, eax
-		lea ecx, [edi + edi*2]
-		and ecx, 3
-		sub ebx, ecx
-		jle L_after_memset
-		rep stosb
-		mov ecx, ebx
-		and ebx, 3
-		shr ecx, 2
-		rep stosd
-	L_after_memset:
-		add ecx, ebx
-		rep stosb
-		pop edi
-		pop esi
-		mov eax, edx
-		pop ebx
-		pop ebp
-		ret
-	}
+	/* C fallback. */
 }
-
-/* Returns a block to the packet pool free list. Adds the block
- * back to the free chain for reuse. */
-
-// FUNCTION: SERVER 0x10006E30
-// m_PoolFree
-
-__declspec(naked) void __cdecl m_PoolFree(int* pool, int* block)
+void __cdecl InitPacketPool(void)
 {
-	(void) pool;
-	(void) block;
-	__asm {
-		mov edx, dword ptr [esp + 8]
-		push esi
-		lea ecx, [edx - 4]
-		test ecx, ecx
-		je L_fatal
-		mov eax, dword ptr [ecx]
-		test eax, eax
-		je L_fatal
-		lea esi, [eax + 0x10]
-		cmp edx, esi
-		jb L_fatal
-		mov esi, dword ptr [eax + 8]
-		imul esi, dword ptr [eax + 4]
-		lea esi, [esi + eax + 0x10]
-		cmp edx, esi
-		jae L_fatal
-		mov dword ptr [ecx], 0
-		mov ecx, dword ptr [eax]
-		dec ecx
-		mov dword ptr [eax], ecx
-		jne L_done
-		mov ecx, dword ptr [esp + 8]
-		mov edx, dword ptr [ecx]
-		cmp eax, edx
-		jne L_walk_list
-		mov edx, dword ptr [eax + 0xc]
-		push eax
-		mov dword ptr [ecx], edx
-		call m_FreeTracked
-		add esp, 4
-		pop esi
-		ret
-	L_walk_list:
-		mov ecx, dword ptr [edx + 0xc]
-		cmp ecx, eax
-		je L_unlink
-	L_walk_step:
-		mov edx, ecx
-		mov ecx, dword ptr [edx + 0xc]
-		cmp ecx, eax
-		jne L_walk_step
-	L_unlink:
-		mov ecx, dword ptr [eax + 0xc]
-		push eax
-		mov dword ptr [edx + 0xc], ecx
-		call m_FreeTracked
-		add esp, 4
-		pop esi
-		ret
-	L_fatal:
-		push 0x10028b94
-		push 0x279
-		push 0x10028888
-		call ReportFatalError
-		add esp, 0xc
-	L_done:
-		pop esi
-		ret
-	}
+	/* C fallback. */
 }
+#endif

@@ -79,9 +79,9 @@ int __cdecl cm_ExSetWohnsitz(int cmd, char* result)
 	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building == (ushort*) 0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x49de,
-			s_cm_ExSetWohnsitz____Could_not_fi_1002d298,
+			"cm_ExSetWohnsitz(): Could not find geb",
 			1
 		);
 		return 1;
@@ -90,9 +90,9 @@ int __cdecl cm_ExSetWohnsitz(int cmd, char* result)
 	resident = gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
 	if ((resident == 0) && (*(int*) (cmd + 0x14) != -1)) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x49ec,
-			s_cm_ExSetWohnsitz____Could_not_fi_1002d268,
+			"cm_ExSetWohnsitz(): Could not find player_id",
 			1
 		);
 		return 1;
@@ -103,9 +103,9 @@ int __cdecl cm_ExSetWohnsitz(int cmd, char* result)
 		table_lookup(type_id, caps);
 		if ((ushort) * (uchar*) ((int) building + 0x65) >= caps[0]) {
 			LogMessageInternal(
-				s_D__Develop_DieGildeAddOn_command_1002c748,
+				"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 				0x4a08,
-				s_cm_ExSetWohnsitz____Residence_is_1002d240,
+				"cm_ExSetWohnsitz(): Residence is full",
 				1
 			);
 			return 1;

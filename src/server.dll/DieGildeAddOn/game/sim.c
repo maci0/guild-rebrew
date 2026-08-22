@@ -13,6 +13,7 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
  * family tree linkages. Used in citizen creation to find
  * compatible parents for stat inheritance. */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x100151e0
 // FindAndMatchParents
 

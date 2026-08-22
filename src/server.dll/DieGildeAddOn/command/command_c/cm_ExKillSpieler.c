@@ -42,9 +42,9 @@ int __cdecl cm_ExKillSpieler(int cmd)
 		return 0;
 	}
 	LogMessageInternal(
-		s_D__Develop_DieGildeAddOn_command_1002c748,
+		"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 		0x397d,
-		s_cm_ExKillSpieler___Could_not_fin_1002d154,
+		"cm_ExKillSpieler():Could not find SpielerID!",
 		1
 	);
 	return 0;

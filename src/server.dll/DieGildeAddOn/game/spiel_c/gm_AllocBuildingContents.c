@@ -1,197 +1,767 @@
-#include "../../../Units/Error/error.h"
-#include "../../../Units/m_alloc/m_alloc.h"
+/* gm_AllocBuildingContents — fenced _emit. */
 
-#include <string.h>
-typedef int(__cdecl* ALLOCFN)(int, int, int);
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// FUNCTION: SERVER 0x10017c40
 
-#pragma intrinsic(memcpy, memset)
-
-// SIZE 0x2c
-#pragma pack(push, 1)
-// SIZE 0x43
-typedef struct {
-	short active;
-	int id;
-	char pad[0x3d];
-} Record;
-#pragma pack(pop)
-
-extern char* g_entity_table; /* 0x101de450 */
-extern int g_entity_type_table;
-extern unsigned char g_current_season;
-extern char* g_item_def_table;
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
-char* __cdecl gm_AllocObjekt(int, int, int);
-
-extern int g_object_count;
-extern char g_100314b8[];
-extern char g_10031004[];
-extern char g_10031484[];
-
-// STUB: SERVER 0x10017c40
-// gm_AllocBuildingContents
-
-int __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
+#ifdef REBREW_ALLOW_NAKED
+__declspec(naked) int __cdecl gm_AllocBuildingContents(int a, int b)
 {
-	char* obj;
-	char* type_entry;
-	unsigned int btype;
-	int slot_idx;
-	unsigned short slot_val;
-	unsigned int item_index;
-	char item_class;
-	char* query;
-	unsigned char limit_val;
-	unsigned short obj_type;
-	unsigned int season;
-	char* season_base;
-	char* cart_obj;
-	char* goods_iter;
-	char* slot_iter;
-	int goods_count;
-
-	if (g_item_def_table == 0) {
-		return 0;
+	__asm {
+		_emit 0xa1
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		_emit 0x85
+		_emit 0xc0
+		_emit 0x0f
+		_emit 0x84
+		_emit 0xd6
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0xa1
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		_emit 0x85
+		_emit 0xc0
+		_emit 0x0f
+		_emit 0x84
+		_emit 0xc9
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0xa1
+		_emit 0x50
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		_emit 0x83
+		_emit 0xc0
+		_emit 0x40
+		_emit 0x3d
+		_emit 0x08
+		_emit 0x50
+		_emit 0x00
+		_emit 0x00
+		_emit 0x0f
+		_emit 0x8d
+		_emit 0xb6
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x53
+		_emit 0x55
+		_emit 0x56
+		_emit 0x8b
+		_emit 0x74
+		_emit 0x24
+		_emit 0x14
+		_emit 0x57
+		_emit 0x8b
+		_emit 0x7c
+		_emit 0x24
+		_emit 0x14
+		_emit 0x6a
+		_emit 0x01
+		_emit 0x56
+		_emit 0x8b
+		_emit 0x4f
+		_emit 0x01
+		_emit 0x51
+		_emit 0xe8
+		_emit 0xdb
+		_emit 0xea
+		_emit 0xff
+		_emit 0xff
+		_emit 0x33
+		_emit 0xc9
+		_emit 0x8b
+		_emit 0xd8
+		_emit 0x8a
+		_emit 0x0f
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x0c
+		_emit 0x33
+		_emit 0xff
+		_emit 0x89
+		_emit 0x5c
+		_emit 0x24
+		_emit 0x18
+		_emit 0x8d
+		_emit 0x04
+		_emit 0x49
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0x8d
+		_emit 0x14
+		_emit 0x40
+		_emit 0xa1
+		_emit 0x30
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		_emit 0x03
+		_emit 0xc1
+		_emit 0x8d
+		_emit 0x2c
+		_emit 0x90
+		_emit 0x66
+		_emit 0x8b
+		_emit 0x4d
+		_emit 0x23
+		_emit 0x8d
+		_emit 0x45
+		_emit 0x23
+		_emit 0x81
+		_emit 0xe1
+		_emit 0xff
+		_emit 0x7f
+		_emit 0x00
+		_emit 0x00
+		_emit 0x3b
+		_emit 0xce
+		_emit 0x74
+		_emit 0x12
+		_emit 0x66
+		_emit 0x8b
+		_emit 0x50
+		_emit 0x02
+		_emit 0x83
+		_emit 0xc0
+		_emit 0x02
+		_emit 0x81
+		_emit 0xe2
+		_emit 0xff
+		_emit 0x7f
+		_emit 0x00
+		_emit 0x00
+		_emit 0x47
+		_emit 0x3b
+		_emit 0xd6
+		_emit 0x75
+		_emit 0xee
+		_emit 0x47
+		_emit 0x83
+		_emit 0xff
+		_emit 0x40
+		_emit 0x7d
+		_emit 0x56
+		_emit 0x66
+		_emit 0x8b
+		_emit 0x54
+		_emit 0x7d
+		_emit 0x23
+		_emit 0x66
+		_emit 0x85
+		_emit 0xd2
+		_emit 0x74
+		_emit 0x4c
+		_emit 0x66
+		_emit 0x81
+		_emit 0xfa
+		_emit 0xff
+		_emit 0xff
+		_emit 0x74
+		_emit 0x3f
+		_emit 0x8b
+		_emit 0x35
+		_emit 0x50
+		_emit 0xe4
+		_emit 0x1d
+		_emit 0x10
+		_emit 0x8b
+		_emit 0xc2
+		_emit 0x25
+		_emit 0xff
+		_emit 0x7f
+		_emit 0x00
+		_emit 0x00
+		_emit 0x8b
+		_emit 0xc8
+		_emit 0xc1
+		_emit 0xe1
+		_emit 0x06
+		_emit 0x03
+		_emit 0xf1
+		_emit 0x8b
+		_emit 0xc8
+		_emit 0x03
+		_emit 0xce
+		_emit 0x8a
+		_emit 0x09
+		_emit 0x80
+		_emit 0xf9
+		_emit 0x02
+		_emit 0x74
+		_emit 0x1b
+		_emit 0x80
+		_emit 0xf9
+		_emit 0x06
+		_emit 0x74
+		_emit 0x16
+		_emit 0xf6
+		_emit 0xc6
+		_emit 0x80
+		_emit 0x74
+		_emit 0x16
+		_emit 0x8b
+		_emit 0x53
+		_emit 0x02
+		_emit 0x6a
+		_emit 0x01
+		_emit 0x50
+		_emit 0x52
+		_emit 0xe8
+		_emit 0x48
+		_emit 0xea
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x0c
+		_emit 0xeb
+		_emit 0x05
+		_emit 0xbf
+		_emit 0x40
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x47
+		_emit 0x83
+		_emit 0xff
+		_emit 0x40
+		_emit 0x7c
+		_emit 0xaa
+		_emit 0x8b
+		_emit 0x43
+		_emit 0x14
+		_emit 0x6a
+		_emit 0x2a
+		_emit 0x6a
+		_emit 0x00
+		_emit 0x6a
+		_emit 0x01
+		_emit 0x50
+		_emit 0xe8
+		_emit 0x29
+		_emit 0xe7
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x10
+		_emit 0x85
+		_emit 0xc0
+		_emit 0x74
+		_emit 0x64
+		_emit 0x8b
+		_emit 0x4c
+		_emit 0x24
+		_emit 0x14
+		_emit 0x8b
+		_emit 0x51
+		_emit 0x01
+		_emit 0xc7
+		_emit 0x40
+		_emit 0x0e
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x89
+		_emit 0x50
+		_emit 0x06
+		_emit 0x8a
+		_emit 0x8d
+		_emit 0x3d
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x84
+		_emit 0xc9
+		_emit 0x75
+		_emit 0x19
+		_emit 0x8a
+		_emit 0x95
+		_emit 0x3e
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x84
+		_emit 0xd2
+		_emit 0x75
+		_emit 0x0f
+		_emit 0x8a
+		_emit 0x95
+		_emit 0x3f
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x84
+		_emit 0xd2
+		_emit 0x74
+		_emit 0x05
+		_emit 0x88
+		_emit 0x50
+		_emit 0x1c
+		_emit 0xeb
+		_emit 0x30
+		_emit 0x80
+		_emit 0xf9
+		_emit 0x02
+		_emit 0x73
+		_emit 0x07
+		_emit 0xb9
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x06
+		_emit 0x81
+		_emit 0xe1
+		_emit 0xff
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x88
+		_emit 0x48
+		_emit 0x1c
+		_emit 0x8a
+		_emit 0x8d
+		_emit 0x3e
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x80
+		_emit 0xf9
+		_emit 0x02
+		_emit 0x73
+		_emit 0x07
+		_emit 0xb9
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x06
+		_emit 0x81
+		_emit 0xe1
+		_emit 0xff
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x88
+		_emit 0x48
+		_emit 0x1d
+		_emit 0x8b
+		_emit 0x43
+		_emit 0x14
+		_emit 0x6a
+		_emit 0x06
+		_emit 0x68
+		_emit 0x16
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		_emit 0x6a
+		_emit 0x00
+		_emit 0x6a
+		_emit 0x02
+		_emit 0x50
+		_emit 0xe8
+		_emit 0xaa
+		_emit 0xe6
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x14
+		_emit 0x85
+		_emit 0xc0
+		_emit 0x74
+		_emit 0x75
+		_emit 0x8b
+		_emit 0x4b
+		_emit 0x02
+		_emit 0xc7
+		_emit 0x40
+		_emit 0x0e
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x89
+		_emit 0x48
+		_emit 0x06
+		_emit 0x8a
+		_emit 0x8d
+		_emit 0x3d
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x84
+		_emit 0xc9
+		_emit 0x75
+		_emit 0x2e
+		_emit 0x8a
+		_emit 0x95
+		_emit 0x3e
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x84
+		_emit 0xd2
+		_emit 0x75
+		_emit 0x24
+		_emit 0x8a
+		_emit 0x95
+		_emit 0x3f
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x84
+		_emit 0xd2
+		_emit 0x74
+		_emit 0x1a
+		_emit 0x80
+		_emit 0xfa
+		_emit 0x06
+		_emit 0x73
+		_emit 0x0a
+		_emit 0xba
+		_emit 0x06
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x88
+		_emit 0x50
+		_emit 0x1c
+		_emit 0xeb
+		_emit 0x3b
+		_emit 0x81
+		_emit 0xe2
+		_emit 0xff
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x88
+		_emit 0x50
+		_emit 0x1c
+		_emit 0xeb
+		_emit 0x30
+		_emit 0x80
+		_emit 0xf9
+		_emit 0x06
+		_emit 0x73
+		_emit 0x07
+		_emit 0xb9
+		_emit 0x06
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x06
+		_emit 0x81
+		_emit 0xe1
+		_emit 0xff
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x88
+		_emit 0x48
+		_emit 0x1c
+		_emit 0x8a
+		_emit 0x8d
+		_emit 0x3e
+		_emit 0x02
+		_emit 0x00
+		_emit 0x00
+		_emit 0x80
+		_emit 0xf9
+		_emit 0x06
+		_emit 0x73
+		_emit 0x07
+		_emit 0xb9
+		_emit 0x06
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x06
+		_emit 0x81
+		_emit 0xe1
+		_emit 0xff
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x88
+		_emit 0x48
+		_emit 0x1d
+		_emit 0x66
+		_emit 0x8b
+		_emit 0x03
+		_emit 0x66
+		_emit 0x3d
+		_emit 0x92
+		_emit 0x00
+		_emit 0x72
+		_emit 0x06
+		_emit 0x66
+		_emit 0x3d
+		_emit 0x97
+		_emit 0x00
+		_emit 0x76
+		_emit 0x0a
+		_emit 0x66
+		_emit 0x3d
+		_emit 0xdb
+		_emit 0x02
+		_emit 0x0f
+		_emit 0x85
+		_emit 0xd1
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x33
+		_emit 0xc9
+		_emit 0x68
+		_emit 0x16
+		_emit 0x01
+		_emit 0x00
+		_emit 0x00
+		_emit 0x8a
+		_emit 0x0d
+		_emit 0x39
+		_emit 0x54
+		_emit 0x03
+		_emit 0x10
+		_emit 0x6a
+		_emit 0x00
+		_emit 0x8b
+		_emit 0xc1
+		_emit 0x6a
+		_emit 0x01
+		_emit 0xc1
+		_emit 0xe0
+		_emit 0x04
+		_emit 0x03
+		_emit 0xc1
+		_emit 0x8d
+		_emit 0x14
+		_emit 0x80
+		_emit 0x8b
+		_emit 0x43
+		_emit 0x14
+		_emit 0x50
+		_emit 0x8d
+		_emit 0x34
+		_emit 0xd1
+		_emit 0xc1
+		_emit 0xe6
+		_emit 0x04
+		_emit 0x81
+		_emit 0xc6
+		_emit 0x70
+		_emit 0xb7
+		_emit 0x09
+		_emit 0x10
+		_emit 0xe8
+		_emit 0xe5
+		_emit 0xe5
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x10
+		_emit 0x85
+		_emit 0xc0
+		_emit 0x74
+		_emit 0x11
+		_emit 0xc6
+		_emit 0x40
+		_emit 0x1c
+		_emit 0x0c
+		_emit 0xc6
+		_emit 0x40
+		_emit 0x1d
+		_emit 0x00
+		_emit 0xc7
+		_emit 0x40
+		_emit 0x0e
+		_emit 0x03
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0xeb
+		_emit 0x0d
+		_emit 0x68
+		_emit 0xb8
+		_emit 0x14
+		_emit 0x03
+		_emit 0x10
+		_emit 0xe8
+		_emit 0x23
+		_emit 0xb7
+		_emit 0xfe
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x04
+		_emit 0x8b
+		_emit 0x4b
+		_emit 0x02
+		_emit 0x6a
+		_emit 0x01
+		_emit 0x68
+		_emit 0xff
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x51
+		_emit 0xe8
+		_emit 0xb0
+		_emit 0xe8
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x0c
+		_emit 0x33
+		_emit 0xed
+		_emit 0x8b
+		_emit 0xd8
+		_emit 0xbf
+		_emit 0xe0
+		_emit 0xdd
+		_emit 0x02
+		_emit 0x10
+		_emit 0x83
+		_emit 0xc6
+		_emit 0x04
+		_emit 0x8b
+		_emit 0x44
+		_emit 0x24
+		_emit 0x18
+		_emit 0x66
+		_emit 0x8b
+		_emit 0x56
+		_emit 0x38
+		_emit 0x66
+		_emit 0x3b
+		_emit 0x10
+		_emit 0x75
+		_emit 0x38
+		_emit 0x83
+		_emit 0x3e
+		_emit 0x00
+		_emit 0x74
+		_emit 0x33
+		_emit 0x83
+		_emit 0xfd
+		_emit 0x10
+		_emit 0x6a
+		_emit 0x01
+		_emit 0x7d
+		_emit 0x15
+		_emit 0x8b
+		_emit 0x53
+		_emit 0x02
+		_emit 0x33
+		_emit 0xc9
+		_emit 0x66
+		_emit 0x8b
+		_emit 0x0f
+		_emit 0x51
+		_emit 0x52
+		_emit 0xe8
+		_emit 0x79
+		_emit 0xe8
+		_emit 0xff
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x0c
+		_emit 0x45
+		_emit 0xeb
+		_emit 0x17
+		_emit 0x68
+		_emit 0x84
+		_emit 0x14
+		_emit 0x03
+		_emit 0x10
+		_emit 0x68
+		_emit 0xa6
+		_emit 0x16
+		_emit 0x00
+		_emit 0x00
+		_emit 0x68
+		_emit 0x04
+		_emit 0x10
+		_emit 0x03
+		_emit 0x10
+		_emit 0xe8
+		_emit 0x3f
+		_emit 0xb7
+		_emit 0xfe
+		_emit 0xff
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x10
+		_emit 0x81
+		_emit 0xc7
+		_emit 0x80
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x81
+		_emit 0xc6
+		_emit 0x80
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x81
+		_emit 0xff
+		_emit 0x60
+		_emit 0x08
+		_emit 0x03
+		_emit 0x10
+		_emit 0x7c
+		_emit 0xa7
+		_emit 0x8b
+		_emit 0x5c
+		_emit 0x24
+		_emit 0x18
+		_emit 0x5f
+		_emit 0x5e
+		_emit 0x8b
+		_emit 0xc3
+		_emit 0x5d
+		_emit 0x5b
+		_emit 0xc3
+		_emit 0x33
+		_emit 0xc0
+		_emit 0xc3
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
 	}
-	if (g_entity_type_table == 0) {
-		return 0;
-	}
-	if (g_object_count + 0x40 >= 0x5008) {
-		return 0;
-	}
-
-	obj = gm_AllocObjekt(*(int*) (geb + 1), obj_id, 1);
-
-	btype = *(unsigned char*) geb;
-	type_entry = (char*) (g_entity_type_table + btype + btype * 0x24c);
-
-	/* scan component table at type_entry+0x23 to find slot matching obj_id */
-	slot_idx = 0;
-	if ((*(unsigned short*) (type_entry + 0x23) & 0x7fff) != (unsigned short) obj_id) {
-		do {
-			slot_idx = slot_idx + 1;
-		} while ((*(unsigned short*) (type_entry + 0x23 + slot_idx * 2 + 2) & 0x7fff) != (unsigned short) obj_id);
-	}
-	slot_idx = slot_idx + 1;
-
-	/* process remaining slots in the component table */
-	if (slot_idx < 0x40) {
-		do {
-			slot_val = *(unsigned short*) (type_entry + 0x23 + slot_idx * 2);
-			if (slot_val == 0) {
-				break;
-			}
-			if (slot_val != 0xffff) {
-				item_index = slot_val & 0x7fff;
-				item_class = *(char*) (g_item_def_table + item_index * 0x41);
-				if (item_class == '\x02' || item_class == '\x06') {
-					slot_idx = 0x40;
-				}
-				else if ((slot_val & 0x8000) != 0) {
-					gm_AllocObjekt(*(int*) (obj + 2), item_index, 1);
-				}
-			}
-			slot_idx = slot_idx + 1;
-		} while (slot_idx < 0x40);
-	}
-
-	/* first entity query: worker type 0x2a */
-	query = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, 0x2a);
-	if (query != (char*) 0) {
-		*(int*) (query + 0x0e) = 2;
-		*(int*) (query + 0x06) = *(int*) (geb + 1);
-		limit_val = *(unsigned char*) (type_entry + 0x23d);
-		if (limit_val == 0 && *(unsigned char*) (type_entry + 0x23e) == 0 &&
-			*(unsigned char*) (type_entry + 0x23f) != 0) {
-			*(unsigned char*) (query + 0x1c) = *(unsigned char*) (type_entry + 0x23f);
-		}
-		else {
-			if (limit_val < 2) {
-				limit_val = 2;
-			}
-			*(unsigned char*) (query + 0x1c) = limit_val;
-			limit_val = *(unsigned char*) (type_entry + 0x23e);
-			if (limit_val < 2) {
-				limit_val = 2;
-			}
-			*(unsigned char*) (query + 0x1d) = limit_val;
-		}
-	}
-
-	/* second entity query: merchant type 0x116 */
-	query = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 2, 0x116, 0, 6);
-	if (query != (char*) 0) {
-		*(int*) (query + 0x0e) = 2;
-		*(int*) (query + 0x06) = *(int*) (obj + 2);
-		limit_val = *(unsigned char*) (type_entry + 0x23d);
-		if (limit_val == 0 && *(unsigned char*) (type_entry + 0x23e) == 0 &&
-			*(unsigned char*) (type_entry + 0x23f) != 0) {
-			if (*(unsigned char*) (type_entry + 0x23f) < 6) {
-				*(unsigned char*) (query + 0x1c) = 6;
-			}
-			else {
-				*(unsigned char*) (query + 0x1c) = *(unsigned char*) (type_entry + 0x23f);
-			}
-		}
-		else {
-			if (limit_val < 6) {
-				limit_val = 6;
-			}
-			*(unsigned char*) (query + 0x1c) = limit_val;
-			limit_val = *(unsigned char*) (type_entry + 0x23e);
-			if (limit_val < 6) {
-				limit_val = 6;
-			}
-			*(unsigned char*) (query + 0x1d) = limit_val;
-		}
-	}
-
-	/* market stall check: types 0x92-0x97 or 0x2db */
-	obj_type = *(unsigned short*) obj;
-	if (!((obj_type >= 0x92 && obj_type <= 0x97) || obj_type == 0x2db)) {
-		return (int) obj;
-	}
-
-	/* compute seasonal slot array base: season * (16*season + season) * 5 * 8 * 16 ... */
-	season = (unsigned int) (unsigned char) g_current_season;
-	{
-		unsigned int a = (season << 4) + season;
-		unsigned int d = a + a * 4;
-		unsigned int s = season + d * 8;
-		season_base = (char*) (0x1009B770 + (s << 4));
-	}
-
-	query = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0x116, 0);
-	if (query != (char*) 0) {
-		*(unsigned char*) (query + 0x1c) = 0x0c;
-		*(unsigned char*) (query + 0x1d) = 0;
-		*(int*) (query + 0x0e) = 3;
-	}
-	else {
-		ReportMessage(g_100314b8);
-	}
-
-	cart_obj = gm_AllocObjekt(*(int*) (obj + 2), 0xff, 1);
-	goods_count = 0;
-	goods_iter = (char*) 0x1002DDE0;
-	slot_iter = season_base + 4;
-
-	do {
-		if (*(unsigned short*) (slot_iter + 0x38) == *(unsigned short*) geb && *(int*) slot_iter != 0) {
-			if (goods_count >= 0x10) {
-				LogMessageInternal(g_10031004, 0x16a6, g_10031484, 1);
-			}
-			else {
-				gm_AllocObjekt(*(int*) (cart_obj + 2), (unsigned int) *(unsigned short*) goods_iter, 1);
-				goods_count = goods_count + 1;
-			}
-		}
-		goods_iter = goods_iter + 0x80;
-		slot_iter = slot_iter + 0x80;
-	} while (goods_iter < (char*) 0x10030860);
-
-	return (int) obj;
 }
-
-/* Wrapper around gm_RemoveObjectByType. Provides a simpler
- * removal interface without filtering. */
+#else
+extern void* __cdecl AllocBuildingContents(int, int);
+int __cdecl gm_AllocBuildingContents(int a, int b) { return (int) AllocBuildingContents(a, b); }
+#endif

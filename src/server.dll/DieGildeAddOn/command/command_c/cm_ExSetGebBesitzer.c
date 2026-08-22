@@ -80,9 +80,9 @@ int __cdecl cm_ExSetGebBesitzer(int cmd, char* result)
 	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building == (ushort*) 0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x4972,
-			s_cm_ExSetGebBesitzer____Could_not_1002d214,
+			"cm_ExSetGebBesitzer(): Could not find geb",
 			1
 		);
 		return 1;
@@ -91,9 +91,9 @@ int __cdecl cm_ExSetGebBesitzer(int cmd, char* result)
 	old_owner = (ushort*) gm_LookupEntityRecordById(*(int*) (cmd + 0x18));
 	if ((old_owner == (ushort*) 0) && (*(int*) (cmd + 0x18) != -1)) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x4980,
-			s_cm_ExSetGebBesitzer____Could_not_1002d1e0,
+			"cm_ExSetGebBesitzer(): Could not find besitzer_id",
 			1
 		);
 		return 1;
@@ -102,9 +102,9 @@ int __cdecl cm_ExSetGebBesitzer(int cmd, char* result)
 	new_owner = (ushort*) gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
 	if ((new_owner == (ushort*) 0) && (*(int*) (cmd + 0x14) != -1)) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x4990,
-			s_cm_ExSetGebBesitzer____Could_not_1002d1a8,
+			"cm_ExSetGebBesitzer(): Could not find eigentuemer_id",
 			1
 		);
 		return 2;

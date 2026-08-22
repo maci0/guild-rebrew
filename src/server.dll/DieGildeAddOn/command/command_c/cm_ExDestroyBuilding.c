@@ -69,9 +69,9 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building == (ushort*) 0x0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x4c32,
-			s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec,
+			"cm_ExSetGebUpgrade(): Could not find geb",
 			1
 		);
 		return 1;

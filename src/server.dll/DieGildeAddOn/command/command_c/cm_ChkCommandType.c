@@ -47,12 +47,12 @@ int __cdecl cm_ChkCommandType(char* cmd, char* result)
 	cmd_type = *cmd;
 	if ((((cmd_type != '\0') && (cmd_type != '\x05')) && (cmd_type != '\x06')) && (cmd_type != '\a')) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x270b,
-			s_Invalid_Commandtype_in_Execution_1002cacc,
+			"Invalid Commandtype in Execution",
 			1
 		);
-		printf(s_Invalid_Commandtype_in_Execution_1002cacc);
+		printf("Invalid Commandtype in Execution");
 		return 1;
 	}
 	if (result != (char*) 0x0) {

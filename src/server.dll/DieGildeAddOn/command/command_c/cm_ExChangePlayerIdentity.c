@@ -45,17 +45,17 @@ int __cdecl cm_ExChangePlayerIdentity(int cmd, char* result)
 	impl_result = gm_ChangePlayerIdentityImpl(*(int*) (cmd + 0x10), *(int*) (cmd + 0x14));
 	if (0 <= impl_result) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x299d,
-			s_cm_ExChangePlayerIdentity___exec_1002cc14,
+			"cm_ExChangePlayerIdentity() executed",
 			1
 		);
 		return 0;
 	}
 	LogMessageInternal(
-		s_D__Develop_DieGildeAddOn_command_1002c748,
+		"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 		0x29a1,
-		s_cm_ExChangePlayerIdentity___fail_1002cbf0,
+		"cm_ExChangePlayerIdentity() failed",
 		1
 	);
 	return 0;

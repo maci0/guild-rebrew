@@ -54,9 +54,9 @@
  *       line = 0x30bd;
  */
 
-extern char s_cm_ExMoveObjekt___Invalid__quell_1002d024[];
-extern char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[];
-extern char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[];
+char s_cm_ExMoveObjekt___Invalid__quell_1002d024[] = "cm_ExMoveObjekt() Invalid 'quell_besitzer_id'";
+char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[] = "cm_ExMoveObjekt() Invalid 'ziel_besitzer_id'";
+char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[] = "cm_ExMoveObjekt() Object not found at source";
 
 /* Execution handler: moves an object from one inventory slot
  * to another. Validates source and destination entities, then

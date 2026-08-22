@@ -8,382 +8,160 @@
  */
 
 /* Global variable stubs */
-float DAT_10025680;
-float DAT_100256a0;
-float DAT_100256cc;
-float DAT_100257bc;
-float DAT_100257c4;
-float DAT_100257c8;
-double DAT_100257d0;
-double DAT_10025fa0;
-float DAT_10025fa8;
-float DAT_10025fac;
-float DAT_10025fb0;
-float DAT_10025fb4;
-float DAT_10025fb8;
-int DAT_10028938;
-int DAT_1002893c;
-int DAT_1002c050[1];
-unsigned char DAT_10030861;
-int DAT_10030b6c;
-char DAT_10030b84;
-int DAT_10030b88;
-short DAT_10030b8c;
-short DAT_10030b8e;
-char DAT_10030b90;
-int DAT_10030b94;
-int DAT_10030b98;
-short DAT_10030b9c;
-char DAT_10030b9e;
-int DAT_10034624;
-int DAT_10034628;
-int DAT_1003462c;
-int DAT_10034630;
-int DAT_10034634;
-int DAT_10034638;
-void* DAT_10034640;
-int DAT_1003540c;
-int DAT_1003542c;
-int DAT_10035430;
-int DAT_10035434;
-char DAT_10035439;
-int DAT_1003543c;
-char* DAT_10035444;
-char DAT_10035448;
-char DAT_10035449;
-int DAT_1003544c;
-int DAT_10035450;
-char DAT_10035454;
-int DAT_10035458;
-char DAT_1003545c;
-char DAT_1003545d;
-char DAT_1003545e;
-unsigned char* DAT_10035464;
-unsigned short* DAT_10035468;
-int DAT_1003546c;
-unsigned short DAT_10035884;
-short DAT_100358a0;
-unsigned char DAT_10035a04;
-unsigned char DAT_10035a05;
-int DAT_10035a0c;
-char* DAT_100a8c30;
-short* DAT_100a8c34;
-int DAT_100a8c38;
-int* DAT_1013989c;
-int* DAT_101398a0;
-char* DAT_1014d8c0;
-char* DAT_101de450;
-int DAT_101de5a0[1];
-int DAT_101de5a4;
-char DAT_101de5a8;
-int DAT_101de5ac;
-char DAT_101de5b0;
-int DAT_101de5b4[1];
-int DAT_117640a0;
-int DAT_117640a4;
-int DAT_117640b0;
-int DAT_117640b4;
-int DAT_117640b8;
-int DAT_117640bc;
-int DAT_117640c0;
-int DAT_117640c4;
-int PTR_LAB_1002c5a0[1];
-float _DAT_100256a0;
-float _DAT_100256a8;
-float _DAT_100256cc;
-float _DAT_10025fbc;
-int _ctime;
-int _g_game_speed_index;
-float _g_stat_max;
-double _g_stat_max_d;
-float _g_stat_min;
-double _g_stat_min_d;
-double dScaleFactor;
-char* dword_100a8c30;
-unsigned short* dword_100a8c34;
-char* dword_101de450;
-char entity_array[1];
-char entity_slot_table[1];
-char entity_table[1];
-float fColorScale;
-float g_100256a0;
-float g_100256ac;
-float g_100256b0;
-float g_100256b4;
-float g_100256b8;
-float g_100256c0;
-float g_100256c4;
-float g_100256c8;
-int g_1002575c[1];
-int g_1002576c[1];
-char g_1002a0f8[1];
-char g_1002d444;
-char g_1002d45c;
-char g_1002d474;
-int g_1002d4f0;
-int g_1002d4f4;
-char g_1002d4f8;
-char g_1002d4fc;
-int g_1002dde0;
-char g_10031004[1];
-char g_10031484[1];
-char g_100314b8[1];
-void* g_10034614;
-int g_1003546c;
-int g_10035880;
-int g_10035884;
-int g_10035888;
-short g_1003588c;
-char g_100358a0[1];
-int g_1009b764;
-int g_100a8c34;
-int g_100a8cf8;
-char g_100a9820[1];
-char g_10139820[1];
-int g_1014d8c0;
-char g_1014d8e0[1];
-int g_101de454;
-int g_101de55c;
-int g_101de560;
-int g_101deac0;
-int g_101deae8;
-unsigned char* g_EntityListStart;
-unsigned char* g_EntitySearchPtr;
-unsigned char g_FilterActive;
-int g_FilterId;
-unsigned char g_FilterType;
-unsigned short g_FilterVal25;
-unsigned short g_FilterVal27;
-unsigned char g_FilterVal30;
-int g_SearchCount;
-unsigned char g_SearchFlag;
-void* g_SomeGlobal;
-char* g_action_table_base;
-char g_aemter_table[1];
-char* g_array;
-char* g_array_base;
-int g_array_count;
-void* g_array_ptr;
-int g_citizen_count;
-unsigned int g_connection_counter;
-unsigned char g_connections[1];
-int g_console_handle;
-char g_currency_type_array[1];
-unsigned char g_current_season;
-int g_current_year;
-int g_data_ptr;
-int g_data_ptr2;
-int g_data_ptr3;
-int g_data_ptr4;
-int g_dispatch_table[1];
-unsigned int g_download_buffer;
-unsigned int g_download_received;
-unsigned int g_download_slots[8];
-unsigned int g_download_total_size;
-char g_entity_array[1];
-int g_entity_array_ptr;
-char g_entity_base[1];
-char g_entity_end[1];
-int g_entity_id_start;
-char* g_entity_ptr;
-int g_entity_ref_table[1];
-unsigned char g_entity_state_base[1];
-unsigned char g_entity_sync_data[1];
-char* g_entity_table;
-int g_entity_table_end;
-unsigned char g_entity_type_bytes[1];
-int g_entity_type_table;
-int g_ents[1];
-int g_ents2[1];
-char g_error_msg_sell_failed[1];
-char g_error_msg_sell_no_dest[1];
-char g_error_msg_sell_no_source[1];
-int g_file_version;
-int g_flag_3c;
-char* g_game_initialized;
-int g_game_speed_table[1];
-int g_game_speed_value;
-int g_handler_flags;
-int g_handler_started;
-int g_item_def_table;
-int g_key_table[1];
-void* g_list_head;
-int g_listen_socket;
-char g_log_buffer[256];
-int g_log_file_handle;
-char g_log_format_table[1];
-int g_log_level_table[3];
-char g_log_message_buffer;
-unsigned int g_log_mode_flags;
-int g_mem_pool_overflow_flag;
-char g_msg_buf[1];
-int g_net_socket;
-int g_next_object_id;
-int g_object_count;
-int g_owner_window;
-int g_panic_callback;
-int g_plant_count;
-char g_player_slot_0[1];
-unsigned int g_player_slot_field;
-unsigned int g_player_slot_overflow;
-void* g_player_slots;
-int g_player_slots_base[1];
-short g_record_table[1];
-int* g_records;
-char g_relationship_matrix_primary[1];
-char g_relationship_matrix_secondary[1];
-int g_save_info[2];
-int g_save_version;
-int g_sequence_counter;
-int g_severity_table[3];
-char g_slot_array[1];
-int g_slot_count_cat0[1];
-int g_slot_count_cat1[1];
-int g_slot_count_cat2[1];
-int g_slot_count_cat3[1];
-char g_slot_table[1];
-int g_some_limit;
-int g_something_1;
-int g_stat1;
-int g_stat2;
-int g_stat3;
-int g_stat4;
-int g_static_entity_table_358a0;
-int g_stop_flag;
-char g_str_10028888[1];
-char g_str_10028aec[1];
-char g_str_10028b04[1];
-char g_str_10028b60[1];
-char g_str_10028b78[1];
-char g_str_10031500[1];
-char g_str_10031538[1];
-int g_stream_count;
-char g_stream_pool;
-char* g_table;
-char* g_table_a9;
-int g_timestamp_0b6c;
-char g_type_idx;
-int g_work_building_ptrs;
-char* g_unknown_1de450;
+#include <time.h>
+
+int _g_game_speed_index = 0;
+float _g_stat_max = 0;
+double _g_stat_max_d = 0;
+float _g_stat_min = 0;
+double _g_stat_min_d = 0;
+double dScaleFactor = 0;
+char* dword_100a8c30 = 0;
+unsigned short* dword_100a8c34 = 0;
+char* dword_101de450 = 0;
+char entity_array[1] = {0};
+char entity_slot_table[1] = {0};
+char entity_table[1] = {0};
+float fColorScale = 0;
+int fcn_1001a6a1 = 0;
+int g_1002575c[1] = {0};
+int g_1002576c[1] = {0};
+char g_1002d444 = 0;
+char g_1002d45c = 0;
+char g_1002d474 = 0;
+int g_1002d4f0 = 0;
+int g_1002d4f4 = 0;
+char g_1002d4f8 = 0;
+char g_1002d4fc = 0;
+char g_10031004[1] = {0};
+char g_10031484[1] = {0};
+char g_100314b8[1] = {0};
+int g_1003546c = 0;
+int g_10035880 = 0;
+int g_101de560 = 0;
+int g_101deac0 = 0;
+int g_101deae8 = 0;
+unsigned char* g_EntityListStart = 0;
+unsigned char* g_EntitySearchPtr = 0;
+unsigned char g_FilterActive = 0;
+int g_FilterId = 0;
+unsigned char g_FilterType = 0;
+unsigned short g_FilterVal25 = 0;
+unsigned short g_FilterVal27 = 0;
+unsigned char g_FilterVal30 = 0;
+int g_SearchCount = 0;
+unsigned char g_SearchFlag = 0;
+void* g_SomeGlobal = 0;
+char* g_action_table_base = 0;
+int g_active_player_count = 0;
+int g_alchemy_entity_table[1] = {0};
+int g_alloc_counter = 0;
+int g_alloc_root_count = 0;
+int g_alloc_root_count_max = 0;
+int g_alloc_root_field_20 = 0;
+int g_alloc_root_name = 0;
+int g_alloc_root_name_4 = 0;
+int g_alloc_root_size_max = 0;
+int g_alloc_root_size_total = 0;
+char* g_array = 0;
+char* g_array_base = 0;
+unsigned char g_byte_table_30861 = 0;
+unsigned char g_connections[1] = {0};
+int g_console_handle = 0;
+float g_const_57bc = 0;
+float g_const_5fbc = 0;
+char g_currency_type_array[1] = {0};
+int g_data_ptr = 0;
+int g_data_ptr2 = 0;
+int g_data_ptr3 = 0;
+int g_data_ptr4 = 0;
+int g_default_group_name = 0;
+int g_default_group_name_4 = 0;
+int g_dispatch_table[1] = {0};
+int g_dispatch_table_a[1] = {0};
+int g_dispatch_table_b[1] = {0};
+int g_dynamic_count = 0;
+int g_dynasty_field_2c = 0;
+int g_dynasty_generation_counter = 0;
+char g_entity_array[1] = {0};
+int g_entity_id_start = 0;
+int g_ents[1] = {0};
+int g_ents2[1] = {0};
+int g_file_version = 0;
+float g_float_const_a0 = 0;
+float g_float_const_a8 = 0;
+float g_float_const_cc = 0;
+int g_game_speed_table[1] = {0};
+int g_game_speed_value = 0;
+float g_gv_const_5680 = 0;
+float g_gv_const_57c4 = 0;
+float g_gv_const_57c8 = 0;
+int g_handler_flags = 0;
+int g_handler_started = 0;
+int g_key_table[1] = {0};
+char g_log_message_buffer = 0;
+unsigned int g_log_mode_flags = 0;
+int g_mem_pool_overflow_flag = 0;
+char g_msg_buf[1] = {0};
+int g_net_socket = 0;
+int g_object_count = 0;
+int g_office_slots[1] = {0};
+int g_owner_window = 0;
+int g_panic_callback = 0;
+int g_plant_count = 0;
+int g_query_filter_max_id = 0;
+short g_query_filter_type = 0;
+int g_query_limit = 0;
+int g_query_state_a0c = 0;
+short g_record_table[1] = {0};
+int* g_records = 0;
+int g_save_extra_70 = 0;
+int g_save_extra_74 = 0;
+int g_save_extra_field = 0;
+int g_save_info[2] = {0};
+int g_sequence_counter = 0;
+int g_severity_table[3] = {0};
+int g_something_1 = 0;
+unsigned char g_stat_b_array[1] = {0};
+unsigned char g_static_entity0_entity_id[1] = {0};
+unsigned char g_static_entity_table_358a0[1] = {0};
+int g_stop_flag = 0;
+char* g_table = 0;
+char* g_table_a9 = 0;
+int g_timestamp_0b6c = 0;
+char g_type_idx = 0;
+unsigned int g_work_building_ptrs[1] = {0};
+int m_FreeHeapLocked = 0;
+int vfs_CleanupSubobject = 0;
+int vfs_CompressBlock = 0;
+int vfs_EntityCleanup = 0;
+int vfs_FreeGameSubobject = 0;
+int vfs_FreeSubobj = 0;
+int vfs_GetErrnoPtr = 0;
+int vfs_LockedFwrite = 0;
+int vfs_StreamClose = 0;
+int vfs_WriteBufferLocked = 0;
+
+
+
+/* Big BSS arrays (declared `extern TYPE x[]` in sources; must be DEFINED
+ * non-tentatively here — tentative defs become COMMON weak symbols the
+ * linker parks at the END of .data, pushing folded operand bases (symbol +
+ * struct offset) out of the postlink rewrite range and breaking byte
+ * identity.  Real sparse layout (8 slots at 0x101deb00) is the data-restore
+ * TU's job; sizes here just need to fit the .data VS and stay in range.) */
+char g_player_slot_0[0x264264] = {0};
+char g_player_slot_field[4] = {0};
+char g_player_slot_overflow[0x264264] = {0};
+
+/* BSS tail pad: grows .data VS to the original's 0x174059c (zero-init -> .bss) */
+unsigned char g_bss_tail[0x1269f30] = {0};
+
 
 /* String literal globals */
-char s_ClientSpieler_erzeugt_1002cbbc[1] = "";
 char s_D__Develop_DieGildeAddOn_command_1002c748[1] = "";
-char s_D__Develop_DieGildeAddOn_command_1002d70c[1] = "";
-char s_D__Develop_DieGildeAddOn_game_sp_10031004[1] = "";
-char s_Got_lb_ExPlayerlist_1002d6f8[1] = "";
-char s_Invalid_Commandtype_in_Execution_1002cacc[1] = "";
-char s_Invalid_Id_for_cmdt_FREE_in_cm_E_1002cc5c[1] = "";
-char s_Invalid__GI_Id__for_cmdt_ALLOC_B_1002caf0[1] = "";
-char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[1] = "";
-char s__ahm_AllocAhmInfo_1002a0f7[1] = "";
-char s_cm_ChkChangeAttribute___Error_i_1002c9a0[1] = "";
-char s_cm_ChkChangeAttribute___Invalid_I_1002c9e0[1] = "";
-char s_cm_ChkChangeAttribute___Source_obj_1002c958[1] = "";
-char s_cm_ChkChangeAttribute___Target_obj_1002c90c[1] = "";
-char s_cm_ChkChangeBits___Invalid_Id_1002ca54[1] = "";
-char s_cm_ChkChangeBits___Invalid_actio_1002ca04[1] = "";
-char s_cm_ChkCutsceneReady____failed____1002caa8[1] = "";
-char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[1] = "";
-char s_cm_ChkMoveCredits____Not_enough_m_1002c774[1] = "";
-char s_cm_ChkSellObjekt___Invalid__quel_1002c8dc[1] = "";
-char s_cm_ChkSellObjekt___Invalid__ziel_1002c854[1] = "";
-char s_cm_ChkSellObjekt___Inventory_vol_1002c810[1] = "";
-char s_cm_ChkSellObjekt___Lager_voll_1002c834[1] = "";
-char s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4[1] = "";
-char s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8[1] = "";
-char s_cm_ChkSellObjekt___Not_enough_Ob_1002c884[1] = "";
-char s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74[1] = "";
-char s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c[1] = "";
-char s_cm_ExAllocThemaPredigt____Execut_1002d184[1] = "";
-char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[1] = "";
-char s_cm_ExChangeBits___Invalid_Id_1002d114[1] = "";
-char s_cm_ExChangeDesire___Invalid_Id_1002d0f4[1] = "";
-char s_cm_ExChangeFloat___Invalid_Id_1002d134[1] = "";
-char s_cm_ExChangePlayerIdentity___exec_1002cc14[1] = "";
-char s_cm_ExChangePlayerIdentity___fail_1002cbf0[1] = "";
-char s_cm_ExClearLagerslot___Invalid__L_1002d088[1] = "";
-char s_cm_ExClearLagerslot___Lager_has_n_1002d054[1] = "";
-char s_cm_ExCreateGeb____Could_not_find_1002d41c[1] = "";
-char s_cm_ExCreateGeb____failed_1002d400[1] = "";
-char s_cm_ExEmployWorker____Illegal_geb_1002d33c[1] = "";
-char s_Error_Handler_closed__100273ac[1] = "";
-char s_plt_SetPlantMap____Could_not_fin_1002d990[1] = "";
-char s_D__Develop_DieGildeAddOn_auxilla_1002d9c0[1] = "";
-char s_plt_SetPlantMap____Map_is_not_al_1002d9ec[1] = "";
-char s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394[1] = "";
-char s_gm_KannObjektHergestellt___pCObj_10031628[1] = "";
-char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[1] = "";
-char s_D__Develop_DieGildeAddOn_loadsav_1002d550[1] = "";
-char s_ls_ID2Ptr____Houston__wir_haben_e_1002d520[1] = "";
-char s_amt_fio_LoadAemter____Can_t_load_10029f78[1] = "";
-char s_amt_fio_LoadAemter____Can_t_load_10029fa4[1] = "";
-char s_amt_fio_LoadAemter____Can_t_load_10029fcc[1] = "";
-char s_amt_fio_LoadAemter____Can_t_load_10029ff4[1] = "";
-char s_amt_fio_LoadAemter____Can_t_load_1002a01c[1] = "";
-char s_amt_fio_LoadAemter____Can_t_load_1002a048[1] = "";
-char s_amt_fio_LoadAemter____count_read_1002a06c[1] = "";
-char s_D__Develop_DieGildeAddOn_game_ae_1002a0a0[1] = "";
-char s_amt_fio_LoadAemter____Can_t_load_1002a0c8[1] = "";
-char s_No_more_Slots_for_new_Connection_100299c8[1] = "";
-char s_D__Develop_DieGildeAddOnServer_s_100298b0[1] = "";
-char s_New_Connection_from__li__li__li__100299a0[1] = "";
-char s_D__Develop_Units_vfs_vfs_c_10029458[1] = "";
-char s_vfs__gz_compressed_file____s___i_10029474[1] = "";
-char s_gv_Alloc__all_zombies_1002d444[1] = "";
-char s_gv_Alloc__all_graves_1002d45c[1] = "";
-char s_gv_AllocGraveyardField_1002d474[1] = "";
-char s__________________________________1002735c[1] = "";
-char s__s__s_100270fc[1] = "";
-char s_LogFile_has_been_deleted__1002733c[1] = "";
-unsigned char g_file_write_mode[1] = "";
-char s_cm_ExAllocCharacter___gm_AllocSp_1002d364[1] = "";
-unsigned char g_static_entity0_entity_id[4];
-char s_cm_ExEmployWorker____Illegal_gw__1002d318[1] = "";
-char s_cm_ExFree____Can_t_free_Objects_1002cc3c[1] = "";
-char s_cm_ExKillSpieler___Could_not_fin_1002d154[1] = "";
-char s_cm_ExKillTransporter____invalid_t_1002d3d4[1] = "";
-char s_cm_ExMoveObjekt___Invalid__quell_1002d024[1] = "";
-char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[1] = "";
-char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[1] = "";
-char s_cm_ExProdObjekt___Cannot_produce___1002cf1c[1] = "";
-char s_cm_ExProdObjekt___Rohstoff_versc_1002cef4[1] = "";
-char s_cm_ExSellObjekt___Invalid__gm_ev_1002ce90[1] = "";
-char s_cm_ExSellObjekt___Invalid__quell_1002cec4[1] = "";
-char s_cm_ExSellObjekt___Invalid__ziel__1002cdcc[1] = "";
-char s_cm_ExSellObjekt___Lager_voll_1002cdac[1] = "";
-char s_cm_ExSellObjekt___Not_enough_Cre_1002cd78[1] = "";
-char s_cm_ExSellObjekt___Not_enough_Obj_1002cdfc[1] = "";
-char s_cm_ExSellObjekt____Object_not_fo_1002ce4c[1] = "";
-char s_cm_ExSellObjekt____gm_AllocObjek_1002cce8[1] = "";
-char s_cm_ExSellObjekt____gm_AllocRaum_f_1002ccc0[1] = "";
-char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[1] = "";
-char s_cm_ExSetGebBesitzer____Could_not_1002d1a8[1] = "";
-char s_cm_ExSetGebBesitzer____Could_not_1002d1e0[1] = "";
-char s_cm_ExSetGebBesitzer____Could_not_1002d214[1] = "";
-char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[1] = "";
-char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[1] = "";
-char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[1] = "";
-char s_cm_ExSetWohnsitz____Could_not_fi_1002d298[1] = "";
-char s_cm_ExSetWohnsitz____Residence_is_1002d240[1] = "";
-char s_cm_ExecProduction___Invalid__lager_1002cf9c[1] = "";
-char s_cm_ExecProduction___Lager_has_wron_1002cf74[1] = "";
-char s_cm_ExecProduction___Lager_hat_kein_1002cf48[1] = "";
-char s_gm_AddObjekt____Parent_not_found_10031358[1] = "";
-char s_gm_AddObjekt____obj____ob_NULL_10031390[1] = "";
-char s_gm_AllocGebaeude___failed_1002cb34[1] = "";
-char s_gm_AllocSpieler___failed_1002cbd4[1] = "";
-char s_invalid_client_state_1002d740[1] = "";
-char s_lb_ExLobbyServerCommand___i_1002d858[1] = "";
 
 /* Special forwarding stubs */
-static int stub_errno_val = 0;
-
-int* __cdecl vfs_GetErrnoPtr(void)
-{
-	return &stub_errno_val;
-}
-
 extern int __cdecl ServerMainThread(void*);
 
 int __stdcall thread_proc(void* param)
@@ -392,111 +170,43 @@ int __stdcall thread_proc(void* param)
 }
 
 /* Function stubs */
-void __cdecl FreeCommandBuffer(unsigned int* a, int b)
-{
-}
-
-void __cdecl m_FreeHeapLocked(void* ptr)
-{
-}
-
-int __cdecl RandomBelow(void)
+int __cdecl FreeCommandBuffer(void)
 {
 	return 0;
 }
 
-void __cdecl RecvGameSavegame(void)
-{
-}
-
-int __cdecl vfs_WriteBufferLocked(void* a, int b, int c, int d)
+int __cdecl free_block(void)
 {
 	return 0;
 }
 
-int __cdecl vfs_CleanupSubobject(void* a)
+int __cdecl free_node(void)
 {
 	return 0;
 }
 
-int __cdecl vfs_CompressBlock(void* a, int b)
+int __cdecl game_free(void)
 {
 	return 0;
 }
 
-int __cdecl vfs_Crc32Update(int checksum, int buffer, unsigned int size)
+int __cdecl get_command_type(void)
 {
 	return 0;
 }
 
-void* __cdecl _callnewh(int a)
-{
-	return (void*) 0;
-}
-
-int __cdecl _getpid(void)
+int __cdecl write_log(void)
 {
 	return 0;
 }
 
-void __cdecl _seterrormode(unsigned int value)
-{
-}
 
-int __cdecl crt_locked_putc(int a, int b)
-{
-	return 0;
-}
-
-void __cdecl vfs_EntityCleanup(char* a)
-{
-}
-
-void __cdecl free_block(int a)
-{
-}
-
-int __cdecl vfs_FreeGameSubobject(void* a)
-{
-	return 0;
-}
-
-void __cdecl free_node(char* a)
-{
-}
-
-void __cdecl vfs_FreeSubobj(void* a)
-{
-}
-
-void __cdecl game_free(void* a)
-{
-}
-
-short __cdecl get_command_type(char* a)
-{
-	return 0;
-}
-
-int __cdecl vfs_LockedFwrite(void* a, int b, int c, void* d)
-{
-	return 0;
-}
-
-void __cdecl vfs_StreamClose(int a)
-{
-}
-
-int __cdecl sub_1001a299(void)
-{
-	return 0;
-}
-
-void __cdecl write_log(char* a, int b, char* c)
-{
-}
-
-int __cdecl __ftol(void)
-{
-	return 0;
-}
+/* The compiler emits an undefined __fltused reference from any TU that uses
+ * floating point.  In the original binary that reference pulled LIBCMT's
+ * fpinit.obj, whose .rdata (the "IsProcessorFeaturePresent"/"KERNEL32"
+ * loader helper + __real constants) would otherwise land in OUR .rdata after
+ * the restored blob and duplicate the bytes the blob already carries at the
+ * original RVA.  Defining the marker here satisfies the reference without
+ * pulling fpinit.obj — the FPU init code itself lives in run_000.c.
+ * The value is never read; presence is all the linker checks. */
+int _fltused = 0;

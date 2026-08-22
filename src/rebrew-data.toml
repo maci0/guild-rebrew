@@ -1023,3 +1023,11 @@ section = ".data"
 name = "s_LogFile_has_been_deleted__1002733c"
 type = "char"
 section = ".data"
+
+["SERVER.0x100252e8"]
+section = ".rdata"
+name = "g_rdata_restore_252e8"
+
+["SERVER.0x1002a000"]
+section = ".data"
+name = "g_data_restore_gap"

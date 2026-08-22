@@ -92,9 +92,9 @@ int __cdecl cm_ExAllocSpieler(int cmd, char* result)
 		seed = (int) gm_StartFilteredEntitySearch(1, 1, field_id);
 		if (seed == 0) {
 			LogMessageInternal(
-				s_D__Develop_DieGildeAddOn_command_1002c748,
+				"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 				0x2889,
-				s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50,
+				"Invalid 'GI_Id' for cmdt_ALLOC_SPIELER in cm_ExecCommand()",
 				1
 			);
 			return 1;
@@ -113,9 +113,9 @@ int __cdecl cm_ExAllocSpieler(int cmd, char* result)
 	entity_index = entity_index & 0xffff;
 	if (entity_index == 0xffff) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x2897,
-			s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c,
+			"cm_ExAllocSpieler():gm_AllocSpieler() failed",
 			1
 		);
 		return 1;

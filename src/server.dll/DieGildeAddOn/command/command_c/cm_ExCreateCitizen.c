@@ -63,14 +63,15 @@ extern unsigned int g_work_building_ptrs[];
 extern unsigned char g_entity_state_base[];
 extern unsigned char g_static_entity0_entity_id[];
 extern unsigned char g_static_entity_table_358a0[];
-extern char s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394[];
-extern char s_cm_ExAllocCharacter___gm_AllocSp_1002d364[];
+char s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394[] = "Invalid 'GI_Id' for cmdt_ALLOC_CHARACTER in cm_ExecCommand()";
+char s_cm_ExAllocCharacter___gm_AllocSp_1002d364[] = "cm_ExAllocCharacter():gm_AllocSpieler() failed";
 
 /* Execution handler: creates a new citizen (Buerger) entity.
  * Allocates entity memory, sets initial stats, family links,
  * and home building assignment. Uses random seed for
  * stat generation via gm_CreateEntityFromParents. */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000f980
 __declspec(naked) int __cdecl cm_ExCreateCitizen(int cmd, char* result)
 {

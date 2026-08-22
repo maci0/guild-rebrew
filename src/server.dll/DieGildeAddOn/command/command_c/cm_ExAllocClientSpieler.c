@@ -11,6 +11,7 @@ char* __cdecl strncpy(char*, const char*, unsigned int);
  * Similar to cm_ExAllocSpieler but for client-connected players,
  * updating player slot flags and setting connection state. */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000d570
 __declspec(naked) int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 {

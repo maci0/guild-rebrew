@@ -75,9 +75,9 @@ int __cdecl cm_ExCreateGeb(int cmd, char* result)
 	owner_record = (unsigned short*) gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
 	if (owner_record == (unsigned short*) 0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_command_1002c748,
+			"D:\\Develop\\DieGildeAddOn\\command\\command.c",
 			0x5386,
-			s_cm_ExCreateGeb____Could_not_find_1002d41c,
+			"cm_ExCreateGeb(): Could not find player",
 			1
 		);
 		return 1;
@@ -86,7 +86,7 @@ int __cdecl cm_ExCreateGeb(int cmd, char* result)
 	*(int*) (cmd + 0x14) = g_timestamp_0b6c;
 	building = gm_AllocGebaeude(*(unsigned char*) (cmd + 0x18), *owner_record);
 	if (building == (char*) 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x539e, s_cm_ExCreateGeb____failed_1002d400, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x539e, "cm_ExCreateGeb(): failed", 1);
 		return 1;
 	}
 

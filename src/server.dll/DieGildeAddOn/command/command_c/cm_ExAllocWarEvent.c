@@ -60,6 +60,7 @@ extern void* __cdecl gm_SearchTable67(int);
  * Creates a combat-related game event with attacker/target
  * references and initializes event parameters. */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x10010140
 __declspec(naked) int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 {

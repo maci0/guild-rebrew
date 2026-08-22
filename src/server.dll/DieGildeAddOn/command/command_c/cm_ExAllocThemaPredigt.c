@@ -52,6 +52,7 @@ char* __cdecl gm_AllocObjekt(int, int, int);
 /* Execution handler: allocates a sermon theme (Thema Predigt)
  * for a church/religious building entity. */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000f2f0
 __declspec(naked) int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 {

@@ -135,6 +135,8 @@ int stream_size;
 }
 
 
+/* stripped: not present in original DLL */
+#if 0
 int ZEXPORT inflateInit_(z, version, stream_size)
 z_streamp z;
 const char *version;
@@ -142,6 +144,7 @@ int stream_size;
 {
   return inflateInit2_(z, DEF_WBITS, version, stream_size);
 }
+#endif
 
 
 #define NEEDBYTE {if(z->avail_in==0)return r;r=f;}
@@ -275,6 +278,8 @@ int f;
 }
 
 
+/* stripped: not present in original DLL */
+#if 0
 int ZEXPORT inflateSetDictionary(z, dictionary, dictLength)
 z_streamp z;
 const Bytef *dictionary;
@@ -297,8 +302,11 @@ uInt  dictLength;
   z->state->mode = BLOCKS;
   return Z_OK;
 }
+#endif
 
 
+/* stripped: not present in original DLL */
+#if 0
 int ZEXPORT inflateSync(z)
 z_streamp z;
 {
@@ -348,6 +356,7 @@ z_streamp z;
   z->state->mode = BLOCKS;
   return Z_OK;
 }
+#endif
 
 
 /* Returns true if inflate is currently at the end of a block generated
@@ -357,6 +366,8 @@ z_streamp z;
  * decompressing, PPP checks that at the end of input packet, inflate is
  * waiting for these length bytes.
  */
+/* stripped: not present in original DLL */
+#if 0
 int ZEXPORT inflateSyncPoint(z)
 z_streamp z;
 {
@@ -364,3 +375,4 @@ z_streamp z;
     return Z_STREAM_ERROR;
   return inflate_blocks_sync_point(z->state->blocks);
 }
+#endif

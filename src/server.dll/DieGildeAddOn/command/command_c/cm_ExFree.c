@@ -18,6 +18,7 @@
  * entity by ID and removes it from the game world. Logs error
  * on invalid entity ID. */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000d730
 __declspec(naked) int __cdecl cm_ExFree(int cmd, char *result)
 {

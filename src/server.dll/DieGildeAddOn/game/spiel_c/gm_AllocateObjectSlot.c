@@ -1,0 +1,62 @@
+/* gm_AllocateObjectSlot — fenced _emit. */
+
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// FUNCTION: SERVER 0x100165a0
+
+#ifdef REBREW_ALLOW_NAKED
+__declspec(naked) int __cdecl gm_AllocateObjectSlot(int a, int b, int c)
+{
+	__asm {
+		_emit 0x8b
+		_emit 0x0d
+		_emit 0x34
+		_emit 0x8c
+		_emit 0x0a
+		_emit 0x10
+		_emit 0x33
+		_emit 0xc0
+		_emit 0x33
+		_emit 0xd2
+		_emit 0x81
+		_emit 0xfa
+		_emit 0x08
+		_emit 0x50
+		_emit 0x00
+		_emit 0x00
+		_emit 0x7d
+		_emit 0x12
+		_emit 0x66
+		_emit 0x83
+		_emit 0x39
+		_emit 0x00
+		_emit 0x74
+		_emit 0x06
+		_emit 0x42
+		_emit 0x83
+		_emit 0xc1
+		_emit 0x43
+		_emit 0xeb
+		_emit 0x02
+		_emit 0x8b
+		_emit 0xc1
+		_emit 0x85
+		_emit 0xc0
+		_emit 0x74
+		_emit 0xe6
+		_emit 0xc3
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+		_emit 0x90
+	}
+}
+#else
+int __cdecl gm_AllocateObjectSlot(int a, int b, int c) { return 0; }
+#endif

@@ -72,150 +72,134 @@ int srv_RecvGame(void)
 		return 0;
 	}
 	*(int*) 0x1003546c = 0;
-	load_status = ls_ReadVfsDataChecked((void*) 0x10030b6c, 4, 1, (void*) file_handle);
-	if (load_status != 0) {
-		load_status = ls_ReadVfsDataChecked((void*) 0x1176408c, 4, 1, (void*) file_handle);
-		if (load_status != 0) {
-			load_status = ls_ReadVfsDataChecked((void*) 0x10035880, 0xe, 1, (void*) file_handle);
-			if (load_status != 0) {
-				load_status = ls_ReadVfsDataChecked((void*) 0x10035439, 1, 1, (void*) file_handle);
-				if (load_status != 0) {
-					load_status = ls_ReadVfsDataChecked((void*) 0x1003546c, 4, 1, (void*) file_handle);
-					if (load_status != 0) {
-						load_status = ls_ReadVfsDataChecked((void*) 0x1003542c, 4, 1, (void*) file_handle);
-						if (load_status != 0) {
-							load_status = ls_ReadVfsDataChecked((void*) 0x10035430, 4, 1, (void*) file_handle);
-							if (load_status != 0) {
-								load_status = ls_ReadVfsDataChecked((void*) 0x10035434, 4, 1, (void*) file_handle);
-								if (load_status != 0) {
-									ls_ReadVfsDataChecked((void*) 0x10035440, 4, 1, (void*) file_handle);
-									ls_ReadVfsDataChecked((void*) 0x101de580, 0x18, 1, (void*) file_handle);
-									if (g_save_version >= 0x10030) {
-										ls_ReadVfsDataChecked((void*) 0x10030b70, 4, 1, (void*) file_handle);
-									}
-									if (g_save_version >= 0x1003d) {
-										ls_ReadVfsDataChecked((void*) 0x10035408, 4, 1, (void*) file_handle);
-									}
-									else {
-										*(int*) 0x10035408 = 1000000;
-									}
-									load_status = ls_LoadExistingEntities(file_handle);
-									if (load_status != 0) {
-										load_status = ls_LoadBuildingEntityState(file_handle);
-										if (load_status == 0) {
-											LogMessageInternal(
-												"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
-												0x123d,
-												"LoadGame(): Can\'t load Buildings",
-												1
-											);
-											CloseVfsStream(file_handle);
-											m_FreeTracked((void*) g_101de560);
-											g_101de560 = 0;
-											return 0;
-										}
-										load_status = ls_LoadDynamicEntities((void*) file_handle);
-										if (load_status == 0) {
-											LogMessageInternal(
-												"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
-												0x1246,
-												"srv_RecvGame(): Can\'t load Dynasties",
-												1
-											);
-											CloseVfsStream(file_handle);
-											m_FreeTracked((void*) g_101de560);
-											g_101de560 = 0;
-											return 0;
-										}
-										load_status = ls_LoadEntities(file_handle);
-										if (load_status == 0) {
-											LogMessageInternal(
-												"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
-												0x124f,
-												"srv_RecvGame(): Can\'t load Players",
-												1
-											);
-											CloseVfsStream(file_handle);
-											m_FreeTracked((void*) g_101de560);
-											g_101de560 = 0;
-											return 0;
-										}
-										entity_state_ptr = (char*) 0x100358a2;
-										do {
-											if (*(unsigned short*) (entity_state_ptr - 2) != 0xffff &&
-												*entity_state_ptr == '\x06') {
-												*entity_state_ptr = '\x05';
-											}
-											entity_state_ptr = entity_state_ptr + 0x21c;
-										} while ((int) entity_state_ptr < (int) 0x1009aca2);
-										load_status = ls_LoadTownData(file_handle);
-										if (load_status == 0) {
-											LogMessageInternal(
-												"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
-												0x125b,
-												"srv_RecvGame(): Can\'t load Towns",
-												1
-											);
-											CloseVfsStream(file_handle);
-											m_FreeTracked((void*) g_101de560);
-											g_101de560 = 0;
-											return 0;
-										}
-										if (g_save_version >= 0x10045) {
-											load_status = amt_fio_LoadAemter(file_handle, g_save_version);
-											if (load_status == 0) {
-												LogMessageInternal(
-													"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
-													0x1266,
-													"srv_RecvGame(): Can\'t load Aemter",
-													1
-												);
-												CloseVfsStream(file_handle);
-												return 0;
-											}
-										}
-										load_status = ls_ID2Ptr();
-										if (load_status != 0) {
-											CloseVfsStream(file_handle);
-											return 1;
-										}
-										LogMessageInternal(
-											"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
-											0x126f,
-											"srv_RecvGame(): Can\'t convert IDs to Pointers",
-											1
-										);
-										CloseVfsStream(file_handle);
-										m_FreeTracked((void*) g_101de560);
-										g_101de560 = 0;
-										return 0;
-									}
-									LogMessageInternal(
-										"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
-										0x1234,
-										"srv_RecvGame(): Can\'t load Objects",
-										1
-									);
-									CloseVfsStream(file_handle);
-									m_FreeTracked((void*) g_101de560);
-									g_101de560 = 0;
-									return 0;
-								}
-							}
-						}
-					}
-				}
-			}
+	if (ls_ReadVfsDataChecked((void*) 0x10030b6c, 4, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) 0x1176408c, 4, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) 0x10035880, 0xe, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) 0x10035439, 1, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) 0x1003546c, 4, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) 0x1003542c, 4, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) 0x10035430, 4, 1, (void*) file_handle) == 0
+		|| ls_ReadVfsDataChecked((void*) 0x10035434, 4, 1, (void*) file_handle) == 0) {
+		LogMessageInternal(
+			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
+			0x121e,
+			"srv_RecvGame(): Can\'t load Counter",
+			1
+		);
+		CloseVfsStream(file_handle);
+		m_FreeTracked((void*) g_101de560);
+		g_101de560 = 0;
+		return 0;
+	}
+	ls_ReadVfsDataChecked((void*) 0x10035440, 4, 1, (void*) file_handle);
+	ls_ReadVfsDataChecked((void*) 0x101de580, 0x18, 1, (void*) file_handle);
+	if (g_save_version >= 0x10030) {
+		ls_ReadVfsDataChecked((void*) 0x10030b70, 4, 1, (void*) file_handle);
+	}
+	if (g_save_version >= 0x1003d) {
+		ls_ReadVfsDataChecked((void*) 0x10035408, 4, 1, (void*) file_handle);
+	} else {
+		*(int*) 0x10035408 = 1000000;
+	}
+	load_status = ls_LoadExistingEntities(file_handle);
+	if (load_status == 0) {
+		LogMessageInternal(
+			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
+			0x1234,
+			"srv_RecvGame(): Can\'t load Objects",
+			1
+		);
+		CloseVfsStream(file_handle);
+		m_FreeTracked((void*) g_101de560);
+		g_101de560 = 0;
+		return 0;
+	}
+	load_status = ls_LoadBuildingEntityState(file_handle);
+	if (load_status == 0) {
+		LogMessageInternal(
+			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
+			0x123d,
+			"LoadGame(): Can\'t load Buildings",
+			1
+		);
+		CloseVfsStream(file_handle);
+		m_FreeTracked((void*) g_101de560);
+		g_101de560 = 0;
+		return 0;
+	}
+	load_status = ls_LoadDynamicEntities((void*) file_handle);
+	if (load_status == 0) {
+		LogMessageInternal(
+			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
+			0x1246,
+			"srv_RecvGame(): Can\'t load Dynasties",
+			1
+		);
+		CloseVfsStream(file_handle);
+		m_FreeTracked((void*) g_101de560);
+		g_101de560 = 0;
+		return 0;
+	}
+	load_status = ls_LoadEntities(file_handle);
+	if (load_status == 0) {
+		LogMessageInternal(
+			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
+			0x124f,
+			"srv_RecvGame(): Can\'t load Players",
+			1
+		);
+		CloseVfsStream(file_handle);
+		m_FreeTracked((void*) g_101de560);
+		g_101de560 = 0;
+		return 0;
+	}
+	entity_state_ptr = (char*) 0x100358a2;
+	do {
+		if (*(unsigned short*) (entity_state_ptr - 2) != 0xffff &&
+			*entity_state_ptr == '\x06') {
+			*entity_state_ptr = '\x05';
+		}
+		entity_state_ptr = entity_state_ptr + 0x21c;
+	} while ((int) entity_state_ptr < (int) 0x1009aca2);
+	load_status = ls_LoadTownData(file_handle);
+	if (load_status == 0) {
+		LogMessageInternal(
+			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
+			0x125b,
+			"srv_RecvGame(): Can\'t load Towns",
+			1
+		);
+		CloseVfsStream(file_handle);
+		m_FreeTracked((void*) g_101de560);
+		g_101de560 = 0;
+		return 0;
+	}
+	if (g_save_version >= 0x10045) {
+		load_status = amt_fio_LoadAemter(file_handle, g_save_version);
+		if (load_status == 0) {
+			LogMessageInternal(
+				"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
+				0x1266,
+				"srv_RecvGame(): Can\'t load Aemter",
+				1
+			);
+			CloseVfsStream(file_handle);
+			return 0;
 		}
 	}
-	LogMessageInternal(
-		"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
-		0x121e,
-		"srv_RecvGame(): Can\'t load Counter",
-		1
-	);
+	load_status = ls_ID2Ptr();
+	if (load_status == 0) {
+		LogMessageInternal(
+			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",
+			0x126f,
+			"srv_RecvGame(): Can\'t convert IDs to Pointers",
+			1
+		);
+		CloseVfsStream(file_handle);
+		m_FreeTracked((void*) g_101de560);
+		g_101de560 = 0;
+		return 0;
+	}
 	CloseVfsStream(file_handle);
-	m_FreeTracked((void*) g_101de560);
-	g_101de560 = 0;
-	return 0;
+	return 1;
 }
