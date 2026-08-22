@@ -14,7 +14,6 @@ tools/VC/
 .pytest_cache/
 .ruff_cache/
 .claude
-.opencode/
 .cache/
 .agents/
 .benchmarks/
@@ -56,7 +55,6 @@ cand_swap.c
 *.c.tmp
 
 # Others
-opencode.json
 flirt_sigs/
 .sisyphus/
 
