@@ -58,7 +58,7 @@ mkdir -p build
 # Configure with MSVC6 toolchain
 echo "Configuring with MSVC6 toolchain..."
 cmake -B build \
-    --toolchain cmake/toolchain-msvc6-wine.cmake \
+    --toolchain cmake/toolchain-msvc6-docker.cmake \
     -DCMAKE_BUILD_TYPE="$BUILD_TYPE"
 
 # Build

@@ -6,7 +6,8 @@
 
 - **Target**: `server.dll` (pe, x86_32)
 - **Compiler**: msvc6 (docker image `rebrew/msvc:6.0-win32` — wine inside; the
-  CMake build runs it through `tools/msvc6-wine-{cl,link,lib}`)
+  CMake build runs it through the `rebrew-cmake-{cl,link,lib}` console scripts
+  via `cmake/toolchain-msvc6-docker.cmake`)
 - **Language**: C89 — follow compiler constraints below
 - **Config**: `rebrew-project.toml` (all tools read from here)
 

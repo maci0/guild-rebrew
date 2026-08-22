@@ -54,7 +54,7 @@ def read_data_vs(path):
 
 def recompile():
     subprocess.run(
-        [str(PROJECT / "tools/msvc6-wine-cl"), "/nologo", "/c", "/O2", "/Gd",
+        ["rebrew-cmake-cl", "/nologo", "/c", "/O2", "/Gd",
          f"/Fo{OBJ}", str(LINK_STUBS)],
         cwd=PROJECT, check=True, capture_output=True,
     )
