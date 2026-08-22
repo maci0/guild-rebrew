@@ -1031,3 +1031,8 @@ name = "g_rdata_restore_252e8"
 ["SERVER.0x1002a000"]
 section = ".data"
 name = "g_data_restore_gap"
+
+["SERVER.0x24000"]
+name = "g_iat_region"
+section = ".rdata"
+note = "IAT at .rdata start (crt_imports.c forcing region)"
