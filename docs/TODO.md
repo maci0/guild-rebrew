@@ -3,6 +3,15 @@
 Last verify: 241/259 passed (30 EXACT + 197 RELOC + 14 PROVEN), 18 failed.
 Goal requires 259/259 with inline asm only for 1-5 byte padding.
 
+> **Tooling moved (2026-08-22):** the `scripts/` helpers referenced below
+> were folded into rebrew: `gen_link_stubs.py` → `rebrew gen-stubs`,
+> `inline_strings.py`/`define_strings.py` → `rebrew inline-strings`,
+> `own_globals.py`/`own_init_arrays.py` → `rebrew data --own`,
+> `reassign_globals.py` → `rebrew data --fix-ownership`,
+> `converge_layout.py` → `rebrew data --converge`,
+> `consolidate_declarations.py` → `rebrew merge --consolidate`.
+> Entries below describe the work at the time.
+
 ## BSS work (2026-08-22) — raw .data VirtualSize now falls out of the link
 
 `scripts/gen_link_stubs.py` now emits every stub global zero-initialized
