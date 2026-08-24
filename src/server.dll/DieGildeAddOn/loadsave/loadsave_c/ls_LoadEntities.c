@@ -2316,6 +2316,10 @@ __declspec(naked) int __cdecl ls_LoadEntities(int ctx)
 	}
 }
 #else
+/* Blocked from C conversion (frame layout, see
+ * docs/msvc6-allocator.md "ls_LoadEntities"): the reference reuses the ctx
+ * arg slot for header_field and keeps sub esp,0xc (record_count/i/id);
+ * MSVC6 allocates a 4th frame dword (sub esp,0x10).  Best 2239/2268. */
 int __cdecl ls_LoadEntities(int ctx)
 {
 	int record_count;

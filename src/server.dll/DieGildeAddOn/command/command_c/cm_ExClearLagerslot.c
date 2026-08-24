@@ -55,7 +55,16 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * }
  */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000e690
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000e690.
+// C conversion blocker (docs/msvc6-allocator.md Finding 42): the
+// Finding 7 family store materialization — the reference keeps the
+// short* base in esi and folds `mov [esi+0x10],eax` while passing
+// &cmd in the middle of gm_ResolveEntityById(0, &cmd, 0, field);
+// every C emits `mov eax,[esp+4]` first and CSE-hoists
+// `lea esi,[eax+0x10]`, shifting the resolve arg pushes.
 __declspec(naked) int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)
 {
 	(void) cmd;
@@ -138,3 +147,42 @@ __declspec(naked) int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)
 		ret
 	}
 }
+#else
+int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)
+{
+	short* psVar1;
+	int field;
+	int ok;
+	unsigned short* puVar3;
+	uint line;
+	char* msg;
+
+	psVar1 = cmd;
+	field = gm_GetFieldByType((char*)cmd, *(int*)(cmd + 8));
+	*(int*)(psVar1 + 8) = field;
+	ok = gm_ResolveEntityById(0, (void**)&cmd, 0, field);
+	if (ok == 0) {
+		msg = s_cm_ExClearLagerslot___Invalid__L_1002d088;
+		line = 0x314b;
+	} else {
+		if ((*cmd == 0x2a) || (*cmd == 0x116)) {
+			puVar3 = gm_StartEntityQuery(*(int*)(cmd + 10), 1, 0, (uint)(ushort)psVar1[10]);
+			if (puVar3 == 0) {
+				return 1;
+			}
+			if (*(int*)(puVar3 + 7) != 1) {
+				return 1;
+			}
+			gm_RemoveObjectByType((char**)(cmd + 10), (uint)(ushort)psVar1[10]);
+			if (result != 0) {
+				*result = 1;
+			}
+			return 0;
+		}
+		msg = s_cm_ExClearLagerslot___Lager_has_n_1002d054;
+		line = 0x3155;
+	}
+	LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, line, msg, 1);
+	return 1;
+}
+#endif

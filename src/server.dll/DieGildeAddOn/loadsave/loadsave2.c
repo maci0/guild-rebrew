@@ -44,7 +44,11 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 
 // FUNCTION: SERVER 0x100127d0
 // ls_LoadExistingEntities
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x100127d0.
+// Save loader with vfs reads — no C conversion attempted; fenced-naked.
 void __cdecl gm_CleanupObjectEntities(void);
 
 __declspec(naked) int __cdecl ls_LoadExistingEntities(int arg1)
@@ -180,6 +184,14 @@ __declspec(naked) int __cdecl ls_LoadExistingEntities(int arg1)
 		ret
 	}
 }
+#else
+int __cdecl ls_LoadExistingEntities(int arg1)
+{
+	/* C fallback (no byte-matching conversion; save loader). */
+	(void) arg1;
+	return 0;
+}
+#endif
 
 /* Loads building entity state from a save file. Reads
  * building type, owner, upgrade level, and production

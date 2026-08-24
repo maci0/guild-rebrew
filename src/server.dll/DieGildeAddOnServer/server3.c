@@ -45,6 +45,9 @@ extern unsigned char g_connections[]; /* 0x101deb00 */
 // FUNCTION: SERVER 0x1000a860
 // ProcessSendData
 
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000a860.
+// Network send path with rep movsd copy — no C conversion attempted; fenced-naked.
 __declspec(naked) int __cdecl ProcessSendData(void)
 {
 	__asm {
@@ -106,6 +109,13 @@ __declspec(naked) int __cdecl ProcessSendData(void)
 		ret
 	}
 }
+#else
+int __cdecl ProcessSendData(void)
+{
+	/* C fallback (no byte-matching conversion; network send path). */
+	return 0;
+}
+#endif
 
 /* Queues a command packet for server-side processing.
  * Copies the packet into the command queue buffer via memcpy. */

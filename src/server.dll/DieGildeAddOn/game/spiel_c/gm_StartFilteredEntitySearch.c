@@ -338,6 +338,12 @@ __declspec(naked) unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_c
 	}
 }
 #else
+/* Blocked from C conversion (setup register/CSE role, see
+ * docs/msvc6-allocator.md "gm_StartFilteredEntitySearch"): the reference
+ * parks the zero in edx and CSEs the 0xff byte constants into cl (hoisted
+ * `mov cl,0xff` reused for both byte stores), and emits the stores in the
+ * declaration order; MSVC6 picks ecx for the zero, emits immediate stores,
+ * and reorders extra5 first.  Best 241/296. */
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 {
 	int* arg_ptr;

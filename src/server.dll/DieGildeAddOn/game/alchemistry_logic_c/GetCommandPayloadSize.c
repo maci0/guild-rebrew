@@ -788,17 +788,22 @@ __declspec(naked) int __cdecl GetCommandPayloadSize(unsigned char* cmd_payload)
 	}
 }
 #else
+/* Blocked from C conversion (register roles, see
+ * docs/msvc6-allocator.md "GetCommandPayloadSize").  The and-idiom, the
+ * case-0x16 loop, the case body order, and the -(x!=c) idiom are all
+ * reproduced; only the register roles remain (target: switch byte in dl,
+ * index in ecx, count in cl; MSVC6: cl/edx/dl).  Best 742/752. */
 int GetCommandPayloadSize(unsigned char* cmd_payload)
 
 {
-	int entry_size;
+	int count;
 	unsigned char* cursor;
 	int total_size;
-	int count;
+	int entry_size;
 
 	// switch table (103 cases) at 0x1000c864
 	switch (*cmd_payload) {
-	case 3:
+	case 0x3:
 	case 0x13:
 	case 0x1a:
 	case 0x25:
@@ -812,11 +817,9 @@ int GetCommandPayloadSize(unsigned char* cmd_payload)
 	case 0x5b:
 	case 0x5d:
 		return 0x1c;
-	case 4:
+	case 0x4:
 		return 0x11;
-	default:
-		return 0x91;
-	case 8:
+	case 0x8:
 	case 0x1c:
 	case 0x28:
 	case 0x31:
@@ -829,27 +832,12 @@ int GetCommandPayloadSize(unsigned char* cmd_payload)
 	case 0x58:
 	case 0x69:
 		return 0x14;
-	case 10:
+	case 0xa:
 		return 0x50;
 	case 0xb:
 		return 0x2a;
 	case 0xc:
 		return 0x49;
-	case 0xd:
-	case 0x21:
-	case 0x23:
-	case 0x24:
-	case 0x26:
-	case 0x27:
-	case 0x29:
-	case 0x2a:
-	case 0x33:
-	case 0x39:
-	case 0x3a:
-	case 0x5a:
-	case 0x66:
-	case 0x68:
-		return 0x18;
 	case 0xf:
 	case 0x2c:
 		return 0x21;
@@ -865,23 +853,45 @@ int GetCommandPayloadSize(unsigned char* cmd_payload)
 		return 0x39;
 	case 0x16:
 	case 0x17:
-		cursor = cmd_payload + (*cmd_payload == 0x16 ? 0x15 : 0x15);
+		count = cmd_payload[0x14];
+		cursor = (*cmd_payload == 0x16) ? (cmd_payload + 0x15) : (cmd_payload + 0x15);
 		total_size = 0x15;
-		break;
+		while (count > 0) {
+			entry_size = cursor[1] * *cursor + 4;
+			total_size = total_size + entry_size;
+			cursor = cursor + entry_size;
+			count = count - 1;
+		}
+		return total_size;
 	case 0x18:
 		return cmd_payload[0x14] * 5 + 0x15;
 	case 0x19:
 	case 0x53:
 		return 0x24;
 	case 0x1b:
-	case 100:
+	case 0x64:
 		return 0x28;
 	case 0x1d:
 		return 0x5f;
 	case 0x20:
-		return (-(cmd_payload[0x10] != '\x0e') & 0x7c) + 0x11;
+		return ((cmd_payload[0x10] != 0xe ? -1 : 0) & 0x7c) + 0x11;
 	case 0x22:
 		return 0x3d;
+	case 0xd:
+	case 0x21:
+	case 0x23:
+	case 0x24:
+	case 0x26:
+	case 0x27:
+	case 0x29:
+	case 0x2a:
+	case 0x33:
+	case 0x39:
+	case 0x3a:
+	case 0x5a:
+	case 0x66:
+	case 0x68:
+		return 0x18;
 	case 0x2d:
 	case 0x45:
 		return 0x1f;
@@ -891,16 +901,16 @@ int GetCommandPayloadSize(unsigned char* cmd_payload)
 	case 0x2f:
 	case 0x30:
 		return 0x3c;
-	case 0x32:
-	case 0x3e:
-	case 0x4f:
-	case 0x5e:
-	case 99:
-		return 0x34;
 	case 0x35:
 		return 0x5d;
 	case 0x37:
 		return 0x45;
+	case 0x32:
+	case 0x3e:
+	case 0x4f:
+	case 0x5e:
+	case 0x63:
+		return 0x34;
 	case 0x40:
 	case 0x60:
 		return 0x2f;
@@ -930,16 +940,13 @@ int GetCommandPayloadSize(unsigned char* cmd_payload)
 		return 0x38;
 	case 0x5c:
 		return 0x1a;
-	case 0x5f:
-		return 0x80;
 	case 0x61:
 	case 0x62:
 		return 0x29;
-	}
-	for (count = cmd_payload[0x14]; count > 0; count = count - 1) {
-		entry_size = cursor[1] * *cursor + 4;
-		total_size = total_size + entry_size;
-		cursor = cursor + entry_size;
+	case 0x5f:
+		return 0x80;
+	default:
+		return 0x91;
 	}
 	return total_size;
 }

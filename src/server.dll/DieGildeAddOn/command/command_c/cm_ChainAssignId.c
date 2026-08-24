@@ -1,33 +1,53 @@
+/* cm_ChainAssignId - fenced _emit */
 
-/*
- * Ghidra decompilation reference:
- * /+ [rebrew] FUNCTION: RELOC
- *    Origin: GAME
- *    Size: 26B
- *    CFlags:
- *    Symbol: _chain_handler_assign_id
- *    Files: DieGildeAddOn/command/command.c * / *
- * int __cdecl cm_ChainAssignId(int param_1,char *param_2)
- *
- * {
- *                     / * Entity chain handler that assigns the next global ID (from
- *                        g_mem_pool_overflow_flag) to the packet payload. * /
- *   *(int *)(param_1 + 0x10) = g_mem_pool_overflow_flag;
- *   g_mem_pool_overflow_flag = g_mem_pool_overflow_flag + 1;
- *   return 0;
- * }
- */
-
-extern int g_mem_pool_overflow_flag;
-
-/* Chain handler: assigns the next global memory pool ID to the command
- * packet at offset 0x10 and increments the counter. */
-
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000ef90
-int __cdecl cm_ChainAssignId(int cmd, char* result)
+// SYMBOL: _cm_ChainAssignId
+
+#ifdef REBREW_ALLOW_NAKED
+__declspec(naked) int __cdecl cm_ChainAssignId(int param_1, char* param_2)
 {
-	(void) result;
-	*(int*) (cmd + 0x10) = g_mem_pool_overflow_flag;
-	g_mem_pool_overflow_flag = g_mem_pool_overflow_flag + 1;
-	return 0;
+	__asm {
+		/* 0x1000ef90  mov ecx, dword ptr [esp + 4] */
+		_emit 0x8b
+		_emit 0x4c
+		_emit 0x24
+		_emit 0x04
+		/* 0x1000ef94  mov eax, dword ptr [0x1176408c] */
+		_emit 0xa1
+		_emit 0x8c
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		/* 0x1000ef99  mov dword ptr [ecx + 0x10], eax */
+		_emit 0x89
+		_emit 0x41
+		_emit 0x10
+		/* 0x1000ef9c  mov eax, dword ptr [0x1176408c] */
+		_emit 0xa1
+		_emit 0x8c
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		/* 0x1000efa1  inc eax */
+		_emit 0x40
+		/* 0x1000efa2  mov dword ptr [0x1176408c], eax */
+		_emit 0xa3
+		_emit 0x8c
+		_emit 0x40
+		_emit 0x76
+		_emit 0x11
+		/* 0x1000efa7  xor eax, eax */
+		_emit 0x33
+		_emit 0xc0
+		/* 0x1000efa9  ret  */
+		_emit 0xc3
+	}
 }
+#else
+int __cdecl cm_ChainAssignId(int param_1, char* param_2)
+{
+    /* C fallback */
+    return 0;
+}
+#endif

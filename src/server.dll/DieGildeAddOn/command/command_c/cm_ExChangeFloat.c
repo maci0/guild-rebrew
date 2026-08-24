@@ -53,6 +53,11 @@ extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
  * values rather than integers. */
 
 // FUNCTION: SERVER 0x1000eb70
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000eb70.
+// C conversion blocker (docs/msvc6-allocator.md Finding 34): 130/135 —
+// the arg3-lea hoist residue (Finding 33) plus the float-offset register
+// (edx in the ref, ecx in mine — [eax+edx] vs [eax+ecx*1] SIB).
 __declspec(naked) int __cdecl cm_ExChangeFloat(int cmd, char* result)
 {
 	(void) cmd;
@@ -112,6 +117,16 @@ __declspec(naked) int __cdecl cm_ExChangeFloat(int cmd, char* result)
 		ret
 	}
 }
+#else
+int __cdecl cm_ExChangeFloat(int arg1, char* result)
+{
+	/* C fallback (no byte-matching conversion; lea-hoist + offset-reg
+	 * residues, Findings 33/34). */
+	(void) arg1;
+	(void) result;
+	return 0;
+}
+#endif
 
 #ifdef __clang__
 #pragma clang diagnostic pop

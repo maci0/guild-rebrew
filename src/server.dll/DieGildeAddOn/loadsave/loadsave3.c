@@ -44,7 +44,11 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 
 // FUNCTION: SERVER 0x10014070
 // ls_ID2Ptr
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x10014070.
+// Id-resolution with fatal path — no C conversion attempted; fenced-naked.
 __declspec(naked) unsigned int ls_ID2Ptr(void)
 {
 	__asm {
@@ -269,6 +273,13 @@ __declspec(naked) unsigned int ls_ID2Ptr(void)
 		ret
 	}
 }
+#else
+unsigned int ls_ID2Ptr(void)
+{
+	/* C fallback (no byte-matching conversion; id resolution). */
+	return 0;
+}
+#endif
 
 /* Receives and loads a complete game state from a client.
  * Called during lobby-to-game transition to receive the

@@ -11,8 +11,59 @@ char* __cdecl strncpy(char*, const char*, unsigned int);
  * Similar to cm_ExAllocSpieler but for client-connected players,
  * updating player slot flags and setting connection state. */
 
+/*
+ * NOTE: blocked from C conversion (result-register role, see
+ * docs/msvc6-allocator.md "cm_ExAllocClientSpieler").  Semantically correct
+ * C (best 142/361) preserved:
+ *
+ *   int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
+ *   {
+ *       unsigned int entity;  char* rec;  short* t;  char* r2;  int f;
+ *       *(int*) (cmd + 0x10) = g_timestamp_0b6c;
+ *       *(int*) (cmd + 0x45) = rand();
+ *       srand(*(int*) (cmd + 0x22));
+ *       entity = gm_CreateEntityFromParents(result ? 6 : 7,
+ *           *(int*) (cmd + 0x14), *(int*) (cmd + 0x18),
+ *           *(unsigned short*) (cmd + 0x1c), 0,
+ *           (unsigned char) *(char*) (cmd + 0x1e), 0,
+ *           (unsigned char) *(char*) (cmd + 0x23));
+ *       entity = entity & 0xffff;
+ *       if (entity == 0xffff) {
+ *           LogMessageInternal((char*) 0x1002c748, 0x290f, (char*) 0x1002cbd4, 1);
+ *           return 1;
+ *       }
+ *       LogMessageInternal((char*) 0x1002c748, 0x2917, (char*) 0x1002cbbc, 1);
+ *       rec = g_static_entity_table_358a0 + entity * 0x21c;
+ *       f = 0x99099 * (unsigned char) *(char*) (cmd + 3);
+ *       *(int*) (0x10442d00 + f * 4) = *(int*) (rec + 4);
+ *       strncpy(rec + 0x30, (char*) cmd + 0x25, 0x10);
+ *       t = gm_GetEntityTableEntry(rec);
+ *       if (t != 0) {
+ *           *(unsigned short*) t = *(unsigned short*) (rec + 0x50);
+ *           strncpy((char*) t + 2, (char*) cmd + 0x35, 0x10);
+ *           strncpy(rec + 0x40, (char*) cmd + 0x35, 0x10);
+ *           r2 = (char*) gm_LookupEntityRecordById(*(int*) (rec + 0x60));
+ *           if (r2 != 0) strncpy(r2 + 0x40, (char*) cmd + 0x35, 0x10);
+ *       }
+ *       *(int*) (rec + 0x54) = *(int*) (cmd + 0x1f);
+ *       *(unsigned char*) (rec + 0xc) = *(unsigned char*) (cmd + 0x24);
+ *       if (result != (char*) 0) {
+ *           result[0] = 1;
+ *           result[1] = 1;
+ *           *(char**) (result + 6) = rec;
+ *       }
+ *       return 0;
+ *   }
+ */
 // CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000d570
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000d570.
+// C conversion blocker (docs/msvc6-allocator.md line 1210): result-
+// register role — the reference's `result ? 6 : 7` first arg is
+// materialized via `mov ebx,[esp+0x18]; mov eax,ebx; neg eax;
+// sbb eax,eax; ... add eax,7` (eax = result!=0 ? -1 : 0, then +7),
+// and the store-multiply chain for entity*0x21c differs; best C 142/361.
 __declspec(naked) int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 {
 	(void) cmd;
@@ -151,3 +202,50 @@ __declspec(naked) int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 		ret
 	}
 }
+#else
+extern unsigned char g_static_entity_table_358a0[];
+int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
+{
+	unsigned int entity;
+	char* rec;
+	short* t;
+	char* r2;
+	int f;
+
+	*(int*)(cmd + 0x10) = g_timestamp_0b6c;
+	*(int*)(cmd + 0x45) = rand();
+	srand(*(int*)(cmd + 0x22));
+	entity = gm_CreateEntityFromParents(result ? 6 : 7,
+		*(int*)(cmd + 0x14), *(int*)(cmd + 0x18),
+		*(unsigned short*)(cmd + 0x1c), 0,
+		(unsigned char)*(char*)(cmd + 0x1e), 0,
+		(unsigned char)*(char*)(cmd + 0x23));
+	entity = entity & 0xffff;
+	if (entity == 0xffff) {
+		LogMessageInternal((char*)0x1002c748, 0x290f, (char*)0x1002cbd4, 1);
+		return 1;
+	}
+	LogMessageInternal((char*)0x1002c748, 0x2917, (char*)0x1002cbbc, 1);
+	rec = (char*)g_static_entity_table_358a0 + entity * 0x21c;
+	f = 0x99099 * (unsigned char)*(char*)(cmd + 3);
+	*(int*)(0x10442d00 + f * 4) = *(int*)(rec + 4);
+	strncpy(rec + 0x30, (char*)cmd + 0x25, 0x10);
+	t = gm_GetEntityTableEntry(rec);
+	if (t != 0) {
+		*(unsigned short*)t = *(unsigned short*)(rec + 0x50);
+		strncpy((char*)t + 2, (char*)cmd + 0x35, 0x10);
+		strncpy(rec + 0x40, (char*)cmd + 0x35, 0x10);
+		r2 = (char*)gm_LookupEntityRecordById(*(int*)(rec + 0x60));
+		if (r2 != 0)
+			strncpy(r2 + 0x40, (char*)cmd + 0x35, 0x10);
+	}
+	*(int*)(rec + 0x54) = *(int*)(cmd + 0x1f);
+	*(unsigned char*)(rec + 0xc) = *(unsigned char*)(cmd + 0x24);
+	if (result != (char*)0) {
+		result[0] = 1;
+		result[1] = 1;
+		*(char**)(result + 6) = rec;
+	}
+	return 0;
+}
+#endif

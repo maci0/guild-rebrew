@@ -17,148 +17,60 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 // CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000d110
-__declspec(naked) int __cdecl cm_ChkJoinLeaveElection(int* cmd)
+// cm_ChkJoinLeaveElection
+
+int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 {
-	(void) cmd;
-	__asm {
-		push esi
-		mov esi, dword ptr [esp + 8]
-		mov eax, dword ptr [esi + 0x10]
-		cmp eax, 0x6a6f696e
-		jne L_try_leav
-		mov eax, dword ptr [esi + 0x18]
-		push eax
-		push 1
-		push 1
-		call gm_StartFilteredEntitySearch
-		add esp, 0xc
-		test eax, eax
-		je L_fail
-		mov ecx, dword ptr [eax + 0x5d]
-		push 0x12d
-		push 0
-		push 6
-		push 2
-		push ecx
-		call gm_StartEntityQuery
-		add esp, 0x14
-		test eax, eax
-		je L_fail
-		mov esi, dword ptr [esi + 0x14]
-		lea edx, [eax + 0x1c]
-		xor ecx, ecx
-		mov eax, edx
-	L_join_scan1:
-		cmp dword ptr [eax], esi
-		je L_fail
-		inc ecx
-		add eax, 4
-		cmp ecx, 4
-		jl L_join_scan1
-		xor eax, eax
-		mov ecx, edx
-	L_join_scan2:
-		cmp dword ptr [ecx], -1
-		je L_join_check
-		inc eax
-		add ecx, 4
-		cmp eax, 4
-		jl L_join_scan2
-	L_fail:
-		mov eax, 1
-		pop esi
-		ret
-	L_join_check:
-		cmp eax, 4
-		jge L_fail
-		xor eax, eax
-		pop esi
-		ret
-	L_try_leav:
-		cmp eax, 0x6c656176
-		jne L_try_cler
-		mov edx, dword ptr [esi + 0x18]
-		push edx
-		push 1
-		push 1
-		call gm_StartFilteredEntitySearch
-		add esp, 0xc
-		test eax, eax
-		je L_fail
-		mov eax, dword ptr [eax + 0x5d]
-		push 0x12d
-		push 0
-		push 6
-		push 2
-		push eax
-		call gm_StartEntityQuery
-		add esp, 0x14
-		test eax, eax
-		je L_fail
-		mov esi, dword ptr [esi + 0x14]
-		xor ecx, ecx
-		add eax, 0x1c
-	L_leav_scan:
-		cmp dword ptr [eax], esi
-		je L_leav_check
-		inc ecx
-		add eax, 4
-		cmp ecx, 4
-		jl L_leav_scan
-		mov eax, 1
-		pop esi
-		ret
-	L_leav_check:
-		cmp ecx, 4
-		jge L_fail
-		xor eax, eax
-		pop esi
-		ret
-	L_try_cler:
-		cmp eax, 0x636c6572
-		jne L_fail
-		mov ecx, dword ptr [esi + 0x18]
-		push ecx
-		push 1
-		push 1
-		call gm_StartFilteredEntitySearch
-		add esp, 0xc
-		test eax, eax
-		je L_fail
-		mov cx, word ptr [eax + 0x27]
-		_emit 0x66
-		_emit 0x81
-		_emit 0xf9
-		_emit 0xff
-		_emit 0xff
-		je L_cler_query
-		and ecx, 0xffff
-		lea ecx, [ecx + ecx*2]
-		lea ecx, [ecx + ecx*4]
-		lea edx, [ecx + ecx*8]
-		lea ecx, [edx*4 + 0x100358a0]
-		test ecx, ecx
-		je L_cler_query
-		cmp ecx, dword ptr g_1003546c
-		je L_cler_query
-		mov dl, byte ptr [ecx + 8]
-		test dl, dl
-		je L_cler_query
-		cmp byte ptr [ecx + 2], 0xf
-		jne L_fail
-	L_cler_query:
-		mov eax, dword ptr [eax + 0x5d]
-		push 0x12d
-		push 0
-		push 6
-		push 2
-		push eax
-		call gm_StartEntityQuery
-		add esp, 0x14
-		neg eax
-		sbb eax, eax
-		inc eax
-		pop esi
-		ret
+	int action;
+	char* q;
+	int player;
+	int i;
+	unsigned short w;
+	char* rec;
+
+	action = *(int *) ((char *) cmd + 0x10);
+	if (action == 0x6a6f696e) {
+		q = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
+		if (q == 0) return 1;
+		q = (char *) gm_StartEntityQuery(*(int *) (q + 0x5d), 2, 6, 0, 0x12d);
+		if (q == 0) return 1;
+		player = *(int *) ((char *) cmd + 0x14);
+		for (i = 0; i < 4; i++) {
+			if (*(int *) (q + 0x1c + i * 4) == player) return 1;
+		}
+		i = 0;
+		while (i < 4 && *(int *) (q + 0x1c + i * 4) != -1) {
+			i++;
+		}
+		if (i >= 4) return 1;
+		return 0;
 	}
+	if (action == 0x6c656176) {
+		q = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
+		if (q == 0) return 1;
+		q = (char *) gm_StartEntityQuery(*(int *) (q + 0x5d), 2, 6, 0, 0x12d);
+		if (q == 0) return 1;
+		player = *(int *) ((char *) cmd + 0x14);
+		for (i = 0; i < 4; i++) {
+			if (*(int *) (q + 0x1c + i * 4) == player) break;
+		}
+		if (i >= 4) return 1;
+		return 0;
+	}
+	if (action == 0x636c6572) {
+		q = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
+		if (q == 0) return 1;
+		w = *(unsigned short *) (q + 0x27);
+		if (w != 0xffff) {
+			rec = (char *) (0x100358a0 + w * 0x21c);
+			if (rec == 0) goto cler_query;
+			if (rec == (char *) g_1003546c) goto cler_query;
+			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;
+			if (*(unsigned char *) (rec + 2) != 0xf) return 1;
+		}
+		goto cler_query;
+	}
+	return 1;
+cler_query:
+	return gm_StartEntityQuery(*(int *) (q + 0x5d), 2, 6, 0, 0x12d) == 0;
 }

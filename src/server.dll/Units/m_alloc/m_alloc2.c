@@ -67,6 +67,10 @@ struct LinkedListNode {
 // DATA: SERVER 0x10028aec
 // DATA: SERVER 0x10028888
 
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x10006c00 (283B).
+// Complex shutdown routine (sprintf report buffer, global-counter walk,
+// linked-list teardown) — no C conversion attempted; kept fenced-naked.
 __declspec(naked) void __cdecl ShutdownMemoryAllocator(void)
 {
 	__asm {
@@ -169,6 +173,12 @@ __declspec(naked) void __cdecl ShutdownMemoryAllocator(void)
 		ret
 	}
 }
+#else
+void __cdecl ShutdownMemoryAllocator(void)
+{
+	/* C fallback (no byte-matching conversion; see Finding 19). */
+}
+#endif
 
 /* Allocates a block from the packet pool free list. Falls back
  * to HeapAlloc if the pool is exhausted. Thread-safe via
@@ -190,6 +200,10 @@ struct BlockNode {
 	struct BlockNode* next;
 };
 
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x10006d20 (270B).
+// Pool allocation with the alignment-aware memset pass (Finding 19) and
+// param-slot reuse — no C conversion attempted; kept fenced-naked.
 __declspec(naked) void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 {
 	(void) head;
@@ -315,6 +329,17 @@ __declspec(naked) void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, i
 		ret
 	}
 }
+#else
+void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
+{
+	/* C fallback (no byte-matching conversion; alignment pass + param-slot
+	 * reuse — see Findings 19/25). */
+	(void) head;
+	(void) size;
+	(void) max_items;
+	return 0;
+}
+#endif
 
 /* Returns a block to the packet pool free list. Adds the block
  * back to the free chain for reuse. */
@@ -322,6 +347,12 @@ __declspec(naked) void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, i
 // FUNCTION: SERVER 0x10006E30
 // m_PoolFree
 
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x10006e30 (137B).
+// C conversion blocker (docs/msvc6-allocator.md Finding 25): the allocator
+// keeps the block param in esi (ref: edx with a stack reload for the list
+// walk) and inlines the fatal block (ref: sunk to the end).  All 7 C
+// formulations normalize to the same 133B.
 __declspec(naked) void __cdecl m_PoolFree(int* pool, int* block)
 {
 	(void) pool;
@@ -387,6 +418,48 @@ __declspec(naked) void __cdecl m_PoolFree(int* pool, int* block)
 		ret
 	}
 }
+#else
+void __cdecl m_PoolFree(int* pool, int* block)
+{
+	char* hdr;
+	char* p;
+	int cnt;
+	char* node;
+
+	(void) pool;
+	hdr = (char*) block - 4;
+	if (hdr == 0 || (p = *(char**) hdr) == 0) {
+		goto fatal;
+	}
+	if ((char*) block < p + 0x10) {
+		goto fatal;
+	}
+	if ((char*) block >= p + 0x10 + *(int *) (p + 8) * *(int *) (p + 4)) {
+		goto fatal;
+	}
+	*(char**) hdr = 0;
+	cnt = *(int *) p;
+	cnt--;
+	*(int *) p = cnt;
+	if (cnt != 0) {
+		return;
+	}
+	if (*(char**) block == p) {
+		*(char**) block = *(char**) (p + 0xc);
+		m_FreeTracked(p);
+		return;
+	}
+	node = *(char**) block;
+	while (*(char**) (node + 0xc) != p) {
+		node = *(char**) (node + 0xc);
+	}
+	*(char**) (node + 0xc) = *(char**) (p + 0xc);
+	m_FreeTracked(p);
+	return;
+fatal:
+	ReportFatalError((char*) 0x10028888, 0x279, (char*) 0x10028b94);
+}
+#endif
 extern char g_1002a0f8[1];
 char g_str_10028888[1] = {
     0x44,

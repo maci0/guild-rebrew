@@ -876,3 +876,5 @@ __declspec(naked) void __cdecl ls_LoadSavegameHeader(void* a)
 #else
 void __cdecl ls_LoadSavegameHeader(void* a) { /* C fallback */ }
 #endif
+
+/* ReadVfsDataChecked moved to ReadVfsDataChecked.c */

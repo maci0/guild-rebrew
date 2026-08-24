@@ -54,6 +54,12 @@ char* __cdecl gm_AllocObjekt(int, int, int);
 
 // CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000f2f0
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000f2f0.
+// C conversion blocker (docs/msvc6-allocator.md Finding 36): 162/176 —
+// the ref materializes `add edi,0x18` and keeps a dead byte copy
+// (edi+6 → ent+0x22, overwritten by 0); MSVC6 8168 folds the add into
+// the accesses and eliminates the dead store.
 __declspec(naked) int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 {
 	(void) cmd;
@@ -127,3 +133,13 @@ __declspec(naked) int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 		ret
 	}
 }
+#else
+int __cdecl cm_ExAllocThemaPredigt(int arg1, char* result)
+{
+	/* C fallback (no byte-matching conversion; add-edi fold + dead-store
+	 * elim, Finding 36). */
+	(void)arg1;
+	(void)result;
+	return 0;
+}
+#endif

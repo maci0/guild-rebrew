@@ -62,7 +62,18 @@ char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[] = "cm_ExMoveObjekt() Object n
  * to another. Validates source and destination entities, then
  * transfers the object via gm_SubObjekt + gm_AddOrAccumulateObject. */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000e530
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000e530.
+// C conversion blocker (docs/msvc6-allocator.md Finding 37): 10+ C
+// formulations (cmd/base/volatile/int* variants) reproduce every call
+// arg, lea order, and selection exactly, but cannot reproduce (a) the
+// folded `mov [esi+0x14],eax` store1 (MSVC6 either reloads cmd into a
+// scratch or hoists `lea edi,[esi+0x14]` before the first call) and
+// (b) the scan-loop node spill to [esp+0x18] with its redundant re-test
+// after the unlink — a self-consistent allocator fixed-point that
+// primes the attach's register roles (field2 in ecx vs eax).
 __declspec(naked) int __cdecl cm_ExMoveObjekt(int cmd, char* result)
 {
 	(void) cmd;
@@ -213,3 +224,75 @@ __declspec(naked) int __cdecl cm_ExMoveObjekt(int cmd, char* result)
 		ret
 	}
 }
+#else
+int __cdecl cm_ExMoveObjekt(int cmd, char* result)
+{
+	/* C fallback (closest conversion, Finding 37): matches every call,
+	 * lea order and selection; diverges only in store1 (hoisted address)
+	 * and the node spill/attach register roles. */
+	void* src_out;
+	void* dst_out;
+	int* src;
+	int* dst;
+	int* node;
+	int* prev;
+	int field;
+	int ok;
+	int base;
+
+	base = cmd;
+	field = gm_GetFieldByType((char*)cmd, *(int*)(cmd + 0x14));
+	*(int*)(base + 0x14) = field;
+	ok = gm_ResolveEntityById(&src_out, (void**)&cmd, &dst_out, field);
+	if (ok == 0) {
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x30a1,
+		                   s_cm_ExMoveObjekt___Invalid__quell_1002d024, 8);
+		return 1;
+	}
+	if (src_out != 0)
+		src = (int*)((char*)src_out + 0x5d);
+	else if (cmd != 0)
+		src = (int*)(cmd + 0x14);
+	else
+		src = (int*)((char*)dst_out + 0x178);
+	field = gm_GetFieldByType((char*)base, *(int*)(base + 0x10));
+	*(int*)(base + 0x10) = field;
+	ok = gm_ResolveEntityById(&src_out, (void**)&cmd, &dst_out, field);
+	if (ok == 0) {
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x30bd,
+		                   s_cm_ExMoveObjekt___Invalid__ziel__1002cff4, 1);
+		return 1;
+	}
+	if (src_out != 0)
+		dst = (int*)((char*)src_out + 0x5d);
+	else if (cmd != 0)
+		dst = (int*)(cmd + 0x14);
+	else
+		dst = (int*)((char*)dst_out + 0x178);
+	field = gm_GetFieldByType((char*)base, *(int*)(base + 0x18));
+	*(int*)(base + 0x18) = field;
+	node = *src;
+	prev = 0;
+	while (node != 0 && node[2] != field) {
+		prev = node;
+		node = (int*)node[0x3f];
+	}
+	if (node == 0) {
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x30f9,
+		                   s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4, 8);
+		return 1;
+	}
+	if (prev != 0)
+		prev[0x3f] = node[0x3f];
+	else
+		*src = (int*)node[0x3f];
+	if (node != 0) {
+		node[6] = *(int*)(base + 0x10);
+		node[0x3f] = *dst;
+		*dst = node;
+		if (result != 0)
+			*result = 1;
+	}
+	return 0;
+}
+#endif

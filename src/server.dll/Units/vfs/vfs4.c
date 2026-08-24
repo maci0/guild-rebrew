@@ -71,10 +71,10 @@ int __cdecl vfs_CleanupObject(char* obj)
 // FUNCTION: SERVER 0x10008d10
 // CloseVfsStream
 
-// DATA: SERVER 0x10034678
-
-// DATA: SERVER 0x10034670
-
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x10008d10 (301B).
+// Complex stream teardown (frame pointer, 6+ flag branches, 5+ helper
+// calls) — no C conversion attempted; kept fenced-naked.
 __declspec(naked) int __cdecl CloseVfsStream(void* stream)
 {
 	(void) stream;
@@ -195,6 +195,14 @@ __declspec(naked) int __cdecl CloseVfsStream(void* stream)
 		ret
 	}
 }
+#else
+int __cdecl CloseVfsStream(void* stream)
+{
+	/* C fallback (no byte-matching conversion; complex stream teardown). */
+	(void) stream;
+	return 0;
+}
+#endif
 
 /* Reads raw data from a VFS stream. Low-level read that
  * handles buffering, refilling, and byte-by-byte reads

@@ -200,6 +200,9 @@ extern char g_office_slots[];
 // FUNCTION: SERVER 0x1000b040
 // InitBuildingTypeTable
 
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000b040.
+// Alignment-memset table init (Finding 19) — no C conversion attempted; fenced-naked.
 __declspec(naked) void InitBuildingTypeTable(void)
 {
 	__asm {
@@ -287,6 +290,13 @@ __declspec(naked) void InitBuildingTypeTable(void)
 		ret
 	}
 }
+#else
+void InitBuildingTypeTable(void)
+{
+	/* C fallback (no byte-matching conversion; alignment-memset init,
+	 * Finding 19). */
+}
+#endif
 extern unsigned int g_player_slot_0;
 extern int g_save_version[4];
 extern int g_1002dde0[4];

@@ -1104,62 +1104,65 @@ __declspec(naked) int __cdecl ls_InitNewDynastyEntity(int a, int b, int c)
 	}
 }
 
-__declspec(naked) int __cdecl ls_ReadVfsDataChecked(int a, int b, int c)
-{
-	__asm {
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x10
-		_emit 0x8b
-		_emit 0x4c
-		_emit 0x24
-		_emit 0x0c
-		_emit 0x8b
-		_emit 0x54
-		_emit 0x24
-		_emit 0x08
-		_emit 0x50
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x08
-		_emit 0x51
-		_emit 0x52
-		_emit 0x50
-		_emit 0xe8
-		_emit 0xe7
-		_emit 0x69
-		_emit 0xff
-		_emit 0xff
-		_emit 0x33
-		_emit 0xc9
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x3b
-		_emit 0xc8
-		_emit 0x1b
-		_emit 0xc0
-		_emit 0xf7
-		_emit 0xd8
-		_emit 0xc3
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-	}
-}
-
 #else
 int __cdecl ls_LoadGraveyardData(int a, int b, int c) { return 0; }
-int __cdecl ls_InitNewDynastyEntity(int a, int b, int c) { return 0; }
-int __cdecl ls_ReadVfsDataChecked(int a, int b, int c) { return 0; }
+extern unsigned int table_100a8c94[];
+int __cdecl gm_RandomMod(unsigned short range);
+int __cdecl gm_AddOrAccumulateObject(int a, int b, int c);
+int __cdecl fcn_1000b820(int a);
+int __cdecl fcn_1000b850(int a);
+
+/* ls_InitNewDynastyEntity — semantically-correct reconstruction (Finding 49).
+ * Blocked: the 768x768 nested fill loop's induction-variable elimination and
+ * the slot reuse for the running pointer diverge from the reference (best
+ * 99/341).  The resolve/flag-select head is byte-identical. */
+int __cdecl ls_InitNewDynastyEntity(int a, int b, int c, int d)
+{
+	char* p;
+	int i;
+	int n;
+
+	if (a == 0x15) {
+		*(int*)(d + 0x1cc) |= 0x1000;
+		fcn_1000b820(*(int*)(d + 4));
+	} else {
+		*(int*)(d + 0x1cc) |= 0x2000;
+		fcn_1000b850(*(int*)(d + 4));
+	}
+	*(short*)(d + 0xa) = (short)c;
+	*(char*)(d + 0xc) = 0;
+	for (p = (char*)0x100a9820; p < (char*)0x10139820; p += 0x300) {
+		for (i = 0; i < 0x300; i++) {
+			p[i] = (char)(gm_RandomMod(0x40) - 0x20);
+			((char*)0x1014d8e0)[(p - (char*)0x100a9820) + i] = 0;
+		}
+	}
+	*(short*)(d + 0x50) = 0x7fff;
+	*(int*)(d + 0x7c) = 0;
+	*(char*)(d + 0x58) = 0;
+	memset((void*)(d + 0x5c), 0xff, 32);
+	*(int*)(d + 0x170) = 0;
+	*(int*)(d + 0x16c) = 0;
+	*(float*)(d + 0x1c) = 1000.0f;
+	*(float*)(d + 0x14) = 1.0f;
+	*(float*)(d + 0x20) = 12.0f;
+	*(float*)(d + 0x10) = 330.0f;
+	*(float*)(d + 0x18) = 1000.0f;
+	for (n = 0; n < 5; n++)
+		*(char*)(d + n + 0x80) = (char)((float)(gm_RandomMod(0x2a) & 0xffff) + *(float*)0x10025808);
+	*(char*)(d + 0xd) = 9;
+	gm_AddOrAccumulateObject(*(int*)(d + 4),
+	    (unsigned short)table_100a8c94[(unsigned char)*(unsigned char*)0x10035439 * 189], 0xf42400);
+	gm_RandomMod(2);
+	*(char*)(d + 2) = 3;
+	return 0;
+}
 #endif
+
+int __cdecl ReadVfsData(int, int, int, int);
+
+int __cdecl ls_ReadVfsDataChecked(int a, int b, int c, int d)
+{
+	/* ReadVfsData wrapper: nonzero on success (unsigned > 0 carry idiom). */
+	return (unsigned int)ReadVfsData(a, b, c, d) > 0;
+}

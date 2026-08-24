@@ -62,6 +62,12 @@ extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];
  * entity, otherwise validates the transfer amount. */
 
 // FUNCTION: SERVER 0x1000cb20
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000cb20 (171B).
+// C conversion blocker (docs/msvc6-allocator.md Finding 33): 168/171 —
+// the ref hoists the arg3 address lea above the GetFieldByType-result store
+// (3 disp8 bytes differ).  The unsigned-char gm_QueryEntitySum param and the
+// `sum - limit < 0` sub/jns form otherwise match.
 __declspec(naked) int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 {
 	(void) cmd;
@@ -135,3 +141,11 @@ __declspec(naked) int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 		ret
 	}
 }
+#else
+int __cdecl cm_ChkMoveCredits(int arg1)
+{
+	/* C fallback (no byte-matching conversion; lea-scheduling residue, Finding 33). */
+	(void) arg1;
+	return 0;
+}
+#endif

@@ -71,101 +71,34 @@ int __cdecl find_zone_record(char* base, int x, int y)
 
 // FUNCTION: SERVER 0x10014ff0
 // CheckZoneAvailability
-
-__declspec(naked) int __cdecl CheckZoneAvailability(int zone_table, unsigned int x, unsigned int y, int zone_type)
+int __cdecl CheckZoneAvailability(int zone_table, unsigned int x, unsigned int y, int zone_type)
 {
-	(void) zone_table;
-	(void) x;
-	(void) y;
-	(void) zone_type;
-	__asm {
-		push ecx
-		mov eax, dword ptr [esp + 8]
-		push ebx
-		push ebp
-		push esi
-		xor esi, esi
-		xor ecx, ecx
-		add eax, 8
-		push edi
-		or dl, 0xff
-	L_scan_loop:
-		cmp byte ptr [eax + 5], dl
-		jne L_check_match
-		mov esi, 1
-		jmp L_advance
-	L_check_match:
-		mov edi, dword ptr [esp + 0x1c]
-		xor ebx, ebx
-		mov bl, byte ptr [eax]
-		cmp ebx, edi
-		jne L_advance
-		mov edi, dword ptr [esp + 0x20]
-		xor ebx, ebx
-		mov bl, byte ptr [eax + 1]
-		cmp ebx, edi
-		je L_ret0
-	L_advance:
-		inc ecx
-		add eax, 0x18
-		cmp ecx, 0x40
-		jl L_scan_loop
-		test esi, esi
-		jne L_inner
-	L_ret0:
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		pop ecx
-		ret
-	L_inner:
-		mov ebp, dword ptr [esp + 0x24]
-		mov dword ptr [esp + 0x10], 0
-		test ebp, ebp
-		jle L_done
-	L_outer_loop:
-		mov eax, ebp
-		mov ecx, dword ptr [esp + 0x10]
-		cdq
-		sub eax, edx
-		mov edx, dword ptr [esp + 0x20]
-		mov esi, eax
-		xor edi, edi
-		sar esi, 1
-		sub ecx, esi
-		lea ebx, [ecx + edx]
-	L_inner_loop:
-		mov edx, dword ptr [esp + 0x1c]
-		mov ecx, dword ptr [esp + 0x18]
-		mov eax, edi
-		push ebx
-		sub eax, esi
-		add eax, edx
-		push eax
-		push ecx
-		call find_zone_record
-		add esp, 0xc
-		test eax, eax
-		jne L_ret0
-		inc edi
-		cmp edi, ebp
-		jl L_inner_loop
-		mov eax, dword ptr [esp + 0x10]
-		inc eax
-		cmp eax, ebp
-		mov dword ptr [esp + 0x10], eax
-		jl L_outer_loop
-	L_done:
-		pop edi
-		pop esi
-		pop ebp
-		mov eax, 1
-		pop ebx
-		pop ecx
-		ret
+	int i;
+	int j;
+	int found_free;
+	char* e;
+
+	found_free = 0;
+	i = 0;
+	e = (char*) (zone_table + 8);
+	while (i < 0x40) {
+		if (*(signed char*) (e + 5) == (char) 0xff) {
+			found_free = 1;
+		} else if ((unsigned char) *e == x && (unsigned char) *(e + 1) == y) {
+			return 0;
+		}
+		i++;
+		e += 0x18;
 	}
+	if (found_free == 0)
+		return 0;
+	for (j = 0; j < zone_type; j++) {
+		for (i = 0; i < zone_type; i++) {
+			if (find_zone_record(zone_table, x + i - zone_type / 2, y + j - zone_type / 2))
+				return 0;
+		}
+	}
+	return 1;
 }
 
 /* Sets/updates a plant map entry. Creates or modifies a
@@ -178,126 +111,64 @@ char s_plt_SetPlantMap____Map_is_not_al_1002d9ec[] = "plt_SetPlantMap(): Map is 
 
 // FUNCTION: SERVER 0x100150a0
 // plt_SetPlantMap
-
-__declspec(naked) int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, unsigned int y, int zone_type, int extra)
+int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, unsigned int y, int zone_type, int extra)
 {
-	(void) zone_table;
-	(void) x;
-	(void) y;
-	(void) zone_type;
-	(void) extra;
-	__asm {
-		push ebx
-		push ebp
-		mov ebp, dword ptr [esp + 0x18]
-		push esi
-		push edi
-		push ebp
-		call lb_SearchRecordTable
-		mov edi, dword ptr [esp + 0x18]
-		add esp, 4
-		test edi, edi
-		mov dword ptr [esp + 0x20], eax
-		jne L_have_map
-		push 1
-		push offset s_plt_SetPlantMap____Map_is_not_al_1002d9ec
-		push 0x83
-		push offset s_D__Develop_DieGildeAddOn_auxilla_1002d9c0
-		call LogMessageInternal
-		add esp, 0x10
-		xor eax, eax
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		ret
-	L_have_map:
-		xor ecx, ecx
-		lea esi, [edi + 9]
-		or edx, 0xffffffff
-	L_scan1:
-		mov ebx, dword ptr [esp + 0x18]
-		xor eax, eax
-		mov al, byte ptr [esi - 1]
-		cmp eax, ebx
-		jne L_scan1_next
-		mov ebx, dword ptr [esp + 0x1c]
-		xor eax, eax
-		mov al, byte ptr [esi]
-		cmp eax, ebx
-		jne L_scan1_next
-		cmp byte ptr [esi + 4], dl
-		jne L_apply
-	L_scan1_next:
-		inc ecx
-		add esi, 0x18
-		cmp ecx, 0x40
-		jl L_scan1
-		xor ecx, ecx
-		lea eax, [edi + 0xd]
-	L_scan2:
-		cmp byte ptr [eax], dl
-		je L_store_new
-		inc ecx
-		add eax, 0x18
-		cmp ecx, 0x40
-		jl L_scan2
-		push 1
-		push offset s_plt_SetPlantMap____Could_not_fin_1002d990
-		push 0x9b
-		push offset s_D__Develop_DieGildeAddOn_auxilla_1002d9c0
-		call LogMessageInternal
-		add esp, 0x10
-		xor eax, eax
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		ret
-	L_store_new:
-		mov esi, dword ptr [g_dynamic_count]
-		lea eax, [ecx + ecx*2]
-		mov dword ptr [edi + eax*8], esi
-		mov eax, dword ptr [g_dynamic_count]
-		inc eax
-		mov dword ptr [g_dynamic_count], eax
-	L_apply:
-		lea ecx, [ecx + ecx*2]
-		lea eax, [edi + ecx*8]
-		mov ecx, dword ptr [esp + 0x24]
-		test ecx, ecx
-		mov word ptr [eax + 0xa], bp
-		jne L_set_xy
-		test ebp, ebp
-		mov dword ptr [eax + 0x10], edx
-		je L_set_ffmark
-		mov byte ptr [eax + 0xd], 1
-		jmp L_set_xy
-	L_set_ffmark:
-		mov byte ptr [eax + 0xd], dl
-	L_set_xy:
-		mov cl, byte ptr [esp + 0x1c]
-		mov dl, byte ptr [esp + 0x18]
-		mov byte ptr [eax + 9], cl
-		mov ecx, dword ptr [esp + 0x20]
-		test ecx, ecx
-		mov byte ptr [eax + 8], dl
-		je L_no_record
-		mov dl, byte ptr [ecx + 0x42]
-		pop edi
-		pop esi
-		pop ebp
-		mov byte ptr [eax + 0xc], dl
-		pop ebx
-		ret
-	L_no_record:
-		pop edi
-		pop esi
-		pop ebp
-		mov byte ptr [eax + 0xc], 0
-		pop ebx
-		ret
+	char* map;
+	char* rec;
+	char* p;
+	int i;
+	unsigned char marker;
+
+	map = (char*) lb_SearchRecordTable(zone_type);
+	if (zone_table == 0) {
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_auxilla_1002d9c0, 0x83, s_plt_SetPlantMap____Map_is_not_al_1002d9ec, 1);
+		return 0;
 	}
+	marker = 0xff;
+	i = 0;
+	p = (char*) zone_table + 9;
+	while (i < 0x40) {
+		if ((unsigned char) p[-1] == x && (unsigned char) p[0] == y && p[4] != (char) marker) {
+			goto apply;
+		}
+		i++;
+		p += 0x18;
+	}
+	i = 0;
+	p = (char*) zone_table + 0xd;
+	while (i < 0x40) {
+		if (p[0] == (char) marker) {
+			goto store_new;
+		}
+		i++;
+		p += 0x18;
+	}
+	LogMessageInternal(s_D__Develop_DieGildeAddOn_auxilla_1002d9c0, 0x9b, s_plt_SetPlantMap____Could_not_fin_1002d990, 1);
+	return 0;
+store_new:
+	*(int*) ((char*) zone_table + i * 24) = g_dynamic_count;
+	g_dynamic_count++;
+apply:
+	rec = (char*) zone_table + i * 24;
+	*(short*) (rec + 0xa) = (short) zone_type;
+	if (extra != 0) {
+		goto set_xy;
+	}
+	*(int*) (rec + 0x10) = -1;
+	if (zone_type != 0) {
+		*(char*) (rec + 0xd) = 1;
+	} else {
+		*(char*) (rec + 0xd) = 0xff;
+	}
+set_xy:
+	*(char*) (rec + 8) = (char) x;
+	*(char*) (rec + 9) = (char) y;
+	if (map != 0) {
+		*(char*) (rec + 0xc) = *(char*) (map + 0x42);
+	} else {
+		*(char*) (rec + 0xc) = 0;
+	}
+	return (int) rec;
 }
 
 /* Simple lookup into a global table by index. Returns value

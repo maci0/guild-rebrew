@@ -23,7 +23,7 @@ size = 33
 status = "EXACT"
 
 ["SERVER.0x10003170"]
-size = 240
+size = 235
 status = "RELOC"
 note = "Function passes itself to VirtualQuery to check its own code page protection"
 ghidra = "IsExecutableOrReadableProtect"
@@ -53,7 +53,7 @@ analysis = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after
 
 ["SERVER.0x100035c0"]
 size = 119
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10003640"]
 size = 132
@@ -73,15 +73,15 @@ status = "RELOC"
 
 ["SERVER.0x10003c50"]
 size = 65
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10003ca0"]
 size = 77
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10003cf0"]
 size = 43
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10004b80"]
 size = 57
@@ -117,18 +117,21 @@ cflags = "/DREBREW_ALLOW_NAKED"
 ["SERVER.0x10006c00"]
 size = 283
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10006d20"]
 size = 270
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10006e30"]
 size = 137
-status = "RELOC"
+status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10008a50"]
 size = 53
-status = "RELOC"
+status = "EXACT"
 ghidra = "cleanup_entity"
 
 ["SERVER.0x10008a90"]
@@ -138,12 +141,13 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10008c80"]
 size = 129
-status = "RELOC"
+status = "EXACT"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10008d10"]
 size = 301
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10008e40"]
 size = 472
@@ -219,15 +223,16 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 ["SERVER.0x1000a860"]
 size = 131
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000a8f0"]
 size = 170
-status = "RELOC"
+status = "EXACT"
 analysis = "Takes a raw command payload, pulls an available CommandPacket struct from incoming_cmd_freelist, populates it, calculates command type via 0x1000c710, and appends it to the tail of incoming_cmd_queue."
 
 ["SERVER.0x1000a9a0"]
 size = 170
-status = "RELOC"
+status = "EXACT"
 analysis = "Takes a raw command payload, pulls an available CommandPacket struct from outgoing_cmd_freelist, populates it, and appends it to the tail of outgoing_cmd_queue. | Get free command buffer from pool"
 
 ["SERVER.0x1000aa50"]
@@ -248,6 +253,7 @@ status = "RELOC"
 ["SERVER.0x1000b040"]
 size = 372
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000b1c0"]
 size = 205
@@ -257,6 +263,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 ["SERVER.0x1000b290"]
 size = 425
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000b440"]
 size = 133
@@ -280,6 +287,7 @@ status = "RELOC"
 ["SERVER.0x1000b880"]
 size = 263
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000b990"]
 size = 157
@@ -289,6 +297,7 @@ status = "RELOC"
 size = 179
 status = "RELOC"
 analysis = "Iterates through the command execution tracker table at g_office_secondary_id_base to detach or update a specific entity's links and pending sequence numbers. Used when an entity changes state abruptly or is being removed."
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000baf0"]
 size = 606
@@ -332,6 +341,7 @@ status = "EXACT"
 ["SERVER.0x1000c3c0"]
 size = 83
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000c420"]
 size = 166
@@ -373,6 +383,7 @@ status = "EXACT"
 ["SERVER.0x1000cb20"]
 size = 171
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000cbd0"]
 size = 517
@@ -392,11 +403,11 @@ status = "RELOC"
 
 ["SERVER.0x1000d020"]
 size = 22
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x1000d040"]
 size = 22
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x1000d060"]
 size = 169
@@ -466,10 +477,12 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 ["SERVER.0x1000e530"]
 size = 352
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000e690"]
 size = 191
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000e750"]
 size = 128
@@ -478,22 +491,27 @@ status = "RELOC"
 ["SERVER.0x1000e7d0"]
 size = 256
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000e8d0"]
-size = 240
+size = 239
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000e9c0"]
 size = 214
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000eaa0"]
 size = 208
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000eb70"]
 size = 144
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000ec00"]
 size = 912
@@ -502,7 +520,7 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x1000ef90"]
 size = 26
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x1000efb0"]
 size = 122
@@ -514,7 +532,7 @@ status = "RELOC"
 
 ["SERVER.0x1000f080"]
 size = 26
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x1000f0a0"]
 size = 37
@@ -523,6 +541,7 @@ status = "RELOC"
 ["SERVER.0x1000f0d0"]
 size = 197
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000f1a0"]
 size = 327
@@ -559,11 +578,11 @@ status = "RELOC"
 
 ["SERVER.0x1000f940"]
 size = 22
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x1000f960"]
 size = 22
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x1000f980"]
 size = 336
@@ -617,11 +636,12 @@ status = "RELOC"
 
 ["SERVER.0x10010080"]
 size = 22
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x100100a0"]
 size = 159
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10010140"]
 size = 280
@@ -629,12 +649,12 @@ status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10010260"]
-size = 144
-status = "RELOC"
+size = 149
+status = "EXACT"
 
 ["SERVER.0x100102f0"]
 size = 17
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10010310"]
 size = 52
@@ -651,6 +671,7 @@ status = "RELOC"
 ["SERVER.0x100104a0"]
 size = 135
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10010530"]
 size = 113
@@ -659,19 +680,19 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100105b0"]
 size = 329
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10010710"]
 size = 320
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10010850"]
 size = 370
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x100109d0"]
 size = 832
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10010d10"]
 size = 570
@@ -679,7 +700,7 @@ status = "RELOC"
 
 ["SERVER.0x10010f50"]
 size = 66
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10010fa0"]
 size = 525
@@ -687,15 +708,15 @@ status = "RELOC"
 
 ["SERVER.0x100111b0"]
 size = 501
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x100113b0"]
 size = 390
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10011540"]
 size = 288
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10011660"]
 size = 297
@@ -704,18 +725,18 @@ globals = "SERVER 0x100a8c30"
 
 ["SERVER.0x10011790"]
 size = 242
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10011890"]
 size = 164
-status = "RELOC"
+status = "EXACT"
 analysis = "Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure."
 globals = "SERVER 0x1003546c"
 note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=0 vs 4294967294"
 
 ["SERVER.0x10011940"]
 size = 674
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10011bf0"]
 size = 1040
@@ -731,7 +752,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100122e0"]
 size = 346
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10012440"]
 size = 37
@@ -809,7 +830,7 @@ status = "RELOC"
 
 ["SERVER.0x10014bf0"]
 size = 163
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10014ca0"]
 size = 265
@@ -823,7 +844,7 @@ analysis = "obj includes 28B jump table after code (296B obj vs 267B PE). Code m
 
 ["SERVER.0x10014ee0"]
 size = 69
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x10014f30"]
 size = 74
@@ -855,10 +876,12 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 size = 83
 status = "RELOC"
 analysis = "Updates priority tracking for dynamic entity dispatch/update lists. Limits simultaneous update weight using GetStatPair constraints."
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10015460"]
 size = 145
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10015500"]
 size = 180
@@ -867,6 +890,7 @@ status = "RELOC"
 ["SERVER.0x100155c0"]
 size = 197
 status = "EXACT"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10015690"]
 size = 41
@@ -892,6 +916,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 ["SERVER.0x10015cf0"]
 size = 194
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10015dc0"]
 size = 55
@@ -992,7 +1017,7 @@ status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10017240"]
-size = 240
+size = 235
 status = "RELOC"
 
 ["SERVER.0x10017330"]
@@ -1016,8 +1041,8 @@ status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100179b0"]
-size = 192
-status = "RELOC"
+size = 197
+status = "EXACT"
 
 ["SERVER.0x10017a70"]
 size = 62
@@ -1026,6 +1051,7 @@ status = "RELOC"
 ["SERVER.0x10017ab0"]
 size = 74
 status = "RELOC"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10017b00"]
 size = 320
@@ -1049,13 +1075,14 @@ ghidra = "find_and_process"
 
 ["SERVER.0x10017f90"]
 size = 23
-status = "RELOC"
+status = "EXACT"
 analysis = "Checks if the provided entity pointer is valid and active (not -1). If so, it invokes amt_ClearEntityLinks on it to detach it from game world lists before deletion or recycling."
 
 ["SERVER.0x10017fb0"]
 size = 278
 status = "RELOC"
 ghidra = "gm_DeallocEntity"
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100180d0"]
 size = 81
@@ -1171,7 +1198,7 @@ ghidra = "ahm_RandomBelow"
 
 ["SERVER.0x1001a0f0"]
 size = 22
-status = "RELOC"
+status = "EXACT"
 
 ["SERVER.0x1001a110"]
 size = 48
@@ -1401,3 +1428,18 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 size = 14
 status = "EXACT"
 cflags = "/O1 /Gd /DREBREW_ALLOW_NAKED"
+
+["SERVER.0x1000ea20"]
+size = 235
+
+["SERVER.0x100011f0"]
+size = 309
+status = "EXACT"
+
+["SERVER.0x10001b1d"]
+size = 129
+status = "EXACT"
+
+["SERVER.0x10003600"]
+size = 54
+status = "EXACT"

@@ -1054,3 +1054,4 @@ __declspec(naked) void __cdecl gv_ExAllocGraveyardWorker(void* a)
 #else
 void __cdecl gv_ExAllocGraveyardWorker(void* a) { /* C fallback */ }
 #endif
+/* UpdateProductionProgress moved to UpdateProductionProgress.c */

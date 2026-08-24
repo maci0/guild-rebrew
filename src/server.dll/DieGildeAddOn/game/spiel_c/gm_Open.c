@@ -903,6 +903,9 @@ __declspec(naked) int __cdecl gm_Open(int map_id)
 // FUNCTION: SERVER 0x10015950
 // gm_Open
 
+/* Blocked from C conversion (pointer-base + register roles, see
+ * docs/msvc6-allocator.md "gm_Open").  Best 732/861. */
+
 int __cdecl gm_Open(int map_id)
 {
 	unsigned int* src_player_ptr;

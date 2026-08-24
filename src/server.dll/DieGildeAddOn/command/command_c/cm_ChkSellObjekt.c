@@ -21,198 +21,71 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern int __cdecl gm_KannObjektHergestellt(char*, int, int);
 
 // FUNCTION: SERVER 0x1000cbd0
-__declspec(naked) int __cdecl cm_ChkSellObjekt(char* cmd)
+// cm_ChkSellObjekt
+
+int __cdecl cm_ChkSellObjekt(char* cmd)
 {
-	(void) cmd;
-	__asm {
-		sub esp, 0xc
-		push esi
-		mov esi, dword ptr [esp + 0x14]
-		mov eax, dword ptr [esi + 0x14]
-		cmp eax, -1
-		je near L_phase2
-		push eax
-		push esi
-		call gm_GetFieldByType
-		mov dword ptr [esi + 0x14], eax
-		push eax
-		lea eax, [esp + 0x10]
-		lea ecx, [esp + 0x20]
-		push eax
-		lea edx, [esp + 0x18]
-		push ecx
-		push edx
-		call gm_ResolveEntityById
-		add esp, 0x18
-		test eax, eax
-		jne L_p1_have_entity
-		push 8
-		push offset s_cm_ChkSellObjekt___Invalid__quel_1002c8dc
-		push 0x236b
-		jmp near L_log_fail
-	L_p1_have_entity:
-		mov eax, dword ptr [esp + 8]
-		test eax, eax
-		je L_p1_b
-		add eax, 0x5d
-		jmp L_p1_query
-	L_p1_b:
-		mov eax, dword ptr [esp + 0x14]
-		test eax, eax
-		je L_p1_c
-		add eax, 0x14
-		jmp L_p1_query
-	L_p1_c:
-		mov eax, dword ptr [esp + 4]
-		add eax, 0x178
-	L_p1_query:
-		mov edx, dword ptr [eax]
-		xor ecx, ecx
-		mov cx, word ptr [esi + 0x18]
-		push ecx
-		push 0
-		push 1
-		push edx
-		call gm_StartEntityQuery
-		add esp, 0x10
-		test eax, eax
-		jne L_p1_have_query
-		push 8
-		push offset s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4
-		push 0x2383
-		jmp near L_log_fail
-	L_p1_have_query:
-		mov eax, dword ptr [eax + 0xe]
-		mov ecx, dword ptr [esi + 0x1f]
-		cmp eax, ecx
-		jge L_phase2
-		push 8
-		push offset s_cm_ChkSellObjekt___Not_enough_Ob_1002c884
-		push 0x238f
-		jmp near L_log_fail
-	L_phase2:
-		mov eax, dword ptr [esi + 0x10]
-		cmp eax, -1
-		je near L_success
-		push eax
-		push esi
-		call gm_GetFieldByType
-		lea ecx, [esp + 0xc]
-		mov dword ptr [esi + 0x10], eax
-		push eax
-		lea edx, [esp + 0x20]
-		push ecx
-		lea eax, [esp + 0x1c]
-		push edx
-		push eax
-		call gm_ResolveEntityById
-		add esp, 0x18
-		test eax, eax
-		jne L_p2_have_entity
-		push 8
-		push offset s_cm_ChkSellObjekt___Invalid__ziel_1002c854
-		push 0x23ab
-		jmp near L_log_fail
-	L_p2_have_entity:
-		mov eax, dword ptr [esp + 0xc]
-		test eax, eax
-		je L_p2_check_b
-		mov ax, word ptr [eax + 0x27]
-		cmp ax, 0xffff
-		je L_p2_parent_null
-		and eax, 0xffff
-		lea eax, [eax + eax*2]
-		lea eax, [eax + eax*4]
-		lea ecx, [eax + eax*8]
-		lea eax, [ecx*4 + 0x100358a0]
-		jmp near L_p2_check_credits
-	L_p2_parent_null:
-		xor eax, eax
-		jmp near L_p2_check_credits
-	L_p2_check_b:
-		mov eax, dword ptr [esp + 0x14]
-		test eax, eax
-		je L_p2_c
-		mov cx, word ptr [eax]
-		cmp cx, 0x2a
-		je L_p2_check_kann
-		cmp cx, 0x116
-		je L_p2_check_kann
-		cmp cx, 0x1dd
-		jne L_p2_resolve_parent
-	L_p2_check_kann:
-		mov edx, dword ptr [esi + 0x1f]
-		xor ecx, ecx
-		mov cx, word ptr [esi + 0x18]
-		push edx
-		push ecx
-		push eax
-		call gm_KannObjektHergestellt
-		mov ecx, dword ptr [esi + 0x1f]
-		add esp, 0xc
-		cmp eax, ecx
-		jge L_p2_resolve_parent_load_arg
-		push 8
-		push offset s_cm_ChkSellObjekt___Lager_voll_1002c834
-		push 0x23cd
-		jmp L_log_fail
-	L_p2_resolve_parent_load_arg:
-		mov eax, dword ptr [esp + 0x14]
-	L_p2_resolve_parent:
-		push eax
-		call gm_ResolveParentEntity
-		add esp, 4
-		jmp L_p2_check_credits
-	L_p2_c:
-		mov edx, dword ptr [esi + 0x1f]
-		mov ecx, dword ptr [esp + 4]
-		xor eax, eax
-		push edx
-		mov ax, word ptr [esi + 0x18]
-		push eax
-		push ecx
-		call gm_CheckInventoryCapacity
-		mov ecx, dword ptr [esi + 0x1f]
-		add esp, 0xc
-		cmp eax, ecx
-		jge L_p2_load_parent_c
-		push 8
-		push offset s_cm_ChkSellObjekt___Inventory_vol_1002c810
-		push 0x23e3
-		jmp L_log_fail
-	L_p2_load_parent_c:
-		mov eax, dword ptr [esp + 4]
-	L_p2_check_credits:
-		mov ecx, dword ptr [esi + 0x23]
-		test ecx, ecx
-		je L_success
-		test eax, eax
-		je L_success
-		mov dl, byte ptr [esi + 0x1e]
-		mov eax, dword ptr [eax + 0x178]
-		push edx
-		push eax
-		call gm_QueryEntitySum
-		mov ecx, dword ptr [esi + 0x1f]
-		add esp, 8
-		imul ecx, dword ptr [esi + 0x23]
-		cmp eax, ecx
-		jge L_success
-		push 8
-		push offset s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8
-		push 0x23ff
-	L_log_fail:
-		push offset s_D__Develop_DieGildeAddOn_command_1002c748
-		call LogMessageInternal
-		add esp, 0x10
-		mov eax, 1
-		pop esi
-		add esp, 0xc
-		ret
-	L_success:
-		xor eax, eax
-		pop esi
-		add esp, 0xc
-		ret
+	char* t_a;
+	char* t_b;
+	char* t_c;
+	char* t_d;
+	char* q;
+	char* p;
+	int field;
+	unsigned short w;
+
+	if (*(int *) (cmd + 0x14) != -1) {
+		*(int *) (cmd + 0x14) = gm_GetFieldByType(cmd, *(int *) (cmd + 0x14));
+		if (!gm_ResolveEntityById((void **) &t_b, (void **) &t_d, (void **) &t_a, *(int *) (cmd + 0x14))) {
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x236b, s_cm_ChkSellObjekt___Invalid__quel_1002c8dc, 8);
+			return 1;
+		}
+		p = t_b ? t_b + 0x5d : (t_d ? t_d + 0x14 : t_a + 0x178);
+		q = (char *) gm_StartEntityQuery(*(int *) p, 1, 0, *(unsigned short *) (cmd + 0x18));
+		if (q == 0) {
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2383, s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4, 8);
+			return 1;
+		}
+		if (*(int *) (q + 0xe) < *(int *) (cmd + 0x1f)) {
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x238f, s_cm_ChkSellObjekt___Not_enough_Ob_1002c884, 8);
+			return 1;
+		}
 	}
+	if (*(int *) (cmd + 0x10) != -1) {
+		*(int *) (cmd + 0x10) = gm_GetFieldByType(cmd, *(int *) (cmd + 0x10));
+		if (!gm_ResolveEntityById((void **) &t_c, (void **) &t_d, (void **) &t_a, *(int *) (cmd + 0x10))) {
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23ab, s_cm_ChkSellObjekt___Invalid__ziel_1002c854, 8);
+			return 1;
+		}
+		if (t_c) {
+			w = *(unsigned short *) (t_c + 0x27);
+			if (w != 0xffff) {
+				p = (char *) (0x100358a0 + w * 0x21c);
+			} else {
+				p = 0;
+			}
+		} else if (t_d) {
+			w = *(unsigned short *) t_d;
+			if (w == 0x2a || w == 0x116 || w == 0x1dd) {
+				if (gm_KannObjektHergestellt(t_d, *(unsigned short *) (cmd + 0x18), *(int *) (cmd + 0x1f)) < *(int *) (cmd + 0x1f)) {
+					LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23cd, s_cm_ChkSellObjekt___Lager_voll_1002c834, 8);
+					return 1;
+				}
+			}
+			p = gm_ResolveParentEntity(t_d);
+		} else {
+			if (gm_CheckInventoryCapacity(t_a, *(unsigned short *) (cmd + 0x18), *(int *) (cmd + 0x1f)) < *(int *) (cmd + 0x1f)) {
+				LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23e3, s_cm_ChkSellObjekt___Inventory_vol_1002c810, 8);
+				return 1;
+			}
+			p = t_a;
+		}
+		if (*(int *) (cmd + 0x23) != 0 && p != 0) {
+			if (((int (__cdecl *) (int, unsigned char)) gm_QueryEntitySum)(*(int *) (p + 0x178), *(unsigned char *) (cmd + 0x1e)) < *(int *) (cmd + 0x1f) * *(int *) (cmd + 0x23)) {
+				LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23ff, s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8, 8);
+				return 1;
+			}
+		}
+	}
+	return 0;
 }

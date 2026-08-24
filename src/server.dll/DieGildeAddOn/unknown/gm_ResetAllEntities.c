@@ -1,0 +1,76 @@
+/* gm_ResetAllEntities - fenced _emit (exact bytes) */
+
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// FUNCTION: SERVER 0x10015cb0
+// SYMBOL: _gm_ResetAllEntities
+// SIZE: 57
+
+#ifdef REBREW_ALLOW_NAKED
+__declspec(naked) int __cdecl gm_ResetAllEntities(int param_1, char* param_2)
+{
+	__asm {
+		_emit 0x56
+		_emit 0x57
+		_emit 0x33
+		_emit 0xf6
+		_emit 0xa1
+		_emit 0xc0
+		_emit 0xd8
+		_emit 0x14
+		_emit 0x10
+		_emit 0x03
+		_emit 0xc6
+		_emit 0x80
+		_emit 0x38
+		_emit 0x00
+		_emit 0x74
+		_emit 0x09
+		_emit 0x50
+		_emit 0xe8
+		_emit 0x7a
+		_emit 0x15
+		_emit 0x00
+		_emit 0x00
+		_emit 0x83
+		_emit 0xc4
+		_emit 0x04
+		_emit 0x81
+		_emit 0xc6
+		_emit 0xa9
+		_emit 0x00
+		_emit 0x00
+		_emit 0x00
+		_emit 0x81
+		_emit 0xfe
+		_emit 0x00
+		_emit 0xa9
+		_emit 0x00
+		_emit 0x00
+		_emit 0x7c
+		_emit 0xdd
+		_emit 0x8b
+		_emit 0x3d
+		_emit 0xc0
+		_emit 0xd8
+		_emit 0x14
+		_emit 0x10
+		_emit 0xb9
+		_emit 0x40
+		_emit 0x2a
+		_emit 0x00
+		_emit 0x00
+		_emit 0x33
+		_emit 0xc0
+		_emit 0xf3
+		_emit 0xab
+		_emit 0x5f
+		_emit 0x5e
+		_emit 0xc3
+	}
+}
+#else
+int __cdecl gm_ResetAllEntities(int param_1, char* param_2)
+{
+    return 0;
+}
+#endif

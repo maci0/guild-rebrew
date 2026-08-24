@@ -9,7 +9,16 @@ extern double _g_stat_max_d;
  * Reads entity and stat index from the command, applies a delta
  * or sets an absolute value to the desire field. */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000e9c0
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000e9c0.
+// C conversion blocker (docs/msvc6-allocator.md Finding 40): the
+// Finding 7 family store materialization (base copy + &cmd + folded
+// `mov [edi+0x10],eax` — every C emits lea esi,[eax+0x10] with 3
+// prologue pushes instead of the deferred ebx/esi) PLUS the Finding 35
+// FPU clamp re-compare (the clamp routes through a second fcom max
+// after already knowing stat<max).
 __declspec(naked) int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
 {
 	(void) cmd;
@@ -103,3 +112,48 @@ __declspec(naked) int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
 		ret
 	}
 }
+#else
+extern double _g_stat_min_d;
+extern double _g_stat_max_d;
+
+int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
+{
+	int field;
+	int ok;
+	int idx;
+	int i;
+	int entity;
+	uchar* src;
+	float* stat;
+	int base;
+
+	base = (int)cmd;
+	field = gm_GetFieldByType((char*)cmd, *(int*)(cmd + 0x10));
+	ok = gm_ResolveEntityById(0, 0, (void**)&cmd, field);
+	*(int*)(base + 0x10) = field;
+	if (ok == 0) {
+		LogMessageInternal((char*)0x1002c748, 0x33af, (char*)0x1002d0f4, 1);
+		return 1;
+	}
+	entity = (int)cmd;
+	src = (uchar*)(base + 0x15);
+	i = 0;
+	if (*(uchar*)(base + 0x14) > 0) {
+		do {
+			idx = *src;
+			src++;
+			stat = (float*)(entity + (idx * 3 + 0x24) * 4);
+			*stat += *(float*)src;
+			src += 4;
+			if (*stat > _g_stat_max_d)
+				*stat = _g_stat_max_d;
+			else if (*stat < _g_stat_min_d)
+				*stat = _g_stat_min_d;
+			i++;
+		} while (i < (unsigned int)*(uchar*)(base + 0x14));
+	}
+	if (result != 0)
+		*result = 1;
+	return 0;
+}
+#endif

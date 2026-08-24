@@ -9,7 +9,7 @@ char __cdecl check_memory_protection(unsigned int);
 char __cdecl AnalyzeInstruction(int, int, int, int*);
 unsigned int __cdecl EmitCrashModuleLine(int*);
 char* __cdecl GetDebugRecordByIndex();
-void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
+void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 extern int g_severity_table[3];
 extern unsigned int g_log_mode_flags;
 extern int g_console_handle;
@@ -30,37 +30,22 @@ static char s_Error_Handler_closed__100273ac[] = "Error-Handler closed.\n";
 // CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x100034c0
 // ShutdownLogAndErrorHandler
-
-__declspec(naked) void __cdecl ShutdownLogAndErrorHandler(void)
+void __cdecl ShutdownLogAndErrorHandler(void)
 {
-	__asm {
-		push esi
-		mov esi, offset g_severity_table
-	L_loop:
-		mov eax, dword ptr [esi]
-		mov ecx, dword ptr [g_log_mode_flags]
-		push eax
-		push ecx
-		push offset s_Error_Handler_closed__100273ac
-		call DispatchLogOutput
-		add esi, 4
-		add esp, 0xc
-		cmp esi, offset g_severity_table + 12
-		jl L_loop
-		mov al, byte ptr [g_log_mode_flags]
-		xor esi, esi
-		test al, 8
-		je L_skip_console
-		call dword ptr [FreeConsole]
-		mov dword ptr [g_console_handle], esi
-	L_skip_console:
-		mov dword ptr [g_panic_callback], esi
-		mov dword ptr [g_owner_window], esi
-		mov dword ptr [g_log_mode_flags], esi
-		pop esi
-		ret
+	int i;
+
+	for (i = 0; i < 3; i++) {
+		DispatchLogOutput((char*) 0x100273ac, g_log_mode_flags, g_severity_table[i]);
 	}
+	if (g_log_mode_flags & 8) {
+		FreeConsole();
+		g_console_handle = 0;
+	}
+	g_panic_callback = 0;
+	g_owner_window = 0;
+	g_log_mode_flags = 0;
 }
+
 
 /* Reports a fatal error with a message, then terminates the
  * process via _exit(). Does not return. */
@@ -87,7 +72,7 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 		flags = g_log_mode_flags;
 	}
 	if ((flags & 0xd) != 0) {
-		DispatchLogOutput(&g_log_message_buffer, (unsigned char) flags, 1);
+		DispatchLogOutput(&g_log_message_buffer, flags, 1);
 		flags = g_log_mode_flags;
 	}
 	if ((flags & 2) == 0) {
@@ -132,79 +117,22 @@ void __cdecl ReportMessage(char* msg)
 // FUNCTION: SERVER 0x10003640
 // LogMessageInternal
 
-__declspec(naked) void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity)
+void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity)
 {
-	(void) module;
-	(void) line;
-	(void) msg;
-	(void) severity;
-	__asm {
-		_emit 0xa1
-		_emit 0x10
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		test eax, eax
-		jne L_have_cb
-		push 0x10030
-		push 0x10027424
-		push 0x100273fc
-		push 0
-		_emit 0xff
-		_emit 0x15
-		_emit 0x48
-		_emit 0x41
-		_emit 0x02
-		_emit 0x10
-		ret
-	L_have_cb:
-		_emit 0xa0
-		_emit 0x18
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		test al, 1
-		je L_ret
-		mov ecx, dword ptr [esp + 8]
-		mov edx, dword ptr [esp + 4]
-		test al, 0x20
-		mov eax, dword ptr [esp + 0xc]
-		push eax
-		push ecx
-		push edx
-		je L_no_time
-		_emit 0xff
-		_emit 0x15
-		_emit 0x54
-		_emit 0x41
-		_emit 0x02
-		_emit 0x10
-		push eax
-		push 0x10027464
-		push 0x117640e0
-		call sprintf
-		add esp, 0x18
-		jmp L_dispatch
-	L_no_time:
-		push 0x10027448
-		push 0x117640e0
-		call sprintf
-		add esp, 0x14
-	L_dispatch:
-		mov eax, dword ptr [esp + 0x10]
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x18
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		push eax
-		push ecx
-		push 0x117640e0
-		call DispatchLogOutput
-		add esp, 0xc
-	L_ret:
-		ret
+	unsigned char flags;
+
+	if (*(int*) 0x10034610 == 0) {
+		((void (__stdcall*)(int, char*, char*, int)) *(void**) 0x10024148)(0, (char*) 0x100273fc, (char*) 0x10027424, 0x10030);
+		return;
+	}
+	flags = *(unsigned char*) 0x10034618;
+	if (flags & 1) {
+		if (flags & 0x20) {
+			sprintf((char*) 0x117640e0, (char*) 0x10027464, ((int (__cdecl*)(void)) *(void**) 0x10024154)(), module, line, msg);
+		} else {
+			sprintf((char*) 0x117640e0, (char*) 0x10027448, module, line, msg);
+		}
+		DispatchLogOutput((char*) 0x117640e0, *(int*) 0x10034618, severity);
 	}
 }
 extern unsigned int g_player_slot_overflow;

@@ -43,6 +43,12 @@ extern unsigned int __ftol(void);
  * payload. Applies change with clamping via gm_MapEntityStatRange. */
 
 // FUNCTION: SERVER 0x100100a0
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x100100a0.
+// C conversion blocker (docs/msvc6-allocator.md Finding 35): 146/159 —
+// the ref re-compares f against a4 (fcom a4 twice) to route the merge
+// block (f>=a4 clamp vs f>cc keep); MSVC6 8168 always folds the second
+// compare away.  The fild spill and the __ftol stores otherwise match.
 __declspec(naked) int __cdecl cm_ExModifyStat(int* cmd)
 {
 	(void) cmd;
@@ -110,3 +116,11 @@ __declspec(naked) int __cdecl cm_ExModifyStat(int* cmd)
 		ret
 	}
 }
+#else
+int __cdecl cm_ExModifyStat(int arg1)
+{
+	/* C fallback (no byte-matching conversion; FPU re-compare, Finding 35). */
+	(void) arg1;
+	return 1;
+}
+#endif

@@ -20,6 +20,13 @@
 
 // CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000d730
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000d730.
+// C conversion blocker: 177/180 — the Finding 33 arg3-lea hoist residue
+// (the static out-param lands in the arg1 slot; ref keeps it in a local).
+// `unsigned short r` (forces and eax,0xffff) and the shared push-1
+// (severity/dealloc arg2) otherwise match.
 __declspec(naked) int __cdecl cm_ExFree(int cmd, char *result)
 {
 	(void) cmd;
@@ -98,3 +105,12 @@ __declspec(naked) int __cdecl cm_ExFree(int cmd, char *result)
 		ret
 	}
 }
+#else
+int __cdecl cm_ExFree(int arg1, char* result)
+{
+	/* C fallback (no byte-matching conversion; Finding 33 lea residue). */
+	(void) arg1;
+	(void) result;
+	return 0;
+}
+#endif

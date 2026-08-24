@@ -66,7 +66,16 @@ extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
  * Resolves entity, reads field type/offset/value from the command
  * payload, then applies the change to the entity's memory. */
 
+// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x1000e7d0
+#ifdef REBREW_ALLOW_NAKED
+// NAKED verification build: byte-identical to original 0x1000e7d0.
+// C conversion blocker (docs/msvc6-allocator.md Finding 38): best C is
+// 213/242 — the head, calls, selection and all three add-to-memory
+// inner loops match byte-for-byte, but the loop's register pairing
+// ({count,offset,dst2}->ecx with src->eax in the reference vs
+// {count,offset,dst2}->eax with src->ecx in every formulation) is an
+// allocator fixed-point that 19 C shapes could not invert.
 __declspec(naked) int __cdecl cm_ExChangeAttribute(int cmd, char *result)
 {
 	(void) cmd;
@@ -191,3 +200,78 @@ __declspec(naked) int __cdecl cm_ExChangeAttribute(int cmd, char *result)
 		ret
 	}
 }
+#else
+int __cdecl cm_ExChangeAttribute(int cmd, char *result)
+{
+	void* pv8;
+	void* pv4;
+	int* resolved;
+	register char* src;
+	char* entity;
+	char* dst2;
+	unsigned short* puVar5;
+	int field;
+	int ok;
+	unsigned int n;
+	int size;
+	unsigned int i;
+
+	field = gm_GetFieldByType((char*)cmd, *(int*)(cmd + 0x10));
+	ok = gm_ResolveEntityById(&resolved, &pv8, &pv4, field);
+	if (ok == 0) {
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x31f7,
+		                   s_cm_ExChangeAttribute___Invalid_I_1002d0b0, 1);
+		return 1;
+	}
+	*(int*)(cmd + 0x10) = field;
+	if (resolved != 0)
+		entity = (char*)resolved;
+	else if (pv8 != 0)
+		entity = (char*)pv8;
+	else
+		entity = (char*)pv4;
+	src = (char*)(cmd + 0x15);
+	i = 0;
+	if (*(unsigned char*)(cmd + 0x14) > 0) {
+		do {
+			size = *(char*)src;
+			n = *(char*)(src + 1);
+			src++;
+			puVar5 = (unsigned short*)(src + 1);
+			src++;
+			dst2 = entity + *puVar5;
+			src += 2;
+			switch (size) {
+			case 1:
+				while (n > 0) {
+					*dst2 += *src;
+					src++;
+					dst2++;
+					n--;
+				}
+				break;
+			case 2:
+				while (n > 0) {
+					*(short*)dst2 += *(short*)src;
+					src += 2;
+					dst2 += 2;
+					n--;
+				}
+				break;
+			case 4:
+				while (n > 0) {
+					*(int*)dst2 += *(int*)src;
+					src += 4;
+					dst2 += 4;
+					n--;
+				}
+				break;
+			}
+			i++;
+		} while (i < (unsigned int)*(unsigned char*)(cmd + 0x14));
+	}
+	if (result != 0)
+		*result = 1;
+	return 0;
+}
+#endif
