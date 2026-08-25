@@ -52,14 +52,6 @@ extern int g_entity_type_table;
  */
 
 // FUNCTION: SERVER 0x100104a0
-
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x100104a0 (135B).
-// C conversion blocker (docs/msvc6-allocator.md Finding 32): 133/135 — the
-// ref materializes the type*589 address with a separate lea before the
-// 0x247 load; MSVC6 folds it (Finding 30 pattern).  The r-variable branch
-// form (not `if (x==1) return A; return B;` — that if-converts branchless)
-// and the index-before-obj statement order otherwise match.
 __declspec(naked) int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 {
 	(void) cmd;
@@ -124,44 +116,3 @@ __declspec(naked) int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 		ret
 	}
 }
-#else
-int __cdecl cm_GetBuildingStatCount(uchar* cmd)
-{
-	unsigned char t247;
-	unsigned char* obj;
-	char* tp;
-	int r;
-
-	tp = dword_100a8c30 + *(unsigned char *) cmd * 589;
-	t247 = *(unsigned char *) (tp + 0x247);
-	obj = *(unsigned char**) (cmd + 0x65);
-	if (t247 == 1) {
-		r = 8;
-		if (*(unsigned char *) (obj + 0x19) == 1) {
-			r = 0xc;
-		}
-		return r;
-	}
-	if (t247 == 2) {
-		r = 0xc;
-		if (*(unsigned char *) (obj + 0x19) == 1) {
-			r = 0x12;
-		}
-		if (*(unsigned char *) (obj + 0x1a) == 1) {
-			r += 2;
-		}
-		return r;
-	}
-	r = 0x10;
-	if (*(unsigned char *) (obj + 0x19) == 1) {
-		r = 0x18;
-	}
-	if (*(unsigned char *) (obj + 0x1a) == 1) {
-		r += 4;
-	}
-	if (*(unsigned char *) (obj + 0x1b) == 1) {
-		r += 2;
-	}
-	return r;
-}
-#endif

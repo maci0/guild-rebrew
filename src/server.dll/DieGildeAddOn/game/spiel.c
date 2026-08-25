@@ -51,7 +51,7 @@ extern char* g_array_base;
 extern char g_entity_array[];
 void __cdecl free_node(char*);
 int __cdecl gm_FreeObjectListRecursive(char**);
-void __cdecl gm_NoopRet2(void);
+void __cdecl gm_NoopRet2(char* slot);
 char* __cdecl gm_AllocateObjectSlot(void);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 short* __cdecl gm_ResolveParentEntity(short*);
@@ -138,7 +138,7 @@ extern float g_float_const_a8;
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10015CB0
 // gm_ResetAllEntities
 
@@ -167,83 +167,46 @@ void __cdecl gm_ResetAllEntities(void)
 
 // FUNCTION: SERVER 0x10015cf0
 // gm_CleanupObjectEntities
+//   NEAR_MATCHING 139/194: control flow and all calls match; remaining diffs
+//   are msvc6 addressing-mode choices — original encodes [esi+eax] (counter as
+//   base reg) and uses `lea ecx,[esi+eax]` for the cleanup pointer (ours folds
+//   to `add eax,esi`, 1 byte smaller, hence SIZE_MISMATCH). Not reachable with
+//   this compiler's address-mode selection; semantics are identical.
 
 int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
+void __cdecl gm_NoopRet2(char* slot);
 
-__declspec(naked) void __cdecl gm_CleanupObjectEntities(void)
+void __cdecl gm_CleanupObjectEntities(void)
 {
-	__asm {
-		sub esp, 0xc
-		push esi
-		push edi
-		xor esi, esi
-	L_top:
-		mov eax, dword ptr [g_query_base]
-		cmp word ptr [esi + eax], 0
-		je L_next
-		mov eax, dword ptr [esi + eax + 6]
-		lea ecx, [esp + 0x10]
-		push eax
-		lea edx, [esp + 0x10]
-		push ecx
-		lea eax, [esp + 0x10]
-		push edx
-		push eax
-		call gm_ResolveEntityById
-		mov eax, dword ptr [esp + 0x18]
-		add esp, 0x10
-		test eax, eax
-		je L_chk_existing
-		add eax, 0x5d
-		jmp L_test_head
-	L_chk_existing:
-		mov eax, dword ptr [esp + 0xc]
-		test eax, eax
-		je L_chk_static
-		add eax, 0x14
-		jmp L_test_head
-	L_chk_static:
-		mov eax, dword ptr [esp + 0x10]
-		test eax, eax
-		je L_cleanup
-		add eax, 0x178
-	L_test_head:
-		test eax, eax
-		je L_cleanup
-		mov edx, dword ptr [g_query_base]
-		xor ecx, ecx
-		mov cx, word ptr [esi + edx]
-		push ecx
-		push eax
-		call gm_RemoveObjectByType
-		add esp, 8
-		jmp L_next
-	L_cleanup:
-		mov eax, dword ptr [g_query_base]
-		lea ecx, [esi + eax]
-		push ecx
-		call gm_NoopRet2
-		mov edx, dword ptr [g_query_base]
-		add esp, 4
-		mov word ptr [esi + edx], 0
-		mov eax, dword ptr [g_query_limit]
-		dec eax
-		mov dword ptr [g_query_limit], eax
-	L_next:
-		add esi, 0x43
-		cmp esi, 0x14f218
-		jl L_top
-		mov edi, dword ptr [g_query_base]
-		mov ecx, 0x53c86
-		xor eax, eax
-		rep stosd
-		pop edi
-		pop esi
-		add esp, 0xc
-		ret
-	}
-}
+	int i;
+	void* dynamic;
+	void* existing;
+	void* static_ptr;
+	char* list_head;
 
+	for (i = 0; i < 0x14f218; i += 0x43) {
+		if (*(unsigned short*) (i + (char*) g_query_base) != 0) {
+			gm_ResolveEntityById(&dynamic, &existing, &static_ptr, *(int*) (i + (char*) g_query_base + 6));
+			if (dynamic != NULL) {
+				list_head = (char*) dynamic + 0x5d;
+			} else if (existing != NULL) {
+				list_head = (char*) existing + 0x14;
+			} else if (static_ptr != NULL) {
+				list_head = (char*) static_ptr + 0x178;
+			} else {
+				list_head = NULL;
+			}
+			if (list_head != NULL) {
+				gm_RemoveObjectByType((void**) list_head, *(unsigned short*) (i + (char*) g_query_base));
+			} else {
+				gm_NoopRet2(i + (char*) g_query_base);
+				*(unsigned short*) (i + (char*) g_query_base) = 0;
+				g_query_limit--;
+			}
+		}
+	}
+	memset(g_query_base, 0, 0x14f218);
+}
 /* Finds a record in the entity table by ID. Searches the
  * global entity records for a matching entity ID. Returns
  * pointer or NULL. */
@@ -309,129 +272,55 @@ void __cdecl gm_CleanupAllEntities(void)
 // FUNCTION: SERVER 0x10015e90
 // gm_ResolveEntityById
 
-__declspec(naked) int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
+extern int g_1014d8c0;
+
+int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
 {
-	(void) dynamic;
-	(void) existing;
-	(void) static_ptr;
-	(void) entity_id;
-	__asm {
-		_emit 0xa1
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		push ebx
-		push esi
-		test eax, eax
-		push edi
-		je near L_ret0
-		mov edi, dword ptr [esp + 0x10]
-		test edi, edi
-		je L_chk_existing
-		mov dword ptr [edi], 0
-	L_chk_existing:
-		mov ebx, dword ptr [esp + 0x14]
-		test ebx, ebx
-		je L_chk_static
-		mov dword ptr [ebx], 0
-	L_chk_static:
-		mov edx, dword ptr [esp + 0x18]
-		mov esi, dword ptr [esp + 0x1c]
-		test edx, edx
-		je L_dyn
-		mov dword ptr [edx], 0
-		mov eax, 0x100358a0
-		xor ecx, ecx
-	L_static_loop:
-		_emit 0x66
-		_emit 0x81
-		_emit 0x38
-		_emit 0xff
-		_emit 0xff
-		je L_static_next
-		cmp dword ptr [eax + 4], esi
-		je L_found_static
-	L_static_next:
-		add eax, 0x21c
-		inc ecx
-		cmp ecx, 0x300
-		jl L_static_loop
-	L_dyn:
-		test edi, edi
-		je L_existing
-		_emit 0xa1
-		_emit 0xc0
-		_emit 0xd8
-		_emit 0x14
-		_emit 0x10
-		xor ecx, ecx
-	L_dyn_loop:
-		cmp byte ptr [eax], 0
-		je L_dyn_next
-		cmp dword ptr [eax + 1], esi
-		je L_found_dyn
-	L_dyn_next:
-		inc ecx
-		add eax, 0xa9
-		cmp ecx, 0x100
-		jl L_dyn_loop
-		jmp L_existing
-	L_found_static:
-		pop edi
-		pop esi
-		mov dword ptr [edx], eax
-		mov eax, 3
-		pop ebx
-		ret
-	L_found_dyn:
-		mov dword ptr [edi], eax
-		pop edi
-		pop esi
-		mov eax, 1
-		pop ebx
-		ret
-	L_existing:
-		test ebx, ebx
-		je L_ret0
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x50
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		_emit 0xa1
-		_emit 0x34
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-		xor ecx, ecx
-		test edx, edx
-		jle L_ret0
-	L_ex_loop:
-		cmp word ptr [eax], 0
-		je L_ex_next
-		cmp dword ptr [eax + 2], esi
-		je L_found_existing
-		inc ecx
-	L_ex_next:
-		add eax, 0x43
-		cmp ecx, edx
-		jl L_ex_loop
-	L_ret0:
-		pop edi
-		pop esi
-		xor eax, eax
-		pop ebx
-		ret
-	L_found_existing:
-		pop edi
-		pop esi
-		mov dword ptr [ebx], eax
-		mov eax, 2
-		pop ebx
-		ret
+	int i;
+	char* p;
+
+	if (g_entity_table == NULL) {
+		return 0;
 	}
+	if (dynamic != NULL) {
+		*dynamic = NULL;
+	}
+	if (existing != NULL) {
+		*existing = NULL;
+	}
+	if (static_ptr != NULL) {
+		*static_ptr = NULL;
+		p = (char*) 0x100358a0;
+		for (i = 0; i < 0x300; i++) {
+			if (*(unsigned short*) p != 0xffff && *(int*) (p + 4) == entity_id) {
+				*static_ptr = p;
+				return 3;
+			}
+			p += 0x21c;
+		}
+	}
+	if (dynamic != NULL) {
+		p = (char*) g_1014d8c0;
+		for (i = 0; i < 0x100; i++, p += 0xa9) {
+			if (*(char*) p != 0 && *(int*) (p + 1) == entity_id) {
+				*dynamic = p;
+				return 1;
+			}
+		}
+	}
+	if (existing != NULL) {
+		p = (char*) g_query_base;
+		for (i = 0; i < g_query_limit; p += 0x43) {
+			if (*(unsigned short*) p != 0) {
+				if (*(int*) (p + 2) == entity_id) {
+					*existing = p;
+					return 2;
+				}
+				i++;
+			}
+		}
+	}
+	return 0;
 }
 
 /* Refreshes market availability. Recalculates which goods

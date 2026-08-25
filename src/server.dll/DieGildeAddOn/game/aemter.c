@@ -1,344 +1,201 @@
+/* aemter.c - office slot table helpers (proper C) */
+
 #include <stdio.h>
 #include "../../Units/Error/error.h"
 
-// SIZE 0x18
+/* Office slot table entry - 0x18 bytes per slot. */
 typedef struct {
-	int value;
-	char type;
-	char pad[19];
-} ENT;
+	unsigned char id;      /* +0x00 */
+	unsigned char pad1[3];
+	int a;                 /* +0x04 */
+	unsigned char b;       /* +0x08 */
+	unsigned char pad2[3];
+	int c;                 /* +0x0c */
+	unsigned char type;    /* +0x10 */
+	unsigned char pad3[3];
+	int d;                 /* +0x14 */
+} OFFICE_SLOT;
 
-extern int g_aemter_table;
-void* __cdecl gm_LookupEntityRecordById(int);
-extern ENT g_ents[];
-extern ENT g_ents2[];
-extern unsigned short g_default_value_b;
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
-void __cdecl InitBuildingTypeTable(void);
+/* 24-byte copy payload fetched from the g_str_29bb8 template table. */
+typedef struct {
+	int f0;
+	int f4;
+	int f8;
+	int fc;
+	int f10;
+	int f14;
+} COPY24;
 
-/* Validates if an entity is eligible for an office position.
- * Checks entity type, existing office holdings, and eligibility
- * requirements. Returns 0 on success, non-zero on failure. */
-
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
-// FUNCTION: SERVER 0x1000b1c0
-// amt_ValidateOfficeCandidate
-
+extern OFFICE_SLOT g_office_slots[];
+extern COPY24 g_str_29bb8[];
 void* __cdecl gm_LookupEntityRecordById(int entityId);
 
-__declspec(naked) int __cdecl amt_ValidateOfficeCandidate(int* arg1)
+/* Validates whether an entity can take an office position.  Scans the
+ * office slot table for the requested type; on a hit verifies the slot is
+ * free (no holder, type 3, fewer than 4 incumbents) and, when a home
+ * office type is given, that both table entries agree on the holder
+ * byte.  Returns 1 when valid, 0 otherwise. */
+
+// FUNCTION: SERVER 0x1000b1c0
+// SYMBOL: _amt_ValidateOfficeCandidate
+// SIZE: 205
+
+int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 {
-	(void) arg1;
-	__asm {
-		push ebx
-		push esi
-		mov esi, dword ptr [esp + 0xc]
-		mov eax, dword ptr [esi]
-		push eax
-		call gm_LookupEntityRecordById
-		add esp, 4
-		test eax, eax
-		je L_ret0
-		mov cl, byte ptr [eax + 0x168]
-		test cl, cl
-		jne L_ret0
-		mov dl, byte ptr [esi + 4]
-		xor ecx, ecx
-		mov eax, 0x101de5a0
-	L_loop1:
-		cmp byte ptr [eax], dl
-		je L_found1
-		add eax, 0x18
-		inc ecx
-		cmp eax, 0x101de870
-		jl L_loop1
-	L_ret0:
-		pop esi
-		xor eax, eax
-		pop ebx
-		ret
-	L_found1:
-		cmp ecx, 0x1e
-		jge L_ret0
-		lea eax, [ecx + ecx*2]
-		shl eax, 3
-		cmp dword ptr [eax + 0x101de5a4], -1
-		jne L_ret0
-		cmp byte ptr [eax + 0x101de5b0], 3
-		jne L_ret0
-		cmp dword ptr [eax + 0x101de5ac], 4
-		jge L_ret0
-		mov bl, byte ptr [eax + 0x101de5a8]
-		mov al, byte ptr [esi + 6]
-		cmp al, bl
-		jne L_ret0
-		mov dl, byte ptr [esi + 5]
-		cmp dl, 0xff
-		je L_ret1
-		xor ecx, ecx
-		mov eax, 0x101de5a0
-	L_loop2:
-		cmp byte ptr [eax], dl
-		je L_found2
-		add eax, 0x18
-		inc ecx
-		cmp eax, 0x101de870
-		jl L_loop2
-		pop esi
-		xor eax, eax
-		pop ebx
-		ret
-	L_found2:
-		cmp ecx, 0x1e
-		jge L_ret0
-		lea eax, [ecx + ecx*2]
-		shl eax, 3
-		cmp bl, byte ptr [eax + 0x101de5a8]
-		jne L_ret0
-		cmp dword ptr [eax + 0x101de5a4], -1
-		jne L_ret0
-		cmp byte ptr [eax + 0x101de5b0], 3
-		jne L_ret0
-		cmp dword ptr [eax + 0x101de5ac], 4
-		jge L_ret0
-	L_ret1:
-		pop esi
-		mov eax, 1
-		pop ebx
-		ret
+	unsigned char* rec;
+	unsigned char b;
+	OFFICE_SLOT* p;
+	int i;
+
+	rec = gm_LookupEntityRecordById(arg1[0]);
+	if (rec == 0 || rec[0x168] != 0)
+		return 0;
+
+	i = 0;
+	for (; i < 30; i++) {
+		if (g_office_slots[i].id == ((unsigned char*) arg1)[4])
+			break;
 	}
+	if (i >= 30)
+		return 0;
+
+	if ((g_office_slots)[i].a != -1 ||
+	    (g_office_slots)[i].type != 3 ||
+	    (g_office_slots)[i].c >= 4)
+		return 0;
+	b = (g_office_slots)[i].b;
+	if (((unsigned char*) arg1)[6] != b)
+		return 0;
+
+	if (((unsigned char*) arg1)[5] != 0xff) {
+		i = 0;
+		for (; i < 30; i++) {
+			if (g_office_slots[i].id == ((unsigned char*) arg1)[5])
+				break;
+		}
+		if (i >= 30)
+			return 0;
+
+		if (b != (g_office_slots)[i].b ||
+		    (g_office_slots)[i].a != -1 ||
+		    (g_office_slots)[i].type != 3 ||
+		    (g_office_slots)[i].c >= 4)
+			return 0;
+	}
+	return 1;
 }
 
-/* Validates preconditions and assigns an office to an entity.
- * Performs eligibility checks, then updates the office holder
- * table and entity links. */
+/* Validates preconditions and assigns an office to an entity.  Performs
+ * eligibility checks, then updates the office holder table and entity
+ * links. */
 
 // FUNCTION: SERVER 0x1000b290
-// ValidateAndAssignOffice
+// SYMBOL: _ValidateAndAssignOffice
+// SIZE: 425
 
-__declspec(naked) unsigned int ValidateAndAssignOffice(unsigned int* arg1)
+unsigned int __cdecl ValidateAndAssignOffice(unsigned int* arg1)
 {
-	(void) arg1;
-	__asm {
-		sub esp, 0x18
-		push ebx
-		push ebp
-		push esi
-		mov esi, dword ptr [esp + 0x28]
-		push edi
-		mov eax, dword ptr [esi]
-		push eax
-		call gm_LookupEntityRecordById
-		mov ebp, eax
-		add esp, 4
-		test ebp, ebp
-		je L_fail
-		_emit 0x66
-		_emit 0x81
-		_emit 0x7d
-		_emit 0x00
-		_emit 0xff
-		_emit 0xff
-		je L_fail
-		mov al, byte ptr [ebp + 0x168]
-		test al, al
-		jne L_fail
-		mov al, byte ptr [esi + 4]
-		xor edx, edx
-		mov ecx, 0x101de5a0
-	L_scan1:
-		cmp byte ptr [ecx], al
-		je L_found1
-		add ecx, 0x18
-		inc edx
-		cmp ecx, 0x101de870
-		jl L_scan1
-	L_fail:
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		add esp, 0x18
-		ret
-	L_found1:
-		cmp edx, 0x1e
-		jge L_fail
-		mov cl, byte ptr [esi + 6]
-		lea edx, [edx + edx*2]
-		shl edx, 3
-		mov byte ptr [esp + 0x2c], cl
-		mov al, byte ptr [edx + 0x101de5a8]
-		cmp cl, al
-		jne L_fail
-		mov bl, byte ptr [esi + 5]
-		cmp bl, 0xff
-		je L_simple_path
-		xor esi, esi
-		mov ecx, 0x101de5a0
-	L_scan2:
-		cmp byte ptr [ecx], bl
-		je L_found2
-		add ecx, 0x18
-		inc esi
-		cmp ecx, 0x101de870
-		jl L_scan2
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		add esp, 0x18
-		ret
-	L_found2:
-		cmp esi, 0x1e
-		jge L_fail
-		lea ebx, [esi + esi*2]
-		shl ebx, 3
-		cmp al, byte ptr [ebx + 0x101de5a8]
-		jne L_fail
-		and eax, 0xff
-		lea edi, [esp + 0x10]
-		lea ecx, [eax + eax*2]
-		mov eax, dword ptr [esp + 0x2c]
-		lea esi, [ecx*8 + 0x10029bb8]
-		mov ecx, 6
-		rep movsd
-		mov esi, dword ptr [esp + 0x10]
-		mov ecx, eax
-		and ecx, 0xff
-		cmp esi, ecx
-		jne L_fail
-		mov ecx, dword ptr [esp + 0x20]
-		test ecx, ecx
-		je L_fail
-		mov ecx, dword ptr [edx + 0x101de5a4]
-		or esi, 0xffffffff
-		cmp ecx, esi
-		jne L_fail
-		cmp byte ptr [edx + 0x101de5b0], 3
-		jne L_fail
-		mov edi, dword ptr [edx + 0x101de5ac]
-		mov ecx, 4
-		cmp edi, ecx
-		jge L_fail
-		cmp dword ptr [ebx + 0x101de5a4], esi
-		jne L_fail
-		cmp dword ptr [ebx + 0x101de5ac], ecx
-		jge L_fail
-		mov byte ptr [ebp + 0x168], al
-		mov ecx, dword ptr [edx + 0x101de5ac]
-		inc ecx
-		pop edi
-		mov dword ptr [edx + 0x101de5ac], ecx
-		mov eax, dword ptr [ebx + 0x101de5ac]
-		inc eax
-		pop esi
-		mov dword ptr [ebx + 0x101de5ac], eax
-		pop ebp
-		mov eax, 1
-		pop ebx
-		add esp, 0x18
-		ret
-	L_simple_path:
-		cmp dword ptr [edx + 0x101de5a4], -1
-		jne L_fail
-		cmp byte ptr [edx + 0x101de5b0], 3
-		jne L_fail
-		cmp dword ptr [edx + 0x101de5ac], 4
-		jge L_fail
-		mov byte ptr [ebp + 0x168], cl
-		mov eax, dword ptr [edx + 0x101de5ac]
-		inc eax
-		pop edi
-		pop esi
-		mov dword ptr [edx + 0x101de5ac], eax
-		pop ebp
-		mov eax, 1
-		pop ebx
-		add esp, 0x18
-		ret
+	unsigned char* rec;
+	unsigned char x6;
+	unsigned char x5;
+	unsigned char b;
+	COPY24 copy;
+	int i;
+	int j;
+
+	rec = gm_LookupEntityRecordById(arg1[0]);
+	if (rec == 0)
+		return 0;
+	if (*(unsigned short*) rec == 0xffff)
+		return 0;
+	if (rec[0x168] != 0)
+		return 0;
+
+	i = 0;
+	for (; i < 30; i++) {
+		if (g_office_slots[i].id == ((unsigned char*) arg1)[4])
+			break;
 	}
+	if (i >= 30)
+		return 0;
+
+	x6 = ((unsigned char*) arg1)[6];
+	if (x6 != (g_office_slots)[i].b)
+		return 0;
+
+	x5 = ((unsigned char*) arg1)[5];
+	if (x5 != 0xff) {
+		j = 0;
+		for (; j < 30; j++) {
+			if (g_office_slots[j].id == x5)
+				break;
+		}
+		if (j >= 30)
+			return 0;
+
+		if ((g_office_slots)[i].b != (g_office_slots)[j].b)
+			return 0;
+
+		copy = g_str_29bb8[(g_office_slots)[i].b];
+		if (copy.f0 != x6 || copy.f10 == 0)
+			return 0;
+		if ((g_office_slots)[i].a != -1 ||
+		    (g_office_slots)[i].type != 3 ||
+		    (g_office_slots)[i].c >= 4)
+			return 0;
+		if ((g_office_slots)[j].a != -1 ||
+		    (g_office_slots)[j].c >= 4)
+			return 0;
+
+		rec[0x168] = x6;
+		(g_office_slots)[i].c++;
+		(g_office_slots)[j].c++;
+		return 1;
+	}
+
+	if ((g_office_slots)[i].a != -1 ||
+	    (g_office_slots)[i].type != 3 ||
+	    (g_office_slots)[i].c >= 4)
+		return 0;
+	rec[0x168] = x6;
+	(g_office_slots)[i].c++;
+	return 1;
 }
 
-/* Validates a generic office command string. Parses the command
- * buffer and checks that the referenced entities and office
- * type are valid. Returns 0 if valid. */
+/* Validates a generic office command string.  Parses the command buffer
+ * and checks that the referenced entities and office type are valid.
+ * Returns 1 when valid, 0 otherwise. */
 
 // FUNCTION: SERVER 0x1000b440
-// amt_ValidateCommand
+// SYMBOL: _amt_ValidateCommand
+// SIZE: 133
 
-__declspec(naked) int __cdecl amt_ValidateCommand(char* arg1)
+int __cdecl amt_ValidateCommand(char* arg1)
 {
-	(void) arg1;
-	__asm {
-		push esi
-		mov esi, dword ptr [esp + 8]
-		cmp byte ptr [esi + 6], 0xff
-		je L_ret1
-		mov dl, byte ptr [esi]
-		xor ecx, ecx
-		mov eax, 0x101de5a0
-	L_loop:
-		cmp byte ptr [eax], dl
-		je L_found
-		add eax, 0x18
-		inc ecx
-		cmp eax, 0x101de990
-		jl L_loop
-		pop esi
-		xor eax, eax
-		ret
-	L_found:
-		cmp ecx, 0x2a
-		jl L_check_b0
-		pop esi
-		xor eax, eax
-		ret
-	L_check_b0:
-		lea eax, [ecx + ecx*2]
-		shl eax, 3
-		cmp byte ptr [eax + 0x101de5b0], 1
-		je L_check_b4
-		pop esi
-		xor eax, eax
-		ret
-	L_check_b4:
-		cmp dword ptr [eax + 0x101de5b4], -1
-		je L_check_p7
-		pop esi
-		xor eax, eax
-		ret
-	L_check_p7:
-		mov eax, dword ptr [esi + 7]
-		cmp eax, -1
-		je L_check_p1
-		push eax
-		call gm_LookupEntityRecordById
-		add esp, 4
-		test eax, eax
-		jne L_check_p1
-		pop esi
-		ret
-	L_check_p1:
-		mov eax, dword ptr [esi + 1]
-		cmp eax, -1
-		je L_ret1
-		push eax
-		call gm_LookupEntityRecordById
-		add esp, 4
-		test eax, eax
-		jne L_ret1
-		pop esi
-		ret
-	L_ret1:
-		pop esi
-		mov eax, 1
-		ret
+	int i;
+
+	if (((unsigned char*) arg1)[6] == 0xff)
+		return 1;
+
+	i = 0;
+	for (; i < 42; i++) {
+		if (g_office_slots[i].id == ((unsigned char*) arg1)[0])
+			break;
 	}
+	if (i >= 42)
+		return 0;
+
+	if ((g_office_slots)[i].type != 1)
+		return 0;
+	if ((g_office_slots)[i].d != -1)
+		return 0;
+	if (*(int*) (arg1 + 7) != -1) {
+		if (gm_LookupEntityRecordById(*(int*) (arg1 + 7)) == 0)
+			return 0;
+	}
+	if (*(int*) (arg1 + 1) != -1) {
+		if (gm_LookupEntityRecordById(*(int*) (arg1 + 1)) == 0)
+			return 0;
+	}
+	return 1;
 }
-
-/* Executes an office assignment. Updates the office holder table,
- * assigns benefits and duties to the new holder, and notifies
- * the game state of the change. */
-

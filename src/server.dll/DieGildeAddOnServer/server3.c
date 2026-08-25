@@ -44,78 +44,39 @@ extern unsigned char g_connections[]; /* 0x101deb00 */
 
 // FUNCTION: SERVER 0x1000a860
 // ProcessSendData
+void __cdecl list_unlink_relink(char* ctx, char* node);
 
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x1000a860.
-// Network send path with rep movsd copy — no C conversion attempted; fenced-naked.
-__declspec(naked) int __cdecl ProcessSendData(void)
-{
-	__asm {
-		push ebx
-		push esi
-		push edi
-		mov ebx, 0x101deb00
-	L_loop:
-		test byte ptr [ebx], 1
-		je L_next
-		push ebx
-		call SendPlayerData
-		add esp, 4
-		cmp eax, -1
-		je L_ret_neg1
-	L_inner:
-		mov esi, dword ptr [ebx + 0x2641f4]
-		test esi, esi
-		je L_chk_result
-		mov ecx, dword ptr [ebx]
-		test ch, 1
-		je L_chk_result
-		lea edi, [ebx + 0xb1]
-		mov ecx, 0x26
-		rep movsd
-		movsb
-		mov eax, dword ptr [ebx + 0x2641f4]
-		push eax
-		push ebx
-		call FreeCommandBuffer
-		mov edi, dword ptr [ebx]
-		push ebx
-		and edi, 0xfffffeff
-		mov dword ptr [ebx], edi
-		call SendPlayerData
-		add esp, 0xc
-		cmp eax, -1
-		je L_ret_neg1
-		jmp L_inner
-	L_chk_result:
-		cmp eax, -1
-		je L_ret_neg1
-	L_next:
-		add ebx, 0x264264
-		cmp ebx, 0x114ffe20
-		jge L_ret_ok
-		jmp L_loop
-	L_ret_neg1:
-		pop edi
-		pop esi
-		or eax, 0xffffffff
-		pop ebx
-		ret
-	L_ret_ok:
-		pop edi
-		pop esi
-		xor eax, eax
-		pop ebx
-		ret
-	}
-}
-#else
 int __cdecl ProcessSendData(void)
 {
-	/* C fallback (no byte-matching conversion; network send path). */
+	unsigned char* p;
+	int r;
+	unsigned int* pkt;
+
+	p = g_connections;
+	do {
+		if (!(p[0] & 1)) {
+			continue;
+		}
+		r = SendPlayerData((unsigned int*) p);
+		if (r == -1) {
+			return -1;
+		}
+		while ((pkt = *(unsigned int**) (p + 0x2641f4)) != 0 && (*(unsigned int*) p & 0x100) != 0) {
+			memcpy(p + 0xb1, pkt, 0x99);
+			list_unlink_relink((char*) p, *(char**) (p + 0x2641f4));
+			*(unsigned int*) p &= ~0x100;
+			r = SendPlayerData((unsigned int*) p);
+			if (r == -1) {
+				return -1;
+			}
+		}
+		if (r == -1) {
+			return -1;
+		}
+		p += 0x264264;
+	} while ((int) p < 0x114ffe20);
 	return 0;
 }
-#endif
 
 /* Queues a command packet for server-side processing.
  * Copies the packet into the command queue buffer via memcpy. */

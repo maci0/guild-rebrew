@@ -9,227 +9,116 @@ extern unsigned char g_stat_b_array[];
 extern unsigned char g_slot_table;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
+/* Simulation entity: 0x21c-byte records at 0x10035800. */
+typedef struct {
+	char pad[0xa0];
+	unsigned short field_a0;    /* +0xa0: slot id (0xffff = free) */
+	unsigned char field_a2;     /* +0xa2: state byte */
+	char pad2;
+	int field_a4;               /* +0xa4 */
+	unsigned char field_a8;     /* +0xa8: usable flag */
+	char pad3;
+	unsigned short field_aa;    /* +0xaa */
+	char pad4[0x14];            /* +0xac..0xc0 */
+	float field_c0;             /* +0xc0 */
+	char pad5[0x108 - 0xc4];
+	int field_108[5];           /* +0x108: linked children */
+	char pad6[0x21c - 0x11c];
+} SIM_ENT;
+
+extern SIM_ENT g_sim_ents[];
+
 /* Searches for matching parent entities by type and creates
  * family tree linkages. Used in citizen creation to find
  * compatible parents for stat inheritance. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100151e0
 // FindAndMatchParents
 
-__declspec(naked) unsigned int FindAndMatchParents(unsigned int arg1)
+unsigned int __cdecl FindAndMatchParents(unsigned int param)
 {
-	(void) arg1;
-	__asm {
-		sub esp, 0x20
-		push ebx
-		push ebp
-		push esi
-		push edi
-		xor edi, edi
-		mov dword ptr [esp + 0x18], 0x60
-		mov dword ptr [esp + 0x1c], 0x4b
-		mov dword ptr [esp + 0x20], 0x28
-		mov dword ptr [esp + 0x24], 0x17
-		mov dword ptr [esp + 0x28], 9
-		mov dword ptr [esp + 0x2c], edi
-		mov ebx, 0x300
-	L_loop1:
-		push ebx
-		call gm_RandomMod
-		mov ebp, eax
-		and eax, 0xffff
-		add esp, 4
-		lea eax, [eax + eax*2]
-		lea eax, [eax + eax*4]
-		lea ecx, [eax + eax*8]
-		shl ecx, 2
-		_emit 0x66
-		_emit 0x81
-		_emit 0xb9
-		_emit 0xa0
-		_emit 0x58
-		_emit 0x03
-		_emit 0x10
-		_emit 0xff
-		_emit 0xff
-		jne L_l1_check_state
-		lea eax, [ebx + ebx*2]
-		cdq
-		and edx, 3
-		add eax, edx
-		sar eax, 2
-		mov ebx, eax
-		jmp L_l1_continue
-	L_l1_check_state:
-		cmp byte ptr [ecx + 0x100358a2], 6
-		jae L_l1_fail
-		xor eax, eax
-		mov ax, word ptr [ecx + 0x100358aa]
-		mov dword ptr [esp + 0x10], eax
-		fild dword ptr [esp + 0x10]
-		fcomp dword ptr [ecx + 0x100358c0]
-		fnstsw ax
-		test ah, 1
-		jne L_l1_fail
-		mov al, byte ptr [ecx + 0x100358a8]
-		test al, al
-		je L_l1_fail
-		lea eax, [ecx + 0x10035908]
-		xor esi, esi
-		mov ecx, 5
-	L_l1_count:
-		cmp dword ptr [eax], -1
-		je L_l1_count_skip
-		inc esi
-	L_l1_count_skip:
-		add eax, 4
-		dec ecx
-		jne L_l1_count
-		push 0x100
-		call gm_RandomMod
-		mov ecx, dword ptr [esp + esi*4 + 0x1c]
-		and eax, 0xffff
-		add esp, 4
-		inc eax
-		cmp eax, ecx
-		jl L_l1_done
-		jmp L_l1_continue
-	L_l1_fail:
-		mov ebp, 0xffff
-	L_l1_continue:
-		inc edi
-		cmp edi, 0x10
-		jl L_loop1
-	L_l1_done:
-		_emit 0x66
-		_emit 0x81
-		_emit 0xfd
-		_emit 0xff
-		_emit 0xff
-		jne L_loop2_init
-		pop edi
-		pop esi
-		pop ebp
-		xor ax, ax
-		pop ebx
-		add esp, 0x20
-		ret
-	L_loop2_init:
-		mov dword ptr [esp + 0x10], 0
-	L_loop2:
-		push ebx
-		call gm_RandomMod
-		mov esi, eax
-		and eax, 0xffff
-		add esp, 4
-		lea eax, [eax + eax*2]
-		lea eax, [eax + eax*4]
-		lea ecx, [eax + eax*8]
-		shl ecx, 2
-		_emit 0x66
-		_emit 0x81
-		_emit 0xb9
-		_emit 0xa0
-		_emit 0x58
-		_emit 0x03
-		_emit 0x10
-		_emit 0xff
-		_emit 0xff
-		jne L_l2_check_state
-		lea eax, [ebx + ebx*2]
-		cdq
-		and edx, 3
-		add eax, edx
-		sar eax, 2
-		mov ebx, eax
-		jmp L_l2_continue
-	L_l2_check_state:
-		cmp byte ptr [ecx + 0x100358a2], 6
-		jae L_l2_fail
-		xor edx, edx
-		mov dx, word ptr [ecx + 0x100358aa]
-		mov dword ptr [esp + 0x14], edx
-		fild dword ptr [esp + 0x14]
-		fcomp dword ptr [ecx + 0x100358c0]
-		fnstsw ax
-		test ah, 1
-		jne L_l2_fail
-		mov al, byte ptr [ecx + 0x100358a8]
-		test al, al
-		je L_l2_fail
-		lea eax, [ecx + 0x10035908]
-		xor edi, edi
-		mov ecx, 5
-	L_l2_count:
-		cmp dword ptr [eax], -1
-		je L_l2_count_skip
-		inc edi
-	L_l2_count_skip:
-		add eax, 4
-		dec ecx
-		jne L_l2_count
-		push 0x100
-		call gm_RandomMod
-		mov ecx, dword ptr [esp + edi*4 + 0x1c]
-		and eax, 0xffff
-		add esp, 4
-		inc eax
-		cmp eax, ecx
-		jl L_l2_done
-		jmp L_l2_continue
-	L_l2_fail:
-		mov esi, 0xffff
-	L_l2_continue:
-		mov eax, dword ptr [esp + 0x10]
-		inc eax
-		cmp eax, 0x10
-		mov dword ptr [esp + 0x10], eax
-		jl L_loop2
-	L_l2_done:
-		_emit 0x66
-		_emit 0x81
-		_emit 0xfe
-		_emit 0xff
-		_emit 0xff
-		jne L_have_parents
-		pop edi
-		pop esi
-		pop ebp
-		xor ax, ax
-		pop ebx
-		add esp, 0x20
-		ret
-	L_have_parents:
-		mov eax, dword ptr [esp + 0x34]
-		push 2
-		push 0
-		push 0
-		and esi, 0xffff
-		push 0
-		push eax
-		and ebp, 0xffff
-		lea eax, [esi + esi*2]
-		lea eax, [eax + eax*4]
-		lea ecx, [eax + eax*8]
-		mov eax, ebp
-		mov edx, dword ptr [ecx*4 + 0x100358a4]
-		lea eax, [eax + eax*2]
-		push edx
-		lea eax, [eax + eax*4]
-		lea eax, [eax + eax*8]
-		mov ecx, dword ptr [eax*4 + 0x100358a4]
-		push ecx
-		push 0
-		call gm_CreateEntityFromParents
-		add esp, 0x20
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		add esp, 0x20
-		ret
+	SIM_ENT* ent;
+	int weights[6];
+	unsigned int rnd;
+	unsigned int count;
+	unsigned int parentA;
+	unsigned int parentB;
+	int i;
+	int j = 0;
+	int k;
+	float f1;
+	float f2;
+
+	weights[0] = 0x60;
+	weights[1] = 0x4b;
+	weights[2] = 0x28;
+	weights[3] = 0x17;
+	weights[4] = 9;
+	weights[5] = 0;
+	i = 0x300;
+	for (; j < 0x10; j++) {
+		rnd = gm_RandomMod(i);
+		parentA = rnd;
+		ent = &g_sim_ents[rnd & 0xffff];
+		if (ent->field_a0 == 0xffff) {
+			i = i * 3 / 4;
+			continue;
+		}
+		f1 = (float) ent->field_aa;
+		if (ent->field_a2 < 6 && f1 >= ent->field_c0 && ent->field_a8 != 0) {
+			count = 0;
+			for (k = 0; k < 5; k++) {
+				if (ent->field_108[k] != -1) {
+					count++;
+				}
+			}
+			if ((gm_RandomMod(0x100) & 0xffff) + 1 < (unsigned int) weights[count]) {
+				goto done1;
+			}
+		} else {
+			parentA = 0xffff;
+		}
 	}
+done1:
+	if (parentA == 0xffff) {
+		return 0;
+	}
+
+	for (j = 0; j < 0x10; j++) {
+		rnd = gm_RandomMod(i);
+		parentB = rnd;
+		ent = &g_sim_ents[rnd & 0xffff];
+		if (ent->field_a0 == 0xffff) {
+			i = i * 3 / 4;
+			continue;
+		}
+		f2 = (float) ent->field_aa;
+		if (ent->field_a2 < 6 && f2 >= ent->field_c0 && ent->field_a8 != 0) {
+			count = 0;
+			for (k = 0; k < 5; k++) {
+				if (ent->field_108[k] != -1) {
+					count++;
+				}
+			}
+			if ((gm_RandomMod(0x100) & 0xffff) + 1 < (unsigned int) weights[count]) {
+				goto done2;
+			}
+		} else {
+			parentB = 0xffff;
+		}
+	}
+done2:
+	if (parentB == 0xffff) {
+		return 0;
+	}
+
+	return gm_CreateEntityFromParents(
+		0,
+		g_sim_ents[parentA & 0xffff].field_a4,
+		g_sim_ents[parentB & 0xffff].field_a4,
+		(int) param,
+		0, 0, 0, 2);
 }
 
 /* Updates entity priority/scheduling. Called during simulation
@@ -238,45 +127,20 @@ __declspec(naked) unsigned int FindAndMatchParents(unsigned int arg1)
 // FUNCTION: SERVER 0x10015400
 // sim_PriorityUpdate
 
-__declspec(naked) void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
+void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 {
-	(void) ctx;
-	(void) entity;
-	__asm {
-		sub esp, 8
-		xor ecx, ecx
-		_emit 0x8d
-		_emit 0x44
-		_emit 0x24
-		_emit 0x00
-		push esi
-		mov esi, dword ptr [esp + 0x14]
-		push eax
-		mov cl, byte ptr [esi]
-		push ecx
-		call table_lookup
-		movzx dx, byte ptr [esi + 0x65]
-		add esp, 8
-		cmp dx, word ptr [esp + 4]
-		jae L_done
-		mov edx, dword ptr [esp + 0x10]
-		mov ecx, dword ptr [edx + 0x170]
-		test ecx, ecx
-		je L_setnew
-		mov al, byte ptr [ecx + 0x65]
-		test al, al
-		jbe L_setnew
-		dec al
-		mov byte ptr [ecx + 0x65], al
-	L_setnew:
-		mov dword ptr [edx + 0x170], esi
-		mov al, byte ptr [esi + 0x65]
-		inc al
-		mov byte ptr [esi + 0x65], al
-	L_done:
-		pop esi
-		add esp, 8
-		ret
+	unsigned short tmp[4];
+	char* old;
+
+	table_lookup((unsigned char) entity[0], tmp);
+	if ((unsigned short) (unsigned char) entity[0x65] < tmp[0]) {
+		old = *(char**) (ctx + 0x170);
+		if (old != 0) {
+			if ((unsigned char) old[0x65] > 0)
+				old[0x65]--;
+		}
+		*(char**) (ctx + 0x170) = entity;
+		entity[0x65]++;
 	}
 }
 
@@ -287,76 +151,26 @@ __declspec(naked) void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 // FUNCTION: SERVER 0x10015460
 // sim_StartEntityQueryByType
 
-__declspec(naked) void __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
+void __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
 {
-	(void) arg1;
-	__asm {
-		push esi
-		mov esi, dword ptr [esp + 8]
-		xor edx, edx
-		push edi
-		mov dl, byte ptr [esi]
-		mov edi, dword ptr [g_entity_type_table]
-		add edi, edx
-		xor eax, eax
-		lea ecx, [edx + edx*2]
-		shl ecx, 4
-		add ecx, edx
-		lea ecx, [ecx + ecx*2]
-		lea ecx, [edi + ecx*4]
-		mov cl, byte ptr [ecx]
-		cmp cl, 1
-		jne L_chk2
-		mov edx, dword ptr [esi + 0x5d]
-		push 0x12
-		push eax
-		push 1
-		push edx
-		call gm_StartEntityQuery
-		add esp, 0x10
-		pop edi
-		pop esi
-		ret
-	L_chk2:
-		cmp cl, 2
-		jne L_chk1d
-		mov eax, dword ptr [esi + 0x5d]
-		push 0x13
-		push 0
-		push 1
-		push eax
-		call gm_StartEntityQuery
-		add esp, 0x10
-		pop edi
-		pop esi
-		ret
-	L_chk1d:
-		cmp cl, 0x1d
-		jne L_chk16
-		mov ecx, dword ptr [esi + 0x5d]
-		push 0xfd
-		push 0
-		push 1
-		push ecx
-		call gm_StartEntityQuery
-		add esp, 0x10
-		pop edi
-		pop esi
-		ret
-	L_chk16:
-		cmp cl, 0x16
-		jne L_ret
-		mov edx, dword ptr [esi + 0x5d]
-		push 0x120
-		push 0
-		push 1
-		push edx
-		call gm_StartEntityQuery
-		add esp, 0x10
-	L_ret:
-		pop edi
-		pop esi
-		ret
+	unsigned char cls;
+	int zero;
+
+	zero = 0;
+	cls = *((unsigned char*) g_entity_type_table + arg1[0] + arg1[0] * 588);
+	switch (cls) {
+	case 1:
+		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, zero, 0x12);
+		break;
+	case 2:
+		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x13);
+		break;
+	case 0x1d:
+		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0xfd);
+		break;
+	case 0x16:
+		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x120);
+		break;
 	}
 }
 
@@ -409,99 +223,47 @@ error:
 
 #pragma pack(push, 1)
 // SIZE 0xe
+typedef struct {
+	int x00;             /* +0x00 */
+	unsigned short x04;  /* +0x04 */
+	int x06;             /* +0x06 */
+	int x0a;             /* +0x0a */
+} SIM_CLOCK;
 #pragma pack(pop)
 
-__declspec(naked) int __cdecl AdvanceGameClock(int* arg1, int arg2, int arg3, int arg4)
+int __cdecl AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4)
 {
-	(void) arg1;
-	(void) arg2;
-	(void) arg3;
-	(void) arg4;
-	__asm {
-		mov ecx, dword ptr [esp + 4]
-		mov edx, dword ptr [esp + 0x10]
-		push esi
-		mov eax, dword ptr [ecx + 0xa]
-		lea esi, [edx + eax]
-		mov eax, 0x88888889
-		imul esi
-		add edx, esi
-		sar edx, 5
-		mov eax, edx
-		shr eax, 0x1f
-		add edx, eax
-		mov eax, dword ptr [ecx + 6]
-		add eax, edx
-		mov dword ptr [ecx + 6], eax
-		mov eax, esi
-		cdq
-		mov esi, 0x3c
-		idiv esi
-		mov eax, dword ptr [esp + 0x10]
-		mov dword ptr [ecx + 0xa], edx
-		mov edx, dword ptr [ecx + 6]
-		lea esi, [edx + eax]
-		mov eax, 0x88888889
-		imul esi
-		add edx, esi
-		sar edx, 5
-		mov eax, edx
-		shr eax, 0x1f
-		add edx, eax
-		mov eax, esi
-		add word ptr [ecx + 4], dx
-		mov esi, 0x3c
-		cdq
-		idiv esi
-		xor esi, esi
-		mov si, word ptr [ecx + 4]
-		mov dword ptr [ecx + 6], edx
-		mov edx, dword ptr [esp + 0xc]
-		add esi, edx
-		cmp esi, 0x18
-		jl L_check_neg
-		mov eax, 0xaaaaaaab
-		mul esi
-		shr edx, 4
-		lea eax, [edx*4]
-		sub eax, edx
-		neg eax
-		lea esi, [esi + eax*8]
-	L_inc_loop:
-		mov eax, dword ptr [ecx]
-		inc eax
-		dec edx
-		mov dword ptr [ecx], eax
-		jne L_inc_loop
-	L_check_neg:
-		test esi, esi
-		jge L_store_pos
-		mov edx, 0x17
-		mov eax, 0xaaaaaaab
-		sub edx, esi
-		mul edx
-		shr edx, 4
-		lea eax, [edx + edx*2]
-		lea eax, [esi + eax*8]
-	L_dec_loop:
-		mov esi, dword ptr [ecx]
-		dec esi
-		dec edx
-		mov dword ptr [ecx], esi
-		jne L_dec_loop
-		mov word ptr [ecx + 4], ax
-		pop esi
-		ret
-	L_store_pos:
-		mov word ptr [ecx + 4], si
-		pop esi
-		ret
+	int minutes;
+	int hour;
+	int days;
+
+	minutes = arg4 + clock->x0a;
+	clock->x06 += minutes / 60;
+	clock->x0a = minutes % 60;
+	minutes = arg4 + clock->x06;
+	clock->x04 += minutes / 60;
+	clock->x06 = minutes % 60;
+	hour = clock->x04 + arg3;
+	if (hour >= 24) {
+		days = (unsigned int) hour / 24;
+		hour = hour - days * 24;
+		do {
+			clock->x00++;
+		} while (--days != 0);
 	}
+	if (hour < 0) {
+		days = (unsigned int) (23 - hour) / 24;
+		hour = hour + days * 24;
+		do {
+			clock->x00--;
+		} while (--days != 0);
+	}
+	clock->x04 = (unsigned short) hour;
 }
 
-/* Sets synchronization parameters for the simulation.
- * Configures tick rate, player count, and timing values
- * used for network-synchronized game state. */
+/* Sets the simulation sync parameters for the entity query
+ * engine. Stores target, type, and field values for later use
+ * by the query dispatcher. */
 
 // FUNCTION: SERVER 0x10015690
 // sim_SetSyncParams

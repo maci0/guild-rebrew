@@ -45,10 +45,8 @@ typedef struct {
 	PAIR entries[6];
 } TGT;
 
-/* Resets an alchemy entity to its initial state by zeroing
- * out its operational fields via memset. */
+// CFLAGS: /O2 /Gd
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
 // FUNCTION: SERVER 0x1000c1e0
@@ -84,68 +82,29 @@ int __cdecl ahm_ApplyColorComponent(char* color_cmd, char* target)
  * given parameters. */
 
 // FUNCTION: SERVER 0x1000c280
-// ahm_AllocateEntitySlot
+// SYMBOL: _ahm_AllocateEntitySlot
+// SIZE: 130
 
-__declspec(naked) int __cdecl ahm_AllocateEntitySlot(int cmd_payload, int arg2, int arg3)
+int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 {
-	(void) cmd_payload;
-	(void) arg2;
-	(void) arg3;
-	__asm {
-		push esi
-		push edi
-		mov edi, dword ptr [esp + 0x10]
-		xor esi, esi
-		lea eax, [edi + 0xc]
-	L_loop:
-		cmp dword ptr [eax], 0
-		je L_alloc
-		inc esi
-		add eax, 8
-		cmp esi, 6
-		jl L_loop
-		pop edi
-		xor eax, eax
-		pop esi
-		ret
-	L_alloc:
-		mov eax, dword ptr [esp + 0x14]
-		push 0xff
-		push 0
-		push 6
-		mov ecx, dword ptr [eax + 0x5d]
-		push 2
-		push ecx
-		call gm_StartEntityQuery
-		mov ecx, dword ptr [esp + 0x20]
-		mov edx, dword ptr [g_next_object_id]
-		add esp, 0x14
-		mov dword ptr [ecx + 0x14], edx
-		mov edx, dword ptr [ecx + 8]
-		mov dword ptr [edi + esi*8 + 0xc], edx
-		mov edx, dword ptr [ecx + 0x10]
-		test eax, eax
-		mov dword ptr [edi + esi*8 + 0x10], edx
-		je L_skip_add
-		mov ecx, dword ptr [ecx + 8]
-		mov edx, dword ptr [eax + 2]
-		push 2
-		push ecx
-		push edx
-		call gm_AddOrAccumulateObject
-		add esp, 0xc
-	L_skip_add:
-		xor eax, eax
-		mov al, byte ptr [g_current_season]
-		push eax
-		call gm_RefreshMarketAvailability
-		add esp, 4
-		mov eax, 1
-		pop edi
-		pop esi
-		ret
+	int i;
+	unsigned short* query;
+
+	for (i = 0; i < 6; i++) {
+		if (*(int*) (tgt + 0xc + i * 8) == 0) {
+			query = gm_StartEntityQuery(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
+			*(int*) (obj + 0x14) = g_next_object_id;
+			*(int*) (tgt + 0xc + i * 8) = *(int*) (obj + 8);
+			*(int*) (tgt + 0x10 + i * 8) = *(int*) (obj + 0x10);
+			if (query != 0)
+				gm_AddOrAccumulateObject(*(int*) ((char*) query + 2), *(int*) (obj + 8), 2);
+			gm_RefreshMarketAvailability(g_current_season);
+			return 1;
+		}
 	}
+	return 0;
 }
+
 
 /* Clears a slot if it matches a target value. Used during
  * alchemy cleanup to remove specific entity references. */
@@ -202,41 +161,26 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
  * Prevents stat overflow/underflow during recipe processing. */
 
 // FUNCTION: SERVER 0x1000c3c0
-// ahm_ClampFloatValue
+// SYMBOL: _ahm_ClampFloatValue
+// SIZE: 83
 
-__declspec(naked) int __cdecl ahm_ClampFloatValue(int cmd_payload, int arg2)
+int __cdecl ahm_ClampFloatValue(int arg1, int arg2)
 {
-	(void) cmd_payload;
-	(void) arg2;
-	__asm {
-		mov eax, dword ptr [esp + 4]
-		mov ecx, dword ptr [esp + 8]
-		fld dword ptr [eax + 0x10]
-		fadd dword ptr [ecx + 4]
-		fcom dword ptr g_float_const_cc
-		fnstsw ax
-		test ah, 0x41
-		jne L_below_min
-		fcom dword ptr g_float_const_a0
-		fnstsw ax
-		test ah, 1
-		je L_above_max
-		fstp dword ptr [ecx + 4]
-		mov eax, 1
-		ret
-	L_below_min:
-		fstp st(0)
-		fld dword ptr g_float_const_cc
-		mov eax, 1
-		fstp dword ptr [ecx + 4]
-		ret
-	L_above_max:
-		fstp st(0)
-		fld dword ptr g_float_const_a0
-		mov eax, 1
-		fstp dword ptr [ecx + 4]
-		ret
+	float v;
+
+	v = *(float*) (arg1 + 0x10) + *(float*) (arg2 + 4);
+	if (v > g_float_const_cc) {
+		if (v < g_float_const_a0) {
+			*(float*) (arg2 + 4) = v;
+		} else {
+			v = g_float_const_a0;
+			*(float*) (arg2 + 4) = v;
+		}
+	} else {
+		v = g_float_const_cc;
+		*(float*) (arg2 + 4) = v;
 	}
+	return 1;
 }
 
 /* Fires (activates) an alchemy entity and cleans up the
@@ -289,216 +233,69 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
  * a building. Sets up recipe slots and ingredient storage. */
 
 // FUNCTION: SERVER 0x1000c4d0
-// ahm_AllocAhmInfo
+// SYMBOL: _ahm_AllocAhmInfo
+// SIZE: 295
 
-__declspec(naked) int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
+int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
 {
-	(void) cmd_payload;
-	(void) arg2;
-	__asm {
-		sub esp, 0x3c
-		_emit 0x8d
-		_emit 0x44
-		_emit 0x24
-		_emit 0x00
-		push ebx
-		push esi
-		push edi
-		mov edi, dword ptr [esp + 0x4c]
-		push edi
-		push 1
-		push 4
-		push eax
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		jne L_n1
-	L_ret0:
-		pop edi
-		pop esi
-		pop ebx
-		add esp, 0x3c
-		ret
-	L_n1:
-		push edi
-		push 1
-		lea ecx, [esp + 0x18]
-		push 4
-		push ecx
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		jne L_n2
-		pop edi
-		pop esi
-		pop ebx
-		add esp, 0x3c
-		ret
-	L_n2:
-		push edi
-		push 1
-		lea edx, [esp + 0x1c]
-		push 1
-		push edx
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		jne L_n3
-		pop edi
-		pop esi
-		pop ebx
-		add esp, 0x3c
-		ret
-	L_n3:
-		push edi
-		push 1
-		lea eax, [esp + 0x1d]
-		push 1
-		push eax
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		jne L_n4
-		pop edi
-		pop esi
-		pop ebx
-		add esp, 0x3c
-		ret
-	L_n4:
-		push edi
-		push 1
-		lea ecx, [esp + 0x1e]
-		push 1
-		push ecx
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		jne L_n5
-		pop edi
-		pop esi
-		pop ebx
-		add esp, 0x3c
-		ret
-	L_n5:
-		push edi
-		push 1
-		lea edx, [esp + 0x1f]
-		push 1
-		push edx
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		jne L_loop_init
-	L_xor_ret0:
-		pop edi
-		pop esi
-		xor eax, eax
-		pop ebx
-		add esp, 0x3c
-		ret
-	L_loop_init:
-		xor ebx, ebx
-		lea esi, [esp + 0x1c]
-	L_loop:
-		push edi
-		push 1
-		lea eax, [esi - 4]
-		push 4
-		push eax
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		je L_xor_ret0
-		push edi
-		push 1
-		push 4
-		push esi
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		je L_xor_ret0
-		inc ebx
-		add esi, 8
-		cmp ebx, 6
-		jl L_loop
-		mov edi, dword ptr [esp + 0x50]
-		mov eax, dword ptr [edi + 0x65]
-		test eax, eax
-		jne L_have_buf
-		push 0x1002a0f8
-		push 0x3c
-		call m_AllocTracked
-		add esp, 8
-		mov dword ptr [edi + 0x65], eax
-	L_have_buf:
-		mov edi, dword ptr [edi + 0x65]
-		mov ecx, 0xf
-		lea esi, [esp + 0xc]
-		mov eax, 1
-		rep movsd
-		pop edi
-		pop esi
-		pop ebx
-		add esp, 0x3c
-		ret
-	}
-}
+	char buf[0x3c];
+	int i;
 
-/* Initializes an alchemy entity with randomized properties.
- * Uses RandomBelow for stat variation within allowed ranges. */
+	if (!ls_ReadVfsDataChecked(buf, 4, 1, cmd_payload))
+		return 0;
+	if (!ls_ReadVfsDataChecked(buf + 4, 4, 1, cmd_payload))
+		return 0;
+	if (!ls_ReadVfsDataChecked(buf + 8, 1, 1, cmd_payload))
+		return 0;
+	if (!ls_ReadVfsDataChecked(buf + 9, 1, 1, cmd_payload))
+		return 0;
+	if (!ls_ReadVfsDataChecked(buf + 0xa, 1, 1, cmd_payload))
+		return 0;
+	if (!ls_ReadVfsDataChecked(buf + 0xb, 1, 1, cmd_payload))
+		return 0;
+	for (i = 0; i < 6; i++) {
+		if (!ls_ReadVfsDataChecked(buf + 0xc + i * 8, 4, 1, cmd_payload))
+			return 0;
+		if (!ls_ReadVfsDataChecked(buf + 0x10 + i * 8, 4, 1, cmd_payload))
+			return 0;
+	}
+	if (*(int*) (arg2 + 0x65) == 0)
+		*(int*) (arg2 + 0x65) = (int) m_AllocTracked(0x3c, "ahm_AllocAhmInfo");
+	memcpy((void*) *(int*) (arg2 + 0x65), buf, 0x3c);
+	return 1;
+}
 
 // FUNCTION: SERVER 0x1000c600
-// ahm_InitRandomEntity
+// SYMBOL: _ahm_InitRandomEntity
+// SIZE: 109
 
-int __cdecl RandomBelow(unsigned short max);
-
-__declspec(naked) char* __cdecl ahm_InitRandomEntity(void)
+char* __cdecl ahm_InitRandomEntity(void)
 {
-	__asm {
-		push ebx
-		push 0x20
-		call gm_RandomMod
-		add esp, 4
-		and eax, 0xffff
-		mov edx, 0x20
-	L_scan:
-		lea ecx, [eax + eax*2]
-		lea ecx, [ecx + ecx*4]
-		lea ecx, [eax + ecx*4]
-		mov bl, byte ptr [ecx*4 + 0x1002a2c2]
-		test bl, bl
-		je L_found
-		dec edx
-		inc eax
-		and eax, 0x1f
-		test edx, edx
-		jne L_scan
-		xor eax, eax
-		pop ebx
-		ret
-	L_found:
-		lea ecx, [eax + eax*2]
-		lea edx, [ecx + ecx*4]
-		lea ecx, [eax + edx*4]
-		mov edx, 0xe
-		shl ecx, 2
-		lea eax, [ecx + 0x1002a200]
-	L_fmul_loop:
-		fld dword ptr [eax - 4]
-		fmul dScaleFactor
-		fstp dword ptr [eax]
-		add eax, 0xc
-		dec edx
-		jne L_fmul_loop
-		mov byte ptr [ecx + 0x1002a2c2], 1
-		lea eax, [ecx + 0x1002a1d0]
-		pop ebx
-		ret
-	}
-}
+	unsigned int idx;
+	int counter;
+	unsigned int off;
+	float* p;
+	int n;
 
-/* Looks up an alchemy entity in the global table by ID.
- * Returns pointer to the entity's table entry. */
+	idx = gm_RandomMod(0x20) & 0xffff;
+	counter = 0x20;
+	do {
+		if (*(unsigned char*) (0x1002a2c2 + idx * 244) == 0)
+			goto found;
+		counter--;
+		idx = (idx + 1) & 0x1f;
+	} while (counter != 0);
+	return 0;
+found:
+	off = idx * 244;
+	p = (float*) (0x1002a200 + off);
+	for (n = 0xe; n != 0; n--) {
+		*p = *(float*) ((char*) p - 4) * dScaleFactor;
+		p += 3;
+	}
+	*(unsigned char*) (0x1002a2c2 + off) = 1;
+	return (char*) (0x1002a1d0 + off);
+}
 
 // FUNCTION: SERVER 0x1000c670
 // ahm_LookupEntityInTable
@@ -520,61 +317,25 @@ int* __cdecl ahm_LookupEntityInTable(int entity_id)
  * Returns the building type category for alchemy purposes. */
 
 // FUNCTION: SERVER 0x1000c6a0
-// ahm_QueryEntityBuildingType
+// SYMBOL: _ahm_QueryEntityBuildingType
+// SIZE: 102
 
-__declspec(naked) int __cdecl ahm_QueryEntityBuildingType(int cmd_payload)
+int __cdecl ahm_QueryEntityBuildingType(int arg1)
 {
-	(void) cmd_payload;
-	__asm {
-		mov eax, dword ptr [esp + 4]
-		push esi
-		push 5
-		push 1
-		mov ecx, dword ptr [eax + 0x178]
-		push ecx
-		call gm_StartEntityQuery
-		mov esi, eax
-		add esp, 0xc
-		test esi, esi
-		je L_fail
-	L_loop:
-		xor edx, edx
-		mov dx, word ptr [esi]
-		push edx
-		call ahm_LookupEntityInTable
-		add esp, 4
-		test eax, eax
-		jne L_check_type
-		call gm_NextEntityQueryMatch
-		mov esi, eax
-		test esi, esi
-		jne L_loop
-		push eax
-		call ahm_LookupEntityInTable
-		add esp, 4
-		pop esi
-		ret
-	L_check_type:
-		mov ecx, dword ptr [eax + 0x58]
-		cmp ecx, 1
-		je L_check_count
-		cmp ecx, 2
-		jne L_ret
-	L_check_count:
-		mov ecx, dword ptr [esi + 0x20]
-		test ecx, ecx
-		jg L_ret
-	L_fail:
-		push 0
-		call ahm_LookupEntityInTable
-		add esp, 4
-	L_ret:
-		pop esi
-		ret
+	unsigned short* query;
+	int* entry;
+
+	query = gm_StartEntityQuery(*(int*) (arg1 + 0x178), 1, 5);
+	while (query != 0) {
+		entry = ahm_LookupEntityInTable(*(unsigned short*) query);
+		if (entry != 0) {
+			if ((*(int*) ((char*) entry + 0x58) == 1 ||
+			     *(int*) ((char*) entry + 0x58) == 2) &&
+			    *(int*) ((char*) query + 0x20) <= 0)
+				entry = ahm_LookupEntityInTable(0);
+			return entry;
+		}
+		query = gm_NextEntityQueryMatch();
 	}
+	return ahm_LookupEntityInTable(0);
 }
-
-/* Calculates the payload size of a command packet based on
- * the command type and field count. Used for buffer allocation
- * and validation. */
-

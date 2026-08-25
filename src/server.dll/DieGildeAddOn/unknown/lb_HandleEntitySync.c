@@ -1,182 +1,43 @@
-/* lb_HandleEntitySync - fenced _emit (exact bytes) */
+/* lb_HandleEntitySync - proper C */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10014bf0
 // SYMBOL: _lb_HandleEntitySync
 // SIZE: 163
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl lb_HandleEntitySync(int player, int msg)
-{
-	__asm {
-		_emit 0x53
-		_emit 0x8b
-		_emit 0x5c
-		_emit 0x24
-		_emit 0x08
-		_emit 0x56
-		_emit 0x8b
-		_emit 0x03
-		_emit 0x57
-		_emit 0xf6
-		_emit 0xc4
-		_emit 0x60
-		_emit 0x74
-		_emit 0x33
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x68
-		_emit 0x40
-		_emit 0xd7
-		_emit 0x02
-		_emit 0x10
-		_emit 0x68
-		_emit 0x54
-		_emit 0x03
-		_emit 0x00
-		_emit 0x00
-		_emit 0x68
-		_emit 0x0c
-		_emit 0xd7
-		_emit 0x02
-		_emit 0x10
-		_emit 0xe8
-		_emit 0x2c
-		_emit 0xea
-		_emit 0xfe
-		_emit 0xff
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x24
-		_emit 0x50
-		_emit 0x53
-		_emit 0xc6
-		_emit 0x00
-		_emit 0x02
-		_emit 0xe8
-		_emit 0x7e
-		_emit 0x5d
-		_emit 0xff
-		_emit 0xff
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x18
-		_emit 0x40
-		_emit 0xf7
-		_emit 0xd8
-		_emit 0x1b
-		_emit 0xc0
-		_emit 0x5f
-		_emit 0xf7
-		_emit 0xd8
-		_emit 0x5e
-		_emit 0x48
-		_emit 0x5b
-		_emit 0xc3
-		_emit 0x8b
-		_emit 0x54
-		_emit 0x24
-		_emit 0x14
-		_emit 0x33
-		_emit 0xc9
-		_emit 0xb8
-		_emit 0x04
-		_emit 0xeb
-		_emit 0x1d
-		_emit 0x10
-		_emit 0x8b
-		_emit 0x72
-		_emit 0x14
-		_emit 0x8d
-		_emit 0x7a
-		_emit 0x14
-		_emit 0x39
-		_emit 0x30
-		_emit 0x74
-		_emit 0x26
-		_emit 0x05
-		_emit 0x64
-		_emit 0x42
-		_emit 0x26
-		_emit 0x00
-		_emit 0x41
-		_emit 0x3d
-		_emit 0x24
-		_emit 0xfe
-		_emit 0x4f
-		_emit 0x11
-		_emit 0x7c
-		_emit 0xef
-		_emit 0xc6
-		_emit 0x02
-		_emit 0x02
-		_emit 0x52
-		_emit 0x53
-		_emit 0xe8
-		_emit 0x43
-		_emit 0x5d
-		_emit 0xff
-		_emit 0xff
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x08
-		_emit 0x40
-		_emit 0xf7
-		_emit 0xd8
-		_emit 0x1b
-		_emit 0xc0
-		_emit 0x5f
-		_emit 0xf7
-		_emit 0xd8
-		_emit 0x5e
-		_emit 0x48
-		_emit 0x5b
-		_emit 0xc3
-		_emit 0x8b
-		_emit 0xc1
-		_emit 0xc1
-		_emit 0xe0
-		_emit 0x04
-		_emit 0x03
-		_emit 0xc1
-		_emit 0xc1
-		_emit 0xe0
-		_emit 0x08
-		_emit 0x03
-		_emit 0xc1
-		_emit 0xc1
-		_emit 0xe0
-		_emit 0x04
-		_emit 0x03
-		_emit 0xc1
-		_emit 0xb9
-		_emit 0x15
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x8d
-		_emit 0x04
-		_emit 0xc0
-		_emit 0x8d
-		_emit 0x34
-		_emit 0x85
-		_emit 0x0c
-		_emit 0x2d
-		_emit 0x44
-		_emit 0x10
-		_emit 0xf3
-		_emit 0xa5
-		_emit 0x66
-		_emit 0xa5
-		_emit 0xa4
-		_emit 0xeb
-		_emit 0xc3
-	}
-}
-#else
+extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
+extern int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
+
+/* Handles a sync command from a player. If the player's command
+ * flags indicate an invalid state, logs it and replies with a
+ * "no-op" result. Otherwise scans the entity table for the
+ * target entity and copies its record into the message. */
+
 int __cdecl lb_HandleEntitySync(int player, int msg)
 {
-    return 0;
+	int tab;
+	int eid;
+	int i;
+
+	if ((*(int*) player & 0x6000) != 0) {
+		LogMessageInternal((char*) 0x1002d70c, 0x354, (char*) 0x1002d740, 1);
+		*(char*) msg = 2;
+		i = cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg);
+		return (i == -1) ? -1 : 0;
+	}
+	eid = *(int*) ((char*) msg + 0x14);
+	tab = 0x101deb04;
+	for (i = 0; ; i++) {
+		if (*(int*) tab == eid) {
+			memcpy((char*) msg + 0x14, (void*) (0x10442d0c + (unsigned int) i * 0x264264), 0x57);
+			i = cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg);
+			return (i == -1) ? -1 : 0;
+		}
+		tab += 0x264264;
+		if (tab >= 0x114ffe24)
+			break;
+	}
+	*(char*) msg = 2;
+	i = cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg);
+	return (i == -1) ? -1 : 0;
 }
-#endif

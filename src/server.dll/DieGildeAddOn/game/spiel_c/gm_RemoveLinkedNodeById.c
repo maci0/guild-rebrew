@@ -1,158 +1,59 @@
-/* gm_RemoveLinkedNodeById — fenced _emit. */
+/* gm_RemoveLinkedNodeById — removes a linked-list node by id. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+#include <stddef.h>
+
 // FUNCTION: SERVER 0x10016680
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl gm_RemoveLinkedNodeById(int a, int b, int c)
+extern int g_query_limit; /* 0x10035450 */
+
+void __cdecl gm_FreeObjectListRecursive(void* children);
+void __cdecl gm_NoopRet2(void* node);
+
+/* Linked-list node: active flag, unique id, child-list head, next pointer. */
+#pragma pack(push, 1)
+typedef struct LinkedNode {
+	short active;             /* 0x00 */
+	int id;                   /* 0x02 */
+	char pad0[0x0e];          /* 0x06 */
+	struct LinkedNode* children; /* 0x14 */
+	char pad1[0x27];          /* 0x18 */
+	struct LinkedNode* next;  /* 0x3f */
+} LinkedNode;
+#pragma pack(pop)
+
+/* Removes the node whose id equals b from the list headed by *a.
+ * Returns 0 on success, -1 if the list is empty, -2 if the id is
+ * not found. Also decrements the global query limit counter. */
+int __cdecl gm_RemoveLinkedNodeById(int a, int b, int c)
 {
-	__asm {
-		_emit 0x53
-		_emit 0x55
-		_emit 0x8b
-		_emit 0x6c
-		_emit 0x24
-		_emit 0x0c
-		_emit 0x56
-		_emit 0x33
-		_emit 0xdb
-		_emit 0x57
-		_emit 0x8b
-		_emit 0x75
-		_emit 0x00
-		_emit 0x85
-		_emit 0xf6
-		_emit 0x75
-		_emit 0x08
-		_emit 0x5f
-		_emit 0x5e
-		_emit 0x5d
-		_emit 0x83
-		_emit 0xc8
-		_emit 0xff
-		_emit 0x5b
-		_emit 0xc3
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x18
-		_emit 0x33
-		_emit 0xff
-		_emit 0x39
-		_emit 0x46
-		_emit 0x02
-		_emit 0x74
-		_emit 0x14
-		_emit 0x8b
-		_emit 0xde
-		_emit 0x8b
-		_emit 0x76
-		_emit 0x3f
-		_emit 0x47
-		_emit 0x85
-		_emit 0xf6
-		_emit 0x75
-		_emit 0xf1
-		_emit 0x5f
-		_emit 0x5e
-		_emit 0x5d
-		_emit 0xb8
-		_emit 0xfe
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-		_emit 0x5b
-		_emit 0xc3
-		_emit 0x85
-		_emit 0xf6
-		_emit 0x75
-		_emit 0x0a
-		_emit 0x5f
-		_emit 0x5e
-		_emit 0x5d
-		_emit 0xb8
-		_emit 0xfe
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-		_emit 0x5b
-		_emit 0xc3
-		_emit 0x8b
-		_emit 0x4e
-		_emit 0x14
-		_emit 0x8d
-		_emit 0x46
-		_emit 0x14
-		_emit 0x85
-		_emit 0xc9
-		_emit 0x74
-		_emit 0x09
-		_emit 0x50
-		_emit 0xe8
-		_emit 0x3a
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		_emit 0x56
-		_emit 0xe8
-		_emit 0x91
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		_emit 0x85
-		_emit 0xff
-		_emit 0x75
-		_emit 0x08
-		_emit 0x8b
-		_emit 0x46
-		_emit 0x3f
-		_emit 0x89
-		_emit 0x45
-		_emit 0x00
-		_emit 0xeb
-		_emit 0x06
-		_emit 0x8b
-		_emit 0x4e
-		_emit 0x3f
-		_emit 0x89
-		_emit 0x4b
-		_emit 0x3f
-		_emit 0x66
-		_emit 0xc7
-		_emit 0x06
-		_emit 0x00
-		_emit 0x00
-		_emit 0xa1
-		_emit 0x50
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		_emit 0x48
-		_emit 0x5f
-		_emit 0x5e
-		_emit 0xa3
-		_emit 0x50
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		_emit 0x5d
-		_emit 0x33
-		_emit 0xc0
-		_emit 0x5b
-		_emit 0xc3
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
+	LinkedNode** head;
+	LinkedNode* node;
+	LinkedNode* prev;
+	int index;
+
+	head = (LinkedNode**) a;
+	node = *head;
+	prev = NULL;
+	if (node == NULL)
+		return -1;
+	index = 0;
+
+	while (node != NULL && node->id != b) {
+		prev = node;
+		node = node->next;
+		index++;
 	}
+	if (node == NULL)
+		return -2;
+
+	if (node->children != NULL)
+		gm_FreeObjectListRecursive(&node->children);
+	gm_NoopRet2(node);
+	if (index == 0)
+		*head = node->next;
+	else
+		prev->next = node->next;
+	node->active = 0;
+	g_query_limit--;
+	return 0;
 }
-#else
-int __cdecl gm_RemoveLinkedNodeById(int a, int b, int c) { return 0; }
-#endif

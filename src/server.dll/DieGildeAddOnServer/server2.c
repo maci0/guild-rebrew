@@ -42,12 +42,9 @@ extern unsigned char g_connections[]; /* 0x101deb00 */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x10009d30
 // srv_Init
 
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original/Server/server.dll 0x10009d30 (296B)
 __declspec(naked) int __cdecl srv_Init(void)
 {
 	__asm {
@@ -179,11 +176,6 @@ __declspec(naked) int __cdecl srv_Init(void)
 		ret
 	}
 }
-
-#else
-/* C reconstruction not preserved (near-miss 162/296, frame 0x504 vs 0x4f8,
- * see docs/msvc6-allocator.md). */
-#endif
 
 /* Creates the TCP listen socket for accepting client
  * connections. Calls WSAStartup, socket(), bind(), listen(). */

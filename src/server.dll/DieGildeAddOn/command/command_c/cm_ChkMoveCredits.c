@@ -1,151 +1,63 @@
+/* cm_ChkMoveCredits - proper C */
 
-/*
- * Ghidra decompilation reference:
- * /+ [rebrew] FUNCTION: MATCHING
- *    Origin: GAME
- *    Size: 267B
- *    CFlags:
- *    Symbol: _CheckMoveCredits
- *    Files: DieGildeAddOn/command/command.c * / *
- * int __cdecl cm_ChkMoveCredits(int param_1,char *param_2)
- *
- * {
- *   int iVar1;
- *   int iVar2;
- *   int *piVar3;
- *   undefined4 extraout_ECX;
- *   uint line;
- *   char *msg;
- *   void *local_8;
- *   void *local_4;
- *
- *   iVar1 = param_1;
- *   if (*(int *)(param_1 + 0x14) == -1) {
- *     return 0;
- *   }
- *   iVar2 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x14));
- *   *(int *)(iVar1 + 0x14) = iVar2;
- *   iVar2 = gm_ResolveEntityById((void **)&param_1,&local_8,&local_4,iVar2);
- *   if (iVar2 == 0) {
- *     msg = s_cm_ChkMoveCredits____Invalid__qu_1002c7a4;
- *     line = 0x22f9;
- *   }
- *   else {
- *     if (param_1 == 0) {
- *       if (local_8 == (void *)0x0) {
- *         piVar3 = (int *)((int)local_4 + 0x178);
- *       }
- *       else {
- *         piVar3 = (int *)((int)local_8 + 0x14);
- *       }
- *     }
- *     else {
- *       piVar3 = (int *)(param_1 + 0x5d);
- *     }
- *     iVar2 = gm_QueryEntitySum(*piVar3,CONCAT31((int3)((uint)extraout_ECX >> 8),
- *                                             *(undefined1 *)(iVar1 + 0x1c)));
- *     if (-1 < iVar2 - *(int *)(iVar1 + 0x1d)) {
- *       return 0;
- *     }
- *     msg = s_cm_ChkMoveCredits____Not_enough_m_1002c774;
- *     line = 0x231b;
-*/
-
-#include "../command_internal.h"
-#include "../../../Units/Error/error.h"
-
+extern int __cdecl gm_GetFieldByType(char*, int);
+extern int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
+extern int __cdecl gm_QueryEntitySum(int, unsigned char);
+extern void __cdecl LogMessageInternal(char*, int, char*, int);
+extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
 extern char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[];
 extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];
 
-/* Validation handler: resolves entity by ID and checks if a
- * credit (currency) transfer is valid. Returns 1 on invalid
- * entity, otherwise validates the transfer amount. */
+/* Validation handler: resolves the credit source entity and checks
+ * that it has enough funds for the requested transfer.  Returns 1 on
+ * invalid entity or insufficient balance, 0 when the move is allowed.
+ *
+ * Byte-match note: same Finding 7-family allocator fixed-point (docs/
+ * msvc6-allocator.md Finding 33) — the reference hoists the arg3
+ * address lea above the pre-resolve field store (esi-based, folded
+ * `mov [esi+0x14],eax`); MSVC6 8168 emits the out-param leas after the
+ * arg4 push and either reloads the param for the store or materializes
+ * `lea esi,[eax+0x14]` with an extra push.  The -1 early return, the
+ * entity selection, the raw-byte gm_QueryEntitySum call (unsigned-char
+ * 2nd param stops zero-extension) and the sub/jns balance check all
+ * match structurally. */
 
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000cb20
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x1000cb20 (171B).
-// C conversion blocker (docs/msvc6-allocator.md Finding 33): 168/171 —
-// the ref hoists the arg3 address lea above the GetFieldByType-result store
-// (3 disp8 bytes differ).  The unsigned-char gm_QueryEntitySum param and the
-// `sum - limit < 0` sub/jns form otherwise match.
-__declspec(naked) int __cdecl cm_ChkMoveCredits(int cmd, char* result)
+// SYMBOL: _cm_ChkMoveCredits
+// SIZE: 171
+
+int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 {
-	(void) cmd;
+	void* pv8;
+	void* pv4;
+	int base;
+	int field;
+	int* sum_src;
+
 	(void) result;
-	__asm {
-		sub esp, 8
-		push esi
-		mov esi, dword ptr [esp + 0x10]
-		mov eax, dword ptr [esi + 0x14]
-		cmp eax, -1
-		je L_ret0
-		push eax
-		push esi
-		call gm_GetFieldByType
-		mov dword ptr [esi + 0x14], eax
-		push eax
-		lea eax, [esp + 0x14]
-		lea ecx, [esp + 0x10]
-		push eax
-		lea edx, [esp + 0x20]
-		push ecx
-		push edx
-		call gm_ResolveEntityById
-		add esp, 0x18
-		test eax, eax
-		jne L_resolved
-		push 1
-		push 0x1002c7a4
-		push 0x22f9
-		jmp L_log
-	L_resolved:
-		mov eax, dword ptr [esp + 0x10]
-		test eax, eax
-		je L_no_p1
-		add eax, 0x5d
-		jmp L_have_sum
-	L_no_p1:
-		mov eax, dword ptr [esp + 4]
-		test eax, eax
-		je L_use_area
-		add eax, 0x14
-		jmp L_have_sum
-	L_use_area:
-		mov eax, dword ptr [esp + 8]
-		add eax, 0x178
-	L_have_sum:
-		mov cl, byte ptr [esi + 0x1c]
-		mov edx, dword ptr [eax]
-		push ecx
-		push edx
-		call gm_QueryEntitySum
-		mov ecx, dword ptr [esi + 0x1d]
-		add esp, 8
-		sub eax, ecx
-		jns L_ret0
-		push 1
-		push 0x1002c774
-		push 0x231b
-	L_log:
-		push 0x1002c748
-		call LogMessageInternal
-		add esp, 0x10
-		mov eax, 1
-		pop esi
-		add esp, 8
-		ret
-	L_ret0:
-		xor eax, eax
-		pop esi
-		add esp, 8
-		ret
+
+	base = cmd;
+	if (*(int*) (cmd + 0x14) == -1) {
+		return 0;
 	}
-}
-#else
-int __cdecl cm_ChkMoveCredits(int arg1)
-{
-	/* C fallback (no byte-matching conversion; lea-scheduling residue, Finding 33). */
-	(void) arg1;
+	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
+	*(int*) (cmd + 0x14) = field;
+	if (gm_ResolveEntityById((void**) &cmd, &pv8, &pv4, field) == 0) {
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x22f9,
+		                   s_cm_ChkMoveCredits____Invalid__qu_1002c7a4, 1);
+		return 1;
+	}
+	if (cmd != 0)
+		sum_src = (int*) (cmd + 0x5d);
+	else if (pv8 != 0)
+		sum_src = (int*) ((char*) pv8 + 0x14);
+	else
+		sum_src = (int*) ((char*) pv4 + 0x178);
+	if (gm_QueryEntitySum(*sum_src, *(unsigned char*) (base + 0x1c)) - *(int*) (base + 0x1d) < 0) {
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x231b,
+		                   s_cm_ChkMoveCredits____Not_enough_m_1002c774, 1);
+		return 1;
+	}
 	return 0;
 }
-#endif

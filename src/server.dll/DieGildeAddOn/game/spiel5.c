@@ -38,7 +38,7 @@ extern int g_data_ptr2;
 extern int g_data_ptr3;
 extern int g_data_ptr4;
 extern unsigned char* g_entity_ptr;
-int g_entity_type_table;
+extern int g_entity_type_table; /* 0x100a8c30 */
 extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
@@ -137,7 +137,7 @@ extern float g_float_const_a8;
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10017210
 // gm_SearchStruct
 
@@ -270,94 +270,32 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 /* Sets worker limits for a building based on its type and
  * upgrade level. Reads from the building type table. */
 
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10017400
 // gm_SetBuildingWorkerLimits
 
-__declspec(naked) void __cdecl gm_SetBuildingWorkerLimits(unsigned char* arg1)
+void __cdecl gm_SetBuildingWorkerLimits(unsigned char* building)
 {
-	(void) arg1;
-	__asm {
-		push esi
-		push edi
-		mov edi, dword ptr [esp + 0xc]
-		xor ecx, ecx
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x30
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-		push 6
-		mov cl, byte ptr [edi]
-		push 0x2a
-		add edx, ecx
-		push 0
-		lea eax, [ecx + ecx*2]
-		push 2
-		shl eax, 4
-		add eax, ecx
-		lea eax, [eax + eax*2]
-		lea esi, [edx + eax*4]
-		mov eax, dword ptr [edi + 0x5d]
-		push eax
-		call gm_StartEntityQuery
-		add esp, 0x14
-		test eax, eax
-		je L_second
-		mov cl, byte ptr [esi + 0x23d]
-		test cl, cl
-		jne L_else
-		mov dl, byte ptr [esi + 0x23e]
-		test dl, dl
-		jne L_else
-		mov dl, byte ptr [esi + 0x23f]
-		test dl, dl
-		je L_else
-		mov byte ptr [eax + 0x1c], dl
-		jmp L_second
-	L_else:
-		cmp cl, 2
-		jae L_keep_cl
-		mov ecx, 2
-		jmp L_store_1c
-	L_keep_cl:
-		and ecx, 0xff
-	L_store_1c:
-		mov byte ptr [eax + 0x1c], cl
-		mov cl, byte ptr [esi + 0x23e]
-		cmp cl, 2
-		jae L_keep_cl2
-		mov ecx, 2
-		jmp L_store_1d
-	L_keep_cl2:
-		and ecx, 0xff
-	L_store_1d:
-		mov byte ptr [eax + 0x1d], cl
-	L_second:
-		mov ecx, dword ptr [edi + 0x5d]
-		push 6
-		push 0x116
-		push 0
-		push 2
-		push ecx
-		call gm_StartEntityQuery
-		add esp, 0x14
-		test eax, eax
-		je L_done
-		mov cl, byte ptr [esi + 0x23d]
-		test cl, cl
-		jne L_done
-		mov cl, byte ptr [esi + 0x23e]
-		test cl, cl
-		jne L_done
-		mov cl, byte ptr [esi + 0x23f]
-		test cl, cl
-		je L_done
-		mov byte ptr [eax + 0x1c], cl
-	L_done:
-		pop edi
-		pop esi
-		ret
+	unsigned char* entry;
+	unsigned char* q;
+	int type;
+
+	type = building[0];
+	entry = (unsigned char*) (g_entity_type_table + type + type * 588);
+	q = (unsigned char*) gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 0, 0x2a, 6);
+	if (q != 0) {
+		if (entry[0x23d] == 0 && entry[0x23e] == 0 && entry[0x23f] != 0) {
+			q[0x1c] = entry[0x23f];
+		} else {
+			q[0x1c] = (unsigned char) (entry[0x23d] < 2 ? 2 : entry[0x23d]);
+			q[0x1d] = (unsigned char) (entry[0x23e] < 2 ? 2 : entry[0x23e]);
+		}
+	}
+	q = (unsigned char*) gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 0, 0x116, 6);
+	if (q != 0) {
+		if (entry[0x23d] == 0 && entry[0x23e] == 0 && entry[0x23f] != 0) {
+			q[0x1c] = entry[0x23f];
+		}
 	}
 }
 

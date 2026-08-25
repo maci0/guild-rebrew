@@ -1,62 +1,30 @@
-/* gm_AllocateObjectSlot — fenced _emit. */
+/* gm_AllocateObjectSlot — scan the fixed object pool (stride 0x43) for the
+ * first slot whose active flag is 0; return its address, or NULL once the
+ * pool is exhausted (limit 0x5008 slots). */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100165a0
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl gm_AllocateObjectSlot(int a, int b, int c)
+#include <stdlib.h>
+
+extern unsigned short* dword_100a8c34;
+
+char* __cdecl gm_AllocateObjectSlot(void)
 {
-	__asm {
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x34
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-		_emit 0x33
-		_emit 0xc0
-		_emit 0x33
-		_emit 0xd2
-		_emit 0x81
-		_emit 0xfa
-		_emit 0x08
-		_emit 0x50
-		_emit 0x00
-		_emit 0x00
-		_emit 0x7d
-		_emit 0x12
-		_emit 0x66
-		_emit 0x83
-		_emit 0x39
-		_emit 0x00
-		_emit 0x74
-		_emit 0x06
-		_emit 0x42
-		_emit 0x83
-		_emit 0xc1
-		_emit 0x43
-		_emit 0xeb
-		_emit 0x02
-		_emit 0x8b
-		_emit 0xc1
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x74
-		_emit 0xe6
-		_emit 0xc3
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
+	char* node;
+	int i;
+	char* result;
+
+	node = (char*) dword_100a8c34;
+	result = NULL;
+	i = 0;
+	while (result == NULL && i < 0x5008) {
+		if (*(short*) node != 0) {
+			i++;
+			node += 0x43;
+		} else {
+			result = node;
+		}
 	}
+	return result;
 }
-#else
-int __cdecl gm_AllocateObjectSlot(int a, int b, int c) { return 0; }
-#endif

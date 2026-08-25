@@ -215,3 +215,113 @@ int __cdecl write_log(void)
  * pulling fpinit.obj — the FPU init code itself lives in run_000.c.
  * The value is never read; presence is all the linker checks. */
 int _fltused = 0;
+
+/* --- Auto-added stubs for symbols lost during naked->C conversion --- */
+int __cdecl ahm_RandomBelow(void) { return 0; }
+int __cdecl AssignProductionSlot(void) { return 0; }
+unsigned char byte_100a9820 = 0;
+unsigned char byte_1014d8e0 = 0;
+int __cdecl destroy_entity(void) { return 0; }
+int dword_1002574c = 0;
+int __cdecl fcn_10002640(void) { return 0; }
+int __cdecl fcn_10003960(void) { return 0; }
+int __cdecl fcn_100058d0(void) { return 0; }
+int __cdecl fcn_10016cd0(void) { return 0; }
+int __cdecl fcn_1001a18a(void) { return 0; }
+int __cdecl fcn_1001a207(void) { return 0; }
+int __cdecl fcn_1001a286(void) { return 0; }
+int __cdecl fcn_1001a2eb(void) { return 0; }
+int __cdecl fcn_1001a46e(void) { return 0; }
+int __cdecl fcn_1001a527(void) { return 0; }
+int __cdecl fcn_1001a540(void) { return 0; }
+int __cdecl fcn_1001a567(void) { return 0; }
+int __cdecl fcn_1001a7f7(void) { return 0; }
+int __cdecl fcn_1001aa6a(void) { return 0; }
+int __cdecl fcn_1001ab81(void) { return 0; }
+int __cdecl fcn_1001aff0(void) { return 0; }
+int __cdecl fcn_1001b542(void) { return 0; }
+int __cdecl find_entity_26(void) { return 0; }
+int __cdecl find_entity_27(void) { return 0; }
+int g_1002574c = 0;
+int g_1002577c = 0;
+int g_1002578c = 0;
+int g_1002579c = 0;
+int g_100257ac = 0;
+int g_1002dde0 = 0;
+int g_10030b6c = 0;
+int g_10034610 = 0;
+int g_10034614 = 0;
+int g_10034618 = 0;
+int g_1003461c = 0;
+int g_10034624 = 0;
+int g_10034628 = 0;
+int g_1003462c = 0;
+int g_10034630 = 0;
+int g_10034634 = 0;
+int g_10034638 = 0;
+int g_10034640 = 0;
+int g_10034678 = 0;
+int g_10035434 = 0;
+int g_100a8c34 = 0;
+int g_1014d8c0 = 0;
+int g_101de454 = 0;
+int g_101de55c = 0;
+int g_117640a0 = 0;
+int g_117640a4 = 0;
+int g_117640b0 = 0;
+int g_117640b4 = 0;
+int g_117640b8 = 0;
+int g_117640bc = 0;
+int g_117640c0 = 0;
+int g_117640c4 = 0;
+int g_117660e0 = 0;
+int g_11766204 = 0;
+int g_chain_id_start = 0;
+int g_const_57c0 = 0;
+int g_crc_table_241a0 = 0;
+int g_download_buffer = 0;
+int g_download_received = 0;
+int g_download_slots = 0;
+int g_download_total_size = 0;
+int g_dynamic_entities = 0;
+int g_entity_base = 0;
+int g_entity_end = 0;
+int g_entity_ptr = 0;
+int g_error_msg_sell_failed = 0;
+int g_error_msg_sell_no_dest = 0;
+int g_error_msg_sell_no_source = 0;
+int g_item_def_table = 0;
+int g_log_buffer = 0;
+int g_log_file_handle = 0;
+int g_max_players = 0;
+int g_player_slots_base = 0;
+int g_query_count = 0;
+int g_query_match_count = 0;
+int g_relationship_matrix_primary = 0;
+int g_relationship_matrix_secondary = 0;
+int g_sim_ents = 0;
+int g_str_29bb8 = 0;
+int g_unknown_1de450 = 0;
+int __cdecl gv_GetSlotEntry(void) { return 0; }
+int __cdecl gv_ReplaceProductionWorker(void) { return 0; }
+int __cdecl gv_UpdateProductionProgress(void) { return 0; }
+int __cdecl gv_ValidateEntityAction(void) { return 0; }
+int __cdecl inflate_blocks(void) { return 0; }
+int __cdecl inflate_blocks_free(void) { return 0; }
+int __cdecl lb_ExLobbyServerCommand(void) { return 0; }
+int __cdecl lb_SearchRecordTable(void) { return 0; }
+int __cdecl MoveSlotEntry(void) { return 0; }
+int PTR_LAB_1002c5a0[1] = {0};
+int __cdecl rand_mod(void) { return 0; }
+int __cdecl read_uint32_be(void) { return 0; }
+int __cdecl ReadVfsCompressed(void) { return 0; }
+int __cdecl RecvGameSavegame(void) { return 0; }
+char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[1] = "";
+char s_cm_ChkMoveCredits____Not_enough_m_1002c774[1] = "";
+char s_cm_ExAllocThemaPredigt____Execut_1002d184[1] = "";
+char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[1] = "";
+char s_cm_ExChangeBits___Invalid_Id_1002d114[1] = "";
+char s_cm_ExChangeDesire___Invalid_I_1002d0f4[1] = "";
+char s_cm_ExChangeFloat___Invalid_Id_1002d134[1] = "";
+char s_cm_ExClearLagerslot___Invalid__L_1002d088[1] = "";
+char s_cm_ExClearLagerslot___Lager_has_n_1002d054[1] = "";

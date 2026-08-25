@@ -39,159 +39,54 @@ extern unsigned int ls_ID2Ptr(void);
  * production slots, worker assignments, and field states
  * for graveyard buildings. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
-unsigned short* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
-
 // FUNCTION: SERVER 0x100127d0
 // ls_LoadExistingEntities
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x100127d0.
-// Save loader with vfs reads — no C conversion attempted; fenced-naked.
 void __cdecl gm_CleanupObjectEntities(void);
+extern unsigned short* dword_100a8c34; /* 0x100a8c34 */
+extern int g_query_limit; /* 0x10035450 */
 
-__declspec(naked) int __cdecl ls_LoadExistingEntities(int arg1)
-{
-	(void) arg1;
-	__asm {
-		push ecx
-		push ebx
-		push ebp
-		push esi
-		push edi
-		call gm_CleanupObjectEntities
-		mov edi, dword ptr [esp + 0x18]
-		lea eax, [esp + 0x10]
-		push edi
-		push 1
-		push 4
-		push eax
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		jne L_have_count
-	L_ret0:
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		pop ecx
-		ret
-	L_have_count:
-		mov eax, dword ptr [esp + 0x10]
-		xor ebp, ebp
-		test eax, eax
-		jle L_done
-		xor ebx, ebx
-	L_loop:
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x34
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-		push edi
-		push 1
-		push 2
-		lea esi, [ebx + ecx]
-		push esi
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		je L_ret0
-		push edi
-		push 1
-		lea edx, [esi + 2]
-		push 4
-		push edx
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		je L_ret0
-		push edi
-		push 1
-		lea eax, [esi + 6]
-		push 4
-		push eax
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		je L_ret0
-		push edi
-		push 1
-		lea ecx, [esi + 0xa]
-		push 4
-		push ecx
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		je L_ret0
-		push edi
-		push 1
-		lea edx, [esi + 0xe]
-		push 4
-		push edx
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		je near L_ret0
-		push edi
-		push 1
-		lea eax, [esi + 0x12]
-		push 1
-		push eax
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		je near L_ret0
-		push edi
-		push 1
-		lea ecx, [esi + 0x13]
-		push 1
-		push ecx
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		je near L_ret0
-		push edi
-		push 1
-		add esi, 0x1c
-		push 0x1f
-		push esi
-		call ls_ReadVfsDataChecked
-		add esp, 0x10
-		test eax, eax
-		je near L_ret0
-		mov eax, dword ptr [esp + 0x10]
-		inc ebp
-		add ebx, 0x43
-		cmp ebp, eax
-		jl L_loop
-	L_done:
-		pop edi
-		pop esi
-		_emit 0xa3
-		_emit 0x50
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		pop ebp
-		mov eax, 1
-		pop ebx
-		pop ecx
-		ret
-	}
-}
-#else
 int __cdecl ls_LoadExistingEntities(int arg1)
 {
-	/* C fallback (no byte-matching conversion; save loader). */
-	(void) arg1;
-	return 0;
+	int count;
+	int i;
+	unsigned char* p;
+
+	gm_CleanupObjectEntities();
+	if (!ls_ReadVfsDataChecked(&count, 4, 1, (void*) arg1)) {
+		return 0;
+	}
+	for (i = 0; i < count; i++) {
+		p = (unsigned char*) dword_100a8c34 + i * 0x43;
+		if (!ls_ReadVfsDataChecked(p, 2, 1, (void*) arg1)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(p + 2, 4, 1, (void*) arg1)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(p + 6, 4, 1, (void*) arg1)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(p + 0xa, 4, 1, (void*) arg1)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(p + 0xe, 4, 1, (void*) arg1)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(p + 0x12, 1, 1, (void*) arg1)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(p + 0x13, 1, 1, (void*) arg1)) {
+			return 0;
+		}
+		p += 0x1c;
+		if (!ls_ReadVfsDataChecked(p, 0x1f, 1, (void*) arg1)) {
+			return 0;
+		}
+	}
+	g_query_limit = count;
+	return 1;
 }
-#endif
 
 /* Loads building entity state from a save file. Reads
  * building type, owner, upgrade level, and production

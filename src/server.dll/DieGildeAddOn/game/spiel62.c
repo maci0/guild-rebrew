@@ -137,7 +137,6 @@ extern float g_float_const_a8;
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x10017f30
 // gm_RemoveObjectWrapper
 
@@ -171,15 +170,6 @@ void __cdecl gm_RemoveEntityLink(int entity)
 /* Initializes an entity if it exists. Validates the entity
  * pointer, then sets default field values. No-op on NULL. */
 
-// FUNCTION: SERVER 0x10017f90
-// gm_InitEntityIfValid
-
-void __cdecl gm_InitEntityIfValid(short* entity)
-{
-	if (entity != (short*) 0 && *(unsigned short*) entity != 0xFFFF) {
-		amt_ClearEntityLinks(entity);
-	}
-}
 
 /* EntityStruct — stride 0x21c (540 bytes), 768 entries at g_entity_array (0x100358a0)
  * Field map derived from EXE cross-reference (Europa1400Gold_TL.exe):
@@ -243,116 +233,54 @@ extern int g_entity_ref_table[1];
 
 // FUNCTION: SERVER 0x10017fb0
 // gm_DeallocEntity
-__declspec(naked) void __cdecl gm_DeallocEntity(unsigned int index, int arg2)
+//   NEAR_MATCHING 182/278: logic, calls, and sprintf blocks (fmt 0x10031500 for
+//   arg2==0, 0x10031538 for arg2==1) all correct. Remaining diffs are msvc6
+//   register allocation: the ref-clear loop reloads [esi+4] per inner
+//   iteration in the original (ours per outer, `cmp [eax],edi` folded), and
+//   the memset/store order after the ref loop differs by two instructions.
+//   Semantics identical.
+
+int __cdecl sprintf(char* buffer, const char* format, ...); /* 0x1001a299 */
+
+void __cdecl gm_DeallocEntity(unsigned int index, int arg2)
 {
-	(void) index;
-	(void) arg2;
-	__asm {
-		sub esp, 0x204
-		mov eax, dword ptr [esp + 0x208]
-		push ebx
-		push ebp
-		push esi
-		lea eax, [eax + eax*2]
-		push edi
-		mov bl, 0xf
-		lea eax, [eax + eax*4]
-		lea ebp, [eax + eax*8]
-		shl ebp, 2
-		mov al, byte ptr [ebp + 0x100358a2]
-		mov edi, dword ptr [ebp + 0x100358a4]
-		lea esi, [ebp + 0x100358a0]
-		cmp al, bl
-		mov dword ptr [esp + 0x10], edi
-		je L_after_init
-		mov byte ptr [esi + 8], 0
-		_emit 0x66
-		_emit 0xa1
-		_emit 0x80
-		_emit 0x58
-		_emit 0x03
-		_emit 0x10
-		push esi
-		mov word ptr [esi + 0x28], ax
-		call gm_InitEntityIfValid
-		add esp, 4
-		mov byte ptr [esi + 2], bl
-	L_after_init:
-		lea ecx, [esi + 0x178]
-		push ecx
-		call gm_FreeObjectListRecursive
-		mov ebx, dword ptr [esp + 0x220]
-		add esp, 4
-		test ebx, ebx
-		je L_param2_zero
-		_emit 0x66
-		_emit 0x81
-		_emit 0x3e
-		_emit 0xff
-		_emit 0xff
-		je L_skip_dec
-		_emit 0xff
-		_emit 0x0d
-		_emit 0x34
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-	L_skip_dec:
-		mov edx, 0x100358fc
-	L_ref_outer:
-		mov eax, edx
-		mov ecx, 8
-	L_ref_inner:
-		mov edi, dword ptr [eax]
-		cmp edi, dword ptr [esi + 4]
-		jne L_ref_inner_next
-		mov dword ptr [eax], 0xffffffff
-	L_ref_inner_next:
-		add eax, 4
-		dec ecx
-		jne L_ref_inner
-		add edx, 0x21c
-		cmp edx, 0x1009acfc
-		jl L_ref_outer
-		mov ecx, 0x87
-		xor eax, eax
-		mov edi, esi
-		rep stosd
-		or eax, 0xffffffff
-		mov word ptr [esi], 0xffff
-		lea edi, [ebp + 0x100358fc]
-		mov ecx, 8
-		mov dword ptr [ebp + 0x100358a4], eax
-		cmp ebx, 1
-		rep stosd
-		jne L_skip_log
-		mov edx, dword ptr [esp + 0x10]
-		lea eax, [esp + 0x14]
-		push edx
-		push 0x10031538
-		push eax
-		call sprintf
-		add esp, 0xc
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		add esp, 0x204
-		ret
-	L_param2_zero:
-		push edi
-		lea ecx, [esp + 0x18]
-		push 0x10031500
-		push ecx
-		call sprintf
-		add esp, 0xc
-	L_skip_log:
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		add esp, 0x204
-		ret
+	char buffer[0x200];
+	char* entity;
+	int entity_id;
+	int i;
+	int j;
+	int* ref;
+
+	entity = (char*) 0x100358a0 + index * 0x21c;
+	entity_id = *(int*) (entity + 4);
+	if (*(unsigned char*) (entity + 2) != 0xf) {
+		entity[8] = 0;
+		*(short*) (entity + 0x28) = *(short*) 0x10035880;
+		gm_InitEntityIfValid((short*) entity);
+		entity[2] = 0xf;
+	}
+	gm_FreeObjectListRecursive((char**) (entity + 0x178));
+	if (arg2 != 0) {
+		if (*(unsigned short*) entity != 0xffff) {
+			g_citizen_count--;
+		}
+		for (i = 0; i < 0x300; i++) {
+			ref = (int*) ((char*) 0x100358fc + i * 0x21c);
+			for (j = 0; j < 8; j++) {
+				if (*(int*) (entity + 4) == ref[j]) {
+					ref[j] = -1;
+				}
+			}
+		}
+		memset(entity, 0, 0x21c);
+		*(unsigned short*) entity = 0xffff;
+		*(int*) (entity + 4) = -1;
+		memset((char*) 0x100358fc + index * 0x21c, 0xff, 0x20);
+		if (arg2 == 1) {
+			sprintf(buffer, (char*) 0x10031538, entity_id);
+		}
+	} else {
+		sprintf(buffer, (char*) 0x10031500, entity_id);
 	}
 }
 
@@ -680,41 +608,21 @@ int __cdecl gm_GetOppositeStatIndex(int stat_id)
 
 // FUNCTION: SERVER 0x10018450
 // gm_RandomStatModifier
+//   NEAR_MATCHING 24/78: logic correct (zero-case, const-57bc double compare,
+//   0xb/6 ranges, byte accumulation). Remaining diffs are msvc6 FPU/branch
+//   codegen: original emits `fcomp [const]` + `test ah,1` (ours fld+fcompp +
+//   test ah,0x41), byte-width loads/adds (mov bl / add al / add bl,al vs our
+//   dword forms), and the range-select branch layout. Not reproducible.
 
-__declspec(naked) char __cdecl gm_RandomStatModifier(char stat_value)
+char __cdecl gm_RandomStatModifier(char stat_value)
 {
-	(void) stat_value;
-	__asm {
-		push ebx
-		mov bl, byte ptr [esp + 8]
-		test bl, bl
-		jne L_nonzero
-		push 0x2a
-		call gm_RandomMod
-		add esp, 4
-		add al, 0x15
-		pop ebx
-		ret
-	L_nonzero:
-		mov eax, dword ptr [esp + 8]
-		and eax, 0xff
-		mov dword ptr [esp + 8], eax
-		fild dword ptr [esp + 8]
-		fcomp g_const_57bc
-		fnstsw ax
-		test ah, 1
-		mov eax, 0xb
-		je L_call
-		mov eax, 6
-	L_call:
-		push eax
-		call gm_RandomMod
-		add esp, 4
-		add bl, al
-		mov al, bl
-		pop ebx
-		ret
+	if (stat_value == 0) {
+		return (char) (gm_RandomMod(0x2a) + 0x15);
 	}
+	if ((double) (unsigned char) stat_value < g_const_57bc) {
+		return (char) (stat_value + gm_RandomMod(6));
+	}
+	return (char) (stat_value + gm_RandomMod(0xb));
 }
 
 /* Looks up an entity record by its integer ID. Searches

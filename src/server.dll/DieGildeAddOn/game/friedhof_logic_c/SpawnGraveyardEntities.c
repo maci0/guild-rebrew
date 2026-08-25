@@ -1,508 +1,72 @@
-/* SpawnGraveyardEntities - fenced _emit */
+/* SpawnGraveyardEntities - proper C */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x10010850
 // SYMBOL: _SpawnGraveyardEntities
+// SIZE: 370
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl SpawnGraveyardEntities(void* a)
+extern int g_entity_type_table;
+extern int g_next_object_id;
+extern int g_current_year;
+extern float g_const_57bc;
+extern float g_const_57c0;
+int __cdecl gm_RandomMod(int range);
+void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
+                                    void* filter, int type);
+
+/* Spawns up to *count* graveyard workers for the entity.  Validates the
+ * entity type (0x1d) and maturity level (1..3), then fills each spawned
+ * slot's record with a fresh object id, random stats and random role
+ * values.  Returns the number of slots spawned. */
+
+int __cdecl SpawnGraveyardEntities(void* entity, int count)
 {
-	__asm {
-/* 0x10010850  mov eax, dword ptr [esp + 4] */
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x04
-/* 0x10010854  xor ecx, ecx */
-		_emit 0x33
-		_emit 0xc9
-/* 0x10010856  push ebx */
-		_emit 0x53
-/* 0x10010857  push ebp */
-		_emit 0x55
-/* 0x10010858  mov cl, byte ptr [eax] */
-		_emit 0x8a
-		_emit 0x08
-/* 0x1001085a  push esi */
-		_emit 0x56
-/* 0x1001085b  push edi */
-		_emit 0x57
-/* 0x1001085c  lea eax, [ecx + ecx*2] */
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x49
-/* 0x1001085f  shl eax, 4 */
-		_emit 0xc1
-		_emit 0xe0
-		_emit 0x04
-/* 0x10010862  add eax, ecx */
-		_emit 0x03
-		_emit 0xc1
-/* 0x10010864  lea edx, [eax + eax*2] */
-		_emit 0x8d
-		_emit 0x14
-		_emit 0x40
-/* 0x10010867  mov eax, dword ptr [0x100a8c30] */
-		_emit 0xa1
-		_emit 0x30
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-/* 0x1001086c  add eax, ecx */
-		_emit 0x03
-		_emit 0xc1
-/* 0x1001086e  mov cl, byte ptr [eax + edx*4] */
-		_emit 0x8a
-		_emit 0x0c
-		_emit 0x90
-/* 0x10010871  lea eax, [eax + edx*4] */
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x90
-/* 0x10010874  cmp cl, 0x1d */
-		_emit 0x80
-		_emit 0xf9
-		_emit 0x1d
-/* 0x10010877  jne 0x100109bb */
-		_emit 0x0f
-		_emit 0x85
-		_emit 0x3e
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-/* 0x1001087d  mov al, byte ptr [eax + 0x247] */
-		_emit 0x8a
-		_emit 0x80
-		_emit 0x47
-		_emit 0x02
-		_emit 0x00
-		_emit 0x00
-/* 0x10010883  cmp al, 1 */
-		_emit 0x3c
-		_emit 0x01
-/* 0x10010885  jb 0x100109bb */
-		_emit 0x0f
-		_emit 0x82
-		_emit 0x30
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-/* 0x1001088b  cmp al, 3 */
-		_emit 0x3c
-		_emit 0x03
-/* 0x1001088d  ja 0x100109bb */
-		_emit 0x0f
-		_emit 0x87
-		_emit 0x28
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-/* 0x10010893  mov ebx, dword ptr [esp + 0x18] */
-		_emit 0x8b
-		_emit 0x5c
-		_emit 0x24
-		_emit 0x18
-/* 0x10010897  xor ebp, ebp */
-		_emit 0x33
-		_emit 0xed
-/* 0x10010899  test ebx, ebx */
-		_emit 0x85
-		_emit 0xdb
-/* 0x1001089b  jle 0x100109b4 */
-		_emit 0x0f
-		_emit 0x8e
-		_emit 0x13
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-/* 0x100108a1  mov ecx, dword ptr [esp + 0x14] */
-		_emit 0x8b
-		_emit 0x4c
-		_emit 0x24
-		_emit 0x14
-/* 0x100108a5  push 0 */
-		_emit 0x6a
-		_emit 0x00
-/* 0x100108a7  push 0x10010700 */
-		_emit 0x68
-		_emit 0x00
-		_emit 0x07
-		_emit 0x01
-		_emit 0x10
-/* 0x100108ac  push 0 */
-		_emit 0x6a
-		_emit 0x00
-/* 0x100108ae  push ecx */
-		_emit 0x51
-/* 0x100108af  push 0 */
-		_emit 0x6a
-		_emit 0x00
-/* 0x100108b1  call 0x10010710 */
-		_emit 0xe8
-		_emit 0x5a
-		_emit 0xfe
-		_emit 0xff
-		_emit 0xff
-/* 0x100108b6  mov esi, eax */
-		_emit 0x8b
-		_emit 0xf0
-/* 0x100108b8  add esp, 0x14 */
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x14
-/* 0x100108bb  test esi, esi */
-		_emit 0x85
-		_emit 0xf6
-/* 0x100108bd  je 0x100109b4 */
-		_emit 0x0f
-		_emit 0x84
-		_emit 0xf1
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-/* 0x100108c3  mov edx, dword ptr [esi + 0x10] */
-		_emit 0x8b
-		_emit 0x56
-		_emit 0x10
-/* 0x100108c6  mov eax, dword ptr [0x10030b6c] */
-		_emit 0xa1
-		_emit 0x6c
-		_emit 0x0b
-		_emit 0x03
-		_emit 0x10
-/* 0x100108cb  mov dword ptr [edx], eax */
-		_emit 0x89
-		_emit 0x02
-/* 0x100108cd  mov eax, dword ptr [0x10030b6c] */
-		_emit 0xa1
-		_emit 0x6c
-		_emit 0x0b
-		_emit 0x03
-		_emit 0x10
-/* 0x100108d2  inc eax */
-		_emit 0x40
-/* 0x100108d3  mov dword ptr [0x10030b6c], eax */
-		_emit 0xa3
-		_emit 0x6c
-		_emit 0x0b
-		_emit 0x03
-		_emit 0x10
-/* 0x100108d8  mov ecx, dword ptr [esi + 0x10] */
-		_emit 0x8b
-		_emit 0x4e
-		_emit 0x10
-/* 0x100108db  mov edx, dword ptr [ecx] */
-		_emit 0x8b
-		_emit 0x11
-/* 0x100108dd  mov word ptr [esi + 8], 0x7fff */
-		_emit 0x66
-		_emit 0xc7
-		_emit 0x46
-		_emit 0x08
-		_emit 0xff
-		_emit 0x7f
-/* 0x100108e3  mov dword ptr [esi + 4], edx */
-		_emit 0x89
-		_emit 0x56
-		_emit 0x04
-/* 0x100108e6  mov eax, dword ptr [0x10035880] */
-		_emit 0xa1
-		_emit 0x80
-		_emit 0x58
-		_emit 0x03
-		_emit 0x10
-/* 0x100108eb  add eax, 5 */
-		_emit 0x83
-		_emit 0xc0
-		_emit 0x05
-/* 0x100108ee  mov byte ptr [esi + 0xc], 0xff */
-		_emit 0xc6
-		_emit 0x46
-		_emit 0x0c
-		_emit 0xff
-/* 0x100108f2  mov word ptr [esi + 0xa], ax */
-		_emit 0x66
-		_emit 0x89
-		_emit 0x46
-		_emit 0x0a
-/* 0x100108f6  xor edi, edi */
-		_emit 0x33
-		_emit 0xff
-/* 0x100108f8  push 8 */
-		_emit 0x6a
-		_emit 0x08
-/* 0x100108fa  call 0x1001a0d0 */
-		_emit 0xe8
-		_emit 0xd1
-		_emit 0x97
-		_emit 0x00
-		_emit 0x00
-/* 0x100108ff  and eax, 0xffff */
-		_emit 0x25
-		_emit 0xff
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-/* 0x10010904  add esp, 4 */
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-/* 0x10010907  mov dword ptr [esp + 0x18], eax */
-		_emit 0x89
-		_emit 0x44
-		_emit 0x24
-		_emit 0x18
-/* 0x1001090b  fild dword ptr [esp + 0x18] */
-		_emit 0xdb
-		_emit 0x44
-		_emit 0x24
-		_emit 0x18
-/* 0x1001090f  fmul dword ptr [0x100257c0] */
-		_emit 0xd8
-		_emit 0x0d
-		_emit 0xc0
-		_emit 0x57
-		_emit 0x02
-		_emit 0x10
-/* 0x10010915  fadd dword ptr [0x100257bc] */
-		_emit 0xd8
-		_emit 0x05
-		_emit 0xbc
-		_emit 0x57
-		_emit 0x02
-		_emit 0x10
-/* 0x1001091b  call 0x1001b564 */
-		_emit 0xe8
-		_emit 0x44
-		_emit 0xac
-		_emit 0x00
-		_emit 0x00
-/* 0x10010920  mov ecx, dword ptr [esi + 0x10] */
-		_emit 0x8b
-		_emit 0x4e
-		_emit 0x10
-/* 0x10010923  inc edi */
-		_emit 0x47
-/* 0x10010924  cmp edi, 5 */
-		_emit 0x83
-		_emit 0xff
-		_emit 0x05
-/* 0x10010927  mov byte ptr [ecx + edi + 0x23], al */
-		_emit 0x88
-		_emit 0x44
-		_emit 0x39
-		_emit 0x23
-/* 0x1001092b  jl 0x100108f8 */
-		_emit 0x7c
-		_emit 0xcb
-/* 0x1001092d  push 9 */
-		_emit 0x6a
-		_emit 0x09
-/* 0x1001092f  call 0x1001a0d0 */
-		_emit 0xe8
-		_emit 0x9c
-		_emit 0x97
-		_emit 0x00
-		_emit 0x00
-/* 0x10010934  mov edx, dword ptr [esi + 0x10] */
-		_emit 0x8b
-		_emit 0x56
-		_emit 0x10
-/* 0x10010937  and eax, 0xffff */
-		_emit 0x25
-		_emit 0xff
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-/* 0x1001093c  inc eax */
-		_emit 0x40
-/* 0x1001093d  push 2 */
-		_emit 0x6a
-		_emit 0x02
-/* 0x1001093f  mov dword ptr [edx + 0x2c], eax */
-		_emit 0x89
-		_emit 0x42
-		_emit 0x2c
-/* 0x10010942  call 0x1001a0d0 */
-		_emit 0xe8
-		_emit 0x89
-		_emit 0x97
-		_emit 0x00
-		_emit 0x00
-/* 0x10010947  mov ecx, dword ptr [esi + 0x10] */
-		_emit 0x8b
-		_emit 0x4e
-		_emit 0x10
-/* 0x1001094a  and eax, 0xffff */
-		_emit 0x25
-		_emit 0xff
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-/* 0x1001094f  inc eax */
-		_emit 0x40
-/* 0x10010950  push 0x5e */
-		_emit 0x6a
-		_emit 0x5e
-/* 0x10010952  mov dword ptr [ecx + 0x30], eax */
-		_emit 0x89
-		_emit 0x41
-		_emit 0x30
-/* 0x10010955  call 0x1001a0d0 */
-		_emit 0xe8
-		_emit 0x76
-		_emit 0x97
-		_emit 0x00
-		_emit 0x00
-/* 0x1001095a  mov edx, dword ptr [esi + 0x10] */
-		_emit 0x8b
-		_emit 0x56
-		_emit 0x10
-/* 0x1001095d  and eax, 0xffff */
-		_emit 0x25
-		_emit 0xff
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-/* 0x10010962  inc eax */
-		_emit 0x40
-/* 0x10010963  push 4 */
-		_emit 0x6a
-		_emit 0x04
-/* 0x10010965  mov dword ptr [edx + 0x34], eax */
-		_emit 0x89
-		_emit 0x42
-		_emit 0x34
-/* 0x10010968  call 0x1001a0d0 */
-		_emit 0xe8
-		_emit 0x63
-		_emit 0x97
-		_emit 0x00
-		_emit 0x00
-/* 0x1001096d  mov ecx, dword ptr [0x10035880] */
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x80
-		_emit 0x58
-		_emit 0x03
-		_emit 0x10
-/* 0x10010973  mov edx, dword ptr [esi + 0x10] */
-		_emit 0x8b
-		_emit 0x56
-		_emit 0x10
-/* 0x10010976  and eax, 0xffff */
-		_emit 0x25
-		_emit 0xff
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-/* 0x1001097b  push 2 */
-		_emit 0x6a
-		_emit 0x02
-/* 0x1001097d  sub ecx, eax */
-		_emit 0x2b
-		_emit 0xc8
-/* 0x1001097f  dec ecx */
-		_emit 0x49
-/* 0x10010980  mov dword ptr [edx + 0x40], ecx */
-		_emit 0x89
-		_emit 0x4a
-		_emit 0x40
-/* 0x10010983  call 0x1001a0d0 */
-		_emit 0xe8
-		_emit 0x48
-		_emit 0x97
-		_emit 0x00
-		_emit 0x00
-/* 0x10010988  mov ecx, dword ptr [esi + 0x10] */
-		_emit 0x8b
-		_emit 0x4e
-		_emit 0x10
-/* 0x1001098b  and eax, 0xffff */
-		_emit 0x25
-		_emit 0xff
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-/* 0x10010990  push 0x10 */
-		_emit 0x6a
-		_emit 0x10
-/* 0x10010992  mov dword ptr [ecx + 0x38], eax */
-		_emit 0x89
-		_emit 0x41
-		_emit 0x38
-/* 0x10010995  call 0x1001a0d0 */
-		_emit 0xe8
-		_emit 0x36
-		_emit 0x97
-		_emit 0x00
-		_emit 0x00
-/* 0x1001099a  push 0x10 */
-		_emit 0x6a
-		_emit 0x10
-/* 0x1001099c  call 0x1001a0d0 */
-		_emit 0xe8
-		_emit 0x2f
-		_emit 0x97
-		_emit 0x00
-		_emit 0x00
-/* 0x100109a1  push 0x10 */
-		_emit 0x6a
-		_emit 0x10
-/* 0x100109a3  call 0x1001a0d0 */
-		_emit 0xe8
-		_emit 0x28
-		_emit 0x97
-		_emit 0x00
-		_emit 0x00
-/* 0x100109a8  add esp, 0x20 */
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x20
-/* 0x100109ab  inc ebp */
-		_emit 0x45
-/* 0x100109ac  cmp ebp, ebx */
-		_emit 0x3b
-		_emit 0xeb
-/* 0x100109ae  jl 0x100108a1 */
-		_emit 0x0f
-		_emit 0x8c
-		_emit 0xed
-		_emit 0xfe
-		_emit 0xff
-		_emit 0xff
-/* 0x100109b4  pop edi */
-		_emit 0x5f
-/* 0x100109b5  mov eax, ebp */
-		_emit 0x8b
-		_emit 0xc5
-/* 0x100109b7  pop esi */
-		_emit 0x5e
-/* 0x100109b8  pop ebp */
-		_emit 0x5d
-/* 0x100109b9  pop ebx */
-		_emit 0x5b
-/* 0x100109ba  ret  */
-		_emit 0xc3
-/* 0x100109bb  pop edi */
-		_emit 0x5f
-/* 0x100109bc  pop esi */
-		_emit 0x5e
-/* 0x100109bd  pop ebp */
-		_emit 0x5d
-/* 0x100109be  xor eax, eax */
-		_emit 0x33
-		_emit 0xc0
-/* 0x100109c0  pop ebx */
-		_emit 0x5b
-/* 0x100109c1  ret  */
-		_emit 0xc3
+	unsigned char type;
+	unsigned char* taddr;
+	void* slot;
+	int i;
+	int r;
+	int spawned;
+
+	type = *(unsigned char*) entity;
+	taddr = (unsigned char*) (type * 0x24c + g_entity_type_table + type);
+	if (*taddr != 0x1d)
+		return 0;
+	if (*(taddr + 0x247) < 1 || *(taddr + 0x247) > 3)
+		return 0;
+
+	spawned = 0;
+	if (count > 0) {
+		do {
+			slot = FindSlotEntryFiltered(0, entity, 0, (void*) 0x10010700, 0);
+			if (slot == 0)
+				break;
+			*(int*) *(int*) ((char*) slot + 0x10) = g_next_object_id;
+			g_next_object_id++;
+			*(int*) ((char*) slot + 4) = *(int*) *(int*) ((char*) slot + 0x10);
+			*(unsigned short*) ((char*) slot + 8) = 0x7fff;
+			*(unsigned char*) ((char*) slot + 0xc) = 0xff;
+			*(unsigned short*) ((char*) slot + 0xa) =
+			    (unsigned short) (g_current_year + 5);
+			for (i = 0; i < 5; i++) {
+				r = gm_RandomMod(8) & 0xffff;
+				*(unsigned char*) (*(int*) ((char*) slot + 0x10) + 0x24 + i) =
+				    (unsigned char) ((float) r * g_const_57c0 + g_const_57bc);
+			}
+			*(int*) (*(int*) ((char*) slot + 0x10) + 0x2c) =
+			    (gm_RandomMod(9) & 0xffff) + 1;
+			*(int*) (*(int*) ((char*) slot + 0x10) + 0x30) =
+			    (gm_RandomMod(2) & 0xffff) + 1;
+			*(int*) (*(int*) ((char*) slot + 0x10) + 0x34) =
+			    (gm_RandomMod(0x5e) & 0xffff) + 1;
+			*(int*) (*(int*) ((char*) slot + 0x10) + 0x40) =
+			    g_current_year - (gm_RandomMod(4) & 0xffff) - 1;
+			*(int*) (*(int*) ((char*) slot + 0x10) + 0x38) =
+			    gm_RandomMod(2) & 0xffff;
+			gm_RandomMod(0x10);
+			gm_RandomMod(0x10);
+			gm_RandomMod(0x10);
+			spawned++;
+		} while (spawned < count);
 	}
+	return spawned;
 }
-#else
-int __cdecl SpawnGraveyardEntities(void* a)
-{
-    /* C fallback */
-    return 0;
-}
-#endif

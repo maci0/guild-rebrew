@@ -1,50 +1,35 @@
-/* cm_ExSimCommand - fenced _emit */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+/*
+ * Ghidra decompilation reference:
+ * /+ [rebrew] FUNCTION: RELOC
+ *    Origin: GAME
+ *    Size: 22B
+ *    CFlags:
+ *    Symbol: _ExSimCommand
+ *    Files: DieGildeAddOn/command/command.c * / *
+ * int __cdecl cm_ExSimCommand(void *param_1,char *param_2)
+ *
+ * {
+ *   int iVar1;
+ *
+ *   iVar1 = amt_SwapOfficeHolders((int *)((int)param_1 + 0x10));
+ *   return (uint)(iVar1 == 0);
+ * }
+ */
+
+int __cdecl amt_SwapOfficeHolders(int*);
+
+/* Execution handler: processes a simulation command by
+ * delegating to amt_SwapOfficeHolders. Returns 1 if the
+ * swap failed (result == 0), 0 on success. */
+
 // FUNCTION: SERVER 0x10010080
-// SYMBOL: _cm_ExSimCommand
+int __cdecl cm_ExSimCommand(void* cmd, char* result)
+{
+	int swap_result;
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl cm_ExSimCommand(void* param_1, char* param_2)
-{
-	__asm {
-		/* 0x10010080  mov eax, dword ptr [esp + 4] */
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x04
-		/* 0x10010084  add eax, 0x10 */
-		_emit 0x83
-		_emit 0xc0
-		_emit 0x10
-		/* 0x10010087  push eax */
-		_emit 0x50
-		/* 0x10010088  call 0x1000b880 */
-		_emit 0xe8
-		_emit 0xf3
-		_emit 0xb7
-		_emit 0xff
-		_emit 0xff
-		/* 0x1001008d  add esp, 4 */
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		/* 0x10010090  neg eax */
-		_emit 0xf7
-		_emit 0xd8
-		/* 0x10010092  sbb eax, eax */
-		_emit 0x1b
-		_emit 0xc0
-		/* 0x10010094  inc eax */
-		_emit 0x40
-		/* 0x10010095  ret  */
-		_emit 0xc3
-	}
+	(void) result;
+
+	swap_result = amt_SwapOfficeHolders((int*) ((int) cmd + 0x10));
+	return (unsigned int) (swap_result == 0);
 }
-#else
-int __cdecl cm_ExSimCommand(void* param_1, char* param_2)
-{
-    /* C fallback */
-    return 0;
-}
-#endif

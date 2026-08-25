@@ -1,85 +1,26 @@
-/* gv_Free3Fields - fenced _emit (exact bytes) */
+/* gv_Free3Fields - proper C */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10010f50
 // SYMBOL: _gv_Free3Fields
 // SIZE: 66
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl gv_Free3Fields(int param_1, char* param_2)
+extern void __cdecl m_FreeTracked(void* ptr);
+
+/* Frees a 3-field slot: releases the two tracked pointers at
+ * +0x1c and +0x20 (if set), then the slot itself. */
+
+void __cdecl gv_Free3Fields(int* slot)
 {
-	__asm {
-		_emit 0x56
-		_emit 0x8b
-		_emit 0x74
-		_emit 0x24
-		_emit 0x08
-		_emit 0x85
-		_emit 0xf6
-		_emit 0x74
-		_emit 0x37
-		_emit 0x8b
-		_emit 0x46
-		_emit 0x1c
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x74
-		_emit 0x10
-		_emit 0x50
-		_emit 0xe8
-		_emit 0xba
-		_emit 0x58
-		_emit 0xff
-		_emit 0xff
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		_emit 0xc7
-		_emit 0x46
-		_emit 0x1c
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x8b
-		_emit 0x46
-		_emit 0x20
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x74
-		_emit 0x10
-		_emit 0x50
-		_emit 0xe8
-		_emit 0xa3
-		_emit 0x58
-		_emit 0xff
-		_emit 0xff
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		_emit 0xc7
-		_emit 0x46
-		_emit 0x20
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x56
-		_emit 0xe8
-		_emit 0x93
-		_emit 0x58
-		_emit 0xff
-		_emit 0xff
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		_emit 0x5e
-		_emit 0xc3
+	if (slot == 0)
+		return;
+	if (slot[7] != 0) {
+		m_FreeTracked((void*) slot[7]);
+		slot[7] = 0;
 	}
+	if (slot[8] != 0) {
+		m_FreeTracked((void*) slot[8]);
+		slot[8] = 0;
+	}
+	m_FreeTracked((void*) slot);
 }
-#else
-int __cdecl gv_Free3Fields(int param_1, char* param_2)
-{
-    return 0;
-}
-#endif

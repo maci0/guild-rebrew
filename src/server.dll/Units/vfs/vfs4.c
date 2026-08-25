@@ -71,138 +71,72 @@ int __cdecl vfs_CleanupObject(char* obj)
 // FUNCTION: SERVER 0x10008d10
 // CloseVfsStream
 
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x10008d10 (301B).
-// Complex stream teardown (frame pointer, 6+ flag branches, 5+ helper
-// calls) — no C conversion attempted; kept fenced-naked.
-__declspec(naked) int __cdecl CloseVfsStream(void* stream)
-{
-	(void) stream;
-	__asm {
-		push ebp
-		push esi
-		mov esi, dword ptr [esp + 0xc]
-		xor ebp, ebp
-		test esi, esi
-		je near L_pop2_ret
-		mov al, byte ptr [esi + 0x13c]
-		push edi
-		test al, 0x20
-		je near L_not20
-		test al, 8
-		je near L_skip_z
-		test al, 1
-		je L_deflate
-		lea eax, [esi + 0x100]
-		push eax
-		call inflateEnd
-		add esp, 4
-		jmp L_skip_z
-	L_deflate:
-		lea edi, [esi + 0x100]
-		push 4
-		push edi
-		call deflate
-		push edi
-		call deflateEnd
-		mov eax, dword ptr [esi + 0x110]
-		add esp, 0xc
-		cmp eax, 8
-		jb L_skip_z
-		mov eax, dword ptr [esi + 0x10c]
-		mov ecx, dword ptr [esi + 0x138]
-		mov edx, 4
-	L_byte_loop1:
-		mov byte ptr [eax], cl
-		shr ecx, 8
-		inc eax
-		dec edx
-		jne L_byte_loop1
-		mov ecx, dword ptr [esi + 0x108]
-		mov edx, 4
-	L_byte_loop2:
-		mov byte ptr [eax], cl
-		shr ecx, 8
-		inc eax
-		dec edx
-		jne L_byte_loop2
-		mov edx, dword ptr [esi + 0x114]
-		mov ecx, dword ptr [esi + 0x10c]
-		mov eax, dword ptr [esi + 0x110]
-		add edx, 8
-		add ecx, 8
-		add eax, -8
-		mov dword ptr [esi + 0x114], edx
-		mov dword ptr [esi + 0x10c], ecx
-		mov dword ptr [esi + 0x110], eax
-	L_skip_z:
-		test byte ptr [esi + 0x13c], 1
-		jne L_after
-		mov ebp, dword ptr [esi + 0x114]
-		jmp L_after
-	L_not20:
-		mov ecx, dword ptr [esi + 0x100]
-		test ecx, ecx
-		je L_after
-		test al, 1
-		je L_else1
-		test al, 0x10
-		je L_else1
-		push ecx
-		call vfs_CleanupObject
-		mov ecx, dword ptr [esi + 0x100]
-		push ecx
-		call vfs_DestroyEntity
-		add esp, 8
-		jmp L_after
-	L_else1:
-		test al, 8
-		push ecx
-		je L_fflush
-		call vfs_FlushAndClose
-		jmp L_after_call
-	L_fflush:
-		call fflush
-	L_after_call:
-		add esp, 4
-	L_after:
-		_emit 0x8b
-		_emit 0x3d
-		_emit 0x78
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		push esi
-		dec edi
-		push 0x10034670
-		_emit 0x89
-		_emit 0x3d
-		_emit 0x78
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		call m_PoolFree
-		add esp, 8
-		mov eax, ebp
-		pop edi
-		pop esi
-		pop ebp
-		ret
-	L_pop2_ret:
-		mov eax, ebp
-		pop esi
-		pop ebp
-		ret
-	}
-}
-#else
+
+extern int g_10034678;
+extern int g_10034670;
+extern int __cdecl destroy_entity(void* obj);
+extern int __cdecl read_uint32_be(void* obj);
+extern int __cdecl fcn_1001a18a(void* obj);
+
 int __cdecl CloseVfsStream(void* stream)
 {
-	/* C fallback (no byte-matching conversion; complex stream teardown). */
-	(void) stream;
-	return 0;
+	int result;
+	int n;
+	unsigned int v;
+	char* w;
+
+	result = 0;
+	if (stream != 0) {
+		if (*(unsigned char*) ((char*) stream + 0x13c) & 0x20) {
+			if (*(unsigned char*) ((char*) stream + 0x13c) & 8) {
+				if (*(unsigned char*) ((char*) stream + 0x13c) & 1) {
+					inflateEnd((char*) stream + 0x100);
+				} else {
+					deflate((char*) stream + 0x100, 4);
+					deflateEnd((char*) stream + 0x100);
+					if (*(unsigned int*) ((char*) stream + 0x110) >= 8) {
+						w = *(char**) ((char*) stream + 0x10c);
+						v = *(unsigned int*) ((char*) stream + 0x138);
+						n = 4;
+						do {
+							*w = (char) v;
+							v >>= 8;
+							w++;
+						} while (--n != 0);
+						v = *(unsigned int*) ((char*) stream + 0x108);
+						n = 4;
+						do {
+							*w = (char) v;
+							v >>= 8;
+							w++;
+						} while (--n != 0);
+						*(unsigned int*) ((char*) stream + 0x114) += 8;
+						*(char**) ((char*) stream + 0x10c) += 8;
+						*(unsigned int*) ((char*) stream + 0x110) -= 8;
+					}
+				}
+			}
+			if (!(*(unsigned char*) ((char*) stream + 0x13c) & 1)) {
+				result = *(unsigned int*) ((char*) stream + 0x114);
+			}
+		} else {
+			if (*(void**) ((char*) stream + 0x100) != 0) {
+				if ((*(unsigned char*) ((char*) stream + 0x13c) & 1) && (*(unsigned char*) ((char*) stream + 0x13c) & 0x10)) {
+					vfs_CleanupObject(*(void**) ((char*) stream + 0x100));
+					destroy_entity(*(void**) ((char*) stream + 0x100));
+				} else if (*(unsigned char*) ((char*) stream + 0x13c) & 8) {
+					read_uint32_be(*(void**) ((char*) stream + 0x100));
+				} else {
+					fcn_1001a18a(*(void**) ((char*) stream + 0x100));
+				}
+			}
+		}
+		g_10034678--;
+		m_PoolFree((int*) 0x10034670, stream);
+	}
+	return result;
 }
-#endif
+
 
 /* Reads raw data from a VFS stream. Low-level read that
  * handles buffering, refilling, and byte-by-byte reads

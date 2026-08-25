@@ -134,52 +134,27 @@ double __cdecl gm_RandomFloat01(void);
 extern float g_float_const_a0;
 extern float g_float_const_a8;
 
-/* Allocates and initializes a game entity structure. Allocates
- * memory via m_AllocTracked and zeroes the initial fields. */
+/* Scans the per-entity slot table for an entry whose 16-bit id
+ * matches arg2. Each entity owns 0x2a90 bytes at 0x1009b770,
+ * holding 0x55 slots of 0x80 bytes; returns the matching slot
+ * pointer or NULL. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10016240
 // gm_FindSlotById
 
 // DATA: SERVER 0x1009b770
 
-__declspec(naked) char* __cdecl gm_FindSlotById(int arg1, int arg2)
+char* __cdecl gm_FindSlotById(int arg1, int arg2)
 {
-	(void) arg1;
-	(void) arg2;
-	__asm {
-		mov edx, dword ptr [esp + 4]
-		xor ecx, ecx
-		mov eax, edx
-		push esi
-		shl eax, 4
-		add eax, edx
-		mov esi, dword ptr [esp + 0xc]
-		push edi
-		lea eax, [eax + eax*4]
-		lea edx, [edx + eax*8]
-		shl edx, 4
-		lea eax, [edx + 0x1009b770]
-	L_loop:
-		xor edi, edi
-		mov di, word ptr [eax]
-		cmp edi, esi
-		je L_found
-		inc ecx
-		add eax, 0x80
-		cmp ecx, 0x55
-		jl L_loop
-		pop edi
-		xor eax, eax
-		pop esi
-		ret
-	L_found:
-		shl ecx, 7
-		pop edi
-		pop esi
-		lea eax, [ecx + edx + 0x1009b770]
-		ret
+	int i;
+
+	for (i = 0; i < 0x55; i++) {
+		if (*(unsigned short*) (0x1009b770 + arg1 * 0x2a90 + i * 0x80) == arg2) {
+			return (char*) (0x1009b770 + arg1 * 0x2a90 + i * 0x80);
+		}
 	}
+	return 0;
 }
 
 /* Returns the next matching entity from an active query.

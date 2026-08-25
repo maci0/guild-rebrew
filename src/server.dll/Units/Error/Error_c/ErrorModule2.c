@@ -27,7 +27,7 @@ void __cdecl write_log(char*, int, char*);
 /* string referenced by ShutdownLogAndErrorHandler asm (was in the init body) */
 static char s_Error_Handler_closed__100273ac[] = "Error-Handler closed.\n";
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100034c0
 // ShutdownLogAndErrorHandler
 void __cdecl ShutdownLogAndErrorHandler(void)

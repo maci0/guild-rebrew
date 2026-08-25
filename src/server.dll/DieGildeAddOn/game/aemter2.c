@@ -16,11 +16,28 @@ extern unsigned short g_default_value_b;
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void __cdecl InitBuildingTypeTable(void);
 
+/* Office slot table at 0x101de5a0, 42 entries of 0x18 bytes. */
+#pragma pack(push, 1)
+typedef struct {
+	char type;         /* +0 */
+	char pad0[3];
+	int entityId;      /* +4 */
+	char role;         /* +8 */
+	char pad1[3];
+	int count;         /* +0xc */
+	char state;        /* +0x10 */
+	char pad2[3];
+	int assignmentId;  /* +0x14 */
+} OfficeSlot;
+#pragma pack(pop)
+
+extern OfficeSlot g_office_slots[];
+
 /* Validates if an entity is eligible for an office position.
  * Checks entity type, existing office holdings, and eligibility
  * requirements. Returns 0 on success, non-zero on failure. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000B820
 // amt_FindEntity26
 
@@ -59,140 +76,67 @@ void __cdecl amt_FindEntity27(int val)
 // FUNCTION: SERVER 0x1000b880
 // amt_SwapOfficeHolders
 
-__declspec(naked) int __cdecl amt_SwapOfficeHolders(int* arg1)
+int __cdecl amt_SwapOfficeHolders(int* arg1)
 {
-	(void) arg1;
-	__asm {
-		push ebx
-		mov ebx, dword ptr [esp + 8]
-		push ebp
-		push esi
-		mov eax, dword ptr [ebx]
-		push edi
-		push eax
-		call gm_LookupEntityRecordById
-		add esp, 4
-		mov dword ptr [esp + 0x14], eax
-		test eax, eax
-		jne L_have_req
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		ret
-	L_have_req:
-		mov ecx, dword ptr [eax + 0x194]
-		mov eax, dword ptr [ebx + 6]
-		cmp ecx, eax
-		jge L_scan_a
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		ret
-	L_scan_a:
-		mov dl, byte ptr [ebx + 4]
-		xor ecx, ecx
-		mov eax, 0x101de5a0
-	L_loop_a:
-		cmp byte ptr [eax], dl
-		je L_found_a
-		add eax, 0x18
-		inc ecx
-		cmp eax, 0x101de870
-		jl L_loop_a
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		ret
-	L_found_a:
-		lea edx, [ecx + ecx*2]
-		lea edi, [edx*8 + 0x101de5a0]
-		test edi, edi
-		jne L_have_a
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		ret
-	L_have_a:
-		mov eax, dword ptr [edi + 4]
-		push eax
-		call gm_LookupEntityRecordById
-		mov ebp, eax
-		add esp, 4
-		test ebp, ebp
-		jne L_scan_b
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		ret
-	L_scan_b:
-		mov dl, byte ptr [ebx + 5]
-		xor ecx, ecx
-		mov eax, 0x101de5a0
-	L_loop_b:
-		cmp byte ptr [eax], dl
-		je L_found_b
-		add eax, 0x18
-		inc ecx
-		cmp eax, 0x101de870
-		jl L_loop_b
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		ret
-	L_found_b:
-		lea ecx, [ecx + ecx*2]
-		lea esi, [ecx*8 + 0x101de5a0]
-		test esi, esi
-		jne L_have_b
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		ret
-	L_have_b:
-		mov edx, dword ptr [esi + 4]
-		push edx
-		call gm_LookupEntityRecordById
-		add esp, 4
-		test eax, eax
-		jne L_do_swap
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		ret
-	L_do_swap:
-		mov cl, byte ptr [esi + 8]
-		mov byte ptr [ebp + 0x166], cl
-		mov dl, byte ptr [edi + 8]
-		mov byte ptr [eax + 0x166], dl
-		mov ecx, dword ptr [esi + 4]
-		mov eax, dword ptr [edi + 4]
-		mov dword ptr [edi + 4], ecx
-		mov dword ptr [esi + 4], eax
-		mov eax, dword ptr [esp + 0x14]
-		mov edx, dword ptr [ebx + 6]
-		pop edi
-		mov ecx, dword ptr [eax + 0x194]
-		pop esi
-		sub ecx, edx
-		pop ebp
-		mov dword ptr [eax + 0x194], ecx
-		mov eax, 1
-		pop ebx
-		ret
+	OfficeSlot* slot_a;
+	OfficeSlot* slot_b;
+	char* ent_a;
+	char* ent_b;
+	char* ent_c;
+	int i;
+
+	ent_a = (char*) gm_LookupEntityRecordById(arg1[0]);
+	if (ent_a == 0)
+		return 0;
+	if (*(int*) (ent_a + 0x194) < *(int*) ((char*) arg1 + 6))
+		return 0;
+
+	/* find office slot A by type byte */
+	i = 0;
+	while (1) {
+		if (g_office_slots[i].type == *((char*) arg1 + 4)) {
+			break;
+		}
+		i++;
+		if (i >= 0x2a) {
+			return 0;
+		}
 	}
+	slot_a = &g_office_slots[i];
+	if (slot_a == 0) {
+		return 0;
+	}
+	ent_b = (char*) gm_LookupEntityRecordById(slot_a->entityId);
+	if (ent_b == 0) {
+		return 0;
+	}
+
+	/* find office slot B by type byte */
+	i = 0;
+	while (1) {
+		if (g_office_slots[i].type == *((char*) arg1 + 5)) {
+			break;
+		}
+		i++;
+		if (i >= 0x2a) {
+			return 0;
+		}
+	}
+	slot_b = &g_office_slots[i];
+	if (slot_b == 0) {
+		return 0;
+	}
+	ent_c = (char*) gm_LookupEntityRecordById(slot_b->entityId);
+	if (ent_c == 0) {
+		return 0;
+	}
+	*(char*) (ent_b + 0x166) = slot_b->role;
+	*(char*) (ent_c + 0x166) = slot_a->role;
+	i = slot_a->entityId;
+	slot_a->entityId = slot_b->entityId;
+	slot_b->entityId = i;
+	*(int*) (ent_a + 0x194) -= *(int*) ((char*) arg1 + 6);
+	return 1;
 }
 
 /* Clears all entity links for an office position. Removes
@@ -201,66 +145,45 @@ __declspec(naked) int __cdecl amt_SwapOfficeHolders(int* arg1)
 // FUNCTION: SERVER 0x1000b990
 // amt_ClearEntityLinks
 
-__declspec(naked) int __cdecl amt_ClearEntityLinks(int arg1)
+int __cdecl amt_ClearEntityLinks(char* entity)
 {
-	(void) arg1;
-	__asm {
-		push ebx
-		push ebp
-		mov ebp, dword ptr [esp + 0xc]
-		push esi
-		mov si, word ptr [g_default_value_b]
-		xor ebx, ebx
-		xor eax, eax
-		mov ecx, 0x101de5b4
-	L_loop1:
-		mov edx, dword ptr [ebp + 4]
-		cmp dword ptr [ecx - 0x10], edx
-		jne L_else1
-		cmp si, 0xb
-		mov dword ptr [ecx - 0x10], 0xffffffff
-		seta dl
-		add edx, 3
-		mov dword ptr [ecx], 0xffffffff
-		mov byte ptr [ecx - 4], dl
-		mov dword ptr [ecx - 8], ebx
-		or al, 1
-		jmp L_loop1_next
-	L_else1:
-		cmp dword ptr [ecx], edx
-		jne L_loop1_next
-		mov dword ptr [ecx], 0xffffffff
-		mov byte ptr [ecx - 4], 1
-	L_loop1_next:
-		add ecx, 0x18
-		cmp ecx, 0x101de9a4
-		jl L_loop1
-		cmp byte ptr [ebp + 0x168], bl
-		je L_skip_loop2
-		mov ecx, 0x101de5ac
-	L_loop2:
-		mov dl, byte ptr [ecx - 4]
-		cmp dl, byte ptr [ebp + 0x168]
-		jne L_loop2_next
-		mov edx, dword ptr [ecx]
-		cmp edx, ebx
-		jle L_loop2_next
-		dec edx
-		or al, 1
-		mov dword ptr [ecx], edx
-	L_loop2_next:
-		add ecx, 0x18
-		cmp ecx, 0x101de99c
-		jl L_loop2
-	L_skip_loop2:
-		mov byte ptr [ebp + 0x166], bl
-		mov byte ptr [ebp + 0x169], bl
-		mov byte ptr [ebp + 0x168], bl
-		pop esi
-		pop ebp
-		pop ebx
-		ret
+	OfficeSlot* slot;
+	unsigned short default_val;
+	int i;
+	int result;
+	int state_tmp;
+
+	default_val = (unsigned short) g_default_value_b;
+	result = 0;
+	slot = (OfficeSlot*) 0x101de5a0;
+	for (i = 0; i < 0x2a; i++) {
+		if (slot[i].entityId == *(int*) (entity + 4)) {
+			slot[i].entityId = -1;
+			slot[i].assignmentId = -1;
+			state_tmp = (default_val > 0xb) ? 4 : 3;
+			slot[i].state = (char) state_tmp;
+			slot[i].count = 0;
+			result |= 1;
+		}
+		else if (slot[i].assignmentId == *(int*) (entity + 4)) {
+			slot[i].assignmentId = -1;
+			slot[i].state = 1;
+		}
 	}
+	if (*(char*) (entity + 0x168) != 0) {
+		for (i = 0; i < 0x2a; i++) {
+			if (slot[i].role == *(char*) (entity + 0x168)) {
+				if (slot[i].count > 0) {
+					slot[i].count--;
+					result |= 1;
+				}
+			}
+		}
+	}
+	*(char*) (entity + 0x166) = 0;
+	*(char*) (entity + 0x169) = 0;
+	*(char*) (entity + 0x168) = 0;
+	return result;
 }
 
 /* Updates entity links for an office assignment. Sets up
@@ -270,76 +193,44 @@ __declspec(naked) int __cdecl amt_ClearEntityLinks(int arg1)
 // FUNCTION: SERVER 0x1000ba30
 // amt_UpdateEntityLinks
 
-__declspec(naked) void __cdecl amt_UpdateEntityLinks(int arg1, int arg2)
+void __cdecl amt_UpdateEntityLinks(char* entity, int arg2)
 {
-	(void) arg1;
-	(void) arg2;
-	__asm {
-		mov dx, word ptr [g_default_value_b]
-		push ebx
-		push ebp
-		mov ebp, dword ptr [esp + 0xc]
-		push esi
-		xor ebx, ebx
-		xor esi, esi
-		mov eax, 0x101de5b4
-	L_loop1:
-		mov ecx, dword ptr [ebp + 4]
-		cmp dword ptr [eax - 0x10], ecx
-		jne L_else1
-		cmp dword ptr [esp + 0x14], ebx
-		je L_else1_load
-		mov ebp, dword ptr [esp + 0x10]
-		cmp dx, 0xb
-		seta cl
-		mov dword ptr [eax - 0x10], 0xffffffff
-		add ecx, 3
-		mov dword ptr [eax], 0xffffffff
-		mov byte ptr [eax - 4], cl
-		mov dword ptr [eax - 8], ebx
-		or esi, 1
-		jmp L_loop1_next
-	L_else1_load:
-		mov ebp, dword ptr [esp + 0x10]
-	L_else1:
-		cmp dword ptr [eax], ecx
-		jne L_loop1_next
-		mov dword ptr [eax], 0xffffffff
-		mov byte ptr [eax - 4], 1
-	L_loop1_next:
-		add eax, 0x18
-		cmp eax, 0x101de9a4
-		jl L_loop1
-		cmp byte ptr [ebp + 0x168], bl
-		je L_skip_loop2
-		mov eax, 0x101de5ac
-	L_loop2:
-		mov dl, byte ptr [eax - 4]
-		mov cl, byte ptr [ebp + 0x168]
-		cmp dl, cl
-		jne L_loop2_next
-		mov ecx, dword ptr [eax]
-		cmp ecx, ebx
-		jle L_loop2_next
-		dec ecx
-		or esi, 1
-		mov dword ptr [eax], ecx
-	L_loop2_next:
-		add eax, 0x18
-		cmp eax, 0x101de99c
-		jl L_loop2
-	L_skip_loop2:
-		cmp dword ptr [esp + 0x14], ebx
-		je L_skip_param2
-		mov byte ptr [ebp + 0x166], bl
-		mov byte ptr [ebp + 0x169], bl
-	L_skip_param2:
-		mov byte ptr [ebp + 0x168], bl
-		pop esi
-		pop ebp
-		pop ebx
-		ret
+	OfficeSlot* slot;
+	unsigned short default_val;
+	int i;
+	int result;
+
+	default_val = (unsigned short) g_default_value_b;
+	result = 0;
+	slot = (OfficeSlot*) 0x101de5a0;
+	for (i = 0; i < 0x2a; i++) {
+		if (slot[i].entityId == *(int*) (entity + 4) && arg2 != 0) {
+			slot[i].entityId = -1;
+			slot[i].assignmentId = -1;
+			slot[i].state = (default_val > 0xb) ? 4 : 3;
+			slot[i].count = 0;
+			result |= 1;
+		}
+		else if (slot[i].assignmentId == *(int*) (entity + 4)) {
+			slot[i].assignmentId = -1;
+			slot[i].state = 1;
+		}
 	}
+	if (*(char*) (entity + 0x168) != 0) {
+		for (i = 0; i < 0x2a; i++) {
+			if (slot[i].role == *(char*) (entity + 0x168)) {
+				if (slot[i].count > 0) {
+					slot[i].count--;
+					result |= 1;
+				}
+			}
+		}
+	}
+	if (arg2 != 0) {
+		*(char*) (entity + 0x166) = 0;
+		*(char*) (entity + 0x169) = 0;
+	}
+	*(char*) (entity + 0x168) = 0;
 }
 
 /* File I/O loader for office data (Aemter). Reads office

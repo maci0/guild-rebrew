@@ -1,944 +1,138 @@
+/* gm_RefreshMarketAvailability — refreshes the market item availability. */
+
 // FUNCTION: SERVER 0x10015f70
+
 #include "../../../Units/Error/error.h"
-#include "../../../Units/m_alloc/m_alloc.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <windows.h>
-typedef int(__cdecl* ALLOCFN)(int, int, int);
+#include <stddef.h>
 
-#pragma intrinsic(memcpy, memset)
+extern int g_active_player_count; /* 0x1003543c */
+extern unsigned char g_current_season; /* 0x10035439 */
+extern char* g_slot_array; /* 0x1009b770 */
+extern char* g_item_def_table; /* 0x101de450 */
+extern int g_entity_type_table; /* 0x100a8c30 */
 
-// SIZE 0x2c
-#pragma pack(push, 1)
-// SIZE 0x43
-typedef struct {
-	short active;
-	int id;
-	char pad[0x3d];
-} Record;
-#pragma pack(pop)
-
-extern char* g_entity_table; /* 0x101de450 */
-extern int g_entity_type_table;
-extern unsigned char g_current_season;
-extern int g_active_player_count;
-extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
-
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) void __cdecl gm_RefreshMarketAvailability(int season)
-{
-	__asm {
-		_emit 0x83
-		_emit 0xec
-		_emit 0x28
-		_emit 0x56
-		_emit 0x6a
-		_emit 0x0a
-		_emit 0x6a
-		_emit 0x05
-		_emit 0x6a
-		_emit 0x01
-		_emit 0xc7
-		_emit 0x44
-		_emit 0x24
-		_emit 0x18
-		_emit 0x92
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x44
-		_emit 0x24
-		_emit 0x1c
-		_emit 0x93
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x44
-		_emit 0x24
-		_emit 0x20
-		_emit 0x94
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x44
-		_emit 0x24
-		_emit 0x24
-		_emit 0x95
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x44
-		_emit 0x24
-		_emit 0x28
-		_emit 0x96
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x44
-		_emit 0x24
-		_emit 0x2c
-		_emit 0x97
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x44
-		_emit 0x24
-		_emit 0x30
-		_emit 0xdb
-		_emit 0x02
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x44
-		_emit 0x24
-		_emit 0x34
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xe8
-		_emit 0x21
-		_emit 0x11
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x0c
-		_emit 0xa3
-		_emit 0x3c
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x75
-		_emit 0x1e
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x68
-		_emit 0x2c
-		_emit 0x12
-		_emit 0x03
-		_emit 0x10
-		_emit 0x68
-		_emit 0xcf
-		_emit 0x07
-		_emit 0x00
-		_emit 0x00
-		_emit 0x68
-		_emit 0x04
-		_emit 0x10
-		_emit 0x03
-		_emit 0x10
-		_emit 0xe8
-		_emit 0x5f
-		_emit 0xd6
-		_emit 0xfe
-		_emit 0xff
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x5e
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x28
-		_emit 0xc3
-		_emit 0x8b
-		_emit 0x4c
-		_emit 0x24
-		_emit 0x30
-		_emit 0x33
-		_emit 0xd2
-		_emit 0x8b
-		_emit 0xc1
-		_emit 0x8a
-		_emit 0x15
-		_emit 0x39
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		_emit 0xc1
-		_emit 0xe0
-		_emit 0x04
-		_emit 0x03
-		_emit 0xc1
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x80
-		_emit 0x8d
-		_emit 0x34
-		_emit 0xc1
-		_emit 0xc1
-		_emit 0xe6
-		_emit 0x04
-		_emit 0x81
-		_emit 0xc6
-		_emit 0x70
-		_emit 0xb7
-		_emit 0x09
-		_emit 0x10
-		_emit 0x3b
-		_emit 0xca
-		_emit 0x89
-		_emit 0x74
-		_emit 0x24
-		_emit 0x08
-		_emit 0x0f
-		_emit 0x85
-		_emit 0x1e
-		_emit 0x02
-		_emit 0x00
-		_emit 0x00
-		_emit 0x8d
-		_emit 0x46
-		_emit 0x04
-		_emit 0xb9
-		_emit 0x55
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc7
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x05
-		_emit 0x80
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x49
-		_emit 0x75
-		_emit 0xf2
-		_emit 0x53
-		_emit 0x57
-		_emit 0x6a
-		_emit 0x06
-		_emit 0x6a
-		_emit 0x01
-		_emit 0xe8
-		_emit 0xa8
-		_emit 0x10
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x08
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x0f
-		_emit 0x84
-		_emit 0xee
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x55
-		_emit 0x33
-		_emit 0xd2
-		_emit 0x8b
-		_emit 0x3d
-		_emit 0x30
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-		_emit 0x8a
-		_emit 0x10
-		_emit 0x03
-		_emit 0xfa
-		_emit 0x8d
-		_emit 0x0c
-		_emit 0x52
-		_emit 0xc1
-		_emit 0xe1
-		_emit 0x04
-		_emit 0x03
-		_emit 0xca
-		_emit 0x8d
-		_emit 0x0c
-		_emit 0x49
-		_emit 0x80
-		_emit 0x3c
-		_emit 0x8f
-		_emit 0x0a
-		_emit 0x0f
-		_emit 0x84
-		_emit 0xbe
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x8b
-		_emit 0x50
-		_emit 0x5d
-		_emit 0x68
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x6a
-		_emit 0x00
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x52
-		_emit 0xe8
-		_emit 0xe9
-		_emit 0x03
-		_emit 0x00
-		_emit 0x00
-		_emit 0x8b
-		_emit 0xd8
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x85
-		_emit 0xdb
-		_emit 0x89
-		_emit 0x5c
-		_emit 0x24
-		_emit 0x10
-		_emit 0xc7
-		_emit 0x44
-		_emit 0x24
-		_emit 0x3c
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x0f
-		_emit 0x84
-		_emit 0x93
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x8b
-		_emit 0xfe
-		_emit 0x83
-		_emit 0x7c
-		_emit 0x24
-		_emit 0x3c
-		_emit 0x55
-		_emit 0x0f
-		_emit 0x8d
-		_emit 0x86
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x66
-		_emit 0x8b
-		_emit 0x07
-		_emit 0x66
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x74
-		_emit 0x6a
-		_emit 0x25
-		_emit 0xff
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-		_emit 0x50
-		_emit 0x8b
-		_emit 0x43
-		_emit 0x14
-		_emit 0x6a
-		_emit 0x00
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x50
-		_emit 0xe8
-		_emit 0xa8
-		_emit 0x03
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x74
-		_emit 0x50
-		_emit 0x33
-		_emit 0xc0
-		_emit 0xc7
-		_emit 0x47
-		_emit 0x04
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x66
-		_emit 0x8b
-		_emit 0x07
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		_emit 0x8b
-		_emit 0xc8
-		_emit 0xbb
-		_emit 0x55
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc1
-		_emit 0xe1
-		_emit 0x06
-		_emit 0x03
-		_emit 0xd1
-		_emit 0x03
-		_emit 0xc2
-		_emit 0x8b
-		_emit 0xd6
-		_emit 0x8d
-		_emit 0x48
-		_emit 0x2e
-		_emit 0xbe
-		_emit 0x04
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x66
-		_emit 0x8b
-		_emit 0x2a
-		_emit 0x66
-		_emit 0x3b
-		_emit 0x29
-		_emit 0x75
-		_emit 0x07
-		_emit 0xc7
-		_emit 0x42
-		_emit 0x04
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc1
-		_emit 0x02
-		_emit 0x4e
-		_emit 0x75
-		_emit 0xeb
-		_emit 0x81
-		_emit 0xc2
-		_emit 0x80
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x4b
-		_emit 0x75
-		_emit 0xda
-		_emit 0x8b
-		_emit 0x5c
-		_emit 0x24
-		_emit 0x10
-		_emit 0x8b
-		_emit 0x74
-		_emit 0x24
-		_emit 0x14
-		_emit 0x8b
-		_emit 0x4c
-		_emit 0x24
-		_emit 0x3c
-		_emit 0x41
-		_emit 0x81
-		_emit 0xc7
-		_emit 0x80
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x89
-		_emit 0x4c
-		_emit 0x24
-		_emit 0x3c
-		_emit 0xe9
-		_emit 0x6f
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-		_emit 0xe8
-		_emit 0x58
-		_emit 0x0e
-		_emit 0x00
-		_emit 0x00
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x0f
-		_emit 0x85
-		_emit 0x14
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-		_emit 0x5d
-		_emit 0xbb
-		_emit 0x55
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x3c
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		_emit 0x33
-		_emit 0xc0
-		_emit 0x66
-		_emit 0x8b
-		_emit 0x46
-		_emit 0x3c
-		_emit 0x8b
-		_emit 0x51
-		_emit 0x5d
-		_emit 0x50
-		_emit 0x6a
-		_emit 0x00
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x52
-		_emit 0xe8
-		_emit 0x10
-		_emit 0x03
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x74
-		_emit 0x4a
-		_emit 0x8b
-		_emit 0x40
-		_emit 0x14
-		_emit 0x68
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x6a
-		_emit 0x00
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x50
-		_emit 0xe8
-		_emit 0xf7
-		_emit 0x02
-		_emit 0x00
-		_emit 0x00
-		_emit 0x8b
-		_emit 0xf8
-		_emit 0x8b
-		_emit 0x46
-		_emit 0x04
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x74
-		_emit 0x2c
-		_emit 0x8b
-		_emit 0x57
-		_emit 0x14
-		_emit 0x33
-		_emit 0xc9
-		_emit 0x66
-		_emit 0x8b
-		_emit 0x0e
-		_emit 0x51
-		_emit 0x6a
-		_emit 0x00
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x52
-		_emit 0xe8
-		_emit 0xd8
-		_emit 0x02
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x75
-		_emit 0x12
-		_emit 0x66
-		_emit 0x8b
-		_emit 0x06
-		_emit 0x8b
-		_emit 0x4f
-		_emit 0x02
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x50
-		_emit 0x51
-		_emit 0xe8
-		_emit 0xc2
-		_emit 0x05
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x0c
-		_emit 0x81
-		_emit 0xc6
-		_emit 0x80
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x4b
-		_emit 0x75
-		_emit 0x8c
-		_emit 0xb8
-		_emit 0x92
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x8d
-		_emit 0x7c
-		_emit 0x24
-		_emit 0x14
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x3c
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		_emit 0x33
-		_emit 0xdb
-		_emit 0x50
-		_emit 0x53
-		_emit 0x8b
-		_emit 0x42
-		_emit 0x5d
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x50
-		_emit 0xe8
-		_emit 0x98
-		_emit 0x02
-		_emit 0x00
-		_emit 0x00
-		_emit 0x8b
-		_emit 0xf0
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x85
-		_emit 0xf6
-		_emit 0x74
-		_emit 0x58
-		_emit 0x8b
-		_emit 0x4e
-		_emit 0x14
-		_emit 0x68
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x53
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x51
-		_emit 0xe8
-		_emit 0x7e
-		_emit 0x02
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x74
-		_emit 0x40
-		_emit 0x8b
-		_emit 0x50
-		_emit 0x14
-		_emit 0x6a
-		_emit 0x05
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x52
-		_emit 0xe8
-		_emit 0x6a
-		_emit 0x02
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x0c
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x74
-		_emit 0x0a
-		_emit 0x43
-		_emit 0xe8
-		_emit 0x8d
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x75
-		_emit 0xf6
-		_emit 0x8b
-		_emit 0x46
-		_emit 0x14
-		_emit 0x6a
-		_emit 0x11
-		_emit 0x6a
-		_emit 0x04
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x50
-		_emit 0xe8
-		_emit 0x4a
-		_emit 0x02
-		_emit 0x00
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x74
-		_emit 0x0c
-		_emit 0x33
-		_emit 0xc9
-		_emit 0x8a
-		_emit 0x48
-		_emit 0x1c
-		_emit 0x3b
-		_emit 0xcb
-		_emit 0x74
-		_emit 0x03
-		_emit 0x88
-		_emit 0x58
-		_emit 0x1c
-		_emit 0x8b
-		_emit 0x47
-		_emit 0x04
-		_emit 0x83
-		_emit 0xc7
-		_emit 0x04
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x75
-		_emit 0x80
-		_emit 0x5f
-		_emit 0x5b
-		_emit 0x5e
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x28
-		_emit 0xc3
-	}
-}
-#else
+/* Rebuilds the market slots for the given season: seeds the slot table
+ * from the market object list, marks matching item definitions as
+ * available, allocates missing objects and tracks per-item counts. */
 void __cdecl gm_RefreshMarketAvailability(int season)
 {
-	int base;
-	int resource_types[8];
+	unsigned int local_20;
+	unsigned int local_1c[7];
+	char* slot_base;
+	char* slot;
+	char* base;
+	char* def;
+	void* pb;
+	unsigned short* q;
+	unsigned short* result;
+	unsigned short* r2;
+	int* pv;
+	int counter;
+	int outer;
+	int inner;
+	int count;
+	int i;
+	int id;
+	int mbase;
 
-	resource_types[0] = 0x92;
-	resource_types[1] = 0x93;
-	resource_types[2] = 0x94;
-	resource_types[3] = 0x95;
-	resource_types[4] = 0x96;
-	resource_types[5] = 0x97;
-	resource_types[6] = 0x2db;
-	resource_types[7] = 0;
+	local_20 = 0x92;
+	local_1c[0] = 0x93;
+	local_1c[1] = 0x94;
+	local_1c[2] = 0x95;
+	local_1c[3] = 0x96;
+	local_1c[4] = 0x97;
+	local_1c[5] = 0x2db;
+	local_1c[6] = 0;
 
-	g_active_player_count = (int) gm_StartFilteredEntitySearch(1, 5, 10);
+	g_active_player_count = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
 	if (g_active_player_count == 0) {
-		LogMessageInternal((char*) 0x10031004, 0x7cf, (char*) 0x1003122c, 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x7cf,
+			"gm_ObjectsAvailble - Kein Markt", 1);
 		return;
 	}
 
-	{
-		int ecx;
-		int eax;
-		ecx = season;
-		eax = ecx;
-		eax = eax << 4;
-		eax = eax + ecx;
-		eax = eax + eax * 4;
-		base = ecx + eax * 8;
-		base = base << 4;
-		base = base + 0x1009b770;
-	}
+	slot_base = g_slot_array + season * 0x2a90;
+	if (season == g_current_season) {
+		slot = slot_base + 4;
+		for (i = 0x55; i != 0; i--) {
+			*(int*) slot = 0;
+			slot += 0x80;
+		}
 
-	if (season != g_current_season) {
-		return;
-	}
-
-	/* Clear offset 4 of each of 0x55 slots (stride 0x80) */
-	{
-		int ptr;
-		int cnt;
-		ptr = base + 4;
-		cnt = 0x55;
-		do {
-			*(int*) ptr = 0;
-			ptr += 0x80;
-			cnt--;
-		} while (cnt != 0);
-	}
-
-	/* First major loop: iterate filtered entities */
-	{
-		int entity_ptr;
-		entity_ptr = (int) gm_StartFilteredEntitySearch(1, 6);
-		if (entity_ptr != 0) {
-			do {
-				int byteVal;
-				int edi;
-				int ecx2;
-				byteVal = *(unsigned char*) entity_ptr;
-				edi = g_entity_type_table;
-				edi += byteVal;
-				ecx2 = byteVal + byteVal * 2;
-				ecx2 = ecx2 << 4;
-				ecx2 = ecx2 + byteVal;
-				ecx2 = ecx2 + ecx2 * 2;
-				if (*(char*) (edi + ecx2 * 4) != '\n') {
-					int query_result;
-					query_result = (int) gm_StartEntityQuery(*(int*) (entity_ptr + 0x5d), 1, 0, 0xff);
-					season = 0;
-					if (query_result != 0) {
-						int pSlot;
-						pSlot = base;
-						while (season < 0x55) {
-							if (*(short*) pSlot != 0) {
-								int inner_query;
-								inner_query = (int)
-									gm_StartEntityQuery(*(int*) (query_result + 0x14), 1, 0, *(short*) pSlot & 0xffff);
-								if (inner_query != 0) {
-									int rowId;
-									int edx2;
-									int pOuter;
-									int pInner;
-									int outerCount;
-									int pInnerCount;
-									*(int*) (pSlot + 4) = 1;
-									rowId = *(short*) pSlot & 0xffff;
-									edx2 = *(int*) g_item_def_table;
-									edx2 = edx2 + (rowId << 6);
-									edx2 = edx2 + rowId;
-									pOuter = base;
-									outerCount = 0x55;
-									do {
-										pInner = edx2 + 0x2e;
-										pInnerCount = 4;
-										do {
-											if (*(short*) pOuter == *(short*) pInner) {
-												*(int*) (pOuter + 4) = 1;
-											}
-											pInner += 2;
-											pInnerCount--;
-										} while (pInnerCount != 0);
-										pOuter += 0x80;
-										outerCount--;
-									} while (outerCount != 0);
+		pb = gm_StartFilteredEntitySearch(1, 6);
+		while (pb != 0) {
+			if (*(char*)(g_entity_type_table + *(unsigned char*) pb * 0x24d) != '\n') {
+				q = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) pb + 0x5d), 1, 0, 0xff);
+				if (q != 0) {
+					counter = 0;
+					slot = slot_base;
+					while (counter < 0x55) {
+						if (*(unsigned short*) slot != 0) {
+							if (gm_StartEntityQuery(*(int*)((char*) q + 0x14), 1, 0, *(unsigned short*) slot) != 0) {
+								*(int*)(slot + 4) = 1;
+								base = slot_base;
+								for (outer = 0x55; outer != 0; outer--) {
+									def = g_item_def_table + *(unsigned short*) slot * 0x41 + 0x2e;
+									for (inner = 4; inner != 0; inner--) {
+										if (*(unsigned short*) base == *(unsigned short*) def)
+											*(int*)(base + 4) = 1;
+										def += 2;
+									}
+									base += 0x80;
 								}
 							}
-							season++;
-							pSlot += 0x80;
 						}
+						counter++;
+						slot += 0x80;
 					}
 				}
-				entity_ptr = (int) FindNextFilteredEntity();
-			} while (entity_ptr != 0);
+			}
+			pb = FindNextFilteredEntity();
 		}
-	}
 
-	/* Second major loop: 0x55 iterations over base array */
-	{
-		int query_result;
-		int esi;
-		query_result = 0x55;
-		esi = base;
-		do {
-			int inner_query;
-			int outer_query;
-			int edi;
-			inner_query = g_active_player_count;
-			{
-				int ax;
-				ax = *(short*) (esi + 0x3c) & 0xffff;
-				outer_query = (int) gm_StartEntityQuery(*(int*) (inner_query + 0x5d), 1, 0, ax);
-				if (outer_query != 0) {
-					edi = (int) gm_StartEntityQuery(*(int*) (outer_query + 0x14), 1, 0, 0xff);
-					if (*(int*) (esi + 4) != 0) {
-						int edx;
-						int cx;
-						edx = *(int*) (edi + 0x14);
-						cx = *(short*) esi & 0xffff;
-						inner_query = (int) gm_StartEntityQuery(edx, 1, 0, cx);
-						if (inner_query == 0) {
-							gm_AllocObjekt(*(int*) (edi + 2), *(short*) esi & 0xffff, 1);
-						}
+		slot = slot_base;
+		for (i = 0x55; i != 0; i--) {
+			mbase = g_active_player_count;
+			result = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) mbase + 0x5d), 1, 0, *(unsigned short*)(slot + 0x3c));
+			if (result != 0) {
+				result = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) result + 0x14), 1, 0, 0xff);
+				if (result != 0 && *(int*)(slot + 4) != 0) {
+					r2 = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) result + 0x14), 1, 0, *(unsigned short*) slot);
+					if (r2 == 0) {
+						gm_AllocObjekt(*(int*)((char*) result + 2), *(unsigned short*) slot, 1);
 					}
 				}
 			}
-			esi += 0x80;
-			query_result--;
-		} while (query_result != 0);
-	}
+			slot += 0x80;
+		}
 
-	/* Third loop: iterate over resource_types array */
-	{
-		int resource_id;
-		int* pArr;
-		resource_id = 0x92;
-		pArr = &resource_types[0];
+		id = 0x92;
+		q = (unsigned short*) &local_20;
 		do {
-			int inner_query;
-			int outer_query;
-			int count_query;
-			int uCount;
-			uCount = 0;
-			outer_query = (int) gm_StartEntityQuery(*(int*) (g_active_player_count + 0x5d), 1, 0, resource_id);
-			if (outer_query != 0) {
-				inner_query = (int) gm_StartEntityQuery(*(int*) (outer_query + 0x14), 1, 0, 0xff);
-				if (inner_query != 0) {
-					count_query = (int) gm_StartEntityQuery(*(int*) (inner_query + 0x14), 1, 5);
-					while (count_query != 0) {
-						uCount++;
-						count_query = (int) gm_NextEntityQueryMatch();
+			count = 0;
+			result = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) g_active_player_count + 0x5d), 1, 0, id);
+			if (result != 0) {
+				r2 = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) result + 0x14), 1, 0, 0xff);
+				if (r2 != 0) {
+					r2 = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) r2 + 0x14), 1, count);
+					while (r2 != 0) {
+						count++;
+						r2 = (unsigned short*) gm_NextEntityQueryMatch();
 					}
-					count_query = (int) gm_StartEntityQuery(*(int*) (outer_query + 0x14), 1, 4, 0x11);
-					if (count_query != 0) {
-						if ((*(unsigned char*) (count_query + 0x1c) & 0xff) != uCount) {
-							*(unsigned char*) (count_query + 0x1c) = (unsigned char) uCount;
-						}
-					}
+					result = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) result + 0x14), 1, 4, 0x11);
+					if (result != 0 && *(unsigned char*)((char*) result + 0x1c) != count)
+						*(unsigned char*)((char*) result + 0x1c) = (unsigned char) count;
 				}
 			}
-			pArr = pArr + 1;
-			resource_id = *pArr;
-		} while (resource_id != 0);
+			id = (int) q[1];
+			q += 2;
+		} while (id != 0);
 	}
 }
-#endif
-
-/* Finds a slot by ID in the entity slot table. Returns
- * the slot pointer or NULL if not found. */

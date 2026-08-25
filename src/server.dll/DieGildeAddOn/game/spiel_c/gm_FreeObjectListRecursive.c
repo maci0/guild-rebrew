@@ -1,94 +1,41 @@
-/* gm_FreeObjectListRecursive — fenced _emit. */
+/* gm_FreeObjectListRecursive — unlink and dispose every node of the object
+ * linked list rooted at *head (each node is a 0x43-byte pool slot).
+ * Recursively frees each node's child list (offset 0x14) first, then hands
+ * the node to gm_NoopRet2 (a free stub). Returns -1 on an empty list. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10016710
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl gm_FreeObjectListRecursive(int a, int b, int c)
+#include <stdlib.h>
+
+#pragma pack(push, 1)
+typedef struct EntitySlot {
+	short active;               /* 0x00 */
+	int id;                     /* 0x02 */
+	char pad[0x0e];             /* 0x06 */
+	void* child;                /* 0x14 */
+	char pad2[0x3f - 0x18];     /* 0x18 */
+	struct EntitySlot* next;    /* 0x3f */
+} EntitySlot;
+#pragma pack(pop)
+
+void __cdecl gm_NoopRet2(void* node);
+
+int __cdecl gm_FreeObjectListRecursive(EntitySlot** head)
 {
-	__asm {
-		_emit 0x56
-		_emit 0x57
-		_emit 0x8b
-		_emit 0x7c
-		_emit 0x24
-		_emit 0x0c
-		_emit 0x85
-		_emit 0xff
-		_emit 0x74
-		_emit 0x33
-		_emit 0x8b
-		_emit 0x37
-		_emit 0x85
-		_emit 0xf6
-		_emit 0x75
-		_emit 0x06
-		_emit 0x5f
-		_emit 0x83
-		_emit 0xc8
-		_emit 0xff
-		_emit 0x5e
-		_emit 0xc3
-		_emit 0x8b
-		_emit 0x46
-		_emit 0x3f
-		_emit 0x89
-		_emit 0x07
-		_emit 0x8b
-		_emit 0x4e
-		_emit 0x14
-		_emit 0x8d
-		_emit 0x46
-		_emit 0x14
-		_emit 0x85
-		_emit 0xc9
-		_emit 0x74
-		_emit 0x09
-		_emit 0x50
-		_emit 0xe8
-		_emit 0xd5
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		_emit 0x56
-		_emit 0xe8
-		_emit 0x2c
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-		_emit 0x8b
-		_emit 0x37
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		_emit 0x85
-		_emit 0xf6
-		_emit 0x75
-		_emit 0xd9
-		_emit 0x5f
-		_emit 0x33
-		_emit 0xc0
-		_emit 0x5e
-		_emit 0xc3
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-	}
+	EntitySlot* node;
+
+	if (head == NULL)
+		return 0;
+	node = *head;
+	if (node == NULL)
+		return -1;
+	do {
+		*head = node->next;
+		if (node->child != NULL)
+			gm_FreeObjectListRecursive((EntitySlot**) &node->child);
+		gm_NoopRet2(node);
+		node = *head;
+	} while (node != NULL);
+	return 0;
 }
-#else
-int __cdecl gm_FreeObjectListRecursive(int a, int b, int c) { return 0; }
-#endif

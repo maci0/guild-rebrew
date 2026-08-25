@@ -67,118 +67,51 @@ struct LinkedListNode {
 // DATA: SERVER 0x10028aec
 // DATA: SERVER 0x10028888
 
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x10006c00 (283B).
-// Complex shutdown routine (sprintf report buffer, global-counter walk,
-// linked-list teardown) — no C conversion attempted; kept fenced-naked.
-__declspec(naked) void __cdecl ShutdownMemoryAllocator(void)
-{
-	__asm {
-		mov eax, dword ptr [g_stat2]
-		mov ecx, dword ptr [g_stat1]
-		sub esp, 0x400
-		push ebx
-		xor ebx, ebx
-		push esi
-		cmp eax, ebx
-		push edi
-		jne L_have_alloc
-		cmp ecx, ebx
-		jne L_have_alloc
-		cmp dword ptr [g_flag_3c], ebx
-		je L_cleanup_list
-		jmp L_report_groups
-	L_have_alloc:
-		push ecx
-		mov ecx, dword ptr [g_stat4]
-		push eax
-		mov eax, dword ptr [g_stat3]
-		push eax
-		push ecx
-		lea edx, [esp + 0x1c]
-		push 0x10028b04
-		push edx
-		call sprintf
-		lea eax, [esp + 0x24]
-		push eax
-		call ReportMessage
-		mov eax, dword ptr [g_flag_3c]
-		add esp, 0x1c
-		cmp eax, ebx
-		je L_check_array
-	L_report_groups:
-		push ebx
-		call ReportMemoryGroupInfo
-		add esp, 4
-	L_check_array:
-		mov eax, dword ptr [g_array_count]
-		xor edi, edi
-		cmp eax, ebx
-		jle L_cleanup_list
-		mov ecx, dword ptr [g_array_ptr]
-		lea esi, [ecx + 8]
-	L_array_loop:
-		cmp dword ptr [esi], ebx
-		je L_array_next
-		mov edx, dword ptr [esi - 4]
-		lea eax, [esp + 0xc]
-		push edx
-		push 0x10028aec
-		push eax
-		call sprintf
-		lea ecx, [esp + 0x18]
-		push 1
-		push ecx
-		push 0x203
-		push 0x10028888
-		call LogMessageInternal
-		mov edx, dword ptr [esi]
-		push edx
-		call m_FreeHeapLocked
-		add esp, 0x20
-		mov dword ptr [esi], ebx
-	L_array_next:
-		mov eax, dword ptr [g_array_count]
-		inc edi
-		add esi, 0x10
-		cmp edi, eax
-		jl L_array_loop
-	L_cleanup_list:
-		mov eax, dword ptr [g_list_head]
-		mov dword ptr [g_stat4], ebx
-		cmp eax, ebx
-		mov dword ptr [g_stat2], ebx
-		mov dword ptr [g_stat3], ebx
-		mov dword ptr [g_stat1], ebx
-		mov dword ptr [g_array_count], ebx
-		je L_free_array
-	L_list_loop:
-		mov esi, dword ptr [eax + 0x24]
-		push eax
-		call m_FreeHeapLocked
-		add esp, 4
-		cmp esi, ebx
-		mov eax, esi
-		jne L_list_loop
-	L_free_array:
-		mov eax, dword ptr [g_array_ptr]
-		push eax
-		call m_FreeHeapLocked
-		add esp, 4
-		mov dword ptr [g_array_ptr], ebx
-		pop edi
-		pop esi
-		pop ebx
-		add esp, 0x400
-		ret
-	}
-}
-#else
 void __cdecl ShutdownMemoryAllocator(void)
 {
-	/* C fallback (no byte-matching conversion; see Finding 19). */
+	char buf[0x3f0];
+	char buf2[0xc];
+	int i;
+	char* item;
+	char* node;
+	char* next;
+
+	if (g_stat2 != 0 || g_stat1 != 0) {
+		sprintf(buf, "[*] Memory-Shutdown-Anomaly: [*]\nUsed %i blocks in %i bytes.\n\n%i block(s) left in %i bytes.", g_stat4, g_stat3, g_stat2, g_stat1);
+		ReportMessage(buf);
+		if (g_flag_3c != 0) {
+			ReportMemoryGroupInfo(0);
+		}
+	} else {
+		if (g_flag_3c == 0) {
+			goto cleanup;
+		}
+		ReportMemoryGroupInfo(0);
+	}
+	for (i = 0; i < g_array_count; i++) {
+		item = (char*) g_array_ptr + 8 + i * 0x10;
+		if (*(char**) item != 0) {
+			sprintf(buf2, "-> Pointer not freed:%s", *(char**) (item - 4));
+			LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x203, buf2, 1);
+			m_FreeHeapLocked(*(void**) item);
+			*(char**) item = 0;
+		}
+	}
+cleanup:
+	g_stat4 = 0;
+	g_stat2 = 0;
+	g_stat3 = 0;
+	g_stat1 = 0;
+	g_array_count = 0;
+	node = (char*) g_list_head;
+	while (node != 0) {
+		next = *(char**) (node + 0x24);
+		m_FreeHeapLocked(node);
+		node = next;
+	}
+	m_FreeHeapLocked((void*) g_array_ptr);
+	g_array_ptr = 0;
 }
-#endif
 
 /* Allocates a block from the packet pool free list. Falls back
  * to HeapAlloc if the pool is exhausted. Thread-safe via
@@ -200,146 +133,55 @@ struct BlockNode {
 	struct BlockNode* next;
 };
 
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x10006d20 (270B).
-// Pool allocation with the alignment-aware memset pass (Finding 19) and
-// param-slot reuse — no C conversion attempted; kept fenced-naked.
-__declspec(naked) void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
-{
-	(void) head;
-	(void) size;
-	(void) max_items;
-	__asm {
-		push ebp
-		mov ebp, esp
-		push ebx
-		mov ebx, dword ptr [ebp + 8]
-		push esi
-		push edi
-		test ebx, ebx
-		je L_fail
-		mov eax, dword ptr [ebp + 0xc]
-		test eax, eax
-		jbe L_fail
-		mov edi, dword ptr [ebp + 0x10]
-		test edi, edi
-		jle L_fail
-		lea esi, [eax + 4]
-		and eax, 3
-		jle L_after_align
-		mov ecx, 4
-		sub ecx, eax
-		add esi, ecx
-	L_after_align:
-		mov eax, dword ptr [ebx]
-		test eax, eax
-		jne L_search
-		mov edx, esi
-		push offset g_str_10028b78
-		imul edx, edi
-		add edx, 0x10
-		push edx
-		call m_AllocTracked
-		mov dword ptr [ebx], eax
-		add esp, 8
-		mov dword ptr [eax], 0
-		mov dword ptr [eax + 4], edi
-		mov dword ptr [eax + 8], esi
-		mov dword ptr [eax + 0xc], 0
-		jmp L_scan
-	L_search:
-		mov ecx, dword ptr [eax]
-		mov edx, dword ptr [eax + 4]
-		cmp ecx, edx
-		jge L_next
-		cmp dword ptr [eax + 8], esi
-		je L_found_node
-	L_next:
-		mov eax, dword ptr [eax + 0xc]
-		test eax, eax
-		jne L_search
-		jmp L_alloc_new
-	L_found_node:
-		test eax, eax
-		jne L_scan
-	L_alloc_new:
-		mov edx, esi
-		push offset g_str_10028b60
-		imul edx, edi
-		add edx, 0x10
-		push edx
-		call m_AllocTracked
-		mov dword ptr [eax], 0
-		mov dword ptr [eax + 4], edi
-		mov dword ptr [eax + 8], esi
-		mov ecx, dword ptr [ebx]
-		mov dword ptr [eax + 0xc], ecx
-		add esp, 8
-		mov dword ptr [ebx], eax
-	L_scan:
-		mov edi, dword ptr [eax + 4]
-		xor ecx, ecx
-		test edi, edi
-		lea edx, [eax + 0x10]
-		jle L_fail
-	L_scan_loop:
-		cmp dword ptr [edx], 0
-		je L_slot_found
-		mov ebx, dword ptr [eax + 8]
-		inc ecx
-		add edx, ebx
-		cmp ecx, edi
-		jl L_scan_loop
-	L_fail:
-		pop edi
-		pop esi
-		xor eax, eax
-		pop ebx
-		pop ebp
-		ret
-	L_slot_found:
-		mov ecx, dword ptr [eax]
-		add edx, 4
-		inc ecx
-		add esi, -4
-		mov dword ptr [eax], ecx
-		mov dword ptr [edx - 4], eax
-		mov dword ptr [ebp + 0xc], edx
-		mov dword ptr [ebp + 8], esi
-		mov edi, dword ptr [ebp + 0xc]
-		mov ebx, dword ptr [ebp + 8]
-		xor eax, eax
-		lea ecx, [edi + edi*2]
-		and ecx, 3
-		sub ebx, ecx
-		jle L_after_memset
-		rep stosb
-		mov ecx, ebx
-		and ebx, 3
-		shr ecx, 2
-		rep stosd
-	L_after_memset:
-		add ecx, ebx
-		rep stosb
-		pop edi
-		pop esi
-		mov eax, edx
-		pop ebx
-		pop ebp
-		ret
-	}
-}
-#else
 void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 {
-	/* C fallback (no byte-matching conversion; alignment pass + param-slot
-	 * reuse — see Findings 19/25). */
-	(void) head;
-	(void) size;
-	(void) max_items;
-	return 0;
+	int asize;
+	struct BlockNode* block;
+	int i;
+	char* slot;
+
+	if (head == 0 || (unsigned int) size == 0 || max_items <= 0) {
+		return 0;
+	}
+	asize = size + 4;
+	if ((size & 3) > 0) {
+		asize += 4 - (size & 3);
+	}
+	block = *head;
+	if (block != 0) {
+		while (block->count >= block->max || block->size != asize) {
+			block = block->next;
+			if (block == 0) {
+				break;
+			}
+		}
+	}
+	if (block == 0) {
+		block = (struct BlockNode*) m_AllocTracked(asize * max_items + 0x10, "m:pool_get_free(tp_m_pool)");
+		block->count = 0;
+		block->max = max_items;
+		block->size = asize;
+		block->next = *head;
+		*head = block;
+	}
+	if (block->max <= 0) {
+		return 0;
+	}
+	slot = (char*) block + 0x10;
+	for (i = 0; i < block->max; i++) {
+		if (*(int*) slot == 0) {
+			break;
+		}
+		slot += asize;
+	}
+	if (i >= block->max) {
+		return 0;
+	}
+	block->count++;
+	slot += 4;
+	memset(slot, 0, asize - 4);
+	return slot;
 }
-#endif
 
 /* Returns a block to the packet pool free list. Adds the block
  * back to the free chain for reuse. */
@@ -347,119 +189,40 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 // FUNCTION: SERVER 0x10006E30
 // m_PoolFree
 
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x10006e30 (137B).
-// C conversion blocker (docs/msvc6-allocator.md Finding 25): the allocator
-// keeps the block param in esi (ref: edx with a stack reload for the list
-// walk) and inlines the fatal block (ref: sunk to the end).  All 7 C
-// formulations normalize to the same 133B.
-__declspec(naked) void __cdecl m_PoolFree(int* pool, int* block)
-{
-	(void) pool;
-	(void) block;
-	__asm {
-		mov edx, dword ptr [esp + 8]
-		push esi
-		lea ecx, [edx - 4]
-		test ecx, ecx
-		je L_fatal
-		mov eax, dword ptr [ecx]
-		test eax, eax
-		je L_fatal
-		lea esi, [eax + 0x10]
-		cmp edx, esi
-		jb L_fatal
-		mov esi, dword ptr [eax + 8]
-		imul esi, dword ptr [eax + 4]
-		lea esi, [esi + eax + 0x10]
-		cmp edx, esi
-		jae L_fatal
-		mov dword ptr [ecx], 0
-		mov ecx, dword ptr [eax]
-		dec ecx
-		mov dword ptr [eax], ecx
-		jne L_done
-		mov ecx, dword ptr [esp + 8]
-		mov edx, dword ptr [ecx]
-		cmp eax, edx
-		jne L_walk_list
-		mov edx, dword ptr [eax + 0xc]
-		push eax
-		mov dword ptr [ecx], edx
-		call m_FreeTracked
-		add esp, 4
-		pop esi
-		ret
-	L_walk_list:
-		mov ecx, dword ptr [edx + 0xc]
-		cmp ecx, eax
-		je L_unlink
-	L_walk_step:
-		mov edx, ecx
-		mov ecx, dword ptr [edx + 0xc]
-		cmp ecx, eax
-		jne L_walk_step
-	L_unlink:
-		mov ecx, dword ptr [eax + 0xc]
-		push eax
-		mov dword ptr [edx + 0xc], ecx
-		call m_FreeTracked
-		add esp, 4
-		pop esi
-		ret
-	L_fatal:
-		push 0x10028b94
-		push 0x279
-		push 0x10028888
-		call ReportFatalError
-		add esp, 0xc
-	L_done:
-		pop esi
-		ret
-	}
-}
-#else
 void __cdecl m_PoolFree(int* pool, int* block)
 {
-	char* hdr;
-	char* p;
-	int cnt;
-	char* node;
+	int* slot;
+	int* blk;
+	int* prev;
 
-	(void) pool;
-	hdr = (char*) block - 4;
-	if (hdr == 0 || (p = *(char**) hdr) == 0) {
-		goto fatal;
-	}
-	if ((char*) block < p + 0x10) {
-		goto fatal;
-	}
-	if ((char*) block >= p + 0x10 + *(int *) (p + 8) * *(int *) (p + 4)) {
-		goto fatal;
-	}
-	*(char**) hdr = 0;
-	cnt = *(int *) p;
-	cnt--;
-	*(int *) p = cnt;
-	if (cnt != 0) {
+	slot = (int*) ((char*) block - 4);
+	if (slot == 0 || *slot == 0) {
+		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x279, "m_pool_free: tried to free invalid pool-entry (or overwritten void*)!");
 		return;
 	}
-	if (*(char**) block == p) {
-		*(char**) block = *(char**) (p + 0xc);
-		m_FreeTracked(p);
+	blk = (int*) *slot;
+	if ((unsigned int) (char*) block < (unsigned int) ((char*) blk + 0x10) ||
+	    (unsigned int) (char*) block >= (unsigned int) ((char*) blk + 0x10 + blk[2] * blk[1])) {
+		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x279, "m_pool_free: tried to free invalid pool-entry (or overwritten void*)!");
 		return;
 	}
-	node = *(char**) block;
-	while (*(char**) (node + 0xc) != p) {
-		node = *(char**) (node + 0xc);
+	*slot = 0;
+	blk[0]--;
+	if (blk[0] == 0) {
+		if (blk == (int*) *pool) {
+			*pool = blk[3];
+			m_FreeTracked(blk);
+			return;
+		}
+		prev = (int*) *pool;
+		while (prev[3] != (int) blk) {
+			prev = (int*) prev[3];
+		}
+		prev[3] = blk[3];
+		m_FreeTracked(blk);
 	}
-	*(char**) (node + 0xc) = *(char**) (p + 0xc);
-	m_FreeTracked(p);
-	return;
-fatal:
-	ReportFatalError((char*) 0x10028888, 0x279, (char*) 0x10028b94);
 }
-#endif
+
 extern char g_1002a0f8[1];
 char g_str_10028888[1] = {
     0x44,

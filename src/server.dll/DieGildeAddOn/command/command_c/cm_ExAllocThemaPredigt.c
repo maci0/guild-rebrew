@@ -1,15 +1,13 @@
 
 /*
- * BLOCKER_DELTA: 4
- * Ghidra decompilation reference (sizeInBytes=1 BROKEN, use rebrew asm):
+ * Conversion note: the 7-byte payload copy (cmd+0x18 -> obj+0x1c) must be
+ * written as memcpy(dst, src, 7).  MSVC6 /O2 expands the inline memcpy to
+ * dword+word+byte stores and materializes the dst base (lea ecx,[esi+0x1c])
+ * and the adjusted src base (add edi,0x18), byte-matching the reference.
+ * Plain field-by-field pointer stores get folded back to base+offset
+ * addressing (168B vs 172B) or flip the esi/edi allocation.
  *
- * Target uses add edi,0x18 to adjust param_1 base for 7-byte copy
- * (saves 1 byte per source read) and lea ecx,[esi+0x1c] to create
- * dst pointer (saves 1 byte per dest write). MSVC6 /O2 folds these
- * optimizations back to base+offset addressing, producing 168B vs
- * 172B. Adding param_1 += 0x18 generates the add instruction but
- * causes esi/edi register allocation swap. Dead store preserved via
- * dst pointer alias hiding (dst[6] vs pcVar2[0x22]).
+ * Ghidra decompilation reference:
  *
  * int __cdecl cm_ExAllocThemaPredigt(int param_1,char *param_2)
  *
@@ -45,101 +43,41 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern char g_player_slot_0[];
 extern char s_cm_ExAllocThemaPredigt____Execut_1002d184[];
 char* __cdecl gm_AllocObjekt(int, int, int);
 
 /* Execution handler: allocates a sermon theme (Thema Predigt)
  * for a church/religious building entity. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000f2f0
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x1000f2f0.
-// C conversion blocker (docs/msvc6-allocator.md Finding 36): 162/176 —
-// the ref materializes `add edi,0x18` and keeps a dead byte copy
-// (edi+6 → ent+0x22, overwritten by 0); MSVC6 8168 folds the add into
-// the accesses and eliminates the dead store.
-__declspec(naked) int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
+int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 {
-	(void) cmd;
-	(void) result;
-	__asm {
-		_emit 0xa1
-		_emit 0x6c
-		_emit 0x0b
-		_emit 0x03
-		_emit 0x10
-		push esi
-		push edi
-		mov edi, dword ptr [esp + 0xc]
-		mov ecx, dword ptr [edi + 0x14]
-		mov dword ptr [edi + 0x10], eax
-		push ecx
-		push edi
-		call gm_GetFieldByType
-		push 1
-		push 0x1b5
-		push eax
-		mov dword ptr [edi + 0x14], eax
-		call gm_AllocObjekt
-		mov esi, eax
-		add esp, 0x14
-		test esi, esi
-		jne L_alloc_ok
-		pop edi
-		mov eax, 1
-		pop esi
-		ret
-	L_alloc_ok:
-		xor ecx, ecx
-		push 1
-		mov cl, byte ptr [edi + 3]
-		add edi, 0x18
-		mov eax, ecx
-		push 0x1002d184
-		shl eax, 4
-		add eax, ecx
-		push 0x40db
-		shl eax, 8
-		add eax, ecx
-		push 0x1002c748
-		shl eax, 4
-		add eax, ecx
-		lea ecx, [esi + 0x1c]
-		lea edx, [eax + eax*8]
-		mov eax, dword ptr [esi + 2]
-		mov dword ptr [edx*4 + 0x10442d08], eax
-		mov byte ptr [esi + 0x12], 0x40
-		mov edx, dword ptr [edi]
-		mov dword ptr [ecx], edx
-		mov ax, word ptr [edi + 4]
-		mov word ptr [ecx + 4], ax
-		mov dl, byte ptr [edi + 6]
-		mov byte ptr [ecx + 6], dl
-		mov byte ptr [esi + 0x22], 0
-		call LogMessageInternal
-		mov eax, dword ptr [esp + 0x20]
-		add esp, 0x10
-		test eax, eax
-		je L_done
-		mov byte ptr [eax], 1
-		mov byte ptr [eax + 1], 3
-		mov dword ptr [eax + 6], esi
-	L_done:
-		pop edi
-		xor eax, eax
-		pop esi
-		ret
+	int field;
+	char* obj;
+	char* dst;
+	uint f;
+
+	*(int*) (cmd + 0x10) = g_timestamp_0b6c;
+	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
+	*(int*) (cmd + 0x14) = field;
+	obj = gm_AllocObjekt(field, 0x1b5, 1);
+	if (obj == 0) {
+		return 1;
 	}
-}
-#else
-int __cdecl cm_ExAllocThemaPredigt(int arg1, char* result)
-{
-	/* C fallback (no byte-matching conversion; add-edi fold + dead-store
-	 * elim, Finding 36). */
-	(void)arg1;
-	(void)result;
+	f = 0x99099 * (unsigned char) *(char*) (cmd + 3);
+	cmd += 0x18;
+	dst = obj + 0x1c;
+	*(int*) (0x10442d08 + f * 4) = *(int*) (obj + 2);
+	obj[0x12] = 0x40;
+	memcpy(dst, cmd, 7);
+	obj[0x22] = 0;
+	LogMessageInternal((char*) 0x1002c748, 0x40db,
+	                   s_cm_ExAllocThemaPredigt____Execut_1002d184, 1);
+	if (result != 0) {
+		*result = 1;
+		result[1] = 3;
+		*(char**) (result + 6) = obj;
+	}
 	return 0;
 }
-#endif

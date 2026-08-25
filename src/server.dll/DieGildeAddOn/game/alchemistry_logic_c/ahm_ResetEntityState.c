@@ -1,173 +1,48 @@
-/* ahm_ResetEntityState + ahm_CheckFlag — fenced _emit (C is 656B over). */
+/* ahm_ResetEntityState + ahm_CheckFlag - proper C */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+#include <string.h>
+
+/* Resets an alchemy entity's operational state when its type is 1 or 2:
+ * clears the link list head, marks the terminal link as -1 and bumps the
+ * link counter. */
+
 // FUNCTION: SERVER 0x1000BD50
+// SYMBOL: _ahm_ResetEntityState
+// SIZE: 78
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) void __cdecl ahm_ResetEntityState(void* a)
+void __cdecl ahm_ResetEntityState(void* a)
 {
-	__asm {
-		_emit 0x8b
-		_emit 0x4c
-		_emit 0x24
-		_emit 0x04
-		_emit 0x8a
-		_emit 0x41
-		_emit 0x02
-		_emit 0x3c
-		_emit 0x01
-		_emit 0x74
-		_emit 0x04
-		_emit 0x3c
-		_emit 0x02
-		_emit 0x75
-		_emit 0x32
-		_emit 0x8a
-		_emit 0x81
-		_emit 0x64
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x84
-		_emit 0xc0
-		_emit 0x74
-		_emit 0x28
-		_emit 0x8d
-		_emit 0x81
-		_emit 0xb4
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x56
-		_emit 0x8b
-		_emit 0xf0
-		_emit 0x33
-		_emit 0xd2
-		_emit 0x89
-		_emit 0x16
-		_emit 0x89
-		_emit 0x56
-		_emit 0x04
-		_emit 0x89
-		_emit 0x56
-		_emit 0x08
-		_emit 0x89
-		_emit 0x56
-		_emit 0x0c
-		_emit 0xc7
-		_emit 0x81
-		_emit 0xc0
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-		_emit 0x8b
-		_emit 0x08
-		_emit 0x5e
-		_emit 0x83
-		_emit 0xc9
-		_emit 0x01
-		_emit 0x89
-		_emit 0x08
-		_emit 0xc3
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
+	if (*(unsigned char*) ((char*) a + 2) == 1 ||
+	    *(unsigned char*) ((char*) a + 2) == 2) {
+		if (*(unsigned char*) ((char*) a + 0x164) != 0) {
+			memset((char*) a + 0x1b4, 0, 0x10);
+			*(int*) ((char*) a + 0x1c0) = -1;
+			*(int*) ((char*) a + 0x1b4) |= 1;
+		}
 	}
 }
+
+/* Checks the flag state of an alchemy entity's linked record.  Returns
+ * non-zero when the entity type table marks it as an alchemy building
+ * (0x1e) and the record carries an allocated data pointer. */
 
 // FUNCTION: SERVER 0x1000BDA0
+// SYMBOL: _ahm_CheckFlag
+// SIZE: 70
 
-__declspec(naked) void __cdecl ahm_CheckFlag(void* a)
+extern int g_entity_type_table;
+
+int __cdecl ahm_CheckFlag(void* a)
 {
-	__asm {
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x04
-		_emit 0xf6
-		_emit 0x80
-		_emit 0xcc
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x04
-		_emit 0x74
-		_emit 0x36
-		_emit 0x8b
-		_emit 0x90
-		_emit 0x6c
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x85
-		_emit 0xd2
-		_emit 0x74
-		_emit 0x2c
-		_emit 0x33
-		_emit 0xc9
-		_emit 0x56
-		_emit 0x8a
-		_emit 0x0a
-		_emit 0x8b
-		_emit 0x35
-		_emit 0x30
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-		_emit 0x03
-		_emit 0xf1
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x49
-		_emit 0xc1
-		_emit 0xe0
-		_emit 0x04
-		_emit 0x03
-		_emit 0xc1
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x40
-		_emit 0x8a
-		_emit 0x0c
-		_emit 0x86
-		_emit 0x5e
-		_emit 0x80
-		_emit 0xf9
-		_emit 0x1e
-		_emit 0x75
-		_emit 0x0b
-		_emit 0x8b
-		_emit 0x4a
-		_emit 0x65
-		_emit 0x33
-		_emit 0xc0
-		_emit 0x85
-		_emit 0xc9
-		_emit 0x0f
-		_emit 0x95
-		_emit 0xc0
-		_emit 0xc3
-		_emit 0x33
-		_emit 0xc0
-		_emit 0xc3
+	char* rec;
+
+	if (*(int*) ((char*) a + 0x1cc) & 4) {
+		rec = *(char**) ((char*) a + 0x16c);
+		if (rec != 0) {
+			if (*(unsigned char*) (g_entity_type_table +
+			    *(unsigned char*) rec + *(unsigned char*) rec * 0x24c) == 0x1e)
+				return *(int*) (rec + 0x65) != 0;
+		}
 	}
+	return 0;
 }
-#else
-void __cdecl ahm_ResetEntityState(void* a) { /* C fallback */ }
-void __cdecl ahm_CheckFlag(void* a) { /* C fallback */ }
-#endif

@@ -1,15 +1,4 @@
-
-/*
- * Ghidra decompilation is BROKEN (sizeInBytes=1).
- * Reverse engineered from target disassembly via rebrew asm.
- *
- * Blocker details: Only the first 20 bytes differ (prologue + gm_GetFieldByType
- * call setup). The compiler uses lea esi,[eax+0x10] to precompute the store
- * address instead of keeping param_1 in esi and using [esi+0x10] displacement.
- * It also chooses ecx for zero-extend instead of eax, and reorders the sub esp
- * relative to the param_1 load. The remaining 160 bytes match exactly (modulo
- * relocations).
- */
+/* cm_ExFree - proper C */
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
@@ -18,99 +7,41 @@
  * entity by ID and removes it from the game world. Logs error
  * on invalid entity ID. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000d730
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x1000d730.
-// C conversion blocker: 177/180 — the Finding 33 arg3-lea hoist residue
-// (the static out-param lands in the arg1 slot; ref keeps it in a local).
-// `unsigned short r` (forces and eax,0xffff) and the shared push-1
-// (severity/dealloc arg2) otherwise match.
-__declspec(naked) int __cdecl cm_ExFree(int cmd, char *result)
+// SYMBOL: _cm_ExFree
+// SIZE: 180
+
+int __cdecl cm_ExFree(int cmd, char* result)
 {
-	(void) cmd;
-	(void) result;
-	__asm {
-		sub esp, 8
-		xor eax, eax
-		push esi
-		mov esi, dword ptr [esp + 0x10]
-		mov ax, word ptr [esi + 0x10]
-		push eax
-		push esi
-		call gm_GetFieldByType
-		mov word ptr [esi + 0x10], ax
-		and eax, 0xffff
-		lea ecx, [esp + 0x10]
-		push eax
-		lea edx, [esp + 0x10]
-		push ecx
-		lea eax, [esp + 0x20]
-		push edx
-		push eax
-		call gm_ResolveEntityById
-		add esp, 0x18
-		test eax, eax
-		pop esi
-		jne L_have_entity
-		push 1
-		push 0x1002cc5c
-		push 0x2a09
-		jmp L_log
-	L_have_entity:
-		mov eax, dword ptr [esp + 0xc]
-		test eax, eax
-		je L_check_object
-		push eax
-		call gm_CleanupBuildingEntity
-		add esp, 4
-		test eax, eax
-		je L_set_pflag
-		mov eax, 1
-		add esp, 8
-		ret
-	L_check_object:
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x00
-		push 1
-		test eax, eax
-		je L_dealloc
-		push 0x1002cc3c
-		push 0x2a21
-	L_log:
-		push 0x1002c748
-		call LogMessageInternal
-		add esp, 0x10
-		mov eax, 1
-		add esp, 8
-		ret
-	L_dealloc:
-		mov edx, dword ptr [esp + 8]
-		xor ecx, ecx
-		mov cx, word ptr [edx]
-		push ecx
-		call gm_DeallocEntity
-		add esp, 8
-	L_set_pflag:
-		mov eax, dword ptr [esp + 0x10]
-		test eax, eax
-		je L_done
-		mov byte ptr [eax], 1
-	L_done:
-		xor eax, eax
-		add esp, 8
-		ret
+	void* dyn;
+	void* exist;
+	void* static_rec;
+	int field;
+	int rc;
+
+	field = gm_GetFieldByType((char*) cmd, (unsigned short) *(unsigned short*) (cmd + 0x10));
+	*(unsigned short*) (cmd + 0x10) = (unsigned short) field;
+	field &= 0xffff;
+	rc = gm_ResolveEntityById(&dyn, &exist, &static_rec, field);
+	if (rc == 0) {
+		LogMessageInternal((char*) 0x1002c748, 0x2a09, (char*) 0x1002cc5c, 1);
+		return 1;
 	}
-}
-#else
-int __cdecl cm_ExFree(int arg1, char* result)
-{
-	/* C fallback (no byte-matching conversion; Finding 33 lea residue). */
-	(void) arg1;
-	(void) result;
+	if (dyn != 0) {
+		rc = gm_CleanupBuildingEntity((unsigned char*) dyn);
+		if (rc != 0) {
+			return 1;
+		}
+	} else {
+		if (exist != 0) {
+			LogMessageInternal((char*) 0x1002c748, 0x2a21, (char*) 0x1002cc3c, 1);
+			return 1;
+		}
+		gm_DeallocEntity((unsigned short) *(unsigned short*) static_rec, 1);
+	}
+	if (result != 0) {
+		*result = 1;
+	}
 	return 0;
 }
-#endif

@@ -137,7 +137,6 @@ extern float g_float_const_a8;
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x10017910
 // gm_SetupEntityQuery
 
@@ -245,47 +244,20 @@ void* __cdecl gm_SearchTable67(int id)
 // FUNCTION: SERVER 0x10017AB0
 // gm_CheckEntityType
 
-__declspec(naked) int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
+int __cdecl gm_CheckEntityType(unsigned char* entity_ptr)
 {
-	(void) entity_ptr;
-	__asm {
-		mov eax, dword ptr [esp + 4]
-		test eax, eax
-		jne L_nonnull
-		ret
+	char* type_entry;
 
-	L_nonnull:
-		xor ecx, ecx
-		mov edx, dword ptr [g_entity_type_table]
-		mov cl, byte ptr [eax]
-		add edx, ecx
-		lea eax, [ecx + ecx * 2]
-		shl eax, 4
-		add eax, ecx
-		lea eax, [eax + eax * 2]
-		lea eax, [edx + eax * 4]
-		mov al, byte ptr [eax]
-		cmp al, 0x0b
-		je L_true
-		cmp al, 0x0d
-		je L_true
-		cmp al, 0x0c
-		je L_true
-		cmp al, 0x10
-		je L_true
-		cmp al, 0x1c
-		je L_true
-		cmp al, 0x1d
-		je L_true
-		cmp al, 0x1f
-		je L_true
-		xor eax, eax
-		ret
-
-	L_true:
-		mov eax, 1
-		ret
+	if (entity_ptr == NULL) {
+		return 0;
 	}
+	type_entry = (char*) g_entity_type_table + (unsigned int) *entity_ptr * 0x24d;
+	if (*type_entry == 0x0b || *type_entry == 0x0d || *type_entry == 0x0c ||
+	    *type_entry == 0x10 || *type_entry == 0x1c || *type_entry == 0x1d ||
+	    *type_entry == 0x1f) {
+		return 1;
+	}
+	return 0;
 }
 
 /* Assigns a building owner. Updates the building's owner

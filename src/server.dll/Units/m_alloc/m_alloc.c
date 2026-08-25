@@ -1,401 +1,92 @@
-/* m_FreeTracked + InitPacketPool — fenced _emit: the C compiles 704B over
- * the original's 368B (register/scheduling drift). */
+/* m_FreeTracked — debug-heap tracked free (0x10006820). */
 
 // FUNCTION: SERVER 0x10006820
 // m_FreeTracked
 // SIZE: 192
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) void __cdecl m_FreeTracked(void* a)
+extern int g_10034638;
+extern int g_10034624;
+extern int g_10034640;
+extern int g_1003462c;
+extern int g_10034630;
+extern int g_10034634;
+extern int g_10034628;
+extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
+extern void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* message);
+extern void __cdecl fcn_1001ab81(void* ptr);
+extern int g_117640b4;
+extern int g_117640b0;
+extern int g_117640bc;
+extern int g_117640b8;
+extern int g_117640c0;
+extern int g_117640c4;
+extern int g_117640a0;
+extern int g_117640a4;
+
+void __cdecl m_FreeTracked(void* ptr)
 {
-	__asm {
-		_emit 0x8b
-		_emit 0x54
-		_emit 0x24
-		_emit 0x04
-		_emit 0x56
-		_emit 0x85
-		_emit 0xd2
-		_emit 0x57
-		_emit 0x0f
-		_emit 0x84
-		_emit 0xab
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xa1
-		_emit 0x38
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x24
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x8b
-		_emit 0x35
-		_emit 0x40
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x48
-		_emit 0xa3
-		_emit 0x38
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x33
-		_emit 0xc0
-		_emit 0x85
-		_emit 0xc9
-		_emit 0x7e
-		_emit 0x0d
-		_emit 0x39
-		_emit 0x56
-		_emit 0x08
-		_emit 0x74
-		_emit 0x08
-		_emit 0x83
-		_emit 0xc6
-		_emit 0x10
-		_emit 0x40
-		_emit 0x3b
-		_emit 0xc1
-		_emit 0x7c
-		_emit 0xf3
-		_emit 0x3b
-		_emit 0xc1
-		_emit 0x75
-		_emit 0x1c
-		_emit 0x6a
-		_emit 0x01
-		_emit 0x68
-		_emit 0xf8
-		_emit 0x88
-		_emit 0x02
-		_emit 0x10
-		_emit 0x68
-		_emit 0x49
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x68
-		_emit 0x88
-		_emit 0x88
-		_emit 0x02
-		_emit 0x10
-		_emit 0xe8
-		_emit 0xce
-		_emit 0xcd
-		_emit 0xff
-		_emit 0xff
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-		_emit 0x5f
-		_emit 0x5e
-		_emit 0xc3
-		_emit 0x8b
-		_emit 0x7e
-		_emit 0x0c
-		_emit 0x52
-		_emit 0xc7
-		_emit 0x46
-		_emit 0x08
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xe8
-		_emit 0xf9
-		_emit 0x42
-		_emit 0x01
-		_emit 0x00
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x2c
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		_emit 0x4a
-		_emit 0x89
-		_emit 0x15
-		_emit 0x2c
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x8b
-		_emit 0x06
-		_emit 0x8b
-		_emit 0x48
-		_emit 0x14
-		_emit 0x49
-		_emit 0x89
-		_emit 0x48
-		_emit 0x14
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x28
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x2b
-		_emit 0xd7
-		_emit 0x89
-		_emit 0x15
-		_emit 0x28
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x8b
-		_emit 0x36
-		_emit 0x8b
-		_emit 0x4e
-		_emit 0x10
-		_emit 0x2b
-		_emit 0xcf
-		_emit 0x89
-		_emit 0x4e
-		_emit 0x10
-		_emit 0xa1
-		_emit 0x28
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x85
-		_emit 0xc0
-		_emit 0x7d
-		_emit 0x17
-		_emit 0x68
-		_emit 0xe0
-		_emit 0x88
-		_emit 0x02
-		_emit 0x10
-		_emit 0x68
-		_emit 0x7a
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x68
-		_emit 0x88
-		_emit 0x88
-		_emit 0x02
-		_emit 0x10
-		_emit 0xe8
-		_emit 0x4a
-		_emit 0xcc
-		_emit 0xff
-		_emit 0xff
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x0c
-		_emit 0x5f
-		_emit 0x5e
-		_emit 0xc3
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
+	char* pool;
+	int i;
+	int count;
+	int size;
+	int* block;
+
+	if (ptr == 0) {
+		return;
+	}
+	g_10034638--;
+	count = g_10034624;
+	pool = (char*) g_10034640;
+	for (i = 0; i < count; i++) {
+		if (*(void**) (pool + 8) == ptr) {
+			break;
+		}
+		pool += 0x10;
+	}
+	if (i == count) {
+		LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x149, "Memory freed more than once or tried to free invalid pointer", 1);
+		return;
+	}
+	size = *(int*) (pool + 0xc);
+	*(int*) (pool + 8) = 0;
+	fcn_1001ab81(ptr);
+	g_1003462c--;
+	block = *(int**) pool;
+	block[5]--;
+	g_10034628 -= size;
+	block = *(int**) pool;
+	block[4] -= size;
+	if (g_10034628 < 0) {
+		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x17a, "Memory-Underflow Error");
 	}
 }
+
+/* InitPacketPool — allocates and zeroes the packet pool (0x100068E0).
+ * The dest-alignment memset prelude (lea ecx,[edi+edi*2]; ...) is an
+ * unreproducible msvc6 expansion (docs/msvc6-allocator.md); a plain
+ * memset compiles to the non-aligned rep stosd form. */
 
 // FUNCTION: SERVER 0x100068E0
 // InitPacketPool
 // SIZE: 176
 
-__declspec(naked) void __cdecl InitPacketPool(void)
+extern void* __cdecl fcn_1001a7f7(unsigned int size);
+
+void __cdecl InitPacketPool(int n)
 {
-	__asm {
-		_emit 0x55
-		_emit 0x8b
-		_emit 0xec
-		_emit 0x8b
-		_emit 0x45
-		_emit 0x08
-		_emit 0x53
-		_emit 0xa3
-		_emit 0x24
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x56
-		_emit 0xc1
-		_emit 0xe0
-		_emit 0x04
-		_emit 0x57
-		_emit 0x8b
-		_emit 0xf8
-		_emit 0x33
-		_emit 0xf6
-		_emit 0x57
-		_emit 0x89
-		_emit 0x35
-		_emit 0x28
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x89
-		_emit 0x35
-		_emit 0x30
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x89
-		_emit 0x35
-		_emit 0x2c
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x89
-		_emit 0x35
-		_emit 0x34
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0xe8
-		_emit 0xe4
-		_emit 0x3e
-		_emit 0x01
-		_emit 0x00
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		_emit 0xa3
-		_emit 0x40
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x89
-		_emit 0x7d
-		_emit 0x08
-		_emit 0x8b
-		_emit 0x3d
-		_emit 0x40
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		_emit 0x8b
-		_emit 0x5d
-		_emit 0x08
-		_emit 0x33
-		_emit 0xc0
-		_emit 0x8d
-		_emit 0x0c
-		_emit 0x7f
-		_emit 0x83
-		_emit 0xe1
-		_emit 0x03
-		_emit 0x2b
-		_emit 0xd9
-		_emit 0x7e
-		_emit 0x0c
-		_emit 0xf3
-		_emit 0xaa
-		_emit 0x8b
-		_emit 0xcb
-		_emit 0x83
-		_emit 0xe3
-		_emit 0x03
-		_emit 0xc1
-		_emit 0xe9
-		_emit 0x02
-		_emit 0xf3
-		_emit 0xab
-		_emit 0x03
-		_emit 0xcb
-		_emit 0xf3
-		_emit 0xaa
-		_emit 0xa1
-		_emit 0x38
-		_emit 0x89
-		_emit 0x02
-		_emit 0x10
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x3c
-		_emit 0x89
-		_emit 0x02
-		_emit 0x10
-		_emit 0x89
-		_emit 0x35
-		_emit 0xb4
-		_emit 0x40
-		_emit 0x76
-		_emit 0x11
-		_emit 0x89
-		_emit 0x35
-		_emit 0xb0
-		_emit 0x40
-		_emit 0x76
-		_emit 0x11
-		_emit 0x89
-		_emit 0x35
-		_emit 0xbc
-		_emit 0x40
-		_emit 0x76
-		_emit 0x11
-		_emit 0x89
-		_emit 0x35
-		_emit 0xb8
-		_emit 0x40
-		_emit 0x76
-		_emit 0x11
-		_emit 0x89
-		_emit 0x35
-		_emit 0xc0
-		_emit 0x40
-		_emit 0x76
-		_emit 0x11
-		_emit 0x89
-		_emit 0x35
-		_emit 0xc4
-		_emit 0x40
-		_emit 0x76
-		_emit 0x11
-		_emit 0x5f
-		_emit 0x5e
-		_emit 0xa3
-		_emit 0xa0
-		_emit 0x40
-		_emit 0x76
-		_emit 0x11
-		_emit 0x89
-		_emit 0x0d
-		_emit 0xa4
-		_emit 0x40
-		_emit 0x76
-		_emit 0x11
-		_emit 0x5b
-		_emit 0x5d
-		_emit 0xc3
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-		_emit 0x90
-	}
+	g_10034624 = n;
+	g_10034628 = 0;
+	g_10034630 = 0;
+	g_1003462c = 0;
+	g_10034634 = 0;
+	g_10034640 = (int) fcn_1001a7f7((unsigned int) (n * 16));
+	memset((void*) g_10034640, 0, (unsigned int) (n * 16));
+	g_117640b4 = 0;
+	g_117640b0 = 0;
+	g_117640bc = 0;
+	g_117640b8 = 0;
+	g_117640c0 = 0;
+	g_117640c4 = 0;
+	g_117640a0 = *(unsigned int*) 0x10028938;
+	g_117640a4 = *(unsigned int*) 0x1002893c;
 }
-#else
-void __cdecl m_FreeTracked(void* a)
-{
-	/* C fallback. */
-}
-void __cdecl InitPacketPool(void)
-{
-	/* C fallback. */
-}
-#endif

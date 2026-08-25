@@ -119,7 +119,7 @@ extern double g_const_5fa0; /* 0x10025fa0 */
 extern float g_float_const_cc; /* 0x100256cc */
 extern float g_gv_const_57c8; /* 0x100257c8 */
 extern double g_const_57d0; /* 0x100257d0 */
-double __cdecl gm_CalculateProductionValue(int, int);
+double __cdecl gm_CalculateProductionValue(int, unsigned char);
 extern char g_type_idx;
 extern int g_key_table[];
 extern char entity_array[];
@@ -137,7 +137,6 @@ extern float g_float_const_a8;
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x100196c0
 // gm_QueryEntitySum
 
@@ -165,214 +164,64 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 
 // FUNCTION: SERVER 0x10019720
 // gm_CalculateProductionValue
+//   NEAR_MATCHING (FPU-heavy): recursive production-value computation with
+//   x87 math. The instruction stream (fild/fimul/fidiv/fxch/faddp/fmulp
+//   ordering and stack choreography, plus the `acc` accumulator seeded with
+//   the raw entity_index bits and the `(param2 & 0xff)` scaling) cannot be
+//   reproduced by msvc6 6.0 from any natural C expression — the FPU stack
+//   scheduling differs. Semantics below match the disassembly.
 
-/* Game function - recursive entity value calculation with FPU math */
-/* Accesses g_entity_table (0x101de450), calls __ftol and itself recursively */
-/* Computes weighted entity stat values with caching in field_0x38 */
-
-__declspec(naked) double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
+double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 {
-	(void) entity_index;
-	(void) param2;
-	__asm {
-		mov ecx, dword ptr [esp + 4]
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		sub esp, 8
-		mov eax, ecx
-		shl eax, 6
-		push ebx
-		push esi
-		add edx, eax
-		mov esi, ecx
-		add esi, edx
-		xor ebx, ebx
-		mov eax, dword ptr [esi + 0x38]
-		cmp eax, ebx
-		je L_compute
-		shl eax, 5
-		mov dword ptr [esp + 0x14], eax
-		mov eax, dword ptr [esp + 0x18]
-		fild dword ptr [esp + 0x14]
-		and eax, 0xff
-		mov dword ptr [esp + 0x18], eax
-		mov al, byte ptr [esi + 0x21]
-		fimul dword ptr [esp + 0x18]
-		cmp al, 3
-		_emit 0xd8
-		_emit 0x0d
-		_emit 0xb8
-		_emit 0x5f
-		_emit 0x02
-		_emit 0x10
-		jne near L_pop_done
-		_emit 0xd8
-		_emit 0x0d
-		_emit 0xb4
-		_emit 0x5f
-		_emit 0x02
-		_emit 0x10
-		pop esi
-		pop ebx
-		add esp, 8
-		ret
-	L_compute:
-		mov edx, dword ptr [esi + 0x22]
-		mov ax, word ptr [esi + 0x36]
-		mov dword ptr [esp + 8], edx
-		xor edx, edx
-		cmp ax, bx
-		mov dword ptr [esp + 0xc], ebx
-		sete dl
-		and eax, 0xffff
-		add edx, eax
-		mov eax, dword ptr [ecx*4 + 0x101dd8e0]
-		fild qword ptr [esp + 8]
-		lea ecx, [eax + eax*2]
-		mov dword ptr [esp + 0x14], edx
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x30
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-		fidiv dword ptr [esp + 0x14]
-		shl ecx, 4
-		add ecx, eax
-		add edx, eax
-		cmp eax, ebx
-		lea ecx, [ecx + ecx*2]
-		lea ecx, [edx + ecx*4]
-		je L_no_record
-		_emit 0xd9
-		_emit 0x05
-		_emit 0xcc
-		_emit 0x56
-		_emit 0x02
-		_emit 0x10
-		xor eax, eax
-	L_mod_loop:
-		xor edx, edx
-		mov dl, byte ptr [ecx + eax + 0x233]
-		inc eax
-		mov dword ptr [esp + 0x14], edx
-		cmp eax, 2
-		fild dword ptr [esp + 0x14]
-		_emit 0xd8
-		_emit 0x0d
-		_emit 0xa8
-		_emit 0x5f
-		_emit 0x02
-		_emit 0x10
-		_emit 0xdc
-		_emit 0x0d
-		_emit 0xa0
-		_emit 0x5f
-		_emit 0x02
-		_emit 0x10
-		fxch st(1)
-		faddp st(1), st
-		jl L_mod_loop
-		jmp L_have_mod
-	L_no_record:
-		_emit 0xd9
-		_emit 0x05
-		_emit 0xc8
-		_emit 0x57
-		_emit 0x02
-		_emit 0x10
-	L_have_mod:
-		_emit 0xdc
-		_emit 0x0d
-		_emit 0xd0
-		_emit 0x57
-		_emit 0x02
-		_emit 0x10
-		fxch st(1)
-		cmp byte ptr [esi], 0x17
-		fmulp st(1), st
-		fstp dword ptr [esp + 0x14]
-		jne L_recurse
-		fld dword ptr [esp + 0x14]
-		_emit 0xd8
-		_emit 0x0d
-		_emit 0xb0
-		_emit 0x5f
-		_emit 0x02
-		_emit 0x10
-		pop esi
-		pop ebx
-		add esp, 8
-		ret
-	L_recurse:
-		push ebp
-		mov ebp, dword ptr [esp + 0x1c]
-		push edi
-		lea edi, [esi + 0x2e]
-	L_rec_loop:
-		mov ax, word ptr [edi]
-		test ax, ax
-		je L_rec_done
-		cmp ax, 0xffff
-		je L_rec_next
-		and eax, 0xffff
-		push ebp
-		push eax
-		call gm_CalculateProductionValue
-		xor eax, eax
-		add esp, 8
-		mov ax, word ptr [edi - 8]
-		xor ecx, ecx
-		mov cx, word ptr [esi + 0x36]
-		mov dword ptr [esp + 0x20], eax
-		fimul dword ptr [esp + 0x20]
-		mov dword ptr [esp + 0x20], ecx
-		fidiv dword ptr [esp + 0x20]
-		fadd dword ptr [esp + 0x1c]
-		fstp dword ptr [esp + 0x1c]
-	L_rec_next:
-		inc ebx
-		add edi, 2
-		cmp ebx, 4
-		jl L_rec_loop
-	L_rec_done:
-		fld dword ptr [esp + 0x1c]
-		_emit 0xd8
-		_emit 0x0d
-		_emit 0xac
-		_emit 0x5f
-		_emit 0x02
-		_emit 0x10
-		call __ftol
-		and ebp, 0xff
-		pop edi
-		mov dword ptr [esp + 0x1c], ebp
-		mov dword ptr [esi + 0x38], eax
-		fild dword ptr [esp + 0x1c]
-		pop ebp
-		fmul dword ptr [esp + 0x14]
-		_emit 0xd8
-		_emit 0x0d
-		_emit 0xb8
-		_emit 0x5f
-		_emit 0x02
-		_emit 0x10
-		_emit 0xd8
-		_emit 0x0d
-		_emit 0xb0
-		_emit 0x5f
-		_emit 0x02
-		_emit 0x10
-	L_pop_done:
-		pop esi
-		pop ebx
-		add esp, 8
-		ret
+	char* entity;
+	double value;
+	float acc;
+	int i;
+	int min_val;
+	char* record;
+	unsigned short comp;
+	unsigned short weight;
+
+	entity = (char*) g_entity_table + entity_index * 0x41;
+	if (*(int*) (entity + 0x38) != 0) {
+		value = (double) (*(int*) (entity + 0x38) << 5);
+		value *= (double) (param2 & 0xff);
+		value *= *(float*) 0x10025fb8;
+		if (*(char*) (entity + 0x21) == 3) {
+			value *= *(float*) 0x10025fb4;
+		}
+		return value;
 	}
+	min_val = *(int*) (entity_index * 4 + 0x101dd8e0);
+	if (min_val != 0) {
+		double mod_value;
+
+		record = (char*) (g_entity_type_table + min_val * 0x24d);
+		mod_value = *(float*) 0x100256cc;
+		for (i = 0; i < 2; i++) {
+			mod_value += (double) *(unsigned char*) (record + i + 0x233) * *(float*) 0x10025fa8 / *(double*) 0x10025fa0;
+		}
+		value = ((double) *(int*) (entity + 0x22) / (double) ((*(unsigned short*) (entity + 0x36) == 0) + *(unsigned short*) (entity + 0x36))) * (mod_value / *(double*) 0x100257d0);
+	} else {
+		value = ((double) *(int*) (entity + 0x22) / (double) ((*(unsigned short*) (entity + 0x36) == 0) + *(unsigned short*) (entity + 0x36))) * (*(float*) 0x100257c8 / *(double*) 0x100257d0);
+	}
+	if (*(char*) entity == 0x17) {
+		return value * *(float*) 0x10025fb0;
+	}
+	acc = *(float*) &entity_index;
+	for (i = 0; i < 4; i++) {
+		comp = *(unsigned short*) (entity + 0x2e + i * 2);
+		if (comp == 0) {
+			break;
+		}
+		if (comp == 0xffff) {
+			continue;
+		}
+		weight = *(unsigned short*) (entity + 0x26 + i * 2);
+		acc += (float) (gm_CalculateProductionValue(comp, param2) * (double) weight / (double) *(unsigned short*) (entity + 0x36));
+	}
+	*(int*) (entity + 0x38) = (int) (acc * *(float*) 0x10025fac);
+	return (double) (param2 & 0xff) * value * *(float*) 0x10025fb8 * *(float*) 0x10025fb0;
 }
 
 /* Sums production values across all buildings of a type.
@@ -380,175 +229,65 @@ __declspec(naked) double __cdecl gm_CalculateProductionValue(int entity_index, i
 
 // FUNCTION: SERVER 0x100198b0
 // gm_SumBuildingProductionValues
+//   NEAR_MATCHING 218/355: control flow, calls, and FPU accumulation correct;
+//   remaining diffs are msvc6 register allocation (have_query flag register,
+//   loop-counter register, and the folded [eax+edx] addressing for the
+//   entity-record byte reads) plus resulting branch displacements.
 
-/* Game function - entity query stat accumulator */
-/* Iterates entity references in a record, calls gm_CalculateProductionValue for each, accumulates results */
-
-__declspec(naked) int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
+int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 {
-	(void) obj;
-	(void) param2;
-	__asm {
-		push ecx
-		mov eax, dword ptr [esp + 8]
-		xor ecx, ecx
-		push ebx
-		push ebp
-		mov cl, byte ptr [eax]
-		push esi
-		push edi
-		xor esi, esi
-		lea eax, [ecx + ecx*2]
-		xor bl, bl
-		shl eax, 4
-		add eax, ecx
-		lea edx, [eax + eax*2]
-		_emit 0xa1
-		_emit 0x30
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-		add eax, ecx
-		mov ecx, dword ptr [eax + edx*4 + 0x249]
-		lea eax, [eax + edx*4]
-		imul ecx, ecx, 0xf00
-		mov dword ptr [esp + 0x10], ecx
-		xor ebp, ebp
-		lea edi, [eax + 0x25]
-	L_loop:
-		mov ax, word ptr [edi - 2]
-		test ax, ax
-		je near L_exit
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		and eax, 0x7fff
-		mov ecx, eax
-		shl ecx, 6
-		add edx, ecx
-		mov ecx, eax
-		add ecx, edx
-		test bl, bl
-		jne L_have_query
-		mov cl, byte ptr [ecx]
-		cmp cl, 2
-		je L_call_q
-		cmp cl, 6
-		jne near L_loop_next
-	L_call_q:
-		push eax
-		mov eax, dword ptr [esp + 0x1c]
-		push 0
-		push 1
-		mov ecx, dword ptr [eax + 0x5d]
-		push ecx
-		call gm_StartEntityQuery
-		mov esi, eax
-		add esp, 0x10
-		test esi, esi
-		je near L_loop_next
-		mov dl, byte ptr [esi + 0x12]
-		xor eax, eax
-		mov ax, word ptr [esi]
-		push edx
-		push eax
-		call gm_CalculateProductionValue
-		fiadd dword ptr [esp + 0x18]
-		add esp, 8
-		call __ftol
-		cmp ebp, 0x3f
-		mov dword ptr [esp + 0x10], eax
-		jge near L_loop_next
-		mov ax, word ptr [edi]
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		and eax, 0x7fff
-		mov ecx, eax
-		shl ecx, 6
-		add edx, ecx
-		mov al, byte ptr [eax + edx]
-		cmp al, 2
-		je L_loop_next
-		cmp al, 6
-		je L_loop_next
-		mov bl, 1
-		jmp L_loop_next
-	L_have_query:
-		test esi, esi
-		je L_loop_next
-		push eax
-		mov eax, dword ptr [esi + 0x14]
-		push 0
-		push 1
-		push eax
-		call gm_StartEntityQuery
-		add esp, 0x10
-		test eax, eax
-		je L_sub_skip
-		mov cl, byte ptr [eax + 0x12]
-		xor edx, edx
-		mov dx, word ptr [eax]
-		push ecx
-		push edx
-		call gm_CalculateProductionValue
-		fiadd dword ptr [esp + 0x18]
-		add esp, 8
-		call __ftol
-		mov dword ptr [esp + 0x10], eax
-	L_sub_skip:
-		cmp ebp, 0x3f
-		jge L_loop_next
-		mov ax, word ptr [edi]
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		and eax, 0x7fff
-		mov ecx, eax
-		shl ecx, 6
-		add edx, ecx
-		mov al, byte ptr [eax + edx]
-		cmp al, 2
-		je L_clear_q
-		cmp al, 6
-		jne L_loop_next
-	L_clear_q:
-		xor bl, bl
-	L_loop_next:
-		inc ebp
-		add edi, 2
-		cmp ebp, 0x40
-		jl near L_loop
-	L_exit:
-		fild dword ptr [esp + 0x1c]
-		_emit 0xd8
-		_emit 0x0d
-		_emit 0xb8
-		_emit 0x5f
-		_emit 0x02
-		_emit 0x10
-		fimul dword ptr [esp + 0x10]
-		call __ftol
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		pop ecx
-		ret
-	}
-}
+	char* record;
+	char* comp_ptr;
+	int total;
+	char have_query;
+	void* q;
+	int i;
+	unsigned short comp;
+	unsigned short next_comp;
+	char* comp_record;
+	char* next_record;
 
-/* Accumulates a typed value (type 2) across entities.
- * Specialized aggregation for specific entity field types. */
+	record = (char*) g_entity_type_table + (unsigned char) obj[0] * 0x24d;
+	total = *(int*) (record + 0x249) * 0xf00;
+	q = NULL;
+	have_query = 0;
+	comp_ptr = record + 0x25;
+	for (i = 0; i < 0x40; i++, comp_ptr += 2) {
+		comp = *(unsigned short*) (comp_ptr - 2);
+		if (comp == 0) {
+			break;
+		}
+		comp_record = (char*) g_entity_table + (comp & 0x7fff) * 0x41;
+		if (have_query == 0) {
+			if (*comp_record == 2 || *comp_record == 6) {
+				q = gm_StartEntityQuery(*(int*) (obj + 0x5d), 1, 0, comp & 0x7fff);
+				if (q != NULL) {
+					total = (int) (gm_CalculateProductionValue(*(unsigned short*) q, *(unsigned char*) ((char*) q + 0x12)) + (double) total);
+					if (i < 0x3f) {
+						next_comp = *(unsigned short*) comp_ptr;
+						next_record = (char*) g_entity_table + (next_comp & 0x7fff) * 0x41;
+						if (*next_record != 2 && *next_record != 6) {
+							have_query = 1;
+						}
+					}
+				}
+			}
+		} else if (q != NULL) {
+			q = gm_StartEntityQuery(*(int*) ((char*) q + 0x14), 1, 0, comp & 0x7fff);
+			if (q != NULL) {
+				total = (int) (gm_CalculateProductionValue(*(unsigned short*) q, *(unsigned char*) ((char*) q + 0x12)) + (double) total);
+			}
+			if (i < 0x3f) {
+				next_comp = *(unsigned short*) comp_ptr;
+				next_record = (char*) g_entity_table + (next_comp & 0x7fff) * 0x41;
+				if (*next_record == 2 || *next_record == 6) {
+					have_query = 0;
+				}
+			}
+		}
+	}
+	return (int) ((double) param2 * *(float*) 0x10025fb8 * (double) total);
+}
 
 // FUNCTION: SERVER 0x10019A20
 // gm_AccumulateTyped2
@@ -577,54 +316,24 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 // FUNCTION: SERVER 0x10019a70
 // gm_EntityQuerySum
 
-__declspec(naked) int __cdecl gm_EntityQuerySum(int arg1)
+int __cdecl gm_EntityQuerySum(int arg1)
 {
-	(void) arg1;
-	__asm {
-		push ecx
-		mov eax, dword ptr [esp + 8]
-		push esi
-		xor esi, esi
-		push 0x2a
-		mov ecx, dword ptr [eax + 0x5d]
-		push esi
-		push 6
-		push 2
-		push ecx
-		mov dword ptr [esp + 0x18], esi
-		call gm_StartEntityQuery
-		add esp, 0x14
-		test eax, eax
-		je L_done
-		mov edx, dword ptr [eax + 0x14]
-		push 5
-		push 1
-		push edx
-		call gm_StartEntityQuery
-		add esp, 0xc
-		test eax, eax
-		je L_done
-	L_loop:
-		mov cl, byte ptr [eax + 0x12]
-		xor edx, edx
-		mov dx, word ptr [eax]
-		push ecx
-		push edx
-		call gm_CalculateProductionValue
-		fiadd dword ptr [esp + 0xc]
-		add esp, 8
-		call __ftol
-		mov esi, eax
-		mov dword ptr [esp + 4], esi
-		call gm_NextEntityQueryMatch
-		test eax, eax
-		jne L_loop
-	L_done:
-		mov eax, esi
-		pop esi
-		pop ecx
-		ret
+	int sum;
+	void* head;
+	unsigned short* q;
+
+	sum = 0;
+	head = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 2, 6, sum, 0x2a);
+	if (head != NULL) {
+		q = gm_StartEntityQuery(*(int*) ((char*) head + 0x14), 1, 5);
+		if (q != NULL) {
+			do {
+				sum = (int) (gm_CalculateProductionValue(*(unsigned short*) q, *(unsigned char*) ((char*) q + 0x12)) + (double) sum);
+				q = gm_NextEntityQueryMatch();
+			} while (q != NULL);
+		}
 	}
+	return sum;
 }
 
 /* Resolves a parent entity reference. Follows entity chain
@@ -742,53 +451,32 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 // FUNCTION: SERVER 0x10019c60
 // gm_FindEntityByOwner
-__declspec(naked) char* __cdecl gm_FindEntityByOwner(int arg1)
+//   NEAR_MATCHING 12/98: logic identical; msvc6 register allocation differs —
+//   original keeps arg1 in edi and i in esi with a split prologue (null path
+//   returns before esi is pushed); ours allocates arg1 to esi / i to edx and
+//   merges the null return into the shared exit. No source ordering tried
+//   (decl order, local copy, goto/result form) changes the allocation.
+
+char* __cdecl gm_FindEntityByOwner(int arg1)
 {
-	(void) arg1;
-	__asm {
-		push edi
-		mov edi, dword ptr [esp + 8]
-		xor eax, eax
-		test edi, edi
-		jne L_start
-		pop edi
-		ret
-	L_start:
-		push esi
-		xor esi, esi
-		mov ecx, 0x100358a2
-	L_loop:
-		mov dl, byte ptr [ecx + 0x162]
-		test dl, dl
-		je L_next
-		cmp dword ptr [ecx + 0x16a], edi
-		jne L_next
-		mov dl, byte ptr [ecx]
-		cmp dl, 6
-		je L_found
-		cmp dl, 7
-		je L_found
-		cmp dl, 1
-		je L_found
-		cmp dl, 2
-		je L_found
-	L_next:
-		add ecx, 0x21c
-		inc esi
-		cmp ecx, 0x1009aca2
-		jl L_loop
-		pop esi
-		pop edi
-		ret
-	L_found:
-		lea eax, [esi + esi*2]
-		pop esi
-		pop edi
-		lea eax, [eax + eax*4]
-		lea eax, [eax + eax*8]
-		lea eax, [eax*4 + 0x100358a0]
-		ret
+	int i;
+	char* p;
+
+	if (arg1 == 0) {
+		return NULL;
 	}
+	p = (char*) 0x100358a2;
+	i = 0;
+	do {
+		if (p[0x162] != 0 && *(int*) (p + 0x16a) == arg1) {
+			if (*p == 6 || *p == 7 || *p == 1 || *p == 2) {
+				return (char*) 0x100358a0 + i * 0x21c;
+			}
+		}
+		p += 0x21c;
+		i++;
+	} while (p < (char*) 0x1009aca2);
+	return NULL;
 }
 
 /* Gets a message field from a command packet. Reads a
@@ -807,52 +495,6 @@ int __cdecl gm_GetMsgField(char* msg, char* pkt)
 	return *(int*) (pkt + 0xe);
 }
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl compute_size(char* pkt)
-{
-	__asm {
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x04
-		_emit 0x66
-		_emit 0x81
-		_emit 0x38
-		_emit 0xdd
-		_emit 0x01
-		_emit 0x8b
-		_emit 0x40
-		_emit 0x0e
-		_emit 0x75
-		_emit 0x07
-		_emit 0x83
-		_emit 0xc0
-		_emit 0x02
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x80
-		_emit 0xc3
-		_emit 0x83
-		_emit 0xf8
-		_emit 0x03
-		_emit 0x75
-		_emit 0x06
-		_emit 0xb8
-		_emit 0x50
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0xc3
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x80
-		_emit 0xc1
-		_emit 0xe0
-		_emit 0x02
-		_emit 0xc3
-	}
-}
-#else
 int __cdecl compute_size(char* pkt)
 {
 	int count;
@@ -865,7 +507,6 @@ int __cdecl compute_size(char* pkt)
 	}
 	return count * 0x14;
 }
-#endif
 
 /* Checks if an object can be produced (Kann Objekt Hergestellt).
  * Validates recipe requirements, ingredient availability,
@@ -875,403 +516,174 @@ char s_gm_KannObjektHergestellt___pCObj_10031628[] = "gm_eval_SlotVoll(): Lager 
 
 // FUNCTION: SERVER 0x10019d30
 // gm_KannObjektHergestellt
+//   NEAR_MATCHING 91/407: logic and all calls correct (incl. the
+//   `min(obj, requested)` use_max quirk and the is_cat2/is_producer filter
+//   matrix). Remaining diffs are msvc6 register allocation — original keeps
+//   obj in edi / requested in esi / size in ebp / is_cat2 in bl across the
+//   whole function; ours rotates registers differently, shifting every
+//   instruction. Allocator behavior not reproducible from source.
 
-__declspec(naked) int __cdecl gm_KannObjektHergestellt(char* obj, int entity_index, int requested)
+int __cdecl compute_size(char* pkt, int param2);
+
+int __cdecl gm_KannObjektHergestellt(char* obj, int entity_index, int requested)
 {
-	(void) obj;
-	(void) entity_index;
-	(void) requested;
-	__asm {
-		push ebx
-		push ebp
-		push esi
-		push edi
-		mov edi, dword ptr [esp + 0x14]
-		push edi
-		call gm_EntityAccumulate
-		add esp, 4
-		test eax, eax
-		jne L_have_ent
-		push 1
-		push offset s_gm_KannObjektHergestellt___pCObj_10031628
-		push 0x31de
-		push offset s_D__Develop_DieGildeAddOn_game_sp_10031004
-		call LogMessageInternal
-		add esp, 0x10
-		xor eax, eax
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		ret
-	L_have_ent:
-		xor ecx, ecx
-		mov cl, byte ptr [eax]
-		push ecx
-		call gm_GetBuildingTypeCategory
-		mov esi, dword ptr [esp + 0x1c]
-		xor ebx, ebx
-		cmp eax, 2
-		push esi
-		push edi
-		sete bl
-		call compute_size
-		mov edx, dword ptr [edi + 0x14]
-		push esi
-		push 0
-		mov ebp, eax
-		push 1
-		push edx
-		mov dword ptr [esp + 0x30], ebp
-		call gm_StartEntityQuery
-		add esp, 0x1c
-		test eax, eax
-		je L_no_query
-		push eax
-		push edi
-		call gm_GetMsgField
-		mov ecx, ebp
-		add esp, 8
-		sub ecx, eax
-		mov eax, dword ptr [esp + 0x1c]
-		cmp ecx, eax
-		jg near L_done
-		pop edi
-		pop esi
-		pop ebp
-		mov eax, ecx
-		pop ebx
-		ret
-	L_no_query:
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		mov eax, esi
-		shl eax, 6
-		add ecx, eax
-		add esi, ecx
-		test ebx, ebx
-		je L_not_cat2
-		mov al, byte ptr [esi]
-		xor edx, edx
-		cmp al, 0x17
-		sete dl
-		mov ebp, edx
-		jmp L_after_producer
-	L_not_cat2:
-		mov al, byte ptr [esi]
-		cmp al, 0x17
-		je L_is_producer
-		cmp al, 0x25
-		je L_is_producer
-		xor ebp, ebp
-		jmp L_after_producer
-	L_is_producer:
-		mov ebp, 1
-	L_after_producer:
-		cmp word ptr [edi], 0x2a
-		jne near L_not_2a
-		mov eax, dword ptr [edi + 0x14]
-		push 5
-		push 1
-		push eax
-		xor esi, esi
-		call gm_StartEntityQuery
-		add esp, 0xc
-		test eax, eax
-		je L_query_done
-	L_iter:
-		xor ecx, ecx
-		mov cx, word ptr [eax]
-		_emit 0xa1
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		mov edx, ecx
-		shl edx, 6
-		add eax, edx
-		add ecx, eax
-		test ebx, ebx
-		je L_check_no_cat2
-		mov al, byte ptr [ecx]
-		test ebp, ebp
-		je L_check_not_producer
-		cmp al, 0x17
-		jne L_skip
-		jmp L_count
-	L_check_not_producer:
-		cmp al, 0x17
-		je L_skip
-		jmp L_count
-	L_check_no_cat2:
-		mov cl, byte ptr [ecx]
-		test ebp, ebp
-		je L_check_no_cat2_notprod
-		cmp cl, 0x17
-		je L_count
-		cmp cl, 0x25
-		jne L_skip
-		jmp L_count
-	L_check_no_cat2_notprod:
-		cmp cl, 0x17
-		je L_skip
-		cmp cl, 0x25
-		je L_skip
-	L_count:
-		inc esi
-	L_skip:
-		call gm_NextEntityQueryMatch
-		test eax, eax
-		jne L_iter
-	L_query_done:
-		test ebp, ebp
-		je L_use_1d
-		xor ecx, ecx
-		mov cl, byte ptr [edi + 0x1c]
-		cmp esi, ecx
-		jl L_use_max
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		ret
-	L_use_1d:
-		xor edx, edx
-		mov dl, byte ptr [edi + 0x1d]
-		cmp esi, edx
-		jl L_use_max
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		ret
-	L_not_2a:
-		mov eax, dword ptr [edi + 0x14]
-		push 5
-		push 1
-		push eax
-		xor esi, esi
-		call gm_StartEntityQuery
-		add esp, 0xc
-		test eax, eax
-		je L_count_done
-	L_count_loop:
-		inc esi
-		call gm_NextEntityQueryMatch
-		test eax, eax
-		jne L_count_loop
-	L_count_done:
-		xor ecx, ecx
-		mov cl, byte ptr [edi + 0x1c]
-		cmp esi, ecx
-		jl L_use_max
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		ret
-	L_use_max:
-		mov eax, dword ptr [esp + 0x1c]
-		mov ecx, dword ptr [esp + 0x14]
-		cmp ecx, eax
-		jge L_done
-		mov eax, ecx
-	L_done:
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		ret
-	}
-}
+	char* ent;
+	char* record;
+	int category;
+	int is_cat2;
+	int is_producer;
+	int size;
+	int count;
+	int msg_field;
+	void* q;
+	unsigned short q_id;
 
-/* Checks inventory capacity. Verifies whether an entity's
- * inventory has room for additional objects of a given type. */
+	ent = (char*) gm_EntityAccumulate((void*) obj);
+	if (ent == NULL) {
+		LogMessageInternal((char*) 0x10031004, 0x31de, (char*) 0x10031628, 1);
+		return 0;
+	}
+	category = gm_GetBuildingTypeCategory((unsigned char) *ent);
+	is_cat2 = (category == 2);
+	size = compute_size(obj, requested);
+	q = gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, requested);
+	if (q != NULL) {
+		msg_field = gm_GetMsgField(q, obj);
+		if (size - msg_field > requested) {
+			return requested < (int) obj ? requested : (int) obj;
+		}
+		return size - msg_field;
+	}
+	record = (char*) g_entity_table + requested * 0x41;
+	if (is_cat2) {
+		is_producer = (record[0] == 0x17);
+	} else {
+		is_producer = (record[0] == 0x17 || record[0] == 0x25);
+	}
+	count = 0;
+	if (*(unsigned short*) obj == 0x2a) {
+		q = gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 5);
+		if (q != NULL) {
+			do {
+				q_id = *(unsigned short*) q;
+				record = (char*) g_entity_table + q_id * 0x41;
+				if (is_cat2) {
+					if ((record[0] == 0x17) == is_producer) {
+						count++;
+					}
+				} else {
+					if ((record[0] == 0x17 || record[0] == 0x25) == is_producer) {
+						count++;
+					}
+				}
+				q = gm_NextEntityQueryMatch();
+			} while (q != NULL);
+		}
+		if (is_producer) {
+			if (count < *(unsigned char*) (obj + 0x1c)) {
+				return requested < (int) obj ? requested : (int) obj;
+			}
+			return 0;
+		}
+		if (count < *(unsigned char*) (obj + 0x1d)) {
+			return requested < (int) obj ? requested : (int) obj;
+		}
+		return 0;
+	}
+	q = gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 5);
+	count = 0;
+	if (q != NULL) {
+		do {
+			count++;
+			q = gm_NextEntityQueryMatch();
+		} while (q != NULL);
+	}
+	if (count < *(unsigned char*) (obj + 0x1c)) {
+		return requested < (int) obj ? requested : (int) obj;
+	}
+	return 0;
+}
 
 // FUNCTION: SERVER 0x10019ed0
 // gm_CheckInventoryCapacity
+//   NEAR_MATCHING 35/395: logic and all calls correct (type-list scan,
+//   ahm_LookupEntityInTable guard, query capacity checks, max(0,x) returns).
+//   Remaining diffs are msvc6 register allocation: original keeps the type
+//   byte and the 3-used/requested computations in registers with ebp, ours
+//   spills type_byte to the stack and allocates no ebp; prologue/table
+//   scheduling differs throughout. Allocator behavior not reproducible.
 
-/* Game function - computes available entity slots (capped at 3) */
-
-__declspec(naked) int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested)
+int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested)
 {
-	(void) obj;
-	(void) entity_index;
-	(void) requested;
-	__asm {
-		sub esp, 0x20
-		push ebx
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		push ebp
-		push esi
-		push edi
-		mov edi, dword ptr [esp + 0x38]
-		mov eax, edi
-		xor ebp, ebp
-		shl eax, 6
-		add ecx, eax
-		mov eax, edi
-		add eax, ecx
-		xor esi, esi
-		mov dword ptr [esp + 0x10], 8
-		mov dword ptr [esp + 0x14], 0xc
-		mov al, byte ptr [eax]
-		mov dword ptr [esp + 0x18], 0x12
-		cmp al, 9
-		mov dword ptr [esp + 0x1c], 0x19
-		mov dword ptr [esp + 0x20], 0x22
-		mov dword ptr [esp + 0x24], 0x20
-		mov dword ptr [esp + 0x28], 0x27
-		mov dword ptr [esp + 0x2c], ebp
-		jne L_not9
-		mov eax, dword ptr [esp + 0x3c]
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		add esp, 0x20
-		ret
-	L_not9:
-		mov edx, eax
-		mov eax, 8
-		and edx, 0xff
-		lea ecx, [esp + 0x10]
-	L_scan:
-		cmp eax, edx
-		je L_in_list
-		mov eax, dword ptr [ecx + 4]
-		add ecx, 4
-		cmp eax, ebp
-		jne L_scan
-		jmp L_scan_done
-	L_in_list:
-		mov esi, 1
-	L_scan_done:
-		mov ebx, dword ptr [esp + 0x34]
-		mov al, byte ptr [ebx + 2]
-		cmp al, 6
-		je L_check_ahm
-		cmp al, 7
-		jne L_check_idx
-	L_check_ahm:
-		push edi
-		call ahm_LookupEntityInTable
-		add esp, 4
-		test eax, eax
-		jne near L_ret_zero
-	L_check_idx:
-		cmp edi, 0x179
-		je near L_ret_zero
-		cmp edi, 0x17a
-		je near L_ret_zero
-		test esi, esi
-		je near L_ret_zero
-		mov edx, dword ptr [ebx + 0x178]
-		push edi
-		push 0
-		push 1
-		push edx
-		call gm_StartEntityQuery
-		mov esi, eax
-		add esp, 0x10
-		test esi, esi
-		je L_no_q
-		push edi
-		call ahm_LookupEntityInTable
-		mov esi, dword ptr [esi + 0xe]
-		mov eax, dword ptr [esp + 0x40]
-		add esp, 4
-		lea ecx, [esi + eax]
-		cmp ecx, 3
-		jle L_use_req
-		mov ebp, 3
-		xor eax, eax
-		sub ebp, esi
-		pop edi
-		test ebp, ebp
-		setl al
-		dec eax
-		pop esi
-		and eax, ebp
-		pop ebp
-		pop ebx
-		add esp, 0x20
-		ret
-	L_no_q:
-		mov edx, dword ptr [ebx + 0x178]
-		push 5
-		push 1
-		push edx
-		xor esi, esi
-		call gm_StartEntityQuery
-		add esp, 0xc
-		test eax, eax
-		je L_after_q2
-	L_q2_loop:
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		xor ecx, ecx
-		mov cx, word ptr [eax]
-		mov eax, ecx
-		shl eax, 6
-		add edx, eax
-		cmp byte ptr [ecx + edx], 9
-		je L_q2_skip
-		inc esi
-	L_q2_skip:
-		call gm_NextEntityQueryMatch
-		test eax, eax
-		jne L_q2_loop
-		cmp esi, 6
-		jge L_use_3
-	L_after_q2:
-		mov eax, dword ptr [esp + 0x3c]
-		mov ebp, 3
-		cmp eax, 3
-		jg L_use_3
-	L_use_req:
-		mov ebp, eax
-	L_use_3:
-		xor eax, eax
-		pop edi
-		test ebp, ebp
-		setl al
-		dec eax
-		pop esi
-		and eax, ebp
-		pop ebp
-		pop ebx
-		add esp, 0x20
-		ret
-	L_ret_zero:
-		pop edi
-		pop esi
-		pop ebp
-		xor eax, eax
-		pop ebx
-		add esp, 0x20
-		ret
-	}
-}
+	char* entity;
+	unsigned char type_byte;
+	int in_list;
+	int used;
+	void* q;
+	int i;
+	int count;
 
-/* Sets a field value on an entity. Writes a value at the
- * specified offset into the entity structure. */
+	entity = (char*) g_entity_table + entity_index * 0x41;
+	type_byte = entity[0];
+	in_list = 0;
+	if (type_byte != 9) {
+		int list[8] = { 8, 0xc, 0x12, 0x19, 0x22, 0x20, 0x27, 0 };
+
+		for (i = 0; ; i++) {
+			if (list[i] == (type_byte & 0xff)) {
+				in_list = 1;
+				break;
+			}
+			if (list[i + 1] == 0) {
+				break;
+			}
+		}
+		if (obj[2] == 6 || obj[2] == 7) {
+			if (ahm_LookupEntityInTable(entity_index) != 0) {
+				return 0;
+			}
+		}
+		if (entity_index == 0x179 || entity_index == 0x17a) {
+			return 0;
+		}
+		if (in_list == 0) {
+			return 0;
+		}
+		q = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 0, entity_index);
+		if (q != NULL) {
+			ahm_LookupEntityInTable(entity_index);
+			used = *(int*) ((char*) q + 0xe);
+			if (used + requested > 3) {
+				if (3 - used < 0) {
+					return 0;
+				}
+				return 3 - used;
+			}
+			if (requested > 3) {
+				return 3;
+			}
+			return requested;
+		}
+		count = 0;
+		q = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 5);
+		if (q != NULL) {
+			do {
+				if (*(char*) ((char*) g_entity_table + *(unsigned short*) q * 0x41) != 9) {
+					count++;
+				}
+				q = gm_NextEntityQueryMatch();
+			} while (q != NULL);
+		}
+		if (count >= 6) {
+			return 3;
+		}
+		if (requested > 3) {
+			return 3;
+		}
+		return requested;
+	}
+	return requested;
+}
 
 // FUNCTION: SERVER 0x1001A060
 // gm_EntitySetField
@@ -1317,14 +729,6 @@ int __cdecl gm_RandomMod(unsigned short n)
 
 /* Returns a random float in [0.0, 1.0). Converts the
  * integer RNG output to a normalized float value. */
-
-// FUNCTION: SERVER 0x1001a0f0
-// gm_RandomFloat01
-
-double __cdecl gm_RandomFloat01(void)
-{
-	return (double) rand() * (double) g_const_5fbc;
-}
 
 /* Returns a random value with quadratic distribution.
  * Produces values biased toward lower numbers. Used for

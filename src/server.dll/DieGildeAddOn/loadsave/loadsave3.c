@@ -34,264 +34,126 @@ int ls_LoadEntities(int);
 int ls_LoadTownData(int);
 extern int amt_fio_LoadAemter(int, int);
 extern unsigned int ls_ID2Ptr(void);
-
-/* Loads graveyard-specific data from a save file. Reads
- * production slots, worker assignments, and field states
- * for graveyard buildings. */
-
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 
+extern int g_query_limit; /* 0x10035450 */
+extern int g_active_player_count; /* 0x1003543c */
+extern char* g_entity_table; /* 0x101de450 */
+extern char* g_100a8c34; /* 0x100a8c34 */
+extern unsigned int g_1003546c; /* 0x1003546c */
+
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10014070
 // ls_ID2Ptr
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// NOTE: best-effort proper C (was 103/491 naked-era, now 187/491).  All
+// control flow, stack layout and reloc sites match; remaining deltas are
+// msvc6 scheduler/allocation quirks: (1) the entity-loop gate hoists the
+// CSE'd `lea eax,[esi-4]` ABOVE the `je` continue-branch and folds the
+// -4 load into [eax] (ref emits `je; mov ecx,[esi-4]; lea eax,[esi-4]`),
+// (2) the node-walk do-while copy-propagates `node=nxt` into the loop load
+// (ref keeps the load via node), and (3) the entity-loop back-edge
+// displacement follows from (1).  The v1/v2/v3 register roles were fixed by
+// introducing an explicit `nxt` walk variable (ref-style allocation).
 
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x10014070.
-// Id-resolution with fatal path — no C conversion attempted; fenced-naked.
-__declspec(naked) unsigned int ls_ID2Ptr(void)
-{
-	__asm {
-		_emit 0xa1
-		_emit 0x6c
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		sub esp, 0xc
-		push eax
-		call gm_LookupEntityRecordById
-		add esp, 4
-		_emit 0xa3
-		_emit 0x6c
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		test eax, eax
-		jne L_have_player
-		push 1
-		push offset s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580
-		push 0x1016
-		push offset s_D__Develop_DieGildeAddOn_loadsav_1002d550
-		call LogMessageInternal
-		add esp, 0x10
-		xor eax, eax
-		add esp, 0xc
-		ret
-	L_have_player:
-		push ebp
-		push esi
-		push edi
-		push 0xa
-		push 5
-		push 1
-		call gm_StartFilteredEntitySearch
-		_emit 0xa3
-		_emit 0x3c
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		_emit 0xa1
-		_emit 0xec
-		_emit 0xd4
-		_emit 0x02
-		_emit 0x10
-		add esp, 0xc
-		cmp eax, 0x10017
-		jl L_skip_lookup_array
-		mov esi, 0x10035478
-	L_lookup_loop:
-		mov ecx, dword ptr [esi]
-		push ecx
-		call gm_LookupEntityRecordById
-		mov dword ptr [esi], eax
-		add esi, 4
-		add esp, 4
-		cmp esi, 0x10035498
-		jl L_lookup_loop
-	L_skip_lookup_array:
-		mov esi, 0x10035a10
-		mov edi, 0xffff
-	L_entity_loop:
-		cmp word ptr [esi - 0x170], di
-		je L_entity_skip
-		mov ecx, dword ptr [esi - 4]
-		lea eax, [esi - 4]
-		cmp ecx, -1
-		jne L_resolve_a
-		mov dword ptr [eax], 0
-		jmp L_check_b
-	L_resolve_a:
-		push ecx
-		push 0
-		push 0
-		push eax
-		call gm_ResolveEntityById
-		add esp, 0x10
-	L_check_b:
-		mov eax, dword ptr [esi]
-		cmp eax, -1
-		jne L_resolve_b
-		mov dword ptr [esi], 0
-		jmp L_entity_skip
-	L_resolve_b:
-		push eax
-		push 0
-		push 0
-		push esi
-		call gm_ResolveEntityById
-		add esp, 0x10
-	L_entity_skip:
-		add esi, 0x21c
-		cmp esi, 0x1009ae10
-		jl L_entity_loop
-		_emit 0xa1
-		_emit 0x50
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		xor ebp, ebp
-		test eax, eax
-		jle L_finish
-		xor edi, edi
-	L_outer:
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x34
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-		xor eax, eax
-		mov ax, word ptr [edi + edx]
-		lea esi, [edi + edx]
-		_emit 0x8b
-		_emit 0x15
-		_emit 0x50
-		_emit 0xe4
-		_emit 0x1d
-		_emit 0x10
-		mov ecx, eax
-		shl ecx, 6
-		add edx, ecx
-		cmp byte ptr [eax + edx], 0x1d
-		jne L_after_clear
-		mov dword ptr [esi + 0x24], 0
-	L_after_clear:
-		mov eax, dword ptr [esi + 6]
-		cmp eax, -1
-		je near L_inc
-		push eax
-		lea eax, [esp + 0x18]
-		lea ecx, [esp + 0x14]
-		push eax
-		lea edx, [esp + 0x14]
-		push ecx
-		push edx
-		call gm_ResolveEntityById
-		add esp, 0x10
-		test eax, eax
-		jne L_resolved
-		push 1
-		push offset s_ls_ID2Ptr____Houston__wir_haben_e_1002d520
-		push 0x1050
-		push offset s_D__Develop_DieGildeAddOn_loadsav_1002d550
-		call LogMessageInternal
-		add esp, 0x10
-		jmp L_inc
-	L_resolved:
-		mov eax, dword ptr [esp + 0xc]
-		test eax, eax
-		je L_chk_b
-		mov ecx, dword ptr [eax + 0x5d]
-		test ecx, ecx
-		jne L_walk_5d
-		mov dword ptr [eax + 0x5d], esi
-		jmp L_inc
-	L_walk_5d:
-		mov eax, dword ptr [ecx + 0x3f]
-		test eax, eax
-		je L_attach_3f
-	L_walk_5d_loop:
-		mov ecx, eax
-		mov eax, dword ptr [ecx + 0x3f]
-		test eax, eax
-		jne L_walk_5d_loop
-		jmp L_attach_3f
-	L_chk_b:
-		mov eax, dword ptr [esp + 0x10]
-		test eax, eax
-		je L_chk_c
-		mov ecx, dword ptr [eax + 0x14]
-		test ecx, ecx
-		jne L_walk_14
-		mov dword ptr [eax + 0x14], esi
-		jmp L_inc
-	L_walk_14:
-		mov eax, dword ptr [ecx + 0x3f]
-		test eax, eax
-		je L_attach_3f
-	L_walk_14_loop:
-		mov ecx, eax
-		mov eax, dword ptr [ecx + 0x3f]
-		test eax, eax
-		jne L_walk_14_loop
-		jmp L_attach_3f
-	L_chk_c:
-		mov eax, dword ptr [esp + 0x14]
-		mov ecx, dword ptr [eax + 0x178]
-		test ecx, ecx
-		jne L_walk_178
-		mov dword ptr [eax + 0x178], esi
-		jmp L_inc
-	L_walk_178:
-		mov eax, dword ptr [ecx + 0x3f]
-		test eax, eax
-		je L_attach_3f
-	L_walk_178_loop:
-		mov ecx, eax
-		mov eax, dword ptr [ecx + 0x3f]
-		test eax, eax
-		jne L_walk_178_loop
-	L_attach_3f:
-		mov dword ptr [ecx + 0x3f], esi
-	L_inc:
-		_emit 0xa1
-		_emit 0x50
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-		inc ebp
-		add edi, 0x43
-		cmp ebp, eax
-		jl near L_outer
-	L_finish:
-		call gm_EntitySetField
-		pop edi
-		pop esi
-		mov eax, 1
-		pop ebp
-		add esp, 0xc
-		ret
-	}
-}
-#else
 unsigned int ls_ID2Ptr(void)
 {
-	/* C fallback (no byte-matching conversion; id resolution). */
-	return 0;
-}
-#endif
+	int v1;
+	int v2;
+	int v3;
+	unsigned char* e;
+	int* p;
+	int i;
+	char* s;
+	unsigned int idx;
+	void* node;
+	void* nxt;
 
-/* Receives and loads a complete game state from a client.
- * Called during lobby-to-game transition to receive the
- * savegame data stream and initialize the game world. */
-extern unsigned char g_file_append_mode[1];
-extern char s__s__s_100270fc[1];
-extern char s_LogFile_has_been_deleted__1002733c[1];
-extern char s__________________________________1002735c[1];
-extern char g_str_10028888[1];
-extern char g_str_10028aec[1];
-extern char g_str_10028b04[1];
-extern char g_1002a0f8[1];
+	g_1003546c = gm_LookupEntityRecordById(g_1003546c);
+	if (g_1003546c == 0) {
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_loadsav_1002d550, 0x1016,
+		    s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580, 1);
+		return 0;
+	}
+	g_active_player_count = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
+	if (g_file_version >= 0x10017) {
+		for (p = (int*) 0x10035478; (int) p < 0x10035498; p++) {
+			*p = gm_LookupEntityRecordById(*p);
+		}
+	}
+	for (e = (unsigned char*) 0x10035a10; (int) e < 0x1009ae10; e += 0x21c) {
+		if (*(unsigned short*) (e - 0x170) == 0xffff) {
+			continue;
+		}
+		if (*(int*) (e - 4) == -1) {
+			*(int*) (e - 4) = 0;
+		} else {
+			gm_ResolveEntityById(e - 4, 0, 0, *(int*) (e - 4));
+		}
+		if (*(int*) e == -1) {
+			*(int*) e = 0;
+		} else {
+			gm_ResolveEntityById(e, 0, 0, *(int*) e);
+		}
+	}
+	for (i = 0; i < g_query_limit; i++) {
+		s = (char*) g_100a8c34 + i * 0x43;
+		idx = *(unsigned short*) s;
+		if (*(char*) (g_entity_table + idx * 64 + idx) == 0x1d) {
+			*(int*) (s + 0x24) = 0;
+		}
+		if (*(int*) (s + 6) != -1) {
+			if (!gm_ResolveEntityById(&v1, &v2, &v3, *(int*) (s + 6))) {
+				LogMessageInternal(s_D__Develop_DieGildeAddOn_loadsav_1002d550, 0x1050,
+				    s_ls_ID2Ptr____Houston__wir_haben_e_1002d520, 1);
+			} else if (v1 != 0) {
+				node = *(void**) (v1 + 0x5d);
+				if (node == 0) {
+					*(void**) (v1 + 0x5d) = s;
+				} else {
+					nxt = *(void**) ((char*) node + 0x3f);
+					if (nxt != 0) {
+						do {
+							node = nxt;
+							nxt = *(void**) ((char*) node + 0x3f);
+						} while (nxt != 0);
+					}
+					*(void**) ((char*) node + 0x3f) = s;
+				}
+			} else if (v2 != 0) {
+				node = *(void**) (v2 + 0x14);
+				if (node == 0) {
+					*(void**) (v2 + 0x14) = s;
+				} else {
+					nxt = *(void**) ((char*) node + 0x3f);
+					if (nxt != 0) {
+						do {
+							node = nxt;
+							nxt = *(void**) ((char*) node + 0x3f);
+						} while (nxt != 0);
+					}
+					*(void**) ((char*) node + 0x3f) = s;
+				}
+			} else {
+				node = *(void**) (v3 + 0x178);
+				if (node == 0) {
+					*(void**) (v3 + 0x178) = s;
+				} else {
+					nxt = *(void**) ((char*) node + 0x3f);
+					if (nxt != 0) {
+						do {
+							node = nxt;
+							nxt = *(void**) ((char*) node + 0x3f);
+						} while (nxt != 0);
+					}
+					*(void**) ((char*) node + 0x3f) = s;
+				}
+			}
+		}
+	}
+	gm_EntitySetField();
+	return 1;
+}
+
 extern int g_1002dde0[4];
 extern int g_array_count[4];
 int g_stat1[4] = {

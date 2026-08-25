@@ -200,103 +200,65 @@ extern char g_office_slots[];
 // FUNCTION: SERVER 0x1000b040
 // InitBuildingTypeTable
 
-#ifdef REBREW_ALLOW_NAKED
-// NAKED verification build: byte-identical to original 0x1000b040.
-// Alignment-memset table init (Finding 19) — no C conversion attempted; fenced-naked.
-__declspec(naked) void InitBuildingTypeTable(void)
+void __cdecl InitBuildingTypeTable(void)
 {
-	__asm {
-		push ebp
-		mov ebp, esp
-		push ecx
-		push ebx
-		push edi
-		mov dword ptr [ebp - 4], 0x3f0
-		mov edi, offset g_office_slots
-		mov ebx, dword ptr [ebp - 4]
-		xor eax, eax
-		lea ecx, [edi + edi*2]
-		and ecx, 3
-		sub ebx, ecx
-		jle L_after_stos
-		rep stosb
-		mov ecx, ebx
-		and ebx, 3
-		shr ecx, 2
-		rep stosd
-	L_after_stos:
-		add ecx, ebx
-		rep stosb
-		xor ecx, ecx
-		pop edi
-		mov eax, offset g_office_slots + 4
-		or edx, 0xffffffff
-		pop ebx
-	L_loop_init:
-		mov byte ptr [eax - 4], cl
-		mov dword ptr [eax], edx
-		mov dword ptr [eax + 0x10], edx
-		add eax, 0x18
-		inc ecx
-		cmp eax, offset g_office_slots + 0x3f4
-		jl L_loop_init
-		mov al, 1
-		mov byte ptr [g_office_slots + 0x38], 2
-		mov byte ptr [g_office_slots + 0x8], al
-		mov byte ptr [g_office_slots + 0x20], al
-		mov al, 4
-		mov byte ptr [g_office_slots + 0x50], 3
-		mov byte ptr [g_office_slots + 0x68], al
-		mov byte ptr [g_office_slots + 0x80], al
-		mov al, 7
-		mov byte ptr [g_office_slots + 0x98], 5
-		mov byte ptr [g_office_slots + 0xb0], 6
-		mov byte ptr [g_office_slots + 0xc8], al
-		mov byte ptr [g_office_slots + 0xe0], al
-		mov byte ptr [g_office_slots + 0xf8], 8
-		mov byte ptr [g_office_slots + 0x110], 9
-		mov byte ptr [g_office_slots + 0x128], 0xa
-		mov byte ptr [g_office_slots + 0x140], 0xb
-		mov byte ptr [g_office_slots + 0x158], 0xc
-		mov byte ptr [g_office_slots + 0x170], 0xd
-		mov byte ptr [g_office_slots + 0x188], 0xe
-		mov byte ptr [g_office_slots + 0x1a0], 0xf
-		mov byte ptr [g_office_slots + 0x1b8], 0x10
-		mov byte ptr [g_office_slots + 0x1d0], 0x11
-		mov byte ptr [g_office_slots + 0x1e8], 0x12
-		mov byte ptr [g_office_slots + 0x200], 0x13
-		mov byte ptr [g_office_slots + 0x218], 0x14
-		mov byte ptr [g_office_slots + 0x230], 0x15
-		mov byte ptr [g_office_slots + 0x248], 0x16
-		mov byte ptr [g_office_slots + 0x260], 0x17
-		mov byte ptr [g_office_slots + 0x278], 0x18
-		mov byte ptr [g_office_slots + 0x290], 0x19
-		mov byte ptr [g_office_slots + 0x2a8], 0x1a
-		mov byte ptr [g_office_slots + 0x2c0], 0x1b
-		mov byte ptr [g_office_slots + 0x2d8], 0x1c
-		mov byte ptr [g_office_slots + 0x2f0], 0x1d
-		mov byte ptr [g_office_slots + 0x308], 0x1e
-		mov byte ptr [g_office_slots + 0x320], 0x1f
-		mov byte ptr [g_office_slots + 0x338], 0x20
-		mov byte ptr [g_office_slots + 0x350], 0x21
-		mov byte ptr [g_office_slots + 0x368], 0x22
-		mov byte ptr [g_office_slots + 0x380], 0x23
-		mov byte ptr [g_office_slots + 0x398], 0x24
-		mov byte ptr [g_office_slots + 0x3b0], 0x25
-		mov byte ptr [g_office_slots + 0x3c8], 0x26
-		mov byte ptr [g_office_slots + 0x3e0], 0x27
-		mov esp, ebp
-		pop ebp
-		ret
-	}
+	char* p;
+	int i;
+
+	memset(g_office_slots, 0, 0x3f0);
+	i = 0;
+	p = g_office_slots + 4;
+	do {
+		*(p - 4) = (char) i;
+		*(int*) p = -1;
+		*(int*) (p + 0x10) = -1;
+		p += 0x18;
+		i++;
+	} while ((int) p < (int) (g_office_slots + 0x3f4));
+
+	*(unsigned char*) (g_office_slots + 0x8) = 0x1;
+	*(unsigned char*) (g_office_slots + 0x20) = 0x1;
+	*(unsigned char*) (g_office_slots + 0x38) = 0x2;
+	*(unsigned char*) (g_office_slots + 0x50) = 0x3;
+	*(unsigned char*) (g_office_slots + 0x68) = 0x4;
+	*(unsigned char*) (g_office_slots + 0x80) = 0x4;
+	*(unsigned char*) (g_office_slots + 0x98) = 0x5;
+	*(unsigned char*) (g_office_slots + 0xb0) = 0x6;
+	*(unsigned char*) (g_office_slots + 0xc8) = 0x7;
+	*(unsigned char*) (g_office_slots + 0xe0) = 0x7;
+	*(unsigned char*) (g_office_slots + 0xf8) = 0x8;
+	*(unsigned char*) (g_office_slots + 0x110) = 0x9;
+	*(unsigned char*) (g_office_slots + 0x128) = 0xa;
+	*(unsigned char*) (g_office_slots + 0x140) = 0xb;
+	*(unsigned char*) (g_office_slots + 0x158) = 0xc;
+	*(unsigned char*) (g_office_slots + 0x170) = 0xd;
+	*(unsigned char*) (g_office_slots + 0x188) = 0xe;
+	*(unsigned char*) (g_office_slots + 0x1a0) = 0xf;
+	*(unsigned char*) (g_office_slots + 0x1b8) = 0x10;
+	*(unsigned char*) (g_office_slots + 0x1d0) = 0x11;
+	*(unsigned char*) (g_office_slots + 0x1e8) = 0x12;
+	*(unsigned char*) (g_office_slots + 0x200) = 0x13;
+	*(unsigned char*) (g_office_slots + 0x218) = 0x14;
+	*(unsigned char*) (g_office_slots + 0x230) = 0x15;
+	*(unsigned char*) (g_office_slots + 0x248) = 0x16;
+	*(unsigned char*) (g_office_slots + 0x260) = 0x17;
+	*(unsigned char*) (g_office_slots + 0x278) = 0x18;
+	*(unsigned char*) (g_office_slots + 0x290) = 0x19;
+	*(unsigned char*) (g_office_slots + 0x2a8) = 0x1a;
+	*(unsigned char*) (g_office_slots + 0x2c0) = 0x1b;
+	*(unsigned char*) (g_office_slots + 0x2d8) = 0x1c;
+	*(unsigned char*) (g_office_slots + 0x2f0) = 0x1d;
+	*(unsigned char*) (g_office_slots + 0x308) = 0x1e;
+	*(unsigned char*) (g_office_slots + 0x320) = 0x1f;
+	*(unsigned char*) (g_office_slots + 0x338) = 0x20;
+	*(unsigned char*) (g_office_slots + 0x350) = 0x21;
+	*(unsigned char*) (g_office_slots + 0x368) = 0x22;
+	*(unsigned char*) (g_office_slots + 0x380) = 0x23;
+	*(unsigned char*) (g_office_slots + 0x398) = 0x24;
+	*(unsigned char*) (g_office_slots + 0x3b0) = 0x25;
+	*(unsigned char*) (g_office_slots + 0x3c8) = 0x26;
+	*(unsigned char*) (g_office_slots + 0x3e0) = 0x27;
 }
-#else
-void InitBuildingTypeTable(void)
-{
-	/* C fallback (no byte-matching conversion; alignment-memset init,
-	 * Finding 19). */
-}
-#endif
 extern unsigned int g_player_slot_0;
 extern int g_save_version[4];
 extern int g_1002dde0[4];

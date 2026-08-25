@@ -15,7 +15,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * in the election slots and an empty slot exists. For 'leav',
  * verifies the player is actually in a slot. */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000d110
 // cm_ChkJoinLeaveElection
 

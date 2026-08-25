@@ -1,42 +1,18 @@
-/* cm_DispatchMoveSlot - fenced _emit */
+/* cm_DispatchMoveSlot - proper C */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
+extern int __cdecl MoveSlotEntry(void*);
+
+/* Dispatch handler: forwards the command payload at offset 0x10 to
+ * MoveSlotEntry, which relocates an entity between inventory slots. */
+
+// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100102f0
 // SYMBOL: _cm_DispatchMoveSlot
+// SIZE: 17
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl cm_DispatchMoveSlot(void* cmd, char* result_buf)
-{
-	__asm {
-		/* 0x100102f0  mov eax, dword ptr [esp + 4] */
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x04
-		/* 0x100102f4  add eax, 0x10 */
-		_emit 0x83
-		_emit 0xc0
-		_emit 0x10
-		/* 0x100102f7  push eax */
-		_emit 0x50
-		/* 0x100102f8  call 0x10011940 */
-		_emit 0xe8
-		_emit 0x43
-		_emit 0x16
-		_emit 0x00
-		_emit 0x00
-		/* 0x100102fd  add esp, 4 */
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x04
-		/* 0x10010300  ret  */
-		_emit 0xc3
-	}
-}
-#else
 int __cdecl cm_DispatchMoveSlot(void* cmd, char* result_buf)
 {
-    /* C fallback */
-    return 0;
+	(void) result_buf;
+
+	return MoveSlotEntry((char*) cmd + 0x10);
 }
-#endif

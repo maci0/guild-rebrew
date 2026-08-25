@@ -1,434 +1,74 @@
-/* ActivateGraveyardSection - fenced _emit */
+/* ActivateGraveyardSection - proper C */
 
-// CFLAGS: /O2 /Gd /DREBREW_ALLOW_NAKED
 // FUNCTION: SERVER 0x10011660
 // SYMBOL: _ActivateGraveyardSection
+// SIZE: 297
 
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl ActivateGraveyardSection(void* a)
+extern char* dword_100a8c30;
+extern int g_1003546c;
+extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+
+/* Validates and activates a graveyard section: resolves the section's
+ * entity, checks the grave slot is a free graveyard field, then enables
+ * the production slots of the worker array for the section's field type. */
+
+int __cdecl ActivateGraveyardSection(void* cmd)
 {
-	__asm {
-/* 0x10011660  push ecx */
-		_emit 0x51
-/* 0x10011661  push esi */
-		_emit 0x56
-/* 0x10011662  push edi */
-		_emit 0x57
-/* 0x10011663  mov edi, dword ptr [esp + 0x10] */
-		_emit 0x8b
-		_emit 0x7c
-		_emit 0x24
-		_emit 0x10
-/* 0x10011667  lea ecx, [esp + 0x10] */
-		_emit 0x8d
-		_emit 0x4c
-		_emit 0x24
-		_emit 0x10
-/* 0x1001166b  mov eax, dword ptr [edi + 8] */
-		_emit 0x8b
-		_emit 0x47
-		_emit 0x08
-/* 0x1001166e  push eax */
-		_emit 0x50
-/* 0x1001166f  push 0 */
-		_emit 0x6a
-		_emit 0x00
-/* 0x10011671  push 0 */
-		_emit 0x6a
-		_emit 0x00
-/* 0x10011673  push ecx */
-		_emit 0x51
-/* 0x10011674  call 0x10015e90 */
-		_emit 0xe8
-		_emit 0x17
-		_emit 0x48
-		_emit 0x00
-		_emit 0x00
-/* 0x10011679  mov edx, dword ptr [esp + 0x20] */
-		_emit 0x8b
-		_emit 0x54
-		_emit 0x24
-		_emit 0x20
-/* 0x1001167d  add esp, 0x10 */
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-/* 0x10011680  test edx, edx */
-		_emit 0x85
-		_emit 0xd2
-/* 0x10011682  je 0x10011782 */
-		_emit 0x0f
-		_emit 0x84
-		_emit 0xfa
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-/* 0x10011688  mov ax, word ptr [edx + 0x27] */
-		_emit 0x66
-		_emit 0x8b
-		_emit 0x42
-		_emit 0x27
-/* 0x1001168c  cmp ax, 0xffff */
-		_emit 0x66
-		_emit 0x3d
-		_emit 0xff
-		_emit 0xff
-/* 0x10011690  je 0x10011782 */
-		_emit 0x0f
-		_emit 0x84
-		_emit 0xec
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-/* 0x10011696  and eax, 0xffff */
-		_emit 0x25
-		_emit 0xff
-		_emit 0xff
-		_emit 0x00
-		_emit 0x00
-/* 0x1001169b  lea eax, [eax + eax*2] */
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x40
-/* 0x1001169e  lea eax, [eax + eax*4] */
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x80
-/* 0x100116a1  lea eax, [eax + eax*8] */
-		_emit 0x8d
-		_emit 0x04
-		_emit 0xc0
-/* 0x100116a4  lea ecx, [eax*4 + 0x100358a0] */
-		_emit 0x8d
-		_emit 0x0c
-		_emit 0x85
-		_emit 0xa0
-		_emit 0x58
-		_emit 0x03
-		_emit 0x10
-/* 0x100116ab  mov eax, dword ptr [0x1003546c] */
-		_emit 0xa1
-		_emit 0x6c
-		_emit 0x54
-		_emit 0x03
-		_emit 0x10
-/* 0x100116b0  cmp ecx, eax */
-		_emit 0x3b
-		_emit 0xc8
-/* 0x100116b2  je 0x10011782 */
-		_emit 0x0f
-		_emit 0x84
-		_emit 0xca
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-/* 0x100116b8  xor ecx, ecx */
-		_emit 0x33
-		_emit 0xc9
-/* 0x100116ba  mov esi, dword ptr [0x100a8c30] */
-		_emit 0x8b
-		_emit 0x35
-		_emit 0x30
-		_emit 0x8c
-		_emit 0x0a
-		_emit 0x10
-/* 0x100116c0  mov cl, byte ptr [edx] */
-		_emit 0x8a
-		_emit 0x0a
-/* 0x100116c2  add esi, ecx */
-		_emit 0x03
-		_emit 0xf1
-/* 0x100116c4  lea eax, [ecx + ecx*2] */
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x49
-/* 0x100116c7  shl eax, 4 */
-		_emit 0xc1
-		_emit 0xe0
-		_emit 0x04
-/* 0x100116ca  add eax, ecx */
-		_emit 0x03
-		_emit 0xc1
-/* 0x100116cc  lea eax, [eax + eax*2] */
-		_emit 0x8d
-		_emit 0x04
-		_emit 0x40
-/* 0x100116cf  cmp byte ptr [esi + eax*4], 0x1d */
-		_emit 0x80
-		_emit 0x3c
-		_emit 0x86
-		_emit 0x1d
-/* 0x100116d3  je 0x100116de */
-		_emit 0x74
-		_emit 0x09
-/* 0x100116d5  pop edi */
-		_emit 0x5f
-/* 0x100116d6  mov eax, 0xfffffffe */
-		_emit 0xb8
-		_emit 0xfe
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-/* 0x100116db  pop esi */
-		_emit 0x5e
-/* 0x100116dc  pop ecx */
-		_emit 0x59
-/* 0x100116dd  ret  */
-		_emit 0xc3
-/* 0x100116de  mov esi, dword ptr [edx + 0x65] */
-		_emit 0x8b
-		_emit 0x72
-		_emit 0x65
-/* 0x100116e1  test esi, esi */
-		_emit 0x85
-		_emit 0xf6
-/* 0x100116e3  jne 0x100116ee */
-		_emit 0x75
-		_emit 0x09
-/* 0x100116e5  pop edi */
-		_emit 0x5f
-/* 0x100116e6  mov eax, 0xfffffffd */
-		_emit 0xb8
-		_emit 0xfd
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-/* 0x100116eb  pop esi */
-		_emit 0x5e
-/* 0x100116ec  pop ecx */
-		_emit 0x59
-/* 0x100116ed  ret  */
-		_emit 0xc3
-/* 0x100116ee  mov ecx, dword ptr [edi + 4] */
-		_emit 0x8b
-		_emit 0x4f
-		_emit 0x04
-/* 0x100116f1  lea edx, [esp + 8] */
-		_emit 0x8d
-		_emit 0x54
-		_emit 0x24
-		_emit 0x08
-/* 0x100116f5  push ecx */
-		_emit 0x51
-/* 0x100116f6  push edx */
-		_emit 0x52
-/* 0x100116f7  push 0 */
-		_emit 0x6a
-		_emit 0x00
-/* 0x100116f9  push 0 */
-		_emit 0x6a
-		_emit 0x00
-/* 0x100116fb  call 0x10015e90 */
-		_emit 0xe8
-		_emit 0x90
-		_emit 0x47
-		_emit 0x00
-		_emit 0x00
-/* 0x10011700  mov eax, dword ptr [esp + 0x18] */
-		_emit 0x8b
-		_emit 0x44
-		_emit 0x24
-		_emit 0x18
-/* 0x10011704  add esp, 0x10 */
-		_emit 0x83
-		_emit 0xc4
-		_emit 0x10
-/* 0x10011707  test eax, eax */
-		_emit 0x85
-		_emit 0xc0
-/* 0x10011709  jne 0x10011714 */
-		_emit 0x75
-		_emit 0x09
-/* 0x1001170b  pop edi */
-		_emit 0x5f
-/* 0x1001170c  mov eax, 0xfffffffa */
-		_emit 0xb8
-		_emit 0xfa
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-/* 0x10011711  pop esi */
-		_emit 0x5e
-/* 0x10011712  pop ecx */
-		_emit 0x59
-/* 0x10011713  ret  */
-		_emit 0xc3
-/* 0x10011714  mov eax, dword ptr [edi + 0xc] */
-		_emit 0x8b
-		_emit 0x47
-		_emit 0x0c
-/* 0x10011717  cmp eax, 3 */
-		_emit 0x83
-		_emit 0xf8
-		_emit 0x03
-/* 0x1001171a  jne 0x1001173d */
-		_emit 0x75
-		_emit 0x21
-/* 0x1001171c  mov eax, dword ptr [esi + 0x14] */
-		_emit 0x8b
-		_emit 0x46
-		_emit 0x14
-/* 0x1001171f  test eax, eax */
-		_emit 0x85
-		_emit 0xc0
-/* 0x10011721  je 0x10011770 */
-		_emit 0x74
-		_emit 0x4d
-/* 0x10011723  cmp dword ptr [esi + 4], 3 */
-		_emit 0x83
-		_emit 0x7e
-		_emit 0x04
-		_emit 0x03
-/* 0x10011727  jl 0x10011770 */
-		_emit 0x7c
-		_emit 0x47
-/* 0x10011729  mov ecx, 1 */
-		_emit 0xb9
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-/* 0x1001172e  pop edi */
-		_emit 0x5f
-/* 0x1001172f  mov byte ptr [esi + 0x1b], cl */
-		_emit 0x88
-		_emit 0x4e
-		_emit 0x1b
-/* 0x10011732  mov byte ptr [esi + 0x1a], cl */
-		_emit 0x88
-		_emit 0x4e
-		_emit 0x1a
-/* 0x10011735  mov byte ptr [esi + 0x19], cl */
-		_emit 0x88
-		_emit 0x4e
-		_emit 0x19
-/* 0x10011738  xor eax, eax */
-		_emit 0x33
-		_emit 0xc0
-/* 0x1001173a  pop esi */
-		_emit 0x5e
-/* 0x1001173b  pop ecx */
-		_emit 0x59
-/* 0x1001173c  ret  */
-		_emit 0xc3
-/* 0x1001173d  cmp eax, 2 */
-		_emit 0x83
-		_emit 0xf8
-		_emit 0x02
-/* 0x10011740  jne 0x10011760 */
-		_emit 0x75
-		_emit 0x1e
-/* 0x10011742  mov eax, dword ptr [esi + 0x10] */
-		_emit 0x8b
-		_emit 0x46
-		_emit 0x10
-/* 0x10011745  test eax, eax */
-		_emit 0x85
-		_emit 0xc0
-/* 0x10011747  je 0x10011770 */
-		_emit 0x74
-		_emit 0x27
-/* 0x10011749  cmp dword ptr [esi + 4], 2 */
-		_emit 0x83
-		_emit 0x7e
-		_emit 0x04
-		_emit 0x02
-/* 0x1001174d  jl 0x10011770 */
-		_emit 0x7c
-		_emit 0x21
-/* 0x1001174f  mov ecx, 1 */
-		_emit 0xb9
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-/* 0x10011754  mov byte ptr [esi + 0x1a], cl */
-		_emit 0x88
-		_emit 0x4e
-		_emit 0x1a
-/* 0x10011757  mov byte ptr [esi + 0x19], cl */
-		_emit 0x88
-		_emit 0x4e
-		_emit 0x19
-/* 0x1001175a  pop edi */
-		_emit 0x5f
-/* 0x1001175b  xor eax, eax */
-		_emit 0x33
-		_emit 0xc0
-/* 0x1001175d  pop esi */
-		_emit 0x5e
-/* 0x1001175e  pop ecx */
-		_emit 0x59
-/* 0x1001175f  ret  */
-		_emit 0xc3
-/* 0x10011760  mov ecx, 1 */
-		_emit 0xb9
-		_emit 0x01
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-/* 0x10011765  cmp eax, ecx */
-		_emit 0x3b
-		_emit 0xc1
-/* 0x10011767  jne 0x10011779 */
-		_emit 0x75
-		_emit 0x10
-/* 0x10011769  mov eax, dword ptr [esi + 0xc] */
-		_emit 0x8b
-		_emit 0x46
-		_emit 0x0c
-/* 0x1001176c  test eax, eax */
-		_emit 0x85
-		_emit 0xc0
-/* 0x1001176e  jne 0x10011757 */
-		_emit 0x75
-		_emit 0xe7
-/* 0x10011770  pop edi */
-		_emit 0x5f
-/* 0x10011771  mov eax, 0xfffffff9 */
-		_emit 0xb8
-		_emit 0xf9
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-/* 0x10011776  pop esi */
-		_emit 0x5e
-/* 0x10011777  pop ecx */
-		_emit 0x59
-/* 0x10011778  ret  */
-		_emit 0xc3
-/* 0x10011779  pop edi */
-		_emit 0x5f
-/* 0x1001177a  mov eax, 0xfffffff8 */
-		_emit 0xb8
-		_emit 0xf8
-		_emit 0xff
-		_emit 0xff
-		_emit 0xff
-/* 0x1001177f  pop esi */
-		_emit 0x5e
-/* 0x10011780  pop ecx */
-		_emit 0x59
-/* 0x10011781  ret  */
-		_emit 0xc3
-/* 0x10011782  pop edi */
-		_emit 0x5f
-/* 0x10011783  or eax, 0xffffffff */
-		_emit 0x83
-		_emit 0xc8
-		_emit 0xff
-/* 0x10011786  pop esi */
-		_emit 0x5e
-/* 0x10011787  pop ecx */
-		_emit 0x59
-/* 0x10011788  ret  */
-		_emit 0xc3
+	void* entity;
+	void* workers;
+	void* resolved;
+	unsigned short grave_id;
+	unsigned char field_id;
+	int field_type;
+
+	gm_ResolveEntityById(&entity, 0, 0, *(int*) ((char*) cmd + 8));
+	if (entity) {
+		grave_id = *(unsigned short*) ((char*) entity + 0x27);
+		if (grave_id != 0xffff) {
+			if ((char*) 0x100358a0 + grave_id * 0x21c != (char*) g_1003546c) {
+				field_id = *(unsigned char*) entity;
+				if (dword_100a8c30[field_id + field_id * 588] != 0x1d) {
+					return -2;
+				}
+				workers = *(void**) ((char*) entity + 0x65);
+				if (!workers) {
+					return -3;
+				}
+				gm_ResolveEntityById(0, 0, &resolved, *(int*) ((char*) cmd + 4));
+				if (!resolved) {
+					return -6;
+				}
+				field_type = *(int*) ((char*) cmd + 0xc);
+				if (field_type == 3) {
+					if (*(int*) ((char*) workers + 0x14)
+					    && *(int*) ((char*) workers + 4) >= 3) {
+						*(char*) ((char*) workers + 0x1b) = 1;
+						*(char*) ((char*) workers + 0x1a) = 1;
+						*(char*) ((char*) workers + 0x19) = 1;
+						return 0;
+					}
+					return -7;
+				}
+				if (field_type == 2) {
+					if (*(int*) ((char*) workers + 0x10) != 0) {
+						if (*(int*) ((char*) workers + 4) >= 2) {
+							*(char*) ((char*) workers + 0x1a) = 1;
+							*(char*) ((char*) workers + 0x19) = 1;
+							return 0;
+						}
+					}
+					return -7;
+				}
+				if (field_type == 1) {
+					if (*(int*) ((char*) workers + 0xc) == 0) {
+						return -7;
+					}
+					*(char*) ((char*) workers + 0x19) = 1;
+					return 0;
+				}
+				return -8;
+			}
+		}
 	}
+	return -1;
 }
-#else
-int __cdecl ActivateGraveyardSection(void* a)
-{
-    /* C fallback */
-    return 0;
-}
-#endif
