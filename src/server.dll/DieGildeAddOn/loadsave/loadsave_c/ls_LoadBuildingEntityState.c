@@ -10,7 +10,7 @@ int __cdecl AllocGraveyardField(int);
 extern void amt_FindEntity26(int);
 extern void amt_FindEntity27(int);
 extern char gm_RandomMod(int);
-extern unsigned char __ftol();
+extern unsigned char _ftol();
 extern void gm_AddOrAccumulateObject(int, int, int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);

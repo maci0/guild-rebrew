@@ -10,7 +10,7 @@
 #include <string.h>
 
 extern int __cdecl rand_mod(int n);
-extern int __cdecl __ftol(void);
+extern int __cdecl _ftol(void);
 extern int __cdecl find_entity_26(int entity_id);
 extern int __cdecl find_entity_27(int entity_id);
 extern int __cdecl fcn_10016cd0(int a, int b, int c);

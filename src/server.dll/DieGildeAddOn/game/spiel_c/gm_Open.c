@@ -21,7 +21,6 @@ typedef struct {
 extern char* g_entity_table; /* 0x101de450 */
 void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
-int __cdecl _getpid(void);
 extern int g_entity_type_table;
 extern char* g_item_def_table;
 extern int g_1014d8c0;
@@ -140,7 +139,6 @@ int __cdecl gm_Open(int map_id)
 			*(char*) (table_offset + 0x21 + g_entity_type_table) + producible_count;
 		table_offset = next_offset;
 	} while (next_offset < 0xca78);
-	_getpid();
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x588, "gm_Open(): exit", 1);
 	return 0;
 }

@@ -221,8 +221,8 @@ voidpf zcalloc (opaque, items, size)
     /* The game's zlib build routes zcalloc through the nh_malloc thunk
      * (0x1001a7f7) and zcfree through CRT free (0x1001ab81) directly,
      * matching the original server.dll bytes. */
-    extern void* __cdecl nh_malloc_thunk(unsigned int size);
-    return (voidpf) nh_malloc_thunk(items * size);
+    extern void* __cdecl _nh_malloc(unsigned int size);
+    return (voidpf) _nh_malloc(items * size);
 }
 
 void  zcfree (opaque, ptr)

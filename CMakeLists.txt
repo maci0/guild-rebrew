@@ -178,11 +178,14 @@ if(REBREW_BUILD_SERVER)
 
   # System import libs resolve inside the toolchain image via LIB
   # (Z:\opt\msvc6.0\VC98\Lib); WS2_32/WINMM are not in CMake's default set.
+  # LIBCMT is the release static CRT the original binary links against —
+  # the CRT is linked, not reversed (run_000.c removed).
   target_link_libraries(server_dll PRIVATE
     KERNEL32.lib
     USER32.lib
     WS2_32.lib
     WINMM.lib
+    LIBCMT.lib
   )
 
   set_property(TARGET server_dll PROPERTY OUTPUT_NAME "server")
@@ -299,9 +302,9 @@ if (MSVC_FOR_DECOMP)
   if(TARGET server_dll)
     if(REBREW_DEBUG_INFO)
       target_compile_options(server_dll PRIVATE /Z7)
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE")
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD")
     else()
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE")
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD")
     endif()
     # Post-link (rebrew postlink --layout layout/server.dll): converge the
     # linked DLL onto the original's layout byte-for-byte, purely from the

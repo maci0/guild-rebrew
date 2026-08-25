@@ -36,7 +36,7 @@
 
 extern float _g_stat_max;
 extern float _g_stat_min;
-extern unsigned int __ftol(void);
+extern unsigned int _ftol(void);
 
 /* Execution handler: modifies a character stat by index.
  * Reads entity ID, stat index, and delta from the command
@@ -84,7 +84,7 @@ __declspec(naked) int __cdecl cm_ExModifyStat(int* cmd)
 		jne L_call_skip_clamp
 		fstp st(0)
 		fld dword ptr _g_stat_max
-		call __ftol
+		call _ftol
 		mov byte ptr [esi + edi + 0x80], al
 		pop edi
 		pop esi
@@ -95,7 +95,7 @@ __declspec(naked) int __cdecl cm_ExModifyStat(int* cmd)
 		fstp st(0)
 		fld dword ptr _g_stat_min
 	L_call_skip_clamp:
-		call __ftol
+		call _ftol
 		mov byte ptr [esi + edi + 0x80], al
 		pop edi
 		pop esi

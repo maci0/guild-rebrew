@@ -26,7 +26,6 @@ void __cdecl RecvGameSavegame(void);
 int __cdecl srv_Init(void);
 int __cdecl AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10);
-void __cdecl _seterrormode(int value);
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 extern unsigned char g_connections[]; /* 0x101deb00 */
@@ -111,7 +110,6 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 	srv_Init();
 	sprintf(log_buffer, (char*) 0x100298d8, *(int*) 0x11764084);
 	LogMessageInternal((char*) 0x100298b0, 0x131, log_buffer, 1);
-	_seterrormode(timeGetTime());
 
 	last_announce_tick = 0;
 	phase_complete = 0;

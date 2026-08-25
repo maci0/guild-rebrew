@@ -353,7 +353,7 @@ status = "RELOC"
 
 ["SERVER.0x1000c600"]
 size = 109
-status = "SIZE_MISMATCH"
+status = "NEAR_MATCHING"
 
 ["SERVER.0x1000c670"]
 size = 45
@@ -734,7 +734,7 @@ status = "SIZE_MISMATCH"
 
 ["SERVER.0x10011890"]
 size = 164
-status = "NEAR_MATCHING"
+status = "RELOC"
 analysis = "Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure."
 globals = "SERVER 0x1003546c"
 note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=0 vs 4294967294"
@@ -910,7 +910,7 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10015950"]
 size = 861
-status = "NEAR_MATCHING"
+status = "SIZE_MISMATCH"
 ghidra = "InitGameWorld"
 analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
@@ -997,7 +997,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016cd0"]
 size = 272
-status = "NEAR_MATCHING"
+status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016de0"]
@@ -1049,8 +1049,8 @@ status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100179b0"]
-size = 197
-status = "SIZE_MISMATCH"
+size = 181
+status = "RELOC"
 
 ["SERVER.0x10017a70"]
 size = 62
@@ -1180,7 +1180,7 @@ status = "RELOC"
 
 ["SERVER.0x10019c60"]
 size = 98
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 
 ["SERVER.0x10019cd0"]
 size = 48

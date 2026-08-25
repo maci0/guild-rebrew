@@ -46,8 +46,8 @@ int __cdecl gm_AddOrAccumulateObject(int a, int b, int c)
 	}
 	if (!gm_ResolveEntityById(&dyn, &exi, &sta, a)) {
 		char buf[0x200];
-		sprintf(&buf[0x10], "gm_AddObjekt(): Parent not found. ObjProt:%i Menge:%i", b, c);
-		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xdfd, &buf[0x10], 8);
+		sprintf(buf, "gm_AddObjekt(): Parent not found. ObjProt:%i Menge:%i", b, c);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xdfd, buf, 8);
 		return 0;
 	}
 	if (dyn != 0) p = (char*) dyn + 0x5d;

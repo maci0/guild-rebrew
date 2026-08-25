@@ -146,7 +146,7 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
                                     void* filter, int type);
 int __cdecl fcn_10016ea0(int a, int b, int c);
 int __cdecl gm_AddOrAccumulateObject(int a, int b, int c);
-int __cdecl __ftol(void);
+int __cdecl _ftol(void);
 
 /* Moves a graveyard worker's slot entry to the field it currently works
  * in: finds the source entry and a free destination slot, copies the
@@ -225,7 +225,7 @@ int __cdecl gv_MoveSlotEntry(void* a, void* arg2)
 	if (count > 0) {
 		fcn_10016ea0(*(int*) ((char*) arg2 + 4),
 		             table_100a8c94[g_current_season * 189], 0);
-		i = __ftol((float) count * table_1002572c[*(unsigned char*) ((char*) a + 0xd)]);
+		i = _ftol((float) count * table_1002572c[*(unsigned char*) ((char*) a + 0xd)]);
 		gm_AddOrAccumulateObject(0x100358a4 + i * 540,
 		                         table_100a8c94[g_current_season * 189], i);
 	}

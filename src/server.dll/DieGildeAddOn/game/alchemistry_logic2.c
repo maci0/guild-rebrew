@@ -2,7 +2,7 @@
 #include "../../Units/m_alloc/m_alloc.h"
 
 #include <string.h>
-int __cdecl __ftol(void);
+int __cdecl _ftol(void);
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
@@ -268,6 +268,11 @@ int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
 // FUNCTION: SERVER 0x1000c600
 // SYMBOL: _ahm_InitRandomEntity
 // SIZE: 109
+// NEAR_MATCHING 100/109: scale-loop scheduling residue — target emits
+// `fstp [eax]; add eax,0xc; dec edx; jne` (store before pointer bump);
+// MSVC6 6.0 folds this shape to `add; dec; fstp [eax-0xc]` for every
+// source form tried. The increment-first loop below reproduces the
+// store encoding (fstp [eax]) at the cost of a base-12 lea + fld [eax+8].
 
 char* __cdecl ahm_InitRandomEntity(void)
 {
@@ -279,19 +284,19 @@ char* __cdecl ahm_InitRandomEntity(void)
 
 	idx = gm_RandomMod(0x20) & 0xffff;
 	counter = 0x20;
-	do {
+	while (counter != 0) {
 		if (*(unsigned char*) (0x1002a2c2 + idx * 244) == 0)
 			goto found;
 		counter--;
 		idx = (idx + 1) & 0x1f;
-	} while (counter != 0);
+	}
 	return 0;
 found:
 	off = idx * 244;
-	p = (float*) (0x1002a200 + off);
+	p = (float*) (0x1002a200 + off) - 3;
 	for (n = 0xe; n != 0; n--) {
-		*p = *(float*) ((char*) p - 4) * dScaleFactor;
 		p += 3;
+		*p = *(p - 1) * dScaleFactor;
 	}
 	*(unsigned char*) (0x1002a2c2 + off) = 1;
 	return (char*) (0x1002a1d0 + off);

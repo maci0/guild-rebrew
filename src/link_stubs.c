@@ -325,3 +325,22 @@ char s_cm_ExChangeDesire___Invalid_I_1002d0f4[1] = "";
 char s_cm_ExChangeFloat___Invalid_Id_1002d134[1] = "";
 char s_cm_ExClearLagerslot___Invalid__L_1002d088[1] = "";
 char s_cm_ExClearLagerslot___Lager_has_n_1002d054[1] = "";
+
+
+/* --- CRT locale stubs: resolve symbols that would otherwise pull
+ * LIBCMT's locale objects (setlocal.obj/getqloc.obj/w_loc.obj/a_loc.obj),
+ * which reference NLS APIs (EnumSystemLocalesA, GetLocaleInfoA, ...) that
+ * the original binary does NOT import.  The original's locale data lives
+ * in the restored .data gap (data_restore.c); postlink rewrites .text
+ * operands to the reference addresses.  C names below map to the LIBCMT
+ * symbols via MSVC6 cdecl decoration (C foo -> symbol _foo). --- */
+int __setlc_active = 0;            /* ___setlc_active */
+int __unguarded_readlc_active = 0; /* ___unguarded_readlc_active */
+int __lc_handle = 0;               /* ___lc_handle */
+int __lc_codepage = 0;             /* ___lc_codepage */
+int __lc_collate_cp = 0;           /* ___lc_collate_cp */
+int __mb_cur_max = 0;              /* ___mb_cur_max */
+unsigned short* _pctype = 0;       /* __pctype */
+int __crtGetLocaleInfoA = 0;       /* ___crtGetLocaleInfoA */
+int __crtGetLocaleInfoW = 0;       /* ___crtGetLocaleInfoW */
+int __get_qualified_locale = 0;    /* ___get_qualified_locale */

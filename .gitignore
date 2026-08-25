@@ -74,3 +74,4 @@ rebrew-function.toml.lock
 
 # Legacy binary layout zip (replaced by the committed text layout/<target>/)
 layout/*.zip
+build-*/

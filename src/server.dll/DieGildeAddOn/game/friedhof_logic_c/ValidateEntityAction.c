@@ -29,7 +29,7 @@ int __cdecl ValidateEntityAction(void* cmd)
 				if (*(void**) ((char*) entity + 0x65) == 0) {
 					return -3;
 				}
-				return (SpawnGraveyardEntities(entity, *(int*) ((char*) cmd + 0x13)) > 0 ? 4 : 0) + (-4);
+				return SpawnGraveyardEntities(entity, *(int*) ((char*) cmd + 0x13)) > 0 ? 0 : -4;
 			}
 		}
 	}

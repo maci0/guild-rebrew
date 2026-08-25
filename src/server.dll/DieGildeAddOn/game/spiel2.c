@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-int __cdecl __ftol(void);
+int __cdecl _ftol(void);
 
 typedef int(__cdecl* ALLOCFN)(int, int, int);
 

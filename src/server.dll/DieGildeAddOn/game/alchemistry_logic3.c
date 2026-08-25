@@ -2,7 +2,7 @@
 #include "../../Units/m_alloc/m_alloc.h"
 
 #include <string.h>
-int __cdecl __ftol(void);
+int __cdecl _ftol(void);
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 

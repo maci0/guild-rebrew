@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <stdio.h>
 extern unsigned int __cdecl crc32(unsigned int crc, unsigned char* buf, unsigned int len);
-extern int __cdecl crt_toupper(int c);
+extern int __cdecl toupper(int c);
 /* Opens a VFS stream over a caller buffer. Parses the mode flags
  * (N = none, R = read, W = write, Z = zlib) and initializes the
  * stream structure with the matching inflate/deflate setup. */
@@ -34,7 +34,7 @@ int __cdecl OpenVfsStream(unsigned char* buf, unsigned int size, char* mode_flag
 		return 0;
 	}
 	for (p = mode_flags; *p != 0; p++) {
-		idx = crt_toupper(*p) - 0x4e;
+		idx = toupper(*p) - 0x4e;
 		switch (idx) {
 		case 0:
 			mode18 = 0;

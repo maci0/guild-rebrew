@@ -7,7 +7,7 @@
  * header init (type byte from arg4, id, parent fields), the father/mother
  * resolution via gm_GetEntityTableEntry, the gender/class checks
  * (gm_EntityClassCheck / gm_IsInRange), the random trait generation
- * (gm_RandomMod / gm_RandomFloat01 / gm_RandomQuadratic / __ftol), the
+ * (gm_RandomMod / gm_RandomFloat01 / gm_RandomQuadratic / _ftol), the
  * attribute clamping and the final id assignment with the 0x10030b6c
  * counter. The middle ~2500 bytes interleave dozens of per-type field
  * initializations whose exact register allocation and branch layout msvc6

@@ -17,7 +17,7 @@ extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, int d, int e);
 extern int __cdecl fcn_10016ea0(int a, int b, int c);
 extern int __cdecl gm_AddOrAccumulateObject(int a, int b, int c);
-extern int __cdecl __ftol(void);
+extern int __cdecl _ftol(void);
 
 int __cdecl HireProductionWorker(void* req)
 {

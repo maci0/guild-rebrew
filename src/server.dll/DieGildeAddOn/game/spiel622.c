@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-int __cdecl __ftol(void);
+int __cdecl _ftol(void);
 
 typedef int(__cdecl* ALLOCFN)(int, int, int);
 
@@ -451,11 +451,6 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 // FUNCTION: SERVER 0x10019c60
 // gm_FindEntityByOwner
-//   NEAR_MATCHING 12/98: logic identical; msvc6 register allocation differs —
-//   original keeps arg1 in edi and i in esi with a split prologue (null path
-//   returns before esi is pushed); ours allocates arg1 to esi / i to edx and
-//   merges the null return into the shared exit. No source ordering tried
-//   (decl order, local copy, goto/result form) changes the allocation.
 
 char* __cdecl gm_FindEntityByOwner(int arg1)
 {
@@ -465,17 +460,14 @@ char* __cdecl gm_FindEntityByOwner(int arg1)
 	if (arg1 == 0) {
 		return NULL;
 	}
-	p = (char*) 0x100358a2;
-	i = 0;
-	do {
+	for (i = 0; i < 0x300; i++) {
+		p = (char*) 0x100358a2 + i * 0x21c;
 		if (p[0x162] != 0 && *(int*) (p + 0x16a) == arg1) {
 			if (*p == 6 || *p == 7 || *p == 1 || *p == 2) {
 				return (char*) 0x100358a0 + i * 0x21c;
 			}
 		}
-		p += 0x21c;
-		i++;
-	} while (p < (char*) 0x1009aca2);
+	}
 	return NULL;
 }
 
