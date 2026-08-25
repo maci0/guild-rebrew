@@ -1,8 +1,9 @@
 /* rdata_restore.c — missing .rdata middle content.
 
 The game's .rdata between the zlib tables and the CRT strings (original
-offsets 0x252e8..0x26608 (ends at the import descriptors)) is referenced by naked _emit dumps and string
-literals that the decompiled sources never define: the VFS ".BIN" extension
+offsets 0x252e8..0x26608 (ends at the import descriptors)) is referenced by
+inline-asm dumps and string literals that the decompiled sources never
+define: the VFS ".BIN" extension
 strings, the compression float tables, the game balance tables, a table of
 CRT lock-function pointers, and the CRT error/locale strings.  The original
 binary was linked with these as unreferenced-but-kept .rdata contributions;
@@ -10,12 +11,11 @@ this TU reproduces the exact bytes so the section lands at the original RVA.
 
 The data is emitted as one blob and placed in the link right after
 trees.c.obj (see order_sources.py), so its .rdata contribution starts at
-0x252e8 exactly like the original's.  Fenced under REBREW_ALLOW_NAKED so
-byte-identity builds can consume it.
+0x252e8 exactly like the original's.  Always compiled so byte-identity
+builds consume it.
 
 */
 // DATA: SERVER 0x100252e8  /* .rdata restore blob at raw 0x252e8 */
-#ifdef REBREW_ALLOW_NAKED
 const unsigned char g_rdata_restore_252e8[] = {
 
 	0x20,0x75,0x6e,0x7a,0x69,0x70,0x20,0x30,0x2e,0x31,0x35,0x61,0x20,0x43,0x6f,0x70,
@@ -325,4 +325,3 @@ const unsigned char g_rdata_restore_252e8[] = {
 	0x53,0x75,0x6e,0x00,0x00,0x00,0x00,0x00,0xff,0xff,0xff,0xff,0x44,0x34,0x02,0x10,
 	0x48,0x34,0x02,0x10,0xff,0xff,0xff,0xff,0xb3,0x34,0x02,0x10,0xb7,0x34,0x02,0x10,
 };
-#endif

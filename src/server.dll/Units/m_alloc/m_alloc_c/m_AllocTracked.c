@@ -8,7 +8,7 @@
 
 void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
 void __cdecl ReportMessage(char* msg); /* Single arg log? */
-void* __cdecl _callnewh(int); /* 0x1001a7f7 */
+void* __cdecl malloc(unsigned int size); /* 0x1001a7f7 - game malloc */
 extern int g_array_count;
 extern int g_stat1;
 extern int g_stat2;
@@ -78,7 +78,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 				node = node->next;
 			}
 			if (node == 0) {
-				node = (struct GroupNode*) _callnewh(0x28);
+				node = (struct GroupNode*) malloc(0x28);
 				strcpy(node->name, buf);
 				node->size_total = 0;
 				node->count_total = 0;
@@ -91,7 +91,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 		}
 	}
 	node->count++;
-	ptr = _callnewh(size);
+	ptr = malloc(size);
 	if (ptr == 0) {
 		sprintf(buf, "Out of Memory Error: Malloc - Failed %s for %u bytes", tag, size);
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0xcd, buf);

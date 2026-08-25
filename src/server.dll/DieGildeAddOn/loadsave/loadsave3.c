@@ -45,7 +45,6 @@ extern unsigned int g_1003546c; /* 0x1003546c */
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10014070
 // ls_ID2Ptr
-// NOTE: best-effort proper C (was 103/491 naked-era, now 187/491).  All
 // control flow, stack layout and reloc sites match; remaining deltas are
 // msvc6 scheduler/allocation quirks: (1) the entity-loop gate hoists the
 // CSE'd `lea eax,[esi-4]` ABOVE the `je` continue-branch and folds the

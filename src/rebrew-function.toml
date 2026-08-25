@@ -197,8 +197,9 @@ analysis = "Initialize all player slots to disconnected state, then create TCP l
 
 ["SERVER.0x1000a080"]
 size = 600
-status = "RELOC"
+status = "NEAR_MATCHING"
 analysis = "Iterates over g_player_slots looking for an empty slot. If one is found, calls Ordinal_1 (accept()) to accept a new connection, configures the socket, initializes the slot structures (receive_buffer, send_buffer), and flags it as a newly connected player."
+cflags = "/O2 /Gd"
 
 ["SERVER.0x1000a2e0"]
 size = 96
@@ -207,7 +208,8 @@ analysis = "Shutdown socket (SD_BOTH) | Close socket handle"
 
 ["SERVER.0x1000a340"]
 size = 336
-status = "RELOC"
+status = "SIZE_MISMATCH"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x1000a490"]
 size = 211
@@ -404,6 +406,7 @@ status = "RELOC"
 ["SERVER.0x1000d020"]
 size = 22
 status = "RELOC"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x1000d040"]
 size = 22
@@ -524,6 +527,7 @@ cflags = "/O2 /Gd"
 ["SERVER.0x1000ef90"]
 size = 26
 status = "RELOC"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x1000efb0"]
 size = 122
@@ -660,6 +664,7 @@ status = "RELOC"
 ["SERVER.0x100102f0"]
 size = 17
 status = "RELOC"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x10010310"]
 size = 52
@@ -686,6 +691,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 ["SERVER.0x100105b0"]
 size = 329
 status = "RELOC"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x10010710"]
 size = 320
@@ -706,6 +712,7 @@ status = "SIZE_MISMATCH"
 ["SERVER.0x10010f50"]
 size = 66
 status = "RELOC"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x10010fa0"]
 size = 525
@@ -714,6 +721,7 @@ status = "RELOC"
 ["SERVER.0x100111b0"]
 size = 501
 status = "RELOC"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x100113b0"]
 size = 390
@@ -731,6 +739,7 @@ globals = "SERVER 0x100a8c30"
 ["SERVER.0x10011790"]
 size = 242
 status = "SIZE_MISMATCH"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x10011890"]
 size = 164
@@ -738,6 +747,7 @@ status = "RELOC"
 analysis = "Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure."
 globals = "SERVER 0x1003546c"
 note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=0 vs 4294967294"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x10011940"]
 size = 674
@@ -758,6 +768,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 ["SERVER.0x100122e0"]
 size = 346
 status = "SIZE_MISMATCH"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x10012440"]
 size = 37
@@ -805,6 +816,7 @@ cflags = "/O2 /Gd"
 size = 491
 status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd"
+note = "best-effort proper C (was 103/491 naked-era, now 187/491).  All"
 
 ["SERVER.0x10014260"]
 size = 892
@@ -960,6 +972,7 @@ size = 320
 status = "PROVEN"
 analysis = "Parse vararg criteria tuples for entity query filtering."
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+note = "structure is faithful to the reference (loop, switch, flag dispatch,"
 
 ["SERVER.0x100165a0"]
 size = 37
@@ -1018,6 +1031,7 @@ status = "SIZE_MISMATCH"
 size = 304
 status = "PROVEN"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+note = "matches from the switch dispatch onward; the 9-global setup block"
 
 ["SERVER.0x10017210"]
 size = 39
@@ -1036,6 +1050,7 @@ ghidra = "InitBuildingDefaultItems"
 ["SERVER.0x10017400"]
 size = 202
 status = "RELOC"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x100174d0"]
 size = 1088
@@ -1237,15 +1252,25 @@ source = "TZSET.C:374"
 ["SERVER.0x1001a835"]
 source = "DBGHEAP.C:126"
 size = 252
+status = "RELOC"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001ab81"]
 source = "DBGHEAP.C:952"
+size = 233
+status = "RELOC"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001b5cc"]
 source = "DBGHEAP.C:763"
+size = 815
+status = "NEAR_MATCHING"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001ff84"]
 source = "DBGHEAP.C:452"
+size = 153
+cflags = "/O1 /Gd"
 
 ["SERVER.0x10020943"]
 source = "TZSET.C:96"
@@ -1271,7 +1296,8 @@ status = "EXACT"
 
 ["SERVER.0x1001ba71"]
 size = 51
-status = "EXACT"
+status = "RELOC"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001baa4"]
 size = 235
@@ -1280,7 +1306,9 @@ size = 235
 status = "RELOC"
 
 ["SERVER.0x1001bb60"]
-status = "MISSING_SIZE"
+status = "RELOC"
+size = 47
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001bc61"]
 size = 174
@@ -1324,14 +1352,17 @@ status = "MISSING_SIZE"
 
 ["SERVER.0x1001a7e5"]
 size = 9
-status = "EXACT"
+status = "RELOC"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001a527"]
 size = 25
 status = "EXACT"
 
 ["SERVER.0x1001bbb2"]
-status = "MISSING_SIZE"
+status = "RELOC"
+size = 47
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001a2eb"]
 status = "MISSING_SIZE"
@@ -1341,11 +1372,13 @@ status = "MISSING_SIZE"
 
 ["SERVER.0x1001ad29"]
 size = 9
-status = "EXACT"
+status = "RELOC"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001fdf8"]
 size = 57
-status = "EXACT"
+status = "RELOC"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001f855"]
 size = 117
@@ -1369,17 +1402,23 @@ status = "EXACT"
 
 ["SERVER.0x1001bdd0"]
 size = 123
-status = "EXACT"
+status = "SIZE_MISMATCH"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001a7f7"]
 size = 18
 status = "RELOC"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001d036"]
-status = "MISSING_SIZE"
+status = "RELOC"
+size = 97
+cflags = "/O1 /Oy- /Gd"
 
 ["SERVER.0x1001d097"]
-status = "MISSING_SIZE"
+status = "RELOC"
+size = 21
+cflags = "/O1 /Oy- /Gd"
 
 ["SERVER.0x10021aad"]
 size = 9
@@ -1391,11 +1430,13 @@ status = "EXACT"
 
 ["SERVER.0x1001a809"]
 size = 44
-status = "EXACT"
+status = "RELOC"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x1001d238"]
 size = 27
-status = "EXACT"
+status = "RELOC"
+cflags = "/O1 /Gd"
 
 ["SERVER.0x10003960"]
 status = "EXACT"
@@ -1443,6 +1484,7 @@ size = 235
 ["SERVER.0x100011f0"]
 size = 309
 status = "RELOC"
+cflags = "/O2 /Gd"
 
 ["SERVER.0x10001b1d"]
 size = 129
@@ -1451,3 +1493,243 @@ status = "EXACT"
 ["SERVER.0x10003600"]
 size = 54
 status = "EXACT"
+
+["SERVER.0x1001b8fb"]
+size = 217
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001b9d4"]
+size = 157
+cflags = "/O1 /Oy- /Gd"
+status = "RELOC"
+
+["SERVER.0x1001a960"]
+size = 266
+status = "PROVEN"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001aa99"]
+size = 232
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001a931"]
+size = 47
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001aa6a"]
+size = 47
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001d3c8"]
+size = 93
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001d515"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 43
+
+["SERVER.0x1001d540"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 809
+
+["SERVER.0x1001db72"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 177
+
+["SERVER.0x1001dc23"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 251
+
+["SERVER.0x1001dd1e"]
+status = "EXACT"
+cflags = "/O1 /Gd"
+size = 758
+
+["SERVER.0x1001e014"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 324
+
+["SERVER.0x1001e158"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 86
+
+["SERVER.0x1001e1ae"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 194
+
+["SERVER.0x1001d425"]
+size = 168
+status = "SIZE_MISMATCH"
+
+["SERVER.0x1001d0ac"]
+size = 84
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001d100"]
+size = 30
+status = "SIZE_MISMATCH"
+
+["SERVER.0x1001d198"]
+size = 160
+status = "SIZE_MISMATCH"
+
+["SERVER.0x1001a692"]
+size = 15
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001e270"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 87
+
+["SERVER.0x1001e2c7"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 69
+
+["SERVER.0x1001e514"]
+status = "EXACT"
+cflags = "/O1 /Gd"
+size = 292
+
+["SERVER.0x1001e638"]
+status = "EXACT"
+cflags = "/O1 /Gd"
+size = 169
+
+["SERVER.0x1001a643"]
+size = 45
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001ad32"]
+size = 164
+cflags = "/O1 /Gd"
+toolchain = "msvc600sp6"
+status = "SIZE_MISMATCH"
+
+["SERVER.0x1001e30c"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 520
+
+["SERVER.0x1001d869"]
+status = "RELOC"
+cflags = "/O1 /Gd"
+size = 777
+
+["SERVER.0x1001fe31"]
+size = 339
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001f8e0"]
+size = 224
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001ae20"]
+size = 272
+cflags = "/O1 /Gd"
+
+["SERVER.0x10022107"]
+size = 137
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001d280"]
+size = 328
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001d4cd"]
+size = 72
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001d253"]
+size = 45
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x10021200"]
+size = 56
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001ac9f"]
+size = 46
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001bb8f"]
+size = 35
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001bbe1"]
+size = 35
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001f0ff"]
+size = 147
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001a758"]
+size = 26
+status = "EXACT"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001f8d0"]
+size = 16
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001fb12"]
+size = 436
+cflags = "/O1 /Gd"
+
+["SERVER.0x100220eb"]
+size = 28
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001cfa1"]
+size = 41
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001cfca"]
+size = 108
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001d11e"]
+size = 19
+status = "EXACT"
+cflags = "/O1 /Gd"
+
+["SERVER.0x10020fe1"]
+size = 23
+status = "RELOC"
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001a7ee"]
+size = 9
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001c9a5"]
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001f9c0"]
+cflags = "/O1 /Gd"

@@ -1,16 +1,10 @@
-/* ReadVfsData — fenced _emit: C compiles 480B over the original. */
+/* ReadVfsData — VFS stream read (0x10008E40), SIZE_MISMATCH (obj 455 vs
+ * target 472): register allocation (stream→edi in target) and the
+ * dest-alignment memcpy prelude (lea ecx,[edi+edi*2]; ...) are
+ * unreproducible msvc6 expansions (docs/msvc6-allocator.md). */
 
 // FUNCTION: SERVER 0x10008E40
 // ReadVfsData
-// SIZE: 480
-
-/* ReadVfsData — VFS stream read (0x10008E40). The dest-alignment memcpy
- * prelude (lea ecx,[edi+edi*2]; ...) is an unreproducible msvc6 expansion
- * (docs/msvc6-allocator.md); a plain memcpy compiles to the non-aligned
- * form. */
-
-// ReadVfsData
-// SIZE: 480
 
 #include <string.h>
 

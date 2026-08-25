@@ -6,7 +6,7 @@
 
 void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
 void __cdecl ReportMessage(char* msg);
-void* __cdecl _callnewh(int);
+void* __cdecl malloc(unsigned int size); /* 0x1001a7f7 - game malloc */
 void __cdecl ReportMemoryGroupInfo(const char* toggle);
 extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 // CFLAGS: /O2 /Gd

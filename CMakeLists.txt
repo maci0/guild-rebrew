@@ -302,9 +302,9 @@ if (MSVC_FOR_DECOMP)
   if(TARGET server_dll)
     if(REBREW_DEBUG_INFO)
       target_compile_options(server_dll PRIVATE /Z7)
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD")
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12")
     else()
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD")
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12")
     endif()
     # Post-link (rebrew postlink --layout layout/server.dll): converge the
     # linked DLL onto the original's layout byte-for-byte, purely from the

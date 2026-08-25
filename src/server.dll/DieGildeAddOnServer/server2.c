@@ -29,7 +29,7 @@ extern int g_stop_flag;
 void __cdecl InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);
 void __cdecl ShutdownMemoryAllocator();
-int __cdecl gm_Open(char*, char*);
+int __cdecl gm_Open(char*);
 int __cdecl CreateListenSocket(int port);
 void __cdecl InitPacketPool(int);
 extern int g_net_socket;
@@ -44,137 +44,35 @@ extern unsigned char g_connections[]; /* 0x101deb00 */
 
 // FUNCTION: SERVER 0x10009d30
 // srv_Init
+// CFLAGS: /O2 /Gd
 
-__declspec(naked) int __cdecl srv_Init(void)
+int __cdecl srv_Init(void)
 {
-	__asm {
-		sub esp, 0x504
-		push ebx
-		push esi
-		push edi
-		_emit 0xff
-		_emit 0x15
-		_emit 0x6c
-		_emit 0x40
-		_emit 0x02
-		_emit 0x10
-		push 2
-		push eax
-		_emit 0xff
-		_emit 0x15
-		_emit 0x68
-		_emit 0x40
-		_emit 0x02
-		_emit 0x10
-		push 3
-		push 0
-		push 0
-		push 0x1000a010
-		call InitializeLogAndErrorHandler
-		push 0x7fa6
-		call InitPacketPool
-		mov edi, 0x10029594
-		or ecx, 0xffffffff
-		xor eax, eax
-		lea edx, [esp + 0x20]
-		repne scasb
-		not ecx
-		sub edi, ecx
-		mov eax, ecx
-		mov esi, edi
-		mov edi, edx
-		lea edx, [esp + 0x20]
-		shr ecx, 2
-		rep movsd
-		mov ecx, eax
-		xor eax, eax
-		and ecx, 3
-		rep movsb
-		mov edi, 0x10029998
-		or ecx, 0xffffffff
-		repne scasb
-		not ecx
-		sub edi, ecx
-		mov esi, edi
-		mov ebx, ecx
-		mov edi, edx
-		or ecx, 0xffffffff
-		repne scasb
-		mov ecx, ebx
-		dec edi
-		shr ecx, 2
-		rep movsd
-		mov ecx, ebx
-		lea eax, [esp + 0x20]
-		and ecx, 3
-		push eax
-		rep movsb
-		call gm_Open
-		add esp, 0x18
-		test eax, eax
-		pop edi
-		pop esi
-		pop ebx
-		jge L_gm_ok
-		_emit 0x8d
-		_emit 0x4c
-		_emit 0x24
-		_emit 0x00
-		lea edx, [esp + 0x104]
-		push ecx
-		push 0x10029974
-		push edx
-		call sprintf
-		lea eax, [esp + 0x110]
-		push 1
-		push eax
-		push 0x3cd
-		push 0x100298b0
-		call LogMessageInternal
-		add esp, 0x1c
-		add esp, 1284
-		ret
-	L_gm_ok:
-		call gm_InitEntitySlots
-		call InitBuildingTypeTable
-		_emit 0x8b
-		_emit 0x0d
-		_emit 0x88
-		_emit 0x40
-		_emit 0x76
-		_emit 0x11
-		push ecx
-		call CreateListenSocket
-		add esp, 4
-		cmp eax, -1
-		_emit 0xa3
-		_emit 0xec
-		_emit 0xea
-		_emit 0x1d
-		_emit 0x10
-		jne L_socket_ok
-		push 1
-		push 0x10029948
-		push 0x3db
-		push 0x100298b0
-		call LogMessageInternal
-		add esp, 0x10
-		add esp, 1284
-		ret
-	L_socket_ok:
-		_emit 0xc7
-		_emit 0x05
-		_emit 0x90
-		_emit 0x40
-		_emit 0x76
-		_emit 0x11
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		_emit 0x00
-		add esp, 1284
-		ret
+	char path[0x104];
+	char msg[0x400];
+	void* hThread;
+
+	hThread = GetCurrentThread();
+	SetThreadPriority(hThread, 2);
+	((int (__cdecl*)(void*, int, int, int)) InitializeLogAndErrorHandler)((void*) CleanupSockets, 0, 0, 3);
+	InitPacketPool(0x7fa6);
+	strcpy(path, (char*) 0x10029594);
+	strcat(path, (char*) 0x10029998);
+	if (gm_Open(path) < 0) {
+		sprintf(msg, "Could not open gamefiles path:%s", path);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x3cd, msg, 1);
+		goto srv_done;
 	}
+	gm_InitEntitySlots();
+	InitBuildingTypeTable();
+	g_net_socket = CreateListenSocket(*(int*) 0x11764088);
+	if (g_net_socket == -1) {
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x3db, "***ERROR: Initialization of Socket failed!\n", 1);
+		goto srv_done;
+	}
+	*(int*) 0x11764090 = 0;
+srv_done:
+	;
 }
 
 /* Creates the TCP listen socket for accepting client
@@ -322,228 +220,99 @@ char s_D__Develop_DieGildeAddOnServer_s_100298b0[] = "D:\\Develop\\DieGildeAddOn
 char s_New_Connection_from__li__li__li__100299a0[] = "New Connection from %li.%li.%li.%li\n";
 extern int __cdecl sprintf(char*, const char*, ...);
 
-__declspec(naked) int __cdecl AcceptConnections(void)
+int __cdecl AcceptConnections(void)
 {
-	__asm {
-		_emit 0xa1
-		_emit 0xec
-		_emit 0xea
-		_emit 0x1d
-		_emit 0x10
-		sub esp, 0x118
-		cmp eax, -1
-		push ebx
-		push ebp
-		push esi
-		jne L_have_socket
-		pop esi
-		pop ebp
-		or eax, 0xffffffff
-		pop ebx
-		add esp, 0x118
-		ret
-	L_have_socket:
-		xor ebp, ebp
-		mov eax, 0x101deb00
-	L_find_loop:
-		cmp dword ptr [eax], 0
-		je L_found_slot
-		add eax, 0x264264
-		inc ebp
-		cmp eax, 0x114ffe20
-		jge L_no_slots
-		jmp L_find_loop
-	L_found_slot:
-		mov eax, ebp
-		shl eax, 4
-		add eax, ebp
-		shl eax, 8
-		add eax, ebp
-		shl eax, 4
-		add eax, ebp
-		lea eax, [eax + eax*8]
-		lea esi, [eax*4 + 0x101deb00]
-		test esi, esi
-		jne L_do_accept
-	L_no_slots:
-		push 1
-		push offset s_No_more_Slots_for_new_Connection_100299c8
-		push 0x495
-		push offset s_D__Develop_DieGildeAddOnServer_s_100298b0
-		call LogMessageInternal
-		_emit 0xa1
-		_emit 0x20
-		_emit 0xfe
-		_emit 0x4f
-		_emit 0x11
-		add esp, 0x10
-		test eax, eax
-		jne L_ret_neg1
-		mov esi, 0x114ffe20
-	L_do_accept:
-		_emit 0xa1
-		_emit 0xec
-		_emit 0xea
-		_emit 0x1d
-		_emit 0x10
-		lea ecx, [esp + 0x10]
-		lea edx, [esp + 0x14]
-		push ecx
-		push edx
-		push eax
-		mov dword ptr [esp + 0x1c], 0x10
-		_emit 0xff
-		_emit 0x15
-		_emit 0x5c
-		_emit 0x41
-		_emit 0x02
-		_emit 0x10
-		mov ebx, eax
-		cmp ebx, -1
-		jne L_have_new_socket
-	L_ret_neg1:
-		pop esi
-		pop ebp
-		or eax, 0xffffffff
-		pop ebx
-		add esp, 0x118
-		ret
-	L_have_new_socket:
-		push edi
-		_emit 0x8b
-		_emit 0x3d
-		_emit 0x84
-		_emit 0x41
-		_emit 0x02
-		_emit 0x10
-		lea ecx, [esp + 0x10]
-		push 4
-		push ecx
-		push 0x1002
-		push 0xffff
-		push ebx
-		mov dword ptr [esp + 0x24], 0x10000
-		call edi
-		lea edx, [esp + 0x10]
-		push 4
-		push edx
-		push 0x1001
-		push 0xffff
-		push ebx
-		mov dword ptr [esp + 0x24], 0x10000
-		call edi
-		_emit 0xa1
-		_emit 0x7c
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		lea edx, [esi + 0x26420c]
-		inc eax
-		mov ecx, 0x15
-		_emit 0xa3
-		_emit 0x7c
-		_emit 0x46
-		_emit 0x03
-		_emit 0x10
-		mov dword ptr [esi + 4], eax
-		xor eax, eax
-		mov edi, edx
-		mov dword ptr [esi], 0x2103
-		rep stosd
-		stosw
-		stosb
-		mov eax, dword ptr [esi + 4]
-		xor edi, edi
-		cmp ebp, edi
-		mov dword ptr [edx], eax
-		jne L_skip_or400
-		mov eax, dword ptr [esi]
-		or ah, 4
-		mov dword ptr [esi], eax
-	L_skip_or400:
-		mov dword ptr [esi + 0x14], ebx
-		mov word ptr [esi + 0x14a], di
-		mov word ptr [esi + 0x14c], di
-		mov word ptr [esi + 0x14e], 0x19
-		_emit 0xff
-		_emit 0x15
-		_emit 0x5c
-		_emit 0x40
-		_emit 0x02
-		_emit 0x10
-		add eax, 0x493e0
-		xor ecx, ecx
-		mov dword ptr [esi + 0x150], eax
-	L_init_loop:
-		mov eax, ecx
-		shl eax, 4
-		add eax, ecx
-		lea edx, [esi + eax*8]
-		add eax, edx
-		cmp ecx, edi
-		mov byte ptr [eax + 0x154], 0
-		mov byte ptr [eax + 0x132154], 0
-		jne L_not_first
-		mov dword ptr [esi + 0x1e5], edi
-		mov dword ptr [esi + 0x1321e5], edi
-		jmp L_set_e9
-	L_not_first:
-		lea edx, [eax + 0xbb]
-		cmp ecx, 0x1fff
-		mov dword ptr [eax + 0x1e5], edx
-		lea edx, [eax + 0x1320bb]
-		mov dword ptr [eax + 0x1321e5], edx
-		jge L_set_e9_zero
-	L_set_e9:
-		lea edx, [eax + 0x1ed]
-		mov dword ptr [eax + 0x1e9], edx
-		lea edx, [eax + 0x1321ed]
-		mov dword ptr [eax + 0x1321e9], edx
-		jmp L_init_next
-	L_set_e9_zero:
-		mov dword ptr [eax + 0x1e9], edi
-		mov dword ptr [eax + 0x1321e9], edi
-	L_init_next:
-		inc ecx
-		cmp ecx, 0x2000
-		jl L_init_loop
-		mov edx, dword ptr [esp + 0x1f]
-		lea eax, [esi + 0x154]
-		lea ecx, [esi + 0x132154]
-		mov dword ptr [esi + 0x2641f8], eax
-		mov eax, dword ptr [esp + 0x1e]
-		and edx, 0xff
-		mov dword ptr [esi + 0x2641fc], ecx
-		mov ecx, dword ptr [esp + 0x1d]
-		push edx
-		mov edx, dword ptr [esp + 0x20]
-		and eax, 0xff
-		and ecx, 0xff
-		push eax
-		and edx, 0xff
-		push ecx
-		push edx
-		lea eax, [esp + 0x38]
-		push offset s_New_Connection_from__li__li__li__100299a0
-		push eax
-		mov dword ptr [esi + 0x2641f0], edi
-		mov dword ptr [esi + 0x2641f4], edi
-		call sprintf
-		lea ecx, [esp + 0x40]
-		push 1
-		push ecx
-		push 0x4e1
-		push offset s_D__Develop_DieGildeAddOnServer_s_100298b0
-		call LogMessageInternal
-		add esp, 0x28
-		mov eax, ebx
-		pop edi
-		pop esi
-		pop ebp
-		pop ebx
-		add esp, 0x118
-		ret
+	int optval;
+	int addrlen;
+	struct sockaddr addr;
+	char msg[0x100];
+	int p;
+	unsigned char* slot;
+	int sock;
+	int i;
+
+	if (g_net_socket == -1)
+		return -1;
+
+	i = 0;
+	p = 0x101deb00;
+	while (1) {
+		if (*(int*) p == 0)
+			break;
+		p += 0x264264;
+		i++;
+		if (p >= 0x114ffe20)
+			goto no_slots;
 	}
+	slot = (unsigned char*) 0x101deb00 + i * 0x264264;
+	if (slot != 0)
+		goto do_accept;
+
+no_slots:
+	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x495, s_No_more_Slots_for_new_Connection_100299c8, 1);
+	if (*(int*) 0x114ffe20 != 0)
+		goto ret_neg1;
+	slot = (unsigned char*) 0x114ffe20;
+
+do_accept:
+	addrlen = 16;
+	sock = accept(g_net_socket, &addr, &addrlen);
+	if (sock == -1)
+		goto ret_neg1;
+
+	{
+		int (__stdcall* setopt)(unsigned int, int, int, const char*, int) = setsockopt;
+		optval = 0x10000;
+		setopt(sock, 0xffff, 0x1002, (const char*) &optval, 4);
+		optval = 0x10000;
+		setopt(sock, 0xffff, 0x1001, (const char*) &optval, 4);
+	}
+
+	*(int*) 0x1003467c = *(int*) 0x1003467c + 1;
+	*(int*) (slot + 4) = *(int*) 0x1003467c;
+	*(int*) slot = 0x2103;
+	memset(slot + 0x26420c, 0, 0x57);
+	*(int*) (slot + 0x26420c) = *(int*) (slot + 4);
+	if (i == 0)
+		*(int*) slot = *(int*) slot | 0x400;
+	*(int*) (slot + 0x14) = sock;
+	*(unsigned short*) (slot + 0x14a) = 0;
+	*(unsigned short*) (slot + 0x14c) = 0;
+	*(unsigned short*) (slot + 0x14e) = 0x19;
+	*(unsigned int*) (slot + 0x150) = GetTickCount() + 0x493e0;
+
+	for (i = 0; i < 0x2000; i++) {
+		unsigned char* q = slot + i * 0x99;
+		q[0x154] = 0;
+		q[0x132154] = 0;
+		if (i == 0) {
+			*(unsigned int*) (slot + 0x1e5) = 0;
+			*(unsigned int*) (slot + 0x1321e5) = 0;
+		} else {
+			*(unsigned int*) (q + 0x1e5) = (unsigned int) (q + 0xbb);
+			*(unsigned int*) (q + 0x1321e5) = (unsigned int) (q + 0x1320bb);
+		}
+		if (i < 0x1fff) {
+			*(unsigned int*) (q + 0x1e9) = (unsigned int) (q + 0x1ed);
+			*(unsigned int*) (q + 0x1321e9) = (unsigned int) (q + 0x1321ed);
+		} else {
+			*(unsigned int*) (q + 0x1e9) = 0;
+			*(unsigned int*) (q + 0x1321e9) = 0;
+		}
+	}
+
+	*(unsigned int*) (slot + 0x2641f8) = (unsigned int) (slot + 0x154);
+	*(unsigned int*) (slot + 0x2641fc) = (unsigned int) (slot + 0x132154);
+	sprintf(msg, s_New_Connection_from__li__li__li__100299a0,
+		((unsigned char*) &addr)[8], ((unsigned char*) &addr)[5],
+		((unsigned char*) &addr)[6], ((unsigned char*) &addr)[7]);
+	*(unsigned int*) (slot + 0x2641f0) = 0;
+	*(unsigned int*) (slot + 0x2641f4) = 0;
+	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x4e1, msg, 1);
+	return sock;
+
+ret_neg1:
+	return -1;
 }
 
 /* Closes a specific player's network connection. Shuts down
@@ -574,147 +343,68 @@ int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot)
 
 /* recv = 0x10024168, GetTickCount = 0x1002405c, WSAGetLastError = 0x10024170 */
 
-__declspec(naked) int __cdecl ReceivePacketHeader(unsigned int* conn)
+int __cdecl ReceivePacketHeader(unsigned int* conn)
 {
-	(void) conn;
-	__asm {
-		push esi
-		mov esi, dword ptr [esp + 8]
-		push edi
-		test byte ptr [esi], 0x80
-		jne near L_ret0
-		mov ax, word ptr [esi + 0x14a]
-		_emit 0x8b
-		_emit 0x3d
-		_emit 0x68
-		_emit 0x41
-		_emit 0x02
-		_emit 0x10
-		cmp ax, 3
-		jae L_load_eax_arg
-		and eax, 0xffff
-		mov ecx, 3
-		sub ecx, eax
-		push 0
-		lea edx, [eax + esi + 0x18]
-		mov eax, dword ptr [esi + 0x14]
-		push ecx
-		push edx
-		push eax
-		call edi
-		test eax, eax
-		jne L_after_recv1
-		_emit 0xff
-		_emit 0x15
-		_emit 0x5c
-		_emit 0x40
-		_emit 0x02
-		_emit 0x10
-		cmp dword ptr [esi + 0x150], eax
-		jae near L_ret0
-		push 1
-		push 0x10029a04
-		push 0x52a
-		push 0x100298b0
-		call LogMessageInternal
-		push esi
-		call cm_ClosePlayerConnection
-		add esp, 0x14
-		or eax, 0xffffffff
-		pop edi
-		pop esi
-		ret
-	L_after_recv1:
-		cmp eax, -1
-		jne L_add_and_check
-		jmp L_wsa_err
-	L_load_eax_arg:
-		mov eax, dword ptr [esp + 0xc]
-	L_add_and_check:
-		add word ptr [esi + 0x14a], ax
-		mov ax, word ptr [esi + 0x14a]
-		cmp ax, 3
-		jb near L_ret0
-		xor ecx, ecx
-		and eax, 0xffff
-		mov cx, word ptr [esi + 0x19]
-		push 0
-		sub ecx, eax
-		lea edx, [eax + esi + 0x18]
-		mov eax, dword ptr [esi + 0x14]
-		push ecx
-		push edx
-		push eax
-		call edi
-		test eax, eax
-		jne L_after_recv2
-		_emit 0xff
-		_emit 0x15
-		_emit 0x5c
-		_emit 0x40
-		_emit 0x02
-		_emit 0x10
-		cmp dword ptr [esi + 0x150], eax
-		jae near L_ret0
-		push 1
-		push 0x10029a04
-		push 0x552
-		push 0x100298b0
-		call LogMessageInternal
-		push esi
-		call cm_ClosePlayerConnection
-		add esp, 0x14
-		or eax, 0xffffffff
-		pop edi
-		pop esi
-		ret
-	L_after_recv2:
-		cmp eax, -1
-		jne L_success
-	L_wsa_err:
-		_emit 0xff
-		_emit 0x15
-		_emit 0x70
-		_emit 0x41
-		_emit 0x02
-		_emit 0x10
-		cmp eax, 0x2733
-		je L_ret0
-		push eax
-		call LogWinsockError
-		push esi
-		call cm_ClosePlayerConnection
-		add esp, 8
-		or eax, 0xffffffff
-		pop edi
-		pop esi
-		ret
-	L_success:
-		add word ptr [esi + 0x14a], ax
-		_emit 0xff
-		_emit 0x15
-		_emit 0x5c
-		_emit 0x40
-		_emit 0x02
-		_emit 0x10
-		mov cx, word ptr [esi + 0x14a]
-		add eax, 0x493e0
-		cmp cx, word ptr [esi + 0x19]
-		mov dword ptr [esi + 0x150], eax
-		jne L_ret0
-		mov eax, dword ptr [esi]
-		mov word ptr [esi + 0x14a], 0
-		or al, 0x80
-		mov dword ptr [esi], eax
-	L_ret0:
-		pop edi
-		xor eax, eax
-		pop esi
-		ret
-	}
-}
+	int (__stdcall* recv_fn)(unsigned int, char*, int, int);
+	int n;
+	int err;
+	unsigned short state;
 
-/* Sends queued data to a client socket. Transmits buffered
+	if (*(unsigned char*) conn & 0x80)
+		return 0;
+
+	state = *(unsigned short*) ((char*) conn + 0x14a);
+	recv_fn = (int (__stdcall*)(unsigned int, char*, int, int)) * (void**) 0x10024168;
+	if (state < 3) {
+		n = recv_fn(*(unsigned int*) ((char*) conn + 0x14),
+			    (char*) conn + 0x18 + *(unsigned short*) ((char*) conn + 0x14a),
+			    3 - *(unsigned short*) ((char*) conn + 0x14a), 0);
+		if (n == 0) {
+			if (*(unsigned int*) ((char*) conn + 0x150) >= GetTickCount())
+				return 0;
+			LogMessageInternal((char*) 0x100298b0, 0x52a, (char*) 0x10029a04, 1);
+			cm_ClosePlayerConnection(conn);
+			return -1;
+		}
+		if (n == -1)
+			goto wsa_err;
+	} else {
+		n = *(int*) &conn;
+	}
+
+	*(unsigned short*) ((char*) conn + 0x14a) = (unsigned short) (*(unsigned short*) ((char*) conn + 0x14a) + n);
+	if (*(unsigned short*) ((char*) conn + 0x14a) < 3)
+		return 0;
+
+	n = recv_fn(*(unsigned int*) ((char*) conn + 0x14),
+		    (char*) conn + 0x18 + *(unsigned short*) ((char*) conn + 0x14a),
+		    (unsigned short) *(unsigned short*) ((char*) conn + 0x19) - *(unsigned short*) ((char*) conn + 0x14a), 0);
+	if (n == 0) {
+		if (*(unsigned int*) ((char*) conn + 0x150) >= GetTickCount())
+			return 0;
+		LogMessageInternal((char*) 0x100298b0, 0x552, (char*) 0x10029a04, 1);
+		cm_ClosePlayerConnection(conn);
+		return -1;
+	}
+	if (n == -1)
+		goto wsa_err;
+
+	*(unsigned short*) ((char*) conn + 0x14a) = (unsigned short) (*(unsigned short*) ((char*) conn + 0x14a) + n);
+	*(unsigned int*) ((char*) conn + 0x150) = GetTickCount() + 0x493e0;
+	if (*(unsigned short*) ((char*) conn + 0x14a) == *(unsigned short*) ((char*) conn + 0x19)) {
+		*(unsigned int*) conn = *(unsigned int*) conn | 0x80;
+		*(unsigned short*) ((char*) conn + 0x14a) = 0;
+	}
+	return 0;
+
+wsa_err:
+	err = WSAGetLastError();
+	if (err == 0x2733)
+		return 0;
+	LogWinsockError(err);
+	cm_ClosePlayerConnection(conn);
+	return -1;
+}/* Sends queued data to a client socket. Transmits buffered
  * outgoing packets with retry logic for partial sends. */
 
 // FUNCTION: SERVER 0x1000a490

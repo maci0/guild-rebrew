@@ -236,10 +236,20 @@ int __cdecl fcn_1001a527(void) { return 0; }
 int __cdecl fcn_1001a540(void) { return 0; }
 int __cdecl fcn_1001a567(void) { return 0; }
 int __cdecl fcn_1001a7f7(void) { return 0; }
-int __cdecl fcn_1001aa6a(void) { return 0; }
 int __cdecl fcn_1001ab81(void) { return 0; }
+int __cdecl fcn_1001accd(void) { return 0; }
 int __cdecl fcn_1001aff0(void) { return 0; }
 int __cdecl fcn_1001b542(void) { return 0; }
+int __cdecl fcn_1001c083(void) { return 0; }
+int __cdecl fcn_1001e8b4(void) { return 0; }
+int __cdecl fcn_1001eab0(void) { return 0; }
+/* GROUP B: game memset/memmove (0x10021240 / 0x1001b200) - stubs until the
+ * crt mem TUs are reversed; postlink rewrites call targets to the reference
+ * VAs. */
+void * __cdecl fcn_10021240(void * dst, int c, unsigned int n) { return 0; }
+void * __cdecl fcn_1001b200(void * dst, const void * src, unsigned int n) { return 0; }
+int __cdecl fcn_1001ede5(void) { return 0; }
+int __cdecl fcn_1001eec1(void) { return 0; }
 int __cdecl find_entity_26(void) { return 0; }
 int __cdecl find_entity_27(void) { return 0; }
 int g_1002574c = 0;
@@ -335,6 +345,7 @@ char s_cm_ExClearLagerslot___Lager_has_n_1002d054[1] = "";
  * operands to the reference addresses.  C names below map to the LIBCMT
  * symbols via MSVC6 cdecl decoration (C foo -> symbol _foo). --- */
 int __setlc_active = 0;            /* ___setlc_active */
+int __app_type = 2;               /* ___app_type - GUI app (keeps LIBCMT crt0.obj out of the link) */
 int __unguarded_readlc_active = 0; /* ___unguarded_readlc_active */
 int __lc_handle = 0;               /* ___lc_handle */
 int __lc_codepage = 0;             /* ___lc_codepage */
@@ -344,3 +355,19 @@ unsigned short* _pctype = 0;       /* __pctype */
 int __crtGetLocaleInfoA = 0;       /* ___crtGetLocaleInfoA */
 int __crtGetLocaleInfoW = 0;       /* ___crtGetLocaleInfoW */
 int __get_qualified_locale = 0;    /* ___get_qualified_locale */
+
+/* --- CRT-copy helpers referenced by the crt_region CRT layer that are not
+ * yet reversed; stubs satisfy the link, postlink rewrites call targets to
+ * the reference VAs. --- */
+void* __cdecl _getptd(void);              /* 0x1001d131 - _getptd */
+void* __cdecl _getptd(void) { return 0; }
+char* __cdecl fcn_1001af30(const char* s, int c); /* 0x1001af30 - strchr */
+char* __cdecl fcn_1001af30(const char* s, int c) { return 0; }
+unsigned long __cdecl fcn_10020ff8(const char*, char**, int, void*); /* 0x10020ff8 - _strtoxl */
+unsigned long __cdecl fcn_10020ff8(const char* s, char** e, int b, void* l) { return 0; }
+void __cdecl fcn_100203a2(int fd);             /* 0x100203a2 - _lock_fhandle */
+void __cdecl fcn_100203a2(int fd) { }
+void* __cdecl fcn_10020360(int fd);            /* 0x10020360 - _get_osfhandle */
+void* __cdecl fcn_10020360(int fd) { return 0; }
+void __cdecl fcn_10020401(int fd);             /* 0x10020401 - slot unlock */
+void __cdecl fcn_10020401(int fd) { }
