@@ -5,7 +5,7 @@
 
 /* Server Core Lifecycle */
 extern int __cdecl srv_Init(int port);
-extern int __cdecl ServerMainThread(void* param);
+extern int __stdcall ServerMainThread(void* param);
 extern int __cdecl srv_RecvGame(void);
 
 /* Global Initialization */

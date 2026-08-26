@@ -24,7 +24,7 @@ void __cdecl LogWinsockError(int err_code);
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
-int __cdecl ServerMainThread(void* lpThreadParameter);
+int __stdcall ServerMainThread(void* lpThreadParameter);
 extern int g_stop_flag;
 void __cdecl InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);

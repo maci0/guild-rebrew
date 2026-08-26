@@ -7,6 +7,7 @@
 #include <windows.h>
 #include <winsock2.h>
 unsigned int __stdcall timeGetTime(void);
+extern void __cdecl srand_impl(unsigned int); /* 0x1001b535 (CRT srand body) */
 
 /* Command layer (local externs — server.c uses different signatures) */
 int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
@@ -45,7 +46,7 @@ extern unsigned char g_connections[]; /* 0x101deb00 */
 
 // CFLAGS: /O2 /Gd
 
-int __cdecl ServerMainThread(void* lpThreadParameter)
+int __stdcall ServerMainThread(void* lpThreadParameter)
 {
 	char* module_path;
 	char* ini_tail;
@@ -66,10 +67,10 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 	unsigned int line;
 	int i;
 	int phase_complete;
-	unsigned char cmd_buffer_primary[0x99];
-	unsigned char cmd_buffer_secondary[0x99];
 	unsigned int startup_cfg_words[27];
 	char log_buffer[64];
+	unsigned char cmd_buffer_primary[0x99];
+	unsigned char cmd_buffer_secondary[0x99];
 
 	module_path = (char*) 0x101de9a0;
 	GetModuleFileNameA(0, module_path, 0x104);
@@ -89,14 +90,7 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 		module_path
 	);
 
-	src_words = (unsigned int*) lpThreadParameter;
-	cfg_ptr = startup_cfg_words;
-	for (i = 0; i < 0x1a; i++) {
-		*cfg_ptr = *src_words;
-		src_words = src_words + 1;
-		cfg_ptr = cfg_ptr + 1;
-	}
-	*(unsigned short*) cfg_ptr = (unsigned short) (*src_words);
+	memcpy(startup_cfg_words, lpThreadParameter, 0x6a);
 
 	if (*(unsigned short*) ((char*) startup_cfg_words + 2) == 1) {
 		*((unsigned char*) startup_cfg_words + 0x27) = 0;
@@ -111,6 +105,7 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 	sprintf(log_buffer, (char*) 0x100298d8, *(int*) 0x11764084);
 	LogMessageInternal((char*) 0x100298b0, 0x131, log_buffer, 1);
 
+	srand_impl(timeGetTime());
 	last_announce_tick = 0;
 	phase_complete = 0;
 	for (;;) {
@@ -125,13 +120,13 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 				connected_players = connected_players + 1;
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((char*) player_slot < (char*) 0x114ffe20);
+		} while ((int) player_slot < 0x114ffe20);
 
 		AcceptConnections();
 
 		if (connected_players == *(unsigned int*) 0x11764084) {
 			phase_complete = 1;
-			for (player_slot = (unsigned int*) 0x101deb00; (char*) player_slot < (char*) 0x114ffe20;
+			for (player_slot = (unsigned int*) 0x101deb00; (int) player_slot < 0x114ffe20;
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264)) {
 				if ((*player_slot != 0) && ((*player_slot & 0x800) == 0)) {
 					phase_complete = 0;
@@ -174,7 +169,7 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 				cm_ClosePlayerConnection(player_slot);
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((char*) player_slot < (char*) 0x114ffe20);
+		} while ((int) player_slot < 0x114ffe20);
 
 		Sleep(0x1e);
 		if (phase_complete) {
@@ -188,7 +183,7 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 			*player_slot = (*player_slot & 0xfffffdff) | 0x4004;
 		}
 		player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-	} while ((char*) player_slot < (char*) 0x114ffe20);
+	} while ((int) player_slot < 0x114ffe20);
 
 	i = 0;
 	player_slot = (unsigned int*) 0x101deb00;
@@ -200,7 +195,7 @@ int __cdecl ServerMainThread(void* lpThreadParameter)
 		}
 		player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 		i = i + 1;
-	} while ((char*) player_slot < (char*) 0x114ffe20);
+	} while ((int) player_slot < 0x114ffe20);
 
 	CleanupSockets();
 
@@ -211,7 +206,7 @@ send_start_commands:
 	do {
 		if (*player_slot != 0) {
 			cmd_buffer_primary[0] = 4;
-			*(unsigned int*) (cmd_buffer_primary + 0x10) = (unsigned int) ((((*player_slot & 8) != 0) ? 0 : 1) + 1);
+			*(unsigned int*) (cmd_buffer_primary + 0x10) = (unsigned int) ((((*player_slot & 8) != 0) ? 0 : 7) + 2);
 			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 				goto cleanup_and_exit;
 			}
@@ -225,7 +220,7 @@ send_start_commands:
 			}
 		}
 		player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-	} while ((char*) player_slot < (char*) 0x114ffe20);
+	} while ((int) player_slot < 0x114ffe20);
 
 	LogMessageInternal((char*) 0x100298b0, 0x1ca, (char*) 0x10029824, 1);
 	for (;;) {
@@ -241,7 +236,7 @@ send_start_commands:
 				break;
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((char*) player_slot < (char*) 0x114ffe20);
+		} while ((int) player_slot < 0x114ffe20);
 
 		result = (unsigned int) ProcessReceiveData();
 		if ((result == 0xffffffff) || (ProcessSendData() == -1)) {
@@ -301,7 +296,7 @@ send_start_commands:
 
 				transfer_progress = transfer_progress + 1;
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-			} while ((char*) transfer_progress < (char*) 0x101deae8);
+			} while ((int) transfer_progress < 0x101deae8);
 
 			result = (unsigned int) ProcessReceiveData();
 			if ((result == 0xffffffff) || (ProcessSendData() == -1)) {
@@ -320,7 +315,7 @@ send_start_commands:
 				*player_slot = *player_slot & 0xfffffffb;
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((char*) player_slot < (char*) 0x114ffe20);
+		} while ((int) player_slot < 0x114ffe20);
 	}
 
 	m_FreeTracked(*(void**) 0x101deae8);
@@ -335,13 +330,13 @@ send_start_commands:
 				*player_slot = *player_slot | 0x10;
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((char*) player_slot < (char*) 0x114ffe20);
+		} while ((int) player_slot < 0x114ffe20);
 
 		do {
 			phase_complete = 1;
 			player_slot = (unsigned int*) 0x101deb00;
 			do {
-				if ((char*) 0x114ffe1f < (char*) player_slot) {
+				if (0x114ffe1f < (int) player_slot) {
 					break;
 				}
 				if ((*player_slot & 0x10) != 0) {
@@ -370,7 +365,7 @@ send_start_commands:
 			}
 		}
 		player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-	} while ((char*) player_slot < (char*) 0x114ffe20);
+	} while ((int) player_slot < 0x114ffe20);
 
 	LogMessageInternal((char*) 0x100298b0, 0x2a8, (char*) 0x100297b0, 1);
 
@@ -389,11 +384,11 @@ send_start_commands:
 				goto check_sync_all_players;
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((char*) player_slot < (char*) 0x114ffe20);
+		} while ((int) player_slot < 0x114ffe20);
 		goto process_pending_sync;
 
 		while ((player_slot = (unsigned int*) ((char*) player_slot + 0x264264)),
-			   (char*) player_slot < (char*) 0x114ffe20) {
+			   (int) player_slot < 0x114ffe20) {
 		check_sync_all_players:
 			if ((*player_slot != 0) && ((*player_slot & 0x40) == 0)) {
 				phase_complete = 1;
@@ -413,7 +408,7 @@ send_start_commands:
 				}
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((char*) player_slot < (char*) 0x114ffe20);
+		} while ((int) player_slot < 0x114ffe20);
 
 	check_transfer_state:
 		if (*(int*) 0x11764090 == 0) {
@@ -430,7 +425,7 @@ send_start_commands:
 					phase_complete = 0;
 				}
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-			} while ((char*) player_slot < (char*) 0x114ffe20);
+			} while ((int) player_slot < 0x114ffe20);
 
 			if (!phase_complete) {
 				goto game_loop_network_io;
@@ -443,7 +438,7 @@ send_start_commands:
 				}
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 				*(unsigned int*) 0x101deaf0 = current_tick;
-			} while ((char*) player_slot < (char*) 0x114ffe20);
+			} while ((int) player_slot < 0x114ffe20);
 		}
 		else if (phase_complete || (current_tick < *(unsigned int*) 0x101deaf0)) {
 			goto game_loop_network_io;
@@ -463,7 +458,7 @@ send_start_commands:
 				}
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((char*) player_slot < (char*) 0x114ffe20);
+		} while ((int) player_slot < 0x114ffe20);
 
 		if (*(unsigned short*) 0x10035884 > 0x16) {
 			phase_complete = 1;
@@ -480,7 +475,7 @@ send_start_commands:
 					*(int*) 0x11764090 = 0;
 				}
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-			} while ((char*) player_slot < (char*) 0x114ffe20);
+			} while ((int) player_slot < 0x114ffe20);
 
 			*(unsigned int*) 0x10035880 = *(unsigned int*) 0x10035880 + 1;
 			sim_SetSyncParams(0x10035880, 6, 0, 0);
