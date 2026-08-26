@@ -1239,17 +1239,29 @@ order.  MSVC6 picks `ecx` for the zero, emits per-store immediates
 extra2/extra3 word stores.  Cast removal, statement reordering, and the
 /O1 /Ox /Og /Oy sweep did not change it.
 
-**gm_Open (0x10015950) — 732/861 (pointer-base + register roles).** The
-fence's #else C is a full reconstruction; two regions diverge. (1) The
-player-slot init loop: the reference bases dst_player_ptr at dst[0]
+**gm_Open (0x10015950) — 856/861, PROVEN via 1-byte slice prove [91..92]
+(pointer-base + register roles).** The C is a full reconstruction; restored
+2026-08-26: the original calls `srand(timeGetTime())` (thunk fcn.1001a140)
+between the producible-count loop and the exit log — the reversed CRT used to
+provide it as `getpid` (run_000.c) until c77489a dropped run_000 and the call
+with it; the C now calls it via an extern symbol. Two regions still diverge.
+(1) The player-slot init loop: the reference bases dst_player_ptr at dst[0]
 (`lea edi,[eax+0xc]` for the memcpy, stores at [eax-4]/[eax]/[eax+4]/
 [eax+8]) while MSVC6 normalizes the base to dst[1] (stores at
 [eax-8]/[eax-4]/[eax]/[eax+4], `lea edi,[eax+8]`) — the [-1] index in the
 source drives the base normalization. (2) The producible-count tail loop:
-the reference walks the entity table in esi with the g_item_def_table base
-in ebp and keeps producible_count/slot_counter on the stack; MSVC6's
-register roles and the `+= producible_count` addressing
-(`[esi+eax-0x22c]` vs a plain store) differ. Semantics match throughout.
+with `table_offset += 0x24d` driving the outer while and a hoisted
+`slot_idx`, the inner loop now matches byte-for-byte except the item-category
+load: the reference materializes `item + idx*65` in a register
+(`mov ecx,eax; add ecx,ebx; mov cl,[ecx]`, 6B) while SP6 folds it into
+`mov cl,[eax+ebx]` (3B); and the outer store: the reference uses index
+addressing with a compensated displacement (`mov [esi+eax-0x22c],bl`, 7B)
+after hoisting `add esi,0x24d` between load and store, while SP6 materializes
+the address (`lea eax,[edx+esi+0x21]; mov [eax],dl`). Those two decisions
+account for the remaining 5B (856 vs 861); ~10 C expression variants
+(`*0x41` vs `*0x40+idx`, named address vars, struct indexing, double-use CSE,
+outer-tail temps) and a /G3 /G5 /G6 /GB /O1 flag sweep all compile to the
+same fold. Semantics match throughout (slice-proven).
 
 **GetCommandPayloadSize (0x1000c710) — 494/752 (switch preamble + case split).**
 The fence's #else C is a partial reconstruction of the 103-case payload-size

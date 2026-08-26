@@ -28,6 +28,10 @@ extern int g_100a8c34;
 extern int g_100a8cf8;
 extern int g_1009b764;
 extern int g_1002dde0;
+/* fcn.1001a140 — the original binary calls this thunk (srand(timeGetTime()))
+ * between the producible-count loop and the exit log; the reversed CRT
+ * provided it as `getpid` before run_000.c was dropped (c77489a). */
+extern void __cdecl srv_SeedRandomWithTime(void);
 
 
 // CFLAGS: /O2 /Gd
@@ -35,7 +39,8 @@ extern int g_1002dde0;
 // gm_Open
 
 /* Blocked from C conversion (pointer-base + register roles, see
- * docs/msvc6-allocator.md "gm_Open").  Best 732/861. */
+ * docs/msvc6-allocator.md "gm_Open").  Best 856/861; PROVEN via 1-byte
+ * slice prove [91..92] (2026-08-26). */
 
 int __cdecl gm_Open(int map_id)
 {
@@ -43,12 +48,12 @@ int __cdecl gm_Open(int map_id)
 	unsigned int* dst_player_ptr;
 	unsigned int player_field;
 	FILE* file_handle;
-	int next_offset;
 	unsigned short slot_entry;
 	char item_category;
 	int producible_count;
 	unsigned short* slot_ptr;
 	int slot_counter;
+	int slot_idx;
 	unsigned char path_buf[512];
 	int table_offset;
 
@@ -125,8 +130,9 @@ int __cdecl gm_Open(int map_id)
 		do {
 			slot_entry = *slot_ptr;
 			if (slot_entry != 0xffff) {
-				item_category = *(char*) (g_item_def_table + (slot_entry & 0x7fff) * 0x41);
-				if (((item_category == '\x02') || (item_category == '\x06')) && ((slot_entry & 0x7fff) != 0xfd) &&
+				slot_idx = slot_entry & 0x7fff;
+				item_category = *(char*) (g_item_def_table + slot_idx * 0x40 + slot_idx);
+				if (((item_category == '\x02') || (item_category == '\x06')) && (slot_idx != 0xfd) &&
 					((slot_entry & 0x8000) != 0)) {
 					producible_count = producible_count + 1;
 				}
@@ -134,11 +140,13 @@ int __cdecl gm_Open(int map_id)
 			slot_ptr = slot_ptr + 1;
 			slot_counter = slot_counter + -1;
 		} while (slot_counter != 0);
-		next_offset = table_offset + 0x24d;
 		*(char*) (table_offset + 0x21 + g_entity_type_table) =
 			*(char*) (table_offset + 0x21 + g_entity_type_table) + producible_count;
-		table_offset = next_offset;
-	} while (next_offset < 0xca78);
+		table_offset = table_offset + 0x24d;
+	} while (table_offset < 0xca78);
+	/* Original seeds the RNG from the system timer before the exit log
+	 * (fcn.1001a140 = srand(timeGetTime())). */
+	srv_SeedRandomWithTime();
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x588, "gm_Open(): exit", 1);
 	return 0;
 }

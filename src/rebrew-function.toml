@@ -273,7 +273,7 @@ status = "RELOC"
 
 ["SERVER.0x1000b4d0"]
 size = 836
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 analysis = "Iterates through a fixed validation table at g_office_table looking for a matching command_type. Once found, verifies conditions including checking if entity_ids in the payload actually map to existing objects using gm_LookupEntityRecordById. Returns 1 if valid, 0 if invalid."
 
@@ -923,10 +923,11 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10015950"]
 size = 861
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 ghidra = "InitGameWorld"
 analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+toolchain = "msvc600sp6"
 
 ["SERVER.0x10015cb0"]
 size = 57

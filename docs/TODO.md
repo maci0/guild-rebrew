@@ -133,11 +133,13 @@ following bytes aren't the next function's code.
 | 0x10018850 | gm_CreateEntityFromParents | 3689 | Large stub: 3689 byte delta, 0% — not attempted (needs full decomp) | 0% |
 | 0x1001a670 | exit | 17 | CRT thunk `push 0 push 0 push [esp+0xc] call _doexit add esp ret`; C fix is `void exit(int){_doexit(code,0,0);}` with /O1, but causes LIBCMT duplicate link error. Build never links even at HEAD, so DLL hash is unreachable. Fix requires CMake /NODEFAULTLIB or renaming the symbol. | 0% with STUB, RELOC with /O1 but link fails |
 
-## NEAR_MATCHING (1)
+## NEAR_MATCHING (0)
 
-| VA | Name | Size | Delta | Blocker | Best |
-|---|---|---|---|---|---|
-| 0x10015950 | gm_Open | 861 | 129 | `lea edi hoisting + jb vs jl + inner loop reg alloc (esi/edi/ebp shuffle)`. Signed fix `(int)ptr < (int)addr` gained 1 byte (731→732). Remaining lea ordering and inner `xor esi vs xor edx` need decl-order or volatile tricks. GA candidate pending. Full prove path-explodes; slice prove 0-200 may work. | 85.0% |
+(empty — gm_Open promoted to PROVEN 2026-08-26 via 1-byte slice prove [91..92]
+after restoring the missing `srand(timeGetTime())` call (fcn.1001a140, dropped
+with run_000.c in c77489a) and matching the tail loop's register roles;
+compiled size 856/861, remaining 5B are MSVC6 fold-vs-materialize decisions,
+see docs/msvc6-allocator.md "gm_Open".)
 
 ## SIZE_MISMATCH (16)
 
