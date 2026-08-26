@@ -126,7 +126,6 @@ uInt w;
 
 
 /* stripped: dumped as infblock_dump.c */
-#if 0
 int inflate_blocks(s, z, r)
 inflate_blocks_statef *s;
 z_streamp z;
@@ -372,11 +371,9 @@ int r;
       LEAVE
   }
 }
-#endif
 
 
 /* stripped: dumped */
-#if 0
 int inflate_blocks_free(s, z)
 inflate_blocks_statef *s;
 z_streamp z;
@@ -388,12 +385,10 @@ z_streamp z;
   Tracev((stderr, "inflate:   blocks freed\n"));
   return Z_OK;
 }
-#endif
 
 
 
 /* stripped: not present in original DLL */
-#if 0
 void inflate_set_dictionary(s, d, n)
 inflate_blocks_statef *s;
 const Bytef *d;
@@ -402,12 +397,10 @@ uInt  n;
   zmemcpy(s->window, d, n);
   s->read = s->write = s->window + n;
 }
-#endif
 
 
 
 /* stripped: inflate_blocks_sync_point not present in original DLL */
-#if 0
 /* Returns true if inflate is currently at the end of a block generated
  * by Z_SYNC_FLUSH or Z_FULL_FLUSH. 
  * IN assertion: s != Z_NULL
@@ -417,5 +410,4 @@ inflate_blocks_statef *s;
 {
   return s->mode == LENS;
 }
-#endif
 

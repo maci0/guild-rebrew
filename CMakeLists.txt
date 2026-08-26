@@ -144,7 +144,7 @@ if(REBREW_BUILD_SERVER)
       --first-va trees.c=0x10006ec0
       --first-va trees2.c=0x10008800
       --first-va zutil.c=0x100092e0
-      --exclude gzio.c --exclude inffast.c --exclude infcodes.c
+      --exclude gzio.c
       --exclude compress.c --exclude uncompr.c
     OUTPUT_VARIABLE ORDERED_SOURCES
     OUTPUT_STRIP_TRAILING_WHITESPACE
