@@ -29,6 +29,7 @@ extern int g_stat2;
 extern int g_stat3;
 extern int g_stat4;
 extern void* g_array_ptr;
+extern char g_alloc_root_name; /* 0x117640a0 - root group node */
 
 void __cdecl ReportMemoryGroupInfo(const char* toggle)
 {
@@ -47,7 +48,7 @@ void __cdecl ReportMemoryGroupInfo(const char* toggle)
 	}
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1b5, buf, 1);
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1b6, "---g-r-o-u-p---i-n-f-o-s---", 1);
-	node = (struct GroupNode*) 0x117640a0;
+	node = (struct GroupNode*) &g_alloc_root_name;
 	while (node != 0) {
 		if (toggle != 0 && fcn_1001aff0(node->name, toggle) != 0) {
 			match = 1;
@@ -63,7 +64,7 @@ void __cdecl ReportMemoryGroupInfo(const char* toggle)
 						*p = 0;
 					}
 					if (node->size_total == 0 && node->count_total == 0) {
-						sprintf(buf, "[%s] w/ %i (%ik) bytes in %i block(s) (called %i times).", buf2, node->size_max, node->size_max >> 10, node->count_total, node->count_max);
+						sprintf(buf, "[%s] w/ %i (%ik) bytes in %i block(s) (called %i times).", buf2, node->size_max, node->size_max >> 10, node->count_max, node->count);
 		} else {
 						sprintf(buf, "[%s] -> w/ %i/%i (%ik/%ik) bytes in %i/%i block(s) (called %i times).", buf2, node->size_total, node->size_max, node->size_total >> 10, node->size_max >> 10, node->count_total, node->count_max, node->count);
 					}

@@ -94,7 +94,7 @@ status = "EXACT"
 ["SERVER.0x10006580"]
 size = 658
 status = "SIZE_MISMATCH"
-cflags = "/O2 /Gd /Oy-"
+cflags = "/O2 /G6 /Oy- /Gd"
 analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
 note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=2179763029 vs 0"
 
@@ -111,7 +111,7 @@ cflags = "/O2 /Gd /Oy-"
 
 ["SERVER.0x10006990"]
 size = 612
-status = "SIZE_MISMATCH"
+status = "RELOC"
 cflags = "/O2 /Gd"
 
 ["SERVER.0x10006c00"]
@@ -264,7 +264,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000b290"]
 size = 425
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000b440"]
