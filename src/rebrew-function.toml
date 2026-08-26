@@ -17,6 +17,8 @@ cflags = "/O2 /Gd"
 size = 376
 status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd"
+blocker = "instruction folding (lea vs mov), loop rotation / branch layout, register allocation, zero-extend pattern (xor vs mov)"
+blocker_delta = 298
 
 ["SERVER.0x10003140"]
 size = 33
@@ -525,6 +527,13 @@ size = 912
 status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd"
 
+["SERVER.0x1000ec00".prove_constraints.arg0]
+type = "pointer"
+struct_size = 40
+
+["SERVER.0x1000ec00".prove_constraints.arg0.fields.0x1c]
+type = "concrete"
+value = 0
 ["SERVER.0x1000ef90"]
 size = 26
 status = "RELOC"

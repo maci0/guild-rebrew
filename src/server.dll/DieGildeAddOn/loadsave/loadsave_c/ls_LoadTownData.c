@@ -36,27 +36,31 @@ extern unsigned int ls_ID2Ptr(void);
  * records (0x100a8c88, stride 0x2f4) with name/timestamps/flags/population/
  * resource pairs/political state.
  *
- * Byte-match note: best proper C is 274/1361 (20%) — NEAR_MATCHING is not
- * reachable.  The reference build keeps the frame to ONE local (push ecx;
- * count only) with ptr/ebp/edi fully register-resident (ctx=esi, ptr=ebx,
- * i=ebp, inner=edi, then ptr2/base reusing edi/ebp), and the inner loop
- * emits per-read lea [edi-8]/[edi-4] without extra induction bases.  MSVC6
- * compiles every C formulation tried (10+ across pointer types, int/char*
- * ptr, for/do-while/while loops, struct-record reads, scope isolation,
- * split counters, /O1 /Ox /Os /Og- /G5 /Oy- flags) to a 2-local frame
- * (sub esp,8) with the inner loop strength-reduced into extra base
- * registers (inner-4/inner+4), spilling ptr and i.  See
- * docs/msvc6-allocator.md (base-normalization + register-cascade classes);
- * docs/TODO.md lists the same blocker with rebrew "register hints" as the
- * intended fix. */
+ * Byte-match note (2026-08-26): compiled 1354/1361 bytes, 758/1361 masked
+ * matches (55.7%); prologue + phase 1 (0x0-0x1df) byte-identical.  The
+ * count-read is MSVC6-split: `&count` lands in the dead file-arg slot
+ * (lea [esp+0x18]) while the phase-1 loop bound reloads the 0x3e copy at
+ * [esp+0x10] — the read value is dead, exactly as in the reference build.
+ * Phase 1 needs the derived-sub-pointer forms (`hdr = ptr - 8`,
+ * `r = inner - 8`) so MSVC6 folds them back into single-base lea [ebx-8]/
+ * [edi-8] addressing instead of normalizing extra induction bases; the
+ * outer loop variable must be an `int` (signed `jl` bound compare).
+ * Phase 2 needs a `while` loop (the `for` form miscompiles: stride 0x5e8
+ * instead of 0x2f4, skipping records) with an `int` loop variable (signed
+ * `jl` bound compare, as in the reference) and the reads anchored on the
+ * derived `q = ptr2 - 8`; ptr2 then stays memory-resident (arg-slot
+ * induction, `mov ebx,[esp+0x18]` reload at the head) matching the
+ * reference.  Remaining 7 bytes: the two 10x8B loops compile without the
+ * reference's per-loop ptr2 reload + base-relative 6-byte lea — an MSVC6
+ * register-allocation choice not steerable from C (see
+ * docs/msvc6-allocator.md; rebrew register hints would be the fix). */
 
 int __cdecl ls_LoadTownData(int file)
 {
 	int count;
-	char* ptr;
-	char* ptr2;
+	int ptr;
+	int ptr2;
 	char* inner;
-	char* base;
 	int i;
 	void* ctx;
 
@@ -68,55 +72,57 @@ int __cdecl ls_LoadTownData(int file)
 		}
 	}
 
-	for (ptr = (char*) 0x1009b768; ptr < (char*) 0x100a8c38; ptr += 0x2a90) {
-		if (!ls_ReadVfsDataChecked(ptr - 8, 4, 1, ctx)) {
+	for (ptr = 0x1009b768; ptr < 0x100a8c38; ptr += 0x2a90) {
+		char* hdr = (char*) (ptr - 8);
+		if (!ls_ReadVfsDataChecked(hdr, 4, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr - 4, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(hdr + 4, 4, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(hdr + 8, 4, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr + 4, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(hdr + 0xc, 4, 1, ctx)) {
 			return 0;
 		}
 
 		i = 0;
 		if (count > 0) {
-			inner = ptr + 0x10;
+			inner = (char*) (ptr + 0x10);
 			do {
-				if (!ls_ReadVfsDataChecked(inner - 8, 2, 1, ctx)) {
+				char* r = inner - 8;
+				if (!ls_ReadVfsDataChecked(r, 2, 1, ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(inner - 4, 4, 1, ctx)) {
+				if (!ls_ReadVfsDataChecked(r + 4, 4, 1, ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(inner, 4, 1, ctx)) {
+				if (!ls_ReadVfsDataChecked(r + 8, 4, 1, ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(inner + 4, 4, 1, ctx)) {
+				if (!ls_ReadVfsDataChecked(r + 0xc, 4, 1, ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(inner + 0x18, 4, 1, ctx)) {
+				if (!ls_ReadVfsDataChecked(r + 0x20, 4, 1, ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(inner + 0x1c, 4, 1, ctx)) {
+				if (!ls_ReadVfsDataChecked(r + 0x24, 4, 1, ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(inner + 0x28, 4, 1, ctx)) {
+				if (!ls_ReadVfsDataChecked(r + 0x30, 4, 1, ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(inner + 0x2c, 4, 1, ctx)) {
+				if (!ls_ReadVfsDataChecked(r + 0x34, 4, 1, ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(inner + 0x30, 4, 1, ctx)) {
+				if (!ls_ReadVfsDataChecked(r + 0x38, 4, 1, ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(inner + 0x34, 2, 1, ctx)) {
+				if (!ls_ReadVfsDataChecked(r + 0x3c, 2, 1, ctx)) {
 					return 0;
 				}
-				if (!ls_ReadVfsDataChecked(inner + 0x24, 4, 1, ctx)) {
+				if (!ls_ReadVfsDataChecked(r + 0x2c, 4, 1, ctx)) {
 					return 0;
 				}
 				i++;
@@ -126,39 +132,39 @@ int __cdecl ls_LoadTownData(int file)
 
 	}
 
-	ptr2 = (char*) 0x100a8c88;
-	do {
-		base = ptr2 - 0x48;
+	ptr2 = 0x100a8c88;
+	while (ptr2 < 0x100a9858) {
+		char* q = (char*) (ptr2 - 8);
 
-		if (!ls_ReadVfsDataChecked(base, 0x20, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q - 0x40, 0x20, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr2 - 8, 8, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q, 8, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr2, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 8, 1, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr2 + 4, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0xc, 4, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr2 + 8, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x10, 4, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr2 + 0xc, 2, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x14, 2, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr2 + 0x10, 8, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x18, 8, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr2 + 0x18, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x20, 1, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(ptr2 + 0x19, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x21, 1, 1, ctx)) {
 			return 0;
 		}
 
-		inner = ptr2 + 0x1c;
+		inner = (char*) (ptr2 + 0x1c);
 		for (i = 0; i < 10; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 8, 1, ctx)) {
 				return 0;
@@ -166,7 +172,7 @@ int __cdecl ls_LoadTownData(int file)
 			inner += 8;
 		}
 
-		inner = base + 0xb4;
+		inner = q + 0x74;
 		for (i = 0; i < 10; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 8, 1, ctx)) {
 				return 0;
@@ -174,14 +180,14 @@ int __cdecl ls_LoadTownData(int file)
 			inner += 8;
 		}
 
-		if (!ls_ReadVfsDataChecked(base + 0x104, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0xc4, 1, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(base + 0x105, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0xc5, 1, 1, ctx)) {
 			return 0;
 		}
 
-		inner = base + 0x108;
+		inner = q + 0xc8;
 		for (i = 0; i < 4; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 4, 1, ctx)) {
 				return 0;
@@ -189,7 +195,7 @@ int __cdecl ls_LoadTownData(int file)
 			inner += 4;
 		}
 
-		inner = base + 0x118;
+		inner = q + 0xd8;
 		for (i = 0; i < 4; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 4, 1, ctx)) {
 				return 0;
@@ -197,11 +203,11 @@ int __cdecl ls_LoadTownData(int file)
 			inner += 4;
 		}
 
-		if (!ls_ReadVfsDataChecked(base + 0x128, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0xe8, 4, 1, ctx)) {
 			return 0;
 		}
 
-		inner = base + 0x12c;
+		inner = q + 0xec;
 		for (i = 0; i < 0xb; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 1, 1, ctx)) {
 				return 0;
@@ -209,11 +215,11 @@ int __cdecl ls_LoadTownData(int file)
 			inner++;
 		}
 
-		if (!ls_ReadVfsDataChecked(base + 0x137, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0xf7, 1, 1, ctx)) {
 			return 0;
 		}
 
-		inner = base + 0x138;
+		inner = q + 0xf8;
 		for (i = 0; i < 7; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 1, 1, ctx)) {
 				return 0;
@@ -221,20 +227,20 @@ int __cdecl ls_LoadTownData(int file)
 			inner++;
 		}
 
-		if (!ls_ReadVfsDataChecked(base + 0x13f, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0xff, 1, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(base + 0x140, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x100, 1, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(base + 0x141, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x101, 1, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(base + 0x142, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x102, 1, 1, ctx)) {
 			return 0;
 		}
 
-		inner = base + 0x144;
+		inner = q + 0x104;
 		for (i = 0; i < 8; i++) {
 			if (!ls_ReadVfsDataChecked(inner, 0x12, 1, ctx)) {
 				return 0;
@@ -242,24 +248,24 @@ int __cdecl ls_LoadTownData(int file)
 			inner += 0x12;
 		}
 
-		if (!ls_ReadVfsDataChecked(base + 0x1d4, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x194, 4, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(base + 0x1d8, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x198, 4, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(base + 0x1dc, 0xd0, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(q + 0x19c, 0xd0, 1, ctx)) {
 			return 0;
 		}
 
 		if (g_file_version >= 0x10037) {
-			if (!ls_ReadVfsDataChecked(base + 0x2ec, 8, 1, ctx)) {
+			if (!ls_ReadVfsDataChecked(q + 0x2ac, 8, 1, ctx)) {
 				return 0;
 			}
 		}
 
 		ptr2 += 0x2f4;
-	} while (ptr2 < (char*) 0x100a9858);
+	}
 
 	return 1;
 }
