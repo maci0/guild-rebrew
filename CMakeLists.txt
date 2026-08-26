@@ -27,7 +27,7 @@ option(REBREW_BUILD_SERVER "Build server.dll reconstruction" ON)
 option(REBREW_BUILD_GOLD "Build Europa1400Gold.exe reconstruction" OFF)
 option(REBREW_BUILD_GOLDTL "Build Europa1400Gold_TL.exe reconstruction" OFF)
 option(REBREW_ALLOW_NAKED "Allow __declspec(naked)+__asm for byte-identical verification build (fenced #ifdef)" ON)
-option(REBREW_DEBUG_INFO "Emit /Z7 + /debug (PDB for reccmp). OFF = byte-identity build: original DLL has no debug directory" ON)
+option(REBREW_DEBUG_INFO "Emit /Z7 + /debug (PDB for reccmp). OFF = byte-identity build: original DLL has no debug directory" OFF)
 
 # ---------------------------------------------------------------------------
 # Architecture detection
