@@ -477,7 +477,7 @@ cflags = "/O2 /Gd"
 ["SERVER.0x1000e140"]
 size = 993
 status = "SIZE_MISMATCH"
-cflags = "/O2 /Gd"
+cflags = "/Ox /Gd"
 
 ["SERVER.0x1000e530"]
 size = 352
@@ -703,7 +703,8 @@ status = "STUB"
 
 ["SERVER.0x100109d0"]
 size = 832
-status = "SIZE_MISMATCH"
+status = "RELOC"
+toolchain = "msvc600sp6"
 
 ["SERVER.0x10010d10"]
 size = 570

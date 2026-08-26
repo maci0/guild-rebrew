@@ -1,10 +1,10 @@
 # Reversed Functions Catalog
 
-Total: 554/563 functions cataloged (327 exact, 168 reloc-normalized, 4 near-matching, 3 stubs)  
-Coverage: 96.3% of .text section (136115/141382 bytes)
+Total: 556/563 functions cataloged (327 exact, 173 reloc-normalized, 4 near-matching, 3 stubs)  
+Coverage: 96.3% of .text section (136178/141382 bytes)
 
 
-## SERVER (562 functions)
+## SERVER (626 functions)
 
 | VA | Size | Name | Symbol | Flags | Match | File |
 |-----|------|------|--------|-------|-------|------|
@@ -98,7 +98,7 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x10009310 | 8B | exit_handler | _exit_handler@12 |  | FUNCTION/EXACT | DieGildeAddOnServer/server.c |
 | 0x10009320 | 42B | Init | _Init |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
 | 0x10009350 | 68B | Exit | _Exit |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
-| 0x100093A0 | 2434B | ServerMainThread | _ServerMainThread | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server_c/ServerMainThread.c |
+| 0x100093A0 | 2434B | ServerMainThread | _ServerMainThread@4 | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server_c/ServerMainThread.c |
 | 0x10009D30 | 296B | srv_Init | _srv_Init | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
 | 0x10009E60 | 419B | CreateListenSocket | _CreateListenSocket |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
 | 0x1000A010 | 112B | CleanupSockets | _CleanupSockets |  | FUNCTION/PROVEN | DieGildeAddOnServer/server2.c |
@@ -106,7 +106,7 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x1000A2E0 | 96B | cm_ClosePlayerConnection | _cm_ClosePlayerConnection |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
 | 0x1000A340 | 336B | ReceivePacketHeader | _ReceivePacketHeader | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server2.c |
 | 0x1000A490 | 211B | SendPlayerData | _SendPlayerData |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
-| 0x1000A570 | 750B | ProcessReceiveData | _ProcessReceiveData | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server_c/ProcessReceiveData.c |
+| 0x1000A570 | 750B | ProcessReceiveData | _ProcessReceiveData | /Ox /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server_c/ProcessReceiveData.c |
 | 0x1000A860 | 131B | ProcessSendData | _ProcessSendData | /O2 /Gd /Ow | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server3.c |
 | 0x1000A8F0 | 170B | QueueCommandForProcessing | _QueueCommandForProcessing |  | FUNCTION/RELOC | DieGildeAddOnServer/server3.c |
 | 0x1000A9A0 | 170B | cm_QueuePlayerCommand | _cm_QueuePlayerCommand |  | FUNCTION/RELOC | DieGildeAddOnServer/server3.c |
@@ -117,7 +117,7 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x1000B1C0 | 205B | amt_ValidateOfficeCandidate | _amt_ValidateOfficeCandidate | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
 | 0x1000B290 | 425B | ValidateAndAssignOffice | _ValidateAndAssignOffice | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/aemter.c |
 | 0x1000B440 | 133B | amt_ValidateCommand | _amt_ValidateCommand |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000B4D0 | 836B | ExecuteOfficeAssignment | _ExecuteOfficeAssignment | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/aemter_c/ExecuteOfficeAssignment.c |
+| 0x1000B4D0 | 836B | ExecuteOfficeAssignment | _ExecuteOfficeAssignment | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/PROVEN | DieGildeAddOn/game/aemter_c/ExecuteOfficeAssignment.c |
 | 0x1000B820 | 42B | amt_FindEntity26 | _amt_FindEntity26 | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/aemter2.c |
 | 0x1000B850 | 42B | amt_FindEntity27 | _amt_FindEntity27 |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter2.c |
 | 0x1000B880 | 263B | amt_SwapOfficeHolders | _amt_SwapOfficeHolders | /O2 /Ob0 /Gd | FUNCTION/RELOC | DieGildeAddOn/game/aemter2.c |
@@ -161,7 +161,7 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x1000D7F0 | 176B | cm_ExTransferCurrency | _cm_ExTransferCurrency |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExTransferCurrency.c |
 | 0x1000D8A0 | 144B | cm_ExTransferCurrencyNoKill | _cm_ExTransferCurrencyNoKill |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExTransferCurrencyNoKill.c |
 | 0x1000D930 | 2057B | cm_ExSellObjekt | _cm_ExSellObjekt | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/command/command_c/cm_ExSellObjekt.c |
-| 0x1000E140 | 993B | cm_ExProdObjekt | _cm_ExProdObjekt | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/command/command_c/cm_ExProdObjekt.c |
+| 0x1000E140 | 993B | cm_ExProdObjekt | _cm_ExProdObjekt | /Ox /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/command/command_c/cm_ExProdObjekt.c |
 | 0x1000E530 | 352B | cm_ExMoveObjekt | _cm_ExMoveObjekt | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExMoveObjekt.c |
 | 0x1000E690 | 191B | cm_ExClearLagerslot | _cm_ExClearLagerslot | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/command/command_c/cm_ExClearLagerslot.c |
 | 0x1000E750 | 128B | cm_ExAllocObjekt | _cm_ExAllocObjekt | /O2 /Gd | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocObjekt.c |
@@ -212,7 +212,7 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x100105B0 | 329B | GetSlotEntry | _GetSlotEntry | /O2 /Gd | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic_c/GetSlotEntry.c |
 | 0x10010710 | 320B | FindSlotEntryFiltered | _FindSlotEntryFiltered |  | FUNCTION/NEAR_MATCHING | DieGildeAddOn/game/friedhof_logic_c/FindSlotEntryFiltered.c |
 | 0x10010850 | 370B | SpawnGraveyardEntities | _SpawnGraveyardEntities |  | FUNCTION/STUB | DieGildeAddOn/game/friedhof_logic_c/SpawnGraveyardEntities.c |
-| 0x100109D0 | 832B | AllocGraveyardField | _AllocGraveyardField |  | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/friedhof_logic_c/AllocGraveyardField.c |
+| 0x100109D0 | 832B | AllocGraveyardField | _AllocGraveyardField |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic_c/AllocGraveyardField.c |
 | 0x10010D10 | 570B | UpgradeGraveyardField | _UpgradeGraveyardField |  | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/friedhof_dump.c |
 | 0x10010F50 | 66B | gv_Free3Fields | _gv_Free3Fields | /O2 /Gd | FUNCTION/RELOC | DieGildeAddOn/unknown/gv_Free3Fields.c |
 | 0x100111B0 | 501B | HireProductionWorker | _HireProductionWorker | /O2 /Gd | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic_c/HireProductionWorker.c |
@@ -251,7 +251,7 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x100155C0 | 197B | AdvanceGameClock | _AdvanceGameClock | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/sim.c |
 | 0x10015690 | 41B | sim_SetSyncParams | _sim_SetSyncParams |  | FUNCTION/EXACT | DieGildeAddOn/game/sim.c |
 | 0x100156C0 | 642B | gm_InitObjektHersteller | _gm_InitObjektHersteller | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/spiel_c/gm_InitObjektHersteller.c |
-| 0x10015950 | 861B | gm_Open | _gm_Open | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/spiel_c/gm_Open.c |
+| 0x10015950 | 861B | gm_Open | _gm_Open | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/PROVEN | DieGildeAddOn/game/spiel_c/gm_Open.c |
 | 0x10015CB0 | 57B | gm_ResetAllEntities | _gm_ResetAllEntities | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10015CF0 | 194B | gm_CleanupObjectEntities | _gm_CleanupObjectEntities | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/spiel.c |
 | 0x10015DC0 | 55B | gm_FindRecordById | _gm_FindRecordById |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
@@ -336,32 +336,49 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x1001A527 | 0B | ctime | _ctime |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A540 | 39B | strrchr | _strrchr |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A567 | 0B | time | _time |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A643 | 45B | fcn_1001a643 | _fcn_1001a643 | /O1 /Gd | FUNCTION/RELOC | crt_region/initterm.c |
 | 0x1001A681 | 17B | exit | _exit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A692 | 15B | _cexit | __cexit | /O1 /Gd | FUNCTION/RELOC | crt_region/cexit.c |
 | 0x1001A692 | 0B | cexit | __cexit |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A6A1 | 163B | doexit | _doexit |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A746 | 9B | lock_0d | lock_0d |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A74F | 9B | unlock_0d | unlock_0d |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A758 | 26B | fcn_1001a758 | _fcn_1001a758 | /O1 /Gd | FUNCTION/EXACT | crt_region/initterm.c |
 | 0x1001A758 | 26B | initterm | _initterm |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A772 | 115B | dosmaperr | _dosmaperr |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A7E5 | 9B | fcn_1001a7e5 | _fcn_1001a7e5 | /O1 /Gd | FUNCTION/RELOC | crt_region/flsall.c |
 | 0x1001A7E5 | 0B | errno | __errno |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A7EE | 9B | fcn_1001a7ee | _fcn_1001a7ee | /O1 /Gd | FUNCTION/RELOC | crt_region/flsall.c |
 | 0x1001A7EE | 0B | doserrno | ___doserrno |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A7F7 | 18B | malloc | _malloc | /O1 /Gd | FUNCTION/RELOC | crt_region/malloc.c |
+| 0x1001A809 | 44B | fcn_1001a809 | _fcn_1001a809 | /O1 /Gd | FUNCTION/RELOC | crt_region/malloc.c |
 | 0x1001A809 | 0B | nh_malloc | __nh_malloc |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A835 | 252B | fcn_1001a835 | _fcn_1001a835 | /O1 /Gd | FUNCTION/RELOC | crt_region/malloc.c |
 | 0x1001A835 | 0B | malloc | _malloc |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A89C | 9B | unlock_09a | unlock_09a |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A8FB | 9B | unlock_09b | unlock_09b |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A931 | 47B | fcn_1001a931 | _fcn_1001a931 | /O1 /Gd | FUNCTION/RELOC | crt_region/fwrite_fread.c |
 | 0x1001A931 | 47B | crt_locked_call4a | _crt_locked_call4a |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001A960 | 266B | fcn_1001a960 | _fcn_1001a960 | /O1 /Gd | FUNCTION/PROVEN | crt_region/fwrite_fread.c |
 | 0x1001A960 | 266B | fwrite | _fwrite |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AA6A | 47B | fcn_1001aa6a | _fcn_1001aa6a | /O1 /Gd | FUNCTION/RELOC | crt_region/fwrite_fread.c |
 | 0x1001AA6A | 47B | fread | fread |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AA99 | 232B | fcn_1001aa99 | _fcn_1001aa99 | /O1 /Gd | FUNCTION/RELOC | crt_region/fwrite_fread.c |
 | 0x1001AA99 | 232B | fread | _fread |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AB81 | 233B | free | _free | /O1 /Gd | FUNCTION/RELOC | crt_region/free.c |
 | 0x1001AB81 | 215B | free | _free |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001ABEB | 9B | unlock_09c | unlock_09c |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001AC43 | 9B | unlock_09d | unlock_09d |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001AC70 | 47B | alloca_probe | __alloca_probe |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AC9F | 46B | fcn_1001ac9f | _fcn_1001ac9f | /O1 /Gd | FUNCTION/RELOC | crt_region/flsall.c |
 | 0x1001AC9F | 46B | fclose | _fclose |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001ACCD | 92B | flush | __flush |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AD29 | 9B | fcn_1001ad29 | _fcn_1001ad29 | /O1 /Gd | FUNCTION/RELOC | crt_region/h_ad29.c |
 | 0x1001AD29 | 9B | signal_lock | signal_lock |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AD32 | 164B | fcn_1001ad32 | _fcn_1001ad32 | /O1 /Gd | FUNCTION/SIZE_MISMATCH | crt_region/flsall.c |
 | 0x1001AD32 | 164B | flsall | __flsall |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001ADD6 | 59B | crt_locked_putc | crt_locked_putc |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001AE20 | 272B | fcn_1001ae20 | _fcn_1001ae20 | /O1 /Gd | FUNCTION/STUB | crt_region/amsg_exit.c |
 | 0x1001AE20 | 254B | strncpy | _strncpy |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001AF30 | 193B | strchr | _strchr |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001AFF0 | 128B | strstr | _strstr |  | LIBRARY/EXACT | library_msvc.h |
@@ -375,26 +392,31 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x1001B542 | 34B | rand | _rand |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001B564 | 39B | ftol | __ftol |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001B58B | 65B | printf | _printf |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001B5CC | 815B | realloc | _realloc | /O1 /Gd | FUNCTION/NEAR_MATCHING | crt_region/realloc.c |
 | 0x1001B5CC | 781B | realloc | _realloc |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001B757 | 9B | unlock_09e | unlock_09e |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001B8A5 | 11B | unlock_9 | _unlock_9 |  | LIBRARY/EXACT | library_msvc.h |
-| 0x1001B8FB | 217B | __CRT_INIT | ___CRT_INIT@12 | /O1 /Gd | FUNCTION/STUB | crt_region/crt_init.c |
+| 0x1001B8FB | 217B | __CRT_INIT | ___CRT_INIT@12 | /O1 /Gd | FUNCTION/RELOC | crt_region/crt_init.c |
 | 0x1001B8FB | 217B | CRT_INIT@12 | __CRT_INIT@12 |  | LIBRARY/EXACT | library_msvc.h |
-| 0x1001B9D4 | 157B | DllMain | _DllMain@12 | /O1 /Oy- /Gd | FUNCTION/STUB | crt_region/dllmain.c |
+| 0x1001B9D4 | 157B | DllMain | _DllMain@12 | /O1 /Oy- /Gd | FUNCTION/RELOC | crt_region/dllmain.c |
 | 0x1001B9D4 | 157B | DllMainCRTStartup@12 | __DllMainCRTStartup@12 |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BA71 | 51B | _amsg_exit | __amsg_exit | /O1 /Gd | FUNCTION/RELOC | crt_region/amsg_exit.c |
 | 0x1001BA71 | 48B | amsg_exit | __amsg_exit |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001BAA4 | 168B | ioterm | __ioterm |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001BB60 | 47B | fcn_1001bb60 | _fcn_1001bb60 | /O1 /Gd | FUNCTION/RELOC | crt_region/lock_streams.c |
 | 0x1001BB60 | 47B | lock_stream | _lock_stream |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BB8F | 35B | fcn_1001bb8f | _fcn_1001bb8f | /O1 /Gd | FUNCTION/RELOC | crt_region/flsall.c |
 | 0x1001BB8F | 35B | lock_file | __lock_file |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001BBB2 | 47B | fcn_1001bbb2 | _fcn_1001bbb2 | /O1 /Gd | FUNCTION/RELOC | crt_region/lock_streams.c |
 | 0x1001BBB2 | 47B | unlock_stream | _unlock_stream |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BBE1 | 35B | fcn_1001bbe1 | _fcn_1001bbe1 | /O1 /Gd | FUNCTION/RELOC | crt_region/flsall.c |
 | 0x1001BBE1 | 35B | unlock_file | __unlock_file |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001BC04 | 93B | close | __close |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001BC61 | 131B | free_osfhnd | __free_osfhnd |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001BCE4 | 43B | free_buf | _free_buf |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001BD0F | 141B | stbuf | __stbuf |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001BD9C | 42B | crt_cond_cleanup | crt_cond_cleanup |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001BDD0 | 123B | fcn_1001bdd0 | _fcn_1001bdd0 | /O1 /Gd | FUNCTION/SIZE_MISMATCH | crt_region/setargv.c |
 | 0x1001BDD0 | 123B | strlen | _strlen |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001BE4B | 368B | openfile | __openfile |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001BFBB | 200B | getstream | __getstream |  | LIBRARY/EXACT | library_msvc.h |
@@ -406,7 +428,9 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x1001C97A | 13B | stream_read_dword | _stream_read_dword |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001C987 | 16B | stream_read_qword | _stream_read_qword |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001C997 | 14B | stream_read_word | _stream_read_word |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001C9A5 | 0B | _ioinit | __ioinit | /O1 /Gd | FUNCTION/STUB | crt_region/ioinit.c |
 | 0x1001C9A5 | 444B | ioinit | __ioinit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CB61 | 0B | _ioterm | __ioterm |  | FUNCTION/STUB | crt_region/ioinit.c |
 | 0x1001CB61 | 84B | ioterm | _ioterm |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001CBB5 | 101B | lseek | __lseek |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001CC1A | 115B | lseek_lk | __lseek_lk |  | LIBRARY/EXACT | library_msvc.h |
@@ -414,36 +438,62 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x1001CD57 | 40B | format_digits | _format_digits |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001CD7F | 352B | localtime | _localtime |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001CEDF | 194B | loctotime_t | ___loctotime_t |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CFA1 | 41B | fcn_1001cfa1 | _fcn_1001cfa1 | /O1 /Gd | FUNCTION/RELOC | crt_region/tidtable.c |
 | 0x1001CFA1 | 41B | crt_delete_cs | crt_delete_cs |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001CFCA | 108B | fcn_1001cfca | _fcn_1001cfca | /O1 /Gd | FUNCTION/RELOC | crt_region/tidtable.c |
 | 0x1001CFCA | 108B | crt_delete_locks | crt_delete_locks |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D036 | 97B | _mlock | __mlock | /O1 /Oy- /Gd | FUNCTION/RELOC | crt_region/mlock.c |
 | 0x1001D036 | 97B | lock | __lock |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D097 | 21B | _munlock | __munlock | /O1 /Oy- /Gd | FUNCTION/RELOC | crt_region/mlock.c |
 | 0x1001D097 | 21B | unlock | __unlock |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D0AC | 84B | __mtinit | ___mtinit | /O1 /Gd | FUNCTION/RELOC | crt_region/tidtable.c |
 | 0x1001D0AC | 84B | mtinit | __mtinit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D100 | 30B | crt_close_handle | _crt_close_handle |  | FUNCTION/SIZE_MISMATCH | crt_region/tidtable.c |
 | 0x1001D100 | 30B | crt_close_handle | crt_close_handle |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D11E | 19B | fcn_1001d11e | _fcn_1001d11e | /O1 /Gd | FUNCTION/EXACT | crt_region/tidtable.c |
 | 0x1001D11E | 19B | set_vtable | set_vtable |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D131 | 103B | getptd | __getptd |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D198 | 160B | __freeptd | ___freeptd |  | FUNCTION/SIZE_MISMATCH | crt_region/tidtable.c |
 | 0x1001D198 | 160B | freeptd | __freeptd |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D238 | 27B | fcn_1001d238 | _fcn_1001d238 | /O1 /Gd | FUNCTION/RELOC | crt_region/tidtable.c |
 | 0x1001D238 | 27B | crt_gfunc_call | crt_gfunc_call |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D253 | 45B | fcn_1001d253 | _fcn_1001d253 | /O1 /Gd | FUNCTION/RELOC | crt_region/crt_heap.c |
 | 0x1001D253 | 45B | crt_get_osver | crt_get_osver |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D280 | 328B | fcn_1001d280 | _fcn_1001d280 | /O1 /Gd | FUNCTION/STUB | crt_region/crt_heap.c |
 | 0x1001D280 | 328B | heap_select | ___heap_select |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D3C8 | 93B | crt_heap_init | _crt_heap_init | /O1 /Gd | FUNCTION/RELOC | crt_region/crt_heap.c |
 | 0x1001D3C8 | 93B | crt_heap_init | crt_heap_init |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D425 | 168B | __heap_term | ___heap_term |  | FUNCTION/SIZE_MISMATCH | crt_region/crt_heap.c |
 | 0x1001D425 | 168B | heap_term | __heap_term |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D4CD | 72B | fcn_1001d4cd | _fcn_1001d4cd | /O1 /Gd | FUNCTION/RELOC | crt_region/crt_heap.c |
 | 0x1001D4CD | 72B | sbh_heap_init | ___sbh_heap_init |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D515 | 43B | fcn_1001d515 | _fcn_1001d515 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001D515 | 43B | crt_find_entry | crt_find_entry |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D540 | 809B | fcn_1001d540 | _fcn_1001d540 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001D540 | 809B | sbh_free_block | ___sbh_free_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D869 | 777B | fcn_1001d869 | _fcn_1001d869 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001D869 | 777B | sbh_alloc_block | ___sbh_alloc_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001DB72 | 177B | fcn_1001db72 | _fcn_1001db72 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001DB72 | 177B | sbh_alloc_new_region | ___sbh_alloc_new_region |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001DC23 | 251B | fcn_1001dc23 | _fcn_1001dc23 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001DC23 | 251B | sbh_alloc_new_group | ___sbh_alloc_new_group |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001DD1E | 758B | fcn_1001dd1e | _fcn_1001dd1e | /O1 /Gd | FUNCTION/EXACT | crt_region/sbh_pool.c |
 | 0x1001DD1E | 758B | sbh_resize_block | ___sbh_resize_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E014 | 324B | fcn_1001e014 | _fcn_1001e014 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001E014 | 324B | old_sbh_new_region | ___old_sbh_new_region |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E158 | 86B | fcn_1001e158 | _fcn_1001e158 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001E158 | 86B | sbh_decommit_pages | __sbh_decommit_pages |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E1AE | 194B | fcn_1001e1ae | _fcn_1001e1ae | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001E1AE | 194B | old_sbh_decommit_pages | ___old_sbh_decommit_pages |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E270 | 87B | fcn_1001e270 | _fcn_1001e270 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001E270 | 87B | old_sbh_find_block | ___old_sbh_find_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E2C7 | 69B | fcn_1001e2c7 | _fcn_1001e2c7 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001E2C7 | 69B | update_page_entry | update_page_entry |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E30C | 520B | __old_sbh_alloc_block | ___old_sbh_alloc_block | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001E30C | 520B | old_sbh_alloc_block | ___old_sbh_alloc_block |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E514 | 292B | fcn_1001e514 | _fcn_1001e514 | /O1 /Gd | FUNCTION/EXACT | crt_region/sbh_pool.c |
 | 0x1001E514 | 292B | old_sbh_alloc_block_from_page | ___old_sbh_alloc_block_from_page |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001E638 | 169B | fcn_1001e638 | _fcn_1001e638 | /O1 /Gd | FUNCTION/EXACT | crt_region/sbh_pool.c |
 | 0x1001E638 | 169B | old_sbh_resize_block | ___old_sbh_resize_block |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001E6E4 | 32B | except_handler3 | __except_handler3 |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001E704 | 34B | seh_filter | _seh_filter |  | LIBRARY/EXACT | library_msvc.h |
@@ -458,6 +508,7 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x1001EDE5 | 220B | filbuf | __filbuf |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001EEC1 | 101B | crt_lseek_wrap | _crt_lseek_wrap |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001EF26 | 473B | read_lk | __read_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F0FF | 147B | fcn_1001f0ff | _fcn_1001f0ff | /O1 /Gd | FUNCTION/STUB | crt_region/flsall.c |
 | 0x1001F0FF | 147B | crt_commit | crt_commit |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001F192 | 18B | crt_const_call | crt_const_call |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001F1A4 | 62B | IsNonwritableInCurrentImage | ___IsNonwritableInCurrentImage |  | LIBRARY/EXACT | library_msvc.h |
@@ -475,14 +526,23 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x1001F60C | 37B | crt_strcpy_advance | _crt_strcpy_advance |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001F631 | 511B | crtLCMapStringA | ___crtLCMapStringA |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001F855 | 117B | isctype | __isctype |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F8D0 | 16B | fcn_1001f8d0 | _fcn_1001f8d0 | /O1 /Gd | FUNCTION/STUB | crt_region/setargv.c |
 | 0x1001F8D0 | 7B | CopyCString | CopyCString |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F8E0 | 224B | fcn_1001f8e0 | _fcn_1001f8e0 | /O1 /Gd | FUNCTION/STUB | crt_region/amsg_exit.c |
 | 0x1001F8E0 | 224B | strcat | _strcat |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F9C0 | 0B | _setenvp | __setenvp | /O1 /Gd | FUNCTION/STUB | crt_region/setargv.c |
 | 0x1001F9C0 | 185B | setenvp | __setenvp |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FA79 | 0B | _setargv | __setargv |  | FUNCTION/STUB | crt_region/setargv.c |
 | 0x1001FA79 | 153B | setargv | __setargv |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FB12 | 436B | fcn_1001fb12 | _fcn_1001fb12 | /O1 /Gd | FUNCTION/STUB | crt_region/setargv.c |
 | 0x1001FB12 | 436B | parse_cmdline | _parse_cmdline |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FCC6 | 0B | __crtGetEnvironmentStringsA | ___crtGetEnvironmentStringsA |  | FUNCTION/STUB | crt_region/setargv.c |
 | 0x1001FCC6 | 306B | crtGetEnvironmentStringsA | ___crtGetEnvironmentStringsA |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FDF8 | 57B | fcn_1001fdf8 | _fcn_1001fdf8 | /O1 /Gd | FUNCTION/RELOC | crt_region/amsg_exit.c |
 | 0x1001FDF8 | 57B | crt_runtime_error | crt_runtime_error |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FE31 | 339B | fcn_1001fe31 | _fcn_1001fe31 | /O1 /Gd | FUNCTION/STUB | crt_region/amsg_exit.c |
 | 0x1001FE31 | 339B | NMSG_WRITE | __NMSG_WRITE |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FF84 | 153B | calloc | _calloc | /O1 /Gd | FUNCTION/STUB | crt_region/tidtable.c |
 | 0x1001FF84 | 289B | calloc | _calloc |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1002001D | 9B | unlock_09f | unlock_09f |  | LIBRARY/EXACT | library_msvc.h |
 | 0x100200A6 | 9B | unlock_09g | unlock_09g |  | LIBRARY/EXACT | library_msvc.h |
@@ -506,8 +566,10 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x10020BEB | 428B | isindst_lk | __isindst_lk |  | LIBRARY/EXACT | library_msvc.h |
 | 0x10020D97 | 320B | cvtdate | cvtdate |  | LIBRARY/EXACT | library_msvc.h |
 | 0x10020ED7 | 266B | gmtime_lk | _gmtime_lk |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10020FE1 | 23B | fcn_10020fe1 | _fcn_10020fe1 | /O1 /Gd | FUNCTION/RELOC | crt_region/crt_heap.c |
 | 0x10020FE1 | 23B | call_with_zero | call_with_zero |  | LIBRARY/EXACT | library_msvc.h |
 | 0x10020FF8 | 517B | strtoxl | _strtoxl |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10021200 | 56B | fcn_10021200 | _fcn_10021200 | /O1 /Gd | FUNCTION/STUB | crt_region/crt_heap.c |
 | 0x10021200 | 56B | strncmp | _strncmp |  | LIBRARY/EXACT | library_msvc.h |
 | 0x10021240 | 88B | memset | _memset |  | LIBRARY/EXACT | library_msvc.h |
 | 0x10021298 | 53B | controlfp | __controlfp |  | LIBRARY/EXACT | library_msvc.h |
@@ -543,7 +605,9 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x10021F0A | 51B | code_translate | code_translate |  | LIBRARY/EXACT | library_msvc.h |
 | 0x10021F3D | 41B | CrtIoInfoInit | CrtIoInfoInit |  | LIBRARY/EXACT | library_msvc.h |
 | 0x10021F66 | 389B | setSBUpLow | _setSBUpLow |  | LIBRARY/EXACT | library_msvc.h |
+| 0x100220EB | 28B | fcn_100220eb | _fcn_100220eb | /O1 /Gd | FUNCTION/RELOC | crt_region/setargv.c |
 | 0x100220EB | 28B | crt_cinit_once | _crt_cinit_once |  | LIBRARY/EXACT | library_msvc.h |
+| 0x10022107 | 137B | fcn_10022107 | _fcn_10022107 | /O1 /Gd | FUNCTION/STUB | crt_region/amsg_exit.c |
 | 0x10022107 | 137B | crtLoadWinAPI | __crtLoadWinAPI |  | LIBRARY/EXACT | library_msvc.h |
 | 0x10022190 | 293B | chsize_lk | __chsize_lk |  | LIBRARY/EXACT | library_msvc.h |
 | 0x100222B5 | 139B | atoi | _atoi |  | LIBRARY/EXACT | library_msvc.h |
@@ -571,7 +635,7 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x10023812 | 40B | strdup | __strdup |  | LIBRARY/EXACT | library_msvc.h |
 | 0x10023840 | 0B | RtlUnwind | RtlUnwind |  | LIBRARY/EXACT | library_imports.h |
 
-## Unmatched Functions (32 remaining)
+## Unmatched Functions (30 remaining)
 
 | VA | Size | Name |
 |-----|------|---------|
@@ -601,9 +665,7 @@ Coverage: 96.3% of .text section (136115/141382 bytes)
 | 0x10018272 | 190B | case.0x10018211.15 |
 | 0x10019D00 | 48B | fcn.10019d00 |
 | 0x1001A286 | 19B | fcn.1001a286 |
-| 0x1001A643 | 45B | fcn.1001a643 |
 | 0x1001A670 | 34B | fcn.1001a670 |
-| 0x1001A7F7 | 18B | fcn.1001a7f7 |
 | 0x1001E7DC | 216B | fcn.1001e7dc |
 | 0x10022FF1 | 544B | fcn.10022ff1 |
 | 0x1002350A | 43B | fcn.1002350a |

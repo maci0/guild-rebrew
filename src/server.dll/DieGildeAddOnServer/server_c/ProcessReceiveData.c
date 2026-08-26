@@ -52,10 +52,7 @@ int __cdecl ProcessReceiveData(void)
 	unsigned int status;
 	unsigned int total;
 
-	i = 0;
-	conn = (unsigned int*) 0x101deb00;
-
-	do {
+	for (i = 0, conn = (unsigned int*) 0x101deb00; (int) conn < 0x114ffe20; conn = (unsigned int*) ((char*) conn + 0x264264), i++) {
 		if ((*(unsigned char*) conn & 1) != 0) {
 			do {
 				ret = ReceivePacketHeader(conn);
@@ -139,26 +136,19 @@ int __cdecl ProcessReceiveData(void)
 				return -1;
 			}
 		}
-		conn = (unsigned int*) ((char*) conn + 0x264264);
-		i++;
-	} while ((int) conn < 0x114ffe20);
+	}
 
-	if ((*(unsigned char*) 0x114ffe20 & 1) == 0) {
-		return 0;
-	}
-admin_loop:
-	i = ReceivePacketHeader((unsigned int*) 0x114ffe20);
-	if (i == -1) {
-		return 0;
-	}
-	if ((*(unsigned char*) 0x114ffe20 & 0x80) != 0) {
-		pktbuf[0] = 2;
-		cm_QueuePlayerCommand((unsigned int*) 0x114ffe20, pktbuf);
-		cm_ClosePlayerConnection((unsigned int*) 0x114ffe20);
-		return 0;
-	}
-	if ((*(unsigned char*) 0x114ffe20 & 1) != 0) {
-		goto admin_loop;
+	while ((*(unsigned char*) 0x114ffe20 & 1) != 0) {
+		i = ReceivePacketHeader((unsigned int*) 0x114ffe20);
+		if (i == -1) {
+			return 0;
+		}
+		if ((*(unsigned char*) 0x114ffe20 & 0x80) != 0) {
+			pktbuf[0] = 2;
+			cm_QueuePlayerCommand((unsigned int*) 0x114ffe20, pktbuf);
+			cm_ClosePlayerConnection((unsigned int*) 0x114ffe20);
+			return 0;
+		}
 	}
 	return 0;
 }

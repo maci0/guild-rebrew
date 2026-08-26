@@ -36,16 +36,20 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  *
  * Conversion state: pure C (naked wrapper removed).  The frame and the
  * gm_GetFieldByType/gm_ResolveEntityById calls match byte-for-byte.  The
- * three error LogMessageInternal epilogues diverge because MSVC6 tail-
- * merges the identical early returns (a `goto`-to-shared-return shape
- * keeps the calls inline but breaks the tail, so the natural per-error
- * `return 1` is kept — semantically correct), and the material loop
- * diverges by the pre-loop dead store `mov [esp+0x18],ebx`
- * (saved_quantity = quantity overwritten by 4 — MSVC6's dead-store
- * elimination removes it from every C formulation) — best-effort 133/993. */
+ * three early-error LogMessageInternal epilogues are kept as separate
+ * `return 1` blocks so MSVC6 does not tail-merge them (matching the
+ * target, which inlines all three); the two later errors ("Nicht genug
+ * Rohstoffe" / "Rohstoff verschwunden") are separate blocks whose
+ * identical tails MSVC6 cross-jumps exactly like the target (error4
+ * pushes 1/str/line and jumps into error5's push-file).  Compiled with
+ * /Ox (the target's optimization level; /O2 enables /Og which makes
+ * MSVC6 tail-merge the early errors).  The material loop still diverges
+ * by the pre-loop dead store `mov [esp+0x18],ebx` (saved_quantity =
+ * quantity overwritten by 4) which MSVC6 eliminates in every C
+ * formulation tried. */
 
 
-// CFLAGS: /O2 /Gd
+// CFLAGS: /Ox /Gd
 int __cdecl cm_ExProdObjekt(int msg, char* result)
 {
 	int quantity;
@@ -55,7 +59,6 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	ushort* material_iter;
 	long production_value;
 	short* player_entry;
-	uint line;
 	short* lager;
 	char* recipe_def;
 	short* owner;
@@ -67,7 +70,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	quantity = gm_ResolveEntityById((void**)0, (void**)&lager, (void**)0, quantity);
 	if (quantity == 0) {
 		LogMessageInternal(
-			"D:\Develop\DieGildeAddOn\command\command.c",
+			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x2f3b,
 			"cm_ExProdObjekt() Invalid 'lager_id'",
 			1
@@ -76,7 +79,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	}
 	if ((*lager != 0x2a) && (*lager != 0x116)) {
 		LogMessageInternal(
-			"D:\Develop\DieGildeAddOn\command\command.c",
+			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x2f53,
 			"cm_ExProdObjekt() Lager has wrong Type",
 			1
@@ -86,7 +89,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	owner = gm_ResolveParentEntity(lager);
 	if (owner == (short*)0) {
 		LogMessageInternal(
-			"D:\Develop\DieGildeAddOn\command\command.c",
+			s_D__Develop_DieGildeAddOn_command_1002c748,
 			0x2f6d,
 			"cm_ExProdObjekt() Lager hat keinen Besitzer",
 			1
@@ -128,10 +131,12 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 		saved_quantity = quantity;
 	}
 	if (quantity == 0) {
-		recipe = "cm_ExProdObjekt(): Nicht gen\374gend Rohstoffe";
-		line = 0x2fb5;
-	LAB_1000e3e1:
-		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", line, recipe, 1);
+		LogMessageInternal(
+			s_D__Develop_DieGildeAddOn_command_1002c748,
+			0x2fb5,
+			"cm_ExProdObjekt(): Nicht gen\374gend Rohstoffe",
+			1
+		);
 		if (result != (char*)0) {
 			result[1] = '\b';
 		}
@@ -142,9 +147,16 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 		if (*material_iter != 0) {
 			obj_entry = (ushort*)gm_StartEntityQuery(*(int*)(lager + 10), 1, 0, (uint)*material_iter);
 			if (obj_entry == (ushort*)0) {
-				recipe = "cm_ExProdObjekt() Rohstoff verschwunden";
-				line = 0x2fdd;
-				goto LAB_1000e3e1;
+				LogMessageInternal(
+					s_D__Develop_DieGildeAddOn_command_1002c748,
+					0x2fdd,
+					"cm_ExProdObjekt() Rohstoff verschwunden",
+					1
+				);
+				if (result != (char*)0) {
+					result[1] = '\b';
+				}
+				return 1;
 			}
 			*(uint*)(obj_entry + 7) = *(int*)(obj_entry + 7) - (uint)material_iter[-4] * quantity;
 			recipe = gm_FindSlotById((uint)g_current_season, (uint)*material_iter);

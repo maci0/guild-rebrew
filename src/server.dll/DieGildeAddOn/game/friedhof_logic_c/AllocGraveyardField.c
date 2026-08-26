@@ -60,99 +60,95 @@ cleanup:
 	}
 	memset(*(void**) ((char*) slot + 0x20), 0, g_1002576c[entry[0x247]] * 68);
 	for (i = 0; i < g_1002576c[entry[0x247]]; i++)
-		*(int*) ((char*) *(void**) ((char*) slot + 0x20) + i * 0x44) = -1;
+		*(unsigned*) ((char*) *(void**) ((char*) slot + 0x20) + i * 0x44) = 0xFFFFFFFFu;
 	*(void**) ((char*) slot + 8) = *(void**) ((char*) slot + 0x1c);
 	*(char*) ((char*) slot + 0x18) = 1;
 	*(char*) ((char*) slot + 0x19) = 0;
 	*(char*) ((char*) slot + 0x1a) = 0;
 	*(char*) ((char*) slot + 0x1b) = 0;
+	p = (char*) *(void**) ((char*) slot + 0x1c);
+	e = (char*) *(void**) ((char*) slot + 0x20);
 	if (*(int*) ((char*) slot + 4) == 1) {
 		*(void**) ((char*) slot + 0x10) = 0;
-		*(void**) ((char*) slot + 0xc) = (char*) *(void**) ((char*) slot + 0x1c) + 0xa0;
+		*(void**) ((char*) slot + 0xc) = p + 0xa0;
 		*(void**) ((char*) slot + 0x14) = 0;
-		p = (char*) *(void**) ((char*) slot + 0x1c);
-		e = (char*) *(void**) ((char*) slot + 0x20);
 		for (i = 0; i < 8; i++) {
 			*(int*) p = 0;
 			*(void**) (p + 0x10) = e;
-			*(int*) (p + 4) = -1;
-			*(short*) (p + 8) = 0xffff;
+			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (p + 8) = 0xFFFFu;
 			e += 0x44;
 			p += 0x14;
 		}
 		for (i = 0; i < 4; i++) {
 			*(int*) p = 1;
 			*(void**) (p + 0x10) = e;
-			*(int*) (p + 4) = -1;
-			*(short*) (p + 8) = 0xffff;
+			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (p + 8) = 0xFFFFu;
 			e += 0x88;
 			p += 0x14;
 		}
 	} else if (*(int*) ((char*) slot + 4) == 2) {
 		*(void**) ((char*) slot + 0x14) = 0;
-		*(void**) ((char*) slot + 0xc) = (char*) *(void**) ((char*) slot + 0x1c) + 0xf0;
-		*(void**) ((char*) slot + 0x10) = (char*) *(void**) ((char*) slot + 0x1c) + 0x168;
-		p = (char*) *(void**) ((char*) slot + 0x1c);
-		e = (char*) *(void**) ((char*) slot + 0x20);
+		*(void**) ((char*) slot + 0xc) = p + 0xf0;
+		*(void**) ((char*) slot + 0x10) = p + 0x168;
 		for (i = 0; i < 0xc; i++) {
 			*(int*) p = 0;
 			*(void**) (p + 0x10) = e;
-			*(int*) (p + 4) = -1;
-			*(short*) (p + 8) = 0xffff;
+			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (p + 8) = 0xFFFFu;
 			e += 0x44;
 			p += 0x14;
 		}
 		for (i = 0; i < 6; i++) {
 			*(int*) p = 1;
 			*(void**) (p + 0x10) = e;
-			*(int*) (p + 4) = -1;
-			*(short*) (p + 8) = 0xffff;
+			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (p + 8) = 0xFFFFu;
 			e += 0x88;
 			p += 0x14;
 		}
 		for (i = 0; i < 2; i++) {
 			*(int*) p = 2;
 			*(void**) (p + 0x10) = e;
-			*(int*) (p + 4) = -1;
-			*(short*) (p + 8) = 0xffff;
+			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (p + 8) = 0xFFFFu;
 			e += 0x110;
 			p += 0x14;
 		}
 	} else {
-		*(void**) ((char*) slot + 0xc) = (char*) *(void**) ((char*) slot + 0x1c) + 0x140;
-		*(void**) ((char*) slot + 0x10) = (char*) *(void**) ((char*) slot + 0x1c) + 0x1e0;
-		*(void**) ((char*) slot + 0x14) = (char*) *(void**) ((char*) slot + 0x1c) + 0x230;
-		p = (char*) *(void**) ((char*) slot + 0x1c);
-		e = (char*) *(void**) ((char*) slot + 0x20);
+		*(void**) ((char*) slot + 0xc) = p + 0x140;
+		*(void**) ((char*) slot + 0x10) = p + 0x1e0;
+		*(void**) ((char*) slot + 0x14) = p + 0x230;
 		for (i = 0; i < 0x10; i++) {
 			*(int*) p = 0;
 			*(void**) (p + 0x10) = e;
-			*(int*) (p + 4) = -1;
-			*(short*) (p + 8) = 0xffff;
+			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (p + 8) = 0xFFFFu;
 			e += 0x44;
 			p += 0x14;
 		}
 		for (i = 0; i < 8; i++) {
 			*(int*) p = 1;
 			*(void**) (p + 0x10) = e;
-			*(int*) (p + 4) = -1;
-			*(short*) (p + 8) = 0xffff;
+			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (p + 8) = 0xFFFFu;
 			e += 0x88;
 			p += 0x14;
 		}
 		for (i = 0; i < 4; i++) {
 			*(int*) p = 2;
 			*(void**) (p + 0x10) = e;
-			*(int*) (p + 4) = -1;
-			*(short*) (p + 8) = 0xffff;
+			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (p + 8) = 0xFFFFu;
 			e += 0x110;
 			p += 0x14;
 		}
 		for (i = 0; i < 2; i++) {
 			*(int*) p = 3;
 			*(void**) (p + 0x10) = e;
-			*(int*) (p + 4) = -1;
-			*(short*) (p + 8) = 0xffff;
+			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (p + 8) = 0xFFFFu;
 			e += 0x220;
 			p += 0x14;
 		}

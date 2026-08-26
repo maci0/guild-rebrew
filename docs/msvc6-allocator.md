@@ -2226,18 +2226,25 @@ to stop the elimination.  Kept fenced-naked; C preserved in #else.
 
 ## Finding 50 — AllocGraveyardField (0x100109d0): alloc/field-init loop allocation
 
-Best C is 141/661 positional (3 formulations).  The validation/alloc head
-is byte-identical (the `dword_100a8c30` 147-chain type check, the
+RESOLVED — now RELOC (832/832 byte-match, 13 relocs) as proper C under
+`msvc600sp6`.  The validation/alloc head is byte-identical (the
+`dword_100a8c30` 147-chain type check, the
 `m_AllocTracked(0x24, "0x1002d474")` 36-byte struct + `memset 36`,
 `[esi] = *(b+1)`, `[esi+4] = tp[0x247]`, the two sub-allocations
 `g_1002575c[type]*20` and `g_1002576c[type]*68` with their `memset`s, and
-the cleanup free chain).  The divergence is the six `field-init` loops
-(type 1: 8+4, type 2: 12, type 3: 16+12 — each storing `0`/`1`,
-`q`, `-1`, `0xffff` per 0x14-byte slot while stepping `q` by 0x44 or
-0x88) plus the `-1` fill loop and the second `memset`: MSVC6 merges the
-`-1` dword store with the `0xffff` word store into one register (the
-reference keeps `edi = -1` and `edx = 0xffff` separate), and its induction
-variables fold the `+0x14/+0x44` walks into a single pointer where the
-reference keeps the counter, offset, and base separate.  `0x1000` must be
-written `*(int*) |= 0x1000` (not `0x100000`) to get the `or dh,0x10`
-byte-form.  Kept fenced-naked; C preserved in #else.
+the cleanup free chain).  The blocker was register allocation in the six
+`field-init` loops (type 1: 8+4, type 2: 12, type 3: 16+12 — each storing
+`0`/`1`, `q`, `-1`, `0xffff` per 0x14-byte slot while stepping `q` by
+0x44 or 0x88) plus the `-1` fill loop: MSVC6 merged the `-1` dword store
+with the `0xffff` word store into one register (`or edx,-1` in the memset
+tail, then `mov [p+4],edx` / `mov word [p+8],dx`), while the reference
+keeps `edi = -1` (`or edi,0xffffffff` at the loop entry) and
+`edx = 0xffff` (`mov edx,0xffff`) separate — the merge cascades into the
+loop counter (`edi` vs `ebp`), index, and base-reload registers.  Two
+source fixes reproduce the reference exactly: (1) write the constants as
+**unsigned** — `*(unsigned*) (p+4) = 0xFFFFFFFFu` and
+`*(unsigned short*) (p+8) = 0xFFFFu` (and the fill loop likewise) — which
+stops MSVC6 from treating them as the same value; (2) hoist `p = slot+0x1c`
+and `e = slot+0x20` before the type dispatch and use them in every branch,
+so the reference's single pre-dispatch `mov eax,[esi+0x1c]` /
+`mov ecx,[esi+0x20]` is emitted instead of per-branch loads.
