@@ -140,6 +140,7 @@ local static_tree_desc  static_bl_desc =
  */
 
 local void tr_static_init OF((void));
+local void compress_block OF((deflate_state *s, ct_data *ltree, ct_data *dtree));
 local void init_block     OF((deflate_state *s));
 local void pqdownheap     OF((deflate_state *s, ct_data *tree, int k));
 local void gen_bitlen     OF((deflate_state *s, tree_desc *desc));
@@ -150,7 +151,6 @@ local void send_tree      OF((deflate_state *s, ct_data *tree, int max_code));
 local int  build_bl_tree  OF((deflate_state *s));
 local void send_all_trees OF((deflate_state *s, int lcodes, int dcodes,
                               int blcodes));
-extern void vfs_CompressBlock (deflate_state *s, ct_data *ltree, ct_data *dtree);
 extern void set_data_type (deflate_state *s);
 extern unsigned bi_reverse (unsigned value, int length);
 extern void bi_windup (deflate_state *s);
@@ -983,7 +983,7 @@ void _tr_flush_block(s, buf, stored_len, eof)
     } else if (static_lenb == opt_lenb) {
 #endif
         send_bits(s, (STATIC_TREES<<1)+eof, 3);
-        vfs_CompressBlock(s, (ct_data *)static_ltree, (ct_data *)static_dtree);
+        compress_block(s, (ct_data *)static_ltree, (ct_data *)static_dtree);
 #ifdef DEBUG
         s->compressed_len += 3 + s->static_len;
 #endif
@@ -991,7 +991,7 @@ void _tr_flush_block(s, buf, stored_len, eof)
         send_bits(s, (DYN_TREES<<1)+eof, 3);
         send_all_trees(s, s->l_desc.max_code+1, s->d_desc.max_code+1,
                        max_blindex+1);
-        vfs_CompressBlock(s, (ct_data *)s->dyn_ltree, (ct_data *)s->dyn_dtree);
+        compress_block(s, (ct_data *)s->dyn_ltree, (ct_data *)s->dyn_dtree);
 #ifdef DEBUG
         s->compressed_len += 3 + s->opt_len;
 #endif
@@ -1013,65 +1013,9 @@ void _tr_flush_block(s, buf, stored_len, eof)
 }
 
 /* ===========================================================================
- * Save the match info and tally the frequency counts. Return true if
- * the current block must be flushed.
- */
-/* stripped: not present in original DLL */
-#if 0
-int _tr_tally (s, dist, lc)
-    deflate_state *s;
-    unsigned dist;  /* distance of matched string */
-    unsigned lc;    /* match length-MIN_MATCH or unmatched char (if dist==0) */
-{
-    s->d_buf[s->last_lit] = (ush)dist;
-    s->l_buf[s->last_lit++] = (uch)lc;
-    if (dist == 0) {
-        /* lc is the unmatched char */
-        s->dyn_ltree[lc].Freq++;
-    } else {
-        s->matches++;
-        /* Here, lc is the match length - MIN_MATCH */
-        dist--;             /* dist = match distance - 1 */
-        Assert((ush)dist < (ush)MAX_DIST(s) &&
-               (ush)lc <= (ush)(MAX_MATCH-MIN_MATCH) &&
-               (ush)d_code(dist) < (ush)D_CODES,  "_tr_tally: bad match");
-
-        s->dyn_ltree[_length_code[lc]+LITERALS+1].Freq++;
-        s->dyn_dtree[d_code(dist)].Freq++;
-    }
-
-#ifdef TRUNCATE_BLOCK
-    /* Try to guess if it is profitable to stop the current block here */
-    if ((s->last_lit & 0x1fff) == 0 && s->level > 2) {
-        /* Compute an upper bound for the compressed length */
-        ulg out_length = (ulg)s->last_lit*8L;
-        ulg in_length = (ulg)((long)s->strstart - s->block_start);
-        int dcode;
-        for (dcode = 0; dcode < D_CODES; dcode++) {
-            out_length += (ulg)s->dyn_dtree[dcode].Freq *
-                (5L+extra_dbits[dcode]);
-        }
-        out_length >>= 3;
-        Tracev((stderr,"\nlast_lit %u, in %ld, out ~%ld(%ld%%) ",
-               s->last_lit, in_length, out_length,
-               100L - out_length*100L/in_length));
-        if (s->matches < s->last_lit/2 && out_length < in_length/2) return 1;
-    }
-#endif
-    return (s->last_lit == s->lit_bufsize-1);
-    /* We avoid equality with lit_bufsize because of wraparound at 64K
-     * on 16 bit machines and because stored blocks are restricted to
-     * 64K-1 bytes.
-     */
-}
-#endif
-
-
-/* ===========================================================================
  * Send the block data compressed using the given Huffman trees
  */
 /* stripped: replaced by vfs_CompressBlock (game variant) */
-#if 0
 local void compress_block(s, ltree, dtree)
     deflate_state *s;
     ct_data *ltree; /* literal tree */
@@ -1118,7 +1062,59 @@ local void compress_block(s, ltree, dtree)
     send_code(s, END_BLOCK, ltree);
     s->last_eob_len = ltree[END_BLOCK].Len;
 }
+
+
+/* ===========================================================================
+ * Save the match info and tally the frequency counts. Return true if
+ * the current block must be flushed.
+ */
+/* stripped: not present in original DLL */
+int _tr_tally (s, dist, lc)
+    deflate_state *s;
+    unsigned dist;  /* distance of matched string */
+    unsigned lc;    /* match length-MIN_MATCH or unmatched char (if dist==0) */
+{
+    s->d_buf[s->last_lit] = (ush)dist;
+    s->l_buf[s->last_lit++] = (uch)lc;
+    if (dist == 0) {
+        /* lc is the unmatched char */
+        s->dyn_ltree[lc].Freq++;
+    } else {
+        s->matches++;
+        /* Here, lc is the match length - MIN_MATCH */
+        dist--;             /* dist = match distance - 1 */
+        Assert((ush)dist < (ush)MAX_DIST(s) &&
+               (ush)lc <= (ush)(MAX_MATCH-MIN_MATCH) &&
+               (ush)d_code(dist) < (ush)D_CODES,  "_tr_tally: bad match");
+
+        s->dyn_ltree[_length_code[lc]+LITERALS+1].Freq++;
+        s->dyn_dtree[d_code(dist)].Freq++;
+    }
+
+#ifdef TRUNCATE_BLOCK
+    /* Try to guess if it is profitable to stop the current block here */
+    if ((s->last_lit & 0x1fff) == 0 && s->level > 2) {
+        /* Compute an upper bound for the compressed length */
+        ulg out_length = (ulg)s->last_lit*8L;
+        ulg in_length = (ulg)((long)s->strstart - s->block_start);
+        int dcode;
+        for (dcode = 0; dcode < D_CODES; dcode++) {
+            out_length += (ulg)s->dyn_dtree[dcode].Freq *
+                (5L+extra_dbits[dcode]);
+        }
+        out_length >>= 3;
+        Tracev((stderr,"\nlast_lit %u, in %ld, out ~%ld(%ld%%) ",
+               s->last_lit, in_length, out_length,
+               100L - out_length*100L/in_length));
+        if (s->matches < s->last_lit/2 && out_length < in_length/2) return 1;
+    }
 #endif
+    return (s->last_lit == s->lit_bufsize-1);
+    /* We avoid equality with lit_bufsize because of wraparound at 64K
+     * on 16 bit machines and because stored blocks are restricted to
+     * 64K-1 bytes.
+     */
+}
 
 
 /* ===========================================================================
