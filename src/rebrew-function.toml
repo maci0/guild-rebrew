@@ -94,7 +94,7 @@ status = "EXACT"
 ["SERVER.0x10006580"]
 size = 658
 status = "SIZE_MISMATCH"
-cflags = "/O2 /G6 /Oy- /Gd"
+cflags = "/O2 /Gd"
 analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
 note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=2179763029 vs 0"
 
@@ -116,13 +116,14 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x10006c00"]
 size = 283
-status = "SIZE_MISMATCH"
+status = "RELOC"
 cflags = "/O2 /Gd"
 
 ["SERVER.0x10006d20"]
 size = 270
 status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd /Oy-"
+blocker = "found-slot memset: target uses alignment-pass inline memset (lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx) with dest/len spilled to dead arg slots [ebp+0xc]/[ebp+8]; msvc6 SP6 emits only the plain dword+tail form from any C shape (docs/msvc6-allocator.md Finding 19). Best proper-C match 234/270."
 
 ["SERVER.0x10006e30"]
 size = 137

@@ -1,6 +1,6 @@
 # Reversed Functions Catalog
 
-Total: 556/563 functions cataloged (327 exact, 173 reloc-normalized, 4 near-matching, 3 stubs)  
+Total: 556/563 functions cataloged (327 exact, 176 reloc-normalized, 4 near-matching, 3 stubs)  
 Coverage: 96.3% of .text section (136178/141382 bytes)
 
 
@@ -61,11 +61,11 @@ Coverage: 96.3% of .text section (136178/141382 bytes)
 | 0x10006280 | 393B | inflate_trees_dynamic | inflate_trees_dynamic |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006410 | 46B | inflate_trees_fixed | inflate_trees_fixed |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006440 | 306B | inflate_flush | inflate_flush |  | LIBRARY/EXACT | library_zlib.h |
-| 0x10006580 | 658B | m_AllocTracked | _m_AllocTracked | /O2 /Gd /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc_c/m_AllocTracked.c |
+| 0x10006580 | 658B | m_AllocTracked | _m_AllocTracked | /O2 /Gd | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc_c/m_AllocTracked.c |
 | 0x10006820 | 188B | m_FreeTracked | _m_FreeTracked | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
 | 0x100068E0 | 162B | InitPacketPool | _InitPacketPool | /O2 /Gd /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc.c |
-| 0x10006990 | 612B | ReportMemoryGroupInfo | _ReportMemoryGroupInfo | /O2 /Gd | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc_c/ReportMemoryGroupInfo.c |
-| 0x10006C00 | 283B | ShutdownMemoryAllocator | _ShutdownMemoryAllocator | /O2 /Gd | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc2.c |
+| 0x10006990 | 612B | ReportMemoryGroupInfo | _ReportMemoryGroupInfo | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc_c/ReportMemoryGroupInfo.c |
+| 0x10006C00 | 283B | ShutdownMemoryAllocator | _ShutdownMemoryAllocator | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc2.c |
 | 0x10006D20 | 270B | m_PoolAlloc | _m_PoolAlloc | /O2 /Gd /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc2.c |
 | 0x10006E30 | 137B | m_PoolFree | _m_PoolFree | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc2.c |
 | 0x10006EC0 | 108B | tr_init | _tr_init |  | LIBRARY/EXACT | library_zlib.h |
@@ -106,7 +106,7 @@ Coverage: 96.3% of .text section (136178/141382 bytes)
 | 0x1000A2E0 | 96B | cm_ClosePlayerConnection | _cm_ClosePlayerConnection |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
 | 0x1000A340 | 336B | ReceivePacketHeader | _ReceivePacketHeader | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server2.c |
 | 0x1000A490 | 211B | SendPlayerData | _SendPlayerData |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
-| 0x1000A570 | 750B | ProcessReceiveData | _ProcessReceiveData | /Ox /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server_c/ProcessReceiveData.c |
+| 0x1000A570 | 750B | ProcessReceiveData | _ProcessReceiveData | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server_c/ProcessReceiveData.c |
 | 0x1000A860 | 131B | ProcessSendData | _ProcessSendData | /O2 /Gd /Ow | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server3.c |
 | 0x1000A8F0 | 170B | QueueCommandForProcessing | _QueueCommandForProcessing |  | FUNCTION/RELOC | DieGildeAddOnServer/server3.c |
 | 0x1000A9A0 | 170B | cm_QueuePlayerCommand | _cm_QueuePlayerCommand |  | FUNCTION/RELOC | DieGildeAddOnServer/server3.c |
@@ -115,7 +115,7 @@ Coverage: 96.3% of .text section (136178/141382 bytes)
 | 0x1000AD40 | 768B | LogWinsockError | _LogWinsockError |  | FUNCTION/RELOC | DieGildeAddOnServer/server4.c |
 | 0x1000B040 | 372B | InitBuildingTypeTable | _InitBuildingTypeTable | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server4.c |
 | 0x1000B1C0 | 205B | amt_ValidateOfficeCandidate | _amt_ValidateOfficeCandidate | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
-| 0x1000B290 | 425B | ValidateAndAssignOffice | _ValidateAndAssignOffice | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/aemter.c |
+| 0x1000B290 | 425B | ValidateAndAssignOffice | _ValidateAndAssignOffice | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/PROVEN | DieGildeAddOn/game/aemter.c |
 | 0x1000B440 | 133B | amt_ValidateCommand | _amt_ValidateCommand |  | FUNCTION/RELOC | DieGildeAddOn/game/aemter.c |
 | 0x1000B4D0 | 836B | ExecuteOfficeAssignment | _ExecuteOfficeAssignment | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/PROVEN | DieGildeAddOn/game/aemter_c/ExecuteOfficeAssignment.c |
 | 0x1000B820 | 42B | amt_FindEntity26 | _amt_FindEntity26 | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/aemter2.c |

@@ -69,8 +69,7 @@ struct LinkedListNode {
 
 void __cdecl ShutdownMemoryAllocator(void)
 {
-	char buf[0x3f0];
-	char buf2[0xc];
+	char buf[0x400];
 	int i;
 	char* item;
 	char* node;
@@ -88,15 +87,21 @@ void __cdecl ShutdownMemoryAllocator(void)
 		}
 		ReportMemoryGroupInfo(0);
 	}
-	for (i = 0; i < g_array_count; i++) {
-		item = (char*) g_array_ptr + 8 + i * 0x10;
+	i = 0;
+	if (g_array_count <= 0) {
+		goto cleanup;
+	}
+	item = (char*) g_array_ptr + 8;
+	do {
 		if (*(char**) item != 0) {
-			sprintf(buf2, "-> Pointer not freed:%s", *(char**) (item - 4));
-			LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x203, buf2, 1);
+			sprintf(buf, "-> Pointer not freed:%s", *(char**) (item - 4));
+			LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x203, buf, 1);
 			m_FreeHeapLocked(*(void**) item);
 			*(char**) item = 0;
 		}
-	}
+		i++;
+		item += 0x10;
+	} while (i < g_array_count);
 cleanup:
 	g_stat4 = 0;
 	g_stat2 = 0;
@@ -140,7 +145,7 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 	int i;
 	char* slot;
 
-	if (head == 0 || (unsigned int) size == 0 || max_items <= 0) {
+	if (head == 0 || (unsigned int) size <= 0 || max_items <= 0) {
 		return 0;
 	}
 	asize = size + 4;
@@ -148,39 +153,37 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 		asize += 4 - (size & 3);
 	}
 	block = *head;
-	if (block != 0) {
-		while (block->count >= block->max || block->size != asize) {
-			block = block->next;
-			if (block == 0) {
-				break;
-			}
-		}
-	}
 	if (block == 0) {
 		block = (struct BlockNode*) m_AllocTracked(asize * max_items + 0x10, "m:pool_get_free(tp_m_pool)");
+		*head = block;
 		block->count = 0;
 		block->max = max_items;
 		block->size = asize;
-		block->next = *head;
-		*head = block;
-	}
-	if (block->max <= 0) {
-		return 0;
+		block->next = 0;
+	} else {
+		while (block != 0 && (block->count >= block->max || block->size != asize)) {
+			block = block->next;
+		}
+		if (block == 0) {
+			block = (struct BlockNode*) m_AllocTracked(asize * max_items + 0x10, "m:pool_alloc(tp_m_pool)");
+			block->count = 0;
+			block->max = max_items;
+			block->size = asize;
+			block->next = *head;
+			*head = block;
+		}
 	}
 	slot = (char*) block + 0x10;
-	for (i = 0; i < block->max; i++) {
+	for (i = 0; i < block->max; i++, slot += block->size) {
 		if (*(int*) slot == 0) {
-			break;
+			block->count++;
+			*(int*) slot = (int) block;
+			slot += 4;
+			memset(slot, 0, asize - 4);
+			return slot;
 		}
-		slot += asize;
 	}
-	if (i >= block->max) {
-		return 0;
-	}
-	block->count++;
-	slot += 4;
-	memset(slot, 0, asize - 4);
-	return slot;
+	return 0;
 }
 
 /* Returns a block to the packet pool free list. Adds the block

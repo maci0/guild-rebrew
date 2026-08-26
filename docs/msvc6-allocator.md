@@ -799,8 +799,8 @@ the dest lea in-loop.
 
 ## m_PoolAlloc (0x10006d20) / InitBuildingTypeTable (0x1000b040) — blocked (alignment-prefixed memset)
 
-Both functions otherwise convert cleanly (m_PoolAlloc 223/270 with msvc6
-`/O2 /Oy-`; InitBuildingTypeTable 261/372 with explicit-store C) but share
+Both functions otherwise convert cleanly (m_PoolAlloc 234/270 with msvc6
+`/O2 /Gd /Oy-`; InitBuildingTypeTable 261/372 with explicit-store C) but share
 an unreproducible memset expansion. The reference emits a **dest-alignment
 prelude** before the dword stores:
 
@@ -832,6 +832,16 @@ a service-pack or custom-build codegen difference; preserved C is in
 m_alloc2.c / server4.c. The rest of both functions (alignment calc, node
 search, slot scan, and InitBuildingTypeTable's loop + 42 unrolled constant
 stores with their `mov al,N` value grouping) matches msvc6 `/O2` exactly.
+Since the original writeup, m_PoolAlloc's C was rebuilt and now matches
+234/270 (from 223): the two allocation sites with their distinct literals
+(`m:pool_get_free(tp_m_pool)` for the empty-head path with `*head=block`
+stored first, `m:pool_alloc(tp_m_pool)` for the search-miss path with
+`next=*head`/`*head=block` last), the `while (block && ...)` search loop,
+`slot += block->size` in the for-increment, and the back-pointer write
+`*(int*)slot = (int)block` before `count++`/`memset(slot+4, 0, asize-4)`.
+The only remaining delta is the found-path memset block (offset 0x10006df7
+on), still the unreproducible alignment-prelude expansion. ShutdownMemoryAllocator
+(0x10006c00) is no longer blocked — see its section below.
 
 ## lb_ExPlayerlist (0x100145e0) — DONE (struct-for-layout + auto-zero + tail layout)
 
@@ -1012,17 +1022,20 @@ unsigned jb/jae), *slot = 0, count--, and when empty unlink from *pool
 (head case or prev->next walk) + m_FreeTracked; fatal =
 ReportFatalError(0x10028888, 0x279, 0x10028b94).
 
-## ShutdownMemoryAllocator (0x10006c00) — blocked (buffer layout + prove explosion)
+## ShutdownMemoryAllocator (0x10006c00) — DONE (RELOC 283/283)
 
-Memory-allocator teardown; C preserved in /tmp/sma.c (best 96/283). Blocked
-on the four sprintf/ReportMessage/log buffer offsets: the reference lays
-them at [esp+0xc]/[esp+0x18]/[esp+0x1c]/[esp+0x24], while MSVC6 16-aligns
-or overlaps them (single 0x400 buffer → scattered bases; separate
-b3[0xc]/b4[4]/b1[8]/b2[0x3dc] → b1@0x1c + b4@0x18 match but b3 overlaps b4
-and b2 lands at 0x38). `rebrew prove` explodes on the array/list loops →
-no fence; remains plain naked. Note the recurring file-edit hazard: the
-#else-fence revert pattern truncates everything after the fence — always
-re-check the build after reverting (this cost two restore cycles).
+Memory-allocator teardown; C in m_alloc2.c, RELOC 283/283. Reproducing the
+reference needed three fixes over the old /tmp/sma.c shape: (1) a single
+`char buf[0x400]` reused by both sprintf sites (the reference lays the loop
+"-> Pointer not freed:%s" buffer at the SAME frame offset as the anomaly
+buffer — the old `buf[0x3f0]+buf2[0xc]` pair gave a 0x3fc frame and a
+separate buf2 at 0x3f0); (2) the array loop as `i = 0; if (g_array_count
+<= 0) goto cleanup; item = g_array_ptr + 8; do {...} while (i < g_array_count)`
+with `i++; item += 0x10;` at the body end — this reproduces the reference's
+guard-then-pointer-load preheader (`mov eax,[g_array_count]; xor edi,edi;
+cmp eax,ebx; jle; mov ecx,[g_array_ptr]; lea esi,[ecx+8]`) and the
+`inc edi; add esi,0x10` loop-back order; (3) `/O2 /Gd` (frame-pointer
+omission — the reference uses esp-relative addressing throughout).
 
 ## gm_RandomStatModifier (0x10018450) — blocked (char value representation)
 

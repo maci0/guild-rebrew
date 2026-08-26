@@ -1,7 +1,16 @@
-/* ReadVfsData — VFS stream read (0x10008E40), SIZE_MISMATCH (obj 455 vs
- * target 472): register allocation (stream→edi in target) and the
- * dest-alignment memcpy prelude (lea ecx,[edi+edi*2]; ...) are
- * unreproducible msvc6 expansions (docs/msvc6-allocator.md). */
+/* ReadVfsData — VFS stream read (0x10008E40). Reads from a memory buffer
+ * (flags & 0x20: cursor at stream+0x100, flushed via fcn_100058d0 when
+ * flags & 8), a gzip-in-zip payload (flags & 0x10 → ReadVfsCompressed), a
+ * raw stream (flags & 8 → fcn_10003960) or a plain file (fcn_1001aa6a).
+ * The stream handle/cursor is the first dword of the stream+0x100 zone.
+ *
+ * STATUS: SIZE_MISMATCH (obj 446 vs target 472).  Semantics now match the
+ * target (memcpy cursor at +0x100, fcn_10003960(*zstrm, buf, total),
+ * fcn_1001aa6a(..., *zstrm)); the residual 26 bytes are an msvc6 register-
+ * allocation fixed point (target: stream→edi/total→esi, flags&0x20→dl,
+ * dest-aligned memcpy prelude `lea ecx,[edi+edi*2]`; candidate:
+ * stream→esi/total→ebx, flags&0x20 spilled, naive memcpy).  ~50 source
+ * variants + cflag/SP sweeps did not flip it (docs/msvc6-allocator.md). */
 
 // FUNCTION: SERVER 0x10008E40
 // ReadVfsData
@@ -11,8 +20,8 @@
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 extern int __cdecl ReadVfsCompressed(int zstrm, char* buf, unsigned int total);
-extern int __cdecl fcn_10003960(char* buf, int size, int count);
-extern int __cdecl fcn_1001aa6a(char* buf, int size, int count, void* zstrm);
+extern int __cdecl fcn_10003960(void* handle, char* buf, int total);
+extern int __cdecl fcn_1001aa6a(char* buf, int size, int count, void* handle);
 extern int __cdecl fcn_100058d0(void* zstrm, int flush);
 
 int __cdecl ReadVfsData(char* buf, int size, int count, char* stream)
@@ -56,9 +65,9 @@ int __cdecl ReadVfsData(char* buf, int size, int count, char* stream)
 			result = total - *(int*) (stream + 0x110);
 			goto done;
 		}
-		memcpy(buf, *(char**) (stream + 0x10c), total);
+		memcpy(buf, *(char**) zstrm, total);
 		result = total;
-		*(char**) (stream + 0x10c) += total;
+		*(char**) zstrm += total;
 		*(int*) (stream + 0x104) -= total;
 		*(int*) (stream + 0x108) += total;
 		goto done;
@@ -82,10 +91,10 @@ int __cdecl ReadVfsData(char* buf, int size, int count, char* stream)
 		goto done;
 	}
 	if (flags & 8) {
-		result = fcn_10003960(buf, size, count);
+		result = fcn_10003960(*(char**) zstrm, buf, total);
 		goto done;
 	}
-	result = fcn_1001aa6a(buf, size, count, zstrm);
+	result = fcn_1001aa6a(buf, size, count, *(char**) zstrm);
 done:
 	return result;
 }
