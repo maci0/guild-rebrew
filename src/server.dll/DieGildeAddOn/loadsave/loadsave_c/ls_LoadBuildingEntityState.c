@@ -254,13 +254,11 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 			}
 			else {
 				int* state_ptr = (int*) (esi + 0x99);
-				int zero = 0;
-				*state_ptr = zero;
-				*(int*) ((char*) state_ptr + 4) = zero;
-				*(int*) ((char*) state_ptr + 8) = zero;
-				*(int*) ((char*) state_ptr + 0xc) = zero;
-				*(int*) (esi + 0xa5) = neg1;
-				*state_ptr = *state_ptr | 1;
+				state_ptr[0] = 0;
+				state_ptr[1] = 0;
+				state_ptr[2] = 0;
+				state_ptr[3] = neg1;
+				state_ptr[0] |= 1;
 			}
 
 			*(int*) (esi + 0x30) = 0x1388;

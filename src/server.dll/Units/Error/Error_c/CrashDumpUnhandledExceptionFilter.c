@@ -1,396 +1,341 @@
 // FUNCTION: SERVER 0x10002770
 #include <stdio.h>
-#include <time.h>
+#include <string.h>
 #include <windows.h>
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
 char __cdecl check_memory_protection(unsigned int);
 char __cdecl AnalyzeInstruction(int, int, int, int*);
 unsigned int __cdecl EmitCrashModuleLine(int*);
 extern void* g_10034614;
-extern int g_severity_table[3];
-extern void (*g_panic_callback)(void);
-/* Dispatches a log message to the configured output handlers
- * (file, debugger, etc.). Routes based on severity level. */
 
 // CFLAGS: /O2 /Gd
-// NOTE: semantically complete reconstruction; the reference packs its
-// locals into a 0x280 frame (module path at [esp+0x188], small date/time
-// buffers at 0x74/0x7c/0x90/0x98) while the C reserves 0x45c, and its
-// register allocation diverges — the whole body is offset-shifted
-// (best 279/2115).  Kept as proper C per batch policy.
+// NOTE: semantically complete reconstruction rebuilt from the target disasm.
+// Frame (0x28c vs 0x280), register allocation (imports in ebx/ebp/edi vs
+// esi/edi; ebx/edi saves deferred in the reference), and the exception-name
+// dispatch tree shape (reference tests 0xc000008e first, MSVC6 here pivots
+// 0xc0000005) still diverge — structural similarity ~0.97 (701/724).  Kept
+// as proper C per batch policy.
 
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
-	char szModulePath[0x100];
-	char* p;
-	char* pStart;
-	void* hDbgFile;
+	unsigned int nBytesWritten;
+	char szLine[4];
+	char fCanContinue;
+	char sp;
 	unsigned int dwDbgFileSize;
 	unsigned int dwBytesRead;
+	unsigned int* pStack;
+	unsigned int nFrames;
+	CONTEXT* pCtx;
+	void* hDbgFile;
 	void* pDbgBuf;
-	void* hCrashLog;
 	void* hProcess;
-	char szDateLen;
-	char szTimeLen;
-	char szDateBuf[0x100];
-	char szTimeBuf[0x100];
-	char szExcDesc[0x100];
-	unsigned int i;
-	unsigned int* pDwords;
-	unsigned int key;
-	unsigned int nDwords;
+	void* hCrashLog;
+	unsigned int eip;
 	unsigned int excCode;
-	EXCEPTION_RECORD* pExcRec;
-	const char* pExcName;
-	unsigned int excNameLen;
-	unsigned int nBytesWritten;
-	unsigned int nBytesRead2;
 	int instrDest;
+	unsigned int i;
+	unsigned int key;
+	unsigned int* pDwords;
 	char instrType;
-	char fCanContinue;
+	unsigned int szDateLen;
+	unsigned int szTimeLen;
 	int frameInfo[7];
 	MEMORY_BASIC_INFORMATION mbi;
-	unsigned int nFrames;
-	unsigned int* pStack;
-	unsigned int eip;
-	unsigned int idx;
+	char szSep[0x1b];
+	char szDateBuf[0x100];
+	char szModulePath[0x100];
+
+	/* Save the exception context for the stack walk */
+	pCtx = pExceptionPointers->ContextRecord;
+	fCanContinue = 0;
 
 	/* Disable crash handler to avoid recursion */
 	SetUnhandledExceptionFilter(0);
 
-	/* Save exception pointer for callback */
-	frameInfo[0] = (int) pExceptionPointers->ContextRecord;
-
 	/* Get module filename to build .dbg path */
-	GetModuleFileNameA(0, szModulePath, 0x100);
+	if (!GetModuleFileNameA(0, szModulePath, 0x100)) {
+		goto no_dbg;
+	}
 
 	/* Find last char */
-	p = szModulePath;
-	if (*p != '\0') {
-		while (*(p + 1)) {
-			p++;
-		}
-		/* Search backwards for '.' */
-		pStart = szModulePath;
-		while (p >= pStart) {
-			if (*p == '.') {
-				break;
+	{
+		char* p;
+		char* pStart;
+		p = szModulePath;
+		if (*p != '\0') {
+			while (*(p + 1)) {
+				p++;
 			}
-			p--;
-		}
-		if (p >= pStart && *p == '.') {
-			p++;
-			*p = 'd';
-			p++;
-			*p = 'b';
-			p++;
-			*p = 'g';
-			*(p + 1) = '\0';
+			/* Search backwards for '.' */
+			pStart = szModulePath;
+			while (p >= pStart) {
+				if (*p == '.') {
+					break;
+				}
+				p--;
+			}
+			if (p >= pStart && *p == '.') {
+				p++;
+				*p = 'd';
+				p++;
+				*p = 'b';
+				p++;
+				*p = 'g';
+				*(p + 1) = '\0';
+			}
 		}
 	}
 
-	/* gm_Open the .dbg file */
+	/* Open the .dbg file */
 	hDbgFile = CreateFileA(szModulePath, 0x80000000, 1, 0, 3, 0x80, 0);
-	hCrashLog = (void*) -1;
-	frameInfo[1] = (int) hCrashLog;
-
 	if (hDbgFile == (void*) -1) {
+		LogMessageInternal((char*) 0x10027144, 0x220, (char*) 0x10027104, 1);
 		goto no_dbg;
 	}
 
 	/* Read 4-byte dbg file size */
 	ReadFile(hDbgFile, &dwDbgFileSize, 4, &dwBytesRead, 0);
 	if (dwBytesRead != 4) {
-		goto close_dbg;
+		LogMessageInternal((char*) 0x10027144, 0x21b, (char*) 0x10027110, 1);
+		CloseHandle(hDbgFile);
+		goto no_dbg;
 	}
 
 	/* Allocate buffer for dbg content */
 	pDbgBuf = VirtualAlloc(0, dwDbgFileSize, 0x1000, 4);
-	frameInfo[2] = (int) pDbgBuf;
 	if (!pDbgBuf) {
-		goto close_dbg;
+		LogMessageInternal((char*) 0x10027144, 0x218, (char*) 0x10027120, 1);
+		CloseHandle(hDbgFile);
+		goto no_dbg;
 	}
 
 	/* Read entire dbg file */
 	ReadFile(hDbgFile, pDbgBuf, dwDbgFileSize, &dwBytesRead, 0);
 	if (dwDbgFileSize != dwBytesRead) {
-		goto bad_dbg_free;
+		LogMessageInternal((char*) 0x10027144, 0x213, (char*) 0x1002712c, 1);
+		VirtualFree(pDbgBuf, 0, 0x8000);
+		CloseHandle(hDbgFile);
+		goto no_dbg;
 	}
 
-	/* gm_Open crash log for append */
+	/* Open crash log for append */
 	hCrashLog = CreateFileA((const char*) 0x10027318, 0x40000000, 0, 0, 4, 0x80, 0);
-	frameInfo[1] = (int) hCrashLog;
 
 	/* Decrypt dbg: rotate-XOR each dword */
 	key = *(unsigned int*) pDbgBuf;
-	nDwords = dwBytesRead / 4 - 4;
 	pDwords = (unsigned int*) ((char*) pDbgBuf + 0x10);
-	i = 0;
-	if (nDwords != 0) {
-		do {
-			unsigned int rotkey;
-			rotkey = (key >> 17) | (key << 15);
-			pDwords[i] ^= rotkey;
-			i++;
-		} while (i < nDwords);
+	for (i = 0; i < dwBytesRead / 4 - 4; i++) {
+		key = (key >> 17) | (key << 15);
+		pDwords[i] ^= key;
 	}
 
 	if (hCrashLog == (void*) -1) {
-		goto bad_dbg_free;
+		LogMessageInternal((char*) 0x10027144, 0x20f, (char*) 0x10027164, 1);
+		VirtualFree(pDbgBuf, 0, 0x8000);
+		CloseHandle(hDbgFile);
+		goto no_dbg;
 	}
 
 	/* Seek to end of crash log */
 	hProcess = GetCurrentProcess();
+	memcpy(szLine, "\r\n", 3);
+	sp = ' ';
+	memcpy(szSep, "------------------------\r\n", 0x1b);
 	SetFilePointer(hCrashLog, -1, 0, 2);
 
 	/* Write separator line */
-	WriteFile(hCrashLog, (const char*) 0x100272f8, 0x1a, &nBytesWritten, 0);
+	WriteFile(hCrashLog, szSep, 0x1a, &nBytesWritten, 0);
 
 	/* Write date */
-	szDateLen = (char) GetDateFormatA(0x400, 2, 0, 0, szDateBuf, 0x100);
+	szDateLen = GetDateFormatA(0x400, 2, 0, 0, szDateBuf, 0x100);
 	if (szDateLen) {
-		WriteFile(hCrashLog, szDateBuf, (unsigned int) (szDateLen - 1), &nBytesWritten, 0);
-		{
-			char sp = ' ';
-			WriteFile(hCrashLog, &sp, 1, &nBytesWritten, 0);
-		}
+		WriteFile(hCrashLog, szDateBuf, szDateLen - 1, &nBytesWritten, 0);
+		WriteFile(hCrashLog, &sp, 1, &nBytesWritten, 0);
 	}
 
 	/* Write time */
-	szTimeLen = (char) GetTimeFormatA(0x400, 8, 0, 0, szTimeBuf, 0x100);
+	szTimeLen = GetTimeFormatA(0x400, 8, 0, 0, szDateBuf, 0x100);
 	if (szTimeLen) {
-		WriteFile(hCrashLog, szTimeBuf, (unsigned int) (szTimeLen - 1), &nBytesWritten, 0);
-		{
-			char nl[2];
-			nl[0] = '\r';
-			nl[1] = '\n';
-			WriteFile(hCrashLog, nl, 2, &nBytesWritten, 0);
-		}
+		WriteFile(hCrashLog, szDateBuf, szTimeLen - 1, &nBytesWritten, 0);
+		WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 	}
 
 	/* Classify exception */
-	pExcRec = pExceptionPointers->ExceptionRecord;
-	excCode = pExcRec->ExceptionCode;
-	pExcName = 0;
-	excNameLen = 0;
+	excCode = pExceptionPointers->ExceptionRecord->ExceptionCode;
 
-	if (excCode == 0x80000003) {
-		/* BREAKPOINT */
-		pExcName = (const char*) 0x100272e0;
-		excNameLen = 0xa;
-		goto write_exc_name_nl;
-	}
-	if (excCode == 0x80000004) {
-		/* SINGLE_STEP */
-		pExcName = (const char*) 0x100272ec;
-		excNameLen = 0xb;
-		goto write_exc_name_nl;
-	}
-	if (excCode == 0xc0000005) {
+	switch (excCode) {
+	case 0xc000008e:
+		WriteFile(hCrashLog, (const char*) 0x1002721c, 0x12, &nBytesWritten, 0);
+		break;
+	case 0xc000001d:
+		WriteFile(hCrashLog, (const char*) 0x10027290, 0x13, &nBytesWritten, 0);
+		break;
+	case 0xc0000005:
 		/* ACCESS_VIOLATION */
 		WriteFile(hCrashLog, (const char*) 0x100272cc, 0x11, &nBytesWritten, 0);
-		if (pExcRec->ExceptionInformation[0] == 0) {
+		if (pExceptionPointers->ExceptionRecord->ExceptionInformation[0] == 0) {
 			WriteFile(hCrashLog, (const char*) 0x100272c4, 5, &nBytesWritten, 0);
 		}
 		else {
 			WriteFile(hCrashLog, (const char*) 0x100272bc, 6, &nBytesWritten, 0);
 		}
-		sprintf(szExcDesc, (const char*) 0x100272b4, pExcRec->ExceptionInformation[1]);
-		{
-			char* s2 = szExcDesc;
-			unsigned int l2;
-			while (*s2) {
-				s2++;
+		sprintf(szDateBuf, (const char*) 0x100272b4, pExceptionPointers->ExceptionRecord->ExceptionInformation[1]);
+		WriteFile(hCrashLog, szDateBuf, strlen(szDateBuf), &nBytesWritten, 0);
+		break;
+	case 0x80000003:
+		WriteFile(hCrashLog, (const char*) 0x100272e0, 0xa, &nBytesWritten, 0);
+		break;
+	case 0x80000004:
+		WriteFile(hCrashLog, (const char*) 0x100272ec, 0xb, &nBytesWritten, 0);
+		break;
+	default:
+		if (excCode > 0xc000008e) {
+			/* Jump table 2 */
+			i = excCode + 0x3fffff71;
+			if (i > 0x6e) {
+				goto unknown_exc;
 			}
-			l2 = (unsigned int) (s2 - szExcDesc);
-			WriteFile(hCrashLog, szExcDesc, l2, &nBytesWritten, 0);
+			switch (i) {
+			case 0:
+				WriteFile(hCrashLog, (const char*) 0x10027208, 0x12, &nBytesWritten, 0);
+				break;
+			case 1:
+				WriteFile(hCrashLog, (const char*) 0x100271f0, 0x15, &nBytesWritten, 0);
+				break;
+			case 2:
+				WriteFile(hCrashLog, (const char*) 0x100271e0, 0xc, &nBytesWritten, 0);
+				break;
+			case 3:
+				WriteFile(hCrashLog, (const char*) 0x100271d0, 0xf, &nBytesWritten, 0);
+				break;
+			case 4:
+				WriteFile(hCrashLog, (const char*) 0x100271c0, 0xd, &nBytesWritten, 0);
+				break;
+			case 5:
+				WriteFile(hCrashLog, (const char*) 0x100271ac, 0x12, &nBytesWritten, 0);
+				break;
+			case 6:
+				WriteFile(hCrashLog, (const char*) 0x1002719c, 0xc, &nBytesWritten, 0);
+				break;
+			case 7:
+				WriteFile(hCrashLog, (const char*) 0x10027188, 0x10, &nBytesWritten, 0);
+				break;
+			case 0x6e:
+				WriteFile(hCrashLog, (const char*) 0x10027178, 0xe, &nBytesWritten, 0);
+				break;
+			default:
+				goto unknown_exc;
+			}
+			break;
 		}
-		goto write_nl;
-	}
-	if (excCode == 0xc000001d) {
-		pExcName = (const char*) 0x10027290;
-		excNameLen = 0x13;
-		goto write_exc_name_nl;
-	}
-	if (excCode > 0xc000001d && excCode < 0xc000008e) {
-		/* Jump table 1 */
-		idx = excCode + 0x3fffffdb;
-		if (idx > 0x68) {
+		else if (excCode > 0xc000001d) {
+			/* Jump table 1 */
+			i = excCode + 0x3fffffdb;
+			if (i > 0x68) {
+				goto unknown_exc;
+			}
+			switch (i) {
+			case 0:
+				WriteFile(hCrashLog, (const char*) 0x10027230, 0x18, &nBytesWritten, 0);
+				break;
+			case 1:
+				WriteFile(hCrashLog, (const char*) 0x1002724c, 0x13, &nBytesWritten, 0);
+				break;
+			case 0x67:
+				WriteFile(hCrashLog, (const char*) 0x10027278, 0x15, &nBytesWritten, 0);
+				break;
+			case 0x68:
+				WriteFile(hCrashLog, (const char*) 0x10027260, 0x14, &nBytesWritten, 0);
+				break;
+			default:
+				goto unknown_exc;
+			}
+			break;
+		}
+		else if (excCode > 0xc0000005) {
+			if (excCode == 0xc0000006) {
+				WriteFile(hCrashLog, (const char*) 0x100272a4, 0xd, &nBytesWritten, 0);
+				break;
+			}
 			goto unknown_exc;
 		}
-		switch (idx) {
-		case 0:
-			pExcName = (const char*) 0x10027278;
-			excNameLen = 0x15;
-			break;
-		case 1:
-			pExcName = (const char*) 0x10027260;
-			excNameLen = 0x14;
-			break;
-		case 2:
-			pExcName = (const char*) 0x1002724c;
-			excNameLen = 0x13;
-			break;
-		case 3:
-			pExcName = (const char*) 0x10027230;
-			excNameLen = 0x18;
-			break;
-		case 4:
-			pExcName = (const char*) 0x1002721c;
-			excNameLen = 0x12;
-			break;
-		default:
+		else {
 			goto unknown_exc;
 		}
-		goto write_exc_name_nl;
 	}
-	if (excCode == 0xc000008e) {
-		pExcName = (const char*) 0x1002721c;
-		excNameLen = 0x12;
-		goto write_exc_name_nl;
-	}
-	if (excCode > 0xc000008e) {
-		/* Jump table 2 */
-		idx = excCode + 0x3fffff71;
-		if (idx > 0x6e) {
-			goto unknown_exc;
-		}
-		switch (idx) {
-		case 0:
-			pExcName = (const char*) 0x10027208;
-			excNameLen = 0x12;
-			break;
-		case 1:
-			pExcName = (const char*) 0x100271f0;
-			excNameLen = 0x15;
-			break;
-		case 2:
-			pExcName = (const char*) 0x100271e0;
-			excNameLen = 0xc;
-			break;
-		case 3:
-			pExcName = (const char*) 0x100271d0;
-			excNameLen = 0xf;
-			break;
-		case 4:
-			pExcName = (const char*) 0x100271c0;
-			excNameLen = 0xd;
-			break;
-		case 5:
-			pExcName = (const char*) 0x100271ac;
-			excNameLen = 0x12;
-			break;
-		case 6:
-			pExcName = (const char*) 0x1002719c;
-			excNameLen = 0xc;
-			break;
-		case 7:
-			pExcName = (const char*) 0x10027188;
-			excNameLen = 0x10;
-			break;
-		case 0x6e:
-			pExcName = (const char*) 0x10027178;
-			excNameLen = 0xe;
-			WriteFile(hCrashLog, pExcName, excNameLen, &nBytesWritten, 0);
-			goto write_nl;
-		default:
-			goto unknown_exc;
-		}
-		goto write_exc_name_nl;
-	}
+
+
+write_nl:
+	WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 
 unknown_exc:
-	goto write_nl;
-
-write_exc_name_nl:
-	if (pExcName) {
-		WriteFile(hCrashLog, pExcName, excNameLen, &nBytesWritten, 0);
-	}
-write_nl: {
-	char nl[2];
-	nl[0] = '\r';
-	nl[1] = '\n';
-	WriteFile(hCrashLog, nl, 2, &nBytesWritten, 0);
-}
 
 	/* Stack walk */
-	eip = pExceptionPointers->ContextRecord->Eip;
-	pDbgBuf = (void*) ((char*) pDbgBuf - 4);
-	frameInfo[3] = (int) pDbgBuf;
-	frameInfo[4] = (int) hCrashLog;
-	frameInfo[5] = eip;
+	eip = pCtx->Eip;
+	frameInfo[0] = (int) pDbgBuf;
+	frameInfo[1] = (int) hCrashLog;
+	frameInfo[2] = (int) eip;
+	frameInfo[3] = 0;
+	frameInfo[4] = 0;
+	frameInfo[5] = 0;
 	frameInfo[6] = 0;
 	nFrames = 0x800;
-	pStack = (unsigned int*) ((unsigned int) pExceptionPointers->ContextRecord->Esp - 4);
+	pStack = (unsigned int*) (pCtx->Esp - 4);
 
-	while (nFrames > 0) {
-		pStack++;
-		VirtualQuery((const void*) *pStack, &mbi, 0x1c);
+	for (;;) {
+		VirtualQuery((const void*) eip, &mbi, 0x1c);
 		instrType = check_memory_protection((unsigned int) mbi.Protect);
-		if (!instrType || mbi.RegionSize < 0x1000) {
+		if (!instrType) {
 			goto next_frame;
 		}
-		if (eip != pExceptionPointers->ContextRecord->Eip) {
-			instrType = AnalyzeInstruction((int) *pStack, 7, (int) *pStack, &instrDest);
+		if (mbi.RegionSize != 0x1000) {
+			goto next_frame;
+		}
+		if (eip != pCtx->Eip) {
+			char* pInstr = szDateBuf;
+			int nInstr = 7;
+			do {
+				if (ReadProcessMemory(hProcess, (void*) (eip - nInstr), pInstr, nInstr, 0)) {
+					break;
+				}
+				nInstr--;
+				pInstr++;
+			} while (nInstr > 0);
+			instrType = AnalyzeInstruction(nInstr, (int) &szDateBuf[7], (int) eip, &instrDest);
 			if (!instrType) {
 				goto next_frame;
 			}
-			if (!EmitCrashModuleLine(frameInfo)) {
-				goto next_frame;
-			}
 		}
-		nFrames--;
-		frameInfo[5] = (int) pStack;
-		eip = *pStack;
+		if (EmitCrashModuleLine(frameInfo)) {
+			nFrames--;
+		}
+	next_frame:
+		pStack++;
 		if ((int) nFrames <= 0) {
 			goto done_walk;
 		}
-		ReadProcessMemory(hProcess, (const void*) frameInfo[4], szExcDesc, 4, &nBytesRead2);
-		if (nBytesRead2 != 0) {
-			goto next_frame;
+		if (!ReadProcessMemory(hProcess, pStack, &instrDest, 4, 0)) {
+			break;
 		}
-	next_frame:;
 	}
 
 done_walk:
 
-	/* Restore pDbgBuf pointer */
-	pDbgBuf = (void*) frameInfo[3];
-
-	if (hCrashLog != (void*) -1) {
-		CloseHandle(hCrashLog);
+	if (g_10034614) {
+		((void (__cdecl*)(void*)) g_10034614)(hCrashLog);
+		fCanContinue = 1;
 	}
+	WriteFile(hCrashLog, &szLine[2], 1, &nBytesWritten, 0);
+	CloseHandle(hCrashLog);
 	VirtualFree(pDbgBuf, 0, 0x8000);
-
-close_dbg:
 	CloseHandle(hDbgFile);
 
 no_dbg:
-	fCanContinue = frameInfo[3] != 0;
-
-	if (g_10034614) {
-		((void(__cdecl*)(EXCEPTION_POINTERS*)) g_10034614)(pExceptionPointers);
+	if (g_10034614 && !fCanContinue) {
+		((void (__cdecl*)(int)) g_10034614)(-1);
 	}
-
-	if (!fCanContinue) {
-		LogMessageInternal((char*) 0x10027144, 0x20f, (char*) 0x10027164, 1);
-	}
-	else {
-		LogMessageInternal((char*) 0x10027144, 0x213, (char*) 0x10027164, 1);
-		VirtualFree(pDbgBuf, 0, 0x8000);
-		CloseHandle(hCrashLog);
-	}
-
 	UnhandledExceptionFilter(pExceptionPointers);
 
 	return 1;
-
-bad_dbg_free:
-	VirtualFree(pDbgBuf, 0, 0x8000);
-	CloseHandle(hDbgFile);
-	goto no_dbg;
 }
-
-
-/* Emits one line of module information for crash dumps.
- * Writes module name, base address, and size to the dump file. */

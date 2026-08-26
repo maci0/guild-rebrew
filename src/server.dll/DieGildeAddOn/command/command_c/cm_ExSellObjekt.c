@@ -45,10 +45,17 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  *
  * Conversion state: pure C (naked wrapper removed).  The head diverges
  * on MSVC6 register allocation: the reference zeroes the saved locals
- * through edi with a 0x228 frame; every C formulation zeroes through ebx
+ * through edi with a 0x228 frame (9 zeroed dwords + an unused 4-byte gap
+ * before the 512-byte log buffer); every C formulation zeroes through ebx
  * with a 0x224 frame (one fewer spilled local), and the zero-store
- * order/registers cascade through all 651 structural diffs — best-effort
- * 235/2057 (docs/msvc6-allocator.md GRA class). */
+ * order/registers cascade through ~650 structural diffs — best-effort
+ * 229/2057 bytes (docs/msvc6-allocator.md GRA class).
+ *
+ * The dest-resolution call passes its out-params in the reference's
+ * register order: gm_ResolveEntityById(&dest_dynamic_entity,
+ * &dest_existing_entity, &source_static_entity, ...) — the second branch
+ * of the dest block then re-checks the SOURCE's shared dynamic/existing
+ * slot (resolved_dynamic), which the dest call no longer overwrites. */
 
 
 // CFLAGS: /O2 /Gd
@@ -179,8 +186,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		resolve_result = gm_GetFieldByType(cmd, *(int*)(cmd + 0x10));
 		*(int*)(cmd + 0x10) = resolve_result;
 		resolve_result = gm_ResolveEntityById(
+			(void**)&dest_dynamic_entity,
 			(void**)&dest_existing_entity,
-			(void**)&resolved_dynamic,
 			(void**)&source_static_entity,
 			resolve_result
 		);
