@@ -940,6 +940,27 @@ not a constant):
   The original build's compiler variant (service-pack/custom-build codegen)
   remains the suspect. Ceiling for proper C confirmed at 234/270.
 
+### InitPacketPool (0x100068e0) — re-verified 2026-08-27, same conclusion
+
+Non-leaf runtime-count site (count `n*16` kept in ebx across the `malloc`
+call at 0x1001a7f7; 143B compiled vs 162B target, the 19B delta being the
+prelude + the count-register choice edi-vs-ebx that precedes it). Probed for
+this exact body: 15 C formulations — inline `n*16`, `int`/`unsigned` locals,
+`volatile` count, memory-resident count via the `g_flag_3c` global store,
+dest-copy locals (`char* d`/`void* pool`), `n<<4`, store-to-global after the
+call (`memset` count reloaded), address-taken local, reordered statements,
+named vs absolute-address globals — × `/O2 /Gd /Oy-`, plus an `/O1 /Ox /O2
+/G5 /G6 /GB /Oi /Og-` flag sweep: zero prelude hits, count always
+re-materialized into volatile ecx. The rest of the function is byte-faithful:
+prologue, four zero stores (`0x28,0x30,0x2c,0x34` order — source order, not
+address order), malloc call, and the tail. The tail is the discriminator for
+source shape: the reference hoists the two `g_alloc_root_name/_4` loads
+above the six zero stores (`mov eax,[g_default_group_name]` right after the
+memset, stores at the end after `pop edi/esi`) — only reproducible with the
+assignments written FIRST and named externs (absolute-address derefs keep
+source order and emit the loads after the stores). Final state: SIZE_MISMATCH
+97/162, C in m_alloc.c.
+
 ## lb_ExPlayerlist (0x100145e0) — DONE (struct-for-layout + auto-zero + tail layout)
 
 Converted to C, RELOC 209/209. Findings:
