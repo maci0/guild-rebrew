@@ -43,10 +43,16 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * identical tails MSVC6 cross-jumps exactly like the target (error4
  * pushes 1/str/line and jumps into error5's push-file).  Compiled with
  * /Ox (the target's optimization level; /O2 enables /Og which makes
- * MSVC6 tail-merge the early errors).  The material loop still diverges
- * by the pre-loop dead store `mov [esp+0x18],ebx` (saved_quantity =
- * quantity overwritten by 4) which MSVC6 eliminates in every C
- * formulation tried. */
+ * MSVC6 tail-merge the early errors).  The target's pre-loop dead store
+ * `mov [esp+0x18],ebx` (saved_quantity = quantity, overwritten by the
+ * loop counter `4`) is reproduced with a volatile write of the dead value;
+ * MSVC6 eliminates every non-volatile formulation tried.  Remaining
+ * divergence is register allocation: (1) the second material loop's entry
+ * reloads recipe_def (`mov edx,[esp+0x14]; lea edi,[edx+0x2e]`) in the
+ * target while our build reuses the live `recipe` register
+ * (`add edi,0x2e`, -4B), and (2) the g_current_season load uses `mov cl`
+ * (6B modrm) in the target vs `mov al` (5B moffs) here — both follow from
+ * which registers MSVC6 picks for `recipe` / the material loop temporaries. */
 
 
 // CFLAGS: /Ox /Gd
@@ -96,23 +102,23 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 		);
 		return 1;
 	}
-	quantity = *(int*)(msg + 0x16);
-	saved_quantity = quantity;
 	recipe_def = g_unknown_1de450 + (uint)*(ushort*)(msg + 0x14) * 0x41;
+	*(volatile int*)&saved_quantity = *(int*)(msg + 0x16);
+	quantity = *(int*)(msg + 0x16);
 	saved_quantity = 4;
 	material_iter = (ushort*)(recipe_def + 0x26);
 	do {
 		if (material_iter[4] != 0) {
 			obj_entry = (ushort*)gm_StartEntityQuery(*(int*)(lager + 10), 1, 0, (uint)material_iter[4]);
-			if (obj_entry == (ushort*)0) {
-				quantity = 0;
-			}
-			else {
+			if (obj_entry != (ushort*)0) {
 				recipe = (char*)gm_GetMsgField((int)lager, (int)obj_entry);
 				if (quantity >= (int)recipe / (int)(uint)*material_iter) {
 					recipe = (char*)gm_GetMsgField((int)lager, (int)obj_entry);
 					quantity = (int)recipe / (int)(uint)*material_iter;
 				}
+			}
+			else {
+				quantity = 0;
 			}
 		}
 		material_iter = material_iter + 1;

@@ -108,7 +108,7 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x100068e0"]
 size = 162
-status = "SIZE_MISMATCH"
+status = "RELOC"
 analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
 cflags = "/O2 /Gd /Oy-"
 
@@ -222,9 +222,11 @@ analysis = "Ingress parser boundary for per-player receive buffer. Validation be
 
 ["SERVER.0x1000a570"]
 size = 750
-status = "STUB"
+status = "PROVEN"
 analysis = "Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09)."
 cflags = "/O2 /Gd /Ot"
+blocker = "MSVC6 call-arg sharing: for the if(status&0x10) dispatch inside the slot loop, MSVC6 hoists the shared (conn,conn+6) arg pushes above the branch (lea ecx,[ebp+0x18]; test; push; mov [ecx+3],bl; push; je; call; call) — 5 bytes smaller than target's per-branch arg setups (750 vs 745). Not reproducible via pure C89 (15+ variants tried: if/else, store-in-both, pkt local, expression forms, loop forms, volatile store; SP5 and SP6 identical). PROVEN equivalent via rebrew prove."
+blocker_delta = 5
 
 ["SERVER.0x1000a860"]
 size = 131
@@ -484,6 +486,8 @@ cflags = "/O2 /Gd"
 size = 993
 status = "SIZE_MISMATCH"
 cflags = "/Ox /Gd"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
+blocker_delta = 638
 
 ["SERVER.0x1000e530"]
 size = 352

@@ -65,9 +65,9 @@ int __cdecl ProcessReceiveData(void)
 				}
 				if (status & 2) {
 					if (*(unsigned char*) (conn + 6) == 3) {
-						conn[0xb] = conn[1];
 						conn[0xc] = (*conn & 0x400) ? 1 : 2;
-						if (cm_QueuePlayerCommand(conn, (unsigned char*) (conn + 6)) == -1) {
+						conn[0xb] = conn[1];
+						if (cm_QueuePlayerCommand(conn, (unsigned char*) conn + 0x18) == -1) {
 							return -1;
 						}
 					}
@@ -77,7 +77,7 @@ int __cdecl ProcessReceiveData(void)
 				if (status & 0x200) {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x5df, "LOBBY mode", 1);
 					if (*(unsigned char*) (conn + 6) == 0x5f) {
-						if (lb_ExLobbyServerCommand(conn, (int) (conn + 6)) == -1) {
+						if (lb_ExLobbyServerCommand(conn, (int) ((unsigned char*) conn + 0x18)) == -1) {
 							return -1;
 						}
 						sprintf(logbuf_lo, "status after lb_ExLobbyServerCommand: %i", *conn);
@@ -91,8 +91,8 @@ int __cdecl ProcessReceiveData(void)
 				if (status & 8) {
 					if (*(unsigned char*) (conn + 6) == 8) {
 						total = conn[10];
-						g_download_total_size = total;
 						g_download_received = 0;
+						g_download_total_size = total;
 						memset(g_download_slots, 0xff, 32);
 						g_download_buffer = (unsigned int) m_AllocTracked(total, "srv_LoadBuf");
 					}
@@ -116,14 +116,15 @@ int __cdecl ProcessReceiveData(void)
 					}
 					goto done_inner;
 				}
-				*((unsigned char*) conn + 0x1b) = (unsigned char) i;
 				if (status & 0x10) {
+					*((unsigned char*) conn + 0x1b) = (unsigned char) i;
 					if (QueueCommandForProcessing(conn, (unsigned char*) (conn + 6)) != 0) {
 						return -1;
 					}
 					status = *conn & 0xffffff6f;
 					goto set_status;
 				}
+				*((unsigned char*) conn + 0x1b) = (unsigned char) i;
 				if (QueueCommandForProcessing(conn, (unsigned char*) (conn + 6)) != 0) {
 					return -1;
 				}
@@ -152,11 +153,3 @@ int __cdecl ProcessReceiveData(void)
 	}
 	return 0;
 }
-
-
-void* __cdecl memcpy(void*, const void*, unsigned int);
-
-/* Processes the outgoing send queue. Iterates connected
- * clients and transmits any queued response packets. */
-extern int g_listen_socket;
-int g_list_head;
