@@ -96,9 +96,10 @@ status = "EXACT"
 ["SERVER.0x10006580"]
 size = 658
 status = "SIZE_MISMATCH"
-cflags = "/O2 /Gd"
+cflags = "/O2 /Gd /G6 /Oy-"
 analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
 note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=2179763029 vs 0"
+toolchain = "msvc600sp6"
 
 ["SERVER.0x10006820"]
 size = 188

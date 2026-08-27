@@ -1,5 +1,5 @@
 // FUNCTION: SERVER 0x10006580
-// CFLAGS: /O2 /Gd
+// CFLAGS: /O2 /Gd /G6 /Oy-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,12 +21,15 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
  * tracking: records the source location string, updates group
  * counters, and maintains the allocation list. */
 
-// CFLAGS: /O2 /Gd
-// NOTE: target uses the alignment-pass inline memset (lea ecx,[edi+edi*2];
-// and ecx,3; sub ebx,ecx; ...) + a zero register in ebx (cmp eax,ebx, bl
-// byte stores, bl-based intrinsic strcmp).  No C shape reproduces that
-// combination with this toolchain (see docs/msvc6-allocator.md Finding 19
-// — same blocker as InitPacketPool / m_PoolAlloc); best proper-C match.
+// CFLAGS: /O2 /Gd /G6 /Oy-
+// NOTE: best config found — 184/658 instr bytes matched (obj 631 vs target 658).
+// The target needs an ebp frame AND the /G6 zero-register idiom (xor ebx,ebx
+// at entry; cmp reg,ebx / bl byte stores; bl-based intrinsic strcmp).  msvc6
+// SP6 materializes the zero register only without /Oy- (/G6) and the frame
+// only with it, so the combination is unreproducible from any C shape
+// (docs/msvc6-allocator.md Finding 51).  The residual size gap is the
+// alignment-pass inline memset (lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx)
+// — same Finding 19 blocker as InitPacketPool / m_PoolAlloc.
 
 struct GroupNode {
 	char name[0x10];

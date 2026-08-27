@@ -57,13 +57,17 @@ int __cdecl cm_ExCopyEntityData(char* cmd_ptr, char* response)
 	if (ebx_type == 4) {
 		level = *(uint*) (cmd_ptr + 0x24);
 
+		/* NB: the reference keeps BOTH guard pairs — the first is a
+		 * standalone if (level>0 && level>=4), the second starts the
+		 * if/else chain (level>0 && level==4). If chained with else-if,
+		 * MSVC6 proves the second condition dead and merges the guards. */
 		if (level > 0 && level >= (uint) ebx_type) {
 			threshold_high = 0x28;
 			threshold_low = -115;
 			decay_high = -20;
 			decay_low = 3;
 		}
-		else if (level > 0 && level == (uint) ebx_type) {
+		if (level > 0 && level == (uint) ebx_type) {
 			threshold_high = 0x28;
 			threshold_low = -115;
 			decay_high = -20;

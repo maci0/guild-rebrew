@@ -2261,3 +2261,39 @@ stops MSVC6 from treating them as the same value; (2) hoist `p = slot+0x1c`
 and `e = slot+0x20` before the type dispatch and use them in every branch,
 so the reference's single pre-dispatch `mov eax,[esi+0x1c]` /
 `mov ecx,[esi+0x20]` is emitted instead of per-branch loads.
+
+## Finding 51 — m_AllocTracked (0x10006580): frame + zero-register fixed point
+
+Blocked; best config `/O2 /Gd /G6 /Oy-` (msvc600sp6) matches 184/658 instr
+bytes (obj 631 vs target 658, 25 relocs).  The C body is the best proper-C
+shape (list walk, inline strcmp/strcpy, slot fill, stat updates all
+structurally correct); the size and byte gaps are two allocator fixed
+points:
+
+1. **frame + zero register never coexist.**  The reference opens with
+   `push ebp; mov ebp,esp; sub esp,0x118; mov eax,[g_array_ptr]; push ebx;
+   xor ebx,ebx; push esi; cmp eax,ebx; push edi` — an ebp frame AND a
+   materialized zero register in ebx (all later zero-compares/stores are
+   `cmp reg,ebx` / `mov [mem],ebx` / `mov [..],bl`, and the intrinsic
+   strcmp is the `cmp cl,bl` form).  MSVC6 SP6 creates the zero register
+   only when ebp is free as a scratch register, i.e. with frame omission
+   (`/G6` alone, no `/Oy-`: `xor ebx,ebx` + `cmp eax,ebx` + bl strcmp, but
+   args at `[esp+0x128]` and `add esp` epilogue, 666 bytes); `/Oy-` gives
+   the frame but allocates ebx to the group-head/node pointer instead
+   (632 bytes, `test`-based compares).  Every probe that forces a frame
+   without `/Oy-` (`&param`, `_alloca`, named zero locals, field-store
+   reorder, n-local spill) keeps the frame OR the zero register, never
+   both.
+2. **alignment-pass memset** — the `memset(ptr,0,size)` expands to the
+   dest-aligning `lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx; rep stosb;
+   rep stosd; ...` form (size spilled to `[ebp-8]`, ptr to `[ebp-4]`).
+   Same unreproducible expansion as InitPacketPool / m_PoolAlloc
+   (Finding 19): msvc6 SP6 emits only the plain `shr ecx,2; rep stosd;
+   and ecx,3; rep stosb` from any C shape.
+
+`/O2 /Gd /G6 /Oy-` was chosen over plain `/O2 /Gd /Oy-` (167/658) because
+the reference's zero-register idiom is /G6-only, and /G6 without `/Oy-`
+drops the frame and 54 matched bytes (130/666).  A `rebrew test` run with
+`--cflags "/O2 /Gd /G6 /Oy-"` persists the per-function metadata; the
+generic `--fix-blocker` write currently crashes with an AttributeError
+(`SimpleNamespace` has no `metadata_dir`) and was not used.
