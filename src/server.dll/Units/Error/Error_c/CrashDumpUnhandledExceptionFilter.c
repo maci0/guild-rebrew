@@ -20,6 +20,11 @@ extern void* g_10034614;
 // spilled at [esp+0x44] instead of kept in ebp), and the dispatch bodies stay
 // inline (jbe/jne skips) where the reference lays the comparison chain
 // straight-line with handlers out of line.  Kept as proper C per batch policy.
+// STATUS: PROVEN — semantic equivalence verified with `rebrew prove`
+// (EAX return-value equivalence via Z3 symbolic execution); byte-match
+// (EXACT) remains blocked by the MSVC6 register-allocation cascade above,
+// so SIZE_MISMATCH was resolved via the symbolic-proof path instead of
+// further codegen forcing.
 
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {

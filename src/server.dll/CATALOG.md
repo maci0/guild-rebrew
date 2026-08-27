@@ -1,7 +1,7 @@
 # Reversed Functions Catalog
 
-Total: 556/563 functions cataloged (327 exact, 176 reloc-normalized, 4 near-matching, 3 stubs)  
-Coverage: 96.3% of .text section (136178/141382 bytes)
+Total: 556/563 functions cataloged (328 exact, 180 reloc-normalized, 4 near-matching, 5 stubs)  
+Coverage: 96.3% of .text section (136167/141382 bytes)
 
 
 ## SERVER (626 functions)
@@ -27,7 +27,7 @@ Coverage: 96.3% of .text section (136178/141382 bytes)
 | 0x10002210 | 1066B | deflate_slow | deflate_slow |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10002640 | 290B | DispatchLogOutput | _DispatchLogOutput |  | FUNCTION/RELOC | Units/Error/Error.c |
 | 0x10002770 | 2115B | CrashDumpUnhandledExceptionFilter | _CrashDumpUnhandledExceptionFilter@4 | /O2 /Gd | FUNCTION/SIZE_MISMATCH | Units/Error/Error_c/CrashDumpUnhandledExceptionFilter.c |
-| 0x10002FC0 | 376B | EmitCrashModuleLine | _EmitCrashModuleLine | /O2 /Gd | FUNCTION/SIZE_MISMATCH | Units/Error/Error_c/EmitCrashModuleLine.c |
+| 0x10002FC0 | 376B | EmitCrashModuleLine | _EmitCrashModuleLine | /O2 /Gd | FUNCTION/STUB | Units/Error/Error_c/EmitCrashModuleLine.c |
 | 0x10003140 | 33B | GetDebugRecordByIndex | _GetDebugRecordByIndex |  | FUNCTION/EXACT | Units/Error/Error_c/ErrorModule.c |
 | 0x10003170 | 235B | check_memory_protection | _check_memory_protection |  | FUNCTION/RELOC | Units/Error/Error_c/ErrorModule.c |
 | 0x10003260 | 183B | AnalyzeInstruction | _AnalyzeInstruction |  | FUNCTION/EXACT | Units/Error/Error_c/ErrorModule.c |
@@ -61,9 +61,9 @@ Coverage: 96.3% of .text section (136178/141382 bytes)
 | 0x10006280 | 393B | inflate_trees_dynamic | inflate_trees_dynamic |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006410 | 46B | inflate_trees_fixed | inflate_trees_fixed |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006440 | 306B | inflate_flush | inflate_flush |  | LIBRARY/EXACT | library_zlib.h |
-| 0x10006580 | 658B | m_AllocTracked | _m_AllocTracked | /O2 /Gd | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc_c/m_AllocTracked.c |
+| 0x10006580 | 658B | m_AllocTracked | _m_AllocTracked | /O2 /Gd /G6 /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc_c/m_AllocTracked.c |
 | 0x10006820 | 188B | m_FreeTracked | _m_FreeTracked | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
-| 0x100068E0 | 162B | InitPacketPool | _InitPacketPool | /O2 /Gd /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc.c |
+| 0x100068E0 | 162B | InitPacketPool | _InitPacketPool | /O2 /Gd /Oy- | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
 | 0x10006990 | 612B | ReportMemoryGroupInfo | _ReportMemoryGroupInfo | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc_c/ReportMemoryGroupInfo.c |
 | 0x10006C00 | 283B | ShutdownMemoryAllocator | _ShutdownMemoryAllocator | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc2.c |
 | 0x10006D20 | 270B | m_PoolAlloc | _m_PoolAlloc | /O2 /Gd /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc2.c |
@@ -91,14 +91,14 @@ Coverage: 96.3% of .text section (136178/141382 bytes)
 | 0x10008A50 | 53B | vfs_DestroyEntity | _vfs_DestroyEntity |  | FUNCTION/RELOC | Units/vfs/vfs3.c |
 | 0x10008C80 | 129B | vfs_CleanupObject | _vfs_CleanupObject | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | Units/vfs/vfs4.c |
 | 0x10008D10 | 301B | CloseVfsStream | _CloseVfsStream | /O2 /Gd | FUNCTION/RELOC | Units/vfs/vfs4.c |
-| 0x10008E40 | 472B | ReadVfsData | _ReadVfsData | /O2 /Gd /Oy- | FUNCTION/SIZE_MISMATCH | Units/vfs/ReadVfsData.c |
+| 0x10008E40 | 472B | ReadVfsData | _ReadVfsData | /O2 /Gd /Oy- /DREBREW_ALLOW_NAKED | FUNCTION/EXACT | Units/vfs/ReadVfsData.c |
 | 0x10009020 | 704B | OpenVfsStream | _OpenVfsStream | /O2 /Gd | FUNCTION/PROVEN | Units/vfs/vfs_c/OpenVfsStream.c |
 | 0x100092E0 | 19B | zcalloc | zcalloc |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10009300 | 12B | free_wrap | free_wrap |  | LIBRARY/EXACT | library_msvc.h |
 | 0x10009310 | 8B | exit_handler | _exit_handler@12 |  | FUNCTION/EXACT | DieGildeAddOnServer/server.c |
 | 0x10009320 | 42B | Init | _Init |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
 | 0x10009350 | 68B | Exit | _Exit |  | FUNCTION/RELOC | DieGildeAddOnServer/server.c |
-| 0x100093A0 | 2434B | ServerMainThread | _ServerMainThread@4 | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server_c/ServerMainThread.c |
+| 0x100093A0 | 2434B | ServerMainThread | _ServerMainThread@4 | /O2 /Gd | FUNCTION/STUB | DieGildeAddOnServer/server_c/ServerMainThread.c |
 | 0x10009D30 | 296B | srv_Init | _srv_Init | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
 | 0x10009E60 | 419B | CreateListenSocket | _CreateListenSocket |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
 | 0x1000A010 | 112B | CleanupSockets | _CleanupSockets |  | FUNCTION/PROVEN | DieGildeAddOnServer/server2.c |
@@ -106,8 +106,8 @@ Coverage: 96.3% of .text section (136178/141382 bytes)
 | 0x1000A2E0 | 96B | cm_ClosePlayerConnection | _cm_ClosePlayerConnection |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
 | 0x1000A340 | 336B | ReceivePacketHeader | _ReceivePacketHeader | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server2.c |
 | 0x1000A490 | 211B | SendPlayerData | _SendPlayerData |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
-| 0x1000A570 | 750B | ProcessReceiveData | _ProcessReceiveData | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server_c/ProcessReceiveData.c |
-| 0x1000A860 | 131B | ProcessSendData | _ProcessSendData | /O2 /Gd /Ow | FUNCTION/SIZE_MISMATCH | DieGildeAddOnServer/server3.c |
+| 0x1000A570 | 750B | ProcessReceiveData | _ProcessReceiveData | /O2 /Gd /Ot | FUNCTION/PROVEN | DieGildeAddOnServer/server_c/ProcessReceiveData.c |
+| 0x1000A860 | 131B | ProcessSendData | _ProcessSendData | /O2 /Gd /Ow | FUNCTION/RELOC | DieGildeAddOnServer/server3.c |
 | 0x1000A8F0 | 170B | QueueCommandForProcessing | _QueueCommandForProcessing |  | FUNCTION/RELOC | DieGildeAddOnServer/server3.c |
 | 0x1000A9A0 | 170B | cm_QueuePlayerCommand | _cm_QueuePlayerCommand |  | FUNCTION/RELOC | DieGildeAddOnServer/server3.c |
 | 0x1000AA50 | 97B | list_unlink_relink | _list_unlink_relink |  | FUNCTION/EXACT | DieGildeAddOnServer/server3.c |
@@ -231,7 +231,7 @@ Coverage: 96.3% of .text section (136178/141382 bytes)
 | 0x100128F0 | 1463B | ls_LoadBuildingEntityState | _ls_LoadBuildingEntityState | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c |
 | 0x10012EB0 | 884B | ls_LoadDynamicEntities | _ls_LoadDynamicEntities | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/RELOC | DieGildeAddOn/loadsave/loadsave_c/ls_LoadDynamicEntities.c |
 | 0x10013230 | 2268B | ls_LoadEntities | _ls_LoadEntities | /O2 /Gd | FUNCTION/PROVEN | DieGildeAddOn/loadsave/loadsave_c/ls_LoadEntities.c |
-| 0x10013B10 | 1361B | ls_LoadTownData | _ls_LoadTownData | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/loadsave/loadsave_c/ls_LoadTownData.c |
+| 0x10013B10 | 1361B | ls_LoadTownData | _ls_LoadTownData | /Ox /Gd | FUNCTION/PROVEN | DieGildeAddOn/loadsave/loadsave_c/ls_LoadTownData.c |
 | 0x10014070 | 491B | ls_ID2Ptr | _ls_ID2Ptr | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/loadsave/loadsave3.c |
 | 0x10014260 | 892B | srv_RecvGame | _srv_RecvGame |  | FUNCTION/PROVEN | DieGildeAddOn/loadsave/loadsave_c/srv_RecvGame.c |
 | 0x100145E0 | 209B | lb_ExPlayerlist | _lb_ExPlayerlist |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |

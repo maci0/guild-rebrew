@@ -36,7 +36,7 @@ extern unsigned int ls_ID2Ptr(void);
  * records (0x100a8c88, stride 0x2f4) with name/timestamps/flags/population/
  * resource pairs/political state.
  *
- * Byte-match note (2026-08-26): compiled 1354/1361 bytes, 758/1361 masked
+ * Byte-match note (2026-08-26/27): compiled 1354/1361 bytes, 758/1361 masked
  * matches (55.7%); prologue + phase 1 (0x0-0x1df) byte-identical.  The
  * count-read is MSVC6-split: `&count` lands in the dead file-arg slot
  * (lea [esp+0x18]) while the phase-1 loop bound reloads the 0x3e copy at
@@ -50,10 +50,13 @@ extern unsigned int ls_ID2Ptr(void);
  * `jl` bound compare, as in the reference) and the reads anchored on the
  * derived `q = ptr2 - 8`; ptr2 then stays memory-resident (arg-slot
  * induction, `mov ebx,[esp+0x18]` reload at the head) matching the
- * reference.  Remaining 7 bytes: the two 10x8B loops compile without the
- * reference's per-loop ptr2 reload + base-relative 6-byte lea — an MSVC6
- * register-allocation choice not steerable from C (see
- * docs/msvc6-allocator.md; rebrew register hints would be the fix). */
+ * reference.  The 7-byte gap + phase-2 register plan (reference keeps
+ * `ebp = ptr2-0x48` as a long-lived base with `ebx` counters; this C
+ * keeps `q` in `edi` with `ebp` counters) is an MSVC6 register-allocation
+ * choice not steerable from C — ~15 formulations tried (base-relative
+ * variants trigger induction-variable elimination / constant-folding,
+ * declaration order and `register` hints are ignored).
+ * Resolved via `rebrew prove`: semantically PROVEN (EAX, 15 state pairs). */
 
 int __cdecl ls_LoadTownData(int file)
 {

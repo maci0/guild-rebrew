@@ -1676,6 +1676,16 @@ is the compiler's response to an *opaque* destination+size pair with a
 potentially large size; the register-reuse that forces the spill is an
 allocator scheduling choice.  Kept fenced-naked.
 
+The same prelude also blocks the *memcpy* variant in `ReadVfsData`
+(0x10008e40, vfs TU): the target expands `memcpy(buf, *zstrm, total)` with
+the dest-aligned prelude (flags&0x20 hoisted to dl, zstrm ptr spilled to
+[ebp-0xc], frame 0x10c), while msvc6 SP6 emits only the plain
+`shr ecx,2; rep movsd; and ecx,3; rep movsb` from any C shape (~60 whole-
+function variants; template absent from the SP6 C1/C1XX/C2 binaries).
+Resolved with the same `#ifdef REBREW_ALLOW_NAKED` exact-bytes `_emit`
+fence (`rebrew asm --inline-c`): EXACT 472/472, C kept in the `#else`
+fallback for `rebrew prove`.
+
 ## Finding 20 — m_FreeTracked (0x10006820): transient-register alternation (185/188)
 
 The reference's post-`free` block alternates edx/ecx for the four global
