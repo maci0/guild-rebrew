@@ -176,7 +176,7 @@
 0x1000e9c0 ExChangeDesire 214
 0x1000eaa0 ExSetEntityBitmask 208
 0x1000eb70 ExSetEntityField 144
-0x1000ec00 ExCopyEntityData 912
+0x1000ec00 ExCopyEntityData 901
 0x1000ef90 cm_ChainAssignId 26
 0x1000efb0 SetSyncFlags 122
 0x1000f030 cm_ExKillSpieler 72

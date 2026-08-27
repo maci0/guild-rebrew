@@ -268,16 +268,30 @@ dispatch register allocation:
   **ebx**, and the `cnt >= fld` dispatch emits `cmp edi,ebx; jae case4`
   with a duplicated `test edi,edi; jbe default` guard pair (a comparison
   chain, *not* a jump table — so the original was not a `switch`).
-- Mine: `fld` lands in `esi`, the dispatch inverts to `cmp <fld>,<cnt>;
-  jb check3`, and MSVC eliminates the redundant guard (it proves
-  `cnt==fld` is subsumed by `cnt>=fld`). ~20 chain/switch formulations
-  tested; every `switch` form compiles to a jump table (`lea eax,[cnt-1];
-  cmp eax,3; ja; jmp [eax*4]`), and every if/else chain either inverts or
-  removes the dead checks. The exact reference chain (jumped-to case4 +
-  kept redundant guards) is not reproducible.
+- Mine (current): `fld` also lands in **ebx** (fixed since this finding was
+  written), but MSVC still eliminates one of the two guards: the separate-if
+  form drops the `cnt>=fld` branch as dead (its stores are provably
+  overwritten by the else-if chain), and the else-if-chained form drops the
+  `cnt==fld` branch as subsumed.  `volatile` locals keep both guards but
+  hoist the constants into registers and duplicate the store block, so the
+  reference's shared immediate-store block is not reproducible either.  ~20
+  chain/switch formulations tested; every `switch` form compiles to a jump
+  table (`lea eax,[cnt-1]; cmp eax,3; ja; jmp [eax*4]`), and every if/else
+  chain either inverts or removes the dead checks.  The exact reference
+  chain (jumped-to case4 + kept redundant guards) is not reproducible.
+- The chained else-if form is used in the source because it preserves the
+  reference behaviour for `level >= 4` (the separate-if form changes
+  `level >= 5` to the default set).  Best-effort is 206/901 bytes (obj 898;
+  the stale 912 in functions.txt/toml includes 11 bytes of linker padding)
+  with the dispatch store order (`decay_low` before `decay_high`) and
+  do-while scan loops tuned to the reference layout.  A `while(1)+break`
+  variant matches a few more bytes (212) but is 36 bytes smaller.
 - The register cascade (fld → ebx vs esi) is the same class of GRA
   sensitivity as Finding 7: the reference's allocation is "better"
   (single callee-save for fld, reused later) and cannot be steered from C.
+  The matrix-loop registers (outer_idx/outer_ent/mat_row/inner_ent/delta =
+  edi/ebx/edx/esi/ebp vs ebx/ebp/esi/edi/edx) are likewise unaffected by
+  declaration order (tested 4 orderings).
 
 ## Finding 8d — value propagation splits shared blocks
 

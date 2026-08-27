@@ -11,12 +11,18 @@ extern char g_relationship_matrix_secondary[];
  *
  * Conversion state: pure C (naked wrapper removed); head (frame +
  * mov edi,cmd + the two deferred-cleanup gm_GetFieldByType calls) is
- * byte-identical.  The threshold dispatch, the relationship-matrix
- * loops and the type-0..3 branches still diverge on MSVC6 register
- * allocation and branch layout (docs/msvc6-allocator.md Finding 8b) —
- * best-effort 157/901; the reference's duplicated
- * `test edi,edi; jbe default` guard pair is not steerable from C
- * (the head needs the `char* cmd` local block below). */
+ * byte-identical. Best-effort 206/901 bytes (obj 898 — the stale
+ * metadata size 912 includes 11 bytes of linker padding; the function
+ * itself is 901).  The remaining 3-byte gap and the bulk of the byte
+ * diffs come from the reference's duplicated
+ * `test edi,edi; jbe default` dispatch-guard pair, which MSVC6 always
+ * collapses to a single guard (dead-if / subsumption analysis) and is
+ * not steerable from C (docs/msvc6-allocator.md Finding 8b).  The
+ * else-if-chained guard below keeps the reference semantics
+ * (level >= 4 -> 0x28 set; the separate-if form lets MSVC6 drop the
+ * level>=4 branch as dead, which changes level>=5 behaviour).  The
+ * matrix loops and type-0..3 branches still diverge on MSVC6 register
+ * allocation and branch layout (inverted clamps, loop rotation). */
 
 // CFLAGS: /O2 /Gd
 int __cdecl cm_ExCopyEntityData(char* cmd_ptr, char* response)
@@ -57,17 +63,21 @@ int __cdecl cm_ExCopyEntityData(char* cmd_ptr, char* response)
 	if (ebx_type == 4) {
 		level = *(uint*) (cmd_ptr + 0x24);
 
-		/* NB: the reference keeps BOTH guard pairs — the first is a
-		 * standalone if (level>0 && level>=4), the second starts the
-		 * if/else chain (level>0 && level==4). If chained with else-if,
-		 * MSVC6 proves the second condition dead and merges the guards. */
+		/* NB: the reference keeps BOTH guard pairs — a standalone
+		 * if (level>0 && level>=4) AND the else-if (level>0 && level==4)
+		 * that starts the chain below; MSVC6 eliminates one guard in
+		 * every C formulation (separate ifs drop the >=4 branch as dead,
+		 * chained else-if drops the ==4 branch as subsumed).  Chaining is
+		 * used here because it preserves the reference behaviour for
+		 * level >= 4.  The decay_high/decay_low store order below matches
+		 * the reference's stack-slot layout. */
 		if (level > 0 && level >= (uint) ebx_type) {
 			threshold_high = 0x28;
 			threshold_low = -115;
-			decay_high = -20;
 			decay_low = 3;
+			decay_high = -20;
 		}
-		if (level > 0 && level == (uint) ebx_type) {
+		else if (level > 0 && level == (uint) ebx_type) {
 			threshold_high = 0x28;
 			threshold_low = -115;
 			decay_high = -20;
@@ -76,26 +86,26 @@ int __cdecl cm_ExCopyEntityData(char* cmd_ptr, char* response)
 		else if (level == 3) {
 			threshold_high = 0x37;
 			threshold_low = -105;
-			decay_high = -16;
 			decay_low = 5;
+			decay_high = -16;
 		}
 		else if (level == 2) {
 			threshold_high = 0x46;
 			threshold_low = -95;
-			decay_high = -12;
 			decay_low = 7;
+			decay_high = -12;
 		}
 		else if (level == 1) {
 			threshold_high = 0x55;
 			threshold_low = -85;
-			decay_high = -8;
 			decay_low = 9;
+			decay_high = -8;
 		}
 		else {
 			threshold_high = 0x64;
 			threshold_low = -75;
-			decay_high = -5;
 			decay_low = 11;
+			decay_high = -5;
 		}
 
 		outer_idx = 0;
@@ -139,12 +149,15 @@ skip_modify:
 	else {
 		dst_slot = 0;
 		scan_ptr = (char*) 0x100358a4;
-		while (*(int*) scan_ptr != target_field) {
+		do {
+			if (*(int*) scan_ptr == target_field) {
+				break;
+			}
 			scan_ptr += 0x21c;
 			dst_slot++;
-			if ((uint) scan_ptr >= 0x1009aca4) {
-				return 1;
-			}
+		} while ((uint) scan_ptr < 0x1009aca4);
+		if ((uint) scan_ptr >= 0x1009aca4) {
+			return 1;
 		}
 		if (dst_slot >= 0x300) {
 			return 1;
@@ -168,12 +181,15 @@ skip_modify:
 		else {
 			src_slot = 0;
 			scan_ptr = (char*) 0x100358a4;
-			while (*(int*) scan_ptr != *(int*) (cmd_ptr + 0x10)) {
+			do {
+				if (*(int*) scan_ptr == *(int*) (cmd_ptr + 0x10)) {
+					break;
+				}
 				scan_ptr += 0x21c;
 				src_slot++;
-				if ((uint) scan_ptr >= 0x1009aca4) {
-					return 1;
-				}
+			} while ((uint) scan_ptr < 0x1009aca4);
+			if ((uint) scan_ptr >= 0x1009aca4) {
+				return 1;
 			}
 			if (src_slot >= 0x300 || ((ushort*)g_static_entity_table_358a0)[src_slot * 0x10e] == (ushort) 0xffff) {
 				return 1;
@@ -202,7 +218,7 @@ skip_modify:
 					rel_value = 0x7f;
 				}
 				g_relationship_matrix_primary[idx] = (char) rel_value;
-				if (-1 < *(int*) (cmd_ptr + 0x18)) {
+				if (*(int*) (cmd_ptr + 0x18) >= 0) {
 					rel_value = rel_value / 2;
 				}
 				target_field = (int) (signed char) g_relationship_matrix_secondary[idx] + rel_value;
