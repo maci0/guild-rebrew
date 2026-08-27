@@ -57,39 +57,35 @@ int __cdecl cm_ExCopyEntityData(char* cmd_ptr, char* response)
 	if (ebx_type == 4) {
 		level = *(uint*) (cmd_ptr + 0x24);
 
-		if (level > 0) {
-			if (level >= (uint) ebx_type) {
-				threshold_high = 0x28;
-				threshold_low = -115;
-				decay_high = -20;
-				decay_low = 3;
-			}
-			else {
-				if (level == 3) {
-					threshold_high = 0x37;
-					threshold_low = -105;
-					decay_high = -16;
-					decay_low = 5;
-				}
-				else if (level == 2) {
-					threshold_high = 0x46;
-					threshold_low = -95;
-					decay_high = -12;
-					decay_low = 7;
-				}
-				else if (level == 1) {
-					threshold_high = 0x55;
-					threshold_low = -85;
-					decay_high = -8;
-					decay_low = 9;
-				}
-				else {
-					threshold_high = 0x64;
-					threshold_low = -75;
-					decay_high = -5;
-					decay_low = 11;
-				}
-			}
+		if (level > 0 && level >= (uint) ebx_type) {
+			threshold_high = 0x28;
+			threshold_low = -115;
+			decay_high = -20;
+			decay_low = 3;
+		}
+		else if (level > 0 && level == (uint) ebx_type) {
+			threshold_high = 0x28;
+			threshold_low = -115;
+			decay_high = -20;
+			decay_low = 3;
+		}
+		else if (level == 3) {
+			threshold_high = 0x37;
+			threshold_low = -105;
+			decay_high = -16;
+			decay_low = 5;
+		}
+		else if (level == 2) {
+			threshold_high = 0x46;
+			threshold_low = -95;
+			decay_high = -12;
+			decay_low = 7;
+		}
+		else if (level == 1) {
+			threshold_high = 0x55;
+			threshold_low = -85;
+			decay_high = -8;
+			decay_low = 9;
 		}
 		else {
 			threshold_high = 0x64;

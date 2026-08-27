@@ -54,24 +54,27 @@ int __cdecl ProcessSendData(void)
 
 	p = g_connections;
 	do {
-		if (!(p[0] & 1)) {
-			continue;
-		}
-		r = SendPlayerData((unsigned int*) p);
-		if (r == -1) {
-			return -1;
-		}
-		while ((pkt = *(unsigned int**) (p + 0x2641f4)) != 0 && (*(unsigned int*) p & 0x100) != 0) {
-			memcpy(p + 0xb1, pkt, 0x99);
-			list_unlink_relink((char*) p, *(char**) (p + 0x2641f4));
-			*(unsigned int*) p &= ~0x100;
+		if ((p[0] & 1) != 0) {
 			r = SendPlayerData((unsigned int*) p);
 			if (r == -1) {
 				return -1;
 			}
-		}
-		if (r == -1) {
-			return -1;
+			while (1) {
+				pkt = *(unsigned int**) (p + 0x2641f4);
+				if (pkt == 0 || (*(unsigned int*) p & 0x100) == 0) {
+					break;
+				}
+				memcpy(p + 0xb1, pkt, 0x99);
+				list_unlink_relink((char*) p, *(char**) (p + 0x2641f4));
+				*(unsigned int*) p &= ~0x100;
+				r = SendPlayerData((unsigned int*) p);
+				if (r == -1) {
+					return -1;
+				}
+			}
+			if (r == -1) {
+				return -1;
+			}
 		}
 		p += 0x264264;
 	} while ((int) p < 0x114ffe20);

@@ -227,7 +227,7 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x1000a860"]
 size = 131
-status = "SIZE_MISMATCH"
+status = "RELOC"
 cflags = "/O2 /Gd /Ow"
 
 ["SERVER.0x1000a8f0"]
