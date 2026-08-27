@@ -268,11 +268,12 @@ int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
 // FUNCTION: SERVER 0x1000c600
 // SYMBOL: _ahm_InitRandomEntity
 // SIZE: 109
-// NEAR_MATCHING 100/109: scale-loop scheduling residue — target emits
-// `fstp [eax]; add eax,0xc; dec edx; jne` (store before pointer bump);
-// MSVC6 6.0 folds this shape to `add; dec; fstp [eax-0xc]` for every
-// source form tried. The increment-first loop below reproduces the
-// store encoding (fstp [eax]) at the cost of a base-12 lea + fld [eax+8].
+// PROVEN via `rebrew prove` (was NEAR_MATCHING 100/109). Residual is the
+// MSVC6 scale-loop scheduling fold: target emits `fstp [eax]; add eax,0xc;
+// dec edx; jne` (store before pointer bump); 6.0 folds the bump-then-store
+// source below to `add; dec; fstp [eax]` with a base-12 lea + `fld [eax+8]`.
+// Every source form tried folds one of load/store; prove established
+// equivalence so the byte-count-neutral form below is kept.
 
 char* __cdecl ahm_InitRandomEntity(void)
 {

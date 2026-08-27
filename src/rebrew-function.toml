@@ -199,7 +199,7 @@ analysis = "Initialize all player slots to disconnected state, then create TCP l
 
 ["SERVER.0x1000a080"]
 size = 600
-status = "NEAR_MATCHING"
+status = "PROVEN"
 analysis = "Iterates over g_player_slots looking for an empty slot. If one is found, calls Ordinal_1 (accept()) to accept a new connection, configures the socket, initializes the slot structures (receive_buffer, send_buffer), and flags it as a newly connected player."
 cflags = "/O2 /Gd"
 
@@ -362,7 +362,7 @@ status = "RELOC"
 
 ["SERVER.0x1000c600"]
 size = 109
-status = "NEAR_MATCHING"
+status = "PROVEN"
 
 ["SERVER.0x1000c670"]
 size = 45
@@ -710,6 +710,7 @@ cflags = "/O2 /Gd"
 ["SERVER.0x10010710"]
 size = 320
 status = "NEAR_MATCHING"
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 18 x 18 state pairs); EAX=0 vs 1591742452"
 
 ["SERVER.0x10010850"]
 size = 370

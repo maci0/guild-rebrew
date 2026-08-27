@@ -304,7 +304,7 @@ do_accept:
 	*(unsigned int*) (slot + 0x2641f8) = (unsigned int) (slot + 0x154);
 	*(unsigned int*) (slot + 0x2641fc) = (unsigned int) (slot + 0x132154);
 	sprintf(msg, s_New_Connection_from__li__li__li__100299a0,
-		((unsigned char*) &addr)[8], ((unsigned char*) &addr)[5],
+		((unsigned char*) &addr)[4], ((unsigned char*) &addr)[5],
 		((unsigned char*) &addr)[6], ((unsigned char*) &addr)[7]);
 	*(unsigned int*) (slot + 0x2641f0) = 0;
 	*(unsigned int*) (slot + 0x2641f4) = 0;
