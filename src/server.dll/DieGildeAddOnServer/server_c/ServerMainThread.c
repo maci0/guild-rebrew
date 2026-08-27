@@ -7,7 +7,7 @@
 #include <windows.h>
 #include <winsock2.h>
 __declspec(dllimport) unsigned int __stdcall timeGetTime(void);
-extern void __cdecl srand_impl(unsigned int); /* 0x1001b535 (CRT srand body) */
+extern void __cdecl srand(unsigned int); /* CRT srand */
 
 /* Command layer (local externs — server.c uses different signatures) */
 int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
@@ -100,7 +100,7 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 	sprintf(log_buffer, (char*) 0x100298d8, *(int*) 0x11764084);
 	LogMessageInternal((char*) 0x100298b0, 0x131, log_buffer, 1);
 
-	srand_impl(timeGetTime());
+	srand(timeGetTime());
 	last_announce_tick = 0;
 	phase_complete = 0;
 	while (*(int*) 0x10034680 == 0) {

@@ -167,7 +167,7 @@ unsigned char g_bss_tail[0x1269f30] = {0};
 char s_D__Develop_DieGildeAddOn_command_1002c748[1] = "";
 
 /* Special forwarding stubs */
-extern int __cdecl ServerMainThread(void*);
+extern int __stdcall ServerMainThread(void*);
 
 int __stdcall thread_proc(void* param)
 {

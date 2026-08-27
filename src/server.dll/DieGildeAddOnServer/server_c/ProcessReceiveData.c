@@ -1,3 +1,4 @@
+int g_list_head;
 // FUNCTION: SERVER 0x1000a570
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
