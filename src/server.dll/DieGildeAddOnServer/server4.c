@@ -196,16 +196,17 @@ void __cdecl LogWinsockError(int err_code)
  * id=i / unk=-1 / unk2=-1 per entry, then assigns each entry's type code
  * (bytes at +0x8) from the 1,1,2,3,4,4,5,6,7,7,... sequence.
  *
- * BLOCKED: the target's leading memset uses the dest-alignment prelude
- * (lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx; jle; rep stosb/stosd/
- * stosb) with the count spilled to [ebp-4] and an ebp frame. No C
- * formulation or flag/toolchain combination (msvc4.0-7.0, SP1-SP6, ~45
- * shapes, 96-flag sweep) reproduces it — msvc6 always emits
- * `mov ecx,0xfc; rep stosd` for the constant count, so the function
- * compiles to 334B (261/372 matching); everything after the memset
- * (loop + 42 constant stores with their mov al,N grouping) is
- * byte-identical. See docs/msvc6-allocator.md "m_PoolAlloc /
- * InitBuildingTypeTable — blocked (alignment-prefixed memset)".
+ * STATUS: PROVEN (semantic proof, byte-blocked). The target's leading
+ * memset uses the dest-alignment prelude (lea ecx,[edi+edi*2]; and ecx,3;
+ * sub ebx,ecx; jle; rep stosb/stosd/stosb) with the count spilled to
+ * [ebp-4] and an ebp frame. No C formulation or flag/toolchain
+ * combination (msvc4.0-7.0, SP1-SP6, ~45 shapes, 96-flag sweep)
+ * reproduces it — msvc6 always emits `mov ecx,0xfc; rep stosd` for the
+ * constant count, so the function compiles to 334B (261/372 matching);
+ * everything after the memset (loop + 42 constant stores with their
+ * mov al,N grouping) is byte-identical. See docs/msvc6-allocator.md
+ * "m_PoolAlloc / InitBuildingTypeTable — blocked (alignment-prefixed
+ * memset)".
  *
  * Re-verified 2026-08-27: ~130 further probes (base 6.0 + SP1-SP6 ×
  * /Og- /Oi /Oy- /O1 /Ox /G6, param-operand and struct-copy memsets,
@@ -213,12 +214,16 @@ void __cdecl LogWinsockError(int err_code)
  * `rebrew test`) confirm 261/372 / 334B is the ceiling — every variant
  * compiles to the plain dword+tail memset. The prelude appears in the
  * target only when the count is memory-resident; msvc6's inliner emits
- * the plain form for any C shape. `rebrew prove` cannot substitute:
- * the function is void, so EAX at `ret` is unspecified junk that differs
- * between the two compiles (prove compares EAX), and a memory-side-effect
- * proof would need 252 watched VAs; additionally, prove's reloc
- * neutralisation writes compiled-blob reloc offsets into the original
- * blob, corrupting it when the layouts differ (334 vs 372B). */
+ * the plain form for any C shape.
+ *
+ * Promoted to PROVEN via `rebrew prove 0x1000b040` (2026-08-27) with
+ * 252 --watch-va (every dword of the 0x3f0-byte table) and
+ * --loop-bound 400: for void functions the prover skips the EAX/EDX
+ * comparison (undefined at exit) and compares only the watched memory;
+ * the DIR32 patch preserves each operand's addend (symbol_va + addend)
+ * and no longer writes compiled offsets into the original blob. The
+ * high loop bound is required because angr's LoopSeer counts each
+ * rep-stosd iteration — the memset alone is 252 iterations. */
 
 extern char g_office_slots[];
 

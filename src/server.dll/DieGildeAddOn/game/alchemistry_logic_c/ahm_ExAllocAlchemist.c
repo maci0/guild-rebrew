@@ -94,11 +94,13 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	}
 
 	memset((void*) (0x100358a0 + slot_index * 0x21c), 0, 0x21c);
-	*(int*) (0x100358a4 + slot_index * 0x21c) = -1;
 	/* volatile: keeps this store alive past the slot[0] = slot_index
 	 * write below (the reference keeps both stores; a plain store is
-	 * dead-store-eliminated by MSVC6 here). */
+	 * dead-store-eliminated by MSVC6 here). Reference order is
+	 * slot[0]=0xffff before slot[4]=-1 (the -1 in eax is reused by the
+	 * second memset). */
 	*(volatile unsigned short*) (0x100358a0 + slot_index * 0x21c) = 0xffff;
+	*(volatile int*) (0x100358a4 + slot_index * 0x21c) = -1;
 	memset((void*) (0x100358fc + slot_index * 0x21c), -1, 0x20);
 
 	slot = (char*) (0x100358a0 + slot_index * 0x21c);
@@ -132,8 +134,8 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	*(unsigned short*) (slot + 0x50) = 0x7fff;
 
 	/* While-form of the 5-iteration fill: the top-tested loop shape
-	 * (rather than a for) is what keeps the reference's register
-	 * allocation downstream. */
+	 * (rather than a for or do-while) is what keeps the reference's
+	 * register allocation downstream. */
 	i = 0;
 	while (1) {
 		if (!(i < 5)) break;
@@ -151,14 +153,17 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	}
 	*(int*) (slot + 0x20) = 0x41400000;
 
-	rand_value = (int) (*(float*) 0x100256bc * *(float*) (slot + 0x1c));
+	{
+		float f_tmp = *(float*) (slot + 0x1c);
+		rand_value = (int) (*(float*) 0x100256bc * f_tmp);
+	}
 	rand_value = (unsigned short) gm_RandomMod(rand_value);
 
 	{
 		float v = (float) rand_value;
 		*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
-		*(float*) (slot + 0x10) = v + *(float*) 0x100256b8 * *(float*) (slot + 0x1c) -
-			*(float*) 0x100256b4 * *(float*) (slot + 0x1c);
+		*(float*) (slot + 0x10) = v + *(float*) (slot + 0x1c) * *(float*) 0x100256b8 -
+			*(float*) (slot + 0x1c) * *(float*) 0x100256b4;
 	}
 
 	rand_iter = 0;
@@ -167,19 +172,16 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		unsigned short btype;
 		int rnd1;
 		int rnd2;
-		int base_off;
 
 		btype = *(unsigned short*) (0x100358a0 + slot_index * 0x21c);
-		base_off = btype + rand_iter;
 		rnd1 = gm_RandomMod(0x40) - 0x20;
-		*(char*) (base_off + 0x100a9820) = (char) rnd1;
-		*(char*) (base_off + 0x1014d8e0) = 0;
+		*(char*) (0x100a9820 + btype + rand_iter) = (char) rnd1;
+		*(char*) (0x1014d8e0 + btype + rand_iter) = 0;
 
 		btype = *(unsigned short*) (0x100358a0 + slot_index * 0x21c);
-		base_off = btype * 0x300 + i;
 		rnd2 = gm_RandomMod(0x40) - 0x20;
-		*(char*) (base_off + 0x100a9820) = (char) rnd2;
-		*(char*) (base_off + 0x1014d8e0) = 0;
+		*(char*) (0x100a9820 + btype * 0x300 + i) = (char) rnd2;
+		*(char*) (0x1014d8e0 + btype * 0x300 + i) = 0;
 		i = i + 1;
 		rand_iter = rand_iter + 0x300;
 	} while (rand_iter < 0x90000);

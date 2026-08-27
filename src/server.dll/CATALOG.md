@@ -1,6 +1,6 @@
 # Reversed Functions Catalog
 
-Total: 556/563 functions cataloged (327 exact, 182 reloc-normalized, 4 near-matching, 5 stubs)  
+Total: 556/563 functions cataloged (327 exact, 184 reloc-normalized, 4 near-matching, 5 stubs)  
 Coverage: 96.3% of .text section (136167/141382 bytes)
 
 
@@ -61,12 +61,12 @@ Coverage: 96.3% of .text section (136167/141382 bytes)
 | 0x10006280 | 393B | inflate_trees_dynamic | inflate_trees_dynamic |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006410 | 46B | inflate_trees_fixed | inflate_trees_fixed |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006440 | 306B | inflate_flush | inflate_flush |  | LIBRARY/EXACT | library_zlib.h |
-| 0x10006580 | 658B | m_AllocTracked | _m_AllocTracked | /O2 /Gd /G6 /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc_c/m_AllocTracked.c |
+| 0x10006580 | 658B | m_AllocTracked | _m_AllocTracked | /O2 /Gd /G6 /Oy- | FUNCTION/PROVEN | Units/m_alloc/m_alloc_c/m_AllocTracked.c |
 | 0x10006820 | 188B | m_FreeTracked | _m_FreeTracked | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
 | 0x100068E0 | 162B | InitPacketPool | _InitPacketPool | /O2 /Gd /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc.c |
 | 0x10006990 | 612B | ReportMemoryGroupInfo | _ReportMemoryGroupInfo | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc_c/ReportMemoryGroupInfo.c |
 | 0x10006C00 | 283B | ShutdownMemoryAllocator | _ShutdownMemoryAllocator | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc2.c |
-| 0x10006D20 | 270B | m_PoolAlloc | _m_PoolAlloc | /O2 /Gd /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc2.c |
+| 0x10006D20 | 270B | m_PoolAlloc | _m_PoolAlloc | /O2 /Gd /Oy- | FUNCTION/PROVEN | Units/m_alloc/m_alloc2.c |
 | 0x10006E30 | 137B | m_PoolFree | _m_PoolFree | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc2.c |
 | 0x10006EC0 | 108B | tr_init | _tr_init |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006F30 | 1B | tr_static_init | tr_static_init |  | LIBRARY/EXACT | library_zlib.h |

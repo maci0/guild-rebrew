@@ -886,21 +886,23 @@ at ReadVfsData 0x10008f0c — every one in a function that has never
 byte-matched (SIZE_MISMATCH or only PROVEN). Conclusion stands: the
 prelude is an unreproducible codegen-template difference.
 
-`rebrew prove` cannot rescue this one (unlike ReadVfsData, which is an
-`int` return and was PROVEN via EAX equivalence): InitBuildingTypeTable
-is `void`, so EAX at `ret` is unspecified junk that differs between the
-two compiles, and a memory-side-effect proof would need one watched VA
-per table dword (252 VAs). Note also that prove's reloc neutralisation
-(prove.py) writes the compiled blob's reloc offsets into the *original*
-blob ("patch both blobs") — for size-mismatched functions the layouts
-don't correspond, so the original is corrupted and the run dies with
-"no terminal states"; `--watch-va 0x101de5a0` overrides the data relocs
-with the real VA and reaches terminal states, but then the dir32 patch
-drops the operand addends (the `cmp eax, g_office_slots+0x3f4` bound
-becomes `0x101de5a0`) and the memory comparison fails. Both are
-prove-tool bugs worth fixing for pointer-returning siblings (m_PoolAlloc
-0x10006d20, AllocateTrackedHeapBlock 0x10006580 return pointers and
-could be PROVEN via EAX once the original-blob corruption is fixed).
+`rebrew prove` can rescue this one, and now does (2026-08-27): the two
+prove-tool bugs noted below were fixed in prove.py — (1) DIR32 watched
+patches preserve operand addends (`symbol_va + addend`, so the
+`cmp eax, g_office_slots+0x3f4` bound links to `0x101de994`, not the
+bare base), and the original blob is no longer patched at compiled
+offsets (its linked operands are already correct; writing compiled
+offsets into it corrupted the different-layout instruction stream);
+(2) void functions now skip the EAX/EDX comparison entirely (EAX at
+`ret` is unspecified junk for a void cdecl function) and prove by
+memory side effects only. InitBuildingTypeTable is therefore PROVEN:
+`rebrew prove 0x1000b040 --loop-bound 400 --watch-va <252 table dwords>`
+compares every dword of the 0x3f0-byte table (1×1 terminal state
+pairs). Note the high `--loop-bound`: angr's LoopSeer counts each
+rep-stosd iteration, and the memset alone is 252. Pointer-returning
+siblings (m_PoolAlloc 0x10006d20, AllocateTrackedHeapBlock 0x10006580)
+prove via EAX equivalence once the original-blob corruption is fixed —
+m_PoolAlloc is now PROVEN too.
 Since the original writeup, m_PoolAlloc's C was rebuilt and now matches
 234/270 (from 223): the two allocation sites with their distinct literals
 (`m:pool_get_free(tp_m_pool)` for the empty-head path with `*head=block`
