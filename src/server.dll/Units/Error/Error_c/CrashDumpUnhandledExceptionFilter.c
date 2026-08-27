@@ -10,11 +10,16 @@ extern void* g_10034614;
 
 // CFLAGS: /O2 /Gd
 // NOTE: semantically complete reconstruction rebuilt from the target disasm.
-// Frame (0x28c vs 0x280), register allocation (imports in ebx/ebp/edi vs
-// esi/edi; ebx/edi saves deferred in the reference), and the exception-name
-// dispatch tree shape (reference tests 0xc000008e first, MSVC6 here pivots
-// 0xc0000005) still diverge — structural similarity ~0.97 (701/724).  Kept
-// as proper C per batch policy.
+// Exception dispatch converted from switch to the reference's if/else chain
+// (tests 0xc000008e, 0xc000001d, 0xc0000005 first, then 0x80000003/04); the
+// module-path scan now uses the reference loop shapes (`while (*p != '\0') p++`
+// and `if (*p == '.')` without the p>=pStart guard).  Compiled 2137 vs target
+// 2115 (-40 from the switch form).  Remaining deltas are the MSVC6 register-
+// allocation cascade: prologue saves 4 regs (ebx/ebp/esi/edi) vs 2 (ebp/esi)
+// with ebx/edi deferred in the reference, frame 0x28c vs 0x280 (hDbgFile
+// spilled at [esp+0x44] instead of kept in ebp), and the dispatch bodies stay
+// inline (jbe/jne skips) where the reference lays the comparison chain
+// straight-line with handlers out of line.  Kept as proper C per batch policy.
 
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
@@ -64,7 +69,7 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 		char* pStart;
 		p = szModulePath;
 		if (*p != '\0') {
-			while (*(p + 1)) {
+			while (*p != '\0') {
 				p++;
 			}
 			/* Search backwards for '.' */
@@ -75,7 +80,7 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 				}
 				p--;
 			}
-			if (p >= pStart && *p == '.') {
+			if (*p == '.') {
 				p++;
 				*p = 'd';
 				p++;
@@ -164,14 +169,82 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	/* Classify exception */
 	excCode = pExceptionPointers->ExceptionRecord->ExceptionCode;
 
-	switch (excCode) {
-	case 0xc000008e:
+	if (excCode > 0xc000008e) {
+		/* Jump table 2 */
+		i = excCode + 0x3fffff71;
+		if (i > 0x6e) {
+			goto unknown_exc;
+		}
+		switch (i) {
+		case 0:
+			WriteFile(hCrashLog, (const char*) 0x10027208, 0x12, &nBytesWritten, 0);
+			break;
+		case 1:
+			WriteFile(hCrashLog, (const char*) 0x100271f0, 0x15, &nBytesWritten, 0);
+			break;
+		case 2:
+			WriteFile(hCrashLog, (const char*) 0x100271e0, 0xc, &nBytesWritten, 0);
+			break;
+		case 3:
+			WriteFile(hCrashLog, (const char*) 0x100271d0, 0xf, &nBytesWritten, 0);
+			break;
+		case 4:
+			WriteFile(hCrashLog, (const char*) 0x100271c0, 0xd, &nBytesWritten, 0);
+			break;
+		case 5:
+			WriteFile(hCrashLog, (const char*) 0x100271ac, 0x12, &nBytesWritten, 0);
+			break;
+		case 6:
+			WriteFile(hCrashLog, (const char*) 0x1002719c, 0xc, &nBytesWritten, 0);
+			break;
+		case 7:
+			WriteFile(hCrashLog, (const char*) 0x10027188, 0x10, &nBytesWritten, 0);
+			break;
+		case 0x6e:
+			WriteFile(hCrashLog, (const char*) 0x10027178, 0xe, &nBytesWritten, 0);
+			break;
+		default:
+			goto unknown_exc;
+		}
+	}
+	else if (excCode == 0xc000008e) {
 		WriteFile(hCrashLog, (const char*) 0x1002721c, 0x12, &nBytesWritten, 0);
-		break;
-	case 0xc000001d:
+	}
+	else if (excCode > 0xc000001d) {
+		/* Jump table 1 */
+		i = excCode + 0x3fffffdb;
+		if (i > 0x68) {
+			goto unknown_exc;
+		}
+		switch (i) {
+		case 0:
+			WriteFile(hCrashLog, (const char*) 0x10027230, 0x18, &nBytesWritten, 0);
+			break;
+		case 1:
+			WriteFile(hCrashLog, (const char*) 0x1002724c, 0x13, &nBytesWritten, 0);
+			break;
+		case 0x67:
+			WriteFile(hCrashLog, (const char*) 0x10027278, 0x15, &nBytesWritten, 0);
+			break;
+		case 0x68:
+			WriteFile(hCrashLog, (const char*) 0x10027260, 0x14, &nBytesWritten, 0);
+			break;
+		default:
+			goto unknown_exc;
+		}
+	}
+	else if (excCode == 0xc000001d) {
 		WriteFile(hCrashLog, (const char*) 0x10027290, 0x13, &nBytesWritten, 0);
-		break;
-	case 0xc0000005:
+	}
+	else if (excCode > 0xc0000005) {
+		if (excCode == 0xc0000006) {
+			WriteFile(hCrashLog, (const char*) 0x100272a4, 0xd, &nBytesWritten, 0);
+		}
+		else {
+			goto unknown_exc;
+		}
+	}
+	else if (excCode == 0xc0000005) {
 		/* ACCESS_VIOLATION */
 		WriteFile(hCrashLog, (const char*) 0x100272cc, 0x11, &nBytesWritten, 0);
 		if (pExceptionPointers->ExceptionRecord->ExceptionInformation[0] == 0) {
@@ -182,87 +255,15 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 		}
 		sprintf(szDateBuf, (const char*) 0x100272b4, pExceptionPointers->ExceptionRecord->ExceptionInformation[1]);
 		WriteFile(hCrashLog, szDateBuf, strlen(szDateBuf), &nBytesWritten, 0);
-		break;
-	case 0x80000003:
+	}
+	else if (excCode == 0x80000003) {
 		WriteFile(hCrashLog, (const char*) 0x100272e0, 0xa, &nBytesWritten, 0);
-		break;
-	case 0x80000004:
+	}
+	else if (excCode == 0x80000004) {
 		WriteFile(hCrashLog, (const char*) 0x100272ec, 0xb, &nBytesWritten, 0);
-		break;
-	default:
-		if (excCode > 0xc000008e) {
-			/* Jump table 2 */
-			i = excCode + 0x3fffff71;
-			if (i > 0x6e) {
-				goto unknown_exc;
-			}
-			switch (i) {
-			case 0:
-				WriteFile(hCrashLog, (const char*) 0x10027208, 0x12, &nBytesWritten, 0);
-				break;
-			case 1:
-				WriteFile(hCrashLog, (const char*) 0x100271f0, 0x15, &nBytesWritten, 0);
-				break;
-			case 2:
-				WriteFile(hCrashLog, (const char*) 0x100271e0, 0xc, &nBytesWritten, 0);
-				break;
-			case 3:
-				WriteFile(hCrashLog, (const char*) 0x100271d0, 0xf, &nBytesWritten, 0);
-				break;
-			case 4:
-				WriteFile(hCrashLog, (const char*) 0x100271c0, 0xd, &nBytesWritten, 0);
-				break;
-			case 5:
-				WriteFile(hCrashLog, (const char*) 0x100271ac, 0x12, &nBytesWritten, 0);
-				break;
-			case 6:
-				WriteFile(hCrashLog, (const char*) 0x1002719c, 0xc, &nBytesWritten, 0);
-				break;
-			case 7:
-				WriteFile(hCrashLog, (const char*) 0x10027188, 0x10, &nBytesWritten, 0);
-				break;
-			case 0x6e:
-				WriteFile(hCrashLog, (const char*) 0x10027178, 0xe, &nBytesWritten, 0);
-				break;
-			default:
-				goto unknown_exc;
-			}
-			break;
-		}
-		else if (excCode > 0xc000001d) {
-			/* Jump table 1 */
-			i = excCode + 0x3fffffdb;
-			if (i > 0x68) {
-				goto unknown_exc;
-			}
-			switch (i) {
-			case 0:
-				WriteFile(hCrashLog, (const char*) 0x10027230, 0x18, &nBytesWritten, 0);
-				break;
-			case 1:
-				WriteFile(hCrashLog, (const char*) 0x1002724c, 0x13, &nBytesWritten, 0);
-				break;
-			case 0x67:
-				WriteFile(hCrashLog, (const char*) 0x10027278, 0x15, &nBytesWritten, 0);
-				break;
-			case 0x68:
-				WriteFile(hCrashLog, (const char*) 0x10027260, 0x14, &nBytesWritten, 0);
-				break;
-			default:
-				goto unknown_exc;
-			}
-			break;
-		}
-		else if (excCode > 0xc0000005) {
-			if (excCode == 0xc0000006) {
-				WriteFile(hCrashLog, (const char*) 0x100272a4, 0xd, &nBytesWritten, 0);
-				break;
-			}
-			goto unknown_exc;
-		}
-		else {
-			goto unknown_exc;
-		}
+	}
+	else {
+		goto unknown_exc;
 	}
 
 

@@ -6,7 +6,7 @@
 #include <string.h>
 #include <windows.h>
 #include <winsock2.h>
-unsigned int __stdcall timeGetTime(void);
+__declspec(dllimport) unsigned int __stdcall timeGetTime(void);
 extern void __cdecl srand_impl(unsigned int); /* 0x1001b535 (CRT srand body) */
 
 /* Command layer (local externs — server.c uses different signatures) */
@@ -50,11 +50,8 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 {
 	char* module_path;
 	char* ini_tail;
-	char* log_message;
 	unsigned int* player_slot;
 	unsigned int* transfer_progress;
-	unsigned int* src_words;
-	unsigned int* cfg_ptr;
 	unsigned int* payload_src;
 	unsigned int* payload_dst;
 	unsigned int connected_players;
@@ -63,14 +60,12 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 	unsigned int last_announce_tick;
 	unsigned int sync_timer;
 	unsigned int game_speed;
-	unsigned int result;
-	unsigned int line;
 	int i;
 	int phase_complete;
-	unsigned int startup_cfg_words[27];
-	char log_buffer[64];
 	unsigned char cmd_buffer_primary[0x99];
 	unsigned char cmd_buffer_secondary[0x99];
+	unsigned int startup_cfg_words[27];
+	char log_buffer[64];
 
 	module_path = (char*) 0x101de9a0;
 	GetModuleFileNameA(0, module_path, 0x104);
@@ -108,11 +103,7 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 	srand_impl(timeGetTime());
 	last_announce_tick = 0;
 	phase_complete = 0;
-	for (;;) {
-		if (*(int*) 0x10034680 != 0) {
-			break;
-		}
-
+	while (*(int*) 0x10034680 == 0) {
 		connected_players = 0;
 		player_slot = (unsigned int*) 0x101deb00;
 		do {
@@ -144,27 +135,22 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 			last_announce_tick = timeGetTime();
 		}
 
-		result = (unsigned int) ProcessReceiveData();
-		if (result == 0xffffffff) {
-			log_message = (char*) 0x1002986c;
-			line = 0x15f;
-			goto log_error_and_cleanup;
+		if ((unsigned int) ProcessReceiveData() == 0xffffffff) {
+			LogMessageInternal((char*) 0x100298b0, 0x15f, (char*) 0x1002986c, 1);
+			goto cleanup_and_exit;
 		}
 
-		result = (unsigned int) ProcessSendData();
-		if (result == 0xffffffff) {
-			log_message = (char*) 0x1002986c;
-			line = 0x16a;
-			goto log_error_and_cleanup;
+		if ((unsigned int) ProcessSendData() == 0xffffffff) {
+			LogMessageInternal((char*) 0x100298b0, 0x16a, (char*) 0x1002986c, 1);
+			goto cleanup_and_exit;
 		}
 
 		player_slot = (unsigned int*) 0x101deb00;
 		do {
 			if ((*player_slot & 0x1000) != 0) {
 				if ((*player_slot & 0x400) != 0) {
-					log_message = (char*) 0x10029834;
-					line = 0x176;
-					goto log_error_and_cleanup;
+					LogMessageInternal((char*) 0x100298b0, 0x176, (char*) 0x10029834, 1);
+					goto cleanup_and_exit;
 				}
 				cm_ClosePlayerConnection(player_slot);
 			}
@@ -181,20 +167,20 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 	do {
 		if ((*player_slot & 1) != 0) {
 			*player_slot = (*player_slot & 0xfffffdff) | 0x4004;
-		}
-		player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
+		}		player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 	} while ((int) player_slot < 0x114ffe20);
 
 	i = 0;
 	player_slot = (unsigned int*) 0x101deb00;
 	do {
-		if ((*player_slot & 0x400) != 0) {
-			*(unsigned int*) ((char*) 0x101deb00 + i * 0x264264) =
-				*(unsigned int*) ((char*) 0x101deb00 + i * 0x264264) | 8;
-			goto send_start_commands;
+		if ((*player_slot & 0x400) == 0) {
+			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
+			i = i + 1;
+			continue;
 		}
-		player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		i = i + 1;
+		*(unsigned int*) ((char*) 0x101deb00 + i * 0x264264) =
+			*(unsigned int*) ((char*) 0x101deb00 + i * 0x264264) | 8;
+		goto send_start_commands;
 	} while ((int) player_slot < 0x114ffe20);
 
 	CleanupSockets();
@@ -206,14 +192,20 @@ send_start_commands:
 	do {
 		if (*player_slot != 0) {
 			cmd_buffer_primary[0] = 4;
-			*(unsigned int*) (cmd_buffer_primary + 0x10) = (unsigned int) ((((*player_slot & 8) != 0) ? 0 : 7) + 2);
+			cmd_buffer_primary[3] = 0xff;
+			*(unsigned int*) (cmd_buffer_primary + 4) = 0xffffffff;
+			*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
+			cmd_buffer_primary[0x10] = (unsigned char) ((((*player_slot & 8) != 0) ? 0 : 7) + 2);
 			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 				goto cleanup_and_exit;
 			}
 
 			cmd_buffer_primary[0] = 0x20;
-			*(unsigned int*) (cmd_buffer_primary + 9) = (unsigned int) i;
+			cmd_buffer_primary[3] = 0xff;
+			*(unsigned int*) (cmd_buffer_primary + 4) = 0xffffffff;
+			*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
 			cmd_buffer_primary[0x10] = 7;
+			*(unsigned int*) (cmd_buffer_primary + 0x11) = (unsigned int) i;
 			i = i + 1;
 			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 				goto cleanup_and_exit;
@@ -231,18 +223,22 @@ send_start_commands:
 		phase_complete = 1;
 		player_slot = (unsigned int*) 0x101deb00;
 		do {
-			if ((*player_slot & 8) != 0) {
-				phase_complete = 0;
-				break;
+			if ((*player_slot & 8) == 0) {
+				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
+				continue;
 			}
-			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
+			phase_complete = 0;
+			break;
 		} while ((int) player_slot < 0x114ffe20);
 
-		result = (unsigned int) ProcessReceiveData();
-		if ((result == 0xffffffff) || (ProcessSendData() == -1)) {
-			log_message = (char*) 0x1002986c;
-			line = 0x1df;
-			goto log_error_and_cleanup;
+		if ((unsigned int) ProcessReceiveData() == 0xffffffff) {
+			LogMessageInternal((char*) 0x100298b0, 0x1df, (char*) 0x1002986c, 1);
+			goto cleanup_and_exit;
+		}
+
+		if ((unsigned int) ProcessSendData() == 0xffffffff) {
+			LogMessageInternal((char*) 0x100298b0, 0x1df, (char*) 0x1002986c, 1);
+			goto cleanup_and_exit;
 		}
 
 		Sleep(0x1e);
@@ -263,6 +259,9 @@ send_start_commands:
 				if ((*player_slot & 4) != 0) {
 					if (*transfer_progress == 0xffffffff) {
 						cmd_buffer_primary[0] = 8;
+						cmd_buffer_primary[3] = 0xff;
+						*(unsigned int*) (cmd_buffer_primary + 4) = *transfer_progress;
+						*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
 						*(unsigned int*) (cmd_buffer_primary + 0x10) = *(unsigned int*) 0x101deac0;
 						if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 							goto cleanup_and_exit;
@@ -271,6 +270,9 @@ send_start_commands:
 					}
 					else {
 						cmd_buffer_primary[0] = 9;
+						cmd_buffer_primary[3] = 0xff;
+						*(unsigned int*) (cmd_buffer_primary + 4) = 0xffffffff;
+						*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
 						payload_src = (unsigned int*) ((char*) *(void**) 0x101deae8 + *transfer_progress);
 						payload_dst = (unsigned int*) (cmd_buffer_primary + 0x10);
 						for (i = 0x20; i != 0; i--) {
@@ -298,11 +300,14 @@ send_start_commands:
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 			} while ((int) transfer_progress < 0x101deae8);
 
-			result = (unsigned int) ProcessReceiveData();
-			if ((result == 0xffffffff) || (ProcessSendData() == -1)) {
-				log_message = (char*) 0x1002986c;
-				line = 0x23a;
-				goto log_error_and_cleanup;
+			if ((unsigned int) ProcessReceiveData() == 0xffffffff) {
+				LogMessageInternal((char*) 0x100298b0, 0x23a, (char*) 0x1002986c, 1);
+				goto cleanup_and_exit;
+			}
+
+			if ((unsigned int) ProcessSendData() == 0xffffffff) {
+				LogMessageInternal((char*) 0x100298b0, 0x23a, (char*) 0x1002986c, 1);
+				goto cleanup_and_exit;
 			}
 
 			Sleep(0x1e);
@@ -345,11 +350,14 @@ send_start_commands:
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 			} while (phase_complete);
 
-			result = (unsigned int) ProcessReceiveData();
-			if ((result == 0xffffffff) || (ProcessSendData() == -1)) {
-				log_message = (char*) 0x1002986c;
-				line = 0x278;
-				goto log_error_and_cleanup;
+			if ((unsigned int) ProcessReceiveData() == 0xffffffff) {
+				LogMessageInternal((char*) 0x100298b0, 0x278, (char*) 0x1002986c, 1);
+				goto cleanup_and_exit;
+			}
+
+			if ((unsigned int) ProcessSendData() == 0xffffffff) {
+				LogMessageInternal((char*) 0x100298b0, 0x278, (char*) 0x1002986c, 1);
+				goto cleanup_and_exit;
 			}
 
 			Sleep(0x1e);
@@ -360,6 +368,10 @@ send_start_commands:
 	do {
 		if ((*player_slot & 1) != 0) {
 			cmd_buffer_secondary[0] = 4;
+			cmd_buffer_secondary[3] = 0xff;
+			*(unsigned int*) (cmd_buffer_secondary + 0xc) = 0xffffffff;
+			*(unsigned int*) (cmd_buffer_secondary + 0x14) = 0;
+			cmd_buffer_secondary[0x18] = 4;
 			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_secondary) == -1) {
 				goto cleanup_and_exit;
 			}
@@ -421,12 +433,12 @@ send_start_commands:
 			player_slot = (unsigned int*) 0x101deb00;
 			do {
 				if ((*player_slot != 0) && ((*player_slot & 0x20) == 0)) {
-					*(int*) 0x11764090 = 0;
 					phase_complete = 0;
 				}
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 			} while ((int) player_slot < 0x114ffe20);
 
+			*(int*) 0x11764090 = phase_complete;
 			if (!phase_complete) {
 				goto game_loop_network_io;
 			}
@@ -437,8 +449,8 @@ send_start_commands:
 					*player_slot = *player_slot & 0xffffffdf;
 				}
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-				*(unsigned int*) 0x101deaf0 = current_tick;
 			} while ((int) player_slot < 0x114ffe20);
+			*(unsigned int*) 0x101deaf0 = current_tick;
 		}
 		else if (phase_complete || (current_tick < *(unsigned int*) 0x101deaf0)) {
 			goto game_loop_network_io;
@@ -449,10 +461,13 @@ send_start_commands:
 		do {
 			if (*player_slot != 0) {
 				cmd_buffer_primary[0] = 0x1e;
-				*(unsigned int*) (cmd_buffer_primary + 0x0c) = *(unsigned int*) 0x10035884;
+				cmd_buffer_primary[3] = 0xff;
+				*(unsigned int*) (cmd_buffer_primary + 4) = 0xffffffff;
+				*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
 				*(unsigned int*) (cmd_buffer_primary + 0x10) = *(unsigned int*) 0x10035880;
-				*(unsigned int*) (cmd_buffer_primary + 0x18) = *(unsigned int*) 0x10035888;
-				*(unsigned short*) (cmd_buffer_primary + 0x1c) = *(unsigned short*) 0x1003588c;
+				*(unsigned int*) (cmd_buffer_primary + 0x14) = *(unsigned int*) 0x10035884;
+				*(unsigned int*) (cmd_buffer_primary + 0x20) = *(unsigned int*) 0x10035888;
+				*(unsigned short*) (cmd_buffer_primary + 0x24) = *(unsigned short*) 0x1003588c;
 				if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 					goto cleanup_and_exit;
 				}
@@ -466,8 +481,16 @@ send_start_commands:
 			do {
 				if (*player_slot != 0) {
 					cmd_buffer_secondary[0] = 0x20;
+					cmd_buffer_secondary[3] = 0xff;
+					*(unsigned int*) (cmd_buffer_secondary + 4) = 0xffffffff;
+					*(unsigned int*) (cmd_buffer_secondary + 0xc) = 0;
+					cmd_buffer_secondary[0x10] = 2;
 					if (phase_complete) {
+						*(unsigned int*) (cmd_buffer_secondary + 0x11) = 1;
 						phase_complete = 0;
+					}
+					else {
+						*(unsigned int*) (cmd_buffer_secondary + 0x11) = 0;
 					}
 					if (cm_QueuePlayerCommand(player_slot, cmd_buffer_secondary) == -1) {
 						goto cleanup_and_exit;
@@ -486,11 +509,14 @@ send_start_commands:
 		*(unsigned int*) 0x101deaf0 = sync_timer + game_speed;
 
 	game_loop_network_io:
-		result = (unsigned int) ProcessReceiveData();
-		if ((result == 0xffffffff) || (ProcessSendData() == -1)) {
-			log_message = (char*) 0x1002986c;
-			line = 0x348;
-			goto log_error_and_cleanup;
+		if ((unsigned int) ProcessReceiveData() == 0xffffffff) {
+			LogMessageInternal((char*) 0x100298b0, 0x348, (char*) 0x1002986c, 1);
+			goto cleanup_and_exit;
+		}
+
+		if ((unsigned int) ProcessSendData() == 0xffffffff) {
+			LogMessageInternal((char*) 0x100298b0, 0x348, (char*) 0x1002986c, 1);
+			goto cleanup_and_exit;
 		}
 
 		if (cm_ProcessCommandQueue() == -1) {
@@ -498,14 +524,7 @@ send_start_commands:
 		}
 	}
 
-log_error_and_cleanup:
-	LogMessageInternal((char*) 0x100298b0, line, log_message, 1);
-
 cleanup_and_exit:
 	CleanupSockets();
 	return 0;
 }
-
-
-/* Initializes server subsystems: memory allocator, logging,
- * network sockets, game data tables, and entity pools. */
