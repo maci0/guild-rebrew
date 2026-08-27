@@ -3,18 +3,30 @@
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10002FC0
 // EmitCrashModuleLine
-// SIZE: 358
-// NOTE: semantically complete reconstruction.  Loop (module search), both
-// return epilogues (xor al,al / mov al,1), tbuf register roles (AL/ECX),
-// frame size (0x1c) and the WriteFile sequence (extra / module name / ' '
-// space byte / debug record / CRLF) now match the reference.  Remaining
-// deltas are the MSVC6 register-allocation cascade documented in
-// docs/msvc6-allocator.md (ValidateAndAssignOffice class): the tbuf byte
-// loads land in CL instead of AL, `extra` stays in ebp (reference spills it
-// to [esp+0x14] and keeps `rec` in ebp), so the space byte (`sp`) spills to
-// extra's slot as a dword instead of the arg slot as a word.  20+ C
-// formulations (declaration orders, statement orders, types incl. volatile/
-// register, extra-in-branch defs, flag-first, st4 local) did not steer it.
+// SIZE: 376
+// NOTE: semantically complete reconstruction (verified statement-by-statement
+// against the target disasm).  Byte-exact so far: the module-search loop
+// (offsets 0x00-0x3e, incl. the hoisted st[2] load, unsigned jb/jbe bounds and
+// the lea [edi+ebp+0x10] stride), both return epilogues (xor al,al / mov al,1),
+// frame size 0x1c, and the GetDebugRecordByIndex call setup (mod kept in edx).
+// Remaining deltas (0x3f onward, 39 structural instructions, 183/376 byte
+// match) are a single MSVC6 register-allocation cascade, same class as
+// ValidateAndAssignOffice (docs/msvc6-allocator.md):
+//  - found block: the tbuf byte temps land in CL instead of AL (a0-moffs form
+//    missing), so the first dword temp takes EAX (a1) instead of ECX;
+//  - the extra=0 store is hoisted to the top of the found block and `extra` is
+//    homed in the dead arg slot [esp+0x30]; the reference keeps it at
+//    [esp+0x14] immediately before the first branch;
+//  - frame slots: ours = written@0x10, sp@0x18, linebuf coalesced into
+//    tbuf@0x1c, extra@arg slot; reference = linebuf@0x10, extra@0x14,
+//    written@0x18, tbuf@0x1c, sp spilled as a word to the arg slot;
+//  - tail: linebuf word/byte stores are emitted right after their loads (ref:
+//    deferred into the `if (extra)` branch shadow); sp stored as a dword (ref:
+//    word).
+// NOT steerable from C: 70+ formulations (declaration orders, statement
+// orders, types incl. volatile/register, struct overlays, loop forms, tail
+// reorders, dependency-forcing expressions) all compile byte-identical, and
+// the GA (50 generations) found no register-allocation gains.
 
 #include <string.h>
 #include <windows.h>

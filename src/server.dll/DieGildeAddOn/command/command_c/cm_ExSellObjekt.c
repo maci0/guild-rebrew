@@ -43,22 +43,33 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * to another. Handles object type validation, inventory transfers,
  * production slot updates, and building ownership changes.
  *
+ * Error handling uses the reference's inline-call shape: each failure
+ * site calls LogMessageInternal(...) and returns 1, and MSVC6 /O2
+ * tail-merges the identical call+return into the target's shared call
+ * tail (stack-pushed args at each site + one shared call/epilogue).
+ * The earlier goto-through-capacity_check/error_code formulation
+ * compiled to register-passed args at a single push site and matched
+ * only 229 bytes.
+ *
  * Conversion state: pure C (naked wrapper removed).  The head diverges
  * on MSVC6 register allocation: the reference zeroes the saved locals
  * through edi with a 0x228 frame (9 zeroed dwords + an unused 4-byte gap
  * before the 512-byte log buffer); every C formulation zeroes through ebx
  * with a 0x224 frame (one fewer spilled local), and the zero-store
- * order/registers cascade through ~650 structural diffs — best-effort
- * 229/2057 bytes (docs/msvc6-allocator.md GRA class).
+ * order/registers cascade through the byte diffs — best-effort
+ * 392/2057 bytes (obj 2056; docs/msvc6-allocator.md GRA class).
  *
- * Rechecked 2026-08-27: the call inventory matches the reference 31/31,
- * so the 62-byte deficit is pure codegen (no missing block).  Variants
- * tried and rejected: g_current_season int (1991B/208), unused pad locals
- * (eliminated), declaration reordering (no change), /O1 (1716B/205) and
- * /Ox (2049B/263 — more hits but still 8B short and a different global
- * allocation; the project's matching functions are /O2-dominated).  No
- * flag or formulation shifts the zero-store register off ebx to the
- * reference's edi; /O2 /Gd stays the best committed state.
+ * Rechecked 2026-08-27: the call inventory matches the reference
+ * 1:1 (error-path restructure did not add or drop a call), so the
+ * residual delta is pure codegen (no missing block).  Variants tried
+ * and rejected: g_current_season int, unused pad locals (eliminated),
+ * declaration reordering (verified: byte-identical), local merges
+ * (container_ptr/source_container_ptr/linked_list_ptr), entity_type /
+ * obj_category as int, dest-call out-param order swap (203B),
+ * /O1 (ebp frame), /Ox (larger, different global allocation), /O2 /G5
+ * /G6 /Oy- (no change).  No flag or formulation shifts the zero-store
+ * register off ebx to the reference's edi; /O2 /Gd stays the best
+ * committed state.
  *
  * The dest-resolution call passes its out-params in the reference's
  * register order: gm_ResolveEntityById(&dest_dynamic_entity,
@@ -91,7 +102,6 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	uint weight_fraction;
 	char log_buffer[512];
 	short entity_type;
-	uint error_code;
 	char obj_category;
 
 	source_owner_entity = (short*)0;
@@ -116,9 +126,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			resolve_result
 		);
 		if (resolve_result == 0) {
-			capacity_check = "cm_ExSellObjekt() Invalid 'quell_besitzer_id'";
-			error_code = 0x2c05;
-			goto sell_error_return;
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2c05, "cm_ExSellObjekt() Invalid 'quell_besitzer_id'", 8);
+			return 1;
 		}
 		if (source_existing_entity != (void*)0) {
 			container_ptr = (char**)((int)source_existing_entity + 0x5d);
@@ -140,9 +149,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			source_container_ptr = container_ptr;
 			source_owner_entity = gm_ResolveParentEntity(resolved_dynamic);
 			if (source_owner_entity == (short*)0) {
-				capacity_check = "cm_ExSellObjekt() Invalid 'gm_eval_ObjektBesitzer'";
-				error_code = 0x2c2f;
-				goto sell_error_return;
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2c2f, "cm_ExSellObjekt() Invalid 'gm_eval_ObjektBesitzer'", 8);
+				return 1;
 			}
 		} else {
 			source_owner_entity = source_static_entity;
@@ -201,9 +209,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			resolve_result
 		);
 		if (resolve_result == 0) {
-			capacity_check = "cm_ExSellObjekt() Invalid 'ziel_besitzer_id'";
-			error_code = 0x2cdd;
-			goto sell_error_return;
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2cdd, "cm_ExSellObjekt() Invalid 'ziel_besitzer_id'", 8);
+			return 1;
 		}
 		if (dest_existing_entity != (char*)0) {
 			linked_list_ptr = (int*)(dest_existing_entity + 0x5d);
@@ -225,9 +232,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 					*(int*)(cmd + 0x1f)
 				);
 				if (resolve_result < *(int*)(cmd + 0x1f)) {
-					capacity_check = "cm_ExSellObjekt() Lager voll";
-					error_code = 0x2d1b;
-					goto sell_error_return;
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d1b, "cm_ExSellObjekt() Lager voll", 8);
+					return 1;
 				}
 			} else if (entity_type == 0x1dd) {
 				goto check_producible;
@@ -246,9 +252,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
 			resolve_result = gm_QueryEntitySum(*(int*)(dest_owner_entity + 0xbc), cmd[0x1e]);
 			if (resolve_result < *(int*)(cmd + 0x1f) * *(int*)(cmd + 0x23)) {
-				capacity_check = "cm_ExSellObjekt() Not enough Credits at destination";
-				error_code = 0x2d4f;
-				goto sell_error_return;
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d4f, "cm_ExSellObjekt() Not enough Credits at destination", 8);
+				return 1;
 			}
 		}
 	}
@@ -262,9 +267,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				amount = gm_GetMsgField((int)source_dynamic_ref, (int)dest_object);
 				source_dynamic_ref = source_dynamic_entity;
 				if ((uint)amount - weight_fraction < (uint)*(int*)(cmd + 0x1f)) {
-					capacity_check = g_error_msg_sell_no_source;
-					error_code = 0x2d79;
-					goto sell_error_return;
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d79, g_error_msg_sell_no_source, 8);
+					return 1;
 				}
 			}
 			goto finalize_transfer;
@@ -309,9 +313,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
 				if (source_existing_entity == (void*)0) {
-					capacity_check = g_error_msg_sell_no_dest;
-					error_code = 0x2def;
-					goto sell_error_return;
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2def, g_error_msg_sell_no_dest, 8);
+					return 1;
 				}
 				gm_RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(cmd + 0x18));
 			} else {
@@ -349,22 +352,19 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
 				if (dest_existing_entity == (char*)0) {
-					capacity_check = g_error_msg_sell_failed;
-					error_code = 0x2e45;
-					goto sell_error_return;
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e45, g_error_msg_sell_failed, 8);
+					return 1;
 				}
 				dest_object = (ushort*)gm_AllocBuildingContents(dest_existing_entity, (uint)*(ushort*)(cmd + 0x18));
 				if (dest_object == (ushort*)0) {
-					capacity_check = "cm_ExSellObjekt(): gm_AllocRaum failed";
-					error_code = 0x2e39;
-					goto sell_error_return;
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e39, "cm_ExSellObjekt(): gm_AllocRaum failed", 8);
+					return 1;
 				}
 			} else {
 				dest_object = (ushort*)gm_AllocObjekt(*(int*)(cmd + 0x10), (uint)*(ushort*)(cmd + 0x18), *(int*)(cmd + 0x1f));
 				if (dest_object == (ushort*)0) {
-					capacity_check = "cm_ExSellObjekt(): gm_AllocObjekt failed";
-					error_code = 0x2e5d;
-					goto sell_error_return;
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e5d, "cm_ExSellObjekt(): gm_AllocObjekt failed", 8);
+					return 1;
 				}
 				if (dest_dynamic_entity != (short*)0) {
 					*(int*)(dest_object + 7) = *(int*)(dest_object + 7) + 1;
@@ -410,7 +410,4 @@ LAB_1000e0e7:
 		}
 	}
 	return 0;
-sell_error_return:
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", error_code, capacity_check, 8);
-	return 1;
 }

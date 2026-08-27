@@ -94,11 +94,11 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	}
 
 	memset((void*) (0x100358a0 + slot_index * 0x21c), 0, 0x21c);
-	/* volatile: keeps this store alive past the slot[0] = slot_index
-	 * write below (the reference keeps both stores; a plain store is
-	 * dead-store-eliminated by MSVC6 here). Reference order is
-	 * slot[0]=0xffff before slot[4]=-1 (the -1 in eax is reused by the
-	 * second memset). */
+	/* volatile: keeps both stores alive past the slot[0] = slot_index
+	 * write below (the reference keeps them: slot[0]=0xffff, then
+	 * slot[4]=-1 with the -1 in eax reused by the second memset). The
+	 * reference order is slot[0]=0xffff before slot[4]=-1; both must be
+	 * volatile or MSVC6 dead-store-eliminates slot[0]=0xffff. */
 	*(volatile unsigned short*) (0x100358a0 + slot_index * 0x21c) = 0xffff;
 	*(volatile int*) (0x100358a4 + slot_index * 0x21c) = -1;
 	memset((void*) (0x100358fc + slot_index * 0x21c), -1, 0x20);
@@ -135,7 +135,8 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 
 	/* While-form of the 5-iteration fill: the top-tested loop shape
 	 * (rather than a for or do-while) is what keeps the reference's
-	 * register allocation downstream. */
+	 * register allocation downstream (the reference's fill is
+	 * bottom-tested, but a do-while here cascades: 998 obj / 285 match). */
 	i = 0;
 	while (1) {
 		if (!(i < 5)) break;
@@ -166,22 +167,33 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 			*(float*) (slot + 0x1c) * *(float*) 0x100256b4;
 	}
 
+	/* GRA fixed point: the base_off formulation strength-reduces this
+	 * loop to advancing pointers + a down-counter (989 obj), which is
+	 * what keeps the ebx=0 zero-register prologue (push ebx / cmp eax,ebx)
+	 * intact. Inlining the grid addresses instead reproduces the
+	 * reference loop shape (cmp edi,0x90000/jl bottom test, per-iter lea
+	 * chains) but costs the prologue (push 0 / dynamic in ebx; 1000 obj,
+	 * 364 match). The two are mutually exclusive under msvc6 /O2; 989/417
+	 * is the best reachable state (see blocker note). */
 	rand_iter = 0;
 	i = 0;
 	do {
 		unsigned short btype;
 		int rnd1;
 		int rnd2;
+		int base_off;
 
 		btype = *(unsigned short*) (0x100358a0 + slot_index * 0x21c);
+		base_off = btype + rand_iter;
 		rnd1 = gm_RandomMod(0x40) - 0x20;
-		*(char*) (0x100a9820 + btype + rand_iter) = (char) rnd1;
-		*(char*) (0x1014d8e0 + btype + rand_iter) = 0;
+		*(char*) (base_off + 0x100a9820) = (char) rnd1;
+		*(char*) (base_off + 0x1014d8e0) = 0;
 
 		btype = *(unsigned short*) (0x100358a0 + slot_index * 0x21c);
+		base_off = btype * 0x300 + i;
 		rnd2 = gm_RandomMod(0x40) - 0x20;
-		*(char*) (0x100a9820 + btype * 0x300 + i) = (char) rnd2;
-		*(char*) (0x1014d8e0 + btype * 0x300 + i) = 0;
+		*(char*) (base_off + 0x100a9820) = (char) rnd2;
+		*(char*) (base_off + 0x1014d8e0) = 0;
 		i = i + 1;
 		rand_iter = rand_iter + 0x300;
 	} while (rand_iter < 0x90000);
