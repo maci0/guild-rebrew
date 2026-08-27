@@ -1,6 +1,6 @@
 # Reversed Functions Catalog
 
-Total: 556/563 functions cataloged (328 exact, 180 reloc-normalized, 4 near-matching, 5 stubs)  
+Total: 556/563 functions cataloged (327 exact, 182 reloc-normalized, 4 near-matching, 5 stubs)  
 Coverage: 96.3% of .text section (136167/141382 bytes)
 
 
@@ -26,7 +26,7 @@ Coverage: 96.3% of .text section (136167/141382 bytes)
 | 0x100020A0 | 367B | longest_match | longest_match |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10002210 | 1066B | deflate_slow | deflate_slow |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10002640 | 290B | DispatchLogOutput | _DispatchLogOutput |  | FUNCTION/RELOC | Units/Error/Error.c |
-| 0x10002770 | 2115B | CrashDumpUnhandledExceptionFilter | _CrashDumpUnhandledExceptionFilter@4 | /O2 /Gd | FUNCTION/SIZE_MISMATCH | Units/Error/Error_c/CrashDumpUnhandledExceptionFilter.c |
+| 0x10002770 | 2115B | CrashDumpUnhandledExceptionFilter | _CrashDumpUnhandledExceptionFilter@4 | /O2 /Gd | FUNCTION/PROVEN | Units/Error/Error_c/CrashDumpUnhandledExceptionFilter.c |
 | 0x10002FC0 | 376B | EmitCrashModuleLine | _EmitCrashModuleLine | /O2 /Gd | FUNCTION/STUB | Units/Error/Error_c/EmitCrashModuleLine.c |
 | 0x10003140 | 33B | GetDebugRecordByIndex | _GetDebugRecordByIndex |  | FUNCTION/EXACT | Units/Error/Error_c/ErrorModule.c |
 | 0x10003170 | 235B | check_memory_protection | _check_memory_protection |  | FUNCTION/RELOC | Units/Error/Error_c/ErrorModule.c |
@@ -63,7 +63,7 @@ Coverage: 96.3% of .text section (136167/141382 bytes)
 | 0x10006440 | 306B | inflate_flush | inflate_flush |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006580 | 658B | m_AllocTracked | _m_AllocTracked | /O2 /Gd /G6 /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc_c/m_AllocTracked.c |
 | 0x10006820 | 188B | m_FreeTracked | _m_FreeTracked | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
-| 0x100068E0 | 162B | InitPacketPool | _InitPacketPool | /O2 /Gd /Oy- | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
+| 0x100068E0 | 162B | InitPacketPool | _InitPacketPool | /O2 /Gd /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc.c |
 | 0x10006990 | 612B | ReportMemoryGroupInfo | _ReportMemoryGroupInfo | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc_c/ReportMemoryGroupInfo.c |
 | 0x10006C00 | 283B | ShutdownMemoryAllocator | _ShutdownMemoryAllocator | /O2 /Gd | FUNCTION/RELOC | Units/m_alloc/m_alloc2.c |
 | 0x10006D20 | 270B | m_PoolAlloc | _m_PoolAlloc | /O2 /Gd /Oy- | FUNCTION/SIZE_MISMATCH | Units/m_alloc/m_alloc2.c |
@@ -91,7 +91,7 @@ Coverage: 96.3% of .text section (136167/141382 bytes)
 | 0x10008A50 | 53B | vfs_DestroyEntity | _vfs_DestroyEntity |  | FUNCTION/RELOC | Units/vfs/vfs3.c |
 | 0x10008C80 | 129B | vfs_CleanupObject | _vfs_CleanupObject | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | Units/vfs/vfs4.c |
 | 0x10008D10 | 301B | CloseVfsStream | _CloseVfsStream | /O2 /Gd | FUNCTION/RELOC | Units/vfs/vfs4.c |
-| 0x10008E40 | 472B | ReadVfsData | _ReadVfsData | /O2 /Gd /Oy- /DREBREW_ALLOW_NAKED | FUNCTION/EXACT | Units/vfs/ReadVfsData.c |
+| 0x10008E40 | 472B | ReadVfsData | _ReadVfsData | /O2 /Gd /Oy- /DREBREW_ALLOW_NAKED | FUNCTION/PROVEN | Units/vfs/ReadVfsData.c |
 | 0x10009020 | 704B | OpenVfsStream | _OpenVfsStream | /O2 /Gd | FUNCTION/PROVEN | Units/vfs/vfs_c/OpenVfsStream.c |
 | 0x100092E0 | 19B | zcalloc | zcalloc |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10009300 | 12B | free_wrap | free_wrap |  | LIBRARY/EXACT | library_msvc.h |
@@ -161,7 +161,7 @@ Coverage: 96.3% of .text section (136167/141382 bytes)
 | 0x1000D7F0 | 176B | cm_ExTransferCurrency | _cm_ExTransferCurrency |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExTransferCurrency.c |
 | 0x1000D8A0 | 144B | cm_ExTransferCurrencyNoKill | _cm_ExTransferCurrencyNoKill |  | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExTransferCurrencyNoKill.c |
 | 0x1000D930 | 2057B | cm_ExSellObjekt | _cm_ExSellObjekt | /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/command/command_c/cm_ExSellObjekt.c |
-| 0x1000E140 | 993B | cm_ExProdObjekt | _cm_ExProdObjekt | /Ox /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/command/command_c/cm_ExProdObjekt.c |
+| 0x1000E140 | 993B | cm_ExProdObjekt | _cm_ExProdObjekt | /Ox /Gd | FUNCTION/PROVEN | DieGildeAddOn/command/command_c/cm_ExProdObjekt.c |
 | 0x1000E530 | 352B | cm_ExMoveObjekt | _cm_ExMoveObjekt | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExMoveObjekt.c |
 | 0x1000E690 | 191B | cm_ExClearLagerslot | _cm_ExClearLagerslot | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/command/command_c/cm_ExClearLagerslot.c |
 | 0x1000E750 | 128B | cm_ExAllocObjekt | _cm_ExAllocObjekt | /O2 /Gd | FUNCTION/RELOC | DieGildeAddOn/command/command_c/cm_ExAllocObjekt.c |

@@ -108,7 +108,7 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x100068e0"]
 size = 162
-status = "RELOC"
+status = "SIZE_MISMATCH"
 analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
 cflags = "/O2 /Gd /Oy-"
 
@@ -155,7 +155,7 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x10008e40"]
 size = 472
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd /Oy- /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10009020"]
@@ -262,6 +262,7 @@ status = "RELOC"
 size = 372
 status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd"
+note = "prove: Z3 found a satisfying assignment where EAX+mem(1 VA) differs (checked 1 x 1 state pairs); EAX=3793338096 vs 270394631"
 
 ["SERVER.0x1000b1c0"]
 size = 205

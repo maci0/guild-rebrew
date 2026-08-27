@@ -864,6 +864,43 @@ count reproduces either the frame or the prelude. Confirmed: the target's
 `mov [ebp-4],0x3f0; mov ebx,[ebp-4]` spill is the only frame local, and the
 function is a leaf (no calls), so a proper-C match cannot reach 372 bytes
 (ceiling 334B / 261 matched bytes).
+
+Re-verified 2026-08-27 (InitBuildingTypeTable, full body, end-to-end via
+`rebrew test`): 7 whole-function variants (constant / `int n` / dest-copy
+`char *d` / volatile / address-taken counts × dests) × `/O2 /Gd` and
+`/O2 /Gd /Oy-` — best is still 261/372 (334B), every other variant is
+worse (volatile: 355-358B but 192-256 matched — the spill breaks the
+loop/store register allocation). Additional compiler builds: base 6.0
+(12.00.8168) and 6.0-SP6 (12.00.8804, /G6-capable i.e. Processor-Pack
+codegen) both emit the plain form for variable/volatile/param-operand
+counts; a 16-variant × 7-flag matrix (volatile, address-taken, struct
+member, register/const/unsigned/size_t counts, dest-copy locals,
+struct-copy `memcpy` forms, `/Og- /Oi /Oy- /O1 /Ox /G6`) produced zero
+prelude hits; two-arg param probes `memset(p, n)` / `memset(slot+4, 0,
+asize-4)` (the m_PoolAlloc shape) also plain. The prelude template
+(`lea r,[edi+edi*2]; and r,3; sub ebx,ecx; jle; rep stosb; rep stosd;
+rep stosb`) occurs at exactly 6 target sites — m_AllocTracked 0x10006730,
+InitPacketPool 0x10006929, m_PoolAlloc 0x10006e0d, InitBuildingTypeTable
+0x1000b057, gm_AllocGebaeude 0x10017611, plus a memcpy twin (rep movs)
+at ReadVfsData 0x10008f0c — every one in a function that has never
+byte-matched (SIZE_MISMATCH or only PROVEN). Conclusion stands: the
+prelude is an unreproducible codegen-template difference.
+
+`rebrew prove` cannot rescue this one (unlike ReadVfsData, which is an
+`int` return and was PROVEN via EAX equivalence): InitBuildingTypeTable
+is `void`, so EAX at `ret` is unspecified junk that differs between the
+two compiles, and a memory-side-effect proof would need one watched VA
+per table dword (252 VAs). Note also that prove's reloc neutralisation
+(prove.py) writes the compiled blob's reloc offsets into the *original*
+blob ("patch both blobs") — for size-mismatched functions the layouts
+don't correspond, so the original is corrupted and the run dies with
+"no terminal states"; `--watch-va 0x101de5a0` overrides the data relocs
+with the real VA and reaches terminal states, but then the dir32 patch
+drops the operand addends (the `cmp eax, g_office_slots+0x3f4` bound
+becomes `0x101de5a0`) and the memory comparison fails. Both are
+prove-tool bugs worth fixing for pointer-returning siblings (m_PoolAlloc
+0x10006d20, AllocateTrackedHeapBlock 0x10006580 return pointers and
+could be PROVEN via EAX once the original-blob corruption is fixed).
 Since the original writeup, m_PoolAlloc's C was rebuilt and now matches
 234/270 (from 223): the two allocation sites with their distinct literals
 (`m:pool_get_free(tp_m_pool)` for the empty-head path with `*head=block`
@@ -874,6 +911,34 @@ stored first, `m:pool_alloc(tp_m_pool)` for the search-miss path with
 The only remaining delta is the found-path memset block (offset 0x10006df7
 on), still the unreproducible alignment-prelude expansion. ShutdownMemoryAllocator
 (0x10006c00) is no longer blocked — see its section below.
+
+Re-verified 2026-08-27 on the full m_PoolAlloc body (runtime count `asize-4`,
+not a constant):
+- Compiled the identical body with every available image — msvc 4.0/4.1/4.2,
+  5.0/SP1/SP3, 6.0/base+SP1-SP6, 7.0 — all emit byte-identical 248-byte code,
+  zero prelude hits. Same for a /G3 /G4 /G5 /G6 /G7 /GB sweep and a residual
+  flag sweep (/Os /Ot /Oz /Oa /Ow /Og- combinations) on the runtime-count body.
+- ~15 additional C formulations added to the prior ~45: address-taken locals
+  that survive DCE, memory-residency forced via opaque global stores,
+  `volatile` count, `unsigned` count, byte and dword zero loops
+  (`for(j...) slot[j]=0`, `while(n--)`, `while(n>=4){*(int*)p=0;...}`),
+  `block->size-4` field count, inlined static wrapper — all still the plain
+  `shr ecx,2; rep stosd; and ecx,3; rep stosb` form (or `call memset`).
+- Target-wide scan: the prelude template (`lea r,[edi+edi*2]; and r,3;
+  sub ebx,ecx; jle; rep stosb; ...; rep stosd; ...; rep stosb`) occurs at
+  exactly 6 sites — m_AllocTracked 0x10006730, InitPacketPool 0x10006929,
+  m_PoolAlloc 0x10006e0d, ReadVfsData 0x10008f0c (a **memcpy** variant:
+  `rep movsb/movsd`, src in esi), InitBuildingTypeTable 0x1000b057,
+  gm_AllocGebaeude 0x10017611 — all in Finding-19-blocked functions. The
+  plain form occurs at independent sites (zlib deflate/lm_init,
+  AllocGraveyardField, setSBUpLow). Both forms coexist in ONE binary.
+- Structural discriminator: plain-form sites materialize the count freshly
+  into the volatile ecx (`mov eax,[g]; lea ecx,[eax+eax*4]; ...` in
+  AllocGraveyardField); aligned-form sites load the count from a stack slot
+  into ebx with dest in edi. msvc6 SP6 always keeps runtime counts in ecx —
+  fresh or reloaded — so no C shape can steer it onto the ebx/memory path.
+  The original build's compiler variant (service-pack/custom-build codegen)
+  remains the suspect. Ceiling for proper C confirmed at 234/270.
 
 ## lb_ExPlayerlist (0x100145e0) — DONE (struct-for-layout + auto-zero + tail layout)
 
@@ -1682,9 +1747,10 @@ the dest-aligned prelude (flags&0x20 hoisted to dl, zstrm ptr spilled to
 [ebp-0xc], frame 0x10c), while msvc6 SP6 emits only the plain
 `shr ecx,2; rep movsd; and ecx,3; rep movsb` from any C shape (~60 whole-
 function variants; template absent from the SP6 C1/C1XX/C2 binaries).
-Resolved with the same `#ifdef REBREW_ALLOW_NAKED` exact-bytes `_emit`
-fence (`rebrew asm --inline-c`): EXACT 472/472, C kept in the `#else`
-fallback for `rebrew prove`.
+Resolved via `rebrew prove` (2026-08-27): SIZE_MISMATCH → PROVEN (EAX
+equivalence, 2+2 states).  The earlier exact-bytes `_emit` fence that
+reached EXACT 472/472 was reverted (goal constraint: inline asm only for
+1-5 byte padding), so the symbolic-proof path stands.
 
 ## Finding 20 — m_FreeTracked (0x10006820): transient-register alternation (185/188)
 

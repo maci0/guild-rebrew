@@ -205,7 +205,20 @@ void __cdecl LogWinsockError(int err_code)
  * compiles to 334B (261/372 matching); everything after the memset
  * (loop + 42 constant stores with their mov al,N grouping) is
  * byte-identical. See docs/msvc6-allocator.md "m_PoolAlloc /
- * InitBuildingTypeTable — blocked (alignment-prefixed memset)". */
+ * InitBuildingTypeTable — blocked (alignment-prefixed memset)".
+ *
+ * Re-verified 2026-08-27: ~130 further probes (base 6.0 + SP1-SP6 ×
+ * /Og- /Oi /Oy- /O1 /Ox /G6, param-operand and struct-copy memsets,
+ * volatile/address-taken counts and dests, full-function bodies through
+ * `rebrew test`) confirm 261/372 / 334B is the ceiling — every variant
+ * compiles to the plain dword+tail memset. The prelude appears in the
+ * target only when the count is memory-resident; msvc6's inliner emits
+ * the plain form for any C shape. `rebrew prove` cannot substitute:
+ * the function is void, so EAX at `ret` is unspecified junk that differs
+ * between the two compiles (prove compares EAX), and a memory-side-effect
+ * proof would need 252 watched VAs; additionally, prove's reloc
+ * neutralisation writes compiled-blob reloc offsets into the original
+ * blob, corrupting it when the layouts differ (334 vs 372B). */
 
 extern char g_office_slots[];
 
