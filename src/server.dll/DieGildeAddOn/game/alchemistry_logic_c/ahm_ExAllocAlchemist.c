@@ -44,7 +44,7 @@ typedef struct {
  * building's alchemy data block (record->0x65). Returns the slot index or
  * 0xffff on failure. */
 
-unsigned short __cdecl ahm_ExAllocAlchemist(int cmd_payload)
+unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 {
 	void* dynamic;
 	int building_type;
@@ -70,7 +70,7 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	building_type = (unsigned char) *(char*) dynamic;
 	if (*((char*) (g_entity_type_table + building_type + building_type * 0x24c)) != 0x1e) {
 		LogMessageInternal((char*) 0x1002a10c, 0x451, (char*) 0x1002a168, 1);
-		return 0xffff;
+		goto ret_false;
 	}
 
 	for (slot_index = 0; slot_index < 0x300; slot_index++) {
@@ -84,29 +84,32 @@ unsigned short __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		}
 		if (slot_index == 0x300) {
 			LogMessageInternal((char*) 0x1002a10c, 0x45d, (char*) 0x1002a140, 1);
+			ret_false:
 			return 0xffff;
 		}
 	}
 
-found_slot:
 	if (*(char*) (0x100358a2 + slot_index * 0x21c) == 0xf) {
 		g_citizen_count = g_citizen_count - 1;
 	}
 
 	memset((void*) (0x100358a0 + slot_index * 0x21c), 0, 0x21c);
-	*(unsigned short*) (0x100358a0 + slot_index * 0x21c) = 0xffff;
 	*(int*) (0x100358a4 + slot_index * 0x21c) = -1;
+	/* volatile: keeps this store alive past the slot[0] = slot_index
+	 * write below (the reference keeps both stores; a plain store is
+	 * dead-store-eliminated by MSVC6 here). */
+	*(volatile unsigned short*) (0x100358a0 + slot_index * 0x21c) = 0xffff;
 	memset((void*) (0x100358fc + slot_index * 0x21c), -1, 0x20);
 
 	slot = (char*) (0x100358a0 + slot_index * 0x21c);
 
 	g_citizen_count = g_citizen_count + 1;
-	*(volatile unsigned short*) slot = (unsigned short) slot_index;
-	*(int*) (slot + 0x170) = (int) dynamic;
-	*(int*) (slot + 0x16c) = (int) dynamic;
+	*(unsigned short*) (0x100358a0 + slot_index * 0x21c) = (unsigned short) slot_index;
 	*(char*) (slot + 2) = 0;
 	*(int*) (slot + 4) = g_next_object_id;
 	g_next_object_id = g_next_object_id + 1;
+	*(int*) (slot + 0x170) = (int) dynamic;
+	*(int*) (slot + 0x16c) = (int) dynamic;
 
 	*(int*) (slot + 0x1f0) = 0;
 	*(int*) (slot + 0x210) = -1;
@@ -128,8 +131,14 @@ found_slot:
 	*(int*) (slot + 0x20c) = -1;
 	*(unsigned short*) (slot + 0x50) = 0x7fff;
 
-	for (i = 0; i < 5; i = i + 1) {
+	/* While-form of the 5-iteration fill: the top-tested loop shape
+	 * (rather than a for) is what keeps the reference's register
+	 * allocation downstream. */
+	i = 0;
+	while (1) {
+		if (!(i < 5)) break;
 		*(char*) (slot + i + 0x80) = (char) (gm_RandomMod(0x40) + 0x54);
+		i += 1;
 	}
 	*(char*) (slot + 9) = 0;
 
@@ -142,40 +151,38 @@ found_slot:
 	}
 	*(int*) (slot + 0x20) = 0x41400000;
 
-	{
-		float base = *(float*) (slot + 0x1c) * *(float*) 0x100256bc;
-		rand_value = _ftol();
-		(void) base;
-	}
+	rand_value = (int) (*(float*) 0x100256bc * *(float*) (slot + 0x1c));
 	rand_value = (unsigned short) gm_RandomMod(rand_value);
 
 	{
 		float v = (float) rand_value;
 		*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
-		*(float*) (slot + 0x10) = v + *(float*) (slot + 0x1c) * *(float*) 0x100256b8 -
-			*(float*) (slot + 0x1c) * *(float*) 0x100256b4;
+		*(float*) (slot + 0x10) = v + *(float*) 0x100256b8 * *(float*) (slot + 0x1c) -
+			*(float*) 0x100256b4 * *(float*) (slot + 0x1c);
 	}
 
 	rand_iter = 0;
-	for (i = 0; i < 0x300; i = i + 1) {
+	i = 0;
+	do {
 		unsigned short btype;
 		int rnd1;
 		int rnd2;
 		int base_off;
 
-		btype = *(volatile unsigned short*) slot;
-		rnd1 = gm_RandomMod(0x40) - 0x20;
+		btype = *(unsigned short*) (0x100358a0 + slot_index * 0x21c);
 		base_off = btype + rand_iter;
+		rnd1 = gm_RandomMod(0x40) - 0x20;
 		*(char*) (base_off + 0x100a9820) = (char) rnd1;
 		*(char*) (base_off + 0x1014d8e0) = 0;
 
-		btype = *(volatile unsigned short*) slot;
-		rnd2 = gm_RandomMod(0x40) - 0x20;
+		btype = *(unsigned short*) (0x100358a0 + slot_index * 0x21c);
 		base_off = btype * 0x300 + i;
+		rnd2 = gm_RandomMod(0x40) - 0x20;
 		*(char*) (base_off + 0x100a9820) = (char) rnd2;
 		*(char*) (base_off + 0x1014d8e0) = 0;
+		i = i + 1;
 		rand_iter = rand_iter + 0x300;
-	}
+	} while (rand_iter < 0x90000);
 
 	if (*(int*) ((char*) dynamic + 0x65) == 0) {
 		*(int*) ((char*) dynamic + 0x65) = (int) m_AllocTracked(0x3c, (char*) 0x1002a0f8);
@@ -184,10 +191,12 @@ found_slot:
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);
 	memset((void*) alch_data_ptr, 0, 0x3c);
 
+	/* alch_props read hoisted ahead of the slot-id store below: MSVC6's
+	 * allocation matches the reference only in this statement order. */
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);
-	*(int*) alch_data_ptr = *(int*) (slot + 4);
-
 	alch_props = (unsigned char) *(char*) (cmd_payload + 0xf);
+
+	*(int*) alch_data_ptr = *(int*) (slot + 4);
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);
 	*(float*) (alch_data_ptr + 4) =
 		((float) alch_props * *(float*) 0x100256ac + *(float*) 0x100256a0) * *(float*) 0x100256b0;

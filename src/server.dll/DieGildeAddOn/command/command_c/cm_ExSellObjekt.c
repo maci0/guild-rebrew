@@ -51,6 +51,15 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * order/registers cascade through ~650 structural diffs — best-effort
  * 229/2057 bytes (docs/msvc6-allocator.md GRA class).
  *
+ * Rechecked 2026-08-27: the call inventory matches the reference 31/31,
+ * so the 62-byte deficit is pure codegen (no missing block).  Variants
+ * tried and rejected: g_current_season int (1991B/208), unused pad locals
+ * (eliminated), declaration reordering (no change), /O1 (1716B/205) and
+ * /Ox (2049B/263 — more hits but still 8B short and a different global
+ * allocation; the project's matching functions are /O2-dominated).  No
+ * flag or formulation shifts the zero-store register off ebx to the
+ * reference's edi; /O2 /Gd stays the best committed state.
+ *
  * The dest-resolution call passes its out-params in the reference's
  * register order: gm_ResolveEntityById(&dest_dynamic_entity,
  * &dest_existing_entity, &source_static_entity, ...) — the second branch

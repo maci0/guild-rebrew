@@ -222,9 +222,9 @@ analysis = "Ingress parser boundary for per-player receive buffer. Validation be
 
 ["SERVER.0x1000a570"]
 size = 750
-status = "SIZE_MISMATCH"
+status = "STUB"
 analysis = "Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09)."
-cflags = "/O2 /Gd"
+cflags = "/O2 /Gd /Ot"
 
 ["SERVER.0x1000a860"]
 size = 131
@@ -326,6 +326,8 @@ size = 1002
 status = "SIZE_MISMATCH"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
+blocker = "grid-loop strength reduction: MSVC6 LICM folds the in-loop btype reload into a base-pointer loop (reference recomputes addresses per iteration, rand_iter-bound, i in ret-slot); found_slot register/scheduling fixed points (g_citizen_count in edi vs ecx, cmd_payload load timing). Best clean state 989/1002 bytes, 408 byte-match, CFG+frame matched; semantically verified (original 124/1021)."
+blocker_delta = 700
 
 ["SERVER.0x1000c1e0"]
 size = 160
