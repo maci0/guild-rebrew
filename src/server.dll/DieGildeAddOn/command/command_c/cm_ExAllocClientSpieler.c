@@ -11,13 +11,19 @@ char* __cdecl strncpy(char*, const char*, unsigned int);
  * Similar to cm_ExAllocSpieler but for client-connected players,
  * updating player slot flags and setting connection state.
  *
- * Conversion state: pure C (naked wrapper removed).  The head diverges
- * on MSVC6 register allocation: the reference keeps cmd in edi, entity
- * in esi and materializes the `result ? 6 : 7` first arg first in eax
- * (`mov ebx,[esp+0x18]; mov eax,ebx; neg eax; sbb eax,eax; add eax,7`);
- * every C formulation allocates cmd→esi/entity→edi and computes the
- * conditional last in ecx — best-effort 142/361
- * (docs/msvc6-allocator.md GRA class). */
+ * Conversion state: pure C (naked wrapper removed).  The tail now
+ * matches — keeping the entity slot as an explicit `off` and folding
+ * the g_static_entity_table base into each access reproduces the
+ * reference's `lea esi,[eax+eax*8]; shl esi,2` offset form
+ * (previously the full address was materialized, 26B shorter).
+ * Remaining deltas are allocator/scheduling fixed-points: the
+ * reference keeps cmd in edi (esi here) and materializes the
+ * `result ? 6 : 7` first arg first in eax (`mov ebx,[esp+0x18];
+ * mov eax,ebx; neg eax; sbb eax,eax; add eax,7`) while MSVC6 8168
+ * computes it last in ecx, and the reference hoists the strncpy
+ * arg leas into the rec computation (docs/msvc6-allocator.md GRA
+ * class).  SIZE 361/361, NEAR_MATCHING — prove path-explodes on
+ * the original side (gm_CreateEntityFromParents loop). */
 
 
 
@@ -26,10 +32,10 @@ char* __cdecl strncpy(char*, const char*, unsigned int);
 int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 {
 	unsigned int entity;
-	char* rec;
 	short* t;
 	char* r2;
 	int f;
+	int off;
 
 	{
 		char* c = (char*) cmd;
@@ -48,25 +54,25 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 		return 1;
 	}
 	LogMessageInternal((char*)0x1002c748, 0x2917, (char*)0x1002cbbc, 1);
-	rec = (char*)g_static_entity_table_358a0 + entity * 0x21c;
+	off = entity * 0x21c;
 	f = 0x99099 * (unsigned char)*(char*)(cmd + 3);
-	*(int*)(0x10442d00 + f * 4) = *(int*)(rec + 4);
-	strncpy(rec + 0x30, (char*)cmd + 0x25, 0x10);
-	t = gm_GetEntityTableEntry(rec);
+	*(int*)(0x10442d00 + f * 4) = *(int*)(g_static_entity_table_358a0 + off + 4);
+	strncpy(g_static_entity_table_358a0 + off + 0x30, (char*)cmd + 0x25, 0x10);
+	t = gm_GetEntityTableEntry(g_static_entity_table_358a0 + off);
 	if (t != 0) {
-		*(unsigned short*)t = *(unsigned short*)(rec + 0x50);
+		*(unsigned short*)t = *(unsigned short*)(g_static_entity_table_358a0 + off + 0x50);
 		strncpy((char*)t + 2, (char*)cmd + 0x35, 0x10);
-		strncpy(rec + 0x40, (char*)cmd + 0x35, 0x10);
-		r2 = (char*)gm_LookupEntityRecordById(*(int*)(rec + 0x60));
+		strncpy(g_static_entity_table_358a0 + off + 0x40, (char*)cmd + 0x35, 0x10);
+		r2 = (char*)gm_LookupEntityRecordById(*(int*)(g_static_entity_table_358a0 + off + 0x60));
 		if (r2 != 0)
 			strncpy(r2 + 0x40, (char*)cmd + 0x35, 0x10);
 	}
-	*(int*)(rec + 0x54) = *(int*)(cmd + 0x1f);
-	*(unsigned char*)(rec + 0xc) = *(unsigned char*)(cmd + 0x24);
+	*(int*)(g_static_entity_table_358a0 + off + 0x54) = *(int*)(cmd + 0x1f);
+	*(unsigned char*)(g_static_entity_table_358a0 + off + 0xc) = *(unsigned char*)(cmd + 0x24);
 	if (result != (char*)0) {
 		result[0] = 1;
 		result[1] = 1;
-		*(char**)(result + 6) = rec;
+		*(char**)(result + 6) = g_static_entity_table_358a0 + off;
 	}
 	return 0;
 }

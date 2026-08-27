@@ -10,16 +10,14 @@ extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
  * field descriptors (kind/value-count/offset) and adds each value
  * sequence to the entity's memory at the given sizes (1/2/4).
  *
- * Byte-match note: same Finding 7-family allocator fixed-point (docs/
- * msvc6-allocator.md Finding 38) — the reference keeps the base in ebp
- * and the pre-loop field store folds as `mov [ebp+0x10],esi`; every C
- * shape materializes `lea esi,[eax+0x10]` and needs an extra
- * callee-saved register.  The head, calls and selection match
- * structurally, and all three add-to-memory inner loops match
- * byte-for-byte once the value count `n` is declared unsigned (the
- * reference's `test/jbe` guard is unsigned).  The loop register
- * pairing ({count,offset,dst}->ecx, src->eax in the reference) stays
- * swapped in every formulation. */
+ * Byte-match note: PROVEN via rebrew prove.  The head now matches
+ * the reference's resolved out-param pattern (separate `resolved`
+ * variable keeps cmd in the base register and folds the pre-resolve
+ * field store `mov [ebp+0x10],esi`), closing the Finding 38
+ * fixed-point.  The three add-to-memory loops still swap register
+ * roles with the reference ({count,offset,dst}->ecx, src->eax there;
+ * reversed here) — a pure allocator cascade, so the function is
+ * PROVEN rather than RELOC. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000e7d0
@@ -30,6 +28,7 @@ int __cdecl cm_ExChangeAttribute(int cmd, char* result)
 {
 	void* pv8;
 	void* pv4;
+	int resolved;
 	char* entity;
 	char* src;
 	char* dst2;
@@ -43,15 +42,15 @@ int __cdecl cm_ExChangeAttribute(int cmd, char* result)
 
 	base = cmd;
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
-	ok = gm_ResolveEntityById((void**) &cmd, &pv8, &pv4, field);
+	ok = gm_ResolveEntityById((void**) &resolved, &pv8, &pv4, field);
 	if (ok == 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x31f7,
 		                   s_cm_ExChangeAttribute___Invalid_I_1002d0b0, 1);
 		return 1;
 	}
 	*(int*) (base + 0x10) = field;
-	if (cmd != 0)
-		entity = (char*) cmd;
+	if (resolved != 0)
+		entity = (char*) resolved;
 	else if (pv8 != 0)
 		entity = (char*) pv8;
 	else

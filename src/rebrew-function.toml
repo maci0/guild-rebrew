@@ -456,7 +456,7 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x1000d570"]
 size = 361
-status = "SIZE_MISMATCH"
+status = "NEAR_MATCHING"
 cflags = "/O2 /Gd"
 
 ["SERVER.0x1000d6e0"]
@@ -503,7 +503,7 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x1000e7d0"]
 size = 256
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000e8d0"]
@@ -513,17 +513,17 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000e9c0"]
 size = 214
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd"
 
 ["SERVER.0x1000eaa0"]
 size = 208
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd"
 
 ["SERVER.0x1000eb70"]
 size = 144
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000ec00"]

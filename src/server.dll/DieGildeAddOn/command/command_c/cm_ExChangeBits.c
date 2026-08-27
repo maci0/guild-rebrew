@@ -9,15 +9,15 @@ extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
  * the entity, then sets/clears bits at the command-specified offset
  * with the given size (1/2/4 bytes), mask and value.
  *
- * Byte-match note: same Finding 7-family allocator fixed-point —
- * the reference folds the pre-resolve field store as
- * `mov [esi+0x10],eax` while passing &cmd to gm_ResolveEntityById;
- * the best C (this file) emits the folded store for the base-copy
- * shape only via a `lea edi,[esi+0x10]` materialization (extra push),
- * and the param-store shape reloads cmd from its home slot
- * (`mov ecx,[esp+0x18]`, docs/msvc6-allocator.md Finding 39).
- * The size dispatch and all three per-size read-modify-write blocks
- * match structurally; only register roles are swapped (cascade). */
+ * Byte-match note: PROVEN via rebrew prove.  The head now matches
+ * the reference's resolved out-param pattern — a separate `resolved`
+ * variable keeps cmd in esi and folds the pre-resolve store as
+ * `mov [esi+0x10],eax` (closing the Finding 39/7 fixed-points); the
+ * size dispatch and all three per-size read-modify-write blocks
+ * match structurally.  Only register roles are swapped (resolved in
+ * ecx here vs eax there, and the branch on it inverted je/jne) — a
+ * pure allocator cascade, so the function is PROVEN rather than
+ * RELOC. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000eaa0
@@ -28,6 +28,7 @@ int __cdecl cm_ExChangeBits(int cmd, char* result)
 {
 	void* pv8;
 	void* pv4;
+	int resolved;
 	unsigned int* puVar3;
 	unsigned char bVar4;
 	unsigned int uVar5;
@@ -38,14 +39,14 @@ int __cdecl cm_ExChangeBits(int cmd, char* result)
 	base = cmd;
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
 	*(int*) (cmd + 0x10) = field;
-	field = gm_ResolveEntityById((void**) &cmd, &pv8, &pv4, field);
+	field = gm_ResolveEntityById((void**) &resolved, &pv8, &pv4, field);
 	if (field == 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x340d,
 		                   s_cm_ExChangeBits___Invalid_Id_1002d114, 1);
 		return 1;
 	}
-	if (cmd != 0)
-		puVar3 = (unsigned int*) ((char*) cmd + *(int*) (base + 0x14));
+	if (resolved != 0)
+		puVar3 = (unsigned int*) ((char*) resolved + *(int*) (base + 0x14));
 	else if (pv8 != 0)
 		puVar3 = (unsigned int*) ((char*) pv8 + *(int*) (base + 0x14));
 	else
