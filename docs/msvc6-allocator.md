@@ -2393,10 +2393,11 @@ so the reference's single pre-dispatch `mov eax,[esi+0x1c]` /
 
 ## Finding 51 — m_AllocTracked (0x10006580): frame + zero-register fixed point
 
-Blocked; best config `/O2 /Gd /G6 /Oy-` (msvc600sp6) matches 184/658 instr
-bytes (obj 631 vs target 658, 25 relocs).  The C body is the best proper-C
-shape (list walk, inline strcmp/strcpy, slot fill, stat updates all
-structurally correct); the size and byte gaps are two allocator fixed
+Byte-blocked; best config `/O2 /Gd /G6 /Oy-` (msvc600sp6) matches 184/658
+instr bytes (obj 631 vs target 658, 25 relocs).  **Semantically PROVEN**
+(`rebrew prove`, 2026-08-27): the C body is a faithful reconstruction (list
+walk, inline strcmp/strcpy, slot fill, stat updates, all five string
+literals byte-identical); the size and byte gaps are two allocator fixed
 points:
 
 1. **frame + zero register never coexist.**  The reference opens with
@@ -2426,3 +2427,16 @@ drops the frame and 54 matched bytes (130/666).  A `rebrew test` run with
 `--cflags "/O2 /Gd /G6 /Oy-"` persists the per-function metadata; the
 generic `--fix-blocker` write currently crashes with an AttributeError
 (`SimpleNamespace` has no `metadata_dir`) and was not used.
+
+**Prove note (2026-08-27).**  The first `rebrew prove` runs reported a
+counterexample (`EAX=2179763029 vs 0`) that turned out to be an artifact of
+the prover's reloc patching, not a real semantic difference: `prove.py`
+patched the original blob at the *compiled* blob's reloc offsets, and with
+the layouts diverging (631 vs 658 bytes) the `_ReportFatalError` displacement
+landed inside the target's `push 0x10028888` / `call ReportFatalError`
+sequence, so the `g_array_ptr==0` fatal path returned the unconstrained stub
+value instead of 0.  The fix (order-paired call-site stubbing in
+`prove_equivalence`, with an offset-based fallback when the two blobs' call
+counts differ) lets `rebrew prove` establish equivalence; STATUS is now
+PROVEN.  The byte gap remains a codegen fixed point, so PROVEN — not
+EXACT/RELOC — is the terminal status for this function.

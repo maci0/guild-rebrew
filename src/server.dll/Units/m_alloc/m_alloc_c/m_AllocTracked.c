@@ -30,6 +30,8 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 // (docs/msvc6-allocator.md Finding 51).  The residual size gap is the
 // alignment-pass inline memset (lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx)
 // — same Finding 19 blocker as InitPacketPool / m_PoolAlloc.
+// STATUS: PROVEN (rebrew prove, 2026-08-27) — semantically equivalent; the
+// byte gap is a codegen fixed point, so PROVEN is the terminal status.
 
 struct GroupNode {
 	char name[0x10];
