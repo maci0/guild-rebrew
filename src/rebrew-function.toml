@@ -155,7 +155,7 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x10008e40"]
 size = 472
-status = "EXACT"
+status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd /Oy- /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10009020"]
@@ -328,8 +328,8 @@ size = 1002
 status = "SIZE_MISMATCH"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
-blocker = "grid-loop strength reduction: MSVC6 LICM folds the in-loop btype reload into a base-pointer loop (reference recomputes addresses per iteration, rand_iter-bound, i in ret-slot); found_slot register/scheduling fixed points (g_citizen_count in edi vs ecx, cmd_payload load timing). Best clean state 989/1002 bytes, 408 byte-match, CFG+frame matched; semantically verified (original 124/1021)."
-blocker_delta = 700
+blocker = "Grid-loop LICM/strength-reduction fixed point: MSVC6 hoists the in-loop btype reload and converts base_off into advancing pointers + down-counter (reference recomputes addresses per iteration, rand_iter-bound, i in ret-slot). Reached the reference loop shape (cmp edi,0x90000/jl bottom test, per-iter lea chains) by inlining grid addresses (no base_off variable) — best 1001/1002 bytes, 392 byte-match (v21: inline loop + f_tmp FPU operand-order fix); the ebx=i register cascade costs 16-56 match bytes (push 0 vs push ebx prologue, immediate vs bl stores). volatile btype forces the in-loop reload but cascades worse (997 obj, 210-348 match). GA (25x16) found only semantically-inverted score gains; rejected. Best clean state remains 989/1002, 408 byte-match, CFG+frame matched; semantically verified."
+blocker_delta = 594
 
 ["SERVER.0x1000c1e0"]
 size = 160
@@ -484,10 +484,8 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x1000e140"]
 size = 993
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/Ox /Gd"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, zero-extend pattern (xor vs mov)"
-blocker_delta = 638
 
 ["SERVER.0x1000e530"]
 size = 352
