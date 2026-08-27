@@ -75,7 +75,30 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * register order: gm_ResolveEntityById(&dest_dynamic_entity,
  * &dest_existing_entity, &source_static_entity, ...) — the second branch
  * of the dest block then re-checks the SOURCE's shared dynamic/existing
- * slot (resolved_dynamic), which the dest call no longer overwrites. */
+ * slot (resolved_dynamic), which the dest call no longer overwrites.
+ *
+ * Size-gap analysis 2026-08-27 (obj 2056 vs target 2057): the ONE byte is
+ * NOT a single missing byte — an instruction-level alignment shows ~50
+ * scattered ±1..±13-byte deltas summing to -1.  The frame gap (0x228 vs
+ * 0x224) does not contribute to the total (the sub/add esp immediates are
+ * the same length); the deltas are the tail-merge shape (candidate inlines
+ * the two error tails; reference shares one tail at 0x1000e00e), the
+ * case-block order, and the register-role cascade.
+ *
+ * Fresh lever sweep (new this session): declaration order is fully inert
+ * (5 permutations → byte-identical); init-STATEMENT order does reorder the
+ * zero-stores (verified via 4 permutations) but never flips the store
+ * register; container_ptr zero-init / extra zeroed slot local / temp
+ * elimination (direct source_container_ptr assignment, 2068B) / decl-
+ * initializer form (2033B) all fail.  Reference head has dead `xor ebx,ebx`
+ * + `xor ebp,ebp` beside the edi stores — the reference zero-initialized
+ * container_ptr (ebx) and source_owner_entity (ebp) as REGISTER variables
+ * while the 9 slot locals zero through edi; every C shape materializes the
+ * slot-zero in ebx instead (roles: ref ebx=source_container /
+ * edi=dest_container+dest_owner_entity+zero; cand edi=both containers /
+ * ebx=dest_owner_entity+zero).  Flags re-confirmed: /G5 /G6 /GB /Og /Oi-
+ * /Ob0 /O1 /Ox /Oy- do not flip it.  /O2 /Gd stays the best committed
+ * state (261 raw / 392 reloc-masked bytes). */
 
 
 // CFLAGS: /O2 /Gd

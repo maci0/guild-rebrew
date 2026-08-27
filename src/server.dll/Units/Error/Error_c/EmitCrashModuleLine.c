@@ -13,20 +13,33 @@
 // match) are a single MSVC6 register-allocation cascade, same class as
 // ValidateAndAssignOffice (docs/msvc6-allocator.md):
 //  - found block: the tbuf byte temps land in CL instead of AL (a0-moffs form
-//    missing), so the first dword temp takes EAX (a1) instead of ECX;
+//    missing), so the first dword temp takes EAX (a1) instead of ECX; the
+//    reference keeps the byte loads in AL (a0) and the dword loads in ECX
+//    (8b 0d), with the st4 load after the d2c load (reference load order
+//    b38, d34, b30, d2c, st4, flag and deferred stores);
 //  - the extra=0 store is hoisted to the top of the found block and `extra` is
 //    homed in the dead arg slot [esp+0x30]; the reference keeps it at
 //    [esp+0x14] immediately before the first branch;
-//  - frame slots: ours = written@0x10, sp@0x18, linebuf coalesced into
-//    tbuf@0x1c, extra@arg slot; reference = linebuf@0x10, extra@0x14,
-//    written@0x18, tbuf@0x1c, sp spilled as a word to the arg slot;
+//  - frame slots (from raw binary bytes — `rebrew asm` mis-decodes
+//    `88 44 24 28`/`8b 46 10` here): ours = written@0x10, linebuf@0x14,
+//    sp@0x18 (dword store), tbuf@0x1c, extra@arg slot; reference =
+//    linebuf@0x10, extra@0x14, written@0x18, tbuf@0x1c, sp spilled as a
+//    word to the arg slot; linebuf is NOT coalesced into tbuf;
 //  - tail: linebuf word/byte stores are emitted right after their loads (ref:
 //    deferred into the `if (extra)` branch shadow); sp stored as a dword (ref:
 //    word).
-// NOT steerable from C: 70+ formulations (declaration orders, statement
-// orders, types incl. volatile/register, struct overlays, loop forms, tail
-// reorders, dependency-forcing expressions) all compile byte-identical, and
-// the GA (50 generations) found no register-allocation gains.
+// NOT steerable from C: the header register allocation and the frame-slot
+// order are locked — this session re-tested ~55 formulations (declaration
+// orders, all found-block statement permutations incl. the reference load
+// order, byte/char/unsigned-char/int/volatile types, array vs pointer
+// indexing, struct packing, loop forms, if(0) block reordering, extra as
+// initializer/per-path/volatile) on top of the earlier 70+, and none moved
+// the match off 183/376; the quick flag sweep (20 combos) scores all
+// identical, /G3-G6 /GB /O1 /Os /Ot /Ox change nothing useful, and the
+// SP0 (12.00.8168) and SP6 (12.00.8804) toolchains emit byte-identical
+// code.  The GA (50 generations) found no register-allocation gains.
+// `rebrew prove` is gated on NEAR_MATCHING/SIZE_MISMATCH and rejects this
+// STUB (183/376 < 60% threshold); the match cannot be driven up from C.
 
 #include <string.h>
 #include <windows.h>

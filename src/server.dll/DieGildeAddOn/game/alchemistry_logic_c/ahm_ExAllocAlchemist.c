@@ -167,16 +167,17 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 			*(float*) (slot + 0x1c) * *(float*) 0x100256b4;
 	}
 
-	/* GRA fixed point: the base_off formulation strength-reduces this
-	 * loop to advancing pointers + a down-counter (989 obj), which is
-	 * what keeps the ebx=0 zero-register prologue (push ebx / cmp eax,ebx)
-	 * intact. Inlining the grid addresses instead reproduces the
-	 * reference loop shape (cmp edi,0x90000/jl bottom test, per-iter lea
-	 * chains) but costs the prologue (push 0 / dynamic in ebx; 1000 obj,
-	 * 364 match). The two are mutually exclusive under msvc6 /O2; 989/417
-	 * is the best reachable state (see blocker note). */
+	/* The grid loop reuses rand_value as the +1 index counter, matching the
+	 * reference: rand_value is zeroed (mov [esp+0x14], ebx) after the
+	 * slot[0x10] float math, then lives in that same stack slot for the
+	 * second grid index (loaded before the second gm_RandomMod call, reloaded
+	 * and incremented after it; the counter is never read after the loop).
+	 * NOTE (verified 2026-08-27): this formulation still strength-reduces
+	 * under msvc6 /O2 (989 obj, 417 match) — reusing the spilled slot does
+	 * NOT pin the allocator to the reference's per-iteration lea chains. The
+	 * fixed point is documented in the metadata blocker. */
+	rand_value = 0;
 	rand_iter = 0;
-	i = 0;
 	do {
 		unsigned short btype;
 		int rnd1;
@@ -190,11 +191,11 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		*(char*) (base_off + 0x1014d8e0) = 0;
 
 		btype = *(unsigned short*) (0x100358a0 + slot_index * 0x21c);
-		base_off = btype * 0x300 + i;
+		base_off = btype * 0x300 + rand_value;
 		rnd2 = gm_RandomMod(0x40) - 0x20;
 		*(char*) (base_off + 0x100a9820) = (char) rnd2;
 		*(char*) (base_off + 0x1014d8e0) = 0;
-		i = i + 1;
+		rand_value = rand_value + 1;
 		rand_iter = rand_iter + 0x300;
 	} while (rand_iter < 0x90000);
 
