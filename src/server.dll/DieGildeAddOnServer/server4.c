@@ -191,9 +191,21 @@ void __cdecl LogWinsockError(int err_code)
 	}
 }
 
-/* Initializes the building type lookup table. Loads building
- * definitions (costs, capacities, upgrade paths) from game
- * data into the runtime type table. */
+/* Initializes the building type lookup table (42 entries, 0x18 bytes
+ * each, base g_office_slots = 0x101de5a0). Zeroes the table, stamps
+ * id=i / unk=-1 / unk2=-1 per entry, then assigns each entry's type code
+ * (bytes at +0x8) from the 1,1,2,3,4,4,5,6,7,7,... sequence.
+ *
+ * BLOCKED: the target's leading memset uses the dest-alignment prelude
+ * (lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx; jle; rep stosb/stosd/
+ * stosb) with the count spilled to [ebp-4] and an ebp frame. No C
+ * formulation or flag/toolchain combination (msvc4.0-7.0, SP1-SP6, ~45
+ * shapes, 96-flag sweep) reproduces it — msvc6 always emits
+ * `mov ecx,0xfc; rep stosd` for the constant count, so the function
+ * compiles to 334B (261/372 matching); everything after the memset
+ * (loop + 42 constant stores with their mov al,N grouping) is
+ * byte-identical. See docs/msvc6-allocator.md "m_PoolAlloc /
+ * InitBuildingTypeTable — blocked (alignment-prefixed memset)". */
 
 extern char g_office_slots[];
 

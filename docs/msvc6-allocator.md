@@ -846,6 +846,24 @@ a service-pack or custom-build codegen difference; preserved C is in
 m_alloc2.c / server4.c. The rest of both functions (alignment calc, node
 search, slot scan, and InitBuildingTypeTable's loop + 42 unrolled constant
 stores with their `mov al,N` value grouping) matches msvc6 `/O2` exactly.
+
+Additional probes (2026-08, InitBuildingTypeTable specifically): msvc600sp4
+and msvc600sp5 also emit the plain dword+tail form (SP1-SP6 now all ruled
+out); a 96-combination flag sweep on the full function body (`/O1 /O2 /Ox
+/Od` × `/G5 /G6` × `/Oy-` × `/Oi` × `/Og-`) produced zero alignment-prelude
+hits; ~45 C formulations total were compiled, adding dest-copy locals
+(`char *d = g; memset(d,0,0x3f0)`), pointer-difference counts (`end-start`
+through locals), `sizeof` through pointer-to-array casts, volatile and
+address-taken counts inside the full loop+stores body, inlined-wrapper
+passes (the wrapper inlines but `memset` becomes a `call`), and count
+variables shared with the loop bound — all still `mov ecx,0xfc; rep stosd`
+or `call memset`. The aligned prelude only ever appears in the target when
+the count is a memory-resident runtime value in an ebp-framed function
+(e.g. 0x10006728, 0x10017611), and no leaf-function probe with a constant
+count reproduces either the frame or the prelude. Confirmed: the target's
+`mov [ebp-4],0x3f0; mov ebx,[ebp-4]` spill is the only frame local, and the
+function is a leaf (no calls), so a proper-C match cannot reach 372 bytes
+(ceiling 334B / 261 matched bytes).
 Since the original writeup, m_PoolAlloc's C was rebuilt and now matches
 234/270 (from 223): the two allocation sites with their distinct literals
 (`m:pool_get_free(tp_m_pool)` for the empty-head path with `*head=block`
