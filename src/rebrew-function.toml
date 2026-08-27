@@ -349,7 +349,7 @@ status = "EXACT"
 
 ["SERVER.0x1000c3c0"]
 size = 83
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000c420"]
@@ -391,7 +391,7 @@ status = "EXACT"
 
 ["SERVER.0x1000cb20"]
 size = 171
-status = "SIZE_MISMATCH"
+status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000cbd0"]
@@ -493,7 +493,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000e690"]
 size = 191
-status = "SIZE_MISMATCH"
+status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000e750"]

@@ -164,22 +164,20 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 // SYMBOL: _ahm_ClampFloatValue
 // SIZE: 83
 
-int __cdecl ahm_ClampFloatValue(int arg1, int arg2)
+int __cdecl ahm_ClampFloatValue(float* arg1, float* arg2)
 {
 	float v;
 
-	v = *(float*) (arg1 + 0x10) + *(float*) (arg2 + 4);
+	v = arg1[4] + arg2[1];
 	if (v > g_float_const_cc) {
 		if (v < g_float_const_a0) {
-			*(float*) (arg2 + 4) = v;
-		} else {
-			v = g_float_const_a0;
-			*(float*) (arg2 + 4) = v;
+			arg2[1] = v;
+			return 1;
 		}
-	} else {
-		v = g_float_const_cc;
-		*(float*) (arg2 + 4) = v;
+		arg2[1] = g_float_const_a0;
+		return 1;
 	}
+	arg2[1] = g_float_const_cc;
 	return 1;
 }
 

@@ -31,30 +31,29 @@ int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 {
 	void* pv8;
 	void* pv4;
-	int base;
 	int field;
+	int resolved;
 	int* sum_src;
 
 	(void) result;
 
-	base = cmd;
 	if (*(int*) (cmd + 0x14) == -1) {
 		return 0;
 	}
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
 	*(int*) (cmd + 0x14) = field;
-	if (gm_ResolveEntityById((void**) &cmd, &pv8, &pv4, field) == 0) {
+	if (gm_ResolveEntityById((void**) &resolved, &pv8, &pv4, field) == 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x22f9,
 		                   s_cm_ChkMoveCredits____Invalid__qu_1002c7a4, 1);
 		return 1;
 	}
-	if (cmd != 0)
-		sum_src = (int*) (cmd + 0x5d);
+	if (resolved != 0)
+		sum_src = (int*) (resolved + 0x5d);
 	else if (pv8 != 0)
 		sum_src = (int*) ((char*) pv8 + 0x14);
 	else
 		sum_src = (int*) ((char*) pv4 + 0x178);
-	if (gm_QueryEntitySum(*sum_src, *(unsigned char*) (base + 0x1c)) - *(int*) (base + 0x1d) < 0) {
+	if (gm_QueryEntitySum(*sum_src, *(unsigned char*) (cmd + 0x1c)) - *(int*) (cmd + 0x1d) < 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x231b,
 		                   s_cm_ChkMoveCredits____Not_enough_m_1002c774, 1);
 		return 1;
