@@ -56,7 +56,6 @@ found:
 	*(unsigned char*) (tbuf + 0xc) = *(unsigned char*) 0x10027330;
 	st4 = st[4];
 	*(unsigned int*) (tbuf + 8) = *(unsigned int*) 0x1002732c;
-	sp = *(unsigned short*) 0x10027328;
 	flag = *(char*) 0x1003461c;
 	extra = 0;
 	if (st4 == 0) {
@@ -80,12 +79,15 @@ found:
 	rec = (int*) GetDebugRecordByIndex((char*) mod, (unsigned int) entry[3]);
 	*(unsigned short*) (linebuf + 0) = *(unsigned short*) 0x10027314;
 	*(unsigned char*) (linebuf + 2) = *(unsigned char*) 0x10027316;
+	sp = *(unsigned short*) 0x10027328;
 	if (extra != 0) {
 		WriteFile((HANDLE) st[1], extra, 4, (LPDWORD) &written, 0);
 	}
 	WriteFile((HANDLE) st[1], (char*) entry + 0x10, entry[0] - 1, (LPDWORD) &written, 0);
-	WriteFile((HANDLE) st[1], (char*) &sp, 1, (LPDWORD) &written, 0);
-	WriteFile((HANDLE) st[1], (char*) rec + 4, rec[0] - 1, (LPDWORD) &written, 0);
+	if (rec != 0) {
+		WriteFile((HANDLE) st[1], (char*) &sp, 1, (LPDWORD) &written, 0);
+		WriteFile((HANDLE) st[1], (char*) rec + 4, rec[0] - 1, (LPDWORD) &written, 0);
+	}
 	WriteFile((HANDLE) st[1], linebuf, 2, (LPDWORD) &written, 0);
 	return 1;
 }

@@ -15,7 +15,7 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x10002fc0"]
 size = 376
-status = "SIZE_MISMATCH"
+status = "STUB"
 cflags = "/O2 /Gd"
 blocker = "instruction folding (lea vs mov), loop rotation / branch layout, register allocation, zero-extend pattern (xor vs mov)"
 blocker_delta = 298
