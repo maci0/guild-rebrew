@@ -28,21 +28,21 @@ int __cdecl SpawnGraveyardEntities(void* entity, int count)
 	int spawned;
 
 	type = *(unsigned char*) entity;
-	taddr = (unsigned char*) (type * 0x24c + g_entity_type_table + type);
+	taddr = (unsigned char*) (g_entity_type_table + type + type * 0x24c);
 	if ((*taddr == 0x1d) && (*(taddr + 0x247) >= 1) && (*(taddr + 0x247) <= 3)) {
 		spawned = 0;
 		if (count > 0) {
 			while (spawned < count) {
-			slot = FindSlotEntryFiltered(0, entity, 0, (void*) 0x10010700, 0);
-			if (slot == 0)
-				break;
+				slot = FindSlotEntryFiltered(0, entity, 0, (void*) 0x10010700, 0);
+				if (slot == 0)
+					break;
 			*(int*) *(int*) ((char*) slot + 0x10) = g_next_object_id;
 			g_next_object_id++;
 			*(int*) ((char*) slot + 4) = *(int*) *(int*) ((char*) slot + 0x10);
 			*(unsigned short*) ((char*) slot + 8) = 0x7fff;
-			*(unsigned char*) ((char*) slot + 0xc) = 0xff;
 			*(unsigned short*) ((char*) slot + 0xa) =
 			    (unsigned short) (g_current_year + 5);
+			*(unsigned char*) ((char*) slot + 0xc) = 0xff;
 			for (i = 0; i < 5; i++) {
 				r = gm_RandomMod(8) & 0xffff;
 				*(unsigned char*) (*(int*) ((char*) slot + 0x10) + 0x24 + i) =

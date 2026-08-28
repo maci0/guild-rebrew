@@ -366,10 +366,16 @@ int __cdecl ReceivePacketHeader(unsigned int* conn)
 			cm_ClosePlayerConnection(conn);
 			return -1;
 		}
-		if (n == -1)
-			goto wsa_err;
+		if (n == -1) {
+			err = WSAGetLastError();
+			if (err == 0x2733)
+				return 0;
+			LogWinsockError(err);
+			cm_ClosePlayerConnection(conn);
+			return -1;
+		}
 	} else {
-		n = *(int*) &conn;
+		n = *(volatile int*) &conn;
 	}
 
 	*(unsigned short*) ((char*) conn + 0x14a) = (unsigned short) (*(unsigned short*) ((char*) conn + 0x14a) + n);
@@ -386,24 +392,22 @@ int __cdecl ReceivePacketHeader(unsigned int* conn)
 		cm_ClosePlayerConnection(conn);
 		return -1;
 	}
-	if (n == -1)
-		goto wsa_err;
+	if (n == -1) {
+		err = WSAGetLastError();
+		if (err == 0x2733)
+			return 0;
+		LogWinsockError(err);
+		cm_ClosePlayerConnection(conn);
+		return -1;
+	}
 
 	*(unsigned short*) ((char*) conn + 0x14a) = (unsigned short) (*(unsigned short*) ((char*) conn + 0x14a) + n);
 	*(unsigned int*) ((char*) conn + 0x150) = GetTickCount() + 0x493e0;
 	if (*(unsigned short*) ((char*) conn + 0x14a) == *(unsigned short*) ((char*) conn + 0x19)) {
-		*(unsigned int*) conn = *(unsigned int*) conn | 0x80;
+		*(unsigned int*) conn |= 0x80;
 		*(unsigned short*) ((char*) conn + 0x14a) = 0;
 	}
 	return 0;
-
-wsa_err:
-	err = WSAGetLastError();
-	if (err == 0x2733)
-		return 0;
-	LogWinsockError(err);
-	cm_ClosePlayerConnection(conn);
-	return -1;
 }/* Sends queued data to a client socket. Transmits buffered
  * outgoing packets with retry logic for partial sends. */
 

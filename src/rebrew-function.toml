@@ -210,7 +210,7 @@ analysis = "Shutdown socket (SD_BOTH) | Close socket handle"
 
 ["SERVER.0x1000a340"]
 size = 336
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd"
 
 ["SERVER.0x1000a490"]
@@ -458,6 +458,7 @@ cflags = "/O2 /Gd"
 size = 361
 status = "NEAR_MATCHING"
 cflags = "/O2 /Gd"
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 6039 x 5703 state pairs); EAX=4294967295 vs 0"
 
 ["SERVER.0x1000d6e0"]
 size = 78
@@ -716,6 +717,7 @@ note = "prove: Z3 found a satisfying assignment where EAX differs (checked 18 x 
 ["SERVER.0x10010850"]
 size = 370
 status = "STUB"
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=0 vs 4026531840"
 
 ["SERVER.0x100109d0"]
 size = 832
@@ -724,7 +726,7 @@ toolchain = "msvc600sp6"
 
 ["SERVER.0x10010d10"]
 size = 570
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 
 ["SERVER.0x10010f50"]
 size = 66
@@ -793,7 +795,7 @@ status = "RELOC"
 
 ["SERVER.0x10012470"]
 size = 857
-status = "NEAR_MATCHING"
+status = "PROVEN"
 analysis = "ls_LoadSavegameHeader: Reads versioned savegame header from VFS stream. Allocates 0xE100 temp buffer, reads format version, player count, map name (32 bytes), timestamps, difficulty, player scores (8 entries for version > 0x10033), savegame description (96 bytes). Returns 1 on success, 0 on read failure."
 cflags = "/O2 /Gd"
 

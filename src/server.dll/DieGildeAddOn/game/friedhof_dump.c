@@ -53,6 +53,7 @@ int __cdecl UpgradeGraveyardField(unsigned char* field)
 	int maturity;
 	int level;
 	int count8;
+	int countc;
 	int count10;
 	int i;
 
@@ -80,6 +81,7 @@ int __cdecl UpgradeGraveyardField(unsigned char* field)
 		memcpy(*(void**) (*(char**) ((char*) new_alloc + 0xc) + 0x10),
 		       *(void**) (*(char**) ((char*) old_alloc + 0xc) + 0x10), 0x88 * 4);
 		count8 = 8;
+		countc = 4;
 		count10 = 0;
 	} else {
 		memcpy(*(void**) (*(char**) ((char*) new_alloc + 8) + 0x10),
@@ -89,6 +91,7 @@ int __cdecl UpgradeGraveyardField(unsigned char* field)
 		memcpy(*(void**) (*(char**) ((char*) new_alloc + 0x10) + 0x10),
 		       *(void**) (*(char**) ((char*) old_alloc + 0x10) + 0x10), 0x88 * 4);
 		count8 = 0xc;
+		countc = 6;
 		count10 = 2;
 	}
 	if (((char**) old_alloc)[2] != 0 && count8 > 0) {
@@ -105,8 +108,8 @@ int __cdecl UpgradeGraveyardField(unsigned char* field)
 			    *(unsigned char*) ((char**) ((char**) old_alloc)[2] + i * 0x14 + 0xc);
 		}
 	}
-	if (((char**) old_alloc)[3] != 0 && count10 > 0) {
-		for (i = 0; i < count10; i++) {
+	if (((char**) old_alloc)[3] != 0 && countc > 0) {
+		for (i = 0; i < countc; i++) {
 			*(int*) ((char*) ((char**) new_alloc)[3] + i * 0x14) =
 			    *(int*) ((char*) ((char**) old_alloc)[3] + i * 0x14);
 			*(int*) ((char*) ((char**) new_alloc)[3] + i * 0x14 + 4) =
@@ -117,6 +120,20 @@ int __cdecl UpgradeGraveyardField(unsigned char* field)
 			    *(unsigned short*) ((char*) ((char**) old_alloc)[3] + i * 0x14 + 0xa);
 			*(unsigned char*) ((char*) ((char**) new_alloc)[3] + i * 0x14 + 0xc) =
 			    *(unsigned char*) ((char*) ((char**) old_alloc)[3] + i * 0x14 + 0xc);
+		}
+	}
+	if (((char**) old_alloc)[4] != 0 && count10 > 0) {
+		for (i = 0; i < count10; i++) {
+			*(int*) ((char*) ((char**) new_alloc)[4] + i * 0x14) =
+			    *(int*) ((char*) ((char**) old_alloc)[4] + i * 0x14);
+			*(int*) ((char*) ((char**) new_alloc)[4] + i * 0x14 + 4) =
+			    *(int*) ((char*) ((char**) old_alloc)[4] + i * 0x14 + 4);
+			*(unsigned short*) ((char*) ((char**) new_alloc)[4] + i * 0x14 + 8) =
+			    *(unsigned short*) ((char*) ((char**) old_alloc)[4] + i * 0x14 + 8);
+			*(unsigned short*) ((char*) ((char**) new_alloc)[4] + i * 0x14 + 0xa) =
+			    *(unsigned short*) ((char*) ((char**) old_alloc)[4] + i * 0x14 + 0xa);
+			*(unsigned char*) ((char*) ((char**) new_alloc)[4] + i * 0x14 + 0xc) =
+			    *(unsigned char*) ((char*) ((char**) old_alloc)[4] + i * 0x14 + 0xc);
 		}
 	}
 	((char*) new_alloc)[0x18] = ((char*) old_alloc)[0x18];
