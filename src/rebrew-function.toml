@@ -480,6 +480,7 @@ status = "RELOC"
 size = 2057
 status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd"
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 3 x 17 state pairs); EAX=1 vs 0"
 
 ["SERVER.0x1000e140"]
 size = 993
@@ -528,7 +529,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000ec00"]
 size = 912
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd"
 
 ["SERVER.0x1000ec00".prove_constraints.arg0]
@@ -668,7 +669,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10010140"]
 size = 280
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd"
 
 ["SERVER.0x10010260"]

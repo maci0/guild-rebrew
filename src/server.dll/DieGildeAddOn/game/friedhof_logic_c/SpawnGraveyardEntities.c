@@ -29,14 +29,10 @@ int __cdecl SpawnGraveyardEntities(void* entity, int count)
 
 	type = *(unsigned char*) entity;
 	taddr = (unsigned char*) (type * 0x24c + g_entity_type_table + type);
-	if (*taddr != 0x1d)
-		return 0;
-	if (*(taddr + 0x247) < 1 || *(taddr + 0x247) > 3)
-		return 0;
-
-	spawned = 0;
-	if (count > 0) {
-		do {
+	if ((*taddr == 0x1d) && (*(taddr + 0x247) >= 1) && (*(taddr + 0x247) <= 3)) {
+		spawned = 0;
+		if (count > 0) {
+			while (spawned < count) {
 			slot = FindSlotEntryFiltered(0, entity, 0, (void*) 0x10010700, 0);
 			if (slot == 0)
 				break;
@@ -65,8 +61,9 @@ int __cdecl SpawnGraveyardEntities(void* entity, int count)
 			gm_RandomMod(0x10);
 			gm_RandomMod(0x10);
 			gm_RandomMod(0x10);
-			spawned++;
-		} while (spawned < count);
+				spawned++;
+			}
+		}
 	}
 	return spawned;
 }

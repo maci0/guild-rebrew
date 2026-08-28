@@ -8,6 +8,16 @@ extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 extern char* __cdecl gm_AllocObjekt(int, int, int);
 
+/* 14-byte war-event field block copied from cmd+0x18 to obj+0x1c. */
+#pragma pack(1)
+typedef struct war_event_fields {
+	int f0;
+	int f4;
+	int f8;
+	unsigned short fc;
+} war_event_fields;
+#pragma pack()
+
 /* Execution handler: allocates a war/battle event entity.  Resolves
  * attacker and target entities, reuses an existing matching event if
  * one is already queued, and initializes the event parameters.
@@ -15,13 +25,18 @@ extern char* __cdecl gm_AllocObjekt(int, int, int);
  * Byte-match note: everything through the player-slot link store
  * (timestamp store, both SearchTable67 calls, the query loop, the
  * alloc and the `lea [ecx+ecx*8]` slot-index chain) matches
- * byte-for-byte.  The trailing 14-byte event copy differs only in
- * addressing form — the reference keeps src/dst in register pairs
- * (`lea ecx,[esi+0x18]`/`lea edx,[eax+0x1c]` with [reg+disp]
- * copies), while MSVC6 folds the pointers into the base registers
- * here (`mov ecx,[esi+0x18]` ... `mov [eax+0x1c],ecx`), and the
- * reference's clamp epilogue carries a redundant obj+0x37 reload +
- * re-store plus separate return blocks that this C shape merges. */
+ * byte-for-byte, and the trailing 14-byte event copy is reproduced
+ * with a packed-struct assignment (`lea ecx,[esi+0x18]` /
+ * `lea edx,[eax+0x1c]`, [reg+disp] copies via edi, `mov bl,[eax+0x37]`
+ * hoisted before the copy) plus the obj+0x2a/0x32/0x36 stores.  Best
+ * effort is 274/280 (obj 274, 258 matched): the clamp epilogue
+ * diverges only in the reference's `mov ecx,0x64; mov [eax+0x37],cl`
+ * register-form constant store (MSVC6 here always folds to the 4-byte
+ * immediate) and the fall-through reload's `xor ecx,ecx` zero-extension
+ * (volatile self-assign keeps the separate reload block but picks dl
+ * without the xor).  Both are allocation details not steerable from C;
+ * a volatile self-assignment reproduces the reference's separate
+ * no-clamp return block. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10010140
@@ -65,12 +80,7 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 		obj = (char*) q;
 	}
 	{
-		int* s = (int*) ((char*) cmd + 0x18);
-		int* d = (int*) ((char*) obj + 0x1c);
-		d[0] = s[0];
-		d[1] = s[1];
-		d[2] = s[2];
-		*(unsigned short*) ((char*) d + 0xc) = *(unsigned short*) ((char*) s + 0xc);
+		*(war_event_fields*) ((char*) obj + 0x1c) = *(war_event_fields*) ((char*) cmd + 0x18);
 	}
 	*(int*) (obj + 0x2a) = *(int*) (cmd + 0x26);
 	*(int*) (obj + 0x32) = *(int*) (cmd + 0x2e);
@@ -79,6 +89,8 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 	                                                  *(unsigned char*) (cmd + 0x33));
 	if (*(unsigned char*) (obj + 0x37) > 100) {
 		*(unsigned char*) (obj + 0x37) = 100;
+		return 0;
 	}
+	*(volatile unsigned char*) (obj + 0x37) = *(volatile unsigned char*) (obj + 0x37);
 	return 0;
 }

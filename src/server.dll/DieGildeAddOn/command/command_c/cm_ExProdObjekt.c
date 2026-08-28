@@ -45,14 +45,19 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * /Ox (the target's optimization level; /O2 enables /Og which makes
  * MSVC6 tail-merge the early errors).  The target's pre-loop dead store
  * `mov [esp+0x18],ebx` (saved_quantity = quantity, overwritten by the
- * loop counter `4`) is reproduced with a volatile write of the dead value;
- * MSVC6 eliminates every non-volatile formulation tried.  Remaining
- * divergence is register allocation: (1) the second material loop's entry
- * reloads recipe_def (`mov edx,[esp+0x14]; lea edi,[edx+0x2e]`) in the
- * target while our build reuses the live `recipe` register
- * (`add edi,0x2e`, -4B), and (2) the g_current_season load uses `mov cl`
- * (6B modrm) in the target vs `mov al` (5B moffs) here — both follow from
- * which registers MSVC6 picks for `recipe` / the material loop temporaries. */
+ * loop counter `4`) is reproduced with VOLATILE writes of both dead
+ * values — MSVC6 eliminates every non-volatile formulation tried, and
+ * making only the first store volatile leaves the function 5 bytes
+ * short (the second-loop recipe_def reload and the `mov cl` season
+ * load only fall out of the full /Ox register allocation once both
+ * stores are volatile).  With both volatile the function is
+ * NEAR_MATCHING 993/993 (636 bytes, was 437).  Remaining divergence is
+ * pure scheduling/order in the pre-loop dead-store block (the volatile
+ * `= 4` materializes as `mov ecx,4; mov [esp+0x18],ecx` plus a
+ * duplicate loop-counter store instead of the target's single immediate
+ * `mov [esp+0x18],4`) plus the register-allocation knock-ons of that
+ * block (second-loop `add edi,0x2e` vs target reload, `mov al` vs
+ * `mov cl` season load). */
 
 
 // CFLAGS: /Ox /Gd
@@ -105,7 +110,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	recipe_def = g_unknown_1de450 + (uint)*(ushort*)(msg + 0x14) * 0x41;
 	*(volatile int*)&saved_quantity = *(int*)(msg + 0x16);
 	quantity = *(int*)(msg + 0x16);
-	saved_quantity = 4;
+	*(volatile int*)&saved_quantity = 4;
 	material_iter = (ushort*)(recipe_def + 0x26);
 	do {
 		if (material_iter[4] != 0) {
