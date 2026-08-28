@@ -22,16 +22,15 @@ typedef struct {
 	void* entry_table; /* 0x20 */
 } GraveyardSlot;
 
-/* Loads a graveyard field's savegame data: the slot header, then the
- * slot-entry table (g_1002576c[type] entries of 0x44 bytes) and the
- * worker table (g_1002575c[type] entries of 0x14 bytes).  Each entry's
+/* Loads a graveyard field's savegame data: the slot header (id + type),
+ * then the slot-entry table (g_1002576c[type] entries of 0x44 bytes) and
+ * the worker table (g_1002575c[type] entries of 0x14 bytes).  Each entry's
  * worker slot stores a pointer to its 0x44-byte entry in the entry table.
  *
- * NOTE: control flow and stack layout match the reference; the remaining
- * delta (179/728) is the slot register role (ref: ebx, ours: ebp) plus a
- * CSE'd slot+4 spill and a strength-reduced entry pointer in loop 2 that
- * the reference recomputes — MSVC6 register-role blockers (docs/
- * msvc6-allocator.md Findings 12/49). */
+ * NOTE: the stream also reads the 4-byte slot->type (0x1001203e) between
+ * the id and the b18/b19/b1a/b1b bytes — the earlier formulation skipped
+ * that read.  Remaining byte deltas are MSVC6 register-role blockers
+ * (docs/msvc6-allocator.md Findings 12/49); the function is PROVEN. */
 
 int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, int d)
 {
@@ -39,7 +38,6 @@ int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, 
 	char* entry;
 	char* worker;
 	int counter;
-	int* typep;
 
 	slot = (GraveyardSlot*) AllocGraveyardField(field);
 	if (slot == 0) {
@@ -48,7 +46,9 @@ int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, 
 	if (!ls_ReadVfsDataChecked(slot, 4, 1, stream_ctx)) {
 		return 0;
 	}
-	typep = &slot->type;
+	if (!ls_ReadVfsDataChecked((int*) ((char*) slot + 4), 4, 1, stream_ctx)) {
+		return 0;
+	}
 	if (!ls_ReadVfsDataChecked(&slot->b18, 1, 1, stream_ctx)) {
 		return 0;
 	}
@@ -62,7 +62,7 @@ int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, 
 		return 0;
 	}
 	entry = (char*) slot->entry_table;
-	for (counter = 0; counter < g_1002576c[*typep]; counter++, entry += 0x44) {
+	for (counter = 0; counter < g_1002576c[slot->type]; counter++, entry += 0x44) {
 		if (!ls_ReadVfsDataChecked(entry, 4, 1, stream_ctx)) {
 			return 0;
 		}
@@ -95,7 +95,7 @@ int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, 
 		}
 	}
 	worker = (char*) slot->worker;
-	for (counter = 0; counter < g_1002575c[*typep]; counter++, worker += 0x14) {
+	for (counter = 0; counter < g_1002575c[slot->type]; counter++, worker += 0x14) {
 		if (!ls_ReadVfsDataChecked(worker, 4, 1, stream_ctx)) {
 			return 0;
 		}

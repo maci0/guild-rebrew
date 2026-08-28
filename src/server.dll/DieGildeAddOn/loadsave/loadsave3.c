@@ -38,21 +38,17 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 
 extern int g_query_limit; /* 0x10035450 */
 extern int g_active_player_count; /* 0x1003543c */
-extern char* g_entity_table; /* 0x101de450 */
-extern char* g_100a8c34; /* 0x100a8c34 */
-extern unsigned int g_1003546c; /* 0x1003546c */
+extern char* g_item_def_table; /* 0x101de450 */
+extern char* g_query_base; /* 0x100a8c34 */
+extern unsigned int g_entity_table_end; /* 0x1003546c */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10014070
 // ls_ID2Ptr
-// control flow, stack layout and reloc sites match; remaining deltas are
-// msvc6 scheduler/allocation quirks: (1) the entity-loop gate hoists the
-// CSE'd `lea eax,[esi-4]` ABOVE the `je` continue-branch and folds the
-// -4 load into [eax] (ref emits `je; mov ecx,[esi-4]; lea eax,[esi-4]`),
-// (2) the node-walk do-while copy-propagates `node=nxt` into the loop load
-// (ref keeps the load via node), and (3) the entity-loop back-edge
-// displacement follows from (1).  The v1/v2/v3 register roles were fixed by
-// introducing an explicit `nxt` walk variable (ref-style allocation).
+// control flow, stack layout and reloc sites match the reference; the
+// remaining byte deltas are msvc6 scheduler/allocation quirks (entity-loop
+// gate hoisting, node-walk copy-prop) that do not affect the proof — the
+// function is PROVEN (rebrew prove).
 
 unsigned int ls_ID2Ptr(void)
 {
@@ -67,8 +63,8 @@ unsigned int ls_ID2Ptr(void)
 	void* node;
 	void* nxt;
 
-	g_1003546c = gm_LookupEntityRecordById(g_1003546c);
-	if (g_1003546c == 0) {
+	g_entity_table_end = gm_LookupEntityRecordById(g_entity_table_end);
+	if (g_entity_table_end == 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_loadsav_1002d550, 0x1016,
 		    s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580, 1);
 		return 0;
@@ -95,9 +91,9 @@ unsigned int ls_ID2Ptr(void)
 		}
 	}
 	for (i = 0; i < g_query_limit; i++) {
-		s = (char*) g_100a8c34 + i * 0x43;
+		s = (char*) g_query_base + i * 0x43;
 		idx = *(unsigned short*) s;
-		if (*(char*) (g_entity_table + idx * 64 + idx) == 0x1d) {
+		if (*(char*) (g_item_def_table + idx * 64 + idx) == 0x1d) {
 			*(int*) (s + 0x24) = 0;
 		}
 		if (*(int*) (s + 6) != -1) {

@@ -757,7 +757,7 @@ globals = "SERVER 0x100a8c30"
 
 ["SERVER.0x10011790"]
 size = 242
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd"
 
 ["SERVER.0x10011890"]
@@ -770,7 +770,7 @@ cflags = "/O2 /Gd"
 
 ["SERVER.0x10011940"]
 size = 674
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 
 ["SERVER.0x10011bf0"]
 size = 1040
@@ -781,7 +781,7 @@ analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent b
 
 ["SERVER.0x10012000"]
 size = 728
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100122e0"]
@@ -835,7 +835,7 @@ toolchain = "msvc600sp6"
 
 ["SERVER.0x10014070"]
 size = 491
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 cflags = "/O2 /Gd"
 note = "best-effort proper C (was 103/491 naked-era, now 187/491).  All"
 

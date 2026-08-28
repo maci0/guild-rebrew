@@ -18,7 +18,6 @@ int __cdecl UpdateProductionProgress(void* building)
 	unsigned char field_id;
 	void* workers;
 	void* slot;
-	unsigned char prog;
 	int sum;
 
 	gm_ResolveEntityById(&entity, 0, 0, *(int*) ((char*) building + 8));

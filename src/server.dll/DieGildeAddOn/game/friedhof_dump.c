@@ -152,40 +152,50 @@ int __cdecl UpgradeGraveyardField(unsigned char* field)
 extern char* dword_100a8c30;
 extern int g_1003546c;
 extern int g_next_object_id;
+extern int g_current_year;
 extern int g_1002574c[];
 extern float table_1002572c[];
 extern unsigned int table_100a8c94[];
 extern unsigned char g_current_season;
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
-void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
+void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
-int __cdecl fcn_10016ea0(int a, int b, int c);
+int __cdecl gm_SubObjektNoKill(int a, int b, int c);
 int __cdecl gm_AddOrAccumulateObject(int a, int b, int c);
 int __cdecl _ftol(void);
 
 /* Moves a graveyard worker's slot entry to the field it currently works
  * in: finds the source entry and a free destination slot, copies the
  * entry across, clears the source, and accumulates the produced goods
- * for the current season. */
+ * for the current season.
+ *
+ * NOTE: the loop walks the destination region for a free (-1) slot, then
+ * migrates the source entry there (rep movsd / rep stosd); the earlier
+ * formulation broke out on *dst == -1 without copying.  The first
+ * gm_ResolveEntityById receives (0, 0, &a, id) — the out-param reuses the
+ * arg-1 slot (hence the `cmd = a` register copy).  PROVEN. */
 
 int __cdecl gv_MoveSlotEntry(void* a, void* arg2)
 {
-	void* rec;
+	void* cmd;
 	void* rec2;
 	void* slot;
+	void* found2;
 	void* found;
 	int* src_entry;
 	int* dst_entry;
 	int* dst_end;
+	int* src_end;
 	int count;
 	int i;
 
-	gm_ResolveEntityById(&rec, 0, 0, *(int*) a);
-	if (rec == 0)
+	cmd = a;
+	gm_ResolveEntityById(0, 0, &a, *(int*) a);
+	if (a == 0)
 		return -6;
-	gm_ResolveEntityById(0, 0, &rec2, *(int*) ((char*) a + 4));
+	gm_ResolveEntityById(&rec2, 0, 0, *(int*) ((char*) cmd + 4));
 	if (rec2 == 0)
 		return -1;
 	if (*(unsigned short*) ((char*) rec2 + 0x27) == 0xffff)
@@ -199,52 +209,70 @@ int __cdecl gv_MoveSlotEntry(void* a, void* arg2)
 	slot = *(void**) ((char*) rec2 + 0x65);
 	if (slot == 0)
 		return -3;
-	if (!gv_CheckSlotActive(slot, *(int*) ((char*) a + 8)))
+	if (!gv_CheckSlotActive(slot, *(int*) ((char*) cmd + 8)))
 		return -4;
-	found = gv_GetSlotEntry(slot, *(int*) ((char*) a + 8),
-	                        *(unsigned char*) ((char*) a + 0xc));
+	found = GetSlotEntry(slot, *(int*) ((char*) cmd + 8),
+	                     *(unsigned char*) ((char*) cmd + 0xc));
 	if (found == 0)
 		return -7;
-	if (*(unsigned short*) ((char*) found + 8) != *(unsigned short*) ((char*) a + 0x50))
+	if (*(unsigned short*) ((char*) found + 8) != *(unsigned short*) ((char*) cmd + 0x50))
 		return -7;
 
 	src_entry = *(int**) ((char*) found + 0x10);
-	dst_end = src_entry + g_1002574c[*(unsigned char*) ((char*) a + 0xd)] * 17;
-	dst_entry = *(int**) ((char*) slot + 0x10) + g_1002574c[*(int*) ((char*) a + 8)] * 17;
-
-	found = FindSlotEntryFiltered(a, rec2, 0, (void*) 0x10010700,
-	                              *(unsigned char*) ((char*) a + 0xd));
-	if (found == 0)
+	found2 = FindSlotEntryFiltered(a, rec2, 0, (void*) 0x10010700,
+	                               *(int*) ((char*) cmd + 0xd));
+	if (found2 == 0)
 		return -7;
+	dst_entry = *(int**) ((char*) found2 + 0x10);
+	dst_end = dst_entry + g_1002574c[*(int*) ((char*) cmd + 0xd)] * 17;
+	src_end = src_entry + g_1002574c[*(int*) ((char*) cmd + 8)] * 17;
 
-	for (;;) {
-		if (*dst_entry == -1)
-			break;
-		if (dst_entry >= src_entry)
-			break;
-		if (*dst_entry != -1) {
+	if (dst_entry < dst_end) {
+		for (;;) {
+			if (*dst_entry != -1)
+				goto advance;
+			if (dst_entry >= src_entry)
+				break;
+			if (*src_entry == -1) {
+				dst_entry += 0x11;
+				if (dst_entry >= src_entry)
+					break;
+				continue;
+			}
 			memcpy(dst_entry, src_entry, 0x44);
 			memset(src_entry, 0, 0x44);
 			*src_entry = -1;
+			if (src_entry >= src_end)
+				break;
+		advance:
+			dst_entry += 0x11;
+			if (dst_entry < src_end)
+				continue;
 			break;
 		}
-		dst_entry += 0x11;
-		if (dst_entry >= src_entry)
-			break;
 	}
 
-	*(int*) ((char*) found + 4) = -1;
-	*(unsigned short*) ((char*) found + 8) = 0xffff;
-	*(unsigned short*) ((char*) found + 0xa) = 0xff;
-	*(int*) ((char*) a + 0x15) = g_next_object_id;
+	*(int*) ((char*) found2 + 4) = *(int*) ((char*) found + 4);
+	*(int*) ((char*) found2 + 4) = -1;
+	*(unsigned short*) ((char*) found2 + 8) = *(unsigned short*) ((char*) found + 8);
+	*(unsigned short*) ((char*) found2 + 8) = 0xffff;
+	*(unsigned short*) ((char*) found2 + 0xa) = (unsigned short) (g_current_year + 0xa);
+	*(char*) ((char*) found2 + 0xc) = 0xff;
+	*(unsigned short*) ((char*) found + 0xa) = (unsigned short) (g_current_year + 0xa);
+	*(int*) ((char*) cmd + 0x15) = g_next_object_id;
 
-	count = *(int*) ((char*) a + 0x11);
+	count = *(int*) ((char*) cmd + 0x11);
 	if (count > 0) {
-		fcn_10016ea0(*(int*) ((char*) arg2 + 4),
-		             table_100a8c94[g_current_season * 189], 0);
-		i = _ftol((float) count * table_1002572c[*(unsigned char*) ((char*) a + 0xd)]);
-		gm_AddOrAccumulateObject(0x100358a4 + i * 540,
-		                         table_100a8c94[g_current_season * 189], i);
+		gm_SubObjektNoKill(*(int*) ((char*) cmd + 4),
+		                   (unsigned int) *(unsigned short*) ((char*) table_100a8c94 +
+		                                                       g_current_season * 756),
+		                   count);
+		i = _ftol((float) count * table_1002572c[*(int*) ((char*) cmd + 0xd)]);
+		gm_AddOrAccumulateObject(*(int*) (0x100358a4 +
+		                                 (unsigned short) *(unsigned short*) ((char*) found + 0x27) * 540),
+		                         (unsigned int) *(unsigned short*) ((char*) table_100a8c94 +
+		                                                             g_current_season * 756),
+		                         i);
 	}
 	return 0;
 }
