@@ -2,6 +2,15 @@
 size = 179
 status = "RELOC"
 
+["SERVER.0x100011f0"]
+size = 309
+cflags = "/O2 /Gd"
+status = "RELOC"
+
+["SERVER.0x10001b1d"]
+size = 129
+status = "EXACT"
+
 ["SERVER.0x10002640"]
 size = 290
 status = "RELOC"
@@ -9,14 +18,14 @@ analysis = "Core logging sink. Takes an output_mask bitfield: bit 0 writes to fi
 
 ["SERVER.0x10002770"]
 size = 2115
+cflags = "/O2 /Gd"
 status = "PROVEN"
 analysis = "Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride)."
-cflags = "/O2 /Gd"
 
 ["SERVER.0x10002fc0"]
 size = 376
-status = "STUB"
 cflags = "/O2 /Gd"
+status = "STUB"
 blocker = "instruction folding (lea vs mov), loop rotation / branch layout, register allocation, zero-extend pattern (xor vs mov)"
 blocker_delta = 298
 
@@ -37,15 +46,15 @@ status = "EXACT"
 
 ["SERVER.0x10003320"]
 size = 404
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
 ghidra = "DecodePotentialControlTransfer"
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100034c0"]
 size = 83
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
 analysis = "Initialization routine for the server's telemetry. Registers the CrashDumpUnhandledExceptionFilter. Allocates a console if requested via flags. Truncates log files (__server.log, gilde_server.log) if they exceed 64KB (0x10000 bytes) and seeds them with a startup banner. | If file logging is enabled, validate/rotate server log targets."
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10003520"]
 size = 160
@@ -57,9 +66,18 @@ analysis = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after
 size = 119
 status = "RELOC"
 
+["SERVER.0x10003600"]
+size = 54
+status = "EXACT"
+
 ["SERVER.0x10003640"]
 size = 132
 status = "RELOC"
+
+["SERVER.0x100036d0"]
+size = 332
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
 
 ["SERVER.0x10003820"]
 size = 114
@@ -68,6 +86,11 @@ status = "RELOC"
 ["SERVER.0x100038a0"]
 size = 177
 status = "RELOC"
+
+["SERVER.0x10003960"]
+size = 560
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
 
 ["SERVER.0x10003b90"]
 size = 182
@@ -85,51 +108,76 @@ status = "RELOC"
 size = 43
 status = "RELOC"
 
+["SERVER.0x10003e40"]
+size = 3328
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
+
+["SERVER.0x10004b40"]
+size = 57
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
+
 ["SERVER.0x10004b80"]
 size = 57
+status = "EXACT"
+
+["SERVER.0x10004bc0"]
+size = 1968
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "EXACT"
 
 ["SERVER.0x10005370"]
 size = 20
 status = "EXACT"
 
+["SERVER.0x10005390"]
+size = 911
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
+
 ["SERVER.0x10006580"]
 size = 658
-status = "PROVEN"
 cflags = "/O2 /Gd /G6 /Oy-"
-analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
 toolchain = "msvc600sp6"
+status = "PROVEN"
+analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
 
 ["SERVER.0x10006820"]
 size = 188
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x100068e0"]
 size = 162
+cflags = "/O2 /Gd /Oy-"
 status = "SIZE_MISMATCH"
 analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
-cflags = "/O2 /Gd /Oy-"
 
 ["SERVER.0x10006990"]
 size = 612
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x10006c00"]
 size = 283
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x10006d20"]
 size = 270
-status = "PROVEN"
 cflags = "/O2 /Gd /Oy-"
+status = "PROVEN"
 
 ["SERVER.0x10006e30"]
 size = 137
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
+
+["SERVER.0x100083c0"]
+size = 1083
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
 
 ["SERVER.0x10008a50"]
 size = 53
@@ -138,29 +186,29 @@ ghidra = "cleanup_entity"
 
 ["SERVER.0x10008a90"]
 size = 492
-status = "EXACT"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
 
 ["SERVER.0x10008c80"]
 size = 129
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10008d10"]
 size = 301
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x10008e40"]
 size = 472
-status = "PROVEN"
 cflags = "/O2 /Gd /Oy- /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
 
 ["SERVER.0x10009020"]
 size = 704
+cflags = "/O2 /Gd"
 status = "PROVEN"
 analysis = "Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks."
-cflags = "/O2 /Gd"
 
 ["SERVER.0x10009310"]
 size = 8
@@ -179,14 +227,14 @@ analysis = "Exported function called by the host engine to shut down the server 
 
 ["SERVER.0x100093a0"]
 size = 2434
+cflags = "/O2 /Gd"
 status = "STUB"
 analysis = "Core orchestration loop. Phase 1 (Lobby): Loops accepting connections until connected_players == g_max_players and every connected player has the 0x800 ready flag. Then transitions into Phase 2 (Transfer). | PHASE 0: Read game.ini config — server port (default 7531), game path, max players | Initialize server: thread priority, logging, packet pool, game data, listen socket | PHASE 1 — LOBBY: Wait for all players to connect and set ready flag (0x800). Broadcasts server info every 3 seconds. Processes network I/O. Handles disconnect requests (0x1000) and host disconnect (0x400 = terminate). | PHASE 3 — DATA RECEIVE: Wait for host to send savegame data (flag 0x08 cleared when done). Then call RecvGameSavegame to deserialize game state. | PHASE 5 — PLAYER ALLOCATION: Wait for each player to allocate their character entity (flag 0x10 set, cleared when cmd received). | PHASE 6 — GAME LOOP: Main simulation tick. Checks sync flags (0x40=sync data, 0x20=sync ready). Advances game clock, broadcasts sync packets (cmd 0x1E). Processes commands via ProcessAndBroadcastAllCommands. Speed controlled by g_game_speed_value. | PHASE 4 — DATA SEND: Stream savegame to all non-host clients in 128-byte chunks (cmd type 0x09). First sends total size (cmd type 0x08). Clears flag 0x04 when transfer complete per player."
-cflags = "/O2 /Gd"
 
 ["SERVER.0x10009d30"]
 size = 296
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10009e60"]
 size = 419
@@ -199,9 +247,9 @@ analysis = "Initialize all player slots to disconnected state, then create TCP l
 
 ["SERVER.0x1000a080"]
 size = 600
+cflags = "/O2 /Gd"
 status = "PROVEN"
 analysis = "Iterates over g_player_slots looking for an empty slot. If one is found, calls Ordinal_1 (accept()) to accept a new connection, configures the socket, initializes the slot structures (receive_buffer, send_buffer), and flags it as a newly connected player."
-cflags = "/O2 /Gd"
 
 ["SERVER.0x1000a2e0"]
 size = 96
@@ -210,8 +258,8 @@ analysis = "Shutdown socket (SD_BOTH) | Close socket handle"
 
 ["SERVER.0x1000a340"]
 size = 336
-status = "PROVEN"
 cflags = "/O2 /Gd"
+status = "PROVEN"
 
 ["SERVER.0x1000a490"]
 size = 211
@@ -220,16 +268,16 @@ analysis = "Ingress parser boundary for per-player receive buffer. Validation be
 
 ["SERVER.0x1000a570"]
 size = 750
-status = "PROVEN"
-analysis = "Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09)."
 cflags = "/O2 /Gd /Ot"
+status = "PROVEN"
 blocker = "MSVC6 call-arg sharing: for the if(status&0x10) dispatch inside the slot loop, MSVC6 hoists the shared (conn,conn+6) arg pushes above the branch (lea ecx,[ebp+0x18]; test; push; mov [ecx+3],bl; push; je; call; call) — 5 bytes smaller than target's per-branch arg setups (750 vs 745). Not reproducible via pure C89 (15+ variants tried: if/else, store-in-both, pkt local, expression forms, loop forms, volatile store; SP5 and SP6 identical). PROVEN equivalent via rebrew prove."
 blocker_delta = 5
+analysis = "Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09)."
 
 ["SERVER.0x1000a860"]
 size = 131
-status = "RELOC"
 cflags = "/O2 /Gd /Ow"
+status = "RELOC"
 
 ["SERVER.0x1000a8f0"]
 size = 170
@@ -248,9 +296,9 @@ ghidra = "FreeCommandBuffer"
 
 ["SERVER.0x1000aac0"]
 size = 639
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "PROVEN"
 analysis = "Master Command Router. Iterates over every slot's incoming_cmd_queue. Evaluates commands via g_command_handlers. Upon validation, pushes valid commands to the sender's outgoing queue (to acknowledge) and broadcasts them to all other connected players' outgoing queues. Recognizes 0x05/0x06 to batch list and pass to ahm_ProcessEntityChain."
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000ad40"]
 size = 768
@@ -258,19 +306,19 @@ status = "RELOC"
 
 ["SERVER.0x1000b040"]
 size = 372
-status = "PROVEN"
 cflags = "/O2 /Gd"
+status = "PROVEN"
 note = "prove: Function returns void and no --watch-va was given — there is nothing to compare (EAX is undefined at exit for void functions). Pass --watch-va for each global the function writes."
 
 ["SERVER.0x1000b1c0"]
 size = 205
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x1000b290"]
 size = 425
-status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
 
 ["SERVER.0x1000b440"]
 size = 133
@@ -278,14 +326,14 @@ status = "RELOC"
 
 ["SERVER.0x1000b4d0"]
 size = 836
-status = "PROVEN"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "PROVEN"
 analysis = "Iterates through a fixed validation table at g_office_table looking for a matching command_type. Once found, verifies conditions including checking if entity_ids in the payload actually map to existing objects using gm_LookupEntityRecordById. Returns 1 if valid, 0 if invalid."
 
 ["SERVER.0x1000b820"]
 size = 42
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x1000b850"]
 size = 42
@@ -293,8 +341,8 @@ status = "RELOC"
 
 ["SERVER.0x1000b880"]
 size = 263
-status = "RELOC"
 cflags = "/O2 /Ob0 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000b990"]
 size = 157
@@ -302,38 +350,38 @@ status = "RELOC"
 
 ["SERVER.0x1000ba30"]
 size = 179
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
 analysis = "Iterates through the command execution tracker table at g_office_secondary_id_base to detach or update a specific entity's links and pending sequence numbers. Used when an entity changes state abruptly or is being removed."
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000baf0"]
 size = 606
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
 ghidra = "LoadOfficeData"
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000bd50"]
 size = 66
-status = "EXACT"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
 
 ["SERVER.0x1000bda0"]
 size = 70
-status = "RELOC"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000bdf0"]
 size = 1002
-status = "SIZE_MISMATCH"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
+status = "SIZE_MISMATCH"
 blocker = "GRA fixed point (re-confirmed 2026-08-27, msvc600sp6): the grid loop's btype load is LICM'd out and base_off is strength-reduced into advancing pointers + a down-counter; the reference recomputes addresses per iteration (cmp edi,0x90000/jl bottom test, per-iter lea chains, i in a stack slot). KEY COUPLING: the ebx=0 zero-register prologue (push ebx / cmp eax,ebx / dynamic spilled) survives ONLY with the base_off down-counter loop; inlining the grid addresses reproduces the reference loop shape but loses the prologue (push 0 / dynamic in ebx / immediate zero stores; 1000 obj, 364 match). The two are mutually exclusive under MSVC6 /O2. Best reachable state: 989/1002 bytes, 417 byte-match (v24: base_off loop + f_tmp operand-order fix + volatile slot[4] store), CFG+frame matched, semantically verified. Volatile btype forces the in-loop reload but cascades worse (997 obj, 218-360 match); do-while fill regresses (998 obj, 285 match); GA (25x16 historic, 48x150 attempted here but serialized docker compiles would take hours) finds no register-allocation gains."
 blocker_delta = 598
+analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
 
 ["SERVER.0x1000c1e0"]
 size = 160
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x1000c280"]
 size = 130
@@ -349,8 +397,8 @@ status = "EXACT"
 
 ["SERVER.0x1000c3c0"]
 size = 83
-status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
 
 ["SERVER.0x1000c420"]
 size = 166
@@ -375,15 +423,15 @@ status = "RELOC"
 
 ["SERVER.0x1000c710"]
 size = 752
-status = "PROVEN"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "PROVEN"
 blocker = "the original's direct-switch dispatch zero-extends the switch"
 
 ["SERVER.0x1000ca00"]
 size = 130
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
 analysis = "Iterates through a linked list of CommandPackets generated from a Command 0x05 / 0x06 block. Runs secondary validation handlers from g_entity_chain_handlers. Re-flags commands to 0x01/0x02 status based on success/fail."
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x1000ca90"]
 size = 130
@@ -391,8 +439,8 @@ status = "EXACT"
 
 ["SERVER.0x1000cb20"]
 size = 171
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x1000cbd0"]
 size = 517
@@ -412,8 +460,8 @@ status = "RELOC"
 
 ["SERVER.0x1000d020"]
 size = 22
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000d040"]
 size = 22
@@ -425,8 +473,8 @@ status = "RELOC"
 
 ["SERVER.0x1000d110"]
 size = 333
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000d260"]
 size = 120
@@ -446,18 +494,18 @@ status = "EXACT"
 
 ["SERVER.0x1000d350"]
 size = 267
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000d460"]
 size = 267
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000d570"]
 size = 361
-status = "NEAR_MATCHING"
 cflags = "/O2 /Gd"
+status = "NEAR_MATCHING"
 note = "prove: Z3 found a satisfying assignment where EAX differs (checked 6039 x 5703 state pairs); EAX=4294967295 vs 0"
 
 ["SERVER.0x1000d6e0"]
@@ -466,8 +514,8 @@ status = "RELOC"
 
 ["SERVER.0x1000d730"]
 size = 180
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000d7f0"]
 size = 176
@@ -479,59 +527,62 @@ status = "RELOC"
 
 ["SERVER.0x1000d930"]
 size = 2057
-status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd"
+status = "SIZE_MISMATCH"
 note = "prove: Z3 found a satisfying assignment where EAX differs (checked 3 x 17 state pairs); EAX=1 vs 0"
 
 ["SERVER.0x1000e140"]
 size = 993
-status = "PROVEN"
 cflags = "/Ox /Gd"
+status = "PROVEN"
 
 ["SERVER.0x1000e530"]
 size = 352
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x1000e690"]
 size = 191
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x1000e750"]
 size = 128
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000e7d0"]
 size = 256
-status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
 
 ["SERVER.0x1000e8d0"]
 size = 239
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x1000e9c0"]
 size = 214
-status = "PROVEN"
 cflags = "/O2 /Gd"
+status = "PROVEN"
+
+["SERVER.0x1000ea20"]
+size = 235
 
 ["SERVER.0x1000eaa0"]
 size = 208
-status = "PROVEN"
 cflags = "/O2 /Gd"
+status = "PROVEN"
 
 ["SERVER.0x1000eb70"]
 size = 144
-status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
 
 ["SERVER.0x1000ec00"]
 size = 912
-status = "PROVEN"
 cflags = "/O2 /Gd"
+status = "PROVEN"
 
 ["SERVER.0x1000ec00".prove_constraints.arg0]
 type = "pointer"
@@ -540,10 +591,11 @@ struct_size = 40
 ["SERVER.0x1000ec00".prove_constraints.arg0.fields.0x1c]
 type = "concrete"
 value = 0
+
 ["SERVER.0x1000ef90"]
 size = 26
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000efb0"]
 size = 122
@@ -555,8 +607,8 @@ status = "RELOC"
 
 ["SERVER.0x1000f080"]
 size = 26
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000f0a0"]
 size = 37
@@ -564,8 +616,8 @@ status = "RELOC"
 
 ["SERVER.0x1000f0d0"]
 size = 197
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x1000f1a0"]
 size = 327
@@ -573,8 +625,8 @@ status = "RELOC"
 
 ["SERVER.0x1000f2f0"]
 size = 176
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000f3a0"]
 size = 3
@@ -602,8 +654,8 @@ status = "RELOC"
 
 ["SERVER.0x1000f940"]
 size = 22
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000f960"]
 size = 22
@@ -611,8 +663,8 @@ status = "RELOC"
 
 ["SERVER.0x1000f980"]
 size = 336
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1000fad0"]
 size = 85
@@ -636,8 +688,8 @@ status = "RELOC"
 
 ["SERVER.0x1000fd50"]
 size = 445
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x1000ff10"]
 size = 22
@@ -665,13 +717,13 @@ status = "RELOC"
 
 ["SERVER.0x100100a0"]
 size = 159
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10010140"]
 size = 280
-status = "PROVEN"
 cflags = "/O2 /Gd"
+status = "PROVEN"
 
 ["SERVER.0x10010260"]
 size = 144
@@ -679,8 +731,8 @@ status = "RELOC"
 
 ["SERVER.0x100102f0"]
 size = 17
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x10010310"]
 size = 52
@@ -696,18 +748,18 @@ status = "RELOC"
 
 ["SERVER.0x100104a0"]
 size = 135
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10010530"]
 size = 113
-status = "EXACT"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
 
 ["SERVER.0x100105b0"]
 size = 329
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x10010710"]
 size = 320
@@ -721,8 +773,8 @@ note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1
 
 ["SERVER.0x100109d0"]
 size = 832
-status = "RELOC"
 toolchain = "msvc600sp6"
+status = "RELOC"
 
 ["SERVER.0x10010d10"]
 size = 570
@@ -730,8 +782,8 @@ status = "PROVEN"
 
 ["SERVER.0x10010f50"]
 size = 66
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x10010fa0"]
 size = 525
@@ -739,8 +791,8 @@ status = "RELOC"
 
 ["SERVER.0x100111b0"]
 size = 501
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x100113b0"]
 size = 390
@@ -757,16 +809,16 @@ globals = "SERVER 0x100a8c30"
 
 ["SERVER.0x10011790"]
 size = 242
-status = "PROVEN"
 cflags = "/O2 /Gd"
+status = "PROVEN"
 
 ["SERVER.0x10011890"]
 size = 164
+cflags = "/O2 /Gd"
 status = "RELOC"
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=0 vs 4294967294"
 analysis = "Validates a standard entity action command. Resolves the target entity ID (from cmd->payload + 0). Validates the entity exists, is a valid type, and its action mask/state is valid using FUN_10010850. Returns 0 on success, negative error codes (-1 to -4) on failure."
 globals = "SERVER 0x1003546c"
-note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=0 vs 4294967294"
-cflags = "/O2 /Gd"
 
 ["SERVER.0x10011940"]
 size = 674
@@ -774,20 +826,20 @@ status = "PROVEN"
 
 ["SERVER.0x10011bf0"]
 size = 1040
-status = "PROVEN"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "PROVEN"
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
 
 ["SERVER.0x10012000"]
 size = 728
-status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
 
 ["SERVER.0x100122e0"]
 size = 346
-status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd"
+status = "SIZE_MISMATCH"
 
 ["SERVER.0x10012440"]
 size = 37
@@ -795,48 +847,48 @@ status = "RELOC"
 
 ["SERVER.0x10012470"]
 size = 857
+cflags = "/O2 /Gd"
 status = "PROVEN"
 analysis = "ls_LoadSavegameHeader: Reads versioned savegame header from VFS stream. Allocates 0xE100 temp buffer, reads format version, player count, map name (32 bytes), timestamps, difficulty, player scores (8 entries for version > 0x10033), savegame description (96 bytes). Returns 1 on success, 0 on read failure."
-cflags = "/O2 /Gd"
 
 ["SERVER.0x100127d0"]
 size = 282
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x100128f0"]
 size = 1463
-status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd"
+toolchain = "msvc6"
+status = "SIZE_MISMATCH"
+blocker = "Target keeps -1 in ebp (or ebp,0xffffffff at loop entry; mov [mem],ebp x3: ahm_info[0], esi+0xa5, esi+0x95) — pre-6.0-style constant caching MSVC6 SP6 does not emit for this loop shape (docs/TOOLCHAIN.md fingerprint; docs/msvc6-allocator.md Finding 4). 15+ C formulations tried (register/const/volatile/pointer forms, store order, guard clauses, block removal): best 1464B vs 1463 (1B over). Flag sweep (192 combos) and GA found no valid shape. msvc5/420 cache the read-count 1 in ebp instead. Fix requires register-hint tooling or per-function pre-6.0 toolchain."
 analysis = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 globals = "SERVER 0x100a8c34"
-toolchain = "msvc6"
-blocker = "Target keeps -1 in ebp (or ebp,0xffffffff at loop entry; mov [mem],ebp x3: ahm_info[0], esi+0xa5, esi+0x95) — pre-6.0-style constant caching MSVC6 SP6 does not emit for this loop shape (docs/TOOLCHAIN.md fingerprint; docs/msvc6-allocator.md Finding 4). 15+ C formulations tried (register/const/volatile/pointer forms, store order, guard clauses, block removal): best 1464B vs 1463 (1B over). Flag sweep (192 combos) and GA found no valid shape. msvc5/420 cache the read-count 1 in ebp instead. Fix requires register-hint tooling or per-function pre-6.0 toolchain."
 
 ["SERVER.0x10012eb0"]
 size = 884
-status = "RELOC"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x10013230"]
 size = 2268
+cflags = "/O2 /Gd"
 status = "PROVEN"
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 67 x 5 state pairs); EAX=0 vs 1"
 ghidra = "LoadStaticEntities"
 analysis = "Deserializes all static entities from savegame stream. Reads entity count, landmark pointers, then loops reading 70+ fields per entity with version-gated sections (g_save_format_version). Entity data at g_static_entities array, stride 0x21C bytes. Returns 1 on success, 0 on read failure."
-note = "prove: Z3 found a satisfying assignment where EAX differs (checked 67 x 5 state pairs); EAX=0 vs 1"
-cflags = "/O2 /Gd"
 
 ["SERVER.0x10013b10"]
 size = 1361
-status = "PROVEN"
-analysis = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 62 buildings per player), (2) town records with name, timestamps, flags, population, wealth, 10 resource pairs, 10 production pairs, 4 tax rates, 4 trade routes, reputation, guild standings, 8 event records, political data. Returns 1 on success."
 cflags = "/Ox /Gd"
 toolchain = "msvc600sp6"
+status = "PROVEN"
+analysis = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 62 buildings per player), (2) town records with name, timestamps, flags, population, wealth, 10 resource pairs, 10 production pairs, 4 tax rates, 4 trade routes, reputation, guild standings, 8 event records, political data. Returns 1 on success."
 
 ["SERVER.0x10014070"]
 size = 491
-status = "PROVEN"
 cflags = "/O2 /Gd"
+status = "PROVEN"
 note = "best-effort proper C (was 103/491 naked-era, now 187/491).  All"
 
 ["SERVER.0x10014260"]
@@ -855,13 +907,13 @@ status = "RELOC"
 
 ["SERVER.0x100147b0"]
 size = 670
-status = "NEAR_MATCHING"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x10014a50"]
 size = 157
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10014af0"]
 size = 247
@@ -869,8 +921,8 @@ status = "RELOC"
 
 ["SERVER.0x10014bf0"]
 size = 163
-status = "SIZE_MISMATCH"
-cflags = "/O1 /Gd"
+cflags = "/O2 /Gd"
+status = "PROVEN"
 
 ["SERVER.0x10014ca0"]
 size = 265
@@ -909,19 +961,19 @@ ghidra = "GetStatPair"
 
 ["SERVER.0x100151e0"]
 size = 535
-status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
 
 ["SERVER.0x10015400"]
 size = 83
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
 analysis = "Updates priority tracking for dynamic entity dispatch/update lists. Limits simultaneous update weight using GetStatPair constraints."
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10015460"]
 size = 145
-status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
 
 ["SERVER.0x10015500"]
 size = 180
@@ -929,8 +981,38 @@ status = "RELOC"
 
 ["SERVER.0x100155c0"]
 size = 197
-status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
+
+["SERVER.0x100155c0".prove_constraints.arg0]
+type = "pointer"
+struct_size = 14
+
+["SERVER.0x100155c0".prove_constraints.arg0.fields.0x00]
+type = "concrete"
+value = 0
+
+["SERVER.0x100155c0".prove_constraints.arg0.fields.0x04]
+type = "concrete"
+value = 0
+
+["SERVER.0x100155c0".prove_constraints.arg0.fields.0x06]
+type = "concrete"
+value = 0
+
+["SERVER.0x100155c0".prove_constraints.arg0.fields.0x0a]
+type = "concrete"
+value = 0
+
+["SERVER.0x100155c0".prove_constraints.arg2]
+type = "range"
+min = 0
+max = 0
+
+["SERVER.0x100155c0".prove_constraints.arg3]
+type = "range"
+min = 5
+max = 5
 
 ["SERVER.0x10015690"]
 size = 41
@@ -938,26 +1020,26 @@ status = "EXACT"
 
 ["SERVER.0x100156c0"]
 size = 642
-status = "SIZE_MISMATCH"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "SIZE_MISMATCH"
 
 ["SERVER.0x10015950"]
 size = 861
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+toolchain = "msvc600sp6"
 status = "PROVEN"
 ghidra = "InitGameWorld"
 analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
-cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-toolchain = "msvc600sp6"
 
 ["SERVER.0x10015cb0"]
 size = 57
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10015cf0"]
 size = 194
-status = "SIZE_MISMATCH"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "SIZE_MISMATCH"
 
 ["SERVER.0x10015dc0"]
 size = 55
@@ -973,67 +1055,67 @@ status = "RELOC"
 
 ["SERVER.0x10015f70"]
 size = 714
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 status = "PROVEN"
 analysis = "Refreshes market availability table (85 entries of 0x80 bytes each). Scans all buildings for producible items, marks ingredients as available, then auto-allocates missing market objects. Also counts special resource types (0x92-0x97, 0x2db) in the town market."
-cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["SERVER.0x10016240"]
 size = 72
-status = "EXACT"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
 
 ["SERVER.0x10016290"]
 size = 464
-status = "PROVEN"
-analysis = "Apply active query filters (id/type/owner/group) to current candidate."
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "PROVEN"
 blocker = "cannot reach EXACT with any available compiler (MSVC 4.0-7.1, all /O"
+analysis = "Apply active query filters (id/type/owner/group) to current candidate."
 
 ["SERVER.0x10016460"]
 size = 320
-status = "PROVEN"
-analysis = "Parse vararg criteria tuples for entity query filtering."
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "PROVEN"
 note = "structure is faithful to the reference (loop, switch, flag dispatch,"
+analysis = "Parse vararg criteria tuples for entity query filtering."
 
 ["SERVER.0x100165a0"]
 size = 37
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
 analysis = "Walks the primary linked list of object allocations starting at g_existing_entities (a global pointer array). Looks for the first slot with an active flag == 0. Stops searching after 0x5007 (20487) slots. Returns pointer to the slot or NULL if full. | Scan fixed object pool and return first free slot."
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100165d0"]
 size = 155
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10016670"]
 size = 1
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "EXACT"
 analysis = "Linear search by object type id within sibling linked list."
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016680"]
 size = 139
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 toolchain = "msvc6"
+status = "RELOC"
 
 ["SERVER.0x10016710"]
 size = 66
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10016760"]
 size = 1392
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "PROVEN"
 analysis = "High-level entity allocation wrapper. Resolves the parent_id using gm_ResolveEntityById to find the appropriate entity list head. Allocates a new object slot using gm_AllocateObjectSlot. Inserts the new object into the parent's linked list and initializes basic fields (type, id from global g_next_entity_id, parent pointer)."
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10016cd0"]
 size = 272
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10016de0"]
 size = 186
@@ -1050,15 +1132,13 @@ size = 346
 status = "SIZE_MISMATCH"
 
 ["SERVER.0x100170e0"]
-size = 304
-status = "PROVEN"
-cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-note = "matches from the switch dispatch onward; the 9-global setup block"
+blocker = "comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+blocker_delta = 166
 
 ["SERVER.0x10017210"]
 size = 39
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10017240"]
 size = 235
@@ -1071,19 +1151,19 @@ ghidra = "InitBuildingDefaultItems"
 
 ["SERVER.0x10017400"]
 size = 202
-status = "RELOC"
 cflags = "/O2 /Gd"
+status = "RELOC"
 
 ["SERVER.0x100174d0"]
 size = 1088
-status = "PROVEN"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "PROVEN"
 ghidra = "gm_AllocGebaeude"
 
 ["SERVER.0x10017910"]
 size = 145
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x100179b0"]
 size = 181
@@ -1095,8 +1175,8 @@ status = "RELOC"
 
 ["SERVER.0x10017ab0"]
 size = 74
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10017b00"]
 size = 320
@@ -1104,14 +1184,14 @@ status = "RELOC"
 
 ["SERVER.0x10017c40"]
 size = 742
-status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
 
 ["SERVER.0x10017f30"]
 size = 35
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
 ghidra = "call_compare"
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x10017f60"]
 size = 36
@@ -1125,9 +1205,9 @@ analysis = "Checks if the provided entity pointer is valid and active (not -1). 
 
 ["SERVER.0x10017fb0"]
 size = 278
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "SIZE_MISMATCH"
 ghidra = "gm_DeallocEntity"
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["SERVER.0x100180d0"]
 size = 81
@@ -1169,18 +1249,18 @@ analysis = "duplicate bounds check needed for correct register allocation"
 
 ["SERVER.0x10018530"]
 size = 800
-status = "PROVEN"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "PROVEN"
 
 ["SERVER.0x10018850"]
 size = 3689
-status = "STUB"
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+status = "STUB"
 
 ["SERVER.0x100196c0"]
 size = 81
-status = "RELOC"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
+status = "RELOC"
 
 ["SERVER.0x10019720"]
 size = 396
@@ -1249,64 +1329,123 @@ status = "RELOC"
 size = 48
 status = "RELOC"
 
-[0x100170e0]
-blocker = "comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 166
+["SERVER.0x1001a140"]
+size = 14
+cflags = "/O1 /Gd /DREBREW_ALLOW_NAKED"
+status = "EXACT"
 
-[SERVER.0x1001a835]
-source = "DBGHEAP.C:126"
+["SERVER.0x1001a18a"]
+size = 49
+status = "EXACT"
 
-[SERVER.0x1001ab81]
-source = "DBGHEAP.C:952"
+["SERVER.0x1001a1bb"]
+size = 76
+status = "EXACT"
 
-[SERVER.0x1001b5cc]
-source = "DBGHEAP.C:763"
+["SERVER.0x1001a2eb"]
+status = "MISSING_SIZE"
 
-[SERVER.0x1001ff84]
-source = "DBGHEAP.C:452"
+["SERVER.0x1001a30d"]
+status = "MISSING_SIZE"
 
-[SERVER.0x10020943]
-source = "TZSET.C:96"
+["SERVER.0x1001a527"]
+size = 25
+status = "EXACT"
 
-[SERVER.0x10020d97]
-source = "TZSET.C:374"
+["SERVER.0x1001a643"]
+size = 45
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001a670"]
+size = 17
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001a692"]
+size = 15
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001a758"]
+size = 26
+cflags = "/O1 /Gd"
+status = "EXACT"
+
+["SERVER.0x1001a7e5"]
+size = 9
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001a7ee"]
+size = 9
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001a7f7"]
+size = 18
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001a809"]
+size = 44
+cflags = "/O1 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1001a835"]
 source = "DBGHEAP.C:126"
-size = 252
-status = "RELOC"
+
+["SERVER.0x1001a931"]
+size = 47
 cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001a960"]
+size = 266
+cflags = "/O1 /Gd"
+status = "PROVEN"
+
+["SERVER.0x1001aa6a"]
+size = 47
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001aa99"]
+size = 232
+cflags = "/O1 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1001ab81"]
 source = "DBGHEAP.C:952"
-size = 233
 status = "RELOC"
+
+["SERVER.0x1001ac9f"]
+size = 46
 cflags = "/O1 /Gd"
-
-["SERVER.0x1001b5cc"]
-source = "DBGHEAP.C:763"
-size = 815
-status = "NEAR_MATCHING"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001ff84"]
-source = "DBGHEAP.C:452"
-size = 153
-cflags = "/O1 /Gd"
-
-["SERVER.0x10020943"]
-source = "TZSET.C:96"
-
-["SERVER.0x10020d97"]
-source = "TZSET.C:374"
-
-["SERVER.0x1001a670"]
 status = "RELOC"
-size = 17
-cflags = "/O1 /Gd"
 
-["SERVER.0xdeadbeef"]
+["SERVER.0x1001accd"]
+size = 92
+status = "EXACT"
+
+["SERVER.0x1001ad29"]
+size = 9
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001ad32"]
+size = 164
+cflags = "/O1 /Gd"
+toolchain = "msvc600sp6"
 status = "SIZE_MISMATCH"
+
+["SERVER.0x1001ae20"]
+size = 272
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001b12f"]
+size = 204
+status = "EXACT"
 
 ["SERVER.0x1001b564"]
 size = 39
@@ -1316,10 +1455,24 @@ status = "EXACT"
 size = 65
 status = "EXACT"
 
+["SERVER.0x1001b5cc"]
+source = "DBGHEAP.C:763"
+status = "NEAR_MATCHING"
+
+["SERVER.0x1001b8fb"]
+size = 217
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001b9d4"]
+size = 157
+cflags = "/O1 /Oy- /Gd"
+status = "RELOC"
+
 ["SERVER.0x1001ba71"]
 size = 51
-status = "RELOC"
 cflags = "/O1 /Gd"
+status = "RELOC"
 
 ["SERVER.0x1001baa4"]
 size = 235
@@ -1328,9 +1481,28 @@ size = 235
 status = "RELOC"
 
 ["SERVER.0x1001bb60"]
-status = "RELOC"
 size = 47
 cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001bb8f"]
+size = 35
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001bbb2"]
+size = 47
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001bbe1"]
+size = 35
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001bc04"]
+size = 93
+status = "EXACT"
 
 ["SERVER.0x1001bc61"]
 size = 174
@@ -1338,13 +1510,203 @@ size = 174
 ["SERVER.0x1001bce4"]
 status = "MISSING_SIZE"
 
-["SERVER.0x1001bc04"]
-size = 93
+["SERVER.0x1001bdd0"]
+size = 123
+cflags = "/O1 /Gd"
+status = "SIZE_MISMATCH"
+
+["SERVER.0x1001c9a5"]
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001cfa1"]
+size = 41
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001cfca"]
+size = 108
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001d036"]
+size = 97
+cflags = "/O1 /Oy- /Gd"
+status = "RELOC"
+
+["SERVER.0x1001d097"]
+size = 21
+cflags = "/O1 /Oy- /Gd"
+status = "RELOC"
+
+["SERVER.0x1001d0ac"]
+size = 84
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001d100"]
+size = 30
+status = "SIZE_MISMATCH"
+
+["SERVER.0x1001d11e"]
+size = 19
+cflags = "/O1 /Gd"
 status = "EXACT"
 
-["SERVER.0x1002146d"]
-size = 203
+["SERVER.0x1001d198"]
+size = 160
+status = "SIZE_MISMATCH"
+
+["SERVER.0x1001d238"]
+size = 27
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001d253"]
+size = 45
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001d280"]
+size = 328
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001d3c8"]
+size = 93
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001d425"]
+size = 168
+status = "SIZE_MISMATCH"
+
+["SERVER.0x1001d4cd"]
+size = 72
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001d515"]
+size = 43
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001d540"]
+size = 809
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001d869"]
+size = 777
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001db72"]
+size = 177
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001dc23"]
+size = 251
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001dd1e"]
+size = 758
+cflags = "/O1 /Gd"
 status = "EXACT"
+
+["SERVER.0x1001e014"]
+size = 324
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001e158"]
+size = 86
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001e1ae"]
+size = 194
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001e270"]
+size = 87
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001e2c7"]
+size = 69
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001e30c"]
+size = 520
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001e514"]
+size = 292
+cflags = "/O1 /Gd"
+status = "EXACT"
+
+["SERVER.0x1001e638"]
+size = 169
+cflags = "/O1 /Gd"
+status = "EXACT"
+
+["SERVER.0x1001f0ff"]
+size = 147
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001f855"]
+size = 117
+status = "EXACT"
+
+["SERVER.0x1001f8d0"]
+size = 16
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001f8e0"]
+size = 224
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001f9c0"]
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001fb12"]
+size = 436
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001fdf8"]
+size = 57
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x1001fe31"]
+size = 339
+cflags = "/O1 /Gd"
+
+["SERVER.0x1001ff84"]
+source = "DBGHEAP.C:452"
+
+["SERVER.0x100200c1"]
+size = 129
+status = "EXACT"
+
+["SERVER.0x10020943"]
+source = "TZSET.C:96"
+
+["SERVER.0x10020d97"]
+source = "TZSET.C:374"
+
+["SERVER.0x10020fe1"]
+size = 23
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x10021200"]
+size = 56
+cflags = "/O1 /Gd"
 
 ["SERVER.0x10021298"]
 size = 53
@@ -1359,6 +1721,23 @@ status = "MISSING_SIZE"
 ["SERVER.0x10021375"]
 status = "MISSING_SIZE"
 
+["SERVER.0x1002146d"]
+size = 203
+status = "EXACT"
+
+["SERVER.0x10021aad"]
+size = 9
+status = "EXACT"
+
+["SERVER.0x100220eb"]
+size = 28
+cflags = "/O1 /Gd"
+status = "RELOC"
+
+["SERVER.0x10022107"]
+size = 137
+cflags = "/O1 /Gd"
+
 ["SERVER.0x100222b5"]
 size = 139
 status = "EXACT"
@@ -1372,386 +1751,5 @@ status = "MISSING_SIZE"
 ["SERVER.0x10022f83"]
 status = "MISSING_SIZE"
 
-["SERVER.0x1001a7e5"]
-size = 9
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001a527"]
-size = 25
-status = "EXACT"
-
-["SERVER.0x1001bbb2"]
-status = "RELOC"
-size = 47
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001a2eb"]
-status = "MISSING_SIZE"
-
-["SERVER.0x1001a30d"]
-status = "MISSING_SIZE"
-
-["SERVER.0x1001ad29"]
-size = 9
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001fdf8"]
-size = 57
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001f855"]
-size = 117
-status = "EXACT"
-
-["SERVER.0x100200c1"]
-size = 129
-status = "EXACT"
-
-["SERVER.0x1001a18a"]
-size = 49
-status = "EXACT"
-
-["SERVER.0x1001a1bb"]
-size = 76
-status = "EXACT"
-
-["SERVER.0x1001accd"]
-size = 92
-status = "EXACT"
-
-["SERVER.0x1001bdd0"]
-size = 123
+["SERVER.0xdeadbeef"]
 status = "SIZE_MISMATCH"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001a7f7"]
-size = 18
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d036"]
-status = "RELOC"
-size = 97
-cflags = "/O1 /Oy- /Gd"
-
-["SERVER.0x1001d097"]
-status = "RELOC"
-size = 21
-cflags = "/O1 /Oy- /Gd"
-
-["SERVER.0x10021aad"]
-size = 9
-status = "EXACT"
-
-["SERVER.0x1001b12f"]
-size = 204
-status = "EXACT"
-
-["SERVER.0x1001a809"]
-size = 44
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d238"]
-size = 27
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x10003960"]
-status = "EXACT"
-size = 560
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-
-["SERVER.0x100036d0"]
-status = "EXACT"
-size = 332
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-
-["SERVER.0x100083c0"]
-status = "EXACT"
-size = 1083
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-
-["SERVER.0x10004bc0"]
-status = "EXACT"
-size = 1968
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-
-["SERVER.0x10005390"]
-status = "EXACT"
-size = 911
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-
-["SERVER.0x10003e40"]
-status = "EXACT"
-size = 3328
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-
-["SERVER.0x10004b40"]
-status = "EXACT"
-size = 57
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-
-["SERVER.0x1001a140"]
-size = 14
-status = "EXACT"
-cflags = "/O1 /Gd /DREBREW_ALLOW_NAKED"
-
-["SERVER.0x1000ea20"]
-size = 235
-
-["SERVER.0x100011f0"]
-size = 309
-status = "RELOC"
-cflags = "/O2 /Gd"
-
-["SERVER.0x10001b1d"]
-size = 129
-status = "EXACT"
-
-["SERVER.0x10003600"]
-size = 54
-status = "EXACT"
-
-["SERVER.0x1001b8fb"]
-size = 217
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001b9d4"]
-size = 157
-cflags = "/O1 /Oy- /Gd"
-status = "RELOC"
-
-["SERVER.0x1001a960"]
-size = 266
-status = "PROVEN"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001aa99"]
-size = 232
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001a931"]
-size = 47
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001aa6a"]
-size = 47
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d3c8"]
-size = 93
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d515"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 43
-
-["SERVER.0x1001d540"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 809
-
-["SERVER.0x1001db72"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 177
-
-["SERVER.0x1001dc23"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 251
-
-["SERVER.0x1001dd1e"]
-status = "EXACT"
-cflags = "/O1 /Gd"
-size = 758
-
-["SERVER.0x1001e014"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 324
-
-["SERVER.0x1001e158"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 86
-
-["SERVER.0x1001e1ae"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 194
-
-["SERVER.0x1001d425"]
-size = 168
-status = "SIZE_MISMATCH"
-
-["SERVER.0x1001d0ac"]
-size = 84
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d100"]
-size = 30
-status = "SIZE_MISMATCH"
-
-["SERVER.0x1001d198"]
-size = 160
-status = "SIZE_MISMATCH"
-
-["SERVER.0x1001a692"]
-size = 15
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001e270"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 87
-
-["SERVER.0x1001e2c7"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 69
-
-["SERVER.0x1001e514"]
-status = "EXACT"
-cflags = "/O1 /Gd"
-size = 292
-
-["SERVER.0x1001e638"]
-status = "EXACT"
-cflags = "/O1 /Gd"
-size = 169
-
-["SERVER.0x1001a643"]
-size = 45
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001ad32"]
-size = 164
-cflags = "/O1 /Gd"
-toolchain = "msvc600sp6"
-status = "SIZE_MISMATCH"
-
-["SERVER.0x1001e30c"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 520
-
-["SERVER.0x1001d869"]
-status = "RELOC"
-cflags = "/O1 /Gd"
-size = 777
-
-["SERVER.0x1001fe31"]
-size = 339
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001f8e0"]
-size = 224
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001ae20"]
-size = 272
-cflags = "/O1 /Gd"
-
-["SERVER.0x10022107"]
-size = 137
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d280"]
-size = 328
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d4cd"]
-size = 72
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d253"]
-size = 45
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x10021200"]
-size = 56
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001ac9f"]
-size = 46
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001bb8f"]
-size = 35
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001bbe1"]
-size = 35
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001f0ff"]
-size = 147
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001a758"]
-size = 26
-status = "EXACT"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001f8d0"]
-size = 16
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001fb12"]
-size = 436
-cflags = "/O1 /Gd"
-
-["SERVER.0x100220eb"]
-size = 28
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001cfa1"]
-size = 41
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001cfca"]
-size = 108
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001d11e"]
-size = 19
-status = "EXACT"
-cflags = "/O1 /Gd"
-
-["SERVER.0x10020fe1"]
-size = 23
-status = "RELOC"
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001a7ee"]
-size = 9
-cflags = "/O1 /Gd"
-status = "RELOC"
-
-["SERVER.0x1001c9a5"]
-cflags = "/O1 /Gd"
-
-["SERVER.0x1001f9c0"]
-cflags = "/O1 /Gd"

@@ -26,7 +26,9 @@ typedef struct {
 	char pad6[0x21c - 0x11c];
 } SIM_ENT;
 
-extern SIM_ENT g_sim_ents[];
+/* Slot base: g_slot_table (0x10035800).  SIM_ENT is 0x21c bytes;
+ * use the macro for access instead of a separate extern array. */
+#define SIM_ENT_IDX(i) ((SIM_ENT*)((unsigned char*)&g_slot_table + ((i) & 0xffff) * 0x21c))
 
 /* Searches for matching parent entities by type and creates
  * family tree linkages. Used in citizen creation to find
@@ -60,7 +62,7 @@ unsigned int __cdecl FindAndMatchParents(unsigned int param)
 	for (; j < 0x10; j++) {
 		rnd = gm_RandomMod(i);
 		parentA = rnd;
-		ent = &g_sim_ents[rnd & 0xffff];
+		ent = SIM_ENT_IDX(rnd);
 		if (ent->field_a0 == 0xffff) {
 			i = i * 3 / 4;
 			continue;
@@ -88,7 +90,7 @@ done1:
 	for (j = 0; j < 0x10; j++) {
 		rnd = gm_RandomMod(i);
 		parentB = rnd;
-		ent = &g_sim_ents[rnd & 0xffff];
+		ent = SIM_ENT_IDX(rnd);
 		if (ent->field_a0 == 0xffff) {
 			i = i * 3 / 4;
 			continue;
@@ -115,8 +117,8 @@ done2:
 
 	return gm_CreateEntityFromParents(
 		0,
-		g_sim_ents[parentA & 0xffff].field_a4,
-		g_sim_ents[parentB & 0xffff].field_a4,
+		SIM_ENT_IDX(parentA)->field_a4,
+		SIM_ENT_IDX(parentB)->field_a4,
 		(int) param,
 		0, 0, 0, 2);
 }
@@ -154,23 +156,16 @@ void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 void __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
 {
 	unsigned char cls;
-	int zero;
 
-	zero = 0;
-	cls = *((unsigned char*) g_entity_type_table + arg1[0] + arg1[0] * 588);
-	switch (cls) {
-	case 1:
-		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, zero, 0x12);
-		break;
-	case 2:
+	cls = ((unsigned char*) g_entity_type_table)[arg1[0] + arg1[0] * 588];
+	if (cls == 1) {
+		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x12);
+	} else if (cls == 2) {
 		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x13);
-		break;
-	case 0x1d:
+	} else if (cls == 0x1d) {
 		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0xfd);
-		break;
-	case 0x16:
+	} else if (cls == 0x16) {
 		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x120);
-		break;
 	}
 }
 
@@ -231,7 +226,7 @@ typedef struct {
 } SIM_CLOCK;
 #pragma pack(pop)
 
-int __cdecl AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4)
+void __cdecl AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4)
 {
 	int minutes;
 	int hour;

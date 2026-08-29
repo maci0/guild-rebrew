@@ -21,7 +21,7 @@ int __cdecl lb_HandleLobbyCommands(char* player, char* msg)
 	PlayerSlot* slot2;
 	unsigned int flags;
 	int count;
-	int i;
+	int* p;
 	int arr[8];
 	char buf[0x100];
 	char* m14;
@@ -41,7 +41,6 @@ int __cdecl lb_HandleLobbyCommands(char* player, char* msg)
 
 join:
 	count = 0;
-	i = 0;
 	for (slot = (PlayerSlot*) 0x101deb00;
 	     (int) slot < 0x114ffe20;
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
@@ -62,7 +61,7 @@ join:
 
 	m14 = msg + 0x14;
 	slot = (PlayerSlot*) 0x101deb00;
-	*(unsigned int*) (m14 + 4) = (unsigned int) slot;
+	*(unsigned int*) (m14 + 4) = 0;
 	for (; (int) slot < 0x114ffe20;
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
 		flags = slot->flags;
@@ -70,17 +69,16 @@ join:
 		    *(int*) ((char*) slot + 0x264218) == *(int*) (m14 + 0xc)) {
 			arr[0] = 0; arr[1] = 0; arr[2] = 0; arr[3] = 0;
 			arr[4] = 0; arr[5] = 0; arr[6] = 0; arr[7] = 0;
-			for (slot2 = (PlayerSlot*) 0x101deb00;
+			for (p = arr, slot2 = (PlayerSlot*) 0x101deb00;
 			     (int) slot2 < 0x114ffe20;
-			     slot2 = (PlayerSlot*) ((char*) slot2 + 0x264264)) {
+			     slot2 = (PlayerSlot*) ((char*) slot2 + 0x264264), p++) {
 				flags = slot2->flags;
 				if ((flags & 1) && (flags & 0x200) && (char*) slot2 != player) {
 					if (*(int*) ((char*) slot2 + 0x264218) >= 0 &&
 					    *(int*) ((char*) slot2 + 0x264218) < 8) {
-						arr[i] = 1;
+						*p = 1;
 					}
 				}
-				i++;
 			}
 			count = 0;
 			while (count < 8) {

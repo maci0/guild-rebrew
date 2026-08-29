@@ -5,6 +5,8 @@
 // SYMBOL: _lb_HandleEntitySync
 // SIZE: 163
 
+#include <string.h>
+
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
 
@@ -18,26 +20,25 @@ int __cdecl lb_HandleEntitySync(int player, int msg)
 	int tab;
 	int eid;
 	int i;
+	unsigned int flags;
 
-	if ((*(int*) player & 0x6000) != 0) {
+	flags = *(unsigned int*) player;
+	if ((flags & 0x6000) != 0) {
 		LogMessageInternal((char*) 0x1002d70c, 0x354, (char*) 0x1002d740, 1);
 		*(char*) msg = 2;
-		i = cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg);
-		return (i == -1) ? -1 : 0;
+		return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1) ? -1 : 0;
 	}
 	eid = *(int*) ((char*) msg + 0x14);
 	tab = 0x101deb04;
-	for (i = 0; ; i++) {
+	i = 0;
+	do {
 		if (*(int*) tab == eid) {
 			memcpy((char*) msg + 0x14, (void*) (0x10442d0c + (unsigned int) i * 0x264264), 0x57);
-			i = cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg);
-			return (i == -1) ? -1 : 0;
+			return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1) ? -1 : 0;
 		}
 		tab += 0x264264;
-		if (tab >= 0x114ffe24)
-			break;
-	}
+		i++;
+	} while (tab < 0x114ffe24);
 	*(char*) msg = 2;
-	i = cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg);
-	return (i == -1) ? -1 : 0;
+	return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1) ? -1 : 0;
 }
