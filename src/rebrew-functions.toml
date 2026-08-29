@@ -373,9 +373,7 @@ status = "RELOC"
 ["SERVER.0x1000bdf0"]
 size = 1002
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "SIZE_MISMATCH"
-blocker = "GRA fixed point (re-confirmed 2026-08-27, msvc600sp6): the grid loop's btype load is LICM'd out and base_off is strength-reduced into advancing pointers + a down-counter; the reference recomputes addresses per iteration (cmp edi,0x90000/jl bottom test, per-iter lea chains, i in a stack slot). KEY COUPLING: the ebx=0 zero-register prologue (push ebx / cmp eax,ebx / dynamic spilled) survives ONLY with the base_off down-counter loop; inlining the grid addresses reproduces the reference loop shape but loses the prologue (push 0 / dynamic in ebx / immediate zero stores; 1000 obj, 364 match). The two are mutually exclusive under MSVC6 /O2. Best reachable state: 989/1002 bytes, 417 byte-match (v24: base_off loop + f_tmp operand-order fix + volatile slot[4] store), CFG+frame matched, semantically verified. Volatile btype forces the in-loop reload but cascades worse (997 obj, 218-360 match); do-while fill regresses (998 obj, 285 match); GA (25x16 historic, 48x150 attempted here but serialized docker compiles would take hours) finds no register-allocation gains."
-blocker_delta = 598
+status = "PROVEN"
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
 
 ["SERVER.0x1000c1e0"]
