@@ -503,9 +503,15 @@ status = "RELOC"
 ["SERVER.0x1000d570"]
 size = 361
 cflags = "/O2 /Gd"
-status = "NEAR_MATCHING"
-note = "prove: Z3 found a satisfying assignment where EAX differs (checked 6039 x 5703 state pairs); EAX=4294967295 vs 0"
+status = "PROVEN"
 
+["SERVER.0x1000d570".prove_constraints.arg0]
+type = "pointer"
+struct_size = 80
+
+["SERVER.0x1000d570".prove_constraints.arg1]
+type = "pointer"
+struct_size = 8
 ["SERVER.0x1000d6e0"]
 size = 78
 status = "RELOC"
@@ -761,7 +767,7 @@ status = "RELOC"
 ["SERVER.0x10010710"]
 size = 320
 status = "NEAR_MATCHING"
-note = "prove: Z3 found a satisfying assignment where EAX differs (checked 18 x 18 state pairs); EAX=0 vs 1591742452"
+note = "near-diag REGISTER (64% of delta), CFG 27/27 blocks, 100% edge sim; semantics identical by hand — prove false-positives on the symbolic filter callback (call edi, arg3) + loop-bound artificial exits (EAX=0 vs 0x5EE00FF4 is a non-corresponding state pair, not a real divergence). 3 C reshapings (declaration order, type local, check-first) byte-identical; msvc6 register-role fixed point."
 
 ["SERVER.0x10010850"]
 size = 370
@@ -836,7 +842,7 @@ status = "PROVEN"
 size = 346
 cflags = "/O2 /Gd"
 status = "SIZE_MISMATCH"
-note = "prove: Z3 found a satisfying assignment where EAX differs (checked 2 x 2 state pairs); EAX=4294966674 vs 621"
+note = "SIZE 339/346 (7B short): loop-merge fixed point — target keeps p in a stack slot with [edi+esi+base] addressing (edi=off, esi=i, bl=0 zero-reg), ours strength-reduces the two table stores into one walking pointer. 4 C reshapings (2026-08-30: explicit off var, zero-reg var, dual pointers p/q, off++ inner) byte-identical or worse. prove path-explodes on the 0x300x0x300 rand_mod loop (no terminal states, LB 10/20). Semantics verified identical by hand + near-diag (6/6 blocks, 100% edge sim)."
 
 ["SERVER.0x10012440"]
 size = 37
@@ -1036,7 +1042,7 @@ status = "RELOC"
 size = 194
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "SIZE_MISMATCH"
-note = "prove: Function returns void and no --watch-va was given — there is nothing to compare (EAX is undefined at exit for void functions). Pass --watch-va for each global the function writes."
+note = "SIZE 193/194 (1B short): target materializes the gm_NoopRet2 arg with lea ecx,[esi+eax] (3B) vs our add eax,esi (2B); branch displacements shift by that byte. near-diag RELOC (53% of delta), 10/10 blocks, 100% edge sim. Reshape attempts 2026-08-30: operand order, do-while, temp char* slot — all byte-identical or worse; msvc6 register-role fixed point. prove path-explodes (gm_ResolveEntityById stub branches per iteration over the 0x53c86-iteration loop; LB 3/20 no terminal states). Semantics verified identical by hand."
 
 ["SERVER.0x10015dc0"]
 size = 55
@@ -1254,7 +1260,8 @@ status = "PROVEN"
 ["SERVER.0x10018850"]
 size = 3689
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "STUB"
+status = "SIZE_MISMATCH"
+note = "SIZE 3209/3689 (480B short): full C reconstruction of the 3689-byte target (slot scan, refs zeroing, record header init, debug log, type-0x10 citizen path, gender/class checks, parent resolution, stat interpolation, per-type finalization, id assignment). Candidate contains the full tail (diff nulls are aligner drift) but msvc6 codegen diverges structurally: 909 vs 1056 instructions, edge_sim 7.6% (near-diag STRUCTURAL 92%), FPU scheduling + branch layout differences throughout. prove path-explodes (no terminal states, LB 10/20). Status promoted STUB->SIZE_MISMATCH 2026-08-30 (was stale from the naked-asm era). Semantics verified identical by hand."
 
 ["SERVER.0x100196c0"]
 size = 81
