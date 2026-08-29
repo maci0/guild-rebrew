@@ -233,12 +233,8 @@ extern int g_entity_ref_table[1];
 
 // FUNCTION: SERVER 0x10017fb0
 // gm_DeallocEntity
-//   NEAR_MATCHING 182/278: logic, calls, and sprintf blocks (fmt 0x10031500 for
-//   arg2==0, 0x10031538 for arg2==1) all correct. Remaining diffs are msvc6
-//   register allocation: the ref-clear loop reloads [esi+4] per inner
-//   iteration in the original (ours per outer, `cmp [eax],edi` folded), and
-//   the memset/store order after the ref loop differs by two instructions.
-//   Semantics identical.
+//   PROVEN (ref-clear loop re-reads *eid per inner iteration — volatile to
+//   defeat msvc6 LICM; -1 store via absolute 0x100358a4+index*0x21c)
 
 int __cdecl sprintf(char* buffer, const char* format, ...); /* 0x1001a299 */
 
@@ -246,13 +242,15 @@ void __cdecl gm_DeallocEntity(unsigned int index, int arg2)
 {
 	char buffer[0x200];
 	char* entity;
+	int* eid;
 	int entity_id;
 	int i;
 	int j;
 	int* ref;
 
 	entity = (char*) 0x100358a0 + index * 0x21c;
-	entity_id = *(int*) (entity + 4);
+	eid = (int*) (entity + 4);
+	entity_id = *eid;
 	if (*(unsigned char*) (entity + 2) != 0xf) {
 		entity[8] = 0;
 		*(short*) (entity + 0x28) = *(short*) 0x10035880;
@@ -267,14 +265,14 @@ void __cdecl gm_DeallocEntity(unsigned int index, int arg2)
 		for (i = 0; i < 0x300; i++) {
 			ref = (int*) ((char*) 0x100358fc + i * 0x21c);
 			for (j = 0; j < 8; j++) {
-				if (*(int*) (entity + 4) == ref[j]) {
+				if (ref[j] == *(volatile int*) eid) {
 					ref[j] = -1;
 				}
 			}
 		}
 		memset(entity, 0, 0x21c);
 		*(unsigned short*) entity = 0xffff;
-		*(int*) (entity + 4) = -1;
+		*(int*) ((char*) 0x100358a4 + index * 0x21c) = -1;
 		memset((char*) 0x100358fc + index * 0x21c, 0xff, 0x20);
 		if (arg2 == 1) {
 			sprintf(buffer, (char*) 0x10031538, entity_id);
@@ -608,21 +606,20 @@ int __cdecl gm_GetOppositeStatIndex(int stat_id)
 
 // FUNCTION: SERVER 0x10018450
 // gm_RandomStatModifier
-//   NEAR_MATCHING 24/78: logic correct (zero-case, const-57bc double compare,
-//   0xb/6 ranges, byte accumulation). Remaining diffs are msvc6 FPU/branch
-//   codegen: original emits `fcomp [const]` + `test ah,1` (ours fld+fcompp +
-//   test ah,0x41), byte-width loads/adds (mov bl / add al / add bl,al vs our
-//   dword forms), and the range-select branch layout. Not reproducible.
+//   PROVEN (msvc6: float-cast compare with fcomp [const], shared ternary call)
 
 char __cdecl gm_RandomStatModifier(char stat_value)
 {
+	int uv;
+	char result;
+
 	if (stat_value == 0) {
-		return (char) (gm_RandomMod(0x2a) + 0x15);
+		result = (char) (gm_RandomMod(0x2a) + 0x15);
+	} else {
+		uv = (unsigned char) *(int*) &stat_value;
+		result = (char) (stat_value + gm_RandomMod((float) uv >= g_const_57bc ? 0xb : 6));
 	}
-	if ((double) (unsigned char) stat_value < g_const_57bc) {
-		return (char) (stat_value + gm_RandomMod(6));
-	}
-	return (char) (stat_value + gm_RandomMod(0xb));
+	return result;
 }
 
 /* Looks up an entity record by its integer ID. Searches

@@ -1121,16 +1121,18 @@ ghidra = "SubtractObjectFromOwner"
 
 ["SERVER.0x10016ea0"]
 size = 211
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 analysis = "Decrease tracked amount; delete entry if it reaches zero."
 
 ["SERVER.0x10016f80"]
 size = 346
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 
 ["SERVER.0x100170e0"]
 blocker = "comparison direction swap, instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
 blocker_delta = 166
+size = 304
+status = "NEAR_MATCHING"
 
 ["SERVER.0x10017210"]
 size = 39
@@ -1203,7 +1205,7 @@ analysis = "Checks if the provided entity pointer is valid and active (not -1). 
 ["SERVER.0x10017fb0"]
 size = 278
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 ghidra = "gm_DeallocEntity"
 
 ["SERVER.0x100180d0"]
@@ -1232,7 +1234,7 @@ status = "EXACT"
 
 ["SERVER.0x10018450"]
 size = 78
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 
 ["SERVER.0x100184a0"]
 size = 56

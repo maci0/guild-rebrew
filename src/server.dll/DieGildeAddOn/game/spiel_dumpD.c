@@ -17,7 +17,7 @@ extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
 extern unsigned char* g_query_filter_base; /* 0x10035464 */
 extern short g_query_filter_extra2; /* 0x10030b8c */
 extern short g_query_filter_extra3; /* 0x10030b8e */
-extern char g_filter_extra5; /* 0x10030b84 */
+extern unsigned char g_filter_extra5; /* 0x10030b84 */
 extern int g_query_filter_extra1; /* 0x10030b88 */
 extern unsigned char g_query_filter_extra4; /* 0x10030b90 */
 extern unsigned char g_dynasty_field_48; /* 0x10035448 */
