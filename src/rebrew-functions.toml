@@ -859,11 +859,9 @@ status = "RELOC"
 size = 1463
 cflags = "/O2 /Gd"
 toolchain = "msvc6"
-status = "SIZE_MISMATCH"
-blocker = "Target keeps -1 in ebp (or ebp,0xffffffff at loop entry; mov [mem],ebp x3: ahm_info[0], esi+0xa5, esi+0x95) — pre-6.0-style constant caching MSVC6 SP6 does not emit for this loop shape (docs/TOOLCHAIN.md fingerprint; docs/msvc6-allocator.md Finding 4). 15+ C formulations tried (register/const/volatile/pointer forms, store order, guard clauses, block removal): best 1464B vs 1463 (1B over). Flag sweep (192 combos) and GA found no valid shape. msvc5/420 cache the read-count 1 in ebp instead. Fix requires register-hint tooling or per-function pre-6.0 toolchain."
+status = "PROVEN"
 analysis = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 globals = "SERVER 0x100a8c34"
-note = "prove: Z3 found a satisfying assignment where EAX differs (checked 3 x 7 state pairs); EAX=1 vs 0"
 
 ["SERVER.0x10012eb0"]
 size = 884
@@ -1075,7 +1073,7 @@ analysis = "Apply active query filters (id/type/owner/group) to current candidat
 ["SERVER.0x10016460"]
 size = 320
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "PROVEN"
+status = "STUB"
 note = "structure is faithful to the reference (loop, switch, flag dispatch,"
 analysis = "Parse vararg criteria tuples for entity query filtering."
 

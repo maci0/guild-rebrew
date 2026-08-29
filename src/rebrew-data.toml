@@ -52,6 +52,18 @@ name = "g_aemter_table"
 section = ".data"
 type = "int"
 
+["SERVER.0x101de454"]
+note = "auxiliary entity count (loadsave)"
+name = "g_101de454"
+section = ".data"
+type = "int"
+
+["SERVER.0x101de55c"]
+note = "auxiliary entity buffer (realloc'd)"
+name = "g_101de55c"
+section = ".data"
+type = "int"
+
 ["SERVER.0x100a8c30"]
 name = "g_entity_type_table"
 section = ".data"
