@@ -1036,6 +1036,7 @@ status = "RELOC"
 size = 194
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "SIZE_MISMATCH"
+note = "prove: Function returns void and no --watch-va was given — there is nothing to compare (EAX is undefined at exit for void functions). Pass --watch-va for each global the function writes."
 
 ["SERVER.0x10015dc0"]
 size = 55
