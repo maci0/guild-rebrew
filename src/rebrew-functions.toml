@@ -1267,7 +1267,7 @@ status = "SIZE_MISMATCH"
 
 ["SERVER.0x100198b0"]
 size = 355
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 analysis = "Recursive production value calculator. Computes the base value of an object type by looking up prototype data (stride 0x41), applying worker skill bonuses from building prototypes, and recursively summing ingredient costs (up to 4 ingredients). Caches result at proto_entry+0x38. Applies quality and production multipliers."
 
 ["SERVER.0x10019a20"]
@@ -1304,11 +1304,11 @@ status = "EXACT"
 
 ["SERVER.0x10019d30"]
 size = 407
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 
 ["SERVER.0x10019ed0"]
 size = 395
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 ghidra = "gm_KannObjektHergestellt"
 
 ["SERVER.0x1001a060"]

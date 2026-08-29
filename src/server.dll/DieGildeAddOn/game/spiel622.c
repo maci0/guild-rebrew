@@ -184,8 +184,11 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 
 	entity = (char*) g_entity_table + entity_index * 0x41;
 	if (*(int*) (entity + 0x38) != 0) {
+		int scale;
+
+		scale = param2 & 0xff;
 		value = (double) (*(int*) (entity + 0x38) << 5);
-		value *= (double) (param2 & 0xff);
+		value *= scale;
 		value *= *(float*) 0x10025fb8;
 		if (*(char*) (entity + 0x21) == 3) {
 			value *= *(float*) 0x10025fb4;
@@ -199,11 +202,11 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 		record = (char*) (g_entity_type_table + min_val * 0x24d);
 		mod_value = *(float*) 0x100256cc;
 		for (i = 0; i < 2; i++) {
-			mod_value += (double) *(unsigned char*) (record + i + 0x233) * *(float*) 0x10025fa8 / *(double*) 0x10025fa0;
+			mod_value += (double) *(unsigned char*) (record + i + 0x233) * *(float*) 0x10025fa8 * *(double*) 0x10025fa0;
 		}
-		value = ((double) *(int*) (entity + 0x22) / (double) ((*(unsigned short*) (entity + 0x36) == 0) + *(unsigned short*) (entity + 0x36))) * (mod_value / *(double*) 0x100257d0);
+		value = ((double) (unsigned int) *(int*) (entity + 0x22) / (double) ((*(unsigned short*) (entity + 0x36) == 0) + *(unsigned short*) (entity + 0x36))) * (mod_value * *(double*) 0x100257d0);
 	} else {
-		value = ((double) *(int*) (entity + 0x22) / (double) ((*(unsigned short*) (entity + 0x36) == 0) + *(unsigned short*) (entity + 0x36))) * (*(float*) 0x100257c8 / *(double*) 0x100257d0);
+		value = ((double) (unsigned int) *(int*) (entity + 0x22) / (double) ((*(unsigned short*) (entity + 0x36) == 0) + *(unsigned short*) (entity + 0x36))) * (*(float*) 0x100257c8 * *(double*) 0x100257d0);
 	}
 	if (*(char*) entity == 0x17) {
 		return value * *(float*) 0x10025fb0;
@@ -542,7 +545,7 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int entity_index, int requested)
 	if (q != NULL) {
 		msg_field = gm_GetMsgField(q, obj);
 		if (size - msg_field > requested) {
-			return requested < (int) obj ? requested : (int) obj;
+			return requested;
 		}
 		return size - msg_field;
 	}
