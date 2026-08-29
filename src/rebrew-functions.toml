@@ -1459,6 +1459,8 @@ status = "EXACT"
 ["SERVER.0x1001b5cc"]
 source = "DBGHEAP.C:763"
 status = "NEAR_MATCHING"
+size = 815
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 4 x 5 state pairs); EAX=4294901759 vs 65536"
 
 ["SERVER.0x1001b8fb"]
 size = 217
@@ -1514,7 +1516,7 @@ status = "MISSING_SIZE"
 ["SERVER.0x1001bdd0"]
 size = 123
 cflags = "/O1 /Gd"
-status = "SIZE_MISMATCH"
+status = "PROVEN"
 
 ["SERVER.0x1001c9a5"]
 cflags = "/O1 /Gd"
