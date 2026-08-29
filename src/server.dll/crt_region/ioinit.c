@@ -128,19 +128,21 @@ void __cdecl _ioterm(void)
 {
     char** p;
 
-    for (p = (char**)0x11766460; (unsigned int)p < 0x11766560u; p++)
+    for (p = (char**)0x11766460; (int)p < 0x11766560; p++)
     {
         char* base = *p;
         if (base != NULL)
         {
+            char* b = base;
             char* q = base + 0xc;
-            while (q < *p + 0x480)
+            while (b < *p + 0x480)
             {
                 if (*(int*)(q - 4) != 0)
                     DeleteCriticalSection((LPCRITICAL_SECTION)q);
+                b += 0x24;
                 q += 0x24;
             }
-            free(base);
+            free(*p);
             *p = NULL;
         }
     }
