@@ -167,11 +167,17 @@ void __cdecl gm_ResetAllEntities(void)
 
 // FUNCTION: SERVER 0x10015cf0
 // gm_CleanupObjectEntities
-//   NEAR_MATCHING 139/194: control flow and all calls match; remaining diffs
-//   are msvc6 addressing-mode choices — original encodes [esi+eax] (counter as
-//   base reg) and uses `lea ecx,[esi+eax]` for the cleanup pointer (ours folds
-//   to `add eax,esi`, 1 byte smaller, hence SIZE_MISMATCH). Not reachable with
-//   this compiler's address-mode selection; semantics are identical.
+//   SIZE_MISMATCH 139/194 (obj 193): control flow and all calls match; residual
+//   diffs are msvc6 register-role choices — original encodes [esi+eax] (counter
+//   as base reg) and materializes the gm_NoopRet2 arg with `lea ecx,[esi+eax]`
+//   (ours folds to `add eax,esi`, 1 byte smaller, hence SIZE_MISMATCH), and the
+//   branch displacements shift by that byte.  Reshape attempts 2026-08-29
+//   (all byte-identical or worse): `g_query_base + i` operand order in every
+//   index expression, do-while loop form, temp `char* slot` (135/187B).  Not
+//   reachable with this compiler's register allocation; symbolic prove also
+//   explodes (gm_ResolveEntityById stub makes the dynamic/existing/static
+//   if-chain branch per iteration over the 0x53c86-iteration loop).  Semantics
+//   verified identical against the target disasm by hand.
 
 int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
 void __cdecl gm_NoopRet2(char* slot);

@@ -13,7 +13,7 @@ extern char* g_entity_table; /* 0x101de450 */
 
 /* Game function - gm_InitObjektHersteller (initialize object manufacturers)
  *
- * NOTE: NEAR_MATCHING (109/642 exact, rest structural). The control flow,
+ * SIZE_MISMATCH at byte level (obj 630 vs target 642): control flow,
  * constants, and call sequence are correct, but msvc6's register allocation
  * and scheduler diverge from the original binary: original keeps record_base
  * in ebx and byte_offset in ebp (ours: ebp/esi, zero in esi), original spills
@@ -22,8 +22,13 @@ extern char* g_entity_table; /* 0x101de450 */
  * constant stores while our build interleaves them. The early prev_type/record
  * zero stores are kept by the original but eliminated as dead here. No source
  * ordering tried (decl order, init placement, store-before/after-call)
- * reproduces the original allocation; would need a compiler-build that
- * schedules like the original. */
+ * reproduces the original allocation.
+ *
+ * PROVEN 2026-08-29: symbolic equivalence (mem on 0x10139840 + 0x101dd8e0)
+ * with --loop-bound 4000 — the scan loop's per-state back-edge count is
+ * cumulative (88+87+...+1 = 3916) across the outer loop's iterations, so a
+ * bound below ~3900 makes LoopSeer discard the state before the function
+ * terminates; lower bounds report "no terminal states". */
 
 void __cdecl gm_InitObjektHersteller(void)
 {

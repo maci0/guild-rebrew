@@ -72,33 +72,22 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * committed state.
  *
  * The dest-resolution call passes its out-params in the reference's
- * register order: gm_ResolveEntityById(&dest_dynamic_entity,
- * &dest_existing_entity, &source_static_entity, ...) — the second branch
- * of the dest block then re-checks the SOURCE's shared dynamic/existing
- * slot (resolved_dynamic), which the dest call no longer overwrites.
+ * register order: gm_ResolveEntityById(&dest_existing_entity,
+ * &resolved_dynamic, &source_static_entity, ...).  The reference reuses the
+ * SOURCE's resolved_dynamic slot for the dest call's second out-param, so
+ * the dest block's second branch re-checks the DEST's dynamic entity (the
+ * dest call overwrites the source's value) — the earlier formulation passed
+ * (&dest_dynamic_entity, &dest_existing_entity, ...), which left the source's
+ * resolved_dynamic untouched and made branch 2 test the wrong entity (real
+ * semantic bug; the old code failed symbolic proving with EAX=1 vs 0).
  *
- * Size-gap analysis 2026-08-27 (obj 2056 vs target 2057): the ONE byte is
- * NOT a single missing byte — an instruction-level alignment shows ~50
- * scattered ±1..±13-byte deltas summing to -1.  The frame gap (0x228 vs
- * 0x224) does not contribute to the total (the sub/add esp immediates are
- * the same length); the deltas are the tail-merge shape (candidate inlines
- * the two error tails; reference shares one tail at 0x1000e00e), the
- * case-block order, and the register-role cascade.
- *
- * Fresh lever sweep (new this session): declaration order is fully inert
- * (5 permutations → byte-identical); init-STATEMENT order does reorder the
- * zero-stores (verified via 4 permutations) but never flips the store
- * register; container_ptr zero-init / extra zeroed slot local / temp
- * elimination (direct source_container_ptr assignment, 2068B) / decl-
- * initializer form (2033B) all fail.  Reference head has dead `xor ebx,ebx`
- * + `xor ebp,ebp` beside the edi stores — the reference zero-initialized
- * container_ptr (ebx) and source_owner_entity (ebp) as REGISTER variables
- * while the 9 slot locals zero through edi; every C shape materializes the
- * slot-zero in ebx instead (roles: ref ebx=source_container /
- * edi=dest_container+dest_owner_entity+zero; cand edi=both containers /
- * ebx=dest_owner_entity+zero).  Flags re-confirmed: /G5 /G6 /GB /Og /Oi-
- * /Ob0 /O1 /Ox /Oy- do not flip it.  /O2 /Gd stays the best committed
- * state (261 raw / 392 reloc-masked bytes). */
+ * Byte-level: still SIZE_MISMATCH (obj 2055 vs target 2057) — the residual
+ * deltas are the tail-merge shape (candidate inlines the two error tails;
+ * reference shares one tail at 0x1000e00e), the case-block order, and the
+ * register-role cascade (reference zeroes the saved locals through edi with
+ * a 0x228 frame; the C builds zero through ebx with a 0x224 frame —
+ * docs/msvc6-allocator.md GRA class).  Semantically PROVEN equivalent
+ * (Z3, EAX) as of 2026-08-29. */
 
 
 // CFLAGS: /O2 /Gd
@@ -226,8 +215,8 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		resolve_result = gm_GetFieldByType(cmd, *(int*)(cmd + 0x10));
 		*(int*)(cmd + 0x10) = resolve_result;
 		resolve_result = gm_ResolveEntityById(
-			(void**)&dest_dynamic_entity,
 			(void**)&dest_existing_entity,
+			(void**)&resolved_dynamic,
 			(void**)&source_static_entity,
 			resolve_result
 		);

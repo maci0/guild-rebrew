@@ -1,7 +1,15 @@
 /* InitNewDynastyEntity - initializes a dynasty entity: sets its link flags,
  * fills the static field buffers with random height values, initializes the
  * entity's geometry/speed fields and spawn stats (5 values), then links it
- * into the season-based entity table. */
+ * into the season-based entity table.
+ *
+ * Returns void: the only caller (0x100196a2) discards the return value and
+ * the reference's EAX at exit is the discarded rand_mod(2) result, so the
+ * earlier `int` prototype made symbolic proving fail on junk EAX.
+ * SIZE_MISMATCH at byte level (obj 339 vs target 346): pure register-role
+ * delta in the two fill loops (reference: outer counter on the stack, edi =
+ * p - 0x100a9820, ebx = 0; ours: ebx/edi register walkers) — semantics
+ * verified identical against the target by hand. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100122e0
@@ -16,7 +24,7 @@ extern int __cdecl find_entity_27(int entity_id);
 extern int __cdecl fcn_10016cd0(int a, int b, int c);
 extern unsigned char g_current_season;
 
-int __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, void* entity)
+void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, void* entity)
 {
 	int i;
 	int j;
