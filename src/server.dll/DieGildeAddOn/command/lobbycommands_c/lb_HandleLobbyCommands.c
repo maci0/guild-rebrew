@@ -24,21 +24,24 @@ int __cdecl lb_HandleLobbyCommands(char* player, char* msg)
 	int i;
 	int arr[8];
 	char buf[0x100];
+	char* m14;
 
 	flags = *(unsigned int*) player;
 	if ((flags & 0x4000) != 0) {
 		LogMessageInternal((char*) 0x1002d70c, 0x29a, (char*) 0x1002d740, 1);
+		msg[0] = 2;
+		return cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1 ? -1 : 0;
 	} else if ((flags & 0x2000) == 0) {
 		LogMessageInternal((char*) 0x1002d70c, 0x2a4, (char*) 0x1002d740, 1);
+		msg[0] = 2;
+		return cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1 ? -1 : 0;
 	} else {
 		goto join;
 	}
 
-	msg[0] = 2;
-	return cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1 ? -1 : 0;
-
 join:
 	count = 0;
+	i = 0;
 	for (slot = (PlayerSlot*) 0x101deb00;
 	     (int) slot < 0x114ffe20;
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
@@ -57,15 +60,16 @@ join:
 		return 0;
 	}
 
-	*(unsigned int*) (msg + 0x18) = 0;
-	for (slot = (PlayerSlot*) 0x101deb00;
-	     (int) slot < 0x114ffe20;
+	m14 = msg + 0x14;
+	slot = (PlayerSlot*) 0x101deb00;
+	*(unsigned int*) (m14 + 4) = (unsigned int) slot;
+	for (; (int) slot < 0x114ffe20;
 	     slot = (PlayerSlot*) ((char*) slot + 0x264264)) {
 		flags = slot->flags;
 		if ((flags & 1) && (flags & 0x200) && (char*) slot != player &&
-		    *(int*) ((char*) slot + 0x264218) == *(int*) (msg + 0x20)) {
-			memset(arr, 0, sizeof arr);
-			i = 0;
+		    *(int*) ((char*) slot + 0x264218) == *(int*) (m14 + 0xc)) {
+			arr[0] = 0; arr[1] = 0; arr[2] = 0; arr[3] = 0;
+			arr[4] = 0; arr[5] = 0; arr[6] = 0; arr[7] = 0;
 			for (slot2 = (PlayerSlot*) 0x101deb00;
 			     (int) slot2 < 0x114ffe20;
 			     slot2 = (PlayerSlot*) ((char*) slot2 + 0x264264)) {
@@ -79,26 +83,24 @@ join:
 				i++;
 			}
 			count = 0;
-			while (arr[count] != 0) {
-				count++;
-				if (count >= 8) {
+			while (count < 8) {
+				if (arr[count] == 0) {
+					*(unsigned int*) (m14 + 0xc) = count;
 					break;
 				}
-			}
-			if (count < 8) {
-				*(unsigned int*) (msg + 0x20) = count;
+				count++;
 			}
 			break;
 		}
 	}
 
-	sprintf(buf, "lb_ExPlayerHasJoined: before <<memcpy>>: %i", *(unsigned int*) player);
+	sprintf(buf, (char*) 0x1002d81c, *(unsigned int*) player);
 	LogMessageInternal((char*) 0x1002d70c, 0x2dd, buf, 1);
-	memcpy((char*) player + 0x26420c, msg + 0x14, 87);
-	sprintf(buf, "lb_ExPlayerHasJoined: after <<memcpy>>: %i", *(unsigned int*) player);
+	memcpy((char*) player + 0x26420c, m14, 87);
+	sprintf(buf, (char*) 0x1002d7f0, *(unsigned int*) player);
 	LogMessageInternal((char*) 0x1002d70c, 0x2e2, buf, 1);
 	*(unsigned int*) player &= ~0x2000;
-	sprintf(buf, "lb_ExPlayerHasJoined: before <<srv_PutConnSCommand>>: %i", *(unsigned int*) player);
+	sprintf(buf, (char*) 0x1002d7b4, *(unsigned int*) player);
 	LogMessageInternal((char*) 0x1002d70c, 0x2e7, buf, 1);
 
 	for (slot = (PlayerSlot*) 0x101deb00;
@@ -112,7 +114,7 @@ join:
 		}
 	}
 
-	sprintf(buf, "lb_ExPlayerHasJoined: status on exit: %i", *(unsigned int*) player);
+	sprintf(buf, (char*) 0x1002d788, *(unsigned int*) player);
 	LogMessageInternal((char*) 0x1002d70c, 0x2ef, buf, 1);
 	return 0;
 }

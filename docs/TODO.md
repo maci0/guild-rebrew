@@ -404,7 +404,7 @@ _lock_stream (0x1001BB60, 47B) RELOC 100% (condition: stream >= _iob &&
 stream <= _iob+0x260 -> __lock(index); else EnterCriticalSection via
 __declspec(dllimport) for the ff15 import-call form). __ioterm
 (crt_ioterm.c) body is byte-perfect 168/168 but verify reports SIZE_MISMATCH:
-rebrew-function.toml records size 235 (spans the two now-separate helpers);
+rebrew-functions.toml records size 235 (spans the two now-separate helpers);
 rebrew has no tool path to refresh library-region sizes (extract only lists
 un-reversed candidates) — metadata artifact, not a code issue. bm 248.
 
