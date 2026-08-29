@@ -768,8 +768,7 @@ note = "prove: Z3 found a satisfying assignment where EAX differs (checked 18 x 
 
 ["SERVER.0x10010850"]
 size = 370
-status = "STUB"
-note = "prove: Z3 found a satisfying assignment where EAX differs (checked 1 x 1 state pairs); EAX=0 vs 4026531840"
+status = "PROVEN"
 
 ["SERVER.0x100109d0"]
 size = 832
@@ -864,6 +863,7 @@ status = "SIZE_MISMATCH"
 blocker = "Target keeps -1 in ebp (or ebp,0xffffffff at loop entry; mov [mem],ebp x3: ahm_info[0], esi+0xa5, esi+0x95) — pre-6.0-style constant caching MSVC6 SP6 does not emit for this loop shape (docs/TOOLCHAIN.md fingerprint; docs/msvc6-allocator.md Finding 4). 15+ C formulations tried (register/const/volatile/pointer forms, store order, guard clauses, block removal): best 1464B vs 1463 (1B over). Flag sweep (192 combos) and GA found no valid shape. msvc5/420 cache the read-count 1 in ebp instead. Fix requires register-hint tooling or per-function pre-6.0 toolchain."
 analysis = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 globals = "SERVER 0x100a8c34"
+note = "prove: Z3 found a satisfying assignment where EAX differs (checked 3 x 7 state pairs); EAX=1 vs 0"
 
 ["SERVER.0x10012eb0"]
 size = 884
@@ -1022,6 +1022,7 @@ status = "EXACT"
 size = 642
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 status = "SIZE_MISMATCH"
+note = "prove: Function returns void and no --watch-va was given — there is nothing to compare (EAX is undefined at exit for void functions). Pass --watch-va for each global the function writes."
 
 ["SERVER.0x10015950"]
 size = 861

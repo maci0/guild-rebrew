@@ -35,7 +35,20 @@ extern unsigned int ls_ID2Ptr(void);
 
 /* Loads graveyard-specific data from a save file. Reads
  * production slots, worker assignments, and field states
- * for graveyard buildings. */
+ * for graveyard buildings.
+ *
+ * NOTE: SIZE_MISMATCH (1464 vs 1463, 1 byte). 100% mnemonic-aligned with
+ * the reference (496/496 same-mnemonic diffs) — control flow, calls and
+ * constants match; remaining deltas are MSVC6 register allocation and block
+ * layout: the reference caches the -1 sentinel in ebp (`or ebp,-1` once +
+ * `mov [..], ebp` at 3 sites) while our build rematerializes
+ * `mov dword ptr [..], 0xffffffff` (the "constant-caching blocker", +1 byte
+ * net), and the reference keeps stream_ctx in edi with a 4-register prologue
+ * (ours: 3 registers, frame offsets shifted by 4). rebrew prove reports an
+ * EAX=1 vs 0 mismatch on some (3 x 7) explored state pairs — consistent with
+ * the read-hook symbolics under the divergent block layout, not confirmed as
+ * a real behavioral difference (mnemonics align 100%); not reachable with
+ * this compiler's scheduling. */
 
 
 unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)

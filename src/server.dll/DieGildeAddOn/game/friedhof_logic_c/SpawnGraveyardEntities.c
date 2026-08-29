@@ -64,6 +64,8 @@ int __cdecl SpawnGraveyardEntities(void* entity, int count)
 				spawned++;
 			}
 		}
+	} else {
+		spawned = 0;
 	}
 	return spawned;
 }
