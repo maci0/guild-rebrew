@@ -18,7 +18,7 @@
  *     if (puVar1 != (ushort *)0x0) {
  *       puVar1 = gm_StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *       if (puVar1 != (ushort *)0x0) {
- *         return (uint)(g_something_1 - *(int *)(puVar1 + 0x14) < 2);
+ *         return (uint)(g_current_year - *(int *)(puVar1 + 0x14) < 2);
  *       }
  *     }
  *   }
@@ -45,7 +45,7 @@
 
 #include "../command_internal.h"
 
-extern int g_something_1;
+extern int g_current_year;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
@@ -58,7 +58,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 /* Validation handler: checks preconditions for election ('elec')
  * or trade ('buy ') commands by resolving the entity and
- * verifying timing constraints against g_something_1. */
+ * verifying timing constraints against g_current_year. */
 
 // FUNCTION: SERVER 0x1000d060
 int __cdecl cm_ChkElectionOrTrade(int cmd)
@@ -71,7 +71,7 @@ int __cdecl cm_ChkElectionOrTrade(int cmd)
 		if (entity != (ushort*) 0x0) {
 			entity = gm_StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
 			if (entity != (ushort*) 0x0) {
-				return (int) (g_something_1 - *(int*) (entity + 0x14) <= 1);
+				return (int) (g_current_year - *(int*) (entity + 0x14) <= 1);
 			}
 		}
 	}

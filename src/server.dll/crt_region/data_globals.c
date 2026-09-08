@@ -63,9 +63,9 @@ CRITICAL_SECTION* locktable[0x40]; /* per-lock CRITICAL_SECTION ptrs */
 // DATA: SERVER 0x11766438
 void* g_11766438;          /* pool: region scan cursor (ptr into array) */
 // DATA: SERVER 0x11766440
-int g_11766440;            /* pool: region count */
+int __sbh_cntHeaderList; /* was __sbh_cntHeaderList */            /* pool: region count */
 // DATA: SERVER 0x11766444
-void* g_11766444;          /* pool: region descriptor array */
+void* __sbh_pHeaderList; /* was __sbh_pHeaderList */          /* pool: region descriptor array */
 // DATA: SERVER 0x11766460
 int g_11766460[0x40];      /* stream group ptr table (0x11766460..0x1176655c) */
 // DATA: SERVER 0x11766560
@@ -109,6 +109,7 @@ void (*g_100356e0)(void);  /* _crt_runtime_error user hook (0x1001fdf8) */
 // DATA: SERVER 0x100355a0
 void* g_100355a0;          /* _pnhheap - new-handler fnptr (0x1001d238) */
 // DATA: SERVER 0x10033ef0
+// SIZE 0x8
 struct rterr_entry { int num; char* text; };   /* _NMSG_WRITE runtime-error table (0x1001fe31) */
 struct rterr_entry g_rterrlist[18];
 // DATA: SERVER 0x10035838

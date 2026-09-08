@@ -39,6 +39,10 @@ Thumbs.db
 original/
 
 # Temp / scratch files from RE workflow
+.scratch/
+.scratchwork/
+__mc_tmp.c
+*.cod
 diff_*.txt
 ga_*.txt
 fix_*.py
@@ -71,6 +75,7 @@ diff.json
 # Vendored tool binaries (re-downloadable)
 tools/ghidra-cli
 rebrew-functions.toml.lock
+rebrew-data.toml.lock
 
 # Legacy binary layout zip (replaced by the committed text layout/<target>/)
 layout/*.zip

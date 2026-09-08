@@ -1,12 +1,12 @@
 /* gm_StartEntityQuery — sets up an entity query from a vararg filter list. */
 
-/* NOTE: structure is faithful to the reference (loop, switch, flag dispatch,
- * shared query tail all match), but the entry allocation cannot be reproduced
- * byte-for-byte: the reference parks the zero in eax (table load in ecx,
- * count stores via eax-moffs, esi pushed only around the loop); MSVC 6.0
- * insists on loading the table into eax and parking the zero in esi whenever
- * the check_container tail is present (see docs/msvc6-allocator.md
- * "Finding 1/2"). Best effort: 151/316 bytes. */
+/* NOTE: the entry allocation is order-sensitive. Each flag must be zeroed
+ * immediately before its own global store (flag1/g_query_flag1, then
+ * flag2/g_query_flag2), after the filter stores; that keeps flag1 in dl and
+ * flag2 in bl. Zeroing both flags up front commons the value into bl and
+ * costs the g_query_flag3/g_query_flag1 stores. The -1 filter values are
+ * written as unsigned literals into unsigned globals so MSVC 6.0 emits
+ * immediate stores instead of commoning -1 into a register. */
 
 // FUNCTION: SERVER 0x10016460
 
@@ -17,8 +17,8 @@
 extern char* g_item_def_table; /* 0x101de450 */
 extern int g_query_filter_max_id; /* 0x10030b94 */
 extern int g_query_filter_owner; /* 0x10030b98 */
-extern short g_query_filter_type; /* 0x10030b9c */
-extern char g_query_filter_state; /* 0x10030b9e */
+extern unsigned short g_query_filter_type; /* 0x10030b9c */
+extern unsigned char g_query_filter_state; /* 0x10030b9e */
 extern char g_query_flag1; /* 0x1003545c */
 extern char g_query_flag2; /* 0x1003545d */
 extern char g_query_flag3; /* 0x1003545e */
@@ -46,15 +46,15 @@ unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int
 		return (unsigned short*) 0;
 	}
 
-	flag1 = 0;
-	flag2 = 0;
-
 	g_query_filter_max_id = 0x7fff;
-	g_query_filter_owner = -1;
-	g_query_filter_type = (short) 0xffff;
-	g_query_filter_state = (char) 0xff;
+	g_query_filter_owner = 0xffffffff;
+	g_query_filter_type = 0xffff;
+	g_query_filter_state = 0xff;
 	g_query_flag3 = 0;
+
+	flag1 = 0;
 	g_query_flag1 = flag1;
+	flag2 = 0;
 	g_query_flag2 = flag2;
 	g_query_active = 1;
 	g_query_count = 0;
@@ -102,11 +102,11 @@ unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int
 		g_query_flag2 = flag2;
 
 		if (flag1 != 0) {
-			container_id = (int) g_query_base;
 			if (flag2 != 0) {
 				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xb66, "gm_ff_Objekt: Invalid Combination of Flags", 1);
 				return (unsigned short*) 0;
 			}
+			container_id = (int) g_query_base;
 			goto query_tail;
 		}
 	}

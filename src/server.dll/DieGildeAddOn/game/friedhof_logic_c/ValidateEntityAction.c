@@ -6,8 +6,8 @@
 // FUNCTION: SERVER 0x10011890
 // SYMBOL: _ValidateEntityAction
 
-extern char* dword_100a8c30;
 extern int g_1003546c;
+extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl SpawnGraveyardEntities(void* building, int count);
 
@@ -23,7 +23,7 @@ int __cdecl ValidateEntityAction(void* cmd)
 		if (grave_id != 0xffff) {
 			if ((char*) 0x100358a0 + grave_id * 0x21c != (char*) g_1003546c) {
 				field_id = *(unsigned char*) entity;
-				if (dword_100a8c30[field_id + field_id * 588] != 0x1d) {
+				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
 					return -2;
 				}
 				if (*(void**) ((char*) entity + 0x65) == 0) {

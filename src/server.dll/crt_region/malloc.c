@@ -38,9 +38,9 @@ void* __cdecl fcn_1001a809(unsigned int size, int nhFlag)
 
 // FUNCTION: SERVER 0x1001a835
 
-extern void __cdecl _mlock(int);  /* 0x1001d036 */
-extern void __cdecl _munlock(int); /* 0x1001d097 */
-extern void* __cdecl fcn_1001d869(unsigned int); /* 0x1001d869 - pool block alloc */
+extern void __cdecl _lock(int);  /* 0x1001d036 -> symbol __lock */
+extern void __cdecl _unlock(int); /* 0x1001d097 -> symbol __unlock */
+extern void* __cdecl __sbh_alloc_block(unsigned int); /* 0x1001d869 -> ___sbh_alloc_block */
 extern void* __cdecl __old_sbh_alloc_block(unsigned int); /* 0x1001e30c - block alloc */
 
 extern int g_11766450;          /* 0x11766450 - allocator mode: 3=pool, 2=block */
@@ -56,14 +56,14 @@ void* __cdecl fcn_1001a835(unsigned int size)
     {
         if (size <= g_11766448)
         {
-            _mlock(9);
+            _lock(9);
             __try
             {
-                p = fcn_1001d869(size);
+                p = __sbh_alloc_block(size);
             }
             __finally
             {
-                _munlock(9);
+                _unlock(9);
             }
             if (p != NULL)
                 return p;
@@ -79,14 +79,14 @@ void* __cdecl fcn_1001a835(unsigned int size)
         if (size > g_10033b9c)
             return HeapAlloc(g_1176644c, 0, size);
 
-        _mlock(9);
+        _lock(9);
         __try
         {
             p = __old_sbh_alloc_block(size >> 4);
         }
         __finally
         {
-            _munlock(9);
+            _unlock(9);
         }
         if (p != NULL)
             return p;

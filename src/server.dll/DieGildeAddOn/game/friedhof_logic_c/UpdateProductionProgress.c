@@ -1,12 +1,11 @@
 /* UpdateProductionProgress - advances a production slot's progress by the
  * building's production time, clamped to [0, 0xff]. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10011790
 // SYMBOL: _UpdateProductionProgress
 
-extern char* dword_100a8c30;
 extern int g_1003546c;
+extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
@@ -19,6 +18,7 @@ int __cdecl UpdateProductionProgress(void* building)
 	void* workers;
 	void* slot;
 	int sum;
+	int neg;
 
 	gm_ResolveEntityById(&entity, 0, 0, *(int*) ((char*) building + 8));
 	if (entity) {
@@ -26,7 +26,7 @@ int __cdecl UpdateProductionProgress(void* building)
 		if (grave_id != 0xffff) {
 			if ((char*) 0x100358a0 + grave_id * 0x21c != (char*) g_1003546c) {
 				field_id = *(unsigned char*) entity;
-				if (dword_100a8c30[field_id + field_id * 588] != 0x1d) {
+				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
 					return -2;
 				}
 				workers = *(void**) ((char*) entity + 0x65);
@@ -41,8 +41,12 @@ int __cdecl UpdateProductionProgress(void* building)
 					return -7;
 				}
 				sum = *(unsigned char*) ((char*) slot + 0xc);
-				sum += *(int*) ((char*) building + 0x13);
-				sum = (sum <= 0) ? 0 : sum;
+				sum = *(int*) ((char*) building + 0x13) + sum;
+				/* Spelling the negative clamp as an explicit setle/dec/and
+				 * mask, rather than a ternary, is what emits the target's
+				 * byte-load-then-copy pair ahead of the add. */
+				neg = (sum <= 0) ? 1 : 0;
+				sum &= neg - 1;
 				if (sum >= 0xff) {
 					sum = 0xff;
 				}

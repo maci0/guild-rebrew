@@ -36,8 +36,7 @@ extern unsigned int ls_ID2Ptr(void);
  * records (0x100a8c88, stride 0x2f4) with name/timestamps/flags/population/
  * resource pairs/political state.
  *
- * Byte-match note (2026-08-26/27): compiled 1354/1361 bytes, 758/1361 masked
- * matches (55.7%); prologue + phase 1 (0x0-0x1df) byte-identical.  The
+ * Byte-match note: RELOC, 1361/1361.  The
  * count-read is MSVC6-split: `&count` lands in the dead file-arg slot
  * (lea [esp+0x18]) while the phase-1 loop bound reloads the 0x3e copy at
  * [esp+0x10] — the read value is dead, exactly as in the reference build.
@@ -50,21 +49,44 @@ extern unsigned int ls_ID2Ptr(void);
  * `jl` bound compare, as in the reference) and the reads anchored on the
  * derived `q = ptr2 - 8`; ptr2 then stays memory-resident (arg-slot
  * induction, `mov ebx,[esp+0x18]` reload at the head) matching the
- * reference.  The 7-byte gap + phase-2 register plan (reference keeps
- * `ebp = ptr2-0x48` as a long-lived base with `ebx` counters; this C
- * keeps `q` in `edi` with `ebp` counters) is an MSVC6 register-allocation
- * choice not steerable from C — ~15 formulations tried (base-relative
- * variants trigger induction-variable elimination / constant-folding,
- * declaration order and `register` hints are ignored).
- * Resolved via `rebrew prove`: semantically PROVEN (EAX, 15 state pairs). */
+ * reference.
+ *
+ * Phase 2 uses TWO bases, matching the reference: the head reads (through
+ * ptr2+0x21) stay on `q = ptr2 - 8`, and everything from the second
+ * 10x8 loop onward moves to `b = ptr2 - 0x48`, which the reference holds
+ * in ebp for the rest of the record (`lea edi,[ebp+0xb4]`,
+ * `lea eax,[ebp+0x104]`, `add ebp,0x2ec` for the final version-gated
+ * read).  Anchoring that tail on `q` instead cost 25 matches and 19 bytes.
+ *
+ * Every phase-2 read from the second 10x8 loop onward used to sit 0x10 too
+ * high (b+0xc4 where the reference reads b+0xb4, through b+0x2fc against
+ * b+0x2ec).  That was a real read-offset bug, not just a byte mismatch: the
+ * reference's record layout is contiguous, the first 10x8 loop ending at
+ * b+0xb4 exactly where the second begins (`lea edi,[ebp+0xb4]` at
+ * 0x10013dfb, `add ebp,0x2ec` at 0x10014025).  Corrected, 727 -> 729.
+ *
+ * What closed the remaining edi<->ebx role swap (729 -> RELOC): `inner` and
+ * `i` were function-scope locals shared by the phase-1 and phase-2 loops.
+ * That shared residency pinned phase 2's record base into ebx instead of the
+ * reference's edi, shifting every instruction from 174 on.  Declaring a
+ * separate `inner`/`i` pair inside each of the two loop bodies freed the
+ * register and the tail fell out with the reference's roles: 729 -> 1290.
+ * The seven phase-2 sub-loops then needed the reference's statement order,
+ * counter zeroed before the pointer is set up and incremented before the
+ * pointer advances, which the `do { } while (i < N)` form emits: 1290 ->
+ * 1357.  The last four bytes were the first 10x8 loop's latch, fixed by
+ * moving its `inner += 8` into the `for` third clause so the increment pairs
+ * with the counter: 1357 -> 1361/1361, RELOC.
+ *
+ * All 46 `~~` operands resolved: the only call target is 0x10012440
+ * (ls_ReadVfsDataChecked, db/server.dll_functions.csv) and the only global
+ * is 0x1002d4ec (g_file_version, rebrew_globals.h:18). */
 
 int __cdecl ls_LoadTownData(int file)
 {
 	int count;
 	int ptr;
 	int ptr2;
-	char* inner;
-	int i;
 	void* ctx;
 
 	ctx = (void*) file;
@@ -76,6 +98,8 @@ int __cdecl ls_LoadTownData(int file)
 	}
 
 	for (ptr = 0x1009b768; ptr < 0x100a8c38; ptr += 0x2a90) {
+		char* inner;
+		int i;
 		char* hdr = (char*) (ptr - 8);
 		if (!ls_ReadVfsDataChecked(hdr, 4, 1, ctx)) {
 			return 0;
@@ -138,6 +162,9 @@ int __cdecl ls_LoadTownData(int file)
 	ptr2 = 0x100a8c88;
 	while (ptr2 < 0x100a9858) {
 		char* q = (char*) (ptr2 - 8);
+		char* b = (char*) (ptr2 - 0x48);
+		char* inner;
+		int i;
 
 		if (!ls_ReadVfsDataChecked(q - 0x40, 0x20, 1, ctx)) {
 			return 0;
@@ -168,101 +195,112 @@ int __cdecl ls_LoadTownData(int file)
 		}
 
 		inner = (char*) (ptr2 + 0x1c);
-		for (i = 0; i < 10; i++) {
+		for (i = 0; i < 10; i++, inner += 8) {
 			if (!ls_ReadVfsDataChecked(inner, 8, 1, ctx)) {
 				return 0;
 			}
-			inner += 8;
 		}
 
-		inner = q + 0x74;
-		for (i = 0; i < 10; i++) {
+		i = 0;
+		inner = b + 0xb4;
+		do {
 			if (!ls_ReadVfsDataChecked(inner, 8, 1, ctx)) {
 				return 0;
 			}
+			i++;
 			inner += 8;
-		}
+		} while (i < 10);
 
-		if (!ls_ReadVfsDataChecked(q + 0xc4, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(b + 0x104, 1, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(q + 0xc5, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(b + 0x105, 1, 1, ctx)) {
 			return 0;
 		}
 
-		inner = q + 0xc8;
-		for (i = 0; i < 4; i++) {
+		i = 0;
+		inner = b + 0x108;
+		do {
 			if (!ls_ReadVfsDataChecked(inner, 4, 1, ctx)) {
 				return 0;
 			}
+			i++;
 			inner += 4;
-		}
+		} while (i < 4);
 
-		inner = q + 0xd8;
-		for (i = 0; i < 4; i++) {
+		i = 0;
+		inner = b + 0x118;
+		do {
 			if (!ls_ReadVfsDataChecked(inner, 4, 1, ctx)) {
 				return 0;
 			}
+			i++;
 			inner += 4;
-		}
+		} while (i < 4);
 
-		if (!ls_ReadVfsDataChecked(q + 0xe8, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(b + 0x128, 4, 1, ctx)) {
 			return 0;
 		}
 
-		inner = q + 0xec;
-		for (i = 0; i < 0xb; i++) {
+		i = 0;
+		inner = b + 0x12c;
+		do {
 			if (!ls_ReadVfsDataChecked(inner, 1, 1, ctx)) {
 				return 0;
 			}
+			i++;
 			inner++;
-		}
+		} while (i < 0xb);
 
-		if (!ls_ReadVfsDataChecked(q + 0xf7, 1, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(b + 0x137, 1, 1, ctx)) {
 			return 0;
 		}
 
-		inner = q + 0xf8;
-		for (i = 0; i < 7; i++) {
+		i = 0;
+		inner = b + 0x138;
+		do {
 			if (!ls_ReadVfsDataChecked(inner, 1, 1, ctx)) {
 				return 0;
 			}
+			i++;
 			inner++;
+		} while (i < 7);
+
+		if (!ls_ReadVfsDataChecked(b + 0x13f, 1, 1, ctx)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(b + 0x140, 1, 1, ctx)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(b + 0x141, 1, 1, ctx)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(b + 0x142, 1, 1, ctx)) {
+			return 0;
 		}
 
-		if (!ls_ReadVfsDataChecked(q + 0xff, 1, 1, ctx)) {
-			return 0;
-		}
-		if (!ls_ReadVfsDataChecked(q + 0x100, 1, 1, ctx)) {
-			return 0;
-		}
-		if (!ls_ReadVfsDataChecked(q + 0x101, 1, 1, ctx)) {
-			return 0;
-		}
-		if (!ls_ReadVfsDataChecked(q + 0x102, 1, 1, ctx)) {
-			return 0;
-		}
-
-		inner = q + 0x104;
-		for (i = 0; i < 8; i++) {
+		i = 0;
+		inner = b + 0x144;
+		do {
 			if (!ls_ReadVfsDataChecked(inner, 0x12, 1, ctx)) {
 				return 0;
 			}
+			i++;
 			inner += 0x12;
-		}
+		} while (i < 8);
 
-		if (!ls_ReadVfsDataChecked(q + 0x194, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(b + 0x1d4, 4, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(q + 0x198, 4, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(b + 0x1d8, 4, 1, ctx)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(q + 0x19c, 0xd0, 1, ctx)) {
+		if (!ls_ReadVfsDataChecked(b + 0x1dc, 0xd0, 1, ctx)) {
 			return 0;
 		}
 
 		if (g_file_version >= 0x10037) {
-			if (!ls_ReadVfsDataChecked(q + 0x2ac, 8, 1, ctx)) {
+			if (!ls_ReadVfsDataChecked(b + 0x2ec, 8, 1, ctx)) {
 				return 0;
 			}
 		}

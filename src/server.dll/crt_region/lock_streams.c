@@ -1,5 +1,5 @@
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001bb60
+// FUNCTION: SERVER 0x1001bb60 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 #include <windows.h>
 
 extern void __cdecl _mlock(int);   /* 0x1001d036 */
@@ -20,7 +20,7 @@ void __cdecl fcn_1001bb60(void* p)
         EnterCriticalSection((LPCRITICAL_SECTION)((char*)p + 0x20));
 }
 
-// FUNCTION: SERVER 0x1001bbb2
+// FUNCTION: SERVER 0x1001bbb2 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 void __cdecl fcn_1001bbb2(void* p)
 {

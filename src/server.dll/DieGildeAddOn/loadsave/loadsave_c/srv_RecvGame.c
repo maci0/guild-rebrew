@@ -2,6 +2,9 @@
 #include "../../../Units/m_alloc/m_alloc.h"
 #include "../../../Units/vfs/vfs.h"
 #include "../../game/entity.h"
+extern int g_entity_id_counter;
+extern int g_sequence_counter;
+
 
 #include <stdlib.h>
 
@@ -11,7 +14,7 @@ extern char gm_RandomMod(int);
 extern unsigned char _ftol();
 extern void gm_AddOrAccumulateObject(int, int, int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-extern int g_save_version;
+extern int g_file_version;
 extern int g_file_version; /* 0x1002d4ec */
 extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
 extern int g_101de454; /* 0x101de454 */
@@ -93,13 +96,13 @@ int srv_RecvGame(void)
 	}
 	ls_ReadVfsDataChecked((void*) 0x10035440, 4, 1, (void*) file_handle);
 	ls_ReadVfsDataChecked((void*) 0x101de580, 0x18, 1, (void*) file_handle);
-	if (g_save_version >= 0x10030) {
-		ls_ReadVfsDataChecked((void*) 0x10030b70, 4, 1, (void*) file_handle);
+	if (g_file_version >= 0x10030) {
+		ls_ReadVfsDataChecked((void*) &g_entity_id_counter, 4, 1, (void*) file_handle);
 	}
-	if (g_save_version >= 0x1003d) {
-		ls_ReadVfsDataChecked((void*) 0x10035408, 4, 1, (void*) file_handle);
+	if (g_file_version >= 0x1003d) {
+		ls_ReadVfsDataChecked((void*) &g_sequence_counter, 4, 1, (void*) file_handle);
 	} else {
-		*(int*) 0x10035408 = 1000000;
+		g_sequence_counter = 1000000;
 	}
 	load_status = ls_LoadExistingEntities(file_handle);
 	if (load_status == 0) {
@@ -174,8 +177,8 @@ int srv_RecvGame(void)
 		g_101de560 = 0;
 		return 0;
 	}
-	if (g_save_version >= 0x10045) {
-		load_status = amt_fio_LoadAemter(file_handle, g_save_version);
+	if (g_file_version >= 0x10045) {
+		load_status = amt_fio_LoadAemter(file_handle, g_file_version);
 		if (load_status == 0) {
 			LogMessageInternal(
 				"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",

@@ -25,7 +25,7 @@ void __cdecl LogWinsockError(int err_code);
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 int __stdcall ServerMainThread(void* lpThreadParameter);
-extern int g_stop_flag;
+extern int g_handler_started;
 void __cdecl InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);
 void __cdecl ShutdownMemoryAllocator();
@@ -36,14 +36,15 @@ extern int g_net_socket;
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 int __cdecl SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
-short __cdecl get_command_type(char*);
+int GetCommandPayloadSize(unsigned char* cmd_payload);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 extern unsigned char g_connections[]; /* 0x101deb00 */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 
 // FUNCTION: SERVER 0x10009310
-// exit_handler
+// SYMBOL: _exit_handler@12
+// SIZE: 6
 int __stdcall exit_handler(int a, int b, int c)
 {
 	return 1;
@@ -55,7 +56,7 @@ int __stdcall exit_handler(int a, int b, int c)
 // FUNCTION: SERVER 0x10009320
 // Init
 
-HANDLE g_thread_handle;
+void* g_thread_handle;
 
 int __cdecl Init(LPVOID param)
 {
@@ -74,10 +75,10 @@ void __cdecl Exit(void)
 	if (!g_thread_handle) {
 		return;
 	}
-	g_stop_flag = 1;
+	g_handler_started = 1;
 	do {
 		Sleep(10);
-	} while (g_stop_flag);
+	} while (g_handler_started);
 	TerminateThread(g_thread_handle, 0);
 	CloseHandle(g_thread_handle);
 }

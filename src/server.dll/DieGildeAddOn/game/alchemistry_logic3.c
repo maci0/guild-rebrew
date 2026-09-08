@@ -15,7 +15,7 @@ int __cdecl gm_RefreshMarketAvailability(int season);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_DeallocEntity(unsigned int index, int param);
 void* __cdecl gm_NextEntityQueryMatch(void);
-extern float fColorScale;
+extern float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
 extern float g_float_const_cc;

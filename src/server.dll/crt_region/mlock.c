@@ -1,53 +1,75 @@
 // CFLAGS: /O1 /Oy- /Gd
-// FUNCTION: SERVER 0x1001d036
+/* Full local replacement for LIBCMT:mlock.obj so the linker never pulls
+ * LIBCMT's copy (which imports FatalAppExitA / IsBadWritePtr). */
 #include <windows.h>
 
-/* CRT lock table: array of per-lock CRITICAL_SECTION pointers, indexed by
- * locknum.  Lock 0x11 (_LOCK_LOCK) serializes table entry creation. */
-extern CRITICAL_SECTION* locktable[]; /* 0x10031aac */
+#define _TOTAL_LOCKS 44
 
-extern void* __cdecl malloc(unsigned int); /* 0x1001a7f7 */
-extern void __cdecl free(void*);           /* 0x1001ab81 */
-extern void __cdecl _amsg_exit(int);     /* 0x1001ba71 - game _amsg_exit */
-extern void __cdecl _mlock(int);
-extern void __cdecl _munlock(int);
+CRITICAL_SECTION* __locktable[_TOTAL_LOCKS];
+/* Game-side copies (tidtable.c) reference locktable[] as CRITICAL_SECTION**. */
+CRITICAL_SECTION** locktable = __locktable;
 
+extern void* __cdecl malloc(unsigned int);
+extern void __cdecl free(void*);
+extern void __cdecl _amsg_exit(int);
+extern void __stdcall ExitProcess(UINT);
+
+void __cdecl _mlock(int locknum);
+void __cdecl _munlock(int locknum);
+
+void __cdecl _lockerr_exit(char* msg)
+{
+    (void)msg;
+    ExitProcess(1);
+}
+
+void __cdecl _mtinitlocks(void)
+{
+    int i;
+    for (i = 0; i < _TOTAL_LOCKS; i++)
+        __locktable[i] = NULL;
+}
+
+void __cdecl _mtdeletelocks(void)
+{
+    int i;
+    for (i = 0; i < _TOTAL_LOCKS; i++) {
+        if (__locktable[i] != NULL) {
+            DeleteCriticalSection(__locktable[i]);
+            free(__locktable[i]);
+            __locktable[i] = NULL;
+        }
+    }
+}
+
+// FUNCTION: SERVER 0x1001d036
+// _mlock
 void __cdecl _mlock(int locknum)
 {
     CRITICAL_SECTION* pcs;
 
-    if (locktable[locknum] == NULL)
-    {
-        pcs = (CRITICAL_SECTION*)malloc(0x18);
+    if (__locktable[locknum] == NULL) {
+        pcs = (CRITICAL_SECTION*)malloc(sizeof(CRITICAL_SECTION));
         if (pcs == NULL)
-            _amsg_exit(0x11);   /* _RT_LOCK: fatal lock allocation error */
-        _mlock(0x11);             /* _LOCK_LOCK */
-        if (locktable[locknum] == NULL)
-        {
+            _amsg_exit(0x11);
+        _mlock(0x11);
+        if (__locktable[locknum] == NULL) {
             InitializeCriticalSection(pcs);
-            locktable[locknum] = pcs;
-        }
-        else
-        {
+            __locktable[locknum] = pcs;
+        } else {
             free(pcs);
         }
         _munlock(0x11);
     }
-    EnterCriticalSection(locktable[locknum]);
+    EnterCriticalSection(__locktable[locknum]);
 }
 
 // FUNCTION: SERVER 0x1001d097
-
+// _munlock
 void __cdecl _munlock(int locknum)
 {
-    LeaveCriticalSection(locktable[locknum]);
+    LeaveCriticalSection(__locktable[locknum]);
 }
-
-/* _lock/_unlock: generic lock-table entry/exit used by the LIBCMT stdio
- * objects that the game did not copy.  Provided so those objects bind to
- * the game's lock machinery instead of pulling LIBCMT's mlock.obj (whose
- * fatal path imports FatalAppExitA, which the original binary does not
- * import). */
 
 void __cdecl _lock(int locknum)
 {

@@ -1,5 +1,5 @@
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001a692
+// FUNCTION: SERVER 0x1001a692 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 #include <windows.h>
 
 /* Game's _cexit override: runs exit-time cleanup via the game's _doexit. */

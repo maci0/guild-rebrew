@@ -9,6 +9,7 @@
 #include <stdlib.h>
 
 #pragma pack(push, 1)
+// SIZE 0x43
 typedef struct EntitySlot {
 	short active;               /* 0x00 */
 	int id;                     /* 0x02 */

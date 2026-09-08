@@ -17,6 +17,7 @@
 #include <windows.h>
 
 /* V6 sbh structures (winheap.h tagHeader/tagRegion/tagGroup/tagEntry). */
+// SIZE 0xc
 typedef struct tagEntry
 {
     int                 sizeFront;
@@ -24,23 +25,27 @@ typedef struct tagEntry
     struct tagEntry *   pEntryPrev;
 } SbhEntry;
 
+// SIZE 0x4
 typedef struct tagEntryEnd
 {
     int                 sizeBack;
 } SbhEntryEnd;
 
+// SIZE 0x8
 typedef struct tagListHead
 {
     SbhEntry *          pEntryNext;
     SbhEntry *          pEntryPrev;
 } SbhListHead;
 
+// SIZE 0x204
 typedef struct tagGroup
 {
     int                 cntEntries;
     SbhListHead         listHead[64];
 } SbhGroup;
 
+// SIZE 0x41c4
 typedef struct tagRegion
 {
     int                 indGroupUse;
@@ -50,6 +55,7 @@ typedef struct tagRegion
     SbhGroup            grpHeadList[32];
 } SbhRegion;
 
+// SIZE 0x14
 typedef struct tagHeader
 {
     unsigned int        bitvEntryHi;
@@ -62,12 +68,14 @@ typedef struct tagHeader
 /* V5 ("old") sbh structures (winheap.h __old_sbh_*). */
 typedef char            OldPara[16];
 
+// SIZE 0x8
 typedef struct __old_region_map
 {
     int                 free_paras_in_page;
     unsigned int        last_failed_alloc;
 } OldRegionMap;
 
+// SIZE 0x1000
 typedef struct __old_sbh_page
 {
     unsigned char *     p_starting_alloc_map;
@@ -77,6 +85,7 @@ typedef struct __old_sbh_page
     OldPara             alloc_blocks[240];
 } OldSbhPage;
 
+// SIZE 0x2020
 typedef struct __old_sbh_region
 {
     struct __old_sbh_region * p_next_region;
@@ -102,8 +111,8 @@ extern int g_11766430;              /* __sbh_sizeHeaderList */
 extern int g_11766434;              /* __sbh_indGroupDefer */
 extern void * g_11766438;           /* __sbh_pHeaderScan */
 extern void * g_1176643c;           /* __sbh_pHeaderDefer */
-extern int g_11766440;              /* __sbh_cntHeaderList */
-extern void * g_11766444;           /* __sbh_pHeaderList */
+extern int __sbh_cntHeaderList;              /* __sbh_cntHeaderList */
+extern void * __sbh_pHeaderList;           /* __sbh_pHeaderList */
 extern char g_10031b78;              /* static region descriptor head (defined in data_globals.c) */
 extern OldSbhRegion * g_10033b98;   /* __old_sbh_p_starting_region */
 extern int g_100355a4;              /* __old_sbh_decommitable_pages */
@@ -128,15 +137,15 @@ extern void * __cdecl fcn_1001b200(void *, const void *, unsigned int); /* game 
  * ==================================================================== */
 
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001d515
+// FUNCTION: SERVER 0x1001d515 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 SbhHeader * __cdecl fcn_1001d515(void * pvAlloc)
 {
     SbhHeader * pHeaderLast;
     SbhHeader * pHeader;
     unsigned int offRegion;
 
-    pHeaderLast = (SbhHeader *)g_11766444 + g_11766440;
-    pHeader = (SbhHeader *)g_11766444;
+    pHeaderLast = (SbhHeader *)__sbh_pHeaderList + __sbh_cntHeaderList;
+    pHeader = (SbhHeader *)__sbh_pHeaderList;
     while (pHeader < pHeaderLast)
     {
         offRegion = (unsigned int)pvAlloc - (unsigned int)pHeader->pHeapData;
@@ -154,7 +163,7 @@ SbhHeader * __cdecl fcn_1001d515(void * pvAlloc)
  * commit vector returns to its initial value).
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001d540
+// FUNCTION: SERVER 0x1001d540 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 void __cdecl fcn_1001d540(SbhHeader * pHeader, void * pvAlloc)
 {
     SbhRegion * pRegion;
@@ -320,14 +329,14 @@ void __cdecl fcn_1001d540(SbhHeader * pHeader, void * pvAlloc)
 
                 fcn_1001b200((void *)g_1176643c,
                              (void *)((SbhHeader *)g_1176643c + 1),
-                             (int)((SbhHeader *)g_11766444 + g_11766440) -
+                             (int)((SbhHeader *)__sbh_pHeaderList + __sbh_cntHeaderList) -
                              (int)((SbhHeader *)g_1176643c + 1));
-                g_11766440--;
+                __sbh_cntHeaderList--;
 
                 if (pHeader > (SbhHeader *)g_1176643c)
                     pHeader--;
 
-                g_11766438 = g_11766444;
+                g_11766438 = __sbh_pHeaderList;
             }
         }
 
@@ -343,7 +352,7 @@ void __cdecl fcn_1001d540(SbhHeader * pHeader, void * pvAlloc)
  * creating a new region when needed.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001d869
+// FUNCTION: SERVER 0x1001d869 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 void * __cdecl fcn_1001d869(int intSize)
 {
     SbhHeader * pHeaderLast;
@@ -361,7 +370,7 @@ void * __cdecl fcn_1001d869(int intSize)
     int sizeNewFree;
     int indNewFree;
 
-    pHeaderLast = (SbhHeader *)g_11766444 + g_11766440;
+    pHeaderLast = (SbhHeader *)__sbh_pHeaderList + __sbh_cntHeaderList;
 
     /* add 8 bytes entry overhead and round up to next para size */
     sizeEntry = (intSize + 2 * 4 + 15) & ~15;   /* 2 * sizeof(int) */
@@ -394,7 +403,7 @@ void * __cdecl fcn_1001d869(int intSize)
     /* if no entry, scan from list start up to the rover */
     if (pHeader == pHeaderLast)
     {
-        pHeader = (SbhHeader *)g_11766444;
+        pHeader = (SbhHeader *)__sbh_pHeaderList;
         while (pHeader < (SbhHeader *)g_11766438)
         {
             if ((bitvEntryHi & pHeader->bitvEntryHi) |
@@ -415,7 +424,7 @@ void * __cdecl fcn_1001d869(int intSize)
 
             if (pHeader == pHeaderLast)
             {
-                pHeader = (SbhHeader *)g_11766444;
+                pHeader = (SbhHeader *)__sbh_pHeaderList;
                 while (pHeader < (SbhHeader *)g_11766438)
                 {
                     if (pHeader->bitvCommit)
@@ -561,24 +570,24 @@ void * __cdecl fcn_1001d869(int intSize)
  * allocate a REGION, reserve the 1MB region address space.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001db72
+// FUNCTION: SERVER 0x1001db72 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 SbhHeader * __cdecl fcn_1001db72(void)
 {
     SbhHeader * pHeader;
 
     /* if the list is full, realloc to extend its size */
-    if (g_11766440 == g_11766430)
+    if (__sbh_cntHeaderList == g_11766430)
     {
-        if (!(pHeader = (SbhHeader *)HeapReAlloc(g_1176644c, 0, g_11766444,
+        if (!(pHeader = (SbhHeader *)HeapReAlloc(g_1176644c, 0, __sbh_pHeaderList,
                             (g_11766430 + 16) * 20)))   /* sizeof(HEADER) */
             return NULL;
 
-        g_11766444 = pHeader;
+        __sbh_pHeaderList = pHeader;
         g_11766430 += 16;
     }
 
     /* point to the new header in the list */
-    pHeader = (SbhHeader *)g_11766444 + g_11766440;
+    pHeader = (SbhHeader *)__sbh_pHeaderList + __sbh_cntHeaderList;
 
     /* allocate a new region associated with the new header */
     if (!(pHeader->pRegion = (SbhRegion *)HeapAlloc(g_1176644c, 8,
@@ -599,7 +608,7 @@ SbhHeader * __cdecl fcn_1001db72(void)
     pHeader->bitvCommit = 0xffffffff;   /* BITV_COMMIT_INIT */
 
     /* complete entry by incrementing the list count */
-    g_11766440++;
+    __sbh_cntHeaderList++;
 
     /* initialize index of group to try first (none defined yet) */
     pHeader->pRegion->indGroupUse = -1;
@@ -612,7 +621,7 @@ SbhHeader * __cdecl fcn_1001db72(void)
  * region (commit + fill the group's page entries) and return its index.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001dc23
+// FUNCTION: SERVER 0x1001dc23 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 int __cdecl fcn_1001dc23(SbhHeader * pHeader)
 {
     SbhRegion * pRegion;
@@ -701,7 +710,7 @@ int __cdecl fcn_1001dc23(SbhHeader * pHeader)
  * in place (allocated entries keep the +1 size marker).
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001dd1e
+// FUNCTION: SERVER 0x1001dd1e (was FUNCTION; provided by LIBCMT / library_msvc.h)
 int __cdecl fcn_1001dd1e(SbhHeader * pHeader, void * pvAlloc, int intNew)
 {
     SbhRegion * pRegion;
@@ -893,7 +902,7 @@ int __cdecl fcn_1001dd1e(SbhHeader * pHeader, void * pvAlloc, int intNew)
  * the region_map[] and the first committed pages.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e014
+// FUNCTION: SERVER 0x1001e014 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 OldSbhRegion * __cdecl fcn_1001e014(void)
 {
     OldSbhRegion * pregnew;
@@ -983,7 +992,7 @@ OldSbhRegion * __cdecl fcn_1001e014(void)
  * V5 region, unlink its descriptor (the static one is only marked free).
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e158
+// FUNCTION: SERVER 0x1001e158 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 void __cdecl fcn_1001e158(OldSbhRegion * preg)
 {
     /* release the passed region */
@@ -1016,7 +1025,7 @@ void __cdecl fcn_1001e158(OldSbhRegion * preg)
  * pages are uncommitted.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e1ae
+// FUNCTION: SERVER 0x1001e1ae (was FUNCTION; provided by LIBCMT / library_msvc.h)
 void __cdecl fcn_1001e1ae(int count)
 {
     OldSbhRegion * preg1;
@@ -1087,7 +1096,7 @@ void __cdecl fcn_1001e1ae(int count)
  * descriptors through the output parameters.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e270
+// FUNCTION: SERVER 0x1001e270 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 unsigned char * __cdecl fcn_1001e270(void * pblck, OldSbhRegion ** ppreg, OldSbhPage ** pppage)
 {
     OldSbhRegion * preg;
@@ -1127,7 +1136,7 @@ unsigned char * __cdecl fcn_1001e270(void * pblck, OldSbhRegion ** ppreg, OldSbh
  * alloc_map[] clear) and trigger page decommitment when a page empties.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e2c7
+// FUNCTION: SERVER 0x1001e2c7 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 void __cdecl fcn_1001e2c7(OldSbhRegion * preg, OldSbhPage * ppage, unsigned char * pmap)
 {
     OldRegionMap * pregmap;
@@ -1156,7 +1165,7 @@ void __cdecl fcn_1001e2c7(OldSbhRegion * preg, OldSbhPage * ppage, unsigned char
  * last resort creates a new region.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e30c
+// FUNCTION: SERVER 0x1001e30c (was FUNCTION; provided by LIBCMT / library_msvc.h)
 void * __cdecl __old_sbh_alloc_block(size_t para_req)
 {
     OldSbhRegion * preg;
@@ -1331,7 +1340,7 @@ void * __cdecl __old_sbh_alloc_block(size_t para_req)
  * a specific V5 page (start at p_starting_alloc_map, then wrap to 0).
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e514
+// FUNCTION: SERVER 0x1001e514 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 void * __cdecl fcn_1001e514(OldSbhPage * ppage, size_t free_para_count, size_t para_req)
 {
     unsigned char * pmap1;
@@ -1481,7 +1490,7 @@ void * __cdecl fcn_1001e514(OldSbhPage * ppage, size_t free_para_count, size_t p
  * place (pmap = alloc_map[] entry, sizes in 16-byte paragraphs).
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e638
+// FUNCTION: SERVER 0x1001e638 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 int __cdecl fcn_1001e638(OldSbhRegion * preg, OldSbhPage * ppage, unsigned char * pmap, size_t new_para_sz)
 {
     unsigned char * pmap2;

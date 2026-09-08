@@ -7,7 +7,7 @@
 #define REBREW_GLOBALS_H
 
 /* .data */
-extern int g_log_level_table; /* 0x10027078 */
+extern int g_log_level_table[]; /* 0x10027078 */
 extern char g_log_format_table; /* 0x10027084 */
 extern char g_str_10028888; /* 0x10028888 */
 extern char g_str_10028aec; /* 0x10028AEC */
@@ -15,9 +15,11 @@ extern char g_str_10028b04; /* 0x10028B04 */
 extern char g_str_10028b60; /* 0x10028B60 */
 extern char g_str_10028b78; /* 0x10028B78 */
 extern char g_1002a0f8; /* 0x1002A0F8 */
-extern int g_save_version; /* 0x1002D4EC */
+extern int g_file_version; /* 0x1002D4EC */
 extern int g_1002dde0; /* 0x1002DDE0 */
 extern int g_next_object_id; /* 0x10030B6C */
+extern int g_entity_id_counter; /* 0x10030B70 */
+extern unsigned short g_entity_slot_table[]; /* 0x100A8C94 */
 extern char g_filter_extra5; /* 0x10030B84 */
 extern int g_query_filter_extra1; /* 0x10030B88 */
 extern int g_query_filter_extra2; /* 0x10030B8C */
@@ -36,6 +38,7 @@ extern void* g_array_ptr; /* 0x10034640 */
 extern char g_stream_pool; /* 0x10034670 */
 extern int g_stream_count; /* 0x10034678 */
 extern int g_connection_counter; /* 0x1003467C, connection counter */
+extern int g_sequence_counter; /* 0x10035408 */
 extern int g_citizen_count; /* 0x10035434 */
 extern unsigned char g_current_season; /* 0x10035439 */
 extern int g_dynasty_field_44; /* 0x10035444 */
@@ -51,6 +54,7 @@ extern unsigned char* g_query_filter_base; /* 0x10035464 */
 extern unsigned short* g_query_cursor; /* 0x10035468 */
 extern int g_entity_table_end; /* 0x1003546C */
 extern int g_current_year; /* 0x10035880 */
+extern int g_plant_info_table; /* 0x1002d878 */
 extern int g_default_value_b; /* 0x10035884 */
 extern int g_default_value_c; /* 0x10035888 */
 extern short g_default_value_d; /* 0x1003588C */
@@ -58,10 +62,11 @@ extern char* g_slot_table; /* 0x100358A0 */
 extern char g_entity_state_base; /* 0x100358A2 */
 extern int g_entity_ref_table; /* 0x100358FC */
 extern char g_entity_type_bytes; /* 0x10035A04 */
+extern int g_query_state_a0c; /* 0x10035A0C */
 extern int g_some_limit; /* 0x1009ACFC */
 extern unsigned int g_1009b764; /* 0x1009B764 */
 extern char* g_slot_array; /* 0x1009B770 */
-extern int g_entity_type_table; /* 0x100A8C30 */
+extern char* g_entity_type_table; /* 0x100A8C30 */
 extern unsigned short* g_query_base; /* 0x100A8C34 */
 extern int g_query_match_count; /* 0x100A8C38 */
 extern unsigned int g_100a8cf8; /* 0x100A8CF8 */
@@ -73,7 +78,6 @@ extern unsigned int g_download_received; /* 0x101DEAC4 */
 extern int g_download_slots; /* 0x101DEAC8 */
 extern unsigned int g_download_buffer; /* 0x101DEAE8 */
 extern int g_listen_socket; /* 0x101DEAEC, listen socket */
-extern unsigned int g_player_slot_0; /* 0x101DEB00, first player slot (stride 0x264264 bytes) */
 extern unsigned int g_player_slot_field; /* 0x101DEB14 */
 extern unsigned int g_player_slot_overflow; /* 0x114FFE20, overflow slot */
 extern int g_list_head; /* 0x117640C4 */
@@ -82,6 +86,7 @@ extern int g_log_file_handle; /* 0x11766204 */
 
 /* .rdata */
 extern float g_float_const_a0; /* 0x100256A0 */
+extern float g_float_const_a8; /* 0x100256A8 */
 extern float g_float_const_ac; /* 0x100256AC */
 extern float g_float_const_b0; /* 0x100256B0 */
 extern float g_float_const_b4; /* 0x100256B4 */
@@ -91,3 +96,23 @@ extern float g_float_const_c4; /* 0x100256C4 */
 extern float g_float_const_c8; /* 0x100256C8 */
 
 #endif /* REBREW_GLOBALS_H */
+extern int g_chain_id_start; /* 0x1176408C */
+extern int g_max_players; /* 0x11764084 */
+extern int g_game_speed_table; /* 0x10025718 */
+extern int g_game_speed_value; /* 0x1002C3F0 */
+extern int g_game_speed_index; /* 0x1002C3F4 */
+extern float g_color_scale; /* 0x100256A4 */
+extern int g_entity_id_field; /* 0x100358A4 — entity id at slot+4 */
+extern char g_office_slots[]; /* 0x101DE5A0 — 42 x 0x18 */
+extern unsigned char g_entity_base[]; /* 0x1009ACA0 */
+extern unsigned int g_crc_table_241a0[256]; /* 0x100241A0 */
+extern unsigned char g_dynamic_entities[]; /* 0x1009ACA2 */
+extern int g_file_version; /* 0x1002D4EC */
+extern int g_handler_started; /* 0x10034680 */
+extern char g_connections[]; /* 0x101DEB00 */
+extern void* g_thread_handle; /* 0x11764094 */
+extern void (*g_panic_callback)(void); /* 0x10034610 */
+extern void* g_thread_handle; /* 0x11764094 */
+extern void (*g_panic_callback)(void); /* 0x10034610 */
+extern unsigned int g_log_mode_flags; /* 0x10034618 */
+extern int g_handler_started; /* 0x10034680 */

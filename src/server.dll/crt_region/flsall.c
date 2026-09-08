@@ -1,5 +1,5 @@
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001ad32
+// FUNCTION: SERVER 0x1001ad32 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 #include <windows.h>
 
 /* Game's __flsall override: walks the tracked-block table (0x11766564,
@@ -16,6 +16,10 @@ extern int __cdecl fcn_1001ac9f(void*);        /* 0x1001ac9f - delete block */
 extern int g_11767580;   /* 0x11767580 - tracked-block table count */
 extern void* g_11766564; /* 0x11766564 - tracked-block table */
 
+/* RELOC 164/164. mode reads: volatile slot reads in the loop body (keeps the
+ * 3-push head and [esp+0x10] compares), plain read in the tail return (emits
+ * cmp [esp+0x14] ahead of pop ecx). A plain body homes mode in ebp; a volatile
+ * tail reads [esp+0x10] after the pop. */
 int __cdecl fcn_1001ad32(int mode)
 {
     int i;
@@ -36,15 +40,18 @@ int __cdecl fcn_1001ad32(int mode)
             flags = *(int*)((char*)p + 0xc);
             if (flags & 0x83)
             {
-                if (mode == 1)
+                if (*(volatile int*)&mode == 1)
                 {
                     if (fcn_1001ac9f(p) != -1)
                         count++;
                 }
-                else if (mode == 0)
+                else
                 {
-                    if ((flags & 2) != 0 && fcn_1001ac9f(p) == -1)
-                        fail = -1;
+                    if (*(volatile int*)&mode == 0)
+                    {
+                        if ((flags & 2) != 0 && fcn_1001ac9f(p) == -1)
+                            fail = -1;
+                    }
                 }
             }
             fcn_1001bbe1(i, ((void**)g_11766564)[i]);
@@ -52,14 +59,13 @@ int __cdecl fcn_1001ad32(int mode)
         i++;
     }
     _munlock(2);
-    if (*(int*)&mode == 1)
+    if (mode == 1)
         return count;
-    else
-        return fail;
+    return fail;
 }
 
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001ac9f
+// FUNCTION: SERVER 0x1001ac9f (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* _fclose_lk (game copy): flush, then _commit when the _COMMIT flag (0x4000)
  * is set on the stream.  Returns -1 on flush/commit failure, else 0. */
@@ -76,7 +82,7 @@ int __cdecl fcn_1001ac9f(void* stream)
     return 0;
 }
 
-// FUNCTION: SERVER 0x1001bb8f
+// FUNCTION: SERVER 0x1001bb8f (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* _lock_file (game copy): index < 20 locks the global stream lock
  * (index + 0x1c), otherwise the per-stream CRITICAL_SECTION at +0x20. */
@@ -89,7 +95,7 @@ void __cdecl fcn_1001bb8f(int index, void* pio)
         EnterCriticalSection((LPCRITICAL_SECTION)((char*)pio + 0x20));
 }
 
-// FUNCTION: SERVER 0x1001bbe1
+// FUNCTION: SERVER 0x1001bbe1 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* _unlock_file (game copy): mirror of fcn_1001bb8f. */
 
@@ -101,7 +107,7 @@ void __cdecl fcn_1001bbe1(int index, void* pio)
         LeaveCriticalSection((LPCRITICAL_SECTION)((char*)pio + 0x20));
 }
 
-// FUNCTION: SERVER 0x1001f0ff
+// FUNCTION: SERVER 0x1001f0ff (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* _commit (game copy): flushes the stream's file handle to disk via the
  * per-stream group table; sets errno=9 (EBADF) on failure. */
@@ -116,21 +122,26 @@ extern int* __cdecl fcn_1001a7ee(void);  /* 0x1001a7ee - __doserrno */
 
 int __cdecl fcn_1001f0ff(int fd)
 {
-    int result = 0;
+    int result;
+    char** slot;
+    unsigned int off;
 
-    if (fd < g_11766560)
+    if ((unsigned int)fd < (unsigned int)g_11766560)
     {
-        unsigned int bit = (fd & 0x1f) * 36;
-        char* g = (char*)g_11766460[fd >> 5];
-
-        if ((g[bit + 4] & 1) != 0)
+        slot = (char**)&g_11766460[fd >> 5];
+        off = (unsigned int)(fd & 0x1f) * 36;
+        if (((*slot)[off + 4] & 1) != 0)
         {
             fcn_100203a2(fd);
-            if ((g[bit + 4] & 1) != 0)
+            if (((*slot)[off + 4] & 1) != 0)
             {
                 if (FlushFileBuffers(fcn_10020360(fd)) == 0)
+                    result = (int)GetLastError();
+                else
+                    result = 0;
+                if (result != 0)
                 {
-                    *fcn_1001a7ee() = GetLastError();
+                    *fcn_1001a7ee() = result;
                     *fcn_1001a7e5() = 9;
                     result = -1;
                 }
@@ -141,17 +152,14 @@ int __cdecl fcn_1001f0ff(int fd)
                 result = -1;
             }
             fcn_10020401(fd);
+            return result;
         }
     }
-    else
-    {
-        *fcn_1001a7e5() = 9;
-        result = -1;
-    }
-    return result;
+    *fcn_1001a7e5() = 9;
+    return -1;
 }
 
-// FUNCTION: SERVER 0x1001a7e5
+// FUNCTION: SERVER 0x1001a7e5 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* __errno: returns &_ptd->_errno (offset 8 in the _ptd block). */
 
@@ -162,7 +170,7 @@ int* __cdecl fcn_1001a7e5(void)
     return (int*)((char*)_getptd() + 8);
 }
 
-// FUNCTION: SERVER 0x1001a7ee
+// FUNCTION: SERVER 0x1001a7ee (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* __doserrno: returns &_ptd->_doserrno (offset 0xc in the _ptd block). */
 

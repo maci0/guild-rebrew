@@ -12,7 +12,7 @@ extern char gm_RandomMod(int);
 extern unsigned char _ftol();
 extern void gm_AddOrAccumulateObject(int, int, int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-extern int g_save_version;
+extern int g_file_version;
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 extern int g_file_version; /* 0x1002d4ec */
 extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
@@ -45,10 +45,17 @@ extern unsigned int g_entity_table_end; /* 0x1003546c */
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10014070
 // ls_ID2Ptr
-// control flow, stack layout and reloc sites match the reference; the
-// remaining byte deltas are msvc6 scheduler/allocation quirks (entity-loop
-// gate hoisting, node-walk copy-prop) that do not affect the proof — the
-// function is PROVEN (rebrew prove).
+// RELOC, 491/491. The entity loop indexes from the record base (rec = e -
+// 0x170, positive offsets) so msvc6 keeps the address CSE out of the
+// null-check; with e-relative negative offsets it hoists `lea [esi-4]` above
+// the `je` and shifts every following byte (187/491).
+// The list walks need both the target's copy-propagation and its eax/ecx
+// roles, and those are two separate decisions. Guarding on node's successor
+// then walking a second cursor (nxt) that is seeded from node and written
+// back at the end gives `mov ecx,eax` + `mov eax,[ecx+0x3f]`; walking node
+// itself gives the same shape with the registers swapped (461/491), and the
+// original do/while over nxt copy-propagates into `mov eax,[eax+0x3f]`
+// (488/491). Probed in .scratch/pv3/w3-w6.c.
 
 unsigned int ls_ID2Ptr(void)
 {
@@ -62,6 +69,7 @@ unsigned int ls_ID2Ptr(void)
 	unsigned int idx;
 	void* node;
 	void* nxt;
+	unsigned char* rec;
 
 	g_entity_table_end = gm_LookupEntityRecordById(g_entity_table_end);
 	if (g_entity_table_end == 0) {
@@ -76,18 +84,19 @@ unsigned int ls_ID2Ptr(void)
 		}
 	}
 	for (e = (unsigned char*) 0x10035a10; (int) e < 0x1009ae10; e += 0x21c) {
-		if (*(unsigned short*) (e - 0x170) == 0xffff) {
+		rec = e - 0x170;
+		if (*(unsigned short*) rec == 0xffff) {
 			continue;
 		}
-		if (*(int*) (e - 4) == -1) {
-			*(int*) (e - 4) = 0;
+		if (*(int*) (rec + 0x16c) == -1) {
+			*(int*) (rec + 0x16c) = 0;
 		} else {
-			gm_ResolveEntityById(e - 4, 0, 0, *(int*) (e - 4));
+			gm_ResolveEntityById((void**) (rec + 0x16c), 0, 0, *(int*) (rec + 0x16c));
 		}
-		if (*(int*) e == -1) {
-			*(int*) e = 0;
+		if (*(int*) (rec + 0x170) == -1) {
+			*(int*) (rec + 0x170) = 0;
 		} else {
-			gm_ResolveEntityById(e, 0, 0, *(int*) e);
+			gm_ResolveEntityById((void**) (rec + 0x170), 0, 0, *(int*) (rec + 0x170));
 		}
 	}
 	for (i = 0; i < g_query_limit; i++) {
@@ -105,12 +114,12 @@ unsigned int ls_ID2Ptr(void)
 				if (node == 0) {
 					*(void**) (v1 + 0x5d) = s;
 				} else {
-					nxt = *(void**) ((char*) node + 0x3f);
-					if (nxt != 0) {
+					if (*(void**) ((char*) node + 0x3f) != 0) {
+						nxt = node;
 						do {
-							node = nxt;
-							nxt = *(void**) ((char*) node + 0x3f);
-						} while (nxt != 0);
+							nxt = *(void**) ((char*) nxt + 0x3f);
+						} while (*(void**) ((char*) nxt + 0x3f) != 0);
+						node = nxt;
 					}
 					*(void**) ((char*) node + 0x3f) = s;
 				}
@@ -119,12 +128,12 @@ unsigned int ls_ID2Ptr(void)
 				if (node == 0) {
 					*(void**) (v2 + 0x14) = s;
 				} else {
-					nxt = *(void**) ((char*) node + 0x3f);
-					if (nxt != 0) {
+					if (*(void**) ((char*) node + 0x3f) != 0) {
+						nxt = node;
 						do {
-							node = nxt;
-							nxt = *(void**) ((char*) node + 0x3f);
-						} while (nxt != 0);
+							nxt = *(void**) ((char*) nxt + 0x3f);
+						} while (*(void**) ((char*) nxt + 0x3f) != 0);
+						node = nxt;
 					}
 					*(void**) ((char*) node + 0x3f) = s;
 				}
@@ -133,12 +142,12 @@ unsigned int ls_ID2Ptr(void)
 				if (node == 0) {
 					*(void**) (v3 + 0x178) = s;
 				} else {
-					nxt = *(void**) ((char*) node + 0x3f);
-					if (nxt != 0) {
+					if (*(void**) ((char*) node + 0x3f) != 0) {
+						nxt = node;
 						do {
-							node = nxt;
-							nxt = *(void**) ((char*) node + 0x3f);
-						} while (nxt != 0);
+							nxt = *(void**) ((char*) nxt + 0x3f);
+						} while (*(void**) ((char*) nxt + 0x3f) != 0);
+						node = nxt;
 					}
 					*(void**) ((char*) node + 0x3f) = s;
 				}

@@ -14,7 +14,7 @@
  *   ushort *puVar2;
  *   uint uVar3;
  *
- *   *(undefined4 *)(param_1 + 0x14) = g_timestamp_0b6c;
+ *   *(undefined4 *)(param_1 + 0x14) = g_next_object_id;
  *   puVar2 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(param_1 + 0x10));
  *   if (puVar2 == (ushort *)0x0) {
  *     LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x4a94,
@@ -50,7 +50,7 @@
 #include "../../../Units/Error/error.h"
 #include "../command_internal.h"
 
-extern int g_entity_type_table;
+extern char* g_entity_type_table;
 extern unsigned char g_current_season;
 
 void __cdecl ReportMessage(char* msg, ...);
@@ -75,7 +75,7 @@ int __cdecl cm_ExSetGebUpgrade(int cmd, char* result)
 	uint type_id;
 	char* entry;
 
-	*(int*) (cmd + 0x14) = g_timestamp_0b6c;
+	*(int*) (cmd + 0x14) = g_next_object_id;
 	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building == (ushort*) 0) {
 		LogMessageInternal(

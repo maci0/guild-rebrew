@@ -17,7 +17,7 @@
  * to reload result from its stack slot (the target's store+reload tail),
  * which MSVC6's optimizer would otherwise fold away. */
 
-extern int __stdcall __CRT_INIT(void* hmod, unsigned int reason, void* reserved); /* 0x1001b8fb */
+extern int __stdcall _CRT_INIT(void* hmod, unsigned int reason, void* reserved); /* 0x1001b8fb -> __CRT_INIT@12 */
 extern int __stdcall exit_handler(void* a, unsigned int b, void* c);              /* 0x10009310 */
 
 extern int g_100354fc; /* 0x100354fc - __CRT_INIT attach/detach refcount */
@@ -37,7 +37,7 @@ int __stdcall DllMain(void* hMod, unsigned int reason, void* reserved)
     {
         if (g_11767588 != NULL && !g_11767588(hMod, reason, reserved))
             return 0;
-        if (!__CRT_INIT(hMod, reason, reserved))
+        if (!_CRT_INIT(hMod, reason, reserved))
             return 0;
     }
 
@@ -46,11 +46,11 @@ int __stdcall DllMain(void* hMod, unsigned int reason, void* reserved)
     {
         if (result != 0)
             return *vp;
-        __CRT_INIT(hMod, 0, reserved);
+        _CRT_INIT(hMod, 0, reserved);
     }
     if (reason != 0 && reason != 3)
         return *vp;
-    if (!__CRT_INIT(hMod, reason, reserved))
+    if (!_CRT_INIT(hMod, reason, reserved))
         result = 0;
     if (result == 0 || g_11767588 == NULL)
         return *vp;

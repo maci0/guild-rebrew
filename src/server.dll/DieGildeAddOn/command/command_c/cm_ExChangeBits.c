@@ -9,15 +9,15 @@ extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
  * the entity, then sets/clears bits at the command-specified offset
  * with the given size (1/2/4 bytes), mask and value.
  *
- * Byte-match note: PROVEN via rebrew prove.  The head now matches
- * the reference's resolved out-param pattern — a separate `resolved`
- * variable keeps cmd in esi and folds the pre-resolve store as
- * `mov [esi+0x10],eax` (closing the Finding 39/7 fixed-points); the
- * size dispatch and all three per-size read-modify-write blocks
- * match structurally.  Only register roles are swapped (resolved in
- * ecx here vs eax there, and the branch on it inverted je/jne) — a
- * pure allocator cascade, so the function is PROVEN rather than
- * RELOC. */
+ * Byte-match note (RELOC, 208/208): three shapes are load-bearing.
+ * The `+ [base+0x14]` add is hoisted out of the three-way select and
+ * applied once at the merge, matching the target's single
+ * `mov ecx,[esi+0x14]; add eax,ecx`.  The select must assign puVar3
+ * itself; routing it through a separate `char* sel` local scored
+ * 202/208 with the pointer stuck in ecx instead of eax.  The size-1
+ * and size-4 blocks re-read through the pointer for the `or` rather
+ * than caching the masked value in a local; the cached form costs
+ * one instruction each and scored 126/208. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000eaa0
@@ -30,8 +30,6 @@ int __cdecl cm_ExChangeBits(int cmd, char* result)
 	void* pv4;
 	int resolved;
 	unsigned int* puVar3;
-	unsigned char bVar4;
-	unsigned int uVar5;
 	int base;
 	int field;
 	int size;
@@ -45,18 +43,22 @@ int __cdecl cm_ExChangeBits(int cmd, char* result)
 		                   s_cm_ExChangeBits___Invalid_Id_1002d114, 1);
 		return 1;
 	}
+	/* The offset add is hoisted out of the select: the target picks the
+	 * base pointer in eax, then adds [esi+0x14] once at the merge point. */
 	if (resolved != 0)
-		puVar3 = (unsigned int*) ((char*) resolved + *(int*) (base + 0x14));
+		puVar3 = (unsigned int*) resolved;
 	else if (pv8 != 0)
-		puVar3 = (unsigned int*) ((char*) pv8 + *(int*) (base + 0x14));
+		puVar3 = (unsigned int*) pv8;
 	else
-		puVar3 = (unsigned int*) ((char*) pv4 + *(int*) (base + 0x14));
+		puVar3 = (unsigned int*) pv4;
+	puVar3 = (unsigned int*) ((char*) puVar3 + *(int*) (base + 0x14));
 	size = *(int*) (base + 0x18);
 	switch (size) {
 	case 1:
-		bVar4 = *(unsigned char*) puVar3 & (unsigned char) ~*(unsigned char*) (base + 0x20);
-		*(unsigned char*) puVar3 = bVar4;
-		*(unsigned char*) puVar3 = (unsigned char) (*(unsigned char*) (base + 0x1c) | bVar4);
+		*(unsigned char*) puVar3 = *(unsigned char*) puVar3 &
+			(unsigned char) ~*(unsigned char*) (base + 0x20);
+		*(unsigned char*) puVar3 = (unsigned char) (*(unsigned char*) (base + 0x1c) |
+			*(unsigned char*) puVar3);
 		break;
 	case 2:
 		*(unsigned short*) puVar3 = *(unsigned short*) puVar3 &
@@ -65,9 +67,8 @@ int __cdecl cm_ExChangeBits(int cmd, char* result)
 			*(unsigned short*) puVar3);
 		break;
 	case 4:
-		uVar5 = *puVar3 & ~*(unsigned int*) (base + 0x20);
-		*puVar3 = uVar5;
-		*puVar3 = *(unsigned int*) (base + 0x1c) | uVar5;
+		*puVar3 = *puVar3 & ~*(unsigned int*) (base + 0x20);
+		*puVar3 = *(unsigned int*) (base + 0x1c) | *puVar3;
 		break;
 	}
 	if (result != 0) {

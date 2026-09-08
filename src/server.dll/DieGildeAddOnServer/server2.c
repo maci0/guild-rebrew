@@ -25,7 +25,7 @@ void __cdecl LogWinsockError(int err_code);
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
-extern int g_stop_flag;
+extern int g_handler_started;
 void __cdecl InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);
 void __cdecl ShutdownMemoryAllocator();
@@ -36,15 +36,15 @@ extern int g_net_socket;
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 int __cdecl SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
-short __cdecl get_command_type(char*);
+int GetCommandPayloadSize(unsigned char* cmd_payload);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 extern unsigned char g_connections[]; /* 0x101deb00 */
+extern int g_connection_counter; /* 0x1003467c */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 
 // FUNCTION: SERVER 0x10009d30
 // srv_Init
-// CFLAGS: /O2 /Gd
 
 int __cdecl srv_Init(void)
 {
@@ -207,6 +207,27 @@ void __cdecl CleanupSockets(void)
 
 /* accept = 0x1002415c, setsockopt = 0x10024184, GetTickCount = 0x1002405c */
 
+/* RELOC 600/600 (2026-09-07).
+
+ * Two scheduling fixes close the prior 570/600 form:
+
+ * 1. Head store-before-memset: MSVC6 sinks `*(int*)slot = 0x2103` past the
+ * non-aliasing memset. Writing through
+ * `dst + ((char*)slot - dst)` with `dst = slot + 0x26420c` keeps the
+ * `[esi]` encoding and forces the store ahead of `rep stos`
+ * (570 -> 588). Plain `*(int*)slot`, volatile, comma-in-memset, and
+ * `dst - 0x26420c` either sink or emit `[edx-imm]` (size crash).
+
+ * 2. Tail zero stores: with the head alias in place, non-volatile
+ * `*(unsigned int*)(slot + 0x2641f0/f4) = 0` *before* sprintf sinks to
+ * between the last argument push and the call (588 -> 600 RELOC).
+ * Volatile after sprintf left them after the call (588); volatile or
+ * comma-before/above sprintf reordered the pointer/byte cluster (519).
+
+ * Folded fallback `0x101deb00 + 8 * 0x264264` kept; literal `0x114ffe20`
+ * with the dst head reopened the sprintf cluster (546).
+ */
+
 // DATA: SERVER 0x101deaec
 
 // DATA: SERVER 0x101deb00
@@ -252,7 +273,7 @@ no_slots:
 	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x495, s_No_more_Slots_for_new_Connection_100299c8, 1);
 	if (*(int*) 0x114ffe20 != 0)
 		goto ret_neg1;
-	slot = (unsigned char*) 0x114ffe20;
+	slot = (unsigned char*) 0x101deb00 + 8 * 0x264264;
 
 do_accept:
 	addrlen = 16;
@@ -268,10 +289,13 @@ do_accept:
 		setopt(sock, 0xffff, 0x1001, (const char*) &optval, 4);
 	}
 
-	*(int*) 0x1003467c = *(int*) 0x1003467c + 1;
-	*(int*) (slot + 4) = *(int*) 0x1003467c;
-	*(int*) slot = 0x2103;
-	memset(slot + 0x26420c, 0, 0x57);
+	g_connection_counter = g_connection_counter + 1;
+	*(int*) (slot + 4) = g_connection_counter;
+	{
+		char* dst = (char*) (slot + 0x26420c);
+		*(int*) (dst + ((char*) slot - dst)) = 0x2103;
+		memset(dst, 0, 0x57);
+	}
 	*(int*) (slot + 0x26420c) = *(int*) (slot + 4);
 	if (i == 0)
 		*(int*) slot = *(int*) slot | 0x400;
@@ -303,11 +327,11 @@ do_accept:
 
 	*(unsigned int*) (slot + 0x2641f8) = (unsigned int) (slot + 0x154);
 	*(unsigned int*) (slot + 0x2641fc) = (unsigned int) (slot + 0x132154);
+	*(unsigned int*) (slot + 0x2641f0) = 0;
+	*(unsigned int*) (slot + 0x2641f4) = 0;
 	sprintf(msg, s_New_Connection_from__li__li__li__100299a0,
 		((unsigned char*) &addr)[4], ((unsigned char*) &addr)[5],
 		((unsigned char*) &addr)[6], ((unsigned char*) &addr)[7]);
-	*(unsigned int*) (slot + 0x2641f0) = 0;
-	*(unsigned int*) (slot + 0x2641f4) = 0;
 	LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x4e1, msg, 1);
 	return sock;
 
@@ -404,8 +428,13 @@ int __cdecl ReceivePacketHeader(unsigned int* conn)
 	*(unsigned short*) ((char*) conn + 0x14a) = (unsigned short) (*(unsigned short*) ((char*) conn + 0x14a) + n);
 	*(unsigned int*) ((char*) conn + 0x150) = GetTickCount() + 0x493e0;
 	if (*(unsigned short*) ((char*) conn + 0x14a) == *(unsigned short*) ((char*) conn + 0x19)) {
-		*(unsigned int*) conn |= 0x80;
-		*(unsigned short*) ((char*) conn + 0x14a) = 0;
+		unsigned int flags;
+		/* Both accesses must be volatile: the volatile flag read keeps
+		 * the OR in al instead of materializing 0x80 into edx, and the
+		 * volatile clear pins it between the load and the OR. */
+		flags = *(volatile unsigned int*) conn;
+		*(volatile unsigned short*) ((char*) conn + 0x14a) = 0;
+		*(unsigned int*) conn = flags | 0x80;
 	}
 	return 0;
 }/* Sends queued data to a client socket. Transmits buffered

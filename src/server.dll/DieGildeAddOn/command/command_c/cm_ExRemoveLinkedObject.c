@@ -9,107 +9,60 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
  * and detaches it from the entity chain. */
 
 // FUNCTION: SERVER 0x1000f0d0
-__declspec(naked) int __cdecl cm_ExRemoveLinkedObject(int cmd, char *result)
+int __cdecl cm_ExRemoveLinkedObject(int param_1, char *param_2)
 {
-	(void) cmd;
-	(void) result;
-	__asm {
-		push ecx
-		push esi
-		push edi
-		mov edi, dword ptr [esp + 0x14]
-		test edi, edi
-		je L_skip_mark
-		mov byte ptr [edi], 2
-	L_skip_mark:
-		mov esi, dword ptr [esp + 0x10]
-		lea ecx, [esp + 8]
-		lea edx, [esp + 0x14]
-		mov eax, dword ptr [esi + 0x10]
-		push eax
-		push ecx
-		lea eax, [esp + 0x18]
-		push edx
-		push eax
-		call gm_ResolveEntityById
-		mov eax, dword ptr [esp + 0x20]
-		add esp, 0x10
-		test eax, eax
-		je L_no_p1
-		mov ecx, dword ptr [esi + 0x14]
-		cmp ecx, -1
-		jne L_have_query
-		mov ecx, dword ptr [esi + 0x18]
-		add eax, 0x5d
-		push ecx
-		jmp L_call_remove
-	L_have_query:
-		mov edx, dword ptr [eax + 0x5d]
-		push ecx
-		push 1
-		push 6
-		push 2
-		push edx
-		call gm_StartEntityQuery
-		add esp, 0x14
-		mov dword ptr [esp + 0x14], eax
-		test eax, eax
-		je L_ret_neg2
-		mov ecx, dword ptr [esi + 0x18]
-		add eax, 0x14
-		push ecx
-		jmp L_call_remove
-	L_ret_neg2:
-		pop edi
-		mov eax, 0xfffffffe
-		pop esi
-		pop ecx
-		ret
-	L_no_p1:
-		mov eax, dword ptr [esp + 8]
-		test eax, eax
-		je L_check_p2
-		mov edx, dword ptr [esi + 0x18]
-		add eax, 0x178
-		push edx
-	L_call_remove:
-		push eax
-		call gm_RemoveLinkedNodeById
-		add esp, 8
-		test eax, eax
-		je L_set_ok
-		pop edi
-		pop esi
-		pop ecx
-		ret
-	L_check_p2:
-		mov eax, dword ptr [esp + 0x14]
-		test eax, eax
-		je L_ret_neg1
-		mov ecx, dword ptr [esi + 0x18]
-		add eax, 0x14
-		push ecx
-		push eax
-		call gm_RemoveLinkedNodeById
-		add esp, 8
-		test eax, eax
-		jne L_ret_eax
-	L_set_ok:
-		test edi, edi
-		je L_done
-		mov byte ptr [edi], 1
-	L_done:
-		pop edi
-		xor eax, eax
-		pop esi
-		pop ecx
-		ret
-	L_ret_neg1:
-		or eax, 0xffffffff
-	L_ret_eax:
-		pop edi
-		pop esi
-		pop ecx
-		ret
+	char *statusOut;
+	int result;
+	void *dynEntity;
+
+	/* The volatile read loads param_2 straight into edi at the top instead
+	 * of staging it through eax, which is what makes the prologue push
+	 * ecx/esi/edi before any load. */
+	statusOut = *(char* volatile*)&param_2;
+	if (statusOut != (char *)0x0) {
+		*statusOut = '\x02';
 	}
+	result = param_1;
+	gm_ResolveEntityById((void **)&param_1, (void **)&param_2, &dynEntity, *(int *)(result + 0x10));
+	/* Each arm spells out its own gm_RemoveLinkedNodeById call; the compiler
+	 * tail-merges them onto the shared push/call, which is what emits the
+	 * target's per-branch `push <nodeId>` followed by `jmp` into the merge
+	 * point.  A hand-written goto merge with a shared nodeId local instead
+	 * parks the id in esi and sinks the push past the jmp. */
+	if (param_1 != 0) {
+		if (*(int *)(result + 0x14) == -1) {
+			result = gm_RemoveLinkedNodeById((int *)(param_1 + 0x5d), *(int *)(result + 0x18));
+		} else {
+			param_2 = (char *)gm_StartEntityQuery(*(int *)(param_1 + 0x5d), 2, 6, 1, *(int *)(result + 0x14));
+			/* Positive guard: the target falls through on success and keeps
+			 * the -2 return out of line after it (`je` to the error block). */
+			if (param_2 != (char *)0x0) {
+				result = gm_RemoveLinkedNodeById((int *)((int)param_2 + 0x14), *(int *)(result + 0x18));
+			} else {
+				return -2;
+			}
+		}
+	} else if (dynEntity != (void *)0x0) {
+		result = gm_RemoveLinkedNodeById((int *)((int)dynEntity + 0x178), *(int *)(result + 0x18));
+	} else if (param_2 != (char *)0x0) {
+		/* This arm keeps its own push/call in the target rather than joining
+		 * the merge point the other three share; checking result here instead
+		 * of at the common tail is what stops it being merged in.  The guard
+		 * is positive so the -1 return sits out of line past the tail. */
+		result = gm_RemoveLinkedNodeById((int *)((int)param_2 + 0x14), *(int *)(result + 0x18));
+		if (result != 0) {
+			return result;
+		}
+		goto ok;
+	} else {
+		return -1;
+	}
+	if (result != 0) {
+		return result;
+	}
+ok:
+	if (statusOut != (char *)0x0) {
+		*statusOut = '\x01';
+	}
+	return 0;
 }

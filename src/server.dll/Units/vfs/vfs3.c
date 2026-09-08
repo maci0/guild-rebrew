@@ -7,7 +7,7 @@
 
 int* __cdecl vfs_GetErrnoPtr(void);
 int __cdecl vfs_WriteBufferLocked(void*, int, int, int);
-void __cdecl m_FreeHeapLocked(void*);
+void __cdecl free(void*);
 int __cdecl vfs_FreeGameSubobject(void*);
 int __cdecl vfs_CleanupSubobject(void*);
 int __cdecl vfs_CompressBlock(void*, int);

@@ -27,19 +27,13 @@ typedef struct {
 } Record;
 #pragma pack(pop)
 
-extern char* g_entity_table; /* 0x101de450 */
+extern char* g_item_def_table; /* 0x101de450 */
 void __cdecl gm_InitEntitySlots(void);
-unsigned short* g_query_base;
+extern unsigned short* g_query_base;
 extern int g_query_limit;
-extern Record* g_records;
-void __cdecl free_block(int);
-extern int g_data_ptr;
-extern int g_data_ptr2;
-extern int g_data_ptr3;
-extern int g_data_ptr4;
+void __cdecl m_FreeTracked(void*);
+extern char* g_entity_type_table;
 extern unsigned char* g_entity_ptr;
-int g_entity_type_table;
-extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -47,7 +41,7 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern char* g_array_base;
-extern char g_entity_array[];
+extern char* g_slot_table;
 void __cdecl free_node(char*);
 int __cdecl gm_FreeObjectListRecursive(char**);
 void __cdecl gm_NoopRet2(void);
@@ -70,7 +64,6 @@ extern int g_FilterId;
 extern unsigned short g_FilterVal25;
 extern unsigned short g_FilterVal27;
 extern unsigned char g_FilterVal30;
-extern char* g_array;
 void __cdecl gv_Free3Fields(void* param);
 extern int g_query_state_a0c;
 extern unsigned char g_byte_table_30861;
@@ -83,10 +76,6 @@ void __cdecl SpawnGraveyardEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
-extern char* g_table_a9;
-extern char* dword_100a8c30;
-extern unsigned short* dword_100a8c34;
-extern char* dword_101de450;
 int __cdecl gm_EntityAccumulate(void*);
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 void __cdecl amt_ClearEntityLinks(short*);
@@ -95,21 +84,20 @@ void __cdecl gm_DeallocEntity(unsigned int idx, int param);
 extern int g_citizen_count;
 extern int g_dynasty_field_2c;
 extern int g_dynasty_generation_counter;
-extern char g_entity_base[];
+extern unsigned char g_entity_base[];
 extern char g_entity_end[];
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
 extern float g_const_57bc;
 int __cdecl gm_RandomMod(unsigned short range);
-extern char entity_table[];
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AssignBuildingOwner(unsigned char*, unsigned short, unsigned int);
 int __cdecl gm_WalkEntityChain(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
-extern char entity_slot_table[];
+extern unsigned short g_entity_slot_table[];
 extern float g_const_5fb8; /* 0x10025fb8 */
 extern float g_const_5fb4; /* 0x10025fb4 */
 extern float g_const_5fb0; /* 0x10025fb0 */
@@ -120,9 +108,7 @@ extern float g_float_const_cc; /* 0x100256cc */
 extern float g_gv_const_57c8; /* 0x100257c8 */
 extern double g_const_57d0; /* 0x100257d0 */
 double __cdecl gm_CalculateProductionValue(int, int);
-extern char g_type_idx;
-extern int g_key_table[];
-extern char entity_array[];
+extern char g_current_season;
 int __cdecl gm_SumBuildingProductionValues(char*, int);
 int __cdecl gm_EntityQuerySum(int);
 int __cdecl compute_size(char*); /* 0x10019d00 */
@@ -171,7 +157,7 @@ void __cdecl gm_RemoveEntityLink(int entity)
  * pointer, then sets default field values. No-op on NULL. */
 
 
-/* EntityStruct — stride 0x21c (540 bytes), 768 entries at g_entity_array (0x100358a0)
+/* EntityStruct — stride 0x21c (540 bytes), 768 entries at g_slot_table (0x100358a0)
  * Field map derived from EXE cross-reference (Europa1400Gold_TL.exe):
  *   +0x00 (2)  entity_index      Self-index in array (0xFFFF = free slot)
  *   +0x02 (1)  entity_state      0x0F = dead/free, 0x06/0x07 = active types
@@ -219,8 +205,7 @@ struct EntityStruct {
 	char pad179[0x21c - 0x179];
 };
 
-// DATA: SERVER 0x10035880
-extern unsigned short g_something_1[1];
+// DATA: SERVER 0x10035880 — g_current_year (defined above)
 // DATA: SERVER 0x1009acfc
 // DATA: SERVER 0x100358fc
 extern int g_entity_ref_table[1];
@@ -233,8 +218,10 @@ extern int g_entity_ref_table[1];
 
 // FUNCTION: SERVER 0x10017fb0
 // gm_DeallocEntity
-//   PROVEN (ref-clear loop re-reads *eid per inner iteration — volatile to
-//   defeat msvc6 LICM; -1 store via absolute 0x100358a4+index*0x21c)
+//   Ref-clear loop walks with an explicit pointer over a do/while on the row
+//   base; that shape makes msvc6 load *p into a register and keep the entity
+//   id as the memory operand (mov edi,[eax] / cmp edi,[esi+4]), matching the
+//   original. A `volatile` read of the id inverts the operand roles instead.
 
 int __cdecl sprintf(char* buffer, const char* format, ...); /* 0x1001a299 */
 
@@ -242,15 +229,13 @@ void __cdecl gm_DeallocEntity(unsigned int index, int arg2)
 {
 	char buffer[0x200];
 	char* entity;
-	int* eid;
 	int entity_id;
-	int i;
 	int j;
-	int* ref;
+	int* p;
+	int* base;
 
 	entity = (char*) 0x100358a0 + index * 0x21c;
-	eid = (int*) (entity + 4);
-	entity_id = *eid;
+	entity_id = *(int*) (entity + 4);
 	if (*(unsigned char*) (entity + 2) != 0xf) {
 		entity[8] = 0;
 		*(short*) (entity + 0x28) = *(short*) 0x10035880;
@@ -262,18 +247,27 @@ void __cdecl gm_DeallocEntity(unsigned int index, int arg2)
 		if (*(unsigned short*) entity != 0xffff) {
 			g_citizen_count--;
 		}
-		for (i = 0; i < 0x300; i++) {
-			ref = (int*) ((char*) 0x100358fc + i * 0x21c);
+		base = (int*) 0x100358fc;
+		do {
+			p = base;
 			for (j = 0; j < 8; j++) {
-				if (ref[j] == *(volatile int*) eid) {
-					ref[j] = -1;
+				if (*p == *(int*) (entity + 4)) {
+					*p = -1;
 				}
+				p++;
 			}
-		}
+			base = (int*) ((char*) base + 0x21c);
+		} while ((int) base < 0x1009acfc);
 		memset(entity, 0, 0x21c);
 		*(unsigned short*) entity = 0xffff;
 		*(int*) ((char*) 0x100358a4 + index * 0x21c) = -1;
-		memset((char*) 0x100358fc + index * 0x21c, 0xff, 0x20);
+		/* Written as a dword loop, not memset: msvc6 expands both to the same
+		 * `rep stosd`, but only this form sets edi before ecx as the original
+		 * does. A memset call emits `mov ecx,8` first. */
+		p = (int*) ((char*) 0x100358fc + index * 0x21c);
+		for (j = 0; j < 8; j++) {
+			p[j] = -1;
+		}
 		if (arg2 == 1) {
 			sprintf(buffer, (char*) 0x10031538, entity_id);
 		}
@@ -297,7 +291,7 @@ void __cdecl gm_InitEntitySlots(void)
 		gm_DeallocEntity(i, 2);
 	}
 
-	ptr = g_entity_base;
+	ptr = (char*) g_entity_base;
 	do {
 		memset(ptr, 0, 0xAC);
 		*(short*) ptr = (short) 0xFFFF;
@@ -386,7 +380,7 @@ int __cdecl gm_CheckStatLevel(int entity_idx, int stat_id)
 	if (val == stat_id) {
 		return (unsigned int) g_entity_type_bytes[idx];
 	}
-	result = (int) gm_GetEntityTableEntry(g_entity_array + idx);
+	result = (int) gm_GetEntityTableEntry((char*) &g_slot_table + idx);
 	if (result == 0) {
 		return 0;
 	}
@@ -610,14 +604,18 @@ int __cdecl gm_GetOppositeStatIndex(int stat_id)
 
 char __cdecl gm_RandomStatModifier(char stat_value)
 {
-	int uv;
 	char result;
 
-	if (stat_value == 0) {
+	/* The volatile byte read keeps the parameter's low byte in bl; the mask
+	 * below then reloads the full dword and homes it in the parameter slot,
+	 * which is what fild reads. A plain read lets msvc6 fold both into one
+	 * dword load. */
+	result = *(volatile char*) &stat_value;
+	if (result == 0) {
 		result = (char) (gm_RandomMod(0x2a) + 0x15);
 	} else {
-		uv = (unsigned char) *(int*) &stat_value;
-		result = (char) (stat_value + gm_RandomMod((float) uv >= g_const_57bc ? 0xb : 6));
+		result += (char) gm_RandomMod(
+		    (float) (*(int*) &stat_value & 0xff) >= g_const_57bc ? 0xb : 6);
 	}
 	return result;
 }
@@ -664,7 +662,7 @@ short* __cdecl gm_GetEntityTableEntry(char* param)
 			if (table_index >= 0 && table_index < 0x10) {
 			}
 			if (table_index >= 0 && table_index < 0x10) {
-				return (short*) (&entity_table[table_index * 0xac]);
+				return (short*) (&g_entity_base[table_index * 0xac]);
 			}
 		}
 	}

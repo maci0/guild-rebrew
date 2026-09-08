@@ -5,7 +5,6 @@
 // FUNCTION: SERVER 0x10003320
 // InitializeLogAndErrorHandler
 // SIZE: 404
-// CFLAGS: /O2 /Gd
 
 #include <windows.h>
 

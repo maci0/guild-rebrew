@@ -4,7 +4,7 @@
 // SYMBOL: _SpawnGraveyardEntities
 // SIZE: 370
 
-extern int g_entity_type_table;
+extern char* g_entity_type_table;
 extern int g_next_object_id;
 extern int g_current_year;
 extern float g_const_57bc;
@@ -17,6 +17,15 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
  * entity type (0x1d) and maturity level (1..3), then fills each spawned
  * slot's record with a fresh object id, random stats and random role
  * values.  Returns the number of slots spawned. */
+
+/* Byte-match note: RELOC 370/370.  The spawn loop must be a bare
+ * `while (spawned < count)`; wrapping it in a redundant `if (count > 0)`
+ * left the stat loop's store as `mov [edi+ecx+0x23],al` against the
+ * reference's `mov [ecx+edi+0x23],al` (369/370).  The extra guard raises
+ * register pressure enough to swap the SIB base and index roles.  The
+ * addressing expression itself is not the lever: twelve spellings of the
+ * store address (subscript, pointer walk, split index, addend order,
+ * hoisted base) all emit identical bytes. */
 
 int __cdecl SpawnGraveyardEntities(void* entity, int count)
 {
@@ -31,11 +40,10 @@ int __cdecl SpawnGraveyardEntities(void* entity, int count)
 	taddr = (unsigned char*) (g_entity_type_table + type + type * 0x24c);
 	if ((*taddr == 0x1d) && (*(taddr + 0x247) >= 1) && (*(taddr + 0x247) <= 3)) {
 		spawned = 0;
-		if (count > 0) {
-			while (spawned < count) {
-				slot = FindSlotEntryFiltered(0, entity, 0, (void*) 0x10010700, 0);
-				if (slot == 0)
-					break;
+		while (spawned < count) {
+			slot = FindSlotEntryFiltered(0, entity, 0, (void*) 0x10010700, 0);
+			if (slot == 0)
+				break;
 			*(int*) *(int*) ((char*) slot + 0x10) = g_next_object_id;
 			g_next_object_id++;
 			*(int*) ((char*) slot + 4) = *(int*) *(int*) ((char*) slot + 0x10);
@@ -45,7 +53,7 @@ int __cdecl SpawnGraveyardEntities(void* entity, int count)
 			*(unsigned char*) ((char*) slot + 0xc) = 0xff;
 			for (i = 0; i < 5; i++) {
 				r = gm_RandomMod(8) & 0xffff;
-				*(unsigned char*) (*(int*) ((char*) slot + 0x10) + 0x24 + i) =
+				*(unsigned char*) (i + *(int*) ((char*) slot + 0x10) + 0x24) =
 				    (unsigned char) ((float) r * g_const_57c0 + g_const_57bc);
 			}
 			*(int*) (*(int*) ((char*) slot + 0x10) + 0x2c) =
@@ -61,8 +69,7 @@ int __cdecl SpawnGraveyardEntities(void* entity, int count)
 			gm_RandomMod(0x10);
 			gm_RandomMod(0x10);
 			gm_RandomMod(0x10);
-				spawned++;
-			}
+			spawned++;
 		}
 	} else {
 		spawned = 0;

@@ -14,7 +14,7 @@
  *   int val;
  *   undefined2 extraout_var;
  *
- *   *(undefined4 *)(param_1 + 0x14) = g_timestamp_0b6c;
+ *   *(undefined4 *)(param_1 + 0x14) = g_next_object_id;
  *   val = rand();
  *   *(int *)(param_1 + 0x10) = val;
  *   srand(val);
@@ -38,7 +38,7 @@ int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
 
 	(void) result;
 
-	*(int*) (cmd + 0x14) = g_timestamp_0b6c;
+	*(int*) (cmd + 0x14) = g_next_object_id;
 	val = rand();
 	*(int*) (cmd + 0x10) = val;
 	srand(val);

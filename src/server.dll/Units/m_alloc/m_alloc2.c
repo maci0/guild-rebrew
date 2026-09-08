@@ -14,7 +14,7 @@ int g_stat3 = 0;
 int g_stat4 = 0;
 extern int g_alloc_counter;
 extern void* g_array_ptr;
-void __cdecl m_FreeHeapLocked(void* ptr);
+void __cdecl free(void* ptr);
 extern int g_alloc_root_count;
 extern int g_alloc_root_size_total;
 extern int g_alloc_root_count_max;
@@ -96,7 +96,7 @@ void __cdecl ShutdownMemoryAllocator(void)
 		if (*(char**) item != 0) {
 			sprintf(buf, "-> Pointer not freed:%s", *(char**) (item - 4));
 			LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x203, buf, 1);
-			m_FreeHeapLocked(*(void**) item);
+			free(*(void**) item);
 			*(char**) item = 0;
 		}
 		i++;
@@ -111,10 +111,10 @@ cleanup:
 	node = (char*) g_list_head;
 	while (node != 0) {
 		next = *(char**) (node + 0x24);
-		m_FreeHeapLocked(node);
+		free(node);
 		node = next;
 	}
-	m_FreeHeapLocked((void*) g_array_ptr);
+	free((void*) g_array_ptr);
 	g_array_ptr = 0;
 }
 
@@ -138,6 +138,31 @@ struct BlockNode {
 	struct BlockNode* next;
 };
 
+/* The target keeps a frame pointer here (push ebp / mov ebp,esp) and homes the
+ * memset operands back into the incoming parameter slots at [ebp+8]/[ebp+0xc].
+ * The pragma gives this one function the frame without a per-file /Oy-, which
+ * would break its file-mates (see docs/msvc6-c-shapes.md sections 12 and 13).
+ * Residual at 245/270 (obj 258) is the block-fill prelude and nothing else.
+ * The mismatched bytes are offsets 0xe9 and 0xeb-0x101, one contiguous run
+ * covering the prelude and the epilogue it displaces; the first 0xe8 bytes are
+ * byte-identical.  Sequence-aligning the two instruction streams gives 96 of
+ * 102 candidate instructions identical at zero shift, with the 6 differing
+ * pairs all inside the prelude window.  See docs/msvc6-allocator.md,
+ * "m_PoolAlloc (0x10006d20) / InitBuildingTypeTable (0x1000b040)".
+ *
+ * Re-measured: the delta is 24 bytes, all of them the prelude and the epilogue
+ * it displaces.  The candidate is byte-identical through offset 0xe7, which
+ * includes both parameter homes (`mov [ebp+0xc],edx` at 0xdf and
+ * `mov [ebp+8],esi` at 0xe2) and the `mov edi,[ebp+0xc]` reload at 0xe5.  The
+ * first differing byte is at 0xe8, the length reload: the target takes ebx,
+ * the candidate ecx, and that choice is forced by the prelude that follows it
+ * (`lea ecx,[edi+edi*2]` needs ecx free), so it is not separable.  Nothing
+ * outside the window differs, and the residual attributable to the prelude
+ * alone is the full 24 bytes.  Probes that all held or regressed 245: the two
+ * volatile read-backs swapped (242), a second volatile round-trip on the
+ * length (239, obj 264), unsigned length (245), the two homes swapped (241),
+ * and an arithmetic no-op on the length (245). */
+#pragma optimize("y", off)
 void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 {
 	int asize;
@@ -175,16 +200,43 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 	}
 	slot = (char*) block + 0x10;
 	for (i = 0; i < block->max; i++, slot += block->size) {
-		if (*(int*) slot == 0) {
-			block->count++;
-			*(int*) slot = (int) block;
-			slot += 4;
-			memset(slot, 0, asize - 4);
-			return slot;
+	if (*(int*) slot == 0) {
+			{
+				char *alen;
+				int c;
+				void **psize;
+				void *d;
+				int n;
+				/* Best known: 245/270, obj 258 (2026-09-07). Free-slot schedule:
+				 *   alen=(char*)asize; c=count; slot+=4; c++; alen-=4; count=c;
+				 *   *(int*)(slot-4)=block; asize=(int)alen;
+				 *   dual homes via alias: dest at [ebp+0xc] through (char*)&head+4,
+				 *   len at [ebp+8] via *(int*)&head; locals d/n from volatile
+				 *   read-backs (forces ADD esi,-4 and target home order).
+				 * Gains +3 over 242 single-home form. First ** is length reload
+				 * into ecx (want ebx) plus section-11 align-first prelude residual.
+				 */
+				alen = (char *)(unsigned)asize;
+				c = block->count;
+				slot += 4;
+				c++;
+				alen -= 4;
+				block->count = c;
+				*(int*)(slot - 4) = (int) block;
+				asize = (int)(unsigned)alen;
+				psize = (void**) ((char*) &head + 4);
+				*psize = (void*) slot;
+				*(int*) &head = asize;
+				d = *(void* volatile*) psize;
+				n = *(volatile int*) &head;
+				memset(d, 0, (unsigned int) n);
+				return slot;
+			}
 		}
 	}
 	return 0;
 }
+#pragma optimize("", on)
 
 /* Returns a block to the packet pool free list. Adds the block
  * back to the free chain for reuse. */

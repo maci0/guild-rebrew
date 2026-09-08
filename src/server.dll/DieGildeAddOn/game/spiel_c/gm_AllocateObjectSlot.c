@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 
-extern unsigned short* dword_100a8c34;
+extern unsigned short* g_query_base;
 
 char* __cdecl gm_AllocateObjectSlot(void)
 {
@@ -15,7 +15,7 @@ char* __cdecl gm_AllocateObjectSlot(void)
 	int i;
 	char* result;
 
-	node = (char*) dword_100a8c34;
+	node = (char*) g_query_base;
 	result = NULL;
 	i = 0;
 	while (result == NULL && i < 0x5008) {

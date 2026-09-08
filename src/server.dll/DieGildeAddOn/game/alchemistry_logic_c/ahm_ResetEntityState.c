@@ -30,7 +30,7 @@ void __cdecl ahm_ResetEntityState(void* a)
 // SYMBOL: _ahm_CheckFlag
 // SIZE: 70
 
-extern int g_entity_type_table;
+extern char* g_entity_type_table;
 
 int __cdecl ahm_CheckFlag(void* a)
 {

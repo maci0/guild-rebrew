@@ -11,6 +11,7 @@ void __cdecl gm_NoopRet2(void* node);
 
 /* Linked-list node: type id (word), child-list head, next pointer. */
 #pragma pack(push, 1)
+// SIZE 0x43
 typedef struct LinkedNode {
 	unsigned short id;        /* 0x00 */
 	char pad0[0x12];          /* 0x02 */

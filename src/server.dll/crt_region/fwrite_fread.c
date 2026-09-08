@@ -1,7 +1,9 @@
 #include <windows.h>
 #include <stddef.h>
 
-/* Game-local stdio stream object (MSVC6 _iobuf, _tmpfname omitted). */
+/* Game-local stdio stream object (MSVC6 _iobuf, _tmpfname omitted).
+ * 7 members x 4 bytes = 0x1c. */
+// SIZE 0x1c
 typedef struct _iobuf {
     char* _ptr;    /* 0x00 */
     int _cnt;      /* 0x04 */
@@ -27,7 +29,7 @@ extern int __cdecl fcn_1001eec1(int, void*, size_t);           /* _read 0x1001ee
 extern int __cdecl fcn_1001ede5(CRT_FILE*);                    /* _filbuf 0x1001ede5 */
 
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001a960
+// FUNCTION: SERVER 0x1001a960 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* fwrite core (unlocked — the game's CRT has no per-call lock here).
  * Writes size*count bytes from buffer to the stream: staged through the
@@ -105,7 +107,7 @@ size_t __cdecl fcn_1001a960(char* buffer, size_t size, size_t count, CRT_FILE* s
 }
 
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001aa99
+// FUNCTION: SERVER 0x1001aa99 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* fread core (unlocked).  Reads size*count bytes into buffer: from the
  * stream buffer when buffered, directly via fcn_1001eec1 (_read) for large
@@ -177,7 +179,7 @@ size_t __cdecl fcn_1001aa99(char* buffer, size_t size, size_t count, CRT_FILE* s
     return count;
 }
 
-// FUNCTION: SERVER 0x1001a931
+// FUNCTION: SERVER 0x1001a931 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* Locked fwrite entry (PDB: _crt_locked_call4a).  Serializes the call with
  * the stream's own lock (fcn_1001bb60/fcn_1001bbb2, lock dispatch). */
@@ -192,7 +194,7 @@ size_t __cdecl fcn_1001a931(char* buffer, size_t size, size_t count, CRT_FILE* s
     return r;
 }
 
-// FUNCTION: SERVER 0x1001aa6a
+// FUNCTION: SERVER 0x1001aa6a (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* Locked fread entry (exported `fread` in the PDB).  Serializes the call
  * with the stream's own lock. */

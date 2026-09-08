@@ -18,13 +18,12 @@ typedef struct {
 } Record;
 #pragma pack(pop)
 
-extern char* g_entity_table; /* 0x101de450 */
+extern char* g_item_def_table; /* 0x101de450 */
 void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
-extern int g_entity_type_table;
-extern char* g_item_def_table;
-extern int g_1014d8c0;
-extern int g_100a8c34;
+extern char* g_entity_type_table;
+extern unsigned char* g_entity_ptr;
+extern unsigned short* g_query_base;
 extern int g_100a8cf8;
 extern int g_1009b764;
 extern int g_1002dde0;
@@ -38,9 +37,48 @@ extern void __cdecl srv_SeedRandomWithTime(void);
 // FUNCTION: SERVER 0x10015950
 // gm_Open
 
-/* Blocked from C conversion (pointer-base + register roles, see
- * docs/msvc6-allocator.md "gm_Open").  Best 856/861; PROVEN via 1-byte
- * slice prove [91..92] (2026-08-26). */
+/* RELOC, 861/861.  The category byte load must be split
+ * across `def_row`/`cat_p` and dereferenced through `volatile char*` so
+ * msvc6 materializes the address (`mov ecx,eax; add ecx,ebx; mov cl,[ecx]`)
+ * instead of folding it into `[eax+ebx]`.  Both halves are required:
+ * folding it back into one expression, even with the volatile cast, is
+ * 5 bytes short and scores 750.
+ *
+ * The prologue player-copy loop now matches byte for byte.  Two separate
+ * locals are required, and each one decides a different thing:
+ *   - `copy_dst` (= dst + 3) is the memcpy destination.  It must have a
+ *     second use in the loop body, or msvc6 folds the lea into the call
+ *     argument instead of emitting it.  Reading the first store through it
+ *     (`copy_dst[-4]`) as well as the third (`copy_dst[-1]`) is what pulls
+ *     the lea above the stores, matching the reference (846 -> 849).
+ *   - `base` (= dst + 2) carries the two middle stores as `base[-2]` and
+ *     `base[-1]`.  That is what sets the store base register 8 bytes higher
+ *     so the displacements land on [-4]/[0]/[+4]/[+8] as the reference has
+ *     them (849 -> 858).
+ * Both are needed: with `copy_dst` alone the schedule is right but every
+ * displacement is 8 low, and with `base` alone the lea trails the stores.
+ * Dead ends measured on the way: routing all four stores through `copy_dst`
+ * (843), only the first store through it (846), `copy_dst` assigned after
+ * the first store (SIZE_MISMATCH, 211), a `char*` typed `copy_dst` with byte
+ * displacements (SIZE_MISMATCH, 786), and biasing `dst_player_ptr` itself by
+ * +2 (849, same as no bias) or +1/-1/-2 (worse).
+ *
+ * The producible-count loop's SIB base/index roles (`[esi+eax+0x21]`, counter
+ * as base and table as index) come from the induction variable's form, not
+ * from the addend order.  Counting rows in `row_index` and spelling every
+ * address as `g_entity_type_table + row_index * 0x24d + disp` makes msvc6
+ * strength-reduce the multiply into the loop-carried register and give it the
+ * base role; accumulating a byte offset (`table_offset += 0x24d`) gives the
+ * reloaded table pointer the base role instead, whatever the addend order.
+ * The final store also needs its address in a pointer local (`count_p`) used
+ * for both the load and the store: spelling the read-modify-write with the
+ * full expression twice emits a `lea` plus `[eax]` accesses (798).
+ * Dead ends on this loop: addend-order swaps and array-subscript spellings
+ * (no change, 858), `(char*) table_offset` casts and a pointer-local rmw on
+ * the offset-accumulating shape (785, SIZE_MISMATCH), caching the table
+ * pointer in a local (671), an `unsigned char` count (697), seeding the count
+ * from the byte instead of zero (711), and keeping `row_index * 0x24d` in
+ * `table_offset` rather than inlining it at each use (798). */
 
 int __cdecl gm_Open(int map_id)
 {
@@ -55,31 +93,42 @@ int __cdecl gm_Open(int map_id)
 	int slot_counter;
 	int slot_idx;
 	unsigned char path_buf[512];
-	int table_offset;
+	int row_index;
+	char* count_p;
+	char* def_row;
+	char* cat_p;
 
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d3, "gm_Open(): enter", 1);
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d6, "gm_Open(): Spieler initialisieren", 1);
+	/* 0x10031204 is "gm_Open(): St\344dte" (Latin-1 a-umlaut, byte 0xe4).  The
+	   text sits in a relocation slot, so a wrong string still scores RELOC;
+	   see docs/msvc6-c-shapes.md section 36. */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4d6, "gm_Open(): St\344dte", 1);
 	src_player_ptr = (unsigned int*) &g_100a8cf8;
 	dst_player_ptr = (unsigned int*) &g_1009b764;
 	do {
-		dst_player_ptr[-1] = src_player_ptr[-0x14];
+		unsigned int* copy_dst;
+		unsigned int* base;
+		base = dst_player_ptr + 2;
+		copy_dst = dst_player_ptr + 3;
+		copy_dst[-4] = src_player_ptr[-0x14];
 		player_field = *src_player_ptr;
-		dst_player_ptr[0] = 1000;
-		dst_player_ptr[1] = player_field;
-		dst_player_ptr[2] = 1000;
-		memcpy((void*) &dst_player_ptr[3], (void*) &g_1002dde0, 0x2a80);
+		base[-2] = 1000;
+		base[-1] = player_field;
+		copy_dst[-1] = 1000;
+		memcpy((void*) copy_dst, (void*) &g_1002dde0, 0x2a80);
 		src_player_ptr = src_player_ptr + 0xbd;
 		dst_player_ptr = dst_player_ptr + 0xaa4;
 	} while ((int) src_player_ptr < (int) 0x100a9bbc);
-	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e3, "gm_Open(): Gebaeude-Daten", 1);
-	g_entity_type_table = (int) m_AllocTracked(0xca78, (const char*) 0x100311d8);
+	/* 0x100311f0 is "gm_Open(): Geb\344ude" (Latin-1 a-umlaut, byte 0xe4). */
+	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e3, "gm_Open(): Geb\344ude", 1);
+	g_entity_type_table = (char*) m_AllocTracked(0xca78, (const char*) 0x100311d8);
 	if (g_entity_type_table == 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0x4e8, "Memory could not be allocated!", 1);
 		return -1;
 	}
-	g_1014d8c0 = (int) m_AllocTracked(0xa900, (const char*) 0x100311a0);
-	memset((void*) g_1014d8c0, 0, 0xa900);
-	if (g_1014d8c0 == 0) {
+	g_entity_ptr = (unsigned char*) m_AllocTracked(0xa900, (const char*) 0x100311a0);
+	memset((void*) g_entity_ptr, 0, 0xa900);
+	if (g_entity_ptr == 0) {
 		return -2;
 	}
 	sprintf((char*) path_buf, (char*) 0x1003118c, map_id, (char*) 0x10031194);
@@ -90,15 +139,15 @@ int __cdecl gm_Open(int map_id)
 	}
 	fread((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
 	fflush(file_handle);
-	g_item_def_table = (int) m_AllocTracked(0xb9dc, (const char*) 0x10031140);
+	g_item_def_table = (char*) m_AllocTracked(0xb9dc, (const char*) 0x10031140);
 	if (g_item_def_table == 0) {
 		return -4;
 	}
-	g_100a8c34 = (int) m_AllocTracked(0x14f218, (const char*) 0x1003112c);
-	if (g_100a8c34 == 0) {
+	g_query_base = (unsigned short*) m_AllocTracked(0x14f218, (const char*) 0x1003112c);
+	if (g_query_base == 0) {
 		return -5;
 	}
-	memset((void*) g_100a8c34, 0, 0x14f218);
+	memset((void*) g_query_base, 0, 0x14f218);
 	sprintf((char*) path_buf, (char*) 0x1003118c, map_id, (char*) 0x10031120);
 	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
@@ -122,16 +171,19 @@ int __cdecl gm_Open(int map_id)
 		"gm_Open(): ---- Das dusselige Datendesign hinbiegen !! -----",
 		1
 	);
-	table_offset = 0;
+	row_index = 0;
 	do {
 		producible_count = 0;
 		slot_counter = 0x40;
-		slot_ptr = (unsigned short*) (table_offset + 0x23 + g_entity_type_table);
+		slot_ptr = (unsigned short*) (g_entity_type_table + row_index * 0x24d + 0x23);
 		do {
 			slot_entry = *slot_ptr;
 			if (slot_entry != 0xffff) {
 				slot_idx = slot_entry & 0x7fff;
-				item_category = *(char*) (g_item_def_table + slot_idx * 0x40 + slot_idx);
+				def_row = g_item_def_table + slot_idx * 0x40;
+				cat_p = (char*) slot_idx;
+				cat_p += (int) def_row;
+				item_category = *(volatile char*) cat_p;
 				if (((item_category == '\x02') || (item_category == '\x06')) && (slot_idx != 0xfd) &&
 					((slot_entry & 0x8000) != 0)) {
 					producible_count = producible_count + 1;
@@ -140,10 +192,10 @@ int __cdecl gm_Open(int map_id)
 			slot_ptr = slot_ptr + 1;
 			slot_counter = slot_counter + -1;
 		} while (slot_counter != 0);
-		*(char*) (table_offset + 0x21 + g_entity_type_table) =
-			*(char*) (table_offset + 0x21 + g_entity_type_table) + producible_count;
-		table_offset = table_offset + 0x24d;
-	} while (table_offset < 0xca78);
+		count_p = g_entity_type_table + row_index * 0x24d + 0x21;
+		*count_p = (char) (*count_p + producible_count);
+		row_index = row_index + 1;
+	} while (row_index < 0x58);
 	/* Original seeds the RNG from the system timer before the exit log
 	 * (fcn.1001a140 = srand(timeGetTime())). */
 	srv_SeedRandomWithTime();

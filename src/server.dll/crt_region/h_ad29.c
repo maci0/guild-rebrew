@@ -1,7 +1,7 @@
 #include <windows.h>
 
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001ad29
+// FUNCTION: SERVER 0x1001ad29 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 // SIZE: 9
 
 /* Tail helper: heap maintenance entry — runs the tracked-block walk in

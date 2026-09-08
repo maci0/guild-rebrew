@@ -1,6 +1,5 @@
 /* crc32 - proper C (zlib-style, 8-byte unrolled) */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100011f0
 // SYMBOL: _crc32
 // SIZE: 309

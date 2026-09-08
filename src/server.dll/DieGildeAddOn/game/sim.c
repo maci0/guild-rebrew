@@ -1,34 +1,27 @@
 #include "../../Units/Error/error.h"
-extern unsigned short gm_RandomMod(unsigned int);
+extern int __cdecl gm_RandomMod(unsigned short range);
 unsigned int __cdecl gm_CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 void __cdecl table_lookup(unsigned int a, unsigned short* b);
-extern int g_entity_type_table;
-unsigned int __cdecl FindAndMatchParents(unsigned int param);
+extern char* g_entity_type_table;
+unsigned short __cdecl FindAndMatchParents(unsigned int param);
 extern unsigned char g_entity_type_bytes[];
 extern unsigned char g_stat_b_array[];
-extern unsigned char g_slot_table;
+extern unsigned char g_slot_table[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
-/* Simulation entity: 0x21c-byte records at 0x10035800. */
-typedef struct {
-	char pad[0xa0];
-	unsigned short field_a0;    /* +0xa0: slot id (0xffff = free) */
-	unsigned char field_a2;     /* +0xa2: state byte */
-	char pad2;
-	int field_a4;               /* +0xa4 */
-	unsigned char field_a8;     /* +0xa8: usable flag */
-	char pad3;
-	unsigned short field_aa;    /* +0xaa */
-	char pad4[0x14];            /* +0xac..0xc0 */
-	float field_c0;             /* +0xc0 */
-	char pad5[0x108 - 0xc4];
-	int field_108[5];           /* +0x108: linked children */
-	char pad6[0x21c - 0x11c];
-} SIM_ENT;
-
-/* Slot base: g_slot_table (0x10035800).  SIM_ENT is 0x21c bytes;
- * use the macro for access instead of a separate extern array. */
-#define SIM_ENT_IDX(i) ((SIM_ENT*)((unsigned char*)&g_slot_table + ((i) & 0xffff) * 0x21c))
+/* Simulation entity records are 0x21c bytes, based at g_slot_table
+ * (0x10035800).  Fields used here: +0xa0 slot id (0xffff = free),
+ * +0xa2 state byte, +0xa4 entity id, +0xa8 usable flag, +0xaa weight,
+ * +0xc0 float threshold, +0x108 five linked children.
+ *
+ * Records are addressed by byte offset into g_slot_table rather than
+ * through a struct pointer.  Subscripting the array keeps the pure record
+ * offset in a register and leaves the symbol as each access's displacement
+ * (`lea ecx,[eax+eax*8]` / `shl ecx,2` / `cmp word[ecx+g_slot_table+0xa0]`),
+ * which is what the target does.  A struct pointer built from the address
+ * of a scalar folds the final *4 into the SIB scale and adds the symbol
+ * into the pointer instead, which cost every access in both scan loops. */
+#define SIM_ENT_OFF(i) (((i) & 0xffff) * 0x21c)
 
 /* Searches for matching parent entities by type and creates
  * family tree linkages. Used in citizen creation to find
@@ -38,14 +31,14 @@ typedef struct {
 // FUNCTION: SERVER 0x100151e0
 // FindAndMatchParents
 
-unsigned int __cdecl FindAndMatchParents(unsigned int param)
+unsigned short __cdecl FindAndMatchParents(unsigned int param)
 {
-	SIM_ENT* ent;
 	int weights[6];
+	unsigned int off;
 	unsigned int rnd;
 	unsigned int count;
-	unsigned int parentA;
-	unsigned int parentB;
+	unsigned short parentA;
+	unsigned short parentB;
 	int i;
 	int j = 0;
 	int k;
@@ -62,20 +55,21 @@ unsigned int __cdecl FindAndMatchParents(unsigned int param)
 	for (; j < 0x10; j++) {
 		rnd = gm_RandomMod(i);
 		parentA = rnd;
-		ent = SIM_ENT_IDX(rnd);
-		if (ent->field_a0 == 0xffff) {
+		off = SIM_ENT_OFF(rnd);
+		if (*(unsigned short*) &g_slot_table[off + 0xa0] == 0xffff) {
 			i = i * 3 / 4;
 			continue;
 		}
-		f1 = (float) ent->field_aa;
-		if (ent->field_a2 < 6 && f1 >= ent->field_c0 && ent->field_a8 != 0) {
+		f1 = (float) *(unsigned short*) &g_slot_table[off + 0xaa];
+		if (g_slot_table[off + 0xa2] < 6 && f1 >= *(float*) &g_slot_table[off + 0xc0] &&
+		    g_slot_table[off + 0xa8] != 0) {
 			count = 0;
 			for (k = 0; k < 5; k++) {
-				if (ent->field_108[k] != -1) {
+				if (((int*) &g_slot_table[off + 0x108])[k] != -1) {
 					count++;
 				}
 			}
-			if ((gm_RandomMod(0x100) & 0xffff) + 1 < (unsigned int) weights[count]) {
+			if ((int) ((gm_RandomMod(0x100) & 0xffff) + 1) < weights[count]) {
 				goto done1;
 			}
 		} else {
@@ -90,20 +84,21 @@ done1:
 	for (j = 0; j < 0x10; j++) {
 		rnd = gm_RandomMod(i);
 		parentB = rnd;
-		ent = SIM_ENT_IDX(rnd);
-		if (ent->field_a0 == 0xffff) {
+		off = SIM_ENT_OFF(rnd);
+		if (*(unsigned short*) &g_slot_table[off + 0xa0] == 0xffff) {
 			i = i * 3 / 4;
 			continue;
 		}
-		f2 = (float) ent->field_aa;
-		if (ent->field_a2 < 6 && f2 >= ent->field_c0 && ent->field_a8 != 0) {
+		f2 = (float) *(unsigned short*) &g_slot_table[off + 0xaa];
+		if (g_slot_table[off + 0xa2] < 6 && f2 >= *(float*) &g_slot_table[off + 0xc0] &&
+		    g_slot_table[off + 0xa8] != 0) {
 			count = 0;
 			for (k = 0; k < 5; k++) {
-				if (ent->field_108[k] != -1) {
+				if (((int*) &g_slot_table[off + 0x108])[k] != -1) {
 					count++;
 				}
 			}
-			if ((gm_RandomMod(0x100) & 0xffff) + 1 < (unsigned int) weights[count]) {
+			if ((int) ((gm_RandomMod(0x100) & 0xffff) + 1) < weights[count]) {
 				goto done2;
 			}
 		} else {
@@ -115,10 +110,10 @@ done2:
 		return 0;
 	}
 
-	return gm_CreateEntityFromParents(
+	return (unsigned short) gm_CreateEntityFromParents(
 		0,
-		SIM_ENT_IDX(parentA)->field_a4,
-		SIM_ENT_IDX(parentB)->field_a4,
+		*(int*) &g_slot_table[SIM_ENT_OFF(parentA) + 0xa4],
+		*(int*) &g_slot_table[SIM_ENT_OFF(parentB) + 0xa4],
 		(int) param,
 		0, 0, 0, 2);
 }
@@ -153,20 +148,47 @@ void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 // FUNCTION: SERVER 0x10015460
 // sim_StartEntityQueryByType
 
-void __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
+unsigned short* __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
 {
+	unsigned short* result = 0;
 	unsigned char cls;
+	unsigned char* base;
+	unsigned char* slot;
+	unsigned int idx;
+	unsigned int off;
 
-	cls = ((unsigned char*) g_entity_type_table)[arg1[0] + arg1[0] * 588];
+	/* The function returns the query handle, and that is what produced the
+	 * `xor eax,eax` that ten earlier probing rounds chased as a constant-0
+	 * argument.  eax holds the fall-through return value 0, materialised
+	 * before the dispatch; the cls==1 arm reuses that still-live register for
+	 * its third argument (`push eax`) while the three later arms, whose eax
+	 * was clobbered by the preceding call, push the literal.  The extra live
+	 * value across all four calls is also what forces the second callee-saved
+	 * register (edi) the target saves.  Nothing about the argument spelling
+	 * was ever reachable; the signature was wrong.
+	 *
+	 * Prior rounds measured a ceiling of 18/145 on the void signature and
+	 * logged the zero argument as unreachable; that conclusion was an artefact
+	 * of the missing return value.  Also confirmed while closing this: the
+	 * volatile record read gives the target's `lea` + `mov cl,[ecx]` pair where
+	 * a plain read folds into a scaled `mov cl,[edi+ecx*4]`, and the table must
+	 * be read as a plain pointer, not through a volatile alias, or
+	 * `mov ecx,[esp+4]` sinks below `push edi`. */
+	idx = arg1[0];
+	base = (unsigned char*) g_entity_type_table + idx;
+	off = idx * 588;
+	slot = base + off;
+	cls = *(volatile unsigned char*) slot;
 	if (cls == 1) {
-		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x12);
+		result = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x12);
 	} else if (cls == 2) {
-		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x13);
+		result = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x13);
 	} else if (cls == 0x1d) {
-		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0xfd);
+		result = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0xfd);
 	} else if (cls == 0x16) {
-		gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x120);
+		result = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x120);
 	}
+	return result;
 }
 
 /* Creates a new citizen entity with initial stats generated
@@ -198,7 +220,7 @@ void* __cdecl sim_CreateCitizen(unsigned char flags, int citizen_type, int paren
 	if (new_entity_slot == 0xffff) {
 		goto error;
 	}
-	return &g_slot_table + new_entity_slot * 0x21c;
+	return g_slot_table + new_entity_slot * 0x21c;
 error:
 	LogMessageInternal(
 		"D:\\Develop\\DieGildeAddOn\\game\\sim.c",
@@ -226,35 +248,59 @@ typedef struct {
 } SIM_CLOCK;
 #pragma pack(pop)
 
+#pragma optimize("a", on)
 void __cdecl AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4)
 {
+	unsigned short* p4 = &clock->x04;
 	int minutes;
-	int hour;
 	int days;
 
-	minutes = arg4 + clock->x0a;
-	clock->x06 += minutes / 60;
-	clock->x0a = minutes % 60;
-	minutes = arg4 + clock->x06;
-	clock->x04 += minutes / 60;
-	clock->x06 = minutes % 60;
-	hour = clock->x04 + arg3;
-	if (hour >= 24) {
-		days = (unsigned int) hour / 24;
-		hour = hour - days * 24;
+	/* Each of the three carries takes its own argument: the target reads
+	 * [esp+0x10] before `push esi` (arg4), [esp+0x10] after the push
+	 * (arg3) and [esp+0xc] after it (arg2).
+	 *
+	 * Three shapes are load-bearing for the byte match:
+	 *   - `#pragma optimize("a", on)` (assume no aliasing) lets msvc6 hoist
+	 *     the x04 read above the x06 store at 0x64, matching the target's
+	 *     `xor esi,esi; mov si,[ecx+4]; mov [ecx+6],edx` order.  Without it
+	 *     the two are transposed and the body scores 187/197.
+	 *   - The two 60-minute carries are written without temporaries: each
+	 *     sum appears twice, once under `/ 60` and once under `% 60`, and
+	 *     msvc6 CSEs the pair into one imul/idiv chain.  Naming a sum in a
+	 *     local costs 5 bytes (192 against the 197-byte target).
+	 *   - Both `minutes < 0` and the fallthrough exit through one tail store
+	 *     to x04.  With a `return` inside the branch and a duplicated store,
+	 *     loop 2's `mov [ecx],esi` schedules ahead of `dec edx` (194/197);
+	 *     merged, the store sinks below the decrement as the target has it.
+	 *
+	 * `minutes += *(volatile int*) &arg2` is required: read plain, msvc6
+	 * folds the load into `add esi,[esp+0xc]` and the tail loses 76 bytes.
+	 * `p4`, a plain `unsigned short*` alias of x04, gives the target's
+	 * `xor esi,esi` + `mov si,word[ecx+4]`; a volatile ushort read emits a
+	 * 6-byte `and esi,0xffff` instead. */
+	clock->x06 = clock->x06 + (arg4 + clock->x0a) / 60;
+	clock->x0a = (arg4 + clock->x0a) % 60;
+	clock->x04 = (unsigned short) (clock->x04 + (arg3 + clock->x06) / 60);
+	clock->x06 = (arg3 + clock->x06) % 60;
+	minutes = *p4;
+	minutes += *(volatile int*) &arg2;
+	if (minutes >= 24) {
+		days = (unsigned int) minutes / 24;
+		minutes = minutes - days * 24;
 		do {
 			clock->x00++;
 		} while (--days != 0);
 	}
-	if (hour < 0) {
-		days = (unsigned int) (23 - hour) / 24;
-		hour = hour + days * 24;
+	if (minutes < 0) {
+		days = (unsigned int) (23 - minutes) / 24;
+		minutes = minutes + days * 24;
 		do {
 			clock->x00--;
 		} while (--days != 0);
 	}
-	clock->x04 = (unsigned short) hour;
+	clock->x04 = (unsigned short) minutes;
 }
+#pragma optimize("", on)
 
 /* Sets the simulation sync parameters for the entity query
  * engine. Stores target, type, and field values for later use

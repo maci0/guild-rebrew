@@ -13,12 +13,12 @@
  *   void *pvVar1;
  *   int iVar2;
  *
- *   *(undefined4 *)(cmd + 0x18) = g_timestamp_0b6c;
+ *   *(undefined4 *)(cmd + 0x18) = g_next_object_id;
  *   if (*(int *)(cmd + 0x14) != -1) {
  *     pvVar1 = (void *)gm_GetFieldByType((char *)cmd,*(int *)(cmd + 0x14));
  *     *(void **)(cmd + 0x14) = pvVar1;
  *     iVar2 = gm_SubObjekt(pvVar1,(uint)*(ushort *)
- *                                     (&g_currency_type_array +
+ *                                     (&g_entity_slot_table +
  *                                     (uint)*(byte *)(cmd + 0x1c) * 0x2f4),
  *                       *(int *)(cmd + 0x1d));
  *     if (iVar2 == 0) {
@@ -30,7 +30,7 @@
  *     *(int *)(cmd + 0x10) = iVar2;
  *     pvVar1 = gm_AddOrAccumulateObject
  *                        (iVar2,(uint)*(ushort *)
- *                                      (&g_currency_type_array +
+ *                                      (&g_entity_slot_table +
  *                                      (uint)*(byte *)(cmd + 0x1c) * 0x2f4),
  *                         *(int *)(cmd + 0x1d));
  *     if (pvVar1 == (void *)0x0) {
@@ -48,7 +48,7 @@
 
 void* __cdecl gm_AddOrAccumulateObject(int, unsigned int, int);
 
-extern unsigned short g_currency_type_array[];
+extern unsigned short g_entity_slot_table[];
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -60,7 +60,7 @@ extern unsigned short g_currency_type_array[];
 /* Execution handler: transfers currency between two entities.
  * Subtracts from source (cmd+0x14) via gm_SubObjekt and adds
  * to destination (cmd+0x10) via gm_AddOrAccumulateObject.
- * Currency type is indexed from g_currency_type_array. Returns 1
+ * Currency type is indexed from g_entity_slot_table. Returns 1
  * if subtraction fails (insufficient funds). */
 
 // FUNCTION: SERVER 0x1000d7f0
@@ -69,14 +69,14 @@ int __cdecl cm_ExTransferCurrency(int cmd, char* result)
 	void* entity_ptr;
 	int field_result;
 
-	*(int*) (cmd + 0x18) = g_timestamp_0b6c;
+	*(int*) (cmd + 0x18) = g_next_object_id;
 
 	if (*(int*) (cmd + 0x14) != -1) {
 		entity_ptr = (void*) gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
 		*(void**) (cmd + 0x14) = entity_ptr;
 		field_result = gm_SubObjekt(
 			entity_ptr,
-			(unsigned int) *(unsigned short*) ((char*) g_currency_type_array +
+			(unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +
 											   (unsigned int) *(unsigned char*) (cmd + 0x1c) * 0x2f4),
 			*(int*) (cmd + 0x1d)
 		);
@@ -90,7 +90,7 @@ int __cdecl cm_ExTransferCurrency(int cmd, char* result)
 		*(int*) (cmd + 0x10) = field_result;
 		entity_ptr = gm_AddOrAccumulateObject(
 			field_result,
-			(unsigned int) *(unsigned short*) ((char*) g_currency_type_array +
+			(unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +
 											   (unsigned int) *(unsigned char*) (cmd + 0x1c) * 0x2f4),
 			*(int*) (cmd + 0x1d)
 		);

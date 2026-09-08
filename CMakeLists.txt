@@ -94,6 +94,24 @@ if(REBREW_BUILD_SERVER)
   list(FILTER SERVER_SOURCES INCLUDE REGEX "\\.c$")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt/")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/zlib/")
+  # Pure CRT bodies live in LIBCMT. Keep only game/layout files under crt_region.
+  list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt_region/")
+  set(_CRT_REGION_KEEP
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/crt_imports.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/data_restore.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/data_globals.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/rdata_restore.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_globals.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/dllmain.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/initterm.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/mlock.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_pool.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_aliases.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/crt_heap.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/amsg_exit.c"
+  )
+  list(APPEND SERVER_SOURCES ${_CRT_REGION_KEEP})
+
 
   if(NOT MSVC_FOR_DECOMP)
     set(_MSVC_ONLY_SOURCES
@@ -185,7 +203,7 @@ if(REBREW_BUILD_SERVER)
     USER32.lib
     WS2_32.lib
     WINMM.lib
-    LIBCMT.lib
+    "${PROJECT_SOURCE_DIR}/.scratch/libcmt_nosbheap/LIBCMT.LIB"
   )
 
   set_property(TARGET server_dll PROPERTY OUTPUT_NAME "server")
@@ -302,9 +320,9 @@ if (MSVC_FOR_DECOMP)
   if(TARGET server_dll)
     if(REBREW_DEBUG_INFO)
       target_compile_options(server_dll PRIVATE /Z7)
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12")
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/NODEFAULTLIB:LIBCMT" "/ENTRY:DllMain@12")
     else()
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12")
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/NODEFAULTLIB:LIBCMT" "/ENTRY:DllMain@12")
     endif()
     # Post-link (rebrew postlink --layout layout/server.dll): converge the
     # linked DLL onto the original's layout byte-for-byte, purely from the
@@ -326,6 +344,7 @@ if (MSVC_FOR_DECOMP)
       # the original changes (rebrew gen-layout --target server.dll) and
       # commit it.
       COMMAND ${CMAKE_COMMAND} -E echo "Converging layout onto reference (rebrew postlink --layout)"
+      COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:server_dll>" "${PROJECT_SOURCE_DIR}/.scratch/server.dll.prelayout"
       COMMAND rebrew postlink "$<TARGET_FILE:server_dll>"
               --layout "${PROJECT_SOURCE_DIR}/layout/server.dll"
       VERBATIM)

@@ -7,11 +7,12 @@
 // FUNCTION: SERVER 0x100111b0
 // SYMBOL: _HireProductionWorker
 
-extern char* dword_100a8c30;
 extern int g_1003546c;
+extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int dword_1002574c[];
 extern float table_1002572c[];
-extern unsigned int table_100a8c94[];
+/* 189 4-byte entries per object type; only the low word of each entry is read. */
+extern unsigned int g_entity_slot_table[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, int d, int e);
@@ -38,7 +39,7 @@ int __cdecl HireProductionWorker(void* req)
 	    (char*) 0x100358a0 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c == (char*) g_1003546c)
 		return -1;
 	field_id = *(unsigned char*) entity1;
-	if (dword_100a8c30[field_id + field_id * 588] != 0x1d) {
+	if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
 		return -2;
 	}
 	workers = *(void**) ((char*) entity1 + 0x65);
@@ -68,9 +69,9 @@ int __cdecl HireProductionWorker(void* req)
 		*(int*) ((char*) *(void**) ((char*) slot + 0x10) + j * 0x44) = -1;
 	}
 	if (*(int*) ((char*) req + 0x13) > 0) {
-		word1 = (unsigned short) table_100a8c94[(unsigned char) *(unsigned char*) 0x10035439 * 189];
+		word1 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
 		fcn_10016ea0(*(int*) ((char*) entity2 + 4), word1, *(int*) ((char*) req + 0x13));
-		word2 = (unsigned short) table_100a8c94[(unsigned char) *(unsigned char*) 0x10035439 * 189];
+		word2 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
 		ftol_val = (int) (*(int*) ((char*) req + 0x13) * table_1002572c[*(int*) ((char*) req + 0xc)]);
 		gm_AddOrAccumulateObject(*(int*) ((char*) 0x100358a4 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c),
 		    word2, ftol_val);

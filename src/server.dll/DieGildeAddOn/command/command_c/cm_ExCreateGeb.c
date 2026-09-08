@@ -21,11 +21,11 @@
  *     line = 0x5386;
  *   }
  *   else {
- *     *(undefined4 *)(cmd + 0x14) = g_timestamp_0b6c;
+ *     *(undefined4 *)(cmd + 0x14) = g_next_object_id;
  *     pcVar2 = gm_AllocGebaeude(CONCAT31((int3)((uint)puVar1 >> 8),*(undefined1 *)(cmd + 0x18)),
  *                            CONCAT22(extraout_var,*puVar1));
  *     if (pcVar2 != (char *)0x0) {
- *       *(undefined4 *)(g_player_slot_0[*(byte *)(cmd + 3)].data + 0x2641fc) =
+ *       *(undefined4 *)(g_connections[*(byte *)(cmd + 3)].data + 0x2641fc) =
  *            *(undefined4 *)(pcVar2 + 1);
  *       if (result != (char *)0x0) {
  *         *result = '\x01';
@@ -53,7 +53,7 @@ typedef struct player_slot {
 } player_slot;
 
 char* __cdecl gm_AllocGebaeude(unsigned char, unsigned short);
-extern player_slot g_player_slot_0[];
+extern player_slot g_connections[];
 
 extern char s_cm_ExCreateGeb____Could_not_find_1002d41c[];
 extern char s_cm_ExCreateGeb____failed_1002d400[];
@@ -83,14 +83,14 @@ int __cdecl cm_ExCreateGeb(int cmd, char* result)
 		return 1;
 	}
 
-	*(int*) (cmd + 0x14) = g_timestamp_0b6c;
+	*(int*) (cmd + 0x14) = g_next_object_id;
 	building = gm_AllocGebaeude(*(unsigned char*) (cmd + 0x18), *owner_record);
 	if (building == (char*) 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x539e, "cm_ExCreateGeb(): failed", 1);
 		return 1;
 	}
 
-	g_player_slot_0[(unsigned int) *(unsigned char*) (cmd + 3)].data = *(int*) (building + 1);
+	g_connections[(unsigned int) *(unsigned char*) (cmd + 3)].data = *(int*) (building + 1);
 	if (result != (char*) 0) {
 		*result = '\x01';
 		result[1] = '\x02';

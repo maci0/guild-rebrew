@@ -1,5 +1,5 @@
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001c9a5
+// FUNCTION: SERVER 0x1001c9a5 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 #include <windows.h>
 
 /* Game's _ioinit override: builds the stream lock/descriptor table
@@ -120,30 +120,27 @@ void __cdecl _ioinit(void)
     SetHandleCount(g_11766560);
 }
 
-// FUNCTION: SERVER 0x1001cb61
+// FUNCTION: SERVER 0x1001cb61 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 extern void __cdecl free(void*);   /* 0x1001ab81 - game free override */
 
+/* RELOC 84/84. Single 0x24-stride cursor with the lock at b+8/b+0xc: a split
+ * b/q pair emits lea/add prologues and register copies the target lacks. */
 void __cdecl _ioterm(void)
 {
     char** p;
+    char* b;
 
     for (p = (char**)0x11766460; (int)p < 0x11766560; p++)
     {
-        char* base = *p;
-        if (base != NULL)
+        if (*p == NULL)
+            continue;
+        for (b = *p; b < *p + 0x480; b += 0x24)
         {
-            char* b = base;
-            char* q = base + 0xc;
-            while (b < *p + 0x480)
-            {
-                if (*(int*)(q - 4) != 0)
-                    DeleteCriticalSection((LPCRITICAL_SECTION)q);
-                b += 0x24;
-                q += 0x24;
-            }
-            free(*p);
-            *p = NULL;
+            if (*(int*)(b + 8) != 0)
+                DeleteCriticalSection((LPCRITICAL_SECTION)(b + 0xc));
         }
+        free(*p);
+        *p = NULL;
     }
 }

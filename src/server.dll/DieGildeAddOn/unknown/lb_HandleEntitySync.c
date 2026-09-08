@@ -20,25 +20,34 @@ int __cdecl lb_HandleEntitySync(int player, int msg)
 	int tab;
 	int eid;
 	int i;
-	unsigned int flags;
+	char* dst;
+	char* m;
 
-	flags = *(unsigned int*) player;
-	if ((flags & 0x6000) != 0) {
+	if ((*(unsigned int*) player & 0x6000) != 0) {
 		LogMessageInternal((char*) 0x1002d70c, 0x354, (char*) 0x1002d740, 1);
 		*(char*) msg = 2;
 		return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1) ? -1 : 0;
 	}
-	eid = *(int*) ((char*) msg + 0x14);
-	tab = 0x101deb04;
+	/* Reading msg into m before the counters emits the target's schedule:
+	 * the reload (`mov edx,[esp+0x14]`) first, then `xor ecx,ecx` and the
+	 * table constant, then the two edx-relative reads.  A volatile pin on
+	 * msg holds the reload in place but drags both edx-relative reads ahead
+	 * of the constants (152/163); a plain read lets msvc6 sink them past the
+	 * constants, which is what the target does.  `while` rather than
+	 * `do/while` gives the single-compare loop with the `jl` back-edge. */
+	m = (char*) msg;
 	i = 0;
-	do {
+	tab = 0x101deb04;
+	eid = *(int*) (m + 0x14);
+	dst = m + 0x14;
+	while (tab < 0x114ffe24) {
 		if (*(int*) tab == eid) {
-			memcpy((char*) msg + 0x14, (void*) (0x10442d0c + (unsigned int) i * 0x264264), 0x57);
-			return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1) ? -1 : 0;
+			memcpy(dst, (void*) (0x10442d0c + (unsigned int) i * 0x264264), 0x57);
+			return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) m) == -1) ? -1 : 0;
 		}
 		tab += 0x264264;
 		i++;
-	} while (tab < 0x114ffe24);
-	*(char*) msg = 2;
-	return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) msg) == -1) ? -1 : 0;
+	}
+	*m = 2;
+	return (cm_QueuePlayerCommand((unsigned int*) player, (unsigned char*) m) == -1) ? -1 : 0;
 }

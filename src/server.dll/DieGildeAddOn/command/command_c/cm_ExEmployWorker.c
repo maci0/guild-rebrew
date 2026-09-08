@@ -33,7 +33,7 @@ int __cdecl cm_ExEmployWorker(int cmd, char* result)
 	char worker_type;
 
 	workplace_entity = (ushort*) 0;
-	*(int*) (cmd + 0x1f) = g_timestamp_0b6c;
+	*(int*) (cmd + 0x1f) = g_next_object_id;
 	random_seed = rand();
 	*(int*) (cmd + 0x23) = random_seed;
 	srand(random_seed);

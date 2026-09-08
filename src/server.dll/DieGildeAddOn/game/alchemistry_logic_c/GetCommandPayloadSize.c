@@ -1,7 +1,7 @@
 #include <string.h>
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
-extern float fColorScale;
+extern float g_color_scale;
 extern double dScaleFactor;
 extern dispatch_fn PTR_LAB_1002c5a0[];
 
@@ -23,17 +23,13 @@ typedef struct {
 
 // FUNCTION: SERVER 0x1000c710
 // GetCommandPayloadSize
-// value via `mov dl,[eax]; mov ecx,edx; and ecx,0xff`, and the case 0x16/17
-// body keeps a dead `cmp dl,0x16`.  No available MSVC build (VC4.2/5.0/
-// 6.0 incl. SP1/SP2, all /O flag combos) reproduces the and-idiom — every
-// one emits movzx and folds the dead comparison.  Compiler-version codegen
-// difference; needs the original's exact CL.EXE build to reach EXACT.
 
-/* Blocked from C conversion (register roles, see
- * docs/msvc6-allocator.md "GetCommandPayloadSize").  The and-idiom, the
- * case-0x16 loop, the case body order, and the -(x!=c) idiom are all
- * reproduced; only the register roles remain (target: switch byte in dl,
- * index in ecx, count in cl; MSVC6: cl/edx/dl).  Best 742/752. */
+/* RELOC 752/752.  The switch-byte/index register pair (dl/ecx in the target,
+ * cl/edx before this fix) is decided by which case-0x16 statement reads
+ * cmd_payload first: assigning `cursor` from the `*cmd_payload == 0x16`
+ * test before reading `cmd_payload[0x14]` into `count` pins the byte in dl.
+ * The reverse order scores 742/752, and hoisting `total_size = 0x15` above
+ * both scores 508/752. */
 int GetCommandPayloadSize(unsigned char* cmd_payload)
 
 {
@@ -94,8 +90,8 @@ int GetCommandPayloadSize(unsigned char* cmd_payload)
 		return 0x39;
 	case 0x16:
 	case 0x17:
-		count = cmd_payload[0x14];
 		cursor = (*cmd_payload == 0x16) ? (cmd_payload + 0x15) : (cmd_payload + 0x15);
+		count = cmd_payload[0x14];
 		total_size = 0x15;
 		while (count > 0) {
 			entry_size = cursor[1] * *cursor + 4;

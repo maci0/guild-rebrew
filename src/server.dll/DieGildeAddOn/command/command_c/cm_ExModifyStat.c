@@ -34,79 +34,52 @@
 
 #include "../command_internal.h"
 
-extern float _g_stat_max;
-extern float _g_stat_min;
+extern float g_color_scale; /* 0x100256a4: stat upper bound, 252.0 */
+extern float g_float_const_cc; /* 0x100256cc: stat lower bound, 0.0 */
 extern unsigned int _ftol(void);
 
 /* Execution handler: modifies a character stat by index.
  * Reads entity ID, stat index, and delta from the command
- * payload. Applies change with clamping via gm_MapEntityStatRange. */
+ * payload. Applies change with clamping via gm_MapEntityStatRange.
+ *
+ * RELOC 159/159. The head tests the raw (float)(int)(...) expression and the
+ * local is assigned only at the retest; assigning it before the head makes
+ * the retest's condition textually identical to the first head test, so the
+ * compiler folds the `<` retest away and its mask reads 0x41 (52-58 at obj
+ * 167-179 for every `<` spelling tried). Comparing the just-computed value
+ * in the head against the local in the retest breaks the identity, and the
+ * `<` retest survives with `test ah,1`. A `v >= _g_stat_min` retest scores
+ * 159/159 too but compares the wrong global (stores max for min < v < max);
+ * the float slots here resolve to the reference's own globals, g_color_scale
+ * (252.0) and g_float_const_cc (0.0), verified against the .obj relocations.
+ * Prior full dead-end log in .scratch/a0_baseline2.c. */
 
 // FUNCTION: SERVER 0x100100a0
-__declspec(naked) int __cdecl cm_ExModifyStat(int* cmd)
+int __cdecl cm_ExModifyStat(int* param_1)
 {
-	(void) cmd;
-	__asm {
-		push ebx
-		mov ebx, dword ptr [esp + 8]
-		push esi
-		push edi
-		mov eax, dword ptr [ebx + 0x10]
-		push eax
-		call gm_LookupEntityRecordById
-		mov edi, eax
-		add esp, 4
-		test edi, edi
-		je L_fail
-		mov esi, dword ptr [ebx + 0x14]
-		test esi, esi
-		jl L_fail
-		cmp esi, 4
-		jg L_fail
-		mov edx, dword ptr [ebx + 0x18]
-		xor ecx, ecx
-		mov cl, byte ptr [esi + edi + 0x80]
-		add edx, ecx
-		mov dword ptr [esp + 0x10], edx
-		fild dword ptr [esp + 0x10]
-		fcom dword ptr _g_stat_max
-		fnstsw ax
-		test ah, 1
-		je L_check_max
-		fcom dword ptr _g_stat_min
-		fnstsw ax
-		test ah, 0x41
-		jne L_use_min
-	L_check_max:
-		fcom dword ptr _g_stat_max
-		fnstsw ax
-		test ah, 1
-		jne L_call_skip_clamp
-		fstp st(0)
-		fld dword ptr _g_stat_max
-		call _ftol
-		mov byte ptr [esi + edi + 0x80], al
-		pop edi
-		pop esi
-		xor eax, eax
-		pop ebx
-		ret
-	L_use_min:
-		fstp st(0)
-		fld dword ptr _g_stat_min
-	L_call_skip_clamp:
-		call _ftol
-		mov byte ptr [esi + edi + 0x80], al
-		pop edi
-		pop esi
-		xor eax, eax
-		pop ebx
-		ret
-	L_fail:
-		pop edi
-		pop esi
-		mov eax, 1
-		pop ebx
-		ret
+	int stat_index;
+	int entity_record;
+	float new_stat_value;
+
+	entity_record = gm_LookupEntityRecordById(param_1[4]);
+	if ((entity_record == 0) || ((stat_index = param_1[5], stat_index < 0) || (4 < stat_index))) {
+		return 1;
 	}
+	if (!((float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record)) < g_color_scale)) goto retest;
+	if (!((float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record)) <= g_float_const_cc)) goto retest;
+	goto use_min;
+retest:
+	new_stat_value = (float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record));
+	if (new_stat_value < g_color_scale) goto store;
+	*(char*) (stat_index + 0x80 + entity_record) = (char) (long) g_color_scale;
+	return 0;
+use_min:
+	new_stat_value = g_float_const_cc;
+store:
+	*(char*) (stat_index + 0x80 + entity_record) = (char) (long) new_stat_value;
+	return 0;
 }
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif

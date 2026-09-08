@@ -9,8 +9,8 @@ void __cdecl ReportMessage(char* msg);
 void* __cdecl malloc(unsigned int size); /* 0x1001a7f7 - game malloc */
 void __cdecl ReportMemoryGroupInfo(const char* toggle);
 extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
-// CFLAGS: /O2 /Gd
 
+// SIZE 0x28
 struct GroupNode {
 	char name[0x10];
 	int size_total;   /* 0x10 */
@@ -44,7 +44,8 @@ void __cdecl ReportMemoryGroupInfo(const char* toggle)
 	if (g_stat1 == 0 && g_stat2 == 0) {
 		sprintf(buf, "[*] Memory-Subsystem-Information:\n--> max_used %i blocks in %i bytes (%ik).", g_stat4, g_stat3, g_stat3 >> 10);
 		} else {
-		sprintf(buf, "[*] Memory-Subsystem-Information: [*]\n--> max_used %i blocks in %i bytes (%ik). %i block(s) left in %i (%ik) bytes.", g_stat4, g_stat3, g_stat3 >> 10, g_stat2, g_stat1, g_stat1 >> 10);
+		sprintf(buf, "[*] Memory-Subsystem-Information: [*]\n--> max_used %i blocks in %i bytes (%ik). %i block(s) left in %i (%ik) bytes.",
+			g_stat4, g_stat3, g_stat3 >> 10, g_stat2, g_stat1, g_stat1 >> 10);
 	}
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1b5, buf, 1);
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1b6, "---g-r-o-u-p---i-n-f-o-s---", 1);
@@ -66,7 +67,9 @@ void __cdecl ReportMemoryGroupInfo(const char* toggle)
 					if (node->size_total == 0 && node->count_total == 0) {
 						sprintf(buf, "[%s] w/ %i (%ik) bytes in %i block(s) (called %i times).", buf2, node->size_max, node->size_max >> 10, node->count_max, node->count);
 		} else {
-						sprintf(buf, "[%s] -> w/ %i/%i (%ik/%ik) bytes in %i/%i block(s) (called %i times).", buf2, node->size_total, node->size_max, node->size_total >> 10, node->size_max >> 10, node->count_total, node->count_max, node->count);
+						sprintf(buf, "[%s] -> w/ %i/%i (%ik/%ik) bytes in %i/%i block(s) (called %i times).",
+							buf2, node->size_total, node->size_max, node->size_total >> 10, node->size_max >> 10,
+							node->count_total, node->count_max, node->count);
 					}
 					LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1cc, buf, 1);
 					if (match != 0) {

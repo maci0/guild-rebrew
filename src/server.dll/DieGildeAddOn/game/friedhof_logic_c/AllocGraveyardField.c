@@ -4,8 +4,8 @@
 // SYMBOL: _AllocGraveyardField
 // SIZE: 832
 
-extern char* dword_100a8c30;
 extern int g_1002575c[];
+extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int g_1002576c[];
 extern void* __cdecl m_AllocTracked(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);
@@ -23,7 +23,7 @@ int __cdecl AllocGraveyardField(unsigned char* field)
 	char* e;
 	int i;
 
-	entry = (unsigned char*) (dword_100a8c30 + field[0] + field[0] * 588);
+	entry = (unsigned char*) (g_entity_type_table + field[0] + field[0] * 588);
 	if (entry[0] != 0x1d) {
 		return 0;
 	}

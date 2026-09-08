@@ -4,8 +4,8 @@
 // SYMBOL: _FindSlotEntryFiltered
 // SIZE: 320
 
-extern char* dword_100a8c30;
 extern int g_1002577c[];
+extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int g_1002578c[];
 extern int g_1002579c[];
 extern int g_100257ac[];
@@ -20,51 +20,65 @@ extern int __cdecl cm_GetBuildingStatCount(unsigned char* entity);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor, void* filter, int type)
 {
 	unsigned char* entry;
-	char* limit;
-	char* cur;
+	unsigned char* limit;
 	void* workers;
 
-	entry = (unsigned char*) ((dword_100a8c30 + *(unsigned char*) entity) + *(unsigned char*) entity * 588);
+	/* The walk reuses the `cursor` parameter rather than a separate local.
+	 * That is what fixes the register assignment: with a distinct `cur`
+	 * local msvc6 gives type/workers/entry edi/esi/ebx where the target
+	 * uses ebx/edi/esi, scoring 263/320 (38 register and 6 structural
+	 * diffs, the latter a prologue reschedule that sinks the type load
+	 * below the entity load).  Writing the walker back into the parameter
+	 * shortens the cursor value's live range so the dispatch result
+	 * inherits esi and `limit` inherits ebp, reproducing the target
+	 * exactly.  Permuting or retyping the locals, splitting the guard,
+	 * hoisting the slot index, volatile pins and the CFLAGS sweep all
+	 * leave the cycle in place.
+	 *
+	 * Now 320/320 RELOC; the 7 reloc bytes are the four g_10025* tables,
+	 * g_entity_type_table and the two calls, so RELOC is the ceiling. */
+
+	entry = (unsigned char*) ((g_entity_type_table + *(unsigned char*) entity) + *(unsigned char*) entity * 588);
 	workers = *(void**) ((char*) entity + 0x65);
 	if (type != 0xff && !gv_CheckSlotActive(workers, type)) {
 		return 0;
 	}
 	if (type == 0) {
-		limit = (char*) *(int*) ((char*) workers + 8) + g_1002577c[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 8) + g_1002577c[*(unsigned char*) (entry + 0x247)] * 20;
 	} else if (type == 1) {
-		limit = (char*) *(int*) ((char*) workers + 0xc) + g_1002578c[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0xc) + g_1002578c[*(unsigned char*) (entry + 0x247)] * 20;
 	} else if (type == 2) {
-		limit = (char*) *(int*) ((char*) workers + 0x10) + g_1002579c[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0x10) + g_1002579c[*(unsigned char*) (entry + 0x247)] * 20;
 	} else if (type == 3) {
-		limit = (char*) *(int*) ((char*) workers + 0x14) + g_100257ac[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0x14) + g_100257ac[*(unsigned char*) (entry + 0x247)] * 20;
 	} else if (type == 0xff) {
-		limit = (char*) *(int*) ((char*) workers + 0x1c) + cm_GetBuildingStatCount((unsigned char*) entity) * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0x1c) + cm_GetBuildingStatCount((unsigned char*) entity) * 20;
 	} else {
 		return 0;
 	}
 	if (!cursor) {
 		if (type == 0) {
-			cur = *(char**) ((char*) workers + 8);
+			cursor = *(void**) ((char*) workers + 8);
 		} else if (type == 1) {
-			cur = *(char**) ((char*) workers + 0xc);
+			cursor = *(void**) ((char*) workers + 0xc);
 		} else if (type == 2) {
-			cur = *(char**) ((char*) workers + 0x10);
+			cursor = *(void**) ((char*) workers + 0x10);
 		} else if (type == 3) {
-			cur = *(char**) ((char*) workers + 0x14);
+			cursor = *(void**) ((char*) workers + 0x14);
 		} else {
-			cur = *(char**) ((char*) workers + 0x1c);
+			cursor = *(void**) ((char*) workers + 0x1c);
 		}
 	} else {
-		cur = (char*) cursor + 0x14;
+		cursor = (char*) cursor + 0x14;
 	}
-	while (cur < limit) {
+	while ((unsigned char*) cursor < limit) {
 		if (!filter) {
-			return cur;
+			return cursor;
 		}
-		if (((int (__cdecl*) (void*, void*)) filter)(filter_arg, cur)) {
-			return cur;
+		if (((int (__cdecl*) (void*, void*)) filter)(filter_arg, cursor)) {
+			return cursor;
 		}
-		cur += 0x14;
+		cursor = (char*) cursor + 0x14;
 	}
 	return 0;
 }

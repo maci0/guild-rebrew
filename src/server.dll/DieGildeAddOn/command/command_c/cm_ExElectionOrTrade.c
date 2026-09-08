@@ -40,7 +40,7 @@
  *     if (puVar1 == (ushort *)0x0) {
  *       return 1;
  *     }
- *     if (g_something_1 - *(int *)(puVar1 + 0x14) < 2) {
+ *     if (g_current_year - *(int *)(puVar1 + 0x14) < 2) {
  *       return 1;
  *     }
  *     puVar1[0xe] = 0xffff;
@@ -49,7 +49,7 @@
  *     puVar1[0x11] = 0xffff;
  *     puVar1[0x12] = 0xffff;
  *     puVar1[0x13] = 0xffff;
- *     *(int *)(puVar1 + 0x14) = g_something_1 + -1;
+ *     *(int *)(puVar1 + 0x14) = g_current_year + -1;
  *   }
  *   else if (*(int *)(cmd + 0x10) == 0x62757920) {
  *     iVar2 = gm_LookupEntityRecordById(*(int *)(cmd + 0x14));

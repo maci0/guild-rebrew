@@ -6,16 +6,14 @@
  * Returns void: the only caller (0x100196a2) discards the return value and
  * the reference's EAX at exit is the discarded rand_mod(2) result, so the
  * earlier `int` prototype made symbolic proving fail on junk EAX.
- * SIZE_MISMATCH at byte level (obj 339 vs target 346): pure register-role
- * delta in the two fill loops (reference: outer counter on the stack, edi =
- * p - 0x100a9820, ebx = 0; ours: ebx/edi register walkers) — semantics
- * verified identical against the target by hand. */
+ *
+ * The 0x5c..0x7c fill is written as an explicit 8x int loop rather than
+ * memset(): the compiler unrolls it to the same `rep stosd`, but with the
+ * setup instruction order the reference uses. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100122e0
 // SYMBOL: _InitNewDynastyEntity
-
-#include <string.h>
 
 extern int __cdecl rand_mod(int n);
 extern int __cdecl _ftol(void);
@@ -23,13 +21,19 @@ extern int __cdecl find_entity_26(int entity_id);
 extern int __cdecl find_entity_27(int entity_id);
 extern int __cdecl fcn_10016cd0(int a, int b, int c);
 extern unsigned char g_current_season;
+extern unsigned char byte_100a9820[];
+extern unsigned char byte_1014d8e0[];
+/* 189 4-byte entries per object type; only the low word of each entry is read. */
+extern unsigned int g_entity_slot_table[];
 
 void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, void* entity)
 {
 	int i;
 	int j;
-	char* p;
+	int p;
+	int off;
 	int flags;
+	int k;
 
 	(void) unused;
 
@@ -46,16 +50,20 @@ void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, 
 	}
 	*(unsigned short*) ((char*) entity + 0xa) = word_arg;
 	*(char*) ((char*) entity + 0xc) = 0;
-	for (p = (char*) 0x100a9820; p < (char*) 0x10139820; p += 0x300) {
-		for (i = 0; i < 0x300; i++) {
-			p[i] = (char) (rand_mod(0x40) - 0x20);
-			((char*) 0x1014d8e0)[(p - (char*) 0x100a9820) + i] = 0;
+	for (p = (int) byte_100a9820; p < (int) byte_100a9820 + 0x90000; p += 0x300) {
+		i = 0;
+		off = p - (int) byte_100a9820;
+		for (; i < 0x300; i++) {
+			byte_100a9820[off + i] = (unsigned char) (rand_mod(0x40) - 0x20);
+			byte_1014d8e0[off + i] = 0;
 		}
 	}
 	*(unsigned short*) ((char*) entity + 0x50) = 0x7fff;
 	*(int*) ((char*) entity + 0x7c) = 0;
 	*(char*) ((char*) entity + 0x58) = 0;
-	memset((char*) entity + 0x5c, 0xff, 0x20);
+	for (k = 0; k < 8; k++) {
+		((int*) ((char*) entity + 0x5c))[k] = -1;
+	}
 	*(int*) ((char*) entity + 0x170) = 0;
 	*(int*) ((char*) entity + 0x16c) = 0;
 	*(float*) ((char*) entity + 0x1c) = 1000.0f;
@@ -69,8 +77,8 @@ void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, 
 	}
 	*(char*) ((char*) entity + 0xd) = 9;
 	fcn_10016cd0(*(int*) ((char*) entity + 4),
-	             *(unsigned short*) ((char*) 0x100a8c94 + (unsigned int) g_current_season * 756),
-	             1000000);
+	             (unsigned short) g_entity_slot_table[(unsigned int) g_current_season * 189],
+	             0xf42400);
 	rand_mod(2);
 	*(char*) ((char*) entity + 2) = 3;
 }

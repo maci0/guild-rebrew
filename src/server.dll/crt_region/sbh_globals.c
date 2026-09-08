@@ -15,6 +15,7 @@
 #include <stddef.h>
 
 /* V6 sbh structures (winheap.h tagHeader/tagRegion/tagGroup/tagEntry). */
+// SIZE 0xc
 typedef struct tagEntry
 {
     int                 sizeFront;      /* +0x00 */
@@ -22,18 +23,21 @@ typedef struct tagEntry
     struct tagEntry *   pEntryPrev;     /* +0x08 */
 } SbhEntry;
 
+// SIZE 0x8
 typedef struct tagListHead
 {
     SbhEntry *          pEntryNext;     /* +0x00 */
     SbhEntry *          pEntryPrev;     /* +0x04 */
 } SbhListHead;
 
+// SIZE 0x204
 typedef struct tagGroup
 {
     int                 cntEntries;     /* +0x00 */
     SbhListHead         listHead[64];   /* +0x04 */
 } SbhGroup;
 
+// SIZE 0x41c4
 typedef struct tagRegion
 {
     int                 indGroupUse;    /* +0x00 */
@@ -43,6 +47,7 @@ typedef struct tagRegion
     SbhGroup            grpHeadList[32];    /* +0x144 */
 } SbhRegion;
 
+// SIZE 0x14
 typedef struct tagHeader
 {
     unsigned int        bitvEntryHi;    /* +0x00 */
@@ -55,12 +60,14 @@ typedef struct tagHeader
 /* V5 ("old") sbh structures (winheap.h __old_sbh_*). */
 typedef char            OldPara[16];
 
+// SIZE 0x8
 typedef struct __old_region_map
 {
     int                 free_paras_in_page;   /* +0x00 */
     unsigned int        last_failed_alloc;    /* +0x04 */
 } OldRegionMap;
 
+// SIZE 0x1000
 typedef struct __old_sbh_page
 {
     unsigned char *     p_starting_alloc_map; /* +0x00 */
@@ -70,6 +77,7 @@ typedef struct __old_sbh_page
     OldPara             alloc_blocks[240];    /* +0x100 */
 } OldSbhPage;
 
+// SIZE 0x2020
 typedef struct __old_sbh_region
 {
     struct __old_sbh_region * p_next_region;       /* +0x00 */
@@ -86,11 +94,11 @@ typedef struct __old_sbh_region
  * (0x1176643c's pair member 0x11766434 is here) and the old-sbh static
  * region head (0x10031b78) are defined in data_globals.c. */
 // DATA: SERVER 0x11766430
-int g_11766430 = 0;                 /* __sbh_sizeHeaderList - allocated size of header list */
+int g_11766430;                 /* __sbh_sizeHeaderList - allocated size of header list */
 // DATA: SERVER 0x11766434
-int g_11766434 = 0;                 /* __sbh_indGroupDefer - deferred group index */
+int g_11766434;                 /* __sbh_indGroupDefer - deferred group index */
 // DATA: SERVER 0x1176643c
-void * g_1176643c = NULL;           /* __sbh_pHeaderDefer - deferred group header */
+void * g_1176643c;           /* __sbh_pHeaderDefer - deferred group header */
 
 // DATA: SERVER 0x10033b98
-OldSbhRegion * g_10033b98 = NULL;   /* __old_sbh_p_starting_region */
+OldSbhRegion * g_10033b98;   /* __old_sbh_p_starting_region */

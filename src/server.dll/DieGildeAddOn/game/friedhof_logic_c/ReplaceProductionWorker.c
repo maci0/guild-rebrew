@@ -4,11 +4,11 @@
 // SYMBOL: _ReplaceProductionWorker
 // SIZE: 288
 
-extern int g_entity_type_table;
+extern char* g_entity_type_table;
 extern int g_1003546c;
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
-void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
+void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
 
 int __cdecl ReplaceProductionWorker(void* a)
 {
@@ -45,7 +45,7 @@ int __cdecl ReplaceProductionWorker(void* a)
 		owner_id = *(int*) ((char*) a + 4);
 		slot_off = *(unsigned short*) ((char*) rec2 + 0x50);
 	}
-	slot = gv_GetSlotEntry((void*) worker, *(int*) ((char*) a + 0xc),
+	slot = GetSlotEntry((void*) worker, *(int*) ((char*) a + 0xc),
 	                       *(unsigned char*) ((char*) a + 0x10));
 	if (slot == 0)
 		return -7;

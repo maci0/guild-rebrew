@@ -54,7 +54,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern int g_entity_type_table;
+extern char* g_entity_type_table;
 
 void __cdecl table_lookup(uint, ushort*);
 

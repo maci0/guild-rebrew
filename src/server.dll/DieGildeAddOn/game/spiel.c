@@ -27,19 +27,13 @@ typedef struct {
 } Record;
 #pragma pack(pop)
 
-extern char* g_entity_table; /* 0x101de450 */
+extern char* g_item_def_table; /* 0x101de450 */
 void __cdecl gm_InitEntitySlots(void);
-unsigned short* g_query_base;
+extern unsigned short* g_query_base;
 extern int g_query_limit;
-extern Record* g_records;
-void __cdecl free_block(int);
-extern int g_data_ptr;
-extern int g_data_ptr2;
-extern int g_data_ptr3;
-extern int g_data_ptr4;
+void __cdecl m_FreeTracked(void*);
+extern char* g_entity_type_table;
 extern unsigned char* g_entity_ptr;
-int g_entity_type_table;
-extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -48,7 +42,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern char* g_array_base;
 // DATA: SERVER 0x100358a0
-extern char g_entity_array[];
+extern char* g_slot_table;
 void __cdecl free_node(char*);
 int __cdecl gm_FreeObjectListRecursive(char**);
 void __cdecl gm_NoopRet2(char* slot);
@@ -71,7 +65,6 @@ extern int g_FilterId;
 extern unsigned short g_FilterVal25;
 extern unsigned short g_FilterVal27;
 extern unsigned char g_FilterVal30;
-extern char* g_array;
 void __cdecl gv_Free3Fields(void* param);
 extern int g_query_state_a0c;
 extern unsigned char g_byte_table_30861;
@@ -84,10 +77,6 @@ void __cdecl SpawnGraveyardEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
-extern char* g_table_a9;
-extern char* dword_100a8c30;
-extern unsigned short* dword_100a8c34;
-extern char* dword_101de450;
 int __cdecl gm_EntityAccumulate(void*);
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 void __cdecl amt_ClearEntityLinks(short*);
@@ -96,21 +85,20 @@ void __cdecl gm_DeallocEntity(unsigned int idx, int param);
 extern int g_citizen_count;
 extern int g_dynasty_field_2c;
 extern int g_dynasty_generation_counter;
-extern char g_entity_base[];
+extern unsigned char g_entity_base[];
 extern char g_entity_end[];
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
 extern float g_const_57bc;
 int __cdecl gm_RandomMod(unsigned short range);
-extern char entity_table[];
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AssignBuildingOwner(unsigned char*, unsigned short, unsigned int);
 int __cdecl gm_WalkEntityChain(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
-extern char entity_slot_table[];
+extern unsigned short g_entity_slot_table[];
 extern float g_const_5fb8; /* 0x10025fb8 */
 extern float g_const_5fb4; /* 0x10025fb4 */
 extern float g_const_5fb0; /* 0x10025fb0 */
@@ -121,9 +109,7 @@ extern float g_float_const_cc; /* 0x100256cc */
 extern float g_gv_const_57c8; /* 0x100257c8 */
 extern double g_const_57d0; /* 0x100257d0 */
 double __cdecl gm_CalculateProductionValue(int, int);
-extern char g_type_idx;
-extern int g_key_table[];
-extern char entity_array[];
+extern char g_current_season;
 int __cdecl gm_SumBuildingProductionValues(char*, int);
 int __cdecl gm_EntityQuerySum(int);
 int __cdecl compute_size(char*); /* 0x10019d00 */
@@ -167,17 +153,12 @@ void __cdecl gm_ResetAllEntities(void)
 
 // FUNCTION: SERVER 0x10015cf0
 // gm_CleanupObjectEntities
-//   SIZE_MISMATCH 139/194 (obj 193): control flow and all calls match; residual
-//   diffs are msvc6 register-role choices — original encodes [esi+eax] (counter
-//   as base reg) and materializes the gm_NoopRet2 arg with `lea ecx,[esi+eax]`
-//   (ours folds to `add eax,esi`, 1 byte smaller, hence SIZE_MISMATCH), and the
-//   branch displacements shift by that byte.  Reshape attempts 2026-08-29
-//   (all byte-identical or worse): `g_query_base + i` operand order in every
-//   index expression, do-while loop form, temp `char* slot` (135/187B).  Not
-//   reachable with this compiler's register allocation; symbolic prove also
-//   explodes (gm_ResolveEntityById stub makes the dynamic/existing/static
-//   if-chain branch per iteration over the 0x53c86-iteration loop).  Semantics
-//   verified identical against the target disasm by hand.
+//   Loop counts records (i < 0x5008, i++) and scales by the 0x43 stride at each
+//   use, rather than stepping a byte offset by 0x43.  msvc6 strength-reduces the
+//   i*0x43 induction variable itself into esi, which makes esi the SIB base and
+//   keeps the reloaded g_query_base live, so the gm_NoopRet2 argument is formed
+//   with `lea ecx,[esi+eax]`.  Pre-computing the byte offset instead lets the
+//   compiler fold it to `add eax,esi`, one byte short of the 194-byte target.
 
 int __cdecl gm_RemoveObjectByType(void** objectListHead, unsigned int objectTypeId);
 void __cdecl gm_NoopRet2(char* slot);
@@ -190,9 +171,9 @@ void __cdecl gm_CleanupObjectEntities(void)
 	void* static_ptr;
 	char* list_head;
 
-	for (i = 0; i < 0x14f218; i += 0x43) {
-		if (*(unsigned short*) (i + (char*) g_query_base) != 0) {
-			gm_ResolveEntityById(&dynamic, &existing, &static_ptr, *(int*) (i + (char*) g_query_base + 6));
+	for (i = 0; i < 0x5008; i++) {
+		if (*(unsigned short*) ((char*) g_query_base + i * 0x43) != 0) {
+			gm_ResolveEntityById(&dynamic, &existing, &static_ptr, *(int*) ((char*) g_query_base + i * 0x43 + 6));
 			if (dynamic != NULL) {
 				list_head = (char*) dynamic + 0x5d;
 			} else if (existing != NULL) {
@@ -203,10 +184,10 @@ void __cdecl gm_CleanupObjectEntities(void)
 				list_head = NULL;
 			}
 			if (list_head != NULL) {
-				gm_RemoveObjectByType((void**) list_head, *(unsigned short*) (i + (char*) g_query_base));
+				gm_RemoveObjectByType((void**) list_head, *(unsigned short*) ((char*) g_query_base + i * 0x43));
 			} else {
-				gm_NoopRet2(i + (char*) g_query_base);
-				*(unsigned short*) (i + (char*) g_query_base) = 0;
+				gm_NoopRet2((char*) g_query_base + i * 0x43);
+				*(unsigned short*) ((char*) g_query_base + i * 0x43) = 0;
 				g_query_limit--;
 			}
 		}
@@ -226,10 +207,10 @@ Record* __cdecl gm_FindRecordById(int id)
 	Record* p;
 
 	i = 0;
-	p = g_records;
+	p = (Record*) g_query_base;
 	while (i < 0x5008) {
 		if (p->active != 0 && p->id == id) {
-			return (Record*) ((char*) g_records + i * 0x43);
+			return (Record*) ((char*) g_query_base + i * 0x43);
 		}
 		i++;
 		p = (Record*) ((char*) p + 0x43);
@@ -253,21 +234,21 @@ void __cdecl gm_CleanupAllEntities(void)
 			ent = (int) FindNextFilteredEntity();
 		} while (ent);
 	}
-	if (g_data_ptr) {
-		free_block(g_data_ptr);
-		g_data_ptr = 0;
+	if (g_entity_type_table) {
+		m_FreeTracked(g_entity_type_table);
+		g_entity_type_table = 0;
 	}
-	if (g_data_ptr2) {
-		free_block(g_data_ptr2);
-		g_data_ptr2 = 0;
+	if (g_entity_ptr) {
+		m_FreeTracked(g_entity_ptr);
+		g_entity_ptr = 0;
 	}
-	if (g_data_ptr3) {
-		free_block(g_data_ptr3);
-		g_data_ptr3 = 0;
+	if (g_item_def_table) {
+		m_FreeTracked(g_item_def_table);
+		g_item_def_table = 0;
 	}
-	if (g_data_ptr4) {
-		free_block(g_data_ptr4);
-		g_data_ptr4 = 0;
+	if (g_query_base) {
+		m_FreeTracked(g_query_base);
+		g_query_base = 0;
 	}
 }
 
@@ -278,14 +259,13 @@ void __cdecl gm_CleanupAllEntities(void)
 // FUNCTION: SERVER 0x10015e90
 // gm_ResolveEntityById
 
-extern int g_1014d8c0;
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
 {
 	int i;
 	char* p;
 
-	if (g_entity_table == NULL) {
+	if (g_item_def_table == NULL) {
 		return 0;
 	}
 	if (dynamic != NULL) {
@@ -306,7 +286,7 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 		}
 	}
 	if (dynamic != NULL) {
-		p = (char*) g_1014d8c0;
+		p = (char*) g_entity_ptr;
 		for (i = 0; i < 0x100; i++, p += 0xa9) {
 			if (*(char*) p != 0 && *(int*) (p + 1) == entity_id) {
 				*dynamic = p;

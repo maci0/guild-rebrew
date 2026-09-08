@@ -27,6 +27,42 @@ void* __cdecl gm_LookupEntityRecordById(int);
 /* Game function - entity role/assignment table manager */
 /* Updates a 0x18-byte record table at 0x101de5a0, clears old roles, sets new assignments */
 
+/* Byte-match note: RELOC 836/836.  Two levers, in the high-role block:
+ *
+ * The ecx/edx naming residue: spelling the clear as `*scan & ~mask` inline,
+ * instead of hoisting `neg_mask = ~mask` into a local, puts role_ch in cl and
+ * the mask in edx as the reference does (826 -> 829).
+ *
+ * The preheader order (`not edx; mov eax,0x10035a6c`, where a pointer-cursor
+ * loop emits `mov eax,0x10035a6c; not edx`): counting rows and spelling the
+ * address as `0x10035a6c + row * 0x21c` gives msvc6 a multiply to strength-
+ * reduce, and it then materialises the negated mask before the table base.
+ * The `while ((int) scan < 0x1009ae6c)` bound became `row < 768` (the table is
+ * 768 rows of 0x21c: 0x1009ae6c - 0x10035a6c = 0x65400 = 768 * 0x21c).
+ * A byte-offset counter (`off += 0x21c`, `off < 0x65400`) also emits the `not`
+ * first, but recomputes the bound with a `lea`/`cmp` pair against 0x65400 and
+ * is longer.
+ *
+ * Dead ends on the pointer-cursor shape, all 829/836: for/while/do-while loop
+ * forms, `&=` vs explicit and, `~mask` on either operand side, `mask ^ -1`,
+ * `mask ^ 0xffffffff`, char / unsigned int / int pointer cursors, `scan +=
+ * 0x87`, scan declared before, after, and outside the mask block, an unsigned
+ * mask, an unsigned loop bound, a load/modify/store body with an explicit
+ * temp, advancing the cursor before the store to mirror the target's
+ * `[eax-0x21c]` write-back, a dead `~mask` consumer before the loop, a scan
+ * base spelled `0x1009ae6c - 0x65400`, and a separate row counter beside the
+ * pointer cursor.  Regressions: an end-pointer local (828), hoisting `~mask`
+ * into a local or the for-init (826), negating mask in place before the loop
+ * (826), an index-only walk (817/843, wrong size), a volatile mask read
+ * (740/851), a switch over role_ch (jump table, 740/836), and assigning mask
+ * before the flag store in each arm (755/836).
+ *
+ * The earlier note that the preheader order and the mask register were one
+ * inseparable decision held only for the pointer-cursor shapes probed then:
+ * every one that emitted `not` first also moved the mask to ecx.  The row
+ * multiply emits `not` first while keeping the mask in esi/edx, so the two are
+ * separable after all. */
+
 int __cdecl ExecuteOfficeAssignment(char* cmd_payload)
 {
 	int iStack;
@@ -236,14 +272,13 @@ after_old_clear:
 			}
 
 			{
-				int* scan;
-				unsigned int neg_mask;
-				neg_mask = ~mask;
-				scan = (int*) 0x10035a6c;
-				while ((int) scan < 0x1009ae6c) {
-					*scan = *scan & neg_mask;
-					scan = (int*) ((char*) scan + 0x21c);
-				}
+				int row;
+				row = 0;
+				do {
+					*(int*) (0x10035a6c + row * 0x21c) =
+						*(int*) (0x10035a6c + row * 0x21c) & ~mask;
+					row++;
+				} while (row < 768);
 			}
 		}
 		goto final_store;

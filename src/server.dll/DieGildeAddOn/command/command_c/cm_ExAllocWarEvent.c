@@ -2,7 +2,7 @@
 
 #include "../command_internal.h"
 
-extern char g_player_slot_0[];
+extern char g_connections[];
 extern void* __cdecl gm_SearchTable67(int);
 extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
@@ -10,6 +10,7 @@ extern char* __cdecl gm_AllocObjekt(int, int, int);
 
 /* 14-byte war-event field block copied from cmd+0x18 to obj+0x1c. */
 #pragma pack(1)
+// SIZE 0xe
 typedef struct war_event_fields {
 	int f0;
 	int f4;
@@ -22,21 +23,11 @@ typedef struct war_event_fields {
  * attacker and target entities, reuses an existing matching event if
  * one is already queued, and initializes the event parameters.
  *
- * Byte-match note: everything through the player-slot link store
- * (timestamp store, both SearchTable67 calls, the query loop, the
- * alloc and the `lea [ecx+ecx*8]` slot-index chain) matches
- * byte-for-byte, and the trailing 14-byte event copy is reproduced
- * with a packed-struct assignment (`lea ecx,[esi+0x18]` /
- * `lea edx,[eax+0x1c]`, [reg+disp] copies via edi, `mov bl,[eax+0x37]`
- * hoisted before the copy) plus the obj+0x2a/0x32/0x36 stores.  Best
- * effort is 274/280 (obj 274, 258 matched): the clamp epilogue
- * diverges only in the reference's `mov ecx,0x64; mov [eax+0x37],cl`
- * register-form constant store (MSVC6 here always folds to the 4-byte
- * immediate) and the fall-through reload's `xor ecx,ecx` zero-extension
- * (volatile self-assign keeps the separate reload block but picks dl
- * without the xor).  Both are allocation details not steerable from C;
- * a volatile self-assignment reproduces the reference's separate
- * no-clamp return block. */
+ * The clamp epilogue needs a 32-bit `clamped` temp assigned in both
+ * arms of the if/else and stored once after the join.  That form emits
+ * the reference's `mov ecx,0x64` / `xor ecx,ecx; mov cl,[eax+0x37]`
+ * register-width materialization; storing the constant or the reloaded
+ * byte directly at each return folds to an immediate store instead. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10010140
@@ -50,10 +41,11 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 	unsigned short* q;
 	char* obj;
 	unsigned int slot_idx;
+	unsigned int clamped;
 
 	(void) result;
 
-	*(int*) (cmd + 0x10) = g_timestamp_0b6c;
+	*(int*) (cmd + 0x10) = g_next_object_id;
 	attacker = gm_SearchTable67(*(int*) (cmd + 0x26));
 	if (attacker == 0) {
 		return 1;
@@ -75,7 +67,7 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 			return 1;
 		}
 		slot_idx = (unsigned int) *(unsigned char*) (cmd + 3);
-		*(int*) (g_player_slot_0 + slot_idx * 0x264264 + 0x264208) = *(int*) (obj + 2);
+		*(int*) (g_connections + slot_idx * 0x264264 + 0x264208) = *(int*) (obj + 2);
 	} else {
 		obj = (char*) q;
 	}
@@ -88,9 +80,10 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 	*(unsigned char*) (obj + 0x37) = (unsigned char) (*(unsigned char*) (obj + 0x37) +
 	                                                  *(unsigned char*) (cmd + 0x33));
 	if (*(unsigned char*) (obj + 0x37) > 100) {
-		*(unsigned char*) (obj + 0x37) = 100;
-		return 0;
+		clamped = 100;
+	} else {
+		clamped = *(unsigned char*) (obj + 0x37);
 	}
-	*(volatile unsigned char*) (obj + 0x37) = *(volatile unsigned char*) (obj + 0x37);
+	*(unsigned char*) (obj + 0x37) = (unsigned char) clamped;
 	return 0;
 }

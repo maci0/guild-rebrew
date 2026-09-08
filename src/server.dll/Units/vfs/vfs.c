@@ -7,7 +7,7 @@
 
 int* __cdecl vfs_GetErrnoPtr(void);
 int __cdecl vfs_WriteBufferLocked(void*, int, int, int);
-void __cdecl m_FreeHeapLocked(void*);
+void __cdecl free(void*);
 int __cdecl vfs_FreeGameSubobject(void*);
 int __cdecl vfs_CleanupSubobject(void*);
 int __cdecl vfs_CompressBlock(void*, int);
@@ -34,60 +34,34 @@ int __cdecl ReadVfsCompressed(int, int, unsigned int);
 // FUNCTION: SERVER 0x10003820
 // vfs_GetByte
 
-__declspec(naked) unsigned int __cdecl vfs_GetByte(int* stream)
+unsigned int __cdecl vfs_GetByte(int* stream)
 {
-	(void) stream;
-	__asm {
-		push esi
-		mov esi, dword ptr [esp + 8]
-		mov eax, dword ptr [esi + 0x3c]
-		test eax, eax
-		je L_have_buf
-		or eax, 0xffffffff
-		pop esi
-		ret
-	L_have_buf:
-		mov eax, dword ptr [esi + 4]
-		test eax, eax
-		jne L_read
-		call vfs_GetErrnoPtr
-		mov dword ptr [eax], 0
-		mov eax, dword ptr [esi + 0x40]
-		mov ecx, dword ptr [esi + 0x44]
-		push eax
-		push 0x4000
-		push 1
-		push ecx
-		call vfs_WriteBufferLocked
-		add esp, 0x10
-		mov dword ptr [esi + 4], eax
-		test eax, eax
-		jne L_refilled
-		mov edx, dword ptr [esi + 0x40]
-		mov dword ptr [esi + 0x3c], 1
-		or eax, 0xffffffff
-		test byte ptr [edx + 0xc], 0x20
-		je L_done
-		mov dword ptr [esi + 0x38], eax
-		pop esi
-		ret
-	L_refilled:
-		mov eax, dword ptr [esi + 0x44]
-		mov dword ptr [esi], eax
-	L_read:
-		mov eax, dword ptr [esi + 4]
-		xor ecx, ecx
-		dec eax
-		mov dword ptr [esi + 4], eax
-		mov eax, dword ptr [esi]
-		mov cl, byte ptr [eax]
-		inc eax
-		mov dword ptr [esi], eax
-		mov eax, ecx
-	L_done:
-		pop esi
-		ret
+	int* errno_ptr;
+	int bytes_read;
+
+	if (stream[0xf] != 0) {
+		return (unsigned int) -1;
 	}
+	if (stream[1] == 0) {
+		errno_ptr = vfs_GetErrnoPtr();
+		*errno_ptr = 0;
+		bytes_read = vfs_WriteBufferLocked((void*) stream[0x11], 1, 0x4000, stream[0x10]);
+		stream[1] = bytes_read;
+		if (bytes_read == 0) {
+			stream[0xf] = 1;
+			if ((*(unsigned char*) (stream[0x10] + 0xc) & 0x20) != 0) {
+				stream[0xe] = -1;
+			}
+			return (unsigned int) -1;
+		}
+		stream[0] = stream[0x11];
+	}
+	/* The read cursor is post-incremented in place through a pointer alias
+	 * of stream[0]. Copying it into a local first makes MSVC6 hold the
+	 * cursor in ecx and zero-extend the byte into eax, which loses the
+	 * target's reuse of eax for both the count temp and the cursor. */
+	stream[1] = stream[1] - 1;
+	return *(*(unsigned char**) &stream[0])++;
 }
 
 /* Closes a VFS stream and releases associated resources.
@@ -107,7 +81,7 @@ int __cdecl vfs_CloseStream(void* stream)
 		return -2;
 	}
 	if (*(void**) ((int) stream + 0x50) != 0) {
-		m_FreeHeapLocked(*(void**) ((int) stream + 0x50));
+		free(*(void**) ((int) stream + 0x50));
 	}
 	if (*(int*) ((int) stream + 0x1c) != 0) {
 		if (*(char*) ((int) stream + 0x5c) == 'w') {
@@ -130,15 +104,15 @@ int __cdecl vfs_CloseStream(void* stream)
 		result = *(int*) ((int) stream + 0x38);
 	}
 	if (*(void**) ((int) stream + 0x44) != 0) {
-		m_FreeHeapLocked(*(void**) ((int) stream + 0x44));
+		free(*(void**) ((int) stream + 0x44));
 	}
 	if (*(void**) ((int) stream + 0x48) != 0) {
-		m_FreeHeapLocked(*(void**) ((int) stream + 0x48));
+		free(*(void**) ((int) stream + 0x48));
 	}
 	if (*(void**) ((int) stream + 0x54) != 0) {
-		m_FreeHeapLocked(*(void**) ((int) stream + 0x54));
+		free(*(void**) ((int) stream + 0x54));
 	}
-	m_FreeHeapLocked(stream);
+	free(stream);
 	return result;
 }
 

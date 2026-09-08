@@ -1,7 +1,6 @@
 #include <windows.h>
 
-// CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001b5cc
+// FUNCTION: SERVER 0x1001b5cc (was FUNCTION; provided by LIBCMT / library_msvc.h)
 // SIZE: 815
 
 /* Game override of CRT realloc.  Mirrors malloc/free: mode 3 = pool

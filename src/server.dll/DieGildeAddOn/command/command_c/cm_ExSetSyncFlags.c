@@ -12,19 +12,19 @@
  *
  * {
  *   if (*(char *)(cmd + 0x10) == '\x01') {
- *     g_player_slot_0[*(byte *)(cmd + 3)].flags =
- *          g_player_slot_0[*(byte *)(cmd + 3)].flags | 0x20;
+ *     g_connections[*(byte *)(cmd + 3)].flags =
+ *          g_connections[*(byte *)(cmd + 3)].flags | 0x20;
  *   }
  *   if (*(char *)(cmd + 0x10) == '\x0e') {
- *     g_player_slot_0[*(byte *)(cmd + 3)].flags =
- *          g_player_slot_0[*(byte *)(cmd + 3)].flags | 0x40;
+ *     g_connections[*(byte *)(cmd + 3)].flags =
+ *          g_connections[*(byte *)(cmd + 3)].flags | 0x40;
  *   }
  *   if (*(char *)(cmd + 0x10) == '\x12') {
- *     _g_game_speed_index = *(int *)(cmd + 0x11);
- *     if (3 < _g_game_speed_index) {
- *       _g_game_speed_index = 4;
+ *     g_game_speed_index = *(int *)(cmd + 0x11);
+ *     if (3 < g_game_speed_index) {
+ *       g_game_speed_index = 4;
  *     }
- *     g_game_speed_value = *(undefined4 *)(&g_game_speed_table + _g_game_speed_index * 4);
+ *     g_game_speed_value = *(undefined4 *)(&g_game_speed_table + g_game_speed_index * 4);
  *   }
  *   return 0;
  * }
@@ -36,8 +36,8 @@ typedef struct player_slot {
 	char gap_0004[0x264260];
 } player_slot;
 
-extern player_slot g_player_slot_0[];
-extern int _g_game_speed_index;
+extern player_slot g_connections[];
+extern int g_game_speed_index;
 extern int g_game_speed_value;
 extern int g_game_speed_table[];
 
@@ -51,12 +51,12 @@ int __cdecl cm_ExSetSyncFlags(int cmd, char* result)
 	int speed_index;
 
 	if (*(char*) (cmd + 0x10) == '\x01') {
-		g_player_slot_0[*(unsigned char*) (cmd + 3)].flags =
-			g_player_slot_0[*(unsigned char*) (cmd + 3)].flags | 0x20;
+		g_connections[*(unsigned char*) (cmd + 3)].flags =
+			g_connections[*(unsigned char*) (cmd + 3)].flags | 0x20;
 	}
 	if (*(char*) (cmd + 0x10) == '\x0e') {
-		g_player_slot_0[*(unsigned char*) (cmd + 3)].flags =
-			g_player_slot_0[*(unsigned char*) (cmd + 3)].flags | 0x40;
+		g_connections[*(unsigned char*) (cmd + 3)].flags =
+			g_connections[*(unsigned char*) (cmd + 3)].flags | 0x40;
 	}
 	if (*(char*) (cmd + 0x10) == '\x12') {
 		speed_index = *(int*) (cmd + 0x11);
@@ -64,7 +64,7 @@ int __cdecl cm_ExSetSyncFlags(int cmd, char* result)
 			speed_index = 4;
 		}
 		g_game_speed_value = g_game_speed_table[speed_index];
-		_g_game_speed_index = speed_index;
+		g_game_speed_index = speed_index;
 	}
 	return 0;
 }

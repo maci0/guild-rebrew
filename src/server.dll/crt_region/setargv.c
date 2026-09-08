@@ -1,5 +1,6 @@
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001f9c0
+// FUNCTION: SERVER 0x1001f9c0 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// SIZE: 185
 #include <windows.h>
 
 /* Game's CRT-startup overrides for command-line/environment parsing:
@@ -63,7 +64,7 @@ void __cdecl _setenvp(void)
     g_1176758c = 1;
 }
 
-// FUNCTION: SERVER 0x1001fa79
+// FUNCTION: SERVER 0x1001fa79 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 extern char g_100355d8[];    /* 0x100355d8 - module filename buffer */
 extern int g_100354e0;       /* 0x100354e0 - _pgmptr */
@@ -95,7 +96,7 @@ void __cdecl _setargv(void)
     g_100354c4 = argc - 1;
 }
 
-// FUNCTION: SERVER 0x1001fcc6
+// FUNCTION: SERVER 0x1001fcc6 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 extern int g_100356dc;       /* 0x100356dc - env mode: 0=uninit, 1=W, 2=A */
 extern void* __cdecl fcn_1001eab0(void*, const void*, int); /* 0x1001eab0 - memcpy */
@@ -204,7 +205,7 @@ ansi:
 }
 
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001bdd0
+// FUNCTION: SERVER 0x1001bdd0 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* _strlen (game copy of the CRT asm strlen: alignment loop then the
  * 0x7efefeff dword null-detection scan). */
@@ -236,7 +237,7 @@ size_t __cdecl fcn_1001bdd0(const char* str)
     }
 }
 
-// FUNCTION: SERVER 0x1001f8d0
+// FUNCTION: SERVER 0x1001f8d0 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* _strcpy (game copy; functional C equivalent of the asm original which
  * tail-jumps into the shared strcat copy loop). */
@@ -250,7 +251,7 @@ char* __cdecl fcn_1001f8d0(char* dst, const char* src)
     return dst;
 }
 
-// FUNCTION: SERVER 0x1001fb12
+// FUNCTION: SERVER 0x1001fb12 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* _parse_cmdline (game copy): scans the program name, then the argument
  * list, into the string buffer argend; counts args (argc) and copied bytes
@@ -421,7 +422,7 @@ void __cdecl fcn_1001fb12(char* cmdstart, char** argv, char** argend, int* argc,
     (*argc)++;
 }
 
-// FUNCTION: SERVER 0x100220eb
+// FUNCTION: SERVER 0x100220eb (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* __crtinitcommandline: on first use, sets the multibyte codepage to the
  * locale default (-3) and marks the command line as parsed. */

@@ -93,6 +93,21 @@ relocations) > `NEAR_MATCHING` (close) > `STUB` (incomplete)
 - **Execution**: all CL.EXE/LINK.EXE calls run through the docker image
   (`rebrew/msvc:6.0-win32`); build it with `rebrew toolchain build msvc6`
   before `cmake --build`
+- **CFLAGS are per-file in practice**, not per-function: a flag one function
+  needs can break a file-mate. See `docs/msvc6-c-shapes.md` section 12.
+
+## Codegen References
+
+Empirical notes on what makes C compile to the target's exact bytes:
+
+| Doc | Covers |
+|-----|--------|
+| `docs/msvc6-c-shapes.md` | Declaration types, operand forms, statement order, loop shape, CFLAGS scoping |
+| `docs/msvc6-allocator.md` | Register allocation (`eax/ecx/edx` vs `ebx/esi/edi`) |
+
+Read `msvc6-c-shapes.md` before reshaping a function that compiles but does
+not match. It catalogues the patterns that have closed real mismatches, each
+with a verified call site.
 
 ## Agent Skills
 

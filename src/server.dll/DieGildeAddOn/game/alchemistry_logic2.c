@@ -15,7 +15,7 @@ int __cdecl gm_RefreshMarketAvailability(int season);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_DeallocEntity(unsigned int index, int param);
 void* __cdecl gm_NextEntityQueryMatch(void);
-extern float fColorScale;
+extern float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
 extern float g_float_const_cc;
@@ -58,19 +58,19 @@ int __cdecl ahm_ApplyColorComponent(char* color_cmd, char* target)
 	switch (*(int*) (color_cmd + 8)) {
 	case 0:
 		val = *(float*) (color_cmd + 0x10);
-		*(unsigned char*) (target + 8) = (unsigned char) (int) (val * fColorScale);
+		*(unsigned char*) (target + 8) = (unsigned char) (int) (val * g_color_scale);
 		return 1;
 	case 1:
 		val = *(float*) (color_cmd + 0x10);
-		*(unsigned char*) (target + 9) = (unsigned char) (int) (val * fColorScale);
+		*(unsigned char*) (target + 9) = (unsigned char) (int) (val * g_color_scale);
 		return 1;
 	case 2:
 		val = *(float*) (color_cmd + 0x10);
-		*(unsigned char*) (target + 0xa) = (unsigned char) (int) (val * fColorScale);
+		*(unsigned char*) (target + 0xa) = (unsigned char) (int) (val * g_color_scale);
 		return 1;
 	case 3:
 		val = *(float*) (color_cmd + 0x10);
-		*(unsigned char*) (target + 0xb) = (unsigned char) (int) (val * fColorScale);
+		*(unsigned char*) (target + 0xb) = (unsigned char) (int) (val * g_color_scale);
 		return 1;
 	default:
 		return 0;
@@ -158,7 +158,30 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 }
 
 /* Clamps a floating-point alchemy value to valid bounds.
- * Prevents stat overflow/underflow during recipe processing. */
+ * Prevents stat overflow/underflow during recipe processing.
+ * g_float_const_cc (0x100256cc) and g_float_const_a0 (0x100256a0) hold
+ * 0.0f and 1.0f, so this is a clamp into [0.0, 1.0].
+ *
+ * The in-range test is one short-circuit `&&`, not a nested if, and the two
+ * clamp arms select a value into a local that a single trailing store writes.
+ * That shape alone gives the target's bytes; no volatile, flag local or
+ * merge blocker is needed.
+ *
+ * Why the nested-if spellings could not get there. The target keeps three
+ * blocks: the in-range one stores then sets eax, while both clamp blocks set
+ * eax before the store. A nested if makes all three tails identical, so the
+ * cross-jump pass merges the clamp arms into a 74-byte body. Splitting the
+ * value selection from the store is what makes the clamp tails differ from
+ * the in-range tail, which blocks the merge for free and simultaneously
+ * fixes the eax scheduling.
+ *
+ * Dead ends from earlier passes, all on nested-if variants: routing the
+ * constants through a float local, per-arm float temps, a `static const int`
+ * return blocker (83 bytes and the right block order, but the return then
+ * loads from memory instead of an immediate), volatile on the constant, the
+ * destination or the local, goto chains for block layout, and a
+ * /G3../G6 /Ox /Gy /Gf /Op /Za flag sweep. None beat 64/83. */
+
 
 // FUNCTION: SERVER 0x1000c3c0
 // SYMBOL: _ahm_ClampFloatValue
@@ -167,17 +190,19 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 int __cdecl ahm_ClampFloatValue(float* arg1, float* arg2)
 {
 	float v;
+	float c;
 
 	v = arg1[4] + arg2[1];
-	if (v > g_float_const_cc) {
-		if (v < g_float_const_a0) {
-			arg2[1] = v;
-			return 1;
-		}
-		arg2[1] = g_float_const_a0;
+	if (v > g_float_const_cc && v < g_float_const_a0) {
+		arg2[1] = v;
 		return 1;
 	}
-	arg2[1] = g_float_const_cc;
+	if (v <= g_float_const_cc) {
+		c = g_float_const_cc;
+	} else {
+		c = g_float_const_a0;
+	}
+	arg2[1] = c;
 	return 1;
 }
 
@@ -230,6 +255,9 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 /* Allocates and initializes the alchemy info structure for
  * a building. Sets up recipe slots and ingredient storage. */
 
+// DATA: SERVER 0x1002a0f8
+char s_ahm_AllocAhmInfo_1002a0f8[] = "ahm_AllocAhmInfo";
+
 // FUNCTION: SERVER 0x1000c4d0
 // SYMBOL: _ahm_AllocAhmInfo
 // SIZE: 295
@@ -258,7 +286,7 @@ int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
 			return 0;
 	}
 	if (*(int*) (arg2 + 0x65) == 0)
-		*(int*) (arg2 + 0x65) = (int) m_AllocTracked(0x3c, "ahm_AllocAhmInfo");
+		*(int*) (arg2 + 0x65) = (int) m_AllocTracked(0x3c, s_ahm_AllocAhmInfo_1002a0f8);
 	memcpy((void*) *(int*) (arg2 + 0x65), buf, 0x3c);
 	return 1;
 }
@@ -266,12 +294,6 @@ int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
 // FUNCTION: SERVER 0x1000c600
 // SYMBOL: _ahm_InitRandomEntity
 // SIZE: 109
-// PROVEN via `rebrew prove` (was NEAR_MATCHING 100/109). Residual is the
-// MSVC6 scale-loop scheduling fold: target emits `fstp [eax]; add eax,0xc;
-// dec edx; jne` (store before pointer bump); 6.0 folds the bump-then-store
-// source below to `add; dec; fstp [eax]` with a base-12 lea + `fld [eax+8]`.
-// Every source form tried folds one of load/store; prove established
-// equivalence so the byte-count-neutral form below is kept.
 
 char* __cdecl ahm_InitRandomEntity(void)
 {
@@ -292,11 +314,15 @@ char* __cdecl ahm_InitRandomEntity(void)
 	return 0;
 found:
 	off = idx * 244;
-	p = (float*) (0x1002a200 + off) - 3;
-	for (n = 0xe; n != 0; n--) {
+	p = (float*) (0x1002a200 + off);
+	n = 0xe;
+	do {
+		/* volatile pins the store right after the multiply; without it
+		 * MSVC6 sinks it past the pointer bump to `fstp [eax-0xc]`. */
+		*(volatile float*) p = p[-1] * dScaleFactor;
 		p += 3;
-		*p = *(p - 1) * dScaleFactor;
-	}
+		n--;
+	} while (n != 0);
 	*(unsigned char*) (0x1002a2c2 + off) = 1;
 	return (char*) (0x1002a1d0 + off);
 }

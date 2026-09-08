@@ -1,5 +1,5 @@
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001d0ac
+// FUNCTION: SERVER 0x1001d0ac (was FUNCTION; provided by LIBCMT / library_msvc.h)
 #include <windows.h>
 
 /* Game's CRT-startup overrides of the per-thread data machinery:
@@ -34,7 +34,7 @@ int __cdecl __mtinit(void)
     return 0;
 }
 
-// FUNCTION: SERVER 0x1001d100
+// FUNCTION: SERVER 0x1001d100 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 void __cdecl crt_close_handle(void)
 {
@@ -46,7 +46,7 @@ void __cdecl crt_close_handle(void)
     }
 }
 
-// FUNCTION: SERVER 0x1001d198
+// FUNCTION: SERVER 0x1001d198 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 extern void __cdecl free(void*);   /* 0x1001ab81 - game free override */
 
@@ -81,7 +81,7 @@ void __cdecl __freeptd(int ptd)
 }
 
 // CFLAGS: /O1 /Gd
-// FUNCTION: SERVER 0x1001cfa1
+// FUNCTION: SERVER 0x1001cfa1 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* __mtinitlocks (game copy): initializes the four static critical sections
  * embedded in the lock-pointer table. */
@@ -96,7 +96,7 @@ void __cdecl fcn_1001cfa1(void)
     InitializeCriticalSection(locktable[1]);
 }
 
-// FUNCTION: SERVER 0x1001cfca
+// FUNCTION: SERVER 0x1001cfca (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* __mtdeletelocks (game copy): walks the per-lock CS pointer table
  * (0x10031aac..0x10031b6c), deleting+frees entries except the four static
@@ -123,7 +123,7 @@ void __cdecl fcn_1001cfca(void)
     DeleteCriticalSection(locktable[1]);
 }
 
-// FUNCTION: SERVER 0x1001d11e
+// FUNCTION: SERVER 0x1001d11e (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* set_vtable: stamps the _ptd's vtable pointer and refcount. */
 
@@ -133,7 +133,7 @@ void __cdecl fcn_1001d11e(void* ptd)
     *(int*)((char*)ptd + 0x14) = 1;
 }
 
-// FUNCTION: SERVER 0x1001d238
+// FUNCTION: SERVER 0x1001d238 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* _callnewh: invokes the new-handler (g_100355a0) when installed; returns 1
  * if the handler handled the allocation, else 0. */
@@ -148,7 +148,8 @@ int __cdecl fcn_1001d238(unsigned int size)
     return 0;
 }
 
-// FUNCTION: SERVER 0x1001ff84
+// FUNCTION: SERVER 0x1001ff84 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// SIZE: 153
 
 /* calloc (game copy): rounds the byte count up to 16, dispatches to the
  * pool (mode 3) / block (mode 2) allocators under _mlock(9), falls back to
@@ -169,9 +170,10 @@ void* __cdecl calloc(unsigned int num, unsigned int size)
 {
     void* result;
     unsigned int bytes;
+    int mode;
 
-    bytes = num * size;
-    size = bytes;
+    size = num * size;
+    bytes = size;
     if (size <= 0xFFFFFFE0u)
     {
         if (size == 0)
@@ -183,7 +185,8 @@ void* __cdecl calloc(unsigned int num, unsigned int size)
         result = NULL;
         if (size <= 0xFFFFFFE0u)
         {
-            if (g_11766450 == 3)
+            mode = g_11766450;
+            if (mode == 3)
             {
                 if (bytes <= g_11766448)
                 {
@@ -191,13 +194,10 @@ void* __cdecl calloc(unsigned int num, unsigned int size)
                     __try { result = fcn_1001d869(bytes); }
                     __finally { _munlock(9); }
                     if (result != NULL)
-                    {
                         fcn_10021240(result, 0, bytes);
-                        return result;
-                    }
                 }
             }
-            else if (g_11766450 == 2)
+            else if (mode == 2)
             {
                 if (size <= g_10033b9c)
                 {
@@ -205,13 +205,11 @@ void* __cdecl calloc(unsigned int num, unsigned int size)
                     __try { result = __old_sbh_alloc_block(size >> 4); }
                     __finally { _munlock(9); }
                     if (result != NULL)
-                    {
                         fcn_10021240(result, 0, size);
-                        return result;
-                    }
                 }
             }
-            result = HeapAlloc(g_1176644c, 8, size);
+            if (result == NULL)
+                result = HeapAlloc(g_1176644c, 8, size);
         }
         if (result != NULL)
             return result;

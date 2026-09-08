@@ -16,16 +16,8 @@ double _g_stat_max_d = 0;
 float _g_stat_min = 0;
 double _g_stat_min_d = 0;
 double dScaleFactor = 0;
-char* dword_100a8c30 = 0;
-unsigned short* dword_100a8c34 = 0;
-char* dword_101de450 = 0;
-char entity_array[1] = {0};
-char entity_slot_table[1] = {0};
-char entity_table[1] = {0};
-float fColorScale = 0;
 int fcn_1001a6a1 = 0;
 int fcn_10016ea0 = 0;
-unsigned int table_100a8c94[1] = {0};
 float table_1002572c[1] = {0.0f};
 int table_1002574c[1] = {0};
 int g_1002575c[1] = {0};
@@ -67,18 +59,11 @@ int g_alloc_root_name = 0;
 int g_alloc_root_name_4 = 0;
 int g_alloc_root_size_max = 0;
 int g_alloc_root_size_total = 0;
-char* g_array = 0;
 char* g_array_base = 0;
 unsigned char g_byte_table_30861 = 0;
-unsigned char g_connections[1] = {0};
 int g_console_handle = 0;
 float g_const_57bc = 0;
 float g_const_5fbc = 0;
-char g_currency_type_array[1] = {0};
-int g_data_ptr = 0;
-int g_data_ptr2 = 0;
-int g_data_ptr3 = 0;
-int g_data_ptr4 = 0;
 int g_default_group_name = 0;
 int g_default_group_name_4 = 0;
 int g_dispatch_table[1] = {0};
@@ -87,67 +72,49 @@ int g_dispatch_table_b[1] = {0};
 int g_dynamic_count = 0;
 int g_dynasty_field_2c = 0;
 int g_dynasty_generation_counter = 0;
-char g_entity_array[1] = {0};
-char* g_entity_table = 0;
-int g_entity_id_start = 0;
-int g_ents[1] = {0};
-int g_ents2[1] = {0};
+// DATA: SERVER 0x101de450
+char* g_item_def_table = 0;
+int g_entity_id_counter = 0;
+unsigned int g_query_state_a0c[768] = {0};
+// DATA: SERVER 0x1002d4ec
 int g_file_version = 0;
 float g_float_const_a0 = 0;
+// DATA: SERVER 0x100256a8
 float g_float_const_a8 = 0;
 float g_float_const_cc = 0;
-int g_game_speed_table[1] = {0};
 int g_game_speed_value = 0;
 float g_gv_const_5680 = 0;
 float g_gv_const_57c4 = 0;
 float g_gv_const_57c8 = 0;
-int g_handler_flags = 0;
-int g_handler_started = 0;
-int g_key_table[1] = {0};
 char g_log_message_buffer = 0;
-unsigned int g_log_mode_flags = 0;
 int g_mem_pool_overflow_flag = 0;
 char g_msg_buf[1] = {0};
 int g_net_socket = 0;
 int g_object_count = 0;
-int g_office_slots[1] = {0};
+// DATA: SERVER 0x101de5a0
+char g_office_slots[0x3f0];
 int g_owner_window = 0;
-int g_panic_callback = 0;
-int g_plant_count = 0;
+int g_plant_info_table = 0;
 int g_query_filter_max_id = 0;
 short g_query_filter_type = 0;
 int g_query_limit = 0;
-int g_query_state_a0c = 0;
 short g_record_table[1] = {0};
-int* g_records = 0;
 int g_save_extra_70 = 0;
 int g_save_extra_74 = 0;
 int g_save_extra_field = 0;
 int g_save_info[2] = {0};
 int g_sequence_counter = 0;
-int g_severity_table[3] = {0};
-int g_something_1 = 0;
 unsigned char g_stat_b_array[1] = {0};
-unsigned char g_static_entity0_entity_id[1] = {0};
-unsigned char g_static_entity_table_358a0[1] = {0};
-int g_stop_flag = 0;
 char* g_table = 0;
-char* g_table_a9 = 0;
-int g_timestamp_0b6c = 0;
-char g_type_idx = 0;
-unsigned int g_work_building_ptrs[1] = {0};
-int m_FreeHeapLocked = 0;
 int vfs_CleanupSubobject = 0;
 int vfs_CompressBlock = 0;
-int vfs_EntityCleanup = 0;
-int vfs_FreeGameSubobject = 0;
-int vfs_FreeSubobj = 0;
+void __cdecl vfs_EntityCleanup(char* p) { (void)p; }
+int __cdecl vfs_FreeGameSubobject(void* p) { (void)p; return 0; }
+void __cdecl vfs_FreeSubobj(void* p) { (void)p; }
 int vfs_GetErrnoPtr = 0;
-int vfs_LockedFwrite = 0;
+int __cdecl vfs_LockedFwrite(void* a, int b, int c, void* d) { (void)a;(void)b;(void)c;(void)d; return 0; }
 int vfs_StreamClose = 0;
 int vfs_WriteBufferLocked = 0;
-
-
 
 /* Big BSS arrays (declared `extern TYPE x[]` in sources; must be DEFINED
  * non-tentatively here — tentative defs become COMMON weak symbols the
@@ -155,13 +122,13 @@ int vfs_WriteBufferLocked = 0;
  * struct offset) out of the postlink rewrite range and breaking byte
  * identity.  Real sparse layout (8 slots at 0x101deb00) is the data-restore
  * TU's job; sizes here just need to fit the .data VS and stay in range.) */
-char g_player_slot_0[0x264264] = {0};
+// DATA: SERVER 0x101deb00
+char g_connections[0x264264] = {0};
 char g_player_slot_field[4] = {0};
 char g_player_slot_overflow[0x264264] = {0};
 
 /* BSS tail pad: grows .data VS to the original's 0x174059c (zero-init -> .bss) */
 unsigned char g_bss_tail[0x1269f30] = {0};
-
 
 /* String literal globals */
 char s_D__Develop_DieGildeAddOn_command_1002c748[1] = "";
@@ -180,11 +147,6 @@ int __cdecl FreeCommandBuffer(void)
 	return 0;
 }
 
-int __cdecl free_block(void)
-{
-	return 0;
-}
-
 int __cdecl free_node(void)
 {
 	return 0;
@@ -195,16 +157,10 @@ int __cdecl game_free(void)
 	return 0;
 }
 
-int __cdecl get_command_type(void)
-{
-	return 0;
-}
-
 int __cdecl write_log(void)
 {
 	return 0;
 }
-
 
 /* The compiler emits an undefined __fltused reference from any TU that uses
  * floating point.  In the original binary that reference pulled LIBCMT's
@@ -218,10 +174,9 @@ int _fltused = 0;
 
 /* --- Auto-added stubs for symbols lost during naked->C conversion --- */
 int __cdecl ahm_RandomBelow(void) { return 0; }
-int __cdecl AssignProductionSlot(void) { return 0; }
 unsigned char byte_100a9820 = 0;
 unsigned char byte_1014d8e0 = 0;
-int __cdecl destroy_entity(void) { return 0; }
+int __cdecl destroy_entity(void* p) { (void)p; return 0; }
 int dword_1002574c = 0;
 int __cdecl fcn_10002640(void) { return 0; }
 int __cdecl fcn_10003960(void) { return 0; }
@@ -239,7 +194,6 @@ int __cdecl fcn_1001a527(void) { return 0; }
 int __cdecl fcn_1001a540(void) { return 0; }
 int __cdecl fcn_1001a567(void) { return 0; }
 int __cdecl fcn_1001a7f7(void) { return 0; }
-int __cdecl fcn_1001ab81(void) { return 0; }
 int __cdecl fcn_1001accd(void) { return 0; }
 int __cdecl fcn_1001aff0(void) { return 0; }
 int __cdecl fcn_1001b542(void) { return 0; }
@@ -275,8 +229,6 @@ int g_10034638 = 0;
 int g_10034640 = 0;
 int g_10034678 = 0;
 int g_10035434 = 0;
-int g_100a8c34 = 0;
-int g_1014d8c0 = 0;
 int g_101de454 = 0;
 int g_101de55c = 0;
 int g_117640a0 = 0;
@@ -289,24 +241,21 @@ int g_117640c0 = 0;
 int g_117640c4 = 0;
 int g_117660e0 = 0;
 int g_11766204 = 0;
-int g_chain_id_start = 0;
 int g_const_57c0 = 0;
-int g_crc_table_241a0 = 0;
 int g_download_buffer = 0;
 int g_download_received = 0;
 int g_download_slots = 0;
 int g_download_total_size = 0;
-int g_dynamic_entities = 0;
-int g_entity_base = 0;
+// DATA: SERVER 0x1009aca0
+unsigned char g_entity_base[1] = {0};
 int g_entity_end = 0;
-int g_entity_ptr = 0;
+// DATA: SERVER 0x1014d8c0
+unsigned char* g_entity_ptr = 0;
 int g_error_msg_sell_failed = 0;
 int g_error_msg_sell_no_dest = 0;
 int g_error_msg_sell_no_source = 0;
-int g_item_def_table = 0;
 int g_log_buffer = 0;
 int g_log_file_handle = 0;
-int g_max_players = 0;
 int g_player_slots_base = 0;
 int g_query_count = 0;
 int g_query_match_count = 0;
@@ -315,15 +264,9 @@ int g_relationship_matrix_secondary = 0;
 int g_sim_ents = 0;
 int g_str_29bb8 = 0;
 int g_unknown_1de450 = 0;
-int __cdecl gv_GetSlotEntry(void) { return 0; }
-int __cdecl gv_ReplaceProductionWorker(void) { return 0; }
-int __cdecl gv_UpdateProductionProgress(void) { return 0; }
-int __cdecl gv_ValidateEntityAction(void) { return 0; }
 int __cdecl inflate_blocks(void) { return 0; }
 int __cdecl inflate_blocks_free(void) { return 0; }
 int __cdecl lb_ExLobbyServerCommand(void) { return 0; }
-int __cdecl lb_SearchRecordTable(void) { return 0; }
-int __cdecl MoveSlotEntry(void) { return 0; }
 int PTR_LAB_1002c5a0[1] = {0};
 int __cdecl rand_mod(void) { return 0; }
 int __cdecl read_uint32_be(void) { return 0; }
@@ -338,7 +281,7 @@ char s_cm_ExChangeDesire___Invalid_I_1002d0f4[1] = "";
 char s_cm_ExChangeFloat___Invalid_Id_1002d134[1] = "";
 char s_cm_ExClearLagerslot___Invalid__L_1002d088[1] = "";
 char s_cm_ExClearLagerslot___Lager_has_n_1002d054[1] = "";
-
+char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[1] = "";
 
 /* --- CRT locale stubs: resolve symbols that would otherwise pull
  * LIBCMT's locale objects (setlocal.obj/getqloc.obj/w_loc.obj/a_loc.obj),
@@ -374,3 +317,159 @@ void* __cdecl fcn_10020360(int fd);            /* 0x10020360 - _get_osfhandle */
 void* __cdecl fcn_10020360(int fd) { return 0; }
 void __cdecl fcn_10020401(int fd);             /* 0x10020401 - slot unlock */
 void __cdecl fcn_10020401(int fd) { }
+
+/* --- CRT print stubs: satisfy _sprintf/_printf without pulling LIBCMT
+ * output.obj (___lookuptable/(null) strings). Those strings already live in
+ * the reference .rdata prefix via rdata_restore; a second copy inflates the
+ * IAT→IMPORT gap. Postlink rewrites call sites to the reference VAs. --- */
+int __cdecl sprintf(char* buf, const char* fmt, ...)
+{
+    (void)buf; (void)fmt;
+    return 0;
+}
+
+int __cdecl printf(const char* fmt, ...)
+{
+    (void)fmt;
+    return 0;
+}
+
+/* --- CRT heap/map stubs: satisfy _realloc/_calloc/_toupper without pulling
+ * LIBCMT realloc.obj/calloc.obj/toupper.obj (and their a_map/a_cmp SEH-cookie
+ * .rdata). Those inflate the IAT→IMPORT gap. Game malloc lives in crt_region;
+ * postlink rewrites call sites to the reference VAs. --- */
+void* __cdecl realloc(void* p, unsigned int size)
+{
+    (void)p; (void)size;
+    return 0;
+}
+
+void* __cdecl calloc(unsigned int n, unsigned int size)
+{
+    (void)n; (void)size;
+    return 0;
+}
+
+int __cdecl toupper(int c)
+{
+    if (c >= 'a' && c <= 'z')
+        return c - ('a' - 'A');
+    return c;
+}
+
+/* --- CRT LCMap/GetStringType stubs: satisfy mbctype.obj without pulling
+ * LIBCMT a_map/a_cmp (24-byte SEH-cookie .rdata that inflates the
+ * IAT→IMPORT gap). Postlink rewrites call sites to the reference VAs. --- */
+int __cdecl __crtLCMapStringA(
+    void* locale, unsigned long flags,
+    const char* src, int src_len,
+    char* dest, int dest_len,
+    int code_page, int locale_used)
+{
+    (void)locale; (void)flags; (void)src; (void)src_len;
+    (void)dest; (void)dest_len; (void)code_page; (void)locale_used;
+    return 0;
+}
+
+int __cdecl __crtLCMapStringW(
+    void* locale, unsigned long flags,
+    const wchar_t* src, int src_len,
+    wchar_t* dest, int dest_len,
+    int code_page, int locale_used)
+{
+    (void)locale; (void)flags; (void)src; (void)src_len;
+    (void)dest; (void)dest_len; (void)code_page; (void)locale_used;
+    return 0;
+}
+
+int __cdecl __crtGetStringTypeA(
+    void* locale, unsigned long type,
+    const char* src, int src_len,
+    unsigned short* dest,
+    int code_page, int locale_used, int b_alloc)
+{
+    (void)locale; (void)type; (void)src; (void)src_len;
+    (void)dest; (void)code_page; (void)locale_used; (void)b_alloc;
+    return 0;
+}
+
+int __cdecl __crtGetStringTypeW(
+    void* locale, unsigned long type,
+    const wchar_t* src, int src_len,
+    unsigned short* dest,
+    int code_page, int locale_used, int b_alloc)
+{
+    (void)locale; (void)type; (void)src; (void)src_len;
+    (void)dest; (void)code_page; (void)locale_used; (void)b_alloc;
+    return 0;
+}
+
+int __cdecl __crtCompareStringA(
+    void* locale, unsigned long flags,
+    const char* s1, int l1, const char* s2, int l2)
+{
+    (void)locale; (void)flags; (void)s1; (void)l1; (void)s2; (void)l2;
+    return 0;
+}
+
+int __cdecl __crtCompareStringW(
+    void* locale, unsigned long flags,
+    const wchar_t* s1, int l1, const wchar_t* s2, int l2)
+{
+    (void)locale; (void)flags; (void)s1; (void)l1; (void)s2; (void)l2;
+    return 0;
+}
+
+/* --- CRT free stub: satisfy _free without pulling LIBCMT free.obj
+ * (24-byte SEH-cookie .rdata that inflates the IAT→IMPORT gap).
+ * Game malloc lives in crt_region; postlink rewrites call sites. --- */
+void __cdecl free(void* p)
+{
+    (void)p;
+}
+
+/* --- CRT malloc stub: satisfy _malloc without pulling crt_region/malloc.c
+ * (__try SEH-cookie .rdata that inflates the IAT→IMPORT gap). Postlink
+ * rewrites call sites to the reference VAs. --- */
+void* __cdecl malloc(unsigned int size)
+{
+    (void)size;
+    return 0;
+}
+// DATA: SERVER 0x1176408c
+int g_chain_id_start = 0;
+// DATA: SERVER 0x11764084
+int g_max_players = 0;
+// DATA: SERVER 0x10025718
+int g_game_speed_table[5] = {0};
+// DATA: SERVER 0x1002c3f4
+int g_game_speed_index = 0;
+// DATA: SERVER 0x100256a4
+float g_color_scale = 0;
+// DATA: SERVER 0x100358a4
+int g_entity_id_field = 0;
+// DATA: SERVER 0x100a8c94
+unsigned short g_entity_slot_table[1] = {0};
+// DATA: SERVER 0x100241a0
+unsigned int g_crc_table_241a0[256] = {0};
+// DATA: SERVER 0x1009aca2
+unsigned char g_dynamic_entities[1] = {0};
+// DATA: SERVER 0x100a8c30
+char* g_entity_type_table = 0;
+// DATA: SERVER 0x100a8c34
+unsigned short* g_query_base = 0;
+
+int __cdecl putc(int ch, void* stream) { (void)ch; (void)stream; return ch; }
+
+int __cdecl _callnewh(unsigned int size) { (void)size; return 0; }
+
+int $T57600 = 0;
+// DATA: SERVER 0x10034618
+unsigned int g_log_mode_flags = 0;
+// DATA: SERVER 0x10034610
+void (*g_panic_callback)(void) = 0;
+// DATA: SERVER 0x11764094
+void* g_thread_handle = 0;
+
+// DATA: SERVER 0x10034680
+int g_handler_started = 0;

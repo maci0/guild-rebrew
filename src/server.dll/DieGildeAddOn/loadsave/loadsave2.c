@@ -12,7 +12,7 @@ extern char gm_RandomMod(int);
 extern unsigned char _ftol();
 extern void gm_AddOrAccumulateObject(int, int, int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-extern int g_save_version;
+extern int g_file_version;
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 extern int g_file_version; /* 0x1002d4ec */
 extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
@@ -43,7 +43,7 @@ extern unsigned int ls_ID2Ptr(void);
 // ls_LoadExistingEntities
 
 void __cdecl gm_CleanupObjectEntities(void);
-extern unsigned short* dword_100a8c34; /* 0x100a8c34 */
+extern unsigned short* g_query_base; /* 0x100a8c34 */
 extern int g_query_limit; /* 0x10035450 */
 
 int __cdecl ls_LoadExistingEntities(int arg1)
@@ -57,7 +57,7 @@ int __cdecl ls_LoadExistingEntities(int arg1)
 		return 0;
 	}
 	for (i = 0; i < count; i++) {
-		p = (unsigned char*) dword_100a8c34 + i * 0x43;
+		p = (unsigned char*) g_query_base + i * 0x43;
 		if (!ls_ReadVfsDataChecked(p, 2, 1, (void*) arg1)) {
 			return 0;
 		}
@@ -123,7 +123,7 @@ int __cdecl ls_LoadEntities(int arg1)
 	if (read_result == 0) {
 		return 0;
 	}
-	if (g_save_version > 0x10016) {
+	if (g_file_version > 0x10016) {
 		for (read_result = (int) 0x10035478; read_result < (int) 0x10035498; read_result += 4) {
 			inner_result = ls_ReadVfsDataChecked((void*) read_result, 4, 1, (void*) stream);
 			if (inner_result == 0) {
@@ -140,7 +140,7 @@ int __cdecl ls_LoadEntities(int arg1)
 			}
 			read_result = (entity_slot & 0xffff) * 0x21c;
 			*(unsigned short*) (read_result + 0x100358a0) = entity_slot;
-			if (g_save_version < 0x1003e) {
+			if (g_file_version < 0x1003e) {
 				*(int*) (read_result + 0x10035aac) = -1;
 			}
 			else {
@@ -201,7 +201,7 @@ int __cdecl ls_LoadEntities(int arg1)
 			if (inner_result == 0) {
 				return 0;
 			}
-			if (g_save_version > 0x1003a) {
+			if (g_file_version > 0x1003a) {
 				inner_result = ls_ReadVfsDataChecked((void*) (read_result + 0x100358c8), 2, 1, (void*) stream);
 				if (inner_result == 0) {
 					return 0;
@@ -215,7 +215,7 @@ int __cdecl ls_LoadEntities(int arg1)
 			if (inner_result == 0) {
 				return 0;
 			}
-			if (g_save_version > 0x10030) {
+			if (g_file_version > 0x10030) {
 				inner_result = ls_ReadVfsDataChecked((void*) (read_result + 0x100358e0), 0x10, 1, (void*) stream);
 				if (inner_result == 0) {
 					return 0;
@@ -237,7 +237,7 @@ int __cdecl ls_LoadEntities(int arg1)
 			if (inner_result == 0) {
 				return 0;
 			}
-			if (g_save_version > 0x10023) {
+			if (g_file_version > 0x10023) {
 				inner_result = ls_ReadVfsDataChecked((void*) (read_result + 0x1003591c), 4, 1, (void*) stream);
 				if (inner_result == 0) {
 					return 0;
@@ -285,7 +285,7 @@ int __cdecl ls_LoadEntities(int arg1)
 			if (inner_result == 0) {
 				return 0;
 			}
-			if (g_save_version < 0x10020) {
+			if (g_file_version < 0x10020) {
 				inner_result = ls_ReadVfsDataChecked((void*) (read_result + 0x10035a14), 2, 1, (void*) stream);
 			}
 			else {
@@ -311,7 +311,7 @@ int __cdecl ls_LoadEntities(int arg1)
 			if (inner_result == 0) {
 				return 0;
 			}
-			if (g_save_version < 0x1003e) {
+			if (g_file_version < 0x1003e) {
 				*(int*) (read_result + 0x10035a30) = 4;
 			}
 			inner_result = ls_ReadVfsDataChecked((void*) (read_result + 0x10035a34), 4, 1, (void*) stream);
@@ -358,7 +358,7 @@ int __cdecl ls_LoadEntities(int arg1)
 			if (inner_result == 0) {
 				return 0;
 			}
-			if (g_save_version < 0x10049) {
+			if (g_file_version < 0x10049) {
 				*(int*) (read_result + 0x10035a6c) = 0;
 			}
 			else {
@@ -387,13 +387,13 @@ int __cdecl ls_LoadEntities(int arg1)
 			if (inner_result == 0) {
 				return 0;
 			}
-			if (g_save_version > 0x10029) {
+			if (g_file_version > 0x10029) {
 				inner_result = ls_ReadVfsDataChecked((void*) (read_result + 0x10035a90), 4, 1, (void*) stream);
 				if (inner_result == 0) {
 					return 0;
 				}
 			}
-			if (g_save_version > 0x10020) {
+			if (g_file_version > 0x10020) {
 				inner_result = ls_ReadVfsDataChecked((void*) (read_result + 0x10035a65), 1, 1, (void*) stream);
 				if (inner_result == 0) {
 					return 0;
@@ -404,13 +404,13 @@ int __cdecl ls_LoadEntities(int arg1)
 				return 0;
 			}
 			*(int*) (read_result + 0x10035a24) = ref_value;
-			if (g_save_version > 0x10020) {
+			if (g_file_version > 0x10020) {
 				inner_result = ls_ReadVfsDataChecked((void*) (read_result + 0x10035a94), 0x18, 1, (void*) stream);
 				if (inner_result == 0) {
 					return 0;
 				}
 			}
-			if (g_save_version > 0x10035) {
+			if (g_file_version > 0x10035) {
 				inner_result = ls_ReadVfsDataChecked((void*) (read_result + 0x10035ab0), 4, 1, (void*) stream);
 				if (inner_result == 0) {
 					return 0;

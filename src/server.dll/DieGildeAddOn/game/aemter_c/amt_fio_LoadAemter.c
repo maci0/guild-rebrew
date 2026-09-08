@@ -5,6 +5,7 @@
 // SIZE: 606
 
 /* Office slot table entry - 0x18 bytes per slot. */
+// SIZE 0x18
 typedef struct {
 	unsigned char id;        /* +0x00 */
 	unsigned char pad1[3];
@@ -21,6 +22,16 @@ extern OFFICE_SLOT g_office_slots[];
 extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize,
                                          int elementCount, int streamCtx);
 extern void __cdecl InitBuildingTypeTable(void);
+
+extern char s_amt_fio_LoadAemter____Can_t_load_1002a0c8[];
+extern char s_D__Develop_DieGildeAddOn_game_ae_1002a0a0[];
+extern char s_amt_fio_LoadAemter____count_read_1002a06c[];
+extern char s_amt_fio_LoadAemter____Can_t_load_1002a048[];
+extern char s_amt_fio_LoadAemter____Can_t_load_1002a01c[];
+extern char s_amt_fio_LoadAemter____Can_t_load_10029ff4[];
+extern char s_amt_fio_LoadAemter____Can_t_load_10029fcc[];
+extern char s_amt_fio_LoadAemter____Can_t_load_10029fa4[];
+extern char s_amt_fio_LoadAemter____Can_t_load_10029f78[];
 extern void __cdecl LogMessageInternal(const char* module, int line,
                                        const char* text, int type);
 extern int __cdecl sprintf(char* buffer, const char* format, ...); /* 0x1001a299 */
@@ -45,46 +56,46 @@ int __cdecl amt_fio_LoadAemter(int streamCtx, int version)
 		return 0;
 
 	if (!ls_ReadVfsDataChecked(&value, 4, 1, streamCtx)) {
-		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", 0xe73,
-		                   "amt_fio_LoadAemter(): Can't load count", 1);
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe73,
+		                   s_amt_fio_LoadAemter____Can_t_load_1002a0c8, 1);
 		return 0;
 	}
 	if (value != (int) count) {
-		sprintf(msg, "amt_fio_LoadAemter(): count read is %i, expected %i",
+		sprintf(msg, s_amt_fio_LoadAemter____count_read_1002a06c,
 		        value, 0x2a);
-		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", 0xe7c,
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe7c,
 		                   msg, 1);
 		return 0;
 	}
 	for (i = 0; i < count; i++) {
 		if (!ls_ReadVfsDataChecked(&g_office_slots[i].id, 1, 1, streamCtx)) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", 0xe82,
-			                   "amt_fio_LoadAemter(): Can't load id", 1);
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe82,
+			                   s_amt_fio_LoadAemter____Can_t_load_1002a048, 1);
 			return 0;
 		}
 		if (!ls_ReadVfsDataChecked(&g_office_slots[i].mplayerid, 4, 1, streamCtx)) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", 0xe83,
-			                   "amt_fio_LoadAemter(): Can't load mplayerid", 1);
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe83,
+			                   s_amt_fio_LoadAemter____Can_t_load_1002a01c, 1);
 			return 0;
 		}
 		if (!ls_ReadVfsDataChecked(&g_office_slots[i].mamt, 1, 1, streamCtx)) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", 0xe84,
-			                   "amt_fio_LoadAemter(): Can't load mamt", 1);
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe84,
+			                   s_amt_fio_LoadAemter____Can_t_load_10029ff4, 1);
 			return 0;
 		}
 		if (!ls_ReadVfsDataChecked(&g_office_slots[i].pcount, 4, 1, streamCtx)) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", 0xe85,
-			                   "amt_fio_LoadAemter(): Can't load pcount", 1);
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe85,
+			                   s_amt_fio_LoadAemter____Can_t_load_10029fcc, 1);
 			return 0;
 		}
 		if (!ls_ReadVfsDataChecked(&g_office_slots[i].status, 1, 1, streamCtx)) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", 0xe86,
-			                   "amt_fio_LoadAemter(): Can't load status", 1);
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe86,
+			                   s_amt_fio_LoadAemter____Can_t_load_10029fa4, 1);
 			return 0;
 		}
 		if (!ls_ReadVfsDataChecked(&g_office_slots[i].msetter, 4, 1, streamCtx)) {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\aemter.c", 0xe87,
-			                   "amt_fio_LoadAemter(): Can't load msetter", 1);
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe87,
+			                   s_amt_fio_LoadAemter____Can_t_load_10029f78, 1);
 			return 0;
 		}
 	}

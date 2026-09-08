@@ -31,7 +31,7 @@
  *   local_1 = '\x02';
  *   pcVar5 = (char *)0x0;
  *   bVar1 = false;
- *   *(undefined4 *)(cmd + 0x10) = g_plant_count;
+ *   *(undefined4 *)(cmd + 0x10) = g_dynamic_count;
  *   puVar2 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x14));
  *   if (puVar2 != (ushort *)0x0) {
  *     pcVar3 = lb_SearchRecordTable((uint)*(ushort *)(cmd + 0x1a));
@@ -63,7 +63,7 @@ int __cdecl CheckZoneAvailability(void*, unsigned int, unsigned int, unsigned in
 char* __cdecl FindRecord(void*, unsigned int, unsigned int);
 char* __cdecl plt_SetPlantMap(void*, unsigned int, unsigned int, unsigned int, unsigned int);
 
-extern int g_plant_count;
+extern int g_dynamic_count;
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 /* Chain handler: performs a record/zone lookup for a filtered entity.
@@ -84,7 +84,7 @@ int __cdecl cm_ChainRecordLookup(int cmd, char* result)
 	found = (char*) 0x0;
 	needs_create = 0;
 
-	*(int*) (cmd + 0x10) = g_plant_count;
+	*(int*) (cmd + 0x10) = g_dynamic_count;
 	entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x14));
 	if (entity != (void*) 0x0) {
 		rec = lb_SearchRecordTable(*(unsigned short*) (cmd + 0x1a));

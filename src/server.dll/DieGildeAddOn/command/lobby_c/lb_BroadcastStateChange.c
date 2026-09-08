@@ -1,4 +1,3 @@
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10014a50
 // lb_BroadcastStateChange
 

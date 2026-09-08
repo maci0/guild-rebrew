@@ -18,12 +18,49 @@ extern int g_dispatch_table_a[]; /* 0x1013989c */
 
 // FUNCTION: SERVER 0x10016290
 // gm_NextEntityQueryMatch
-//   combos, 8+ C shapes). Original: split prologue (only `push ebx` before the
-//   entry null-check, ebp/esi/edi pushed after), `stack_depth` in edi (ours esi),
-//   no loop rotation (null-check at loop top; ours rotates it to the bottom),
-//   shared `mov eax, ebx` epilogue (ours folds the count>=limit exit to
-//   `xor eax,eax`). All are allocator/scheduler behaviors no available
-//   compiler build reproduces. ~60 bytes of structural diff remain.
+//   RELOC 464/464.
+//   The last wall was a two-web callee-save colouring tie-break: the depth
+//   value lives across the whole loop, while the limit (loop top), the count
+//   (loop bottom), g_item_def_table (state block) and [current+0x14] (tail)
+//   coalesce into one web of short ranges. The target gives edi to the long
+//   web and esi to the short one; every spelling that kept a named
+//   `int stack_depth` local got the reverse, for 439/464 with 19 RR and 5
+//   SIB-form differences and the size and block layout already exact.
+//   The fix is Finding 12 in docs/msvc6-allocator.md: delete the local and
+//   read g_query_match_count directly at all seven sites. The local was
+//   already kept in lockstep with the global on every path, so this is
+//   semantics-neutral; without it the value is an anonymous CSE'd load born
+//   at its first use, which orders the two webs the way the target has them.
+//   Partial conversions do not pay: converting only the tail store or only
+//   the pop arm stays at 439, and keeping the entry arm on the local falls to
+//   191/466. Hoisting the tail `fld` to function scope is neutral (also
+//   464/464), so the local body form is kept.
+//   Earlier passes, for the levers they establish:
+//   (a) Type-compare arms. HIT at 0x10016373 and MISS at 0x10016386 share an
+//   11-byte prefix that msvc6 cross-jumps, tail-merging MISS into the nomatch
+//   block and losing 15 bytes. Both arms need the full cursor reload with the
+//   flag store first; only the flag-first position breaks the merge.
+//   (b) Owner check. `if (field != owner) goto lab_nomatch; is_match = 1;`
+//   compiles to a `je` past the store; the target has `jne` to the shared
+//   nomatch block. The if/else spelling emits the target's polarity.
+//   (c) Tail dispatch. The target lays the advance arm (flag1 != 0) first and
+//   repeats `test cl,cl; je +2; mov ebx,eax` inside each arm instead of
+//   hoisting it above the flag1 test.
+//   (d) Loop guard as `while (count < limit)` with the two in-loop exits as
+//   `break` merges the three exits into one epilogue and gives the target's
+//   shrink-wrapped prologue (`push ebx` alone before the entry null-check).
+//   (e) The max_id word load hoisted into a named `cur_id` local before the
+//   0x7fff guard gives `xor ecx,ecx; mov cx,[eax]; cmp ecx,edx`; without it
+//   the load takes edi. Merging the guard into the inner compare collapses it.
+//   (f) filter_type_cache and the gm_GetEntityType result as `unsigned short`
+//   tested against 0xffff give the target's 5-byte `cmp bp,0xffff`.
+//   The shared `lab_nomatch: is_match = 0;` also fixes a real semantic bug:
+//   the target clears cl on both mismatch paths, while an older revision
+//   cleared it only in the max_id arm, so with g_query_flag3 set an owner
+//   mismatch returned the entity as a match.
+//   Probe harness and variants in .scratch/neqm-l4/ (gen1.py, score.py,
+//   regs.sh); superseded probe sets in .scratch/neqm2/ and .scratch/neqm3/.
+
 
 unsigned short __cdecl gm_GetEntityType(short* entity);
 
@@ -31,34 +68,32 @@ void* __cdecl gm_NextEntityQueryMatch(void)
 {
     unsigned short* current;
     unsigned short* matched_ent;
-    short filter_type_cache;
-    int stack_depth;
+    unsigned short filter_type_cache;
+    unsigned short cur_id;
     char is_match;
 
     current = g_query_cursor;
     matched_ent = (unsigned short*)0;
     is_match = 0;
     if (current == (unsigned short*)0) {
-        return (void*)matched_ent;
+        return (void*)current;
     }
     if (g_query_active != 0) {
         g_query_active = 0;
         if (g_query_flag2 != 0 && *(int*)((char*)current + 0x14) != 0) {
             g_dispatch_table_b[g_query_match_count] = *(int*)((char*)current + 0x14);
             g_query_match_count++;
+            goto have_depth;
         }
     }
-    stack_depth = g_query_match_count;
-    filter_type_cache = g_query_filter_type;
-    if (g_query_count >= g_query_limit) {
-        return (void*)matched_ent;
-    }
-    do {
+have_depth:
+    while (g_query_count < g_query_limit) {
+        filter_type_cache = g_query_filter_type;
         if (current == (unsigned short*)0) {
-            return (void*)matched_ent;
+            break;
         }
         if (is_match != 0) {
-            return (void*)matched_ent;
+            break;
         }
         while (*current == 0) {
             current = (unsigned short*)((char*)current + 0x43);
@@ -68,41 +103,44 @@ void* __cdecl gm_NextEntityQueryMatch(void)
             is_match = 1;
         }
         if (g_query_filter_max_id != 0x7fff) {
-            is_match = 0;
-            if (*current != g_query_filter_max_id) {
-                goto lab_3bc;
+            cur_id = *current;
+            if (cur_id != g_query_filter_max_id) {
+                goto lab_nomatch;
             }
             is_match = 1;
         }
         if (g_query_filter_owner != -1) {
-            if (*(int*)((char*)current + 2) != g_query_filter_owner) {
-                goto lab_3bc;
+            if (*(int*)((char*)current + 2) == g_query_filter_owner) {
+                is_match = 1;
+            } else {
+                goto lab_nomatch;
             }
-            is_match = 1;
         }
-        if (filter_type_cache != -1) {
-            short res;
+        if (filter_type_cache != 0xffff) {
+            unsigned short res;
             res = gm_GetEntityType((short*)current);
             filter_type_cache = g_query_filter_type;
-            stack_depth = g_query_match_count;
-            if (res != filter_type_cache) {
+            if (res == filter_type_cache) {
+                is_match = 1;
                 current = g_query_cursor;
-                stack_depth = g_query_match_count;
-                is_match = 0;
-                goto lab_3bc;
+                goto lab_395;
             }
+            is_match = 0;
             current = g_query_cursor;
-            stack_depth = g_query_match_count;
-            is_match = 1;
+            goto lab_3bc;
         }
 lab_395:
         if (g_query_filter_state != (char)0xff) {
-            unsigned short eid;
+            unsigned int eid;
             char* tbl;
-            eid = *current;
+            eid = (unsigned int)*current;
             tbl = g_item_def_table;
-            is_match = *(char*)(tbl + (unsigned int)eid * 0x41) == g_query_filter_state;
+            tbl += eid * 0x40;
+            is_match = tbl[eid] == g_query_filter_state;
         }
+        goto lab_3bc;
+lab_nomatch:
+        is_match = 0;
 lab_3bc:
         if (g_query_flag1 != 0) {
             if (is_match != 0) {
@@ -117,27 +155,27 @@ lab_3bc:
             }
             current = *(unsigned short**)((char*)current + 0x3f);
             g_query_cursor = current;
-            if (current == (unsigned short*)0) {
-                if (g_query_flag2 != 0 && stack_depth != 0) {
-                    current = (unsigned short*)g_dispatch_table_a[stack_depth];
-                    stack_depth--;
-                    g_query_cursor = current;
-                    g_query_match_count = stack_depth;
-                    if (*(int*)((char*)current + 0x14) != 0) {
-                        g_dispatch_table_b[stack_depth] = *(int*)((char*)current + 0x14);
-                        goto lab_43e;
-                    }
+            if (current != (unsigned short*)0) {
+                int fld;
+                fld = *(int*)((char*)current + 0x14);
+                if (fld != 0 && g_query_flag2 != 0) {
+                    g_dispatch_table_b[g_query_match_count] = fld;
+                    goto lab_43e;
                 }
             } else {
-                if (*(int*)((char*)current + 0x14) != 0 && g_query_flag2 != 0) {
-                    g_dispatch_table_b[stack_depth] = *(int*)((char*)current + 0x14);
+                if (g_query_flag2 != 0 && g_query_match_count != 0) {
+                    current = (unsigned short*)g_dispatch_table_a[g_query_match_count];
+                    g_query_match_count--;
+                    g_query_cursor = current;
+                    if (*(int*)((char*)current + 0x14) != 0) {
+                        g_dispatch_table_b[g_query_match_count] = *(int*)((char*)current + 0x14);
 lab_43e:
-                    stack_depth++;
-                    g_query_match_count = stack_depth;
+                        g_query_match_count++;
+                    }
                 }
             }
         }
-    } while (g_query_count < g_query_limit);
+    }
     return (void*)matched_ent;
 }
 

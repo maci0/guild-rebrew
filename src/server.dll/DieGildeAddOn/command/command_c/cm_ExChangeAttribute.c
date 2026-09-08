@@ -10,14 +10,18 @@ extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
  * field descriptors (kind/value-count/offset) and adds each value
  * sequence to the entity's memory at the given sizes (1/2/4).
  *
- * Byte-match note: PROVEN via rebrew prove.  The head now matches
- * the reference's resolved out-param pattern (separate `resolved`
- * variable keeps cmd in the base register and folds the pre-resolve
- * field store `mov [ebp+0x10],esi`), closing the Finding 38
- * fixed-point.  The three add-to-memory loops still swap register
- * roles with the reference ({count,offset,dst}->ecx, src->eax there;
- * reversed here) — a pure allocator cascade, so the function is
- * PROVEN rather than RELOC. */
+ * Byte-match note: the head matches the reference's resolved out-param
+ * pattern (separate `resolved` variable keeps cmd in the base register
+ * and folds the pre-resolve field store `mov [ebp+0x10],esi`).  Reading
+ * the descriptor with post-increments and a single `+= 2` (rather than
+ * an interleaved `puVar5` alias) reproduces the reference's
+ * `inc/inc/mov cx,[reg]/add reg,2` schedule.
+ *
+ * The descriptor-cursor/destination register pair (eax/ecx) is decided
+ * by the field offset: reading it into `off`, bumping `src`, and only
+ * then forming `dst2 = entity + off` puts the cursor in eax and the
+ * destination in ecx as the original does.  Folding the offset load
+ * directly into `dst2 = entity + *(unsigned short*) src` swaps them. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000e7d0
@@ -32,13 +36,13 @@ int __cdecl cm_ExChangeAttribute(int cmd, char* result)
 	char* entity;
 	char* src;
 	char* dst2;
-	unsigned short* puVar5;
 	int base;
 	int field;
 	int ok;
 	int size;
 	unsigned int n;
 	unsigned int i;
+	unsigned int off;
 
 	base = cmd;
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
@@ -59,13 +63,11 @@ int __cdecl cm_ExChangeAttribute(int cmd, char* result)
 	i = 0;
 	if (*(unsigned char*) (base + 0x14) > 0) {
 		do {
-			size = *(signed char*) src;
-			n = *(signed char*) (src + 1);
-			src++;
-			puVar5 = (unsigned short*) (src + 1);
-			src++;
-			dst2 = entity + *puVar5;
+			size = *(signed char*) src++;
+			n = *(signed char*) src++;
+			off = *(unsigned short*) src;
 			src += 2;
+			dst2 = entity + off;
 			switch (size) {
 			case 1:
 				while (n > 0) {

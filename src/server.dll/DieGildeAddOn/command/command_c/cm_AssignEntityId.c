@@ -12,17 +12,17 @@
  * {
  *   DWORD DVar1;
  *
- *   *(int *)(param_1 + 0x10) = g_entity_id_start;
+ *   *(int *)(param_1 + 0x10) = g_entity_id_counter;
  *   DVar1 = timeGetTime();
  *   *(DWORD *)(param_1 + 0x14) = DVar1;
- *   g_entity_id_start = g_entity_id_start + 1;
+ *   g_entity_id_counter = g_entity_id_counter + 1;
  *   return 0;
  * }
  */
 
 typedef unsigned long DWORD;
 
-extern int g_entity_id_start;
+extern int g_entity_id_counter;
 __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 
 /* Assigns the next sequential entity ID to the command packet at
@@ -36,9 +36,9 @@ int __cdecl cm_AssignEntityId(int cmd, char* result)
 
 	(void) result;
 
-	*(int*) (cmd + 0x10) = g_entity_id_start;
+	*(int*) (cmd + 0x10) = g_entity_id_counter;
 	timestamp = timeGetTime();
 	*(DWORD*) (cmd + 0x14) = timestamp;
-	g_entity_id_start = g_entity_id_start + 1;
+	g_entity_id_counter = g_entity_id_counter + 1;
 	return 0;
 }

@@ -27,19 +27,13 @@ typedef struct {
 } Record;
 #pragma pack(pop)
 
-extern char* g_entity_table; /* 0x101de450 */
+extern char* g_item_def_table; /* 0x101de450 */
 void __cdecl gm_InitEntitySlots(void);
-unsigned short* g_query_base;
+extern unsigned short* g_query_base;
 extern int g_query_limit;
-extern Record* g_records;
-void __cdecl free_block(int);
-extern int g_data_ptr;
-extern int g_data_ptr2;
-extern int g_data_ptr3;
-extern int g_data_ptr4;
+void __cdecl m_FreeTracked(void*);
+extern char* g_entity_type_table;
 extern unsigned char* g_entity_ptr;
-extern int g_entity_type_table; /* 0x100a8c30 */
-extern char* g_item_def_table;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -47,7 +41,7 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern char* g_array_base;
-extern char g_entity_array[];
+extern char* g_slot_table;
 void __cdecl free_node(char*);
 int __cdecl gm_FreeObjectListRecursive(char**);
 void __cdecl gm_NoopRet2(void);
@@ -70,7 +64,6 @@ extern int g_FilterId;
 extern unsigned short g_FilterVal25;
 extern unsigned short g_FilterVal27;
 extern unsigned char g_FilterVal30;
-extern char* g_array;
 void __cdecl gv_Free3Fields(void* param);
 extern int g_query_state_a0c;
 extern unsigned char g_byte_table_30861;
@@ -83,10 +76,6 @@ void __cdecl SpawnGraveyardEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
-extern char* g_table_a9;
-extern char* dword_100a8c30;
-extern unsigned short* dword_100a8c34;
-extern char* dword_101de450;
 int __cdecl gm_EntityAccumulate(void*);
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 void __cdecl amt_ClearEntityLinks(short*);
@@ -95,21 +84,20 @@ void __cdecl gm_DeallocEntity(unsigned int idx, int param);
 extern int g_citizen_count;
 extern int g_dynasty_field_2c;
 extern int g_dynasty_generation_counter;
-extern char g_entity_base[];
+extern unsigned char g_entity_base[];
 extern char g_entity_end[];
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
 extern float g_const_57bc;
 int __cdecl gm_RandomMod(unsigned short range);
-extern char entity_table[];
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AssignBuildingOwner(unsigned char*, unsigned short, unsigned int);
 int __cdecl gm_WalkEntityChain(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
-extern char entity_slot_table[];
+extern unsigned short g_entity_slot_table[];
 extern float g_const_5fb8; /* 0x10025fb8 */
 extern float g_const_5fb4; /* 0x10025fb4 */
 extern float g_const_5fb0; /* 0x10025fb0 */
@@ -120,9 +108,7 @@ extern float g_float_const_cc; /* 0x100256cc */
 extern float g_gv_const_57c8; /* 0x100257c8 */
 extern double g_const_57d0; /* 0x100257d0 */
 double __cdecl gm_CalculateProductionValue(int, int);
-extern char g_type_idx;
-extern int g_key_table[];
-extern char entity_array[];
+extern char g_current_season;
 int __cdecl gm_SumBuildingProductionValues(char*, int);
 int __cdecl gm_EntityQuerySum(int);
 int __cdecl compute_size(char*); /* 0x10019d00 */
@@ -145,7 +131,7 @@ char* __cdecl gm_SearchStruct(void)
 {
 	char* p;
 	char* end;
-	p = g_array;
+	p = (char*) g_entity_ptr;
 	end = p + 0xa900;
 	while (p < end) {
 		if (*p == 0) {
@@ -327,7 +313,6 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 	}
 	has_producer = 0;
 	geb = gm_SearchStruct();
-	temp_result = g_entity_type_table;
 	if (geb == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\game\\spiel.c",

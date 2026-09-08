@@ -7,10 +7,10 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern int __cdecl rand(void);
 extern void __cdecl srand(unsigned int);
-extern unsigned int g_work_building_ptrs[];
+extern unsigned int g_query_state_a0c[];
 extern unsigned char g_entity_state_base[];
-extern unsigned char g_static_entity0_entity_id[];
-extern unsigned char g_static_entity_table_358a0[];
+extern int g_entity_id_field; /* 0x100358A4 */
+extern unsigned char g_slot_table[];
 extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
 char s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394[] = "Invalid 'GI_Id' for cmdt_ALLOC_CHARACTER in cm_ExecCommand()";
 char s_cm_ExAllocCharacter___gm_AllocSp_1002d364[] = "cm_ExAllocCharacter():gm_AllocSpieler() failed";
@@ -30,7 +30,7 @@ int __cdecl cm_ExCreateCitizen(int cmd, char* result)
 	unsigned int entity;
 	unsigned int idx;
 
-	*(int *) (cmd + 0x10) = g_timestamp_0b6c;
+	*(int *) (cmd + 0x10) = g_next_object_id;
 	*(int *) (cmd + 0x22) = rand();
 	if (result) {
 		result[0] = 2;
@@ -60,18 +60,18 @@ int __cdecl cm_ExCreateCitizen(int cmd, char* result)
 		gm_FindRecordById(*(int *) (cmd + 0x1b));
 	}
 	idx = entity * 0x21c;
-	g_work_building_ptrs[entity * 0x87] = 0;
+	g_query_state_a0c[entity * 0x87] = 0;
 	g_entity_state_base[idx] = 0xd;
 	if (*(unsigned char *) (cmd + 0x21) != 0) {
-		gm_AllocObjekt(*(unsigned int *) (g_static_entity0_entity_id + idx),
+		gm_AllocObjekt(*(unsigned int *) ((char*) &g_entity_id_field + idx),
 		               *(unsigned char *) (cmd + 0x21), 1);
 	}
 	*((unsigned int *) (0x10442d00 + (unsigned char) *(char *) (cmd + 3) * 0x264264)) =
-	    *(unsigned int *) (g_static_entity0_entity_id + idx);
+	    *(unsigned int *) ((char*) &g_entity_id_field + idx);
 	if (result) {
 		result[0] = 1;
 		result[1] = 1;
-		*(int *) (result + 6) = (int) (g_static_entity_table_358a0 + idx);
+		*(int *) (result + 6) = (int) (g_slot_table + idx);
 	}
 	return 0;
 }

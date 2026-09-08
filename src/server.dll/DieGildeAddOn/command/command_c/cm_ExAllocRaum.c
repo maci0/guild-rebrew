@@ -19,7 +19,7 @@ typedef struct copy_12_dwords {
 	uint data[12];
 } copy_12_dwords;
 
-extern player_slot g_player_slot_0[];
+extern player_slot g_connections[];
 char* __cdecl gm_AllocGebaeude(uchar, uint);
 
 extern char s_gm_AllocGebaeude___failed_1002cb34[];
@@ -36,7 +36,7 @@ int __cdecl cm_ExAllocRaum(int cmd, char* result)
 	int field_id;
 	int i;
 
-	*(int*) (cmd + 0x10) = g_timestamp_0b6c;
+	*(int*) (cmd + 0x10) = g_next_object_id;
 	if (*(int*) (cmd + 0x16) == -1) {
 		i = 0xffff;
 	}
@@ -45,8 +45,8 @@ int __cdecl cm_ExAllocRaum(int cmd, char* result)
 		*(int*) (cmd + 0x16) = field_id;
 		i = 0;
 		while ((ushort) i < 0x300) {
-			if (*(ushort*) (g_static_entity_table_358a0 + (uint)(ushort) i * 0x21c) != (ushort) 0xffff &&
-				*(int*) (g_static_entity_table_358a0 + (uint)(ushort) i * 0x21c + 4) == field_id) {
+			if (*(ushort*) (g_slot_table + (uint)(ushort) i * 0x21c) != (ushort) 0xffff &&
+				*(int*) (g_slot_table + (uint)(ushort) i * 0x21c + 4) == field_id) {
 				break;
 			}
 			i = i + 1;
@@ -71,7 +71,7 @@ int __cdecl cm_ExAllocRaum(int cmd, char* result)
 		);
 		return 1;
 	}
-	g_player_slot_0[(uint) *(uchar*) (cmd + 3)].data = *(int*) (building + 1);
+	g_connections[(uint) *(uchar*) (cmd + 3)].data = *(int*) (building + 1);
 	*(ushort*) (building + 0x5a) = *(ushort*) (cmd + 0x1a);
 	if (*(int*) (cmd + 0x1c) != 0) {
 		*(copy_12_dwords*) (building + 0x65) = *(copy_12_dwords*) (cmd + 0x20);

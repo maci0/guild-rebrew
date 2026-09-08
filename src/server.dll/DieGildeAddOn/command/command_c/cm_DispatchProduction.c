@@ -14,7 +14,7 @@
  *   int iVar2;
  *   uint uVar3;
  *
- *   *(undefined4 *)(param_1 + 0x27) = g_timestamp_0b6c;
+ *   *(undefined4 *)(param_1 + 0x27) = g_next_object_id;
  *   iVar2 = rand();
  *   *(int *)(param_1 + 0x2b) = iVar2;
  *   puVar1 = (uint32_t *)(param_1 + 0x10);
@@ -50,13 +50,13 @@
 
 typedef unsigned int uint32_t;
 
-unsigned int __cdecl AssignProductionSlot(int);
+unsigned int __cdecl AssignProductionSlot(void*);
 unsigned int __cdecl HireProductionWorker(int);
 unsigned int __cdecl ExtendProductionTime(uint32_t*);
-int __cdecl gv_ReplaceProductionWorker(uchar*);
+int __cdecl ReplaceProductionWorker(void*);
 int __cdecl ActivateGraveyardSection(uchar*);
-int __cdecl gv_UpdateProductionProgress(uchar*);
-int __cdecl gv_ValidateEntityAction(uchar*);
+int __cdecl UpdateProductionProgress(void*);
+int __cdecl ValidateEntityAction(void*);
 
 /* Dispatch handler: routes production commands based on the
  * sub-command type at cmd+0x10. Dispatches to:
@@ -74,13 +74,13 @@ int __cdecl cm_DispatchProduction(int cmd, char* result)
 
 	(void) result;
 
-	*(int*) (cmd + 0x27) = g_timestamp_0b6c;
+	*(int*) (cmd + 0x27) = g_next_object_id;
 	rc = rand();
 	*(int*) (cmd + 0x2b) = rc;
 	data_ptr = (uint32_t*) (cmd + 0x10);
 	switch (*(int*) (cmd + 0x10)) {
 	case 0:
-		status = AssignProductionSlot((int) data_ptr);
+		status = AssignProductionSlot(data_ptr);
 		return status;
 	case 1:
 		status = HireProductionWorker((int) data_ptr);
@@ -89,16 +89,16 @@ int __cdecl cm_DispatchProduction(int cmd, char* result)
 		status = ExtendProductionTime(data_ptr);
 		return status;
 	case 3:
-		rc = gv_ReplaceProductionWorker((uchar*) data_ptr);
+		rc = ReplaceProductionWorker(data_ptr);
 		return rc;
 	case 4:
 		rc = ActivateGraveyardSection((uchar*) data_ptr);
 		return rc;
 	case 5:
-		rc = gv_UpdateProductionProgress((uchar*) data_ptr);
+		rc = UpdateProductionProgress(data_ptr);
 		return rc;
 	case 6:
-		rc = gv_ValidateEntityAction((uchar*) data_ptr);
+		rc = ValidateEntityAction(data_ptr);
 		return rc;
 	default:
 		return -1;

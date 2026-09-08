@@ -25,7 +25,7 @@ void __cdecl LogWinsockError(int err_code);
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
-extern int g_stop_flag;
+extern int g_handler_started;
 void __cdecl InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);
 void __cdecl ShutdownMemoryAllocator();
@@ -36,7 +36,7 @@ extern int g_net_socket;
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 int __cdecl SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
-short __cdecl get_command_type(char*);
+int GetCommandPayloadSize(unsigned char* cmd_payload);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 extern unsigned char g_connections[]; /* 0x101deb00 */
 /* Console control handler for graceful shutdown.
@@ -101,7 +101,7 @@ int __cdecl QueueCommandForProcessing(unsigned int* player_slot, unsigned char* 
 	}
 	*(int*) ((int) player_slot + 0x2641f8) = *(int*) (buf + 0x95);
 	memcpy(buf, cmd_data, 0x99);
-	*(short*) (buf + 1) = get_command_type(buf);
+	*(short*) (buf + 1) = GetCommandPayloadSize((unsigned char*) buf);
 	tail = *(int*) ((int) player_slot + 0x2641f0);
 	if (tail != 0) {
 		while (*(int*) (tail + 0x95) != 0) {
@@ -137,7 +137,7 @@ int __cdecl cm_QueuePlayerCommand(unsigned int* player_slot, unsigned char* cmd_
 	}
 	*(int*) ((int) player_slot + 0x2641fc) = *(int*) (buf + 0x95);
 	memcpy(buf, cmd_data, 0x99);
-	*(short*) (buf + 1) = get_command_type(buf);
+	*(short*) (buf + 1) = GetCommandPayloadSize((unsigned char*) buf);
 	tail = *(int*) ((int) player_slot + 0x2641f4);
 	if (tail != 0) {
 		while (*(int*) (tail + 0x95) != 0) {

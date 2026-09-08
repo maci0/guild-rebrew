@@ -15,14 +15,14 @@
  *   int iVar1;
  *   char *pcVar2;
  *
- *   *(undefined4 *)(param_1 + 0x10) = g_timestamp_0b6c;
+ *   *(undefined4 *)(param_1 + 0x10) = g_next_object_id;
  *   iVar1 = gm_GetFieldByType((char *)param_1,*(int *)(param_1 + 0x14));
  *   *(int *)(param_1 + 0x14) = iVar1;
  *   pcVar2 = gm_AllocObjekt(iVar1,0x1b5,1);
  *   if (pcVar2 == (char *)0x0) {
  *     return 1;
  *   }
- *   *(undefined4 *)(g_player_slot_0[*(byte *)(param_1 + 3)].data + 0x264200) =
+ *   *(undefined4 *)(g_connections[*(byte *)(param_1 + 3)].data + 0x264200) =
  *        *(undefined4 *)(pcVar2 + 2);
  *   pcVar2[0x12] = '@';
  *   *(undefined4 *)(pcVar2 + 0x1c) = *(undefined4 *)(param_1 + 0x18);
@@ -49,7 +49,6 @@ char* __cdecl gm_AllocObjekt(int, int, int);
 /* Execution handler: allocates a sermon theme (Thema Predigt)
  * for a church/religious building entity. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000f2f0
 int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 {
@@ -58,7 +57,7 @@ int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 	char* dst;
 	uint f;
 
-	*(int*) (cmd + 0x10) = g_timestamp_0b6c;
+	*(int*) (cmd + 0x10) = g_next_object_id;
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
 	*(int*) (cmd + 0x14) = field;
 	obj = gm_AllocObjekt(field, 0x1b5, 1);

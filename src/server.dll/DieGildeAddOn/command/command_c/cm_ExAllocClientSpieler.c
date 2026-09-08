@@ -11,23 +11,25 @@ char* __cdecl strncpy(char*, const char*, unsigned int);
  * Similar to cm_ExAllocSpieler but for client-connected players,
  * updating player slot flags and setting connection state.
  *
- * Conversion state: pure C (naked wrapper removed).  The tail now
- * matches — keeping the entity slot as an explicit `off` and folding
- * the g_static_entity_table base into each access reproduces the
- * reference's `lea esi,[eax+eax*8]; shl esi,2` offset form
- * (previously the full address was materialized, 26B shorter).
- * Remaining deltas are allocator/scheduling fixed-points: the
- * reference keeps cmd in edi (esi here) and materializes the
- * `result ? 6 : 7` first arg first in eax (`mov ebx,[esp+0x18];
- * mov eax,ebx; neg eax; sbb eax,eax; add eax,7`) while MSVC6 8168
- * computes it last in ecx, and the reference hoists the strncpy
- * arg leas into the rec computation (docs/msvc6-allocator.md GRA
- * class).  SIZE 361/361, NEAR_MATCHING — prove path-explodes on
- * the original side (gm_CreateEntityFromParents loop). */
+ * RELOC 361/361.  Keeping the entity slot as an explicit `off` and
+ * folding the g_static_entity_table base into each access reproduces
+ * the reference's `lea esi,[eax+eax*8]; shl esi,2` offset form.
+ *
+ * The first argument must be written as an if/else, not `result ? 6 : 7`.
+ * The ternary makes MSVC6 sink the computation to just before the call
+ * and put it in ecx; the if/else emits `mov eax,[esp+0x18]; neg eax;
+ * sbb eax,eax` right after srand and folds the `add eax,7` into the
+ * argument push sequence, matching the reference.  That single change
+ * took the function from 287/361 to 361/361.
+ *
+ * Dead ends against the same cluster, all still 287 or worse:
+ * `7 - (result != 0)`, `6 + (result == 0)`, `result == 0 ? 7 : 6`,
+ * a `volatile` kind (96/375), hoisting the ternary into the call
+ * argument list, and hoisting the trailing gm_CreateEntityFromParents
+ * args into locals (86/363). */
 
 
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000d570
 int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 {
@@ -39,10 +41,15 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 
 	{
 		char* c = (char*) cmd;
-		*(int*)(c + 0x10) = g_timestamp_0b6c;
+		unsigned int kind;
+		*(int*)(c + 0x10) = g_next_object_id;
 		*(int*)(c + 0x45) = rand();
 		srand(*(int*)(c + 0x22));
-		entity = gm_CreateEntityFromParents(result ? 6 : 7,
+		if (result)
+			kind = 6;
+		else
+			kind = 7;
+		entity = gm_CreateEntityFromParents(kind,
 			*(int*)(c + 0x14), *(int*)(c + 0x18),
 			*(unsigned short*)(c + 0x1c), 0,
 			(unsigned char)*(char*)(c + 0x1e), 0,
@@ -56,23 +63,23 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 	LogMessageInternal((char*)0x1002c748, 0x2917, (char*)0x1002cbbc, 1);
 	off = entity * 0x21c;
 	f = 0x99099 * (unsigned char)*(char*)(cmd + 3);
-	*(int*)(0x10442d00 + f * 4) = *(int*)(g_static_entity_table_358a0 + off + 4);
-	strncpy(g_static_entity_table_358a0 + off + 0x30, (char*)cmd + 0x25, 0x10);
-	t = gm_GetEntityTableEntry(g_static_entity_table_358a0 + off);
+	*(int*)(0x10442d00 + f * 4) = *(int*)(g_slot_table + off + 4);
+	strncpy(g_slot_table + off + 0x30, (char*)cmd + 0x25, 0x10);
+	t = gm_GetEntityTableEntry(g_slot_table + off);
 	if (t != 0) {
-		*(unsigned short*)t = *(unsigned short*)(g_static_entity_table_358a0 + off + 0x50);
+		*(unsigned short*)t = *(unsigned short*)(g_slot_table + off + 0x50);
 		strncpy((char*)t + 2, (char*)cmd + 0x35, 0x10);
-		strncpy(g_static_entity_table_358a0 + off + 0x40, (char*)cmd + 0x35, 0x10);
-		r2 = (char*)gm_LookupEntityRecordById(*(int*)(g_static_entity_table_358a0 + off + 0x60));
+		strncpy(g_slot_table + off + 0x40, (char*)cmd + 0x35, 0x10);
+		r2 = (char*)gm_LookupEntityRecordById(*(int*)(g_slot_table + off + 0x60));
 		if (r2 != 0)
 			strncpy(r2 + 0x40, (char*)cmd + 0x35, 0x10);
 	}
-	*(int*)(g_static_entity_table_358a0 + off + 0x54) = *(int*)(cmd + 0x1f);
-	*(unsigned char*)(g_static_entity_table_358a0 + off + 0xc) = *(unsigned char*)(cmd + 0x24);
+	*(int*)(g_slot_table + off + 0x54) = *(int*)(cmd + 0x1f);
+	*(unsigned char*)(g_slot_table + off + 0xc) = *(unsigned char*)(cmd + 0x24);
 	if (result != (char*)0) {
 		result[0] = 1;
 		result[1] = 1;
-		*(char**)(result + 6) = g_static_entity_table_358a0 + off;
+		*(char**)(result + 6) = g_slot_table + off;
 	}
 	return 0;
 }

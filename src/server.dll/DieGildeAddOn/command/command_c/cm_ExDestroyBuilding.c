@@ -23,7 +23,7 @@
  *       }
  *       puVar2 = gm_NextEntityQueryMatch();
  *     }
- *     piVar3 = &g_work_building_ptrs;
+ *     piVar3 = &g_query_state_a0c;
  *     do {
  *       if ((ushort *)*piVar3 == puVar1) {
  *         *piVar3 = 0;
@@ -50,7 +50,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern int g_work_building_ptrs;
+extern int g_query_state_a0c;
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -85,7 +85,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 		match = gm_NextEntityQueryMatch();
 	}
 
-	slot_scan = &g_work_building_ptrs;
+	slot_scan = &g_query_state_a0c;
 	do {
 		if ((ushort*) *slot_scan == building) {
 			*slot_scan = 0;

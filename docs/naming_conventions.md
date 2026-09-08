@@ -273,9 +273,9 @@ Globals use a `g_` prefix. When the original name is unknown, the convention
 in this project is `g_<hex_address>`:
 
 ```c
-extern int g_timestamp_0b6c;              /* known purpose, partial name */
+extern int g_next_object_id;              /* known purpose, partial name */
 extern char g_player_slot_0[];            /* known: player slot array */
-extern char g_static_entity_table_358a0[];/* known: static entity table */
+extern char g_slot_table[];/* known: static entity table */
 extern int g_entity_type_table;           /* known: entity type lookup */
 extern int g_10030b6c;                    /* unknown: address-only name */
 ```

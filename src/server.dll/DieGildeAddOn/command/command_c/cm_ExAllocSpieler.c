@@ -22,7 +22,7 @@
  *   ushort *puVar2;
  *   uint uVar3;
  *
- *   *(undefined4 *)(cmd + 0x10) = g_timestamp_0b6c;
+ *   *(undefined4 *)(cmd + 0x10) = g_next_object_id;
  *   iVar1 = rand();
  *   *(int *)(cmd + 0x26) = iVar1;
  *   srand(iVar1);
@@ -48,18 +48,18 @@
  *                        s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c,1);
  *     return 1;
  *   }
- *   *(undefined4 *)(g_player_slot_0[*(byte *)(cmd + 3)].data + 0x2641f8) =
- *        (&g_static_entity0_entity_id)[uVar3 * 0x87];
+ *   *(undefined4 *)(g_connections[*(byte *)(cmd + 3)].data + 0x2641f8) =
+ *        (&g_entity_id_field)[uVar3 * 0x87];
  *   if (result != (char *)0x0) {
  *     *result = '\x01';
  *     result[1] = '\x01';
- *     *(undefined2 **)(result + 6) = &g_static_entity_table_358a0 + uVar3 * 0x10e;
+ *     *(undefined2 **)(result + 6) = &g_slot_table + uVar3 * 0x10e;
  *   }
  *   return 0;
  * }
  */
 
-extern char g_player_slot_0[];
+extern char g_connections[];
 uint __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[];
@@ -78,7 +78,7 @@ int __cdecl cm_ExAllocSpieler(int cmd, char* result)
 	int field_id;
 	char* entity_ptr;
 
-	*(int*) (cmd + 0x10) = g_timestamp_0b6c;
+	*(int*) (cmd + 0x10) = g_next_object_id;
 	seed = rand();
 	*(int*) (cmd + 0x26) = seed;
 	srand(seed);
@@ -120,10 +120,10 @@ int __cdecl cm_ExAllocSpieler(int cmd, char* result)
 		);
 		return 1;
 	}
-	*(int*) (g_player_slot_0 + (uint) *(uchar*) (cmd + 3) * 0x264264 + 0x2641f8) =
-		*(int*) (g_static_entity_table_358a0 + entity_index * 0x21c + 4);
+	*(int*) (g_connections + (uint) *(uchar*) (cmd + 3) * 0x264264 + 0x2641f8) =
+		*(int*) (g_slot_table + entity_index * 0x21c + 4);
 	if (result != (char*) 0) {
-		entity_ptr = g_static_entity_table_358a0 + entity_index * 0x21c;
+		entity_ptr = g_slot_table + entity_index * 0x21c;
 		*result = '\x01';
 		result[1] = '\x01';
 		*(char**) (result + 6) = entity_ptr;

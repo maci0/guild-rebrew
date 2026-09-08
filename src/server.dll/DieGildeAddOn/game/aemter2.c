@@ -1,23 +1,14 @@
 #include <stdio.h>
 #include "../../Units/Error/error.h"
 
-// SIZE 0x18
-typedef struct {
-	int value;
-	char type;
-	char pad[19];
-} ENT;
-
-extern int g_aemter_table;
 void* __cdecl gm_LookupEntityRecordById(int);
-extern ENT g_ents[];
-extern ENT g_ents2[];
 extern unsigned short g_default_value_b;
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void __cdecl InitBuildingTypeTable(void);
 
 /* Office slot table at 0x101de5a0, 42 entries of 0x18 bytes. */
 #pragma pack(push, 1)
+// SIZE 0x18
 typedef struct {
 	char type;         /* +0 */
 	char pad0[3];
@@ -45,8 +36,9 @@ void __cdecl amt_FindEntity26(int val)
 {
 	unsigned int i;
 	for (i = 0x29; i != 0; i--) {
-		if (g_ents[i].type == 0x26) {
-			g_ents[i].value = val;
+		/* asm checks byte at slot+8 (role); stores dword at slot+4 (entityId) */
+		if (g_office_slots[i].role == 0x26) {
+			g_office_slots[i].entityId = val;
 			return;
 		}
 	}
@@ -62,8 +54,8 @@ void __cdecl amt_FindEntity27(int val)
 {
 	unsigned int i;
 	for (i = 0x29; i != 0; i--) {
-		if (g_ents2[i].type == 0x27) {
-			g_ents2[i].value = val;
+		if (g_office_slots[i].role == 0x27) {
+			g_office_slots[i].entityId = val;
 			return;
 		}
 	}

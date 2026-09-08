@@ -3,7 +3,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern char g_currency_type_array[];
+extern unsigned short g_entity_slot_table[];
 extern char* g_unknown_1de450;
 extern unsigned char g_current_season;
 
@@ -117,7 +117,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	char obj_category;
 
 	source_owner_entity = (short*)0;
-	*(int*)(cmd + 0x1a) = g_timestamp_0b6c;
+	*(int*)(cmd + 0x1a) = g_next_object_id;
 	resolved_dynamic = (short*)0;
 	dest_dynamic_entity = (short*)0;
 	dest_object = (ushort*)0;
@@ -147,7 +147,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			if (*(ushort*)((int)source_existing_entity + 0x27) == 0xffff) {
 				source_owner_entity = (short*)0;
 			} else {
-				source_owner_entity = (short*)(g_static_entity_table_358a0 +
+				source_owner_entity = (short*)(g_slot_table +
 					(uint)*(ushort*)((int)source_existing_entity + 0x27) * 0x21c);
 			}
 		} else if (resolved_dynamic != (short*)0) {
@@ -229,7 +229,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			if (*(ushort*)(dest_existing_entity + 0x27) == 0xffff) {
 				dest_owner_entity = (short*)0;
 			} else {
-				dest_owner_entity = (short*)(g_static_entity_table_358a0 +
+				dest_owner_entity = (short*)(g_slot_table +
 					(uint)*(ushort*)(dest_existing_entity + 0x27) * 0x21c);
 			}
 		} else if (resolved_dynamic != (short*)0) {
@@ -336,7 +336,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		if (*(int*)(cmd + 0x23) != 0) {
 			gm_AddOrAccumulateObject(
 				*(int*)(source_owner_entity + 2),
-				(uint)*(ushort*)(g_currency_type_array + (uint)(unsigned char)cmd[0x1e] * 0x2f4),
+				(uint)*(ushort*)(g_entity_slot_table + (uint)(unsigned char)cmd[0x1e] * 0x2f4),
 				*(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f)
 			);
 			if (source_dynamic_ref != (short*)0) {
@@ -394,7 +394,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
 			gm_SubObjekt(
 				*(void**)(dest_owner_entity + 2),
-				(uint)*(ushort*)(g_currency_type_array + (uint)(unsigned char)cmd[0x1e] * 0x2f4),
+				(uint)*(ushort*)(g_entity_slot_table + (uint)(unsigned char)cmd[0x1e] * 0x2f4),
 				*(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f)
 			);
 			if (dest_dynamic_entity != (short*)0) {

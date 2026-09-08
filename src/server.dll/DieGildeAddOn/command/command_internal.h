@@ -38,8 +38,8 @@ extern void* __cdecl gm_FindRecordById(int);
 /* CRT / thread */
 
 /* Common globals */
-extern int g_timestamp_0b6c;
-extern char g_static_entity_table_358a0[];
+extern int g_next_object_id;
+extern char g_slot_table[];
 
 /* __FILE__ string for LogMessageInternal calls in command.c */
 extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
