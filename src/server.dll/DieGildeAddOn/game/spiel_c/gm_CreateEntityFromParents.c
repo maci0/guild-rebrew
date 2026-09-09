@@ -1,4 +1,4 @@
-/* gm_CreateEntityFromParents — allocate and initialize an entity from a
+/* gm_CreateEntityFromParents: allocate and initialize an entity from a
  * father/mother pair with random trait generation.
  *
  * Real name in the original sources: gm_AllocSpieler from spiel.c.  This is
@@ -10,60 +10,69 @@
  * finalization (refs scan, id assignment, trait loops, dynasty init) and the
  * final id assignment with the 0x10030b6c counter.
  *
- * This C version follows the disassembly data flow.  It compiles to 3671
- * bytes against the 3696-byte target, 715 of 3689 bytes matched.
+ * Current state: 859 of 3689 bytes matched, object 3694 bytes.  Structurally
+ * complete: 1056 target instructions against 1059 compiled, 126 target basic
+ * blocks against 127, 125 matched.  Earlier notes claiming the object was
+ * 480 bytes short described a much older body and no longer apply; there are
+ * no missing regions to add.
  *
- * Call skeleton is structurally correct: 55 calls on both sides, same order,
- * same callees.  Peak drift between corresponding call sites is +16
- * instructions and it returns to 0 by the tail, so the control flow is right
- * and the residue is msvc6 scheduling and register allocation, not logic.
+ * Statement order is the dominant lever in this function.  msvc6 schedules
+ * the record-header stores and the citizen-path field copies in source
+ * order, so relocating single statements by one to three lines moves the
+ * score by tens of bytes at a time.  A hill-climb over single-statement
+ * relocations took the function from 734 to 858; it has converged, so no
+ * remaining single move improves the score.
  *
- * Two fixes measured here (711 -> 715):
- *   - the `for (n = _ftol(...))` at the second age loop became a plain
- *     `(int)` cast (doc section 15).  That removed a `sub esp,8` /
- *     `fstp qword ptr [esp]` pair and, as a side effect, moved `idx` from
- *     spill slot esp+0x20 to the target's esp+0x1c, which made the first 40
- *     instructions align exactly.  The other four `_ftol` sites were each
- *     retested after this change and all still score worse as casts
- *     (715 -> 491/466/464/471), so they stay explicit.
- *   - the `*(u16*)slot = 0xffff` before the -1 fills was dropped.  msvc6
- *     dead-store-eliminates it here; the target keeps it, but every spelling
- *     that preserves it (volatile, absolute address, byte pair, signed -1)
- *     costs more than the one instruction it buys (715 -> 589/597/480).
+ * Levers that landed (each measured, score in parentheses):
+ *   - the 0x82 trait bump reads through the volatile alias inside the store
+ *     expression rather than through a separate `trait` local (734 -> 780).
+ *     The extra local defeated msvc6's mov/add/mov and cost a spill slot.
+ *   - `slot[2] = type` sinks below the two zero stores at 0x170 and 0x16c,
+ *     which is the target's order at 0x100188f9 (780 -> 781).
+ *   - `ref = father + 0x68` is computed before the 0x58 increment, matching
+ *     the target's `lea ecx,[edx+0x68]` ahead of `inc al` (781 -> 782).
+ *   - in the citizen path `slot[9] = ent[0xd5]` precedes
+ *     `slot[0x164] = ent[0xd4]` (782 -> 785).
+ *   - the idx>=6 selector is spelled as a subtraction from the high base,
+ *     `0xc2 - (idx >= 6 ? 0x86 : 0)`, which emits the target's
+ *     setge / dec / and 0x86 / add 0x3c; the addition form emits an extra
+ *     `add al` (858 -> 859).
  *
- * Measured dead ends, all reverted (score from the 715 base):
- *   - declaration order of the locals: no effect at all (idx placed at every
- *     position 3..11 scored exactly 715).  msvc6 assigns spill slots by
- *     liveness, not declaration order, so the frame layout is not steerable
- *     from the source.
- *   - `volatile int idx` 272, `unsigned idx` 458, `short idx` 331.
- *   - merging the two adjacent `return *(u16*)slot;` into one: still emits 5
- *     epilogues against the target's 4, and `exact` drops 83 -> 77.
- *   - final `return idx;` -> `return *(u16*)slot;` (the value the target's
- *     shared epilogue actually returns): 559, though it is the only variant
- *     that reaches obj_size 3686.  Combined with the _ftol and 0xffff levers:
- *     501/567/544.
- *   - hoisting the interpolation weights out of the trait loop: 575/563/654.
- *   - hoisting `(double)slot[0xa]` into a local to get the target's
- *     `fst`+`fcomp` pair instead of our `fld`+`fcompp`: 599/490.
- *   - `_ftol` declared with a parameter (double/float/long/__stdcall):
- *     715/571/715/460.  An explicit call always marshals the argument per the
- *     C calling convention; the target's on-stack form is only reachable
- *     through a cast, which is exactly the section-15 trade-off.
- *   - forcing per-use reloads of the slot id in the parent-sympathy block
- *     with volatile, to reproduce the target's `xor eax,eax`+`mov ax` at each
- *     of the four stores (target has 38 xors, we have 31): 567/563/570.
- *   - moving the slot+0x50 dynasty-counter update into the FPU latency gap
- *     after gm_RandomFloat01, matching the target's interleave: 473-481.
- *     msvc6 already performs that interleave from the current statement
- *     order; spelling it out defeats it.
+ * Measured dead ends, all reverted (score from the 859 base unless noted):
+ *   - every remaining `_ftol` site as a plain `(int)` cast: 473 / 471 / 470
+ *     for the three trait-selection sites and 547 for the age loop.  Each
+ *     saves the `sub esp,8` / `fstp qword ptr [esp]` pair but costs about
+ *     380 matched bytes, so the explicit calls stay.
+ *   - merging `colv` and `rowv` into one local, or into any of `i`, `j`,
+ *     `rnd`, `n`, `idx`, `best_father`, `best_mother`: 608 to 652.  The
+ *     object shrinks toward 3684 but the sympathy loops lose their
+ *     single-base addressing.
+ *   - `acc` as `double` instead of `float`: 614.
+ *   - volatile reads on the four parent-sympathy stores, to force the
+ *     target's per-use `xor eax,eax` + `mov ax` reloads: 627.
+ *   - restoring the `*(u16*)slot = 0xffff` before the -1 fills: 680.
+ *   - the no-parent selector ternaries rewritten in the subtraction form
+ *     that worked for idx>=6: 631 to 745.  Those sites already emit the
+ *     target's shape.
+ *   - `t == 1` inverted into a guard clause in the location block: 770.
+ *   - `gm_RandomMod((unsigned short) arg8)` spelled as `gm_RandomMod(2)`:
+ *     601.  The constant defeats the target's register reuse.
+ *   - the stat-modifier table index rewritten to put `i` first: 591.
+ *   - CFLAGS sweep over 20 variants (/G3, /G4, /G5, /Gd, /Oy and
+ *     combinations): every one scores identically to the current /O2 /Gd.
  *
- * Remaining gap: 25 bytes.  Roughly 9 of them are the duplicated epilogue
- * (5 rets vs 4) and the rest is FPU form -- we emit 3 `fiadd` and 4 `fmulp`
- * where the target emits 0 and 1, and 2 `sub esp,8`/`fstp qword` pairs where
- * it emits none.  Both remaining pairs sit at explicit `_ftol` call sites
- * that measure worse as casts, so closing them needs a different lever than
- * the spelling of the conversion. */
+ * `rebrew prove` cannot certify this function.  Both a 600-second and a
+ * 2400-second run with loop bounds 10 and 3 report no terminal states for
+ * the original binary: the two 0x300-iteration sympathy loops and the
+ * 0x300-iteration slot scan explode the path space well before any exit is
+ * reached.  Slice proving would need per-block start and end offsets.
+ *
+ * Remaining delta: 5 bytes of object size, which is one 4-byte spill slot
+ * (`sub esp,0x420` against the target's `sub esp,0x41c`) plus the two
+ * `sub esp,8` / `fstp qword` pairs at the `_ftol` sites minus what the
+ * shorter frame saves.  The scalar local area is 0x2c in the target and
+ * 0x30 here, so one live local too many; every merge tried above trades
+ * more matched bytes than the slot is worth. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10018850
@@ -81,7 +90,7 @@ extern double g_dbl_const_688; /* 0x10025688 */
 extern double g_dbl_const_6d0; /* 0x100256d0 */
 extern double g_dbl_const_7d8; /* 0x100257d8 */
 extern double g_dbl_const_810; /* 0x10025810 */
-extern double g_dbl_const_f88; /* 0x10025f88 */
+extern float g_dbl_const_f88; /* 0x10025f88 - fmul dword, not qword */
 extern double g_dbl_const_f90; /* 0x10025f90 */
 extern double g_dbl_const_f98; /* 0x10025f98 */
 int __cdecl gm_EntityClassCheck(int);
@@ -240,7 +249,7 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 			} else if (idx < 4) {
 				slot[0x217] = 0x5c;
 			}
-			slot[0x217] = (char) (0x3c + (idx >= 6 ? 0 : 0x86));
+			slot[0x217] = (char) (0xc2 - (idx >= 6 ? 0x86 : 0));
 			if ((double) *(unsigned short*) (slot + 0xa) >
 			    *(float*) (slot + 0x20)) {
 				acc = *(float*) (slot + 0x1c);

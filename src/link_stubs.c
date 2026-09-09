@@ -473,3 +473,79 @@ void* g_thread_handle = 0;
 
 // DATA: SERVER 0x10034680
 int g_handler_started = 0;
+
+/* --- .rdata float/double constants ---
+ * Real operands of fmul/fadd/fsubr in the target, so a zero stub would
+ * silently change behaviour; the literals below reproduce the original bytes
+ * exactly (verified against server.dll at the annotated VAs).
+ *
+ * Deliberately NOT const: the originals live inside the rdata_restore blob
+ * (0x100252e8..0x10026608), which already contributes those bytes to .rdata.
+ * Emitting these as const would append a duplicate 0x20 bytes to .rdata and
+ * shift the section, breaking the postlink layout check. As mutable objects
+ * they land in .data, whose contents postlink replaces from the reference.
+ *
+ * `f88` is a dword fmul (float) in the target, unlike its qword neighbours. */
+// DATA: SERVER 0x10025688
+double g_dbl_const_688 = 2.0;
+// DATA: SERVER 0x100256d0
+double g_dbl_const_6d0 = 0.001;
+// DATA: SERVER 0x100257d0
+double g_const_57d0 = 0.5;
+// DATA: SERVER 0x100257d8
+double g_dbl_const_7d8 = 1.0;
+// DATA: SERVER 0x10025810
+double g_dbl_const_810 = 0.2;
+// DATA: SERVER 0x10025f88
+float g_dbl_const_f88 = 0.6f;
+// DATA: SERVER 0x10025f90
+double g_dbl_const_f90 = 8.0;
+// DATA: SERVER 0x10025f98
+double g_dbl_const_f98 = 900.0;
+// DATA: SERVER 0x10025fa0
+double g_const_5fa0 = 0.0013888888888888887;
+// DATA: SERVER 0x10025fa8
+float g_const_5fa8 = 896.0f;
+// DATA: SERVER 0x10025fac
+float g_const_5fac = 0.06875f;
+// DATA: SERVER 0x10025fb0
+float g_const_5fb0 = 2.2f;
+// DATA: SERVER 0x10025fb4
+float g_const_5fb4 = 1.5f;
+// DATA: SERVER 0x10025fb8
+float g_const_5fb8 = 0.01f;
+
+/* Savegame header tail: the 9 bytes "Savegame\0" copied into the header at
+ * +0x9c by ls_LoadSavegameHeader. Layout must match its struct SaveHeaderTail
+ * (int, int, char) under #pragma pack(1). */
+#pragma pack(1)
+struct SaveHeaderTail {
+	int a;
+	int b;
+	char c;
+};
+#pragma pack()
+// DATA: SERVER 0x1002d4f0
+struct SaveHeaderTail g_save_header_tail = { 0x65766153, 0x656d6167, 0 };
+
+/* Tick rate read from the server ini by ServerMainThread; the binary's
+ * initial value is 0 and the profile read overwrites it at startup. */
+// DATA: SERVER 0x11764088
+int g_tick_rate = 0;
+
+/* Small-block-heap pool region list, zero-init .data (BSS) in the original. */
+// DATA: SERVER 0x11766440
+int g_11766440 = 0;
+// DATA: SERVER 0x11766444
+void* g_11766444 = 0;
+
+/* Game's private toupper (0x1001b0c0), called by OpenVfsStream. Forwarded to
+ * the CRT rather than stubbed: OpenVfsStream uppercases path characters, so a
+ * stub returning 0 would corrupt every lookup. */
+int __cdecl crt_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z') {
+		return c - ('a' - 'A');
+	}
+	return c;
+}
