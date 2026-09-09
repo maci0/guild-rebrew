@@ -141,6 +141,7 @@ if(REBREW_BUILD_SERVER)
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/mlock.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_globals.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_pool.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_aliases.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/crt_heap.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/amsg_exit.c"
   )
