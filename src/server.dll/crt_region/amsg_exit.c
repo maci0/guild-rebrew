@@ -2,9 +2,21 @@
 // FUNCTION: SERVER 0x1001ba71 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 #include <windows.h>
 
-/* Game's __amsg_exit override: writes the runtime error message and calls
- * the exit hook.  The g_10035508/g_1003550c check gates a pre-exit hook
- * (fcn_1001fdf8) on the C runtime's "report mode" flags. */
+/* NOT a game override: this is stock LIBCMT __amsg_exit from dllcrt0.obj.
+ * The bytes at 0x1001ba71 are identical to the library body outside that
+ * object's own relocation slots, so the original simply linked it. The same
+ * holds for the other functions in this file (see
+ * .scratch/libcmt_probe/SUMMARY.md).
+ *
+ * It stays in the build for a link-side reason only: compiling it keeps
+ * LIBCMT crt0msg.obj out, and that object would add 0x2c2 bytes of
+ * runtime-error message strings to .rdata which rdata_restore.c already
+ * supplies. Linking both overshoots .rdata by 0x320 and postlink refuses the
+ * image. Do not treat this file as reversing work to finish.
+ *
+ * Behaviour: writes the runtime error message and calls the exit hook. The
+ * g_10035508/g_1003550c check gates a pre-exit hook (fcn_1001fdf8) on the C
+ * runtime's "report mode" flags. */
 
 /* rterr_entry: int num + char* text = 8 bytes. */
 // SIZE 0x8

@@ -99,16 +99,46 @@ if(REBREW_BUILD_SERVER)
   # crc32.c defines _crc32 twice.
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/unknown/crc32\\.c$")
   # Pure CRT bodies live in LIBCMT. Keep only game/layout files under crt_region.
+  #
+  # 66 of the 68 annotated functions under crt_region/ were measured to be
+  # byte-identical to stock LIBCMT (identical outside the library object's own
+  # relocation slots). They are linked library code that was reversed by
+  # mistake, and none of them belongs in the build. Evidence and the exact
+  # symbol/object for each: .scratch/libcmt_probe/SUMMARY.md, reproduce with
+  # .scratch/libcmt_probe/cmp_libcmt.py. Only _initterm (0x1001a758) and
+  # _parse_cmdline (0x1001fb12) are absent from this LIBCMT build.
+  #
+  # The files kept below are NOT kept because their bodies are ours. Each one
+  # exists to displace a specific LIBCMT object whose side effects the
+  # reference does not have:
+  #   sbh_globals/sbh_pool/sbh_aliases  displace sbheap.obj, which reaches
+  #       IsBadWritePtr through __imp__IsBadWritePtr@8. A local IsBadWritePtr
+  #       does not help: the function name is never referenced, only the
+  #       indirect slot, which still resolves from KERNEL32.lib. crt_heap.c
+  #       comes along because sbh_aliases.c calls its __sbh_heap_init body.
+  #   mlock.c                            displaces mlock.obj (FatalAppExitA).
+  #   amsg_exit.c                        keeps crt0msg.obj out. That object
+  #       contributes the runtime-error message strings, which rdata_restore.c
+  #       also supplies, so linking both overshoots .rdata by 0x320.
+  #       Deleting them from the blob and letting the library provide them was
+  #       tried and does not work: the original packs those strings into 0x2eb
+  #       bytes, while the linker places crt0msg's 23 separate COMDATs with
+  #       per-section padding into 0x32b. The content is then correct and
+  #       unduplicated, but .rdata is 0x40 long and postlink still refuses it.
+  #       Only the blob reproduces the original's tighter packing, so the blob
+  #       keeps the strings and crt0msg.obj stays out of the link.
+  # Dropping any of these was tried and measured; each one regresses either the
+  # import set or the .rdata size.
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt_region/")
   set(_CRT_REGION_KEEP
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/crt_imports.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/data_restore.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/data_globals.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/rdata_restore.c"
-    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_globals.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/dllmain.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/initterm.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/mlock.c"
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_globals.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_pool.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_aliases.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/crt_heap.c"
