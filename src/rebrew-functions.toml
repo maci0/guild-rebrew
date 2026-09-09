@@ -196,7 +196,7 @@ blocker = "alignment-prefixed memcpy prelude — same pure-C wall as m_PoolAlloc
 blocker_delta = 335
 
 ["SERVER.0x10009020"]
-size = 704
+size = 667
 status = "PROVEN"
 analysis = "Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks."
 blocker = "frame/slot + cmp[mem],0 vs mov/test residual; loop/null-check probes regress to 129-272 from 450/701; 11B size gap (693 vs 704) — parked"
@@ -801,7 +801,7 @@ status = "RELOC"
 ["SERVER.0x10011bf0"]
 size = 1040
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "PROVEN"
+status = "STUB"
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
 blocker = "three scheduler phase shifts, all instruction-identical to the reference: strcpy pair (reference hoists lea edx,[ebp+0x40] into the first copy), the 5-byte fill shifted 6B behind it, and the field-init block's early 0x218/0xd stores. Source order already matches the reference in each. Parked at 606/1040 at obj exactly 1040; classifier reports STUB only because 58.3% is under the 60% NEAR_MATCHING threshold."
@@ -1130,7 +1130,7 @@ status = "RELOC"
 ["SERVER.0x100174d0"]
 size = 1088
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "PROVEN"
+status = "STUB"
 ghidra = "gm_AllocGebaeude"
 
 ["SERVER.0x10017910"]
