@@ -93,6 +93,10 @@ relocations) > `NEAR_MATCHING` (close) > `STUB` (incomplete)
 - **Execution**: all CL.EXE/LINK.EXE calls run through the docker image
   (`rebrew/msvc:6.0-win32`); build it with `rebrew toolchain build msvc6`
   before `cmake --build`
+- **`REBREW_DEBUG_INFO` must be OFF to link.** With it ON, `/debug` adds a
+  0x1c-byte debug directory that grows `.rdata` past the reference and the
+  postlink layout step fails with "built .rdata prefix size does not match".
+  Configure with `cmake -S . -B build-sp6 -DREBREW_DEBUG_INFO=OFF`.
 - **CFLAGS are per-file in practice**, not per-function: a flag one function
   needs can break a file-mate. See `docs/msvc6-c-shapes.md` section 12.
 
