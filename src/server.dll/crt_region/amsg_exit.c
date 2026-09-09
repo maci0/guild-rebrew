@@ -1,4 +1,4 @@
-// FUNCTION: SERVER 0x1001ba71 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// SUPPORT: SERVER reversed mirror of stock LIBCMT amsg/crt0msg code, compiled to keep crt0msg.obj out of the link (its runtime-error strings duplicate rdata_restore.c). the strcat mirror (0x1001f8e0) is asm in the CRT and cannot match in pure C; this file is scaffolding, not reversed game code
 #include <windows.h>
 
 /* NOT a game override: this is stock LIBCMT __amsg_exit from dllcrt0.obj.
@@ -34,8 +34,6 @@ void __cdecl _amsg_exit(int msg)
     fcn_1001fe31(msg);
     g_100317f0(0xff);
 }
-
-// FUNCTION: SERVER 0x1001fdf8 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* _crt_runtime_error: gated on the report-mode flags; calls _NMSG_WRITE
  * twice (0xfc = "abort pressed", 0xff = generic) around an optional user
@@ -82,7 +80,6 @@ static char* __cdecl fcn_1001f8d0(char* dst, const char* src)
     return dst;
 }
 
-// FUNCTION: SERVER 0x1001fe31 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 void __cdecl fcn_1001fe31(int rterrnum)
 {
     struct rterr_entry* p;
@@ -123,8 +120,6 @@ void __cdecl fcn_1001fe31(int rterrnum)
     fcn_10022107(buf2, "Microsoft Visual C++ Runtime Library", 0x12010);
 }
 
-// FUNCTION: SERVER 0x1001f8e0 (was FUNCTION; provided by LIBCMT / library_msvc.h)
-
 /* _strcat (game copy of the CRT string helper; the target is the asm
  * version, this is a functional C equivalent). */
 
@@ -138,8 +133,6 @@ char* __cdecl fcn_1001f8e0(char* dst, const char* src)
         ;
     return dst;
 }
-
-// FUNCTION: SERVER 0x1001ae20 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* _strncpy (game copy of the CRT asm original: src-align byte loop,
  * dword scan with 0x7efefeff null detection, partial-dword cascade,
@@ -277,8 +270,6 @@ out:
 end:
     return dst;
 }
-
-// FUNCTION: SERVER 0x10022107 (was FUNCTION; provided by LIBCMT / library_msvc.h)
 
 /* __crtMessageBoxA: dynamically resolves user32.dll!MessageBoxA (plus the
  * GetActiveWindow/GetLastActivePopup owner-window chain) on first use and

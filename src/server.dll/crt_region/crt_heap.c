@@ -1,4 +1,4 @@
-// FUNCTION: SERVER 0x1001d3c8
+// SUPPORT: SERVER reversed mirror of stock LIBCMT heap-init/term code, compiled to supply the __sbh/heap symbols locally so sbheap.obj stays out of the link (it would import IsBadWritePtr). the 4-byte-larger fcn_1001d280 mirror and the asm strcmp-family fcn_10021200 cannot match in pure C; this file is scaffolding, not reversed game code
 #include <windows.h>
 
 /* Game's CRT-startup overrides for the heap init/term pair (the binary
@@ -54,8 +54,6 @@ int __cdecl crt_heap_init(int mode)
     return 1;
 }
 
-// FUNCTION: SERVER 0x1001d425
-
 void __cdecl __heap_term(void)
 {
     int i;
@@ -85,8 +83,6 @@ void __cdecl __heap_term(void)
     }
     HeapDestroy(g_1176644c);
 }
-
-// FUNCTION: SERVER 0x1001d280
 
 /* _heap_select: returns the allocator mode (3=pool/sbh, 2=block, 1=default).
  * NT5+ hosts return 1 directly; otherwise the __MSVCRT_HEAP_SELECT env var
@@ -169,8 +165,6 @@ checkver:
     return 2;
 }
 
-// FUNCTION: SERVER 0x1001d4cd
-
 /* _sbh_heap_init: allocates the region-header table from the process heap
  * and initializes the pool-allocator globals. */
 
@@ -198,8 +192,6 @@ int __cdecl fcn_1001d4cd(unsigned int size)
     return 1;
 }
 
-// FUNCTION: SERVER 0x1001d253
-
 /* crt_get_osver: reads the linker major/minor version from the module's PE
  * header (GetModuleHandleA(NULL)) into the 2-byte buffer. */
 
@@ -223,8 +215,6 @@ void __cdecl fcn_1001d253(char* out)
     }
 }
 
-// FUNCTION: SERVER 0x10021200
-
 /* _strncmp (game copy; functional C equivalent of the asm original). */
 
 int __cdecl fcn_10021200(const char* s1, const char* s2, unsigned int n)
@@ -239,8 +229,6 @@ int __cdecl fcn_10021200(const char* s1, const char* s2, unsigned int n)
         return 0;
     return (unsigned char)*s1 - (unsigned char)*s2;
 }
-
-// FUNCTION: SERVER 0x10020fe1
 
 /* strtoul wrapper: forwards to the internal _strtoxl with a NULL locale. */
 
