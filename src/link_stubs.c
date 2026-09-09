@@ -264,8 +264,8 @@ int g_relationship_matrix_secondary = 0;
 int g_sim_ents = 0;
 int g_str_29bb8 = 0;
 int g_unknown_1de450 = 0;
-int __cdecl inflate_blocks(void) { return 0; }
-int __cdecl inflate_blocks_free(void) { return 0; }
+/* inflate_blocks / inflate_blocks_free are provided by the vendored
+ * references/zlib-1.1.3/infblock.c; stubs here would shadow the real ones. */
 int __cdecl lb_ExLobbyServerCommand(void) { return 0; }
 int PTR_LAB_1002c5a0[1] = {0};
 int __cdecl rand_mod(void) { return 0; }
@@ -305,8 +305,9 @@ int __get_qualified_locale = 0;    /* ___get_qualified_locale */
 /* --- CRT-copy helpers referenced by the crt_region CRT layer that are not
  * yet reversed; stubs satisfy the link, postlink rewrites call targets to
  * the reference VAs. --- */
-void* __cdecl _getptd(void);              /* 0x1001d131 - _getptd */
-void* __cdecl _getptd(void) { return 0; }
+/* _getptd (0x1001d131) comes from LIBCMT tidtable.obj. A stub returning 0
+ * would make the __errno / __doserrno accessors in crt_region/flsall.c
+ * dereference a null per-thread block. */
 char* __cdecl fcn_1001af30(const char* s, int c); /* 0x1001af30 - strchr */
 char* __cdecl fcn_1001af30(const char* s, int c) { return 0; }
 unsigned long __cdecl fcn_10020ff8(const char*, char**, int, void*); /* 0x10020ff8 - _strtoxl */

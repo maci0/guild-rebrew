@@ -231,18 +231,11 @@ extern char g_entity_type_bytes;
 int g_array_count[4] = {
     0x00, 0x00, 0x00, 0x00,
 };
-int g_stat1[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
-int g_stat2[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
-int g_stat3[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
-int g_stat4[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
+/* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
+extern int g_stat1;
+extern int g_stat2;
+extern int g_stat3;
+extern int g_stat4;
 int g_flag_3c[4] = {
     0x00, 0x00, 0x00, 0x00,
 };

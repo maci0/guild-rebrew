@@ -23,9 +23,10 @@ extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
 extern int g_save_info[2];
 extern int OpenVfsStream(char*, char*, int);
-char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[] = "ls_ID2Ptr(): Stadtspieler Id not found";
-char s_D__Develop_DieGildeAddOn_loadsav_1002d550[] = "D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c";
-char s_ls_ID2Ptr____Houston__wir_haben_e_1002d520[] = "ls_ID2Ptr(): Houston, wir haben ein Problem...";
+/* Defined in loadsave2.c; same literals, same VAs. */
+extern char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[];
+extern char s_D__Develop_DieGildeAddOn_loadsav_1002d550[];
+extern char s_ls_ID2Ptr____Houston__wir_haben_e_1002d520[];
 int ls_LoadSavegameHeader(int, char*);
 int ls_LoadExistingEntities(int);
 unsigned int ls_LoadBuildingEntityState(unsigned int);
@@ -160,26 +161,18 @@ unsigned int ls_ID2Ptr(void)
 
 extern int g_1002dde0[4];
 extern int g_array_count[4];
-int g_stat1[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
-int g_stat2[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
-int g_stat3[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
-int g_stat4[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
+/* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
+extern int g_stat1;
+extern int g_stat2;
+extern int g_stat3;
+extern int g_stat4;
 extern int g_flag_3c[4];
 extern void* g_array_ptr[4];
 extern char g_stream_pool[1];
 extern int g_stream_count[4];
 extern int g_connection_counter[4];
-int g_next_object_id[4] = {
-    0x01, 0x00, 0x00, 0x00,
-};
+/* Canonical definition lives in DieGildeAddOn/game/spiel.c. */
+extern int g_next_object_id;
 char g_filter_extra5[1] = {
     0xff,
 };
@@ -195,12 +188,9 @@ short g_query_filter_extra3[2] = {
 int g_query_filter_extra4[4] = {
     0xff, 0x00, 0x00, 0x00,
 };
-int g_query_filter_owner[4] = {
-    0xff, 0xff, 0xff, 0xff,
-};
-char g_query_filter_state[1] = {
-    0xff,
-};
+/* Canonical definition lives in game/spiel_c/gm_NextEntityQueryMatch.c. */
+extern int g_query_filter_owner;
+extern char g_query_filter_state;
 char g_str_10031500[1] = {
     0x67,
 };

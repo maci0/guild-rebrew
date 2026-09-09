@@ -94,6 +94,10 @@ if(REBREW_BUILD_SERVER)
   list(FILTER SERVER_SOURCES INCLUDE REGEX "\\.c$")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt/")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/zlib/")
+  # unknown/crc32.c is the reversed copy of zlib's crc32 (0x100011f0). It stays
+  # in the tree for `rebrew test`, but linking it beside references/zlib-1.1.3/
+  # crc32.c defines _crc32 twice.
+  list(FILTER SERVER_SOURCES EXCLUDE REGEX "/unknown/crc32\\.c$")
   # Pure CRT bodies live in LIBCMT. Keep only game/layout files under crt_region.
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt_region/")
   set(_CRT_REGION_KEEP
@@ -196,14 +200,24 @@ if(REBREW_BUILD_SERVER)
 
   # System import libs resolve inside the toolchain image via LIB
   # (Z:\opt\msvc6.0\VC98\Lib); WS2_32/WINMM are not in CMake's default set.
-  # LIBCMT is the release static CRT the original binary links against —
-  # the CRT is linked, not reversed (run_000.c removed).
+  # LIBCMT is the release static CRT the original binary links against: the
+  # stock library from the toolchain image, resolved via LIB. The CRT is
+  # linked, not reversed.
+  #
+  # It must stay stock. The build previously used a hand-stripped copy under
+  # .scratch/ with 22 objects removed, which was both gitignored (so the build
+  # was unreproducible on a fresh clone) and unnecessary. The objects that
+  # actually have to lose the link are sbheap.obj, validate.obj and mlock.obj,
+  # because they import IsBadWritePtr / FatalAppExitA and the original
+  # server.dll has neither import. The crt_region files sbh_aliases.c,
+  # sbh_pool.c and mlock.c define those symbols locally, so the linker never
+  # pulls the LIBCMT versions and the import set matches the reference.
   target_link_libraries(server_dll PRIVATE
     KERNEL32.lib
     USER32.lib
     WS2_32.lib
     WINMM.lib
-    "${PROJECT_SOURCE_DIR}/.scratch/libcmt_nosbheap/LIBCMT.LIB"
+    LIBCMT.lib
   )
 
   set_property(TARGET server_dll PROPERTY OUTPUT_NAME "server")
@@ -318,11 +332,17 @@ if (MSVC_FOR_DECOMP)
   set(CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL "/incremental:no")
 
   if(TARGET server_dll)
+    # /FORCE:MULTIPLE is still required for exactly two symbols. dllmain.c
+    # calls _CRT_INIT, which the linker resolves from LIBCMT dllcrt0.obj, and
+    # that object also defines ___app_type and __amsg_exit. The game overrides
+    # both (amsg_exit.c is the reversed 0x1001ba71), so they collide. Dropping
+    # the flag fails with LNK2005 on those two until dllcrt0.obj is replaced.
+    # Every other duplicate has been resolved; the link is otherwise clean.
     if(REBREW_DEBUG_INFO)
       target_compile_options(server_dll PRIVATE /Z7)
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/NODEFAULTLIB:LIBCMT" "/ENTRY:DllMain@12")
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12")
     else()
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/NODEFAULTLIB:LIBCMT" "/ENTRY:DllMain@12")
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12")
     endif()
     # Post-link (rebrew postlink --layout layout/server.dll): converge the
     # linked DLL onto the original's layout byte-for-byte, purely from the
