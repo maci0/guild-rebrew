@@ -1,5 +1,4 @@
 // FUNCTION: SERVER 0x10006580
-// CFLAGS: /O2 /Gd /G6 /Oy-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -25,7 +25,6 @@ extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000e7d0
-// SYMBOL: _cm_ExChangeAttribute
 // SIZE: 242
 
 int __cdecl cm_ExChangeAttribute(int cmd, char* result)

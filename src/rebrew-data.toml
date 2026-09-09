@@ -1346,3 +1346,6 @@ name = "g_11766564"
 type = "void **"
 section = ".bss"
 note = "tracked-block (stream) table ptr - __flsall/_fcloseall walk this"
+
+["SERVER.0x10028bdc"]
+section = ".data"

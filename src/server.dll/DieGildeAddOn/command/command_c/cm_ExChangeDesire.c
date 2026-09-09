@@ -45,9 +45,7 @@ extern char s_cm_ExChangeDesire___Invalid_I_1002d0f4[];
  * constant at 0x10025698 (_g_stat_min_d) is 0.0 and 0x10025690
  * (_g_stat_max_d) is 1000.0. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000e9c0
-// SYMBOL: _cm_ExChangeDesire
 // SIZE: 214
 
 int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)

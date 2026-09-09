@@ -6,9 +6,7 @@ extern unsigned int __cdecl ValidateAndAssignOffice(unsigned int*);
  * payload at offset 0x10 to the requesting player. Returns 1 on
  * success, 0 on failure. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000f940
-// SYMBOL: _cm_ExAssignOffice
 // SIZE: 22
 
 int __cdecl cm_ExAssignOffice(void* obj)

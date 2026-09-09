@@ -1,7 +1,6 @@
 /* crc32 - proper C (zlib-style, 8-byte unrolled) */
 
 // FUNCTION: SERVER 0x100011f0
-// SYMBOL: _crc32
 // SIZE: 309
 
 /* CRC table at 0x100241a0 (256 entries, zlib 1.1.3 polynomial). */

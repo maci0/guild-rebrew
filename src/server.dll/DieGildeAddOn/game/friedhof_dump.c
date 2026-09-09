@@ -4,7 +4,6 @@
 
 int g_file_version;
 // FUNCTION: SERVER 0x10010530
-// SYMBOL: _gv_CheckSlotActive
 // SIZE: 113
 
 int __cdecl gv_CheckSlotActive(void* slot, int type)
@@ -33,7 +32,6 @@ int __cdecl gv_CheckSlotActive(void* slot, int type)
 }
 
 // FUNCTION: SERVER 0x10010d10
-// SYMBOL: _UpgradeGraveyardField
 // SIZE: 570
 
 extern void __cdecl m_FreeTracked(void* ptr);
@@ -216,7 +214,6 @@ fail:
 
 
 // FUNCTION: SERVER 0x10011940
-// SYMBOL: _gv_MoveSlotEntry
 // SIZE: 674
 
 extern int g_entity_table_end;

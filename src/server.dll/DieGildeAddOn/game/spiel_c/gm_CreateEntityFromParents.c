@@ -76,7 +76,6 @@
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10018850
-// SYMBOL: _gm_CreateEntityFromParents
 
 #include <stdlib.h>
 #include <string.h>

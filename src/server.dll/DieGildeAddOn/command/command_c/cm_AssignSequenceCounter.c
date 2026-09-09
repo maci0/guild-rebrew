@@ -6,7 +6,6 @@ extern int g_sequence_counter;
  * at offset 0x10, then increments the global counter. */
 
 // FUNCTION: SERVER 0x1000f080
-// SYMBOL: _cm_AssignSequenceCounter
 // SIZE: 26
 
 int __cdecl cm_AssignSequenceCounter(int cmd, char* result)

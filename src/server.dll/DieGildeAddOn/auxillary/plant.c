@@ -4,7 +4,6 @@ int __cdecl find_zone_record(char* base, int x, int y);
  * stride 0x46; terminated by a zero key word. */
 
 // FUNCTION: SERVER 0x10014ee0
-// SYMBOL: _lb_SearchRecordTable
 // SIZE: 69
 
 extern int g_plant_info_table; /* 0x1002d878 */

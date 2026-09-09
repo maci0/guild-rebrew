@@ -24,7 +24,6 @@ extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000cb20
-// SYMBOL: _cm_ChkMoveCredits
 // SIZE: 171
 
 int __cdecl cm_ChkMoveCredits(int cmd, char* result)

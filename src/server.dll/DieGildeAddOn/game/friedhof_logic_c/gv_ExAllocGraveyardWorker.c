@@ -412,7 +412,6 @@
  * inert. */
 
 // FUNCTION: SERVER 0x10011bf0
-// SYMBOL: _gv_ExAllocGraveyardWorker
 
 extern int g_1003546c;
 extern char* g_entity_type_table; /* 0x100A8C30 */

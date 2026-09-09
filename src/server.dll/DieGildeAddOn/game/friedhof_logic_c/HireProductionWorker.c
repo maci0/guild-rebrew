@@ -3,9 +3,7 @@
  * initializes the slot from the requested entity, clears the slot's entry
  * list, and books the production amount when positive. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100111b0
-// SYMBOL: _HireProductionWorker
 
 extern int g_1003546c;
 extern char* g_entity_type_table; /* 0x100A8C30 */

@@ -1,7 +1,6 @@
 /* AllocGraveyardField - proper C */
 
 // FUNCTION: SERVER 0x100109d0
-// SYMBOL: _AllocGraveyardField
 // SIZE: 832
 
 extern int g_1002575c[];

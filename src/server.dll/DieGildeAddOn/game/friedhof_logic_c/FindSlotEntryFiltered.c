@@ -1,7 +1,6 @@
 /* FindSlotEntryFiltered - proper C */
 
 // FUNCTION: SERVER 0x10010710
-// SYMBOL: _FindSlotEntryFiltered
 // SIZE: 320
 
 extern int g_1002577c[];

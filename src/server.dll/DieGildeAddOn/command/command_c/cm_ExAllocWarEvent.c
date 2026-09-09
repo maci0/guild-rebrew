@@ -29,9 +29,7 @@ typedef struct war_event_fields {
  * register-width materialization; storing the constant or the reloaded
  * byte directly at each return folds to an immediate store instead. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10010140
-// SYMBOL: _cm_ExAllocWarEvent
 // SIZE: 280
 
 int __cdecl cm_ExAllocWarEvent(int cmd, char* result)

@@ -43,7 +43,6 @@ extern char* g_item_def_table; /* 0x101de450 */
 extern char* g_query_base; /* 0x100a8c34 */
 extern unsigned int g_entity_table_end; /* 0x1003546c */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10014070
 // ls_ID2Ptr
 // RELOC, 491/491. The entity loop indexes from the record base (rec = e -

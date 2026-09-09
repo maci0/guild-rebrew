@@ -82,7 +82,6 @@ int __cdecl ahm_ApplyColorComponent(char* color_cmd, char* target)
  * given parameters. */
 
 // FUNCTION: SERVER 0x1000c280
-// SYMBOL: _ahm_AllocateEntitySlot
 // SIZE: 130
 
 int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
@@ -184,7 +183,6 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 
 
 // FUNCTION: SERVER 0x1000c3c0
-// SYMBOL: _ahm_ClampFloatValue
 // SIZE: 83
 
 int __cdecl ahm_ClampFloatValue(float* arg1, float* arg2)
@@ -259,7 +257,6 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 char s_ahm_AllocAhmInfo_1002a0f8[] = "ahm_AllocAhmInfo";
 
 // FUNCTION: SERVER 0x1000c4d0
-// SYMBOL: _ahm_AllocAhmInfo
 // SIZE: 295
 
 int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
@@ -292,7 +289,6 @@ int __cdecl ahm_AllocAhmInfo(int cmd_payload, int arg2)
 }
 
 // FUNCTION: SERVER 0x1000c600
-// SYMBOL: _ahm_InitRandomEntity
 // SIZE: 109
 
 char* __cdecl ahm_InitRandomEntity(void)
@@ -347,7 +343,6 @@ int* __cdecl ahm_LookupEntityInTable(int entity_id)
  * Returns the building type category for alchemy purposes. */
 
 // FUNCTION: SERVER 0x1000c6a0
-// SYMBOL: _ahm_QueryEntityBuildingType
 // SIZE: 102
 
 int __cdecl ahm_QueryEntityBuildingType(int arg1)

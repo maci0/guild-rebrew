@@ -1,7 +1,6 @@
 /* amt_fio_LoadAemter - loads the office slot table from a save stream. */
 
 // FUNCTION: SERVER 0x1000baf0
-// SYMBOL: _amt_fio_LoadAemter
 // SIZE: 606
 
 /* Office slot table entry - 0x18 bytes per slot. */

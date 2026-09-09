@@ -1,8 +1,6 @@
 /* gv_Free3Fields - proper C */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10010f50
-// SYMBOL: _gv_Free3Fields
 // SIZE: 66
 
 extern void __cdecl m_FreeTracked(void* ptr);

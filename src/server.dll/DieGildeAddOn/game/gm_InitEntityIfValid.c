@@ -1,7 +1,6 @@
 /* gm_InitEntityIfValid - proper C */
 
 // FUNCTION: SERVER 0x10017f90
-// SYMBOL: _gm_InitEntityIfValid
 // SIZE: 23
 
 int __cdecl amt_ClearEntityLinks(int arg1); /* 0x1000b990 */

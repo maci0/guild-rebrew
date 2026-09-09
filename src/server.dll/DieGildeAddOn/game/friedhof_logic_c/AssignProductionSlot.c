@@ -1,8 +1,6 @@
 /* AssignProductionSlot - fills a production slot entry from the owner entity. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10010fa0
-// SYMBOL: _AssignProductionSlot
 // SIZE: 525
 
 extern int g_1003546c;

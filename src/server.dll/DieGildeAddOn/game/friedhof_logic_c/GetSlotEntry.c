@@ -1,9 +1,7 @@
 /* GetSlotEntry - returns the active slot entry of a worker for the given
  * work type and job index, or NULL when the request is invalid. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100105b0
-// SYMBOL: _GetSlotEntry
 
 extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
 

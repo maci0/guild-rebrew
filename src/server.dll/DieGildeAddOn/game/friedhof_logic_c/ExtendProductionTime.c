@@ -1,7 +1,6 @@
 /* ExtendProductionTime - proper C */
 
 // FUNCTION: SERVER 0x100113b0
-// SYMBOL: _ExtendProductionTime
 // SIZE: 390
 
 extern int g_1003546c;

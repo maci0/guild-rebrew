@@ -2,7 +2,6 @@
  * building's production time, clamped to [0, 0xff]. */
 
 // FUNCTION: SERVER 0x10011790
-// SYMBOL: _UpdateProductionProgress
 
 extern int g_1003546c;
 extern char* g_entity_type_table; /* 0x100A8C30 */

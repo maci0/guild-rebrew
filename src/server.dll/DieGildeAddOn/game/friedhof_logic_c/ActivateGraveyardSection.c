@@ -1,7 +1,6 @@
 /* ActivateGraveyardSection - proper C */
 
 // FUNCTION: SERVER 0x10011660
-// SYMBOL: _ActivateGraveyardSection
 // SIZE: 297
 
 extern int g_1003546c;

@@ -19,9 +19,7 @@ extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
  * than caching the masked value in a local; the cached form costs
  * one instruction each and scored 126/208. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000eaa0
-// SYMBOL: _cm_ExChangeBits
 // SIZE: 208
 
 int __cdecl cm_ExChangeBits(int cmd, char* result)

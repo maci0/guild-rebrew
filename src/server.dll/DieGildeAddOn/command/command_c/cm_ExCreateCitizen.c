@@ -21,7 +21,6 @@ char s_cm_ExAllocCharacter___gm_AllocSp_1002d364[] = "cm_ExAllocCharacter():gm_A
  * building, and publishes the new entity id into the player
  * slot at offset 0x264200. Writes result status into result[0]. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000f980
 
 int __cdecl cm_ExCreateCitizen(int cmd, char* result)

@@ -1,8 +1,6 @@
 /* lb_HandleEntitySync - proper C */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10014bf0
-// SYMBOL: _lb_HandleEntitySync
 // SIZE: 163
 
 #include <string.h>

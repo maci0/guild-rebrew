@@ -43,7 +43,6 @@ extern unsigned char g_connections[]; /* 0x101deb00 */
  * Handles Ctrl+C and close events. Always returns 0. */
 
 // FUNCTION: SERVER 0x10009310
-// SYMBOL: _exit_handler@12
 // SIZE: 6
 int __stdcall exit_handler(int a, int b, int c)
 {

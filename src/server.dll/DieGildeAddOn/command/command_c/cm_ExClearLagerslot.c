@@ -24,7 +24,6 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000e690
-// SYMBOL: _cm_ExClearLagerslot
 // SIZE: 191
 
 int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)

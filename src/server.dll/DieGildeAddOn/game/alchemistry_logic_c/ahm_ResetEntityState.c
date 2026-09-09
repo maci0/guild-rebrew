@@ -7,7 +7,6 @@
  * link counter. */
 
 // FUNCTION: SERVER 0x1000BD50
-// SYMBOL: _ahm_ResetEntityState
 // SIZE: 78
 
 void __cdecl ahm_ResetEntityState(void* a)
@@ -27,7 +26,6 @@ void __cdecl ahm_ResetEntityState(void* a)
  * (0x1e) and the record carries an allocated data pointer. */
 
 // FUNCTION: SERVER 0x1000BDA0
-// SYMBOL: _ahm_CheckFlag
 // SIZE: 70
 
 extern char* g_entity_type_table;

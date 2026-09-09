@@ -2,9 +2,7 @@
  * resolves the target entity, checks it is an active graveyard field,
  * then spawns the requested number of graveyard entities. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10011890
-// SYMBOL: _ValidateEntityAction
 
 extern int g_1003546c;
 extern char* g_entity_type_table; /* 0x100A8C30 */

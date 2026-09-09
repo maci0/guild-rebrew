@@ -11,9 +11,7 @@
  * memset(): the compiler unrolls it to the same `rep stosd`, but with the
  * setup instruction order the reference uses. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100122e0
-// SYMBOL: _InitNewDynastyEntity
 
 extern int __cdecl rand_mod(int n);
 extern int __cdecl _ftol(void);

@@ -39,7 +39,6 @@ void* __cdecl gm_LookupEntityRecordById(int entityId);
  * byte.  Returns 1 when valid, 0 otherwise. */
 
 // FUNCTION: SERVER 0x1000b1c0
-// SYMBOL: _amt_ValidateOfficeCandidate
 // SIZE: 205
 
 int __cdecl amt_ValidateOfficeCandidate(int* arg1)
@@ -92,7 +91,6 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
  * links. */
 
 // FUNCTION: SERVER 0x1000b290
-// SYMBOL: _ValidateAndAssignOffice
 // SIZE: 425
 //   RELOC 425/425, obj 425, 0 structural and 0 register diffs.  The shape is
 //   load-bearing in four places; each was needed to get here and each still
@@ -201,7 +199,6 @@ unsigned int __cdecl ValidateAndAssignOffice(unsigned int* arg1)
  * Returns 1 when valid, 0 otherwise. */
 
 // FUNCTION: SERVER 0x1000b440
-// SYMBOL: _amt_ValidateCommand
 // SIZE: 133
 
 int __cdecl amt_ValidateCommand(char* arg1)

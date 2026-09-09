@@ -1,7 +1,6 @@
 /* SpawnGraveyardEntities - proper C */
 
 // FUNCTION: SERVER 0x10010850
-// SYMBOL: _SpawnGraveyardEntities
 // SIZE: 370
 
 extern char* g_entity_type_table;

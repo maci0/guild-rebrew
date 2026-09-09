@@ -1,7 +1,6 @@
 /* ReplaceProductionWorker - proper C */
 
 // FUNCTION: SERVER 0x10011540
-// SYMBOL: _ReplaceProductionWorker
 // SIZE: 288
 
 extern char* g_entity_type_table;
