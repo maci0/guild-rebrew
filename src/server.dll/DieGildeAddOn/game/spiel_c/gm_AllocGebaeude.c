@@ -145,6 +145,8 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
 char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 {
 	char* geb;
+	/* 0x410-byte locals block: 0x400 log buffer + 4 pointer/int slots. */
+	// SIZE 0x410
 	struct {
 		char msg[0x400];
 		char* dest;

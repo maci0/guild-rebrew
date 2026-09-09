@@ -151,7 +151,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 
 // FUNCTION: SERVER 0x10019720
 // gm_CalculateProductionValue
-//   NEAR_MATCHING: 386/396 matched, 4 differing instructions out of 123.
+//   NEAR_MATCHING 386/396 matched, 4 differing instructions out of 123.
 //   Compiled size is 396 bytes, equal to the target's 396 bytes of code; the
 //   `size = 400` in the metadata is the padded slot, not a code-size shortfall.
 //

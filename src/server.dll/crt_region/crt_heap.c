@@ -1,4 +1,3 @@
-// CFLAGS: /O1 /Gd
 // FUNCTION: SERVER 0x1001d3c8
 #include <windows.h>
 
@@ -20,6 +19,7 @@ extern void* g_10031b78;   /* 0x10031b78 - block allocator region-list head */
 
 /* 0x14-byte pool region descriptor: base = 1MB VirtualAlloc'd region,
  * header = separately heap-allocated region struct. */
+// SIZE 0x14
 typedef struct
 {
     int field0;
@@ -86,7 +86,6 @@ void __cdecl __heap_term(void)
     HeapDestroy(g_1176644c);
 }
 
-// CFLAGS: /O1 /Gd
 // FUNCTION: SERVER 0x1001d280
 
 /* _heap_select: returns the allocator mode (3=pool/sbh, 2=block, 1=default).
