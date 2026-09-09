@@ -106,13 +106,11 @@
  * gm_AllocBuildingContents correction below: this body's object is already
  * exactly 1078, so any growth reads as a regression.
  *
- * Status note: `rebrew test` and `rebrew verify` print STUB here, but that is
- * only the label those tools use for a same-size compile that does not match
- * ("NEAR_MATCHING/STUB: N byte diffs", rebrew/compile.py).  The recorded
- * metadata status in src/rebrew-functions.toml is PROVEN, and `rebrew prove`
- * refuses to run precisely because of it ("Status is 'PROVEN', expected
- * NEAR_MATCHING or SIZE_MISMATCH"), with or without --watch-va.  There is no
- * STUB status to clear on this function. */
+ * Status note: `rebrew test` and `rebrew verify` report STUB, and the
+ * metadata status in src/rebrew-functions.toml is STUB: the old PROVEN claim
+ * predated the 2026-09 body rewrites and was demoted by verify per the
+ * documented rule once the bytes no longer backed it.  See the BLOCKER
+ * field (set via `rebrew blocker set 0x100174d0`) for the wall. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100174d0

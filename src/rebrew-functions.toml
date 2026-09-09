@@ -1132,6 +1132,7 @@ size = 1088
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 status = "STUB"
 ghidra = "gm_AllocGebaeude"
+blocker = "alignment-prefixed block-fill prelude (34B at 0x10017609: lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx; jle; three rep runs) is unreproducible in pure C (docs/msvc6-allocator.md Finding 19) and shifts every downstream register. obj already equals the target's 1078, so the two real semantic fixes (in-loop gm_AllocBuildingContents for prototype types 2/6 in the comp&0x8000 arm; switch on spilled s.type_id not geb[0]) each grow the object and score as regressions — parked at 418/1078."
 
 ["SERVER.0x10017910"]
 size = 145
