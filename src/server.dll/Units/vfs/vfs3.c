@@ -40,9 +40,9 @@ int __cdecl vfs_DestroyEntity(char* entity)
 		return -102;
 	}
 	if (*(int*) (entity + 0x7c)) {
-		vfs_EntityCleanup(entity);
+		vfs_CleanupObject(entity);
 	}
-	vfs_StreamClose(*(int*) entity);
+	fflush((FILE*) *(int*) entity);
 	free(entity);
 	return 0;
 }

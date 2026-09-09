@@ -4,7 +4,7 @@
 // Not compiled - annotation-only markers for reccmp matching
 
 // LIBRARY: SERVER 0x1001A140
-// _getpid
+// srv_SeedRandomWithTime
 // SIZE: 14
 
 // LIBRARY: SERVER 0x1001A18A
@@ -37,8 +37,12 @@
 // LIBRARY: SERVER 0x1001A567
 // _time
 
-// LIBRARY: SERVER 0x1001A681
+// LIBRARY: SERVER 0x1001A670
 // _exit
+// SIZE: 17
+
+// LIBRARY: SERVER 0x1001A681
+// __exit
 // SIZE: 17
 
 // LIBRARY: SERVER 0x1001A692
@@ -50,22 +54,26 @@
 // LIBRARY: SERVER 0x1001A7EE
 // ___doserrno
 
+// LIBRARY: SERVER 0x1001A7F7
+// _malloc
+// SIZE: 18
+
 // LIBRARY: SERVER 0x1001A809
 // __nh_malloc
 
 // LIBRARY: SERVER 0x1001A835
-// _malloc
+// __malloc
 
 // LIBRARY: SERVER 0x1001A960
 // _fwrite
 // SIZE: 266
 
 // LIBRARY: SERVER 0x1001AA6A
-// fread
+// _fread
 // SIZE: 47
 
 // LIBRARY: SERVER 0x1001AA99
-// _fread
+// __fread
 // SIZE: 232
 
 // LIBRARY: SERVER 0x1001AB81
@@ -199,11 +207,11 @@
 // SIZE: 194
 
 // LIBRARY: SERVER 0x1001D036
-// __lock
+// __mlock
 // SIZE: 97
 
 // LIBRARY: SERVER 0x1001D097
-// __unlock
+// __munlock
 // SIZE: 21
 
 // LIBRARY: SERVER 0x1001D0AC

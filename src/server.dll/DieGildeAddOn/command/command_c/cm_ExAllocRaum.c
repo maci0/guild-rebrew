@@ -9,9 +9,9 @@
 
 // SIZE 0x264264
 typedef struct player_slot {
-	char gap_0000[0x2641fc];
+	char gap_0000[0x264204];
 	int data;
-	char gap_264200[0x64];
+	char gap_264208[0x5c];
 } player_slot;
 
 // SIZE 0x30

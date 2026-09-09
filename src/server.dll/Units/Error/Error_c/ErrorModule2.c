@@ -12,14 +12,11 @@ char* __cdecl GetDebugRecordByIndex();
 void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 extern int g_log_level_table[];
 extern unsigned int g_log_mode_flags;
-extern int g_console_handle;
+extern int g_log_file_handle;
 extern int g_owner_window;
 extern void (*g_panic_callback)(void);
-extern char g_log_message_buffer;
+extern char g_log_message_buffer[];
 extern int g_handler_started;
-extern int g_log_mode_flags;
-extern char g_msg_buf[];
-void __cdecl write_log(char*, int, char*);
 
 /* Dispatches a log message to the configured output handlers
  * (file, debugger, etc.). Routes based on severity level. */
@@ -38,7 +35,7 @@ void __cdecl ShutdownLogAndErrorHandler(void)
 	}
 	if (g_log_mode_flags & 8) {
 		FreeConsole();
-		g_console_handle = 0;
+		g_log_file_handle = 0;
 	}
 	g_panic_callback = 0;
 	g_owner_window = 0;
@@ -51,7 +48,7 @@ void __cdecl ShutdownLogAndErrorHandler(void)
 
 // FUNCTION: SERVER 0x10003520
 // ReportFatalError
-__declspec(noreturn) void __cdecl _exit(int);
+__declspec(noreturn) void __cdecl exit(int);
 
 void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* message)
 {
@@ -59,7 +56,7 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 	int dialogResult;
 
 	if (g_panic_callback == 0) {
-		MessageBoxA((HWND) 0, "ERROR Handler has not been started!", "Error!", 0x30);
+		MessageBoxA((HWND) 0, "ERROR-Handler has not been started...", "Error!", 0x30);
 		return;
 	}
 	flags = g_log_mode_flags;
@@ -67,22 +64,22 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 		return;
 	}
 	if ((flags & 0xf) != 0) {
-		sprintf(&g_log_message_buffer, "FATAL ERROR (%s:%lu):\n%s\n", modulePath, lineNumber, message);
+		sprintf(g_log_message_buffer, "FATAL ERROR (%s:%lu):\n%s\n", modulePath, lineNumber, message);
 		flags = g_log_mode_flags;
 	}
 	if ((flags & 0xd) != 0) {
-		DispatchLogOutput(&g_log_message_buffer, flags, 1);
+		DispatchLogOutput(g_log_message_buffer, flags, 1);
 		flags = g_log_mode_flags;
 	}
 	if ((flags & 2) == 0) {
 		return;
 	}
-	dialogResult = MessageBoxA((HWND) g_owner_window, &g_log_message_buffer, "Fatal Error! Abort Program?", 0x124);
+	dialogResult = MessageBoxA((HWND) g_owner_window, g_log_message_buffer, "Fatal Error! Abort Program?", 0x124);
 	if (dialogResult != 6) {
 		return;
 	}
 	g_panic_callback();
-	_exit(0xf);
+	exit(0xf);
 }
 
 /* Reports a non-fatal message through the logging system.
@@ -101,8 +98,8 @@ void __cdecl ReportMessage(char* msg)
 		return;
 	}
 	if (g_log_mode_flags & 0x0d) {
-		sprintf(g_msg_buf, "MESSAGE: %s\n", msg);
-		write_log(g_msg_buf, g_log_mode_flags, (char*) 1);
+		sprintf(g_log_message_buffer, "MESSAGE: %s\n", msg);
+		DispatchLogOutput(g_log_message_buffer, g_log_mode_flags, 1);
 	}
 	if (g_log_mode_flags & 2) {
 		MessageBoxA(0, msg, "Message:", 0x1030);

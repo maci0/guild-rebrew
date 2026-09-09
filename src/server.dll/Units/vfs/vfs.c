@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* __cdecl vfs_GetErrnoPtr(void);
+int* __cdecl _errno(void);
 int __cdecl vfs_WriteBufferLocked(void*, int, int, int);
 void __cdecl free(void*);
 int __cdecl vfs_FreeGameSubobject(void*);
@@ -43,9 +43,9 @@ unsigned int __cdecl vfs_GetByte(int* stream)
 		return (unsigned int) -1;
 	}
 	if (stream[1] == 0) {
-		errno_ptr = vfs_GetErrnoPtr();
+		errno_ptr = _errno();
 		*errno_ptr = 0;
-		bytes_read = vfs_WriteBufferLocked((void*) stream[0x11], 1, 0x4000, stream[0x10]);
+		bytes_read = (int) fread((void*) stream[0x11], 1, 0x4000, (FILE*) stream[0x10]);
 		stream[1] = bytes_read;
 		if (bytes_read == 0) {
 			stream[0xf] = 1;
@@ -85,16 +85,16 @@ int __cdecl vfs_CloseStream(void* stream)
 	}
 	if (*(int*) ((int) stream + 0x1c) != 0) {
 		if (*(char*) ((int) stream + 0x5c) == 'w') {
-			result = vfs_FreeGameSubobject(stream);
+			result = deflateEnd((void*) stream);
 		}
 		else if (*(char*) ((int) stream + 0x5c) == 'r') {
-			result = vfs_CleanupSubobject(stream);
+			result = inflateEnd((void*) stream);
 		}
 	}
 	if (*(FILE**) ((int) stream + 0x40) != 0) {
-		close_result = fclose(*(FILE**) ((int) stream + 0x40));
+		close_result = fflush(*(FILE**) ((int) stream + 0x40));
 		if (close_result != 0) {
-			errno_ptr = vfs_GetErrnoPtr();
+			errno_ptr = _errno();
 			if (*errno_ptr != 0x1d) {
 				result = -1;
 			}

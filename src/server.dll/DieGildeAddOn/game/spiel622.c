@@ -839,17 +839,17 @@ int __cdecl gm_GetMsgField(char* msg, char* pkt)
 	return *(int*) (pkt + 0xe);
 }
 
+// FUNCTION: SERVER 0x10019d00
+// compute_size
 int __cdecl compute_size(char* pkt)
 {
-	int count;
-	count = *(int*) (pkt + 0xe);
 	if (*(short*) pkt == 0x1dd) {
-		return (count + 2) * 5;
+		return (*(int*) (pkt + 0xe) + 2) * 5;
 	}
-	if (count == 3) {
+	if (*(int*) (pkt + 0xe) == 3) {
 		return 0x50;
 	}
-	return count * 0x14;
+	return *(int*) (pkt + 0xe) * 0x14;
 }
 
 /* Checks if an object can be produced (Kann Objekt Hergestellt).

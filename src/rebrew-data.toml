@@ -6,13 +6,13 @@ type = "int"
 
 ["SERVER.0x101deaec"]
 note = "listen socket"
-name = "g_listen_socket"
+name = "g_net_socket"
 section = ".data"
 type = "int"
 
 ["SERVER.0x101deb00"]
 note = "first player slot (stride 0x264264 bytes)"
-name = "g_player_slot_0"
+name = "g_connections"
 section = ".data"
 type = "unsigned int"
 
@@ -320,7 +320,7 @@ section = ".data"
 type = "char"
 
 ["SERVER.0x1002d4ec"]
-name = "g_save_version"
+name = "g_file_version"
 section = ".data"
 type = "int"
 
@@ -1186,13 +1186,13 @@ section = ".bss"
 note = "pool: region scan cursor (ptr into array)"
 
 ["SERVER.0x11766440"]
-name = "g_11766440"
+name = "__sbh_cntHeaderList"
 type = "int"
 section = ".bss"
 note = "pool: region count"
 
 ["SERVER.0x11766444"]
-name = "g_11766444"
+name = "__sbh_pHeaderList"
 type = "void *"
 section = ".bss"
 note = "pool: region descriptor array"
@@ -1379,3 +1379,133 @@ note = "tracked-block (stream) table ptr - __flsall/_fcloseall walk this"
 
 ["SERVER.0x10028bdc"]
 section = ".data"
+
+["SERVER.0x1002d878"]
+name = "g_plant_info_table"
+section = ".data"
+type = "unsigned char"
+
+["SERVER.0x10030b70"]
+name = "g_entity_id_counter"
+section = ".data"
+type = "int"
+
+["SERVER.0x10035408"]
+name = "g_sequence_counter"
+section = ".data"
+type = "int"
+
+["SERVER.0x1176408c"]
+name = "g_chain_id_start"
+section = ".bss"
+type = "int"
+
+["SERVER.0x10025690"]
+name = "_g_stat_max_d"
+section = ".rdata"
+type = "double"
+
+["SERVER.0x10025698"]
+name = "_g_stat_min_d"
+section = ".rdata"
+type = "double"
+
+["SERVER.0x100358a4"]
+name = "g_entity_id_field"
+section = ".data"
+type = "int"
+
+["SERVER.0x100256a4"]
+name = "g_color_scale"
+section = ".rdata"
+type = "float"
+
+["SERVER.0x10025718"]
+name = "g_game_speed_table"
+section = ".rdata"
+type = "int"
+
+["SERVER.0x1002c3f0"]
+name = "g_game_speed_value"
+section = ".data"
+type = "int"
+
+["SERVER.0x1002c3f4"]
+name = "g_game_speed_index"
+section = ".data"
+type = "int"
+
+["SERVER.0x100a8c94"]
+name = "g_entity_slot_table"
+section = ".data"
+type = "unsigned short"
+
+["SERVER.0x11764084"]
+name = "g_max_players"
+section = ".bss"
+type = "int"
+
+["SERVER.0x100256d0"]
+name = "dScaleFactor"
+section = ".rdata"
+type = "double"
+
+["SERVER.0x100257c0"]
+name = "g_const_57c0"
+section = ".rdata"
+type = "float"
+
+["SERVER.0x100256a8"]
+name = "g_float_const_a8"
+section = ".rdata"
+type = "float"
+
+["SERVER.0x1009aca2"]
+name = "g_dynamic_entities"
+section = ".data"
+type = "unsigned char"
+
+["SERVER.0x101de460"]
+name = "g_save_info"
+section = ".data"
+type = "int"
+
+["SERVER.0x11764094"]
+name = "g_thread_handle"
+section = ".bss"
+type = "void *"
+
+["SERVER.0x10034680"]
+name = "g_handler_started"
+section = ".data"
+type = "int"
+
+["SERVER.0x10034618"]
+name = "g_log_mode_flags"
+section = ".data"
+type = "unsigned int"
+
+["SERVER.0x10034610"]
+name = "g_panic_callback"
+section = ".data"
+type = "void (*)(void)"
+
+["SERVER.0x117660e0"]
+name = "g_owner_window"
+section = ".bss"
+type = "int"
+
+["SERVER.0x117640e0"]
+name = "g_log_message_buffer"
+section = ".bss"
+type = "char"
+
+["SERVER.0x1002d4f0"]
+name = "g_save_header_tail"
+section = ".data"
+type = "char"
+
+["SERVER.0x100241a0"]
+name = "g_crc_table_241a0"
+section = ".rdata"
+type = "unsigned int"

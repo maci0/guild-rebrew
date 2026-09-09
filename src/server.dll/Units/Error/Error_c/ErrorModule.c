@@ -12,14 +12,11 @@ char* __cdecl GetDebugRecordByIndex();
 void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
 extern int g_log_level_table[];
 extern unsigned int g_log_mode_flags;
-extern int g_console_handle;
+extern int g_log_file_handle;
 extern int g_owner_window;
 extern void (*g_panic_callback)(void);
-extern char g_log_message_buffer;
+extern char g_log_message_buffer[];
 extern int g_handler_started;
-extern int g_log_mode_flags;
-extern char g_msg_buf[];
-void __cdecl write_log(char*, int, char*);
 
 /* Dispatches a log message to the configured output handlers
  * (file, debugger, etc.). Routes based on severity level. */

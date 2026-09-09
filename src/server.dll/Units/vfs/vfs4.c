@@ -56,7 +56,7 @@ int __cdecl vfs_CleanupObject(char* obj)
 	}
 	*(int*) sub = 0;
 	if (*(int*) (sub + 0x40)) {
-		vfs_FreeSubobj(sub + 4);
+		inflateEnd((void*) (sub + 4));
 	}
 	*(int*) (sub + 0x40) = 0;
 	free(sub);
@@ -74,8 +74,6 @@ int __cdecl vfs_CleanupObject(char* obj)
 
 extern int g_10034678;
 extern int g_10034670;
-extern int __cdecl destroy_entity(void* obj);
-extern int __cdecl read_uint32_be(void* obj);
 extern int __cdecl fcn_1001a18a(void* obj);
 
 int __cdecl CloseVfsStream(void* stream)
@@ -120,16 +118,16 @@ int __cdecl CloseVfsStream(void* stream)
 				result = *(unsigned int*) ((char*) stream + 0x114);
 			}
 		} else {
-			if (*(void**) ((char*) stream + 0x100) != 0) {
-				if ((*(unsigned char*) ((char*) stream + 0x13c) & 1) && (*(unsigned char*) ((char*) stream + 0x13c) & 0x10)) {
-					vfs_CleanupObject(*(void**) ((char*) stream + 0x100));
-					destroy_entity(*(void**) ((char*) stream + 0x100));
-				} else if (*(unsigned char*) ((char*) stream + 0x13c) & 8) {
-					read_uint32_be(*(void**) ((char*) stream + 0x100));
-				} else {
-					fcn_1001a18a(*(void**) ((char*) stream + 0x100));
+				if (*(void**) ((char*) stream + 0x100) != 0) {
+					if ((*(unsigned char*) ((char*) stream + 0x13c) & 1) && (*(unsigned char*) ((char*) stream + 0x13c) & 0x10)) {
+						vfs_CleanupObject(*(void**) ((char*) stream + 0x100));
+						vfs_DestroyEntity(*(void**) ((char*) stream + 0x100));
+					} else if (*(unsigned char*) ((char*) stream + 0x13c) & 8) {
+						vfs_FlushAndClose((int) *(void**) ((char*) stream + 0x100));
+					} else {
+						fcn_1001a18a(*(void**) ((char*) stream + 0x100));
+					}
 				}
-			}
 		}
 		g_10034678--;
 		m_PoolFree((int*) 0x10034670, stream);

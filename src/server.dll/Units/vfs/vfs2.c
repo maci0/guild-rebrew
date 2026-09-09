@@ -5,13 +5,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* __cdecl vfs_GetErrnoPtr(void);
 int __cdecl vfs_WriteBufferLocked(void*, int, int, int);
 void __cdecl free(void*);
 int __cdecl vfs_FreeGameSubobject(void*);
 int __cdecl vfs_CleanupSubobject(void*);
 int __cdecl deflate(void*, int);  /* zlib deflate — the original calls it directly */
-int __cdecl vfs_LockedFwrite(void*, int, int, void*);
+int __cdecl _crt_locked_call4a(void*, int, int, void*);
+int __cdecl crt_locked_putc(int, void*);
 unsigned int __cdecl vfs_GetByte(int*);
 unsigned int __cdecl vfs_FlushStream(int, int);
 void __cdecl vfs_WriteUint32LE(int, unsigned int);
@@ -48,7 +48,7 @@ unsigned int __cdecl vfs_FlushStream(int stream, int dest)
 	do {
 		remaining = 0x4000 - *(int*) (stream + 0x10);
 		if (remaining != 0) {
-			write_result = vfs_LockedFwrite(*(void**) (stream + 0x48), 1, remaining, *(void**) (stream + 0x40));
+			write_result = _crt_locked_call4a(*(void**) (stream + 0x48), 1, remaining, *(void**) (stream + 0x40));
 			if (write_result != remaining) {
 				*(int*) (stream + 0x38) = -1;
 				return (unsigned int) -1;
@@ -132,7 +132,7 @@ void __cdecl vfs_WriteUint32LE(int stream, unsigned int value)
 
 	i = 4;
 	do {
-		putc(value & 0xff, (FILE*) stream);
+		crt_locked_putc(value & 0xff, (void*) stream);
 		value = value >> 8;
 		i = i - 1;
 	} while (i != 0);

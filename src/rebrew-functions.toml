@@ -1755,3 +1755,9 @@ status = "MISSING_SIZE"
 size = 84
 cflags = "/O1 /Gd"
 status = "RELOC"
+
+["SERVER.0x10019d00"]
+size = 48
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-09T17:28:03+00:00"

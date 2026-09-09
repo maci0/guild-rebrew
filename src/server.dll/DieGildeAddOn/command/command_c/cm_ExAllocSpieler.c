@@ -120,7 +120,7 @@ int __cdecl cm_ExAllocSpieler(int cmd, char* result)
 		);
 		return 1;
 	}
-	*(int*) (g_connections + (uint) *(uchar*) (cmd + 3) * 0x264264 + 0x2641f8) =
+	*(int*) (g_connections + (uint) *(uchar*) (cmd + 3) * 0x264264 + 0x264200) =
 		*(int*) (g_slot_table + entity_index * 0x21c + 4);
 	if (result != (char*) 0) {
 		entity_ptr = g_slot_table + entity_index * 0x21c;
