@@ -361,7 +361,23 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //   The `unsigned char` second parameter in the forward declaration above is
 //   load-bearing for gm_SumBuildingProductionValues (0x100198b0, 218/355) and
 //   gm_EntityQuerySum (0x10019a70, RELOC); widening it to `int` regresses both.
-
+//
+//   Residual re-audit 2026-09-09 (391/396, one transposition at 228-232:
+//   target `fxch st(1); cmp byte ptr [esi],0x17`, candidate the reverse).
+//   22 new probes across five categories, all 391 or worse; the order is a
+//   pure msvc6 scheduler choice with no C89 spelling:
+//   - per-statement #pragma is impossible inside a function (C2156); the only
+//     scope is the whole function, and dropping "a" regresses the epilogue
+//     (383) while leaving the transposition intact.
+//   - every statement/sequence split around the merge is inert at 391.
+//   - scaling through the p2_wide double moves the [esi] access into the
+//     target slot but splits it into mov al/cmp al (obj 397, 255).
+//   - a volatile value store (387) puts the fxch first but sinks the folded
+//     cmp past fmulp+fstp: plain store lets the load hoist fully to slot 1,
+//     volatile blocks it entirely, the target needs the partial hoist.
+//   - duplicating the 57d0 scale into both arms grows obj to 403.
+//   Cross-binary: only 5 fxch in the whole .text; no other function shows the
+//   folded-cmp-after-fxch order, so there is no C precedent to copy.
 #pragma optimize("a", on)
 double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 {
