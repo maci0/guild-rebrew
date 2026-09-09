@@ -344,6 +344,16 @@ name = "g_log_format_table"
 section = ".data"
 type = "char"
 
+["SERVER.0x100270e4"]
+name = "g_log_newline"
+section = ".data"
+type = "char"
+
+["SERVER.0x100270e8"]
+name = "g_log_default_name"
+section = ".data"
+type = "char"
+
 ["SERVER.0x10034624"]
 name = "g_array_count"
 section = ".data"
@@ -633,12 +643,12 @@ type = "void*"
 section = ".idata"
 
 ["SERVER.0x10024178"]
-name = "__imp__WSACleanup@0"
+name = "__imp__WSAStartup@8"
 type = "void*"
 section = ".idata"
 
 ["SERVER.0x1002417c"]
-name = "__imp__WSAStartup@8"
+name = "__imp__WSACleanup@0"
 type = "void*"
 section = ".idata"
 
@@ -871,6 +881,11 @@ name = "__imp__GetCPInfo@8"
 type = "void*"
 section = ".idata"
 
+["SERVER.0x100240c0"]
+name = "__imp__WriteConsoleA@20"
+type = "void*"
+section = ".idata"
+
 ["SERVER.0x100240c4"]
 name = "__imp__ExitProcess@4"
 type = "void*"
@@ -1006,6 +1021,11 @@ name = "__imp__MessageBoxA@16"
 type = "void*"
 section = ".idata"
 
+["SERVER.0x1002414c"]
+name = "__imp__GetWindowTextA@12"
+type = "void*"
+section = ".idata"
+
 ["SERVER.0x10024154"]
 name = "__imp__timeGetTime@0"
 type = "void*"
@@ -1033,6 +1053,16 @@ section = ".data"
 
 ["SERVER.0x1002733c"]
 name = "s_LogFile_has_been_deleted__1002733c"
+type = "char"
+section = ".data"
+
+["SERVER.0x10027314"]
+name = "g_crash_newline"
+type = "char"
+section = ".data"
+
+["SERVER.0x10027328"]
+name = "g_crash_space"
 type = "char"
 section = ".data"
 

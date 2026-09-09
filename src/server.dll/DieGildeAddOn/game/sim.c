@@ -10,14 +10,14 @@ extern unsigned char g_slot_table[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
 /* Simulation entity records are 0x21c bytes, based at g_slot_table
- * (0x10035800).  Fields used here: +0xa0 slot id (0xffff = free),
- * +0xa2 state byte, +0xa4 entity id, +0xa8 usable flag, +0xaa weight,
- * +0xc0 float threshold, +0x108 five linked children.
+ * (0x100358a0).  Fields used here: +0x00 slot id (0xffff = free),
+ * +0x02 state byte, +0x04 entity id, +0x08 usable flag, +0x0a weight,
+ * +0x20 float threshold, +0x68 five linked children.
  *
  * Records are addressed by byte offset into g_slot_table rather than
  * through a struct pointer.  Subscripting the array keeps the pure record
  * offset in a register and leaves the symbol as each access's displacement
- * (`lea ecx,[eax+eax*8]` / `shl ecx,2` / `cmp word[ecx+g_slot_table+0xa0]`),
+ * (`lea ecx,[eax+eax*8]` / `shl ecx,2` / `cmp word[ecx+g_slot_table+0x0]`),
  * which is what the target does.  A struct pointer built from the address
  * of a scalar folds the final *4 into the SIB scale and adds the symbol
  * into the pointer instead, which cost every access in both scan loops. */
@@ -56,16 +56,16 @@ unsigned short __cdecl FindAndMatchParents(unsigned int param)
 		rnd = gm_RandomMod(i);
 		parentA = rnd;
 		off = SIM_ENT_OFF(rnd);
-		if (*(unsigned short*) &g_slot_table[off + 0xa0] == 0xffff) {
+		if (*(unsigned short*) &g_slot_table[off] == 0xffff) {
 			i = i * 3 / 4;
 			continue;
 		}
-		f1 = (float) *(unsigned short*) &g_slot_table[off + 0xaa];
-		if (g_slot_table[off + 0xa2] < 6 && f1 >= *(float*) &g_slot_table[off + 0xc0] &&
-		    g_slot_table[off + 0xa8] != 0) {
+		f1 = (float) *(unsigned short*) &g_slot_table[off + 0xa];
+		if (g_slot_table[off + 0x2] < 6 && f1 >= *(float*) &g_slot_table[off + 0x20] &&
+		    g_slot_table[off + 0x8] != 0) {
 			count = 0;
 			for (k = 0; k < 5; k++) {
-				if (((int*) &g_slot_table[off + 0x108])[k] != -1) {
+				if (((int*) &g_slot_table[off + 0x68])[k] != -1) {
 					count++;
 				}
 			}
@@ -85,16 +85,16 @@ done1:
 		rnd = gm_RandomMod(i);
 		parentB = rnd;
 		off = SIM_ENT_OFF(rnd);
-		if (*(unsigned short*) &g_slot_table[off + 0xa0] == 0xffff) {
+		if (*(unsigned short*) &g_slot_table[off] == 0xffff) {
 			i = i * 3 / 4;
 			continue;
 		}
-		f2 = (float) *(unsigned short*) &g_slot_table[off + 0xaa];
-		if (g_slot_table[off + 0xa2] < 6 && f2 >= *(float*) &g_slot_table[off + 0xc0] &&
-		    g_slot_table[off + 0xa8] != 0) {
+		f2 = (float) *(unsigned short*) &g_slot_table[off + 0xa];
+		if (g_slot_table[off + 0x2] < 6 && f2 >= *(float*) &g_slot_table[off + 0x20] &&
+		    g_slot_table[off + 0x8] != 0) {
 			count = 0;
 			for (k = 0; k < 5; k++) {
-				if (((int*) &g_slot_table[off + 0x108])[k] != -1) {
+				if (((int*) &g_slot_table[off + 0x68])[k] != -1) {
 					count++;
 				}
 			}
@@ -112,8 +112,8 @@ done2:
 
 	return (unsigned short) gm_CreateEntityFromParents(
 		0,
-		*(int*) &g_slot_table[SIM_ENT_OFF(parentA) + 0xa4],
-		*(int*) &g_slot_table[SIM_ENT_OFF(parentB) + 0xa4],
+		*(int*) &g_slot_table[SIM_ENT_OFF(parentA) + 0x4],
+		*(int*) &g_slot_table[SIM_ENT_OFF(parentB) + 0x4],
 		(int) param,
 		0, 0, 0, 2);
 }

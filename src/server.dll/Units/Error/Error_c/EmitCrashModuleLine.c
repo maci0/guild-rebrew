@@ -9,6 +9,20 @@
 
 char* __cdecl GetDebugRecordByIndex(char* arg1, unsigned int arg2);
 
+/* This TU's .data string pool copies of "\r\n" and " " (the same text
+ * occurs earlier in .rdata, so content-scan binding would resolve to those
+ * copies instead of the ones the local-array init reads here). */
+
+// DATA: SERVER 0x10027314
+char g_crash_newline[4] = {
+    0x0d, 0x0a, 0x00, 0x00,
+};
+
+// DATA: SERVER 0x10027328
+char g_crash_space[4] = {
+    0x20, 0x00, 0x00, 0x00,
+};
+
 unsigned char __cdecl EmitCrashModuleLine(int* st)
 {
 	int* mod;
@@ -63,8 +77,12 @@ found:
 
 		rec = (int*) GetDebugRecordByIndex((char*) mod, (unsigned int) entry[3]);
 		{
-			char linebuf[3] = "\r\n";
-			char spbuf[2] = " ";
+			char linebuf[3];
+			char spbuf[2];
+
+			*(unsigned short*) linebuf = *(const unsigned short*) g_crash_newline;
+			linebuf[2] = g_crash_newline[2];
+			*(unsigned short*) spbuf = *(const unsigned short*) g_crash_space;
 
 			if (extra != 0) {
 				WriteFile((HANDLE) st[1], extra, 4, (LPDWORD) &written, 0);

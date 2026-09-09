@@ -42,6 +42,18 @@ char g_log_format_table[13] = {
     0x5f, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2e, 0x6c, 0x6f, 0x67, 0x00,
 };
 
+/* The log module's own literal pool copies (this TU's .data), used because
+ * the same text occurs earlier in .rdata/.data and content-scan binding
+ * would resolve to those copies instead of the ones this code targets. */
+
+// DATA: SERVER 0x100270e4
+char g_log_newline[2] = { 0x0a, 0x00, };
+
+// DATA: SERVER 0x100270e8
+char g_log_default_name[13] = {
+    0x5f, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2e, 0x6c, 0x6f, 0x67, 0x00,
+};
+
 void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 {
 	char buf[260];
@@ -67,7 +79,7 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 		}
 
 	fallback:
-		sprintf(buf, "%s\\%s", g_log_buffer, "__server.log");
+		sprintf(buf, "%s\\%s", g_log_buffer, g_log_default_name);
 		stream = (FILE*) fopen(buf, "at");
 		if (stream == 0) {
 			goto skip;
@@ -75,19 +87,19 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 
 	do_write:
 		fputs(msg, stream);
-		fputs("\n", stream);
+		fputs(g_log_newline, stream);
 		fflush(stream);
 	skip:;
 	}
 
 	if (flags & 4) {
 		OutputDebugStringA(msg);
-		OutputDebugStringA("\n");
+		OutputDebugStringA(g_log_newline);
 	}
 
 	if (flags & 8) {
-		WriteFile((HANDLE) g_log_file_handle, msg, strlen(msg), &written, 0);
-		WriteFile((HANDLE) g_log_file_handle, "\n", 1, &written, 0);
+		WriteConsoleA((HANDLE) g_log_file_handle, msg, strlen(msg), &written, 0);
+		WriteConsoleA((HANDLE) g_log_file_handle, g_log_newline, 1, &written, 0);
 	}
 }
 

@@ -90,7 +90,7 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 			break;
 		}
 		i++;
-		if (i >= 0x2a) {
+		if (i >= 0x1e) {
 			return 0;
 		}
 	}
@@ -110,7 +110,7 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 			break;
 		}
 		i++;
-		if (i >= 0x2a) {
+		if (i >= 0x1e) {
 			return 0;
 		}
 	}

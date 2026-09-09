@@ -40,7 +40,7 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 	g_1003461c = (d >> 4) & 1;
 	SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER) 0x10002770);
 	h = fcn_1001a567(0);
-	GetModuleFileNameA((HMODULE) c, path, 0x100);
+	GetWindowTextA((HWND) c, path, 0x100);
 	((void (__stdcall*)(int, const char*, int)) *(void**) 0x1002403c)(0, (const char*) 0x11766100, 0x104);
 	*fcn_1001a540((char*) 0x11766100, 0x5c) = 0;
 	sprintf((char*) 0x117640e0, (char*) 0x1002735c, path, fcn_1001a527((char*) &h));
