@@ -100,13 +100,14 @@ if(REBREW_BUILD_SERVER)
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/unknown/crc32\\.c$")
   # Pure CRT bodies live in LIBCMT. Keep only game/layout files under crt_region.
   #
-  # 66 of the 68 annotated functions under crt_region/ were measured to be
+  # All 68 annotated functions under crt_region/ were measured to be
   # byte-identical to stock LIBCMT (identical outside the library object's own
   # relocation slots). They are linked library code that was reversed by
-  # mistake, and none of them belongs in the build. Evidence and the exact
+  # mistake; none of it is reversing work to finish. Evidence and the exact
   # symbol/object for each: .scratch/libcmt_probe/SUMMARY.md, reproduce with
-  # .scratch/libcmt_probe/cmp_libcmt.py. Only _initterm (0x1001a758) and
-  # _parse_cmdline (0x1001fb12) are absent from this LIBCMT build.
+  # .scratch/libcmt_probe/cmp_libcmt.py. Note _initterm and _parse_cmdline are
+  # static (COFF storage class 3) in the CRT, so they are absent from the
+  # archive symbol index; a scan that only walks external symbols misses them.
   #
   # The files kept below are NOT kept because their bodies are ours. Each one
   # exists to displace a specific LIBCMT object whose side effects the
