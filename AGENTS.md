@@ -109,6 +109,13 @@ relocations) > `NEAR_MATCHING` (close) > `STUB` (incomplete)
   0x1c-byte debug directory that grows `.rdata` past the reference and the
   postlink layout step fails with "built .rdata prefix size does not match".
   Configure with `cmake -S . -B build-sp6 -DREBREW_DEBUG_INFO=OFF`.
+- **Never patch LIBCMT or any other library.** Link the stock library from the
+  toolchain image. When a library object drags in something the reference does
+  not have, displace it with a local definition (see the `_CRT_REGION_KEEP`
+  comment in `CMakeLists.txt`) or change what references it. The build once
+  linked a hand-stripped LIBCMT kept in gitignored `.scratch/`, which no fresh
+  clone could reproduce; `scripts/check_library_code.py` now refuses to run if
+  its reference copy differs from the toolchain's.
 - **CFLAGS are per-file in practice**, not per-function: a flag one function
   needs can break a file-mate. See `docs/msvc6-c-shapes.md` section 12.
 

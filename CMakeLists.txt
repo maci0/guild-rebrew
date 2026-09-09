@@ -243,6 +243,12 @@ if(REBREW_BUILD_SERVER)
   # server.dll has neither import. The crt_region files sbh_aliases.c,
   # sbh_pool.c and mlock.c define those symbols locally, so the linker never
   # pulls the LIBCMT versions and the import set matches the reference.
+  #
+  # Never patch a library to make the link work. Displace the offending object
+  # with a local definition, as above, or change what references it. A doctored
+  # .lib cannot be reproduced from a clean checkout and hides the very
+  # duplication scripts/check_library_code.py exists to catch; that script
+  # refuses to run if its reference copy differs from the toolchain's.
   target_link_libraries(server_dll PRIVATE
     KERNEL32.lib
     USER32.lib

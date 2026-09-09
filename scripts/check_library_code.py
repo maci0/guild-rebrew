@@ -228,6 +228,39 @@ def extract_reference_lib(dest: Path) -> None:
     )
 
 
+def assert_library_is_stock(path: Path) -> None:
+    """Refuse to run against a hand-modified library.
+
+    The build once linked a LIBCMT with 22 objects stripped out, kept in
+    gitignored scratch, so a fresh clone could not reproduce it. Checking a
+    reversed function against a doctored library would also mask exactly the
+    duplication this script exists to find.
+    """
+    import shutil
+    import subprocess
+
+    if shutil.which("docker") is None:
+        return
+    proc = subprocess.run(
+        [
+            "docker", "run", "--rm", "--entrypoint", "sh",
+            "-v", f"{path.parent}:/out", DEFAULT_LIB_IMAGE,
+            "-c", f"md5sum {DEFAULT_LIB_PATH} /out/{path.name}",
+        ],
+        capture_output=True,
+        text=True,
+        timeout=120,
+        check=False,
+    )
+    sums = [ln.split()[0] for ln in proc.stdout.splitlines() if ln.strip()]
+    if len(sums) == 2 and sums[0] != sums[1]:
+        sys.exit(
+            f"check_library_code: {path} differs from the toolchain's stock "
+            f"{DEFAULT_LIB_PATH}.\n"
+            "Libraries must not be patched. Delete it and re-run to re-extract."
+        )
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--binary", default="original/Server/server.dll")
@@ -256,6 +289,8 @@ def main() -> int:
     for lib in libs:
         if not lib.exists():
             extract_reference_lib(lib)
+        elif lib == ROOT / ".scratch/libcmt_stock.LIB":
+            assert_library_is_stock(lib)
     missing = [p for p in libs if not p.exists()]
     if missing:
         print(
