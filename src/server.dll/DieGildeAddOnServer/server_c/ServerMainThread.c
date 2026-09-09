@@ -153,7 +153,63 @@ extern int g_tick_rate;    /* 0x11764088 */
  * has already desynchronised the compiled offsets ([2400:2434] is rejected
  * outright as out of range for the 2433-byte object).
  * Getting this off SIZE_MISMATCH needs import-thunk stubbing in prove.py,
- * not a source change here. */
+ * not a source change here.
+ *
+ * Round 9 (2026-09-09) attacked the two cold blocks directly, with
+ * .scratch/smt-a/ as the harness (probe.sh, bskew.py, sdiff.py).  The
+ * disassembly re-derivation first: both regions are separable cold tails,
+ * not interleaved code.  Each is a single basic block with one predecessor
+ * and one successor, physically wedged into an unrelated chain:
+ *   - host-slot store, 33 bytes / 10 instructions, target 0x1000973a-0x1000975b
+ *     (`mov eax,ecx; shl/add chain; or dword [eax*4+0x101deb00],8;
+ *     jmp 0x10009657`), reached only by `jne rel32` from 0x1000963f and
+ *     ending in a 5-byte backward jmp to the send_start entry.  It sits
+ *     between the phase-5 transfer loop's exit `jmp` (0x10009738) and the
+ *     transfer_pending landing (0x1000975b).
+ *   - unsynced-player, 7 bytes, target 0x10009b66-0x10009b6c
+ *     (`mov edi,1; jmp 0x10009afa`), reached only by `je rel32` from
+ *     0x10009a95 (the check-sync loop), sitting between the
+ *     `0x11764090 == 0` branch tail (mov [0x101deaf0],ebx; jmp 0x10009b81)
+ *     and the else-if head (0x10009b6d).
+ *
+ * Fresh probes, each compiled and inspected for the two block positions and
+ * the loop shapes (all scored against the 1162 baseline unless noted):
+ *   - Bisection by deletion: removing the phase-5 transfer content (S1),
+ *     the send-start loop (S2), or both (S3) leaves the host store glued
+ *     inline at obj+0x2b5 right after the CleanupSockets call.  The code
+ *     downstream of the branch site does not steer the placement at all.
+ *   - Distance inflation (S5/S6): ~350 bytes of filler pushed the store
+ *     past the jne's rel8 range and msvc6 still kept it inline, accepting
+ *     a rel32.  Out-of-line placement is not a rel8/rel32 decision.
+ *   - Transfer-loop polarity: rewriting the phase-5 search as
+ *     `if ((*p & 8) == 0) { advance; continue; } goto transfer_pending;`
+ *     flips msvc6 to the target's classic loop shape (test; jne; add; cmp;
+ *     jl; jmp), matching the target's instruction sequence exactly, but the
+ *     host store still does not land in the target's gap: 772 (E1).  The
+ *     positional score is all-or-nothing; no single-region fix helps.
+ *   - Same inversion on the compound-condition check-sync loops A/B via a
+ *     `||` guard: transfer loop classic, loops A and B unaffected (the
+ *     rotation lever works only on the single-condition loop), 772 (G1,
+ *     628 insns; loop A inverted alone stayed rotated at 629 insns).
+ *   - Both cold bodies moved textually to the end of the function before
+ *     cleanup_and_exit (VF): byte-identical 1162.  Source position of the
+ *     cold code confirmed irrelevant for the unsynced block too.
+ *   - `#pragma optimize("", off)` around the whole function: 847
+ *     instructions of unoptimised code, unusable; no pragma letter steers
+ *     the layout pass while the optimiser is on.
+ *
+ * Verdict after rounds 6-9 (every compiled variant measured): both cold
+ * blocks are emitted by this msvc6 build adjacent to their source loop's
+ * chain, and the original compile deferred them into gaps inside unrelated
+ * chains.  No C structure tried (label position, branch polarity, guard
+ * form, duplication, cold-tail placement, region size, pragmas)
+ * reproduces the deferral.  The remaining 43 instruction-level
+ * differences (register-name pairs and store orders around the send-start
+ * and sync-packet loops) are allocator fixed points downstream of the
+ * same layout decision.  This is a genuine layout-pass artifact, matching
+ * docs/msvc6-c-shapes.md section 17; byte-EXACT needs a code-layout lever
+ * that does not exist in C89 for this compiler, and PROVEN needs
+ * import-thunk stubbing in prove.py. */
 
 int __stdcall ServerMainThread(void* lpThreadParameter)
 {

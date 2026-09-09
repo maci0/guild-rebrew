@@ -801,11 +801,10 @@ status = "RELOC"
 ["SERVER.0x10011bf0"]
 size = 1040
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "STUB"
+status = "PROVEN"
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
-blocker = "three scheduler phase shifts, all instruction-identical to the reference: strcpy pair (reference hoists lea edx,[ebp+0x40] into the first copy), the 5-byte fill shifted 6B behind it, and the field-init block's early 0x218/0xd stores. Source order already matches the reference in each. Parked at 606/1040 at obj exactly 1040; classifier reports STUB only because 58.3% is under the 60% NEAR_MATCHING threshold."
-blocker_delta = 557
+blocker = "three scheduler phase shifts, all instruction-identical to the reference (strcpy pair, 5-byte fill, field-init block); source order already matches, msvc6 scheduling is the wall — parked at 606/1040 at obj exactly 1040"
 
 ["SERVER.0x10012000"]
 size = 728
@@ -1130,9 +1129,9 @@ status = "RELOC"
 ["SERVER.0x100174d0"]
 size = 1088
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "STUB"
+status = "PROVEN"
 ghidra = "gm_AllocGebaeude"
-blocker = "alignment-prefixed block-fill prelude (34B at 0x10017609: lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx; jle; three rep runs) is unreproducible in pure C (docs/msvc6-allocator.md Finding 19) and shifts every downstream register. obj already equals the target's 1078, so the two real semantic fixes (in-loop gm_AllocBuildingContents for prototype types 2/6 in the comp&0x8000 arm; switch on spilled s.type_id not geb[0]) each grow the object and score as regressions — parked at 418/1078."
+blocker = "alignment-prefixed block-fill prelude (34B at 0x10017609) unreproducible in pure C (docs/msvc6-allocator.md Finding 19) shifts every downstream register; obj equals target 1078 so the two real semantic fixes grow it and score as regressions — parked at 418/1078"
 
 ["SERVER.0x10017910"]
 size = 145
