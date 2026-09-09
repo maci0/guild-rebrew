@@ -15,11 +15,22 @@
 
 ```
 1. rebrew todo --json                          # get highest ROI action items
-2. rebrew skeleton 0x<VA>                      # generate .c skeleton
-3. rebrew test src/server.dll/<func>.c --json  # compile + compare
-4. # iterate code until STATUS: EXACT or RELOC
-5. rebrew test --all --json                    # batch promote all ready functions
+2. python3 scripts/check_library_code.py --va 0x<VA>   # is it already in a library?
+3. rebrew skeleton 0x<VA>                      # generate .c skeleton
+4. rebrew test src/server.dll/<func>.c --json  # compile + compare
+5. # iterate code until STATUS: EXACT or RELOC
+6. rebrew test --all --json                    # batch promote all ready functions
 ```
+
+> [!IMPORTANT]
+> **Check step 2 before reversing anything.** Statically linked library code
+> sits in `.text` looking exactly like game code, and reversing it is wasted
+> work: the linker supplies those bytes anyway. All 68 functions that once
+> lived under `crt_region/` were stock LIBCMT, reversed by mistake and matched
+> for weeks before anyone checked. `rebrew flirt` only finds 25 of them,
+> because it matches names against prebuilt signatures; the check above
+> compares bytes against the library actually being linked, which is why it
+> finds all 68. It also runs as a pre-commit hook over the whole tree.
 
 ## CLI Tools
 
@@ -42,6 +53,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew graph --format summary` | Dependency graph stats and blockers |
 | `rebrew catalog --json` | Generate coverage catalog |
 | `rebrew flirt --json` | FLIRT scan for known library functions |
+| `python3 scripts/check_library_code.py` | Byte-level check that no reversed function duplicates a linked library |
 | `rebrew extract list --json` | Extract and disassemble functions (list/show/batch) |
 | `rebrew asm 0x<VA> --size 128 --json` | Quick offline disassembly |
 | `rebrew sync --push` | Push annotations to Ghidra |
