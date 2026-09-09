@@ -27,10 +27,15 @@
 > sits in `.text` looking exactly like game code, and reversing it is wasted
 > work: the linker supplies those bytes anyway. All 68 functions that once
 > lived under `crt_region/` were stock LIBCMT, reversed by mistake and matched
-> for weeks before anyone checked. `rebrew flirt` only finds 25 of them,
-> because it matches names against prebuilt signatures; the check above
-> compares bytes against the library actually being linked, which is why it
-> finds all 68. It also runs as a pre-commit hook over the whole tree.
+> for weeks before anyone checked.
+>
+> Use `check_library_code.py`, not `rebrew flirt`, for this question. FLIRT
+> matches short byte patterns against prebuilt signatures and identifies 9 of
+> those 68 (25 library functions across the whole binary; regenerating the
+> signatures from this exact LIBCMT raises it to 37, still 9 of the 68). The
+> check above compares whole function bodies against the library actually
+> being linked, ignoring relocation slots, which is why it finds all 68. It
+> also runs as a pre-commit hook over the whole tree.
 
 ## CLI Tools
 
@@ -45,7 +50,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew diff <file> --json` | Structured byte diff vs target |
 | `rebrew match <file> --json` | Run GA matching engine on one function |
 | `rebrew match --all --json` | Batch GA on all STUB functions |
-| `rebrew match --all --near-miss --threshold 5` | Batch GA on MATCHING functions with small deltas |
+| `rebrew match --all --near-miss --threshold 5` | Batch GA on NEAR_MATCHING functions with small deltas (Δ ≤ threshold) |
 | `rebrew rename <old> <new>` | Rename function and update cross-references |
 | `rebrew verify --json` | Bulk verify all reversed files |
 | `rebrew lint --json` | Validate annotations |
@@ -105,19 +110,32 @@ relocations) > `NEAR_MATCHING` (close) > `STUB` (incomplete)
 - **Execution**: all CL.EXE/LINK.EXE calls run through the docker image
   (`rebrew/msvc:6.0-win32`); build it with `rebrew toolchain build msvc6`
   before `cmake --build`
-- **`REBREW_DEBUG_INFO` must be OFF to link.** With it ON, `/debug` adds a
-  0x1c-byte debug directory that grows `.rdata` past the reference and the
-  postlink layout step fails with "built .rdata prefix size does not match".
-  Configure with `cmake -S . -B build-sp6 -DREBREW_DEBUG_INFO=OFF`.
-- **Never patch LIBCMT or any other library.** Link the stock library from the
-  toolchain image. When a library object drags in something the reference does
-  not have, displace it with a local definition (see the `_CRT_REGION_KEEP`
-  comment in `CMakeLists.txt`) or change what references it. The build once
-  linked a hand-stripped LIBCMT kept in gitignored `.scratch/`, which no fresh
-  clone could reproduce; `scripts/check_library_code.py` now refuses to run if
-  its reference copy differs from the toolchain's.
 - **CFLAGS are per-file in practice**, not per-function: a flag one function
   needs can break a file-mate. See `docs/msvc6-c-shapes.md` section 12.
+
+## Linking
+
+Build with `cmake -S . -B build-sp6 -DREBREW_DEBUG_INFO=OFF && cmake --build build-sp6`.
+
+- **`REBREW_DEBUG_INFO` must be OFF.** With it ON, `/debug` adds a 0x1c-byte
+  debug directory that grows `.rdata` past the reference, and the postlink
+  layout step fails with "built .rdata prefix size does not match".
+- **Link stock libraries. Never patch a `.lib`.** When a library object drags
+  in something the reference does not have, displace it with a local
+  definition of the symbols it provides (see the `_CRT_REGION_KEEP` comment in
+  `CMakeLists.txt`) or change what references it. The build once linked a
+  hand-stripped LIBCMT kept in gitignored `.scratch/`, which no fresh clone
+  could reproduce; `scripts/check_library_code.py` refuses to run if its
+  reference copy differs from the toolchain's.
+- **A duplicate-symbol warning is a finding, not noise.** `LNK4006` usually
+  means either the same global is defined in several translation units, or
+  something the library already provides has been reimplemented. Resolve it
+  rather than silencing it with `/FORCE:MULTIPLE`. Two cases remain here
+  (`___app_type`, `__amsg_exit`): `dllmain.c` calls `_CRT_INIT`, which pulls
+  LIBCMT `dllcrt0.obj`, and that object defines both.
+- **Compare the import table against the reference** after any link change.
+  An extra import means a library object came in that the original did not
+  have; a missing one means the opposite. The reference has exactly 100.
 
 ## Codegen References
 
