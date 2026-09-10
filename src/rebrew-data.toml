@@ -700,17 +700,17 @@ type = "float"
 status = "UNCHECKED"
 
 ["SERVER.0x10025fb8"]
-name = "g_const_5fb8"
+name = "g_const_0_01"
 type = "float"
 status = "UNCHECKED"
 
 ["SERVER.0x10025fbc"]
-name = "g_const_5fbc"
+name = "g_const_1_over_32767"
 type = "float"
 status = "UNCHECKED"
 
 ["SERVER.0x100257bc"]
-name = "g_const_57bc"
+name = "g_const_42_0"
 type = "float"
 status = "UNCHECKED"
 
@@ -1732,7 +1732,7 @@ type = "double"
 status = "UNCHECKED"
 
 ["SERVER.0x100257c0"]
-name = "g_const_57c0"
+name = "g_const_21_0"
 section = ".rdata"
 type = "float"
 status = "UNCHECKED"

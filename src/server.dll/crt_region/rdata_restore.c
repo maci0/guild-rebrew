@@ -15,6 +15,10 @@ trees.c.obj (see order_sources.py), so its .rdata contribution starts at
 builds consume it.
 
 */
+// DATA: SERVER 0x100257bc  /* float 42.0 */
+// DATA: SERVER 0x100257c0  /* float 21.0 */
+// DATA: SERVER 0x10025fb8  /* float 0.01 */
+// DATA: SERVER 0x10025fbc  /* float 1/32767 */
 // DATA: SERVER 0x100252e8  /* .rdata restore blob at raw 0x252e8 */
 const unsigned char g_rdata_restore_252e8[] = {
 
