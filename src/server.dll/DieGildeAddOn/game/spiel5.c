@@ -289,11 +289,11 @@ void __cdecl gm_SetBuildingWorkerLimits(unsigned char* building)
  * storage, and links to the town. */
 
 // DATA: SERVER 0x10035884
-extern int g_10035884;
+extern unsigned short g_current_hour;
 // DATA: SERVER 0x10035888
-extern int g_10035888;
+extern int g_clock_copy_mid;
 // DATA: SERVER 0x1003588c
-extern short g_1003588c;
+extern short g_clock_copy_tail;
 
 #if 0 /* split to spiel_c/gm_AllocGebaeude.c */
 char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
@@ -409,9 +409,9 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 		case 6:
 		case 7:
 			*(int*) (geb + 0x69) = g_current_year;
-			*(int*) (geb + 0x6d) = g_10035884;
-			*(int*) (geb + 0x71) = g_10035888;
-			*(short*) (geb + 0x75) = g_1003588c;
+			*(int*) (geb + 0x6d) = g_current_hour;
+			*(int*) (geb + 0x71) = g_clock_copy_mid;
+			*(short*) (geb + 0x75) = g_clock_copy_tail;
 			if (owner_id != -1) {
 				*(int*) (geb + 0x65) = *(int*) ((unsigned short) location_id * 0x21c + 0x100358a4);
 				break;

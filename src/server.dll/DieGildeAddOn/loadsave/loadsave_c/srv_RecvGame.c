@@ -24,7 +24,7 @@ extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
 extern unsigned int g_download_buffer; /* 0x101deae8 */
 extern unsigned int g_download_total_size; /* 0x101deac0 */
-extern int g_101de560;
+extern int g_recv_game_buffer;
 extern int g_save_info[2];
 extern int OpenVfsStream(char*, char*, int);
 int ls_LoadSavegameHeader(int, char*);
@@ -57,8 +57,8 @@ int srv_RecvGame(void)
 			"ls_RecvGame(): Can\'t open File",
 			1
 		);
-		m_FreeTracked((void*) g_101de560);
-		g_101de560 = 0;
+		m_FreeTracked((void*) g_recv_game_buffer);
+		g_recv_game_buffer = 0;
 		return 0;
 	}
 	ls_LoadSavegameHeader(file_handle, (char*) g_save_info);
@@ -70,8 +70,8 @@ int srv_RecvGame(void)
 			1
 		);
 		CloseVfsStream(file_handle);
-		m_FreeTracked((void*) g_101de560);
-		g_101de560 = 0;
+		m_FreeTracked((void*) g_recv_game_buffer);
+		g_recv_game_buffer = 0;
 		return 0;
 	}
 	*(int*) 0x1003546c = 0;
@@ -90,8 +90,8 @@ int srv_RecvGame(void)
 			1
 		);
 		CloseVfsStream(file_handle);
-		m_FreeTracked((void*) g_101de560);
-		g_101de560 = 0;
+		m_FreeTracked((void*) g_recv_game_buffer);
+		g_recv_game_buffer = 0;
 		return 0;
 	}
 	ls_ReadVfsDataChecked((void*) 0x10035440, 4, 1, (void*) file_handle);
@@ -113,8 +113,8 @@ int srv_RecvGame(void)
 			1
 		);
 		CloseVfsStream(file_handle);
-		m_FreeTracked((void*) g_101de560);
-		g_101de560 = 0;
+		m_FreeTracked((void*) g_recv_game_buffer);
+		g_recv_game_buffer = 0;
 		return 0;
 	}
 	load_status = ls_LoadBuildingEntityState(file_handle);
@@ -126,8 +126,8 @@ int srv_RecvGame(void)
 			1
 		);
 		CloseVfsStream(file_handle);
-		m_FreeTracked((void*) g_101de560);
-		g_101de560 = 0;
+		m_FreeTracked((void*) g_recv_game_buffer);
+		g_recv_game_buffer = 0;
 		return 0;
 	}
 	load_status = ls_LoadDynamicEntities((void*) file_handle);
@@ -139,8 +139,8 @@ int srv_RecvGame(void)
 			1
 		);
 		CloseVfsStream(file_handle);
-		m_FreeTracked((void*) g_101de560);
-		g_101de560 = 0;
+		m_FreeTracked((void*) g_recv_game_buffer);
+		g_recv_game_buffer = 0;
 		return 0;
 	}
 	load_status = ls_LoadEntities(file_handle);
@@ -152,8 +152,8 @@ int srv_RecvGame(void)
 			1
 		);
 		CloseVfsStream(file_handle);
-		m_FreeTracked((void*) g_101de560);
-		g_101de560 = 0;
+		m_FreeTracked((void*) g_recv_game_buffer);
+		g_recv_game_buffer = 0;
 		return 0;
 	}
 	entity_state_ptr = (char*) 0x100358a2;
@@ -173,8 +173,8 @@ int srv_RecvGame(void)
 			1
 		);
 		CloseVfsStream(file_handle);
-		m_FreeTracked((void*) g_101de560);
-		g_101de560 = 0;
+		m_FreeTracked((void*) g_recv_game_buffer);
+		g_recv_game_buffer = 0;
 		return 0;
 	}
 	if (g_file_version >= 0x10045) {
@@ -199,8 +199,8 @@ int srv_RecvGame(void)
 			1
 		);
 		CloseVfsStream(file_handle);
-		m_FreeTracked((void*) g_101de560);
-		g_101de560 = 0;
+		m_FreeTracked((void*) g_recv_game_buffer);
+		g_recv_game_buffer = 0;
 		return 0;
 	}
 	CloseVfsStream(file_handle);

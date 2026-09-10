@@ -20,7 +20,6 @@ extern char s_m_pool_alloc_tp_m_pool_10028b60; /* 0x10028B60 */
 extern char s_m_pool_get_free_tp_m_pool_10028b78; /* 0x10028B78 */
 extern unsigned char g_10028bdc[]; /* 0x10028BDC */
 extern unsigned char g_data_restore_gap[]; /* 0x1002A000 */
-extern char g_1002a0f8; /* 0x1002A0F8 */
 extern int g_producer_id_table; /* 0x1002DDE0 */
 extern char g_query_filter_state; /* 0x10030B9E */
 extern char g_str_10031500; /* 0x10031500 */
@@ -44,9 +43,9 @@ extern char g_query_flag2; /* 0x1003545D */
 extern char g_query_flag3; /* 0x1003545E */
 extern unsigned short* g_query_cursor; /* 0x10035468 */
 extern int g_current_year; /* 0x10035880 */
-extern int g_default_value_b; /* 0x10035884 */
-extern int g_default_value_c; /* 0x10035888 */
-extern short g_default_value_d; /* 0x1003588C */
+extern int g_current_hour; /* 0x10035884 */
+extern int g_clock_copy_mid; /* 0x10035888 */
+extern short g_clock_copy_tail; /* 0x1003588C */
 extern char* g_slot_table; /* 0x100358A0 */
 extern char g_entity_state_base; /* 0x100358A2 */
 extern int g_entity_ref_table; /* 0x100358FC */

@@ -2,7 +2,7 @@
 #include "../../Units/Error/error.h"
 
 void* __cdecl gm_LookupEntityRecordById(int);
-extern unsigned short g_default_value_b;
+extern unsigned short g_current_hour;
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void __cdecl InitBuildingTypeTable(void);
 
@@ -145,7 +145,7 @@ int __cdecl amt_ClearEntityLinks(char* entity)
 	int result;
 	int state_tmp;
 
-	default_val = (unsigned short) g_default_value_b;
+	default_val = (unsigned short) g_current_hour;
 	result = 0;
 	slot = (OfficeSlot*) 0x101de5a0;
 	for (i = 0; i < 0x2a; i++) {
@@ -192,7 +192,7 @@ void __cdecl amt_UpdateEntityLinks(char* entity, int arg2)
 	int i;
 	int result;
 
-	default_val = (unsigned short) g_default_value_b;
+	default_val = (unsigned short) g_current_hour;
 	result = 0;
 	slot = (OfficeSlot*) 0x101de5a0;
 	for (i = 0; i < 0x2a; i++) {

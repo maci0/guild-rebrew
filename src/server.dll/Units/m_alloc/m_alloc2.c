@@ -297,7 +297,6 @@ void __cdecl m_PoolFree(int* pool, int* block)
 	}
 }
 
-extern char g_1002a0f8[1];
 char g_str_10028888[1] = {
     0x44,
 };
