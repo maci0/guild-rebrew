@@ -1,3 +1,4 @@
+// CFLAGS: /O1 /Gd
 // FUNCTION: SERVER 0x1001b8fb (was FUNCTION; provided by LIBCMT / library_msvc.h)
 #include <windows.h>
 

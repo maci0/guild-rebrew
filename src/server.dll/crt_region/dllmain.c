@@ -1,3 +1,4 @@
+// CFLAGS: /O1 /Oy- /Gd
 // FUNCTION: SERVER 0x1001b9d4
 #include <windows.h>
 

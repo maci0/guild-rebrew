@@ -42,45 +42,6 @@ extern unsigned char g_connections[]; /* 0x101deb00 */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 
-// FUNCTION: SERVER 0x1000a860
-// ProcessSendData
-void __cdecl list_unlink_relink(char* ctx, char* node);
-
-int __cdecl ProcessSendData(void)
-{
-	unsigned char* p;
-	int r;
-	unsigned int* pkt;
-
-	p = g_connections;
-	do {
-		if ((p[0] & 1) != 0) {
-			r = SendPlayerData((unsigned int*) p);
-			if (r == -1) {
-				return -1;
-			}
-			while (1) {
-				pkt = *(unsigned int**) (p + 0x2641f4);
-				if (pkt == 0 || (*(unsigned int*) p & 0x100) == 0) {
-					break;
-				}
-				memcpy(p + 0xb1, pkt, 0x99);
-				list_unlink_relink((char*) p, *(char**) (p + 0x2641f4));
-				*(unsigned int*) p &= ~0x100;
-				r = SendPlayerData((unsigned int*) p);
-				if (r == -1) {
-					return -1;
-				}
-			}
-			if (r == -1) {
-				return -1;
-			}
-		}
-		p += 0x264264;
-	} while ((int) p < 0x114ffe20);
-	return 0;
-}
-
 /* Queues a command packet for server-side processing.
  * Copies the packet into the command queue buffer via memcpy. */
 

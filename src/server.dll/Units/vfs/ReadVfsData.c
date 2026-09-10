@@ -1,3 +1,4 @@
+// CFLAGS: /O2 /Gd /Oy-
 /* ReadVfsData — VFS stream read (0x10008E40). Reads from a memory buffer
  * (flags & 0x20: cursor at stream+0x100, flushed via fcn_100058d0 when
  * flags & 8), a gzip-in-zip payload (flags & 0x10 → ReadVfsCompressed), a
