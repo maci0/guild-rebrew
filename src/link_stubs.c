@@ -176,9 +176,6 @@ int __cdecl fcn_10002640(void) { return 0; }
 int __cdecl fcn_100058d0(void) { return 0; }
 int __cdecl fcn_10016cd0(void) { return 0; }
 int __cdecl fcn_1001a18a(void) { return 0; }
-/* fcn.1001a140 = srand(timeGetTime()); called by gm_Open (gm_Open.c) — the
- * reversed CRT provided it as `getpid` until run_000.c was dropped. */
-int __cdecl srv_SeedRandomWithTime(void) { return 0; }
 int __cdecl fcn_1001a207(void) { return 0; }
 int __cdecl fcn_1001a286(void) { return 0; }
 int __cdecl fcn_1001a2eb(void) { return 0; }
