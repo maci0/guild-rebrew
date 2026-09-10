@@ -217,6 +217,11 @@ void __cdecl InitPacketPool(int n)
 	 * memory exactly as asm operands are. Reproducing it is the only way to
 	 * match this region in pure C + this block (documented in
 	 * docs/msvc6-allocator.md, Finding 19). */
+	/*
+	 * TODO: replace this inline-asm fill with proper C once a spelling is
+	 * found; no msvc6 C memset/memcpy form emits the prelude
+	 * (docs/msvc6-allocator.md Finding 19).
+	 */
 	__asm {
 		mov edi, g_array_ptr
 		mov ebx, n
