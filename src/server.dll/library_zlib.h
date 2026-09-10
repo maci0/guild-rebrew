@@ -63,14 +63,6 @@
 // deflate_slow
 // SIZE: 1066
 
-// LIBRARY: SERVER 0x100036d0
-// check_header
-// SIZE: 332
-
-// LIBRARY: SERVER 0x10003960
-// gzread
-// SIZE: 559
-
 // LIBRARY: SERVER 0x10003D20
 // inflate_blocks_reset
 // SIZE: 123

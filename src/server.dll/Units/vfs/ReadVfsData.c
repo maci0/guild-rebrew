@@ -321,7 +321,7 @@
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 extern int __cdecl ReadVfsCompressed(int zstrm, char* buf, unsigned int total);
-extern int __cdecl fcn_10003960(void* handle, char* buf, int total);
+extern int __cdecl gzread(void* handle, char* buf, unsigned int total);
 extern int __cdecl fread(char* buf, int size, int count, void* handle); /* 0x1001aa6a LIBCMT */
 extern int __cdecl fcn_100058d0(void* zstrm, int flush);
 
@@ -415,7 +415,7 @@ int __cdecl ReadVfsData(char* buf, int size, int count, char* stream)
 		goto done;
 	}
 	if (flags & 8) {
-		result = fcn_10003960(*(char**) zstrm, buf, total);
+		result = gzread(*(char**) zstrm, buf, total);
 		goto done;
 	}
 	result = fread(buf, size, count, *(char**) zstrm);
