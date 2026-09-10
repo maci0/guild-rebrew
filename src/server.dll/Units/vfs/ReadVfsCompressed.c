@@ -7,6 +7,13 @@
  * running crc32.  Returns the number of bytes produced, -1 on an I/O
  * failure, -100 when the stream has no input buffer and -102 when the
  * handle or stream pointer is null.
+ *
+ * Residual: obj 499 against the target's 492. The target loads and tests
+ * `handle` before the two accumulator zero-stores; these are `volatile int`,
+ * which fixes the frame but keeps the stores at the top of the body. Moving
+ * the stores below the guard checks (first use is `return result` at the
+ * avail_out test) drops the object to 475 at 26/492, so the target's order is
+ * not a plain source-order reordering.
  */
 
 // FUNCTION: SERVER 0x10008A90
