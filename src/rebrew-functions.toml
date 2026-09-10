@@ -180,9 +180,9 @@ ghidra = "cleanup_entity"
 ["SERVER.0x10008a90"]
 size = 492
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "SIZE_MISMATCH"
-updated_by = "test"
-updated_at = "2026-09-10T14:30:44+00:00"
+status = "PROVEN"
+updated_by = "prove"
+updated_at = "2026-09-10T16:24:29+00:00"
 
 ["SERVER.0x10008c80"]
 size = 129
