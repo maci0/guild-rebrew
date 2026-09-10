@@ -312,6 +312,12 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //   the scaled operand's type, and the same type choice decides whether the
 //   compare folds. No C89 spelling separates the two.
 //
+//   2026-09-10: search closed. `rebrew match` ran 100 generations without
+//   beating the residual and `rebrew prove` established the two forms
+//   equivalent (EAX, 1 original state vs 1 compiled state), so the function is
+//   recorded PROVEN rather than byte-identical. The 5-byte delta stays in the
+//   linked artifact.
+//
 //   Notes below predate the pragma; scores quoted in them are against 378.
 //   Re-measured against the 386 base, all still inert or worse: the return
 //   expression reassociated five ways (357..386), `value` copied to a separate
