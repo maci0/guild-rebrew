@@ -89,7 +89,7 @@ extern char g_entity_end[];
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
-extern float g_const_57bc;
+extern float g_const_42_0;
 int __cdecl gm_RandomMod(unsigned short range);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AssignBuildingOwner(unsigned char*, unsigned short, unsigned int);
@@ -99,15 +99,15 @@ int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 extern unsigned int g_entity_slot_table[];
-extern float g_const_5fb8; /* 0x10025fb8 */
-extern float g_const_5fb4; /* 0x10025fb4 */
-extern float g_const_5fb0; /* 0x10025fb0 */
-extern float g_const_5fac; /* 0x10025fac */
-extern float g_const_5fa8; /* 0x10025fa8 */
-extern double g_const_5fa0; /* 0x10025fa0 */
-extern float g_float_const_cc; /* 0x100256cc */
+extern float g_const_0_01; /* 0x10025fb8 */
+extern float g_const_1_5; /* 0x10025fb4 */
+extern float g_const_2_2; /* 0x10025fb0 */
+extern float g_const_0_06875; /* 0x10025fac */
+extern float g_const_896_0; /* 0x10025fa8 */
+extern double g_const_1_over_720; /* 0x10025fa0 */
+extern float g_const_0_0; /* 0x100256cc */
 extern float g_gv_const_57c8; /* 0x100257c8 */
-extern double g_const_57d0; /* 0x100257d0 */
+extern double g_const_half; /* 0x100257d0 */
 double __cdecl gm_CalculateProductionValue(int, unsigned char);
 extern unsigned char g_current_season;
 int __cdecl gm_SumBuildingProductionValues(char*, int);
@@ -116,10 +116,10 @@ int __cdecl compute_size(char*); /* 0x10019d00 */
 char* __cdecl gm_FindEntityByOwner(int); /* 0x10019c60 */
 int __cdecl gm_GetMsgField(char*, char*); /* 0x10019cd0 */
 int __cdecl ahm_LookupEntityInTable(int); /* 0x1000c670 */
-extern float g_const_5fbc;
+extern float g_const_1_over_32767;
 double __cdecl gm_RandomFloat01(void);
-extern float g_float_const_a0;
-extern float g_float_const_a8;
+extern float g_const_1_0;
+extern float g_const_neg_1_0;
 
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */
@@ -210,7 +210,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //     `param2` homed through a PLAIN `int*` alias and widened in a separate
 //     statement. A volatile alias there is ordered against the +0x38 store and
 //     schedules the `and` before the ftol call, which the target does not do.
-//   - `acc = quot; acc = acc * mod_value; value = (float)(acc * g_const_57d0)`
+//   - `acc = quot; acc = acc * mod_value; value = (float)(acc * g_const_half)`
 //     yields `fxch st(1)` / `fmulp st(1)` and drops the dead `fstp st(0)`,
 //     disproving the earlier note that no source form pops there.
 //
@@ -242,7 +242,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //
 //   The fxch slot and the folded compare are mutually exclusive across every
 //   shape measured (2026-09-08, ~330 compiles, scripts in .scratch/pv-x87/):
-//   - Scaling by g_const_57d0 through a FLOAT local (`mod_value` or `value`)
+//   - Scaling by g_const_half through a FLOAT local (`mod_value` or `value`)
 //     folds the compare to `cmp byte ptr [esi],0x17` but schedules it one slot
 //     ahead of the fxch. This is the 391 shape.
 //   - Scaling through a DOUBLE local (`p2_wide`, `acc`, a block-scoped temp)
@@ -282,7 +282,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //   still 391. What it adds to the picture:
 //   - The `fxch` is a removable stack fixup, not a fixed instruction. Making
 //     the scaled double the destination of the merge multiply
-//     (`acc = (double) mod_value * g_const_57d0; mod_value = (float)(acc * quot)`)
+//     (`acc = (double) mod_value * g_const_half; mod_value = (float)(acc * quot)`)
 //     drops it entirely for a 394-byte object, and `value = (float)(acc * quot)`
 //     replaces `fmulp st(1)` with the non-popping `fmul st,st(1)` at 385/396.
 //     So the question is not how to move the fxch but why msvc6 ranks the
@@ -319,14 +319,14 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //   (374), a volatile `[esi+0x38]` store (372), a volatile home store (378),
 //   the mask before the store (369), the `dp` alias for the store (89), the
 //   compare widened/unsigned/via a hoisted local (inert), the loop as a `for`
-//   (382), and every reassociation of the g_const_57d0 multiply (380..386,
+//   (382), and every reassociation of the g_const_half multiply (380..386,
 //   the 372-shape now reaches 380 but reintroduces a dead `fstp st(0)`).
 //   Hoisting integer work (`i = 0`, the `p2_home` alias, a dead `weight`
 //   assignment) above the compare to give the scheduler something to place
 //   there is inert.
 //
 //   Superseded residual notes (7 instructions, 378/396):
-//   - [67..70] 378 shape: mod_value scaled by g_const_57d0 as a float store,
+//   - [67..70] 378 shape: mod_value scaled by g_const_half as a float store,
 //     then acc = quot; value = (float)(acc * mod_value). Emits qword fmul
 //     before fxch/fmulp and keeps fstp/jne. Leftover: cmp [esi],0x17 one
 //     instruction early (fmul qword; cmp; fxch; fmulp). kind=*entity after
@@ -417,9 +417,9 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 		*p2_alias = param2 & 0xff;
 		kind = *(volatile char*) (entity + 0x21);
 		cached = cached * (int) *p2_alias;
-		cached = cached * g_const_5fb8;
+		cached = cached * g_const_0_01;
 		if (kind == 3) {
-			cached = cached * g_const_5fb4;
+			cached = cached * g_const_1_5;
 		}
 		return cached;
 	}
@@ -436,10 +436,10 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	min_val = *(int*) (entity_index * 4 + 0x101dd8e0);
 	record = g_entity_type_table + min_val * 0x24d;
 	if (min_val != 0) {
-		mod_value = g_float_const_cc;
+		mod_value = g_const_0_0;
 		for (i = 0; i < 2; i++) {
 			weight = *(unsigned char*) (record + i + 0x233);
-			mod_value = (float) ((double) weight * g_const_5fa8 * g_const_5fa0 + mod_value);
+			mod_value = (float) ((double) weight * g_const_896_0 * g_const_1_over_720 + mod_value);
 		}
 	} else {
 		mod_value = g_gv_const_57c8;
@@ -448,16 +448,16 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	   destination of the multiply, so msvc6 emits `fxch st(1)` / `fmulp st(1)`
 	   and consumes quot. Written as one expression it keeps quot live and
 	   emits the non-popping `fmul st,st(1)` plus a trailing `fstp st(0)`.
-	   The g_const_57d0 multiply has to stay last: applying it before the
+	   The g_const_half multiply has to stay last: applying it before the
 	   exchange makes msvc6 unfold the 0x17 compare below into
 	   `mov al,[esi]` / `cmp al,0x17`, which is 3 bytes longer.
 	   Re-tested 2026-09-04 against the target's [67..70] order (the qword
 	   multiply BEFORE the fxch).  Four formulations, all worse than the 374
 	   below, so reassociating this site is a dead end:
-	     acc = mod_value * g_const_57d0; value = (float)(acc * quot);    372
-	     acc = mod_value; acc = acc * g_const_57d0; ...                  254
-	     acc = quot; value = (float)(mod_value * g_const_57d0 * acc);    254
-	     acc = mod_value * g_const_57d0; acc = acc * quot;               372
+	     acc = mod_value * g_const_half; value = (float)(acc * quot);    372
+	     acc = mod_value; acc = acc * g_const_half; ...                  254
+	     acc = quot; value = (float)(mod_value * g_const_half * acc);    254
+	     acc = mod_value * g_const_half; acc = acc * quot;               372
 	     acc = 57d0*mod_value; kind=*entity; acc*=quot; if(kind==0x17)  372
 	     (qword fmul matches, cmp [esi],0x17 too early, fmulp becomes
 	     fmul st(1)/fstp).  acc *= 57d0 then *mod_value: 248 SIZE 398.
@@ -474,11 +474,11 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	   Folding the two assignments into `value = (float)(acc * mod_value)`
 	   holds 378 with the same 7 structural diffs and one less live local. */
 	acc = quot;
-	mod_value = (float) ((double) mod_value * g_const_57d0);
+	mod_value = (float) ((double) mod_value * g_const_half);
 	value = (float) (acc * mod_value);
 	if (*(char*) entity == 0x17) {
 		mod_value = value;
-		return (float) ((double) mod_value * g_const_5fb0);
+		return (float) ((double) mod_value * g_const_2_2);
 	}
 	cp = (unsigned short*) (entity + 0x2e);
 	/* A `while` with the counter incremented ahead of the pointer gives the
@@ -522,13 +522,13 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	   frame does not grow another slot. */
 	p2_home = &param2;
 	mod_value = value;
-	*(int*) (entity + 0x38) = (int) (mod_value * g_const_5fac);
+	*(int*) (entity + 0x38) = (int) (mod_value * g_const_0_06875);
 	*p2_home = param2 & 0xff;
 	p2_wide = *p2_home;
 	acc = p2_wide;
 	acc = acc * value;
-	acc = acc * g_const_5fb8;
-	return acc * g_const_5fb0;
+	acc = acc * g_const_0_01;
+	return acc * g_const_2_2;
 }
 #pragma optimize("", on)
 
@@ -542,7 +542,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 //   `mov al,[eax+edx]`; the second query result must go to its own local
 //   instead of overwriting `q`, because the original keeps the outer query in
 //   esi across the branch; the epilogue multiply order is
-//   `(param2 * g_const_5fb8) * total`, which emits fild/fmul/fimul, where the
+//   `(param2 * g_const_0_01) * total`, which emits fild/fmul/fimul, where the
 //   `(double)` casts emitted fld/fimul/fimul; and the inner call's `q+0x14`
 //   load stays inside the argument list, which is what emits the original's
 //   `push eax` / `mov eax,[esi+0x14]` / ... / `push eax` schedule. Hoisting
@@ -625,7 +625,7 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 		i++;
 		comp_ptr++;
 	}
-	return (int) ((param2 * g_const_5fb8) * total);
+	return (int) ((param2 * g_const_0_01) * total);
 }
 
 // FUNCTION: SERVER 0x10019A20
@@ -1243,11 +1243,11 @@ float __cdecl gm_RandomQuadratic(void)
 	float rand_val;
 
 	rand_val = (float) gm_RandomFloat01();
-	rand_val = (rand_val + rand_val) - g_float_const_a0;
-	if (rand_val < g_float_const_cc) {
-		return g_float_const_a8 * rand_val * rand_val;
+	rand_val = (rand_val + rand_val) - g_const_1_0;
+	if (rand_val < g_const_0_0) {
+		return g_const_neg_1_0 * rand_val * rand_val;
 	}
-	return g_float_const_a0 * rand_val * rand_val;
+	return g_const_1_0 * rand_val * rand_val;
 }
 int g_some_limit;
 unsigned int g_1009b764;

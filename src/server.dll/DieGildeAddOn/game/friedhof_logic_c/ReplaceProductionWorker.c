@@ -4,7 +4,7 @@
 // SIZE: 288
 
 extern char* g_entity_type_table;
-extern int g_1003546c;
+extern unsigned short* g_entity_table_end; /* 0x1003546c */
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
@@ -27,7 +27,7 @@ int __cdecl ReplaceProductionWorker(void* a)
 	if (rec == 0 ||
 	    *(unsigned short*) ((char*) rec + 0x27) == limit ||
 	    0x100358a0 + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
-	        g_1003546c)
+	        g_entity_table_end)
 		return -1;
 	type = *(unsigned char*) rec;
 	if (*(unsigned char*) (g_entity_type_table + type + type * 0x24c) != 0x1d)

@@ -1149,7 +1149,7 @@ naked with the C as a comment.
 (ebp = the outer g_query_limit-loop counter) while MSVC6 pushes ebp lazily
 at the outer loop's preheader (shifting every [esp+N] offset). Other
 first-pass deltas: the resolve out-param locals and the lookup-array pass.
-The decode is complete (see the file comment): g_1003546c player lookup,
+The decode is complete (see the file comment): g_entity_table_end player lookup,
 gm_StartFilteredEntitySearch(1,5,0xa), the g_file_version-gated lookup
 array, the 0x21c-stride entity pass with the word@-0x170 gate and
 resolve/replace of ids at -4/0, and the outer loop's linked-list attaches
@@ -2458,7 +2458,7 @@ available compilers).  Kept fenced-naked; C preserved in #else.
 Best C is 291/370 positional (5+ formulations).  The entire body decodes
 and matches: the `dword_100a8c30 + (uchar)*a * 589` type check (field
 `tp[0x247]` in 1..3), the `gv_FindSlotEntryFiltered(0, a, 0,
-0x10010700, 0)` slot acquisition, the `*p = g_10030b6c++` counter bump,
+0x10010700, 0)` slot acquisition, the `*p = g_next_object_id++` counter bump,
 the `slot+4/+8/+0xa/+0xc` field stores, the 5-iteration `gm_RandomMod`
 byte fill (offsets +0x24..+0x28), the four `gm_RandomMod`+1 dword stores
 (+0x2c/+0x30/+0x34/+0x38/+0x40), and the three discarded `gm_RandomMod`
@@ -2497,7 +2497,7 @@ RESOLVED — now RELOC (832/832 byte-match, 13 relocs) as proper C under
 `dword_100a8c30` 147-chain type check, the
 `m_AllocTracked(0x24, "0x1002d474")` 36-byte struct + `memset 36`,
 `[esi] = *(b+1)`, `[esi+4] = tp[0x247]`, the two sub-allocations
-`g_1002575c[type]*20` and `g_1002576c[type]*68` with their `memset`s, and
+`g_field_worker_count[type]*20` and `g_field_entry_count[type]*68` with their `memset`s, and
 the cleanup free chain).  The blocker was register allocation in the six
 `field-init` loops (type 1: 8+4, type 2: 12, type 3: 16+12 — each storing
 `0`/`1`, `q`, `-1`, `0xffff` per 0x14-byte slot while stepping `q` by

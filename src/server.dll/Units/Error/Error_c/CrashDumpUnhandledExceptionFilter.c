@@ -6,7 +6,7 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 char __cdecl check_memory_protection(unsigned int);
 char __cdecl AnalyzeInstruction(int, int, int, int*);
 unsigned int __cdecl EmitCrashModuleLine(int*);
-extern void* g_10034614;
+extern void* g_crash_callback;
 
 // CFLAGS: /O1 /G6 /Gd /Oy
 // NOTE: semantically complete reconstruction rebuilt from the target disasm.
@@ -328,8 +328,8 @@ unknown_exc:
 
 done_walk:
 
-	if (g_10034614) {
-		((void (__cdecl*)(void*)) g_10034614)(hCrashLog);
+	if (g_crash_callback) {
+		((void (__cdecl*)(void*)) g_crash_callback)(hCrashLog);
 		fCanContinue = 1;
 	}
 	WriteFile(hCrashLog, &szLine[2], 1, &nBytesWritten, 0);
@@ -338,8 +338,8 @@ done_walk:
 	CloseHandle(hDbgFile);
 
 no_dbg:
-	if (g_10034614 && !fCanContinue) {
-		((void (__cdecl*)(int)) g_10034614)(-1);
+	if (g_crash_callback && !fCanContinue) {
+		((void (__cdecl*)(int)) g_crash_callback)(-1);
 	}
 	UnhandledExceptionFilter(pExceptionPointers);
 

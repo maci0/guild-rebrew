@@ -312,7 +312,7 @@ walking pointer had to be established in the target's order:
 	i = 0;
 	entries = *(int**) ((char*) slot + 0x10);
 	selected = entries;
-	count = dword_1002574c[*(int*) ((char*) req + 0xc)];
+	count = g_worker_entry_count[*(int*) ((char*) req + 0xc)];
 	for (; i < count; i++) {
 ```
 
@@ -1743,7 +1743,7 @@ Scaling through a `float` local folds the compare into `cmp byte ptr [esi],0x17`
 but schedules it ahead of the `fxch`:
 
 ```c
-mod_value = (float) ((double) mod_value * g_const_57d0);
+mod_value = (float) ((double) mod_value * g_const_half);
 value = (float) (acc * mod_value);            /* cmp; fxch  -> 391/396 */
 ```
 
@@ -1752,7 +1752,7 @@ the target does, but msvc6 then keeps the byte in a register and emits
 `mov al,[esi]` plus a later `cmp al,0x17`, one byte longer:
 
 ```c
-p2_wide = (double) mod_value * g_const_57d0;
+p2_wide = (double) mod_value * g_const_half;
 value = (float) (acc * p2_wide);              /* fxch; mov al -> obj 397 */
 ```
 
@@ -1764,7 +1764,7 @@ the scaled double the destination of the merge multiply drops it and shortens
 the object by two bytes:
 
 ```c
-acc = (double) mod_value * g_const_57d0;
+acc = (double) mod_value * g_const_half;
 mod_value = (float) (acc * quot);             /* no fxch -> obj 394 */
 ```
 

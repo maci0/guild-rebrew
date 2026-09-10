@@ -3,11 +3,11 @@
 // FUNCTION: SERVER 0x10010710
 // SIZE: 320
 
-extern int g_1002577c[];
+extern int g_field_worker_count_wt0[];
 extern char* g_entity_type_table; /* 0x100A8C30 */
-extern int g_1002578c[];
-extern int g_1002579c[];
-extern int g_100257ac[];
+extern int g_field_worker_count_wt1[];
+extern int g_field_worker_count_wt2[];
+extern int g_field_worker_count_wt3[];
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern int __cdecl cm_GetBuildingStatCount(unsigned char* entity);
 
@@ -43,13 +43,13 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
 		return 0;
 	}
 	if (type == 0) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 8) + g_1002577c[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 8) + g_field_worker_count_wt0[*(unsigned char*) (entry + 0x247)] * 20;
 	} else if (type == 1) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0xc) + g_1002578c[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0xc) + g_field_worker_count_wt1[*(unsigned char*) (entry + 0x247)] * 20;
 	} else if (type == 2) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0x10) + g_1002579c[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0x10) + g_field_worker_count_wt2[*(unsigned char*) (entry + 0x247)] * 20;
 	} else if (type == 3) {
-		limit = (unsigned char*) *(int*) ((char*) workers + 0x14) + g_100257ac[*(unsigned char*) (entry + 0x247)] * 20;
+		limit = (unsigned char*) *(int*) ((char*) workers + 0x14) + g_field_worker_count_wt3[*(unsigned char*) (entry + 0x247)] * 20;
 	} else if (type == 0xff) {
 		limit = (unsigned char*) *(int*) ((char*) workers + 0x1c) + cm_GetBuildingStatCount((unsigned char*) entity) * 20;
 	} else {

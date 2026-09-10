@@ -11,11 +11,11 @@ extern int __cdecl fcn_1001d280(void);   /* 0x1001d280 - allocator mode select *
 extern int __cdecl fcn_1001d4cd(int);    /* 0x1001d4cd - pool allocator init */
 extern int __cdecl fcn_1001e014(void);   /* 0x1001e014 - block allocator init */
 
-extern void* g_1176644c;   /* 0x1176644c - process heap handle */
-extern int g_11766450;     /* 0x11766450 - allocator mode: 3=pool, 2=block */
-extern int g_11766440;     /* 0x11766440 - pool region count */
-extern void* g_11766444;   /* 0x11766444 - pool region descriptor array */
-extern char g_10031b78;   /* 0x10031b78 - block allocator region-list head */
+extern void* _crtheap;   /* 0x1176644c - process heap handle */
+extern int __active_heap;     /* 0x11766450 - allocator mode: 3=pool, 2=block */
+extern int __sbh_cntHeaderList;     /* 0x11766440 - pool region count */
+extern void* __sbh_pHeaderList;   /* 0x11766444 - pool region descriptor array */
+extern char g_old_sbh_region_head;   /* 0x10031b78 - block allocator region-list head */
 
 /* 0x14-byte pool region descriptor: base = 1MB VirtualAlloc'd region,
  * header = separately heap-allocated region struct. */
@@ -31,23 +31,23 @@ typedef struct
 
 int __cdecl crt_heap_init(int mode)
 {
-    g_1176644c = HeapCreate(mode == 0, 0x1000, 0);
-    if (g_1176644c == NULL)
+    _crtheap = HeapCreate(mode == 0, 0x1000, 0);
+    if (_crtheap == NULL)
         return 0;
-    g_11766450 = fcn_1001d280();
-    if (g_11766450 == 3)
+    __active_heap = fcn_1001d280();
+    if (__active_heap == 3)
     {
         if (fcn_1001d4cd(0x3f8) == 0)
         {
-            HeapDestroy(g_1176644c);
+            HeapDestroy(_crtheap);
             return 0;
         }
     }
-    else if (g_11766450 == 2)
+    else if (__active_heap == 2)
     {
         if (fcn_1001e014() == 0)
         {
-            HeapDestroy(g_1176644c);
+            HeapDestroy(_crtheap);
             return 0;
         }
     }
@@ -59,29 +59,29 @@ void __cdecl __heap_term(void)
     int i;
     pool_region* r;
 
-    if (g_11766450 == 3)
+    if (__active_heap == 3)
     {
-        r = (pool_region*)g_11766444;
-        for (i = 0; i < g_11766440; r++, i++)
+        r = (pool_region*)__sbh_pHeaderList;
+        for (i = 0; i < __sbh_cntHeaderList; r++, i++)
         {
             VirtualFree(r->base, 0x100000, MEM_DECOMMIT);
             VirtualFree(r->base, 0, MEM_RELEASE);
-            HeapFree(g_1176644c, 0, r->header);
+            HeapFree(_crtheap, 0, r->header);
         }
-        HeapFree(g_1176644c, 0, g_11766444);
+        HeapFree(_crtheap, 0, __sbh_pHeaderList);
     }
-    else if (g_11766450 == 2)
+    else if (__active_heap == 2)
     {
-        void* node = &g_10031b78;
+        void* node = &g_old_sbh_region_head;
         do
         {
             void* pv = *(void**)((char*)node + 0x10);
             if (pv != NULL)
                 VirtualFree(pv, 0, MEM_RELEASE);
             node = *(void**)node;
-        } while (node != &g_10031b78);
+        } while (node != &g_old_sbh_region_head);
     }
-    HeapDestroy(g_1176644c);
+    HeapDestroy(_crtheap);
 }
 
 /* _heap_select: returns the allocator mode (3=pool/sbh, 2=block, 1=default).
@@ -168,27 +168,27 @@ checkver:
 /* _sbh_heap_init: allocates the region-header table from the process heap
  * and initializes the pool-allocator globals. */
 
-extern void* g_1176644c;   /* process heap handle */
-extern void* g_11766444;   /* pool region descriptor array */
-extern void* g_1176643c;   /* deferred group header (__sbh_pHeaderDefer) */
-extern int g_11766440;     /* pool region count */
-extern void* g_11766438;   /* pool region scan cursor */
-extern unsigned int g_11766448;  /* max pool allocation size */
-extern int g_11766430;     /* pool header-list allocated size */
+extern void* _crtheap;   /* process heap handle */
+extern void* __sbh_pHeaderList;   /* pool region descriptor array */
+extern void* __sbh_pHeaderDefer;   /* deferred group header (__sbh_pHeaderDefer) */
+extern int __sbh_cntHeaderList;     /* pool region count */
+extern void* __sbh_pHeaderScan;   /* pool region scan cursor */
+extern unsigned int g_max_pool_alloc_size;  /* max pool allocation size */
+extern int __sbh_sizeHeaderList;     /* pool header-list allocated size */
 
 int __cdecl fcn_1001d4cd(unsigned int size)
 {
     void* pentry;
 
-    pentry = HeapAlloc(g_1176644c, 0, 0x140);
-    g_11766444 = pentry;
+    pentry = HeapAlloc(_crtheap, 0, 0x140);
+    __sbh_pHeaderList = pentry;
     if (pentry == NULL)
         return 0;
-    g_11766448 = size;
-    g_1176643c = 0;
-    g_11766440 = 0;
-    g_11766438 = pentry;
-    g_11766430 = 0x10;
+    g_max_pool_alloc_size = size;
+    __sbh_pHeaderDefer = 0;
+    __sbh_cntHeaderList = 0;
+    __sbh_pHeaderScan = pentry;
+    __sbh_sizeHeaderList = 0x10;
     return 1;
 }
 

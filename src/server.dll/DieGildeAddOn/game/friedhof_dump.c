@@ -219,7 +219,7 @@ fail:
 extern unsigned short* g_entity_table_end;
 extern int g_next_object_id;
 extern int g_current_year;
-extern int g_1002574c[];
+extern int g_worker_entry_count[];
 extern float table_1002572c[];
 extern unsigned int g_entity_slot_table[];
 extern unsigned char g_current_season;
@@ -246,9 +246,9 @@ int __cdecl _ftol(void);
  * reuses the arg-1 slot, hence the `cmd = a` register copy.
  *
  * RELOC 674/674. What closed the bulk:
- * the 0x1003546c guard read an undeclared `g_1003546c` instead of
+ * the 0x1003546c guard read an undeclared `g_entity_table_end` instead of
  * `g_entity_table_end`; the three -1 guards are one `||` chain, not three
- * separate `goto`s; the source bound g_1002574c[cmd+8] is computed before
+ * separate `goto`s; the source bound g_worker_entry_count[cmd+8] is computed before
  * the FindSlotEntryFiltered call and spilled (0x10011a4d); the post-loop
  * move clears the source entry and fills the destination, not both on
  * found2 (0x10011b0d-0x10011b3e); 0xff lives in one register across the
@@ -278,7 +278,7 @@ int __cdecl _ftol(void);
  * gm_ResolveEntityById (x2), gv_CheckSlotActive, GetSlotEntry,
  * FindSlotEntryFiltered, gm_SubObjektNoKill, __ftol and
  * gm_AddOrAccumulateObject; the globals are g_entity_table_end,
- * g_entity_type_table, g_1002574c (x2), g_current_year, g_next_object_id,
+ * g_entity_type_table, g_worker_entry_count (x2), g_current_year, g_next_object_id,
  * g_current_season (x2), g_entity_slot_table (x2) and table_1002572c. */
 
 int __cdecl gv_MoveSlotEntry(void* a)
@@ -328,13 +328,13 @@ int __cdecl gv_MoveSlotEntry(void* a)
 	src_entry = *(int**) ((char*) found + 0x10);
 	/* The source bound is computed before the call (0x10011a4d) and spilled
 	 * to [esp+0x10]. */
-	src_count = g_1002574c[*(int*) ((char*) cmd + 8)];
+	src_count = g_worker_entry_count[*(int*) ((char*) cmd + 8)];
 	found2 = FindSlotEntryFiltered(a, rec2, 0, (void*) 0x10010700,
 	                               *(int*) ((char*) cmd + 0xd));
 	if (found2 == 0)
 		goto fail7;
 	dst_entry = *(int**) ((char*) found2 + 0x10);
-	dst_end = dst_entry + g_1002574c[*(int*) ((char*) cmd + 0xd)] * 17;
+	dst_end = dst_entry + g_worker_entry_count[*(int*) ((char*) cmd + 0xd)] * 17;
 	src_end = src_entry + src_count * 17;
 
 	if (dst_entry < dst_end) {

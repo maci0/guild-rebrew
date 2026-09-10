@@ -94,11 +94,11 @@ typedef struct __old_sbh_region
  * (0x1176643c's pair member 0x11766434 is here) and the old-sbh static
  * region head (0x10031b78) are defined in data_globals.c. */
 // DATA: SERVER 0x11766430
-int g_11766430;                 /* __sbh_sizeHeaderList - allocated size of header list */
+int __sbh_sizeHeaderList;                 /* __sbh_sizeHeaderList - allocated size of header list */
 // DATA: SERVER 0x11766434
-int g_11766434;                 /* __sbh_indGroupDefer - deferred group index */
+int __sbh_indGroupDefer;                 /* __sbh_indGroupDefer - deferred group index */
 // DATA: SERVER 0x1176643c
-void * g_1176643c;           /* __sbh_pHeaderDefer - deferred group header */
+void * __sbh_pHeaderDefer;           /* __sbh_pHeaderDefer - deferred group header */
 
 // DATA: SERVER 0x10033b98
-OldSbhRegion * g_10033b98;   /* __old_sbh_p_starting_region */
+OldSbhRegion * __old_sbh_p_starting_region;   /* __old_sbh_p_starting_region */

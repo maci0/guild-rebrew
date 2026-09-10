@@ -14,7 +14,7 @@
  * image. Do not treat this file as reversing work to finish.
  *
  * Behaviour: writes the runtime error message and calls the exit hook. The
- * g_10035508/g_1003550c check gates a pre-exit hook (fcn_1001fdf8) on the C
+ * __error_mode/__app_type check gates a pre-exit hook (fcn_1001fdf8) on the C
  * runtime's "report mode" flags. */
 
 /* rterr_entry: int num + char* text = 8 bytes. */
@@ -23,13 +23,13 @@ struct rterr_entry { int num; char* text; };   /* matches data_globals.c */
 
 extern void __cdecl fcn_1001fdf8(void);   /* 0x1001fdf8 - pre-exit hook */
 extern void __cdecl fcn_1001fe31(int);    /* 0x1001fe31 - _NMSG_WRITE */
-extern int g_10035508;                    /* 0x10035508 - report-mode flag */
-extern int g_1003550c;                    /* 0x1003550c - report-mode flag 2 */
+extern int __error_mode;                    /* 0x10035508 - report-mode flag */
+extern int __app_type;                    /* 0x1003550c - report-mode flag 2 */
 extern void (__cdecl* g_100317f0)(int);   /* 0x100317f0 - _exit hook */
 
 void __cdecl _amsg_exit(int msg)
 {
-    if (g_10035508 == 1 || (g_10035508 == 0 && g_1003550c == 1))
+    if (__error_mode == 1 || (__error_mode == 0 && __app_type == 1))
         fcn_1001fdf8();
     fcn_1001fe31(msg);
     g_100317f0(0xff);
@@ -43,7 +43,7 @@ extern void (__cdecl* g_100356e0)(void);   /* 0x100356e0 - runtime-error hook */
 
 void __cdecl fcn_1001fdf8(void)
 {
-    if (g_10035508 == 1 || (g_10035508 == 0 && g_1003550c == 1))
+    if (__error_mode == 1 || (__error_mode == 0 && __app_type == 1))
     {
         fcn_1001fe31(0xfc);
         if (g_100356e0 != NULL)
@@ -95,7 +95,7 @@ void __cdecl fcn_1001fe31(int rterrnum)
     off = i * 8;
     if (rterrnum != *(int*)(0x10033ef0 + off))
         return;
-    if (g_10035508 == 1 || (g_10035508 == 0 && g_1003550c == 1))
+    if (__error_mode == 1 || (__error_mode == 0 && __app_type == 1))
     {
         char* volatile* slot = &((char* volatile*)0x10033ef4)[off >> 2];
 
@@ -275,32 +275,32 @@ end:
  * GetActiveWindow/GetLastActivePopup owner-window chain) on first use and
  * forwards the (text, caption, type) triple. */
 
-extern void* g_10035838;   /* 0x10035838 - cached MessageBoxA */
-extern void* g_1003583c;   /* 0x1003583c - cached GetActiveWindow */
-extern void* g_10035840;   /* 0x10035840 - cached GetLastActivePopup */
+extern void* pfnMessageBoxA;   /* 0x10035838 - cached MessageBoxA */
+extern void* pfnGetActiveWindow;   /* 0x1003583c - cached GetActiveWindow */
+extern void* pfnGetLastActivePopup;   /* 0x10035840 - cached GetLastActivePopup */
 
 int __cdecl fcn_10022107(const char* text, const char* caption, unsigned int type)
 {
     void* hwnd = NULL;
 
-    if (g_10035838 == hwnd)
+    if (pfnMessageBoxA == hwnd)
     {
         HMODULE h;
 
         h = LoadLibraryA("user32.dll");
         if ((void*)h == hwnd ||
-            (g_10035838 = (void*)GetProcAddress(h, "MessageBoxA")) == hwnd)
+            (pfnMessageBoxA = (void*)GetProcAddress(h, "MessageBoxA")) == hwnd)
             goto fail;
-        g_1003583c = (void*)GetProcAddress(h, "GetActiveWindow");
-        g_10035840 = (void*)GetProcAddress(h, "GetLastActivePopup");
+        pfnGetActiveWindow = (void*)GetProcAddress(h, "GetActiveWindow");
+        pfnGetLastActivePopup = (void*)GetProcAddress(h, "GetLastActivePopup");
     }
-    if (g_1003583c != NULL)
+    if (pfnGetActiveWindow != NULL)
     {
-        hwnd = ((void* (__stdcall*)(void))g_1003583c)();
-        if (hwnd != NULL && g_10035840 != NULL)
-            hwnd = ((void* (__stdcall*)(void*))g_10035840)(hwnd);
+        hwnd = ((void* (__stdcall*)(void))pfnGetActiveWindow)();
+        if (hwnd != NULL && pfnGetLastActivePopup != NULL)
+            hwnd = ((void* (__stdcall*)(void*))pfnGetLastActivePopup)(hwnd);
     }
-    return ((int (__stdcall*)(void*, const char*, const char*, unsigned int))g_10035838)(
+    return ((int (__stdcall*)(void*, const char*, const char*, unsigned int))pfnMessageBoxA)(
         hwnd, text, caption, type);
 fail:
     return 0;

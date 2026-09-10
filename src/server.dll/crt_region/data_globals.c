@@ -11,7 +11,7 @@
  *
  * Types follow the byte-verified extern declarations in this directory
  * (crt_init.c, dllmain.c, malloc.c, free.c, realloc.c, lock_streams.c,
- * mlock.c): g_100354b4/b8/bc/c0 are unsigned — __CRT_INIT shifts them
+ * mlock.c): _osver/b8/bc/c0 are unsigned — __CRT_INIT shifts them
  * with SHR in the reference; g_11767588 is the DllMain user-handler
  * fnptr; locktable holds CRITICAL_SECTION* entries; g_lock_stream_table
  * anchors the stream lock-pointer table (lock index math uses its
@@ -23,30 +23,30 @@
 unsigned int g_10033b9c;   /* block alloc threshold (mode 2) */
 
 // DATA: SERVER 0x100354b4
-unsigned int g_100354b4;   /* OS version dword (GetVersion) */
+unsigned int _osver;   /* OS version dword (GetVersion) */
 // DATA: SERVER 0x100354b8
-unsigned int g_100354b8;   /* (major << 8) | minor */
+unsigned int _winver;   /* (major << 8) | minor */
 // DATA: SERVER 0x100354bc
-unsigned int g_100354bc;   /* OS major */
+unsigned int _winmajor;   /* OS major */
 // DATA: SERVER 0x100354c0
-unsigned int g_100354c0;   /* OS minor */
+unsigned int _winminor;   /* OS minor */
 // DATA: SERVER 0x100354ec
-int g_100354ec;            /* _cexit-already-ran flag */
+int _C_Termination_Done;            /* _cexit-already-ran flag */
 // DATA: SERVER 0x100354fc
-int g_100354fc;            /* __CRT_INIT attach/detach refcount */
+int __proc_attached;            /* __CRT_INIT attach/detach refcount */
 // DATA: SERVER 0x10035500
-void* g_10035500;          /* environment strings ptr */
+void* _aenvptr;          /* environment strings ptr */
 // DATA: SERVER 0x1003559c
 int g_1003559c;            /* new-handler retry flag (_callnewh) */
 
 // DATA: SERVER 0x11766448
-unsigned int g_11766448;   /* max pool allocation size (mode 3) */
+unsigned int g_max_pool_alloc_size;   /* max pool allocation size (mode 3) */
 // DATA: SERVER 0x1176644c
-void* g_1176644c;          /* process heap handle */
+void* _crtheap;          /* process heap handle */
 // DATA: SERVER 0x11766450
-int g_11766450;            /* allocator mode: 3=pool, 2=block */
+int __active_heap;            /* allocator mode: 3=pool, 2=block */
 // DATA: SERVER 0x11767584
-void* g_11767584;          /* GetCommandLineA result */
+void* _acmdln;          /* GetCommandLineA result */
 // DATA: SERVER 0x11767588
 int (__stdcall* g_11767588)(void* hmod, unsigned int reason, void* reserved); /* DllMain user handler */
 
@@ -61,7 +61,7 @@ CRITICAL_SECTION* locktable[0x40]; /* per-lock CRITICAL_SECTION ptrs */
  * in .bss and are pinned here so the .text data operands converge). --- */
 
 // DATA: SERVER 0x11766438
-void* g_11766438;          /* pool: region scan cursor (ptr into array) */
+void* __sbh_pHeaderScan;          /* pool: region scan cursor (ptr into array) */
 // DATA: SERVER 0x11766440
 int __sbh_cntHeaderList; /* was __sbh_cntHeaderList */            /* pool: region count */
 // DATA: SERVER 0x11766444
@@ -79,9 +79,9 @@ int g_11767590;            /* cmdline/env parsed flag */
 // DATA: SERVER 0x10031b6c
 int g_10031b6c;            /* TLS index (__tlsindex) */
 // DATA: SERVER 0x10031b78
-char g_10031b78;           /* block allocator region-list head node */
+char g_old_sbh_region_head;           /* block allocator region-list head node */
 // DATA: SERVER 0x100317d8
-void* g_100317d8;          /* first init fnptr */
+void* _FPinit;          /* first init fnptr */
 // DATA: SERVER 0x100317f0
 void (__cdecl* g_100317f0)(int); /* _exit hook fnptr */
 // DATA: SERVER 0x100354c4
@@ -95,11 +95,11 @@ int g_100354e0;            /* _pgmptr */
 // DATA: SERVER 0x100354e8
 char g_100354e8;           /* 0x1001bb4c tail flag */
 // DATA: SERVER 0x10035508
-int g_10035508;            /* __amsg_exit report-mode flag */
+int __error_mode;            /* __amsg_exit report-mode flag */
 // DATA: SERVER 0x1003550c
-int g_1003550c;            /* __amsg_exit report-mode flag 2 */
+int __app_type;            /* __amsg_exit report-mode flag 2 */
 // DATA: SERVER 0x100355a4
-int g_100355a4;            /* fully-free page count (SBH) */
+int __old_sbh_decommitable_pages;            /* fully-free page count (SBH) */
 // DATA: SERVER 0x100355d8
 char g_100355d8[0x104];    /* module filename buffer */
 // DATA: SERVER 0x100356dc
@@ -113,10 +113,10 @@ void* g_100355a0;          /* _pnhheap - new-handler fnptr (0x1001d238) */
 struct rterr_entry { int num; char* text; };   /* _NMSG_WRITE runtime-error table (0x1001fe31) */
 struct rterr_entry g_rterrlist[18];
 // DATA: SERVER 0x10035838
-void* g_10035838;          /* cached MessageBoxA proc (0x10022107) */
+void* pfnMessageBoxA;          /* cached MessageBoxA proc (0x10022107) */
 // DATA: SERVER 0x1003583c
-void* g_1003583c;          /* cached GetActiveWindow proc (0x10022107) */
+void* pfnGetActiveWindow;          /* cached GetActiveWindow proc (0x10022107) */
 // DATA: SERVER 0x10035840
-void* g_10035840;          /* cached GetLastActivePopup proc (0x10022107) */
+void* pfnGetLastActivePopup;          /* cached GetLastActivePopup proc (0x10022107) */
 // DATA: SERVER 0x11766564
 void** g_11766564;         /* tracked-block (stream) table ptr - __flsall/_fcloseall walk this */

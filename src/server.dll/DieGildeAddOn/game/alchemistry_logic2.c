@@ -18,12 +18,12 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 extern float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
-extern float g_float_const_cc;
-extern float g_float_const_a0;
+extern float g_const_0_0;
+extern float g_const_1_0;
 extern double dScaleFactor;
 extern int g_alchemy_entity_table[];
 int* __cdecl ahm_LookupEntityInTable(int);
-extern dispatch_fn PTR_LAB_1002c5a0[];
+extern dispatch_fn g_chain_handler_table[];
 
 // SIZE 0x8
 typedef struct {
@@ -158,7 +158,7 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 
 /* Clamps a floating-point alchemy value to valid bounds.
  * Prevents stat overflow/underflow during recipe processing.
- * g_float_const_cc (0x100256cc) and g_float_const_a0 (0x100256a0) hold
+ * g_const_0_0 (0x100256cc) and g_const_1_0 (0x100256a0) hold
  * 0.0f and 1.0f, so this is a clamp into [0.0, 1.0].
  *
  * The in-range test is one short-circuit `&&`, not a nested if, and the two
@@ -191,14 +191,14 @@ int __cdecl ahm_ClampFloatValue(float* arg1, float* arg2)
 	float c;
 
 	v = arg1[4] + arg2[1];
-	if (v > g_float_const_cc && v < g_float_const_a0) {
+	if (v > g_const_0_0 && v < g_const_1_0) {
 		arg2[1] = v;
 		return 1;
 	}
-	if (v <= g_float_const_cc) {
-		c = g_float_const_cc;
+	if (v <= g_const_0_0) {
+		c = g_const_0_0;
 	} else {
-		c = g_float_const_a0;
+		c = g_const_1_0;
 	}
 	arg2[1] = c;
 	return 1;

@@ -40,15 +40,15 @@ extern void* __cdecl fcn_1001e514(OldSbhPage* ppage, size_t free_para_count, siz
 extern int __cdecl fcn_1001e638(OldSbhRegion* preg, OldSbhPage* ppage, unsigned char* pmap, size_t new_para_sz);
 
 /* --- game globals (sbh_globals.c / data_globals.c) --- */
-extern int g_11766430;                 /* __sbh_sizeHeaderList */
-extern int g_11766434;                 /* __sbh_indGroupDefer */
-extern void* g_11766438;               /* __sbh_pHeaderScan */
-extern void* g_1176643c;               /* __sbh_pHeaderDefer */
+extern int __sbh_sizeHeaderList;                 /* __sbh_sizeHeaderList */
+extern int __sbh_indGroupDefer;                 /* __sbh_indGroupDefer */
+extern void* __sbh_pHeaderScan;               /* __sbh_pHeaderScan */
+extern void* __sbh_pHeaderDefer;               /* __sbh_pHeaderDefer */
 /* Header-list symbols use LIBCMT names so heapinit.obj resolves without sbheap.obj. */
 extern int __sbh_cntHeaderList;        /* was __sbh_cntHeaderList */
 extern void* __sbh_pHeaderList;        /* was __sbh_pHeaderList */
-extern OldSbhRegion* g_10033b98;       /* __old_sbh_p_starting_region */
-extern int g_100355a4;                 /* __old_sbh_decommitable_pages */
+extern OldSbhRegion* __old_sbh_p_starting_region;       /* __old_sbh_p_starting_region */
+extern int __old_sbh_decommitable_pages;                 /* __old_sbh_decommitable_pages */
 
 /* Threshold / init flags + old-sbh enable flag (LIBCMT data symbols).
  * MSVC6 ignores /alternatename, so these must be real definitions. */

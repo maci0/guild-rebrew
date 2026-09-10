@@ -16,8 +16,8 @@ extern int g_file_version;
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 extern int g_file_version; /* 0x1002d4ec */
 extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
-extern int g_101de454; /* 0x101de454 */
-extern int g_101de55c; /* 0x101de55c */
+extern int g_aux_entity_count; /* 0x101de454 */
+extern int g_aux_entity_buffer; /* 0x101de55c */
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
@@ -158,7 +158,7 @@ unsigned int ls_ID2Ptr(void)
 	return 1;
 }
 
-extern int g_1002dde0;
+extern int g_producer_id_table;
 extern int g_array_count;
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
 extern int g_stat1;
@@ -167,8 +167,8 @@ extern int g_stat3;
 extern int g_stat4;
 extern int g_flag_3c;
 extern void* g_array_ptr;
-extern char g_stream_pool[1];
-extern int g_stream_count[4];
+extern int g_stream_pool; /* 0x10034670 */
+extern int g_stream_count; /* 0x10034678 */
 extern int g_connection_counter;
 /* Canonical definition lives in DieGildeAddOn/game/spiel.c. */
 extern int g_next_object_id;

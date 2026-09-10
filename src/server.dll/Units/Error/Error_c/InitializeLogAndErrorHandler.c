@@ -8,12 +8,12 @@
 
 #include <windows.h>
 
-extern int g_10034610;
-extern void* g_10034614;
-extern int g_10034618;
-extern char g_1003461c;
-extern int g_117660e0;
-extern int g_11766204;
+extern int g_panic_callback;
+extern void* g_crash_callback;
+extern unsigned int g_log_mode_flags; /* 0x10034618 */
+extern char g_crash_dump_all_frames;
+extern int g_owner_window;
+extern int g_log_file_handle;
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 extern int __cdecl fcn_1001a567(int);
 extern char* __cdecl fcn_1001a527(char*);
@@ -33,18 +33,18 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 	char* f;
 	char* sp;
 
-	g_10034610 = a;
-	g_10034618 = d;
-	g_10034614 = b;
-	g_117660e0 = c;
-	g_1003461c = (d >> 4) & 1;
+	g_panic_callback = a;
+	g_log_mode_flags = d;
+	g_crash_callback = b;
+	g_owner_window = c;
+	g_crash_dump_all_frames = (d >> 4) & 1;
 	SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER) 0x10002770);
 	h = fcn_1001a567(0);
 	GetWindowTextA((HWND) c, path, 0x100);
 	((void (__stdcall*)(int, const char*, int)) *(void**) 0x1002403c)(0, (const char*) 0x11766100, 0x104);
 	*fcn_1001a540((char*) 0x11766100, 0x5c) = 0;
 	sprintf((char*) 0x117640e0, (char*) 0x1002735c, path, fcn_1001a527((char*) &h));
-	if (g_10034618 & 1) {
+	if (g_log_mode_flags & 1) {
 		sp = (char*) 0x10027084;
 		do {
 			sprintf(buf, (char*) 0x100270fc, (char*) 0x11766100, sp);
@@ -61,13 +61,13 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 			sp += 0x20;
 		} while ((int) sp < 0x100270e4);
 	}
-	if (g_10034618 & 8) {
+	if (g_log_mode_flags & 8) {
 		((void (__stdcall*)(void)) *(void**) 0x10024048)();
-		g_11766204 = ((int (__stdcall*)(int)) *(void**) 0x10024044)(-0xb);
+		g_log_file_handle = ((int (__stdcall*)(int)) *(void**) 0x10024044)(-0xb);
 	}
 	sp = (char*) 0x10027078;
 	do {
-		fcn_10002640((char*) 0x117640e0, g_10034618, *(int*) sp);
+		fcn_10002640((char*) 0x117640e0, g_log_mode_flags, *(int*) sp);
 		sp += 4;
 	} while ((int) sp < 0x10027084);
 }

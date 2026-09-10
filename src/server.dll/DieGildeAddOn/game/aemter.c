@@ -17,7 +17,7 @@ typedef struct {
 	int d;                 /* +0x14 */
 } OFFICE_SLOT;
 
-/* 24-byte copy payload fetched from the g_str_29bb8 template table. */
+/* 24-byte copy payload fetched from the g_office_role_templates template table. */
 // SIZE 0x18
 typedef struct {
 	int f0;
@@ -29,7 +29,7 @@ typedef struct {
 } COPY24;
 
 extern char g_office_slots[]; /* 0x101de5a0 */
-extern COPY24 g_str_29bb8[];
+extern COPY24 g_office_role_templates[];
 void* __cdecl gm_LookupEntityRecordById(int entityId);
 
 /* Validates whether an entity can take an office position.  Scans the
@@ -99,7 +99,7 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 //       (`*(unsigned char*) &arg1 = cmd[6]`).  The original reloads it as a
 //       dword for both the copy compare and the +0x168 store, which is what
 //       makes it use a 0x18 frame with `push edi` in the prologue;
-//     - the copy index is spelled `g_str_29bb8[((OFFICE_SLOT*) g_office_slots)[i].b]`, not
+//     - the copy index is spelled `g_office_role_templates[((OFFICE_SLOT*) g_office_slots)[i].b]`, not
 //       through a row pointer, so it CSEs with the `.b` the guard left in al
 //       and emits `and eax,0xff` / `lea ecx,[eax+eax*2]`;
 //     - the home dword is re-read through a `unsigned int*` local taken
@@ -158,7 +158,7 @@ unsigned int __cdecl ValidateAndAssignOffice(unsigned int* arg1)
 			return 0;
 		if (((OFFICE_SLOT*) g_office_slots)[i].b != ((OFFICE_SLOT*) g_office_slots)[j].b)
 			return 0;
-		copy = g_str_29bb8[((OFFICE_SLOT*) g_office_slots)[i].b];
+		copy = g_office_role_templates[((OFFICE_SLOT*) g_office_slots)[i].b];
 		hp = (unsigned int*) &arg1;
 		hw = *hp;
 		f0v = copy.f0;

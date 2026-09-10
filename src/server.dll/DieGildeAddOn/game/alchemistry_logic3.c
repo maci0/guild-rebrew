@@ -18,12 +18,12 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 extern float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
-extern float g_float_const_cc;
-extern float g_float_const_a0;
+extern float g_const_0_0;
+extern float g_const_1_0;
 extern double dScaleFactor;
 extern int g_alchemy_entity_table[];
 int* __cdecl ahm_LookupEntityInTable(int);
-extern dispatch_fn PTR_LAB_1002c5a0[];
+extern dispatch_fn g_chain_handler_table[];
 
 // SIZE 0x8
 typedef struct {
@@ -74,7 +74,7 @@ int __cdecl ahm_ProcessEntityChain(char* cmd_payload)
 		if (node->cmd == 6) {
 			goto check_result;
 		}
-		if (PTR_LAB_1002c5a0[node->cmd](node) != 0) {
+		if (g_chain_handler_table[node->cmd](node) != 0) {
 			ok = 0;
 		}
 		node = node->next;

@@ -35,7 +35,7 @@
 #include "../command_internal.h"
 
 extern float g_color_scale; /* 0x100256a4: stat upper bound, 252.0 */
-extern float g_float_const_cc; /* 0x100256cc: stat lower bound, 0.0 */
+extern float g_const_0_0; /* 0x100256cc: stat lower bound, 0.0 */
 extern unsigned int _ftol(void);
 
 /* Execution handler: modifies a character stat by index.
@@ -51,7 +51,7 @@ extern unsigned int _ftol(void);
  * `<` retest survives with `test ah,1`. A `v >= _g_stat_min` retest scores
  * 159/159 too but compares the wrong global (stores max for min < v < max);
  * the float slots here resolve to the reference's own globals, g_color_scale
- * (252.0) and g_float_const_cc (0.0), verified against the .obj relocations.
+ * (252.0) and g_const_0_0 (0.0), verified against the .obj relocations.
  * Prior full dead-end log in .scratch/a0_baseline2.c. */
 
 // FUNCTION: SERVER 0x100100a0
@@ -66,7 +66,7 @@ int __cdecl cm_ExModifyStat(int* param_1)
 		return 1;
 	}
 	if (!((float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record)) < g_color_scale)) goto retest;
-	if (!((float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record)) <= g_float_const_cc)) goto retest;
+	if (!((float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record)) <= g_const_0_0)) goto retest;
 	goto use_min;
 retest:
 	new_stat_value = (float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record));
@@ -74,7 +74,7 @@ retest:
 	*(char*) (stat_index + 0x80 + entity_record) = (char) (long) g_color_scale;
 	return 0;
 use_min:
-	new_stat_value = g_float_const_cc;
+	new_stat_value = g_const_0_0;
 store:
 	*(char*) (stat_index + 0x80 + entity_record) = (char) (long) new_stat_value;
 	return 0;

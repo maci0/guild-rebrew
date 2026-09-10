@@ -16,7 +16,7 @@ extern float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
 extern double dScaleFactor;
-extern dispatch_fn PTR_LAB_1002c5a0[];
+extern dispatch_fn g_chain_handler_table[];
 
 extern char* g_entity_type_table;
 extern int g_citizen_count;

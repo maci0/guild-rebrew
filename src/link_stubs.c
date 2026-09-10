@@ -20,23 +20,21 @@ int fcn_1001a6a1 = 0;
 int fcn_10016ea0 = 0;
 float table_1002572c[1] = {0.0f};
 int table_1002574c[1] = {0};
-int g_1002575c[1] = {0};
-int g_1002576c[1] = {0};
+int g_field_worker_count[1] = {0};
+int g_field_entry_count[1] = {0};
 char g_1002d444 = 0;
 char g_1002d45c = 0;
 char g_1002d474 = 0;
 int g_1002d4f0 = 0;
 int g_1002d4f4 = 0;
 char g_1002d4f8 = 0;
-char g_1002d4fc = 0;
+char s_ls_tmp_1002d4fc = 0;
 char g_10031004[1] = {0};
 char g_10031484[1] = {0};
 char g_100314b8[1] = {0};
-int g_1003546c = 0;
-int g_10035880 = 0;
+int g_entity_table_end = 0;
+int g_current_year = 0;
 int g_101de560 = 0;
-int g_101deac0 = 0;
-int g_101deae8 = 0;
 unsigned char* g_EntityListStart = 0;
 unsigned char* g_EntitySearchPtr = 0;
 unsigned char g_FilterActive = 0;
@@ -62,8 +60,8 @@ int g_alloc_root_size_total = 0;
 char* g_array_base = 0;
 unsigned char g_byte_table_30861 = 0;
 int g_console_handle = 0;
-float g_const_57bc = 0;
-float g_const_5fbc = 0;
+float g_const_42_0 = 0;
+float g_const_1_over_32767 = 0;
 int g_default_group_name = 0;
 int g_default_group_name_4 = 0;
 int g_dispatch_table[1] = {0};
@@ -78,10 +76,10 @@ int g_entity_id_counter = 0;
 unsigned int g_query_state_a0c[768] = {0};
 // DATA: SERVER 0x1002d4ec
 int g_file_version = 0;
-float g_float_const_a0 = 0;
+float g_const_1_0 = 0;
 // DATA: SERVER 0x100256a8
-float g_float_const_a8 = 0;
-float g_float_const_cc = 0;
+float g_const_neg_1_0 = 0;
+float g_const_0_0 = 0;
 int g_game_speed_value = 0;
 float g_gv_const_5680 = 0;
 float g_gv_const_57c4 = 0;
@@ -93,7 +91,6 @@ int g_net_socket = 0;
 int g_object_count = 0;
 // DATA: SERVER 0x101de5a0
 char g_office_slots[0x3f0];
-int g_owner_window = 0;
 int g_plant_info_table = 0;
 int g_query_filter_max_id = 0;
 short g_query_filter_type = 0;
@@ -174,10 +171,8 @@ int _fltused = 0;
 
 /* --- Auto-added stubs for symbols lost during naked->C conversion --- */
 int __cdecl ahm_RandomBelow(void) { return 0; }
-unsigned char byte_100a9820 = 0;
-unsigned char byte_1014d8e0 = 0;
 int __cdecl destroy_entity(void* p) { (void)p; return 0; }
-int dword_1002574c = 0;
+int g_worker_entry_count = 0;
 int __cdecl fcn_10002640(void) { return 0; }
 int __cdecl fcn_10003960(void) { return 0; }
 int __cdecl fcn_100058d0(void) { return 0; }
@@ -209,17 +204,13 @@ int __cdecl fcn_1001ede5(void) { return 0; }
 int __cdecl fcn_1001eec1(void) { return 0; }
 int __cdecl find_entity_26(void) { return 0; }
 int __cdecl find_entity_27(void) { return 0; }
-int g_1002574c = 0;
-int g_1002577c = 0;
-int g_1002578c = 0;
-int g_1002579c = 0;
-int g_100257ac = 0;
-int g_1002dde0 = 0;
-int g_10030b6c = 0;
-int g_10034610 = 0;
-int g_10034614 = 0;
-int g_10034618 = 0;
-int g_1003461c = 0;
+int g_field_worker_count_wt0 = 0;
+int g_field_worker_count_wt1 = 0;
+int g_field_worker_count_wt2 = 0;
+int g_field_worker_count_wt3 = 0;
+int g_producer_id_table = 0;
+int g_crash_callback = 0;
+int g_crash_dump_all_frames = 0;
 int g_10034624 = 0;
 int g_10034628 = 0;
 int g_1003462c = 0;
@@ -227,10 +218,9 @@ int g_10034630 = 0;
 int g_10034634 = 0;
 int g_10034638 = 0;
 int g_10034640 = 0;
-int g_10034678 = 0;
-int g_10035434 = 0;
-int g_101de454 = 0;
-int g_101de55c = 0;
+int g_citizen_count = 0;
+int g_aux_entity_count = 0;
+int g_aux_entity_buffer = 0;
 int g_117640a0 = 0;
 int g_117640a4 = 0;
 int g_117640b0 = 0;
@@ -239,13 +229,12 @@ int g_117640b8 = 0;
 int g_117640bc = 0;
 int g_117640c0 = 0;
 int g_117640c4 = 0;
-int g_117660e0 = 0;
-int g_11766204 = 0;
-int g_const_57c0 = 0;
-int g_download_buffer = 0;
+int g_owner_window = 0;
+int g_const_21_0 = 0;
 int g_download_received = 0;
+unsigned int g_download_buffer = 0;
+unsigned int g_download_total_size = 0;
 int g_download_slots = 0;
-int g_download_total_size = 0;
 // DATA: SERVER 0x1009aca0
 unsigned char g_entity_base[1] = {0};
 int g_entity_end = 0;
@@ -262,12 +251,12 @@ int g_query_match_count = 0;
 int g_relationship_matrix_primary = 0;
 int g_relationship_matrix_secondary = 0;
 int g_sim_ents = 0;
-int g_str_29bb8 = 0;
+int g_office_role_templates = 0;
 int g_unknown_1de450 = 0;
 /* inflate_blocks / inflate_blocks_free are provided by the vendored
  * references/zlib-1.1.3/infblock.c; stubs here would shadow the real ones. */
 int __cdecl lb_ExLobbyServerCommand(void) { return 0; }
-int PTR_LAB_1002c5a0[1] = {0};
+int g_chain_handler_table[1] = {0};
 int __cdecl rand_mod(void) { return 0; }
 int __cdecl read_uint32_be(void) { return 0; }
 int __cdecl ReadVfsCompressed(void) { return 0; }
@@ -492,7 +481,7 @@ double g_dbl_const_688 = 2.0;
 // DATA: SERVER 0x100256d0
 double g_dbl_const_6d0 = 0.001;
 // DATA: SERVER 0x100257d0
-double g_const_57d0 = 0.5;
+double g_const_half = 0.5;
 // DATA: SERVER 0x100257d8
 double g_dbl_const_7d8 = 1.0;
 // DATA: SERVER 0x10025810
@@ -504,17 +493,17 @@ double g_dbl_const_f90 = 8.0;
 // DATA: SERVER 0x10025f98
 double g_dbl_const_f98 = 900.0;
 // DATA: SERVER 0x10025fa0
-double g_const_5fa0 = 0.0013888888888888887;
+double g_const_1_over_720 = 0.0013888888888888887;
 // DATA: SERVER 0x10025fa8
-float g_const_5fa8 = 896.0f;
+float g_const_896_0 = 896.0f;
 // DATA: SERVER 0x10025fac
-float g_const_5fac = 0.06875f;
+float g_const_0_06875 = 0.06875f;
 // DATA: SERVER 0x10025fb0
-float g_const_5fb0 = 2.2f;
+float g_const_2_2 = 2.2f;
 // DATA: SERVER 0x10025fb4
-float g_const_5fb4 = 1.5f;
+float g_const_1_5 = 1.5f;
 // DATA: SERVER 0x10025fb8
-float g_const_5fb8 = 0.01f;
+float g_const_0_01 = 0.01f;
 
 /* Savegame header tail: the 9 bytes "Savegame\0" copied into the header at
  * +0x9c by ls_LoadSavegameHeader. Layout must match its struct SaveHeaderTail
@@ -536,9 +525,9 @@ int g_tick_rate = 0;
 
 /* Small-block-heap pool region list, zero-init .data (BSS) in the original. */
 // DATA: SERVER 0x11766440
-int g_11766440 = 0;
+int __sbh_cntHeaderList = 0;
 // DATA: SERVER 0x11766444
-void* g_11766444 = 0;
+void* __sbh_pHeaderList = 0;
 
 /* Game's private toupper (0x1001b0c0), called by OpenVfsStream. Forwarded to
  * the CRT rather than stubbed: OpenVfsStream uppercases path characters, so a

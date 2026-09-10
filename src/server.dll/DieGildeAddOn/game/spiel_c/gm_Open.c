@@ -26,7 +26,7 @@ extern unsigned char* g_entity_ptr;
 extern unsigned short* g_query_base;
 extern int g_100a8cf8;
 extern int g_1009b764;
-extern int g_1002dde0;
+extern int g_producer_id_table;
 /* fcn.1001a140 — the original binary calls this thunk (srand(timeGetTime()))
  * between the producible-count loop and the exit log; the reversed CRT
  * provided it as `getpid` before run_000.c was dropped (c77489a). */
@@ -115,7 +115,7 @@ int __cdecl gm_Open(int map_id)
 		base[-2] = 1000;
 		base[-1] = player_field;
 		copy_dst[-1] = 1000;
-		memcpy((void*) copy_dst, (void*) &g_1002dde0, 0x2a80);
+		memcpy((void*) copy_dst, (void*) &g_producer_id_table, 0x2a80);
 		src_player_ptr = src_player_ptr + 0xbd;
 		dst_player_ptr = dst_player_ptr + 0xaa4;
 	} while ((int) src_player_ptr < (int) 0x100a9bbc);

@@ -16,16 +16,16 @@ extern char g_crash_space; /* 0x10027328 */
 extern char g_str_10028888; /* 0x10028888 */
 extern char g_str_10028aec; /* 0x10028AEC */
 extern char g_str_10028b04; /* 0x10028B04 */
-extern char g_str_10028b60; /* 0x10028B60 */
-extern char g_str_10028b78; /* 0x10028B78 */
+extern char s_m_pool_alloc_tp_m_pool_10028b60; /* 0x10028B60 */
+extern char s_m_pool_get_free_tp_m_pool_10028b78; /* 0x10028B78 */
 extern unsigned char g_10028bdc[]; /* 0x10028BDC */
 extern unsigned char g_data_restore_gap[]; /* 0x1002A000 */
 extern char g_1002a0f8; /* 0x1002A0F8 */
-extern int g_1002dde0; /* 0x1002DDE0 */
+extern int g_producer_id_table; /* 0x1002DDE0 */
 extern char g_query_filter_state; /* 0x10030B9E */
 extern char g_str_10031500; /* 0x10031500 */
 extern char g_str_10031538; /* 0x10031538 */
-extern void * g_100317d8; /* 0x100317D8, first init fnptr */
+extern void * _FPinit; /* 0x100317D8, first init fnptr */
 extern char g_lock_stream_table; /* 0x100317F8, stream lock-pointer table anchor (0x100317f8..0x10031a58, stride 0x20) */
 extern CRITICAL_SECTION * locktable; /* 0x10031AAC, per-lock CRITICAL_SECTION ptr table (0x40 entries) */
 extern struct rterr_entry[18] g_rterrlist; /* 0x10033EF0, _NMSG_WRITE runtime-error table (0x1001fe31) */
@@ -78,46 +78,46 @@ extern unsigned char g_rdata_restore_252e8[]; /* 0x100252E8 */
 /* .bss */
 extern void (__cdecl *)(int) g_100317f0; /* 0x100317F0, _exit hook fnptr */
 extern int g_10031b6c; /* 0x10031B6C, TLS index (__tlsindex) */
-extern char g_10031b78; /* 0x10031B78, block allocator region-list head node */
-extern OldSbhRegion * g_10033b98; /* 0x10033B98, __old_sbh_p_starting_region (V5 sbh rover) */
+extern char g_old_sbh_region_head; /* 0x10031B78, block allocator region-list head node */
+extern OldSbhRegion * __old_sbh_p_starting_region; /* 0x10033B98, __old_sbh_p_starting_region (V5 sbh rover) */
 extern unsigned int g_10033b9c; /* 0x10033B9C, block alloc threshold (allocator mode 2) */
-extern unsigned int g_100354b4; /* 0x100354B4, OS version dword (GetVersion) */
-extern unsigned int g_100354b8; /* 0x100354B8, (major << 8) | minor */
-extern unsigned int g_100354bc; /* 0x100354BC, OS major */
-extern unsigned int g_100354c0; /* 0x100354C0, OS minor */
+extern unsigned int _osver; /* 0x100354B4, OS version dword (GetVersion) */
+extern unsigned int _winver; /* 0x100354B8, (major << 8) | minor */
+extern unsigned int _winmajor; /* 0x100354BC, OS major */
+extern unsigned int _winminor; /* 0x100354C0, OS minor */
 extern int g_100354c4; /* 0x100354C4, __argc */
 extern int g_100354c8; /* 0x100354C8, __argv */
 extern int g_100354d0; /* 0x100354D0, __envp */
 extern int g_100354e0; /* 0x100354E0, _pgmptr */
 extern char g_100354e8; /* 0x100354E8, 0x1001bb4c tail flag */
-extern int g_100354ec; /* 0x100354EC, _cexit-already-ran flag */
-extern int g_100354fc; /* 0x100354FC, __CRT_INIT attach/detach refcount */
-extern void * g_10035500; /* 0x10035500, environment strings ptr */
-extern int g_10035508; /* 0x10035508, __amsg_exit report-mode flag */
-extern int g_1003550c; /* 0x1003550C, __amsg_exit report-mode flag 2 */
+extern int _C_Termination_Done; /* 0x100354EC, _cexit-already-ran flag */
+extern int __proc_attached; /* 0x100354FC, __CRT_INIT attach/detach refcount */
+extern void * _aenvptr; /* 0x10035500, environment strings ptr */
+extern int __error_mode; /* 0x10035508, __amsg_exit report-mode flag */
+extern int __app_type; /* 0x1003550C, __amsg_exit report-mode flag 2 */
 extern int g_1003559c; /* 0x1003559C, new-handler retry flag (_callnewh) */
 extern void * g_100355a0; /* 0x100355A0, _pnhheap new-handler fnptr (0x1001d238) */
-extern int g_100355a4; /* 0x100355A4, fully-free page count (SBH) */
+extern int __old_sbh_decommitable_pages; /* 0x100355A4, fully-free page count (SBH) */
 extern char g_100355d8; /* 0x100355D8, module filename buffer (0x104) */
 extern int g_100356dc; /* 0x100356DC, env mode: 0=uninit, 1=W, 2=A */
 extern void (*)(void) g_100356e0; /* 0x100356E0, _crt_runtime_error user hook (0x1001fdf8) */
-extern void * g_10035838; /* 0x10035838, cached MessageBoxA proc (0x10022107) */
-extern void * g_1003583c; /* 0x1003583C, cached GetActiveWindow proc (0x10022107) */
-extern void * g_10035840; /* 0x10035840, cached GetLastActivePopup proc (0x10022107) */
-extern int g_11766430; /* 0x11766430, __sbh_sizeHeaderList - allocated header-list size */
-extern int g_11766434; /* 0x11766434, __sbh_indGroupDefer - deferred group index */
-extern void * g_11766438; /* 0x11766438, pool: region scan cursor (ptr into array) */
-extern void * g_1176643c; /* 0x1176643C, __sbh_pHeaderDefer - deferred group header */
+extern void * pfnMessageBoxA; /* 0x10035838, cached MessageBoxA proc (0x10022107) */
+extern void * pfnGetActiveWindow; /* 0x1003583C, cached GetActiveWindow proc (0x10022107) */
+extern void * pfnGetLastActivePopup; /* 0x10035840, cached GetLastActivePopup proc (0x10022107) */
+extern int __sbh_sizeHeaderList; /* 0x11766430, __sbh_sizeHeaderList - allocated header-list size */
+extern int __sbh_indGroupDefer; /* 0x11766434, __sbh_indGroupDefer - deferred group index */
+extern void * __sbh_pHeaderScan; /* 0x11766438, pool: region scan cursor (ptr into array) */
+extern void * __sbh_pHeaderDefer; /* 0x1176643C, __sbh_pHeaderDefer - deferred group header */
 extern int _sbh_cntHeaderList; /* 0x11766440, pool: region count */
 extern void * _sbh_pHeaderList; /* 0x11766444, pool: region descriptor array */
-extern unsigned int g_11766448; /* 0x11766448, max pool allocation size (allocator mode 3) */
-extern void * g_1176644c; /* 0x1176644C, process heap handle */
-extern int g_11766450; /* 0x11766450, allocator mode: 3=pool, 2=block */
+extern unsigned int g_max_pool_alloc_size; /* 0x11766448, max pool allocation size (allocator mode 3) */
+extern void * _crtheap; /* 0x1176644C, process heap handle */
+extern int __active_heap; /* 0x11766450, allocator mode: 3=pool, 2=block */
 extern int g_11766460; /* 0x11766460, stream group ptr table (0x11766460..0x1176655c, 0x40 entries) */
 extern int g_11766560; /* 0x11766560, current stream count */
 extern void ** g_11766564; /* 0x11766564, tracked-block (stream) table ptr - __flsall/_fcloseall walk this */
 extern int g_11767580; /* 0x11767580, tracked-block table count */
-extern void * g_11767584; /* 0x11767584, GetCommandLineA result */
+extern void * _acmdln; /* 0x11767584, GetCommandLineA result */
 extern int (__stdcall *)(void *, unsigned int, void *) g_11767588; /* 0x11767588, DllMain user handler fnptr */
 extern int g_1176758c; /* 0x1176758C, __envp built flag */
 extern int g_11767590; /* 0x11767590, cmdline/env parsed flag */

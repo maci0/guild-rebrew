@@ -17,13 +17,13 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 extern int g_file_version;
 extern int g_file_version; /* 0x1002d4ec */
 extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
-extern int g_101de454; /* 0x101de454 */
-extern int g_101de55c; /* 0x101de55c */
+extern int g_aux_entity_count; /* 0x101de454 */
+extern int g_aux_entity_buffer; /* 0x101de55c */
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
-extern int g_101deae8;
-extern int g_101deac0;
+extern unsigned int g_download_buffer; /* 0x101deae8 */
+extern unsigned int g_download_total_size; /* 0x101deac0 */
 extern int g_101de560;
 extern int g_save_info[2];
 extern int OpenVfsStream(char*, char*, int);
@@ -49,7 +49,7 @@ int srv_RecvGame(void)
 	int load_status;
 	char* entity_state_ptr;
 
-	file_handle = OpenVfsStream((char*) g_101deae8, (char*) g_101deac0, (int) (const char*) 0x1002944c);
+	file_handle = OpenVfsStream((char*) g_download_buffer, (char*) g_download_total_size, (int) (const char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",

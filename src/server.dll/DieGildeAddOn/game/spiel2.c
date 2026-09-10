@@ -89,7 +89,7 @@ extern char g_entity_end[];
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
-extern float g_const_57bc;
+extern float g_const_42_0;
 int __cdecl gm_RandomMod(unsigned short range);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AssignBuildingOwner(unsigned char*, unsigned short, unsigned int);
@@ -98,15 +98,15 @@ int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
 extern unsigned int g_entity_slot_table[];
-extern float g_const_5fb8; /* 0x10025fb8 */
-extern float g_const_5fb4; /* 0x10025fb4 */
-extern float g_const_5fb0; /* 0x10025fb0 */
-extern float g_const_5fac; /* 0x10025fac */
-extern float g_const_5fa8; /* 0x10025fa8 */
-extern double g_const_5fa0; /* 0x10025fa0 */
-extern float g_float_const_cc; /* 0x100256cc */
+extern float g_const_0_01; /* 0x10025fb8 */
+extern float g_const_1_5; /* 0x10025fb4 */
+extern float g_const_2_2; /* 0x10025fb0 */
+extern float g_const_0_06875; /* 0x10025fac */
+extern float g_const_896_0; /* 0x10025fa8 */
+extern double g_const_1_over_720; /* 0x10025fa0 */
+extern float g_const_0_0; /* 0x100256cc */
 extern float g_gv_const_57c8; /* 0x100257c8 */
-extern double g_const_57d0; /* 0x100257d0 */
+extern double g_const_half; /* 0x100257d0 */
 double __cdecl gm_CalculateProductionValue(int, int);
 extern unsigned char g_current_season;
 int __cdecl gm_SumBuildingProductionValues(char*, int);
@@ -115,10 +115,10 @@ int __cdecl compute_size(char*); /* 0x10019d00 */
 char* __cdecl gm_FindEntityByOwner(int); /* 0x10019c60 */
 int __cdecl gm_GetMsgField(char*, char*); /* 0x10019cd0 */
 int __cdecl ahm_LookupEntityInTable(int); /* 0x1000c670 */
-extern float g_const_5fbc;
+extern float g_const_1_over_32767;
 double __cdecl gm_RandomFloat01(void);
-extern float g_float_const_a0;
-extern float g_float_const_a8;
+extern float g_const_1_0;
+extern float g_const_neg_1_0;
 
 /* Scans the per-entity slot table for an entry whose 16-bit id
  * matches arg2. Each entity owns 0x2a90 bytes at 0x1009b770,

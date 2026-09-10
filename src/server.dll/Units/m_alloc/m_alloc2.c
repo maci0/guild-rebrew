@@ -126,10 +126,10 @@ cleanup:
 // m_PoolAlloc
 
 // DATA: SERVER 0x10028b78
-extern char g_str_10028b78[27];
+extern char s_m_pool_get_free_tp_m_pool_10028b78[27];
 
 // DATA: SERVER 0x10028b60
-extern char g_str_10028b60[24];
+extern char s_m_pool_alloc_tp_m_pool_10028b60[24];
 
 struct BlockNode {
 	int count;
@@ -307,9 +307,9 @@ char g_str_10028aec[1] = {
 char g_str_10028b04[1] = {
     0x5b,
 };
-extern char g_str_10028b60[24] = {
+extern char s_m_pool_alloc_tp_m_pool_10028b60[24] = {
     0x6d,
 };
-extern char g_str_10028b78[27] = {
+extern char s_m_pool_get_free_tp_m_pool_10028b78[27] = {
     0x6d,
 };

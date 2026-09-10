@@ -6,7 +6,7 @@
  * [0x1001d515, 0x1001e6e1) - the game's "sbheap.obj" - and are ported from
  * the MSVC 6.0 CRT source with the game's modifications:
  *
- *   - _crtheap replaced by the game's heap handle g_1176644c
+ *   - _crtheap replaced by the game's heap handle _crtheap
  *   - memset -> fcn_10021240, memmove -> fcn_1001b200 (game copies)
  *   - sbh globals relocated to 0x11766430-0x11766444 / 0x10031b78 /
  *     0x10033b98 / 0x100355a4 (defined in sbh_globals.c)
@@ -107,16 +107,16 @@ typedef struct __old_sbh_region
 #define _OLD_NO_PAGES              ((OldSbhPage *)-1)
 
 /* sbh globals (sbh_globals.c) */
-extern int g_11766430;              /* __sbh_sizeHeaderList */
-extern int g_11766434;              /* __sbh_indGroupDefer */
-extern void * g_11766438;           /* __sbh_pHeaderScan */
-extern void * g_1176643c;           /* __sbh_pHeaderDefer */
+extern int __sbh_sizeHeaderList;              /* __sbh_sizeHeaderList */
+extern int __sbh_indGroupDefer;              /* __sbh_indGroupDefer */
+extern void * __sbh_pHeaderScan;           /* __sbh_pHeaderScan */
+extern void * __sbh_pHeaderDefer;           /* __sbh_pHeaderDefer */
 extern int __sbh_cntHeaderList;              /* __sbh_cntHeaderList */
 extern void * __sbh_pHeaderList;           /* __sbh_pHeaderList */
-extern char g_10031b78;              /* static region descriptor head (defined in data_globals.c) */
-extern OldSbhRegion * g_10033b98;   /* __old_sbh_p_starting_region */
-extern int g_100355a4;              /* __old_sbh_decommitable_pages */
-extern void * g_1176644c;           /* game heap handle (_crtheap analog) */
+extern char g_old_sbh_region_head;              /* static region descriptor head (defined in data_globals.c) */
+extern OldSbhRegion * __old_sbh_p_starting_region;   /* __old_sbh_p_starting_region */
+extern int __old_sbh_decommitable_pages;              /* __old_sbh_decommitable_pages */
+extern void * _crtheap;           /* game heap handle (_crtheap analog) */
 
 /* helpers outside this VA run (other sbh/TU objects) */
 extern SbhHeader * __cdecl fcn_1001db72(void);                 /* __sbh_alloc_new_region */
@@ -129,7 +129,7 @@ extern void * __cdecl fcn_1001b200(void *, const void *, unsigned int); /* game 
 
 /* the static region descriptor occupies 0x2020 bytes at 0x10031b78
  * (data_globals.c defines the head symbol as a byte anchor) */
-#define g_old_heap ((OldSbhRegion *)&g_10031b78)
+#define g_old_heap ((OldSbhRegion *)&g_old_sbh_region_head)
 
 /* ======================================================================
  * 0x1001d515 - __sbh_find_block: locate the header whose region contains
@@ -306,41 +306,41 @@ void __cdecl fcn_1001d540(SbhHeader * pHeader, void * pvAlloc)
     /* if the group became empty, decommit the previously deferred group */
     if (--pGroup->cntEntries == 0)
     {
-        if (g_1176643c)
+        if (__sbh_pHeaderDefer)
         {
-            pHeapDecommit = (void *)((char *)((SbhHeader *)g_1176643c)->pHeapData +
-                                    g_11766434 * 0x8000);
+            pHeapDecommit = (void *)((char *)((SbhHeader *)__sbh_pHeaderDefer)->pHeapData +
+                                    __sbh_indGroupDefer * 0x8000);
             VirtualFree(pHeapDecommit, 0x8000, 0x4000);   /* MEM_DECOMMIT */
 
-            ((SbhHeader *)g_1176643c)->bitvCommit |=
-                0x80000000 >> g_11766434;
+            ((SbhHeader *)__sbh_pHeaderDefer)->bitvCommit |=
+                0x80000000 >> __sbh_indGroupDefer;
 
-            ((SbhHeader *)g_1176643c)->pRegion->bitvGroupLo[g_11766434] = 0;
-            if (--((SbhHeader *)g_1176643c)->pRegion->cntRegionSize[63] == 0)
-                ((SbhHeader *)g_1176643c)->bitvEntryLo &= ~1;
+            ((SbhHeader *)__sbh_pHeaderDefer)->pRegion->bitvGroupLo[__sbh_indGroupDefer] = 0;
+            if (--((SbhHeader *)__sbh_pHeaderDefer)->pRegion->cntRegionSize[63] == 0)
+                ((SbhHeader *)__sbh_pHeaderDefer)->bitvEntryLo &= ~1;
 
             /* if the commit vector is back to initial, drop the region */
-            if (((SbhHeader *)g_1176643c)->bitvCommit == 0xffffffff)
+            if (((SbhHeader *)__sbh_pHeaderDefer)->bitvCommit == 0xffffffff)
             {
-                VirtualFree(((SbhHeader *)g_1176643c)->pHeapData, 0, 0x8000);
+                VirtualFree(((SbhHeader *)__sbh_pHeaderDefer)->pHeapData, 0, 0x8000);
 
-                HeapFree(g_1176644c, 0, ((SbhHeader *)g_1176643c)->pRegion);
+                HeapFree(_crtheap, 0, ((SbhHeader *)__sbh_pHeaderDefer)->pRegion);
 
-                fcn_1001b200((void *)g_1176643c,
-                             (void *)((SbhHeader *)g_1176643c + 1),
+                fcn_1001b200((void *)__sbh_pHeaderDefer,
+                             (void *)((SbhHeader *)__sbh_pHeaderDefer + 1),
                              (int)((SbhHeader *)__sbh_pHeaderList + __sbh_cntHeaderList) -
-                             (int)((SbhHeader *)g_1176643c + 1));
+                             (int)((SbhHeader *)__sbh_pHeaderDefer + 1));
                 __sbh_cntHeaderList--;
 
-                if (pHeader > (SbhHeader *)g_1176643c)
+                if (pHeader > (SbhHeader *)__sbh_pHeaderDefer)
                     pHeader--;
 
-                g_11766438 = __sbh_pHeaderList;
+                __sbh_pHeaderScan = __sbh_pHeaderList;
             }
         }
 
-        g_1176643c = pHeader;
-        g_11766434 = indGroup;
+        __sbh_pHeaderDefer = pHeader;
+        __sbh_indGroupDefer = indGroup;
     }
 }
 
@@ -390,7 +390,7 @@ void * __cdecl fcn_1001d869(int intSize)
     }
 
     /* scan header list from rover to end */
-    pHeader = (SbhHeader *)g_11766438;
+    pHeader = (SbhHeader *)__sbh_pHeaderScan;
     while (pHeader < pHeaderLast)
     {
         if ((bitvEntryHi & pHeader->bitvEntryHi) |
@@ -403,7 +403,7 @@ void * __cdecl fcn_1001d869(int intSize)
     if (pHeader == pHeaderLast)
     {
         pHeader = (SbhHeader *)__sbh_pHeaderList;
-        while (pHeader < (SbhHeader *)g_11766438)
+        while (pHeader < (SbhHeader *)__sbh_pHeaderScan)
         {
             if ((bitvEntryHi & pHeader->bitvEntryHi) |
                 (bitvEntryLo & pHeader->bitvEntryLo))
@@ -412,7 +412,7 @@ void * __cdecl fcn_1001d869(int intSize)
         }
 
         /* no free entry exists, scan for available groups to commit */
-        if (pHeader == (SbhHeader *)g_11766438)
+        if (pHeader == (SbhHeader *)__sbh_pHeaderScan)
         {
             while (pHeader < pHeaderLast)
             {
@@ -424,7 +424,7 @@ void * __cdecl fcn_1001d869(int intSize)
             if (pHeader == pHeaderLast)
             {
                 pHeader = (SbhHeader *)__sbh_pHeaderList;
-                while (pHeader < (SbhHeader *)g_11766438)
+                while (pHeader < (SbhHeader *)__sbh_pHeaderScan)
                 {
                     if (pHeader->bitvCommit)
                         break;
@@ -432,7 +432,7 @@ void * __cdecl fcn_1001d869(int intSize)
                 }
 
                 /* if no available groups, create a new region */
-                if (pHeader == (SbhHeader *)g_11766438)
+                if (pHeader == (SbhHeader *)__sbh_pHeaderScan)
                     if (!(pHeader = fcn_1001db72()))
                         return NULL;
             }
@@ -442,7 +442,7 @@ void * __cdecl fcn_1001d869(int intSize)
                 return NULL;
         }
     }
-    g_11766438 = pHeader;
+    __sbh_pHeaderScan = pHeader;
 
     pRegion = pHeader->pRegion;
     indGroupUse = pRegion->indGroupUse;
@@ -554,9 +554,9 @@ void * __cdecl fcn_1001d869(int intSize)
     if (pGroup->cntEntries++ == 0)
     {
         /* if allocating into deferred group, cancel deferral */
-        if (pHeader == (SbhHeader *)g_1176643c &&
-            indGroupUse == g_11766434)
-            g_1176643c = NULL;
+        if (pHeader == (SbhHeader *)__sbh_pHeaderDefer &&
+            indGroupUse == __sbh_indGroupDefer)
+            __sbh_pHeaderDefer = NULL;
     }
 
     pRegion->indGroupUse = indGroupUse;
@@ -575,21 +575,21 @@ SbhHeader * __cdecl fcn_1001db72(void)
     SbhHeader * pHeader;
 
     /* if the list is full, realloc to extend its size */
-    if (__sbh_cntHeaderList == g_11766430)
+    if (__sbh_cntHeaderList == __sbh_sizeHeaderList)
     {
-        if (!(pHeader = (SbhHeader *)HeapReAlloc(g_1176644c, 0, __sbh_pHeaderList,
-                            (g_11766430 + 16) * 20)))   /* sizeof(HEADER) */
+        if (!(pHeader = (SbhHeader *)HeapReAlloc(_crtheap, 0, __sbh_pHeaderList,
+                            (__sbh_sizeHeaderList + 16) * 20)))   /* sizeof(HEADER) */
             return NULL;
 
         __sbh_pHeaderList = pHeader;
-        g_11766430 += 16;
+        __sbh_sizeHeaderList += 16;
     }
 
     /* point to the new header in the list */
     pHeader = (SbhHeader *)__sbh_pHeaderList + __sbh_cntHeaderList;
 
     /* allocate a new region associated with the new header */
-    if (!(pHeader->pRegion = (SbhRegion *)HeapAlloc(g_1176644c, 8,
+    if (!(pHeader->pRegion = (SbhRegion *)HeapAlloc(_crtheap, 8,
                                     sizeof(SbhRegion))))  /* HEAP_ZERO_MEMORY */
         return NULL;
 
@@ -597,7 +597,7 @@ SbhHeader * __cdecl fcn_1001db72(void)
     if ((pHeader->pHeapData = VirtualAlloc(0, 0x100000,
                                      0x2000, 4)) == NULL)  /* MEM_RESERVE, PAGE_READWRITE */
     {
-        HeapFree(g_1176644c, 0, pHeader->pRegion);
+        HeapFree(_crtheap, 0, pHeader->pRegion);
         return NULL;
     }
 
@@ -913,7 +913,7 @@ OldSbhRegion * __cdecl fcn_1001e014(void)
         pregnew = g_old_heap;
     else
     {
-        if ((pregnew = (OldSbhRegion *)HeapAlloc(g_1176644c, 0,
+        if ((pregnew = (OldSbhRegion *)HeapAlloc(_crtheap, 0,
                                     sizeof(OldSbhRegion))) == NULL)
             return NULL;
     }
@@ -981,7 +981,7 @@ OldSbhRegion * __cdecl fcn_1001e014(void)
 
     /* unable to create the new region; free the descriptor if necessary */
     if (pregnew != g_old_heap)
-        HeapFree(g_1176644c, 0, pregnew);
+        HeapFree(_crtheap, 0, pregnew);
 
     return NULL;
 }
@@ -998,8 +998,8 @@ void __cdecl fcn_1001e158(OldSbhRegion * preg)
     VirtualFree(preg->p_pages_begin, 0, 0x8000);
 
     /* update __old_sbh_p_starting_region, if necessary */
-    if (g_10033b98 == preg)
-        g_10033b98 = preg->p_prev_region;
+    if (__old_sbh_p_starting_region == preg)
+        __old_sbh_p_starting_region = preg->p_prev_region;
 
     if (preg != g_old_heap)
     {
@@ -1008,7 +1008,7 @@ void __cdecl fcn_1001e158(OldSbhRegion * preg)
         preg->p_next_region->p_prev_region = preg->p_prev_region;
 
         /* free the region descriptor */
-        HeapFree(g_1176644c, 0, preg);
+        HeapFree(_crtheap, 0, preg);
     }
     else
     {
@@ -1055,7 +1055,7 @@ void __cdecl fcn_1001e1ae(int count)
                          * first_uncommitted pointer */
                         pregmap->free_paras_in_page = -1;
 
-                        g_100355a4--;
+                        __old_sbh_decommitable_pages--;
 
                         if ((preg1->p_first_uncommitted == NULL) ||
                             (preg1->p_first_uncommitted > pregmap))
@@ -1153,7 +1153,7 @@ void __cdecl fcn_1001e2c7(OldSbhRegion * preg, OldSbhPage * ppage, unsigned char
 
     /* if the page is completely free, count it toward decommitment */
     if (pregmap->free_paras_in_page == 240)
-        if (++g_100355a4 == 32)             /* 2 * _OLD_PAGES_PER_COMMITMENT */
+        if (++__old_sbh_decommitable_pages == 32)             /* 2 * _OLD_PAGES_PER_COMMITMENT */
             fcn_1001e1ae(16);
 }
 
@@ -1176,7 +1176,7 @@ void * __cdecl __old_sbh_alloc_block(size_t para_req)
     int i, j;
 
     /* first pass: try to satisfy the request from committed pages */
-    preg = g_10033b98;
+    preg = __old_sbh_p_starting_region;
 
     do
     {
@@ -1199,7 +1199,7 @@ void * __cdecl __old_sbh_alloc_block(size_t para_req)
                                     para_req)) != NULL)
                     {
                         /* success: update the rover, free count and map */
-                        g_10033b98 = preg;
+                        __old_sbh_p_starting_region = preg;
                         pregmap->free_paras_in_page -= para_req;
                         preg->p_starting_region_map = pregmap;
                         return retp;
@@ -1226,7 +1226,7 @@ void * __cdecl __old_sbh_alloc_block(size_t para_req)
                                     pregmap->free_paras_in_page,
                                     para_req)) != NULL)
                     {
-                        g_10033b98 = preg;
+                        __old_sbh_p_starting_region = preg;
                         pregmap->free_paras_in_page -= para_req;
                         preg->p_starting_region_map = pregmap;
                         return retp;
@@ -1239,7 +1239,7 @@ void * __cdecl __old_sbh_alloc_block(size_t para_req)
             }
         }
     }
-    while ((preg = preg->p_next_region) != g_10033b98);
+    while ((preg = preg->p_next_region) != __old_sbh_p_starting_region);
 
     /* second pass: look for an uncommitted page, starting at the
      * static descriptor rather than the rover */
@@ -1286,7 +1286,7 @@ void * __cdecl __old_sbh_alloc_block(size_t para_req)
                 }
 
                 /* update the starting-region rover */
-                g_10033b98 = preg;
+                __old_sbh_p_starting_region = preg;
 
                 /* update p_first_uncommitted for the region */
                 while ((pregmap2 < &(preg->region_map[1024])) &&
@@ -1324,7 +1324,7 @@ void * __cdecl __old_sbh_alloc_block(size_t para_req)
         ppage = preg->p_pages_begin;
         ppage->alloc_map[0] = (unsigned char)para_req;
 
-        g_10033b98 = preg;
+        __old_sbh_p_starting_region = preg;
         ppage->p_starting_alloc_map = &(ppage->alloc_map[para_req]);
         ppage->free_paras_at_start = 240 - para_req;
         (preg->region_map[0]).free_paras_in_page -= (unsigned char)para_req;

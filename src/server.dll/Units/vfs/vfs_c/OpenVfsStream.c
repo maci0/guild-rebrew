@@ -140,7 +140,7 @@ extern int __cdecl crt_toupper(int c);
  * the mode13 test as `je` (inverting it relocates the plain-buffer block
  * out of line, section 17), the `mode18 = 0` store ahead of the
  * [esi+0x100] store (volatile there costs 4B), and the finalize
- * interleave, where the target hoists the g_10034678 increment between
+ * interleave, where the target hoists the g_stream_count increment between
  * the two flag reads.
  *
  * Follow-up session, held 450/701 (no score change). The two forms are
@@ -180,14 +180,14 @@ extern int __cdecl crt_toupper(int c);
  * apply: walking `mode_flags` itself instead of `p` scores 135 in both the
  * hoisted and the direct spelling, because the parameter slot is reloaded
  * per iteration. Tail probes are all inert on the 450 form (450 unless
- * noted): the g_10034678 read-modify-write split into a temp, both sprintf
+ * noted): the g_stream_count read-modify-write split into a temp, both sprintf
  * mode18 arguments as masked dwords, a mode14 temp read before the
  * increment, the flag byte built through a named temp, and explicit casts
  * on the xor and shift operands. Forcing the second sprintf argument to
  * reload does emit the target's two `[esp+0x18]` loads and its push order,
  * but costs 4 bytes of object (obj 705) for no match_count. */
 
-extern int g_10034678;
+extern int g_stream_count;
 extern void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
 extern void __cdecl m_PoolFree(void* pool, void* item);
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
@@ -304,7 +304,7 @@ inflate_setup:
 	}
 finalize:
 	if (stream != 0) {
-		g_10034678++;
+		g_stream_count++;
 		*(unsigned char*) (stream + 0x13c) = (unsigned char) (((*(unsigned char*) (stream + 0x13c) & 0xf6) ^ (*(unsigned char*) &mode14 & 1)) | ((mode18 & 1) << 3));
 		sprintf(stream, (char*) 0x100294a4, buf, size, mode18, mode18);
 	}

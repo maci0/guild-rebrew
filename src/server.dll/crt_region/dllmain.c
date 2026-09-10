@@ -19,7 +19,7 @@
 extern int __stdcall _CRT_INIT(void* hmod, unsigned int reason, void* reserved); /* 0x1001b8fb -> __CRT_INIT@12 */
 extern int __stdcall exit_handler(void* a, unsigned int b, void* c);              /* 0x10009310 */
 
-extern int g_100354fc; /* 0x100354fc - __CRT_INIT attach/detach refcount */
+extern int __proc_attached; /* 0x100354fc - __CRT_INIT attach/detach refcount */
 extern int (__stdcall* g_11767588)(void* hmod, unsigned int reason, void* reserved); /* 0x11767588 */
 
 int __stdcall DllMain(void* hMod, unsigned int reason, void* reserved)
@@ -29,7 +29,7 @@ int __stdcall DllMain(void* hMod, unsigned int reason, void* reserved)
 
     if (reason == 0)
     {
-        if (g_100354fc == 0)
+        if (__proc_attached == 0)
             return 0;
     }
     else if (reason == 1 || reason == 2)

@@ -121,7 +121,7 @@
  * inert (semantically identical, not kept); an `int* ivp` alias instead of the
  * volatile counter, 96; a single `chosen` counted by both grave sweeps, 379;
  * merging the second sweep into the first block, 399; sinking `chosen = n`
- * past the 0x300 log branch, 396 and STUB; hoisting `g_10035434++` above the
+ * past the 0x300 log branch, 396 and STUB; hoisting `g_citizen_count++` above the
  * grave-id store, 451; hoisting `j = 0` above the count load, inert.
  *
  * Still open: an ecx<->edx role exchange at the entry-search loop (diff 99-118,
@@ -160,7 +160,7 @@
  * All six `~~` operands resolved against the original: the four calls are
  * gm_ResolveEntityById 0x10015e90, gv_CheckSlotActive 0x10010530, GetSlotEntry
  * 0x100105b0 and LogMessageInternal 0x10003640; the two data slots are
- * 0x1003546c (g_1003546c) and 0x100a8c30 (g_entity_type_table).
+ * 0x1003546c (g_entity_table_end) and 0x100a8c30 (g_entity_type_table).
  *
  * 2026-09-08 pass (484 -> 526, obj 1038 -> 1044): the `grave + 4` store
  * re-based onto the raw slot offset.  Holding `chosen * 0x21c` in an `off`
@@ -212,12 +212,12 @@
  *     instruction the object was missing.  537 -> 538.
  *   - the object-id and citizen-count bumps read into `seq` and `live` locals
  *     before the two entity stores, with the writebacks after.  The reference
- *     loads g_10035434 into edi and g_10030b6c into ecx ahead of the
+ *     loads g_citizen_count into edi and g_next_object_id into ecx ahead of the
  *     grave+0x170 / grave+0x16c pair and writes both back at the end
  *     (0x10011dd2-0x10011dff).  Reading them inline emitted a load-inc-store
  *     round trip per counter instead.  538 -> 541.  The narrower spelling
  *     with `live++` as a separate statement scores 538, so the initializer
- *     form (`int live = g_10035434 + 1`) is the one to keep.
+ *     form (`int live = g_citizen_count + 1`) is the one to keep.
  *
  * The pass-2 note above records the counter bump as inert; that was measured
  * before the volatile 0xffff store existed.  The two are coupled: neither
@@ -331,7 +331,7 @@
  * si,[ebp]; and esi,0xffff` at 7).  Measured on the 603 body and reverted:
  * the second memset re-based as `(char*) 0x100358fc + off` 485 and as
  * `(char*) 0x100358a0 + off + 0x5c` 487 (both still hold after the size fix),
- * the g_10030b6c read sunk below the two entity stores 598, `one = 1` moved
+ * the g_next_object_id read sunk below the two entity stores 598, `one = 1` moved
  * out of the counter block (inert), volatile on the grave+0x218 store 594 and
  * on grave+0xd 595, a shared `neg = -1` local feeding the slot+4 store, the
  * memset fill and the 0x210/0x18c/0x20c stores (inert at 538), volatile on
@@ -413,13 +413,13 @@
 
 // FUNCTION: SERVER 0x10011bf0
 
-extern int g_1003546c;
+extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern char* g_entity_type_table; /* 0x100A8C30 */
-extern int g_10035434;
-extern int g_10030b6c;
-extern int dword_1002574c[];
-extern unsigned char byte_100a9820[];
-extern unsigned char byte_1014d8e0[];
+extern int g_citizen_count;
+extern int g_next_object_id;
+extern int g_worker_entry_count[];
+extern char g_relationship_matrix_primary[];
+extern char g_relationship_matrix_secondary[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
 extern void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
@@ -452,7 +452,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	gm_ResolveEntityById(&entity, 0, 0, *(int*) ((char*) req + 8));
 	if (!entity ||
 	    *(unsigned short*) ((char*) entity + 0x27) == 0xffff ||
-	    (char*) 0x100358a0 + *(unsigned short*) ((char*) entity + 0x27) * 0x21c == (char*) g_1003546c)
+	    (char*) 0x100358a0 + *(unsigned short*) ((char*) entity + 0x27) * 0x21c == (char*) g_entity_table_end)
 		return -1;
 	field_id = *(unsigned char*) entity;
 	if (g_entity_type_table[field_id + field_id * 588] != 0x1d)
@@ -466,7 +466,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	if (!slot)
 		return 0xffff;
 	p = *(void**) ((char*) slot + 0x10);
-	count = dword_1002574c[*(int*) ((char*) req + 0xc)];
+	count = g_worker_entry_count[*(int*) ((char*) req + 0xc)];
 	j = 0;
 	if (count <= j)
 		goto fail_ffff;
@@ -506,7 +506,7 @@ fail_ffff:
 		}
 	}
 	if (*(unsigned char*) ((char*) 0x100358a2 + chosen * 0x21c) == 0xf)
-		g_10035434--;
+		g_citizen_count--;
 	off = chosen * 0x21c;
 	grave = (char*) 0x100358a0 + off;
 	memset(grave, 0, 0x21c);
@@ -521,15 +521,15 @@ fail_ffff:
 	 * matching the reference's edi/ecx traffic at 0x10011dd2-0x10011dff.
 	 * Bumping them in place emits a load-inc-store round trip each. */
 	{
-		int live = g_10035434 + 1;
-		int seq = g_10030b6c;
+		int live = g_citizen_count + 1;
+		int seq = g_next_object_id;
 		*(int*) (grave + 0x170) = (int) entity;
 		*(int*) (grave + 0x16c) = (int) entity;
 		*(int*) (grave + 4) = seq;
-		g_10030b6c = seq + 1;
+		g_next_object_id = seq + 1;
 		one = 1;
 		*(volatile unsigned short*) grave = (unsigned short) chosen;
-		g_10035434 = live;
+		g_citizen_count = live;
 	}
 	*(unsigned char*) (grave + 2) = 0x14;
 	*(int*) (grave + 0x1f0) = 0;
@@ -578,8 +578,8 @@ fail_ffff:
 			int r;
 			int col;
 			r = gm_RandomMod(0x40);
-			byte_1014d8e0[a] = 0;
-			byte_100a9820[a] = (unsigned char) r - 0x20;
+			g_relationship_matrix_secondary[a] = 0;
+			g_relationship_matrix_primary[a] = (unsigned char) r - 0x20;
 			col = iv;
 			b = *(volatile unsigned short*) grave * 0x300 + col;
 			/* The counter bump sits between the call and its stores to
@@ -587,13 +587,13 @@ fail_ffff:
 			 * 0x10011f68, ahead of the store pair at 0x10011f75. */
 			r = gm_RandomMod(0x40);
 			iv = iv + 1;
-			byte_100a9820[b] = (unsigned char) r - 0x20;
-			byte_1014d8e0[b] = 0;
+			g_relationship_matrix_primary[b] = (unsigned char) r - 0x20;
+			g_relationship_matrix_secondary[b] = 0;
 		}
 	}
 	if (*(int*) entry == *(int*) ((char*) slot + 4)) {
 		int n;
-		count = dword_1002574c[*(int*) ((char*) req + 0xc)];
+		count = g_worker_entry_count[*(int*) ((char*) req + 0xc)];
 		if (count > 0) {
 			p = *(void**) ((char*) slot + 0x10);
 			for (n = 0; n < count; n++, p = (char*) p + 0x44) {

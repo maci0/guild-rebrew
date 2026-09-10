@@ -72,8 +72,8 @@ int __cdecl vfs_CleanupObject(char* obj)
 // CloseVfsStream
 
 
-extern int g_10034678;
-extern int g_10034670;
+extern int g_stream_count;
+extern int g_stream_pool;
 extern int __cdecl fcn_1001a18a(void* obj);
 
 int __cdecl CloseVfsStream(void* stream)
@@ -129,7 +129,7 @@ int __cdecl CloseVfsStream(void* stream)
 					}
 				}
 		}
-		g_10034678--;
+		g_stream_count--;
 		m_PoolFree((int*) 0x10034670, stream);
 	}
 	return result;

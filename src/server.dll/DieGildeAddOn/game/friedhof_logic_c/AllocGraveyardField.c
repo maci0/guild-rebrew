@@ -3,9 +3,9 @@
 // FUNCTION: SERVER 0x100109d0
 // SIZE: 832
 
-extern int g_1002575c[];
+extern int g_field_worker_count[];
 extern char* g_entity_type_table; /* 0x100A8C30 */
-extern int g_1002576c[];
+extern int g_field_entry_count[];
 extern void* __cdecl m_AllocTracked(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);
 extern void* __cdecl memset(void* dest, int c, unsigned int count);
@@ -36,13 +36,13 @@ int __cdecl AllocGraveyardField(unsigned char* field)
 	memset(slot, 0, 0x24);
 	*(int*) slot = *(int*) (field + 1);
 	*(int*) ((char*) slot + 4) = entry[0x247];
-	*(void**) ((char*) slot + 0x1c) = (char*) m_AllocTracked(g_1002575c[entry[0x247]] * 20,
+	*(void**) ((char*) slot + 0x1c) = (char*) m_AllocTracked(g_field_worker_count[entry[0x247]] * 20,
 	    (const char*) 0x1002d45c);
 	if (!*(void**) ((char*) slot + 0x1c)) {
 		goto cleanup;
 	}
-	memset(*(void**) ((char*) slot + 0x1c), 0, g_1002575c[entry[0x247]] * 20);
-	*(void**) ((char*) slot + 0x20) = (char*) m_AllocTracked(g_1002576c[entry[0x247]] * 68,
+	memset(*(void**) ((char*) slot + 0x1c), 0, g_field_worker_count[entry[0x247]] * 20);
+	*(void**) ((char*) slot + 0x20) = (char*) m_AllocTracked(g_field_entry_count[entry[0x247]] * 68,
 	    (const char*) 0x1002d444);
 	if (*(void**) ((char*) slot + 0x20) == 0) {
 cleanup:
@@ -57,8 +57,8 @@ cleanup:
 		m_FreeTracked(slot);
 		return 0;
 	}
-	memset(*(void**) ((char*) slot + 0x20), 0, g_1002576c[entry[0x247]] * 68);
-	for (i = 0; i < g_1002576c[entry[0x247]]; i++)
+	memset(*(void**) ((char*) slot + 0x20), 0, g_field_entry_count[entry[0x247]] * 68);
+	for (i = 0; i < g_field_entry_count[entry[0x247]]; i++)
 		*(unsigned*) ((char*) *(void**) ((char*) slot + 0x20) + i * 0x44) = 0xFFFFFFFFu;
 	*(void**) ((char*) slot + 8) = *(void**) ((char*) slot + 0x1c);
 	*(char*) ((char*) slot + 0x18) = 1;

@@ -32,7 +32,7 @@
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version; /* 0x1002d4ec */
-extern char g_1002d4fc; /* 0x1002d4fc */
+extern char s_ls_tmp_1002d4fc; /* 0x1002d4fc */
 
 /* The 0x1002d4f0/f4/f8 defaults for the header tail, as one object: the
  * three fields are adjacent and always written together. */
@@ -51,7 +51,7 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 	void* buf;
 	int i;
 
-	buf = m_AllocTracked(0xe100, &g_1002d4fc);
+	buf = m_AllocTracked(0xe100, &s_ls_tmp_1002d4fc);
 	if (!ls_ReadVfsDataChecked(dest, 4, 1, (void*) stream)) {
 		return 0;
 	}

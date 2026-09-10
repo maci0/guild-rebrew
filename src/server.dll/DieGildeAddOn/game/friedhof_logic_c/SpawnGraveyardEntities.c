@@ -6,8 +6,8 @@
 extern char* g_entity_type_table;
 extern int g_next_object_id;
 extern int g_current_year;
-extern float g_const_57bc;
-extern float g_const_57c0;
+extern float g_const_42_0;
+extern float g_const_21_0;
 int __cdecl gm_RandomMod(int range);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
@@ -53,7 +53,7 @@ int __cdecl SpawnGraveyardEntities(void* entity, int count)
 			for (i = 0; i < 5; i++) {
 				r = gm_RandomMod(8) & 0xffff;
 				*(unsigned char*) (i + *(int*) ((char*) slot + 0x10) + 0x24) =
-				    (unsigned char) ((float) r * g_const_57c0 + g_const_57bc);
+				    (unsigned char) ((float) r * g_const_21_0 + g_const_42_0);
 			}
 			*(int*) (*(int*) ((char*) slot + 0x10) + 0x2c) =
 			    (gm_RandomMod(9) & 0xffff) + 1;

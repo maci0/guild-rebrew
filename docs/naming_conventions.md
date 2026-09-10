@@ -277,7 +277,7 @@ extern int g_next_object_id;              /* known purpose, partial name */
 extern char g_player_slot_0[];            /* known: player slot array */
 extern char g_slot_table[];/* known: static entity table */
 extern int g_entity_type_table;           /* known: entity type lookup */
-extern int g_10030b6c;                    /* unknown: address-only name */
+extern int g_1009b764;                    /* unknown: address-only name */
 ```
 
 ### String Constants

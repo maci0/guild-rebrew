@@ -7,8 +7,8 @@
 
 int __cdecl AllocGraveyardField(unsigned char* field);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-extern int g_1002575c[];
-extern int g_1002576c[];
+extern int g_field_worker_count[];
+extern int g_field_entry_count[];
 
 // SIZE 0x24
 typedef struct {
@@ -24,8 +24,8 @@ typedef struct {
 } GraveyardSlot;
 
 /* Loads a graveyard field's savegame data: the slot header (id + type),
- * then the slot-entry table (g_1002576c[type] entries of 0x44 bytes) and
- * the worker table (g_1002575c[type] entries of 0x14 bytes).  Each entry's
+ * then the slot-entry table (g_field_entry_count[type] entries of 0x44 bytes) and
+ * the worker table (g_field_worker_count[type] entries of 0x14 bytes).  Each entry's
  * worker slot stores a pointer to its 0x44-byte entry in the entry table.
  *
  * NOTE: the stream also reads the 4-byte slot->type (0x1001203e) between
@@ -87,7 +87,7 @@ typedef struct {
  *
  * All 27 relocation slots resolved: 23 calls to ReadVfsDataChecked
  * (0x10012440), one to AllocGraveyardField (0x100109d0), and the globals
- * g_1002576c (x2) and g_1002575c (x2), all confirmed against
+ * g_field_entry_count (x2) and g_field_worker_count (x2), all confirmed against
  * db/server.dll_functions.csv and the target disassembly. */
 
 int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, int d)
@@ -122,7 +122,7 @@ int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, 
 		return 0;
 	}
 	entry = (char*) slot->entry_table;
-	n = g_1002576c[slot->type];
+	n = g_field_entry_count[slot->type];
 	counter = 0;
 	while (counter < n) {
 		if (!ls_ReadVfsDataChecked(entry, 4, 1, stream_ctx)) {
@@ -155,7 +155,7 @@ int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, 
 		if (!ls_ReadVfsDataChecked(entry + 0x40, 4, 1, stream_ctx)) {
 			return 0;
 		}
-		n = g_1002576c[slot->type];
+		n = g_field_entry_count[slot->type];
 		counter++;
 		entry += 0x44;
 	}
@@ -165,7 +165,7 @@ int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, 
 	 * scores 708. */
 	i = 0;
 	worker = (char*) slot->worker;
-	while (i < g_1002575c[slot->type]) {
+	while (i < g_field_worker_count[slot->type]) {
 		int sid;
 
 		if (!ls_ReadVfsDataChecked(worker, 4, 1, stream_ctx)) {

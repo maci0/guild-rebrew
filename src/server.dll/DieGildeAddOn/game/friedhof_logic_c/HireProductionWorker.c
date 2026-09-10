@@ -5,9 +5,9 @@
 
 // FUNCTION: SERVER 0x100111b0
 
-extern int g_1003546c;
+extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern char* g_entity_type_table; /* 0x100A8C30 */
-extern int dword_1002574c[];
+extern int g_worker_entry_count[];
 extern float table_1002572c[];
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 extern unsigned int g_entity_slot_table[];
@@ -34,7 +34,7 @@ int __cdecl HireProductionWorker(void* req)
 	gm_ResolveEntityById(&entity1, 0, 0, *(int*) ((char*) req + 8));
 	if (!entity1 ||
 	    *(unsigned short*) ((char*) entity1 + 0x27) == 0xffff ||
-	    (char*) 0x100358a0 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c == (char*) g_1003546c)
+	    (char*) 0x100358a0 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c == (char*) g_entity_table_end)
 		return -1;
 	field_id = *(unsigned char*) entity1;
 	if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
@@ -63,7 +63,7 @@ int __cdecl HireProductionWorker(void* req)
 	*(unsigned short*) ((char*) slot + 0xa) =
 	    *(unsigned short*) ((char*) req + 0x11) + *(unsigned short*) ((char*) 0x10035880);
 	*(unsigned char*) ((char*) slot + 0xc) = 0xff;
-	for (j = 0; j < dword_1002574c[*(int*) ((char*) req + 0xc)]; j++) {
+	for (j = 0; j < g_worker_entry_count[*(int*) ((char*) req + 0xc)]; j++) {
 		*(int*) ((char*) *(void**) ((char*) slot + 0x10) + j * 0x44) = -1;
 	}
 	if (*(int*) ((char*) req + 0x13) > 0) {

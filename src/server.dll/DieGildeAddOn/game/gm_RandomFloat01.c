@@ -3,7 +3,7 @@
 // FUNCTION: SERVER 0x1001a0f0
 // SIZE: 22
 
-extern float g_const_5fbc;
+extern float g_const_1_over_32767;
 int __cdecl fcn_1001b542(void); /* rand-like helper */
 
 /* Returns a random float in [0, 1): the raw 32-bit random value scaled
@@ -11,5 +11,5 @@ int __cdecl fcn_1001b542(void); /* rand-like helper */
 
 double __cdecl gm_RandomFloat01(void)
 {
-	return (float) fcn_1001b542() * g_const_5fbc;
+	return (float) fcn_1001b542() * g_const_1_over_32767;
 }

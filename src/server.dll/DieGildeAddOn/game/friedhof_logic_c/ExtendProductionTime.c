@@ -3,7 +3,7 @@
 // FUNCTION: SERVER 0x100113b0
 // SIZE: 390
 
-extern int g_1003546c;
+extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern char* g_entity_type_table; /* 0x100A8C30 */
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 extern unsigned int g_entity_slot_table[];
@@ -36,7 +36,7 @@ int __cdecl ExtendProductionTime(void* building)
 	if (entity) {
 		grave_id = *(unsigned short*) ((char*) entity + 0x27);
 		if (grave_id != 0xffff) {
-			if ((char*) 0x100358a0 + grave_id * 0x21c != (char*) g_1003546c) {
+			if ((char*) 0x100358a0 + grave_id * 0x21c != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
 				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
 					return -2;

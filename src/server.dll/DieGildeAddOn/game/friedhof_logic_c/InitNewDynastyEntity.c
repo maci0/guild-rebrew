@@ -19,8 +19,8 @@ extern int __cdecl amt_FindEntity26(int entity_id);
 extern int __cdecl amt_FindEntity27(int entity_id);
 extern int __cdecl fcn_10016cd0(int a, int b, int c);
 extern unsigned char g_current_season;
-extern unsigned char byte_100a9820[];
-extern unsigned char byte_1014d8e0[];
+extern char g_relationship_matrix_primary[];
+extern char g_relationship_matrix_secondary[];
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 extern unsigned int g_entity_slot_table[];
 
@@ -48,12 +48,12 @@ void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, 
 	}
 	*(unsigned short*) ((char*) entity + 0xa) = word_arg;
 	*(char*) ((char*) entity + 0xc) = 0;
-	for (p = (int) byte_100a9820; p < (int) byte_100a9820 + 0x90000; p += 0x300) {
+	for (p = (int) g_relationship_matrix_primary; p < (int) g_relationship_matrix_primary + 0x90000; p += 0x300) {
 		i = 0;
-		off = p - (int) byte_100a9820;
+		off = p - (int) g_relationship_matrix_primary;
 		for (; i < 0x300; i++) {
-			byte_100a9820[off + i] = (unsigned char) (gm_RandomMod(0x40) - 0x20);
-			byte_1014d8e0[off + i] = 0;
+			g_relationship_matrix_primary[off + i] = (unsigned char) (gm_RandomMod(0x40) - 0x20);
+			g_relationship_matrix_secondary[off + i] = 0;
 		}
 	}
 	*(unsigned short*) ((char*) entity + 0x50) = 0x7fff;

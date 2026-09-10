@@ -1297,11 +1297,6 @@ section = ".data"
 name = "g_data_restore_gap"
 status = "UNCHECKED"
 
-["SERVER.0x24000"]
-name = "g_iat_region"
-section = ".rdata"
-note = "IAT at .rdata start (crt_imports.c forcing region)"
-
 # ---- GROUP C: CRT-startup + allocator-pool globals (data_globals.c) ----
 
 ["SERVER.0x10033b9c"]
@@ -1809,4 +1804,7 @@ type = "unsigned int"
 status = "UNCHECKED"
 
 ["SERVER.0x00024000"]
+name = "g_iat_region"
+section = ".rdata"
+note = "IAT at .rdata start (crt_imports.c forcing region)"
 status = "UNCHECKED"

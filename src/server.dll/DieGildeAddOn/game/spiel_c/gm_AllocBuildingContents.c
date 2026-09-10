@@ -66,7 +66,7 @@
  * Operand audit (2026-09-06): every `~~` resolves.  The masked globals are
  * g_item_def_table (0x101de450), g_entity_type_table (0x100a8c30),
  * g_query_limit (0x10035450), g_current_season (0x10035439), g_slot_array
- * (0x1009b770) and g_1002dde0 (0x1002dde0), each matching its declaration
+ * (0x1009b770) and g_producer_id_table (0x1002dde0), each matching its declaration
  * here.  The masked calls resolve to gm_AllocObjekt (0x10016760),
  * gm_StartEntityQuery (0x10016460), ReportMessage (0x100035c0) and
  * LogMessageInternal (0x10003640) per db/server.dll_functions.csv.  The three
@@ -89,7 +89,7 @@ extern char* g_entity_type_table;      /* 0x100a8c30 */
 extern int g_query_limit;              /* 0x10035450 */
 extern unsigned char g_current_season; /* 0x10035439 */
 extern char* g_slot_array;             /* 0x1009b770 — array symbol, not a pointer */
-extern int g_1002dde0;                 /* 0x1002dde0 — producer id table */
+extern int g_producer_id_table;                 /* 0x1002dde0 — producer id table */
 
 void* __cdecl gm_AllocObjekt(int, int, int);
 unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int first_arg, ...);
@@ -197,7 +197,7 @@ char* __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
 
 		sub = (char*) gm_AllocObjekt(*(int*) (obj + 2), 0xff, 1);
 		alloc_count = 0;
-		prod = (char*) &g_1002dde0;
+		prod = (char*) &g_producer_id_table;
 		slot += 4;
 		/* Signed bound: the reference ends the walk with `jl`, so the
 		 * limit compare must be on int, not on the pointer (which would

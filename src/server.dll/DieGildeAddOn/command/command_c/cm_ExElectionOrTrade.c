@@ -60,7 +60,7 @@
  *     if (puVar1 == (ushort *)0x0) {
  */
 
-extern int g_10035880;
+extern int g_current_year;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
@@ -90,11 +90,11 @@ int __cdecl cm_ExElectionOrTrade(int cmd, char* result)
 		if (entity == (void*) 0x0) {
 			return 1;
 		}
-		if (g_10035880 - *(int*) ((char*) entity + 0x28) > 1) {
+		if (g_current_year - *(int*) ((char*) entity + 0x28) > 1) {
 			*(int*) ((char*) entity + 0x1c) = -1;
 			*(int*) ((char*) entity + 0x20) = -1;
 			*(int*) ((char*) entity + 0x24) = -1;
-			*(int*) ((char*) entity + 0x28) = g_10035880 - 1;
+			*(int*) ((char*) entity + 0x28) = g_current_year - 1;
 		}
 		else {
 			return 1;
