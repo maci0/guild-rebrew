@@ -32,6 +32,7 @@
 // FUNCTION: SERVER 0x10008A90
 // ReadVfsCompressed
 
+// SIZE 0x6c
 typedef struct VFS_INFLATE {
 	void* inbuf;            /* +0x00 read window */
 	char* next_in;          /* +0x04 cursor into it */

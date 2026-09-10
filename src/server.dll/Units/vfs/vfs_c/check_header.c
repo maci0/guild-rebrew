@@ -18,6 +18,7 @@
 
 #include "zutil.h"
 
+// SIZE 0x4
 struct internal_state {int dummy;}; /* for buggy compilers */
 
 #ifndef Z_BUFSIZE
