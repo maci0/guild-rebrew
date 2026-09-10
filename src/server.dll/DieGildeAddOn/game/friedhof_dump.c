@@ -216,7 +216,7 @@ fail:
 // FUNCTION: SERVER 0x10011940
 // SIZE: 674
 
-extern int g_entity_table_end;
+extern unsigned short* g_entity_table_end;
 extern int g_next_object_id;
 extern int g_current_year;
 extern int g_1002574c[];

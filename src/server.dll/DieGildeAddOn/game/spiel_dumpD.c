@@ -20,8 +20,8 @@ extern short g_query_filter_extra3; /* 0x10030b8e */
 extern unsigned char g_filter_extra5; /* 0x10030b84 */
 extern int g_query_filter_extra1; /* 0x10030b88 */
 extern unsigned char g_query_filter_extra4; /* 0x10030b90 */
-extern unsigned char g_dynasty_field_48; /* 0x10035448 */
-extern unsigned char g_dynasty_field_49; /* 0x10035449 */
+extern char g_dynasty_field_48; /* 0x10035448 */
+extern char g_dynasty_field_49; /* 0x10035449 */
 extern int g_dynasty_field_4c; /* 0x1003544c */
 
 /* Adds b units of object a to the list reachable from the resolved parent

@@ -517,8 +517,8 @@ void __cdecl InitBuildingTypeTable(void)
 }
 #pragma optimize("", on)
 
-extern int g_file_version[4];
-extern int g_1002dde0[4];
+extern int g_file_version;
+extern int g_1002dde0;
 char g_1002a0f8[1] = {
     0x61,
 };

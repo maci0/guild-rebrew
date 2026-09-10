@@ -15,7 +15,7 @@ extern void* g_1176644c;   /* 0x1176644c - process heap handle */
 extern int g_11766450;     /* 0x11766450 - allocator mode: 3=pool, 2=block */
 extern int g_11766440;     /* 0x11766440 - pool region count */
 extern void* g_11766444;   /* 0x11766444 - pool region descriptor array */
-extern void* g_10031b78;   /* 0x10031b78 - block allocator region-list head */
+extern char g_10031b78;   /* 0x10031b78 - block allocator region-list head */
 
 /* 0x14-byte pool region descriptor: base = 1MB VirtualAlloc'd region,
  * header = separately heap-allocated region struct. */
@@ -170,7 +170,7 @@ checkver:
 
 extern void* g_1176644c;   /* process heap handle */
 extern void* g_11766444;   /* pool region descriptor array */
-extern int g_1176643c;     /* deferred header ptr (low word used) */
+extern void* g_1176643c;   /* deferred group header (__sbh_pHeaderDefer) */
 extern int g_11766440;     /* pool region count */
 extern void* g_11766438;   /* pool region scan cursor */
 extern unsigned int g_11766448;  /* max pool allocation size */

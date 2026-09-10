@@ -9,7 +9,7 @@
 #include <windows.h>
 
 extern int g_10034610;
-extern int g_10034614;
+extern void* g_10034614;
 extern int g_10034618;
 extern char g_1003461c;
 extern int g_117660e0;

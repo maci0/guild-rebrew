@@ -7,8 +7,8 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern int __cdecl rand(void);
 extern void __cdecl srand(unsigned int);
-extern unsigned int g_query_state_a0c[];
-extern unsigned char g_entity_state_base[];
+extern int g_query_state_a0c[];
+extern char g_entity_state_base[];
 extern int g_entity_id_field; /* 0x100358A4 */
 extern unsigned char g_slot_table[];
 extern char s_D__Develop_DieGildeAddOn_command_1002c748[];

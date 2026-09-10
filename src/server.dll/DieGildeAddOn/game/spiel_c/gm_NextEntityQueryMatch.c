@@ -10,8 +10,8 @@ extern char* g_item_def_table; /* 0x101de450 */
 extern int g_query_limit; /* 0x10035450 */
 extern int g_query_filter_max_id; /* 0x10030b94 */
 extern int g_query_filter_owner; /* 0x10030b98 */
-extern short g_query_filter_type; /* 0x10030b9c */
-extern char g_query_filter_state; /* 0x10030b9e */
+extern unsigned short g_query_filter_type; /* 0x10030b9c */
+extern unsigned char g_query_filter_state; /* 0x10030b9e */
 extern int g_query_match_count; /* 0x100a8c38 */
 extern int g_dispatch_table_b[]; /* 0x101398a0 */
 extern int g_dispatch_table_a[]; /* 0x1013989c */
@@ -54,6 +54,11 @@ extern int g_dispatch_table_a[]; /* 0x1013989c */
 //   the load takes edi. Merging the guard into the inner compare collapses it.
 //   (f) filter_type_cache and the gm_GetEntityType result as `unsigned short`
 //   tested against 0xffff give the target's 5-byte `cmp bp,0xffff`.
+//   (g) g_query_filter_state is `unsigned char` tree-wide. With the global
+//   unsigned, the target byte compare at 0x100163b6 needs both `!= 0xff`
+//   without the old `(char)` cast and `(unsigned char) tbl[eid]` on the item
+//   read; applying only one scores 350/473 or 331/472. The companion
+//   gm_StartEntityQuery needs the same unsigned declaration (char -> 222/320).
 //   The shared `lab_nomatch: is_match = 0;` also fixes a real semantic bug:
 //   the target clears cl on both mismatch paths, while an older revision
 //   cleared it only in the max_id arm, so with g_query_flag3 set an owner
@@ -130,13 +135,13 @@ have_depth:
             goto lab_3bc;
         }
 lab_395:
-        if (g_query_filter_state != (char)0xff) {
+        if (g_query_filter_state != 0xff) {
             unsigned int eid;
             char* tbl;
             eid = (unsigned int)*current;
             tbl = g_item_def_table;
             tbl += eid * 0x40;
-            is_match = tbl[eid] == g_query_filter_state;
+            is_match = (unsigned char) tbl[eid] == g_query_filter_state;
         }
         goto lab_3bc;
 lab_nomatch:
@@ -181,15 +186,15 @@ lab_43e:
 
 unsigned short* g_query_cursor;
 int g_query_filter_owner = 0xffffffff;
-char g_query_filter_state = 255;
+unsigned char g_query_filter_state = 255;
 char g_query_flag2;
 extern int g_query_match_count;
-extern unsigned char g_entity_base;
+extern unsigned char g_entity_base[];
 extern int g_some_limit;
 int g_citizen_count;
 unsigned char g_current_season;
 int g_dynasty_field_44;
-int g_dynasty_field_48;
+char g_dynasty_field_48;
 char g_dynasty_field_49;
 int g_dynasty_field_4c;
 extern char g_query_flag1;

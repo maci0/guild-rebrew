@@ -209,7 +209,7 @@ int __cdecl gm_Open(int map_id)
 int g_citizen_count;
 extern unsigned char g_current_season;
 extern int g_dynasty_field_44;
-int g_dynasty_field_48;
+char g_dynasty_field_48;
 extern char g_dynasty_field_49;
 extern int g_dynasty_field_4c;
 char g_query_active;
@@ -219,36 +219,28 @@ char g_query_flag2;
 char g_query_flag3;
 extern unsigned char* g_query_filter_base;
 unsigned short* g_query_cursor;
-extern int g_entity_table_end;
+extern unsigned short* g_entity_table_end;
 extern int g_current_year;
-extern int g_default_value_b;
+extern unsigned short g_default_value_b;
 extern int g_default_value_c;
 extern short g_default_value_d;
-extern char* g_slot_table;
-extern char g_entity_state_base;
+extern unsigned char g_slot_table[];
+extern char g_entity_state_base[];
 extern int g_entity_ref_table;
-extern char g_entity_type_bytes;
-int g_array_count[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
+extern unsigned char g_entity_type_bytes[];
+int g_array_count = 0;
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
 extern int g_stat1;
 extern int g_stat2;
 extern int g_stat3;
 extern int g_stat4;
-int g_flag_3c[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
-void* g_array_ptr[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
+int g_flag_3c = 0;
+void* g_array_ptr = 0;
 char g_stream_pool[1] = {
     0x00,
 };
 int g_stream_count[4] = {
     0x00, 0x00, 0x00, 0x00,
 };
-int g_connection_counter[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
+int g_connection_counter = 0;
 

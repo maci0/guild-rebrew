@@ -50,7 +50,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern int g_query_state_a0c;
+extern int g_query_state_a0c[];
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);

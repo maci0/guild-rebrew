@@ -14,9 +14,8 @@ extern unsigned int g_log_mode_flags;
 extern int g_console_handle;
 extern int g_owner_window;
 extern void (*g_panic_callback)(void);
-extern char g_log_message_buffer;
+extern char g_log_message_buffer[];
 extern int g_handler_started;
-extern int g_log_mode_flags;
 extern char g_msg_buf[];
 void __cdecl write_log(char*, int, char*);
 

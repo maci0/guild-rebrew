@@ -20,7 +20,7 @@ extern dispatch_fn PTR_LAB_1002c5a0[];
 
 extern char* g_entity_type_table;
 extern int g_citizen_count;
-extern char g_slot_table[];
+extern unsigned char g_slot_table[];
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);

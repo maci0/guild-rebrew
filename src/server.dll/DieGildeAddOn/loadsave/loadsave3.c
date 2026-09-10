@@ -40,8 +40,8 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 extern int g_query_limit; /* 0x10035450 */
 extern int g_active_player_count; /* 0x1003543c */
 extern char* g_item_def_table; /* 0x101de450 */
-extern char* g_query_base; /* 0x100a8c34 */
-extern unsigned int g_entity_table_end; /* 0x1003546c */
+extern unsigned short* g_query_base; /* 0x100a8c34 */
+extern unsigned short* g_entity_table_end; /* 0x1003546c */
 
 // FUNCTION: SERVER 0x10014070
 // ls_ID2Ptr
@@ -158,18 +158,18 @@ unsigned int ls_ID2Ptr(void)
 	return 1;
 }
 
-extern int g_1002dde0[4];
-extern int g_array_count[4];
+extern int g_1002dde0;
+extern int g_array_count;
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
 extern int g_stat1;
 extern int g_stat2;
 extern int g_stat3;
 extern int g_stat4;
-extern int g_flag_3c[4];
-extern void* g_array_ptr[4];
+extern int g_flag_3c;
+extern void* g_array_ptr;
 extern char g_stream_pool[1];
 extern int g_stream_count[4];
-extern int g_connection_counter[4];
+extern int g_connection_counter;
 /* Canonical definition lives in DieGildeAddOn/game/spiel.c. */
 extern int g_next_object_id;
 char g_filter_extra5[1] = {
@@ -189,7 +189,7 @@ int g_query_filter_extra4[4] = {
 };
 /* Canonical definition lives in game/spiel_c/gm_NextEntityQueryMatch.c. */
 extern int g_query_filter_owner;
-extern char g_query_filter_state;
+extern unsigned char g_query_filter_state;
 char g_str_10031500[1] = {
     0x67,
 };

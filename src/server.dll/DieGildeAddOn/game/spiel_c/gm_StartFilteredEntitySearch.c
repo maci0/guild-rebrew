@@ -44,7 +44,7 @@ extern short g_query_filter_extra3; /* 0x10030b8e */
 extern unsigned char g_filter_extra5; /* 0x10030b84 */
 extern int g_query_filter_extra1; /* 0x10030b88 */
 extern unsigned char g_query_filter_extra4; /* 0x10030b90 */
-extern char* g_dynasty_field_44; /* 0x10035444 */
+extern int g_dynasty_field_44; /* 0x10035444 */
 extern char g_dynasty_field_49; /* 0x10035449 */
 extern int g_dynasty_field_4c; /* 0x1003544c */
 extern char g_dynasty_field_48; /* 0x10035448 */
@@ -93,7 +93,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 				break;
 			case 2:
 				arg_ptr++;
-				strcpy(g_dynasty_field_44, *(char**) arg_ptr);
+				strcpy((char*) g_dynasty_field_44, *(char**) arg_ptr);
 				break;
 			case 3:
 				g_query_filter_extra2 = *(short*) (arg_ptr + 1);

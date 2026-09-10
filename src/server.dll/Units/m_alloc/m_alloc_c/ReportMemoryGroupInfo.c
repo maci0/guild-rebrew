@@ -29,7 +29,7 @@ extern int g_stat2;
 extern int g_stat3;
 extern int g_stat4;
 extern void* g_array_ptr;
-extern char g_alloc_root_name; /* 0x117640a0 - root group node */
+extern int g_alloc_root_name; /* 0x117640a0 - root group node */
 
 void __cdecl ReportMemoryGroupInfo(const char* toggle)
 {

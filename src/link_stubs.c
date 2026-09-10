@@ -550,3 +550,28 @@ int __cdecl crt_toupper(int c)
 	}
 	return c;
 }
+
+/* --- Call targets renamed to their real CRT entry points (2026-09-10) ---
+ * The round-trip catalog work renamed vfs2.c's calls off dead local stubs onto
+ * the real CRT symbols at their reference VAs (crt_locked_putc 0x1001add6,
+ * _crt_locked_call4a 0x1001a931). Those names have no definition in the tree,
+ * so the link needs them satisfied here; postlink rewrites the call targets to
+ * the reference VAs (same contract as every other stub in this file).
+ * NOTE: `rebrew gen-stubs` emits _crt_locked_call4a as a data int (it does not
+ * classify a symbol that is CALLED as a function) and would also drop the rest
+ * of this file's stubs, so these two are added by hand. */
+int __cdecl _crt_locked_call4a(void* a, int b, int c, void* d)
+{
+	(void) a;
+	(void) b;
+	(void) c;
+	(void) d;
+	return 0;
+}
+
+int __cdecl crt_locked_putc(int ch, void* stream)
+{
+	(void) ch;
+	(void) stream;
+	return 0;
+}

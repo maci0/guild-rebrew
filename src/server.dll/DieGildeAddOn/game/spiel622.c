@@ -41,7 +41,7 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern char* g_array_base;
-extern char* g_slot_table;
+extern unsigned char g_slot_table[];
 void __cdecl free_node(char*);
 int __cdecl gm_FreeObjectListRecursive(char**);
 void __cdecl gm_NoopRet2(void);
@@ -65,7 +65,7 @@ extern unsigned short g_FilterVal25;
 extern unsigned short g_FilterVal27;
 extern unsigned char g_FilterVal30;
 void __cdecl gv_Free3Fields(void* param);
-extern int g_query_state_a0c;
+extern int g_query_state_a0c[];
 extern unsigned char g_byte_table_30861;
 char* __cdecl gm_SearchStruct(void);
 int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
@@ -109,7 +109,7 @@ extern float g_float_const_cc; /* 0x100256cc */
 extern float g_gv_const_57c8; /* 0x100257c8 */
 extern double g_const_57d0; /* 0x100257d0 */
 double __cdecl gm_CalculateProductionValue(int, unsigned char);
-extern char g_current_season;
+extern unsigned char g_current_season;
 int __cdecl gm_SumBuildingProductionValues(char*, int);
 int __cdecl gm_EntityQuerySum(int);
 int __cdecl compute_size(char*); /* 0x10019d00 */

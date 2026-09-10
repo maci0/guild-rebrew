@@ -7,14 +7,7 @@ extern unsigned short g_entity_slot_table[];
 extern char* g_unknown_1de450;
 extern unsigned char g_current_season;
 
-// SIZE 0x264264
-typedef struct {
-	unsigned int flags;
-	unsigned int id;
-	unsigned char data[0x26425C];
-} TradePlayerSlot;
-
-extern TradePlayerSlot g_player_slots_base[];
+extern PlayerSlot g_player_slots_base[8];
 extern char g_error_msg_sell_no_source[];
 extern char g_error_msg_sell_no_dest[];
 extern char g_error_msg_sell_failed[];
