@@ -557,9 +557,9 @@ int __cdecl crt_toupper(int c)
  * _crt_locked_call4a 0x1001a931). Those names have no definition in the tree,
  * so the link needs them satisfied here; postlink rewrites the call targets to
  * the reference VAs (same contract as every other stub in this file).
- * NOTE: `rebrew gen-stubs` emits _crt_locked_call4a as a data int (it does not
- * classify a symbol that is CALLED as a function) and would also drop the rest
- * of this file's stubs, so these two are added by hand. */
+ * NOTE: `rebrew gen-stubs` now classifies a called symbol as a function (it
+ * scans both bare prototypes and call sites), but regenerating would still
+ * drop the rest of this file's stubs, so these two stay by hand. */
 int __cdecl _crt_locked_call4a(void* a, int b, int c, void* d)
 {
 	(void) a;
