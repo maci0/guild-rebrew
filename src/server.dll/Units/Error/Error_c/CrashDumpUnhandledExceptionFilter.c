@@ -8,7 +8,7 @@ char __cdecl AnalyzeInstruction(int, int, int, int*);
 unsigned int __cdecl EmitCrashModuleLine(int*);
 extern void* g_crash_callback;
 
-// CFLAGS: /O1 /G6 /Gd /Oy
+// CFLAGS: /O2 /Gd
 // NOTE: semantically complete reconstruction rebuilt from the target disasm.
 // Exception dispatch converted from switch to the reference's if/else chain
 // (tests 0xc000008e, 0xc000001d, 0xc0000005 first, then 0x80000003/04); the
