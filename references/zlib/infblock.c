@@ -9,12 +9,6 @@
 #include "infcodes.h"
 #include "infutil.h"
 
-/* The game's zlib build routes the CODES-branch ZFREE through the engine's
- * dispatch helper (gm_DispatchCall(param, obj) == obj->fn24(obj->field28,
- * param)); the pristine zfree indirect call is replaced.  Matches the
- * original server.dll codegen (verified byte-for-byte). */
-extern int __cdecl gm_DispatchCall(int param, void* obj);
-
 struct inflate_codes_state {int dummy;}; /* for buggy compilers */
 
 /* simplify the use of the inflate_huft type with some defines */
@@ -83,7 +77,7 @@ uLongf *c;
   if (s->mode == BTREE || s->mode == DTREE)
     ZFREE(z, s->sub.trees.blens);
   if (s->mode == CODES)
-    gm_DispatchCall(s->sub.decode.codes, z);
+    inflate_codes_free(s->sub.decode.codes, z);
   s->mode = TYPE;
   s->bitk = 0;
   s->bitb = 0;
@@ -344,7 +338,7 @@ int r;
       if ((r = inflate_codes(s, z, r)) != Z_STREAM_END)
         return inflate_flush(s, z, r);
       r = Z_OK;
-      gm_DispatchCall(s->sub.decode.codes, z);
+      inflate_codes_free(s->sub.decode.codes, z);
       LOAD
       Tracev((stderr, "inflate:       codes end, %lu total out\n",
               z->total_out + (q >= s->read ? q - s->read :

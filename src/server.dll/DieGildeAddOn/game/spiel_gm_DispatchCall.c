@@ -120,17 +120,6 @@ double __cdecl gm_RandomFloat01(void);
 extern float g_const_1_0;
 extern float g_const_neg_1_0;
 
-/* Allocates and initializes a game entity structure. Allocates
- * memory via m_AllocTracked and zeroes the initial fields. */
-
-// FUNCTION: SERVER 0x10005370
-// gm_DispatchCall
-
-int __cdecl gm_DispatchCall(int param, DISPATCH_OBJ* obj)
-{
-	return obj->func(obj->field_28, param);
-}
-
 /* Initializes the object production (Hersteller) system.
  * Loads product definitions, recipes, and production chain
  * data from game files. */

@@ -83,6 +83,10 @@
 // inflate_codes
 // SIZE: 1968
 
+// LIBRARY: SERVER 0x10005370
+// inflate_codes_free
+// SIZE: 20
+
 // LIBRARY: SERVER 0x10005390
 // inflate_fast
 // SIZE: 911
