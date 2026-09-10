@@ -14,6 +14,19 @@
  * the stores below the guard checks (first use is `return result` at the
  * avail_out test) drops the object to 475 at 26/492, so the target's order is
  * not a plain source-order reordering.
+ *
+ * Volatility probed per accumulator (2026-09-10, .scratch/rvc/probe.py, obj /
+ * matched of 492): both volatile 499/138 (current), both plain 469/29, plain
+ * with `int*` address-escaped aliases 469/29 (msvc6 promotes them anyway, so
+ * the address-escape lever does not work here), `done` volatile only 505/131,
+ * `result` volatile only 465/22. The volatile on `result` is load-bearing;
+ * `done` costs more than it buys on its own, and neither field is individually
+ * the target's 492. `unsigned int` and `long` give the identical 499/138.
+ *
+ * The candidate is missing a 5-instruction epilogue the target has
+ * (pop esi / pop ebp / pop ebx / add esp,8 / ret), 7 bytes, while running 14
+ * bytes longer elsewhere; the instruction streams are too misaligned to
+ * localise it further until the prologue order is fixed.
  */
 
 // FUNCTION: SERVER 0x10008A90
