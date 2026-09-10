@@ -3,1076 +3,1299 @@ note = "connection counter"
 name = "g_connection_counter"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x101deaec"]
 note = "listen socket"
 name = "g_net_socket"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x101deb00"]
 note = "first player slot (stride 0x264264 bytes)"
 name = "g_connections"
 section = ".data"
 type = "unsigned int"
+status = "UNCHECKED"
 
 ["SERVER.0x114ffe20"]
 note = "overflow slot"
 name = "g_player_slot_overflow"
 section = ".data"
 type = "unsigned int"
+status = "UNCHECKED"
 
 ["SERVER.0x101deb14"]
 name = "g_player_slot_field"
 section = ".data"
 type = "unsigned int"
+status = "UNCHECKED"
 
 ["SERVER.0x101deac0"]
 name = "g_download_total_size"
 section = ".data"
 type = "unsigned int"
+status = "UNCHECKED"
 
 ["SERVER.0x101deac4"]
 name = "g_download_received"
 section = ".data"
 type = "unsigned int"
+status = "UNCHECKED"
 
 ["SERVER.0x101deac8"]
 name = "g_download_slots"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x101deae8"]
 name = "g_download_buffer"
 section = ".data"
 type = "unsigned int"
+status = "UNCHECKED"
 
 ["SERVER.0x101de5a4"]
 name = "g_aemter_table"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x101de454"]
 note = "auxiliary entity count (loadsave)"
 name = "g_101de454"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x101de55c"]
 note = "auxiliary entity buffer (realloc'd)"
 name = "g_101de55c"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x100a8c30"]
 name = "g_entity_type_table"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b6c"]
 name = "g_next_object_id"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035434"]
 name = "g_citizen_count"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035439"]
 name = "g_current_season"
 section = ".data"
 type = "unsigned char"
+status = "UNCHECKED"
 
 ["SERVER.0x1002a0f8"]
 name = "g_1002a0f8"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x100256b4"]
 name = "g_float_const_b4"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100256b8"]
 name = "g_float_const_b8"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100256c0"]
 name = "g_float_const_c0"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100256c4"]
 name = "g_float_const_c4"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100256c8"]
 name = "g_float_const_c8"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100256a0"]
 name = "g_float_const_a0"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100256ac"]
 name = "g_float_const_ac"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100256b0"]
 name = "g_float_const_b0"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x1003546c"]
 name = "g_entity_table_end"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x100358a0"]
 name = "g_slot_table"
 section = ".data"
 type = "char*"
+status = "UNCHECKED"
 
 ["SERVER.0x1014d8c0"]
 name = "g_entity_ptr"
 section = ".data"
 type = "unsigned char*"
+status = "UNCHECKED"
 
 ["SERVER.0x101de450"]
 name = "g_item_def_table"
 section = ".data"
 type = "char*"
+status = "UNCHECKED"
 
 ["SERVER.0x100a8c34"]
 name = "g_query_base"
 section = ".data"
 type = "unsigned short*"
+status = "UNCHECKED"
 
 ["SERVER.0x100a8cf8"]
 name = "g_100a8cf8"
 section = ".data"
 type = "unsigned int"
+status = "UNCHECKED"
 
 ["SERVER.0x1009b764"]
 name = "g_1009b764"
 section = ".data"
 type = "unsigned int"
+status = "UNCHECKED"
 
 ["SERVER.0x1002dde0"]
 name = "g_1002dde0"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x1009b770"]
 name = "g_slot_array"
 section = ".data"
 type = "char*"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b98"]
 section = ".data"
 name = "g_query_filter_owner"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b9e"]
 section = ".data"
 name = "g_query_filter_state"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x1003545e"]
 section = ".data"
 name = "g_query_flag3"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x1003545c"]
 section = ".data"
 name = "g_query_flag1"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x1003545d"]
 section = ".data"
 name = "g_query_flag2"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10035454"]
 section = ".data"
 name = "g_query_active"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10035458"]
 section = ".data"
 name = "g_query_count"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x100a8c38"]
 section = ".data"
 name = "g_query_match_count"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035468"]
 section = ".data"
 name = "g_query_cursor"
 type = "unsigned short*"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b8c"]
 section = ".data"
 name = "g_query_filter_extra2"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b8e"]
 section = ".data"
 name = "g_query_filter_extra3"
 type = "short"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b84"]
 section = ".data"
 name = "g_filter_extra5"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b88"]
 section = ".data"
 name = "g_query_filter_extra1"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b90"]
 section = ".data"
 name = "g_query_filter_extra4"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035444"]
 section = ".data"
 name = "g_dynasty_field_44"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035449"]
 section = ".data"
 name = "g_dynasty_field_49"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x1003544c"]
 section = ".data"
 name = "g_dynasty_field_4c"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035448"]
 section = ".data"
 name = "g_dynasty_field_48"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035464"]
 section = ".data"
 name = "g_query_filter_base"
 type = "unsigned char*"
+status = "UNCHECKED"
 
 ["SERVER.0x10035880"]
 name = "g_current_year"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035884"]
 name = "g_default_value_b"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035888"]
 name = "g_default_value_c"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x1003588c"]
 name = "g_default_value_d"
 section = ".data"
 type = "short"
+status = "UNCHECKED"
 
 ["SERVER.0x1009acfc"]
 name = "g_some_limit"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x100358fc"]
 name = "g_entity_ref_table"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10031500"]
 name = "g_str_10031500"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10031538"]
 name = "g_str_10031538"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10035a04"]
 name = "g_entity_type_bytes"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x100358a2"]
 name = "g_entity_state_base"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x1002d4ec"]
 name = "g_file_version"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x11766100"]
 name = "g_log_buffer"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x11766204"]
 name = "g_log_file_handle"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10027078"]
 name = "g_log_level_table"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10027084"]
 name = "g_log_format_table"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x100270e4"]
 name = "g_log_newline"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x100270e8"]
 name = "g_log_default_name"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10034624"]
 name = "g_array_count"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10034628"]
 name = "g_stat1"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x1003462c"]
 name = "g_stat2"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10034630"]
 name = "g_stat3"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10034634"]
 name = "g_stat4"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x1003463c"]
 name = "g_flag_3c"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10034640"]
 name = "g_array_ptr"
 section = ".data"
 type = "void*"
+status = "UNCHECKED"
 
 ["SERVER.0x117640c4"]
 name = "g_list_head"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10028b04"]
 name = "g_str_10028b04"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10028aec"]
 name = "g_str_10028aec"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10028888"]
 name = "g_str_10028888"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10028b78"]
 name = "g_str_10028b78"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10028b60"]
 name = "g_str_10028b60"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10034678"]
 name = "g_stream_count"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10034670"]
 name = "g_stream_pool"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b94"]
 name = "g_query_filter_max_id"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b9c"]
 name = "g_query_filter_type"
 type = "short"
+status = "UNCHECKED"
 
 ["SERVER.0x1003543c"]
 name = "g_active_player_count"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x101398a0"]
 name = "g_dispatch_table_b"
 type = "int*"
+status = "UNCHECKED"
 
 ["SERVER.0x1013989c"]
 name = "g_dispatch_table_a"
 type = "int*"
+status = "UNCHECKED"
 
 ["SERVER.0x10034638"]
 name = "g_alloc_counter"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035450"]
 name = "g_query_limit"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x101de5a0"]
 name = "g_office_slots"
 type = "char*"
+status = "UNCHECKED"
 
 ["SERVER.0x100256bc"]
 name = "g_float_const_bc"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100256cc"]
 name = "g_float_const_cc"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x117640a0"]
 name = "g_alloc_root_name"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x117640b0"]
 name = "g_alloc_root_size_total"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x117640b4"]
 name = "g_alloc_root_count"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x117640b8"]
 name = "g_alloc_root_size_max"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x117640bc"]
 name = "g_alloc_root_count_max"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x117640c0"]
 name = "g_alloc_root_field_20"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x1003540c"]
 name = "g_dynamic_count"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x1002c050"]
 name = "g_alchemy_entity_table"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10028938"]
 name = "g_default_group_name"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x1002893c"]
 name = "g_default_group_name_4"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x117640a4"]
 name = "g_alloc_root_name_4"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035478"]
 name = "g_save_extra_field"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10025680"]
 name = "g_gv_const_5680"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100257c4"]
 name = "g_gv_const_57c4"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100257c8"]
 name = "g_gv_const_57c8"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x10035a0c"]
 name = "g_query_state_a0c"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035470"]
 name = "g_save_extra_70"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035474"]
 name = "g_save_extra_74"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10030861"]
 name = "g_byte_table_30861"
 type = "unsigned char"
+status = "UNCHECKED"
 
 ["SERVER.0x1003542c"]
 name = "g_dynasty_field_2c"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035430"]
 name = "g_dynasty_generation_counter"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035a05"]
 name = "g_stat_b_array"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10025fa0"]
 name = "g_const_5fa0"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x10025fa8"]
 name = "g_const_5fa8"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x10025fac"]
 name = "g_const_5fac"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x10025fb0"]
 name = "g_const_5fb0"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x10025fb4"]
 name = "g_const_5fb4"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x10025fb8"]
 name = "g_const_5fb8"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x10025fbc"]
 name = "g_const_5fbc"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100257bc"]
 name = "g_const_57bc"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100257d0"]
 name = "g_const_57d0"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x10029bb8"]
 name = "g_str_29bb8"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x1009aca0"]
 name = "g_entity_base"
 type = "unsigned char"
 section = ".data"
+status = "UNCHECKED"
 
 ["SERVER.0x1009b760"]
 name = "g_entity_end"
 type = "unsigned char"
 section = ".data"
+status = "UNCHECKED"
 
 ["SERVER.0x1002415c"]
 name = "__imp__accept@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024160"]
 name = "__imp__listen@8"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024164"]
 name = "__imp__send@16"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024168"]
 name = "__imp__recv@16"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002416c"]
 name = "__imp__ioctlsocket@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024170"]
 name = "__imp__WSAGetLastError@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024174"]
 name = "__imp__shutdown@8"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024178"]
 name = "__imp__WSAStartup@8"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002417c"]
 name = "__imp__WSACleanup@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024180"]
 name = "__imp__socket@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024184"]
 name = "__imp__setsockopt@20"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024188"]
 name = "__imp__htonl@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002418c"]
 name = "__imp__htons@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024190"]
 name = "__imp__bind@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024194"]
 name = "__imp__sendto@24"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024198"]
 name = "__imp__closesocket@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100313fc"]
 name = "$SG18890"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x10024000"]
 name = "__imp__GetLocalTime@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024004"]
 name = "__imp__OutputDebugStringA@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024008"]
 name = "__imp__UnhandledExceptionFilter@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002400c"]
 name = "__imp__VirtualFree@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024010"]
 name = "__imp__CloseHandle@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024014"]
 name = "__imp__ReadProcessMemory@20"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024018"]
 name = "__imp__VirtualQuery@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002401c"]
 name = "__imp__GetTimeFormatA@24"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024020"]
 name = "__imp__GetDateFormatA@24"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024024"]
 name = "__imp__WriteFile@20"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024028"]
 name = "__imp__SetFilePointer@16"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002402c"]
 name = "__imp__GetCurrentProcess@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024030"]
 name = "__imp__VirtualAlloc@16"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024034"]
 name = "__imp__ReadFile@20"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024038"]
 name = "__imp__CreateFileA@28"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002403c"]
 name = "__imp__GetModuleFileNameA@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024040"]
 name = "__imp__SetUnhandledExceptionFilter@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024044"]
 name = "__imp__GetStdHandle@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024048"]
 name = "__imp__AllocConsole@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002404c"]
 name = "__imp__FreeConsole@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024050"]
 name = "__imp__CreateThread@24"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024054"]
 name = "__imp__TerminateThread@8"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024058"]
 name = "__imp__Sleep@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002405c"]
 name = "__imp__GetTickCount@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024060"]
 name = "__imp__GetPrivateProfileStringA@24"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024064"]
 name = "__imp__GetPrivateProfileIntA@16"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024068"]
 name = "__imp__SetThreadPriority@8"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002406c"]
 name = "__imp__GetCurrentThread@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024070"]
 name = "__imp__GetStartupInfoA@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024074"]
 name = "__imp__HeapFree@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024078"]
 name = "__imp__LCMapStringW@24"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024088"]
 name = "__imp__SetEndOfFile@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002408c"]
 name = "__imp__LoadLibraryA@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024090"]
 name = "__imp__GetOEMCP@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024094"]
 name = "__imp__GetACP@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024098"]
 name = "__imp__GetStringTypeW@16"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002409c"]
 name = "__imp__GetStringTypeA@20"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240a0"]
 name = "__imp__GetCPInfo@8"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240c0"]
 name = "__imp__WriteConsoleA@20"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240c4"]
 name = "__imp__ExitProcess@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240cc"]
 name = "__imp__HeapAlloc@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240d0"]
 name = "__imp__TlsSetValue@8"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240d4"]
 name = "__imp__InterlockedDecrement@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240d8"]
 name = "__imp__InterlockedIncrement@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240dc"]
 name = "__imp__GetLastError@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240e0"]
 name = "__imp__HeapReAlloc@16"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240e4"]
 name = "__imp__GetCommandLineA@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240e8"]
 name = "__imp__GetVersion@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240ec"]
 name = "__imp__EnterCriticalSection@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240f0"]
 name = "__imp__LeaveCriticalSection@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x100240f4"]
 name = "__imp__InitializeCriticalSection@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024104"]
 name = "__imp__DeleteCriticalSection@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024108"]
 name = "__imp__GetCurrentThreadId@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002410c"]
 name = "__imp__HeapDestroy@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024110"]
 name = "__imp__TlsAlloc@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024114"]
 name = "__imp__TlsFree@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024118"]
 name = "__imp__SetLastError@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002411c"]
 name = "__imp__TlsGetValue@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024124"]
 name = "__imp__RtlUnwind@16"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002412c"]
 name = "__imp__FlushFileBuffers@4"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024130"]
 name = "__imp__HeapCreate@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024134"]
 name = "__imp__MultiByteToWideChar@24"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024138"]
 name = "__imp__GetProcAddress@8"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002413c"]
 name = "__imp__WideCharToMultiByte@32"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024140"]
 name = "__imp__LCMapStringA@24"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024148"]
 name = "__imp__MessageBoxA@16"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002414c"]
 name = "__imp__GetWindowTextA@12"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x10024154"]
 name = "__imp__timeGetTime@0"
 type = "void*"
 section = ".idata"
+status = "UNCHECKED"
 
 ["SERVER.0x1002735c"]
 name = "s__________________________________1002735c"
 type = "char"
 section = ".data"
+status = "UNCHECKED"
 
 ["SERVER.0x100270fc"]
 name = "s__s__s_100270fc"
 type = "char"
 section = ".data"
+status = "UNCHECKED"
 
 ["SERVER.0x10027358"]
 name = "g_file_write_mode"
 type = "unsigned char"
 section = ".data"
+status = "UNCHECKED"
 
 ["SERVER.0x100270f8"]
 name = "g_file_append_mode"
 type = "unsigned char"
 section = ".data"
+status = "UNCHECKED"
 
 ["SERVER.0x1002733c"]
 name = "s_LogFile_has_been_deleted__1002733c"
 type = "char"
 section = ".data"
+status = "UNCHECKED"
 
 ["SERVER.0x10027314"]
 name = "g_crash_newline"
 type = "char"
 section = ".data"
+status = "UNCHECKED"
 
 ["SERVER.0x10027328"]
 name = "g_crash_space"
 type = "char"
 section = ".data"
+status = "UNCHECKED"
 
 ["SERVER.0x100252e8"]
 section = ".rdata"
 name = "g_rdata_restore_252e8"
+status = "UNCHECKED"
 
 ["SERVER.0x1002a000"]
 section = ".data"
 name = "g_data_restore_gap"
+status = "UNCHECKED"
 
 ["SERVER.0x24000"]
 name = "g_iat_region"
@@ -1086,90 +1309,105 @@ name = "g_10033b9c"
 type = "unsigned int"
 section = ".bss"
 note = "block alloc threshold (allocator mode 2)"
+status = "UNCHECKED"
 
 ["SERVER.0x100354b4"]
 name = "g_100354b4"
 type = "unsigned int"
 section = ".bss"
 note = "OS version dword (GetVersion)"
+status = "UNCHECKED"
 
 ["SERVER.0x100354b8"]
 name = "g_100354b8"
 type = "unsigned int"
 section = ".bss"
 note = "(major << 8) | minor"
+status = "UNCHECKED"
 
 ["SERVER.0x100354bc"]
 name = "g_100354bc"
 type = "unsigned int"
 section = ".bss"
 note = "OS major"
+status = "UNCHECKED"
 
 ["SERVER.0x100354c0"]
 name = "g_100354c0"
 type = "unsigned int"
 section = ".bss"
 note = "OS minor"
+status = "UNCHECKED"
 
 ["SERVER.0x100354ec"]
 name = "g_100354ec"
 type = "int"
 section = ".bss"
 note = "_cexit-already-ran flag"
+status = "UNCHECKED"
 
 ["SERVER.0x100354fc"]
 name = "g_100354fc"
 type = "int"
 section = ".bss"
 note = "__CRT_INIT attach/detach refcount"
+status = "UNCHECKED"
 
 ["SERVER.0x10035500"]
 name = "g_10035500"
 type = "void *"
 section = ".bss"
 note = "environment strings ptr"
+status = "UNCHECKED"
 
 ["SERVER.0x1003559c"]
 name = "g_1003559c"
 type = "int"
 section = ".bss"
 note = "new-handler retry flag (_callnewh)"
+status = "UNCHECKED"
 
 ["SERVER.0x11766448"]
 name = "g_11766448"
 type = "unsigned int"
 section = ".bss"
 note = "max pool allocation size (allocator mode 3)"
+status = "UNCHECKED"
 
 ["SERVER.0x1176644c"]
 name = "g_1176644c"
 type = "void *"
 section = ".bss"
 note = "process heap handle"
+status = "UNCHECKED"
 
 ["SERVER.0x11766450"]
 name = "g_11766450"
 type = "int"
 section = ".bss"
 note = "allocator mode: 3=pool, 2=block"
+status = "UNCHECKED"
 
 ["SERVER.0x11767584"]
 name = "g_11767584"
 type = "void *"
 section = ".bss"
 note = "GetCommandLineA result"
+status = "UNCHECKED"
 
 ["SERVER.0x11767588"]
 name = "g_11767588"
 type = "int (__stdcall *)(void *, unsigned int, void *)"
 section = ".bss"
 note = "DllMain user handler fnptr"
+status = "UNCHECKED"
 
 ["SERVER.0x100317f8"]
 name = "g_lock_stream_table"
 type = "char"
 section = ".data"
 note = "stream lock-pointer table anchor (0x100317f8..0x10031a58, stride 0x20)"
+status = "UNCHECKED"
 
 ["SERVER.0x10031aac"]
 name = "locktable"
@@ -1178,204 +1416,238 @@ section = ".data"
 note = "per-lock CRITICAL_SECTION ptr table (0x40 entries)"
 
 # ---- extra globals referenced by the crt_region CRT-startup/allocator fns ----
+status = "UNCHECKED"
 
 ["SERVER.0x11766438"]
 name = "g_11766438"
 type = "void *"
 section = ".bss"
 note = "pool: region scan cursor (ptr into array)"
+status = "UNCHECKED"
 
 ["SERVER.0x11766440"]
 name = "__sbh_cntHeaderList"
 type = "int"
 section = ".bss"
 note = "pool: region count"
+status = "UNCHECKED"
 
 ["SERVER.0x11766444"]
 name = "__sbh_pHeaderList"
 type = "void *"
 section = ".bss"
 note = "pool: region descriptor array"
+status = "UNCHECKED"
 
 ["SERVER.0x11766430"]
 name = "g_11766430"
 type = "int"
 section = ".bss"
 note = "__sbh_sizeHeaderList - allocated header-list size"
+status = "UNCHECKED"
 
 ["SERVER.0x11766434"]
 name = "g_11766434"
 type = "int"
 section = ".bss"
 note = "__sbh_indGroupDefer - deferred group index"
+status = "UNCHECKED"
 
 ["SERVER.0x1176643c"]
 name = "g_1176643c"
 type = "void *"
 section = ".bss"
 note = "__sbh_pHeaderDefer - deferred group header"
+status = "UNCHECKED"
 
 ["SERVER.0x11766460"]
 name = "g_11766460"
 type = "int"
 section = ".bss"
 note = "stream group ptr table (0x11766460..0x1176655c, 0x40 entries)"
+status = "UNCHECKED"
 
 ["SERVER.0x11766560"]
 name = "g_11766560"
 type = "int"
 section = ".bss"
 note = "current stream count"
+status = "UNCHECKED"
 
 ["SERVER.0x11767580"]
 name = "g_11767580"
 type = "int"
 section = ".bss"
 note = "tracked-block table count"
+status = "UNCHECKED"
 
 ["SERVER.0x1176758c"]
 name = "g_1176758c"
 type = "int"
 section = ".bss"
 note = "__envp built flag"
+status = "UNCHECKED"
 
 ["SERVER.0x11767590"]
 name = "g_11767590"
 type = "int"
 section = ".bss"
 note = "cmdline/env parsed flag"
+status = "UNCHECKED"
 
 ["SERVER.0x10031b6c"]
 name = "g_10031b6c"
 type = "int"
 section = ".bss"
 note = "TLS index (__tlsindex)"
+status = "UNCHECKED"
 
 ["SERVER.0x10031b78"]
 name = "g_10031b78"
 type = "char"
 section = ".bss"
 note = "block allocator region-list head node"
+status = "UNCHECKED"
 
 ["SERVER.0x10033b98"]
 name = "g_10033b98"
 type = "OldSbhRegion *"
 section = ".bss"
 note = "__old_sbh_p_starting_region (V5 sbh rover)"
+status = "UNCHECKED"
 
 ["SERVER.0x100317d8"]
 name = "g_100317d8"
 type = "void *"
 section = ".data"
 note = "first init fnptr"
+status = "UNCHECKED"
 
 ["SERVER.0x100317f0"]
 name = "g_100317f0"
 type = "void (__cdecl *)(int)"
 section = ".bss"
 note = "_exit hook fnptr"
+status = "UNCHECKED"
 
 ["SERVER.0x100354c4"]
 name = "g_100354c4"
 type = "int"
 section = ".bss"
 note = "__argc"
+status = "UNCHECKED"
 
 ["SERVER.0x100354c8"]
 name = "g_100354c8"
 type = "int"
 section = ".bss"
 note = "__argv"
+status = "UNCHECKED"
 
 ["SERVER.0x100354d0"]
 name = "g_100354d0"
 type = "int"
 section = ".bss"
 note = "__envp"
+status = "UNCHECKED"
 
 ["SERVER.0x100354e0"]
 name = "g_100354e0"
 type = "int"
 section = ".bss"
 note = "_pgmptr"
+status = "UNCHECKED"
 
 ["SERVER.0x100354e8"]
 name = "g_100354e8"
 type = "char"
 section = ".bss"
 note = "0x1001bb4c tail flag"
+status = "UNCHECKED"
 
 ["SERVER.0x10035508"]
 name = "g_10035508"
 type = "int"
 section = ".bss"
 note = "__amsg_exit report-mode flag"
+status = "UNCHECKED"
 
 ["SERVER.0x1003550c"]
 name = "g_1003550c"
 type = "int"
 section = ".bss"
 note = "__amsg_exit report-mode flag 2"
+status = "UNCHECKED"
 
 ["SERVER.0x100355a4"]
 name = "g_100355a4"
 type = "int"
 section = ".bss"
 note = "fully-free page count (SBH)"
+status = "UNCHECKED"
 
 ["SERVER.0x100355d8"]
 name = "g_100355d8"
 type = "char"
 section = ".bss"
 note = "module filename buffer (0x104)"
+status = "UNCHECKED"
 
 ["SERVER.0x100356dc"]
 name = "g_100356dc"
 type = "int"
 section = ".bss"
 note = "env mode: 0=uninit, 1=W, 2=A"
+status = "UNCHECKED"
 
 ["SERVER.0x100356e0"]
 name = "g_100356e0"
 type = "void (*)(void)"
 section = ".bss"
 note = "_crt_runtime_error user hook (0x1001fdf8)"
+status = "UNCHECKED"
 
 ["SERVER.0x100355a0"]
 name = "g_100355a0"
 type = "void *"
 section = ".bss"
 note = "_pnhheap new-handler fnptr (0x1001d238)"
+status = "UNCHECKED"
 
 ["SERVER.0x10033ef0"]
 name = "g_rterrlist"
 type = "struct rterr_entry[18]"
 section = ".data"
 note = "_NMSG_WRITE runtime-error table (0x1001fe31)"
+status = "UNCHECKED"
 
 ["SERVER.0x10035838"]
 name = "g_10035838"
 type = "void *"
 section = ".bss"
 note = "cached MessageBoxA proc (0x10022107)"
+status = "UNCHECKED"
 
 ["SERVER.0x1003583c"]
 name = "g_1003583c"
 type = "void *"
 section = ".bss"
 note = "cached GetActiveWindow proc (0x10022107)"
+status = "UNCHECKED"
 
 ["SERVER.0x10035840"]
 name = "g_10035840"
 type = "void *"
 section = ".bss"
 note = "cached GetLastActivePopup proc (0x10022107)"
+status = "UNCHECKED"
 
 ["SERVER.0x11766564"]
 name = "g_11766564"
 type = "void **"
 section = ".bss"
 note = "tracked-block (stream) table ptr - __flsall/_fcloseall walk this"
+status = "UNCHECKED"
 
 ["SERVER.0x10028bdc"]
 section = ".data"
@@ -1384,128 +1656,157 @@ section = ".data"
 name = "g_plant_info_table"
 section = ".data"
 type = "unsigned char"
+status = "UNCHECKED"
 
 ["SERVER.0x10030b70"]
 name = "g_entity_id_counter"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10035408"]
 name = "g_sequence_counter"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x1176408c"]
 name = "g_chain_id_start"
 section = ".bss"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10025690"]
 name = "_g_stat_max_d"
 section = ".rdata"
 type = "double"
+status = "UNCHECKED"
 
 ["SERVER.0x10025698"]
 name = "_g_stat_min_d"
 section = ".rdata"
 type = "double"
+status = "UNCHECKED"
 
 ["SERVER.0x100358a4"]
 name = "g_entity_id_field"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x100256a4"]
 name = "g_color_scale"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x10025718"]
 name = "g_game_speed_table"
 section = ".rdata"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x1002c3f0"]
 name = "g_game_speed_value"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x1002c3f4"]
 name = "g_game_speed_index"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x100a8c94"]
 name = "g_entity_slot_table"
 section = ".data"
 type = "unsigned short"
+status = "UNCHECKED"
 
 ["SERVER.0x11764084"]
 name = "g_max_players"
 section = ".bss"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x100256d0"]
 name = "dScaleFactor"
 section = ".rdata"
 type = "double"
+status = "UNCHECKED"
 
 ["SERVER.0x100257c0"]
 name = "g_const_57c0"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x100256a8"]
 name = "g_float_const_a8"
 section = ".rdata"
 type = "float"
+status = "UNCHECKED"
 
 ["SERVER.0x1009aca2"]
 name = "g_dynamic_entities"
 section = ".data"
 type = "unsigned char"
+status = "UNCHECKED"
 
 ["SERVER.0x101de460"]
 name = "g_save_info"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x11764094"]
 name = "g_thread_handle"
 section = ".bss"
 type = "void *"
+status = "UNCHECKED"
 
 ["SERVER.0x10034680"]
 name = "g_handler_started"
 section = ".data"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x10034618"]
 name = "g_log_mode_flags"
 section = ".data"
 type = "unsigned int"
+status = "UNCHECKED"
 
 ["SERVER.0x10034610"]
 name = "g_panic_callback"
 section = ".data"
 type = "void (*)(void)"
+status = "UNCHECKED"
 
 ["SERVER.0x117660e0"]
 name = "g_owner_window"
 section = ".bss"
 type = "int"
+status = "UNCHECKED"
 
 ["SERVER.0x117640e0"]
 name = "g_log_message_buffer"
 section = ".bss"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x1002d4f0"]
 name = "g_save_header_tail"
 section = ".data"
 type = "char"
+status = "UNCHECKED"
 
 ["SERVER.0x100241a0"]
 name = "g_crc_table_241a0"
 section = ".rdata"
 type = "unsigned int"
+status = "UNCHECKED"
+
+["SERVER.0x00024000"]
+status = "UNCHECKED"

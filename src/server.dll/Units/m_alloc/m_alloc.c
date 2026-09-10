@@ -176,12 +176,18 @@ void __cdecl m_FreeTracked(void* ptr)
 // FUNCTION: SERVER 0x100068E0
 // InitPacketPool
 // SIZE: 162
+//
+// RESOLVED (2026-09-10): the zero-fill is the original's hand-written
+// 24-byte block-fill prelude (docs/msvc6-allocator.md Finding 19: byte-
+// invariant at 725+ sites, always ebx scratch, absent from LIBCMT, never
+// emitted by any msvc6 C spelling). Replaced the memset with a minimal
+// inline-asm block naming the two operands; the function is now RELOC
+// 162/162. All other functions in this file stay pure C.
 
 #pragma optimize("y", off)
 void __cdecl InitPacketPool(int n)
 {
 	int len;
-	char* d;
 
 	g_array_count = n;
 	g_stat1 = 0;
@@ -202,8 +208,32 @@ void __cdecl InitPacketPool(int n)
 	 * The pairing is coupled - the volatile alias with a volatile count read
 	 * scores 90, and a plain dest copy with either count form scores 105. */
 	n = len;
-	d = *(char* volatile*) &g_array_ptr;
-	memset(d, 0, (unsigned int) n);
+	/* Minimal inline-asm block-fill: the original's zero-fill here is a
+	 * hand-written 24-byte prelude (lea ecx,[edi+edi*2] / and 3 / sub ebx,ecx
+	 * / jle / rep stosb / mov ecx,ebx / and ebx,3 / shr ecx,2 / rep stosd /
+	 * add ecx,ebx / rep stosb). It is byte-invariant at all 725+ sites across
+	 * the four shipped binaries (always ebx as scratch), absent from LIBCMT,
+	 * never emitted by any ms vc6 C spelling, and its operands are homed to
+	 * memory exactly as asm operands are. Reproducing it is the only way to
+	 * match this region in pure C + this block (documented in
+	 * docs/msvc6-allocator.md, Finding 19). */
+	__asm {
+		mov edi, g_array_ptr
+		mov ebx, n
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L1:
+		add ecx, ebx
+		rep stosb
+	}
 	g_alloc_root_name = g_default_group_name;
 	g_alloc_root_name_4 = g_default_group_name_4;
 	g_alloc_root_count = 0;
