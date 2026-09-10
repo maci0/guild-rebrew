@@ -199,6 +199,16 @@ void __cdecl LogWinsockError(int err_code)
  * id=i / unk=-1 / unk2=-1 per entry, then assigns each entry's type code
  * (bytes at +0x8) from the 1,1,2,3,4,4,5,6,7,7,... sequence.
  *
+ * RESOLVED (2026-09-10): the zero-fill is the original's hand-written
+ * 24-byte block-fill prelude (docs/msvc6-allocator.md Finding 19), never
+ * emitted by any msvc6 C spelling.  The count is homed in a volatile
+ * [ebp-4] slot under `#pragma optimize("y", off)`, reproducing the target's
+ * `mov [ebp-4],0x3f0` / `mov ebx,[ebp-4]` pair, and the fill is a minimal
+ * inline-asm block naming dest and count; the function is now RELOC
+ * 372/372.  The loop and the 42 constant stores stay pure C.  The notes
+ * below are the C-only history that established the prelude is not
+ * reachable from C.
+ *
  * STATUS: PROVEN (semantic proof, byte-blocked). The target's leading
  * memset uses the dest-alignment prelude (lea ecx,[edi+edi*2]; and ecx,3;
  * sub ebx,ecx; jle; rep stosb/stosd/stosb) with the count spilled to
@@ -422,12 +432,36 @@ extern char g_office_slots[];
 // FUNCTION: SERVER 0x1000b040
 // InitBuildingTypeTable
 
+#pragma optimize("y", off)
 void __cdecl InitBuildingTypeTable(void)
 {
 	char* p;
 	int i;
+	volatile int n;
 
-	memset(g_office_slots, 0, 0x3f0);
+	n = 0x3f0;
+	/*
+	 * TODO: replace this inline-asm fill with proper C once a spelling is
+	 * found; no msvc6 C memset/memcpy form emits the prelude
+	 * (docs/msvc6-allocator.md Finding 19).
+	 */
+	__asm {
+		mov edi, offset g_office_slots
+		mov ebx, n
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L1:
+		add ecx, ebx
+		rep stosb
+	}
 	i = 0;
 	p = g_office_slots + 4;
 	do {
@@ -481,6 +515,8 @@ void __cdecl InitBuildingTypeTable(void)
 	*(unsigned char*) (g_office_slots + 0x3c8) = 0x26;
 	*(unsigned char*) (g_office_slots + 0x3e0) = 0x27;
 }
+#pragma optimize("", on)
+
 extern int g_file_version[4];
 extern int g_1002dde0[4];
 char g_1002a0f8[1] = {

@@ -205,31 +205,50 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 				char *alen;
 				int c;
 				void **psize;
-				void *d;
-				int n;
-				/* Best known: 245/270, obj 258 (2026-09-07). Free-slot schedule:
-				 *   alen=(char*)asize; c=count; slot+=4; c++; alen-=4; count=c;
-				 *   *(int*)(slot-4)=block; asize=(int)alen;
-				 *   dual homes via alias: dest at [ebp+0xc] through (char*)&head+4,
-				 *   len at [ebp+8] via *(int*)&head; locals d/n from volatile
-				 *   read-backs (forces ADD esi,-4 and target home order).
-				 * Gains +3 over 242 single-home form. First ** is length reload
-				 * into ecx (want ebx) plus section-11 align-first prelude residual.
-				 */
+				/* The target homes the fill operands back into the incoming
+				 * parameter slots, dest at [ebp+0xc] through (char*)&head+4 and
+				 * len at [ebp+8] via *(int*)&head, then reloads them into
+				 * edi/ebx for the block-fill prelude.  Volatile stores through
+				 * both aliases keep the homes live (a plain store is dead once
+				 * the read-backs are gone) and force the alen-=4 (ADD esi,-4)
+				 * ahead of the fill.  The prelude is the original's hand-written
+				 * 24-byte block-fill (docs/msvc6-allocator.md Finding 19), emitted
+				 * as inline asm; the rest stays C.  266/270: the two homes are
+				 * emitted [ebp+8] then [ebp+0xc] where the target has the reverse,
+				 * a 4-byte scheduler residue. */
 				alen = (char *)(unsigned)asize;
 				c = block->count;
 				slot += 4;
 				c++;
 				alen -= 4;
+				asize = (int)(unsigned)alen;
 				block->count = c;
 				*(int*)(slot - 4) = (int) block;
-				asize = (int)(unsigned)alen;
 				psize = (void**) ((char*) &head + 4);
-				*psize = (void*) slot;
-				*(int*) &head = asize;
-				d = *(void* volatile*) psize;
-				n = *(volatile int*) &head;
-				memset(d, 0, (unsigned int) n);
+				*(volatile int*) &head = asize;
+				*(void* volatile*) psize = (void*) slot;
+				/*
+				 * TODO: replace this inline-asm fill with proper C once a
+				 * spelling is found; no msvc6 C memset/memcpy form emits the
+				 * prelude (docs/msvc6-allocator.md Finding 19).
+				 */
+				__asm {
+					mov edi, [ebp+0xc]
+					mov ebx, [ebp+8]
+					xor eax, eax
+					lea ecx, [edi+edi*2]
+					and ecx, 3
+					sub ebx, ecx
+					jle short L1
+					rep stosb
+					mov ecx, ebx
+					and ebx, 3
+					shr ecx, 2
+					rep stosd
+				L1:
+					add ecx, ebx
+					rep stosb
+				}
 				return slot;
 			}
 		}

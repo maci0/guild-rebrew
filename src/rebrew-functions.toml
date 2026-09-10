@@ -141,9 +141,10 @@ status = "RELOC"
 ["SERVER.0x100068e0"]
 size = 162
 cflags = "/O2 /Gd /Oy-"
-status = "SIZE_MISMATCH"
+status = "RELOC"
 analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
-blocker = "alignment-prefixed memset prelude (12B) + the length's edi-vs-ebx register choice it forces (4B); everything after the fill is identical, displaced 16B"
+updated_by = "verify"
+updated_at = "2026-09-10T07:05:33+00:00"
 
 ["SERVER.0x10006990"]
 size = 612
@@ -298,10 +299,10 @@ status = "RELOC"
 
 ["SERVER.0x1000b040"]
 size = 372
-status = "PROVEN"
+status = "RELOC"
 note = "prove: Function returns void and no --watch-va was given — there is nothing to compare (EAX is undefined at exit for void functions). Pass --watch-va for each global the function writes."
-blocker = "alignment-prefixed memset prelude — same wall as m_PoolAlloc (docs/msvc6-allocator.md)"
-blocker_delta = 138
+updated_by = "verify"
+updated_at = "2026-09-10T07:05:33+00:00"
 
 ["SERVER.0x1000b1c0"]
 size = 205
