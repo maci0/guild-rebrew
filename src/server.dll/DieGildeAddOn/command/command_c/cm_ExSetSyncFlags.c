@@ -36,7 +36,7 @@ typedef struct player_slot {
 	char gap_0004[0x264260];
 } player_slot;
 
-extern player_slot g_connections[];
+extern unsigned char g_connections[];
 extern int g_game_speed_index;
 extern int g_game_speed_value;
 extern int g_game_speed_table[];
@@ -51,12 +51,12 @@ int __cdecl cm_ExSetSyncFlags(int cmd, char* result)
 	int speed_index;
 
 	if (*(char*) (cmd + 0x10) == '\x01') {
-		g_connections[*(unsigned char*) (cmd + 3)].flags =
-			g_connections[*(unsigned char*) (cmd + 3)].flags | 0x20;
+		((player_slot*) g_connections)[*(unsigned char*) (cmd + 3)].flags =
+			((player_slot*) g_connections)[*(unsigned char*) (cmd + 3)].flags | 0x20;
 	}
 	if (*(char*) (cmd + 0x10) == '\x0e') {
-		g_connections[*(unsigned char*) (cmd + 3)].flags =
-			g_connections[*(unsigned char*) (cmd + 3)].flags | 0x40;
+		((player_slot*) g_connections)[*(unsigned char*) (cmd + 3)].flags =
+			((player_slot*) g_connections)[*(unsigned char*) (cmd + 3)].flags | 0x40;
 	}
 	if (*(char*) (cmd + 0x10) == '\x12') {
 		speed_index = *(int*) (cmd + 0x11);

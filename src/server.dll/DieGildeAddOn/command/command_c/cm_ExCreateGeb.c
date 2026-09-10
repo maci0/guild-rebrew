@@ -53,7 +53,7 @@ typedef struct player_slot {
 } player_slot;
 
 char* __cdecl gm_AllocGebaeude(unsigned char, unsigned short);
-extern player_slot g_connections[];
+extern unsigned char g_connections[];
 
 extern char s_cm_ExCreateGeb____Could_not_find_1002d41c[];
 extern char s_cm_ExCreateGeb____failed_1002d400[];
@@ -90,7 +90,7 @@ int __cdecl cm_ExCreateGeb(int cmd, char* result)
 		return 1;
 	}
 
-	g_connections[(unsigned int) *(unsigned char*) (cmd + 3)].data = *(int*) (building + 1);
+	((player_slot*) g_connections)[(unsigned int) *(unsigned char*) (cmd + 3)].data = *(int*) (building + 1);
 	if (result != (char*) 0) {
 		*result = '\x01';
 		result[1] = '\x02';

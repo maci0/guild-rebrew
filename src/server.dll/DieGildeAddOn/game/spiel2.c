@@ -97,7 +97,7 @@ int __cdecl gm_WalkEntityChain(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
-extern unsigned short g_entity_slot_table[];
+extern unsigned int g_entity_slot_table[];
 extern float g_const_5fb8; /* 0x10025fb8 */
 extern float g_const_5fb4; /* 0x10025fb4 */
 extern float g_const_5fb0; /* 0x10025fb0 */

@@ -19,7 +19,7 @@ typedef struct copy_12_dwords {
 	uint data[12];
 } copy_12_dwords;
 
-extern player_slot g_connections[];
+extern unsigned char g_connections[];
 char* __cdecl gm_AllocGebaeude(uchar, uint);
 
 extern char s_gm_AllocGebaeude___failed_1002cb34[];
@@ -71,7 +71,7 @@ int __cdecl cm_ExAllocRaum(int cmd, char* result)
 		);
 		return 1;
 	}
-	g_connections[(uint) *(uchar*) (cmd + 3)].data = *(int*) (building + 1);
+	((player_slot*) g_connections)[(uint) *(uchar*) (cmd + 3)].data = *(int*) (building + 1);
 	*(ushort*) (building + 0x5a) = *(ushort*) (cmd + 0x1a);
 	if (*(int*) (cmd + 0x1c) != 0) {
 		*(copy_12_dwords*) (building + 0x65) = *(copy_12_dwords*) (cmd + 0x20);

@@ -42,7 +42,7 @@
 #include "../command_internal.h"
 
 void* __cdecl memcpy(void*, const void*, unsigned int);
-extern char g_connections[];
+extern unsigned char g_connections[];
 char* __cdecl gm_AllocObjekt(int, int, int);
 
 /* Execution handler: allocates a new object in an entity's

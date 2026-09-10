@@ -22,7 +22,7 @@ typedef struct {
 } OfficeSlot;
 #pragma pack(pop)
 
-extern OfficeSlot g_office_slots[];
+extern char g_office_slots[]; /* 0x101de5a0 */
 
 /* Validates if an entity is eligible for an office position.
  * Checks entity type, existing office holdings, and eligibility
@@ -37,8 +37,8 @@ void __cdecl amt_FindEntity26(int val)
 	unsigned int i;
 	for (i = 0x29; i != 0; i--) {
 		/* asm checks byte at slot+8 (role); stores dword at slot+4 (entityId) */
-		if (g_office_slots[i].role == 0x26) {
-			g_office_slots[i].entityId = val;
+		if (((OfficeSlot*) g_office_slots)[i].role == 0x26) {
+			((OfficeSlot*) g_office_slots)[i].entityId = val;
 			return;
 		}
 	}
@@ -54,8 +54,8 @@ void __cdecl amt_FindEntity27(int val)
 {
 	unsigned int i;
 	for (i = 0x29; i != 0; i--) {
-		if (g_office_slots[i].role == 0x27) {
-			g_office_slots[i].entityId = val;
+		if (((OfficeSlot*) g_office_slots)[i].role == 0x27) {
+			((OfficeSlot*) g_office_slots)[i].entityId = val;
 			return;
 		}
 	}
@@ -86,7 +86,7 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 	/* find office slot A by type byte */
 	i = 0;
 	while (1) {
-		if (g_office_slots[i].type == *((char*) arg1 + 4)) {
+		if (((OfficeSlot*) g_office_slots)[i].type == *((char*) arg1 + 4)) {
 			break;
 		}
 		i++;
@@ -94,7 +94,7 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 			return 0;
 		}
 	}
-	slot_a = &g_office_slots[i];
+	slot_a = &((OfficeSlot*) g_office_slots)[i];
 	if (slot_a == 0) {
 		return 0;
 	}
@@ -106,7 +106,7 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 	/* find office slot B by type byte */
 	i = 0;
 	while (1) {
-		if (g_office_slots[i].type == *((char*) arg1 + 5)) {
+		if (((OfficeSlot*) g_office_slots)[i].type == *((char*) arg1 + 5)) {
 			break;
 		}
 		i++;
@@ -114,7 +114,7 @@ int __cdecl amt_SwapOfficeHolders(int* arg1)
 			return 0;
 		}
 	}
-	slot_b = &g_office_slots[i];
+	slot_b = &((OfficeSlot*) g_office_slots)[i];
 	if (slot_b == 0) {
 		return 0;
 	}

@@ -48,7 +48,7 @@
 
 void* __cdecl gm_AddOrAccumulateObject(int, unsigned int, int);
 
-extern unsigned short g_entity_slot_table[];
+extern unsigned int g_entity_slot_table[];
 
 #ifdef __clang__
 #pragma clang diagnostic push

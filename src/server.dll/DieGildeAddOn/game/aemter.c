@@ -28,7 +28,7 @@ typedef struct {
 	int f14;
 } COPY24;
 
-extern OFFICE_SLOT g_office_slots[];
+extern char g_office_slots[]; /* 0x101de5a0 */
 extern COPY24 g_str_29bb8[];
 void* __cdecl gm_LookupEntityRecordById(int entityId);
 
@@ -54,33 +54,33 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 
 	i = 0;
 	for (; i < 30; i++) {
-		if (g_office_slots[i].id == ((unsigned char*) arg1)[4])
+		if (((OFFICE_SLOT*) g_office_slots)[i].id == ((unsigned char*) arg1)[4])
 			break;
 	}
 	if (i >= 30)
 		return 0;
 
-	if ((g_office_slots)[i].a != -1 ||
-	    (g_office_slots)[i].type != 3 ||
-	    (g_office_slots)[i].c >= 4)
+	if (((OFFICE_SLOT*) g_office_slots)[i].a != -1 ||
+	    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
+	    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4)
 		return 0;
-	b = (g_office_slots)[i].b;
+	b = ((OFFICE_SLOT*) g_office_slots)[i].b;
 	if (((unsigned char*) arg1)[6] != b)
 		return 0;
 
 	if (((unsigned char*) arg1)[5] != 0xff) {
 		i = 0;
 		for (; i < 30; i++) {
-			if (g_office_slots[i].id == ((unsigned char*) arg1)[5])
+			if (((OFFICE_SLOT*) g_office_slots)[i].id == ((unsigned char*) arg1)[5])
 				break;
 		}
 		if (i >= 30)
 			return 0;
 
-		if (b != (g_office_slots)[i].b ||
-		    (g_office_slots)[i].a != -1 ||
-		    (g_office_slots)[i].type != 3 ||
-		    (g_office_slots)[i].c >= 4)
+		if (b != ((OFFICE_SLOT*) g_office_slots)[i].b ||
+		    ((OFFICE_SLOT*) g_office_slots)[i].a != -1 ||
+		    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
+		    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4)
 			return 0;
 	}
 	return 1;
@@ -99,7 +99,7 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 //       (`*(unsigned char*) &arg1 = cmd[6]`).  The original reloads it as a
 //       dword for both the copy compare and the +0x168 store, which is what
 //       makes it use a 0x18 frame with `push edi` in the prologue;
-//     - the copy index is spelled `g_str_29bb8[g_office_slots[i].b]`, not
+//     - the copy index is spelled `g_str_29bb8[((OFFICE_SLOT*) g_office_slots)[i].b]`, not
 //       through a row pointer, so it CSEs with the `.b` the guard left in al
 //       and emits `and eax,0xff` / `lea ecx,[eax+eax*2]`;
 //     - the home dword is re-read through a `unsigned int*` local taken
@@ -140,25 +140,25 @@ unsigned int __cdecl ValidateAndAssignOffice(unsigned int* arg1)
 		return 0;
 	i = 0;
 	for (; i < 30; i++) {
-		if (g_office_slots[i].id == cmd[4])
+		if (((OFFICE_SLOT*) g_office_slots)[i].id == cmd[4])
 			break;
 	}
 	if (i >= 30)
 		return 0;
 	*(unsigned char*) &arg1 = cmd[6];
-	if (*(unsigned char*) &arg1 != g_office_slots[i].b)
+	if (*(unsigned char*) &arg1 != ((OFFICE_SLOT*) g_office_slots)[i].b)
 		return 0;
 	x5 = cmd[5];
 	if (x5 != 0xff) {
 		for (j = 0; j < 30; j++) {
-			if (g_office_slots[j].id == x5)
+			if (((OFFICE_SLOT*) g_office_slots)[j].id == x5)
 				break;
 		}
 		if (j >= 30)
 			return 0;
-		if (g_office_slots[i].b != g_office_slots[j].b)
+		if (((OFFICE_SLOT*) g_office_slots)[i].b != ((OFFICE_SLOT*) g_office_slots)[j].b)
 			return 0;
-		copy = g_str_29bb8[g_office_slots[i].b];
+		copy = g_str_29bb8[((OFFICE_SLOT*) g_office_slots)[i].b];
 		hp = (unsigned int*) &arg1;
 		hw = *hp;
 		f0v = copy.f0;
@@ -167,29 +167,29 @@ unsigned int __cdecl ValidateAndAssignOffice(unsigned int* arg1)
 		{
 			int ai;
 			int aj;
-			ai = g_office_slots[i].a;
-			aj = g_office_slots[j].a;
+			ai = ((OFFICE_SLOT*) g_office_slots)[i].a;
+			aj = ((OFFICE_SLOT*) g_office_slots)[j].a;
 			if (ai != -1 ||
-			    g_office_slots[i].type != 3 ||
-			    g_office_slots[i].c >= 4 ||
+			    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
+			    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4 ||
 			    aj != -1 ||
-			    g_office_slots[j].c >= 4)
+			    ((OFFICE_SLOT*) g_office_slots)[j].c >= 4)
 				return 0;
 			rec[0x168] = (unsigned char) hw;
-			g_office_slots[i].c++;
-			g_office_slots[j].c++;
+			((OFFICE_SLOT*) g_office_slots)[i].c++;
+			((OFFICE_SLOT*) g_office_slots)[j].c++;
 			return 1;
 		}
 	}
 	{
 		int ai;
-		ai = g_office_slots[i].a;
+		ai = ((OFFICE_SLOT*) g_office_slots)[i].a;
 		if (ai != -1 ||
-		    g_office_slots[i].type != 3 ||
-		    g_office_slots[i].c >= 4)
+		    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
+		    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4)
 			return 0;
 		rec[0x168] = *(unsigned char*) &arg1;
-		g_office_slots[i].c++;
+		((OFFICE_SLOT*) g_office_slots)[i].c++;
 		return 1;
 	}
 }
@@ -210,15 +210,15 @@ int __cdecl amt_ValidateCommand(char* arg1)
 
 	i = 0;
 	for (; i < 42; i++) {
-		if (g_office_slots[i].id == ((unsigned char*) arg1)[0])
+		if (((OFFICE_SLOT*) g_office_slots)[i].id == ((unsigned char*) arg1)[0])
 			break;
 	}
 	if (i >= 42)
 		return 0;
 
-	if ((g_office_slots)[i].type != 1)
+	if (((OFFICE_SLOT*) g_office_slots)[i].type != 1)
 		return 0;
-	if ((g_office_slots)[i].d != -1)
+	if (((OFFICE_SLOT*) g_office_slots)[i].d != -1)
 		return 0;
 	if (*(int*) (arg1 + 7) != -1) {
 		if (gm_LookupEntityRecordById(*(int*) (arg1 + 7)) == 0)

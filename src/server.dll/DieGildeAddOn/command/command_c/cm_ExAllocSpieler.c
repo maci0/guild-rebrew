@@ -59,7 +59,7 @@
  * }
  */
 
-extern char g_connections[];
+extern unsigned char g_connections[];
 uint __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
 
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[];

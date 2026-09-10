@@ -499,7 +499,7 @@
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
-extern unsigned int g_connections[]; /* 0x101deb00 */
+extern unsigned char g_connections[]; /* 0x101deb00 */
 int __cdecl ahm_ProcessEntityChain(char* cmd_payload);
 int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
@@ -566,7 +566,7 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 			t2 = *(unsigned char*) pkt;
 			if (t2 < 0x6a) {
 				if (t2 == 0x20 && *(unsigned char*) (pkt + 0x10) == 0xe) {
-					slot = (char*) &g_connections[(unsigned int) *(unsigned char*) (pkt + 3) * 0x99099];
+					slot = (char*) &((unsigned int*) g_connections)[(unsigned int) *(unsigned char*) (pkt + 3) * 0x99099];
 					if ((*(unsigned char*) slot & 0x40) != 0) {
 						LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x72e, "Multisync!!!", 1);
 					}
@@ -600,9 +600,9 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 				goto advance;
 				}
 			queued:
-				if ((*(unsigned char*) &g_connections[(unsigned int) *(unsigned char*) (pkt + 3) * 0x99099] & 1) != 0) {
+				if ((*(unsigned char*) &((unsigned int*) g_connections)[(unsigned int) *(unsigned char*) (pkt + 3) * 0x99099] & 1) != 0) {
 					*(unsigned char*) pkt = 2;
-					slot = (char*) &g_connections[(unsigned int) *(unsigned char*) (pkt + 3) * 0x99099];
+					slot = (char*) &((unsigned int*) g_connections)[(unsigned int) *(unsigned char*) (pkt + 3) * 0x99099];
 					if (cm_QueuePlayerCommand((unsigned int*) slot, (unsigned char*) pkt) == -1) {
 						return -1;
 					}

@@ -221,7 +221,7 @@ extern int g_next_object_id;
 extern int g_current_year;
 extern int g_1002574c[];
 extern float table_1002572c[];
-extern unsigned short g_entity_slot_table[];
+extern unsigned int g_entity_slot_table[];
 extern unsigned char g_current_season;
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);

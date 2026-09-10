@@ -3,7 +3,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern unsigned short g_entity_slot_table[];
+extern unsigned int g_entity_slot_table[];
 extern char* g_unknown_1de450;
 extern unsigned char g_current_season;
 
@@ -329,7 +329,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		if (*(int*)(cmd + 0x23) != 0) {
 			gm_AddOrAccumulateObject(
 				*(int*)(source_owner_entity + 2),
-				(uint)*(ushort*)(g_entity_slot_table + (uint)(unsigned char)cmd[0x1e] * 0x2f4),
+				(uint)*(ushort*)(((unsigned short*) g_entity_slot_table) + (uint)(unsigned char)cmd[0x1e] * 0x2f4),
 				*(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f)
 			);
 			if (source_dynamic_ref != (short*)0) {
@@ -387,7 +387,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
 			gm_SubObjekt(
 				*(void**)(dest_owner_entity + 2),
-				(uint)*(ushort*)(g_entity_slot_table + (uint)(unsigned char)cmd[0x1e] * 0x2f4),
+				(uint)*(ushort*)(((unsigned short*) g_entity_slot_table) + (uint)(unsigned char)cmd[0x1e] * 0x2f4),
 				*(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f)
 			);
 			if (dest_dynamic_entity != (short*)0) {

@@ -17,7 +17,7 @@ typedef struct {
 	int msetter;             /* +0x14 */
 } OFFICE_SLOT;
 
-extern OFFICE_SLOT g_office_slots[];
+extern char g_office_slots[]; /* 0x101de5a0 */
 extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize,
                                          int elementCount, int streamCtx);
 extern void __cdecl InitBuildingTypeTable(void);
@@ -67,32 +67,32 @@ int __cdecl amt_fio_LoadAemter(int streamCtx, int version)
 		return 0;
 	}
 	for (i = 0; i < count; i++) {
-		if (!ls_ReadVfsDataChecked(&g_office_slots[i].id, 1, 1, streamCtx)) {
+		if (!ls_ReadVfsDataChecked(&((OFFICE_SLOT*) g_office_slots)[i].id, 1, 1, streamCtx)) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe82,
 			                   s_amt_fio_LoadAemter____Can_t_load_1002a048, 1);
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(&g_office_slots[i].mplayerid, 4, 1, streamCtx)) {
+		if (!ls_ReadVfsDataChecked(&((OFFICE_SLOT*) g_office_slots)[i].mplayerid, 4, 1, streamCtx)) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe83,
 			                   s_amt_fio_LoadAemter____Can_t_load_1002a01c, 1);
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(&g_office_slots[i].mamt, 1, 1, streamCtx)) {
+		if (!ls_ReadVfsDataChecked(&((OFFICE_SLOT*) g_office_slots)[i].mamt, 1, 1, streamCtx)) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe84,
 			                   s_amt_fio_LoadAemter____Can_t_load_10029ff4, 1);
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(&g_office_slots[i].pcount, 4, 1, streamCtx)) {
+		if (!ls_ReadVfsDataChecked(&((OFFICE_SLOT*) g_office_slots)[i].pcount, 4, 1, streamCtx)) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe85,
 			                   s_amt_fio_LoadAemter____Can_t_load_10029fcc, 1);
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(&g_office_slots[i].status, 1, 1, streamCtx)) {
+		if (!ls_ReadVfsDataChecked(&((OFFICE_SLOT*) g_office_slots)[i].status, 1, 1, streamCtx)) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe86,
 			                   s_amt_fio_LoadAemter____Can_t_load_10029fa4, 1);
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(&g_office_slots[i].msetter, 4, 1, streamCtx)) {
+		if (!ls_ReadVfsDataChecked(&((OFFICE_SLOT*) g_office_slots)[i].msetter, 4, 1, streamCtx)) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_ae_1002a0a0, 0xe87,
 			                   s_amt_fio_LoadAemter____Can_t_load_10029f78, 1);
 			return 0;
