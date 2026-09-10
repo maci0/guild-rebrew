@@ -196,9 +196,9 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 	slot[0x165] = (char) arg7;
 	*(int*) (slot + 0x190) = 4;
 	*(int*) (slot + 0x194) = 0;
-	slot[0xd] = 1;
 	*(int*) (slot + 0x18c) = -1;
 	*(int*) (slot + 0x20c) = -1;
+	slot[0xd] = 1;
 	if (slot[2] == 3 || slot[2] == 0x10 || slot[2] == 0x13) {
 		*(int*) (slot + 0x1e8) = 1;
 	}
@@ -510,13 +510,13 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		*(int*) (slot + 0x54) = *(int*) (father + 0x54);
 	}
 	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
-	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
 	*(float*) (slot + 0x14) =
 	    (float) ((gm_RandomQuadratic() * *(float*) 0x100256c8 +
 	              *(float*) 0x100256c4) *
 	                 g_dbl_const_f88 +
 	             (*(float*) (father + 0x14) + *(float*) (mother + 0x14)) *
 	                 g_dbl_const_810);
+	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
 	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
 	                                           g_dbl_const_810)) &
 	      0xffff;
@@ -613,12 +613,12 @@ stat_modifiers:
 	}
 	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
-	*(float*) (slot + 0x14) =
-	    (float) (gm_RandomQuadratic() * *(float*) 0x100256c8) +
-	    *(float*) 0x100256c4;
 	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
 	                                           g_dbl_const_810)) &
 	      0xffff;
+	*(float*) (slot + 0x14) =
+	    (float) (gm_RandomQuadratic() * *(float*) 0x100256c8) +
+	    *(float*) 0x100256c4;
 	*(int*) (slot + 0x18) = *(int*) (slot + 0x1c);
 	*(float*) (slot + 0x10) =
 	    (float) (*(float*) (slot + 0x1c) * *(float*) 0x100256b8 +
@@ -627,7 +627,6 @@ stat_modifiers:
 	/* drawn twice in the reference (0x1001956a and 0x10019574); the first
 	 * result is discarded */
 	gm_RandomMod(0x10);
-	rnd = gm_RandomMod(0x10) & 0xffff;
 	if ((double) *(unsigned short*) (slot + 0xa) > *(float*) (slot + 0x20)) {
 		acc = *(float*) (slot + 0x1c);
 		for (n = (int) ((double) *(unsigned short*) (slot + 0xa) -
@@ -641,6 +640,7 @@ stat_modifiers:
 		}
 		*(float*) (slot + 0x1c) = acc;
 	}
+	rnd = gm_RandomMod(0x10) & 0xffff;
 	ahm_ResetEntityState(slot);
 	memset(slot + 0x1b4, 0, 0x10);
 	if (slot[2] == 3 || slot[2] == 4 || slot[2] == 2 || slot[2] == 0x13) {
