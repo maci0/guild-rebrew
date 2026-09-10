@@ -40,8 +40,8 @@ extern unsigned int __cdecl fread(void* ptr, unsigned int size, unsigned int cou
 int __cdecl ReadVfsCompressed(int handle, char* buf, unsigned int len)
 {
 	VFS_INFLATE* s;
-	int done;
-	int result;
+	volatile int done;
+	volatile int result;
 	unsigned int n;
 	unsigned int i;
 	char* out;
