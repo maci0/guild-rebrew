@@ -258,7 +258,6 @@ int __cdecl lb_ExLobbyServerCommand(void) { return 0; }
 int g_chain_handler_table[1] = {0};
 int __cdecl rand_mod(void) { return 0; }
 int __cdecl read_uint32_be(void) { return 0; }
-int __cdecl ReadVfsCompressed(void) { return 0; }
 int __cdecl RecvGameSavegame(void) { return 0; }
 char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[1] = "";
 char s_cm_ChkMoveCredits____Not_enough_m_1002c774[1] = "";
