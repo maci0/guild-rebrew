@@ -73,18 +73,18 @@
 
 // LIBRARY: SERVER 0x10003e40
 // inflate_blocks
-// SIZE: 3385
+// SIZE: 3328
 
 // LIBRARY: SERVER 0x10004B40
 // inflate_blocks_free
 // SIZE: 57
 
 // LIBRARY: SERVER 0x10004bc0
-// inflate_fast
-// SIZE: 1988
+// inflate_codes
+// SIZE: 1968
 
 // LIBRARY: SERVER 0x10005390
-// inflate_codes
+// inflate_fast
 // SIZE: 911
 
 // LIBRARY: SERVER 0x10005720
