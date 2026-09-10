@@ -117,6 +117,7 @@
 
 // LIBRARY: SERVER 0x1001B535
 // _srand_impl
+// SIZE: 13
 
 // LIBRARY: SERVER 0x1001B542
 // _rand
@@ -616,10 +617,6 @@
 // LIBRARY: SERVER 0x1001B200
 // _memmove2
 // SIZE: 664
-
-// LIBRARY: SERVER 0x1001B535
-// set_errno
-// SIZE: 13
 
 // LIBRARY: SERVER 0x1001B757
 // unlock_09e
