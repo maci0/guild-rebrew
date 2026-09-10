@@ -122,7 +122,7 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 	char* slot;
 	char* mother;
 	char* father;
-	char work[0x400];
+	char work[0x3fc];
 	int idx;
 	int i;
 	int j;
