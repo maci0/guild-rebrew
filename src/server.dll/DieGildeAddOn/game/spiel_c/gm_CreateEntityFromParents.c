@@ -194,14 +194,14 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 	slot[0x166] = 0;
 	slot[0x1f4] = 0;
 	slot[0x165] = (char) arg7;
-	*(int*) (slot + 0x190) = 4;
-	*(int*) (slot + 0x194) = 0;
 	*(int*) (slot + 0x20c) = -1;
 	*(int*) (slot + 0x18c) = -1;
+	*(int*) (slot + 0x194) = 0;
 	slot[0xd] = 1;
 	if (slot[2] == 3 || slot[2] == 0x10 || slot[2] == 0x13) {
 		*(int*) (slot + 0x1e8) = 1;
 	}
+	*(int*) (slot + 0x190) = 4;
 	if (slot[2] == 0x10) {
 		/* entity type 0x10: citizen with randomized traits from ahm */
 		char* ent;
@@ -405,6 +405,12 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		slot[0xc] = father[0xc];
 		*(int*) (slot + 0x1d0) = *(int*) (father + 0x1d0);
 	}
+	*(float*) (slot + 0x124) =
+	    (float) ((gm_RandomFloat01() + g_dbl_const_688) *
+	             g_dbl_const_f90);
+	*(float*) (slot + 0x128) =
+	    (float) ((double) *(float*) (slot + 0x124) *
+	             g_dbl_const_6d0);
 	/* 14-iteration parent trait interpolation; the 0x88/0x84/0x80 triple is
 	 * float, not byte: the reference stores them with fstp dword */
 	for (i = 0; i < 0xe; i++) {
@@ -422,12 +428,6 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		    (float) ((double) *(float*) (slot + 0x88 + i * 0xc) *
 		             g_dbl_const_6d0);
 	}
-	*(float*) (slot + 0x124) =
-	    (float) ((gm_RandomFloat01() + g_dbl_const_688) *
-	             g_dbl_const_f90);
-	*(float*) (slot + 0x128) =
-	    (float) ((double) *(float*) (slot + 0x124) *
-	             g_dbl_const_6d0);
 	/* find the best trait index of each parent (quirky +1 indexing) */
 	best_mother = 0;
 	best_father = 0;
@@ -499,7 +499,6 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 			break;
 		}
 	}
-	*(int*) (slot + 0x7c) = 0;
 	if (mother[2] == 6 || mother[2] == 7 || mother[2] == 5) {
 		*(unsigned short*) (slot + 0x50) = *(unsigned short*) (mother + 0x50);
 		slot[0x58] = (char) (mother[0x58] + 1);
@@ -509,17 +508,18 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		slot[0x58] = (char) (father[0x58] + 1);
 		*(int*) (slot + 0x54) = *(int*) (father + 0x54);
 	}
+	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
+	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
+	                                           g_dbl_const_810)) &
+	      0xffff;
+	*(int*) (slot + 0x7c) = 0;
 	*(float*) (slot + 0x14) =
 	    (float) ((gm_RandomQuadratic() * *(float*) 0x100256c8 +
 	              *(float*) 0x100256c4) *
 	                 g_dbl_const_f88 +
 	             (*(float*) (father + 0x14) + *(float*) (mother + 0x14)) *
 	                 g_dbl_const_810);
-	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
-	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
-	                                           g_dbl_const_810)) &
-	      0xffff;
 	*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
 	*(float*) (slot + 0x10) =
 	    (float) (*(float*) (slot + 0x1c) * *(float*) 0x100256b8 +
@@ -580,7 +580,6 @@ stat_modifiers:
 		                      *(unsigned char*) (slot + 0x164) * 6);
 	}
 	*(int*) (slot + 0x64) = gender;
-	slot[0x58] = 1;
 	memset(slot + 0x5c, 0xff, 0x20);
 	if (father != (char*) 0) {
 		int* ref;
@@ -611,15 +610,16 @@ stat_modifiers:
 		    (unsigned short) (*(int*) 0x1003542c);
 		(*(int*) 0x1003542c)++;
 	}
-	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
+	slot[0x58] = 1;
 	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
-	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
-	                                           g_dbl_const_810)) &
-	      0xffff;
+	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
+	*(int*) (slot + 0x18) = *(int*) (slot + 0x1c);
 	*(float*) (slot + 0x14) =
 	    (float) (gm_RandomQuadratic() * *(float*) 0x100256c8) +
 	    *(float*) 0x100256c4;
-	*(int*) (slot + 0x18) = *(int*) (slot + 0x1c);
+	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
+	                                           g_dbl_const_810)) &
+	      0xffff;
 	*(float*) (slot + 0x10) =
 	    (float) (*(float*) (slot + 0x1c) * *(float*) 0x100256b8 +
 	             (double) rnd - *(float*) (slot + 0x1c) *
