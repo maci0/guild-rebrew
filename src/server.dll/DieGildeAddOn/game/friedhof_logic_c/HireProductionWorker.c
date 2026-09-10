@@ -8,7 +8,7 @@
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int g_worker_entry_count[];
-extern float table_1002572c[];
+extern float g_output_share[];
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 extern unsigned int g_entity_slot_table[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
@@ -70,7 +70,7 @@ int __cdecl HireProductionWorker(void* req)
 		word1 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
 		fcn_10016ea0(*(int*) ((char*) entity2 + 4), word1, *(int*) ((char*) req + 0x13));
 		word2 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
-		ftol_val = (int) (*(int*) ((char*) req + 0x13) * table_1002572c[*(int*) ((char*) req + 0xc)]);
+		ftol_val = (int) (*(int*) ((char*) req + 0x13) * g_output_share[*(int*) ((char*) req + 0xc)]);
 		gm_AddOrAccumulateObject(*(int*) ((char*) 0x100358a4 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c),
 		    word2, ftol_val);
 	}

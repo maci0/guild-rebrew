@@ -220,7 +220,7 @@ extern unsigned short* g_entity_table_end;
 extern int g_next_object_id;
 extern int g_current_year;
 extern int g_worker_entry_count[];
-extern float table_1002572c[];
+extern float g_output_share[];
 extern unsigned int g_entity_slot_table[];
 extern unsigned char g_current_season;
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
@@ -279,7 +279,7 @@ int __cdecl _ftol(void);
  * FindSlotEntryFiltered, gm_SubObjektNoKill, __ftol and
  * gm_AddOrAccumulateObject; the globals are g_entity_table_end,
  * g_entity_type_table, g_worker_entry_count (x2), g_current_year, g_next_object_id,
- * g_current_season (x2), g_entity_slot_table (x2) and table_1002572c. */
+ * g_current_season (x2), g_entity_slot_table (x2) and g_output_share. */
 
 int __cdecl gv_MoveSlotEntry(void* a)
 {
@@ -388,7 +388,7 @@ done:
 		/* fild re-reads the field (0x10011b7c) instead of the register, and
 		 * the conversion is an implicit cast, not a pushed double. */
 		i = (int) ((float) *(int*) ((char*) cmd + 0x11) *
-		           table_1002572c[*(int*) ((char*) cmd + 0xd)]);
+		           g_output_share[*(int*) ((char*) cmd + 0xd)]);
 		gm_AddOrAccumulateObject(*(int*) (0x100358a4 +
 		                                 (unsigned short) *(unsigned short*) ((char*) rec2 + 0x27) * 540),
 		                         (unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +

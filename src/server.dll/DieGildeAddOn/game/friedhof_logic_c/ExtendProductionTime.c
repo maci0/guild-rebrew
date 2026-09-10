@@ -7,7 +7,7 @@ extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern char* g_entity_type_table; /* 0x100A8C30 */
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 extern unsigned int g_entity_slot_table[];
-extern float table_1002572c[];
+extern float g_output_share[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
@@ -63,7 +63,7 @@ int __cdecl ExtendProductionTime(void* building)
 					word1 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
 					fcn_10016ea0(obj4, word1, *(int*) ((char*) building + 0x13));
 					word2 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
-					ftol_val = (int) (*(int*) ((char*) building + 0x13) * table_1002572c[*(int*) ((char*) building + 0xc)]);
+					ftol_val = (int) (*(int*) ((char*) building + 0x13) * g_output_share[*(int*) ((char*) building + 0xc)]);
 					gm_AddOrAccumulateObject(*(int*) ((char*) 0x100358a4 + *(unsigned short*) ((char*) entity + 0x27) * 0x21c),
 					    word2, ftol_val);
 				}
