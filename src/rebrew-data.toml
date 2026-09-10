@@ -703,16 +703,19 @@ status = "UNCHECKED"
 name = "g_const_0_01"
 type = "float"
 status = "UNCHECKED"
+section = ".rdata"
 
 ["SERVER.0x10025fbc"]
 name = "g_const_1_over_32767"
 type = "float"
 status = "UNCHECKED"
+section = ".rdata"
 
 ["SERVER.0x100257bc"]
 name = "g_const_42_0"
 type = "float"
 status = "UNCHECKED"
+section = ".rdata"
 
 ["SERVER.0x100257d0"]
 name = "g_const_57d0"
