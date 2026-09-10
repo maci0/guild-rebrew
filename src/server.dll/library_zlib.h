@@ -79,6 +79,10 @@
 // inflate_blocks_free
 // SIZE: 57
 
+// LIBRARY: SERVER 0x10004b80
+// inflate_codes_new
+// SIZE: 57
+
 // LIBRARY: SERVER 0x10004bc0
 // inflate_codes
 // SIZE: 1968
