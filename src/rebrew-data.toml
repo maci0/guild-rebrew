@@ -197,7 +197,7 @@ type = "unsigned int"
 status = "UNCHECKED"
 
 ["SERVER.0x1002dde0"]
-name = "g_1002dde0"
+name = "g_producer_id_table"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
@@ -329,19 +329,19 @@ type = "int"
 status = "UNCHECKED"
 
 ["SERVER.0x10035884"]
-name = "g_default_value_b"
+name = "g_current_hour"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
 
 ["SERVER.0x10035888"]
-name = "g_default_value_c"
+name = "g_clock_copy_mid"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
 
 ["SERVER.0x1003588c"]
-name = "g_default_value_d"
+name = "g_clock_copy_tail"
 section = ".data"
 type = "short"
 status = "UNCHECKED"
@@ -491,13 +491,13 @@ type = "char"
 status = "UNCHECKED"
 
 ["SERVER.0x10028b78"]
-name = "g_str_10028b78"
+name = "s_m_pool_get_free_tp_m_pool_10028b78"
 section = ".data"
 type = "char"
 status = "UNCHECKED"
 
 ["SERVER.0x10028b60"]
-name = "g_str_10028b60"
+name = "s_m_pool_alloc_tp_m_pool_10028b60"
 section = ".data"
 type = "char"
 status = "UNCHECKED"
@@ -1307,49 +1307,49 @@ note = "block alloc threshold (allocator mode 2)"
 status = "UNCHECKED"
 
 ["SERVER.0x100354b4"]
-name = "g_100354b4"
+name = "_osver"
 type = "unsigned int"
 section = ".bss"
 note = "OS version dword (GetVersion)"
 status = "UNCHECKED"
 
 ["SERVER.0x100354b8"]
-name = "g_100354b8"
+name = "_winver"
 type = "unsigned int"
 section = ".bss"
 note = "(major << 8) | minor"
 status = "UNCHECKED"
 
 ["SERVER.0x100354bc"]
-name = "g_100354bc"
+name = "_winmajor"
 type = "unsigned int"
 section = ".bss"
 note = "OS major"
 status = "UNCHECKED"
 
 ["SERVER.0x100354c0"]
-name = "g_100354c0"
+name = "_winminor"
 type = "unsigned int"
 section = ".bss"
 note = "OS minor"
 status = "UNCHECKED"
 
 ["SERVER.0x100354ec"]
-name = "g_100354ec"
+name = "_C_Termination_Done"
 type = "int"
 section = ".bss"
 note = "_cexit-already-ran flag"
 status = "UNCHECKED"
 
 ["SERVER.0x100354fc"]
-name = "g_100354fc"
+name = "__proc_attached"
 type = "int"
 section = ".bss"
 note = "__CRT_INIT attach/detach refcount"
 status = "UNCHECKED"
 
 ["SERVER.0x10035500"]
-name = "g_10035500"
+name = "_aenvptr"
 type = "void *"
 section = ".bss"
 note = "environment strings ptr"
@@ -1363,28 +1363,28 @@ note = "new-handler retry flag (_callnewh)"
 status = "UNCHECKED"
 
 ["SERVER.0x11766448"]
-name = "g_11766448"
+name = "g_max_pool_alloc_size"
 type = "unsigned int"
 section = ".bss"
 note = "max pool allocation size (allocator mode 3)"
 status = "UNCHECKED"
 
 ["SERVER.0x1176644c"]
-name = "g_1176644c"
+name = "_crtheap"
 type = "void *"
 section = ".bss"
 note = "process heap handle"
 status = "UNCHECKED"
 
 ["SERVER.0x11766450"]
-name = "g_11766450"
+name = "__active_heap"
 type = "int"
 section = ".bss"
 note = "allocator mode: 3=pool, 2=block"
 status = "UNCHECKED"
 
 ["SERVER.0x11767584"]
-name = "g_11767584"
+name = "_acmdln"
 type = "void *"
 section = ".bss"
 note = "GetCommandLineA result"
@@ -1414,7 +1414,7 @@ note = "per-lock CRITICAL_SECTION ptr table (0x40 entries)"
 status = "UNCHECKED"
 
 ["SERVER.0x11766438"]
-name = "g_11766438"
+name = "__sbh_pHeaderScan"
 type = "void *"
 section = ".bss"
 note = "pool: region scan cursor (ptr into array)"
@@ -1435,21 +1435,21 @@ note = "pool: region descriptor array"
 status = "UNCHECKED"
 
 ["SERVER.0x11766430"]
-name = "g_11766430"
+name = "__sbh_sizeHeaderList"
 type = "int"
 section = ".bss"
 note = "__sbh_sizeHeaderList - allocated header-list size"
 status = "UNCHECKED"
 
 ["SERVER.0x11766434"]
-name = "g_11766434"
+name = "__sbh_indGroupDefer"
 type = "int"
 section = ".bss"
 note = "__sbh_indGroupDefer - deferred group index"
 status = "UNCHECKED"
 
 ["SERVER.0x1176643c"]
-name = "g_1176643c"
+name = "__sbh_pHeaderDefer"
 type = "void *"
 section = ".bss"
 note = "__sbh_pHeaderDefer - deferred group header"
@@ -1498,21 +1498,21 @@ note = "TLS index (__tlsindex)"
 status = "UNCHECKED"
 
 ["SERVER.0x10031b78"]
-name = "g_10031b78"
+name = "g_old_sbh_region_head"
 type = "char"
 section = ".bss"
 note = "block allocator region-list head node"
 status = "UNCHECKED"
 
 ["SERVER.0x10033b98"]
-name = "g_10033b98"
+name = "__old_sbh_p_starting_region"
 type = "OldSbhRegion *"
 section = ".bss"
 note = "__old_sbh_p_starting_region (V5 sbh rover)"
 status = "UNCHECKED"
 
 ["SERVER.0x100317d8"]
-name = "g_100317d8"
+name = "_FPinit"
 type = "void *"
 section = ".data"
 note = "first init fnptr"
@@ -1561,21 +1561,21 @@ note = "0x1001bb4c tail flag"
 status = "UNCHECKED"
 
 ["SERVER.0x10035508"]
-name = "g_10035508"
+name = "__error_mode"
 type = "int"
 section = ".bss"
 note = "__amsg_exit report-mode flag"
 status = "UNCHECKED"
 
 ["SERVER.0x1003550c"]
-name = "g_1003550c"
+name = "__app_type"
 type = "int"
 section = ".bss"
 note = "__amsg_exit report-mode flag 2"
 status = "UNCHECKED"
 
 ["SERVER.0x100355a4"]
-name = "g_100355a4"
+name = "__old_sbh_decommitable_pages"
 type = "int"
 section = ".bss"
 note = "fully-free page count (SBH)"
@@ -1617,21 +1617,21 @@ note = "_NMSG_WRITE runtime-error table (0x1001fe31)"
 status = "UNCHECKED"
 
 ["SERVER.0x10035838"]
-name = "g_10035838"
+name = "pfnMessageBoxA"
 type = "void *"
 section = ".bss"
 note = "cached MessageBoxA proc (0x10022107)"
 status = "UNCHECKED"
 
 ["SERVER.0x1003583c"]
-name = "g_1003583c"
+name = "pfnGetActiveWindow"
 type = "void *"
 section = ".bss"
 note = "cached GetActiveWindow proc (0x10022107)"
 status = "UNCHECKED"
 
 ["SERVER.0x10035840"]
-name = "g_10035840"
+name = "pfnGetLastActivePopup"
 type = "void *"
 section = ".bss"
 note = "cached GetLastActivePopup proc (0x10022107)"
