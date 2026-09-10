@@ -59,3 +59,13 @@
 0x1001a643  # __cinit                  initterm.c
 0x1001a758  # _initterm                initterm.c
 0x1001b9d4  # __DllMainCRTStartup@12   dllmain.c (the /ENTRY symbol itself)
+
+# --- source-vendored: references/zlib ------------------------------------
+# Not a .LIB, so the archive scan cannot see it: these bodies come from the
+# vendored zlib source, compiled into the target. Only entries that must stay
+# in the tree for link-side reasons belong here.
+#
+# unknown/crc32.c is a reversed copy of zlib's _crc32 (0x100011f0), kept
+# because `rebrew test` compiles it standalone. CMakeLists excludes it from
+# the link, since references/zlib-1.1.3/crc32.c defines _crc32 too.
+0x100011f0  # _crc32                   unknown/crc32.c

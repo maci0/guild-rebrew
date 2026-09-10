@@ -25,6 +25,15 @@ way:
     __sys_errlist) trivially "matches" anything once its slots are masked.
     Candidates must be at least half fixed bytes.
 
+Libraries vendored as *source* (references/zlib) are covered too, from the
+build database: they are never a .LIB, so a function reversed out of one hides
+from the archive scan. Two such functions had been reversed into the game tree
+(0x10004b80 and 0x10005370, both from infcodes.c) before this pass existed.
+Stale objects are excluded by taking the object list from
+compile_commands.json rather than globbing the build directory -- a leftover
+object from a file since dropped from the build otherwise reports as a
+duplicate of the tree's own source.
+
 Exit status: 0 when no unexpected library code is found, 1 otherwise, so this
 works as a pre-commit hook or CI gate.
 """
@@ -32,6 +41,7 @@ works as a pre-commit hook or CI gate.
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import struct
 import sys
@@ -171,6 +181,56 @@ def index_library(path: Path) -> dict[str, list[tuple[str, bytes, dict, int]]]:
     return index
 
 
+def index_objects(objects: list[Path]) -> dict[str, list[tuple[str, bytes, dict, int]]]:
+    """Index loose COFF objects the same way :func:`index_library` indexes a .LIB.
+
+    Needed for libraries vendored as source (references/zlib), which the linker
+    never sees as an archive: a function reversed out of one of those hides from
+    the .LIB scan entirely, so the index has to come from the build output.
+    """
+    index: dict[str, list[tuple[str, bytes, dict, int]]] = {}
+    for path in objects:
+        obj = path.read_bytes()
+        if len(obj) < 20:
+            continue
+        try:
+            sections = coff_sections(obj)
+            symbols = coff_symbols(obj)
+        except (struct.error, IndexError):
+            continue
+        for sym, value, section, storage_class in symbols:
+            if section > 0 and storage_class in (2, 3) and section <= len(sections):
+                if sym.startswith("."):
+                    continue
+                index.setdefault(sym, []).append((path.name, obj, sections[section - 1], value))
+    return index
+
+
+def vendored_objects(compile_commands: Path, root: Path) -> list[Path]:
+    """Objects the *current* build produces from references/.
+
+    Taking the list from compile_commands.json rather than globbing the build
+    directory matters: a stale object from a file since dropped from the build
+    (gzio.c) otherwise reports as a duplicate of the tree's own source.
+    """
+    if not compile_commands.exists():
+        return []
+    out: list[Path] = []
+    for entry in json.loads(compile_commands.read_text()):
+        source = entry.get("file", "").replace("\\", "/")
+        if "/references/" not in source:
+            continue
+        m = re.search(r"/Fo(\S+)", entry.get("command", ""))
+        if not m:
+            continue
+        obj = Path(m.group(1))
+        if not obj.is_absolute():
+            obj = Path(entry.get("directory", ".")) / obj
+        if obj.exists():
+            out.append(obj)
+    return out
+
+
 def match_at(index, data: bytes) -> tuple[str, str] | None:
     """Return (symbol, object) when data is a library body, else None."""
     if len(data) < MIN_BYTES:
@@ -277,6 +337,12 @@ def main() -> int:
         help="file of VAs known to be library code and deliberately kept",
     )
     ap.add_argument(
+        "--compile-commands",
+        default="build-sp6/compile_commands.json",
+        help="build database used to find objects compiled from references/ "
+        "(source-vendored libraries such as zlib). Skipped when absent.",
+    )
+    ap.add_argument(
         "--va",
         help="check a single VA (hex) instead of every annotation. Use this "
         "before starting work on a function.",
@@ -304,6 +370,17 @@ def main() -> int:
     for lib in libs:
         for sym, entries in index_library(lib).items():
             index.setdefault(sym, []).extend(entries)
+
+    vendored = vendored_objects(ROOT / args.compile_commands, ROOT)
+    if vendored:
+        for sym, entries in index_objects(vendored).items():
+            index.setdefault(sym, []).extend(entries)
+    else:
+        print(
+            "check_library_code: note, no build database at "
+            f"{args.compile_commands}; source-vendored libraries not checked",
+            file=sys.stderr,
+        )
 
     allow_path = ROOT / args.allow
     allowed = set()
