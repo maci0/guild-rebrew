@@ -196,8 +196,8 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 	slot[0x165] = (char) arg7;
 	*(int*) (slot + 0x190) = 4;
 	*(int*) (slot + 0x194) = 0;
-	*(int*) (slot + 0x18c) = -1;
 	*(int*) (slot + 0x20c) = -1;
+	*(int*) (slot + 0x18c) = -1;
 	slot[0xd] = 1;
 	if (slot[2] == 3 || slot[2] == 0x10 || slot[2] == 0x13) {
 		*(int*) (slot + 0x1e8) = 1;
@@ -509,13 +509,13 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		slot[0x58] = (char) (father[0x58] + 1);
 		*(int*) (slot + 0x54) = *(int*) (father + 0x54);
 	}
-	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 	*(float*) (slot + 0x14) =
 	    (float) ((gm_RandomQuadratic() * *(float*) 0x100256c8 +
 	              *(float*) 0x100256c4) *
 	                 g_dbl_const_f88 +
 	             (*(float*) (father + 0x14) + *(float*) (mother + 0x14)) *
 	                 g_dbl_const_810);
+	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
 	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
 	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
 	                                           g_dbl_const_810)) &
