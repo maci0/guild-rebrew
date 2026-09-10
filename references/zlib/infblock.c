@@ -167,7 +167,7 @@ int r;
             inflate_huft *tl, *td;
 
             inflate_trees_fixed(&bl, &bd, &tl, &td, z);
-            s->sub.decode.codes = (inflate_codes_statef *)ZALLOC(z, 1, 0x40);
+            s->sub.decode.codes = inflate_codes_new(bl, bd, tl, td, z);
             if (s->sub.decode.codes == Z_NULL)
             {
               r = Z_MEM_ERROR;
@@ -331,7 +331,7 @@ int r;
           LEAVE
         }
         Tracev((stderr, "inflate:       trees ok\n"));
-        if ((c = (inflate_codes_statef *)ZALLOC(z, 1, 0x40)) == Z_NULL)
+        if ((c = inflate_codes_new(bl, bd, tl, td, z)) == Z_NULL)
         {
           r = Z_MEM_ERROR;
           LEAVE
@@ -344,7 +344,7 @@ int r;
       if ((r = inflate_codes(s, z, r)) != Z_STREAM_END)
         return inflate_flush(s, z, r);
       r = Z_OK;
-      ZFREE(z, s->sub.decode.codes);
+      gm_DispatchCall(s->sub.decode.codes, z);
       LOAD
       Tracev((stderr, "inflate:       codes end, %lu total out\n",
               z->total_out + (q >= s->read ? q - s->read :
