@@ -16,13 +16,14 @@ routing the read-modify-write through a pointer local forces a `lea` and lands
 
 ## `.text` link shortfall (2026-09-11) — the build is not byte-identical
 
-The linked `.text` is 0x3a29 (14,889 bytes) shorter than the reference's
-0x22846, and `rebrew postlink` used to pad it back to the reference's
-VirtualSize and apply the layout package's call/operand maps by offset,
-producing a binary 92% wrong in `.text` while the section table, imports and
-header fields all matched. Nothing failed: `rebrew verify` is per-function at
-the object level, and `verify --whole-binary` compares section sizes, exports,
-imports, `.rsrc` and headers, never `.text` content.
+The raw link's `.text` is 2,197 B short of the reference's 0x22846 (0x21fb1,
+3,269 B before the `/INCLUDE:` change below).  `rebrew postlink` used to pad it
+back to the reference's VirtualSize and apply the layout package's call/operand
+maps by offset, producing a binary 92% wrong in `.text` while the section table,
+imports and header fields all matched.  Nothing failed: `rebrew verify` is
+per-function at the object level, and `verify --whole-binary` compares section
+sizes, exports, imports, `.rsrc` and headers, never `.text` content.  The layout
+guard now fails loud instead: 269/7,463 map entries validate (3.6%, minimum 90%).
 
 Measurements (raw link, postlink skipped):
 
@@ -133,11 +134,12 @@ inside `a_cmp.obj` (COFF storage class 3), so it is absent from the archive
 symbol index and `/INCLUDE:_strncnt` fails LNK2001.
 
 `___ld12mul` (544) and `__except_handler3` (216) are a different case: both are
-in LIBCMT and reachable with `/INCLUDE:`.  Measured on the raw link
-(`/INCLUDE:___ld12mul /INCLUDE:__except_handler3`, which also pulls
-`mantold.obj` and `tenpow.obj`): link clean, imports unchanged at 100, `.text`
-VirtualSize 138,113 -> 139,185 (+1,072 B) against the reference's 141,382.  That
-1,072 B is a link change, not decompilation.
+in LIBCMT and reachable with `/INCLUDE:`, and `CMakeLists.txt` now passes both
+on `server_dll` (both `target_link_options` branches; it also pulls `mantold.obj`
+and `tenpow.obj`).  Measured: link clean, imports unchanged at 100, `.text`
+VirtualSize 138,113 -> 139,185 (+1,072 B) against the reference's 141,382, and
+the postlink layout coverage is unchanged (269 vs 270 of 7,463 map entries).
+That 1,072 B is a link change, not decompilation.
 
 The rest of the table has no stock supplier: a substring search of each
 reference body against the members of all four LIBCMT variants finds none of
