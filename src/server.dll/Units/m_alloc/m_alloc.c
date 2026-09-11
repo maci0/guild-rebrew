@@ -24,7 +24,7 @@ extern int g_default_group_name_4;   /* 0x1002893c */
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* message);
 extern void __cdecl free(void* ptr);
-extern void* __cdecl fcn_1001a7f7(unsigned int size);
+extern void* __cdecl malloc(unsigned int size);
 
 void __cdecl m_FreeTracked(void* ptr)
 {
@@ -195,7 +195,7 @@ void __cdecl InitPacketPool(int n)
 	g_stat2 = 0;
 	g_stat4 = 0;
 	len = n * 16;
-	g_array_ptr = fcn_1001a7f7((unsigned int) len);
+	g_array_ptr = malloc((unsigned int) len);
 	/* Homing the length in the parameter slot reproduces the target's
 	 * `mov [ebp+8],edi` / `mov ebx,[ebp+8]` pair; without it the length
 	 * stays in a register across the call. The store must be plain: making

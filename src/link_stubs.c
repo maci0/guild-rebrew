@@ -171,7 +171,6 @@ int _fltused = 0;
 int __cdecl ahm_RandomBelow(void) { return 0; }
 int __cdecl destroy_entity(void* p) { (void)p; return 0; }
 int g_worker_entry_count = 0;
-int __cdecl fcn_1001a7f7(void) { return 0; }
 int __cdecl fcn_1001accd(void) { return 0; }
 int __cdecl fcn_1001aff0(void) { return 0; }
 int __cdecl fcn_1001c083(void) { return 0; }
@@ -298,11 +297,6 @@ void __cdecl free(void* p)
 /* --- CRT malloc stub: satisfy _malloc without pulling crt_region/malloc.c
  * (__try SEH-cookie .rdata that inflates the IAT→IMPORT gap). Postlink
  * rewrites call sites to the reference VAs. --- */
-void* __cdecl malloc(unsigned int size)
-{
-    (void)size;
-    return 0;
-}
 // DATA: SERVER 0x1176408c
 int g_chain_id_start = 0;
 // DATA: SERVER 0x11764084
