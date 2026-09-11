@@ -117,6 +117,13 @@ relocations) > `NEAR_MATCHING` (close) > `STUB` (incomplete)
 
 Build with `cmake -S . -B build-sp6 -DREBREW_DEBUG_INFO=OFF && cmake --build build-sp6`.
 
+**Run `scripts/gate.sh` before committing.** It is the three checks that must
+pass: `rebrew lint`, the compile (the POST_BUILD postlink step is expected to
+fail until the tree is position-aligned, so only `error C####`/`error LNK####`
+count), and `rebrew verify --full` against a baseline of 277 passed. A drop
+below the baseline is a regression; raise `BASELINE` only when a change
+improves the number.
+
 - **`REBREW_DEBUG_INFO` must be OFF.** With it ON, `/debug` adds a 0x1c-byte
   debug directory that grows `.rdata` past the reference, and the postlink
   layout step fails with "built .rdata prefix size does not match".
