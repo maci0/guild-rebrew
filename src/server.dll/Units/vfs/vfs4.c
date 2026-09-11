@@ -79,8 +79,8 @@ int __cdecl CloseVfsStream(void* stream)
 {
 	int result;
 	int n;
-	unsigned int v;
-	char* w;
+	unsigned int value;
+	char* write_cursor;
 
 	result = 0;
 	if (stream != 0) {
@@ -92,20 +92,20 @@ int __cdecl CloseVfsStream(void* stream)
 					deflate((char*) stream + 0x100, 4);
 					deflateEnd((char*) stream + 0x100);
 					if (*(unsigned int*) ((char*) stream + 0x110) >= 8) {
-						w = *(char**) ((char*) stream + 0x10c);
-						v = *(unsigned int*) ((char*) stream + 0x138);
+						write_cursor = *(char**) ((char*) stream + 0x10c);
+						value = *(unsigned int*) ((char*) stream + 0x138);
 						n = 4;
 						do {
-							*w = (char) v;
-							v >>= 8;
-							w++;
+							*write_cursor = (char) value;
+							value >>= 8;
+							write_cursor++;
 						} while (--n != 0);
-						v = *(unsigned int*) ((char*) stream + 0x108);
+						value = *(unsigned int*) ((char*) stream + 0x108);
 						n = 4;
 						do {
-							*w = (char) v;
-							v >>= 8;
-							w++;
+							*write_cursor = (char) value;
+							value >>= 8;
+							write_cursor++;
 						} while (--n != 0);
 						*(unsigned int*) ((char*) stream + 0x114) += 8;
 						*(char**) ((char*) stream + 0x10c) += 8;

@@ -125,7 +125,7 @@ unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* entity)
 {
 	char* type_entry;
 	int result;
-	unsigned short* p;
+	unsigned short* query_cursor;
 
 	gm_GetBuildingTypeCategory((int) *entity);
 	type_entry = (char*) (g_entity_type_table + (unsigned int) *entity * 0x24d);
@@ -136,11 +136,11 @@ unsigned short* __cdecl gm_SetupEntityQuery(unsigned char* entity)
 	if (*type_entry == 4) {
 		return (unsigned short*) gm_StartEntityQuery(*(int*) (entity + 0x5d), 1, 0, 0x54);
 	}
-	p = (unsigned short*) gm_StartEntityQuery(*(int*) (entity + 0x5d), 1, 4, 2);
-	while (p != (unsigned short*) 0 && *p == 0xfd) {
-		p = gm_NextEntityQueryMatch();
+	query_cursor = (unsigned short*) gm_StartEntityQuery(*(int*) (entity + 0x5d), 1, 4, 2);
+	while (query_cursor != (unsigned short*) 0 && *query_cursor == 0xfd) {
+		query_cursor = gm_NextEntityQueryMatch();
 	}
-	return p;
+	return query_cursor;
 }
 
 /* Returns the category of a building type. Maps a building
@@ -202,16 +202,16 @@ int __cdecl gm_GetBuildingTypeCategory(int arg1)
 
 void* __cdecl gm_SearchTable67(int id)
 {
-	char* p;
+	char* query_cursor;
 	int i;
 
 	i = 0;
-	p = (char*) g_entity_ptr;
-	for (; i < 256; i++, p += 0xa9) {
-		if (*(char*) p == 0) {
+	query_cursor = (char*) g_entity_ptr;
+	for (; i < 256; i++, query_cursor += 0xa9) {
+		if (*(char*) query_cursor == 0) {
 			continue;
 		}
-		if (*(int*) (p + 1) != id) {
+		if (*(int*) (query_cursor + 1) != id) {
 			continue;
 		}
 		return (void*) (g_entity_ptr + i * 0xa9);

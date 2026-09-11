@@ -126,11 +126,11 @@ extern float g_const_neg_1_0;
 void __cdecl gm_ResetAllEntities(void)
 {
 	int i;
-	char* p;
+	char* entity_cursor;
 	for (i = 0; i < 0x100; i++) {
-		p = g_entity_ptr + i * 0xa9;
-		if (*p != 0) {
-			gm_CleanupBuildingEntity((unsigned char*) p);
+		entity_cursor = g_entity_ptr + i * 0xa9;
+		if (*entity_cursor != 0) {
+			gm_CleanupBuildingEntity((unsigned char*) entity_cursor);
 		}
 	}
 	{
@@ -199,16 +199,16 @@ void __cdecl gm_CleanupObjectEntities(void)
 Record* __cdecl gm_FindRecordById(int id)
 {
 	int i;
-	Record* p;
+	Record* entity_cursor;
 
 	i = 0;
-	p = (Record*) g_query_base;
+	entity_cursor = (Record*) g_query_base;
 	while (i < 0x5008) {
-		if (p->active != 0 && p->id == id) {
+		if (entity_cursor->active != 0 && entity_cursor->id == id) {
 			return (Record*) ((char*) g_query_base + i * 0x43);
 		}
 		i++;
-		p = (Record*) ((char*) p + 0x43);
+		entity_cursor = (Record*) ((char*) entity_cursor + 0x43);
 	}
 	return (Record*) 0;
 }
@@ -258,7 +258,7 @@ void __cdecl gm_CleanupAllEntities(void)
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
 {
 	int i;
-	char* p;
+	char* entity_cursor;
 
 	if (g_item_def_table == NULL) {
 		return 0;
@@ -271,30 +271,30 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 	}
 	if (static_ptr != NULL) {
 		*static_ptr = NULL;
-		p = (char*) 0x100358a0;
+		entity_cursor = (char*) 0x100358a0;
 		for (i = 0; i < 0x300; i++) {
-			if (*(unsigned short*) p != 0xffff && *(int*) (p + 4) == entity_id) {
-				*static_ptr = p;
+			if (*(unsigned short*) entity_cursor != 0xffff && *(int*) (entity_cursor + 4) == entity_id) {
+				*static_ptr = entity_cursor;
 				return 3;
 			}
-			p += 0x21c;
+			entity_cursor += 0x21c;
 		}
 	}
 	if (dynamic != NULL) {
-		p = (char*) g_entity_ptr;
-		for (i = 0; i < 0x100; i++, p += 0xa9) {
-			if (*(char*) p != 0 && *(int*) (p + 1) == entity_id) {
-				*dynamic = p;
+		entity_cursor = (char*) g_entity_ptr;
+		for (i = 0; i < 0x100; i++, entity_cursor += 0xa9) {
+			if (*(char*) entity_cursor != 0 && *(int*) (entity_cursor + 1) == entity_id) {
+				*dynamic = entity_cursor;
 				return 1;
 			}
 		}
 	}
 	if (existing != NULL) {
-		p = (char*) g_query_base;
-		for (i = 0; i < g_query_limit; p += 0x43) {
-			if (*(unsigned short*) p != 0) {
-				if (*(int*) (p + 2) == entity_id) {
-					*existing = p;
+		entity_cursor = (char*) g_query_base;
+		for (i = 0; i < g_query_limit; entity_cursor += 0x43) {
+			if (*(unsigned short*) entity_cursor != 0) {
+				if (*(int*) (entity_cursor + 2) == entity_id) {
+					*existing = entity_cursor;
 					return 2;
 				}
 				i++;

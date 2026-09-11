@@ -12,8 +12,8 @@ extern void* g_crash_callback;
 // NOTE: semantically complete reconstruction rebuilt from the target disasm.
 // Exception dispatch converted from switch to the reference's if/else chain
 // (tests 0xc000008e, 0xc000001d, 0xc0000005 first, then 0x80000003/04); the
-// module-path scan now uses the reference loop shapes (`while (*p != '\0') p++`
-// and `if (*p == '.')` without the p>=pStart guard).  Compiled 2137 vs target
+// module-path scan now uses the reference loop shapes (`while (*path_cursor != '\0') path_cursor++`
+// and `if (*path_cursor == '.')` without the path_cursor>=pStart guard).  Compiled 2137 vs target
 // 2115 (-40 from the switch form).  Remaining deltas are the MSVC6 register-
 // allocation cascade: prologue saves 4 regs (ebx/ebp/esi/edi) vs 2 (ebp/esi)
 // with ebx/edi deferred in the reference, frame 0x28c vs 0x280 (hDbgFile
@@ -31,7 +31,7 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	unsigned int nBytesWritten;
 	char szLine[4];
 	char fCanContinue;
-	char sp;
+	char space;
 	unsigned int dwDbgFileSize;
 	unsigned int dwBytesRead;
 	unsigned int* pStack;
@@ -70,29 +70,29 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 
 	/* Find last char */
 	{
-		char* p;
+		char* path_cursor;
 		char* pStart;
-		p = szModulePath;
-		if (*p != '\0') {
-			while (*p != '\0') {
-				p++;
+		path_cursor = szModulePath;
+		if (*path_cursor != '\0') {
+			while (*path_cursor != '\0') {
+				path_cursor++;
 			}
 			/* Search backwards for '.' */
 			pStart = szModulePath;
-			while (p >= pStart) {
-				if (*p == '.') {
+			while (path_cursor >= pStart) {
+				if (*path_cursor == '.') {
 					break;
 				}
-				p--;
+				path_cursor--;
 			}
-			if (*p == '.') {
-				p++;
-				*p = 'd';
-				p++;
-				*p = 'b';
-				p++;
-				*p = 'g';
-				*(p + 1) = '\0';
+			if (*path_cursor == '.') {
+				path_cursor++;
+				*path_cursor = 'd';
+				path_cursor++;
+				*path_cursor = 'b';
+				path_cursor++;
+				*path_cursor = 'g';
+				*(path_cursor + 1) = '\0';
 			}
 		}
 	}
@@ -150,7 +150,7 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	/* Seek to end of crash log */
 	hProcess = GetCurrentProcess();
 	memcpy(szLine, "\r\n", 3);
-	sp = ' ';
+	space = ' ';
 	memcpy(szSep, "------------------------\r\n", 0x1b);
 	SetFilePointer(hCrashLog, -1, 0, 2);
 
@@ -161,7 +161,7 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	szDateLen = GetDateFormatA(0x400, 2, 0, 0, szDateBuf, 0x100);
 	if (szDateLen) {
 		WriteFile(hCrashLog, szDateBuf, szDateLen - 1, &nBytesWritten, 0);
-		WriteFile(hCrashLog, &sp, 1, &nBytesWritten, 0);
+		WriteFile(hCrashLog, &space, 1, &nBytesWritten, 0);
 	}
 
 	/* Write time */

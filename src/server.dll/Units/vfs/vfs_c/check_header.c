@@ -1,11 +1,11 @@
 /* gzio run — check_header then gzread, compiled as one object (0x100036d0).
- * Bodies from references/zlib-1.1.3/gzio.c with the stripped blocks removed;
+ * Bodies from references/zlib-1.1.3/gzio.byte with the stripped blocks removed;
  * getLong is taken from the tree's 0x10003c50 implementation.
  */
 
 // FUNCTION: SERVER 0x100036D0
 
-/* gzio.c -- IO on .gz files
+/* gzio.byte -- IO on .gz files
  * Copyright (C) 1995-1998 Jean-loup Gailly.
  * For conditions of distribution and use, see copyright notice in zlib.h
  *
@@ -74,14 +74,14 @@ local void check_header(gz_stream* s)
     int method; /* method byte */
     int flags;  /* flags byte */
     uInt len;
-    int c;
+    int byte;
 
     /* Check the gzip magic header */
     for (len = 0; len < 2; len++) {
-	c = get_byte(s);
-	if (c != gz_magic[len]) {
+	byte = get_byte(s);
+	if (byte != gz_magic[len]) {
 	    if (len != 0) s->stream.avail_in++, s->stream.next_in--;
-	    if (c != EOF) {
+	    if (byte != EOF) {
 		s->stream.avail_in++, s->stream.next_in--;
 		s->transparent = 1;
 	    }
@@ -106,10 +106,10 @@ local void check_header(gz_stream* s)
 	while (len-- != 0 && get_byte(s) != EOF) ;
     }
     if ((flags & ORIG_NAME) != 0) { /* skip the original file name */
-	while ((c = get_byte(s)) != 0 && c != EOF) ;
+	while ((byte = get_byte(s)) != 0 && byte != EOF) ;
     }
     if ((flags & COMMENT) != 0) {   /* skip the .gz file comment */
-	while ((c = get_byte(s)) != 0 && c != EOF) ;
+	while ((byte = get_byte(s)) != 0 && byte != EOF) ;
     }
     if ((flags & HEAD_CRC) != 0) {  /* skip the header crc */
 	for (len = 0; len < 2; len++) (void)get_byte(s);
@@ -329,7 +329,7 @@ int ZEXPORTVA gzprintf (file, format, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,
 #endif
 
 /* ===========================================================================
-      Writes c, converted to an unsigned char, into the compressed file.
+      Writes byte, converted to an unsigned char, into the compressed file.
    gzputc returns the value that was written, or -1 in case of error.
 */
 
@@ -384,13 +384,13 @@ local uLong getLong (s)
     gz_stream *s;
 {
     uLong x = (uLong)get_byte(s);
-    int c;
+    int byte;
 
     x += ((uLong)get_byte(s))<<8;
     x += ((uLong)get_byte(s))<<16;
-    c = get_byte(s);
-    if (c == EOF) s->z_err = Z_DATA_ERROR;
-    x += ((uLong)c)<<24;
+    byte = get_byte(s);
+    if (byte == EOF) s->z_err = Z_DATA_ERROR;
+    x += ((uLong)byte)<<24;
     return x;
 }
 

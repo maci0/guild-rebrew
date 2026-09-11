@@ -124,18 +124,18 @@ extern float g_const_neg_1_0;
 
 char* __cdecl gm_SearchStruct(void)
 {
-	char* p;
+	char* entity_cursor;
 	char* end;
-	p = (char*) g_entity_ptr;
-	end = p + 0xa900;
-	while (p < end) {
-		if (*p == 0) {
+	entity_cursor = (char*) g_entity_ptr;
+	end = entity_cursor + 0xa900;
+	while (entity_cursor < end) {
+		if (*entity_cursor == 0) {
 			break;
 		}
-		p += 0xa9;
+		entity_cursor += 0xa9;
 	}
-	if (p < end) {
-		return p;
+	if (entity_cursor < end) {
+		return entity_cursor;
 	}
 	return 0;
 }
@@ -257,24 +257,24 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* building)
 {
 	unsigned char* entry;
-	unsigned char* q;
+	unsigned char* query_result;
 	int type;
 
 	type = building[0];
 	entry = (unsigned char*) (g_entity_type_table + type + type * 588);
-	q = (unsigned char*) gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 0, 0x2a, 6);
-	if (q != 0) {
+	query_result = (unsigned char*) gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 0, 0x2a, 6);
+	if (query_result != 0) {
 		if (entry[0x23d] == 0 && entry[0x23e] == 0 && entry[0x23f] != 0) {
-			q[0x1c] = entry[0x23f];
+			query_result[0x1c] = entry[0x23f];
 		} else {
-			q[0x1c] = (unsigned char) (entry[0x23d] < 2 ? 2 : entry[0x23d]);
-			q[0x1d] = (unsigned char) (entry[0x23e] < 2 ? 2 : entry[0x23e]);
+			query_result[0x1c] = (unsigned char) (entry[0x23d] < 2 ? 2 : entry[0x23d]);
+			query_result[0x1d] = (unsigned char) (entry[0x23e] < 2 ? 2 : entry[0x23e]);
 		}
 	}
-	q = (unsigned char*) gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 0, 0x116, 6);
-	if (q != 0) {
+	query_result = (unsigned char*) gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 0, 0x116, 6);
+	if (query_result != 0) {
 		if (entry[0x23d] == 0 && entry[0x23e] == 0 && entry[0x23f] != 0) {
-			q[0x1c] = entry[0x23f];
+			query_result[0x1c] = entry[0x23f];
 		}
 	}
 }

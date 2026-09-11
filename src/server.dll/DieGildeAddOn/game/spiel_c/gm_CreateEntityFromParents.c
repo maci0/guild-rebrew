@@ -54,7 +54,7 @@
  *   - the no-parent selector ternaries rewritten in the subtraction form
  *     that worked for idx>=6: 631 to 745.  Those sites already emit the
  *     target's shape.
- *   - `t == 1` inverted into a guard clause in the location block: 770.
+ *   - `type_entry == 1` inverted into a guard clause in the location block: 770.
  *   - `gm_RandomMod((unsigned short) arg8)` spelled as `gm_RandomMod(2)`:
  *     601.  The constant defeats the target's register reuse.
  *   - the stat-modifier table index rewritten to put `i` first: 591.
@@ -276,14 +276,14 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 
 	/* building-type location field */
 	if (location != 0) {
-		unsigned char bt;
-		unsigned char t;
+		unsigned char type_byte;
+		unsigned char type_entry;
 
-		bt = *(unsigned char*) location;
-		t = *(*(unsigned char**) 0x100a8c30 + bt * 0x24d);
-		if (t == 1) {
+		type_byte = *(unsigned char*) location;
+		type_entry = *(*(unsigned char**) 0x100a8c30 + type_byte * 0x24d);
+		if (type_entry == 1) {
 			*(int*) (slot + 0x170) = location;
-		} else if (t > 3 && t < 0x17 && t != 0xa && t != 0xf && t != 0x11) {
+		} else if (type_entry > 3 && type_entry < 0x17 && type_entry != 0xa && type_entry != 0xf && type_entry != 0x11) {
 			*(int*) (slot + 0x16c) = location;
 		}
 	}

@@ -19,8 +19,8 @@ int __cdecl gv_AllocField(unsigned char* field)
 {
 	unsigned char* entry;
 	void* slot;
-	char* p;
-	char* e;
+	char* entity_cursor;
+	char* record_cursor;
 	int i;
 
 	entry = (unsigned char*) (g_entity_type_table + field[0] + field[0] * 588);
@@ -66,91 +66,91 @@ cleanup:
 	*(char*) ((char*) slot + 0x19) = 0;
 	*(char*) ((char*) slot + 0x1a) = 0;
 	*(char*) ((char*) slot + 0x1b) = 0;
-	p = (char*) *(void**) ((char*) slot + 0x1c);
-	e = (char*) *(void**) ((char*) slot + 0x20);
+	entity_cursor = (char*) *(void**) ((char*) slot + 0x1c);
+	record_cursor = (char*) *(void**) ((char*) slot + 0x20);
 	if (*(int*) ((char*) slot + 4) == 1) {
 		*(void**) ((char*) slot + 0x10) = 0;
-		*(void**) ((char*) slot + 0xc) = p + 0xa0;
+		*(void**) ((char*) slot + 0xc) = entity_cursor + 0xa0;
 		*(void**) ((char*) slot + 0x14) = 0;
 		for (i = 0; i < 8; i++) {
-			*(int*) p = 0;
-			*(void**) (p + 0x10) = e;
-			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
-			*(unsigned short*) (p + 8) = 0xFFFFu;
-			e += 0x44;
-			p += 0x14;
+			*(int*) entity_cursor = 0;
+			*(void**) (entity_cursor + 0x10) = record_cursor;
+			*(unsigned*) (entity_cursor + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (entity_cursor + 8) = 0xFFFFu;
+			record_cursor += 0x44;
+			entity_cursor += 0x14;
 		}
 		for (i = 0; i < 4; i++) {
-			*(int*) p = 1;
-			*(void**) (p + 0x10) = e;
-			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
-			*(unsigned short*) (p + 8) = 0xFFFFu;
-			e += 0x88;
-			p += 0x14;
+			*(int*) entity_cursor = 1;
+			*(void**) (entity_cursor + 0x10) = record_cursor;
+			*(unsigned*) (entity_cursor + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (entity_cursor + 8) = 0xFFFFu;
+			record_cursor += 0x88;
+			entity_cursor += 0x14;
 		}
 	} else if (*(int*) ((char*) slot + 4) == 2) {
 		*(void**) ((char*) slot + 0x14) = 0;
-		*(void**) ((char*) slot + 0xc) = p + 0xf0;
-		*(void**) ((char*) slot + 0x10) = p + 0x168;
+		*(void**) ((char*) slot + 0xc) = entity_cursor + 0xf0;
+		*(void**) ((char*) slot + 0x10) = entity_cursor + 0x168;
 		for (i = 0; i < 0xc; i++) {
-			*(int*) p = 0;
-			*(void**) (p + 0x10) = e;
-			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
-			*(unsigned short*) (p + 8) = 0xFFFFu;
-			e += 0x44;
-			p += 0x14;
+			*(int*) entity_cursor = 0;
+			*(void**) (entity_cursor + 0x10) = record_cursor;
+			*(unsigned*) (entity_cursor + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (entity_cursor + 8) = 0xFFFFu;
+			record_cursor += 0x44;
+			entity_cursor += 0x14;
 		}
 		for (i = 0; i < 6; i++) {
-			*(int*) p = 1;
-			*(void**) (p + 0x10) = e;
-			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
-			*(unsigned short*) (p + 8) = 0xFFFFu;
-			e += 0x88;
-			p += 0x14;
+			*(int*) entity_cursor = 1;
+			*(void**) (entity_cursor + 0x10) = record_cursor;
+			*(unsigned*) (entity_cursor + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (entity_cursor + 8) = 0xFFFFu;
+			record_cursor += 0x88;
+			entity_cursor += 0x14;
 		}
 		for (i = 0; i < 2; i++) {
-			*(int*) p = 2;
-			*(void**) (p + 0x10) = e;
-			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
-			*(unsigned short*) (p + 8) = 0xFFFFu;
-			e += 0x110;
-			p += 0x14;
+			*(int*) entity_cursor = 2;
+			*(void**) (entity_cursor + 0x10) = record_cursor;
+			*(unsigned*) (entity_cursor + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (entity_cursor + 8) = 0xFFFFu;
+			record_cursor += 0x110;
+			entity_cursor += 0x14;
 		}
 	} else {
-		*(void**) ((char*) slot + 0xc) = p + 0x140;
-		*(void**) ((char*) slot + 0x10) = p + 0x1e0;
-		*(void**) ((char*) slot + 0x14) = p + 0x230;
+		*(void**) ((char*) slot + 0xc) = entity_cursor + 0x140;
+		*(void**) ((char*) slot + 0x10) = entity_cursor + 0x1e0;
+		*(void**) ((char*) slot + 0x14) = entity_cursor + 0x230;
 		for (i = 0; i < 0x10; i++) {
-			*(int*) p = 0;
-			*(void**) (p + 0x10) = e;
-			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
-			*(unsigned short*) (p + 8) = 0xFFFFu;
-			e += 0x44;
-			p += 0x14;
+			*(int*) entity_cursor = 0;
+			*(void**) (entity_cursor + 0x10) = record_cursor;
+			*(unsigned*) (entity_cursor + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (entity_cursor + 8) = 0xFFFFu;
+			record_cursor += 0x44;
+			entity_cursor += 0x14;
 		}
 		for (i = 0; i < 8; i++) {
-			*(int*) p = 1;
-			*(void**) (p + 0x10) = e;
-			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
-			*(unsigned short*) (p + 8) = 0xFFFFu;
-			e += 0x88;
-			p += 0x14;
+			*(int*) entity_cursor = 1;
+			*(void**) (entity_cursor + 0x10) = record_cursor;
+			*(unsigned*) (entity_cursor + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (entity_cursor + 8) = 0xFFFFu;
+			record_cursor += 0x88;
+			entity_cursor += 0x14;
 		}
 		for (i = 0; i < 4; i++) {
-			*(int*) p = 2;
-			*(void**) (p + 0x10) = e;
-			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
-			*(unsigned short*) (p + 8) = 0xFFFFu;
-			e += 0x110;
-			p += 0x14;
+			*(int*) entity_cursor = 2;
+			*(void**) (entity_cursor + 0x10) = record_cursor;
+			*(unsigned*) (entity_cursor + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (entity_cursor + 8) = 0xFFFFu;
+			record_cursor += 0x110;
+			entity_cursor += 0x14;
 		}
 		for (i = 0; i < 2; i++) {
-			*(int*) p = 3;
-			*(void**) (p + 0x10) = e;
-			*(unsigned*) (p + 4) = 0xFFFFFFFFu;
-			*(unsigned short*) (p + 8) = 0xFFFFu;
-			e += 0x220;
-			p += 0x14;
+			*(int*) entity_cursor = 3;
+			*(void**) (entity_cursor + 0x10) = record_cursor;
+			*(unsigned*) (entity_cursor + 4) = 0xFFFFFFFFu;
+			*(unsigned short*) (entity_cursor + 8) = 0xFFFFu;
+			record_cursor += 0x220;
+			entity_cursor += 0x14;
 		}
 	}
 	*(void**) (field + 0x65) = slot;
