@@ -98,10 +98,10 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 
 // FUNCTION: SERVER 0x10014db0
 // lb_ExLobbyServerCommand
-int __cdecl fcn_100147b0(unsigned int*, unsigned char*);
-int __cdecl fcn_10014a50(unsigned int*, unsigned char*);
+int __cdecl lb_HandleLobbyCommands(unsigned int*, unsigned char*);
+int __cdecl lb_BroadcastStateChange(unsigned int*, unsigned char*);
 int __cdecl fcn_10014af0(unsigned int*, unsigned char*);
-int __cdecl fcn_10014bf0(unsigned int*, unsigned char*);
+int __cdecl lb_HandleEntitySync(unsigned int*, unsigned char*);
 int __cdecl fcn_10014ca0(unsigned int*, unsigned char*);
 
 int __cdecl lb_ExLobbyServerCommand(unsigned int* player, unsigned char* msg)
@@ -116,13 +116,13 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* player, unsigned char* msg)
 	case 1:
 		return lb_SendLobbyConfig(player, msg);
 	case 2:
-		return fcn_100147b0(player, msg);
+		return lb_HandleLobbyCommands(player, msg);
 	case 3:
-		return fcn_10014a50(player, msg);
+		return lb_BroadcastStateChange(player, msg);
 	case 4:
 		return fcn_10014af0(player, msg);
 	case 5:
-		return fcn_10014bf0(player, msg);
+		return lb_HandleEntitySync(player, msg);
 	case 6:
 		return fcn_10014ca0(player, msg);
 	}
@@ -169,3 +169,4 @@ int __cdecl fcn_10014af0(unsigned int* player, unsigned char* msg)
 	}
 	return 0;
 }
+
