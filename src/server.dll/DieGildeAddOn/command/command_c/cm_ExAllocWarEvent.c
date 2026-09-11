@@ -37,7 +37,7 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 {
 	void* attacker;
 	void* target;
-	unsigned short* q;
+	unsigned short* query_result;
 	char* obj;
 	unsigned int slot_idx;
 	unsigned int clamped;
@@ -53,14 +53,14 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 	if (target == 0) {
 		return 1;
 	}
-	q = gm_StartEntityQuery(*(int*) ((char*) target + 0x5d), 1, 0, 0xca);
-	while (q != 0) {
-		if (*(int*) ((char*) q + 0x2a) == *(int*) ((char*) attacker + 1)) {
+	query_result = gm_StartEntityQuery(*(int*) ((char*) target + 0x5d), 1, 0, 0xca);
+	while (query_result != 0) {
+		if (*(int*) ((char*) query_result + 0x2a) == *(int*) ((char*) attacker + 1)) {
 			break;
 		}
-		q = gm_NextEntityQueryMatch();
+		query_result = gm_NextEntityQueryMatch();
 	}
-	if (q == 0) {
+	if (query_result == 0) {
 		obj = gm_AllocObjekt(*(int*) ((char*) target + 1), 0xca, 1);
 		if (obj == 0) {
 			return 1;
@@ -68,7 +68,7 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 		slot_idx = (unsigned int) *(unsigned char*) (cmd + 3);
 		*(int*) (g_connections + slot_idx * 0x264264 + 0x264208) = *(int*) (obj + 2);
 	} else {
-		obj = (char*) q;
+		obj = (char*) query_result;
 	}
 	{
 		*(war_event_fields*) ((char*) obj + 0x1c) = *(war_event_fields*) ((char*) cmd + 0x18);

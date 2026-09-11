@@ -30,7 +30,7 @@ int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)
 {
 	int field;
 	short* resolved;
-	unsigned short* q;
+	unsigned short* query_result;
 
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 8));
 	*(int*) (cmd + 8) = field;
@@ -41,12 +41,12 @@ int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)
 		return 1;
 	}
 	if ((*resolved == 0x2a) || (*resolved == 0x116)) {
-		q = gm_StartEntityQuery(*(int*) ((char*) resolved + 0x14), 1, 0,
+		query_result = gm_StartEntityQuery(*(int*) ((char*) resolved + 0x14), 1, 0,
 		                        (uint) (ushort) cmd[0x14 / 2]);
-		if (q == 0) {
+		if (query_result == 0) {
 			return 1;
 		}
-		if (*(int*) (q + 7) != 1) {
+		if (*(int*) (query_result + 7) != 1) {
 			return 1;
 		}
 		gm_RemoveObjectByType((void**) ((char*) resolved + 0x14), (uint) (ushort) cmd[0x14 / 2]);

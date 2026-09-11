@@ -74,17 +74,17 @@ void __cdecl ahm_AllocateEntitySlot(void*, void*, void*);
 // FUNCTION: SERVER 0x10010390
 int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
 {
-	char* p;
+	char* record;
 	uint action_type;
 	char* src;
 	int flag_ok;
 
 	(void) result;
-	p = (char*) gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
-	if (p == (char*) 0) {
+	record = (char*) gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
+	if (record == (char*) 0) {
 		return -1;
 	}
-	flag_ok = ahm_CheckFlag(p);
+	flag_ok = ahm_CheckFlag(record);
 	if (flag_ok == 0) {
 		return -2;
 	}
@@ -92,22 +92,22 @@ int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
 	src = (char*) (cmd + 0x10);
 	switch (action_type) {
 	case 0x61535263:
-		ahm_SearchAndSet(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
+		ahm_SearchAndSet(src, *(char**) (*(int*) (record + 0x16c) + 0x65));
 		return 0;
 	case 0x61536d53:
-		ahm_ClampFloatValue(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
+		ahm_ClampFloatValue(src, *(char**) (*(int*) (record + 0x16c) + 0x65));
 		return 0;
 	case 0x46697245:
-		ahm_FireEntityAndCleanup(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
+		ahm_FireEntityAndCleanup(src, *(char**) (*(int*) (record + 0x16c) + 0x65), *(char**) (record + 0x16c));
 		return 0;
 	case 0x61437353:
-		ahm_ApplyColorComponent(src, *(char**) (*(int*) (p + 0x16c) + 0x65));
+		ahm_ApplyColorComponent(src, *(char**) (*(int*) (record + 0x16c) + 0x65));
 		return 0;
 	case 0x61616452:
-		ahm_AllocateEntitySlot(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
+		ahm_AllocateEntitySlot(src, *(char**) (*(int*) (record + 0x16c) + 0x65), *(char**) (record + 0x16c));
 		return 0;
 	case 0x61736452:
-		ahm_SlotClearMatch(src, *(char**) (*(int*) (p + 0x16c) + 0x65), *(char**) (p + 0x16c));
+		ahm_SlotClearMatch(src, *(char**) (*(int*) (record + 0x16c) + 0x65), *(char**) (record + 0x16c));
 		return 0;
 	default:
 		return -3;

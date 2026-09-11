@@ -62,12 +62,12 @@ int __cdecl cm_ChkChangeBits(int cmd, char* result)
 	void* entity_or_node;
 	void* ent_a;
 	void* sel;
-	int r;
+	int field;
 
 	(void) result;
-	r = gm_GetFieldByType((char*) cmd, *(int *) (cmd + 0x10));
-	*(int *) (cmd + 0x10) = r;
-	if (gm_ResolveEntityById(&ent_a, &entity_or_node, &ent_c, r) == 0) {
+	field = gm_GetFieldByType((char*) cmd, *(int *) (cmd + 0x10));
+	*(int *) (cmd + 0x10) = field;
+	if (gm_ResolveEntityById(&ent_a, &entity_or_node, &ent_c, field) == 0) {
 		LogMessageInternal((char*) 0x1002c748, 0x250d, (char*) 0x1002ca54, 1);
 		return 1;
 	}

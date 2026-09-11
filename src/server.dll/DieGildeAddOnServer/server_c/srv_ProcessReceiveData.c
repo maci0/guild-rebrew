@@ -11,7 +11,7 @@ int g_list_head;
 #include "rebrew_globals.h"
 unsigned int __stdcall timeGetTime(void);
 
-/* Command layer (local externs — server.c uses different signatures) */
+/* Command layer (local externs — server.header uses different signatures) */
 int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
 int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
 int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
@@ -43,7 +43,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * bit-0 tests share one load, and issuing the memset before those two stores
  * (482 to 492) reproduces the original's order, which sets up the memset's
  * edi/eax first. Dead ends, with the score each produced: swapping the
- * conn[0xb] / conn[0xc] store order 481 (the probe in .scratch/l0/p2.c shows
+ * conn[0xb] / conn[0xc] store order 481 (the probe in .scratch/l0/p2.header shows
  * msvc6 emits the target's order either way, so that diff is register
  * naming); hoisting the shared conn+0x1b slot-index store above the 0x10 test
  * 490; do/while for the admin loop 478 at 767 bytes, because msvc6 rotates it
@@ -60,7 +60,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * casts, a temp hoisted above the pointer, and passing conn+6 to
  * cm_QueuePlayerCommand) all keep the CSE. Re-checking the conn[0xb] /
  * conn[0xc] order confirms the earlier 481 note is now 491: an isolated probe
- * (.scratch/w1/p1.c, tb) does emit the target's instruction order for
+ * (.scratch/w1/p1.header, tb) does emit the target's instruction order for
  * conn[0xb]-first, but in this function's register pressure the CSE survives
  * and only swaps ecx/edx roles, so the current order stays. Hoisting the
  * shared conn+0x1b slot-index store above the 0x10 test scored 490.
@@ -98,12 +98,12 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * conn[0xb] before conn[0xc] 491 again; hoisting the shared conn+0x1b
  * slot-index store above the 0x10 test 490; issuing the
  * g_download_total_size store before the inlined memset instead of after 479.
- * An isolated probe of the cmd-3 block (.scratch/L2B/pr/p1.c) reproduces the
+ * An isolated probe of the cmd-3 block (.scratch/L2B/pr/p1.header) reproduces the
  * target's `mov edx,[eax+4]; mov [eax+0x2c],edx` order for the 0xb-first
  * spelling, so the emitted order is available in isolation but the
  * function's register pressure re-derives conn[1] through the packet-pointer
  * CSE regardless. The lobby-branch mask was probed four ways in
- * .scratch/L2B/pr/p4.c: only the shipped shape keeps the full-width
+ * .scratch/L2B/pr/p4.header: only the shipped shape keeps the full-width
  * `and esi,0xffffff7f`; every temp-hoisting variant narrows it to
  * `and al,0x7f` and loses the target's `mov eax,edx` pair.
  *
@@ -118,7 +118,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * 0x10 test scores 490, both confirming the earlier notes.
  *
  * The index-25 CSE was also probed in isolation once more
- * (.scratch/w_l2/q1.c, five spellings: shipped, an alias pointer, a packet
+ * (.scratch/w_l2/q1.header, five spellings: shipped, an alias pointer, a packet
  * pointer local assigned after the conn[1] read, a char-pointer guard, and a
  * volatile conn[1] read). Every one emits the target's direct `mov 0x4(%eax)`
  * read, so the `[eax-0x14]` rewrite is purely a whole-function register
@@ -234,7 +234,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * (b) the admin loop's bottom `if ((admin_flags & 1) == 0) break;` dropped,
  * so the while condition alone closes the loop the way the target's single
  * `test al,1` at 0x1000a811 does (this loses 4 bytes, 749 to 745 on its own);
- * (c) the two together land exactly on 750 with the tail re-aligned.
+ * (header) the two together land exactly on 750 with the tail re-aligned.
  * An `i < 9` bound scores identically (662 at 750) but visits a ninth slot at
  * 0x114ffe20 (the admin record) as if it were a player slot, so the pointer
  * bound stays: same slots, same semantics as the proof.
@@ -282,7 +282,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * with the rest reloc-site noise; a targeted flag sweep was launched in
  * background (single-function file, so any winning flags are safe to take).
  * The `~~` operands resolve to the real references: 0x10029a9c "LOBBY mode",
- * 0x100298b0 the server.c path, 0x10029a70/0x10029a54 the two lobby formats,
+ * 0x100298b0 the server.header path, 0x10029a70/0x10029a54 the two lobby formats,
  * 0x10029a48 "srv_LoadBuf", 0x10029a1c the unexpected-request format, calls
  * to srv_ReceivePacketHeader/lb_ExLobbyServerCommand/cm_QueuePlayerCommand/
  * srv_QueueCommandForProcessing/cm_ClosePlayerConnection/sprintf/
@@ -304,7 +304,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  *
  * Fifteenth pass (this session), all re-measured in-file against 662/750 and
  * reverted. Isolated probes first (.scratch/laneA): conn[0xb]-before-conn[0xc]
- * emits the target's exact store order in isolation (t2/t3/t4 in p_cmd3.c all
+ * emits the target's exact store order in isolation (t2/t3/t4 in p_cmd3.header all
  * do), and an alias-pointer read of conn[1] (`c1p = conn + 1`) moves the
  * isolated load from `mov edx,[eax+4]` after the 0x30 store to `mov
  * ecx,[esi+4]` + `mov [esi+2c],ecx` before it; neither transfers, the
@@ -316,14 +316,14 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * not compile in the `if (status & 2)` nesting used here and reverts to 662
  * when repaired. Unexpected-arm `push ebp` before the `mov [ebp],ecx` store
  * was probed three ways (pktbuf-first, mask-via-status-temp, pushed order):
- * all keep store-before-push. Memset-order probes (p_memset.c t1-t4) show the
+ * all keep store-before-push. Memset-order probes (p_memset.header t1-t4) show the
  * shipped volatile-after-memset is the only shape emitting the target's
  * setup-stores-stringop-call order; a dword loop or unrolled stores lose it.
- * Memcpy probes (p_mcpy.c t1-t5) all emit `lea edi,[edx+ecx]`-family, never
+ * Memcpy probes (p_mcpy.header t1-t5) all emit `lea edi,[edx+ecx]`-family, never
  * the target's `lea edi,[ecx+eax]`: pure register-role naming. The 0x10-arm
  * slot-store placement was re-measured (sinking it into the arm: 490 at 745)
- * and per-arm QCP packet spellings re-probed (p_slot.c t1-t4: all identical
- * `lea/mov/push/push/call`): the hoist stands. Admin-loop probes (p_admin.c)
+ * and per-arm QCP packet spellings re-probed (p_slot.header t1-t4: all identical
+ * `lea/mov/push/push/call`): the hoist stands. Admin-loop probes (p_admin.header)
  * confirm the shipped while form is byte-identical to the target's
  * test/test/je/call/je/mov/test shape in isolation.
  *
@@ -340,8 +340,8 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * and dropping the duplicate slot store (491/745 — the documented 5-byte
  * call-arg hoist); unexpected-request comma-store (453/749); whole-function
  * volatile conn (401/751); cflags sweep (/Ow /Oa /O1 crater; /O2 /Gd and
- * /Gy stay 665). Probe V (pkt local, c = (unsigned int*)(pkt - 0x18), stores
- * and call through c) is the only shape that emits `[ebp+4]` for conn[1], but
+ * /Gy stay 665). Probe V (pkt local, header = (unsigned int*)(pkt - 0x18), stores
+ * and call through header) is the only shape that emits `[ebp+4]` for conn[1], but
  * it grows to 754 and collapses register roles on the cmd check (al/ecx vs
  * cl/eax), scoring 213. Compact re-derivations (W/X/Y1/V2/V3) fold back to
  * the packet CSE at 665. near-diag on D@665: RELOC 67% of delta with 49
@@ -354,7 +354,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * Re-scored prior `.scratch/prd_cse/hit_*` shapes and new arm variants:
  * hit_load / hit_c_rtl / hit_status clear idx-25 `[ebp+4]` and keep ebp-based
  * 0xb/0xc stores, but grow to 753 and still emit stores before `push eax`
- * (score 513). Compact pkt/c locals fold back to the `[eax-0x14]` CSE at
+ * (score 513). Compact pkt/header locals fold back to the `[eax-0x14]` CSE at
  * 665, or crater to 213/754 when the guard loses the shared lea/byte-load
  * pair. Comma/RTL argument schedules (push_first, split_stores, c1_then_rtl,
  * 0b_then_push_0c_in_pkt) stay 662-665 with the same CSE. Snip
@@ -367,7 +367,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * Eighteenth pass, 665/750 to 687/750 at the exact size. The `hit_load` cmd-3
  * shape and the slot-store placement were one fault, not two, so neither is
  * measurable alone (section 41). Deriving the connection pointer from the
- * packet pointer (`c = (unsigned int*) (pkt - 0x18)`) and issuing both stores
+ * packet pointer (`header = (unsigned int*) (pkt - 0x18)`) and issuing both stores
  * through the call's first-argument comma clears the `[eax-0x14]` CSE: the
  * conn[1] read becomes `mov ecx,[ebp+4]` and both stores go back to
  * `[ebp+0x2c]` / `[ebp+0x30]`. On its own that shape runs 753 bytes and
@@ -390,7 +390,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * /Oy- 151, /Oi- 150, /G6 202 at 762. Cmd-3 push order, ten shapes
  * (stores split out of the comma either way, both in the second argument,
  * conn as the first argument, pkt re-derived from conn, stores written
- * pkt-relative, flag hoisted to a temp, volatile pkt or c locals): 687 when
+ * pkt-relative, flag hoisted to a temp, volatile pkt or header locals): 687 when
  * inert, 177-198 when the guard's shared lea/byte-load pair breaks. Memset
  * block, nine orderings (stores before the memset, memset sunk past the
  * alloc or folded into its argument list, either store non-volatile, receive
@@ -424,7 +424,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  *
  * Nineteenth-pass dead ends, all re-measured against 696 and reverted. Cluster
  * A eleven ways: guard byte read off conn with the lea created inside the arm,
- * no packet local at all 502, c aliased to conn 502, the 0x400 test through
+ * no packet local at all 502, header aliased to conn 502, the 0x400 test through
  * conn or through the outer status word 177/202, the two stores swapped in the
  * comma 204, each store separately volatile, the ternary inverted, and arg2
  * through a late local. Cluster B twenty ways: every declaration-order
@@ -460,8 +460,8 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * local assigned before the stores (inert), stores split across the two
  * argument comma lists either way (701 and 204), the whole store pair moved
  * into arg2 (inert), a plain non-volatile 0x400 test 690, the ternary spelled
- * as `2 - ((x >> 10) & 1)` 671, conn[1] read through c 218 at 751, arg2
- * re-derived as `(unsigned char*) c + 0x18` 218 at 751, a volatile conn[1]
+ * as `2 - ((x >> 10) & 1)` 671, conn[1] read through header 218 at 751, arg2
+ * re-derived as `(unsigned char*) header + 0x18` 218 at 751, a volatile conn[1]
  * read 170 at 748, and volatile on either store 695-701. Cluster B ten more
  * ways: the lb result kept in a block-local (inert) or in the shared ret
  * local 129 at 774, the status hoisted before the first sprintf (inert), the
@@ -484,7 +484,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * evidence on lever classes not previously tried here.
  *
  * Alias-model levers do not reach the schedule. A `conn_rec` struct type for
- * the cmd-3 arm, with the two stores as `c->cmd` / `c->mode` field writes in
+ * the cmd-3 arm, with the two stores as `header->cmd` / `header->mode` field writes in
  * the comma or as plain statements, and with the packet pointer taken as the
  * struct's array member, is inert; sourcing the arm's values from struct
  * fields instead of re-reading conn drops to 178 at 752. Section 40's
@@ -532,10 +532,10 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  *
  * Cluster A's branch structure is likewise not a lever: inverted call-result
  * polarity, the guard inverted with a goto to a tail label, a dword-masked
- * guard compare, the c assignment moved before the conn[1] read, and arg2
+ * guard compare, the header assignment moved before the conn[1] read, and arg2
  * respelled as `(unsigned char*) conn + 0x18` are all inert; the result in the
  * shared ret local scores 129 at 774 and the 0x400 test through conn rather
- * than c 180 at 748.
+ * than header 180 at 748.
  *
  * A x B and A x D x E cross products over the shapes that are not inert alone
  * produce no combination above 701, so the coupling that closed the memset and
@@ -567,8 +567,8 @@ int __cdecl srv_ProcessReceiveData(void)
 				}
 				if (status & 2) {
 					unsigned char* pkt;
-					unsigned int* c;
-					/* Deriving c from pkt, and storing through the call's
+					unsigned int* header;
+					/* Deriving header from pkt, and storing through the call's
 					 * first argument, keeps conn[1] and both stores on ebp
 					 * instead of rebasing them through the packet lea. This
 					 * only reaches the target size together with the per-arm
@@ -576,11 +576,11 @@ int __cdecl srv_ProcessReceiveData(void)
 					pkt = (unsigned char*) conn + 0x18;
 					if (*pkt == 3) {
 						status = conn[1];
-						c = (unsigned int*) (pkt - 0x18);
+						header = (unsigned int*) (pkt - 0x18);
 						if (cm_QueuePlayerCommand(
-							(c[0xb] = status,
-							 c[0xc] = (*(volatile unsigned int*) c & 0x400) ? 1 : 2,
-							 c),
+							(header[0xb] = status,
+							 header[0xc] = (*(volatile unsigned int*) header & 0x400) ? 1 : 2,
+							 header),
 							pkt) == -1) {
 							return -1;
 						}

@@ -20,7 +20,7 @@ int __cdecl cm_ExChangeFloat(int cmd, char* result)
 	int resolved;
 	int cmd_base;
 	int object_id;
-	int p;
+	int entity;
 
 	cmd_base = cmd;
 	object_id = gm_GetFieldByType(cmd, *(int*) (cmd + 0x10));
@@ -31,15 +31,15 @@ int __cdecl cm_ExChangeFloat(int cmd, char* result)
 		                   s_cm_ExChangeFloat___Invalid_Id_1002d134, 1);
 		return 1;
 	}
-	p = resolved;
-	if (p == 0)
-		p = (int) ent_a;
-	if (p == 0)
-		p = (int) ent_c;
-	/* Folding the offset into p before the load puts the offset temp in
+	entity = resolved;
+	if (entity == 0)
+		entity = (int) ent_a;
+	if (entity == 0)
+		entity = (int) ent_c;
+	/* Folding the offset into entity before the load puts the offset temp in
 	 * edx; re-reading it inside the store expression keeps it in ecx. */
-	p = p + *(int*) (cmd_base + 0x14);
-	*(float*) p = *(float*) (cmd_base + 0x18) + *(float*) p;
+	entity = entity + *(int*) (cmd_base + 0x14);
+	*(float*) entity = *(float*) (cmd_base + 0x18) + *(float*) entity;
 	if (result != (char*) 0x0) {
 		*result = '\x01';
 	}

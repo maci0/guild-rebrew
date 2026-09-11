@@ -21,7 +21,7 @@ int __cdecl lb_HandleLobbyCommands(char* player, char* msg)
 	PlayerSlot* slot2;
 	unsigned int flags;
 	int count;
-	int* p;
+	int* slot_cursor;
 	int arr[8];
 	char buf[0x100];
 	char* m14;
@@ -69,14 +69,14 @@ join:
 		    *(int*) ((char*) slot + 0x264218) == *(int*) (m14 + 0xc)) {
 			arr[0] = 0; arr[1] = 0; arr[2] = 0; arr[3] = 0;
 			arr[4] = 0; arr[5] = 0; arr[6] = 0; arr[7] = 0;
-			for (p = arr, slot2 = (PlayerSlot*) 0x101deb00;
+			for (slot_cursor = arr, slot2 = (PlayerSlot*) 0x101deb00;
 			     (int) slot2 < 0x114ffe20;
-			     slot2 = (PlayerSlot*) ((char*) slot2 + 0x264264), p++) {
+			     slot2 = (PlayerSlot*) ((char*) slot2 + 0x264264), slot_cursor++) {
 				flags = slot2->flags;
 				if ((flags & 1) && (flags & 0x200) && (char*) slot2 != player) {
 					if (*(int*) ((char*) slot2 + 0x264218) >= 0 &&
 					    *(int*) ((char*) slot2 + 0x264218) < 8) {
-						*p = 1;
+						*slot_cursor = 1;
 					}
 				}
 			}

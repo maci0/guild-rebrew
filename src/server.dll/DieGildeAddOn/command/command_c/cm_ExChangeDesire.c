@@ -57,7 +57,7 @@ int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
 	int i;
 	int off;
 	uchar* src;
-	float d;
+	float delta;
 	double clamped;
 
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
@@ -74,10 +74,10 @@ int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
 		do {
 			idx = *src;
 			src++;
-			d = *(float*) src;
+			delta = *(float*) src;
 			off = (idx * 3 + 0x24) * 4;
 			src += 4;
-			STAT(off) += d;
+			STAT(off) += delta;
 			if (STAT(off) < _g_stat_min_d) goto pick;
 			if (STAT(off) < _g_stat_max_d) goto pick;
 			clamped = _g_stat_max_d;

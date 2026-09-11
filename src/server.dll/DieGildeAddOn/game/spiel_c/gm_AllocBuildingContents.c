@@ -30,8 +30,8 @@
  * clamps written inline instead of through an `unsigned char` temp, which
  * otherwise spills to a stack slot (270 -> 340 -> 551); the producer walk
  * as a `do/while` with an `(int)` limit compare, which gives the reference's
- * `jl` and its loop rotation (551 -> 652); the `q+6` source-field store
- * written before the `q+0xe` constant store in both query arms, which is the
+ * `jl` and its loop rotation (551 -> 652); the `query_result+6` source-field store
+ * written before the `query_result+0xe` constant store in both query arms, which is the
  * reference's load/store interleave at IDX 89/126 (652 -> 672); and the
  * volatile read of `geb+1` at the gm_AllocObjekt call, which pins that load
  * below the callee-save pushes so obj_id takes esi and geb takes edi as the
@@ -97,7 +97,7 @@ char* __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
 	char* obj;
 	char* row;
 	char* scan;
-	char* q;
+	char* query_result;
 	char* sub;
 	char* slot;
 	char* prod;
@@ -152,42 +152,42 @@ char* __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
 		i++;
 	}
 
-	q = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, 0x2a);
-	if (q != NULL) {
+	query_result = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, 0x2a);
+	if (query_result != NULL) {
 		/* Source field first: the reference loads geb[1]/obj[2] before it
-		 * stores the constant 2 at q+0xe (IDX 89/126). */
-		*(int*) (q + 6) = *(int*) (geb + 1);
-		*(int*) (q + 0xe) = 2;
+		 * stores the constant 2 at query_result+0xe (IDX 89/126). */
+		*(int*) (query_result + 6) = *(int*) (geb + 1);
+		*(int*) (query_result + 0xe) = 2;
 		if (row[0x23d] == 0 && row[0x23e] == 0 && row[0x23f] != 0) {
-			q[0x1c] = row[0x23f];
+			query_result[0x1c] = row[0x23f];
 		}
 		else {
-			q[0x1c] = (char) ((unsigned char) row[0x23d] < 2 ? 2 : (unsigned char) row[0x23d]);
-			q[0x1d] = (char) ((unsigned char) row[0x23e] < 2 ? 2 : (unsigned char) row[0x23e]);
+			query_result[0x1c] = (char) ((unsigned char) row[0x23d] < 2 ? 2 : (unsigned char) row[0x23d]);
+			query_result[0x1d] = (char) ((unsigned char) row[0x23e] < 2 ? 2 : (unsigned char) row[0x23e]);
 		}
 	}
 
-	q = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 2, 0, 0x116, 6);
-	if (q != NULL) {
-		*(int*) (q + 6) = *(int*) (obj + 2);
-		*(int*) (q + 0xe) = 2;
+	query_result = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 2, 0, 0x116, 6);
+	if (query_result != NULL) {
+		*(int*) (query_result + 6) = *(int*) (obj + 2);
+		*(int*) (query_result + 0xe) = 2;
 		if (row[0x23d] == 0 && row[0x23e] == 0 && row[0x23f] != 0) {
-			q[0x1c] = (char) ((unsigned char) row[0x23f] < 6 ? 6 : (unsigned char) row[0x23f]);
+			query_result[0x1c] = (char) ((unsigned char) row[0x23f] < 6 ? 6 : (unsigned char) row[0x23f]);
 		}
 		else {
-			q[0x1c] = (char) ((unsigned char) row[0x23d] < 6 ? 6 : (unsigned char) row[0x23d]);
-			q[0x1d] = (char) ((unsigned char) row[0x23e] < 6 ? 6 : (unsigned char) row[0x23e]);
+			query_result[0x1c] = (char) ((unsigned char) row[0x23d] < 6 ? 6 : (unsigned char) row[0x23d]);
+			query_result[0x1d] = (char) ((unsigned char) row[0x23e] < 6 ? 6 : (unsigned char) row[0x23e]);
 		}
 	}
 
 	if ((*(unsigned short*) obj >= 0x92 && *(unsigned short*) obj <= 0x97) ||
 	    *(unsigned short*) obj == 0x2db) {
 		slot = (char*) &g_slot_array + (unsigned int) g_current_season * 0x2a90;
-		q = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, 0x116);
-		if (q != NULL) {
-			q[0x1c] = 0xc;
-			q[0x1d] = 0;
-			*(int*) (q + 0xe) = 3;
+		query_result = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, 0x116);
+		if (query_result != NULL) {
+			query_result[0x1c] = 0xc;
+			query_result[0x1d] = 0;
+			*(int*) (query_result + 0xe) = 3;
 		}
 		else {
 			ReportMessage((char*) 0x100314b8);
