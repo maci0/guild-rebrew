@@ -12,10 +12,10 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl cm_ExJoinLeaveElection(int cmd, char* result)
 {
 	int action;
-	char* q;
+	char* query_result;
 	int player;
 	int i;
-	unsigned short w;
+	unsigned short slot_index;
 	char* rec;
 
 	if (result) {
@@ -25,42 +25,42 @@ int __cdecl cm_ExJoinLeaveElection(int cmd, char* result)
 	}
 	action = *(int *) (cmd + 0x10);
 	if (action == 0x6a6f696e) {
-		q = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) (cmd + 0x18));
-		if (q == 0) return 1;
-		q = (char *) gm_StartEntityQuery(*(int *) (q + 0x5d), 2, 6, 0, 0x12d);
-		if (q == 0) return 1;
+		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) (cmd + 0x18));
+		if (query_result == 0) return 1;
+		query_result = (char *) gm_StartEntityQuery(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
+		if (query_result == 0) return 1;
 		player = *(int *) (cmd + 0x14);
 		for (i = 0; i < 4; i++) {
-			if (*(int *) (q + 0x1c + i * 4) == player) return 1;
+			if (*(int *) (query_result + 0x1c + i * 4) == player) return 1;
 		}
 		for (i = 0; i < 4; i++) {
-			if (*(int *) (q + 0x1c + i * 4) == -1) break;
+			if (*(int *) (query_result + 0x1c + i * 4) == -1) break;
 		}
 		if (i >= 4) return 1;
 		if (result) result[0] = 1;
-		*(int *) (q + 0x1c + i * 4) = *(int *) (cmd + 0x14);
+		*(int *) (query_result + 0x1c + i * 4) = *(int *) (cmd + 0x14);
 		return 0;
 	}
 	if (action == 0x6c656176) {
-		q = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) (cmd + 0x18));
-		if (q == 0) return 1;
-		q = (char *) gm_StartEntityQuery(*(int *) (q + 0x5d), 2, 6, 0, 0x12d);
-		if (q == 0) return 1;
+		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) (cmd + 0x18));
+		if (query_result == 0) return 1;
+		query_result = (char *) gm_StartEntityQuery(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
+		if (query_result == 0) return 1;
 		player = *(int *) (cmd + 0x14);
 		for (i = 0; i < 4; i++) {
-			if (*(int *) (q + 0x1c + i * 4) == player) break;
+			if (*(int *) (query_result + 0x1c + i * 4) == player) break;
 		}
 		if (i >= 4) return 1;
 		if (result) result[0] = 1;
-		*(int *) (q + 0x1c + i * 4) = -1;
+		*(int *) (query_result + 0x1c + i * 4) = -1;
 		return 0;
 	}
 	if (action == 0x636c6572) {
-		q = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) (cmd + 0x18));
-		if (q == 0) return 1;
-		w = *(unsigned short *) (q + 0x27);
-		if (w != 0xffff) {
-			rec = (char *) (0x100358a0 + w * 0x21c);
+		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) (cmd + 0x18));
+		if (query_result == 0) return 1;
+		slot_index = *(unsigned short *) (query_result + 0x27);
+		if (slot_index != 0xffff) {
+			rec = (char *) (0x100358a0 + slot_index * 0x21c);
 			if (rec == 0) goto cler_query;
 			if (rec == (char *) g_entity_table_end) goto cler_query;
 			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;
@@ -70,12 +70,12 @@ int __cdecl cm_ExJoinLeaveElection(int cmd, char* result)
 	}
 	return 1;
 cler_query:
-	q = (char *) gm_StartEntityQuery(*(int *) (q + 0x5d), 2, 6, 0, 0x12d);
-	if (q == 0) return 1;
+	query_result = (char *) gm_StartEntityQuery(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
+	if (query_result == 0) return 1;
 	if (result) result[0] = 1;
 	for (i = 0; i < 4; i++) {
-		if (*(int *) (q + 0x1c + i * 4) == *(int *) (cmd + 0x14)) {
-			*(int *) (q + 0x1c + i * 4) = -1;
+		if (*(int *) (query_result + 0x1c + i * 4) == *(int *) (cmd + 0x14)) {
+			*(int *) (query_result + 0x1c + i * 4) = -1;
 		}
 	}
 	return 0;

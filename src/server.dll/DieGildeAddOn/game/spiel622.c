@@ -219,7 +219,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //   docs/msvc6-c-shapes.md section 44. File-mates hold their status; the flag
 //   is scoped by the closing `#pragma optimize("", on)` after the body.
 //   Layering a second flag on top of "a" is inert or worse ("g"/"t"/"w"/"y" on
-//   and "p"/"s"/"w" off all hold 386; "p" on, "s" on, "t" off, "y" off and
+//   and "record_cursor"/"s"/"w" off all hold 386; "record_cursor" on, "s" on, "t" off, "y" off and
 //   "g" off collapse the body). CFLAGS remain inert at both 378 and 386:
 //   /G3 /G4 /G5 /Ox /Gy /Oi- /Ob0 all score identically, /G6 /Op /O1 /Ot
 //   collapse.
@@ -251,7 +251,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //     BYTE-IDENTICAL objects (compared hex, not just the score), so no flag
 //     reaches this scheduling decision. /G6 /Op /Oy- /O1 /Od collapse.
 //   - `#pragma optimize`: 20 combinations. "a" plus any of g/t/w/y hold 391;
-//     "s" on, "t" off, "y" off, "g" off, "p" on each collapse the body.
+//     "s" on, "t" off, "y" off, "g" off, "record_cursor" on each collapse the body.
 //   - All four msvc6 service-pack images (sp1..sp4) produce the identical
 //     391/396 object, verified on an isolated probe (.scratch/pv-x87/probe.c)
 //     that reproduces this function without windows.h.
@@ -541,17 +541,17 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 //   RELOC 355/355. Four fixes took it from 218: indexing the item table inline
 //   rather than through a `char*` local emits the original's folded
 //   `mov al,[eax+edx]`; the second query result must go to its own local
-//   instead of overwriting `q`, because the original keeps the outer query in
+//   instead of overwriting `query_result`, because the original keeps the outer query in
 //   esi across the branch; the epilogue multiply order is
 //   `(param2 * g_const_0_01) * total`, which emits fild/fmul/fimul, where the
-//   `(double)` casts emitted fld/fimul/fimul; and the inner call's `q+0x14`
+//   `(double)` casts emitted fld/fimul/fimul; and the inner call's `query_result+0x14`
 //   load stays inside the argument list, which is what emits the original's
 //   `push eax` / `mov eax,[esi+0x14]` / ... / `push eax` schedule. Hoisting
 //   that load into a local (`qbase`) materialises it into ecx before the
 //   pushes and costs 5 bytes.
 //   The last fix was the whole-function esi/edi role swap that made the hoist
 //   look necessary. It is decided by the OUTER call's first argument: reading
-//   `*q` into an `int` local and passing that, instead of passing `*q`
+//   `*query_result` into an `int` local and passing that, instead of passing `*query_result`
 //   directly, puts the query in esi and the cursor in edi as the original has
 //   them, and it also reproduces the original's
 //   `mov dl,[esi+0x12]` / `xor eax,eax` / `mov ax,[esi]` order. The local's
@@ -560,21 +560,21 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 //   Dead ends measured on the hoisted shape (all 350, register swap right but
 //   schedule wrong): dead-hoist beside the inline load, `register int`,
 //   comma/assignment folded into the argument, address-only and `int*`/`char*`
-//   alias hoists, `((int*) q)[5]`, `*(int*)(q + 0xa)` in short units, hoisting
+//   alias hoists, `((int*) query_result)[5]`, `*(int*)(query_result + 0xa)` in short units, hoisting
 //   the masked id instead, and hoisting the outer call's `obj+0x5d`.
 //   Dead ends on the inline shape (all 343, schedule right but registers
 //   swapped): declaration order (all 10 positions for comp_ptr), `register`
-//   qualifiers on either pointer, swapping the init order of `q` and
-//   `comp_ptr` (336), a `volatile int*` inline load (337), `q`/`sub`/
+//   qualifiers on either pointer, swapping the init order of `query_result` and
+//   `comp_ptr` (336), a `volatile int*` inline load (337), `query_result`/`sub`/
 //   `have_query` retyped, a `!=` loop bound, an end-pointer loop bound, and
-//   hoisting `next_comp` above the branch. A redundant `if (q != 0)` guard
+//   hoisting `next_comp` above the branch. A redundant `if (query_result != 0)` guard
 //   around the inner call flips the registers but reverts the schedule, and
-//   `q == comp_ptr` style dead compares flip them at the cost of a
+//   `query_result == comp_ptr` style dead compares flip them at the cost of a
 //   `sub esp,8` frame and a `have_query` spill.
 int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 {
 	char* record;
-	unsigned short* q;
+	unsigned short* query_result;
 	int total;
 	char have_query;
 	unsigned short* comp_ptr;
@@ -587,7 +587,7 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 
 	record = (char*) g_entity_type_table + (unsigned char) obj[0] * 0x24d;
 	total = *(int*) (record + 0x249) * 0xf00;
-	q = NULL;
+	query_result = NULL;
 	have_query = 0;
 	i = 0;
 	comp_ptr = (unsigned short*) (record + 0x25);
@@ -599,10 +599,10 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 		comp_record = (char*) g_item_def_table + (comp & 0x7fff) * 0x41;
 		if (have_query == 0) {
 			if (*comp_record == 2 || *comp_record == 6) {
-				q = gm_StartEntityQuery(*(int*) (obj + 0x5d), 1, 0, comp & 0x7fff);
-				if (q != NULL) {
-					q_slot = *q;
-					total = (int) (gm_CalculateProductionValue(q_slot, *(unsigned char*) ((char*) q + 0x12)) + (double) total);
+				query_result = gm_StartEntityQuery(*(int*) (obj + 0x5d), 1, 0, comp & 0x7fff);
+				if (query_result != NULL) {
+					q_slot = *query_result;
+					total = (int) (gm_CalculateProductionValue(q_slot, *(unsigned char*) ((char*) query_result + 0x12)) + (double) total);
 					if (i < 0x3f) {
 						next_comp = *comp_ptr;
 						if (((char*) g_item_def_table)[(next_comp & 0x7fff) * 0x41] != 2 && ((char*) g_item_def_table)[(next_comp & 0x7fff) * 0x41] != 6) {
@@ -611,8 +611,8 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 					}
 				}
 			}
-		} else if (q != NULL) {
-			sub = gm_StartEntityQuery(*(int*) ((char*) q + 0x14), 1, 0, comp & 0x7fff);
+		} else if (query_result != NULL) {
+			sub = gm_StartEntityQuery(*(int*) ((char*) query_result + 0x14), 1, 0, comp & 0x7fff);
 			if (sub != NULL) {
 				total = (int) (gm_CalculateProductionValue(*sub, *(unsigned char*) ((char*) sub + 0x12)) + (double) total);
 			}
@@ -660,17 +660,17 @@ int __cdecl gm_EntityQuerySum(int arg1)
 {
 	int sum;
 	void* head;
-	unsigned short* q;
+	unsigned short* query_result;
 
 	sum = 0;
 	head = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 2, 6, sum, 0x2a);
 	if (head != NULL) {
-		q = gm_StartEntityQuery(*(int*) ((char*) head + 0x14), 1, 5);
-		if (q != NULL) {
+		query_result = gm_StartEntityQuery(*(int*) ((char*) head + 0x14), 1, 5);
+		if (query_result != NULL) {
 			do {
-				sum = (int) (gm_CalculateProductionValue(*(unsigned short*) q, *(unsigned char*) ((char*) q + 0x12)) + (double) sum);
-				q = gm_NextEntityQueryMatch();
-			} while (q != NULL);
+				sum = (int) (gm_CalculateProductionValue(*(unsigned short*) query_result, *(unsigned char*) ((char*) query_result + 0x12)) + (double) sum);
+				query_result = gm_NextEntityQueryMatch();
+			} while (query_result != NULL);
 		}
 	}
 	return sum;
@@ -801,27 +801,27 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 char* __cdecl gm_FindEntityByOwner(int arg1)
 {
 	int i;
-	int p;
-	char* r;
+	int record_cursor;
+	char* record;
 
-	r = NULL;
+	record = NULL;
 	if (arg1 == 0) {
-		return r;
+		return record;
 	}
 	i = 0;
-	p = 0x100358a2;
-	while (p < 0x1009aca2) {
-		if (*(char*) (p + 0x162) != 0 && *(int*) (p + 0x16a) == arg1) {
-			if (*(char*) p == 6 || *(char*) p == 7 || *(char*) p == 1 ||
-			    *(char*) p == 2) {
-				r = (char*) (0x100358a0 + i * 0x21c);
+	record_cursor = 0x100358a2;
+	while (record_cursor < 0x1009aca2) {
+		if (*(char*) (record_cursor + 0x162) != 0 && *(int*) (record_cursor + 0x16a) == arg1) {
+			if (*(char*) record_cursor == 6 || *(char*) record_cursor == 7 || *(char*) record_cursor == 1 ||
+			    *(char*) record_cursor == 2) {
+				record = (char*) (0x100358a0 + i * 0x21c);
 				break;
 			}
 		}
-		p += 0x21c;
+		record_cursor += 0x21c;
 		i++;
 	}
-	return r;
+	return record;
 }
 
 /* Gets a message field from a command packet. Reads a
@@ -882,7 +882,7 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int item_id, int requested)
 	int size;
 	int count;
 	int msg_field;
-	void* q;
+	void* query_result;
 	int q_id;
 
 	pkt = obj;
@@ -893,9 +893,9 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int item_id, int requested)
 	}
 	is_cat2 = (gm_GetBuildingTypeCategory((unsigned char) *ent) == 2);
 	size = compute_size(pkt, item_id);
-	q = gm_StartEntityQuery(*(int*) (pkt + 0x14), 1, 0, item_id);
-	if (q != NULL) {
-		msg_field = gm_GetMsgField(pkt, (char*) q);
+	query_result = gm_StartEntityQuery(*(int*) (pkt + 0x14), 1, 0, item_id);
+	if (query_result != NULL) {
+		msg_field = gm_GetMsgField(pkt, (char*) query_result);
 		if (size - msg_field > requested) {
 			return requested;
 		}
@@ -913,10 +913,10 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int item_id, int requested)
 	}
 	if (*(unsigned short*) pkt == 0x2a) {
 		count = 0;
-		q = gm_StartEntityQuery(*(int*) (pkt + 0x14), 1, 5);
-		if (q != NULL) {
+		query_result = gm_StartEntityQuery(*(int*) (pkt + 0x14), 1, 5);
+		if (query_result != NULL) {
 			do {
-				q_id = *(unsigned short*) q;
+				q_id = *(unsigned short*) query_result;
 				record = (char*) g_item_def_table + q_id * 0x41;
 				if (is_cat2) {
 					if (is_producer) {
@@ -939,8 +939,8 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int item_id, int requested)
 						}
 					}
 				}
-				q = gm_NextEntityQueryMatch();
-			} while (q != NULL);
+				query_result = gm_NextEntityQueryMatch();
+			} while (query_result != NULL);
 		}
 		if (is_producer) {
 			if (count >= *(unsigned char*) (pkt + 0x1c)) {
@@ -954,12 +954,12 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int item_id, int requested)
 		goto limited;
 	}
 	count = 0;
-	q = gm_StartEntityQuery(*(int*) (pkt + 0x14), 1, 5);
-	if (q != NULL) {
+	query_result = gm_StartEntityQuery(*(int*) (pkt + 0x14), 1, 5);
+	if (query_result != NULL) {
 		do {
 			count++;
-			q = gm_NextEntityQueryMatch();
-		} while (q != NULL);
+			query_result = gm_NextEntityQueryMatch();
+		} while (query_result != NULL);
 	}
 	if (count >= *(unsigned char*) (pkt + 0x1c)) {
 		return 0;
@@ -980,8 +980,8 @@ limited:
 //       list[7] then comes from ebp as the target has it (`mov [esp+0x2c],ebp`
 //       at 0x10019f2c) rather than esi, and the first 26 bytes match rather
 //       than the first 20. 278 -> 279.
-//     - seeding the scan through an escaped pointer (`pl = list; ppl = &pl;
-//       elem = **ppl;`) instead of `elem = list[0]`. Taking pl's address stops
+//     - seeding the scan through an escaped pointer (`list_cursor = list; ppl = &list_cursor;
+//       elem = **ppl;`) instead of `elem = list[0]`. Taking list_cursor's address stops
 //       msvc6 constant-propagating list[0] == 8, so it no longer peels the
 //       first compare into `cmp edx,8` with the loop entered at &list[1];
 //       the target holds 8 in a register (`mov eax,8` at 0x10019f40), enters
@@ -1071,7 +1071,7 @@ limited:
 //   as one multiply (250); `elem = 8` as a literal instead of `list[0]` (250);
 //   a `while (elem != 0)` loop rotation (31 raw, 397 bytes - it does emit the
 //   target's `mov eax,8` / `lea ecx,[esp+0x10]` / `cmp eax,edx` scan head
-//   exactly, but loses the prologue); reading `*pl` instead of `pl[1]` (41 raw,
+//   exactly, but loses the prologue); reading `*list_cursor` instead of `list_cursor[1]` (41 raw,
 //   396); the sentinel compared against `in_list` or `cap` to share a zero
 //   register (250, inert); the list written as eight element stores with
 //   list[7] sourced from `cap` (250); moving `cap = 0` after `in_list = 0`
@@ -1081,7 +1081,7 @@ limited:
 //   merge (84 raw, 398).
 //
 //   2026-09-06 pass 2 (no score change, kept 291): a `do/while (elem != type)`
-//   scan with the sentinel as a top break, the bump as `pl++; elem = *pl;`
+//   scan with the sentinel as a top break, the bump as `list_cursor++; elem = *list_cursor;`
 //   and a post-loop hit test scores 292 at the same size, but every
 //   post-loop spelling tried (`if (elem == type)`, `if (elem != 0)`, entry
 //   `if/else` guard, hit-break-inside, compound bottom conditions) either
@@ -1105,12 +1105,12 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 	char* entity;
 	unsigned char type_byte;
 	int type;
-	int* pl;
+	int* list_cursor;
 	int** ppl;
 	int elem;
 	int in_list;
 	int used;
-	void* q;
+	void* query_result;
 	int count;
 	int cap;
 
@@ -1131,16 +1131,16 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 		return requested;
 	}
 	type = type_byte & 0xff;
-	pl = list;
-	ppl = &pl;
+	list_cursor = list;
+	ppl = &list_cursor;
 	elem = **ppl;
 	for (;;) {
 		if (elem == type) {
 			in_list = 1;
 			break;
 		}
-		elem = pl[1];
-		pl++;
+		elem = list_cursor[1];
+		list_cursor++;
 		if (elem == 0) {
 			break;
 		}
@@ -1156,10 +1156,10 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 	if (in_list == 0) {
 		return 0;
 	}
-	q = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 0, entity_index);
-	if (q != NULL) {
+	query_result = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 0, entity_index);
+	if (query_result != NULL) {
 		ahm_LookupEntityInTable(entity_index);
-		used = *(int*) ((char*) q + 0xe);
+		used = *(int*) ((char*) query_result + 0xe);
 		if (used + requested > 3) {
 			cap = 3 - used;
 		} else {
@@ -1167,14 +1167,14 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 		}
 	} else {
 		count = 0;
-		q = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 5);
-		if (q != NULL) {
+		query_result = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 5);
+		if (query_result != NULL) {
 			do {
-				if (*(char*) ((char*) g_item_def_table + *(unsigned short*) q * 0x41) != 9) {
+				if (*(char*) ((char*) g_item_def_table + *(unsigned short*) query_result * 0x41) != 9) {
 					count++;
 				}
-				q = gm_NextEntityQueryMatch();
-			} while (q != NULL);
+				query_result = gm_NextEntityQueryMatch();
+			} while (query_result != NULL);
 		}
 		if (count < 6) {
 			if (requested > 3) {

@@ -55,7 +55,7 @@ int __cdecl lb_ExPlayerlist(unsigned int* player, unsigned char* msg)
 // lb_SendLobbyConfig
 int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 {
-	int v;
+	int value;
 	int result;
 	unsigned char* conn;
 	unsigned char* rec;
@@ -77,9 +77,9 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 		result = cm_QueuePlayerCommand(player, msg);
 		return (result + 1 == 0) ? -1 : 0;
 	}
-	v = *(int *) (msg + 0x18);
-	*(int *) ((char *) player + 0x264210) = v;
-	if (v != 0) {
+	value = *(int *) (msg + 0x18);
+	*(int *) ((char *) player + 0x264210) = value;
+	if (value != 0) {
 		*player |= 0x800;
 	} else {
 		*player &= ~0x800;

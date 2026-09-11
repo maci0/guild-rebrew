@@ -54,16 +54,16 @@ int __cdecl crt_heap_init(int mode)
 void __cdecl __heap_term(void)
 {
     int i;
-    pool_region* r;
+    pool_region* region;
 
     if (__active_heap == 3)
     {
-        r = (pool_region*)__sbh_pHeaderList;
-        for (i = 0; i < __sbh_cntHeaderList; r++, i++)
+        region = (pool_region*)__sbh_pHeaderList;
+        for (i = 0; i < __sbh_cntHeaderList; region++, i++)
         {
-            VirtualFree(r->base, 0x100000, MEM_DECOMMIT);
-            VirtualFree(r->base, 0, MEM_RELEASE);
-            HeapFree(_crtheap, 0, r->header);
+            VirtualFree(region->base, 0x100000, MEM_DECOMMIT);
+            VirtualFree(region->base, 0, MEM_RELEASE);
+            HeapFree(_crtheap, 0, region->header);
         }
         HeapFree(_crtheap, 0, __sbh_pHeaderList);
     }
@@ -97,8 +97,8 @@ int __cdecl fcn_1001d280(void)
     char env[0x1090];
     char module[0x104];
     char major;
-    char* p;
-    char* q;
+    char* env_cursor;
+    char* comma;
     int value;
     unsigned int n;
 
@@ -107,50 +107,50 @@ int __cdecl fcn_1001d280(void)
         return 1;
     if (GetEnvironmentVariableA("__MSVCRT_HEAP_SELECT", env, 0x1090) == 0)
         goto checkver;
-    p = env;
-    while (*p != 0)
+    env_cursor = env;
+    while (*env_cursor != 0)
     {
-        if (*p >= 'a' && *p <= 'z')
-            *p -= 0x20;
-        p++;
+        if (*env_cursor >= 'a' && *env_cursor <= 'z')
+            *env_cursor -= 0x20;
+        env_cursor++;
     }
     if (fcn_10021200("__GLOBAL_HEAP_SELECTED", env, 0x16) == 0)
-        p = env;
+        env_cursor = env;
     else
     {
         if (GetModuleFileNameA(NULL, module, 0x104) != 0)
         {
-            p = module;
-            while (*p != 0)
+            env_cursor = module;
+            while (*env_cursor != 0)
             {
-                if (*p >= 'a' && *p <= 'z')
-                    *p -= 0x20;
-                p++;
+                if (*env_cursor >= 'a' && *env_cursor <= 'z')
+                    *env_cursor -= 0x20;
+                env_cursor++;
             }
-            p = strstr(env, module);
+            env_cursor = strstr(env, module);
         }
         else
-            p = NULL;
+            env_cursor = NULL;
     }
-    if (p != NULL)
+    if (env_cursor != NULL)
     {
-        char* r;
+        char* region;
 
-        q = fcn_1001af30(p, ',');
-        if (q != NULL)
+        comma = fcn_1001af30(env_cursor, ',');
+        if (comma != NULL)
         {
-            q++;
-            r = q;
-            while (*r != 0)
+            comma++;
+            region = comma;
+            while (*region != 0)
             {
-                if (*r == ';')
+                if (*region == ';')
                 {
-                    *r = 0;
+                    *region = 0;
                     break;
                 }
-                r++;
+                region++;
             }
-            value = fcn_10020fe1(q, NULL, 10);
+            value = fcn_10020fe1(comma, NULL, 10);
             if (value == 2 || value == 3 || value == 1)
                 return value;
         }
@@ -187,17 +187,17 @@ int __cdecl fcn_1001d4cd(unsigned int size)
 
 void __cdecl fcn_1001d253(char* out)
 {
-    char* h;
+    char* module_base;
 
     *(int*)out = 0;
-    h = (char*)GetModuleHandleA(NULL);
-    if (*(unsigned short*)h == 0x5a4d)
+    module_base = (char*)GetModuleHandleA(NULL);
+    if (*(unsigned short*)module_base == 0x5a4d)
     {
-        unsigned int e = *(unsigned int*)(h + 0x3c);
+        unsigned int e = *(unsigned int*)(module_base + 0x3c);
 
         if (e != 0)
         {
-            char* pe = h + e;
+            char* pe = module_base + e;
 
             out[0] = pe[0x1a];
             out[1] = pe[0x1b];

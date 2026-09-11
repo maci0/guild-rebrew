@@ -113,37 +113,37 @@ error:
 
 int __cdecl gm_GetFieldByType(char* p, int type)
 {
-	unsigned int x;
+	unsigned int byte_value;
 	unsigned int i;
 
 	if (type == -2) {
-		x = (unsigned char) p[3];
-		i = x << 4;
-		i += x;
+		byte_value = (unsigned char) p[3];
+		i = byte_value << 4;
+		i += byte_value;
 		i <<= 8;
-		i += x;
+		i += byte_value;
 		i <<= 4;
-		i += x;
+		i += byte_value;
 		return ((int*) 0x10442d00)[i * 9];
 	}
 	if (type == -3) {
-		x = (unsigned char) p[3];
-		i = x << 4;
-		i += x;
+		byte_value = (unsigned char) p[3];
+		i = byte_value << 4;
+		i += byte_value;
 		i <<= 8;
-		i += x;
+		i += byte_value;
 		i <<= 4;
-		i += x;
+		i += byte_value;
 		return ((int*) 0x10442d04)[i * 9];
 	}
 	if (type == -4) {
-		x = (unsigned char) p[3];
-		i = x << 4;
-		i += x;
+		byte_value = (unsigned char) p[3];
+		i = byte_value << 4;
+		i += byte_value;
 		i <<= 8;
-		i += x;
+		i += byte_value;
 		i <<= 4;
-		i += x;
+		i += byte_value;
 		return ((int*) 0x10442d08)[i * 9];
 	}
 	return type;
