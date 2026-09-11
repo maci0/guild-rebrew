@@ -391,9 +391,9 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	int min_val;
 	int divisor;
 	int weight;
-	int* dp;
+	int* divisor_ptr;
 	unsigned short comp;
-	unsigned short* cp;
+	unsigned short* ingredient_cursor;
 	double* sub;
 	int slot;
 	int* slot_p;
@@ -432,8 +432,8 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 	   See docs/msvc6-c-shapes.md. */
 	quot = (double) (unsigned int) *(volatile int*) (entity + 0x22);
 	divisor = (*(unsigned short*) (entity + 0x36) == 0) + *(unsigned short*) (entity + 0x36);
-	dp = &divisor;
-	quot = quot / *dp;
+	divisor_ptr = &divisor;
+	quot = quot / *divisor_ptr;
 	min_val = *(int*) (entity_index * 4 + 0x101dd8e0);
 	record = g_entity_type_table + min_val * 0x24d;
 	if (min_val != 0) {
@@ -481,13 +481,13 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 		mod_value = value;
 		return (float) ((double) mod_value * g_const_2_2);
 	}
-	cp = (unsigned short*) (entity + 0x2e);
+	ingredient_cursor = (unsigned short*) (entity + 0x2e);
 	/* A `while` with the counter incremented ahead of the pointer gives the
 	   target's `inc ebx` / `add edi,2` order; a `for` header emits them the
 	   other way round. */
 	i = 0;
 	while (i < 4) {
-		comp = *cp;
+		comp = *ingredient_cursor;
 		if (comp == 0) {
 			break;
 		}
@@ -503,7 +503,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 			slot_v = (volatile int*) &slot;
 			sub = &quot;
 			*sub = gm_CalculateProductionValue(comp, param2);
-			*slot_p = (int) cp[-4];
+			*slot_p = (int) ingredient_cursor[-4];
 			*sub = *sub * *slot_p;
 			*slot_v = (int) *(unsigned short*) (entity + 0x36);
 			*sub = *sub / *slot_v;
@@ -511,7 +511,7 @@ double __cdecl gm_CalculateProductionValue(int entity_index, int param2)
 			value = (float) *sub;
 		}
 		i++;
-		cp++;
+		ingredient_cursor++;
 	}
 	/* Homing the masked param2 through a PLAIN int alias and widening it in a
 	   separate statement makes it the FPU stack top, so the epilogue is

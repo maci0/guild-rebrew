@@ -44,7 +44,7 @@ void* __cdecl gm_LookupEntityRecordById(int entityId);
 int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 {
 	unsigned char* rec;
-	unsigned char b;
+	unsigned char holder;
 	OFFICE_SLOT* p;
 	int i;
 
@@ -64,8 +64,8 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 	    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
 	    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4)
 		return 0;
-	b = ((OFFICE_SLOT*) g_office_slots)[i].b;
-	if (((unsigned char*) arg1)[6] != b)
+	holder = ((OFFICE_SLOT*) g_office_slots)[i].b;
+	if (((unsigned char*) arg1)[6] != holder)
 		return 0;
 
 	if (((unsigned char*) arg1)[5] != 0xff) {
@@ -77,7 +77,7 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 		if (i >= 30)
 			return 0;
 
-		if (b != ((OFFICE_SLOT*) g_office_slots)[i].b ||
+		if (holder != ((OFFICE_SLOT*) g_office_slots)[i].b ||
 		    ((OFFICE_SLOT*) g_office_slots)[i].a != -1 ||
 		    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
 		    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4)
@@ -122,10 +122,10 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* arg1)
 {
 	unsigned char* cmd;
-	unsigned int* hp;
+	unsigned int* arg1_alias;
 	unsigned char* rec;
 	unsigned char x5;
-	unsigned int hw;
+	unsigned int arg1_value;
 	int f0v;
 	COPY24 copy;
 	int i;
@@ -159,32 +159,32 @@ unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* arg1)
 		if (((OFFICE_SLOT*) g_office_slots)[i].b != ((OFFICE_SLOT*) g_office_slots)[j].b)
 			return 0;
 		copy = g_office_role_templates[((OFFICE_SLOT*) g_office_slots)[i].b];
-		hp = (unsigned int*) &arg1;
-		hw = *hp;
+		arg1_alias = (unsigned int*) &arg1;
+		arg1_value = *arg1_alias;
 		f0v = copy.f0;
-		if (f0v != (int) (hw & 0xff) || copy.f10 == 0)
+		if (f0v != (int) (arg1_value & 0xff) || copy.f10 == 0)
 			return 0;
 		{
-			int ai;
-			int aj;
-			ai = ((OFFICE_SLOT*) g_office_slots)[i].a;
-			aj = ((OFFICE_SLOT*) g_office_slots)[j].a;
-			if (ai != -1 ||
+			int type_i;
+			int type_j;
+			type_i = ((OFFICE_SLOT*) g_office_slots)[i].a;
+			type_j = ((OFFICE_SLOT*) g_office_slots)[j].a;
+			if (type_i != -1 ||
 			    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
 			    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4 ||
-			    aj != -1 ||
+			    type_j != -1 ||
 			    ((OFFICE_SLOT*) g_office_slots)[j].c >= 4)
 				return 0;
-			rec[0x168] = (unsigned char) hw;
+			rec[0x168] = (unsigned char) arg1_value;
 			((OFFICE_SLOT*) g_office_slots)[i].c++;
 			((OFFICE_SLOT*) g_office_slots)[j].c++;
 			return 1;
 		}
 	}
 	{
-		int ai;
-		ai = ((OFFICE_SLOT*) g_office_slots)[i].a;
-		if (ai != -1 ||
+		int type_i;
+		type_i = ((OFFICE_SLOT*) g_office_slots)[i].a;
+		if (type_i != -1 ||
 		    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
 		    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4)
 			return 0;
