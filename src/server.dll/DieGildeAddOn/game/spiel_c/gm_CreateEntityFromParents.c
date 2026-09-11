@@ -33,10 +33,13 @@
  *     the target's `lea ecx,[edx+0x68]` ahead of `inc al` (781 -> 782).
  *   - in the citizen path `slot[9] = ent[0xd5]` precedes
  *     `slot[0x164] = ent[0xd4]` (782 -> 785).
- *   - the idx>=6 selector is spelled as a subtraction from the high base,
- *     `0xc2 - (idx >= 6 ? 0x86 : 0)`, which emits the target's
- *     setge / dec / and 0x86 / add 0x3c; the addition form emits an extra
- *     `add al` (858 -> 859).
+ *   - the idx>=6 selector must be the addition form,
+ *     `0x3c + (idx < 6 ? 0x86 : 0)`, which emits the target's
+ *     setge / dec / and 0x86 / add 0x3c.  The subtraction spelling
+ *     `0xc2 - (idx >= 6 ? 0x86 : 0)` emits setl / sub instead (the earlier
+ *     note here had the two forms the wrong way round); switching it takes
+ *     the alignment from 616 to 617 of 1056 and the object from 3698 back to
+ *     3694.
  *
  * Measured dead ends, all reverted (score from the 859 base unless noted):
  *   - every remaining `_ftol` site as a plain `(int)` cast: 473 / 471 / 470
@@ -260,7 +263,7 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 			} else if (idx < 4) {
 				slot[0x217] = 0x5c;
 			}
-			slot[0x217] = (char) (0xc2 - (idx >= 6 ? 0x86 : 0));
+			slot[0x217] = (char) (0x3c + (idx < 6 ? 0x86 : 0));
 			if ((double) *(unsigned short*) (slot + 0xa) >
 			    *(float*) (slot + 0x20)) {
 				acc = *(float*) (slot + 0x1c);
