@@ -58,30 +58,30 @@ extern char s_cm_ChkChangeBits___Invalid_actio_1002ca04[];
 // FUNCTION: SERVER 0x1000cf30
 int __cdecl cm_ChkChangeBits(int cmd, char* result)
 {
-	void* a;
-	void* b;
-	void* c;
+	void* ent_c;
+	void* entity_or_node;
+	void* ent_a;
 	void* sel;
 	int r;
 
 	(void) result;
 	r = gm_GetFieldByType((char*) cmd, *(int *) (cmd + 0x10));
 	*(int *) (cmd + 0x10) = r;
-	if (gm_ResolveEntityById(&c, &b, &a, r) == 0) {
+	if (gm_ResolveEntityById(&ent_a, &entity_or_node, &ent_c, r) == 0) {
 		LogMessageInternal((char*) 0x1002c748, 0x250d, (char*) 0x1002ca54, 1);
 		return 1;
 	}
-	sel = c ? c : (b ? b : a);
-	if (a == 0) {
+	sel = ent_a ? ent_a : (entity_or_node ? entity_or_node : ent_c);
+	if (ent_c == 0) {
 		return 0;
 	}
-	if (*(int *) (cmd + 0x14) + (int) sel != (int) a + 0x1c8) {
+	if (*(int *) (cmd + 0x14) + (int) sel != (int) ent_c + 0x1c8) {
 		return 0;
 	}
 	if (!(*(int *) (cmd + 0x1c) & 0x800000)) {
 		return 0;
 	}
-	if (*(int *) ((char*) a + 0x1c8) & 0x800000) {
+	if (*(int *) ((char*) ent_c + 0x1c8) & 0x800000) {
 		LogMessageInternal((char*) 0x1002c748, 0x2533, (char*) 0x1002ca04, 1);
 		return 1;
 	}

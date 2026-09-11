@@ -34,7 +34,7 @@ extern int g_dynasty_field_4c; /* 0x1003544c */
 
 int __cdecl gm_AddOrAccumulateObject(int a, int b, int c)
 {
-	char* p;
+	char* list_head;
 	void* dyn;
 	void* exi;
 	void* sta;
@@ -50,11 +50,11 @@ int __cdecl gm_AddOrAccumulateObject(int a, int b, int c)
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", 0xdfd, buf, 8);
 		return 0;
 	}
-	if (dyn != 0) p = (char*) dyn + 0x5d;
-	else if (exi != 0) p = (char*) exi + 0x14;
-	else if (sta != 0) p = (char*) sta + 0x178;
+	if (dyn != 0) list_head = (char*) dyn + 0x5d;
+	else if (exi != 0) list_head = (char*) exi + 0x14;
+	else if (sta != 0) list_head = (char*) sta + 0x178;
 	else return 0;
-	exi = (void*) gm_StartEntityQuery(*(int*) p, 1, 0, b);
+	exi = (void*) gm_StartEntityQuery(*(int*) list_head, 1, 0, b);
 	if (exi == 0) {
 		return (int) gm_AllocObjekt(a, b, c);
 	}
@@ -71,7 +71,7 @@ int __cdecl gm_AddOrAccumulateObject(int a, int b, int c)
 
 int __cdecl gm_SubObjekt(int a, int b, int c)
 {
-	char* p;
+	char* list_head;
 	void* dyn;
 	void* sta;
 
@@ -80,11 +80,11 @@ int __cdecl gm_SubObjekt(int a, int b, int c)
 		                   "gm_SubObjekt(): Parent not found", 1);
 		return 0;
 	}
-	if (dyn != 0) p = (char*) dyn + 0x5d;
-	else if (a != 0) p = (char*) a + 0x14;
-	else if (sta != 0) p = (char*) sta + 0x178;
+	if (dyn != 0) list_head = (char*) dyn + 0x5d;
+	else if (a != 0) list_head = (char*) a + 0x14;
+	else if (sta != 0) list_head = (char*) sta + 0x178;
 	else return 0;
-	a = (int) gm_StartEntityQuery(*(int*) p, 1, 0, b);
+	a = (int) gm_StartEntityQuery(*(int*) list_head, 1, 0, b);
 	if (a == 0) {
 		return 0;
 	}
@@ -93,7 +93,7 @@ int __cdecl gm_SubObjekt(int a, int b, int c)
 	}
 	*(int*) (a + 0xe) -= c;
 	if (*(int*) (a + 0xe) <= 0) {
-		gm_RemoveObjectByType(p, b);
+		gm_RemoveObjectByType(list_head, b);
 	}
 	return 1;
 }
@@ -113,7 +113,7 @@ int __cdecl gm_SubObjekt(int a, int b, int c)
 
 int __cdecl gm_SubObjektNoKill(int a, int b, int c)
 {
-	char* p;
+	char* list_head;
 	void* exi;
 	void* dyn;
 	void* sta;
@@ -123,18 +123,18 @@ int __cdecl gm_SubObjektNoKill(int a, int b, int c)
 		                   "gm_SubObjectNoKill(): Parent not found", 1);
 		return 0;
 	}
-	if (dyn != 0) p = (char*) dyn + 0x5d;
-	else if (exi != 0) p = (char*) exi + 0x14;
-	else if (sta != 0) p = (char*) sta + 0x178;
+	if (dyn != 0) list_head = (char*) dyn + 0x5d;
+	else if (exi != 0) list_head = (char*) exi + 0x14;
+	else if (sta != 0) list_head = (char*) sta + 0x178;
 	else return 0;
-	exi = (void*) gm_StartEntityQuery(*(int*) p, 1, 0, b);
+	exi = (void*) gm_StartEntityQuery(*(int*) list_head, 1, 0, b);
 	if (exi == 0) {
 		exi = (void*) gm_AllocObjekt(a, b, 1);
 		*(int*) ((char*) exi + 0xe) = 0;
 	}
 	*(int*) ((char*) exi + 0xe) -= c;
 	if (*(int*) ((char*) exi + 0xe) == 0) {
-		gm_RemoveObjectByType(p, b);
+		gm_RemoveObjectByType(list_head, b);
 	}
 	return 1;
 }
@@ -339,7 +339,7 @@ int __cdecl gm_SubObjektNoKill(int a, int b, int c)
 
 void* __cdecl gm_FindNextFilteredEntity(void)
 {
-	unsigned char* p;
+	unsigned char* list_head;
 	unsigned char* end;
 	unsigned char match;
 
@@ -352,34 +352,34 @@ void* __cdecl gm_FindNextFilteredEntity(void)
 		return 0;
 	}
 	if (g_dynasty_field_49 != 0) {
-		p = g_query_filter_base;
+		list_head = g_query_filter_base;
 		g_dynasty_field_49 = 0;
-		if (p < end) {
-			while (*p == 0) {
-				p += 0xa9;
-				g_query_filter_base = p;
-				if (p >= end) {
+		if (list_head < end) {
+			while (*list_head == 0) {
+				list_head += 0xa9;
+				g_query_filter_base = list_head;
+				if (list_head >= end) {
 					break;
 				}
 			}
 		}
 		goto candidate;
 	} else {
-		p = g_query_filter_base;
+		list_head = g_query_filter_base;
 		do {
-			p += 0xa9;
-			g_query_filter_base = p;
-			if (p < end) {
+			list_head += 0xa9;
+			g_query_filter_base = list_head;
+			if (list_head < end) {
 				goto a2;
 			}
 			return 0;
 		a2:
 			;
-		} while (*p == 0);
+		} while (*list_head == 0);
 	}
 candidate:
 	match = 0;
-	if (p >= end) {
+	if (list_head >= end) {
 		return 0;
 	}
 	for (;;) {
@@ -387,31 +387,31 @@ candidate:
 			match = 1;
 		}
 		if (g_filter_extra5 != 0xff) {
-			if (*p != g_filter_extra5) {
+			if (*list_head != g_filter_extra5) {
 				goto no_match;
 			}
 			match = 1;
 		}
 		if (g_query_filter_extra1 != -1) {
-			if (*(int*) (p + 1) != g_query_filter_extra1) {
+			if (*(int*) (list_head + 1) != g_query_filter_extra1) {
 				goto no_match;
 			}
 			match = 1;
 		}
 		if (g_query_filter_extra2 != 0x7fff) {
-			if (*(short*) (p + 0x25) != g_query_filter_extra2) {
+			if (*(short*) (list_head + 0x25) != g_query_filter_extra2) {
 				goto no_match;
 			}
 			match = 1;
 		}
 		if (g_query_filter_extra3 != 0x7fff) {
-			if (*(short*) (p + 0x27) != g_query_filter_extra3) {
+			if (*(short*) (list_head + 0x27) != g_query_filter_extra3) {
 				goto no_match;
 			}
 			match = 1;
 		}
 		if (g_query_filter_extra4 != 0xff) {
-			match = (*(unsigned char*) ((char*) g_entity_type_table + *p + *p * 588) ==
+			match = (*(unsigned char*) ((char*) g_entity_type_table + *list_head + *list_head * 588) ==
 			         g_query_filter_extra4);
 		}
 		goto counted;
@@ -420,18 +420,18 @@ candidate:
 	counted:
 		g_dynasty_field_4c++;
 		if (match == 0) {
-			while (*p == 0 || 1) {
-				p += 0xa9;
-				g_query_filter_base = p;
-				if (p >= end) {
+			while (*list_head == 0 || 1) {
+				list_head += 0xa9;
+				g_query_filter_base = list_head;
+				if (list_head >= end) {
 					break;
 				}
-				if (*p != 0) {
+				if (*list_head != 0) {
 					break;
 				}
 			}
 		}
-		if (p >= end) {
+		if (list_head >= end) {
 			break;
 		}
 		if (match != 0) {
@@ -440,7 +440,7 @@ candidate:
 	}
 	if (match == 0) {
 		g_query_filter_base = 0;
-		p = 0;
+		list_head = 0;
 	}
-	return p;
+	return list_head;
 }

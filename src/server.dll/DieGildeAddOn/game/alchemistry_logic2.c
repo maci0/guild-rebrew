@@ -187,20 +187,20 @@ int __cdecl ahm_SearchAndSet(SRC* src, TGT* tgt)
 
 int __cdecl ahm_ClampFloatValue(float* arg1, float* arg2)
 {
-	float v;
-	float c;
+	float sum;
+	float clamp;
 
-	v = arg1[4] + arg2[1];
-	if (v > g_const_0_0 && v < g_const_1_0) {
-		arg2[1] = v;
+	sum = arg1[4] + arg2[1];
+	if (sum > g_const_0_0 && sum < g_const_1_0) {
+		arg2[1] = sum;
 		return 1;
 	}
-	if (v <= g_const_0_0) {
-		c = g_const_0_0;
+	if (sum <= g_const_0_0) {
+		clamp = g_const_0_0;
 	} else {
-		c = g_const_1_0;
+		clamp = g_const_1_0;
 	}
-	arg2[1] = c;
+	arg2[1] = clamp;
 	return 1;
 }
 
@@ -296,7 +296,7 @@ char* __cdecl ahm_InitRandomEntity(void)
 	unsigned int idx;
 	int counter;
 	unsigned int off;
-	float* p;
+	float* table_cursor;
 	int n;
 
 	idx = gm_RandomMod(0x20) & 0xffff;
@@ -310,13 +310,13 @@ char* __cdecl ahm_InitRandomEntity(void)
 	return 0;
 found:
 	off = idx * 244;
-	p = (float*) (0x1002a200 + off);
+	table_cursor = (float*) (0x1002a200 + off);
 	n = 0xe;
 	do {
 		/* volatile pins the store right after the multiply; without it
 		 * MSVC6 sinks it past the pointer bump to `fstp [eax-0xc]`. */
-		*(volatile float*) p = p[-1] * g_dbl_const_6d0;
-		p += 3;
+		*(volatile float*) table_cursor = table_cursor[-1] * g_dbl_const_6d0;
+		table_cursor += 3;
 		n--;
 	} while (n != 0);
 	*(unsigned char*) (0x1002a2c2 + off) = 1;
@@ -329,10 +329,10 @@ found:
 int* __cdecl ahm_LookupEntityInTable(int entity_id)
 {
 	int i;
-	int* p;
+	int* table_cursor;
 
-	for (i = 0, p = g_alchemy_entity_table; (int) p < (int) (g_alchemy_entity_table + 0x17 * 10); p += 0x17, i++) {
-		if (*p == entity_id) {
+	for (i = 0, table_cursor = g_alchemy_entity_table; (int) table_cursor < (int) (g_alchemy_entity_table + 0x17 * 10); table_cursor += 0x17, i++) {
+		if (*table_cursor == entity_id) {
 			return g_alchemy_entity_table + i * 0x17;
 		}
 	}

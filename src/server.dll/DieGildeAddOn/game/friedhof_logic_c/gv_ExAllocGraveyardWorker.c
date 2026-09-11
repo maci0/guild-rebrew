@@ -437,7 +437,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	void* slot;
 	void* workers;
 	void* p;
-	int gv;
+	int grave_cursor;
 	char* grave;
 	int chosen;
 	int j;
@@ -484,20 +484,20 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	if (!entry || *(int*) entry != job_id)
 		goto fail_ffff;
 	chosen = 0;
-	gv = 0x100358a0;
-	while (gv < 0x1009aca0) {
-		if (*(unsigned short*) gv == 0xffff)
+	grave_cursor = 0x100358a0;
+	while (grave_cursor < 0x1009aca0) {
+		if (*(unsigned short*) grave_cursor == 0xffff)
 			break;
-		gv += 0x21c;
+		grave_cursor += 0x21c;
 		chosen++;
 	}
 	if (chosen == 0x300) {
 		chosen = 0;
-		gv = 0x100358a2;
-		while (gv < 0x1009aca2) {
-			if (*(unsigned char*) gv == 0xf)
+		grave_cursor = 0x100358a2;
+		while (grave_cursor < 0x1009aca2) {
+			if (*(unsigned char*) grave_cursor == 0xf)
 				break;
-			gv += 0x21c;
+			grave_cursor += 0x21c;
 			chosen++;
 		}
 		if (chosen == 0x300) {
@@ -575,21 +575,21 @@ fail_ffff:
 		iv = 0;
 		for (n = 0; n < 0x90000; n += 0x300) {
 			int a = n + *(volatile unsigned short*) grave;
-			int b;
-			int r;
+			int byte_offset;
+			int random_value;
 			int col;
-			r = gm_RandomMod(0x40);
+			random_value = gm_RandomMod(0x40);
 			g_relationship_matrix_secondary[a] = 0;
-			g_relationship_matrix_primary[a] = (unsigned char) r - 0x20;
+			g_relationship_matrix_primary[a] = (unsigned char) random_value - 0x20;
 			col = iv;
-			b = *(volatile unsigned short*) grave * 0x300 + col;
+			byte_offset = *(volatile unsigned short*) grave * 0x300 + col;
 			/* The counter bump sits between the call and its stores to
 			 * match the reference's `add esi,0x300` / `inc edx` at
 			 * 0x10011f68, ahead of the store pair at 0x10011f75. */
-			r = gm_RandomMod(0x40);
+			random_value = gm_RandomMod(0x40);
 			iv = iv + 1;
-			g_relationship_matrix_primary[b] = (unsigned char) r - 0x20;
-			g_relationship_matrix_secondary[b] = 0;
+			g_relationship_matrix_primary[byte_offset] = (unsigned char) random_value - 0x20;
+			g_relationship_matrix_secondary[byte_offset] = 0;
 		}
 	}
 	if (*(int*) entry == *(int*) ((char*) slot + 4)) {
