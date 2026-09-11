@@ -86,24 +86,45 @@ instead of SP6's moves `.text` at 2 offsets (112357, 123706), the same
 magnitude as relinking one tree twice.  SP6's `LIBCMT` is compatible with the
 reference for everything our link pulls.
 
-Where the remaining 3,269 B is, with the false leads removed:
-`case.0x1000ad61.*` (15 x 32 B plus a 248 B tail) lies inside `0x1000ad40
-LogWinsockError`, which verifies RELOC over its full 600 B, and `0x10003960
-gzread` (559 B) verifies RELOC in `check_header.c`.  The genuinely absent bytes
-are three CRT members the reference links and ours does not (matched with
-`scripts/check_library_code.py` against LIBCMT):
+Where the remaining 3,269 B is, with the false leads removed: it is CRT member
+selection, not missing game code.  The 279 annotated functions net +29 B
+against the reference (the 19 PROVEN sum to roughly +25, the two walls +4), so
+nothing we reverse explains the deficit.
 
-| reference VA | size | LIBCMT member | object |
+Matching every catalog entry typed `library` (`0x10022ff1`; reloc slots
+zero-filled) against the four MSVC 6.0 `LIBCMT.LIB` variants and every object
+the build compiles leaves 24 entries (3,360 B) with no supplier in the link.
+Three resolve to interior catalog addresses inside members we do have (`0x1001af30`
+is 156 B into `_strchr`, `0x1001aff0` 100 B into `_strstr`, `0x10021ac0` 140 B
+into `_strcmp`), and `strdup`/`isctype`/`setmode_lk` are in the link map, so
+about 2.6 KB are genuinely absent:
+
+| reference VA | size | CRT member | in the link map |
 |---|---|---|---|
-| `0x10022ff1` | 544 | `___ld12mul` | `tenpow.obj` |
-| `0x1001e7dc` | 216 | `__except_handler3` | `exsup3.obj` |
-| `0x1002350a` | 43 | `_strncnt` | `a_cmp.obj` |
+| `0x10022a2f` | 673 | `_ld12cvt` | no |
+| `0x1001b757` | 334 | `_unlock_09e` | no |
+| `0x1001f1e2` | 233 | `_IsProcessorFeaturePresent` | no |
+| `0x100219f7` | 201 | `_dtold` | no |
+| `0x1001e7d4` | 197 | `_exsup` | no |
+| `0x100200a6`, `0x1002001d`, `0x1001a89c`, `0x1001abeb`, `0x1001b8a5`, `0x1001a8fb`, `0x1001ac43` | 156-45 | `_unlock_09f/g/a/c/9/b/d` | no |
+| `0x1001f855` | 123 | `_isctype` | yes |
+| `0x100207b8` | 120 | `_wctomb_lk` | no |
+| `0x10022ea1` | 111 | `_setmode_lk` | yes |
+| `0x1001b088` | 56 | `_init_fptrs` | no |
+| `0x10020915` | 46 | `_crt_once_init` | no |
+| `0x10023812` | 46 | `_strdup` | yes |
+| `0x1001e7ba` | 34 | `_EH3_save_context` | no |
+| `0x1001b070` | 23 | `_fpmath` | no |
+| `0x1001a140` | 14 | `_getpid` | no |
 
-`rebrew xrefs 0x10022ff1` puts both callers (`0x10022094`, `0x10022db7a`)
-inside the CRT, so these cannot be recovered by reversing game code; they are
-the displaced-CRT design (`_fltused` at `link_stubs.c:168`, the `dllmain.c`
-substitution).  Closing them means a link-design change (`/include:` forcing,
-or undoing the displacement), not more decompilation.
+Plus `___ld12mul` (544), `__except_handler3` (216) and `_strncnt` (43) found the
+same way.  `rebrew xrefs 0x10022ff1` puts both callers inside the CRT, so none
+of this is recoverable by reversing game code: our displaced CRT startup
+(`_fltused` at `link_stubs.c:168`, the `dllmain.c` substitution) never
+references the startup/float/stdio path that pulled these members in the
+original.  Closing the gap means a link-design change (`/include:` forcing, or
+a startup that pulls exactly these members instead of nothing), not more
+decompilation.
 
 Tooling: the SP1/SP2/SP3/SP5 images never exported `INCLUDE`/`LIB`, so `rebrew
 match --flag-sweep-toolchains` reported them as compile failures
