@@ -97,12 +97,12 @@ int __cdecl srv_CreateListenSocket(int port)
 
 	/* init player slot flags */
 	{
-		unsigned int* p = &g_player_slot_field;
+		unsigned int* slot_walk = &g_player_slot_field;
 		do {
-			*(int*) ((char*) p - 0x14) = 0;
-			*p = 0xFFFFFFFF;
-			p = (unsigned int*) ((char*) p + 0x264264);
-		} while ((int) p < 0x114ffe34);
+			*(int*) ((char*) slot_walk - 0x14) = 0;
+			*slot_walk = 0xFFFFFFFF;
+			slot_walk = (unsigned int*) ((char*) slot_walk + 0x264264);
+		} while ((int) slot_walk < 0x114ffe34);
 	}
 
 	WSAStartup(0x101, (WSADATA*) wsadata);
@@ -178,14 +178,14 @@ cleanup_wsa:
 
 void __cdecl srv_CleanupSockets(void)
 {
-	int p;
-	p = 0x101deb14;
-	while (p < 0x114ffe34) {
-		if (*(int*) (p - 0x14)) {
-			shutdown(*(int*) p, 2);
-			closesocket(*(int*) p);
+	int slot_walk;
+	slot_walk = 0x101deb14;
+	while (slot_walk < 0x114ffe34) {
+		if (*(int*) (slot_walk - 0x14)) {
+			shutdown(*(int*) slot_walk, 2);
+			closesocket(*(int*) slot_walk);
 		}
-		p += 0x264264;
+		slot_walk += 0x264264;
 	}
 	shutdown(g_net_socket, 2);
 	closesocket(g_net_socket);
@@ -247,7 +247,7 @@ int __cdecl srv_AcceptConnections(void)
 	int addrlen;
 	struct sockaddr addr;
 	char msg[0x100];
-	int p;
+	int slot_walk;
 	unsigned char* slot;
 	int sock;
 	int i;
@@ -256,13 +256,13 @@ int __cdecl srv_AcceptConnections(void)
 		return -1;
 
 	i = 0;
-	p = 0x101deb00;
+	slot_walk = 0x101deb00;
 	while (1) {
-		if (*(int*) p == 0)
+		if (*(int*) slot_walk == 0)
 			break;
-		p += 0x264264;
+		slot_walk += 0x264264;
 		i++;
-		if (p >= 0x114ffe20)
+		if (slot_walk >= 0x114ffe20)
 			goto no_slots;
 	}
 	slot = (unsigned char*) 0x101deb00 + i * 0x264264;

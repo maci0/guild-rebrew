@@ -300,9 +300,9 @@ typedef struct {
  *     the gm_RandomQuadratic call and the multiply chain (741 -> 747),
  *     matching the reference's `mov [esi+0x20],0x41400000` at 0x1000bfe5
  *     sitting between the `fmul` at 0x1000bfdf and the `fadd` at 0x1000bfec.
- *   - cmd_payload read into a `pp` local through `*(volatile int*)&cmd_payload`
+ *   - cmd_payload read into a `slot_ptr` local through `*(volatile int*)&cmd_payload`
  *     at the end of the counter block, with the slot+0xa source byte read
- *     from `pp` non-volatile (747 -> 781).  The volatile qualifier on the
+ *     from `slot_ptr` non-volatile (747 -> 781).  The volatile qualifier on the
  *     POINTER read (not on the byte read as before) is what forces the
  *     reference's separate `mov ecx,[esp+0x1c]` at 0x1000bf38; qualifying the
  *     byte read instead pins the movzx but leaves the pointer folded.
@@ -324,7 +324,7 @@ typedef struct {
  *     or `++`, `one = 1` at five further positions down the flat store list.
  *     Regressions: a volatile `one` store 338, `one` read from a const global
  *     313, the index store after the cc writeback 719, the object-id read
- *     before the cc bump 718, the `pp` read hoisted into the cc slack 179.
+ *     before the cc bump 718, the `slot_ptr` read hoisted into the cc slack 179.
  *   - grid loop holds the store address in edi (also its counter) where the
  *     reference uses ebp, so all four `mov byte ptr [reg+TABLE]` stores and
  *     the `add`/`cmp` pair differ by one register field.  Inert: subscripts on
@@ -346,7 +346,7 @@ typedef struct {
  * Also measured on the 787 body and reverted: the fv-block expression in five
  * groupings (`(v+a)-b`, `a+v-b`, `v+(a-b)` 734, a sum temp, v as double, all
  * inert or worse), the slot+0x18 copy through an int temp read before the
- * gm_RandomMod call (439) or after it (446), `alch_props` read through `pp`
+ * gm_RandomMod call (439) or after it (446), `alch_props` read through `slot_ptr`
  * (314), and dropping the alch-data reload between the slot-id store and the
  * float (554).
  *
@@ -363,7 +363,7 @@ typedef struct {
  *   - a `p1` local for the first slot+0x1c multiply of the slot+0x10
  *     expression (802 -> 817), which pins `fld [esi+0x1c]; fmul [const]` at
  *     the reference's 0x1000c022 instead of hoisting the constant.
- *   - the `pp` read (cmd_payload through a volatile int) moved OUT of the
+ *   - the `slot_ptr` read (cmd_payload through a volatile int) moved OUT of the
  *     counter block down to its use at the slot+0xa store (817 -> 823).  The
  *     pass-5 note that placed it at the end of the counter block was the best
  *     position for the 747 body; on the 817 body the use site is better,
@@ -427,7 +427,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	int one;
 	int minus_one;
 	int i;
-	int pp;
+	int slot_ptr;
 
 	building_id = *(int*) (cmd_payload + 8);
 	gm_ResolveEntityById(&dynamic, 0, 0, building_id);
@@ -509,8 +509,8 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	 * at 0x1000bf48 instead of reusing a register that already holds the
 	 * pointer.  It belongs here at the use site, not in the counter block:
 	 * the reference reloads after the object-id writeback, not before. */
-	pp = *(volatile int*) &cmd_payload;
-	*(unsigned short*) (slot + 0xa) = *(unsigned char*) (pp + 0x10);
+	slot_ptr = *(volatile int*) &cmd_payload;
+	*(unsigned short*) (slot + 0xa) = *(unsigned char*) (slot_ptr + 0x10);
 	*(char*) (slot + 0x164) = 0x52;
 	*(char*) (slot + 0x166) = 0;
 	*(char*) (slot + 0x165) = 0;

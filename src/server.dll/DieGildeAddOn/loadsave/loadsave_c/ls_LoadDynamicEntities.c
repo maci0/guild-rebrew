@@ -43,7 +43,7 @@ int __cdecl ls_LoadDynamicEntities(void* file)
     int i;
     int count;
     int i2;
-    char* p;
+    char* record_cursor;
 
     for (i = 0; i < 16; i++) {
 
