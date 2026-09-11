@@ -50,16 +50,6 @@
  *   - `acc` as `double` instead of `float`: 614.
  *   - volatile reads on the four parent-sympathy stores, to force the
  *     target's per-use `xor eax,eax` + `mov ax` reloads: 627.
- *   - restoring the `*(u16*)slot = 0xffff` before the -1 fills: 680 by the
- *     positional score, but the score cannot judge this one.  The reference
- *     has the store, and with it the object shrinks 3694 -> 3692 (target
- *     3689) and the instruction-level sequence alignment (scripts/seqdiff.py)
- *     rises 614 -> 615 of 1056, while the positional score collapses 924 ->
- *     680 because one extra instruction shifts every later byte.  The same
- *     artifact is why `rebrew diff` reports only 67 exact instructions here
- *     against 614 aligned.  The store belongs in the source; it is left out
- *     only because it does not move STATUS (still SIZE_MISMATCH) and would
- *     misorder `rebrew todo`.
  *   - the no-parent selector ternaries rewritten in the subtraction form
  *     that worked for idx>=6: 631 to 745.  Those sites already emit the
  *     target's shape.
@@ -76,12 +66,13 @@
  * 0x300-iteration slot scan explode the path space well before any exit is
  * reached.  Slice proving would need per-block start and end offsets.
  *
- * Remaining delta: 5 bytes of object size, which is one 4-byte spill slot
- * (`sub esp,0x420` against the target's `sub esp,0x41c`) plus the two
- * `sub esp,8` / `fstp qword` pairs at the `_ftol` sites minus what the
- * shorter frame saves.  The scalar local area is 0x2c in the target and
- * 0x30 here, so one live local too many; every merge tried above trades
- * more matched bytes than the slot is worth. */
+ * Remaining delta: 9 bytes of object size with both stores in place (3698
+ * against the target's 3689; 3694, five over, with the 0xffff store dropped).
+ * The prologues match exactly (`sub esp, 0x41c` on both sides), so this is
+ * not a frame-size difference: the earlier note here claiming `sub esp,0x420`
+ * against the target's `0x41c`, and the "one live local too many" reading that
+ * followed from it, were wrong.  The alignment view (scripts/seqdiff.py, 616
+ * of 1056) puts the residue at ~200 small groups, not one slot. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10018850
@@ -169,20 +160,31 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 	}
 	slot = (char*) 0x100358a0 + idx * 0x21c;
 	memset(slot, 0, 0x21c);
-	/* The reference stores 0xffff here before the -1 fills; msvc6
-	 * dead-store-eliminates it against the id store further down, and every
-	 * spelling that keeps it costs more than it buys (see the header).
+	/* The reference stores 0xffff here before the -1 fills.  msvc6
+	 * dead-store-eliminates it against the id store further down unless the
+	 * id store is addressed so the two are not provably the same location:
+	 * with `*(unsigned short*) (0x100358a0 + idx * 0x21c) = idx` below, both
+	 * stores survive (spelling that store through `slot` removes this one).
+	 * The reference's own disassembly keeps both, so the scaled-index form is
+	 * the reconstruction, not a trick.
+	 *
+	 * Measured with both stores: object 3698 against the target's 3689 and
+	 * scripts/seqdiff.py aligning 616 of 1056 instructions, against 3694 /
+	 * 614 with this store dropped.  The object is further from the target's
+	 * size than the version without it (which is 5 B over rather than 9),
+	 * because the remaining ~11 B of the target's code is still missing; the
+	 * positional score falls 924 -> 583 for the offset-shift reason, so
+	 * `rebrew test`'s score cannot judge this function.
 	 *
 	 * The -1 fills are addressed off the scaled index, not off slot: the
 	 * reference keeps idx * 0x21c live in edx and reuses it as the base for
-	 * both.  The id store on the next line, by contrast, goes through slot
-	 * (ebp) in the reference; spelling it off the scaled index there cost
-	 * 41 matched instructions. */
+	 * both. */
+	*(unsigned short*) slot = 0xffff;
 	*(int*) (0x100358a4 + idx * 0x21c) = -1;
 	memset((void*) (0x100358fc + idx * 0x21c), 0xff, 0x20);
 
 	/* record header init + debug sprintf/log */
-	*(unsigned short*) slot = (unsigned short) idx;
+	*(unsigned short*) (0x100358a0 + idx * 0x21c) = (unsigned short) idx;
 	*(int*) (slot + 0x170) = 0;
 	*(int*) (slot + 0x16c) = 0;
 	slot[0x215] = 0;
