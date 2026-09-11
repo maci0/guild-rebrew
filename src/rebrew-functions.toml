@@ -1003,9 +1003,11 @@ status = "RELOC"
 size = 861
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 toolchain = "msvc600sp6"
-status = "RELOC"
+status = "SIZE_MISMATCH"
 ghidra = "InitGameWorld"
 analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
+updated_by = "verify"
+updated_at = "2026-09-11T12:24:12+00:00"
 
 ["SERVER.0x10015cb0"]
 size = 57

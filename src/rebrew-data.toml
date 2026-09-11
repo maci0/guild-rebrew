@@ -403,7 +403,7 @@ status = "UNCHECKED"
 ["SERVER.0x10027078"]
 name = "g_log_level_table"
 section = ".data"
-type = "int[]"
+type = "int[12]"
 status = "UNCHECKED"
 
 ["SERVER.0x10027084"]
@@ -736,7 +736,7 @@ status = "UNCHECKED"
 
 ["SERVER.0x1009aca0"]
 name = "g_entity_base"
-type = "unsigned char"
+type = "unsigned char[]"
 section = ".data"
 status = "UNCHECKED"
 
@@ -1710,7 +1710,7 @@ status = "UNCHECKED"
 ["SERVER.0x10025718"]
 name = "g_game_speed_table"
 section = ".rdata"
-type = "int"
+type = "int[]"
 status = "UNCHECKED"
 
 ["SERVER.0x1002c3f0"]
@@ -1728,7 +1728,7 @@ status = "UNCHECKED"
 ["SERVER.0x100a8c94"]
 name = "g_entity_slot_table"
 section = ".data"
-type = "unsigned short"
+type = "unsigned int[]"
 status = "UNCHECKED"
 
 ["SERVER.0x11764084"]
@@ -1788,7 +1788,7 @@ status = "UNCHECKED"
 ["SERVER.0x10034610"]
 name = "g_panic_callback"
 section = ".data"
-type = "void (*)(void)"
+type = ""
 status = "UNCHECKED"
 
 ["SERVER.0x117660e0"]
@@ -1812,7 +1812,7 @@ status = "UNCHECKED"
 ["SERVER.0x100241a0"]
 name = "g_crc_table_241a0"
 section = ".rdata"
-type = "unsigned int"
+type = "unsigned int[256]"
 status = "UNCHECKED"
 
 ["SERVER.0x00024000"]
