@@ -421,9 +421,3 @@ int __cdecl _crt_locked_call4a(void* a, int b, int c, void* d)
 	return 0;
 }
 
-int __cdecl crt_locked_putc(int ch, void* stream)
-{
-	(void) ch;
-	(void) stream;
-	return 0;
-}

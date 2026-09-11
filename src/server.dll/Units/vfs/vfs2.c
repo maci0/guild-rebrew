@@ -11,7 +11,6 @@ int __cdecl vfs_FreeGameSubobject(void*);
 int __cdecl vfs_CleanupSubobject(void*);
 int __cdecl deflate(void*, int);  /* zlib deflate — the original calls it directly */
 int __cdecl _crt_locked_call4a(void*, int, int, void*);
-int __cdecl crt_locked_putc(int, void*);
 unsigned int __cdecl vfs_GetByte(int*);
 unsigned int __cdecl vfs_FlushStream(int, int);
 void __cdecl vfs_WriteUint32LE(int, unsigned int);
@@ -132,7 +131,7 @@ void __cdecl vfs_WriteUint32LE(int stream, unsigned int value)
 
 	i = 4;
 	do {
-		crt_locked_putc(value & 0xff, (void*) stream);
+		fputc(value & 0xff, (void*) stream);
 		value = value >> 8;
 		i = i - 1;
 	} while (i != 0);
