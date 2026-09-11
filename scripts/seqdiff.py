@@ -85,15 +85,41 @@ def extract(va: int, size: int, out: Path) -> None:
     out.write_bytes(pe.get_data(va - pe.OPTIONAL_HEADER.ImageBase, size))
 
 
+def classify(t: list[str], c: list[str]) -> str:
+    """Group a diff hunk by what would have to change to close it.
+
+    sched   the same instructions in a different order (scheduler/layout)
+    operand the same mnemonics with different operands (register allocation)
+    instr   a genuinely different instruction (a spelling change can move it)
+
+    ``instr`` over-counts: difflib substitutes across a shifted hunk, so a
+    hunk that is really the same instructions shifted lands here too.  Read it
+    as an upper bound on spelling-level work, and ``sched``/``operand`` as the
+    reliable part.
+    """
+    tm = [x.split()[0] for x in t]
+    cm = [x.split()[0] for x in c]
+    if sorted(tm) == sorted(cm):
+        return "sched"
+    if set(tm) == set(cm):
+        return "operand"
+    return "instr"
+
+
 def main() -> None:
-    if sys.argv[1] == "--extract":
-        extract(int(sys.argv[2], 16), int(sys.argv[3]), Path(sys.argv[4]))
+    argv = sys.argv[1:]
+    triage = "--triage" in argv
+    argv = [x for x in argv if x != "--triage"]
+    if argv[0] == "--extract":
+        extract(int(argv[1], 16), int(argv[2]), Path(argv[3]))
         return
-    obj, sym, tbin = Path(sys.argv[1]), sys.argv[2], Path(sys.argv[3])
+    obj, sym, tbin = Path(argv[0]), argv[1], Path(argv[2])
     a, b = target_seq(tbin), cand_seq(obj, sym)
     sm = difflib.SequenceMatcher(None, a, b, autojunk=False)
     same = sum(bl.size for bl in sm.get_matching_blocks())
     print(f"target {len(a)} insns, candidate {len(b)} insns, aligned identical {same}")
+
+    hunks = []
     ops: dict[str, int] = {}
     differing = 0
     for tag, i1, i2, j1, j2 in sm.get_opcodes():
@@ -101,12 +127,30 @@ def main() -> None:
             continue
         ops[tag] = ops.get(tag, 0) + 1
         differing += max(i2 - i1, j2 - j1)
+        hunks.append((tag, i1, i2, j1, j2))
+    print(f"opcode groups: {ops}  differing insns: {differing}")
+
+    if triage:
+        kinds: dict[str, list] = {"sched": [], "operand": [], "instr": []}
+        for h in hunks:
+            tag, i1, i2, j1, j2 = h
+            kinds[classify(a[i1:i2], b[j1:j2])].append(h)
+        for k, v in kinds.items():
+            print(f"{k}: {len(v)}")
+        for tag, i1, i2, j1, j2 in kinds["instr"]:
+            print(f"--- {tag} T[{i1}:{i2}] C[{j1}:{j2}]")
+            for x in a[i1:i2]:
+                print(f"  T {x}")
+            for x in b[j1:j2]:
+                print(f"  C {x}")
+        return
+
+    for tag, i1, i2, j1, j2 in hunks:
         print(f"--- {tag} T[{i1}:{i2}] C[{j1}:{j2}]")
         for x in a[i1:i2]:
             print(f"  T {x}")
         for x in b[j1:j2]:
             print(f"  C {x}")
-    print(f"opcode groups: {ops}  differing insns: {differing}")
 
 
 if __name__ == "__main__":
