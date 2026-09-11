@@ -15,13 +15,13 @@ extern char g_crash_dump_all_frames;
 extern int g_owner_window;
 extern int g_log_file_handle;
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
-extern int __cdecl fcn_1001a567(int);
-extern char* __cdecl fcn_1001a527(char*);
-extern char* __cdecl fcn_1001a286(char* buf, const char* mode);
-extern int __cdecl fcn_1001a46e(char* f, int a, int b);
-extern int __cdecl fcn_1001a2eb(char* f);
+extern long __cdecl time(long* t);
+extern char* __cdecl ctime(const long* t);
+extern void* __cdecl fopen(const char* path, const char* mode);
+extern int __cdecl fseek(void* f, long off, int whence);
+extern long __cdecl ftell(void* f);
 extern int __cdecl fcn_1001a18a(char* f);
-extern int __cdecl fcn_1001a207(const char* msg, char* f);
+extern int __cdecl fputs(const char* s, void* f);
 extern char* __cdecl fcn_1001a540(const char* s, int c);
 extern void __cdecl fcn_10002640(char* msg, int flags, int severity);
 
@@ -39,22 +39,22 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 	g_owner_window = c;
 	g_crash_dump_all_frames = (d >> 4) & 1;
 	SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER) 0x10002770);
-	h = fcn_1001a567(0);
+	h = time(0);
 	GetWindowTextA((HWND) c, path, 0x100);
 	((void (__stdcall*)(int, const char*, int)) *(void**) 0x1002403c)(0, (const char*) 0x11766100, 0x104);
 	*fcn_1001a540((char*) 0x11766100, 0x5c) = 0;
-	sprintf((char*) 0x117640e0, (char*) 0x1002735c, path, fcn_1001a527((char*) &h));
+	sprintf((char*) 0x117640e0, (char*) 0x1002735c, path, ctime((long*) &h));
 	if (g_log_mode_flags & 1) {
 		sp = (char*) 0x10027084;
 		do {
 			sprintf(buf, (char*) 0x100270fc, (char*) 0x11766100, sp);
-			f = fcn_1001a286(buf, "at");
+			f = fopen(buf, "at");
 			if (f != 0) {
-				fcn_1001a46e(f, 0, 2);
-				if (fcn_1001a2eb(f) > 0x10000) {
+				fseek(f, 0, 2);
+				if (ftell(f) > 0x10000) {
 					fcn_1001a18a(f);
-					f = fcn_1001a286(buf, "wt");
-					fcn_1001a207((char*) 0x1002733c, f);
+					f = fopen(buf, "wt");
+					fputs((char*) 0x1002733c, f);
 				}
 				fcn_1001a18a(f);
 			}
