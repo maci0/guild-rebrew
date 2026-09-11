@@ -72,16 +72,16 @@
  */
 
 // FUNCTION: SERVER 0x100104a0
-int __cdecl cm_GetBuildingStatCount(uchar* param_1)
+int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 {
 	int upgrade_data;
 	int stat_count;
 	uchar entity_type;
 	char* type_entry;
 
-	entity_type = *param_1;
+	entity_type = *cmd;
 	type_entry = g_entity_type_table + (uint) entity_type * 0x24d;
-	upgrade_data = *(int*) (param_1 + 0x65);
+	upgrade_data = *(int*) (cmd + 0x65);
 	/* Reading the tier byte in each test rather than into a local makes the
 	 * record address a common subexpression, so msvc6 materialises it with
 	 * `lea eax,[esi+eax*4]` and reads `[eax+0x247]` instead of folding the

@@ -63,7 +63,7 @@ char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[] = "cm_ExMoveObjekt() Object n
  * transfers the object via gm_SubObjekt + gm_AddOrAccumulateObject. */
 
 // FUNCTION: SERVER 0x1000e530
-int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
+int __cdecl cm_ExMoveObjekt(int cmd, char* result)
 {
 	int object_id;
 	void* ent_a;
@@ -73,8 +73,8 @@ int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
 	int* dst_list;
 	int prev;
 
-	object_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x14));
-	*(int*) (param_1 + 0x14) = object_id;
+	object_id = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x14));
+	*(int*) (cmd + 0x14) = object_id;
 	if (gm_ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -95,8 +95,8 @@ int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
 		src_list = (int*) ((char*) ent_c + 0x178);
 	}
 
-	object_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x10));
-	*(int*) (param_1 + 0x10) = object_id;
+	object_id = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
+	*(int*) (cmd + 0x10) = object_id;
 	if (gm_ResolveEntityById(&ent_a, (void**) &entity_or_node, &ent_c, object_id) == 0) {
 		LogMessageInternal(
 			s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -117,8 +117,8 @@ int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
 		dst_list = (int*) ((char*) ent_c + 0x178);
 	}
 
-	object_id = gm_GetFieldByType((char*) param_1, *(int*) (param_1 + 0x18));
-	*(int*) (param_1 + 0x18) = object_id;
+	object_id = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x18));
+	*(int*) (cmd + 0x18) = object_id;
 
 	prev = 0;
 	entity_or_node = *src_list;
@@ -146,12 +146,12 @@ int __cdecl cm_ExMoveObjekt(int param_1, char* param_2)
 		return 1;
 	}
 
-	*(int*) (entity_or_node + 6) = *(int*) (param_1 + 0x10);
+	*(int*) (entity_or_node + 6) = *(int*) (cmd + 0x10);
 	*(int*) (entity_or_node + 0x3f) = *dst_list;
 	*dst_list = entity_or_node;
 
-	if (param_2 != (char*) 0x0) {
-		*param_2 = '\x01';
+	if (result != (char*) 0x0) {
+		*result = '\x01';
 	}
 
 	return 0;

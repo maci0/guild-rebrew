@@ -25,8 +25,8 @@ extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
 // FUNCTION: SERVER 0x1000e8d0
 int __cdecl cm_ExSetAttribute(int cmd, char* result)
 {
-	void* pv8;
-	void* pv4;
+	void* entity_or_node;
+	void* ent_c;
 	int resolved;
 	char* entity;
 	char* src;
@@ -42,7 +42,7 @@ int __cdecl cm_ExSetAttribute(int cmd, char* result)
 	base = cmd;
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
 	*(int*) (base + 0x10) = field;
-	ok = gm_ResolveEntityById((void**) &resolved, &pv8, &pv4, field);
+	ok = gm_ResolveEntityById((void**) &resolved, &entity_or_node, &ent_c, field);
 	if (ok == 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x32ed,
 		                   s_cm_ExSetAttribute___Invalid_Id_1002d0d4, 1);
@@ -50,10 +50,10 @@ int __cdecl cm_ExSetAttribute(int cmd, char* result)
 	}
 	if (resolved != 0)
 		entity = (char*) resolved;
-	else if (pv8 != 0)
-		entity = (char*) pv8;
+	else if (entity_or_node != 0)
+		entity = (char*) entity_or_node;
 	else
-		entity = (char*) pv4;
+		entity = (char*) ent_c;
 	src = (char*) (base + 0x15);
 	i = 0;
 	if (*(unsigned char*) (base + 0x14) > 0) {

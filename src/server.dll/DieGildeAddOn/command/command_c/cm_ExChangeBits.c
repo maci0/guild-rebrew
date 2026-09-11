@@ -24,10 +24,10 @@ extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
 
 int __cdecl cm_ExChangeBits(int cmd, char* result)
 {
-	void* pv8;
-	void* pv4;
+	void* ent_a;
+	void* ent_c;
 	int resolved;
-	unsigned int* puVar3;
+	unsigned int* node_ptr;
 	int base;
 	int field;
 	int size;
@@ -35,7 +35,7 @@ int __cdecl cm_ExChangeBits(int cmd, char* result)
 	base = cmd;
 	field = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
 	*(int*) (cmd + 0x10) = field;
-	field = gm_ResolveEntityById((void**) &resolved, &pv8, &pv4, field);
+	field = gm_ResolveEntityById((void**) &resolved, &ent_a, &ent_c, field);
 	if (field == 0) {
 		LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x340d,
 		                   s_cm_ExChangeBits___Invalid_Id_1002d114, 1);
@@ -44,29 +44,29 @@ int __cdecl cm_ExChangeBits(int cmd, char* result)
 	/* The offset add is hoisted out of the select: the target picks the
 	 * base pointer in eax, then adds [esi+0x14] once at the merge point. */
 	if (resolved != 0)
-		puVar3 = (unsigned int*) resolved;
-	else if (pv8 != 0)
-		puVar3 = (unsigned int*) pv8;
+		node_ptr = (unsigned int*) resolved;
+	else if (ent_a != 0)
+		node_ptr = (unsigned int*) ent_a;
 	else
-		puVar3 = (unsigned int*) pv4;
-	puVar3 = (unsigned int*) ((char*) puVar3 + *(int*) (base + 0x14));
+		node_ptr = (unsigned int*) ent_c;
+	node_ptr = (unsigned int*) ((char*) node_ptr + *(int*) (base + 0x14));
 	size = *(int*) (base + 0x18);
 	switch (size) {
 	case 1:
-		*(unsigned char*) puVar3 = *(unsigned char*) puVar3 &
+		*(unsigned char*) node_ptr = *(unsigned char*) node_ptr &
 			(unsigned char) ~*(unsigned char*) (base + 0x20);
-		*(unsigned char*) puVar3 = (unsigned char) (*(unsigned char*) (base + 0x1c) |
-			*(unsigned char*) puVar3);
+		*(unsigned char*) node_ptr = (unsigned char) (*(unsigned char*) (base + 0x1c) |
+			*(unsigned char*) node_ptr);
 		break;
 	case 2:
-		*(unsigned short*) puVar3 = *(unsigned short*) puVar3 &
+		*(unsigned short*) node_ptr = *(unsigned short*) node_ptr &
 			(unsigned short) ~*(unsigned short*) (base + 0x20);
-		*(unsigned short*) puVar3 = (unsigned short) (*(unsigned short*) (base + 0x1c) |
-			*(unsigned short*) puVar3);
+		*(unsigned short*) node_ptr = (unsigned short) (*(unsigned short*) (base + 0x1c) |
+			*(unsigned short*) node_ptr);
 		break;
 	case 4:
-		*puVar3 = *puVar3 & ~*(unsigned int*) (base + 0x20);
-		*puVar3 = *(unsigned int*) (base + 0x1c) | *puVar3;
+		*node_ptr = *node_ptr & ~*(unsigned int*) (base + 0x20);
+		*node_ptr = *(unsigned int*) (base + 0x1c) | *node_ptr;
 		break;
 	}
 	if (result != 0) {

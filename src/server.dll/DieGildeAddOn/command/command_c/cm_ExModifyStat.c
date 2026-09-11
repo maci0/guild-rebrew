@@ -55,21 +55,21 @@ extern unsigned int _ftol(void);
  * Prior full dead-end log in .scratch/a0_baseline2.c. */
 
 // FUNCTION: SERVER 0x100100a0
-int __cdecl cm_ExModifyStat(int* param_1)
+int __cdecl cm_ExModifyStat(int* cmd)
 {
 	int stat_index;
 	int entity_record;
 	float new_stat_value;
 
-	entity_record = gm_LookupEntityRecordById(param_1[4]);
-	if ((entity_record == 0) || ((stat_index = param_1[5], stat_index < 0) || (4 < stat_index))) {
+	entity_record = gm_LookupEntityRecordById(cmd[4]);
+	if ((entity_record == 0) || ((stat_index = cmd[5], stat_index < 0) || (4 < stat_index))) {
 		return 1;
 	}
-	if (!((float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record)) < g_color_scale)) goto retest;
-	if (!((float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record)) <= g_const_0_0)) goto retest;
+	if (!((float) (int) (cmd[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record)) < g_color_scale)) goto retest;
+	if (!((float) (int) (cmd[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record)) <= g_const_0_0)) goto retest;
 	goto use_min;
 retest:
-	new_stat_value = (float) (int) (param_1[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record));
+	new_stat_value = (float) (int) (cmd[6] + (unsigned int) *(unsigned char*) (stat_index + 0x80 + entity_record));
 	if (new_stat_value < g_color_scale) goto store;
 	*(char*) (stat_index + 0x80 + entity_record) = (char) (long) g_color_scale;
 	return 0;
