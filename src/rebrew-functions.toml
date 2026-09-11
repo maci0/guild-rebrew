@@ -147,6 +147,7 @@ status = "RELOC"
 analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
 updated_by = "verify"
 updated_at = "2026-09-10T07:05:33+00:00"
+blocker = "partial __asm block reproduces the original's alignment-prefixed memset prelude, which pure C cannot emit (docs/msvc6-allocator.md); the function byte-matches with it"
 
 ["SERVER.0x10006990"]
 size = 612
@@ -307,6 +308,7 @@ status = "RELOC"
 note = "prove: Function returns void and no --watch-va was given — there is nothing to compare (EAX is undefined at exit for void functions). Pass --watch-va for each global the function writes."
 updated_by = "verify"
 updated_at = "2026-09-10T07:05:33+00:00"
+blocker = "partial __asm block reproduces the original's block-fill/memcpy prelude, which pure C cannot emit (docs/msvc6-allocator.md); the function byte-matches with it"
 
 ["SERVER.0x1000b1c0"]
 size = 205
