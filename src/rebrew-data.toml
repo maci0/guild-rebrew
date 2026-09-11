@@ -843,7 +843,7 @@ section = ".idata"
 status = "UNCHECKED"
 
 ["SERVER.0x100313fc"]
-name = "$SG18890"
+name = "g_100313fc"
 type = "char"
 status = "UNCHECKED"
 
