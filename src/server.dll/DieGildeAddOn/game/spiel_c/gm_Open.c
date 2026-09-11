@@ -67,9 +67,10 @@ extern void __cdecl srv_SeedRandomWithTime(void);
  * strength-reduce the multiply into the loop-carried register and give it the
  * base role; accumulating a byte offset (`table_offset += 0x24d`) gives the
  * reloaded table pointer the base role instead, whatever the addend order.
- * The final store also needs its address in a pointer local (`count_p`) used
- * for both the load and the store: spelling the read-modify-write with the
- * full expression twice emits a `lea` plus `[eax]` accesses (798).
+ * The final read-modify-write is spelled out twice rather than routed through
+ * a pointer local.  A pointer local forces a `lea` into a register plus
+ * `[reg]` accesses and lands 2 bytes short (859); the double spelling keeps
+ * the load and store as direct `[counter + table + disp]` operands.
  * Dead ends on this loop: addend-order swaps and array-subscript spellings
  * (no change, 858), `(char*) table_offset` casts and a pointer-local rmw on
  * the offset-accumulating shape (785, SIZE_MISMATCH), caching the table
@@ -91,7 +92,6 @@ int __cdecl gm_Open(int map_id)
 	int slot_idx;
 	unsigned char path_buf[512];
 	int row_index;
-	char* count_p;
 	char* def_row;
 	char* cat_p;
 
@@ -189,8 +189,8 @@ int __cdecl gm_Open(int map_id)
 			slot_ptr = slot_ptr + 1;
 			slot_counter = slot_counter + -1;
 		} while (slot_counter != 0);
-		count_p = g_entity_type_table + row_index * 0x24d + 0x21;
-		*count_p = (char) (*count_p + producible_count);
+		*(char*) (g_entity_type_table + row_index * 0x24d + 0x21) =
+			*(char*) (g_entity_type_table + row_index * 0x24d + 0x21) + producible_count;
 		row_index = row_index + 1;
 	} while (row_index < 0x58);
 	/* Original seeds the RNG from the system timer before the exit log

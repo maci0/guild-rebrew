@@ -1368,9 +1368,10 @@ semantically dead `if (count > 0)` wrapper around a `while` loop that already
 tested it: the extra nesting raised register pressure enough to flip the
 roles.
 
-A read-modify-write in the same loop may additionally need its address held
-in a pointer local used for both the load and the store; otherwise msvc6
-emits a `lea` plus separate `[reg]` accesses.
+A read-modify-write in the same loop keeps its address as two direct
+`[counter + table + disp]` operands. Routing it through a pointer local forces
+a `lea` into a register plus `[reg]` accesses; in `gm_Open` that shape is 2
+bytes shorter than the reference (859/861) while the double spelling is exact.
 
 ## 35. PROVEN status is lost by a STUB result, and that is a real regression
 

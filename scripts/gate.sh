@@ -15,7 +15,7 @@ set -uo pipefail
 cd "$(cd "$(dirname "$0")/.." && pwd)"
 mkdir -p .scratch
 
-BASELINE=${BASELINE:-277}
+BASELINE=${BASELINE:-278}
 rc=0
 
 echo "== rebrew lint"

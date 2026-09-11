@@ -1,7 +1,18 @@
 # Blockers — 100% Round-Trip Goal
 
-Last verify: 277/279 passed (30 EXACT + 228 RELOC + 19 PROVEN), 2 failed.
-Goal requires 279/279 with inline asm only for 1-5 byte padding.
+Last verify: 278/280 passed, 2 failed (0x100093a0 ServerMainThread 2433 vs
+2434, 0x10018850 gm_CreateEntityFromParents 3694 vs 3689).
+Goal requires 280/280 with inline asm only for 1-5 byte padding.
+
+## gm_Open back to RELOC (2026-09-12)
+
+`0x10015950` had drifted to SIZE_MISMATCH (859/861) when a later rewrite
+replaced the proven producible-count tail with a `count_p` pointer local.
+Restoring the inline double spelling of `g_entity_type_table + row_index *
+0x24d + 0x21` brings it back to RELOC 861/861: the multiply form is what gives
+the byte counter the SIB base role (docs/msvc6-c-shapes.md section 34), and
+routing the read-modify-write through a pointer local forces a `lea` and lands
+2 bytes short.  verify --full 277/280 -> 278/280.
 
 ## `.text` link shortfall (2026-09-11) — the build is not byte-identical
 
