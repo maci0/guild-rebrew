@@ -343,6 +343,7 @@ void* __cdecl FindNextFilteredEntity(void)
 	unsigned char* end;
 	unsigned char match;
 
+	match = 0;
 	end = (unsigned char*) g_entity_ptr + 0xa900;
 	if (g_entity_type_table == 0) {
 		return 0;
