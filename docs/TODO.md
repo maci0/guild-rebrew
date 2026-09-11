@@ -397,8 +397,13 @@ unfinished work; `rebrew todo` reports the same two and nothing else.
 
 | VA | Name | Size | State | Wall |
 |---|---|---|---|---|
-| 0x10018850 | gm_CreateEntityFromParents | 3689 | obj 3694, 924 B matched | A single-statement hill-climb over the store schedule converged here (header in the .c).  The object is 5 B long and ~990 instructions sit in a different order, so the schedule, not the control flow, is wrong; the statement order has to be re-derived from the target disassembly rather than moved one line at a time. |
-| 0x100093a0 | ServerMainThread | 2434 | obj 2433, 1162 B matched | obj 1 B short.  Two cold blocks (host-slot store 0x1000973a, unsynced flag 0x10009b66) that the original C2 deferred into gaps inside unrelated chains.  Nine rounds of label position, branch polarity, guard form, duplication, cold-tail placement, region size and pragma probes all emit them adjacent to their source loop (header in the .c); all seven VC6 SP builds compile it identically. |
+| 0x10018850 | gm_CreateEntityFromParents | 3689 | obj 3694, 924 B matched; 614/1056 insns sequence-aligned | 207 differing groups / 663 instructions.  A single-statement hill-climb over the store schedule converged here (header in the .c), so the statement order has to be re-derived from the target disassembly rather than moved one line at a time. |
+| 0x100093a0 | ServerMainThread | 2434 | obj 2433, 1162 B matched; 583/627 insns sequence-aligned | 29 differing groups / 67 instructions, candidate 2 long.  The largest group is the host-slot cold block (0x1000973a): the loop that branches to it is instruction-identical to the target's, only C2's placement of the block differs.  Nine rounds of label position, branch polarity, guard form, duplication, cold-tail placement, region size and pragma probes all leave it adjacent to its source loop (header in the .c); all seven VC6 SP builds and a CFLAGS sweep compile it identically. |
+
+`scripts/seqdiff.py` produces those counts.  `rebrew diff` aligns by byte
+offset, so a 1-4 byte size difference desynchronises it and every later
+instruction reads as structural (973 reported for gm_CreateEntityFromParents
+against 663 by sequence alignment, and 67 exact instructions against 614).
 
 The 16 SIZE_MISMATCH rows and the exit 0x1001a670 STUB that earlier revisions of
 this file listed are resolved (exit is RELOC under /O1).
