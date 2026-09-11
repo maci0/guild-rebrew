@@ -50,7 +50,16 @@
  *   - `acc` as `double` instead of `float`: 614.
  *   - volatile reads on the four parent-sympathy stores, to force the
  *     target's per-use `xor eax,eax` + `mov ax` reloads: 627.
- *   - restoring the `*(u16*)slot = 0xffff` before the -1 fills: 680.
+ *   - restoring the `*(u16*)slot = 0xffff` before the -1 fills: 680 by the
+ *     positional score, but the score cannot judge this one.  The reference
+ *     has the store, and with it the object shrinks 3694 -> 3692 (target
+ *     3689) and the instruction-level sequence alignment (scripts/seqdiff.py)
+ *     rises 614 -> 615 of 1056, while the positional score collapses 924 ->
+ *     680 because one extra instruction shifts every later byte.  The same
+ *     artifact is why `rebrew diff` reports only 67 exact instructions here
+ *     against 614 aligned.  The store belongs in the source; it is left out
+ *     only because it does not move STATUS (still SIZE_MISMATCH) and would
+ *     misorder `rebrew todo`.
  *   - the no-parent selector ternaries rewritten in the subtraction form
  *     that worked for idx>=6: 631 to 745.  Those sites already emit the
  *     target's shape.
