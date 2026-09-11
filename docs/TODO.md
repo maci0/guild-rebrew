@@ -232,6 +232,12 @@ Left for a hand edit, each needing a closer look than a name swap:
   declaration, so the role has to be read out of the function.
 - `crc32.c` `c`: zlib's own code, left for library fidelity.
 
+- `CloseVfsStream` (0x10008d10, 301 B, vfs4.c) vs the pre-existing
+  `vfs_CloseStream` (0x100038a0, 177 B, vfs.c): two distinct functions, not a
+  duplicate, which is why the rename was refused.  `CloseVfsStream` still
+  needs a `vfs_` name, but the two do different things and the choice needs a
+  semantic read of the 301-byte one rather than a name swap.
+
 ## BSS work (2026-08-22) — raw .data VirtualSize now falls out of the link
 
 `scripts/gen_link_stubs.py` now emits every stub global zero-initialized
