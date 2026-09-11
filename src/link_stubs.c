@@ -286,14 +286,6 @@ void* __cdecl fcn_10020360(int fd) { return 0; }
 void __cdecl fcn_10020401(int fd);             /* 0x10020401 - slot unlock */
 void __cdecl fcn_10020401(int fd) { }
 
-/* --- CRT free stub: satisfy _free without pulling LIBCMT free.obj
- * (24-byte SEH-cookie .rdata that inflates the IAT→IMPORT gap).
- * Game malloc lives in crt_region; postlink rewrites call sites. --- */
-void __cdecl free(void* p)
-{
-    (void)p;
-}
-
 /* --- CRT malloc stub: satisfy _malloc without pulling crt_region/malloc.c
  * (__try SEH-cookie .rdata that inflates the IAT→IMPORT gap). Postlink
  * rewrites call sites to the reference VAs. --- */
