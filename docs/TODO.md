@@ -1,7 +1,61 @@
 # Blockers — 100% Round-Trip Goal
 
-Last verify: 241/259 passed (30 EXACT + 197 RELOC + 14 PROVEN), 18 failed.
-Goal requires 259/259 with inline asm only for 1-5 byte padding.
+Last verify: 277/279 passed (30 EXACT + 228 RELOC + 19 PROVEN), 2 failed.
+Goal requires 279/279 with inline asm only for 1-5 byte padding.
+
+## `.text` link shortfall (2026-09-11) — the build is not byte-identical
+
+The linked `.text` is 0x3a29 (14,889 bytes) shorter than the reference's
+0x22846, and `rebrew postlink` used to pad it back to the reference's
+VirtualSize and apply the layout package's call/operand maps by offset,
+producing a binary 92% wrong in `.text` while the section table, imports and
+header fields all matched. Nothing failed: `rebrew verify` is per-function at
+the object level, and `verify --whole-binary` compares section sizes, exports,
+imports, `.rsrc` and headers, never `.text` content.
+
+Measurements (raw link, postlink skipped):
+
+| commit | date | `.text` VirtualSize | vs reference |
+|---|---|---|---|
+| `8f135ed` | 2026-08-22 | 0x22c9f | +0x459, trimmable, layout map 99.5% |
+| `cce0a1b` | 2026-08-25 | 0x2344f | +0xc09, trimmable |
+| `93ecf29` | 2026-08-26 | 0x1edc2 | **-0x3a84** |
+| `c77489a^` (parent) | 2026-08-26 | 0x1edc2 | -0x3a84 (same tree) |
+| `b67f1d3` (HEAD) | 2026-09-11 | 0x1ee1d | -0x3a29 |
+
+So the regression is `93ecf29` ("Convert naked asm to proper C across
+game/loadsave/command units"), not the LIBCMT switch in `c77489a` that
+followed it. That commit deleted 72,290 lines and added 6,197 across 140
+files: the naked `_emit` dumps became proper C and the link lost ~18KB of
+`.text` it had been emitting. `8f135ed` is the last link that produced the
+reference's shape.
+
+Tried and measured (all in the raw-link metric above):
+
+- Restoring the 11 `crt_region` TUs deleted by `7d48b38` (`malloc.c`, `free.c`,
+  `realloc.c`, `ioinit.c`, `tidtable.c`, `cexit.c`, `setargv.c`, `flsall.c`,
+  `fwrite_fread.c`, `h_ad29.c`, `lock_streams.c`), after renaming the
+  `g_<VA>` globals to the current CRT names: 0x1ee1d -> 0x1fcdd. Recovers
+  0xec0 of the 0x3a29. Necessary, not sufficient.
+- Forcing the reference's CRT members in with `#pragma comment(linker,
+  "/include:...")` for every `// LIBRARY:` marker in `library_msvc.h`: fails
+  with 104 unresolved externals. Many names in those headers (`code_translate`,
+  `overflow_add`, `bit_reverse`, ...) are not linkable LIBCMT symbols; the
+  true symbol/object mapping has to come from `scripts/check_library_code.py`,
+  and MSVC marks some helpers (`_initterm`, `_parse_cmdline`) static so they
+  cannot be named at all.
+
+Next: find which converted functions emit less than the dumps did. `link /MAP`
+on the current tree lists every contribution to `.text`, which answers it in
+one relink. The dump files emptied by `93ecf29` are the place to look:
+`Units/vfs/infblock_dump.c`, `infcodes_dump.c`, `inffast_dump.c`,
+`vfs_CompressBlock.c`, `gz_gzread.c`, `gz_check_header.c`,
+`ReadVfsCompressed.c`.
+
+The guard added to `rebrew postlink` on 2026-09-11 makes this class of
+breakage loud: it validates the layout package's sparse maps against the
+built bytes before patching and fails below 90% coverage (reference 100%,
+this tree 4%).
 
 > **Tooling moved (2026-08-22):** the `scripts/` helpers referenced below
 > were folded into rebrew: `gen_link_stubs.py` → `rebrew gen-stubs`,
@@ -11,6 +65,71 @@ Goal requires 259/259 with inline asm only for 1-5 byte padding.
 > `converge_layout.py` → `rebrew data --converge`,
 > `consolidate_declarations.py` → `rebrew merge --consolidate`.
 > Entries below describe the work at the time.
+
+## Service-pack sweep (2026-09-11) — new, and negative
+
+The game was built with an SP4-or-later toolchain: the reference's sbh family
+matches `LIBCMT` from SP4/SP5/SP6 and not from base/SP1/SP2, and `0x1001e638`
+(`___old_sbh_resize_block`, 169 B) matches SP5 alone.  That pins the pack; it
+does not change a byte.
+
+Compiler sweep: all seven VC 6.0 builds (base, SP1..SP6, CL 12.00.8168 and
+12.00.8804) over the 21 functions `rebrew verify --full` does not byte-match.
+Twenty compile to identical objects under every build.  The one exception,
+`0x1000d930 _cm_ExSellObjekt`, gives `obj 2030` under SP3/SP4 and `obj 2055`
+under the other five; the target is 2057, so neither variant closes it.  Both
+remaining `verify` failures (`0x100093a0` 2433 vs 2434, `0x10018850` 3694 vs
+3689) are byte-identical across all seven.
+
+Library sweep: relinking the built objects against SP5's whole `LIB` tree
+instead of SP6's moves `.text` at 2 offsets (112357, 123706), the same
+magnitude as relinking one tree twice.  SP6's `LIBCMT` is compatible with the
+reference for everything our link pulls.
+
+Where the remaining 3,269 B is, with the false leads removed:
+`case.0x1000ad61.*` (15 x 32 B plus a 248 B tail) lies inside `0x1000ad40
+LogWinsockError`, which verifies RELOC over its full 600 B, and `0x10003960
+gzread` (559 B) verifies RELOC in `check_header.c`.  The genuinely absent bytes
+are three CRT members the reference links and ours does not (matched with
+`scripts/check_library_code.py` against LIBCMT):
+
+| reference VA | size | LIBCMT member | object |
+|---|---|---|---|
+| `0x10022ff1` | 544 | `___ld12mul` | `tenpow.obj` |
+| `0x1001e7dc` | 216 | `__except_handler3` | `exsup3.obj` |
+| `0x1002350a` | 43 | `_strncnt` | `a_cmp.obj` |
+
+`rebrew xrefs 0x10022ff1` puts both callers (`0x10022094`, `0x10022db7a`)
+inside the CRT, so these cannot be recovered by reversing game code; they are
+the displaced-CRT design (`_fltused` at `link_stubs.c:168`, the `dllmain.c`
+substitution).  Closing them means a link-design change (`/include:` forcing,
+or undoing the displacement), not more decompilation.
+
+Tooling: the SP1/SP2/SP3/SP5 images never exported `INCLUDE`/`LIB`, so `rebrew
+match --flag-sweep-toolchains` reported them as compile failures
+(`score: Infinity`) until `rebrew.toolchain.image_msvc_env` supplied the env
+from each image's `tool_root`.  All seven builds now report the same match
+counts.  The technical matrix lives in rebrew's `docs/TOOLCHAIN.md`
+("Service packs: what differs, and how to tell which one a target used").
+
+## cm_RouteCommand recovered (2026-09-11)
+
+`0x10014ca0` carried metadata (RELOC, 265 B) but no source anywhere in the
+tree: the only copy was `lobby_c/lb_BroadcastStateChange.c.bak`, left behind
+when that TU was split into `lobbycommands.c`, `lb_HandleEntitySync.c` and
+`plant.c`.  `lobbycommands.c`'s `case 6` was calling the `fcn_10014ca0` stub in
+`link_stubs.c`, which returns 0.
+
+Restored as `command/command_c/cm_RouteCommand.c` (RELOC, 265/265, 6 relocs),
+call site renamed, stub deleted.  `rebrew verify --full` 277/279 -> 278/280;
+raw-link `.text` 0x21a81 -> 0x21b81 (+256 B net; the stub was 16 B).
+
+Look for more of this class by crossing `link_stubs.c` stubs and stray `.bak`
+files against the metadata: a stub whose VA has a strong status, or a `.bak`
+holding a function no live TU defines.  The raw "strong status but no live
+annotation" scan over-reports (63 VAs, mostly library companions such as
+`gzread` and `inflate_blocks`), so the stub/`.bak` cross-check is the
+trustworthy signal.
 
 ## BSS work (2026-08-22) — raw .data VirtualSize now falls out of the link
 

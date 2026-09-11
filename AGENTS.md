@@ -136,6 +136,15 @@ Build with `cmake -S . -B build-sp6 -DREBREW_DEBUG_INFO=OFF && cmake --build bui
 - **Compare the import table against the reference** after any link change.
   An extra import means a library object came in that the original did not
   have; a missing one means the opposite. The reference has exactly 100.
+- **Compare the built `.text` VirtualSize against the reference** after any
+  link change: 0x22846. `rebrew postlink` patches by `.text`-relative offset
+  and now refuses a `.text` that is not position-aligned (it validates the
+  layout package's sparse maps and fails below 90% coverage), but the number
+  itself is the cheap check. A built `.text` *shorter* than the reference means
+  code the reference contains is not being emitted: `cce0a1b` linked 0x2344f
+  (trimmable, correct) and `93ecf29`, converting the naked `_emit` dumps to
+  proper C, linked 0x1edc2 — 0x3a84 short, which is the state the tree is in
+  today. See `docs/TODO.md`, "`.text` link shortfall".
 
 ## Codegen References
 
