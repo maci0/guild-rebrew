@@ -128,14 +128,25 @@ about 2.6 KB are genuinely absent:
 | `0x1001b070` | 23 | `_fpmath` | no |
 | `0x1001a140` | 14 | `_getpid` | no |
 
-Plus `___ld12mul` (544), `__except_handler3` (216) and `_strncnt` (43) found the
-same way.  `rebrew xrefs 0x10022ff1` puts both callers inside the CRT, so none
-of this is recoverable by reversing game code: our displaced CRT startup
-(`_fltused` at `link_stubs.c:168`, the `dllmain.c` substitution) never
-references the startup/float/stdio path that pulled these members in the
-original.  Closing the gap means a link-design change (`/include:` forcing, or
-a startup that pulls exactly these members instead of nothing), not more
-decompilation.
+`_strncnt` (43) is in the same list but cannot be named at all: it is static
+inside `a_cmp.obj` (COFF storage class 3), so it is absent from the archive
+symbol index and `/INCLUDE:_strncnt` fails LNK2001.
+
+`___ld12mul` (544) and `__except_handler3` (216) are a different case: both are
+in LIBCMT and reachable with `/INCLUDE:`.  Measured on the raw link
+(`/INCLUDE:___ld12mul /INCLUDE:__except_handler3`, which also pulls
+`mantold.obj` and `tenpow.obj`): link clean, imports unchanged at 100, `.text`
+VirtualSize 138,113 -> 139,185 (+1,072 B) against the reference's 141,382.  That
+1,072 B is a link change, not decompilation.
+
+The rest of the table has no stock supplier: a substring search of each
+reference body against the members of all four LIBCMT variants finds none of
+them, so `/INCLUDE:` cannot reach them.  `rebrew xrefs 0x10022ff1` puts both
+callers inside the CRT, so they are not recoverable by reversing game code
+either: our displaced CRT startup (`_fltused` at `link_stubs.c:168`, the
+`dllmain.c` substitution) never references the startup/float/stdio path that
+pulled these members in the original.  Closing the rest needs the game's own CRT
+archive, not more decompilation.
 
 Tooling: the SP1/SP2/SP3/SP5 images never exported `INCLUDE`/`LIB`, so `rebrew
 match --flag-sweep-toolchains` reported them as compile failures
@@ -393,7 +404,10 @@ this file listed are resolved (exit is RELOC under /O1).
 ## What would unblock
 
 - ServerMainThread: a C2 block-ordering lever that pure C89 does not expose; the
-  1-byte size deficit follows from the same placement decision.
+  1-byte size deficit follows from the same placement decision.  A CFLAGS sweep
+  confirms flags are not the lever: /O1, /Og-, /Os, /G6 and /Oa all lose (191,
+  219, 179, 695, 915 matched against the 1162 baseline), and /Ot, /Ob2, /Oy, /Ox
+  are inert.
 - gm_CreateEntityFromParents: re-derive the statement order from the target
   disassembly.  Positional hill-climbing cannot cross from a wrong schedule.
 - Prove still fails on path explosion for the loop-heavy functions; slice proving
