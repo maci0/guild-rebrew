@@ -141,14 +141,21 @@ VirtualSize 138,113 -> 139,185 (+1,072 B) against the reference's 141,382, and
 the postlink layout coverage is unchanged (269 vs 270 of 7,463 map entries).
 That 1,072 B is a link change, not decompilation.
 
-The rest of the table has no stock supplier: a substring search of each
-reference body against the members of all four LIBCMT variants finds none of
-them, so `/INCLUDE:` cannot reach them.  `rebrew xrefs 0x10022ff1` puts both
-callers inside the CRT, so they are not recoverable by reversing game code
-either: our displaced CRT startup (`_fltused` at `link_stubs.c:168`, the
-`dllmain.c` substitution) never references the startup/float/stdio path that
-pulled these members in the original.  Closing the rest needs the game's own CRT
-archive, not more decompilation.
+The rest has no stock supplier, now shown directly rather than by search:
+linking with `/INCLUDE:` for all 22 symbols in the table leaves 20 unresolved
+(LNK2001).  `_strdup` and `_getpid` do resolve, but forcing both adds only 11 B
+of `.text`, so they are not worth two more link objects.  `rebrew xrefs
+0x10022ff1` puts both callers inside the CRT, so these are not recoverable by
+reversing game code either: our displaced CRT startup never references the
+startup/float/stdio path that pulled these members in the original.  The
+remaining 2,197 B of `.text` needs the game's own CRT archive; neither more
+decompilation nor more linking reaches it.
+
+`rebrew lib-match --lib .scratch/libcmt/LIBCMT.sp6.LIB` byte-matches 18 reversed
+functions against LIBCMT members (the `__sbh_*` / `___old_sbh_*` family,
+`__DllMainCRTStartup@12`, `__initterm`, `__lock`, `__unlock`), so the
+`crt_region/` scaffolding agrees with the library rather than duplicating a
+member the link already carries.
 
 Tooling: the SP1/SP2/SP3/SP5 images never exported `INCLUDE`/`LIB`, so `rebrew
 match --flag-sweep-toolchains` reported them as compile failures
