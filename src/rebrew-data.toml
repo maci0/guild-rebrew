@@ -1729,7 +1729,7 @@ type = "int"
 status = "UNCHECKED"
 
 ["SERVER.0x100256d0"]
-name = "dScaleFactor"
+name = "g_dbl_const_6d0"
 section = ".rdata"
 type = "double"
 status = "UNCHECKED"
@@ -1810,4 +1810,51 @@ status = "UNCHECKED"
 name = "g_iat_region"
 section = ".rdata"
 note = "IAT at .rdata start (crt_imports.c forcing region)"
+status = "UNCHECKED"
+
+["SERVER.0x10025688"]
+name = "g_dbl_const_688"
+type = "double"
+section = ".rdata"
+status = "UNCHECKED"
+
+["SERVER.0x100257d8"]
+name = "g_dbl_const_7d8"
+type = "double"
+section = ".rdata"
+status = "UNCHECKED"
+
+["SERVER.0x10025810"]
+name = "g_dbl_const_810"
+type = "double"
+section = ".rdata"
+status = "UNCHECKED"
+
+["SERVER.0x10025f88"]
+name = "g_dbl_const_f88"
+type = "float"
+section = ".rdata"
+status = "UNCHECKED"
+
+["SERVER.0x10025f90"]
+name = "g_dbl_const_f90"
+type = "double"
+section = ".rdata"
+status = "UNCHECKED"
+
+["SERVER.0x10025f98"]
+name = "g_dbl_const_f98"
+type = "double"
+section = ".rdata"
+status = "UNCHECKED"
+
+["SERVER.0x1002c3f8"]
+name = "g_dispatch_table"
+section = ".data"
+status = "UNCHECKED"
+
+["SERVER.0x1002d4fc"]
+name = "s_ls_tmp_1002d4fc"
+type = "char"
+section = ".data"
 status = "UNCHECKED"

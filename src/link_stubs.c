@@ -15,7 +15,6 @@ float _g_stat_max = 0;
 double _g_stat_max_d = 0;
 float _g_stat_min = 0;
 double _g_stat_min_d = 0;
-double dScaleFactor = 0;
 int fcn_1001a6a1 = 0;
 int fcn_10016ea0 = 0;
 float g_output_share[1] = {0.0f};

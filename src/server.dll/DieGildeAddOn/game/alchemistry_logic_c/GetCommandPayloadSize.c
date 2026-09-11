@@ -2,7 +2,7 @@
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
 extern float g_color_scale;
-extern double dScaleFactor;
+extern double g_dbl_const_6d0; /* 0x100256d0 */
 extern dispatch_fn g_chain_handler_table[];
 
 // SIZE 0x8

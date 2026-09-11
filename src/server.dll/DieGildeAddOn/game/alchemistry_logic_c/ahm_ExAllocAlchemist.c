@@ -15,7 +15,7 @@ int __cdecl gm_RefreshMarketAvailability(int season);
 extern float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
-extern double dScaleFactor;
+extern double g_dbl_const_6d0; /* 0x100256d0 */
 extern dispatch_fn g_chain_handler_table[];
 
 extern char* g_entity_type_table;

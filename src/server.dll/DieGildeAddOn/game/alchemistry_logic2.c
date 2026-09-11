@@ -20,7 +20,7 @@ extern int g_next_object_id;
 extern unsigned char g_current_season;
 extern float g_const_0_0;
 extern float g_const_1_0;
-extern double dScaleFactor;
+extern double g_dbl_const_6d0; /* 0x100256d0 */
 extern int g_alchemy_entity_table[];
 int* __cdecl ahm_LookupEntityInTable(int);
 extern dispatch_fn g_chain_handler_table[];
@@ -315,7 +315,7 @@ found:
 	do {
 		/* volatile pins the store right after the multiply; without it
 		 * MSVC6 sinks it past the pointer bump to `fstp [eax-0xc]`. */
-		*(volatile float*) p = p[-1] * dScaleFactor;
+		*(volatile float*) p = p[-1] * g_dbl_const_6d0;
 		p += 3;
 		n--;
 	} while (n != 0);
