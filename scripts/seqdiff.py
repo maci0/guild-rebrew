@@ -137,12 +137,13 @@ def main() -> None:
             kinds[classify(a[i1:i2], b[j1:j2])].append(h)
         for k, v in kinds.items():
             print(f"{k}: {len(v)}")
-        for tag, i1, i2, j1, j2 in kinds["instr"]:
-            print(f"--- {tag} T[{i1}:{i2}] C[{j1}:{j2}]")
-            for x in a[i1:i2]:
-                print(f"  T {x}")
-            for x in b[j1:j2]:
-                print(f"  C {x}")
+        for k in ("operand", "instr"):
+            for tag, i1, i2, j1, j2 in kinds[k]:
+                print(f"--- {k} {tag} T[{i1}:{i2}] C[{j1}:{j2}]")
+                for x in a[i1:i2]:
+                    print(f"  T {x}")
+                for x in b[j1:j2]:
+                    print(f"  C {x}")
         return
 
     for tag, i1, i2, j1, j2 in hunks:
