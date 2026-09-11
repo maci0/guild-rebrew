@@ -21,7 +21,6 @@ struct GroupNode {
 	struct GroupNode* next; /* 0x24 */
 };
 
-void* __cdecl fcn_1001aff0(const char* haystack, const char* needle);
 extern int g_array_count;
 extern int g_stat1;
 extern int g_stat2;
@@ -50,7 +49,7 @@ void __cdecl ReportMemoryGroupInfo(const char* toggle)
 	LogMessageInternal("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0x1b6, "---g-r-o-u-p---i-n-f-o-s---", 1);
 	node = (struct GroupNode*) &g_alloc_root_name;
 	while (node != 0) {
-		if (toggle != 0 && fcn_1001aff0(node->name, toggle) != 0) {
+		if (toggle != 0 && strstr(node->name, toggle) != 0) {
 			match = 1;
 		} else {
 			match = 0;

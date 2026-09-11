@@ -91,7 +91,7 @@ void __cdecl __heap_term(void)
 
 extern void __cdecl fcn_1001d253(char*);            /* 0x1001d253 - read PE linker version */
 extern int __cdecl fcn_10021200(const char*, const char*, unsigned int); /* 0x10021200 - strncmp */
-extern char* __cdecl fcn_1001aff0(const char*, const char*);             /* 0x1001aff0 - strstr */
+
 extern char* __cdecl fcn_1001af30(const char*, int);                     /* 0x1001af30 - strchr */
 
 int __cdecl fcn_1001d280(void)
@@ -130,7 +130,7 @@ int __cdecl fcn_1001d280(void)
                     *p -= 0x20;
                 p++;
             }
-            p = fcn_1001aff0(env, module);
+            p = strstr(env, module);
         }
         else
             p = NULL;
