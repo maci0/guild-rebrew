@@ -42,6 +42,14 @@
  *     3694.
  *
  * Measured dead ends, all reverted (score from the 859 base unless noted):
+ *   - moving `work[0x3fc]` in the declaration list, to chase the scratch area
+ *     sitting at esp+0x40 here against the target's esp+0x3c: msvc6 assigns
+ *     the slot independently of declaration order.  Two uses stay at 0x40 and
+ *     the alignment is unchanged at 617 either way.
+ *   - a local copy of `arg8` (`n = arg8`) before `if (n == 2)`, to stop msvc6
+ *     folding the `gm_RandomMod` argument to the constant 2 (the target pushes
+ *     the register, we push the immediate).  The fold survives and the
+ *     alignment falls 617 -> 616.
  *   - every remaining `_ftol` site as a plain `(int)` cast: 473 / 471 / 470
  *     for the three trait-selection sites and 547 for the age loop.  Each
  *     saves the `sub esp,8` / `fstp qword ptr [esp]` pair but costs about
