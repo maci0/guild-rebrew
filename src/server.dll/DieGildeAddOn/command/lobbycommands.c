@@ -94,3 +94,36 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 }
 
 
+
+// FUNCTION: SERVER 0x10014db0
+// lb_ExLobbyServerCommand
+int __cdecl fcn_100147b0(unsigned int*, unsigned char*);
+int __cdecl fcn_10014a50(unsigned int*, unsigned char*);
+int __cdecl fcn_10014af0(unsigned int*, unsigned char*);
+int __cdecl fcn_10014bf0(unsigned int*, unsigned char*);
+int __cdecl fcn_10014ca0(unsigned int*, unsigned char*);
+
+int __cdecl lb_ExLobbyServerCommand(unsigned int* player, unsigned char* msg)
+{
+	char buf[0x80];
+
+	sprintf(buf, (char*) 0x1002d858, *(unsigned char*) (msg + 0x10));
+	LogMessageInternal((char*) 0x1002d70c, 0x3a5, buf, 1);
+	switch (*(int*) (msg + 0x10)) {
+	case 0:
+		return lb_ExPlayerlist(player, msg);
+	case 1:
+		return lb_SendLobbyConfig(player, msg);
+	case 2:
+		return fcn_100147b0(player, msg);
+	case 3:
+		return fcn_10014a50(player, msg);
+	case 4:
+		return fcn_10014af0(player, msg);
+	case 5:
+		return fcn_10014bf0(player, msg);
+	case 6:
+		return fcn_10014ca0(player, msg);
+	}
+	return 1;
+}

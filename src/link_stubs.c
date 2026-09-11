@@ -238,7 +238,11 @@ int g_office_role_templates = 0;
 int g_unknown_1de450 = 0;
 /* inflate_blocks / inflate_blocks_free are provided by the vendored
  * references/zlib-1.1.3/infblock.c; stubs here would shadow the real ones. */
-int __cdecl lb_ExLobbyServerCommand(void) { return 0; }
+int __cdecl fcn_100147b0(void) { return 0; }
+int __cdecl fcn_10014a50(void) { return 0; }
+int __cdecl fcn_10014af0(void) { return 0; }
+int __cdecl fcn_10014bf0(void) { return 0; }
+int __cdecl fcn_10014ca0(void) { return 0; }
 int g_chain_handler_table[1] = {0};
 int __cdecl rand_mod(void) { return 0; }
 int __cdecl read_uint32_be(void) { return 0; }
