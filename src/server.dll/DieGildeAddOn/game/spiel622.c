@@ -257,7 +257,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //     that reproduces this function without windows.h.
 //   - Local declaration order: 14 permutations, all inert.
 //   - Compare spelling: unsigned/signed char, `entity[0]`, `0x17 ==` reversed,
-//     `!(x != 0x17)`, `(int)` cast, via a `dp`/`cp`/`slot_p` alias, via a
+//     `!(x != 0x17)`, `(int)` cast, via a `divisor_ptr`/`ingredient_cursor`/`slot_p` alias, via a
 //     hoisted int local placed before, between or after the FP statements.
 //     `- 0x17 == 0`, `^ 0x17 == 0` and `& 1` add bytes.
 //   - Branch shape: switch, goto, if/else, duplicated arms, nested block,
@@ -267,7 +267,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //     All regress (319..391).
 //   - Loop body reassociation and the else-arm constant form: inert.
 //   - Filler integer work in the pre-fxch slot (param2 reload, mask, min_val,
-//     the +0x38 read, the cp lea) placed before or between the FP statements:
+//     the +0x38 read, the ingredient_cursor lea) placed before or between the FP statements:
 //     inert. A volatile param2 read there collapses the whole function.
 //   - 312 generated tail permutations (.scratch/pv-x87/gen2.py, gen3.py) over
 //     scaled-local x numerator-local x product form x compare form x return
@@ -295,7 +295,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //     `fmul` rather than cross-jumping, so the merge block boundary does not
 //     move); a double accumulator in the arms (241 or worse, the float
 //     round-trip is load-bearing); eight nested association trees with no
-//     temp; the compare's pointer provenance via `cp`/`dp`/`slot_p` and via a
+//     temp; the compare's pointer provenance via `ingredient_cursor`/`divisor_ptr`/`slot_p` and via a
 //     late-defined pointer; reading the 0x17 byte at the top of the function
 //     into a char/uchar/int local; the loop's own eager-fxch accumulate shape
 //     mirrored onto the merge; 630 further generated permutations over
@@ -318,7 +318,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //   expression reassociated five ways (357..386), `value` copied to a separate
 //   float for the tail multiply (358), `p2_wide` read through a volatile alias
 //   (374), a volatile `[esi+0x38]` store (372), a volatile home store (378),
-//   the mask before the store (369), the `dp` alias for the store (89), the
+//   the mask before the store (369), the `divisor_ptr` alias for the store (89), the
 //   compare widened/unsigned/via a hoisted local (inert), the loop as a `for`
 //   (382), and every reassociation of the g_const_half multiply (380..386,
 //   the 372-shape now reaches 380 but reintroduces a dead `fstp st(0)`).
@@ -331,7 +331,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //     then acc = quot; value = (float)(acc * mod_value). Emits qword fmul
 //     before fxch/fmulp and keeps fstp/jne. Leftover: cmp [esi],0x17 one
 //     instruction early (fmul qword; cmp; fxch; fmulp). kind=*entity after
-//     the multiply is inert; hoisting cp=entity+0x2e there is 91. Reading the
+//     the multiply is inert; hoisting ingredient_cursor=entity+0x2e there is 91. Reading the
 //     byte into an int local ahead of the multiply is 255 at SIZE_MISMATCH;
 //     `unsigned char` instead of `char` at the compare is inert.
 //   - [111..116] the epilogue emits the same instructions in a different
@@ -356,7 +356,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //     directly instead of the `mod_value` float temp (373); splitting the
 //     mask into `param2 &= 0xff` plus the home store (inert); an `int*` alias
 //     for the +0x38 store (inert); moving the `p2_home = &param2` alias
-//     declaration (inert); a dead `cp` store to shorten edi's live range
+//     declaration (inert); a dead `ingredient_cursor` store to shorten edi's live range
 //     (inert, eliminated). Reusing `divisor` as the loop slot scores 364.
 //
 //   The `unsigned char` second parameter in the forward declaration above is

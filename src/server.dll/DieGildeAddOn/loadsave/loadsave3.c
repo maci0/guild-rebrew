@@ -44,12 +44,12 @@ extern unsigned short* g_entity_table_end; /* 0x1003546c */
 
 // FUNCTION: SERVER 0x10014070
 // ls_ID2Ptr
-// RELOC, 491/491. The entity loop indexes from the record base (rec = e -
+// RELOC, 491/491. The entity loop indexes from the record base (rec = entity_cursor -
 // 0x170, positive offsets) so msvc6 keeps the address CSE out of the
-// null-check; with e-relative negative offsets it hoists `lea [esi-4]` above
+// null-check; with entity_cursor-relative negative offsets it hoists `lea [esi-4]` above
 // the `je` and shifts every following byte (187/491).
-// The list walks need both the target's copy-propagation and its eax/ecx
-// roles, and those are two separate decisions. Guarding on node's successor
+// The list walks need both the target'record_cursor copy-propagation and its eax/ecx
+// roles, and those are two separate decisions. Guarding on node'record_cursor successor
 // then walking a second cursor (nxt) that is seeded from node and written
 // back at the end gives `mov ecx,eax` + `mov eax,[ecx+0x3f]`; walking node
 // itself gives the same shape with the registers swapped (461/491), and the
@@ -61,10 +61,10 @@ unsigned int ls_ID2Ptr(void)
 	int v1;
 	int v2;
 	int v3;
-	unsigned char* e;
-	int* p;
+	unsigned char* entity_cursor;
+	int* id_cursor;
 	int i;
-	char* s;
+	char* record_cursor;
 	unsigned int idx;
 	void* node;
 	void* nxt;
@@ -78,12 +78,12 @@ unsigned int ls_ID2Ptr(void)
 	}
 	g_active_player_count = (int) gm_StartFilteredEntitySearch(1, 5, 0xa);
 	if (g_file_version >= 0x10017) {
-		for (p = (int*) 0x10035478; (int) p < 0x10035498; p++) {
-			*p = gm_LookupEntityRecordById(*p);
+		for (id_cursor = (int*) 0x10035478; (int) id_cursor < 0x10035498; id_cursor++) {
+			*id_cursor = gm_LookupEntityRecordById(*id_cursor);
 		}
 	}
-	for (e = (unsigned char*) 0x10035a10; (int) e < 0x1009ae10; e += 0x21c) {
-		rec = e - 0x170;
+	for (entity_cursor = (unsigned char*) 0x10035a10; (int) entity_cursor < 0x1009ae10; entity_cursor += 0x21c) {
+		rec = entity_cursor - 0x170;
 		if (*(unsigned short*) rec == 0xffff) {
 			continue;
 		}
@@ -99,19 +99,19 @@ unsigned int ls_ID2Ptr(void)
 		}
 	}
 	for (i = 0; i < g_query_limit; i++) {
-		s = (char*) g_query_base + i * 0x43;
-		idx = *(unsigned short*) s;
+		record_cursor = (char*) g_query_base + i * 0x43;
+		idx = *(unsigned short*) record_cursor;
 		if (*(char*) (g_item_def_table + idx * 64 + idx) == 0x1d) {
-			*(int*) (s + 0x24) = 0;
+			*(int*) (record_cursor + 0x24) = 0;
 		}
-		if (*(int*) (s + 6) != -1) {
-			if (!gm_ResolveEntityById(&v1, &v2, &v3, *(int*) (s + 6))) {
+		if (*(int*) (record_cursor + 6) != -1) {
+			if (!gm_ResolveEntityById(&v1, &v2, &v3, *(int*) (record_cursor + 6))) {
 				LogMessageInternal(s_D__Develop_DieGildeAddOn_loadsav_1002d550, 0x1050,
 				    s_ls_ID2Ptr____Houston__wir_haben_e_1002d520, 1);
 			} else if (v1 != 0) {
 				node = *(void**) (v1 + 0x5d);
 				if (node == 0) {
-					*(void**) (v1 + 0x5d) = s;
+					*(void**) (v1 + 0x5d) = record_cursor;
 				} else {
 					if (*(void**) ((char*) node + 0x3f) != 0) {
 						nxt = node;
@@ -120,12 +120,12 @@ unsigned int ls_ID2Ptr(void)
 						} while (*(void**) ((char*) nxt + 0x3f) != 0);
 						node = nxt;
 					}
-					*(void**) ((char*) node + 0x3f) = s;
+					*(void**) ((char*) node + 0x3f) = record_cursor;
 				}
 			} else if (v2 != 0) {
 				node = *(void**) (v2 + 0x14);
 				if (node == 0) {
-					*(void**) (v2 + 0x14) = s;
+					*(void**) (v2 + 0x14) = record_cursor;
 				} else {
 					if (*(void**) ((char*) node + 0x3f) != 0) {
 						nxt = node;
@@ -134,12 +134,12 @@ unsigned int ls_ID2Ptr(void)
 						} while (*(void**) ((char*) nxt + 0x3f) != 0);
 						node = nxt;
 					}
-					*(void**) ((char*) node + 0x3f) = s;
+					*(void**) ((char*) node + 0x3f) = record_cursor;
 				}
 			} else {
 				node = *(void**) (v3 + 0x178);
 				if (node == 0) {
-					*(void**) (v3 + 0x178) = s;
+					*(void**) (v3 + 0x178) = record_cursor;
 				} else {
 					if (*(void**) ((char*) node + 0x3f) != 0) {
 						nxt = node;
@@ -148,7 +148,7 @@ unsigned int ls_ID2Ptr(void)
 						} while (*(void**) ((char*) nxt + 0x3f) != 0);
 						node = nxt;
 					}
-					*(void**) ((char*) node + 0x3f) = s;
+					*(void**) ((char*) node + 0x3f) = record_cursor;
 				}
 			}
 		}

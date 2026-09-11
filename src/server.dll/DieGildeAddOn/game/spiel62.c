@@ -213,7 +213,7 @@ struct EntityStruct {
 // FUNCTION: SERVER 0x10017fb0
 // gm_DeallocEntity
 //   Ref-clear loop walks with an explicit pointer over a do/while on the row
-//   base; that shape makes msvc6 load *p into a register and keep the entity
+//   base; that shape makes msvc6 load *base_cursor into a register and keep the entity
 //   id as the memory operand (mov edi,[eax] / cmp edi,[esi+4]), matching the
 //   original. A `volatile` read of the id inverts the operand roles instead.
 
@@ -225,7 +225,7 @@ void __cdecl gm_DeallocEntity(unsigned int index, int arg2)
 	char* entity;
 	int entity_id;
 	int j;
-	int* p;
+	int* base_cursor;
 	int* base;
 
 	entity = (char*) 0x100358a0 + index * 0x21c;
@@ -243,12 +243,12 @@ void __cdecl gm_DeallocEntity(unsigned int index, int arg2)
 		}
 		base = (int*) 0x100358fc;
 		do {
-			p = base;
+			base_cursor = base;
 			for (j = 0; j < 8; j++) {
-				if (*p == *(int*) (entity + 4)) {
-					*p = -1;
+				if (*base_cursor == *(int*) (entity + 4)) {
+					*base_cursor = -1;
 				}
-				p++;
+				base_cursor++;
 			}
 			base = (int*) ((char*) base + 0x21c);
 		} while ((int) base < 0x1009acfc);
@@ -258,9 +258,9 @@ void __cdecl gm_DeallocEntity(unsigned int index, int arg2)
 		/* Written as a dword loop, not memset: msvc6 expands both to the same
 		 * `rep stosd`, but only this form sets edi before ecx as the original
 		 * does. A memset call emits `mov ecx,8` first. */
-		p = (int*) ((char*) 0x100358fc + index * 0x21c);
+		base_cursor = (int*) ((char*) 0x100358fc + index * 0x21c);
 		for (j = 0; j < 8; j++) {
-			p[j] = -1;
+			base_cursor[j] = -1;
 		}
 		if (arg2 == 1) {
 			sprintf(buffer, (char*) 0x10031538, entity_id);
@@ -305,9 +305,9 @@ void __cdecl gm_InitEntitySlots(void)
 
 int __cdecl gm_IsInRange(int x)
 {
-	int r;
-	r = gm_MapEntityStatRange(x);
-	if (r >= 10 && r <= 14) {
+	int stat_range;
+	stat_range = gm_MapEntityStatRange(x);
+	if (stat_range >= 10 && stat_range <= 14) {
 		return 0;
 	}
 	return 2;
@@ -622,17 +622,17 @@ char __cdecl gm_RandomStatModifier(char stat_value)
 // gm_LookupEntityRecordById
 int __cdecl gm_LookupEntityRecordById(int search_id)
 {
-	char* p;
+	char* base_cursor;
 	int i;
 	i = 0;
-	p = (char*) 0x100358A4;
-	while ((int) p < (int) 0x1009ACA4) {
-		if (*(unsigned short*) (p - 4) != 0xFFFF) {
-			if (*(int*) p == search_id) {
+	base_cursor = (char*) 0x100358A4;
+	while ((int) base_cursor < (int) 0x1009ACA4) {
+		if (*(unsigned short*) (base_cursor - 4) != 0xFFFF) {
+			if (*(int*) base_cursor == search_id) {
 				return i * 0x21C + 0x100358A0;
 			}
 		}
-		p += 0x21C;
+		base_cursor += 0x21C;
 		i++;
 	}
 	return 0;
