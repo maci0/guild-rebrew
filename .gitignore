@@ -80,3 +80,6 @@ rebrew-data.toml.lock
 # Legacy binary layout zip (replaced by the committed text layout/<target>/)
 layout/*.zip
 build-*/
+
+# BinSync state dir: regenerable from the metadata (rebrew sync --push --state-dir binsync)
+/binsync/

@@ -128,6 +128,9 @@ if(REBREW_BUILD_SERVER)
   #       unduplicated, but .rdata is 0x40 long and postlink still refuses it.
   #       Only the blob reproduces the original's tighter packing, so the blob
   #       keeps the strings and crt0msg.obj stays out of the link.
+  #   crt_init.c                         NOT in this list and not compiled:
+  #       LIBCMT's dllcrt0.obj already supplies __CRT_INIT, which dllmain.c
+  #       calls. The reversed body stays in the tree for reference only.
   # Dropping any of these was tried and measured; each one regresses either the
   # import set or the .rdata size.
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt_region/")
