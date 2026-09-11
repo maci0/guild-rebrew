@@ -171,9 +171,7 @@ int _fltused = 0;
 int __cdecl ahm_RandomBelow(void) { return 0; }
 int __cdecl destroy_entity(void* p) { (void)p; return 0; }
 int g_worker_entry_count = 0;
-int __cdecl fcn_10002640(void) { return 0; }
 int __cdecl fcn_100058d0(void) { return 0; }
-int __cdecl fcn_10016cd0(void) { return 0; }
 int __cdecl fcn_1001a7f7(void) { return 0; }
 int __cdecl fcn_1001accd(void) { return 0; }
 int __cdecl fcn_1001aff0(void) { return 0; }

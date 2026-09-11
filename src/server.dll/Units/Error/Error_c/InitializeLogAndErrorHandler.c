@@ -23,7 +23,6 @@ extern long __cdecl ftell(void* f);
 extern int __cdecl fclose(void* f);
 extern int __cdecl fputs(const char* s, void* f);
 extern char* __cdecl strrchr(const char* s, int c);
-extern void __cdecl fcn_10002640(char* msg, int flags, int severity);
 
 void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned int d)
 {
@@ -67,7 +66,7 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 	}
 	sp = (char*) 0x10027078;
 	do {
-		fcn_10002640((char*) 0x117640e0, g_log_mode_flags, *(int*) sp);
+		DispatchLogOutput((char*) 0x117640e0, g_log_mode_flags, *(int*) sp);
 		sp += 4;
 	} while ((int) sp < 0x10027084);
 }
