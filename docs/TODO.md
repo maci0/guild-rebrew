@@ -223,14 +223,28 @@ gm_RefreshMarketAvailability, InitNewDynastyEntity, lb_HandleEntitySync,
 lb_HandleLobbyCommands, lobbycommands, m_alloc2, ProcessSendData, server4,
 srv_ProcessReceiveData.
 
-Left for a hand edit, each needing a closer look than a name swap:
-- `server2.c`: three distinct `p` locals (an initialised `unsigned int*` plus
-  two `int` address cursors) — a file-wide rename collides.
-- `m_AllocTracked.c`: `np`/`pp`; the comment-aware pass desyncs on its log.
-- `ls_LoadDynamicEntities.c` `p`, `ahm_ExAllocAlchemist.c` `pp`,
-  `cm_ExAllocWarEvent.c` `fc`: no use found within 60 lines of the
-  declaration, so the role has to be read out of the function.
-- `crc32.c` `c`: zlib's own code, left for library fidelity.
+Closed since (all renamed, re-tested RELOC/NEAR_MATCHING unchanged):
+- `server2.c` — the three `p` locals are `slot_walk` (the struct-declaration
+  guard in `scripts/rename_locals.py` was treating `struct Foo* x;` as opening
+  a struct definition, so the declarations were skipped while the uses were
+  renamed; only a line without a trailing `;` starts a definition now).
+- `m_AllocTracked.c` — `np`/`node_slot`, `pp`/`prev_slot`, comments included.
+- `ls_LoadDynamicEntities.c` — `p`/`record_cursor`;
+  `ahm_ExAllocAlchemist.c` — `pp`/`slot_ptr`.
+- `cm_ExAllocWarEvent.c` `fc`, `aemter.c` `fc`, `ls_LoadSavegameHeader.c`
+  `a`/`b`/`c`: **struct members**, not locals — renaming a field would
+  desynchronise its accesses, so they stay.
+- `crc32.c` `c`: zlib's own code, kept for library fidelity.
+
+Structs (`types.h`) — measured, not applied: the Ghidra-pulled set is a
+*shape* catalogue, and most of its fields are placeholders (`word0`, `byte2`,
+`field178`), so applying it would move placeholder names into the code.
+`PlayerSlot` is the exception worth mining: its fields are named and it
+composes `CommandPacket` at 0x18 and 0xb1 (two 0x99-byte buffers, so the
+composition is self-consistent).  `CommandPacket`'s own field map is wrong —
+it puts `payload[137]` at 0x8, while the lobby handlers read a command-type
+byte at `msg+0x10` and ints at `msg+0x14`/`msg+0x18` — so it has to be
+recovered from its use sites before anything composes it.
 
 - `CloseVfsStream` (0x10008d10, 301 B, vfs4.c) vs the pre-existing
   `vfs_CloseStream` (0x100038a0, 177 B, vfs.c): two distinct functions, not a

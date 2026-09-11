@@ -167,6 +167,13 @@ subsystem:
 | `vfs_` | VFS          | `vfs.c`                  | Virtual file system, streams    |
 | `srv_` | Server       | `server.c`               | Server lifecycle, main loop     |
 
+Two units have **no attested prefix**: `Units/Error/Error.c` and
+`Units/net/broadcast.c`. The debug strings and the binary's own names for
+them are not recovered, so their functions keep descriptive unprefixed names
+(`LogMessageInternal`, `ReportFatalError`, `SendBroadcastPacket`) rather than
+an invented `err_`/`net_`. Add a row here only when the original name is
+attested.
+
 ### Standard Library Functions
 
 Standard CRT functions (`fopen`, `fread`, `putc`, `srand`, `rand`, etc.)
