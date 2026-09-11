@@ -44,35 +44,35 @@ void __cdecl list_unlink_relink(char* ctx, char* node);
 
 int __cdecl ProcessSendData(void)
 {
-	unsigned char* p;
-	int r;
+	unsigned char* slot_cursor;
+	int result;
 	unsigned int* pkt;
 
-	p = g_connections;
+	slot_cursor = g_connections;
 	do {
-		if ((p[0] & 1) != 0) {
-			r = srv_SendPlayerData((unsigned int*) p);
-			if (r == -1) {
+		if ((slot_cursor[0] & 1) != 0) {
+			result = srv_SendPlayerData((unsigned int*) slot_cursor);
+			if (result == -1) {
 				return -1;
 			}
 			while (1) {
-				pkt = *(unsigned int**) (p + 0x2641f4);
-				if (pkt == 0 || (*(unsigned int*) p & 0x100) == 0) {
+				pkt = *(unsigned int**) (slot_cursor + 0x2641f4);
+				if (pkt == 0 || (*(unsigned int*) slot_cursor & 0x100) == 0) {
 					break;
 				}
-				memcpy(p + 0xb1, pkt, 0x99);
-				list_unlink_relink((char*) p, *(char**) (p + 0x2641f4));
-				*(unsigned int*) p &= ~0x100;
-				r = srv_SendPlayerData((unsigned int*) p);
-				if (r == -1) {
+				memcpy(slot_cursor + 0xb1, pkt, 0x99);
+				list_unlink_relink((char*) slot_cursor, *(char**) (slot_cursor + 0x2641f4));
+				*(unsigned int*) slot_cursor &= ~0x100;
+				result = srv_SendPlayerData((unsigned int*) slot_cursor);
+				if (result == -1) {
 					return -1;
 				}
 			}
-			if (r == -1) {
+			if (result == -1) {
 				return -1;
 			}
 		}
-		p += 0x264264;
-	} while ((int) p < 0x114ffe20);
+		slot_cursor += 0x264264;
+	} while ((int) slot_cursor < 0x114ffe20);
 	return 0;
 }

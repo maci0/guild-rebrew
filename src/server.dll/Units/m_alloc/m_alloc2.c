@@ -137,7 +137,7 @@ struct BlockNode {
 /* The target keeps a frame pointer here (push ebp / mov ebp,esp) and homes the
  * memset operands back into the incoming parameter slots at [ebp+8]/[ebp+0xc].
  * The pragma gives this one function the frame without a per-file /Oy-, which
- * would break its file-mates (see docs/msvc6-c-shapes.md sections 12 and 13).
+ * would break its file-mates (see docs/msvc6-count-shapes.md sections 12 and 13).
  * Residual at 245/270 (obj 258) is the block-fill prelude and nothing else.
  * The mismatched bytes are offsets 0xe9 and 0xeb-0x101, one contiguous run
  * covering the prelude and the epilogue it displaces; the first 0xe8 bytes are
@@ -199,7 +199,7 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 	if (*(int*) slot == 0) {
 			{
 				char *alen;
-				int c;
+				int count;
 				void **psize;
 				/* The target homes the fill operands back into the incoming
 				 * parameter slots, dest at [ebp+0xc] through (char*)&head+4 and
@@ -213,12 +213,12 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 				 * emitted [ebp+8] then [ebp+0xc] where the target has the reverse,
 				 * a 4-byte scheduler residue. */
 				alen = (char *)(unsigned)asize;
-				c = block->count;
+				count = block->count;
 				slot += 4;
-				c++;
+				count++;
 				alen -= 4;
 				asize = (int)(unsigned)alen;
-				block->count = c;
+				block->count = count;
 				*(int*)(slot - 4) = (int) block;
 				psize = (void**) ((char*) &head + 4);
 				*(volatile int*) &head = asize;

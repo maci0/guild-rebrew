@@ -34,9 +34,9 @@ char* __cdecl strncpy(char*, const char*, unsigned int);
 int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 {
 	unsigned int entity;
-	short* t;
+	short* entry;
 	char* r2;
-	int f;
+	int hash_index;
 	int off;
 
 	{
@@ -62,13 +62,13 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 	}
 	LogMessageInternal((char*)0x1002c748, 0x2917, (char*)0x1002cbbc, 1);
 	off = entity * 0x21c;
-	f = 0x99099 * (unsigned char)*(char*)(cmd + 3);
-	*(int*)(0x10442d00 + f * 4) = *(int*)(g_slot_table + off + 4);
+	hash_index = 0x99099 * (unsigned char)*(char*)(cmd + 3);
+	*(int*)(0x10442d00 + hash_index * 4) = *(int*)(g_slot_table + off + 4);
 	strncpy(g_slot_table + off + 0x30, (char*)cmd + 0x25, 0x10);
-	t = gm_GetEntityTableEntry(g_slot_table + off);
-	if (t != 0) {
-		*(unsigned short*)t = *(unsigned short*)(g_slot_table + off + 0x50);
-		strncpy((char*)t + 2, (char*)cmd + 0x35, 0x10);
+	entry = gm_GetEntityTableEntry(g_slot_table + off);
+	if (entry != 0) {
+		*(unsigned short*)entry = *(unsigned short*)(g_slot_table + off + 0x50);
+		strncpy((char*)entry + 2, (char*)cmd + 0x35, 0x10);
 		strncpy(g_slot_table + off + 0x40, (char*)cmd + 0x35, 0x10);
 		r2 = (char*)gm_LookupEntityRecordById(*(int*)(g_slot_table + off + 0x60));
 		if (r2 != 0)

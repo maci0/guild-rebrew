@@ -31,13 +31,13 @@ int __cdecl cm_ChkChangeAttribute(int cmd, char* result)
 	char* t_b;
 	char* t_d;
 	unsigned int i;
-	char* p;
+	char* field_cursor;
 	char* base;
 	int addr;
 	int kind;
 	int n;
 	char* rec;
-	int s;
+	int entity_id;
 
 	*(int *) (cmd + 0x10) = gm_GetFieldByType((char *) cmd, *(int *) (cmd + 0x10));
 	if (!gm_ResolveEntityById((void **) &t_b, (void **) &t_a, (void **) &t_d, *(int *) (cmd + 0x10))) {
@@ -50,22 +50,22 @@ int __cdecl cm_ChkChangeAttribute(int cmd, char* result)
 		base = t_a;
 	else
 		base = t_d;
-	p = (char *) cmd + 0x15;
+	field_cursor = (char *) cmd + 0x15;
 	for (i = 0; i < *(unsigned char *) (cmd + 0x14); i++) {
-		kind = *(signed char *) p;
-		p++;
-		n = *(signed char *) p;
-		p++;
-		addr = *(unsigned short *) p + (int) base;
-		p += 2;
+		kind = *(signed char *) field_cursor;
+		field_cursor++;
+		n = *(signed char *) field_cursor;
+		field_cursor++;
+		addr = *(unsigned short *) field_cursor + (int) base;
+		field_cursor += 2;
 		if (t_d != 0) {
 			if (addr == (int) t_d + 4) {
 				LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2479, s_cm_ChkChangeAttribute___Error_i_1002c9a0, 1);
 				return 1;
 			}
 			if (addr == (int) t_d + 0x5c) {
-				s = *(int *) p + *(int *) (t_d + 0x5c);
-				rec = (char *) gm_LookupEntityRecordById(s);
+				entity_id = *(int *) field_cursor + *(int *) (t_d + 0x5c);
+				rec = (char *) gm_LookupEntityRecordById(entity_id);
 				if (rec == 0) {
 					LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x249b, s_cm_ChkChangeAttribute___Source_obj_1002c958, 1);
 					return 1;
@@ -78,13 +78,13 @@ int __cdecl cm_ChkChangeAttribute(int cmd, char* result)
 		}
 		switch (kind) {
 		case 1:
-			if ((unsigned) n > 0) p += n;
+			if ((unsigned) n > 0) field_cursor += n;
 			break;
 		case 2:
-			if ((unsigned) n > 0) p += 2 * n;
+			if ((unsigned) n > 0) field_cursor += 2 * n;
 			break;
 		case 4:
-			if ((unsigned) n > 0) p += 4 * n;
+			if ((unsigned) n > 0) field_cursor += 4 * n;
 			break;
 		}
 	}

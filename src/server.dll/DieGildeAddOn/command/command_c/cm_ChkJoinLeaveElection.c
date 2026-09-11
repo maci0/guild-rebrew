@@ -21,47 +21,47 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 {
 	int action;
-	char* q;
+	char* query_result;
 	int player;
 	int i;
-	unsigned short w;
+	unsigned short slot_index;
 	char* rec;
 
 	action = *(int *) ((char *) cmd + 0x10);
 	if (action == 0x6a6f696e) {
-		q = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
-		if (q == 0) return 1;
-		q = (char *) gm_StartEntityQuery(*(int *) (q + 0x5d), 2, 6, 0, 0x12d);
-		if (q == 0) return 1;
+		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
+		if (query_result == 0) return 1;
+		query_result = (char *) gm_StartEntityQuery(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
+		if (query_result == 0) return 1;
 		player = *(int *) ((char *) cmd + 0x14);
 		for (i = 0; i < 4; i++) {
-			if (*(int *) (q + 0x1c + i * 4) == player) return 1;
+			if (*(int *) (query_result + 0x1c + i * 4) == player) return 1;
 		}
 		i = 0;
-		while (i < 4 && *(int *) (q + 0x1c + i * 4) != -1) {
+		while (i < 4 && *(int *) (query_result + 0x1c + i * 4) != -1) {
 			i++;
 		}
 		if (i >= 4) return 1;
 		return 0;
 	}
 	if (action == 0x6c656176) {
-		q = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
-		if (q == 0) return 1;
-		q = (char *) gm_StartEntityQuery(*(int *) (q + 0x5d), 2, 6, 0, 0x12d);
-		if (q == 0) return 1;
+		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
+		if (query_result == 0) return 1;
+		query_result = (char *) gm_StartEntityQuery(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
+		if (query_result == 0) return 1;
 		player = *(int *) ((char *) cmd + 0x14);
 		for (i = 0; i < 4; i++) {
-			if (*(int *) (q + 0x1c + i * 4) == player) break;
+			if (*(int *) (query_result + 0x1c + i * 4) == player) break;
 		}
 		if (i >= 4) return 1;
 		return 0;
 	}
 	if (action == 0x636c6572) {
-		q = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
-		if (q == 0) return 1;
-		w = *(unsigned short *) (q + 0x27);
-		if (w != 0xffff) {
-			rec = (char *) (0x100358a0 + w * 0x21c);
+		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
+		if (query_result == 0) return 1;
+		slot_index = *(unsigned short *) (query_result + 0x27);
+		if (slot_index != 0xffff) {
+			rec = (char *) (0x100358a0 + slot_index * 0x21c);
 			if (rec == 0) goto cler_query;
 			if (rec == (char *) g_entity_table_end) goto cler_query;
 			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;
@@ -71,5 +71,5 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 	}
 	return 1;
 cler_query:
-	return gm_StartEntityQuery(*(int *) (q + 0x5d), 2, 6, 0, 0x12d) == 0;
+	return gm_StartEntityQuery(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d) == 0;
 }

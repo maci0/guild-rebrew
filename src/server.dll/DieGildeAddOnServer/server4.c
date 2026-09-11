@@ -435,7 +435,7 @@ extern char g_office_slots[];
 #pragma optimize("y", off)
 void __cdecl srv_InitBuildingTypeTable(void)
 {
-	char* p;
+	char* slot_cursor;
 	int i;
 	volatile int n;
 
@@ -463,14 +463,14 @@ void __cdecl srv_InitBuildingTypeTable(void)
 		rep stosb
 	}
 	i = 0;
-	p = g_office_slots + 4;
+	slot_cursor = g_office_slots + 4;
 	do {
-		*(p - 4) = (char) i;
-		*(int*) p = -1;
-		*(int*) (p + 0x10) = -1;
-		p += 0x18;
+		*(slot_cursor - 4) = (char) i;
+		*(int*) slot_cursor = -1;
+		*(int*) (slot_cursor + 0x10) = -1;
+		slot_cursor += 0x18;
 		i++;
-	} while ((int) p < (int) (g_office_slots + 0x3f4));
+	} while ((int) slot_cursor < (int) (g_office_slots + 0x3f4));
 
 	*(unsigned char*) (g_office_slots + 0x8) = 0x1;
 	*(unsigned char*) (g_office_slots + 0x20) = 0x1;
