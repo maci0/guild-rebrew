@@ -553,6 +553,7 @@ status = "UNCHECKED"
 name = "g_office_slots"
 type = "char*"
 status = "UNCHECKED"
+section = ".data"
 
 ["SERVER.0x100256bc"]
 name = "g_float_const_bc"
@@ -678,26 +679,31 @@ status = "UNCHECKED"
 name = "g_const_5fa0"
 type = "float"
 status = "UNCHECKED"
+section = ".rdata"
 
 ["SERVER.0x10025fa8"]
 name = "g_const_5fa8"
 type = "float"
 status = "UNCHECKED"
+section = ".rdata"
 
 ["SERVER.0x10025fac"]
 name = "g_const_5fac"
 type = "float"
 status = "UNCHECKED"
+section = ".rdata"
 
 ["SERVER.0x10025fb0"]
 name = "g_const_5fb0"
 type = "float"
 status = "UNCHECKED"
+section = ".rdata"
 
 ["SERVER.0x10025fb4"]
 name = "g_const_5fb4"
 type = "float"
 status = "UNCHECKED"
+section = ".rdata"
 
 ["SERVER.0x10025fb8"]
 name = "g_const_0_01"
@@ -721,6 +727,7 @@ section = ".rdata"
 name = "g_const_57d0"
 type = "float"
 status = "UNCHECKED"
+section = ".rdata"
 
 ["SERVER.0x10029bb8"]
 name = "g_str_29bb8"
@@ -1858,5 +1865,11 @@ status = "UNCHECKED"
 ["SERVER.0x1002d4fc"]
 name = "s_ls_tmp_1002d4fc"
 type = "char"
+section = ".data"
+status = "UNCHECKED"
+
+["SERVER.0x11764088"]
+name = "g_tick_rate"
+type = "int"
 section = ".data"
 status = "UNCHECKED"
