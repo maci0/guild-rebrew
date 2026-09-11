@@ -152,18 +152,18 @@ void* __cdecl fcn_1001ae20(void* dst, const void* src, unsigned int n)
     const char* s = (const char*)src;
     unsigned int m = n;
     unsigned int keep = n;
-    char c;
+    char byte;
     if (m != 0)
     {
         if ((((unsigned int)s) & 3) == 0)
             goto dw;
     do
     {
-        c = *s++;
-        *d++ = c;
+        byte = *s++;
+        *d++ = byte;
         if (--m == 0)
             goto mid;
-        if (c == 0)
+        if (byte == 0)
             goto dstalign;
     } while ((((unsigned int)s) & 3) != 0);
 dw:
@@ -173,47 +173,47 @@ dw:
     {
         unsigned int x = *(const unsigned int*)s;
         unsigned int t = 0x7efefeff;
-        unsigned int y;
+        unsigned int word;
         t += x;
         x = ~x;
         t ^= x;
-        y = *(volatile unsigned int*)s;
+        word = *(volatile unsigned int*)s;
         s += 4;
         t &= 0x81010100;
         if (t == 0)
         {
-            *(unsigned int*)d = y;
+            *(unsigned int*)d = word;
             d += 4;
             m -= 4;
             if ((m & ~3) == 0)
                 goto tail;
             continue;
         }
-        if ((y & 0xff) == 0)
+        if ((word & 0xff) == 0)
         {
-            y = 0;
-            *(unsigned int*)d = y;
+            word = 0;
+            *(unsigned int*)d = word;
             d += 4;
             m -= 4;
             goto zfdwords;
         }
-        if ((y & 0xff00) == 0)
+        if ((word & 0xff00) == 0)
         {
-            y &= 0xff;
-            *(unsigned int*)d = y;
+            word &= 0xff;
+            *(unsigned int*)d = word;
             d += 4;
             m -= 4;
             goto zfdwords;
         }
-        if ((y & 0xff0000) == 0)
+        if ((word & 0xff0000) == 0)
         {
-            y &= 0xffff;
-            *(unsigned int*)d = y;
+            word &= 0xffff;
+            *(unsigned int*)d = word;
             d += 4;
             m -= 4;
             goto zfdwords;
         }
-        *(unsigned int*)d = y;
+        *(unsigned int*)d = word;
         d += 4;
         m -= 4;
         if ((m & ~3) == 0)
@@ -225,9 +225,9 @@ tail:
         goto mid;
     do
     {
-        c = *s++;
-        *d++ = c;
-        if (c == 0)
+        byte = *s++;
+        *d++ = byte;
+        if (byte == 0)
             goto zf0;
     } while (--m != 0);
     goto mid;

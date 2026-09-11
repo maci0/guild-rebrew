@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <stdio.h>
 extern unsigned int __cdecl crc32(unsigned int crc, unsigned char* buf, unsigned int len);
-extern int __cdecl crt_toupper(int c);
+extern int __cdecl crt_toupper(int current_char);
 /* Opens a VFS stream over a caller buffer. Parses the mode flags
  * (N = none, R = read, W = write, Z = zlib) and initializes the
  * stream structure with the matching inflate/deflate setup.
@@ -195,23 +195,23 @@ extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
 {
 	char* stream;
-	char* p;
-	char c;
-	int r;
+	char* path_cursor;
+	char current_char;
+	int result;
 	int mode14;
 	unsigned char mode13;
 	unsigned char mode18;
 
-	r = 0;
+	result = 0;
 	*(unsigned char*) &mode14 = 1;
 	mode18 = 1;
 	mode13 = 1;
-	c = 0;
+	current_char = 0;
 	if (buf == 0 || size <= 0) {
 		goto done;
 	}
-	for (p = mode_flags, c = *mode_flags; *p != 0; p++, c = *p) {
-	switch (crt_toupper(c)) {
+	for (path_cursor = mode_flags, current_char = *mode_flags; *path_cursor != 0; path_cursor++, current_char = *path_cursor) {
+	switch (crt_toupper(current_char)) {
 		case 'N':
 			mode18 = 0;
 			mode13 = 0;
@@ -308,9 +308,9 @@ finalize:
 		*(unsigned char*) (stream + 0x13c) = (unsigned char) (((*(unsigned char*) (stream + 0x13c) & 0xf6) ^ (*(unsigned char*) &mode14 & 1)) | ((mode18 & 1) << 3));
 		sprintf(stream, (char*) 0x100294a4, buf, size, mode18, mode18);
 	}
-	r = (int) stream;
+	result = (int) stream;
 done:
-	return r;
+	return result;
 cleanup:
 	m_PoolFree((void*) 0x10034670, stream);
 	return 0;

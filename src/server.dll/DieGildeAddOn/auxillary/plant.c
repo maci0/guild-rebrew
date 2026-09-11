@@ -32,18 +32,18 @@ extern int g_dynamic_count;
 char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 {
 	int i;
-	char* p;
+	char* record_cursor;
 	unsigned char marker;
 
 	i = 0;
-	p = base + 9;
+	record_cursor = base + 9;
 	marker = 0xff;
 	while (i < 0x40) {
-		if ((unsigned char) p[-1] == type1 && (unsigned char) p[0] == type2 && p[4] != (char) marker) {
+		if ((unsigned char) record_cursor[-1] == type1 && (unsigned char) record_cursor[0] == type2 && record_cursor[4] != (char) marker) {
 			return base + i * 0x18;
 		}
 		i++;
-		p += 0x18;
+		record_cursor += 0x18;
 	}
 	return (char*) 0;
 }
@@ -135,7 +135,7 @@ int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, unsigned int y, int 
 {
 	char* map;
 	char* rec;
-	char* p;
+	char* record_cursor;
 	int i;
 	unsigned char marker;
 
@@ -146,22 +146,22 @@ int __cdecl plt_SetPlantMap(int zone_table, unsigned int x, unsigned int y, int 
 	}
 	marker = 0xff;
 	i = 0;
-	p = (char*) zone_table + 9;
+	record_cursor = (char*) zone_table + 9;
 	while (i < 0x40) {
-		if ((unsigned char) p[-1] == x && (unsigned char) p[0] == y && p[4] != (char) marker) {
+		if ((unsigned char) record_cursor[-1] == x && (unsigned char) record_cursor[0] == y && record_cursor[4] != (char) marker) {
 			goto apply;
 		}
 		i++;
-		p += 0x18;
+		record_cursor += 0x18;
 	}
 	i = 0;
-	p = (char*) zone_table + 0xd;
+	record_cursor = (char*) zone_table + 0xd;
 	while (i < 0x40) {
-		if (p[0] == (char) marker) {
+		if (record_cursor[0] == (char) marker) {
 			goto store_new;
 		}
 		i++;
-		p += 0x18;
+		record_cursor += 0x18;
 	}
 	LogMessageInternal(s_D__Develop_DieGildeAddOn_auxilla_1002d9c0, 0x9b, s_plt_SetPlantMap____Could_not_fin_1002d990, 1);
 	return 0;
