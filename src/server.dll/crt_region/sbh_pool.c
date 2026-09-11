@@ -8,7 +8,7 @@
  * the MSVC 6.0 CRT source with the game's modifications:
  *
  *   - _crtheap replaced by the game's heap handle _crtheap
- *   - memset -> fcn_10021240, memmove -> fcn_1001b200 (game copies)
+ *   - memset -> memset, memmove -> memcpy (game copies)
  *   - sbh globals relocated to 0x11766430-0x11766444 / 0x10031b78 /
  *     0x10033b98 / 0x100355a4 (defined in sbh_globals.c)
  *
@@ -125,8 +125,8 @@ extern int __cdecl fcn_1001dc23(SbhHeader *);                  /* __sbh_alloc_ne
 extern OldSbhRegion * __cdecl fcn_1001e014(void);              /* __old_sbh_new_region */
 extern void __cdecl fcn_1001e1ae(int);                         /* __old_sbh_decommit_pages */
 extern void * __cdecl fcn_1001e514(OldSbhPage *, size_t, size_t); /* __old_sbh_alloc_block_from_page */
-extern void * __cdecl fcn_10021240(void *, int, unsigned int); /* game memset */
-extern void * __cdecl fcn_1001b200(void *, const void *, unsigned int); /* game memmove */
+extern void* __cdecl memset(void*, int, unsigned int);
+extern void* __cdecl memcpy(void*, const void*, unsigned int);
 
 /* the static region descriptor occupies 0x2020 bytes at 0x10031b78
  * (data_globals.c defines the head symbol as a byte anchor) */
@@ -327,7 +327,7 @@ void __cdecl fcn_1001d540(SbhHeader * pHeader, void * pvAlloc)
 
                 HeapFree(_crtheap, 0, ((SbhHeader *)__sbh_pHeaderDefer)->pRegion);
 
-                fcn_1001b200((void *)__sbh_pHeaderDefer,
+                memcpy((void *)__sbh_pHeaderDefer,
                              (void *)((SbhHeader *)__sbh_pHeaderDefer + 1),
                              (int)((SbhHeader *)__sbh_pHeaderList + __sbh_cntHeaderList) -
                              (int)((SbhHeader *)__sbh_pHeaderDefer + 1));
@@ -963,7 +963,7 @@ OldSbhRegion * __cdecl fcn_1001e014(void)
             }
 
             /* initialize the pages */
-            fcn_10021240(ppage, 0, 0x1000 * 16);
+            memset(ppage, 0, 0x1000 * 16);
             while (ppage < pregnew->p_pages_begin + 16)
             {
                 ppage->p_starting_alloc_map = &(ppage->alloc_map[0]);
@@ -1270,7 +1270,7 @@ void * __cdecl __old_sbh_alloc_block(size_t para_req)
                              4) == ppage)    /* MEM_COMMIT, PAGE_READWRITE */
             {
                 /* initialize the committed pages */
-                fcn_10021240(ppage, i * 0x1000, 0);
+                memset(ppage, i * 0x1000, 0);
 
                 for (j = 0, ppage2 = ppage, pregmap2 = pregmap;
                      j < i;

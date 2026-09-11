@@ -74,7 +74,6 @@ int __cdecl vfs_CleanupObject(char* obj)
 
 extern int g_stream_count;
 extern int g_stream_pool;
-extern int __cdecl fcn_1001a18a(void* obj);
 
 int __cdecl CloseVfsStream(void* stream)
 {
@@ -125,7 +124,7 @@ int __cdecl CloseVfsStream(void* stream)
 					} else if (*(unsigned char*) ((char*) stream + 0x13c) & 8) {
 						vfs_FlushAndClose((int) *(void**) ((char*) stream + 0x100));
 					} else {
-						fcn_1001a18a(*(void**) ((char*) stream + 0x100));
+						fclose(*(void**) ((char*) stream + 0x100));
 					}
 				}
 		}

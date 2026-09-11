@@ -22,7 +22,6 @@ struct GroupNode {
 };
 
 void* __cdecl fcn_1001aff0(const char* haystack, const char* needle);
-char* __cdecl fcn_1001a540(const char* s, int c);
 extern int g_array_count;
 extern int g_stat1;
 extern int g_stat2;
@@ -60,7 +59,7 @@ void __cdecl ReportMemoryGroupInfo(const char* toggle)
 			if (node->name[0] != '!' || node->count_total != 0 || match != 0) {
 				if (toggle == 0 || match != 0) {
 					strcpy(buf2, node->name);
-					p = fcn_1001a540(buf2, 0x3a);
+					p = strrchr(buf2, 0x3a);
 					if (p != 0) {
 						*p = 0;
 					}

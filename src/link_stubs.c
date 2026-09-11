@@ -174,20 +174,15 @@ int g_worker_entry_count = 0;
 int __cdecl fcn_10002640(void) { return 0; }
 int __cdecl fcn_100058d0(void) { return 0; }
 int __cdecl fcn_10016cd0(void) { return 0; }
-int __cdecl fcn_1001a18a(void) { return 0; }
-int __cdecl fcn_1001a540(void) { return 0; }
 int __cdecl fcn_1001a7f7(void) { return 0; }
 int __cdecl fcn_1001accd(void) { return 0; }
 int __cdecl fcn_1001aff0(void) { return 0; }
-int __cdecl fcn_1001b542(void) { return 0; }
 int __cdecl fcn_1001c083(void) { return 0; }
 int __cdecl fcn_1001e8b4(void) { return 0; }
 int __cdecl fcn_1001eab0(void) { return 0; }
 /* GROUP B: game memset/memmove (0x10021240 / 0x1001b200) - stubs until the
  * crt mem TUs are reversed; postlink rewrites call targets to the reference
  * VAs. */
-void * __cdecl fcn_10021240(void * dst, int c, unsigned int n) { return 0; }
-void * __cdecl fcn_1001b200(void * dst, const void * src, unsigned int n) { return 0; }
 int __cdecl fcn_1001ede5(void) { return 0; }
 int __cdecl fcn_1001eec1(void) { return 0; }
 int __cdecl find_entity_26(void) { return 0; }

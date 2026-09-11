@@ -4,12 +4,12 @@
 // SIZE: 22
 
 extern float g_const_1_over_32767;
-int __cdecl fcn_1001b542(void); /* rand-like helper */
+extern int __cdecl rand(void);
 
 /* Returns a random float in [0, 1): the raw 32-bit random value scaled
  * by the 0x10025fbc constant. */
 
 double __cdecl gm_RandomFloat01(void)
 {
-	return (float) fcn_1001b542() * g_const_1_over_32767;
+	return (float) rand() * g_const_1_over_32767;
 }

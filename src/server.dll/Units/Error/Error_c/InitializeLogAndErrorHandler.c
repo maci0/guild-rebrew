@@ -20,9 +20,9 @@ extern char* __cdecl ctime(const long* t);
 extern void* __cdecl fopen(const char* path, const char* mode);
 extern int __cdecl fseek(void* f, long off, int whence);
 extern long __cdecl ftell(void* f);
-extern int __cdecl fcn_1001a18a(char* f);
+extern int __cdecl fclose(void* f);
 extern int __cdecl fputs(const char* s, void* f);
-extern char* __cdecl fcn_1001a540(const char* s, int c);
+extern char* __cdecl strrchr(const char* s, int c);
 extern void __cdecl fcn_10002640(char* msg, int flags, int severity);
 
 void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned int d)
@@ -42,7 +42,7 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 	h = time(0);
 	GetWindowTextA((HWND) c, path, 0x100);
 	((void (__stdcall*)(int, const char*, int)) *(void**) 0x1002403c)(0, (const char*) 0x11766100, 0x104);
-	*fcn_1001a540((char*) 0x11766100, 0x5c) = 0;
+	*strrchr((char*) 0x11766100, 0x5c) = 0;
 	sprintf((char*) 0x117640e0, (char*) 0x1002735c, path, ctime((long*) &h));
 	if (g_log_mode_flags & 1) {
 		sp = (char*) 0x10027084;
@@ -52,11 +52,11 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 			if (f != 0) {
 				fseek(f, 0, 2);
 				if (ftell(f) > 0x10000) {
-					fcn_1001a18a(f);
+					fclose(f);
 					f = fopen(buf, "wt");
 					fputs((char*) 0x1002733c, f);
 				}
-				fcn_1001a18a(f);
+				fclose(f);
 			}
 			sp += 0x20;
 		} while ((int) sp < 0x100270e4);
