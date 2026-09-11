@@ -3,8 +3,9 @@
 // FUNCTION: SERVER 0x100109d0
 // SIZE: 832
 
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 extern int g_field_worker_count[];
-extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int g_field_entry_count[];
 extern void* __cdecl m_AllocTracked(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);

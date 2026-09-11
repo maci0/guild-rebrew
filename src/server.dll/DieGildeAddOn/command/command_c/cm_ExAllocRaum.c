@@ -6,6 +6,8 @@
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 // SIZE 0x264264
 typedef struct player_slot {
@@ -19,7 +21,6 @@ typedef struct copy_12_dwords {
 	uint data[12];
 } copy_12_dwords;
 
-extern unsigned char g_connections[];
 char* __cdecl gm_AllocGebaeude(uchar, uint);
 
 extern char s_gm_AllocGebaeude___failed_1002cb34[];

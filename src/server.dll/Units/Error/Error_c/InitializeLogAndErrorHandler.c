@@ -7,13 +7,14 @@
 // SIZE: 404
 
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 extern int g_panic_callback;
 extern void* g_crash_callback;
 extern unsigned int g_log_mode_flags; /* 0x10034618 */
 extern char g_crash_dump_all_frames;
 extern int g_owner_window;
-extern int g_log_file_handle;
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 extern long __cdecl time(long* t);
 extern char* __cdecl ctime(const long* t);

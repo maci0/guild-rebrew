@@ -2,6 +2,8 @@
 #include <string.h>
 #include <time.h>
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
 extern char* __cdecl ctime(const time_t*);
 
@@ -10,9 +12,7 @@ char __cdecl AnalyzeInstruction(int, int, int, int*);
 unsigned int __cdecl EmitCrashModuleLine(int*);
 char* __cdecl GetDebugRecordByIndex();
 void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
-extern int g_log_level_table[];
 extern unsigned int g_log_mode_flags;
-extern int g_log_file_handle;
 extern int g_owner_window;
 extern void (*g_panic_callback)(void);
 extern char g_log_message_buffer[];
@@ -131,7 +131,6 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 		DispatchLogOutput((char*) 0x117640e0, *(int*) 0x10034618, severity);
 	}
 }
-extern unsigned int g_player_slot_overflow;
 unsigned char g_file_append_mode[1] = {
     0x61,
 };

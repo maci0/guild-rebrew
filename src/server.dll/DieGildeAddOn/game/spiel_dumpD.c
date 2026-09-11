@@ -6,14 +6,14 @@
 #include "../../Units/Error/error.h"
 
 #include <stdio.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void* list, int obj_id);
 
-extern char* g_entity_type_table; /* 0x100a8c30 */
-extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
 extern unsigned char* g_query_filter_base; /* 0x10035464 */
 extern short g_query_filter_extra2; /* 0x10030b8c */
 extern short g_query_filter_extra3; /* 0x10030b8e */

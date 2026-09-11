@@ -3,8 +3,9 @@
 // FUNCTION: SERVER 0x10010710
 // SIZE: 320
 
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 extern int g_field_worker_count_wt0[];
-extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int g_field_worker_count_wt1[];
 extern int g_field_worker_count_wt2[];
 extern int g_field_worker_count_wt3[];

@@ -31,12 +31,13 @@
  */
 
 // SIZE 0x264264
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 typedef struct player_slot {
 	int flags;
 	char gap_0004[0x264260];
 } player_slot;
 
-extern unsigned char g_connections[];
 extern int g_game_speed_index;
 extern int g_game_speed_value;
 extern int g_game_speed_table[];

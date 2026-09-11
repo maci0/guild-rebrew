@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 int __cdecl _ftol(void);
 
 typedef int(__cdecl* ALLOCFN)(int, int, int);
@@ -27,14 +29,10 @@ typedef struct {
 } Record;
 #pragma pack(pop)
 
-extern char* g_item_def_table; /* 0x101de450 */
 void __cdecl gm_InitEntitySlots(void);
 // DATA: SERVER 0x100a8c30  /* g_entity_type_table */
-extern unsigned short* g_query_base;
 extern int g_query_limit;
 void __cdecl m_FreeTracked(void*);
-extern char* g_entity_type_table;
-extern unsigned char* g_entity_ptr;
 void* __cdecl FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -90,7 +88,6 @@ extern char g_entity_end[];
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
-extern float g_const_42_0;
 int __cdecl gm_RandomMod(unsigned short range);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AssignBuildingOwner(unsigned char*, unsigned short, unsigned int);
@@ -99,7 +96,6 @@ int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 void* __cdecl gm_AddOrAccumulateObject(int, int, int);
 extern unsigned int g_entity_slot_table[];
-extern float g_const_0_01; /* 0x10025fb8 */
 extern float g_const_1_5; /* 0x10025fb4 */
 extern float g_const_2_2; /* 0x10025fb0 */
 extern float g_const_0_06875; /* 0x10025fac */
@@ -116,7 +112,6 @@ int __cdecl compute_size(char*); /* 0x10019d00 */
 char* __cdecl gm_FindEntityByOwner(int); /* 0x10019c60 */
 int __cdecl gm_GetMsgField(char*, char*); /* 0x10019cd0 */
 int __cdecl ahm_LookupEntityInTable(int); /* 0x1000c670 */
-extern float g_const_1_over_32767;
 double __cdecl gm_RandomFloat01(void);
 extern float g_const_1_0;
 extern float g_const_neg_1_0;

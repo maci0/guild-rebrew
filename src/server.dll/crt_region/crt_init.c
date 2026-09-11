@@ -1,6 +1,8 @@
 // CFLAGS: /O1 /Gd
 // FUNCTION: SERVER 0x1001b8fb (was FUNCTION; provided by LIBCMT / library_msvc.h)
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 /* __CRT_INIT — the CRT's process attach/detach init + shutdown logic as
  * compiled into the game.  It is called manually by the game's custom
@@ -23,14 +25,6 @@ extern void __cdecl _setargv(void);           /* 0x1001fa79 */
 extern void __cdecl _setenvp(void);           /* 0x1001f9c0 */
 extern void __cdecl fcn_1001a643(void);       /* 0x1001a643 - initterm helper */
 
-extern unsigned int _osver; /* 0x100354b4 - OS version dword */
-extern unsigned int _winver; /* 0x100354b8 - (major << 8) | minor */
-extern unsigned int _winmajor; /* 0x100354bc - OS major */
-extern unsigned int _winminor; /* 0x100354c0 - OS minor */
-extern int _C_Termination_Done;          /* 0x100354ec - _cexit-already-ran flag */
-extern int __proc_attached;          /* 0x100354fc - attach/detach refcount */
-extern void* _aenvptr;        /* 0x10035500 - environment strings ptr */
-extern void* _acmdln;        /* 0x11767584 - GetCommandLineA result */
 
 int __stdcall __CRT_INIT(void* hmod, unsigned int reason, void* reserved)
 {

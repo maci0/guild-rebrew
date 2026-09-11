@@ -53,8 +53,9 @@
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern char* g_entity_type_table;
 
 void __cdecl table_lookup(uint, ushort*);
 

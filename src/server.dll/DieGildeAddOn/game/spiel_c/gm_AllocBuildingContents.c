@@ -83,13 +83,11 @@
 #include "../../../Units/Error/error.h"
 
 #include <stdlib.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern char* g_item_def_table;         /* 0x101de450 */
-extern char* g_entity_type_table;      /* 0x100a8c30 */
 extern int g_query_limit;              /* 0x10035450 */
 extern unsigned char g_current_season; /* 0x10035439 */
-extern char* g_slot_array;             /* 0x1009b770 — array symbol, not a pointer */
-extern int g_producer_id_table;                 /* 0x1002dde0 — producer id table */
 
 void* __cdecl gm_AllocObjekt(int, int, int);
 unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int first_arg, ...);

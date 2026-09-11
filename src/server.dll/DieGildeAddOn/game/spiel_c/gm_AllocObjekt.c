@@ -13,11 +13,11 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern char* g_item_def_table; /* 0x101de450 */
 extern int g_query_limit;      /* 0x10035450 */
 extern int g_next_object_id;   /* 0x10030b6c */
-extern int g_current_year;     /* 0x10035880 */
 
 int __cdecl LogMessageInternal(char*, int, char*, int);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);

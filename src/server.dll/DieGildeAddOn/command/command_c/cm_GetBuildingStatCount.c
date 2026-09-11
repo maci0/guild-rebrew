@@ -1,7 +1,8 @@
 
 #include "../command_internal.h"
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern char* g_entity_type_table;
 
 /* Byte-match note: RELOC at 135/135 (was 41/135 at 132B, then 121/135).
  * The tier byte is read in each test rather than once into a local.  That

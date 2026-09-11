@@ -1,5 +1,7 @@
 // SUPPORT: SERVER reversed mirror of stock LIBCMT heap-init/term code, compiled to supply the __sbh/heap symbols locally so sbheap.obj stays out of the link (it would import IsBadWritePtr). the 4-byte-larger fcn_1001d280 mirror and the asm strcmp-family fcn_10021200 cannot match in pure C; this file is scaffolding, not reversed game code
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 /* Game's CRT-startup overrides for the heap init/term pair (the binary
  * replaces the LIBCMT crt_heap_init/__heap_term with its own pool/block
@@ -11,11 +13,6 @@ extern int __cdecl fcn_1001d280(void);   /* 0x1001d280 - allocator mode select *
 extern int __cdecl fcn_1001d4cd(int);    /* 0x1001d4cd - pool allocator init */
 extern int __cdecl fcn_1001e014(void);   /* 0x1001e014 - block allocator init */
 
-extern void* _crtheap;   /* 0x1176644c - process heap handle */
-extern int __active_heap;     /* 0x11766450 - allocator mode: 3=pool, 2=block */
-extern int __sbh_cntHeaderList;     /* 0x11766440 - pool region count */
-extern void* __sbh_pHeaderList;   /* 0x11766444 - pool region descriptor array */
-extern char g_old_sbh_region_head;   /* 0x10031b78 - block allocator region-list head */
 
 /* 0x14-byte pool region descriptor: base = 1MB VirtualAlloc'd region,
  * header = separately heap-allocated region struct. */
@@ -168,13 +165,6 @@ checkver:
 /* _sbh_heap_init: allocates the region-header table from the process heap
  * and initializes the pool-allocator globals. */
 
-extern void* _crtheap;   /* process heap handle */
-extern void* __sbh_pHeaderList;   /* pool region descriptor array */
-extern void* __sbh_pHeaderDefer;   /* deferred group header (__sbh_pHeaderDefer) */
-extern int __sbh_cntHeaderList;     /* pool region count */
-extern void* __sbh_pHeaderScan;   /* pool region scan cursor */
-extern unsigned int g_max_pool_alloc_size;  /* max pool allocation size */
-extern int __sbh_sizeHeaderList;     /* pool header-list allocated size */
 
 int __cdecl fcn_1001d4cd(unsigned int size)
 {

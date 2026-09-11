@@ -4,6 +4,8 @@
 #include "../../game/entity.h"
 
 #include <stdlib.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 extern void amt_FindEntity26(int);
 extern void amt_FindEntity27(int);
@@ -12,7 +14,6 @@ extern unsigned char _ftol();
 extern void gm_AddOrAccumulateObject(int, int, int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version; /* 0x1002d4ec */
-extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
 extern int g_aux_entity_count; /* 0x101de454 */
 extern int g_aux_entity_buffer; /* 0x101de55c */
 extern unsigned int gm_LookupEntityRecordById(unsigned int);

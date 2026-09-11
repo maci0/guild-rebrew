@@ -4,6 +4,8 @@
 #include "../game/entity.h"
 
 #include <stdlib.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 int __cdecl AllocGraveyardField(int);
 extern void amt_FindEntity26(int);
@@ -15,7 +17,6 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 extern int g_file_version;
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 extern int g_file_version; /* 0x1002d4ec */
-extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
 extern int g_aux_entity_count; /* 0x101de454 */
 extern int g_aux_entity_buffer; /* 0x101de55c */
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
@@ -43,7 +44,6 @@ extern unsigned int ls_ID2Ptr(void);
 // ls_LoadExistingEntities
 
 void __cdecl gm_CleanupObjectEntities(void);
-extern unsigned short* g_query_base; /* 0x100a8c34 */
 extern int g_query_limit; /* 0x10035450 */
 
 int __cdecl ls_LoadExistingEntities(int arg1)

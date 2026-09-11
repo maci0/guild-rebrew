@@ -413,8 +413,9 @@
 
 // FUNCTION: SERVER 0x10011bf0
 
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
-extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int g_citizen_count;
 extern int g_next_object_id;
 extern int g_worker_entry_count[];

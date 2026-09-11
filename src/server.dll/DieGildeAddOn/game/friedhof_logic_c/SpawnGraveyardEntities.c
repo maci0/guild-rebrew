@@ -3,11 +3,9 @@
 // FUNCTION: SERVER 0x10010850
 // SIZE: 370
 
-extern char* g_entity_type_table;
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 extern int g_next_object_id;
-extern int g_current_year;
-extern float g_const_42_0;
-extern float g_const_21_0;
 int __cdecl gm_RandomMod(int range);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);

@@ -117,9 +117,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern char* g_entity_type_table;
-extern char* g_item_def_table;
 extern int g_query_limit;
 void* __cdecl gm_AllocObjekt(int, int, int);
 char* __cdecl gm_AllocBuildingContents(char*, int);

@@ -13,20 +13,12 @@
 #include "../../../Units/Error/error.h"
 
 #include <stddef.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern char* g_item_def_table; /* 0x101de450 */
 extern int g_query_filter_max_id; /* 0x10030b94 */
 extern int g_query_filter_owner; /* 0x10030b98 */
 extern unsigned short g_query_filter_type; /* 0x10030b9c */
-extern unsigned char g_query_filter_state; /* 0x10030b9e */
-extern char g_query_flag1; /* 0x1003545c */
-extern char g_query_flag2; /* 0x1003545d */
-extern char g_query_flag3; /* 0x1003545e */
-extern char g_query_active; /* 0x10035454 */
-extern int g_query_count; /* 0x10035458 */
-extern int g_query_match_count; /* 0x100a8c38 */
-extern unsigned short* g_query_cursor; /* 0x10035468 */
-extern unsigned short* g_query_base; /* 0x100a8c34 */
 
 void* __cdecl gm_NextEntityQueryMatch(void);
 

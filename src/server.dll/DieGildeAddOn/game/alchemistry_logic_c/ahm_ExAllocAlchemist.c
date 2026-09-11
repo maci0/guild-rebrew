@@ -3,6 +3,8 @@
 #include "../../../Units/m_alloc/m_alloc.h"
 
 #include <string.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 int __cdecl _ftol(void);
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
@@ -18,7 +20,6 @@ extern unsigned char g_current_season;
 extern double g_dbl_const_6d0; /* 0x100256d0 */
 extern dispatch_fn g_chain_handler_table[];
 
-extern char* g_entity_type_table;
 extern int g_citizen_count;
 extern unsigned char g_slot_table[];
 extern char g_relationship_matrix_primary[];

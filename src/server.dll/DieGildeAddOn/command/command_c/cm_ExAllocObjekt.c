@@ -40,9 +40,10 @@
  */
 
 #include "../command_internal.h"
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 void* __cdecl memcpy(void*, const void*, unsigned int);
-extern unsigned char g_connections[];
 char* __cdecl gm_AllocObjekt(int, int, int);
 
 /* Execution handler: allocates a new object in an entity's

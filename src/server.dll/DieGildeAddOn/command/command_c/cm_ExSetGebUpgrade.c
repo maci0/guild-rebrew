@@ -49,8 +49,9 @@
 
 #include "../../../Units/Error/error.h"
 #include "../command_internal.h"
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern char* g_entity_type_table;
 extern unsigned char g_current_season;
 
 void __cdecl ReportMessage(char* msg, ...);

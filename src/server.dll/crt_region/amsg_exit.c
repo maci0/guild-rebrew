@@ -1,5 +1,7 @@
 // SUPPORT: SERVER reversed mirror of stock LIBCMT amsg/crt0msg code, compiled to keep crt0msg.obj out of the link (its runtime-error strings duplicate rdata_restore.c). the strcat mirror (0x1001f8e0) is asm in the CRT and cannot match in pure C; this file is scaffolding, not reversed game code
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 /* NOT a game override: this is stock LIBCMT __amsg_exit from dllcrt0.obj.
  * The bytes at 0x1001ba71 are identical to the library body outside that
@@ -19,12 +21,9 @@
 
 /* rterr_entry: int num + char* text = 8 bytes. */
 // SIZE 0x8
-struct rterr_entry { int num; char* text; };   /* matches data_globals.c */
 
 extern void __cdecl fcn_1001fdf8(void);   /* 0x1001fdf8 - pre-exit hook */
 extern void __cdecl fcn_1001fe31(int);    /* 0x1001fe31 - _NMSG_WRITE */
-extern int __error_mode;                    /* 0x10035508 - report-mode flag */
-extern int __app_type;                    /* 0x1003550c - report-mode flag 2 */
 extern void (__cdecl* g_100317f0)(int);   /* 0x100317f0 - _exit hook */
 
 void __cdecl _amsg_exit(int msg)
@@ -56,7 +55,6 @@ void __cdecl fcn_1001fdf8(void)
  * writes the message text to stderr or shows the "Runtime Error!" box via
  * __crtMessageBoxA (0x10022107).  0xfc suppresses the box (abort path). */
 
-extern struct rterr_entry g_rterrlist[18];   /* 0x10033ef0 - error table */
 extern char* __cdecl fcn_1001f8e0(char*, const char*);    /* 0x1001f8e0 - strcat */
 extern void* __cdecl fcn_1001ae20(char*, const char*, unsigned int); /* 0x1001ae20 - strncpy */
 extern int __cdecl fcn_10022107(const char*, const char*, unsigned int); /* 0x10022107 - __crtMessageBoxA */
@@ -275,9 +273,6 @@ end:
  * GetActiveWindow/GetLastActivePopup owner-window chain) on first use and
  * forwards the (text, caption, type) triple. */
 
-extern void* pfnMessageBoxA;   /* 0x10035838 - cached MessageBoxA */
-extern void* pfnGetActiveWindow;   /* 0x1003583c - cached GetActiveWindow */
-extern void* pfnGetLastActivePopup;   /* 0x10035840 - cached GetLastActivePopup */
 
 int __cdecl fcn_10022107(const char* text, const char* caption, unsigned int type)
 {

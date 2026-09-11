@@ -1,8 +1,9 @@
 #include "../../Units/Error/error.h"
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 extern int __cdecl gm_RandomMod(unsigned short range);
 unsigned int __cdecl gm_CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 void __cdecl table_lookup(unsigned int a, unsigned short* b);
-extern char* g_entity_type_table;
 unsigned short __cdecl FindAndMatchParents(unsigned int param);
 extern unsigned char g_entity_type_bytes[];
 extern unsigned char g_stat_b_array[];

@@ -44,6 +44,8 @@
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 // SIZE 0x264264
 typedef struct player_slot {
@@ -53,7 +55,6 @@ typedef struct player_slot {
 } player_slot;
 
 char* __cdecl gm_AllocGebaeude(unsigned char, unsigned short);
-extern unsigned char g_connections[];
 
 extern char s_cm_ExCreateGeb____Could_not_find_1002d41c[];
 extern char s_cm_ExCreateGeb____failed_1002d400[];

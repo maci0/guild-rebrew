@@ -5,6 +5,8 @@
 #include <string.h>
 #include <windows.h>
 #include <winsock2.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 unsigned int __stdcall timeGetTime(void);
 
 /* Command layer (local externs — server.c uses different signatures) */
@@ -32,14 +34,11 @@ void __cdecl ShutdownMemoryAllocator();
 int __cdecl gm_Open(char*);
 int __cdecl CreateListenSocket(int port);
 void __cdecl InitPacketPool(int);
-extern int g_net_socket;
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 int __cdecl SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
 int GetCommandPayloadSize(unsigned char* cmd_payload);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
-extern unsigned char g_connections[]; /* 0x101deb00 */
-extern int g_connection_counter; /* 0x1003467c */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 
@@ -87,7 +86,6 @@ srv_done:
 /* closesocket = 0x10024198, shutdown = 0x10024174 */
 
 // DATA: SERVER 0x101deb14
-extern unsigned int g_player_slot_field;
 
 // SIZE 0x10 — struct sockaddr_in (Winsock system struct)
 int __cdecl CreateListenSocket(int port)
@@ -499,6 +497,5 @@ int __cdecl SendPlayerData(unsigned int* conn)
 // DATA: SERVER 0x101deac0
 // DATA: SERVER 0x101deac4
 // DATA: SERVER 0x101deac8
-extern unsigned int g_download_slots[8];
 // DATA: SERVER 0x101deae8
 

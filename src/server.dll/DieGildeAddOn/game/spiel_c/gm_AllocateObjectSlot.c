@@ -6,8 +6,9 @@
 // FUNCTION: SERVER 0x100165a0
 
 #include <stdlib.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern unsigned short* g_query_base;
 
 char* __cdecl gm_AllocateObjectSlot(void)
 {

@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 typedef int(__cdecl* ALLOCFN)(int, int, int);
 
 #pragma intrinsic(memcpy, memset)
@@ -18,15 +20,10 @@ typedef struct {
 } Record;
 #pragma pack(pop)
 
-extern char* g_item_def_table; /* 0x101de450 */
 void __cdecl gm_InitObjektHersteller(void);
 void __cdecl gm_InitEntitySlots(void);
-extern char* g_entity_type_table;
-extern unsigned char* g_entity_ptr;
-extern unsigned short* g_query_base;
 extern int g_100a8cf8;
 extern int g_1009b764;
-extern int g_producer_id_table;
 /* fcn.1001a140 — the original binary calls this thunk (srand(timeGetTime()))
  * between the producible-count loop and the exit log; the reversed CRT
  * provided it as `getpid` before run_000.c was dropped (c77489a). */
@@ -213,27 +210,17 @@ char g_dynasty_field_48;
 extern char g_dynasty_field_49;
 extern int g_dynasty_field_4c;
 char g_query_active;
-extern int g_query_count;
 char g_query_flag1;
 char g_query_flag2;
 char g_query_flag3;
 extern unsigned char* g_query_filter_base;
 unsigned short* g_query_cursor;
 extern unsigned short* g_entity_table_end;
-extern int g_current_year;
-extern unsigned short g_current_hour;
-extern int g_clock_copy_mid;
-extern short g_clock_copy_tail;
 extern unsigned char g_slot_table[];
 extern char g_entity_state_base[];
-extern int g_entity_ref_table;
 extern unsigned char g_entity_type_bytes[];
 int g_array_count = 0;
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
-extern int g_stat1;
-extern int g_stat2;
-extern int g_stat3;
-extern int g_stat4;
 int g_flag_3c = 0;
 void* g_array_ptr = 0;
 char g_stream_pool[1] = {

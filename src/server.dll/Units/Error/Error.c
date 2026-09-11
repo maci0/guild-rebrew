@@ -2,6 +2,8 @@
 #include <string.h>
 #include <time.h>
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
 extern char* __cdecl ctime(const time_t*);
 
@@ -26,10 +28,8 @@ void __cdecl write_log(char*, int, char*);
 // DispatchLogOutput
 
 // DATA: SERVER 0x11766100
-extern char g_log_buffer[256];
 
 // DATA: SERVER 0x11766204
-extern int g_log_file_handle;
 
 // DATA: SERVER 0x10027078
 int g_log_level_table[12] = {

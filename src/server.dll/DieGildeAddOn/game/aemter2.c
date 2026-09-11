@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include "../../Units/Error/error.h"
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 void* __cdecl gm_LookupEntityRecordById(int);
-extern unsigned short g_current_hour;
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
 void __cdecl InitBuildingTypeTable(void);
 

@@ -1,6 +1,8 @@
 /* ahm_ResetEntityState + ahm_CheckFlag - proper C */
 
 #include <string.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 /* Resets an alchemy entity's operational state when its type is 1 or 2:
  * clears the link list head, marks the terminal link as -1 and bumps the
@@ -28,7 +30,6 @@ void __cdecl ahm_ResetEntityState(void* a)
 // FUNCTION: SERVER 0x1000BDA0
 // SIZE: 70
 
-extern char* g_entity_type_table;
 
 int __cdecl ahm_CheckFlag(void* a)
 {

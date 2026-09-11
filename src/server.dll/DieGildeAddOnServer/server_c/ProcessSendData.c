@@ -6,6 +6,8 @@
 #include <string.h>
 #include <windows.h>
 #include <winsock2.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 unsigned int __stdcall timeGetTime(void);
 
 int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
@@ -30,13 +32,11 @@ void __cdecl ShutdownMemoryAllocator();
 int __cdecl gm_Open(char*, char*);
 int __cdecl CreateListenSocket(int port);
 void __cdecl InitPacketPool(int);
-extern int g_net_socket;
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); 
 int __cdecl SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
 int GetCommandPayloadSize(unsigned char* cmd_payload);
 extern handler_func g_dispatch_table[]; 
-extern unsigned char g_connections[]; 
 
 // FUNCTION: SERVER 0x1000a860
 // ProcessSendData

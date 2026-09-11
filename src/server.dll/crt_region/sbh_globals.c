@@ -13,6 +13,7 @@
  * link resolve and to carry the right VA/size metadata.
  */
 #include <stddef.h>
+#include "rebrew_types.h"
 
 /* V6 sbh structures (winheap.h tagHeader/tagRegion/tagGroup/tagEntry). */
 // SIZE 0xc
@@ -58,36 +59,6 @@ typedef struct tagHeader
 } SbhHeader;
 
 /* V5 ("old") sbh structures (winheap.h __old_sbh_*). */
-typedef char            OldPara[16];
-
-// SIZE 0x8
-typedef struct __old_region_map
-{
-    int                 free_paras_in_page;   /* +0x00 */
-    unsigned int        last_failed_alloc;    /* +0x04 */
-} OldRegionMap;
-
-// SIZE 0x1000
-typedef struct __old_sbh_page
-{
-    unsigned char *     p_starting_alloc_map; /* +0x00 */
-    unsigned int        free_paras_at_start;  /* +0x04 */
-    unsigned char       alloc_map[241];       /* +0x08 */
-    unsigned char       reserved[7];          /* +0xf9 */
-    OldPara             alloc_blocks[240];    /* +0x100 */
-} OldSbhPage;
-
-// SIZE 0x2020
-typedef struct __old_sbh_region
-{
-    struct __old_sbh_region * p_next_region;       /* +0x00 */
-    struct __old_sbh_region * p_prev_region;       /* +0x04 */
-    OldRegionMap *           p_starting_region_map;/* +0x08 */
-    OldRegionMap *           p_first_uncommitted;  /* +0x0c */
-    OldSbhPage *             p_pages_begin;        /* +0x10 */
-    OldSbhPage *             p_pages_end;          /* +0x14 */
-    OldRegionMap             region_map[1025];     /* +0x18 */
-} OldSbhRegion;
 
 /* V6 sbh globals that are not covered by data_globals.c.  The header-list
  * count/array/cursor (0x11766440/44/38), the deferred-group pointer

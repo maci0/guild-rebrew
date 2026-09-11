@@ -3,10 +3,10 @@
 // FUNCTION: SERVER 0x10010fa0
 // SIZE: 525
 
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
-extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int g_worker_entry_count[];
-extern int g_current_year;
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);

@@ -1,18 +1,11 @@
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern char g_query_active; /* 0x10035454 */
-extern int g_query_count; /* 0x10035458 */
-extern char g_query_flag1; /* 0x1003545c */
-extern char g_query_flag2; /* 0x1003545d */
-extern char g_query_flag3; /* 0x1003545e */
-extern unsigned short* g_query_cursor; /* 0x10035468 */
-extern char* g_item_def_table; /* 0x101de450 */
 extern int g_query_limit; /* 0x10035450 */
 extern int g_query_filter_max_id; /* 0x10030b94 */
 extern int g_query_filter_owner; /* 0x10030b98 */
 extern unsigned short g_query_filter_type; /* 0x10030b9c */
-extern unsigned char g_query_filter_state; /* 0x10030b9e */
-extern int g_query_match_count; /* 0x100a8c38 */
 extern int g_dispatch_table_b[]; /* 0x101398a0 */
 extern int g_dispatch_table_a[]; /* 0x1013989c */
 
@@ -188,17 +181,13 @@ unsigned short* g_query_cursor;
 int g_query_filter_owner = 0xffffffff;
 unsigned char g_query_filter_state = 255;
 char g_query_flag2;
-extern int g_query_match_count;
 extern unsigned char g_entity_base[];
-extern int g_some_limit;
 int g_citizen_count;
 unsigned char g_current_season;
 int g_dynasty_field_44;
 char g_dynasty_field_48;
 char g_dynasty_field_49;
 int g_dynasty_field_4c;
-extern char g_query_flag1;
-extern char g_query_flag3;
 unsigned char* g_query_filter_base;
 int g_entity_table_end;
 int g_current_year;

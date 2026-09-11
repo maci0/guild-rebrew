@@ -5,12 +5,11 @@
 #include "../../../Units/Error/error.h"
 
 #include <stddef.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 extern int g_active_player_count; /* 0x1003543c */
 extern unsigned char g_current_season; /* 0x10035439 */
-extern char* g_slot_array; /* 0x1009b770 */
-extern char* g_item_def_table; /* 0x101de450 */
-extern char* g_entity_type_table; /* 0x100a8c30 */
 
 void* __cdecl FindNextFilteredEntity(void);
 void* __cdecl gm_NextEntityQueryMatch(void);

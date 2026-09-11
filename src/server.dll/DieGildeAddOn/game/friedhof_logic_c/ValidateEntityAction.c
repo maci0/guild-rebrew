@@ -4,8 +4,9 @@
 
 // FUNCTION: SERVER 0x10011890
 
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
-extern char* g_entity_type_table; /* 0x100A8C30 */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl SpawnGraveyardEntities(void* building, int count);
 

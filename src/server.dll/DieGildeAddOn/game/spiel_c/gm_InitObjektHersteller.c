@@ -3,11 +3,12 @@
 #include "../../../Units/m_alloc/m_alloc.h"
 
 #include <string.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 typedef int(__cdecl* ALLOCFN)(int, int, int);
 
 #pragma intrinsic(memcpy, memset)
 
-extern char* g_item_def_table; /* 0x101de450 */
 
 // CFLAGS: /O2 /Gd
 

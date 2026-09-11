@@ -31,13 +31,13 @@
  * /O1 /Ox /Og /Oy and #pragma optimize sweeps. Using memcpy as a strcpy
  * stand-in is not equivalent and must not be used: 176/296 and STUB. */
 #include <string.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 // FUNCTION: SERVER 0x100170e0
 
 #pragma intrinsic(memcpy, memset, strcpy)
 
-extern char* g_entity_type_table; /* 0x100a8c30 */
-extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
 extern unsigned char* g_query_filter_base; /* 0x10035464 */
 extern short g_query_filter_extra2; /* 0x10030b8c */
 extern short g_query_filter_extra3; /* 0x10030b8e */

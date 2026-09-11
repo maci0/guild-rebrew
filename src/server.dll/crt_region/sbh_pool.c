@@ -16,6 +16,8 @@
  * "block allocator" (mode 2).  Struct layouts match winheap.h.
  */
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 /* V6 sbh structures (winheap.h tagHeader/tagRegion/tagGroup/tagEntry). */
 // SIZE 0xc
@@ -67,36 +69,6 @@ typedef struct tagHeader
 } SbhHeader;
 
 /* V5 ("old") sbh structures (winheap.h __old_sbh_*). */
-typedef char            OldPara[16];
-
-// SIZE 0x8
-typedef struct __old_region_map
-{
-    int                 free_paras_in_page;
-    unsigned int        last_failed_alloc;
-} OldRegionMap;
-
-// SIZE 0x1000
-typedef struct __old_sbh_page
-{
-    unsigned char *     p_starting_alloc_map;
-    unsigned int        free_paras_at_start;
-    unsigned char       alloc_map[241];
-    unsigned char       reserved[7];
-    OldPara             alloc_blocks[240];
-} OldSbhPage;
-
-// SIZE 0x2020
-typedef struct __old_sbh_region
-{
-    struct __old_sbh_region * p_next_region;
-    struct __old_sbh_region * p_prev_region;
-    OldRegionMap *           p_starting_region_map;
-    OldRegionMap *           p_first_uncommitted;
-    OldSbhPage *             p_pages_begin;
-    OldSbhPage *             p_pages_end;
-    OldRegionMap             region_map[1025];
-} OldSbhRegion;
 
 #define _OLD_PAGESIZE              0x1000
 #define _OLD_PARASIZE              0x10
@@ -108,16 +80,6 @@ typedef struct __old_sbh_region
 #define _OLD_NO_PAGES              ((OldSbhPage *)-1)
 
 /* sbh globals (sbh_globals.c) */
-extern int __sbh_sizeHeaderList;              /* __sbh_sizeHeaderList */
-extern int __sbh_indGroupDefer;              /* __sbh_indGroupDefer */
-extern void * __sbh_pHeaderScan;           /* __sbh_pHeaderScan */
-extern void * __sbh_pHeaderDefer;           /* __sbh_pHeaderDefer */
-extern int __sbh_cntHeaderList;              /* __sbh_cntHeaderList */
-extern void * __sbh_pHeaderList;           /* __sbh_pHeaderList */
-extern char g_old_sbh_region_head;              /* static region descriptor head (defined in data_globals.c) */
-extern OldSbhRegion * __old_sbh_p_starting_region;   /* __old_sbh_p_starting_region */
-extern int __old_sbh_decommitable_pages;              /* __old_sbh_decommitable_pages */
-extern void * _crtheap;           /* game heap handle (_crtheap analog) */
 
 /* helpers outside this VA run (other sbh/TU objects) */
 extern SbhHeader * __cdecl fcn_1001db72(void);                 /* __sbh_alloc_new_region */

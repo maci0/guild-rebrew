@@ -3,7 +3,8 @@
 // FUNCTION: SERVER 0x10011540
 // SIZE: 288
 
-extern char* g_entity_type_table;
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);

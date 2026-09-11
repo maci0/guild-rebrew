@@ -1,5 +1,7 @@
 
 #include "../command_internal.h"
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -60,7 +62,6 @@
  *     if (puVar1 == (ushort *)0x0) {
  */
 
-extern int g_current_year;
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 

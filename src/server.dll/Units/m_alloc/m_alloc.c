@@ -4,19 +4,14 @@
 // m_FreeTracked
 // SIZE: 188
 
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 extern int g_alloc_counter;          /* 0x10034638 */
-extern int g_array_count;            /* 0x10034624 */
-extern int g_stat1;                  /* 0x10034628 */
-extern int g_stat2;                  /* 0x1003462c */
-extern int g_stat3;                  /* 0x10034630 */
-extern int g_stat4;                  /* 0x10034634 */
-extern void* g_array_ptr;            /* 0x10034640 */
 extern int g_alloc_root_count;       /* 0x117640b4 */
 extern int g_alloc_root_size_total;  /* 0x117640b0 */
 extern int g_alloc_root_count_max;   /* 0x117640bc */
 extern int g_alloc_root_size_max;    /* 0x117640b8 */
 extern int g_alloc_root_field_20;    /* 0x117640c0 */
-extern int g_list_head;              /* 0x117640c4 */
 extern int g_alloc_root_name;        /* 0x117640a0 */
 extern int g_alloc_root_name_4;      /* 0x117640a4 */
 extern int g_default_group_name;     /* 0x10028938 */

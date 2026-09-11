@@ -10,6 +10,8 @@
  * IsBadWritePtr — an import the original server.dll does not have. */
 #include <windows.h>
 #include <stddef.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 /* Opaque sbh declarations only; full layouts with SIZE markers live in
  * sbh_pool.c / sbh_globals.c (SbhHeader 0x14, OldSbhPage 0x1000,
@@ -17,9 +19,7 @@
 // SIZE 0x14 (SbhHeader; layout in sbh_pool.c)
 typedef struct SbhHeader SbhHeader;
 // SIZE 0x1000 (OldSbhPage; layout in sbh_pool.c)
-typedef struct __old_sbh_page OldSbhPage;
 // SIZE 0x2020 (OldSbhRegion; layout in sbh_pool.c)
-typedef struct __old_sbh_region OldSbhRegion;
 
 /* --- game bodies (sbh_pool.c / crt_heap.c) --- */
 extern SbhHeader* __cdecl fcn_1001d515(void* pvAlloc);
@@ -40,15 +40,7 @@ extern void* __cdecl fcn_1001e514(OldSbhPage* ppage, size_t free_para_count, siz
 extern int __cdecl fcn_1001e638(OldSbhRegion* preg, OldSbhPage* ppage, unsigned char* pmap, size_t new_para_sz);
 
 /* --- game globals (sbh_globals.c / data_globals.c) --- */
-extern int __sbh_sizeHeaderList;                 /* __sbh_sizeHeaderList */
-extern int __sbh_indGroupDefer;                 /* __sbh_indGroupDefer */
-extern void* __sbh_pHeaderScan;               /* __sbh_pHeaderScan */
-extern void* __sbh_pHeaderDefer;               /* __sbh_pHeaderDefer */
 /* Header-list symbols use LIBCMT names so heapinit.obj resolves without sbheap.obj. */
-extern int __sbh_cntHeaderList;        /* was __sbh_cntHeaderList */
-extern void* __sbh_pHeaderList;        /* was __sbh_pHeaderList */
-extern OldSbhRegion* __old_sbh_p_starting_region;       /* __old_sbh_p_starting_region */
-extern int __old_sbh_decommitable_pages;                 /* __old_sbh_decommitable_pages */
 
 /* Threshold / init flags + old-sbh enable flag (LIBCMT data symbols).
  * MSVC6 ignores /alternatename, so these must be real definitions. */

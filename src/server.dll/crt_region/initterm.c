@@ -1,12 +1,13 @@
 // CFLAGS: /O1 /Gd
 // FUNCTION: SERVER 0x1001a643
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 /* initterm helper: calls the single function pointer at 0x100317d8 (if
  * set), then walks the two .rdata init-vector tables via fcn_1001a758. */
 
 extern void __cdecl fcn_1001a758(void*, void*);   /* 0x1001a758 - initterm loop */
-extern void* _FPinit;   /* 0x100317d8 - first init fnptr */
 
 void __cdecl fcn_1001a643(void)
 {

@@ -1,6 +1,8 @@
 // CFLAGS: /O1 /Oy- /Gd
 // FUNCTION: SERVER 0x1001b9d4
 #include <windows.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 /* Game's custom DLL entry point (PE AddressOfEntryPoint) — replaces the
  * CRT's _DllMainCRTStartup.  Runs the __CRT_INIT logic (0x1001b8fb)
@@ -20,7 +22,6 @@
 extern int __stdcall _CRT_INIT(void* hmod, unsigned int reason, void* reserved); /* 0x1001b8fb -> __CRT_INIT@12 */
 extern int __stdcall exit_handler(void* a, unsigned int b, void* c);              /* 0x10009310 */
 
-extern int __proc_attached; /* 0x100354fc - __CRT_INIT attach/detach refcount */
 extern int (__stdcall* g_11767588)(void* hmod, unsigned int reason, void* reserved); /* 0x11767588 */
 
 int __stdcall DllMain(void* hMod, unsigned int reason, void* reserved)

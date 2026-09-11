@@ -2,6 +2,8 @@
 
 // CFLAGS: /O2 /Gd
 
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 int g_file_version;
 // FUNCTION: SERVER 0x10010530
 // SIZE: 113
@@ -35,7 +37,6 @@ int __cdecl gv_CheckSlotActive(void* slot, int type)
 // SIZE: 570
 
 extern void __cdecl m_FreeTracked(void* ptr);
-extern char* g_entity_type_table; /* 0x100A8C30 */
 int __cdecl AllocGraveyardField(unsigned char* field);
 void __cdecl gv_Free3Fields(int* slot);
 
@@ -218,7 +219,6 @@ fail:
 
 extern unsigned short* g_entity_table_end;
 extern int g_next_object_id;
-extern int g_current_year;
 extern int g_worker_entry_count[];
 extern float g_output_share[];
 extern unsigned int g_entity_slot_table[];

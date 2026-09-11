@@ -46,10 +46,10 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern unsigned char* g_entity_ptr; /* 0x1014d8c0 */
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
-extern char* g_item_def_table;      /* 0x101de450 */
 
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_WalkEntityChain(unsigned short);

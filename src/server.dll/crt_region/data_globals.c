@@ -18,6 +18,7 @@
  * address, reference VAs 0x100317f8..0x10031a58).
  */
 #include <windows.h>
+#include "rebrew_types.h"
 
 // DATA: SERVER 0x10033b9c
 unsigned int g_10033b9c;   /* block alloc threshold (mode 2) */
@@ -110,7 +111,6 @@ void (*g_100356e0)(void);  /* _crt_runtime_error user hook (0x1001fdf8) */
 void* g_100355a0;          /* _pnhheap - new-handler fnptr (0x1001d238) */
 // DATA: SERVER 0x10033ef0
 // SIZE 0x8
-struct rterr_entry { int num; char* text; };   /* _NMSG_WRITE runtime-error table (0x1001fe31) */
 struct rterr_entry g_rterrlist[18];
 // DATA: SERVER 0x10035838
 void* pfnMessageBoxA;          /* cached MessageBoxA proc (0x10022107) */

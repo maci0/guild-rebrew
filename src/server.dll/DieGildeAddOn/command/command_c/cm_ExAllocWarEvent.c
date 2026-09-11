@@ -1,8 +1,9 @@
 /* cm_ExAllocWarEvent - proper C */
 
 #include "../command_internal.h"
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
-extern unsigned char g_connections[];
 extern void* __cdecl gm_SearchTable67(int);
 extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);

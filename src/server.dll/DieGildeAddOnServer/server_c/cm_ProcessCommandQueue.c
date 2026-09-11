@@ -495,11 +495,12 @@
 // FUNCTION: SERVER 0x1000aac0
 
 #include <string.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
-extern unsigned char g_connections[]; /* 0x101deb00 */
 int __cdecl ahm_ProcessEntityChain(char* cmd_payload);
 int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);

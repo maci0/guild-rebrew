@@ -7,6 +7,8 @@ int g_list_head;
 #include <string.h>
 #include <windows.h>
 #include <winsock2.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 unsigned int __stdcall timeGetTime(void);
 
 /* Command layer (local externs — server.c uses different signatures) */
@@ -23,11 +25,6 @@ typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 extern DWORD WINAPI thread_proc(LPVOID);
 int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
-extern unsigned char g_connections[]; /* 0x101deb00 */
-extern unsigned int g_download_total_size; /* 0x101deac0 */
-extern unsigned int g_download_received; /* 0x101deac4 */
-extern unsigned int g_download_slots[8]; /* 0x101deac8 */
-extern unsigned int g_download_buffer; /* 0x101deae8 */
 extern int ReceivePacketHeader(unsigned int* conn);
 extern int QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
 

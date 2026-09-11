@@ -3,8 +3,9 @@
 // FUNCTION: SERVER 0x100113b0
 // SIZE: 390
 
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
-extern char* g_entity_type_table; /* 0x100A8C30 */
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 extern unsigned int g_entity_slot_table[];
 extern float g_output_share[];

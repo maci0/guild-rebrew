@@ -79,12 +79,13 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 #pragma intrinsic(memcpy, memset, strlen, strcpy)
 
 extern int g_next_object_id; /* 0x10030b6c */
 extern int g_citizen_count; /* 0x10035434 */
-extern char* g_item_def_table; /* 0x101de450 */
 extern double g_dbl_const_688; /* 0x10025688 */
 extern double g_dbl_const_6d0; /* 0x100256d0 */
 extern double g_dbl_const_7d8; /* 0x100257d8 */

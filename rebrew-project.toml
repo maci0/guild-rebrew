@@ -27,7 +27,7 @@ profile = "msvc600sp6"
 # standard rebrew runner); no host toolchain tree, so these legacy fields
 # are empty.
 command = ""
-includes = ""
+includes = "src/server.dll"
 libs = ""
 cflags = "/O2 /Gd"
 base_cflags = "/nologo /c /MT /D \"_WIN32_WINNT=0x0400\" /Ireferences/zlib-1.1.3"

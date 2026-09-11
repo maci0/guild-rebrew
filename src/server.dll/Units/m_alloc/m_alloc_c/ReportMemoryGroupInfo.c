@@ -1,6 +1,8 @@
 // FUNCTION: SERVER 0x10006990
 #include <stdio.h>
 #include <string.h>
+#include "rebrew_types.h"
+#include "rebrew_globals.h"
 
 #pragma intrinsic(memset, strcmp, strcpy)
 
@@ -21,12 +23,6 @@ struct GroupNode {
 	struct GroupNode* next; /* 0x24 */
 };
 
-extern int g_array_count;
-extern int g_stat1;
-extern int g_stat2;
-extern int g_stat3;
-extern int g_stat4;
-extern void* g_array_ptr;
 extern int g_alloc_root_name; /* 0x117640a0 - root group node */
 
 void __cdecl ReportMemoryGroupInfo(const char* toggle)
