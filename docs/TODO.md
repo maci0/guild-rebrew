@@ -179,6 +179,17 @@ trustworthy signal.
 - Once those three are done, `.scratch/consolidate_globals.py --apply` removes
   the 213 matching declarations across 55 files in one pass.  It was applied
   and reverted because the header did not compile.
+- Recipe for (1), measured: the sbh family is defined in full in
+  `sbh_pool.c:70-99` and `sbh_globals.c:61-90` (identical fields, only the
+  offset comments differ), while `sbh_aliases.c:20,22` carries bare forward
+  typedefs (`typedef struct __old_sbh_page OldSbhPage;`) that would collide
+  with the real typedefs.  `struct rterr_entry` is defined in
+  `amsg_exit.c:22` and `data_globals.c:113`.  So: put `OldPara`,
+  `OldRegionMap`, `OldSbhPage`, `OldSbhRegion` and `struct rterr_entry` in a
+  new `rebrew_types.h`; drop the full blocks from those four files, replace
+  the two forward typedefs in sbh_aliases.c with the include; insert
+  `rebrew_types.h` *before* `rebrew_globals.h` in every file the consolidation
+  touches.
 - Applying the recovered structs needs a layout check first.  `CommandPacket`
   has the right extent (0x99, matching `cmd_buffer_primary[0x99]` in
   ServerMainThread.c) but its field map cannot be right: it places
