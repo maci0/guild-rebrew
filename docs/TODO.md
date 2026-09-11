@@ -196,35 +196,41 @@ trustworthy signal.
   `payload[137]` at 0x8, while the lobby handlers read a command-type byte at
   `msg+0x10` and ints at `msg+0x14` / `msg+0x18`.
 
-## Short-local naming pass (2026-09-11) — 2 of 52 files done
+## Short-local naming pass (2026-09-11) — done bar the tail
 
-Method: rename identifier occurrences only outside comments, member accesses
-(`.b`, `->p`) and struct field declarations — the Ghidra reference blocks quote
-the decompiler verbatim and the recovered struct layouts must keep their field
-names.  Re-test the file after each (`rebrew test <file>`), then the periodic
-`rebrew verify --full`.
+Method: `scripts/rename_locals.py` renames identifier occurrences outside
+comments, member accesses and struct field declarations; `scripts/rename_locals_comments.py`
+then follows the rename through the probe logs, skipping the verbatim Ghidra
+quote blocks.  Re-test the file after each (`rebrew test <file>`), then the
+periodic `rebrew verify --full`.
 
-Policy: loop counters (`i`, `j`, `k`) and the index names `n`/`id` stay; they
-are idiomatic counters, not decompiler temporaries.
+Policy: loop counters (`i`, `j`, `k`) and `n`/`id` stay — idiomatic counters,
+not decompiler temporaries.  Some audit hits are struct members (`fc` in
+`aemter.c`'s COPY24, `a`/`b`/`c` in `ls_LoadSavegameHeader.c`'s SaveHeaderTail)
+and stay: renaming a field would desynchronise its accesses.
 
-Done:
-- `aemter.c`: `b`/holder, `hp`/arg1_alias, `hw`/arg1_value, `ai`/type_i,
-  `aj`/type_j (its struct member `b` is a field and was deliberately left).
-- `spiel622.c`: `dp`/divisor_ptr, `cp`/ingredient_cursor.
+Renamed in 30 files: aemter, spiel622, alchemistry_logic2/3, spiel_dumpD,
+gv_ExAllocGraveyardWorker, gv_AllocField, gv_SpawnEntities, cm_ChkChangeBits,
+cm_ChkChangeAttribute, cm_ChkJoinLeaveElection, cm_ExJoinLeaveElection,
+cm_ChkSellObjekt, cm_ExSimSpecialAction, cm_ExChangeDesire, cm_ExChangeFloat,
+cm_ExClearLagerslot, cm_ExAllocWarEvent, cm_ExAllocClientSpieler,
+cm_GetBuildingStatCount, cm_ExModifyStat, cm_ExMoveObjekt,
+cm_ExRemoveLinkedObject, amsg_exit, crt_heap, vfs4, vfs_OpenStream,
+check_header, CrashDumpUnhandledExceptionFilter, InitializeLogAndErrorHandler,
+plant, loadsave2, loadsave3, spiel, spiel5, spiel6, spiel62,
+gm_CreateEntityFromParents, gm_AllocBuildingContents, gm_InitObjektHersteller,
+gm_RefreshMarketAvailability, InitNewDynastyEntity, lb_HandleEntitySync,
+lb_HandleLobbyCommands, lobbycommands, m_alloc2, ProcessSendData, server4,
+srv_ProcessReceiveData.
 
-Remaining in `spiel622.c` (context needed per site): `q` at 577, 663, 885,
-1113; `p` 804; `r` 805; `pl` 1108.
-
-Remaining files, by count of cryptic short locals (excluding i/j/k/n/id):
-`aemter.c` done; `spiel622.c` partial; then 4 each in `crt_region/crt_heap.c`,
-`game/alchemistry_logic2.c`, `game/spiel_dumpD.c`,
-`game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c`,
-`command_c/cm_ChkChangeBits.c`; 3 each in nine files (`crt_region/amsg_exit.c`,
-`Units/vfs/vfs_c/vfs_OpenStream.c`, `Units/m_alloc/m_alloc_c/m_AllocTracked.c`,
-`Error_c/InitializeLogAndErrorHandler.c`, `auxillary/plant.c`, `game/spiel62.c`,
-`loadsave3.c`, `ls_LoadSavegameHeader.c`, `gm_RefreshMarketAvailability.c`,
-`cm_ChkSellObjekt.c`); 2 or 1 in the remaining ~37 files.  Total 52 files,
-120 declarations.
+Left for a hand edit, each needing a closer look than a name swap:
+- `server2.c`: three distinct `p` locals (an initialised `unsigned int*` plus
+  two `int` address cursors) — a file-wide rename collides.
+- `m_AllocTracked.c`: `np`/`pp`; the comment-aware pass desyncs on its log.
+- `ls_LoadDynamicEntities.c` `p`, `ahm_ExAllocAlchemist.c` `pp`,
+  `cm_ExAllocWarEvent.c` `fc`: no use found within 60 lines of the
+  declaration, so the role has to be read out of the function.
+- `crc32.c` `c`: zlib's own code, left for library fidelity.
 
 ## BSS work (2026-08-22) — raw .data VirtualSize now falls out of the link
 
