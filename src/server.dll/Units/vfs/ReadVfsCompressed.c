@@ -3,7 +3,7 @@
  * Drives the zlib state machine over a stream whose deflate payload sits in
  * the VFS file at base_off + in_off: refills the input window with
  * fseek/fread, then either mirrors a stored block (flag == 0) or runs
- * fcn_100058d0 (flag != 0), folding every produced byte into the stream's
+ * inflate (flag != 0), folding every produced byte into the stream's
  * running crc32.  Returns the number of bytes produced, -1 on an I/O
  * failure, -100 when the stream has no input buffer and -102 when the
  * handle or stream pointer is null.
@@ -54,7 +54,7 @@ typedef struct VFS_INFLATE {
 } VFS_INFLATE;
 
 extern unsigned int __cdecl crc32(unsigned int crc, unsigned char* buf, unsigned int len);
-extern int __cdecl fcn_100058d0(void* zstrm, int flush);
+extern int __cdecl inflate(void* zstrm, int flush); /* 0x100058d0, zlib */
 extern void* __cdecl fseek(void* stream, long offset, int whence);
 extern unsigned int __cdecl fread(void* ptr, unsigned int size, unsigned int count, void* stream);
 
@@ -136,7 +136,7 @@ int __cdecl ReadVfsCompressed(int handle, char* buf, unsigned int len)
 		} else {
 			out = s->next_out;
 			produced = s->total_out;
-			done = fcn_100058d0(&s->next_in, 2);
+			done = inflate(&s->next_in, 2);
 			n = s->total_out - produced;
 			s->crc = crc32(s->crc, (unsigned char*) out, n);
 			s->cap = s->cap - n;

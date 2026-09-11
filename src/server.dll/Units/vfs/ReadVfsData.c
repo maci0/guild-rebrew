@@ -1,6 +1,6 @@
 // CFLAGS: /O2 /Gd /Oy-
 /* ReadVfsData — VFS stream read (0x10008E40). Reads from a memory buffer
- * (flags & 0x20: cursor at stream+0x100, flushed via fcn_100058d0 when
+ * (flags & 0x20: cursor at stream+0x100, flushed via inflate when
  * flags & 8), a gzip-in-zip payload (flags & 0x10 → ReadVfsCompressed), a
  * raw stream (flags & 8 → fcn_10003960) or a plain file (fcn_1001aa6a).
  * The stream handle/cursor is the first dword of the stream+0x100 zone.
@@ -138,7 +138,7 @@
  * the head so the parameter load leads the prologue, inert; hoisting
  * `total = size * count` above the stream null test, 93; a `d20` cache of
  * `flags & 0x20` stored before `sh.tv`, inert; `total = size; total = total *
- * count;` split, inert; a `zp` local for the fcn_100058d0 handle argument,
+ * count;` split, inert; a `zp` local for the inflate handle argument,
  * inert; the `total == 0` arm spelled as a direct `return total` instead of a
  * goto to the shared tail, 116 at obj 443; a second `sh.tv = total` after the
  * memcpy, 139 at obj 449.  The esi/edi tie for `stream` is still unbroken and
@@ -156,7 +156,7 @@
  * bytes this session: 0x10029450/54 hold 0x1f/0x8b, 0x10029458 the vfs.c path,
  * 0x10029474 the gz-found format, all equal to this file's literals; the call
  * targets are ReadVfsCompressed (0x10008a90), fcn_10003960 (zlib gzread),
- * fread (0x1001aa6a LIBCMT) and fcn_100058d0 (zlib inflate), all real.
+ * fread (0x1001aa6a LIBCMT) and inflate (zlib inflate), all real.
  * EXACT/RELOC remains out of reach from C: the 24-byte dest-alignment prelude
  * at 0x10008f0c is hand-written asm per docs/msvc6-allocator.md (725 sites,
  * ebx-fixed, never emitted by msvc6 in any flag/service-pack sweep), and the
@@ -324,7 +324,7 @@ extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 extern int __cdecl ReadVfsCompressed(int zstrm, char* buf, unsigned int total);
 extern int __cdecl gzread(void* handle, char* buf, unsigned int total);
 extern int __cdecl fread(char* buf, int size, int count, void* handle); /* 0x1001aa6a LIBCMT */
-extern int __cdecl fcn_100058d0(void* zstrm, int flush);
+extern int __cdecl inflate(void* zstrm, int flush); /* 0x100058d0, zlib */
 
 int __cdecl ReadVfsData(char* buf, int size, int count, char* stream)
 {
@@ -378,7 +378,7 @@ int __cdecl ReadVfsData(char* buf, int size, int count, char* stream)
 		if (flags & 8) {
 			*(char**) (stream + 0x10c) = buf;
 			*(int*) (stream + 0x110) = total;
-			fcn_100058d0((void*) sh.zp, 2);
+			inflate((void*) sh.zp, 2);
 			result = total - *(int*) (stream + 0x110);
 			goto done;
 		}
