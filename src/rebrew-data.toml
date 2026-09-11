@@ -16,7 +16,7 @@ status = "UNCHECKED"
 note = "first player slot (stride 0x264264 bytes)"
 name = "g_connections"
 section = ".data"
-type = "unsigned int"
+type = "unsigned char[]"
 status = "UNCHECKED"
 
 ["SERVER.0x114ffe20"]
@@ -47,7 +47,7 @@ status = "UNCHECKED"
 ["SERVER.0x101deac8"]
 name = "g_download_slots"
 section = ".data"
-type = "int"
+type = "unsigned int[8]"
 status = "UNCHECKED"
 
 ["SERVER.0x101deae8"]
@@ -79,7 +79,7 @@ status = "UNCHECKED"
 ["SERVER.0x100a8c30"]
 name = "g_entity_type_table"
 section = ".data"
-type = "int"
+type = "char*"
 status = "UNCHECKED"
 
 ["SERVER.0x10030b6c"]
@@ -163,7 +163,7 @@ status = "UNCHECKED"
 ["SERVER.0x100358a0"]
 name = "g_slot_table"
 section = ".data"
-type = "char*"
+type = ""
 status = "UNCHECKED"
 
 ["SERVER.0x1014d8c0"]
@@ -187,13 +187,13 @@ status = "UNCHECKED"
 ["SERVER.0x100a8cf8"]
 name = "g_100a8cf8"
 section = ".data"
-type = "unsigned int"
+type = ""
 status = "UNCHECKED"
 
 ["SERVER.0x1009b764"]
 name = "g_1009b764"
 section = ".data"
-type = "unsigned int"
+type = ""
 status = "UNCHECKED"
 
 ["SERVER.0x1002dde0"]
@@ -217,7 +217,7 @@ status = "UNCHECKED"
 ["SERVER.0x10030b9e"]
 section = ".data"
 name = "g_query_filter_state"
-type = "char"
+type = "unsigned char"
 status = "UNCHECKED"
 
 ["SERVER.0x1003545e"]
@@ -331,7 +331,7 @@ status = "UNCHECKED"
 ["SERVER.0x10035884"]
 name = "g_current_hour"
 section = ".data"
-type = "int"
+type = "unsigned short"
 status = "UNCHECKED"
 
 ["SERVER.0x10035888"]
@@ -361,25 +361,25 @@ status = "UNCHECKED"
 ["SERVER.0x10031500"]
 name = "g_str_10031500"
 section = ".data"
-type = "char"
+type = "char[1]"
 status = "UNCHECKED"
 
 ["SERVER.0x10031538"]
 name = "g_str_10031538"
 section = ".data"
-type = "char"
+type = "char[1]"
 status = "UNCHECKED"
 
 ["SERVER.0x10035a04"]
 name = "g_entity_type_bytes"
 section = ".data"
-type = "char"
+type = ""
 status = "UNCHECKED"
 
 ["SERVER.0x100358a2"]
 name = "g_entity_state_base"
 section = ".data"
-type = "char"
+type = ""
 status = "UNCHECKED"
 
 ["SERVER.0x1002d4ec"]
@@ -391,7 +391,7 @@ status = "UNCHECKED"
 ["SERVER.0x11766100"]
 name = "g_log_buffer"
 section = ".data"
-type = "char"
+type = "char[256]"
 status = "UNCHECKED"
 
 ["SERVER.0x11766204"]
@@ -403,25 +403,25 @@ status = "UNCHECKED"
 ["SERVER.0x10027078"]
 name = "g_log_level_table"
 section = ".data"
-type = "int"
+type = "int[]"
 status = "UNCHECKED"
 
 ["SERVER.0x10027084"]
 name = "g_log_format_table"
 section = ".data"
-type = "char"
+type = "char[13]"
 status = "UNCHECKED"
 
 ["SERVER.0x100270e4"]
 name = "g_log_newline"
 section = ".data"
-type = "char"
+type = "char[2]"
 status = "UNCHECKED"
 
 ["SERVER.0x100270e8"]
 name = "g_log_default_name"
 section = ".data"
-type = "char"
+type = "char[13]"
 status = "UNCHECKED"
 
 ["SERVER.0x10034624"]
@@ -475,31 +475,31 @@ status = "UNCHECKED"
 ["SERVER.0x10028b04"]
 name = "g_str_10028b04"
 section = ".data"
-type = "char"
+type = "char[1]"
 status = "UNCHECKED"
 
 ["SERVER.0x10028aec"]
 name = "g_str_10028aec"
 section = ".data"
-type = "char"
+type = "char[1]"
 status = "UNCHECKED"
 
 ["SERVER.0x10028888"]
 name = "g_str_10028888"
 section = ".data"
-type = "char"
+type = "char[1]"
 status = "UNCHECKED"
 
 ["SERVER.0x10028b78"]
 name = "s_m_pool_get_free_tp_m_pool_10028b78"
 section = ".data"
-type = "char"
+type = "char[27]"
 status = "UNCHECKED"
 
 ["SERVER.0x10028b60"]
 name = "s_m_pool_alloc_tp_m_pool_10028b60"
 section = ".data"
-type = "char"
+type = "char[24]"
 status = "UNCHECKED"
 
 ["SERVER.0x10034678"]
@@ -1280,13 +1280,13 @@ status = "UNCHECKED"
 
 ["SERVER.0x10027314"]
 name = "g_crash_newline"
-type = "char"
+type = "char[4]"
 section = ".data"
 status = "UNCHECKED"
 
 ["SERVER.0x10027328"]
 name = "g_crash_space"
-type = "char"
+type = "char[4]"
 section = ".data"
 status = "UNCHECKED"
 
@@ -1294,6 +1294,7 @@ status = "UNCHECKED"
 section = ".rdata"
 name = "g_rdata_restore_252e8"
 status = "UNCHECKED"
+type = "const unsigned char[]"
 
 ["SERVER.0x1002a000"]
 section = ".data"
@@ -1301,6 +1302,7 @@ name = "g_data_restore_gap"
 status = "UNCHECKED"
 
 # ---- GROUP C: CRT-startup + allocator-pool globals (data_globals.c) ----
+type = "unsigned char[0xb000]"
 
 ["SERVER.0x10033b9c"]
 name = "g_10033b9c"
@@ -1409,7 +1411,7 @@ status = "UNCHECKED"
 
 ["SERVER.0x10031aac"]
 name = "locktable"
-type = "CRITICAL_SECTION *"
+type = ""
 section = ".data"
 note = "per-lock CRITICAL_SECTION ptr table (0x40 entries)"
 
@@ -1460,7 +1462,7 @@ status = "UNCHECKED"
 
 ["SERVER.0x11766460"]
 name = "g_11766460"
-type = "int"
+type = "int[0x40]"
 section = ".bss"
 note = "stream group ptr table (0x11766460..0x1176655c, 0x40 entries)"
 status = "UNCHECKED"
@@ -1586,7 +1588,7 @@ status = "UNCHECKED"
 
 ["SERVER.0x100355d8"]
 name = "g_100355d8"
-type = "char"
+type = "char[0x104]"
 section = ".bss"
 note = "module filename buffer (0x104)"
 status = "UNCHECKED"
