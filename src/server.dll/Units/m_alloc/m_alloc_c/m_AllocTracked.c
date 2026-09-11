@@ -20,8 +20,8 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 // CFLAGS: /O2 /Gd /G6 /Oy-
 // NOTE: best config found - 212/658 instr bytes matched (obj 624 vs target 658).
 // The target homes three values in the ebp frame: the group node at [ebp-4],
-// the allocation size at [ebp-8], and buf at [ebp-0x18].  The `np` alias on
-// `node` supplies the search-loop spill, the matching `pp` alias on `prev`
+// the allocation size at [ebp-8], and buf at [ebp-0x18].  The `node_slot` alias on
+// `node` supplies the search-loop spill, the matching `prev_slot` alias on `prev`
 // supplies its own home slot (200 -> 208), the `sz` volatile shadow the size
 // slot, and the `nodev` shadow the node reload after the malloc.
 // `buf[0x14]`, not `buf[0x10]`: the target's frame is 0x118 with buf based at
@@ -89,10 +89,10 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 // call are mutually exclusive here, and the target has both.  Forms tried to
 // keep both, all still without the register: plain (non-volatile) `nodev`, a
 // `struct GroupNode* volatile` shadow instead of the int one, dropping `nodev`
-// and relying on the `np` alias, moving `count++` after the null check, and
-// hoisting the increment into a fresh pointer local.  `(*np)->count++` does
+// and relying on the `node_slot` alias, moving `count++` after the null check, and
+// hoisting the increment into a fresh pointer local.  `(*node_slot)->count++` does
 // restore the register in the truncated body but not in the full function
-// (.scratch/L3/m1.c), and it is unsafe besides: `np` is unset when tag == 0.
+// (.scratch/L3/m1.c), and it is unsafe besides: `node_slot` is unset when tag == 0.
 // Whole-file: 145/658 at 650 bytes, reverted.
 //
 // CORRECTION to the bisection above (2026-09-08, .scratch/l9-mat/pr/zr*.c,
@@ -147,17 +147,17 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 // why the earlier note recorded the opposite.
 // Both volatile shadows still pay on the new body: plain `sz` scores 185,
 // plain `nodev` 222, and passing `size` instead of `sz` to malloc 223.
-// `prev->next = node` in place of `(*pp)->next = node` scores 219; assigning
-// `pp = &prev` (which would make that read defined) also costs the same 219,
-// so the unassigned-`pp` spelling is load-bearing for the score.  It is a
-// genuine defect in this reconstruction, not a deliberate shape: `pp` is
-// never written, so `(*pp)` is undefined behaviour.  The target's store is
+// `prev->next = node` in place of `(*prev_slot)->next = node` scores 219; assigning
+// `prev_slot = &prev` (which would make that read defined) also costs the same 219,
+// so the unassigned-`prev_slot` spelling is load-bearing for the score.  It is a
+// genuine defect in this reconstruction, not a deliberate shape: `prev_slot` is
+// never written, so `(*prev_slot)` is undefined behaviour.  The target's store is
 // plainly `prev->next = node` (0x100066b9 `mov ecx,[ebp-8]`; 0x100066ce
 // `mov [ecx+0x24],edx`).  Flagged rather than silently kept at the higher
 // score; whoever next touches this function should decide whether 8 matched
 // bytes are worth an undefined read.  Re-measured on the 230 body: the defined
-// alternatives all cost 10-11 bytes (plain `prev->next` 219, `pp = &prev` plus
-// `*pp = *np` 219, a `volatile int prevv` shadow 220, a volatile-alias store to
+// alternatives all cost 10-11 bytes (plain `prev->next` 219, `prev_slot = &prev` plus
+// `*prev_slot = *node_slot` 219, a `volatile int prevv` shadow 220, a volatile-alias store to
 // `prev` 220, `prev = node` seeded before the loop 225).
 //
 // 227 -> 230: the three tail reads of the size (slot+0xc, g_stat1, and
@@ -212,10 +212,10 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 // with the bisection above: the blocker is `node` staying live across the
 // malloc, not how the zeros are spelled.
 //
-// Other shapes measured and reverted this pass: a `pp = &prev` refresh
+// Other shapes measured and reverted this pass: a `prev_slot = &prev` refresh
 // inside the search loop (226 at obj 623, and structurally worse at 156
 // aligned-identical); the strcmp result through a named int (inert);
-// `prev->next` and `pp`-refreshed linkage for the fresh node (222 at 617),
+// `prev->next` and `prev_slot`-refreshed linkage for the fresh node (222 at 617),
 // and the same with a `nodev` store first (229 at 611); `nodev` written
 // after `count++` (inert); `node = 0` after the shadow store to end its
 // range before the malloc (inert); reloading `node` from `nodev` right after
@@ -246,8 +246,8 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	void* ptr;
 	char* slot;
 	char* p;
-	struct GroupNode** np;
-	struct GroupNode** pp;
+	struct GroupNode** node_slot;
+	struct GroupNode** prev_slot;
 	volatile unsigned int sz;
 	volatile int nodev;
 	void* cur;
@@ -272,13 +272,13 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			strncpy(buf, tag, taglen);
 			buf[taglen] = 0;
 			node = (struct GroupNode*) 0x117640a0;
-			np = &node;
-			while (*np != 0) {
-				if (strcmp(buf, (*np)->name) == 0) {
+			node_slot = &node;
+			while (*node_slot != 0) {
+				if (strcmp(buf, (*node_slot)->name) == 0) {
 					break;
 				}
-				prev = *np;
-				*np = (*np)->next;
+				prev = *node_slot;
+				*node_slot = (*node_slot)->next;
 			}
 			if (node == 0) {
 				node = (struct GroupNode*) malloc(0x28);
@@ -289,7 +289,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 				node->size_max = 0;
 				node->count = 0;
 				node->next = 0;
-				(*pp)->next = node;
+				(*prev_slot)->next = node;
 			}
 		}
 	}

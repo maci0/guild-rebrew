@@ -48,7 +48,9 @@ def main() -> None:
             if struct_depth and depth < struct_depth:
                 struct_depth = 0
             continue
-        if re.match(r"^\s*(typedef\s+)?(struct|union)\b", line):
+        # `struct Foo* x;` uses a struct type; only a line that opens a
+        # definition (no `;` on it) starts a block whose fields must not move.
+        if re.match(r"^\s*(typedef\s+)?(struct|union)\b[^;]*$", line):
             pending_struct = True
             out.append(line)
             continue
