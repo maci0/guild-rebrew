@@ -102,7 +102,7 @@ int __cdecl lb_HandleLobbyCommands(unsigned int*, unsigned char*);
 int __cdecl lb_BroadcastStateChange(unsigned int*, unsigned char*);
 int __cdecl fcn_10014af0(unsigned int*, unsigned char*);
 int __cdecl lb_HandleEntitySync(unsigned int*, unsigned char*);
-int __cdecl fcn_10014ca0(unsigned int*, unsigned char*);
+int __cdecl cm_RouteCommand(unsigned int*, unsigned char*);
 
 int __cdecl lb_ExLobbyServerCommand(unsigned int* player, unsigned char* msg)
 {
@@ -124,7 +124,7 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* player, unsigned char* msg)
 	case 5:
 		return lb_HandleEntitySync(player, msg);
 	case 6:
-		return fcn_10014ca0(player, msg);
+		return cm_RouteCommand(player, msg);
 	}
 	return 1;
 }
