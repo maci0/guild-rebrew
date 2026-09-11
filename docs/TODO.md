@@ -377,75 +377,49 @@ Lesson: when "completing" a naked `_emit` dump from the original, extract exactl
 function's catalog size (db/server.dll_functions.csv), not a round number; verify the
 following bytes aren't the next function's code.
 
-## STUB (2)
+## Open functions (2)
 
-| VA | Name | Size | Blocker (3+ C approaches tried) | Best match |
+`rebrew verify --full` is 278/280.  Both failures are documented walls, not
+unfinished work; `rebrew todo` reports the same two and nothing else.
+
+| VA | Name | Size | State | Wall |
 |---|---|---|---|---|
-| 0x10018850 | gm_CreateEntityFromParents | 3689 | Large stub: 3689 byte delta, 0% — not attempted (needs full decomp) | 0% |
-| 0x1001a670 | exit | 17 | CRT thunk `push 0 push 0 push [esp+0xc] call _doexit add esp ret`; C fix is `void exit(int){_doexit(code,0,0);}` with /O1, but causes LIBCMT duplicate link error. Build never links even at HEAD, so DLL hash is unreachable. Fix requires CMake /NODEFAULTLIB or renaming the symbol. | 0% with STUB, RELOC with /O1 but link fails |
+| 0x10018850 | gm_CreateEntityFromParents | 3689 | obj 3694, 924 B matched | A single-statement hill-climb over the store schedule converged here (header in the .c).  The object is 5 B long and ~990 instructions sit in a different order, so the schedule, not the control flow, is wrong; the statement order has to be re-derived from the target disassembly rather than moved one line at a time. |
+| 0x100093a0 | ServerMainThread | 2434 | obj 2433, 1162 B matched | obj 1 B short.  Two cold blocks (host-slot store 0x1000973a, unsynced flag 0x10009b66) that the original C2 deferred into gaps inside unrelated chains.  Nine rounds of label position, branch polarity, guard form, duplication, cold-tail placement, region size and pragma probes all emit them adjacent to their source loop (header in the .c); all seven VC6 SP builds compile it identically. |
 
-## NEAR_MATCHING (0)
-
-(empty — gm_Open promoted to PROVEN 2026-08-26 via 1-byte slice prove [91..92]
-after restoring the missing `srand(timeGetTime())` call (fcn.1001a140, dropped
-with run_000.c in c77489a) and matching the tail loop's register roles;
-compiled size 856/861, remaining 5B are MSVC6 fold-vs-materialize decisions,
-see docs/msvc6-allocator.md "gm_Open".)
-
-## SIZE_MISMATCH (16)
-
-| VA | Name | Size | Delta | Blocker class | Approaches tried |
-|---|---|---|---|---|---|
-| 0x10002770 | CrashDumpUnhandledExceptionFilter | 1836 | 1603 | Decrypts dbg payload via ROL15 xor, stack walk via ESP slots — large, FPO vs EBP frame. Not attempted. | — |
-| 0x10006580 | m_AllocTracked | 658 | 499 | Frame `sub esp 0x118 vs 0x114`, `xor ebx` vs `test`, push order, epilogue sharing. `msgBuf[260]` fixes frame but 20B over due to duplicated epilogue. Prove shows EAX 2179763029 vs 0 (semantics differ). | 3 (buf sizes, dummy locals, early-return) |
-| 0x10006990 | ReportMemoryGroupInfo | 612 | 574 | `mov ecx,[g_stat2]` before `sub esp` vs after; `sar ecx` vs `sar eax` + push order (early stats >>10). `tmp_stat2` hoist, non-const `filter`, `volatile buf` all 51/624 (~8.2%, 203 structural) — no change. Prove full+slices timeout. | 3 (tmp_stat2, char* filter, volatile buf) |
-| 0x10009020 | OpenVfsStream | 667 | 587 | VFS stream open, multiple branches. Prove timeout. | — |
-| 0x100093a0 | ServerMainThread | 2434 | 2149 | Largest server thread, 2149 delta, prove err. Not attempted. | — |
-| 0x1000a570 | ProcessReceiveData | 760 | 10 | `and/neg/sbb/add` vs `shr/sub` at 0x1000a5bd (`conn[12]`), `lea` folding `[eax-0x14]` vs `[ebp+4]` at same block, `push eax/ebp` swap, `jl` vs `jae` outer loop, `sprintf`/`LogMessageInternal` push reg alloc, download `g_download_total_size`/`g_download_received` order. `reorder_dl` (+2 matches) best: 53.5% (407/760) after 6+ C approaches. Ternary gives `and/neg/sbb` but increases delta to 11B (761 vs 760) and structural 162. Prove (all lb) timeout/path-explosion (loops over 0x264264 stride, nested `do-while ((*(unsigned char*)conn&1)!=0)`). Not byte-identical-able via pure C89 due to MSVC6 CSE folding of `conn[1]` via `lea eax,[conn+6]`. | 6+ (ternary/status_ternary/preload/pkt/char-cast/reorder_dl/signed/volatile/tmp) |
-| 0x1000b4d0 | ExecuteOfficeAssignment | 836 | 748 | Office assignment logic, 748 delta. Prove timeout. | — |
-| 0x1000bdf0 | ahm_ExAllocAlchemist | 1002 | 926 | FPU + dual scans + 76 relocs. Prove timeout. | — |
-| 0x1000d930 | cm_ExSellObjekt | 2057 | 1836 | 2KB handler, stack 0x228 vs 0x224, reg alloc. Naked in siblings but violates padding-only rule. | — |
-| 0x1000e140 | cm_ExProdObjekt | 993 | 868 | 3 early-return epilogues as tail-merging. Naked would fix but violates rule. | — |
-| 0x1000ec00 | cm_ExCopyEntityData | 912 | 780 | `esi vs edi` for cmd_ptr, `ebp vs ebx` for outer_ent, `jle/jge vs jg/jl`. Prove timeout. | 3 (branch unfold, control-flow, pure C) |
-| 0x100128f0 | ls_LoadBuildingEntityState | 1463 | 1352 | FPO `sub esp,0xc` vs EBP frame, `or ebp,-1` vs mov, sequential VFS `je 0x12e00` shared epilogue (20+ edges). Prove timeout. | 3 (flag sweep, logic rewrite, header fix) |
-| 0x10012eb0 | ls_LoadDynamicEntities | 884 | 819 | `push ecx` spill +29B, `lea [esi-2]` vs `push imm`, tail `add edx`. Prove timeout. | 3 (register hints, loop forms, header minimize) |
-| 0x10013b10 | ls_LoadTownData | 1361 | 1367 | `push ecx` 4B vs `sub esp,8`, `g_save_version` alias, `ptr/ebp/edi` swap, inner `inc edi` loops. Prove timeout. | 3 (global alias, scope isolate, register hints) |
-| 0x100156c0 | gm_InitObjektHersteller | 642 | 535 | Frame `0x20 vs 0x24`, `xor ebp` vs `xor esi`, log push ordering, `rep stosd` placement, outer `byte_offset<0xca78` loop reg. | 3 (log reorder, dummy locals, volatile) |
-| 0x100147b0 | lb_HandleLobbyCommands | 670 | 535 | `push edi` hoisting before `test ah,0x40`, `inc/neg/sbb` vs `setcc/dec`, `memset` vs 8×mov. Best 33.9% (227/670) after 3 approaches. STUB→SIZE_MISMATCH with current C but still failing. | 3 (globals/goto, 8-mov zeroing, return idiom) |
+The 16 SIZE_MISMATCH rows and the exit 0x1001a670 STUB that earlier revisions of
+this file listed are resolved (exit is RELOC under /O1).
 
 ## What would unblock
 
-- Large stubs (0x10018850, 0x10002770) need full decomp, not just matching.
-- Prove for many fails is path explosion (loops over 0x300*0x300, nested do-while with VFS). Slice proving (0-400 for ls_LoadEntities, 32-752 for GetCommandPayloadSize) succeeded for 2; similar slicing for others may promote some.
-- Flag-sweep GA (`rebrew match --flag-sweep-only --tier quick` on gm_Open) is pending — may find /Oy, /O2 combos that close small deltas without source change.
-- exit (0x1001a670) needs build fix: CMake should handle LIBCMT duplicate (e.g. /NODEFAULTLIB:LIBCMT or exclude crt/exit).
-- Medium-size handlers (0x1000b4d0, 0x1000d930, 0x1000e140, 0x1000bdf0) are correctly PROVEN-candidate-sized but timeout; longer prove with `--loop-bound 20 --timeout 120` and slicing could promote without byte-identical.
-- Remaining ~10 functions need sustained C rewrites mimicking sibling RELOC patterns (e.g. gm_Open inner loop like proven gm_NextEntityQueryMatch which was just promoted).
+- ServerMainThread: a C2 block-ordering lever that pure C89 does not expose; the
+  1-byte size deficit follows from the same placement decision.
+- gm_CreateEntityFromParents: re-derive the statement order from the target
+  disassembly.  Positional hill-climbing cannot cross from a wrong schedule.
+- Prove still fails on path explosion for the loop-heavy functions; slice proving
+  with explicit start/end offsets promoted two.
 
-## Fencing for future 100% (if naked needed)
+## Inline asm audit (2026-09-12)
 
-CMake `option(REBREW_ALLOW_NAKED ON)` (`build/CMakeCache.txt`) adds `-DREBREW_ALLOW_NAKED=1` for the
-byte-identical verification build. New `__declspec(naked)+__asm` for remaining 18 must be fenced:
+Three `__asm` blocks remain, 15 asm lines each (45 total), one per hand-written
+block-fill site:
 
-```c
-#ifdef REBREW_ALLOW_NAKED
-__declspec(naked) int __cdecl fn(...) { __asm { ... } } // 100% bytes, only when -DREBREW_ALLOW_NAKED
-#else
-int __cdecl fn(...) { /* idiomatic C89 + PROVEN fallback for comparison build */ }
-#endif
-```
+| File | Function | Site |
+|---|---|---|
+| `server4.c:448` | srv_InitBuildingTypeTable | 0x1000b040 |
+| `m_alloc2.c:231` | m_PoolAlloc | 0x10006d20 |
+| `m_alloc.c:220` | InitPacketPool | 0x100068e0 |
 
-This keeps `cmake --build build` (default `REBREW_ALLOW_NAKED=ON` → verification build) byte-identical while
-`cmake -B build -DREBREW_ALLOW_NAKED=OFF && cmake --build build` stays pure-C comparable.
-Existing 100 naked in `plant.c`, `command_c/cm_Chk*`, `server.c` already provide `241/259` RELOCs and remain
-unfenced (baseline) — they are counted as OK in `rg` only when fenced; see `CMakeLists.txt` option.
+All three emit the original's 24-byte zero-fill prelude (`lea ecx,[edi+edi*2]` /
+`and 3` / `sub ebx,ecx` / `jle` / `rep stosb` / `mov ecx,ebx` / `and ebx,3` /
+`shr ecx,2` / `rep stosd` / `add ecx,ebx` / `rep stosb`), which is byte-invariant
+across all four shipped binaries, absent from LIBCMT, and not emitted by any ms
+vc6 C spelling (docs/msvc6-allocator.md Finding 19).  Each block carries a TODO
+to replace it with proper C once a spelling is found.
 
-Completion `rg` must count only **unfenced** naked: `rg -n "__asm|_emit" src/server.dll | grep -v REBREW_ALLOW_NAKED`
-must show only `// padding:` (1-5B) when `REBREW_ALLOW_NAKED=OFF`, or be documented as fenced.
-
-## Inline asm audit
-
-No inline asm for logic was added in this run (all fixes are C or prove). Existing naked functions in `src/server.dll/**` are pre-existing (plant.c, command_c/cm_Chk*, server.c) and excluded from this goal's scope per stop rule. New `REBREW_ALLOW_NAKED` fenced naked is allowed only for minor padding (1-5B) today; whole-function naked for remaining 18 would use the above fence.
+No other inline asm exists.  `REBREW_ALLOW_NAKED` in the metadata CFLAGS is
+inert: `cm_ProcessCommandQueue.c`, `gm_RefreshMarketAvailability.c` and `aemter.c`
+carry the define but contain no `__asm` and no `naked`.
 
 ## Build/tooling state (2026-08-21)
 
