@@ -213,7 +213,7 @@ typedef int(__cdecl* ALLOCFN)(int, int, int);
  *     `record_index < 0x58` instead lets msvc6 fold the guard into the head,
  *     which is the 499/640 variant of the same un-rotated shape.
  *     `#pragma optimize` sweep on the whole function: "a",off, "l",off,
- *     "w",off and "p",on are all inert at 614/642; "g",off explodes to obj 926
+ *     "w",off and "table_cursor",on are all inert at 614/642; "g",off explodes to obj 926
  *     at 26/926.
  *     That round concluded the rotation and the ebp role were one coupled
  *     decision and that 614 was the ceiling. Superseded: they are separate,
@@ -228,7 +228,7 @@ typedef int(__cdecl* ALLOCFN)(int, int, int);
 
 void __cdecl gm_InitObjektHersteller(void)
 {
-	int* p;
+	int* table_cursor;
 	int i;
 	int* mfr_table;
 	char* record_base;
@@ -242,10 +242,10 @@ void __cdecl gm_InitObjektHersteller(void)
 	int comp_count;
 
 	/* Zero manufacturer table (25 ints) */
-	p = (int*) 0x10139820;
+	table_cursor = (int*) 0x10139820;
 	for (i = 0x19; i != 0; i--) {
-		*p = 0;
-		p++;
+		*table_cursor = 0;
+		table_cursor++;
 	}
 
 	same_count = 0;
@@ -273,10 +273,10 @@ void __cdecl gm_InitObjektHersteller(void)
 	record_base = *(char**) 0x100a8c30;
 
 	/* Fill ObjektNr2MinimalHersteller with 0x58 (732 ints) */
-	p = (int*) 0x101dd8e0;
+	table_cursor = (int*) 0x101dd8e0;
 	for (i = 0x2dc; i != 0; i--) {
-		*p = 0x58;
-		p++;
+		*table_cursor = 0x58;
+		table_cursor++;
 	}
 
 	/* prev_type shares the fill constant and must be written *after* the loop:

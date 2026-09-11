@@ -30,7 +30,7 @@ int __cdecl gv_SpawnEntities(void* entity, int count)
 	unsigned char* taddr;
 	void* slot;
 	int i;
-	int r;
+	int random_value;
 	int spawned;
 
 	type = *(unsigned char*) entity;
@@ -49,9 +49,9 @@ int __cdecl gv_SpawnEntities(void* entity, int count)
 			    (unsigned short) (g_current_year + 5);
 			*(unsigned char*) ((char*) slot + 0xc) = 0xff;
 			for (i = 0; i < 5; i++) {
-				r = gm_RandomMod(8) & 0xffff;
+				random_value = gm_RandomMod(8) & 0xffff;
 				*(unsigned char*) (i + *(int*) ((char*) slot + 0x10) + 0x24) =
-				    (unsigned char) ((float) r * g_const_21_0 + g_const_42_0);
+				    (unsigned char) ((float) random_value * g_const_21_0 + g_const_42_0);
 			}
 			*(int*) (*(int*) ((char*) slot + 0x10) + 0x2c) =
 			    (gm_RandomMod(9) & 0xffff) + 1;

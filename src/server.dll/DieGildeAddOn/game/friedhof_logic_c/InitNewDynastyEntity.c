@@ -28,7 +28,7 @@ void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, 
 {
 	int i;
 	int j;
-	int p;
+	int cursor;
 	int off;
 	int flags;
 	int k;
@@ -48,9 +48,9 @@ void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, 
 	}
 	*(unsigned short*) ((char*) entity + 0xa) = word_arg;
 	*(char*) ((char*) entity + 0xc) = 0;
-	for (p = (int) g_relationship_matrix_primary; p < (int) g_relationship_matrix_primary + 0x90000; p += 0x300) {
+	for (cursor = (int) g_relationship_matrix_primary; cursor < (int) g_relationship_matrix_primary + 0x90000; cursor += 0x300) {
 		i = 0;
-		off = p - (int) g_relationship_matrix_primary;
+		off = cursor - (int) g_relationship_matrix_primary;
 		for (; i < 0x300; i++) {
 			g_relationship_matrix_primary[off + i] = (unsigned char) (gm_RandomMod(0x40) - 0x20);
 			g_relationship_matrix_secondary[off + i] = 0;

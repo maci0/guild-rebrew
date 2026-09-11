@@ -50,37 +50,37 @@ int __cdecl ls_LoadExistingEntities(int arg1)
 {
 	int count;
 	int i;
-	unsigned char* p;
+	unsigned char* record_cursor;
 
 	gm_CleanupObjectEntities();
 	if (!ls_ReadVfsDataChecked(&count, 4, 1, (void*) arg1)) {
 		return 0;
 	}
 	for (i = 0; i < count; i++) {
-		p = (unsigned char*) g_query_base + i * 0x43;
-		if (!ls_ReadVfsDataChecked(p, 2, 1, (void*) arg1)) {
+		record_cursor = (unsigned char*) g_query_base + i * 0x43;
+		if (!ls_ReadVfsDataChecked(record_cursor, 2, 1, (void*) arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(p + 2, 4, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 2, 4, 1, (void*) arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(p + 6, 4, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 6, 4, 1, (void*) arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(p + 0xa, 4, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 0xa, 4, 1, (void*) arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(p + 0xe, 4, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 0xe, 4, 1, (void*) arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(p + 0x12, 1, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 0x12, 1, 1, (void*) arg1)) {
 			return 0;
 		}
-		if (!ls_ReadVfsDataChecked(p + 0x13, 1, 1, (void*) arg1)) {
+		if (!ls_ReadVfsDataChecked(record_cursor + 0x13, 1, 1, (void*) arg1)) {
 			return 0;
 		}
-		p += 0x1c;
-		if (!ls_ReadVfsDataChecked(p, 0x1f, 1, (void*) arg1)) {
+		record_cursor += 0x1c;
+		if (!ls_ReadVfsDataChecked(record_cursor, 0x1f, 1, (void*) arg1)) {
 			return 0;
 		}
 	}

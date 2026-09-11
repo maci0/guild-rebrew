@@ -96,19 +96,19 @@ int __cdecl plt_CheckZoneAvailability(int zone_table, unsigned int x, unsigned i
 	int i;
 	int j;
 	int found_free;
-	char* e;
+	char* zone_cursor;
 
 	found_free = 0;
 	i = 0;
-	e = (char*) (zone_table + 8);
+	zone_cursor = (char*) (zone_table + 8);
 	while (i < 0x40) {
-		if (*(signed char*) (e + 5) == (char) 0xff) {
+		if (*(signed char*) (zone_cursor + 5) == (char) 0xff) {
 			found_free = 1;
-		} else if ((unsigned char) *e == x && (unsigned char) *(e + 1) == y) {
+		} else if ((unsigned char) *zone_cursor == x && (unsigned char) *(zone_cursor + 1) == y) {
 			return 0;
 		}
 		i++;
-		e += 0x18;
+		zone_cursor += 0x18;
 	}
 	if (found_free == 0)
 		return 0;

@@ -37,8 +37,8 @@
  * bytes; on top of it these were measured: `count <= 0` 390, declaring j
  * before count 390, loading count before zeroing j 390, `j >= count` 99,
  * bottom-testing the job loop 88, bottom-testing both grave sweeps 89,
- * splitting entry from the p walk 149, moving the job_id load after the
- * p load 386.
+ * splitting entry from the slot_ptr walk 149, moving the job_id load after the
+ * slot_ptr load 386.
  *
  * The job-entry search emits one compare too many: this C tests the count
  * twice (`cmp ecx,1; jl` for the guard, then `cmp ecx,ebx; jle` for the
@@ -179,7 +179,7 @@
  * measured and reverted on the 526 body: `g_slot_table` in place of the
  * 0x100358a0 literals (510-514; unlike cm_ExCopyEntityData, the literal form
  * here already yields the folded displacement), an `off`-killed second memset
- * 504, a rotated or do/while entry search 109, the p load sunk below the
+ * 504, a rotated or do/while entry search 109, the slot_ptr load sunk below the
  * count guard (inert), a byte-typed temp in the 5-byte copy (inert), store
  * reordering around grave+0x50 (inert), an int cast on the neighbour-loop id
  * reads (inert), a pre-store before the clear_entry memset (inert).
@@ -195,7 +195,7 @@
  * the temp gives the reference's esi for all of them.
  *
  * The same lever does NOT apply to the entry search above: hoisting its `q`
- * out of the block scores 528, because `p` is live across the loop there and
+ * out of the block scores 528, because `slot_ptr` is live across the loop there and
  * the reference wants it reloaded.  Also measured on the 537 body and
  * reverted: the second memset re-based as `(char*) 0x100358fc + off` 504 (the
  * pre-existing note still holds after the counter fix), the citizen-count bump
@@ -279,7 +279,7 @@
  *
  * The `#pragma optimize` sweep does not transfer from cm_ExCopyEntityData:
  * "a",on craters to 265 here (the four volatile grave-id reads are exactly the
- * aliasing the pragma discards), "w",on 525, "p",on 532, "s",on and "t",off
+ * aliasing the pragma discards), "w",on 525, "slot_ptr",on 532, "s",on and "t",off
  * 75, "g",off 102, "y",off 113, the rest inert.
  *
  * Residual at 538: 10 bytes over target, still the zero-extend form in the
@@ -349,13 +349,13 @@
  * Levers ported from ahm_ExAllocAlchemist's passes 5 and 6 that do NOT
  * transfer here, each measured on the 606 body: the volatile-pointer reload
  * (`*(void* volatile*) &x`) applied to `req` for the +0x15 byte read 480, to
- * `entry` for the grave+9 read 494, and to `p` for the entry-search walk 337;
+ * `entry` for the grave+9 read 494, and to `slot_ptr` for the entry-search walk 337;
  * a `dst2` local for the second strcpy destination, chasing the reference's
  * early `lea edx,[ebp+0x40]` at 0x2ca, 496; the neighbour loop's two grave-id
  * reads through a plain `unsigned short gid` local in the alchemist's grid
  * shape 499 at obj 1041 (the four volatile reads stay load-bearing).  Also
  * inert on this body: the entry-search bound written `count > j` 605,
- * declaring `count` before `j`, the `p` load sunk below the count guard, the
+ * declaring `count` before `j`, the `slot_ptr` load sunk below the count guard, the
  * `off` multiply hoisted above the 0x100358a2 flag test, the second grid
  * index written `col + gid * 0x300`, the fail return cast through
  * `(int)(unsigned short)`, and a `src` local for the 5-byte copy source.
@@ -408,7 +408,7 @@
  * /O2 /Gy, /Ox /Ob0, /O2 /Gf, /Oxt, all with /Gd) produces the identical
  * 1040-byte object, and the `#pragma optimize` sweep that gained 11 bytes on
  * cm_ExCopyEntityData does not transfer: "a",on craters to 245, "s",on to
- * 76, and "w"/"p"/"q"/"g"/"y"/"t" on plus "a"/"w"/"p"/"q" off are all
+ * 76, and "w"/"slot_ptr"/"q"/"g"/"y"/"t" on plus "a"/"w"/"slot_ptr"/"q" off are all
  * inert. */
 
 // FUNCTION: SERVER 0x10011bf0
@@ -436,7 +436,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	void* entity;
 	void* slot;
 	void* workers;
-	void* p;
+	void* slot_ptr;
 	int grave_cursor;
 	char* grave;
 	int chosen;
@@ -466,20 +466,20 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	slot = gv_GetSlotEntry(workers, *(int*) ((char*) req + 0xc), *(unsigned char*) ((char*) req + 0x10));
 	if (!slot)
 		return 0xffff;
-	p = *(void**) ((char*) slot + 0x10);
+	slot_ptr = *(void**) ((char*) slot + 0x10);
 	count = g_worker_entry_count[*(int*) ((char*) req + 0xc)];
 	j = 0;
 	if (count <= j)
 		goto fail_ffff;
 	job_id = *(int*) ((char*) req + 0x11);
 	{
-		char* q = (char*) p;
+		char* q = (char*) slot_ptr;
 		for (; j < count; j++, q = q + 0x44) {
 			entry = q;
 			if (*(int*) q == job_id)
 				break;
 		}
-		p = q;
+		slot_ptr = q;
 	}
 	if (!entry || *(int*) entry != job_id)
 		goto fail_ffff;
@@ -596,12 +596,12 @@ fail_ffff:
 		int n;
 		count = g_worker_entry_count[*(int*) ((char*) req + 0xc)];
 		if (count > 0) {
-			p = *(void**) ((char*) slot + 0x10);
-			for (n = 0; n < count; n++, p = (char*) p + 0x44) {
-				if (*(int*) p == -1)
+			slot_ptr = *(void**) ((char*) slot + 0x10);
+			for (n = 0; n < count; n++, slot_ptr = (char*) slot_ptr + 0x44) {
+				if (*(int*) slot_ptr == -1)
 					continue;
-				if (*(int*) p != *(int*) entry) {
-					*(int*) ((char*) slot + 4) = *(int*) p;
+				if (*(int*) slot_ptr != *(int*) entry) {
+					*(int*) ((char*) slot + 4) = *(int*) slot_ptr;
 					goto clear_entry;
 				}
 			}
