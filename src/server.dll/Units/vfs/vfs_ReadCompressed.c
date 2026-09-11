@@ -1,4 +1,4 @@
-/* ReadVfsCompressed — gzip payload reader (0x10008A90).
+/* vfs_ReadCompressed — gzip payload reader (0x10008A90).
 
  * Drives the zlib state machine over a stream whose deflate payload sits in
  * the VFS file at base_off + in_off: refills the input window with
@@ -30,7 +30,7 @@
  */
 
 // FUNCTION: SERVER 0x10008A90
-// ReadVfsCompressed
+// vfs_ReadCompressed
 
 // SIZE 0x6c
 typedef struct VFS_INFLATE {
@@ -58,7 +58,7 @@ extern int __cdecl inflate(void* zstrm, int flush); /* 0x100058d0, zlib */
 extern void* __cdecl fseek(void* stream, long offset, int whence);
 extern unsigned int __cdecl fread(void* ptr, unsigned int size, unsigned int count, void* stream);
 
-int __cdecl ReadVfsCompressed(int handle, char* buf, unsigned int len)
+int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 {
 	VFS_INFLATE* s;
 	volatile int done;

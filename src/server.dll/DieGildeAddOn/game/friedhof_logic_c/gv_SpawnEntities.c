@@ -1,4 +1,4 @@
-/* SpawnGraveyardEntities - proper C */
+/* gv_SpawnEntities - proper C */
 
 // FUNCTION: SERVER 0x10010850
 // SIZE: 370
@@ -24,7 +24,7 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
  * store address (subscript, pointer walk, split index, addend order,
  * hoisted base) all emit identical bytes. */
 
-int __cdecl SpawnGraveyardEntities(void* entity, int count)
+int __cdecl gv_SpawnEntities(void* entity, int count)
 {
 	unsigned char type;
 	unsigned char* taddr;

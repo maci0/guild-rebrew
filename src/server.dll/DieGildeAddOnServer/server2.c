@@ -18,26 +18,26 @@ void __cdecl gm_CleanupAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
 void __cdecl gm_InitEntitySlots(void);
 /* Network functions (local externs — signatures differ from net.h) */
-int __cdecl AcceptConnections(void);
-void __cdecl CleanupSockets(void);
+int __cdecl srv_AcceptConnections(void);
+void __cdecl srv_CleanupSockets(void);
 int __cdecl ProcessSendData(void);
-int __cdecl ReceivePacketHeader(unsigned int* conn);
-void __cdecl LogWinsockError(int err_code);
+int __cdecl srv_ReceivePacketHeader(unsigned int* conn);
+void __cdecl srv_LogWinsockError(int err_code);
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
 extern int g_handler_started;
-void __cdecl InitBuildingTypeTable(void);
+void __cdecl srv_InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);
-void __cdecl ShutdownMemoryAllocator();
+void __cdecl m_ShutdownAllocator();
 int __cdecl gm_Open(char*);
-int __cdecl CreateListenSocket(int port);
-void __cdecl InitPacketPool(int);
-int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-int __cdecl SendPlayerData(unsigned int*);
+int __cdecl srv_CreateListenSocket(int port);
+void __cdecl m_InitPacketPool(int);
+int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
+int __cdecl srv_SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
-int GetCommandPayloadSize(unsigned char* cmd_payload);
+int ahm_GetCommandPayloadSize(unsigned char* cmd_payload);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
@@ -53,8 +53,8 @@ int __cdecl srv_Init(void)
 
 	hThread = GetCurrentThread();
 	SetThreadPriority(hThread, 2);
-	((int (__cdecl*)(void*, int, int, int)) InitializeLogAndErrorHandler)((void*) CleanupSockets, 0, 0, 3);
-	InitPacketPool(0x7fa6);
+	((int (__cdecl*)(void*, int, int, int)) InitializeLogAndErrorHandler)((void*) srv_CleanupSockets, 0, 0, 3);
+	m_InitPacketPool(0x7fa6);
 	strcpy(path, (char*) 0x10029594);
 	strcat(path, (char*) 0x10029998);
 	if (gm_Open(path) < 0) {
@@ -63,8 +63,8 @@ int __cdecl srv_Init(void)
 		goto srv_done;
 	}
 	gm_InitEntitySlots();
-	InitBuildingTypeTable();
-	g_net_socket = CreateListenSocket(*(int*) 0x11764088);
+	srv_InitBuildingTypeTable();
+	g_net_socket = srv_CreateListenSocket(*(int*) 0x11764088);
 	if (g_net_socket == -1) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x3db, "***ERROR: Initialization of Socket failed!\n", 1);
 		goto srv_done;
@@ -78,7 +78,7 @@ srv_done:
  * connections. Calls WSAStartup, socket(), bind(), listen(). */
 
 // FUNCTION: SERVER 0x10009e60
-// CreateListenSocket
+// srv_CreateListenSocket
 
 /* WSAStartup = 0x10024178, WSACleanup = 0x1002417c */
 /* socket = 0x10024180, setsockopt = 0x10024184, ioctlsocket = 0x1002416c */
@@ -88,7 +88,7 @@ srv_done:
 // DATA: SERVER 0x101deb14
 
 // SIZE 0x10 — struct sockaddr_in (Winsock system struct)
-int __cdecl CreateListenSocket(int port)
+int __cdecl srv_CreateListenSocket(int port)
 {
 	char wsadata[0x190];
 	int optval;
@@ -174,9 +174,9 @@ cleanup_wsa:
  * the listen socket, and calls WSACleanup. */
 
 // FUNCTION: SERVER 0x1000A010
-// CleanupSockets
+// srv_CleanupSockets
 
-void __cdecl CleanupSockets(void)
+void __cdecl srv_CleanupSockets(void)
 {
 	int p;
 	p = 0x101deb14;
@@ -194,7 +194,7 @@ void __cdecl CleanupSockets(void)
 	gm_ResetAllEntities();
 	gm_CleanupObjectEntities();
 	gm_CleanupAllEntities();
-	ShutdownMemoryAllocator();
+	m_ShutdownAllocator();
 	ShutdownLogAndErrorHandler();
 }
 
@@ -203,7 +203,7 @@ void __cdecl CleanupSockets(void)
  * socket options (TCP_NODELAY, timeouts). */
 
 // FUNCTION: SERVER 0x1000a080
-// AcceptConnections
+// srv_AcceptConnections
 
 /* accept = 0x1002415c, setsockopt = 0x10024184, GetTickCount = 0x1002405c */
 
@@ -241,7 +241,7 @@ char s_D__Develop_DieGildeAddOnServer_s_100298b0[] = "D:\\Develop\\DieGildeAddOn
 char s_New_Connection_from__li__li__li__100299a0[] = "New Connection from %li.%li.%li.%li\n";
 extern int __cdecl sprintf(char*, const char*, ...);
 
-int __cdecl AcceptConnections(void)
+int __cdecl srv_AcceptConnections(void)
 {
 	int optval;
 	int addrlen;
@@ -363,11 +363,11 @@ int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot)
  * size. Handles partial reads and disconnects. */
 
 // FUNCTION: SERVER 0x1000a340
-// ReceivePacketHeader
+// srv_ReceivePacketHeader
 
 /* recv = 0x10024168, GetTickCount = 0x1002405c, WSAGetLastError = 0x10024170 */
 
-int __cdecl ReceivePacketHeader(unsigned int* conn)
+int __cdecl srv_ReceivePacketHeader(unsigned int* conn)
 {
 	int (__stdcall* recv_fn)(unsigned int, char*, int, int);
 	int n;
@@ -394,7 +394,7 @@ int __cdecl ReceivePacketHeader(unsigned int* conn)
 			err = WSAGetLastError();
 			if (err == 0x2733)
 				return 0;
-			LogWinsockError(err);
+			srv_LogWinsockError(err);
 			cm_ClosePlayerConnection(conn);
 			return -1;
 		}
@@ -420,7 +420,7 @@ int __cdecl ReceivePacketHeader(unsigned int* conn)
 		err = WSAGetLastError();
 		if (err == 0x2733)
 			return 0;
-		LogWinsockError(err);
+		srv_LogWinsockError(err);
 		cm_ClosePlayerConnection(conn);
 		return -1;
 	}
@@ -441,11 +441,11 @@ int __cdecl ReceivePacketHeader(unsigned int* conn)
  * outgoing packets with retry logic for partial sends. */
 
 // FUNCTION: SERVER 0x1000a490
-// SendPlayerData
+// srv_SendPlayerData
 
 /* send = 0x10024164, GetTickCount = 0x1002405c, WSAGetLastError = 0x10024170 */
 
-int __cdecl SendPlayerData(unsigned int* conn)
+int __cdecl srv_SendPlayerData(unsigned int* conn)
 {
 	int result;
 	unsigned int tick;

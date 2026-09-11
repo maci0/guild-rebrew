@@ -119,7 +119,7 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 //   `/DREBREW_ALLOW_NAKED` in this function's CFLAGS is inert: the file has
 //   no `__asm` and no `naked` attribute.
 
-unsigned int __cdecl ValidateAndAssignOffice(unsigned int* arg1)
+unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* arg1)
 {
 	unsigned char* cmd;
 	unsigned int* hp;

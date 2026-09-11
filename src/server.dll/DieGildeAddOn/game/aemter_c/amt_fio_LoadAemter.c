@@ -20,7 +20,7 @@ typedef struct {
 extern char g_office_slots[]; /* 0x101de5a0 */
 extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize,
                                          int elementCount, int streamCtx);
-extern void __cdecl InitBuildingTypeTable(void);
+extern void __cdecl srv_InitBuildingTypeTable(void);
 
 extern char s_amt_fio_LoadAemter____Can_t_load_1002a0c8[];
 extern char s_D__Develop_DieGildeAddOn_game_ae_1002a0a0[];
@@ -49,7 +49,7 @@ int __cdecl amt_fio_LoadAemter(int streamCtx, int version)
 
 	count = (version >= 0x10051) ? 0x2a : 0x25;
 
-	InitBuildingTypeTable();
+	srv_InitBuildingTypeTable();
 
 	if (streamCtx == 0)
 		return 0;

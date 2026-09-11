@@ -20,7 +20,7 @@ extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
 extern int g_save_info[2];
-extern int OpenVfsStream(char*, char*, int);
+extern int vfs_OpenStream(char*, char*, int);
 int ls_LoadSavegameHeader(int, char*);
 int ls_LoadExistingEntities(int);
 unsigned int ls_LoadBuildingEntityState(unsigned int);

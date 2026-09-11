@@ -192,7 +192,7 @@ extern void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
 extern void __cdecl m_PoolFree(void* pool, void* item);
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 
-int __cdecl OpenVfsStream(unsigned char* buf, unsigned int size, char* mode_flags)
+int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
 {
 	char* stream;
 	char* p;

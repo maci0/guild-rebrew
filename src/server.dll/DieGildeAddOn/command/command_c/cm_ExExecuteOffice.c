@@ -12,12 +12,12 @@
  * {
  *   int iVar1;
  *
- *   iVar1 = ExecuteOfficeAssignment((char *)((int)param_1 + 0x10));
+ *   iVar1 = amt_ExecuteOfficeAssignment((char *)((int)param_1 + 0x10));
  *   return (uint)(iVar1 == 0);
  * }
  */
 
-int __cdecl ExecuteOfficeAssignment(char*);
+int __cdecl amt_ExecuteOfficeAssignment(char*);
 
 /* Execution handler: executes an office action by delegating
  * to amt_SwapOfficeHolders with the payload at cmd+0x10.
@@ -30,6 +30,6 @@ int __cdecl cm_ExExecuteOffice(void* cmd, char* result)
 
 	(void) result;
 
-	assignResult = ExecuteOfficeAssignment((char*) ((int) cmd + 0x10));
+	assignResult = amt_ExecuteOfficeAssignment((char*) ((int) cmd + 0x10));
 	return assignResult == 0;
 }

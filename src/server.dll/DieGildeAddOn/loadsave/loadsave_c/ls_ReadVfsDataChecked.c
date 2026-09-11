@@ -1,11 +1,11 @@
-/* ls_ReadVfsDataChecked — wrapper around ReadVfsData, nonzero on success. */
+/* ls_ReadVfsDataChecked — wrapper around vfs_ReadData, nonzero on success. */
 
 // FUNCTION: SERVER 0x10012440
 
-int __cdecl ReadVfsData(void*, int, int, void*);
+int __cdecl vfs_ReadData(void*, int, int, void*);
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx)
 {
-	/* ReadVfsData wrapper: nonzero on success (unsigned > 0 carry idiom). */
-	return (unsigned int) ReadVfsData(outBuffer, elementSize, elementCount, streamCtx) > 0;
+	/* vfs_ReadData wrapper: nonzero on success (unsigned > 0 carry idiom). */
+	return (unsigned int) vfs_ReadData(outBuffer, elementSize, elementCount, streamCtx) > 0;
 }

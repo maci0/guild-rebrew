@@ -158,7 +158,7 @@
  * STUB), strcpy/grave+9 reorder (479), 0x18/0x1c order swap (482).
  *
  * All six `~~` operands resolved against the original: the four calls are
- * gm_ResolveEntityById 0x10015e90, gv_CheckSlotActive 0x10010530, GetSlotEntry
+ * gm_ResolveEntityById 0x10015e90, gv_CheckSlotActive 0x10010530, gv_GetSlotEntry
  * 0x100105b0 and LogMessageInternal 0x10003640; the two data slots are
  * 0x1003546c (g_entity_table_end) and 0x100a8c30 (g_entity_type_table).
  *
@@ -259,7 +259,7 @@
  *   - The neighbour loop called `ahm_RandomBelow`, which is not a function in
  *     this binary: it resolves to the zero-returning stub in src/link_stubs.c.
  *     The reference calls gm_RandomMod at 0x1001a0d0 (db/server.dll_functions
- *     .csv, and the sibling SpawnGraveyardEntities.c in this directory reaches
+ *     .csv, and the sibling gv_SpawnEntities.c in this directory reaches
  *     RELOC 370/370 with the same `int __cdecl gm_RandomMod(int)`
  *     declaration).  The emitted instruction bytes are unchanged - both names
  *     compile to the same `call rel32` with a zero addend - so the positional
@@ -423,7 +423,7 @@ extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
-extern void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
+extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 extern int __cdecl gm_RandomMod(int n);
 extern float __cdecl gm_RandomFloat01(void);
 extern void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
@@ -463,7 +463,7 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 		return -3;
 	if (!gv_CheckSlotActive(workers, *(int*) ((char*) req + 0xc)))
 		return -4;
-	slot = GetSlotEntry(workers, *(int*) ((char*) req + 0xc), *(unsigned char*) ((char*) req + 0x10));
+	slot = gv_GetSlotEntry(workers, *(int*) ((char*) req + 0xc), *(unsigned char*) ((char*) req + 0x10));
 	if (!slot)
 		return 0xffff;
 	p = *(void**) ((char*) slot + 0x10);

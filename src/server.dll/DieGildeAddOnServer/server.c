@@ -18,26 +18,26 @@ void __cdecl gm_CleanupAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
 void __cdecl gm_InitEntitySlots(void);
 /* Network functions (local externs — signatures differ from net.h) */
-int __cdecl AcceptConnections(void);
-void __cdecl CleanupSockets(void);
+int __cdecl srv_AcceptConnections(void);
+void __cdecl srv_CleanupSockets(void);
 int __cdecl ProcessSendData(void);
-int __cdecl ReceivePacketHeader(unsigned int* conn);
-void __cdecl LogWinsockError(int err_code);
+int __cdecl srv_ReceivePacketHeader(unsigned int* conn);
+void __cdecl srv_LogWinsockError(int err_code);
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 int __stdcall ServerMainThread(void* lpThreadParameter);
 extern int g_handler_started;
-void __cdecl InitBuildingTypeTable(void);
+void __cdecl srv_InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);
-void __cdecl ShutdownMemoryAllocator();
+void __cdecl m_ShutdownAllocator();
 int __cdecl gm_Open(char*, char*);
-int __cdecl CreateListenSocket(int port);
-void __cdecl InitPacketPool(int);
-int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-int __cdecl SendPlayerData(unsigned int*);
+int __cdecl srv_CreateListenSocket(int port);
+void __cdecl m_InitPacketPool(int);
+int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
+int __cdecl srv_SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
-int GetCommandPayloadSize(unsigned char* cmd_payload);
+int ahm_GetCommandPayloadSize(unsigned char* cmd_payload);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */

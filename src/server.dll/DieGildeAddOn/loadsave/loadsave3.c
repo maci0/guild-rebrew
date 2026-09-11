@@ -7,7 +7,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-int __cdecl AllocGraveyardField(int);
+int __cdecl gv_AllocField(int);
 extern void amt_FindEntity26(int);
 extern void amt_FindEntity27(int);
 extern char gm_RandomMod(int);
@@ -23,7 +23,7 @@ extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
 extern int g_save_info[2];
-extern int OpenVfsStream(char*, char*, int);
+extern int vfs_OpenStream(char*, char*, int);
 /* Defined in loadsave2.c; same literals, same VAs. */
 extern char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[];
 extern char s_D__Develop_DieGildeAddOn_loadsav_1002d550[];

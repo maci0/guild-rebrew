@@ -32,7 +32,7 @@
  *   gm_SetBuildingWorkerLimits((uchar *)puVar2);
  *   gm_AllocBuildingDefaults((uchar *)puVar2);
  *   if (*pcVar1 == '\x1d') {
- *     UpgradeGraveyardField((uint8_t *)puVar2);
+ *     gv_UpgradeField((uint8_t *)puVar2);
  *   }
  *   gm_RefreshMarketAvailability((uint)g_current_season);
  *   if (result != (char *)0x0) {
@@ -57,7 +57,7 @@ extern unsigned char g_current_season;
 void __cdecl ReportMessage(char* msg, ...);
 void __cdecl gm_SetBuildingWorkerLimits(uchar*);
 void __cdecl gm_AllocBuildingDefaults(uchar*);
-void __cdecl UpgradeGraveyardField(uchar*);
+void __cdecl gv_UpgradeField(uchar*);
 void __cdecl gm_RefreshMarketAvailability(int);
 
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
@@ -102,7 +102,7 @@ int __cdecl cm_ExSetGebUpgrade(int cmd, char* result)
 	gm_AllocBuildingDefaults((uchar*) building);
 
 	if (*entry == '\x1d') {
-		UpgradeGraveyardField((uchar*) building);
+		gv_UpgradeField((uchar*) building);
 	}
 
 	gm_RefreshMarketAvailability((uint) g_current_season);

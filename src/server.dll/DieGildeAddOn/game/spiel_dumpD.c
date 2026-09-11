@@ -335,9 +335,9 @@ int __cdecl gm_SubObjektNoKill(int a, int b, int c)
  * File at 168/346, obj 342.  Probe harness: .scratch/l7-fnfe/. */
 
 // FUNCTION: SERVER 0x10016f80
-// FindNextFilteredEntity
+// gm_FindNextFilteredEntity
 
-void* __cdecl FindNextFilteredEntity(void)
+void* __cdecl gm_FindNextFilteredEntity(void)
 {
 	unsigned char* p;
 	unsigned char* end;

@@ -15,15 +15,15 @@ int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
 int __cdecl cm_ProcessCommandQueue(void);
 /* Entity lifecycle (local externs) */
 /* Network functions (local externs — signatures differ from net.h) */
-int __cdecl AcceptConnections(void);
-void __cdecl CleanupSockets(void);
-int __cdecl ProcessReceiveData(void);
+int __cdecl srv_AcceptConnections(void);
+void __cdecl srv_CleanupSockets(void);
+int __cdecl srv_ProcessReceiveData(void);
 int __cdecl ProcessSendData(void);
 int __cdecl SendBroadcastPacket(unsigned char* data, int size);
 
 void __cdecl RecvGameSavegame(void);
 int __cdecl srv_Init(void);
-int __cdecl AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
+int __cdecl sim_AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10);
 extern int g_max_players; /* 0x11764084 */
 extern int g_tick_rate;    /* 0x11764088 */
@@ -146,7 +146,7 @@ extern int g_tick_rate;    /* 0x11764088 */
  * 0x10024060, 0x10024064, 0x10024154 — GetTickCount, Sleep and friends),
  * which have no resolvable target in the loaded image.  The control cases
  * confirm the pattern: 0x1001bdd0 (123B, no calls) proves in seconds, while
- * 0x100068e0 InitPacketPool (162B, one call plus `rep stos`) fails with the
+ * 0x100068e0 m_InitPacketPool (162B, one call plus `rep stos`) fails with the
  * same message despite being 15x smaller.  Mid-function slices additionally
  * have no `ret`, so they can never reach a terminal state, and the two real
  * `ret`s sit at target offsets 2386 and 2431, where the 1-byte size deficit
@@ -176,7 +176,7 @@ extern int g_tick_rate;    /* 0x11764088 */
  * the loop shapes (all scored against the 1162 baseline unless noted):
  *   - Bisection by deletion: removing the phase-5 transfer content (S1),
  *     the send-start loop (S2), or both (S3) leaves the host store glued
- *     inline at obj+0x2b5 right after the CleanupSockets call.  The code
+ *     inline at obj+0x2b5 right after the srv_CleanupSockets call.  The code
  *     downstream of the branch site does not steer the placement at all.
  *   - Distance inflation (S5/S6): ~350 bytes of filler pushed the store
  *     past the jne's rel8 range and msvc6 still kept it inline, accepting
@@ -284,7 +284,7 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 		} while ((int) player_slot < 0x114ffe20);
 
-		AcceptConnections();
+		srv_AcceptConnections();
 
 		if (connected_players == *(unsigned int*) 0x11764084) {
 			phase_complete = 1;
@@ -306,7 +306,7 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 			last_announce_tick = timeGetTime();
 		}
 
-		if ((unsigned int) ProcessReceiveData() == 0xffffffff) {
+		if ((unsigned int) srv_ProcessReceiveData() == 0xffffffff) {
 			LogMessageInternal((char*) 0x100298b0, 0x15f, (char*) 0x1002986c, 1);
 			goto cleanup_and_exit;
 		}
@@ -350,7 +350,7 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 		goto host_slot_found;
 	} while ((int) player_slot < 0x114ffe20);
 
-	CleanupSockets();
+	srv_CleanupSockets();
 
 send_start_commands:
 	Sleep(2000);
@@ -407,7 +407,7 @@ send_start_commands:
 		phase_complete = 0;
 
 	wait_start_io:
-		if ((unsigned int) ProcessReceiveData() == 0xffffffff) {
+		if ((unsigned int) srv_ProcessReceiveData() == 0xffffffff) {
 			LogMessageInternal((char*) 0x100298b0, 0x1df, (char*) 0x1002986c, 1);
 			goto cleanup_and_exit;
 		}
@@ -472,7 +472,7 @@ send_start_commands:
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 			} while ((int) transfer_progress < 0x101deae8);
 
-			if ((unsigned int) ProcessReceiveData() == 0xffffffff) {
+			if ((unsigned int) srv_ProcessReceiveData() == 0xffffffff) {
 				LogMessageInternal((char*) 0x100298b0, 0x23a, (char*) 0x1002986c, 1);
 				goto cleanup_and_exit;
 			}
@@ -524,7 +524,7 @@ send_start_commands:
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 			}
 
-			if ((unsigned int) ProcessReceiveData() == 0xffffffff) {
+			if ((unsigned int) srv_ProcessReceiveData() == 0xffffffff) {
 				LogMessageInternal((char*) 0x100298b0, 0x278, (char*) 0x1002986c, 1);
 				goto cleanup_and_exit;
 			}
@@ -631,7 +631,7 @@ send_start_commands:
 			goto game_loop_network_io;
 		}
 
-		AdvanceGameClock((int*) 0x10035880, 0, 1, 0);
+		sim_AdvanceGameClock((int*) 0x10035880, 0, 1, 0);
 		player_slot = (unsigned int*) 0x101deb00;
 		do {
 			if (*player_slot != 0) {
@@ -688,7 +688,7 @@ send_start_commands:
 		*(unsigned int*) 0x101deaf0 += *(unsigned int*) 0x1002c3f0;
 
 	game_loop_network_io:
-		if ((unsigned int) ProcessReceiveData() == 0xffffffff) {
+		if ((unsigned int) srv_ProcessReceiveData() == 0xffffffff) {
 			LogMessageInternal((char*) 0x100298b0, 0x348, (char*) 0x1002986c, 1);
 			goto cleanup_and_exit;
 		}
@@ -704,6 +704,6 @@ send_start_commands:
 	}
 
 cleanup_and_exit:
-	CleanupSockets();
+	srv_CleanupSockets();
 	return 0;
 }

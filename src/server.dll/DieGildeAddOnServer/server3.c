@@ -18,26 +18,26 @@ void __cdecl gm_CleanupAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
 void __cdecl gm_InitEntitySlots(void);
 /* Network functions (local externs — signatures differ from net.h) */
-int __cdecl AcceptConnections(void);
-void __cdecl CleanupSockets(void);
+int __cdecl srv_AcceptConnections(void);
+void __cdecl srv_CleanupSockets(void);
 int __cdecl ProcessSendData(void);
-int __cdecl ReceivePacketHeader(unsigned int* conn);
-void __cdecl LogWinsockError(int err_code);
+int __cdecl srv_ReceivePacketHeader(unsigned int* conn);
+void __cdecl srv_LogWinsockError(int err_code);
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
 extern int g_handler_started;
-void __cdecl InitBuildingTypeTable(void);
+void __cdecl srv_InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);
-void __cdecl ShutdownMemoryAllocator();
+void __cdecl m_ShutdownAllocator();
 int __cdecl gm_Open(char*, char*);
-int __cdecl CreateListenSocket(int port);
-void __cdecl InitPacketPool(int);
-int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-int __cdecl SendPlayerData(unsigned int*);
+int __cdecl srv_CreateListenSocket(int port);
+void __cdecl m_InitPacketPool(int);
+int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
+int __cdecl srv_SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
-int GetCommandPayloadSize(unsigned char* cmd_payload);
+int ahm_GetCommandPayloadSize(unsigned char* cmd_payload);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
@@ -46,11 +46,11 @@ extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
  * Copies the packet into the command queue buffer via memcpy. */
 
 // FUNCTION: SERVER 0x1000A8F0
-// QueueCommandForProcessing
+// srv_QueueCommandForProcessing
 
 void* memcpy(void*, const void*, unsigned int);
 
-int __cdecl QueueCommandForProcessing(unsigned int* player_slot, unsigned char* cmd_data)
+int __cdecl srv_QueueCommandForProcessing(unsigned int* player_slot, unsigned char* cmd_data)
 {
 	char* buf;
 	int tail;
@@ -62,7 +62,7 @@ int __cdecl QueueCommandForProcessing(unsigned int* player_slot, unsigned char* 
 	}
 	*(int*) ((int) player_slot + 0x2641f8) = *(int*) (buf + 0x95);
 	memcpy(buf, cmd_data, 0x99);
-	*(short*) (buf + 1) = GetCommandPayloadSize((unsigned char*) buf);
+	*(short*) (buf + 1) = ahm_GetCommandPayloadSize((unsigned char*) buf);
 	tail = *(int*) ((int) player_slot + 0x2641f0);
 	if (tail != 0) {
 		while (*(int*) (tail + 0x95) != 0) {
@@ -98,7 +98,7 @@ int __cdecl cm_QueuePlayerCommand(unsigned int* player_slot, unsigned char* cmd_
 	}
 	*(int*) ((int) player_slot + 0x2641fc) = *(int*) (buf + 0x95);
 	memcpy(buf, cmd_data, 0x99);
-	*(short*) (buf + 1) = GetCommandPayloadSize((unsigned char*) buf);
+	*(short*) (buf + 1) = ahm_GetCommandPayloadSize((unsigned char*) buf);
 	tail = *(int*) ((int) player_slot + 0x2641f4);
 	if (tail != 0) {
 		while (*(int*) (tail + 0x95) != 0) {

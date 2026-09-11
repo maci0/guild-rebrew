@@ -1,4 +1,4 @@
-/* ExtendProductionTime - proper C */
+/* gv_ExtendProductionTime - proper C */
 
 // FUNCTION: SERVER 0x100113b0
 // SIZE: 390
@@ -11,7 +11,7 @@ extern unsigned int g_entity_slot_table[];
 extern float g_output_share[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
-extern void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
+extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 extern int __cdecl fcn_10016ea0(int a, int b, int c);
 extern int __cdecl gm_AddOrAccumulateObject(int a, int b, int c);
 extern int __cdecl _ftol(void);
@@ -20,7 +20,7 @@ extern int __cdecl _ftol(void);
  * entity, verifies the grave slot, then adds the building's production
  * time to the slot and accumulates the produced goods. */
 
-int __cdecl ExtendProductionTime(void* building)
+int __cdecl gv_ExtendProductionTime(void* building)
 {
 	void* entity;
 	void* workers;
@@ -53,7 +53,7 @@ int __cdecl ExtendProductionTime(void* building)
 				if (!object) {
 					return -6;
 				}
-				slot = GetSlotEntry(workers, *(int*) ((char*) building + 0xc),
+				slot = gv_GetSlotEntry(workers, *(int*) ((char*) building + 0xc),
 				    *(unsigned char*) ((char*) building + 0x10));
 				if (!slot) {
 					return -7;

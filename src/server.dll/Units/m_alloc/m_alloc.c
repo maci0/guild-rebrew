@@ -59,7 +59,7 @@ void __cdecl m_FreeTracked(void* ptr)
 	}
 }
 
-/* InitPacketPool — allocates and zeroes the packet pool (0x100068E0).
+/* m_InitPacketPool — allocates and zeroes the packet pool (0x100068E0).
  * Target 162 bytes; compiled 146. Of the 16-byte size delta, 12 bytes are the
  * target's dest-alignment memset prelude and 4 are the length's register
  * assignment around it (measured per region by .scratch/ipp-l3/accounting.py).
@@ -68,16 +68,16 @@ void __cdecl m_FreeTracked(void* ptr)
  * unreproducible msvc6 expansion on this toolchain: msvc6 SP6 always
  * materializes runtime counts fresh into ecx and emits the plain
  * dword+tail form (docs/msvc6-allocator.md, "m_PoolAlloc /
- * InitBuildingTypeTable" section). Probed 2026-08-27 for this exact
+ * srv_InitBuildingTypeTable" section). Probed 2026-08-27 for this exact
  * body: 15 C formulations (locals, unsigned/volatile/memory-resident
  * counts, dest-copy, reordered statements) x /O2 /Gd /Oy- plus an
  * /O1 /Ox /O2 /G5 /G6 /GB /Oi /Og- flag sweep — zero prelude hits.
  * Re-tested 2026-09-04, and the "unknown dest alignment" theory is
- * disproved: InitBuildingTypeTable 0x1000b046 emits the prelude for a
+ * disproved: srv_InitBuildingTypeTable 0x1000b046 emits the prelude for a
  * link-time-constant dest (0x101de5a0, dword-aligned) with a constant
  * 0x3f0 length, where alignment is fully known. The prelude is also
  * not a whole-TU property — m_AllocTracked contains both forms, and
- * AllocGraveyardField 0x10010a94 (same m_AllocTracked dest, runtime
+ * gv_AllocField 0x10010a94 (same m_AllocTracked dest, runtime
  * count) emits the plain form. What every one of the 6 prelude sites
  * shares is that both memset operands are reloaded from stack slots
  * immediately before the expansion; no probe reproduced that pairing.
@@ -169,7 +169,7 @@ void __cdecl m_FreeTracked(void* ptr)
  * "flags unlikely to help". */
 
 // FUNCTION: SERVER 0x100068E0
-// InitPacketPool
+// m_InitPacketPool
 // SIZE: 162
 //
 // RESOLVED (2026-09-10): the zero-fill is the original's hand-written
@@ -180,7 +180,7 @@ void __cdecl m_FreeTracked(void* ptr)
 // 162/162. All other functions in this file stay pure C.
 
 #pragma optimize("y", off)
-void __cdecl InitPacketPool(int n)
+void __cdecl m_InitPacketPool(int n)
 {
 	int len;
 

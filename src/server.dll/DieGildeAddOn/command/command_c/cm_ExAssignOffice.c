@@ -1,6 +1,6 @@
 /* cm_ExAssignOffice - proper C */
 
-extern unsigned int __cdecl ValidateAndAssignOffice(unsigned int*);
+extern unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int*);
 
 /* Execution handler: assigns the office described by the command
  * payload at offset 0x10 to the requesting player. Returns 1 on
@@ -11,5 +11,5 @@ extern unsigned int __cdecl ValidateAndAssignOffice(unsigned int*);
 
 int __cdecl cm_ExAssignOffice(void* obj)
 {
-	return ValidateAndAssignOffice((unsigned int*) obj + 4) == 0;
+	return amt_ValidateAndAssignOffice((unsigned int*) obj + 4) == 0;
 }

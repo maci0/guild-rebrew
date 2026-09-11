@@ -11,7 +11,7 @@
 extern int g_active_player_count; /* 0x1003543c */
 extern unsigned char g_current_season; /* 0x10035439 */
 
-void* __cdecl FindNextFilteredEntity(void);
+void* __cdecl gm_FindNextFilteredEntity(void);
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -324,7 +324,7 @@ char* __cdecl gm_AllocObjekt(int, int, int);
  * role (esi vs ebx; up/down/indexed/derived-def and decl-order variants
  * all keep our roles), and the counter-tail order. `~~` audit: calls are
  * gm_StartFilteredEntitySearch/gm_StartEntityQuery/gm_AllocObjekt/
- * FindNextFilteredEntity/LogMessageInternal; globals are
+ * gm_FindNextFilteredEntity/LogMessageInternal; globals are
  * g_active_player_count, g_current_season, g_slot_array,
  * g_entity_type_table, g_item_def_table; the two message pointers read
  * as 0x1003122c "gm_ObjectsAvailble(): Kein Markt" and 0x10031004
@@ -382,7 +382,7 @@ char* __cdecl gm_AllocObjekt(int, int, int);
  * ids[9] (673, frame shift), base-pre-call (156), slot-index (230).
  * `~~` re-audited 2026-09-06: calls are gm_StartFilteredEntitySearch
  * (0x100170e0), gm_StartEntityQuery (0x10016460), gm_AllocObjekt
- * (0x10016760), FindNextFilteredEntity (0x10016f80),
+ * (0x10016760), gm_FindNextFilteredEntity (0x10016f80),
  * gm_NextEntityQueryMatch (0x10016290), LogMessageInternal
  * (0x10003640); globals g_active_player_count, g_current_season,
  * g_slot_array, g_entity_type_table, g_item_def_table; strings
@@ -783,7 +783,7 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 				}
 				}
 			}
-			pb = FindNextFilteredEntity();
+			pb = gm_FindNextFilteredEntity();
 		}
 
 		slot = slot_base;

@@ -1,4 +1,4 @@
-/* HireProductionWorker - hires a production worker: validates the building's
+/* gv_HireProductionWorker - hires a production worker: validates the building's
  * entity and workers, finds a free slot entry via FindSlotEntryFiltered,
  * initializes the slot from the requested entity, clears the slot's entry
  * list, and books the production amount when positive. */
@@ -19,7 +19,7 @@ extern int __cdecl fcn_10016ea0(int a, int b, int c);
 extern int __cdecl gm_AddOrAccumulateObject(int a, int b, int c);
 extern int __cdecl _ftol(void);
 
-int __cdecl HireProductionWorker(void* req)
+int __cdecl gv_HireProductionWorker(void* req)
 {
 	void* entity1;
 	void* entity2;

@@ -3,8 +3,8 @@
 #include "rebrew_globals.h"
 extern int __cdecl gm_RandomMod(unsigned short range);
 unsigned int __cdecl gm_CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
-void __cdecl table_lookup(unsigned int a, unsigned short* b);
-unsigned short __cdecl FindAndMatchParents(unsigned int param);
+void __cdecl plt_TableLookup(unsigned int a, unsigned short* b);
+unsigned short __cdecl sim_FindAndMatchParents(unsigned int param);
 extern unsigned char g_entity_type_bytes[];
 extern unsigned char g_stat_b_array[];
 extern unsigned char g_slot_table[];
@@ -30,9 +30,9 @@ unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100151e0
-// FindAndMatchParents
+// sim_FindAndMatchParents
 
-unsigned short __cdecl FindAndMatchParents(unsigned int param)
+unsigned short __cdecl sim_FindAndMatchParents(unsigned int param)
 {
 	int weights[6];
 	unsigned int off;
@@ -130,7 +130,7 @@ void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
 	unsigned short tmp[4];
 	char* old;
 
-	table_lookup((unsigned char) entity[0], tmp);
+	plt_TableLookup((unsigned char) entity[0], tmp);
 	if ((unsigned short) (unsigned char) entity[0x65] < tmp[0]) {
 		old = *(char**) (ctx + 0x170);
 		if (old != 0) {
@@ -204,7 +204,7 @@ void* __cdecl sim_CreateCitizen(unsigned char flags, int citizen_type, int paren
 	unsigned int new_entity_slot;
 
 	if ((flags & 1) != 0) {
-		new_entity_slot = FindAndMatchParents(parent_id) & 0xffff;
+		new_entity_slot = sim_FindAndMatchParents(parent_id) & 0xffff;
 		if (new_entity_slot == 0xffff) {
 			goto error;
 		}
@@ -237,7 +237,7 @@ error:
  * and notifies connected clients of time changes. */
 
 // FUNCTION: SERVER 0x100155c0
-// AdvanceGameClock
+// sim_AdvanceGameClock
 
 #pragma pack(push, 1)
 // SIZE 0xe
@@ -250,7 +250,7 @@ typedef struct {
 #pragma pack(pop)
 
 #pragma optimize("a", on)
-void __cdecl AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4)
+void __cdecl sim_AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4)
 {
 	unsigned short* p4 = &clock->x04;
 	int minutes;

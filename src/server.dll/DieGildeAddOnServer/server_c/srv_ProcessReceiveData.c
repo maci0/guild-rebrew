@@ -18,23 +18,23 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
 
 /* Entity lifecycle (local externs) */
 /* Network functions (local externs — signatures differ from net.h) */
-int __cdecl ProcessReceiveData(void);
-int __cdecl ReceivePacketHeader(unsigned int* conn);
+int __cdecl srv_ProcessReceiveData(void);
+int __cdecl srv_ReceivePacketHeader(unsigned int* conn);
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
-int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
+int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
-extern int ReceivePacketHeader(unsigned int* conn);
-extern int QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
+extern int srv_ReceivePacketHeader(unsigned int* conn);
+extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
 
-/* ProcessReceiveData: drains the receive buffers of all connected
+/* srv_ProcessReceiveData: drains the receive buffers of all connected
  * player slots. For each connected slot, loops calling
- * ReceivePacketHeader; when a full CommandPacket arrives, validates
+ * srv_ReceivePacketHeader; when a full CommandPacket arrives, validates
  * the connection state flags (0x80 = packet pending) and dispatches:
  * bulk-transfer setup (cmd 0x08/0x09), lobby commands (0x5f),
  * unexpected-request handling, and queuing via
- * QueueCommandForProcessing. Also services the admin connection at
+ * srv_QueueCommandForProcessing. Also services the admin connection at
  * 0x114ffe20.
  *
  * NEAR_MATCHING 492/750, obj 749 against 750. Three fixes took it from 473:
@@ -130,7 +130,7 @@ extern int QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
  * compiler fixed points. Dropping the admin loop's bottom
  * `if ((admin_flags & 1) == 0) break;` is structurally correct -- the target
  * has a single `test al,1` at 0x1000a811 and we emit two -- and it takes the
- * object from 749 to 745 bytes, leaving the 5-byte QueueCommandForProcessing
+ * object from 749 to 745 bytes, leaving the 5-byte srv_QueueCommandForProcessing
  * arg hoist as the only remaining size deficit. It still scores 490 because
  * the removed 4 bytes of junk happened to re-align the epilogue, so it is not
  * kept. That arg hoist was then probed twelve ways in .scratch/lane0c/p
@@ -157,7 +157,7 @@ extern int QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
  * (inert -- tail merging is not driven by the arms being textually equal);
  * one shared call with the mask selected after it 132 at 768 bytes; routing
  * both arms through a `static __inline` wrapper around
- * QueueCommandForProcessing 492 (inert, the prefix hoist survives inlining).
+ * srv_QueueCommandForProcessing 492 (inert, the prefix hoist survives inlining).
  * The packet-pointer CSE at index 25 was re-probed with the whole file
  * respelled to a single textual form (all byte offsets off conn, all
  * `conn + 6` element form, and the guard byte read as `((unsigned char*)
@@ -183,7 +183,7 @@ extern int QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
  * volatile 473). The memcpy destination was spelled three more ways (addend
  * order reversed, the received count hoisted into a local, and a char-pointer
  * base): all inert at 492, so the target's `lea edi,[ecx+eax]` against our
- * `add edi,ecx` stays a register-role consequence. The QueueCommandForProcessing
+ * `add edi,ecx` stays a register-role consequence. The srv_QueueCommandForProcessing
  * arg hoist was probed three more ways (slot store hoisted above the branch
  * with the two arms kept, the same as an explicit if/else, and the 0x10
  * predicate computed into a temp before the store): 490 each. Reordering the
@@ -200,7 +200,7 @@ extern int QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
  * whole body shifts. The pointer-advance form stays.
  *
  * Also re-measured this pass, all reverted, scores in parentheses. On the
- * QueueCommandForProcessing arg hoist (the 5-byte residual): the two arms
+ * srv_QueueCommandForProcessing arg hoist (the 5-byte residual): the two arms
  * given textually distinct address spellings, `(unsigned char*) (conn + 6)`
  * against `&((unsigned char*) conn)[0x18]`, so value numbering cannot prove
  * them equal (inert at 492, msvc6 head-merges on the computed address, not the
@@ -284,8 +284,8 @@ extern int QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
  * The `~~` operands resolve to the real references: 0x10029a9c "LOBBY mode",
  * 0x100298b0 the server.c path, 0x10029a70/0x10029a54 the two lobby formats,
  * 0x10029a48 "srv_LoadBuf", 0x10029a1c the unexpected-request format, calls
- * to ReceivePacketHeader/lb_ExLobbyServerCommand/cm_QueuePlayerCommand/
- * QueueCommandForProcessing/cm_ClosePlayerConnection/sprintf/
+ * to srv_ReceivePacketHeader/lb_ExLobbyServerCommand/cm_QueuePlayerCommand/
+ * srv_QueueCommandForProcessing/cm_ClosePlayerConnection/sprintf/
  * LogMessageInternal/m_AllocTracked, and the g_download_* globals at
  * 0x101deac0/0x101deac4/0x101deae8.
  *
@@ -294,7 +294,7 @@ extern int QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
  * after) is inert at 662; conn[0xb]-before-conn[0xc] at this base scores 661
  * (was 491 at the old 492 base, same CSE, now costs one positional byte).
  * Isolated probes (.scratch pdb_* series, ~20 shapes) confirm per-arm
- * duplicated-tail QueueCommandForProcessing calls are always hoisted above
+ * duplicated-tail srv_QueueCommandForProcessing calls are always hoisted above
  * the branch regardless of store symmetry, guard polarity, goto form, or a
  * shared trailing call: the hoist is driven by the slot loop, not the arms.
  * The lobby ecx/eax naming was probed eleven ways (lb1-lb18): an s-temp
@@ -372,7 +372,7 @@ extern int QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
  * conn[1] read becomes `mov ecx,[ebp+4]` and both stores go back to
  * `[ebp+0x2c]` / `[ebp+0x30]`. On its own that shape runs 753 bytes and
  * scores 513, because it also stops msvc6 hoisting the shared
- * QueueCommandForProcessing prefix, which leaves the pre-test slot store and
+ * srv_QueueCommandForProcessing prefix, which leaves the pre-test slot store and
  * the tail-arm duplicate both live. Moving the slot store into each 0x10 arm
  * and dropping the pre-test copy supplies exactly those three bytes: the arms
  * emit the target's per-arm `mov [ebp+0x1b],bl` / `lea eax,[ebp+0x18]` /
@@ -543,7 +543,7 @@ extern int QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
  * residual clusters. */
 
 
-int __cdecl ProcessReceiveData(void)
+int __cdecl srv_ProcessReceiveData(void)
 {
 	char logbuf_hi[256];
 	char logbuf_lo[256];
@@ -557,7 +557,7 @@ int __cdecl ProcessReceiveData(void)
 	for (i = 0, conn = (unsigned int*) 0x101deb00; (int) conn < 0x114ffe20; conn = (unsigned int*) ((char*) conn + 0x264264), i++) {
 		if ((*(unsigned char*) conn & 1) != 0) {
 			do {
-				ret = ReceivePacketHeader(conn);
+				ret = srv_ReceivePacketHeader(conn);
 				if (ret == -1) {
 					return -1;
 				}
@@ -648,18 +648,18 @@ int __cdecl ProcessReceiveData(void)
 				}
 				/* The slot store is duplicated per arm rather than issued once
 				 * above the test: that is what stops msvc6 hoisting the shared
-				 * QueueCommandForProcessing prefix, so each arm keeps the
+				 * srv_QueueCommandForProcessing prefix, so each arm keeps the
 				 * original's own `mov [ebp+0x1b],bl` / `lea` / `push` / `call`. */
 				if (status & 0x10) {
 					*((unsigned char*) conn + 0x1b) = (unsigned char) i;
-					if (QueueCommandForProcessing(conn, (unsigned char*) (conn + 6)) != 0) {
+					if (srv_QueueCommandForProcessing(conn, (unsigned char*) (conn + 6)) != 0) {
 						return -1;
 					}
 					status = *conn & 0xffffff6f;
 					goto set_status;
 				}
 				*((unsigned char*) conn + 0x1b) = (unsigned char) i;
-				if (QueueCommandForProcessing(conn, (unsigned char*) (conn + 6)) != 0) {
+				if (srv_QueueCommandForProcessing(conn, (unsigned char*) (conn + 6)) != 0) {
 					return -1;
 				}
 				status = *conn & 0xffffff7f;
@@ -678,7 +678,7 @@ int __cdecl ProcessReceiveData(void)
 	 * off the same `mov al`. All three exits of this loop share the single
 	 * `xor eax,eax` epilogue below. */
 	while ((*(unsigned char*) 0x114ffe20 & 1) != 0) {
-		if (ReceivePacketHeader((unsigned int*) 0x114ffe20) == -1) {
+		if (srv_ReceivePacketHeader((unsigned int*) 0x114ffe20) == -1) {
 			goto done;
 		}
 		admin_flags = *(unsigned char*) 0x114ffe20;

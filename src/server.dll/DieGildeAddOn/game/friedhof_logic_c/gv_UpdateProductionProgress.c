@@ -1,4 +1,4 @@
-/* UpdateProductionProgress - advances a production slot's progress by the
+/* gv_UpdateProductionProgress - advances a production slot's progress by the
  * building's production time, clamped to [0, 0xff]. */
 
 // FUNCTION: SERVER 0x10011790
@@ -8,9 +8,9 @@
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
-extern void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
+extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 
-int __cdecl UpdateProductionProgress(void* building)
+int __cdecl gv_UpdateProductionProgress(void* building)
 {
 	void* entity;
 	unsigned short grave_id;
@@ -36,7 +36,7 @@ int __cdecl UpdateProductionProgress(void* building)
 				if (!gv_CheckSlotActive(workers, *(int*) ((char*) building + 0xc))) {
 					return -4;
 				}
-				slot = GetSlotEntry(workers, *(int*) ((char*) building + 0xc), *(unsigned char*) ((char*) building + 0x10));
+				slot = gv_GetSlotEntry(workers, *(int*) ((char*) building + 0xc), *(unsigned char*) ((char*) building + 0x10));
 				if (!slot) {
 					return -7;
 				}

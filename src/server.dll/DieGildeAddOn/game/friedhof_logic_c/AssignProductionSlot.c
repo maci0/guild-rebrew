@@ -9,7 +9,7 @@ extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int g_worker_entry_count[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
-extern void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
+extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 
 #pragma intrinsic(strcpy)
 
@@ -51,7 +51,7 @@ int __cdecl AssignProductionSlot(void* req)
 	gm_ResolveEntityById(0, 0, &owner, *(int*) ((char*) req + 4));
 	if (!owner)
 		return -6;
-	slot = GetSlotEntry(workers, *(int*) ((char*) req + 0xc),
+	slot = gv_GetSlotEntry(workers, *(int*) ((char*) req + 0xc),
 	                    *(unsigned char*) ((char*) req + 0x10));
 	if (!slot ||
 	    *(unsigned short*) ((char*) slot + 8) !=

@@ -28,8 +28,8 @@ extern int g_dynamic_count;
  * Returns pointer to matching record or NULL. */
 
 // FUNCTION: SERVER 0x10014f30
-// FindRecord
-char* __cdecl FindRecord(char* base, unsigned int type1, unsigned int type2)
+// plt_FindRecord
+char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 {
 	int i;
 	char* p;
@@ -90,8 +90,8 @@ int __cdecl find_zone_record(char* base, int x, int y)
  * the zone type matches the requested plant type. */
 
 // FUNCTION: SERVER 0x10014ff0
-// CheckZoneAvailability
-int __cdecl CheckZoneAvailability(int zone_table, unsigned int x, unsigned int y, int zone_type)
+// plt_CheckZoneAvailability
+int __cdecl plt_CheckZoneAvailability(int zone_table, unsigned int x, unsigned int y, int zone_type)
 {
 	int i;
 	int j;
@@ -195,8 +195,8 @@ set_xy:
  * through out-pointer. Returns 0 if index out of range. */
 
 // FUNCTION: SERVER 0x100151B0
-// table_lookup
-int __cdecl table_lookup(int index, int* out)
+// plt_TableLookup
+int __cdecl plt_TableLookup(int index, int* out)
 {
 	if (index >= 0x58) {
 		return 0;

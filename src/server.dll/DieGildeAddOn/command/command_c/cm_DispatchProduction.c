@@ -23,16 +23,16 @@
  *     uVar3 = AssignProductionSlot((int)puVar1);
  *     return uVar3;
  *   case 1:
- *     uVar3 = HireProductionWorker((int)puVar1);
+ *     uVar3 = gv_HireProductionWorker((int)puVar1);
  *     return uVar3;
  *   case 2:
- *     uVar3 = ExtendProductionTime(puVar1);
+ *     uVar3 = gv_ExtendProductionTime(puVar1);
  *     return uVar3;
  *   case 3:
  *     iVar2 = gv_ReplaceProductionWorker((uchar *)puVar1);
  *     return iVar2;
  *   case 4:
- *     iVar2 = ActivateGraveyardSection((uchar *)puVar1);
+ *     iVar2 = gv_ActivateSection((uchar *)puVar1);
  *     return iVar2;
  *   case 5:
  *     iVar2 = gv_UpdateProductionProgress((uchar *)puVar1);
@@ -51,19 +51,19 @@
 typedef unsigned int uint32_t;
 
 unsigned int __cdecl AssignProductionSlot(void*);
-unsigned int __cdecl HireProductionWorker(int);
-unsigned int __cdecl ExtendProductionTime(uint32_t*);
-int __cdecl ReplaceProductionWorker(void*);
-int __cdecl ActivateGraveyardSection(uchar*);
-int __cdecl UpdateProductionProgress(void*);
-int __cdecl ValidateEntityAction(void*);
+unsigned int __cdecl gv_HireProductionWorker(int);
+unsigned int __cdecl gv_ExtendProductionTime(uint32_t*);
+int __cdecl gv_ReplaceProductionWorker(void*);
+int __cdecl gv_ActivateSection(uchar*);
+int __cdecl gv_UpdateProductionProgress(void*);
+int __cdecl gv_ValidateEntityAction(void*);
 
 /* Dispatch handler: routes production commands based on the
  * sub-command type at cmd+0x10. Dispatches to:
- * 0=AssignProductionSlot, 1=HireProductionWorker,
- * 2=ExtendProductionTime, 3=ReplaceProductionWorker,
- * 4=ActivateGraveyardSection, 5=UpdateProductionProgress,
- * 6=ValidateEntityAction. Stamps timestamp and random seed. */
+ * 0=AssignProductionSlot, 1=gv_HireProductionWorker,
+ * 2=gv_ExtendProductionTime, 3=gv_ReplaceProductionWorker,
+ * 4=gv_ActivateSection, 5=gv_UpdateProductionProgress,
+ * 6=gv_ValidateEntityAction. Stamps timestamp and random seed. */
 
 // FUNCTION: SERVER 0x10010260
 int __cdecl cm_DispatchProduction(int cmd, char* result)
@@ -83,22 +83,22 @@ int __cdecl cm_DispatchProduction(int cmd, char* result)
 		status = AssignProductionSlot(data_ptr);
 		return status;
 	case 1:
-		status = HireProductionWorker((int) data_ptr);
+		status = gv_HireProductionWorker((int) data_ptr);
 		return status;
 	case 2:
-		status = ExtendProductionTime(data_ptr);
+		status = gv_ExtendProductionTime(data_ptr);
 		return status;
 	case 3:
-		rc = ReplaceProductionWorker(data_ptr);
+		rc = gv_ReplaceProductionWorker(data_ptr);
 		return rc;
 	case 4:
-		rc = ActivateGraveyardSection((uchar*) data_ptr);
+		rc = gv_ActivateSection((uchar*) data_ptr);
 		return rc;
 	case 5:
-		rc = UpdateProductionProgress(data_ptr);
+		rc = gv_UpdateProductionProgress(data_ptr);
 		return rc;
 	case 6:
-		rc = ValidateEntityAction(data_ptr);
+		rc = gv_ValidateEntityAction(data_ptr);
 		return rc;
 	default:
 		return -1;

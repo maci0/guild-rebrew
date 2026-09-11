@@ -24,7 +24,7 @@ extern int g_alloc_root_name;
 extern int g_alloc_root_name_4;
 extern int g_default_group_name;
 extern int g_default_group_name_4;
-void __cdecl ReportMemoryGroupInfo(const char* toggle);
+void __cdecl m_ReportGroupInfo(const char* toggle);
 void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 void __cdecl m_FreeTracked(void*);
 extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
@@ -34,7 +34,7 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
  * counters, and maintains the allocation list. */
 
 // FUNCTION: SERVER 0x10006c00
-// ShutdownMemoryAllocator
+// m_ShutdownAllocator
 
 // DATA: SERVER 0x10034624
 // DATA: SERVER 0x10034628
@@ -65,7 +65,7 @@ struct LinkedListNode {
 // DATA: SERVER 0x10028aec
 // DATA: SERVER 0x10028888
 
-void __cdecl ShutdownMemoryAllocator(void)
+void __cdecl m_ShutdownAllocator(void)
 {
 	char buf[0x400];
 	int i;
@@ -77,13 +77,13 @@ void __cdecl ShutdownMemoryAllocator(void)
 		sprintf(buf, "[*] Memory-Shutdown-Anomaly: [*]\nUsed %i blocks in %i bytes.\n\n%i block(s) left in %i bytes.", g_stat4, g_stat3, g_stat2, g_stat1);
 		ReportMessage(buf);
 		if (g_flag_3c != 0) {
-			ReportMemoryGroupInfo(0);
+			m_ReportGroupInfo(0);
 		}
 	} else {
 		if (g_flag_3c == 0) {
 			goto cleanup;
 		}
-		ReportMemoryGroupInfo(0);
+		m_ReportGroupInfo(0);
 	}
 	i = 0;
 	if (g_array_count <= 0) {
@@ -144,7 +144,7 @@ struct BlockNode {
  * byte-identical.  Sequence-aligning the two instruction streams gives 96 of
  * 102 candidate instructions identical at zero shift, with the 6 differing
  * pairs all inside the prelude window.  See docs/msvc6-allocator.md,
- * "m_PoolAlloc (0x10006d20) / InitBuildingTypeTable (0x1000b040)".
+ * "m_PoolAlloc (0x10006d20) / srv_InitBuildingTypeTable (0x1000b040)".
  *
  * Re-measured: the delta is 24 bytes, all of them the prelude and the epilogue
  * it displaces.  The candidate is byte-identical through offset 0xe7, which

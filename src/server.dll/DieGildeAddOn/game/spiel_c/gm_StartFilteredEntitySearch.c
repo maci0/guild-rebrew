@@ -49,7 +49,7 @@ extern char g_dynasty_field_49; /* 0x10035449 */
 extern int g_dynasty_field_4c; /* 0x1003544c */
 extern char g_dynasty_field_48; /* 0x10035448 */
 
-void* __cdecl FindNextFilteredEntity(void);
+void* __cdecl gm_FindNextFilteredEntity(void);
 
 /* Initializes the filter state from a list of (type, value) vararg pairs.
  * Type 0 = extra5 (byte), 1 = extra1 (int), 2 = dynasty string copy,
@@ -117,5 +117,5 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...)
 	}
 
 	g_query_filter_base = g_entity_ptr;
-	return (unsigned short*) FindNextFilteredEntity();
+	return (unsigned short*) gm_FindNextFilteredEntity();
 }

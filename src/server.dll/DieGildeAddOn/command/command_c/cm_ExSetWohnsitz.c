@@ -26,7 +26,7 @@
  *     iVar3 = gm_LookupEntityRecordById(*(int *)(cmd + 0x14));
  *     if ((iVar3 != 0) || (*(int *)(cmd + 0x14) == -1)) {
  *       if (*(char *)(g_entity_type_table + (uint)(byte)*puVar2 * 0x24d) == '\x01') {
- *         table_lookup((uint)(byte)*puVar2,(int *)local_8);
+ *         plt_TableLookup((uint)(byte)*puVar2,(int *)local_8);
  *         if (local_8[0] <= *(byte *)((int)puVar2 + 0x65)) {
  *           msg = s_cm_ExSetWohnsitz____Residence_is_1002d240;
  *           line = 0x4a08;
@@ -57,7 +57,7 @@
 #include "rebrew_globals.h"
 
 
-void __cdecl table_lookup(uint, ushort*);
+void __cdecl plt_TableLookup(uint, ushort*);
 
 extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d298[];
 extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[];
@@ -101,7 +101,7 @@ int __cdecl cm_ExSetWohnsitz(int cmd, char* result)
 
 	type_id = (uint) * (uchar*) building;
 	if (*(char*) (g_entity_type_table + type_id * 0x24d) == '\x01') {
-		table_lookup(type_id, caps);
+		plt_TableLookup(type_id, caps);
 		if ((ushort) * (uchar*) ((int) building + 0x65) >= caps[0]) {
 			LogMessageInternal(
 				"D:\\Develop\\DieGildeAddOn\\command\\command.c",

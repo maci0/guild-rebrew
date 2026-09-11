@@ -8,7 +8,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-int __cdecl AllocGraveyardField(int);
+int __cdecl gv_AllocField(int);
 extern void amt_FindEntity26(int);
 extern void amt_FindEntity27(int);
 extern char gm_RandomMod(int);
@@ -24,7 +24,7 @@ extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
 extern int g_save_info[2];
-extern int OpenVfsStream(char*, char*, int);
+extern int vfs_OpenStream(char*, char*, int);
 int ls_LoadSavegameHeader(int, char*);
 int ls_LoadExistingEntities(int);
 unsigned int ls_LoadBuildingEntityState(unsigned int);
@@ -229,7 +229,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) stream_ctx)) {
 						return 0;
 					}
-					*(int*) (esi + 0x65) = AllocGraveyardField((int) esi);
+					*(int*) (esi + 0x65) = gv_AllocField((int) esi);
 					goto label_10012d72;
 				}
 				if (load_result == 0) {

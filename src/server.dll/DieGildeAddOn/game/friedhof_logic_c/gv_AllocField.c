@@ -1,4 +1,4 @@
-/* AllocGraveyardField - proper C */
+/* gv_AllocField - proper C */
 
 // FUNCTION: SERVER 0x100109d0
 // SIZE: 832
@@ -15,7 +15,7 @@ extern void* __cdecl memset(void* dest, int c, unsigned int count);
  * the slot plus its worker table and slot-entry table, initializes the
  * production slots for the field type, and links the slot to the field. */
 
-int __cdecl AllocGraveyardField(unsigned char* field)
+int __cdecl gv_AllocField(unsigned char* field)
 {
 	unsigned char* entry;
 	void* slot;

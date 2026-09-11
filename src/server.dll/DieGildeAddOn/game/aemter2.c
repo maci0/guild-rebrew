@@ -5,7 +5,7 @@
 
 void* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
-void __cdecl InitBuildingTypeTable(void);
+void __cdecl srv_InitBuildingTypeTable(void);
 
 /* Office slot table at 0x101de5a0, 42 entries of 0x18 bytes. */
 #pragma pack(push, 1)

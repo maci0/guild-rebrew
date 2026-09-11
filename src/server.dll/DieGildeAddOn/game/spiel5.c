@@ -32,7 +32,7 @@ typedef struct {
 void __cdecl gm_InitEntitySlots(void);
 extern int g_query_limit;
 void __cdecl m_FreeTracked(void*);
-void* __cdecl FindNextFilteredEntity(void);
+void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
@@ -69,8 +69,8 @@ char* __cdecl gm_SearchStruct(void);
 int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 int __cdecl gm_CheckEntityType(unsigned char* geb);
-int __cdecl AllocGraveyardField(char* geb);
-void __cdecl SpawnGraveyardEntities(char* geb, int param);
+int __cdecl gv_AllocField(char* geb);
+void __cdecl gv_SpawnEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
@@ -463,9 +463,9 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 		case 72:
 		case 73:
 		case 74:
-			temp_result = AllocGraveyardField(geb);
+			temp_result = gv_AllocField(geb);
 			*(int*) (geb + 0x65) = temp_result;
-			SpawnGraveyardEntities(geb, 3);
+			gv_SpawnEntities(geb, 3);
 			break;
 		case 75:
 		case 76:

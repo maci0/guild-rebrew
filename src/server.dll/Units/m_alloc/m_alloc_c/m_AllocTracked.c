@@ -55,7 +55,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 // 212; `node->next = 0` before `node->count = 0`, 212.
 // The residual size gap is the alignment-pass inline memset
 // (lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx) - same Finding 19 blocker as
-// InitPacketPool / m_PoolAlloc.  docs/msvc6-c-shapes.md section 11 records the
+// m_InitPacketPool / m_PoolAlloc.  docs/msvc6-c-shapes.md section 11 records the
 // full probe sweep for that prelude (pointer type, destination provenance,
 // length shape, 12 flag sets, and an explicit align-up split) and concludes no
 // pure-C shape emits it; the three-rep order (stosb, stosd, stosb) is a

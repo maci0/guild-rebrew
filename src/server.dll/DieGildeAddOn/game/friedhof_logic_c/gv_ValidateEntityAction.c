@@ -1,4 +1,4 @@
-/* ValidateEntityAction - validates a standard entity action command:
+/* gv_ValidateEntityAction - validates a standard entity action command:
  * resolves the target entity, checks it is an active graveyard field,
  * then spawns the requested number of graveyard entities. */
 
@@ -8,9 +8,9 @@
 #include "rebrew_globals.h"
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-extern int __cdecl SpawnGraveyardEntities(void* building, int count);
+extern int __cdecl gv_SpawnEntities(void* building, int count);
 
-int __cdecl ValidateEntityAction(void* cmd)
+int __cdecl gv_ValidateEntityAction(void* cmd)
 {
 	void* entity;
 	unsigned short grave_id;
@@ -28,7 +28,7 @@ int __cdecl ValidateEntityAction(void* cmd)
 				if (*(void**) ((char*) entity + 0x65) == 0) {
 					return -3;
 				}
-				return SpawnGraveyardEntities(entity, *(int*) ((char*) cmd + 0x13)) > 0 ? 0 : -4;
+				return gv_SpawnEntities(entity, *(int*) ((char*) cmd + 0x13)) > 0 ? 0 : -4;
 			}
 		}
 	}

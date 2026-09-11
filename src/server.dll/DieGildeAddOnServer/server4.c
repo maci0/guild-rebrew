@@ -18,26 +18,26 @@ void __cdecl gm_CleanupAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
 void __cdecl gm_InitEntitySlots(void);
 /* Network functions (local externs — signatures differ from net.h) */
-int __cdecl AcceptConnections(void);
-void __cdecl CleanupSockets(void);
+int __cdecl srv_AcceptConnections(void);
+void __cdecl srv_CleanupSockets(void);
 int __cdecl ProcessSendData(void);
-int __cdecl ReceivePacketHeader(unsigned int* conn);
-void __cdecl LogWinsockError(int err_code);
+int __cdecl srv_ReceivePacketHeader(unsigned int* conn);
+void __cdecl srv_LogWinsockError(int err_code);
 
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 extern DWORD WINAPI thread_proc(LPVOID);
 extern int g_handler_started;
-void __cdecl InitBuildingTypeTable(void);
+void __cdecl srv_InitBuildingTypeTable(void);
 int __cdecl srv_Init(void);
-void __cdecl ShutdownMemoryAllocator();
+void __cdecl m_ShutdownAllocator();
 int __cdecl gm_Open(char*, char*);
-int __cdecl CreateListenSocket(int port);
-void __cdecl InitPacketPool(int);
-int __cdecl QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-int __cdecl SendPlayerData(unsigned int*);
+int __cdecl srv_CreateListenSocket(int port);
+void __cdecl m_InitPacketPool(int);
+int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
+int __cdecl srv_SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
-int GetCommandPayloadSize(unsigned char* cmd_payload);
+int ahm_GetCommandPayloadSize(unsigned char* cmd_payload);
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
@@ -46,9 +46,9 @@ extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 char s_Unknown_winsock_error_u_10028bdc[] = "Unknown winsock error %u!!!";
 
 // FUNCTION: SERVER 0x1000ad40
-// LogWinsockError
+// srv_LogWinsockError
 
-void __cdecl LogWinsockError(int err_code)
+void __cdecl srv_LogWinsockError(int err_code)
 {
 	char buf[256];
 
@@ -218,7 +218,7 @@ void __cdecl LogWinsockError(int err_code)
  * constant count, so the function compiles to 334B (261/372 matching);
  * everything after the memset (loop + 42 constant stores with their
  * mov al,N grouping) is byte-identical. See docs/msvc6-allocator.md
- * "m_PoolAlloc / InitBuildingTypeTable — blocked (alignment-prefixed
+ * "m_PoolAlloc / srv_InitBuildingTypeTable — blocked (alignment-prefixed
  * memset)".
  *
  * Re-verified 2026-08-27: ~130 further probes (base 6.0 + SP1-SP6 ×
@@ -360,7 +360,7 @@ void __cdecl LogWinsockError(int err_code)
  * byte string `8d 0c 7f` (lea ecx,[edi+edi*2]) occurs six times in
  * original/Server/server.dll, at 0x10006730, 0x10006929, 0x10006e0d,
  * 0x10008f0c, 0x1000b057 and 0x10017611, inside m_AllocTracked,
- * InitPacketPool, m_PoolAlloc, ReadVfsData, this function and
+ * m_InitPacketPool, m_PoolAlloc, vfs_ReadData, this function and
  * gm_AllocGebaeude.  All six are inline expansions with the identical 22-byte
  * tail (`83 e1 03 2b d9 7e 0c ... 03 cb`), and 0x10008f0c is the memcpy form
  * (rep movsb/movsd/movsb) of the same template, so it belongs to both
@@ -430,10 +430,10 @@ void __cdecl LogWinsockError(int err_code)
 extern char g_office_slots[];
 
 // FUNCTION: SERVER 0x1000b040
-// InitBuildingTypeTable
+// srv_InitBuildingTypeTable
 
 #pragma optimize("y", off)
-void __cdecl InitBuildingTypeTable(void)
+void __cdecl srv_InitBuildingTypeTable(void)
 {
 	char* p;
 	int i;

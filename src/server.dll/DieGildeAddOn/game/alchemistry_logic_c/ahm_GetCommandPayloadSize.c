@@ -22,7 +22,7 @@ typedef struct {
  * out its operational fields via memset. */
 
 // FUNCTION: SERVER 0x1000c710
-// GetCommandPayloadSize
+// ahm_GetCommandPayloadSize
 
 /* RELOC 752/752.  The switch-byte/index register pair (dl/ecx in the target,
  * cl/edx before this fix) is decided by which case-0x16 statement reads
@@ -30,7 +30,7 @@ typedef struct {
  * test before reading `cmd_payload[0x14]` into `count` pins the byte in dl.
  * The reverse order scores 742/752, and hoisting `total_size = 0x15` above
  * both scores 508/752. */
-int GetCommandPayloadSize(unsigned char* cmd_payload)
+int ahm_GetCommandPayloadSize(unsigned char* cmd_payload)
 
 {
 	int count;

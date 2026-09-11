@@ -25,7 +25,7 @@
  *   char local_1;
  *
  *                     / * Entity chain handler that performs a record search using
- *                        FindRecord/lb_SearchRecordTable based on entity IDs passed in the payload.
+ *                        plt_FindRecord/lb_SearchRecordTable based on entity IDs passed in the payload.
  *                        Conditionally calls FUN_100150a0 depending on flags. Used for syncing
  *                        database/stat lookups within batched updates. * /
  *   local_1 = '\x02';
@@ -36,14 +36,14 @@
  *   if (puVar2 != (ushort *)0x0) {
  *     pcVar3 = lb_SearchRecordTable((uint)*(ushort *)(cmd + 0x1a));
  *     if (((pcVar3 == (char *)0x0) || (*(char *)(cmd + 0x1c) != '\0')) ||
- *        (iVar4 = CheckZoneAvailability
+ *        (iVar4 = plt_CheckZoneAvailability
  *                           (*(int *)((int)puVar2 + 0x71),(uint)*(byte *)(cmd + 0x18),
  *                            (uint)*(byte *)(cmd + 0x19),(uint)(byte)pcVar3[0x42]), iVar4 != 0)) {
  *       bVar1 = true;
  *     }
  *     if (*(char *)(cmd + 0x1c) == '\0') {
  *       if (*(int *)(cmd + 0x1d) != -1) {
- *         pcVar5 = FindRecord(*(char **)((int)puVar2 + 0x71),(uint)*(byte *)(cmd + 0x18),
+ *         pcVar5 = plt_FindRecord(*(char **)((int)puVar2 + 0x71),(uint)*(byte *)(cmd + 0x18),
  *                             (uint)*(byte *)(cmd + 0x19));
  *         if (result == (char *)0x0) {
  *           return 0;
@@ -55,12 +55,12 @@
  *       }
  *     }
  *     else {
- *       pcVar5 = FindRecord(*(char **)((int)puVar2 + 0x71),(uint)*(byte *)(cmd + 0x18),
+ *       pcVar5 = plt_FindRecord(*(char **)((int)puVar2 + 0x71),(uint)*(byte *)(cmd + 0x18),
  */
 
 char* __cdecl lb_SearchRecordTable(unsigned int);
-int __cdecl CheckZoneAvailability(void*, unsigned int, unsigned int, unsigned int);
-char* __cdecl FindRecord(void*, unsigned int, unsigned int);
+int __cdecl plt_CheckZoneAvailability(void*, unsigned int, unsigned int, unsigned int);
+char* __cdecl plt_FindRecord(void*, unsigned int, unsigned int);
 char* __cdecl plt_SetPlantMap(void*, unsigned int, unsigned int, unsigned int, unsigned int);
 
 extern int g_dynamic_count;
@@ -90,7 +90,7 @@ int __cdecl cm_ChainRecordLookup(int cmd, char* result)
 		rec = lb_SearchRecordTable(*(unsigned short*) (cmd + 0x1a));
 
 		if ((rec == (char*) 0x0) || (*(unsigned char*) (cmd + 0x1c) != 0) ||
-			(CheckZoneAvailability(
+			(plt_CheckZoneAvailability(
 				 *(void**) ((char*) entity + 0x71),
 				 *(unsigned char*) (cmd + 0x18),
 				 *(unsigned char*) (cmd + 0x19),
@@ -100,7 +100,7 @@ int __cdecl cm_ChainRecordLookup(int cmd, char* result)
 		}
 
 		if (*(unsigned char*) (cmd + 0x1c) != 0) {
-			found = FindRecord(
+			found = plt_FindRecord(
 				*(void**) ((char*) entity + 0x71),
 				*(unsigned char*) (cmd + 0x18),
 				*(unsigned char*) (cmd + 0x19)
@@ -110,7 +110,7 @@ int __cdecl cm_ChainRecordLookup(int cmd, char* result)
 			}
 		}
 		else if (*(int*) (cmd + 0x1d) != -1) {
-			found = FindRecord(
+			found = plt_FindRecord(
 				*(void**) ((char*) entity + 0x71),
 				*(unsigned char*) (cmd + 0x18),
 				*(unsigned char*) (cmd + 0x19)

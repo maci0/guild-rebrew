@@ -37,11 +37,11 @@ int __cdecl gv_CheckSlotActive(void* slot, int type)
 // SIZE: 570
 
 extern void __cdecl m_FreeTracked(void* ptr);
-int __cdecl AllocGraveyardField(unsigned char* field);
+int __cdecl gv_AllocField(unsigned char* field);
 void __cdecl gv_Free3Fields(int* slot);
 
 /* Upgrades a graveyard field to the next maturity level: allocates a new
- * field slot via AllocGraveyardField, copies the worker data across, then
+ * field slot via gv_AllocField, copies the worker data across, then
  * frees the old allocation.  Returns the new field data pointer.
  *
  * RELOC, 570/570. Four shapes were needed together; each is noted at its
@@ -58,7 +58,7 @@ void __cdecl gv_Free3Fields(int* slot);
  *     preheader's two initializations.
  */
 
-int __cdecl UpgradeGraveyardField(unsigned char* field)
+int __cdecl gv_UpgradeField(unsigned char* field)
 {
 	unsigned char* entry;
 	void* old_alloc;
@@ -109,7 +109,7 @@ int __cdecl UpgradeGraveyardField(unsigned char* field)
 	if (maturity - level != 1)
 		goto fail;
 	*(void**) (field + 0x65) = 0;
-	new_alloc = AllocGraveyardField(field);
+	new_alloc = gv_AllocField(field);
 	if (new_alloc == 0) {
 		*(void**) (field + 0x65) = old_alloc;
 		goto fail;
@@ -225,7 +225,7 @@ extern unsigned int g_entity_slot_table[];
 extern unsigned char g_current_season;
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
-void* __cdecl GetSlotEntry(void* worker, int worktype, unsigned char job);
+void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
 int __cdecl gm_SubObjektNoKill(int a, int b, int c);
@@ -275,7 +275,7 @@ int __cdecl _ftol(void);
  * the emitted opcode lengths match the target byte for byte.
  *
  * All 19 relocation slots resolved against the target: the eight calls are
- * gm_ResolveEntityById (x2), gv_CheckSlotActive, GetSlotEntry,
+ * gm_ResolveEntityById (x2), gv_CheckSlotActive, gv_GetSlotEntry,
  * FindSlotEntryFiltered, gm_SubObjektNoKill, __ftol and
  * gm_AddOrAccumulateObject; the globals are g_entity_table_end,
  * g_entity_type_table, g_worker_entry_count (x2), g_current_year, g_next_object_id,
@@ -316,7 +316,7 @@ int __cdecl gv_MoveSlotEntry(void* a)
 		return -3;
 	if (!gv_CheckSlotActive(slot, *(int*) ((char*) cmd + 8)))
 		return -4;
-	found = GetSlotEntry(slot, *(int*) ((char*) cmd + 8),
+	found = gv_GetSlotEntry(slot, *(int*) ((char*) cmd + 8),
 	                     *(unsigned char*) ((char*) cmd + 0xc));
 	/* One -7 epilogue in the target at 0x10011a7b, shared by all three
 	 * guards. */

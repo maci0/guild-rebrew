@@ -1,4 +1,4 @@
-/* ActivateGraveyardSection - proper C */
+/* gv_ActivateSection - proper C */
 
 // FUNCTION: SERVER 0x10011660
 // SIZE: 297
@@ -12,7 +12,7 @@ extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** 
  * entity, checks the grave slot is a free graveyard field, then enables
  * the production slots of the worker array for the section's field type. */
 
-int __cdecl ActivateGraveyardSection(void* cmd)
+int __cdecl gv_ActivateSection(void* cmd)
 {
 	void* entity;
 	void* workers;

@@ -130,8 +130,8 @@ int __cdecl gm_CheckEntityType(unsigned char*);
 void* __cdecl gm_SearchStruct(void); /* 0x10017210 */
 void* __cdecl memset(void* dest, int c, unsigned int size);
 void* __cdecl m_AllocTracked(unsigned int size, const char* tag);
-int __cdecl AllocGraveyardField(char* geb);
-void __cdecl SpawnGraveyardEntities(char* geb, int param);
+int __cdecl gv_AllocField(char* geb);
+void __cdecl gv_SpawnEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 void __cdecl gm_AllocBuildingDefaults(unsigned char* geb);
@@ -307,8 +307,8 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	case 0x48:
 	case 0x49:
 	case 0x4a:
-		*(int*) s.dest = AllocGraveyardField(geb);
-		SpawnGraveyardEntities(geb, 3);
+		*(int*) s.dest = gv_AllocField(geb);
+		gv_SpawnEntities(geb, 3);
 		break;
 	case 0x4b:
 	case 0x4c:

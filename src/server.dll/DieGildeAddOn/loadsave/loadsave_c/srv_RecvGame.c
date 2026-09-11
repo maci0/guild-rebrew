@@ -25,7 +25,7 @@ extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
 extern int g_recv_game_buffer;
 extern int g_save_info[2];
-extern int OpenVfsStream(char*, char*, int);
+extern int vfs_OpenStream(char*, char*, int);
 int ls_LoadSavegameHeader(int, char*);
 int ls_LoadExistingEntities(int);
 unsigned int ls_LoadBuildingEntityState(unsigned int);
@@ -48,7 +48,7 @@ int srv_RecvGame(void)
 	int load_status;
 	char* entity_state_ptr;
 
-	file_handle = OpenVfsStream((char*) g_download_buffer, (char*) g_download_total_size, (int) (const char*) 0x1002944c);
+	file_handle = vfs_OpenStream((char*) g_download_buffer, (char*) g_download_total_size, (int) (const char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c",

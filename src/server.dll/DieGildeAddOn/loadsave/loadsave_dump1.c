@@ -5,7 +5,7 @@
 
 #include <string.h>
 
-int __cdecl AllocGraveyardField(unsigned char* field);
+int __cdecl gv_AllocField(unsigned char* field);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_field_worker_count[];
 extern int g_field_entry_count[];
@@ -86,7 +86,7 @@ typedef struct {
  * directly, which is far faster than iterating through rebrew test.
  *
  * All 27 relocation slots resolved: 23 calls to ReadVfsDataChecked
- * (0x10012440), one to AllocGraveyardField (0x100109d0), and the globals
+ * (0x10012440), one to gv_AllocField (0x100109d0), and the globals
  * g_field_entry_count (x2) and g_field_worker_count (x2), all confirmed against
  * db/server.dll_functions.csv and the target disassembly. */
 
@@ -99,7 +99,7 @@ int __cdecl ls_LoadGraveyardData(void* stream_ctx, unsigned char* field, int c, 
 	int i;
 	int n;
 
-	slot = (GraveyardSlot*) AllocGraveyardField(field);
+	slot = (GraveyardSlot*) gv_AllocField(field);
 	if (slot == 0) {
 		return 0;
 	}

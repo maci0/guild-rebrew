@@ -63,7 +63,7 @@ void* __cdecl gm_LookupEntityRecordById(int);
  * multiply emits `not` first while keeping the mask in esi/edx, so the two are
  * separable after all. */
 
-int __cdecl ExecuteOfficeAssignment(char* cmd_payload)
+int __cdecl amt_ExecuteOfficeAssignment(char* cmd_payload)
 {
 	int iStack;
 	int ent;
