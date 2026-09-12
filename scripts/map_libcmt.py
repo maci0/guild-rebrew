@@ -41,6 +41,14 @@ from pathlib import Path
 
 MIN_BYTES = 8
 MIN_FIXED_FRACTION = 0.5
+# How much of the REFERENCE function the member section has to cover.  match()
+# compares min(len(body), len(data)) bytes, so a section that ends early still
+# "matches" on its last few bytes: popen.obj sec 6 is 965 bytes and the entries
+# at 0x1001abeb (88 B) and 0x1001ac43 (45) matched only the 9 bytes at offset
+# 956, which is all that is left after it.  Catalog sizes are sometimes padded
+# above the real function (crt0dat's 34-byte `exit` is a 17-byte section), so
+# the floor has to be low enough to keep those: 17/34 is exactly 0.5.
+MIN_COVER = 0.5
 IMAGE_BASE = 0x10000000
 
 DEFAULT_LIB = Path(".scratch/libcmt/LIBCMT.sp6.LIB")
@@ -247,6 +255,8 @@ def match(index, data: bytes, exclude=None, canon=None):
         n = min(len(body), len(data))
         if n < MIN_BYTES:
             continue
+        if n < MIN_COVER * len(data):
+            continue
         slots = {x - value for x in mask if value <= x < value + n}
         if n - len(slots) < MIN_FIXED_FRACTION * n:
             continue
@@ -254,7 +264,11 @@ def match(index, data: bytes, exclude=None, canon=None):
             if body[i] != data[i] and i not in slots:
                 break
         else:
-            return member, sym, section, value
+            # `remaining` is how many bytes the member holds from `value` on.
+            # The reference function can be longer than the catalog says —
+            # sp6's free.obj sec 1 is 233 bytes and the catalog calls _free at
+            # 0x1001ab81 106 — so this is the real extent to emit.
+            return member, sym, section, value, len(body)
     return None
 
 
@@ -339,6 +353,8 @@ def main() -> int:
                 break
         if got:
             claimed.add((got[0], got[2], got[3]))
+            if got[4] > size:
+                size = got[4]
             # Which library the member came from matters: the service packs do
             # not agree on section numbering, and split_coff resolves a member
             # by NAME against the first library that has it.  popen.obj sec 6 is
