@@ -42,7 +42,7 @@ int __cdecl vfs_DestroyEntity(char* entity)
 	if (*(int*) (entity + 0x7c)) {
 		vfs_CleanupObject(entity);
 	}
-	fflush((FILE*) *(int*) entity);
+	fclose((FILE*) *(int*) entity);
 	free(entity);
 	return 0;
 }
