@@ -59,7 +59,7 @@ void __cdecl m_FreeTracked(void* ptr)
 	}
 }
 
-/* m_InitPacketPool — allocates and zeroes the packet pool (0x100068E0).
+/* m_init — allocates and zeroes the packet pool (0x100068E0).
  * Target 162 bytes; compiled 146. Of the 16-byte size delta, 12 bytes are the
  * target's dest-alignment memset prelude and 4 are the length's register
  * assignment around it (measured per region by .scratch/ipp-l3/accounting.py).
@@ -77,7 +77,7 @@ void __cdecl m_FreeTracked(void* ptr)
  * link-time-constant dest (0x101de5a0, dword-aligned) with a constant
  * 0x3f0 length, where alignment is fully known. The prelude is also
  * not a whole-TU property — m_AllocTracked contains both forms, and
- * gv_AllocField 0x10010a94 (same m_AllocTracked dest, runtime
+ * gv_AllocGraveyardField 0x10010a94 (same m_AllocTracked dest, runtime
  * count) emits the plain form. What every one of the 6 prelude sites
  * shares is that both memset operands are reloaded from stack slots
  * immediately before the expansion; no probe reproduced that pairing.
@@ -169,7 +169,7 @@ void __cdecl m_FreeTracked(void* ptr)
  * "flags unlikely to help". */
 
 // FUNCTION: SERVER 0x100068E0
-// m_InitPacketPool
+// m_init
 // SIZE: 162
 //
 // RESOLVED (2026-09-10): the zero-fill is the original's hand-written
@@ -180,7 +180,7 @@ void __cdecl m_FreeTracked(void* ptr)
 // 162/162. All other functions in this file stay pure C.
 
 #pragma optimize("y", off)
-void __cdecl m_InitPacketPool(int n)
+void __cdecl m_init(int n)
 {
 	int len;
 

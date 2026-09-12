@@ -35,7 +35,7 @@ void __cdecl m_FreeTracked(void*);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern char* g_array_base;
@@ -66,10 +66,10 @@ void __cdecl gv_Free3Fields(void* param);
 extern int g_query_state_a0c[];
 extern unsigned char g_byte_table_30861;
 char* __cdecl gm_SearchStruct(void);
-int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
+int __cdecl gm_AllocRaum(char* geb, int obj_id);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 int __cdecl gm_CheckEntityType(unsigned char* geb);
-int __cdecl gv_AllocField(char* geb);
+int __cdecl gv_AllocGraveyardField(char* geb);
 void __cdecl gv_SpawnEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int);
@@ -78,7 +78,7 @@ int __cdecl gm_EntityAccumulate(void*);
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 void __cdecl amt_ClearEntityLinks(short*);
 void __cdecl gm_InitEntityIfValid(void* arg1);
-void __cdecl gm_DeallocEntity(unsigned int idx, int param);
+void __cdecl gm_KillSpieler(unsigned int idx, int param);
 extern int g_citizen_count;
 extern int g_dynasty_field_2c;
 extern int g_dynasty_generation_counter;
@@ -93,7 +93,7 @@ void __cdecl gm_AssignBuildingOwner(unsigned char*, unsigned short, unsigned int
 int __cdecl gm_WalkEntityChain(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
-void* __cdecl gm_AddOrAccumulateObject(int, int, int);
+void* __cdecl gm_AddObjekt(int, int, int);
 extern unsigned int g_entity_slot_table[];
 extern float g_const_1_5; /* 0x10025fb4 */
 extern float g_const_2_2; /* 0x10025fb0 */
@@ -216,7 +216,7 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 	table_ptr = &g_byte_table_30861;
 	do {
 		if (*building == *(table_ptr - 1)) {
-			query_result = gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 6, 0, 0xff);
+			query_result = gm_ff_Objekt(*(int*) (building + 0x5d), 2, 6, 0, 0xff);
 			if (query_result != (void*) 0) {
 				goto do_inner;
 			}
@@ -227,7 +227,7 @@ void __cdecl gm_AllocBuildingDefaults(unsigned char* building)
 				item_ptr = (unsigned short*) table_ptr;
 				do {
 					if (*item_ptr != 0 &&
-						gm_StartEntityQuery(*(int*) ((int) query_result + 0x14), 1, 0, (unsigned int) *item_ptr) ==
+						gm_ff_Objekt(*(int*) ((int) query_result + 0x14), 1, 0, (unsigned int) *item_ptr) ==
 							(void*) 0) {
 						gm_AllocObjekt(*(int*) ((int) query_result + 2), (unsigned int) *item_ptr, 2);
 					}
@@ -262,7 +262,7 @@ void __cdecl gm_SetBuildingWorkerLimits(unsigned char* building)
 
 	type = building[0];
 	entry = (unsigned char*) (g_entity_type_table + type + type * 588);
-	query_result = (unsigned char*) gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 0, 0x2a, 6);
+	query_result = (unsigned char*) gm_ff_Objekt(*(int*) (building + 0x5d), 2, 0, 0x2a, 6);
 	if (query_result != 0) {
 		if (entry[0x23d] == 0 && entry[0x23e] == 0 && entry[0x23f] != 0) {
 			query_result[0x1c] = entry[0x23f];
@@ -271,7 +271,7 @@ void __cdecl gm_SetBuildingWorkerLimits(unsigned char* building)
 			query_result[0x1d] = (unsigned char) (entry[0x23e] < 2 ? 2 : entry[0x23e]);
 		}
 	}
-	query_result = (unsigned char*) gm_StartEntityQuery(*(int*) (building + 0x5d), 2, 0, 0x116, 6);
+	query_result = (unsigned char*) gm_ff_Objekt(*(int*) (building + 0x5d), 2, 0, 0x116, 6);
 	if (query_result != 0) {
 		if (entry[0x23d] == 0 && entry[0x23e] == 0 && entry[0x23f] != 0) {
 			query_result[0x1c] = entry[0x23f];
@@ -364,7 +364,7 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 				if ((comp_entry & 0x8000) != 0) {
 					if (item_class == '\x02' || item_class == '\x06') {
 						has_producer = 1;
-						gm_AllocBuildingContents(geb, item_index);
+						gm_AllocRaum(geb, item_index);
 					}
 					else if (has_producer == 0) {
 						gm_AllocObjekt(*(int*) (geb + 1), item_index, 1);
@@ -375,7 +375,7 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 		}
 	}
 	{
-		short* product_iter = (short*) gm_StartEntityQuery(*(int*) (geb + 0x5d), 1, 4, 2);
+		short* product_iter = (short*) gm_ff_Objekt(*(int*) (geb + 0x5d), 1, 4, 2);
 		while (product_iter != 0) {
 			if (*product_iter != 0xfd) {
 				*(short*) (geb + 0x29) = *product_iter;
@@ -463,7 +463,7 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 		case 72:
 		case 73:
 		case 74:
-			temp_result = gv_AllocField(geb);
+			temp_result = gv_AllocGraveyardField(geb);
 			*(int*) (geb + 0x65) = temp_result;
 			gv_SpawnEntities(geb, 3);
 			break;

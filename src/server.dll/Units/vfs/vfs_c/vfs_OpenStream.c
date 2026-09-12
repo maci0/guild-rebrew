@@ -189,7 +189,7 @@ extern int __cdecl crt_toupper(int current_char);
 
 extern int g_stream_count;
 extern void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
-extern void __cdecl m_PoolFree(void* pool, void* item);
+extern void __cdecl m_pool_free(void* pool, void* item);
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 
 int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
@@ -312,7 +312,7 @@ finalize:
 done:
 	return result;
 cleanup:
-	m_PoolFree((void*) 0x10034670, stream);
+	m_pool_free((void*) 0x10034670, stream);
 	return 0;
 }
 

@@ -98,7 +98,7 @@ int __cdecl lb_SendLobbyConfig(unsigned int* player, unsigned char* msg)
 
 // FUNCTION: SERVER 0x10014db0
 // lb_ExLobbyServerCommand
-int __cdecl lb_HandleLobbyCommands(unsigned int*, unsigned char*);
+int __cdecl lb_ExPlayerHasJoined(unsigned int*, unsigned char*);
 int __cdecl lb_BroadcastStateChange(unsigned int*, unsigned char*);
 int __cdecl fcn_10014af0(unsigned int*, unsigned char*);
 int __cdecl lb_HandleEntitySync(unsigned int*, unsigned char*);
@@ -116,7 +116,7 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int* player, unsigned char* msg)
 	case 1:
 		return lb_SendLobbyConfig(player, msg);
 	case 2:
-		return lb_HandleLobbyCommands(player, msg);
+		return lb_ExPlayerHasJoined(player, msg);
 	case 3:
 		return lb_BroadcastStateChange(player, msg);
 	case 4:

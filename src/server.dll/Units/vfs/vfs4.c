@@ -129,7 +129,7 @@ int __cdecl CloseVfsStream(void* stream)
 				}
 		}
 		g_stream_count--;
-		m_PoolFree((int*) 0x10034670, stream);
+		m_pool_free((int*) 0x10034670, stream);
 	}
 	return result;
 }

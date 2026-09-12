@@ -13,7 +13,7 @@ extern void amt_FindEntity26(int);
 extern void amt_FindEntity27(int);
 extern char gm_RandomMod(int);
 extern unsigned char _ftol();
-extern void gm_AddOrAccumulateObject(int, int, int);
+extern void gm_AddObjekt(int, int, int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version; /* 0x1002d4ec */
 extern char g_dynamic_entities[]; /* 0x1009aca2 */

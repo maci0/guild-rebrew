@@ -1,4 +1,4 @@
-/* gm_CreateEntityFromParents: allocate and initialize an entity from a
+/* gm_AllocSpieler: allocate and initialize an entity from a
  * father/mother pair with random trait generation.
  *
  * Real name in the original sources: gm_AllocSpieler from spiel.c.  This is
@@ -131,7 +131,7 @@ static char s_family_overflow_100315ac[] =
 static char s_file_spiel_c_10031004[] =
     "D:\\Develop\\DieGildeAddOn\\game\\spiel.c";
 
-unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int gender, int arg4, int location, int arg6, int arg7, int arg8)
+unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int arg4, int location, int arg6, int arg7, int arg8)
 {
 	char* slot;
 	char* mother;

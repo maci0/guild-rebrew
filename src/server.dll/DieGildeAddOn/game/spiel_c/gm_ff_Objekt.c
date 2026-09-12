@@ -1,4 +1,4 @@
-/* gm_StartEntityQuery — sets up an entity query from a vararg filter list. */
+/* gm_ff_Objekt — sets up an entity query from a vararg filter list. */
 
 /* NOTE: the entry allocation is order-sensitive. Each flag must be zeroed
  * immediately before its own global store (flag1/g_query_flag1, then
@@ -27,7 +27,7 @@ void* __cdecl gm_NextEntityQueryMatch(void);
  * (byte), 5 = flag3, 6 = flag2, 7 = flag1. When flag1 is set the cursor
  * starts at the global query base; otherwise the container id is used.
  * Returns the first match, or NULL when no container id was given. */
-unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int first_arg, ...)
+unsigned short* __cdecl gm_ff_Objekt(int container_id, int arg_count, int first_arg, ...)
 {
 	int* arg_ptr;
 	int i;

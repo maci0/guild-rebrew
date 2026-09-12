@@ -17,7 +17,7 @@ int __cdecl cm_ProcessCommandQueue(void);
 /* Network functions (local externs — signatures differ from net.h) */
 int __cdecl srv_AcceptConnections(void);
 void __cdecl srv_CleanupSockets(void);
-int __cdecl srv_ProcessReceiveData(void);
+int __cdecl srv_LoadBuf(void);
 int __cdecl ProcessSendData(void);
 int __cdecl SendBroadcastPacket(unsigned char* data, int size);
 
@@ -166,7 +166,7 @@ extern int g_tick_rate;    /* 0x11764088 */
  * 0x10024060, 0x10024064, 0x10024154 — GetTickCount, Sleep and friends),
  * which have no resolvable target in the loaded image.  The control cases
  * confirm the pattern: 0x1001bdd0 (123B, no calls) proves in seconds, while
- * 0x100068e0 m_InitPacketPool (162B, one call plus `rep stos`) fails with the
+ * 0x100068e0 m_init (162B, one call plus `rep stos`) fails with the
  * same message despite being 15x smaller.  Mid-function slices additionally
  * have no `ret`, so they can never reach a terminal state, and the two real
  * `ret`s sit at target offsets 2386 and 2431, where the 1-byte size deficit
@@ -329,7 +329,7 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 			last_announce_tick = timeGetTime();
 		}
 
-		if ((unsigned int) srv_ProcessReceiveData() == 0xffffffff) {
+		if ((unsigned int) srv_LoadBuf() == 0xffffffff) {
 			LogMessageInternal((char*) 0x100298b0, 0x15f, (char*) 0x1002986c, 1);
 			goto cleanup_and_exit;
 		}
@@ -429,7 +429,7 @@ send_start_commands:
 		phase_complete = 0;
 
 	wait_start_io:
-		if ((unsigned int) srv_ProcessReceiveData() == 0xffffffff) {
+		if ((unsigned int) srv_LoadBuf() == 0xffffffff) {
 			LogMessageInternal((char*) 0x100298b0, 0x1df, (char*) 0x1002986c, 1);
 			goto cleanup_and_exit;
 		}
@@ -494,7 +494,7 @@ send_start_commands:
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 			} while ((int) transfer_progress < 0x101deae8);
 
-			if ((unsigned int) srv_ProcessReceiveData() == 0xffffffff) {
+			if ((unsigned int) srv_LoadBuf() == 0xffffffff) {
 				LogMessageInternal((char*) 0x100298b0, 0x23a, (char*) 0x1002986c, 1);
 				goto cleanup_and_exit;
 			}
@@ -546,7 +546,7 @@ send_start_commands:
 				player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
 			}
 
-			if ((unsigned int) srv_ProcessReceiveData() == 0xffffffff) {
+			if ((unsigned int) srv_LoadBuf() == 0xffffffff) {
 				LogMessageInternal((char*) 0x100298b0, 0x278, (char*) 0x1002986c, 1);
 				goto cleanup_and_exit;
 			}
@@ -713,7 +713,7 @@ send_start_commands:
 		*(unsigned int*) 0x101deaf0 += *(unsigned int*) 0x1002c3f0;
 
 	game_loop_network_io:
-		if ((unsigned int) srv_ProcessReceiveData() == 0xffffffff) {
+		if ((unsigned int) srv_LoadBuf() == 0xffffffff) {
 			LogMessageInternal((char*) 0x100298b0, 0x348, (char*) 0x1002986c, 1);
 			goto cleanup_and_exit;
 		}

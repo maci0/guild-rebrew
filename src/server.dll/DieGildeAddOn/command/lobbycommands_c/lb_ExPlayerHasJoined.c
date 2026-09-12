@@ -15,7 +15,7 @@ extern int g_max_players;
  * Iterates player slots and writes connection info into the
  * response packet. */
 
-int __cdecl lb_HandleLobbyCommands(char* player, char* msg)
+int __cdecl lb_ExPlayerHasJoined(char* player, char* msg)
 {
 	PlayerSlot* slot;
 	PlayerSlot* slot2;

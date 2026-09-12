@@ -12,8 +12,8 @@ typedef int(__cdecl* dispatch_fn)(unsigned char*);
 int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
 int __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomQuadratic(void);
-void __cdecl gm_AddOrAccumulateObject(int p1, int p2, int p3);
-int __cdecl gm_RefreshMarketAvailability(int season);
+void __cdecl gm_AddObjekt(int p1, int p2, int p3);
+int __cdecl gm_ObjectsAvailble(int season);
 extern float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
@@ -24,7 +24,7 @@ extern int g_citizen_count;
 extern unsigned char g_slot_table[];
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
-extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
 void* __cdecl m_AllocTracked(unsigned int size, const char* source);
 
@@ -393,7 +393,7 @@ typedef struct {
  *     double.  Regressions: separate p1/p2 locals evaluated before the
  *     slot+0x18 store (469 at obj 1006), a `c1c` float local shared by the
  *     store and both multiplies (461), volatile on either multiply operand
- *     (798/800), the sibling gm_CreateEntityFromParents spelling
+ *     (798/800), the sibling gm_AllocSpieler spelling
  *     (`field * k + (double) rand_value - field * k`, 451 at obj 998).
  *     Everything from 0x2b2 to the epilogue is this 2-byte phase shift, not a
  *     separate gap.
@@ -626,7 +626,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);
 	*(int*) (alch_data_ptr + 0xc) = *(int*) (cmd_payload + 0x14);
 
-	query_result = (int*) gm_StartEntityQuery(
+	query_result = (int*) gm_ff_Objekt(
 		*(int*) ((char*) dynamic + 0x5d),
 		2,
 		6,
@@ -646,14 +646,14 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	*(int*) (alch_data_ptr + 0x10) = *(int*) (cmd_payload + 0x20);
 
 	if (found_record != 0) {
-		gm_AddOrAccumulateObject(
+		gm_AddObjekt(
 			*(int*) (found_record + 2),
 			*(int*) (cmd_payload + 0x14),
 			2
 		);
 	}
 
-	gm_RefreshMarketAvailability((int) (unsigned char) g_current_season);
+	gm_ObjectsAvailble((int) (unsigned char) g_current_season);
 	*(int*) (slot + 0x1cc) = *(int*) (slot + 0x1cc) | 4;
 
 	return *(unsigned short*) slot;

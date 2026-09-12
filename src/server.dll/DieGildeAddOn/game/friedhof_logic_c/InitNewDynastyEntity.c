@@ -17,7 +17,7 @@ extern int __cdecl gm_RandomMod(int n);
 extern int __cdecl _ftol(void);
 extern int __cdecl amt_FindEntity26(int entity_id);
 extern int __cdecl amt_FindEntity27(int entity_id);
-extern int __cdecl gm_AddOrAccumulateObject(int a, int b, int c);
+extern int __cdecl gm_AddObjekt(int a, int b, int c);
 extern unsigned char g_current_season;
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
@@ -74,7 +74,7 @@ void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, 
 			(char) (long) ((float) (gm_RandomMod(0x2a) & 0xffff) + *(float*) 0x10025808);
 	}
 	*(char*) ((char*) entity + 0xd) = 9;
-	gm_AddOrAccumulateObject(*(int*) ((char*) entity + 4),
+	gm_AddObjekt(*(int*) ((char*) entity + 4),
 	             (unsigned short) g_entity_slot_table[(unsigned int) g_current_season * 189],
 	             0xf42400);
 	gm_RandomMod(2);

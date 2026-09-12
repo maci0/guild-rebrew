@@ -7,12 +7,12 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-int __cdecl gv_AllocField(int);
+int __cdecl gv_AllocGraveyardField(int);
 extern void amt_FindEntity26(int);
 extern void amt_FindEntity27(int);
 extern char gm_RandomMod(int);
 extern unsigned char _ftol();
-extern void gm_AddOrAccumulateObject(int, int, int);
+extern void gm_AddObjekt(int, int, int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version;
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);

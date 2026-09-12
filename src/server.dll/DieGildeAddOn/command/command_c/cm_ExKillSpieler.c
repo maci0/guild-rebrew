@@ -14,7 +14,7 @@
  *
  *   puVar1 = (ushort *)gm_LookupEntityRecordById(*(int *)(param_1 + 0x10));
  *   if (puVar1 != (ushort *)0x0) {
- *     gm_DeallocEntity((uint)*puVar1,*(int *)(param_1 + 0x14));
+ *     gm_KillSpieler((uint)*puVar1,*(int *)(param_1 + 0x14));
  *     return 0;
  *   }
  *   LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x397d,
@@ -38,7 +38,7 @@ int __cdecl cm_ExKillSpieler(int cmd)
 
 	entity = (ushort*) gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
 	if (entity != (ushort*) 0x0) {
-		gm_DeallocEntity((uint) *entity, *(int*) (cmd + 0x14));
+		gm_KillSpieler((uint) *entity, *(int*) (cmd + 0x14));
 		return 0;
 	}
 	LogMessageInternal(

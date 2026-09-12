@@ -34,7 +34,7 @@
  *   if (*pcVar1 == '\x1d') {
  *     gv_UpgradeField((uint8_t *)puVar2);
  *   }
- *   gm_RefreshMarketAvailability((uint)g_current_season);
+ *   gm_ObjectsAvailble((uint)g_current_season);
  *   if (result != (char *)0x0) {
  *     *result = '\x02';
  *     result[1] = '\0';
@@ -58,7 +58,7 @@ void __cdecl ReportMessage(char* msg, ...);
 void __cdecl gm_SetBuildingWorkerLimits(uchar*);
 void __cdecl gm_AllocBuildingDefaults(uchar*);
 void __cdecl gv_UpgradeField(uchar*);
-void __cdecl gm_RefreshMarketAvailability(int);
+void __cdecl gm_ObjectsAvailble(int);
 
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 extern char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[];
@@ -105,7 +105,7 @@ int __cdecl cm_ExSetGebUpgrade(int cmd, char* result)
 		gv_UpgradeField((uchar*) building);
 	}
 
-	gm_RefreshMarketAvailability((uint) g_current_season);
+	gm_ObjectsAvailble((uint) g_current_season);
 
 	if (result != (char*) 0) {
 		*result = '\x02';

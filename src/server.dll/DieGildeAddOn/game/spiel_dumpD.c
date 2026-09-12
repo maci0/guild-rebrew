@@ -1,5 +1,5 @@
-/* spiel fragment D — object list helpers (gm_AddOrAccumulateObject,
- * gm_SubObjekt, gm_SubObjektNoKill) and the filtered entity scanner. */
+/* spiel fragment D — object list helpers (gm_AddObjekt,
+ * gm_SubObjekt, gm_SubObjectNoKill) and the filtered entity scanner. */
 
 // CFLAGS: /O2 /Gd
 
@@ -10,7 +10,7 @@
 #include "rebrew_globals.h"
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void* list, int obj_id);
 
@@ -30,9 +30,9 @@ extern int g_dynasty_field_4c; /* 0x1003544c */
  * created). */
 
 // FUNCTION: SERVER 0x10016cd0
-// gm_AddOrAccumulateObject
+// gm_AddObjekt
 
-int __cdecl gm_AddOrAccumulateObject(int a, int b, int c)
+int __cdecl gm_AddObjekt(int a, int b, int c)
 {
 	char* list_head;
 	void* dyn;
@@ -54,7 +54,7 @@ int __cdecl gm_AddOrAccumulateObject(int a, int b, int c)
 	else if (exi != 0) list_head = (char*) exi + 0x14;
 	else if (sta != 0) list_head = (char*) sta + 0x178;
 	else return 0;
-	exi = (void*) gm_StartEntityQuery(*(int*) list_head, 1, 0, b);
+	exi = (void*) gm_ff_Objekt(*(int*) list_head, 1, 0, b);
 	if (exi == 0) {
 		return (int) gm_AllocObjekt(a, b, c);
 	}
@@ -84,7 +84,7 @@ int __cdecl gm_SubObjekt(int a, int b, int c)
 	else if (a != 0) list_head = (char*) a + 0x14;
 	else if (sta != 0) list_head = (char*) sta + 0x178;
 	else return 0;
-	a = (int) gm_StartEntityQuery(*(int*) list_head, 1, 0, b);
+	a = (int) gm_ff_Objekt(*(int*) list_head, 1, 0, b);
 	if (a == 0) {
 		return 0;
 	}
@@ -109,9 +109,9 @@ int __cdecl gm_SubObjekt(int a, int b, int c)
  * not an early `return 1` on the non-zero path. */
 
 // FUNCTION: SERVER 0x10016ea0
-// gm_SubObjektNoKill
+// gm_SubObjectNoKill
 
-int __cdecl gm_SubObjektNoKill(int a, int b, int c)
+int __cdecl gm_SubObjectNoKill(int a, int b, int c)
 {
 	char* list_head;
 	void* exi;
@@ -127,7 +127,7 @@ int __cdecl gm_SubObjektNoKill(int a, int b, int c)
 	else if (exi != 0) list_head = (char*) exi + 0x14;
 	else if (sta != 0) list_head = (char*) sta + 0x178;
 	else return 0;
-	exi = (void*) gm_StartEntityQuery(*(int*) list_head, 1, 0, b);
+	exi = (void*) gm_ff_Objekt(*(int*) list_head, 1, 0, b);
 	if (exi == 0) {
 		exi = (void*) gm_AllocObjekt(a, b, 1);
 		*(int*) ((char*) exi + 0xe) = 0;

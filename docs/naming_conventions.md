@@ -171,8 +171,48 @@ Two units have **no attested prefix**: `Units/Error/Error.c` and
 `Units/net/broadcast.c`. The debug strings and the binary's own names for
 them are not recovered, so their functions keep descriptive unprefixed names
 (`LogMessageInternal`, `ReportFatalError`, `SendBroadcastPacket`) rather than
-an invented `err_`/`net_`. Add a row here only when the original name is
-attested.
+an invented `err_`/`net_`. The string corpus confirms this: the only
+module-prefixed identifiers near `Error.c` (`0x10027144`) and `broadcast.c`
+(`0x10001130`) are asset names, and neither unit logs with a `err_*():` or
+`net_*():` prefix. Add a row here only when the original name is attested.
+
+File-scoped save/load helpers inside a module take a `fio_` (file I/O) infix:
+`amt_fio_LoadAemter`, `amt_fio_SaveAemter`. The prefix chain is
+`<module>_<role>_<VerbNoun>`, so `amt_fio_LoadAemter` is the `aemter.c`
+file-I/O loader.
+
+### Client-Only Modules (`Europa1400Gold*.exe`)
+
+The client binaries share the game logic (`cm_`, `gm_`, `amt_`, `ls_`, `gv_`,
+`ahm_`) but add engine subsystems that never appear in `server.dll`. These
+prefixes are attested by log strings in `Europa1400Gold_TL.exe` and
+`Europa1400Gold.exe` and are **out of scope for this repo's decompilation
+target**; they are recorded so names are not invented twice.
+
+| Prefix  | Module            | Domain                                   |
+|---------|-------------------|------------------------------------------|
+| `ch_`   | Character         | Character/mesh/animation runtime         |
+| `ai_`   | AI                | Meister (master) AI decision routines    |
+| `he_`   | Handlungsereignis | Game events                              |
+| `cut_`  | Cutscene          | Cutscene control                         |
+| `d2_`   | Direct2D layer    | 2D UI/interface layer (`d2.v1`)          |
+| `d3_`   | Direct3D layer    | 3D renderer (`d3/`)                      |
+| `txt_`  | Text              | Text file parse/format                   |
+| `lc_`   | Location          | Building placement / jail queries        |
+| `rd_`   | Record            | Record / supermap lookup                 |
+| `sv_`   | Server view       | Client-side state sync                   |
+| `io_`   | I/O               | Generic file I/O                         |
+| `init_` | Init              | Startup / scene init                     |
+| `main_` | Main              | Client main loop / menus                 |
+| `nt_`   | Network           | Client network layer                     |
+| `ob_`   | Object            | Object behaviour on the client           |
+| `gs_`   | Court (Gericht)   | Evidence / trial system                  |
+| `am_`   | Method registry   | Engine method registration (`am_RegisterMethod`) |
+
+Assets, script commands, and config keys in the client also use `prefix_`
+spellings (`bau_`, `bk_`, `sp_`, `ub_`, `upgr_`, `riss_`, `prva_`, `snd_`,
+`sbs_`, …). Those are data identifiers, not function names; do not map them
+onto C symbols.
 
 ### Standard Library Functions
 
@@ -250,6 +290,9 @@ Verbs are English. Nouns are German when they name game concepts:
 | Validate | Check preconditions                               |
 | Dispatch | Route to sub-handler                              |
 | Remove   | Unlink / detach                                   |
+| eval     | Evaluate a predicate, no mutation (`gm_eval_SlotVoll`, `gm_eval_ObjektBesitzer`) |
+| Load     | Read from file/stream (`amt_fio_LoadAemter`, `ls_LoadCharacter`) |
+| Save     | Write to file/stream (`amt_fio_SaveAemter`)       |
 
 ### German Noun Vocabulary
 
@@ -342,6 +385,104 @@ LogMessageInternal(
 
 The message string almost always starts with the function name:
 `"cm_ExFree(): Can't free Objects"`. This is how we recover original names.
+
+## Attested Names from Embedded Strings
+
+The shipped binaries embed the full string corpus. RevEng.AI's
+`GET /v2/analyses/{id}/functions/strings` returns every string with the
+function VA that references it. A string shaped `"<name>(): ..."` or
+`"<name>: ..."` names the owning function.
+
+Every name below was then **verified against the code**: the function at the
+stated VA is disassembled and confirmed to push the literal address of that
+string. RevEng's attribution alone is not trusted (it wrongly attached
+`_main_:` to `0x100068e0` and `lb_ExPlayerReadyStatus` to `0x100146c0`).
+
+Reproduce:
+
+```bash
+# list every string a function references; "(): " prefixes name the owner
+curl -s -H "Authorization: Bearer $REVENG_API_KEY" \
+  "https://api.reveng.ai/v2/analyses/1468081/functions/strings?page_size=2000" \
+  | jq -r '.data.strings[] | select(.value|test("^[A-Za-z_]+\\(\\):")) | "\(.functions[0].function_vaddr)\t\(.value)"'
+# then confirm the owner pushes the literal
+rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
+```
+
+### server.dll
+
+| VA | Attested name | Standing |
+|----|---------------|----------|
+| `0x100068e0` | `m_init` | renamed from `m_InitPacketPool` |
+| `0x10006e30` | `m_pool_free` | renamed from `m_PoolFree` |
+| `0x1000a570` | `srv_LoadBuf` | renamed from `srv_ProcessReceiveData` |
+| `0x1000baf0` | `amt_fio_LoadAemter` | already correct |
+| `0x1000bdf0` | `ahm_ExAllocAlchemist` | already correct |
+| `0x1000c4d0` | `ahm_AllocAhmInfo` | already correct (mangled symbol `?ahm_AllocAhmInfo`) |
+| `0x1000d260` | `cm_ChkCutsceneReady` | already correct |
+| `0x1000f030` | `cm_ExKillSpieler` | already correct |
+| `0x1000fb30` | `cm_ExCreateGeb` | already correct |
+| `0x100109d0` | `gv_AllocGraveyardField` | renamed from `gv_AllocField` |
+| `0x10011bf0` | `gv_ExAllocGraveyardWorker` | already correct |
+| `0x10014070` | `ls_ID2Ptr` | already correct |
+| `0x10014260` | `srv_RecvGame` | already correct; the same body also logs `LoadGame():` and `ls_RecvGame():` |
+| `0x100147b0` | `lb_ExPlayerHasJoined` | renamed from `lb_HandleLobbyCommands` |
+| `0x10014db0` | `lb_ExLobbyServerCommand` | already correct |
+| `0x100150a0` | `plt_SetPlantMap` | already correct |
+| `0x10015500` | `sim_CreateCitizen` | already correct |
+| `0x100156c0` | `gm_InitObjektHersteller` | already correct |
+| `0x10015950` | `gm_Open` | already correct |
+| `0x10015f70` | `gm_ObjectsAvailble` | renamed from `gm_RefreshMarketAvailability` |
+| `0x10016460` | `gm_ff_Objekt` | renamed from `gm_StartEntityQuery` |
+| `0x10016760` | `gm_AllocObjekt` | already correct |
+| `0x10016cd0` | `gm_AddObjekt` | renamed from `gm_AddOrAccumulateObject` |
+| `0x10016de0` | `gm_SubObjekt` | already correct |
+| `0x10016ea0` | `gm_SubObjectNoKill` | renamed from `gm_SubObjektNoKill` |
+| `0x10017330` | `gm_AllocGebaeude` (log prefix only) | kept as `gm_AllocBuildingDefaults` |
+| `0x100174d0` | `gm_AllocGebaeude` | already correct |
+| `0x10017c40` | `gm_AllocRaum` | renamed from `gm_AllocBuildingContents` |
+| `0x10017fb0` | `gm_KillSpieler` | renamed from `gm_DeallocEntity` |
+| `0x10018850` | `gm_AllocSpieler` | renamed from `gm_CreateEntityFromParents` |
+| `0x10019d30` | `gm_eval_SlotVoll` | renamed from `gm_KannObjektHergestellt` |
+
+`0x10017330` and `0x100174d0` both push an `"gm_AllocGebaeude(): ..."`
+string. `0x100174d0` is the caller (`call 0x10017330` at `0x1001787f`), so it
+keeps the name; `0x10017330` is its static defaults helper that reuses the
+parent's log prefix.
+
+### Module case: `m_alloc` is snake_case
+
+The `Units/m_alloc` unit does not use the `m_VerbNoun` CamelCase of the game
+modules. Its recovered names are lower snake case:
+
+- `m_alloc` — the tracked allocator, called from every unit. In the original
+  this is a macro: the tracked implementation receives an extra
+  `__FILE__ ":" __LINE__` argument, so our `m_AllocTracked` stays as the
+  implementation name and only the macro was `m_alloc`.
+- `m_init` — sets the slot count and allocates the slot table;
+  `m_alloc` refuses to run before it.
+- `m_pool_free` — pool release.
+- `m_alloc_debug` — not a function: a block group name written by `sprintf`,
+  so it must not be turned into a symbol.
+
+### Original spellings to preserve
+
+Recovered names reproduce the original source exactly, including errors:
+
+- `gm_ObjectsAvailble` (not `Available`)
+- `gm_SubObjectNoKill` uses English `Object`, while `gm_SubObjekt` next to it
+  uses German `Objekt`
+- Umlauts are stripped in string literals: `Gebude` for `Gebäude`,
+  `berschritten` for `überschritten`
+- `erbaut`/`erhalb` fragments and similar truncated strings are continuations
+  of literals that the linker split, not standalone names
+
+### Client binaries
+
+`Europa1400Gold_TL.exe` and `Europa1400Gold.exe` expose the same corpus via
+the same endpoint (5128 and 4956 strings). Their function-name log prefixes
+are listed under Client-Only Modules above. Neither binary is decompiled
+here; the strings only constrain shared-code names and the prefix vocabulary.
 
 ## Struct Naming
 

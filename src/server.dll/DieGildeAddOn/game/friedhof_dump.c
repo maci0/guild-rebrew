@@ -37,11 +37,11 @@ int __cdecl gv_CheckSlotActive(void* slot, int type)
 // SIZE: 570
 
 extern void __cdecl m_FreeTracked(void* ptr);
-int __cdecl gv_AllocField(unsigned char* field);
+int __cdecl gv_AllocGraveyardField(unsigned char* field);
 void __cdecl gv_Free3Fields(int* slot);
 
 /* Upgrades a graveyard field to the next maturity level: allocates a new
- * field slot via gv_AllocField, copies the worker data across, then
+ * field slot via gv_AllocGraveyardField, copies the worker data across, then
  * frees the old allocation.  Returns the new field data pointer.
  *
  * RELOC, 570/570. Four shapes were needed together; each is noted at its
@@ -109,7 +109,7 @@ int __cdecl gv_UpgradeField(unsigned char* field)
 	if (maturity - level != 1)
 		goto fail;
 	*(void**) (field + 0x65) = 0;
-	new_alloc = gv_AllocField(field);
+	new_alloc = gv_AllocGraveyardField(field);
 	if (new_alloc == 0) {
 		*(void**) (field + 0x65) = old_alloc;
 		goto fail;
@@ -228,8 +228,8 @@ int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
-int __cdecl gm_SubObjektNoKill(int a, int b, int c);
-int __cdecl gm_AddOrAccumulateObject(int a, int b, int c);
+int __cdecl gm_SubObjectNoKill(int a, int b, int c);
+int __cdecl gm_AddObjekt(int a, int b, int c);
 int __cdecl _ftol(void);
 
 /* Moves a graveyard worker's slot entry to the field it currently works
@@ -254,7 +254,7 @@ int __cdecl _ftol(void);
  * found2 (0x10011b0d-0x10011b3e); 0xff lives in one register across the
  * byte and word stores (0x10011b32); the ftol result is a plain cast of a
  * re-read field, not a pushed double (0x10011b7c); the +0x27 index at the
- * gm_AddOrAccumulateObject call site reads rec2 via the [esp+0x1c] reload
+ * gm_AddObjekt call site reads rec2 via the [esp+0x1c] reload
  * (0x10011bb1).
  *
  * The last 12 bytes were the skip loop's back edge. Every earlier attempt
@@ -276,8 +276,8 @@ int __cdecl _ftol(void);
  *
  * All 19 relocation slots resolved against the target: the eight calls are
  * gm_ResolveEntityById (x2), gv_CheckSlotActive, gv_GetSlotEntry,
- * FindSlotEntryFiltered, gm_SubObjektNoKill, __ftol and
- * gm_AddOrAccumulateObject; the globals are g_entity_table_end,
+ * FindSlotEntryFiltered, gm_SubObjectNoKill, __ftol and
+ * gm_AddObjekt; the globals are g_entity_table_end,
  * g_entity_type_table, g_worker_entry_count (x2), g_current_year, g_next_object_id,
  * g_current_season (x2), g_entity_slot_table (x2) and g_output_share. */
 
@@ -381,7 +381,7 @@ done:
 
 	count = *(int*) ((char*) cmd + 0x11);
 	if (count > 0) {
-		gm_SubObjektNoKill(*(int*) ((char*) a + 4),
+		gm_SubObjectNoKill(*(int*) ((char*) a + 4),
 		                   (unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +
 		                                                       g_current_season * 756),
 		                   count);
@@ -389,7 +389,7 @@ done:
 		 * the conversion is an implicit cast, not a pushed double. */
 		i = (int) ((float) *(int*) ((char*) cmd + 0x11) *
 		           g_output_share[*(int*) ((char*) cmd + 0xd)]);
-		gm_AddOrAccumulateObject(*(int*) (0x100358a4 +
+		gm_AddObjekt(*(int*) (0x100358a4 +
 		                                 (unsigned short) *(unsigned short*) ((char*) rec2 + 0x27) * 540),
 		                         (unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +
 		                                                             g_current_season * 756),

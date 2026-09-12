@@ -60,7 +60,7 @@ char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[] = "cm_ExMoveObjekt() Object n
 
 /* Execution handler: moves an object from one inventory slot
  * to another. Validates source and destination entities, then
- * transfers the object via gm_SubObjekt + gm_AddOrAccumulateObject. */
+ * transfers the object via gm_SubObjekt + gm_AddObjekt. */
 
 // FUNCTION: SERVER 0x1000e530
 int __cdecl cm_ExMoveObjekt(int cmd, char* result)

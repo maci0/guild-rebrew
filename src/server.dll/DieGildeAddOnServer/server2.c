@@ -33,7 +33,7 @@ int __cdecl srv_Init(void);
 void __cdecl m_ShutdownAllocator();
 int __cdecl gm_Open(char*);
 int __cdecl srv_CreateListenSocket(int port);
-void __cdecl m_InitPacketPool(int);
+void __cdecl m_init(int);
 int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 int __cdecl srv_SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
@@ -54,7 +54,7 @@ int __cdecl srv_Init(void)
 	hThread = GetCurrentThread();
 	SetThreadPriority(hThread, 2);
 	((int (__cdecl*)(void*, int, int, int)) InitializeLogAndErrorHandler)((void*) srv_CleanupSockets, 0, 0, 3);
-	m_InitPacketPool(0x7fa6);
+	m_init(0x7fa6);
 	strcpy(path, (char*) 0x10029594);
 	strcat(path, (char*) 0x10029998);
 	if (gm_Open(path) < 0) {

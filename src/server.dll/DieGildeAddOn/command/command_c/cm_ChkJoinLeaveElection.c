@@ -7,7 +7,7 @@
 #endif
 
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 /* Validation handler: checks preconditions for joining or
@@ -31,7 +31,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 	if (action == 0x6a6f696e) {
 		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
 		if (query_result == 0) return 1;
-		query_result = (char *) gm_StartEntityQuery(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
+		query_result = (char *) gm_ff_Objekt(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
 		if (query_result == 0) return 1;
 		player = *(int *) ((char *) cmd + 0x14);
 		for (i = 0; i < 4; i++) {
@@ -47,7 +47,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 	if (action == 0x6c656176) {
 		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
 		if (query_result == 0) return 1;
-		query_result = (char *) gm_StartEntityQuery(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
+		query_result = (char *) gm_ff_Objekt(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
 		if (query_result == 0) return 1;
 		player = *(int *) ((char *) cmd + 0x14);
 		for (i = 0; i < 4; i++) {
@@ -71,5 +71,5 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 	}
 	return 1;
 cler_query:
-	return gm_StartEntityQuery(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d) == 0;
+	return gm_ff_Objekt(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d) == 0;
 }

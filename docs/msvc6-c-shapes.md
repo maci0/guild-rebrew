@@ -364,7 +364,7 @@ correct: the target loads `slot->0x10` before `req->0xc`.
 
 ## 11. Inline memset expansion (partial result, no byte match)
 
-`InitPacketPool` (0x100068e0) emits a head-alignment prelude:
+`m_init` (0x100068e0) emits a head-alignment prelude:
 
 ```
 lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx; jle; rep stosb; ...; rep stosd; ...; rep stosb
@@ -423,7 +423,7 @@ function in the same file, breaking `m_FreeTracked` (0x10006820) from
 RELOC 188/188 to SIZE_MISMATCH.
 
 A flag one function needs can break another in the same file. `/Oy-` on
-`InitPacketPool` is exactly this conflict: the target's frame pointer needs
+`m_init` is exactly this conflict: the target's frame pointer needs
 it, its file-mate must not have it. Where the flag has a `#pragma optimize`
 equivalent, use that instead; see section 13 for the frame-pointer case.
 
@@ -446,13 +446,13 @@ explicit `--cflags`, not by editing the file.
 `#pragma optimize("y", off)` around a single function emits
 `push ebp; mov ebp, esp` and `pop ebp` under `/O2 /Gd`, with no `// CFLAGS:`
 header and no effect on its file-mates. It is the way out of the section 12
-conflict: `InitPacketPool` (0x100068e0) needs the frame pointer, and
+conflict: `m_init` (0x100068e0) needs the frame pointer, and
 `m_FreeTracked` (0x10006820) in the same file must not have it and stays
 RELOC 188/188.
 
 ```c
 #pragma optimize("y", off)
-void __cdecl InitPacketPool(int n)
+void __cdecl m_init(int n)
 {
 	/* ... */
 }
@@ -481,7 +481,7 @@ memset(g_array_ptr, 0, (unsigned int) *(volatile int*) &n);  /* volatile read */
 ```
 
 This emits `mov [ebp+8],edi` then `mov ecx,[ebp+8]`, matching
-`InitPacketPool` 0x1000691b-0x10006924 and raising it from 97 to 105 matched
+`m_init` 0x1000691b-0x10006924 and raising it from 97 to 105 matched
 bytes. The same idea as section 8a applied to a call boundary rather than an
 FPU operand: the read forces the value to live in memory, and reusing the
 parameter as the destination picks which slot.
@@ -517,8 +517,8 @@ rnd = gm_RandomMod((unsigned short) _ftol(*(float*) (slot + 0x1c) * k));
 rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) * k));
 ```
 
-`src/server.dll/DieGildeAddOn/game/spiel_c/gm_CreateEntityFromParents.c:457`
-closed the last 6 bytes of `gm_CreateEntityFromParents` (0x10018850), taking it
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c:457`
+closed the last 6 bytes of `gm_AllocSpieler` (0x10018850), taking it
 from 3695 to exactly 3689 bytes and 608 to 670 matched.
 
 **Not interchangeable across call sites.** The same rewrite applied to the four
@@ -557,7 +557,7 @@ objdump -r <candidate>.obj | grep 'DISP32\|REL32' | awk '{print $3}'
 ```
 
 A mismatch in that list is a genuine logic error: a call the reconstruction
-invented, omitted, or placed in the wrong branch. In `gm_CreateEntityFromParents`
+invented, omitted, or placed in the wrong branch. In `gm_AllocSpieler`
 this found a `gm_RandomMod(2)` / `gm_RandomFloat01()` pair the source ran on the
 two-parent path where the reference only has it on the no-parent path, and a
 `gm_RandomMod(0x10)` drawn twice in the reference (first result discarded) but
@@ -750,7 +750,7 @@ the query result in exchanged registers, 12 mismatched bytes with an otherwise
 byte-identical stream. Reading the query's field inside the argument list,
 
 ```c
-sub = gm_StartEntityQuery(*(int*) ((char*) q + 0x14), 1, 0, comp & 0x7fff);
+sub = gm_ff_Objekt(*(int*) ((char*) q + 0x14), 1, 0, comp & 0x7fff);
 ```
 
 leaves the load owned by the call site and scores 343/355 with the cursor in
@@ -760,7 +760,7 @@ does:
 
 ```c
 qbase = *(int*) ((char*) q + 0x14);
-sub = gm_StartEntityQuery(qbase, 1, 0, comp & 0x7fff);
+sub = gm_ff_Objekt(qbase, 1, 0, comp & 0x7fff);
 ```
 
 `src/server.dll/DieGildeAddOn/game/spiel622.c:430` (343/355 to 350/355).
@@ -1241,7 +1241,7 @@ the pair untouched.
 The lever was the first argument of the call that *defines* the query:
 
 ```c
-q = gm_StartEntityQuery(...);
+q = gm_ff_Objekt(...);
 q_slot = *q;                                    /* int local */
 total = ... gm_CalculateProductionValue(q_slot, *(unsigned char*) ((char*) q + 0x12)) ...;
 ```
@@ -1433,7 +1433,7 @@ reference reads the parameter it needs at the call site first, so that value
 claims the register pushed first; msvc6 hoists the dereference of the *other*
 parameter into the prologue, and that parameter wins the register instead.
 
-`gm_AllocBuildingContents` (0x10017c40) opens with
+`gm_AllocRaum` (0x10017c40) opens with
 
 ```
 push ebx; push ebp; push esi; mov esi,[esp+0x14]; push edi; mov edi,[esp+0x14]
@@ -1448,7 +1448,7 @@ ebp and pushed `obj_id` down. A volatile read at the argument defers it:
 obj = (char*) gm_AllocObjekt(*(volatile int*) (geb + 1), obj_id, 1);
 ```
 
-`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocBuildingContents.c:107`,
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocRaum.c:107`,
 672 -> 677 of 742 with the object size unchanged.
 
 This is section 8c's residency/ordering distinction applied to an argument
@@ -1533,7 +1533,7 @@ collapses positionally (section 19) and hides a real structural gain. Track
 one byte away from the target size, look for a second change that supplies
 exactly that byte rather than discarding the first.
 
-`gm_AllocBuildingContents` (0x10017c40) sat at NEAR_MATCHING 677/742 for nine
+`gm_AllocRaum` (0x10017c40) sat at NEAR_MATCHING 677/742 for nine
 prior batches with 18 residual `**` in two clusters that were recorded as
 separate register-role problems: the scan cursor built as `lea ecx,[ebp+0x25]`
 where the reference splits the row base and the cursor, and `geb` living in
@@ -1569,7 +1569,7 @@ Computing the row before zeroing the counter,
 frees ebp for the row base. On its own it is 167 at obj 741, one byte short.
 Applied together the two are exact: RELOC 742/742.
 
-`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocBuildingContents.c:107`
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocRaum.c:107`
 
 The two clusters were one fault. With `i = 0` first, msvc6 has ebp tied up and
 folds the row+0x23 displacement into the first read; freeing ebp and advancing

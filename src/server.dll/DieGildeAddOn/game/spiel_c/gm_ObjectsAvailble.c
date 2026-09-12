@@ -1,4 +1,4 @@
-/* gm_RefreshMarketAvailability — refreshes the market item availability. */
+/* gm_ObjectsAvailble — refreshes the market item availability. */
 
 // FUNCTION: SERVER 0x10015f70
 
@@ -13,7 +13,7 @@ extern unsigned char g_current_season; /* 0x10035439 */
 
 void* __cdecl gm_FindNextFilteredEntity(void);
 void* __cdecl gm_NextEntityQueryMatch(void);
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
@@ -323,7 +323,7 @@ char* __cdecl gm_AllocObjekt(int, int, int);
  * splits all inert; the spill costs 1 cascade byte), the match-block row
  * role (esi vs ebx; up/down/indexed/derived-def and decl-order variants
  * all keep our roles), and the counter-tail order. `~~` audit: calls are
- * gm_StartFilteredEntitySearch/gm_StartEntityQuery/gm_AllocObjekt/
+ * gm_StartFilteredEntitySearch/gm_ff_Objekt/gm_AllocObjekt/
  * gm_FindNextFilteredEntity/LogMessageInternal; globals are
  * g_active_player_count, g_current_season, g_slot_array,
  * g_entity_type_table, g_item_def_table; the two message pointers read
@@ -381,7 +381,7 @@ char* __cdecl gm_AllocObjekt(int, int, int);
  * (349), no-base (317 at obj 704), no-defbase (249 at obj 736),
  * ids[9] (673, frame shift), base-pre-call (156), slot-index (230).
  * `~~` re-audited 2026-09-06: calls are gm_StartFilteredEntitySearch
- * (0x100170e0), gm_StartEntityQuery (0x10016460), gm_AllocObjekt
+ * (0x100170e0), gm_ff_Objekt (0x10016460), gm_AllocObjekt
  * (0x10016760), gm_FindNextFilteredEntity (0x10016f80),
  * gm_NextEntityQueryMatch (0x10016290), LogMessageInternal
  * (0x10003640); globals g_active_player_count, g_current_season,
@@ -700,7 +700,7 @@ char* __cdecl gm_AllocObjekt(int, int, int);
  * per row, base reseeded from a row index) scores 264-395.
  * STATUS: PROVEN retained; NEAR_MATCHING 686/714. */
 
-void __cdecl gm_RefreshMarketAvailability(int season)
+void __cdecl gm_ObjectsAvailble(int season)
 {
 	unsigned int ids[8];
 	char* slot_base;
@@ -745,7 +745,7 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 		entity_ptr = gm_StartFilteredEntitySearch(1, 6);
 		while (entity_ptr != 0) {
 			if (*(char*)(g_entity_type_table + *(unsigned char*) entity_ptr * 0x24d) != '\n') {
-				slot_cursor = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) entity_ptr + 0x5d), 1, 0, 0xff);
+				slot_cursor = (unsigned short*) gm_ff_Objekt(*(int*)((char*) entity_ptr + 0x5d), 1, 0, 0xff);
 				season = 0;
 				if (slot_cursor != 0) {
 				slot = slot_base;
@@ -753,7 +753,7 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 					unsigned short slot_value;
 					slot_value = *(unsigned short*) slot;
 					if (slot_value != 0) {
-						if (gm_StartEntityQuery(*(int*)((char*) slot_cursor + 0x14), 1, 0, slot_value) != 0) {
+						if (gm_ff_Objekt(*(int*)((char*) slot_cursor + 0x14), 1, 0, slot_value) != 0) {
 								char* defbase;
 								char* base;
 								int row;
@@ -791,11 +791,11 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 			int w3;
 			w3 = *(unsigned short*)(slot + 0x3c);
 			mbase = g_active_player_count;
-			result = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) mbase + 0x5d), 1, 0, w3);
+			result = (unsigned short*) gm_ff_Objekt(*(int*)((char*) mbase + 0x5d), 1, 0, w3);
 			if (result != 0) {
-				result = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) result + 0x14), 1, 0, 0xff);
+				result = (unsigned short*) gm_ff_Objekt(*(int*)((char*) result + 0x14), 1, 0, 0xff);
 				if (*(int*)(slot + 4) != 0) {
-					r2 = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) result + 0x14), 1, 0, *(unsigned short*) slot);
+					r2 = (unsigned short*) gm_ff_Objekt(*(int*)((char*) result + 0x14), 1, 0, *(unsigned short*) slot);
 					if (r2 == 0) {
 						gm_AllocObjekt(*(int*)((char*) result + 2), *(unsigned short*) slot, 1);
 					}
@@ -808,16 +808,16 @@ void __cdecl gm_RefreshMarketAvailability(int season)
 		slot_cursor = (unsigned short*) ids;
 		do {
 			count = 0;
-			result = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) g_active_player_count + 0x5d), 1, 0, id);
+			result = (unsigned short*) gm_ff_Objekt(*(int*)((char*) g_active_player_count + 0x5d), 1, 0, id);
 			if (result != 0) {
-				r2 = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) result + 0x14), 1, 0, 0xff);
+				r2 = (unsigned short*) gm_ff_Objekt(*(int*)((char*) result + 0x14), 1, 0, 0xff);
 				if (r2 != 0) {
-					r2 = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) r2 + 0x14), 1, 5);
+					r2 = (unsigned short*) gm_ff_Objekt(*(int*)((char*) r2 + 0x14), 1, 5);
 					while (r2 != 0) {
 						count++;
 						r2 = (unsigned short*) gm_NextEntityQueryMatch();
 					}
-					result = (unsigned short*) gm_StartEntityQuery(*(int*)((char*) result + 0x14), 1, 4, 0x11);
+					result = (unsigned short*) gm_ff_Objekt(*(int*)((char*) result + 0x14), 1, 4, 0x11);
 					if (result != 0 && *(unsigned char*)((char*) result + 0x1c) != count)
 						*(unsigned char*)((char*) result + 0x1c) = (unsigned char) count;
 				}

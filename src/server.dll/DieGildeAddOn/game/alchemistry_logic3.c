@@ -10,10 +10,10 @@ extern char* g_table;
 int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
 int __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl gm_AddOrAccumulateObject(int p1, int p2, int p3);
-int __cdecl gm_RefreshMarketAvailability(int season);
+void __cdecl gm_AddObjekt(int p1, int p2, int p3);
+int __cdecl gm_ObjectsAvailble(int season);
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl gm_DeallocEntity(unsigned int index, int param);
+void __cdecl gm_KillSpieler(unsigned int index, int param);
 void* __cdecl gm_NextEntityQueryMatch(void);
 extern float g_color_scale;
 extern int g_next_object_id;
@@ -49,7 +49,7 @@ typedef struct {
  * out its operational fields via memset. */
 
 // CFLAGS: /O2 /Gd
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
 // FUNCTION: SERVER 0x1000ca00
 // ahm_ProcessEntityChain

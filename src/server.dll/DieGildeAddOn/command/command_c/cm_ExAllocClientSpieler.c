@@ -4,7 +4,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-ushort __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
+ushort __cdecl gm_AllocSpieler(uint, int, int, ushort, int, uint, uint, uint);
 char* __cdecl strncpy(char*, const char*, unsigned int);
 
 /* Execution handler: allocates a client-side player entity.
@@ -25,7 +25,7 @@ char* __cdecl strncpy(char*, const char*, unsigned int);
  * Dead ends against the same cluster, all still 287 or worse:
  * `7 - (result != 0)`, `6 + (result == 0)`, `result == 0 ? 7 : 6`,
  * a `volatile` kind (96/375), hoisting the ternary into the call
- * argument list, and hoisting the trailing gm_CreateEntityFromParents
+ * argument list, and hoisting the trailing gm_AllocSpieler
  * args into locals (86/363). */
 
 
@@ -49,7 +49,7 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 			kind = 6;
 		else
 			kind = 7;
-		entity = gm_CreateEntityFromParents(kind,
+		entity = gm_AllocSpieler(kind,
 			*(int*)(c + 0x14), *(int*)(c + 0x18),
 			*(unsigned short*)(c + 0x1c), 0,
 			(unsigned char)*(char*)(c + 0x1e), 0,

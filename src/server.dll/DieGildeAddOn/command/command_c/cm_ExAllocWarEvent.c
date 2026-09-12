@@ -5,7 +5,7 @@
 #include "rebrew_globals.h"
 
 extern void* __cdecl gm_SearchTable67(int);
-extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 extern char* __cdecl gm_AllocObjekt(int, int, int);
 
@@ -53,7 +53,7 @@ int __cdecl cm_ExAllocWarEvent(int cmd, char* result)
 	if (target == 0) {
 		return 1;
 	}
-	query_result = gm_StartEntityQuery(*(int*) ((char*) target + 0x5d), 1, 0, 0xca);
+	query_result = gm_ff_Objekt(*(int*) ((char*) target + 0x5d), 1, 0, 0xca);
 	while (query_result != 0) {
 		if (*(int*) ((char*) query_result + 0x2a) == *(int*) ((char*) attacker + 1)) {
 			break;

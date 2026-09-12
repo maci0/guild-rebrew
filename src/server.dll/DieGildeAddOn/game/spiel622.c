@@ -35,7 +35,7 @@ void __cdecl m_FreeTracked(void*);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern char* g_array_base;
@@ -66,10 +66,10 @@ void __cdecl gv_Free3Fields(void* param);
 extern int g_query_state_a0c[];
 extern unsigned char g_byte_table_30861;
 char* __cdecl gm_SearchStruct(void);
-int __cdecl gm_AllocBuildingContents(char* geb, int obj_id);
+int __cdecl gm_AllocRaum(char* geb, int obj_id);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 int __cdecl gm_CheckEntityType(unsigned char* geb);
-int __cdecl gv_AllocField(char* geb);
+int __cdecl gv_AllocGraveyardField(char* geb);
 void __cdecl gv_SpawnEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int);
@@ -78,7 +78,7 @@ int __cdecl gm_EntityAccumulate(void*);
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
 void __cdecl amt_ClearEntityLinks(short*);
 void __cdecl gm_InitEntityIfValid(void* arg1);
-void __cdecl gm_DeallocEntity(unsigned int idx, int param);
+void __cdecl gm_KillSpieler(unsigned int idx, int param);
 extern int g_citizen_count;
 extern int g_dynasty_field_2c;
 extern int g_dynasty_generation_counter;
@@ -93,7 +93,7 @@ void __cdecl gm_AssignBuildingOwner(unsigned char*, unsigned short, unsigned int
 int __cdecl gm_WalkEntityChain(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
-void* __cdecl gm_AddOrAccumulateObject(int, int, int);
+void* __cdecl gm_AddObjekt(int, int, int);
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 extern unsigned int g_entity_slot_table[];
 extern float g_const_1_5; /* 0x10025fb4 */
@@ -128,7 +128,7 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 	int total;
 
 	total = 0;
-	ent = gm_StartEntityQuery(entity, 1, 4, 9);
+	ent = gm_ff_Objekt(entity, 1, 4, 9);
 	if (ent != (short*) 0) {
 		do {
 			if ((short) g_entity_slot_table[(obj_type & 0xff) * 189] == *ent) {
@@ -599,7 +599,7 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 		comp_record = (char*) g_item_def_table + (comp & 0x7fff) * 0x41;
 		if (have_query == 0) {
 			if (*comp_record == 2 || *comp_record == 6) {
-				query_result = gm_StartEntityQuery(*(int*) (obj + 0x5d), 1, 0, comp & 0x7fff);
+				query_result = gm_ff_Objekt(*(int*) (obj + 0x5d), 1, 0, comp & 0x7fff);
 				if (query_result != NULL) {
 					q_slot = *query_result;
 					total = (int) (gm_CalculateProductionValue(q_slot, *(unsigned char*) ((char*) query_result + 0x12)) + (double) total);
@@ -612,7 +612,7 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 				}
 			}
 		} else if (query_result != NULL) {
-			sub = gm_StartEntityQuery(*(int*) ((char*) query_result + 0x14), 1, 0, comp & 0x7fff);
+			sub = gm_ff_Objekt(*(int*) ((char*) query_result + 0x14), 1, 0, comp & 0x7fff);
 			if (sub != NULL) {
 				total = (int) (gm_CalculateProductionValue(*sub, *(unsigned char*) ((char*) sub + 0x12)) + (double) total);
 			}
@@ -639,7 +639,7 @@ int __cdecl gm_AccumulateTyped2(char* entity)
 	unsigned int idx;
 	sum = 0;
 	idx = (unsigned int) (unsigned char) g_current_season * 189;
-	result = (int) gm_StartEntityQuery(
+	result = (int) gm_ff_Objekt(
 	    *(int*) (entity + 0x178), 1, 0, (int) (unsigned short) g_entity_slot_table[idx]);
 	if (result) {
 		do {
@@ -663,9 +663,9 @@ int __cdecl gm_EntityQuerySum(int arg1)
 	unsigned short* query_result;
 
 	sum = 0;
-	head = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 2, 6, sum, 0x2a);
+	head = gm_ff_Objekt(*(int*) (arg1 + 0x5d), 2, 6, sum, 0x2a);
 	if (head != NULL) {
-		query_result = gm_StartEntityQuery(*(int*) ((char*) head + 0x14), 1, 5);
+		query_result = gm_ff_Objekt(*(int*) ((char*) head + 0x14), 1, 5);
 		if (query_result != NULL) {
 			do {
 				sum = (int) (gm_CalculateProductionValue(*(unsigned short*) query_result, *(unsigned char*) ((char*) query_result + 0x12)) + (double) sum);
@@ -782,7 +782,7 @@ int __cdecl gm_WalkEntityChain(int raw_idx)
 }
 
 // DATA: SERVER 0x100358a2
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
@@ -860,7 +860,7 @@ int __cdecl compute_size(char* pkt)
 char s_gm_KannObjektHergestellt___pCObj_10031628[] = "gm_eval_SlotVoll(): Lager ist in keinem Geb\344ude";
 
 // FUNCTION: SERVER 0x10019d30
-// gm_KannObjektHergestellt
+// gm_eval_SlotVoll
 //   RELOC 407/407. The earlier note blaming register allocation was wrong; the
 //   source had three separate bugs, each costing the rest of the function:
 //   the second and third arguments were transposed (the item id is arg2, not
@@ -872,7 +872,7 @@ char s_gm_KannObjektHergestellt___pCObj_10031628[] = "gm_eval_SlotVoll(): Lager 
 
 int __cdecl compute_size(char* pkt, int param2);
 
-int __cdecl gm_KannObjektHergestellt(char* obj, int item_id, int requested)
+int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 {
 	char* pkt;
 	char* ent;
@@ -893,7 +893,7 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int item_id, int requested)
 	}
 	is_cat2 = (gm_GetBuildingTypeCategory((unsigned char) *ent) == 2);
 	size = compute_size(pkt, item_id);
-	query_result = gm_StartEntityQuery(*(int*) (pkt + 0x14), 1, 0, item_id);
+	query_result = gm_ff_Objekt(*(int*) (pkt + 0x14), 1, 0, item_id);
 	if (query_result != NULL) {
 		msg_field = gm_GetMsgField(pkt, (char*) query_result);
 		if (size - msg_field > requested) {
@@ -913,7 +913,7 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int item_id, int requested)
 	}
 	if (*(unsigned short*) pkt == 0x2a) {
 		count = 0;
-		query_result = gm_StartEntityQuery(*(int*) (pkt + 0x14), 1, 5);
+		query_result = gm_ff_Objekt(*(int*) (pkt + 0x14), 1, 5);
 		if (query_result != NULL) {
 			do {
 				q_id = *(unsigned short*) query_result;
@@ -954,7 +954,7 @@ int __cdecl gm_KannObjektHergestellt(char* obj, int item_id, int requested)
 		goto limited;
 	}
 	count = 0;
-	query_result = gm_StartEntityQuery(*(int*) (pkt + 0x14), 1, 5);
+	query_result = gm_ff_Objekt(*(int*) (pkt + 0x14), 1, 5);
 	if (query_result != NULL) {
 		do {
 			count++;
@@ -1156,7 +1156,7 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 	if (in_list == 0) {
 		return 0;
 	}
-	query_result = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 0, entity_index);
+	query_result = gm_ff_Objekt(*(int*) (obj + 0x178), 1, 0, entity_index);
 	if (query_result != NULL) {
 		ahm_LookupEntityInTable(entity_index);
 		used = *(int*) ((char*) query_result + 0xe);
@@ -1167,7 +1167,7 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 		}
 	} else {
 		count = 0;
-		query_result = gm_StartEntityQuery(*(int*) (obj + 0x178), 1, 5);
+		query_result = gm_ff_Objekt(*(int*) (obj + 0x178), 1, 5);
 		if (query_result != NULL) {
 			do {
 				if (*(char*) ((char*) g_item_def_table + *(unsigned short*) query_result * 0x41) != 9) {
@@ -1199,9 +1199,9 @@ void __cdecl gm_EntitySetField(void)
 		return;
 	}
 	do {
-		sub = (int) gm_StartEntityQuery(*(int*) (entity + 0x5d), 1, 0, 0xff);
+		sub = (int) gm_ff_Objekt(*(int*) (entity + 0x5d), 1, 0, 0xff);
 		if (sub) {
-			sub = (int) gm_StartEntityQuery(*(int*) (sub + 0x14), 1, 5);
+			sub = (int) gm_ff_Objekt(*(int*) (sub + 0x14), 1, 5);
 			if (sub) {
 				do {
 					if (*(int*) (sub + 0xe) != 2) {

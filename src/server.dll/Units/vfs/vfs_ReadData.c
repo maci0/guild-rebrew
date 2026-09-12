@@ -27,7 +27,7 @@
  * Byte-level blocker: the target expands memcpy(buf, *zstrm, total) with a
  * dest-aligned prelude (target: stream→edi/total→esi, flags&0x20→dl,
  * `lea ecx,[edi+edi*2]; and ecx,3; sub len,ecx` — same alignment-pass
- * template as pool_alloc/m_InitPacketPool, docs/msvc6-allocator.md), while
+ * template as pool_alloc/m_init, docs/msvc6-allocator.md), while
  * msvc6 emits only the naive `shr ecx,2; rep movsd; and ecx,3; rep movsb`
  * from any C shape (candidate: stream→esi/total→ebx, flags&0x20 spilled).
  * Compiled 446 vs target 472 (26B delta); ~50 source variants + cflag/SP

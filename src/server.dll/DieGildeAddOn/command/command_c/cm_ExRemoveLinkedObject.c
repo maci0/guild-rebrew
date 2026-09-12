@@ -2,7 +2,7 @@
 #include "../command_internal.h"
 
 int __cdecl gm_RemoveLinkedNodeById(int*, int);
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
 /* Execution handler: removes an object linked to an entity by
  * node ID. Resolves the parent entity, finds the linked node,
@@ -33,7 +33,7 @@ int __cdecl cm_ExRemoveLinkedObject(int cmd, char *status_ptr)
 		if (*(int *)(result + 0x14) == -1) {
 			result = gm_RemoveLinkedNodeById((int *)(cmd + 0x5d), *(int *)(result + 0x18));
 		} else {
-			status_ptr = (char *)gm_StartEntityQuery(*(int *)(cmd + 0x5d), 2, 6, 1, *(int *)(result + 0x14));
+			status_ptr = (char *)gm_ff_Objekt(*(int *)(cmd + 0x5d), 2, 6, 1, *(int *)(result + 0x14));
 			/* Positive guard: the target falls through on success and keeps
 			 * the -2 return out of line after it (`je` to the error block). */
 			if (status_ptr != (char *)0x0) {
