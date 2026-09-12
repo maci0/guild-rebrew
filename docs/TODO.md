@@ -208,6 +208,70 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## The split-set link reproduced, and measured from the linker map (2026-09-13, round 26)
+
+Rounds 4-21 built the split-set link repeatedly and recorded only an end
+figure; nobody had measured *where* LINK put each split object.  This round
+rebuilt it and did, from `/MAP`.
+
+Reproducible recipe (all from the project root; the library list is a
+preference order, first match wins):
+
+```
+python3 scripts/map_libcmt.py --lib .scratch/libcmt/LIBCMT.sp6.LIB \
+    --lib .scratch/libcmt/LIBCMT.sp5.LIB --lib .scratch/libcmt/LIBCMT.base.LIB \
+    --lib .scratch/libcmt/LIBCMT.vc7.LIB --lib .scratch/libcmt/LIBCMT.sp4.LIB \
+    --json > .scratch/libcmt_map_u.json
+python3 scripts/split_coff.py --lib <same five> --map .scratch/libcmt_map_u.json \
+    --out build/libcmt_split --closure          # 259 objects
+# rsp = objects1.rsp minus the eight crt_region/*.obj, with the 259 split
+# objects inserted in map (reference-VA) order after the game objects
+cd build && eval "$(sed 's#@CMakeFiles/server_dll.dir/objects1.rsp#@split.rsp#;
+    s#/out:server.dll#/out:server_split.dll /MAP:server_split.map#;
+    s#/implib:server.lib#/implib:server_split.lib#; s# /pdb:[^ ]*##' \
+    CMakeFiles/server_dll.dir/link.txt)"
+python3 ../scripts/split_audit.py server_split.map
+```
+
+The link succeeds.  `.text` VirtualSize **0x246f6** (end 0x100256f6) against
+the reference's 0x22846 — within 4 bytes of round 18's recorded 0x100256f2, so
+the documented state reproduces, and 259 objects matches round 19's count.
+
+**What the map says.**  `scripts/split_audit.py` reads the object name's
+reference VA against the address LINK gave it.  Of 340 placed split symbols,
+**none is at its reference VA.**  The mapped objects start uniformly at
+**-0xaa** — `_fclose` (0x1001a18a) lands at 0x1001a0e0 — and the drift grows
+monotonically to **+0x5c0** by the tail.  The two ends have different causes:
+
+- the **-0xaa start** is the ~170 bytes of CRT code the reference has before
+  `_fclose` that the split set never emits.  The map matches 235 of the
+  region's 244 functions; the nine it cannot (`srand`, `__CRT_INIT`, `fpmath`,
+  `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`,
+  `fcn_1001a643`, 542 B) are part of it, and the eight `crt_region` objects the
+  split rsp drops were displacing exactly that space in the standard build.
+- the **+0x5c0 drift** accumulates over ~300 objects and is the split objects'
+  COMDAT padding, so it is not a member-selection problem at all.  This is the
+  first measurement that separates the two: rounds 17-21 treated the whole
+  7,852-byte overshoot as leftover "excess of the included members", but at
+  most ~1.5 KB of it can be padding.
+
+`--closure` is a third, independent source of drift: its helper objects are
+placed far from their reference VA (`memcpy.obj`'s `LeadUp1` lands 0x3640
+*below* it, `__STRINGTOLD`'s helper 0xa5c above).
+
+**Also re-measured, negative.**  A reloc-masked search for each mapped
+reference body in the built `.text` (masking the reference's `.reloc` slots
+*and* the four bytes after every `E8`/`E9`, since intra-image relative calls
+carry no relocation entry — see round 11) finds **99 of 235 anywhere** and
+**0 of 235 at their reference VA**.  So the split set is not "the reference CRT
+region, slightly misplaced"; most of the reference CRT code is not in the
+image at all.  The 34-symbol leftover count in rounds 17-21 is a symbol-level
+metric and understates this badly.
+
+**Next step for this half:** re-run the audit with `--closure` off and compare
+the drift, then decide whether the +0x5c0 is padding that a different object
+granularity removes or real extra code.
+
 ## `rebrew diff`'s positional count is not a priority signal (2026-09-13, round 25)
 
 `rebrew diff` aligns the target and candidate streams *positionally*.  When the
