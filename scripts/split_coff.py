@@ -315,6 +315,14 @@ def main() -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--from-va", default="0x1001a150")
     ap.add_argument(
+        "--skip-helper",
+        action="append",
+        default=["__CRT_INIT@12"],
+        help="helper symbol to leave to LIBCMT (repeatable).  Default "
+        "__CRT_INIT@12: when our objects supply it LIBCMT's dllcrt0.obj is not "
+        "pulled and LINK stops resolving /ENTRY:_DllMainCRTStartup@12",
+    )
+    ap.add_argument(
         "--closure",
         action="store_true",
         help="also pull same-member .text sections the mapped function references "
@@ -392,6 +400,8 @@ def main() -> int:
                     ),
                     f"helper_{helper}",
                 )
+                if hsym in args.skip_helper:
+                    continue
                 hsafe = "".join(c if c.isalnum() or c in "._" else "_" for c in hsym)
                 hname = f"{va:08x}_h{helper}_{hsafe}.obj"
                 (outdir / hname).write_bytes(build_object(coff, helper, hsym, set(), set()))
