@@ -208,6 +208,26 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## Every import thunk had a doubled IAT address (2026-09-13, round 48)
+
+`emit_thunks.py` builds each thunk as six body bytes plus a DIR32 relocation to
+`__imp_<symbol>`.  COFF **adds** the value already in the bytes to the resolved
+symbol, and the body was taken from the reference, which already contains the
+address — so LINK wrote `0x10024198 + 0x10024198 = 0x20048330` and all seven
+socket thunks at 0x1001a160..0x1001a18a read `jmp dword ptr [2 * IAT]` instead
+of `jmp dword ptr [IAT]`.  Present since the file was written; invisible to the
+drift audit because the thunks still occupy the right 42 bytes.
+
+The body is now `ff 25 00000000` and the relocation supplies the address.  All
+eight match the reference byte for byte.
+
+**And there are eight, not seven.**  The reference's `.text` ends with
+`jmp dword ptr [0x10024124]` at 0x10023840 — the `_RtlUnwind@16` thunk that
+`except_handler3` calls.  It is not adjacent to the socket group, so it gets its
+own object (`import_thunks_tail.obj`) and `make_split_rsp` places it after the
+CRT objects: any thunk object whose stem ends in `_tail` goes in a separate
+group between `ordered` and the `emit_defs` objects.
+
 ## The section prefix before a matched symbol (2026-09-13, round 47)
 
 Round 46 left 201 of 319 symbols on a constant **-16** plateau starting at
