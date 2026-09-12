@@ -1842,3 +1842,50 @@ Two cautions, both measured:
   instruction sequences with relocations masked (`scripts/seqdiff.py`,
   `scripts/zlibcheck.py`) and keep the build's own `.text` size as the
   link-level figure.
+
+## 48. msvc6 folds a compared variable into a later store, and no spelling keeps it in the register
+
+`ServerMainThread` (0x100093a0) builds a command packet in the
+`if (sent_bytes == 0xffffffff)` arm of the transfer loop.  The reference keeps
+`sent_bytes` in `eax` across the arm and loads `total_size` into `ecx`:
+
+```asm
+    mov  eax, [ebx]                    ; sent_bytes (compared with -1)
+    cmp  eax, -1
+    jne  ...
+    mov  ecx, [0x101deac0]             ; total_size
+    lea  edx, [esp+0x10]
+    push edx
+    push ebp
+    mov  byte  [esp+0x18], 8
+    mov  byte  [esp+0x1b], 0xff
+    mov  dword [esp+0x1c], eax         ; sent_bytes, register form
+    mov  dword [esp+0x24], 0
+    mov  dword [esp+0x28], ecx         ; total_size
+    call cm_QueuePlayerCommand
+```
+
+When the arm stores `sent_bytes`, msvc6 constant-propagates the value the
+`if` compared and emits the 8-byte immediate `mov dword [esp+0x1c], 0xffffffff`
+instead.  That frees `eax`, so `total_size` lands in `eax` and the `lea` takes
+`ecx`: three instructions differ and the object is four bytes long.
+
+Measured on the same file, all **inert** (byte-identical objects): comparing
+`(int) sent_bytes == -1`; storing a literal `0xffffffff`; storing
+`(unsigned int) (int) sent_bytes`; copying `sent_bytes` into a second local
+and comparing or storing *that* (copy propagation carries the constant
+through); declaring `total_size` inside the arm.  The fold is driven by the
+compared *expression*, and neither a cast nor an intermediate variable breaks
+it.
+
+The one spelling that clears it is to compare the memory operand instead of the
+local, `*(unsigned int*) transfer_progress == 0xffffffff`.  The value then
+survives in `eax` and `total_size` moves to `ecx`, exactly as the reference.
+The cost is a second live value across the argument pushes: c2 then stores
+`total_size` before the pushes (pre-push displacements) and gives the `lea`
+`ecx`, so three hunks close and three open, and the object drops to 2431 bytes.
+Recorded as a dead end rather than a fix.
+
+Note the *other* arm of the same `if`, at target 0x10009846, stores the literal
+`0xffffffff` and the reference keeps the 8-byte immediate there too.  Only the
+arm whose store operand is a variable reaches this rule.
