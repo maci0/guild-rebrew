@@ -51,44 +51,72 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
-## `/Oa` is the dominant lever on one function, and unusable (2026-09-13, round 24)
+## `ls_LoadBuildingEntityState` is one constant-caching decision away (2026-09-13, round 24)
 
-A systematic flag sweep over all 20 non-byte-exact functions (see the table at
-the end of this section) found exactly one function where a flag moves the
-byte compare at all: `ls_LoadBuildingEntityState` (0x100128f0) under `/Oa`
-(assume no aliasing) goes from **125/1464 to 713/1463** matched bytes, and its
-prologue becomes byte-identical:
+Read this section with the measurement caveat first, because the tooling
+misreported this function in every earlier round.
+
+**`rebrew diff`'s positional count is meaningless here and its candidate
+column lies about the prologue.**  The file's own header note already says the
+function is 100% mnemonic-aligned with the reference, and that is right: an
+LCS over mnemonics gives **484 of the reference's 499 instructions (97%)**
+against the current `/O2` object.  But the reference materialises `-1` once
+(`or ebp,0xffffffff`) where the candidate rematerialises it at each of the
+three stores, so the two instruction streams differ in length and the diff's
+index alignment desyncs at instruction 2 — it then reports only **3** exact
+instructions and prints a candidate prologue of `push esi; push edi` where the
+real object has `push ebx; push esi; push edi`.  `rebrew-cmake-cl` +
+`objdump -d -Mintel` is the ground truth for prologues; mnemonic LCS is the
+ground truth for "how close".
+
+**The whole gap.**  Reference prologue and the three `neg1` stores:
 
 ```
-target  83ec0c 53 55 56 57   sub esp,0xc; push ebx; push ebp; push esi; push edi
-/O2     83ec0c 56 57         push esi; push edi
-/Oa     83ec0c 53 55 56 57   exact
+target   83ec0c 53 55 56 57   sub esp,0xc; push ebx; push ebp; push esi; push edi
+/O2 obj  83ec0c 53 56 57      push ebx; push esi; push edi          (one short)
+target   83cdff               or ebp,0xffffffff        once at 0x10012934
+target   8928 / 89afa5000000 / 89af95000000
+                             mov [eax],ebp / mov [edi+0xa5],ebp / mov [edi+0x95],ebp
+/O2 obj  c700ffffffff ...     mov dword [mem],0xffffffff at all three sites
 ```
 
-That is the first time this function's four-callee-saved-register prologue has
-been reproduced.  `/Ox`, `/O1`, `/Ot`, `/Og-`, `/Ow`, `/Ob1`, `/Ob2`, `/Oy-`,
-`/G6`, `/G5`, `/Oi-`, `/Gy`, `/Os` on top of `/O2` are all inert or worse;
-`#pragma optimize("a", on)` around the function is byte-identical to
-`--cflags "/O2 /Gd /Oa"`.
+The register *roles* otherwise agree — the reference and the candidate both
+put `stream_ctx` in edi and the entity pointer in esi (the source note's claim
+that ours differs is stale).  Everything else is the knock-on: no ebp means
+every frame slot is 4 bytes low from instruction 5 on, and the object is
+1464 vs 1463.
 
-**It still cannot be adopted.**  Under `/Oa` the object is 1427 bytes against
-the reference's 1463, and the -36 B is structural, not cosmetic: with the
-no-aliasing assumption msvc6 CSEs `*(int*)(esi + 0x71)` across the ~12
-`ls_ReadVfsDataChecked` calls in the `esi[0] == 0x1e` arm and keeps the
-allocator result + 8 in a register (`lea ebx,[eax+8]`, `lea ecx,[ebx-8]`),
-while the reference reloads it before every call (`mov edx,[esi+0x71]`,
-`lea eax,[ebx+edx+4]`).  Forcing the reload with a volatile read regresses the
-whole function to 117/1471 under both `/Oa` and `/O2`.  So the reference shows
-`/Oa`-style register allocation with `/O2`-style aliasing in the same
-function; no flag pair or spelling produces both, which is the same shape as
-the `-1` caching wall recorded in round 23 and the `strcpy`/zero-register
-trade in `m_AllocTracked`.
+**`/Oa` flips exactly that one decision**, which is why it is the only flag
+that moves this function (125 -> 713 matched bytes) and why its prologue is
+byte-identical: the `/Oa` object has `or ebp,0xffffffff` and the three
+`mov [mem],ebp`.  But `/Oa` also keeps the `m_AllocTracked` result in a
+register for the whole read loop instead of reloading it before each call
+(`lea ebx,[eax+8]`, no `mov edx,[esi+0x71]` anywhere) and gives up 36 bytes.
+Declaring the read helper's buffer parameter `int*` or `char*` does not bring
+the reloads back (the CSE is not parameter-type driven), and a volatile read
+regresses to 117/1471.  So the reference really is `/Oa`-style constant
+caching with `/O2`-style aliasing.
+
+Under the tree's own `/O2 /Gd`, eleven spellings of `neg1` all leave ebp
+uncached and the object at 1464: dropping `register`; `~0`; moving the
+assignment above `offset = 0`, above the `entity_count` guard, or into the
+loop body; initialising it at the declaration; `long` instead of `int`; a dead
+`neg1 == 0` guard in the loop; deleting the `dummy` local; inlining the
+`int* ebx` pointer local; and `/G6` (130/1464).  This is the round-23
+constant-caching wall seen from the other side: the allocator's choice is
+reachable by a *flag* that also rewrites the memory model, and by no source
+form at all.
+
+**The rest of the flag sweep.**  `/Ox`, `/O1`, `/Ot`, `/Og-`, `/Ow`, `/Ob1`,
+`/Ob2`, `/Oy-`, `/G6`, `/G5`, `/Oi-`, `/Gy`, `/Os` on top of `/O2` are all
+inert or worse for this function; `#pragma optimize("a", on)` around the body
+is byte-identical to `--cflags "/O2 /Gd /Oa"`.
 
 Register-aware diff of the `/Oa` build: 142 exact, 28 reloc, **51
 register-only**, **278 structural**.  The register-only set is a clean
-esi/edi swap — the reference keeps `stream_ctx` in edi and the entity pointer
-in esi, ours the other way round (the file's own note at the top already
-records the reference's edi choice).  Four source attempts to move it are
+esi/edi swap — under `/Oa` the reference keeps `stream_ctx` in edi and the
+entity pointer in esi, ours the other way round.  Four source attempts to move
+it are
 byte-identical to the baseline and inert: copying the parameter into a local
 `char* ctx` and using that at all 43 sites, renaming the entity-pointer local,
 declaring it before the two int locals, and adding an extra local.  The
