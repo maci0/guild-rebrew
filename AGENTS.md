@@ -115,7 +115,7 @@ relocations) > `NEAR_MATCHING` (close) > `STUB` (incomplete)
 
 ## Linking
 
-Build with `cmake -S . -B build-sp6 -DREBREW_DEBUG_INFO=OFF && cmake --build build-sp6`.
+Build with `cmake -S . -B build -DREBREW_DEBUG_INFO=OFF && cmake --build build`.
 
 **Run `scripts/gate.sh` before committing.** It is the three checks that must
 pass: `rebrew lint`, the compile (the POST_BUILD postlink step is expected to

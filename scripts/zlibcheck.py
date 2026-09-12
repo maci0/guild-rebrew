@@ -24,7 +24,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import capstone  # noqa: E402
 import seqdiff  # noqa: E402
 
-DEFAULT_DIR = "build-sp6/CMakeFiles/server_dll.dir/references/zlib-1.1.3"
+DEFAULT_DIR = "build/CMakeFiles/server_dll.dir/references/zlib-1.1.3"
 SYMBOL = re.compile(r"<(_?[A-Za-z][A-Za-z0-9_]*)>:\s*$")
 RELOC = re.compile(r"^([0-9a-f]{8})\s+\S+\s+")
 MD = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)

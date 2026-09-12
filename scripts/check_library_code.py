@@ -338,7 +338,7 @@ def main() -> int:
     )
     ap.add_argument(
         "--compile-commands",
-        default="build-sp6/compile_commands.json",
+        default="build/compile_commands.json",
         help="build database used to find objects compiled from references/ "
         "(source-vendored libraries such as zlib). Skipped when absent.",
     )
