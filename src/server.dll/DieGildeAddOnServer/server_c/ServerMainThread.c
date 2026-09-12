@@ -41,8 +41,13 @@ extern int g_tick_rate;    /* 0x11764088 */
  * PHASE 6 (Game loop): advance the game clock, broadcast sync
  *   packets (cmd 0x1E/0x20), process the command queue.
  *
- * STATUS: SIZE_MISMATCH, obj 2436 against a 2434 target, 20 instruction
- * hunks under the order-based diff (was 22 hunks at obj 2439).
+ * STATUS: STUB, object 2434 bytes against a 2434 target (+0), 627 of 627
+ * instructions.  The order-based diff (.scratch/ndiff.py) aligns 601 of the
+ * 627 and leaves 19 hunks of one to five instructions: 10 reorderings, one
+ * register name, and 8 substitutions (`lea esi,[eax+ecx]` against
+ * `add esi,eax`, a `je`/`jne` polarity swap, an extra global reload).  An
+ * adjacent-statement hill climb over the whole body finds no improving move,
+ * so statement order is exhausted as a lever.
  *
  * `match_count` is a *positional* byte compare (relocation slots masked,
  * rebrew/src/rebrew/core/matching.py:488), so one byte of size difference
@@ -62,14 +67,14 @@ extern int g_tick_rate;    /* 0x11764088 */
  *     expression unsigned char and reproduces it, the `+2` spelling does
  *     not.  Hoisting 7 into a local instead widens it back to 32 bits.
  *
- * Root cause, single instruction: at target 0x1000963f the branch into
- * the host-slot block is `jne rel32` (6 bytes) because the block sits out
- * of line, ending in a 5-byte backward `jmp`. MSVC places the same block
- * inline here, so the branch is `jne rel8` (2 bytes) and the block needs
- * only a 2-byte skip: 6+5 against 2+2+2 is exactly the 3-byte deficit.
- * In the 672-byte prefix that is still aligned, the ONLY non-relocation
- * byte differences are that `jne` and three `jmp 0x961`/`jmp 0x95e`
- * displacements, which are themselves consequences of the same 3 bytes.
+ * Root cause: not a size difference any more.  The object is 2434 bytes, the
+ * target's exact length, and 601 of 627 instructions align.  The residue is
+ * register allocation and block layout that no C89 spelling has steered:
+ * `lea esi,[eax+ecx]` where msvc6 emits `add esi,eax`, a `je`/`jne` swap on
+ * the same two successors, a spilled global at [esp+0x28] against the
+ * target's [esp+0x20], and ten reorderings of independent instructions.
+ * The earlier "single-instruction 3-byte deficit" reading here described a
+ * 2436-byte object and is retracted.
  *
  * Failed attempts (all compiled and measured, see docs/msvc6-c-shapes.md
  * section 17 for the three earlier placement experiments):
@@ -104,10 +109,10 @@ extern int g_tick_rate;    /* 0x11764088 */
  *     their point of use, not hoisted into a local.
  *   - 0x10035880 likewise, but 0x10035884 must stay in a local.
  *
- * Remaining delta (2026-09-12): 2 bytes and 20 hunks.  Most are register
- * names for the same instruction; the earliest is the packet build at the
+ * Remaining delta (2026-09-12): zero bytes, 19 hunks, 26 instructions.  The
+ * earliest content difference is the packet build at the
  * `if (sent_bytes == 0xffffffff)` head, where msvc6 propagates the compared
- * constant into the cmd+4 store (a 8-byte immediate) while the target keeps
+ * constant into the cmd+4 store (an 8-byte immediate) while the target keeps
  * the value in eax.  Moving the comparison off `sent_bytes` (e.g. onto
  * `*transfer_progress`) removes the propagation but also hoists the cmd+0x10
  * store ahead of the argument pushes, so neither spelling matches yet.

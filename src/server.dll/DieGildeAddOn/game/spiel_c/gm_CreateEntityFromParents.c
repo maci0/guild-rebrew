@@ -232,11 +232,11 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		if (ent != (char*) 0) {
 			*(int*) (slot + 0x1f0) = *(int*) ent;
 			rnd = gm_RandomMod(8) & 0xffff;
-			slot[0x164] = ent[0xd4];
 			slot[9] = ent[0xd5];
-			slot[0xc] = ent[0xd6];
 			strcpy(slot + 0x30, ent + 4);
+			slot[0x164] = ent[0xd4];
 			strcpy(slot + 0x40, ent + 0x14);
+			slot[0xc] = ent[0xd6];
 			strcpy(slot + 0x1f4, ent + 0xd7);
 			*(int*) (slot + 0x80) = *(int*) (ent + 0x24);
 			*(char*) (slot + 0x84) = ent[0x28];
