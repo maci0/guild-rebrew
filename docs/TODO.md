@@ -1,5 +1,44 @@
 # Blockers — 100% Round-Trip Goal
 
+## Who the `.rdata` surplus actually is (2026-09-13, round 55)
+
+After the IAT fix, `.rdata` differs in two runs.  The tail one is a surplus of
+0x450 over the reference, and asking the map which objects own the symbols at
+0x10026000..0x10026c60 names them exactly:
+
+```
+LIBCMT:crt0msg.obj   17 symbols      LIBCMT:timeset.obj   2
+LIBCMT:testfdiv.obj   5              LIBCMT:a_map.obj     2
+LIBCMT:x10fout.obj    4              LIBCMT:tzset.obj     1
+LIBCMT:output.obj     3
+```
+
+Every one of those is a LIBCMT object our link pulls for its *code*, whose
+`.rdata` then comes along and lands after `rdata_restore.c`'s blob instead of
+inside the region the blob already reproduces.  So the blob and the linked
+library are supplying the same bytes twice, which is exactly what
+`CMakeLists.txt` records under `amsg_exit.c`.
+
+The sizes say how much of the blob is load-bearing:
+
+```
+rdata_restore.c.obj  .rdata  0x1320   (4896 B)
+built .rdata overshoot       0x0450   (1104 B)
+data_restore.c.obj   .data   0xb000  (45056 B)
+built .data  overshoot       0x431c  (17180 B)
+```
+
+so roughly 0xED0 of the blob is genuinely missing content and ~0x450 of it is
+duplicated by those seven objects.  Deleting the duplicated strings from the
+blob is the recorded attempt and lands `.rdata` at +0x40 rather than +0x450 --
+the remaining 64 bytes are the open question, and `.data` is the same shape
+with a much bigger blob.
+
+Note this is *not* the same problem as rounds 52/54: there the fix was a wrong
+symbol name and a swapped pair of `/include` directives, both one-line.  Here
+the two programs are both right and they overlap, so the work is deciding
+which bytes belong to the blob.
+
 ## The IAT is in slot order now (2026-09-13, round 54)
 
 The IAT lives in `.rdata` and its slot order is part of byte identity.  Two of
