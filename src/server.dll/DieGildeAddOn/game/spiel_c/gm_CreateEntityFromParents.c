@@ -620,20 +620,27 @@ stat_modifiers:
 		}
 	}
 	if (type == 6 || type == 7 || type == 5) {
-		if (*(int*) 0x10035430 >= 0x10) {
+		/* The reference loads the family counter once and reuses it for the
+		 * bound test and the update: `mov eax,[0x10035430]; cmp eax,0x10;
+		 * jl ...; mov edx,eax; or dh,0x80; inc eax; mov [ebp+0x50],dx;
+		 * mov [0x10035430],eax` at 0x100194c5.  Reading the global twice
+		 * emitted a 16-bit load for the store and a second 32-bit load for
+		 * the increment. */
+		n = *(int*) 0x10035430;
+		if (n >= 0x10) {
 			LogMessageInternal(s_file_spiel_c_10031004, 0x27f0,
 			                   s_family_overflow_100315ac, 1);
 			return 0xffff;
 		}
-		*(unsigned short*) (slot + 0x50) =
-		    (unsigned short) ((*(int*) 0x10035430) | 0x8000);
-		(*(int*) 0x10035430)++;
+		*(unsigned short*) (slot + 0x50) = (unsigned short) (n | 0x8000);
+		*(int*) 0x10035430 = n + 1;
 	} else if (type >= 0xa) {
 		*(unsigned short*) (slot + 0x50) = 0x7fff;
 	} else {
-		*(unsigned short*) (slot + 0x50) =
-		    (unsigned short) (*(int*) 0x1003542c);
-		(*(int*) 0x1003542c)++;
+		/* Same single-load shape on the other counter (0x100194d8). */
+		n = *(int*) 0x1003542c;
+		*(unsigned short*) (slot + 0x50) = (unsigned short) n;
+		*(int*) 0x1003542c = n + 1;
 	}
 	slot[0x58] = 1;
 	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
