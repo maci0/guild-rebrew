@@ -28,6 +28,65 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## LIBCMT is appended after every object — the reference interleaves it (2026-09-13, round 4)
+
+The objective says zlib and LIBCMT are to be *linked in*, not reversed, so
+round 4 tested dropping the eight `crt_region` files that exist only to
+displace LIBCMT members (`dllmain.c` must stay: the reference's
+`AddressOfEntryPoint` is 0x1001b9d4, i.e. the hand-written `DllMain`, not
+LIBCMT's `DllMainCRTStartup`).  Measured, with `dllmain.c` kept:
+
+| | committed (keep files) | keep files dropped |
+|---|---|---|
+| compile errors | 0 | 0 |
+| `.text` VirtualSize | 0x2284c (+6) | 0x22572 (**-0x2d4**) |
+| imports | 100 | 102 (**+IsBadWritePtr +FatalAppExitA**) |
+| postlink coverage | 402/7463 | 402/7463 |
+
+Dropping them is worse on both counts, so the tree is restored.  But the
+experiment exposes the real structure of the problem:
+
+**MSVC LINK places every archive member after every command-line object.**  Our
+link ends its own objects at ~0x1bd40 and LIBCMT's members start at ~0x1c000
+(`_fflush` at 0x1caf5, `_srand` at 0x1d8d0, `__mtinitlocks` at 0x1c663).  The
+reference **interleaves** members with game/CRT objects:
+
+```
+0x1001a140 srv_SeedRandomWithTime   (game, 14 B)
+0x1001a150 srand                    (LIBCMT)
+0x1001a18a fflush                   (LIBCMT)
+0x1001a1bb fclose_lk                (LIBCMT)
+  ...                                (LIBCMT members through 0x1001a643)
+0x1001a643 fcn_1001a643             (crt_region/initterm.c)
+0x1001a758 __initterm               (LIBCMT)
+  ...
+0x1001b9d4 DllMain                  (crt_region/dllmain.c)
+0x1001d036 _mlock                   (crt_region/mlock.c)
+```
+
+So the LIBCMT region can only line up if its **member objects are on the
+command line, in reference-VA order**, instead of the whole `.lib` being
+appended.  That is still "linking LIBCMT in" — stock objects, no reversing —
+and it is the concrete next step for roughly 39 KB (28%) of `.text`.
+
+Feasibility, measured this round by byte-matching every reference `.text`
+function against LIBCMT.sp6's COMDAT sections with the same
+fixed-bytes-minus-reloc-slots rule `check_library_code.py` uses: **209 of the
+254 reference functions at or above 0x1001a150 match a stock LIBCMT body
+outright — 32,455 B of 39,216 B (83%)**, including the sbh family and the 68
+functions already reversed under `crt_region/`.  (A first pass reported only
+136 because it pre-filtered candidates on their raw first 8 bytes; the
+reference's resolved `a1 imm32` operands differ from the library's zeroed
+reloc slots, so the pre-filter has to be reloc-insensitive.  A full scan with
+the mask rule is the correct method and costs seconds.)
+
+The 45 non-matching ones are mostly boundary artifacts rather than missing
+code: `0x10021ac0 strcmp` is 140 B *inside* LIBCMT's `_strcmp`, so the
+catalog's boundary, not the body, is what differs.  The genuinely absent set
+is the ~2.6 KB the file already lists elsewhere (`_ld12cvt` 673 B, several
+`unlock_09*`, `_output` 1857 B, ...).  So placing the stock members explicitly
+buys ~32 KB of byte-exact `.text` before any of those need a decision.
+
 ## The ten real size mismatches (2026-09-13, round 3)
 
 `rebrew verify --full` is the only accurate size source; `db/server.dll_functions.csv`
