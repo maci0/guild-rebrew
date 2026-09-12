@@ -295,6 +295,20 @@ alone are 97 of the 128 bytes.  A size delta is a structural difference (a
 missing or extra instruction), which is why those three are the right targets
 and the five near-matches (5-49 byte deltas at identical size) are not.
 
+**The three size deltas are the memcpy alignment prelude, and it is not
+flag-selected.**  All three are short by the same thing: the target expands
+`memcpy` with a destination-alignment prelude
+(`lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx; jle; rep movsb; mov ecx,ebx;
+and ebx,3; shr ecx,2; rep movsd; add ecx,ebx; rep movsb`), msvc6 emits the
+naive `shr ecx,2; rep movsd; and ecx,3; rep movsb`.  Re-probed this round on
+a fresh four-shape file (`/O2 /Gd`, `/O2 /Gd /G6`, `/Ox /Gd`, `/O1 /Gd`,
+`/O2 /Gd /Oy-`, `/O2 /Gd /G6 /Oy-`, `/Os /Gd`): every flag set emits the naive
+template, so `/G6` does not select it.  The `lea ecx,[edi+edi*2]; and ecx,3`
+is worth recognising: it is `(-edi) & 3` computed as `(3*edi) & 3`, which is
+the same value because `4*edi ≡ 0 (mod 4)` — so the prelude is the *standard*
+dest-align form, not an exotic one.  Until MSVC6 is made to emit it, these
+three functions stay short and the game region stays at -0x80.
+
 **Next step:** the residual is now the biggest single term, but it cannot be
 attacked before the -0x80: every split object is displaced by the game
 region's length.  The 20 non-exact game functions are the prerequisite, not an
