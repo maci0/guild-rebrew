@@ -1,5 +1,46 @@
 # Blockers — 100% Round-Trip Goal
 
+## `.data`: the blob is perfect and 0x72C too late; 46 strings are missing (2026-09-13, round 58)
+
+`data_restore.c`'s blob is **byte-perfect**.  Comparing the reference's
+`.data[0x3000:0xe000]` against ours at a shift of +0x72c gives 45056 of 45056
+bytes equal, and at shift 0 only 41% of the section matches.  So `.data` is a
+pure placement problem: the blob starts at our offset 0x372c where the
+reference has it at 0x3000.
+
+```
+ref[0x3000]  41 65 6d 74 65 72 28 29 3a 20 43 61 6e 27 74 20 6c 6f 61 64 20 6d 61 6d 74 00 00 00
+bld[0x372c]  41 65 6d 74 65 72 28 29 3a 20 43 61 6e 27 74 20 6c 6f 61 64 20 6d 61 6d 74 00 00 00
+```
+
+1836 bytes of our `.data[0:0x372c]` have no counterpart in the reference's
+`[0:0x3000]`.  The block-by-block shift profile is noisy (16-byte `find`
+matches recur), but every block from 0x3000 on that matches cleanly matches at
+exactly +0x72c, so the excess accumulates before the blob and nowhere else.
+Fixing it is worth about 37 points of `.data` agreement: 45056 of 57344 bytes
+become comparable, i.e. 41% -> ~79%.
+
+The prefix also has real *content* missing.  Of the reference's 453 `.data`
+strings, **46 are absent from our whole image**, and every one belongs to the
+crash-dump / error module:
+
+```
+gilde_server.log     __dbg.log            no dbg file        bad dbg file
+no memory            bad (small) dbg file not open crashdump D:\Develop\Units\Error\Error.c
+STACK_OVERFLOW       PRIV_INSTRUCTION     INT_OVERFLOW       INT_DIVIDE_BY_ZERO
+FLT_UNDERFLOW        FLT_STACK_CHECK      FLT_OVERFLOW       FLT_INVALID_OPERATION
+FLT_INEXACT_RESULT   FLT_DIVIDE_BY_ZERO   FLT_DENORMAL_OPERAND
+NONCONTINUABLE_EXCEPTION  INVALID_DISPOSITION  ARRAY_BOUNDS_EXCEEDED
+ILLEGAL_INSTRUCTION  IN_PAGE_ERROR        0x%08X             ... (46)
+```
+
+That is the exception-name table `CrashDumpUnhandledExceptionFilter` is 22.5%
+identical against, and `CrashDumpUnhandledExceptionFilter.c` defines none of
+it.  The strings have no direct `push imm32` reference anywhere in the
+reference's `.text`, so they are dead data the original link kept; they belong
+in the restore blob (or the file), and they are the one concrete content gap
+left in `.data`.
+
 ## The same fix for `.data` (2026-09-13, round 57)
 
 Round 56's classifier bug sent `rdata_restore.c.obj` to the `head` group.
