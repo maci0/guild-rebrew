@@ -134,14 +134,44 @@ class Coff:
         return out
 
 
-def build_object(coff: Coff, index: int, out_name: str) -> bytes:
-    """One-section COFF object for `coff.sections[index]`."""
-    s = coff.sections[index]
-    relocs = coff.section_relocs(index)
-    body = coff.section_body(index)
+def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False) -> bytes:
+    """COFF object for `coff.sections[index]` plus its same-member closure.
 
-    # Symbols to keep: definitions in this section, the section symbol, and
-    # every symbol referenced by a relocation.
+    `separate` holds the section indices that are themselves emitted as their
+    own object (the member's mapped functions); the closure stops there so the
+    sections are not duplicated and stay at their own reference VAs.
+    """
+    separate = separate or set()
+    claimed = claimed if claimed is not None else set()
+    # Section closure: every .text section reachable from this one through a
+    # relocation to a symbol defined in ANOTHER section of the same member.
+    # MSVC splits a member's shared tails into separate COMDATs (memmove's
+    # LeadUp*/UnwindUp*/TrailUp* family), and leaving them out makes the linker
+    # re-pull the whole member and append it after the region.
+    need = {index}
+    work = [index] if closure else []
+    while work:
+        i = work.pop()
+        for _va, symidx, _typ in coff.section_relocs(i):
+            if symidx >= len(coff.symbols):
+                continue
+            sec = coff.symbols[symidx]["section"]
+            if sec > 0:
+                j = sec - 1
+                if (
+                    j not in need
+                    and j not in separate
+                    and j not in claimed
+                    and coff.sections[j]["name"].startswith(b".text")
+                ):
+                    need.add(j)
+                    work.append(j)
+    secs = sorted(need)
+    claimed.update(secs)
+    new_secnum = {old: k + 1 for k, old in enumerate(secs)}
+
+    # Symbols to keep: every definition in the emitted sections and every
+    # symbol referenced by their relocations.
     keep = []
     seen = set()
 
@@ -151,16 +181,14 @@ def build_object(coff: Coff, index: int, out_name: str) -> bytes:
             keep.append(i)
 
     for i, sym in enumerate(coff.symbols):
-        if sym["section"] == index + 1:
+        if sym["section"] > 0 and (sym["section"] - 1) in new_secnum:
             add(i)
-    for _va, symidx, _typ in relocs:
-        if symidx < len(coff.symbols):
-            add(symidx)
-    # Sections referenced by relocations are emitted as IMAGE_REL_I386_DIR32
-    # against the section symbol's replacement, so no extra sections needed.
+    for i in secs:
+        for _va, symidx, _typ in coff.section_relocs(i):
+            if symidx < len(coff.symbols):
+                add(symidx)
 
-    # New string table + symbol table.  SectionNumber is 1 for everything that
-    # lived in the extracted section; absolute/undefined keep their original.
+    # Symbol table, renumbered onto the emitted sections.
     strtab = bytearray(b"\0\0\0\0")
     new_symbols = bytearray()
     remap = {}
@@ -174,13 +202,7 @@ def build_object(coff: Coff, index: int, out_name: str) -> bytes:
             off = len(strtab)
             strtab += sym["name"].encode("ascii", "replace") + b"\0"
             raw = b"\0\0\0\0" + struct.pack("<I", off)
-        section_number = sym["section"]
-        if section_number == index + 1:
-            section_number = 1
-        elif section_number > 0:
-            # The defining section is not part of this object, so the linker
-            # has to resolve the symbol from wherever it is emitted.
-            section_number = 0
+        section_number = new_secnum.get(sym["section"] - 1, 0) if sym["section"] > 0 else sym["section"]
         new_symbols += (
             raw
             + struct.pack(
@@ -194,33 +216,43 @@ def build_object(coff: Coff, index: int, out_name: str) -> bytes:
             + sym["aux"]
         )
 
-    # Relocations, remapped.
-    new_relocs = bytearray()
-    for va, symidx, typ in relocs:
-        new_relocs += struct.pack("<IIH", va, remap.get(symidx, 0), typ)
-
-    # Layout: header, section header, body, relocs, symbols, string table.
+    # Layout: header, section headers, then (body, relocations) per section,
+    # then symbols and the string table.
     hdr_size = 20
     sec_size = 40
-    body_off = hdr_size + sec_size
-    reloc_off = body_off + len(body)
-    if not relocs:
-        reloc_off = 0
-    sym_off = body_off + len(body) + len(new_relocs)
-    str_off = sym_off + len(new_symbols)
+    cur = hdr_size + sec_size * len(secs)
+    headers = bytearray()
+    blobs = bytearray()
+    for old in secs:
+        body = coff.section_body(old)
+        relocs = coff.section_relocs(old)
+        body_off = cur
+        cur += len(body)
+        cur += (-cur) % 4
+        if relocs:
+            reloc_off = cur
+            blob = b"".join(
+                struct.pack("<IIH", va, remap.get(symidx, 0), typ) for va, symidx, typ in relocs
+            )
+            cur += len(blob)
+        else:
+            reloc_off = 0
+            blob = b""
+        sec = bytearray(coff.data[coff.sections[old]["off"] : coff.sections[old]["off"] + 40])
+        struct.pack_into("<I", sec, 16, len(body))
+        struct.pack_into("<I", sec, 20, body_off)
+        struct.pack_into("<I", sec, 24, reloc_off)
+        struct.pack_into("<I", sec, 28, 0)
+        struct.pack_into("<H", sec, 32, len(relocs))
+        struct.pack_into("<H", sec, 34, 0)
+        headers += sec
+        blobs += body + b"\0" * ((-(body_off + len(body))) % 4) + blob
 
-    sec = bytearray(coff.data[s["off"] : s["off"] + 40])
-    struct.pack_into("<I", sec, 16, len(body))  # SizeOfRawData
-    struct.pack_into("<I", sec, 20, body_off)  # PointerToRawData
-    struct.pack_into("<I", sec, 24, reloc_off)  # PointerToRelocations
-    struct.pack_into("<I", sec, 28, 0)  # PointerToLinenumbers
-    struct.pack_into("<H", sec, 32, len(relocs))  # NumberOfRelocations
-    struct.pack_into("<H", sec, 34, 0)  # NumberOfLinenumbers
-
+    sym_off = cur
     header = struct.pack(
         "<HHIIIHH",
         coff.machine,
-        1,
+        len(secs),
         coff.timestamp,
         sym_off,
         entry_count,
@@ -228,7 +260,7 @@ def build_object(coff: Coff, index: int, out_name: str) -> bytes:
         coff.characteristics,
     )
     struct.pack_into("<I", strtab, 0, len(strtab))
-    return bytes(header) + bytes(sec) + body + bytes(new_relocs) + bytes(new_symbols) + bytes(strtab)
+    return bytes(header) + bytes(headers) + bytes(blobs) + bytes(new_symbols) + bytes(strtab)
 
 
 def main() -> int:
@@ -237,6 +269,13 @@ def main() -> int:
     ap.add_argument("--map", required=True, help="JSON from scripts/map_libcmt.py --json")
     ap.add_argument("--out", required=True)
     ap.add_argument("--from-va", default="0x1001a150")
+    ap.add_argument(
+        "--closure",
+        action="store_true",
+        help="also pull same-member .text sections the mapped function references "
+        "(memmove's LeadUp*/UnwindUp* COMDATs); the PoC link with this on did not "
+        "resolve /ENTRY:_DllMainCRTStartup@12, so it is off by default",
+    )
     args = ap.parse_args()
 
     root = Path(__file__).resolve().parent.parent
@@ -260,13 +299,21 @@ def main() -> int:
     resolve = name_resolver(members)
     by_name = {resolve(raw): obj for raw, obj in members}
 
-    written, index = [], {}
+    written = []
     for member, funcs in want.items():
         obj = by_name.get(member)
         if obj is None:
             print(f"  missing member {member}", file=sys.stderr)
             continue
         coff = Coff(obj)
+        separate = set()
+        claimed = set()
+        closure = args.closure
+        for _va, symbol in funcs:
+            for sym in coff.symbols:
+                if sym["name"] == symbol and sym["section"] > 0:
+                    separate.add(sym["section"] - 1)
+                    break
         for va, symbol in funcs:
             # find the section that defines `symbol`
             hit = None
@@ -277,7 +324,9 @@ def main() -> int:
             if hit is None:
                 print(f"  no section for {symbol} in {member}", file=sys.stderr)
                 continue
-            data = build_object(coff, coff.symbols[hit]["section"] - 1, symbol)
+            data = build_object(
+                coff, coff.symbols[hit]["section"] - 1, symbol, separate, claimed, closure
+            )
             safe = "".join(c if c.isalnum() or c in "._" else "_" for c in symbol)
             name = f"{va:08x}_{safe}.obj"
             (outdir / name).write_bytes(data)
