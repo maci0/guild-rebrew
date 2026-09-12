@@ -208,6 +208,57 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## Carried data sections are closure roots; commons are parked (2026-09-13, round 29)
+
+Two fixes and one parked experiment on top of round 28's `--with-data`.
+
+**1. A carried data section must be a closure root.**  `_file.obj`'s `.data`
+holds `__iob`, whose initialisers name `___endstdio` — and that lives in a
+*second* `.text` section of the same member (section 7 of 16), which the map
+never mapped.  Carrying the `.data` therefore turned a definition into an
+undefined reference, and LINK went straight back to the archive for the whole
+member.  `build_object` now walks relocations from the extra data sections too,
+not only from the root `.text` (still restricted to same-member `.text`, so it
+cannot pull another member's data).  Effect: `_file.obj` drops out of the pull
+list, 7 -> 6 members and 1,635 bytes, `.text` 0x238c5 -> **0x238c1**.
+
+**2. Uninitialized sections were written as raw data.**  A `.bss` section has
+`PointerToRawData == 0`; the code was emitting `raw_size` zero bytes into the
+file and advancing the cursor for them, so the object claimed contents for a
+section that has none and the following section's file offsets shifted.  Such a
+section now contributes no bytes and keeps `SizeOfRawData = raw_size` with
+`PointerToRawData = 0`.  Neutral on `.text` (0x238c1 either way) and the default
+path is unchanged — regenerating the plain `--closure` set still reproduces
+**0x246e6**, so nothing earlier in this line moved.
+
+**3. `--with-commons` is parked.**  The six remaining pulls are driven by
+symbols that no member *section* defines: `mbctype.obj` declares `__mbctype` as
+section 0 value 0x101, `___mbcodepage` 4, `___mbulinfo` 0xc, and `crt0dat.obj`
+declares `__FPinit` / `___onexitbegin` / `___mbctype_initialized`, `winxfltr`
+`__XcptActTab`, `exsup` `__except_list`, `dllcrt0` `__cinit` — all *common*
+symbols, which the linker allocates, so LINK searches the archive and takes the
+whole member.  `--with-commons` emits them as a synthetic `.bss` holding each
+at its aligned offset (size from the symbol's `Value` field, as COFF records
+for a common).  LINK rejects the result:
+
+```
+1001a670_.text.obj : fatal error LNK1143: invalid or corrupt file:
+                     no symbol for comdat section 0x2
+```
+
+and after fixing the section-count accounting in the file layout (the
+synthetic header has to be included when the symbol offset is computed) the
+symbol table still came out unreadable to objdump ("bad string table size"), so
+the generator is left behind the flag rather than in the default path.  The
+thing to bisect next time is the interaction between the appended section and
+the real COMDAT section symbols — the synthetic section is not a COMDAT and
+should not need a section symbol of its own.
+
+**Current state of this half:** `--closure --with-data` links clean at
+**0x238c1** (reference 0x22846, +4,219 bytes), 6 members / 1,635 bytes still
+pulled, and `--with-commons` is the next lever.  `/ENTRY:_DllMainCRTStartup@12`
+is worth a further 2 bytes whenever the entry question is settled.
+
 ## `split_coff --with-data` removes 3,617 bytes of the overshoot (2026-09-13, round 28)
 
 Round 27 concluded that LINK loads the 12 leftover members for their *data*

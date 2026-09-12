@@ -148,7 +148,7 @@ def masked_body(obj: bytes, sec: dict) -> bytes:
     return bytes(body)
 
 
-def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None, extra: set[int] | None = None) -> bytes:
+def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None, extra: set[int] | None = None, emit_commons: bool = False) -> bytes:
     """COFF object for `coff.sections[index]` plus its same-member closure.
 
     `separate` holds the section indices that are themselves emitted as their
@@ -163,7 +163,12 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     # LeadUp*/UnwindUp*/TrailUp* family), and leaving them out makes the linker
     # re-pull the whole member and append it after the region.
     need = {index} | set(extra or ())
-    work = [index] if closure else []
+    # Walk relocations to same-member .text sections.  With --closure the root
+    # .text section is a root; a carried data section is *always* a root,
+    # because its initialisers name code in the same member (the iob array
+    # points at ___endstdio) and leaving that out turns a definition into an
+    # undefined reference that re-pulls the whole member from the archive.
+    work = list(need) if closure else list(extra or ())
     while work:
         i = work.pop()
         for _va, symidx, _typ in coff.section_relocs(i):
@@ -183,6 +188,26 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     secs = sorted(need)
     claimed.update(secs)
     new_secnum = {old: k + 1 for k, old in enumerate(secs)}
+
+    # Common symbols (storage class 2, section 0, value = size, e.g.
+    # __mbctype:0x101) are allocated by the linker, so no member section
+    # defines them and LINK goes to the archive for the whole member.  With
+    # --with-data we emit one synthetic .bss holding every common the member
+    # declares, each symbol at its aligned offset.
+    commons: list[tuple[int, int, int]] = []
+    synth_total = 0
+    synth_sec = 0
+    if extra and emit_commons:
+        off = 0
+        for i, sym in enumerate(coff.symbols):
+            if sym["storage_class"] == 2 and sym["section"] == 0 and sym["value"] > 0:
+                align = 8 if sym["value"] >= 8 else 4
+                off = (off + align - 1) & ~(align - 1)
+                commons.append((i, off, sym["value"]))
+                off += sym["value"]
+        if off:
+            synth_total = (off + 3) & ~3
+            synth_sec = len(secs) + 1
 
     # Symbols to keep: every definition in the emitted sections and every
     # symbol referenced by their relocations.
@@ -219,12 +244,16 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
                 return first_ext[j]
         return symidx
 
+    for i, _off, _sz in commons:
+        add(i)
+
     for i in secs:
         for _va, symidx, _typ in coff.section_relocs(i):
             if symidx < len(coff.symbols):
                 add(resolve_ref(symidx))
 
     # Symbol table, renumbered onto the emitted sections.
+    common_off = {i: off for i, off, _sz in commons}
     strtab = bytearray(b"\0\0\0\0")
     new_symbols = bytearray()
     remap = {}
@@ -239,11 +268,15 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
             strtab += sym["name"].encode("ascii", "replace") + b"\0"
             raw = b"\0\0\0\0" + struct.pack("<I", off)
         section_number = new_secnum.get(sym["section"] - 1, 0) if sym["section"] > 0 else sym["section"]
+        value = sym["value"]
+        if old_i in common_off:
+            section_number = synth_sec
+            value = common_off[old_i]
         new_symbols += (
             raw
             + struct.pack(
                 "<IhHBB",
-                sym["value"],
+                value,
                 section_number,
                 sym["type"],
                 sym["storage_class"],
@@ -270,20 +303,25 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     # then symbols and the string table.
     hdr_size = 20
     sec_size = 40
-    cur = hdr_size + sec_size * len(secs)
+    cur = hdr_size + sec_size * (len(secs) + (1 if synth_sec else 0))
     headers = bytearray()
     blobs = bytearray()
     for old in secs:
         sec_old = coff.sections[old]
-        if sec_old["raw_ptr"] == 0:
-            # .bss-style section: no raw data in the object, just a size.
-            body = b"\0" * sec_old["raw_size"]
-        else:
-            body = coff.section_body(old)
+        # A .bss-style section has PointerToRawData 0 and no bytes in the file:
+        # keep its size but emit nothing and do not advance the file cursor.
+        uninit = sec_old["raw_ptr"] == 0
+        body = b"" if uninit else coff.section_body(old)
+        size = sec_old["raw_size"] if uninit else len(body)
         relocs = coff.section_relocs(old)
-        body_off = cur
-        cur += len(body)
-        cur += (-cur) % 4
+        if uninit:
+            body_off = 0
+            pad = b""
+        else:
+            body_off = cur
+            cur += len(body)
+            pad = b"\0" * ((-cur) % 4)
+            cur += len(pad)
         if relocs:
             reloc_off = cur
             blob = b"".join(
@@ -295,20 +333,33 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
             reloc_off = 0
             blob = b""
         sec = bytearray(coff.data[coff.sections[old]["off"] : coff.sections[old]["off"] + 40])
-        struct.pack_into("<I", sec, 16, len(body))
+        struct.pack_into("<I", sec, 16, size)
         struct.pack_into("<I", sec, 20, body_off)
         struct.pack_into("<I", sec, 24, reloc_off)
         struct.pack_into("<I", sec, 28, 0)
         struct.pack_into("<H", sec, 32, len(relocs))
         struct.pack_into("<H", sec, 34, 0)
         headers += sec
-        blobs += body + b"\0" * ((-(body_off + len(body))) % 4) + blob
+        blobs += body + pad + blob
+
+    if synth_sec:
+        synth = bytearray(40)
+        synth[0:5] = b".bss\0\0\0"
+        struct.pack_into("<I", synth, 8, synth_total)
+        struct.pack_into("<I", synth, 16, synth_total)
+        struct.pack_into("<I", synth, 20, 0)
+        struct.pack_into("<I", synth, 24, 0)
+        struct.pack_into("<I", synth, 28, 0)
+        struct.pack_into("<H", synth, 32, 0)
+        struct.pack_into("<H", synth, 34, 0)
+        struct.pack_into("<I", synth, 36, 0xC0300080)
+        headers += synth
 
     sym_off = cur
     header = struct.pack(
         "<HHIIIHH",
         coff.machine,
-        len(secs),
+        len(secs) + (1 if synth_sec else 0),
         coff.timestamp,
         sym_off,
         entry_count,
@@ -363,6 +414,13 @@ def main() -> int:
         ".CRT$*) on the object for its lowest-VA mapped function, so the "
         "member's data symbols have a command-line definition and LINK stops "
         "loading the whole member from the archive",
+    )
+    ap.add_argument(
+        "--with-commons",
+        action="store_true",
+        help="(experimental) also emit the member's common symbols as a "
+        "synthetic .bss.  The objects this produces are rejected by LINK "
+        "today - see docs/TODO.md round 29",
     )
     ap.add_argument(
         "--closure",
@@ -463,6 +521,7 @@ def main() -> int:
                 build_object(
                     coff, root_sec, symbol, mapped, claimed, False, aliases,
                     extra=data_secs if n == 0 else None,
+                    emit_commons=args.with_commons,
                 )
             )
             written.append((va, str(outdir / name), symbol))
