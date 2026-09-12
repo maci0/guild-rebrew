@@ -301,6 +301,27 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
         if old_i in common_off:
             section_number = synth_sec
             value = common_off[old_i]
+        aux = bytearray(sym["aux"])
+        # A section-definition AUX record carries the section NUMBER it is
+        # associated with (bytes 12..13) when its COMDAT selection is
+        # ASSOCIATIVE (5).  Splitting renumbers the sections, and a stale
+        # number makes LINK fail its COMDAT pass: "Internal error during
+        # ReadSymbolTable" under /OPT:REF.  Remap it, and if the associated
+        # section was not emitted, drop back to SELECT_ANY.
+        for k in range(sym["naux"]):
+            base_aux = k * 18
+            if len(aux) < base_aux + 18:
+                break
+            if aux[base_aux + 14] == 5:
+                assoc = aux[base_aux + 12] | (aux[base_aux + 13] << 8)
+                newno = new_secnum.get(assoc - 1) if assoc else None
+                if newno:
+                    aux[base_aux + 12] = newno & 0xFF
+                    aux[base_aux + 13] = (newno >> 8) & 0xFF
+                else:
+                    aux[base_aux + 12] = 0
+                    aux[base_aux + 13] = 0
+                    aux[base_aux + 14] = 2
         new_symbols += (
             raw
             + struct.pack(
@@ -311,7 +332,7 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
                 sym["storage_class"],
                 sym["naux"],
             )
-            + sym["aux"]
+            + bytes(aux)
         )
 
     # Aliases: other CRT members whose section body is byte-identical to this
