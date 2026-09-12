@@ -515,20 +515,30 @@ def main() -> int:
     mapping = json.loads(Path(args.map).read_text())
     floor = int(args.from_va, 16)
     want = {}
+    lib_of: dict[str, str] = {}
     for e in mapping["matched"]:
         va = int(e["va"], 16)
         if va >= floor:
+            if e.get("lib"):
+                lib_of.setdefault(e["member"], e["lib"])
             want.setdefault(e["member"], []).append(
                 (va, e["symbol"], e.get("section"), int(e.get("offset", 0)))
             )
 
     by_name: dict[str, bytes] = {}
+    # (library basename, member) -> object, so a map entry that names the
+    # library it matched in gets THAT copy.  The service packs disagree on
+    # section numbering: popen.obj sec 6 is a 965-byte .text in vc7 and not code
+    # at all in 6.0-sp6, and taking the first library's copy emitted nothing.
+    by_lib_name: dict[tuple[str, str], bytes] = {}
     alias_index: dict[bytes, set[str]] = {}
     for lp in libs:
         members = ar_members(lp.read_bytes())
         resolve = name_resolver(members)
+        key_lib = Path(lp).name
         for raw, obj in members:
             by_name.setdefault(resolve(raw), obj)
+            by_lib_name.setdefault((key_lib, resolve(raw)), obj)
             if len(obj) < 20:
                 continue
             try:
@@ -547,6 +557,48 @@ def main() -> int:
                 }
                 if ext:
                     alias_index.setdefault(masked_body(obj, sec), set()).update(ext)
+
+    # Entries whose VA falls inside a section another entry already emits must
+    # not be emitted again.  The reference overlaps functions freely: popen's
+    # `$L21349` fragment at 0x1001a89c is interior to malloc.obj's 252-byte
+    # __malloc, and wpopen's at 0x1001a8fb likewise, while crt0dat's `exit` pair
+    # are two separate 17-byte sections that really do tile.  The test uses the
+    # EMITTED extent, not the catalog size, or the crt0dat pair would be
+    # collapsed.
+    map_size = {}
+    for e in mapping["matched"]:
+        map_size[(e["member"], int(e["va"], 16))] = e.get("size")
+    flat = sorted(
+        (va, member, symbol, section, offset)
+        for member, funcs in want.items()
+        for (va, symbol, section, offset) in funcs
+    )
+    interior = set()
+    frontier = -1
+    for va, member, _symbol, section, offset in flat:
+        if va < frontier:
+            interior.add((member, va))
+            continue
+        obj_i = by_name.get(member)
+        lib_i = lib_of.get(member)
+        if lib_i:
+            obj_i = by_lib_name.get((lib_i, member), obj_i)
+        end = va
+        if obj_i is not None and section:
+            try:
+                sec_i = Coff(obj_i).sections[section - 1]
+                avail = sec_i["raw_size"]
+                if (
+                    offset
+                    and sec_i["name"].startswith(b".text")
+                    and offset < avail
+                ):
+                    avail -= offset
+                want_n = map_size.get((member, va))
+                end = va + (min(want_n, avail) if want_n else avail)
+            except (struct.error, IndexError):
+                end = va
+        frontier = max(frontier, end)
 
     written: list[tuple[int | None, str, str]] = []
 
@@ -586,6 +638,9 @@ def main() -> int:
 
     for member, funcs in want.items():
         obj = by_name.get(member)
+        lib = lib_of.get(member)
+        if lib:
+            obj = by_lib_name.get((lib, member), obj)
         if obj is None:
             print(f"  missing member {member}", file=sys.stderr)
             continue
@@ -627,6 +682,8 @@ def main() -> int:
         member_names = all_mapped_names
 
         for n, (va, symbol, section, offset) in enumerate(funcs_sorted):
+            if (member, va) in interior:
+                continue
             entry_size = sizes.get(va)
             root_sec = find_section(symbol, section)
             if root_sec is None:

@@ -323,6 +323,7 @@ def main() -> int:
         if data is None:
             continue
         got = None
+        got_lib = None
         for _lp, _ix in lib_indexes:
             got = match(_ix, data, claimed, canon)
             if got is None:
@@ -334,10 +335,18 @@ def main() -> int:
                 # has them, so a cross-variant section number is not usable.
                 got = match(_ix, data, None, canon)
             if got:
+                got_lib = _lp
                 break
         if got:
             claimed.add((got[0], got[2], got[3]))
-            hits.append((va, name, size, got[0], got[1], got[2], got[3]))
+            # Which library the member came from matters: the service packs do
+            # not agree on section numbering, and split_coff resolves a member
+            # by NAME against the first library that has it.  popen.obj sec 6 is
+            # a 965-byte .text in vc7 and not code at all in 6.0-sp6.
+            hits.append(
+                (va, name, size, got[0], got[1], got[2], got[3],
+                 Path(got_lib).name if got_lib else "")
+            )
         else:
             miss.append((va, name, size))
 
@@ -361,8 +370,10 @@ def main() -> int:
                             # seven reference functions, so the object for each
                             # has to be the slice starting there.
                             "offset": offset,
+                            "lib": lib,
                         }
-                        for va, name, size, member, sym, section, offset in sorted(hits)
+                        for va, name, size, member, sym, section, offset, lib
+                        in sorted(hits)
                     ],
                     "matched_bytes": sum(h[2] for h in hits),
                     "region_total": len(in_region),
@@ -383,7 +394,7 @@ def main() -> int:
     print()
     # member order by first VA: this is the link-object order
     by_member: dict[str, list[tuple[int, str]]] = {}
-    for va, name, size, member, sym, _section, _off in sorted(hits):
+    for va, name, size, member, sym, _section, _off, _lib in sorted(hits):
         if va >= floor:
             by_member.setdefault(member, []).append((va, sym))
     for member, funcs in sorted(by_member.items(), key=lambda kv: min(v for v, _ in kv[1])):
