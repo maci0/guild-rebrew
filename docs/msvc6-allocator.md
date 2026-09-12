@@ -905,8 +905,25 @@ Measured with `.scratch/mp2/tmpl.py`, `scratch.py`, `libscan.py`:
 
 An `__asm` block naming the two operands as C variables reproduces
 m_init byte-for-byte (`.scratch/memset_probe/a3.c`). The original
-sources used an asm zero-fill/copy macro here. Project rules forbid asm, so
-these functions stay plain C and rely on `rebrew prove`.
+sources used an asm zero-fill/copy macro here, so the prelude cannot be
+reached from C and the six sites split two ways:
+
+| Sites | Spelling | Result |
+|-------|----------|--------|
+| m_init 0x10006929, m_PoolAlloc 0x10006e0d, srv_InitBuildingTypeTable 0x1000b057 | minimal `__asm` block | byte-exact: m_init and srv_InitBuildingTypeTable RELOC 100%, m_PoolAlloc 4 bytes off |
+| m_AllocTracked 0x10006730, vfs_ReadData 0x10008f0c, gm_AllocGebaeude 0x10017611 | plain C | PROVEN, with the prelude's bytes missing (m_AllocTracked 608 vs 658, vfs_ReadData 446 vs 472) |
+
+Removing the remaining three blocks is possible but costs byte identity:
+m_init measured 97/162 with the object 143 bytes against the target's 162
+when the block is replaced by `memset` (`.scratch/memsetprobe/m_alloc_noasm.c`),
+and it would then need `rebrew prove` to stay green. Kept as asm for now.
+
+Re-checked 2026-09-12, independently of the 20-image sweep below:
+msvc600sp5pp, msvc7, msvc700, msvc700sp1, msvc710 and msvc710sp1 with
+/O1 and /O2 never emit the prelude for `memset`/`memcpy`; MSVC6's STL
+(`std::fill`, `std::fill_n`, `std::copy`) does not either; and every C
+spelling of the head pad (`d*3`, `(d<<1)+d`, `d+d+d`, `-d`, `4-(d&3)`)
+compiles to `neg`, never to `lea ecx,[edi+edi*2]`.
 
 Two earlier claims in this file are corrected by the above: the prelude is
 not a "dest-alignment" expansion (0x1000b046's dest is link-time constant
