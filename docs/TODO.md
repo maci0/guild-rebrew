@@ -28,6 +28,28 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## Section closure: implemented, and the entry symbol blocks it (2026-09-13, round 8)
+
+Group (1) of the leftovers is fixed in the tool.  `scripts/split_coff.py`
+gained `--closure`: it walks the relocation graph from the mapped section and
+includes the same-member `.text` sections it references, stopping at sections
+that are themselves emitted as their own object (so nothing is duplicated) and
+claiming each helper section once across the whole run.  With `--closure` the
+set is 222 objects / 37,871 B (against 34,280 B single-section), and a
+`/FORCE:UNRESOLVED` link drops the leftovers **121 -> 101** at
+`.text 0x10026824`.
+
+It is off by default because of one concrete blocker: with closure on, LINK
+stops resolving `/ENTRY:_DllMainCRTStartup@12`.  The extracted `dllcrt0`
+object does define `__DllMainCRTStartup@12` — a `/FORCE:UNRESOLVED` map shows
+it at 0x1001b824 from `1001b9d4___DllMainCRTStartup_12.obj` — and the link
+succeeds again if the multi-section object is not used, so the failure is in
+the multi-section object's symbol/section wiring (or LINK's entry lookup over
+it), not in the closure itself.  `/ENTRY:__DllMainCRTStartup@12` is wrong —
+LINK prepends its own underscore and looks for `___DllMainCRTStartup@12`.
+That is the next thing to fix; everything else about the closure is measured
+and working.
+
 ## What the split set still misses (2026-09-13, round 7)
 
 Fixing `map_libcmt.match` to compare the *common prefix* instead of requiring
