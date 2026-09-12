@@ -103,11 +103,7 @@ unsigned char g_stat_b_array[1] = {0};
 char* g_table = 0;
 int vfs_CleanupSubobject = 0;
 int vfs_CompressBlock = 0;
-void __cdecl vfs_EntityCleanup(char* p) { (void)p; }
-int __cdecl vfs_FreeGameSubobject(void* p) { (void)p; return 0; }
-void __cdecl vfs_FreeSubobj(void* p) { (void)p; }
 int vfs_GetErrnoPtr = 0;
-int __cdecl vfs_LockedFwrite(void* a, int b, int c, void* d) { (void)a;(void)b;(void)c;(void)d; return 0; }
 int vfs_StreamClose = 0;
 int vfs_WriteBufferLocked = 0;
 
@@ -136,27 +132,6 @@ int __stdcall thread_proc(void* param)
 	return ServerMainThread(param);
 }
 
-/* Function stubs */
-int __cdecl FreeCommandBuffer(void)
-{
-	return 0;
-}
-
-int __cdecl free_node(void)
-{
-	return 0;
-}
-
-int __cdecl game_free(void)
-{
-	return 0;
-}
-
-int __cdecl write_log(void)
-{
-	return 0;
-}
-
 /* The compiler emits an undefined __fltused reference from any TU that uses
  * floating point.  In the original binary that reference pulled LIBCMT's
  * fpinit.obj, whose .rdata (the "IsProcessorFeaturePresent"/"KERNEL32"
@@ -168,20 +143,10 @@ int __cdecl write_log(void)
 int _fltused = 0;
 
 /* --- Auto-added stubs for symbols lost during naked->C conversion --- */
-int __cdecl ahm_RandomBelow(void) { return 0; }
-int __cdecl destroy_entity(void* p) { (void)p; return 0; }
 int g_worker_entry_count = 0;
-int __cdecl fcn_1001accd(void) { return 0; }
-int __cdecl fcn_1001c083(void) { return 0; }
-int __cdecl fcn_1001e8b4(void) { return 0; }
-int __cdecl fcn_1001eab0(void) { return 0; }
 /* GROUP B: game memset/memmove (0x10021240 / 0x1001b200) - stubs until the
  * crt mem TUs are reversed; postlink rewrites call targets to the reference
  * VAs. */
-int __cdecl fcn_1001ede5(void) { return 0; }
-int __cdecl fcn_1001eec1(void) { return 0; }
-int __cdecl find_entity_26(void) { return 0; }
-int __cdecl find_entity_27(void) { return 0; }
 int g_field_worker_count_wt0 = 0;
 int g_field_worker_count_wt1 = 0;
 int g_field_worker_count_wt2 = 0;
@@ -234,8 +199,6 @@ int g_unknown_1de450 = 0;
 /* inflate_blocks / inflate_blocks_free are provided by the vendored
  * references/zlib-1.1.3/infblock.c; stubs here would shadow the real ones. */
 int g_chain_handler_table[1] = {0};
-int __cdecl rand_mod(void) { return 0; }
-int __cdecl read_uint32_be(void) { return 0; }
 int __cdecl RecvGameSavegame(void) { return 0; }
 char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[1] = "";
 char s_cm_ChkMoveCredits____Not_enough_m_1002c774[1] = "";
@@ -278,11 +241,8 @@ char* __cdecl fcn_1001af30(const char* s, int c) { return 0; }
 unsigned long __cdecl fcn_10020ff8(const char*, char**, int, void*); /* 0x10020ff8 - _strtoxl */
 unsigned long __cdecl fcn_10020ff8(const char* s, char** e, int b, void* l) { return 0; }
 void __cdecl fcn_100203a2(int fd);             /* 0x100203a2 - _lock_fhandle */
-void __cdecl fcn_100203a2(int fd) { }
 void* __cdecl fcn_10020360(int fd);            /* 0x10020360 - _get_osfhandle */
-void* __cdecl fcn_10020360(int fd) { return 0; }
 void __cdecl fcn_10020401(int fd);             /* 0x10020401 - slot unlock */
-void __cdecl fcn_10020401(int fd) { }
 
 /* --- CRT malloc stub: satisfy _malloc without pulling crt_region/malloc.c
  * (__try SEH-cookie .rdata that inflates the IAT→IMPORT gap). Postlink
@@ -312,7 +272,6 @@ unsigned short* g_query_base = 0;
 
 int __cdecl putc(int ch, void* stream) { (void)ch; (void)stream; return ch; }
 
-int __cdecl _callnewh(unsigned int size) { (void)size; return 0; }
 
 int $T57600 = 0;
 // DATA: SERVER 0x10034618

@@ -11,8 +11,8 @@ the round-by-round entries below establish.
 | game functions, byte-exact at object level | 261 of 281 `byte_matched` | ~140 KB |
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
-| standard CMake link, `.text` | 0x2283c (-10), postlink coverage 400/7,463 (5.4%) | — |
-| split-set link (LIBCMT member objects), `.text` end | 0x100256f2 (over by 0x1eac) | — |
+| standard CMake link, `.text` | 0x226fc (-330), postlink coverage 401/7,463 (5.4%) | — |
+| split-set link (LIBCMT member objects), `.text` | 0x2297a (+308, was +676) | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
 | CRT split-set leftovers | **34** symbols across ~10 members | 5,294 B |
@@ -207,6 +207,52 @@ second — so the structural count understates how hard they are.
 signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
+
+## Deleting the dead half of `link_stubs.c` takes 368 bytes off the split link (2026-09-13, round 36)
+
+Round 35 left the deletion undone because the dead names appeared in the
+tooling.  Checked: the only hits outside `docs/` and `.scratch/` are Ghidra
+label fields inside `src/rebrew-functions.toml` (`ghidra = "..."` on *other*
+functions) plus the definitions themselves — **no link-time or postlink-time
+dependency**.  Recomputing deadness as "defined by `link_stubs.c.obj` and
+undefined in no object of either response file" gives **89 of 232** symbols.
+
+Removed the 24 that are C functions (20 one-line stubs, 4 multi-line):
+`_callnewh`, `ahm_RandomBelow`, `destroy_entity`, `fcn_1001accd`,
+`fcn_1001c083`, `fcn_1001e8b4`, `fcn_1001eab0`, `fcn_1001ede5`, `fcn_1001eec1`,
+`find_entity_26`, `find_entity_27`, `rand_mod`, `read_uint32_be`,
+`vfs_EntityCleanup`, `vfs_FreeGameSubobject`, `vfs_FreeSubobj`,
+`vfs_LockedFwrite`, `FreeCommandBuffer`, `free_node`, `game_free`,
+`write_log`.  The other 65 dead symbols are `.data`/`.bss` globals and were
+left alone — they do not emit `.text`, and `.data` is postlink's business.
+
+`link_stubs.c.obj` `.text` **512 -> 128 B**; the split set **0x22aea (+676) ->
+0x2297a (+308)**.  `gate.sh` still passes: 0 compile/link errors, 279/281.
+
+**The standard link got worse and that is the honest reading.**  It went
+`0x2283c (-10) -> 0x226fc (-330)`: at -10 it was only accidentally the right
+total length while 94.6% of the layout map failed.  Delete nothing further
+here without measuring: the 128 B left is exactly the seven stubs that *are*
+referenced (`thread_proc`, `RecvGameSavegame`, `fcn_1001af30`,
+`fcn_10020ff8`, `putc`, `crt_toupper`, `_crt_locked_call4a`), and they go away
+only when the functions behind them are reversed.
+
+**Corrected accounting of the remaining +308:**
+
+| term | bytes |
+|---|---|
+| game region (`_fclose` starts 0x80 early: 96 B of game shortfall + 32 B `_getpid`/`srand`) | -128 |
+| CRT content (38,618 against the reference region's 38,588) | +30 |
+| `link_stubs.c` scaffolding `.text` | +128 |
+| residual slack | +278 |
+| | **+308** |
+
+**Next step:** the residual is now the biggest single term.  Round 35 measured
+that only 89% of member-internal adjacent section pairs are contiguous in the
+reference, so the 278 cannot be pure per-member emission order; it needs the
+same `split_audit --content` breakdown run against the reference's own
+function boundaries to see which members the reference interleaves.  Failing
+that, the 20 non-exact game functions are the larger prize.
 
 ## The remaining 784 bytes of "slack" are mostly our own scaffold (2026-09-13, round 35)
 
