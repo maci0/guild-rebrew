@@ -64,7 +64,12 @@
  *   - the no-parent selector ternaries rewritten in the subtraction form
  *     that worked for idx>=6: 631 to 745.  Those sites already emit the
  *     target's shape.
- *   - `type_entry == 1` inverted into a guard clause in the location block: 770.
+ *   - `type_entry == 1` inverted into a guard clause in the location block:
+ *     measured 770 at the time and reverted, but re-tested 2026-09-12 after the
+ *     FPU and clamp fixes and it is the reference's shape after all (715 ->
+ *     718, and the emitted branch is now the target's `je` to an out-of-line
+ *     0x170 store).  Do not trust the 770 figure; it predates the current
+ *     source.  A rejection is only valid for the compilation it was measured on.
  *   - `gm_RandomMod((unsigned short) arg8)` spelled as `gm_RandomMod(2)`:
  *     601.  The constant defeats the target's register reuse.
  *   - the stat-modifier table index rewritten to put `i` first: 591.
@@ -301,10 +306,12 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 
 		type_byte = *(unsigned char*) location;
 		type_entry = *(*(unsigned char**) 0x100a8c30 + type_byte * 0x24d);
-		if (type_entry == 1) {
+		if (type_entry != 1) {
+			if (type_entry > 3 && type_entry < 0x17 && type_entry != 0xa && type_entry != 0xf && type_entry != 0x11) {
+				*(int*) (slot + 0x16c) = location;
+			}
+		} else {
 			*(int*) (slot + 0x170) = location;
-		} else if (type_entry > 3 && type_entry < 0x17 && type_entry != 0xa && type_entry != 0xf && type_entry != 0x11) {
-			*(int*) (slot + 0x16c) = location;
 		}
 	}
 	slot[0xd] = (char) ((slot[0x166] != 0) + 1);
