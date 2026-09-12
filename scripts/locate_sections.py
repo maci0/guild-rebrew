@@ -142,7 +142,9 @@ def main() -> int:
                 if (member, i + 1) in known:
                     continue
                 sym = next((x["name"] for x in coff.symbols
-                            if x["section"] == i + 1 and x["storage_class"] == 2),
+                            if x is not None
+                            and x["section"] == i + 1
+                            and x["storage_class"] == 2),
                            ".text")
                 body, mask = candidate_mask(coff, i)
                 va = locate(ref, body, mask)

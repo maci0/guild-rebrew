@@ -94,7 +94,14 @@ class Coff:
                 }
             )
         self.strtab_off = self.symptr + self.nsyms * 18 if self.symptr else 0
-        self.symbols = []
+        # Indexed by COFF symbol-table ENTRY index, not by position: a
+        # relocation's symbol index counts the AUX records too, so a compacted
+        # list makes every index past an AUX record wrong, and
+        # `remap.get(symidx, 0)` then silently emits symbol 0 -- the object's
+        # own section symbol -- so the call jumps to its own start.
+        # (fclose.obj sec 3's four relocations name entries 13..16 while a
+        # compacted list held 14 symbols.)
+        self.symbols = [None] * self.nsyms
         i = 0
         while i < self.nsyms:
             off = self.symptr + i * 18
@@ -106,18 +113,16 @@ class Coff:
                 name = data[self.strtab_off + stroff : end].decode("ascii", "replace")
             else:
                 name = raw.rstrip(b"\0").decode("ascii", "replace")
-            self.symbols.append(
-                {
-                    "raw_name": raw,
-                    "name": name,
-                    "value": struct.unpack_from("<I", entry, 8)[0],
-                    "section": struct.unpack_from("<h", entry, 12)[0],
-                    "type": struct.unpack_from("<H", entry, 14)[0],
-                    "storage_class": entry[16],
-                    "naux": entry[17],
-                    "aux": data[off + 18 : off + 18 + entry[17] * 18],
-                }
-            )
+            self.symbols[i] = {
+                "raw_name": raw,
+                "name": name,
+                "value": struct.unpack_from("<I", entry, 8)[0],
+                "section": struct.unpack_from("<h", entry, 12)[0],
+                "type": struct.unpack_from("<H", entry, 14)[0],
+                "storage_class": entry[16],
+                "naux": entry[17],
+                "aux": data[off + 18 : off + 18 + entry[17] * 18],
+            }
             i += 1 + entry[17]
 
     def section_body(self, index: int) -> bytes:
@@ -178,7 +183,7 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     while work:
         i = work.pop()
         for _va, symidx, _typ in coff.section_relocs(i):
-            if symidx >= len(coff.symbols):
+            if symidx >= len(coff.symbols) or coff.symbols[symidx] is None:
                 continue
             sec = coff.symbols[symidx]["section"]
             if sec > 0:
@@ -206,6 +211,8 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     if extra and emit_commons:
         off = 0
         for i, sym in enumerate(coff.symbols):
+            if sym is None:
+                continue
             if sym["storage_class"] == 2 and sym["section"] == 0 and sym["value"] > 0:
                 align = 8 if sym["value"] >= 8 else 4
                 off = (off + align - 1) & ~(align - 1)
@@ -226,6 +233,8 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
             keep.append(i)
 
     for i, sym in enumerate(coff.symbols):
+        if sym is None:
+            continue
         if sym["section"] > 0 and (sym["section"] - 1) in new_secnum:
             # Never drop the root COMDAT's section symbol: LINK reports a
             # COMDAT without one as "no symbol for comdat section".
@@ -250,6 +259,8 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     # external function symbol defined in that section.
     first_ext: dict[int, int] = {}
     for i, sym in enumerate(coff.symbols):
+        if sym is None:
+            continue
         if sym["section"] > 0 and sym["storage_class"] == 2:
             j = sym["section"] - 1
             if j not in first_ext or sym["value"] < coff.symbols[first_ext[j]]["value"]:
@@ -259,6 +270,8 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
         if symidx >= len(coff.symbols):
             return symidx
         sym = coff.symbols[symidx]
+        if sym is None:
+            return symidx
         if sym["storage_class"] == 3 and sym["name"].startswith(".") and sym["section"] > 0:
             j = sym["section"] - 1
             if j not in new_secnum and j in first_ext:
@@ -439,7 +452,7 @@ def closure_sections(coff: Coff, root: int, skip: set[int]) -> list[int]:
     while work:
         i = work.pop(0)
         for _va, symidx, _typ in coff.section_relocs(i):
-            if symidx >= len(coff.symbols):
+            if symidx >= len(coff.symbols) or coff.symbols[symidx] is None:
                 continue
             sec = coff.symbols[symidx]["section"]
             if sec <= 0:
@@ -514,14 +527,17 @@ def main() -> int:
 
     mapping = json.loads(Path(args.map).read_text())
     floor = int(args.from_va, 16)
-    want = {}
-    lib_of: dict[str, str] = {}
+    # Grouped by (member, library), not by member alone.  Service packs
+    # disagree about individual sections -- sbheap.obj section 34 is
+    # `3b c6 72 55` in sp5 and `3b f0 77 55` in sp6 -- so a member can be
+    # matched in one pack for one VA and another pack for the next.  Keying by
+    # member dropped the per-entry library and emitted whichever pack came
+    # first, which is one byte wrong at 0x1001e638.
+    want: dict[tuple[str, str], list] = {}
     for e in mapping["matched"]:
         va = int(e["va"], 16)
         if va >= floor:
-            if e.get("lib"):
-                lib_of.setdefault(e["member"], e["lib"])
-            want.setdefault(e["member"], []).append(
+            want.setdefault((e["member"], e.get("lib") or ""), []).append(
                 (va, e["symbol"], e.get("section"), int(e.get("offset", 0)))
             )
 
@@ -551,7 +567,8 @@ def main() -> int:
                 ext = {
                     sym["name"]
                     for sym in coff_tmp.symbols
-                    if sym["section"] == i + 1
+                    if sym is not None
+                    and sym["section"] == i + 1
                     and sym["storage_class"] == 2
                     and not sym["name"].startswith(".")
                 }
@@ -569,20 +586,19 @@ def main() -> int:
     for e in mapping["matched"]:
         map_size[(e["member"], int(e["va"], 16))] = e.get("size")
     flat = sorted(
-        (va, member, symbol, section, offset)
-        for member, funcs in want.items()
+        (va, member, lib, symbol, section, offset)
+        for (member, lib), funcs in want.items()
         for (va, symbol, section, offset) in funcs
     )
     interior = set()
     frontier = -1
-    for va, member, _symbol, section, offset in flat:
+    for va, member, lib, _symbol, section, offset in flat:
         if va < frontier:
             interior.add((member, va))
             continue
         obj_i = by_name.get(member)
-        lib_i = lib_of.get(member)
-        if lib_i:
-            obj_i = by_lib_name.get((lib_i, member), obj_i)
+        if lib:
+            obj_i = by_lib_name.get((lib, member), obj_i)
         end = va
         if obj_i is not None and section:
             try:
@@ -602,9 +618,11 @@ def main() -> int:
 
     written: list[tuple[int | None, str, str]] = []
 
-    def member_external_names(member_name, funcs_list):
+    def member_external_names(member_name, lib_name, funcs_list):
         """External names defined by this member's mapped sections."""
         obj_i = by_name.get(member_name)
+        if lib_name:
+            obj_i = by_lib_name.get((lib_name, member_name), obj_i)
         if obj_i is None:
             return set()
         try:
@@ -613,18 +631,11 @@ def main() -> int:
             return set()
         names = set()
         for _va, symbol_i, section_i, _off_i in funcs_list:
-            if section_i:
-                sec_i = section_i - 1
-            else:
-                sec_i = next(
-                    (s["section"] - 1 for s in coff_i.symbols
-                     if s["name"] == symbol_i and s["section"] > 0),
-                    None,
-                )
+            sec_i = resolve_section(coff_i, symbol_i, section_i)
             if sec_i is None:
                 continue
             for sym in coff_i.symbols:
-                if (
+                if sym is not None and (
                     sym["section"] == sec_i + 1
                     and sym["storage_class"] == 2
                     and not sym["name"].startswith(".")
@@ -632,30 +643,53 @@ def main() -> int:
                     names.add(sym["name"])
         return names
 
-    all_mapped_names = set()
-    for _member, _funcs in want.items():
-        all_mapped_names |= member_external_names(_member, _funcs)
+    def resolve_section(coff_i, symbol_i, section_i):
+        """Which section of THIS copy holds `symbol_i`.
 
-    for member, funcs in want.items():
+        The map's index is authoritative only for the copy it was matched in.
+        The same member in another service pack can number its sections
+        differently (and crt0dat.mbctype.obj really does), so fall back to a
+        name lookup when the recorded index does not hold that symbol.
+        """
+        if section_i and 0 < section_i <= len(coff_i.sections) and any(
+            s is not None and s["name"] == symbol_i and s["section"] == section_i
+            for s in coff_i.symbols
+        ):
+            return section_i - 1
+        for sym in coff_i.symbols:
+            if sym is not None and sym["name"] == symbol_i and sym["section"] > 0:
+                return sym["section"] - 1
+        if section_i and 0 < section_i <= len(coff_i.sections):
+            return section_i - 1
+        return None
+
+    all_mapped_names = set()
+    all_by_member: dict[str, list] = {}
+    for (_member, _lib), _funcs in want.items():
+        all_mapped_names |= member_external_names(_member, _lib, _funcs)
+        all_by_member.setdefault(_member, []).extend(_funcs)
+
+    data_done: set[str] = set()
+    for (member, lib), funcs in want.items():
         obj = by_name.get(member)
-        lib = lib_of.get(member)
         if lib:
             obj = by_lib_name.get((lib, member), obj)
         if obj is None:
             print(f"  missing member {member}", file=sys.stderr)
             continue
         coff = Coff(obj)
-        def find_section(symbol, section):
-            """The map records the matched COFF section; .text symbols repeat."""
-            if section:
-                return section - 1
-            for sym in coff.symbols:
-                if sym["name"] == symbol and sym["section"] > 0:
-                    return sym["section"] - 1
-            return None
 
+        def find_section(symbol, section):
+            return resolve_section(coff, symbol, section)
+
+        # Every section ANY copy of this member emits, resolved into this copy.
+        # A member whose entries were matched in two service packs is emitted as
+        # two object groups, and a group that only knew its own sections made
+        # the closure pass re-emit the other pack's sections: the sp5 mbctype
+        # object carried sp5's `___initmbctable` to 0x10021ec0, displacing the
+        # sp6 crtGetACP that belongs there.
         mapped = set()
-        for _va, symbol, section, _off in funcs:
+        for _va, symbol, section, _off in all_by_member[member]:
             sec = find_section(symbol, section)
             if sec is not None:
                 mapped.add(sec)
@@ -669,6 +703,9 @@ def main() -> int:
         funcs_sorted = sorted(funcs, key=lambda f: f[0])
         sizes = {}
         for e in mapping["matched"]:
+            # Keyed by VA, not by (member, lib): the map never lists a VA twice,
+            # and an entry with no library recorded still has to contribute its
+            # size to whichever pack's group it landed in.
             if e["member"] == member:
                 sizes[int(e["va"], 16)] = e["size"]
         # External names defined by the mapped sections of ANY member.  They must
@@ -720,12 +757,21 @@ def main() -> int:
             (outdir / name).write_bytes(
                 build_object(
                     coff, root_sec, symbol, mapped, claimed, False, aliases,
-                    extra=data_secs if n == 0 else None,
+                    # Once per member, not once per (member, library) group:
+                    # the packs' data sections hold the same symbols, and a
+                    # second copy is a duplicate definition.
+                    extra=(
+                        data_secs
+                        if n == 0 and member not in data_done
+                        else None
+                    ),
                     emit_commons=args.with_commons,
                     trim=entry_size if args.trim else None,
                     start=start,
                 )
             )
+            if n == 0:
+                data_done.add(member)
             written.append((va, str(outdir / name), symbol))
             if not args.closure:
                 continue
@@ -740,7 +786,9 @@ def main() -> int:
                     (
                         s["name"]
                         for s in coff.symbols
-                        if s["section"] - 1 == helper and s["storage_class"] == 2
+                        if s is not None
+                        and s["section"] - 1 == helper
+                        and s["storage_class"] == 2
                     ),
                     f"helper_{helper}",
                 )

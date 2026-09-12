@@ -1,5 +1,96 @@
 # Blockers — 100% Round-Trip Goal
 
+## The CRT region of the split link is byte-exact (2026-09-13, round 50)
+
+There is now an honest whole-`.text` metric, and it says the stock-library half
+of the split-set link is **done**.
+
+`scripts/text_match.py` reports, per range, bytes equal at the same offset
+(`raw`) and bytes equal *or* filled in by the linker (`masked`).  The mask is
+principled, not a heuristic: every DIR32 slot from the image's own
+base-relocation table, plus every rel32 operand of a branch or call.  What
+survives is exactly the part the compiler controls — opcodes, ModRM, register
+allocation, displacements, constants.  `masked == 100%` over a range means the
+code there *is* the reference's code.
+
+```
+whole .text  raw 54663/141382 = 38.66%   masked 78775/141382 = 55.72%
+crt    raw  94.50%   masked 100.00%   (39877 bytes, 244 ranges, 0 differ)
+game   raw  79.47%   masked  91.58%   (82829 bytes, 260 ranges, 6975 differ)   [--drift]
+```
+
+The `game` line needs `--drift <link_drift.json>`: drift is piecewise constant
+and shifts whole objects, so a fixed-offset comparison understates the game
+region badly (38.91% vs the true 91.58%).  With `--drift auto` the tool runs
+`link_drift.py` itself.  CRT ranges are emitted in reference-VA order, so the
+fixed-offset figure is already the right one for them.
+
+Two bugs stood between the last round and `0 differ` over 39,877 bytes, both in
+`scripts/split_coff.py`, both about COFF indices:
+
+* **Relocations name symbol-table *entries*, not positions.** `Coff.symbols`
+  was a compacted list (AUX records skipped via `i += 1 + entry[17]`), while a
+  relocation's `symidx` counts AUX records.  Any index past an AUX record was
+  therefore wrong, and `remap.get(symidx, 0)` silently emitted symbol 0 — the
+  object's own section symbol — so calls jumped to their own start.  `fclose.obj`
+  §3 names entries 13..16 while the compacted list held 14 symbols.  The list is
+  now `[None] * nsyms` indexed by entry index, with `None` guards at every
+  consumer (`locate_sections.py`, `emit_commons.py`, `emit_defs.py` too).
+* **A member matched in two service packs was emitted as one group.**  The
+  reference CRT genuinely mixes packs (sp6 for most sections, sp5 for
+  `dosmaperr`, `NMSG_WRITE`, `setmbcp`, `output`, `sbheap` §34 …), and the map
+  records the pack per VA.  `split_coff` keyed the object by member alone and
+  used whichever pack came first, which emitted sp6's
+  `sbheap.obj` §34 — `3b f0 77 55` where the reference has sp5's
+  `3b c6 72 55` — at 0x1001e638: one byte wrong in 39,877.  Grouping by
+  `(member, library)` fixes it, but then a group only knows *its own* mapped
+  sections, so the closure pass re-emitted the other pack's sections (sp5's
+  `___initmbctable` landed at 0x10021ec0 and displaced the sp6 `crtGetACP` that
+  belongs there).  The mapped set is now member-wide, resolved per copy by
+  symbol name when the recorded index belongs to the other pack, and the
+  member's data sections are emitted once per member rather than once per group.
+
+The remaining gap is entirely the game region, and it is 20 functions:
+
+| function | bytes | differ |
+|---|---|---|
+| `gm_AllocSpieler` | 3689 | 1971 |
+| `CrashDumpUnhandledExceptionFilter` | 2115 | 975 |
+| `cm_ExSellObjekt` | 2057 | 973 |
+| `ServerMainThread` | 2434 | 506 |
+| `ls_LoadBuildingEntityState` | 1463 | 382 |
+| `gm_AllocGebaeude` | 1088 | 363 |
+| `gv_ExAllocGraveyardWorker` | 1040 | 358 |
+| `m_AllocTracked` | 658 | 288 |
+| `vfs_ReadCompressed` | 492 | 233 |
+| `vfs_ReadData` | 472 | 208 |
+| `cm_ExCopyEntityData` | 912 | 187 |
+| `vfs_OpenStream` | 667 | 154 |
+| `ahm_ExAllocAlchemist` | 1002 | 136 |
+| `gm_CheckInventoryCapacity` | 395 | 89 |
+| `gm_FindNextFilteredEntity` | 346 | 55 |
+| `srv_LoadBuf` | 750 | 49 |
+| `gm_ObjectsAvailble` | 714 | 28 |
+| `cm_ExProdObjekt` | 993 | 13 |
+| `gm_CalculateProductionValue` | 396 | 5 |
+| `cm_ProcessCommandQueue` | 639 | 2 |
+
+6,975 differing bytes; those 20 functions account for all of them.  Six objects
+also carry a size error, and each one is a drift step:
+
+```
+CrashDumpUnhandledExceptionFilter.c.obj   span=2128  built=2144  err=+16
+m_AllocTracked.c.obj                      span=672   built=656   err=-16
+vfs_ReadCompressed.c.obj                  span=496   built=512   err=+16
+vfs_OpenStream.c.obj                      span=752   built=704   err=-48
+cm_ExCopyEntityData.c.obj                 span=912   built=880   err=-32
+gm_AllocGebaeude.c.obj                    span=1088  built=1120  err=+32
+```
+
+Once those are zero the drift is 0 end to end, the built `.text` (0x22af8,
++690) loses the dead-stripped import thunk tail that `rebrew postlink` already
+trims, and masked-100% becomes byte identity.
+
 ## Distance to byte identity (2026-09-13, round 24)
 
 One place to read the whole gap.  Nothing here is new work; it is the state
@@ -12,8 +103,8 @@ the round-by-round entries below establish.
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
 | standard CMake link, `.text` | 0x2276c (-218), postlink coverage 401/7,463 (5.4%) | — |
-| split-set link (LIBCMT member objects), `.text` | 0x22cfa (+1204); 246 of 319 symbols exactly at their reference VA, 0 LIBCMT pulls, drift one-sided (+112..+0x31c) | — |
-| CRT region functions matched | 235 of 244 | 38,674 B |
+| split-set link (LIBCMT member objects), `.text` | 0x22af8 (+690, the dead-stripped thunk tail); 246 of 319 symbols exactly at their reference VA, 0 LIBCMT pulls | — |
+| CRT region, masked-identical (round 50) | **100.00%, 0 differing bytes** | 39,877 B in 244 ranges |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
 | CRT split-set leftovers | **34** symbols across ~10 members | 5,294 B |
 

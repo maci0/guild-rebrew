@@ -143,7 +143,11 @@ def main() -> int:
                 except (struct.error, IndexError):
                     continue
                 for sym in coff.symbols:
-                    if sym["storage_class"] != 2 or sym["name"] not in missing:
+                    if (
+                        sym is None
+                        or sym["storage_class"] != 2
+                        or sym["name"] not in missing
+                    ):
                         continue
                     if sym["section"] == -1:
                         absolutes.setdefault(sym["name"], sym["value"])

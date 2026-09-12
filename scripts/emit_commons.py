@@ -114,7 +114,10 @@ def main() -> int:
         commons = [
             (s["name"], s["value"])
             for s in syms
-            if s["storage_class"] == 2 and s["section"] == 0 and s["value"] > 0
+            if s is not None
+            and s["storage_class"] == 2
+            and s["section"] == 0
+            and s["value"] > 0
         ]
         commons = [(n, v) for n, v in commons if n not in seen]
         if not commons:
