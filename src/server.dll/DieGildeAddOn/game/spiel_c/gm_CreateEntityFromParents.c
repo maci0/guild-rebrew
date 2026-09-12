@@ -278,7 +278,7 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 					acc = acc - *(float*) (slot + 0x14) +
 					      *(float*) (slot + 0x14) / acc;
 				}
-				if (acc > *(float*) 0x100256a0) {
+				if (acc <= *(float*) 0x100256a0) {
 					acc = *(float*) 0x100256a0;
 				}
 				*(float*) (slot + 0x1c) = acc;
@@ -671,7 +671,7 @@ stat_modifiers:
 			acc = acc - *(float*) (slot + 0x14) +
 			      *(float*) (slot + 0x14) / acc;
 		}
-		if (acc > *(float*) 0x100256a0) {
+		if (acc <= *(float*) 0x100256a0) {
 			acc = *(float*) 0x100256a0;
 		}
 		*(float*) (slot + 0x1c) = acc;
