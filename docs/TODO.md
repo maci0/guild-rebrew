@@ -276,6 +276,13 @@ closure is the better configuration for total size — as round 10 found — and
 the current link's `/ENTRY:DllMain@12` no longer needs the `__CRT_INIT` helper
 that forced `--skip-helper` in rounds 8-10.
 
+**Also run, negative.**  `rebrew climb --objective aligned` (4 passes,
+dry-run) on `gm_CheckInventoryCapacity` — the closest function the round-25
+alignment table had not already shown to be a scheduling wall — reports one
+move at statement 18 worth **+1 matched byte** of the whole binary, i.e. noise.
+The deterministic adjacent-statement climb has nothing to offer on it; its
+residual is the documented address-form/spill wall, not statement order.
+
 **Next step for this half:** the ~0x1eb0 overshoot splits into the -0xaa start
 (missing code) and the +0x5c0 tail drift (padding), but the mapped sections
 themselves total 38,674 B against the reference region's 34,550 B, so there is
