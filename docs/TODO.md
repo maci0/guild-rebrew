@@ -11,7 +11,7 @@ the round-by-round entries below establish.
 | game functions, byte-exact at object level | 261 of 281 `byte_matched` | ~140 KB |
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
-| standard CMake link, `.text` | 0x2275c (-234), postlink coverage 401/7,463 (5.4%) | — |
+| standard CMake link, `.text` | 0x2276c (-218), postlink coverage 401/7,463 (5.4%) | — |
 | split-set link (LIBCMT member objects), `.text` | 0x2297a (+308, was +676) | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
@@ -207,6 +207,74 @@ second — so the structural count understates how hard they are.
 signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
+
+## One missing function was 16 bytes of the game region's drift (2026-09-13, round 38)
+
+The object-error table from round 37 has a caveat worth stating: msvc6 pads a
+COFF `.text` section to a 16-byte multiple, and LINK merges the *padded*
+length, so an object's contribution is `round16(function size)` — not the
+function size.  `vfs_ReadCompressed` is the clean example: its function is 7
+bytes long (499 against 492) and its section therefore rounds to 512 where
+the reference's rounds to 496, which is the whole +16.  Every remaining
+game-region island is a wrong *function* size plus that rounding.
+
+**`gv_GetSlotEntry` was missing a function, not mis-sized.**  The reference
+has a second function in that translation unit at 0x10010700:
+
+```
+8b4c2408   mov  ecx,[esp+8]
+33c0       xor  eax,eax
+837904ff   cmp  dword ptr [ecx+4],-1
+0f94c0     sete al
+c3         ret
+```
+
+It has no caller, no catalog name, and never appeared in the 281 tracked
+functions, so nothing pointed at it.  Without it the object is 329 + 7 bytes
+of msvc6's 16-byte intra-section alignment = 336, against the 352-byte span
+to `FindSlotEntryFiltered`; with it the object is 329 + 7 + 14 + 2 = 352.
+Written as ordinary C in `gv_GetSlotEntry.c` it is **EXACT 14/14**.
+
+`rebrew skeleton 0x10010700` is what puts the `size = 14` annotation in
+`src/rebrew-functions.toml`; `rebrew test` skips a marked function with no
+SIZE, reporting `SKIPPED: No SIZE annotation`.  Note that rebrew leaves the
+toml mode 444, so restoring a backup of it needs `rm` first — `cp` over it
+fails with EACCES.
+
+**Effect:** `verify` is 280/282 (up from 279/281), built `.text` 0x2275c
+(-234) -> **0x2276c (-218)**, and the split set now places **25 of 330**
+symbols exactly at their reference VA, up from **0**.
+
+**`scripts/link_drift.py` needed a tie-break.**  Several functions here are
+byte-identical twins — the `cm_ExAllocAlchemist` / `cm_ExAllocGraveyardWorker`
+thunks, `amt_FindEntity26` / `amt_FindEntity27` — so "highest score wins"
+latched onto the wrong copy and reported an 80-byte drift where the real one
+was 16.  Ties now break towards the reference offset.
+
+**The five remaining game-region size errors**, and the drift island each one
+creates:
+
+| object | function delta | island |
+|---|---|---|
+| `CrashDumpUnhandledExceptionFilter` | +22 | +16 at 0x10002770 |
+| `m_AllocTracked` | -2 | -16 at 0x10006580 |
+| `vfs_ReadCompressed` | +7 | +16 at 0x10008a90 |
+| `cm_ExCopyEntityData` | -21 | -32 at 0x1000ec00 |
+| `gm_AllocGebaeude` | +32 | +32 at 0x100174d0 |
+
+`gv_GetSlotEntry` is no longer among them.  Every one is on the 20
+non-byte-exact list, so the game half of the link cannot be aligned without
+finishing them.
+
+**Next step:** the five above, smallest first.  `m_AllocTracked` (2 bytes),
+`vfs_ReadCompressed` (7) and `cm_ExCopyEntityData` (21) are all at documented
+scheduling plateaus, but `vfs_ReadCompressed`'s 7 bytes are the prologue
+order (the target hoists `mov eax,[esp+0xc]` above `push ebx` and puts
+`test eax,eax` after `push esi`), which is the same class of lever that
+closed other functions.  The standard link cannot fix the CRT half at all:
+`link_drift` shows the `sbh_*` / `crt_*` reconstruction objects 12,737 bytes
+away from where the reference has them, because LINK appends command-line
+objects after the archive members — that is the split set's job.
 
 ## The link's whole remaining error is seven object sizes (2026-09-13, round 37)
 
