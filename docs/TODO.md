@@ -268,9 +268,20 @@ region, slightly misplaced"; most of the reference CRT code is not in the
 image at all.  The 34-symbol leftover count in rounds 17-21 is a symbol-level
 metric and understates this badly.
 
-**Next step for this half:** re-run the audit with `--closure` off and compare
-the drift, then decide whether the +0x5c0 is padding that a different object
-granularity removes or real extra code.
+**`--closure` is worth 0x758 bytes but adds the outliers.**  Re-run with the
+same map and no `--closure` (235 objects instead of 259): the link still
+succeeds and `.text` grows 0x246f6 -> **0x24e4e** (over by 0x2608 instead of
+0x1eb0), 319 placed symbols instead of 340, drift -0x3650 .. +0x607.  So
+closure is the better configuration for total size — as round 10 found — and
+the current link's `/ENTRY:DllMain@12` no longer needs the `__CRT_INIT` helper
+that forced `--skip-helper` in rounds 8-10.
+
+**Next step for this half:** the ~0x1eb0 overshoot splits into the -0xaa start
+(missing code) and the +0x5c0 tail drift (padding), but the mapped sections
+themselves total 38,674 B against the reference region's 34,550 B, so there is
+also ~4 KB of over-inclusion.  Attribute the drift between padding and
+over-inclusion object by object — the map has the per-symbol addresses to do
+it.
 
 ## `rebrew diff`'s positional count is not a priority signal (2026-09-13, round 25)
 
