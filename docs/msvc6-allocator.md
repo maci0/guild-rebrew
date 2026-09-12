@@ -395,7 +395,7 @@ catches it. `amt_fio_LoadAemter` (0x1000baf0, 606B) converted to RELOC
 606/606 with this rule; also confirms the signed/unsigned branch rule
 (loop bound as `unsigned int` → `jbe`/`jb`, matching the reference).
 
-`ValidateAndAssignOffice` (0x1000b290, 425B, same family) is a documented
+`amt_ValidateAndAssignOffice` (0x1000b290, 425B, same family) is a documented
 near-miss: the identical recipe gets 41/425 with the head matching, then
 MSVC6 assigns `result` to `edi`+spill (frame grows to 0x1c, `buf` shifts
 to [esp+0x14]) instead of the reference's `ebp`-resident `result` (frame
@@ -455,7 +455,7 @@ allocator/codegen divergences:
    does not change this — the fusion peephole is suppressed in our shape.
 
 Also confirmed while reconstructing: `0x101de450` is a **pointer global**
-(`mov edx,[0x101de450]`), i.e. `g_entity_table` — the reference never uses
+(`mov edx,[0x101de450]`), i.e. `g_item_def_table` — the reference never uses
 `0x101de450` as a literal base; `(double)` of the unsigned dword at
 `ent+0x22` zero-extends via the `fild qword` pair (`[esp+8]=val,[esp+0xc]=0`),
 so the source type is `unsigned int` → double.
@@ -506,12 +506,12 @@ cap/goto CFG shape (single `cap` variable, shared clamp epilogue reached via
 callee-saved pushes, `edi`=entity_index) — that part was the key unlock.
 Still blocked on three allocation/peephole details:
 
-1. **Ent-address shape**: reference emits `mov ecx,[g_entity_table]; mov
+1. **Ent-address shape**: reference emits `mov ecx,[g_item_def_table]; mov
    eax,edi; shl eax,6; add ecx,eax; mov eax,edi; add eax,ecx` (separate
    adds) then `mov al,[eax]`. Ours folds the `+idx` term into the load
    addressing mode (`mov cl,[edi+edx]`) and assigns the base to edx. Writing
    `ent = base + idx*0x40; ent += idx;` is strength-reduced right back.
-2. **Base register**: `mov ecx,[g_entity_table]` (ref) vs `mov edx,[...]`
+2. **Base register**: `mov ecx,[g_item_def_table]` (ref) vs `mov edx,[...]`
    (ours) — cascades into the idx*64 register (eax vs ecx).
 3. **Clamp peephole**: ref emits `test ebp,ebp; setl al` (after the sub and
    a `pop edi` in between); ours emits `sets dl` directly on the sub flags
@@ -554,7 +554,7 @@ a switch form ballooned to 189 bytes (not the if/else chain). The
 pre-materialized 0 constant appears to be the linchpin of the reference's
 register allocation, and no C shape reproduced it.
 
-## AdvanceGameClock (0x100155c0) — blocked (arg4 live-range split)
+## sim_AdvanceGameClock (0x100155c0) — blocked (arg4 live-range split)
 
 Semantically correct C preserved in sim.c (best 19/200, ref 197). The
 function's /60 and /24 magic-multiply idioms (`0x88888889` = ÷60 signed,
@@ -572,7 +572,7 @@ before the section-1 stores and defers the minutes store past the idiv.
 ~9 formulations (single/shared/scoped temps, inline CSE, struct pointer,
 do-while, zero-var) could not trigger the split. The clock struct is
 `{int days; short hours; int minutes; int seconds;}` packed (SIZE 0xe);
-the caller is `AdvanceGameClock((int*)0x10035880, 0, 1, 0)`.
+the caller is `sim_AdvanceGameClock((int*)0x10035880, 0, 1, 0)`.
 
 ## ReceivePacketHeader (0x1000a340) — blocked (cross-jump + branch polarity)
 
@@ -743,7 +743,7 @@ plus the Ghidra-decomp condition shape `((max <= f) || (min < f)) && (max
 <= f)`. The register-layout of the clamp block (fstp/fld swap, __ftol
 call) follows once the tests match.
 
-## CheckZoneAvailability (0x10014ff0) — DONE (induction-base folding)
+## plt_CheckZoneAvailability (0x10014ff0) — DONE (induction-base folding)
 
 Converted to C, RELOC 175/175. Finding: **MSVC6 folds the largest
 positive address constant into the induction pointer's base when the
@@ -754,7 +754,7 @@ at the loop tail — the same shape as the neighboring `find_zone_record`)
 keeps the base at `zone_table+8` with the reference's `[eax+5]/[eax]/[eax+1]`
 displacements. Struct-field access (`struct zone_record` sized 0x18) does
 NOT prevent the fold — only the increment-form source does. Contrast with
-`FindRecord` (0x10014f30) / `plt_SetPlantMap` scan1 (0x100150a0): there the
+`plt_FindRecord` (0x10014f30) / `plt_SetPlantMap` scan1 (0x100150a0): there the
 reference itself has the +1 folded (`lea esi,[edi+9]`, `[esi-1]/[esi]/[esi+4]`),
 so per-iteration recompute or `p = base+9` is the matching form. Rule of
 thumb: **read the reference's folded base constant from the init `lea`/`add`
@@ -768,7 +768,7 @@ Converted to C, RELOC 257/257. Findings:
   pre-loads `0xffffffff` into edx once (`or edx,0xffffffff`), then uses `dl`
   for the two byte marker compares and `edx` for the dword `-1` store. This
   appears only when C keeps a named `unsigned char marker = 0xff` (as in the
-  neighboring `FindRecord`); literal `0xff` compares compile to
+  neighboring `plt_FindRecord`); literal `0xff` compares compile to
   `cmp byte[mem],0xff` immediates and lose the `or`/`dl` form.
 - **Dead param-slot reuse:** the SearchRecordTable result lands in
   `zone_type`'s stack slot (`mov [esp+0x20],eax`) because zone_type's value
@@ -789,7 +789,7 @@ Converted to C, RELOC 257/257. Findings:
 
 Connection loop iterating 8 slots (`0x101deb00` + `0x264264` stride to
 `0x114ffe20`, signed `jge` end compare — cast to int, else `jae`); per
-slot: flag bit 1 gate, `SendPlayerData`, inner packet loop
+slot: flag bit 1 gate, `srv_SendPlayerData`, inner packet loop
 (pkt at `+0x2641f4`, flag bit 0x100, `memcpy(dst +0xb1, pkt, 0x99)`
 via rep movsd/movsb, `FreeCommandBuffer(conn, pkt)`, clear flag bit,
 re-send). Semantically correct C preserved in server3.c (best 18/132).
@@ -805,10 +805,10 @@ prologue) and re-expresses the pkt load through it (`mov edx,[ebp+0x264143]`).
 assignment, unsigned char* conn) could not move the packet to esi or keep
 the dest lea in-loop.
 
-## m_PoolAlloc (0x10006d20) / InitBuildingTypeTable (0x1000b040) — blocked (alignment-prefixed memset)
+## m_PoolAlloc (0x10006d20) / srv_InitBuildingTypeTable (0x1000b040) — blocked (alignment-prefixed memset)
 
 Both functions otherwise convert cleanly (m_PoolAlloc 234/270 with msvc6
-`/O2 /Gd /Oy-`; InitBuildingTypeTable 261/372 with explicit-store C) but share
+`/O2 /Gd /Oy-`; srv_InitBuildingTypeTable 261/372 with explicit-store C) but share
 a block-fill prelude that msvc6 never emits (shown below to be hand-written
 asm, see "The prelude is hand-written asm" further down). The reference runs
 this **alignment prelude** before the dword stores:
@@ -839,10 +839,10 @@ also spills payload+len to dead param slots (`[ebp+0xc]`/`[ebp+8]`) around
 the memset — a consequence of the prelude's extra register pressure. Suspect
 a service-pack or custom-build codegen difference; preserved C is in
 m_alloc2.c / server4.c. The rest of both functions (alignment calc, node
-search, slot scan, and InitBuildingTypeTable's loop + 42 unrolled constant
+search, slot scan, and srv_InitBuildingTypeTable's loop + 42 unrolled constant
 stores with their `mov al,N` value grouping) matches msvc6 `/O2` exactly.
 
-Additional probes (2026-08, InitBuildingTypeTable specifically): msvc600sp4
+Additional probes (2026-08, srv_InitBuildingTypeTable specifically): msvc600sp4
 and msvc600sp5 also emit the plain dword+tail form (SP1-SP6 now all ruled
 out); a 96-combination flag sweep on the full function body (`/O1 /O2 /Ox
 /Od` × `/G5 /G6` × `/Oy-` × `/Oi` × `/Og-`) produced zero alignment-prelude
@@ -860,7 +860,7 @@ count reproduces either the frame or the prelude. Confirmed: the target's
 function is a leaf (no calls), so a proper-C match cannot reach 372 bytes
 (ceiling 334B / 261 matched bytes).
 
-Re-verified 2026-08-27 (InitBuildingTypeTable, full body, end-to-end via
+Re-verified 2026-08-27 (srv_InitBuildingTypeTable, full body, end-to-end via
 `rebrew test`): 7 whole-function variants (constant / `int n` / dest-copy
 `char *d` / volatile / address-taken counts × dests) × `/O2 /Gd` and
 `/O2 /Gd /Oy-` — best is still 261/372 (334B), every other variant is
@@ -875,7 +875,7 @@ prelude hits; two-arg param probes `memset(p, n)` / `memset(slot+4, 0,
 asize-4)` (the m_PoolAlloc shape) also plain. The prelude template
 (`lea r,[edi+edi*2]; and r,3; sub ebx,ecx; jle; rep stosb; rep stosd;
 rep stosb`) occurs at exactly 6 target sites — m_AllocTracked 0x10006730,
-m_init 0x10006929, m_PoolAlloc 0x10006e0d, InitBuildingTypeTable
+m_init 0x10006929, m_PoolAlloc 0x10006e0d, srv_InitBuildingTypeTable
 0x1000b057, gm_AllocGebaeude 0x10017611, plus a memcpy twin (rep movs)
 at ReadVfsData 0x10008f0c — every one in a function that has never
 byte-matched (SIZE_MISMATCH or only PROVEN).
@@ -924,7 +924,7 @@ offsets (its linked operands are already correct; writing compiled
 offsets into it corrupted the different-layout instruction stream);
 (2) void functions now skip the EAX/EDX comparison entirely (EAX at
 `ret` is unspecified junk for a void cdecl function) and prove by
-memory side effects only. InitBuildingTypeTable is therefore PROVEN:
+memory side effects only. srv_InitBuildingTypeTable is therefore PROVEN:
 `rebrew prove 0x1000b040 --loop-bound 400 --watch-va <252 table dwords>`
 compares every dword of the 0x3f0-byte table (1×1 terminal state
 pairs). Note the high `--loop-bound`: angr's LoopSeer counts each
@@ -940,7 +940,7 @@ stored first, `m:pool_alloc(tp_m_pool)` for the search-miss path with
 `slot += block->size` in the for-increment, and the back-pointer write
 `*(int*)slot = (int)block` before `count++`/`memset(slot+4, 0, asize-4)`.
 The only remaining delta is the found-path memset block (offset 0x10006df7
-on), still the unreproducible alignment-prelude expansion. ShutdownMemoryAllocator
+on), still the unreproducible alignment-prelude expansion. m_ShutdownAllocator
 (0x10006c00) is no longer blocked — see its section below.
 
 Re-verified 2026-08-27 on the full m_PoolAlloc body (runtime count `asize-4`,
@@ -959,13 +959,13 @@ not a constant):
   sub ebx,ecx; jle; rep stosb; ...; rep stosd; ...; rep stosb`) occurs at
   exactly 6 sites — m_AllocTracked 0x10006730, m_init 0x10006929,
   m_PoolAlloc 0x10006e0d, ReadVfsData 0x10008f0c (a **memcpy** variant:
-  `rep movsb/movsd`, src in esi), InitBuildingTypeTable 0x1000b057,
+  `rep movsb/movsd`, src in esi), srv_InitBuildingTypeTable 0x1000b057,
   gm_AllocGebaeude 0x10017611 — all in Finding-19-blocked functions. The
   plain form occurs at independent sites (zlib deflate/lm_init,
-  AllocGraveyardField, setSBUpLow). Both forms coexist in ONE binary.
+  gv_AllocGraveyardField, setSBUpLow). Both forms coexist in ONE binary.
 - Structural discriminator: plain-form sites materialize the count freshly
   into the volatile ecx (`mov eax,[g]; lea ecx,[eax+eax*4]; ...` in
-  AllocGraveyardField); aligned-form sites load the count from a stack slot
+  gv_AllocGraveyardField); aligned-form sites load the count from a stack slot
   into ebx with dest in edi. msvc6 SP6 always keeps runtime counts in ecx —
   fresh or reloaded — so no C shape can steer it onto the ebx/memory path.
   The original build's compiler variant (service-pack/custom-build codegen)
@@ -1199,7 +1199,7 @@ unsigned jb/jae), *slot = 0, count--, and when empty unlink from *pool
 (head case or prev->next walk) + m_FreeTracked; fatal =
 ReportFatalError(0x10028888, 0x279, 0x10028b94).
 
-## ShutdownMemoryAllocator (0x10006c00) — DONE (RELOC 283/283)
+## m_ShutdownAllocator (0x10006c00) — DONE (RELOC 283/283)
 
 Memory-allocator teardown; C in m_alloc2.c, RELOC 283/283. Reproducing the
 reference needed three fixes over the old /tmp/sma.c shape: (1) a single
@@ -1292,7 +1292,7 @@ slot-vs-min check is the compiler's ternary expansion.
 
 ## cm_ExSetAttribute (0x1000e8d0) — blocked (cmd-in-ebp role)
 
-Attribute-set handler; C preserved in cm_ExSetAttribute.c + /tmp/cxsa.c
+Attribute-set handler; C preserved in cm_ExSetAttribute.c
 (best 15/243). The reference keeps cmd in ebp across the
 GetField/Resolve calls; MSVC6 reloads the param slot and schedules the
 resolve arg pushes differently. The descriptor decode is clean: signed
@@ -1301,7 +1301,7 @@ size/count bytes + 16-bit offset, three size-dispatched copy loops
 
 ## cm_ExRemoveLinkedObject (0x1000f0d0) — blocked (result/cmd register roles)
 
-Linked-node removal; C preserved in cm_ExRemoveLinkedObject.c + /tmp/cxrlo.c
+Linked-node removal; C preserved in cm_ExRemoveLinkedObject.c
 (best 22/197). The reference keeps result in edi and the original cmd in esi
 across the resolve/query calls (with the resolve's 2nd out writing into the
 result param slot); MSVC6 keeps both in volatile registers. The decode is
@@ -1312,7 +1312,7 @@ result+0x14) with the -2/-1/0/eax return conventions.
 ## cm_ExChangeAttribute (0x1000e7d0) — blocked (cmd-in-ebp / dst-in-edi roles)
 
 Attribute accumulator (the `*dst += src` sibling of cm_ExSetAttribute); C
-preserved in cm_ExChangeAttribute.c + /tmp/cxca.c (best 18/261). Same
+preserved in cm_ExChangeAttribute.c (best 18/261). Same
 blocker class: the reference keeps the original cmd in ebp and dst_base in
 edi across the descriptor loop; MSVC6 reloads the param slots. The Ghidra
 reference at the top of the file matches the decode exactly.
@@ -1323,7 +1323,7 @@ reference at the top of the file matches the decode exactly.
 
 ### Converted to byte-identical C (all RELOC, verified via `rebrew verify` 245/245, build hash c7ac331f)
 
-**FindAndMatchParents (0x100151e0, 535B)** — `gm_RandomMod` parent scan.
+**sim_FindAndMatchParents (0x100151e0, 535B)** — `gm_RandomMod` parent scan.
 - The loop values are `unsigned short`: the compares compile to 16-bit
   `cmp bp/si, 0xffff` and the return-0 epilogue to `xor ax,ax` — the return
   type is `unsigned short` (the whole-register `mov ebp,eax` after the call
@@ -1464,7 +1464,7 @@ account for the remaining 5B (856 vs 861); ~10 C expression variants
 outer-tail temps) and a /G3 /G5 /G6 /GB /O1 flag sweep all compile to the
 same fold. Semantics match throughout (slice-proven).
 
-**GetCommandPayloadSize (0x1000c710) — 494/752 (switch preamble + case split).**
+**ahm_GetCommandPayloadSize (0x1000c710) — 494/752 (switch preamble + case split).**
 The fence's #else C is a partial reconstruction of the 103-case payload-size
 switch.  Two blockers: (1) the switch preamble — the reference emits
 `mov dl,[eax]; mov ecx,edx; and ecx,0xff; add ecx,-3; cmp ecx,0x66; ja;
@@ -1483,7 +1483,7 @@ explicit variable) and the /O1 /Ox /Og sweep did not change the preamble.
 
 The rebrew codegen docs (`docs/codegen/msvc/msvc-6.md`) claim the /O2
 unsigned-char form is `and eax,0xff` (`25 ff 00 00 00` / `81 e1 ff 00 00 00`)
-— the 5.0/6.0 marker.  The GetCommandPayloadSize (0x1000c710) target shows
+— the 5.0/6.0 marker.  The ahm_GetCommandPayloadSize (0x1000c710) target shows
 exactly this in its switch preamble, yet every probe of a bare byte load
 produced `xor reg,reg; mov reg_low,[mem]`, and the file's own investigation
 comment claimed no available MSVC build reproduces the and-idiom.  The
@@ -1511,7 +1511,7 @@ Probes (docker msvc6 12.00.8168, /O2):
 The fold of `(cond ? CONST : CONST)` with equal constant arms REMOVES the
 comparison and kills the byte's liveness → xor-form.  A ternary with
 VARIABLE or POINTER arms does NOT fold (MSVC6 evaluates the condition, then
-selects) → byte stays live → and-form.  For GetCommandPayloadSize the
+selects) → byte stays live → and-form.  For ahm_GetCommandPayloadSize the
 decisive change was the cursor expression:
 
 ```c
@@ -1521,7 +1521,7 @@ cursor = cmd_payload + (*cmd_payload == 0x16 ? 0x15 : 0x15);
 cursor = (*cmd_payload == 0x16) ? (cmd_payload + 0x15) : (cmd_payload + 0x15);
 ```
 
-This raised GetCommandPayloadSize from 494 to 623 matches and produced the
+This raised ahm_GetCommandPayloadSize from 494 to 623 matches and produced the
 target's exact preamble shape (`mov reg_low,[eax]; mov reg2,reg; and
 reg2,0xff; add reg2,-3; cmp reg2,0x66; ja; jmp [reg2*4+table]`) — the
 previous "needs the original's exact CL.EXE build" conclusion in the file
@@ -1558,11 +1558,11 @@ The earlier sweeps tried only the /O and /G axes by hand (~6 combos).
 `/Ob0..2` (inlining), `/ML /MT /MD /MLd /MTd /MDd` (runtime library),
 `/Zp1..16` (alignment), `/GX` (EH), `/Gs` (stack checking), `/GZ` (debug
 checks), `/GR` (RTTI), `/TP` (C++ mode).  A targeted-tier run on the
-GetCommandPayloadSize reconstruction produced no improvement (the register
+ahm_GetCommandPayloadSize reconstruction produced no improvement (the register
 roles are not flag-selectable); the run confirmed the register-role blockers
 are structural, not flag-fixable.
 
-### GetCommandPayloadSize follow-up: 494 → 742 (three more levers found)
+### ahm_GetCommandPayloadSize follow-up: 494 → 742 (three more levers found)
 
 Continuing from the and-idiom resolution, three further levers took the
 reconstruction from 623 to 742/752 (sizes match):
@@ -1591,7 +1591,7 @@ reconstruction from 623 to 742/752 (sizes match):
    explicit `unsigned char sw` switch-value variable (which regressed to
    599), and the flag sweep (targeted tier) did not move them.
 
-### Register-role residue confirmed for GetCommandPayloadSize (742/752)
+### Register-role residue confirmed for ahm_GetCommandPayloadSize (742/752)
 
 The final 10 bytes are exclusively register-role encodings in the switch
 preamble and the case-0x16 count setup: the reference uses `dl` for the
@@ -1914,7 +1914,7 @@ bytes match (arg1-based semantics — `mov ebp,[esp+0x10]` after `push esi` is
 *a reload of arg1*, not arg2; the `b+4 < bound` / `b+1 < bound` loop-bound
 idiom from Finding 20 applies).  Kept fenced-naked.
 
-## Finding 22 — SwapOfficeHolders (0x1000b880): register-name residue (264/263)
+## Finding 22 — amt_SwapOfficeHolders (0x1000b880): register-name residue (264/263)
 
 The best C is 264 bytes vs 263 target — every instruction shape, order, and
 slot matches; only *register names* differ.  The allocator assigns
@@ -1944,7 +1944,7 @@ The remaining 8-byte residue is a pure allocator register-preference quirk
 (ebp for the entry parameter vs ebx) with no C-shape lever found.  Kept
 fenced-naked.
 
-## Finding 23 — ValidateOfficeCandidate (0x1000b1c0): fail-block sinking + loop rotation
+## Finding 23 — amt_ValidateOfficeCandidate (0x1000b1c0): fail-block sinking + loop rotation
 
 Best C is 244 bytes vs 205 target.  The reference's structure: the two
 search loops are *non-rotated* do-whiles (`cmp byte [eax],dl; je found; add;
@@ -2042,7 +2042,7 @@ same 130B.  The type*589 index chain (lea 3t; shl 4; +t; lea *3; lea
 [base+*4]) and the four `gm_ff_Objekt(v,1,0,code)` dispatch calls
 match.  Kept fenced-naked.
 
-## Finding 28 — AdvanceGameClock (0x100155c0): arg4 preserve vs reload
+## Finding 28 — sim_AdvanceGameClock (0x100155c0): arg4 preserve vs reload
 
 Best C is 215 bytes vs 197 target.  The reference keeps only esi as a
 callee-saved register and RELOADS arg4 from its stack slot after the idiv
@@ -2337,7 +2337,7 @@ CheckSlotActive call, and the ternary clamp `(val <= 0) ? 0 : val`
 (branchless setle/dec/and) all match.  Two scheduler fixed-points
 remain:
 
-1. **GetSlotEntry arg setup.**  The reference loads the byte arg3
+1. **gv_GetSlotEntry arg setup.**  The reference loads the byte arg3
    first (`mov dl,[edi+0x10]; mov eax,[edi+0xc]; push edx; push eax`)
    with NO zero/sign extension (raw byte push — the callee reads only
    the low byte); every C either zero-extends (`xor edx,edx; mov dl`
@@ -2424,7 +2424,7 @@ rewrites, volatile pins on `type`/`entity`/`workers`/`cursor`, parameter
 homing, MSVC6 SP1/SP2/SP4, and a full CFLAGS sweep (all ties at 97500,
 `/G3` and peers, exact=false).  Each left 263/320 or scored worse.
 
-## Finding 48 — SpawnGraveyardEntities (0x10010850): prologue region-split (cold-path saves)
+## Finding 48 — gv_SpawnEntities (0x10010850): prologue region-split (cold-path saves)
 
 [2026-08-24 exhaustive follow-up — goal-mode audit.]  Best C is 292/370
 positional (10+ formulations).  Additional evidence gathered:
@@ -2457,7 +2457,7 @@ available compilers).  Kept fenced-naked; C preserved in #else.
 
 Best C is 291/370 positional (5+ formulations).  The entire body decodes
 and matches: the `dword_100a8c30 + (uchar)*a * 589` type check (field
-`tp[0x247]` in 1..3), the `gv_FindSlotEntryFiltered(0, a, 0,
+`tp[0x247]` in 1..3), the `FindSlotEntryFiltered(0, a, 0,
 0x10010700, 0)` slot acquisition, the `*p = g_next_object_id++` counter bump,
 the `slot+4/+8/+0xa/+0xc` field stores, the 5-iteration `gm_RandomMod`
 byte fill (offsets +0x24..+0x28), the four `gm_RandomMod`+1 dword stores
@@ -2490,7 +2490,7 @@ the running slot pointer `p` from the reused arg-3 stack slot each outer
 iteration.  A named `zero` variable and a `q = p - base` offset both fail
 to stop the elimination.  Kept fenced-naked; C preserved in #else.
 
-## Finding 50 — AllocGraveyardField (0x100109d0): alloc/field-init loop allocation
+## Finding 50 — gv_AllocGraveyardField (0x100109d0): alloc/field-init loop allocation
 
 RESOLVED — now RELOC (832/832 byte-match, 13 relocs) as proper C under
 `msvc600sp6`.  The validation/alloc head is byte-identical (the
