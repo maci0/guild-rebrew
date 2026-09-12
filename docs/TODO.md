@@ -326,10 +326,23 @@ intra-section alignment.  Emitting it means an object whose section carries
 16-byte alignment — the split objects take their alignment from the member, so
 a 5-byte one left at 1-byte alignment would land `_strchr` at -11, not -16.
 
-**Next step:** the missing 5-byte tail at 0x1001af20, then the CRT functions no
-LIBCMT variant carries at all — `allmul_slow` (0x10022f29, 27 B), `unlock_9`
-(0x1001b8a5, 86 B) and the `unlock_09e/f/g` group (0x1001b757 334,
-0x1002001d 137, 0x100200a6 156) — which have to be written as C.
+**Next step:** the missing 5-byte tail at 0x1001af20 (done in round 47), then
+the CRT functions no LIBCMT variant carries at all — `allmul_slow`
+(0x10022f29, 27 B), `unlock_9` (0x1001b8a5, 86 B) and the `unlock_09e/f/g`
+group (0x1001b757 334, 0x1002001d 137, 0x100200a6 156).
+
+**Correction (round 48): those are not missing.**  Every one of them is
+*interior* to a section we already emit — `unlock_9` sits at offset 729 and
+`unlock_09e` at offset 395 of the 815-byte `1001b5cc_.text.obj`
+(`realloc.obj` §1); `unlock_09f` at +153 and `unlock_09g` at +290 of the
+317-byte `1001ff84_.text.obj`; `allmul_slow` at +25 of the 52-byte
+`10022f10_.text.obj`.  `map_libcmt` only walks catalog entries, so a Ghidra
+split inside a member section shows up as an unmatched catalog row even though
+the bytes are emitted.  Nothing has to be written by hand.  The only two
+uncovered VAs left in the whole CRT are `srand` (0x1001a150, 12 B) and the
+eighth IAT thunk `_RtlUnwind@16` (0x10023840, 6 B) — the reference's `.text`
+ends there, and `emit_thunks.py` only emits the seven socket thunks because
+they are the ones that sit together at 0x1001a160.
 
 ## The map did not say which library it matched in (2026-09-13, round 45)
 
