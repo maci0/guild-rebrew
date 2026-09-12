@@ -231,33 +231,41 @@ section now contributes no bytes and keeps `SizeOfRawData = raw_size` with
 path is unchanged — regenerating the plain `--closure` set still reproduces
 **0x246e6**, so nothing earlier in this line moved.
 
-**3. `--with-commons` is parked.**  The six remaining pulls are driven by
-symbols that no member *section* defines: `mbctype.obj` declares `__mbctype` as
-section 0 value 0x101, `___mbcodepage` 4, `___mbulinfo` 0xc, and `crt0dat.obj`
-declares `__FPinit` / `___onexitbegin` / `___mbctype_initialized`, `winxfltr`
-`__XcptActTab`, `exsup` `__except_list`, `dllcrt0` `__cinit` — all *common*
-symbols, which the linker allocates, so LINK searches the archive and takes the
-whole member.  `--with-commons` emits them as a synthetic `.bss` holding each
-at its aligned offset (size from the symbol's `Value` field, as COFF records
-for a common).  LINK rejects the result:
+**3. The commons are emitted as standalone objects, and that is worth another
+571 bytes.**  The six remaining pulls are driven by symbols that no member
+*section* defines: `mbctype.obj` declares `__mbctype` as section 0 value 0x101,
+`___mbcodepage` 4, `___mbulinfo` 0xc, and `crt0dat.obj` declares `__FPinit` /
+`___onexitbegin` / `___mbctype_initialized`, `winxfltr` `__XcptActTab`, `exsup`
+`__except_list`, `dllcrt0` `__cinit` — all *common* symbols, which the linker
+allocates, so LINK searches the archive and takes the whole member.
 
-```
-1001a670_.text.obj : fatal error LNK1143: invalid or corrupt file:
-                     no symbol for comdat section 0x2
-```
+`scripts/emit_commons.py` emits one tiny one-section object per member holding
+that member's commons in a `.bss` (each at its aligned offset, size from the
+symbol's `Value` field as COFF records for a common), one object per member,
+deduplicated by symbol name across libraries; `make_split_rsp.py --commons`
+adds them to the link line.  Result: `mbctype.obj` drops out of the pull list,
+6 -> 5 members, `.text` 0x238c1 -> **0x23686** (-571 bytes).
 
-and after fixing the section-count accounting in the file layout (the
-synthetic header has to be included when the symbol offset is computed) the
-symbol table still came out unreadable to objdump ("bad string table size"), so
-the generator is left behind the flag rather than in the default path.  The
-thing to bisect next time is the interaction between the appended section and
-the real COMDAT section symbols — the synthetic section is not a COMDAT and
-should not need a section symbol of its own.
+**The failure this replaced was a two-byte bug, not a COMDAT problem.**  The
+first attempt folded the synthetic `.bss` into the split object itself and LINK
+rejected it (`LNK1143: invalid or corrupt file: no symbol for comdat section
+0x2`), and after correcting the section-count accounting the symbol table was
+still unreadable ("bad string table size").  The cause was in the object
+writer, not in the linker's COMDAT rules: a section header's name is 8 bytes,
+and `sec[0:5] = b".bss\0\0\0"` assigns **seven** bytes into a five-byte slice,
+which *resizes* the bytearray and shifts every following offset by two.  With
+`sec[0:8] = b".bss\0\0\0\0"` the same synthetic section is fine.  The
+in-object `--with-commons` path keeps the code but stays off by default; the
+standalone-object route is simpler and is what the numbers above use.
 
-**Current state of this half:** `--closure --with-data` links clean at
-**0x238c1** (reference 0x22846, +4,219 bytes), 6 members / 1,635 bytes still
-pulled, and `--with-commons` is the next lever.  `/ENTRY:_DllMainCRTStartup@12`
-is worth a further 2 bytes whenever the entry question is settled.
+**Current state of this half:** `--closure --with-data` plus the commons
+objects links clean at **0x23686** (reference 0x22846, **+0xE40 = 3,648
+bytes**), down from 0x246f6 at the start of this line — 4,208 bytes removed in
+three rounds.  Five members are still pulled (`crt0dat.obj`, `dllcrt0.obj`,
+`dllmain.obj`, `exsup.obj`, `winxfltr.obj`) and the next causes to attack are
+`_DllMain@12` (the `/ENTRY:` symbol), `__CRT_INIT@12`, and the `__cinit` /
+`___xc_a` cascade into `crt0dat.obj`.  `/ENTRY:_DllMainCRTStartup@12` is worth
+a further 2 bytes whenever the entry question is settled.
 
 ## `split_coff --with-data` removes 3,617 bytes of the overshoot (2026-09-13, round 28)
 

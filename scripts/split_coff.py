@@ -344,7 +344,7 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
 
     if synth_sec:
         synth = bytearray(40)
-        synth[0:5] = b".bss\0\0\0"
+        synth[0:8] = b".bss\0\0\0\0"
         struct.pack_into("<I", synth, 8, synth_total)
         struct.pack_into("<I", synth, 16, synth_total)
         struct.pack_into("<I", synth, 20, 0)

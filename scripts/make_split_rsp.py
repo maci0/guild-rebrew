@@ -55,6 +55,9 @@ def main() -> int:
     ap.add_argument("--split", required=True, help="split_coff output directory")
     ap.add_argument("--objects", required=True, help="objects1.rsp from the CMake build")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--commons", help="directory from scripts/emit_commons.py; its "
+                    "objects define the mapped members' common symbols so LINK "
+                    "stops loading whole members for them")
     ap.add_argument("--no-sort", action="store_true",
                     help="keep split_coff's index order (the pre-round-27 behaviour)")
     args = ap.parse_args()
@@ -80,7 +83,11 @@ def main() -> int:
             tail.append(t)
         else:
             mid.append(t)
-    ordered = [e["obj"].replace(str(ROOT / "build") + "/", "") for e in index]
+    extra_objs = []
+    if args.commons:
+        for f in sorted((ROOT / args.commons).glob("*.obj")):
+            extra_objs.append(f.relative_to(ROOT / "build").as_posix())
+    ordered = [e["obj"].replace(str(ROOT / "build") + "/", "") for e in index] + extra_objs
     (ROOT / args.out).write_text(" ".join(head + mid + ordered + data + tail))
     print(f"{len(ordered)} split objects -> {args.out} "
           f"({len(head) + len(mid) + len(ordered) + len(data) + len(tail)} tokens)")
