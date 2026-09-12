@@ -96,12 +96,14 @@ def main() -> int:
         for f in sorted((ROOT / args.commons).glob("*.obj")):
             extra_objs.append(f.relative_to(ROOT / "build").as_posix())
     ordered = [e["obj"].replace(str(ROOT / "build") + "/", "") for e in index]
-    thunk_objs = []
+    thunk_objs, tail_thunks = [], []
     if args.thunks:
         for f in sorted((ROOT / args.thunks).glob("*.obj")):
-            thunk_objs.append(f.relative_to(ROOT / "build").as_posix())
+            dest = tail_thunks if f.stem.endswith("_tail") else thunk_objs
+            dest.append(f.relative_to(ROOT / "build").as_posix())
     (ROOT / args.out).write_text(
-        " ".join(head + mid + thunk_objs + ordered + extra_objs + data + tail))
+        " ".join(head + mid + thunk_objs + ordered + tail_thunks
+                 + extra_objs + data + tail))
     print(f"{len(ordered)} split objects + {len(thunk_objs)} thunk objects -> {args.out} "
           f"({len(head) + len(mid) + len(ordered) + len(data) + len(tail)} tokens)")
     return 0

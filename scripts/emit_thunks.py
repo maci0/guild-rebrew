@@ -48,6 +48,15 @@ THUNKS = {
     0x10024180: "_socket@12",       # socket(af, type, protocol)
 }
 
+#: IAT VA -> symbol for thunks that are NOT adjacent to the socket group.  The
+#: reference's `.text` ends with `jmp dword ptr [0x10024124]` at 0x10023840,
+#: six bytes past `_mbsdup` -- the `_RtlUnwind@16` thunk that `except_handler3`
+#: calls.  It has to be emitted as its own object placed after the CRT
+#: objects, so make_split_rsp puts it in a separate group.
+TAIL_THUNKS = {
+    0x10024124: "_RtlUnwind@16",   # RtlUnwind(target, frame, value, ctx)
+}
+
 
 def text_at(data: bytes, va: int, size: int) -> bytes:
     e = struct.unpack_from("<I", data, 0x3C)[0]
@@ -135,17 +144,27 @@ def main() -> int:
         code = text_at(data, iat - 0x10, 8)   # cheap sanity read, not used
         del code
         thunks.append((sym, None, iat))
-    # read the real six bytes at the thunk VA by searching for `ff 25 <iat>`
+    # The body must be `ff 25 00000000`: the DIR32 relocation supplies the IAT
+    # address, and the value already in the bytes is ADDED to it.  Using the
+    # reference's own six bytes (which contain the address) doubled every
+    # operand, so all eight thunks read `jmp [2 * IAT]` instead of `jmp [IAT]`.
     for i, (sym, _c, iat) in enumerate(thunks):
         pat = b"\xff\x25" + struct.pack("<I", iat)
-        pos = data.find(pat)
-        if pos < 0:
+        if data.find(pat) < 0:
             raise SystemExit(f"no thunk for {sym} ({iat:#x})")
-        thunks[i] = (sym, pat, iat)
+        thunks[i] = (sym, b"\xff\x25\x00\x00\x00\x00", iat)
     (out / "import_thunks.obj").write_bytes(build_object(thunks))
+
+    tail = []
+    for iat, sym in sorted(TAIL_THUNKS.items(), key=lambda kv: -kv[0]):
+        pat = b"\xff\x25" + struct.pack("<I", iat)
+        if data.find(pat) < 0:
+            raise SystemExit(f"no thunk for {sym} ({iat:#x})")
+        tail.append((sym, b"\xff\x25\x00\x00\x00\x00", iat))
+    (out / "import_thunks_tail.obj").write_bytes(build_object(tail))
     (out / "index.json").write_text(json.dumps(
         [{"symbol": s, "iat": iat} for s, _c, iat in thunks], indent=1))
-    print(f"wrote {len(thunks)} thunks to {out / 'import_thunks.obj'}")
+    print(f"wrote {len(thunks)} thunks + {len(tail)} tail thunks to {out}")
     return 0
 
 
