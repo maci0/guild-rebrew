@@ -12,7 +12,7 @@ the round-by-round entries below establish.
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
 | standard CMake link, `.text` | 0x2276c (-218), postlink coverage 401/7,463 (5.4%) | — |
-| split-set link (LIBCMT member objects), `.text` | 0x22c8a; 38 of 330 symbols exactly at their reference VA, sum of abs delta 114,890, 10 objects discarded | — |
+| split-set link (LIBCMT member objects), `.text` | 0x22b8a; 38 of 330 symbols exactly at their reference VA, 0 LIBCMT archive pulls, 11 duplicate objects discarded | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
 | CRT split-set leftovers | **34** symbols across ~10 members | 5,294 B |
@@ -208,6 +208,63 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## LINK was pulling exsup.obj out of LIBCMT (2026-09-13, round 43)
+
+The split link had **five symbols satisfied by an archive member**:
+
+```
+0001:00022bb4  _gu_return                10023bb4 f   LIBCMT:exsup.obj
+0001:00022bbc  __unwind_handler          10023bbc f   LIBCMT:exsup.obj
+0001:00022c46  __abnormal_termination    10023c46 f   LIBCMT:exsup.obj
+0001:00022c72  __NLG_Notify              10023c72 f   LIBCMT:exsup.obj
+0001:00022c85  __NLG_Dispatch            10023c85 f   LIBCMT:exsup.obj
+```
+
+LINK could not find them among our objects, so it pulled the whole
+`exsup.obj` member and appended it **after** everything else, at 0x10023bb4 —
+256 bytes at the end of `.text` instead of in the CRT region.
+
+**Why they were missing.**  `exsup.obj` §1 is one 238-byte section holding
+seven reference functions at offsets 0, 24, 32, 66, 154, 170, 205, 214 and
+233.  `map_libcmt` already recorded which one each VA matched, through the
+symbol's offset in the section, but `split_coff` emitted every entry as the
+section from byte 0 and then `--trim` dropped every symbol past the reference
+function's length.  `__abnormal_termination` sits at offset 170; the entry at
+0x1001e78e is 35 bytes long, so it was discarded along with the bytes it
+belonged to.
+
+**Fix: `build_object` grew a `start`.**  The body becomes
+`body[start:start+trim]`, symbol values and relocation offsets are rebased,
+symbols and relocations outside the slice are dropped, and the root COMDAT's
+section symbol is never dropped (a COMDAT without one is `LNK1143: no symbol
+for comdat section`).  Sliced objects also get an **empty alias set** — the
+alias index lists every spelling of the *whole* section, and exporting those
+from each slice puts the same symbols on several objects again.
+
+**A second bug surfaced on the way.**  The pre-existing trim filter
+(`sym["value"] >= trim`) was still applied to sliced objects, so the slice at
+offset 170 dropped `__abnormal_termination` because `170 >= 35` — it deleted
+the very symbol the slice exists to define.  It now applies only when
+`start == 0`.
+
+| | before | after |
+|---|---|---|
+| symbols satisfied by a LIBCMT archive member | 5 | **0** |
+| split-set `.text` | 0x22c8a (+1092) | **0x22b8a (+836)** |
+| objects LINK discards | 10 | 11, all duplicates |
+
+Slicing is skipped when the section `split_coff` actually loaded is not code,
+or when the offset is past its end, because the map records the section of the
+*first* library that matched while `split_coff` resolves the member against the
+first library that has it.
+
+**Method note.**  Checking whether a discarded object's content is really lost
+by searching the built `.text` for the reference's exact bytes gives false
+negatives for any block containing a `call`: the rel32 depends on the drifted
+callee address.  Compare the two blocks with their relocations set aside
+instead — that is how the ten duplicates in the round-42 entry were confirmed
+harmless.
+
 ## Three CRT members carry the same 101 bytes (2026-09-13, round 42)
 
 The alias mechanism in `split_coff` exports every byte-identical spelling of a
@@ -229,11 +286,26 @@ The exclusion now covers the mapped sections of **every** member
 | objects LINK discards | 14 (541 B) | **10 (280 B)** |
 | delta range | -0x2b0 .. +0x22c | **-0x264 .. +0x25c** |
 
-**The ten remaining discards are seven harmless and three real.**  Seven are
-the `$L21349` / `$L21312` fragments with a zero-length `.text` — nothing is
-lost when LINK drops them.  The three that cost bytes are
-`1001e7dc___except_handler3.obj` (216), `1001e899___seh_longjmp_unwind_4.obj`
-(27) and `1001ba7f___amsg_exit.obj` (37).
+**All ten remaining discards are harmless duplicates — verified, not assumed.**
+Seven are the `$L21349` / `$L21312` fragments with a zero-length `.text`.  The
+other three look like losses and are not:
+
+| discarded | reference VA | but the bytes are emitted by |
+|---|---|---|
+| `1001e7dc___except_handler3.obj` | 0x1001e7dc | `1001e7d4_.text.obj`, at +8 — found at 0x1001e5e4 |
+| `1001e899___seh_longjmp_unwind_4.obj` | 0x1001e899 | same object, at +197 — found at 0x1001e769 |
+| `1001ba7f___amsg_exit.obj` | 0x1001ba7f | `1001ba71_.text.obj`, at +14 — found at 0x1001b81b |
+
+The quick check that suggested otherwise was wrong: searching the built `.text`
+for the reference's exact bytes fails for any block containing a `call`, because
+the rel32 depends on the drifted callee address.  Comparing the two blocks with
+their relocations set aside shows `__amsg_exit` at 0x1001b81b is byte-for-byte
+the reference's, and the exsup3 and seh_longjmp interiors are present at their
+expected offsets inside the object that carries the whole section.
+
+**So the split set is not losing content.  It has the opposite problem: its
+`.text` is 0x22c8a against the reference's 0x22846, 1092 bytes too long.**  The
+CRT half's remaining work is placement and duplication, not missing bytes.
 
 **Why the exsup3 pair is hard.**  `exsup3.obj` §1 is one 224-byte section
 holding *three* reference functions, and `map_libcmt` records which one it
@@ -247,22 +319,13 @@ matched through the symbol's offset inside the section:
 
 `split_coff` never sees that offset, so all three emit the section from byte
 0, trimmed to three different lengths.  The first object carries the closure
-and so defines all three symbols, and the other two are then duplicates.
-Teaching `build_object` to emit a *slice* (a `start` alongside `trim`, with
-symbol values and relocation offsets rebased, and the root COMDAT section
-symbol never dropped) was implemented and measured:
+and so defines all three symbols, and the other two are then duplicates —
+which is harmless here, because the section is emitted once and the interior
+functions sit at the right relative offsets inside it.
 
-| | no slice | slice |
-|---|---|---|
-| sum of abs delta | 114,890 | **113,474** |
-| symbols exactly at their VA | 38 | 38 |
-| symbols placed | 327 | 320 |
-| objects discarded | 10 | 12 |
-
-It is correct in principle — the fragment bytes come out right — but it loses
-more content than it recovers, because the slices still export the whole
-section's alias set and two more objects (35 and 24 bytes) became duplicates.
-Reverted.  Retry it *together with* a per-slice symbol set.
+See the round-43 entry below for the case where *not* slicing was not
+harmless: `exsup.obj`, where the same omission left three symbols undefined
+and made LINK pull the whole member out of LIBCMT.
 
 **Cross-library section indices are a trap.**  A map entry can name a section
 that only exists in a later service pack: vc7's `popen.obj` has 21 sections
