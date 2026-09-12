@@ -531,6 +531,23 @@ def main() -> int:
         for e in mapping["matched"]:
             if e["member"] == member:
                 sizes[int(e["va"], 16)] = e["size"]
+        # External names defined by THIS member's mapped sections.  They must not
+        # be exported as aliases from each other's objects: crt0dat.obj §14 and
+        # §16 are byte-identical (`__lockexit` / `__unlockexit`), and fread.obj
+        # §1 is byte-identical to fwrite.obj §1, so the alias index lists both
+        # spellings for each body.  Exporting the sibling's name as well makes
+        # two of our objects define the same symbol, and LINK then discards one
+        # of them — which is what left the CRT region 9 and 47 bytes short.
+        member_names = set()
+        for _sec_i in mapped:
+            for _sym in coff.symbols:
+                if (
+                    _sym["section"] == _sec_i + 1
+                    and _sym["storage_class"] == 2
+                    and not _sym["name"].startswith(".")
+                ):
+                    member_names.add(_sym["name"])
+
         for n, (va, symbol, section) in enumerate(funcs_sorted):
             entry_size = sizes.get(va)
             root_sec = find_section(symbol, section)
@@ -541,7 +558,7 @@ def main() -> int:
             name = f"{va:08x}_{safe}.obj"
             aliases = alias_index.get(masked_body(coff.data, coff.sections[root_sec]), set()) - {
                 symbol
-            }
+            } - member_names
             (outdir / name).write_bytes(
                 build_object(
                     coff, root_sec, symbol, mapped, claimed, False, aliases,

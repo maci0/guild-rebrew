@@ -138,6 +138,28 @@ def reloc_mask(obj: bytes, section: dict) -> set[int]:
     return mask
 
 
+def member_section_counts(path: Path) -> dict[str, int]:
+    """member name -> number of COFF sections in that library's copy.
+
+    split_coff resolves a member by NAME against the first library that has it,
+    so a section index that is only valid in a later service pack is unusable:
+    vc7's popen.obj has 21 sections where the 6.0 ones have 9, and a map entry
+    pointing at vc7 §17 makes the splitter index past the end.
+    """
+    counts = {}
+    members = ar_members(path.read_bytes())
+    resolve = make_name_resolver(members)
+    for raw_name, obj in members:
+        name = resolve(raw_name)
+        if not name.endswith(".obj") or len(obj) < 20:
+            continue
+        try:
+            counts[name] = len(coff_sections(obj))
+        except (struct.error, IndexError):
+            continue
+    return counts
+
+
 def index_library(path: Path) -> list[tuple[str, str, bytes, dict, int, int, set[int]]]:
     """(symbol, member, object bytes, section, section index, value, reloc mask)."""
     members = ar_members(path.read_bytes())
@@ -200,8 +222,24 @@ class Reference:
         return self.img[off : off + size]
 
 
-def match(index, data: bytes):
+def match(index, data: bytes, exclude=None, canon=None):
+    """First library section whose fixed bytes equal `data`.
+
+    `exclude` holds `(member, section, value)` keys already assigned to another
+    reference VA.  Several CRT members carry two COMDAT sections with byte-
+    identical bodies that differ only in their relocation target: crt0dat's
+    `_lock` and `_unlock` wrappers are both `6a0d e8???? ???? 59 c3`, and
+    fread.obj's `_crt_locked_call4a` equals its own `_fread` helper.  Without
+    exclusion the second VA re-matches the first section, the two emitted
+    objects come out byte-identical, and LINK discards one of them.
+    """
+    exclude = exclude or set()
+    canon = canon or {}
     for sym, member, obj, sec, section, value, mask in index:
+        if (member, section, value) in exclude:
+            continue
+        if section > canon.get(member, section):
+            continue
         body = obj[sec["raw_ptr"] + value : sec["raw_ptr"] + sec["raw_size"]]
         # The catalog's size for a function is often padded (or truncated)
         # relative to the member's COMDAT section, so compare the common
@@ -216,7 +254,7 @@ def match(index, data: bytes):
             if body[i] != data[i] and i not in slots:
                 break
         else:
-            return member, sym, section
+            return member, sym, section, value
     return None
 
 
@@ -263,12 +301,21 @@ def main() -> int:
             )
         lib_paths.append(lp)
     lib_indexes = [(lp, index_library(lp)) for lp in lib_paths]
+    # Section indices that split_coff cannot honour, because it will resolve the
+    # member against a different (earlier) library's copy of it.
+    canon: dict[str, int] = {}
+    for lp, _ix in lib_indexes:
+        for member, count in member_section_counts(lp).items():
+            canon.setdefault(member, count)
     index = lib_indexes[0][1]
     ref = Reference(root / args.target_bin)
     rows = load_catalog(root)
     floor = int(args.from_va, 16)
 
     hits, miss = [], []
+    # Sections already handed to an earlier reference VA.  Re-using one would
+    # make two emitted objects byte-identical, and LINK keeps only the first.
+    claimed = set()
     for va, name, size in rows:
         if size < MIN_BYTES:
             continue
@@ -277,10 +324,19 @@ def main() -> int:
             continue
         got = None
         for _lp, _ix in lib_indexes:
-            got = match(_ix, data)
+            got = match(_ix, data, claimed, canon)
+            if got is None:
+                # Nothing left unclaimed in THIS library: either the VA really
+                # is an alias of another name for the same body (dup/strdup sit
+                # at one VA), or the only other candidate lives in a different
+                # service pack whose member has a different section layout —
+                # split_coff resolves members against the first library that
+                # has them, so a cross-variant section number is not usable.
+                got = match(_ix, data, None, canon)
             if got:
                 break
         if got:
+            claimed.add((got[0], got[2], got[3]))
             hits.append((va, name, size, got[0], got[1], got[2]))
         else:
             miss.append((va, name, size))
