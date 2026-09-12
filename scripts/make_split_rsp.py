@@ -55,6 +55,9 @@ def main() -> int:
     ap.add_argument("--split", required=True, help="split_coff output directory")
     ap.add_argument("--objects", required=True, help="objects1.rsp from the CMake build")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--thunks", help="directory from scripts/emit_thunks.py; its "
+                    "objects are inserted between the game objects and the CRT "
+                    "objects, where the reference has its IAT thunks")
     ap.add_argument("--defs", help="directory from scripts/emit_defs.py; its objects "
                     "define the sections the split set leaves undefined")
     ap.add_argument("--commons", help="directory from scripts/emit_commons.py; its "
@@ -92,9 +95,14 @@ def main() -> int:
     if args.commons:
         for f in sorted((ROOT / args.commons).glob("*.obj")):
             extra_objs.append(f.relative_to(ROOT / "build").as_posix())
-    ordered = [e["obj"].replace(str(ROOT / "build") + "/", "") for e in index] + extra_objs
-    (ROOT / args.out).write_text(" ".join(head + mid + ordered + data + tail))
-    print(f"{len(ordered)} split objects -> {args.out} "
+    ordered = [e["obj"].replace(str(ROOT / "build") + "/", "") for e in index]
+    thunk_objs = []
+    if args.thunks:
+        for f in sorted((ROOT / args.thunks).glob("*.obj")):
+            thunk_objs.append(f.relative_to(ROOT / "build").as_posix())
+    (ROOT / args.out).write_text(
+        " ".join(head + mid + thunk_objs + ordered + extra_objs + data + tail))
+    print(f"{len(ordered)} split objects + {len(thunk_objs)} thunk objects -> {args.out} "
           f"({len(head) + len(mid) + len(ordered) + len(data) + len(tail)} tokens)")
     return 0
 

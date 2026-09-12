@@ -208,6 +208,49 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## The socket IAT thunks now sit where the reference has them (2026-09-13, round 32)
+
+Round 31 named 42 of the missing 74 CRT-pre bytes: the seven
+`jmp dword ptr [IAT]` stubs at 0x1001a160..0x1001a18a that the reference's
+`SendBroadcastPacket` calls from nine sites.  They exist because the original
+source declares those imports without `__declspec(dllimport)`, so MSVC emits a
+five-byte `call _socket@12`; ours does the same, but LINK takes the thunk from
+`WS2_32.lib` and archive members are appended after every command-line object,
+so it lands at the end of `.text` instead.
+
+`scripts/emit_thunks.py` emits the reference's own six bytes for each thunk
+(`ff 25 <IAT>` with the operand as a DIR32 relocation against the import
+library's `__imp_<decorated>` symbol), as one COMDAT `.text` in the reference's
+order (closesocket, sendto, bind, htons, htonl, setsockopt, socket), and
+`make_split_rsp.py --thunks DIR` inserts it between the game objects and the
+CRT objects.  Measured:
+
+| | before | after |
+|---|---|---|
+| `.text` | 0x23354 (+2,830) | **0x2334a (+2,820)** |
+| `_fclose` placement delta | -0xaa | **-0x80** |
+| thunk VAs | absent from `.text` | 0x1001a0e0..0x1001a10a, same order as the reference |
+
+`scripts/split_link.sh` runs the whole pipeline including this step and
+reproduces 0x2334a from scratch.
+
+**What the remaining -0x80 is.**  The reference has `_getpid` (14 B) at
+0x1001a140 and `srand` (13 B + padding) at 0x1001a150, before the thunks —
+32 bytes — and the other 96 bytes are the game shortfall.  Neither `_getpid`
+nor `srand` is defined by **any** member of the five LIBCMT variants (a scan of
+every member finds no such symbol), which is why `map_libcmt` could not place
+them and why `emit_defs` never sees them: nothing in our link references them.
+They are the first two of the nine functions the map records as carried by no
+library, and under this objective they are not ours to reverse — the reference
+build simply has CRT code that the available LIBCMTs do not.
+
+**Bug note.**  `.text` is five characters, so `sec[0:6] = b".text\0\0"`
+assigns *seven* bytes into a six-byte slice and resizes the bytearray by one:
+the object then claims a 42-byte body that starts one byte early, and LINK
+reports the section as corrupt ("bad string table size" from objdump, LNK1143
+from LINK).  It is the same class as round 29's `.bss` bug, and the fix is
+`sec[0:8] = b".text\0\0\0"` — always assign into an 8-byte name slice.
+
 ## The remaining 2,830 bytes, attributed (2026-09-13, round 31)
 
 Round 30 left the split-set `.text` at 0x23354, +2,830 over the reference, and

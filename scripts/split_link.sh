@@ -36,13 +36,17 @@ rm -rf "$WORK/split"
 python3 scripts/split_coff.py "${LIBS[@]}" --map "$MAP" \
     --out "$WORK/split" --closure --with-data
 
+echo "== import thunks"
+rm -rf "$WORK/thunks"
+python3 scripts/emit_thunks.py --target-bin original/Server/server.dll --out "$WORK/thunks"
+
 echo "== commons"
 rm -rf "$WORK/commons"
 python3 scripts/emit_commons.py "${LIBS[@]}" --map "$MAP" --out "$WORK/commons"
 
 echo "== response file (pass 1, so emit_defs can see the real object set)"
 python3 scripts/make_split_rsp.py --split "$WORK/split" --objects "$OBJ_RSP" \
-    --commons "$WORK/commons" --out "$WORK/rsp1.rsp"
+    --thunks "$WORK/thunks" --commons "$WORK/commons" --out "$WORK/rsp1.rsp"
 
 echo "== definitions (iterated to a fixed point)"
 rm -rf "$WORK/defs"
@@ -50,7 +54,8 @@ python3 scripts/emit_defs.py "${LIBS[@]}" --rsp "$WORK/rsp1.rsp" --out "$WORK/de
 
 echo "== response file (final) and link"
 python3 scripts/make_split_rsp.py --split "$WORK/split" --objects "$OBJ_RSP" \
-    --commons "$WORK/commons" --defs "$WORK/defs" --out "$WORK/rsp.rsp"
+    --thunks "$WORK/thunks" --commons "$WORK/commons" --defs "$WORK/defs" \
+    --out "$WORK/rsp.rsp"
 cmd=$(sed "s#@CMakeFiles/server_dll.dir/objects1.rsp#@${WORK#build/}/rsp.rsp#;
            s#/out:server.dll#/out:split_poc.dll /MAP:split_poc.map#;
            s#/implib:server.lib#/implib:split_poc.lib#;
