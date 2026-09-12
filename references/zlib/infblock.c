@@ -382,7 +382,11 @@ z_streamp z;
 
 
 
-/* stripped: not present in original DLL */
+/* stripped: not present in original DLL.  inflateSetDictionary and
+ * inflateSyncPoint (the only callers) are #if 0'd in inflate.c, so these two
+ * bodies are unreferenced; the tree links /OPT:NOREF, which keeps
+ * unreferenced COMDATs, so they must not be compiled at all. */
+#if 0
 void inflate_set_dictionary(s, d, n)
 inflate_blocks_statef *s;
 const Bytef *d;
@@ -394,7 +398,6 @@ uInt  n;
 
 
 
-/* stripped: inflate_blocks_sync_point not present in original DLL */
 /* Returns true if inflate is currently at the end of a block generated
  * by Z_SYNC_FLUSH or Z_FULL_FLUSH. 
  * IN assertion: s != Z_NULL
@@ -404,4 +407,5 @@ inflate_blocks_statef *s;
 {
   return s->mode == LENS;
 }
+#endif
 

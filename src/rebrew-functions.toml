@@ -81,7 +81,9 @@ status = "RELOC"
 ["SERVER.0x10003960"]
 size = 560
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "EXACT"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-12T18:22:33+00:00"
 
 ["SERVER.0x10003b90"]
 size = 182

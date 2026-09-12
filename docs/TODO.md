@@ -1,9 +1,92 @@
 # Blockers — 100% Round-Trip Goal
 
-Last verify: 278/280 passed, 2 failed (0x100093a0 ServerMainThread, object
+Last verify: 279/281 passed, 2 failed (0x100093a0 ServerMainThread, object
 size 2434 = the target's but the bytes differ; 0x10018850
-gm_AllocSpieler 3688 vs 3689).
+gm_AllocSpieler 3688 vs 3689).  gzread (0x10003960) is new: it was defined
+in check_header.c without a `// FUNCTION:` marker, so `verify` never counted
+it; it is byte-exact (559/559, RELOC) now that it has its own TU and marker.
 Goal requires 280/280 with inline asm only for 1-5 byte padding.
+
+**`verify` is not a byte-identity gate.**  19 of the 21 non-byte-exact
+functions carry `PROVEN`, and `passed: true` for PROVEN does not consult the
+byte compare: CrashDumpUnhandledExceptionFilter reports `match_percent 12.5`
+and `delta 1873` yet counts as passed.  The honest number is `byte_matched`
+in `db/verify_results.json` (259/280 at this revision).  Whole-binary
+identity needs the 21 byte diffs **and** the link alignment below.
+
+## Structural link alignment (2026-09-13) — `.text` +214 -> +6, order fixed
+
+The raw link (postlink skipped — the POST_BUILD step still refuses) was
+`0x2291c` before this pass and is `0x2284c` now against the reference's
+`0x22846`: **+6 bytes**, down from +214.  postlink map coverage 4.1% -> 5.4%.
+The size is now nearly right; what is left is placement and per-function size.
+
+Five fixes, each measured by relinking with `/MAP` and diffing symbol VAs
+against `db/server.dll_functions.csv`:
+
+- **check_header.c had a private `get_byte`.**  The reference's check_header
+  (0x100036d0) calls **0x10003820** twelve times (disassembly of the target),
+  i.e. the shared VFS reader, not a TU-local helper.  `rebrew test` passed
+  the file anyway because call displacements are masked.  Replacing the local
+  body with a `vfs_GetByte` call deleted the unreferenced static
+  `_get_byte` (128 B) from the link and left check_header byte-identical
+  (332/332 RELOC).
+- **gzread split into its own TU.**  The original places check_header
+  (0x36d0), then vfs.c's two functions (0x3820, 0x38a0), then gzread (0x3960);
+  one object can only emit its functions contiguously, so gzread moved to
+  `Units/vfs/vfs_c/gzread.c`.  It is 559/559.
+- **Two infblock bodies are not in the reference at all.**
+  `inflate_set_dictionary` and `inflate_blocks_sync_point` have no exact-byte
+  match anywhere in the target (their only callers, `inflateSetDictionary`
+  and `inflateSyncPoint`, are already `#if 0` in `references/zlib/inflate.c`),
+  but the tree links `/OPT:NOREF`, which keeps unreferenced COMDATs.  They
+  were `#if 0`'d in `references/zlib/infblock.c` too (~0x50 B).
+- **infcodes.c and inffast.c had no `--first-va` in `order-sources`.**  They
+  sorted last and their five functions linked at 0x1a950-0x1b160 instead of
+  0x4b80-0x5390 (2,900 B out of place).  Added
+  `--first-va infcodes.c=0x10004b80` and `--first-va inffast.c=0x10005390`.
+- **Two merged TUs split.**  `order-sources` orders *files* by their first
+  VA, so a file holding functions from non-adjacent reference regions cannot
+  be position-aligned.  `friedhof_dump.c` (0x10530/0x10d10/0x11940) became
+  `gv_CheckSlotActive.c` + `gv_UpgradeField.c` + `gv_MoveSlotEntry.c`;
+  `lobbycommands.c` (0x145e0/0x146c0/0x14af0/0x14db0) became
+  `lb_ExPlayerlist.c` + `fcn_10014af0.c` + `lb_ExLobbyServerCommand.c`.
+  All seven functions were re-tested and kept their status.
+
+With those in place the delta is a single **+16** from 0x10002fd0
+(EmitCrashModuleLine) through 0x100067f0 — every function in the first 40% of
+`.text` links exactly where the reference has it, once CrashDump is fixed.
+
+## Next three blockers, in link order (2026-09-13)
+
+1. **0x10002770 CrashDumpUnhandledExceptionFilter** — obj 2137, target 2115.
+   +22 bytes, and with 16-byte COMDAT padding it is the whole +16 shift for
+   0x2fd0-0x6820.  `PROVEN` masks it in `verify`.  Blocker is the prologue:
+   4 saved regs (ebx/ebp/esi/edi) against the target's 2 (ebp/esi, ebx/edi
+   deferred), frame 0x28c vs 0x280, hDbgFile spilled at [esp+0x44] instead
+   of held in ebp.  This is the single highest-value function in the tree.
+2. **0x10006580 m_AllocTracked** — obj 608, target 658 (-50).  First
+   shortfall; moves the delta from +16 to -48.  `PROVEN`, 36.7% match.
+3. **spiel62.c / spiel622.c** are the last non-contiguous game TUs
+   (`gm_InitEntityIfValid` at 0x17f90 interleaves spiel62's 0x17f60/0x17fb0;
+   `gm_RandomFloat01` at 0x1a0f0 interleaves spiel622's 0x1a0d0/0x1a110).
+   Split them the same way as the two above.  `server4.c` and
+   `crt_region/initterm.c` also report interlopers but those are Ghidra
+   switch-case labels / library bodies, not real TU members.
+
+## Tooling environment (2026-09-13) — the rebrew checkout is a moving target
+
+`rebrew` is installed editable (`__editable__.rebrew-0.6.0.pth`) pointing at
+`~/Desktop/Projects/relumea/rebrew/src`, which is being edited concurrently.
+Mid-pass `rebrew-cmake-cl` died with `ToolchainSpec.__init__() got an
+unexpected keyword argument 'image_binary'` (working-tree refactor of
+`toolchain_spec.py`/`toolchain_data.py`).  A stable copy of the committed
+tree (`git archive HEAD src/rebrew`) was extracted to
+`.scratch/rebrew-stable/` and used through `PYTHONPATH` for `verify`,
+`lint` and the build.  `scripts/gate.sh` will keep failing on the build step
+until that checkout is consistent again — it is not this tree's regression.
+There is also a docker container from a 2026-09-11 `rebrew match` still
+spinning (`docker ps` name `rebrew-93321f0d944a`), pinning one core.
 
 ## gm_Open back to RELOC (2026-09-12)
 
@@ -54,7 +137,7 @@ Tried and measured (all in the raw-link metric above):
   "/include:...")` for every `// LIBRARY:` marker in `library_msvc.h`: fails
   with 104 unresolved externals. Many names in those headers (`code_translate`,
   `overflow_add`, `bit_reverse`, ...) are not linkable LIBCMT symbols; the
-  true symbol/object mapping has to come from `scripts/check_library_code.py`,
+  true symbol/object mapping has to come from `rebrew lib-match --stock-lib`,
   and MSVC marks some helpers (`_initterm`, `_parse_cmdline`) static so they
   cannot be named at all.
 

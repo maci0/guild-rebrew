@@ -194,6 +194,8 @@ if(REBREW_BUILD_SERVER)
       --first-va crc32.c=0x100011f0
       --first-va deflate.c=0x10001330
       --first-va infblock.c=0x10003d20
+      --first-va infcodes.c=0x10004b80
+      --first-va inffast.c=0x10005390
       --first-va inflate.c=0x10005720
       --first-va inftrees.c=0x10005d00
       --first-va infutil.c=0x10006440
@@ -250,8 +252,8 @@ if(REBREW_BUILD_SERVER)
   # Never patch a library to make the link work. Displace the offending object
   # with a local definition, as above, or change what references it. A doctored
   # .lib cannot be reproduced from a clean checkout and hides the very
-  # duplication scripts/check_library_code.py exists to catch; that script
-  # refuses to run if its reference copy differs from the toolchain's.
+  # duplication `rebrew lib-match` exists to catch; that check refuses to run
+  # if the extracted copy differs from the toolchain image's.
   target_link_libraries(server_dll PRIVATE
     KERNEL32.lib
     USER32.lib
