@@ -99,7 +99,7 @@ extern void* __cdecl memcpy(void*, const void*, unsigned int);
  * the allocation block.  Scans the header list from the start.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001d515 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001d515
 SbhHeader * __cdecl ___sbh_find_block(void * pvAlloc)
 {
     SbhHeader * pHeaderLast;
@@ -125,7 +125,7 @@ SbhHeader * __cdecl ___sbh_find_block(void * pvAlloc)
  * commit vector returns to its initial value).
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001d540 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001d540
 void __cdecl fcn_1001d540(SbhHeader * pHeader, void * pvAlloc)
 {
     SbhRegion * pRegion;
@@ -314,7 +314,7 @@ void __cdecl fcn_1001d540(SbhHeader * pHeader, void * pvAlloc)
  * creating a new region when needed.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001d869 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001d869
 void * __cdecl fcn_1001d869(int intSize)
 {
     SbhHeader * pHeaderLast;
@@ -532,7 +532,7 @@ void * __cdecl fcn_1001d869(int intSize)
  * allocate a REGION, reserve the 1MB region address space.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001db72 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001db72
 SbhHeader * __cdecl fcn_1001db72(void)
 {
     SbhHeader * pHeader;
@@ -583,7 +583,7 @@ SbhHeader * __cdecl fcn_1001db72(void)
  * region (commit + fill the group's page entries) and return its index.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001dc23 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001dc23
 int __cdecl fcn_1001dc23(SbhHeader * pHeader)
 {
     SbhRegion * pRegion;
@@ -672,7 +672,7 @@ int __cdecl fcn_1001dc23(SbhHeader * pHeader)
  * in place (allocated entries keep the +1 size marker).
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001dd1e (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001dd1e
 int __cdecl fcn_1001dd1e(SbhHeader * pHeader, void * pvAlloc, int intNew)
 {
     SbhRegion * pRegion;
@@ -864,7 +864,7 @@ int __cdecl fcn_1001dd1e(SbhHeader * pHeader, void * pvAlloc, int intNew)
  * the region_map[] and the first committed pages.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e014 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001e014
 OldSbhRegion * __cdecl fcn_1001e014(void)
 {
     OldSbhRegion * pregnew;
@@ -954,7 +954,7 @@ OldSbhRegion * __cdecl fcn_1001e014(void)
  * V5 region, unlink its descriptor (the static one is only marked free).
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e158 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001e158
 void __cdecl fcn_1001e158(OldSbhRegion * preg)
 {
     /* release the passed region */
@@ -987,7 +987,7 @@ void __cdecl fcn_1001e158(OldSbhRegion * preg)
  * pages are uncommitted.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e1ae (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001e1ae
 void __cdecl fcn_1001e1ae(int count)
 {
     OldSbhRegion * preg1;
@@ -1058,7 +1058,7 @@ void __cdecl fcn_1001e1ae(int count)
  * descriptors through the output parameters.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e270 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001e270
 unsigned char * __cdecl fcn_1001e270(void * pblck, OldSbhRegion ** ppreg, OldSbhPage ** pppage)
 {
     OldSbhRegion * preg;
@@ -1098,7 +1098,7 @@ unsigned char * __cdecl fcn_1001e270(void * pblck, OldSbhRegion ** ppreg, OldSbh
  * alloc_map[] clear) and trigger page decommitment when a page empties.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e2c7 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001e2c7
 void __cdecl fcn_1001e2c7(OldSbhRegion * preg, OldSbhPage * ppage, unsigned char * pmap)
 {
     OldRegionMap * pregmap;
@@ -1127,7 +1127,7 @@ void __cdecl fcn_1001e2c7(OldSbhRegion * preg, OldSbhPage * ppage, unsigned char
  * last resort creates a new region.
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e30c (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001e30c
 void * __cdecl __old_sbh_alloc_block(size_t para_req)
 {
     OldSbhRegion * preg;
@@ -1302,7 +1302,7 @@ void * __cdecl __old_sbh_alloc_block(size_t para_req)
  * a specific V5 page (start at p_starting_alloc_map, then wrap to 0).
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e514 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001e514
 void * __cdecl fcn_1001e514(OldSbhPage * ppage, size_t free_para_count, size_t para_req)
 {
     unsigned char * pmap1;
@@ -1452,7 +1452,7 @@ void * __cdecl fcn_1001e514(OldSbhPage * ppage, size_t free_para_count, size_t p
  * place (pmap = alloc_map[] entry, sizes in 16-byte paragraphs).
  * ==================================================================== */
 
-// FUNCTION: SERVER 0x1001e638 (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001e638
 int __cdecl fcn_1001e638(OldSbhRegion * preg, OldSbhPage * ppage, unsigned char * pmap, size_t new_para_sz)
 {
     unsigned char * pmap2;
