@@ -271,10 +271,34 @@ reference's 12-byte `mov eax,[esp+4] / push eax / call 0x1001b535 / pop ecx /
 ret` wrapper is therefore a separate function with no library supplier, and
 `0x1001a140` (`srv_SeedRandomWithTime`) calls the same 0x1001b535 helper.
 
+**Where the -0x80 actually is.**  `db/verify_results.json` has ten size
+divergences; the sign below is *ours minus target*:
+
+| function | target | ours | delta |
+|---|---|---|---|
+| `m_AllocTracked` 0x10006580 | 658 | 608 | **-50** |
+| `vfs_ReadData` 0x10008e40 | 472 | 446 | **-26** |
+| `cm_ExCopyEntityData` 0x1000ec00 | 901 | 880 | **-21** |
+| `vfs_ReadCompressed` 0x10008a90 | 492 | 499 | +7 |
+| `vfs_OpenStream` 0x10009020 | 667 | 693 | +26 |
+| `CrashDumpUnhandledExceptionFilter` 0x10002770 | 2115 | 2137 | +22 |
+| `gm_FindNextFilteredEntity` 0x10016f80 | 346 | 342 | -4 |
+| `cm_ExSellObjekt` 0x1000d930 | 2057 | 2055 | -2 |
+| `gm_AllocSpieler` 0x10018850 | 3689 | 3688 | -1 |
+| `ls_LoadBuildingEntityState` 0x100128f0 | 1463 | 1464 | +1 |
+| | | | **-48** |
+
+The other 15 bytes of the -0x80 are `srand`'s 16 absent bytes minus one byte
+of LINK padding.  So the shortfall is **three functions**, not a diffuse
+layout problem: `m_AllocTracked`, `vfs_ReadData` and `cm_ExCopyEntityData`
+alone are 97 of the 128 bytes.  A size delta is a structural difference (a
+missing or extra instruction), which is why those three are the right targets
+and the five near-matches (5-49 byte deltas at identical size) are not.
+
 **Next step:** the residual is now the biggest single term, but it cannot be
 attacked before the -0x80: every split object is displaced by the game
 region's length.  The 20 non-exact game functions are the prerequisite, not an
-alternative — they are also where the 96 bytes of game shortfall live.  Note
+alternative — start from the three size mismatches above.  Note
 in passing that `cm_ExProdObjekt` (976/993, the closest of the twenty) was
 re-tested this round: hoisting the `g_unknown_1de450` load into its own
 statement above `recipe_idx` and splitting the `<< 6` off leaves it at exactly
