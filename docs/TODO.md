@@ -12,7 +12,7 @@ the round-by-round entries below establish.
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
 | standard CMake link, `.text` | 0x2276c (-218), postlink coverage 401/7,463 (5.4%) | — |
-| split-set link (LIBCMT member objects), `.text` | 0x2297a (+308, was +676) | — |
+| split-set link (LIBCMT member objects), `.text` | 0x22b8a; 35 of 330 symbols exactly at their reference VA, sum of abs delta 150,062 | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
 | CRT split-set leftovers | **34** symbols across ~10 members | 5,294 B |
@@ -207,6 +207,65 @@ second — so the structural count understates how hard they are.
 signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
+
+## Two reference VAs were sharing one library section (2026-09-13, round 41)
+
+The split set's CRT drift had two independent causes, and both reduce to the
+same failure: **two of our emitted objects came out byte-identical, so LINK
+kept one and silently dropped the other.**
+
+**1. `map_libcmt` matched on content alone.**  A CRT member can hold two
+COMDAT sections with identical bodies that differ only in their relocation
+target:
+
+| VAs in the reference | member sections | body |
+|---|---|---|
+| 0x1001a746 / 0x1001a74f | `crt0dat.obj` §14 / §16 | `6a0d e8???? ???? 59 c3` — `__lockexit` / `__unlockexit` |
+| 0x1001a931 / 0x1001aa6a | `fread.obj` §1 / (alternative) | 47 bytes, both calling 0x1001bb60 |
+
+The matcher returned the first section that fitted, so both VAs claimed §14
+(or fread §1), the two objects came out with the same md5, and LINK discarded
+one — the 9 bytes at `__initterm` and the 47 bytes before `__fread_lk`.
+`match()` now takes a set of `(member, section, value)` keys already handed to
+another VA and skips them.  The fallback matters: an alias at *one* VA
+(`_mbsdup` / `__strdup` both sit at 0x10023812) must still resolve to the
+shared section, so the exclusion only applies while the same library has an
+unclaimed candidate left.
+
+**2. `split_coff` exported the sibling's name.**  Even with distinct sections
+the objects still clashed: the alias index lists every byte-identical spelling
+of a body, so the §14 object exported `__unlockexit` and the §16 object
+exported `__lockexit`, and two objects defining one symbol is again a
+duplicate for LINK.  Each object's alias set now excludes the external names
+defined by its own member's mapped sections.
+
+**3. Section indices are library-specific.**  A map entry can point at a
+section that only exists in a later service pack — vc7's `popen.obj` has 21
+sections where the 6.0 ones have 9 — and `split_coff` resolves a member by
+name against the *first* library that has it, so vc7 §17 indexed past the end
+and crashed the splitter.  Entries above the canonical library's section count
+for that member are now filtered out.
+
+**Effect on the split set:**
+
+| | before | after |
+|---|---|---|
+| symbols exactly at their reference VA | 25 | **35** |
+| objects LINK discards | 20 (923 B) | **14 (541 B)** |
+| first drift island | -9 at `__initterm` | **gone** (first is -47 at `__fread_lk`) |
+| delta range | -0x353 .. +0x22c | **-0x2b0 .. +0x22c** |
+| sum of \|delta\| over placed symbols | ~182,000 | **150,062** |
+| section VirtualSize | 0x229fa | 0x22b8a |
+
+The VirtualSize grows because 382 bytes of reference content that used to be
+dropped are now emitted; it is not the metric to read here.  Note also that
+`rebrew verify` is unaffected (280/282) — these are split-set pipeline
+scripts, not part of the build.
+
+**Next step:** 14 objects are still discarded.  Their pairs are in the map
+with the same `(member, section)`; the remaining ones want the same treatment,
+and if a member has no second section that fits, the object needs a distinct
+primary symbol rather than a distinct section.
 
 ## The component loop walks a pointer, and the CPU flag is /G5 (2026-09-13, round 40)
 
