@@ -28,6 +28,30 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## The merge's exact blocker: a section symbol per COMDAT (2026-09-13, round 20)
+
+Re-attempted the static-sharing merge with VA-ordered roots (so the merged
+object's section order follows the reference, not the member's section order).
+LINK now rejects the object outright:
+
+```
+1001a681_.text.obj : fatal error LNK1143: invalid or corrupt file:
+                     no symbol for comdat section 0x4
+```
+
+Dumping the merged object shows why: it has six sections but only five section
+symbols — the nine-byte `LINK_ONCE_DISCARD` section (crt0dat.obj's
+`__lockexit`/`_doexit` neighbourhood) has none, and one symbol still points at
+section 6 while the discardable section has no number.  A COMDAT section is
+only valid when its section symbol (and its AUX record) is present, and the
+current keep-set walk drops that one.
+
+So the merge is a COFF bookkeeping problem, not a placement problem: every
+emitted section needs its section symbol kept and its AUX `Number` (assoc)
+renumbered.  Renumbering the assoc field alone did not fix it — the missing
+symbol is the issue.  Reverted again; the round-18 state (34 leftovers,
+`.text` 0x100256f2) stands.
+
 ## The 34 survivors, and a measured negative (2026-09-13, round 19)
 
 The remaining leftovers are concentrated in a few members: `sbheap.obj` (5
