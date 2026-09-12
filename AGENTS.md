@@ -10,8 +10,9 @@
   the second target need `--target Europa1400Gold_TL.exe`, otherwise they
   silently use the default target.
 - **Target status**: `server.dll` is the position-aligned CMake build.
-  `Europa1400Gold_TL.exe` is onboarded only: 6335 functions discovered, its
-  reversed dir holds the first skeletons, and it has no layout scaffolding yet.
+  `Europa1400Gold_TL.exe` is onboarded: 6335 functions discovered, 29 sources
+  (10 skeletons plus 19 imported from `server.dll`, of which 3 are byte-exact
+  and 6 near-matching), no layout scaffolding yet.
 - **Compiler**: msvc6 (docker image `rebrew/msvc:6.0-win32` — wine inside; the
   CMake build runs it through the `rebrew-cmake-{cl,link,lib}` console scripts
   via `cmake/toolchain-msvc-6.0-sp6-docker.cmake`)

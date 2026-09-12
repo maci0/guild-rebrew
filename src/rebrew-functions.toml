@@ -1827,81 +1827,103 @@ updated_at = "2026-09-12T14:53:02+00:00"
 size = 404
 
 ["GOLDTL.0x00412f10"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:53:29+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:27+00:00"
+size = 416
 
 ["GOLDTL.0x0042e450"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:53:34+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:18+00:00"
+size = 22
 
 ["GOLDTL.0x0042e4b0"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:53:39+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:23+00:00"
+size = 14
 
 ["GOLDTL.0x00465350"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:53:42+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:24+00:00"
+size = 496
 
 ["GOLDTL.0x004c7400"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:53:49+00:00"
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:15+00:00"
+size = 336
 
 ["GOLDTL.0x004f1650"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:53:56+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:20+00:00"
+size = 320
 
 ["GOLDTL.0x004f18d0"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:54:01+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:16+00:00"
+size = 320
 
 ["GOLDTL.0x004f2880"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:54:04+00:00"
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:19+00:00"
+size = 400
 
 ["GOLDTL.0x004f2a80"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:54:07+00:00"
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:20+00:00"
+size = 288
 
 ["GOLDTL.0x004f2c00"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:54:09+00:00"
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:18+00:00"
+size = 304
 
 ["GOLDTL.0x004f2d90"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:54:12+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:21+00:00"
+size = 240
 
 ["GOLDTL.0x00502850"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:54:17+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:17+00:00"
+size = 464
 
 ["GOLDTL.0x00502e00"]
-status = "NEAR_MATCHING"
-updated_by = "verify"
-updated_at = "2026-09-12T14:54:20+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:16+00:00"
+size = 37
 
 ["GOLDTL.0x00513d40"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:54:24+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:17+00:00"
+size = 991
 
 ["GOLDTL.0x005218f0"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:54:28+00:00"
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:22+00:00"
+size = 37
 
 ["GOLDTL.0x0063e931"]
-status = "EXTRACT_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-12T14:54:32+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-12T14:56:23+00:00"
+size = 495
+
+["GOLDTL.0x004ec850"]
+size = 80
+
+["GOLDTL.0x004959f0"]
+size = 32
