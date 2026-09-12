@@ -350,7 +350,7 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x1001A6A1 | 163B | doexit | _doexit |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A746 | 9B | lock_0d | lock_0d |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A74F | 9B | unlock_0d | unlock_0d |  | LIBRARY/EXACT | library_msvc.h |
-| 0x1001A758 | 26B | fcn_1001a758 | _fcn_1001a758 | /O1 /Gd | FUNCTION/EXACT | crt_region/initterm.c |
+| 0x1001A758 | 26B | __initterm | ___initterm | /O1 /Gd | FUNCTION/EXACT | crt_region/initterm.c |
 | 0x1001A758 | 26B | initterm | _initterm |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A772 | 115B | dosmaperr | _dosmaperr |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001A7E5 | 0B | errno | __errno |  | LIBRARY/EXACT | library_msvc.h |
@@ -430,16 +430,16 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x1001D097 | 21B | munlock | __munlock |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D0AC | 84B | mtinit | __mtinit |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D100 | 30B | crt_close_handle | crt_close_handle |  | LIBRARY/EXACT | library_msvc.h |
-| 0x1001D11E | 19B | set_vtable | set_vtable |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D11E | 19B | initptd | __initptd |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D131 | 103B | getptd | __getptd |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D198 | 160B | freeptd | __freeptd |  | LIBRARY/EXACT | library_msvc.h |
-| 0x1001D238 | 27B | crt_gfunc_call | crt_gfunc_call |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001D238 | 27B | callnewh | __callnewh |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D253 | 45B | crt_get_osver | crt_get_osver |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D280 | 328B | heap_select | ___heap_select |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D3C8 | 93B | crt_heap_init | crt_heap_init |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D425 | 168B | heap_term | __heap_term |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D4CD | 72B | sbh_heap_init | ___sbh_heap_init |  | LIBRARY/EXACT | library_msvc.h |
-| 0x1001D515 | 43B | fcn_1001d515 | _fcn_1001d515 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
+| 0x1001D515 | 43B | ___sbh_find_block | ____sbh_find_block | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001D515 | 43B | crt_find_entry | crt_find_entry |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001D540 | 809B | fcn_1001d540 | _fcn_1001d540 | /O1 /Gd | FUNCTION/RELOC | crt_region/sbh_pool.c |
 | 0x1001D540 | 809B | sbh_free_block | ___sbh_free_block |  | LIBRARY/EXACT | library_msvc.h |
@@ -480,7 +480,7 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x1001EDE5 | 220B | filbuf | __filbuf |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001EEC1 | 101B | crt_lseek_wrap | _crt_lseek_wrap |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001EF26 | 473B | read_lk | __read_lk |  | LIBRARY/EXACT | library_msvc.h |
-| 0x1001F0FF | 147B | crt_commit | crt_commit |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001F0FF | 147B | commit | _commit |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001F192 | 18B | crt_const_call | crt_const_call |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001F1A4 | 62B | IsNonwritableInCurrentImage | ___IsNonwritableInCurrentImage |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001F1E2 | 41B | IsProcessorFeaturePresent | __IsProcessorFeaturePresent |  | LIBRARY/EXACT | library_msvc.h |
@@ -503,7 +503,7 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x1001FA79 | 153B | setargv | __setargv |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001FB12 | 436B | parse_cmdline | _parse_cmdline |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001FCC6 | 306B | crtGetEnvironmentStringsA | ___crtGetEnvironmentStringsA |  | LIBRARY/EXACT | library_msvc.h |
-| 0x1001FDF8 | 57B | crt_runtime_error | crt_runtime_error |  | LIBRARY/EXACT | library_msvc.h |
+| 0x1001FDF8 | 57B | FF_MSGBANNER | __FF_MSGBANNER |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001FE31 | 339B | NMSG_WRITE | __NMSG_WRITE |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1001FF84 | 289B | calloc | _calloc |  | LIBRARY/EXACT | library_msvc.h |
 | 0x1002001D | 9B | unlock_09f | unlock_09f |  | LIBRARY/EXACT | library_msvc.h |

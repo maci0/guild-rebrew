@@ -100,7 +100,7 @@ extern void* __cdecl memcpy(void*, const void*, unsigned int);
  * ==================================================================== */
 
 // FUNCTION: SERVER 0x1001d515 (was FUNCTION; provided by LIBCMT / library_msvc.h)
-SbhHeader * __cdecl fcn_1001d515(void * pvAlloc)
+SbhHeader * __cdecl ___sbh_find_block(void * pvAlloc)
 {
     SbhHeader * pHeaderLast;
     SbhHeader * pHeader;

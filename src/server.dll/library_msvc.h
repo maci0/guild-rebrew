@@ -695,11 +695,11 @@
 // SIZE: 30
 
 // LIBRARY: SERVER 0x1001D11E
-// set_vtable
+// __initptd
 // SIZE: 19
 
 // LIBRARY: SERVER 0x1001D238
-// crt_gfunc_call
+// __callnewh
 // SIZE: 27
 
 // LIBRARY: SERVER 0x1001D253
@@ -751,7 +751,7 @@
 // SIZE: 101
 
 // LIBRARY: SERVER 0x1001F0FF
-// crt_commit
+// _commit
 // SIZE: 147
 
 // LIBRARY: SERVER 0x1001F192
@@ -791,7 +791,7 @@
 // SIZE: 436
 
 // LIBRARY: SERVER 0x1001FDF8
-// crt_runtime_error
+// __FF_MSGBANNER
 // SIZE: 57
 
 // LIBRARY: SERVER 0x1002001D

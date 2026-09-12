@@ -23,7 +23,7 @@
 // SIZE 0x8
 
 extern void __cdecl fcn_1001fdf8(void);   /* 0x1001fdf8 - pre-exit hook */
-extern void __cdecl fcn_1001fe31(int);    /* 0x1001fe31 - _NMSG_WRITE */
+extern void __cdecl fcn_1001fe31(int);    /* 0x1001fe31 - __NMSG_WRITE */
 extern void (__cdecl* g_100317f0)(int);   /* 0x100317f0 - _exit hook */
 
 void __cdecl _amsg_exit(int msg)
@@ -34,7 +34,7 @@ void __cdecl _amsg_exit(int msg)
     g_100317f0(0xff);
 }
 
-/* _crt_runtime_error: gated on the report-mode flags; calls _NMSG_WRITE
+/* _crt_runtime_error: gated on the report-mode flags; calls __NMSG_WRITE
  * twice (0xfc = "abort pressed", 0xff = generic) around an optional user
  * hook (g_100356e0).  Mirrors the game's copy of crt0msg.c. */
 
@@ -51,7 +51,7 @@ void __cdecl fcn_1001fdf8(void)
     }
 }
 
-/* _NMSG_WRITE: looks rterrnum up in _rterrlist (0x10033ef0), then either
+/* __NMSG_WRITE: looks rterrnum up in _rterrlist (0x10033ef0), then either
  * writes the message text to stderr or shows the "Runtime Error!" box via
  * __crtMessageBoxA (0x10022107).  0xfc suppresses the box (abort path). */
 
@@ -304,7 +304,7 @@ fail:
 /* LIBCMT dllcrt0 pulls these undecorated CRT names. Alias them to the game
  * copies above so crt0msg.obj / crtmbox.obj are not linked (their .rdata
  * strings inflate the IAT→IMPORT gap past the layout prefix). */
-void __cdecl _NMSG_WRITE(int rterrnum)
+void __cdecl __NMSG_WRITE(int rterrnum)
 {
     fcn_1001fe31(rterrnum);
 }

@@ -22,7 +22,7 @@ typedef struct SbhHeader SbhHeader;
 // SIZE 0x2020 (OldSbhRegion; layout in sbh_pool.c)
 
 /* --- game bodies (sbh_pool.c / crt_heap.c) --- */
-extern SbhHeader* __cdecl fcn_1001d515(void* pvAlloc);
+extern SbhHeader* __cdecl ___sbh_find_block(void* pvAlloc);
 extern void __cdecl fcn_1001d540(SbhHeader* pHeader, void* pvAlloc);
 extern void* __cdecl fcn_1001d869(int intSize);
 extern SbhHeader* __cdecl fcn_1001db72(void);
@@ -75,7 +75,7 @@ int __cdecl _set_old_sbh_threshold(unsigned int threshold)
     return 1;
 }
 
-int __cdecl __sbh_heap_init(unsigned int size)
+int __cdecl ___sbh_heap_init(unsigned int size)
 {
     int ok;
     ok = fcn_1001d4cd(size);
@@ -86,7 +86,7 @@ int __cdecl __sbh_heap_init(unsigned int size)
 
 SbhHeader* __cdecl __sbh_find_block(void* pvAlloc)
 {
-    return fcn_1001d515(pvAlloc);
+    return ___sbh_find_block(pvAlloc);
 }
 
 void __cdecl __sbh_free_block(SbhHeader* pHeader, void* pvAlloc)

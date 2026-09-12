@@ -87,7 +87,7 @@ void __cdecl __heap_term(void)
  * (>=6 → 3, else 2). */
 
 extern void __cdecl fcn_1001d253(char*);            /* 0x1001d253 - read PE linker version */
-extern int __cdecl fcn_10021200(const char*, const char*, unsigned int); /* 0x10021200 - strncmp */
+extern int __cdecl fcn_10021200(const char*, const char*, unsigned int); /* 0x10021200 - _strncmp */
 
 extern char* __cdecl fcn_1001af30(const char*, int);                     /* 0x1001af30 - strchr */
 
