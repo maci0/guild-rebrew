@@ -15,11 +15,12 @@ repos:
         args: ['--config-file=.clang-tidy']
 
     # Catches reversing work that duplicates a linked library. Byte-level, so
-    # it does not depend on function names matching. Skipped automatically
-    # when the reference library has not been extracted (exit 2).
+    # it does not depend on function names matching. The stock archive is
+    # extracted from the toolchain image; the hook skips itself when the
+    # container runtime is unavailable.
     -   id: no-library-code
         name: no reversed library code
-        entry: python3 scripts/check_library_code.py
+        entry: rebrew lib-match --stock-lib LIBCMT.LIB --allow scripts/library_code_allowlist.txt
         language: system
         pass_filenames: false
         files: '^src/.*\.c$'

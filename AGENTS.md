@@ -23,7 +23,7 @@
 
 ```
 1. rebrew todo --json                          # get highest ROI action items
-2. python3 scripts/check_library_code.py --va 0x<VA>   # is it already in a library?
+2. rebrew lib-match --stock-lib LIBCMT.LIB --va 0x<VA>   # is it already in a library?
 3. rebrew skeleton 0x<VA>                      # generate .c skeleton
 4. rebrew test src/server.dll/<func>.c --json  # compile + compare
 5. # iterate code until STATUS: EXACT or RELOC
@@ -37,7 +37,7 @@
 > lived under `crt_region/` were stock LIBCMT, reversed by mistake and matched
 > for weeks before anyone checked.
 >
-> Use `check_library_code.py`, not `rebrew flirt`, for this question. FLIRT
+> Use `rebrew lib-match`, not `rebrew flirt`, for this question. FLIRT
 > matches short byte patterns against prebuilt signatures and identifies 9 of
 > those 68 (25 library functions across the whole binary; regenerating the
 > signatures from this exact LIBCMT raises it to 37, still 9 of the 68). The
@@ -66,7 +66,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew graph --format summary` | Dependency graph stats and blockers |
 | `rebrew catalog --json` | Generate coverage catalog |
 | `rebrew flirt --json` | FLIRT scan for known library functions |
-| `python3 scripts/check_library_code.py` | Byte-level check that no reversed function duplicates a linked library |
+| `rebrew lib-match --stock-lib LIBCMT.LIB` | Byte-level check that no reversed function duplicates a linked library |
 | `rebrew extract list --json` | Extract and disassemble functions (list/show/batch) |
 | `rebrew asm 0x<VA> --size 128 --json` | Quick offline disassembly |
 | `rebrew sync --push` | Push annotations to Ghidra |
@@ -143,8 +143,8 @@ improves the number.
   definition of the symbols it provides (see the `_CRT_REGION_KEEP` comment in
   `CMakeLists.txt`) or change what references it. The build once linked a
   hand-stripped LIBCMT kept in gitignored `.scratch/`, which no fresh clone
-  could reproduce; `scripts/check_library_code.py` refuses to run if its
-  reference copy differs from the toolchain's.
+  could reproduce; `rebrew lib-match --stock-lib` refuses to run if the
+  extracted copy differs from the toolchain image's.
 - **A duplicate-symbol warning is a finding, not noise.** `LNK4006` usually
   means either the same global is defined in several translation units, or
   something the library already provides has been reimplemented. Resolve it
