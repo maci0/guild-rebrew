@@ -14,6 +14,43 @@ and `delta 1873` yet counts as passed.  The honest number is `byte_matched`
 in `db/verify_results.json` (259/280 at this revision).  Whole-binary
 identity needs the 21 byte diffs **and** the link alignment below.
 
+## The ten real size mismatches (2026-09-13, round 3)
+
+`rebrew verify --full` is the only accurate size source; `db/server.dll_functions.csv`
+carries stale registry sizes (it reports 600 B for `srv_LogWinsockError`, whose
+`rebrew test` slot is 758 and byte-exact).  The functions whose object size
+disagrees with the target are exactly:
+
+| VA | function | obj | target | delta | match |
+|---|---|---|---|---|---|
+| 0x10002770 | CrashDumpUnhandledExceptionFilter | 2137 | 2115 | +22 | 12.5% |
+| 0x10006580 | m_AllocTracked | 608 | 658 | -50 | 36.7% |
+| 0x10008a90 | vfs_ReadCompressed | 499 | 492 | +7 | 27.6% |
+| 0x10008e40 | vfs_ReadData | 446 | 472 | -26 | 30.0% |
+| 0x10009020 | vfs_OpenStream | 693 | 667 | +26 | 64.0% |
+| 0x1000d930 | cm_ExSellObjekt | 2055 | 2057 | -2 | 9.7% |
+| 0x1000ec00 | cm_ExCopyEntityData | 880 | 901 | -21 | 58.3% |
+| 0x100128f0 | ls_LoadBuildingEntityState | 1464 | 1463 | +1 | 8.5% |
+| 0x10016f80 | gm_FindNextFilteredEntity | 342 | 346 | -4 | 48.5% |
+| 0x10018850 | gm_AllocSpieler | 3688 | 3689 | -1 | 23.1% |
+
+Note that a near-zero size delta does not mean a near byte match:
+`cm_ExSellObjekt` (-2), `ls_LoadBuildingEntityState` (+1) and
+`gm_AllocSpieler` (-1) are 8-23% matches.  The remaining 11 non-byte-exact
+functions are size-exact but byte-different (`srv_LoadBuf`, `gm_ObjectsAvailble`,
+`cm_ProcessCommandQueue`, `cm_ExProdObjekt`, `m_PoolAlloc`,
+`gm_CalculateProductionValue`, `vfs_OpenStream`, `gm_CheckInventoryCapacity`,
+`ahm_ExAllocAlchemist`, `gv_ExAllocGraveyardWorker`, `ServerMainThread`).
+
+**The inline-asm prelude is not transplantable into a divergent body.**
+Round 3 replaced m_AllocTracked's `memset(ptr, 0, sz)` with the target's
+prelude as an `__asm` block naming the C locals.  Result: obj 608 -> 646,
+match 241 -> 182.  The reference's prelude reads dest from `[ebp-4]` and
+length from `[ebp-8]`; this reconstruction homes them in ebx and `[ebp+0xc]`,
+so the block is not the same bytes and the surrounding allocator degrades.
+Getting the prelude bytes into a function whose operand homes already differ
+is not the win it looks like — the homes have to match first.
+
 ## The alignment is now a short, named list (2026-09-13, round 2)
 
 Every game TU is contiguous, so `/MAP` deltas against
