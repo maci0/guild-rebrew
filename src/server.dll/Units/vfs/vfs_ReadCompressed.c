@@ -95,22 +95,30 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 		if (s->avail_in == 0) {
 			n = s->remaining;
 			if (n > 0) {
-				if (n > 0x4000) {
-					n = 0x4000;
+				/* The clamped chunk length is a SEPARATE variable, not `n`
+				 * itself.  The target materialises the constant first
+				 * (`mov edi,0x4000` / `cmp eax,edi` / `jae` / `mov edi,eax`)
+				 * and keeps the dead `test edi,edi` that follows it;
+				 * clamping `n` in place makes msvc6 emit the other min shape
+				 * (`cmp edi,0x4000` / `jbe` / `mov edi,0x4000`) and drop the
+				 * check.  Measured: 499 -> 497 bytes, aligned 76.5% -> 79.0%. */
+				i = 0x4000;
+				if (n < 0x4000) {
+					i = n;
 				}
-				if (n == 0) {
+				if (i == 0) {
 					return 0;
 				}
 				if (fseek(s->file, s->base_off + s->in_off, 0) != 0) {
 					return -1;
 				}
-				if (fread(s->inbuf, n, 1, s->file) != 1) {
+				if (fread(s->inbuf, i, 1, s->file) != 1) {
 					return -1;
 				}
-				s->in_off = s->in_off + n;
-				s->remaining = s->remaining - n;
+				s->in_off = s->in_off + i;
+				s->remaining = s->remaining - i;
 				s->next_in = s->inbuf;
-				s->avail_in = n;
+				s->avail_in = i;
 			}
 		}
 		if (s->flag == 0) {
