@@ -84,8 +84,8 @@
 #pragma comment(linker, "/include:__imp__WideCharToMultiByte@32")
 #pragma comment(linker, "/include:__imp__LCMapStringA@24")
 // USER32.dll
-#pragma comment(linker, "/include:__imp__MessageBoxA@16")
 #pragma comment(linker, "/include:__imp__GetWindowTextA@12")
+#pragma comment(linker, "/include:__imp__MessageBoxA@16")
 // WS2_32.dll
 #pragma comment(linker, "/include:__imp__accept@12")
 #pragma comment(linker, "/include:__imp__listen@8")
