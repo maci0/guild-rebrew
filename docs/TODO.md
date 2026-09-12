@@ -12,7 +12,7 @@ the round-by-round entries below establish.
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
 | standard CMake link, `.text` | 0x2276c (-218), postlink coverage 401/7,463 (5.4%) | — |
-| split-set link (LIBCMT member objects), `.text` | 0x22a0a (+452); 0 LIBCMT archive pulls, 6 duplicate objects discarded (72 B), 37 symbols exactly at their reference VA | — |
+| split-set link (LIBCMT member objects), `.text` | 0x22cba (+1140); 46 of ~320 symbols exactly at their reference VA, 201 more at a constant -16, 0 LIBCMT pulls, 0 objects discarded | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
 | CRT split-set leftovers | **34** symbols across ~10 members | 5,294 B |
@@ -207,6 +207,77 @@ second — so the structural count understates how hard they are.
 signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
+
+## The catalog's function size was truncating every longer object (2026-09-13, round 46)
+
+The map's `size` came from the catalog — Ghidra's function size — and
+`split_coff` trims each object to it.  That silently cut every reference
+function longer than its catalog entry.  `_free` is the case that mattered:
+LIBCMT's `free.obj` §1 is **233 bytes**, and Ghidra had catalogued 0x1001ab81
+as a 106-byte `free` with the tail as two more "functions" (`unlock_09c` 88,
+`unlock_09d` 45).  Our object was cut to 106 and the other 127 bytes were never
+emitted — which is exactly the -128 drift island at `__alloca_probe`.
+
+`match()` now reports how many bytes the member holds from the matched symbol
+on, and the map takes the **larger** of that and the catalog size.  `--trim`
+still caps at the section, so nothing grows past the member.
+
+Two matcher filters also had to change:
+
+* **`MIN_COVER = 0.5`** — `match()` compares `min(len(body), len(data))`, so a
+  section that ends early still "matched" on its last few bytes: the
+  `popen.obj` §6 entries at 0x1001abeb (88 B) and 0x1001ac43 (45) matched only
+  the 9 bytes at offset 956 of a 965-byte section.  The floor has to stay at
+  0.5 because catalog sizes are sometimes padded *above* the real function —
+  crt0dat's 34-byte `exit` is a 17-byte section, exactly 0.5.
+* **`MIN_FIXED_BYTES = 12`** — `MIN_FIXED_FRACTION` alone is too strict for
+  relocation-dense code.  `init_fptrs` (`fpinit.obj` §7, 56 B) is six stores of
+  absolute addresses, so 44 of its 56 bytes are operand slots and only 12 are
+  opcodes.  A match now passes with **either** 12 fixed bytes **or** half the
+  section fixed.  The absolute floor alone would be wrong: the fraction test is
+  what keeps `undname.obj` §2 (0 fixed of 86) out, and that section otherwise
+  matches several targets.
+
+`match` selection also now prefers the library with the **longest** matching
+section rather than the first that fits, since a shorter one matches as a
+prefix and is then trimmed.  (That is what should have chosen vc7's 292-byte
+`strncpy.obj` over sp6's 254-byte one; vc7's turns out to be a different
+implementation and does not match, so the change is currently neutral — kept
+because the rule is the right one.)
+
+| | before | after |
+|---|---|---|
+| region functions matched | 229/244 | **234/244** |
+| symbols exactly at their reference VA | 38 | **46** |
+| sum of abs delta over placed symbols | 155,180 | **32,172** |
+| delta range | -0x310 .. +0x25c | **-0x10 .. +0x30c** |
+| objects LINK discards | 6 | **0** |
+| LIBCMT archive pulls | 0 | 0 |
+
+**201 of the remaining 319 symbols sit at exactly -16.**  That plateau starts
+at `_strchr` (0x1001af30) and is one missing piece: between `_strncpy` (which
+ends at 0x1001af1d, `pop ebx; pop esi; pop edi; ret`) and `_strchr` the
+reference has
+
+```
+0x1001af1e  cc cc                     int3 padding
+0x1001af20  8d42ff                    lea eax,[edx-1]
+0x1001af23  5b                        pop ebx
+0x1001af24  c3                        ret
+0x1001af25  8da42400000000            lea esp,[esp]      \
+0x1001af2c  8d642400                  lea esp,[esp]       > 11 bytes of padding
+0x1001af30  33c0                      xor eax,eax        /   <- _strchr
+```
+
+a 5-byte strncpy return-value tail plus 11 bytes of msvc6's 16-byte
+intra-section alignment.  Emitting it means an object whose section carries
+16-byte alignment — the split objects take their alignment from the member, so
+a 5-byte one left at 1-byte alignment would land `_strchr` at -11, not -16.
+
+**Next step:** the missing 5-byte tail at 0x1001af20, then the CRT functions no
+LIBCMT variant carries at all — `allmul_slow` (0x10022f29, 27 B), `unlock_9`
+(0x1001b8a5, 86 B) and the `unlock_09e/f/g` group (0x1001b757 334,
+0x1002001d 137, 0x100200a6 156) — which have to be written as C.
 
 ## The map did not say which library it matched in (2026-09-13, round 45)
 
