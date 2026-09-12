@@ -70,7 +70,7 @@ Every reversed `.c` file starts with a **stable identity header** — only the
 information that is intrinsic to the function and never changes:
 
 ```c
-// FUNCTION: server.dll 0x<virtual_address>
+// FUNCTION: SERVER 0x<virtual_address>
 // SYMBOL: _function_name                 ← optional, derived from C definition
 
 void __cdecl function_name(void)
@@ -80,10 +80,11 @@ void __cdecl function_name(void)
 ```
 
 Volatile metadata (status, size, compiler flags, notes, blockers) is stored
-**outside** the `.c` file in a per-directory `rebrew-functions.toml` metadata file:
+**outside** the `.c` files, in `src/rebrew-functions.toml` (data globals in
+`src/rebrew-data.toml`), keyed by `<marker>.<VA>`:
 
 ```toml
-["server.dll.0x10001234"]
+["SERVER.0x10001234"]
 status = "STUB"
 size   = 42
 cflags = "/O2 /Gd"
@@ -92,12 +93,14 @@ note   = "inline asm detected"
 ```
 
 > [!CAUTION]
-> **Never manually edit `rebrew-functions.toml`.** It is managed exclusively by Rebrew
+> **Never manually edit `src/rebrew-functions.toml`.** It is managed exclusively by Rebrew
 > CLI tools (`rebrew test`, `rebrew match`, `rebrew diff --fix-blocker`, etc.).  Manual
 > edits will be lost or corrupt the file and break tool workflows.
 
-**STATUS values**: `PROVEN` (semantically verified) > `EXACT` (byte-perfect) > `RELOC` (match after masking
-relocations) > `NEAR_MATCHING` (close) > `STUB` (incomplete)
+**STATUS values**: `PROVEN` (semantically verified) > `EXACT` (byte-perfect) >
+`RELOC` (match after masking relocations) > `STUB` (incomplete). `SIZE_MISMATCH`
+and `MISSING_SIZE` are stored when the object size disagrees with the binary.
+`NEAR_MATCHING` appears only in `rebrew verify` output, never in the metadata.
 
 `CFLAGS` is optional — falls back to the target default from `rebrew-project.toml`.
 

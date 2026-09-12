@@ -2,7 +2,7 @@
 
 Last verify: 278/280 passed, 2 failed (0x100093a0 ServerMainThread, object
 size 2434 = the target's but the bytes differ; 0x10018850
-gm_AllocSpieler 3673 vs 3689).
+gm_AllocSpieler 3688 vs 3689).
 Goal requires 280/280 with inline asm only for 1-5 byte padding.
 
 ## gm_Open back to RELOC (2026-09-12)
@@ -1076,7 +1076,7 @@ RESULT: reccmp 88.71 -> 89.10%; the inflate/trees region now drifts by a
 UNIFORM +32 (from inflate_blocks being 32B short after the alloc patch) and
 the m_alloc/trees area by +32/-592/+1296. NEXT: (1) inflate_blocks -32 delta
 vs the original; (2) trees.c half-1 is ~1264B oversized (statics not
-inlined); (3) m_alloc.c split (ShutdownMemoryAllocator..m_pool_free are a
+inlined); (3) m_alloc.c split (m_ShutdownAllocator..m_pool_free are a
 separate TU in the original, after ReportMemoryGroupInfo).
 
 ## infblock/m_alloc convergence (2026-08-22) — aligned 36 -> 71, reccmp 89.24%
@@ -1107,7 +1107,7 @@ then the CRT block, then data/BSS.
   version. Patched trees.c (calls + extern decl) and stripped compress_block
   + _tr_tally; the whole trees half-1 (5376B) now aligns exactly.
 - Anchor sweep: 12 more unanchored `_emit` dump files got their
-  `// FUNCTION:` headers (ProcessReceiveData, ExecuteOfficeAssignment,
+  `// FUNCTION:` headers (ProcessReceiveData, amt_ExecuteOfficeAssignment,
   ls_Load*, cm_Ex*, gm_AllocSpieler, ahm_ExAllocAlchemist, ...).
 - server.c split at srv_Init (exit_handler/Init/Exit stay; server2.c =
   srv_Init..); OpenVfsStream + ServerMainThread dumps anchored.
@@ -1140,7 +1140,7 @@ extractor later if verify-based promotion matters.
   A split helper must strip that line automatically.
 - RESULT: 99 aligned (23.40%) — 0x10007e40..0x1000aa50 (send_tree through
   list_unlink_relink) byte-aligned. NEXT: cm_ProcessCommandQueue dump is
-  16B over; ExecuteOfficeAssignment +2000 placement; the amt/ahm C-size
+  16B over; amt_ExecuteOfficeAssignment +2000 placement; the amt/ahm C-size
   blocks; then the CRT block and data/BSS.
 
 ## ahm/aemter convergence (2026-08-22) — 112 -> 198 aligned (46.7%), reccmp 89.58%

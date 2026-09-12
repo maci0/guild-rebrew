@@ -50,10 +50,10 @@ extern unsigned int g_entity_slot_table[];
 word1 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
 ```
 
-`src/server.dll/DieGildeAddOn/game/friedhof_logic_c/HireProductionWorker.c:15,72`
+`src/server.dll/DieGildeAddOn/game/friedhof_logic_c/gv_HireProductionWorker.c:15,72`
 
-One declaration fix corrected four functions: `HireProductionWorker`
-(0x100111b0), `ExtendProductionTime` (0x100113b0),
+One declaration fix corrected four functions: `gv_HireProductionWorker`
+(0x100111b0), `gv_ExtendProductionTime` (0x100113b0),
 `cm_ExTransferCurrencyNoKill` (0x1000d8a0), `gm_QueryEntitySum` (0x100196c0).
 
 A byte-offset form (`*(unsigned short*)((char*) tbl + idx * 0x2f4)`) also
@@ -182,7 +182,7 @@ The target had one. A short-circuit merge produces the single shared exit and
 flips the branch sense (`jne` to `je`):
 
 ```c
-	slot = GetSlotEntry(workers, *(int*) ((char*) req + 0xc),
+	slot = gv_GetSlotEntry(workers, *(int*) ((char*) req + 0xc),
 	                    *(unsigned char*) ((char*) req + 0x10));
 	if (!slot ||
 	    *(unsigned short*) ((char*) slot + 8) !=
@@ -867,7 +867,7 @@ levers close most of them. Both were found on functions this section
 previously listed as unreachable.
 
 **Which value is read from memory first fixes the byte register.** In
-`GetCommandPayloadSize` (0x1000c710) the target keeps the switch byte in `dl`
+`ahm_GetCommandPayloadSize` (0x1000c710) the target keeps the switch byte in `dl`
 and the loop index in `ecx`; the `case 0x16` body reads `cmd_payload` twice,
 once for the `*cmd_payload == 0x16` test and once for `cmd_payload[0x14]`.
 Reading the byte for the test first pins it in `dl`:
@@ -879,10 +879,10 @@ count = cmd_payload[0x14];    /* RELOC 752/752 */
 
 The reverse order scores 742/752, and hoisting the unrelated
 `total_size = 0x15` above both scores 508/752.
-`src/server.dll/DieGildeAddOn/game/alchemistry_logic_c/GetCommandPayloadSize.c:93`.
+`src/server.dll/DieGildeAddOn/game/alchemistry_logic_c/ahm_GetCommandPayloadSize.c:93`.
 
 **A hoisted `~x` temp takes the register the target gave the other value.**
-In `ExecuteOfficeAssignment` (0x1000b4d0) the loop clear was written as a
+In `amt_ExecuteOfficeAssignment` (0x1000b4d0) the loop clear was written as a
 `neg_mask` local, which parked the mask in `ecx` and pushed `role_ch` to
 `edx`, the reverse of the reference. Spelling the complement inline in the
 loop body restores both:
@@ -891,7 +891,7 @@ loop body restores both:
 *scan = *scan & ~mask;        /* 826/836 -> 829/836 */
 ```
 
-`src/server.dll/DieGildeAddOn/game/aemter_c/ExecuteOfficeAssignment.c:260`.
+`src/server.dll/DieGildeAddOn/game/aemter_c/amt_ExecuteOfficeAssignment.c:260`.
 The same complement written as `neg_mask = ~mask`, as `mask = ~mask` before
 the loop, or inside a `for`-init all score 826.
 
@@ -1149,7 +1149,7 @@ instruction 0. Both are more tractable than the percentage suggests, because
 Recurring across the conversions: when two reads feed different consumers,
 the one you write first claims the register the target expects.
 
-In `GetCommandPayloadSize` (0x1000c710) the target keeps a switch byte in
+In `ahm_GetCommandPayloadSize` (0x1000c710) the target keeps a switch byte in
 `dl` and a loop index in `ecx`. Assigning the cursor, whose initializer reads
 the switch byte, *before* reading the count pins the byte in `dl` and closed
 a 10-byte gap. Reversing the two statements scores 742 of 752.
@@ -1214,7 +1214,7 @@ from the induction variable's form. Counting rows and spelling every access as
 `g_entity_type_table + row_index * 0x24d + disp` gives the counter the base
 role and closed the function (858/861 -> 861/861 RELOC).
 
-**Preheader instruction order.** In `ExecuteOfficeAssignment` (0x1000b4d0) the
+**Preheader instruction order.** In `amt_ExecuteOfficeAssignment` (0x1000b4d0) the
 reference emitted `not edx; mov eax,0x10035a6c` and a pointer-cursor loop
 emitted the two the other way round. Rewriting the sweep as
 `*(int*) (0x10035a6c + row * 0x21c)` over `row < 768` put the `not` first and
@@ -1252,7 +1252,7 @@ reference's `mov dl,[esi+0x12]` / `xor eax,eax` / `mov ax,[esi]` read order.
 
 The local's width matters. The natural `unsigned short` emits an
 `and eax,0xffff` widen and reorders the two field reads (SIZE_MISMATCH, 167 of
-355). An `int` local is exact. See also §16 on local width.
+355). An `int` local is exact. See also section 6 on local width.
 
 Before hoisting a value out of an argument list to fix register naming, check
 whether hoisting one out of a *different* call fixes it instead: the hoist that
@@ -1268,7 +1268,7 @@ Section 14 homes one value in an incoming parameter's own slot. The slot is
 four bytes, and the *other* bytes of it are usable homes too. That matters when
 the frame is one dword too large because a single byte value needs a spill.
 
-`ValidateAndAssignOffice` (0x1000b290) reads a holder byte
+`amt_ValidateAndAssignOffice` (0x1000b290) reads a holder byte
 (`g_office_slots[i].b`) before a scan loop and uses it after. The reference
 keeps it in `al` across the loop; every C shape that carries it in a local puts
 it in `cl`, which the loop's cursor clobbers, so msvc6 spills it to a fresh
@@ -1329,7 +1329,7 @@ int __cdecl m(void)
 emits `test/jne/xor eax,eax/ret` before any push, then `push ebx; mov ebx,...;
 push esi; mov esi,...; push edi`. `.scratch/w_l2/m1.c`; `m2.c` and `m3.c` show
 the same with one register (`esi`) live from entry, which is the exact shape of
-`FindNextFilteredEntity` (0x10016f80) and `gm_NextEntityQueryMatch`
+`gm_FindNextFilteredEntity` (0x10016f80) and `gm_NextEntityQueryMatch`
 (0x10016290).
 
 The threshold is real and low. `m4.c` differs from `m3.c` only in carrying two
@@ -1363,7 +1363,7 @@ MSVC 6.0 decides the roles from how the loop advances.
 
 Three such swaps in `gm_Open` (0x10015950) closed it at 861/861 after the
 addend-order approach had been tried and failed. The same swap in
-`SpawnGraveyardEntities` (0x10010850) came instead from removing a
+`gv_SpawnEntities` (0x10010850) came instead from removing a
 semantically dead `if (count > 0)` wrapper around a `while` loop that already
 tested it: the extra nesting raised register pressure enough to flip the
 roles.
@@ -1667,7 +1667,7 @@ Where the target reads one struct field and stores to another in the opposite
 order from the candidate, `"a"` is the difference: without it msvc6 must assume
 the store may alias the read and keeps source order.
 
-In `AdvanceGameClock` (0x100155c0) the target emits
+In `sim_AdvanceGameClock` (0x100155c0) the target emits
 
 ```
 xor esi,esi; mov si,word ptr [ecx+4]; mov dword ptr [ecx+6],edx
@@ -1680,7 +1680,7 @@ the target's order with no source change at all, 187 to 194/197.
 
 ```c
 #pragma optimize("a", on)
-void __cdecl AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4)
+void __cdecl sim_AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4)
 {
 	/* ... */
 }
@@ -1704,7 +1704,7 @@ Two exits that write the same value to the same field, one inside an `if` with
 a `return` and one at the end of the function, cost more than the duplicated
 store: they change how the preceding loop schedules.
 
-`AdvanceGameClock`'s second loop had to emit
+`sim_AdvanceGameClock`'s second loop had to emit
 
 ```
 mov esi,[ecx]; dec esi; dec edx; mov [ecx],esi; jne

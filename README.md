@@ -33,7 +33,7 @@ rebrew skeleton 0x10003DA0
 rebrew test src/server.dll/my_func.c
 
 # 5. If near-miss, check the diff and try the GA
-rebrew diff src/server.dll/my_func.c --mm   # structural diffs only
+rebrew diff src/server.dll/my_func.c -m   # structural diffs only
 rebrew match src/server.dll/my_func.c --generations 200 --pop-size 64 -j 16  # GA search
 
 # 6. Single-file flag sweep

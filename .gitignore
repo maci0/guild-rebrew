@@ -20,13 +20,6 @@ run_out/
 build/
 *.log
 
-
-# Target binary bytes (extracted from original DLLs)
-bin/
-
-# Extracted target function bytes (legacy, no longer generated)
-func_0x*.bin
-
 # Cognee
 .cognee-data/
 .env.cognee
@@ -40,7 +33,6 @@ original/
 
 # Temp / scratch files from RE workflow
 .scratch/
-.scratchwork/
 __mc_tmp.c
 *.cod
 diff_*.txt
@@ -67,7 +59,6 @@ reccmp-*-recomp.txt
 catalog.json
 .env.temp
 db/
-archive/
 compile_commands.json
 .rebrew
 diff.json
@@ -77,8 +68,8 @@ tools/ghidra-cli
 rebrew-functions.toml.lock
 rebrew-data.toml.lock
 
-# Legacy binary layout zip (replaced by the committed text layout/<target>/)
-layout/*.zip
+# Variant build trees. The one build directory is build/; this only keeps a
+# stray -B build-something from being committed by accident.
 build-*/
 
 # BinSync state dir: regenerable from the metadata (rebrew sync --push --state-dir binsync)
