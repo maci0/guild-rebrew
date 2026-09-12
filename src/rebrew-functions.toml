@@ -1820,3 +1820,88 @@ blocker = "Application code — pending per-function decompilation"
 size = 16
 blocker = "Application code — pending per-function decompilation"
 
+["GOLDTL.0x0041d6b0"]
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-12T14:53:02+00:00"
+size = 404
+
+["GOLDTL.0x00412f10"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:53:29+00:00"
+
+["GOLDTL.0x0042e450"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:53:34+00:00"
+
+["GOLDTL.0x0042e4b0"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:53:39+00:00"
+
+["GOLDTL.0x00465350"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:53:42+00:00"
+
+["GOLDTL.0x004c7400"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:53:49+00:00"
+
+["GOLDTL.0x004f1650"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:53:56+00:00"
+
+["GOLDTL.0x004f18d0"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:54:01+00:00"
+
+["GOLDTL.0x004f2880"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:54:04+00:00"
+
+["GOLDTL.0x004f2a80"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:54:07+00:00"
+
+["GOLDTL.0x004f2c00"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:54:09+00:00"
+
+["GOLDTL.0x004f2d90"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:54:12+00:00"
+
+["GOLDTL.0x00502850"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:54:17+00:00"
+
+["GOLDTL.0x00502e00"]
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-12T14:54:20+00:00"
+
+["GOLDTL.0x00513d40"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:54:24+00:00"
+
+["GOLDTL.0x005218f0"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:54:28+00:00"
+
+["GOLDTL.0x0063e931"]
+status = "EXTRACT_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-12T14:54:32+00:00"
