@@ -341,14 +341,13 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 
 	i = 0;
 	player_slot = (unsigned int*) 0x101deb00;
-	do {
-		if ((*player_slot & 0x400) == 0) {
-			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-			i = i + 1;
-			continue;
+	while ((int) player_slot < 0x114ffe20) {
+		if ((*player_slot & 0x400) != 0) {
+			goto host_slot_found;
 		}
-		goto host_slot_found;
-	} while ((int) player_slot < 0x114ffe20);
+		player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
+		i = i + 1;
+	}
 
 	srv_CleanupSockets();
 
