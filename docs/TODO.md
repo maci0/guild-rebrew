@@ -14,6 +14,74 @@ and `delta 1873` yet counts as passed.  The honest number is `byte_matched`
 in `db/verify_results.json` (259/280 at this revision).  Whole-binary
 identity needs the 21 byte diffs **and** the link alignment below.
 
+## The alignment is now a short, named list (2026-09-13, round 2)
+
+Every game TU is contiguous, so `/MAP` deltas against
+`db/server.dll_functions.csv` now read as one gate plus four small shortfalls.
+`.text` is 0x2284c (+6) and postlink coverage 402/7463 (5.4%).
+
+| from VA | delta | cause |
+|---|---|---|
+| 0x10001000 | 0 | |
+| 0x10002fc0 | **+16** | CrashDumpUnhandledExceptionFilter, obj 2137 vs 2115 |
+| 0x10006820 | **-48** | m_AllocTracked, obj 608 vs 658 |
+| 0x10008c80 | -32 | |
+| 0x10009020 | -64 | |
+| 0x1000ef90 | -96 | |
+| 0x10010710 | -112 | last event before the LIBCMT region |
+
+Fix CrashDump and the delta is 0 for the first 0x3800 bytes of `.text` — the
+whole 0x2fd0..0x6820 span, ~28% of the map entries, validates in one change.
+It is the highest-value function in the tree by a wide margin.  The prologue
+is the whole difference: the target saves ebp/esi with frame 0x280 and keeps
+`hDbgFile` in ebp; ours saves ebx/ebp/esi/edi with frame 0x28c and spills it.
+Any C rewrite that drops two callee-saved registers is the fix; the body
+after the prologue already matches instruction for instruction once the
+0x14 esp displacement is taken out.
+
+Round 2 also split the last two non-contiguous game TUs the way round 1 split
+friedhof_dump/lobbycommands: `spiel62.c` -> `gm_RemoveObjectWrapper.c`
+(0x17f30+0x17f60) and `spiel622.c` -> `gm_RandomQuadratic.c` (0x1a110), so
+`gm_InitEntityIfValid.c` (0x17f90) and `gm_RandomFloat01.c` (0x1a0f0) land
+between their neighbours.  All four moved functions re-tested unchanged.
+
+## The block-fill prelude is not a compiler template (2026-09-13)
+
+Round 1 mapped the six `lea ecx,[edi+edi*2]; and ecx,3` sites (3 present via
+inline asm, 3 missing).  The open question was whether another MSVC emits it.
+Measured by compiling m_AllocTracked with `#pragma intrinsic(memset)` — the
+configuration that inlines the fill — under every toolchain that has a memset
+expansion:
+
+| toolchain | match | obj |
+|---|---|---|
+| msvc-4.2 | 143 | 694 |
+| msvc-5.0 | 193 | 617 |
+| msvc-6.0-sp4 | **226** | 613 |
+| msvc-6.0-sp6 | 226 | 613 |
+| msvc-7.0 | 134 | 617 |
+| msvc-7.0-rtm | 135 | 615 |
+| msvc-7.1 | 134 | 617 |
+
+No toolchain reaches the prelude (target 658); the shape is byte-invariant
+across the shipped binaries, `sub`+`jle` with no intervening `test` is not
+msvc6 output, and no C spelling of the align-up split reproduces it.  The
+prelude is therefore hand-written asm in the original game code, not a
+compiler template — reproducing it with an inline `__asm` block matches what
+the original did (the tree already carries three such blocks).
+
+**m_PoolAlloc (0x10006d20) is 4 bytes from exact and its recorded blocker is
+stale.**  The metadata says "alignment-prefixed memset prelude — pure C cannot
+emit"; the object is 270/270 and the prelude IS emitted by the file's inline
+asm.  `rebrew diff 0x10006d20` reports `{exact 101, reloc 4, structural 2}`:
+the only residual is the order of the two parameter homes, target
+`mov [ebp+0xc],edx` / `mov [ebp+8],esi`, ours reversed.  Measured this round:
+any source order that puts the slot home first (swapped stores, a shared
+`volatile int*`, dropping the `asize` temp and homing `alen` directly) lets
+the scheduler sink `add esi,-4` past it and lands on 260/270.  The shipped
+order keeps `add esi,-4` early but emits the homes reversed.  Whoever clears
+that one scheduler artifact gets the function free.
+
 ## Structural link alignment (2026-09-13) — `.text` +214 -> +6, order fixed
 
 The raw link (postlink skipped — the POST_BUILD step still refuses) was

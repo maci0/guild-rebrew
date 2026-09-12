@@ -115,38 +115,6 @@ double __cdecl gm_RandomFloat01(void);
 extern float g_const_1_0;
 extern float g_const_neg_1_0;
 
-/* Allocates and initializes a game entity structure. Allocates
- * memory via m_AllocTracked and zeroes the initial fields. */
-
-// FUNCTION: SERVER 0x10017f30
-// gm_RemoveObjectWrapper
-
-int __cdecl gm_RemoveObjectWrapper(int entity_record, unsigned int obj_type)
-{
-	int remove_result;
-
-	remove_result = gm_RemoveObjectByType((void**) (entity_record + 0x5d), obj_type);
-	if (remove_result == -2) {
-		return -3;
-	}
-	return 0;
-}
-
-/* Removes a link from an entity. Clears a specific entity
- * reference field, breaking the association. */
-
-// FUNCTION: SERVER 0x10017f60
-// gm_RemoveEntityLink
-
-void __cdecl gm_RemoveEntityLink(int entity)
-{
-	int parent_entity;
-
-	parent_entity = (int) gm_EntityAccumulate((void*) entity);
-	if (parent_entity != 0) {
-		gm_RemoveLinkedNodeById((int*) (parent_entity + 0x5d), *(int*) (entity + 2));
-	}
-}
 
 /* Initializes an entity if it exists. Validates the entity
  * pointer, then sets default field values. No-op on NULL. */
@@ -666,4 +634,5 @@ short* __cdecl gm_GetEntityTableEntry(char* param)
 /* Implementation of player identity change. Swaps player
  * entity identity between two IDs, updating all back-
  * references in buildings and citizens. */
+
 

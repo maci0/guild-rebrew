@@ -1236,21 +1236,3 @@ int __cdecl gm_RandomMod(unsigned short n)
  * Produces values biased toward lower numbers. Used for
  * stat rolls and probability curves. */
 
-// FUNCTION: SERVER 0x1001a110
-// gm_RandomQuadratic
-
-float __cdecl gm_RandomQuadratic(void)
-{
-	float rand_val;
-
-	rand_val = (float) gm_RandomFloat01();
-	rand_val = (rand_val + rand_val) - g_const_1_0;
-	if (rand_val < g_const_0_0) {
-		return g_const_neg_1_0 * rand_val * rand_val;
-	}
-	return g_const_1_0 * rand_val * rand_val;
-}
-int g_some_limit;
-unsigned int g_1009b764;
-char* g_slot_array;
-unsigned int g_100a8cf8;
