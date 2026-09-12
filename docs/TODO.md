@@ -1,5 +1,44 @@
 # Blockers — 100% Round-Trip Goal
 
+## The CMake `.text` shortfall is substitution, not absence (2026-09-13, round 53)
+
+The 0x470 the CMake link is short is *not* code the linker failed to pull.
+`build/split_poc/map_full.json` records 244 reference CRT sections across 116
+LIBCMT members; 101 of those members are pulled by the CMake link and 26 are
+not -- together 11,315 bytes of reference CRT code:
+
+```
+sbheap.obj 4628   strgtold.obj 1233   cvt.obj 1062    intrncvt.obj 1004
+memmove.obj 821   mbscat.obj   464    ieee87.obj 358  tolower.obj  314
+mlock.obj   267   strnicmp.obj 257    stricmp.obj 208 ...  (26 total)
+```
+
+None of them has a direct `call rel32` site in the reference: they are pulled
+transitively, through the CRT's own tables.  Forcing all 21 of them in with
+`/INCLUDE:<first external symbol>` settles what that means:
+
+```
+.svg .text  0x223d6   (1136 short)   as linked
+            0x25d9e   (13144 over)   with the 26 members added
+```
+
+So the reference has those members and the CMake link does not -- but adding
+them overshoots by 0x3568, because 0x2f00-odd bytes of the CRT region are
+already occupied by *our* C: the `_CRT_REGION_KEEP` scaffolding
+(`sbh_pool.c` 4556, `crt_heap.c` 944, `amsg_exit.c` 1168, `sbh_aliases.c` 480,
+`mlock.c` 212, `initterm.c` 80, `dllmain.c` 208, `link_stubs.c` 16) stands in
+for `sbheap.obj`, `mlock.obj`, `crt0msg.obj`, `dllcrt0.obj` and friends.  Those
+substitutions are ~1136 bytes shorter than the library bodies they displace,
+which is the whole of the shortfall.
+
+That is a design fact, not a bug to chase: the CMake build *cannot* be
+byte-identical while it substitutes C for library members, unless each
+substitute body is itself byte-exact.  Byte identity goes through the split
+set, which emits the real member sections at their reference VAs and already
+matches the CRT region 100.00% (39,877 bytes, round 50).  The CMake build's
+job is `rebrew verify` / `rebrew test`; the split build's job is the byte
+comparison, and `scripts/text_match.py --align` is how it is scored.
+
 ## The link had an extra import, from one underscore (2026-09-13, round 52)
 
 `server.dll` has exactly 100 imports.  The CMake link had **101**, and the
