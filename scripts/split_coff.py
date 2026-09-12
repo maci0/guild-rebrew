@@ -310,7 +310,8 @@ def closure_sections(coff: Coff, root: int, skip: set[int]) -> list[int]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--lib", required=True)
+    ap.add_argument("--lib", action="append", required=True,
+                    help="static library (repeatable); members are looked up in order")
     ap.add_argument("--map", required=True, help="JSON from scripts/map_libcmt.py --json")
     ap.add_argument("--out", required=True)
     ap.add_argument("--from-va", default="0x1001a150")
@@ -332,9 +333,13 @@ def main() -> int:
     args = ap.parse_args()
 
     root = Path(__file__).resolve().parent.parent
-    lib = Path(args.lib)
-    if not lib.is_absolute():
-        lib = root / lib
+    libs = []
+    for spec_ in args.lib:
+        lp = Path(spec_)
+        if not lp.is_absolute():
+            lp = root / lp
+        libs.append(lp)
+    lib = libs[0]
     outdir = Path(args.out)
     if not outdir.is_absolute():
         outdir = root / outdir
@@ -348,9 +353,12 @@ def main() -> int:
         if va >= floor:
             want.setdefault(e["member"], []).append((va, e["symbol"]))
 
-    members = ar_members(lib.read_bytes())
-    resolve = name_resolver(members)
-    by_name = {resolve(raw): obj for raw, obj in members}
+    by_name: dict[str, bytes] = {}
+    for lp in libs:
+        members = ar_members(lp.read_bytes())
+        resolve = name_resolver(members)
+        for raw, obj in members:
+            by_name.setdefault(resolve(raw), obj)
 
     written: list[tuple[int | None, str, str]] = []
     for member, funcs in want.items():

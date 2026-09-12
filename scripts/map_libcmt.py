@@ -138,8 +138,8 @@ def reloc_mask(obj: bytes, section: dict) -> set[int]:
     return mask
 
 
-def index_library(path: Path) -> list[tuple[str, str, bytes, dict, int, set[int]]]:
-    """(symbol, member, object bytes, section, symbol value, reloc mask)."""
+def index_library(path: Path) -> list[tuple[str, str, bytes, dict, int, int, set[int]]]:
+    """(symbol, member, object bytes, section, section index, value, reloc mask)."""
     members = ar_members(path.read_bytes())
     resolve = make_name_resolver(members)
     index = []
@@ -156,12 +156,15 @@ def index_library(path: Path) -> list[tuple[str, str, bytes, dict, int, set[int]
             # 2 = external, 3 = static (CRT helpers such as _initterm).
             if section <= 0 or storage_class not in (2, 3) or section > len(sections):
                 continue
-            if sym.startswith("."):
-                continue
+            # Section symbols (".text") are kept: many LIBCMT helpers are only
+            # reachable through them, and skipping them left ~22 reference
+            # functions unmatched (exsup, NMSG_WRITE, setmbcp, dosmaperr ...).
             sec = sections[section - 1]
             if sec["raw_size"] <= value:
                 continue
-            index.append((sym, name, obj, sec, value, reloc_mask(obj, sec)))
+            index.append(
+                (sym, name, obj, sec, section, value, reloc_mask(obj, sec))
+            )
     return index
 
 
@@ -198,7 +201,7 @@ class Reference:
 
 
 def match(index, data: bytes):
-    for sym, member, obj, sec, value, mask in index:
+    for sym, member, obj, sec, section, value, mask in index:
         body = obj[sec["raw_ptr"] + value : sec["raw_ptr"] + sec["raw_size"]]
         # The catalog's size for a function is often padded (or truncated)
         # relative to the member's COMDAT section, so compare the common
@@ -213,7 +216,7 @@ def match(index, data: bytes):
             if body[i] != data[i] and i not in slots:
                 break
         else:
-            return member, sym
+            return member, sym, section
     return None
 
 
@@ -232,7 +235,14 @@ def load_catalog(root: Path) -> list[tuple[int, str, int]]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--lib", default=str(DEFAULT_LIB))
+    ap.add_argument(
+        "--lib",
+        action="append",
+        default=None,
+        help="static library to match against, in preference order (repeatable). "
+        "The reference CRT is a mix: 223 region functions match SP6, 5 more only "
+        "match SP5/base (dosmaperr, NMSG_WRITE, setmbcp, output).",
+    )
     ap.add_argument("--target-bin", default="original/Server/server.dll")
     ap.add_argument("--catalog", default="db/server.dll_functions.csv")
     ap.add_argument("--from", dest="from_va", default="0x1001a150")
@@ -240,17 +250,20 @@ def main() -> int:
     args = ap.parse_args()
 
     root = Path(__file__).resolve().parent.parent
-    lib = Path(args.lib)
-    if not lib.is_absolute():
-        lib = root / lib
-    if not lib.exists():
-        sys.exit(
-            f"map_libcmt: {lib} not found.  Extract it once with\n"
-            f"  rebrew lib-match --stock-lib {DEFAULT_STOCK}\n"
-            "or point --lib at the toolchain's LIBCMT.LIB."
-        )
-
-    index = index_library(lib)
+    lib_paths = []
+    for spec_ in args.lib or [str(DEFAULT_LIB)]:
+        lp = Path(spec_)
+        if not lp.is_absolute():
+            lp = root / lp
+        if not lp.exists():
+            sys.exit(
+                f"map_libcmt: {lp} not found.  Extract it once with\n"
+                f"  rebrew lib-match --stock-lib {DEFAULT_STOCK}\n"
+                "or point --lib at the toolchain's LIBCMT.LIB."
+            )
+        lib_paths.append(lp)
+    lib_indexes = [(lp, index_library(lp)) for lp in lib_paths]
+    index = lib_indexes[0][1]
     ref = Reference(root / args.target_bin)
     rows = load_catalog(root)
     floor = int(args.from_va, 16)
@@ -262,9 +275,13 @@ def main() -> int:
         data = ref.body(va, size)
         if data is None:
             continue
-        got = match(index, data)
+        got = None
+        for _lp, _ix in lib_indexes:
+            got = match(_ix, data)
+            if got:
+                break
         if got:
-            hits.append((va, name, size, got[0], got[1]))
+            hits.append((va, name, size, got[0], got[1], got[2]))
         else:
             miss.append((va, name, size))
 
@@ -274,7 +291,7 @@ def main() -> int:
         print(
             json.dumps(
                 {
-                    "library": str(lib),
+                    "libraries": [str(lp) for lp, _ix in lib_indexes],
                     "matched": [
                         {
                             "va": f"0x{va:x}",
@@ -282,8 +299,9 @@ def main() -> int:
                             "size": size,
                             "member": member,
                             "symbol": sym,
+                            "section": section,
                         }
-                        for va, name, size, member, sym in sorted(hits)
+                        for va, name, size, member, sym, section in sorted(hits)
                     ],
                     "matched_bytes": sum(h[2] for h in hits),
                     "region_total": len(in_region),
@@ -294,8 +312,8 @@ def main() -> int:
         )
         return 0
 
-    print(f"library: {lib}")
-    print(f"indexed sections: {len(index)}")
+    print("libraries: " + ", ".join(str(lp) for lp, _ix in lib_indexes))
+    print(f"indexed sections: {sum(len(ix) for _lp, ix in lib_indexes)}")
     print(f"matched {len(hits)} functions ({sum(h[2] for h in hits)} B)")
     print(
         f"region >= {args.from_va}: {len(reg_hits)}/{len(in_region)} "
@@ -304,7 +322,7 @@ def main() -> int:
     print()
     # member order by first VA: this is the link-object order
     by_member: dict[str, list[tuple[int, str]]] = {}
-    for va, name, size, member, sym in sorted(hits):
+    for va, name, size, member, sym, _section in sorted(hits):
         if va >= floor:
             by_member.setdefault(member, []).append((va, sym))
     for member, funcs in sorted(by_member.items(), key=lambda kv: min(v for v, _ in kv[1])):
