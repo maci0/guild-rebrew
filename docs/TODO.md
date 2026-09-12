@@ -12,7 +12,7 @@ the round-by-round entries below establish.
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
 | standard CMake link, `.text` | 0x2276c (-218), postlink coverage 401/7,463 (5.4%) | — |
-| split-set link (LIBCMT member objects), `.text` | 0x22b8a; 35 of 330 symbols exactly at their reference VA, sum of abs delta 150,062 | — |
+| split-set link (LIBCMT member objects), `.text` | 0x22c8a; 38 of 330 symbols exactly at their reference VA, sum of abs delta 114,890, 10 objects discarded | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
 | CRT split-set leftovers | **34** symbols across ~10 members | 5,294 B |
@@ -207,6 +207,71 @@ second — so the structural count understates how hard they are.
 signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
+
+## Three CRT members carry the same 101 bytes (2026-09-13, round 42)
+
+The alias mechanism in `split_coff` exports every byte-identical spelling of a
+section body, because that is what stops LINK pulling a sibling archive member
+just to resolve another name.  Round 41 narrowed it to the object's *own*
+member, which fixed crt0dat §14/§16 and fread/fwrite — but `lseek.obj`,
+`read.obj` and `write.obj` all carry the **same 101 bytes**, so each still
+exported all three of `__lseek`, `__read` and `__write`.  Three objects
+defining the same symbol set makes LINK keep one and drop two, which is what
+lost 101 bytes at 0x1001e8b4 and 101 more at 0x1001eec1.
+
+The exclusion now covers the mapped sections of **every** member
+(`all_mapped_names` in `split_coff`).
+
+| | round 41 | round 42 |
+|---|---|---|
+| symbols exactly at their reference VA | 35 | **38** |
+| sum of abs delta over placed symbols | 150,062 | **114,890** |
+| objects LINK discards | 14 (541 B) | **10 (280 B)** |
+| delta range | -0x2b0 .. +0x22c | **-0x264 .. +0x25c** |
+
+**The ten remaining discards are seven harmless and three real.**  Seven are
+the `$L21349` / `$L21312` fragments with a zero-length `.text` — nothing is
+lost when LINK drops them.  The three that cost bytes are
+`1001e7dc___except_handler3.obj` (216), `1001e899___seh_longjmp_unwind_4.obj`
+(27) and `1001ba7f___amsg_exit.obj` (37).
+
+**Why the exsup3 pair is hard.**  `exsup3.obj` §1 is one 224-byte section
+holding *three* reference functions, and `map_libcmt` records which one it
+matched through the symbol's offset inside the section:
+
+| reference VA | section offset | size |
+|---|---|---|
+| 0x1001e7d4 | 0 | 197 |
+| 0x1001e7dc | 8 | 216 |
+| 0x1001e899 | 197 | 27 |
+
+`split_coff` never sees that offset, so all three emit the section from byte
+0, trimmed to three different lengths.  The first object carries the closure
+and so defines all three symbols, and the other two are then duplicates.
+Teaching `build_object` to emit a *slice* (a `start` alongside `trim`, with
+symbol values and relocation offsets rebased, and the root COMDAT section
+symbol never dropped) was implemented and measured:
+
+| | no slice | slice |
+|---|---|---|
+| sum of abs delta | 114,890 | **113,474** |
+| symbols exactly at their VA | 38 | 38 |
+| symbols placed | 327 | 320 |
+| objects discarded | 10 | 12 |
+
+It is correct in principle — the fragment bytes come out right — but it loses
+more content than it recovers, because the slices still export the whole
+section's alias set and two more objects (35 and 24 bytes) became duplicates.
+Reverted.  Retry it *together with* a per-slice symbol set.
+
+**Cross-library section indices are a trap.**  A map entry can name a section
+that only exists in a later service pack: vc7's `popen.obj` has 21 sections
+where the 6.0 ones have 9, and its §6 is a 965-byte `.text` while sp6's §6 is
+not code at all.  `split_coff` resolves a member by name against the *first*
+library that has it, so the offset is meaningless there.  Round 41 added a
+section-count filter; the slice experiment needed a second guard (only slice a
+`.text` root section, and only when the offset is inside it).  The real fix is
+to record the library in the map and have `split_coff` read that copy.
 
 ## Two reference VAs were sharing one library section (2026-09-13, round 41)
 
