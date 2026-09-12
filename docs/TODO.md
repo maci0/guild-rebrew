@@ -28,6 +28,43 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## Explicit member placement works; whole members overshoot (2026-09-13, round 5)
+
+Round 5 built the link the plan calls for and measured the two obstacles.
+
+**The reference's `DllMain` is LIBCMT code.**  `0x1001b9d4` — the reference's
+`AddressOfEntryPoint` — is byte-for-byte `__DllMainCRTStartup@12` from
+LIBCMT's `dllcrt0.obj` (`scripts/map_libcmt.py` reports the symbol).  So
+`crt_region/dllmain.c` reverses library code, and `/ENTRY:DllMain@12` should
+be `/ENTRY:_DllMainCRTStartup@12`.  The same holds for `amsg_exit.c`
+(`__amsg_exit`, also `dllcrt0.obj`).
+
+**Explicit member objects are placed inline, in the order given.**  A PoC link
+put 99 extracted LIBCMT members (the ones `map_libcmt.py` maps for
+VA >= 0x1001a150) on the command line after the game objects:
+`_fclose` landed at 0x1001a0e0, immediately after `srv_SeedRandomWithTime`,
+and the rest followed in the supplied order (after fixing a sort bug that
+ordered the members by *path* instead of by VA).  So the mechanism the plan
+needs is confirmed — the library is no longer appended at the end.
+
+Two obstacles, both measured:
+
+1. **Whole members overshoot by ~6.3 KB.**  The 99 members carry 40,896 B of
+   `.text` against the reference region's 34,550 B (0x1001a150..0x10022846),
+   because a member ships functions the reference never had.  The PoC's
+   `.text` therefore ran to 0x10025658.  Per-*function* selection is required:
+   either split each member's `/Gy` COMDATs and place only the sections the
+   reference uses, or drive the link with `/OPT:REF` plus an `/INCLUDE:` for
+   every symbol in the region.  A first `/OPT:REF` attempt collapsed the whole
+   link to 0x10011504, so the `/INCLUDE:` list has to be complete before that
+   switch is flipped.
+2. **Absolute VAs inherit the game region's cumulative error.**  Placing the
+   members right after the game objects put `_fclose` at 0x1a0e0 against the
+   reference's 0x1a18a, exactly the -112 B the game region is short by the end
+   (CrashDump +16, m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData
+   -32, ...).  Member placement cannot be checked until the game region is
+   exact, but it can be developed independently.
+
 ## LIBCMT is appended after every object — the reference interleaves it (2026-09-13, round 4)
 
 The objective says zlib and LIBCMT are to be *linked in*, not reversed, so
