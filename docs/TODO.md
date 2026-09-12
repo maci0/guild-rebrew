@@ -203,6 +203,70 @@ documented exhaustively as scheduling walls — the FP-stack `fxch`/folded-compa
 exclusivity in the first, the pre-loop volatile-store interleave in the
 second — so the structural count understates how hard they are.
 
+**Superseded (round 25).**  The `structural` column above is *not* a priority
+signal: `rebrew diff` aligns positionally, so one instruction of length
+difference desyncs everything after it.  See the alignment-corrected table in
+the round-25 section below before choosing a target.
+
+## `rebrew diff`'s positional count is not a priority signal (2026-09-13, round 25)
+
+`rebrew diff` aligns the target and candidate streams *positionally*.  When the
+candidate inserts or deletes one instruction the alignment desyncs for the rest
+of the function, so `structural` explodes and `exact` collapses even though the
+two streams are the same program in the same order.  Two examples measured this
+round: `cm_ProcessCommandQueue` reads **15.6%** positionally but **88.3%** once
+aligned, and `ls_LoadBuildingEntityState` reads **0.6%** positionally but
+**88.8%** aligned.  The round-24 flags on both functions were chasing a
+measurement artefact.
+
+`scripts/align_match.py` computes the honest number: the longest common
+subsequence of normalized instruction text, i.e. the largest number of target
+instructions that can be matched, in order, by an instruction that will be
+byte-identical in the linked image.  Normalization lowercases, drops `;`
+comments and segment prefixes, masks bracketed symbol operands and any number
+`>= 0x10000` (image addresses / relocations), and keeps only the mnemonic for
+branches and calls; register names and small displacements are *kept*, so a
+register-role or frame-offset difference is still a mismatch.
+
+| function | tgt | cand | identical, in order | % | `rebrew diff` positional |
+|---|---|---|---|---|---|
+| `cm_ExProdObjekt` | 354 | 369 | 329 | 92.9% | 98.6% |
+| `ls_LoadBuildingEntityState` | 499 | 495 | 443 | 88.8% | 0.6% |
+| `cm_ProcessCommandQueue` | 205 | 204 | 181 | 88.3% | 15.6% |
+| `gm_CheckInventoryCapacity` | 138 | 142 | 121 | 87.7% | 7.2% |
+| `ServerMainThread` | 627 | 641 | 545 | 86.9% | 81.7% |
+| `gm_ObjectsAvailble` | 229 | 235 | 197 | 86.0% | 92.1% |
+| `gm_CalculateProductionValue` | 123 | 127 | 102 | 82.9% | 98.4% |
+| `cm_ExCopyEntityData` | 249 | 239 | 192 | 77.1% | 32.1% |
+| `ahm_ExAllocAlchemist` | 286 | 293 | 219 | 76.6% | 39.2% |
+| `vfs_ReadCompressed` | 200 | 213 | 153 | 76.5% | 25.0% |
+| `srv_LoadBuf` | 226 | 228 | 171 | 75.7% | 88.9% |
+| `gv_ExAllocGraveyardWorker` | 333 | 332 | 245 | 73.6% | 52.0% |
+| `cm_ExSellObjekt` | 667 | 673 | 479 | 71.8% | 9.0% |
+| `gm_AllocSpieler` | 1056 | 1061 | 669 | 63.4% | 8.1% |
+| `gm_FindNextFilteredEntity` | 118 | 119 | 72 | 61.0% | 5.1% |
+| `vfs_ReadData` | 174 | 168 | 101 | 58.0% | 17.8% |
+| `m_AllocTracked` | 249 | 228 | 116 | 46.6% | 16.5% |
+| `gm_AllocGebaeude` `!` | 346 | 186 | 129 | 37.3% | 25.7% |
+| `CrashDump` `!` | 724 | 266 | 163 | 22.5% | 3.2% |
+| `vfs_OpenStream` `!` | 197 | 31 | 27 | 13.7% | 50.8% |
+
+The positional column is `(exact + reloc) / total` from the round-24 diffs.
+Rows marked `!` have a candidate slice far shorter than the target — objdump
+splits those COMDATs — so their percentage is meaningless and the tool prints
+`!` for them.
+
+Two consequences worth carrying forward.  First, the ordering above is the
+ordering to work in: `cm_ProcessCommandQueue`, `gm_CheckInventoryCapacity` and
+`cm_ExCopyEntityData` are much closer than the positional metric suggested,
+while `gm_CalculateProductionValue` and `cm_ExProdObjekt` are already known
+scheduling walls despite sitting at the top.  Second, `rebrew diff -r`
+(register-aware) only partially repairs this — it moves
+`gm_ObjectsAvailble`'s structural count 18 -> 3 but leaves
+`cm_ProcessCommandQueue` at 167 structural — so it is not a substitute.
+
+Tool: `python3 scripts/align_match.py [--va 0x...] [--json]`.
+
 ## m_PoolAlloc closed: asm operands must be named locals (2026-09-13, round 23)
 
 `0x10006d20 m_PoolAlloc` was the first of the 21 to fall: **266/270 ->
