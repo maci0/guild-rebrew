@@ -1775,3 +1775,47 @@ size = 48
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-09T17:28:03+00:00"
+
+["GOLDTL.0x00427570"]
+size = 16
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x00427580"]
+size = 16
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x00427590"]
+size = 16
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x004774a0"]
+size = 16
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x004937f0"]
+size = 16
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x004bf1a0"]
+size = 16
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x004edcd0"]
+size = 16
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x00535550"]
+size = 16
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x00535560"]
+size = 16
+cflags = "/O2 /Gd"
+status = "STUB"
+updated_by = "test"
+updated_at = "2026-09-12T14:33:21+00:00"
+blocker = "Application code — pending per-function decompilation"
+
+["GOLDTL.0x005ba8e0"]
+size = 16
+blocker = "Application code — pending per-function decompilation"

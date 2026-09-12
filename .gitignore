@@ -20,6 +20,9 @@ run_out/
 build/
 *.log
 
+# Extracted target bytes (the per-target bin_dir; regenerable)
+bin/
+
 # Cognee
 .cognee-data/
 .env.cognee

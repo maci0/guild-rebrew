@@ -80,9 +80,11 @@ the `rebrew/msvc:6.0-win32` docker image (see `cmake/toolchain-msvc6-docker.cmak
 
 | Target | Binary | Status |
 |--------|--------|--------|
-| `server_dll` | `original/Server/server.dll` | Active, 561 functions, 330 byte-exact |
-| `Europa1400Gold` | `original/Europa1400Gold.exe` | Not started |
-| `Europa1400Gold_TL` | `original/Europa1400Gold_TL.exe` | Not started |
+| `server.dll` | `original/Server/server.dll` | Active: 561 functions, 330 byte-exact, verify 278/280 |
+| `Europa1400Gold_TL.exe` | `original/Europa1400Gold_TL.exe` | Onboarded: 6335 functions discovered, 10 skeletons, 0 matched |
+
+`original/Europa1400Gold.exe` appears in `reccmp-project.yml` but is not a
+rebrew target.
 
 ## License
 

@@ -4,7 +4,14 @@
 
 ## Project
 
-- **Target**: `server.dll` (pe, x86_32)
+- **Targets**: `server.dll` (pe, x86_32; the default; marker `SERVER`) and
+  `Europa1400Gold_TL.exe` (pe, x86_32; marker `GOLDTL`). They share the game
+  logic, so one source file can carry one marker per build. Commands aimed at
+  the second target need `--target Europa1400Gold_TL.exe`, otherwise they
+  silently use the default target.
+- **Target status**: `server.dll` is the position-aligned CMake build.
+  `Europa1400Gold_TL.exe` is onboarded only: 6335 functions discovered, its
+  reversed dir holds the first skeletons, and it has no layout scaffolding yet.
 - **Compiler**: msvc6 (docker image `rebrew/msvc:6.0-win32` — wine inside; the
   CMake build runs it through the `rebrew-cmake-{cl,link,lib}` console scripts
   via `cmake/toolchain-msvc6-docker.cmake`)
