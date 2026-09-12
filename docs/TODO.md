@@ -1,5 +1,35 @@
 # Blockers — 100% Round-Trip Goal
 
+## The split build's `.rdata` is in the wrong order; the CMake build's is not (2026-09-13, round 55)
+
+This round's useful surprise: the CMake build reproduces the reference's
+`.rdata` *arrangement* while the split build -- the byte-identity vehicle for
+`.text` -- does not.
+
+```
+                              unzip 0.15a  deflate 1.1.3  runtime error   .rdata differing
+reference                          0x12e9          0x5a1          0x2110   --
+build/server_manual.dll            0x12e9          0x5a1          0x2110   2215 / 11905
+build/split_poc.dll                0x01a1          0x18c1          0x0fc8   10625 / 11905
+```
+
+`rdata_restore.c`'s blob is byte-identical in both; only its start moves
+(0x1a0 against the reference's 0x12e8), and everything the blob carries moves
+with it.  The blob's internal layout is fine -- `runtime error ` sits 0xe28
+bytes into it in both builds.
+
+The cause is the 229 LIBCMT member objects the split set emits explicitly:
+their `.rdata` contributions land before the blob, where in the CMake build
+the library's contributions land after it.  So the split build's `.text` is
+the reason to use it and its `.rdata` is the reason not to, and the two need
+reconciling before the split build can be the whole answer.
+
+Note also that `.rdata` placement does **not** follow response-file order:
+moving `rdata_restore.c` from the second slot of objects1.rsp to just after
+`trees.c.obj` (round 54) left `.rdata` byte-for-byte identical, and the split
+rsp puts the blob last yet it lands first.  Whatever MSVC6 keys the merge on,
+it is not the object order that drives `.text`.
+
 ## Who the `.rdata` surplus actually is (2026-09-13, round 55)
 
 After the IAT fix, `.rdata` differs in two runs.  The tail one is a surplus of
