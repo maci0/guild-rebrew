@@ -404,8 +404,14 @@ unfinished work; `rebrew todo` reports the same two and nothing else.
 
 | VA | Name | Size | State | Wall |
 |---|---|---|---|---|
-| 0x10018850 | gm_CreateEntityFromParents | 3689 | obj 3694, 752 B matched; 617/1056 insns sequence-aligned | 198 hunks: 40 scheduling, 10 operand-only (register/destination swaps plus one extra `fstp st(0)`), the rest substitution artifacts.  `rebrew prove` returns "no terminal states" at 200 s / `--loop-bound 1` (path explosion over the 0x300 loops), so PROVEN is not available either.  A single-statement hill-climb converged, so what is left is allocator-side. |
-| 0x100093a0 | ServerMainThread | 2434 | obj 2433, 1162 B matched; 583/627 insns sequence-aligned | 29 hunks / 67 instructions, candidate 2 long, all downstream of one root cause: the host-slot cold block (0x1000973a).  The loop that branches to it is instruction-identical to the target's; only C2's placement differs.  Nine rounds of label position, branch polarity, guard form, duplication, cold-tail placement, region size and pragma probes leave it adjacent to its source loop; all seven VC6 SP builds and a CFLAGS sweep compile it identically.  `rebrew prove` also returns "no terminal states" (420 s, `--loop-bound 1`) even though `prove.py` already hooks IAT-indirect Win32 calls, so the barrier is the loop state space, not the thunks. |
+| 0x10018850 | gm_CreateEntityFromParents | 3689 | obj 3694, 752 B matched; 570/1056 insns aligned | 199 hunks.  Measured with relocation-table masking (the sound metric, see below); the earlier 617/1056 came from folding displacements textually, which flattered some hunks.  40 hunks are scheduling, 10 operand-only, the rest substitution artifacts.  `rebrew prove` returns "no terminal states" at 200 s / `--loop-bound 1` (path explosion over the 0x300 loops), so PROVEN is not available either.  A single-statement hill-climb converged, so what is left is allocator-side. |
+| 0x100093a0 | ServerMainThread | 2434 | obj 2433, 1162 B matched; 522/627 insns aligned | 35 hunks, candidate 2 long, all downstream of one root cause: the host-slot cold block (0x1000973a).  The loop that branches to it is instruction-identical to the target's; only C2's placement differs.  Nine rounds of label position, branch polarity, guard form, duplication, cold-tail placement, region size and pragma probes leave it adjacent to its source loop; all seven VC6 SP builds and a CFLAGS sweep compile it identically.  `rebrew prove` also returns "no terminal states" (420 s, `--loop-bound 1`) even though `prove.py` already hooks IAT-indirect Win32 calls, so the barrier is the loop state space, not the thunks. |
+
+`scripts/zlibcheck.py` is the reference measurement: masking the byte ranges
+the object's own relocation table covers, on both sides, it reports the zlib
+region's 46 functions as exact, which validates the metric.  Alignment figures
+above come from the same masking (`.scratch/wall.py`); the older pattern-based
+numbers in this file should not be compared with them.
 
 `scripts/seqdiff.py` produces those counts.  `rebrew diff` aligns by byte
 offset, so a 1-4 byte size difference desynchronises it and every later
