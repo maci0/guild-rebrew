@@ -14,7 +14,7 @@
   reversed dir holds the first skeletons, and it has no layout scaffolding yet.
 - **Compiler**: msvc6 (docker image `rebrew/msvc:6.0-win32` — wine inside; the
   CMake build runs it through the `rebrew-cmake-{cl,link,lib}` console scripts
-  via `cmake/toolchain-msvc6-docker.cmake`)
+  via `cmake/toolchain-msvc-6.0-docker.cmake`)
 - **Language**: C89 — follow compiler constraints below
 - **Config**: `rebrew-project.toml` (all tools read from here)
 
@@ -118,7 +118,7 @@ and `MISSING_SIZE` are stored when the object size disagrees with the binary.
 - **Symbol decoration**: `_func` for `__cdecl`, `_func@N` for `__stdcall`
 - **No `/GS`** (buffer security), no `__declspec(noinline)`
 - **Execution**: all CL.EXE/LINK.EXE calls run through the docker image
-  (`rebrew/msvc:6.0-win32`); build it with `rebrew toolchain build msvc6`
+  (`rebrew/msvc:6.0-win32`); build it with `rebrew toolchain build msvc-6.0`
   before `cmake --build`
 - **CFLAGS are per-file in practice**, not per-function: a flag one function
   needs can break a file-mate. See `docs/msvc6-c-shapes.md` section 12.

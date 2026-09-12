@@ -1,6 +1,6 @@
 #!/bin/bash
 # Build server.dll using MSVC6 via the rebrew docker image
-# (rebrew/msvc:6.0-win32 — wine inside; run `rebrew toolchain build msvc6` first).
+# (rebrew/msvc:6.0-win32 — wine inside; run `rebrew toolchain build msvc-6.0` first).
 #
 # Usage: ./build-win.sh [options]
 #   -j, --jobs N    Number of parallel jobs (default: 8)
@@ -58,7 +58,7 @@ mkdir -p build
 # Configure with MSVC6 toolchain
 echo "Configuring with MSVC6 toolchain..."
 cmake -B build \
-    --toolchain cmake/toolchain-msvc6-docker.cmake \
+    --toolchain cmake/toolchain-msvc-6.0-docker.cmake \
     -DCMAKE_BUILD_TYPE="$BUILD_TYPE"
 
 # Build
