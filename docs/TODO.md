@@ -28,6 +28,33 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## Section closure: helpers land, the entry lookup does not (2026-09-13, round 9)
+
+Two changes this round, one measured and shipped, one still blocked.
+
+**Shipped: section-symbol relocations are retargeted.**  A relocation may name
+a `.text` *section* symbol of a COMDAT the object does not carry; emitting it
+as an external literally named `.text` left LINK with an unresolvable
+reference.  `build_object` now retargets it at the external function symbol
+defined at that section (lowest value), and guards the few members whose
+relocations carry out-of-range indices.  With the default single-section
+split: **leftovers 121 -> 112 and `.text` end 0x268c0 -> 0x263fc**, link still
+clean.  Object counts and the default path are otherwise unchanged.
+
+**Blocked: `--closure` and `/ENTRY`.**  The helper sections are now emitted as
+their own *single-section* objects, placed immediately after the function that
+branches to them (247 objects total), so the multi-section object shape is no
+longer involved.  The link still fails: LINK pulls `crt0.obj` for
+`mainCRTStartup` and reports `unresolved external symbol _main`, i.e. it is
+building the console-EXE startup chain instead of using the DLL entry.  A
+`/FORCE:UNRESOLVED` map of the same link shows `__DllMainCRTStartup@12`
+defined by `1001b9d4___DllMainCRTStartup_12.obj` **and** `_mainCRTStartup`
+present from `LIBCMT:crt0.obj`, so the entry symbol exists and LINK is still
+not selecting it.  The one thing that correlates with the failure is our
+objects now supplying `__CRT_INIT@12`, so LIBCMT's `dllcrt0.obj` is no longer
+pulled.  Next: either keep `dllcrt0.obj` in the link, or find why
+`/ENTRY:_DllMainCRTStartup@12` stops matching when it is absent.
+
 ## Section closure: implemented, and the entry symbol blocks it (2026-09-13, round 8)
 
 Group (1) of the leftovers is fixed in the tool.  `scripts/split_coff.py`
