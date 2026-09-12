@@ -44,10 +44,12 @@ DROP = (
 #: Where the two restore blobs go, by the running `.data` total of the objects
 #: before them.  `rdata_restore.c`'s blob carries `// DATA: SERVER 0x1002a000`,
 #: i.e. reference `.data` offset 0x3000, and `.data` is placed in response-file
-#: order, so the blobs belong after the game objects whose own `.data` adds up
-#: to that.  Our objects run a little ahead of the reference's, so the measured
-#: optimum sits just past it -- see the round-60 table in docs/TODO.md.
-_BLOB_AT_DATA = 0x3200
+#: order, so the blobs belong near the point where the game objects' own
+#: `.data` adds up to that.  The landscape is jagged -- one object either way
+#: costs thousands of bytes -- so the constant is measured, not derived; see
+#: the round-60 and round-62 tables in docs/TODO.md.  If an object's `.data`
+#: size changes, re-sweep rather than trusting this number.
+_BLOB_AT_DATA = 0x3050
 
 
 def _section_bytes(path: str, prefix: str) -> int:
