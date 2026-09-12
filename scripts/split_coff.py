@@ -148,7 +148,7 @@ def masked_body(obj: bytes, sec: dict) -> bytes:
     return bytes(body)
 
 
-def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None, extra: set[int] | None = None, emit_commons: bool = False, trim: int | None = None) -> bytes:
+def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None, extra: set[int] | None = None, emit_commons: bool = False, trim: int | None = None, start: int = 0) -> bytes:
     """COFF object for `coff.sections[index]` plus its same-member closure.
 
     `separate` holds the section indices that are themselves emitted as their
@@ -162,7 +162,7 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     # 238-byte exsup section carries six reference functions of 34..216 bytes —
     # and emitting all of it for each of them multiplies the over-inclusion.
     if trim is not None:
-        trim = min(trim, coff.sections[index]["raw_size"])
+        trim = min(trim, max(0, coff.sections[index]["raw_size"] - start))
     # Section closure: every .text section reachable from this one through a
     # relocation to a symbol defined in ANOTHER section of the same member.
     # MSVC splits a member's shared tails into separate COMDATs (memmove's
@@ -227,7 +227,20 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
 
     for i, sym in enumerate(coff.symbols):
         if sym["section"] > 0 and (sym["section"] - 1) in new_secnum:
-            if trim is not None and sym["section"] - 1 == index and sym["value"] >= trim:
+            # Never drop the root COMDAT's section symbol: LINK reports a
+            # COMDAT without one as "no symbol for comdat section".
+            is_sec_sym = sym["storage_class"] == 3 and sym["name"].startswith(".")
+            if sym["section"] - 1 == index and start and not is_sec_sym and (
+                sym["value"] < start
+                or (trim is not None and sym["value"] >= start + trim)
+            ):
+                continue
+            if (
+                not start
+                and trim is not None
+                and sym["section"] - 1 == index
+                and sym["value"] >= trim
+            ):
                 continue
             add(i)
 
@@ -257,6 +270,10 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
 
     for i in secs:
         for _va, symidx, _typ in coff.section_relocs(i):
+            if i == index and start and (
+                _va < start or (trim is not None and _va >= start + trim)
+            ):
+                continue
             if trim is not None and i == index and _va >= trim:
                 continue
             if symidx < len(coff.symbols):
@@ -279,6 +296,8 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
             raw = b"\0\0\0\0" + struct.pack("<I", off)
         section_number = new_secnum.get(sym["section"] - 1, 0) if sym["section"] > 0 else sym["section"]
         value = sym["value"]
+        if start and sym["section"] - 1 == index and value >= start:
+            value -= start
         if old_i in common_off:
             section_number = synth_sec
             value = common_off[old_i]
@@ -322,11 +341,14 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
         # keep its size but emit nothing and do not advance the file cursor.
         uninit = sec_old["raw_ptr"] == 0
         body = b"" if uninit else coff.section_body(old)
-        if trim is not None and old == index:
-            body = body[:trim]
+        if old == index and (trim is not None or start):
+            body = body[start:start + trim] if trim is not None else body[start:]
         size = sec_old["raw_size"] if uninit else len(body)
         relocs = [r for r in coff.section_relocs(old)
-                  if not (trim is not None and old == index and r[0] >= trim)]
+                  if not (old == index and (
+                      (trim is not None and r[0] >= trim)
+                      or (start and (r[0] < start
+                                     or (trim is not None and r[0] >= start + trim)))))]
         if uninit:
             body_off = 0
             pad = b""
@@ -338,7 +360,12 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
         if relocs:
             reloc_off = cur
             blob = b"".join(
-                struct.pack("<IIH", va, remap.get(resolve_ref(symidx), 0), typ)
+                struct.pack(
+                    "<IIH",
+                    va - start if old == index and start else va,
+                    remap.get(resolve_ref(symidx), 0),
+                    typ,
+                )
                 for va, symidx, typ in relocs
             )
             cur += len(blob)
@@ -470,7 +497,9 @@ def main() -> int:
     for e in mapping["matched"]:
         va = int(e["va"], 16)
         if va >= floor:
-            want.setdefault(e["member"], []).append((va, e["symbol"], e.get("section")))
+            want.setdefault(e["member"], []).append(
+                (va, e["symbol"], e.get("section"), int(e.get("offset", 0)))
+            )
 
     by_name: dict[str, bytes] = {}
     alias_index: dict[bytes, set[str]] = {}
@@ -510,7 +539,7 @@ def main() -> int:
         except (struct.error, IndexError):
             return set()
         names = set()
-        for _va, symbol_i, section_i in funcs_list:
+        for _va, symbol_i, section_i, _off_i in funcs_list:
             if section_i:
                 sec_i = section_i - 1
             else:
@@ -550,7 +579,7 @@ def main() -> int:
             return None
 
         mapped = set()
-        for _va, symbol, section in funcs:
+        for _va, symbol, section, _off in funcs:
             sec = find_section(symbol, section)
             if sec is not None:
                 mapped.add(sec)
@@ -576,7 +605,7 @@ def main() -> int:
         # bytes), 0x1001eec1 (101) and elsewhere.
         member_names = all_mapped_names
 
-        for n, (va, symbol, section) in enumerate(funcs_sorted):
+        for n, (va, symbol, section, offset) in enumerate(funcs_sorted):
             entry_size = sizes.get(va)
             root_sec = find_section(symbol, section)
             if root_sec is None:
@@ -584,15 +613,39 @@ def main() -> int:
                 continue
             safe = "".join(c if c.isalnum() or c in "._" else "_" for c in symbol)
             name = f"{va:08x}_{safe}.obj"
-            aliases = alias_index.get(masked_body(coff.data, coff.sections[root_sec]), set()) - {
-                symbol
-            } - member_names
+            # Slice from the matched symbol's offset only when that makes sense
+            # for the section split_coff actually loaded: the map records the
+            # section of the FIRST library that matched, and a popen.obj offset
+            # valid in vc7's 21-section copy can point past the end of the
+            # 9-section 6.0 one.
+            root_sec_info = coff.sections[root_sec]
+            start = (
+                offset
+                if (
+                    args.trim
+                    and offset
+                    and root_sec_info["name"].startswith(b".text")
+                    and offset < root_sec_info["raw_size"]
+                )
+                else 0
+            )
+            if start:
+                # A slice carries only the names physically inside it.  The
+                # alias index lists every spelling of the WHOLE section, and
+                # exporting those from each slice puts the same symbols on
+                # several objects, which makes LINK keep one and drop the rest.
+                aliases = set()
+            else:
+                aliases = alias_index.get(
+                    masked_body(coff.data, coff.sections[root_sec]), set()
+                ) - {symbol} - member_names
             (outdir / name).write_bytes(
                 build_object(
                     coff, root_sec, symbol, mapped, claimed, False, aliases,
                     extra=data_secs if n == 0 else None,
                     emit_commons=args.with_commons,
                     trim=entry_size if args.trim else None,
+                    start=start,
                 )
             )
             written.append((va, str(outdir / name), symbol))

@@ -337,7 +337,7 @@ def main() -> int:
                 break
         if got:
             claimed.add((got[0], got[2], got[3]))
-            hits.append((va, name, size, got[0], got[1], got[2]))
+            hits.append((va, name, size, got[0], got[1], got[2], got[3]))
         else:
             miss.append((va, name, size))
 
@@ -356,8 +356,13 @@ def main() -> int:
                             "member": member,
                             "symbol": sym,
                             "section": section,
+                            # Offset of the matched symbol inside the section:
+                            # exsup.obj sec 1 is one 238-byte section holding
+                            # seven reference functions, so the object for each
+                            # has to be the slice starting there.
+                            "offset": offset,
                         }
-                        for va, name, size, member, sym, section in sorted(hits)
+                        for va, name, size, member, sym, section, offset in sorted(hits)
                     ],
                     "matched_bytes": sum(h[2] for h in hits),
                     "region_total": len(in_region),
@@ -378,7 +383,7 @@ def main() -> int:
     print()
     # member order by first VA: this is the link-object order
     by_member: dict[str, list[tuple[int, str]]] = {}
-    for va, name, size, member, sym, _section in sorted(hits):
+    for va, name, size, member, sym, _section, _off in sorted(hits):
         if va >= floor:
             by_member.setdefault(member, []).append((va, sym))
     for member, funcs in sorted(by_member.items(), key=lambda kv: min(v for v, _ in kv[1])):
