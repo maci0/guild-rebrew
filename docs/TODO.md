@@ -28,6 +28,39 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## Why `fflush.obj` is pulled: the reference has no public `_fflush` (2026-09-13, round 14)
+
+`/VERBOSE:LIB` names the culprit for one leftover group.  LIBCMT's
+`fflush.obj` is pulled and then ignored piecewise:
+
+```
+LIBCMT.lib(fflush.obj) : warning LNK4006: __fflush_lk already defined in 1001ac9f_.text.obj
+LIBCMT.lib(fflush.obj) : warning LNK4006: __flush     already defined in 1001accd_.text.obj
+LIBCMT.lib(fflush.obj) : warning LNK4006: __flushall  already defined in 1001ad29_.text.obj
+```
+
+The split set already carries the reference's `fflush.obj` sections — the map
+matches 0x1001ac9f / 0x1001accd / 0x1001ad29 / 0x1001ad32 to sections 3, 5, 7
+and 9 of that member (`__fflush_lk`, `__flush`, `__flushall`, `_flsall`).  The
+member is pulled anyway for two symbols the reference does **not** contain:
+`_fflush` and (elsewhere) `_flsall`'s public partner.  In other words the
+reference's CRT build omitted the public `_fflush` wrapper, while three game
+files (`gm_Open.c`, `Error.c`, `vfs.c`) call `fflush`, so our link pulls the
+member to resolve it.
+
+That matters because a game function's call target is a *masked* relocation —
+it does not have to name the same symbol as the reference, only resolve to a
+VA that postlink rewrites.  If those call sites named the function the
+reference actually calls (its `__fflush_lk`, i.e. the body at 0x1001ac9f,
+which the split set already provides), the member would not be pulled at all
+and the leftover would disappear.  The same shape should be checked for the
+other leftovers that our game code references but the reference omits.
+
+Identifying the reference's own target is not a byte-scan: the built `.text`
+is not offset-aligned with the reference, so reading the reference at the
+built call-site offset yields garbage (measured — five `fflush` call sites,
+none with an `E8` at the matching offset).  It has to be read per function.
+
 ## VC7 fills the unlock family; 9 functions remain (2026-09-13, round 13)
 
 Swept the 16 unmatched region functions against more CRT builds (extract with
