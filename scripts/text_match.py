@@ -164,7 +164,7 @@ def drift_table(spec: str) -> list[tuple[int, int, str, int]]:
 
 def main() -> int:
     argv = list(sys.argv[1:])
-    value_flags = ("--region", "--drift", "--built")
+    value_flags = ("--region", "--drift", "--built", "--window")
     opt = {}
     for flag in value_flags:
         if flag in argv:
@@ -179,7 +179,9 @@ def main() -> int:
     assert rva == bva, (hex(rva), hex(bva))
     n = min(rvs, len(rbody))
     rmask = image_mask(str(REFERENCE), rbody[:n], rva)
-    bmask = image_mask(str(built_path), bbody[:bvs], bva) if "--drift" in opt else None
+    aligned = "--align" in argv
+    drift = "--drift" in opt or aligned
+    bmask = image_mask(str(built_path), bbody[:bvs], bva) if drift else None
 
     def score(lo, hi, shift=0):
         raw = ok = tot = 0
@@ -200,15 +202,34 @@ def main() -> int:
           f"masked {ok}/{tot} = {100.0 * ok / tot:.2f}%")
     print(f"built .text 0x{bvs:x}  reference 0x{rvs:x}  delta {bvs - rvs:+d}")
 
-    if "--drift" in opt:
+    if aligned or "--drift" in opt:
+        if aligned:
+            res = json.loads((ROOT / "db/verify_results.json").read_text())["results"]
+            listed = [
+                (int(x["va"], 16), x.get("size") or 0, x["name"]) for x in res
+            ]
+        else:
+            listed = [
+                (va, size, name)
+                for va, size, name, _d in drift_table(opt["--drift"])
+            ]
+        window = int(opt.get("--window", 80))
         rows = []
-        for va, size, name, drift in drift_table(opt["--drift"]):
+        for va, size, name in listed:
             lo = va - rva
             hi = min(lo + size, n)
             if lo >= n or hi <= lo:
                 continue
-            r, o, t = score(lo, hi, drift)
-            rows.append((o / t if t else 1.0, name, "game", t, r, o, va))
+            best = None
+            # Drift is constant per object, so one offset fits the whole
+            # function; search for it rather than trusting link_drift's guess,
+            # whose low-confidence rows can hide real differences.
+            for shift in range(-window, window + 1):
+                r, o, t = score(lo, hi, shift)
+                if best is None or o > best[2]:
+                    best = (r, shift, o, t)
+            r, shift, o, t = best
+            rows.append((o / t if t else 1.0, name, "game", t, r, o, va, shift))
     else:
         rows = []
         for va, size, name, region in boundaries():
@@ -219,7 +240,7 @@ def main() -> int:
             r, o, t = score(lo, hi)
             rows.append((o / t if t else 1.0, name, region, t, r, o, va))
 
-    order = ["crt", "game"] if "--drift" not in opt else ["game"]
+    order = ["crt", "game"] if not drift else ["game"]
     for region in order:
         rs = [x for x in rows if x[2] == region]
         tt = sum(x[3] for x in rs)
@@ -232,9 +253,11 @@ def main() -> int:
 
     if opt.get("--region"):
         rows = [x for x in rows if x[2] == opt["--region"]]
-    print(f"{'masked':>7s}  {'bytes':>7s}  {'differ':>7s}  region  name")
-    for frac, name, region, t, r, o, va in sorted(rows)[: 60 if verbose else 15]:
-        print(f"{100 * frac:6.1f}%  {t:7d}  {t - o:7d}  {region:5s}  "
+    print(f"{'masked':>7s}  {'bytes':>7s}  {'differ':>7s}  {'drift':>5s}  region  name")
+    for row in sorted(rows)[: 60 if verbose else 15]:
+        frac, name, region, t, r, o, va = row[:7]
+        sh = row[7] if len(row) > 7 else 0
+        print(f"{100 * frac:6.1f}%  {t:7d}  {t - o:7d}  {sh:+5d}  {region:5s}  "
               f"{name}  @0x{va:x}")
     return 0
 
