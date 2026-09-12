@@ -2,17 +2,20 @@
 # split_link.sh - reproduce the split-set PoC link end to end.
 #
 #   LIBCMT is never reversed: scripts/map_libcmt.py says which stock member
-#   body the reference has at each VA, scripts/split_coff.py turns each mapped
-#   section into a command-line object, scripts/emit_commons.py defines the
-#   members' commons, scripts/emit_defs.py defines whatever is still
-#   undefined, and scripts/make_split_rsp.py assembles the LINK response file.
+#   body the reference has at each VA, scripts/locate_sections.py completes
+#   that map with the member sections the catalog mapping cannot reach,
+#   scripts/split_coff.py turns each mapped section into a command-line object,
+#   scripts/emit_commons.py defines the members' commons, scripts/emit_thunks.py
+#   restores the socket IAT thunks, scripts/emit_defs.py defines whatever is
+#   still undefined, and scripts/make_split_rsp.py assembles the response file.
 #
 # Requires a configured and built CMake tree (build/CMakeFiles/server_dll.dir/
 # objects1.rsp).  Usage:
 #
 #   scripts/split_link.sh [workdir]        # default build/split_poc
 #
-# Prints the built .text VirtualSize against the reference's 0x22846.
+# Prints the built .text VirtualSize against the reference's 0x22846 and the
+# per-object placement audit.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -31,14 +34,33 @@ mkdir -p "$WORK"
 echo "== map"
 python3 scripts/map_libcmt.py "${LIBS[@]}" --json > "$MAP"
 
-echo "== split (closure + member data)"
+echo "== map completion (locate member sections the catalog mapping missed)"
+python3 scripts/locate_sections.py --members "${LIBS[@]}" --map "$MAP" --json \
+    > "$WORK/extra.json"
+python3 - "$MAP" "$WORK/extra.json" "$WORK/map_full.json" <<'PY'
+import json, sys
+base, extra, out = sys.argv[1], sys.argv[2], sys.argv[3]
+m = json.load(open(base))
+x = json.load(open(extra))["matched"]
+have_va = {int(e["va"], 16) for e in m["matched"]}
+have_ms = {(e["member"], e.get("section")) for e in m["matched"]}
+add = [e for e in x
+       if int(e["va"], 16) not in have_va and (e["member"], e.get("section")) not in have_ms]
+m["matched"] = sorted(m["matched"] + add, key=lambda e: int(e["va"], 16))
+json.dump(m, open(out, "w"), indent=1)
+print(f"{len(add)} extra sections merged")
+PY
+MAP="$WORK/map_full.json"
+
+echo "== split (member data; --closure is subsumed by the completed map)"
 rm -rf "$WORK/split"
 python3 scripts/split_coff.py "${LIBS[@]}" --map "$MAP" \
-    --out "$WORK/split" --closure --with-data
+    --out "$WORK/split" --with-data
 
 echo "== import thunks"
 rm -rf "$WORK/thunks"
-python3 scripts/emit_thunks.py --target-bin original/Server/server.dll --out "$WORK/thunks"
+python3 scripts/emit_thunks.py --target-bin original/Server/server.dll \
+    --out "$WORK/thunks"
 
 echo "== commons"
 rm -rf "$WORK/commons"

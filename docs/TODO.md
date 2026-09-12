@@ -208,6 +208,53 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## Three of the "no library carries" functions are in LIBCMT after all (2026-09-13, round 33)
+
+Rounds 11-13 recorded nine CRT functions that no available library carries
+(`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`,
+`crt_once_init`, `allmul_slow`, `fcn_1001a643`), and round 31 leaned on that
+when it concluded `_getpid`/`srand` at 0x1001a140 are "not ours to reverse".
+**Three of those nine are member sections the catalog mapping simply could not
+reach**, and `scripts/locate_sections.py` finds them:
+
+| catalog VA | member section | located at |
+|---|---|---|
+| `fcn_1001a643` | `crt0dat.obj` section 2 — symbol `__cinit` | 0x1001a643, 45 B |
+| `fpmath` | `fpinit.obj` section 3 — symbol `__fpmath` | 0x1001b070, 23 B |
+| `__CRT_INIT` | `dllcrt0.obj` section 3 — symbol `__CRT_INIT@12` | 0x1001b8fb, 217 B |
+
+`map_libcmt` matches *catalog functions to member sections* by name and prefix
+length; these sections are only reachable through a member's section symbol or
+under a different name, so they fell through.  `locate_sections.py` goes the
+other way — for a member section, find its reference VA — with the mask the
+round-31 note said was needed: relocation slots plus the four bytes after every
+`E8`/`E9` (intra-image relative calls carry no relocation entry), a fixed-run
+`bytes.find` pre-filter, and a full scan for heavily relocated code where no
+16-byte run is fixed (the thunk block is 14 fixed bytes in 42).  Run over every
+member of the five variants it recovers **12 sections** the map missed; run
+over the emitted thunk object it returns 0x1001a160, confirming that object's
+content matches the reference exactly.
+
+**Measured on the whole pipeline** (`.text` against the reference's 0x22846,
+and the per-object drift range from `scripts/split_audit.py`):
+
+| configuration | `.text` | drift range | exact placements |
+|---|---|---|---|
+| round 32 (catalog map, `--closure`) | **0x2334a (+2,820)** | -0x230 .. +0xa7c | 0 |
+| catalog map + catalog map completion, `--closure` | 0x233ea (+2,980) | -0xf0 .. +0xbdc | **2** |
+| completed map, no `--closure` | 0x23364 (+2,846) | **-0x132 .. +0x76c** | 0 |
+
+The completed map is the better state to build on even though it is 26 bytes
+larger: the worst-case drift falls by 784 bytes, which is what byte identity
+needs, and `--closure` is subsumed once the map covers the sections (it exists
+to recover sections the catalog mapping misses).  `scripts/split_link.sh` now
+runs the completion step and drops `--closure`; it reproduces 0x23364.
+
+**Next step:** with the map complete, the remaining excess can be attributed
+per section rather than per category — the 12 recovered sections and the
+`emit_defs`/commons objects should each now be checkable against a known
+reference VA, so any that still have none are the real over-inclusion.
+
 ## The socket IAT thunks now sit where the reference has them (2026-09-13, round 32)
 
 Round 31 named 42 of the missing 74 CRT-pre bytes: the seven
