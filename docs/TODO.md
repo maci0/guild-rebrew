@@ -12,7 +12,7 @@ the round-by-round entries below establish.
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
 | standard CMake link, `.text` | 0x2276c (-218), postlink coverage 401/7,463 (5.4%) | — |
-| split-set link (LIBCMT member objects), `.text` | 0x22b8a; 38 of 330 symbols exactly at their reference VA, 0 LIBCMT archive pulls, but 96 unreferenced import thunks (+576 B) and .rdata +1408 B | — |
+| split-set link (LIBCMT member objects), `.text` | 0x22a0a (+452); 0 LIBCMT archive pulls, 6 duplicate objects discarded (72 B), 37 symbols exactly at their reference VA | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
 | CRT split-set leftovers | **34** symbols across ~10 members | 5,294 B |
@@ -207,6 +207,58 @@ second — so the structural count understates how hard they are.
 signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
+
+## The map did not say which library it matched in (2026-09-13, round 45)
+
+The first drift island in the split set was **-128 at `__alloca_probe`**: every
+object from `_fclose` to 0x1001ab81 was placed contiguously and correctly, and
+then the object for 0x1001ac70 landed at 0x1001abf0.  The reference has two
+functions in between — 0x1001abeb (88 bytes) and 0x1001ac43 (45) — and our
+objects for them emitted **nothing**.
+
+**Cause 1: the map did not record the library.**  `map_libcmt` searches the
+five service packs in order and `split_coff` resolves a member by name against
+the first library that has it.  They disagree on section numbering: vc7's
+`popen.obj` §6 is a 965-byte `.text`, 6.0-sp6's §6 is not code at all.  The map
+now carries `lib`, and `split_coff` indexes members per `(library, member)`.
+
+**Cause 2: the reference overlaps functions freely.**  popen's `$L21349`
+fragment at 0x1001a89c is *interior* to `malloc.obj`'s 252-byte `__malloc`, and
+wpopen's at 0x1001a8fb likewise; emitting them again duplicates bytes that are
+already there and pushed everything after them 18 bytes late.  `split_coff` now
+drops any entry whose VA falls inside the extent another entry **actually
+emits** — computed from the section's `raw_size` and `--trim`, not the catalog
+size.  That distinction matters: crt0dat's `exit` pair are two separate 17-byte
+sections that really do tile, and a catalog-size test (34 and 17) would collapse
+one of them.
+
+| | before | after |
+|---|---|---|
+| split-set `.text` | 0x22b8a (+836) | **0x22a0a (+452)** |
+| objects LINK discards | 11 (315 B) | **6 (72 B)** |
+| symbols exactly at their reference VA | 38 | 37 |
+| LIBCMT archive pulls | 0 | 0 |
+
+**Honest reading: this is progress on size and completeness, not on
+placement.**  The per-symbol drift is if anything wider at the tail (81 symbols
+at -592, 80 at -752, against -731/-848 before), because the layout is a chain
+and the objects after the changed ones all move.  The `.text` figure is the one
+that improved unambiguously, and 384 bytes of it is content that used to be
+missing or duplicated.
+
+**Still wrong:** the popen `$L21349` entries at 0x1001abeb and 0x1001ac43.  A
+catalog size of 88 and 45 matched only a **9-byte prefix** at offset 956 of a
+965-byte section — there is nothing left of the section after that offset — so
+all three entries emit the same 9 bytes and LINK keeps one.
+`match()` accepts a 9-byte common prefix because it compares
+`min(len(body), len(data))`; a match this short should be rejected, or the
+entry needs locating from scratch.
+
+**Method note.**  `rebrew postlink`'s `data` fixer already trims "the extra
+`.text` tail (import thunks/stubs the original build dead-stripped)", so the 96
+unreferenced import thunks from round 44 are a *known and handled* condition,
+not a blocker — they only matter because the tail must be trimmable, which
+requires everything before it to be position-aligned.
 
 ## 96 import thunks the reference does not have (2026-09-13, round 44)
 
