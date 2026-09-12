@@ -28,6 +28,39 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## Per-function COMDAT selection works (2026-09-13, round 6)
+
+`scripts/split_coff.py` turns the mapped members into standalone per-function
+COFF objects: LIBCMT is built `/Gy`, so each function is its own COMDAT
+`.text` section, and the script re-emits one object per section (relocations
+remapped onto a rebuilt symbol table, string table rebuilt, cross-section
+symbol references demoted to undefined so the linker resolves them from the
+sibling object).  Measured: **209 objects, 34,280 B of `.text` against the
+reference region's 34,550 B** — per-*function* selection is essentially exact,
+against the 40,896 B whole members carry.
+
+A PoC link with those 209 objects on the command line, in reference-VA order,
+places them inline and in order:
+
+```
+_fclose                  split object   0x1001a0e0   (reference 0x1001a18a)
+_srand                   split object   0x1001b105
+__DllMainCRTStartup@12   split object   0x1001b4cb
+```
+
+The offsets are the game region's cumulative -0xaa, as in round 5, so member
+placement still cannot be checked until the game region is exact.
+
+**What is left is not placement but coverage.**  The PoC's `.text` still ran to
+0x10025ce2 against the reference's 0x10023846, because `LIBCMT.lib` is still on
+the link line and appends every member our objects reference that the split set
+does not contain (`_fflush` landed at 0x10022bd8 from `LIBCMT:fflush.obj`).
+That residue is the "our C references symbols the reference does not have"
+side of the reconciliation, not a placement bug: the split set is 270 B short
+of the region, while the leftovers account for the extra ~9 KB.  Next: either
+supply every symbol the link needs from the split set (so `LIBCMT.lib` drops
+out) or reconcile the extra references themselves.
+
 ## Explicit member placement works; whole members overshoot (2026-09-13, round 5)
 
 Round 5 built the link the plan calls for and measured the two obstacles.
