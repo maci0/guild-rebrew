@@ -200,13 +200,17 @@ class Reference:
 def match(index, data: bytes):
     for sym, member, obj, sec, value, mask in index:
         body = obj[sec["raw_ptr"] + value : sec["raw_ptr"] + sec["raw_size"]]
-        if len(body) < len(data):
+        # The catalog's size for a function is often padded (or truncated)
+        # relative to the member's COMDAT section, so compare the common
+        # prefix rather than requiring the member to be at least as long.
+        n = min(len(body), len(data))
+        if n < MIN_BYTES:
             continue
-        slots = {x - value for x in mask if value <= x < value + len(data)}
-        if len(data) - len(slots) < MIN_FIXED_FRACTION * len(data):
+        slots = {x - value for x in mask if value <= x < value + n}
+        if n - len(slots) < MIN_FIXED_FRACTION * n:
             continue
-        for i, byte in enumerate(body[: len(data)]):
-            if byte != data[i] and i not in slots:
+        for i in range(n):
+            if body[i] != data[i] and i not in slots:
                 break
         else:
             return member, sym
