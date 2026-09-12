@@ -217,27 +217,37 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		rep stosb
 	}
 	/* component loop: counter reuses geb_type (ebp+8) */
-	geb_type = 0;
-	for (; geb_type < 0x40; geb_type++) {
-		unsigned short comp = *(unsigned short*) (s.record + 0x23 + geb_type * 2);
-		char* comp_rec;
-		unsigned char comp_type;
+	{
+		/* The target walks a pointer (`lea edi,[record+0x23]`, `add edi,2`
+		 * in the for-increment) rather than indexing by the counter, and it
+		 * keeps the pointer increment AHEAD of the counter increment.  Both
+		 * increments have to be in the header, or the `continue` below skips
+		 * the pointer. */
+		unsigned short* rec;
 
-		if (comp == 0) {
-			break;
-		}
-		if (comp == 0xffff) {
-			continue;
-		}
-		comp_rec = (char*) g_item_def_table + (comp & 0x7fff) * 0x41;
-		comp_type = comp_rec[0];
-		if (comp_type == 2 || comp_type == 6) {
-			s.flag = 1;
-		}
-		if (comp & 0x8000) {
-			if (comp_type != 2 && comp_type != 6) {
-				if (s.flag == 0) {
-					gm_AllocObjekt(*(int*) (geb + 1), comp & 0x7fff, 1);
+		geb_type = 0;
+		rec = (unsigned short*) (s.record + 0x23);
+		for (; geb_type < 0x40; geb_type++, rec++) {
+			unsigned short comp = *rec;
+			char* comp_rec;
+			unsigned char comp_type;
+
+			if (comp == 0) {
+				break;
+			}
+			if (comp == 0xffff) {
+				continue;
+			}
+			comp_rec = (char*) g_item_def_table + (comp & 0x7fff) * 0x41;
+			comp_type = comp_rec[0];
+			if (comp_type == 2 || comp_type == 6) {
+				s.flag = 1;
+			}
+			if (comp & 0x8000) {
+				if (comp_type != 2 && comp_type != 6) {
+					if (s.flag == 0) {
+						gm_AllocObjekt(*(int*) (geb + 1), comp & 0x7fff, 1);
+					}
 				}
 			}
 		}
