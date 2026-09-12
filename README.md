@@ -52,35 +52,37 @@ rebrew match src/server.dll/my_func.c --flag-sweep-only
 
 ```
 guild-rebrew/
-├── src/server.dll/       # Reversed C source files (~147 functions)
+├── src/server.dll/       # Reversed C source files (561 functions)
 ├── original/             # Target binaries (gitignored)
-├── references/           # Reference source (zlib 1.1.3)
-├── tools/                # Vendored MSVC6 compiler toolchain
-│   ├── MSVC600/          # CL.EXE, headers, libs
-│   └── VC/               # Additional VC headers/libs
-├── db/                   # Coverage data (coverage.db, JSONs)
-├── docs/                 # User stories & workflow docs
-├── archive/              # Old experiments
-├── rebrew-project.toml           # Project configuration
+├── references/zlib/      # Reference source (zlib 1.1.3, submodule)
+├── db/                   # Coverage data (gitignored)
+├── docs/                 # Codegen notes, naming conventions, TODO
+├── layout/server.dll/    # Link layout package
+├── rebrew-project.toml   # Project configuration
 ├── reccmp-project.yml    # reccmp configuration
 └── AGENTS.md             # Full project reference
 ```
+
+The MSVC6 compiler is not vendored: every CL.EXE/LINK.EXE call runs through
+the `rebrew/msvc:6.0-win32` docker image (see `cmake/toolchain-msvc6-docker.cmake`).
 
 ## Documentation
 
 | Document | Description |
 |----------|-------------|
 | [AGENTS.md](AGENTS.md) | Full project reference for AI agents and contributors |
-| [docs/USER_STORIES.md](docs/USER_STORIES.md) | Workspace-specific user stories with workflow diagrams |
-| [handoff.md](handoff.md) | Session handoff context and pending tasks |
+| [docs/msvc6-c-shapes.md](docs/msvc6-c-shapes.md) | C spellings that compile to the target's exact bytes |
+| [docs/msvc6-allocator.md](docs/msvc6-allocator.md) | Register allocation notes |
+| [docs/naming_conventions.md](docs/naming_conventions.md) | Original developer naming conventions |
+| [docs/TODO.md](docs/TODO.md) | Open work and the .text link shortfall |
 
 ## Targets
 
 | Target | Binary | Status |
 |--------|--------|--------|
-| `server_dll` | `original/Server/server.dll` | Active (~400 functions reversed) |
-| `Europa1400Gold` | `original/Europa1400Gold.exe` | Future |
-| `Europa1400Gold_TL` | `original/Europa1400Gold_TL.exe` | Future |
+| `server_dll` | `original/Server/server.dll` | Active, 561 functions, 330 byte-exact |
+| `Europa1400Gold` | `original/Europa1400Gold.exe` | Not started |
+| `Europa1400Gold_TL` | `original/Europa1400Gold_TL.exe` | Not started |
 
 ## License
 
