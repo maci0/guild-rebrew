@@ -1981,3 +1981,9 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /I/home/maci/Desktop/Projects/relumea/gui
 
 ["GOLDTL.0x005c86b0"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/net"
+
+["SERVER.0x10010700"]
+size = 14
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-12T21:04:40+00:00"

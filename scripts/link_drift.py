@@ -193,7 +193,13 @@ def main() -> int:
             continue
         step = max(1, len(probes) // 48)
         probes = probes[::step][:48]
-        best, best_score = None, -1
+        # Several functions in this binary are byte-identical twins (the
+        # cm_ExAllocAlchemist / cm_ExAllocGraveyardWorker thunks, amt_FindEntity26
+        # / 27), so a plain "highest score wins" search can latch onto the
+        # wrong copy and report a spurious 80-byte drift.  Break ties towards
+        # the reference offset: a real placement error is at most a few tens of
+        # bytes, and the neighbourhood is continuous.
+        best, best_score, best_dist = None, -1, 1 << 30
         lo = max(0, off - args.window)
         hi = min(bvsz - size, off + args.window)
         for cand in range(lo, hi + 1):
@@ -201,8 +207,9 @@ def main() -> int:
             for i in probes:
                 if built_bytes[cand + i] == target[i]:
                     score += 1
-            if score > best_score:
-                best_score, best = score, cand
+            dist = abs(cand - off)
+            if score > best_score or (score == best_score and dist < best_dist):
+                best_score, best, best_dist = score, cand, dist
         rows.append({
             "va": row["va"],
             "name": row["name"],

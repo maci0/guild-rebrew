@@ -53,3 +53,17 @@ void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job)
 	}
 	return 0;
 }
+
+/* 14-byte unnamed helper the reference has at 0x10010700, between this
+ * function and FindSlotEntryFiltered.  It has no caller and no catalog name,
+ * but it is part of the same translation unit in the reference, and the 7
+ * bytes of `nop` that separate the two are msvc6's 16-byte intra-section
+ * function alignment.  Returns whether the dword at p+4 is -1. */
+
+// FUNCTION: SERVER 0x10010700
+
+int __cdecl fcn_10010700(void* unused, int* p)
+{
+	(void) unused;
+	return *(int*) ((char*) p + 4) == -1;
+}
