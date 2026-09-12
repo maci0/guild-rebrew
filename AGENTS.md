@@ -120,7 +120,7 @@ Build with `cmake -S . -B build-sp6 -DREBREW_DEBUG_INFO=OFF && cmake --build bui
 **Run `scripts/gate.sh` before committing.** It is the three checks that must
 pass: `rebrew lint`, the compile (the POST_BUILD postlink step is expected to
 fail until the tree is position-aligned, so only `error C####`/`error LNK####`
-count), and `rebrew verify --full` against a baseline of 277 passed. A drop
+count), and `rebrew verify --full` against a baseline of 278 passed. A drop
 below the baseline is a regression; raise `BASELINE` only when a change
 improves the number.
 
