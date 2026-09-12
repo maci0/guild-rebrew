@@ -22,7 +22,7 @@ echo "== rebrew lint"
 rebrew lint 2>&1 | tail -1
 
 echo "== build (compile errors only)"
-cmake --build build-sp6 -j8 > .scratch/gate-build.log 2>&1
+cmake --build build -j8 > .scratch/gate-build.log 2>&1
 errs=$(grep -cE "error C[0-9]+|error LNK" .scratch/gate-build.log)
 echo "compile/link errors: $errs  (full log: .scratch/gate-build.log)"
 [ "$errs" -eq 0 ] || rc=1
