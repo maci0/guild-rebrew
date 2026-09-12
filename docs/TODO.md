@@ -1,6 +1,6 @@
 # Blockers — 100% Round-Trip Goal
 
-## Distance to byte identity (2026-09-13, round 23)
+## Distance to byte identity (2026-09-13, round 24)
 
 One place to read the whole gap.  Nothing here is new work; it is the state
 the round-by-round entries below establish.
@@ -50,6 +50,112 @@ this reconstruction puts the same two values in ebx/edi, so the compiler
 reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
+
+## `/Oa` is the dominant lever on one function, and unusable (2026-09-13, round 24)
+
+A systematic flag sweep over all 20 non-byte-exact functions (see the table at
+the end of this section) found exactly one function where a flag moves the
+byte compare at all: `ls_LoadBuildingEntityState` (0x100128f0) under `/Oa`
+(assume no aliasing) goes from **125/1464 to 713/1463** matched bytes, and its
+prologue becomes byte-identical:
+
+```
+target  83ec0c 53 55 56 57   sub esp,0xc; push ebx; push ebp; push esi; push edi
+/O2     83ec0c 56 57         push esi; push edi
+/Oa     83ec0c 53 55 56 57   exact
+```
+
+That is the first time this function's four-callee-saved-register prologue has
+been reproduced.  `/Ox`, `/O1`, `/Ot`, `/Og-`, `/Ow`, `/Ob1`, `/Ob2`, `/Oy-`,
+`/G6`, `/G5`, `/Oi-`, `/Gy`, `/Os` on top of `/O2` are all inert or worse;
+`#pragma optimize("a", on)` around the function is byte-identical to
+`--cflags "/O2 /Gd /Oa"`.
+
+**It still cannot be adopted.**  Under `/Oa` the object is 1427 bytes against
+the reference's 1463, and the -36 B is structural, not cosmetic: with the
+no-aliasing assumption msvc6 CSEs `*(int*)(esi + 0x71)` across the ~12
+`ls_ReadVfsDataChecked` calls in the `esi[0] == 0x1e` arm and keeps the
+allocator result + 8 in a register (`lea ebx,[eax+8]`, `lea ecx,[ebx-8]`),
+while the reference reloads it before every call (`mov edx,[esi+0x71]`,
+`lea eax,[ebx+edx+4]`).  Forcing the reload with a volatile read regresses the
+whole function to 117/1471 under both `/Oa` and `/O2`.  So the reference shows
+`/Oa`-style register allocation with `/O2`-style aliasing in the same
+function; no flag pair or spelling produces both, which is the same shape as
+the `-1` caching wall recorded in round 23 and the `strcpy`/zero-register
+trade in `m_AllocTracked`.
+
+Register-aware diff of the `/Oa` build: 142 exact, 28 reloc, **51
+register-only**, **278 structural**.  The register-only set is a clean
+esi/edi swap — the reference keeps `stream_ctx` in edi and the entity pointer
+in esi, ours the other way round (the file's own note at the top already
+records the reference's edi choice).  Four source attempts to move it are
+byte-identical to the baseline and inert: copying the parameter into a local
+`char* ctx` and using that at all 43 sites, renaming the entity-pointer local,
+declaring it before the two int locals, and adding an extra local.  The
+structural remainder is the CSE block above plus the rotated 0x55 loop tail.
+
+**Sweep table** (`match/total@obj`, `/O2 /Gd` then `/O2 /Gd /Oa` then
+`/O1 /Gd`):
+
+| function | `/O2 /Gd` | `/O2 /Gd /Oa` | `/O1 /Gd` |
+|---|---|---|---|
+| CrashDump | 267/2137@2137 | 265/2129@2129 | 221/2115@**1645** |
+| m_AllocTracked | 123/680@680 | 123/677@677 | 160/658@544 |
+| vfs_ReadCompressed | 138/499@499 | 43/493@493 | 21/492@378 |
+| vfs_ReadData | 46/482@482 | 37/485@485 | 48/472@371 |
+| vfs_OpenStream | 444/693@693 | 114/697@697 | 44/667@589 |
+| ServerMainThread | 1336/2434@2434 | 1142/2450@2450 | 194/2434@2237 |
+| srv_LoadBuf | 701/750@750 | 112/780@780 | 117/750@668 |
+| cm_ProcessCommandQueue | 624/639@639 | 99/639@609 | 85/639@541 |
+| ahm_ExAllocAlchemist | 823/1002@1002 | 507/1010@1010 | 165/1002@944 |
+| cm_ExSellObjekt | 199/2057@2055 | 226/2057@1963 | 195/2057@1738 |
+| cm_ExProdObjekt | 976/993@993 | 341/993@982 | 90/993@795 |
+| cm_ExCopyEntityData | 525/901@880 | 525/901@880 | 130/901@822 |
+| gv_ExAllocGraveyardWorker | 606/1040@1040 | 245/1042@1042 | 90/1040@911 |
+| ls_LoadBuildingEntityState | 125/1464@1464 | **713/1463@1427** | 128/1463@1367 |
+| gm_ObjectsAvailble | 686/714@714 | 567/714@709 | 83/714@617 |
+| gm_FindNextFilteredEntity | 168/346@342 | 168/346@342 | 89/346@306 |
+| gm_AllocGebaeude | 418/1078@1078 | 243/1078@1078 | 68/1078@946 |
+| gm_AllocSpieler | 500/3689@3652 | 504/3692@3692 | 289/3689@3344 |
+| gm_CalculateProductionValue | 391/396@396 | 391/396@396 | 71/396@339 |
+| gm_CheckInventoryCapacity | 293/395@395 | 152/395@389 | 37/395@340 |
+
+Note the two functions that already carry `#pragma optimize("a", on)` in the
+tree (`cm_ExCopyEntityData`, `gm_CalculateProductionValue` in `spiel622.c`) are
+the two whose `/Oa` column is unchanged — consistent with the pragma and the
+flag being the same switch.  `gm_CalculateProductionValue`'s `nbad` stays at 2.
+
+**Prioritised target list**, `rebrew diff <va>` under the tree's own
+`/O2 /Gd`, sorted by structural mismatches (the only counts that need code
+work; `reloc` slots are masked and `reg`-only diffs are not in this table):
+
+| function | exact | structural | instrs | obj vs target |
+|---|---|---|---|---|
+| `gm_CalculateProductionValue` | 106 | 2 | 123 | 396 vs 396 |
+| `cm_ExProdObjekt` | 316 | 5 | 354 | 993 vs 993 |
+| `gm_ObjectsAvailble` | 188 | 18 | 229 | 714 vs 714 |
+| `srv_LoadBuf` | 166 | 25 | 226 | 750 vs 750 |
+| `vfs_OpenStream` | 96 | 99 | 199 | 667 vs 667 |
+| `gm_FindNextFilteredEntity` | 5 | 112 | 118 | 342 vs 346 |
+| `ServerMainThread` | 477 | 115 | 627 | 2434 vs 2434 |
+| `gm_CheckInventoryCapacity` | 9 | 128 | 138 | 395 vs 395 |
+| `vfs_ReadData` | 31 | 143 | 174 | 446 vs 472 |
+| `vfs_ReadCompressed` | 50 | 150 | 200 | 492 vs 492 |
+| `gv_ExAllocGraveyardWorker` | 166 | 160 | 333 | 1040 vs 1040 |
+| `cm_ExCopyEntityData` | 78 | 169 | 249 | 880 vs 901 |
+| `cm_ProcessCommandQueue` | 30 | 173 | 205 | 639 vs 639 |
+| `ahm_ExAllocAlchemist` | 98 | 175 | 287 | 1002 vs 1002 |
+| `m_AllocTracked` | 33 | 208 | 249 | 608 vs 658 |
+| `gm_AllocGebaeude` | 75 | 264 | 353 | 1078 vs 1078 |
+| `ls_LoadBuildingEntityState` | 3 | 496 | 499 | 1463 vs 1463 |
+| `cm_ExSellObjekt` | 59 | 607 | 667 | 2055 vs 2057 |
+| `CrashDump` | 11 | 701 | 724 | 2115 vs 2115 |
+| `gm_AllocSpieler` | 82 | 971 | 1056 | 3688 vs 3689 |
+
+The two closest (`gm_CalculateProductionValue`, `cm_ExProdObjekt`) are both
+documented exhaustively as scheduling walls — the FP-stack `fxch`/folded-compare
+exclusivity in the first, the pre-loop volatile-store interleave in the
+second — so the structural count understates how hard they are.
 
 ## m_PoolAlloc closed: asm operands must be named locals (2026-09-13, round 23)
 
