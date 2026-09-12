@@ -1,5 +1,30 @@
 # Blockers — 100% Round-Trip Goal
 
+## The same fix for `.data` (2026-09-13, round 57)
+
+Round 56's classifier bug sent `rdata_restore.c.obj` to the `head` group.
+`data_restore.c.obj` was *deliberately* there, from the CMake world where the
+comment says it has to be linked next so the raw link's `.data` rsz reaches
+0xe000.  That reasoning does not hold for the split response file, and the
+same symptom appears: the `.data` blob reproduces reference bytes that the
+game objects' own `.data` contributions sit in front of, so in `head` it lands
+far too early.
+
+Moving it into the same slot as the `.rdata` blob -- after the CMake objects
+and before the split ones -- is inert for `.rdata` and moves `.data` a long
+way:
+
+```
+                   .text    .rdata   .data        (differing bytes)
+split_poc before   86647     2237    38546
+split_poc after    86608     2237    33690
+```
+
+`.data` goes 33% -> 41% equal, `.text` picks up 39 bytes, `.rdata` is
+unchanged.  The relative order of the two blobs does not matter (both
+`data,rdata` and `rdata,data` measure identically), and `data_globals.c.obj`
+is inert wherever it sits, so it stays where it was.
+
 ## Fixed: the split build's `.rdata` order (2026-09-13, round 56)
 
 Round 55 left the split build's `.rdata` landing the `rdata_restore.c` blob at

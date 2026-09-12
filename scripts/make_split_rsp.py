@@ -84,11 +84,16 @@ def main() -> int:
         # "data_restore.c.obj") is True, so the bare basename sends the
         # rdata blob to `head` and its .rdata lands at offset 0x1a0 instead
         # of the reference's 0x12e8.
-        if t.endswith("/crt_imports.c.obj") or t.endswith("/data_restore.c.obj"):
+        if t.endswith("/crt_imports.c.obj"):
             head.append(t)
         elif t.endswith("/data_globals.c.obj"):
             data.append(t)
-        elif t.endswith("/rdata_restore.c.obj"):
+        elif t.endswith("/rdata_restore.c.obj") or t.endswith("/data_restore.c.obj"):
+            # Both restore blobs reproduce reference section content that the
+            # game objects' own contributions sit in front of, so they belong
+            # after the CMake objects and before the split ones -- not in
+            # `head`, which put the .rdata blob at offset 0x1a0 instead of
+            # 0x12e8 and the .data blob a long way early as well.
             rdata.append(t)
         elif t.endswith("/link_stubs.c.obj"):
             tail.append(t)
