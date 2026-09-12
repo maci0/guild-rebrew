@@ -28,6 +28,32 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## VC7 fills the unlock family; 9 functions remain (2026-09-13, round 13)
+
+Swept the 16 unmatched region functions against more CRT builds (extract with
+`docker run --rm --entrypoint sh -v $PWD/.scratch/libcmt:/out <image> -c 'cp
+<path>/libcmt.lib /out/<name>.LIB'`; the image paths are
+`/opt/msvc5.0/lib/libcmt.lib`, `/opt/msvc7.0/Vc7/lib/libcmt.lib`,
+`/opt/msvc7.1/Vc7/lib/libcmt.lib`):
+
+| library | unmatched matched |
+|---|---|
+| VC5 LIBCMT | 0 / 16 |
+| LIBC 6.0 (single-threaded) | 0 / 16 |
+| VC7 LIBCMT | **7 / 16** — the whole `unlock_09*` family (778 B) |
+
+So `--lib SP6 --lib SP5 --lib VC7` resolves **235 of 244 region functions
+(38,674 of 39,216 B)**, leaving 9 (542 B): `srand`, `fcn_1001a643`, `fpmath`,
+`init_fptrs`, `unlock_9`, `__CRT_INIT`, `crt_close_handle`, `crt_once_init`,
+`allmul_slow`.  None of VC5/VC6-base/SP4/SP5/SP6/VC7/LIBC carries them, so they
+are a build variant none of the libraries on hand reproduces.
+
+The link is unchanged by the VC7 addition (73 leftovers, `.text` 0x10025d0e):
+the extracted `unlock` helpers are still pulled from LIBCMT members that other
+symbols need, so *coverage* improves while the leftover set does not shrink.
+73 leftovers is 6,858 B of the 0x24c8 region overshoot; the rest of the gap is
+the split set's own excess.
+
 ## The reference CRT is a service-pack mix (2026-09-13, round 11)
 
 Two findings, both from chasing the 22 unmatched region functions.
