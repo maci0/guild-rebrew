@@ -31,6 +31,8 @@ whose `.rdata` the blob also supplies), so the size is unchanged; only the
 arrangement moved.
 
 The classifier now matches on `/<name>`, which is what the bug needed.
+Verified end to end through `scripts/split_link.sh`, not just by hand-editing
+a response file: the pipeline reproduces 2237/11905 on its own.
 
 ## The split build's `.rdata` is in the wrong order; the CMake build's is not (2026-09-13, round 55)
 
