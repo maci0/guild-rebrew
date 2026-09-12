@@ -80,8 +80,8 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 // What suppresses it here is `node`'s live range across the malloc.  Bisected
 // on this exact body by truncating it at successive statements
 // (.scratch/L3/{c0..c3,r1,r2,x1..x4}.c, all under /O2 /Gd /G6 /Oy-):
-//   - body cut before `nodev = (int) node`, returning ptr:  xor ebx,ebx
-//   - the same cut returning `node` instead of `ptr`:       no zero register
+//   - body cut before `nodev = (int) node`, returning mem:  xor ebx,ebx
+//   - the same cut returning `node` instead of `mem`:       no zero register
 //   - adding `nodev = (int) node` alone:                    no zero register
 //   - adding `node->count++` alone:                         no zero register
 //   - adding `sz = size` and the malloc alone:              zero register kept
@@ -205,7 +205,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 // live-range side, all inert at 233: the `buf[taglen]` terminator written
 // through a named zero local, to match the target's `mov [ebp+esi-0x18],bl`;
 // and every null/zero guard in the function (g_array_ptr, size, tag, p,
-// node, ptr, cur, and the search-loop condition) spelled as a comparison
+// node, mem, cur, and the search-loop condition) spelled as a comparison
 // against one function-scope `zero` local so a single zero value spans the
 // whole body.  Initialising `prev`, `taglen` or `i` to 0 ahead of the first
 // guard so a zero opens the function is likewise inert.  This is consistent
@@ -243,7 +243,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	struct GroupNode* prev;
 	int taglen;
 	int i;
-	void* ptr;
+	void* mem;
 	char* slot;
 	char* p;
 	struct GroupNode** node_slot;
@@ -296,13 +296,35 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	nodev = (int) node;
 	node->count++;
 	sz = size;
-	ptr = malloc(sz);
-	if (ptr == 0) {
+	mem = malloc(sz);
+	if (mem == 0) {
 		sprintf(buf, "Out of Memory Error: Malloc - Failed %s for %u bytes", tag, size);
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0xcd, buf);
 		return 0;
 	}
-	memset(ptr, 0, sz);
+	{
+		/* The original's zero-fill here is the 24-byte hand-written prelude
+		 * (docs/msvc6-allocator.md Finding 19); no msvc6 C spelling emits
+		 * it.  Reproduced as a block-fill with ordinary named locals, which
+		 * is what the target's operand homing at [ebp-4]/[ebp-8] is. */
+		__asm {
+			mov edi, mem
+			mov ebx, sz
+			xor eax, eax
+			lea ecx, [edi+edi*2]
+			and ecx, 3
+			sub ebx, ecx
+			jle short L1
+			rep stosb
+			mov ecx, ebx
+			and ebx, 3
+			shr ecx, 2
+			rep stosd
+		L1:
+			add ecx, ebx
+			rep stosb
+		}
+	}
 	if (g_stat2 < g_array_count) {
 		node = (struct GroupNode*) nodev;
 		slot = (char*) g_array_ptr;
@@ -316,7 +338,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			i++;
 		}
 		p = (char*) tag;
-		*(void**) (slot + 8) = ptr;
+		*(void**) (slot + 8) = mem;
 		*(const char**) (slot + 4) = p;
 		*(unsigned int*) (slot + 0xc) = size;
 		*(struct GroupNode**) slot = node;
@@ -339,5 +361,5 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	} else {
 		ReportFatalError("D:\\Develop\\Units\\m_alloc\\m_alloc.c", 0xf0, "No more free memory slots...\nCall m_init() with more slots!");
 	}
-	return ptr;
+	return mem;
 }

@@ -11,7 +11,7 @@ the round-by-round entries below establish.
 | game functions, byte-exact at object level | 261 of 281 `byte_matched` | ~140 KB |
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
-| standard CMake link, `.text` | 0x226fc (-330), postlink coverage 401/7,463 (5.4%) | — |
+| standard CMake link, `.text` | 0x2275c (-234), postlink coverage 401/7,463 (5.4%) | — |
 | split-set link (LIBCMT member objects), `.text` | 0x2297a (+308, was +676) | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
@@ -207,6 +207,91 @@ second — so the structural count understates how hard they are.
 signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
+
+## The link's whole remaining error is seven object sizes (2026-09-13, round 37)
+
+`objects1.rsp` is **already sorted by reference VA** — 0 inversions in 173
+adjacent pairs — so the game region is not misordered.  What breaks it is
+purely per-object length: the drift profile below is piecewise constant and
+changes value only at the objects whose `.text` is the wrong size.
+
+`scripts/link_drift.py` (new) is what makes this visible.  It masks the bytes
+a relocation may legitimately change (every rel32, every immediate or
+displacement pointing into the image), then finds the offset in the built
+`.text` that maximises the match, per tracked function.  Output today:
+
+```
+built .text 0x2275c  reference 0x22846  delta -234
+  SendBroadcastPacket / crc32 / DispatchLogOutput     drift  0
+  EmitCrashModuleLine .. vfs_WriteUint32LE            drift +16   (CrashDump broke it)
+  m_FreeTracked .. m_pool_free                        drift  0
+  ...
+  sim_* .. gm_RandomQuadratic                         drift -32
+```
+
+**The block-fill prelude has exactly six sites in the whole binary**, all in
+the game region, and three were still unreproduced:
+
+| site | function | kind | state |
+|---|---|---|---|
+| 0x10006730 | `m_AllocTracked` | zero-fill | this round |
+| 0x10008f0c | `vfs_ReadData` | copy | this round |
+| 0x10017611 | `gm_AllocGebaeude` | zero-fill | this round |
+| 0x10006929 | `m_init` | zero-fill | already asm |
+| 0x10006e0d | `m_PoolAlloc` | zero-fill | already asm |
+| 0x1000b057 | `srv_InitBuildingTypeTable` | zero-fill | already asm |
+
+Five are `xor eax,eax` + `rep stosb/stosd`; `vfs_ReadData` is the same
+template with `rep movsb/movsd` from `esi`.  The prelude is **not reachable
+from C**: re-probed this round with eight `memset` shapes, twenty `memcpy`
+shapes and one 0x100-frame shape mimicking `vfs_ReadData`, across
+`/O2 /Gd`, `/O2 /Gd /G6`, `/O2 /Gd /G5`, `/Ox`, `/O1`, `/Oy-`, `/Os`, `/Oa`,
+`/Ow` and every `6.0`…`6.0-sp6` image, plus `4.2` and `5.0`.  Every one emits
+the naive `shr ecx,2; rep stosd; and ecx,3; rep stosb`.  `/G6` *is* being
+applied — it changes the scheduling around the fill — it just does not select
+this template.  Reproducing the six sites as block-fill asm by naming the
+operands as ordinary locals is therefore the only route, and is the sanctioned
+exception to "C only": the target has no C spelling, and the same idiom
+appears nowhere else in the binary (no other `sub reg,reg; jle` without a
+`test` between).
+
+**Effect of the three new sites:**
+
+| function | object before | object after | target | aligned before | aligned after |
+|---|---|---|---|---|---|
+| `m_AllocTracked` | 608 | 656 | 672 | 46.6% | 51.4% |
+| `vfs_ReadData` | 446 | 479 | 472 | 58.0% | 76.4% |
+| `gm_AllocGebaeude` | 1088 | 1120 | 1088 | 37.3% | 41.6% |
+
+Built `.text` **0x226fc (-330) -> 0x2275c (-234)**, and the game region's
+accumulated drift at `gm_RandomQuadratic` goes from about -100 to **-32**.
+
+**The remaining per-object size errors** (span = distance to the next
+object's first reference VA, so only objects that tile densely are
+meaningful):
+
+| object | span | built | error |
+|---|---|---|---|
+| `vfs_OpenStream.c.obj` | 752 | 704 | **-48** |
+| `cm_ExCopyEntityData.c.obj` | 912 | 880 | **-32** |
+| `gm_AllocGebaeude.c.obj` | 1088 | 1120 | +32 |
+| `CrashDumpUnhandledExceptionFilter.c.obj` | 2128 | 2144 | +16 |
+| `m_AllocTracked.c.obj` | 672 | 656 | -16 |
+| `vfs_ReadCompressed.c.obj` | 496 | 512 | +16 |
+| `gv_GetSlotEntry.c.obj` | 352 | 336 | -16 |
+
+`gm_AllocGebaeude` is the one deliberate trade: its object was exactly 1088
+before, and carrying the correct prelude makes it +32, but that is *also*
+what took the whole `.text` 32 bytes closer.  Its other 32 bytes of excess
+have to come out before it can be byte-exact; the prelude is a prerequisite
+because it sits directly in front of the component loop and shifts every
+register assignment downstream.
+
+**Next step:** `vfs_OpenStream` (-48) and `cm_ExCopyEntityData` (-32) are the
+two biggest remaining size errors and neither is a prelude site, so their
+shortfall has a different cause — start there.  `gv_GetSlotEntry` (-16) is
+not on the non-exact list at all, so its 16 bytes are missing *content*, not
+a wrong function size.
 
 ## Deleting the dead half of `link_stubs.c` takes 368 bytes off the split link (2026-09-13, round 36)
 

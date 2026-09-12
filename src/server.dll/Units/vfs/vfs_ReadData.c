@@ -382,7 +382,32 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 			result = total - *(int*) (stream + 0x110);
 			goto done;
 		}
-		memcpy(buf, *(char**) sh.zp, total);
+		{
+			char* fsrc;
+
+			fsrc = *(char**) sh.zp;
+			/* The original's copy is the 24-byte hand-written alignment
+			 * prelude (docs/msvc6-allocator.md Finding 19): dest-align,
+			 * then dwords, then the remainder, with a short-count fallback.
+			 * No msvc6 C memcpy spelling emits it. */
+			__asm {
+				mov edi, buf
+				mov esi, fsrc
+				mov ebx, total
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short L1
+				rep movsb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep movsd
+			L1:
+				add ecx, ebx
+				rep movsb
+			}
+		}
 		result = total;
 		*(char**) sh.zp += total;
 		{

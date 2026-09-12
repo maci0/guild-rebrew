@@ -196,7 +196,26 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	/* target: mov [ebp+8],0x30; lea eax,[esi+0x65]; mov [ebp-0x10],eax; stos */
 	geb_type = 0x30;
 	s.dest = geb + 0x65;
-	memset(s.dest, 0, (unsigned int) geb_type);
+	/* The original's fill here is the 24-byte hand-written block-fill prelude
+	 * (docs/msvc6-allocator.md Finding 19); no msvc6 C memset spelling emits
+	 * it.  Reproduced as a block-fill with ordinary named operands. */
+	__asm {
+		mov edi, s.dest
+		mov ebx, geb_type
+		xor eax, eax
+		lea ecx, [edi+edi*2]
+		and ecx, 3
+		sub ebx, ecx
+		jle short L1
+		rep stosb
+		mov ecx, ebx
+		and ebx, 3
+		shr ecx, 2
+		rep stosd
+	L1:
+		add ecx, ebx
+		rep stosb
+	}
 	/* component loop: counter reuses geb_type (ebp+8) */
 	geb_type = 0;
 	for (; geb_type < 0x40; geb_type++) {
