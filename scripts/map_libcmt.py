@@ -378,6 +378,26 @@ def main() -> int:
         else:
             miss.append((va, name, size))
 
+    # A matched symbol can start partway into its member section, and the bytes
+    # before it are real code the reference places immediately before it.
+    # strchr.obj sec 1 starts with a 5-byte tail (`lea eax,[edx-1]; pop ebx;
+    # ret`) followed by 11 bytes of 16-byte alignment padding, so _strchr is at
+    # offset 16 and those first 16 bytes belong at 0x1001af20 -- the piece that
+    # put 201 symbols on a constant -16 plateau.  Emit the prefix as its own
+    # entry unless another entry already covers that VA.
+    occupied = {h[0] for h in hits}
+    extra = []
+    for va, name, size, member, sym, section, offset, lib in hits:
+        if not offset:
+            continue
+        base = va - offset
+        if base in occupied or any(base <= v < va for v in occupied):
+            continue
+        extra.append((base, name + "$prefix", offset, member, sym, section, 0, lib))
+        occupied.add(base)
+    hits.extend(extra)
+    hits.sort()
+
     in_region = [(v, n, s) for v, n, s in rows if v >= floor and s >= MIN_BYTES]
     reg_hits = [h for h in hits if h[0] >= floor]
     if args.json:
