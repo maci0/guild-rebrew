@@ -64,7 +64,7 @@ guild-rebrew/
 ```
 
 The MSVC6 compiler is not vendored: every CL.EXE/LINK.EXE call runs through
-the `rebrew/msvc:6.0-win32` docker image (see `cmake/toolchain-msvc-6.0-docker.cmake`).
+the `rebrew/msvc:6.0-sp6-win32` docker image (see `cmake/toolchain-msvc-6.0-sp6-docker.cmake`).
 
 ## Documentation
 
