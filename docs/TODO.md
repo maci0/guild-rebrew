@@ -344,6 +344,19 @@ eighth IAT thunk `_RtlUnwind@16` (0x10023840, 6 B) — the reference's `.text`
 ends there, and `emit_thunks.py` only emits the seven socket thunks because
 they are the ones that sit together at 0x1001a160.
 
+`srand` also accounts for the last -16 island in the *game* region: the drift
+goes +16 from `gm_SetupEntityQuery` to `gm_QueryEntitySum` (0x100196c0) and
+back to 0 at `__CRT_INIT`, and 0x100196c0 plus spiel622, `gm_RandomFloat01`,
+`gm_RandomQuadratic` and `srv_SeedRandomWithTime` lands exactly on 0x1001a150.
+The reference's 12 bytes there are `mov eax,[esp+4] / push eax / call
+0x1001b535 / pop ecx / ret` — a wrapper around the 13-byte getptd/store body
+that `rand.obj` §1 supplies at 0x1001b535.  It **cannot be written as C here**:
+`library_msvc.h` declares 0x1001A150 a LIBRARY function, and `rebrew skeleton
+0x1001A150` refuses with "Already covered by: library_msvc.h".  The tooling is
+right — it is library code whose service pack we do not have, not game code.
+Writing it would also collide with `_srand`, which `rand.obj` already defines
+for the same symbol, so the 13-byte body at 0x1001b535 would be displaced.
+
 ## The map did not say which library it matched in (2026-09-13, round 45)
 
 The first drift island in the split set was **-128 at `__alloca_probe`**: every
