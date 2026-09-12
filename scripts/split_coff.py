@@ -148,7 +148,7 @@ def masked_body(obj: bytes, sec: dict) -> bytes:
     return bytes(body)
 
 
-def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None) -> bytes:
+def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None, extra: set[int] | None = None) -> bytes:
     """COFF object for `coff.sections[index]` plus its same-member closure.
 
     `separate` holds the section indices that are themselves emitted as their
@@ -162,7 +162,7 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     # MSVC splits a member's shared tails into separate COMDATs (memmove's
     # LeadUp*/UnwindUp*/TrailUp* family), and leaving them out makes the linker
     # re-pull the whole member and append it after the region.
-    need = {index}
+    need = {index} | set(extra or ())
     work = [index] if closure else []
     while work:
         i = work.pop()
@@ -274,7 +274,12 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     headers = bytearray()
     blobs = bytearray()
     for old in secs:
-        body = coff.section_body(old)
+        sec_old = coff.sections[old]
+        if sec_old["raw_ptr"] == 0:
+            # .bss-style section: no raw data in the object, just a size.
+            body = b"\0" * sec_old["raw_size"]
+        else:
+            body = coff.section_body(old)
         relocs = coff.section_relocs(old)
         body_off = cur
         cur += len(body)
@@ -350,6 +355,14 @@ def main() -> int:
         help="helper symbol to leave to LIBCMT (repeatable).  Default "
         "__CRT_INIT@12: when our objects supply it LIBCMT's dllcrt0.obj is not "
         "pulled and LINK stops resolving /ENTRY:_DllMainCRTStartup@12",
+    )
+    ap.add_argument(
+        "--with-data",
+        action="store_true",
+        help="also carry each member's non-.text sections (.data/.bss/.rdata/"
+        ".CRT$*) on the object for its lowest-VA mapped function, so the "
+        "member's data symbols have a command-line definition and LINK stops "
+        "loading the whole member from the archive",
     )
     ap.add_argument(
         "--closure",
@@ -429,7 +442,14 @@ def main() -> int:
             if sec is not None:
                 mapped.add(sec)
         claimed: set[int] = set()
-        for va, symbol, section in sorted(funcs, key=lambda f: f[0]):
+        data_secs: set[int] = set()
+        if args.with_data:
+            for i, sec in enumerate(coff.sections):
+                nm = sec["name"].rstrip(b"\0").decode("ascii", "replace")
+                if nm.startswith((".data", ".bss", ".rdata", ".CRT$")):
+                    data_secs.add(i)
+        funcs_sorted = sorted(funcs, key=lambda f: f[0])
+        for n, (va, symbol, section) in enumerate(funcs_sorted):
             root_sec = find_section(symbol, section)
             if root_sec is None:
                 print(f"  no section for {symbol} in {member}", file=sys.stderr)
@@ -440,7 +460,10 @@ def main() -> int:
                 symbol
             }
             (outdir / name).write_bytes(
-                build_object(coff, root_sec, symbol, mapped, claimed, False, aliases)
+                build_object(
+                    coff, root_sec, symbol, mapped, claimed, False, aliases,
+                    extra=data_secs if n == 0 else None,
+                )
             )
             written.append((va, str(outdir / name), symbol))
             if not args.closure:

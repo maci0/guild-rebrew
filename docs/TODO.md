@@ -208,12 +208,68 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
-## Two thirds of the split-set overshoot is LINK padding, not content (2026-09-13, round 27)
+## `split_coff --with-data` removes 3,617 bytes of the overshoot (2026-09-13, round 28)
+
+Round 27 concluded that LINK loads the 12 leftover members for their *data*
+symbols, because the split set extracted only `.text`.  This round implements
+that: `split_coff --with-data` carries each mapped member's `.data`, `.bss`,
+`.rdata` and `.CRT$*` sections on the object for that member's lowest-VA mapped
+function, so the member's data has a command-line definition.  It also fixes a
+latent bug the flag exposed: a `.bss`-style section has `PointerToRawData == 0`,
+and `section_body` was reading the object *header* for it; such sections now
+emit `raw_size` zero bytes.
+
+Measured on the closure set, both VS-sorted by `scripts/make_split_rsp.py`:
+
+| build | `.text` | vs reference | archive pull |
+|---|---|---|---|
+| `--closure` (round 27) | 0x246e6 | +0x1ea0 (7,840 B) | 12 members, 34 symbols, 4,978 B |
+| `--closure --with-data` | **0x238c5** | **+0x107f (4,223 B)** | **7 members, 16 symbols, 1,655 B** |
+
+**-0xE21 = 3,617 bytes**, and the archive pull shrinks by exactly the
+difference: `output.obj`, `sbheap.obj`, `cvt.obj`, `tzset.obj`, `strtol.obj`,
+`intrncvt.obj`, `atox.obj`, `handler.obj`, `crt0msg.obj`, `_newmode.obj`,
+`ioinit.obj`, `ncommode.obj` and the rest stop being loaded.  The default path
+is unchanged: regenerating the plain `--closure` set with the patched script
+reproduces 0x246e6 byte-for-byte, so the `.bss` fix only affects objects that
+actually carry an uninitialized section.
+
+**What is left, from LINK `/VERBOSE`.**  With the flag on the remaining pull is
+7 members, and `/VERBOSE` names the one symbol that loads each
+(`Found <symbol>` / `Referenced in <obj>`):
+
+`_DllMain@12` -> `dllmain.obj`; `__except_list` -> `exsup.obj`;
+`__CRT_INIT@12` -> `dllcrt0.obj`; `___endstdio` -> `_file.obj`;
+`__XcptActTab` -> `winxfltr.obj`; `__mbctype` -> `mbctype.obj`;
+`__cinit` / `___xc_a` -> `crt0dat.obj`.
+
+Most of these are **common symbols**, not data a section carries: `mbctype.obj`
+defines `__mbctype` as section 0 with value 0x101, `___mbcodepage` as section 0
+value 4, and so on.  A common is allocated by the linker, so no `.data` section
+of ours can satisfy the lookup; the object has to carry the allocation itself.
+`_DllMain@12` is different again: it is the `/ENTRY:` symbol, and the split rsp
+drops the `crt_region/dllmain.c.obj` that supplied it, so LINK looks in the
+archive and finds LIBCMT's `dllmain.obj`.  Measured: switching `/ENTRY:` to
+`_DllMainCRTStartup@12` (which resolves to `__DllMainCRTStartup@12`, the
+symbol the split set's `1001b9d4_.text.obj` actually defines) links clean at
+**0x238c3**, two bytes better; `/ENTRY:__DllMainCRTStartup@12` fails outright,
+confirming LINK prepends its own underscore.
+
+**Next step for this half:** emit the pulled members' commons as ordinary
+`.bss` definitions of the recorded size (the symbol's `Value` field), and
+either keep `crt_region/dllmain.c.obj` in the rsp or use the
+`_DllMainCRTStartup@12` entry.  Both are small, and the remaining 4,223 bytes
+decompose into the ~1,655-byte pull plus the `-0xaa` missing prologue and
+inter-object slack from round 27.
+
+## The split-set overshoot is 12 archive-pulled members (2026-09-13, round 27)
 
 The round-26 audit left one question open: the built `.text` is 7,840 bytes
 over the reference's 141,382, and the placed objects are mostly in the right
 order, so where do the bytes come from?  Three measurements this round answer
-it, and one of them was a genuine tooling bug.
+it, and one of them was a genuine tooling bug.  (An intermediate answer in
+this round — "5,619 bytes of LINK padding" — was wrong and is corrected in
+item 3 below.)
 
 **1. `split_coff`'s `index.json` is not in reference-VA order.**  Four descents
 in the 235-entry list, the worst being `0x1001eab0` emitted immediately after
