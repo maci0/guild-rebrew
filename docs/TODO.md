@@ -14,6 +14,20 @@ and `delta 1873` yet counts as passed.  The honest number is `byte_matched`
 in `db/verify_results.json` (259/280 at this revision).  Whole-binary
 identity needs the 21 byte diffs **and** the link alignment below.
 
+**CrashDump's four-register prologue is not the loop.**  Section 38's
+corollary says to delete the loop and recompile; if the head then matches, the
+loop is the blocker.  Round 3 cut CrashDump's `for (;;)` stack walk out
+entirely (probe `.scratch/zz_cdprobe.c`, since removed): the object drops to
+1761 bytes but the prologue is still `sub esp,0x234; push ebx; push ebp;
+push esi; push edi`, i.e. all four callee-saved registers are reserved at
+entry with no loop at all.  The demand is in the entry region — the target
+puts the CreateFileA IAT pointer in esi and `hDbgFile` in ebp (both pushed at
+entry) and only reaches for ebx/edi after the `hDbgFile == -1` guard, while
+this reconstruction puts the same two values in ebx/edi, so the compiler
+reserves all four up front.  It is a register-role permutation across the
+entry block, not loop pressure, and not reachable by deleting or reshaping
+the walk.
+
 ## The ten real size mismatches (2026-09-13, round 3)
 
 `rebrew verify --full` is the only accurate size source; `db/server.dll_functions.csv`
