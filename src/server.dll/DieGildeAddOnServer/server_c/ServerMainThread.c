@@ -239,6 +239,9 @@ int __stdcall ServerMainThread(void* lpThreadParameter)
 	unsigned int current_tick;
 	unsigned int last_announce_tick;
 	unsigned int sync_timer;
+	unsigned int sync_p0;
+	unsigned int sync_p1;
+	unsigned short sync_p2;
 	int i;
 	int phase_complete;
 	unsigned int sent_bytes;
@@ -654,14 +657,17 @@ send_start_commands:
 				 * Target writes it as [esp+0x30]; the buffer base is
 				 * esp+0x18 after the two argument pushes. */
 				sync_timer = *(unsigned int*) 0x10035884;
+				sync_p0 = *(unsigned int*) 0x10035880;
+				sync_p1 = *(unsigned int*) 0x10035888;
+				sync_p2 = *(unsigned short*) 0x1003588c;
 				*(unsigned int*) (cmd_buffer_primary + 0x14) = sync_timer;
-				*(unsigned int*) (cmd_buffer_primary + 0x10) = *(unsigned int*) 0x10035880;
+				*(unsigned int*) (cmd_buffer_primary + 0x10) = sync_p0;
 				cmd_buffer_primary[0] = 0x1e;
 				cmd_buffer_primary[3] = 0xff;
 				*(unsigned int*) (cmd_buffer_primary + 4) = 0xffffffff;
 				*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
-				*(unsigned int*) (cmd_buffer_primary + 0x18) = *(unsigned int*) 0x10035888;
-				*(unsigned short*) (cmd_buffer_primary + 0x1c) = *(unsigned short*) 0x1003588c;
+				*(unsigned int*) (cmd_buffer_primary + 0x18) = sync_p1;
+				*(unsigned short*) (cmd_buffer_primary + 0x1c) = sync_p2;
 				if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 					goto cleanup_and_exit;
 				}
