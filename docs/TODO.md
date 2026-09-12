@@ -28,6 +28,29 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## The remaining leftovers are CRT-internal (2026-09-13, round 17)
+
+The per-function check that found the five `fclose` sites was applied to the
+whole leftover list.  Grepping every game source, every `crt_region` file and
+`link_stubs.c` for each leftover's name (`strdup`, `_write_char`,
+`___endstdio`, `__unlock_file`, the sbh extras, `_ceil`, `_strtoxl`,
+`_strtoul`, `__ld12tof`, `__atoldbl`, `__STRINGTOLD`, `__XcptFilter`,
+`matherr`, the fpexcept family, `tzset`/`cvtdate`, ...) returns **no live
+reference** — the only two hits are comments (`link_stubs.c`: `flsall`,
+`crt_heap.c`: `strtoul`).  So the 71 leftovers are pulled by the CRT members
+themselves, not by game code naming a wrong symbol: they are the build-variant
+excess of the included members.
+
+That closes the "game C names a wrong CRT symbol" line of attack; the rest of
+the region gap is (a) the 9 functions no available library carries and (b) the
+internal references of the members we do include.
+
+Also re-confirmed on the game side: CrashDump's four-register prologue is
+immune to entry reshaping.  Hoisting `hProcess = GetCurrentProcess()` to the
+top and reordering the local declarations both leave
+`sub esp,0x28c; push ebx; push ebp; push esi; ... push edi` unchanged, the
+same inertness the file's own notes record for other entry spellings.
+
 ## Fixed: those call sites were `fclose` (2026-09-13, rounds 15-16)
 
 `rebrew diff` resolves the *reference's* operand, which is what round 14 lacked:
