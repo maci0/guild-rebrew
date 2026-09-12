@@ -1,5 +1,40 @@
 # Blockers — 100% Round-Trip Goal
 
+## The IAT is in slot order now (2026-09-13, round 54)
+
+The IAT lives in `.rdata` and its slot order is part of byte identity.  Two of
+the 100 slots were swapped:
+
+```
+MessageBoxA      ref 0x10024148   built 0x1002414c
+GetWindowTextA   ref 0x1002414c   built 0x10024148
+```
+
+`crt_imports.c` already listed the two `/include` directives in the
+reference's order; emitting them in the opposite order lands each import in
+the reference's slot.  Reading the map's `__imp__` symbols in address order
+now gives **0 mismatches** against the reference across all four DLLs, with an
+identical per-DLL order (KERNEL32 81, USER32 2, WS2_32 16, WINMM 1).
+
+**Tooling trap, worth remembering:** comparing import tables with pefile's
+`DIRECTORY_ENTRY_IMPORT` order reports WS2_32 as badly scrambled, but that
+walks the *OriginalFirstThunk* (ILT), a different table from the IAT.  The
+check that matters is per import descriptor, read `FirstThunk` and the
+`IMAGE_IMPORT_BY_NAME` behind each `OriginalFirstThunk` entry, then compare
+`FirstThunk + 4*i` between the two binaries.  Do not trust the ILT order.
+
+After this, `.rdata` differs in exactly two runs:
+
+```
+0x0000..0x0198   the import region -- the IAT slot *contents* are RVAs into
+                 the hint/name table, which our surplus content displaces
+0x2608..0x2e80   the crt0msg surplus, plus 0x2e81..0x32d1 which the
+                 reference does not have at all
+```
+
+Everything between 0x0199 and 0x2607 matches the reference **exactly**, so
+the import-region run is downstream of the surplus, not a separate problem.
+
 ## The CMake `.text` shortfall is substitution, not absence (2026-09-13, round 53)
 
 The 0x470 the CMake link is short is *not* code the linker failed to pull.
