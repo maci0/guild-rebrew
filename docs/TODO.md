@@ -12,7 +12,7 @@ the round-by-round entries below establish.
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
 | standard CMake link, `.text` | 0x2276c (-218), postlink coverage 401/7,463 (5.4%) | — |
-| split-set link (LIBCMT member objects), `.text` | 0x22cba (+1140); 46 of ~320 symbols exactly at their reference VA, 201 more at a constant -16, 0 LIBCMT pulls, 0 objects discarded | — |
+| split-set link (LIBCMT member objects), `.text` | 0x22cfa (+1204); 246 of 319 symbols exactly at their reference VA, 0 LIBCMT pulls, drift one-sided (+112..+0x31c) | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
 | CRT split-set leftovers | **34** symbols across ~10 members | 5,294 B |
@@ -207,6 +207,49 @@ second — so the structural count understates how hard they are.
 signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
+
+## The section prefix before a matched symbol (2026-09-13, round 47)
+
+Round 46 left 201 of 319 symbols on a constant **-16** plateau starting at
+`_strchr`.  The cause was not missing code but *unclaimed* code: a match can
+start partway into its member section, and the bytes before it are real code
+the reference places immediately before it.  `strchr.obj` §1 starts with
+
+```
+8d42ff              lea eax,[edx-1]      <- the strncpy return-value tail
+5bc3                pop ebx; ret
+8da42400000000 8d642400                  11 bytes of 16-byte alignment padding
+...                 _strchr at offset 16
+```
+
+so the reference has those 16 bytes at 0x1001af20 and `_strchr` at 0x1001af30,
+while our map only knew about the offset-16 entry and emitted from there.
+
+For every hit with a non-zero section offset the map now adds a second entry at
+`VA - offset` covering `[0, offset)`, unless another entry already covers that
+VA.  The `exsup` group is unaffected because its offset-0 entry is already
+present, so the prefix is skipped.
+
+| | before | after |
+|---|---|---|
+| symbols exactly at their reference VA | 46 | **246** |
+| sum of abs delta over placed symbols | 32,172 | **30,088** |
+| delta range | -0x10 .. +0x30c | **+0x0 .. +0x31c** |
+| objects LINK discards | 0 | 0 |
+| LIBCMT archive pulls | 0 | 0 |
+| split-set `.text` | 0x22cba (+1140) | 0x22cfa (+1204) |
+
+**The drift is now one-sided** — nothing is early any more, and the 73
+remaining symbols are at +112 and up.  They start at `LeadUp1` (0x1001b200) and
+come from the `strstr` / `fpinit` / `memcpy` stretch, where `strstr.obj` §1 is
+128 bytes against a 152-byte catalog entry: the same "shorter section than the
+reference function" shape as round 46's `strncpy`, but this time no variant
+carries a longer `strstr`.
+
+Note that `split_audit`'s "objects LINK discards" test is by object basename,
+and the new prefix object defines no map-visible *symbols* of its own — it is
+in the image (the bytes at 0x1001af20 match the reference exactly) but does not
+show up in the map, so it reads as discarded.  Compare bytes, not basenames.
 
 ## The catalog's function size was truncating every longer object (2026-09-13, round 46)
 
