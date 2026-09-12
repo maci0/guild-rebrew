@@ -25,13 +25,12 @@ built .text  0x223d6   (1136 short)   as linked
 So the reference has those members and the CMake link does not -- but adding
 them overshoots by 0x3568 (14,280 bytes of new `.text`, against 11,315 in the
 map, the difference being the sections the map never claimed).  The reason is
-that 7,664 bytes of the CRT region are already occupied by *our* C: the
+that 7,648 bytes of `.text` are already occupied by *our* C: the
 `_CRT_REGION_KEEP` scaffolding (`sbh_pool.c` 4556, `crt_heap.c` 944,
 `amsg_exit.c` 1168, `sbh_aliases.c` 480, `mlock.c` 212, `initterm.c` 80,
 `dllmain.c` 208, `link_stubs.c` 16) stands in for `sbheap.obj`, `mlock.obj`,
-`crt0msg.obj`, `dllcrt0.obj` and friends.  The CRT region is 55,826 bytes
-against the reference's 56,962, so the net of those substitutions is the
-1136-byte shortfall.
+`crt0msg.obj`, `dllcrt0.obj` and friends, and the net of those substitutions
+against the library bodies they displace is the 1136-byte shortfall.
 
 That is a design fact, not a bug to chase: the CMake build *cannot* be
 byte-identical while it substitutes C for library members, unless each
