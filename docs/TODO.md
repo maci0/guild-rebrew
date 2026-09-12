@@ -1,7 +1,8 @@
 # Blockers — 100% Round-Trip Goal
 
-Last verify: 278/280 passed, 2 failed (0x100093a0 ServerMainThread 2433 vs
-2434, 0x10018850 gm_CreateEntityFromParents 3694 vs 3689).
+Last verify: 278/280 passed, 2 failed (0x100093a0 ServerMainThread, object
+size 2434 = the target's but the bytes differ; 0x10018850
+gm_CreateEntityFromParents 3694 vs 3689).
 Goal requires 280/280 with inline asm only for 1-5 byte padding.
 
 ## gm_Open back to RELOC (2026-09-12)
@@ -90,8 +91,8 @@ Compiler sweep: all seven VC 6.0 builds (base, SP1..SP6, CL 12.00.8168 and
 Twenty compile to identical objects under every build.  The one exception,
 `0x1000d930 _cm_ExSellObjekt`, gives `obj 2030` under SP3/SP4 and `obj 2055`
 under the other five; the target is 2057, so neither variant closes it.  Both
-remaining `verify` failures (`0x100093a0` 2433 vs 2434, `0x10018850` 3694 vs
-3689) are byte-identical across all seven.
+remaining `verify` failures (`0x100093a0` obj 2434 = target but bytes differ,
+`0x10018850` 3694 vs 3689) are byte-identical across all seven.
 
 Library sweep: relinking the built objects against SP5's whole `LIB` tree
 instead of SP6's moves `.text` at 2 offsets (112357, 123706), the same
@@ -420,7 +421,7 @@ unfinished work; `rebrew todo` reports the same two and nothing else.
 | VA | Name | Size | State | Wall |
 |---|---|---|---|---|
 | 0x10018850 | gm_CreateEntityFromParents | 3689 | obj 3694, 752 B matched; 570/1056 insns aligned | 199 hunks.  Measured with relocation-table masking (the sound metric, see below); the earlier 617/1056 came from folding displacements textually, which flattered some hunks.  48 hunks are scheduling, 13 operand-only, 138 substitution artifacts (re-triaged under the sound masking; the earlier 40/10/148 split was close enough that the change does not overturn it).  `rebrew prove` returns "no terminal states" at 200 s / `--loop-bound 1` (path explosion over the 0x300 loops), so PROVEN is not available either.  A single-statement hill-climb converged, so what is left is allocator-side. |
-| 0x100093a0 | ServerMainThread | 2434 | obj 2433, 828 B positional; 558/627 insns aligned | The "no C89 lever" verdict this row used to carry was **wrong** and is retracted.  Rewriting three loops from `do {} while` to a top-tested `while` (same body, same `goto`) moves their cold exits out of line, where the target has them: alignment 522 -> 547 -> 557 -> 558 of 627, hunks 53 -> 47 (31 scheduling, 2 operand, 13 substitution).  The lever is the loop's **form**, which changes the CFG C2 orders blocks by, not its text or position; nine rounds of label position, branch polarity, guard form, duplication, cold-tail placement, region size and pragmas had all failed on those.  It is loop-specific, not universal: the transfer loop at the pending-sync search regresses 558 -> 523 and the `process_pending_sync` loop is neutral, so each conversion must be measured.  `rebrew prove` still returns "no terminal states" (420 s, `--loop-bound 1`). |
+| 0x100093a0 | ServerMainThread | 2434 | obj 2434 (exact), 1343 B positional; 582/627 insns aligned under the reloc-masked metric | The "no C89 lever" verdict this row used to carry was **wrong** and is retracted.  Two levers move it.  (1) Loop **form**: a `do {} while` whose single-condition body ends in a `goto` compiles to a rotated, test-duplicated loop; the equivalent top-tested `while` carrying the same body and `goto` compiles to the target's single-test shape.  Applied to the host-slot search, the transfer scan and two others.  It is loop-specific, not universal: the pending-sync loop regresses and `process_pending_sync` is neutral, so each conversion must be measured.  (2) Operand **width**: `((host_flags_word & 8) ? 7 : 0) + 2` is byte-width in the target; the `? 9 : 2` spelling keeps the expression `unsigned char` and reproduces it.  Reading the sync-packet clock words into locals first (the target hoists all three loads) takes the object from 2436 to exactly the target's 2434.  Sound-metric alignment 558 -> 582 of 627, hunks 47 -> 36 (27 scheduling, 1 operand, 8 substitution); the instruction count now matches exactly, 627/627.  Flags, declaration order, TU composition, loop spelling and GA mutations are all swept and inert.  `rebrew prove` still returns "no terminal states" (420 s, `--loop-bound 1`). |
 
 `scripts/zlibcheck.py` is the reference measurement: masking the byte ranges
 the object's own relocation table covers, on both sides, it reports the zlib
@@ -438,13 +439,25 @@ this file listed are resolved (exit is RELOC under /O1).
 
 ## What would unblock
 
-- ServerMainThread: a C2 block-ordering lever that pure C89 does not expose; the
-  1-byte size deficit follows from the same placement decision.  A CFLAGS sweep
-  confirms flags are not the lever: /O1, /Og-, /Os, /G6 and /Oa all lose (191,
-  219, 179, 695, 915 matched against the 1162 baseline), and /Ot, /Ob2, /Oy, /Ox
-  are inert.
-- gm_CreateEntityFromParents: re-derive the statement order from the target
-  disassembly.  Positional hill-climbing cannot cross from a wrong schedule.
+- ServerMainThread: the size deficit is gone (object is now exactly the target's
+  2434) and the instruction count matches 627/627, so what is left is 36
+  reloc-masked hunks of register naming plus two opcode-level differences
+  (`add esi,eax` against `lea esi,[eax+ecx]`, and one inverted loop back-edge).
+  Flags are not the lever and are now fully swept: /O1, /Og-, /Os, /G6, /Ge and
+  /Oa all lose, and /Ot, /Ob2, /Oy, /Ox, /Ow, /Og, /Op, /G3, /G4, /G5, /GB, /GA
+  and /Gi are inert.  Declaration order and TU composition are inert too.  Do
+  not re-run the GA on this function: its score ranks a 2433-byte result above
+  a 2434-byte one and its best candidate is a `long __stdcall` function with
+  duplicated assignments, i.e. not the original source.
+- gm_CreateEntityFromParents: this one still has genuine opcode-level
+  differences (33 extra / 31 missing mnemonics), concentrated in floating-point
+  form.  The target emits `fst dword [esp+0x24]` + `fcomp dword [ebp+0x20]`
+  where we emit `flds` + `fld st(1)` + `fcompp`, and `fimul dword [esp+0x14]`
+  where we emit `fild` + `fmulp`.  Its stack-slot assignment also differs from
+  the target's (target-only offsets 0x34/0x3c/0x43c, ours-only
+  0x2c/0x30/0x38/0x40/0x45c) at the same frame size.  Expression spelling,
+  operand order and declaration order are all inert; the lead to chase is the
+  scratch-slot layout, not the expression text.
 - Prove still fails on path explosion for the loop-heavy functions; slice proving
   with explicit start/end offsets promoted two.
 
