@@ -260,7 +260,7 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 			*(float*) (slot + 0x10) =
 			    (float) (*(float*) (slot + 0x1c) *
 			                 *(float*) 0x100256b8 +
-			             (double) rnd -
+			             (double) (unsigned short) rnd -
 			             *(float*) (slot + 0x1c) *
 			                 *(float*) 0x100256b4);
 			if (arg4 < 2) {
@@ -542,7 +542,7 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 	*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
 	*(float*) (slot + 0x10) =
 	    (float) (*(float*) (slot + 0x1c) * *(float*) 0x100256b8 +
-	             (double) rnd - *(float*) (slot + 0x1c) *
+	             (double) (unsigned short) rnd - *(float*) (slot + 0x1c) *
 	                                *(float*) 0x100256b4);
 	/* Symmetric sympathy-matrix init: both [j][id] and [id][j].  Each pair of
 	 * stores shares one index local, which is what makes msvc6 emit the
@@ -654,7 +654,7 @@ stat_modifiers:
 	      0xffff;
 	*(float*) (slot + 0x10) =
 	    (float) (*(float*) (slot + 0x1c) * *(float*) 0x100256b8 +
-	             (double) rnd - *(float*) (slot + 0x1c) *
+	             (double) (unsigned short) rnd - *(float*) (slot + 0x1c) *
 	                                *(float*) 0x100256b4);
 	/* The reference draws gm_RandomMod(0x10) twice here, back to back and
 	 * both ahead of the stat guard (0x1001956a and 0x10019574).  Neither
