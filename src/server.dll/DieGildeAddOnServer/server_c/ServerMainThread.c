@@ -390,12 +390,12 @@ send_start_commands:
 
 		phase_complete = 1;
 		player_slot = (unsigned int*) 0x101deb00;
-		do {
+		while ((int) player_slot < 0x114ffe20) {
 			if ((*player_slot & 8) != 0) {
 				goto transfer_pending;
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((int) player_slot < 0x114ffe20);
+		}
 		goto wait_start_io;
 
 	host_slot_found:
