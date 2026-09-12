@@ -208,6 +208,69 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## A clamped length has to be its own variable (2026-09-13, round 39)
+
+`vfs_ReadCompressed` clamped its read chunk in place:
+
+```c
+n = s->remaining;
+if (n > 0) {
+    if (n > 0x4000) n = 0x4000;
+    if (n == 0) return 0;
+    ... fread(s->inbuf, n, 1, s->file); ...
+}
+```
+
+The target does not clamp in place.  It materialises the constant first and
+keeps the dead check that follows:
+
+```
+mov edi,0x4000 / cmp eax,edi / jae L / mov edi,eax / test edi,edi / je ret0
+```
+
+Clamping `n` makes msvc6 emit the *other* min shape
+(`cmp edi,0x4000` / `jbe L` / `mov edi,0x4000`) and drop the check entirely.
+Using `i` — the separate clamped length the source already declares — gives
+the target's shape byte for byte.  **499 -> 497 bytes, aligned 76.5% ->
+79.0%.**
+
+Measured and reverted while getting there: four different ternaries, an
+if/else, and the constant on the left all give the clamp shape (73.6%); a
+signed `lim` with casts gives 497 at 75.8%; folding the two `volatile int`
+locals into one struct gives 497 with no gain.
+
+**The prologue reorder is a real trade.**  Moving `if (handle == 0)
+return -102;` above the two `volatile` initialisers drops the object's
+section from 512 to 496 — which is exactly the reference span, so it *closes*
+that drift island — but costs 4 points of byte alignment (79.0% -> 75.0%),
+because the target initialises `done`/`result` at the top and only schedules
+the handle test late.  Not kept.
+
+**CFLAGS sweeps of the two default-flag functions came back empty.**
+
+| function | default | best other | target |
+|---|---|---|---|
+| `CrashDumpUnhandledExceptionFilter` | 2137 | `/G6` 2129 (`/Oa` 2129) | 2115 |
+| `cm_ExCopyEntityData` | 880 | `/G6` 881; `/Oy-` 875 | 912 |
+
+`/G6` shrinks `CrashDump` by 8 bytes but costs 3.2 points of alignment
+(22.5% -> 19.3%), and neither reaches the next 16-byte bucket, so the island
+would not move.  `cm_ExCopyEntityData` is 32 bytes short under *every* flag
+set — it is missing code, not mis-flagged.  All five of the round-38 islands
+are single-function files, so these sweeps are safe to repeat.
+
+`cm_ExCopyEntityData`'s remaining differences are structural, not scheduling:
+the target writes `movsx eax,[edx+ecx]` where we write `[ecx+edx]` (swapped
+base/index roles), it has a two-way `jge`/`jmp`/`mov eax,-1`/`jmp` where we
+have a one-way `jl`, and it compares through a pointer
+(`mov edx,IMM / cmp [edx],eax`) where we load the value first
+(`mov esi,[IMM] / cmp esi,eax`).
+
+**Next step:** same five islands.  `m_AllocTracked` (section 656 against the
+672 span) and `vfs_ReadCompressed` (512 against 496) are one 16-byte bucket
+away; `cm_ExCopyEntityData` needs 32 bytes of code found, and
+`CrashDump`/`gm_AllocGebaeude` need real reversing.
+
 ## One missing function was 16 bytes of the game region's drift (2026-09-13, round 38)
 
 The object-error table from round 37 has a caveat worth stating: msvc6 pads a
