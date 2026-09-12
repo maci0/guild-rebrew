@@ -275,7 +275,7 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 			if ((double) *(unsigned short*) (slot + 0xa) >
 			    *(float*) (slot + 0x20)) {
 				acc = *(float*) (slot + 0x1c);
-				for (n = _ftol((double) *(unsigned short*) (slot + 0xa) -
+				for (n = (int) ((double) *(unsigned short*) (slot + 0xa) -
 				               *(float*) (slot + 0x20));
 				     n > 0; n--) {
 					acc = acc - *(float*) (slot + 0x14) +
@@ -392,16 +392,14 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		             g_dbl_const_6d0);
 		/* symmetric sympathy-matrix init: both [j][id] and [id][j] */
 		for (j = 0; j < 0x300; j++) {
-			*(char*) (0x1014d8e0 + *(unsigned short*) slot +
-			          j * 0x300) = 0;
-			*(char*) (0x100a9820 + *(unsigned short*) slot +
-			          j * 0x300) =
+			colv = *(volatile unsigned short*) slot + j * 0x300;
+			*(char*) (0x1014d8e0 + colv) = 0;
+			*(char*) (0x100a9820 + colv) =
 			    (char) (gm_RandomMod(0x40) - 0x20);
-			*(char*) (0x100a9820 +
-			          ((*(unsigned short*) slot * 3) << 8) + j) =
+			rowv = ((*(volatile unsigned short*) slot * 3) << 8) + j;
+			*(char*) (0x100a9820 + rowv) =
 			    (char) (gm_RandomMod(0x40) - 0x20);
-			*(char*) (0x1014d8e0 +
-			          ((*(unsigned short*) slot * 3) << 8) + j) = 0;
+			*(char*) (0x1014d8e0 + rowv) = 0;
 		}
 		slot[0xc] = (char) gm_RandomMod(2);
 		*(float*) (slot + 0x1d0) =
@@ -468,15 +466,15 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 	acc = (float) gm_RandomFloat01();
 	for (i = 0; i < 5; i++) {
 		if (i == best_father) {
-			slot[0x80 + i] = (char) _ftol(
+			slot[0x80 + i] = (char) (
 			    (double) *(unsigned char*) (father + 0x80 + i) *
 			    *(float*) 0x100256b0);
 		} else if (i == best_mother) {
-			slot[0x80 + i] = (char) _ftol(
+			slot[0x80 + i] = (char) (
 			    (double) *(unsigned char*) (mother + 0x80 + i) *
 			    *(float*) 0x100256b0);
 		} else {
-			slot[0x80 + i] = (char) _ftol(
+			slot[0x80 + i] = (char) (
 			    ((g_dbl_const_7d8 - (double) acc) *
 			         (double) *(unsigned char*) (father + 0x80 + i) +
 			     (double) acc *
@@ -552,10 +550,13 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 	 * stores shares one index local, which is what makes msvc6 emit the
 	 * reference's single-base "mov byte ptr [edi + <table>]" form instead of
 	 * recomputing the address for every store.  Both reads must stay
-	 * volatile; measured alternatives scored lower (both plain 573, colv
-	 * plain 576, rowv plain 574, against 711 for the shape below).  The
-	 * sibling loop in the no-parent path above must NOT get this treatment:
-	 * applying it there scored 665. */
+	 * volatile; the reference reloads `*(unsigned short*) slot` once per
+	 * iteration (two `xor eax,eax; mov ax,[ebp]` pairs at 0x10019342) and
+	 * only a volatile read prevents msvc6 from keeping it in a register.
+	 * The sibling loop in the no-parent path above takes the same shape: the
+	 * reference reloads there too (0x10018f12..0x10018f41), which an earlier
+	 * note here denied.  Its four writes were inline, so they had to be given
+	 * the two index locals first. */
 	for (j = 0; j < 0x300; j++) {
 		colv = *(volatile unsigned short*) slot + j * 0x300;
 		*(char*) (0x1014d8e0 + colv) = 0;
@@ -567,17 +568,17 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		*(char*) (0x1014d8e0 + rowv) = 0;
 	}
 	/* mutual sympathy between the new entity and each parent */
-	*(char*) (0x100a9820 + ((*(unsigned short*) slot * 3) << 8) +
+	*(char*) (0x100a9820 + ((*(volatile unsigned short*) slot * 3) << 8) +
 	          *(unsigned short*) mother) =
 	    (char) (0x7f - gm_RandomMod(0x20));
 	*(char*) (0x100a9820 + ((*(unsigned short*) mother * 3) << 8) +
-	          *(unsigned short*) slot) =
+	          *(volatile unsigned short*) slot) =
 	    (char) (0x7f - gm_RandomMod(0x20));
-	*(char*) (0x100a9820 + ((*(unsigned short*) slot * 3) << 8) +
+	*(char*) (0x100a9820 + ((*(volatile unsigned short*) slot * 3) << 8) +
 	          *(unsigned short*) father) =
 	    (char) (0x7f - gm_RandomMod(0x20));
 	*(char*) (0x100a9820 + ((*(unsigned short*) father * 3) << 8) +
-	          *(unsigned short*) slot) =
+	          *(volatile unsigned short*) slot) =
 	    (char) (0x7f - gm_RandomMod(0x20));
 	/* stat modifier loop from the type tables; shared with the no-parent
 	 * path, which reaches it via the goto above */
