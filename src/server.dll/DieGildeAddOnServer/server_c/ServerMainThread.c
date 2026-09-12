@@ -564,24 +564,24 @@ send_start_commands:
 		current_tick = GetTickCount();
 		phase_complete = 0;
 		player_slot = (unsigned int*) 0x101deb00;
-		do {
+		while ((int) player_slot < 0x114ffe20) {
 			if ((*player_slot != 0) && ((*player_slot & 0x40) != 0)) {
 				goto check_sync_all_players;
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((int) player_slot < 0x114ffe20);
+		}
 		goto process_pending_sync;
 
 	check_sync_all_players:
 		phase_complete = 0;
 		player_slot = (unsigned int*) 0x101deb00;
-		do {
+		while ((int) player_slot < 0x114ffe20) {
 			if ((*player_slot != 0) && ((*player_slot & 0x40) == 0)) {
 				phase_complete = 1;
 				goto check_transfer_state;
 			}
 			player_slot = (unsigned int*) ((char*) player_slot + 0x264264);
-		} while ((int) player_slot < 0x114ffe20);
+		}
 
 	process_pending_sync:
 		player_slot = (unsigned int*) 0x101deb00;
