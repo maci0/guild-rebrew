@@ -351,7 +351,7 @@ def main() -> int:
     for e in mapping["matched"]:
         va = int(e["va"], 16)
         if va >= floor:
-            want.setdefault(e["member"], []).append((va, e["symbol"]))
+            want.setdefault(e["member"], []).append((va, e["symbol"], e.get("section")))
 
     by_name: dict[str, bytes] = {}
     for lp in libs:
@@ -367,26 +367,26 @@ def main() -> int:
             print(f"  missing member {member}", file=sys.stderr)
             continue
         coff = Coff(obj)
-        mapped = set()
-        for _va, symbol in funcs:
+        def find_section(symbol, section):
+            """The map records the matched COFF section; .text symbols repeat."""
+            if section:
+                return section - 1
             for sym in coff.symbols:
                 if sym["name"] == symbol and sym["section"] > 0:
-                    mapped.add(sym["section"] - 1)
-                    break
+                    return sym["section"] - 1
+            return None
+
+        mapped = set()
+        for _va, symbol, section in funcs:
+            sec = find_section(symbol, section)
+            if sec is not None:
+                mapped.add(sec)
         claimed: set[int] = set()
-        for va, symbol in sorted(funcs):
-            hit = next(
-                (
-                    i
-                    for i, sym in enumerate(coff.symbols)
-                    if sym["name"] == symbol and sym["section"] > 0
-                ),
-                None,
-            )
-            if hit is None:
+        for va, symbol, section in sorted(funcs, key=lambda f: f[0]):
+            root_sec = find_section(symbol, section)
+            if root_sec is None:
                 print(f"  no section for {symbol} in {member}", file=sys.stderr)
                 continue
-            root_sec = coff.symbols[hit]["section"] - 1
             safe = "".join(c if c.isalnum() or c in "._" else "_" for c in symbol)
             name = f"{va:08x}_{safe}.obj"
             (outdir / name).write_bytes(build_object(coff, root_sec, symbol, mapped, claimed))
