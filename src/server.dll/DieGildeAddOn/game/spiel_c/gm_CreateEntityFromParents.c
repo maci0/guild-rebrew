@@ -10,11 +10,11 @@
  * finalization (refs scan, id assignment, trait loops, dynasty init) and the
  * final id assignment with the 0x10030b6c counter.
  *
- * Current state: 859 of 3689 bytes matched, object 3694 bytes.  Structurally
- * complete: 1056 target instructions against 1059 compiled, 126 target basic
- * blocks against 127, 125 matched.  Earlier notes claiming the object was
- * 480 bytes short described a much older body and no longer apply; there are
- * no missing regions to add.
+ * Current state: object 3681 bytes against the target's 3689 (-8).  The
+ * normalized instruction comparison (.scratch/ndiff.py) aligns 699 of the
+ * target's 1056 instructions, in 192 hunks of 1-2 instructions each.  No
+ * region is missing: the call sequences agree 55/55, so every statement has
+ * a counterpart and the residue is spelling, order and register choice.
  *
  * Statement order is the dominant lever in this function.  msvc6 schedules
  * the record-header stores and the citizen-path field copies in source
@@ -69,7 +69,8 @@
  *     601.  The constant defeats the target's register reuse.
  *   - the stat-modifier table index rewritten to put `i` first: 591.
  *   - CFLAGS sweep over 20 variants (/G3, /G4, /G5, /Gd, /Oy and
- *     combinations): every one scores identically to the current /O2 /Gd.
+ *     combinations): every one scores identically to the current
+ *     /O2 /Gd /Oa; the FPU forms (/Op) and /G6 both regress.
  *
  * `rebrew prove` cannot certify this function.  Both a 600-second and a
  * 2400-second run with loop bounds 10 and 3 report no terminal states for
@@ -77,15 +78,11 @@
  * 0x300-iteration slot scan explode the path space well before any exit is
  * reached.  Slice proving would need per-block start and end offsets.
  *
- * Remaining delta: 9 bytes of object size with both stores in place (3698
- * against the target's 3689; 3694, five over, with the 0xffff store dropped).
- * The prologues match exactly (`sub esp, 0x41c` on both sides), so this is
- * not a frame-size difference: the earlier note here claiming `sub esp,0x420`
- * against the target's `0x41c`, and the "one live local too many" reading that
- * followed from it, were wrong.  The alignment view (scripts/seqdiff.py, 616
- * of 1056) puts the residue at ~200 small groups, not one slot. */
+ * Remaining delta: 8 bytes short, spread over ~192 one- and two-instruction
+ * hunks.  The prologues match exactly (`sub esp, 0x41c` on both sides), so
+ * this is not a frame-size difference. */
 
-// CFLAGS: /O2 /Gd
+// CFLAGS: /O2 /Gd /Oa
 // FUNCTION: SERVER 0x10018850
 
 #include <stdlib.h>
@@ -114,7 +111,7 @@ char __cdecl gm_RandomStatModifier(char);
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl ahm_ResetEntityState(char*);
-void __cdecl InitNewDynastyEntity(int, int, char*, char*);
+void __cdecl InitNewDynastyEntity(int, void*, unsigned short, void*);
 int __cdecl _ftol(void);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl LogMessageInternal(char*, int, char*, int);
@@ -223,6 +220,7 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 	slot[0xd] = 1;
 	if (slot[2] == 3 || slot[2] == 0x10 || slot[2] == 0x13) {
 		*(int*) (slot + 0x1e8) = 1;
+		slot[0xd] = 2;
 	}
 	*(int*) (slot + 0x190) = 4;
 	if (slot[2] == 0x10) {
@@ -230,17 +228,16 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		char* ent;
 
 		ent = ahm_InitRandomEntity();
-		slot[0xd] = 2;
 		slot[2] = 3;
 		if (ent != (char*) 0) {
 			*(int*) (slot + 0x1f0) = *(int*) ent;
 			rnd = gm_RandomMod(8) & 0xffff;
-			strcpy(slot + 0x1f4, ent + 0xd7);
 			slot[0x164] = ent[0xd4];
 			slot[9] = ent[0xd5];
 			slot[0xc] = ent[0xd6];
 			strcpy(slot + 0x30, ent + 4);
 			strcpy(slot + 0x40, ent + 0x14);
+			strcpy(slot + 0x1f4, ent + 0xd7);
 			*(int*) (slot + 0x80) = *(int*) (ent + 0x24);
 			*(char*) (slot + 0x84) = ent[0x28];
 			memcpy(slot + 0x88, ent + 0x2c, 0xa8);
@@ -292,7 +289,8 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		/* ahm_InitRandomEntity returned NULL: fall through */
 	}
 	if (slot[2] == 0x15 || slot[2] == 0x16) {
-		InitNewDynastyEntity(type & 0xff, mother_id, father, slot);
+		InitNewDynastyEntity(type & 0xff, (void*) mother_id, (unsigned short) arg4,
+		                     slot);
 		return *(unsigned short*) slot;
 	}
 
@@ -520,6 +518,7 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 			break;
 		}
 	}
+	*(int*) (slot + 0x7c) = 0;
 	if (mother[2] == 6 || mother[2] == 7 || mother[2] == 5) {
 		*(unsigned short*) (slot + 0x50) = *(unsigned short*) (mother + 0x50);
 		slot[0x58] = (char) (mother[0x58] + 1);
@@ -530,16 +529,15 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		*(int*) (slot + 0x54) = *(int*) (father + 0x54);
 	}
 	*(int*) (slot + 0x1c) = 0x447a0000; /* 1000.0f */
-	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
-	                                           g_dbl_const_810)) &
-	      0xffff;
-	*(int*) (slot + 0x7c) = 0;
 	*(float*) (slot + 0x14) =
 	    (float) ((gm_RandomQuadratic() * *(float*) 0x100256c8 +
 	              *(float*) 0x100256c4) *
 	                 g_dbl_const_f88 +
 	             (*(float*) (father + 0x14) + *(float*) (mother + 0x14)) *
 	                 g_dbl_const_810);
+	rnd = gm_RandomMod((unsigned short) (int) (*(float*) (slot + 0x1c) *
+	                                           g_dbl_const_810)) &
+	      0xffff;
 	*(int*) (slot + 0x20) = 0x41400000; /* 12.0f */
 	*(float*) (slot + 0x18) = *(float*) (slot + 0x1c);
 	*(float*) (slot + 0x10) =
