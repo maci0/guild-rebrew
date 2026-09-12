@@ -1,5 +1,37 @@
 # Blockers — 100% Round-Trip Goal
 
+## Fixed: the split build's `.rdata` order (2026-09-13, round 56)
+
+Round 55 left the split build's `.rdata` landing the `rdata_restore.c` blob at
+offset 0x1a0 instead of the reference's 0x12e8.  The cause was a one-line
+suffix test in `scripts/make_split_rsp.py`:
+
+```python
+t.endswith("data_restore.c.obj")     # True for "rdata_restore.c.obj" too!
+```
+
+so the rdata blob was classified into the `head` group, along with the data
+blob, and linked third.  `.rdata` placement *does* follow response-file order
+-- what misled round 55 was reading `rdata_restore`'s index in the CMake
+response file as 2, when it is 192.  Moving it to sit after the CMake objects
+and before the split ones (index 186 of 454) puts it where the reference has
+it:
+
+```
+                              unzip 0.15a  deflate 1.1.3  runtime error   .rdata differing
+reference                          0x12e9          0x5a1          0x2110   --
+build/split_poc.dll (before)       0x01a1          0x18c1          0x0fc8   10625 / 11905
+build/split_poc.dll (after)        0x12e9          0x5a1          0x2110    2237 / 11905
+```
+
+`.rdata` agreement goes 11% -> 81%, matching the CMake build's 2215, and
+`.text` differing drops 86,719 -> 86,647 as a side effect.  `.rdata` is still
++0x530 too long for the reason round 55 recorded (the seven LIBCMT objects
+whose `.rdata` the blob also supplies), so the size is unchanged; only the
+arrangement moved.
+
+The classifier now matches on `/<name>`, which is what the bug needed.
+
 ## The split build's `.rdata` is in the wrong order; the CMake build's is not (2026-09-13, round 55)
 
 This round's useful surprise: the CMake build reproduces the reference's

@@ -76,15 +76,21 @@ def main() -> int:
         print(f"missing {args.objects}; configure the CMake build first", file=sys.stderr)
         return 1
 
-    head, mid, data, tail = [], [], [], []
+    head, mid, data, rdata, tail = [], [], [], [], []
     for t in tokens:
         if any(d in t for d in DROP):
             continue
-        if t.endswith("crt_imports.c.obj") or t.endswith("data_restore.c.obj"):
+        # NB: match on "/<name>" -- "rdata_restore.c.obj".endswith(
+        # "data_restore.c.obj") is True, so the bare basename sends the
+        # rdata blob to `head` and its .rdata lands at offset 0x1a0 instead
+        # of the reference's 0x12e8.
+        if t.endswith("/crt_imports.c.obj") or t.endswith("/data_restore.c.obj"):
             head.append(t)
-        elif t.endswith("data_globals.c.obj") or t.endswith("rdata_restore.c.obj"):
+        elif t.endswith("/data_globals.c.obj"):
             data.append(t)
-        elif t.endswith("link_stubs.c.obj"):
+        elif t.endswith("/rdata_restore.c.obj"):
+            rdata.append(t)
+        elif t.endswith("/link_stubs.c.obj"):
             tail.append(t)
         else:
             mid.append(t)
@@ -102,7 +108,7 @@ def main() -> int:
             dest = tail_thunks if f.stem.endswith("_tail") else thunk_objs
             dest.append(f.relative_to(ROOT / "build").as_posix())
     (ROOT / args.out).write_text(
-        " ".join(head + mid + thunk_objs + ordered + tail_thunks
+        " ".join(head + mid + thunk_objs + rdata + ordered + tail_thunks
                  + extra_objs + data + tail))
     print(f"{len(ordered)} split objects + {len(thunk_objs)} thunk objects -> {args.out} "
           f"({len(head) + len(mid) + len(ordered) + len(data) + len(tail)} tokens)")
