@@ -134,7 +134,21 @@ class Coff:
         return out
 
 
-def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False) -> bytes:
+def masked_body(obj: bytes, sec: dict) -> bytes:
+    """Section body with every relocation field zeroed."""
+    body = bytearray(obj[sec["raw_ptr"] : sec["raw_ptr"] + sec["raw_size"]])
+    for i in range(sec["nreloc"]):
+        off = sec["reloc_ptr"] + i * 10
+        if off + 10 > len(obj):
+            break
+        addr = struct.unpack_from("<I", obj, off)[0]
+        for k in range(4):
+            if addr + k < len(body):
+                body[addr + k] = 0
+    return bytes(body)
+
+
+def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None) -> bytes:
     """COFF object for `coff.sections[index]` plus its same-member closure.
 
     `separate` holds the section indices that are themselves emitted as their
@@ -237,6 +251,20 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
             )
             + sym["aux"]
         )
+
+    # Aliases: other CRT members whose section body is byte-identical to this
+    # one (_lseek and __write are the same 101 bytes in different members).
+    # Exporting all of their names here stops the linker pulling the sibling
+    # member just to resolve the other spelling.
+    for alias in sorted(aliases or ()):
+        off = len(strtab)
+        strtab += alias.encode("ascii", "replace") + b"\0"
+        new_symbols += (
+            b"\0\0\0\0"
+            + struct.pack("<I", off)
+            + struct.pack("<IhHBB", 0, 1, 0x20, 2, 0)
+        )
+        entry_count += 1
 
     # Layout: header, section headers, then (body, relocations) per section,
     # then symbols and the string table.
@@ -354,11 +382,30 @@ def main() -> int:
             want.setdefault(e["member"], []).append((va, e["symbol"], e.get("section")))
 
     by_name: dict[str, bytes] = {}
+    alias_index: dict[bytes, set[str]] = {}
     for lp in libs:
         members = ar_members(lp.read_bytes())
         resolve = name_resolver(members)
         for raw, obj in members:
             by_name.setdefault(resolve(raw), obj)
+            if len(obj) < 20:
+                continue
+            try:
+                coff_tmp = Coff(obj)
+            except (struct.error, IndexError):
+                continue
+            for i, sec in enumerate(coff_tmp.sections):
+                if not sec["name"].startswith(b".text") or sec["raw_size"] == 0:
+                    continue
+                ext = {
+                    sym["name"]
+                    for sym in coff_tmp.symbols
+                    if sym["section"] == i + 1
+                    and sym["storage_class"] == 2
+                    and not sym["name"].startswith(".")
+                }
+                if ext:
+                    alias_index.setdefault(masked_body(obj, sec), set()).update(ext)
 
     written: list[tuple[int | None, str, str]] = []
     for member, funcs in want.items():
@@ -389,7 +436,12 @@ def main() -> int:
                 continue
             safe = "".join(c if c.isalnum() or c in "._" else "_" for c in symbol)
             name = f"{va:08x}_{safe}.obj"
-            (outdir / name).write_bytes(build_object(coff, root_sec, symbol, mapped, claimed))
+            aliases = alias_index.get(masked_body(coff.data, coff.sections[root_sec]), set()) - {
+                symbol
+            }
+            (outdir / name).write_bytes(
+                build_object(coff, root_sec, symbol, mapped, claimed, False, aliases)
+            )
             written.append((va, str(outdir / name), symbol))
             if not args.closure:
                 continue
