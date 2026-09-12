@@ -28,6 +28,41 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## What the split set still misses (2026-09-13, round 7)
+
+Fixing `map_libcmt.match` to compare the *common prefix* instead of requiring
+the member body to be at least as long as the catalog entry (the catalog
+pads/truncates: `_exit` 34 vs 17, `_strncpy` 272 vs 254, `_strchr` 192 vs 188)
+recovered 209 -> **222 of 244 region functions, 34,790 B of 39,216**.  Relinked
+with the 222 split objects, `.text` still ran to 0x100268c0 against the
+reference's 0x10023846, with **121 symbols still pulled from `LIBCMT.lib`**.
+Those 121 fall into three groups, and only the first is a splitter bug:
+
+1. **Intra-member section closure.**  `_memmove`'s body branches to labels that
+   MSVC emitted as *separate COMDAT sections of the same member*
+   (`LeadUp1..3`, `UnwindUp0..7`, `TrailUp0..3`, `LeadDown*`, `UnwindDown*`,
+   `TrailDown*` — ~40 symbols).  The splitter demotes cross-section references
+   to undefined, so the linker re-pulls the whole `memmove.obj` and its
+   internals land after the region.  The fix is to include the transitive
+   closure of same-member sections in the extracted object.
+2. **The 22 unmatched region functions** (4,426 B): `srand`,
+   `output` (1,857), `__CRT_INIT`, `exsup` (197), `NMSG_WRITE` (339),
+   `setmbcp` (429), `dosmaperr`, the `unlock_09*` family, `crt_close_handle`,
+   `crt_once_init`, `allmul_slow`, `fpmath`, `init_fptrs`,
+   `fcn_1001a643`, `fcn_1001e638`.  Each needs its own matching rule (several
+   are single-instruction helpers, others span COMDAT boundaries).
+3. **CRT-internal references** the split set does not supply: `fpexcept`,
+   `util`, `fpctrl`, `matherr`, `tzset`, `handler`, `_ceil`, `_strtoxl`.  These
+   are pulled by other members, not by game code (`ceil` appears nowhere in
+   `src/server.dll`), so they are part of whatever the reference's own members
+   referenced.
+
+**The catalog is an incomplete view of the region.**  It lists 254 functions
+above 0x1001a150; the PoC link emits 343 there.  Section (2) is bounded by the
+catalog, but closing the gap needs the region's true function inventory read
+from the binary (boundaries and all), not a name list — otherwise the split
+set and the leftover set can never be proven equal.
+
 ## Per-function COMDAT selection works (2026-09-13, round 6)
 
 `scripts/split_coff.py` turns the mapped members into standalone per-function
