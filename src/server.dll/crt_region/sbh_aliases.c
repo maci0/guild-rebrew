@@ -75,7 +75,7 @@ int __cdecl _set_old_sbh_threshold(unsigned int threshold)
     return 1;
 }
 
-int __cdecl ___sbh_heap_init(unsigned int size)
+int __cdecl __sbh_heap_init(unsigned int size)
 {
     int ok;
     ok = fcn_1001d4cd(size);
