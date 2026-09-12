@@ -439,25 +439,39 @@ this file listed are resolved (exit is RELOC under /O1).
 
 ## What would unblock
 
-- ServerMainThread: the size deficit is gone (object is now exactly the target's
-  2434) and the instruction count matches 627/627, so what is left is 36
-  reloc-masked hunks of register naming plus two opcode-level differences
-  (`add esi,eax` against `lea esi,[eax+ecx]`, and one inverted loop back-edge).
-  Flags are not the lever and are now fully swept: /O1, /Og-, /Os, /G6, /Ge and
-  /Oa all lose, and /Ot, /Ob2, /Oy, /Ox, /Ow, /Og, /Op, /G3, /G4, /G5, /GB, /GA
-  and /Gi are inert.  Declaration order and TU composition are inert too.  Do
-  not re-run the GA on this function: its score ranks a 2433-byte result above
-  a 2434-byte one and its best candidate is a `long __stdcall` function with
-  duplicated assignments, i.e. not the original source.
-- gm_CreateEntityFromParents: this one still has genuine opcode-level
-  differences (33 extra / 31 missing mnemonics), concentrated in floating-point
-  form.  The target emits `fst dword [esp+0x24]` + `fcomp dword [ebp+0x20]`
-  where we emit `flds` + `fld st(1)` + `fcompp`, and `fimul dword [esp+0x14]`
-  where we emit `fild` + `fmulp`.  Its stack-slot assignment also differs from
-  the target's (target-only offsets 0x34/0x3c/0x43c, ours-only
-  0x2c/0x30/0x38/0x40/0x45c) at the same frame size.  Expression spelling,
-  operand order and declaration order are all inert; the lead to chase is the
-  scratch-slot layout, not the expression text.
+- ServerMainThread: closed at this precision.  Object size is exactly the
+  target's 2434 and the instruction count matches 627/627.  Comparing
+  **basic-block shapes** (fingerprints of mnemonics only, which survive both
+  register naming and scheduler reordering) leaves exactly **4 unmatched
+  blocks of 207, and that is the floor across all 36 variants built for this
+  function** - 34 of them also score exactly 4, the fold removal scores 5 and
+  one spelling scores 6.  The four are: the loop back-edge polarity; `add
+  esi,eax` where the target has `lea esi,[eax+ecx]`; and two blocks that
+  differ only in the order of the same six mnemonics.  Every lever derivable
+  from the reference's disassembly has been tried and measured: loop **form**
+  (which did work, twice) is exhausted, operand **width** worked once, and
+  CFLAGS are fully swept (/O1, /Og-, /Os, /G6, /Ge, /Oa all lose; /Ot, /Ob2,
+  /Oy, /Ox, /Ow, /Og, /Op, /G3, /G4, /G5, /GB, /GA, /Gi inert), as are
+  declaration order, TU composition, statement swapping and loop spelling.
+  Do not use call-ordinal, branch-ordinal, FP-subsequence or matching-block
+  deltas as per-site locators: all four were built, all four oscillate, and
+  each was spot-checked against identical code.  The GA is also unusable here
+  - its score ranks a 2433-byte result above a 2434-byte one.
+- gm_CreateEntityFromParents: 3678 B vs the target's 3689, 1049 vs 1056
+  instructions, 652/1056 order-based alignment, **72 unmatched block shapes of
+  225**.  Two real corrections landed: the `__ftol` call convention (the
+  reference passes its operand in st(0), so our pushes were spurious and were
+  the whole of the old +5-byte "match") and the stat guard, which compares in
+  single precision.  **Judge this function by unmatched block shapes and
+  order-based alignment, never by |size - target|**: the float guard improved
+  every structural metric including `rebrew test`'s own score (504 -> 514)
+  while moving the size 11 bytes further away.  The 7-instruction gap is
+  distributed - five of our size-6 blocks are size-7 in the target, plus three
+  missing size-1 blocks - not one missing construct.  The FP operand-width
+  deltas (`fiadd` 0/3, `fimul` 1/0, `fild` 10/8, `fld qword` 0/1, `fsubr
+  qword` 2/1) and every spelling tried against them, including the `rnd` cast
+  and the second guard site, all return byte-identical objects.  Nothing
+  outstanding is reachable from C89 as far as these measurements go.
 - Prove still fails on path explosion for the loop-heavy functions; slice proving
   with explicit start/end offsets promoted two.
 
