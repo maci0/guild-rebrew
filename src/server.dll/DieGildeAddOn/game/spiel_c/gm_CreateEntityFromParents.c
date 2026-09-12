@@ -567,18 +567,21 @@ unsigned short __cdecl gm_CreateEntityFromParents(int type, int mother_id, int g
 		    (char) (gm_RandomMod(0x40) - 0x20);
 		*(char*) (0x1014d8e0 + rowv) = 0;
 	}
-	/* mutual sympathy between the new entity and each parent */
-	*(char*) (0x100a9820 + ((*(volatile unsigned short*) slot * 3) << 8) +
+	/* mutual sympathy between the new entity and each parent.  Unlike the two
+	 * loops above, these reads are plain: the unit compiles with /Oa, and
+	 * under a no-alias assumption the volatile only cost msvc6 the reloads
+	 * the reference actually takes. */
+	*(char*) (0x100a9820 + ((*(unsigned short*) slot * 3) << 8) +
 	          *(unsigned short*) mother) =
 	    (char) (0x7f - gm_RandomMod(0x20));
 	*(char*) (0x100a9820 + ((*(unsigned short*) mother * 3) << 8) +
-	          *(volatile unsigned short*) slot) =
+	          *(unsigned short*) slot) =
 	    (char) (0x7f - gm_RandomMod(0x20));
-	*(char*) (0x100a9820 + ((*(volatile unsigned short*) slot * 3) << 8) +
+	*(char*) (0x100a9820 + ((*(unsigned short*) slot * 3) << 8) +
 	          *(unsigned short*) father) =
 	    (char) (0x7f - gm_RandomMod(0x20));
 	*(char*) (0x100a9820 + ((*(unsigned short*) father * 3) << 8) +
-	          *(volatile unsigned short*) slot) =
+	          *(unsigned short*) slot) =
 	    (char) (0x7f - gm_RandomMod(0x20));
 	/* stat modifier loop from the type tables; shared with the no-parent
 	 * path, which reaches it via the goto above */
