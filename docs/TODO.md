@@ -28,6 +28,31 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## Duplicate wrapper bodies masquerade as leftovers (2026-09-13, round 18)
+
+Tracing which split object leaves each leftover undefined found a general
+cause.  The CRT builds the same thin wrapper into several members: `lseek.obj`'s
+`__lseek` and `write.obj`'s `__write` are **the same 101 bytes** (verified
+byte-for-byte, same 28 relocation slots).  Whichever member the map picks for
+that VA, references to the other spelling stay undefined, so the linker pulls
+the sibling member purely to resolve the alias — which is where a whole group
+of the "CRT-internal" leftovers came from.
+
+`split_coff` now indexes every `.text` section body (relocation slots zeroed)
+across all libraries and exports the other members' external symbol names as
+aliases on the extracted section.  One object then satisfies both spellings.
+
+Measured on the split-set link, all links clean:
+
+| | leftovers | leftover bytes | `.text` end |
+|---|---|---|---|
+| round 17 | 71 | 6,650 | 0x10025c3e |
+| round 18 | **34** | **5,294** | **0x100256f2** |
+
+That also invalidates part of round 17's conclusion: the leftovers were not
+all "internal references we cannot touch" — over half were aliases of bodies
+already in the split set.
+
 ## The remaining leftovers are CRT-internal (2026-09-13, round 17)
 
 The per-function check that found the five `fclose` sites was applied to the
