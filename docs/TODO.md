@@ -28,6 +28,28 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## `--closure` works: leftovers 121 -> 77 (2026-09-13, round 10)
+
+The round-9 blocker was one helper object.  Bisected by dropping candidates
+from the rsp: when our split set supplies `__CRT_INIT@12`, LIBCMT's
+`dllcrt0.obj` is not pulled and LINK stops resolving
+`/ENTRY:_DllMainCRTStartup@12` — it builds the console-EXE chain
+(`crt0.obj` / unresolved `_main`) instead.  Removing that single object from
+the link restores it (exit 0), so `--skip-helper` now defaults to
+`__CRT_INIT@12` and the closure is usable.
+
+Measured, all links exit 0:
+
+| split set | objects | LIBCMT leftovers | `.text` end |
+|---|---|---|---|
+| default (single-section) | 222 | 112 | 0x100263fc |
+| `--closure` | 246 | **77** | **0x10025ac7** |
+
+Reference `.text` ends at 0x10023846, so the region is still 0x2281 over — the
+remaining 77 leftovers, i.e. group (2) and (3) from round 7 minus what the
+closure absorbed.  `__CRT_INIT@12` itself (0x1001b8fb, unmatched) is one of
+them and is currently placed by LIBCMT at the end rather than at its VA.
+
 ## Section closure: helpers land, the entry lookup does not (2026-09-13, round 9)
 
 Two changes this round, one measured and shipped, one still blocked.
