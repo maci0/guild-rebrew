@@ -8,7 +8,6 @@ dependencies = [
     "pyunicorn>=0.9.0",
     "reccmp>=0.1.1",
     "rebrew",
-    "recoverage",
 ]
 
 [project.optional-dependencies]
@@ -29,7 +28,6 @@ override-dependencies = ["capstone>=5.0.8"]
 
 [tool.uv.sources]
 rebrew = { path = "../rebrew", editable = true }
-recoverage = { path = "../recoverage", editable = true }
 
 [tool.ruff]
 target-version = "py312"
