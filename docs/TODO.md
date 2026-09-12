@@ -254,11 +254,25 @@ helper/definition objects, so it is not worth chasing: the round-27 "5,619
 bytes of LINK padding" was a measurement mistake, and the real inter-object
 slack is this.
 
-**So the two open items on this half are:** (1) place the import thunks and
-match the IAT base — a `.data`/PE-layout problem, which the postlink step
-already has the `iat_thunks` list for in `rebrew-project.toml`; and (2) the
-96-byte game shortfall, which is the other half's business (the 20 non-exact
-functions).
+**Two facts about the definition sections, from trying to place them.**  The
+reference's `__DllMainCRTStartup@12` does not call `__CRT_INIT@12` directly: at
+0x1001b9fa it is `mov eax, dword ptr [0x11767588]; ...; call eax`, i.e. the
+address is taken and stored in a data slot, so `__CRT_INIT@12` cannot be
+located by following a direct call.  And a relocation- and `E8`-masked search
+over the reference's `.text` finds no position for the emitted `__CRT_INIT@12`
+body — but that body is dense enough with relocations and `call` displacements
+that no 16-byte run free of both exists, so the search is not conclusive either
+way.  `_DllMain@12`'s six-byte stub (`6a 01 58 c2 0c 00`) *is* present in the
+reference.  Placing these sections at their reference VAs therefore needs a
+proper masked matcher (the technique `scripts/map_libcmt.py` already uses), not
+a window search.
+
+**So the open items on this half are:** (1) place the import thunks and match
+the IAT base — a `.data`/PE-layout problem, which the postlink step already has
+the `iat_thunks` list for in `rebrew-project.toml`; (2) byte-match the emitted
+definition and closure sections against the reference so they land at the right
+VAs; and (3) the 96-byte game shortfall, which is the other half's business
+(the 20 non-exact functions).
 
 ## No LIBCMT member is pulled any more (2026-09-13, round 30)
 
