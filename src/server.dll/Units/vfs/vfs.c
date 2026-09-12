@@ -92,7 +92,7 @@ int __cdecl vfs_CloseStream(void* stream)
 		}
 	}
 	if (*(FILE**) ((int) stream + 0x40) != 0) {
-		close_result = fflush(*(FILE**) ((int) stream + 0x40));
+		close_result = fclose(*(FILE**) ((int) stream + 0x40));
 		if (close_result != 0) {
 			errno_ptr = _errno();
 			if (*errno_ptr != 0x1d) {

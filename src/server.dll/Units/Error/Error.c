@@ -87,7 +87,7 @@ void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 	do_write:
 		fputs(msg, stream);
 		fputs(g_log_newline, stream);
-		fflush(stream);
+		fclose(stream);
 	skip:;
 	}
 
