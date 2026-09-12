@@ -41,14 +41,26 @@ extern int g_tick_rate;    /* 0x11764088 */
  * PHASE 6 (Game loop): advance the game clock, broadcast sync
  *   packets (cmd 0x1E/0x20), process the command queue.
  *
- * STATUS: SIZE_MISMATCH, 1162/2434, obj 2433 against a 2434 target.
+ * STATUS: SIZE_MISMATCH, obj 2436 against a 2434 target, 20 instruction
+ * hunks under the order-based diff (was 22 hunks at obj 2439).
  *
- * The residual is one layout-pass decision, not missing or wrong code.
- * Under an optimal alignment 584/627 instructions are already identical;
  * `match_count` is a *positional* byte compare (relocation slots masked,
- * rebrew/src/rebrew/core/matching.py:488), so the 1-byte deficit shifts
- * every later byte and scores it as a miss. The 43 instructions that
- * still differ are almost all register-name choices, not wrong code.
+ * rebrew/src/rebrew/core/matching.py:488), so one byte of size difference
+ * desynchronises everything after it; read the hunk count, not that score.
+ *
+ * Two levers do move this function, both verified by the order-based diff:
+ *   - loop FORM.  A `do {} while` around a single-condition body whose tail
+ *     is reached by a `goto` compiles to a rotated, test-duplicated loop;
+ *     the equivalent top-tested `while` carrying the same body and `goto`
+ *     compiles to the target's single-test shape.  Applied to the host-slot
+ *     search, the transfer-scan loop and two others: 629 -> 627 instructions
+ *     (target 627).  It is not universal; the transfer/pending loop at
+ *     line 393 regresses under it (measured), so convert one loop at a time.
+ *   - operand WIDTH.  The cmd+0x10 byte is ((host_flags_word & 8) ? 7 : 0)
+ *     + 2 evaluated entirely in byte registers (mov bl,7 / sbb al,al /
+ *     and al,bl / add al,2) in the target; the `? 9 : 2` spelling keeps the
+ *     expression unsigned char and reproduces it, the `+2` spelling does
+ *     not.  Hoisting 7 into a local instead widens it back to 32 bits.
  *
  * Root cause, single instruction: at target 0x1000963f the branch into
  * the host-slot block is `jne rel32` (6 bytes) because the block sits out
@@ -92,10 +104,13 @@ extern int g_tick_rate;    /* 0x11764088 */
  *     their point of use, not hoisted into a local.
  *   - 0x10035880 likewise, but 0x10035884 must stay in a local.
  *
- * Remaining delta: 1 byte of object size and 43 instructions that differ
- * only in which register the value lands in (ebx/ecx and eax/edx pairs
- * around the sync counter at 0x10035880). Not reachable by any statement
- * or loop reshaping tried here.
+ * Remaining delta (2026-09-12): 2 bytes and 20 hunks.  Most are register
+ * names for the same instruction; the earliest is the packet build at the
+ * `if (sent_bytes == 0xffffffff)` head, where msvc6 propagates the compared
+ * constant into the cmd+4 store (a 8-byte immediate) while the target keeps
+ * the value in eax.  Moving the comparison off `sent_bytes` (e.g. onto
+ * `*transfer_progress`) removes the propagation but also hoists the cmd+0x10
+ * store ahead of the argument pushes, so neither spelling matches yet.
  *
  * 2026-09-08 round 7 re-measured this with an order-based instruction diff
  * that masks branch displacements and relocated operands, so layout shifts
