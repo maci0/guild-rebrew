@@ -1,5 +1,79 @@
 # Blockers — 100% Round-Trip Goal
 
+## The link had an extra import, from one underscore (2026-09-13, round 52)
+
+`server.dll` has exactly 100 imports.  The CMake link had **101**, and the
+extra one was `IsBadWritePtr` -- the import the whole `sbh_globals` /
+`sbh_pool` / `sbh_aliases` / `crt_heap` scaffolding exists to keep out, by
+displacing LIBCMT's `sbheap.obj`.  It did not work, and the reason was one
+character: `sbh_aliases.c` wrote
+
+```c
+int __cdecl ___sbh_heap_init(unsigned int size)
+```
+
+MSVC decorates C `__sbh_heap_init` to COFF `___sbh_heap_init`, which is what
+`sbheap.obj` exports and what `heapinit.obj` calls.  The local definition was
+spelled with a third underscore in C, i.e. COFF `____sbh_heap_init`, a
+*different symbol*: the real one stayed undefined, the linker pulled
+`sbheap.obj` for it, and `__imp__IsBadWritePtr@8` came with it.  Every sibling
+in the same file is spelled the library's way (`__sbh_find_block`,
+`__sbh_heap_check`, `__sbh_free_block`), which is what exposed the typo.
+
+To measure the CMake link without the postlink step deleting it:
+
+```
+cd build && PYTHONPATH=../.scratch/rebrew-stable/src \
+  eval "$(sed 's#/out:server.dll#/out:server_manual.dll /MAP:server_manual.map#; \
+               s#/implib:server.lib#/implib:server_manual.lib#' \
+          CMakeFiles/server_dll.dir/link.txt)"
+```
+
+before -> after:
+
+| | before | after | reference |
+|---|---|---|---|
+| imports | 101 | **100** | 100 |
+| KERNEL32 imports | 82 | **81** | 81 |
+| `LNK4006` duplicates | 50 | **8** | -- |
+| `.text` vsize | 0x2276c | 0x223d6 | 0x22846 |
+| `.rdata` vsize | 0x32f1 | 0x32d1 | 0x2e81 |
+| `.rdata` differing bytes | 7414 / 11905 | **2215 / 11905** | 0 |
+| `.data` vsize | 0x17468d8 | 0x17448b8 | 0x174059c |
+
+`.rdata` agreement goes 38% -> 81% because the import tables sit at its very
+start: with a wrong import set every RVA in them is off.
+
+The 0x396 that `.text` lost is dead duplicate code, not a regression.
+`sbheap.obj` was being linked even though `sbh_aliases.c.obj`'s definitions
+won (`LNK4006 ... second definition ignored`), so its bodies occupied `.text`
+without ever being referenced.  Removing them reveals the honest shortfall:
+`.text` is 0x470 (1136 bytes) *short* of the reference, not the 0xda the
+duplicate bodies were hiding.  Closing that is the next `.text` item.
+
+### What is left in `.rdata`: 0x450 too big, from crt0msg
+
+After the fix `.rdata` is still +0x450, and the cause is visible in the
+`LNK4006` list: `crt0msg.obj` is still pulled, for `__NMSG_WRITE` and
+`__GET_RTERRMSG` (only `__FF_MSGBANNER` is duplicated, by `amsg_exit.c`).  Its
+23 one-string `.rdata` COMDATs then land *and* `rdata_restore.c`'s blob
+supplies the same strings, so eleven literals appear twice:
+
+```
+'`h````'  '(null)'  'runtime error '  'KERNEL32'  'GAIsProcessorFeaturePresent'
+'SunMonTueWedThuFriSat'  'JanFebMarAprMayJunJulAugSepOctNovDec'
+'1#QNAN'  '1#INF'  '1#IND'  '1#SNAN'
+```
+
+`CMakeLists.txt` already records the trade: the original packs those strings
+into 0x2eb bytes, while the linker's per-COMDAT placement of crt0msg's copies
+costs 0x32b, so the blob is what reproduces the reference.  But the blob only
+wins if `crt0msg.obj` stays out of the link, and it does not, because nothing
+else defines `__NMSG_WRITE` / `__GET_RTERRMSG`.  Displacing those two locally
+(same pattern as the sbh files) is what would drop the duplicate literals --
+and would also remove ~0x180 of the `.text` shortfall, since those two
+functions are part of the 1136 missing bytes.
+
 ## The compiler build is not the missing lever (2026-09-13, round 51)
 
 Every one of the 20 game residues is an MSVC6 allocator/scheduler fixed point,
