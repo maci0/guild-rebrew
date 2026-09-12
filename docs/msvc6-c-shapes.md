@@ -1795,3 +1795,50 @@ before spending a pass on statement order.
 
 `src/server.dll/DieGildeAddOn/game/spiel622.c:232`, search scripts in
 `.scratch/pv-x87/` and `.scratch/spiel622-x87/`.
+
+## 47. A loop's form, not its text, decides where C2 puts its cold exit block
+
+`ServerMainThread` (0x100093a0) has a loop whose taken branch leads to a cold
+block that the reference keeps out of line — after the *next* loop, in a gap in
+an unrelated chain.  Everything about the loop's text matched the reference
+already: the instructions were identical, the branch target was right, and nine
+rounds of probes left the block inline, immediately after the loop with a `jump`
+over it.
+
+- label position (including moving the cold body to the end of the function)
+- branch polarity (`if (clear) { advance; continue; } goto cold;` versus
+  `if (taken) goto cold;`)
+- guard form, block duplication, cold-tail placement, region size
+- `#pragma optimize` letters
+- every VC6 service pack, and a CFLAGS sweep
+
+What moves it is the loop's **form**:
+
+```c
+    do {                                  /* cold block lands inline */
+        if ((*p & mask) == 0) { advance; continue; }
+        goto cold;
+    } while ((int) p < bound);
+
+    while ((int) p < bound) {             /* cold block lands out of line */
+        if ((*p & mask) != 0) { goto cold; }
+        advance;
+    }
+```
+
+The body, the condition and the `goto` are the same; only the rotation differs.
+Three loops in that function gained alignment this way (522 -> 547 -> 557 -> 558
+of 627 instructions, localised with the relocation-masked sequence diff).
+
+Two cautions, both measured:
+
+- **It is loop-specific, not universal.**  The same edit on the pending-sync
+  transfer loop *regressed* 558 -> 523, and on `process_pending_sync` it was
+  neutral.  Convert only loops whose taken branch targets a cold block the
+  reference places out of line, and measure each one.
+- **Do not judge it by the positional byte score.**  That score fell 1162 -> 828
+  on the change that raised alignment by 25 instructions: one extra instruction
+  shifts every later byte, so the positional count desynchronises.  Compare
+  instruction sequences with relocations masked (`scripts/seqdiff.py`,
+  `scripts/zlibcheck.py`) and keep the build's own `.text` size as the
+  link-level figure.
