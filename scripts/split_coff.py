@@ -499,6 +499,41 @@ def main() -> int:
                     alias_index.setdefault(masked_body(obj, sec), set()).update(ext)
 
     written: list[tuple[int | None, str, str]] = []
+
+    def member_external_names(member_name, funcs_list):
+        """External names defined by this member's mapped sections."""
+        obj_i = by_name.get(member_name)
+        if obj_i is None:
+            return set()
+        try:
+            coff_i = Coff(obj_i)
+        except (struct.error, IndexError):
+            return set()
+        names = set()
+        for _va, symbol_i, section_i in funcs_list:
+            if section_i:
+                sec_i = section_i - 1
+            else:
+                sec_i = next(
+                    (s["section"] - 1 for s in coff_i.symbols
+                     if s["name"] == symbol_i and s["section"] > 0),
+                    None,
+                )
+            if sec_i is None:
+                continue
+            for sym in coff_i.symbols:
+                if (
+                    sym["section"] == sec_i + 1
+                    and sym["storage_class"] == 2
+                    and not sym["name"].startswith(".")
+                ):
+                    names.add(sym["name"])
+        return names
+
+    all_mapped_names = set()
+    for _member, _funcs in want.items():
+        all_mapped_names |= member_external_names(_member, _funcs)
+
     for member, funcs in want.items():
         obj = by_name.get(member)
         if obj is None:
@@ -531,22 +566,15 @@ def main() -> int:
         for e in mapping["matched"]:
             if e["member"] == member:
                 sizes[int(e["va"], 16)] = e["size"]
-        # External names defined by THIS member's mapped sections.  They must not
-        # be exported as aliases from each other's objects: crt0dat.obj §14 and
-        # §16 are byte-identical (`__lockexit` / `__unlockexit`), and fread.obj
-        # §1 is byte-identical to fwrite.obj §1, so the alias index lists both
-        # spellings for each body.  Exporting the sibling's name as well makes
-        # two of our objects define the same symbol, and LINK then discards one
-        # of them — which is what left the CRT region 9 and 47 bytes short.
-        member_names = set()
-        for _sec_i in mapped:
-            for _sym in coff.symbols:
-                if (
-                    _sym["section"] == _sec_i + 1
-                    and _sym["storage_class"] == 2
-                    and not _sym["name"].startswith(".")
-                ):
-                    member_names.add(_sym["name"])
+        # External names defined by the mapped sections of ANY member.  They must
+        # not be exported as aliases.  Several CRT bodies are byte-identical
+        # across members — lseek.obj, read.obj and write.obj all carry the same
+        # 101 bytes, and crt0dat.obj §14/§16 the same 9 — so the alias index
+        # lists every spelling for each.  Exporting them all makes several of our
+        # objects define the same symbol set, and LINK then keeps one and drops
+        # the rest, which is what left the CRT region short at 0x1001e8b4 (101
+        # bytes), 0x1001eec1 (101) and elsewhere.
+        member_names = all_mapped_names
 
         for n, (va, symbol, section) in enumerate(funcs_sorted):
             entry_size = sizes.get(va)
