@@ -208,6 +208,47 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## The remaining 784 bytes of "slack" are mostly our own scaffold (2026-09-13, round 35)
+
+Round 34 called the 784-byte difference between the split region's span and its
+summed content "inter-object slack".  That is wrong: **`link_stubs.c.obj` alone
+contributes 512 bytes of `.text`**, and all of it is code the reference does not
+have.  It is in the response file but not in any of the `--content`
+directories, so it fell into the residual.  The other scaffolding objects
+(`data_globals.c.obj`, `rdata_restore.c.obj`, `crt_imports.c.obj`) contribute
+**0** bytes of `.text`; only `link_stubs.c` emits code.
+
+`link_stubs.c` defines 232 symbols, and **96 of them are referenced by no object
+in either the standard or the split response file** — about half its `.text` is
+dead stubs kept alive only by `/OPT:NOREF`.  Removing them would be worth on the
+order of 250 bytes, but it was **not done**: several dead names
+(`ahm_RandomBelow`, `FreeCommandBuffer`, `rand_mod`, `_putc`, `write_log`)
+appear in the tooling and configuration, so the postlink's expectations have to
+be checked before deleting them.  The file is shared scaffolding, not
+reconstruction, so a mistake there is expensive.
+
+**Corrected accounting of the remaining +676:**
+
+| term | bytes |
+|---|---|
+| game region (`_fclose` starts 0x80 early: 96 B of game shortfall + 32 B `_getpid`/`srand`) | -128 |
+| CRT content (38,618 against the reference region's 38,588) | +30 |
+| `link_stubs.c` scaffolding `.text` | +512 |
+| residual slack | +262 |
+| | **+676** |
+
+**Also measured, and negative.**  Only 89% of member-internal adjacent section
+pairs are contiguous in the reference (118 of 133), so the reference's layout is
+section-by-section like ours and per-member emission would not reproduce it.
+The exceptions are the members whose sections the reference splits:
+`memcpy.obj` at 0x1001b200 and 0x1001eab0, `popen.obj` in five places,
+`lseek.obj` in three, `cwprintf.obj`, `fread.obj`, `crt0dat.obj`.
+
+**Next step:** either check the postlink's symbol expectations and delete the
+dead half of `link_stubs.c`, or leave the CRT half where it is and go back to
+the 20 non-exact game functions — the game region is still 128 bytes short and
+that is the larger remaining piece.
+
 ## Trimming each section to the reference function size removes 2,170 bytes (2026-09-13, round 34)
 
 `map_libcmt` matches a reference function to a member section by *common
