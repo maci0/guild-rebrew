@@ -105,6 +105,23 @@ Also re-confirmed this round, and negative: the 2026-09-11 service-pack sweep
 already covers all seven VC 6.0 builds over these functions ("Twenty compile
 to identical objects under every build"), so another SP sweep is redundant.
 
+**Second negative: the `-1` constant-caching wall is not a spelling.**
+`ls_LoadBuildingEntityState` (0x100128f0) is the cleanest example — 1464 vs
+1463 bytes, 100% mnemonic-aligned, and the entire gap is that the reference
+caches the sentinel in `ebp` (`or ebp,0xffffffff` once, then three
+`mov [mem],ebp`) while msvc6 rematerializes `mov dword ptr [mem],0xffffffff`
+at each of the three stores and so needs no fourth callee-saved register
+(entry is `push esi; push edi` against the target's
+`push ebx; push ebp; push esi; push edi`, and every frame offset is 8 low).
+Seven spellings of `neg1` measured: dropping `register`, `~0`, moving the
+assignment above `offset = 0`, `unsigned int` + `0xffffffffu`, and a
+file-scope `static int s_neg1 = -1;` read into `neg1` — all inert at
+125/1464 except the last two, which are worse (obj 1481/1475).  Delaying the
+assignment to the first loop iteration reaches 150/1481.  The caching
+decision is the allocator's, driven by live-range pressure the
+reconstruction does not reproduce, exactly as `docs/msvc6-c-shapes.md` §48
+records for `ServerMainThread`'s `sent_bytes`.
+
 ## Static demotion is clean but neutral (2026-09-13, round 21)
 
 Third attempt at the intra-member static problem, this time without merging
