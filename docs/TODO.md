@@ -102,10 +102,16 @@ uncached and the object at 1464: dropping `register`; `~0`; moving the
 assignment above `offset = 0`, above the `entity_count` guard, or into the
 loop body; initialising it at the declaration; `long` instead of `int`; a dead
 `neg1 == 0` guard in the loop; deleting the `dummy` local; inlining the
-`int* ebx` pointer local; and `/G6` (130/1464).  This is the round-23
-constant-caching wall seen from the other side: the allocator's choice is
-reachable by a *flag* that also rewrites the memory model, and by no source
-form at all.
+`int* ebx` pointer local; and `/G6` (130/1464).  **Raising the use count does
+not trigger it either** — a diagnostic build with a fourth and a fifth
+`neg1` store (obj 1475 / 1479) still has no `or ebp,0xffffffff`, so the
+decision is not a use-count threshold.  This is the round-23 constant-caching
+wall seen from the other side: the allocator's choice is reachable by a *flag*
+that also rewrites the memory model, and by no source form at all.  `cl /help`
+offers no finer-grained switch — the whole family is `/Oa` (assume no
+aliasing), `/Ow` (assume cross-function aliasing), `/Og`, `/Ob<n>`, `/Ot`,
+`/Oy`, `/Oi`, `/Ox`, and `/Oa` and `/Ow` each alone reproduce neither half of
+the pair.
 
 **The rest of the flag sweep.**  `/Ox`, `/O1`, `/Ot`, `/Og-`, `/Ow`, `/Ob1`,
 `/Ob2`, `/Oy-`, `/G6`, `/G5`, `/Oi-`, `/Gy`, `/Os` on top of `/O2` are all
