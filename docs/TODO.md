@@ -1,5 +1,34 @@
 # Blockers — 100% Round-Trip Goal
 
+## `/GF` is not the string-dedup answer (2026-09-13, round 59)
+
+Our `.data` carries duplicate string literals the reference does not: 105 extra
+occurrences, and the worst is `"D:\\Develop\\DieGildeAddOn\\game\\spiel.c"`,
+which appears **22 times** across eight of our sources -- `spiel.c`,
+`spiel2.c`, `spiel5.c`, `spiel_dumpD.c` and four `spiel_c/*.c` -- because we
+split the original single `spiel.c` translation unit into per-function files.
+The reference has one copy each.
+
+`/GF` (eliminate duplicate strings) looks like the fix and is not.  Adding it
+to `CMAKE_C_FLAGS` and rebuilding:
+
+```
+                 .rdata vsize   .rdata diff   .data vsize   .data diff   .data strings
+before              0x32d1          2215       0x17448b8       38470          469
+with /GF            0x4fa1         10712       0x1742bf8       35407          369
+```
+
+It does merge -- `.data` loses 0x1cc0 and 100 string occurrences -- but it
+over-merges (369 against the reference's 453) and it moves the pooled strings
+into `.rdata`, which grows by 0x2120 and whose agreement collapses from 2215 to
+10712 differing bytes.  Net strongly negative, reverted.  The reference was
+built without `/GF`; its lack of duplicates comes from its translation-unit
+partition, not from a flag.
+
+That makes TU merging the lever for `.data`, which is what `rebrew
+merge-sweep` exists for, and it is a much larger change than anything else on
+the list.
+
 ## `.data`: the blob is perfect and 0x72C too late; 46 strings are missing (2026-09-13, round 58)
 
 `data_restore.c`'s blob is **byte-perfect**.  Comparing the reference's
