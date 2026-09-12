@@ -94,36 +94,48 @@ byte-identical to the baseline and inert: copying the parameter into a local
 declaring it before the two int locals, and adding an extra local.  The
 structural remainder is the CSE block above plus the rotated 0x55 loop tail.
 
-**Sweep table** (`match/total@obj`, `/O2 /Gd` then `/O2 /Gd /Oa` then
-`/O1 /Gd`):
+**Sweep table.**  `match/total@obj` for each function's *recorded* CFLAGS and
+for the same flags with `/Oa` appended.  **`rebrew test --cflags` replaces the
+metadata CFLAGS outright**, so a sweep that passes a fixed flag string
+silently measures a different configuration for the six functions whose
+`src/rebrew-functions.toml` entry is not the `/O2 /Gd` default; the numbers
+below pass each function's own recorded string (the first column is identical
+to a plain `rebrew test --no-promote` on the untouched tree):
 
-| function | `/O2 /Gd` | `/O2 /Gd /Oa` | `/O1 /Gd` |
+| function | recorded cflags | recorded | + `/Oa` |
 |---|---|---|---|
-| CrashDump | 267/2137@2137 | 265/2129@2129 | 221/2115@**1645** |
-| m_AllocTracked | 123/680@680 | 123/677@677 | 160/658@544 |
-| vfs_ReadCompressed | 138/499@499 | 43/493@493 | 21/492@378 |
-| vfs_ReadData | 46/482@482 | 37/485@485 | 48/472@371 |
-| vfs_OpenStream | 444/693@693 | 114/697@697 | 44/667@589 |
-| ServerMainThread | 1336/2434@2434 | 1142/2450@2450 | 194/2434@2237 |
-| srv_LoadBuf | 701/750@750 | 112/780@780 | 117/750@668 |
-| cm_ProcessCommandQueue | 624/639@639 | 99/639@609 | 85/639@541 |
-| ahm_ExAllocAlchemist | 823/1002@1002 | 507/1010@1010 | 165/1002@944 |
-| cm_ExSellObjekt | 199/2057@2055 | 226/2057@1963 | 195/2057@1738 |
-| cm_ExProdObjekt | 976/993@993 | 341/993@982 | 90/993@795 |
-| cm_ExCopyEntityData | 525/901@880 | 525/901@880 | 130/901@822 |
-| gv_ExAllocGraveyardWorker | 606/1040@1040 | 245/1042@1042 | 90/1040@911 |
-| ls_LoadBuildingEntityState | 125/1464@1464 | **713/1463@1427** | 128/1463@1367 |
-| gm_ObjectsAvailble | 686/714@714 | 567/714@709 | 83/714@617 |
-| gm_FindNextFilteredEntity | 168/346@342 | 168/346@342 | 89/346@306 |
-| gm_AllocGebaeude | 418/1078@1078 | 243/1078@1078 | 68/1078@946 |
-| gm_AllocSpieler | 500/3689@3652 | 504/3692@3692 | 289/3689@3344 |
-| gm_CalculateProductionValue | 391/396@396 | 391/396@396 | 71/396@339 |
-| gm_CheckInventoryCapacity | 293/395@395 | 152/395@389 | 37/395@340 |
+| CrashDump | `/O2 /Gd` | 267/2137@2137 | 265/2129@2129 |
+| m_AllocTracked | `/O2 /Gd /G6 /Oy-` | 241/658@608 | 241/658@608 |
+| vfs_ReadCompressed | `/O2 /Gd /DREBREW_ALLOW_NAKED` | 138/499@499 | 43/493@493 |
+| vfs_ReadData | `/O2 /Gd /Oy- /DREBREW_ALLOW_NAKED` | 138/472@446 | 71/472@447 |
+| vfs_OpenStream | `/O2 /Gd` | 444/693@693 | 114/697@697 |
+| ServerMainThread | `/O2 /Gd` | 1336/2434@2434 | 1142/2450@2450 |
+| srv_LoadBuf | `/O2 /Gd /Ot` | 701/750@750 | 112/780@780 |
+| cm_ProcessCommandQueue | `/O2 /Gd /DREBREW_ALLOW_NAKED` | 624/639@639 | 99/639@609 |
+| ahm_ExAllocAlchemist | `/DREBREW_ALLOW_NAKED /O2 /Gd` | 823/1002@1002 | 507/1010@1010 |
+| cm_ExSellObjekt | `/O2 /Gd` | 199/2057@2055 | 226/2057@1963 |
+| cm_ExProdObjekt | `/Ox /Gd` | 976/993@993 | 341/993@982 |
+| cm_ExCopyEntityData | `/O2 /Gd` | 525/901@880 | 525/901@880 |
+| gv_ExAllocGraveyardWorker | `/DREBREW_ALLOW_NAKED /O2 /Gd` | 606/1040@1040 | 245/1042@1042 |
+| ls_LoadBuildingEntityState | `/O2 /Gd` | 125/1464@1464 | **713/1463@1427** |
+| gm_ObjectsAvailble | `/DREBREW_ALLOW_NAKED /O2 /Gd` | 686/714@714 | 567/714@709 |
+| gm_FindNextFilteredEntity | `/O2 /Gd` | 168/346@342 | 168/346@342 |
+| gm_AllocGebaeude | `/DREBREW_ALLOW_NAKED /O2 /Gd` | 418/1078@1078 | 243/1078@1078 |
+| gm_AllocSpieler | `/DREBREW_ALLOW_NAKED /O2 /Gd /Oa /Ow` | 851/3689@3688 | 851/3689@3688 |
+| gm_CalculateProductionValue | `/O2 /Gd` + pragma `a` | 391/396@396 | 391/396@396 |
+| gm_CheckInventoryCapacity | `/O2 /Gd` | 293/395@395 | 152/395@389 |
 
-Note the two functions that already carry `#pragma optimize("a", on)` in the
-tree (`cm_ExCopyEntityData`, `gm_CalculateProductionValue` in `spiel622.c`) are
-the two whose `/Oa` column is unchanged — consistent with the pragma and the
-flag being the same switch.  `gm_CalculateProductionValue`'s `nbad` stays at 2.
+Three functions are already `/Oa`-equivalent and their column is unchanged:
+`gm_AllocSpieler` (`/Oa` in the metadata), `gm_CalculateProductionValue` and
+`cm_ExCopyEntityData` (the `#pragma optimize("a", on)` in their sources).
+`ls_LoadBuildingEntityState` is the only function `/Oa` helps; it is the only
+one whose column should be read as a lead.
+
+The six non-default `/O2 /Gd` entries are load-bearing and were re-measured
+here for the first time as a set: `m_AllocTracked` is 241/658 with
+`/G6 /Oy-` against 123/680 with plain `/O2 /Gd`, `vfs_ReadData` is 138/472
+against 46/482, and `gm_AllocSpieler` is 851/3689 against 500/3689 — the
+`/Oa /Ow` in its metadata is worth 351 matched bytes.
 
 **Prioritised target list**, `rebrew diff <va>` under the tree's own
 `/O2 /Gd`, sorted by structural mismatches (the only counts that need code
