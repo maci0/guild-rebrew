@@ -91,6 +91,25 @@ Once those are zero the drift is 0 end to end, the built `.text` (0x22af8,
 +690) loses the dead-stripped import thunk tail that `rebrew postlink` already
 trims, and masked-100% becomes byte identity.
 
+Where to start, smallest residue first, all with `scripts/text_match.py
+--align` for the size of the gap and `rebrew diff <va> --json` for its shape:
+
+| function | VA | differ | shape |
+|---|---|---|---|
+| `cm_ProcessCommandQueue` | 0x1000aac0 | 2 | block layout: the `test ebx,ebx; je` guard and the `jne` back edge are one block earlier in the reference; the object is already the right length |
+| `gm_CalculateProductionValue` | 0x10019720 | 5 | `fxch st(1)` and `cmp byte ptr [esi],0x17` emitted in the opposite order |
+| `cm_ExProdObjekt` | 0x1000e140 | 13 | 4 instructions: the `g_unknown_1de450` load and the `mov [esp+0x18],ebx` store interleave the other way |
+| `gm_ObjectsAvailble` | 0x10015f70 | 28 | pure ebx/edi register swap plus one spill slot |
+
+Negative results from this round, so they are not repeated: a targeted
+flag sweep over `/O2 /Gd`, `/GB`, `/Oy`, `/O1`, `/Ox`, `/Ot`, `/Og-` on
+`gm_CalculateProductionValue` finds **no exact flag set** (best score 7500,
+all `exact: false`), and `rebrew climb --passes 2 --objective aligned` on
+`gm_ObjectsAvailble` finds **no improving adjacent-statement swap**
+(baseline == best == 207,984 matched bytes, `moves: []`).  Both confirm
+what the per-file logs already record: these residues are MSVC6 allocator
+and scheduler fixed points, not statement-order choices.
+
 ## Distance to byte identity (2026-09-13, round 24)
 
 One place to read the whole gap.  Nothing here is new work; it is the state
