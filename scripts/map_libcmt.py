@@ -41,6 +41,13 @@ from pathlib import Path
 
 MIN_BYTES = 8
 MIN_FIXED_FRACTION = 0.5
+# Relocation-dense functions legitimately have few fixed bytes: LIBCMT's
+# init_fptrs (fpinit.obj sec 7, 56 bytes) is six stores of absolute addresses,
+# so 44 of its 56 bytes are operand slots and only 12 are opcodes.  A pure
+# fraction rejects it.  An absolute floor alone would accept sections that are
+# nothing but relocation slots (undname.obj sec 2 matched several targets with
+# 0 fixed bytes out of 86), so require EITHER.
+MIN_FIXED_BYTES = 12
 # How much of the REFERENCE function the member section has to cover.  match()
 # compares min(len(body), len(data)) bytes, so a section that ends early still
 # "matches" on its last few bytes: popen.obj sec 6 is 965 bytes and the entries
@@ -258,7 +265,8 @@ def match(index, data: bytes, exclude=None, canon=None):
         if n < MIN_COVER * len(data):
             continue
         slots = {x - value for x in mask if value <= x < value + n}
-        if n - len(slots) < MIN_FIXED_FRACTION * n:
+        fixed = n - len(slots)
+        if fixed < MIN_FIXED_BYTES and fixed < MIN_FIXED_FRACTION * n:
             continue
         for i in range(n):
             if body[i] != data[i] and i not in slots:
@@ -336,21 +344,25 @@ def main() -> int:
         data = ref.body(va, size)
         if data is None:
             continue
+        # Prefer the library whose section is LONGEST, not the first that
+        # matches.  A shorter section matches as a prefix and then --trim cuts
+        # the object to it: sp6's strncpy.obj sec 1 is 254 bytes and the
+        # reference's _strncpy is 272, while vc7's is 292, so taking sp6 cost
+        # 18 bytes at the head of a 201-symbol drift plateau.
         got = None
         got_lib = None
         for _lp, _ix in lib_indexes:
-            got = match(_ix, data, claimed, canon)
-            if got is None:
+            cand = match(_ix, data, claimed, canon)
+            if cand is None:
                 # Nothing left unclaimed in THIS library: either the VA really
                 # is an alias of another name for the same body (dup/strdup sit
                 # at one VA), or the only other candidate lives in a different
                 # service pack whose member has a different section layout —
                 # split_coff resolves members against the first library that
                 # has them, so a cross-variant section number is not usable.
-                got = match(_ix, data, None, canon)
-            if got:
-                got_lib = _lp
-                break
+                cand = match(_ix, data, None, canon)
+            if cand and (got is None or cand[4] > got[4]):
+                got, got_lib = cand, _lp
         if got:
             claimed.add((got[0], got[2], got[3]))
             if got[4] > size:
