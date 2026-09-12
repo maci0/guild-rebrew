@@ -1,5 +1,28 @@
 # Blockers — 100% Round-Trip Goal
 
+## Distance to byte identity (2026-09-13, round 22)
+
+One place to read the whole gap.  Nothing here is new work; it is the state
+the round-by-round entries below establish.
+
+| piece | state | size |
+|---|---|---|
+| reference `.text` | — | 141,382 B (0x22846) |
+| game functions, byte-exact at object level | 259 of 280 `byte_matched` | ~140 KB |
+| game functions, not byte-exact | **21** (10 size mismatches + 11 byte-different; 19 of them `PROVEN`, so `verify` hides them) | ~19 KB |
+| first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
+| standard CMake link, `.text` | 0x2284c (+6), postlink coverage 402/7,463 (5.4%) | — |
+| split-set link (LIBCMT member objects), `.text` end | 0x100256f2 (over by 0x1eac) | — |
+| CRT region functions matched | 235 of 244 | 38,674 B |
+| CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
+| CRT split-set leftovers | **34** symbols across ~10 members | 5,294 B |
+
+The two halves are independent: the game walls keep the standard link from
+byte identity, and the CRT leftovers keep the split-set link from it.  Within
+the CRT half, rounds 18-21 (aliases, static demotion, section merging) moved
+the leftover count 71 -> 34 and then plateaued; rounds 15-16 removed a whole
+member by correcting five game call sites from `fflush` to `fclose`.
+
 Last verify: 279/281 passed, 2 failed (0x100093a0 ServerMainThread, object
 size 2434 = the target's but the bytes differ; 0x10018850
 gm_AllocSpieler 3688 vs 3689).  gzread (0x10003960) is new: it was defined
