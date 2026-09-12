@@ -239,12 +239,21 @@ present, so the prefix is skipped.
 | LIBCMT archive pulls | 0 | 0 |
 | split-set `.text` | 0x22cba (+1140) | 0x22cfa (+1204) |
 
-**The drift is now one-sided** — nothing is early any more, and the 73
-remaining symbols are at +112 and up.  They start at `LeadUp1` (0x1001b200) and
-come from the `strstr` / `fpinit` / `memcpy` stretch, where `strstr.obj` §1 is
-128 bytes against a 152-byte catalog entry: the same "shorter section than the
-reference function" shape as round 46's `strncpy`, but this time no variant
-carries a longer `strstr`.
+**Every mapped section now starts at its reference VA.**  `split_audit` still
+reports 73 symbols with a delta, but they are all *interior* symbols of a
+shared-tail object — the `memcpy.obj` `LeadUp*`/`UnwindUp*`/`TrailUp*` family,
+`exsup3`'s `__except_handler3` and `__seh_longjmp_unwind@4`, `strchr`'s
+`___from_strstr_to_strchr`, `fpinit`'s `__fpclear`.  The audit keys a symbol to
+the VA in its *object filename*, so an interior label reads as if the whole
+section were late by its offset.  Filtering those families out leaves **4**
+nonzero deltas, and all four are that same artefact — the symbols really are at
+their reference VAs.
+
+So the +1204 in `.text` is entirely **after** the CRT region: `link_stubs.c`,
+`emit_defs`' objects and the 96 unreferenced import thunks, which `rebrew
+postlink`'s `data` fixer trims as "the extra `.text` tail".  The CRT half's
+placement is done; what is left there is the functions no LIBCMT variant
+carries (round 46) and the tail.
 
 Note that `split_audit`'s "objects LINK discards" test is by object basename,
 and the new prefix object defines no map-visible *symbols* of its own — it is
