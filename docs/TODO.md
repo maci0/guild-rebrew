@@ -28,6 +28,41 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## The reference CRT is a service-pack mix (2026-09-13, round 11)
+
+Two findings, both from chasing the 22 unmatched region functions.
+
+**Section symbols must be indexed.**  Many LIBCMT helpers are only reachable
+through their `.text` *section* symbol; skipping every symbol starting with
+`"."` hid them.  Indexing them recovered `exsup` (0 diffs against
+`exsup3.obj`, 224 B body vs the catalog's 197).
+
+**The rest are not SP6.**  `dosmaperr`, `NMSG_WRITE`, `setmbcp` and `output`
+differ from SP6 by exactly one opcode byte: the reference has `7c` (`jl`)
+where SP6 has `72` (`jb`) at the same offset — a signed/unsigned source
+difference.  They match **LIBCMT.base and LIBCMT.sp5** instead.  Per-region
+byte-match counts:
+
+| library | region functions | bytes |
+|---|---|---|
+| LIBCMT.base | 209 | 33,414 |
+| LIBCMT.sp4 | 224 | 36,844 |
+| LIBCMT.sp6 | 223 | 34,987 |
+| LIBCMT.sp5 | **228** | **37,896** |
+| SP6 then SP5 (union) | **228** | **37,896** |
+
+`map_libcmt.py` and `split_coff.py` now take `--lib` repeatably as a preference
+list, so `--lib SP6 --lib SP5` resolves 228 of 244 region functions — the
+remaining 16 (1,320 B) match no version on hand (`srand`, `__CRT_INIT`,
+`unlock_09*`, `fpmath`, `init_fptrs`, `crt_close_handle`, `crt_once_init`,
+`allmul_slow`, two `fcn_*`).
+
+Note the union set does **not** yet improve the PoC link: without `--closure`
+it links but leaves 175 LIBCMT symbols (vs 112 for SP6 alone), because the SP5
+members define different symbol spellings; with `--closure` it loses `/ENTRY`
+again.  The coverage number is the solid result; the link metrics need the
+symbol reconciliation.
+
 ## `--closure` works: leftovers 121 -> 77 (2026-09-13, round 10)
 
 The round-9 blocker was one helper object.  Bisected by dropping candidates
