@@ -651,9 +651,9 @@ stat_modifiers:
 	/* drawn twice in the reference (0x1001956a and 0x10019574); the first
 	 * result is discarded */
 	gm_RandomMod(0x10);
-	if ((double) *(unsigned short*) (slot + 0xa) > *(float*) (slot + 0x20)) {
+	if ((float) *(unsigned short*) (slot + 0xa) > *(float*) (slot + 0x20)) {
 		acc = *(float*) (slot + 0x1c);
-		for (n = (int) ((double) *(unsigned short*) (slot + 0xa) -
+		for (n = (int) ((float) *(unsigned short*) (slot + 0xa) -
 		               *(float*) (slot + 0x20));
 		     n > 0; n--) {
 			acc = acc - *(float*) (slot + 0x14) +
