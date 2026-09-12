@@ -47,6 +47,16 @@ and the rest followed in the supplied order (after fixing a sort bug that
 ordered the members by *path* instead of by VA).  So the mechanism the plan
 needs is confirmed — the library is no longer appended at the end.
 
+**But dropping the hand copy regresses today.**  Replacing
+`crt_region/dllmain.c` with LIBCMT's `_DllMainCRTStartup@12` (and
+`/ENTRY:DllMain@12` with `/ENTRY:_DllMainCRTStartup@12`) measured
+`.text 0x2277c` against the reference's `0x22846` — **-0xca**, where the
+committed tree is +6 — and postlink coverage 394/7463 against 402.  So the
+`dllmain.c` object is supplying something else as well (or the entry change
+alters which members the linker pulls), and the swap has to wait until the
+member placement is in place.  The tree is restored; this is recorded as the
+target state, not a change to make on its own.
+
 Two obstacles, both measured:
 
 1. **Whole members overshoot by ~6.3 KB.**  The 99 members carry 40,896 B of
