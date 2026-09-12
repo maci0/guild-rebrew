@@ -183,10 +183,32 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     for i, sym in enumerate(coff.symbols):
         if sym["section"] > 0 and (sym["section"] - 1) in new_secnum:
             add(i)
+
+    # A relocation may name a *section* symbol (class 3, ".text") of a COMDAT
+    # that is not part of this object.  Leaving that as an external named
+    # ".text" leaves LINK with an unresolvable reference, so retarget it at the
+    # external function symbol defined in that section.
+    first_ext: dict[int, int] = {}
+    for i, sym in enumerate(coff.symbols):
+        if sym["section"] > 0 and sym["storage_class"] == 2:
+            j = sym["section"] - 1
+            if j not in first_ext or sym["value"] < coff.symbols[first_ext[j]]["value"]:
+                first_ext[j] = i
+
+    def resolve_ref(symidx: int) -> int:
+        if symidx >= len(coff.symbols):
+            return symidx
+        sym = coff.symbols[symidx]
+        if sym["storage_class"] == 3 and sym["name"].startswith(".") and sym["section"] > 0:
+            j = sym["section"] - 1
+            if j not in new_secnum and j in first_ext:
+                return first_ext[j]
+        return symidx
+
     for i in secs:
         for _va, symidx, _typ in coff.section_relocs(i):
             if symidx < len(coff.symbols):
-                add(symidx)
+                add(resolve_ref(symidx))
 
     # Symbol table, renumbered onto the emitted sections.
     strtab = bytearray(b"\0\0\0\0")
@@ -232,7 +254,8 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
         if relocs:
             reloc_off = cur
             blob = b"".join(
-                struct.pack("<IIH", va, remap.get(symidx, 0), typ) for va, symidx, typ in relocs
+                struct.pack("<IIH", va, remap.get(resolve_ref(symidx), 0), typ)
+                for va, symidx, typ in relocs
             )
             cur += len(blob)
         else:
@@ -261,6 +284,28 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     )
     struct.pack_into("<I", strtab, 0, len(strtab))
     return bytes(header) + bytes(headers) + bytes(blobs) + bytes(new_symbols) + bytes(strtab)
+
+
+def closure_sections(coff: Coff, root: int, skip: set[int]) -> list[int]:
+    """Same-member .text sections reachable from `root`, excluding `skip`."""
+    out: list[int] = []
+    seen = {root}
+    work = [root]
+    while work:
+        i = work.pop(0)
+        for _va, symidx, _typ in coff.section_relocs(i):
+            if symidx >= len(coff.symbols):
+                continue
+            sec = coff.symbols[symidx]["section"]
+            if sec <= 0:
+                continue
+            j = sec - 1
+            if j in seen or j in skip or not coff.sections[j]["name"].startswith(b".text"):
+                continue
+            seen.add(j)
+            out.append(j)
+            work.append(j)
+    return out
 
 
 def main() -> int:
@@ -299,43 +344,68 @@ def main() -> int:
     resolve = name_resolver(members)
     by_name = {resolve(raw): obj for raw, obj in members}
 
-    written = []
+    written: list[tuple[int | None, str, str]] = []
     for member, funcs in want.items():
         obj = by_name.get(member)
         if obj is None:
             print(f"  missing member {member}", file=sys.stderr)
             continue
         coff = Coff(obj)
-        separate = set()
-        claimed = set()
-        closure = args.closure
+        mapped = set()
         for _va, symbol in funcs:
             for sym in coff.symbols:
                 if sym["name"] == symbol and sym["section"] > 0:
-                    separate.add(sym["section"] - 1)
+                    mapped.add(sym["section"] - 1)
                     break
-        for va, symbol in funcs:
-            # find the section that defines `symbol`
-            hit = None
-            for i, sym in enumerate(coff.symbols):
-                if sym["name"] == symbol and sym["section"] > 0:
-                    hit = i
-                    break
+        claimed: set[int] = set()
+        for va, symbol in sorted(funcs):
+            hit = next(
+                (
+                    i
+                    for i, sym in enumerate(coff.symbols)
+                    if sym["name"] == symbol and sym["section"] > 0
+                ),
+                None,
+            )
             if hit is None:
                 print(f"  no section for {symbol} in {member}", file=sys.stderr)
                 continue
-            data = build_object(
-                coff, coff.symbols[hit]["section"] - 1, symbol, separate, claimed, closure
-            )
+            root_sec = coff.symbols[hit]["section"] - 1
             safe = "".join(c if c.isalnum() or c in "._" else "_" for c in symbol)
             name = f"{va:08x}_{safe}.obj"
-            (outdir / name).write_bytes(data)
+            (outdir / name).write_bytes(build_object(coff, root_sec, symbol, mapped, claimed))
             written.append((va, str(outdir / name), symbol))
+            if not args.closure:
+                continue
+            # Same-member helpers the function branches to.  They are emitted as
+            # their own SINGLE-section objects, placed immediately after this
+            # one, rather than folded into it: a multi-section object makes LINK
+            # lose /ENTRY resolution (see docs/TODO.md).
+            claimed.add(root_sec)
+            for helper in closure_sections(coff, root_sec, mapped | claimed):
+                claimed.add(helper)
+                hsym = next(
+                    (
+                        s["name"]
+                        for s in coff.symbols
+                        if s["section"] - 1 == helper and s["storage_class"] == 2
+                    ),
+                    f"helper_{helper}",
+                )
+                hsafe = "".join(c if c.isalnum() or c in "._" else "_" for c in hsym)
+                hname = f"{va:08x}_h{helper}_{hsafe}.obj"
+                (outdir / hname).write_bytes(build_object(coff, helper, hsym, set(), set()))
+                written.append((None, str(outdir / hname), hsym))
 
-    written.sort()
     print(f"wrote {len(written)} objects to {outdir}")
     (outdir / "index.json").write_text(
-        json.dumps([{"va": f"0x{v:x}", "obj": o, "symbol": s} for v, o, s in written], indent=1)
+        json.dumps(
+            [
+                {"va": (f"0x{v:x}" if v is not None else None), "obj": o, "symbol": s}
+                for v, o, s in written
+            ],
+            indent=1,
+        )
     )
     return 0
 
