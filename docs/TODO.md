@@ -269,13 +269,23 @@ inside the split region the slack is 833 bytes, and the real third term is the
 archive pull above.
 
 **Consequence for the CRT half.**  Two thirds of the gap is one problem —
-"make the split set define every symbol the pulled members define" — and it is
-the same problem rounds 17-21 were iterating on from the symbol side.  The
-remaining third is small and local.  `scripts/make_split_rsp.py` and
-`scripts/split_audit.py` make either measurable, and the next experiment is to
-enumerate the undefined references each pulled member satisfies (link with
-`/VERBOSE`, or diff the archive symbols against the symbols the command-line
-objects define) rather than reasoning about the members.
+"stop LINK loading those 12 members" — and the symbol analysis says why it
+loads them.  Collecting the defined and undefined externals of all 447
+command-line objects shows the split set extracts **only `.text`**: the
+members' *data* symbols (`__environ` from `crt0dat.obj`, `__iob` from
+`_file.obj`, `___mbcodepage`, `__XcptActTab`, `__exitflag`, ...) are defined by
+nothing else on the command line, so LINK satisfies each reference by loading
+the whole member and appending its `.text`.  (`_g_current_season`,
+`_g_slot_array`, `__crtheap`, ... are `<common>` and not part of this — a first
+pass that treated every section-0 symbol as undefined produced a false 113-symbol
+list before the commons were separated out.)
+
+So the next `split_coff` extension is to emit each mapped member's `.data` /
+`.bss` sections alongside its `.text` section, so the data references resolve
+from command-line objects.  That should drop the 4,978-byte archive pull
+without touching a byte of code, and `scripts/split_audit.py` shows the result
+directly.  `scripts/make_split_rsp.py` and `scripts/split_audit.py` make it
+measurable; the recipe above reproduces the starting state.
 
 **Also measured:** layout fidelity of the sorted closure build is **169 of 240**
 consecutive split-object pairs placed with exactly the reference's gap; the
