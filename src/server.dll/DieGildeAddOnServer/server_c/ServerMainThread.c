@@ -520,8 +520,6 @@ send_start_commands:
 	m_FreeTracked(*(void**) 0x101deae8);
 	host_flags = *(unsigned char*) 0x101de464;
 	*(void**) 0x101deae8 = (void*) 0;
-	*(unsigned int*) 0x101deac0 = 0;
-
 	if ((host_flags & 4) == 0) {
 		LogMessageInternal((char*) 0x100298b0, 0x262, (char*) 0x100297bc, 1);
 		player_slot = (unsigned int*) 0x101deb00;
@@ -559,6 +557,8 @@ send_start_commands:
 			Sleep(0x1e);
 		}
 	}
+
+	*(unsigned int*) 0x101deac0 = 0;
 
 	player_slot = (unsigned int*) 0x101deb00;
 	do {
