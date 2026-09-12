@@ -55,6 +55,8 @@ def main() -> int:
     ap.add_argument("--split", required=True, help="split_coff output directory")
     ap.add_argument("--objects", required=True, help="objects1.rsp from the CMake build")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--defs", help="directory from scripts/emit_defs.py; its objects "
+                    "define the sections the split set leaves undefined")
     ap.add_argument("--commons", help="directory from scripts/emit_commons.py; its "
                     "objects define the mapped members' common symbols so LINK "
                     "stops loading whole members for them")
@@ -84,6 +86,9 @@ def main() -> int:
         else:
             mid.append(t)
     extra_objs = []
+    if args.defs:
+        for f in sorted((ROOT / args.defs).glob("*.obj")):
+            extra_objs.append(f.relative_to(ROOT / "build").as_posix())
     if args.commons:
         for f in sorted((ROOT / args.commons).glob("*.obj")):
             extra_objs.append(f.relative_to(ROOT / "build").as_posix())

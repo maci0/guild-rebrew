@@ -208,6 +208,54 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## No LIBCMT member is pulled any more (2026-09-13, round 30)
+
+The last five pulled members were driven by symbols whose *defining section*
+the split set never emits — sections the map did not match to a reference
+function, in members that are otherwise mapped, and whole members the map does
+not cover:
+
+| symbol | member | defining section |
+|---|---|---|
+| `__except_list` | `exsup.obj` | **ABSOLUTE** (section -1, value 0) |
+| `__XcptActTab` | `winxfltr.obj` | `.data` (0x88) |
+| `__cinit` | `crt0dat.obj` | `.text` (0x2d, section 2) |
+| `___xc_a` | `crt0init.obj` | `.CRT$XCA` (4) |
+| `__CRT_INIT@12` | `dllcrt0.obj` | `.text` (0xd9, section 3) |
+| `_DllMain@12` | `dllmain.obj` | `.text` (6, section 1) |
+
+`scripts/emit_defs.py` closes it from the symbol side: read the defined and
+undefined externals of every object already on the response file, take the
+difference, map each missing symbol to the section that defines it in one of
+the LIBCMT variants, and emit that section as its own object — or, for an
+`ABSOLUTE` symbol, a one-symbol object with section number 0xFFFF.
+
+**It has to iterate.**  One pass is not enough because the definitions cascade:
+emitting `__CRT_INIT@12` (dllcrt0 section 2) *introduces* the reference to
+`_DllMain@12`, which no object on the response file had named before.  The
+script re-scans its own output and repeats, converging in four passes from 74
+missing symbols to 0.  Two bugs found on the way, both worth recording because
+they are easy to mistake for linker behaviour: objdump prints a COFF definition
+as `(sec N)` and an undefined external as `(sec 0)`, so a first pass that
+treated section 0 as a definition reported "0 undefined" and emitted nothing;
+and keying the output file on `member + section` alone makes two symbols in one
+section overwrite each other, which silently lost `crt0dat`'s and
+`crt0init`'s sections until the emit was grouped by `(member, section)`.
+
+`make_split_rsp.py --defs DIR` adds the objects.  Result: **zero LIBCMT archive
+members are pulled**, and `.text` 0x23686 -> **0x23354** (-818 bytes), so the
+overshoot is down from 7,840 to **2,830 bytes** — 5,026 bytes removed since the
+round-26 baseline, and the CRT half is now "LIBCMT is linked in" in the literal
+sense: every symbol the split set references is defined by a command-line
+object.
+
+**What the remaining 2,830 bytes are.**  The 13 emitted definition objects add
+only 268 bytes of `.text`, and the commons objects add none, so the residue is
+not the new objects.  It is the round-26/27 terms: the -0xaa missing prologue
+before `_fclose`, the split objects' +1,049 over-inclusion, the inter-object
+slack, and whatever the *game* region contributes.  Attributing it needs a
+fresh map audit — `scripts/split_audit.py` on the new link is the first step.
+
 ## Carried data sections are closure roots; commons are parked (2026-09-13, round 29)
 
 Two fixes and one parked experiment on top of round 28's `--with-data`.
