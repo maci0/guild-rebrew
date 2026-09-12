@@ -242,8 +242,10 @@ and keying the output file on `member + section` alone makes two symbols in one
 section overwrite each other, which silently lost `crt0dat`'s and
 `crt0init`'s sections until the emit was grouped by `(member, section)`.
 
-`make_split_rsp.py --defs DIR` adds the objects.  Result: **zero LIBCMT archive
-members are pulled**, and `.text` 0x23686 -> **0x23354** (-818 bytes), so the
+`make_split_rsp.py --defs DIR` adds the objects, and `scripts/split_link.sh`
+now runs the whole pipeline — map, split, commons, definitions, response file,
+link, audit — in one command against a configured `build/` tree.  Result:
+**zero LIBCMT archive members are pulled**, and `.text` 0x23686 -> **0x23354** (-818 bytes), so the
 overshoot is down from 7,840 to **2,830 bytes** — 5,026 bytes removed since the
 round-26 baseline, and the CRT half is now "LIBCMT is linked in" in the literal
 sense: every symbol the split set references is defined by a command-line
