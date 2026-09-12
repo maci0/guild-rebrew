@@ -28,20 +28,37 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
-## Fixed: those call sites were `fclose` (2026-09-13, round 15)
+## Fixed: those call sites were `fclose` (2026-09-13, rounds 15-16)
 
 `rebrew diff` resolves the *reference's* operand, which is what round 14 lacked:
 reading the per-function diff of `DispatchLogOutput` (0x10002640),
-`vfs_CloseStream` (0x100038a0) and `gm_Open` (0x10015950) shows all four
-`fflush`-looking call sites targeting **0x1001a18a**, and that function's 49
-bytes are byte-identical to `fclose.obj`'s `_fclose` in both SP6 and SP5 (the
-`fflush` name was the catalog's RevEng.AI guess).  The reconstruction had
-spelled them `fflush`, which is why LIBCMT's `fflush.obj` was pulled for a
-public `_fflush` the reference's CRT build does not contain.
+`vfs_CloseStream` (0x100038a0), `vfs_DestroyEntity` (0x10008a50) and `gm_Open`
+(0x10015950) shows all five `fflush`-looking call sites targeting
+**0x1001a18a**, and that function's 49 bytes are byte-identical to
+`fclose.obj`'s `_fclose` in both SP6 and SP5 (the `fflush` name was the
+catalog's RevEng.AI guess).  The reconstruction had spelled them `fflush`,
+which is why LIBCMT's `fflush.obj` was pulled for a public `_fflush` the
+reference's CRT build does not contain.
 
-The four sites now call `fclose`.  A game function's call displacement is a
-masked relocation, so the compiled bytes are unchanged and all three functions
-re-test RELOC at their original sizes (290/290, 177/177, 861/861).
+All five sites now call `fclose`.  A game function's call displacement is a
+masked relocation, so the compiled bytes are unchanged and every affected
+function re-tests RELOC at its original size (290/290, 177/177, 53/53,
+861/861), with `verify --full` holding at 279/281.
+
+Measured effect on the split-set link:
+
+| | leftovers | leftover bytes | `.text` end |
+|---|---|---|---|
+| before | 73 | 6,858 | 0x10025d0e |
+| after | **71** | **6,650** | **0x10025c3e** |
+
+`LIBCMT:fflush.obj` is no longer in the link at all, and the standard build's
+`.text` drops 0x2284c -> 0x2283c.
+
+The generalisable check: for every CRT symbol our game C names, run
+`rebrew diff` on the enclosing function and compare the reference's resolved
+target against the member whose body lives there.  A mismatch means the
+catalog name is wrong and the link is pulling a member the reference never had.
 
 ## Why `fflush.obj` is pulled: the reference has no public `_fflush` (2026-09-13, round 14)
 
