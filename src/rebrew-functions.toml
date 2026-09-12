@@ -130,7 +130,7 @@ status = "EXACT"
 ["SERVER.0x10006580"]
 size = 658
 cflags = "/O2 /Gd /G6 /Oy-"
-toolchain = "msvc600sp6"
+toolchain = "msvc-6.0-sp6"
 status = "PROVEN"
 analysis = "Custom memory allocator wrapping malloc with extensive usage tracking. Groups allocations by `groupTag` (usually a source file or component string). Keeps aggregate counts and sizes in g_mem_tracking_table (an array/hash of allocation metadata blocks). Used exclusively over raw malloc in the GAME code."
 blocker = "§11 memset prelude — pure C cannot emit — parked"
@@ -758,7 +758,7 @@ status = "RELOC"
 
 ["SERVER.0x100109d0"]
 size = 832
-toolchain = "msvc600sp6"
+toolchain = "msvc-6.0-sp6"
 status = "RELOC"
 
 ["SERVER.0x10010d10"]
@@ -838,7 +838,7 @@ status = "RELOC"
 
 ["SERVER.0x100128f0"]
 size = 1463
-toolchain = "msvc6"
+toolchain = "msvc-6.0"
 status = "PROVEN"
 analysis = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 globals = "SERVER 0x100a8c34"
@@ -860,7 +860,7 @@ analysis = "Deserializes all static entities from savegame stream. Reads entity 
 ["SERVER.0x10013b10"]
 size = 1361
 cflags = "/Ox /Gd"
-toolchain = "msvc600sp6"
+toolchain = "msvc-6.0-sp6"
 status = "RELOC"
 analysis = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 62 buildings per player), (2) town records with name, timestamps, flags, population, wealth, 10 resource pairs, 10 production pairs, 4 tax rates, 4 trade routes, reputation, guild standings, 8 event records, political data. Returns 1 on success."
 
@@ -1002,7 +1002,7 @@ status = "RELOC"
 ["SERVER.0x10015950"]
 size = 861
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-toolchain = "msvc600sp6"
+toolchain = "msvc-6.0-sp6"
 status = "RELOC"
 ghidra = "InitGameWorld"
 analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
@@ -1078,7 +1078,7 @@ analysis = "Linear search by object type id within sibling linked list."
 ["SERVER.0x10016680"]
 size = 139
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-toolchain = "msvc6"
+toolchain = "msvc-6.0"
 status = "RELOC"
 
 ["SERVER.0x10016710"]
@@ -1431,7 +1431,7 @@ status = "RELOC"
 ["SERVER.0x1001ad32"]
 size = 164
 cflags = "/O1 /Gd"
-toolchain = "msvc600sp6"
+toolchain = "msvc-6.0-sp6"
 status = "RELOC"
 
 ["SERVER.0x1001ae20"]
