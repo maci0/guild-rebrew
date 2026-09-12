@@ -1,4 +1,4 @@
-/* gm_AllocBuildingContents — allocate a building's contents (components,
+/* gm_AllocRaum — allocate a building's contents (components,
  * resources, producers) for the given building record.
  *
  * Reconstructed from the disassembly at 0x10017c40: NULL guards on the two
@@ -6,7 +6,7 @@
  * object; the entity-type row (`g_entity_type_table + geb[0] * 0x24d`)
  * scanned from field 0x23 for the caller's component id; the 0x40-slot
  * component loop with the type 2/6 early-out and the 0x8000 flag
- * sub-allocation; two gm_StartEntityQuery walks (filter 0x2a, then
+ * sub-allocation; two gm_ff_Objekt walks (filter 0x2a, then
  * 2/0x116/6) each clamping fields 0x1c/0x1d; the 0x92..0x97 / 0x2db
  * building-type branch with the seasonal slot table at
  * g_slot_array + season * 0x2a90; and the 0x80-stride producer loop with
@@ -68,7 +68,7 @@
  * g_query_limit (0x10035450), g_current_season (0x10035439), g_slot_array
  * (0x1009b770) and g_producer_id_table (0x1002dde0), each matching its declaration
  * here.  The masked calls resolve to gm_AllocObjekt (0x10016760),
- * gm_StartEntityQuery (0x10016460), ReportMessage (0x100035c0) and
+ * gm_ff_Objekt (0x10016460), ReportMessage (0x100035c0) and
  * LogMessageInternal (0x10003640) per db/server.dll_functions.csv.  The three
  * message pointers are written as literal addresses and compare `==`, not
  * `~~`; read out of original/server.exe they are 0x100314b8 "gm_AllocRaum():
@@ -90,9 +90,9 @@ extern int g_query_limit;              /* 0x10035450 */
 extern unsigned char g_current_season; /* 0x10035439 */
 
 void* __cdecl gm_AllocObjekt(int, int, int);
-unsigned short* __cdecl gm_StartEntityQuery(int container_id, int arg_count, int first_arg, ...);
+unsigned short* __cdecl gm_ff_Objekt(int container_id, int arg_count, int first_arg, ...);
 
-char* __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
+char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 {
 	char* obj;
 	char* row;
@@ -152,7 +152,7 @@ char* __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
 		i++;
 	}
 
-	query_result = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, 0x2a);
+	query_result = (char*) gm_ff_Objekt(*(int*) (obj + 0x14), 1, 0, 0x2a);
 	if (query_result != NULL) {
 		/* Source field first: the reference loads geb[1]/obj[2] before it
 		 * stores the constant 2 at query_result+0xe (IDX 89/126). */
@@ -167,7 +167,7 @@ char* __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
 		}
 	}
 
-	query_result = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 2, 0, 0x116, 6);
+	query_result = (char*) gm_ff_Objekt(*(int*) (obj + 0x14), 2, 0, 0x116, 6);
 	if (query_result != NULL) {
 		*(int*) (query_result + 6) = *(int*) (obj + 2);
 		*(int*) (query_result + 0xe) = 2;
@@ -183,7 +183,7 @@ char* __cdecl gm_AllocBuildingContents(char* geb, int obj_id)
 	if ((*(unsigned short*) obj >= 0x92 && *(unsigned short*) obj <= 0x97) ||
 	    *(unsigned short*) obj == 0x2db) {
 		slot = (char*) &g_slot_array + (unsigned int) g_current_season * 0x2a90;
-		query_result = (char*) gm_StartEntityQuery(*(int*) (obj + 0x14), 1, 0, 0x116);
+		query_result = (char*) gm_ff_Objekt(*(int*) (obj + 0x14), 1, 0, 0x116);
 		if (query_result != NULL) {
 			query_result[0x1c] = 0xc;
 			query_result[0x1d] = 0;

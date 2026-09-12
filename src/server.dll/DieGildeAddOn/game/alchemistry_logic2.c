@@ -10,10 +10,10 @@ extern char* g_table;
 int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
 int __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl gm_AddOrAccumulateObject(int p1, int p2, int p3);
-int __cdecl gm_RefreshMarketAvailability(int season);
+void __cdecl gm_AddObjekt(int p1, int p2, int p3);
+int __cdecl gm_ObjectsAvailble(int season);
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl gm_DeallocEntity(unsigned int index, int param);
+void __cdecl gm_KillSpieler(unsigned int index, int param);
 void* __cdecl gm_NextEntityQueryMatch(void);
 extern float g_color_scale;
 extern int g_next_object_id;
@@ -47,7 +47,7 @@ typedef struct {
 
 // CFLAGS: /O2 /Gd
 
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
 // FUNCTION: SERVER 0x1000c1e0
 // ahm_ApplyColorComponent
@@ -91,13 +91,13 @@ int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 
 	for (i = 0; i < 6; i++) {
 		if (*(int*) (tgt + 0xc + i * 8) == 0) {
-			query = gm_StartEntityQuery(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
+			query = gm_ff_Objekt(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
 			*(int*) (obj + 0x14) = g_next_object_id;
 			*(int*) (tgt + 0xc + i * 8) = *(int*) (obj + 8);
 			*(int*) (tgt + 0x10 + i * 8) = *(int*) (obj + 0x10);
 			if (query != 0)
-				gm_AddOrAccumulateObject(*(int*) ((char*) query + 2), *(int*) (obj + 8), 2);
-			gm_RefreshMarketAvailability(g_current_season);
+				gm_AddObjekt(*(int*) ((char*) query + 2), *(int*) (obj + 8), 2);
+			gm_ObjectsAvailble(g_current_season);
 			return 1;
 		}
 	}
@@ -129,7 +129,7 @@ int __cdecl ahm_SlotClearMatch(char* data, char* target, char* src)
 	}
 	return 0;
 found:
-	ent = (int) gm_StartEntityQuery(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
+	ent = (int) gm_ff_Objekt(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
 	if (ent) {
 		gm_RemoveObjectByType((void**) (ent + 0x14), *(unsigned int*) (data + 8));
 	}
@@ -221,7 +221,7 @@ int __cdecl ahm_FireEntityAndCleanup(int cmd, int* entity_id_ptr, int parent_rec
 	(void) cmd;
 	entity = (unsigned short*) gm_LookupEntityRecordById(*entity_id_ptr);
 	if (entity != (unsigned short*) 0) {
-		query_result = gm_StartEntityQuery(*(int*) (parent_record + 0x5d), 2, 6, 0, 0xff);
+		query_result = gm_ff_Objekt(*(int*) (parent_record + 0x5d), 2, 6, 0, 0xff);
 		*(int*) (entity + 0xb8) = 0;
 		*(int*) (entity + 0xb6) = 0;
 		slot_iter = (unsigned int*) (entity_id_ptr + 3);
@@ -241,7 +241,7 @@ int __cdecl ahm_FireEntityAndCleanup(int cmd, int* entity_id_ptr, int parent_rec
 			*entity_id_ptr = 0;
 			entity_id_ptr = entity_id_ptr + 1;
 		}
-		gm_DeallocEntity(*entity, 1);
+		gm_KillSpieler(*entity, 1);
 		return 1;
 	}
 	return 0;
@@ -350,7 +350,7 @@ int __cdecl ahm_QueryEntityBuildingType(int arg1)
 	unsigned short* query;
 	int* entry;
 
-	query = gm_StartEntityQuery(*(int*) (arg1 + 0x178), 1, 5);
+	query = gm_ff_Objekt(*(int*) (arg1 + 0x178), 1, 5);
 	while (query != 0) {
 		entry = ahm_LookupEntityInTable(*(unsigned short*) query);
 		if (entry != 0) {

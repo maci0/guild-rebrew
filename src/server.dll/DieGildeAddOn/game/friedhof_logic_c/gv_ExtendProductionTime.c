@@ -13,7 +13,7 @@ extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** 
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 extern int __cdecl fcn_10016ea0(int a, int b, int c);
-extern int __cdecl gm_AddOrAccumulateObject(int a, int b, int c);
+extern int __cdecl gm_AddObjekt(int a, int b, int c);
 extern int __cdecl _ftol(void);
 
 /* Extends a production slot's remaining time: resolves the building's
@@ -65,7 +65,7 @@ int __cdecl gv_ExtendProductionTime(void* building)
 					fcn_10016ea0(obj4, word1, *(int*) ((char*) building + 0x13));
 					word2 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
 					ftol_val = (int) (*(int*) ((char*) building + 0x13) * g_output_share[*(int*) ((char*) building + 0xc)]);
-					gm_AddOrAccumulateObject(*(int*) ((char*) 0x100358a4 + *(unsigned short*) ((char*) entity + 0x27) * 0x21c),
+					gm_AddObjekt(*(int*) ((char*) 0x100358a4 + *(unsigned short*) ((char*) entity + 0x27) * 0x21c),
 					    word2, ftol_val);
 				}
 				return 0;

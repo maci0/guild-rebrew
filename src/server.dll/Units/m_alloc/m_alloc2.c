@@ -257,9 +257,9 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
  * back to the free chain for reuse. */
 
 // FUNCTION: SERVER 0x10006E30
-// m_PoolFree
+// m_pool_free
 
-void __cdecl m_PoolFree(int* pool, int* block)
+void __cdecl m_pool_free(int* pool, int* block)
 {
 	int* slot;
 	int* blk;

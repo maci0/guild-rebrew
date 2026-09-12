@@ -37,7 +37,7 @@
  * which loads msvc6 hoists above the rep movsd (byte [ebp+2] and word [ebp],
  * not the dword [ebp+4]).
  *
- * gm_AddOrAccumulateObject takes the owner id out of rec_a+4 (target loads
+ * gm_AddObjekt takes the owner id out of rec_a+4 (target loads
  * [esp+0x30] with two arguments already pushed), not the to_id parameter.
  */
 
@@ -59,8 +59,8 @@ int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl gm_MapEntityStatRange(int);
 char* __cdecl gm_GetEntityTableEntry(char*);
-void __cdecl gm_AddOrAccumulateObject(int, int, int);
-void __cdecl gm_DeallocEntity(int, int);
+void __cdecl gm_AddObjekt(int, int, int);
+void __cdecl gm_KillSpieler(int, int);
 void __cdecl amt_ClearEntityLinks(char*);
 
 int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
@@ -185,7 +185,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 		obj_type = *(unsigned short*) obj;
 		if (obj_type != 0) {
 			if (g_item_def_table[(obj_type << 6) + obj_type] == 9) {
-				gm_AddOrAccumulateObject(*(int*) (rec_a + 4), obj_type,
+				gm_AddObjekt(*(int*) (rec_a + 4), obj_type,
 					*(int*) (obj + 0xe));
 			}
 		}
@@ -195,7 +195,7 @@ int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 	*(int*) ((char*) 0x10035a48 + chain * 0x21c) = link;
 	*(int*) ((char*) 0x10035a34 + chain * 0x21c) = 4;
 	*(int*) ((char*) 0x10035a68 + chain * 0x21c) = 0;
-	gm_DeallocEntity(*(unsigned short*) rec_b, 0);
+	gm_KillSpieler(*(unsigned short*) rec_b, 0);
 
 	return chain;
 }

@@ -2,7 +2,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-ushort __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
+ushort __cdecl gm_AllocSpieler(uint, int, int, ushort, int, uint, uint, uint);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern int __cdecl rand(void);
@@ -46,7 +46,7 @@ int __cdecl cm_ExCreateCitizen(int cmd, char* result)
 			return 1;
 		}
 	}
-	entity = gm_CreateEntityFromParents(
+	entity = gm_AllocSpieler(
 	    *(unsigned char *) (cmd + 0x14), -1, -1, 0x14, 0,
 	    *(unsigned char *) (cmd + 0x1f), *(unsigned char *) (cmd + 0x20), 0);
 	entity = entity & 0xffff;

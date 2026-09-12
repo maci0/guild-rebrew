@@ -33,7 +33,7 @@ int __cdecl srv_Init(void);
 void __cdecl m_ShutdownAllocator();
 int __cdecl gm_Open(char*, char*);
 int __cdecl srv_CreateListenSocket(int port);
-void __cdecl m_InitPacketPool(int);
+void __cdecl m_init(int);
 int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 int __cdecl srv_SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);

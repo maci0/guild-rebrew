@@ -11,14 +11,14 @@ char s_cm_ChkSellObjekt___Invalid__ziel_1002c854[] = "cm_ChkSellObjekt() Invalid
 char s_cm_ChkSellObjekt___Inventory_vol_1002c810[] = "cm_ChkSellObjekt() Inventory voll";
 char s_cm_ChkSellObjekt___Lager_voll_1002c834[] = "cm_ChkSellObjekt() Lager voll";
 char s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8[] = "cm_ChkSellObjekt() Not enough Credits at destination";
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
 /* Validation handler: checks preconditions for selling an object.
  * Resolves source/destination entities, verifies entity types
  * match, and checks inventory capacity. Logs error on invalid ID
  * or type mismatch. */
 
-extern int __cdecl gm_KannObjektHergestellt(char*, int, int);
+extern int __cdecl gm_eval_SlotVoll(char*, int, int);
 
 // FUNCTION: SERVER 0x1000cbd0
 // cm_ChkSellObjekt
@@ -41,7 +41,7 @@ int __cdecl cm_ChkSellObjekt(char* cmd)
 			return 1;
 		}
 		list_head = t_b ? t_b + 0x5d : (t_d ? t_d + 0x14 : t_a + 0x178);
-		query_result = (char *) gm_StartEntityQuery(*(int *) list_head, 1, 0, *(unsigned short *) (cmd + 0x18));
+		query_result = (char *) gm_ff_Objekt(*(int *) list_head, 1, 0, *(unsigned short *) (cmd + 0x18));
 		if (query_result == 0) {
 			LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x2383, s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4, 8);
 			return 1;
@@ -67,7 +67,7 @@ int __cdecl cm_ChkSellObjekt(char* cmd)
 		} else if (t_d) {
 			slot_index = *(unsigned short *) t_d;
 			if (slot_index == 0x2a || slot_index == 0x116 || slot_index == 0x1dd) {
-				if (gm_KannObjektHergestellt(t_d, *(unsigned short *) (cmd + 0x18), *(int *) (cmd + 0x1f)) < *(int *) (cmd + 0x1f)) {
+				if (gm_eval_SlotVoll(t_d, *(unsigned short *) (cmd + 0x18), *(int *) (cmd + 0x1f)) < *(int *) (cmd + 0x1f)) {
 					LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748, 0x23cd, s_cm_ChkSellObjekt___Lager_voll_1002c834, 8);
 					return 1;
 				}

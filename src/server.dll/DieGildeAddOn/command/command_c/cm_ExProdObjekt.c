@@ -31,7 +31,7 @@ extern char s_cm_ExecProduction___Lager_has_wron_1002cf74[];
 extern char s_cm_ExecProduction___Lager_hat_kein_1002cf48[];
 extern char s_cm_ExProdObjekt___Cannot_produce___1002cf1c[];
 extern char s_cm_ExProdObjekt___Rohstoff_versc_1002cef4[];
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
@@ -76,7 +76,7 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * (3) The second loop is do/while (`production_cap = 0` above the head,
  * counter increment in the tail), which reproduces the target's
  * `lea edi,[edx+0x2e]` head.  Dead ends on this form: moving the reloads
- * below the gm_KannObjektHergestellt call (406), hoisting the call amount
+ * below the gm_eval_SlotVoll call (406), hoisting the call amount
  * (411) or the message type (426, closest) into locals, swapping the two
  * post-loop reloads, swapping the loop-tail statements (994 bytes), an
  * if/else cap clamp (455), inverting the lager 0x2a guard, splitting the
@@ -319,7 +319,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	quantity = *(int*)(msg + 0x16);
 	do {
 		if (material_iter[4] != 0) {
-			obj_entry = (ushort*)gm_StartEntityQuery(*(int*)(lager + 10), 1, 0, (uint)material_iter[4]);
+			obj_entry = (ushort*)gm_ff_Objekt(*(int*)(lager + 10), 1, 0, (uint)material_iter[4]);
 			if (obj_entry != (ushort*)0) {
 				recipe = (char*)gm_GetMsgField((int)lager, (int)obj_entry);
 				if (quantity >= (int)recipe / (int)(uint)*material_iter) {
@@ -336,7 +336,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	} while (loop_count != 0);
 	recipe = recipe_def;
 	saved_quantity = quantity;
-	production_cap = gm_KannObjektHergestellt(
+	production_cap = gm_eval_SlotVoll(
 		(char*)lager,
 		(uint)*(ushort*)(msg + 0x14),
 		(uint)*(ushort*)(recipe_def + 0x36) * quantity
@@ -362,7 +362,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	material_iter = (ushort*)(recipe_def + 0x2e);
 	for (; production_cap < 4; production_cap++, material_iter++) {
 		if (*material_iter != 0) {
-			obj_entry = (ushort*)gm_StartEntityQuery(*(int*)(lager + 10), 1, 0, (uint)*material_iter);
+			obj_entry = (ushort*)gm_ff_Objekt(*(int*)(lager + 10), 1, 0, (uint)*material_iter);
 			if (obj_entry == (ushort*)0) {
 				LogMessageInternal(
 					s_D__Develop_DieGildeAddOn_command_1002c748,
@@ -385,7 +385,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 			}
 		}
 	}
-	material_iter = (ushort*)gm_StartEntityQuery(*(int*)(lager + 10), 1, 0, (uint)*(ushort*)(msg + 0x14));
+	material_iter = (ushort*)gm_ff_Objekt(*(int*)(lager + 10), 1, 0, (uint)*(ushort*)(msg + 0x14));
 	recipe = recipe_def;
 	if (material_iter != (ushort*)0) {
 		*(uint*)(material_iter + 7) = *(int*)(material_iter + 7) + (uint)*(ushort*)(recipe_def + 0x36) * quantity;

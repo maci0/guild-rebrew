@@ -62,11 +62,11 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x10006440 | 306B | inflate_flush | inflate_flush |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006580 | 658B | m_AllocTracked | _m_AllocTracked | /O2 /Gd /G6 /Oy- | FUNCTION/PROVEN | Units/m_alloc/m_alloc_c/m_AllocTracked.c |
 | 0x10006820 | 188B | m_FreeTracked | _m_FreeTracked |  | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
-| 0x100068E0 | 162B | m_InitPacketPool | _m_InitPacketPool | /O2 /Gd /Oy- | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
+| 0x100068E0 | 162B | m_init | _m_init | /O2 /Gd /Oy- | FUNCTION/RELOC | Units/m_alloc/m_alloc.c |
 | 0x10006990 | 612B | m_ReportGroupInfo | _m_ReportGroupInfo |  | FUNCTION/RELOC | Units/m_alloc/m_alloc_c/m_ReportGroupInfo.c |
 | 0x10006C00 | 283B | m_ShutdownAllocator | _m_ShutdownAllocator |  | FUNCTION/RELOC | Units/m_alloc/m_alloc2.c |
 | 0x10006D20 | 270B | m_PoolAlloc | _m_PoolAlloc | /O2 /Gd /Oy- | FUNCTION/PROVEN | Units/m_alloc/m_alloc2.c |
-| 0x10006E30 | 137B | m_PoolFree | _m_PoolFree |  | FUNCTION/RELOC | Units/m_alloc/m_alloc2.c |
+| 0x10006E30 | 137B | m_pool_free | _m_pool_free |  | FUNCTION/RELOC | Units/m_alloc/m_alloc2.c |
 | 0x10006EC0 | 108B | tr_init | _tr_init |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006F30 | 1B | tr_static_init | tr_static_init |  | LIBRARY/EXACT | library_zlib.h |
 | 0x10006F40 | 102B | init_block | init_block |  | LIBRARY/EXACT | library_zlib.h |
@@ -106,7 +106,7 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x1000A2E0 | 96B | cm_ClosePlayerConnection | _cm_ClosePlayerConnection |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
 | 0x1000A340 | 336B | srv_ReceivePacketHeader | _srv_ReceivePacketHeader |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
 | 0x1000A490 | 211B | srv_SendPlayerData | _srv_SendPlayerData |  | FUNCTION/RELOC | DieGildeAddOnServer/server2.c |
-| 0x1000A570 | 750B | srv_ProcessReceiveData | _srv_ProcessReceiveData | /O2 /Gd /Ot | FUNCTION/PROVEN | DieGildeAddOnServer/server_c/srv_ProcessReceiveData.c |
+| 0x1000A570 | 750B | srv_LoadBuf | _srv_LoadBuf | /O2 /Gd /Ot | FUNCTION/PROVEN | DieGildeAddOnServer/server_c/srv_LoadBuf.c |
 | 0x1000A860 | 131B | ProcessSendData | _ProcessSendData | /O2 /Gd /Ow | FUNCTION/RELOC | DieGildeAddOnServer/server_c/ProcessSendData.c |
 | 0x1000A8F0 | 170B | srv_QueueCommandForProcessing | _srv_QueueCommandForProcessing |  | FUNCTION/RELOC | DieGildeAddOnServer/server3.c |
 | 0x1000A9A0 | 170B | cm_QueuePlayerCommand | _cm_QueuePlayerCommand |  | FUNCTION/RELOC | DieGildeAddOnServer/server3.c |
@@ -212,7 +212,7 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x100105B0 | 329B | gv_GetSlotEntry | _gv_GetSlotEntry |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic_c/gv_GetSlotEntry.c |
 | 0x10010710 | 320B | FindSlotEntryFiltered | _FindSlotEntryFiltered |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic_c/FindSlotEntryFiltered.c |
 | 0x10010850 | 370B | gv_SpawnEntities | _gv_SpawnEntities |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic_c/gv_SpawnEntities.c |
-| 0x100109D0 | 832B | gv_AllocField | _gv_AllocField |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic_c/gv_AllocField.c |
+| 0x100109D0 | 832B | gv_AllocGraveyardField | _gv_AllocGraveyardField |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic_c/gv_AllocGraveyardField.c |
 | 0x10010D10 | 570B | gv_UpgradeField | _gv_UpgradeField |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_dump.c |
 | 0x10010F50 | 66B | gv_Free3Fields | _gv_Free3Fields |  | FUNCTION/RELOC | DieGildeAddOn/unknown/gv_Free3Fields.c |
 | 0x10010FA0 | 525B | AssignProductionSlot | _AssignProductionSlot |  | FUNCTION/RELOC | DieGildeAddOn/game/friedhof_logic_c/AssignProductionSlot.c |
@@ -237,7 +237,7 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x10014260 | 892B | srv_RecvGame | _srv_RecvGame |  | FUNCTION/RELOC | DieGildeAddOn/loadsave/loadsave_c/srv_RecvGame.c |
 | 0x100145E0 | 209B | lb_ExPlayerlist | _lb_ExPlayerlist |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
 | 0x100146C0 | 236B | lb_SendLobbyConfig | _lb_SendLobbyConfig |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
-| 0x100147B0 | 670B | lb_HandleLobbyCommands | _lb_HandleLobbyCommands |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands_c/lb_HandleLobbyCommands.c |
+| 0x100147B0 | 670B | lb_ExPlayerHasJoined | _lb_ExPlayerHasJoined |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands_c/lb_ExPlayerHasJoined.c |
 | 0x10014A50 | 157B | lb_BroadcastStateChange | _lb_BroadcastStateChange | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/command/lobby_c/lb_BroadcastStateChange.c |
 | 0x10014AF0 | 247B | fcn_10014af0 | _fcn_10014af0 |  | FUNCTION/RELOC | DieGildeAddOn/command/lobbycommands.c |
 | 0x10014BF0 | 163B | lb_HandleEntitySync | _lb_HandleEntitySync |  | FUNCTION/RELOC | DieGildeAddOn/unknown/lb_HandleEntitySync.c |
@@ -262,19 +262,19 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x10015DC0 | 55B | gm_FindRecordById | _gm_FindRecordById |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10015E00 | 135B | gm_CleanupAllEntities | _gm_CleanupAllEntities |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
 | 0x10015E90 | 211B | gm_ResolveEntityById | _gm_ResolveEntityById |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel.c |
-| 0x10015F70 | 714B | gm_RefreshMarketAvailability | _gm_RefreshMarketAvailability | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/PROVEN | DieGildeAddOn/game/spiel_c/gm_RefreshMarketAvailability.c |
+| 0x10015F70 | 714B | gm_ObjectsAvailble | _gm_ObjectsAvailble | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/PROVEN | DieGildeAddOn/game/spiel_c/gm_ObjectsAvailble.c |
 | 0x10016240 | 72B | gm_FindSlotById | _gm_FindSlotById | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/EXACT | DieGildeAddOn/game/spiel2.c |
 | 0x10016290 | 464B | gm_NextEntityQueryMatch | _gm_NextEntityQueryMatch | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_NextEntityQueryMatch.c |
-| 0x10016460 | 320B | gm_StartEntityQuery | _gm_StartEntityQuery | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_StartEntityQuery.c |
+| 0x10016460 | 320B | gm_ff_Objekt | _gm_ff_Objekt | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_ff_Objekt.c |
 | 0x100165A0 | 37B | gm_AllocateObjectSlot | _gm_AllocateObjectSlot | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_AllocateObjectSlot.c |
 | 0x100165D0 | 155B | gm_RemoveObjectByType | _gm_RemoveObjectByType | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_RemoveObjectByType.c |
 | 0x10016670 | 1B | gm_NoopRet2 | _gm_NoopRet2 | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/EXACT | DieGildeAddOn/game/spiel_c/gm_NoopRet2.c |
 | 0x10016680 | 139B | gm_RemoveLinkedNodeById | _gm_RemoveLinkedNodeById | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_RemoveLinkedNodeById.c |
 | 0x10016710 | 66B | gm_FreeObjectListRecursive | _gm_FreeObjectListRecursive | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_FreeObjectListRecursive.c |
 | 0x10016760 | 1392B | gm_AllocObjekt | _gm_AllocObjekt | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_AllocObjekt.c |
-| 0x10016CD0 | 272B | gm_AddOrAccumulateObject | _gm_AddOrAccumulateObject | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel_dumpD.c |
+| 0x10016CD0 | 272B | gm_AddObjekt | _gm_AddObjekt | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel_dumpD.c |
 | 0x10016DE0 | 186B | gm_SubObjekt | _gm_SubObjekt |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel_dumpD.c |
-| 0x10016EA0 | 211B | gm_SubObjektNoKill | _gm_SubObjektNoKill |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel_dumpD.c |
+| 0x10016EA0 | 211B | gm_SubObjectNoKill | _gm_SubObjectNoKill |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel_dumpD.c |
 | 0x10016F80 | 346B | gm_FindNextFilteredEntity | _gm_FindNextFilteredEntity |  | FUNCTION/PROVEN | DieGildeAddOn/game/spiel_dumpD.c |
 | 0x100170E0 | 304B | gm_StartFilteredEntitySearch | _gm_StartFilteredEntitySearch |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_StartFilteredEntitySearch.c |
 | 0x10017210 | 39B | gm_SearchStruct | _gm_SearchStruct | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel5.c |
@@ -287,11 +287,11 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x10017A70 | 62B | gm_SearchTable67 | _gm_SearchTable67 |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel6.c |
 | 0x10017AB0 | 74B | gm_CheckEntityType | _gm_CheckEntityType | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel6.c |
 | 0x10017B00 | 320B | gm_AssignBuildingOwner | _gm_AssignBuildingOwner |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel6.c |
-| 0x10017C40 | 742B | gm_AllocBuildingContents | _gm_AllocBuildingContents | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_AllocBuildingContents.c |
+| 0x10017C40 | 742B | gm_AllocRaum | _gm_AllocRaum | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_AllocRaum.c |
 | 0x10017F30 | 35B | gm_RemoveObjectWrapper | _gm_RemoveObjectWrapper | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel62.c |
 | 0x10017F60 | 36B | gm_RemoveEntityLink | _gm_RemoveEntityLink |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel62.c |
 | 0x10017F90 | 23B | gm_InitEntityIfValid | _gm_InitEntityIfValid |  | FUNCTION/RELOC | DieGildeAddOn/game/gm_InitEntityIfValid.c |
-| 0x10017FB0 | 278B | gm_DeallocEntity | _gm_DeallocEntity | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel62.c |
+| 0x10017FB0 | 278B | gm_KillSpieler | _gm_KillSpieler | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel62.c |
 | 0x100180D0 | 81B | gm_InitEntitySlots | _gm_InitEntitySlots |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel62.c |
 | 0x10018130 | 32B | gm_IsInRange | _gm_IsInRange |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel62.c |
 | 0x10018150 | 70B | gm_EntityClassCheck | _gm_EntityClassCheck |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel62.c |
@@ -302,7 +302,7 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x100184A0 | 56B | gm_LookupEntityRecordById | _gm_LookupEntityRecordById |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel62.c |
 | 0x100184E0 | 66B | gm_GetEntityTableEntry | _gm_GetEntityTableEntry |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel62.c |
 | 0x10018530 | 800B | gm_ChangePlayerIdentityImpl | _gm_ChangePlayerIdentityImpl | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel_c/gm_ChangePlayerIdentityImpl.c |
-| 0x10018850 | 3689B | gm_CreateEntityFromParents | _gm_CreateEntityFromParents | /DREBREW_ALLOW_NAKED /O2 /Gd | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/spiel_c/gm_CreateEntityFromParents.c |
+| 0x10018850 | 3689B | gm_AllocSpieler | _gm_AllocSpieler | /DREBREW_ALLOW_NAKED /O2 /Gd /Oa /Ow | FUNCTION/SIZE_MISMATCH | DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c |
 | 0x100196C0 | 81B | gm_QueryEntitySum | _gm_QueryEntitySum | /O2 /Gd /DREBREW_ALLOW_NAKED | FUNCTION/RELOC | DieGildeAddOn/game/spiel622.c |
 | 0x10019720 | 396B | gm_CalculateProductionValue | _gm_CalculateProductionValue |  | FUNCTION/PROVEN | DieGildeAddOn/game/spiel622.c |
 | 0x100198B0 | 355B | gm_SumBuildingProductionValues | _gm_SumBuildingProductionValues |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel622.c |
@@ -315,7 +315,7 @@ Coverage: 97.2% of .text section (137434/141382 bytes)
 | 0x10019C60 | 98B | gm_FindEntityByOwner | _gm_FindEntityByOwner |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel622.c |
 | 0x10019CD0 | 48B | gm_GetMsgField | _gm_GetMsgField |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel622.c |
 | 0x10019D00 | 48B | compute_size | _compute_size |  | FUNCTION/EXACT | DieGildeAddOn/game/spiel622.c |
-| 0x10019D30 | 407B | gm_KannObjektHergestellt | _gm_KannObjektHergestellt |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel622.c |
+| 0x10019D30 | 407B | gm_eval_SlotVoll | _gm_eval_SlotVoll |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel622.c |
 | 0x10019ED0 | 395B | gm_CheckInventoryCapacity | _gm_CheckInventoryCapacity |  | FUNCTION/PROVEN | DieGildeAddOn/game/spiel622.c |
 | 0x1001A060 | 97B | gm_EntitySetField | _gm_EntitySetField |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel622.c |
 | 0x1001A0D0 | 32B | gm_RandomMod | _gm_RandomMod |  | FUNCTION/RELOC | DieGildeAddOn/game/spiel622.c |

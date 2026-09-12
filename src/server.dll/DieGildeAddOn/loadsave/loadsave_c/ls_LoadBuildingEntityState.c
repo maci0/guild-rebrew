@@ -8,12 +8,12 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-int __cdecl gv_AllocField(int);
+int __cdecl gv_AllocGraveyardField(int);
 extern void amt_FindEntity26(int);
 extern void amt_FindEntity27(int);
 extern char gm_RandomMod(int);
 extern unsigned char _ftol();
-extern void gm_AddOrAccumulateObject(int, int, int);
+extern void gm_AddObjekt(int, int, int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 int __cdecl ahm_AllocAhmInfo(int building, int slot);
@@ -229,7 +229,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 					if (!ls_ReadVfsDataChecked(esi + 0x65, 0x30, 1, (void*) stream_ctx)) {
 						return 0;
 					}
-					*(int*) (esi + 0x65) = gv_AllocField((int) esi);
+					*(int*) (esi + 0x65) = gv_AllocGraveyardField((int) esi);
 					goto label_10012d72;
 				}
 				if (load_result == 0) {

@@ -16,7 +16,7 @@
  *   if (*(int *)(cmd + 0x10) == 0x636c6572) {
  *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x18));
  *     if (puVar1 != (ushort *)0x0) {
- *       puVar1 = gm_StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
+ *       puVar1 = gm_ff_Objekt(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *       if (puVar1 != (ushort *)0x0) {
  *         return (uint)(g_current_year - *(int *)(puVar1 + 0x14) < 2);
  *       }
@@ -25,7 +25,7 @@
  *   else if (*(int *)(cmd + 0x10) == 0x62757920) {
  *     puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x18));
  *     if (puVar1 != (ushort *)0x0) {
- *       puVar1 = gm_StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
+ *       puVar1 = gm_ff_Objekt(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *       if (puVar1 != (ushort *)0x0) {
  *         iVar2 = 0;
  *         puVar1 = puVar1 + 0xe;
@@ -47,7 +47,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 #ifdef __clang__
@@ -70,7 +70,7 @@ int __cdecl cm_ChkElectionOrTrade(int cmd)
 	if (*(int*) (cmd + 0x10) == 0x636c6572) {
 		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x18));
 		if (entity != (ushort*) 0x0) {
-			entity = gm_StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
+			entity = gm_ff_Objekt(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
 			if (entity != (ushort*) 0x0) {
 				return (int) (g_current_year - *(int*) (entity + 0x14) <= 1);
 			}
@@ -79,7 +79,7 @@ int __cdecl cm_ChkElectionOrTrade(int cmd)
 	else if (*(int*) (cmd + 0x10) == 0x62757920) {
 		entity = gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x18));
 		if (entity != (ushort*) 0x0) {
-			entity = gm_StartEntityQuery(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
+			entity = gm_ff_Objekt(*(int*) ((int) entity + 0x5d), 2, 6, 0, 300);
 			if (entity != (ushort*) 0x0) {
 				cmd = *(int*) (cmd + 0x1c);
 				idx = 0;

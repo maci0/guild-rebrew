@@ -28,7 +28,7 @@
  *   if (*(int *)(cmd + 0x10) != -1) {
  *     iVar2 = gm_GetFieldByType((char *)cmd,*(int *)(cmd + 0x10));
  *     *(int *)(cmd + 0x10) = iVar2;
- *     pvVar1 = gm_AddOrAccumulateObject
+ *     pvVar1 = gm_AddObjekt
  *                        (iVar2,(uint)*(ushort *)
  *                                      (&g_entity_slot_table +
  *                                      (uint)*(byte *)(cmd + 0x1c) * 0x2f4),
@@ -46,7 +46,7 @@
 
 #include "../command_internal.h"
 
-void* __cdecl gm_AddOrAccumulateObject(int, unsigned int, int);
+void* __cdecl gm_AddObjekt(int, unsigned int, int);
 
 extern unsigned int g_entity_slot_table[];
 
@@ -59,7 +59,7 @@ extern unsigned int g_entity_slot_table[];
 
 /* Execution handler: transfers currency between two entities.
  * Subtracts from source (cmd+0x14) via gm_SubObjekt and adds
- * to destination (cmd+0x10) via gm_AddOrAccumulateObject.
+ * to destination (cmd+0x10) via gm_AddObjekt.
  * Currency type is indexed from g_entity_slot_table. Returns 1
  * if subtraction fails (insufficient funds). */
 
@@ -88,7 +88,7 @@ int __cdecl cm_ExTransferCurrency(int cmd, char* result)
 	if (*(int*) (cmd + 0x10) != -1) {
 		field_result = gm_GetFieldByType((char*) cmd, *(int*) (cmd + 0x10));
 		*(int*) (cmd + 0x10) = field_result;
-		entity_ptr = gm_AddOrAccumulateObject(
+		entity_ptr = gm_AddObjekt(
 			field_result,
 			(unsigned int) *(unsigned short*) ((char*) g_entity_slot_table +
 											   (unsigned int) *(unsigned char*) (cmd + 0x1c) * 0x2f4),

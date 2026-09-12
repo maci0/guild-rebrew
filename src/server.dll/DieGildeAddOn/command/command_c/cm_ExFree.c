@@ -36,7 +36,7 @@ int __cdecl cm_ExFree(int cmd, char* result)
 			LogMessageInternal((char*) 0x1002c748, 0x2a21, (char*) 0x1002cc3c, 1);
 			return 1;
 		}
-		gm_DeallocEntity((unsigned short) *(unsigned short*) static_rec, 1);
+		gm_KillSpieler((unsigned short) *(unsigned short*) static_rec, 1);
 	}
 	if (result != 0) {
 		*result = 1;

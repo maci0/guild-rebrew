@@ -18,7 +18,7 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
 
 /* Entity lifecycle (local externs) */
 /* Network functions (local externs — signatures differ from net.h) */
-int __cdecl srv_ProcessReceiveData(void);
+int __cdecl srv_LoadBuf(void);
 int __cdecl srv_ReceivePacketHeader(unsigned int* conn);
 typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
@@ -28,7 +28,7 @@ extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 extern int srv_ReceivePacketHeader(unsigned int* conn);
 extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
 
-/* srv_ProcessReceiveData: drains the receive buffers of all connected
+/* srv_LoadBuf: drains the receive buffers of all connected
  * player slots. For each connected slot, loops calling
  * srv_ReceivePacketHeader; when a full CommandPacket arrives, validates
  * the connection state flags (0x80 = packet pending) and dispatches:
@@ -543,7 +543,7 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * residual clusters. */
 
 
-int __cdecl srv_ProcessReceiveData(void)
+int __cdecl srv_LoadBuf(void)
 {
 	char logbuf_hi[256];
 	char logbuf_lo[256];

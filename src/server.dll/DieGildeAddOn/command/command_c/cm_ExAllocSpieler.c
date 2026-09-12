@@ -41,7 +41,7 @@
  *       return 1;
  *     }
  *   }
- *   uVar3 = gm_CreateEntityFromParents
+ *   uVar3 = gm_AllocSpieler
  *                     ((uint)*(byte *)(cmd + 0x14),*(int *)(cmd + 0x15),
  *                      *(int *)(cmd + 0x19),(uint)*(ushort *)(cmd + 0x1d),(int)puVar2);
  *   uVar3 = uVar3 & 0xffff;
@@ -61,7 +61,7 @@
  * }
  */
 
-uint __cdecl gm_CreateEntityFromParents(uint, int, int, ushort, int, uint, uint, uint);
+uint __cdecl gm_AllocSpieler(uint, int, int, ushort, int, uint, uint, uint);
 
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[];
 extern char s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c[];
@@ -101,7 +101,7 @@ int __cdecl cm_ExAllocSpieler(int cmd, char* result)
 			return 1;
 		}
 	}
-	entity_index = gm_CreateEntityFromParents(
+	entity_index = gm_AllocSpieler(
 		*(uchar*) (cmd + 0x14),
 		*(int*) (cmd + 0x15),
 		*(int*) (cmd + 0x19),

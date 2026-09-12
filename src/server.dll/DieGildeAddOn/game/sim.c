@@ -2,13 +2,13 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 extern int __cdecl gm_RandomMod(unsigned short range);
-unsigned int __cdecl gm_CreateEntityFromParents(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
+unsigned int __cdecl gm_AllocSpieler(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
 void __cdecl plt_TableLookup(unsigned int a, unsigned short* b);
 unsigned short __cdecl sim_FindAndMatchParents(unsigned int param);
 extern unsigned char g_entity_type_bytes[];
 extern unsigned char g_stat_b_array[];
 extern unsigned char g_slot_table[];
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
 /* Simulation entity records are 0x21c bytes, based at g_slot_table
  * (0x100358a0).  Fields used here: +0x00 slot id (0xffff = free),
@@ -111,7 +111,7 @@ done2:
 		return 0;
 	}
 
-	return (unsigned short) gm_CreateEntityFromParents(
+	return (unsigned short) gm_AllocSpieler(
 		0,
 		*(int*) &g_slot_table[SIM_ENT_OFF(parentA) + 0x4],
 		*(int*) &g_slot_table[SIM_ENT_OFF(parentB) + 0x4],
@@ -181,20 +181,20 @@ unsigned short* __cdecl sim_StartEntityQueryByType(unsigned char* arg1)
 	slot = base + off;
 	cls = *(volatile unsigned char*) slot;
 	if (cls == 1) {
-		result = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x12);
+		result = gm_ff_Objekt(*(int*) (arg1 + 0x5d), 1, 0, 0x12);
 	} else if (cls == 2) {
-		result = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x13);
+		result = gm_ff_Objekt(*(int*) (arg1 + 0x5d), 1, 0, 0x13);
 	} else if (cls == 0x1d) {
-		result = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0xfd);
+		result = gm_ff_Objekt(*(int*) (arg1 + 0x5d), 1, 0, 0xfd);
 	} else if (cls == 0x16) {
-		result = gm_StartEntityQuery(*(int*) (arg1 + 0x5d), 1, 0, 0x120);
+		result = gm_ff_Objekt(*(int*) (arg1 + 0x5d), 1, 0, 0x120);
 	}
 	return result;
 }
 
 /* Creates a new citizen entity with initial stats generated
  * from parent entities. Allocates entity memory, assigns random
- * stats via gm_CreateEntityFromParents, and links to home. */
+ * stats via gm_AllocSpieler, and links to home. */
 
 // FUNCTION: SERVER 0x10015500
 // sim_CreateCitizen
@@ -215,7 +215,7 @@ void* __cdecl sim_CreateCitizen(unsigned char flags, int citizen_type, int paren
 	}
 	else {
 		new_entity_slot =
-			gm_CreateEntityFromParents(citizen_type, -1, -1, parent_id, 0, (unsigned int) stat_a, (unsigned int) stat_b, 2) &
+			gm_AllocSpieler(citizen_type, -1, -1, parent_id, 0, (unsigned int) stat_a, (unsigned int) stat_b, 2) &
 			0xffff;
 	}
 	if (new_entity_slot == 0xffff) {

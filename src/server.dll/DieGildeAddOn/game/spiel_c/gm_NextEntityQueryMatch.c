@@ -51,7 +51,7 @@ extern int g_dispatch_table_a[]; /* 0x1013989c */
 //   unsigned, the target byte compare at 0x100163b6 needs both `!= 0xff`
 //   without the old `(char)` cast and `(unsigned char) tbl[eid]` on the item
 //   read; applying only one scores 350/473 or 331/472. The companion
-//   gm_StartEntityQuery needs the same unsigned declaration (char -> 222/320).
+//   gm_ff_Objekt needs the same unsigned declaration (char -> 222/320).
 //   The shared `lab_nomatch: is_match = 0;` also fixes a real semantic bug:
 //   the target clears cl on both mismatch paths, while an older revision
 //   cleared it only in the max_id arm, so with g_query_flag3 set an owner

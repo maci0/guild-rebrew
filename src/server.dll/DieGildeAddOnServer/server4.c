@@ -33,7 +33,7 @@ int __cdecl srv_Init(void);
 void __cdecl m_ShutdownAllocator();
 int __cdecl gm_Open(char*, char*);
 int __cdecl srv_CreateListenSocket(int port);
-void __cdecl m_InitPacketPool(int);
+void __cdecl m_init(int);
 int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
 int __cdecl srv_SendPlayerData(unsigned int*);
 void __cdecl FreeCommandBuffer(unsigned int*, int);
@@ -360,7 +360,7 @@ void __cdecl srv_LogWinsockError(int err_code)
  * byte string `8d 0c 7f` (lea ecx,[edi+edi*2]) occurs six times in
  * original/Server/server.dll, at 0x10006730, 0x10006929, 0x10006e0d,
  * 0x10008f0c, 0x1000b057 and 0x10017611, inside m_AllocTracked,
- * m_InitPacketPool, m_PoolAlloc, vfs_ReadData, this function and
+ * m_init, m_PoolAlloc, vfs_ReadData, this function and
  * gm_AllocGebaeude.  All six are inline expansions with the identical 22-byte
  * tail (`83 e1 03 2b d9 7e 0c ... 03 cb`), and 0x10008f0c is the memcpy form
  * (rep movsb/movsd/movsb) of the same template, so it belongs to both

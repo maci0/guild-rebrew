@@ -4,7 +4,7 @@ Reverse-engineering notes on how the MSVC 6.0 (CL 12.00) code generator
 assigns `eax/ecx/edx` vs the callee-saved `ebx/esi/edi`, derived from
 minimal probe functions compiled against the real toolchain
 (`rebrew/msvc:6.0-win32`, wine) and byte-compared with the original
-`server.dll` (target `gm_StartEntityQuery` 0x10016460, `gm_NextEntityQueryMatch`
+`server.dll` (target `gm_ff_Objekt` 0x10016460, `gm_NextEntityQueryMatch`
 0x10016290 and friends).
 
 This complements `rebrew/docs/codegen/msvc/msvc-6.md`. Where that doc
@@ -23,7 +23,7 @@ cp /tmp/probeNN.c _v.c
 /home/maci/.local/bin/rebrew-cmake-cl /nologo \
   -I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll \
   /W3 -MT /O2 /Gd /Fo"_v.obj" /Fd. -c _v.c
-objdump -d _v.obj | sed -n '/<_gm_StartEntityQuery>:/,/^$/p'
+objdump -d _v.obj | sed -n '/<_gm_ff_Objekt>:/,/^$/p'
 ```
 
 Reference bytes come from `rebrew asm 0x10016460 --size 200 --json`.
@@ -144,7 +144,7 @@ three separate return sites (entry inline, error separate, check returns
 
 ## Finding 3 — flag variables: first-tested flag gets `dl`, second gets `bl`
 
-`gm_StartEntityQuery` keeps two byte flags in registers. The assignment
+`gm_ff_Objekt` keeps two byte flags in registers. The assignment
 tracks the *dispatch order*, not declaration order:
 
 - case 7 handler: `mov dl, 1` → flag tested **first** (`test dl,dl;
@@ -297,7 +297,7 @@ dispatch register allocation:
 
 `gm_SetBuildingWorkerLimits` (0x10017400, 202B) converts at the head
 (the `push esi; push edi; mov edi,[esp+0xc]` base + interleaved
-`gm_StartEntityQuery` arg pushes + table `lea` chain match byte-for-byte)
+`gm_ff_Objekt` arg pushes + table `lea` chain match byte-for-byte)
 and then diverges in the field chain:
 
 ```c
@@ -460,7 +460,7 @@ Also confirmed while reconstructing: `0x101de450` is a **pointer global**
 `ent+0x22` zero-extends via the `fild qword` pair (`[esp+8]=val,[esp+0xc]=0`),
 so the source type is `unsigned int` → double.
 
-## gm_KannObjektHergestellt (0x10019d30) — CONVERTED, patterns that mattered
+## gm_eval_SlotVoll (0x10019d30) — CONVERTED, patterns that mattered
 
 Byte-identical C achieved (RELOC 407/407) after ~8 iterations. Each of these
 was the deciding factor for one divergence class:
@@ -473,8 +473,8 @@ was the deciding factor for one divergence class:
    callee-saved esi) follows from the arg materialization. A 1-arg call
    drops both the junk push and the early esi load.
 2. **`count = 0` before the call** — the reference zeroes `esi` between the
-   arg pushes and `call gm_StartEntityQuery`; the C must be
-   `count = 0; q = gm_StartEntityQuery(...)` (assignment textually first),
+   arg pushes and `call gm_ff_Objekt`; the C must be
+   `count = 0; q = gm_ff_Objekt(...)` (assignment textually first),
    not `q = ...; count = 0;`.
 3. **Signed limit type** — `int limit` (not `unsigned int`): the reference
    compares with `jl` (signed). The zero-extended byte load
@@ -875,7 +875,7 @@ prelude hits; two-arg param probes `memset(p, n)` / `memset(slot+4, 0,
 asize-4)` (the m_PoolAlloc shape) also plain. The prelude template
 (`lea r,[edi+edi*2]; and r,3; sub ebx,ecx; jle; rep stosb; rep stosd;
 rep stosb`) occurs at exactly 6 target sites — m_AllocTracked 0x10006730,
-InitPacketPool 0x10006929, m_PoolAlloc 0x10006e0d, InitBuildingTypeTable
+m_init 0x10006929, m_PoolAlloc 0x10006e0d, InitBuildingTypeTable
 0x1000b057, gm_AllocGebaeude 0x10017611, plus a memcpy twin (rep movs)
 at ReadVfsData 0x10008f0c — every one in a function that has never
 byte-matched (SIZE_MISMATCH or only PROVEN).
@@ -904,7 +904,7 @@ Measured with `.scratch/mp2/tmpl.py`, `scratch.py`, `libscan.py`:
   home both operands, which is the asm-operand signature.
 
 An `__asm` block naming the two operands as C variables reproduces
-InitPacketPool byte-for-byte (`.scratch/memset_probe/a3.c`). The original
+m_init byte-for-byte (`.scratch/memset_probe/a3.c`). The original
 sources used an asm zero-fill/copy macro here. Project rules forbid asm, so
 these functions stay plain C and rely on `rebrew prove`.
 
@@ -957,7 +957,7 @@ not a constant):
   `shr ecx,2; rep stosd; and ecx,3; rep stosb` form (or `call memset`).
 - Target-wide scan: the prelude template (`lea r,[edi+edi*2]; and r,3;
   sub ebx,ecx; jle; rep stosb; ...; rep stosd; ...; rep stosb`) occurs at
-  exactly 6 sites — m_AllocTracked 0x10006730, InitPacketPool 0x10006929,
+  exactly 6 sites — m_AllocTracked 0x10006730, m_init 0x10006929,
   m_PoolAlloc 0x10006e0d, ReadVfsData 0x10008f0c (a **memcpy** variant:
   `rep movsb/movsd`, src in esi), InitBuildingTypeTable 0x1000b057,
   gm_AllocGebaeude 0x10017611 — all in Finding-19-blocked functions. The
@@ -971,7 +971,7 @@ not a constant):
   The original build's compiler variant (service-pack/custom-build codegen)
   remains the suspect. Ceiling for proper C confirmed at 234/270.
 
-### InitPacketPool (0x100068e0) — re-verified 2026-08-27, same conclusion
+### m_init (0x100068e0) — re-verified 2026-08-27, same conclusion
 
 Non-leaf runtime-count site (count `n*16` kept in ebx across the `malloc`
 call at 0x1001a7f7; 143B compiled vs 162B target, the 19B delta being the
@@ -1054,7 +1054,7 @@ to `jne L_have_req` (error in fall-through, inline epilogue) vs ours
 confirmed: `lea edx,[ecx+ecx*2]; lea edi,[edx*8+base]` for `base + i*24`,
 `test edi,edi; jne` kept even though `base+i*24` is never 0.
 
-## gm_DeallocEntity (0x10017fb0) — FENCED + PROVEN (267/278, scheduling swap)
+## gm_KillSpieler (0x10017fb0) — FENCED + PROVEN (267/278, scheduling swap)
 
 Entity deallocation; C in the #else fence of spiel62.c, PROVEN via
 `rebrew prove` (symbolic equivalence). Findings:
@@ -1114,9 +1114,9 @@ b3[0x3f4]; (2) `SetThreadPriority(GetCurrentThread(), 2)` hoists the
 `push 2` before the GetCurrentThread call (a temp handle fixes the order
 but re-introduces a stack local that shifts the buffers). Other findings:
 - **Deferred cleanup across 4 calls** — `InitializeLogAndErrorHandler`
-  (4 args, via a cast-call against the 1-arg prototype), `InitPacketPool`,
+  (4 args, via a cast-call against the 1-arg prototype), `m_init`,
   `gm_Open` all pop their cdecl args in ONE `add esp,0x18` after gm_Open.
-- **The `0x7fa6` stack-arg reuse**: `InitPacketPool(0x7fa6)`'s push doubles
+- **The `0x7fa6` stack-arg reuse**: `m_init(0x7fa6)`'s push doubles
   as gm_Open's 2nd param — only reproducible by calling gm_Open as a 1-arg
   cast-call (`((int(__cdecl*)(char*))gm_Open)(b1)`); a literal 2-arg call
   emits a second push (+4 bytes).
@@ -1184,7 +1184,7 @@ be used — remains plain naked. Note the resolve-heavy functions
 current symbolic engine; the fence+PROVEN pattern only works for
 resolve-free functions.
 
-## m_PoolFree (0x10006e30) — blocked (pool register role + block order)
+## m_pool_free (0x10006e30) — blocked (pool register role + block order)
 
 Block return to the pool free list; C preserved as a comment in m_alloc2.c
 (best 23/137 with /O2 — size matches). Blocked on: MSVC6 keeps the pool
@@ -1834,7 +1834,7 @@ then byte-match.  (Also: `__declspec(dllimport)` on FreeConsole is needed
 to get the reference's `call dword ptr [__imp__FreeConsole]` IAT form
 instead of a direct `call`.)
 
-## Finding 19 — InitPacketPool (0x100068e0): memset alignment-pass + param-slot spill
+## Finding 19 — m_init (0x100068e0): memset alignment-pass + param-slot spill
 
 The reference memsets the pool with the *alignment-aware* inline form
 (`lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx; jle; rep stosb; rep stosd;
@@ -1999,7 +1999,7 @@ it still stores via `mov`. In-tree best remains the original 64/83.
 The three-way split with the early `mov eax,1` is a scheduler+block-layout
 choice 8168 makes in neither mode.  Kept fenced-naked.
 
-## Finding 25 — m_PoolFree (0x10006e30): block param register + fatal placement
+## Finding 25 — m_pool_free (0x10006e30): block param register + fatal placement
 
 Best C is 133 bytes vs 137 target.  The reference keeps the `block`
 parameter in edx (volatile — its live range spans no call) and RELOADS it
@@ -2039,7 +2039,7 @@ assigns arg1→edx and base→esi (one push instead of two), folds the index
 chain the same way but into eax, and emits `push 0` for the first branch's
 arg3.  Type/base temps, /G6, and the natural forms all normalize to the
 same 130B.  The type*589 index chain (lea 3t; shl 4; +t; lea *3; lea
-[base+*4]) and the four `gm_StartEntityQuery(v,1,0,code)` dispatch calls
+[base+*4]) and the four `gm_ff_Objekt(v,1,0,code)` dispatch calls
 match.  Kept fenced-naked.
 
 ## Finding 28 — AdvanceGameClock (0x100155c0): arg4 preserve vs reload
@@ -2300,7 +2300,7 @@ while passing `&cmd` in the middle of
 the resolve arg pushes (the ref interleaves the store between `push
 ecx` and `push 0`).  The rest of the Ghidra reference converts cleanly:
 the `*cmd == 0x2a || *cmd == 0x116` word compare, the
-`gm_StartEntityQuery(*(int*)(cmd+10), 1, 0, (uint)(ushort)psVar1[10])`
+`gm_ff_Objekt(*(int*)(cmd+10), 1, 0, (uint)(ushort)psVar1[10])`
 call with the `xor edx,edx; mov dx,[esi+0x14]` zero-extend, the
 `*(int*)(puVar3+7) != 1` count check, the
 `gm_RemoveObjectByType((char**)(cmd+10), ...)` call, and the shared
@@ -2481,7 +2481,7 @@ head is byte-identical (4 real args — the 4th is the entity struct; the
 `a == 0x15` selects `[d+0x1cc] |= 0x1000` + `fcn_1000b820` vs `|=
 0x2000` + `fcn_1000b850`; `[d+0xa] = (short)c`), as are the tail float
 stores (1000.0/1.0/12.0/330.0/1000.0), the 5-iteration `fild; fadd` byte
-fill, and the `gm_AddOrAccumulateObject` call.  The blocker is the nested
+fill, and the `gm_AddObjekt` call.  The blocker is the nested
 768x768 fill (`for p = 0x100a9820..0x10139820 step 0x300; for i < 0x300`
 `p[i] = rnd(0x40)-0x20; p2[p-0x100a9820+i] = 0`): MSVC6 strength-reduces
 `i` into a running pointer pair (eliminating the counter), while the
@@ -2566,7 +2566,7 @@ points:
 2. **alignment-pass memset** — the `memset(ptr,0,size)` expands to the
    dest-aligning `lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx; rep stosb;
    rep stosd; ...` form (size spilled to `[ebp-8]`, ptr to `[ebp-4]`).
-   Same unreproducible expansion as InitPacketPool / m_PoolAlloc
+   Same unreproducible expansion as m_init / m_PoolAlloc
    (Finding 19): msvc6 SP6 emits only the plain `shr ecx,2; rep stosd;
    and ecx,3; rep stosb` from any C shape.
 

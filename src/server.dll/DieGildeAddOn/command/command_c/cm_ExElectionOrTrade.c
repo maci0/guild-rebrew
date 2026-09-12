@@ -38,7 +38,7 @@
  *     if (puVar1 == (ushort *)0x0) {
  *       return 1;
  *     }
- *     puVar1 = gm_StartEntityQuery(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
+ *     puVar1 = gm_ff_Objekt(*(int *)((int)puVar1 + 0x5d),2,6,0,300);
  *     if (puVar1 == (ushort *)0x0) {
  *       return 1;
  *     }
@@ -62,7 +62,7 @@
  *     if (puVar1 == (ushort *)0x0) {
  */
 
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 /* Execution handler: processes election or trade transactions.
@@ -87,7 +87,7 @@ int __cdecl cm_ExElectionOrTrade(int cmd, char* result)
 		if (entity == (void*) 0x0) {
 			return 1;
 		}
-		entity = gm_StartEntityQuery(*(int*) ((char*) entity + 0x5d), 2, 6, 0, 0x12c);
+		entity = gm_ff_Objekt(*(int*) ((char*) entity + 0x5d), 2, 6, 0, 0x12c);
 		if (entity == (void*) 0x0) {
 			return 1;
 		}
@@ -110,7 +110,7 @@ int __cdecl cm_ExElectionOrTrade(int cmd, char* result)
 		if (entity == (void*) 0x0) {
 			return 1;
 		}
-		entity = gm_StartEntityQuery(*(int*) ((char*) entity + 0x5d), 2, 6, 0, 0x12c);
+		entity = gm_ff_Objekt(*(int*) ((char*) entity + 0x5d), 2, 6, 0, 0x12c);
 		if (entity == (void*) 0x0) {
 			return 1;
 		}

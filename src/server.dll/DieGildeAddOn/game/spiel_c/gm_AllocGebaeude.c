@@ -5,7 +5,7 @@
  * (0x10cb) failure path; the record header init (type byte, id counter at
  * 0x10030b6c, owner fields 0x25/0x27 from arg2, 0x64 defaults at 0x3d/0x45/
  * 0x5c); the 0x40-component loop with the 0x10016760 sub-allocations and
- * the flag logic; gm_AllocBuildingContents; gm_StartEntityQuery;
+ * the flag logic; gm_AllocRaum; gm_ff_Objekt;
  * gm_SetupEntityQuery / gm_CheckEntityType with the 0x1388 field; and the
  * big building-type switch (jump table at 0x10017890) with its per-type
  * initialization.
@@ -43,7 +43,7 @@
  * downstream of it.
  *
  * Measured and reverted at this body (byte score in parentheses):
- * moving gm_AllocBuildingContents into the loop for prototype types 2 and 6
+ * moving gm_AllocRaum into the loop for prototype types 2 and 6
  * as at 0x1001769d (323, structurally closer but 12 bytes long); a `walk`
  * pointer or in-place `s.record` advance instead of the indexed read (326);
  * `g_item_def_table + idx*0x40 + idx` split addressing (323); switching on
@@ -56,7 +56,7 @@
  *
  * Semantic correction found but NOT adopted, recorded because it is a real
  * behaviour difference rather than a codegen one.  The target has no
- * post-loop gm_AllocBuildingContents call.  It calls it INSIDE the component
+ * post-loop gm_AllocRaum call.  It calls it INSIDE the component
  * loop at 0x100176cd, in the `comp & 0x8000` arm, for prototype types 2 and 6
  * only, with the component index as the second argument
  * (`push eax; push esi; call 0x10017c40`, where eax is `comp & 0x7fff`), and
@@ -83,7 +83,7 @@
  * msvc6 canonicalizes them back to the same `* 0x41` form.  A single named
  * `0x64` stored to the 0x3d/0x45/0x5c triple, to match the target's one
  * `mov eax,0x64` feeding three stores, is inert on alignment.  A plain `q`
- * local and a goto-based tail for the gm_StartEntityQuery chain are both
+ * local and a goto-based tail for the gm_ff_Objekt chain are both
  * inert structurally (582/226, unchanged) and lose positional score.
  *
  * Jump table re-verified against the PE (pefile, .scratch/l2-alloc/dumpva.py)
@@ -103,7 +103,7 @@
  * 1082, and the dispatch itself still scores 0/30 because the 34-byte
  * block-fill prelude at 0x10017609 sits between the head and the switch and
  * shifts everything after it).  Not adopted for the same reason as the
- * gm_AllocBuildingContents correction below: this body's object is already
+ * gm_AllocRaum correction below: this body's object is already
  * exactly 1078, so any growth reads as a regression.
  *
  * Status note: `rebrew test` and `rebrew verify` report STUB, and the
@@ -122,15 +122,15 @@
 
 extern int g_query_limit;
 void* __cdecl gm_AllocObjekt(int, int, int);
-char* __cdecl gm_AllocBuildingContents(char*, int);
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+char* __cdecl gm_AllocRaum(char*, int);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 int __cdecl gm_CheckEntityType(unsigned char*);
 void* __cdecl gm_SearchStruct(void); /* 0x10017210 */
 void* __cdecl memset(void* dest, int c, unsigned int size);
 void* __cdecl m_AllocTracked(unsigned int size, const char* tag);
-int __cdecl gv_AllocField(char* geb);
+int __cdecl gv_AllocGraveyardField(char* geb);
 void __cdecl gv_SpawnEntities(char* geb, int param);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char* geb);
 int __cdecl gm_GetBuildingTypeCategory(int btype);
@@ -223,8 +223,8 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 			}
 		}
 	}
-	gm_AllocBuildingContents(geb, *(int*) (geb + 1));
-	s.record = (char*) gm_StartEntityQuery(*(int*) (geb + 0x5d), 1, 4, 2);
+	gm_AllocRaum(geb, *(int*) (geb + 1));
+	s.record = (char*) gm_ff_Objekt(*(int*) (geb + 0x5d), 1, 4, 2);
 	if (s.record != NULL) {
 		while (*(unsigned short*) s.record == 0xfd) {
 			s.record = (char*) gm_NextEntityQueryMatch();
@@ -307,7 +307,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	case 0x48:
 	case 0x49:
 	case 0x4a:
-		*(int*) s.dest = gv_AllocField(geb);
+		*(int*) s.dest = gv_AllocGraveyardField(geb);
 		gv_SpawnEntities(geb, 3);
 		break;
 	case 0x4b:

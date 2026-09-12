@@ -2,7 +2,7 @@
 
 Last verify: 278/280 passed, 2 failed (0x100093a0 ServerMainThread, object
 size 2434 = the target's but the bytes differ; 0x10018850
-gm_CreateEntityFromParents 3673 vs 3689).
+gm_AllocSpieler 3673 vs 3689).
 Goal requires 280/280 with inline asm only for 1-5 byte padding.
 
 ## gm_Open back to RELOC (2026-09-12)
@@ -257,7 +257,7 @@ not decompiler temporaries.  Some audit hits are struct members (`fc` in
 and stay: renaming a field would desynchronise its accesses.
 
 Renamed in 30 files: aemter, spiel622, alchemistry_logic2/3, spiel_dumpD,
-gv_ExAllocGraveyardWorker, gv_AllocField, gv_SpawnEntities, cm_ChkChangeBits,
+gv_ExAllocGraveyardWorker, gv_AllocGraveyardField, gv_SpawnEntities, cm_ChkChangeBits,
 cm_ChkChangeAttribute, cm_ChkJoinLeaveElection, cm_ExJoinLeaveElection,
 cm_ChkSellObjekt, cm_ExSimSpecialAction, cm_ExChangeDesire, cm_ExChangeFloat,
 cm_ExClearLagerslot, cm_ExAllocWarEvent, cm_ExAllocClientSpieler,
@@ -265,10 +265,10 @@ cm_GetBuildingStatCount, cm_ExModifyStat, cm_ExMoveObjekt,
 cm_ExRemoveLinkedObject, amsg_exit, crt_heap, vfs4, vfs_OpenStream,
 check_header, CrashDumpUnhandledExceptionFilter, InitializeLogAndErrorHandler,
 plant, loadsave2, loadsave3, spiel, spiel5, spiel6, spiel62,
-gm_CreateEntityFromParents, gm_AllocBuildingContents, gm_InitObjektHersteller,
-gm_RefreshMarketAvailability, InitNewDynastyEntity, lb_HandleEntitySync,
-lb_HandleLobbyCommands, lobbycommands, m_alloc2, ProcessSendData, server4,
-srv_ProcessReceiveData.
+gm_AllocSpieler, gm_AllocRaum, gm_InitObjektHersteller,
+gm_ObjectsAvailble, InitNewDynastyEntity, lb_HandleEntitySync,
+lb_ExPlayerHasJoined, lobbycommands, m_alloc2, ProcessSendData, server4,
+srv_LoadBuf.
 
 Closed since (all renamed, re-tested RELOC/NEAR_MATCHING unchanged):
 - `server2.c` — the three `p` locals are `slot_walk` (the struct-declaration
@@ -420,7 +420,7 @@ unfinished work; `rebrew todo` reports the same two and nothing else.
 
 | VA | Name | Size | State | Wall |
 |---|---|---|---|---|
-| 0x10018850 | gm_CreateEntityFromParents | 3689 | obj 3673, 527 B matched; 661/1056 insns identical (order-based diff); 61 unmatched block shapes of 225 | The `__ftol` call form was wrong: the reference passes the operand in st(0) (its only `sub esp` is the prologue) while we pushed 8 bytes per site, and that is what held the object at +5 bytes; the sites are casts now.  Both sympathy-matrix loops also reload `*(unsigned short*) slot` per write in the reference, so those reads are volatile, and the no-parent loop needed the two index locals first.  That took the object to 3690 (one byte over) and the order-based alignment from 617 to 650 of 1056. The stat guard then had to compare in single precision - the reference spills 32 bits (`fst dword [esp+0x24]`) before `fcomp dword [ebp+0x20]` - which gives 3678, 652/1056 and 72 unmatched blocks, and improves every structural metric including `rebrew test`'s own score (504 -> 514) while moving away from the target size.  Judge gm by unmatched block shapes and order-based alignment, never by |size - target|.  The reloc-masked figure (543, was 570) and the byte-offset score (504, was 752) both regress and should NOT be used to judge a gm variant: the reloc-masked metric is only sound when the candidate's reloc layout matches the target's, and this file's own note records that byte-offset alignment reads structural where the schedule merely differs.  `rebrew prove` returns "no terminal states" at 200 s / `--loop-bound 1` (path explosion over the 0x300 loops), so PROVEN is not available either. |
+| 0x10018850 | gm_AllocSpieler | 3689 | obj 3673, 527 B matched; 661/1056 insns identical (order-based diff); 61 unmatched block shapes of 225 | The `__ftol` call form was wrong: the reference passes the operand in st(0) (its only `sub esp` is the prologue) while we pushed 8 bytes per site, and that is what held the object at +5 bytes; the sites are casts now.  Both sympathy-matrix loops also reload `*(unsigned short*) slot` per write in the reference, so those reads are volatile, and the no-parent loop needed the two index locals first.  That took the object to 3690 (one byte over) and the order-based alignment from 617 to 650 of 1056. The stat guard then had to compare in single precision - the reference spills 32 bits (`fst dword [esp+0x24]`) before `fcomp dword [ebp+0x20]` - which gives 3678, 652/1056 and 72 unmatched blocks, and improves every structural metric including `rebrew test`'s own score (504 -> 514) while moving away from the target size.  Judge gm by unmatched block shapes and order-based alignment, never by |size - target|.  The reloc-masked figure (543, was 570) and the byte-offset score (504, was 752) both regress and should NOT be used to judge a gm variant: the reloc-masked metric is only sound when the candidate's reloc layout matches the target's, and this file's own note records that byte-offset alignment reads structural where the schedule merely differs.  `rebrew prove` returns "no terminal states" at 200 s / `--loop-bound 1` (path explosion over the 0x300 loops), so PROVEN is not available either. |
 | 0x100093a0 | ServerMainThread | 2434 | obj 2434 (exact), 1343 B positional; 582/627 insns aligned under the reloc-masked metric | The "no C89 lever" verdict this row used to carry was **wrong** and is retracted.  Two levers move it.  (1) Loop **form**: a `do {} while` whose single-condition body ends in a `goto` compiles to a rotated, test-duplicated loop; the equivalent top-tested `while` carrying the same body and `goto` compiles to the target's single-test shape.  Applied to the host-slot search, the transfer scan and two others.  It is loop-specific, not universal: the pending-sync loop regresses and `process_pending_sync` is neutral, so each conversion must be measured.  (2) Operand **width**: `((host_flags_word & 8) ? 7 : 0) + 2` is byte-width in the target; the `? 9 : 2` spelling keeps the expression `unsigned char` and reproduces it.  Reading the sync-packet clock words into locals first (the target hoists all three loads) takes the object from 2436 to exactly the target's 2434.  Sound-metric alignment 558 -> 582 of 627, hunks 47 -> 36 (27 scheduling, 1 operand, 8 substitution); the instruction count now matches exactly, 627/627.  Flags, declaration order, TU composition, loop spelling and GA mutations are all swept and inert.  `rebrew prove` still returns "no terminal states" (420 s, `--loop-bound 1`). |
 
 `scripts/zlibcheck.py` is the reference measurement: masking the byte ranges
@@ -431,7 +431,7 @@ numbers in this file should not be compared with them.
 
 `scripts/seqdiff.py` produces those counts.  `rebrew diff` aligns by byte
 offset, so a 1-4 byte size difference desynchronises it and every later
-instruction reads as structural (973 reported for gm_CreateEntityFromParents
+instruction reads as structural (973 reported for gm_AllocSpieler
 against 663 by sequence alignment, and 67 exact instructions against 614).
 
 The 16 SIZE_MISMATCH rows and the exit 0x1001a670 STUB that earlier revisions of
@@ -457,7 +457,7 @@ this file listed are resolved (exit is RELOC under /O1).
   deltas as per-site locators: all four were built, all four oscillate, and
   each was spot-checked against identical code.  The GA is also unusable here
   - its score ranks a 2433-byte result above a 2434-byte one.
-- gm_CreateEntityFromParents: 3678 B vs the target's 3689, 1049 vs 1056
+- gm_AllocSpieler: 3678 B vs the target's 3689, 1049 vs 1056
   instructions, 652/1056 order-based alignment, **72 unmatched block shapes of
   225**.  Two real corrections landed: the `__ftol` call convention (the
   reference passes its operand in st(0), so our pushes were spurious and were
@@ -484,7 +484,7 @@ block-fill site:
 |---|---|---|
 | `server4.c:448` | srv_InitBuildingTypeTable | 0x1000b040 |
 | `m_alloc2.c:231` | m_PoolAlloc | 0x10006d20 |
-| `m_alloc.c:220` | InitPacketPool | 0x100068e0 |
+| `m_alloc.c:220` | m_init | 0x100068e0 |
 
 All three emit the original's 24-byte zero-fill prelude (`lea ecx,[edi+edi*2]` /
 `and 3` / `sub ebx,ecx` / `jle` / `rep stosb` / `mov ecx,ebx` / `and ebx,3` /
@@ -494,7 +494,7 @@ vc6 C spelling (docs/msvc6-allocator.md Finding 19).  Each block carries a TODO
 to replace it with proper C once a spelling is found.
 
 No other inline asm exists.  `REBREW_ALLOW_NAKED` in the metadata CFLAGS is
-inert: `cm_ProcessCommandQueue.c`, `gm_RefreshMarketAvailability.c` and `aemter.c`
+inert: `cm_ProcessCommandQueue.c`, `gm_ObjectsAvailble.c` and `aemter.c`
 carry the define but contain no `__asm` and no `naked`.
 
 ## Build/tooling state (2026-08-21)
@@ -1076,7 +1076,7 @@ RESULT: reccmp 88.71 -> 89.10%; the inflate/trees region now drifts by a
 UNIFORM +32 (from inflate_blocks being 32B short after the alloc patch) and
 the m_alloc/trees area by +32/-592/+1296. NEXT: (1) inflate_blocks -32 delta
 vs the original; (2) trees.c half-1 is ~1264B oversized (statics not
-inlined); (3) m_alloc.c split (ShutdownMemoryAllocator..m_PoolFree are a
+inlined); (3) m_alloc.c split (ShutdownMemoryAllocator..m_pool_free are a
 separate TU in the original, after ReportMemoryGroupInfo).
 
 ## infblock/m_alloc convergence (2026-08-22) — aligned 36 -> 71, reccmp 89.24%
@@ -1090,7 +1090,7 @@ separate TU in the original, after ReportMemoryGroupInfo).
   inside, and `#endif` must be on its OWN line — MSVC6 ignores `}#endif`
   glued directives (C1004).
 - m_alloc.c split (m_alloc.c / m_alloc2.c) + the stale-marker bug fixed in
-  m_alloc2.c; m_FreeTracked+InitPacketPool replaced with a two-function
+  m_alloc2.c; m_FreeTracked+m_init replaced with a two-function
   fenced dump (C was 704B over the original's 368B).
 
 RESULT: 71 aligned (17.19%) — everything 0x10004b80..0x10007e40
@@ -1108,7 +1108,7 @@ then the CRT block, then data/BSS.
   + _tr_tally; the whole trees half-1 (5376B) now aligns exactly.
 - Anchor sweep: 12 more unanchored `_emit` dump files got their
   `// FUNCTION:` headers (ProcessReceiveData, ExecuteOfficeAssignment,
-  ls_Load*, cm_Ex*, gm_CreateEntityFromParents, ahm_ExAllocAlchemist, ...).
+  ls_Load*, cm_Ex*, gm_AllocSpieler, ahm_ExAllocAlchemist, ...).
 - server.c split at srv_Init (exit_handler/Init/Exit stay; server2.c =
   srv_Init..); OpenVfsStream + ServerMainThread dumps anchored.
 - ReadVfsCompressed dumped (C was 480B over); vfs3.c split into vfs3
@@ -1146,7 +1146,7 @@ extractor later if verify-based promotion matters.
 ## ahm/aemter convergence (2026-08-22) — 112 -> 198 aligned (46.7%), reccmp 89.58%
 
 - ahm_ResetEntityState+ahm_CheckFlag dumped (C was 656B over);
-  alchemistry_logic.c split 3-way with the shared decl (gm_StartEntityQuery)
+  alchemistry_logic.c split 3-way with the shared decl (gm_ff_Objekt)
   restored to the split headers; the empty header file deleted (it carried a
   stale marker into the unknown bucket).
 - amt_fio_LoadAemter dumped (the uniform +656 root) — the whole aemter/
@@ -1169,7 +1169,7 @@ then the CRT region, then data/BSS.
   parked at 0x10018b00).
 
 REMAINING: the ls/lb/sim region (ls_LoadGraveyardData +16, ls_LoadSavegameHeader
-+800, lb_HandleLobbyCommands +1264, ... — same per-function dump loop), then
++800, lb_ExPlayerHasJoined +1264, ... — same per-function dump loop), then
 the CRT block, then data/BSS.
 
 ## loadsave region (2026-08-22) — 220 -> 227 aligned (55.5%)
@@ -1178,7 +1178,7 @@ the CRT block, then data/BSS.
   (LoadGraveyardData/InitNewDynastyEntity/ReadVfsDataChecked) dumped as a
   3-function TU; loadsave.c split into loadsave2 (LoadExistingEntities) and
   loadsave3 (ls_ID2Ptr) — both hit the stale-marker bug (deleted line 43).
-- gm_RefreshMarketAvailability/gm_StartEntityQuery/gm_AllocObjekt got their
+- gm_ObjectsAvailble/gm_ff_Objekt/gm_AllocObjekt got their
   missing `// FUNCTION:` anchors (C files with no _emit — the emit-only sweep
   missed them).
 
@@ -1191,7 +1191,7 @@ then the lb block, the CRT block, and data/BSS.
 - spiel.c split 6-way at the gm-dump boundaries (split_tu.py, VAs:
   0x10016240/0x100165A0/0x10016cd0/0x10017210/0x10017910) + spiel6 -> spiel62
   (0x10017f30). The mega-TU was swallowing the separately anchored gm dumps.
-- gm_AllocGebaeude/gm_AllocBuildingContents dumped (were tiny gen'd
+- gm_AllocGebaeude/gm_AllocRaum dumped (were tiny gen'd
   forwarding wrappers, originals are 1088B/752B of real code).
 - gm_AllocObjekt dumped — the uniform +16 root (C 16B over). The whole gm
   block snapped into alignment (+16 -> 261 aligned).
@@ -1212,7 +1212,7 @@ NEXT: gm_ChangePlayerIdentityImpl (+6464 — spiel62 fragment), the lb block
 - THE ENTIRE GAME REGION 0x10001000..0x1001a110 now aligns.
 
 REMAINING:
-1. The lb block (lb_HandleLobbyCommands +1248 / lb_* -672 — a TU split or C
+1. The lb block (lb_ExPlayerHasJoined +1248 / lb_* -672 — a TU split or C
    delta in the lobby region).
 2. THE CRT BLOCK — now the dominant gap: our LIBCMT extraction burst lands
    +2164..+46449 off the original's contiguous CRT region. The LIB is

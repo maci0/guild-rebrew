@@ -5,7 +5,7 @@
 
 extern char s_cm_ExClearLagerslot___Invalid__L_1002d088[];
 extern char s_cm_ExClearLagerslot___Lager_has_n_1002d054[];
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 /* Execution handler: clears an inventory slot of a warehouse-like
@@ -41,7 +41,7 @@ int __cdecl cm_ExClearLagerslot(short* cmd, uchar* result)
 		return 1;
 	}
 	if ((*resolved == 0x2a) || (*resolved == 0x116)) {
-		query_result = gm_StartEntityQuery(*(int*) ((char*) resolved + 0x14), 1, 0,
+		query_result = gm_ff_Objekt(*(int*) ((char*) resolved + 0x14), 1, 0,
 		                        (uint) (ushort) cmd[0x14 / 2]);
 		if (query_result == 0) {
 			return 1;

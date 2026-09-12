@@ -15,8 +15,8 @@ extern char g_error_msg_sell_failed[];
 short* __cdecl gm_ResolveParentEntity(short*);
 int __cdecl compute_size(char*, int);
 int __cdecl gm_RemoveObjectWrapper(int, uint);
-void* __cdecl gm_AddOrAccumulateObject(int, uint, int);
-void* __cdecl gm_AllocBuildingContents(char*, uint);
+void* __cdecl gm_AddObjekt(int, uint, int);
+void* __cdecl gm_AllocRaum(char*, uint);
 int __cdecl sprintf(char*, const char*, ...);
 
 extern char s_cm_ExSellObjekt___Invalid__quell_1002cec4[];
@@ -28,7 +28,7 @@ extern char s_cm_ExSellObjekt___Lager_voll_1002cdac[];
 extern char s_cm_ExSellObjekt___Not_enough_Cre_1002cd78[];
 extern char s_cm_ExSellObjekt____gm_AllocRaum_f_1002ccc0[];
 extern char s_cm_ExSellObjekt____gm_AllocObjek_1002cce8[];
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
@@ -162,7 +162,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			container_ptr = (char**)(source_static_entity + 0xbc);
 			source_container_ptr = container_ptr;
 		}
-		dest_object = (ushort*)gm_StartEntityQuery((int)*container_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
+		dest_object = (ushort*)gm_ff_Objekt((int)*container_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
 		if (dest_object == (ushort*)0) {
 			sprintf(
 				log_buffer,
@@ -231,7 +231,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				entity_type == 0x1dc || entity_type == 0x116) {
 				dest_dynamic_entity = resolved_dynamic;
 			check_producible:
-				resolve_result = gm_KannObjektHergestellt(
+				resolve_result = gm_eval_SlotVoll(
 					(char*)resolved_dynamic,
 					(uint)*(ushort*)(cmd + 0x18),
 					*(int*)(cmd + 0x1f)
@@ -252,7 +252,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		if (*(g_unknown_1de450 + (uint)*(ushort*)(cmd + 0x18) * 0x41) == '\x1d') {
 			dest_game_object = (ushort*)0;
 		} else {
-			dest_game_object = (ushort*)gm_StartEntityQuery(*linked_list_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
+			dest_game_object = (ushort*)gm_ff_Objekt(*linked_list_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
 		}
 		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
 			resolve_result = gm_QueryEntitySum(*(int*)(dest_owner_entity + 0xbc), cmd[0x1e]);
@@ -327,7 +327,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			}
 		}
 		if (*(int*)(cmd + 0x23) != 0) {
-			gm_AddOrAccumulateObject(
+			gm_AddObjekt(
 				*(int*)(source_owner_entity + 2),
 				(uint) (unsigned short) g_entity_slot_table[(unsigned char) cmd[0x1e] * 189],
 				*(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f)
@@ -360,7 +360,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e45, g_error_msg_sell_failed, 8);
 					return 1;
 				}
-				dest_object = (ushort*)gm_AllocBuildingContents(dest_existing_entity, (uint)*(ushort*)(cmd + 0x18));
+				dest_object = (ushort*)gm_AllocRaum(dest_existing_entity, (uint)*(ushort*)(cmd + 0x18));
 				if (dest_object == (ushort*)0) {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e39, "cm_ExSellObjekt(): gm_AllocRaum failed", 8);
 					return 1;

@@ -16,7 +16,7 @@
  *
  *   puVar1 = gm_StartFilteredEntitySearch(1,1,*(undefined4 *)(cmd + 0x10));
  *   if (puVar1 != (ushort *)0x0) {
- *     puVar2 = gm_StartEntityQuery(0,2,7,4,0x1d);
+ *     puVar2 = gm_ff_Objekt(0,2,7,4,0x1d);
  *     while (puVar2 != (ushort *)0x0) {
  *       if (*(int *)(puVar2 + 0xe) == *(int *)((int)puVar1 + 1)) {
  *         gm_RemoveEntityLink((int)puVar2);
@@ -52,7 +52,7 @@
 
 extern int g_query_state_a0c[];
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
-unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
+unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 /* Execution handler: destroys a building entity. Resolves
@@ -77,7 +77,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 		return 1;
 	}
 
-	match = gm_StartEntityQuery(0, 2, 7, 4, 0x1d);
+	match = gm_ff_Objekt(0, 2, 7, 4, 0x1d);
 	while (match != (ushort*) 0x0) {
 		if (*(int*) (match + 0xe) == *(int*) ((int) building + 1)) {
 			gm_RemoveEntityLink((int) match);

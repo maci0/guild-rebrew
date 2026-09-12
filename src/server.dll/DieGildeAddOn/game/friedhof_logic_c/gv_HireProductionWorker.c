@@ -16,7 +16,7 @@ extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** 
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, int d, int e);
 extern int __cdecl fcn_10016ea0(int a, int b, int c);
-extern int __cdecl gm_AddOrAccumulateObject(int a, int b, int c);
+extern int __cdecl gm_AddObjekt(int a, int b, int c);
 extern int __cdecl _ftol(void);
 
 int __cdecl gv_HireProductionWorker(void* req)
@@ -72,7 +72,7 @@ int __cdecl gv_HireProductionWorker(void* req)
 		fcn_10016ea0(*(int*) ((char*) entity2 + 4), word1, *(int*) ((char*) req + 0x13));
 		word2 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
 		ftol_val = (int) (*(int*) ((char*) req + 0x13) * g_output_share[*(int*) ((char*) req + 0xc)]);
-		gm_AddOrAccumulateObject(*(int*) ((char*) 0x100358a4 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c),
+		gm_AddObjekt(*(int*) ((char*) 0x100358a4 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c),
 		    word2, ftol_val);
 	}
 	return 0;
