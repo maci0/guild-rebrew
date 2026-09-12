@@ -57,6 +57,35 @@ With those in place the delta is a single **+16** from 0x10002fd0
 (EmitCrashModuleLine) through 0x100067f0 — every function in the first 40% of
 `.text` links exactly where the reference has it, once CrashDump is fixed.
 
+## The six block-fill prelude sites (2026-09-13) — three are missing
+
+`docs/msvc6-c-shapes.md` §11 says the `lea ecx,[edi+edi*2] / and ecx,3 /
+sub ebx,ecx / jle / rep stosb / …stosd… / …stosb` prelude needs asm.  Scanning
+both images for `8d0c7f 83e103` locates the sites exactly:
+
+| reference | built | supplier |
+|---|---|---|
+| 0x10006730 | — | **m_AllocTracked (0x10006580)** — the -50 B shortfall |
+| 0x10006929 | 0x100068f9 | m_init (0x100068e0), inline `__asm` in m_alloc.c |
+| 0x10006e0d | 0x10006ddd | m_alloc2.c inline `__asm` |
+| 0x10008f0c | — | **vfs_ReadData (0x10008e40)**, PROVEN 30.0% |
+| 0x1000b057 | 0x1000b017 | server4.c inline `__asm` |
+| 0x10017611 | — | **gm_AllocGebaeude (0x100174d0)**, PROVEN 38.8% |
+
+So the three non-byte-exact PROVEN functions that are *not* prologue/register
+walls are exactly the three whose prelude site is missing: supplying the fill
+is most of each one's size delta (m_AllocTracked -50, vfs_ReadData,
+gm_AllocGebaeude).  Only three `__asm {` blocks remain in the tree
+(`grep -rn '__asm[[:space:]]*{'`): server4.c:448, m_alloc.c:220,
+m_alloc2.c:231 — all of them this one prelude.
+
+A pure-C spelling of the prelude would close three functions at once and
+delete all remaining inline asm — this is the single highest-value open
+question in the tree.  Everything §11 records as tried (pointer type,
+provenance, length shape, 12 flag sets, the align-up split) should be read
+before re-probing; the split form in particular is documented as worse
+(42-66 matched vs 105 for plain `memset`).
+
 ## Next three blockers, in link order (2026-09-13)
 
 1. **0x10002770 CrashDumpUnhandledExceptionFilter** — obj 2137, target 2115.
