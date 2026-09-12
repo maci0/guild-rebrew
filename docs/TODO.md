@@ -232,6 +232,20 @@ member; our objects reference 124 `__imp_` symbols across 54 objects, so the
 members get pulled, and `/OPT:NOREF` then refuses to drop the unused thunk
 COMDAT that came with each.
 
+Measured split of the 96, by deleting one object from the response file and
+relinking:
+
+| source | thunks |
+|---|---|
+| `crt_imports.c.obj` — 100 `#pragma comment(linker, "/include:__imp__X@N")` | **20** |
+| genuine `__imp_` references in the game and split objects (124 across 54) | **76** |
+
+`crt_imports.c` is the auto-generated TU that forces the IAT slots to be
+allocated in the reference's order.  Removing it from the link costs 0x78
+bytes of `.text` and 20 thunks, but the IAT order is then whatever LINK's hash
+produces — which is why it exists, and which `rebrew postlink` already rewrites
+from the layout package.  So it is a candidate, not a fix: 20 of 96.
+
 **`/OPT:REF` is not the answer.**  Linking the split set with it drops `.text`
 to **0xc510 (50,448 bytes)** — 90 KB of the reference's code would go, because
 almost nothing references a split object: they are one section each, and the
@@ -253,6 +267,11 @@ options are to define the `__imp_` symbols locally against our own import table
 (the layout package already carries the full IAT), or to accept the 576 bytes
 and attack the drift instead.  Note the reference's IAT is 1408 bytes smaller
 than ours too, so some of the same excess may be in `.rdata`.
+
+**Method note.**  Do not try to parse `KERNEL32.LIB` member-by-member with a
+naive archive reader: the first member is a linker member whose "symbols" are
+not COFF at all, and the reader will happily interpret a section count of
+several thousand and dump garbage.
 
 ## LINK was pulling exsup.obj out of LIBCMT (2026-09-13, round 43)
 
