@@ -247,12 +247,39 @@ only when the functions behind them are reversed.
 | residual slack | +278 |
 | | **+308** |
 
-**Next step:** the residual is now the biggest single term.  Round 35 measured
-that only 89% of member-internal adjacent section pairs are contiguous in the
-reference, so the 278 cannot be pure per-member emission order; it needs the
-same `split_audit --content` breakdown run against the reference's own
-function boundaries to see which members the reference interleaves.  Failing
-that, the 20 non-exact game functions are the larger prize.
+**The +308 is not the real distance.**  `split_audit` still reports **0 of 330
+placed symbols at their reference VA**: `_fclose` lands at 0x1001a10a against
+0x1001a18a, a uniform **-0x80** for the first ten symbols, drifting to -0x3d3
+by the tail (`__strdup` at 0x10023442 against 0x10023812).  The -0x80 is
+exactly the game region's shortfall, so the CRT cannot be placed until the
+game half is the right length; matching the total would only hide that.
+
+**Two more measured facts.**
+
+*LINK discards 20 of the 246 split objects* (923 B of `.text`) as duplicate
+COMDAT sections — aliases where the reference has two names for one body:
+`crt0dat.obj` §14 at both 0x1001a746 and 0x1001a74f, `_mbscat`/`__mbscat`,
+`__except_handler3`, `_amsg_exit`, the four `$L21349` fragments.  They are in
+the response file and in the audit's `--content` sum but occupy no bytes, so
+`split_audit`'s "slack" figure double-counts them and is not a padding
+measurement.
+
+*`srand` (0x1001a150, 12 B) is in no LIBCMT variant, and no `srand.obj` member
+exists in any of the six.*  `rand.obj` supplies only the 13-byte seed-setter
+(content-matched at 0x1001b535) and `_rand` (34 B at 0x1001b542).  The
+reference's 12-byte `mov eax,[esp+4] / push eax / call 0x1001b535 / pop ecx /
+ret` wrapper is therefore a separate function with no library supplier, and
+`0x1001a140` (`srv_SeedRandomWithTime`) calls the same 0x1001b535 helper.
+
+**Next step:** the residual is now the biggest single term, but it cannot be
+attacked before the -0x80: every split object is displaced by the game
+region's length.  The 20 non-exact game functions are the prerequisite, not an
+alternative — they are also where the 96 bytes of game shortfall live.  Note
+in passing that `cm_ExProdObjekt` (976/993, the closest of the twenty) was
+re-tested this round: hoisting the `g_unknown_1de450` load into its own
+statement above `recipe_idx` and splitting the `<< 6` off leaves it at exactly
+976 with the identical mismatch set, confirming the round-7 finding that the
+volatile dead store pins the load.
 
 ## The remaining 784 bytes of "slack" are mostly our own scaffold (2026-09-13, round 35)
 
