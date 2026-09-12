@@ -28,6 +28,26 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## Static demotion is clean but neutral (2026-09-13, round 21)
+
+Third attempt at the intra-member static problem, this time without merging
+sections: make every cross-section reference to a `.text` static external, and
+export the defining object's statics under the same name as externals.  Two
+rounds of triage were needed to get the link clean:
+
+- demoting *all* cross-section statics to external produced
+  `unresolved external symbol .debug$F` (debug section symbols must stay
+  object-local), and
+- after excluding `.`-named symbols, `unresolved external symbol
+  _dstflag_cache` / `$T17396` — member-local `.bss`/`.data` statics we never
+  extract.  Restricting the demotion to symbols whose defining section is
+  `.text` made the link clean again.
+
+Result: exit 0, but **34 leftovers / 5,294 B / `.text` 0x100256f2 — identical
+to round 18.**  The members are being pulled for other symbols anyway, so the
+static references were not what kept them alive.  Reverted to keep the
+splitter simple; the round-18 state stands.
+
 ## The merge's exact blocker: a section symbol per COMDAT (2026-09-13, round 20)
 
 Re-attempted the static-sharing merge with VA-ordered roots (so the merged
