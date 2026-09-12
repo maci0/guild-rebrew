@@ -1,0 +1,91 @@
+#!/usr/bin/env python3
+"""Build the LINK response file for the split-set experiment.
+
+The split set is: every game object the CMake build compiles, minus the eight
+`crt_region/*.obj` hand-reversed LIBCMT bodies, plus the per-section objects
+`scripts/split_coff.py` extracted from the mapped LIBCMT members, ordered by
+the reference VA encoded in each object's filename.
+
+Ordering matters and was wrong before round 27: `split_coff` writes
+`index.json` in the order the map matched members, which is **not** sorted by
+reference VA (four descents in the 235-entry list).  Feeding it straight to
+LINK, as the old `/tmp/mkrsp.py` did, put the 821-byte `memmove` body next to
+its identical `memmove2` twin instead of 0x38b0 later, i.e. 13.5 KB out of
+place.  Sorting by VA drops the worst placement error from -0x3640 to -0x260
+and shrinks `.text` from 0x246f6 to 0x246e6.
+
+Usage:
+    python3 scripts/make_split_rsp.py --split build/libcmt_split \\
+        --objects build/CMakeFiles/server_dll.dir/objects1.rsp \\
+        --out build/split_sorted.rsp
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import shlex
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+
+#: the hand-reversed LIBCMT bodies the split objects replace
+DROP = (
+    "crt_region/initterm.c.obj", "crt_region/dllmain.c.obj",
+    "crt_region/mlock.c.obj", "crt_region/sbh_pool.c.obj",
+    "crt_region/sbh_aliases.c.obj", "crt_region/crt_heap.c.obj",
+    "crt_region/amsg_exit.c.obj", "crt_region/sbh_globals.c.obj",
+)
+
+
+def va_of(entry: dict) -> int:
+    v = entry.get("va")
+    if isinstance(v, str):
+        return int(v, 16)
+    if isinstance(v, int):
+        return v
+    m = re.search(r"([0-9a-f]{8})_", entry["obj"])
+    return int(m.group(1), 16) if m else 1 << 32
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--split", required=True, help="split_coff output directory")
+    ap.add_argument("--objects", required=True, help="objects1.rsp from the CMake build")
+    ap.add_argument("--out", required=True)
+    ap.add_argument("--no-sort", action="store_true",
+                    help="keep split_coff's index order (the pre-round-27 behaviour)")
+    args = ap.parse_args()
+
+    index = json.loads((ROOT / args.split / "index.json").read_text())
+    if not args.no_sort:
+        index = sorted(index, key=va_of)
+    try:
+        tokens = shlex.split((ROOT / args.objects).read_text())
+    except FileNotFoundError:
+        print(f"missing {args.objects}; configure the CMake build first", file=sys.stderr)
+        return 1
+
+    head, mid, data, tail = [], [], [], []
+    for t in tokens:
+        if any(d in t for d in DROP):
+            continue
+        if t.endswith("crt_imports.c.obj") or t.endswith("data_restore.c.obj"):
+            head.append(t)
+        elif t.endswith("data_globals.c.obj") or t.endswith("rdata_restore.c.obj"):
+            data.append(t)
+        elif t.endswith("link_stubs.c.obj"):
+            tail.append(t)
+        else:
+            mid.append(t)
+    ordered = [e["obj"].replace(str(ROOT / "build") + "/", "") for e in index]
+    (ROOT / args.out).write_text(" ".join(head + mid + ordered + data + tail))
+    print(f"{len(ordered)} split objects -> {args.out} "
+          f"({len(head) + len(mid) + len(ordered) + len(data) + len(tail)} tokens)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

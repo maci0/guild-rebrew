@@ -208,6 +208,68 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## Two thirds of the split-set overshoot is LINK padding, not content (2026-09-13, round 27)
+
+The round-26 audit left one question open: the built `.text` is 7,840 bytes
+over the reference's 141,382, and the placed objects are mostly in the right
+order, so where do the bytes come from?  Three measurements this round answer
+it, and one of them was a genuine tooling bug.
+
+**1. `split_coff`'s `index.json` is not in reference-VA order.**  Four descents
+in the 235-entry list, the worst being `0x1001eab0` emitted immediately after
+`0x1001b200`.  Both are 821-byte LIBCMT bodies (`memmove2` and `memmove`) and
+the reference has them 0x38b0 apart, so the old rsp — which fed `index.json`
+straight to LINK, as `/tmp/mkrsp.py` did — dropped the `memmove` body 13.5 KB
+from where it belongs and every later object inherited the shift.
+`scripts/make_split_rsp.py` replaces that ad-hoc rsp construction and sorts by
+the VA in each object's name (verified byte-identical to the hand-sorted rsp).
+Effect on the closure build: worst placement error -0x3640 -> **-0x260**,
+`.text` 0x246f6 -> **0x246e6**.  Modest in bytes, but the layout is now
+reference-ordered, which every later measurement depends on.
+
+**2. Over-inclusion is +1,049 bytes, in 15 objects.**  Summing the `.text`
+section sizes of the 235 mapped split objects gives 39,723 bytes against the
+38,674 those same functions occupy in the reference.  Only 15 objects are
+bigger than the reference function, and they carry 2,161 bytes of excess;
+the largest are `realloc` (+420, the member section is 815 against the
+reference's 395), `0x1001f8d0` (+224), the three `exsup` spellings
+`__NLG_Notify` / `__unwind_handler` / `__abnormal_termination` (+204 each) and
+`0x1001e6e4` (+172).  Round 19's "the leftovers are intra-member statics"
+story is a different effect from this one: this is the extracted section being
+longer than the reference function.
+
+**3. 5,619 bytes of the 7,840-byte overshoot is LINK's per-object padding.**
+Summing the `.text` sizes of all 447 objects on the rsp gives 143,603 bytes;
+the built `.text` is 149,222.  The 5,619-byte difference is **12.6 bytes per
+object**, introduced by the linker, not by any object's content.  Only 833
+bytes of it sits between consecutive *split* objects (the rest is around the
+game objects and the object/end boundaries), so this is not a property of the
+LIBCMT sections — it is the cost of putting 447 objects on the command line
+instead of linking an archive.
+
+So the decomposition of the overshoot is
+
+| component | bytes |
+|---|---|
+| mapped sections, over-inclusion | +1,049 |
+| LINK per-object padding | +5,619 |
+| ordering / misplaced objects | ~+900 |
+| missing code before `_fclose` | -170 |
+| **total** | **+7,840** |
+
+**Consequence for the CRT half.**  Roughly 72% of the gap is not a
+reconstruction question at all: it is the object granularity.  Packing the
+mapped sections into fewer objects — e.g. `.text$001`..`.text$NNN`
+sub-sections inside one object, which LINK concatenates in suffix order — should
+reclaim most of the 5,619 bytes without changing a byte of content.  That is
+the next experiment, and `scripts/make_split_rsp.py` plus
+`scripts/split_audit.py` make its result measurable.
+
+**Also measured:** layout fidelity of the sorted closure build is **169 of 240**
+consecutive split-object pairs placed with exactly the reference's gap; the
+nonzero steps are the closure helper objects landing next to their parent
+section (+1950/-1841, +1233/-1173, +647/-625) and the 15 oversized objects.
+
 ## The split-set link reproduced, and measured from the linker map (2026-09-13, round 26)
 
 Rounds 4-21 built the split-set link repeatedly and recorded only an end
