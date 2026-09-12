@@ -1,5 +1,60 @@
 # Blockers — 100% Round-Trip Goal
 
+## The compiler build is not the missing lever (2026-09-13, round 51)
+
+Every one of the 20 game residues is an MSVC6 allocator/scheduler fixed point,
+so the obvious remaining hypothesis was that the reference was built by a
+different CL.  It was not.  Compiling the same source with every MSVC 6.0
+service pack the toolchain images provide (`REBREW_TOOLCHAIN=msvc-6.0[-spN]`)
+gives byte-identical output for four of the five closest functions, and a
+3-byte difference for the fifth:
+
+```
+                       sp0..sp3        sp4..sp6
+gm_ObjectsAvailble     683/714         686/714   objsize 720
+gm_CalculateProductionValue 391/396    391/396   objsize 400
+cm_ProcessCommandQueue 624/639         624/639   objsize 640
+vfs_OpenStream         434/667         434/667   objsize 704
+```
+
+The sp4 step on `gm_ObjectsAvailble` is the reference's own build being sp4+,
+which is what the project already uses; it does not close the gap.  So the
+toolchain choice is right and the residue is in the C.
+
+A one-at-a-time flag sweep (`/O1 /Os /Ot /Og /Oy /Ob1 /Ob2 /Oi /Op /Oa /Ox`,
+plus the `/O2`-minus variants) over the same functions agrees:
+
+```
+CrashDumpUnhandledExceptionFilter  base 293/2115  best /O2 /Oi-  316/2115
+m_AllocTracked                     base 197/658   best /Oa        198/658
+vfs_ReadCompressed                 base 167/492   best (base)     167/492
+vfs_ReadData                       base 120/472   best (base)     120/472
+vfs_OpenStream                     base 434/667   best (base)     434/667
+ServerMainThread                   base 1383/2434 best (base)    1383/2434
+```
+
+No single flag moves a function more than 23 bytes out of 2115 and none is
+exact.  This matches the per-file logs (`/O1` and `/Ot` give frame-pointer
+prologues on `vfs_OpenStream`, `/Ox` equals `/O2`) and closes the flag and
+compiler-version lines of attack for the whole set.
+
+Also measured and negative this round, on `cm_ExProdObjekt` (4 instructions,
+the `g_unknown_1de450` load and the `loop_count` store interleaved the other
+way): three semantically identical reorderings of
+
+```c
+recipe_idx   = (uint)*(ushort*)(msg + 0x14);
+*(volatile int*)&loop_count = *(int*)(msg + 0x16);
+recipe_shift = g_unknown_1de450 + (recipe_idx << 6);
+loop_count   = 4;
+```
+
+-- shift-expression first, the global split into its own assignment before the
+volatile store, and the global assignment first -- all compile to the *same*
+976/993 bytes as the current form.  MSVC6 re-derives its own schedule from the
+expression DAG, so statement order is not the lever here either.  A fourth
+variant that hoists the shift into `recipe_idx` breaks the size (249/990).
+
 ## The CRT region of the split link is byte-exact (2026-09-13, round 50)
 
 There is now an honest whole-`.text` metric, and it says the stock-library half
