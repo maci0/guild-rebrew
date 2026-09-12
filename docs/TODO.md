@@ -208,6 +208,75 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## The component loop walks a pointer, and the CPU flag is /G5 (2026-09-13, round 40)
+
+`gm_AllocGebaeude`'s component loop indexed the record by the counter:
+
+```c
+	geb_type = 0;
+	for (; geb_type < 0x40; geb_type++) {
+		unsigned short comp = *(unsigned short*) (s.record + 0x23 + geb_type * 2);
+		if (comp == 0) break;
+		if (comp == 0xffff) continue;
+		...
+	}
+```
+
+The target walks a pointer instead, and keeps the pointer increment *ahead*
+of the counter increment:
+
+```
+lea edi,[eax+0x23]            ; once, before the loop
+...
+add edi,2 / mov eax,[ebp+8] / inc eax / cmp eax,0x40 / mov [ebp+8],eax / jl
+```
+
+Written as a pointer walk with both increments in the for-header:
+
+```c
+	rec = (unsigned short*) (s.record + 0x23);
+	for (; geb_type < 0x40; geb_type++, rec++) { comp = *rec; ... }
+```
+
+Both increments have to be in the header — with `rec++` at the end of the
+body the `continue` for a 0xffff component skips it.  Aligned 41.6% ->
+**42.5%**; object 1120 -> 1118 bytes (target 1088).  The island stays: the
+function still carries about 19 extra instructions elsewhere.
+
+**The project's CPU flag is not /G6.**  `spiel622.c` carries 17 functions, 15
+of them byte-exact, so it is a good probe.  `/O2 /Gd /G3`, `/G4` and `/G5`
+produce a byte-identical object to the `/O2 /Gd` default — `rebrew diff`
+reports the same `2 structural, 15 reloc, 106 exact` for
+`gm_CalculateProductionValue` under all four.  `/O2 /Gd /G6` changes the
+codegen of **12 of the 17** functions, so the default is a `/G5`-class
+setting and any function whose metadata says `/G6` is an explicit override,
+not the house style.
+
+**`gm_CalculateProductionValue` is the closest function in the binary to
+byte-exact and is still two instructions away.**  `rebrew diff` on it reads
+`2 structural diff(s), 0 register diff(s), 15 reloc diff(s), 106 exact
+match(es)` — the two structural diffs are one swapped pair:
+
+```
+target:  fmul qword [0x100257d0] / fxch st(1) / cmp byte [esi],0x17 / fmulp st(1)
+ours:    fmul qword [0x100257d0] / cmp byte [esi],0x17 / fxch st(1) / fmulp st(1)
+```
+
+The `cmp` is hoisted one slot too far into the x87 delay shadow.  Re-tested
+this round against the `acc = quot; mod_value = ...; value = (float)(acc *
+mod_value);` block: swapping the first two statements, casting both operands
+to double, and folding `mod_value` into the `value` expression all leave it at
+`2 structural / 106 exact`; using `quot` directly in place of `acc` makes it
+worse (4 structural, 104 exact), and folding the whole multiply into one
+expression is much worse (54 structural).  Combined with the round-1..7
+sweep in the file header, this is a genuine fixed point of the x87
+scheduler — every spelling lands on the same two-instruction swap.
+
+**Next step:** unchanged — the five islands.  `vfs_ReadCompressed` is 497
+bytes against a 496-byte bucket, so one legitimate byte of shrinkage would
+close it; `m_AllocTracked` is 656 against 672 and needs 1..16 more;
+`cm_ExCopyEntityData` needs 32 bytes of code found.
+
 ## A clamped length has to be its own variable (2026-09-13, round 39)
 
 `vfs_ReadCompressed` clamped its read chunk in place:
