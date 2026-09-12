@@ -28,6 +28,21 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## Fixed: those call sites were `fclose` (2026-09-13, round 15)
+
+`rebrew diff` resolves the *reference's* operand, which is what round 14 lacked:
+reading the per-function diff of `DispatchLogOutput` (0x10002640),
+`vfs_CloseStream` (0x100038a0) and `gm_Open` (0x10015950) shows all four
+`fflush`-looking call sites targeting **0x1001a18a**, and that function's 49
+bytes are byte-identical to `fclose.obj`'s `_fclose` in both SP6 and SP5 (the
+`fflush` name was the catalog's RevEng.AI guess).  The reconstruction had
+spelled them `fflush`, which is why LIBCMT's `fflush.obj` was pulled for a
+public `_fflush` the reference's CRT build does not contain.
+
+The four sites now call `fclose`.  A game function's call displacement is a
+masked relocation, so the compiled bytes are unchanged and all three functions
+re-test RELOC at their original sizes (290/290, 177/177, 861/861).
+
 ## Why `fflush.obj` is pulled: the reference has no public `_fflush` (2026-09-13, round 14)
 
 `/VERBOSE:LIB` names the culprit for one leftover group.  LIBCMT's
