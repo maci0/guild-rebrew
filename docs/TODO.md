@@ -18,8 +18,8 @@ transitively, through the CRT's own tables.  Forcing all 21 of them in with
 `/INCLUDE:<first external symbol>` settles what that means:
 
 ```
-.svg .text  0x223d6   (1136 short)   as linked
-            0x25d9e   (13144 over)   with the 26 members added
+built .text  0x223d6   (1136 short)   as linked
+             0x25d9e   (13144 over)   with the 26 members added
 ```
 
 So the reference has those members and the CMake link does not -- but adding
