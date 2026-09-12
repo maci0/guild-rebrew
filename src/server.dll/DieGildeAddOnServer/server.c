@@ -43,7 +43,7 @@ extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
  * Handles Ctrl+C and close events. Always returns 0. */
 
 // FUNCTION: SERVER 0x10009310
-// SIZE: 6
+// SIZE: 8
 int __stdcall exit_handler(int a, int b, int c)
 {
 	return 1;

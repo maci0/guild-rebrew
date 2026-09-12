@@ -9,7 +9,7 @@
  * link counter. */
 
 // FUNCTION: SERVER 0x1000BD50
-// SIZE: 78
+// SIZE: 66
 
 void __cdecl ahm_ResetEntityState(void* a)
 {

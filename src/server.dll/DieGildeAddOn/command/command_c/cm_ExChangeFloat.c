@@ -11,7 +11,7 @@ extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000eb70
-// SIZE: 135
+// SIZE: 144
 
 int __cdecl cm_ExChangeFloat(int cmd, char* result)
 {
