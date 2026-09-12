@@ -63,6 +63,25 @@ members define different symbol spellings; with `--closure` it loses `/ENTRY`
 again.  The coverage number is the solid result; the link metrics need the
 symbol reconciliation.
 
+*Corrected in round 12:* the 175 was a splitter bug, not a symbol problem.
+Section-symbol matching means a member has one `.text` symbol per COMDAT, and
+`split_coff` looked sections up *by symbol name*, so it extracted an arbitrary
+section.  Finding the section from the map's recorded section number restores
+the SP6 numbers and makes the union a net win.  All links exit 0:
+
+| split set | objects | LIBCMT leftovers | `.text` end |
+|---|---|---|---|
+| SP6, no closure | 223 | 112 | 0x100264dc |
+| SP6 -> SP5 union, no closure | 228 | 107 | 0x100264de |
+| SP6, closure | 246 | 77 | 0x10025ac7 |
+| SP6 -> SP5 union, closure | 252 | **73** | 0x10025d0e |
+
+Reference `.text` ends at 0x10023846, so the region is still ~0x24c8 over: the
+73 leftovers, i.e. group (2)'s remaining 16 unmatched functions (`srand`,
+`__CRT_INIT`, `unlock_09*`, `fpmath`, `init_fptrs`, `crt_close_handle`,
+`crt_once_init`, `allmul_slow`, two `fcn_*`) and group (3)'s CRT-internal
+references.
+
 ## `--closure` works: leftovers 121 -> 77 (2026-09-13, round 10)
 
 The round-9 blocker was one helper object.  Bisected by dropping candidates
