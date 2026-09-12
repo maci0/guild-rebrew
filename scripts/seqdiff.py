@@ -44,6 +44,9 @@ def norm(text: str) -> str:
     # same instruction, so fold the empty-reloc operands onto the symbol.
     text = re.sub(r"\[0\]", "[g]", text)
     text = re.sub(r"\[0 \+ ", "[g + ", text)
+    # a reloc'd global appears in the candidate as its addend, e.g. [0x1c],
+    # because objdump has no resolved address for it.
+    text = re.sub(r"\[0x[0-9a-f]{1,5}\]", "[g]", text)
     text = re.sub(r"\bpush 0\b", "push g", text)
     text = re.sub(r"\s+", " ", text).strip()
     return BRANCH.sub(lambda m: m.group(1) + " <t>", text)
