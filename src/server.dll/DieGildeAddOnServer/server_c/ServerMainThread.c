@@ -362,7 +362,7 @@ send_start_commands:
 			cmd_buffer_primary[3] = 0xff;
 			*(unsigned int*) (cmd_buffer_primary + 4) = 0xffffffff;
 			*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
-			cmd_buffer_primary[0x10] = (unsigned char) ((((host_flags_word & 8) != 0) ? 7 : 0) + 2);
+			cmd_buffer_primary[0x10] = (unsigned char) ((((host_flags_word & 8) != 0) ? 9 : 2));
 			if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
 				goto cleanup_and_exit;
 			}
