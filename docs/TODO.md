@@ -1,5 +1,51 @@
 # Blockers — 100% Round-Trip Goal
 
+## Where the restore blobs go in the response file (2026-09-13, round 60)
+
+Rounds 56 and 57 established that `.data` and `.rdata` are placed in
+response-file order, and moved both restore blobs out of `head` to sit after
+the game objects.  "After the game objects" is not the end of the story: the
+blobs want to sit where the reference has them, and the reference has
+`rdata_restore.c`'s blob at reference `.data` offset 0x3000 (its own
+`// DATA: SERVER 0x1002a000` marker).  Sweeping the insertion point across the
+game objects, with `.data` differing bytes as the metric:
+
+```
+ insertion point            .text    .rdata   .data
+ head (index 1, round 56)   86699     9328    38561
+ end of mid (index 185)     86608     2237    33690
+ after 64 objects           86599     2237    33009
+ after 80 objects           86600     2237    31125
+ after 92 objects           86600     2237    30165
+ after 96 objects           86600     2237    28634
+ after 98 objects           86600     2237    26799
+ after 100 objects          86600     2237    28931
+ after 128 objects          86600     2237    28931
+ after 160 objects          86606     2237    32601
+ after the split objects    86682     6365    37768
+ at the very end            86759     6422    37922
+```
+
+Index 98 is the optimum and index 98 is also principled: the running `.data`
+total of the first 97 game objects is 0x31c9 and object 98 takes it to 0x3238,
+so 0x3200 is the first threshold at which the cumulative total passes the
+blob's 0x3000 reference offset.  That is why the case sits just past a
+cumulative-0x3000 rule rather than exactly on it -- our objects' `.data` runs a
+little ahead of the reference's, which is the duplication problem round 59
+measured, not an independent fact.
+
+`make_split_rsp.py` now computes that cut itself: it sums each game object's
+`.data` section sizes out of its COFF header and inserts the blobs at the first
+object where the running total reaches 0x3200.  Effect end to end through
+`scripts/split_link.sh`:
+
+```
+          before round 60    after
+.text     86608              86600
+.rdata     2237               2237
+.data     33690              26799     (41.25% -> 53.27% equal)
+```
+
 ## `/GF` is not the string-dedup answer (2026-09-13, round 59)
 
 Our `.data` carries duplicate string literals the reference does not: 105 extra

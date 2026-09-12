@@ -26,6 +26,7 @@ import argparse
 import json
 import re
 import shlex
+import struct
 import sys
 from pathlib import Path
 
@@ -38,6 +39,34 @@ DROP = (
     "crt_region/sbh_aliases.c.obj", "crt_region/crt_heap.c.obj",
     "crt_region/amsg_exit.c.obj", "crt_region/sbh_globals.c.obj",
 )
+
+
+#: Where the two restore blobs go, by the running `.data` total of the objects
+#: before them.  `rdata_restore.c`'s blob carries `// DATA: SERVER 0x1002a000`,
+#: i.e. reference `.data` offset 0x3000, and `.data` is placed in response-file
+#: order, so the blobs belong after the game objects whose own `.data` adds up
+#: to that.  Our objects run a little ahead of the reference's, so the measured
+#: optimum sits just past it -- see the round-60 table in docs/TODO.md.
+_BLOB_AT_DATA = 0x3200
+
+
+def _section_bytes(path: str, prefix: str) -> int:
+    """Total size of the object's sections whose name starts with `prefix`."""
+    try:
+        data = (ROOT / "build" / path).read_bytes()
+    except OSError:
+        return 0
+    try:
+        count = struct.unpack_from("<H", data, 2)[0]
+    except struct.error:
+        return 0
+    total = 0
+    for i in range(count):
+        off = 20 + i * 40
+        name = data[off : off + 8].rstrip(b"\0").decode("ascii", "replace")
+        if name.startswith(prefix):
+            total += struct.unpack_from("<I", data, off + 16)[0]
+    return total
 
 
 def va_of(entry: dict) -> int:
@@ -112,9 +141,18 @@ def main() -> int:
         for f in sorted((ROOT / args.thunks).glob("*.obj")):
             dest = tail_thunks if f.stem.endswith("_tail") else thunk_objs
             dest.append(f.relative_to(ROOT / "build").as_posix())
+    # Split `mid` where the restore blobs belong, so their `.data`/`.rdata`
+    # land at the reference's offsets instead of after every game object.
+    cut = len(mid)
+    acc = 0
+    for i, t in enumerate(mid):
+        acc += _section_bytes(t, ".data")
+        if acc >= _BLOB_AT_DATA:
+            cut = i + 1
+            break
     (ROOT / args.out).write_text(
-        " ".join(head + mid + thunk_objs + rdata + ordered + tail_thunks
-                 + extra_objs + data + tail))
+        " ".join(head + mid[:cut] + rdata + mid[cut:] + thunk_objs + ordered
+                 + tail_thunks + extra_objs + data + tail))
     print(f"{len(ordered)} split objects + {len(thunk_objs)} thunk objects -> {args.out} "
           f"({len(head) + len(mid) + len(ordered) + len(data) + len(tail)} tokens)")
     return 0
