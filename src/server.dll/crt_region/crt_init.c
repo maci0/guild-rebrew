@@ -1,4 +1,4 @@
-// FUNCTION: SERVER 0x1001b8fb (was FUNCTION; provided by LIBCMT / library_msvc.h)
+// FUNCTION: SERVER 0x1001b8fb
 #include <windows.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
