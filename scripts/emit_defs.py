@@ -119,7 +119,10 @@ def main() -> int:
         defined, undefined = scan(rsp_objects + emitted)
         missing = sorted(
             s for s in undefined - defined
-            if not s.startswith(("__imp_", "??_C@", "?"))
+            # Only C++ string literals are skipped: `?_set_new_handler@@...`
+            # is a real import-shaped symbol, and filtering every `?`-prefixed
+            # name silently left handler.obj to the archive.
+            if not s.startswith(("__imp_", "??_C@"))
             and s not in args.skip and s not in done
         )
         print(f"pass {_round}: {len(undefined)} undefined, {len(defined)} defined, "

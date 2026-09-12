@@ -148,7 +148,7 @@ def masked_body(obj: bytes, sec: dict) -> bytes:
     return bytes(body)
 
 
-def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None, extra: set[int] | None = None, emit_commons: bool = False) -> bytes:
+def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None, extra: set[int] | None = None, emit_commons: bool = False, trim: int | None = None) -> bytes:
     """COFF object for `coff.sections[index]` plus its same-member closure.
 
     `separate` holds the section indices that are themselves emitted as their
@@ -157,6 +157,12 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
     """
     separate = separate or set()
     claimed = claimed if claimed is not None else set()
+    # `trim` cuts the ROOT section to the reference function's size.  A member
+    # section can be longer than the reference function it was matched to — the
+    # 238-byte exsup section carries six reference functions of 34..216 bytes —
+    # and emitting all of it for each of them multiplies the over-inclusion.
+    if trim is not None:
+        trim = min(trim, coff.sections[index]["raw_size"])
     # Section closure: every .text section reachable from this one through a
     # relocation to a symbol defined in ANOTHER section of the same member.
     # MSVC splits a member's shared tails into separate COMDATs (memmove's
@@ -221,6 +227,8 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
 
     for i, sym in enumerate(coff.symbols):
         if sym["section"] > 0 and (sym["section"] - 1) in new_secnum:
+            if trim is not None and sym["section"] - 1 == index and sym["value"] >= trim:
+                continue
             add(i)
 
     # A relocation may name a *section* symbol (class 3, ".text") of a COMDAT
@@ -249,6 +257,8 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
 
     for i in secs:
         for _va, symidx, _typ in coff.section_relocs(i):
+            if trim is not None and i == index and _va >= trim:
+                continue
             if symidx < len(coff.symbols):
                 add(resolve_ref(symidx))
 
@@ -312,8 +322,11 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
         # keep its size but emit nothing and do not advance the file cursor.
         uninit = sec_old["raw_ptr"] == 0
         body = b"" if uninit else coff.section_body(old)
+        if trim is not None and old == index:
+            body = body[:trim]
         size = sec_old["raw_size"] if uninit else len(body)
-        relocs = coff.section_relocs(old)
+        relocs = [r for r in coff.section_relocs(old)
+                  if not (trim is not None and old == index and r[0] >= trim)]
         if uninit:
             body_off = 0
             pad = b""
@@ -416,6 +429,13 @@ def main() -> int:
         "loading the whole member from the archive",
     )
     ap.add_argument(
+        "--trim",
+        action="store_true",
+        help="cut each emitted section to the reference function's size (the map "
+        "records it), so a member section longer than the function it was "
+        "matched to stops multiplying the over-inclusion",
+    )
+    ap.add_argument(
         "--with-commons",
         action="store_true",
         help="(experimental) also emit the member's common symbols as a "
@@ -507,7 +527,12 @@ def main() -> int:
                 if nm.startswith((".data", ".bss", ".rdata", ".CRT$")):
                     data_secs.add(i)
         funcs_sorted = sorted(funcs, key=lambda f: f[0])
+        sizes = {}
+        for e in mapping["matched"]:
+            if e["member"] == member:
+                sizes[int(e["va"], 16)] = e["size"]
         for n, (va, symbol, section) in enumerate(funcs_sorted):
+            entry_size = sizes.get(va)
             root_sec = find_section(symbol, section)
             if root_sec is None:
                 print(f"  no section for {symbol} in {member}", file=sys.stderr)
@@ -522,6 +547,7 @@ def main() -> int:
                     coff, root_sec, symbol, mapped, claimed, False, aliases,
                     extra=data_secs if n == 0 else None,
                     emit_commons=args.with_commons,
+                    trim=entry_size if args.trim else None,
                 )
             )
             written.append((va, str(outdir / name), symbol))

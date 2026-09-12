@@ -208,6 +208,49 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## Trimming each section to the reference function size removes 2,170 bytes (2026-09-13, round 34)
+
+`map_libcmt` matches a reference function to a member section by *common
+prefix*, so a section can be far longer than the function it was matched to:
+the 238-byte `exsup` section carries **six** reference functions of 34, 35, 66,
+148, 197 and 216 bytes, and `split_coff` was emitting all 238 bytes for each of
+them.  The same holds for `realloc` (member section 815 B against a 395-byte
+reference function), `calloc`, `free`, `output` and `strchr`.
+
+`split_coff --trim` cuts the emitted root section to the map's size for that
+entry, drops the symbols defined past the cut, and drops relocations past it.
+Result:
+
+| | round 33 | round 34 |
+|---|---|---|
+| `.text` | 0x23364 (+2,846) | **0x22aea (+676)** |
+| drift range | -0x132 .. +0x76c | -0x3d3 .. +0x1ac |
+| archive members pulled | none | none |
+
+**2,170 bytes**, and the emitted CRT content is now 38,618 bytes against the
+reference CRT region's 38,588 — **+30 bytes of content**, with the remaining
+784 bytes being inter-object slack across ~290 objects.  The whole CRT half is
+now within 814 bytes of the reference, and the total +676 decomposes as -128 for
+the game region (96 bytes of game shortfall plus the 32-byte `_getpid`/`srand`
+pair that no LIBCMT carries) and +814 for the CRT region (784 slack + 30
+content).
+
+**`--trim` exposed a filter bug in `emit_defs`.**  Its missing-symbol filter
+skipped every `?`-prefixed name as a C++ string literal, so when trimming
+removed `?_set_new_handler@@YAP6AHI@ZP6AHI@Z@Z` from the middle of `handler.obj`'s
+section, nothing replaced it and LINK pulled the whole member back.  Only
+`??_C@` names are string literals; with the filter narrowed to `("__imp_",
+"??_C@")` the pull disappears and `.text` drops another 10 bytes (0x22af4 ->
+0x22aea).
+
+`scripts/split_link.sh` runs the trimmed configuration and reproduces 0x22aea.
+
+**Next step:** the residual is now dominated by the 784 bytes of slack plus the
+128-byte game shortfall, both small and local.  Per-object slack is worth one
+more look — the audit's worst deltas are a block of ~40 objects sitting at
+-0x3d0 — but the bigger prize is the other half: the 20 non-exact game
+functions.
+
 ## Three of the "no library carries" functions are in LIBCMT after all (2026-09-13, round 33)
 
 Rounds 11-13 recorded nine CRT functions that no available library carries

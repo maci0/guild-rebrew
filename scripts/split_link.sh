@@ -52,10 +52,10 @@ print(f"{len(add)} extra sections merged")
 PY
 MAP="$WORK/map_full.json"
 
-echo "== split (member data; --closure is subsumed by the completed map)"
+echo "== split (member data, trimmed to the reference function's size)"
 rm -rf "$WORK/split"
 python3 scripts/split_coff.py "${LIBS[@]}" --map "$MAP" \
-    --out "$WORK/split" --with-data
+    --out "$WORK/split" --with-data --trim
 
 echo "== import thunks"
 rm -rf "$WORK/thunks"
