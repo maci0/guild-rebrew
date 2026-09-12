@@ -41,6 +41,7 @@ import argparse
 import collections
 import re
 import sys
+from pathlib import Path
 
 LINE = re.compile(
     r"\s+([0-9a-f]{4}):([0-9a-f]{8})\s+(\S+)\s+([0-9a-f]{8})\s+(\S+)\s+(\S+)")
@@ -50,6 +51,14 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("mapfile")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--content", action="append", default=[],
+                    help="directory of objects whose .text is part of this region "
+                         "(repeatable); with it the region span, its content and "
+                         "the slack between them are printed")
+    ap.add_argument("--reference-end", default="0x10023846",
+                    help="VA the reference .text ends at (for the breakdown)")
+    ap.add_argument("--text-end", help="VA the built .text ends at; overrides the "
+                    "heuristic end used for the breakdown")
     args = ap.parse_args()
 
     rows = []
@@ -85,6 +94,31 @@ def main() -> int:
     print(f"placed split symbols: {len(rows)}")
     print(f"exactly at their reference VA: {deltas.get(0, 0)}")
     print(f"delta range: {min(deltas):+#x} .. {max(deltas):+#x}")
+    if args.content:
+        def text_size(path):
+            b = open(path, "rb").read()
+            nsec = int.from_bytes(b[2:4], "little")
+            optsz = int.from_bytes(b[16:18], "little")
+            base = 20 + optsz
+            total = 0
+            for i in range(nsec):
+                hdr = b[base + i * 40:base + (i + 1) * 40]
+                if hdr[0:5] == b".text":
+                    total += int.from_bytes(hdr[16:20], "little")
+            return total
+
+        content = 0
+        for d in args.content:
+            content += sum(text_size(str(f)) for f in Path(d).glob("*.obj"))
+        region_start = min(va for _ref, va, _n in rows)
+        end = (int(args.text_end, 16) if args.text_end
+               else int(args.reference_end, 16) + max(va - ref for ref, va, _n in rows))
+        span = end - region_start
+        print()
+        print(f"region built   {region_start:#x} .. {end:#x} = {span} bytes")
+        print(f"emitted content{content:>28} bytes")
+        print(f"slack (span - content){span - content:>17} bytes")
+        print(f"reference span (end - first ref VA){end - min(ref for ref, _v, _n in rows):>8} bytes")
     print()
     print(f"{'symbol':34} {'reference':>11} {'built':>11} {'delta':>9}")
     for ref, va, name in rows[:10] + rows[-10:]:

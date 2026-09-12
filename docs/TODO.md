@@ -208,6 +208,58 @@ signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
 
+## The remaining 2,830 bytes, attributed (2026-09-13, round 31)
+
+Round 30 left the split-set `.text` at 0x23354, +2,830 over the reference, and
+"attribute it" as the next step.  `scripts/split_audit.py --content DIR` now
+prints the region span against the objects' summed `.text`, so the three terms
+fall out:
+
+| term | bytes |
+|---|---|
+| game region — the built stream ends at 0x1001a0e0, the reference at 0x1001a18a | **-170** |
+| CRT content 40,755 against the reference CRT span 38,588 | **+2,167** |
+| inter-object slack — region span 41,588 minus content 40,755 | **+833** |
+| | **+2,830** |
+
+**The -170 has a name.**  96 bytes of it is *game* code (the game objects end
+0x60 before the reference's CRT starts) and 74 bytes is CRT code before
+`_fclose`:
+
+```
+0x1001a140  _getpid        14 B   call [GetCurrentProcess]; push eax; call srand; pop ecx; ret
+0x1001a150  srand          13 B
+0x1001a160  7 IAT thunks   42 B   jmp dword ptr [0x10024198/94/90/8c/88/84/80]
+```
+
+Those seven thunks are `socket`, `setsockopt`, `htonl`, `htons`, `bind`,
+`sendto`, `closesocket`, and they are live code, not dead stubs: the
+reference's `SendBroadcastPacket` (0x10001130) makes **nine direct
+`call`/`jmp` to them** between 0x10001142 and 0x100011c0.  Our builds do
+generate equivalent thunks — but at 0x1001c2b8+ in the standard build and at
+the end of `.text` (0x100240f0+) in the split build, targeting an IAT base of
+0x10025000+ rather than the reference's 0x10024180.  So what is missing at
+0x1001a160 is **import-thunk placement plus a matching IAT layout**, not code:
+the six-byte `jmp [IAT]` bytes themselves are the same shape we already emit,
+and they come from `WS2_32.lib` in the standard build.
+
+**The +2,167 content excess** is the sum of the terms rounds 27-30 measured:
+the mapped sections' +1,049 over-inclusion (15 sections larger than the
+reference function they were matched to), the closure helper sections (+744),
+and the 13 definition objects (+268) — 2,061 of the 2,167, the remainder being
+rounding across the region.
+
+**The +833 slack** is 3.2 bytes per object across 259 split objects plus 28
+helper/definition objects, so it is not worth chasing: the round-27 "5,619
+bytes of LINK padding" was a measurement mistake, and the real inter-object
+slack is this.
+
+**So the two open items on this half are:** (1) place the import thunks and
+match the IAT base — a `.data`/PE-layout problem, which the postlink step
+already has the `iat_thunks` list for in `rebrew-project.toml`; and (2) the
+96-byte game shortfall, which is the other half's business (the 20 non-exact
+functions).
+
 ## No LIBCMT member is pulled any more (2026-09-13, round 30)
 
 The last five pulled members were driven by symbols whose *defining section*
