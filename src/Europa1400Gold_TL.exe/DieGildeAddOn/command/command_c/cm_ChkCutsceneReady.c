@@ -1,0 +1,73 @@
+
+/*
+ * Ghidra decompilation reference:
+ * /+ [rebrew] FUNCTION: RELOC
+ *    Origin: GAME
+ *    Size: 120B
+ *    CFlags:
+ *    Symbol: _CheckCutsceneReady
+ *    Files: DieGildeAddOn/command/command.c * / *
+ * int __cdecl cm_ChkCutsceneReady(char *obj)
+ *
+ * {
+ *   int entity_ptr;
+ *   int *id_ptr;
+ *   int i;
+ *
+ *   if (*(int *)(obj + 0x10) == -1) {
+ *     return 1;
+ *   }
+ *   i = 0;
+ *   id_ptr = (int *)(obj + 0x14);
+ *   while( true ) {
+ *     entity_ptr = gm_LookupEntityRecordById(*id_ptr);
+ *     if (((entity_ptr != 0) &&
+ *         (((*(char *)(entity_ptr + 2) == '\x06' || (*(char *)(entity_ptr + 2) == '\a')) &&
+ *          (*(int *)(entity_ptr + 0x20c) != -1)))) &&
+ *        (*(int *)(entity_ptr + 0x20c) != *(int *)(obj + 0x10))) break;
+ *     i = i + 1;
+ *     id_ptr = id_ptr + 1;
+ *     if (0xf < i) {
+ *       return 0;
+ *     }
+ *   }
+ *   LogMessageInternal(s_D__Develop_DieGildeAddOn_command_1002c748,0x26db,
+ *                      s_cm_ChkCutsceneReady____failed____1002caa8,1);
+ *   return 1;
+ * }
+ */
+
+#include "../command_internal.h"
+#include "../../../Units/Error/error.h"
+
+extern char s_cm_ChkCutsceneReady____failed____1002caa8[];
+
+/* Validation handler: checks if up to 16 entities referenced
+ * by IDs in the command payload are all in cutscene-ready state
+ * (entity type 0x06 or 0x07). Returns 0 when all are ready,
+ * 1 if any entity is missing or not ready. */
+
+// FUNCTION: GOLDTL 0x4f6520
+// SIZE: 128
+// cm_ChkCutsceneReady
+int __cdecl cm_ChkCutsceneReady(char* obj)
+{
+	int entity_ptr;
+	int* id_ptr;
+	int i;
+
+	if (*(int *)(obj + 0x10) == -1) {
+		return 1;
+	}
+	for (i = 0, id_ptr = (int *)(obj + 0x14); i < 0x10; i++, id_ptr++) {
+		entity_ptr = gm_LookupEntityRecordById(*id_ptr);
+		if (entity_ptr != 0 &&
+		    (*(char *)(entity_ptr + 2) == '\x06' || *(char *)(entity_ptr + 2) == '\a') &&
+		    *(int *)(entity_ptr + 0x20c) != -1 &&
+		    *(int *)(entity_ptr + 0x20c) != *(int *)(obj + 0x10)) {
+			LogMessageInternal((char*) 0x1002c748, 0x26db, (char*) 0x1002caa8, 1);
+			return 1;
+		}
+	}
+	return 0;
+}
