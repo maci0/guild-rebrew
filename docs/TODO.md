@@ -65,14 +65,27 @@ supplies the same strings, so eleven literals appear twice:
 '1#QNAN'  '1#INF'  '1#IND'  '1#SNAN'
 ```
 
+The evidence that the blob is the right copy and the library's is the
+surplus is positional: the *first* occurrence of every one of them lands at
+exactly the reference's offset, and the second does not.
+
+```
+             reference   built (first)   built (second)
+runtime error   0x2110       0x2110          0x2724
+R6028           0x2150       0x2150          0x2764
+R6002           0x2370       0x2370          0x2984
+(null)          0x2074       0x2074          0x271c
+```
+
 `CMakeLists.txt` already records the trade: the original packs those strings
 into 0x2eb bytes, while the linker's per-COMDAT placement of crt0msg's copies
 costs 0x32b, so the blob is what reproduces the reference.  But the blob only
 wins if `crt0msg.obj` stays out of the link, and it does not, because nothing
 else defines `__NMSG_WRITE` / `__GET_RTERRMSG`.  Displacing those two locally
-(same pattern as the sbh files) is what would drop the duplicate literals --
-and would also remove ~0x180 of the `.text` shortfall, since those two
-functions are part of the 1136 missing bytes.
+(same pattern as the sbh files) drops the duplicate literals and puts
+`FF_MSGBANNER` (57 B) and `NMSG_WRITE` (339 B) back into `.text`, where the
+reference has them at 0x1001fdf8 and 0x1001fe31 -- 0x18c of the 0x470
+shortfall.
 
 ## The compiler build is not the missing lever (2026-09-13, round 51)
 
