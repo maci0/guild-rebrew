@@ -217,8 +217,8 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	slot[0x164] = (char) arg6;
 	*(unsigned short*) (slot + 0xa) = (unsigned short) arg4;
 	slot[0x166] = 0;
-	slot[0x1f4] = 0;
 	slot[0x165] = (char) arg7;
+	slot[0x1f4] = 0;
 	*(int*) (slot + 0x20c) = -1;
 	*(int*) (slot + 0x18c) = -1;
 	*(int*) (slot + 0x194) = 0;
@@ -492,8 +492,8 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	 * checks above (reference 0x10018d96..0x10018df9).  The randomized pair
 	 * belongs only to the no-parent path at 0x1001939a. */
 	/* record both parents and hook the child into their ref arrays */
-	*(int*) (slot + 0x60) = mother_id;
 	*(int*) (slot + 0x64) = gender;
+	*(int*) (slot + 0x60) = mother_id;
 	*(int*) (slot + 0x68) = -1;
 	*(int*) (slot + 0x6c) = -1;
 	*(int*) (slot + 0x70) = -1;
@@ -607,11 +607,11 @@ stat_modifiers:
 		}
 	}
 
+	*(int*) (slot + 0x64) = gender;
 	if (type != 6 && type != 7) {
 		slot[0xd] = *(char*) (0x10030ba5 +
 		                      *(unsigned char*) (slot + 0x164) * 6);
 	}
-	*(int*) (slot + 0x64) = gender;
 	memset(slot + 0x5c, 0xff, 0x20);
 	if (father != (char*) 0) {
 		int* ref;
