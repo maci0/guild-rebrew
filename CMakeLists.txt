@@ -380,9 +380,9 @@ if (MSVC_FOR_DECOMP)
     # Every other duplicate has been resolved; the link is otherwise clean.
     if(REBREW_DEBUG_INFO)
       target_compile_options(server_dll PRIVATE /Z7)
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12" "/INCLUDE:___ld12mul" "/INCLUDE:__except_handler3")
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/debug" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12" "/INCLUDE:___ld12mul" "/INCLUDE:__except_handler3" "/INCLUDE:___dtold" "/INCLUDE:_wctomb" "/INCLUDE:__setmode_lk" "/INCLUDE:__strdup" "/INCLUDE:__NLG_Notify" "/INCLUDE:__ms_p5_mp_test_fdiv")
     else()
-      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12" "/INCLUDE:___ld12mul" "/INCLUDE:__except_handler3")
+      target_link_options(server_dll PRIVATE "/OPT:NOREF" "/FORCE:MULTIPLE" "/NODEFAULTLIB:LIBCMTD" "/ENTRY:DllMain@12" "/INCLUDE:___ld12mul" "/INCLUDE:__except_handler3" "/INCLUDE:___dtold" "/INCLUDE:_wctomb" "/INCLUDE:__setmode_lk" "/INCLUDE:__strdup" "/INCLUDE:__NLG_Notify" "/INCLUDE:__ms_p5_mp_test_fdiv")
     endif()
     # Post-link (rebrew postlink --layout layout/server.dll): converge the
     # linked DLL onto the original's layout byte-for-byte, purely from the
