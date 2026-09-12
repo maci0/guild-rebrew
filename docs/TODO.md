@@ -28,6 +28,29 @@ reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
 
+## The 34 survivors, and a measured negative (2026-09-13, round 19)
+
+The remaining leftovers are concentrated in a few members: `sbheap.obj` (5
+symbols, 1,608 B), `tzset.obj` (3, 1,395), `mbctype.obj` (5, 571), `cvt.obj`
+(3, 398), `winxfltr.obj` (2, 376), `crt0dat.obj` (4, 251), `output.obj` (6,
+201), `exsup.obj` (2, 214), `dllcrt0.obj` (1, 217), plus singles.
+
+Tracing undefined references from the split objects shows the mechanism for
+several of them: MSVC emits **statics that the member's own sections
+reference**.  `output.obj` §5 (`output`) calls `_write_char`, which is a
+*class-3 static* defined in §6 of the same member.  Splitting every section
+into its own object turns that intra-member local reference into an
+unsatisfiable external, so the linker pulls LIBCMT's whole `output.obj` — and
+the same shape recurs in `cvt`, `mbctype`, `tzset`, `crt0dat` and `sbheap`.
+
+I tried the obvious fix — group mapped sections that are adjacent in the
+reference VA space back into one object, so the intra-member statics resolve.
+Measured: objects 259 -> 138, but leftovers **34 -> 60** and `.text` end
+0x100256f2 -> 0x10025d72.  Reverted.  The grouping misplaces sections whose
+order inside the member does not match the reference VA order, so the merge has
+to be done per static-sharing group with an order check, not by simple
+adjacency.
+
 ## Duplicate wrapper bodies masquerade as leftovers (2026-09-13, round 18)
 
 Tracing which split object leaves each leftover undefined found a general
