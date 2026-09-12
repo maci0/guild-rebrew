@@ -656,8 +656,12 @@ stat_modifiers:
 	    (float) (*(float*) (slot + 0x1c) * *(float*) 0x100256b8 +
 	             (double) rnd - *(float*) (slot + 0x1c) *
 	                                *(float*) 0x100256b4);
-	/* drawn twice in the reference (0x1001956a and 0x10019574); the first
-	 * result is discarded */
+	/* The reference draws gm_RandomMod(0x10) twice here, back to back and
+	 * both ahead of the stat guard (0x1001956a and 0x10019574).  Neither
+	 * result is read: the call at 0x10019574 has no `and eax,0xffff` after
+	 * it, so its value is discarded, and reading the two globals in two
+	 * expressions for one draw put one after the guard instead. */
+	gm_RandomMod(0x10);
 	gm_RandomMod(0x10);
 	if ((float) *(unsigned short*) (slot + 0xa) > *(float*) (slot + 0x20)) {
 		acc = *(float*) (slot + 0x1c);
@@ -672,9 +676,8 @@ stat_modifiers:
 		}
 		*(float*) (slot + 0x1c) = acc;
 	}
-	rnd = gm_RandomMod(0x10) & 0xffff;
-	ahm_ResetEntityState(slot);
 	memset(slot + 0x1b4, 0, 0x10);
+	ahm_ResetEntityState(slot);
 	if (slot[2] == 3 || slot[2] == 4 || slot[2] == 2 || slot[2] == 0x13) {
 		rnd = gm_RandomMod(3) & 0xffff;
 		/* volatile read to stop msvc6 folding load and store into a
