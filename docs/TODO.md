@@ -46,6 +46,29 @@ object where the running total reaches 0x3200.  Effect end to end through
 .data     33690              26799     (41.25% -> 53.27% equal)
 ```
 
+A follow-up sweep (round 61) confirms 98 is the optimum and records a
+counterintuitive fact about the metric.  Where the blob actually lands, and
+what it scores:
+
+```
+ cut   blob shift   .data differing
+  98       -0x30         26799
+  99       -0x04         27781
+ 100       +0x40         28931
+```
+
+Cut 99 puts the blob four bytes from its reference offset and scores **worse**
+than cut 98, which is 48 bytes out.  Same-offset agreement is a property of
+the whole arrangement, not of the blob's own alignment: moving the cut slides
+every game object between the old and new positions, and that costs more than
+the blob's alignment gains.  So the cut has to be swept, and "make the blob
+land exactly at 0x3000" is not the right objective.
+
+Also measured and inert or negative: putting `rdata_restore` immediately after
+`data_restore` (identical), `data_globals` there (`.text` 86600 -> 86598, the
+rest unchanged -- two bytes, not worth the special case), and the defs/commons
+group there (`.text` 86600 -> 94985, far worse).
+
 ## `/GF` is not the string-dedup answer (2026-09-13, round 59)
 
 Our `.data` carries duplicate string literals the reference does not: 105 extra
