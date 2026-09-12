@@ -12,7 +12,7 @@ the round-by-round entries below establish.
 | game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
 | standard CMake link, `.text` | 0x2276c (-218), postlink coverage 401/7,463 (5.4%) | — |
-| split-set link (LIBCMT member objects), `.text` | 0x22b8a; 38 of 330 symbols exactly at their reference VA, 0 LIBCMT archive pulls, 11 duplicate objects discarded | — |
+| split-set link (LIBCMT member objects), `.text` | 0x22b8a; 38 of 330 symbols exactly at their reference VA, 0 LIBCMT archive pulls, but 96 unreferenced import thunks (+576 B) and .rdata +1408 B | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
 | CRT split-set leftovers | **34** symbols across ~10 members | 5,294 B |
@@ -207,6 +207,52 @@ second — so the structural count understates how hard they are.
 signal: `rebrew diff` aligns positionally, so one instruction of length
 difference desyncs everything after it.  See the alignment-corrected table in
 the round-25 section below before choosing a target.
+
+## 96 import thunks the reference does not have (2026-09-13, round 44)
+
+Counting `ff 25` (`jmp dword ptr [imm32]`, the import-thunk form) across
+*every* section:
+
+| | reference | split set | standard link |
+|---|---|---|---|
+| `ff 25` | **11** | 107 | 106 |
+| `ff 15` (`call dword ptr [imm32]`) | 211 | 208 | — |
+| `.rdata` VirtualSize | 0x2e81 | 0x3401 | — |
+
+The reference's eleven are the seven socket thunks at 0x1001a160, the
+`_RtlUnwind@16` thunk at 0x10023840, and three in the game region
+(0x10015513, 0x10021eda, 0x10021eef).  Ours has **96 more, all at the end of
+`.text` starting at 0x10023950**, and **nothing references them** — no
+relocation in the image points at 0x10023950.  They are ~576 bytes, which is
+most of the split set's +836.
+
+They are dead COMDATs kept alive by `/OPT:NOREF`.  The import libraries put
+`_GetLocalTime@4` (the thunk) and `__imp__GetLocalTime@4` (the IAT slot) in one
+member; our objects reference 124 `__imp_` symbols across 54 objects, so the
+members get pulled, and `/OPT:NOREF` then refuses to drop the unused thunk
+COMDAT that came with each.
+
+**`/OPT:REF` is not the answer.**  Linking the split set with it drops `.text`
+to **0xc510 (50,448 bytes)** — 90 KB of the reference's code would go, because
+almost nothing references a split object: they are one section each, and the
+archive's own internal cross-references are gone.  `/OPT:NOREF` is what keeps
+them, and the reference clearly used the same discipline.
+
+That experiment also exposed a real malformation.  `/OPT:REF` failed with
+`1001a7f7_.text.obj : error : Internal error during ReadSymbolTable`, because a
+section-definition AUX record with COMDAT selection **ASSOCIATIVE (5)** carries
+the section *number* it is associated with, and `build_object` copied AUX
+records verbatim while renumbering the sections — `malloc.obj` §1's `.rdata`
+kept `assoc 5` inside a two-section object.  `build_object` now remaps that
+number through `new_secnum` and falls back to `SELECT_ANY` when the associated
+section was not emitted.  The `/OPT:NOREF` link is unaffected.
+
+**Next step on this thread:** the thunks have to stop being *included*, not be
+discarded afterwards.  Since they arrive with the `__imp_` symbol's member, the
+options are to define the `__imp_` symbols locally against our own import table
+(the layout package already carries the full IAT), or to accept the 576 bytes
+and attack the drift instead.  Note the reference's IAT is 1408 bytes smaller
+than ours too, so some of the same excess may be in `.rdata`.
 
 ## LINK was pulling exsup.obj out of LIBCMT (2026-09-13, round 43)
 
