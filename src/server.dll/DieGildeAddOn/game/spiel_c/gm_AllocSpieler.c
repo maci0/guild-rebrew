@@ -223,11 +223,11 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	*(int*) (slot + 0x18c) = -1;
 	*(int*) (slot + 0x194) = 0;
 	slot[0xd] = 1;
+	*(int*) (slot + 0x190) = 4;
 	if (slot[2] == 3 || slot[2] == 0x10 || slot[2] == 0x13) {
 		*(int*) (slot + 0x1e8) = 1;
 		slot[0xd] = 2;
 	}
-	*(int*) (slot + 0x190) = 4;
 	if (slot[2] == 0x10) {
 		/* entity type 0x10: citizen with randomized traits from ahm */
 		char* ent;
@@ -412,7 +412,6 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		    *(float*) 0x10025714;
 		goto stat_modifiers;
 	}
-	slot[0xd] = 1;
 	if (mother[2] == 6 || mother[2] == 7 || mother[2] == 5) {
 		slot[0xc] = mother[0xc];
 		*(int*) (slot + 0x1d0) = *(int*) (mother + 0x1d0);
@@ -431,6 +430,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		slot[0xc] = father[0xc];
 		*(int*) (slot + 0x1d0) = *(int*) (father + 0x1d0);
 	}
+	slot[0xd] = 1;
 	*(float*) (slot + 0x124) =
 	    (float) ((gm_RandomFloat01() + g_dbl_const_688) *
 	             g_dbl_const_f90);
