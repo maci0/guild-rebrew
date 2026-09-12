@@ -27,6 +27,29 @@ def norm(name: str) -> str:
     return re.sub(r"^_+", "", name).lower()
 
 
+def cand_seq(obj: Path, raw: str) -> list[str]:
+    """Bytes of one symbol.
+
+    seqdiff.cand_seq stops at the first blank line, which truncates a COMDAT
+    object's largest functions; objdump --disassemble emits exactly one
+    symbol instead.
+    """
+    import capstone
+
+    txt = subprocess.run(
+        ["objdump", "-d", f"--disassemble={raw}", str(obj)], capture_output=True, text=True
+    ).stdout
+    data = bytearray()
+    for line in txt.splitlines():
+        parts = line.split("\t")
+        if len(parts) >= 2 and re.match(r"\s*[0-9a-f]+:", parts[0]):
+            data += bytes.fromhex(parts[1].strip().replace(" ", ""))
+    while data and data[-1] == 0x90:
+        data.pop()
+    md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+    return [seqdiff.norm(f"{i.mnemonic} {i.op_str}".strip()) for i in md.disasm(bytes(data), 0)]
+
+
 def object_symbols(objdir: Path) -> dict[str, tuple[Path, str]]:
     """normalized name -> (object, symbol as objdump prints it)."""
     out: dict[str, tuple[Path, str]] = {}
@@ -64,7 +87,7 @@ def main() -> None:
         obj, raw = hit
         checked += 1
         seqdiff.extract(va, size, target)
-        a, b = seqdiff.target_seq(target), seqdiff.cand_seq(obj, raw)
+        a, b = seqdiff.target_seq(target), cand_seq(obj, raw)
         import difflib
 
         same = sum(bl.size for bl in difflib.SequenceMatcher(None, a, b, autojunk=False).get_matching_blocks())
