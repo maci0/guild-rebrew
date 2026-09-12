@@ -162,9 +162,9 @@ status = "RELOC"
 ["SERVER.0x10006d20"]
 size = 270
 cflags = "/O2 /Gd /Oy-"
-status = "PROVEN"
-blocker = "alignment-prefixed memset prelude — pure C cannot emit (docs/msvc6-allocator.md); dword+tail only from msvc"
-blocker_delta = 36
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-12T19:37:09+00:00"
 
 ["SERVER.0x10006e30"]
 size = 137

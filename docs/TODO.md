@@ -1,6 +1,6 @@
 # Blockers — 100% Round-Trip Goal
 
-## Distance to byte identity (2026-09-13, round 22)
+## Distance to byte identity (2026-09-13, round 23)
 
 One place to read the whole gap.  Nothing here is new work; it is the state
 the round-by-round entries below establish.
@@ -8,10 +8,10 @@ the round-by-round entries below establish.
 | piece | state | size |
 |---|---|---|
 | reference `.text` | — | 141,382 B (0x22846) |
-| game functions, byte-exact at object level | 259 of 280 `byte_matched` | ~140 KB |
-| game functions, not byte-exact | **21** (10 size mismatches + 11 byte-different; 19 of them `PROVEN`, so `verify` hides them) | ~19 KB |
+| game functions, byte-exact at object level | 261 of 281 `byte_matched` | ~140 KB |
+| game functions, not byte-exact | **20** (10 size mismatches + 10 byte-different; 18 of them `PROVEN`/`STUB`, so `verify` hides them) | ~19 KB |
 | first link-alignment gate | CrashDump +16 over 0x2fd0..0x6820; then m_AllocTracked -64, vfs_ReadData -32, cm_ExCopyEntityData -32 | — |
-| standard CMake link, `.text` | 0x2284c (+6), postlink coverage 402/7,463 (5.4%) | — |
+| standard CMake link, `.text` | 0x2283c (-10), postlink coverage 400/7,463 (5.4%) | — |
 | split-set link (LIBCMT member objects), `.text` end | 0x100256f2 (over by 0x1eac) | — |
 | CRT region functions matched | 235 of 244 | 38,674 B |
 | CRT functions no library carries | **9** (`srand`, `__CRT_INIT`, `fpmath`, `init_fptrs`, `unlock_9`, `crt_close_handle`, `crt_once_init`, `allmul_slow`, `fcn_1001a643`) | 542 B |
@@ -30,12 +30,12 @@ in check_header.c without a `// FUNCTION:` marker, so `verify` never counted
 it; it is byte-exact (559/559, RELOC) now that it has its own TU and marker.
 Goal requires 280/280 with inline asm only for 1-5 byte padding.
 
-**`verify` is not a byte-identity gate.**  19 of the 21 non-byte-exact
+**`verify` is not a byte-identity gate.**  18 of the 20 non-byte-exact
 functions carry `PROVEN`, and `passed: true` for PROVEN does not consult the
 byte compare: CrashDumpUnhandledExceptionFilter reports `match_percent 12.5`
 and `delta 1873` yet counts as passed.  The honest number is `byte_matched`
-in `db/verify_results.json` (259/280 at this revision).  Whole-binary
-identity needs the 21 byte diffs **and** the link alignment below.
+in `db/verify_results.json` (261/281 at this revision).  Whole-binary
+identity needs the 20 byte diffs **and** the link alignment below.
 
 **CrashDump's four-register prologue is not the loop.**  Section 38's
 corollary says to delete the loop and recompile; if the head then matches, the
@@ -50,6 +50,60 @@ this reconstruction puts the same two values in ebx/edi, so the compiler
 reserves all four up front.  It is a register-role permutation across the
 entry block, not loop pressure, and not reachable by deleting or reshaping
 the walk.
+
+## m_PoolAlloc closed: asm operands must be named locals (2026-09-13, round 23)
+
+`0x10006d20 m_PoolAlloc` was the first of the 21 to fall: **266/270 ->
+270/270**, `NEAR_MATCHING` -> `RELOC`, and the tree's byte-exact count goes
+259 -> 261 (the 260th is `gzread`, see the distance table).  The residual was
+the two parameter-home stores in the target's descending order
+(`mov [ebp+0xc],edx` / `mov [ebp+8],esi`) where the reconstruction emitted
+them ascending; every source swap of the two statements scored 260 because
+msvc6 then sinks `alen -= 4` (`add esi,-4`) below the stores.
+
+The reconstruction had been forcing those homes with volatile aliases
+(`*(volatile int*) &head = asize;` / `*(void* volatile*) psize = slot;`),
+which is what pinned the stores in source order.  **That whole apparatus is
+unnecessary and harmful.**  `/O2` reuses the dead parameter slots for two
+ordinary block-scope locals on its own, and when the asm block names those
+locals directly it emits the target's exact sequence:
+
+```c
+char* fdest;
+int flen;
+...
+fdest = (char*) slot;
+flen = (int) alen;
+__asm {
+    mov edi, fdest
+    mov ebx, flen
+    xor eax, eax
+    lea ecx, [edi+edi*2]
+    ...
+}
+```
+
+`fdest` lands at `[ebp+0xc]` and `flen` at `[ebp+8]` (the dead `head`/`size`
+slots), the stores come out dest-then-len in the target's order, and
+`add esi,-4` stays ahead of both.  No volatile, no `&param` aliasing, no
+undefined behaviour.
+
+**The generalisable rule:** when the reference's block-fill prelude reads its
+operands from memory, the operands were *ordinary locals* in the original
+source and the register allocator chose those slots.  Naming the locals in
+the asm block and letting msvc6 allocate reproduces the choice; forcing the
+slots through volatile aliases reproduces the addresses but not the schedule,
+and the schedule is what the byte compare sees.  The same test was run on the
+other two missing-prelude functions and neither is prelude-limited:
+`m_AllocTracked` (0x10006580) reaches obj 646 against 658 with the prelude
+present and its score falls (241 -> 180) because the frame grows 8 bytes and
+the entry register roles are the real wall (see "Next three blockers");
+`gm_AllocGebaeude` (0x100174d0) emits the prelude correctly but is 22 bytes
+over and structurally shifted from offset 96.
+
+Also re-confirmed this round, and negative: the 2026-09-11 service-pack sweep
+already covers all seven VC 6.0 builds over these functions ("Twenty compile
+to identical objects under every build"), so another SP sweep is redundant.
 
 ## Static demotion is clean but neutral (2026-09-13, round 21)
 

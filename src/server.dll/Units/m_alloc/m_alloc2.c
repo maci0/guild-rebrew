@@ -200,18 +200,25 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 			{
 				char *alen;
 				int count;
-				void **psize;
-				/* The target homes the fill operands back into the incoming
-				 * parameter slots, dest at [ebp+0xc] through (char*)&head+4 and
-				 * len at [ebp+8] via *(int*)&head, then reloads them into
-				 * edi/ebx for the block-fill prelude.  Volatile stores through
-				 * both aliases keep the homes live (a plain store is dead once
-				 * the read-backs are gone) and force the alen-=4 (ADD esi,-4)
-				 * ahead of the fill.  The prelude is the original's hand-written
-				 * 24-byte block-fill (docs/msvc6-allocator.md Finding 19), emitted
-				 * as inline asm; the rest stays C.  266/270: the two homes are
-				 * emitted [ebp+8] then [ebp+0xc] where the target has the reverse,
-				 * a 4-byte scheduler residue. */
+				char* fdest;
+				int flen;
+				/* The target's fill operands live in the incoming parameter
+				 * slots: dest at [ebp+0xc] and len at [ebp+8].  That is not a
+				 * hand-placed home, it is /O2 reusing the dead parameter slots
+				 * for the two block-scoped locals, and the register allocator
+				 * picks them when the locals are ordinary (non-volatile)
+				 * variables named directly by the asm block.  Forcing the same
+				 * slots through `*(volatile int*)&head` aliases instead scores
+				 * 266/270: the volatile edge pins the two stores in source
+				 * order, so the target's descending [ebp+0xc] / [ebp+8] order
+				 * cannot be expressed, and any source swap sinks the
+				 * `alen -= 4` (ADD esi,-4) below the stores (260).  With named
+				 * locals msvc6 emits dest then len, in the target's order, with
+				 * `alen -= 4` still ahead of both: 270/270.
+				 *
+				 * The prelude itself is the original's hand-written 24-byte
+				 * block-fill (docs/msvc6-allocator.md Finding 19); no msvc6 C
+				 * memset/memcpy spelling emits it. */
 				alen = (char *)(unsigned)asize;
 				count = block->count;
 				slot += 4;
@@ -220,17 +227,11 @@ void* __cdecl m_PoolAlloc(struct BlockNode** head, int size, int max_items)
 				asize = (int)(unsigned)alen;
 				block->count = count;
 				*(int*)(slot - 4) = (int) block;
-				psize = (void**) ((char*) &head + 4);
-				*(volatile int*) &head = asize;
-				*(void* volatile*) psize = (void*) slot;
-				/*
-				 * TODO: replace this inline-asm fill with proper C once a
-				 * spelling is found; no msvc6 C memset/memcpy form emits the
-				 * prelude (docs/msvc6-allocator.md Finding 19).
-				 */
+				fdest = (char*) slot;
+				flen = (int) alen;
 				__asm {
-					mov edi, [ebp+0xc]
-					mov ebx, [ebp+8]
+					mov edi, fdest
+					mov ebx, flen
 					xor eax, eax
 					lea ecx, [edi+edi*2]
 					and ecx, 3
