@@ -238,32 +238,44 @@ reference's 395), `0x1001f8d0` (+224), the three `exsup` spellings
 story is a different effect from this one: this is the extracted section being
 longer than the reference function.
 
-**3. 5,619 bytes of the 7,840-byte overshoot is LINK's per-object padding.**
-Summing the `.text` sizes of all 447 objects on the rsp gives 143,603 bytes;
-the built `.text` is 149,222.  The 5,619-byte difference is **12.6 bytes per
-object**, introduced by the linker, not by any object's content.  Only 833
-bytes of it sits between consecutive *split* objects (the rest is around the
-game objects and the object/end boundaries), so this is not a property of the
-LIBCMT sections — it is the cost of putting 447 objects on the command line
-instead of linking an archive.
+**3. The rest of the overshoot is 12 whole LIBCMT members LINK still pulls
+from the archive.**  The split objects themselves pack to 41,300 bytes
+(0x1001a0e0 .. 0x10024234) against 40,467 of content — only **+833** bytes of
+slack — so the split objects are *not* where the overshoot lives.  What sits
+after them is: the link still pulls `output.obj`, `sbheap.obj`, `mbctype.obj`,
+`crt0dat.obj`, `cvt.obj`, `tzset.obj`, `exsup.obj`, `winxfltr.obj`,
+`dllmain.obj`, `_file.obj`, `dllcrt0.obj`, `a_cmp.obj` from `LIBCMT.lib` —
+**12 members, 34 symbols, 4,978 bytes** (0x10024234 .. 0x100255a6) — because
+some reference from a command-line object is still satisfied only by the
+archive.  That member list is exactly the one rounds 17-21 recorded as "the 34
+leftovers", so a symbol-level metric and this byte-level one agree for once.
 
-So the decomposition of the overshoot is
+So the complete decomposition of the +7,840-byte overshoot is
 
 | component | bytes |
 |---|---|
-| mapped sections, over-inclusion | +1,049 |
-| LINK per-object padding | +5,619 |
-| ordering / misplaced objects | ~+900 |
-| missing code before `_fclose` | -170 |
+| game region, missing code before `_fclose` | -170 |
+| split objects, inter-object slack | +833 |
+| archive-pulled members (12 members / 34 symbols) | +4,978 |
+| trailing data/stub/helper objects and end padding | +2,199 |
 | **total** | **+7,840** |
 
-**Consequence for the CRT half.**  Roughly 72% of the gap is not a
-reconstruction question at all: it is the object granularity.  Packing the
-mapped sections into fewer objects — e.g. `.text$001`..`.text$NNN`
-sub-sections inside one object, which LINK concatenates in suffix order — should
-reclaim most of the 5,619 bytes without changing a byte of content.  That is
-the next experiment, and `scripts/make_split_rsp.py` plus
-`scripts/split_audit.py` make its result measurable.
+**Correction.**  An earlier draft of this section claimed 5,619 bytes of
+"LINK per-object padding" from comparing the summed `.text` of everything on
+the rsp (143,603) with the built `.text` (149,222).  That comparison is
+invalid: it spans the game objects, the split objects and the archive members
+mixed together, and the archive members are not on the rsp at all.  Measured
+inside the split region the slack is 833 bytes, and the real third term is the
+archive pull above.
+
+**Consequence for the CRT half.**  Two thirds of the gap is one problem —
+"make the split set define every symbol the pulled members define" — and it is
+the same problem rounds 17-21 were iterating on from the symbol side.  The
+remaining third is small and local.  `scripts/make_split_rsp.py` and
+`scripts/split_audit.py` make either measurable, and the next experiment is to
+enumerate the undefined references each pulled member satisfies (link with
+`/VERBOSE`, or diff the archive symbols against the symbols the command-line
+objects define) rather than reasoning about the members.
 
 **Also measured:** layout fidelity of the sorted closure build is **169 of 240**
 consecutive split-object pairs placed with exactly the reference's gap; the
