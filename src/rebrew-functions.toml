@@ -1810,7 +1810,6 @@ blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00535560"]
 size = 16
-cflags = "/O2 /Gd"
 status = "STUB"
 updated_by = "test"
 updated_at = "2026-09-12T14:33:21+00:00"
@@ -1825,12 +1824,14 @@ status = "NEAR_MATCHING"
 updated_by = "test"
 updated_at = "2026-09-12T14:53:02+00:00"
 size = 404
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/Error/Error_c"
 
 ["GOLDTL.0x00412f10"]
 status = "SIZE_MISMATCH"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:27+00:00"
 size = 416
+cflags = "/O2 /Gd /Oy- /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"
 
 ["GOLDTL.0x0042e450"]
 status = "RELOC"
@@ -1849,54 +1850,63 @@ status = "SIZE_MISMATCH"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:24+00:00"
 size = 496
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"
 
 ["GOLDTL.0x004c7400"]
 status = "NEAR_MATCHING"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:15+00:00"
 size = 336
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
 
 ["GOLDTL.0x004f1650"]
 status = "SIZE_MISMATCH"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:20+00:00"
 size = 320
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x004f18d0"]
 status = "SIZE_MISMATCH"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:16+00:00"
 size = 320
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x004f2880"]
 status = "NEAR_MATCHING"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:19+00:00"
 size = 400
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x004f2a80"]
 status = "NEAR_MATCHING"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:20+00:00"
 size = 288
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x004f2c00"]
 status = "NEAR_MATCHING"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:18+00:00"
 size = 304
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x004f2d90"]
 status = "SIZE_MISMATCH"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:21+00:00"
 size = 240
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x00502850"]
 status = "SIZE_MISMATCH"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:17+00:00"
 size = 464
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
 
 ["GOLDTL.0x00502e00"]
 status = "RELOC"
@@ -1909,21 +1919,62 @@ status = "SIZE_MISMATCH"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:17+00:00"
 size = 991
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
 
 ["GOLDTL.0x005218f0"]
 status = "NEAR_MATCHING"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:22+00:00"
 size = 37
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/loadsave/loadsave_c"
 
 ["GOLDTL.0x0063e931"]
 status = "SIZE_MISMATCH"
 updated_by = "test"
 updated_at = "2026-09-12T14:56:23+00:00"
 size = 495
+cflags = "/O2 /Gd /G6 /Oy- /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/m_alloc/m_alloc_c"
 
 ["GOLDTL.0x004ec850"]
 size = 80
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/alchemistry_logic_c"
 
 ["GOLDTL.0x004959f0"]
 size = 32
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x00430580"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"
+
+["GOLDTL.0x00430cb0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs/vfs_c"
+
+["GOLDTL.0x0045f2c0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"
+
+["GOLDTL.0x004c4b00"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/loadsave"
+
+["GOLDTL.0x004cc490"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x004f6520"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x005027d0"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-12T15:09:44+00:00"
+
+["GOLDTL.0x00503e80"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+
+["GOLDTL.0x00521eb0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/loadsave/loadsave_c"
+
+["GOLDTL.0x00522ac0"]
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/loadsave/loadsave_c"
+
+["GOLDTL.0x005c86b0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/net"

@@ -28,8 +28,6 @@ void __cdecl ahm_ResetEntityState(void* a)
  * non-zero when the entity type table marks it as an alchemy building
  * (0x1e) and the record carries an allocated data pointer. */
 
-// FUNCTION: SERVER 0x1000BDA0
-// SIZE: 70
 
 
 int __cdecl ahm_CheckFlag(void* a)

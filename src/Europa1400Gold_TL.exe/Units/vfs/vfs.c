@@ -1,0 +1,121 @@
+#include "../../Units/Error/error.h"
+#include "../../Units/m_alloc/m_alloc.h"
+#include "zlib.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int* __cdecl _errno(void);
+int __cdecl vfs_WriteBufferLocked(void*, int, int, int);
+void __cdecl free(void*);
+int __cdecl vfs_FreeGameSubobject(void*);
+int __cdecl vfs_CleanupSubobject(void*);
+int __cdecl vfs_CompressBlock(void*, int);
+int __cdecl vfs_LockedFwrite(void*, int, int, void*);
+unsigned int __cdecl vfs_GetByte(int*);
+unsigned int __cdecl vfs_FlushStream(int, int);
+void __cdecl vfs_WriteUint32LE(int, unsigned int);
+int __cdecl vfs_CloseStream(void*);
+void __cdecl vfs_EntityCleanup(char*);
+
+void __cdecl vfs_StreamClose(int);
+extern unsigned int __cdecl crc32(unsigned int crc, unsigned char* buf, unsigned int len);
+void __cdecl vfs_FreeSubobj(void*);
+int __cdecl vfs_CleanupObject(char*);
+int __cdecl vfs_DestroyEntity(char*);
+int __cdecl vfs_ReadUint32BE(int);
+int __cdecl vfs_FlushAndClose(int);
+
+int __cdecl vfs_ReadCompressed(int, int, unsigned int);
+
+/* Reads a single byte from a VFS stream. Advances the read
+ * position and returns the byte value, or error on EOF. */
+
+// FUNCTION: GOLDTL 0x45f2c0
+// SIZE: 192
+// vfs_GetByte
+
+unsigned int __cdecl vfs_GetByte(int* stream)
+{
+	int* errno_ptr;
+	int bytes_read;
+
+	if (stream[0xf] != 0) {
+		return (unsigned int) -1;
+	}
+	if (stream[1] == 0) {
+		errno_ptr = _errno();
+		*errno_ptr = 0;
+		bytes_read = (int) fread((void*) stream[0x11], 1, 0x4000, (FILE*) stream[0x10]);
+		stream[1] = bytes_read;
+		if (bytes_read == 0) {
+			stream[0xf] = 1;
+			if ((*(unsigned char*) (stream[0x10] + 0xc) & 0x20) != 0) {
+				stream[0xe] = -1;
+			}
+			return (unsigned int) -1;
+		}
+		stream[0] = stream[0x11];
+	}
+	/* The read cursor is post-incremented in place through a pointer alias
+	 * of stream[0]. Copying it into a local first makes MSVC6 hold the
+	 * cursor in ecx and zero-extend the byte into eax, which loses the
+	 * target's reuse of eax for both the count temp and the cursor. */
+	stream[1] = stream[1] - 1;
+	return *(*(unsigned char**) &stream[0])++;
+}
+
+/* Closes a VFS stream and releases associated resources.
+ * Frees internal buffers and removes from open stream list. */
+
+// vfs_CloseStream
+
+int __cdecl vfs_CloseStream(void* stream)
+{
+	int close_result;
+	int* errno_ptr;
+	int result;
+
+	result = 0;
+	if (stream == 0) {
+		return -2;
+	}
+	if (*(void**) ((int) stream + 0x50) != 0) {
+		free(*(void**) ((int) stream + 0x50));
+	}
+	if (*(int*) ((int) stream + 0x1c) != 0) {
+		if (*(char*) ((int) stream + 0x5c) == 'w') {
+			result = deflateEnd((void*) stream);
+		}
+		else if (*(char*) ((int) stream + 0x5c) == 'r') {
+			result = inflateEnd((void*) stream);
+		}
+	}
+	if (*(FILE**) ((int) stream + 0x40) != 0) {
+		close_result = fflush(*(FILE**) ((int) stream + 0x40));
+		if (close_result != 0) {
+			errno_ptr = _errno();
+			if (*errno_ptr != 0x1d) {
+				result = -1;
+			}
+		}
+	}
+	if (*(int*) ((int) stream + 0x38) < 0) {
+		result = *(int*) ((int) stream + 0x38);
+	}
+	if (*(void**) ((int) stream + 0x44) != 0) {
+		free(*(void**) ((int) stream + 0x44));
+	}
+	if (*(void**) ((int) stream + 0x48) != 0) {
+		free(*(void**) ((int) stream + 0x48));
+	}
+	if (*(void**) ((int) stream + 0x54) != 0) {
+		free(*(void**) ((int) stream + 0x54));
+	}
+	free(stream);
+	return result;
+}
+
+/* Flushes pending write data from a VFS stream buffer to
+ * disk. Takes stream handle and flush mode parameters. */
+
