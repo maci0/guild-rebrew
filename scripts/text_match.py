@@ -19,9 +19,16 @@ addresses themselves land right is a separate question, answered by
 `scripts/link_drift.py`: masked 100% plus drift 0 everywhere is byte identity.
 
 Because drift is piecewise constant and shifts whole objects, a fixed-offset
-comparison understates the game region.  Pass `--drift` (a `link_drift.py
---json` file, or the word `auto` to run it) and each tracked function is
-compared at its own drifted offset.
+comparison understates the game region.  `--align` searches +-80 bytes for the
+offset that minimises differing bytes for each tracked function (the list comes
+from `db/verify_results.json`), and `--drift FILE` compares at link_drift.py's
+offsets instead.
+
+One caveat: the mask is the *union* of the reference's and the candidate's
+relocation slots, so once the two instruction streams diverge it hides bytes
+that sit inside a wrongly-sized candidate instruction.  Read this as "how big
+is the gap, and where", and `rebrew diff` / `rebrew test` as the authority for
+any one function.
 
 Usage:
     python3 scripts/text_match.py                          # whole .text
