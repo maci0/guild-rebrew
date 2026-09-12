@@ -14,7 +14,9 @@ GetWindowTextA   ref 0x1002414c   built 0x10024148
 reference's order; emitting them in the opposite order lands each import in
 the reference's slot.  Reading the map's `__imp__` symbols in address order
 now gives **0 mismatches** against the reference across all four DLLs, with an
-identical per-DLL order (KERNEL32 81, USER32 2, WS2_32 16, WINMM 1).
+identical per-DLL order (KERNEL32 81, USER32 2, WS2_32 16, WINMM 1).  The
+split build, which is the byte-identity vehicle, verifies 0 mismatches too,
+and both binaries put the IAT at the reference's 0x10024000..0x10024154.
 
 **Tooling trap, worth remembering:** comparing import tables with pefile's
 `DIRECTORY_ENTRY_IMPORT` order reports WS2_32 as badly scrambled, but that
