@@ -141,15 +141,30 @@ VirtualSize 138,113 -> 139,185 (+1,072 B) against the reference's 141,382, and
 the postlink layout coverage is unchanged (269 vs 270 of 7,463 map entries).
 That 1,072 B is a link change, not decompilation.
 
-The rest has no stock supplier, now shown directly rather than by search:
-linking with `/INCLUDE:` for all 22 symbols in the table leaves 20 unresolved
-(LNK2001).  `_strdup` and `_getpid` do resolve, but forcing both adds only 11 B
-of `.text`, so they are not worth two more link objects.  `rebrew xrefs
-0x10022ff1` puts both callers inside the CRT, so these are not recoverable by
-reversing game code either: our displaced CRT startup never references the
-startup/float/stdio path that pulled these members in the original.  The
-remaining 2,197 B of `.text` needs the game's own CRT archive; neither more
-decompilation nor more linking reaches it.
+**This paragraph's conclusion was wrong and is retracted (2026-09-12).**  The
+LNK2001 list came from *guessed, undecorated* symbol names.  With RevEng.AI's
+names for the same VAs the members are in LIBCMT after all, and forcing six of
+them — `___dtold`, `_wctomb`, `__setmode_lk`, `__strdup`, `__NLG_Notify`,
+`__ms_p5_mp_test_fdiv` — takes `.text` from 0x21fb1 to **0x228ec against the
+reference's 0x22846**: 166 B *over*, where this file previously claimed 2,197 B
+short and unreachable.  `$I10_OUTPUT` (0x10022a2f, 659 B) is genuinely absent
+(LNK2001) and is not forced, so the honest count is six of seven.  `exsup.obj`
+is likewise present, reachable via `__NLG_Notify`, not absent as the table said.
+
+What remains is **member selection, not missing code**: `/INCLUDE` drags whole
+LIBCMT objects, so the six add ~2,363 B for ~492 B of annotated functions
+(`___dtold` alone pulls `cfout.obj`, contributing 944 B).  The 166 B is the
+difference between the reference's choice of members and ours.
+
+**How not to measure it.**  Five attempts to attribute the 166 B by searching
+the two linked images all failed, and the reason is structural: the operands
+that differ between two links — IAT slots (`[0x10024154]` vs `[0x10024158]`) and
+intra-image relative call displacements — carry **no relocation entry**, so
+masking cannot reach them; and the annotation VAs do not bound functions
+reliably.  Byte search, `.reloc`-masked search and disassembly-level search are
+all invalid here.  The working route is a layout-resolved comparison
+(`rebrew test --linked`, or `reccmp`, for which `db/server.dll_functions.csv`
+is already formatted) or a member-level comparison against `LIBCMT.LIB` itself.
 
 `rebrew lib-match --lib .scratch/libcmt/LIBCMT.sp6.LIB` byte-matches 18 reversed
 functions against LIBCMT members (the `__sbh_*` / `___old_sbh_*` family,
