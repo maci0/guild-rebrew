@@ -1,4 +1,3 @@
-// CFLAGS: /O1 /Gd
 // FUNCTION: SERVER 0x1001a643
 #include <windows.h>
 #include "rebrew_types.h"
