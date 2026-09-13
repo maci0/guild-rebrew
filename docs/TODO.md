@@ -71,6 +71,30 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-189: the pad step's LONG list is not a lever, and the last pad is gone.**
+
+Residue **9,684**.
+
+`cm_ExCopyEntityData` -1 (466 -> 465), and structurally more than the byte: its object
+was 896 and `pad_short_functions.py` was appending a separate 16-byte `.text` of zeros
+to reach 912, the reference's own span.  It is now 912 of real code -- three hunks: the
+type-2 arm's `cmd_ptr+0x18` read and the type-1 arm's `>= 0` test become volatile (same
+value), and the type-1 *secondary* clamp is rewritten in-range-first, which is
+equivalent (the new third arm fires exactly when the old first did).  The pad step now
+reports nothing short anywhere in the tree.
+
+*The `LONG` list is noise.*  It has 149 entries and reads like the drift source, but it
+compares our **padded** object size against the **metadata** size, so most entries are
+16-byte alignment slack (`cm_ProcessCommandQueue 640 > 639 (+1)`) and some are
+meaningless (`vfs_OpenStream 704 > 667 (+37)` compares against a size that excludes the
+object's own jump table and case map, whose real span is 701 rounded to 704).  The
+quantity that would matter is our padded size against the *reference object's* padded
+size, and nothing computes that.  Do not spend a round on `LONG` as it stands.
+
+*Only one object needed padding*, which is worth knowing: the drift that moves 73 of
+319 symbols is not coming from short objects any more.  Whatever remains of it is in
+the 149 long entries' alignment slack, or in the link order itself.
+
 **Round-188: per-function numbers are not comparable across compositions.**
 
 Residue **9,685**.
