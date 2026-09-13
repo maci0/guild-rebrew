@@ -1,5 +1,43 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-246: two passes disagreed about `cm_ExSellObjekt`'s frame; the reference settles it,
+and round 2 was wrong.**
+
+Round 2 explained the rel8/rel32 histogram (ours 71/32 against the reference's 70/33) as
+"the reference's frame is 4 bytes larger, so its sites sit ~4 bytes further from the tail and
+one crosses the +-127 boundary", and implied frame `0x22c` variants were closer.  The first
+pass, and the project's own record, said the frame **matches**.
+
+Disassembling the reference's prologue at `0x1000d930` settles it:
+
+```
+1000d930  81ec28020000   sub esp, 0x228      <- the reference's frame IS 0x228
+1000d936  a16c0b0310     mov eax,[0x10030b6c]
+1000d93b  53             push ebx
+...
+1000d955  897c2410       mov [esp+0x10],edi   <- the =0 initialiser block,
+1000d959  897c2414       mov [esp+0x14],edi      in SOURCE order, not address order
+1000d95d  897c242c       mov [esp+0x2c],edi
+1000d961  897c2418       mov [esp+0x18],edi
+1000d965  897c2420       mov [esp+0x20],edi
+1000d969  897c2428       mov [esp+0x28],edi
+```
+
+So `0x228` is correct, `0x22c` is not closer, and **the histogram difference is downstream of
+the body's other length differences, not an independent lever** -- do not try to "fix" the
+frame by adding 4 bytes.
+
+Two incidental readings from the same disassembly, recorded because they are cheap ground
+truth for any future pass on this function:
+- the reference's zero-initialiser stores are emitted **in source order** and are *not* in
+  ascending slot order (`0x2c` is stored third, before `0x18`), so the store sequence encodes
+  the source's initialiser order combined with the slot map;
+- the slot map round 2 read out with a sentinel probe (allocator Finding 60) is therefore the
+  thing to compare against this sequence -- but that pass measured eleven rotations of our
+  initialiser block as all byte-identical, so on this function the sequence is not steerable
+  from the source and the swap stays parked.
+
+
 **Round-245 (result): 9,297 -> 9,293, and a toolchain bug fixed at source.**
 
 One win: `ServerMainThread` -4 linked (its volatile-pinned cmd8 store; the agent was honest
