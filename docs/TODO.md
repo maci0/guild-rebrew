@@ -2,6 +2,27 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+**Round-247: the whole image outside `.text` is verified byte-identical, and the fill-byte
+line is closed.**
+
+Structural verification, all measured this round:
+- the PE has exactly four sections (`.data`, `.rdata`, `.reloc`, `.text`) and the first three
+  differ by **0**; there is **no `.idata` section** -- imports live inside the already-matching
+  `.rdata`/`.data`, which is why the residue table has no imports row;
+- the import table is **100 entries in both, matching in set *and* in order** (AGENTS.md's
+  documented check);
+- so 100% of the remaining work is `.text` code generation.
+
+**The fill-byte line is closed.** Round 246 won 13 bytes from a gap byte (`0xCC` where the
+reference had `0x90`) and it was reasonable to ask whether more of that class existed.  It
+does not: scanning every run of >=4 identical padding bytes in the reference (`0x90`, `0xCC`
+or `0x00` -- 435 runs, 3,295 bytes, 2.3% of `.text`), only **30 bytes** differ, and all 30 are
+*code overrunning padding*, not fill mismatches.  The largest is 4 bytes at `0x1000bf64`
+where the reference has four zero bytes and we have instructions -- a code-length difference
+in the preceding function, which is exactly the work the per-function climbs are already
+doing.  No second pad-style fix exists; do not re-open this.
+
+
 **Residue: 9,280 bytes of 0x22846 in `.text` (6.56%).** Everything else in the PE is
 already byte-identical: `.data`, `.rdata`, `.reloc` and the headers all differ by **0**, and
 the import table is 100 entries matching the reference in set *and* order. There is no
