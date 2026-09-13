@@ -1,5 +1,43 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-246 (result): 9,293 -> 9,280 (-13), from a fill byte rather than from code.**
+
+The win came out of a scan for residue that falls *outside* every named function.  That
+region was 20 bytes, and 13 of them were `0x90` in the reference against `0xCC` in ours --
+not code at all, but the gap between `CrashDumpUnhandledExceptionFilter`'s end and the next
+function.  The cause: `pad_short_functions.py` padded a short object to the **unaligned**
+`want` (2115 against `have` 2112), which left the remaining 13 bytes of that 16-byte slot for
+LINK to fill -- and LINK fills with `0xCC`.  It now pads to the **aligned span** (2128) and
+fills with `0x90`, emitting the whole slot itself.  Re-linking with no source recompiled:
+9,293 -> 9,280, all 13 in the outside-functions row, and no other row moved.
+
+Worth noting the check that made it safe: the built `.text` contains **295 bytes of `0xCC`,
+and only those 13 differ** -- the other 282 match the reference's own `0xCC`.  So this is a
+targeted fill, not a blanket refill; a blanket change of the pad byte would have created 282
+new mismatches.  Also verified that `pad_short_functions` pads exactly one object today.
+
+**`gm_AllocSpieler` is closed for good, and my brief for it was wrong.**  I sent an agent to
+apply the `volatile`-at-use-site lever there on the premise that adding `volatile` selects
+the reference's `xor r,r; mov r16,[mem]` form.  Section 52 of the shapes doc says the
+opposite -- `volatile` selects the *masked* form -- and it is right; 14 probes refuted my
+premise.  What the pass established is where the lever stops, now recorded as an amendment to
+section 52: dropping the qualifier does reproduce the reference's form at the sympathy-loop
+reads, but it is what holds that loop's register allocation, so it costs 362 matched bytes.
+Sweeping the qualifier *in* is strictly worse (736 -> 488/408/365) and the full sets exceed
+the 3696 composition band.
+
+Also closed there: the "6 extra `and r,0xffff`, 4 missing `xor`" inventory that three passes
+worked from is a **fixed-offset artifact**.  Both sides' real code is already exactly 3689
+bytes, the gap curve oscillates +-48 and returns to 0, and all 4 reference `xor`s are present
+in our object.  Of our 16 masks only 7 are genuinely extra.  And `matched` there has a
+ceiling of ~3115 of 3689 on one-sided relocations (allocator Finding 59), so the distance
+from 736 to 3689 was never reachable codegen work.
+
+**Round-246 correction already filed:** `cm_ExSellObjekt`'s frame is `0x228` (read from the
+reference prologue), so round 2's "the reference's frame is 4 bytes larger" is wrong and its
+histogram explanation with it.
+
+
 **Round-246: two passes disagreed about `cm_ExSellObjekt`'s frame; the reference settles it,
 and round 2 was wrong.**
 
