@@ -27,6 +27,11 @@ from instr_diff import BUILT, REFERENCE, instructions, mask, sections  # noqa: E
 import capstone  # noqa: E402
 
 MD = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+# Without skipdata, disasm() STOPS at the first byte it cannot decode, so an
+# analysis silently reads only a prefix of the function (gm_AllocSpieler: 1014
+# of 1056 instructions) -- which produced two false "missing call" leads before
+# this was noticed.  Undecodable bytes are emitted as .byte and counted.
+MD.skipdata = True
 
 
 def load(path: Path, va: int, size: int):
@@ -38,6 +43,8 @@ def load(path: Path, va: int, size: int):
     body = raw[off : off + size]
     out = []
     for ins in MD.disasm(body, va):
+        if ins.id == 0:  # skipdata padding: not a real instruction
+            continue
         masked = bytes(0 if m[ins.address - va + k] else ins.bytes[k]
                        for k in range(ins.size))
         out.append((masked, ins))
@@ -59,7 +66,9 @@ def main() -> int:
     ref = load(REFERENCE, args.va, size)
     pat = load(Path(args.built or BUILT), args.va, size)
     print(f"0x{args.va:x} size {size}: reference {len(ref)} insns, "
-          f"built {len(pat)} insns")
+          f"built {len(pat)} insns"
+          + (f"  (built ends 0x{pat[-1][1].address + pat[-1][1].size:x})"
+             if pat else ""))
 
     sm = difflib.SequenceMatcher(None, [b for b, _ in ref], [b for b, _ in pat],
                                  autojunk=False)

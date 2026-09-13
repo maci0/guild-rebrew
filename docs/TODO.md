@@ -71,6 +71,38 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-166: a truncating disassembly that faked three leads, and what a call
+target can and cannot do.**
+
+No byte change (10,934), and the value is two traps closed.
+
+*`MD.disasm` stops at the first byte it cannot decode.*  Every ad-hoc analysis
+this session used it without `skipdata`, so a "call-target comparison" silently
+read only a **prefix** of each function (gm_AllocSpieler: 1014 of 1056
+instructions) and reported calls that were simply beyond the truncation point.
+Three leads came out of that and all three were false:
+
+- `gm_AllocSpieler` "missing" its `_InitNewDynastyEntity` call and a fourth
+  `LogMessageInternal` -- both present; the calls sit past 0x10019644, where the
+  built stream stopped decoding.
+- `vfs_OpenStream` "calling `_toupper`/`crt_toupper` differently" -- it does call
+  a different address in the unlinked object, but see below.
+- `vfs_ReadCompressed` "calling `_fread` where the reference calls `_fwrite`".
+
+`scripts/sizediff.py` now sets `skipdata = True` and reports where the built
+stream ends, and with a complete disassembly the counts line up (reference 1056
+instructions, built 1053, ending exactly at +3689).
+
+*And a call target is a relocation slot, not a byte choice.*  The one lead that
+survived (`vfs_ReadCompressed` calls `fread`, the reference's word at that site
+belongs to `fwrite` -- 7 `fwrite` call sites in the reference against 1 `fread`,
+and we call `fread` twice) was tested by changing the source to `fwrite`: the
+linked image is **byte-identical either way**, because the fixer rewrites the
+E8 displacement from the reference.  What differs is the call's *offset* (ours at
+0x10008b55, the reference's at 0x10008b59) -- i.e. 4 bytes of drift earlier in
+the function -- and no callee spelling can fix an offset.  Reverted: it changed
+semantics for no bytes.
+
 **Round-165: locating the size difference, and two spellings measured shut.**
 
 `scripts/sizediff.py` answers a question the other tools only answer vaguely:
