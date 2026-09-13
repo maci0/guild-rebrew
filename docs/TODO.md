@@ -29,6 +29,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-324 (2026-09-13): VA-resolved polarity hunt void (cross-image).**
+
+- Built the resolver (bytes→absolute targets both sides): 3 same-target
+  polarity pairs (CopyData ×2, Gebaeude ×1). Ground-truth disassembly
+  kills all three: ref's `jge→mov eax,0x7f` vs ours' `jl→mov byte […]`
+  are different clamp-arm structures sharing nothing but a numeric VA —
+  and numeric VA equality across two DIFFERENT layouts is meaningless
+  (same address holds different code in each image). Cross-binary VA
+  comparison is valid only for identical layouts. The round-39 clean
+  verdicts stand; no probe.
+- Residue baseline unchanged: **9,209**.
+
 **Round-323 (2026-09-13): polarity census void (relative targets).**
 
 - Same-mnemonic polarity-pair census across all rows found apparent
