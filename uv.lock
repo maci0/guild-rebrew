@@ -1399,7 +1399,6 @@ dependencies = [
     { name = "lief" },
     { name = "numpy" },
     { name = "python-flirt" },
-    { name = "rebrew-workspace" },
     { name = "rich" },
     { name = "tomlkit" },
     { name = "tree-sitter" },
@@ -1423,7 +1422,6 @@ requires-dist = [
     { name = "numpy", specifier = ">=1.26" },
     { name = "python-flirt", specifier = ">=0.9.10" },
     { name = "rapidfuzz", marker = "extra == 'similarity'", specifier = ">=3.13" },
-    { name = "rebrew-workspace", editable = "../rebrew-workspace" },
     { name = "resembl", marker = "extra == 'similarity'", directory = "../resembl" },
     { name = "rich", specifier = ">=13.0" },
     { name = "tomlkit", specifier = ">=0.12" },
@@ -1443,19 +1441,6 @@ dev = [
     { name = "skills-ref", specifier = ">=0.1.1" },
     { name = "slipcover", specifier = ">=1.0.17" },
 ]
-
-[[package]]
-name = "rebrew-workspace"
-version = "0.1.0"
-source = { editable = "../rebrew-workspace" }
-
-[package.metadata]
-requires-dist = [
-    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.10" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.3" },
-]
-provides-extras = ["dev"]
 
 [[package]]
 name = "reccmp"
