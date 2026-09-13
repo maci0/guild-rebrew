@@ -1,5 +1,55 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-153: the build was not compiling with the flags every measurement
+assumed — `gm_AllocSpieler` was 363 bytes of identity behind.**
+
+`CMakeLists.txt:apply_annotation_cflags` takes a file's flags from its
+`// CFLAGS:` line and falls back to `/O2 /Gd`; `src/rebrew-functions.toml`'s
+`cflags` is read by `rebrew test`/`verify` but *not* by the build.  Where the
+two disagree in a codegen-relevant flag, every number recorded in a file's notes
+describes a build the tree is not producing.  Exactly one of the eighteen
+remaining functions is in that state: `gm_AllocSpieler`, whose metadata says
+`/O2 /Gd /Oa /Ow` (and whose whole note was measured that way) while its
+annotation said `/O2 /Gd /Oa`.  Re-measured with `scripts/probe_function.py`:
+
+```
+/O2 /Gd /Oa      914/3689  1047 instructions
+/O2 /Gd /Oa /Ow 1194/3689  1054 instructions      <- what the notes describe
+```
+
+Adding `/Ow` to the annotation and *reconfiguring* (`apply_annotation_cflags`
+bakes `COMPILE_FLAGS` in at configure time, so a rebuild alone silently reuses
+the old flags — that is how the first attempt at this looked like a no-op) takes
+the linked residue from
+
+```
+.text differing 0x2db6 of 0x22846 (8.28%)
+gm_AllocSpieler  3343
+```
+to
+```
+.text differing 0x2c48 of 0x22846 (8.02%)
+gm_AllocSpieler  2980
+```
+
+Every other residual function's annotation agrees with its metadata's codegen
+flags (the remaining rows differ only by `/DREBREW_ALLOW_NAKED`, which emits no
+code).
+
+Two negative results from the same round, both cheap and both closing a class:
+
+- **The service pack is not the difference.**  `cm_ExProdObjekt` compiled with
+  `REBREW_TOOLCHAIN=msvc-6.0-sp1|sp2|sp3|sp4|sp5|sp6` produces a byte-identical
+  object (980/993, 354 instructions) in all six; only `sp5-pp` differs (743/992,
+  353).  So the eighteen holdouts are not VC6-SP drift that the rest of the tree
+  happens to be insensitive to.
+- **`rebrew match`'s GA fitness does not agree with the positional metric.**
+  Run on `srv_LoadBuf` it reached a `best_score` of 73400 (generation 5) with a
+  candidate that adds `int _dummy_96; BOOL tmp;` and routes `ret` through `tmp`;
+  measured with `probe_function.py` that candidate is 701/750, byte-for-byte the
+  documented baseline.  Do not take a GA score as a positional win without
+  re-measuring.
+
 **Round-152: a probe harness for one function (the missing piece for every
 remaining sweep).**
 

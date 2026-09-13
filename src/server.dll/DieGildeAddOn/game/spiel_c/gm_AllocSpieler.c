@@ -85,9 +85,20 @@
  *
  * Remaining delta: 8 bytes short, spread over ~192 one- and two-instruction
  * hunks.  The prologues match exactly (`sub esp, 0x41c` on both sides), so
- * this is not a frame-size difference. */
+ * this is not a frame-size difference.
+ *
+ * `/Ow` is load-bearing and must stay on the `// CFLAGS:` line below, which is
+ * what the CMake build reads (`apply_annotation_cflags`), *not*
+ * `src/rebrew-functions.toml`.  The annotation used to carry `/O2 /Gd /Oa`
+ * alone while the metadata carried `/Oa /Ow`, so every measurement recorded
+ * above (all made through `rebrew test`/the metadata) described a build the
+ * tree was not producing: the linked function was 1047 instructions against
+ * the target's 1056 and matched 914 of 3689 bytes, against 1054 and 1194 once
+ * the annotation matches.  Note that CMake bakes `COMPILE_FLAGS` in at
+ * configure time, so editing this line needs `cmake -S . -B build`, not just a
+ * rebuild. */
 
-// CFLAGS: /O2 /Gd /Oa
+// CFLAGS: /O2 /Gd /Oa /Ow
 // FUNCTION: SERVER 0x10018850
 
 #include <stdlib.h>
