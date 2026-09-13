@@ -202,7 +202,10 @@ def target_size(va: str) -> int:
 # whichever ran second won -- and it scored better.)
 CAST = re.compile(r"\(\s*(?:\w+\s+)*\w+\s*\*+\s*\)")
 IDENT = re.compile(r"[A-Za-z_]\w*")
-KEYWORDS = {
+# Names that are not object references: statement keywords plus type words.
+# (A separate set from the statement KEYWORDS above, which `is_decl` uses --
+# redefining that one silently stopped declarations being recognised.)
+NOISE = {
     "if", "else", "while", "for", "do", "switch", "case", "default", "return",
     "goto", "break", "continue", "sizeof", "void", "char", "short", "int",
     "long", "float", "double", "unsigned", "signed", "const", "static",
@@ -242,8 +245,8 @@ def accesses(unit: str) -> tuple[set[str], set[str], set[str]]:
             continue
         flat = CAST.sub("", lhs)
         dests.add(re.sub(r"\s+", "", flat))
-        touched |= {t for t in IDENT.findall(flat) if t not in KEYWORDS}
-    reads = {t for t in IDENT.findall(CAST.sub("", code)) if t not in KEYWORDS}
+        touched |= {t for t in IDENT.findall(flat) if t not in NOISE}
+    reads = {t for t in IDENT.findall(CAST.sub("", code)) if t not in NOISE}
     return dests, touched, reads
 
 
@@ -326,6 +329,34 @@ def main() -> int:
         return 0
 
     order = list(range(len(units)))
+    original = list(range(len(units)))
+    from collections import Counter
+    counts = Counter(strip_literals(u).strip() for u in units)
+
+    def order_violations(o) -> list[tuple[int, int]]:
+        """Conflicting pairs whose relative order changed.
+
+        Checking only the span a move crosses is not enough: a sequence of
+        individually safe moves can still end up with a unit on the far side of
+        a unit it conflicts with.  (Measured: gm_AllocSpieler's two-step move of
+        `g_next_object_id++` landed it *above* the store that reads it, so the
+        store read the incremented value.)
+        """
+        pos = {u: k for k, u in enumerate(o)}
+        bad = []
+        for a in range(len(units)):
+            for b in range(a + 1, len(units)):
+                # Only pairs whose units are textually unique can be traced
+                # across the run: repeated statements (a field set the same way
+                # in several branches) cannot be matched to their original
+                # occurrence, and guessing there reports inversions that are not
+                # there.
+                ua, ub = strip_literals(units[a]).strip(), strip_literals(units[b]).strip()
+                if counts[ua] != 1 or counts[ub] != 1:
+                    continue
+                if pos[a] > pos[b] and conflicts(units[a], units[b]):
+                    bad.append((a, b))
+        return bad
 
     def render(o) -> str:
         return "".join(units[k] for k in o)
@@ -343,23 +374,41 @@ def main() -> int:
         tmp.write_text(header(head) + render(move(order, i, j)) + tail)
         return (i, j), score(tmp, args.va)
 
+    def seq(o):
+        """The units in the order they currently appear.
+
+        Candidates are positions in the *current* sequence.  Checking them
+        against `units` (which is indexed by original position) instead was the
+        bug that let an unsafe arrangement through: after the first accepted
+        move every barrier and conflict test looked at the wrong pair.
+        """
+        return [units[k] for k in o]
+
     base = score(src, args.va)
     tgt = target_size(args.va)
     print(f"baseline {base[1]} matched, instruction delta {base[2]:+d}, "
           f"object size {base[3]} vs target {tgt}")
     try:
         for rnd in range(args.rounds):
+            cur = seq(order)
+            cur_barrier = [barrier[k] for k in order]
             cands = [(i, i + d) for i in range(len(units))
                      for d in range(-args.reach, args.reach + 1) if d
                      and 0 <= i + d < len(units)
                      and not (i < ndec <= i + d)          # no decl after a stmt
                      and not (i >= ndec > i + d)          # no stmt before a decl
                      # no crossing a label, in either direction
-                     and not any(barrier[min(i, i + d):max(i, i + d) + 1])
+                     and not any(cur_barrier[min(i, i + d):max(i, i + d) + 1])
                      # and no crossing anything that touches what we touch
-                     and not any(conflicts(units[i], units[k])
-                                 for k in range(min(i, i + d) + 1,
-                                                max(i, i + d) + 1))]
+                     # every unit between the two positions, excluding the
+                     # moved one itself.  For a NEGATIVE move the old range
+                     # started at min+1, which skipped the destination -- so a
+                     # conflict with the unit being crossed was never seen, and
+                     # gm_AllocSpieler's `g_next_object_id++` landed above the
+                     # store that reads it.
+                     and not any(conflicts(cur[i], cur[k])
+                                 for k in range(min(i, i + d), max(i, i + d) + 1)
+                                 if k != i)]
             with cf.ThreadPoolExecutor(max_workers=args.jobs) as ex:
                 results = list(ex.map(lambda ij: submit(*ij), cands))
             for p in src.parent.glob(f"_hc_{name}_*.c"):
@@ -378,10 +427,18 @@ def main() -> int:
             src.write_text(head + render(order) + tail)
             print(f"round {rnd}: {i} -> {j}   {base[1]} matched "
                   f"(insn {base[2]:+d})  "
-                  f"{strip_literals(units[i]).strip().splitlines()[0][:46]!r}")
+                  f"{strip_literals(cur[i]).strip().splitlines()[0][:46]!r}")
     finally:
         for p in src.parent.glob(f"_hc_{name}_*.c"):
             p.unlink(missing_ok=True)
+    bad = order_violations(order)
+    if bad:
+        # Never leave a reordering that changed what a conflicting pair does:
+        # restore the input and say so.
+        src.write_text(head + render(original) + tail)
+        print(f"REJECTED: the climb inverted {len(bad)} conflicting pair(s), "
+              f"e.g. {bad[:3]}; source restored")
+        return 1
     print(f"final {base[1]} matched, instruction delta {base[2]:+d}, "
           f"object size {base[3]} vs target {tgt}")
     return 0

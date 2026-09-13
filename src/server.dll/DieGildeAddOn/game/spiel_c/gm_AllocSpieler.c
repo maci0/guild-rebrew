@@ -204,25 +204,25 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	 * both. */
 	*(unsigned short*) slot = 0xffff;
 	*(int*) (0x100358a4 + idx * 0x21c) = -1;
+	*(int*) (slot + 0x170) = 0;
 	memset((void*) (0x100358fc + idx * 0x21c), 0xff, 0x20);
 
 	/* record header init + debug sprintf/log */
 	*(unsigned short*) (0x100358a0 + idx * 0x21c) = (unsigned short) idx;
-	*(int*) (slot + 0x170) = 0;
 	*(int*) (slot + 0x16c) = 0;
 	slot[0x215] = 0;
 	slot[2] = (char) type;
 	*(int*) (slot + 0x1f0) = 0;
+	g_citizen_count++;
 	*(int*) (slot + 0x210) = -1;
 	slot[0x216] = 0;
 	slot[0x217] = 0;
-	g_citizen_count++;
 	slot[0x218] = 1;
 	sprintf(work, s_fmt_spid_100315e4, g_next_object_id, type);
 	slot[8] = 0x64;
-	LogMessageInternal(s_file_spiel_c_10031004, 0x2637, work, 8);
 	*(int*) (slot + 4) = g_next_object_id;
 	g_next_object_id++;
+	LogMessageInternal(s_file_spiel_c_10031004, 0x2637, work, 8);
 	*(int*) (slot + 0x1e4) = 0x3f800000; /* 1.0f */
 	slot[0x164] = (char) arg6;
 	*(unsigned short*) (slot + 0xa) = (unsigned short) arg4;
@@ -703,11 +703,11 @@ stat_modifiers:
 		slot[0x82 + rnd] =
 		    (char) (*(volatile char*) (slot + 0x82 + rnd) + 0x2a);
 	}
+	LogMessageInternal(s_file_spiel_c_10031004, 0x2888, work, 8);
 	if (idx == 0xffff) {
 		LogMessageInternal(s_file_spiel_c_10031004, 0x286c, s_bug_10031594,
 		                   1);
 	}
 	sprintf(work, s_fmt_playerid_10031570, g_next_object_id, slot + 0x30);
-	LogMessageInternal(s_file_spiel_c_10031004, 0x2888, work, 8);
 	return idx;
 }

@@ -71,6 +71,45 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-158/159: the climb's guards were checked against the wrong sequence.**
+
+10,996 -> 10,964 differing bytes, but the useful part is that three faults in
+the guards are gone -- each one had let an unsafe reordering through while
+scoring better.
+
+- The span a move crosses was computed as `range(min+1, max+1)`, which for a
+  NEGATIVE move skipped the destination index, so a conflict with the unit being
+  crossed was never tested.
+- Worse, candidates were checked against `units` (indexed by *original*
+  position) while the arrangement is a permutation (`order`), so after the first
+  accepted move every barrier and conflict test looked at the wrong pair.
+- The aggregate is not covered by per-move checks anyway, so a run now ends with
+  a **post-condition**: every conflicting pair of textually unique statements
+  must keep its original relative order, else the source is restored and the run
+  reports REJECTED.  (Before it, `gm_AllocSpieler` had inverted 99 conflicting
+  pairs; the one that mattered was `g_next_object_id++` landing above the store
+  that reads it, so the store took the incremented value.)
+
+Also fixed: the read filter's `NOISE` set had been named `KEYWORDS`, shadowing
+the statement-keyword set that `is_decl` uses -- declarations stopped being
+recognised, so they were movable into the statement region (illegal C89, so
+every such candidate failed to compile and was wasted).
+
+With the guards correct, both big functions were climbed for the first time
+against the *positional* metric (their notes describe climbs against an aligned
+one):
+
+```
+gm_AllocSpieler   1194 -> 1240 object bytes, size held at 3696; linked 2980 -> 2947
+CrashDump         523 ->  575 object bytes, size held at 2128; linked 1988 -> 1998
+```
+
+`CrashDump` is the case worth remembering: +52 object bytes and **+10 linked
+bytes** -- the object score is a proxy, and only the linked residue decides.  It
+was reverted; its climb needs the objective to be re-run through the composition
+(a full build per candidate is minutes, so the cheapest correct filter is to
+re-measure at the end and revert, which is what happened here).
+
 **Round-156/157: the climb needed safety rails, and the probe needed fixing.**
 
 11,070 -> 10,996 differing bytes, but the round's real output is that the climb
