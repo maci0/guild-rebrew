@@ -1,5 +1,57 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-154: an unattended statement-move hill-climb — and the objective it
+needed.**
+
+Every note on a remaining function says the residue is statement order and the
+register allocation that follows from it, and that the wins came from moving one
+statement a few lines -- gm_AllocSpieler's 734 -> 858 was exactly that move
+class.  Those climbs were done by hand, one compile per guess.  A compile now
+costs ~1.5 s (`probe_function.py`), so `scripts/hillclimb.py` runs the same
+search unattended: it splits a function body into top-level statement *spans*
+(the whitespace and comments before a statement belong to it, so a reordered
+body is a permutation of the original text -- the first cut re-rendered the body
+and stripped the file's formatting), tries every relocation by up to `--reach`
+positions with declarations pinned to the declaration region (C89), scores each
+with `probe_function.py` over `--jobs` workers, applies the best improving move,
+and repeats until no move improves.  `--dry-run` prints the statement split for
+a new function before any compile is spent.
+
+**The first climb was a mirage, and finding that out was the round's real
+result.**  On `cm_ExSellObjekt` the unconstrained search accepted three moves
+that took the object-level score 387 -> 615 -- and shrank the function from 2057
+to 2044 bytes.  The composition places every function at its reference VA, so a
+size change drags everything after it: `exactly at their reference VA` fell from
+246/319 to **1/319**, and the linked image went from 11,336 differing bytes to
+**89,509**.  The object metric hid it because `probe_function.py` compared over
+`min(target_size, object_size)` -- a short function shrank the denominator and
+scored a flattering percentage.  Both were fixed:
+
+- `probe_function.py` now compares over the target's size (missing bytes count
+  as unmatched) and reports the object's own function size.
+- `hillclimb.py` makes `-|object size - target size|` the **primary** score key,
+  with matched bytes only as the tie-break, and gives a non-compiling candidate a
+  score no real candidate can lose to.
+
+Re-run under that key, `cm_ExSellObjekt` keeps its 2064-byte object and still
+gains: 387 -> 558 object bytes, three moves that the size key had rejected in a
+different order.  The composition stays aligned (246/319 exactly at the
+reference VA, delta +0x0 .. +0x31c) and the linked residue improves
+
+```
+.text differing 0x2c48 of 0x22846 (8.02%)   cm_ExSellObjekt 1979
+.text differing 0x2b82 of 0x22846 (7.88%)   cm_ExSellObjekt 1777
+```
+
+The lesson generalizes: for this target the objective is *position*, so any
+per-object score that ignores size will happily buy bytes with layout.
+
+`gm_ObjectsAvailble` (686/714, the smallest residue in the set) converges
+immediately under the same search: no single-statement relocation at reach 3
+improves it.  Its 28 object bytes are a register-allocation difference (the
+target keeps the clear-loop counter in `ebx` where we keep it in `edi`), which
+this move class cannot reach.
+
 **Round-153: the build was not compiling with the flags every measurement
 assumed — `gm_AllocSpieler` was 363 bytes of identity behind.**
 

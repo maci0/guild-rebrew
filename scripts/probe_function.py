@@ -174,14 +174,23 @@ def main() -> int:
     for r, _sym, _typ in coff.section_relocs(si):
         for k in range(r, min(r + 4, len(body))):
             cmask[k] = 1
-    n = min(size, len(body) - start)
+    # Compare over the TARGET's size, not the object's: a short function used to
+    # shrink the denominator and score a flattering percentage, which is how a
+    # 13-byte-short cm_ExSellObjekt looked like a 228-byte win while it was
+    # costing the composition its position alignment (the linked image went from
+    # 11,336 to 89,509 differing bytes).  The object's own size is reported so a
+    # caller can require it to match.
+    n = size
     cb = body[start : start + n]
-    matched = sum(1 for i in range(n) if (rmask[i] or cmask[start + i]) or rbody[i] == cb[i])
+    matched = sum(
+        1 for i in range(n)
+        if i < len(cb) and ((rmask[i] or cmask[start + i]) or rbody[i] == cb[i])
+    )
     ri = sum(1 for _ in MD.disasm(bytes(rbody[:n]), va))
     ci = sum(1 for _ in MD.disasm(bytes(cb), va))
     print(f"0x{va:x} size {size}: section {si} +{start:#x}, "
           f"matched {matched}/{n} ({100.0 * matched / n:.1f}%), "
-          f"instructions {ci} vs {ri}")
+          f"instructions {ci} vs {ri}, object size {len(body) - start}")
     if tmp is not None:
         print(f"  object: {obj}")
     return 0

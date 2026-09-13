@@ -1,0 +1,311 @@
+#!/usr/bin/env python3
+"""Hill-climb a function's statement order against the reference bytes.
+
+The notes on the remaining non-matching functions all say the same thing: the
+residue is statement order and the register allocation that follows from it, and
+the wins came from moving one statement a few lines (gm_AllocSpieler 734 -> 858
+on exactly that move class, "relocating single statements by one to three lines
+moves the score by tens of bytes").  Those climbs were done by hand, one compile
+per guess.  `scripts/probe_function.py` makes one guess cost about 1.5s, so the
+same search can run unattended.
+
+This splits the function body into top-level statements and repeatedly applies
+the best single move until no move improves the masked byte match.  Moves are
+relocations by up to `--reach` positions, with declarations kept inside the
+declaration region (C89) and statements kept out of it.
+
+The objective is the reference's bytes, so the search cannot "cheat": a move is
+kept only when it makes the compiled function more identical to the target, and
+the source is rewritten in place only on an improvement.
+
+Usage:
+    python3 scripts/hillclimb.py --va 0x10015f70 \\
+        --file src/server.dll/DieGildeAddOn/game/spiel_c/gm_ObjectsAvailble.c
+    python3 scripts/hillclimb.py --va 0x10015f70 --file ... --rounds 3 --jobs 6
+    python3 scripts/hillclimb.py --va 0x10015f70 --file ... --dry-run   # list
+
+`--dry-run` prints the statements it found and exits: the cheap way to check the
+splitter on a new function before spending compiles on it.
+"""
+
+from __future__ import annotations
+
+import argparse
+import concurrent.futures as cf
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+PROBE = ROOT / "scripts/probe_function.py"
+PYTHON = sys.executable
+
+DECL_NAME = re.compile(r"[A-Za-z_]\w*(?:\[[^\]]*\])*$")
+KEYWORDS = {"return", "goto", "break", "continue", "if", "else", "while", "for",
+            "do", "switch", "case", "default"}
+
+
+def strip_literals(text: str) -> str:
+    """Same length as `text`, with string/char/comment bodies blanked out."""
+    out = list(text)
+    i, n = 0, len(text)
+    while i < n:
+        c = text[i]
+        if c in "\"'":
+            q, i = c, i + 1
+            while i < n:
+                if text[i] == "\\":
+                    out[i] = " "
+                    i += 2
+                    continue
+                if text[i] == q:
+                    break
+                out[i] = " "
+                i += 1
+        elif c == "/" and i + 1 < n and text[i + 1] == "*":
+            j = text.find("*/", i + 2)
+            j = n if j < 0 else j + 2
+            for k in range(i, j):
+                out[k] = " "
+            i = j
+            continue
+        elif c == "/" and i + 1 < n and text[i + 1] == "/":
+            j = text.find("\n", i)
+            j = n if j < 0 else j
+            for k in range(i, j):
+                out[k] = " "
+            i = j
+            continue
+        i += 1
+    return "".join(out)
+
+
+def symbol_for(va: int) -> str | None:
+    for line in (ROOT / "build/split_poc.map").read_text().splitlines():
+        m = re.match(r"^\s*[0-9a-f]{4}:[0-9a-f]{8}\s+(\S+)\s+([0-9a-f]{8})\s+f\s", line)
+        if m and int(m.group(2), 16) == va:
+            return re.sub(r"^_|@\d+$", "", m.group(1))
+    return None
+
+
+def function_body(text: str, name: str) -> tuple[int, int]:
+    """Range of the text between the function's outer braces.
+
+    Searched in the comment/string-blanked copy (a doc comment mentioning the
+    name is not the definition) and required to have `{` where a prototype has
+    `;`.
+    """
+    s = strip_literals(text)
+    for m in re.finditer(rf"\b{re.escape(name)}\s*\(", s):
+        # skip the parameter list, then demand the opening brace
+        j = m.end() - 1
+        depth = 0
+        while j < len(s):
+            if s[j] == "(":
+                depth += 1
+            elif s[j] == ")":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        k = j + 1
+        while k < len(s) and s[k].isspace():
+            k += 1
+        if k >= len(s) or s[k] != "{":
+            continue
+        depth = 0
+        for i in range(k, len(s)):
+            if s[i] == "{":
+                depth += 1
+            elif s[i] == "}":
+                depth -= 1
+                if depth == 0:
+                    return k + 1, i
+    sys.exit(f"definition of {name} not found")
+
+
+def statements(body: str) -> list[tuple[int, int]]:
+    """Spans of the body's top-level statements; a braced block counts as one.
+
+    Spans tile the body (`[0, len(body))`) rather than covering only the code:
+    the whitespace and comments *before* a statement belong to it, so moving a
+    statement carries its indentation and its explanatory comment along and a
+    reordered body is a permutation of the original text.
+    """
+    s = strip_literals(body)
+    spans: list[tuple[int, int]] = []
+    i, n, prev = 0, len(s), 0
+    while i < n:
+        while i < n and s[i].isspace():
+            i += 1
+        if i >= n:
+            break
+        start, depth = prev, 0
+        while i < n:
+            c = s[i]
+            if c == "{":
+                depth += 1
+            elif c == "}":
+                depth -= 1
+                if depth == 0:
+                    i += 1
+                    j = i
+                    while j < n and s[j].isspace():
+                        j += 1
+                    if s.startswith(("while", "else"), j):
+                        continue
+                    break
+            elif c == ";" and depth == 0:
+                i += 1
+                break
+            i += 1
+        spans.append((start, i))
+        prev = i
+    if spans:
+        spans[-1] = (spans[-1][0], n)  # the tail whitespace rides the last one
+    return spans
+
+
+def is_decl(unit: str) -> bool:
+    """A declaration is type-ish words and a name, with no call or assignment."""
+    u = strip_literals(unit).strip().rstrip(";").strip()
+    if any(c in u for c in "(=,:"):
+        return False
+    toks = u.replace("*", " ").split()
+    if not toks or toks[0] in KEYWORDS:
+        return False
+    return all(DECL_NAME.fullmatch(t) for t in toks)
+
+
+def target_size(va: str) -> int:
+    """The reference function's size, from the same metadata probe reads."""
+    text = (ROOT / "src/rebrew-functions.toml").read_text()
+    m = re.search(rf'\["SERVER\.0x{int(va, 0):08x}"\]\n(?:.*\n)*?size\s*=\s*(\d+)', text)
+    if not m:
+        sys.exit("no metadata size for that VA")
+    return int(m.group(1))
+
+
+def score(path: Path, va: str) -> tuple[int, int, int, int]:
+    """(size agrees with the target, matched, -insn delta, object size)."""
+    r = subprocess.run([PYTHON, str(PROBE), "--va", va, "--file", str(path)],
+                       capture_output=True, text=True, cwd=ROOT)
+    m = re.search(r"size (\d+):.*matched (\d+)/(\d+).*instructions (\d+) vs (\d+)"
+                  r".*object size (\d+)", r.stdout, re.S)
+    if not m:
+        # A candidate that does not compile must lose to every real score: the
+        # size key is negative, so a plain -1 would outrank it.
+        return -1 << 30, -1, -1, -1
+    target, matched = int(m.group(1)), int(m.group(2))
+    delta = -abs(int(m.group(4)) - int(m.group(5)))
+    obj = int(m.group(6))
+    # Size agreement outranks the byte count: the composition places every
+    # function at its reference VA, so a function that moves away from its
+    # target size drags everything after it and the linked residue explodes
+    # (measured: a 13-byte-short cm_ExSellObjekt took the linked image from
+    # 11,336 to 89,509 differing bytes while its object-level score rose
+    # 387 -> 615).  The probe's `obj` carries a constant per-function offset
+    # against the metadata size (COMDAT tail padding), which cancels in this
+    # comparison.
+    return -abs(obj - target), matched, delta, obj
+
+
+def move(order: list[int], i: int, j: int) -> list[int]:
+    """Take the unit at i and put it where the unit at j is now."""
+    o = order[:]
+    u = o.pop(i)
+    o.insert(j if j < i else j - 1, u)
+    return o
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--va", required=True)
+    ap.add_argument("--file", required=True)
+    ap.add_argument("--symbol", default=None)
+    ap.add_argument("--rounds", type=int, default=10)
+    ap.add_argument("--reach", type=int, default=3, help="max displacement")
+    ap.add_argument("--jobs", type=int, default=4)
+    ap.add_argument("--dry-run", action="store_true")
+    args = ap.parse_args()
+
+    src = ROOT / args.file
+    text = src.read_text()
+    name = args.symbol or symbol_for(int(args.va, 0))
+    if not name:
+        sys.exit("pass --symbol (no map entry for that VA)")
+
+    lo, hi = function_body(text, name)
+    head, body, tail = text[:lo], text[lo:hi], text[hi:]
+    spans = statements(body)
+    units = [body[a:b] for a, b in spans]
+    ndec = 0
+    while ndec < len(units) and is_decl(units[ndec]):
+        ndec += 1
+    print(f"{name}: {len(units)} statements ({ndec} declarations), "
+          f"{len(body)} body bytes")
+    if args.dry_run:
+        for k, u in enumerate(units):
+            print(f"  [{k:3d}] {'decl' if k < ndec else '    '} "
+                  f"{strip_literals(u).strip().splitlines()[0][:72]}")
+        return 0
+
+    order = list(range(len(units)))
+
+    def render(o) -> str:
+        return "".join(units[k] for k in o)
+
+    # A candidate is a whole source file in the real file's directory (the
+    # includes are relative to it), so a run that dies leaves `_hc_*.c` behind.
+    # The identity header is dropped from the copies: without a `// FUNCTION:`
+    # line a stray is invisible to lint (no duplicate-VA error) while
+    # `probe_function.py` still finds the function by its map symbol.
+    def header(text: str) -> str:
+        return re.sub(r"^// FUNCTION: SERVER .*\n", "", text, flags=re.M)
+
+    def submit(i: int, j: int) -> tuple[tuple[int, int], tuple[int, ...]]:
+        tmp = src.with_name(f"_hc_{name}_{i}_{j}.c")
+        tmp.write_text(header(head) + render(move(order, i, j)) + tail)
+        return (i, j), score(tmp, args.va)
+
+    base = score(src, args.va)
+    tgt = target_size(args.va)
+    print(f"baseline {base[1]} matched, instruction delta {base[2]:+d}, "
+          f"object size {base[3]} vs target {tgt}")
+    try:
+        for rnd in range(args.rounds):
+            cands = [(i, i + d) for i in range(len(units))
+                     for d in range(-args.reach, args.reach + 1) if d
+                     and 0 <= i + d < len(units)
+                     and not (i < ndec <= i + d)          # no decl after a stmt
+                     and not (i >= ndec > i + d)]         # no stmt before a decl
+            with cf.ThreadPoolExecutor(max_workers=args.jobs) as ex:
+                results = list(ex.map(lambda ij: submit(*ij), cands))
+            for p in src.parent.glob(f"_hc_{name}_*.c"):
+                p.unlink(missing_ok=True)
+            best, best_move = base, None
+            for mv, sc in results:
+                if sc > best:
+                    best, best_move = sc, mv
+            if best_move is None:
+                print(f"round {rnd}: no improving move among {len(cands)}; "
+                      f"converged at {base[1]}")
+                break
+            i, j = best_move
+            order = move(order, i, j)
+            base = best
+            src.write_text(head + render(order) + tail)
+            print(f"round {rnd}: {i} -> {j}   {base[1]} matched "
+                  f"(insn {base[2]:+d})  "
+                  f"{strip_literals(units[i]).strip().splitlines()[0][:46]!r}")
+    finally:
+        for p in src.parent.glob(f"_hc_{name}_*.c"):
+            p.unlink(missing_ok=True)
+    print(f"final {base[1]} matched, instruction delta {base[2]:+d}, "
+          f"object size {base[3]} vs target {tgt}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
