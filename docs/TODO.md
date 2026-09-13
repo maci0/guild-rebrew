@@ -2,6 +2,51 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+**Round-251: 9,280 -> 9,281, a deliberate +1 for correctness, and CrashDump re-opened with a
+plan.**
+
+**Two real correctness bugs were found in `CrashDumpUnhandledExceptionFilter`'s source, and one
+is now fixed.**  The `AnalyzeInstruction` call passed its first two arguments swapped.  I
+verified it independently rather than taking it on report: the reference's call site
+(0x10002d09) pushes `&buffer` as arg1, `edi` (the count) as arg2, `[esp+0x44]` (the stack-walk
+cursor) as arg3 and `&[esp+0x48]` (the output int) as arg4; and the callee at 0x10003260 agrees
+on every role — `mov edx,[esp+8]` then `cmp edx,5` (arg2 is a count), `mov eax,[esp+4]` then
+`cmp byte ptr [eax-5],0xe8` (arg1 is a pointer), `mov ecx,[esp+0x10]` then `mov [ecx],0`
+(arg4 is the output).  Our source would have had the callee dereference `nInstr - 5`.
+
+**The fix costs 1 byte of linked residue (9,280 -> 9,281), and that is deliberate.**  The rule
+is that only the linked residue decides, so a +1 needs a stated reason: the objective is a
+*recompilation*, and a source that passes a length where the original passed a code pointer is
+not one.  Byte-identity bought with semantically wrong C is a false match, and every byte of a
+final 100% would be suspect.  The block containing the call is currently **dead** — the second
+bug below — which is the only reason the swap is harmless today; fix the cursor and this call
+executes and faults.  **The baseline is therefore 9,281, not 9,280**; the 1 byte is expected to
+come back when the length work below lands.
+
+The second bug, found by the same pass and **not** fixed: the stack walk writes to `instrDest`
+while the loop tests `eip`, which is assigned once from `pCtx->Eip`, so `if (eip != pCtx->Eip)`
+is false every iteration and the instruction-decode block never runs.  The reference advances a
+cursor in memory.
+
+**`CrashDumpUnhandledExceptionFilter` (1,668, the largest live target) is re-opened with a
+plan.**  A previous pass produced `.scratch/…V2-frame0x280.c`, which reproduces the reference's
+frame **exactly** (`sub esp,0x280` against HEAD's 0x28c) and its buffer offsets, by spelling the
+stack-walk cursor as `frameInfo[2]` and the instruction destination as `frameInfo[3]` — i.e. V2
+is the *faithful* version, and it also fixes both bugs above.  It measured **+131 at the link**
+because it is **unfinished**: its code is 1777 bytes against the reference's 1836, so the jump
+tables move 56 bytes early and the tail cascades.  The task is therefore length, at identified
+sites: +21 the decrypt-loop `i` needs to be memory-resident (the reference caches `CreateFileA`
+in `esi` and `ReadFile` in `edi`), +12 the stack walk, +17 the epilogue pops, minus 15 the
+classify switch is already long.  Target: code 1836 so the tables land at 0x72c and 0x7ac.
+An agent is on it.
+
+**A useful counterexample to "object metrics always mispredict."**  V2's object metric was much
+worse (312 against HEAD's 478) *and so was the link* (+131), because the mechanism — a 59-byte
+shortfall displacing a function's own jump tables — was understood.  Object metrics mispredict
+when the mechanism is opaque; they are informative when it is not.  The rule that survives is:
+do not reject on a metric *alone*, and do not accept on one either.
+
+
 **Round-250: hunk composition quantified, and it corrects the "everything is an allocator
 tie-break" conclusion for the largest function.**
 
