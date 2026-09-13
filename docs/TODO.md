@@ -29,6 +29,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-317 (2026-09-13): CrashDump case order matches reference, +0 linked.**
+
+- String-push audit found the only order divergence: 4 case bodies in
+  (25,26,8c,8d) source order vs reference (8c,8d,26,25). Reordered —
+  object metrics identical (530/840), link +0 (bodies carry their own
+  register residue with them). Case order is not the driver. Reverted
+  per keep-only-wins. §65's lever stays a table-order (landed) story.
+- Residue baseline unchanged: **9,209**.
+
 **Round-316 (2026-09-13): SEH axis clean (vacuously).**
 
 - Audited all 18 residue diffs for SEH constructs (fs: chains,
