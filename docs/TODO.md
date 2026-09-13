@@ -4,6 +4,20 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-297 (2026-09-13): Alchemist + CheckInventory reviews CLEAN —
+coverage complete.**
+
+- `ahm_ExAllocAlchemist`: all 175 structural slots traced to codegen
+  (phase shift, edi/ebp, loop shape, FPU idioms); every store, constant,
+  offset, call arg, bound verified identical. Clean.
+- `gm_CheckInventoryCapacity`: addressing, list values, all exit paths
+  (type-9, lookup, excluded ids, in_list), query args, capacity/count
+  math incl. count>=6→0, shared clamp verified. Clean.
+- **All 19 residue functions now carry explicit behavioral verdicts:**
+  17 clean-or-documented, 2 with live recorded bugs (Spieler slot[9]
+  +393-unlandable, CrashDump-State FIXED at +0). Semantic sweep complete.
+- Residue baseline unchanged: **9,209**.
+
 **Round-296 (2026-09-13): PCQ + FindNext semantic reviews CLEAN.**
 
 - `cm_ProcessCommandQueue`: held logic, unlink/relink surgery (0x91/0x95
