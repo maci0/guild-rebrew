@@ -2040,6 +2040,38 @@ tell — and supersedes the last bullet of section 50, where the pair was record
 as a residue with no source lever. The lever is dropping the qualifier on that
 one load.
 
+**Amendment (round 245) — the lever has a wall, and the direction is easy to
+invert.** A pass was briefed with the qualifier backwards ("add `volatile` to get
+the reference's `xor`/`mov`") and refuted it in 14 probes; the brief was wrong,
+this section was right. What that pass *did* establish is where the lever stops:
+
+- **The qualifier is load-bearing for register allocation at some sites, and there
+  the lever cannot be cashed.** On `gm_AllocSpieler` (0x10018850) dropping it at
+  the two sympathy-loop reads *does* produce the reference's `xor ecx,ecx; push
+  0x40; mov cx,[bp]` locally — and costs 362 matched bytes (736 -> 374), because
+  the qualifier is what holds that loop's allocation. Dropping it at both loops:
+  397. Form and allocation are coupled; this is the same shape as
+  `gv_ExAllocGraveyardWorker` above, now measured on the larger function too.
+- **Sweeping the qualifier *in* is worse than leaving it alone.** Adding `volatile`
+  at 1 / 8 / 17 sites gives matched 488 / 408 / 365 against HEAD's 736, and the
+  full sets push the object to COMDAT 3728/3744, past the 3696 composition band —
+  so they fail on layout as well as on score.
+- **A count of `and r,0xffff` sites is not a length signal.** The inventory on this
+  function ("6 extra `and`, 4 missing `xor`") is a fixed-offset artifact: both
+  sides' real code is already exactly 3689 bytes, the gap curve oscillates +-48 and
+  returns to 0, and the 4 reference `xor`s are all present in our object (the last
+  one displaced by one statement-order divergence, not missing). Of our 16 masks
+  only 7 are genuinely extra — 3 are a redundant second mask on a call result, 4
+  are the volatile loads.
+- **`matched` has a ceiling here of ~3115 of 3689** (`matched-reloc - matched` =
+  574, one-sided relocations; see allocator Finding 59). Do not treat the distance
+  from 736 to 3689 as reachable codegen work.
+
+The practical rule this leaves: `volatile` is a *per-variable fixed point*
+(allocator Finding 61). Check the qualifier first, in the direction this section
+states, and expect the lever to be blocked wherever that value's live range also
+determines the allocation.
+
 `src/server.dll/DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c`
 
 ## 53. `switch` case bodies are laid out in source order
