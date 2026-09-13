@@ -4,6 +4,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-287 (2026-09-13): outside-7 hunt ends (net effect, no lever).**
+
+- The +1 table shift is the NET of distributed ± differences, not a single
+  +1 site: byte-length audit of the object diff finds no isolated
+  longer-encoding (the diff is desynced positionally; linked gap
+  oscillates). Fixing the table needs net -1 with layout preserved — a
+  global constraint. Round 5's head fix remains the only -1 candidate and
+  it cascades. No probe.
+- Residue baseline unchanged: **9,209**.
+
 **Round-286 (2026-09-13): outline hypothesis retired by coverage.**
 
 - Considered: residue as inlined blocks the reference outlined into
