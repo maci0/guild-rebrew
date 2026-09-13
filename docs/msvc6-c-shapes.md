@@ -2216,3 +2216,72 @@ Retired lever, not a general law: measured with `scripts/probe_function.py` and
 `scripts/instr_diff.py --obj`; neither spelling moved the linked residue.
 
 `src/server.dll/DieGildeAddOnServer/server_c/cm_ProcessCommandQueue.c`
+
+## 62. A literal shared by several comparisons is not a lever for register residence
+
+Hoisting a repeated immediate into one named local does **not** make msvc6 keep
+it in a register.  On `cm_ExCopyEntityData` (0x1000ec00) the four slot guards
+each compare against `0xffff`; feeding all four from a single local
+
+```c
+ushort empty = (ushort) 0xffff;      /* int instead of ushort: same result */
+```
+
+is **byte-identical** to spelling the four literals out.  msvc6 rematerialises
+`cmp word ptr [reg+disp32],0xffff` (9-10 B) at each site rather than keeping the
+value live.
+
+The reference does hold it — `mov ebp,0xffff` once at 0x1000edc0, then
+`cmp word ptr [eax+0x100358a0],bp` (7 B) — but `ebp` is free there only because
+the instruction that clobbers it (`mov ebp,[eax+0x10035ab0]`, the type-3 arm's
+owner_id load) sits on the other side of a branch.  That is a CSE plus
+callee-saved allocation decision with no C spelling: the value's live range is
+what it is, and a source-level name does not extend it.  A wall, not a lever.
+
+Contrast section 22 (`4 + load_result`), where the *spelling of the load*
+selected the cached form.  The distinction: there the spelling changed the
+address expression the optimizer had to compute; here it changes only a name the
+optimizer erases before allocation.
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c`
+
+## 63. A clamp's winning arm order is per-site, not per-function
+
+The same three-arm clamp wants a different source order in each of the several
+arms of one function, and copying a neighbouring arm's order is not
+transferable.  Measured on `cm_ExCopyEntityData` (0x1000ec00), one arm at a
+time, all exhaustively equivalent so semantics are constant and only layout
+moves:
+
+| arm | order that wins | effect |
+|---|---|---|
+| type-2 | in-range / HIGH / low | honest matched +13 (`jl low / jge high / store / jmp`) |
+| type-1 (secondary) | in-range / LOW / high | honest +7, aligned +10 |
+| type-0 | per-arm stores, trailing store duplicated into each arm | matched-reloc +6, honest -2 |
+| matrix loop | in-range / LOW / high, store after the join (already HEAD) | in-range / HIGH / low craters to 342/524 |
+
+What selects the winner is which order puts the cold blocks in the reference's
+**address order** (section 59: block *creation* order, not statement shape).
+Since that order differs per site, there is no function-level rule to extract:
+measure each arm.  A general "reorder the clamps like the neighbour" edit is not
+a lever.
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c`
+
+## 64. `for (;;) { if (x) break; ... }` is normalised to the `do/while` form
+
+An indefinite loop exited by `break` is re-lowered into the loop test, producing
+byte-identical output to the equivalent `do { ... } while (!x)`.  Measured on
+`cm_ExCopyEntityData` (0x1000ec00): the dst-slot scan written `for (;;) { if
+(match) break; ... }` compiles identically to the `do/while` spelling, with the
+same peeled first compare plus rotated body.
+
+Same normalisation family as section 59 (`goto` re-lowered into `if`): here the
+`break` re-appears as the loop's own test, so `for(;;)`+`break` cannot be used to
+force a loop shape the `do/while` form does not already produce.  Corollary for
+this function: the reference's *unrotated* dst scan is reachable only from the
+top-tested `while` spelling, and that spelling costs the entry guard the
+reference lacks (+3 B, aligned +6, honest -47) -- so the rotation is a genuine
+fixed point, not a spelling problem.
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c`

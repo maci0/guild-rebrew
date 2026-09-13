@@ -2790,13 +2790,13 @@ after it.
 
 **The measurement that establishes it.**  `cm_ExCopyEntityData` (0x1000ec00) has
 `want`/reference size 912 (already 16-aligned), and its object's `.text` measures
-912.  Its band is therefore *every* real code length `<= 912`:
+912.  Its band is therefore *every* real code length `<= 912`.  The full boundary
+set, measured by compiling one variant at each real-body length:
 
 ```
-real 912 -> have 912 -> span 912   neutral
-real 905 -> have 912 -> span 912   neutral
-real 897 -> have 912 -> span 912   neutral
-real 913 -> have 928 -> span 928   composition-breaking
+real 895 / 896      -> have 896 -> padded 912   neutral
+real 897, 899, 900, 904, 905, 912 -> have 912 -> span 912   neutral
+real 913, 917, 918  -> have 928 -> span 928     composition-breaking
 ```
 
 **A lower bound does not exist.**  An earlier note in this campaign recorded the
@@ -2804,6 +2804,18 @@ admissible band as `[897, 912]`; 897 was merely the lowest value a probe had
 tested.  Any real body at or below the padded span is composition-neutral — a
 shorter body is padded, not rejected.  The reason to prefer a body *near* the
 span is residue, not layout, and that is a different argument.
+
+**The admissibility test is `have <= padded(want)`, NOT "the COMDAT is
+unchanged".**  The two differ in exactly the downward direction, and the
+distinction is worth a sentence because the tighter form is the one that gets
+re-derived by anyone reading only the `cl` behaviour: a real body of 895 or 896
+does drop the COMDAT to 896, and that *is* a bucket crossing — but the pad step
+then appends 16 zero bytes and the span is 912 again.  So a bucket crossing
+**downward** is recovered automatically and costs only residue inside this
+function's own slot; a bucket crossing **upward** is the one thing the pipeline
+cannot undo, because a longer object cannot be cut without losing code.  Compare
+`have` against `16*ceil(want/16)`; do not compare it against the previous
+`have`.
 
 **The `LONG` list is mostly noise — filter it before believing it.**  Because
 `have` is 16-aligned and `want` is not, the pad step labels every object whose

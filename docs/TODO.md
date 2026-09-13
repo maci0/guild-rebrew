@@ -1,5 +1,74 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-243: the residue is POSITIONAL CASCADE, and three functions are 65% of it.**
+
+First measurement of the campaign against the full per-function residue table rather
+than against one function at a time.  Ranked, from `.scratch/residue_base.log`
+(9,532 total):
+
+```
+gm_AllocSpieler                            2861   30% of everything left
+CrashDumpUnhandledExceptionFilter          1889
+cm_ExSellObjekt                            1421
+ls_LoadBuildingEntityState                  728
+cm_ExCopyEntityData                         462
+gv_ExAllocGraveyardWorker                   457
+ServerMainThread                            371
+gm_AllocGebaeude                            327
+vfs_OpenStream                              245   then 10 more, all under 250
+```
+
+Top three = 6,171 of 9,532 = **65%**.  Ten functions share the remaining 3,361.
+
+**The shape of a large residue number.**  A function's `bytes` column is *not* how
+much code is wrong.  `gm_AllocSpieler` is 2,861 bytes of residue over a 3,689-byte
+function, but its first differing byte is at `0x100188fa`, which is **+0xaa — 170
+bytes in** — and its instruction count is 1054 against the reference's 1056, a
+deficit of *two*.  A near-identical instruction stream over a 2,861-byte region means
+one early instruction is encoded at a different length, every byte after it is
+shifted, and the tail "differs" without being wrong.  So the residue number measures
+the *distance to the end of the function from the first divergence*, not the size of
+the error.  Two consequences:
+
+- **The reward curve is a cliff, not a slope.**  Fixing the single early encoding can
+  snap thousands of bytes at once.  Budget accordingly: localise the first divergence
+  and the gap curve before touching anything else.
+- **Rank by residue, but work at the first divergence.**  The 1st-diff VA in the table
+  is the coordinate that matters, and for every large entry in it the first diff is
+  early in the function.
+
+This is the same effect Finding 57 describes for cross-composition comparisons,
+observed *within* one function.
+
+**Round-243: `gm_AllocSpieler` (2,861 bytes, 30%) is re-opened, and the reason is a
+correction to the search constraint.**  Two previous passes closed it having searched
+for **size-neutral** edits only.  The size rule they were working under is wrong:
+`cl` rounds each object's `.text` up to 16 bytes, the pad step fills a shortfall with
+zeros, and the linker aligns each contribution to 16 — so the composition survives
+iff the real body is at or below `16*ceil(want/16)`, i.e. **real <= 3696 for this
+function, with no lower bound**.  A candidate that changes the body length is
+admissible; only exceeding 3696 is not.  Full derivation in
+`docs/msvc6-allocator.md` Finding 58.  A fresh pass is running against the gap trace
+(`.scratch/gaptrace.py 0x10018850 3689`), which is the instrument for exactly this.
+
+**Round-243: `cm_ExCopyEntityData` closed with a measured win, and the object metrics
+disagreed in sign.**  Two candidates were link-tested against the 9,533 baseline:
+
+| candidate | object honest | reloc | aligned | real | linked |
+|---|---|---|---|---|---|
+| type-2 clamp arm in-range/HIGH/low, per-arm stores | **443** | 567 | 184 | 905 | **-1** (kept) |
+| that + type-1 secondary in-range/LOW/high (`.alt_t1.c`) | 437 | 573 | **195** | 900 | **+2** (rejected) |
+
+`cm_ExCopyEntityData` 463 -> 462; total 9,533 -> 9,532.  The alternate that won the
+*positional* object metric (`aligned` 195 against 184 — the closest object-level
+analogue of the linked byte compare) lost at the link level by 3 bytes.  Fifth
+recorded instance of an object metric pointing the wrong way; do not rank candidates
+by `aligned`.  The kept change and the rejected alternate are both recorded in
+`docs/msvc6-c-shapes.md` sections 62-64.
+
+Baseline moved: **9,533 -> 9,532** (`.scratch/residue_base.log` regenerated).
+
+
 **Round-154 (same round, finished): the build now compiles what the tools
 measure.**
 
