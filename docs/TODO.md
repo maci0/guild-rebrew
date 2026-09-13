@@ -4,6 +4,22 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-282 (2026-09-13): naive imm-diff semantic audit — false-positive
+generator, one arity check banked.**
+
+- Ran a same-mnemonic immediate-difference audit across all 18 residue
+  functions hunting constant bugs (`cmp cl,2/6`, `push 0/1`, `shl 4/8`
+  swaps, `push 0x72e`). Every case resolved to aligner crossover (both
+  sides contain both values in different interleave) on context inspection:
+  Gebaeude cmp-2/6, PCQ shl-4/8, PCQ Multisync pushes.
+- The one durable check: our Multisync call pushes the correct 4-arg
+  sequence (`push 1; push <str>; push 0x72e; push <file>; call;
+  add esp,0x10`, reloc slots pending) — arity correct, not a bug.
+- Lesson: naive imm-diff without control-flow awareness only finds
+  alignment noise. Semantic coverage stays what it was: 17 PROVEN + 2
+  hand-verified. Do not repeat this audit shape.
+- Residue baseline unchanged: **9,209**.
+
 **Round-281 (2026-09-13): infrastructure certification.**
 
 - Full rebrew test suite with this session's three tool fixes in
