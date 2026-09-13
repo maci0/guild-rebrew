@@ -93,7 +93,7 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 
 // SIZE 0x204
-struct SLogBuffer { unsigned int reserved; char text[512]; };
+struct SLogBuffer { uint weight_fraction; char text[512]; };
 
 uint cm_ExSellObjekt(char* cmd, uchar* result)
 {
@@ -114,7 +114,6 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	char** source_container_ptr;
 	ushort* dest_game_object;
 	void* source_existing_entity;
-	uint weight_fraction;
 	/* The reference's frame is 0x228, 4 bytes more than a bare
 	 * `char log_buffer[512]` gives (0x224), and the extra dword sits
 	 * between the spill block and the buffer: the reference's
@@ -293,10 +292,10 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			parent_check = gm_ResolveParentEntity((short*)dest_object);
 			if (parent_check != dest_owner_entity && *(int*)(dest_object + 0xe) != 0) {
 				resolve_result = compute_size((char*)source_dynamic_ref, (int)*(ushort*)dest_object);
-				weight_fraction = (uint)(resolve_result * *(int*)(dest_object + 0xe)) >> 2;
+				*(volatile uint*)&log_buffer.weight_fraction = (uint)(resolve_result * *(int*)(dest_object + 0xe)) >> 2;
 				amount = gm_GetMsgField((int)source_dynamic_ref, (int)dest_object);
 				source_dynamic_ref = source_dynamic_entity;
-				if ((uint)amount - weight_fraction < (uint)*(int*)(cmd + 0x1f)) {
+				if ((uint)amount - *(volatile uint*)&log_buffer.weight_fraction < (uint)*(int*)(cmd + 0x1f)) {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d79, g_error_msg_sell_no_source, 8);
 					return 1;
 				}
