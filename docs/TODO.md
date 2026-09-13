@@ -4,6 +4,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-281 (2026-09-13): infrastructure certification.**
+
+- Full rebrew test suite with this session's three tool fixes in
+  (merge-sweep strict, case-label registry, atomic-write error):
+  **6503 passed, 29 skipped, 0 failed** in 65s. The toolchain the
+  objective depends on is green.
+- Cold-block deferral re-examined for an unprobed angle (size-threshold
+  lever, linker placement, PGO): none exists in the C89+MSVC6+LINK6
+  envelope — placement is the compiler's static-heuristic layout pass,
+  and every source shape that could steer it is measured. No probe.
+- Residue baseline unchanged: **9,209**.
+
 **Round-280 (2026-09-13): round-trip run (first this session) + rebrew error
 fix.**
 
