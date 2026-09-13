@@ -1,5 +1,34 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-140: the BSS tail pad was 0x329c too long — coverage `82.3% -> 88.5%`.**
+
+`link_stubs.c`'s `g_bss_tail` exists to grow `.data` VirtualSize to the
+reference's `0x174059c`, and it had been sized for an earlier tree: the section
+came out `0x1743838`, so the common symbols at the end of the BSS sat `0x339c`
+past the *reference's* `.data` span — which is what `_map_coverage` tests a data
+pointer against.  Every operand naming one of them failed: 452 entries whose
+excess was about `0x2000`, exactly round 139's biggest class.
+
+Trimming the pad by `0x329c` (`g_bss_tail[0x1269f30] -> [0x1266c94]`) puts the
+vehicle's `.data` at `0x17402e4`, i.e. `0x2b8` *under* the reference rather than
+over, so the commons land inside the span with a little room to grow:
+
+```
+                          failing operands   failing calls   entries   coverage
+before (round 138)                 1,030             288      1,318     82.3%
+after                                571             288        859     88.5%
+```
+
+Nothing else moves — all four raw sizes and file offsets `ok`, the `.rdata`
+prefix exactly `0x2468` bytes with zero mismatches, `.text` placement 246/319 —
+and the top of the bucket list is now the game functions alone:
+`gm_AllocSpieler` 179, `ls_LoadBuildingEntityState` 114,
+`CrashDumpUnhandledExceptionFilter` 112, `ServerMainThread` 99,
+`cm_ExSellObjekt` 96, `ExCopyEntityData` 33, … (`InitBuildingTypeTable` alone
+fell from 65 to 20 on this fix).  The gate needs 90%, i.e. about 112 more
+entries — two or three of the 19 functions, or another data-side fix of this
+kind.
+
 **Round-139: the biggest remaining class is 891 operands pointing past the end of
 the reference's `.data` — our BSS is 0x339c too big.**
 

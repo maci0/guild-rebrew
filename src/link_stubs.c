@@ -122,8 +122,15 @@ char g_connections[0x264264] = {0};
 char g_player_slot_field[4] = {0};
 char g_player_slot_overflow[0x264264] = {0};
 
-/* BSS tail pad: grows .data VS to the original's 0x174059c (zero-init -> .bss) */
-unsigned char g_bss_tail[0x1269f30] = {0};
+/* BSS tail pad: grows .data VS to the original's 0x174059c (zero-init -> .bss).
+ * Sized so the section ends exactly there: the layout-map coverage rule
+ * (`_map_coverage`) accepts a data pointer only when it lands inside the
+ * REFERENCE's .data span, which is its VirtualSize, so a pad that overshoots
+ * pushes the common symbols past the end and every operand that names one
+ * fails (docs/TODO.md round 139).  Re-measure with `rebrew data --bss` or by
+ * comparing our .data VS against 0x174059c after any data change: 0x329c of
+ * pad was the surplus when this was written. */
+unsigned char g_bss_tail[0x1266c94] = {0};
 
 /* String literal globals */
 char s_D__Develop_DieGildeAddOn_command_1002c748[1] = "";
