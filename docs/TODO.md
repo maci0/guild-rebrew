@@ -4,6 +4,23 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-264 (2026-09-13): link lever retired; matrix-clamp precedent probed.**
+
+- Link-level hypotheses measured and retired: no byte-identical function
+  bodies at different VAs in the reference (one trivial 1B collision), so
+  ICF folding contributes nothing; order forced by rsp+adı pads with 246
+  symbols exactly at VA; imports/headers already identical. The link
+  contributes ~0 beyond placement — all 9,209 residue bytes are codegen.
+  (Also: `rebrew link-order --check` does not apply to this tree, which
+  orders via `rebrew order-sources` into SERVER_SOURCES instead of a
+  `set(SOURCES)` block — not filed, the project's own path works.)
+- `cm_ExCopyEntityData` matrix clamp: the type-0/type-2 HIGH-then-low
+  precedent does NOT transfer — the doubly-nested matrix arm with the same
+  reorder goes 180→175 aligned with obj 912→928 (span break). Reverted.
+  The empty-middle form is pressure-specific per arm; the matrix arm keeps
+  its low-first spelling.
+- Residue baseline unchanged: **9,209**.
+
 **Round-263 (2026-09-13): two `rebrew` tool bugs fixed in the rebrew checkout;
 merge-sweep runs for the first time.**
 
