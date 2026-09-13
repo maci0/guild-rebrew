@@ -37,6 +37,59 @@ shape — consistent with its recorded blocker (`frame/slot + cmp[mem],0 vs mov/
 Worth recording because the length lever is the tempting hypothesis there (it was worth -36
 once) and it is now measured, not assumed.
 
+**Round-244: THE CASCADE FRAMING WAS WRONG — high residue has TWO causes, and I
+conflated them.**
+
+Round 243 ranked the functions by residue and inferred, from a high
+`residue / bytes-remaining` ratio, that one early *encoding-length* decision shifts the
+tail.  That inference is invalid, and pointing agents at the "first divergence" on its
+strength cost two budgets before it was refuted.  Both refutations are measurements:
+
+**Cause 1 — a length divergence that cascades.**  Real, and it is the mechanism behind
+Finding 56 (a table placed N bytes early).  But it is *not* what the ratio shows.
+
+**Cause 2 — a frame-size difference, which changes every `esp`-relative operand and no
+length at all.**  `CrashDumpUnhandledExceptionFilter` (0x10002770) was the top of my table
+at 89%.  Its first differing byte `0x10002772` is the **immediate of `sub esp,0x28c` vs
+`sub esp,0x280`** — `81 EC xx xx xx xx` on both sides, *6 bytes each*.  There is no length
+difference anywhere near it.  A wrong frame makes ~every `[esp+N]` displacement wrong, so
+the residue is enormous while the instruction stream is the same length.  The agent spent
+most of its budget at the offset I named; the byte there is a value.
+
+**Cause 3 — genuinely distributed differences.**  `gm_AllocSpieler` (0x10018850), 81% in my
+table: **168 hunks**, and the running gap visits ±40 and *returns to 0 repeatedly* over the
+whole body.  A single early length difference produces one monotone step and a flat tail;
+this curve oscillates with the code.  The two passes before this one were right that it is
+distributed, and my re-open was wrong to doubt them.
+
+**The corrected table** (ratios as before, but the diagnosis column is what matters):
+
+| function | ratio | what the first divergence actually is |
+|---|---|---|
+| CrashDumpUnhandledExceptionFilter | 89% | a frame **value** (`0x28c` vs `0x280`), same length |
+| gm_AllocSpieler | 81% | distributed — 168 hunks, gap returns to 0 |
+| cm_ExSellObjekt | 72% | distributed — gap steps at ~15 sites; first diff is a same-length `lea` disp |
+| gv_ExAllocGraveyardWorker | 59% | a tail-merge direction (which epilogue the jumps target) |
+
+So: **the ratio does not discriminate between the three causes.**  What does is
+`gaptrace`: a monotone step that never returns is cause 1; a gap that oscillates back to 0
+is cause 3; a gap that is flat through a region that still differs byte-wise is cause 2.
+Run it *before* choosing a strategy, and read the shape of the curve, not the first
+divergence.
+
+Two more things this round established about how to read a residue number:
+
+- **`matched` has a hard ceiling of `size − one-sided-reloc bytes`.**  The reference's
+  `.text` has *no* relocations inside `gm_AllocGebaeude` (0 of its 3499 HIGHLOW entries fall
+  in 0x100174d0..0x10017910), so every absolute address we emit there is a one-sided
+  relocation that can never be counted as matching: `matched-reloc − matched` = 140 bytes,
+  identical at HEAD and at the best candidate.  **Do not chase those bytes by editing code.**
+  That is a metric wall, not a codegen defect.
+- **`gaptrace`'s instruction counts include cl's trailing alignment fill** (and the
+  reference's own inter-function pad), so they read high — `gm_AllocSpieler`'s real count is
+  1056 on both sides where the tool implies otherwise.  Do length arithmetic on the **last
+  instruction offset / `ret_end`**, not on a count.
+
 **Round-243 (closing note): the drag lead is dead — layout costs ~15 bytes total.**
 
 I opened a line of inquiry last round into whether objects whose code exceeds their
