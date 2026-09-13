@@ -457,7 +457,7 @@ src_found:
 				dst_slot = dst_slot + src_slot * 0x300;
 				temp = (int) (signed char) g_relationship_matrix_primary[dst_slot];
 				g_relationship_matrix_secondary[dst_slot] = 0;
-				rel_value = *(int*) (cmd_ptr + 0x18) + temp;
+				rel_value = *(volatile int*) (cmd_ptr + 0x18) + temp;
 				if (rel_value < -0x7f) {
 					rel_value = -0x7f;
 					g_relationship_matrix_primary[dst_slot] = (char) rel_value;
@@ -481,19 +481,19 @@ src_found:
 					rel_value = 0x7f;
 				}
 				g_relationship_matrix_primary[dst_slot] = (char) rel_value;
-				if (*(int*) (cmd_ptr + 0x18) >= 0) {
+				if (*(volatile int*) (cmd_ptr + 0x18) >= 0) {
 					rel_value = rel_value / 2;
 				}
 				rel_value = rel_value + (int) (signed char) g_relationship_matrix_secondary[dst_slot];
-				if (rel_value < -0x7f) {
-					rel_value = -0x7f;
+				if (rel_value >= -0x7f && rel_value < 0x7f) {
 					g_relationship_matrix_secondary[dst_slot] = (char) rel_value;
 				}
-				else if (rel_value < 0x7f) {
+				else if (rel_value >= 0x7f) {
+					rel_value = 0x7f;
 					g_relationship_matrix_secondary[dst_slot] = (char) rel_value;
 				}
 				else {
-					rel_value = 0x7f;
+					rel_value = -0x7f;
 					g_relationship_matrix_secondary[dst_slot] = (char) rel_value;
 				}
 			}
