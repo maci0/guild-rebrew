@@ -1,5 +1,34 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-137: the ~390 CRT failures are *unresolved member statics*, and the
+signature is a built value of `0x10000000`.**
+
+Round 136 stopped at "the built slot holds the image base"; it is not a data
+symbol at the wrong offset, it is an **undefined external**.  The object for
+`fcn.10020943` (`10020943_.text.obj`, `.text` only) references
+
+```
++0x18 -> _dstend      sec 0  (undefined)
++0x1f -> _dststart    sec 0
++0x26 -> _tzapiused   sec 0
+```
+
+and none of the three appears anywhere in the built map — the link only
+succeeded because `/FORCE` is on (`warning LNK4088: image being generated due
+to /FORCE option`), so every reference to them resolves to RVA 0, i.e. the
+image base, and 27 operand entries for that one function fail.  Across the CRT
+that is the ~390 entries.  A built value of exactly `image_base` in a failing
+operand entry is therefore the signature of an unresolved symbol, not a
+misplaced one.
+
+The members' data sections are supposed to prevent this: `split_coff.py
+--with-data` attaches them to the member's lowest-VA *mapped* function, and
+`emit_defs.py` is meant to cover whatever is still undefined.  Something in
+that pair misses these statics — the fix is to make the split set define every
+member data symbol (or carry the data sections on members whose lowest-VA
+function is not in the mapped set), and it is worth ~5 points of the gate.
+Round 136's "different things from the same section" reading is superseded.
+
 **Round-136: the ~390 CRT entries fail on *data* operands, and that is the blob
 strategy's own chicken-and-egg.**
 
