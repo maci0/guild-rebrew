@@ -1,5 +1,46 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-129: the split blob works — proven on the timeset tables, prefix
+surplus `0x168 -> 0x120` with the prefix bytes still byte-identical.**
+
+The vehicle's remaining `.rdata` surplus is content that cannot fold
+(`___lookuptable`, the unnamed pointer tables, four `__real@8@`, `___dnames` /
+`___mnames`).  Round 124 proposed covering it with a *split* blob: keep the
+member sections, and cut `rdata_restore.c`'s single array so each one lands at
+its own reference offset inside the blob's range.  That is now measured, using
+`build/split_poc/defs/def_timeset.obj_s0.obj` — a data-only object, so it can
+be ordered independently of any `.text`:
+
+```
+reference .rdata 0x2418  "SunMonTueWedThuFriSat…NovDec"   (0x40 bytes, the
+                                                           dnames/mnames pair)
+arrangement       [piece A: ref .rdata[0x12e8:0x2418)]  (0x1130)
+                  [def_timeset.obj_s0.obj]              (0x40)
+                  [piece B: ref .rdata[0x2458:0x2608)]  (0x1b0)
+                  total 0x1320 = the blob's own length
+```
+
+Result: `.rdata` VirtualSize `0x2fe1 -> 0x2fa1`, import directory `0x2768 ->
+0x2728`, all four raw sizes and offsets still `ok`, `.text` placement
+unchanged (246/319 at their reference VA), and **zero bytes differ from the
+reference in `[0x1a0, 0x2608)`**.
+
+One trap, measured: the piece after the member section must resume at the
+*linker's* aligned end, not at the object's raw section size.  The defs object
+carries `0x3d` bytes of `.rdata` but LINK pads the contribution to `0x40`, so a
+piece B cut at `0x2455` shifted everything by three bytes (401 mismatching
+bytes in the prefix); cutting at `0x2458` is exact.  Compute each cut from the
+next section's start as LINK reports it (the map), not from the object's
+section sizes.
+
+The other four items are still bundled inside `.text` objects
+(`1001c19b_.text.obj` carries `___lookuptable` and its unnamed tables,
+`1001f1a4_.text.obj` / `1001f20b_.text.obj` the reals), so the same treatment
+needs `split_coff.py` to emit a member's data sections as their own objects —
+which is the next step, and then the whole surplus is one `split_blob.py`
+helper away: locate each data object's bytes in the reference, sort by offset,
+cut the blob between them, and order the response file `A, obj1, B, obj2, C…`.
+
 **Round-128: the split composition's section geometry now matches the reference
 exactly — all four raw sizes, all four file offsets, no extra section.**
 
