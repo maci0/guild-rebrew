@@ -486,12 +486,12 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		int live = g_citizen_count + 1;
 		int seq;
 		one = 1;
+		g_citizen_count = live;
 		*(volatile unsigned short*) (g_slot_table + slot_index * 0x21c) =
 		    (unsigned short) slot_index;
-		g_citizen_count = live;
-		seq = *(volatile int*) &g_next_object_id;
 		*(int*) (slot + 0x170) = (int) dynamic;
 		*(int*) (slot + 0x16c) = (int) dynamic;
+		seq = *(volatile int*) &g_next_object_id;
 		*(char*) (slot + 2) = 0;
 		*(int*) (slot + 4) = seq;
 		g_next_object_id = seq + 1;
@@ -502,8 +502,8 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	*(char*) (slot + 0x215) = 0;
 	*(char*) (slot + 0x216) = 0;
 	*(char*) (slot + 0x217) = 0;
-	*(int*) (slot + 0x1e4) = 0x3f800000;
 	*(char*) (slot + 0x218) = (char) one;
+	*(int*) (slot + 0x1e4) = 0x3f800000;
 	*(char*) (slot + 8) = 0x64;
 	/* The volatile read forces the reference's separate `mov ecx,[esp+0x1c]`
 	 * at 0x1000bf48 instead of reusing a register that already holds the

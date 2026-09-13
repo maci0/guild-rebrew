@@ -71,6 +71,169 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-173: the eighteen holdouts fanned out across six subagents, and the
+object-level proxy caught pointing the wrong way four more times.**
+
+10,846 -> **10,098** differing bytes, all in `.text`, with `.data`/`.rdata`/
+`.reloc`/headers still byte-identical and nothing regressed.  This is the first
+round since the pad landed where a batch of independently-probed changes was
+link-validated as a batch, and the batch is where the win came from:
+
+```
+cm_ExSellObjekt            1,759 -> 1,435   (-324)
+vfs_ReadCompressed           348 ->   158   (-190)
+m_AllocTracked               256 ->    93   (-163)
+ls_LoadBuildingEntityState   775 ->   728   ( -47)
+ServerMainThread             379 ->   371   (  -8)
+ahm_ExAllocAlchemist         209 ->   201   (  -8)
+gm_AllocGebaeude             530 ->   527   (  -3)
+gv_ExAllocGraveyardWorker    464 ->   462   (  -2)
+<outside the functions>       36 ->    33   (  -3)
+```
+
+*The method.*  Six subagents, one per disjoint set of source files, each told to
+probe only (the coordinator owns the build, the link and the linked validation)
+and to accept a change only when an object metric rose and the object's size did
+not.  Every agent's kept hunk was then recompiled into `build/` with the exact
+`build.make` command and the whole composition relinked, which is the only
+measurement that decides.  Context is the binding constraint on this work — the
+per-function headers alone run to hundreds of lines — so this is the first round
+where the parallel form was used end to end.
+
+The largest single win came from the same lever round 172 found: `cm_ExSellObjekt`
+(-324) is a pure statement-order transcription — the block of eight pointer
+initialisations reordered to the reference's emission, two `container_ptr` dead
+temps dropped so the container stores are direct, and the `0xffff` owner guard
+inverted so the zero arm is the `else`.  `vfs_ReadCompressed` (-190) is five
+independent spelling fixes, the biggest being `unsigned int i` -> `int i`, which is
+what stops msvc6 proving `i != 0` and deleting the reference's live
+`test edi,edi / je`.  `m_AllocTracked` (-163) hoists the load-bearing volatile
+`g_array_count` read into a local so it stays in `edi` across the guard, the way
+the reference keeps its loop bound.
+
+*The proxy was wrong four more times, and one of them was the coordinator's.*
+Each of these improved `aligned` (the LCS instruction score added in round 172)
+and was a linked regression:
+
+- `gm_AllocSpieler`, two statement reorders read straight off the reference's
+  emission: aligned 647 -> 660, object size unchanged, **linked 2,934 -> 2,970**.
+  Reverted.  Round 172 recorded this change as "no regression"; that reading came
+  from a postlink run that had not been preceded by `scripts/split_link.sh`, so
+  the vehicle it measured was the previous link's.  Run the `final` pipeline
+  (`cmake --build --target server_dll` -> `scripts/split_link.sh` ->
+  `postlink_residual.py --write build/server.dll`) or the number means nothing.
+- `ls_LoadBuildingEntityState`, the seven plant-map reads all made pointer-first
+  (its own agent flagged it, correctly): aligned 396 -> 414, object size 1472 both
+  ways, **linked 728 -> 1,400** because the change drops `push ebp` and the
+  `or ebp,-1` sentinel and every `[esp+N]` in the function then differs.  Rejected.
+- `gm_CheckInventoryCapacity`, the eight element stores folded into an
+  `int list[8] = { ... }` initialiser: aligned 125 -> 127, **linked +7**.  Rejected.
+- `cm_ExProdObjekt`, the recipe address folded back to `g + idx * 0x41` (the
+  pre-pass-4 spelling, still visible in `.scratch/epm/w/exp.c`): aligned 349 ->
+  351, **linked 21 -> 44** plus 36 bytes of collateral on `gm_AllocSpieler`
+  because a size change in an earlier object moves everything after it.  Rejected.
+
+So `aligned` is a better gradient than the fixed-offset count (which saturates),
+but it is still a proxy, and the rule is now explicit: **a candidate is worth
+keeping only after the composition is relinked.**  The cheap way to honour it is
+to batch — probe many changes, then recompile exactly those files with their
+`build.make` command line and relink once.
+
+*The archive was re-judged and is mostly superseded.*  Every past campaign
+recorded "inert at N" from the fixed-offset count, so the ~8,700 already-compiled
+probe objects under `.scratch/` were re-scored with the aligned objective
+(`.scratch/rescore3.py`, COMDAT symbol -> VA, both sides at the metadata size).
+For thirteen of the eighteen holdouts the live tree already beats the best
+archived variant, which is the useful result: the tree is not leaving easy wins
+on the table.  Three exceptions were chased to the end — `gm_CheckInventoryCapacity`
+(`.scratch/pv/pv_H1.c`'s `while (elem != 0)` loop reaches aligned 129 but is a
+*semantic* bug: it classifies the zero sentinel as a miss where the reference
+tests `elem == type` first, so it was not adopted), the `cm_ExProdObjekt` and
+`ls_LoadBuildingEntityState` cases above, both linked regressions.
+
+*Measurement defects fixed in the tooling.*
+
+- `probe_function.py` counted a byte as matched when *either* side had a
+  relocation on it, so an instruction that introduces an absolute address bought
+  all of its operand bytes.  The round-162 CrashDump move (523 -> 565 "matched",
+  which cost 10 linked bytes) was 90% new reloc slots; a per-byte audit at that VA
+  reads 74 both-side relocs and 73 plain-equal for the baseline against 47 and 80
+  for the rejected variant.  `matched` is now the honest count — both sides
+  relocate it, or neither does and the bytes agree — and the old number is kept
+  beside it as `matched-reloc`, because every figure written into a source header
+  before this round is that one.
+- `instr_diff.py --obj <object.obj>` and `probe_function.py`'s second line print
+  the aligned (LCS) score for a probe without relinking; `kind()` folds an
+  object's `[0]`/`0` addend onto `ADDR`, without which every relocated global read
+  counted as a kind the other side did not have.
+
+Also this round: `gm_CheckInventoryCapacity`'s archive lead was reported to its
+agent and correctly refused on semantic grounds; `vfs_OpenStream` (263 bytes) and
+`gm_FindNextFilteredEntity` (226) and `srv_LoadBuf` (49) and `CrashDump` (1988)
+produced no win — CrashDump's first divergence is byte 2 (`sub esp,0x28c` vs
+`0x280`) and the frame is slot-coloured over live ranges, so it is not
+declaration-order steerable.
+
+**Round-172: an object-level sequence score, and gm_AllocSpieler's schedule read
+off the reference instead of searched for.**
+
+Residue 10,846 at the time; round 173 link-validated the two source changes below
+properly and they are a **regression** (2,934 -> 2,970) and have been reverted.
+The measurement finding that produced them stands, and is the round's real
+content; the reading of it — "the linked image is byte-identical" — came from a
+postlink run that had not been preceded by `scripts/split_link.sh`, so it measured
+the previous link's vehicle.
+
+*The measurement was the blocker.* `probe_function.py` scores a **fixed-offset**
+byte compare against the target's size, so once the instruction stream diverges by
+one byte every later byte counts as wrong.  On a 3,689-byte function that
+saturates: gm_AllocSpieler reads 755/3689 from the linked image and 1,246/3689 from
+the freed object, while its instruction *sequence* is two-thirds right.
+`hillclimb.py` optimized that saturated number, which is why it "converged with no
+improving move" on a function that still has 178 hunks.
+
+`scripts/instr_diff.py --obj <object.obj>` scores one compiled COMDAT that way,
+without relinking the vehicle (a full build per probe is minutes; this is ~1.5 s
+plus the compile), and `probe_function.py` now prints the same number on a second
+line (`aligned N/M reference instructions`) so a probe needs only the one command.
+`kind()` also now folds an object's `[0]`/`0` addend onto `ADDR` — without that,
+every relocated global read as a kind the other side did not have and inflated
+gm_AllocSpieler's multiset difference from 79/83 to 111/115.
+
+*Reading the reference's order beats searching for it.*  Two reorders in
+gm_AllocSpieler, both transcribed from the reference disassembly at 0x100188fa
+onward, both leaving the object at exactly 3696 bytes:
+
+- the record-header block moves `*(int*)(slot+0x16c) = 0` up beside
+  `*(int*)(slot+0x170) = 0` (both after `slot[2] = type`), giving the reference's
+  type/0x170/0x16c/0x1f0/0x210/0x215 sequence, and `LogMessageInternal` moves to
+  directly after the `sprintf` it logs — the reference calls it at 0x10018980,
+  before the `slot[4]`/`slot[8]`/`slot[0x1e4]`/`slot[0x164]` stores our source put
+  ahead of it.  LCS 647 -> 659 of 1056.
+- the citizen path's `rnd = gm_RandomMod(8) & 0xffff` moves above
+  `*(int*)(slot+0x1f0) = *(int*) ent` (the reference's `mov [ebp+0x1f0],edx` sits
+  at 0x10018921, *after* the `gm_RandomMod` call our source preceded it with), and
+  `slot[0x164] = ent[0xd4]` moves above `slot[9] = ent[0xd5]` (0x1001891e before
+  0x10018927).  LCS 659 -> 660.
+
+Two claims in that file's own notes are contradicted by the current reference
+disassembly and should not be trusted: "`slot[2] = type` sinks below the two zero
+stores at 0x170 and 0x16c, which is the target's order", and "in the citizen path
+`slot[9] = ent[0xd5]` precedes `slot[0x164] = ent[0xd4]`".  The reference emits
+`mov [ebp+2],al` (type) at 0x1001891e, *then* the two `ebx` zero stores, and it
+emits `slot[0x164]` before `slot[9]`.
+
+That the linked number did not move is the point to keep: the residue is a
+per-function **saturated** fixed-offset compare, so a sequence-level gain is
+invisible to it until the function is positionally aligned end to end.
+gm_AllocSpieler has ~178 hunks to close at roughly +1..+12 LCS per transcribed
+region — a per-function source-reconstruction job, not a search job, and one that
+is now measurable per probe.
+
+Also this round: the remaining holdouts were fanned out across six subagents on
+disjoint files, probing only (the coordinator owns the build and the linked
+validation), because the per-function work is independent and context-bound.
+
 **Round-171: three rebrew defects fixed, one spelling measured shut.**
 
 10,846 bytes unchanged on the DLL; `rebrew`'s own suite went from 3 failures to

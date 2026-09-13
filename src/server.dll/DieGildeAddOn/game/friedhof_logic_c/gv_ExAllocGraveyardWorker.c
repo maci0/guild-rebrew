@@ -467,9 +467,9 @@ int __cdecl gv_ExAllocGraveyardWorker(void* req)
 	if (!slot)
 		return 0xffff;
 	slot_ptr = *(void**) ((char*) slot + 0x10);
-	count = g_worker_entry_count[*(int*) ((char*) req + 0xc)];
 	j = 0;
-	if (count <= j)
+	count = g_worker_entry_count[*(int*) ((char*) req + 0xc)];
+	if (j >= count)
 		goto fail_ffff;
 	job_id = *(int*) ((char*) req + 0x11);
 	{
@@ -515,22 +515,26 @@ fail_ffff:
 	 * without the qualifier msvc6 drops this write and the object loses the
 	 * reference's `mov word ptr [ebp],0xffff` at 0x10011db3. */
 	neg = -1;
-	*(int*) ((char*) 0x100358a4 + off) = neg;
-	memset(grave + 0x5c, neg, 32);
-	*(volatile unsigned short*) grave = 0xffff;
+	{
+		char* m2 = grave + 0x5c;
+		*(int*) ((char*) 0x100358a4 + off) = neg;
+		*(volatile unsigned short*) grave = 0xffff;
+		memset(m2, neg, 32);
+	}
 	/* Both counters are read before the entity stores and written back after,
 	 * matching the reference's edi/ecx traffic at 0x10011dd2-0x10011dff.
 	 * Bumping them in place emits a load-inc-store round trip each. */
 	{
-		int live = g_citizen_count + 1;
-		int seq = g_next_object_id;
+		int live = g_citizen_count;
+		int seq;
 		*(int*) (grave + 0x170) = (int) entity;
 		*(int*) (grave + 0x16c) = (int) entity;
+		seq = g_next_object_id;
 		*(int*) (grave + 4) = seq;
 		g_next_object_id = seq + 1;
 		one = 1;
 		*(volatile unsigned short*) grave = (unsigned short) chosen;
-		g_citizen_count = live;
+		g_citizen_count = live + 1;
 	}
 	*(unsigned char*) (grave + 2) = 0x14;
 	*(int*) (grave + 0x1f0) = 0;
@@ -558,21 +562,21 @@ fail_ffff:
 			*(unsigned char*) (grave + 0x80 + n) = *(unsigned char*) ((char*) entry + 0x24 + n) >> 1;
 	}
 	*(unsigned char*) (grave + 9) = *(unsigned char*) ((char*) entry + 0x38);
-	*(int*) (grave + 0x10) = 0;
 	strcpy((char*) grave + 0x30, (char*) entry + 4);
 	strcpy((char*) grave + 0x40, (char*) *(void* volatile*) &entry + 0x14);
-	*(float*) (grave + 0x14) =
-	    *(float*) 0x10025680 / (gm_RandomFloat01() * *(float*) 0x100257c8 + *(float*) 0x100257c4);
-	*(int*) (grave + 0x18) = 0;
-	*(int*) (grave + 0x1c) = 0x447a0000; /* 1000.0f */
-	*(int*) (grave + 0x20) = 0;
-	*(int*) (grave + 0x24) = 0;
-	*(unsigned short*) (grave + 0x28) = 0;
-	*(int*) (grave + 0x2c) = 0;
+	*(int*) (grave + 0x10) = 0;
 	{
 		int n;
 		volatile int iv;
 		iv = 0;
+		*(float*) (grave + 0x14) =
+		    *(float*) 0x10025680 / (gm_RandomFloat01() * *(float*) 0x100257c8 + *(float*) 0x100257c4);
+		*(int*) (grave + 0x18) = 0;
+		*(int*) (grave + 0x1c) = 0x447a0000; /* 1000.0f */
+		*(int*) (grave + 0x20) = 0;
+		*(int*) (grave + 0x24) = 0;
+		*(unsigned short*) (grave + 0x28) = 0;
+		*(int*) (grave + 0x2c) = 0;
 		for (n = 0; n < 0x90000; n += 0x300) {
 			int a = n + *(volatile unsigned short*) grave;
 			int byte_offset;

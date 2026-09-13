@@ -134,16 +134,16 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 
 	source_owner_entity = (short*)0;
 	*(int*)(cmd + 0x1a) = g_next_object_id;
-	dest_dynamic_entity = (short*)0;
+	source_existing_entity = (void*)0;
 	source_dynamic_entity = (short*)0;
 	dest_game_object = (ushort*)0;
 	resolved_dynamic = (short*)0;
 	dest_object = (ushort*)0;
-	source_static_entity = (short*)0;
 	dest_existing_entity = (char*)0;
-	source_existing_entity = (void*)0;
-	dest_owner_entity = (short*)0;
 	source_container_ptr = (char**)0;
+	dest_owner_entity = (short*)0;
+	dest_dynamic_entity = (short*)0;
+	source_static_entity = (short*)0;
 	if (*(int*)(cmd + 0x14) != -1) {
 		resolve_result = gm_GetFieldByType(cmd, *(int*)(cmd + 0x14));
 		*(int*)(cmd + 0x14) = resolve_result;
@@ -158,13 +158,12 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			return 1;
 		}
 		if (source_existing_entity != (void*)0) {
-			container_ptr = (char**)((int)source_existing_entity + 0x5d);
-			source_container_ptr = container_ptr;
-			if (*(ushort*)((int)source_existing_entity + 0x27) == 0xffff) {
-				source_owner_entity = (short*)0;
-			} else {
+			source_container_ptr = (char**)((int)source_existing_entity + 0x5d);
+			if (*(ushort*)((int)source_existing_entity + 0x27) != 0xffff) {
 				source_owner_entity = (short*)(g_slot_table +
 					(uint)*(ushort*)((int)source_existing_entity + 0x27) * 0x21c);
+			} else {
+				source_owner_entity = (short*)0;
 			}
 		} else if (resolved_dynamic != (short*)0) {
 			entity_type = *resolved_dynamic;
@@ -173,8 +172,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				entity_type == 0x1dd) {
 				source_dynamic_entity = resolved_dynamic;
 			}
-			container_ptr = (char**)(resolved_dynamic + 10);
-			source_container_ptr = container_ptr;
+			source_container_ptr = (char**)(resolved_dynamic + 10);
 			source_owner_entity = gm_ResolveParentEntity(resolved_dynamic);
 			if (source_owner_entity == (short*)0) {
 				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2c2f, "cm_ExSellObjekt() Invalid 'gm_eval_ObjektBesitzer'", 8);
@@ -182,10 +180,9 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			}
 		} else {
 			source_owner_entity = source_static_entity;
-			container_ptr = (char**)(source_static_entity + 0xbc);
-			source_container_ptr = container_ptr;
+			source_container_ptr = (char**)(source_static_entity + 0xbc);
 		}
-		dest_object = (ushort*)gm_ff_Objekt((int)*container_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
+		dest_object = (ushort*)gm_ff_Objekt((int)*source_container_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
 		if (dest_object == (ushort*)0) {
 			sprintf(
 				log_buffer.text,
@@ -248,11 +245,11 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		}
 		if (dest_existing_entity != (char*)0) {
 			linked_list_ptr = (int*)(dest_existing_entity + 0x5d);
-			if (*(ushort*)(dest_existing_entity + 0x27) == 0xffff) {
-				dest_owner_entity = (short*)0;
-			} else {
+			if (*(ushort*)(dest_existing_entity + 0x27) != 0xffff) {
 				dest_owner_entity = (short*)(g_slot_table +
 					(uint)*(ushort*)(dest_existing_entity + 0x27) * 0x21c);
+			} else {
+				dest_owner_entity = (short*)0;
 			}
 		} else if (resolved_dynamic != (short*)0) {
 			entity_type = *resolved_dynamic;

@@ -337,6 +337,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	char* p;
 	unsigned int sz;
 	int nodev;
+	int slots;
 	void* cur;
 
 	if (g_array_ptr == 0) {
@@ -432,11 +433,12 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	 * operand that must stay in a register.  obj_size 649 -> 654 against the
 	 * reference's 658 and the split pipeline's masked differing bytes
 	 * 6,528 -> 6,515. */
-	if (g_stat2 < *(volatile int*) &g_array_count) {
+	slots = *(volatile int*) &g_array_count;
+	if (g_stat2 - slots < 0) {
 		node = (struct GroupNode*) nodev;
 		slot = (char*) g_array_ptr;
 		i = 0;
-		while (i < g_array_count) {
+		while (i < slots) {
 			cur = *(void**) (slot + 8);
 			if (cur == 0) {
 				break;
@@ -462,7 +464,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			g_stat4 = g_stat2;
 		}
 		node->count_total++;
-		if (node->count_total > node->count_max) {
+		if (node->count_total - node->count_max > 0) {
 			node->count_max = node->count_total;
 		}
 	} else {

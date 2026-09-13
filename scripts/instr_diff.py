@@ -89,16 +89,7 @@ def mask(path: Path, secs: dict, va: int, size: int) -> bytearray:
     return m
 
 
-def instructions(path: Path, va: int, size: int, md, extra: bytearray | None = None) -> list[tuple[bytes, str]]:
-    secs = sections(path)
-    tva, tvs, tptr, trs = secs[".text"]
-    off = tptr + (va - tva - IMAGE_BASE)
-    body = path.read_bytes()[off : off + size]
-    m = mask(path, secs, va, size)
-    if extra is not None:  # the union: a slot either image relocates is masked
-        for i in range(min(len(m), len(extra))):
-            if extra[i]:
-                m[i] = 1
+def decode(body: bytes, m: bytearray, va: int, md) -> list[tuple[bytes, str]]:
     out = []
     for insn in md.disasm(body, va):
         i = insn.address - va
@@ -109,14 +100,87 @@ def instructions(path: Path, va: int, size: int, md, extra: bytearray | None = N
     return out
 
 
+def instructions(path: Path, va: int, size: int, md, extra: bytearray | None = None) -> list[tuple[bytes, str]]:
+    secs = sections(path)
+    tva, tvs, tptr, trs = secs[".text"]
+    off = tptr + (va - tva - IMAGE_BASE)
+    body = path.read_bytes()[off : off + size]
+    m = mask(path, secs, va, size)
+    if extra is not None:  # the union: a slot either image relocates is masked
+        for i in range(min(len(m), len(extra))):
+            if extra[i]:
+                m[i] = 1
+    return decode(body, m, va, md)
+
+
+def object_instructions(obj: Path, refmask: bytearray, va: int, md,
+                        size: int | None = None) -> list[tuple[bytes, str]]:
+    """The same decode for a single compiled object's COMDAT, so a probe can be
+    scored without relinking the whole vehicle.
+
+    The COMDAT is picked the way probe_function.py picks it: the symbol the
+    vehicle map gives for this VA, else the section closest to the target size.
+    ``refmask`` is the reference's relocation slots -- a slot either side
+    relocates is masked, because an object's operand holds an addend and the
+    reference's holds the resolved address.
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from split_coff import Coff  # noqa: E402
+
+    coff = Coff(obj.read_bytes())
+    wanted = None
+    mapfile = ROOT / "build/split_poc.map"
+    if mapfile.exists():
+        for line in mapfile.read_text().splitlines():
+            m = re.match(r"^\s+0001:[0-9a-f]{8}\s+(.*?)\s+([0-9a-f]{8})\s+(\S.*)$", line)
+            if m and int(m.group(2), 16) == va:
+                wanted = m.group(1).split()[0]
+    best = None
+    for si, s in enumerate(coff.sections):
+        if not s["name"].startswith(b".text"):
+            continue
+        body = coff.section_body(si)
+        name = next((sym["name"] for sym in coff.symbols
+                     if sym and sym["section"] == si + 1 and sym["storage_class"] == 2), None)
+        key = (0 if (wanted and name == wanted) else 1,
+               abs(len(body) - (size or len(body))))
+        if best is None or key < best[0]:
+            best = (key, si, body)
+    if best is None:
+        sys.exit(f"no .text COMDAT in {obj}")
+    si, body = best[1], best[2]
+    m = bytearray(len(body))
+    for r, _sym, _typ in coff.section_relocs(si):
+        for k in range(r, min(r + 4, len(body))):
+            m[k] = 1
+    for k in range(min(len(body), len(refmask))):
+        if refmask[k]:
+            m[k] = 1
+    return decode(body, m, va, md)
+
+
 def kind(text: str) -> str:
-    return ABSR.sub("ADDR", REGS.sub("R", text))
+    """Fold registers and absolute addresses, so one instruction *kind*
+    survives the difference between `mov [esi+4],1` and `mov [edi+4],1`.
+
+    An object's operand is its addend (0 at a relocation slot, see
+    ``object_instructions``) where the reference's is the resolved address, so
+    those fold onto ADDR too -- without it every relocated global reads as a
+    kind the other side does not have.
+    """
+    text = ABSR.sub("ADDR", REGS.sub("R", text))
+    text = text.replace("[0]", "[ADDR]").replace("[0 + ", "[ADDR + ")
+    if text.endswith(" 0"):
+        text = text[:-2] + " ADDR"
+    return text
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("va", help="function VA, e.g. 0x1000e140")
     ap.add_argument("--built", default=str(BUILT))
+    ap.add_argument("--obj", default=None,
+                    help="score one compiled object's COMDAT instead of the vehicle")
     ap.add_argument("--size", type=lambda s: int(s, 0), default=None,
                     help="function size (default: from src/rebrew-functions.toml)")
     ap.add_argument("-v", "--verbose", action="store_true")
@@ -132,10 +196,14 @@ def main() -> int:
 
     md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
     rmask = mask(REFERENCE, sections(REFERENCE), va, size)
-    bmask = mask(Path(args.built), sections(Path(args.built)), va, size)
-    union = bytearray(1 if (rmask[i] or bmask[i]) else 0 for i in range(size))
-    r = instructions(REFERENCE, va, size, md, union)
-    b = instructions(Path(args.built), va, size, md, union)
+    if args.obj:
+        r = instructions(REFERENCE, va, size, md)
+        b = object_instructions(Path(args.obj), rmask, va, md, size)
+    else:
+        bmask = mask(Path(args.built), sections(Path(args.built)), va, size)
+        union = bytearray(1 if (rmask[i] or bmask[i]) else 0 for i in range(size))
+        r = instructions(REFERENCE, va, size, md, union)
+        b = instructions(Path(args.built), va, size, md, union)
     ra = [x[0] for x in r]
     ba = [x[0] for x in b]
     sm = difflib.SequenceMatcher(a=ra, b=ba, autojunk=False)

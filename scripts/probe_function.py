@@ -211,15 +211,57 @@ def main() -> int:
     # caller can require it to match.
     n = size
     cb = body[start : start + n]
-    matched = sum(
+    # A byte under a relocation on EITHER side used to count as matched.  That is
+    # generous in a way that pays for wrong code: an instruction that introduces a
+    # new absolute address buys all four of its operand bytes whether or not it is
+    # the reference's instruction.  It is also what made the round-162 CrashDump
+    # move (523 -> 565) look like a win when 90% of the gain was new reloc slots.
+    # A byte is really right in the composed image only when both sides relocate
+    # it (postlink rewrites it from the reference) or neither does and the bytes
+    # agree.  The old number is kept alongside as `matched-reloc`, because every
+    # figure recorded in a source header before round 173 is that one.
+    generous = sum(
         1 for i in range(n)
         if i < len(cb) and ((rmask[i] or cmask[start + i]) or rbody[i] == cb[i])
+    )
+    matched = sum(
+        1 for i in range(n)
+        if i < len(cb) and (
+            (rmask[i] and cmask[start + i])
+            or (not rmask[i] and not cmask[start + i] and rbody[i] == cb[i])
+        )
     )
     ri = sum(1 for _ in MD.disasm(bytes(rbody[:n]), va))
     ci = sum(1 for _ in MD.disasm(bytes(cb), va))
     print(f"0x{va:x} size {size}: section {si} +{start:#x}, "
           f"matched {matched}/{n} ({100.0 * matched / n:.1f}%), "
+          f"matched-reloc {generous}/{n}, "
           f"instructions {ci} vs {ri}, object size {len(body) - start}")
+
+    # `matched` above is a FIXED-OFFSET compare, so one inserted byte makes every
+    # later byte wrong.  On a large function it saturates near the first
+    # divergence (gm_AllocSpieler reads 1,246/3689 while two thirds of its
+    # instruction sequence agrees), and a climb against it converges on a
+    # function that still has 178 hunks.  This second number is the aligned
+    # count -- the gradient to climb.  See scripts/instr_diff.py --obj.
+    import difflib
+    import instr_diff
+
+    mds = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+    mds.skipdata = True
+    ra = [b for b, _t in instr_diff.instructions(REFERENCE, va, size, mds)]
+    # the whole COMDAT, not the target's size: a short object must not have its
+    # tail cut off, and a long one's trailing pad is an insert hunk, not a
+    # misalignment.  Same construction as `instr_diff.py --obj`.
+    cm = bytearray(cmask)
+    for k in range(min(n, len(cm))):
+        if rmask[k]:
+            cm[k] = 1
+    ca = [b for b, _t in instr_diff.decode(bytes(body[start:]), cm[start:], va, mds)]
+    sm = difflib.SequenceMatcher(a=ra, b=ca, autojunk=False)
+    aligned = sum(i2 - i1 for tag, i1, i2, _j1, _j2 in sm.get_opcodes() if tag == "equal")
+    print(f"  aligned {aligned}/{len(ra)} reference instructions "
+          f"({100.0 * aligned / max(1, len(ra)):.1f}%)")
     if tmp is not None:
         print(f"  object: {obj}")
     return 0

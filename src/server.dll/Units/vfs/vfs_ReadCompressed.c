@@ -75,7 +75,7 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 	volatile int done;
 	volatile int result;
 	unsigned int n;
-	unsigned int i;
+	int i;
 	char* out;
 	unsigned int produced;
 
@@ -99,10 +99,7 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 	if (len > s->cap) {
 		s->avail_out = s->cap;
 	}
-	if (s->avail_out <= 0) {
-		return result;
-	}
-	do {
+	while (s->avail_out > 0) {
 		if (s->avail_in == 0) {
 			n = s->remaining;
 			if (n > 0) {
@@ -133,10 +130,7 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 			}
 		}
 		if (s->flag == 0) {
-			n = s->avail_out;
-			if (n > s->avail_in) {
-				n = s->avail_in;
-			}
+			n = (s->avail_out < s->avail_in) ? s->avail_out : s->avail_in;
 			i = 0;
 			if (n > 0) {
 				do {
@@ -153,8 +147,8 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 			s->total_out = s->total_out + n;
 			result = result + n;
 		} else {
-			out = s->next_out;
 			produced = s->total_out;
+			out = s->next_out;
 			done = inflate(&s->next_in, 2);
 			n = s->total_out - produced;
 			s->crc = crc32(s->crc, (unsigned char*) out, n);
@@ -171,9 +165,9 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 				}
 			}
 		}
-	} while (s->avail_out > 0);
-	if (done != 0) {
-		return done;
 	}
-	return result;
+	if (done == 0) {
+		return result;
+	}
+	return done;
 }

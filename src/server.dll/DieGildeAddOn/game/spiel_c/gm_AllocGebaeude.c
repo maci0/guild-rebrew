@@ -197,9 +197,9 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	}
 	LogMessageInternal((char*) 0x10031004, 0x10d8, s.msg, 8);
 	*(int*) (geb + 1) = *(volatile int*) 0x10030b6c;
+	*(volatile int*) 0x10030b6c = *(volatile int*) 0x10030b6c + 1;
 	*(unsigned short*) (geb + 0x25) = (unsigned short) owner;
 	*(unsigned short*) (geb + 0x27) = (unsigned short) owner;
-	*(volatile int*) 0x10030b6c = *(volatile int*) 0x10030b6c + 1;
 	*(int*) (geb + 0x3d) = 0x64;
 	*(int*) (geb + 0x45) = 0x64;
 	geb[0x5c] = 0x64;
@@ -267,15 +267,14 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 				s.flag = 1;
 			}
 			if (comp & 0x8000) {
-				if (comp_type != 2 && comp_type != 6) {
-					if (s.flag == 0) {
-						gm_AllocObjekt(*(int*) (geb + 1), comp & 0x7fff, 1);
-					}
+				if (comp_type == 2 || comp_type == 6) {
+					gm_AllocRaum(geb, comp & 0x7fff);
+				} else if (s.flag == 0) {
+					gm_AllocObjekt(*(int*) (geb + 1), comp & 0x7fff, 1);
 				}
 			}
 		}
 	}
-	gm_AllocRaum(geb, *(int*) (geb + 1));
 	s.record = (char*) gm_ff_Objekt(*(int*) (geb + 0x5d), 1, 4, 2);
 	if (s.record != NULL) {
 		while (*(unsigned short*) s.record == 0xfd) {

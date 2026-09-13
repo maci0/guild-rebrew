@@ -663,10 +663,10 @@ send_start_commands:
 				 * esp+0x18 after the two argument pushes. */
 				sync_timer = *(unsigned int*) 0x10035884;
 				sync_p0 = *(unsigned int*) 0x10035880;
-				sync_p1 = *(unsigned int*) 0x10035888;
 				sync_p2 = *(unsigned short*) 0x1003588c;
-				*(unsigned int*) (cmd_buffer_primary + 0x14) = sync_timer;
+				sync_p1 = *(unsigned int*) 0x10035888;
 				*(unsigned int*) (cmd_buffer_primary + 0x10) = sync_p0;
+				*(unsigned int*) (cmd_buffer_primary + 0x14) = sync_timer;
 				cmd_buffer_primary[0] = 0x1e;
 				cmd_buffer_primary[3] = 0xff;
 				*(unsigned int*) (cmd_buffer_primary + 4) = 0xffffffff;

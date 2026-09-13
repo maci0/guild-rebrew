@@ -182,7 +182,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 4 + *(volatile int*) (esi + 0x71)),
+							(void*) (*(volatile int*) (esi + 0x71) + load_result + 4),
 							4,
 							1,
 							(void*) stream_ctx
@@ -190,7 +190,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 8 + *(volatile int*) (esi + 0x71)),
+							(void*) (*(volatile int*) (esi + 0x71) + load_result + 8),
 							1,
 							1,
 							(void*) stream_ctx
@@ -198,7 +198,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 9 + *(volatile int*) (esi + 0x71)),
+							(void*) (*(volatile int*) (esi + 0x71) + load_result + 9),
 							1,
 							1,
 							(void*) stream_ctx
@@ -206,7 +206,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 0xa + *(volatile int*) (esi + 0x71)),
+							(void*) (*(volatile int*) (esi + 0x71) + load_result + 0xa),
 							2,
 							1,
 							(void*) stream_ctx
@@ -214,7 +214,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 0x10 + *(volatile int*) (esi + 0x71)),
+							(void*) (*(volatile int*) (esi + 0x71) + load_result + 0x10),
 							4,
 							1,
 							(void*) stream_ctx
@@ -290,8 +290,9 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 				state_ptr[0] = 0;
 				state_ptr[1] = 0;
 				state_ptr[2] = 0;
-				state_ptr[3] = neg1;
+				state_ptr[3] = 0;
 				state_ptr[0] |= 1;
+				state_ptr[3] = neg1;
 			}
 
 			*(int*) (esi + 0x30) = 0x1388;
@@ -305,6 +306,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 		return 0;
 	}
 
+	current_index = 0;
 	g_aux_entity_buffer = (int) realloc((void*) g_aux_entity_buffer, g_aux_entity_count * 0x60);
 	for (load_result = 0; load_result < g_aux_entity_count; load_result++) {
 		if (!ls_ReadVfsDataChecked((void*) (current_index + g_aux_entity_buffer), 0x40, 1, (void*) stream_ctx)) {
