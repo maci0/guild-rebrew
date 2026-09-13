@@ -34,9 +34,22 @@ own definitions unless the reals can be defined another way (an absolute symbol
 in the `.def`, or an `/alternatename` equivalent — neither exists in this
 linker).
 
-The remaining `0xa0` of unnamed `.rdata` between `0x2638` and `0x2738` is
-non-COMDAT data of members that must be linked for code, so it is stuck for the
-same reason as the three tables.
+The remaining `0x158` in the CMake build is now fully attributed:
+
+```
+0x2608 __real@8@3fff8000000000000000 / @4015800bf6.. / @4014bffffc..  testfdiv   0x18
+0x2620 unnamed pointer tables                                        output.obj 0x48
+0x2668 ___lookuptable                                                output.obj 0x5c
+0x26c4 unnamed pointer tables                                        timeset    0x1c
+0x26e0 ___dnames  (the day-name string "SunMonTueWedThuFriSat")       timeset   0x18
+0x26f8 ___mnames  (the month-name string "JanFebMar…NovDec")          timeset   0x28
+0x2720 unnamed pointer tables                                        timeset/a_map 0x40
+0x2760 import directory (reference 0x2608)
+```
+
+`___dnames`/`___mnames` are the *strings themselves*, not pointer tables, and
+every one of those named sections is plain non-COMDAT data of an object the
+link needs for code, so none of them can be folded away.
 
 **Round-122: the foldable half of the `.rdata` duplicate is folded — 11 COMDATs,
 prefix surplus `0x1c8 -> 0x158`.  The other half is provably not foldable.**
