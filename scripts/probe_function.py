@@ -79,6 +79,19 @@ def reloc_mask(path: Path, secs: dict, va: int, size: int) -> bytearray:
     return m
 
 
+def metadata_cflags(va: int) -> str | None:
+    """The flags rebrew resolves for this function, from rebrew-functions.toml.
+
+    The build no longer reads the `// CFLAGS:` annotation (round 154 moved the
+    single source of truth to the metadata: CMakeLists calls
+    `rebrew cmake-flags`), so neither may this probe -- measuring a `/Ox` or
+    `/G6 /Oy-` function with the `/O2 /Gd` fallback reports the wrong code.
+    """
+    text = (ROOT / "src/rebrew-functions.toml").read_text()
+    m = re.search(rf'\["SERVER\.0x{va:08x}"\]\n(?:.*\n)*?cflags\s*=\s*"([^"]*)"', text)
+    return m.group(1) if m else None
+
+
 def wanted_symbol(va: int) -> str | None:
     """The function's decorated name, from the vehicle link map if it exists."""
     mapfile = ROOT / "build/split_poc.map"
@@ -116,8 +129,11 @@ def main() -> int:
     if obj is None:
         cflags = args.cflags
         if cflags is None:
+            # metadata first (what the build and every tool use); the inline
+            # annotation is the legacy fallback for the second target, which
+            # still carries them.
             m = re.search(r"^// CFLAGS: *(.*)$", src.read_text(), re.M)
-            cflags = m.group(1) if m else "/O2 /Gd"
+            cflags = metadata_cflags(va) or (m.group(1) if m else None) or "/O2 /Gd"
         # the toolchain runs in a container that mounts the project only, so the
         # object has to live inside it
         tmp = ROOT / "build/objtest"
@@ -163,7 +179,13 @@ def main() -> int:
         key = (0 if (wanted and name == wanted) else 1, 0 if hit else 1, delta)
         if best is None or key < best[0]:
             best = (key, si, body)
-    if best is None or best[0][2] > 32:
+    # A body far from the target size is normal: the composition TRIMS an
+    # overrun (crt_region/dllmain.c links a 203-byte object into the reference's
+    # 157-byte slot byte-perfectly), and a function whose flags differ can be
+    # tens of bytes out.  Only the size-fallback path needs the window; a COMDAT
+    # that carries the wanted symbol is the function whatever its size.
+    matched_by_symbol = best is not None and best[0][0] == 0
+    if best is None or (not matched_by_symbol and best[0][2] > 512):
         print(f"function 0x{va:x} not found in {obj} "
               f"(no .text COMDAT within 32 bytes of {size})", file=sys.stderr)
         return 1

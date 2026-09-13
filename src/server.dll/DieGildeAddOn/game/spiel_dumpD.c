@@ -343,10 +343,10 @@ void* __cdecl gm_FindNextFilteredEntity(void)
 	unsigned char match;
 
 	match = 0;
-	end = (unsigned char*) g_entity_ptr + 0xa900;
 	if (g_entity_type_table == 0) {
 		return 0;
 	}
+	end = (unsigned char*) g_entity_ptr + 0xa900;
 	if (g_dynasty_field_4c > 0x100) {
 		return 0;
 	}

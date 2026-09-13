@@ -84,7 +84,6 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 	if (handle == 0) {
 		return -102;
 	}
-	s = *(VFS_INFLATE**) (handle + 0x7c);
 	if (s == 0) {
 		return -102;
 	}
@@ -95,13 +94,14 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 		return 0;
 	}
 	s->avail_out = len;
-	s->next_out = buf;
 	if (len > s->cap) {
 		s->avail_out = s->cap;
 	}
+	s = *(VFS_INFLATE**) (handle + 0x7c);
 	if (s->avail_out <= 0) {
 		return result;
 	}
+	s->next_out = buf;
 	do {
 		if (s->avail_in == 0) {
 			n = s->remaining;

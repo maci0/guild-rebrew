@@ -71,6 +71,42 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-156/157: the climb needed safety rails, and the probe needed fixing.**
+
+11,070 -> 10,996 differing bytes, but the round's real output is that the climb
+can no longer quietly trade semantics for bytes.
+
+*Two moves it accepted were wrong, and both scored better.*
+
+- `vfs_OpenStream`: lifting the `cleanup:` block above `result = stream;` so its
+  four `goto cleanup` sites fell through into the wrong return (23 bytes
+  better).  A label is a jump target, so labels are now **barriers**: neither
+  they nor anything crossing them is a candidate.
+- `gm_AllocGebaeude`: moving the `gm_SetupEntityQuery` block above the
+  `gm_ff_Objekt` block, both of which write `geb+0x29`, so whichever ran second
+  won.  A move is now refused when the moved statement touches anything it
+  crosses -- same cast-stripped destination text, same base object written
+  through, or a read/write of the same base.  (Conservative on purpose: it also
+  refuses `list[2]`/`list[3]` swaps, which are provably disjoint.)
+
+Both reverted, both re-climbed under the guard for a smaller legitimate gain.
+`scripts/qualsweep.py` (declaration-level `volatile`) was written and measured
+inert on `cm_ExProdObjekt` and `gm_ObjectsAvailble`; it is kept because it costs
+~20 compiles per function, not because it has paid off yet.
+
+*`probe_function.py` had two faults of my own making.*  It resolved the flags to
+compile with from the `// CFLAGS:` annotation, which round 154 deleted -- so
+after the migration it measured `/Ox` and `/G6 /Oy-` functions with the
+`/O2 /Gd` fallback.  It now reads `rebrew-functions.toml` first, like the build
+does.  And its locator rejected any COMDAT more than 32 bytes from the target
+size, which hides a function that legitimately overruns (`vfs_OpenStream`
+compiles 37 bytes long and is trimmed by the composition): a section carrying
+the wanted symbol is now accepted whatever its size, with the window kept for
+the size-only fallback.  Two earlier "converged, no improving move" verdicts
+were measured through those faults and were re-run: `m_AllocTracked` is 489/658
+under its real flags (not 552), `vfs_OpenStream` 451/667 (it could not be
+measured at all) -- both converge for real, so nothing was lost.
+
 **Round-155: the climb's size rule was wrong, and four stale operands were
 recoverable.**
 

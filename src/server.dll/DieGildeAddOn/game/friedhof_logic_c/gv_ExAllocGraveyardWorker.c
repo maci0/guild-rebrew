@@ -516,8 +516,8 @@ fail_ffff:
 	 * reference's `mov word ptr [ebp],0xffff` at 0x10011db3. */
 	neg = -1;
 	*(int*) ((char*) 0x100358a4 + off) = neg;
-	*(volatile unsigned short*) grave = 0xffff;
 	memset(grave + 0x5c, neg, 32);
+	*(volatile unsigned short*) grave = 0xffff;
 	/* Both counters are read before the entity stores and written back after,
 	 * matching the reference's edi/ecx traffic at 0x10011dd2-0x10011dff.
 	 * Bumping them in place emits a load-inc-store round trip each. */

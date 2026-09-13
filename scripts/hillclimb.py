@@ -42,6 +42,12 @@ PROBE = ROOT / "scripts/probe_function.py"
 PYTHON = sys.executable
 
 DECL_NAME = re.compile(r"[A-Za-z_]\w*(?:\[[^\]]*\])*$")
+# A label is a jump target: moving it moves what a `goto` reaches, and
+# moving a statement across it changes what falls into it.  (Measured:
+# vfs_OpenStream's `cleanup:` block was lifted above `result = stream;`, so
+# its four `goto cleanup` sites fell through into the wrong return -- and it
+# scored 23 bytes better.)
+LABEL = re.compile(r"^(?:case\b[^:]*|default|[A-Za-z_]\w*)\s*:")
 KEYWORDS = {"return", "goto", "break", "continue", "if", "else", "while", "for",
             "do", "switch", "case", "default"}
 
@@ -187,6 +193,72 @@ def target_size(va: str) -> int:
     return int(m.group(1))
 
 
+# What a statement writes (cast-stripped destination text, plus the base object
+# it writes through) and what it reads.  A move is refused when the moved
+# statement touches anything it crosses: reordering past a read or a write of
+# the same object changes what the program does, and the climb only sees bytes.
+# (Measured: without this, gm_AllocGebaeude lifted a `gm_SetupEntityQuery` block
+# above the `gm_ff_Objekt` block that writes the same `geb+0x29` field, so
+# whichever ran second won -- and it scored better.)
+CAST = re.compile(r"\(\s*(?:\w+\s+)*\w+\s*\*+\s*\)")
+IDENT = re.compile(r"[A-Za-z_]\w*")
+KEYWORDS = {
+    "if", "else", "while", "for", "do", "switch", "case", "default", "return",
+    "goto", "break", "continue", "sizeof", "void", "char", "short", "int",
+    "long", "float", "double", "unsigned", "signed", "const", "static",
+    "volatile", "struct", "union", "enum", "NULL",
+}
+ASSIGN_OPS = ("<<=", ">>=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=")
+
+
+def _lhs_of(line: str) -> str | None:
+    """Text left of an assignment (or the whole line for ++/--), else None."""
+    i = 0
+    while True:
+        i = line.find("=", i)
+        if i < 0:
+            return line if ("++" in line or "--" in line) else None
+        nxt = line[i + 1] if i + 1 < len(line) else ""
+        prv = line[i - 1] if i else ""
+        if nxt == "=" or prv in "<>!":
+            i += 1
+            continue
+        if any(line.endswith(op, 0, i) for op in ASSIGN_OPS):
+            i += 1
+            continue
+        return line[:i]
+
+
+def accesses(unit: str) -> tuple[set[str], set[str], set[str]]:
+    """(destinations, base identifiers written through, identifiers read)."""
+    code = strip_literals(unit)
+    dests: set[str] = set()
+    touched: set[str] = set()
+    for line in code.splitlines():
+        if "=" not in line and "++" not in line and "--" not in line:
+            continue
+        lhs = _lhs_of(line)
+        if not lhs:
+            continue
+        flat = CAST.sub("", lhs)
+        dests.add(re.sub(r"\s+", "", flat))
+        touched |= {t for t in IDENT.findall(flat) if t not in KEYWORDS}
+    reads = {t for t in IDENT.findall(CAST.sub("", code)) if t not in KEYWORDS}
+    return dests, touched, reads
+
+
+def conflicts(moved: str, other: str) -> bool:
+    """Would reordering these two change what the program does?"""
+    dm, bm, rm = accesses(moved)
+    do, bo, ro = accesses(other)
+    return bool(
+        (dm & do)      # same destination
+        or (bm & bo)   # writes through the same base object
+        or (bm & ro)   # ... that the other reads
+        or (bo & rm)   # the other writes something this one reads
+    )
+
+
 def score(path: Path, va: str) -> tuple[int, int, int, int]:
     """(size agrees with the target, matched, -insn delta, object size)."""
     r = subprocess.run([PYTHON, str(PROBE), "--va", va, "--file", str(path)],
@@ -241,6 +313,7 @@ def main() -> int:
     head, body, tail = text[:lo], text[lo:hi], text[hi:]
     spans = statements(body)
     units = [body[a:b] for a, b in spans]
+    barrier = [bool(LABEL.match(strip_literals(u).strip())) for u in units]
     ndec = 0
     while ndec < len(units) and is_decl(units[ndec]):
         ndec += 1
@@ -280,7 +353,13 @@ def main() -> int:
                      for d in range(-args.reach, args.reach + 1) if d
                      and 0 <= i + d < len(units)
                      and not (i < ndec <= i + d)          # no decl after a stmt
-                     and not (i >= ndec > i + d)]         # no stmt before a decl
+                     and not (i >= ndec > i + d)          # no stmt before a decl
+                     # no crossing a label, in either direction
+                     and not any(barrier[min(i, i + d):max(i, i + d) + 1])
+                     # and no crossing anything that touches what we touch
+                     and not any(conflicts(units[i], units[k])
+                                 for k in range(min(i, i + d) + 1,
+                                                max(i, i + d) + 1))]
             with cf.ThreadPoolExecutor(max_workers=args.jobs) as ex:
                 results = list(ex.map(lambda ij: submit(*ij), cands))
             for p in src.parent.glob(f"_hc_{name}_*.c"):

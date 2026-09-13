@@ -87,6 +87,8 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 	}
 
 	current_index = 0;
+
+	current_index = 0;
 	if (0 < entity_count) {
 		offset = 0;
 		neg1 = -1;
@@ -304,8 +306,6 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 	}
 
 	g_aux_entity_buffer = (int) realloc((void*) g_aux_entity_buffer, g_aux_entity_count * 0x60);
-
-	current_index = 0;
 	for (load_result = 0; load_result < g_aux_entity_count; load_result++) {
 		if (!ls_ReadVfsDataChecked((void*) (current_index + g_aux_entity_buffer), 0x40, 1, (void*) stream_ctx)) {
 			return 0;
