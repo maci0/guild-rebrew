@@ -1,5 +1,46 @@
 # Blockers — 100% Round-Trip Goal
 
+## A size match that is a coincidence (2026-09-13, round 80)
+
+Following round 78's conclusion that the duplicated `.rdata` cannot simply be
+deleted, the interesting measurement is what the blob is actually needed for.
+Dropping `rdata_restore.c.obj` from the response file entirely:
+
+```
+              .rdata diff   vsize     raw
+split_poc         2237     0x33b1   16384
+no blob           3438     0x2091   12288      <- raw exactly the reference's 0x3000,
+                                                 but the section is 0xdf0 SHORT
+```
+
+so of the blob's 0x1320 bytes, 0xdf0 are genuinely needed and 0x530 duplicate
+-- and 0x530 is exactly the surplus.  Truncating the blob to its first 0xdf0
+bytes therefore looks like the fix, and it lands the section *exactly* on the
+reference:
+
+```
+              .rdata diff   vsize     raw
+split_poc         2237     0x33b1   16384
+blob truncated    2513     0x2e81   12288      <- 0x2e81 and 0x3000, both exact
+```
+
+`0x2e81` is the reference's `.rdata` VirtualSize to the byte, and the raw size
+matches too.  It is a coincidence.  The truncated tail held the locale strings
+-- `H:mm:ss`, `dddd, MMMM dd, yyyy`, `M/d/yy`, the month names -- which
+**nothing else in the link supplies**:
+
+```
+reference .rdata strings missing from the truncated image: 17
+  H:mm:ss   dddd, MMMM dd, yyyy   M/d/yy   December   November   October ...
+```
+
+The size came out right because unrelated member content filled the space.  A
+byte-exact section size is not evidence of correctness, and this is the
+cheapest demonstration of that in the log -- worth remembering before trusting
+any future "the sizes match now" result on `.rdata` or `.data`.
+
+Both variants reverted; tree clean.
+
 ## The flag space is closed: 36 pairs, all inert (2026-09-13, round 79)
 
 Round 51 swept nine individual optimisation flags over this project's 20
