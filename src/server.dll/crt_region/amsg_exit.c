@@ -304,7 +304,7 @@ fail:
 /* LIBCMT dllcrt0 pulls these undecorated CRT names. Alias them to the game
  * copies above so crt0msg.obj / crtmbox.obj are not linked (their .rdata
  * strings inflate the IAT→IMPORT gap past the layout prefix). */
-void __cdecl __NMSG_WRITE(int rterrnum)
+void __cdecl _NMSG_WRITE(int rterrnum)
 {
     fcn_1001fe31(rterrnum);
 }
@@ -314,7 +314,7 @@ void __cdecl _FF_MSGBANNER(void)
     fcn_1001fdf8();
 }
 
-int __cdecl __crtMessageBoxA(const char* text, const char* caption, unsigned int type)
+int __cdecl _crtMessageBoxA(const char* text, const char* caption, unsigned int type)
 {
     return fcn_10022107(text, caption, type);
 }
