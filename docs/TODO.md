@@ -1,5 +1,35 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-245 (result): 9,297 -> 9,293, and a toolchain bug fixed at source.**
+
+One win: `ServerMainThread` -4 linked (its volatile-pinned cmd8 store; the agent was honest
+that it is a positional artefact rather than a shape fix, and flagged it for revert if that
+function's four cancelling length deltas are ever resynced).  `cm_ExSellObjekt` round 2 found
+nothing in ~50 probes and is parked.
+
+**A `rebrew` correctness bug, found because a claim in the generated `AGENTS.md` contradicted
+the code.**  The tool ranks `EXACT` 0, `RELOC` 1, `PROVEN` 2 — `verify.py`'s own comment
+reads *"PROVEN is a post-verify semantic promotion, NOT a byte match: a proven function
+compiles to bytes that differ from the target"* — but `AGENTS.md.template` told every agent
+`PROVEN > EXACT > RELOC > STUB`, the exact reverse.  **PROVEN must never outrank EXACT**, and
+it propagated: a note written in this file from that template repeated the wrong ordering
+until it was caught.  Fixed the claim everywhere it was made — the template, `status.py`'s
+`matched_pct` docstring and its rendered `"N% byte-matched"` label, the `dashboard.py`
+coverage comment, and `depgraph.py`'s node style, which coloured `PROVEN` with the `EXACT`
+class.  Full rebrew suite: 6503 passed, 29 skipped, 0 failed.
+
+**A composition hazard closed.**  `file(GLOB_RECURSE)` swept a leading-underscore scratch
+file an agent had dropped in `src/` mid-link-test; it was transient and never reached
+`rsp.rsp`, so the measurement it interrupted was valid, but the next configure would have
+compiled it as an extra object.  `CMakeLists.txt` now excludes the `_` prefix — inert today
+(the resolved list is still 176 files) and free insurance.
+
+Also folded in: allocator Findings 59-61 (relocation accounting explains *why* only the
+linked residue decides, and corrects an over-strong "metric wall" call I made last round;
+the sentinel-initial instrument for reading out a frame slot map; `volatile` on a local as a
+per-variable fixed point rather than a knob).
+
+
 **Round-245: `rebrew todo` says 99.6% matched and lists two items.  That is SEMANTIC
 coverage, not this objective, and the difference is the whole remaining task.**
 
