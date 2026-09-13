@@ -4,6 +4,22 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-267 (2026-09-13): PROVEN audit + ranked-leads revision.**
+
+- Audited all 17 PROVEN functions: 16 carry residue (each at a verified wall,
+  confirmed this session or by cited measured rounds), 1
+  (`gm_CalculateProductionValue`) rides at zero linked residue — done for
+  this objective's purposes. No stale-PROVEN possible by construction
+  (`should_promote_status` auto-promotes byte matches over PROVEN on every
+  verify). `gm_FindNextFilteredEntity` re-confirmed at the §74 epilogue wall
+  (standalone reproducer proves compiler-unconditional).
+- Revised the CURRENT STATE ranked-leads block (it still ranked the obsolete
+  V2 length plan first): new ranking leads with new-techniques-not-spellings,
+  corrects Spieler/CrashDump leads to rounds 254-266 state, and groups the
+  exact-local/cascade-loss small rows as whole-function units. Old ranking
+  kept below it as history.
+- Residue baseline unchanged: **9,209**.
+
 **Round-266 (2026-09-13): ObjectsAvailble triple rotation probed inert.**
 
 - `gm_ObjectsAvailble` (25) is the purest wall in the tree: 214/229, mnemonic
@@ -295,7 +311,38 @@ finished: `vfs_ReadCompressed` was improved by **-1 linked** (residue 9,281 -> 9
 ceiling (allocator Finding 59's amendment).  **Check `list_agents` and `.scratch/*.FINAL.c`
 timestamps before starting new work**, so you do not collide with the CrashDump agent.
 
-**Ranked leads, most promising first:**
+**Ranked leads, most promising first (REVISED 2026-09-13 — rounds 254-266;
+supersedes the ranking below it, which is kept as history):**
+
+1. **New techniques, not more spellings.** Every live function is at a
+   measured wall (register-allocation/scheduling choices, epilogue merging,
+   tail duplication, CSE proofs, or cascades where a local fix recolors the
+   function). Fifteen rounds of source probes return exact-local-shapes that
+   lose at the link, or inert objects. What has NOT been tried: a different
+   compiler for the whole tree (SP1-SP6 measured byte-identical on one
+   function; anything further invalidates 281 passing functions), a live
+   TU-partition search (merge-sweep repaired round 263, dry-run only), and
+   allocator steering beyond `volatile` (qualifier direction/polarity
+   exhausted; numbering inert).
+2. **`gm_AllocSpieler` (2,861, 31%) — largest row, deepest wall.** Frame
+   correct (0x41c both sides); tail-order lead verified-then-reverted (+53);
+   the "`add` x4" inventory is now one register-cascaded pair (Finding 54
+   corrected). Ceiling ~3115 on one-sided relocs. Only a use-shape change
+   not yet imagined moves it.
+3. **`CrashDumpUnhandledExceptionFilter` (1,597) — HEAD is length-exact
+   (real code ends 0x0850 both sides, tables at 0x72c/0x7ac); the V2 +59
+   length plan is obsolete.** Frame now 0x284 vs 0x280 (F3's volatiles closed
+   half the 0x28c gap); plain-locals give 0x280 but cost the code length.
+   Remaining: frame + 4-reg-deferred prologue + distributed hunks. Bug 2
+   (dead decode block) still open; V2's faithful spelling still the only
+   known fix, still +131 for the length reason above.
+4. **Small rows with exact-local-fix/cascade-loss signatures** (LS nesting
+   §72b, vfs head §52-3rd-instance, ReadCompressed tail-duplication): each
+   has a verified local shape and a measured cascade. Landable only with a
+   plan for the downstream recoloring — the unit of work is the whole
+   function, not the hunk.
+
+**Older ranking (rounds ≤253; superseded — kept as history):**
 
 1. **`CrashDumpUnhandledExceptionFilter` (1,668) — the only frame-size mismatch left, and the
    faithful version is in hand but unfinished.**  `.scratch/…V2-frame0x280.c` reproduces the
