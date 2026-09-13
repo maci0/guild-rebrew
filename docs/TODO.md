@@ -4,6 +4,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-296 (2026-09-13): PCQ + FindNext semantic reviews CLEAN.**
+
+- `cm_ProcessCommandQueue`: held logic, unlink/relink surgery (0x91/0x95
+  directions), Multisync path, dispatch indexing, broadcast bounds/skip,
+  queued tail (test-before-store), OOR log, all constants verified. The
+  folded join is taken-edge-identical in every reachable state. Clean.
+- `gm_FindNextFilteredEntity`: guards, stride/end/sentinels, all 6 filter
+  arms (incl. extra4 sete-overwrite and sticky-match clear), per-candidate
+  counter, advance/exit/clear-base tail verified VA-by-VA. Clean.
+- 15 of 19 residue functions now carry explicit behavioral verdicts.
+- Residue baseline unchanged: **9,209**.
+
 **Round-295 (2026-09-13): ReadCompressed + ExProdObjekt reviews CLEAN.**
 
 - `vfs_ReadCompressed`: all 16 non-exact insns inside the 4 documented
