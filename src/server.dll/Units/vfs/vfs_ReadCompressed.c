@@ -141,17 +141,26 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 			s->crc = crc32(s->crc, (unsigned char*) s->next_out, n);
 			s->cap = s->cap - n;
 			s->avail_in = s->avail_in - n;
-			s->avail_out = s->avail_out - n;
-			s->next_out = s->next_out + n;
-			s->next_in = s->next_in + n;
-			s->total_out = s->total_out + n;
-			result = result + n;
+			{
+				int acc = result;
+				s->avail_out = s->avail_out - n;
+				s->next_out = s->next_out + n;
+				s->next_in = s->next_in + n;
+				s->total_out = s->total_out + n;
+				result = acc + n;
+			}
 		} else {
 			produced = s->total_out;
 			out = s->next_out;
-			done = inflate(&s->next_in, 2);
-			n = s->total_out - produced;
-			s->crc = crc32(s->crc, (unsigned char*) out, n);
+			{
+				int z;
+				unsigned int crc;
+				z = inflate(&s->next_in, 2);
+				crc = s->crc;
+				n = s->total_out - produced;
+				done = z;
+				s->crc = crc32(crc, (unsigned char*) out, n);
+			}
 			s->cap = s->cap - n;
 			result = result + n;
 			{

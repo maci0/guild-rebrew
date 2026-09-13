@@ -148,8 +148,8 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	char* father;
 	char work[0x3fc];
 	int idx;
-	int i;
 	int j;
+	int i;
 	int rnd;
 	int n;
 	int best_father;
@@ -304,7 +304,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		/* ahm_InitRandomEntity returned NULL: fall through */
 	}
 	if (slot[2] == 0x15 || slot[2] == 0x16) {
-		InitNewDynastyEntity(type & 0xff, (void*) mother_id, (unsigned short) arg4,
+		InitNewDynastyEntity(slot[2] & 0xff, (void*) mother_id, (unsigned short) arg4,
 		                     slot);
 		return *(unsigned short*) slot;
 	}

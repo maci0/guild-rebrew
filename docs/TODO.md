@@ -107,6 +107,41 @@ the round-162 profile: it is very likely the relocation-inflated class, since
 `matched-reloc` credits a byte under a relocation on either side.  Everything else
 confirms the tree is not leaving wins on the table in its own history.
 
+*First link-validated candidates of the round, and one measurement fact that
+explains round 172's surprise.*  Baseline 10,097 -> **10,023**:
+
+```
+gm_AllocSpieler       2934 -> 2908   (-26)  one word: InitNewDynastyEntity(type & 0xff, ..)
+                                            -> InitNewDynastyEntity(slot[2] & 0xff, ..)
+vfs_ReadCompressed     158 ->  134   (-24)
+CrashDump             1988 -> 1975   (-13)  date/time block order, hProc move, and a goto
+                                            still under review (see below)
+cm_ExSellObjekt       1434 -> 1433    (-1)
+```
+
+The gm_AllocSpieler win is worth reading twice: `slot[2] = (char) type` is assigned
+earlier in the function, so naming `slot[2]` again instead of `type` is
+semantically identical, and it lets msvc6 reuse the `mov al,[ebp+2]` it already
+made for the `== 0x15 / == 0x16` test, emitting the 5-byte `and eax,0xff`
+accumulator form instead of the 6-byte `and esi,0xff`.  matched-reloc 1246 -> 1269
+and honest matched 668 -> 691, so it is not relocation inflation, and the real body
+length goes 3690 -> 3689, i.e. *exactly* the reference's.
+
+That last number is the measurement fact worth keeping: **msvc6 pads a COMDAT to a
+16-byte multiple with trailing `nop`s, so every real body length from 3681 to 3696
+reports "object size 3696".**  A candidate can therefore change the linked section
+size — and move every symbol after it — while every tool reports the size as
+unchanged.  That is what made round 172's gm_AllocSpieler reorder look size-neutral
+when it was not, and it is why the honest `matched` and the real body length both
+need checking, not just the reported object size.
+
+*Under review.*  The CrashDump candidate adds `goto no_dbg;` immediately before the
+`log_close:` label, which makes the normal path skip that block's
+`LogMessageInternal` call.  That is a behavioural change rather than a scheduling
+one, so it is being held out of the tree until the agent confirms against the
+reference disassembly that the original really does branch over it; the date/time
+block reorder and the `hProcess` move are pure ordering and are kept.
+
 **Round-173: the eighteen holdouts fanned out across six subagents, and the
 object-level proxy caught pointing the wrong way four more times.**
 
