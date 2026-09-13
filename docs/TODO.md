@@ -51,6 +51,17 @@ The remaining `0x158` in the CMake build is now fully attributed:
 every one of those named sections is plain non-COMDAT data of an object the
 link needs for code, so none of them can be folded away.
 
+The one route that can zero the surplus is the member-section link plus a
+**split blob**: `split_coff.py` already emits one object per member *section*,
+so the sections whose `.rdata` has to sit at a particular reference offset can
+be kept while the rest are left out, and `rdata_restore.c`'s single array
+becomes pieces with gaps at exactly those offsets.  Those VAs are inside the
+blob's range today (`0x12e8..0x2608`), which is precisely what one contiguous
+array cannot express - it cannot share its range with a real object.  Nothing
+measured this round contradicts that route; it is simply a bigger change than a
+fold (generate the per-section set, filter it, re-cut the blob, regenerate the
+response file, link) and it is where the prefix gate should be attacked next.
+
 **Round-122: the foldable half of the `.rdata` duplicate is folded — 11 COMDATs,
 prefix surplus `0x1c8 -> 0x158`.  The other half is provably not foldable.**
 
