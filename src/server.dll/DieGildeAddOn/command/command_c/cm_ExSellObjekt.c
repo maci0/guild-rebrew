@@ -44,13 +44,23 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * compiled to register-passed args at a single push site and matched
  * only 229 bytes.
  *
- * Conversion state: pure C (naked wrapper removed).  The head diverges
- * on MSVC6 register allocation: the reference zeroes the saved locals
- * through edi with a 0x228 frame (9 zeroed dwords + an unused 4-byte gap
- * before the 512-byte log buffer); every C formulation zeroes through ebx
- * with a 0x224 frame (one fewer spilled local), and the zero-store
- * order/registers cascade through the byte diffs — best-effort
- * 392/2057 bytes (obj 2056; docs/msvc6-allocator.md GRA class).
+ * Conversion state: pure C (naked wrapper removed).  The frame matches the
+ * reference exactly as of 2026-09-13; the head diverges only on MSVC6's
+ * register allocation -- the reference parks the zero constant in edi and
+ * keeps it live across the first call (`cmp eax,edi`), ours parks it in ebx
+ * and rematerializes `test eax,eax`, and the local->slot assignment is a
+ * different permutation -- best-effort 392/2057 bytes
+ * (docs/msvc6-allocator.md GRA class).
+ *
+ * Frame layout, fixed 2026-09-13: the reference's 0x228 frame carries a
+ * 4-byte hole between the spill block and the 512-byte log buffer.  It is
+ * not an alignment pad (MSVC6 packs stack objects on 4 bytes; char[512],
+ * __int64[64], double[64] and a struct-of-__int64 array all give the same
+ * frame) and not a plain unused local (eliminated outright).  Modelling the
+ * buffer as the 516-byte `struct SLogBuffer` below allocates the whole
+ * aggregate, so its first dword stays reserved and untouched while `text`
+ * lands on 0x38 -- reproducing `sub esp,0x228`, the [esp+0x38] buffer base
+ * and the [esp+0x238] param slot byte for byte.  See docs/TODO.md round 86.
  *
  * Rechecked 2026-08-27: the call inventory matches the reference
  * 1:1 (error-path restructure did not add or drop a call), so the
@@ -77,10 +87,8 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * Byte-level: still SIZE_MISMATCH (obj 2055 vs target 2057) — the residual
  * deltas are the tail-merge shape (candidate inlines the two error tails;
  * reference shares one tail at 0x1000e00e), the case-block order, and the
- * register-role cascade (reference zeroes the saved locals through edi with
- * a 0x228 frame; the C builds zero through ebx with a 0x224 frame —
- * docs/msvc6-allocator.md GRA class).  Semantically PROVEN equivalent
- * (Z3, EAX) as of 2026-08-29. */
+ * register-role/slot cascade (the frame itself now matches; see above).
+ * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29. */
 
 
 // CFLAGS: /O2 /Gd
