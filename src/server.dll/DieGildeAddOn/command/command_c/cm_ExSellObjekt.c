@@ -325,11 +325,12 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		if (amount <= 0) {
 			obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
-				if (source_existing_entity == (void*)0) {
+				if (source_existing_entity != (void*)0) {
+					gm_RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(cmd + 0x18));
+				} else {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2def, g_error_msg_sell_no_dest, 8);
 					return 1;
 				}
-				gm_RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(cmd + 0x18));
 			} else {
 				gm_RemoveObjectByType(source_container_ptr, (uint)*(ushort*)(cmd + 0x18));
 			}

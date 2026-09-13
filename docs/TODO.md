@@ -71,6 +71,30 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-188: per-function numbers are not comparable across compositions.**
+
+Residue **9,685**.
+
+The `cm_ExSellObjekt` 1,413 -> 1,460 swing is now explained, and it is not a
+regression.  Its round-181 value of 1,413 was *fresh* at the time, in the composition
+that existed then; the vfs, gv and `gm_AllocGebaeude` changes since altered the layout,
+and `postlink_residual` reports differing bytes by reference VA, so a symbol that is
+not exactly at its reference VA drags its whole window.  The total nonetheless fell
+(9,743 -> 9,686), so the drift was net positive.  **Per-function numbers from
+different rounds cannot be compared; only a full-rebuild total can.**  This is the
+third form of the same lesson (round 179: incremental links mix objects; round 185:
+`git add -A` mixes commits; here: per-function windows move with the layout), and it
+means the per-function table is for *ranking within one run*, not for trend.
+
+Settled in the current composition: the `cm_ExSellObjekt` line-328 inversion, which
+measured +46 against a stale baseline in round 186, is **-1** here (1,460 -> 1,459).
+Kept -- and justified independently of the score, since the reference emits that site
+as `test ecx,ecx; je <error>; push; push; call; jmp`, i.e. the error block is the
+taken branch, which is what the inverted form produces.
+
+A rejected candidate re-measured in a fresh composition can be a win, and vice versa.
+That is the practical consequence: keep the candidate lists, not just the verdicts.
+
 **Round-187: the baseline was stale, and the volatile-declaration lever has no
 remaining instances.**
 
