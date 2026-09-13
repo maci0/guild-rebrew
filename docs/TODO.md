@@ -4,6 +4,22 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-271 (2026-09-13): verification round — data tools, locality, calls.**
+
+- `rebrew verify --data`: matched 0 / mismatched 0 / missing 0 — the
+  annotation-based data tools do not apply to this tree (data flows via
+  blobs; `rebrew data` shows 204 globals, 0 annotated, 116 entries, 0
+  conflicts; sections already byte-identical). Do not go down this path
+  expecting per-symbol signal; the section-level identity IS the data
+  verdict.
+- The 4 `locality`-recovered operands (`.text+0xae64/ae85/0x11378/0x119e9`)
+  all verify byte-identical against the reference in the delivered image.
+  The recovery is sound.
+- ServerMainThread call audit: all call sites and `add esp` cleanups match
+  (reloc-masked); the local-extern conventions are correct. No convention
+  bug hiding in the 65 structural.
+- Residue baseline unchanged: **9,209**.
+
 **Round-270 (2026-09-13): postlink's 5 skipped slot operands verified benign.**
 
 - The `imports` fixer rewrites 29 moved IAT slot operands and skips 5 (bare
