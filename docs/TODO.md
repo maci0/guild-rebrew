@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-135: the coverage gap, itemised — 1,396 failing entries, ~1,000 of them
+in the 19 functions and ~390 in the CRT.**
+
+`scripts/cov_buckets.py` (new) applies postlink's own rule to every layout-map
+entry and attributes each failure to the reference function holding the offset.
+On the vehicle (`build/split_poc.dll`, the composition that now satisfies the
+`.rdata` prefix gate):
+
+```
+failing operand entries 1104/4756, call entries 292/2707 -> 81.3%
+fcn.10018850  gm_AllocSpieler                180   (117 ops,  63 calls)
+fcn.100128f0  ls_LoadBuildingEntityState     114   ( 66,     48)
+CrashDumpUnhandledExceptionFilter            112   ( 95,     17)
+ServerMainThread                             101   ( 71,     30)
+TradeCommandHandler (cm_ExSellObjekt)         96   ( 50,     46)
+InitBuildingTypeTable                         65   ( 46,     19)
+ExCopyEntityData                              33   ( 27,      6)
+gv_ExAllocGraveyardWorker                     29   ( 23,      6)
+fcn.10020beb / ExecuteOfficeAssignment / ahm_ExAllocAlchemist  28 / 27 / 27
+…then a long tail of CRT symbols (fcn.10020943, fcn.10015950, fcn.10016290,
+fcn.100151e0, fcn.10016460, …) worth about 390 entries in total.
+```
+
+So the 90% gate needs **both** halves: the game functions from round 119's table
+(they alone are ~1,000 entries, i.e. 13 points) and the remaining member/CRT
+placement (the other ~5 points).  Neither is sufficient alone — perfect
+placement would leave the vehicle at ~86.5%, and the game functions alone
+without placement at ~68%.
+
+Two traps in reimplementing the rule, both hit here and worth keeping:
+`_map_coverage` compares `value - image_base` (an RVA) against
+`meta.section(".rdata").va`, which is an RVA and not an absolute VA (getting
+that wrong reads 65.1% instead of 81.3%); and a call entry also validates when
+the site sits on an `E8`/`E9` with matching two-byte contexts, which is why
+2,415 of 2,707 calls pass even though most targets differ.
+
 **Round-134: postlink's `.rdata` prefix gate is satisfied — exact size, zero
 mismatching bytes — and `.text` coverage is what is left.**
 
