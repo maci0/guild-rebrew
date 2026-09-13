@@ -38,18 +38,35 @@ extern unsigned int ls_ID2Ptr(void);
  * production slots, worker assignments, and field states
  * for graveyard buildings.
  *
- * NOTE: SIZE_MISMATCH (1464 vs 1463, 1 byte). 100% mnemonic-aligned with
- * the reference (496/496 same-mnemonic diffs) — control flow, calls and
- * constants match; remaining deltas are MSVC6 register allocation and block
- * layout: the reference caches the -1 sentinel in ebp (`or ebp,-1` once +
- * `mov [..], ebp` at 3 sites) while our build rematerializes
- * `mov dword ptr [..], 0xffffffff` (the "constant-caching blocker", +1 byte
- * net), and the reference keeps stream_ctx in edi with a 4-register prologue
- * (ours: 3 registers, frame offsets shifted by 4). rebrew prove reports an
- * EAX=1 vs 0 mismatch on some (3 x 7) explored state pairs — consistent with
- * the read-hook symbolics under the divergent block layout, not confirmed as
- * a real behavioral difference (mnemonics align 100%); not reachable with
- * this compiler's scheduling. */
+ * NOTE (round 143): the "constant-caching blocker" is beaten by making the
+ * read loop's argument reads VOLATILE, and only that way.  The reference
+ * caches the -1 sentinel in ebp (`or ebp,-1` once + `mov [..],ebp` at three
+ * sites); under /O2 msvc6 rematerializes `mov dword [..],0xffffffff` instead,
+ * the missing saved register shifts every frame slot, and the whole function
+ * desyncs.  Writing the eight `ls_ReadVfsDataChecked` field reads as
+ * `*(volatile int*) (esi + 0x71)` (the store stays plain) makes /O2 emit the
+ * cached form *and* keep the reference's per-call reloads: fixed-offset masked
+ * match 347 -> 856 of 1463, object 1464 -> 1472 against the reference's 1463,
+ * failing postlink entries 114 -> 59, .text residual 1404 -> 775 bytes, and
+ * whole-binary coverage 88.6% -> 89.3%.
+ *
+ * The switch is fragile and global — swept, all reverted: volatile at any ONE
+ * of the ten field sites leaves the constant rematerialized, the store's own
+ * read volatile kills it again, and so do `4 + load_result + ...`, the
+ * field-first order, `char*` arithmetic, add-then-constant, a `volatile` store
+ * (alone or on top), `unsigned int load_result` (identical) and
+ * `load_result = load_result + 0x18` (identical).  This contradicts the note in
+ * docs/TODO.md round 24 that a volatile read "regresses to 117/1471".
+ *
+ * Residual (25 aligned hunks): the read loop's induction form (`mov ebx,8;
+ * lea ebp,[ebx-8]` where the reference keeps a plain `xor ebx,ebx` and
+ * `lea [ebx+edx+N]`), the store block (`state_ptr[0] |= 1` folds to one store
+ * where the reference reloads — forcing that read volatile costs 16 bytes), a
+ * `lea esi,[edx+ecx]` / `[ecx+edx]` operand order, and the g_aux_entity_buffer
+ * block.  `rebrew prove` reports an EAX=1 vs 0 mismatch on some (3 x 7)
+ * explored state pairs — consistent with the read-hook symbolics under the
+ * divergent block layout, not confirmed as a real behavioural difference
+ * (mnemonics align 100%). */
 
 
 unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
@@ -159,11 +176,11 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 			if (esi[0] == 0x1e) {
 				*(int*) (esi + 0x71) = (int) m_AllocTracked(0x600, (const char*) 0x1002d510);
 				for (load_result = 0; load_result < 0x600; load_result += 0x18) {
-					if (!ls_ReadVfsDataChecked((void*) (load_result + *(int*) (esi + 0x71)), 4, 1, (void*) stream_ctx)) {
+					if (!ls_ReadVfsDataChecked((void*) (load_result + *(volatile int*) (esi + 0x71)), 4, 1, (void*) stream_ctx)) {
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 4 + *(int*) (esi + 0x71)),
+							(void*) (load_result + 4 + *(volatile int*) (esi + 0x71)),
 							4,
 							1,
 							(void*) stream_ctx
@@ -171,7 +188,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 8 + *(int*) (esi + 0x71)),
+							(void*) (load_result + 8 + *(volatile int*) (esi + 0x71)),
 							1,
 							1,
 							(void*) stream_ctx
@@ -179,7 +196,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 9 + *(int*) (esi + 0x71)),
+							(void*) (load_result + 9 + *(volatile int*) (esi + 0x71)),
 							1,
 							1,
 							(void*) stream_ctx
@@ -187,7 +204,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 0xa + *(int*) (esi + 0x71)),
+							(void*) (load_result + 0xa + *(volatile int*) (esi + 0x71)),
 							2,
 							1,
 							(void*) stream_ctx
@@ -195,7 +212,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 0x10 + *(int*) (esi + 0x71)),
+							(void*) (load_result + 0x10 + *(volatile int*) (esi + 0x71)),
 							4,
 							1,
 							(void*) stream_ctx
@@ -203,7 +220,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 0xc + *(int*) (esi + 0x71)),
+							(void*) (load_result + 0xc + *(volatile int*) (esi + 0x71)),
 							1,
 							1,
 							(void*) stream_ctx
@@ -211,7 +228,7 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 						return 0;
 					}
 					if (!ls_ReadVfsDataChecked(
-							(void*) (load_result + 0xd + *(int*) (esi + 0x71)),
+							(void*) (load_result + 0xd + *(volatile int*) (esi + 0x71)),
 							1,
 							1,
 							(void*) stream_ctx

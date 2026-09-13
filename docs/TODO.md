@@ -1,5 +1,56 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-143: a volatile field read beats the constant-caching wall — coverage
+`88.6% -> 89.3%`, `ls_LoadBuildingEntityState` residual `1404 -> 775` bytes.**
+
+The round-24 note called this function "one constant-caching decision away" and
+recorded the decision as unreachable from C: the reference caches the `-1`
+sentinel in ebp (`or ebp,-1` once, then `mov [..],ebp` at three sites) while
+`/O2` rematerialises `mov dword [..],0xffffffff` — and the missing saved register
+shifts every frame slot, desyncing the whole function (1404 differing bytes, 114
+failing entries).  `/Oa` caches the constant but also CSEs `*(int*)(esi+0x71)`
+out of the read loop, `/Ow` merely cancels `/Oa`, and `#pragma optimize("a",on)`
+is `/Oa`.
+
+**It is reachable.**  Writing the *eight* `ls_ReadVfsDataChecked` argument reads
+of that field as `*(volatile int*) (esi + 0x71)` — the store stays plain — makes
+`/O2` emit the reference's cached form *and* keep the per-call reloads:
+
+```
+                       obj size   masked match at fixed offsets   or ebp,-1   loads of 0x71(%esi)
+/O2 (before)             1464        347/1463  (23.7%)               no              10
+/O2 + 8 volatile reads   1472        856/1463  (58.5%)              yes              10
+reference                1463                 —                    yes              10
+```
+
+Beware the milestone table in round 24: it says a volatile read "regresses to
+117/1471" — measured here it is the *only* spelling that works, and it keeps the
+reloads.  (The LCS "matching %" metric moves the *other* way, 89.3% -> 82.9%,
+because the LCS is position-independent: it prefers the old, shifted stream.)
+
+The switch is fragile and global.  Swept on top of the working shape, each
+reverted: volatile at any **one** of the ten field sites leaves the constant
+rematerialized; the store's own read volatile kills it again; `4 + load_result +
+...`, the field-first order, `char*` arithmetic, add-then-constant, a `volatile`
+store (alone or on top), `unsigned int load_result` (byte-identical) and
+`load_result = load_result + 0x18` (byte-identical) all lose it or are inert.
+
+```
+                                     failing entries   coverage   .text bytes     residual
+                                                                   (whole file)   in the function
+round 142                                    852         88.6%        0x328f           1404
+round 143                                    797         89.3%        0x301b            775
+```
+
+The gate needs ≤746 failing entries, so this one change halved the gap: **51
+entries to go** (the function still owns 59 of them).  Its 25 aligned hunks are
+the read loop's induction form (`mov ebx,8; lea ebp,[ebx-8]` where the reference
+keeps a plain `xor ebx,ebx` with `lea [ebx+edx+N]`), the store block
+(`state_ptr[0] |= 1` folds to a single store where the reference reloads — making
+that read volatile costs 16 bytes), one `lea esi,[edx+ecx]`/`[ecx+edx]` operand
+order, and the `g_aux_entity_buffer` block.  Gate re-run with the change: lint
+187/0 errors, 0 compile errors, `verify --full` 281/283 (baseline held).
+
 **Round-142: the split set lost LIBCMT's SEH scopetables (`+7` entries, `-21` bytes);
 with the fixers applied the binary differs from the reference in `.text` only.**
 
