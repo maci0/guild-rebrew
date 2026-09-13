@@ -71,6 +71,44 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-163: the size map, and a flag sweep over all eighteen.**
+
+10,947 -> 10,937 differing bytes.  Byte identity implies size identity, so the
+first useful thing was the real object size of every remaining function
+(`rebrew test --no-promote`, which is exactly what that flag is for):
+
+```
+size-EXACT  (closable by shape work)        size-MISMATCH (needs a size fix first)
+ServerMainThread          379  / 2434       gm_AllocSpieler       +1  / 3689
+gv_ExAllocGraveyardWorker 464  / 1040       cm_ExSellObjekt       +4  / 2057
+ahm_ExAllocAlchemist      209  / 1002       ls_LoadBuildingEntityState +4 / 1463
+srv_LoadBuf                49  /  750       m_AllocTracked        +2  /  658
+gm_ObjectsAvailble         25  /  714       vfs_OpenStream       +26  /  667
+cm_ExProdObjekt            21  /  993       cm_ExCopyEntityData   -8  /  912
+cm_ProcessCommandQueue     15  /  639       vfs_ReadCompressed   -11  /  492
+```
+
+`scripts/flagsweep.py` then compiled every function under 18 flag variants --
+the single largest win in this project came from a flag (`gm_AllocSpieler`'s
+`/Ow`), and a wrong set in the metadata is invisible until someone sweeps it.
+Seventeen functions were already on their best variant; two were not:
+
+- `cm_ExSellObjekt` `/O2 /Gd /Ow`: 561 -> 573 object bytes at an UNCHANGED size
+  (2064), which is worth -12 linked.  Adopted.
+- `CrashDumpUnhandledExceptionFilter` `/O2 /Gd /Oy-`: 523 -> 589 object bytes,
+  but the object shrinks 2128 -> 2016 and the composition collapses (2/319
+  symbols at their reference VA, `.text` +530 instead of +690, residue
+  10,947 -> 130,034).  Reverted: shrinking below the size the vehicle placed is
+  exactly what it cannot absorb.  The flag is recorded here because it is a
+  real 66-byte win that becomes reachable the moment that function's size comes
+  out right -- its +13 overrun and this 99-byte shortfall are the same problem.
+
+A `rebrew` bug fell out of adopting it: `cmake-flags` counted a `// DATA:`
+marker as a function, so CrashDump's file (a generated 568-byte data table plus
+its code) looked self-contradictory and the command refused to emit anything for
+it, breaking the configure step of the build that consumes the table.  Only code
+markers (FUNCTION/STUB/LIBRARY) participate now.
+
 **Round-162: growing a function breaks the composition too.**
 
 10,949 -> 10,947 differing bytes.  Five subagents re-climbed all eighteen
