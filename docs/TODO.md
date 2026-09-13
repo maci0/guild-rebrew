@@ -71,6 +71,49 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-242: CORRECTION -- the size constraint is the PADDED COMDAT, not the real
+body.**
+
+This invalidates verdicts this campaign has been applying for many rounds, so it goes in
+prominently.
+
+cl pads every COMDAT to a 16-byte multiple.  For a function whose object has no
+out-of-line data after its code, the only thing that moves the *composition* is that
+padded size.  Measured on `cm_ExCopyEntityData` (0x1000ec00, whose reference tail is
+pure code -- no jump table, no relocated table bytes; checked in round 186):
+
+```
+real 912 -> COMDAT 912   composition-neutral
+real 905 -> COMDAT 912   composition-neutral
+real 897 -> COMDAT 912   composition-neutral
+real 913 -> COMDAT 928   composition-breaking
+```
+
+So the admissible band is real body **[897, 912]** for that object, not "exactly 900".
+My instruction to its agent -- "hold object size 912 AND real body 900" -- was
+**over-strict**, and the earlier verdict that its `do/while` dst-scan restructure was
+"size-changing (real 900 -> 904) and therefore rejected" was wrong on its stated
+grounds: 904 also yields COMDAT 912 and is composition-neutral.  **That variant should
+be re-tested.**
+
+The distinction that keeps this from being a blanket relaxation, and it matters:
+
+- **inter-object**: what moves the next symbol is the *padded* COMDAT size, so a real
+  body inside the current 16-byte bucket is free;
+- **intra-object**: what moves a function's *own* out-of-line jump table or case map is
+  its *real* body length.  That is why `vfs_OpenStream` was genuinely real-length
+  sensitive -- fixing its 8-byte shortfall was worth -36 -- while `cm_ExCopyEntityData`
+  is not.
+
+Applying the padded rule where the intra-object rule is the binding one is the same
+class of error as applying neither.  Check whether the object has relocated data after
+its code (`reallen2.py` reports the real length; the `.reloc` entries in the object are
+the direct evidence) before deciding which bucket rule applies.
+
+**Practical effect: relax the bounds check from "real == reference real" to "padded
+COMDAT == reference padded span", and re-test candidates previously rejected on real
+length alone** where the object has no tail data.
+
 **Round-241: `gm_AllocSpieler` is closed to size-neutral work -- two independent
 passes found nothing.**
 
