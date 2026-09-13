@@ -29,6 +29,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-303 (2026-09-13): live partition search retired definitively.**
+
+- Re-examined the 7 split candidates: the game-code ones (0x10008A50,
+  0x10009310) would separate already-single-function TUs or layout order
+  only. By the no-LTO mechanism (round 25/277) no split or merge can
+  change per-function codegen — partition is layout-only and layout is
+  position-aligned. The queued live search is not "pending budget", it is
+  VOID: no candidate carries a codegen mechanism. Retired.
+- Residue baseline unchanged: **9,209**.
+
 **Round-302 (2026-09-13): milestone 50 — session balance sheet.**
 
 - 48 session rounds, 0 bytes moved (9,209 throughout), 12 files touched
