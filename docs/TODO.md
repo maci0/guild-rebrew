@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-329 (2026-09-13): big gaps come in two non-lever flavors.**
+
+- CrashDump's largest steps (-59 at 0x068a, -43/-42/-41 cluster) are
+  accumulated drift sums, not hunks: per-hunk diffs there are the known
+  register/schedule set. Combined with round 76 (Spieler's -32 =
+  cluster of tried diffs): big gap steps are either clusters or drift,
+  never single levers. Stop reading gap magnitude as opportunity.
+- Residue baseline unchanged: **9,209**.
+
 **Round-328 (2026-09-13): Spieler's largest hunk is a cluster, not a lever.**
 
 - Biggest gap step (-32 at refoff 0x021b) decomposes into citizen-path
