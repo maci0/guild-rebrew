@@ -121,7 +121,7 @@ def pad_object(name: str, size: int) -> bytes:
     out += struct.pack("<HHIIIHH", 0x14C, 1, 0, symptr, 3, 0, 0)
     out += struct.pack("<8sIIIIIIHHI", b".text", 0, 0, size, raw_ptr,
                        0, 0, 0, 0, TEXT_CHARS)
-    out += b"\x00" * size
+    out += b"\x90" * size
     out += symbols
     out += strtab
     return bytes(out)
@@ -180,13 +180,23 @@ def main() -> int:
                 print(f"LONG  {path.name}: {have} > {span} (+{have - span} over the "
                       f"padded span; want {want}) -- not padded")
             continue
-        pad = want - have
+        # Pad to the reference's 16-byte-aligned span, not to the unaligned
+        # `want`, and fill with 0x90.  `have` is already 16-aligned, so padding
+        # to `want` left (span - want) bytes that LINK filled itself -- with
+        # 0xCC -- where the reference has 0x90.  Measured on
+        # CrashDumpUnhandledExceptionFilter (want 2115, have 2112, span 2128):
+        # the 3-byte pad plus 13 bytes of LINK fill put 0xCC over the reference's
+        # 0x90 for 13 bytes.  Of the image's 295 bytes of 0xCC only those 13
+        # differ, so filling the aligned slot ourselves is a clean win and
+        # leaves no byte to the linker's choice.
+        span = 16 * ((want + 15) // 16)
+        pad = span - have
         dest = outdir / f"{path.stem}_pad.obj"
         if not args.dry_run:
             dest.write_bytes(pad_object(path.stem, pad))
         newtokens.append(str(dest.relative_to(ROOT / "build")))
         padded += 1
-        print(f"pad   {path.name}: {have} -> {want} (+{pad})")
+        print(f"pad   {path.name}: {have} -> {span} (+{pad}, 0x90 fill)")
     if not args.dry_run:
         (ROOT / args.out_rsp).write_text(" ".join(newtokens) + "\n")
     print(f"\n{padded} object(s) padded, {short} too long -> {args.out_rsp}")
