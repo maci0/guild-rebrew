@@ -409,7 +409,22 @@
  * 1040-byte object, and the `#pragma optimize` sweep that gained 11 bytes on
  * cm_ExCopyEntityData does not transfer: "a",on craters to 245, "s",on to
  * 76, and "w"/"slot_ptr"/"q"/"g"/"y"/"t" on plus "a"/"w"/"slot_ptr"/"q" off are all
- * inert. */
+ * inert.
+ *
+ * 2026-09-13 (round 111): 670 -> 671, object still exactly 1040.  The three
+ * statements that follow the `clear_entry` memset were permuted; the winner is
+ * the slot+4 store, then the 32-byte memset, then the volatile 0xffff store
+ * (S-M-F).  The reference order is F-S-M, but F-S-M measures 668 and the
+ * existing S-F-M 670 -- the positional score prefers S-M-F even though the
+ * reference's own emission puts the 0xffff store first.  Re-measured around
+ * it, all inert at 671: `live = g_citizen_count + 1` with the increment
+ * hoisted above the entity stores, `grave = 0x100358a0 + chosen * 0x21c`
+ * before `off`, `neg = -1` after the `m2` declaration, and re-basing the
+ * second memset on `(char*) 0x100358fc + off` (542 at obj 1056, the
+ * pre-existing note still holds).  The long-standing `d2` strcpy-destination
+ * hoist is confirmed as the regression pattern: aligned instructions rise
+ * 258 -> 269 but matched-reloc falls 671 -> 554 and the object grows
+ * 1040 -> 1056 (real 1046). */
 
 // FUNCTION: SERVER 0x10011bf0
 
@@ -518,8 +533,8 @@ fail_ffff:
 	{
 		char* m2 = grave + 0x5c;
 		*(int*) ((char*) 0x100358a4 + off) = neg;
-		*(volatile unsigned short*) grave = 0xffff;
 		memset(m2, neg, 32);
+		*(volatile unsigned short*) grave = 0xffff;
 	}
 	/* Both counters are read before the entity stores and written back after,
 	 * matching the reference's edi/ecx traffic at 0x10011dd2-0x10011dff.
