@@ -1,5 +1,52 @@
 # Blockers — 100% Round-Trip Goal
 
+## The `.rdata` surplus has one root cause, and it is pinned (2026-09-13, round 76)
+
+Round 75 left the 0x530 `.rdata` surplus unexplained.  It is the **tail of the
+import hint/name table**, pushed past the reference's section end:
+
+```
+surplus .rdata[0x2e81:0x33b1] contains
+  AllocConsole FreeConsole CreateThread ... WideCharToMultiByte LCMapStringA
+  KERNEL32.dll  GetWindowTextA  MessageBoxA  USER32.dll  WS2_32.dll  timeGetTime
+  WINMM.dll  server.dll
+```
+
+That tail is downstream of a single insertion.  The blob itself
+(`rdata_restore.c`, ref `.rdata[0x12e8:0x2608]`) matches the reference exactly,
+and so does everything up to 0x2607 -- but four CRT strings then appear a
+**second** time:
+
+```
+              reference      built (blob copy)   built (duplicate)
+(null)          0x2074            0x2074              0x26bc
+runtime error   0x2110            0x2110              0x2768
+SunMonTue...    0x2418            0x2418              0x2af8
+GetLocalTime    0x2a90             --                0x2d3e
+KERNEL32.dll    0x2a06             --                0x32f8
+```
+
+The duplicate block sits at 0x26bc, about 0x480 bytes of it, and everything
+after shifts by that much: the hint/name table moves from 0x2a06 to 0x2d3e and
+its tail runs off the end of the section.  One insertion, one surplus.
+
+The duplicates come from LIBCMT objects the link pulls for their *code*
+(`crt0msg.obj` for `__NMSG_WRITE`/`__GET_RTERRMSG`, and the six others round 55
+named), whose `.rdata` the blob already reproduces.  Removing them from the
+*blob* cannot work: the blob is one contiguous array that matches the reference
+byte-for-byte, so deleting bytes from its middle moves everything after it and
+destroys the match that 0x12e8..0x2607 depends on.
+
+So the fix is to keep those objects out of the link, and for `crt0msg.obj` that
+means supplying `__NMSG_WRITE` and `__GET_RTERRMSG` locally -- writing
+replacement bodies for library code.  That is a direct conflict with this
+goal's "do not reverse LIBCMT, it will just be linked in", and it is worth
+stating rather than working around: `.rdata` (and, by the same mechanism,
+`.data`) cannot be finished under that rule as it stands.  The three options
+are to relax the rule for the handful of objects whose `.rdata`/`.data` the
+restore blobs already carry, to drop the blobs and let the library supply
+everything, or to leave both sections as they are.
+
 ## The split members' `.rdata` is not the `.rdata` surplus either (2026-09-13, round 75)
 
 Round 55 named seven LIBCMT objects (`crt0msg`, `testfdiv`, `x10fout`,
