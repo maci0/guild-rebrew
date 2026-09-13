@@ -1,5 +1,50 @@
 # Blockers — 100% Round-Trip Goal
 
+## The literal alias works on symbols, not on bytes (2026-09-13, round 81)
+
+Round 78 concluded the duplicated `.rdata` needs the members' symbols to
+resolve into the blob's bytes rather than either copy being deleted.  MSVC6
+turns out to give half of that for free: writing the **same string literal**
+in another translation unit produces the **same mangled COMDAT name**, so LINK
+sees a duplicate and keeps one.
+
+Probe: add `const char* const g_probe_null_literal = "(null)";` to
+`rdata_restore.c`, which is linked before the split objects, and relink.
+
+```
+(null)  reference  0x2074
+        split_poc  0x2074, 0x26bc        (the blob's copy and the member's)
+        probe      0x2074                the duplicate is gone
+"second definition ignored" warnings in the probe link: 24
+extra string occurrences over the reference:  18 -> 17
+.rdata differing:                           2237 -> 2234
+.rdata vsize:                               0x33b1 -> 0x33b1
+```
+
+So the mechanism works at the symbol level -- LINK discards 24 member COMDATs
+-- and the duplicated *bytes* stay anyway, because `/OPT:NOREF` keeps a
+discarded COMDAT's section in the image.  `/OPT:REF` is what would drop them,
+and it is unusable:
+
+```
+                   .text vsize   .rdata vsize
+split_poc              0x22af8        0x33b1
+literal + /OPT:REF     0x0ec80        0x3021     .text loses 0x1b478
+```
+
+`/OPT:REF` drops every unreferenced COMDAT, and every split object *is* one
+COMDAT, so the whole split set evaporates.
+
+That points at a specific follow-up rather than a dead end: `split_coff.py`
+copies the members' `.text` sections as COMDATs because that is how LIBCMT
+builds them, but a command-line object's **non**-COMDAT sections are never
+dropped by `/OPT:REF`.  If the split `.text` sections were emitted as ordinary
+`.text`, `literal alias + /OPT:REF` would discard exactly the duplicated
+`.rdata` COMDATs and nothing else.  That is a change to `split_coff.py`'s
+section emission and has not been tried.
+
+Probe reverted, objects rebuilt; tree clean.
+
 ## A size match that is a coincidence (2026-09-13, round 80)
 
 Following round 78's conclusion that the duplicated `.rdata` cannot simply be
