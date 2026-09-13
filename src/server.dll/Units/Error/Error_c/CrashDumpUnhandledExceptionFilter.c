@@ -355,7 +355,7 @@ unknown_exc:
 										}
 										pInstr++;
 									}
-									instrType = AnalyzeInstruction(nInstr, (int) &szDateBuf[7], (int) eip, &instrDest);
+									instrType = AnalyzeInstruction((int) &szDateBuf[7], nInstr, (int) eip, &instrDest);
 									if (!instrType) {
 										goto next_frame;
 									}
