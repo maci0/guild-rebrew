@@ -29,6 +29,17 @@
  * localise it further until the prologue order is fixed.
  */
 
+/* 2026-09-13 (round 110): the span is fixed by reading the volatile `done`
+ * ONCE.  The reference reuses eax across the two tests
+ * (`cmp eax,1 / je / test eax,eax / jne`); ours re-read the volatile between
+ * them.  Hoisting the read into a block-scoped `int d` gives
+ *
+ *   obj 497 -> 481        COMDAT span 512 -> 496  (= the reference's)
+ *   register-agnostic matched 176 -> 171
+ *
+ * The content cost is real and was accepted only because the span is worth
+ * +18 points of whole-.text match; docs/TODO.md round 110.
+ */
 // FUNCTION: SERVER 0x10008A90
 // vfs_ReadCompressed
 
@@ -149,11 +160,15 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 			s->crc = crc32(s->crc, (unsigned char*) out, n);
 			s->cap = s->cap - n;
 			result = result + n;
-			if (done == 1) {
-				return result;
-			}
-			if (done != 0) {
-				return done;
+			{
+				int d;
+				d = done;
+				if (d == 1) {
+					return result;
+				}
+				if (d != 0) {
+					return d;
+				}
 			}
 		}
 	} while (s->avail_out > 0);

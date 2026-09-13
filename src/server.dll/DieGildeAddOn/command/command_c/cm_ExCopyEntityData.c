@@ -249,6 +249,22 @@ extern char g_relationship_matrix_secondary[];
  *     explicit `guard_fail` label to force the reference's third epilogue
  *     (byte-identical output: msvc6 duplicates the block per goto site, so
  *     the epilogue count stays at two against the reference's three). */
+/* 2026-09-13 (round 110): THE THIRD POSITION BREAK, FIXED -- and it was
+ * source-shape after all.  Two clamps are now spelled "in range first, then
+ * HIGH, then low" instead of "in range first, then low, then high": the
+ * `ebx_type == 0` arm and the matrix loop.  That is a pure reordering of the
+ * same three arms, and it is what makes msvc6 materialise the clamp constants
+ * in eax (`mov eax,0x7f` / `mov eax,0xffffff81`) in four more arms instead of
+ * folding them into byte-immediate stores.
+ *
+ *   obj  880 -> 904        COMDAT span 880 -> 912  (= the reference's)
+ *   positional match 196 -> 198
+ *   register-agnostic 202 matched / 31 target-only -> 204 / 25
+ *
+ * Either clamp alone gives obj 892, whose span is 896 -- one byte short of the
+ * window.  The three open spans (this one, vfs_ReadCompressed and CrashDump)
+ * only work as a set; see docs/TODO.md round 110.
+ */
 // CFLAGS: /O2 /Gd
 /* /Oa is not implied by the toml cflags and is worth 11 bytes here: see the
  * pass-5 note above. */
@@ -366,11 +382,11 @@ level_done:
 					if (val > -0x7f && val < 0x7f) {
 						/* in range, keep val */
 					}
-					else if (val <= -0x7f) {
-						val = -0x7f;
+					else if (val >= 0x7f) {
+						val = 0x7f;
 					}
 					else {
-						val = 0x7f;
+						val = -0x7f;
 					}
 					mat_row[inner_idx] = (char) val;
 				}
@@ -488,11 +504,11 @@ src_found:
 				if (rel_value >= -0x7f && rel_value < 0x7f) {
 					/* in range, keep rel_value */
 				}
-				else if (rel_value < -0x7f) {
-					rel_value = -0x7f;
+				else if (rel_value >= 0x7f) {
+					rel_value = 0x7f;
 				}
 				else {
-					rel_value = 0x7f;
+					rel_value = -0x7f;
 				}
 				*scan_ptr = (char) rel_value;
 			}

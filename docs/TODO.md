@@ -1,5 +1,64 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-110: all three position breaks fixed.  Whole-`.text` masked 76.61% ->
+94.97%; postlink coverage 56.6% -> 81.2%.**
+
+Three object sizes were holding the whole game region and the CRT tail off
+their reference VAs.  All three are now correct, and the three edits are one
+reordering plus two hoists -- no semantics changed.
+
+```
+                        obj        span        reference span
+CrashDumpUnhandled...   2137->2113  2144->2128   2128
+vfs_ReadCompressed       497->481    512->496     496
+cm_ExCopyEntityData      880->904    880->912     912
+m_AllocTracked (r107)    654->660    656->672     672
+```
+
+```
+                        whole .text raw   masked    postlink coverage
+round 107/108 state          58.45%        76.61%   4221/7463 = 56.6%
+now                          87.02%        94.97%   6060/7463 = 81.2%
+```
+
+The three fixes:
+
+1. **`cm_ExCopyEntityData` -- a clamp reordering, and it improves content too.**
+   The `ebx_type == 0` arm and the matrix loop are now spelled "in range first,
+   then HIGH, then low" (`else if (rel_value >= 0x7f)`) instead of "in range
+   first, then low, then high".  That makes msvc6 materialise the clamp
+   constants in eax (`mov eax,0x7f` / `mov eax,0xffffff81`) in four more arms
+   rather than folding them into byte-immediate stores.  880 -> 904, span 912;
+   positional 196 -> 198; register-agnostic 202/31 -> 204/25.  Either clamp
+   alone gives obj 892 / span 896 -- one byte short of the window, which is why
+   round 109 saw it as "not enough".
+2. **`vfs_ReadCompressed` -- read the volatile `done` once.**  The reference
+   reuses eax across `cmp eax,1 / je / test eax,eax / jne`; ours re-read the
+   volatile between them.  Hoisting it into a block-scoped `int d` gives
+   497 -> 481, span 496.  Register-agnostic matched 176 -> 171: a real content
+   cost, taken because the span is worth 18 points of whole-.text match.
+3. **`CrashDumpUnhandledExceptionFilter` -- share the log tail.**  Our object
+   had FIVE `call LogMessageInternal` sites for the same five messages; the
+   reference has FOUR call instructions because it shares `push 1; push
+   0x10027144; call` between the VirtualAlloc-failed (0x218) and ReadFile-size
+   (0x21b) paths.  Routing both through an out-of-line `log_close` label with
+   the line and message in locals reproduces the sharing: 2137 -> 2113, span
+   2128; positional 347 -> 352; register-agnostic 416 -> 423.
+
+   The label has to sit at the END of the function.  Placing it directly after
+   the `if (!pDbgBuf)` block makes the entire rest of the body unreachable and
+   msvc6 dead-code-eliminates it -- measured: a 320-byte function.
+
+Game region 92.16% -> 92.10% (6491 -> 6542 differing): the two restructurings
+cost a little local content, which the +18.4 points of whole-.text alignment
+swamps.  Gate: 186 lint files, 0 errors, `verify --full` 281/283.
+
+**What is left.**  postlink still refuses (81.2% against a 90% gate).  The
+remaining 1403 non-validating map entries are: the `+690` byte overhang after
+the last CRT symbol (the `crt_region/` objects the split rsp appends), the
+in-object closure-helper drift `1001b200_.text.obj` / `1001eab0_.text.obj`
+(+0x31c internally), and the game region's instruction-level differences.
+
 **Round-109: the three spans are worth +18.4 points, two of them are in hand,
 and `CrashDump` is the blocker.**
 

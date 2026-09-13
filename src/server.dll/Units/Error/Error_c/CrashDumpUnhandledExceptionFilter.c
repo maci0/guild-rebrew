@@ -84,10 +84,27 @@ extern void* g_crash_callback;
 // so SIZE_MISMATCH was resolved via the symbolic-proof path instead of
 // further codegen forcing.
 
+/* 2026-09-13 (round 110): span fixed.  Our object had FIVE call
+ * LogMessageInternal sites and the reference has FOUR call instructions for
+ * the same five messages -- it shares `push 1; push 0x10027144; call` between
+ * the VirtualAlloc-failed (0x218) and ReadFile-size (0x21b) paths.  Routing
+ * both through an out-of-line `log_close` label with the line/message in
+ * locals reproduces that sharing:
+ *
+ *   obj 2137 -> 2113      COMDAT span 2144 -> 2128  (= the reference's)
+ *   positional match 347 -> 352
+ *   register-agnostic 416 -> 423 matched
+ *
+ * The label must sit at the END of the function.  Placing it directly after
+ * the `if (!pDbgBuf)` block makes the whole rest of the body unreachable and
+ * msvc6 dead-code-eliminates it (measured: a 320-byte function).
+ */
 int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPointers)
 {
 	unsigned int nBytesWritten;
 	char szLine[4];
+	char* fail_msg;
+	unsigned int fail_line;
 	char fCanContinue;
 	char space;
 	unsigned int dwDbgFileSize;
@@ -165,17 +182,17 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	/* Read 4-byte dbg file size */
 	ReadFile(hDbgFile, &dwDbgFileSize, 4, &dwBytesRead, 0);
 	if (dwBytesRead != 4) {
-		LogMessageInternal((char*) 0x10027144, 0x21b, (char*) 0x10027110, 1);
-		CloseHandle(hDbgFile);
-		goto no_dbg;
+		fail_msg = (char*) 0x10027110;
+		fail_line = 0x21b;
+		goto log_close;
 	}
 
 	/* Allocate buffer for dbg content */
 	pDbgBuf = VirtualAlloc(0, dwDbgFileSize, 0x1000, 4);
 	if (!pDbgBuf) {
-		LogMessageInternal((char*) 0x10027144, 0x218, (char*) 0x10027120, 1);
-		CloseHandle(hDbgFile);
-		goto no_dbg;
+		fail_msg = (char*) 0x10027120;
+		fail_line = 0x218;
+		goto log_close;
 	}
 
 	/* Read entire dbg file */
@@ -394,6 +411,11 @@ done_walk:
 	CloseHandle(hCrashLog);
 	VirtualFree(pDbgBuf, 0, 0x8000);
 	CloseHandle(hDbgFile);
+
+log_close:
+	LogMessageInternal((char*) 0x10027144, fail_line, fail_msg, 1);
+	CloseHandle(hDbgFile);
+	goto no_dbg;
 
 no_dbg:
 	if (g_crash_callback && !fCanContinue) {
