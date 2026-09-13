@@ -70,6 +70,28 @@ and rematerializes `test eax,eax`.  Swapping `ebx`<->`edi` in the candidate
 stream and re-running the LCS makes it *worse* (72.7% -> 70.8%), so the
 remaining delta is the slot permutation, not a register rename.
 
+**The hole is unique to this function.**  A sweep of the first instruction of
+every non-exact game function against its built object (`.scratch/framescan.py`:
+target via `rebrew asm`, candidate via the COFF symbol table of
+`build/CMakeFiles/server_dll.dir/<src>.obj`) shows the two `sub esp` immediates
+agreeing exactly everywhere else:
+
+```
+gm_AllocSpieler              0x41c / 0x41c      vfs_OpenStream          0xc   / 0xc
+CrashDumpUnhandledException  0x280 / 0x28c *    ahm_ExAllocAlchemist    (no frame)
+cm_ExSellObjekt              0x228 / 0x228      srv_LoadBuf              0x2a0 / 0x2a0
+ServerMainThread             0x1e4 / 0x1e4      gm_ObjectsAvailble       0x28  / 0x28
+ls_LoadBuildingEntityState   0xc   / 0xc        cm_ExProdObjekt          0x10  / 0x10
+gm_AllocGebaeude             push ebp (both)    cm_ProcessCommandQueue   8     / 8
+gv_ExAllocGraveyardWorker    0x10  / 0x10       m_AllocTracked           push ebp (both)
+cm_ExCopyEntityData          0xc   / 0xc
+```
+
+So the frame is *not* a general lever: 18 of 19 match and the frame-hole
+technique above applies only to `cm_ExSellObjekt`.  The one real outlier left
+is `CrashDumpUnhandledExceptionFilter`, whose frame is 12 bytes too big
+(0x28c vs 0x280) on top of the register cascade already recorded for it.
+
 ## `vfs_ReadCompressed`'s comparison is not source-reachable (2026-09-13, round 85)
 
 LCS-aligned the 216-instruction candidate against the 200-instruction target.
