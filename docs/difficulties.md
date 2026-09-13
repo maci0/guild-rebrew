@@ -208,6 +208,13 @@ These cost as much as the codegen walls, and most of them were learned by being 
    distributed differences. `scripts/gaptrace.py`'s **curve shape** discriminates; the ratio
    does not.
 5. **Tool traps that produced wrong readings.**
+   - `build/objtest/<name>.obj` is stale after `rebrew test`: disassembling it
+     reads an earlier compile. The object a measurement actually wrote is the
+     fresh `build/objtest/probe_*.obj` from `scripts/probe_function.py` (or the
+     build tree object after a rebuild). One round nearly wrote up "the V2
+     frame does not reproduce" from the stale file; the fresh object showed
+     `sub esp,0x280`. (Also: `objdump -d file | head -6` truncates before the
+     first instruction — the header lines eat the budget; use `head -12`.)
    - `gaptrace`'s `size` argument must be the reference's *real body*, not the metadata size.
      `vfs_OpenStream` is 667 bytes of code inside a 701-byte real body inside a 704-byte window;
      the three choices read as "37 B long, 20 extra insns" / "3 B long" / aligned. The first

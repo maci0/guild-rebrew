@@ -4,6 +4,23 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-262 (2026-09-13): documentation round — rounds 1-9 findings promoted
+into the reference docs.**
+
+- `msvc6-c-shapes.md` §48 amendment: the two further ServerMainThread packet
+  probes (volatile drop 2074→2070; point-of-use read re-deriving the 2431
+  dead end) — the fold is a fixed point of the compared expression.
+- New §72b: the LS nesting fix as confirmed-real-but-cascade-losing
+  (byte-exact call sites, aligned 401→414, linked +672) with the rule it
+  leaves: a shape fix that changes live values re-runs the allocator
+  downstream.
+- §52 amendment: the vfs third instance of the volatile fixed point
+  (byte-exact head/back edge, +194 cascade) plus both failed proof-breakers.
+- `msvc6-allocator.md` Finding 54: corrected the drifted "`add` x4" site
+  inventory (now one pair, zero self-adds).
+- `difficulties.md` §5: the stale-`objtest` trap and the `head -6` truncation.
+- Residue baseline unchanged: **9,209**.
+
 **Round-261 (2026-09-13): small rows audited against current numbers; PCQ
 volatile-held re-derived and reverted.**
 

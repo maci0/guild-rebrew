@@ -2709,6 +2709,13 @@ gm_CheckInventoryCapacity section above — this finding is the rule behind it.
 `ahm_ExAllocAlchemist` (0x1000bdf0): every factorisation of a stride re-derives
 the same `3,9,5,4` `lea` chain.  Same class as Finding 30 (`lea` vs folded table
 load), Finding 32 item 2 and Finding 36.
+`gm_AllocSpieler` (0x10018850): a round-250 inventory of "`add R,R` x4 against
+`lea R,[R+R]` x4" no longer reproduces — the current diff holds exactly one
+`lea`-vs-`add` pair (`lea edi,[ecx+ebx]` vs `add esi,ebx`, registers also
+differing, inside the sympathy-loop register cascade) and zero self-`add`
+sites.  The rule stands (a use-shape change is needed, not an address
+respelling); the site count was drift, not ground truth.  Do not go looking
+for four sites.
 
 ## Finding 55 — the frame can be right while the slot map is not
 

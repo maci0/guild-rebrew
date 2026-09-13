@@ -1904,6 +1904,13 @@ Note the *other* arm of the same `if`, at target 0x10009846, stores the literal
 `0xffffffff` and the reference keeps the 8-byte immediate there too.  Only the
 arm whose store operand is a variable reaches this rule.
 
+Amendment (2026-09-13): two further probes on the same arm, both reverted.
+Dropping `volatile` from the cmd+4 store changes nothing structural (2074 ->
+2070 positional); reading `total_size` at its point of use instead of hoisting
+it re-derives the memory-operand outcome above (obj 2431, SIZE_MISMATCH).
+The fold is a fixed point of the compared expression, not of any statement
+order around it.
+
 ## 49. A CFLAGS sweep on one function: inert, negative, and one near miss
 
 `gm_AllocSpieler` (0x10018850, target object 3689 bytes; an earlier revision of
@@ -2071,6 +2078,15 @@ The practical rule this leaves: `volatile` is a *per-variable fixed point*
 (allocator Finding 61). Check the qualifier first, in the direction this section
 states, and expect the lever to be blocked wherever that value's live range also
 determines the allocation.
+
+Amendment (2026-09-13): the same fixed point, third instance, on
+`vfs_OpenStream` (0x10009020). Dropping `current_char` gives the reference's
+`cmp byte [eax],0` entry test and `movsx eax,[esi]` head load byte-exact, plus
+a byte-exact rotated back edge — but frees `al` and recolors the switch body
+into ~40 small hunks (linked +194). Two proof-breaking spellings (volatile-
+sourced init+increment; `p[1]`-before-inc reorder) both fail: c2's value
+numbering sees through them, and the unproven forms add traffic. Any
+proven-equal local is reused at the head; any unproven one costs elsewhere.
 
 `src/server.dll/DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c`
 
@@ -2491,6 +2507,24 @@ decision upstream, and the 2-instruction form you are trying to fix is the *chea
 it.  Here rematerialising the immediate costs +3 bytes, but rematerialising it at the three
 stores costs +12 -- so the current encoding is the cheapest point on that trade, not a
 mistake.
+
+`src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c`
+
+## 72b. a locally exact nesting fix can still lose to the cascade it triggers
+
+Same function (2026-09-13): the `+0xc`/`+0xd` call sites spelled
+`(load_result + const) + idx` while their `+9`/`+0xa`/`+0x10` siblings spell
+`(idx + load_result) + const` — and the siblings match.  Normalising all four
+anomalous sites to the sibling nesting emits exactly the reference shape at
+both call sites (`mov eax,[esi+0x71]; lea ecx,[ebx+eax+0xc]`, the cross-call
+`lea ebp,[ebx+0xd]` hoist gone; aligned 401 -> 414) and kills the +144 middle
+desync — but the object stays span-neutral while the previously-aligned tail
+(0x0429-0x054b) recolors wholesale (`mov [eax],ebp` becomes
+`mov [eax],0xffffffff`, slot shifts, an extra `push edx`): linked +672
+(728 -> 1400).  Reverted.  Section 70's lever is confirmed real and at the
+same time not link-profitable in this body: a shape fix that changes which
+values are live re-runs the allocator over everything downstream.  Do not
+re-try without a plan for the tail recoloring.
 
 `src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c`
 
