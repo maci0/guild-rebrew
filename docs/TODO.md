@@ -44,6 +44,13 @@ turn the windows valid — 15 entries in `fcn.10015950` alone, more elsewhere.
 Roughly a 1-2 round feature, verified against the four raw sizes and file
 offsets.
 
+The premise is measured, not assumed: a scratch TU that uses the same two
+strings (`gen_fold_literals.py`'s mechanism) emits **byte-identical COMDAT
+names** — `??_C@_0CG@CIOG@D?3?2Develop?2DieGildeAddOn?2game?2sp@` and
+`??_C@_0CB@JAGM@gm_ObjectsAvailble?$CI?$CJ?3?5Kein?5Markt@`, matching
+`gm_ObjectsAvailble.c.obj`'s sections exactly — so a dedicated object can define
+any literal the composition needs and win the fold by being listed first.
+
 Standing: coverage **90.0%** (749 failing, 3 short), `.text` residual `0x2db6`
 (8.53%, `0x2d94` inside the 19), every other section byte-identical after the
 fixers, gate green.
