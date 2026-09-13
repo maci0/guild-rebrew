@@ -1,5 +1,10 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-89 metric** (`scripts/text_match.py --drift auto` after
+`scripts/split_link.sh`): game region **92.12% masked, 6,528 differing bytes**
+(m_AllocTracked 250 -> 249).  The round-88 figure was 6,529 and the round-87
+figure 6,537.
+
 **Round-89: `m_AllocTracked`'s remaining gap is one unfolded null test.**
 265 -> 266/658 positional, aligned 207 -> 208 of 249, one fewer mismatch run.
 The `node_slot` alias on `node` was deleted — it is only ever assigned `&node`,
