@@ -4,6 +4,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-276 (2026-09-13): hill-climb on the closest function finds nothing.**
+
+- `rebrew climb` (aligned objective, 2 passes, 52 statements) on
+  `cm_ExProdObjekt` (349/354): best == baseline, no moves applied, file
+  untouched. Adjacent-statement order is exhausted here — one command
+  instead of a dozen manual probes. (Larger order-sensitive functions
+  exceed the climb's time budget at statements²×compile; SMT's six-pass
+  climb already stands.)
+- Residue baseline unchanged: **9,209**.
+
 **Round-275 (2026-09-13): ExSell reuse-permutation deduction.**
 
 - The spill-slot permutation is NOT downstream of the out-param reuse: the
