@@ -34,6 +34,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-332 (2026-09-13): combined SMT packet probes = probe-2 alone.**
+
+- Volatile-drop + point-of-use-read together: obj 2431 SIZE_MISMATCH,
+  match 1215 — identical to point-of-use alone (round 1). The volatile
+  drop adds nothing; the -3 length is all point-of-use. No link test
+  (same numbers as the reverted probe). Reverted + metadata restored.
+- Residue baseline unchanged: **9,209**.
+
 **Round-331 (2026-09-13): six-step workflow pass, steady state.**
 
 - Ran AGENTS.md steps literally: todo → 2 known items; lib-match N/A
