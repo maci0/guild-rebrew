@@ -1,5 +1,65 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-94: `cm_ExCopyEntityData`'s -32 is two folded constant stores per
+clamp, and an object-level disassembly trap.**
+
+`cm_ExCopyEntityData` (0x1000ec00, obj 880 against 912) is the largest of the
+four position-alignment blockers and the one that is *far* short, so it got the
+round.  `sizediff.py` puts the whole gap in the three `ebx_type` clamp blocks,
+and the difference is narrow and specific.
+
+**The addressing is not different -- do not chase it.**  Disassembling the
+*object* shows ours as `mov byte ptr [ecx], 0x81` where the reference (linked)
+reads `mov byte ptr [ecx + 0x100a9820], al`.  That looks like a materialised
+base against a table displacement, but the object's displacement is a **DIR32
+relocation slot holding 0**; after the link ours is `[ecx + 0x100a9820]` too.
+`scripts/fdiff.py` and `sizediff.py` compare linked bytes, but `objcmp` /
+`bigruns` disassemble the object, so relocation displacements read as zero
+there.  Both streams put the same value in `ecx` (the `dst_slot` index).
+
+**The real difference is the store source.**  Reference, `ebx_type == 2`:
+
+```
+target 0x1000ee8b  cmp eax,-0x7f
+                   jl  <low>
+                   cmp eax,0x7f
+                   jge <high>
+                   mov [ecx+0x100a9820],al     <- value still in eax
+                   jmp <join>
+        <low>      mov eax,0xffffff81          (5)
+                   mov [ecx+0x100a9820],al     (6)
+                   jmp <join>
+        <high>     mov eax,0x7f
+                   mov [ecx+0x100a9820],al
+ours               mov byte ptr [ecx+0x100a9820],0x81    (7)
+                   jmp
+                   mov byte ptr [ecx+0x100a9820],al      <- middle branch matches
+                   jmp
+                   mov byte ptr [ecx+0x100a9820],0x7f
+```
+
+The middle branch already matches; the two outer branches fold `(char)rel_value`
+into a memory immediate (7 bytes) where the reference rematerialises the
+constant in `eax` and stores `al` (11 bytes).  The reference is the *larger*
+form, which is why it only appears when the value stays live in a register --
+and here `rel_value` is dead after the store, so msvc6 folds in our build.
+
+Measured and inert on the way to that conclusion, all at obj 880:
+
+```
+pointer form `*((char*)g_relationship_matrix_primary + dst_slot) = ...`  880/525
+`else if (rel_value >= 0x7f)` with the else-branch first                 880/522
+clamp then one shared store (the `ebx_type == 0` shape)                  877/505
+secondary store and temp load swapped                                    880/525
+```
+
+`ebx_type == 0` is the counter-example that proves the shape is source-reachable
+in principle: it has one store *after* the clamp, `rel_value` is live there, and
+ours matches the reference instruction for instruction
+(`mov eax,0xffffff81` / `jmp` / `mov eax,0x7f` / `jmp` / `mov byte [ecx],al`).
+So the `== 2` case needs `rel_value` to be live across its three stores, and no
+spelling that keeps the three stores has produced that yet.
+
 **Round-93: a size-difference locator, and the 16-byte padding threshold.**
 
 New tool `.scratch/sizediff.py`: aligns the target and candidate instruction
