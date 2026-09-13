@@ -222,14 +222,13 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 						}
 
 						if (hCrashLog != (void*) -1) {
+							/* Write separator line */
+							hProcess = GetCurrentProcess();
 							/* Seek to end of crash log */
 							memcpy(szLine, "\r\n", 3);
 							space = ' ';
 							memcpy(szSep, "------------------------\r\n", 0x1b);
 							SetFilePointer(hCrashLog, -1, 0, 2);
-
-							/* Write separator line */
-							hProcess = GetCurrentProcess();
 							WriteFile(hCrashLog, szSep, 0x1a, &nBytesWritten, 0);
 
 							/* Write date */
@@ -248,102 +247,75 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 
 							/* Classify exception */
 							excCode = pExceptionPointers->ExceptionRecord->ExceptionCode;
-							frameInfo[0] = (int) pDbgBuf;
 
-							if (excCode > 0xc000008e) {
-								/* Jump table 2 */
-								i = excCode + 0x3fffff71;
-								if (i > 0x6e) {
-									goto unknown_exc;
-								}
-								switch (i) {
-								case 0:
-									WriteFile(hCrashLog, (const char*) 0x10027208, 0x12, &nBytesWritten, 0);
-									break;
-								case 1:
-									WriteFile(hCrashLog, (const char*) 0x100271f0, 0x15, &nBytesWritten, 0);
-									break;
-								case 2:
-									WriteFile(hCrashLog, (const char*) 0x100271e0, 0xc, &nBytesWritten, 0);
-									break;
-								case 3:
-									WriteFile(hCrashLog, (const char*) 0x100271d0, 0xf, &nBytesWritten, 0);
-									break;
-								case 4:
-									WriteFile(hCrashLog, (const char*) 0x100271c0, 0xd, &nBytesWritten, 0);
-									break;
-								case 5:
-									WriteFile(hCrashLog, (const char*) 0x100271ac, 0x12, &nBytesWritten, 0);
-									break;
-								case 6:
-									WriteFile(hCrashLog, (const char*) 0x1002719c, 0xc, &nBytesWritten, 0);
-									break;
-								case 7:
-									WriteFile(hCrashLog, (const char*) 0x10027188, 0x10, &nBytesWritten, 0);
-									break;
-								case 0x6e:
-									WriteFile(hCrashLog, (const char*) 0x10027178, 0xe, &nBytesWritten, 0);
-									break;
-								default:
-									goto unknown_exc;
-								}
-							}
-							else if (excCode == 0xc000008e) {
+							switch (excCode) {
+							case 0xc0000025:
+								WriteFile(hCrashLog, (const char*) 0x10027230, 0x18, &nBytesWritten, 0);
+								break;
+							case 0xc0000026:
+								WriteFile(hCrashLog, (const char*) 0x1002724c, 0x13, &nBytesWritten, 0);
+								break;
+							case 0xc000008c:
+								WriteFile(hCrashLog, (const char*) 0x10027278, 0x15, &nBytesWritten, 0);
+								break;
+							case 0xc000008d:
+								WriteFile(hCrashLog, (const char*) 0x10027260, 0x14, &nBytesWritten, 0);
+								break;
+							case 0xc000008f:
+								WriteFile(hCrashLog, (const char*) 0x10027208, 0x12, &nBytesWritten, 0);
+								break;
+							case 0xc0000090:
+								WriteFile(hCrashLog, (const char*) 0x100271f0, 0x15, &nBytesWritten, 0);
+								break;
+							case 0xc0000091:
+								WriteFile(hCrashLog, (const char*) 0x100271e0, 0xc, &nBytesWritten, 0);
+								break;
+							case 0xc0000092:
+								WriteFile(hCrashLog, (const char*) 0x100271d0, 0xf, &nBytesWritten, 0);
+								break;
+							case 0xc0000093:
+								WriteFile(hCrashLog, (const char*) 0x100271c0, 0xd, &nBytesWritten, 0);
+								break;
+							case 0xc0000094:
+								WriteFile(hCrashLog, (const char*) 0x100271ac, 0x12, &nBytesWritten, 0);
+								break;
+							case 0xc0000095:
+								WriteFile(hCrashLog, (const char*) 0x1002719c, 0xc, &nBytesWritten, 0);
+								break;
+							case 0xc0000096:
+								WriteFile(hCrashLog, (const char*) 0x10027188, 0x10, &nBytesWritten, 0);
+								break;
+							case 0xc00000fd:
+								WriteFile(hCrashLog, (const char*) 0x10027178, 0xe, &nBytesWritten, 0);
+								break;
+							case 0xc000008e:
 								WriteFile(hCrashLog, (const char*) 0x1002721c, 0x12, &nBytesWritten, 0);
-							}
-							else if (excCode > 0xc000001d) {
-								/* Jump table 1 */
-								i = excCode + 0x3fffffdb;
-								if (i > 0x68) {
-									goto unknown_exc;
-								}
-								switch (i) {
-								case 0:
-									WriteFile(hCrashLog, (const char*) 0x10027230, 0x18, &nBytesWritten, 0);
-									break;
-								case 1:
-									WriteFile(hCrashLog, (const char*) 0x1002724c, 0x13, &nBytesWritten, 0);
-									break;
-								case 0x67:
-									WriteFile(hCrashLog, (const char*) 0x10027278, 0x15, &nBytesWritten, 0);
-									break;
-								case 0x68:
-									WriteFile(hCrashLog, (const char*) 0x10027260, 0x14, &nBytesWritten, 0);
-									break;
-								default:
-									goto unknown_exc;
-								}
-							}
-							else if (excCode == 0xc000001d) {
+								break;
+							case 0xc000001d:
 								WriteFile(hCrashLog, (const char*) 0x10027290, 0x13, &nBytesWritten, 0);
-							}
-							else if (excCode > 0xc0000005) {
-								if (excCode == 0xc0000006) {
-									WriteFile(hCrashLog, (const char*) 0x100272a4, 0xd, &nBytesWritten, 0);
-								}
-								else {
-									goto unknown_exc;
-								}
-							}
-							else if (excCode == 0xc0000005) {
+								break;
+							case 0xc0000006:
+								WriteFile(hCrashLog, (const char*) 0x100272a4, 0xd, &nBytesWritten, 0);
+								break;
+							case 0xc0000005:
 								/* ACCESS_VIOLATION */
 								WriteFile(hCrashLog, (const char*) 0x100272cc, 0x11, &nBytesWritten, 0);
 								if (pExceptionPointers->ExceptionRecord->ExceptionInformation[0] == 0) {
-									WriteFile(hCrashLog, (const char*) 0x100272c4, 5, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) 0x100272c4, 5, &nBytesWritten, 0);
 								}
 								else {
-									WriteFile(hCrashLog, (const char*) 0x100272bc, 6, &nBytesWritten, 0);
+								WriteFile(hCrashLog, (const char*) 0x100272bc, 6, &nBytesWritten, 0);
 								}
 								sprintf(szDateBuf, (const char*) 0x100272b4, pExceptionPointers->ExceptionRecord->ExceptionInformation[1]);
 								WriteFile(hCrashLog, szDateBuf, strlen(szDateBuf), &nBytesWritten, 0);
-							}
-							else if (excCode == 0x80000003) {
+								break;
+							case 0x80000003:
 								WriteFile(hCrashLog, (const char*) 0x100272e0, 0xa, &nBytesWritten, 0);
-							}
-							else if (excCode == 0x80000004) {
+								break;
+							case 0x80000004:
 								WriteFile(hCrashLog, (const char*) 0x100272ec, 0xb, &nBytesWritten, 0);
-							}
-							else {
+								break;
+							default:
 								goto unknown_exc;
 							}
 
@@ -376,13 +348,13 @@ unknown_exc:
 								if (eip != pCtx->Eip) {
 									char* pInstr = szDateBuf;
 									int nInstr = 7;
-									do {
-										if (ReadProcessMemory(hProcess, (void*) (eip - nInstr), pInstr, nInstr, 0)) {
+									while (nInstr--) {
+										if (ReadProcessMemory(hProcess, (void*) (eip - nInstr - 1), pInstr, nInstr + 1, 0)) {
+											nInstr++;
 											break;
 										}
-										nInstr--;
 										pInstr++;
-									} while (nInstr > 0);
+									}
 									instrType = AnalyzeInstruction(nInstr, (int) &szDateBuf[7], (int) eip, &instrDest);
 									if (!instrType) {
 										goto next_frame;
