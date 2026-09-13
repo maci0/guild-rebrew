@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-154 (same round, finished): the build now compiles what the tools
+measure.**
+
+The migration above is done and verified as a no-op.  `CMakeLists.txt` no longer
+parses `// CFLAGS:` at all: it writes its source list, calls
+`rebrew cmake-flags --sources-file ...`, and includes the generated table, with
+`rebrew-functions.toml` on `CMAKE_CONFIGURE_DEPENDS` so editing the metadata
+reconfigures instead of silently reusing baked `COMPILE_FLAGS` (the footgun that
+made the `/Ow` fix look like a no-op).
+
+Reconciling first is what makes the switch provable: six per-function entries
+recorded a flag set the build never used while their functions are correct in
+the linked image under the file's default (`initterm` verified byte-by-byte, the
+rest `RELOC`/100% under both sets), so `rebrew lint --fix` dropped them as
+redundant, and the 41 inline `// CFLAGS:` lines across 35 server sources are
+gone -- the metadata already carried identical values.
+
+Two things this round taught, both worth keeping:
+
+- **`rebrew test` writes metadata.**  Running it to *read* a verdict rewrote
+  `STATUS`/`CFLAGS` on unrelated entries (a `dllmain` entry lost its load-bearing
+  `/Oy-`, `__initterm` lost `EXACT`), which then blocks `lint`/`verify`.  Use
+  `rebrew diff`/`probe_function.py` for measurement, or revert the metadata
+  afterwards.
+- **`initterm.c` is the shape the emitter refuses**, and the refusal was right:
+  its two functions agree on `/O1 /Gd` (which is what `verify` needs) while the
+  build had been compiling the file with `/O2 /Gd`.  Splitting the file into two
+  TUs was tried and **reordered the whole link** (`exactly at their reference VA`
+  246/319 -> 0/319, residue 11,138 -> 48,600), so the split was reverted and the
+  file now compiles with its metadata value instead.  A function moved between
+  files moves in the link; the migration must not repartition TUs.
+
+Final state: residue unchanged at **11,138** differing bytes with everything
+outside `.text` byte-identical, 246/319 symbols exactly at their reference VA,
+`rebrew verify` 281/283 with the baseline held, lint warnings 4 -> 2.
+
 **Round-154 (same round): one authority for compile flags.**
 
 `gm_AllocSpieler`'s bug was not a stray flag, it was three different answers to
