@@ -71,6 +71,40 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-170: the pad lever's other candidates, both measured flat.**
+
+No byte change (10,846).  Round 169's padding makes size-changing improvements
+adoptable, so the two candidates it had been blocking were finally tested.
+
+*CrashDump's `/Oy-` is not a win.*  It was the biggest measured object gain in
+the tree (+66 matched, 523 -> 589) and 112 bytes SHORTER, which is exactly what
+the pad now absorbs, so it was adopted and built:
+
+```
+pad   CrashDumpUnhandledExceptionFilter.c.obj: 2016 -> 2115 (+99)
+exactly at their reference VA: 246        (the pad worked)
+CrashDumpUnhandledExceptionFilter  1988 -> 1997   (+9)
+.text total                     10,846 -> 10,868   (+22)
+```
+
+Reverted.  That is the third time an object-level gain turned into a linked loss
+(+52/+10 on this function in round 162, +50/-88 on cm_ExCopyEntityData in round
+169), and it settles the flag for good: the object score is a proxy, and on this
+function in particular it points the wrong way.
+
+*And `--allow-shrink` finds nothing.*  `hillclimb.py` can now accept a move that
+makes the object smaller (the pad absorbs the gap; growth is still refused,
+because code cannot be cut to fit a shorter slot).  Run on the four largest
+functions -- gm_AllocSpieler, cm_ExSellObjekt, ls_LoadBuildingEntityState,
+cm_ExCopyEntityData -- it converges with no improving move, so the shrinking
+space is empty too.
+
+With that, every lever this campaign has is measured flat on every remaining
+function: statement order (reach 3-12, swaps, size-preserving and shrinking),
+declaration qualifiers, compiler flags (18 variants), toolchain (VC4.2/5.0/6.0
+and every 6.0 service pack), and expression/clamp spellings.  The residual is a
+per-function source-invention problem, not a search problem.
+
 **Round-169: the vehicle now pads, and the first size-changing win is in.**
 
 10,934 -> 10,846 differing bytes.  `cm_ExCopyEntityData` 555 -> 467.

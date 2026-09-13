@@ -293,6 +293,7 @@ def score(
     size_ref: int | None = None,
     objective: str = "matched",
     true_delta: list[int] | None = None,
+    allow_shrink: list[bool] | None = None,
 ) -> tuple[int, int, int, int]:
     """Score one candidate; the returned key depends on `objective`.
 
@@ -317,6 +318,7 @@ def score(
     target, matched = int(m.group(1)), int(m.group(2))
     delta = -abs(int(m.group(4)) - int(m.group(5)))
     obj = int(m.group(6))
+    allow_shrink = allow_shrink if allow_shrink is not None else [False]
     if objective == "size":
         true_delta = true_delta if true_delta is not None else [0]
         # `want` is the probe size that corresponds to a TRUE object size of
@@ -331,6 +333,10 @@ def score(
         )
     if size_ref is None:
         size_ref = target
+    if allow_shrink[0]:
+        # Only shrinking is absorbable (the pad extends a short object to the
+        # reference size); growing one would still drag the symbols after it.
+        return (1 if obj <= size_ref else 0), matched, delta, obj
     return (1 if obj == size_ref else 0), matched, delta, obj
 
 
@@ -358,6 +364,11 @@ def main() -> int:
     ap.add_argument("--symbol", default=None)
     ap.add_argument("--rounds", type=int, default=10)
     ap.add_argument("--reach", type=int, default=3, help="max displacement")
+    ap.add_argument("--allow-shrink", action="store_true",
+                    help="let a move make the object SMALLER (the pipeline pads "
+                         "the gap -- scripts/pad_short_functions.py -- instead of "
+                         "the composition drifting).  Growth is still refused: "
+                         "code cannot be cut to fit a shorter slot.")
     ap.add_argument("--objective", choices=("matched", "size"), default="matched",
                     help="maximise matched bytes (default, keeping the object's "
                          "size fixed) or drive the object's size toward the "
@@ -441,7 +452,8 @@ def main() -> int:
     def submit(spec) -> tuple[tuple, tuple[int, ...]]:
         tmp = src.with_name(f"_hc_{name}_{spec[0]}{spec[1]}_{spec[2]}.c")
         tmp.write_text(header(head) + render(apply_spec(order, spec)) + tail)
-        return spec, score(tmp, args.va, size_ref, args.objective, delta_box)
+        return spec, score(tmp, args.va, size_ref, args.objective,
+                           delta_box, shrink_box)
 
     def seq(o):
         """The units in the order they currently appear.
@@ -453,10 +465,12 @@ def main() -> int:
         """
         return [units[k] for k in o]
 
-    base = score(src, args.va, objective=args.objective)
+    base = score(src, args.va, objective=args.objective,
+                 allow_shrink=[args.allow_shrink])
     tgt = target_size(args.va)
     size_ref = base[3]
     delta_box = [args.true_delta]
+    shrink_box = [args.allow_shrink]
 
     def describe(sc) -> str:
         if args.objective == "size":
