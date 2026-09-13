@@ -4,6 +4,30 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-260 (2026-09-13): lint at zero warnings; W020 resolved per the rule's
+own remedy, W007 with a verified struct size.**
+
+- W020 (`vfs_ReadData.c`: `__asm` + STATUS RELOC): the lint rule's docstring
+  names the remedy — a recorded BLOCKER suppresses it, "measured on a project
+  where three partial block-fill `__asm` bodies sit inside functions that do
+  byte-match (RELOC)". Set via `rebrew blocker set 0x10008e40` (tool path):
+  the partial block reproduces the original's hand-written
+  alignment-prefixed copy prelude (Finding 19), which no pure-C memcpy
+  spelling emits. The sibling functions already carried blockers
+  (m_AllocTracked §11, gm_AllocGebaeude prelude) — this one was the only
+  unsuppressed instance. Warning gone, no source change.
+- W007 (`gzread.c` structs without `// SIZE` marker): added `// SIZE 0x4`
+  (alongside the upstream `/* SIZE 0x4 */` C comment, which the
+  `//`-anchored regex cannot see) and `// SIZE 0x64` for `gz_stream` —
+  the size verified, not asserted: z_stream members counted from
+  `references/zlib-1.1.3/zlib.h` (14 words = 0x38) and a 32-bit
+  `i686-w64-mingw32-gcc` sizeof probe returned gz_stream=100/z_stream=56.
+  (Incidental finding: the marker regex requires `SIZE 0xNN` with no colon —
+  `// SIZE: 0xNN` does not match. Worth knowing before writing more markers.)
+- `rebrew lint`: **187/187, 0 errors, 0 warnings** — first clean run.
+  gzread still RELOC 559/559 (comment-only change). Residue baseline
+  unchanged: **9,209**.
+
 **Round-259 (2026-09-13): vfs proof-breakers exhausted (VN sees through both);
 GA confirms the wall a third way.**
 

@@ -201,6 +201,7 @@ cflags = "/O2 /Gd /Oy- /DREBREW_ALLOW_NAKED"
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-13T00:45:43+00:00"
+blocker = "partial __asm block reproduces the original's hand-written alignment-prefixed copy prelude (docs/msvc6-allocator.md Finding 19), which no pure-C memcpy spelling emits; the function byte-matches with it"
 
 ["SERVER.0x10009020"]
 size = 667

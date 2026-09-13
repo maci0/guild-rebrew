@@ -20,6 +20,7 @@
 #include "zutil.h"
 
 /* SIZE 0x4 */
+// SIZE 0x4
 struct internal_state {int dummy;}; /* for buggy compilers */
 
 #ifndef Z_BUFSIZE
@@ -30,6 +31,7 @@ struct internal_state {int dummy;}; /* for buggy compilers */
 #  endif
 #endif
 
+// SIZE 0x64 (sizeof gz_stream on 32-bit: z_stream 0x38 + 9 ptr/int + mode + startpos; verified with i686-mingw probe)
 typedef struct gz_stream {
     z_stream stream;
     int      z_err;   /* error code for last stream operation */
