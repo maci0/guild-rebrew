@@ -71,6 +71,33 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-227/228: file ownership has to be checked, not assumed.**
+
+Residue **9,533**.  A process failure, recorded because it has now happened twice and
+the cost is not obvious from the outside.
+
+Round 201 recorded that two agents had been working `gm_AllocSpieler` at once -- both
+reported the file changing under them, my reverts fought their writes, and the round's
+measurements thrashed.  I then did it again: round 223 launched a second agent onto
+`gm_AllocSpieler` without checking whether the round-199 fan-out agent was still live on
+it.  It was.
+
+**The fault is not the brief.**  Every brief in this campaign states "edit ONLY your
+assigned files", and every agent has obeyed.  What fails is the coordinator's knowledge
+of *which previous fan-out is still running*: with ~40 agents accumulated in one
+session, `list_agents` is the only source of truth for ownership, and I assigned from
+memory of what I had intended rather than from what was live.
+
+The rule, for whoever coordinates next: **before launching any fan-out, call
+`list_agents`, take the `running` set, diff their file assignments against the ones you
+are about to hand out, and only then write the briefs.**  A function with two writers
+produces an unmeasurable tree and wastes both agents, which is exactly the state that
+made rounds 201-207 unproductive.
+
+The correction cost nothing this time -- the newer agent was redirected to
+`cm_ExCopyEntityData`, one of the two open size-changer suspects, rather than
+interrupted -- but that was luck, not process.
+
 **Round-220/221: the block-creation-order lever does NOT reach
 `gm_FindNextFilteredEntity`, and why.**
 
