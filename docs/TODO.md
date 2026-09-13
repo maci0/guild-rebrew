@@ -1,5 +1,68 @@
 # Blockers — 100% Round-Trip Goal
 
+## CURRENT STATE (kept current; read this before the history below)
+
+**Residue: 9,280 bytes of 0x22846 in `.text` (6.56%).** Everything else in the PE is
+already byte-identical: `.data`, `.rdata`, `.reloc` and the headers all differ by **0**, and
+the import table is 100 entries matching the reference in set *and* order. There is no
+`.idata` section — imports live in the `.rdata`/`.data` that already match. So **all
+remaining work is `.text` code generation**, and the deliverable is
+`build/server.dll` at 286,720 bytes.
+
+**The objective is byte-identity. `rebrew todo` does NOT measure it** — it reports semantic
+coverage (99.6%) and lists only functions needing implementation work. `PROVEN` outranks
+nothing: `EXACT` is the strongest claim and `PROVEN` ranks below `RELOC` because a proven
+function's bytes still differ (see the round-246 entry). The residue table below is the work
+list.
+
+**Regenerating the deliverable** (do this after any `cmake --build`, which *deletes*
+`build/server.dll` on its expected post-link failure):
+
+```
+bash scripts/split_link.sh
+.venv/bin/python scripts/postlink_residual.py --write build/server.dll
+```
+
+**Measuring one candidate** (serialized — never while another agent is writing):
+`bash scripts/linktest.sh <the one source>`; diff against `.scratch/residue_base.log`.
+
+| function | residue | state |
+|---|---|---|
+| `gm_AllocSpieler` | 2861 | **closed, 4 passes** — distributed (168 hunks), `matched` ceiling ~3115 |
+| `CrashDumpUnhandledExceptionFilter` | 1667 | agent: frame + decrypt-loop induction variable |
+| `cm_ExSellObjekt` | 1404 | **parked, 2 passes** — slot swap is a pure colorer tie, source-inert |
+| `ls_LoadBuildingEntityState` | 728 | **closed, 2 passes** — five pinned length steps |
+| `cm_ExCopyEntityData` | 462 | closed (−1 taken) |
+| `gv_ExAllocGraveyardWorker` | 456 | closed (−1 taken) |
+| `ServerMainThread` | 367 | parked (−4 taken); four length deltas cancel, partial fixes harmful |
+| `gm_AllocGebaeude` | 327 | **closed on the C-only constraint** — its win needed an `__asm` barrier |
+| `vfs_OpenStream` | 245 | agent; no length defect (tables aligned at window 0x02bf) |
+| `gm_FindNextFilteredEntity` | 226 | agent |
+| `ahm_ExAllocAlchemist` | 201 | agent |
+| `gm_CheckInventoryCapacity` | 97 | agent |
+| `m_AllocTracked` / `srv_LoadBuf` / `gm_ObjectsAvailble` | 93/49/25 | agent |
+| `vfs_ReadCompressed` / `cm_ExProdObjekt` / `cm_ProcessCommandQueue` | 24/21/15 | agent |
+| *outside every named function* | 7 | was 20; 13 fixed by the pad-fill correction |
+
+**Three rules that were learned expensively — apply them before spending probes:**
+
+1. **Only the linked residue decides.** Object metrics mispredict in both directions and have
+   disagreed in sign **six** times; `aligned` in particular has picked the losing candidate.
+   Never reject a candidate on an object metric alone.
+2. **Read the *shape* of the gap curve, not the first divergence.** A monotone step that never
+   returns is a length cascade; a gap that oscillates back to 0 is distributed differences; a
+   gap that stays flat through a region that still differs byte-wise is a frame or operand
+   *value* difference (`sub esp,0x28c` vs `0x280`, both 6 bytes) which no local edit fixes.
+   Assuming a cascade where there was none cost two agent budgets (round 244).
+3. **The size rule.** `cl` pads each COMDAT to 16 bytes, so for an object with no relocated
+   data after its code any real body at or below `16*ceil(size/16)` is composition-neutral,
+   with **no lower bound**. If the object *does* carry a jump table or case map after its
+   code, the **real** length binds and the pad cannot protect it (Finding 56).
+
+**Constraint reminder:** C only. `__asm` is allowed only where the *original* had hand-written
+assembly (one such block-fill exists in `gm_AllocGebaeude`); a `nop`/barrier block is not
+that, and a large measured win had to be discarded for using one (shapes section 69).
+
 **Round-246 (result): 9,293 -> 9,280 (-13), from a fill byte rather than from code.**
 
 The win came out of a scan for residue that falls *outside* every named function.  That
