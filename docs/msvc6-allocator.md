@@ -1748,6 +1748,16 @@ first ``// FUNCTION:`` VA.  Consequences:
 - Duplicate VA coverage across files (e.g. defining 0x10014f80 in two files)
   breaks the layout silently — check ``// FUNCTION:`` markers before adding.
 
+**Amended (2026 campaign) — the 16-byte pad hides the real body length.**  A
+COMDAT is padded to a 16-byte multiple, so several different real body lengths
+report the *same* object size: every real length from 3681 to 3696 in
+`gm_AllocSpieler` (0x10018850) reports "object size 3696".  A candidate can
+therefore change the linked section size — and move every symbol after it —
+while every tool reports the size as unchanged.  Always compare the *real* body
+length (COMDAT minus its trailing pad) as well as the reported object size.
+Caveat: not every function pads with `0x90`; `CrashDumpUnhandledExceptionFilter`
+(0x10002770) pads with `0x09`, so a naive strip gives a wrong real length there.
+
 ### 0x10014ee0 — word-table search (naked placeholder kept)
 
 The 80-byte helper searches a word table at 0x1002d878 (0x46-byte records,
@@ -2491,6 +2501,18 @@ The `(float)gm_RandomMod(8) & 0xffff` float-chain (`fild; fmul 21.0; fadd
 42.0; __ftol`) and the `do { j++; store[j+0x23]; } while (j < 5)` rotation
 both byte-match.  Kept fenced-naked; C preserved in #else.
 
+**Amended (2026 campaign) — deferred saves also decide the frame size.**
+`CrashDumpUnhandledExceptionFilter` (0x10002770) is the same mechanism measured
+at the link level: the reference defers `push ebx; push edi` to the dominator
+of their first use and restores them at each exit of that region — provable
+because one cold arm reaches the tail without them.  Ours has `ebx`/`edi` live
+before the first branch, so the deferral window never opens and the frame stays
+12 bytes larger (`sub esp,0x28c` against `0x280`), with the whole local slot map
+shifted downstream.  ~30 spellings and an 18-variant flag sweep did not move it.
+The frame size is a *consequence* of which values are live at the first branch,
+not of the local declarations (Finding 52).  `msvc6-c-shapes.md` §38 states the
+same rule for the instruction shape.
+
 ## Finding 49 — ls_InitNewDynastyEntity (0x100122e0): 768x768 fill induction-variable elimination
 
 Best C is 99/341 positional (5 formulations).  The resolve/flag-select
@@ -2606,3 +2628,90 @@ value instead of 0.  The fix (order-paired call-site stubbing in
 counts differ) lets `rebrew prove` establish equivalence; STATUS is now
 PROVEN.  The byte gap remains a codegen fixed point, so PROVEN — not
 EXACT/RELOC — is the terminal status for this function.
+
+## Finding 52 — stack slots are coloured over live ranges, so declaration order is usually inert
+
+MSVC6 assigns frame slots by live-range colouring: two locals whose ranges do
+not overlap share a slot, so swapping their declarations usually changes
+nothing, and *deleting* live locals does not necessarily shrink the frame.
+
+- `CrashDumpUnhandledExceptionFilter` (0x10002770) — declaration order,
+  reversed order, char-first, and several retypings are all byte-identical, and
+  deleting live locals does not shrink its 0x28c frame.
+- `gm_ObjectsAvailble` (0x10015f70) — 10 declaration orders byte-identical.
+- `ls_LoadBuildingEntityState` (0x128f0) — the two slots the reference has at
+  `[esp+0x14]`/`[esp+0x18]` cannot be swapped by declaring them in the other
+  order.
+
+The exception is **init-statement order**: on `cm_ExSellObjekt` (0x1000d930)
+moving one `= 0` initialiser among the others changed which stack slot a
+pointer got.  So the movable thing is the statement that creates the value, not
+the declaration line.  This is the general form of the "declaration order ...
+did not move it" notes in Findings 7, 8b, 22, 41 and 47, and it is the same
+live-range mechanism as Finding 48's prologue split.
+`msvc6-c-shapes.md` §15/§50 credit declaration order for a frame-offset steer
+(round 110); on the sites above it was inert — try live ranges and initialiser
+placement first.
+
+## Finding 53 — callee-saved assignment can be an allocator tie-break that no C names
+
+`gm_ObjectsAvailble` (0x10015f70): `slot_base` is `esi` on both sides, and the
+two claimants are born at emitted indices 71 (`slot_cursor`, the query result)
+and 77 (`slot = slot_base`).  The reference gives `ebx` to the 71-born and `edi`
+to the 77-born; we do the reverse, and the match block's row/inner counters
+follow mechanically because MSVC6 hands the free callee-saved pair out in
+`ebx < esi < edi` order.  Birth order, use counts and spill timing are already
+the reference's; ~600 probes across declaration order, types, scopes,
+`register`, loop-guard rewrites and cursor splits never moved it.  Treat this
+whole-function pair as a colourer fixed point: the Finding 12 lever (birth order
+via named vs anonymous loads) does not reach it because the two birth indices
+already match.
+
+## Finding 54 — strength reduction is decided by the value's uses, not by how the address is spelled
+
+`gm_CheckInventoryCapacity` (0x10019ed0): the reference materialises a pointer
+in `eax` (`mov eax,edi; add eax,ecx; ... mov al,[eax]`, no spill) while we fold
+it to the SIB form and then spill a byte.  Eight address spellings (base
+increment, separate pointer temp, `*(unsigned char*)`, fully inlined,
+`(char*)((unsigned int)base+idx)`, `&base[idx]`) are byte-identical *to each
+other*, which shows the fold is decided by that value's single use, not by the
+expression.  The site is the "Ent-address shape" item in the
+gm_CheckInventoryCapacity section above — this finding is the rule behind it.
+`ahm_ExAllocAlchemist` (0x1000bdf0): every factorisation of a stride re-derives
+the same `3,9,5,4` `lea` chain.  Same class as Finding 30 (`lea` vs folded table
+load), Finding 32 item 2 and Finding 36.
+
+## Finding 55 — the frame can be right while the slot map is not
+
+`gm_AllocSpieler` (0x10018850) has the reference's `sub esp,0x41c` on both
+sides, but our temporaries sit at `0x14/0x24/0x2c/0x30/0x38/0x40` where the
+reference's stop at `0x28`, and the `work` buffer is addressed at `esp+0x34`/
+`0x3c` against our `esp+0x38`/`0x40`.  An equal frame size is not evidence that
+the slots are; check the slot offsets before concluding the frame is fixed
+(contrast the frame-size oracle of Finding 26 / sim_PriorityUpdate, where the
+size was the thing that diverged).
+
+## Finding 56 — a short object's out-of-line data is still misplaced even when the pad step fixes the following symbols
+
+`scripts/pad_short_functions.py` appends a separate zero-filled `.text` to bring
+an object up to its reference span, which keeps later symbols at their reference
+VAs — but the object's *own* jump table and case map, which live after its code
+inside the same object, stay at the wrong offset.  `vfs_OpenStream` (0x10009020)
+was 8 bytes short of the reference's 701-byte real body; its 5-entry jump table
+and 13-byte case map therefore sat 8 bytes early and every relocated entry
+pointed one byte late, which was 22 of the 32 bytes of residue outside the named
+functions.  Fixing the length (not the pad) was worth -36 linked.  The pad buys
+the neighbours their VAs; out-of-line data inside the object needs the real
+length.
+
+## Finding 57 — reporting note: a per-function residue number is only comparable within one composition
+
+Throughout this campaign "linked" means the composed image's per-function
+residue — the only measurement that decides.  `postlink_residual` attributes
+differing bytes by reference VA, so a symbol not exactly at its reference VA
+drags its whole window; 73 of 319 symbols are not exact.  A candidate rejected
+in one composition has therefore been a win in another and vice versa.  Only the
+total from a full rebuild (`cmake --build`, then `scripts/split_link.sh`, then
+`postlink_residual.py --write`) is comparable across rounds, and
+`scripts/linktest.sh` recompiles only the files it is named — so a run is
+attribution only when no other source has changed since the last full build.

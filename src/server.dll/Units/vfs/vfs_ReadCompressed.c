@@ -27,6 +27,27 @@
  * (pop esi / pop ebp / pop ebx / add esp,8 / ret), 7 bytes, while running 14
  * bytes longer elsewhere; the instruction streams are too misaligned to
  * localise it further until the prologue order is fixed.
+ *
+ * 2026-09-14 (matched 425 -> 447, matched-reloc 445 -> 467, obj 480 -> 496 =
+ * the reference's span, real body 492): the missing 12 bytes were a whole
+ * third exit.  The reference has THREE separate epilogues because its tail
+ * returns re-READ the volatile `done` (`jne 0x10008c70` / `mov eax,[esp+0x14]`
+ * / pops / ret) instead of returning the register that already holds it; with
+ * `return d;` and `return t_done;` msvc6 needs no load and tail-merges both
+ * onto the `return result` epilogue, which is 12 bytes shorter.  Spelling the
+ * two returns `return *(volatile int*) &done;` restores exit C byte for byte.
+ * The `d = *(volatile int*) &done;` read also moved up into the block that
+ * follows the crc32 call, ahead of `s->cap -= n; result += n;`, which is where
+ * the reference schedules it (`mov eax,[esp+0x28]` before `add esp,0x14`);
+ * both tails then match from `sub ebx,edi` onward.
+ * Residual 45 bytes: the clamp tests eax before materialising edi (`test
+ * eax,eax` / `mov edi,eax` against `mov edi,eax` / `test edi,edi`), the
+ * stored-block accumulator keeps `n` in edi (`add edi,eax` against `add
+ * eax,edi`), the pre-call crc goes to ecx instead of edx, and the crc32
+ * argument cleanup `add esp,0x14` is scheduled four instructions earlier than
+ * the reference's.  Probed and inert on this body: `n + acc` for `acc + n`,
+ * the old `result` read into a local before the call, `result += n` moved
+ * above the crc32 call, the `done` read after `s->cap -= n` (446-459).
  */
 
 /* 2026-09-13 (round 110): the span is fixed by reading the volatile `done`
@@ -163,22 +184,20 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 			{
 				int z;
 				unsigned int crc;
+				int d;
 				z = inflate(&s->next_in, 2);
 				crc = s->crc;
 				n = s->total_out - produced;
 				*(volatile int*) &done = z;
 				s->crc = crc32(crc, (unsigned char*) out, n);
-			}
-			s->cap = s->cap - n;
-			result = result + n;
-			{
-				int d;
 				d = *(volatile int*) &done;
+				s->cap = s->cap - n;
+				result = result + n;
 				if (d == 1) {
 					return *(volatile int*) &result;
 				}
 				if (d != 0) {
-					return d;
+					return *(volatile int*) &done;
 				}
 			}
 		}
@@ -188,6 +207,6 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 		if (t_done == 0) {
 			return *(volatile int*) &result;
 		}
-		return t_done;
+		return *(volatile int*) &done;
 	}
 }

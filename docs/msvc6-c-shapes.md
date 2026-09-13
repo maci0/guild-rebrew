@@ -167,7 +167,9 @@ the compiler, and hoisting it into a named pointer suppresses it.
 `unsigned int` where the original kept a value in 16 bits changes the loop
 body. The tell in the target is a 16-bit update paired with a widening mask
 each iteration: `mov ax, word ptr [...]` plus `and eax, 0xffff`. Match the
-width the disassembly implies rather than defaulting to `int`.
+width the disassembly implies rather than defaulting to `int`. The widening
+mask itself is a `volatile` tell rather than a width tell: check section 52
+before retyping the load.
 
 ## 7. Branch polarity: merge sequential returns
 
@@ -197,7 +199,8 @@ flips the branch sense (`jne` to `je`):
 The exit structure decides branch layout and total size. A `for(;;)` with
 returns inside the body emits an epilogue per return; a `do/while` with a
 shared tail return emits one. Read the target's exits and mirror the count
-before tuning anything else.
+before tuning anything else. When the residual is a back-edge encoding rather
+than an epilogue count, section 57 is the discriminator.
 
 ## 8a. x87 memory-operand forms: `fimul`/`fidiv` vs `fild` + `fmulp`/`fdivp`
 
@@ -674,7 +677,9 @@ the `cmd+0x18` and `cmd+0x1c` stores produced byte-identical output.
 Rewriting a loop between `while`, `do/while`, and `for(;;)` with explicit
 breaks is likewise inert once the bodies are equivalent: all three shapes of
 the flag-scan loop compiled to the same bytes. The compiler canonicalises the
-loop before layout.
+loop before layout. Section 57 draws the boundary: shape is a lever only where
+the divergence is a back edge pushed out of `rel8` range, and register pressure
+elsewhere leaves it inert.
 
 What *does* move is the order in which distinct globals are first read, since
 that sets register roles. Reordering the sync-packet loads changed the object
@@ -1892,7 +1897,8 @@ arm whose store operand is a variable reaches this rule.
 
 ## 49. A CFLAGS sweep on one function: inert, negative, and one near miss
 
-`gm_AllocSpieler` (0x1001A0F0, target object 3689 bytes) is the smallest
+`gm_AllocSpieler` (0x10018850, target object 3689 bytes; an earlier revision of
+this section cited 0x1001A0F0, which is `gm_RandomFloat01`) is the smallest
 remaining size mismatch in the tree (ours 3688, same span), and it was used to
 sweep the flags that are plausibly still in play.  Numbers are the object size
 and the register-agnostic matched-byte count from `rebrew diff`; "inert" means
@@ -1908,6 +1914,10 @@ a byte-identical object.
 | `/QIfist` | — | — | larger |
 | `/Zp1 /Zp2 /Zp4 /Zp8` | 3688 | 853 | inert |
 | `/Ob2`, `/Ot`, `/Oi`, `/Oi-`, `/Oa-`, `/G5`, `/GB` | 3688 | 853 | inert |
+
+A later campaign measures `/Oa` and `/Ow` as load-bearing on this function and
+`/O2`-class flags as inert on it (section 58), which supersedes the `/Oa-` row
+above.
 
 The lesson is the general one: on this codebase a flag that moves the size
 towards the target has so far always moved the *bytes* away from it, because
@@ -1937,7 +1947,9 @@ shapes.  Quoting target disassembly first, ours second:
 * **`lea r,[r+r]` vs `add r,r`.** c2 picks `lea` when the flags are live;
   a spelling that kills the flags register is the only lever found.
 * **Branch polarity** (see also section 7).  `je <head>` against our
-  `jne <exit>` is a block-placement consequence, not a source choice.
+  `jne <exit>` is a block-placement consequence, not a source choice — except
+  where several guards share an error tail, where a guard inversion decides
+  which site falls through and is a source lever (section 54).
 * **Frame offsets.** `+0x20/+0x24/+0x30` against our `+0x1c/+0x28/+0x2c` is
   the local-slot layout inside one function; it follows `volatile` placement
   and the order of declarations, and it has been steered exactly once
@@ -1945,9 +1957,162 @@ shapes.  Quoting target disassembly first, ours second:
 * **`and eax, 0xffff` after a 16-bit load.** The reference zeroes a register
   once and uses `mov reg16, [mem]`; we widen with `and`.  Section 43's
   byte-width rule is the related lever, and it is why
-  `ls_LoadBuildingEntityState` stays one byte long.
+  `ls_LoadBuildingEntityState` stays one byte long.  The pair is not an
+  unsteerable residue: the `and` form is what a `volatile` load emits and the
+  `xor`/`mov` form is what a plain one emits (section 52), so where the
+  reference has `xor`/`mov` and we have `mov`/`and`, drop the qualifier on that
+  load rather than retyping it.
 
 The one case that *was* steerable had a structural cause — `cm_ExCopyEntityData`
 (round 110) reached its store block from several duplicated branches, and
 spelling the clamp "in range first, then high, then low" collapsed them.
 Before spending a round on any of the five, look for that shape first.
+
+## 51. `volatile` on a local is a scheduling barrier; qualify at the use site
+
+A `volatile int x;` declaration makes *every* store to `x` a scheduling
+barrier, so msvc6 will not move a load across it. Declaring the local plain and
+qualifying only the accesses that need ordering (`*(volatile int*) &x`)
+produces a different — sometimes exactly the reference's — schedule. It is a
+scheduling lever, not a semantics knob.
+
+`vfs_ReadCompressed` (0x10008a90) declared `volatile int done; volatile int
+result;`. Replacing both with plain locals plus casts at the use sites
+reproduced the reference's prologue byte for byte —
+
+```
+mov eax,[esp+0xc] / push ebx / push ebp / push esi / test eax,eax / push edi /
+store / store / jne
+```
+
+— and was worth -62 linked bytes.
+
+Two sub-facts, both measured:
+
+- It is the two *init* stores that are the barrier, not the declaration as
+  such. On the older body, merely casting the init stores (`*(int*) &done = 0;`)
+  with the `volatile` declarations kept already scored 382.
+- One plain read (`int acc = result;`) MUST stay plain. Qualifying it cost 32
+  bytes.
+
+This is the converse of section 39 (a volatile read *deferring* a load past the
+prologue pushes) and of 8c (a volatile read *pinning* load order): here the
+qualifier is removed, and the granularity is one access, not the variable.
+
+`src/server.dll/Units/vfs/vfs_ReadCompressed.c`
+
+## 52. The 16-bit zero-extend idiom is selected by `volatile`, not by C spelling
+
+A plain `unsigned short` load emits `xor r,r; mov r16,[mem]`. The same load
+through a `volatile` pointer emits `mov r16,[mem]; and r,0xffff`. Seventeen
+spellings on msvc6 `/O2 /Gd` in a micro TU — global, cast, typed pointer, struct
+member — all follow the qualifier, not the syntax.
+
+So an `and r,0xffff` in our output is evidence the source reads that field
+`volatile`, and where the reference has `xor`/`mov` and we have `mov`/`and`,
+the residual is the qualifier, not the expression.
+
+`gv_ExAllocGraveyardWorker` (0x10011bf0): its two neighbour-loop reads are
+volatile in our source and demonstrably were not in the original.
+
+This refines section 6 — the widening mask is a `volatile` tell, not a width
+tell — and supersedes the last bullet of section 50, where the pair was recorded
+as a residue with no source lever. The lever is dropping the qualifier on that
+one load.
+
+`src/server.dll/DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c`
+
+## 53. `switch` case bodies are laid out in source order
+
+Reordering the case groups to match the reference's addresses put every body on
+its reference offset; the jump table and byte map are then byte-identical. The
+case *order* is the lever, not the case set.
+
+`gm_AllocGebaeude` (0x100174d0), worth ~-200 linked bytes.
+
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocGebaeude.c`
+
+## 54. A guard inversion moves which site falls through, and with it the branch histogram
+
+Where several error sites share one tail, `if (success) { body } else { error }`
+and `if (failure) { error } body` are semantically identical but reach that tail
+differently: one site falls through, the others `jmp`. Which site falls through
+decides the displacement sizes, and therefore the rel8/rel32 mix.
+
+`cm_ExSellObjekt` (0x1000d930) has, in the reference, 13 `LogMessageInternal`
+sites: 3 inline `sprintf` tails and 10 on a shared tail at 0x1000e00e, 9 by
+`jmp` and 1 by fall-through. Reverting one inversion restored the reference's
+fall-through site and its exact encoding histogram (12 x rel32 + 10 x rel8),
+worth -38 linked bytes.
+
+This refines section 50's "branch polarity ... is a block-placement consequence,
+not a source choice": the polarity of a guard that *shares* a tail is a source
+choice. Section 7 covers the same edit from the epilogue-count side.
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`
+
+## 55. Comparison rewrites must keep the strict/non-strict boundary
+
+`a - b < 0` is `a < b`, never `b <= a`. A candidate written
+`if (0 <= slots - g_stat2)` for `if (g_stat2 - slots < 0)` flipped the equality
+case: a behavioural change, not a codegen one, and it was caught by reading the
+diff, not by any score.
+
+To change which operand folds, flip the operands of the same operator
+(`slots > g_stat2`), never the operator's sense.
+
+Same blind spot as sections 34 and 36: `match_count` and the `~~` mask cannot
+see it. The candidate's VA was not recorded; the finding is a diff-reading
+habit, not a site.
+
+## 56. A missing exit epilogue is a `return` that hands back a register
+
+Where the reference's tail returns re-read a volatile local
+(`jne` / `mov eax,[esp+0x14]` / pops / `ret`), a source `return d;` returns a
+register that already holds the value, so msvc6 needs no load and tail-merges
+that exit onto the main epilogue. Spelling it `return *(volatile int*) &done;`
+restores the separate epilogue byte for byte.
+
+`vfs_ReadCompressed` (0x10008a90): a whole third exit epilogue, 12 bytes, worth
+-22 linked. Same function and the same lever as section 51 — the qualifier sits
+on the use, and it is what makes the load reappear.
+
+`src/server.dll/Units/vfs/vfs_ReadCompressed.c`
+
+## 57. Loop shape is a lever only when the divergence is not register pressure
+
+A bottom-tested `do{}while` can put the body out of range of a short back edge,
+so msvc6 emits `jge exit` plus a long `jmp`; a top-tested `for` restores the
+single `jl` back edge.
+
+`cm_ExProdObjekt` (0x1000e140), worth a large re-alignment.
+
+Where the reference simply holds a different set of live values, loop *shape*
+rewrites are inert:
+
+- `CrashDumpUnhandledExceptionFilter` (0x10002770): five spellings of the
+  decrypt loop (`for`, `while`, `do-while`, `>>2`, pointer increment) are
+  byte-identical.
+- `ahm_ExAllocAlchemist` (0x1000bdf0): all eight factorisations of a stride
+  (`*0x21c`, `*540`, `*45*12`, shifts) are byte-identical, because the strength
+  reducer re-derives the same chain.
+
+Read the diff for a live-value difference before reshaping a loop; sections 8,
+20, 31 and 47 are the cases where the shape itself was the divergence.
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExProdObjekt.c`
+
+## 58. `/Ox` versus `/O2` is per-file and load-bearing
+
+`/O2` enables `/Og`, which makes msvc6 tail-merge early error blocks the
+reference keeps separate; `/Ox` is what several command-handler files need.
+`/Oa` and `/Ow` are load-bearing on `gm_AllocSpieler` (0x10018850), and
+`/O2`-class flags are inert on it.
+
+Flags are per-file in practice, not per-function: a flag one function needs can
+break a file-mate. Section 12 is that conflict, and section 49 is the measured
+flag sweep on `gm_AllocSpieler` — where the same flag set's `/Oa-` row is
+superseded by the `/Oa` measurement here, and `/Ox` is byte-identical on an
+individual function (section 46) while being load-bearing per file.
+
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c`
