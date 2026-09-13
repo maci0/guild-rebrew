@@ -29,6 +29,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-315 (2026-09-13): call-form axis clean; game code has no statics.**
+
+- Direct-vs-indirect call audit across all 18 residue functions: ZERO
+  mismatches — every call site agrees on form. No function-pointer vs
+  direct-extern lever exists.
+- Game-code static functions: none (only 2 CRT-region ones, out of
+  scope). The merge experiment is void a third time — no inline/outline
+  lever exists anywhere in game code.
+- Residue baseline unchanged: **9,209**.
+
 **Round-314 (2026-09-13): denominator audit — 9,209 is all code.**
 
 - Reference .text holds 2,571 padding-ish bytes (154 int3 + 2,417 nop
