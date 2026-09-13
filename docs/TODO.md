@@ -1,5 +1,79 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-109: the three spans are worth +18.4 points, two of them are in hand,
+and `CrashDump` is the blocker.**
+
+**The prize, measured.**  `.scratch/padobj.py` forces the three open objects to
+the reference spans (`CrashDump` 2144 -> 2128, `vfs_ReadCompressed` 512 -> 496,
+`cm_ExCopyEntityData` 880 -> 912) and `scripts/split_link.sh` relinks:
+
+```
+                              whole .text raw   masked   postlink coverage
+current (net 0, spans wrong)      58.45%        76.61%   4221/7463 = 56.6%
+all three spans correct           87.04%        95.01%   6056/7463 = 81.1%
+```
+
++18.4 points of whole-`.text` masked, and 81.1% is within striking distance of
+postlink's 90% gate (the CMake build, whose CRT is scrambled, sits at 30.8%).
+The game region barely moves (92.16 -> 92.15), so the whole of that gain is the
+CRT tail coming into place.
+
+**Two of the three fixes are found -- both are pure branch reordering, no
+semantic change.**
+
+1. `cm_ExCopyEntityData`, in the `ebx_type == 0` arm and the matrix loop: spell
+   each clamp "in range first, then HIGH, then low" (`else if (rel_value >=
+   0x7f) { rel_value = 0x7f; } else { rel_value = -0x7f; }`) instead of "in
+   range first, then low, then high".  Either reordering alone gives obj 892,
+   whose span is 896 -- still one byte short of the window -- and both together
+   give obj **904 / span 912**, the reference bucket:
+
+```
+                             obj   positional  reg-agnostic matched / tgt-only
+baseline                     880      196            202 / 31
+type-0 high-first            892      --            203 / 27
+type-0 + matrix high-first   904      198            204 / 25
+```
+
+   So this one improves the content as well as the size.
+2. `vfs_ReadCompressed`: hoist the volatile `done` read into one local --
+   `{ int d; d = done; if (d == 1) return result; if (d != 0) return d; }` (or
+   the same through the dead `i`/`n`) -- obj 497 -> **481 / span 496**.  The
+   reference reuses `eax` across the two tests where ours re-reads the volatile;
+   the content cost is 176 -> 171 register-agnostic matched, which the +18.4
+   whole-binary points swamp.
+
+**`CrashDump` is the blocker, and its +22 is not source-steerable.**  Needs real
+2137 -> 2113..2128.  The whole deficit is inline-vs-outlined cold blocks: our
+object has **five** `call LogMessageInternal` sites (line numbers 0x220, 0x21b,
+0x218, 0x213, 0x20f) and the reference has only **four** `call` instructions for
+the same five messages -- it shares the `push 1; push 0x10027144; call` tail
+between the 0x218 (VirtualAlloc failed) and 0x21b (ReadFile size) paths:
+
+```
+0x10002e1d push 0x10027120     <- 0x218 message
+0x10002e22 push 0x218
+0x10002e27 jmp  0x10002e35
+0x10002e29 push 1
+0x10002e2b push 0x10027110     <- 0x21b message
+0x10002e30 push 0x21b
+0x10002e35 push 0x10027144     <- shared tail
+0x10002e3a call LogMessageInternal
+```
+
+C cannot express "jump into the middle of another call's argument pushes", so
+that sharing is not reachable from source.  Merging the two sites *fully* (one
+shared call) lands at ~2107, span 2112 -- six bytes *below* the window -- so the
+obvious restructuring overshoots.  This is the same layout-pass behaviour as the
+missing third epilogue in `cm_ExCopyEntityData` (round 104) and the folded
+redundant tests in `cm_ProcessCommandQueue` (round 106).
+
+**Both ready fixes stay unlanded on purpose.**  The three errors sum to zero
+(`+16 +16 -32`) and that net is what places the 58 KB CRT tail; round 105
+measured a strict subset (net -16) at 48.83% against the current 63.66%.  Land
+all three together or none.  The two above are one edit each, so the round that
+cracks `CrashDump` lands the whole set.
+
 **Round-108: the rel32 blind spot bites a second time -- a call to a data stub.**
 
 `rebrew test` masks the rel32 of every call, so a call to the **wrong**
