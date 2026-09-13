@@ -1,5 +1,48 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-96: CrashDump's +29 is section 17, and the four blockers are all
+layout or scheduling.**
+
+`CrashDumpUnhandledExceptionFilter` (0x10002770, obj 2137 against 2115) is the
+last of the four position-alignment blockers to be characterised, and its size
+error is the block-placement pass.  The bytes at its first error site:
+
+```
+target 0x100027a0  call esi                  ; CreateFileA
+                   mov ebp,eax  cmp ebp,-1  mov [esp+0x28],ebp
+                   je 0x10002e4d             ; <- the error block is OUT OF LINE,
+       0x100027ad  push ebx  push edi        ;    at the end of the function
+ours               call ebx  mov edi,eax  cmp edi,-1  mov [esp+0x44],edi
+                   jne 0xd8                  ; <- the error block is INLINE
+                   push 1  push 0x10027104  push 0x220  push 0x10027144
+                   call LogMessageInternal  add esp,0x10  jmp <tail>
+```
+
+Nine error sites are inline in ours and out of line in the reference, and each
+inline one costs a 5-byte `jmp` to skip it.  `docs/msvc6-c-shapes.md` section 17
+is explicit that this pass is not steerable from source and that three label
+placements were measured inert on `ServerMainThread`; the same verdict applies
+here.  So the four alignment blockers are:
+
+```
+CrashDump            +29 obj   block placement (section 17) -- not steerable
+m_AllocTracked       -13 obj   loop-entry null test + branch encodings
+vfs_ReadCompressed    +5 obj   prologue parameter-load hoist
+cm_ExCopyEntityData  -32 obj   folded constant stores in the ==2 clamp
+```
+
+None of the four is a source-shape lever that has not been tried, which is why
+the CMake link's position alignment has to come from the postlink's layout
+convergence rather than from matching every object size by hand.
+
+**`gm_AllocSpieler`'s first divergence is also a schedule hoist.**  At 0x10018898
+the source order is the reference's -- `*(int*)(0x100358a4 + idx*0x21c) = -1;`
+then `memset((void*)(0x100358fc + idx*0x21c), 0xff, 0x20);` -- but msvc6 hoists
+the memset setup (`mov ecx,8; mov eax,esi; lea edi,[edx+0x100358fc]`) above the
+store, while the reference stores first and then sets up `rep stosd`.  That is
+the first of the function's 194 mismatch runs and the pattern for most of them:
+same instructions, hoisted setup.
+
 **Round-95: the two remaining game-region size gaps are scheduling, not
 source shape.**
 
