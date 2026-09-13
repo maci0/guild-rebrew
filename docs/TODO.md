@@ -1,5 +1,46 @@
 # Blockers — 100% Round-Trip Goal
 
+## `merge-sweep` is blocked by jump-table pseudo-functions (2026-09-13, round 72)
+
+Round 71 concluded the merge question is really a partition question, and
+`rebrew merge-sweep` is the tool that searches partitions.  It does not run:
+
+```
+$ rebrew merge-sweep --dry-run --json --max-compiles 4
+{"error": "overlapping functions 0x1000ad40 (ends 0x1000af98) and
+           0x1000ad68: fix the registry before clustering", "code": 2}
+```
+
+The overlap is a jump-table artefact, not a registry mistake.  `srv_LogWinsockError`
+is 600 bytes at 0x1000ad40, and inside it sit sixteen Ghidra auto-named case
+labels:
+
+```
+0x1000ad68 case.0x1000ad61.10019  32      0x1000aea8 case.0x1000ad61.10007  32
+0x1000ad88 case.0x1000ad61.10012  32      0x1000aec8 case.0x1000ad61.10010  32
+...  (16 of them, 0x20 apart, plus a 248-byte one at 0x1000af48)
+0x10018272 case.0x10018211.15    190      (inside the function at 0x10018211)
+```
+
+Seventeen `case.*` entries in all, and they are registered in two places:
+`db/server.dll_functions.csv` (17 rows) and `binsync/functions/*.toml` (17
+files, each `name = "case.0x..."` with a `size`).
+
+Neither removal unblocks it, and both were reverted:
+
+* deleting the 17 CSV rows (`grep -v '|case\.'`) -- same error;
+* moving the 17 `binsync/functions/*.toml` aside -- same error.
+
+So the registry `merge-sweep` clusters comes from a third source that I did not
+identify.  `merge_sweep.py` builds it with `build_function_registry(funcs, cfg,
+ghidra_path=src/server.dll/function_structure.json)`, and that JSON contains no
+`case.` entries at all, so `funcs` is not the CSV either.  Finding where the
+case labels enter the registry is the next step; `rebrew catalog --export-ghidra`
+caches a Ghidra function list and is the likeliest candidate.
+
+Recording this rather than guessing: the tool that would answer the partition
+question is currently unusable, and the fix is upstream of the project tree.
+
 ## The merged cluster compiles, and what it buys (2026-09-13, round 71)
 
 Finishing the canonicalisation from round 70 -- four more prototypes, one
