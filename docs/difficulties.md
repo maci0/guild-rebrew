@@ -6,7 +6,7 @@ compilation or a link. Where a statement is a judgement rather than a measuremen
 
 Companion reading: `docs/msvc6-c-shapes.md` (front-end shapes), `docs/msvc6-allocator.md`
 (register allocation and slot maps), `docs/TODO.md` (round-by-round history and the CURRENT
-STATE block at the top).
+STATE block at the top), `docs/behavioral-verdicts.md` (per-function behavior verdicts).
 
 ---
 

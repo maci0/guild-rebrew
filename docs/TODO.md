@@ -4,6 +4,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-298 (2026-09-13): verdict ledger written.**
+
+- New `docs/behavioral-verdicts.md`: one row per residue function with its
+  behavioral verdict + round (19/19 covered). Cross-linked from
+  `docs/difficulties.md`. Future semantic questions start there, not in
+  ten round notes.
+- Residue baseline unchanged: **9,209**.
+
 **Round-297 (2026-09-13): Alchemist + CheckInventory reviews CLEAN —
 coverage complete.**
 
