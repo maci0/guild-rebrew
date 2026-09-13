@@ -26,16 +26,40 @@ function, but its first differing byte is at `0x100188fa`, which is **+0xaa — 
 bytes in** — and its instruction count is 1054 against the reference's 1056, a
 deficit of *two*.  A near-identical instruction stream over a 2,861-byte region means
 one early instruction is encoded at a different length, every byte after it is
-shifted, and the tail "differs" without being wrong.  So the residue number measures
-the *distance to the end of the function from the first divergence*, not the size of
-the error.  Two consequences:
+shifted, and the tail "differs" without being wrong.  A shifted region differs
+almost everywhere, so the residue number is *bounded by* the distance from the first
+divergence to the end of the function, and approaches it.
 
-- **The reward curve is a cliff, not a slope.**  Fixing the single early encoding can
-  snap thousands of bytes at once.  Budget accordingly: localise the first divergence
-  and the gap curve before touching anything else.
-- **Rank by residue, but work at the first divergence.**  The 1st-diff VA in the table
-  is the coordinate that matters, and for every large entry in it the first diff is
-  early in the function.
+**How far it approaches it, measured** (first-diff offset, remaining bytes, residue,
+ratio) — the honest version of the claim, because the ratio is not constant and the
+cascade explanation is strong for some of these and weak for others:
+
+| function | size | 1st diff | remaining | residue | ratio |
+|---|---|---|---|---|---|
+| CrashDumpUnhandledExceptionFilter | 2115 | +2 | 2113 | 1889 | 89% |
+| gm_AllocSpieler | 3689 | +170 | 3519 | 2861 | 81% |
+| cm_ExSellObjekt | 2057 | +75 | 1982 | 1421 | 72% |
+| gv_ExAllocGraveyardWorker | 1040 | +263 | 777 | 457 | 59% |
+| cm_ExCopyEntityData | 912 | +48 | 864 | 462 | 53% |
+| ls_LoadBuildingEntityState | 1463 | +60 | 1403 | 728 | 52% |
+| gm_AllocGebaeude | 1088 | +96 | 992 | 327 | 33% |
+| ServerMainThread | 2434 | +967 | 1467 | 371 | 25% |
+
+At the top of that table a single early encoding accounts for nearly the whole residue
+and the reward curve is a cliff.  At the bottom it does not: `ServerMainThread` matches
+its first 967 bytes exactly and then has genuinely distributed differences, so its 371
+bytes have to be worked individually.  **Read the ratio before choosing a strategy** —
+for CrashDump (+2, 89%) spend the budget localising one instruction at the top of the
+prologue; for ServerMainThread start at `0x10009767` and expect many small defects.
+Deciding this by the ratio avoids both failure modes: hunting a cliff that is not there,
+and sweeping a whole body that one instruction would have accounted for.
+
+Two consequences that do hold throughout:
+
+- **The 1st-diff VA is the coordinate to start at.**  For every large entry it is early
+  in the function, and it is the only place a cliff can be.
+- **A big residue number is not big wrong code.**  Rank by residue to choose *which*
+  function; then work at that function's first divergence, not across its whole body.
 
 This is the same effect Finding 57 describes for cross-composition comparisons,
 observed *within* one function.
