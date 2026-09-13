@@ -1873,3 +1873,6 @@ name = "g_tick_rate"
 type = "int"
 section = ".data"
 status = "UNCHECKED"
+
+["SERVER.0x10027104"]
+section = ".data"
