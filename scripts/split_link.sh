@@ -54,8 +54,12 @@ MAP="$WORK/map_full.json"
 
 echo "== split (member data, trimmed to the reference function's size)"
 rm -rf "$WORK/split"
+# `--split-rdata` puts each member's `.rdata` sections in their own objects so
+# they can be ordered independently (the split blob); it also lets them fold on
+# their own, which is worth 0xa0 of the prefix surplus with the prefix bytes
+# still byte-identical.  See docs/TODO.md rounds 129-131.
 python3 scripts/split_coff.py "${LIBS[@]}" --map "$MAP" \
-    --out "$WORK/split" --with-data --trim
+    --out "$WORK/split" --with-data --trim --split-rdata
 
 echo "== import thunks"
 rm -rf "$WORK/thunks"

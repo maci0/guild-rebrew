@@ -497,6 +497,18 @@ def main() -> int:
         "matched to stops multiplying the over-inclusion",
     )
     ap.add_argument(
+        "--split-rdata",
+        action="store_true",
+        help="emit a member's `.rdata` sections as their own per-section objects "
+        "(same VA, so the index order and the link are unchanged) while keeping "
+        ".data/.bss/.CRT$* bundled with the function object.  Separate plain "
+        "objects are what the split blob needs: a section whose bytes sit inside "
+        "rdata_restore.c's range has to land at its own reference offset, "
+        "between two pieces of the blob.  Splitting ALL the data sections "
+        "instead perturbs symbol resolution (crt0.obj gets pulled, `_main` "
+        "unresolved) - see docs/TODO.md round 130",
+    )
+    ap.add_argument(
         "--with-commons",
         action="store_true",
         help="(experimental) also emit the member's common symbols as a "
@@ -754,22 +766,41 @@ def main() -> int:
                 aliases = alias_index.get(
                     masked_body(coff.data, coff.sections[root_sec]), set()
                 ) - {symbol} - member_names
+            carry = data_secs if n == 0 and member not in data_done else None
+            rdata_only = set()
+            if carry and args.split_rdata:
+                rdata_only = {
+                    i
+                    for i in carry
+                    if coff.sections[i]["name"].startswith(b".rdata")
+                }
             (outdir / name).write_bytes(
                 build_object(
                     coff, root_sec, symbol, mapped, claimed, False, aliases,
                     # Once per member, not once per (member, library) group:
                     # the packs' data sections hold the same symbols, and a
                     # second copy is a duplicate definition.
-                    extra=(
-                        data_secs
-                        if n == 0 and member not in data_done
-                        else None
-                    ),
+                    extra=(set(carry or ()) - rdata_only) or None,
                     emit_commons=args.with_commons,
                     trim=entry_size if args.trim else None,
                     start=start,
                 )
             )
+            for k, i in enumerate(sorted(rdata_only)):
+                # Own object, same VA as the function object so the index sort
+                # keeps it right behind it and the default link is unchanged.
+                # `extra={i}` keeps the closure walk running from the section,
+                # which is what pulls the same-member .text its initialisers
+                # name (docs/TODO.md round 130).
+                dname = f"{va:08x}_{safe}_r{k}.obj"
+                (outdir / dname).write_bytes(
+                    build_object(
+                        coff, i, dname, mapped, claimed, False, set(),
+                        extra={i},
+                        emit_commons=args.with_commons,
+                    )
+                )
+                written.append((va, str(outdir / dname), f"{symbol}_r{k}"))
             if n == 0:
                 data_done.add(member)
             written.append((va, str(outdir / name), symbol))

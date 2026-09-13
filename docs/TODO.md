@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-131: the member `.rdata` sections are separable now — `split_coff.py
+--split-rdata`, wired into the pipeline and verified byte-neutral.**
+
+Round 130's recommendation was to split only the `.rdata` sections out and
+leave `.data`/`.bss`/`.CRT$*` bundled, which is what `--split-rdata` does.  Each
+of a member's `.rdata` sections becomes its own object (`<va>_<sym>_r<k>.obj`)
+at the same VA, with `extra={i}` so the closure walk still pulls the same-member
+`.text` its initialisers name.  `split_link.sh` passes it, and the vehicle is
+unchanged in every measured respect:
+
+```
+                       .text VS   .rdata VS   .data raw   members at VA   prefix   prefix bytes
+before the split        0x22af8     0x2fe1       0xe000        246/319    0x25c8   0 differ
+with --split-rdata      0x22af8     0x2fe1       0xe000        246/319    0x25c8   0 differ
+```
+
+(round 130's failure — `crt0.obj` pulled, `_main` unresolved — came from
+splitting *all* the data sections; keeping `.data`/`.bss`/`.CRT$*` bundled
+avoids it, and `--split-rdata` is documented in `split_coff.py --help` as the
+safe half.)
+
+**Measured and not taken:** simply *not linking* the new `_r*.obj` objects
+shrinks `.rdata` to `0x2f41` and the prefix to `0x2528` with the prefix bytes
+still byte-identical — but `.text` grows to `0x22d4f` and 22 `LIBCMT` members
+come back, because the omitted sections' symbols go undefined.  That is round
+130's trap again: the sections have to be *placed*, not dropped.
+
+So the pieces are all measured and in place for the split blob: the arrangement
+(round 129), the offsets of all 57 sections (round 130), and now the separate
+objects to place.  What is left is the `split_blob.py` step itself — locate each
+`_r*.obj` in the reference, sort by offset, emit `piece0, obj0, piece1, obj1,
+…` in place of `rdata_restore.c.obj`, drop the moved objects from the tail, and
+confirm the prefix reaches `0x2468` with zero mismatches.  Its remaining
+unknown is the pad LINK inserts between sections: round 129 measured `0x40` for
+a `0x3d`-byte section (`align 4`), and the locator's offsets are the check.
+
 **Round-130: the split blob's input exists — every surviving section is
 locatable — but unbundling them as separate objects breaks the link.**
 
