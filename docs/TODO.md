@@ -4,6 +4,26 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-263 (2026-09-13): two `rebrew` tool bugs fixed in the rebrew checkout;
+merge-sweep runs for the first time.**
+
+- `merge_sweep.py:329`: `zip(vas, vas[1:], strict=True)` raises for every
+  multi-function cluster (always) — now `strict=False` (ruff B905 requires
+  the explicit flag; the first attempt without it failed the ruff hook).
+- `catalog/registry.py`: `build_function_registry` kept Ghidra `case.0x...`
+  jump-table labels as functions, failing overlap checks — now skipped (they
+  are data inside their parent). Project `functions.txt` untouched.
+- Verified: `tests/test_merge_sweep.py` (31) + registry suites pass
+  (56 total); `rebrew merge-sweep --dry-run` now returns 5 clusters with
+  merge/split candidates instead of crashing. Committed in the rebrew
+  checkout (`986ba3d`).
+- NOT run: a live partition search. The dry-run proposes whole-cluster
+  amalgamations, and neighbor-merge is already measured-inert on the top
+  functions (Spieler/SMT blockers: identical objects with three neighbours
+  each side). A live sweep needs per-candidate link tests and a compile
+  budget — queued, not started.
+- Residue baseline unchanged: **9,209**.
+
 **Round-262 (2026-09-13): documentation round — rounds 1-9 findings promoted
 into the reference docs.**
 
