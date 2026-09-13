@@ -4,6 +4,20 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-270 (2026-09-13): postlink's 5 skipped slot operands verified benign.**
+
+- The `imports` fixer rewrites 29 moved IAT slot operands and skips 5 (bare
+  dwords in non-`FF 15`/`FF 25` position). Located all 5 in the pre-fix
+  image: they are `mov reg,[IAT]` loads (e.g. `8b3d84410210` at 0x10009ead).
+  The WS2_32 ordinal slots ARE permuted between our link and the reference
+  (15 remapped: ordinal 9 lives at 0x10024184 in ours, ordinal 21 there in
+  the reference), so the skip looks dangerous — but all 5 instructions are
+  byte-identical after postlink, and correctly so: the fixer copies the IAT
+  region verbatim, so slot contents agree and the assignment permutation no
+  longer matters. The FF15-only conservatism is safe on this tree. No tool
+  change, no source change.
+- Residue baseline unchanged: **9,209**.
+
 **Round-269 (2026-09-13): flag-sweep audit on the four unswept
 flag-sensitive functions; heuristic over-promises.**
 
