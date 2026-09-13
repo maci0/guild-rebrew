@@ -7,12 +7,20 @@
 **Verified state at handoff.** `rebrew lint` 187/187 (0 errors, 2 warnings); a full
 `bash scripts/gate.sh` passes — 0 compile/link errors, `rebrew verify --full` 281/283 against
 the 281 baseline; and `bash scripts/split_link.sh` + `postlink_residual.py --write` reproduces
-`build/server.dll` at **9,280 bytes of `.text` residue in 286,720 bytes**, so the committed tree
+`build/server.dll` at **9,209 bytes of `.text` residue in 286,720 bytes**, so the committed tree
 and the deliverable agree. Every non-`.text` section is byte-identical, and the import table is
 100 entries matching in set and order. All remaining work is `.text` codegen.
 
-**At the end of the session one agent was still in flight**: the one completing the faithful
-`CrashDump` version (lead 1 below).  The other — the last three small functions — has since
+**The faithful `CrashDump` work landed after all: -71 linked.**  Candidate `F3`
+(`.scratch/cand/F3_y2_plus_nf.c`) is the only one measured that lands both jump tables exactly
+at 0x72c/0x7ac (code 1836, +-0), giving CrashDump 1668 -> 1597 and the image 9280 -> 9209.
+**Read its caveat before touching it**: it reaches those offsets by qualifying several locals
+`volatile` so the allocator keeps them in memory, which is a *byte-fitting* device rather than a
+recovered mechanism -- for szDateLen/szTimeLen/excCode/fail_line the reference keeps the value
+in a register -- and its frame is 0x284 against the reference's 0x280.  It is accepted because
+`volatile` changes no observable behaviour (unlike a swapped argument, fixed at +1 earlier); if
+the allocator tie breaks the other way, frame 0x280 and exact tables arrive together and should
+measure above 600 matched.  Lead 1 is therefore **spent**; do not re-derive it.  The other — the last three small functions — has since
 finished: `vfs_ReadCompressed` was improved by **-1 linked** (residue 9,281 -> 9,280, its row
 24 -> 23) by unqualifying only the post-loop test, while `cm_ExProdObjekt` and
 `cm_ProcessCommandQueue` were left at HEAD because their `matched-reloc` already equals their
