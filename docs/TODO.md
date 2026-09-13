@@ -1,5 +1,44 @@
 # Blockers — 100% Round-Trip Goal
 
+## `/OPT:REF` needs `/Gy-` across the whole build, not just the split set (2026-09-13, round 82)
+
+Round 81 proposed emitting the split objects' `.text` sections as **non**-COMDAT
+so `/OPT:REF` would keep them (command-line objects' ordinary sections are
+never dropped) while discarding only the duplicated `.rdata` COMDATs.  Tested
+by clearing `IMAGE_SCN_LNK_COMDAT` (0x1000) on every `.text` section
+`split_coff.py` emits, and rebuilding the split set:
+
+```
+                        .text                    .rdata                  .data
+split_poc          diff 86608  vsize 0x22af8   diff 2237  vsize 0x33b1   diff 25311  vsize 0x1746c28
+non-COMDAT .text   diff 86608  vsize 0x22af8   diff 2237  vsize 0x33b1   diff 25311  vsize 0x1746c28
+```
+
+byte-identical under `/OPT:NOREF` -- a useful fact in itself, the change is
+free -- but `/OPT:REF` on the same object set still collapses the image:
+
+```
+non-COMDAT + /OPT:REF   .text 0x118b0   .rdata 0x32f1   .data 0x1745c7c
+                        .text loses 0x11248
+```
+
+So the split objects were not what `/OPT:REF` was dropping.  It is the **game**
+objects: every one of the 196 CMake objects has COMDAT `.text` sections
+
+```
+spiel.c.obj   .text chars 0x60501020   COMDAT=YES     (5 such sections)
+```
+
+which is MaSVC's `/Gy` function-level linking, and `/OPT:REF` discards any that
+the entry point cannot reach.
+
+So the `/OPT:REF` route needs `/Gy-` on the whole build, not just on the split
+set -- a compiler-flag change across all 196 objects, which is a different and
+much larger experiment than anything attempted so far, and one that would also
+change `.text` padding (round 71 measured 32 bytes of per-object padding for
+just 25 files).  Recorded as the next step for the `.rdata`/`.data` overlap;
+reverted, tree clean.
+
 ## The literal alias works on symbols, not on bytes (2026-09-13, round 81)
 
 Round 78 concluded the duplicated `.rdata` needs the members' symbols to
