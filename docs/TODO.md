@@ -29,6 +29,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-312 (2026-09-13): climb on Tracked — no adjacent-swap win.**
+
+- The 105-127 phase-shift block traced to a 4-instruction order cluster
+  (`lea edi` first vs last). `rebrew climb` (aligned, 28 statements):
+  best == baseline, nothing applied. The lea position is
+  demand-scheduled; statement order exhausted here too. Tree untouched.
+- Residue baseline unchanged: **9,209**.
+
 **Round-311 (2026-09-13): FPU census — no unexamined site.**
 
 - FPU `**` lines per function: Spieler 187, Alchemist 13, CopyData 4,
