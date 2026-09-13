@@ -1,5 +1,40 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-154 (same round): one authority for compile flags.**
+
+`gm_AllocSpieler`'s bug was not a stray flag, it was three different answers to
+"what flags does this file compile with": the CMake build reads the `.c`'s
+`// CFLAGS:` (per file), `rebrew test/verify/match/prove` read
+`rebrew-functions.toml` (per function), `annotation.py`'s overlay lets the TOML
+overwrite the inline value, and `lint`'s own merge lets the inline value win.
+The divergence was silent — lint keeps the inline value in `found_keys` and
+`metadata_sourced_keys` then suppresses W019 — and W019's advice ("migrate the
+inline CFLAGS into the TOML") is advice that changes what the build compiles.
+
+Decided with the user: the TOML is the store, per-file is the granularity, and
+per-function entries are overrides.  Two changes landed in rebrew:
+
+- `lint` now reports an inline `// CFLAGS:` that disagrees with the metadata in
+  *codegen* flags (W019, the treatment `// SIZE:` already had; `/D` excluded).
+- `rebrew cmake-flags` resolves every annotated source file through the tool
+  chain and writes a CMake include setting `COMPILE_FLAGS` for it, so the build
+  can compile what the tools measure.  A file whose functions resolve to
+  different codegen flags is an error rather than an average; `/D` defines are
+  not emitted (the `DREBREW_ALLOW_NAKED` guard must not reach the shipped
+  build) and each omission is printed as a note.
+
+Run here it emits 180 of 187 files and reports exactly three genuine in-file
+conflicts.  Switched over, it would differ from the current build in six files
+— `crt_region/{dllmain,initterm,crt_init}.c` (`/O1` vs `/O2`),
+`ls_LoadTownData.c` (`/Ox`), `srv_SeedRandomWithTime.c` (`/O1`),
+`srv_LoadBuf.c` (`/Ot`) — i.e. metadata flags the build never used.  Those six
+are inert against the target (the functions are byte-identical today under
+`/O2 /Gd`), so the migration is: reconcile those six, resolve the three
+conflicts, point `CMakeLists.txt` at the generated include, add
+`rebrew-functions.toml` to `CMAKE_CONFIGURE_DEPENDS` (which also kills the
+"a bare rebuild reuses stale baked flags" footgun hit last round), and delete
+the inline `// CFLAGS:` lines.
+
 **Round-154: an unattended statement-move hill-climb — and the objective it
 needed.**
 
