@@ -4,6 +4,30 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-256 (2026-09-13): CrashDump HEAD is length-exact with distributed
+residue — the V2 +59 length plan is obsolete; decrypt-loop counter probed
+twice, both reverted.**
+
+- `gaptrace` on HEAD: real code ends reference 0x0850, ours 0x0850 (tables
+  already at 0x72c/0x7ac via F3); gap oscillates +50/-43 and returns toward 0
+  repeatedly — cause 3 (distributed), no monotone cascade. The round-251 plan
+  (+21/+12/+17/−15 = +35 net toward V2's 1777→1836) was written for V2's body;
+  applying it to HEAD's exact-size 2115 object would overshoot. Lead 1 as
+  worded is spent; what remains on this function is the frame (now 0x284 vs
+  0x280 — F3's volatiles already closed half the documented 0x28c gap), the
+  4-reg-vs-2-reg-deferred prologue, and distributed hunks. Do not re-derive.
+- Decrypt-loop `i` residency (+21 site) probed twice on HEAD (base 530/840,
+  obj 2128): separate plain counter `di` → byte-identical metrics (allocator
+  keeps it in edx, as Finding 54 predicts for a use-shape no-op); `volatile`
+  counter → 413/799, obj 2144 (span break: COMDAT 2128 exceeded, tables move).
+  Both reverted. The reference spills `i` under 5-value register pressure
+  (eax key, edx tmp, ecx ptr, esi bound, ebx base); ours colors the same five
+  values with `i` in edx unspilled. No C spelling tried creates that pressure.
+- Residue baseline unchanged: **9,209**. Next: cm_ExSellObjekt is parked, the
+  small functions are allocator ties — the honest state is that every live
+  function is at a measured wall and further rounds should attempt new
+  techniques (different compiler, allocator steering), not more spellings.
+
 **Round-255 (2026-09-13): CrashDump frame fact re-verified on the current body;
 a stale-object trap documented; gm_AllocSpieler lead-2 inventory corrected.**
 
