@@ -71,6 +71,48 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-185: `vfs_ReadCompressed` -62 (committed by accident), and the real-length
+sweep needs the right window.**
+
+Residue **9,645** (from 9,707).
+
+*vfs_ReadCompressed 134 -> 72, link-measured.*  Its agent moved `volatile` from the
+declarations to the use sites: plain `int done; int result;` with
+`*(volatile int*) &x` at the real accesses.  A volatile *declaration* makes the two
+entry zero-stores scheduling barriers, so msvc6 leaves the `handle` load+test behind
+them; qualifying the accesses instead reproduces the reference prologue byte for
+byte (`mov eax,[esp+0xc] / push ebx / push ebp / push esi / test eax,eax / push edi
+/ store / store / jne`).  Two sub-facts worth keeping: the one plain read
+`int acc = result;` must stay plain (qualifying it costs 32 bytes), and on the old
+body merely casting the two *init* stores already gives 382 -- so it is the init
+stores, not the declaration, that are the barrier.  This is the converse of docs
+section 39, which defers a load via a volatile read.
+
+*It was committed without being measured, by accident.*  `git add -A` in round 184
+swept the agent's working-tree edit into `6e5b7c22` (whose message names only
+vfs_OpenStream), and `linktest.sh` recompiles only the files it is named, so the
+change sat in the tree uncompiled and unmeasured for a round.  It happened to be a
+-62 win.  **Never `git add -A` on this tree while agents are working** -- commit
+named paths only, or the commit silently carries unvalidated work.  The same
+mechanism put an agent's `cm_ExSellObjekt` edit into an earlier commit.
+
+*The real-length sweep needs the window to reach past the function.*  Round 184's
+lever -- a real COMDAT body shorter than the reference's puts the out-of-line jump
+table / case map at the wrong offset -- generalises, so `.scratch/reallen.py`
+compares the reference's real body against ours for every holdout.  But the first
+run was wrong for exactly the functions it was written for: the metadata `size`
+(667 for vfs_OpenStream) covers only the *code*, so the reference window stops
+before the table and reports a bogus +34 for a function already fixed.  The window
+must run to the **next function's VA**, not to the metadata size.  The reliable
+statement is the direct one: reference content ends at the last non-0x90 byte
+before the next symbol.
+
+For the record, the first (untrustworthy) run reported CrashDump -2, cm_ExSellObjekt
++9, ls_LoadBuildingEntityState -3, cm_ExCopyEntityData -9, vfs_ReadCompressed +4,
+gm_FindNextFilteredEntity -4.  `gm_AllocGebaeude` reads +0 once measured properly --
+its CSV size 1088 is padded, its real content is 1078 like ours, and its jump table
+and case map match byte for byte -- so it is *not* a length case.
+
 **Round-181: `cm_ExSellObjekt` -19, and the out-of-function residue explained.**
 
 Residue **9,743** (from 9,762).
