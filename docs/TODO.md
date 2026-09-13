@@ -1,5 +1,35 @@
 # Blockers — 100% Round-Trip Goal
 
+## The blob duplicates the objects placed after it (2026-09-13, round 67)
+
+Round 66 left the 0x4000 `.data` raw surplus unexplained.  Locating the blob
+exactly explains it: the best shift for `ref[0x3000:0x5000]` into our `.data`
+is **+0x1e8**, so the blob sits at 0x31e8, and the surplus region
+[0xe000:0x12000] is a *third* copy of content the blob already carries.
+
+```
+ref .data 0x3000  'Aemter(): Can't load mamt'   ours 0x2858 and 0x31e8
+ref .data 0x6400  'cm_ExCreateGeb(): failed'    ours 0x65e8 and 0xe284
+```
+
+`0x65e8` is the blob's copy (`0x6400 + 0x1e8`); `0xe284` is the surplus's.  968
+of the surplus's 1024 16-byte blocks also occur inside `ref[0x3000:0xe000]`.
+
+The mechanism is the cut itself.  `.data` is placed in response-file order, so
+the blob divides the game objects into two groups: those before it contribute
+the 0x31e8 prefix, those after contribute the 0x4000 surplus -- and the surplus
+is content the blob also reproduces.  That is the duplication round 59
+measured as 105 extra string occurrences, now localised: **it is the objects
+placed after the blob**.
+
+Which means the cut cannot be tuned away.  Moving it trades prefix against
+surplus but never removes the overlap; the two arrangements are "objects, then
+blob" and "blob, then objects", and either way one of them duplicates the
+other's content.  Resolving it needs either the blob reduced to the bytes the
+objects do *not* emit, or the objects' `.data` order corrected so the blob is
+unnecessary -- both of which are the object-order problem, and the second is
+what `rebrew merge` exists for.
+
 ## Dropping the split objects' data sections does not help (2026-09-13, round 66)
 
 The `.data` gap is bigger than the blob placement work has been addressing, and
