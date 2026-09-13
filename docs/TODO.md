@@ -1,5 +1,70 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-112: the `.rdata` surplus, found and mechanically validated.**
+
+`.text` is not the only section that has to converge, and `.rdata` is currently
+the larger gap:
+
+```
+                reference        CMake build     split set
+.text vs        0x22846          0x223d6 (-0x470) 0x22af8 (+0x2b2)
+.rdata vs       0x2e81           0x32d1  (+0x450) 0x33b1  (+0x530)
+.data vs        0x174059c        0x1744b18        0x1746c28
+.reloc vs       0x10374          0x7f14           0x81d8
+```
+
+`.data` and `.reloc` are converged by `rebrew postlink` (it copies the
+reference's `.data` and replaces `.reloc`), and the `.rdata` import bookkeeping
+is too -- but postlink only governs the IAT and the import descriptors; the
+rest of `.rdata` is reproduced by our own `crt_region/rdata_restore.c`.
+
+**The surplus is one duplicated block.**  Same-offset match per 1 KB window of
+`.rdata`:
+
+```
++0x0000 (IAT + import bookkeeping)  82.1%   <- the addresses postlink rewrites
++0x2400                            56.0%
++0x2800                             3.8%
++0x2c00                             3.6%
+```
+
+and the last two windows are not garbage -- they are a **second copy of the CRT
+message strings**:
+
+```
+                        "runtime error "   "R6028"
+original/server.dll           1 (0x26110)     1 (0x26150)
+build/probe2.dll              2 (0x26110, 0x26724)  2 (0x26150, 0x26764)
+build/split_poc.dll           2 (0x26110, 0x26768)  2 (0x26150, 0x267a8)
+```
+
+`crt0msg.obj` is pulled in for `__NMSG_WRITE` / `__GET_RTERRMSG`, and its 17
+`??_C@...` message literals are emitted *again* after `rdata_restore.c`'s blob,
+which already carries those bytes at the reference's offsets.  The extra copy
+starts at VA 0x10026724 and runs `"runtime error "`, `"TLOSS error\r\n"`,
+`"R6028\r\n- unable to initialize heap\r\n"` ... `"R6002\r\n- floating
+point not loaded\r\n"` -- the full `crt0msg` string table.
+
+**The fix mechanism is validated.**  A TU that re-establishes those 17 strings
+as real C literals compiles them to the *same* `??_C@...` COMDAT names, so the
+linker discards LIBCMT's copies instead of emitting both.  Measured with
+`.scratch/keepcrt.c` added to a manual link:
+
+```
+.rdata VirtualSize  0x32d1 -> 0x3091   (-0x240)
+crt0msg.obj's ??_C@... data symbols:  gone from the map
+__NMSG_WRITE / __GET_RTERRMSG:        still from LIBCMT, as the reference has them
+```
+
+It is not yet a fix because that TU's own literals then land elsewhere
+(`.data`, at file offset 0x36da4), so the strings are still emitted twice --
+just in different places.  Completing it needs the 17 strings **removed from
+`rdata_restore.c`'s blob** and re-emitted from a TU carrying
+`// DATA: SERVER 0x10026110` so `scripts/order_sources.py` places them at the
+reference's offsets, in the gap the blob then leaves.  That is the concrete next
+step on the `.rdata` half; the blob is one contiguous array, so it splits into
+`[0x252e8 .. 0x26110]` + literals + `[0x269b0 .. 0x26608]`.
+
 **Round-111: position alignment is complete, and the asm constraint is
 audited.**
 
