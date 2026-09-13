@@ -4,6 +4,21 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-268 (2026-09-13): TU theory retired (no LTO in c2); triple-rotation
+second probe inert.**
+
+- Translation-unit composition cannot change c2 codegen: MSVC6 has no
+  interprocedural optimization, and the tree has no static helper functions
+  (no inline/outline lever exists). The two recorded neighbor-merge inerts
+  are sufficient; a third proves nothing. TU work is confined to the
+  already-queued live partition search.
+- `gm_ObjectsAvailble` numbering-shift corollary probed: removing the `def`
+  local (inlining `defbase + 0x2e + inner * 2` at its single use) to un-shift
+  the `(row, base, inner)` rotation → identical swap persists (same 18
+  structural lines). The rotation is not from a spurious local. Reverted.
+  Two probes, both inert: the triple is a colorer fixed point.
+- Residue baseline unchanged: **9,209**.
+
 **Round-267 (2026-09-13): PROVEN audit + ranked-leads revision.**
 
 - Audited all 17 PROVEN functions: 16 carry residue (each at a verified wall,
