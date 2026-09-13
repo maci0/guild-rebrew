@@ -178,7 +178,17 @@ rsp.write_text(" ".join(tokens))
 print(f"swapped the CMake data blob for {obj}")
 RSP
 
-cmd=$(sed "s#@CMakeFiles/server_dll.dir/objects1.rsp#@${WORK#build/}/rsp.rsp#;
+echo "== pad short functions (so the symbols after them keep their reference VAs)"
+# `make_split_rsp.py` orders the link by reference VA, so an object whose .text
+# comes out SHORT drags everything after it and the composition stops being
+# position-aligned -- which makes a better-shaped but differently-sized function
+# unusable.  A .text-only pad object is inserted after each short one; see
+# scripts/pad_short_functions.py.
+python3 scripts/pad_short_functions.py --rsp "$WORK/rsp.rsp" \
+    --out-dir "$WORK/pad" --out-rsp "$WORK/rsp_pad.rsp"
+RSP_PAD="${WORK#build/}/rsp_pad.rsp"
+
+cmd=$(sed "s#@CMakeFiles/server_dll.dir/objects1.rsp#@${RSP_PAD#build/}#;
            s#/out:server.dll#/out:split_poc.dll /MAP:split_poc.map#;
            s#/implib:server.lib#/implib:split_poc.lib#;
            s# /pdb:[^ ]*##" build/CMakeFiles/server_dll.dir/link.txt)

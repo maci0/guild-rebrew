@@ -71,6 +71,42 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-169: the vehicle now pads, and the first size-changing win is in.**
+
+10,934 -> 10,846 differing bytes.  `cm_ExCopyEntityData` 555 -> 467.
+
+Round 168 named the blocker: the layout is `make_split_rsp.py`'s order (sorted by
+reference VA) plus each object's section sizes, so a function that compiles
+SHORT drags every symbol after it.  That made any better-shaped but
+differently-sized function unusable -- the two-arm `0x7f` clamp on that function
+measures +50 matched bytes and -16 of size, and adopting it collapsed the
+composition to 1/319 symbols aligned and 86,425 bytes of residue.
+
+`scripts/pad_short_functions.py` fixes that: for every `<source>.c.obj` whose
+`.text` is smaller than the reference sizes of the functions it defines, it emits
+a one-section `.text` object of `want - have` zero bytes and inserts it into the
+response file immediately after.  `scripts/split_link.sh` now runs it before the
+link.  With nothing short the step is a byte-for-byte no-op (verified: 246/319
+and 10,934 unchanged), and with the two-arm clamp in place it pads
+cm_ExCopyEntityData 896 -> 912, the composition stays aligned at 246/319, and the
+object's +50 matched bytes finally show up in the link: -88.
+
+Two COFF details cost a build each and are worth recording, because nothing in
+the pipeline's own emitters had to be written from scratch before:
+
+- a section needs its **own section symbol** (name `.text`, storage class 3, one
+  aux record) before any other symbol, or LINK answers `LNK1143: invalid or
+  corrupt file: no symbol for comdat section 0x1`;
+- the SectionDefinition aux record is **18 bytes** (Length, NumberOfRelocations,
+  NumberOfLinenumbers, CheckSum, Number, Selection, 3 unused).  Packing 16 shifts
+  every symbol after it and LINK reports `LNK1106: cannot seek to 0x705f0082` --
+  the ASCII of the section name read as an offset.
+
+The step only pads SHORT objects; 149 objects still compile *longer* than their
+reference sizes (gm_AllocSpieler +7, spiel622.c +124, spiel_dumpD.c +25, ...) and
+are reported.  Those cannot be cut without losing code, so the size gap there
+still has to be closed in the source.
+
 **Round-168: why a better object cannot be bought, and the mechanism behind it.**
 
 No byte change (10,934).  Every per-function lever is now measured flat: the
