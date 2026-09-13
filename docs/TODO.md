@@ -2,6 +2,46 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+**Round-250: hunk composition quantified, and it corrects the "everything is an allocator
+tie-break" conclusion for the largest function.**
+
+`scripts/instr_diff.py <va> --built build/server.dll` classifies every hunk, and the split is
+decisive about *which kind* of work is left:
+
+| function | hunks | same-kind (regs/addr) | different-kind (shape) | insert/delete (length/layout) |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | 175 | 33 | 20 | **122** |
+| `CrashDumpUnhandledExceptionFilter` | 101 | 26 | 26 | 49 |
+
+**Correction to round 248/249.** Those rounds concluded from the *small* functions that the
+remaining residue is dominated by register-allocation tie-breaks.  That is true of
+`gm_ObjectsAvailble` / `srv_LoadBuf` / `m_AllocTracked`, and it is **not** true of
+`gm_AllocSpieler`, where 122 of 175 hunks are *insert/delete* — length and layout differences,
+not register choices.  "Distributed (168 hunks)" was accurate but hid which kind of difference
+dominates; do not read the small-function verdict across to the big one.
+
+**Two concrete leads on `gm_AllocSpieler` from the same run** (kind multiset, addresses and
+registers collapsed — 84 reference-only against 82 built-only):
+
+- `add R,R` x4 in ours against `lea R,[R+R]` x4 in the reference — a 1-byte strength-reduction
+  difference per site, and the reference uses the `lea` form.  (Allocator Finding 54 says
+  strength reduction follows the value's uses; this is the first site inventory of it.)
+- **`mov R,[R+0x20]` x8 in the reference against `mov R,[R+0x2c]` x4 plus `mov [R+0x2c],R` x3
+  in ours — a 0xc (12-byte) struct-field offset difference.**  Worth a look as a possible
+  wrong member/offset in the source rather than an allocator effect, since it is a *value*
+  difference and the previous passes were working FPU forms and zero-extends.
+- plus the known `and R,0xffff` x6 against `xor R,R` x4 (the volatile zero-extend wall, shapes
+  section 52).
+
+**`CrashDumpUnhandledExceptionFilter` shows the same 0xc fingerprint and it is a *consequence*
+there**, which is useful confirmation: `lea R,[R+0x90]` x5 and `[R+0x188]` x4 in the reference
+against `[R+0x9c]` x5 and `[R+0x19c]` x3 in ours, and `mov R,[R+0x20]` x3 against
+`mov R,[R+0x18]` x3.  Every one of those is an `esp`-relative slot shifted by 0xc, exactly the
+reference's 0x28c against our 0x280 frame.  So for that function the offsets are *symptoms* and
+the frame is the root — the agent working it is on the right target, and fixing the frame
+should move a large share of the 49 insert/delete hunks at once.
+
+
 **Round-249: the full gate passes end-to-end, and two more functions are closed.**
 
 **GATE: pass** — the first complete run with a clean tree in many rounds: `rebrew lint`
