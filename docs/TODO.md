@@ -4,6 +4,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-283 (2026-09-13): Spieler lead-2 sub-item retired (multiset
+conflation).**
+
+- Round-250's "`mov R,[R+0x20]` x8 vs `[R+0x2c]` — possible wrong member"
+  dissolves on current data: object-level shows ONE such site (idx 452,
+  esp-relative slot = Finding 55, allocator); linked-level 0x20 hits are
+  FPU spill slots (`fst/fld [esp+0x20/0x24/0x28]`) and genuine field-0x20
+  float reads present on both sides. The multiset collapsed esp-relative,
+  struct-field, and FPU-staging forms into one bucket. No wrong member;
+  no probe. Lead 2 is now solely the `lea`/`add` use-shape wall.
+- Residue baseline unchanged: **9,209**.
+
 **Round-282 (2026-09-13): naive imm-diff semantic audit — false-positive
 generator, one arity check banked.**
 
