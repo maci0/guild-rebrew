@@ -2285,3 +2285,191 @@ reference lacks (+3 B, aligned +6, honest -47) -- so the rotation is a genuine
 fixed point, not a spelling problem.
 
 `src/server.dll/DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c`
+
+## 65. an if/else-if chain and a real `switch` emit their jump tables in OPPOSITE order
+
+The strongest read-out of dispatch form found so far, because it is a *structural*
+difference a byte compare sees as a region of total mismatch.
+
+On `CrashDumpUnhandledExceptionFilter` (0x10002770), written as a hand-rolled
+`if/else if` chain over the exception code, the COMDAT's two out-of-line tables are
+emitted **10-entry then 5-entry**.  Rewritten as one `switch (excCode)` with the same
+case set and the same bodies, they come out **5-entry then 10-entry** -- which is the
+reference's order (5-entry at 0x10002e9c, 10-entry at 0x10002f1c).
+
+Measured with the switch rewrite *alone*, nothing else changed:
+
+```
+matched        231 -> 387
+matched-reloc  655 -> 811
+aligned        283 -> 366
+drift at 0x10002a43   +470 -> -26
+```
+
+So the table order is not cosmetic and not downstream of the case bodies: `switch`
+selection changes the block layout, and the fix is to *use a switch*, not to try to
+reorder tables from C.  Corollary: the two hand-computed index maps (0x69 bytes for the
+`-0xc0000025` switch, 0x6f for `-0xc000008f`), the `lea ecx,[ecx+0]` 3-byte align pad and
+the 1-byte `90` pad are all *consequences* of that layout and cannot be fixed directly.
+
+**Use it as a diagnostic in the other direction too:** when a function's residue contains
+a region that looks like total mismatch and the source has a long `if/else if` chain over
+a dense integer key, try the `switch` form first.
+
+`src/server.dll/Units/Error/Error_c/CrashDumpUnhandledExceptionFilter.c`
+
+## 66. a dead store in the source appears as a store in the reference — comparing stores is a dead-code oracle
+
+`frameInfo[0] = (int) pDbgBuf;` occurred twice in the source on
+`CrashDumpUnhandledExceptionFilter` (0x10002770); the reference has exactly **one** store
+there, and the pre-chain copy is absent (no store between `mov edi,[esp+0x294]` at
+0x100029f7 and the first `cmp eax,0xc000008e` at 0x10002a02).  Deleting the first copy:
+`ret` moves -8 bytes, `matched` 442 -> 475, span 2128 -> 2112, no warning.
+
+The general technique: **count the stores to a location in the reference and compare with
+the source.**  The compiler cannot remove a store the reference contains, and it will not
+invent one, so a store-count difference is a source-level contradiction -- a duplicated
+assignment, or one the original never had.  This is much cheaper than reading a diff, and
+it works on a location whose address is a frame slot rather than a symbol.
+
+`src/server.dll/Units/Error/Error_c/CrashDumpUnhandledExceptionFilter.c`
+
+## 67. msvc6 does not reorder calls, so call order in the source is recoverable from the reference
+
+`CrashDumpUnhandledExceptionFilter` (0x10002770): in the hCrashLog-OK path the reference
+calls `GetCurrentProcess` ([0x1002402c], 0x100028fb) **before** the two `szLine`/`szSep`
+memcpys (0x10002901..0x10002923) and `SetFilePointer` ([0x10024028], 0x1000294c); the
+source had `GetCurrentProcess` after `SetFilePointer`.  Hoisting it: `matched` 475 -> 478,
+everything else unchanged.
+
+Unlike register allocation or block layout, **statement order across calls is a
+source-order property**, so the reference's call sequence reads directly into a
+reordering.  Worth checking early on a mismatching function: list the calls in reference
+address order and compare with the source's order.
+
+`src/server.dll/Units/Error/Error_c/CrashDumpUnhandledExceptionFilter.c`
+
+## 68. a redundant null test after a search loop is NOT eliminated, and its width matters
+
+`gm_AllocGebaeude` (0x100174d0).  Written
+
+```c
+while (q != NULL && *q == 0xfd) { q = next(); }
+if (q != NULL) { store; }
+```
+
+msvc6 keeps a redundant 4-byte `cmp eax,ebx; je` for the second test.  The equivalent
+
+```c
+while (q != NULL) { if (*q != 0xfd) { store; break; } q = next(); }
+```
+
+matches the reference's rotated form (`jne top; jmp out`) and costs 4 bytes less -- and
+because those 4 bytes sit *before* a 600-byte aligned region, they shift the switch and its
+jump table: `matched` 503 -> 830.
+
+Lever, and a reminder that the value of a byte is positional: 4 bytes here were worth 327
+matched bytes, while 4 bytes elsewhere in the same function were worth nothing.
+
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocGebaeude.c`
+
+## 69. an `__asm` block is a scheduling barrier — and this project's C-only constraint forbids using it as one
+
+**Mechanically real:** on `gm_AllocGebaeude` (0x100174d0) inserting
+
+```c
+__asm { nop nop nop }
+```
+
+between `idx = comp & 0x7fff;` and the `g_item_def_table` address expression made msvc6
+move `mov ebx,[g_item_def_table]` across the two surrounding instructions, which flipped the
+loop's forward `je` from rel8 to rel32 and realigned a 129-byte loop body onto the
+reference's offsets.  With three further equivalent changes it measured `matched` 683 -> 830
+and `matched-reloc` 823 -> 970 at an unchanged COMDAT of 1088.
+
+**It is not usable here.**  The objective for this recompilation is C only, with a single
+exception: hand-written assembly that the *original* code itself contained.  A `nop`
+barrier is neither -- it is a directive to our compiler to reproduce a schedule no C
+spelling produces, so it manufactures bytes the source does not explain.  The pre-existing
+`__asm` block-fill in this same file is admissible because the original has a 24-byte
+hand-written fill prelude there (Finding 19); the barrier is not.
+
+Measured cost of honouring the constraint: removing only the barrier from that candidate
+gives `matched` 377 (worse than HEAD's 683) and drops the COMDAT to **1072**, which moves the
+jump table and breaks the composition.  So **the entire +147 rested on the barrier**, and
+`gm_AllocGebaeude` was reverted to HEAD rather than shipped.  Recorded so the lever is not
+re-derived as "free": it is real, it is large, and it is off-limits.
+
+**What remains legitimate:** when a schedule is unreachable from C, look for a *source*
+mechanism with the same effect -- an extra local that extends a live range, a
+`volatile` qualification that pins a value to memory (section 60), or a statement order
+that changes which block is created first (section 59).  Those are C, and their effect on
+the scheduler is explainable.
+
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocGebaeude.c`
+
+## 70. operand order in a commutative address expression is inert; only the *nesting* steers
+
+`ls_LoadBuildingEntityState` (0x100128f0): eight spellings of the same address
+expression -- swapping the two operands of the `+`, reordering the addition chain, naming
+an intermediate -- are **byte-identical**.  What does steer codegen is how the additions are
+*nested*: `(load_result + N) + ptr` and `(ptr + load_result) + N` are different, because the
+first computes a scaled index off `load_result` and the second folds `ptr` into the base.
+
+So when an operand shape is wrong, the lever is the parenthesisation, not the order of a
+commutative operator.  A sweep over operand orders is wasted budget; a sweep over nestings
+is not (and this site was already at its optimum).
+
+`src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c`
+
+## 71. `memset(p, 0, N)` is an intrinsic that is not value-tracked, so it beats `p[0]=0; p[0]|=1`
+
+`ls_LoadBuildingEntityState` (0x100128f0).  Writing the state block as
+
+```c
+memset((void*) state_ptr, 0, 0x10);
+state_ptr[0] |= 1;
+*(int*) (esi + 0xa5) = -1;
+```
+
+reproduces the reference's state block **instruction for instruction** (34 bytes, 11
+instructions), where `p[0] = 0; p[0] |= 1;` folds to a single store.  The reason is that the
+`memset` intrinsic is opaque to the value tracker: msvc6 cannot see that the following
+`|= 1` only touches a byte it just zeroed, so it keeps both the fill and the read-modify-write.
+
+**Caveat that makes it a wall in practice here:** it is byte-neutral at this site
+(`matched` 645 -> 645, `matched-reloc` 879 -> 869) because the block is compared at offsets
+that are already +2 wrong, and the extra 4 bytes remove the compensating length that gave the
+only aligned stretch in the tail.  A shape that is locally perfect still buys nothing when
+its position is wrong -- check the running delta at the block *before* spending probes on
+its internal shape.
+
+`src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c`
+
+## 72. a callee-saved sentinel and a CSE can be one mechanism, not two
+
+`ls_LoadBuildingEntityState` (0x100128f0).  The reference caches the `-1` sentinel in `ebp`
+(`or ebp,-1` once, `mov [..],ebp` at three sites) and its read loop also relies on a CSE.
+The two are **not separable**: give either of the two read-loop sites the other address
+nesting (section 70) and the CSE disappears *and* the sentinel goes with it -- `push ebp`
+1 -> 0, `or ebp,-1` 2 -> 0, `mov [..],0xffffffff` 0 -> 3, `matched` 645 -> 79.
+
+Practical rule: when two register-allocation effects vanish together, they are one
+decision upstream, and the 2-instruction form you are trying to fix is the *cheap* half of
+it.  Here rematerialising the immediate costs +3 bytes, but rematerialising it at the three
+stores costs +12 -- so the current encoding is the cheapest point on that trade, not a
+mistake.
+
+`src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c`
+
+## 73. `base + idx*0x40 + idx` always folds to one `[reg+reg]` operand
+
+`gm_AllocGebaeude` (0x100174d0): nineteen spellings -- pointer cast, array subscript,
+two-step pointer, `idx << 6`, `(unsigned)` cast, `int*`-scaled, `&arr[..]`, named
+intermediates, split across two statements -- **all** emit `mov cl,[eax+ebx]`.  The
+reference's materialised form (`mov ecx,eax; add ecx,ebx; mov cl,[ecx]`) is not reachable
+from C at this site.
+
+A wall: the indexed addressing mode is chosen whenever msvc6 can express the sum as
+`base + index`, and no spelling suppresses it.  (The site was reached here only by a
+scheduling barrier, which section 69 rules out.)
