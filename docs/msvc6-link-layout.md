@@ -188,6 +188,39 @@ work: the block that would move up into `[0x2440, 0x2608)` is our own COMDAT
 order (testfdiv reals first), which matches only 53 of 456 bytes of the
 reference's window — and the prefix check compares bytes, not just length.
 
+### Discarding the duplicates instead: COMDAT folding by symbol name
+
+There is a third option, and it is the one that works: **the linker folds
+COMDAT sections by symbol name, keeping the first definition it sees.**  msvc6
+derives a string literal's `??_C@<length><hash>@<mangled-content>?$AA@` name
+from the literal's contents, so an object that references *the same literals*
+defines *the same COMDAT names*, and whatever the library emits for them is
+discarded.
+
+`crt_region/rdata_fold.c` does exactly that for the six objects' strings and
+carries no `.text` at all — the literals go to `.data` (referenced literals do
+not go to `.rdata`; see the section above), which costs nothing because
+postlink overwrites `.data` wholesale.  Measured on the CMake build:
+
+```
+                     .rdata VS   .rdata raw   libc string COMDATs in the map
+before                   0x3041       0x4000  8
+with rdata_fold.c        0x2ff1       0x3000  0 (all folded)
+```
+
+`0x3000` is the reference's raw size, and it moves `.data` to file offset
+`0x27000` and `.reloc` to `0x35000` — the reference's.  Two notes for extending
+it to the rest of the block:
+
+* A COMDAT folds against a definition of the same **name**, whatever the
+  container.  `__lookuptable`/`__dnames`/`__mnames` fold against a one-byte
+  `const` array each (COFF `___lookuptable` is C `__lookuptable`); the bytes do
+  not have to be ours, because the reference's are already inside the blob and
+  postlink rewrites the `.text` operands that point at them.
+* A `.bss` (uninitialized) definition defines the symbol but does **not** fold
+  the library's read-only COMDAT — measured, the library's copy stays in the
+  map.  The definition has to be an initialized constant to be a COMDAT.
+
 ## 4. The import layer
 
 * 100 imports across 4 DLLs (`KERNEL32`, `USER32`, `WS2_32`, `WINMM`), and

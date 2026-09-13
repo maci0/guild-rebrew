@@ -147,6 +147,12 @@ if(REBREW_BUILD_SERVER)
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/sbh_aliases.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/crt_heap.c"
     "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/amsg_exit.c"
+    # rdata_fold.c references the string literals six LIBCMT objects emit as
+    # .rdata COMDATs a second time after rdata_restore.c's blob.  Same content
+    # means the same `??_C@...` COMDAT name, so linking this first makes the
+    # linker discard the library's copies: .rdata raw 0x4000 -> 0x3000, the
+    # reference's.  It carries no .text.
+    "${PROJECT_SOURCE_DIR}/src/server.dll/crt_region/rdata_fold.c"
   )
   list(APPEND SERVER_SOURCES ${_CRT_REGION_KEEP})
 

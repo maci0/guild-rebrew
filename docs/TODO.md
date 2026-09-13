@@ -1,5 +1,57 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-121: the linker folds COMDATs by symbol name, so the six objects' duplicate
+`.rdata` can be *discarded* rather than avoided — all four section raw sizes now
+match the reference.**
+
+msvc6 derives a string literal's `??_C@...` COMDAT name from its contents, and
+MSVC LINK folds COMDAT sections by name, keeping the first definition it sees.
+`crt_region/rdata_fold.c` (new, no `.text`) references the same literals the six
+library objects emit after `rdata_restore.c`'s blob, so theirs are the copies
+that get discarded.  Measured on the real CMake build:
+
+```
+              .text              .rdata             .data              .reloc
+reference  raw 0x23000       raw 0x3000         raw 0xe000 @0x27000   raw 0x11000 @0x35000
+before     raw 0x23000       raw 0x4000         raw 0xe000 @0x28000   raw 0x08000 @0x36000
+after      raw 0x23000       raw 0x3000         raw 0xe000 @0x27000   raw 0x08000 @0x35000
+```
+
+`scripts/section_geometry.py` reports `.text`, `.rdata` and `.data` `ok` and
+`.reloc` at the reference's `0x35000`; postlink then grows `.reloc` to
+`0x11000`, so the post-postlink file is exactly the reference's `0x46000`
+bytes.  Eight of the library's string COMDATs are gone from the map
+(`build/server_lf.map`); `.rdata` VirtualSize went `0x3041 -> 0x2ff1`.
+
+The literals themselves land in `.data` (msvc6 puts referenced literals there,
+not `.rdata`), which is harmless because postlink overwrites `.data`
+wholesale; the pointer array in the new TU exists only to reference them
+without adding a `.text` function, and `data_restore.c`'s blob was left as-is
+because the section still ends inside the `(0xd000, 0xe000]` band.
+
+**Still not folded, and the remaining `.rdata` prefix surplus is now 0x178**
+(the import directory sits at `0x2780` where the reference has `0x2608`; the
+gate wants the region between the IAT and the import directory to be exactly
+`0x2468` bytes *and* byte-identical):
+
+```
+0x2608 litfold4-style table definitions (ours)      0x10
+0x2618 __real@8@3fff8000000000000000 (1.0, folded)  0x08
+0x2628 __real@8@4015800bf60000000000  testfdiv.obj  0x08
+0x2630 __real@8@4014bffffc0000000000  testfdiv.obj  0x08
+0x2638 .. 0x2738  unnamed COMDAT content (0x100)    <- a_map/timeset tables
+0x2738 two ??_C@ a_map.obj strings                   0x0c
+```
+
+The same mechanism extends to all of it: `__lookuptable`, `__dnames` and
+`__mnames` fold against our own same-named COMDAT (a one-byte `const` array is
+enough - the reference's bytes are already in the blob, and postlink rewrites
+the `.text` operands that point at them), and the reals and the remaining
+strings fold against literals/constants of the same value.  The unnamed 0x100
+needs identifying first (`build/server_lf4.map` + the byte dump at
+`.rdata[0x2638:0x2738)`), then the same treatment.  If the region reaches
+exactly `0x2468`, `_fix_imports`' prefix check passes for the first time.
+
 **Round-119: `.data` raw is now the reference's `0xe000`, and postlink's next
 gate after `.text` is the `.rdata` prefix — pinned to the same six objects.**
 
