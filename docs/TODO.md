@@ -50,6 +50,14 @@ Two negative results from the same round, both cheap and both closing a class:
   documented baseline.  Do not take a GA score as a positional win without
   re-measuring.
 
+The `/Ow` win is a plateau, not a knob: `/Ot`, `/Ob0`, `/Ob1`, `/Gy`, `/Gf`,
+`/GF`, `/Oi-` and `/G5` on top of it are all 1194/3689 and 1054 instructions,
+`/O2 /Gd /Ow` *without* `/Oa` is identical too (so `/Oa` is inert here and
+`/Ow` alone is the lever), and `/G6` regresses to 888/1041.  The last other
+annotation/metadata gap is `srv_LoadBuf`'s `/O2 /Gd /Ot` against the build's
+`/O2 /Gd`: measured both ways it is 701/750, 226 instructions — inert, as its
+note already claimed.
+
 **Round-152: a probe harness for one function (the missing piece for every
 remaining sweep).**
 
