@@ -1,5 +1,53 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-146: the last 3 entries are not a padding problem — our `.data` differs
+structurally; three more volatile lotteries failed.**
+
+The gate stands at 749 failing entries (needs ≤746, so **3 short**), and round
+145 pointed at the string-literal placement in `.data` as the cheapest-looking
+class.  This round measured that class before building anything.
+
+*The deltas are not a block shift.*  Taking every operand entry whose reference
+*and* built values are both `.data` pointers — the relocated data references that
+differ — and histogramming `built - reference`: 1,599 entries, and the
+distribution is spread, not uniform:
+
+```
++0x15884e0  119     +0x7930   55     -0x560   38     +0xe18   33
++0xcc0       77     -0x173018c 40    +0x9e38  34     +0x1731a28 26
+-0x528       66     +0x16bde1c 55    +0x6e90  33     +0x151c   26
+```
+
+So padding `.data` cannot move the literals into place — the composition orders
+COMDATs differently from the reference and the layout differs *structurally*.
+444 failing operand entries have a reference value that is a `.data` pointer at
+all: that is the pool the operand fixer repairs post-patch (91.1% against 90.0%
+pre-patch), and only a `.data` layout package closes it.
+
+*Three more volatile lotteries, all reverted (each compiled with the file's own
+annotated CFLAGS, compared at fixed offsets).*
+`m_AllocTracked`: a volatile read of `g_array_ptr` is inert; making the
+`g_alloc_counter` increment volatile reaches the reference's **249-instruction**
+count but shrinks the COMDAT span 672 -> 656, i.e. exactly the round-104
+alignment break; `size` volatile is worse (58.8%).  `gm_AllocGebaeude`: the `nid`
+read volatile is worse (633/1088), the volatile `geb+1` store is neutral, and
+turning the volatile *increment* back into a plain store gains 18 bytes
+(651 -> 669/1088) while the object stays 13 instructions longer than the
+reference — a wash, not committed.
+
+*Plan for the `.data` literals (next round).*  Give the pipeline a literal
+placement the way `split_blob.py` places `.rdata`.  LINK folds `??_C@` COMDATs by
+name with the first definition winning, so a dedicated TU that defines the
+literals **in the reference's order**, listed first behind a pad piece of
+`ref.data[0:first_literal]`, would put each literal at its reference offset and
+turn the windows valid — 15 entries in `fcn.10015950` alone, more elsewhere.
+Roughly a 1-2 round feature, verified against the four raw sizes and file
+offsets.
+
+Standing: coverage **90.0%** (749 failing, 3 short), `.text` residual `0x2db6`
+(8.53%, `0x2d94` inside the 19), every other section byte-identical after the
+fixers, gate green.
+
 **Round-145: the same volatile lever blocks `ServerMainThread`'s constant
 propagation — coverage `89.3% -> 90.0%` (749 failing; the gate needs ≤746).**
 
