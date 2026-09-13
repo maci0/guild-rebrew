@@ -1,5 +1,75 @@
 # Blockers — 100% Round-Trip Goal
 
+## The frame hole is an aggregate, not alignment — `cm_ExSellObjekt` (2026-09-13, round 86)
+
+`cm_ExSellObjekt` (0x1000d930) has been parked for months on a 4-byte frame
+difference: the reference `sub esp, 0x228`, every C formulation 0x224, "one
+fewer spilled local".  The hole is real and now reproduced.
+
+What the reference frame looks like (offsets from post-prologue `esp`):
+
+```
+0x00..0x10   ebx ebp esi edi          (4 pushed callee-saved)
+0x10..0x34   nine spilled dword locals
+0x34..0x38   bytes the reference NEVER touches  <- the hole
+0x38..0x238  the 512-byte log buffer, ending exactly at the return address
+```
+
+Both `sub esp` sizes and the buffer/base offsets line up once the hole exists:
+the reference's `lea ecx,[esp+0x38]` addresses the buffer where a plain array
+gives 0x34, and its param slot is `[esp+0x238]` where a plain array gives
+0x234.
+
+Ruled out, by measurement (`.scratch/ap2.c`, msvc6 /O2 /Gd):
+
+```
+char a[4] + char   buf[512]   sub esp 0x204
+char a[4] + __int64 buf[64]   sub esp 0x204
+char a[4] + double  buf[64]   sub esp 0x204
+char a[4] + struct {__int64 q;} buf[64]   sub esp 0x204
+char a[4] + char   buf[516]   sub esp 0x208
+```
+
+MSVC6 packs stack objects on 4 bytes and does not 8-align `__int64`/`double`
+aggregates, so the hole is not an alignment pad.  `__declspec(align(8))` on a
+local is a fatal `C1600: unsupported data type`.  A plain unused local is
+eliminated outright -- adding `int dead_pad;` and zeroing it with the others
+changed neither the frame nor the store list.
+
+What does reproduce all three is an aggregate with a leading member the source
+never reads:
+
+```c
+// SIZE 0x204
+struct SLogBuffer { unsigned int reserved; char text[512]; };
+...
+struct SLogBuffer log_buffer;
+```
+
+MSVC6 allocates the whole 516-byte object, so the first dword is reserved and
+untouched while `text` lands on 0x38.  With that, `sub esp,0x228` (was 0x224),
+`mov esi,[esp+0x238]` (was 0x234) and the buffer base all match byte for byte.
+
+Aligned instruction match 71.8% -> 72.7% (479 -> 485 of 667); the object size
+is unchanged at 2055 because the frame fix changes no instruction length.
+
+**Residual is now the allocator's local->slot permutation, not the frame.**
+
+```
+                        target   ours
+source_static_entity     0x24    0x24
+resolved_dynamic         0x14    0x18
+source_existing_entity   0x30    0x2c
+```
+
+with a different zero-store order (target `0x10 0x14 0x2c 0x18 0x20 0x28 0x30
+0x1c 0x24`; ours `0x18 0x1c 0x28 0x14 0x10 0x30 0x2c 0x20 0x24`) and a
+different zero register: the reference parks 0 in `edi` and keeps it live
+across the first call (`cmp eax,edi` at 0x1000d994), ours parks it in `ebx`
+and rematerializes `test eax,eax`.  Swapping `ebx`<->`edi` in the candidate
+stream and re-running the LCS makes it *worse* (72.7% -> 70.8%), so the
+remaining delta is the slot permutation, not a register rename.
+
 ## `vfs_ReadCompressed`'s comparison is not source-reachable (2026-09-13, round 85)
 
 LCS-aligned the 216-instruction candidate against the 200-instruction target.

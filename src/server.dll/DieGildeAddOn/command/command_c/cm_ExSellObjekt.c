@@ -84,6 +84,10 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
 
 
 // CFLAGS: /O2 /Gd
+
+// SIZE 0x204
+struct SLogBuffer { unsigned int reserved; char text[512]; };
+
 uint cm_ExSellObjekt(char* cmd, uchar* result)
 {
 	int amount;
@@ -105,7 +109,19 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	ushort* dest_game_object;
 	void* source_existing_entity;
 	uint weight_fraction;
-	char log_buffer[512];
+	/* The reference's frame is 0x228, 4 bytes more than a bare
+	 * `char log_buffer[512]` gives (0x224), and the extra dword sits
+	 * between the spill block and the buffer: the reference's
+	 * `lea ecx,[esp+0x38]` addresses the buffer where a plain array
+	 * yields 0x34, and no instruction anywhere in 0x1000d930 touches
+	 * [esp+0x34].  MSVC6 packs stack locals on 4 bytes with no
+	 * alignment pad (measured: char[512], __int64[64], double[64] and
+	 * a struct-of-__int64 array all give the same frame), and a plain
+	 * unused local is eliminated outright, so the hole is an aggregate
+	 * with a leading member the reference never reads -- modelling the
+	 * buffer as a 516-byte struct reproduces both the frame and the
+	 * buffer base exactly. */
+	struct SLogBuffer log_buffer;
 	short entity_type;
 	char obj_category;
 
@@ -165,13 +181,13 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		dest_object = (ushort*)gm_ff_Objekt((int)*container_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
 		if (dest_object == (ushort*)0) {
 			sprintf(
-				log_buffer,
+				log_buffer.text,
 				"cm_ExSellObjekt(): Object not found: ObjProt:%i Menge:%i CmdCnt:",
 				(uint)*(ushort*)(cmd + 0x18),
 				*(int*)(cmd + 0x1f),
 				*(int*)(cmd + 8)
 			);
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2c53, log_buffer, 8);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2c53, log_buffer.text, 8);
 			return 1;
 		}
 		if (source_dynamic_entity != (short*)0) {
@@ -179,25 +195,25 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			amount = gm_GetMsgField((int)source_dynamic_entity, (int)dest_object);
 			if (amount < resolve_result) {
 				sprintf(
-					log_buffer,
+					log_buffer.text,
 					"cm_ExSellObjekt() Not enough Objekts at source: ObjProt:%i Menge:%i CmdCnt:%i",
 					(uint)*(ushort*)(cmd + 0x18),
 					resolve_result,
 					*(int*)(cmd + 8)
 				);
-				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2c75, log_buffer, 8);
+				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2c75, log_buffer.text, 8);
 				return 1;
 			}
 		}
 		if (*(int*)(dest_object + 7) < *(int*)(cmd + 0x1f)) {
 			sprintf(
-				log_buffer,
+				log_buffer.text,
 				"cm_ExSellObjekt() Not enough Objekts at source: ObjProt:%i Menge:%i CmdCnt:%i",
 				(uint)*(ushort*)(cmd + 0x18),
 				*(int*)(cmd + 0x1f),
 				*(int*)(cmd + 8)
 			);
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2c97, log_buffer, 8);
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2c97, log_buffer.text, 8);
 			return 1;
 		}
 		if (*(int*)(cmd + 0x23) != 0 && source_owner_entity != (short*)0) {
