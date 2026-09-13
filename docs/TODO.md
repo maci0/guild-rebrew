@@ -2,6 +2,59 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+### Continuation notes (written at the end of a long session; start here)
+
+**Verified state at handoff.** `rebrew lint` 187/187 (0 errors, 2 warnings); a full
+`bash scripts/gate.sh` passes — 0 compile/link errors, `rebrew verify --full` 281/283 against
+the 281 baseline; and `bash scripts/split_link.sh` + `postlink_residual.py --write` reproduces
+`build/server.dll` at **9,281 bytes of `.text` residue in 286,720 bytes**, so the committed tree
+and the deliverable agree. Every non-`.text` section is byte-identical, and the import table is
+100 entries matching in set and order. All remaining work is `.text` codegen.
+
+**Two agents were still in flight when this was written**: one completing the faithful
+`CrashDump` version (below), one on the last three small functions
+(`vfs_ReadCompressed`, `cm_ExProdObjekt`, `cm_ProcessCommandQueue`). Check `.scratch/*.FINAL.c`
+timestamps and `list_agents` before starting new work, so you do not collide with them.
+
+**Ranked leads, most promising first:**
+
+1. **`CrashDumpUnhandledExceptionFilter` (1,668) — the only frame-size mismatch left, and the
+   faithful version is in hand but unfinished.**  `.scratch/…V2-frame0x280.c` reproduces the
+   reference's `sub esp,0x280` *exactly* (ours is 0x28c) and its buffer offsets, by spelling the
+   stack-walk cursor as `frameInfo[2]` and the instruction destination as `frameInfo[3]` — which
+   is what the reference does, and which also fixes two real bugs (see below).  It measured
+   **+131 at the link** purely because its code is **1777 bytes against the reference's 1836**,
+   moving its jump tables 56 bytes early.  The task is length at identified sites: **+21** make
+   the decrypt-loop `i` memory-resident (the reference caches `CreateFileA` in `esi` and
+   `ReadFile` in `edi`), **+12** the stack walk, **+17** the epilogue pops, **−15** the classify
+   switch is already long.  Target: code 1836 so the tables land at `0x72c` and `0x7ac`.
+   Reference segment lengths: 315 to the `CreateFileA` return, 343 to the classify compare, 653
+   to `VirtualQuery`, 522 to `ret 4`, 3 for the `ret 4`.
+2. **`gm_AllocSpieler` (2,861, 31%) — frame confirmed correct, two leads open.**  `add R,R` x4
+   where the reference has `lea R,[R+R]` x4 (allocator Finding 54 says strength reduction follows
+   the value's *uses*, so this needs a use-shape change, not an address respelling), and the
+   0xc slot-map assignment itself.  Its `matched` ceiling is ~3115 of 3689 on one-sided
+   relocations, so treat the gap from 736 as mostly unreachable.
+3. **The two correctness bugs below.**  Bug 1 is fixed; bug 2 is not, and the faithful spelling
+   that fixes it is V2, hence lead 1.
+
+**Two real correctness bugs were found in `CrashDump`'s source.**  (1) The `AnalyzeInstruction`
+call passed its first two arguments swapped — the callee at 0x10003260 uses arg2 as a count
+(`cmp edx,5`) and arg1 as a pointer (`cmp byte ptr [eax-5],0xe8`), and the reference caller at
+0x10002d09 pushes `&buffer, edi, cursor, &out` — so our code would have dereferenced `nInstr-5`.
+**Fixed, at a deliberate cost of 1 linked byte.**  (2) The stack walk writes to `instrDest` while
+the loop tests `eip`, which is assigned once from `pCtx->Eip`, so `if (eip != pCtx->Eip)` is
+false every iteration and the instruction-decode block is **dead at run time** — which is the
+only reason bug 1 is harmless today.  Not fixed; V2 fixes it.
+
+**Do not re-derive these; they are measured walls.**  Every function except `CrashDump` is
+closed at a local optimum: the residue there is register-allocation and scheduling choices no C
+spelling steers (allocator Findings 52-55, 60-61), plus msvc6's unconditional merge of
+byte-identical early-return epilogues (shapes §74).  The frame lever is exhausted on 17 of 18
+functions (audit above).  The fill-byte line is closed.  A source-spelling sweep will not reach
+0; it needs a different compiler or a new technique for steering the allocator.
+
+
 **Round-253: frame audit across all 18 residue functions — `CrashDump` is the ONLY frame-size
 mismatch, and the frame lever is therefore exhausted everywhere else.**
 
