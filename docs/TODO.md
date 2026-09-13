@@ -1,5 +1,43 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-124: the member-section route to both remaining gates, and the one
+piece of it that has no answer yet.**
+
+The plan the last rounds imply is: link the *per-section* member objects
+(`scripts/split_coff.py`, ordered by reference VA) instead of `LIBCMT.lib`
+members, so that (a) `.text` lands at the reference's VAs (81.2% coverage
+instead of 55.6%) and (b) the members' `.rdata` sections can simply be
+*omitted*, since `rdata_restore.c`'s blob already holds those bytes.  Measured:
+
+```
+                                   .text VS   .rdata VS   .rdata raw   imports
+split_poc (member sections, data)   0x22af8     0x33b1       0x4000      100
+same, member .rdata omitted         0x23334     0x3311       0x4000      100
+```
+
+Dropping the members' `.rdata` shrinks it by only `0xa0` and grows `.text` by
+exactly the `0x83c` round 75 recorded: the omitted sections' *symbols* go
+undefined, so whole members are pulled back in from `LIBCMT.lib` — with their
+`.rdata`.  The folding TU (`rdata_fold.c`) was not in that response file, and
+covering the rest would need one-byte definitions for `___lookuptable`,
+`__dnames`, `__mnames` and the remaining unnamed content.
+
+**What has no answer yet is the three `__real@8@` constants.**  If
+`testfdiv.obj`'s `.rdata` is omitted, those symbols are undefined and the
+member is pulled back for them — and a data-only TU cannot define them: a
+file-scope `const double a = 1.0;` (or `(double)1`, `2.0/2.0`, `1.0+0.0`)
+emits `_a`, never a `__real@8@…` pool entry (measured: no `__real@` symbol in
+the object).  Only an *expression inside a function* does, and that adds
+`.text`.  So `testfdiv.obj`'s `.rdata` — `0x18` of reals plus its two strings —
+stays, which caps the *omission* route at a surplus of roughly `0x18` plus our
+own definitions unless the reals can be defined another way (an absolute symbol
+in the `.def`, or an `/alternatename` equivalent — neither exists in this
+linker).
+
+The remaining `0xa0` of unnamed `.rdata` between `0x2638` and `0x2738` is
+non-COMDAT data of members that must be linked for code, so it is stuck for the
+same reason as the three tables.
+
 **Round-122: the foldable half of the `.rdata` duplicate is folded — 11 COMDATs,
 prefix surplus `0x1c8 -> 0x158`.  The other half is provably not foldable.**
 

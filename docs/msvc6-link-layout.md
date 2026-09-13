@@ -104,6 +104,28 @@ boundary: every symbol above `0xdf00` there is uninitialized, so the
 surplus was blob + emitted literals, never an initialized global the layout
 could not place.
 
+### The prefix cannot be dodged by reordering: sections merge by name
+
+The sub-sections of image section 2 are merged in **section-name order**, not
+object order — the map always reads
+
+```
+0002:00000000 .idata$5   (IAT)
+0002:000001a0 .rdata     (every `.rdata`-named contribution, in object order)
+0002:000027d0 .idata$2   (import descriptors)
+0002:00002820 .idata$3
+0002:00002834 .idata$4
+0002:000029d4 .idata$6   (hint/name records + DLL names)
+0002:00002ff0 .edata
+```
+
+so no link-line change can put the import descriptors *before* the `.rdata`
+contributions: the gate's `0x2468` bytes are exactly that `.rdata` group, and
+satisfying it means making the group total `0x2468` **and** hold the
+reference's bytes.  The same rule fixes the `.idata$N` order, which is why
+postlink copies `bookkeeping.hex` (`0x828` bytes) over whatever sits at the
+built import directory instead of trying to move it.
+
 ### Why `.data` is where the literals are
 
 Under `/O2 /Gd /MT` (and unchanged by `/Gf`, `/Gy`, `/GA` — measured), msvc6
