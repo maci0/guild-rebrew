@@ -1,5 +1,30 @@
 # Blockers — 100% Round-Trip Goal
 
+## `rebrew verify-placement` is not usable on these binaries (2026-09-13, round 65)
+
+Looking for a per-symbol `.data` placement diagnostic, I ran
+`rebrew verify-placement` -- "Compare .data symbol VAs of the current build
+against the data metadata".  It reports:
+
+```
+$ rebrew verify-placement --built build/split_poc.dll
+symbols: 274  toml-matched: 29  correct-VA: 0  misplaced: 29
+  g_file_append_mode    exp 0x100270f8  our 0x100333e4  d +0xc2ec
+  g_log_format_table    exp 0x10027084  our 0x1003306d  d +0xbfe9
+  ...
+
+$ rebrew verify-placement --built original/Server/server.dll      # the reference itself
+symbols: 274  toml-matched: 29  correct-VA: 0  misplaced: 29
+  g_file_append_mode    exp 0x100270f8  our 0x100323e4  d +0xb2ec
+```
+
+Pointing it at the reference binary still says **29 of 29 misplaced**, which is
+impossible, so the tool is not reading symbol VAs out of these images the way
+its description implies (the reference is a stripped release PE with no COFF
+symbol table).  Its output must not be used to judge `.data` placement here --
+the round-58/60 byte-level comparisons are the sound measurement.  Recording
+this because the 0/29 figure looks like a finding and is not one.
+
 ## The last 16 missing strings are a different case (2026-09-13, round 64)
 
 After round 63, 16 reference `.data` strings are still absent from our image,
