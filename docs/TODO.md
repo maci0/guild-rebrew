@@ -29,6 +29,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-318 (2026-09-13): case-order audit N/A elsewhere.**
+
+- LS string pushes desynced positionally (streams offset throughout the
+  window) — no order reading possible; its switch is swept per header.
+  ExSell has no switch. The round-65 method (first-appearance order
+  comparison) needs aligned bodies; only CrashDump qualified.
+- Residue baseline unchanged: **9,209**.
+
 **Round-317 (2026-09-13): CrashDump case order matches reference, +0 linked.**
 
 - String-push audit found the only order divergence: 4 case bodies in
