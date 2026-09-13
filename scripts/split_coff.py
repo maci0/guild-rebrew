@@ -153,7 +153,7 @@ def masked_body(obj: bytes, sec: dict) -> bytes:
     return bytes(body)
 
 
-def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None, extra: set[int] | None = None, emit_commons: bool = False, trim: int | None = None, start: int = 0) -> bytes:
+def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | None = None, claimed: set[int] | None = None, closure: bool = False, aliases: set[str] | None = None, extra: set[int] | None = None, emit_commons: bool = False, trim: int | None = None, start: int = 0, promote_statics: bool = False) -> bytes:
     """COFF object for `coff.sections[index]` plus its same-member closure.
 
     `separate` holds the section indices that are themselves emitted as their
@@ -335,6 +335,24 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
                     aux[base_aux + 12] = 0
                     aux[base_aux + 13] = 0
                     aux[base_aux + 14] = 2
+        # A member's own statics are file-local, and splitting the member
+        # across objects breaks their linkage: `10020943_.text.obj` references
+        # `_dststart`/`_dstend`/`_tzapiused` as undefined externals while the
+        # object carrying them defines them as class 3, so `/FORCE` resolves
+        # the references to RVA 0 and every operand entry through them fails
+        # (docs/TODO.md round 137).  Promote the data statics to external so
+        # they resolve across the split objects, as the original single object
+        # did.  `$`-labels and section symbols stay local.
+        storage_class = sym["storage_class"]
+        if (
+            promote_statics
+            and storage_class == 3
+            and sym["section"] > 0
+            and sym["name"].startswith("_")
+            and not sym["name"].startswith("$")
+            and not sym["name"].startswith(".")
+        ):
+            storage_class = 2
         new_symbols += (
             raw
             + struct.pack(
@@ -342,7 +360,7 @@ def build_object(coff: Coff, index: int, out_name: str, separate: set[int] | Non
                 value,
                 section_number,
                 sym["type"],
-                sym["storage_class"],
+                storage_class,
                 sym["naux"],
             )
             + bytes(aux)
@@ -495,6 +513,12 @@ def main() -> int:
         help="cut each emitted section to the reference function's size (the map "
         "records it), so a member section longer than the function it was "
         "matched to stops multiplying the over-inclusion",
+    )
+    ap.add_argument(
+        "--promote-statics",
+        action="store_true",
+        help="emit `_`-named data statics as external symbols, so a member split "
+        "across objects still resolves its own statics (docs/TODO.md round 137)",
     )
     ap.add_argument(
         "--split-rdata",
@@ -784,6 +808,7 @@ def main() -> int:
                     emit_commons=args.with_commons,
                     trim=entry_size if args.trim else None,
                     start=start,
+                    promote_statics=args.promote_statics,
                 )
             )
             for k, i in enumerate(sorted(rdata_only)):
@@ -798,6 +823,7 @@ def main() -> int:
                         coff, i, dname, mapped, claimed, False, set(),
                         extra={i},
                         emit_commons=args.with_commons,
+                        promote_statics=args.promote_statics,
                     )
                 )
                 written.append((va, str(outdir / dname), f"{symbol}_r{k}"))

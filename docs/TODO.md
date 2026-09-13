@@ -1,5 +1,31 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-138: split members keep their own statics — coverage `81.3% -> 82.3%`.**
+
+`split_coff.py --promote-statics` emits a `_`-named *data* static as an external
+(class 2) instead of file-local (class 3).  The original member had them
+file-local and resolved them internally; splitting it across objects broke that,
+which is exactly round 137's `_dststart`/`_dstend`/`_tzapiused`.  Measured on
+the vehicle, with `--promote-statics` now passed by `split_link.sh`:
+
+```
+                 failing operands   failing calls   entries   coverage
+before                    1,104            292      1,396     81.3%
+after                     1,030            288      1,318     82.3%
+```
+
+All three statics are now in the map, `fcn.10020943`'s own failures drop from 28
+entries to 9, and nothing else moves: all four raw sizes and file offsets `ok`,
+the `.rdata` prefix still exactly `0x2468` bytes with zero mismatches, `.text`
+placement still 246/319 at their reference VA.
+
+Postlink now reports 6,145/7,463 = **82.3%**, and the bucket list is unchanged at
+the top — the 19 game functions are ~1,000 of the remaining 1,318 entries.  The
+CRT tail is spread thin (8-14 entries each across `fcn.100151e0`,
+`fcn.10016460`, `fcn.100170e0`, `fcn.10020943`, `OpenVfsStream`, …), so the next
+CRT-side win needs whatever symbols those reference rather than one more single
+fix.
+
 **Round-137: the ~390 CRT failures are *unresolved member statics*, and the
 signature is a built value of `0x10000000`.**
 

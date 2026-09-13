@@ -57,9 +57,12 @@ rm -rf "$WORK/split"
 # `--split-rdata` puts each member's `.rdata` sections in their own objects so
 # they can be ordered independently (the split blob); it also lets them fold on
 # their own, which is worth 0xa0 of the prefix surplus with the prefix bytes
-# still byte-identical.  See docs/TODO.md rounds 129-131.
+# still byte-identical.  `--promote-statics` makes a split member's own data
+# statics external so its functions still resolve them; without it `/FORCE`
+# leaves those references at RVA 0 and ~74 layout-map entries fail with a built
+# value of exactly image_base (docs/TODO.md round 137).  See rounds 129-138.
 python3 scripts/split_coff.py "${LIBS[@]}" --map "$MAP" \
-    --out "$WORK/split" --with-data --trim --split-rdata
+    --out "$WORK/split" --with-data --trim --split-rdata --promote-statics
 
 echo "== import thunks"
 rm -rf "$WORK/thunks"
