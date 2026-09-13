@@ -1,5 +1,77 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-111: position alignment is complete, and the asm constraint is
+audited.**
+
+**Every tracked function is now at its reference VA.**  `scripts/link_drift.py`
+on `build/split_poc.dll` reports a single drift change -- the first symbol, at
+delta `+0` -- so the whole 141 KB `.text` is position-correct for the first time.
+Rounds 104-110 fixed one object span at a time to get here
+(`m_AllocTracked`, `CrashDump`, `vfs_ReadCompressed`, `cm_ExCopyEntityData`);
+the four are the only objects in the game region whose COMDAT span ever
+disagreed with the reference's.
+
+**The "only C" constraint: there is no naked asm left, and the six remaining
+inline-asm blocks are load-bearing.**
+
+```
+grep -rn "_emit\|__declspec(naked)" src/server.dll   ->  nothing
+```
+
+Six files carry exactly one `__asm` block each, all the msvc6 block-fill /
+copy prelude:
+
+```
+Units/vfs/vfs_ReadData.c              our alignment+movsb/movsd prelude
+Units/m_alloc/m_alloc_c/m_AllocTracked.c   rep stosd/rep stosb block fill
+Units/m_alloc/m_alloc.c                    same
+Units/m_alloc/m_alloc2.c                   same
+DieGildeAddOnServer/server4.c              same
+DieGildeAddOn/game/spiel_c/gm_AllocGebaeude.c  same
+```
+
+They are named-operand inline asm (`mov edi, buf`), not `_emit` byte dumps, and
+`docs/msvc6-allocator.md` Finding 19 records that no shipped MSVC -- 6.0, SP1-6,
+5.0, 5.0-sp3, under `/O2 /O1 /Ox /Og- /Oi- /G5 /G6 /Oy- /Ot` -- emits the
+prelude from any C spelling of `memcpy` or of a hand-written head/middle/tail
+loop.  Removing one is not free: replacing `vfs_ReadData`'s block with
+`memcpy(buf, fsrc, total)` gives obj 450 (the plain intrinsic), a byte loop 442,
+against 472 today -- and its COMDAT span would move 480 -> 464/448, which would
+re-break the position alignment rounds 107-110 just established, for everything
+after it.  Flagged as a known tension between "only C" and byte identity; the
+blocks stay until either a C spelling is found or the user overrules.
+
+**Where the remaining difference is.**  `rebrew todo` lists exactly two items,
+both already-known: `gm_AllocSpieler` (SIZE_MISMATCH, obj 3688 against 3689) and
+`ServerMainThread` (STUB, obj 2434 = target exactly, 86.9% aligned).  By
+alignment-corrected byte match (`scripts/align_match.py`) the tail is:
+`cm_ExProdObjekt` 92.9, `ls_LoadBuildingEntityState` 88.8,
+`cm_ProcessCommandQueue` 88.3, `gm_CheckInventoryCapacity` 87.7,
+`ServerMainThread` 86.9, `gm_ObjectsAvailble` 86.0, `gm_CalculateProductionValue`
+82.9, `cm_ExCopyEntityData` 77.9 (was 77.1 before round 110's clamp reorder),
+`ahm_ExAllocAlchemist` 76.6, `vfs_ReadCompressed` 76.5 (was 79.0 -- the
+round-110 single-read hoist costs 2.5 points locally), `srv_LoadBuf` 75.7,
+`gv_ExAllocGraveyardWorker` 73.6, `m_AllocTracked` 72.7, `cm_ExSellObjekt` 72.6,
+`gm_AllocSpieler` 63.4, `gm_FindNextFilteredEntity` 61.0.
+
+Where postlink's 1,403 non-validating layout-map entries sit
+(`.scratch/mapcov.py`, exact-value comparison against
+`layout/server.dll/operands.txt` + `calls.txt`):
+
+```
+ 711  untracked (CRT region, spread over text offsets 0x19000-0x22000;
+      those windows are 90.5-95.2% raw-identical at the same offset)
+ 186  gm_AllocSpieler          114  ls_LoadBuildingEntityState
+ 121  CrashDumpUnhandled...    105  ServerMainThread
+  97  cm_ExSellObjekt           67  srv_InitBuildingTypeTable
+```
+
+Note that several of the smaller offenders (`srv_InitBuildingTypeTable`,
+`gm_Open`, `srv_LogWinsockError`, `srv_RecvGame`) are **RELOC** -- their
+instructions are where the map says and only the address *values* differ, which
+is what postlink patches.  The genuinely open ones are the SIZE_MISMATCH /
+PROVEN functions above.
+
 **Round-110: all three position breaks fixed.  Whole-`.text` masked 76.61% ->
 94.97%; postlink coverage 56.6% -> 81.2%.**
 
