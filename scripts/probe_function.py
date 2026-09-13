@@ -79,6 +79,18 @@ def reloc_mask(path: Path, secs: dict, va: int, size: int) -> bytearray:
     return m
 
 
+def wanted_symbol(va: int) -> str | None:
+    """The function's decorated name, from the vehicle link map if it exists."""
+    mapfile = ROOT / "build/split_poc.map"
+    if not mapfile.exists():
+        return None
+    for line in mapfile.read_text().splitlines():
+        m = re.match(r"^\s+0001:[0-9a-f]{8}\s+(.*?)\s+([0-9a-f]{8})\s+(\S.*)$", line)
+        if m and int(m.group(2), 16) == va:
+            return m.group(1).split()[0]
+    return None
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--va", required=True)
@@ -130,30 +142,33 @@ def main() -> int:
     head = bytes(0 if rmask[i] else rbody[i] for i in range(12))
 
     coff = Coff(obj.read_bytes())
-    found = None
+    # the build emits one COMDAT .text per function: pick the section whose size
+    # matches the reference's best, preferring one that starts with the
+    # reference's first bytes (the prologue itself can differ, so the match is
+    # only a tie-break)
+    # the COMDAT's own symbol names the function, which is what disambiguates
+    # equal-sized sections when an edit has moved the prologue
+    wanted = wanted_symbol(va)
+    best = None
     for si, s in enumerate(coff.sections):
         if not s["name"].startswith(b".text"):
             continue
         body = coff.section_body(si)
-        if not head or abs(len(body) - size) > 32:  # the COMDAT is this function's
-            continue
-        for start in range(0, max(0, len(body) - 12) + 1):
-            if all(not head[k] or body[start + k] == head[k] for k in range(12)):
-                found = (si, start, body)
-                break
-        if found:
-            break
-    if found is None:
-        # the prologue itself can differ; fall back to the COMDAT whose size is
-        # nearest the reference's
-        cands = [(abs(len(coff.section_body(i)) - size), i) for i, s in enumerate(coff.sections)
-                 if s["name"].startswith(b".text")]
-        if not cands or cands[0][0] > 32:
-            print(f"function 0x{va:x} not found in {obj}", file=sys.stderr)
-            return 1
-        si = min(cands)[1]
-        found = (si, 0, coff.section_body(si))
-        print(f"  (located by size, section {si})", file=sys.stderr)
+        delta = abs(len(body) - size)
+        name = next((sym["name"] for sym in coff.symbols
+                     if sym and sym["section"] == si + 1
+                     and sym["storage_class"] == 2), None)
+        hit = (len(body) >= 12
+               and all(not head[k] or body[k] == head[k] for k in range(12)))
+        key = (0 if (wanted and name == wanted) else 1, 0 if hit else 1, delta)
+        if best is None or key < best[0]:
+            best = (key, si, body)
+    if best is None or best[0][2] > 32:
+        print(f"function 0x{va:x} not found in {obj} "
+              f"(no .text COMDAT within 32 bytes of {size})", file=sys.stderr)
+        return 1
+    si, body = best[1], best[2]
+    found = (si, 0, body)
     si, start, body = found
     cmask = bytearray(len(body))
     for r, _sym, _typ in coff.section_relocs(si):
