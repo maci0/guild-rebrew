@@ -1,5 +1,49 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-145: the same volatile lever blocks `ServerMainThread`'s constant
+propagation — coverage `89.3% -> 90.0%` (749 failing; the gate needs ≤746).**
+
+`ServerMainThread`'s first *content* difference (`scripts/postlink_residual.py`
+reports only branch displacements until then) was the packet build: msvc6
+propagates the just-compared constant into the cmd+4 store
+(`mov dword [esp+0x1c], 0xffffffff`, 8 bytes) where the reference keeps the value
+in a register (`mov [esp+0x1c], eax`, 4 bytes).  Four bytes of length difference
+shift the rest of the function, which is why a 501-byte residual came out of a
+single instruction.
+
+Reading `*transfer_progress` through a **volatile pointer** (both sites) stops
+the compiler from proving the value is -1 at that store:
+
+```
+                        masked match     entries   ServerMainThread   verify
+                        at fixed offsets           residual           delta / status
+before                  1610 / 2434       99       1114 bytes         1103 / STUB
++ 2 volatile reads      2060 / 2434       51        501 bytes          487 / NEAR_MATCHING
+```
+
+Whole-binary: failing entries 797 -> **749** (498 operands + 251 calls,
+coverage `89.3% -> 90.0%`), `.text` residual `0x301b -> 0x2db6` (`0x2d94` of it
+inside the 19), gate re-run green (lint 187/0 errors, 0 compile errors,
+`verify --full` 281/283 — stub count 1 -> 0).
+
+Swept and reverted, each measured: volatile on the point-of-use sync globals
+`0x10035884/80/88/8c` (masked match falls to 1495), both together (1795), the
+`total_size` reads of `0x101deac0` and its `>=` compare (inert), the zero store
+(inert), and the second `transfer_progress` read (inert).
+
+**The last 3 entries, and where they are.**  Measuring the *patched* bytes —
+`scripts/probe_postlink.py`'s fixers via `scripts/postlink_residual.py` — gives
+**91.1%** (661 failing), i.e. the operand fixer repairs 88 more entries than the
+gate's pre-patch check sees.  The cheapest of those classes is the
+**string-literal placement in `.data`**: `fcn.10015950`'s 15 failing operands are
+skewed four-byte map windows straddling a `push <literal>` whose code is
+byte-identical and whose literal simply sits elsewhere — the reference pushes
+`0x10031004` / `0x10031218` where we push `0x1003204c` / `0x10032074`, a uniform
+**+0x1048**.  `.data` COMDAT order is the linker's, so the pipeline cannot place
+literals yet; a `--split-data`-style per-section placement for *our* objects'
+`.data` (round 139's attempt split *archive members*' data and broke the CRT with
+`LNK2001: _main`) would move 15-40 of these entries inside the gate.
+
 **Round-144: the round-143 volatile lever does not generalise — three sweeps,
 all reverted; plus a first-divergence column for the residual table.**
 
