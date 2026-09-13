@@ -71,6 +71,49 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-217: the corrected per-function picture.**
+
+Residue **9,533**.  With `instr_diff.py`'s decode fixed (round 215), the alignment
+figures below are the first trustworthy set this campaign has had; only
+`gm_AllocSpieler` moved materially (618 -> 646), and the rest agree with what the
+per-function agents independently measured with `probe_function.py`, so the two tools
+are now consistent.  Sorted by residue, not by alignment:
+
+```
+                                       residue   aligned (ref)      %     object/real
+gm_AllocSpieler        0x10018850        2861    646/1056         61.2%   3696/3689
+CrashDump              0x10002770        1889    274/725          37.8%   2128/2113
+cm_ExSellObjekt        0x1000d930        1421    488/667          73.2%   2064/2055
+ls_LoadBuildingEntity  0x100128f0         728    396/499          79.4%   1472/1460
+cm_ExCopyEntityData    0x1000ec00         465    186/260          71.5%    912/900
+gv_ExAllocGraveyard    0x10011bf0         457    258/333          77.5%   1040/1040
+gm_AllocGebaeude       0x100174d0         327    309/356          86.8%   1088/1078
+ServerMainThread       0x100093a0         371    579/627          92.3%   2448/2434
+vfs_OpenStream         0x10009020         245    157/197          79.7%    704/701
+gm_FindNextFiltered    0x10016f80         226     63/118          53.4%    352/342
+ahm_ExAllocAlchemist   0x1000bdf0         201    247/286          86.4%   1008/1002
+vfs_ReadCompressed     0x10008a90          24    192/200          96.0%    496/492
+gm_CheckInventoryCap   0x10019ed0          97    125/138          90.6%    400/395
+m_AllocTracked         0x10006580          93    230/249          92.4%    672/658
+srv_LoadBuf            0x1000a570          49    205/226          90.7%    752/750
+gm_ObjectsAvailble     0x10015f70          25    214/229          93.4%    720/714
+cm_ExProdObjekt        0x1000e140          21    348/354          98.3%   1008/993
+cm_ProcessCommandQueue 0x1000aac0          15    202/205          98.5%    640/639
+```
+
+Read it as a priority list with a caveat this campaign has learned repeatedly: residue
+and alignment disagree, and neither predicts the linked result reliably.  The three
+functions with the *highest* alignment (98.5%, 98.3%, 96.0%) have 15, 21 and 24 bytes
+left -- near-closed -- while `CrashDump` at 37.8% alignment still carries 1889.  A high
+alignment with a small residue is the cheapest place to start; the functions in the 70-80%
+band (cm_ExSellObjekt, ls, cm_ExCopyEntityData, gv) are where a single structural fix
+still moves hundreds of bytes.
+
+The one thing this table cannot show, and the reason it is written down rather than
+derived: `postlink_residual` attributes by reference VA, so a symbol misplaced by an
+earlier object's length drags its whole window, and only a full rebuild between
+measurements keeps these numbers comparable.
+
 **Round-215: RESOLVED -- that was a tool artefact, and it was understating every
 alignment figure.**
 
