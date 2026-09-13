@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-243 (closing note): the drag lead is dead — layout costs ~15 bytes total.**
+
+I opened a line of inquiry last round into whether objects whose code exceeds their
+reference span drag the symbols after them, on the reasoning that a whole shifted
+function would count as residue.  **It does not.**  The evidence is already in the
+residue report and it is decisive:
+
+```
+0x252d of 0x253c differing bytes are inside the 19 functions `rebrew verify`
+reports as not byte-matched; 0xf are not
+```
+
+Placement-attributable residue across the entire image is therefore **15 bytes**.  And the
+three residue functions that happen to sit in genuinely over-span objects show ordinary
+residues, in the same range as functions in well-behaved objects:
+
+| function | its object | object excess | its residue |
+|---|---|---|---|
+| vfs_OpenStream | vfs_OpenStream.c.obj | +32 | 245 |
+| gm_FindNextFilteredEntity | spiel_dumpD.c.obj | +16 | 226 |
+| gm_CheckInventoryCapacity | spiel622.c.obj | +112 | 97 |
+
+If a +112-byte object excess shifted the following symbols, `gm_CheckInventoryCapacity`'s
+window would be wholly wrong and its residue would be its own size, not 97.  So the
+composition places each of our objects at its reference VA independently of its
+neighbours' excess — an over-span object does not push what follows it.  (The 73 split
+symbols that are not exactly at their reference VA, up to +0x31c, are CRT members, and
+they cost the 15 bytes above.)
+
+**Consequence for strategy: there is no layout fix to make.**  The remaining 9,517 bytes
+are code-shape differences inside 19 named functions, and the only lever is the
+per-function climb.  That is worth stating plainly because the drag hypothesis is
+attractive and would otherwise be re-derived: a big residue number looks like a
+displacement, and for the top three functions it *is* — but a displacement *within* the
+function (one early encoding shifting the tail), not a displacement *of* the function.
+
 **Round-243: the residue is POSITIONAL CASCADE, and three functions are 65% of it.**
 
 First measurement of the campaign against the full per-function residue table rather
