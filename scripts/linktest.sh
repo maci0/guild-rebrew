@@ -53,6 +53,22 @@ for f in "$@"; do
     echo "recompiled $rel"
 done
 
+# Stale-object guard.  A source NEWER than its object means the object holds code
+# that is not in the source -- which happens whenever a candidate is reverted (git
+# checkout rewrites the source and bumps its mtime) without recompiling, and it
+# silently poisons every number the run reports.  This is the round-195 case: the
+# tree was clean but one object still held a reverted agent variant.
+stale=$(cd build && for o in $(find CMakeFiles/server_dll.dir -name '*.obj'); do
+    rel=${o#CMakeFiles/server_dll.dir/}; src="../${rel%.obj}"
+    if [ -f "$src" ] && [ "$src" -nt "$o" ]; then echo "${rel%.obj}"; fi
+done)
+if [ -n "$stale" ]; then
+    echo "WARNING: these sources are newer than their objects, so the objects hold" >&2
+    echo "         code that is NOT in the source tree -- recompile them or run a" >&2
+    echo "         full 'cmake --build' before trusting this run:" >&2
+    echo "$stale" | sed 's/^/           /' >&2
+fi
+
 # Attribution guard.  postlink_residual attributes differing bytes by reference
 # VA, and every symbol after a changed object moves, so a per-function delta is
 # attribution ONLY when no other object changed.  Round 179 committed a "-58"
