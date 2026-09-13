@@ -1,5 +1,39 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-132: the split blob runs — prefix surplus `0x160 -> 0xd8`, four bytes
+short of exact — and the four bytes name the last problem.**
+
+`scripts/split_blob.py` (new, not yet wired into `split_link.sh`) locates every
+`_r*.obj` in the reference with its relocation slots masked, sorts by offset,
+and rewrites the response file into `piece0, obj0, piece1, obj1, …` in place of
+`rdata_restore.c.obj`, dropping the moved objects from the tail.  Measured on
+the vehicle:
+
+```
+                     .text VS   .rdata VS   .data raw   members at VA   prefix   prefix bytes
+before                0x22af8     0x2fe1       0xe000        246/319    0x25c8   0 differ
+with split_blob       0x22af8     0x2f51       0xe000        246/319    0x2540   4 differ
+reference             0x22846     0x2e81       0xe000                 0x2468
+```
+
+The four bytes are at `.rdata 0x1fc7`: the CRT marker tables at `0x1fc0` hold a
+pointer, `ref 9c a8 01 10` (`0x1001a89c`) against ours `00 00 00 10` (the image
+base).  A relocation that resolves differently in our layout cannot be placed
+as-is — postlink rewrites `.text` operands, **not `.rdata` contents** — so a
+section holding a pointer has to be *synthesised* from the reference's bytes
+with its symbols defined by our own array rather than linked as the member's
+object.  That is fine for `___lookuptable`, `___dnames`/`___mnames` and the
+unnamed tables (no symbols at all); `__real@8@…` cannot be named in C, so those
+stay in the tail.
+
+Two more limits, both measured and filtered in the script:
+
+* a cut piece is a 4-aligned `.rdata` section, so a section the reference packs
+  at an odd offset (cvt's `__real@8@` at `0x1341`) cannot be landed there;
+* a section that folds (`??_C@…`, re-declared by `rdata_fold.c`) emits nothing,
+  so placing it would leave a gap — placing all of them first took the prefix to
+  `0x2178` with 2,934 mismatching bytes.
+
 **Round-131: the member `.rdata` sections are separable now — `split_coff.py
 --split-rdata`, wired into the pipeline and verified byte-neutral.**
 

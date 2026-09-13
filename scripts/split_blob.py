@@ -1,0 +1,222 @@
+#!/usr/bin/env python3
+"""Put the surviving member `.rdata` sections at their reference offsets.
+
+`rdata_restore.c` reproduces the reference's `.rdata[0x12e8:0x2608)` with one
+array, and the member sections the link still needs land *after* it, pushing
+the import directory late (the postlink prefix check wants that region to be
+exactly `0x2468` bytes and byte-identical).  Most of those sections fold away -
+their `??_C@` names collide with `crt_region/rdata_fold.c`'s literals - but the
+rest cannot: `___lookuptable`, the unnamed pointer tables, the `__real@8@`
+constants, `___dnames` / `___mnames`.
+
+Those have reference offsets *inside* the array's range, which one contiguous
+array cannot express.  This cuts it into pieces around them.  With
+`split_coff.py --split-rdata` each section is its own object, so it can be
+ordered independently of the `.text` it used to be bundled with:
+
+    locate each `_r*.obj` in the reference (relocation slots masked - the rule
+    `scripts/locate_sections.py` uses), sort by offset, and emit
+
+        piece0, obj0, piece1, obj1, ... pieceN
+
+    in place of the blob token, dropping the moved objects from the tail.  The
+    pieces are cut from the reference itself, and the pad LINK puts after an
+    object is absorbed by starting the next piece at the aligned end.
+
+Usage:
+    python3 scripts/split_blob.py --rsp build/split_poc/rsp.rsp \\
+        --split build/split_poc/split --work build/split_poc \\
+        --blob crt_region/rdata_restore.c.obj
+"""
+
+import argparse
+import os
+import shlex
+import struct
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+FOLD_PREFIX = "??_C@"
+
+
+def coff_sections(path):
+    """[(name, bytes, {masked offsets})] for a COFF object."""
+    data = path.read_bytes()
+    count = struct.unpack_from("<H", data, 2)[0]
+    opt = struct.unpack_from("<H", data, 16)[0]
+    out = []
+    for i in range(count):
+        off = 20 + opt + i * 40
+        name = data[off : off + 8].rstrip(b"\0").decode("latin1")
+        size = struct.unpack_from("<I", data, off + 16)[0]
+        ptr = struct.unpack_from("<I", data, off + 20)[0]
+        relptr = struct.unpack_from("<I", data, off + 24)[0]
+        nrel = struct.unpack_from("<H", data, off + 32)[0]
+        mask = set()
+        for k in range(nrel):
+            r = struct.unpack_from("<I", data, relptr + k * 10)[0]
+            mask.update(range(r, r + 4))
+        flags = struct.unpack_from("<I", data, off + 36)[0]
+        out.append((name, data[ptr : ptr + size], mask, flags))
+    return out
+
+
+def coff_external_names(path):
+    """External symbol names of a COFF object."""
+    data = path.read_bytes()
+    symoff = struct.unpack_from("<I", data, 8)[0]
+    nsym = struct.unpack_from("<I", data, 12)[0]
+    strtab = data[symoff + nsym * 18 :]
+    names = []
+    for i in range(nsym):
+        e = data[symoff + i * 18 : symoff + (i + 1) * 18]
+        if e[:4] == b"\0\0\0\0":
+            off = struct.unpack_from("<I", e, 4)[0]
+            name = strtab[off:].split(b"\0")[0].decode("latin1")
+        else:
+            name = e.split(b"\0")[0].decode("latin1")
+        _val, _sec, _typ, cls, _aux = struct.unpack_from("<IhHBB", e, 8)
+        if cls == 2 and name:
+            names.append(name)
+    return names
+
+
+def reference_rdata():
+    raw = (ROOT / "original/Server/server.dll").read_bytes()
+    pe = struct.unpack_from("<I", raw, 0x3C)[0]
+    count = struct.unpack_from("<H", raw, pe + 6)[0]
+    opt = pe + 24
+    for i in range(count):
+        off = opt + struct.unpack_from("<H", raw, pe + 20)[0] + i * 40
+        if raw[off : off + 8].rstrip(b"\0") == b".rdata":
+            vs, _va, _rs, ro = struct.unpack_from("<IIII", raw, off + 8)
+            return raw[ro : ro + vs]
+    raise SystemExit("reference has no .rdata")
+
+
+def locate(ref, body, mask, lo, hi):
+    for at in range(lo, hi - len(body) + 1):
+        for j, byte in enumerate(body):
+            if j not in mask and ref[at + j] != byte:
+                break
+        else:
+            return at
+    return -1
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--rsp", required=True)
+    ap.add_argument("--split", required=True, help="split_coff output directory")
+    ap.add_argument("--work", required=True, help="where the piece sources go")
+    ap.add_argument("--blob", required=True, help="rsp token of the blob to cut")
+    ap.add_argument("--lo", default="0x12e8")
+    ap.add_argument("--hi", default="0x2608")
+    ap.add_argument("--align", type=int, default=4)
+    args = ap.parse_args()
+    lo, hi = int(args.lo, 0), int(args.hi, 0)
+
+    ref = reference_rdata()
+    placed, foldable = [], 0
+    for path in sorted((ROOT / args.split).glob("*.obj")):
+        secs = coff_sections(path)
+        rdata = [s for s in secs if s[0].startswith(".rdata") and s[1]]
+        if len(rdata) != 1:
+            continue
+        name, body, mask, flags = rdata[0]
+        comdat = bool(flags & 0x1000)
+        if len(body) > hi - lo:
+            continue
+        syms = coff_external_names(path)
+        if syms and all(n.startswith(FOLD_PREFIX) for n in syms):
+            # rdata_fold.c re-declares this literal, so the linker folds the
+            # section away and it emits no bytes: placing it would leave a gap.
+            foldable += 1
+            continue
+        at = locate(ref, body, mask, lo, hi)
+        if at < 0:
+            foldable += 1          # re-declared literal: folds, emits nothing
+            continue
+        if at % args.align:
+            # msvc6 emits the cut pieces as 4-aligned `.rdata` sections, so a
+            # section the reference packs at an odd offset (a `__real@8@` right
+            # after a string) cannot be landed there - leave it where it is and
+            # let the tail keep those bytes.
+            print(f"  odd offset {at:#x}, not placed: {path.name}", file=sys.stderr)
+            continue
+        placed.append((at, len(body), path, comdat))
+    placed.sort()
+    print(
+        f"{len(placed)} sections placed, {foldable} not found (folded or not in "
+        f"the blob range)",
+        file=sys.stderr,
+    )
+
+    pieces, sequence, cursor = [], [], lo
+    for at, size, path, comdat in placed:
+        if at < cursor:
+            print(f"  overlap, skipping {path.name} at {at:#x}", file=sys.stderr)
+            continue
+        pieces.append((cursor, at))
+        sequence.append(path)
+        # A COMDAT section (??_C@, __real@) is byte-packed - the reference has
+        # one at an odd offset - while a plain one is aligned.  Measured: a real
+        # at 0x1341 is followed by 0x1349, and a 0x3d-byte table by 0x40.
+        cursor = (
+            at + size
+            if comdat
+            else (at + size + args.align - 1) // args.align * args.align
+        )
+    pieces.append((cursor, hi))
+
+    rsp = Path(args.rsp)
+    tokens = shlex.split(rsp.read_text())
+    blob_token = next((t for t in tokens if t.endswith(args.blob)), None)
+    if blob_token is None:
+        raise SystemExit(f"no {args.blob} token in {rsp}")
+
+    piece_tokens = []
+    for i, (a, b) in enumerate(pieces):
+        if a == b:
+            piece_tokens.append(None)      # sections are adjacent: no gap
+            continue
+        name = f"g_rdata_piece_{i}"
+        src = Path(args.work) / f"{name}.c"
+        body = ref[a:b]
+        lines = [f"const unsigned char {name}[0x{len(body):x}] = {{"]
+        for j in range(0, len(body), 16):
+            lines.append("\t" + ",".join(f"0x{x:02x}" for x in body[j : j + 16]) + ",")
+        lines.append("};")
+        src.write_text("\n".join(lines) + "\n")
+        obj = Path(args.work) / f"{name}.obj"
+        subprocess.run(
+            ["rebrew-cmake-cl", "/nologo", "/c", "/O2", "/Gd", "/MT", f"/Fo{obj}", str(src)],
+            check=True,
+            capture_output=True,
+        )
+        piece_tokens.append(os.path.relpath(obj, ROOT / "build"))
+
+    moved = {os.path.relpath(p, ROOT / "build") for p in sequence}
+    new_tokens = []
+    for t in tokens:
+        if t == blob_token:
+            for i in range(len(pieces)):
+                if piece_tokens[i] is not None:
+                    new_tokens.append(piece_tokens[i])
+                if i < len(sequence):
+                    new_tokens.append(os.path.relpath(sequence[i], ROOT / "build"))
+            continue
+        if t in moved:
+            continue
+        new_tokens.append(t)
+    rsp.write_text(" ".join(new_tokens))
+    print(
+        f"{len(pieces)} pieces + {len(sequence)} placed sections written into {rsp}",
+        file=sys.stderr,
+    )
+
+
+if __name__ == "__main__":
+    main()
