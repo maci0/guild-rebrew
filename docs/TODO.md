@@ -29,6 +29,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-309 (2026-09-13): volatile grid on the rotation triple — exhausted.**
+
+- `volatile` on base: triple unchanged (extra spills net identical score).
+  `volatile` on row: collapse (179/259). `volatile` on inner: collapse
+  worse (200/288, obj 768 span break). No member-homing flips the other
+  two to reference homes. All reverted. The triple is unsteerable at the
+  qualifier level too — declaration, removal, pressure, homing all inert
+  or worse.
+- Residue baseline unchanged: **9,209**.
+
 **Round-308 (2026-09-13): baseline currency + GOLDTL scope confirmed.**
 
 - `residue_base.log` function rows identical to a fresh run — linktest
