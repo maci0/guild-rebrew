@@ -287,39 +287,48 @@ def conflicts(moved: str, other: str) -> bool:
     )
 
 
-def score(path: Path, va: str, size_ref: int | None = None) -> tuple[int, int, int, int]:
-    """(object size unchanged, matched, -insn delta, object size).
+def score(
+    path: Path,
+    va: str,
+    size_ref: int | None = None,
+    objective: str = "matched",
+    true_delta: list[int] | None = None,
+) -> tuple[int, int, int, int]:
+    """Score one candidate; the returned key depends on `objective`.
 
-    `size_ref` is the object size the run started from.  The composition's
-    position alignment depends on it *not changing*: every symbol lands at its
-    reference VA only while the objects keep the sizes the vehicle placed them
-    with, so a candidate that grows OR shrinks a function drags everything after
-    it.  (Measured both ways: a 13-byte-short cm_ExSellObjekt took the linked
-    image from 11,336 to 89,509 bytes, and CrashDump growing 2128 -> 2144 took
-    it to 129,388 with 0/319 symbols aligned.  The earlier "growth is fine"
-    reading came from crt_region/dllmain.c, whose body LIBCMT supplies -- it is
-    not in the link at all.)
+    `matched` (default) keeps the object at the size the run started from --
+    the composition's position alignment depends on that size not changing
+    (measured both ways: a 13-byte-short cm_ExSellObjekt took the linked image
+    from 11,336 to 89,509 bytes, and CrashDump growing 2128 -> 2144 took it to
+    129,388 with 0/319 symbols aligned), and maximises matched bytes.
+
+    `size` instead minimises |object - reference|, which is what a function
+    whose size is already wrong needs first: byte identity implies size
+    identity, so no amount of byte matching closes a function that compiles a
+    different number of bytes.  It is allowed to reduce the match to get there.
     """
     r = subprocess.run([PYTHON, str(PROBE), "--va", va, "--file", str(path)],
                        capture_output=True, text=True, cwd=ROOT)
     m = re.search(r"size (\d+):.*matched (\d+)/(\d+).*instructions (\d+) vs (\d+)"
                   r".*object size (\d+)", r.stdout, re.S)
     if not m:
-        # A candidate that does not compile must lose to every real score: the
-        # size key is negative, so a plain -1 would outrank it.
+        # A candidate that does not compile must lose to every real score.
         return -1 << 30, -1, -1, -1
     target, matched = int(m.group(1)), int(m.group(2))
     delta = -abs(int(m.group(4)) - int(m.group(5)))
     obj = int(m.group(6))
-    # A function must never come out SHORTER than the reference's, and that is
-    # the only size rule the composition imposes: it places each function at its
-    # reference VA and trims an object that overruns (crt_region/dllmain.c links
-    # a 203-byte object into the reference's 157-byte slot byte-perfectly), but
-    # it cannot pad a gap.  Measured the hard way: a 13-byte-short
-    # cm_ExSellObjekt took the linked image from 11,336 to 89,509 differing
-    # bytes while its object-level score rose 387 -> 615, whereas the same climb
-    # at +16 bytes was harmless.  Growth therefore ranks equal to an exact size;
-    # only a shortfall loses.
+    if objective == "size":
+        true_delta = true_delta if true_delta is not None else [0]
+        # `want` is the probe size that corresponds to a TRUE object size of
+        # `target`: the probe's padding offset is fixed per function, so it
+        # cancels when the caller says how far off the true size is.
+        want = (size_ref if size_ref is not None else obj) - true_delta[0]
+        return (
+            -abs(obj - want),
+            1 if obj >= want else 0,   # a shortfall leaves a gap the vehicle cannot fill
+            matched,
+            obj,
+        )
     if size_ref is None:
         size_ref = target
     return (1 if obj == size_ref else 0), matched, delta, obj
@@ -349,6 +358,16 @@ def main() -> int:
     ap.add_argument("--symbol", default=None)
     ap.add_argument("--rounds", type=int, default=10)
     ap.add_argument("--reach", type=int, default=3, help="max displacement")
+    ap.add_argument("--objective", choices=("matched", "size"), default="matched",
+                    help="maximise matched bytes (default, keeping the object's "
+                         "size fixed) or drive the object's size toward the "
+                         "reference's (needs --true-delta)")
+    ap.add_argument("--true-delta", type=int, default=0,
+                    help="the function's TRUE object-size error now, from "
+                         "`rebrew test --no-promote` (probe_function's object "
+                         "size carries a per-function COMDAT-padding offset, so "
+                         "'minimise |probe - target|' does not minimise the real "
+                         "error: for m_AllocTracked it drove a +2 into a -12)")
     ap.add_argument("--swaps", action="store_true",
                     help="also try exchanging two statements (a different "
                          "neighbourhood from relocation, and cheap)")
@@ -422,7 +441,7 @@ def main() -> int:
     def submit(spec) -> tuple[tuple, tuple[int, ...]]:
         tmp = src.with_name(f"_hc_{name}_{spec[0]}{spec[1]}_{spec[2]}.c")
         tmp.write_text(header(head) + render(apply_spec(order, spec)) + tail)
-        return spec, score(tmp, args.va, size_ref)
+        return spec, score(tmp, args.va, size_ref, args.objective, delta_box)
 
     def seq(o):
         """The units in the order they currently appear.
@@ -434,11 +453,19 @@ def main() -> int:
         """
         return [units[k] for k in o]
 
-    base = score(src, args.va)
+    base = score(src, args.va, objective=args.objective)
     tgt = target_size(args.va)
     size_ref = base[3]
-    print(f"baseline {base[1]} matched, instruction delta {base[2]:+d}, "
-          f"object size {base[3]} vs target {tgt}")
+    delta_box = [args.true_delta]
+
+    def describe(sc) -> str:
+        if args.objective == "size":
+            return (f"size error {abs(sc[0]):+d}, matched {sc[2]}, "
+                    f"object size {sc[3]} vs target {tgt}")
+        return (f"matched {sc[1]}, instruction delta {sc[2]:+d}, "
+                f"object size {sc[3]} vs target {tgt}")
+
+    print(f"baseline {describe(base)}")
     try:
         for rnd in range(args.rounds):
             cur = seq(order)
@@ -484,14 +511,13 @@ def main() -> int:
                     best, best_move = sc, mv
             if best_move is None:
                 print(f"round {rnd}: no improving move among {len(cands)}; "
-                      f"converged at {base[1]}")
+                      f"converged ({describe(base)})")
                 break
             order = apply_spec(order, best_move)
             i, j = best_move[1], best_move[2]
             base = best
             src.write_text(head + render(order) + tail)
-            print(f"round {rnd}: {best_move[0]} {i} -> {j}   {base[1]} matched "
-                  f"(insn {base[2]:+d})  "
+            print(f"round {rnd}: {best_move[0]} {i} -> {j}   {describe(base)}  "
                   f"{strip_literals(cur[i]).strip().splitlines()[0][:46]!r}")
     finally:
         for p in src.parent.glob(f"_hc_{name}_*.c"):
@@ -504,8 +530,7 @@ def main() -> int:
         print(f"REJECTED: the climb inverted {len(bad)} conflicting pair(s), "
               f"e.g. {bad[:3]}; source restored")
         return 1
-    print(f"final {base[1]} matched, instruction delta {base[2]:+d}, "
-          f"object size {base[3]} vs target {tgt}")
+    print(f"final {describe(base)}")
     return 0
 
 

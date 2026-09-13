@@ -71,6 +71,36 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-164: a size objective, and the finding that reordering cannot fix a
+size.**
+
+10,937 -> 10,934 differing bytes.  Byte identity implies size identity, so
+`hillclimb.py` grew an `--objective size` mode: maximise closeness to the
+reference's size instead of matched bytes, for the functions whose size is
+already wrong.
+
+The first cut was **unsound and was caught by measuring**: it minimised
+`|probe object - target|`, but `probe_function.py` reports the COMDAT size,
+which carries a per-function padding offset (7 bytes for cm_ExSellObjekt, 12 for
+m_AllocTracked).  Minimising against the target therefore drove `m_AllocTracked`
+from +2 to **-12** -- a shortfall, the one thing the composition cannot absorb.
+The mode now takes `--true-delta N` (the real error, from
+`rebrew test --no-promote`) and drives the probe size toward
+`baseline_probe - N`, and shorter-than-that is ranked below equal-or-longer.
+
+With that, the answer for every size-mismatched function is the same and it is
+worth recording: **statement reordering does not change an object's size.**
+m_AllocTracked (+2), cm_ExSellObjekt (+4) and ls_LoadBuildingEntityState (+4)
+each converged with no improving move against the size objective, and the mode
+was reverted out of the tree.  The size error needs a shape change -- a
+different expression, type or statement form, exactly what the file notes
+describe doing by hand -- not another search.
+
+`ServerMainThread` and `gv_ExAllocGraveyardWorker` were also re-climbed at
+`--reach 12` (double the previous neighbourhood) and converged, so the
+statement-order lever is exhausted on both.  cm_ExSellObjekt's two size-neutral
+swaps survived and are worth -3 linked.
+
 **Round-163: the size map, and a flag sweep over all eighteen.**
 
 10,947 -> 10,937 differing bytes.  Byte identity implies size identity, so the
