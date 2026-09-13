@@ -110,17 +110,26 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--rsp", required=True)
     ap.add_argument("--split", required=True, help="split_coff output directory")
+    ap.add_argument("--defs", action="append", default=[],
+                    help="additional directories to take placed sections from "
+                         "(emit_defs.py output)")
     ap.add_argument("--work", required=True, help="where the piece sources go")
     ap.add_argument("--blob", required=True, help="rsp token of the blob to cut")
     ap.add_argument("--lo", default="0x12e8")
     ap.add_argument("--hi", default="0x2608")
     ap.add_argument("--align", type=int, default=4)
+    ap.add_argument("--byte-align", action="store_true",
+                    help="patch the generated pieces to ALIGN_1 so a section the "
+                         "reference packs at an odd offset can follow one")
     args = ap.parse_args()
     lo, hi = int(args.lo, 0), int(args.hi, 0)
 
     ref = reference_rdata()
-    placed, foldable = [], 0
-    for path in sorted((ROOT / args.split).glob("*.obj")):
+    placed, foldable, absorbed = [], 0, []
+    candidates = sorted((ROOT / args.split).glob("*.obj"))
+    for extra in args.defs:
+        candidates += sorted((ROOT / extra).glob("*.obj"))
+    for path in candidates:
         secs = coff_sections(path)
         rdata = [s for s in secs if s[0].startswith(".rdata") and s[1]]
         if len(rdata) != 1:
@@ -130,6 +139,18 @@ def main():
         if len(body) > hi - lo:
             continue
         syms = coff_external_names(path)
+        carries_text = any(s[0].startswith(".text") and s[1] for s in secs)
+        if mask and not syms and not carries_text:
+            # Anonymous COMDAT data with pointer relocations (the CRT marker
+            # tables at 0x1fc0): nothing names it, so the member object can go
+            # and the piece covers its bytes - the reference's own pointer
+            # values, which is what a relocation in our layout would get wrong
+            # (postlink rewrites .text operands, not .rdata contents).
+            absorbed.append(path)
+            continue
+        if mask:
+            print(f"  has pointers, left in the tail: {path.name}", file=sys.stderr)
+            continue
         if syms and all(n.startswith(FOLD_PREFIX) for n in syms):
             # rdata_fold.c re-declares this literal, so the linker folds the
             # section away and it emits no bytes: placing it would leave a gap.
@@ -139,7 +160,7 @@ def main():
         if at < 0:
             foldable += 1          # re-declared literal: folds, emits nothing
             continue
-        if at % args.align:
+        if at % args.align and not args.byte_align:
             # msvc6 emits the cut pieces as 4-aligned `.rdata` sections, so a
             # section the reference packs at an odd offset (a `__real@8@` right
             # after a string) cannot be landed there - leave it where it is and
@@ -196,9 +217,25 @@ def main():
             check=True,
             capture_output=True,
         )
+        if args.byte_align:
+            # msvc6 emits a `const unsigned char[]` with 4-byte section
+            # alignment, which cannot end at an odd offset; a piece that must
+            # (the reference packs cvt's `__real@8@0` at 0x1341, right after a
+            # string) needs ALIGN_1, so patch our own object's section header.
+            raw = bytearray(obj.read_bytes())
+            count = struct.unpack_from("<H", raw, 2)[0]
+            opt = struct.unpack_from("<H", raw, 16)[0]
+            for k in range(count):
+                off = 20 + opt + k * 40
+                flags = struct.unpack_from("<I", raw, off + 36)[0]
+                if flags & 0x00F00000:
+                    flags = (flags & ~0x00F00000) | 0x00100000  # ALIGN_1
+                    struct.pack_into("<I", raw, off + 36, flags)
+            obj.write_bytes(bytes(raw))
         piece_tokens.append(os.path.relpath(obj, ROOT / "build"))
 
     moved = {os.path.relpath(p, ROOT / "build") for p in sequence}
+    moved |= {os.path.relpath(p, ROOT / "build") for p in absorbed}
     new_tokens = []
     for t in tokens:
         if t == blob_token:
@@ -213,7 +250,8 @@ def main():
         new_tokens.append(t)
     rsp.write_text(" ".join(new_tokens))
     print(
-        f"{len(pieces)} pieces + {len(sequence)} placed sections written into {rsp}",
+        f"{len(pieces)} pieces + {len(sequence)} placed sections + "
+        f"{len(absorbed)} absorbed anonymous sections written into {rsp}",
         file=sys.stderr,
     )
 

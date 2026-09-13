@@ -1,5 +1,35 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-133: the split blob is in the pipeline — `.rdata` is now the reference's
+size exactly, the prefix is byte-identical, and 8 bytes are left.**
+
+`split_blob.py` grew the two things round 132 named, and `split_link.sh` runs it
+before the link:
+
+* it also scans `--defs` (the `___dnames`/`___mnames` tables live in a defs
+  object, not in the split set);
+* an anonymous COMDAT section that holds *pointers* (the CRT marker tables at
+  `0x1fc0`) is **absorbed** rather than placed: nothing names it, so the member
+  object is dropped and the piece covers its bytes — the reference's own pointer
+  values, where a relocation in our layout would put the image base.
+
+```
+                     .text VS   .rdata VS   .data raw   members at VA   import dir   prefix   prefix bytes
+round 128             0x22af8     0x2fe1       0xe000        246/319       0x2768    0x25c8   0 differ
+round 133             0x22af8     0x2e81       0xe000        246/319       0x2610    0x2470   0 differ
+reference             0x22846     0x2e81       0xe000                      0x2608    0x2468
+```
+
+All four raw sizes and file offsets are still `ok` and `.text` placement is
+untouched.  The last **8 bytes** are cvt.obj's `__real@8@00000000000000000000`,
+which the reference packs at the odd offset `0x1341`; `--byte-align` patches the
+generated pieces to `ALIGN_1` so a piece can *end* there (and `.rdata` still
+comes out at `0x2e81`), but the placed section's own object is 4-aligned, so it
+lands at `0x1344` and 3,238 bytes shift.  The remaining work is therefore to
+lower the alignment of *that* object too — it is our own COFF object, not a
+library one — or to place the eight bytes by hand and define the symbol
+elsewhere.
+
 **Round-132: the split blob runs — prefix surplus `0x160 -> 0xd8`, four bytes
 short of exact — and the four bytes name the last problem.**
 
