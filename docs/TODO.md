@@ -1,5 +1,51 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-245: `rebrew todo` says 99.6% matched and lists two items.  That is SEMANTIC
+coverage, not this objective, and the difference is the whole remaining task.**
+
+Running the toolchain's own prioritisation this round:
+
+```
+coverage: ghidra_funcs 219, covered 565, exact 313, reloc 233, proven 17,
+          matching 1, stub 1, documented 0, pct_matched 99.6
+todo:     2 items -- gm_AllocSpieler (roi 39.4, match 26.4%) and
+          ServerMainThread (roi 16.0, match 85.0%)
+```
+
+Both of those are also the two largest items in the linked-residue table, so the tool and
+the byte-identical measure agree on *priority*.  But the headline number does not measure
+this goal, for two reasons, and a future round must not read it as near-completion:
+
+- **The status ordering is semantic, not byte-exact.**  `PROVEN` (semantically verified)
+  outranks `EXACT` (byte-perfect), so a function can be `PROVEN` and still differ
+  byte-for-byte.  `cm_ExCopyEntityData` is `PROVEN` and carries **462 bytes** of linked
+  residue.  `rebrew verify --full` passes a function on object-level equality *with
+  relocation slots masked*, while the linked image compares every byte after patching.
+- **`rebrew todo` lists only functions needing implementation work** (STUB, SIZE_MISMATCH,
+  NEAR_MATCHING).  The other **17** functions carry linked residue while being semantically
+  complete, so they never appear in the list at all.
+
+The two measures are therefore complementary, not competing: `rebrew todo` answers "what
+is not yet implemented", the residue table answers "what is not yet byte-identical", and
+**this objective is the second one.**  After CrashDump's and cm_ExSellObjekt's wins the
+residue table is the authoritative work list:
+
+```
+gm_AllocSpieler                            2861   31%   walled: 168 hunks, distributed
+CrashDumpUnhandledExceptionFilter          1667         agent working (frame 0x28c vs 0x280)
+cm_ExSellObjekt                            1404         agent working (a -121 block-layout step)
+ls_LoadBuildingEntityState                  728         closed: five pinned length steps
+cm_ExCopyEntityData                         462         closed (one -1 win taken)
+gv_ExAllocGraveyardWorker                   456         closed (one -1 win taken)
+ServerMainThread                            371         agent working
+gm_AllocGebaeude                            327         closed on the C-only constraint
+vfs_OpenStream / gm_FindNextFilteredEntity / ahm_ExAllocAlchemist /
+gm_CheckInventoryCapacity / m_AllocTracked / srv_LoadBuf /
+gm_ObjectsAvailble / vfs_ReadCompressed / cm_ExProdObjekt /
+cm_ProcessCommandQueue                      996 total   agents working
+```
+
+
 **Round-244: 9,532 -> 9,297 (-235), the largest single-round drop so far.**
 
 Three link-measured wins, all from agents, all kept only after the link test:
