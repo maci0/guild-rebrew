@@ -71,6 +71,39 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-209: an interrupted agent loses its candidate, and the isolation rule.**
+
+Residue **9,533**.
+
+*Standing requirement, from a real loss.*  Two agents (`dd176ee8`, `067c30f1`,
+`12d219e0` -- three, in fact) were interrupted mid-turn in round 207 to unblock the
+build.  Their candidates were reverted before they could be tested, and neither
+delivered a ranked list, so their work is gone: the surviving scratch directories
+(`.scratch/ovs2`, `pp`, `cmp`, `res`, `rvc2`, `gm_cand`, `ahm2`, `nx`, `fz`) hold dozens
+of variant files each and there is no index saying which one is the frozen candidate.
+The `gm_AllocSpieler` win survived only by luck -- that agent happened to have written
+its candidate to `.scratch/FINAL.c`, which is why round 208 could recover it and measure
+-40.
+
+**So: every agent must leave its frozen candidate at a named, indexable path** --
+`.scratch/<function>.FINAL.c` -- and name that path in its report, before anything else.
+An interrupted turn otherwise costs the whole round's work, and the coordinator cannot
+reconstruct it from a directory of variants.  Put this in the fan-out brief.
+
+*The isolation rule, now demonstrated from both sides.*  The same three candidates
+measured **together** collapsed the composition to 0/319 symbols at reference VA and
+53,931 differing bytes; measured **alone**, `gm_AllocSpieler` was a clean -40.  A single
+object whose length is wrong moves every symbol after it, so a batch measurement
+attributes nothing.  That is now three distinct ways batched measurement has misled
+this campaign: round 179 (an incremental link mixes objects), rounds 201-203 (a build
+compiled while agents write), and this one (several candidates at once).  The rule:
+**one candidate, one full rebuild, one number.**
+
+*Untested and unresolved.*  `cm_ExCopyEntityData` and `gm_AllocGebaeude` were each
+suspected size-changers (the former's `do/while` restructure measured real 900 -> 904;
+the latter's added statement measured object 1104 against 1088) and neither has been
+measured alone.  Their candidates must be re-derived before they can be tested.
+
 **Round-201: restoring the metadata file changes the compile flags, and can break
 the composition.**
 
