@@ -52,6 +52,21 @@ Landed: `src/server.dll/DieGildeAddOnServer/server_c/srv_SeedRandom.c`, an
 `extern` in `command_internal.h`, and the six call sites redirected from
 `srand` to `srv_SeedRandom`.
 
+**The CRT half is now essentially done in the split set.**  Same-offset raw
+match of `build/split_poc.dll` vs the reference, per 8 KB window: the CRT
+windows (`0x1a000` up, i.e. VA 0x1001a000 onward) read 93.9 / 95.1 / 92.7 /
+94.8 / 96.7%, and every *tracked* CRT function reports 100.0% masked with drift
++0 (`__CRT_INIT` 217 B, `_mlock` 97 B, `__old_sbh_alloc_block` 520 B,
+`___sbh_find_block` 43 B, `DllMain` 157 B, all 0 differing).  The residual in
+those windows is untracked CRT bytes, not misplacement.
+
+That makes the split set's object list the thing the **build** should be
+linking.  `scripts/split_link.sh` already assembles it (CMake objects + one
+object per mapped LIBCMT section, in reference order); the CMake target still
+links stock `LIBCMT.lib`, whose member order is scrambled (round 106, drift
++9516 at `__CRT_INIT`).  Converting the target to the ordered object list is the
+next structural step; nothing about the CRT's *content* is still open.
+
 **Round-106: the CRT member set, and why `.text` size parity is a trap.**
 
 **The CMake link is missing 26 LIBCMT members the reference has.**  Joining
