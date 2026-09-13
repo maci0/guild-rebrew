@@ -29,6 +29,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-323 (2026-09-13): polarity census void (relative targets).**
+
+- Same-mnemonic polarity-pair census across all rows found apparent
+  same-target pairs (CopyData `jge/jl 0x32b`, Gebaeude `je/jne 0x19d`).
+  Both dissolve: `rebrew diff` prints branch targets as RELATIVE
+  displacements, so equal strings are coincidence, not equal successors
+  (Gebaeude's pair sits in the known cmp-2/6 crossover). Polarity
+  comparison needs VA-resolved successors; text matching can't do it.
+  No probe.
+- Residue baseline unchanged: **9,209**.
+
 **Round-322 (2026-09-13): size audit — methodology wrong, data right.**
 
 - Compared metadata SIZE against functions.txt for all 18 rows: 6 differ
