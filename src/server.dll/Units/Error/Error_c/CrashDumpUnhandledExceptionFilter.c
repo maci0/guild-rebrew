@@ -351,7 +351,6 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 write_nl:
 	WriteFile(hCrashLog, szLine, 2, &nBytesWritten, 0);
 
-	hProcess = GetCurrentProcess();
 unknown_exc:
 
 	nFrames = 0x800;
