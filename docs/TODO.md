@@ -1,5 +1,50 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-98: the round-97 tool pays for itself -- `m_AllocTracked` 6,528 ->
+6,515.**
+
+The content-gap list for `m_AllocTracked` was seven target-only instructions,
+and one pair of them was the fold `docs/msvc6-c-shapes.md` section 8b is about:
+
+```
+target 0x10006755  mov edi,[g_stat2]        ; loaded into a register, and live
+                   mov eax,[g_array_count]  ;   for the slot loop below
+                   cmp eax,edi
+ours               cmp dword ptr [g_stat2],reg   ; folded: g_stat2 read twice
+                   mov edi,[g_stat2]
+```
+
+A volatile read on the operand that must stay in a register fixes it:
+
+```c
+if (g_stat2 < *(volatile int*) &g_array_count) {
+```
+
+```
+obj_size        649 -> 654   (reference 658)
+match_count     257 -> 269
+content gap       7 -> 6 target-only, 2 cand-only
+split pipeline  6,528 -> 6,515 masked differing bytes
+```
+
+Both operands are `int` and the read is the same value, so the volatile is
+behaviour-preserving.  Gate: 0 lint errors, 0 compile/link errors,
+`verify --full` 280/282.
+
+**The lever does not generalise.**  Searching every remaining non-exact
+function's content-gap list for a candidate-side `cmp ... [R]` fold finds none:
+`ahm_ExAllocAlchemist`, `vfs_OpenStream`, `cm_ExCopyEntityData`,
+`vfs_ReadCompressed`, `gm_AllocGebaeude`, `gv_ExAllocGraveyardWorker` and
+`cm_ExSellObjekt` have no folded-memory-compare in their gap.  The pattern was
+specific to `m_AllocTracked`'s guard, where the loaded global is also live
+across the following loop.
+
+**`ls_LoadBuildingEntityState`'s gap is exactly its documented blocker.**
+Content gap 49 target-only, and the list opens with `push ebp` / three
+`pop ebp` / `or ebp,0xffffffff` / `mov [eax],ebp` -- the fourth callee-saved
+register and the `-1` sentinel cache.  Nothing else in its 49 is structural,
+so that function is one allocator decision away and no further.
+
 **Round-97: the content/​schedule split, per function.**
 
 New tool `.scratch/relcat.py`.  The old comparisons all conflate two different
