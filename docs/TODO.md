@@ -1,5 +1,70 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-244: 9,532 -> 9,297 (-235), the largest single-round drop so far.**
+
+Three link-measured wins, all from agents, all kept only after the link test:
+
+| function | change | object honest | linked |
+|---|---|---|---|
+| CrashDumpUnhandledExceptionFilter | dispatch chain -> one `switch` (+ dead store, + call order) | matched 231 -> 478 | **-219** |
+| cm_ExSellObjekt | `weight_fraction` forced into the log buffer's first slot | matched 598 -> 613, **aligned 491 -> 461** | -15 |
+| gv_ExAllocGraveyardWorker | combined counter bump + two pinned stores | matched 535 -> 541 | -1 |
+
+The CrashDump win is the switch/table-order lever of `msvc6-c-shapes.md` section 65: a
+chain and a real `switch` emit their out-of-line jump tables in opposite order, and the
+reference's order is the switch order.
+
+**The object metrics disagreed in sign on two of the three.** `cm_ExSellObjekt` improved
+`matched` and `matched-reloc` while `aligned` fell by 30, and the link agreed with the
+former; `gv_ExAllocGraveyardWorker` gained 6 byte-agreement bytes while `matched-reloc` fell
+and `aligned` did not move. That is now six recorded instances. The rule stands: **only the
+link test ranks a candidate**, and no object metric may be used to reject one.
+
+**Three functions closed, and one of them on constraint grounds rather than merit.**
+
+- `gm_AllocSpieler` (2,861, now 31% of everything left): no improvement in ~39 probes; the
+  cascade re-open was wrong (see the round-244 correction above). Two passes plus this one
+  agree it is distributed. It also has a hard **140-byte metric ceiling** (one-sided
+  relocations; see below), so its reachable target is ~2,721.
+- `ls_LoadBuildingEntityState` (728): no improvement in ~31 probes. The delta curve steps
+  five times, not once, so there is no single encoding to find; all 68 archived probe
+  objects for this VA re-score at or below HEAD's 645 matched.
+- `gm_AllocGebaeude` (327): a candidate measured matched 683 -> 830 and reloc 823 -> 970,
+  but its lever is an `__asm { nop nop nop }` **scheduling barrier**, and the objective is C
+  only. Removing just the barrier gives 377 (worse than HEAD) and a COMDAT of 1072 instead
+  of 1088, which moves the jump table and breaks composition -- so the whole gain rested on
+  the barrier and the file was reverted. See `msvc6-c-shapes.md` section 69.
+
+**Current ranking** (from a full regeneration, 9,297):
+
+```
+gm_AllocSpieler                            2861   31%
+CrashDumpUnhandledExceptionFilter          1667
+cm_ExSellObjekt                            1404
+ls_LoadBuildingEntityState                  728
+cm_ExCopyEntityData                         462
+gv_ExAllocGraveyardWorker                   456
+ServerMainThread                            371
+gm_AllocGebaeude                            327
+vfs_OpenStream                              245   then 10 more, all under 250
+```
+
+**End-to-end verified this round.** Rather than trust the per-file link tests
+individually, the tree was rebuilt from scratch through the deliverable pipeline
+(`scripts/split_link.sh` + `postlink_residual.py --write`): `build/server.dll` is 286,720
+bytes at residue **9,297**, exactly the accumulated baseline. So the three commits
+reproduce end to end.
+
+**Operational footgun, worth knowing.** `cmake --build build` FAILS at the post-link layout
+step by design (the cmake link's `.text` is short -- `0x221e6` against `0x22846` -- and the
+layout package needs 90% alignment, getting 5.1%), with **no `error C####` or `error
+LNK####`**, which is why `scripts/gate.sh` counts only those. The consequence to remember:
+`make` **deletes the failed target**, so `build/server.dll` disappears. Regenerate it with
+`bash scripts/split_link.sh` followed by
+`.venv/bin/python scripts/postlink_residual.py --write build/server.dll`. Never leave the
+tree after a bare `cmake --build` without doing that, or the deliverable is simply gone.
+
+
 **Round-243 (instruments): the tools the campaign depends on were untracked, and one of
 them was quietly lying.**
 
