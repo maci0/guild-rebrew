@@ -222,13 +222,15 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	}
 
 	/* Seek to end of crash log */
-	hProcess = GetCurrentProcess();
 	memcpy(szLine, "\r\n", 3);
 	space = ' ';
 	memcpy(szSep, "------------------------\r\n", 0x1b);
 	SetFilePointer(hCrashLog, -1, 0, 2);
 
 	/* Write separator line */
+	nFrames = 0x800;
+	hProcess = GetCurrentProcess();
+	frameInfo[0] = (int) pDbgBuf;
 	WriteFile(hCrashLog, szSep, 0x1a, &nBytesWritten, 0);
 
 	/* Write date */
@@ -360,7 +362,6 @@ unknown_exc:
 	frameInfo[4] = 0;
 	frameInfo[5] = 0;
 	frameInfo[6] = 0;
-	nFrames = 0x800;
 	pStack = (unsigned int*) (pCtx->Esp - 4);
 
 	for (;;) {
@@ -410,6 +411,7 @@ done_walk:
 	CloseHandle(hCrashLog);
 	VirtualFree(pDbgBuf, 0, 0x8000);
 	CloseHandle(hDbgFile);
+	goto no_dbg;
 
 log_close:
 	LogMessageInternal((char*) 0x10027144, fail_line, fail_msg, 1);

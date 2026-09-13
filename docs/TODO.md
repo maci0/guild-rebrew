@@ -142,6 +142,25 @@ one, so it is being held out of the tree until the agent confirms against the
 reference disassembly that the original really does branch over it; the date/time
 block reorder and the `hProcess` move are pure ordering and are kept.
 
+*CrashDump's `goto` is the reference's control flow, not a shortcut.*  The
+candidate link-tested 1988 -> 1967.  `goto no_dbg;` before `log_close:` looked
+like a behavioural change, so it was held out and the agent asked to justify it
+against the reference rather than the score.  It did, by enumerating branch
+targets: the reference's normal path ends `0x10002dae  e9 b3 00 00 00  jmp
+0x10002e66` (unconditional, landing on `no_dbg`), and the block our fall-through
+reached at `0x10002db3` is the target of exactly one branch, `je 0x10002db3` at
+0x100028f5, the `hCrashLog == -1` failure arm.  The four LogMessageInternal call
+sites are 0x10002dc4/0x10002dfa/0x10002e3a/0x10002e5e and the normal path reaches
+none of them.  So the fall-through was the reconstruction bug.
+
+*Probe drivers that write into the source make link validation racy.*  Three agents
+sweep by writing each experiment into the source file and restoring it seconds
+later.  `linktest.sh` recompiles that exact path, so a run sampling mid-sweep
+measures a transient — which is what produced a spurious `m_AllocTracked` +161 (the
+file was back at HEAD with no diff when inspected).  The protocol is now: an agent
+puts its best candidate in the file, stops sweeping, and says "file frozen" before
+any link test; only then is the file measured.
+
 **Round-173: the eighteen holdouts fanned out across six subagents, and the
 object-level proxy caught pointing the wrong way four more times.**
 
