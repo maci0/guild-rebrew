@@ -71,6 +71,35 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-187: the baseline was stale, and the volatile-declaration lever has no
+remaining instances.**
+
+Residue **9,686** -- and that is a correction, not a regression.
+
+*The 9,644 figure was measured against a stale object.*  `linktest.sh` recompiles
+only the files it is named, so the per-function tables of rounds 185-186 were built
+on whatever objects happened to be in `build/`, and at least one of them
+(`cm_ExSellObjekt`) was a variant whose source had since been reverted.  A plain
+`gate.sh` full rebuild -- which is what a fresh clone gets -- produces **9,686**, with
+`cm_ExSellObjekt` at 1,460 against the 1,413 the incremental runs reported.  The
+lesson is the same one round 179 taught from the other side: an incremental link is
+only as good as the objects it did not recompile.  **Run the gate (or `cmake
+--build`) before believing a new low**, and treat it as the baseline.  The 1,413
+reading is not reproducible from HEAD and should not be chased.
+
+*The `volatile`-declaration lever is exhausted.*  Round 185's -62 came from replacing
+`volatile int done; volatile int result;` with plain locals plus `*(volatile int*) &x`
+at the use sites.  A sweep for the same shape finds only two bare `volatile`
+declarations left in the tree: `srv_InitBuildingTypeTable`'s `volatile int n;` (inside
+an `__asm` fill, and outside the holdout set) and `gv_ExAllocGraveyardWorker`'s
+`volatile int iv;`, which is a deliberate *never-read* scheduling barrier with no use
+site to move the qualifier to.  Neither is applicable, so that lever is done.
+
+Note also that the `Europa1400Gold_TL.exe` copies of `vfs_ReadCompressed.c`,
+`m_AllocTracked.c` and `vfs_ReadData.c` still carry the old `volatile int`
+declarations -- independent evidence that the pattern was in the original source and
+that removing it in the server.dll copy is the faithful direction.
+
 **Round-186: the real-length lever is closed, and two candidates measured at the
 link.**
 
