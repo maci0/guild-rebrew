@@ -71,6 +71,44 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-168: why a better object cannot be bought, and the mechanism behind it.**
+
+No byte change (10,934).  Every per-function lever is now measured flat: the
+last unfinished climb (`ahm_ExAllocAlchemist`, 89 statements, whose earlier runs
+all timed out mid-round-0) completed and converged immediately (851 matched, one
+declaration swap, no gain), and all eighteen have converged under the current
+tool, on every flag variant, on VC5/VC4.2, and against the size objective.
+
+So the round went at the thing that blocks the one measured win.  The layout is
+`make_split_rsp.py`'s order (sorted by reference VA) plus each object's section
+sizes -- there is no alignment flag in the link command
+(`/nologo /out: /dll /machine:I386 /incremental:no /OPT:NOREF /FORCE:MULTIPLE
+/ENTRY:...`), which is why a size change moves everything after it.
+
+Two observations worth keeping, and one that does not fit:
+
+- `scripts/split_audit.py` reports 246/319 symbols exactly at their reference VA
+  with deltas up to +0x31c, i.e. the vehicle already carries accumulated drift;
+  the residue is attributed per function regardless.
+- A size change of +1/+2/+4 (gm_AllocSpieler, m_AllocTracked, cm_ExSellObjekt,
+  ls_LoadBuildingEntityState) and the current -8 on cm_ExCopyEntityData are all
+  absorbed -- consistent with LINK aligning each object's section to 16 bytes, so
+  only a change that crosses a 16-byte boundary (CrashDump +16, the two-arm clamp
+  -16, `/Oy-` -112) moves the following symbols.
+- The counter-example: `vfs_OpenStream` sits 26 bytes OVER its target (693 vs
+  667) and the composition is aligned anyway.  So the 16-byte rule is the best
+  model so far, not established fact.
+
+The unblocking work is therefore concrete: make the vehicle absorb a size
+difference by padding each function's `.text` to its reference size, after which
+the cm_ExCopyEntityData clamp rewrite (+50 matched, -16 size, currently refused
+by a full-composition collapse to 86,425 bytes of residue) becomes adoptable, as
+would every similar trade.  `scripts/split_coff.py:build_object` is the existing
+COFF emitter to build it on.  A first attempt this round rewrote our objects'
+section headers directly and was abandoned as too fragile; emitting a small
+padding object per short function and inserting it into the response file is the
+simpler mechanism.
+
 **Round-167: VC6 confirmed by measurement, and a size/bytes trade the link
 refuses.**
 
