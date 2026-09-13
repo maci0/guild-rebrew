@@ -71,6 +71,37 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-220/221: the block-creation-order lever does NOT reach
+`gm_FindNextFilteredEntity`, and why.**
+
+Residue **9,533**.  Recorded as a negative with its reason, because the function looks
+like the best remaining target on paper -- the lowest alignment in the tree (63/118,
+53.4%) with 226 bytes -- and §59 is the newest lever, so a future round would
+otherwise retry it.
+
+`gm_FindNextFilteredEntity`'s guards are early returns:
+
+```c
+if (g_entity_type_table == 0)  { return 0; }
+end = (unsigned char*) g_entity_ptr + 0xa900;
+if (g_dynasty_field_4c > 0x100) { return 0; }
+```
+
+§59's mechanism is that the front end creates `else`-blocks innermost-first, so
+`if (success) { body } else { error }` materialises cold handlers at the tail in reverse
+source order.  Applying it to an early-return guard means nesting the entire remainder
+of the function in the success arm -- but **the reference has no tail handlers here**:
+it keeps two inline `xor eax,eax; pop esi; ret` epilogues and jumps over them
+(`jne`/`jle`).  What is needed is the opposite of nesting, and the obstacle is that
+msvc6 cross-jumps the identical guard bodies into one shared block.  §59 changes *where*
+a cold handler lands, not whether identical bodies merge, so it does not reach this.
+
+That matches the earlier agent's measurement here: every distinct-return spelling
+(`end - end`, `&0`, `*0`, a ternary, `^`, `(char*)0`) compiled **byte-identically**,
+because msvc6 constant-folds them before cross-jumping.  The function was closed on that
+evidence and §59 does not reopen it.  Its 53.4% alignment is a cross-jumping wall, not a
+block-creation-order one.
+
 **Round-217: the corrected per-function picture.**
 
 Residue **9,533**.  With `instr_diff.py`'s decode fixed (round 215), the alignment
