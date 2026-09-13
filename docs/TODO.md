@@ -29,6 +29,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-301 (2026-09-13): slot[9] length-neutral attempts ×3, all same wall.**
+
+- Revisit condition from round 288 tested three ways (`n`-reuse: 3671;
+  dedicated temp: 3679; address-taken `*(char*)&arg8`: 3679 — all vs
+  3689 base, match ~571 vs 973). The -10 is structural (slot[0x166]
+  load chain + arg8 reload scheduling), not spelling-fixable; the
+  reference's reload needs pressure our build won't reproduce. Reverted
+  all three. Bug stays recorded with its condition unmet.
+- Residue baseline unchanged: **9,209**.
+
 **Round-299 (2026-09-13): deliverable loads under Wine.**
 
 - First runtime evidence this session: `build/server.dll` (286,720 B)
