@@ -29,7 +29,7 @@ objects: every one of the 196 CMake objects has COMDAT `.text` sections
 spiel.c.obj   .text chars 0x60501020   COMDAT=YES     (5 such sections)
 ```
 
-which is MaSVC's `/Gy` function-level linking, and `/OPT:REF` discards any that
+which is MSVC's `/Gy` function-level linking, and `/OPT:REF` discards any that
 the entry point cannot reach.
 
 So the `/OPT:REF` route needs `/Gy-` on the whole build, not just on the split
