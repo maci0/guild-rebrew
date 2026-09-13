@@ -108,6 +108,23 @@ were the reason it had withheld the spelling, and this measurement shows why the
 ranking metric is the wrong instrument for a layout hypothesis: the object score
 ignores the 22 bytes it would have fixed.
 
+The 8 bytes are then localised by tracking the cumulative offset gap (ours minus
+the reference's) across the aligned streams: it starts +1, peaks +6 around refoff
+0xc6, and ends **-8** at refoff 0x289, so 14 bytes are lost between 0xc6 and the
+epilogue.  Two sites account for it, and the table/case map are byte-for-byte the
+same size in both objects (5 four-byte entries + a 13-byte map) — the table only
+*starts* 8 bytes early:
+
+- ref[79:82] at refoff 0x107, **7 bytes we do not emit at all** —
+  `jmp 0x1000912d; test bl,bl; je 0x100090ea`.  A forward jump over a two-
+  instruction test/branch-back, i.e. a CFG difference in the `check_header` /
+  `inflate_setup` region, not instruction selection.  Seven of the eight.
+- the finalize tail from ~0x246, where the gap collapses +6 -> -17 in one hunk:
+  the reference reloads `[esp+0x18]` (mode18) twice and its `g_stream_count` RMW is
+  the 5-byte `mov eax,[0x10034678]` form.
+
+The agent has been given both sites, with (1) to be attempted alone.
+
 **Round-180: a semantic break caught by reading the diff, and a neutral candidate
 discarded.**
 
