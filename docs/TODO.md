@@ -4,6 +4,21 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-289 (2026-09-13): ExSell semantic review clean + size truth
+reconciled.**
+
+- Scout semantic review: NO behavioral divergence; 31/31 calls verified in
+  order with matching args; the dest out-param reuse confirmed correct
+  (branch 2 tests the DEST's entity); all types/offsets/conditions/log
+  lines match. Full region coverage in the scout report.
+- Same review caught FOUR conflicting size numbers: header "obj 2055",
+  note "2057 (was 2055)", metadata 2057, probe span 2064, test real-body
+  2059. Reconciled: reference 2057 (functions.txt); ours 2059 real
+  (+2 since the weight_fraction fix, span-neutral at 2064). Header
+  corrected (comment-only). Metadata 2057 stands (reference size).
+- CrashDump semantic review still running; lands next round.
+- Residue baseline unchanged: **9,209**.
+
 **Round-288 (2026-09-13): semantic review finds a REAL Spieler bug; fix
 correct but unlandable (+393).**
 

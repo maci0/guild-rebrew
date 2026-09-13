@@ -97,7 +97,9 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * (other locals' homes), which eleven initializer rotations left
  * byte-identical.  Do not chase the permutation through the out-params.
  *
- * Byte-level: still SIZE_MISMATCH (obj 2055 vs target 2057) — the residual
+ * Byte-level: still SIZE_MISMATCH (obj 2059 vs target 2057 — the "2055"
+ * figure here predated the weight_fraction fix; span-neutral at COMDAT
+ * 2064) — the residual
  * deltas are the tail-merge shape (candidate inlines the two error tails;
  * reference shares one tail at 0x1000e00e), the case-block order, and the
  * register-role/slot cascade (the frame itself now matches; see above).
