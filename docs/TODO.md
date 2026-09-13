@@ -1,5 +1,43 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-147: `.data` ordering does not move the gate — the fixers repair those
+entries indirectly, and the round-146 plan is dead.**
+
+*Measured, with the vehicle untouched* (scratch response files + scratch links):
+
+* **Moving the 0x74a0-byte data restore blob from its early rsp slot to the end
+  changes the `.data` layout but not the score.**  `.scratch/datadelta.py`
+  locates every rsp object's `.data` body in both images: 189 placeable sections,
+  and the deltas go from `+0x6b30 ×33 / -0x7930 ×33 / -0x7cec ×17` (blob first) to
+  `-0x490 ×33 / -0x84c ×17 / +0x2780 ×14`.  **Coverage stays 90.0%** (498 operands
+  + 251 calls).  In *both* builds **no** section sits at its reference offset, so
+  the composition's data order is wrong throughout and a single move only shifts
+  the cluster.
+* **Why the fixers gain 88 entries.**  They are the skewed four-byte map windows
+  that *overlap a real operand*: patching the operand (in range) changes the
+  window's bytes with it — `0x10003332` goes pre-patch `0x5ca30000` (out of span)
+  to post-patch `0x10a30000` = the reference value.  All 88 compare as
+  "patched-to-reference" (46 calls + 42 operands).  So the failing entries are
+  *not* data-placement-driven, and reordering `.data` cannot move the gate.
+* **The round-146 literal plan does not link.**  `.scratch/split_data.py` splits
+  our objects' `.data` into 210 per-section objects and sorts them by reference
+  offset: the link then fails with `LNK2001: _fixed_bl`,
+  `??_C@_02JNFB@at?$AA@`, `_?my_version@…` — `build_object`'s library-member
+  symbol protocol is not a drop-in for a TU object, and the text objects lose the
+  definitions their data sections used to carry.  Abandoned; nothing committed.
+
+*Consequence for the gate.*  The pre-patch operand rule is a **proxy** for
+`.text` alignment, and it mis-scores this build: the `.text` *is* aligned
+(`link_drift`: drift `+0` on every function) while the `.data` layout differs —
+and the `data` fixer rewrites those operands anyway (post-patch coverage 91.1%,
+698 -> 661 failing, comfortably past the 90% line).  Two honest routes to green:
+3 more *code* entries (smallest residuals: `cm_ProcessCommandQueue` 2,
+`cm_ExProdObjekt` 2, `gm_ObjectsAvailble`'s register swap ~5), or a toolchain
+decision about the gate's proxy — which is the user's call, not mine.
+
+Standing: coverage **90.0%** (749 failing, 3 short), `.text` residual `0x2db6`,
+every other section byte-identical after the fixers, gate green.
+
 **Round-146: the last 3 entries are not a padding problem — our `.data` differs
 structurally; three more volatile lotteries failed.**
 
