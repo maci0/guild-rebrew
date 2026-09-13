@@ -1,5 +1,61 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-97: the content/​schedule split, per function.**
+
+New tool `.scratch/relcat.py`.  The old comparisons all conflate two different
+things: instructions we are **missing** (a source change can fix those) and
+instructions that are merely **scheduled or allocated differently** (no source
+change has ever fixed one).  Both look identical to a byte diff, because a
+reorder shifts every later byte.
+
+The tool canonicalises both streams with relocation *and* image-address masking
+(the candidate is a COFF object whose symbol operands are zeros -- and several
+sources here write the target VA as a **literal**, so their object needs no
+relocation at all while the reference has one, which is why a relocation-table
+based mask disagreed), LCS-aligns, and reports the multiset difference of the
+*unmatched* instructions.  Reorders cancel in that multiset; real gaps do not.
+
+```
+function                       tgt  cand  matched  runs  target-only  cand-only
+cm_ExProdObjekt                354   354    350      4        1           1
+srv_LoadBuf                    226   226    212     16        4           4
+m_AllocTracked                 249   244    231     27        7           2
+gm_CheckInventoryCapacity      138   137    126     10        8           7
+gm_FindNextFilteredEntity      118   109     93     13       16           7
+vfs_ReadCompressed             200   201    164     25       21          22
+ahm_ExAllocAlchemist           286   287    244     32       33          34
+vfs_OpenStream                 206   212    166     24       34          40
+gm_AllocGebaeude               346   359    277     39       44          57
+cm_ExCopyEntityData            249   239    190     34       47          37
+gv_ExAllocGraveyardWorker      333   332    274     39       49          48
+ls_LoadBuildingEntityState     499   487    447     35       49          37
+cm_ExSellObjekt                667   664    494    112      103         100
+gm_AllocSpieler               1056  1053    747    180      218         215
+```
+
+Read the last two columns, not the byte counts.  They say:
+
+- **`cm_ExProdObjekt` is one instruction from content-exact.**  Its entire
+  content difference is `mov dword ptr [esp+0x18], ebx` (reference) against
+  `mov dword ptr [esp+0x18], eax` (ours) -- the long-documented byte 410.  Every
+  other run in that function is the pre-loop schedule, where both sides hold the
+  same instruction multiset.  Its 13 masked differing bytes are therefore
+  schedule, not content.  Re-confirmed unreachable this round: a volatile
+  read-back of `quantity` scores 431 at obj 1001, an address read-back and a
+  self-assignment are byte-identical at 976.
+- **`srv_LoadBuf` is four instructions from content-exact** -- the pure
+  `eax/ecx/edx` rotation at the two lobby `sprintf`s.
+- **`m_AllocTracked` has 7 target-only against 2 cand-only**, i.e. a net five
+  missing instructions, which is its `-13` obj gap.
+- **`cm_ExProdObjekt`, `srv_LoadBuf` and `gm_CheckInventoryCapacity` together
+  account for 13 of the game region's ~6,500 differing bytes**; the mass is
+  `gm_AllocSpieler` (218 missing) and `cm_ExSellObjekt` (103), and both are
+  overwhelmingly schedule.
+
+So the remaining work splits cleanly: four functions have a small, enumerable
+content gap worth attacking, and eleven are schedule-bound.  The tool is the
+first thing here that tells the two apart without a hand-built diff.
+
 **Round-96: CrashDump's +29 is section 17, and the four blockers are all
 layout or scheduling.**
 
