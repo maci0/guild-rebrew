@@ -1,5 +1,35 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-139: the biggest remaining class is 891 operands pointing past the end of
+the reference's `.data` — our BSS is 0x339c too big.**
+
+Classifying every failing operand entry by its *built* value against the
+reference's spans (`.rdata [0x24000,0x26e81)`, `.data [0x27000,0x176759c)`):
+
+```
+match (built == reference value)                     2436
+inside the reference's .rdata/.data span             1290   -> both validate
+built past the end of the reference's .data           891   <- the big one
+built below the reference's .data start               132
+resolve to the image base (unresolved)                  7
+```
+
+`_map_coverage` accepts a pointer into the reference's `.data` **span**, which
+is the reference's VirtualSize — and ours is `0x1743838` against `0x174059c`,
+i.e. `0x339c` larger (`rebrew data --bss`: BSS at `0x10035000`, 24,323,484
+bytes, but that is the *reference's* figure; the tool has no globals to check
+against here, 0.0% coverage).  Every symbol that lands in our extra `0x339c` of
+BSS therefore misses the span, and the 452 entries whose excess is about
+`0x2000` are exactly that tail.  The remaining excess histogram has a few dozen
+entries with absurd excesses (`0xed5f000`, `0xc748000`) which are not data
+pointers at all and need reading individually.
+
+So the next CRT/data-side win is to bring our `.data` VirtualSize down to the
+reference's — `0x339c` of BSS we declare that the reference does not — and it is
+worth up to ~450 entries.  (132 operands point *below* `.data`, i.e. into
+`.text` or the headers, which the rule never accepts; those need the `.text`
+values themselves to match and belong with the game-function work.)
+
 **Round-138: split members keep their own statics — coverage `81.3% -> 82.3%`.**
 
 `split_coff.py --promote-statics` emits a `_`-named *data* static as an external
