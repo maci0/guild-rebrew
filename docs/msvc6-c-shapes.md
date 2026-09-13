@@ -2505,3 +2505,56 @@ from C at this site.
 A wall: the indexed addressing mode is chosen whenever msvc6 can express the sum as
 `base + index`, and no spelling suppresses it.  (The site was reached here only by a
 scheduling barrier, which section 69 rules out.)
+
+## 74. msvc6 folds byte-identical early-return epilogues unconditionally; the reference folds none
+
+The wall behind every "the reference keeps N epilogues and we keep one" note in this
+project, now measured rather than assumed.
+
+On `gm_FindNextFilteredEntity` (0x10016f80) the reference has **five `ret` sites and merges
+none of them** — three short ones (`xor eax,eax; pop esi; ret`, at `+0x17`, `+0x27`, `+0x75`,
+all byte-identical) and two long ones (`pop edi; pop ebp; pop ebx; pop esi; ret`, at `+0x141`,
+`+0x155`, byte-identical).  Each short one is reached by a **2-byte** conditional
+(`jne +4` / `jle +4` / `jb +4`) that jumps *over* an inline fall-through return.
+
+Our object keeps **two** `ret` sites: one short, one long, with five `rel32` branches
+(`je 0x100170d2`, 6 bytes) into the shared short block.  So the cross-jump is **not**
+downstream of any difference between the exits — the exit paths are byte-identical in the
+reference and it still does not merge them.  Our compiler merges unconditionally.
+
+**It is not a C-shape problem, and this is the evidence that settles it.**  A 352-byte
+standalone TU (`.scratch/l8/m2.c`) carrying the target's exact guard/loop structure
+reproduces the reference's prologue *byte-for-byte* — `mov eax,[g_entity_ptr]; push esi;
+xor cl,cl; lea esi,[eax+0xa900]; mov eax,[g_entity_type_table]; test eax,eax` — and still
+folds all three early exits into one far block.  `/O1`, `/O2 /Os`, `/O2 /Og-` and
+`/O2 /Ot /Oy-` all give two `ret` sites as well.
+
+Consequence: **eight return spellings have now been compiled across two passes and all are
+inert**, which is what the wall predicts.  Do not spend probes trying to make an exit unique.
+Recorded so the "two epilogues against the reference's three/five" note that recurs in this
+project's file headers is recognised as this wall and not as an unsolved shape.
+
+`src/server.dll/DieGildeAddOn/game/spiel_dumpD.c`
+
+## 75. A prologue-fidelity lever, and a past "climb win" that cost it
+
+`gm_FindNextFilteredEntity` (0x10016f80): **`end = g_entity_ptr + 0xa900;` must precede
+`if (g_entity_type_table == 0)`** for the reference's prologue to come out byte-exact.  With
+that order the compiler emits
+
+```
+mov eax,[g_entity_ptr]; push esi; xor cl,cl; lea esi,[eax+0xa900];
+mov eax,[g_entity_type_table]; test eax,eax
+```
+
+which is bytes `0x0`-`0x15` exactly.  Commit `551bea67`, accepted at the time as a climb win,
+moved that assignment *below* the guard; the byte-exact prologue is lost and `matched` falls
+130 -> 127.  A later variant that also drops the redundant `match = 0;` at `candidate:`
+restores the prologue through `+0x15` — the only variant that does — but scores 57 once the
+far-jump guards dominate.
+
+Two lessons: a climb metric can accept a commit that is locally worse in a region it does not
+weight, and the guard/assignment order around an early-exit prologue is a *lever* worth
+checking whenever a function's first 0x20 bytes are wrong.
+
+`src/server.dll/DieGildeAddOn/game/spiel_dumpD.c`

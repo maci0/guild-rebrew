@@ -2,6 +2,49 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+**Round-249: the full gate passes end-to-end, and two more functions are closed.**
+
+**GATE: pass** — the first complete run with a clean tree in many rounds: `rebrew lint`
+187/187 (0 errors, 2 warnings), **0** compile/link errors, `rebrew verify --full` 281/283
+with the baseline held.  The build's post-link failure is expected and deletes
+`build/server.dll`, which was regenerated via `split_link.sh` + `postlink_residual.py`;
+the re-link reproduces **9,280 by 286,720 bytes exactly**, so the committed tree and the
+deliverable agree.
+
+**Two more closed, with walls measured rather than assumed:**
+
+- `gm_FindNextFilteredEntity` (226): the reference keeps **five `ret` sites and merges none**
+  — three byte-identical short epilogues and two byte-identical long ones — while our `/O2`
+  object keeps two with five `rel32` branches into one.  The exit paths are byte-identical in
+  the reference, so the cross-jump is **not** downstream of any shape difference: it is an
+  unconditional merge our compiler performs.  Proven by a 352-byte standalone reproducer that
+  matches the reference's prologue byte-for-byte and still folds the exits; `/O1`, `/Os`,
+  `/Og-`, `/Ot /Oy-` all fold too.  This is the wall behind the "reference keeps N epilogues"
+  note that recurs in this project, and it explains why eight return spellings are inert
+  (`docs/msvc6-c-shapes.md` §74).
+- `gm_CheckInventoryCapacity` (97): the entire tail `+0x8f..+0x18a` is byte-identical and all
+  97 differing bytes lie in a **same-length permuted head** `+0x0..+0x8e`.  Three coupled
+  defects — `base + idx` folding to `[edi+ecx]` (a **second confirmed site of shapes §73**;
+  breaking it flips `entity_index`/`in_list` roles and adds 7 instructions), `elem = list[0]`
+  constant-propagating into a peeled loop entry, and the two prologue zero-inits landing
+  0x1d bytes late — survived seven source-order and declaration variants.  Note the object
+  metric and the link **agree** here (`395-298 = 375-278 = 97`).
+
+**A lever, and a past commit it implicates.**  `end = g_entity_ptr + 0xa900;` must precede
+`if (g_entity_type_table == 0)` for that function's prologue to be byte-exact
+(`docs/msvc6-c-shapes.md` §75); commit `551bea67`, accepted as a climb win at the time, moved
+it below the guard and costs the prologue plus 3 `matched` bytes.  Worth remembering when a
+function's first 0x20 bytes are wrong, and as a caution about what a climb metric accepts.
+
+**Where this leaves the objective.**  Every function except `CrashDumpUnhandledExceptionFilter`
+(1,667, one agent still working its frame) is now closed at a *measured* local optimum, and the
+reason is consistent across all of them: **the remaining residue is dominated by
+register-allocation and scheduling choices that no C spelling steers** (allocator Findings
+52-55, 60, 61) plus the unconditional epilogue merge above.  Rounds now return tens of bytes,
+not hundreds.  Reaching 0 needs either a different compiler or a technique for steering the
+allocator that this campaign has not found; another sweep of source spellings will not do it.
+
+
 **Round-248 (later): five more functions closed with nothing found, and the two walls that
 explain it are now measured.**
 
