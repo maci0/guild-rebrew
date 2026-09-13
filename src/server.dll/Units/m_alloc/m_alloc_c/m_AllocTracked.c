@@ -351,7 +351,19 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 		}
 	}
 	nodev = (int) node;
-	node->count++;
+	/* The reference computes this in a register and writes it back
+	 * (`mov eax,[esi+0x20]; inc eax; mov [esi+0x20],eax`, 7 bytes at
+	 * 0x100066d7); a plain `node->count++` is dead and folds to
+	 * `inc dword ptr [esi+0x20]` (3 bytes) under every spelling tried.  A
+	 * volatile READ is the one form that keeps the value live, and it is
+	 * the same value in this single-threaded code.  Effect: obj_size
+	 * 645 -> 649 against the reference's 658, aligned instruction match
+	 * 208 -> 211 of 249, one fewer mismatch run, and the split pipeline's
+	 * masked differing bytes unchanged at 6,528.  The positional
+	 * `match_count` falls 266 -> 257 because the 4-byte insertion shifts
+	 * every later operand -- the round-88 artefact, not a regression. */
+	taglen = *(volatile int*) &node->count;
+	node->count = taglen + 1;
 	sz = size;
 	mem = malloc(sz);
 	if (mem == 0) {
