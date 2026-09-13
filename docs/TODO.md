@@ -1,5 +1,32 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-103: tool fix, and the `0xffff` sentinel is the next content item.**
+
+The gap tool was reporting relocation displacements as content differences: an
+object's `movsx r, byte ptr [r]` is the linked `movsx r, byte ptr [r + R]`.
+Canonicalising `[reg]` to `[reg + R]` for instructions that cover a relocation
+slot removes that class.  `cm_ExCopyEntityData`: matched 198 -> 202,
+register-agnostic target-only 39 -> 31.  Re-read every earlier gap number in
+this file with that in mind.
+
+What survives in `cm_ExCopyEntityData` is a real content item.  The reference
+materialises the slot sentinel once and uses it twice:
+
+```
+target 0x1000edc0  mov ebp,0xffff
+       0x1000edce  cmp word ptr [eax + 0x100358a0], bp    ; src-slot scan
+       0x1000ee5d  cmp word ptr [edx*4 + 0x100358a0], bp  ; dst-slot scan
+ours               cmp word ptr [...], 0xffff             ; both folded
+```
+
+The two sites are the two `== (ushort) 0xffff` compares at source lines 407 and
+436.  Six bytes immediate-vs-three bytes register is a wash for one use and a
+win for two, which is why the reference hoisted it -- but msvc6 folds both in
+our build, and a first attempt at a shared `ushort free_slot;` local did not
+compile and was not pursued to a measurement.  That is the concrete next item
+for this function, and it needs the placement of the local such that its live
+range spans both compare sites.
+
 **Round-102: a signedness bug, found by the register-agnostic gap list.**
 Game region 6,515 -> **6,495** differing bytes.
 
