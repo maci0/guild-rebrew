@@ -339,7 +339,8 @@ unknown_exc:
 								if (!instrType) {
 									goto next_frame;
 								}
-								if (mbi.RegionSize != 0x1000) {
+								/* The reference compares the State field ([esp+0x68], offset 0x10), not RegionSize (offset 0x0c) — same constant, wrong field used to skip non-committed frames here. */
+								if (mbi.State != 0x1000 /* MEM_COMMIT */) {
 									goto next_frame;
 								}
 								if (frameInfo[2] != (int) pCtx->Eip) {

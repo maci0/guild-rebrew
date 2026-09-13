@@ -4,6 +4,22 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-290 (2026-09-13): CrashDump review — bug 2 already fixed, new bug 3
+found and fixed at +0.**
+
+- Scout semantic review: bug-1 fix verified present (arg order matches the
+  0x10002d00 call, callee roles confirmed); bug 2 (dead decode block) is
+  FIXED in current source (walk region byte-identical to V2, block live) —
+  TODO:621 + round-251 note describe the pre-rewrite spelling, corrected in
+  the current-state ranking; rest clean (dispatch union, lengths, 5 log
+  sites, 568-byte table byte-identical, decrypt, paths, callback).
+- NEW bug 3 (real): walk gate tested `mbi.RegionSize != 0x1000`, reference
+  compares `mbi.State` ([esp+0x68], offset 0x10) — same constant, wrong
+  field; source dropped every committed frame whose size ≠ 1 page. Fixed
+  (`mbi.State != 0x1000`); obj still exactly 2115, link +0 (displacement
+  was already a frame-wall byte). Kept per the correctness rule.
+- Residue baseline unchanged: **9,209**.
+
 **Round-289 (2026-09-13): ExSell semantic review clean + size truth
 reconciled.**
 
@@ -633,9 +649,13 @@ supersedes the ranking below it, which is kept as history):**
    (real code ends 0x0850 both sides, tables at 0x72c/0x7ac); the V2 +59
    length plan is obsolete.** Frame now 0x284 vs 0x280 (F3's volatiles closed
    half the 0x28c gap); plain-locals give 0x280 but cost the code length.
-   Remaining: frame + 4-reg-deferred prologue + distributed hunks. Bug 2
-   (dead decode block) still open; V2's faithful spelling still the only
-   known fix, still +131 for the length reason above.
+   Remaining: frame + 4-reg-deferred prologue + distributed hunks.
+   CORRECTION 2026-09-13: bug 2 (dead decode block) is FIXED in the current
+   source — the walk region is byte-identical to V2 and the decode block is
+   live; the "still open" below and the round-251 note describe the
+   pre-rewrite spelling. Bug 1's fix verified present (arg order matches
+   0x10002d00 call). NEW bug 3 (round 290): walk gate tested
+   mbi.RegionSize, reference tests mbi.State — fixed at +0 linked.
 4. **Small rows with exact-local-fix/cascade-loss signatures** (LS nesting
    §72b, vfs head §52-3rd-instance, ReadCompressed tail-duplication): each
    has a verified local shape and a measured cascade. Landable only with a
