@@ -238,7 +238,10 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			(void**)&source_static_entity,
 			resolve_result
 		);
-				if (!(resolve_result == 0)) {
+		if (resolve_result == 0) {
+			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2cdd, "cm_ExSellObjekt() Invalid 'ziel_besitzer_id'", 8);
+			return 1;
+		}
 		if (dest_existing_entity != (char*)0) {
 			linked_list_ptr = (int*)(dest_existing_entity + 0x5d);
 			if (*(ushort*)(dest_existing_entity + 0x27) != 0xffff) {
@@ -438,7 +441,4 @@ LAB_1000e0e7:
 		}
 	}
 	return 0;
-} else {
-			LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2cdd, "cm_ExSellObjekt() Invalid 'ziel_besitzer_id'", 8);
-			return 1;
-		}}
+}
