@@ -1,5 +1,79 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-141: no data-side lever is left — all 859 failing entries are inside the
+19 non-byte-matched functions.**
+
+Round 140 ended by asking whether one more data-side fix could clear the 113
+entries the 90% gate needs.  It cannot: every failing entry now sits in the
+`.text` of the 19 functions whose code is not byte-identical, and the failing
+values are not misplaced pointers.
+
+*Where they are.*  `scripts/cov_buckets.py` on `build/split_poc.dll`: the top
+five functions own 600 of the 859 entries (396 operands + 204 calls —
+`gm_AllocSpieler` 179, `ls_LoadBuildingEntityState` 114,
+`CrashDumpUnhandledExceptionFilter` 112, `ServerMainThread` 99,
+`cm_ExSellObjekt` 96), the next ten 195 (largest `ExCopyEntityData` 33), and the
+remaining ~64 are 1-2 entries each.  No bucket lies outside the 19 (the bucketer
+attributes a site to the nearest reversed function below it, so read the names
+as regions; the byte accounting below is the proof).
+
+*The failing values are junk, not misplaced data.*  Reading each failing
+operand's **built** value and looking it up in the **built** image's own section
+table: 570 of 571 point outside every section of `split_poc.dll` (only one lands
+in `.text`).  A linker-relocated operand can never do that, so those slots are
+not relocated operands at all — they are arbitrary instruction bytes in code
+that differs.  That is the correction to round 139's reading: the 891
+"past the end of the reference `.data`" entries were *not* mostly misplaced BSS
+pointers (452 of them were, and round 140 fixed those); the 432 that remain are
+windows inside the 19 functions' differing code.
+
+*How much code is actually wrong.*  With both images' relocation slots masked,
+`.text` differs in `0x2d96` bytes (8.3%); `scripts/text_match.py` splits that as
+`crt 100.00%` and `game 90.84%`, and the sum of the 19 functions' `delta`
+values (11,772 bytes, `0x2dfc`) accounts for it.  Per function (masked,
+differing bytes): `cm_ExSellObjekt` 28.3% (1479), `gm_AllocSpieler` 30.4%
+(2571), `CrashDumpUnhandledExceptionFilter` 32.3% (1440),
+`ls_LoadBuildingEntityState` 37.0% (927), `vfs_ReadCompressed` 41.7% (289),
+`gm_AllocGebaeude` 64.8% (383), `ServerMainThread` 72.6% (671),
+`m_AllocTracked` 71.6% (191), `srv_LoadBuf` 93.5% (49).
+
+*Leverage, for whoever takes the gate next* — failing entries per differing byte:
+`ServerMainThread` 99/671 = 0.148, `ls_LoadBuildingEntityState` 114/927 = 0.123,
+`m_AllocTracked` 21/191 = 0.110, `ahm_ExAllocAlchemist` 17/163 = 0.104,
+`ExCopyEntityData` 33/352 = 0.094, `CrashDumpUnhandledExceptionFilter`
+112/1440 = 0.078, `gm_AllocSpieler` 179/2571 = 0.070.  So **one** of
+`ls_LoadBuildingEntityState` (114) or `ServerMainThread` (99) plus one small
+function clears the gap; nothing on the data/link side does.
+
+*Shape of the residue.*  The mismatch is a cascade, not a few missing blocks:
+`gm_AllocSpieler` 236 non-reloc fragments over 2675 bytes (largest 147),
+`ls_LoadBuildingEntityState` 105 over 1005 (largest 35),
+`CrashDumpUnhandledExceptionFilter` 77 over 2000 in its 2115-byte range
+(largest 165).  Each of those files' own header notes already names the cause
+(allocator permutation, out-of-line block placement, the `/Oa`-only
+constant-caching decision), and each records long probe lists.
+
+*New measured lever, negative on the one function tried.*  msvc6 **reuses a
+stack slot for locals declared in disjoint scopes** — `.scratch/scope/p.c`, two
+`char[0x100]` in two blocks: frame `0x200`, versus `0x300` when both live in one
+block; `.scratch/scope/q.c`, three address-taken ints: one shared slot nested,
+two slots not.  Scope is therefore the lever for frame-footprint deficits (the
+`SIZE_MISMATCH` class, and the `.data`-side story above is unrelated).  Applied
+to `CrashDumpUnhandledExceptionFilter`, whose frame is `0x28c` against the
+target's `0x280` with four saved registers against two: moving the
+decrypt/classify temporaries (`excCode`, `i`, `key`, `pDwords`) into one nested
+block is **byte-identical** output (`obj_size` 2113, `match_count` 271, the same
+1844 mismatches), i.e. msvc6 already shares those scalar slots — the 12-byte
+excess is a spill/register fact, not a scope fact.  Reverted.
+
+*Measurement note.*  For a function whose object size differs from the target's,
+`rebrew diff`'s positional count desynchronises at the first size difference and
+its candidate column can even print the wrong prologue (the `ls_LoadBuilding_
+EntityState` header says this; it is still true for
+`CrashDumpUnhandledExceptionFilter`).  Use `rebrew test --json`'s `obj_size` +
+a mnemonic LCS, or `scripts/text_match.py`, and remember the layout maps index
+`.text` by `VA - 0x10001000`, not `VA - 0x10000000`.
+
 **Round-140: the BSS tail pad was 0x329c too long — coverage `82.3% -> 88.5%`.**
 
 `link_stubs.c`'s `g_bss_tail` exists to grow `.data` VirtualSize to the
