@@ -29,6 +29,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-313 (2026-09-13): combined correctness fixes don't cancel cascades.**
+
+- Applied BOTH Spieler fixes at once (slot[9]=(char)arg8 + tail
+  log-after-sprintf): obj 3677 (-12), match 567, linked +402 (vs +393
+  and +53 alone — sub-additive but still catastrophic). Allocator
+  cascades don't cancel each other. Reverted. Interaction thesis dead.
+- Residue baseline unchanged: **9,209**.
+
 **Round-312 (2026-09-13): climb on Tracked — no adjacent-swap win.**
 
 - The 105-127 phase-shift block traced to a 4-instruction order cluster
