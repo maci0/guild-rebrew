@@ -1,5 +1,40 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-130: the split blob's input exists — every surviving section is
+locatable — but unbundling them as separate objects breaks the link.**
+
+Locating is solved.  Masking each data object's relocation slots (the rule
+`scripts/locate_sections.py` uses — a raw `bytes.find` fails on every section
+that holds a pointer, which is why the first attempt found only the 3-byte
+`"TZ"`) and searching the reference's `.rdata[0x12e8:0x2608)` finds **57** of
+`split_coff.py`'s data sections at their exact reference offsets, survivors
+included:
+
+```
+0x17d8 1001f1a4_.text_s0  0x0008   __real@8@…            (testfdiv)
+0x2008 1001c19b_.text_s0  0x0059   ___lookuptable        (output)
+0x2064 1001c19b_.text_s2  0x000e   unnamed pointer table
+0x207c 1001d253_.text_s1  0x0017   unnamed pointer table (heapinit)
+0x20b0 1001f1a4_.text_s1  0x0008   __real@8@…
+0x2458 10020915_.text_s2  0x0003   "TZ"
+…plus crt0msg's 25 R60xx strings, crtmbox's four, cvt's and a_map's
+```
+
+With the arrangement round 129 proved, that list is enough to cut
+`rdata_restore.c` into pieces with every section at its own offset.
+
+What fails is making them orderable.  `split_coff.py` bundles a member's
+non-`.text` sections into its lowest-VA function object, so a section cannot be
+moved without moving the function's `.text` with it.  Emitting one object per
+data section (a `--split-data` variant, `written` entries at the same VA so the
+index order is unchanged) links to
+`LIBCMT.lib(crt0.obj) : error LNK2001: unresolved external symbol _main` — the
+unbundling changes symbol resolution until `crt0.obj` (the EXE startup) is
+pulled.  Most likely the `.CRT$` markers and the `.data`/`.bss` sections have to
+stay bundled with the function object, and only the `.rdata` sections split
+out; that is the next attempt, and it has to be verified byte-neutral (same
+`.text`/`.rdata`/`.data`, same 246/319 placement) before the pieces are cut.
+
 **Round-129: the split blob works — proven on the timeset tables, prefix
 surplus `0x168 -> 0x120` with the prefix bytes still byte-identical.**
 
