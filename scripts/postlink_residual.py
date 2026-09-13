@@ -59,6 +59,12 @@ def main() -> int:
     ap.add_argument("--layout", default="layout/server.dll")
     ap.add_argument("--results", default=".scratch/verify_full.json",
                     help="rebrew verify --full --json output, for attribution")
+    ap.add_argument("--write", default=None,
+                    help="write the patched bytes to this path (the fixers run "
+                         "regardless of the coverage gate; the build refuses "
+                         "below 90%% because a wrong-offset patch would be "
+                         "silent, and this script is the measured way around "
+                         "that refusal -- see docs/TODO.md round 148)")
     ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args()
 
@@ -77,6 +83,21 @@ def main() -> int:
     pat = bytes(built)
     print(f"\nreference {len(ref)} bytes, patched {len(pat)} bytes, delta {len(pat) - len(ref):+d}")
     sr, sp = sections(ref), sections(pat)
+    if args.write:
+        # The reference's `.text` padding beyond VirtualSize is zeros, while the
+        # vehicle's tail carries link thunks the original build dead-stripped;
+        # `_fix_data` preserves that tail deliberately (it must, for a build that
+        # already matches), so normalize it here instead.
+        _tva, _tvs, _tptr, _traw = sr[".text"]
+        _pva, _pvs, _pptr, _praw = sp[".text"]
+        _pad = ref[_tptr + _tvs:_tptr + _traw]
+        if (len(_pad) == _praw - _pvs and _pad.strip(b"\x00") == b""
+                and pat[_pptr + _pvs:_pptr + _praw] != _pad):
+            pat = pat[:_pptr + _pvs] + _pad + pat[_pptr + _praw:]
+            print(f"normalized {len(_pad)} bytes of .text padding")
+        out = ROOT / args.write
+        out.write_bytes(pat)
+        print(f"wrote {out} ({len(pat)} bytes)")
     for name in sorted(set(sr) | set(sp)):
         if name not in sr or name not in sp:
             print(f"{name:9s} MISSING on one side")

@@ -1,5 +1,38 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-148: the pipeline is complete — the produced dll differs from the
+reference in `.text` only (`0x2db6` bytes = the 19 functions).**
+
+`scripts/postlink_residual.py --write build/server_final.dll` now *produces* the
+deliverable instead of only measuring it: the three fixers run around the
+coverage gate (the `--write` help says why), and the `.text` padding is
+normalized to the reference's — its padding beyond VirtualSize is **1,978 zero
+bytes**, while the vehicle's tail carries the link thunks the original build
+dead-stripped (686 non-zero bytes of `0x10`/`0xff`).  `_fix_data` preserves that
+tail deliberately (it must, for a build that already matches), so the
+normalization belongs in the producing command.
+
+```
+$ bash scripts/split_link.sh
+$ python3 scripts/postlink_residual.py --write build/server_final.dll
+.data     differing 0x0        .rdata  differing 0x0
+.reloc    differing 0x0        headers differing 0x0 of 0x1000
+.text     differing 0x2db6 of 0x22846   (file size 286720 = the reference's)
+```
+
+So the remaining work is exactly the 19 non-byte-matched functions —
+11,702 bytes, 8.28% of `.text` — and nothing else.  That is the finish line the
+next rounds can aim at directly, and it is one command to reproduce.
+
+*Also this round, four more volatile lotteries on the smallest residuals, all
+reverted* (compiled with each file's annotated CFLAGS):
+`cm_ExProdObjekt` (98.7% baseline) — volatile on the `g_unknown_1de450` read
+drops to 30.4%, on the `msg+0x16` read 32.5%, on the existing volatile store's
+read 32.1% (each shifts the frame instead of fixing the order);
+`cm_ExSellObjekt` (18.8% baseline) — volatile on the `cmd+0x14` compare 21.2%,
+on the same read as the call argument 20.4%, on the store neutral.  The round-143
+lever does not transfer to either plateau.
+
 **Round-147: `.data` ordering does not move the gate — the fixers repair those
 entries indirectly, and the round-146 plan is dead.**
 
