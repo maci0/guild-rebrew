@@ -1,5 +1,36 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-126: the split composition can carry the reference's `.rdata` too — the
+two gates are not mutually exclusive after all.**
+
+Round 124 measured the split composition's `.rdata` at `0x33b1 / raw 0x4000`
+and concluded the member-section route traded one gate for the other.  It does
+not: that surplus is *strings*, and they fold exactly like the CMake build's.
+`scripts/gen_fold_literals.py` (new) reads every `??_C@…` symbol out of a build
+that still carries the member copies and emits the C spellings; adding its TU
+plus the existing `rdata_fold.c` to the split response file gives
+
+```
+                     .text VS   .rdata VS   .rdata raw   .data off   prefix
+split_poc              0x22af8     0x33b1       0x4000      0x28000   0x2838
++ full literal folds   0x22af8     0x2fe1       0x3000      0x27000   0x25d0
+reference              0x22846     0x2e81       0x3000      0x27000   0x2468
+```
+
+So one composition now has the reference's `.rdata` **and** `.data` raw sizes,
+the reference's file offsets, and `.text` at 81.2% layout coverage (vs the CMake
+build's 55.6%).  The remaining prefix surplus `0x168` is the same item list as
+the CMake build's `0x158` (the three non-COMDAT tables, the `__real@8@`
+constants, the unnamed pointer tables) - no new blocker, and the split-blob
+route from round 124 applies to it.
+
+Two notes for shipping this: the fold TU has to reach the split pipeline
+through `objects1.rsp` (so the literals live in `rdata_fold.c`), and there the
+40 extra literals cost about `0x340` of `.data`, which needs
+`data_restore.c`'s blob re-tuned by the same amount - in the CMake build they
+fold nothing (those members are not linked) and would only spend that budget,
+so the generator is the right place to keep them until the compositions merge.
+
 **Round-124: the member-section route to both remaining gates, and the one
 piece of it that has no answer yet.**
 
