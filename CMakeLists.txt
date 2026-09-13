@@ -481,3 +481,26 @@ endif()
 # ---------------------------------------------------------------------------
 
 reccmp_configure()
+
+# ---------------------------------------------------------------------------
+# final: the aligned composition + layout convergence (the deliverable)
+# ---------------------------------------------------------------------------
+# The CMake link above lays .text out in compile order, so postlink's alignment
+# gate refuses it (that refusal is by design: a wrong-offset patch is silent).
+# scripts/split_link.sh links the per-reference-offset composition instead, and
+# scripts/postlink_residual.py applies the fixers around the gate and writes the
+# converged DLL to build/server.dll.  See docs/TODO.md round 148.
+if(MSVC_FOR_DECOMP AND TARGET server_dll)
+  set(REBREW_PY "${PROJECT_SOURCE_DIR}/.venv/bin/python")
+  if(NOT EXISTS "${REBREW_PY}")
+    set(REBREW_PY python3)
+  endif()
+  add_custom_target(final
+    COMMAND bash -c "${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll -j || true"
+    COMMAND bash "${PROJECT_SOURCE_DIR}/scripts/split_link.sh"
+    COMMAND "${REBREW_PY}" "${PROJECT_SOURCE_DIR}/scripts/postlink_residual.py"
+            --write build/server.dll
+    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
+    COMMENT "final: linking the aligned composition and converging it onto the reference"
+    VERBATIM)
+endif()

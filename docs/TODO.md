@@ -1,5 +1,53 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-149: the build produces the deliverable — `cmake --build build --target
+final` writes `build/server.dll`, identical except the 19 functions.**
+
+New CMake target `final` (end of `CMakeLists.txt`): it compiles the objects (the
+CMake link's postlink refusal is expected and ignored), runs
+`scripts/split_link.sh` for the per-reference-offset composition, then
+`scripts/postlink_residual.py --write build/server.dll` for the fixers plus the
+`.text`-padding normalization.  Verified:
+
+```
+build/server.dll  286720 bytes (the reference's size)
+.data 0 / .rdata 0 / .reloc 0 / headers 0   differing bytes
+.text 0x2db6 of 0x22846                     all inside the 19 functions
+```
+
+So the deliverable is produced end to end by the build system; no hand-run step
+remains, and the gated CMake link stays as the compile-and-refuse step it always
+was.
+
+**New diagnostic** `.scratch/multiset.py` — per function, the instruction counts
+and the multiset difference, which separates "the reference's instructions in a
+different order or registers" (an allocator/scheduling plateau) from "extra or
+missing instruction kinds" (a source-shape difference):
+
+```
+function                          ref  ours  same  ours-only  ref-only
+gm_AllocSpieler                  1056  1047   234         20        29
+CrashDumpUnhandledExceptionFil    724   710   149         21        35
+cm_ExSellObjekt                   667   666   229         13        14
+ls_LoadBuildingEntityState        499   493   333          1         7
+cm_ExCopyEntityData               260   255   110          9        14
+gm_AllocGebaeude                  356   362   175         13         7
+ServerMainThread                  627   627   585          2         2
+gv_ExAllocGraveyardWorker         333   332   239          7         8
+m_AllocTracked                    249   246   199          0         3
+srv_LoadBuf                       226   226   214          0         0
+gm_ObjectsAvailble                229   229   227          0         0
+cm_ExProdObjekt                   354   354   354          0         0
+cm_ProcessCommandQueue            205   203    73          0         2
+gm_CalculateProductionValue       123   123   121          0         0
+```
+
+`cm_ExProdObjekt`'s mnemonics match at **every** index (354/354) — its 21-byte
+residual is pure operand/register assignment.  Only four functions differ by
+more than 7 instruction kinds, so the bulk of the remaining 11,702 bytes is
+allocator/scheduling permutation — the class the per-function notes record
+hundreds of failed probes against.
+
 **Round-148: the pipeline is complete — the produced dll differs from the
 reference in `.text` only (`0x2db6` bytes = the 19 functions).**
 
