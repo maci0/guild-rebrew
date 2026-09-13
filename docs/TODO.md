@@ -7,14 +7,17 @@
 **Verified state at handoff.** `rebrew lint` 187/187 (0 errors, 2 warnings); a full
 `bash scripts/gate.sh` passes — 0 compile/link errors, `rebrew verify --full` 281/283 against
 the 281 baseline; and `bash scripts/split_link.sh` + `postlink_residual.py --write` reproduces
-`build/server.dll` at **9,281 bytes of `.text` residue in 286,720 bytes**, so the committed tree
+`build/server.dll` at **9,280 bytes of `.text` residue in 286,720 bytes**, so the committed tree
 and the deliverable agree. Every non-`.text` section is byte-identical, and the import table is
 100 entries matching in set and order. All remaining work is `.text` codegen.
 
-**Two agents were still in flight when this was written**: one completing the faithful
-`CrashDump` version (below), one on the last three small functions
-(`vfs_ReadCompressed`, `cm_ExProdObjekt`, `cm_ProcessCommandQueue`). Check `.scratch/*.FINAL.c`
-timestamps and `list_agents` before starting new work, so you do not collide with them.
+**At the end of the session one agent was still in flight**: the one completing the faithful
+`CrashDump` version (lead 1 below).  The other — the last three small functions — has since
+finished: `vfs_ReadCompressed` was improved by **-1 linked** (residue 9,281 -> 9,280, its row
+24 -> 23) by unqualifying only the post-loop test, while `cm_ExProdObjekt` and
+`cm_ProcessCommandQueue` were left at HEAD because their `matched-reloc` already equals their
+ceiling (allocator Finding 59's amendment).  **Check `list_agents` and `.scratch/*.FINAL.c`
+timestamps before starting new work**, so you do not collide with the CrashDump agent.
 
 **Ranked leads, most promising first:**
 
