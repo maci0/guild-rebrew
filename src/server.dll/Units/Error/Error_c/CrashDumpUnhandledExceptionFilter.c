@@ -131,26 +131,24 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	unsigned int nBytesWritten;
 	char szLine[4];
 	char* fail_msg;
-	unsigned int fail_line;
+	volatile unsigned int fail_line;
 	char fCanContinue;
 	char space;
 	unsigned int dwDbgFileSize;
 	unsigned int dwBytesRead;
 	unsigned int* pStack;
-	unsigned int nFrames;
+	volatile unsigned int nFrames;
 	CONTEXT* pCtx;
 	void* hDbgFile;
 	void* pDbgBuf;
 	void* hProcess;
 	void* hCrashLog;
-	unsigned int eip;
-	unsigned int excCode;
-	int instrDest;
+	volatile unsigned int excCode;
 	unsigned int i;
 	unsigned int key;
 	unsigned int* pDwords;
-	char instrType;
-	unsigned int szDateLen;
+	volatile char instrType;
+	volatile unsigned int szDateLen;
 	unsigned int szTimeLen;
 	int frameInfo[7];
 	MEMORY_BASIC_INFORMATION mbi;
@@ -326,10 +324,9 @@ unknown_exc:
 
 							nFrames = 0x800;
 							/* Stack walk */
-							eip = pCtx->Eip;
 							frameInfo[0] = (int) pDbgBuf;
 							frameInfo[1] = (int) hCrashLog;
-							frameInfo[2] = (int) eip;
+							frameInfo[2] = (int) pCtx->Eip;
 							frameInfo[3] = 0;
 							frameInfo[4] = 0;
 							frameInfo[5] = 0;
@@ -337,7 +334,7 @@ unknown_exc:
 							pStack = (unsigned int*) (pCtx->Esp - 4);
 
 							for (;;) {
-								VirtualQuery((const void*) eip, &mbi, 0x1c);
+								VirtualQuery((const void*) frameInfo[2], &mbi, 0x1c);
 								instrType = check_memory_protection((unsigned int) mbi.Protect);
 								if (!instrType) {
 									goto next_frame;
@@ -345,17 +342,17 @@ unknown_exc:
 								if (mbi.RegionSize != 0x1000) {
 									goto next_frame;
 								}
-								if (eip != pCtx->Eip) {
+								if (frameInfo[2] != (int) pCtx->Eip) {
 									char* pInstr = szDateBuf;
 									int nInstr = 7;
 									while (nInstr--) {
-										if (ReadProcessMemory(hProcess, (void*) (eip - nInstr - 1), pInstr, nInstr + 1, 0)) {
+										if (ReadProcessMemory(hProcess, (void*) (frameInfo[2] - nInstr - 1), pInstr, nInstr + 1, 0)) {
 											nInstr++;
 											break;
 										}
 										pInstr++;
 									}
-									instrType = AnalyzeInstruction((int) &szDateBuf[7], nInstr, (int) eip, &instrDest);
+									instrType = AnalyzeInstruction((int) &szDateBuf[7], nInstr, frameInfo[2], &frameInfo[3]);
 									if (!instrType) {
 										goto next_frame;
 									}
@@ -368,7 +365,7 @@ next_frame:
 								if ((int) nFrames <= 0) {
 									goto done_walk;
 								}
-								if (!ReadProcessMemory(hProcess, pStack, &instrDest, 4, 0)) {
+								if (!ReadProcessMemory(hProcess, pStack, &frameInfo[2], 4, 0)) {
 									break;
 								}
 							}
