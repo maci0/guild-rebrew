@@ -159,9 +159,26 @@ def main() -> int:
         want = sum(sizes.get(v, 0) for v in vas)
         have = text_size(path)
         if not want or have >= want:
-            if want and have > want:
+            # The pad *decision* is `have >= want` and is unchanged.  The *report*
+            # must compare against the reference's padded span instead: cl rounds
+            # `have` up to a 16-byte multiple while `want` is the unaligned sum of
+            # the reference sizes, so comparing them directly labels every object
+            # whose reference size is not a multiple of 16 as too long -- 149 of
+            # 319 in this tree, burying the handful that genuinely drag.  What
+            # actually moves the following symbols is `have > 16*ceil(want/16)`;
+            # see docs/msvc6-allocator.md Finding 58.
+            #
+            # Caveat: `want` is only as complete as the metadata.  An object
+            # holds code for functions `rebrew-functions.toml` may not describe,
+            # and then `want` understates the reference span and this still
+            # reports a phantom drag -- `trees.c.obj` shows +5376, which cannot
+            # be real (the built image's largest symbol displacement is 796).
+            # Treat a hit as a lead to confirm against the map, not as proof.
+            span = 16 * ((want + 15) // 16)
+            if want and have > span:
                 short += 1
-                print(f"LONG  {path.name}: {have} > {want} (+{have - want}) -- not padded")
+                print(f"LONG  {path.name}: {have} > {span} (+{have - span} over the "
+                      f"padded span; want {want}) -- not padded")
             continue
         pad = want - have
         dest = outdir / f"{path.stem}_pad.obj"
