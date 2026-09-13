@@ -29,6 +29,23 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-302 (2026-09-13): milestone 50 — session balance sheet.**
+
+- 48 session rounds, 0 bytes moved (9,209 throughout), 12 files touched
+  (+954/-32, overwhelmingly notes + headers + 1 real fix at +0).
+- Bought: 3 rebrew tool fixes (suite green) · lint 0/0 · verdicts 19/19
+  (2 live bugs: 1 fixed at +0, 1 unlandable) · round-trip + Wine + whole-
+  binary certification · ledger + session map · every lever class retired
+  with measurements · ~60 probes adjudicated by link test.
+- Not bought: a single byte of residue. Implication for rounds 51-256:
+  the C-spelling search space is exhausted; further rounds should EITHER
+  attempt what this session queued-but-never-ran (live partition search
+  with link adjudication, new-compiler whole-tree pricing) OR do
+  maintenance (verdicts, freshness, tooling) and say so. More solo
+  spelling probes have strongly negative expected information at this
+  point — the map (§Session map) lists them all as tried.
+- Residue baseline unchanged: **9,209**.
+
 **Round-301 (2026-09-13): slot[9] length-neutral attempts ×3, all same wall.**
 
 - Revisit condition from round 288 tested three ways (`n`-reuse: 3671;
