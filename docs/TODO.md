@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-328 (2026-09-13): Spieler's largest hunk is a cluster, not a lever.**
+
+- Biggest gap step (-32 at refoff 0x021b) decomposes into citizen-path
+  copy-order differences + the ent+0x24 `lea`-vs-`mov` — every component
+  already measured (copy order landed +3; six ent+0x24 spellings inert;
+  header order transcribed). Large hunks here are clusters of tried
+  1-3-instruction differences, not single levers. No probe.
+- Residue baseline unchanged: **9,209**.
+
 **Round-327 (2026-09-13): reference artifact census confirms choices.**
 
 - Strings census: zlib 1.1.3 (matches references/zlib-1.1.3 — version
