@@ -18,7 +18,17 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
  * counters, and maintains the allocation list. */
 
 // CFLAGS: /O2 /Gd /G6 /Oy-
-// UPDATE 2026-09-13 (round 89): 265 -> 266/658, aligned 207 -> 208 of 249 and
+// SIZE CORRECTION 2026-09-13 (round 92): the object is 645 bytes, not 658.
+// `rebrew test`'s `total` field is the *comparison length* (the target's size),
+// not the candidate's; the honest field is `obj_size`, which is the function's
+// object bytes with the COMDAT's trailing alignment nops trimmed (this object
+// has 11 of them: `+C242..+C252 nop` in the aligned diff).  Every "obj 658" /
+// "exact size" claim in this file and in docs/TODO.md for this function came
+// from that misreading.  The reference is 658, so this function is 13 bytes
+// SHORT -- and a size error is what breaks whole-binary position alignment
+// (see docs/TODO.md round 92: m_AllocTracked's placed gap is -16).
+//
+// UPDATE 2026-09-13 (round 89): 265 -> 266 positional, aligned 207 -> 208 of 249 and
 // one fewer mismatch run.  The `node_slot` alias on `node` was removed: it is
 // only ever assigned `&node`, so `while (*node_slot != 0) { ... prev =
 // *node_slot; *node_slot = (*node_slot)->next; }` is exactly the direct

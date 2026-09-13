@@ -1,5 +1,75 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-92: `rebrew test`'s `total` is not the object size, and position
+alignment is broken in exactly four places.**
+
+Two corrections and one measurement, all from building the CMake tree and
+reading its map.
+
+**1. The honest object size is `obj_size`, not `total`.**  `rebrew test --json`
+returns both, and they differ whenever the object is not the target's length.
+`total` is the *comparison length* (the target's size, or the overlap); the
+candidate's real code length is `obj_size`, which trims the COMDAT's trailing
+alignment nops.  `m_AllocTracked` is the worked example: the object has 11
+trailing nops, so the section is 656 bytes but the code is **645**, against the
+reference's 658 -- **13 bytes short**, not "exact".  Several notes in this file
+and in `src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c` say "obj 658 /
+exact size" and are wrong for that reason; they have been corrected in the
+source file.
+
+The honest table for every non-exact function (`obj_size` against the catalog
+size, best size first):
+
+```
+function                        target   obj  diff   positional match
+ahm_ExAllocAlchemist              1002  1002     0      823
+cm_ExProdObjekt                    993   993     0      976
+cm_ProcessCommandQueue             639   639     0      624
+gm_CalculateProductionValue        396   396     0      391
+gm_ObjectsAvailble                 714   714     0      686
+gv_ExAllocGraveyardWorker         1040  1040     0      606
+ServerMainThread                  2434  2434     0     1336
+srv_LoadBuf                        750   750     0      701
+ls_LoadBuildingEntityState        1463  1464    +1      125
+gm_AllocSpieler                   3689  3688    -1      851
+cm_ExSellObjekt                   2057  2055    -2      201
+gm_FindNextFilteredEntity          346   342    -4      168
+vfs_ReadCompressed                 492   497    +5      161
+gm_AllocGebaeude                  1088  1078   -10      571
+m_AllocTracked                     658   645   -13      266
+cm_ExCopyEntityData                912   880   -32      525
+vfs_OpenStream                     667   693   +26      444
+```
+
+**2. Position alignment breaks in four places, all in the game region.**
+Linking the CMake objects by hand with `/MAP` (the POST_BUILD postlink deletes
+the DLL, so the map has to be captured from a manual link) gives the VA of
+every public symbol.  Comparing those against the catalog, the cumulative delta
+is piecewise constant with exactly four transitions before the CRT:
+
+```
+at 0x10001130 SendBroadcastPacket      +0
+at 0x10002fc0 EmitCrashModuleLine     +16   <- CrashDump is +29 bytes
+at 0x10006820 m_FreeTracked             0   <- m_AllocTracked is -13, which
+                                               happens to land it back on a
+                                               16-byte boundary
+at 0x10008c80 vfs_CleanupObject       +16   <- vfs_ReadCompressed +5
+at 0x1000ef90 cm_ChainAssignId        -16   <- cm_ExCopyEntityData -32
+```
+
+So **four size errors move 387 of 399 public symbols off their reference VA**,
+which is why `rebrew postlink` reports "only 614/7463 layout-map entries
+validate (8.2%)" and refuses.  Fixing those four would re-align the whole game
+region; nothing else in it is misplaced.
+
+**3. The CRT region beyond 0x1001a140 is in a different order entirely.**  From
+`_srand` onward the deltas are not multiples of 16 but thousands of bytes
+(+13440, +8332, +8260, ... -28688), i.e. the LIBCMT members are linked in a
+different sequence than the reference's.  That is the split PoC's problem to
+solve, not the CMake link's: it is the reason the split set controls member
+order explicitly, and it is why `.text` is 0x223b6 against the reference's
+0x22846 (-0x490) even though the game region's own deltas sum to only -16.
+
 **Round-91: `gm_FindNextFilteredEntity`'s head is not the loop.**
 
 `docs/msvc6-c-shapes.md` section 38 says the lever for a target that
