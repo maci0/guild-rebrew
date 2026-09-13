@@ -1,5 +1,61 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-93: a size-difference locator, and the 16-byte padding threshold.**
+
+New tool `.scratch/sizediff.py`: aligns the target and candidate instruction
+streams, then reports the *byte* difference of every aligned run, so a
+function's missing bytes can be located instead of guessed.  It is what turned
+`m_AllocTracked`'s "-13" into a list.
+
+**`m_AllocTracked`: the count increment is reachable, the loop-entry test is
+not.**  `node->count++` folds to `inc dword ptr [esi+0x20]` (3 bytes) under
+every spelling tried, while the reference emits the register form
+(`mov eax,[esi+0x20]; inc eax; mov [esi+0x20],eax`, 7 bytes at 0x100066d7).
+A **volatile read** is the one form that keeps the value live:
+
+```c
+taglen = *(volatile int*) &node->count;
+node->count = taglen + 1;
+```
+
+Same value in single-threaded code, and it reproduces the reference's three
+instructions exactly.  Effect: `obj_size` 645 -> **649** against the reference's
+658, aligned instruction match 208 -> **211** of 249, one fewer mismatch run,
+split-pipeline masked differing bytes **unchanged at 6,528**.  The positional
+`match_count` falls 266 -> 257 purely because the 4-byte insertion shifts every
+later operand (the round-88 artefact).  Kept, because the size is what the
+whole-binary goal needs and the honest metric does not move.
+
+The remaining `-9` is the loop-entry null test and branch encodings.  Ten more
+spellings were tried for the test this round -- sentinel assigned before the
+`strncpy`, sentinel before `buf[taglen] = 0`, a volatile read-back of `node`, a
+volatile store, `volatile struct GroupNode* node`, and the `node_slot` alias
+with its address escaped -- and **none emits `test eax,eax`**.  msvc6 proves the
+literal sentinel `0x117640a0` non-null in every form; the reference's test is a
+scheduling artefact.
+
+**The 16-byte threshold is what the alignment needs, not the exact size.**  A
+function's COMDAT is padded to a multiple of 16 before the linker places the
+next object, so what moves subsequent VAs is `align16(obj_size)`, not
+`obj_size`.  `m_AllocTracked`'s section is 656 bytes for any `obj_size` in
+645..656, so the placed gap stays 656 against the reference's 672 -- **the
+object has to reach 657 bytes, not 658, before the next function moves.**  The
+same arithmetic applies to the other three alignment blockers:
+
+```
+function              obj   target  align16(obj)  reference span  placed delta
+CrashDump             2137   2115      2144           2128           +16
+m_AllocTracked         649    658       656            672           -16
+vfs_ReadCompressed     497    492       512            496           +16
+cm_ExCopyEntityData    880    912       880            912           -32
+```
+
+`cm_ExCopyEntityData` is the one that is *far* short: 880 against 912, and it
+needs +32 whole bytes of code (its `sizediff` shows the missing blocks are the
+two clamp bodies at T82-86 and T178-183, where the reference materialises
+`mov eax,0xffffff81` / `mov eax,0x7f` and stores `al`, and ours folds the
+immediate into the store).
+
 **Round-92: `rebrew test`'s `total` is not the object size, and position
 alignment is broken in exactly four places.**
 
