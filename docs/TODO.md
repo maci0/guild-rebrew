@@ -1,5 +1,40 @@
 # Blockers — 100% Round-Trip Goal
 
+## The include blocker is solved; the externs are next (2026-09-13, round 69)
+
+Round 68 left `rebrew merge` failing on relative includes that no longer
+resolve once 25 inputs at two depths become one file.  That is mechanical and
+now done: `.scratch/norm_includes.py` copies each input to a flat directory
+rewriting every `#include "..."` against the directory the merged TU will live
+in (24 includes re-based for the `spiel` cluster).  Merging the patched copies
+compiles past the includes and surfaces the real remainder:
+
+```
+probe.c(41)   : error C2059: syntax error : '}'
+probe.c(1965) : error C2040: 'g_entity_table_end' : 'int ' differs in
+                levels of indirection from 'unsigned short *'
+probe.c(1970) : error C2372: 'g_slot_table' : redefinition
+probe.c(1971) : error C2040: 'g_entity_state_base' ...
+```
+
+22 errors over 14 distinct symbols, and they are all the same kind of thing:
+the per-function files were written independently, so they declare the shared
+cluster symbols with slightly different types.  The set:
+
+```
+functions  gm_AddObjekt  gm_AllocRaum  gm_AllocObjekt  gm_FreeObjectListRecursive
+           gm_GetEntityTableEntry  gm_ResolveParentEntity  gm_SearchStruct
+           LogMessageInternal
+globals    g_entity_state_base  g_entity_table_end  g_entity_type_bytes  g_slot_table
+types      LinkedNode (C2011 redefinition)   'active' (C2039, no such member)
+```
+
+Harmonising those ~14 declarations -- ideally by giving the cluster one shared
+header instead of repeating externs in every file -- is what stands between
+here and a compile, and after that the whole `.data` duplication problem goes
+with it.  The normaliser is kept because the same step is needed for every
+other cluster.
+
 ## `rebrew merge` works on the bodies, not the includes (2026-09-13, round 68)
 
 Round 67 concluded the `.data` duplication needs the objects' order corrected so
