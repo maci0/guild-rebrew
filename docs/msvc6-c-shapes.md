@@ -2558,3 +2558,26 @@ weight, and the guard/assignment order around an early-exit prologue is a *lever
 checking whenever a function's first 0x20 bytes are wrong.
 
 `src/server.dll/DieGildeAddOn/game/spiel_dumpD.c`
+
+## 76. A `volatile` read at a *post*-loop test blocks the loop's entry-guard fold
+
+The cheapest win of the last stretch, and a shape worth checking first when a loop's entry
+guard retargets.
+
+`vfs_ReadCompressed` (0x10008a90): the guard's `jbe` at `0x10008b0f` targets the **result**
+epilogue (`0x10008c59`) in the reference, but our build targeted the merged `done` test block
+(`0x10008c51`), because the post-loop test read `done` through a `volatile` qualifier and that
+blocked msvc6 from proving `done == 0` on the entry edge.  Making that **one** test plain --
+`if (done == 0)` -- while leaving both `return` reads and the in-loop read volatile removed
+exactly that hunk: `matched` 447 -> 448, `matched-reloc` 467 -> 468, object/real/aligned
+unchanged, hunks 8 -> 7, and **-1 at the link**.
+
+Reach for it whenever an entry guard retargets because a value could not be proven on the entry
+edge: check whether the *post*-loop test reads that value through a volatile qualifier.
+
+**And it is per-site, which is the refinement of allocator Finding 61.**  Making the same tail
+plain at *all* sites collapses the function: object 496 -> 480, real `0x1f0` -> `0x1e0`,
+`matched` 447 -> 21.  Those volatile reads are what keep `done`'s and `result`'s memory homes,
+so one qualifier can be a lever and its neighbour load-bearing in the same five lines.
+
+`src/server.dll/Units/vfs/vfs_ReadCompressed.c`

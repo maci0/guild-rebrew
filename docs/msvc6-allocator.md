@@ -2976,3 +2976,18 @@ So on `ahm_ExAllocAlchemist` the ceiling (858) equals its *current* `matched-rel
 object already matches everything it can; and `vfs_OpenStream` has 207 bytes of headroom that
 no code edit will move.  **Read this as headroom, not as a target** — and compute it before
 deciding that a low `matched` means a large codegen error.
+
+**Amendment (round 255) — numbers for the `matched` ceiling, and two functions where the entire
+shortfall is accounting.**  Computing the ceiling per window from the reference's HIGHLOW count,
+against our one-sided slots:
+
+| function | reference HIGHLOW in window | ceiling | HEAD `matched` / `matched-reloc` |
+|---|---|---|---|
+| `vfs_ReadCompressed` (0x10008a90) | 0 | 492 | 447 / 467 |
+| `cm_ExProdObjekt` (0x1000e140) | 13 | 980 | 888 / **980** |
+| `cm_ProcessCommandQueue` (0x1000aac0) | 15 | 624 | 584 / **624** |
+
+On the last two, `matched-reloc` already **equals** the ceiling, so their entire remaining
+`matched` shortfall is one-sided relocation accounting and **zero** of it is codegen work.  That
+is the sharpest form of this finding: compute the ceiling first, and a function can be finished
+as far as any code edit can take it while its `matched` still looks far from the size.
