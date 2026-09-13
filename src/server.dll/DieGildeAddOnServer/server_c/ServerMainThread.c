@@ -41,7 +41,8 @@ extern int g_tick_rate;    /* 0x11764088 */
  * PHASE 6 (Game loop): advance the game clock, broadcast sync
  *   packets (cmd 0x1E/0x20), process the command queue.
  *
- * STATUS: STUB, object 2434 bytes against a 2434 target (+0), 627 of 627
+ * STATUS: NEAR_MATCHING (metadata; "STUB" here predated promotion),
+ * object 2434 bytes against a 2434 target (+0), 627 of 627
  * instructions.  The order-based diff (.scratch/ndiff.py) aligns 601 of the
  * 627 and leaves 19 hunks of one to five instructions: 10 reorderings, one
  * register name, and 8 substitutions (`lea esi,[eax+ecx]` against

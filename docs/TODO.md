@@ -4,6 +4,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-285 (2026-09-13): doc-freshness audit, two stale claims fixed.**
+
+- `cm_ExSellObjekt.c`: "best-effort 392/2057" predated the frame fix;
+  current probe 613 matched / 861 reloc. Updated (comment-only).
+- `ServerMainThread.c`: header "STATUS: STUB" vs metadata NEAR_MATCHING
+  (same class as round 7). Corrected with provenance note (comment-only).
+- STATUS header-vs-metadata scan: no other mismatch class outstanding
+  (only CrashDump/m_AllocTracked carry `// STATUS:` lines, both match).
+- Residue baseline unchanged: **9,209**.
+
 **Round-284 (2026-09-13): Spieler blocker staleness fixed via tool path.**
 
 - Blocker head said "obj 3688 (-1)"; tool measures 3689. `--fix-blocker`

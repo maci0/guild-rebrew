@@ -54,8 +54,10 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * out-param reuse, plus scheduling drift from index 222 on.  Two further
  * zero-spelling probes (struct-member init: 127/2057, desync; short-pointer
  * init: byte-identical, no effect) confirm the zero itself is not the
- * lever.  Best-effort 392/2057 bytes stand (docs/msvc6-allocator.md GRA
- * class), but read them as slot-permutation + schedule, not zero-register.
+ * lever.  Best-effort 613/2057 matched (861 matched-reloc), obj 2064
+ * (docs/msvc6-allocator.md GRA class) — the 392 figure quoted here
+ * previously predated the frame fix; current probe 2026-09-13 — but read
+ * them as slot-permutation + schedule, not zero-register.
  *
  * Frame layout, fixed 2026-09-13: the reference's 0x228 frame carries a
  * 4-byte hole between the spill block and the 512-byte log buffer.  It is
