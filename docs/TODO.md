@@ -4,6 +4,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-299 (2026-09-13): deliverable loads under Wine.**
+
+- First runtime evidence this session: `build/server.dll` (286,720 B)
+  loads via LoadLibrary under Wine 11.17 and both exports resolve at
+  their reference VAs (Init 0x10009320, Exit 0x10009350). Init itself
+  not executed (spawns threads/sockets, needs game environment).
+  Smoke harness was /tmp-only; tree untouched.
+- Residue baseline unchanged: **9,209**.
+
 **Round-298 (2026-09-13): verdict ledger written.**
 
 - New `docs/behavioral-verdicts.md`: one row per residue function with its
