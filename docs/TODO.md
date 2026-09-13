@@ -4,6 +4,22 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-291 (2026-09-13): CopyData + Graveyard semantic reviews CLEAN.**
+
+- `cm_ExCopyEntityData`: full 901-byte walk — all 5 clamp arms' bounds
+  AND high/low directions verified (incl. `0x7e<rel` ⟺ `rel>=0x7f`
+  exactness, halving gate, shared-store arm), decay directions, level
+  dispatch constant sets, slot-scan guards, type-3 scale, epilogue paths.
+  Only 3 call sites in ref (no missing/extra). Clean.
+- `gv_ExAllocGraveyardWorker`: full instruction trace — guards, calls,
+  sweeps, ~30 field stores offset+value, float block, neighbour-loop
+  order/values, rescan, return. Sibling slot[9]-bug pattern explicitly
+  checked (`grave+9 = entry+0x38`, correct variable, absent). Clean.
+- Both scouts read-only; tree verified clean. 5 of 19 residue functions
+  now carry explicit behavioral verdicts (SMT/Spieler-2findings/ExSell/
+  CopyData/Graveyard-clean).
+- Residue baseline unchanged: **9,209**.
+
 **Round-290 (2026-09-13): CrashDump review — bug 2 already fixed, new bug 3
 found and fixed at +0.**
 
