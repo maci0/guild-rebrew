@@ -29,6 +29,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-305 (2026-09-13): intrinsic-policy axis clean.**
+
+- Audited all residue functions for call-vs-inline divergence (CRT
+  intrinsic expanded on one side, called on the other): LoadBuf, Objects,
+  ReadCompressed, ExProdObjekt, SMT have ZERO such pairings; PCQ /
+  CheckInventory / Tracked pairings are desync noise (fold-shifted), with
+  string ops present on both sides phase-shifted only. Intrinsic policy
+  contributes nothing to the residue. Retired with data.
+- Residue baseline unchanged: **9,209**.
+
 **Round-304 (2026-09-13): baseline pinned by compare-gate.**
 
 - `rebrew verify --compare`: 0 regressions, 0 improvements, 283 unchanged
