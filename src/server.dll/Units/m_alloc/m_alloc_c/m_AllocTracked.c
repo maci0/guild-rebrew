@@ -18,6 +18,25 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
  * counters, and maintains the allocation list. */
 
 // CFLAGS: /O2 /Gd /G6 /Oy-
+// UPDATE 2026-09-13 (round 87): 182/658 -> 263/658, and the frame now matches
+// the target exactly (sub esp,0x118; node at [ebp-4], size at [ebp-8], buf at
+// [ebp-0x18]).  Two changes, both from the vfs_ReadData finding in
+// docs/TODO.md round 87:
+//   - `volatile` dropped from BOTH shadows (`sz` and `nodev`).  The zero-fill
+//     prelude below names `mem` and `sz` as asm operands, and MSVC6 homes every
+//     asm operand, so `sz` gets its [ebp-8] home from the prelude itself.  The
+//     volatile qualifier was therefore buying nothing but a redundant extra
+//     slot, which pushed the frame from 0x118 to 0x120.
+//   - `buf[0x10]`, not `buf[0x14]`.  The note below argued for 0x14 against the
+//     old 0x120 frame; once the shadows stop inflating it, the target's 0x118
+//     only closes with the 16-byte buffer, which is what puts buf on
+//     [ebp-0x18] and leaves [ebp-8]/[ebp-4] free for size/node.  The reference
+//     therefore has a latent 16-byte-buffer overflow on a tag whose first ':'
+//     is at index >= 15 -- `strncpy(buf, tag, taglen)` is not capped by the
+//     `taglen >= 0x10` warning above it.  Reproduced as-is: the goal is byte
+//     identity, so the reference's own bug is the correct behaviour.
+// Everything below is the pre-round-87 history; its measurements were all taken
+// against the old 0x120 frame.
 // NOTE: best config found - 212/658 instr bytes matched (obj 624 vs target 658).
 // The target homes three values in the ebp frame: the group node at [ebp-4],
 // the allocation size at [ebp-8], and buf at [ebp-0x18].  The `node_slot` alias on
@@ -238,7 +257,7 @@ struct GroupNode {
 void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 {
 	char name[0x100];
-	char buf[0x14];
+	char buf[0x10];
 	struct GroupNode* node;
 	struct GroupNode* prev;
 	int taglen;
@@ -248,8 +267,8 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	char* p;
 	struct GroupNode** node_slot;
 	struct GroupNode** prev_slot;
-	volatile unsigned int sz;
-	volatile int nodev;
+	unsigned int sz;
+	int nodev;
 	void* cur;
 
 	if (g_array_ptr == 0) {
