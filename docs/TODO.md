@@ -34,6 +34,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-331 (2026-09-13): six-step workflow pass, steady state.**
+
+- Ran AGENTS.md steps literally: todo → 2 known items; lib-match N/A
+  (no new functions); test --all --dry-run → 283 listed, current
+  statuses only, no promotions pending. Every step confirms steady
+  state. No action.
+- Residue baseline unchanged: **9,209**.
+
 **Round-330 (2026-09-13): skill-layering decision (no edit).**
 
 - Considered encoding session measurement rules into
