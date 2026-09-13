@@ -1,5 +1,37 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-152: a probe harness for one function (the missing piece for every
+remaining sweep).**
+
+Every non-matching function lives in a TU with several functions, and the build
+emits one COMDAT `.text` section per function, so "compile the file and compare"
+needs to find *this* function inside the object first — which is why the earlier
+flag/source sweeps could only work on single-function `crt_region` files, and
+why last round's `/Ot` probe could not be measured per function.
+
+`scripts/probe_function.py --va 0x… --file <src>` compiles the file with the
+flags its `// CFLAGS:` annotation declares (or `--cflags`), locates the function
+by matching the reference's first 12 bytes with relocation slots wildcarded
+(falling back to the COMDAT whose size is nearest the reference's), and reports
+the fixed-offset masked match and the instruction count.  Verified against the
+numbers the older ad-hoc harnesses produced:
+
+```
+gm_CalculateProductionValue  391/396  123 vs 123 instructions
+cm_ExProdObjekt              980/993  354 vs 354
+srv_LoadBuf                  701/750  226 vs 226
+gm_AllocSpieler              914/3689 1047 vs 1056
+gm_CheckInventoryCapacity    293/395  137 vs 138   (the file's own note says 291/395)
+```
+
+First use: `gm_CheckInventoryCapacity`'s residual is the interleaving of the
+`list[0..2]` seed stores with the `type_byte = entity[0]` load; moving the load
+before `list[3]` scores 292/395 against 293 (no win), and the volatile
+store/load variants could not be measured because the locator failed on them —
+the next round should re-run those with `--size` and the section list printed.
+
+**Round-151: the producing script warns, and the gate's worry is quantified.**
+
 **Round-151: the producing script warns, and the gate's worry is quantified.**
 
 `scripts/postlink_residual.py --write` now measures layout-map coverage with the

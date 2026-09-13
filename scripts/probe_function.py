@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+"""Measure ONE function after editing its source — a probe harness.
+
+Every remaining non-matching function lives in a translation unit with several
+functions (and the build emits one COMDAT `.text` section per function), so
+"compile the file and compare" needs to find *this* function inside the object
+first.  This does that: it compiles the file with the flags its `// CFLAGS:`
+annotation declares (or `--cflags`), locates the function by matching the
+reference's first bytes with relocation slots wildcarded, and reports the
+fixed-offset masked match and the instruction count against the reference.
+
+That is the measurement a source or flag probe needs; edit the source, re-run,
+compare.  For *why* two functions differ, use `scripts/instr_diff.py`.
+
+Usage:
+    python3 scripts/probe_function.py --va 0x10019ed0 \\
+        --file src/server.dll/DieGildeAddOn/game/spiel622.c
+    python3 scripts/probe_function.py --va 0x10019ed0 --file ... --obj build/x.obj
+    python3 scripts/probe_function.py --va 0x10019ed0 --file ... \\
+        --cflags "/O2 /Gd /Ot"
+"""
+
+from __future__ import annotations
+
+import argparse
+import capstone
+import os
+import re
+import struct
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from split_coff import Coff  # noqa: E402
+
+REFERENCE = ROOT / "original/Server/server.dll"
+IMAGE_BASE = 0x10000000
+INCLUDES = ["-I" + str(ROOT / "src/server.dll"),
+            "-I" + str(ROOT / "references/zlib-1.1.3")]
+MD = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+
+
+def sections(path: Path) -> dict:
+    d = path.read_bytes()
+    e = struct.unpack_from("<I", d, 0x3C)[0]
+    n = struct.unpack_from("<H", d, e + 6)[0]
+    opt = struct.unpack_from("<H", d, e + 20)[0]
+    out = {}
+    for i in range(n):
+        off = e + 24 + opt + i * 40
+        name = d[off : off + 8].rstrip(b"\0").decode()
+        vs, va, rs, rp = struct.unpack_from("<IIII", d, off + 8)
+        out[name] = (va, vs, rp, rs)
+    return out
+
+
+def reloc_mask(path: Path, secs: dict, va: int, size: int) -> bytearray:
+    raw = path.read_bytes()
+    m = bytearray(size)
+    if ".reloc" not in secs:
+        return m
+    _va, _vs, rp, rs = secs[".reloc"]
+    blk = raw[rp : rp + rs]
+    i = 0
+    while i + 8 <= len(blk):
+        page, bsize = struct.unpack_from("<II", blk, i)
+        if bsize < 8:
+            break
+        for j in range(i + 8, min(i + bsize, len(blk)), 2):
+            ent = struct.unpack_from("<H", blk, j)[0]
+            if ent >> 12 == 3:
+                o = page + (ent & 0xFFF) - (va - IMAGE_BASE)
+                for k in range(o, o + 4):
+                    if 0 <= k < size:
+                        m[k] = 1
+        i += bsize
+    return m
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--va", required=True)
+    ap.add_argument("--file", required=True, help="source file (or its object's source)")
+    ap.add_argument("--size", type=lambda s: int(s, 0), default=None)
+    ap.add_argument("--cflags", default=None,
+                    help="default: the file's `// CFLAGS:` annotation, else /O2 /Gd")
+    ap.add_argument("--obj", default=None, help="an already-compiled object to measure")
+    args = ap.parse_args()
+
+    va = int(args.va, 0)
+    src = ROOT / args.file
+    size = args.size
+    if size is None:
+        text = (ROOT / "src/rebrew-functions.toml").read_text()
+        m = re.search(rf'\["SERVER\.0x{va:08x}"\]\n(?:.*\n)*?size\s*=\s*(\d+)', text)
+        if not m:
+            sys.exit("pass --size (no metadata entry for that VA)")
+        size = int(m.group(1))
+
+    obj = Path(args.obj) if args.obj else None
+    tmp = None
+    if obj is None:
+        cflags = args.cflags
+        if cflags is None:
+            m = re.search(r"^// CFLAGS: *(.*)$", src.read_text(), re.M)
+            cflags = m.group(1) if m else "/O2 /Gd"
+        # the toolchain runs in a container that mounts the project only, so the
+        # object has to live inside it
+        tmp = ROOT / "build/objtest"
+        tmp.mkdir(parents=True, exist_ok=True)
+        obj = tmp / f"probe_{os.getpid()}.obj"
+        cmd = (["rebrew-cmake-cl", "/nologo", "-DREBREW_ALLOW_NAKED=1",
+                "-Dserver_dll_EXPORTS"] + INCLUDES
+               + ["/W3", "/D", "WIN32", "/D", "_WINDOWS", "/D", "_WIN32_WINNT=0x0400",
+                  "/D", "NDEBUG", "-MT"] + cflags.split() + [f"/Fo{obj}", "-c", str(src)])
+        r = subprocess.run(cmd, cwd=ROOT / "build", capture_output=True, text=True)
+        if not obj.exists():
+            print(r.stdout[-2000:] + r.stderr[-2000:], file=sys.stderr)
+            return 1
+
+    ref = REFERENCE.read_bytes()
+    rsecs = sections(REFERENCE)
+    rva = va - IMAGE_BASE
+    rptr = rsecs[".text"][2] + (rva - rsecs[".text"][0])
+    rbody = ref[rptr : rptr + size]
+    rmask = reloc_mask(REFERENCE, rsecs, va, size)
+    # a short, prologue-stable prefix: the bodies differ, so a long match fails
+    head = bytes(0 if rmask[i] else rbody[i] for i in range(12))
+
+    coff = Coff(obj.read_bytes())
+    found = None
+    for si, s in enumerate(coff.sections):
+        if not s["name"].startswith(b".text"):
+            continue
+        body = coff.section_body(si)
+        if not head or abs(len(body) - size) > 32:  # the COMDAT is this function's
+            continue
+        for start in range(0, max(0, len(body) - 12) + 1):
+            if all(not head[k] or body[start + k] == head[k] for k in range(12)):
+                found = (si, start, body)
+                break
+        if found:
+            break
+    if found is None:
+        # the prologue itself can differ; fall back to the COMDAT whose size is
+        # nearest the reference's
+        cands = [(abs(len(coff.section_body(i)) - size), i) for i, s in enumerate(coff.sections)
+                 if s["name"].startswith(b".text")]
+        if not cands or cands[0][0] > 32:
+            print(f"function 0x{va:x} not found in {obj}", file=sys.stderr)
+            return 1
+        si = min(cands)[1]
+        found = (si, 0, coff.section_body(si))
+        print(f"  (located by size, section {si})", file=sys.stderr)
+    si, start, body = found
+    cmask = bytearray(len(body))
+    for r, _sym, _typ in coff.section_relocs(si):
+        for k in range(r, min(r + 4, len(body))):
+            cmask[k] = 1
+    n = min(size, len(body) - start)
+    cb = body[start : start + n]
+    matched = sum(1 for i in range(n) if (rmask[i] or cmask[start + i]) or rbody[i] == cb[i])
+    ri = sum(1 for _ in MD.disasm(bytes(rbody[:n]), va))
+    ci = sum(1 for _ in MD.disasm(bytes(cb), va))
+    print(f"0x{va:x} size {size}: section {si} +{start:#x}, "
+          f"matched {matched}/{n} ({100.0 * matched / n:.1f}%), "
+          f"instructions {ci} vs {ri}")
+    if tmp is not None:
+        print(f"  object: {obj}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
