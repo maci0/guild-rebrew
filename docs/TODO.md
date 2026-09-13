@@ -71,6 +71,40 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-171: three rebrew defects fixed, one spelling measured shut.**
+
+10,846 bytes unchanged on the DLL; `rebrew`'s own suite went from 3 failures to
+**6503 passed, 0 failed**.
+
+*The spelling.*  `cm_ProcessCommandQueue` is 15 bytes from done and its
+difference is localised: the target re-tests the candidate after assigning it
+(`mov ebx,esi` / `test ebx,ebx` / `je`) where our source writes `held = pkt; goto
+advance;`.  The two are equivalent (`pkt` is non-NULL there, so the shared test
+takes the same branch), so removing the `goto` should let the fall-through serve
+as that test.  Measured: **624 -> 204 matched**.  msvc6 lays the `recheck` block
+out differently and the arm order collapses -- the same end every CFG spelling of
+this function reaches, which its notes already record.
+
+*Three defects in rebrew, all pre-existing except one of mine:*
+
+- `rebrew --version` printed **1.1.0** while the code was **1.2.0**: the callback
+  read `importlib.metadata`, whose value is baked at install time, so an editable
+  checkout starts lying the moment `__init__.py` changes.  It now reads
+  `rebrew.__version__`, which is also what packaging uses as the single source
+  (`[tool.setuptools.dynamic] version = {attr = ...}`).  This had been failing
+  `test_main.py::test_version_matches_module`.
+- `.agents/skills/` had drifted from the canonical `src/rebrew/agent-skills/` —
+  **my** doing: round 154 added the `cmake-flags` row to the workflow skill and
+  did not re-render the copy.  Re-rendered with the command the sync test's
+  docstring gives.
+- `rebrew-toolchains` had no `ido/5.3-linux` or `ido/7.1-linux` Dockerfile,
+  though rebrew's registry defines both as image-backed toolchains and pins the
+  decompals/ido-static-recomp v1.2 asset by sha256 — so a fresh clone could not
+  rebuild them (exactly the "untracked Dockerfile" class
+  `test_toolchain.py::TestDockerfileSanity` exists to catch).  Both are the
+  sibling `-n64` Dockerfile with the tag, labels and target naming changed; the
+  URL, sha256, extraction path and `cc` wrapper are identical.
+
 **Round-170: the pad lever's other candidates, both measured flat.**
 
 No byte change (10,846).  Round 169's padding makes size-changing improvements
