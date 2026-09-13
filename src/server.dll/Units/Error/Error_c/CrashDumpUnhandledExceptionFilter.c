@@ -228,13 +228,10 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	SetFilePointer(hCrashLog, -1, 0, 2);
 
 	/* Write separator line */
-	nFrames = 0x800;
 	hProcess = GetCurrentProcess();
 	WriteFile(hCrashLog, szSep, 0x1a, &nBytesWritten, 0);
 
 	/* Write date */
-	space = ' ';
-	nFrames = 0x800;
 	szDateLen = GetDateFormatA(0x400, 2, 0, 0, szDateBuf, 0x100);
 	if (szDateLen) {
 		WriteFile(hCrashLog, szDateBuf, szDateLen - 1, &nBytesWritten, 0);
@@ -356,6 +353,7 @@ write_nl:
 
 unknown_exc:
 
+	nFrames = 0x800;
 	/* Stack walk */
 	eip = pCtx->Eip;
 	frameInfo[0] = (int) pDbgBuf;
