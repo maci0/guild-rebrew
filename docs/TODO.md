@@ -1,5 +1,42 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-100: what the last few instructions actually are, per function.**
+
+With the register-agnostic metric from round 99, the three closest functions'
+entire content gaps are now enumerated, and none of them is semantic:
+
+```
+srv_LoadBuf       1 / 1   lea r,[r+0xb0]  against  lea r,[r+0xb4]
+m_AllocTracked    5 / 1   mov r,r  mov r,r  cmp r,r  test r,r  je   (loop-entry
+                          test)  against  cmp r,dword ptr [R]        (the fold)
+gm_CheckInventory 8 / 7   mov r,r  add r,r  mov r,byte ptr [r]  mov r,8
+                          lea r,[r+0x10]  mov r,[r+4]  jmp
+                          against  mov r,byte ptr [r+r]  (SIB fold)
+                          mov [r+0x38],r / mov r,[r+0x38]  (byte spill)
+                          cmp r,8  (folded sentinel)  lea r,[r+0x14]
+```
+
+`srv_LoadBuf` is one instruction from content-exact and it is a *position*
+difference: the reference hoists the second lobby `sprintf`'s buffer `lea`
+above the `*conn = *conn & 0xffffff7f` mask, ours emits it after the following
+`push`, which is why the displacement reads `0xb4` against the target's
+`0xb0`.  The `docs/msvc6-c-shapes.md` section 10/8c levers for pinning that
+order (statement permutation, a block-local alias, a volatile read) are all
+recorded as inert on this cluster, and the same source owns the `eax/ecx/edx`
+rotation that the register-agnostic pass now ignores.
+
+`m_AllocTracked` has no semantic content left at all: its five target-only
+entries are the loop-entry null test (round 89, unreachable) plus the one
+folded compare, and the single cand-only entry is that fold.
+
+`gm_CheckInventoryCapacity`'s gap is four shapes, all documented as
+grid-searched: the entity-address SIB fold, the byte spill, the folded
+sentinel `8`, and the `list` base offset (`[esp+0x10]` against `[esp+0x14]`).
+Re-measured this round: `elem = *(volatile int*) &list[0];` scores **48** at
+obj 398, and making the `list[0] = 8;` store volatile scores **269** at obj 395
+against the 293 baseline, so the volatile lever regresses here where it won on
+`m_AllocTracked`'s guard.
+
 **Round-99: the content gap is small everywhere -- the mass is the allocator.**
 
 Round 97's tool counted register-role swaps as content differences.  Adding a
