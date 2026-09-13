@@ -1,5 +1,57 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-115: the `.rdata` duplicate is fixed -- it was one missing
+underscore.**
+
+`crt_region/amsg_exit.c` exists, in its own words, "to keep crt0msg.obj out of
+the link (its runtime-error strings duplicate rdata_restore.c)".  It defined the
+CRT aliases as
+
+```c
+void __cdecl __NMSG_WRITE(int rterrnum) { ... }
+int  __cdecl __crtMessageBoxA(...)      { ... }
+```
+
+and MSVC decorates a C identifier with one more leading underscore, so those
+became the COFF symbols **`___NMSG_WRITE`** and **`___crtMessageBoxA`** -- one
+underscore too many.  They satisfied nothing, `dllcrt0.obj`'s references to
+`__NMSG_WRITE` / `__crtMessageBoxA` stayed undefined, and LIBCMT's
+`crt0msg.obj` and `crtmbox.obj` were pulled in anyway, bringing exactly the
+`??_C@...` string block the file was written to prevent.  The compiled symbols
+made it visible:
+
+```
+___NMSG_WRITE       1001b970   amsg_exit.c.obj    <- ours, unused
+__NMSG_WRITE        10020b48   LIBCMT:crt0msg.obj <- what the link actually used
+__GET_RTERRMSG      10020c9b   LIBCMT:crt0msg.obj
+```
+
+Renaming them to `_NMSG_WRITE` and `_crtMessageBoxA` (one leading underscore in
+C, so two in COFF) fixes it:
+
+```
+                              before        after
+"runtime error " copies       2             1     (reference has 1)
+"R6028" copies                2             1
+crt0msg / crtmbox in the map  present       absent
+.rdata VirtualSize            0x32d1        0x3041   (reference 0x2e81)
+.rdata same-offset match      81.39%        81.71%
+.text VirtualSize             0x223d6       0x22256
+```
+
+Game-region drift is unchanged (`link_drift` still reports the same single `+0`
+change there), and the gate holds: 186 lint files, 0 errors, `verify --full`
+281/283.
+
+The split set is unaffected (`.rdata` still 0x33b1, two copies): there the
+strings come from `1001fdf8_.text.obj`, the split object carrying `crt0msg.obj`'s
+24 `.rdata` sections, on top of `rdata_restore.c`'s blob -- a duplication inside
+the split pipeline, not from the library.  The CMake build, which is the
+artifact, is fixed.
+
+This retires rounds 112-114's plan: the strings never needed re-emitting from a
+`// DATA:` TU, they needed the library object not to be linked at all.
+
 **Round-112: the `.rdata` surplus, found and mechanically validated.**
 
 `.text` is not the only section that has to converge, and `.rdata` is currently
