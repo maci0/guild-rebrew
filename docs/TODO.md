@@ -4,6 +4,24 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-288 (2026-09-13): semantic review finds a REAL Spieler bug; fix
+correct but unlandable (+393).**
+
+- Two-scout semantic review of the uncertified functions: ServerMainThread
+  CLEAN (all 29 structural hunks triaged register/schedule/layout; every
+  flag, cmd byte, call, sleep and log code verified equal across all
+  regions). gm_AllocSpieler: 2 findings.
+- Finding 1 (NEW, real bug): slot[9] else-branch stores slot[0x166] (=0);
+  reference stores (char)arg8 (0x10018cd4 load, jne skips call, 0x10018cec
+  stores al). Correct fix compiles -10 (3689→3679) and costs +393 linked
+  via tail desync — reverted per link rule, recorded in the file header
+  with the revisit condition (length-neutral spelling or resynced tail).
+- Finding 2 (tail log/sprintf order) is the known +53 lead. Both scouts
+  also verified 55/55 calls in order plus all record/dynasty/location/
+  selector/counter constants. SMT needs no header change (already
+  hand-verified); Spieler header carries the bug note.
+- Residue baseline unchanged: **9,209**.
+
 **Round-287 (2026-09-13): outside-7 hunt ends (net effect, no lever).**
 
 - The +1 table shift is the NET of distributed ± differences, not a single

@@ -1,6 +1,17 @@
 /* gm_AllocSpieler: allocate and initialize an entity from a
  * father/mother pair with random trait generation.
  *
+ * KNOWN REAL BUG (2026-09-13, semantic review): the slot[9] else-branch
+ * (`arg8 != 2`) stores slot[0x166] (=0), but the reference stores
+ * (char)arg8 — at 0x10018cd4 the reference loads arg8 into eax, the
+ * 0x10018cde jne skips the gm_RandomMod call, and 0x10018cec stores al.
+ * Observable whenever arg8 is neither 2 nor 0. Correct fix
+ * (`slot[9] = (char)arg8`) compiles 10 bytes shorter (obj 3689 -> 3679)
+ * and costs +393 linked via tail desync — reverted per the link rule.
+ * Revisit only with a length-neutral spelling or a resynced tail.
+ * (Second finding from the same review — tail log/sprintf order — is the
+ * already-recorded +53 lead below.)
+ *
  * Real name in the original sources: gm_AllocSpieler from spiel.c.  This is
  * a full C reconstruction of the 3689-byte target: slot scan, slot/refs
  * zeroing, record header init, the debug sprintf/log, the type-0x10 citizen
