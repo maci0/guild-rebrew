@@ -136,11 +136,55 @@ the end, while the reference *interleaves* them with the project's CRT objects
 (228 matches spanning 0x1001a18a..0x10023812, with 3,052 bytes of gaps that are
 exactly the project objects), and the split set already links that order — it
 is why the split set reaches 81.2% coverage where the CMake build reaches
-55.6%.  Putting the members on the CMake link line in that order (interleaved
-with the objects, which needs a generated response file rather than CMake's
-`@objects1.rsp` + trailing libraries) is the next structural step for `.text`;
-it is necessary but not sufficient for the 90% gate, which also needs the 19
-functions above to close.
+55.6%.  Putting the members on the CMake link line is the next structural step
+for `.text`; it is necessary but not sufficient for the 90% gate, which also
+needs the 19 functions above to close.
+
+**Round-120: interleaving the members by VA is *not* the fix — the composition
+is.  Measured, four links over the same object set** (postlink coverage, and
+`scripts/split_audit.py`'s "split symbols exactly at their reference VA" out of
+319 mapped symbols):
+
+```
+ link                                                  .text     coverage   exact
+ CMake as committed                                 0x22256   55.6%       n/a
+ members merged in by reference VA (defs/commons)   0x234d2   55.9%       n/a
+ members after our objects, blobs last              0x22b08   56.0%       n/a
+ same, IAT thunk object before the members          0x22af8   78.2%   216/319
+ `make_split_rsp.py` (mirrors dropped, blobs at the
+ `_BLOB_AT_DATA` cut) - the split set               0x22af8   81.2%   246/319
+```
+
+Two things this settles, both by direct measurement rather than inference:
+
+* **Merging our objects and the member sections into one reference-VA order
+  makes placement worse, not better**: 0 of 230 member sections land at their
+  reference VA and coverage does not move (55.9%).  MSVC LINK places
+  command-line objects in command-line order, so what matters is the *grouping*
+  — all our objects, then all members in reference order — not a global sort.
+  The reference's interleaving (its `dllcrt0` at 0x1001b8fb before our
+  `dllmain.c` at 0x1001b9d4) is reproduced instead by *dropping* the eight
+  hand-reversed CRT mirrors (`make_split_rsp.py`'s `DROP`): the member sections
+  carry those same bodies and land on their VAs.
+* **The last 42/12 bytes come from the thunk and blob slots, not from the
+  members.**  The `emit_thunks.py` object belongs *before* the member sections
+  (as `scripts/split_link.sh` documents) and its `_tail` companion *after*
+  them; putting either on the wrong side shifts every member by its `.text`
+  size.  The two restore-blob objects belong at the `.data` running-total cut
+  (`_BLOB_AT_DATA = 0x3400` in `make_split_rsp.py`), not at the end: with them
+  late the same object set scores 78.2%, with them at the cut it scores 81.2%.
+
+Dropping the mirrors keeps the import set exact: reference, `split_poc` and the
+interleaved variants all carry **100 imports across the same 4 DLLs**.  The
+`_CRT_REGION_KEEP` note above (extra `IsBadWritePtr` / `FatalAppExitA` imports)
+applies to linking *whole* `LIBCMT.lib` members, not to the curated per-section
+objects `scripts/split_coff.py` emits.
+
+So the CMake target's remaining link-side work is not a new ordering scheme but
+adopting the response file `scripts/make_split_rsp.py` already produces from
+`objects1.rsp` (a custom link step, since CMake always emits its own object
+list before the trailing libraries).  That closes 55.6% -> 81.2%; the last 9
+points to the 90% gate are the 19 functions above.
 
 **Round-117: the CRT half is not where the remaining failure is, and the game
 half is uniformly allocator-bound.**
