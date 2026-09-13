@@ -1,5 +1,42 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-243 (instruments): the tools the campaign depends on were untracked, and one of
+them was quietly lying.**
+
+`ndiff.py`, `cdiff.py`, `gaptrace.py` and `reallen2.py` lived in gitignored `.scratch/`
+while being the instruments every agent is told to use — they would not survive a clean
+checkout.  Promoted to `scripts/`, with the two that assumed they were run from the repo
+root now resolving paths from `__file__`.
+
+`gaptrace.py` then showed two defects when actually used on a function with out-of-line
+tables:
+
+1. **The `size` argument was a trap, and it caught me.**  The correct window is the
+   reference's REAL BODY, which for a function with a jump table or case map is larger than
+   the metadata `size` (code only).  `vfs_OpenStream` is 667 bytes of code inside a 701-byte
+   real body inside a **704**-byte window before the next function.  The three
+   choices read as three different functions:
+
+   | size passed | reference window | reading |
+   |---|---|---|
+   | 667 (metadata) | code only | "220 insns, 37 B long, 20 extra insns" — bogus |
+   | 701 (real body) | code + tables | "3 B long" — bogus, it is cl's 0x90 rounding |
+   | 704 (next VA) | full window | both tails at 0x02bf — aligned |
+
+   The 667 case decodes our table bytes as instructions and invents the extra instruction
+   count.  `size` is now optional and defaults to the next function's VA, with a NOTE when
+   an explicit size disagrees.  **Use the derived window.**
+
+2. `IndexError` when the two streams end at different lengths — the exact situation the
+   trace exists to display.  Both ends now print `end`.
+
+**Verified negative: `vfs_OpenStream` (245 bytes of residue) has no length defect.**  With
+the derived 704-byte window both streams end at `0x02bf`, so its jump table and case map sit
+at the reference offsets and the earlier `-36` length win is intact.  Its 245 bytes are code
+shape — consistent with its recorded blocker (`frame/slot + cmp[mem],0 vs mov/test`).
+Worth recording because the length lever is the tempting hypothesis there (it was worth -36
+once) and it is now measured, not assumed.
+
 **Round-243 (closing note): the drag lead is dead — layout costs ~15 bytes total.**
 
 I opened a line of inquiry last round into whether objects whose code exceeds their
