@@ -230,10 +230,11 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 	/* Write separator line */
 	nFrames = 0x800;
 	hProcess = GetCurrentProcess();
-	frameInfo[0] = (int) pDbgBuf;
 	WriteFile(hCrashLog, szSep, 0x1a, &nBytesWritten, 0);
 
 	/* Write date */
+	space = ' ';
+	nFrames = 0x800;
 	szDateLen = GetDateFormatA(0x400, 2, 0, 0, szDateBuf, 0x100);
 	if (szDateLen) {
 		WriteFile(hCrashLog, szDateBuf, szDateLen - 1, &nBytesWritten, 0);
@@ -249,6 +250,8 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 
 	/* Classify exception */
 	excCode = pExceptionPointers->ExceptionRecord->ExceptionCode;
+	frameInfo[0] = (int) pDbgBuf;
+
 
 	if (excCode > 0xc000008e) {
 		/* Jump table 2 */

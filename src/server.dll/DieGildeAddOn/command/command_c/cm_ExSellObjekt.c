@@ -105,15 +105,15 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	short* source_owner_entity;
 	int* linked_list_ptr;
 	short* source_dynamic_ref;
-	char* dest_existing_entity;
-	char** source_container_ptr;
 	short* dest_owner_entity;
 	short* resolved_dynamic;
-	short* dest_dynamic_entity;
-	void* source_existing_entity;
-	short* source_static_entity;
-	ushort* dest_game_object;
 	short* source_dynamic_entity;
+	char* dest_existing_entity;
+	short* dest_dynamic_entity;
+	short* source_static_entity;
+	char** source_container_ptr;
+	ushort* dest_game_object;
+	void* source_existing_entity;
 	uint weight_fraction;
 	/* The reference's frame is 0x228, 4 bytes more than a bare
 	 * `char log_buffer[512]` gives (0x224), and the extra dword sits

@@ -378,11 +378,16 @@ level_done:
 					else if (val < threshold_low) {
 						val = val + decay_low;
 					}
-					if (val < -0x7f) {
-						val = -0x7f;
+					if (val > -0x7f) {
+						if (val < 0x7f) {
+							/* in range */
+						}
+						else {
+							val = 0x7f;
+						}
 					}
-					else if (val >= 0x7f) {
-						val = 0x7f;
+					else {
+						val = -0x7f;
 					}
 					mat_row[inner_idx] = (char) val;
 				}

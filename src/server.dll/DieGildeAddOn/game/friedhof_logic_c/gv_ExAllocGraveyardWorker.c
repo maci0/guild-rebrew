@@ -525,7 +525,7 @@ fail_ffff:
 	 * matching the reference's edi/ecx traffic at 0x10011dd2-0x10011dff.
 	 * Bumping them in place emits a load-inc-store round trip each. */
 	{
-		int live = g_citizen_count;
+		int live = *(volatile int*) &g_citizen_count;
 		int seq;
 		*(int*) (grave + 0x170) = (int) entity;
 		*(int*) (grave + 0x16c) = (int) entity;
@@ -562,9 +562,9 @@ fail_ffff:
 			*(unsigned char*) (grave + 0x80 + n) = *(unsigned char*) ((char*) entry + 0x24 + n) >> 1;
 	}
 	*(unsigned char*) (grave + 9) = *(unsigned char*) ((char*) entry + 0x38);
+	*(int*) (grave + 0x10) = 0;
 	strcpy((char*) grave + 0x30, (char*) entry + 4);
 	strcpy((char*) grave + 0x40, (char*) *(void* volatile*) &entry + 0x14);
-	*(int*) (grave + 0x10) = 0;
 	{
 		int n;
 		volatile int iv;

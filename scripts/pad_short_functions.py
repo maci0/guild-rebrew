@@ -54,7 +54,15 @@ def function_sizes() -> dict[int, int]:
 def map_entries() -> dict[str, list[int]]:
     """object basename -> the VAs of the functions it defines."""
     out: dict[str, list[int]] = {}
-    for line in (ROOT / "build/split_poc.map").read_text().splitlines():
+    # The map is written by the split link itself (/MAP:split_poc.map), so a
+    # fresh build directory has none on the first run and this step has nothing
+    # to key on.  Return no pad entries instead of raising: the link then runs,
+    # produces the map, and the next run pads as usual.
+    mapfile = ROOT / "build/split_poc.map"
+    if not mapfile.exists():
+        print("pad: no build/split_poc.map yet (first link) -- nothing to pad")
+        return {}
+    for line in mapfile.read_text().splitlines():
         m = re.match(r"^\s*[0-9a-f]{4}:[0-9a-f]{8}\s+(\S+)\s+([0-9a-f]{8})\s+f\s+(\S+)\s*$",
                      line)
         if m and m.group(3).endswith(".obj"):

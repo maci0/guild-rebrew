@@ -196,10 +196,10 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		sprintf(s.msg, (char*) 0x10031438, nid, s.type_id);
 	}
 	LogMessageInternal((char*) 0x10031004, 0x10d8, s.msg, 8);
-	*(int*) (geb + 1) = *(volatile int*) 0x10030b6c;
-	*(volatile int*) 0x10030b6c = *(volatile int*) 0x10030b6c + 1;
 	*(unsigned short*) (geb + 0x25) = (unsigned short) owner;
 	*(unsigned short*) (geb + 0x27) = (unsigned short) owner;
+	*(int*) (geb + 1) = *(volatile int*) 0x10030b6c;
+	*(volatile int*) 0x10030b6c = *(volatile int*) 0x10030b6c + 1;
 	*(int*) (geb + 0x3d) = 0x64;
 	*(int*) (geb + 0x45) = 0x64;
 	geb[0x5c] = 0x64;
@@ -291,7 +291,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	if (gm_CheckEntityType((unsigned char*) geb) != 0)
 		*(int*) (geb + 0x30) = 0x1388;
 	/* building-type switch (jump table 0x10017890 / byte map 0x100178bc). */
-	switch ((unsigned char) geb[0]) {
+	switch (s.type_id) {
 	case 4:
 	case 5:
 	case 6:
@@ -305,18 +305,6 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 			    *(int*) ((char*) 0x100358a4 + (unsigned short) owner * 0x21c);
 		else
 			*(int*) (geb + 0x65) = -1;
-		break;
-	case 0xb:
-	case 0xc:
-	case 0xd:
-		*(int*) (geb + 0x65) = -1;
-		break;
-	case 0xe:
-	case 0xf:
-	case 0x10:
-		*(int*) (geb + 0x65) = 0xa;
-		*(int*) (geb + 0x69) = 3;
-		*(int*) (geb + 0x6d) = 5;
 		break;
 	case 0x14:
 	case 0x15:
@@ -336,6 +324,9 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 				*(int*) (rec + 0x1e) = -1;
 			}
 		}
+		break;
+	case 0x47:
+		*(int*) (geb + 0x30) = 0x13880;
 		break;
 	case 0x1e:
 		/* The reference writes the allocation only to geb+0x71 and then reads
@@ -365,8 +356,17 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 		*(unsigned short*) (geb + 0x6b) = 0;
 		*(int*) (geb + 0x6d) = 0;
 		break;
-	case 0x47:
-		*(int*) (geb + 0x30) = 0x13880;
+	case 0xb:
+	case 0xc:
+	case 0xd:
+		*(int*) (geb + 0x65) = -1;
+		break;
+	case 0xe:
+	case 0xf:
+	case 0x10:
+		*(int*) (geb + 0x65) = 0xa;
+		*(int*) (geb + 0x69) = 3;
+		*(int*) (geb + 0x6d) = 5;
 		break;
 	case 0x48:
 	case 0x49:

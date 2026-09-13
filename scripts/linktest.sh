@@ -36,6 +36,12 @@ for f in "$@"; do
         echo "no compile rule for $rel -- is the tree configured?" >&2
         exit 1
     fi
+    # Compile the live file.  A frozen copy under a dot-prefixed name was tried
+    # to defeat the agents' sample-write sweeps and it collapses the composition
+    # (`exactly at their reference VA: 0`, residue x12) -- something downstream
+    # in split_link.sh/pad_short_functions.py keys off the object's source path.
+    # The race is handled socially instead: a file is only measured after its
+    # agent says "file frozen".
     cmd=$(echo "$line" \
         | sed -e 's|$(C_DEFINES)|-DREBREW_ALLOW_NAKED=1 -Dserver_dll_EXPORTS|' \
               -e "s|\$(C_INCLUDES)|-I$PWD/src/server.dll -I$PWD/references/zlib-1.1.3|" \
