@@ -101,12 +101,28 @@ runs `rebrew verify --full`, and one run demoted `["SERVER.0x10018850"]` from
 never held a claim to.  Two write sites in `verify.py`:
 `~line 1004` (`update_statuses_batch`, gated on `stale_proven` from `proven_vas`,
 which is built from entries whose status *is* `PROVEN`) and `~line 1794`
-(`should_promote_status(current_status, status)`).  Since the entry was
-`SIZE_MISMATCH` it should have been in neither set, so the lattice or the caller is
-treating `SIZE_MISMATCH -> STUB` as a promotion.  Not fixed here — a correct fix
-needs the lattice's intent and rebrew's own suite (6,503 tests) to validate — and
-the metadata was reverted.  **Every gate run will rewrite it again until this is
-fixed.**
+(`should_promote_status(current_status, status)`).  The entry was `SIZE_MISMATCH`,
+so site 1 cannot have fired; site 2 did, because `should_promote_status` ends
+`return current != new` — *every* status change is allowed, demotions included.
+
+**This is by design, not an oversight, and the fix is therefore a decision rather
+than a patch.**  `tests/test_property_status.py` asserts it in two places:
+`test_symmetric_under_rule_set` encodes "a promotion is allowed iff none of the
+refusal rules fire" with the refusal set being only {sticky, STUB -> size-state},
+and `test_exact_to_stub_demotes` says so outright (`should_promote_status("EXACT",
+"STUB") is True  # demotion ok`).  A patch adding the symmetric
+`SIZE_MISMATCH/MISSING_SIZE -> STUB` guard was written and reverted: it fixes the
+observed corruption but fails that property test, i.e. it contradicts the
+documented contract on a guess.  The asymmetry worth raising with the maintainer
+is that the existing STUB guard already encodes "a placeholder must not erase a
+classification", and a byte-state is the *more* informative side of the pair — it
+names the measured delta in its note, where STUB says only "unclassified".
+
+The practical mitigation meanwhile is on this repo's side: a gate run rewrites
+`src/rebrew-functions.toml`, so restore it after gating
+(`git checkout HEAD -- src/rebrew-functions.toml`) rather than committing the
+churn.  **Every gate run will rewrite it again until the question above is
+settled.**
 
 *CrashDump -27* (1989 -> 1962, net -23 with a +4 knock-on in the bytes after the
 function, which are its own jump table/byte map).  The hunk moves `nFrames = 0x800`
