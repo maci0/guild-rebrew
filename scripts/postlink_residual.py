@@ -33,7 +33,9 @@ sys.path.insert(0, str(ROOT))
 
 from rebrew.binary_loader import load_binary  # noqa: E402
 from rebrew.layout_meta import load_package  # noqa: E402
-from rebrew.postlink import FIXERS, FIXER_ORDER, _binary_info_from_bytes  # noqa: E402
+from rebrew.postlink import (  # noqa: E402
+    FIXERS, FIXER_ORDER, MIN_LAYOUT_MAP_COVERAGE, _binary_info_from_bytes, _map_coverage,
+)
 
 IMAGE_BASE = 0x10000000
 
@@ -71,6 +73,14 @@ def main() -> int:
     built_path = ROOT / args.built
     meta = load_package(ROOT / args.layout)
     info_b = load_binary(built_path)
+    op_ok, op_tot, call_ok, call_tot = _map_coverage(bytes(load_binary(built_path).data), meta, info_b)
+    cover = (op_ok + call_ok) / max(1, op_tot + call_tot)
+    if cover < MIN_LAYOUT_MAP_COVERAGE:
+        print(f"WARNING: layout-map coverage {100 * cover:.2f}% is below the "
+              f"{100 * MIN_LAYOUT_MAP_COVERAGE:.0f}% gate; the fixers rewrite "
+              f"operands by fixed offset, so bytes inside the functions that do "
+              f"not match may be patched at the wrong place.  The output is an "
+              f"intermediate artifact, not a runnable build.", file=sys.stderr)
     built = bytearray(info_b.data)
     for name in FIXER_ORDER:
         before = bytes(built)

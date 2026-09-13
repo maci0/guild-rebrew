@@ -1,5 +1,34 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-151: the producing script warns, and the gate's worry is quantified.**
+
+`scripts/postlink_residual.py --write` now measures layout-map coverage with the
+tool's own rule (`_map_coverage` + `MIN_LAYOUT_MAP_COVERAGE`) and warns when it
+is under the gate:
+
+```
+WARNING: layout-map coverage 89.96% is below the 90% gate; the fixers rewrite
+operands by fixed offset, so bytes inside the functions that do not match may be
+patched at the wrong place.  The output is an intermediate artifact, not a
+runnable build.
+```
+
+Quantified on the current vehicle: the fixers change `0x1473` bytes of `.text`,
+of which **`0x18f` (399)** land inside the non-matching functions —
+`srv_LoadBuf` 0x3f, `cm_ExProdObjekt` 0x29, `ahm_ExAllocAlchemist` 0x28,
+`gm_CalculateProductionValue` 0x27, `cm_ProcessCommandQueue` 0x21, … — and
+`0x12e4` elsewhere (ordinary operand rewrites inside matched code).  So the
+gate's refusal protects 399 bytes that the forced path currently writes over,
+and `build/server.dll` from `--target final` is an intermediate artifact until
+those functions match, exactly as the warning now says.  The byte-identity
+target is unaffected (the reference is the arbiter), but nobody should ship the
+intermediate.
+
+No new claim about `gm_FindNextFilteredEntity`'s epilogue duplication: testing
+`/Ot` and `#pragma optimize("t", on)` on it needs the split pipeline per function
+(a COFF object holds several), and the file's own note already records every
+pragma letter as inert there.
+
 **Round-150: a diagnostic that says *what kind* of residual each function has.**
 
 `scripts/instr_diff.py` (new): aligns a function's reference and built
