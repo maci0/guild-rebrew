@@ -120,6 +120,19 @@ python3 scripts/split_blob.py --rsp "$WORK/rsp.rsp" --split "$WORK/split" \
     --blob crt_region/rdata_restore.c.obj
 fi
 
+echo "== absolute definitions for the static labels the split leaves undefined"
+# split_coff splits a member per section, so a relocation to a local label in
+# another of its sections ($T17396, the LIBCMT SEH scopetable malloc's prologue
+# pushes) survives as an undefined *static*.  LINK never reports those: it
+# defines them as absolute 0, so the seven SEH prologues in the composition
+# pushed 0x10000000 where the reference pushes the scopetable address (21 bytes
+# and 7 of postlink's failing operand entries; every non-split build resolves
+# all seven).  Statics are object-local, so the fix is in place: promote the
+# symbol to an external ABSOLUTE definition at the address the reference's own
+# link wrote.  No section bytes are added, so the geometry is untouched.
+python3 scripts/resolve_static_labels.py --rsp "$WORK/rsp.rsp" \
+    --reference original/Server/server.dll --out "$WORK/abs" --rewrite
+
 echo "== data gap for this composition"
 # `data_restore.c`'s blob is sized for the CMake composition (its own .data
 # ends at 0xdf00 with a 0x9a00 blob).  The split objects carry more `.data`

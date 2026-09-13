@@ -1,5 +1,60 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-142: the split set lost LIBCMT's SEH scopetables (`+7` entries, `-21` bytes);
+with the fixers applied the binary differs from the reference in `.text` only.**
+
+*The whole-binary measurement first*, because it re-frames everything else.
+Running postlink's three fixers on the vehicle outside the build (calling
+`rebrew.postlink.FIXERS` directly, i.e. bypassing `check_text_alignment`;
+`.scratch/probe_postlink.py`) yields a file that is **byte-identical to the
+reference** in the header block, `.rdata`, `.data` and `.reloc`, at the
+reference's exact 286,720 bytes.  Only `.text` differs: `0x328f` bytes of its
+`0x22846` VirtualSize, of which `0x326e` sit inside the 19 non-byte-matched
+functions and 33 outside.  Every non-`.text` part of the pipeline is therefore
+already converged, and 100% is exactly "the 19 functions".
+
+That also calibrates the gate: re-measuring coverage *on the patched bytes*
+gives 89.7% (771 failing) against 88.6% on the link, because the operand map
+holds straddling 4-byte windows whose bytes include a data pointer — the fixer's
+in-range guard skips the window itself, but the patch at the real operand lands
+inside it.  So `check_text_alignment` reads ~1.1 points below the state the
+fixers would leave behind; it is still the right check (it is what makes a
+wrong-offset patch impossible), just not the same number.
+
+*The defect.*  `split_coff.py` splits a member per section, so a relocation to a
+**local label in another of the member's sections** survives as an *undefined
+static* — `$T17396`, the scopetable `malloc`'s SEH prologue pushes.  LINK never
+reports an undefined static: it defines it as absolute 0.  Seven prologues
+therefore pushed `0x10000000` instead of the scopetable address.  Evidence: the
+scan for `55 8b ec 6a ff 68` finds exactly 7 sites in every build, all resolved
+in the non-split ones (`server_probe.dll`, `server_lf.dll`, `server_split.dll`)
+and all zero in the split composition.  Statics are object-local, so an
+`emit_defs.py`-style *separate* object defining them is ignored (measured), and
+an in-object ABSOLUTE symbol is honoured only with storage class 2 (same object:
+`scl 3 -> 0`, `scl 2 ->` the value).
+
+`scripts/resolve_static_labels.py` promotes each such symbol **in place** to an
+external ABSOLUTE definition whose value is read from the reference (a reloc
+site's VA is the object's name prefix — the split function's VA — plus the reloc
+offset, and the reference's dword there is what the reference's link wrote).  It
+adds no section bytes, so the geometry the layout package checks is untouched;
+it is idempotent and reproduces all 7 patches from pristine split objects.  Wired
+into `scripts/split_link.sh` after the blob step.
+
+```
+                             failing operands   call entries   coverage   .text bytes
+                                                                    outside the 19
+before (round 141)                      571            288      88.5%            53
+after                                   564            288      88.6%            33
+```
+
+The 33 that remain outside the 19 functions are size tails — 2 bytes past
+`m_AllocTracked`'s end, 1 past `ls_LoadBuildingEntityState`'s, 3 past
+`gm_AllocSpieler`'s, 23 in `vfs_OpenStream`'s tail (its object runs 26 bytes long)
+— plus one 4-byte operand at `0x10012378` (`cmp eax, 0x10139820`) that the data
+fixer leaves because the built value is out of range.  All of them belong to the
+19 functions' work.
+
 **Round-141: no data-side lever is left — all 859 failing entries are inside the
 19 non-byte-matched functions.**
 
