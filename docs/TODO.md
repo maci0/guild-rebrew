@@ -1,5 +1,43 @@
 # Blockers — 100% Round-Trip Goal
 
+## `vfs_ReadCompressed`'s comparison is not source-reachable (2026-09-13, round 85)
+
+LCS-aligned the 216-instruction candidate against the 200-instruction target.
+LCS is 158, and the residue is *not* a pile of missing logic: it is one
+two-byte encoding difference plus normalizer noise.
+
+The real difference is at object instruction 101 (the stored-block guard):
+
+```
+target                 ours
+cmp  eax, edi          cmp  edi, eax      ; 3b c7  vs  3b f8
+jae  <skip>            jbe  <skip>        ; 73 xx  vs  76 xx
+mov  edi, eax          mov  edi, eax
+```
+
+`edi` is `n = s->avail_in` clamped against `s->avail_out`; the pair is
+`min()` and the two encodings are semantically identical -- MSVC picked the
+commutative mirror.  Three source spellings of that clamp were tried:
+
+```
+source form                          raw  obj
+if (n > s->avail_in)  (baseline)     161  497
+if (s->avail_in < n)                 161  497   <- byte-identical
+if (s->avail_in <= n)                161  497   <- byte-identical
+a fourth, stricter clamp spelling   142  488   (different object, worse)
+```
+
+Both flips are *inert*: byte-identical objects, so the clamp's source
+spelling cannot produce the target's operand order.  The difference therefore
+comes from register assignment of `edi`/`eax` earlier in the function, not
+from this line.  File restored; no net change.
+
+Also noted: the LCS diff reports `[ecx+eax]` (target) vs `[ecx+eax*1]`
+(ours) in the copy loop.  `eax*1` is `SIB` with `index=none, base=eax`,
+i.e. the same bytes as `[ecx+eax]`; the two are only distinguishable because
+MSVC emits the SIB form when the accumulator is in `eax`.  Normalizer
+artifact -- do not chase.
+
 ## Reconstructing the dispatch table is not enough for `/OPT:REF` (2026-09-13, round 84)
 
 Round 83 said the `/OPT:REF` route needs the game's data tables expressed as
