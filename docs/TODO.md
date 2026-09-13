@@ -88,15 +88,27 @@ leaves behind, and one of the two gives a broken layout.
 
 Two consequences, both worth acting on:
 
-- **Do not `git checkout` the metadata file as a reflex.**  It is not a neutral
-  restore; it is a build-configuration change.  Re-run the gate afterwards, or leave
-  the gate's version in place.
-- **The committed metadata and the good build are not obviously the same thing**, which
-  means a fresh clone may not reproduce the residue at all.  That is a reproducibility
-  bug at least as serious as the two `linktest.sh` guards fixed in rounds 180 and 196,
-  and it needs a clean-clone experiment to settle: the flags `rebrew cmake-flags`
-  emits from HEAD's metadata versus from the gate-written one, and which of the two the
-  last verified 9,533 came from.
+**CORRECTION (round 202): the mechanism above is wrong.**  Diffing the two metadata
+versions directly shows **zero** differing `cflags` lines -- only two `status` lines --
+so the reconfigure does NOT regenerate different `COMPILE_FLAGS`, and the collapse was
+not a flag change.  The observation stands (a full `cmake --build` after restoring the
+metadata gave 0/319 and 37% differing; re-running the gate restored 246/319 and 9,533),
+but the cause is still unidentified.  Candidates not yet ruled out: the reconfigure
+regenerating `build/CMakeFiles/server_dll.dir/objects1.rsp` (which `split_link.sh`
+consumes as the object list, so its order or membership would move the whole
+composition) or regenerating the generated include with a different per-file *order*,
+which some CMake generators sort differently.  What is established is the operational
+rule:
+
+- **Do not `git checkout` the metadata file as a reflex.**  Whatever the mechanism, the
+  sequence "restore it, then build" produced a broken composition and "re-run the gate,
+  then link" produced a good one.  Re-run the gate afterwards, or leave the gate's
+  version in place.
+- **Reproducibility is still open.**  If a fresh configure produces a different
+  `objects1.rsp`, a fresh clone may not reproduce the residue at all.  Settle it by
+  comparing `build/CMakeFiles/server_dll.dir/objects1.rsp` before and after a
+  reconfigure -- that is a one-file diff, not a clone: `git` cannot help because the
+  file is generated.
 
 Recovery that worked: re-run `scripts/gate.sh` (which rebuilds and re-writes the
 metadata), then `scripts/split_link.sh` and `postlink_residual.py --write`.  That
