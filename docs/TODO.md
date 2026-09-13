@@ -74,6 +74,74 @@ five residual codegen classes are in `docs/msvc6-c-shapes.md` sections 49-50.
 `.scratch/server.dll.prelayout` and fails while a raw size still differs, so a
 future blob or literal change cannot silently re-open the `.data` surplus.
 
+**Round-119 addendum: the remaining `.text` gap is 19 functions, and the CMake
+link's CRT placement — not its code — is what fails postlink's coverage gate.**
+
+`scripts/text_match.py --drift auto` (split set, the better-aligned vehicle:
+`.text` 0x22af8 vs the reference's 0x22846) says whole `.text` raw 87.02% /
+masked 94.97%, and the game region 81.35% / 92.10% — 6,542 differing bytes over
+260 ranges.  Bucketed by function, those bytes are almost entirely in the 19
+functions `rebrew verify` still does not byte-match (17 PROVEN + 1 STUB + 1
+SIZE_MISMATCH; the other 264 are EXACT or RELOC, i.e. byte-equal once
+relocations are masked):
+
+```
+ delta      va  size   match   name
+     5 0x10019720   396   98.7%  gm_CalculateProductionValue   PROVEN
+    15 0x1000aac0   639   97.7%  cm_ProcessCommandQueue        PROVEN
+    17 0x1000e140   993   98.3%  cm_ExProdObjekt               PROVEN
+    28 0x10015f70   714   96.1%  gm_ObjectsAvailble            PROVEN
+    49 0x1000a570   750   93.5%  srv_LoadBuf                   PROVEN
+   102 0x10019ed0   395   74.2%  gm_CheckInventoryCapacity     PROVEN
+   179 0x1000bdf0  1002   82.1%  ahm_ExAllocAlchemist          PROVEN
+   180 0x10016f80   346   48.5%  gm_FindNextFilteredEntity     PROVEN
+   210 0x10006580   658   68.4%  m_AllocTracked                PROVEN
+   266 0x10009020   667   64.0%  vfs_OpenStream                PROVEN
+   339 0x10008a90   492   31.8%  vfs_ReadCompressed            PROVEN
+   434 0x10011bf0  1040   58.3%  gv_ExAllocGraveyardWorker     PROVEN
+   469 0x1000ec00   912   48.3%  cm_ExCopyEntityData           PROVEN
+   507 0x100174d0  1088   53.0%  gm_AllocGebaeude              PROVEN
+  1098 0x100093a0  2434   54.9%  ServerMainThread              STUB
+  1339 0x100128f0  1463    8.5%  ls_LoadBuildingEntityState    PROVEN
+  1844 0x10002770  2115   12.8%  CrashDumpUnhandledExceptionFilter  PROVEN
+  1853 0x1000d930  2057    9.9%  cm_ExSellObjekt               PROVEN
+  2838 0x10018850  3689   23.1%  gm_AllocSpieler               SIZE_MISMATCH
+```
+
+The top five are *documented plateaus*: each file header records the residual
+site and the exhaustive list of spellings already measured against it
+(`gm_CalculateProductionValue` 4 formulations at the multiply/`cmp` site,
+`cm_ProcessCommandQueue` twenty rounds on the two-arm order,
+`cm_ExProdObjekt` ~50 variants of the pre-loop block, `srv_LoadBuf`'s one
+`lea`/`and` schedule).  So the next lever for those cannot be another source
+spelling — it has to be the automated search (`rebrew match`) or something
+outside the C source.  Re-derive this list, in this order, with
+
+```sh
+rebrew verify --json > .scratch/v.json
+jq -r '.results[] | select(.status!="EXACT" and .status!="RELOC")
+       | "\(.delta)\t\(.va)\t\(.size)\t\(.status)"' .scratch/v.json | sort -n
+```
+
+**The CMake build's `.text` placement is wrong for a mechanical reason.**  Its
+`.text` is 0x22256 against the reference's 0x22846 (-1520) and
+`scripts/link_drift.py --object-errors` puts every *game* function at drift 0
+while the CRT region is split in two: `__CRT_INIT`/`DllMain` at +8380 and
+`mlock`/`sbh_pool` at -11636/-12737.  The cause is the one
+`scripts/map_libcmt.py` names: MSVC LINK appends every archive member after
+every command-line object, so our `LIBCMT.lib` members land in one block at
+the end, while the reference *interleaves* them with the project's CRT objects
+(its `dllcrt0` body sits at 0x1001b8fb, before our `dllmain.c` at 0x1001b9d4).
+`map_libcmt.py --json` already produces the reference-VA-ordered member list
+(228 matches spanning 0x1001a18a..0x10023812, with 3,052 bytes of gaps that are
+exactly the project objects), and the split set already links that order — it
+is why the split set reaches 81.2% coverage where the CMake build reaches
+55.6%.  Putting the members on the CMake link line in that order (interleaved
+with the objects, which needs a generated response file rather than CMake's
+`@objects1.rsp` + trailing libraries) is the next structural step for `.text`;
+it is necessary but not sufficient for the 90% gate, which also needs the 19
+functions above to close.
+
 **Round-117: the CRT half is not where the remaining failure is, and the game
 half is uniformly allocator-bound.**
 
