@@ -4,6 +4,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-273 (2026-09-13): endgame pricing + switch-lever check.**
+
+- Priced all 18 residue rows (residue/hunks): small rows 2-9 bytes/hunk
+  (single decisions, all register walls), big rows 12-24 (cascades). No
+  row has an unexamined hunk class — the map has no blank spots.
+- Switch-form lever (§65) checked against the one walled function with
+  switches (`gm_AllocGebaeude`): case groups decoded from the PE match the
+  source exactly, tables positionally aligned — N/A, no probe. The lever
+  remains a CrashDump-only win.
+- Residue baseline unchanged: **9,209**.
+
 **Round-272 (2026-09-13): four-scout fan-out; ExSell header corrected.**
 
 - Scout A (ReadCompressed slots): `done`/`result` decl swap + `d` scope
