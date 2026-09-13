@@ -71,6 +71,43 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-181: `cm_ExSellObjekt` -19, and the out-of-function residue explained.**
+
+Residue **9,743** (from 9,762).
+
+`cm_ExSellObjekt` 1432 -> 1413, measured with `linktest.sh` on a tree where it was
+the only modified file (the round-180 attribution guard was silent, so the delta is
+attribution).  Three changes, all equivalence-checked before committing: two guard
+inversions that keep the same operator and the same arm bodies in the same effect
+order, and a `source_dynamic_ref` local replacing two deliberate self-assignments.
+The latter is only safe because `source_dynamic_entity` has exactly two assignments
+in the whole function (init to 0, and `= resolved_dynamic`), both *before*
+`source_dynamic_ref` is set — verify that before reusing the pattern.
+
+**The 32 differing bytes "outside the non-matching functions" are mostly one
+object's real length.**  `vfs_OpenStream`'s real COMDAT body is 693 against the
+reference's 701, so its out-of-line jump table and 13-byte case map — which live
+after the code inside the same object — sit 8 bytes early, and every 4-byte
+relocated entry in them points one byte late.  A previous agent had a spelling
+(`int mode18` with byte-width accesses, direct `*p` in the flag loop and switch, a
+volatile second `sprintf` argument) that lands the real body on exactly 701 but
+costs 172 in-function bytes; it was never applied.  Applied and linked here:
+
+```
+<outside the non-matching functions>    32 -> 10    (-22)
+vfs_OpenStream                         263 -> 435   (+172)
+.text total                          9,743 -> 9,893 (+150)   rejected
+```
+
+So the diagnosis is confirmed and **quantified: fixing the length alone recovers 22
+of the 32 out-of-function bytes**.  The target is therefore narrow — find the 8
+bytes of real body length the reference has and we do not, and add only those,
+rather than respelling the function to change its length.  The agent has been given
+that instruction; its object metrics (matched-reloc 285 against the baseline's 451)
+were the reason it had withheld the spelling, and this measurement shows why the
+ranking metric is the wrong instrument for a layout hypothesis: the object score
+ignores the 22 bytes it would have fixed.
+
 **Round-180: a semantic break caught by reading the diff, and a neutral candidate
 discarded.**
 
