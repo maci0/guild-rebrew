@@ -29,6 +29,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-306 (2026-09-13): pressure-pad probe inert.**
+
+- Added a short-lived `pressure_pad` local to `gm_ObjectsAvailble` to
+  perturb the allocator's graph solution: identical 18 structural, same
+  rotation. The coloring is stable against whole-graph perturbation, not
+  just declaration order — third inert variant on the triple. Reverted.
+- Residue baseline unchanged: **9,209**.
+
 **Round-305 (2026-09-13): intrinsic-policy axis clean.**
 
 - Audited all residue functions for call-vs-inline divergence (CRT
