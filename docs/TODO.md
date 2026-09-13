@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-122: the foldable half of the `.rdata` duplicate is folded — 11 COMDATs,
+prefix surplus `0x1c8 -> 0x158`.  The other half is provably not foldable.**
+
+Extended `crt_region/rdata_fold.c` with the three remaining literal spellings
+(`"\0"`, `L"\0"`, `L"(null)"` - the mangled name encodes the bytes, so those
+reproduce a_map.obj's two `??_C@` entries and output.obj's wide `"(null)"`):
+
+```
+                       .rdata VS   import dir   prefix surplus
+round 119                    0x3041      0x27d0   0x1c8
++ 8 narrow string COMDATs     0x2ff1      0x2778   0x170
++ 3 wide/NUL spellings        0x2fd1      0x2760   0x158
+```
+
+All four raw sizes still match (`scripts/section_geometry.py`), and `.rdata`
+raw stays `0x3000`.  Measured negatives, each one removing an avenue:
+
+* **`___lookuptable` / `___dnames` / `___mnames` do not fold.**  They are
+  plain (non-COMDAT) `.rdata` in LIBCMT, so a definition of ours does not
+  discard theirs - `/FORCE:MULTIPLE` keeps *both* sections and the surplus
+  grows by whatever we define.  Marking ours `__declspec(selectany)` does make
+  them COMDAT (verified in the object: section flags gain `0x1000`) and still
+  does not fold the library's.  Those `0x9c` bytes are only removable by not
+  linking `output.obj` / `timeset.obj`.
+* **The three `__real@8@` FP constants are COMDAT but unreachable from a
+  data-only TU.**  A file-scope `const double x = 1.0;` emits `_x`, not a
+  `__real@8@...` pool entry; only an *expression* in a function does, and that
+  would add `.text` - which breaks byte identity by construction.
+* A `.bss` definition defines the symbol but does not fold a read-only COMDAT,
+  so "define it somewhere cheap" is not a workaround for either case.
+
+So the remaining `0x158` splits into `0x9c` of non-foldable named tables,
+`0x18` of pooled FP constants, and roughly `0xa0` of unnamed content around
+them (`.rdata[0x2638:0x2738)`, still unclassified).  Reaching the gate's exact
+`0x2468` needs those objects out of the link, not more folding.
+
 **Round-121: the linker folds COMDATs by symbol name, so the six objects' duplicate
 `.rdata` can be *discarded* rather than avoided — all four section raw sizes now
 match the reference.**

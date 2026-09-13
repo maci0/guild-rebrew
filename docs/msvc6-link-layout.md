@@ -220,6 +220,15 @@ it to the rest of the block:
 * A `.bss` (uninitialized) definition defines the symbol but does **not** fold
   the library's read-only COMDAT — measured, the library's copy stays in the
   map.  The definition has to be an initialized constant to be a COMDAT.
+* **Not everything in the library is COMDAT.**  The string literals are
+  (`??_C@…`, 11 of them folded here, worth `0x70` of `.rdata` VirtualSize), but
+  `___lookuptable`, `___dnames` and `___mnames` are plain `.rdata` sections in
+  LIBCMT: a definition of ours — even `__declspec(selectany)`, which does make
+  it COMDAT — leaves *both* sections in the image, so the surplus grows by
+  whatever we define.  Those `0x9c` bytes can only be removed by not linking
+  the objects that carry them.  `__real@8@…` FP constants are COMDAT, but the
+  compiler emits them only from an expression, and adding a `.text` function to
+  get one defeats the purpose.
 
 ## 4. The import layer
 

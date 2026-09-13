@@ -46,5 +46,22 @@ const char* g_rdata_fold_refs[] = {
 	"1#SNAN",
 	"TZ",
 	"(null)",
-	""
+	"",
+	/* a_map.obj's two `??_C@` entries are "\0" and L"\0", output.obj's third
+	 * is the wide "(null)"; the mangled name encodes the bytes, so these
+	 * three spellings reproduce theirs and fold them too. */
+	"\0",
+	L"\0",
+	L"(null)"
 };
+
+/* Measured negative (round 122): output.obj's ___lookuptable and
+ * timeset.obj's ___dnames / ___mnames cannot be folded.  They are plain
+ * (non-COMDAT) .rdata in LIBCMT, so a definition of ours does not discard
+ * theirs - /FORCE:MULTIPLE keeps both sections and the surplus grows by the
+ * definition.  Marking ours __declspec(selectany) (which does make them
+ * COMDAT, verified in the object) does not help for the same reason.  Those
+ * three are only removable by not linking output.obj / timeset.obj, which the
+ * section-3 notes in docs/msvc6-link-layout.md cover.  The __real@8@ FP
+ * constants output.obj's neighbours keep *are* COMDAT, but the compiler only
+ * emits them from an expression, which would add a .text function. */
