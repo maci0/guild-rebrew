@@ -1,5 +1,40 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-101: the climb tool is exhausted, and one more width lever regresses.**
+
+`rebrew climb --objective aligned --passes 3 --dry-run` on
+`cm_ExCopyEntityData` reports **no improving adjacent-statement swap** at all
+(baseline == best == 189,967 aligned bytes, `moves: []`) -- the same verdict the
+file already records for `gm_ObjectsAvailble`, and the +1-byte move it still
+finds on `gm_CheckInventoryCapacity` (statement 18) reproduces round 25's
+number exactly.  The deterministic statement climber has nothing left on the
+close functions; its 15 top-level statements on `cm_ExCopyEntityData` do not
+reach the nested clamp arms anyway.
+
+**`gm_AllocSpieler`'s x87 comparison is right and its spelling is not the
+lever.**  The register-agnostic gap there is 77 target-only, and one entry is a
+genuine type difference at 0x10018bb7:
+
+```
+target  fild dword [esp+0x10] ; fst dword  [esp+0x24] ; fcomp dword [ebp+0x20]
+ours    fild dword [esp+0x14] ; fst qword  [esp+0x24] ; fld dword [ebp+0x20]
+                                ^ stores a double      ^ then fcompp
+```
+
+i.e. the reference compares in **float** where our `(double)` cast compares in
+double, with the 8-byte temporary that follows from it.  Measured three
+spellings -- `(float) cast`, no cast, and a parenthesised float -- and all
+three are **worse**: obj 3,672 against 3,688 and register-agnostic target-only
+77 -> 84 (matched 853 -> 832).  So the `(double)` here is load-bearing for the
+function's frame and x87 homes in the same way the deliberate `(double)` casts
+in the `slot+0x10` expression are (section 8a); removing one to match a single
+`fst` costs more than it buys.  Reverted.
+
+The two smaller items at the same site are also allocator/scheduling: the
+reference emits `add edx,0x3c` where ours narrows to `add dl,0x3c`, and `and
+edx,0x86` in the 6-byte form where ours uses the 3-byte sign-extended one --
+both follow from the value's width, and both are shorter in ours.
+
 **Round-100: what the last few instructions actually are, per function.**
 
 With the register-agnostic metric from round 99, the three closest functions'
