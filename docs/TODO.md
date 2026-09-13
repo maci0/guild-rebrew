@@ -71,6 +71,44 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-162: growing a function breaks the composition too.**
+
+10,949 -> 10,947 differing bytes.  Five subagents re-climbed all eighteen
+functions under the corrected splitter; sixteen converged with zero moves (the
+statement-order lever is exhausted for them), `cm_ExSellObjekt` found one swap
+(-2 linked) and `CrashDump` one that had to be reverted.
+
+*Why CrashDump's had to go.*  It hoisted `excCode = ...ExceptionCode` above the
+separator/date writes and sank `SetFilePointer(hCrashLog, -1, 0, 2)` below them,
+scoring 46 object bytes better.  The rebuild collapsed the whole composition:
+
+```
+split-set .text 0x22ad8 (+658)   exactly at their reference VA: 0   delta +0x10 .. +0x32c
+.text differing 0x1f96c (91.52%)            <- 10,949 -> 129,388 bytes
+```
+
+The object had grown 2128 -> 2144, and everything after it moved.  So the climb's
+size rule -- "an object may not come out SHORTER than the target, growth is
+trimmed" -- was wrong, and the evidence for it was bad: `crt_region/dllmain.c`
+links a 203-byte object into the reference's 157-byte slot byte-perfectly because
+LIBCMT supplies that body; our dllmain is not in the link at all, so its size
+never mattered.  The invariant is that **an object must keep the size it
+started with**: `size_ref = baseline object size`, and the score key is
+`object == size_ref`, not `object >= target`.
+
+*A call is invisible to the access model.*  The same move also reorders a call
+past calls, which nothing could see -- `accesses()` only tracks assignments.
+Two units that both invoke a function now keep their relative order (a call's
+effects, especially ordered I/O, cannot be modelled from the text); moves of a
+call across plain stores, which is where the useful wins come from, stay
+allowed.
+
+*Fan-out sizing.*  Candidate count is `statements x 2 x reach (+ swaps)`, so a
+82-statement function at reach 6 is ~4k compiles: four runs hit their timeout
+mid-round-0 and produced nothing (a timeout also skips the end-of-run
+post-condition, so a killed run's last accepted move needs re-checking by the
+parent -- done here).  Per-function budgets, not one budget for a batch.
+
 **Round-161: a splitter bug that only a timeout exposed, and the climb fanned
 out over subagents.**
 

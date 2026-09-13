@@ -224,6 +224,7 @@ NOISE = {
     "volatile", "struct", "union", "enum", "NULL",
 }
 ASSIGN_OPS = ("<<=", ">>=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=")
+CALL = re.compile(r"\b([A-Za-z_]\w*)\s*\(")
 
 
 def _lhs_of(line: str) -> str | None:
@@ -262,6 +263,12 @@ def accesses(unit: str) -> tuple[set[str], set[str], set[str]]:
     return dests, touched, reads
 
 
+def has_call(unit: str) -> bool:
+    """Does this unit invoke a function (an opaque side effect)?"""
+    code = CAST.sub("", strip_literals(unit))
+    return any(m.group(1) not in NOISE for m in CALL.finditer(code))
+
+
 def conflicts(moved: str, other: str) -> bool:
     """Would reordering these two change what the program does?"""
     dm, bm, rm = accesses(moved)
@@ -271,11 +278,28 @@ def conflicts(moved: str, other: str) -> bool:
         or (bm & bo)   # writes through the same base object
         or (bm & ro)   # ... that the other reads
         or (bo & rm)   # the other writes something this one reads
+        # A call's effects are invisible to an access model built on
+        # assignments, and some of them are ordered (file I/O, logging, a
+        # cursor): two calls must keep their relative order.  (Measured:
+        # CrashDump moved SetFilePointer below the WriteFile calls it positions
+        # the file for, and it scored 46 bytes better.)
+        or (has_call(moved) and has_call(other))
     )
 
 
-def score(path: Path, va: str) -> tuple[int, int, int, int]:
-    """(size agrees with the target, matched, -insn delta, object size)."""
+def score(path: Path, va: str, size_ref: int | None = None) -> tuple[int, int, int, int]:
+    """(object size unchanged, matched, -insn delta, object size).
+
+    `size_ref` is the object size the run started from.  The composition's
+    position alignment depends on it *not changing*: every symbol lands at its
+    reference VA only while the objects keep the sizes the vehicle placed them
+    with, so a candidate that grows OR shrinks a function drags everything after
+    it.  (Measured both ways: a 13-byte-short cm_ExSellObjekt took the linked
+    image from 11,336 to 89,509 bytes, and CrashDump growing 2128 -> 2144 took
+    it to 129,388 with 0/319 symbols aligned.  The earlier "growth is fine"
+    reading came from crt_region/dllmain.c, whose body LIBCMT supplies -- it is
+    not in the link at all.)
+    """
     r = subprocess.run([PYTHON, str(PROBE), "--va", va, "--file", str(path)],
                        capture_output=True, text=True, cwd=ROOT)
     m = re.search(r"size (\d+):.*matched (\d+)/(\d+).*instructions (\d+) vs (\d+)"
@@ -296,7 +320,9 @@ def score(path: Path, va: str) -> tuple[int, int, int, int]:
     # bytes while its object-level score rose 387 -> 615, whereas the same climb
     # at +16 bytes was harmless.  Growth therefore ranks equal to an exact size;
     # only a shortfall loses.
-    return (1 if obj >= target else 0), matched, delta, obj
+    if size_ref is None:
+        size_ref = target
+    return (1 if obj == size_ref else 0), matched, delta, obj
 
 
 def move(order: list[int], i: int, j: int) -> list[int]:
@@ -396,7 +422,7 @@ def main() -> int:
     def submit(spec) -> tuple[tuple, tuple[int, ...]]:
         tmp = src.with_name(f"_hc_{name}_{spec[0]}{spec[1]}_{spec[2]}.c")
         tmp.write_text(header(head) + render(apply_spec(order, spec)) + tail)
-        return spec, score(tmp, args.va)
+        return spec, score(tmp, args.va, size_ref)
 
     def seq(o):
         """The units in the order they currently appear.
@@ -410,6 +436,7 @@ def main() -> int:
 
     base = score(src, args.va)
     tgt = target_size(args.va)
+    size_ref = base[3]
     print(f"baseline {base[1]} matched, instruction delta {base[2]:+d}, "
           f"object size {base[3]} vs target {tgt}")
     try:

@@ -139,11 +139,11 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	dest_game_object = (ushort*)0;
 	dest_dynamic_entity = (short*)0;
 	dest_object = (ushort*)0;
-	source_container_ptr = (char**)0;
+	source_static_entity = (short*)0;
 	dest_owner_entity = (short*)0;
 	source_existing_entity = (void*)0;
 	dest_existing_entity = (char*)0;
-	source_static_entity = (short*)0;
+	source_container_ptr = (char**)0;
 	if (*(int*)(cmd + 0x14) != -1) {
 		resolve_result = gm_GetFieldByType(cmd, *(int*)(cmd + 0x14));
 		*(int*)(cmd + 0x14) = resolve_result;
