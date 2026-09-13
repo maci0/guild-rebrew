@@ -71,6 +71,39 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-190: gm_AllocSpieler's biggest segment delta is a scheduler hoist, not a
+statement order.**
+
+Residue **9,684**, unchanged.
+
+The function's diagnostic map puts `+60` on the `sprintf -> LogMessageInternal`
+segment, the largest single segment.  Reading our object between the two calls gives
+the whole of it: the reference emits **5 instructions** there (the four argument
+pushes and the call), we emit **16** --
+
+```
+70 call sprintf
+71 mov eax,[g_next_object_id]      74 inc eax                 81 mov [ebp+0x216],bl
+72 mov dl,[esp+0x454]              75 mov [g_next_object_id],eax  82 mov [ebp+0x218],1
+73 mov [ebp+4],eax                 76 lea eax,[esp+0x40]      83 mov [ebp+8],0x64
+                                   77 push 8                  84 mov [ebp+0x217],bl
+                                   78 push eax                85 mov [ebp+0x1e4],1.0f
+                                   79 push 0x2637             86 mov [ebp+0x164],dl
+                                   80 push 0
+87 call LogMessageInternal
+```
+
+Those eleven extra instructions are the id store/increment, the `arg6` load and five
+slot stores.  **The source already has them after the call** -- the scheduler hoisted
+them into the gap to fill the call's latency.  So this is not the statement order the
+agent's note rejected at 1262; it is a scheduling artefact, and the lever that would
+move it is a dependency the compiler cannot see through, not an order.
+
+Worth knowing before another round goes here: this single segment is a sixth of the
+function's excess, and it is the same class as `CrashDump`'s `sub esp,0x28c` (an
+allocator/scheduler fixed point), so it belongs with the functions whose residue is
+scheduling rather than with those whose residue is spelling.
+
 **Round-189: the pad step's LONG list is not a lever, and the last pad is gone.**
 
 Residue **9,684**.
