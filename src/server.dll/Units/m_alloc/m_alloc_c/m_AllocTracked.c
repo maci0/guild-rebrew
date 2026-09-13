@@ -18,6 +18,16 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
  * counters, and maintains the allocation list. */
 
 // CFLAGS: /O2 /Gd /G6 /Oy-
+// UPDATE 2026-09-13 (round 87b): 263 -> 265/658, and the reconstruction's
+// uninitialised-pointer read is gone.  `(*prev_slot)->next = node;` used
+// `prev_slot`, which the source never assigns -- undefined behaviour that only
+// appeared to help because it made MSVC emit an extra `mov eax,[ecx]`.  The
+// reference emits a single indirection (`mov [ecx+0x24],edx`, one deref), which
+// is exactly `prev->next = node;`.  `prev` is always assigned before use: the
+// loop's head is `node` initialised to the nonzero sentinel 0x117640a0, so
+// `prev = *node_slot` executes at least once.  Removing the `prev_slot`
+// declaration afterwards is codegen-inert.
+//
 // UPDATE 2026-09-13 (round 87): 182/658 -> 263/658, and the frame now matches
 // the target exactly (sub esp,0x118; node at [ebp-4], size at [ebp-8], buf at
 // [ebp-0x18]).  Two changes, both from the vfs_ReadData finding in
@@ -266,7 +276,6 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	char* slot;
 	char* p;
 	struct GroupNode** node_slot;
-	struct GroupNode** prev_slot;
 	unsigned int sz;
 	int nodev;
 	void* cur;
@@ -308,7 +317,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 				node->size_max = 0;
 				node->count = 0;
 				node->next = 0;
-				(*prev_slot)->next = node;
+				prev->next = node;
 			}
 		}
 	}
