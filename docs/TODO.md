@@ -1,5 +1,37 @@
 # Blockers — 100% Round-Trip Goal
 
+## `merge-sweep` is blocked by a one-word tool bug (2026-09-13, round 73)
+
+Round 72 traced the registry and stopped at "a third source I did not
+identify".  It is `src/server.dll/functions.txt` -- 561 lines of `VA name size`,
+plain project data, with the 17 `case.0x...` rows in it at lines 106-122 (not
+the CSV, and not `function_structure.json`, which has no `case` entries at
+all; `merge_sweep.py` reads `cfg.function_list`, which is that file).
+
+Removing those 17 rows clears the overlap error:
+
+```
+$ grep -v " case\.0x" src/server.dll/functions.txt > f && mv f src/server.dll/functions.txt
+$ rebrew merge-sweep --dry-run --json --max-compiles 2
+{"error": "zip() argument 2 is shorter than argument 1", "code": 2}
+```
+
+and the next error is the real blocker, in `rebrew/merge_sweep.py`:
+
+```python
+for prev_va, curr_va in zip(vas, vas[1:], strict=True):     # line 329
+```
+
+`vas` has n elements and `vas[1:]` has n-1, so **`strict=True` makes this raise
+for every cluster with more than one function** -- that is, always.  The
+partition search cannot run on any target, and the `case.*` rows were only the
+first error it happened to hit.  The fix is to drop `strict=True` (the trailing
+element is simply the one with no successor).
+
+Both edits were reverted; `functions.txt` is back to 561 lines and the tree is
+clean.  The fix belongs in the rebrew checkout, which this goal does not own --
+recording the one-line change here so whoever does own it can apply it.
+
 ## `merge-sweep` is blocked by jump-table pseudo-functions (2026-09-13, round 72)
 
 Round 71 concluded the merge question is really a partition question, and
