@@ -4,6 +4,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-284 (2026-09-13): Spieler blocker staleness fixed via tool path.**
+
+- Blocker head said "obj 3688 (-1)"; tool measures 3689. `--fix-blocker`
+  would have replaced the rich history with generic auto-text (verified
+  on this function — do NOT run it here). Instead restored + surgically
+  corrected the head via `rebrew blocker set` (tool path, 2000-char cap
+  respected): "obj 3689 = target (was -1; corr. 2026-09-13)". Todo text
+  accurate again.
+- Residue baseline unchanged: **9,209**.
+
 **Round-283 (2026-09-13): Spieler lead-2 sub-item retired (multiset
 conflation).**
 
