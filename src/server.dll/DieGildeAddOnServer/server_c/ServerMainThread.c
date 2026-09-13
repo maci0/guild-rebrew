@@ -452,7 +452,7 @@ send_start_commands:
 			transfer_progress = (unsigned int*) 0x101deac8;
 			do {
 				if ((*player_slot & 4) != 0) {
-					sent_bytes = *transfer_progress;
+					sent_bytes = *(volatile unsigned int*) transfer_progress;
 					if (sent_bytes == 0xffffffff) {
 						total_size = *(unsigned int*) 0x101deac0;
 						cmd_buffer_primary[0] = 8;
@@ -481,7 +481,7 @@ send_start_commands:
 							LogMessageInternal((char*) 0x100298b0, 0x228, (char*) 0x100297e4, 1);
 						}
 
-						sent_bytes = *transfer_progress;
+						sent_bytes = *(volatile unsigned int*) transfer_progress;
 						if (sent_bytes >= *(unsigned int*) 0x101deac0) {
 							*player_slot = *player_slot & 0xfffffffb;
 						}
