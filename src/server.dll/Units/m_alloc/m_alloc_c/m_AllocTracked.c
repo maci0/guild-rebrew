@@ -45,6 +45,16 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 //     is at index >= 15 -- `strncpy(buf, tag, taglen)` is not capped by the
 //     `taglen >= 0x10` warning above it.  Reproduced as-is: the goal is byte
 //     identity, so the reference's own bug is the correct behaviour.
+//     The overflow is worse than that check suggests.  The frame is fixed at
+//     0x118 with `buf` on [ebp-0x18], and the asm prelude's `sz` operand is
+//     homed on [ebp-8] with the node on [ebp-4] (target 0x100066e2 /
+//     0x100066f1), so `buf` is exactly 16 bytes and nothing may be added to
+//     it -- yet the OOM path at 0x100066f6 hands it to
+//     sprintf(buf, "Out of Memory Error: Malloc - Failed %s for %u bytes", tag, size),
+//     a ~50-byte write.  The original server.dll smashes its own frame on that
+//     path and the reconstruction now does the same, which is what byte
+//     identity requires.  Do not "fix" buf back to 0x14: that is what cost the
+//     frame and 80 matched bytes in the first place.
 // Everything below is the pre-round-87 history; its measurements were all taken
 // against the old 0x120 frame.
 // NOTE: best config found - 212/658 instr bytes matched (obj 624 vs target 658).
