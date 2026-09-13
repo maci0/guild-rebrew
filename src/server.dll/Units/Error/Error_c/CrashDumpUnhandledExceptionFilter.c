@@ -93,9 +93,13 @@ extern void* g_crash_callback;
 // innermost-first, so nesting the checks as `if (success) ... else { error }`
 // materialises the cold handlers in exactly the reference's tail order
 // (0x10002db3, 0x10002de9, 0x10002e1b, 0x10002e29, 0x10002e35, 0x10002e4d).
-// Nesting alone: linked residue 1918 -> 1889 bytes, size-neutral (COMDAT 2128,
-// code still ends at the reference's `ret 4`, 0x10002e99; 44 calls, all four
-// LogMessageInternal sites at the tail).
+// Nesting alone: linked residue 1918 -> 1889 bytes, COMDAT span unchanged at
+// 2128 (size-neutral) and the call count is now the reference's 44 with all
+// four LogMessageInternal sites at the tail.  The body itself is 11 bytes
+// longer (add esp/ret 4 at 0x10002e9e vs the reference's 0x10002e99), so the
+// two tail jump tables now sit 11 bytes late and their entries stay misplaced;
+// that 11 is absorbed by the trailing 0x09 padding, which is why the span is
+// unchanged.
 //
 // Still open: the frame, 0x28c vs 0x280 (first divergence, byte 2).  It is a
 // spill-count difference, not a declaration-order or flag one -- 8 declaration
