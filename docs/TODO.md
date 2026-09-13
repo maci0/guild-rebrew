@@ -29,6 +29,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-307 (2026-09-13): rotation characterized to the limit.**
+
+- Full loop-region dump (idx 94-121): the loop KERNEL is
+  instruction-identical on both sides (same opcodes/branches/disps;
+  `base` even shares edx at 105-112). Only three outer homes differ
+  (setup + row/base/inner). The IL graphs are isomorphic — c2 paints
+  them differently on numbering ties, and every tie-break input class
+  is exhausted (declarations, locals, pressure-pad, TU, params all
+  inert). No source input remains to vary. The triple is unsteerable
+  by construction, not by lack of trying.
+- Residue baseline unchanged: **9,209**.
+
 **Round-306 (2026-09-13): pressure-pad probe inert.**
 
 - Added a short-lived `pressure_pad` local to `gm_ObjectsAvailble` to
