@@ -4,6 +4,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-255 (2026-09-13): CrashDump frame fact re-verified on the current body;
+a stale-object trap documented; gm_AllocSpieler lead-2 inventory corrected.**
+
+- V2's frame claim reproduces deterministically on the CURRENT (F3) body, not
+  just V2's older one: V2's file and the current file with the same 5
+  `volatile` qualifiers dropped (`fail_line`, `nFrames`, `excCode`,
+  `instrType`, `szDateLen`) are byte-identical sources and probe identically
+  (obj 2064, matched 312/2115, `sub esp,0x280` in the fresh probe object).
+  Plain-locals on the current body via `rebrew test`: obj 2059, match 490 vs
+  631 at HEAD — the documented trade (frame right, tables 56 early), so still
+  spent. All probes reverted; tree clean.
+- **Measurement trap (near-miss, caught before writing it up):** after the
+  in-place qualifier edit, `objdump` of
+  `build/objtest/CrashDumpUnhandledExceptionFilter.obj` still showed
+  `sub esp,0x28c` — that file is NOT refreshed by `rebrew test` (stale from an
+  earlier run). The fresh probe object (`build/objtest/probe_*.obj` from
+  `scripts/probe_function.py`) shows 0x280. Never read the frame from a named
+  objtest file; always disassemble the object the measuring command just
+  wrote. (Also: `objdump -d file | head -6` truncates before the first
+  instruction — the header lines eat the budget; use `head -12`.)
+- `gm_AllocSpieler` lead 2's "`add R,R` x4 vs `lea R,[R+R]` x4" inventory no
+  longer reproduces: the current diff has exactly one `lea`-vs-`add` pair
+  (idx 805, `lea edi,[ecx+ebx]` vs `add esi,ebx`, registers also differing,
+  inside the sympathy-loop register cascade) and zero self-`add R,R` sites in
+  the candidate. The conclusion stands (use-shape change needed per allocator
+  Finding 54; wall), but do not go looking for four sites.
+- Residue baseline unchanged: **9,209**. Next: CrashDump length work at the
+  identified sites (+21/+12/+17/−15); both verify-blocked functions remain at
+  measured walls.
+
 **Round-254 (2026-09-13): two verify-blocked functions probed, both reverted; one doc
 lead closed, one stale note corrected.**
 
