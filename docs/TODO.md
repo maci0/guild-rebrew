@@ -4,6 +4,21 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-294 (2026-09-13): Tracked + Objects semantic reviews CLEAN.**
+
+- `m_AllocTracked`: full 658-byte trace — guards, tag parse (16-byte
+  overflow kept), group search, fresh-node stores (order+values),
+  count/alloc/OOM paths, zero-fill vs asm identical, slot table
+  (all stores/counters/maxima), full-slots Fatal-then-return-mem subtle
+  path, struct layout confirmed. Missing malloc-NULL check matches ref
+  (identical fault). Clean.
+- `gm_ObjectsAvailble`: ids[8] table, both searches, bounds, match logic
+  (offsets/stride/inner-x4), second loop (args/push orders), filters,
+  walk, slot_base math, returns verified. 18 `**` all rotation, 23 `~~`
+  relocs. Clean.
+- 11 of 19 residue functions now carry explicit behavioral verdicts.
+- Residue baseline unchanged: **9,209**.
+
 **Round-293 (2026-09-13): OpenStream + LoadBuf semantic reviews CLEAN.**
 
 - `vfs_OpenStream`: all mode arms (N/R/W/Z bits), guards, loop mapping,
