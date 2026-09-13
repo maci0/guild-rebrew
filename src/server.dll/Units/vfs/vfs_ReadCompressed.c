@@ -72,8 +72,16 @@ extern unsigned int __cdecl fread(void* ptr, unsigned int size, unsigned int cou
 int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 {
 	VFS_INFLATE* s;
-	volatile int done;
-	volatile int result;
+	/* The accumulators are plain locals whose *accesses* carry the volatile
+	 * qualifier, not the declarations.  Both spellings keep the values in
+	 * memory, but a volatile *declaration* makes the two entry zero-stores
+	 * scheduling barriers, so msvc6 keeps the `handle` load/test behind them;
+	 * the reference loads and tests `handle` above the pushes
+	 * (`mov eax,[esp+0xc]` / `push ebx` / `push ebp` / `push esi` /
+	 * `test eax,eax` / `push edi` / store / store / `jne`).  Qualifying the
+	 * use sites instead reproduces that prologue byte for byte. */
+	int done;
+	int result;
 	unsigned int n;
 	int i;
 	char* out;
@@ -147,7 +155,7 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 				s->next_out = s->next_out + n;
 				s->next_in = s->next_in + n;
 				s->total_out = s->total_out + n;
-				result = acc + n;
+				*(volatile int*) &result = acc + n;
 			}
 		} else {
 			produced = s->total_out;
@@ -158,16 +166,16 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 				z = inflate(&s->next_in, 2);
 				crc = s->crc;
 				n = s->total_out - produced;
-				done = z;
+				*(volatile int*) &done = z;
 				s->crc = crc32(crc, (unsigned char*) out, n);
 			}
 			s->cap = s->cap - n;
 			result = result + n;
 			{
 				int d;
-				d = done;
+				d = *(volatile int*) &done;
 				if (d == 1) {
-					return result;
+					return *(volatile int*) &result;
 				}
 				if (d != 0) {
 					return d;
@@ -175,8 +183,8 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 			}
 		}
 	}
-	if (done == 0) {
-		return result;
+	if (*(volatile int*) &done == 0) {
+		return *(volatile int*) &result;
 	}
-	return done;
+	return *(volatile int*) &done;
 }

@@ -306,7 +306,17 @@ finalize:
 	if (stream != 0) {
 		g_stream_count++;
 		*(unsigned char*) (stream + 0x13c) = (unsigned char) (((*(unsigned char*) (stream + 0x13c) & 0xf6) ^ (*(unsigned char*) &mode14 & 1)) | ((mode18 & 1) << 3));
-		sprintf(stream, (char*) 0x100294a4, buf, size, mode18, mode18);
+		/* The first argument is read as a dword and masked, not as the byte
+		 * local it is: the reference emits `mov edx,[esp+0x18]; and edx,0xff`
+		 * for this argument and `mov eax,[esp+0x18]; and eax,0xff` for the
+		 * second, i.e. two dword reads of the same slot.  Writing only the
+		 * first that way makes the stream 8 bytes longer, which lands the real
+		 * body on the reference's 701 and therefore places this object's
+		 * out-of-line jump table and case map at the right offset: 263 -> 245
+		 * here and 32 -> 14 in the bytes after the function.  Widening the
+		 * local instead (`int mode18`) moves its stack slot and costs 16 bytes
+		 * of object.  Little-endian, so the masked low byte is mode18. */
+		sprintf(stream, (char*) 0x100294a4, buf, size, *(unsigned int*) &mode18 & 0xff, mode18);
 	}
 	result = (int) stream;
 done:
