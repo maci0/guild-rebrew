@@ -71,8 +71,34 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
-**Round-214: the linked image does not contain the committed object -- open
-integrity question.**
+**Round-215: RESOLVED -- that was a tool artefact, and it was understating every
+alignment figure.**
+
+The 40-instruction gap was `instr_diff.py`'s own decode.  Its `main` built the
+disassembler without `skipdata`, so `disasm` **stops at the first byte it cannot
+decode**: on `build/server.dll` at 0x10018850 it halted 112 bytes early on a single byte
+(offset 0xdf9, VA 0x10019649) and reported 1014 built instructions against a true 1054,
+with a correspondingly bogus hunk list.  With `skipdata` the same window decodes 1054
+and the alignment is 646, not 618.  Fixed in `scripts/instr_diff.py` -- `md.skipdata =
+True`, which is what `probe_function.py`'s aligned path already did (round 172 added it
+there for the same reason and I did not carry it across).
+
+Two consequences worth keeping:
+
+- The linked image was never wrong.  The first real difference between the object and
+  the linked bytes at that VA is a relocation slot (`00 00 00 00` against a resolved
+  `34 54 03 10`), i.e. the composition does place the committed object's code there.
+  The "deliverable does not contain the committed object" claim below is withdrawn.
+- **Every `instr_diff --built` alignment figure this campaign has quoted for a function
+  containing such a byte is understated**, and any hunk list from it is truncated from
+  that point on.  The numbers are still usable as a *relative* signal within one
+  function, but the absolute counts were wrong wherever this fired.
+
+The lesson is the same one as rounds 202, 203 and 214: a surprising measurement should
+send you to the raw bytes first.  Here the raw bytes showed a relocation slot, and the
+"missing 40 instructions" was capstone giving up.
+
+**Round-214 note, kept for the record and superseded by the above.**
 
 Residue reported 9,533; **treat that as unverified for `gm_AllocSpieler` and possibly in
 total** until this is settled.

@@ -195,6 +195,14 @@ def main() -> int:
         size = int(m.group(1))
 
     md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+    # Without this, `disasm` stops at the first byte it cannot decode and every
+    # count after it is wrong -- measured on build/server.dll at 0x10018850, where
+    # the decode halted 112 bytes early on one byte and reported 1014 built
+    # instructions against a true 1054, with a correspondingly bogus hunk list and
+    # alignment.  That false "40 instructions missing" reading was raised as a build
+    # integrity problem in round 214.  skipdata emits such a byte as `.byte` and
+    # continues, which is what probe_function's aligned path already does.
+    md.skipdata = True
     rmask = mask(REFERENCE, sections(REFERENCE), va, size)
     if args.obj:
         r = instructions(REFERENCE, va, size, md)
