@@ -71,6 +71,42 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-167: VC6 confirmed by measurement, and a size/bytes trade the link
+refuses.**
+
+No byte change (10,934); two things measured shut.
+
+*The holdouts are VC6 output.*  A rebrew note says this target is "a mix of MSVC
+4.2/5.0/6.0 output", and only the VC6 service packs had ever been checked
+(SP1-SP6 byte-identical).  Probing the holdouts with the vendored VC5 and VC4.2
+settles it:
+
+```
+cm_ProcessCommandQueue   msvc-6.0-sp6 624/639   msvc-5.0 206   msvc-5.0-sp3 209   msvc-4.2 165
+gm_ObjectsAvailble       msvc-6.0-sp6 686/714   msvc-5.0 154   msvc-5.0-sp3 154   msvc-4.2 180
+```
+
+So the mix must be elsewhere (the LIBCMT region), and per-function toolchains
+are not what is missing here.
+
+*And a better object can be refused by the link.*  `scripts/sizediff.py` found
+`cm_ExCopyEntityData` emitting its `0x7f` clamp **twice** (ref: once, with the
+constant out of line) -- +17 bytes of pure duplication.  The file's notes describe
+a two-arm clamp form, so it was measured against the shipped three-arm one:
+
+```
+three-arm (shipped)  523 matched / 255 insns / object 912  (= target)
+two-arm              573 matched / 247 insns / object 896  (-16)
+```
+
++50 matched bytes, and the rebuild collapses the composition (1/319 symbols at
+their reference VA, residue 10,934 -> 86,425).  Reverted.  Note the asymmetry
+that makes this a per-case gamble rather than a rule: this function is *already*
+8 bytes short of its target and aligned, and `vfs_OpenStream` is 26 over and
+aligned, while a 16-byte change here and a 16-byte change on CrashDump both break
+it.  Size changes are only safe when the full build says so, which is why every
+hand change goes through one.
+
 **Round-166: a truncating disassembly that faked three leads, and what a call
 target can and cannot do.**
 
