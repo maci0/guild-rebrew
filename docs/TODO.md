@@ -1,5 +1,34 @@
 # Blockers — 100% Round-Trip Goal
 
+## `vfs_ReadCompressed`: the accumulator placement is already right (2026-09-13, round 77)
+
+The file's own note says the target loads and tests `handle` *before* the two
+accumulator zero-stores, and that moving the stores "below the guard checks"
+drops the object to 475 and 26/492.  That left one position untried: after the
+*first* guard only, which is what the target's order literally says.  Measured,
+all reverted:
+
+```
+baseline (stores first)          497 bytes  161/497
+stores after the handle guard    481 bytes   37/492
+stores after the s guard         481 bytes   46/492
+stores after the inbuf guard     481 bytes   46/492
+```
+
+Every later placement is both smaller (481 against the target's 492) and far
+worse, so `done = 0; result = 0;` before the guards is right and the residual
+15 bytes are elsewhere.  Combined with the file's own note -- the candidate is
+missing a 5-instruction epilogue the target has (7 bytes) while running 14
+bytes long elsewhere -- the residue is again a duplicated-versus-shared return
+block, the same class as round 74's `gm_FindNextFilteredEntity` and the other
+18.
+
+Two rounds of variants on two different functions have now landed on the same
+conclusion from opposite directions: the remaining `.text` gap in all 20 is
+MSVC6's block-sharing choices, and the levers that reach source-level structure
+(statement order, guards, locals, volatile, flags, compiler service packs) do
+not reach it.
+
 ## The `.rdata` surplus has one root cause, and it is pinned (2026-09-13, round 76)
 
 Round 75 left the 0x530 `.rdata` surplus unexplained.  It is the **tail of the
