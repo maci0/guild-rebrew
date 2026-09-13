@@ -4,6 +4,27 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-258 (2026-09-13): vfs_OpenStream head fix is locally exact but frees al
+into a global recoloring; the 7 outside-bytes are its +1-shifted jump table.**
+
+- The 7 `<outside the non-matching functions>` bytes (0x100092bc) are
+  OpenVfsStream's jump-table entries, uniformly +1 (`0x10009082+N` vs
+  `0x10009083+N`): our code is a net 1 byte longer ahead of the table. First
+  hunk upstream: ref `cmp byte ptr [eax],0` (3B, the peeled loop-entry test)
+  vs ours `mov al,[eax]; test al,al` (4B) — same root as the next hunk, ref
+  `movsx eax,[esi]` vs ours `movsx eax,al`: the `current_char` local pins al
+  and c2 reuses it at the head where the reference reloads from memory.
+- Probe: drop `current_char`, loop as `for (p = flags; *p; p++)` with
+  `crt_toupper(*p)`. Result: head `cmpb` + `movsbl` byte-exact, back edge
+  (`mov al,[esi+1]; inc esi; test al,al; jne`) byte-exact, table 7→3 outside
+  bytes — but the freed al recolors the switch body into ~40 small (±1..5)
+  hunks: **linked +194 (245→439)**. Reverted. The head fix needs al pinned in
+  the body AND reloaded at the head — contradictory under c2's CSE (any
+  proven-equal local is reused); wall unless a proof-breaking spelling turns
+  up. Do not re-try the deletion; try only a spelling that breaks the
+  `current_char == *path_cursor` proof at the head while keeping al live.
+- Residue baseline unchanged: **9,209**.
+
 **Round-257 (2026-09-13): LS nesting fix is locally exact but loses to a global
 recoloring cascade; cross-import from GOLDTL is a dead end.**
 
