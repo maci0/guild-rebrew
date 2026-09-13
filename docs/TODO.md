@@ -29,6 +29,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-319 (2026-09-13): join-store clamp loses (+8 linked).**
+
+- Type-2 clamp restructured to the type-1 join-store shape (assign in
+  arms, single store after — the shape that matches in type-1): aligned
+  184→188, reloc 567→578, but positional 443→420 and linked +8
+  (462→470). The empty middle branch costs a bare jump. Reverted. The
+  per-arm vs join placement is a wash on this arm; type-1's match does
+  not transfer.
+- Residue baseline unchanged: **9,209**.
+
 **Round-318 (2026-09-13): case-order audit N/A elsewhere.**
 
 - LS string pushes desynced positionally (streams offset throughout the
