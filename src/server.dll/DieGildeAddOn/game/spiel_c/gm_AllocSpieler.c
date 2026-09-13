@@ -60,8 +60,11 @@
  * combined with the header transcription above aligned 658.  It also changes
  * which string the 0x2888 record contains, so it is a behaviour change
  * *towards* the reference: the current source logs the SpID buffer, the
- * target logs the PlayerID buffer.  Verify against the reference before
- * taking it.
+ * target logs the PlayerID buffer.  Closed 2026-09-13: the reference order
+ * is confirmed (0x10019636 `jne` skips the 0x286c log, `sprintf` at
+ * 0x10019666, then the 0x2888 log at 0x1001967c), and applying it measures
+ * obj 3689 -> 3687, match 973 -> 915, linked +53 (2861 -> 2914).  Reverted:
+ * the local alignment gain trades against the link, so this lead is spent.
  *
  * Measured dead ends, all reverted (score from the 859 base unless noted):
  *   - moving `work[0x3fc]` in the declaration list, to chase the scratch area
@@ -109,16 +112,17 @@
  * hunks.  The prologues match exactly (`sub esp, 0x41c` on both sides), so
  * this is not a frame-size difference.
  *
- * `/Ow` is load-bearing and must stay on the `// CFLAGS:` line below, which is
- * what the CMake build reads (`apply_annotation_cflags`), *not*
- * `src/rebrew-functions.toml`.  The annotation used to carry `/O2 /Gd /Oa`
- * alone while the metadata carried `/Oa /Ow`, so every measurement recorded
- * above (all made through `rebrew test`/the metadata) described a build the
- * tree was not producing: the linked function was 1047 instructions against
- * the target's 1056 and matched 914 of 3689 bytes, against 1054 and 1194 once
- * the annotation matches.  Note that CMake bakes `COMPILE_FLAGS` in at
- * configure time, so editing this line needs `cmake -S . -B build`, not just a
- * rebuild. */
+ * `/Ow` is load-bearing in the metadata CFLAGS (`/DREBREW_ALLOW_NAKED
+ * /O2 /Gd /Oa /Ow` in `src/rebrew-functions.toml`), which is what both the
+ * tools and the CMake build read (`rebrew cmake-flags`; there is no inline
+ * `// CFLAGS:` line in this file).  The annotation used to carry
+ * `/O2 /Gd /Oa` alone while the metadata carried `/Oa /Ow`, so every
+ * measurement recorded above (all made through `rebrew test`/the metadata)
+ * described a build the tree was not producing: the linked function was 1047
+ * instructions against the target's 1056 and matched 914 of 3689 bytes,
+ * against 1054 and 1194 once the two agreed.  Note that CMake bakes
+ * `COMPILE_FLAGS` in at configure time, so editing the metadata CFLAGS needs
+ * `cmake -S . -B build`, not just a rebuild. */
 
 // FUNCTION: SERVER 0x10018850
 

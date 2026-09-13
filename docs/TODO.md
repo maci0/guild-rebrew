@@ -4,6 +4,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-254 (2026-09-13): two verify-blocked functions probed, both reverted; one doc
+lead closed, one stale note corrected.**
+
+- `gm_AllocSpieler` tail-order lead (file header: "Verify against the reference
+  before taking it") is now verified AND spent. Reference order confirmed from
+  disassembly (`0x10019636 jne` skips the 0x286c bug-log, `sprintf` PlayerID at
+  0x10019666, then the 0x2888 log at 0x1001967c — i.e. log-after-sprintf, the
+  opposite of the source). Applied: obj 3689 -> 3687, match 973 -> 915,
+  **linked +53 (2861 -> 2914)**. Reverted per the only-the-link-decides rule;
+  the header records the measurement so it is not re-tried.
+- `ServerMainThread` packet-build region re-probed twice against the 2074/2434
+  base: dropping `volatile` on the cmd+4 store (2070, -4) and reading
+  `total_size` at point of use (obj 2431, SIZE_MISMATCH). Both reverted. The
+  second outcome re-derives shapes §48's memory-operand-compare dead end; §48
+  already documents it, so no new doc entry.
+- Stale prose corrected in `gm_AllocSpieler.c` header: it claimed `/Ow` "must
+  stay on the `// CFLAGS:` line below, which is what the CMake build reads
+  (`apply_annotation_cflags`)". There is no such line (verified: no
+  `^// CFLAGS` anywhere in `src/server.dll/`); both tools and CMake resolve
+  CFLAGS from `src/rebrew-functions.toml` via `rebrew cmake-flags`, with
+  metadata winning over any inline value (`metadata._apply_metadata_entry`).
+  Comment-only change; object still exactly 3689.
+- No `rebrew` tool bug found this round. Two false alarms checked and cleared:
+  `test --json` emitting nothing was a stdout/stderr pipe mixup (direct
+  redirect parses fine), and `todo`'s "obj 3688" text is the committed blocker
+  string, not a live measurement (`test` now reports obj 3689 and syncs the
+  status STUB accordingly via the tool path, not a hand edit).
+- Residue baseline unchanged: **9,209**. Next: the ranked leads below (CrashDump
+  frame work first); both verify-blocked functions are at measured walls.
+
 **Verified state at handoff.** `rebrew lint` 187/187 (0 errors, 2 warnings); a full
 `bash scripts/gate.sh` passes — 0 compile/link errors, `rebrew verify --full` 281/283 against
 the 281 baseline; and `bash scripts/split_link.sh` + `postlink_residual.py --write` reproduces
