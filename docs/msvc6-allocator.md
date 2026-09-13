@@ -2879,3 +2879,80 @@ This matters beyond tidiness: the amendment's inverted reading, together with th
 missing lower bound, is what produced the over-strict "real body must equal the
 reference's real body" rule that rejected admissible candidates (see the
 `cm_ExCopyEntityData` `do/while` case, real 900 -> 904, retracted in round 242).
+
+## Finding 59 — relocation accounting: `matched` under-counts, because msvc6 relocates memory operands but not absolute immediates
+
+The complement of the "unreachable bytes" note, and the reason the **linked residue, not any
+object metric, is the only measure** — this is the mechanism behind that rule.
+
+Measured on `ServerMainThread` (0x100093a0). Its COMDAT carries 56 relocations: 14 `DIR32`
+plus 42 `REL32`. **Every `DIR32` site is a memory operand** (`call dword ptr [0x...]`,
+`mov [0x...],r`, `mov r,[0x...]`). An absolute address used as a plain immediate carries
+**no** relocation at all — `push 0x101de9a0` and `mov r,0x101deb00` are pre-baked against
+the preferred base.
+
+The reference is the other way round: its `.reloc` has **128 HIGHLOW entries inside the same
+2434-byte window** (mask 512 bytes against our 224). So for ~288 bytes the reference
+*relocates* a slot where we emit a pre-baked constant, and the honest metric — which refuses
+to match a byte the reference relocates but we do not — cannot count them, even though our
+value is already byte-correct in the linked image.
+
+Two consequences:
+
+- **`matched` is pessimistic on such a function, and `matched-reloc` is optimistic.**  On
+  `ServerMainThread` they read 1521 and 2149 of 2434, and neither is the truth; the raw
+  positional residue (395 differing bytes, 250 of them non-call) is.  `matched` will never
+  approach the size there, so a low `matched` is not evidence of a large codegen error.
+- **Do not read "`matched-reloc − matched` = unreachable bytes" as "give up on them."**  An
+  earlier note of mine called that a metric wall on `gm_AllocGebaeude`; the mechanism is
+  right but the conclusion is too strong.  What the gap means is that *we reach a global by
+  a route the reference does not use there* — an absolute address where the reference has a
+  register already holding it, or vice versa.  That is a real codegen difference, and its
+  fix (if any) is to find the addressing route, not to edit the relocation.
+
+Also measured here and worth keeping: a `matched` ceiling computed from one side's relocation
+count tells you about *our* encoding, not about the reference's, so it must be computed per
+side (the reference's `.reloc` HIGHLOW count inside the window is the other half).
+
+`src/server.dll/DieGildeAddOnServer/server_c/ServerMainThread.c`
+
+## Finding 60 — reading out the frame slot map with sentinel initials (an instrument)
+
+A slot-map question ("which of our locals got `[esp+0x14]`?") can be answered directly
+instead of inferred. Replace each address-taken local's initialiser with a **distinct
+constant** and compile:
+
+```c
+resolved_dynamic = (short*) 0x11;   /* ... 0x22, 0x33, ... for each local */
+```
+
+Each emits `mov dword ptr [esp+N], 0x..`, so the constants read back the per-variable slot
+map in one compile. Measured on `cm_ExSellObjekt` (0x1000d930): ours is
+`source_dynamic_entity`@0x14, `resolved_dynamic`@0x18, `dest_existing_entity`@0x20,
+`dest_dynamic_entity`@0x1c — the reference is exactly the reverse within each pair.
+
+That measurement then settled the diagnosis: **the swap is a pure colorer choice.**  Total
+access counts per slot are identical on both sides, and every block that reads a slot reads
+the *same logical value* as the reference.  So it is a same-value/different-offset
+difference throughout, and **no bytes can be won from it directly** — it only moves the
+downstream displacement.  Separately confirmed inert there: swapping the two declarations,
+and all eleven rotations of the `= 0` initialiser block (ten byte-identical, the eleventh
+moves the object but not the slot map).  Use the sentinel probe before spending probes on
+declaration or statement-order spellings.
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`
+
+## Finding 61 — `volatile` on a local is a per-variable fixed point, not a general register-eviction knob
+
+On `cm_ExSellObjekt` (0x1000d930) the committed `*(volatile uint*)` cast on the log
+buffer's field is a local optimum on all three of `matched`, object size and instruction
+count simultaneously.  Qualifying a neighbouring local instead does not preserve it:
+`source_dynamic_ref` as `short* volatile` gives `matched` 552 with `aligned` 477 but pushes
+the object to **2080** (an upward bucket crossing, i.e. composition-breaking);
+`source_dynamic_entity` qualified gives 413 with object 2048; removing the existing cast
+gives 609 at 2048.  So `volatile` is not a dial — each qualification is its own fixed point,
+and moving it between locals moves the frame.
+
+This is the practical caution for the `volatile`-at-use-site lever generally: it works
+(section 71 of the shapes doc, and the round-143 `ls_` win), but it is *per variable*, so a
+sweep that qualifies "the same kind of thing" elsewhere will not transfer.
