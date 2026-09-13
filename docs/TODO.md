@@ -2,6 +2,41 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+**Round-248: the small-function residues are register-allocation ties, and that is the
+general shape of what is left.**
+
+Three functions were worked with 11 probes and nothing was found — but the *reason* is the
+result, and it generalises:
+
+| function | linked residue | what it actually is |
+|---|---|---|
+| `gm_ObjectsAvailble` | 28 | **one** `ebx`<->`edi` rename (`mov edi,esi` ours against `mov ebx,esi` at 0x10016090) cascading to the row/inner pair |
+| `srv_LoadBuf` | 49 | 9 clusters, all register names or schedule; the largest is a second `sprintf` buffer address materialised lazily after the mask in the reference and hoisted a block earlier in ours |
+| `m_AllocTracked` | 93 | 12 clusters of byte-neutral push/pop shrink-wrap reorderings and one tail accumulator rename |
+
+All three have real bodies already **exactly** the reference's length and no relocated tail
+data, so the size rule offers nothing in either direction.  All three are allocator
+tie-breaks — the same obstacle as the big functions, in miniature.  **This is why recent
+rounds return tens of bytes rather than hundreds: the reachable part of the residue is now
+dominated by choices the C source cannot steer** (`docs/msvc6-allocator.md` Findings 52-55,
+60-61).  Recognizing this early is worth more than another sweep.
+
+Also retires, with measurements:
+- `m_AllocTracked`'s Finding-51 fixed point is **already crossed in the shipped body** — frame
+  `0x118` and `xor ebx,ebx` are both present and the object span is exactly 672.  The file
+  header's "227/658" and "13 bytes short" are stale; HEAD is 525/658 at exact size.  Finding
+  51 is not binding here.
+- The `#pragma function/intrinsic` axis on `m_AllocTracked` is **retired for this body**: five
+  variants (memset/strcpy/strcmp in several combinations) are byte-identical.
+
+**Quantified confirmation of Finding 59:** the reference's `.reloc` is *empty* in all three
+windows while ours relocates every absolute memory operand.  On `srv_LoadBuf` that makes
+`matched-reloc - matched` 100 bytes of a 750-byte function — **13%** — so a `matched` of 601
+really represents 703/752 of correct content.  Where a window has zero reference HIGHLOW
+entries, read `matched-reloc` and the linked residue, and do not treat the `matched` gap as
+codegen work.
+
+
 **Round-248: `gm_AllocSpieler`'s largest hunk localised to an instruction, and one suspected
 source bug ruled out.**
 
