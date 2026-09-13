@@ -29,6 +29,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-314 (2026-09-13): denominator audit — 9,209 is all code.**
+
+- Reference .text holds 2,571 padding-ish bytes (154 int3 + 2,417 nop
+  runs, 1.8%), but per round 247 + postlink normalization these already
+  match (only 30 differ, all code-overrun). The 9,209 residue is 100%
+  code bytes with no padding component — the denominator needs no
+  adjustment and no "unproducible bytes" carve-out applies (preludes via
+  the block-fill exception, merges are compiler behavior).
+- Residue baseline unchanged: **9,209**.
+
 **Round-313 (2026-09-13): combined correctness fixes don't cancel cascades.**
 
 - Applied BOTH Spieler fixes at once (slot[9]=(char)arg8 + tail
