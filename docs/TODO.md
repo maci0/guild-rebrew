@@ -71,6 +71,40 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-236/237: `cm_ExCopyEntityData` is closed -- a budgeted pass found nothing.**
+
+Residue **9,533**.  The first result from the changed fan-out protocol, and worth
+recording because it retires a function rather than adding one to the queue.
+
+A fresh agent was given `cm_ExCopyEntityData` (0x1000ec00, 465 bytes, 71.5% aligned) with
+a **hard budget of ~40 probes** and an explicit instruction that "none found, plus what
+I tried" is a correct answer.  It delivered `.scratch/cm_ExCopyEntityData.FINAL.c`, whose
+md5 is `383682da451450c2422ba8479a416d40` -- **byte-identical to the committed state**,
+probe reading matched 430 / matched-reloc 584 / object 912, exactly the candidate
+committed in round 193.  So its answer is "none found", delivered on time and without
+leaving an unmeasured candidate in the tree.
+
+Together with the earlier work this function is now done as a target:
+
+- its residual was localised by running-offset alignment (matrix clamp 25B against the
+  reference's 27B; dst scan +5 from a rotated loop; the `0xffff` guards held in `ebp`
+  versus our two rematerialised 6-byte immediates; src scan +10 for an entry guard the
+  reference lacks);
+- its main structural alternative -- the `do/while` dst-scan restructure -- was measured
+  as **size-changing** (real body 900 -> 904) and rejected;
+- the reference's three epilogues against our two is the documented cross-jump wall;
+- and an independent budgeted pass found nothing.
+
+**Stop spending here.**  Point the effort at the functions with room: `CrashDump`
+(1,889 bytes, 37.8% aligned), `cm_ExSellObjekt` (1,421, 73.2%), `ls_LoadBuildingEntityState`
+(728), and `gm_AllocGebaeude` (327, the remaining size-changer suspect that still needs
+its candidate re-derived).
+
+*The protocol change is what produced this.*  Twenty-plus rounds were lost to agents
+sweeping without delivering; a probe budget plus "none found is a result" plus
+"write the candidate to a named path first" turned an open-ended wait into a bounded
+answer.  Keep all three in every fan-out brief.
+
 **Round-227/228: file ownership has to be checked, not assumed.**
 
 Residue **9,533**.  A process failure, recorded because it has now happened twice and
