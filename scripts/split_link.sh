@@ -103,6 +103,7 @@ rsp.write_text(" ".join(tokens))
 print(f"fold object {obj} inserted at token 1")
 RSP
 
+if [ "${REBREW_SKIP_SPLIT_BLOB:-0}" != "1" ]; then
 echo "== split blob (member .rdata sections at their reference offsets)"
 # The sections that cannot fold (___lookuptable, the unnamed pointer tables,
 # the __real@8@ constants, ___dnames/___mnames) have reference offsets *inside*
@@ -112,8 +113,9 @@ echo "== split blob (member .rdata sections at their reference offsets)"
 # The remaining 8 bytes of surplus are cvt.obj's `__real@8@0`, which the
 # reference packs at an odd offset - see docs/TODO.md round 133.
 python3 scripts/split_blob.py --rsp "$WORK/rsp.rsp" --split "$WORK/split" \
-    --defs "$WORK/defs" --work "$WORK" \
+    --defs "$WORK/defs" --work "$WORK" --byte-align \
     --blob crt_region/rdata_restore.c.obj
+fi
 
 echo "== data gap for this composition"
 # `data_restore.c`'s blob is sized for the CMake composition (its own .data

@@ -96,6 +96,20 @@ def reference_rdata():
     raise SystemExit("reference has no .rdata")
 
 
+def lower_alignment(path):
+    """Patch a COFF object's sections to ALIGN_1 (our own object, not a library)."""
+    raw = bytearray(path.read_bytes())
+    count = struct.unpack_from("<H", raw, 2)[0]
+    opt = struct.unpack_from("<H", raw, 16)[0]
+    for k in range(count):
+        off = 20 + opt + k * 40
+        flags = struct.unpack_from("<I", raw, off + 36)[0]
+        if flags & 0x00F00000:
+            flags = (flags & ~0x00F00000) | 0x00100000
+            struct.pack_into("<I", raw, off + 36, flags)
+    path.write_bytes(bytes(raw))
+
+
 def locate(ref, body, mask, lo, hi):
     for at in range(lo, hi - len(body) + 1):
         for j, byte in enumerate(body):
@@ -168,6 +182,11 @@ def main():
             print(f"  odd offset {at:#x}, not placed: {path.name}", file=sys.stderr)
             continue
         placed.append((at, len(body), path, comdat))
+        if args.byte_align and at % args.align:
+            # The reference packs this one right after a byte-packed literal, so
+            # the object has to be able to start at an odd offset: its own
+            # section alignment comes down as well as the pieces'.
+            lower_alignment(path)
     placed.sort()
     print(
         f"{len(placed)} sections placed, {foldable} not found (folded or not in "
@@ -217,11 +236,11 @@ def main():
             check=True,
             capture_output=True,
         )
-        if args.byte_align:
+        if args.byte_align and (a % args.align or b % args.align):
             # msvc6 emits a `const unsigned char[]` with 4-byte section
-            # alignment, which cannot end at an odd offset; a piece that must
-            # (the reference packs cvt's `__real@8@0` at 0x1341, right after a
-            # string) needs ALIGN_1, so patch our own object's section header.
+            # alignment, which cannot start or end at an odd offset; only the
+            # pieces touching the reference's odd-packed section need ALIGN_1
+            # (lowering them all drops the pads the reference does have).
             raw = bytearray(obj.read_bytes())
             count = struct.unpack_from("<H", raw, 2)[0]
             opt = struct.unpack_from("<H", raw, 16)[0]

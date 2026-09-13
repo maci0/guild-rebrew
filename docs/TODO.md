@@ -1,5 +1,37 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-134: postlink's `.rdata` prefix gate is satisfied — exact size, zero
+mismatching bytes — and `.text` coverage is what is left.**
+
+The last eight bytes were cvt.obj's `__real@8@00000000000000000000`, which the
+reference packs at the odd offset `0x1341` right after a byte-packed string.  A
+piece cut from the reference can end there, but msvc6 emits a
+`const unsigned char[]` as a 4-aligned `.rdata` section, so the fix is to lower
+the alignment to `ALIGN_1` — **only** on the pieces and the one object that
+touch that section.  Measured:
+
+```
+                          .rdata VS   import dir   prefix   prefix bytes   .text placement
+all 4-aligned                0x2e81       0x2610    0x2470        0 differ   246/319
+all ALIGN_1                  0x2e81       0x2608    0x2468      470 differ   246/319
+only the touching ones       0x2e81       0x2608    0x2468        0 differ   246/319
+reference                    0x2e81       0x2608    0x2468
+```
+
+Lowering everything drops the pads the reference *does* have (first mismatch at
+`0x2061`, right after `___lookuptable`); leaving everything at 4 loses those
+eight bytes.  `split_blob.py --byte-align` now patches a piece only when its
+start or end is odd, and the object when its own offset is odd, and
+`split_link.sh` passes it.
+
+`bash scripts/split_link.sh` therefore ends with the vehicle at: all four raw
+sizes and file offsets `ok`, `.rdata` the reference's size, the prefix exactly
+`0x2468` bytes and byte-identical, `.text` 0x22af8 with 246/319 mapped symbols
+exactly at their reference VA.  Postlink's message is now only the coverage
+gate — **6067/7463 = 81.3%** — which needs the 19 non-byte-matched functions
+(round 119's table), and the CMake artifact still links its own composition, so
+adopting this one there is the other half of the remaining work.
+
 **Round-133: the split blob is in the pipeline — `.rdata` is now the reference's
 size exactly, the prefix is byte-identical, and 8 bytes are left.**
 
