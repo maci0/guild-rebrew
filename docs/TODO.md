@@ -1,5 +1,79 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-119: `.data` raw is now the reference's `0xe000`, and postlink's next
+gate after `.text` is the `.rdata` prefix — pinned to the same six objects.**
+
+**The `.data` surplus is closed.**  The gap blob (`crt_region/data_restore.c`)
+was sized for the project's `.data` as it was when it was generated; the TUs
+have since grown `0x1500` bytes of literals, so the section's content ended at
+`0xf500` instead of `(0xd000, 0xe000]` and the raw came out `0x10000` rather
+than `0xe000`.  The blob is a *prefix* (linked first, after the `.CRT$`
+sections), so the only thing that matters is its length:
+
+```
+own .data (measured from the map's .bss line, 0xdf00 - 0x30 - blob)
+content_end = 0x30 + blob + own          raw = align_up(content_end, 0x1000)
+```
+
+Re-tuning it to `0x9a00` (`rebrew gen-layout --data-gap 0x4600`, plus the
+matching `src/rebrew-data.toml` entry, or lint gains a W016 warning) gives
+
+```
+                 .text              .rdata             .data              .reloc
+reference   vs 0x22846 raw 0x23000  vs 0x2e81 raw 0x3000  vs 0x174059c raw 0xe000  raw 0x11000 @0x35000
+before      vs 0x22256 raw 0x23000  vs 0x3041 raw 0x4000  vs 0x1744a98 raw 0x10000 raw 0x08000 @0x38000
+after       vs 0x22256 raw 0x23000  vs 0x3041 raw 0x4000  vs 0x1743498 raw 0xe000  raw 0x08000 @0x36000
+```
+
+No `.data` symbol had to move: postlink copies the reference's `data.hex`
+over the whole raw anyway, so the blob's *content* is irrelevant to the
+output.  With `.rdata` raw at `0x3000` (the one remaining surplus) the built
+`.reloc` lands at `0x35000` and postlink's `.reloc` growth to `0x11000` makes
+the file exactly the reference's `0x46000` bytes.
+
+**The `.rdata` prefix gate, measured.**  `_fix_imports` refuses to run unless
+the built bytes between the IAT and the import directory are the reference's
+`meta.prefix` — `0x2468` bytes (`layout/server.dll/prefix.hex`), i.e. all of
+`.rdata[0x1a0:0x2608)`.  Ours is `0x2630`.  The `0x1c8` surplus is one block
+after `rdata_restore`'s blob (`0x1320` at `0x12e8`, ending exactly at
+`0x2608` like the reference) and it is LIBCMT `.rdata` re-emitted by six
+objects the link pulls for code:
+
+```
+0x2608 testfdiv.obj reals + "IsProcessorFeaturePresent"   0x2740 timeset.obj __dnames/__mnames
+0x2690 x10fout.obj  "1#QNAN".."1#SNAN"                    0x2780 tzset.obj   "TZ"
+0x26b0 output.obj   __lookuptable, "(null)"               0x2784 a_map.obj  "SunMon..","JanFeb.."
+0x27d0 __IMPORT_DESCRIPTOR_KERNEL32   <- import directory, 0x1c8 late
+```
+
+`crt0msg.obj`/`crtmbox.obj` were the first two members of this set and round
+115 removed them by fixing the alias decoration (`0x33b1 -> 0x3041`); these
+six are what is left, and the reference carries the same bytes inside the
+blob (`"1#QNAN"` at `0x24a8`, `"(null)"` at `0x2074`, `"TZ"` at `0x2458` on
+both sides).  Shrinking the blob by `0x1c8` does not substitute: the bytes
+that would move up into `[0x2440, 0x2608)` are our own COMDAT order, which
+matches 53 of 456 reference bytes, and the gate compares bytes.
+
+**`/OPT:REF` confirms the mechanism and is not usable.**  Relinking the same
+objects with `/OPT:REF` instead of `/OPT:NOREF` drops unreferenced COMDATs and
+lands `.rdata` at `vs 0x2f81 / raw 0x3000` — the reference's raw — but it also
+guts `.text` (`0x22256 -> 0x100c6`), because a large part of our reversed
+`.text` is not referenced by anything.  Recorded as evidence that the surplus
+is unreferenced COMDATs, not as a flag to switch.
+
+**New reference: `docs/msvc6-link-layout.md`.**  Everything above, plus the
+section-geometry rules (`raw = align_up(content_end, FileAlignment)`, the map's
+`.bss` line as the content end, `file_offset(n+1) = file_offset(n) + raw(n)`,
+the literal-goes-to-`.data` rule), the import layer's hash-driven order and
+why the hint/name table's size differs by `0xa`, what postlink may and may not
+overwrite, the `/MAP` probe recipe, and the `gen-layout` churn trap
+(`crt_imports.c` and the toml's import order come out in set-iteration order —
+revert them after regenerating the blob).  Compiler-side sweep results and the
+five residual codegen classes are in `docs/msvc6-c-shapes.md` sections 49-50.
+`scripts/section_geometry.py` is the check: it prints the table above from
+`.scratch/server.dll.prelayout` and fails while a raw size still differs, so a
+future blob or literal change cannot silently re-open the `.data` surplus.
+
 **Round-117: the CRT half is not where the remaining failure is, and the game
 half is uniformly allocator-bound.**
 

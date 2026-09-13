@@ -397,6 +397,9 @@ if (MSVC_FOR_DECOMP)
     # targets, and replaces .reloc.  pe-metadata: normalizes the DOS
     # stub/e_lfanew, TimeDateStamp, CheckSum, .data VirtualSize (BSS tail),
     # .reloc VA and SizeOfImage.  Content is untouched.
+    # The section-geometry rules this depends on (raw-size rounding, the
+    # .rdata prefix gate, the .data gap blob's sizing) are measured and
+    # written up in docs/msvc6-link-layout.md.
     add_custom_command(TARGET server_dll POST_BUILD
       # Converge the linked DLL onto the original's layout WITHOUT needing the
       # original binary at build time: the text-only layout package

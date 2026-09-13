@@ -1303,13 +1303,13 @@ name = "g_rdata_restore_252e8"
 status = "UNCHECKED"
 type = "const unsigned char[]"
 
-["SERVER.0x1002a000"]
+["SERVER.0x1002b600"]
 section = ".data"
 name = "g_data_restore_gap"
 status = "UNCHECKED"
 
 # ---- GROUP C: CRT-startup + allocator-pool globals (data_globals.c) ----
-type = "unsigned char[0xb000]"
+type = "unsigned char[0x9a00]"
 
 ["SERVER.0x10033b9c"]
 name = "g_10033b9c"

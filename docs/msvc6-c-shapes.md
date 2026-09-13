@@ -1889,3 +1889,65 @@ Recorded as a dead end rather than a fix.
 Note the *other* arm of the same `if`, at target 0x10009846, stores the literal
 `0xffffffff` and the reference keeps the 8-byte immediate there too.  Only the
 arm whose store operand is a variable reaches this rule.
+
+## 49. A CFLAGS sweep on one function: inert, negative, and one near miss
+
+`gm_AllocSpieler` (0x1001A0F0, target object 3689 bytes) is the smallest
+remaining size mismatch in the tree (ours 3688, same span), and it was used to
+sweep the flags that are plausibly still in play.  Numbers are the object size
+and the register-agnostic matched-byte count from `rebrew diff`; "inert" means
+a byte-identical object.
+
+| flags added to `/DREBREW_ALLOW_NAKED /O2 /Gd /Oa /Ow` | object | reg-agnostic | verdict |
+|---|---|---|---|
+| (base) | 3688 | 853 | — |
+| `/Ow-` | 3692 | 840 | size closer, content worse |
+| `/G6` | 3701 | 819 | size closer, content worse |
+| `/Op` | 3766 | — | much larger |
+| `/Za` | — | — | larger |
+| `/QIfist` | — | — | larger |
+| `/Zp1 /Zp2 /Zp4 /Zp8` | 3688 | 853 | inert |
+| `/Ob2`, `/Ot`, `/Oi`, `/Oi-`, `/Oa-`, `/G5`, `/GB` | 3688 | 853 | inert |
+
+The lesson is the general one: on this codebase a flag that moves the size
+towards the target has so far always moved the *bytes* away from it, because
+the size gap is one instruction's worth of a scheduling decision, not a
+codegen-policy difference.  Sweep a flag only when a *specific* instruction
+class is wrong (section 50), and score with the reg-agnostic count, never the
+size alone.
+
+## 50. The residual codegen classes, as instructions
+
+Across the game region the remaining differences keep falling into five
+shapes.  Quoting target disassembly first, ours second:
+
+```
+0x100097fb  mov [r+0x1c], r          / mov [r+0x1c], 0xffffffff   -1 materialization
+0x1000984b  lea r, [r+r]             / add r, r                    strength reduction
+0x100098e3  je  <loop head>          / jne <exit>                  branch polarity
+0x10009baf  mov [r+0x30], r  ...     / [r+0x28], [r+0x2c], ...     frame offsets
+ 0x8c9       mov ax, [ebp]           / xor r, r                    zero-register cache
+             and eax, 0xffff         / mov r16, [mem]
+```
+
+* **`-1`/zero materialization.** The reference keeps `-1` in a register once
+  (`or ebp, -1`) and stores the register; we emit the 8-byte immediate.  This
+  is msvc6's absence of constant caching and has no source lever
+  (`docs/msvc6-allocator.md`).
+* **`lea r,[r+r]` vs `add r,r`.** c2 picks `lea` when the flags are live;
+  a spelling that kills the flags register is the only lever found.
+* **Branch polarity** (see also section 7).  `je <head>` against our
+  `jne <exit>` is a block-placement consequence, not a source choice.
+* **Frame offsets.** `+0x20/+0x24/+0x30` against our `+0x1c/+0x28/+0x2c` is
+  the local-slot layout inside one function; it follows `volatile` placement
+  and the order of declarations, and it has been steered exactly once
+  (round 110).
+* **`and eax, 0xffff` after a 16-bit load.** The reference zeroes a register
+  once and uses `mov reg16, [mem]`; we widen with `and`.  Section 43's
+  byte-width rule is the related lever, and it is why
+  `ls_LoadBuildingEntityState` stays one byte long.
+
+The one case that *was* steerable had a structural cause — `cm_ExCopyEntityData`
+(round 110) reached its store block from several duplicated branches, and
+spelling the clamp "in range first, then high, then low" collapsed them.
+Before spending a round on any of the five, look for that shape first.
