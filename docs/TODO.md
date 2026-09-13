@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+## The last 16 missing strings are a different case (2026-09-13, round 64)
+
+After round 63, 16 reference `.data` strings are still absent from our image,
+and they are one block, `\project\DieGilde\game\`, `Usefull Sync`,
+`Sending data...`, `SERVER>>>> ALL PLAYER ARE READY`, `GamePath`, `Config`,
+`\game.ini`, `_main_:`, a vfs format string and a few more.  Fourteen of them
+are addressed by absolute VA from `ServerMainThread.c` (nine) and
+`m_alloc.c` / `vfs_OpenStream.c`, so they are the same defect as rounds 62 and
+63.  Adding the whole contiguous reference range
+`.data[0x2560:0x2960]` (1024 bytes) as one array to `ServerMainThread.c` and
+re-sweeping the cut:
+
+```
+ cut    .data differing
+  90         31679
+  92         31919
+  95         31134     <- best of the sweep
+```
+
+Against 25311 without it, that is **+5823 bytes of `.data` disagreement for
+1024 bytes of content** -- nine times the cost of the CrashDump block, which
+was 637 bytes for 568.  Reverted.
+
+The difference is overlap.  The crash-dump range was absent in its entirety;
+this one is *interleaved* with content we already emit:
+
+```
+ref .data 0x2560  'stream end'                        our image has it at 0x28d5c
+ref .data 0x28b0  'D:\\Develop\\...\\server.c'         our image has it twice, 0x28d8c and 0x28e08
+```
+
+so a contiguous blob duplicates them and shifts everything after it.  This
+group needs the object-order problem solved first -- the same duplication
+round 59 measured as 105 extra string occurrences -- rather than a fourth
+copy of the content.  Recorded rather than forced.
+
 ## The crash-dump message data was absent too (2026-09-13, round 63)
 
 Same defect as round 62, twenty-eight strings wide.  `CrashDumpUnhandledExceptionFilter.c`
