@@ -138,9 +138,9 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	source_dynamic_entity = (short*)0;
 	dest_dynamic_entity = (short*)0;
 	dest_object = (ushort*)0;
-	source_container_ptr = (char**)0;
 	dest_owner_entity = (short*)0;
 	dest_game_object = (ushort*)0;
+	source_container_ptr = (char**)0;
 	source_existing_entity = (void*)0;
 	dest_existing_entity = (char*)0;
 	source_static_entity = (short*)0;
@@ -292,6 +292,21 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		}
 	}
 	source_dynamic_ref = source_dynamic_entity;
+	if (*(int*)(cmd + 0x23) != 0) {
+		if (dest_dynamic_entity == (short*)0 && resolved_dynamic != (short*)0 &&
+			*resolved_dynamic == 0x1dd) {
+			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(cmd + 0x18));
+			if (capacity_check != (char*)0) {
+				*(int*)(capacity_check + 0x18) = *(int*)(capacity_check + 0x18) + *(int*)(cmd + 0x1f);
+			}
+		}
+		if (source_dynamic_ref != (short*)0 && *source_dynamic_ref == 0x1dd) {
+			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(cmd + 0x18));
+			if (capacity_check != (char*)0) {
+				*(int*)(capacity_check + 0x1c) = *(int*)(capacity_check + 0x1c) + *(int*)(cmd + 0x1f);
+			}
+		}
+	}
 	if (source_dynamic_entity != (short*)0) {
 		if (dest_owner_entity != (short*)0) {
 			parent_check = gm_ResolveParentEntity((short*)dest_object);
@@ -364,19 +379,12 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			}
 		}
 	}
-	if (*(int*)(cmd + 0x23) != 0) {
-		if (dest_dynamic_entity == (short*)0 && resolved_dynamic != (short*)0 &&
-			*resolved_dynamic == 0x1dd) {
-			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(cmd + 0x18));
-			if (capacity_check != (char*)0) {
-				*(int*)(capacity_check + 0x18) = *(int*)(capacity_check + 0x18) + *(int*)(cmd + 0x1f);
-			}
-		}
-		if (source_dynamic_ref != (short*)0 && *source_dynamic_ref == 0x1dd) {
-			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(cmd + 0x18));
-			if (capacity_check != (char*)0) {
-				*(int*)(capacity_check + 0x1c) = *(int*)(capacity_check + 0x1c) + *(int*)(cmd + 0x1f);
-			}
+LAB_1000e0e7:
+	if (result != (uchar*)0) {
+		*result = 1;
+		if (*(int*)(cmd + 0x10) != -1) {
+			result[1] = 3;
+			*(ushort**)(result + 6) = dest_object;
 		}
 	}
 	if (*(int*)(cmd + 0x10) != -1) {
@@ -433,14 +441,6 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			}
 			*(int*)(dest_owner_entity + 0xcc) =
 				*(int*)(dest_owner_entity + 0xcc) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
-		}
-	}
-LAB_1000e0e7:
-	if (result != (uchar*)0) {
-		*result = 1;
-		if (*(int*)(cmd + 0x10) != -1) {
-			result[1] = 3;
-			*(ushort**)(result + 6) = dest_object;
 		}
 	}
 	return 0;

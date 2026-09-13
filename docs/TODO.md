@@ -71,6 +71,42 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-155: the climb's size rule was wrong, and four stale operands were
+recoverable.**
+
+Two corrections, 11,138 -> 11,070 differing bytes.
+
+*The climb's size key.*  Round 154 forbade any size change (`-|object size -
+target|`), which was too strict: the composition **trims** an object that
+overruns its reference slot (`crt_region/dllmain.c` links a 203-byte object into
+the reference's 157-byte slot byte-perfectly) and can only fail on a *short*
+one.  The key is now `object size >= target size`, with matched bytes as the
+tie-break, and it immediately found what the strict key had rejected:
+
+```
+cm_ExSellObjekt            558 -> 600 object bytes, size unchanged at 2064
+gm_CheckInventoryCapacity  293 -> 298 object bytes, size unchanged at  400
+```
+Both were accepted with the object size held, so the composition stayed aligned
+(246/319 exactly at their reference VA, delta +0x0 .. +0x31c).  In the linked
+image `cm_ExSellObjekt` 1777 -> 1739, `gm_CheckInventoryCapacity` 102 -> 97,
+`ahm_ExAllocAlchemist` 217 -> 201 (`/O2 /Gd`->`/O1 /Gd`-class moves there too),
+68 bytes in total.
+
+*Four stale operands the fixer's guard refuses.*  `_fix_data` rewrites an
+operand only when the built value already points into the reference's
+`.rdata`/`.data`; that guard is right, and it is load-bearing: of the 441 slots
+it leaves alone, patching **all** of them would "gain" 1,698 bytes purely by
+writing reference operands into instructions whose boundaries differ (every one
+of the 441 is inside the eighteen mismatched functions).  But four are a
+different case -- the instruction around the slot is byte-identical and only the
+operand is stale, e.g. our `cmp eax, 0x117f65b4` against the reference's
+`cmp eax, 0x10139820`, where the split layout put the walked table's end past
+the reference's `.data`.  `scripts/postlink_residual.py` now runs a locality pass
+after the fixers: patch the slot when 12 bytes either side match the reference
+outside the other operand slots.  That test selects exactly those 4 of 441 and
+is worth 13 bytes.
+
 **Round-154: an unattended statement-move hill-climb — and the objective it
 needed.**
 

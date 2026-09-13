@@ -200,15 +200,16 @@ def score(path: Path, va: str) -> tuple[int, int, int, int]:
     target, matched = int(m.group(1)), int(m.group(2))
     delta = -abs(int(m.group(4)) - int(m.group(5)))
     obj = int(m.group(6))
-    # Size agreement outranks the byte count: the composition places every
-    # function at its reference VA, so a function that moves away from its
-    # target size drags everything after it and the linked residue explodes
-    # (measured: a 13-byte-short cm_ExSellObjekt took the linked image from
-    # 11,336 to 89,509 differing bytes while its object-level score rose
-    # 387 -> 615).  The probe's `obj` carries a constant per-function offset
-    # against the metadata size (COMDAT tail padding), which cancels in this
-    # comparison.
-    return -abs(obj - target), matched, delta, obj
+    # A function must never come out SHORTER than the reference's, and that is
+    # the only size rule the composition imposes: it places each function at its
+    # reference VA and trims an object that overruns (crt_region/dllmain.c links
+    # a 203-byte object into the reference's 157-byte slot byte-perfectly), but
+    # it cannot pad a gap.  Measured the hard way: a 13-byte-short
+    # cm_ExSellObjekt took the linked image from 11,336 to 89,509 differing
+    # bytes while its object-level score rose 387 -> 615, whereas the same climb
+    # at +16 bytes was harmless.  Growth therefore ranks equal to an exact size;
+    # only a shortfall loses.
+    return (1 if obj >= target else 0), matched, delta, obj
 
 
 def move(order: list[int], i: int, j: int) -> list[int]:

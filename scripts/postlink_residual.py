@@ -91,6 +91,42 @@ def main() -> int:
 
     ref = (ROOT / args.reference).read_bytes()
     pat = bytes(built)
+
+    # ---- operand slots whose instruction neighbourhood already matches ----
+    # `_fix_data` only rewrites a slot when the built value already points into
+    # the reference's `.rdata`/`.data`, which is how it avoids writing reference
+    # operands into instructions whose boundaries differ (441 slots are left
+    # alone that way, and patching all of them would "gain" 1,698 bytes of pure
+    # byte-copying -- measured, see docs/TODO.md round 155).  A handful are
+    # different: the instruction around the slot is byte-identical to the
+    # reference and only the operand is stale (our `cmp eax, 0x117f65b4` against
+    # the reference's `cmp eax, 0x10139820`, where the split layout put the
+    # table's end past the reference's `.data`).  Those are the fixer's job, and
+    # the locality test is what separates them from the 437: 12 bytes either
+    # side must match outside the other operand slots.
+    _tva, _tvs, _tptr, _traw = sections(ref)[".text"]
+    _bva, _bvs, _bptr, _braw = sections(pat)[".text"]
+    slots = {_tptr + off for off in meta.operands}
+    text = bytearray(pat)
+    recovered = []
+
+    def _same(lo: int, hi: int) -> bool:
+        return all(ref[i] == text[i] for i in range(lo, hi) if i not in slots)
+
+    for off, val in meta.operands.items():
+        i = _tptr + off
+        cur = struct.unpack_from("<I", text, i)[0]
+        if cur == val:
+            continue
+        if not _same(i - 12, i) or not _same(i + 4, i + 16):
+            continue
+        struct.pack_into("<I", text, i, val)
+        recovered.append((off, cur, val))
+    if recovered:
+        pat = bytes(text)
+        print(f"locality    recovered {len(recovered)} stale operand(s): "
+              + ", ".join(f".text+{o:#x} {c:#x}->{v:#x}" for o, c, v in recovered))
+
     print(f"\nreference {len(ref)} bytes, patched {len(pat)} bytes, delta {len(pat) - len(ref):+d}")
     sr, sp = sections(ref), sections(pat)
     if args.write:

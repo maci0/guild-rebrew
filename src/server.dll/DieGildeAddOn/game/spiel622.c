@@ -1116,14 +1116,14 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 
 	in_list = 0;
 	base = (char*) g_item_def_table + entity_index * 0x40;
+	list[2] = 0x12;
 	entity = base + entity_index;
 	list[0] = 8;
 	list[1] = 0xc;
-	list[2] = 0x12;
 	type_byte = entity[0];
 	list[3] = 0x19;
-	list[4] = 0x22;
 	list[5] = 0x20;
+	list[4] = 0x22;
 	list[6] = 0x27;
 	list[7] = 0;
 	cap = 0;
