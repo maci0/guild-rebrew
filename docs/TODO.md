@@ -71,6 +71,54 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-186: the real-length lever is closed, and two candidates measured at the
+link.**
+
+Residue **9,644** (from 9,645).
+
+*The round-184 lever was a one-off.*  `vfs_OpenStream` is fixed, so I corrected
+`.scratch/reallen2.py` (window the reference to the **next function's VA**) and swept
+every holdout.  Six genuine length differences came back:
+
+```
+CrashDump                    -2    cm_ExSellObjekt             -2
+ls_LoadBuildingEntityState   -3    gm_FindNextFilteredEntity   -4
+cm_ExCopyEntityData          -9    vfs_ReadCompressed          +4 (ours longer)
+```
+
+but a length difference only *matters* when the function has out-of-line data after
+its code, because that is what gets misplaced.  Dumping each reference tail settles
+it: all five are pure code ending in `pop`/`ret`, with no jump table and no relocated
+entries.  (CrashDump's `-2` is not even a length difference — its padding byte is
+`0x09`, not `0x90`, so stripping `0x90` stops early.)  `vfs_OpenStream` was the only
+function in the tree with a jump table + 13-byte case map inside its own object, and
+it is done.  **No further layout lever of this kind exists**, which is worth knowing
+before another round is spent hunting one.
+
+*`gv_ExAllocGraveyardWorker` -1* (458 -> 457): the three statements after the memsets
+permuted so the slot+4 store and `memset(m2,neg,32)` precede the volatile `0xffff`
+store.  Size-neutral (obj 1040 = real 1040 = the reference's).  Note the reference's
+*own* order measures 668 matched-reloc, i.e. worse -- this is a scheduling
+coincidence, not a claim about the source's statement order.  Committed by named path
+only, per round 185.
+
+*`cm_ExSellObjekt`, the error-site inversion: rejected, +41.*  `if (x == 0) { log;
+return 1; } remove(x);` written inverted is semantically identical and matches the
+reference's emitted order at that site (`test ecx,ecx; je <error>; push; push; call;
+jmp`), and it does improve the bytes after the function (14 -> 9), but it costs 46
+in-function to buy 5 outside:
+
+```
+cm_ExSellObjekt  1413 -> 1459   (+46)
+<outside>          14 ->    9   ( -5)
+.text total     9,644 -> 9,685  (+41)   reverted
+```
+
+Its agent's own arithmetic is worth keeping: with *both* error sites inverted the body
+is 2052, five bytes short of the reference's 2057, so the missing length is elsewhere
+-- our build tail-merges more error sites than the reference's seven separate
+`push 8; push str; push line; jmp` sites.
+
 **Round-185: `vfs_ReadCompressed` -62 (committed by accident), and the real-length
 sweep needs the right window.**
 
