@@ -40,6 +40,28 @@
  *     note here had the two forms the wrong way round); switching it takes
  *     the alignment from 616 to 617 of 1056 and the object from 3698 back to
  *     3694.
+ *   - the record-header stores are transcribed into the order the target
+ *     *emits*, not the order that reads naturally: [0x170] before [0x16c],
+ *     [0x215] after [0x210], [0x218]/slot[8] after the 0x2637 log, the tail as
+ *     [0x190], [0x194], [0xd], [0x18c], then [0xa], plus
+ *     `ref = father + 0x68` ahead of the father 0x58 increment.  Measured with
+ *     scripts/probe_function.py --va 0x10018850: 697 -> 736 of 3689 honest,
+ *     matched-reloc 1277 -> 1310, aligned 646 -> 654 of 1056, object 3696 and
+ *     real body 3689 unchanged (size-neutral on both).
+ *
+ * Next, and the largest single-file delta found but NOT applied here because
+ * it is not size-neutral: the target calls
+ * LogMessageInternal(file, 0x2888, work, 8) *after* the final
+ * sprintf(work, s_fmt_playerid_10031570, ...), not before it -- see the
+ * 0x286c / 0x2888 / sprintf sequence at 0x1001962c..0x10019690, where the
+ * `jne` from `cmp idx,0xffff` jumps over the 0x286c log straight into the
+ * sprintf.  Moving only that call (and leaving the 0x286c guard ahead of the
+ * sprintf) measures aligned 646 -> 652 and real body 3689 -> 3687, and
+ * combined with the header transcription above aligned 658.  It also changes
+ * which string the 0x2888 record contains, so it is a behaviour change
+ * *towards* the reference: the current source logs the SpID buffer, the
+ * target logs the PlayerID buffer.  Verify against the reference before
+ * taking it.
  *
  * Measured dead ends, all reverted (score from the 859 base unless noted):
  *   - moving `work[0x3fc]` in the declaration list, to chase the scratch area
@@ -206,33 +228,33 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	*(int*) (0x100358a4 + idx * 0x21c) = -1;
 	/* record header init + debug sprintf/log */
 	*(unsigned short*) (0x100358a0 + idx * 0x21c) = (unsigned short) idx;
-	*(int*) (slot + 0x16c) = 0;
-	slot[0x215] = 0;
 	*(int*) (slot + 0x170) = 0;
+	*(int*) (slot + 0x16c) = 0;
 	memset((void*) (0x100358fc + idx * 0x21c), 0xff, 0x20);
 	slot[2] = (char) type;
 	*(int*) (slot + 0x1f0) = 0;
 	g_citizen_count++;
 	*(int*) (slot + 0x210) = -1;
+	slot[0x215] = 0;
 	sprintf(work, s_fmt_spid_100315e4, g_next_object_id, type);
 	slot[0x216] = 0;
-	slot[0x218] = 1;
-	slot[8] = 0x64;
 	slot[0x217] = 0;
 	*(int*) (slot + 4) = g_next_object_id;
 	g_next_object_id++;
 	*(int*) (slot + 0x1e4) = 0x3f800000; /* 1.0f */
 	slot[0x164] = (char) arg6;
 	LogMessageInternal(s_file_spiel_c_10031004, 0x2637, work, 8);
+	slot[0x218] = 1;
+	slot[8] = 0x64;
+	*(int*) (slot + 0x20c) = -1;
 	slot[0x166] = 0;
-	*(unsigned short*) (slot + 0xa) = (unsigned short) arg4;
 	slot[0x165] = (char) arg7;
 	slot[0x1f4] = 0;
-	*(int*) (slot + 0x20c) = -1;
-	*(int*) (slot + 0x18c) = -1;
+	*(int*) (slot + 0x190) = 4;
 	*(int*) (slot + 0x194) = 0;
 	slot[0xd] = 1;
-	*(int*) (slot + 0x190) = 4;
+	*(int*) (slot + 0x18c) = -1;
+	*(unsigned short*) (slot + 0xa) = (unsigned short) arg4;
 	if (slot[2] == 3 || slot[2] == 0x10 || slot[2] == 0x13) {
 		*(int*) (slot + 0x1e8) = 1;
 		slot[0xd] = 2;
@@ -625,8 +647,9 @@ stat_modifiers:
 	if (father != (char*) 0) {
 		int* ref;
 
-		slot[0x58] = (char) (father[0x58] + 1);
 		ref = (int*) (father + 0x68);
+
+		slot[0x58] = (char) (father[0x58] + 1);
 		for (i = 3; i < 8; i++) {
 			if (*ref == -1) {
 				*(int*) (father + i * 4 + 0x5c) = *(int*) (slot + 4);
