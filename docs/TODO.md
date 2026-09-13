@@ -29,6 +29,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-310 (2026-09-13): independent re-verification of headline numbers.**
+
+- lint 187/187 0 errors 0 warnings · verify --full 281/283 · verify
+  --compare 283 unchanged (0/0/0/0) · residue 0x23f9 = 9,209 ·
+  rebrew checkout clean at 88b4364 (round-28 fix). Every number this
+  session reports re-measured independently this round. All hold.
+- Residue baseline unchanged: **9,209**.
+
 **Round-309 (2026-09-13): volatile grid on the rotation triple — exhausted.**
 
 - `volatile` on base: triple unchanged (extra spills net identical score).
