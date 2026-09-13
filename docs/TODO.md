@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-333 (2026-09-13): two coordinated pushes, six probes, all negative.**
+
+- ExSell live-set lane: split-amount coalesced identical; drop
+  parent_check / source_dynamic_ref both worse (609/855/442, obj 2048).
+  Permutation not driven by live-set cardinality.
+- SMT hot-side lane: merged loop condition 739, inverted exit 1074,
+  early-exit wait 910 (vs 1525 base) — hot-path reshape moves bytes
+  sharply down. Branch layout not steerable from the hot side either.
+- Both files reverted by agents, tree verified clean. No link tests
+  (structural degradation, not noise).
+- Residue baseline unchanged: **9,209**.
+
 **Round-332 (2026-09-13): combined SMT packet probes = probe-2 alone.**
 
 - Volatile-drop + point-of-use-read together: obj 2431 SIZE_MISMATCH,
