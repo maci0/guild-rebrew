@@ -4,6 +4,30 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-257 (2026-09-13): LS nesting fix is locally exact but loses to a global
+recoloring cascade; cross-import from GOLDTL is a dead end.**
+
+- `ls_LoadBuildingEntityState` (728): the `+0xc`/`+0xd` call sites spelled
+  `(load_result + const + idx)` while their `+9`/`+0xa`/`+0x10` siblings spell
+  `(idx + load_result) + const` — and the siblings match. Normalizing all four
+  anomalous sites (the two calls plus the line-181 call and the line-240
+  store) to the sibling nesting emits EXACTLY the reference shape at both
+  call sites (`mov eax,[esi+0x71]; lea ecx,[ebx+eax+0xc]`, hoisted
+  `lea ebp,[ebx+0xd]` gone; aligned 401→414) and kills HEAD's +144 middle
+  desync. But the object grows 1463→1472-equivalent... precisely: obj 1472
+  both ways (span-neutral), yet **linked +672 (728→1400)**. The tail hunks at
+  0x0429-0x054b (HEAD: gap +0, aligned) recolor wholesale under the fix
+  (`mov [eax],ebp`→`mov [eax],0xffffffff`, slot shifts, extra `push edx`):
+  a global allocator cascade, not a length. Reverted per the link rule. The
+  mechanism (nesting → folded `lea`, shapes §70) is confirmed real — it is
+  just not link-profitable in this body. Do not re-try without a plan for
+  the tail recoloring.
+- `rebrew cross-import --from Europa1400Gold_TL.exe --dry-run`: 280/280
+  destination functions skipped, "no unambiguous match above threshold" — the
+  EXE's code differs too much to source any server.dll function. Dead end.
+- Residue baseline unchanged: **9,209**. Next: the honest state stands —
+  every live function at a measured wall; new techniques, not more spellings.
+
 **Round-256 (2026-09-13): CrashDump HEAD is length-exact with distributed
 residue — the V2 +59 length plan is obsolete; decrypt-loop counter probed
 twice, both reverted.**
