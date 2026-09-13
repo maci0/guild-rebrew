@@ -34,6 +34,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-327 (2026-09-13): reference artifact census confirms choices.**
+
+- Strings census: zlib 1.1.3 (matches references/zlib-1.1.3 — version
+  choice confirmed), `D:\Develop\...` source paths (our tree layout
+  mirrors the original's), MSVC runtime strings, no PDB path (consistent
+  with no debug dir). Nothing surprising; no action.
+- Residue baseline unchanged: **9,209**.
+
 **Round-325 (2026-09-13): false-positive shapes consolidated (note repaired
 round 74 — was commit-message-only).**
 
