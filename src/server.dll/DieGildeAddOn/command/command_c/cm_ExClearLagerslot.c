@@ -22,7 +22,6 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * remove call, result-byte store) matches structurally with cascaded
  * register-role swaps (dx/cx, eax/edx). */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000e690
 // SIZE: 191
 

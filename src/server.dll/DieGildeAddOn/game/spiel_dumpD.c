@@ -1,7 +1,6 @@
 /* spiel fragment D — object list helpers (gm_AddObjekt,
  * gm_SubObjekt, gm_SubObjectNoKill) and the filtered entity scanner. */
 
-// CFLAGS: /O2 /Gd
 
 #include "../../Units/Error/error.h"
 

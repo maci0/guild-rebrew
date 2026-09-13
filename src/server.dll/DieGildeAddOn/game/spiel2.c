@@ -120,7 +120,6 @@ extern float g_const_neg_1_0;
  * holding 0x55 slots of 0x80 bytes; returns the matching slot
  * pointer or NULL. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10016240
 // gm_FindSlotById
 

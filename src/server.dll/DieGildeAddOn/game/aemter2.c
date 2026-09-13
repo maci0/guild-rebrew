@@ -29,7 +29,6 @@ extern char g_office_slots[]; /* 0x101de5a0 */
  * Checks entity type, existing office holdings, and eligibility
  * requirements. Returns 0 on success, non-zero on failure. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000B820
 // amt_FindEntity26
 

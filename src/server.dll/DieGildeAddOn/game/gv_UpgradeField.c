@@ -3,7 +3,6 @@
  * object cannot be position-aligned.  Body unchanged.
  */
 
-// CFLAGS: /O2 /Gd
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"

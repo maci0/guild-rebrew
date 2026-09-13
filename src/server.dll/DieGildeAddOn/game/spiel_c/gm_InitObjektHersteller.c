@@ -10,7 +10,6 @@ typedef int(__cdecl* ALLOCFN)(int, int, int);
 #pragma intrinsic(memcpy, memset)
 
 
-// CFLAGS: /O2 /Gd
 
 /* Game function - gm_InitObjektHersteller (initialize object manufacturers)
  *

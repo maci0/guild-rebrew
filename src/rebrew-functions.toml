@@ -144,7 +144,6 @@ status = "RELOC"
 
 ["SERVER.0x100068e0"]
 size = 162
-cflags = "/O2 /Gd /Oy-"
 status = "RELOC"
 analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
 updated_by = "verify"
@@ -161,7 +160,6 @@ status = "RELOC"
 
 ["SERVER.0x10006d20"]
 size = 270
-cflags = "/O2 /Gd /Oy-"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-12T19:37:09+00:00"
@@ -269,7 +267,6 @@ analysis = "Ingress parser boundary for per-player receive buffer. Validation be
 
 ["SERVER.0x1000a570"]
 size = 750
-cflags = "/O2 /Gd /Ot"
 status = "PROVEN"
 analysis = "Iterates over g_player_slots. If a slot is connected, loops calling ReceivePacketHeader to ingest stream data into the receive_buffer. Once a full CommandPacket is received, validates and queues it onto the incoming_cmd_queue via QueueCommandForProcessing. It also handles commands for bulk transfer (0x08, 0x09)."
 blocker = "msvc6 scheduling/register naming at exact 750 size, 3 clusters: cmd-3 push eax after the two stores; lobby sprintf eax/ecx/edx rotation plus the coupled second-sprintf buffer lea; unexpected-request push ebp / mov [ebp],ecx swap"
@@ -346,7 +343,6 @@ status = "RELOC"
 
 ["SERVER.0x1000b880"]
 size = 263
-cflags = "/O2 /Ob0 /Gd"
 status = "RELOC"
 
 ["SERVER.0x1000b990"]
@@ -864,7 +860,6 @@ analysis = "Deserializes all static entities from savegame stream. Reads entity 
 
 ["SERVER.0x10013b10"]
 size = 1361
-cflags = "/Ox /Gd"
 toolchain = "msvc-6.0-sp6"
 status = "RELOC"
 analysis = "ls_LoadTownData: Two phases - (1) per-player building slots (up to 62 buildings per player), (2) town records with name, timestamps, flags, population, wealth, 10 resource pairs, 10 production pairs, 4 tax rates, 4 trade routes, reputation, guild standings, 8 event records, political data. Returns 1 on success."
@@ -1324,7 +1319,6 @@ status = "RELOC"
 
 ["SERVER.0x1001a140"]
 size = 14
-cflags = "/O1 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-10T15:27:54+00:00"

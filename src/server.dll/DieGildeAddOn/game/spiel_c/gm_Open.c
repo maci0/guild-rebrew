@@ -30,7 +30,6 @@ extern int g_1009b764;
 extern void __cdecl srv_SeedRandomWithTime(void);
 
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10015950
 // gm_Open
 

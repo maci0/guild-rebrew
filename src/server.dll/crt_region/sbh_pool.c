@@ -1,4 +1,3 @@
-// CFLAGS: /O1 /Gd
 /* sbh_pool.c - GROUP B: allocator pool helpers (game's small-block heap).
  *
  * The original server.dll replaces the CRT's sbheap.c functions with the

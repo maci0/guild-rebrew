@@ -1,6 +1,5 @@
 /* loadsave TU part 1 — ls_LoadGraveyardData + ls_InitNewDynastyEntity. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10012000
 
 #include <string.h>

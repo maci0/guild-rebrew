@@ -45,7 +45,6 @@ typedef struct {
 	PAIR entries[6];
 } TGT;
 
-// CFLAGS: /O2 /Gd
 
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 

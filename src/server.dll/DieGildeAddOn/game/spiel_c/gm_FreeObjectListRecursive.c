@@ -3,7 +3,6 @@
  * Recursively frees each node's child list (offset 0x14) first, then hands
  * the node to gm_NoopRet2 (a free stub). Returns -1 on an empty list. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10016710
 
 #include <stdlib.h>

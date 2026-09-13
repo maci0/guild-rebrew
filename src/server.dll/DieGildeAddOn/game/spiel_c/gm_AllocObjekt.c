@@ -8,7 +8,6 @@
  * index map 0x10016b1c) and 0x10016bc4 (above 0x160, index map 0x10016bd0).
  */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10016760
 
 #include <stdlib.h>

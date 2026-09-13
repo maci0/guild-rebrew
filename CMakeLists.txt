@@ -423,31 +423,54 @@ if (MSVC_FOR_DECOMP)
 endif()
 
 # ---------------------------------------------------------------------------
-# Per-file CFLAGS from source annotations (MSVC decompilation builds only)
+# Per-file CFLAGS come from rebrew-functions.toml, not from the sources
 # ---------------------------------------------------------------------------
-# Each .c file has a "// CFLAGS: ..." annotation that specifies the exact
-# compiler flags needed to match the original binary. This function reads
-# those annotations and applies them as per-file compile flags.
-
-function(apply_annotation_cflags target)
-  get_target_property(sources ${target} SOURCES)
-  foreach(src IN LISTS sources)
-    file(STRINGS "${src}" cflags_lines REGEX "^// CFLAGS:")
-    if(cflags_lines)
-      list(GET cflags_lines 0 cflags_line)
-      string(REGEX REPLACE "^// CFLAGS: *" "" flags "${cflags_line}")
-      string(REPLACE "/I\"references/" "/I\"${PROJECT_SOURCE_DIR}/references/" flags "${flags}")
-      string(REPLACE "/I..\\\\..\\\\references\\\\" "/I\"${PROJECT_SOURCE_DIR}/references/" flags "${flags}")
-      set_source_files_properties("${src}" PROPERTIES COMPILE_FLAGS "${flags}")
-    else()
-      # Default: GAME functions use /O2 /Gd (matches rebrew-project.toml)
-      set_source_files_properties("${src}" PROPERTIES COMPILE_FLAGS "/O2 /Gd")
-    endif()
-  endforeach()
-endfunction()
-
+# The flags a translation unit compiles with are the metadata's business: that
+# is what `rebrew test`/`verify`/`match` resolve, and what the numbers in every
+# file's notes were measured with.  Reading the `// CFLAGS:` annotation out of
+# the .c instead means a file whose annotation disagreed with its metadata
+# compiles something no tool ever measured: gm_AllocSpieler ran that way
+# (annotation /O2 /Gd /Oa, metadata /Oa /Ow, every note measured on the
+# metadata) and was 363 linked bytes behind its own notes.
+#
+# `rebrew cmake-flags` resolves every source through the same chain the tools
+# use and writes the table; this file only consumes it.  The metadata is a
+# configure dependency, so editing it reconfigures the build instead of
+# silently reusing baked COMPILE_FLAGS.
 if(MSVC_FOR_DECOMP AND TARGET server_dll)
-  apply_annotation_cflags(server_dll)
+  if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
+    set(REBREW_BIN "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
+  else()
+    find_program(REBREW_BIN rebrew REQUIRED)
+  endif()
+  set(_rebrew_sources_txt "${CMAKE_BINARY_DIR}/rebrew-sources.txt")
+  set(_rebrew_cflags_cmake "${CMAKE_BINARY_DIR}/rebrew-cflags.cmake")
+  file(WRITE "${_rebrew_sources_txt}" "")
+  foreach(_src IN LISTS SERVER_SOURCES)
+    if(NOT IS_ABSOLUTE "${_src}")
+      set(_abs "${PROJECT_SOURCE_DIR}/${_src}")
+    else()
+      set(_abs "${_src}")
+    endif()
+    file(RELATIVE_PATH _rel "${PROJECT_SOURCE_DIR}" "${_abs}")
+    file(APPEND "${_rebrew_sources_txt}" "${_rel}\n")
+  endforeach()
+  set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+               "${PROJECT_SOURCE_DIR}/src/rebrew-functions.toml")
+  execute_process(
+    COMMAND "${REBREW_BIN}" cmake-flags
+            --sources-file "${_rebrew_sources_txt}"
+            --output "${_rebrew_cflags_cmake}"
+    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
+    RESULT_VARIABLE _rebrew_flags_rc)
+  if(NOT _rebrew_flags_rc EQUAL 0)
+    message(FATAL_ERROR
+      "rebrew cmake-flags failed (rc=${_rebrew_flags_rc}). It refuses a file "
+      "whose functions resolve to different flags, because a translation unit "
+      "compiles with one flag set; split the file or align the metadata.")
+  endif()
+  include("${_rebrew_cflags_cmake}")
+  message(STATUS "rebrew: per-file CFLAGS resolved from src/rebrew-functions.toml")
 endif()
 
 # ---------------------------------------------------------------------------

@@ -265,7 +265,6 @@ extern char g_relationship_matrix_secondary[];
  * window.  The three open spans (this one, vfs_ReadCompressed and CrashDump)
  * only work as a set; see docs/TODO.md round 110.
  */
-// CFLAGS: /O2 /Gd
 /* /Oa is not implied by the toml cflags and is worth 11 bytes here: see the
  * pass-5 note above. */
 #pragma optimize("a", on)

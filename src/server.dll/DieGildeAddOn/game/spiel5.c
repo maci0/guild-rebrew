@@ -118,7 +118,6 @@ extern float g_const_neg_1_0;
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10017210
 // gm_SearchStruct
 

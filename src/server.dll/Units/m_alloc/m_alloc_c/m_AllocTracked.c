@@ -19,7 +19,6 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
  * tracking: records the source location string, updates group
  * counters, and maintains the allocation list. */
 
-// CFLAGS: /O2 /Gd /G6 /Oy-
 // FIXED 2026-09-13 (round 104): the group-list sentinel is an EXTERNAL symbol,
 // not a literal, and that is what the whole "unfolded null test" wall was.
 // The reference loads the root node's ADDRESS and then tests it:

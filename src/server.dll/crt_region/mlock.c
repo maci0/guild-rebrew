@@ -1,4 +1,3 @@
-// CFLAGS: /O1 /Oy- /Gd
 /* Full local replacement for LIBCMT:mlock.obj so the linker never pulls
  * LIBCMT's copy (which imports FatalAppExitA / IsBadWritePtr). */
 #include <windows.h>

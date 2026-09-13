@@ -48,7 +48,6 @@ typedef struct {
 /* Resets an alchemy entity to its initial state by zeroing
  * out its operational fields via memset. */
 
-// CFLAGS: /O2 /Gd
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
 // FUNCTION: SERVER 0x1000ca00

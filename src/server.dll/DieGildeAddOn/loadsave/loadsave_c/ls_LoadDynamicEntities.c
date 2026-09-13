@@ -1,4 +1,3 @@
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10012eb0
 #include "../../../Units/Error/error.h"
 #include "../../../Units/m_alloc/m_alloc.h"

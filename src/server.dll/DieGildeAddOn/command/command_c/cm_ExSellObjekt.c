@@ -91,7 +91,6 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29. */
 
 
-// CFLAGS: /O2 /Gd
 
 // SIZE 0x204
 struct SLogBuffer { unsigned int reserved; char text[512]; };

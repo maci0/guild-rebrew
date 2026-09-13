@@ -22,7 +22,6 @@ extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];
  * 2nd param stops zero-extension) and the sub/jns balance check all
  * match structurally. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000cb20
 // SIZE: 171
 

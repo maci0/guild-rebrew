@@ -260,7 +260,6 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * a byte match. */
 
 
-// CFLAGS: /Ox /Gd
 int __cdecl cm_ExProdObjekt(int msg, char* result)
 {
 	int quantity;

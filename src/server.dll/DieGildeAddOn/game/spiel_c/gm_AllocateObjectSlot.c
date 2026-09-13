@@ -2,7 +2,6 @@
  * first slot whose active flag is 0; return its address, or NULL once the
  * pool is exhausted (limit 0x5008 slots). */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100165a0
 
 #include <stdlib.h>

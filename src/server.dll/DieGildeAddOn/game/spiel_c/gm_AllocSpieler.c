@@ -98,7 +98,6 @@
  * configure time, so editing this line needs `cmake -S . -B build`, not just a
  * rebuild. */
 
-// CFLAGS: /O2 /Gd /Oa /Ow
 // FUNCTION: SERVER 0x10018850
 
 #include <stdlib.h>

@@ -23,7 +23,6 @@ extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
  * destination in ecx as the original does.  Folding the offset load
  * directly into `dst2 = entity + *(unsigned short*) src` swaps them. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x1000e7d0
 // SIZE: 256
 

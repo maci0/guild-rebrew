@@ -136,7 +136,6 @@
  * documented rule once the bytes no longer backed it.  See the BLOCKER
  * field (set via `rebrew blocker set 0x100174d0`) for the wall. */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x100174d0
 
 #include <stdio.h>

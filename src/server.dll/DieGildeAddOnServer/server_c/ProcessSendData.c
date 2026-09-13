@@ -1,4 +1,3 @@
-// CFLAGS: /O2 /Gd /Ow
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
 

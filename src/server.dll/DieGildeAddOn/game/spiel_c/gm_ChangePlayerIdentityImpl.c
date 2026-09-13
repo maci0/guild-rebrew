@@ -41,7 +41,6 @@
  * [esp+0x30] with two arguments already pushed), not the to_id parameter.
  */
 
-// CFLAGS: /O2 /Gd
 // FUNCTION: SERVER 0x10018530
 
 #include <stdlib.h>
