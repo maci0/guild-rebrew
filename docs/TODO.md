@@ -101,6 +101,45 @@ same-offset `.rdata` match is unchanged (81.39% -> 81.32%) because the region
 then has to be refilled by postlink's import-bookkeeping copy.  Cutting the blob
 is what turns it into bytes.
 
+**Round-114: round 113's plan does not work, and `/FORCE:MULTIPLE` is back on
+the table.**
+
+**MSVC6 will not put our literals in `.rdata`.**  Two measurements:
+
+- An *unreferenced* string literal is not emitted at all -- a TU containing
+  only `"runtime error ";` produces `.drectve`, `.text` and `.debug$F`, with no
+  `.rdata` and no `??_C@` symbol.
+- A *referenced* one goes to **`.data`**, not `.rdata`, under `/O2 /Gd /MT` with
+  `/Gf`, `/Gf /Gy` and `/GA` alike (a switch-bodied anchor emitting three
+  literals gives three `.data` sections of 15, 14 and 37 bytes).
+
+LIBCMT's own crt0msg strings are `.rdata` (they land at 0x10026724 in our
+build), so the CRT was built with a placement this toolchain will not reproduce
+from C.  That kills round 113's plan: re-emitting the 17 strings from a
+`// DATA: SERVER 0x10026110` TU would put them in `.data`, leave the `.rdata`
+gap at 0x10026110-0x10026395 unfilled, and shift every byte after it by 645 --
+which is worse, not better, because postlink patches by offset.
+
+**The duplicate therefore has to go through COMDAT selection, and
+`/FORCE:MULTIPLE` appears to be what defeats it.**  Both builds emit LIBCMT's
+copy *and* the split object's copy of the same `??_C@...` sections; a COMDAT
+collision should keep one.  Relinking without `/FORCE:MULTIPLE` (round 113)
+fails on exactly four *non-COMDAT* duplicates, all of them local
+reconstructions overriding a LIBCMT definition:
+
+```
+_putc           link_stubs.c        vs LIBCMT fputc.obj
+__amsg_exit     crt_region/amsg_exit.c  vs LIBCMT dllcrt0.obj
+__FF_MSGBANNER  crt_region/amsg_exit.c  vs LIBCMT crt0msg.obj
+___app_type     link_stubs.c / data_globals.c  vs LIBCMT dllcrt0.obj
+```
+
+Resolving those four -- each is a deliberate local reconstruction of code the
+reference has at a known VA -- and dropping `/FORCE:MULTIPLE` is the next
+experiment: it is the only remaining mechanism that can make the linker discard
+the duplicated string block, and it would do so in both the CMake build and the
+split set at once.
+
 **Round-111: position alignment is complete, and the asm constraint is
 audited.**
 
