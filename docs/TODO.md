@@ -21,7 +21,14 @@ game differing bytes                 6563 -> 6491
 ```
 
 One object, +10.3 points of whole-`.text` masked match and 72 bytes in the game
-region.  The three breaks that remain:
+region.  Note what the fix does to the drift *profile*: the four errors used to
+cancel (net `+16-16+16-32 = -16` entering the CRT), and correcting one leaves the
+net at `+16+0+16-32 = 0`.  The game region now reads drift `0 / +16 / +32 / 0`
+across `0x10002fc0 / 0x10008c80 / 0x1000efb0`, so the middle is *less* aligned
+locally than before while the whole binary is much better -- the CRT tail is
+where the bytes are, and 0 is the right number there.  Every one of the three
+that remains has to be fixed for the game region to be right as well.  The three
+breaks that remain:
 
 | function | ours | ref code | ours span | ref span | needs |
 |---|---|---|---|---|---|
