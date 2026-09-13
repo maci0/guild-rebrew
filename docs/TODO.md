@@ -4,14 +4,31 @@
 with the fixers applied the binary differs from the reference in `.text` only.**
 
 *The whole-binary measurement first*, because it re-frames everything else.
-Running postlink's three fixers on the vehicle outside the build (calling
-`rebrew.postlink.FIXERS` directly, i.e. bypassing `check_text_alignment`;
-`.scratch/probe_postlink.py`) yields a file that is **byte-identical to the
-reference** in the header block, `.rdata`, `.data` and `.reloc`, at the
-reference's exact 286,720 bytes.  Only `.text` differs: `0x328f` bytes of its
-`0x22846` VirtualSize, of which `0x326e` sit inside the 19 non-byte-matched
-functions and 33 outside.  Every non-`.text` part of the pipeline is therefore
-already converged, and 100% is exactly "the 19 functions".
+`scripts/postlink_residual.py` (new) applies the three fixers outside the build
+(calling `rebrew.postlink.FIXERS` directly, i.e. bypassing
+`check_text_alignment`) and diffs the result against the reference.  The output
+is **byte-identical to the reference** in the header block, `.rdata`, `.data` and
+`.reloc`, at the reference's exact 286,720 bytes.  Only `.text` differs:
+`0x328f` of its `0x22846` VirtualSize (9.15%), of which `0x326e` sit inside the
+19 non-byte-matched functions:
+
+```
+gm_AllocSpieler                    3343     vfs_OpenStream        263
+CrashDumpUnhandledExceptionFilter  1988     m_AllocTracked        256
+cm_ExSellObjekt                    1979     gm_FindNextFilteredEntity 232
+ls_LoadBuildingEntityState         1404     ahm_ExAllocAlchemist  217
+ServerMainThread                   1114     gm_CheckInventoryCapacity 102
+cm_ExCopyEntityData                 555     srv_LoadBuf            49
+gm_AllocGebaeude                    529     gm_ObjectsAvailble     25
+gv_ExAllocGraveyardWorker           465     cm_ExProdObjekt        21
+vfs_ReadCompressed                  348     cm_ProcessCommandQueue 15
+                                            gm_CalculateProductionValue 5
+outside the 19 functions             33
+```
+
+Every non-`.text` part of the pipeline is therefore already converged, and 100%
+is exactly "the 19 functions, `0x326e` bytes" (the 33 outside are their size
+tails, listed at the end of this section).
 
 That also calibrates the gate: re-measuring coverage *on the patched bytes*
 gives 89.7% (771 failing) against 88.6% on the link, because the operand map
