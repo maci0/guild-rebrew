@@ -88,7 +88,29 @@ leaves behind, and one of the two gives a broken layout.
 
 Two consequences, both worth acting on:
 
-**CORRECTION (round 202): the mechanism above is wrong.**  Diffing the two metadata
+**RESOLVED (round 203): there is no metadata bug.  The collapse was concurrent writes.**
+
+Both candidate mechanisms are now eliminated by direct inspection: the two metadata
+versions differ in **zero** `cflags` lines (only two `status` lines), and a forced
+reconfigure leaves `build/CMakeFiles/server_dll.dir/objects1.rsp` **byte-identical**
+(0 diff lines, one line either side).  So restoring the metadata changed nothing about
+what was compiled or in what order.
+
+The real cause is the one recorded further down this same round: **five agents were
+writing source files while that rebuild ran.**  A `cmake --build` compiles whatever is
+on disk at that instant, so it compiled a mixture of HEAD, mid-write and candidate
+states, and a single object of the wrong length moves the whole composition.  Nothing
+about the metadata file was involved, and the "re-run the gate afterwards" rule below
+was treating a symptom: the gate rebuilds *and* the agents had stopped by then.
+
+**Superseded correction, kept because the mistake is instructive.**  The round-202 text
+below asserted the mechanism was wrong and listed `objects1.rsp` regenerating as the
+prime candidate.  That was itself wrong.  Two hypotheses were retracted in two rounds
+for the same reason -- reasoning from a sequence of observations instead of doing the
+one direct check (diff the two files) that settles it.  This is the fifth such
+retraction in the campaign.
+
+**Original round-201 note, kept for the record but superseded by the above.**  Diffing the two metadata
 versions directly shows **zero** differing `cflags` lines -- only two `status` lines --
 so the reconfigure does NOT regenerate different `COMPILE_FLAGS`, and the collapse was
 not a flag change.  The observation stands (a full `cmake --build` after restoring the
