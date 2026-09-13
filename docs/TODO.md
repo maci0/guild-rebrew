@@ -4,6 +4,24 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-259 (2026-09-13): vfs proof-breakers exhausted (VN sees through both);
+GA confirms the wall a third way.**
+
+- Two proof-breaking spellings probed for the `current_char == *path_cursor`
+  CSE that blocks the head reload (base 390/460, obj 704): volatile-sourced
+  init+increment (`cc = *(volatile char*)p`) → 118/200, extra observable
+  traffic per iteration; reordered increment (`cc = p[1], p++`, same value,
+  unprovable shape?) → 106/180, back edge reshaped. c2's value numbering sees
+  through both — the `jne` runs increment→head with nothing clobbering al.
+  Both reverted. The proof is unbreakable from plain C: any proven-equal local
+  is reused at the head; any unproven one adds traffic. Wall.
+- `rebrew match` GA on the file (30 gens × 32, register focus, ~10 min
+  budget): best at generation 25 keeps `current_char` and the identical loop —
+  it never found the head fix either, scoring below HEAD. Third confirmation
+  (manual probes, GA, §52 direction) that this residue is not source-steerable.
+  No file change from the run (killed at the time cap; out-dir was /tmp).
+- Residue baseline unchanged: **9,209**.
+
 **Round-258 (2026-09-13): vfs_OpenStream head fix is locally exact but frees al
 into a global recoloring; the 7 outside-bytes are its +1-shifted jump table.**
 
