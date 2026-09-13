@@ -29,6 +29,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-311 (2026-09-13): FPU census — no unexamined site.**
+
+- FPU `**` lines per function: Spieler 187, Alchemist 13, CopyData 4,
+  Grave 3, rest 0. Alchemist's fmul-order + faddp sites carry exhaustive
+  headers (both operand orders, all accumulator spellings, volatile
+  variants — inert/regressed). Grave/CopyData FPU hunks are phase-shifted
+  scheduling (same ops both sides, different interleave). Spieler's are
+  the known interpolation scheduling divergence. No FPU site lacks a
+  verdict. No probe.
+- Residue baseline unchanged: **9,209**.
+
 **Round-310 (2026-09-13): independent re-verification of headline numbers.**
 
 - lint 187/187 0 errors 0 warnings · verify --full 281/283 · verify
