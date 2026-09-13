@@ -2,6 +2,42 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+**Round-252: a 0xc slot shift in `gm_AllocSpieler` is a slot-MAP difference, not a frame bug —
+and the frame is confirmed correct from the reference itself.**
+
+`instr_diff`'s kind multiset showed `mov R,[R+0x20]` x8 in the reference against
+`mov R,[R+0x2c]` in ours — a 0xc displacement difference, which is exactly the *signature* of
+the frame bug on `CrashDumpUnhandledExceptionFilter` (there a 0xc frame error shifts every
+`esp`-relative operand).  So it was worth asking whether `gm_AllocSpieler` — 31% of all
+remaining residue, closed by four passes — has the same root.
+
+It does not.  The reference's prologue at `0x10018850` is **byte-identical to our object's for
+the first 48 bytes**, `sub esp,0x41c` included:
+
+```
+10018850 81ec1c040000  sub esp,0x41c        <- ours: 81ec1c040000, identical
+10018856 53            push ebx
+10018857 55            push ebp
+10018858 33db          xor ebx,ebx
+1001885a 56            push esi
+1001885b 57            push edi
+1001885c 895c241c      mov [esp+0x1c],ebx    <- same slot
+10018860 b8a0580310    mov eax,0x100358a0
+10018865 668138ffff    cmp word ptr [eax],0xffff
+...
+```
+
+So the frame is `0x41c` on both sides and the earlier passes' note is right.  The `[esp+0x20]`
+against `[esp+0x2c]` difference is a **slot-map** difference — which slot each temporary was
+given — with the frame size unchanged.  That is precisely allocator Finding 55's case ("the
+frame can be right while the slot map is not"), and it is not fixable by adding or removing a
+local.  **Do not re-open `gm_AllocSpieler` looking for a frame bug.**
+
+The two leads from round 250 that remain live there are unaffected by this and are *not*
+frame-related: `add R,R` x4 against `lea R,[R+R]` x4, and the `[R+0x20]`/`[R+0x2c]` slot
+assignment itself (a colourer outcome).
+
+
 **Round-251: 9,280 -> 9,281, a deliberate +1 for correctness, and CrashDump re-opened with a
 plan.**
 
