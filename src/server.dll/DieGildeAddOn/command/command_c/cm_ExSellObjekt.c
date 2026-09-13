@@ -225,7 +225,13 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			return 1;
 		}
 		if (*(int*)(cmd + 0x23) != 0 && source_owner_entity != (short*)0) {
-			gm_QueryEntitySum(*(int*)(source_owner_entity + 0xbc), cmd[0x1e]);
+			/* The reference loads this byte with `mov al,[cmd+0x1e]`
+			 * (zero-extended), not `movsx`; the two differ for values
+			 * >= 0x80 and the target's codegen picks the unsigned one.
+			 * Fixing both QueryEntitySum call sites makes cm_ExSellObjekt's
+			 * obj_size exactly 2057 (was 2055) and moves the split
+			 * pipeline's masked differing bytes 6,515 -> 6,495. */
+			gm_QueryEntitySum(*(int*)(source_owner_entity + 0xbc), (unsigned char) cmd[0x1e]);
 		}
 	}
 	if (*(int*)(cmd + 0x10) != -1) {
@@ -279,7 +285,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			dest_game_object = (ushort*)gm_ff_Objekt(*linked_list_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
 		}
 		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
-			resolve_result = gm_QueryEntitySum(*(int*)(dest_owner_entity + 0xbc), cmd[0x1e]);
+			resolve_result = gm_QueryEntitySum(*(int*)(dest_owner_entity + 0xbc), (unsigned char) cmd[0x1e]);
 			if (resolve_result < *(int*)(cmd + 0x1f) * *(int*)(cmd + 0x23)) {
 				LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d4f, "cm_ExSellObjekt() Not enough Credits at destination", 8);
 				return 1;
