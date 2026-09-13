@@ -2,6 +2,44 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+**Round-253: frame audit across all 18 residue functions — `CrashDump` is the ONLY frame-size
+mismatch, and the frame lever is therefore exhausted everywhere else.**
+
+A wrong frame is the largest single lever class in this project: it makes *every* `esp`-relative
+operand wrong without changing any length, which is why it produces a huge residue with a
+satisfying single-cause explanation.  It was found and solved on `CrashDump` by an agent this
+session, so it was worth asking whether any other function has the same root.  Measured by
+disassembling the reference and the built image at each function's VA and comparing the
+prologue's `sub esp,N`:
+
+```
+gm_AllocSpieler                    0x41c / 0x41c   OK
+CrashDumpUnhandledExceptionFilter  0x280 / 0x28c   ** DIFFERS **
+cm_ExSellObjekt                    0x228 / 0x228   OK
+ls_LoadBuildingEntityState         0x0c  / 0x0c    OK
+cm_ExCopyEntityData                0x0c  / 0x0c    OK
+gv_ExAllocGraveyardWorker          0x10  / 0x10    OK
+ServerMainThread                   0x1e4 / 0x1e4   OK
+gm_AllocGebaeude                   0x410 / 0x410   OK
+vfs_OpenStream                     0x0c  / 0x0c    OK
+gm_FindNextFilteredEntity          (no frame -- pushes only)  OK
+ahm_ExAllocAlchemist               0x08  / 0x08    OK
+gm_CheckInventoryCapacity          0x20  / 0x20    OK
+m_AllocTracked                     0x118 / 0x118   OK
+srv_LoadBuf                        0x2a0 / 0x2a0   OK
+gm_ObjectsAvailble                 0x28  / 0x28    OK
+vfs_ReadCompressed                 0x08  / 0x08    OK
+cm_ExProdObjekt                    0x10  / 0x10    OK
+cm_ProcessCommandQueue             0x08  / 0x08    OK
+```
+
+**Consequence: for 17 of the 18 functions, the frame is not the defect and cannot be the
+fix.**  Do not spend probes trying to move a frame on any of them; a slot-map difference is a
+different thing (allocator Finding 55, and `gm_AllocSpieler` is the recorded instance).  The one
+frame-level opportunity left is `CrashDump`, where the faithful spelling gives `sub esp,0x280`
+exactly and is already in hand.
+
+
 **Round-252: a 0xc slot shift in `gm_AllocSpieler` is a slot-MAP difference, not a frame bug —
 and the frame is confirmed correct from the reference itself.**
 
