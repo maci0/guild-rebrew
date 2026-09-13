@@ -424,7 +424,45 @@
  * pre-existing note still holds).  The long-standing `d2` strcpy-destination
  * hoist is confirmed as the regression pattern: aligned instructions rise
  * 258 -> 269 but matched-reloc falls 671 -> 554 and the object grows
- * 1040 -> 1056 (real 1046). */
+ * 1040 -> 1056 (real 1046).
+ * 2026-09-13 pass (round 24x, 535 -> 541 on the honest `matched` metric, object
+ * still exactly 1040, real body 1040).  Two independent changes, each measured
+ * on this body:
+ *
+ *   - The citizen-count bump is the initializer form on a PLAIN read:
+ *     `int live = g_citizen_count + 1;` ... `g_citizen_count = live;`.  The
+ *     previous `int live = *(volatile int*) &g_citizen_count;` +
+ *     `g_citizen_count = live + 1;` made msvc6 sink the load to just before the
+ *     store (it emitted `mov ecx,[g_citizen_count]` after `mov word ptr
+ *     [ebp],si`), which is what pushed the whole field-init block out of place.
+ *     The initializer form hoists the `inc` and re-aligns 0x1c7-0x1f5.
+ *     535 -> 540.  `*(volatile int*)` reads and `live++` as a separate
+ *     statement both keep the sink (420 / 465); only the plain read works.
+ *   - `*(volatile int*) (grave + 0x10) = 0;` and
+ *     `*(volatile unsigned char*) (grave + 2) = 0x14;` pin two stores the
+ *     scheduler otherwise moves.  540 -> 541, and the object stays at 1040.
+ *
+ * Not kept, re-measured on this body (honest `matched` / object size):
+ * statement order F-S-M 532, S-F-M 534, grave+0x10 after both strcpys 532,
+ * `if (!slot) goto fail_ffff;` (collapses the two 0xffff epilogues) 246,
+ * re-basing the second memset on `(char*) 0x100358fc + off` 421 at object
+ * 1056 -- over the 1040 ceiling, so composition-breaking and still out,
+ * `count < 1` as the job-search guard 280 at object 1056 (this is the control
+ * that proves the `count <= j` guard form and the `sub esp,0x10` frame are
+ * load-bearing and already present), /G5 /G4 /Ot identical to HEAD, /G6 135
+ * at object 1056, /Os 25 at object 944.
+ *
+ * The first differing byte is still the `jle` displacement at +0x107: the
+ * reference's three `goto fail_ffff` jumps target the epilogue that follows
+ * the LogMessageInternal call, ours target the earlier `!slot` epilogue, so
+ * msvc6 treats the reference's shared block as a jump target and ours as a
+ * one-predecessor fall-through that it can schedule into (`mov eax,0xffff`
+ * hoisted to the block top, 8 bytes at 0x187).  Every spelling tried to flip
+ * that merge -- `if (slot == 0)`, an explicit `goto fail_ffff;` after the
+ * LogMessage call, the label moved to the end of the function, `goto
+ * fail_ffff` from the `!slot` test -- is either inert or collapses the
+ * epilogue pair.  It is the mechanism to beat.
+ */
 
 // FUNCTION: SERVER 0x10011bf0
 
@@ -540,7 +578,7 @@ fail_ffff:
 	 * matching the reference's edi/ecx traffic at 0x10011dd2-0x10011dff.
 	 * Bumping them in place emits a load-inc-store round trip each. */
 	{
-		int live = *(volatile int*) &g_citizen_count;
+		int live = g_citizen_count + 1;
 		int seq;
 		*(int*) (grave + 0x170) = (int) entity;
 		*(int*) (grave + 0x16c) = (int) entity;
@@ -549,9 +587,9 @@ fail_ffff:
 		g_next_object_id = seq + 1;
 		one = 1;
 		*(volatile unsigned short*) grave = (unsigned short) chosen;
-		g_citizen_count = live + 1;
+		g_citizen_count = live;
 	}
-	*(unsigned char*) (grave + 2) = 0x14;
+	*(volatile unsigned char*) (grave + 2) = 0x14;
 	*(int*) (grave + 0x1f0) = 0;
 	*(int*) (grave + 0x210) = -1;
 	*(unsigned char*) (grave + 0x215) = 0;
@@ -577,7 +615,7 @@ fail_ffff:
 			*(unsigned char*) (grave + 0x80 + n) = *(unsigned char*) ((char*) entry + 0x24 + n) >> 1;
 	}
 	*(unsigned char*) (grave + 9) = *(unsigned char*) ((char*) entry + 0x38);
-	*(int*) (grave + 0x10) = 0;
+	*(volatile int*) (grave + 0x10) = 0;
 	strcpy((char*) grave + 0x30, (char*) entry + 4);
 	strcpy((char*) grave + 0x40, (char*) *(void* volatile*) &entry + 0x14);
 	{
