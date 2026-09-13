@@ -1,5 +1,21 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-87c, `m_AllocTracked` correct C: 263 -> 265/658.**  The reconstruction
+read an uninitialised pointer: `(*prev_slot)->next = node;`, where `prev_slot`
+is declared and never assigned.  `prev_slot` only ever appeared to help because
+it made MSVC emit an extra `mov eax,[ecx]` dereference.  The reference emits a
+*single* indirection (`mov [ecx+0x24],edx`), which is exactly `prev->next =
+node;`.  `prev` is always assigned before use — the loop head is `node`
+initialised to the nonzero sentinel 0x117640a0, so `prev = *node_slot` executes
+at least once — so the replacement is both faster to match and correct.  The
+`prev_slot` declaration then removes cleanly (codegen-inert).
+
+This is worth generalising: **an alias that the source never assigns is a red
+flag, not a lever.**  The old note in that file called the unassigned spelling
+"load-bearing for the score"; it was load-bearing only for the extra
+instruction the extra dereference emitted, and the correct spelling pays the
+same byte back.
+
 **Round-87 net effect on the honest metric** (`scripts/text_match.py --drift
 auto`, after `scripts/split_link.sh`): the game region goes from 91.77% to
 **92.11% masked**, and its differing bytes from 6,851 to **6,537** — 314 bytes
@@ -14,7 +30,8 @@ gm_AllocGebaeude        39.1% -> 41.6%   73.5% masked
 
 The split `.text` also shortens from +0x2b2 to **+0x292** (0x22ad8 vs the
 reference's 0x22846).  Gate: 0 lint errors, 0 compile/link errors,
-`verify --full` 280/282.
+`verify --full` 280/282.  The 87c `m_AllocTracked` fix moves that function to
+265/658 (from 263, and from 182 at the start of the round).
 
 ## `gm_AllocGebaeude` — address-taken struct members force reloads (2026-09-13, round 87b)
 
