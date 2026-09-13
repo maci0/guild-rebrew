@@ -1,5 +1,130 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-104: the four position-alignment breaks, and what fixing them is worth.**
+
+Every remaining layout problem in the game region is **one object whose 16-byte
+COMDAT bucket differs from the reference's**.  `scripts/link_drift.py` on
+`build/probe.dll` shows the drift change exactly four times between
+`0x10001130` and `0x1001a0d0`, and each change is attributable to the object
+immediately before it:
+
+| function | ours | ref code | ours span | ref span | needs |
+|---|---|---|---|---|---|
+| `CrashDumpUnhandledExceptionFilter` @0x10002770 | 2137 | 2115 | 2144 | 2128 | 2113..2128 (shrink 9..24) |
+| `m_AllocTracked` @0x10006580 | 654 | 658 | 656 | 672 | 657..672 (grow 3..18) |
+| `vfs_ReadCompressed` @0x10008a90 | 497 | 492 | 512 | 496 | 481..496 (shrink 1..16) |
+| `cm_ExCopyEntityData` @0x1000ec00 | 880 | 901 | 880 | 912 | 897..912 (grow 17..32) |
+
+`span = align16(COMDAT length)`, and the span is exactly `next_ref_VA - ref_VA`
+for each of the four (`0x10002fc0-0x10002770 = 0x850`, `0x10006820-0x10006580 =
+0x2a0`, `0x10008c80-0x10008a90 = 0x1f0`, `0x1000ef90-0x1000ec00 = 0x390`), so
+**any** length inside the window re-aligns everything after it.  Read the
+`rebrew test` size as the code length and the window as the requirement: being
+4 bytes from the target's length is not a 4-byte problem, it is a 387-symbol
+problem.
+
+**What that is worth, measured.**  `.scratch/padobj.py` rewrites the four
+objects' `.text` raw size to the reference span (nop-padding three, truncating
+CrashDump) and `scripts/split_link.sh` relinks; `scripts/text_match.py --drift
+auto` then reports
+
+```
+                     whole .text masked        game masked   game differ
+baseline (spans wrong)   75459/141382 = 53.37%     92.08%        6563
+spans forced correct    115905/141382 = 81.98%     92.07%        6570
+```
+
+Both rows are measured against the same `db/verify_results.json` (the game
+region's baseline reads 92.16% / 6495 against the previous DB revision), so the
+0.01-point game wobble is noise and the +28.6 points of whole-`.text` is not.
+
+The gain is in the CRT region: the split objects there are placed `+16`
+early/late and the four sizes move the whole tail into place.  This is by a wide
+margin the largest single lever left, and it is why the four windows above are
+the priority over any further per-function content work.
+
+`.scratch/padobj.py` is a measurement tool, not a fix: nops are not the
+reference's bytes, and CrashDump's truncation cuts real code.  It answers "how
+much is alignment worth", and the answer is "far more than the content gaps".
+
+Fixed one at a time the payoff is smaller but still large: forcing only
+`vfs_ReadCompressed`'s span to 496 gives whole `.text` raw 13.64% -> 26.78% and
+masked 53.37% -> **61.14%** (`delta range -0x30..+0x2ec`).  So each of the four
+moves the CRT tail, and the four together are worth more than the sum of the
+parts -- the tail has to land on the reference's own offset, not merely closer
+to it.
+
+**Three attractive size fixes were measured and rejected.**
+
+1. `/Ge` lands `m_AllocTracked` on **exactly** real 658 / span 672.  It does it
+   by replacing the prologue's `sub esp,0x118` with `mov eax,0x118; call
+   __chkstk` -- 4 bytes of stack probe the reference does not have.  A size
+   match, not a content match: `rebrew test` drops 269 -> 177 positional and
+   the aligned diff loses `sub esp,0x118` itself.  Rejected as a size cheat.
+   (It is also one byte away from fixing `cm_ExCopyEntityData`: `/Ge` there is
+   real 887 / span 896, and the window starts at 897.)
+2. `#pragma optimize("a", on)` (or `/Oa`) lands `vfs_ReadCompressed` on real
+   489 / span 496 -- the reference bucket -- and would carry the +7.8 points
+   measured above on its own.  It is a content regression: the register-agnostic
+   alignment drops 176 matched / 7 target-only to **162 / 16**, and the target's
+   own tail keeps a value in `edx` across the byte stores where the /Oa form
+   spills it back to `[esp+0x10]`.  `/Oa` is not the reference's flag for this
+   file; it just happens to land the size.  Rejected, but flagged as the
+   cheapest honest-looking size lever if the content is ever fixed anyway.
+3. `msvc-6.0-sp5-pp` (the SP5 VC++ patch build in `rebrew-toolchains`) fixes
+   two of the four outright -- `vfs_ReadCompressed` 496 with 192 matched
+   (against 497/161) and `cm_ExCopyEntityData` 897 with 438 (against 880/525) --
+   and `m_AllocTracked` moves 654 -> 632, `CrashDump` 2137 -> 2073, so it is not
+   an overall win either.  It is **not usable on the build regardless**: the
+   metadata `toolchain` key is read by `rebrew test` only; CMake compiles the
+   whole target with the one `rebrew-cmake-cl` wrapper and takes per-file flags
+   from each source's `// CFLAGS:` line (`apply_annotation_cflags` in
+   `CMakeLists.txt`), so a per-file toolchain would move the measurement and not
+   the binary.  VC5 is far worse everywhere (`vfs_ReadCompressed` 514/136,
+   `m_AllocTracked` 655/230, `CrashDump` 2093/290) and SP6 SP1..SP6 are
+   byte-identical to SP6's own default.
+
+**The "pre-6.0 constant-caching codegen" reading is a false positive.**
+`rebrew toolchain detect` reports 5 constant-hoist sites (`mov ebx/ebp/esi/edi,
+small-imm32` followed within 32 bytes by `mov [mem], same-reg`), which is the
+signal that made `m_AllocTracked`'s notes conclude "the target was not built
+with the msvc6 SP6 codegen this project has".  Our own SP6 build reproduces 4 of
+the 5 at the same VAs (`0x10001415`, `0x10002439`, `0x100059f4` for the
+reference's `0x100059e4`, `0x10015982` for `0x10015992`); the fifth
+(`0x10022899`) is in the CRT region `probe.dll` does not reach.  Three of the
+five are in **zlib** (`references/zlib-1.1.3`, compiled by this build, not
+reversed), one is in `gm_Open` -- which is already RELOC-matched.  So SP6 is the
+right compiler and the conclusion in that file is unsupported; the remaining
+size gaps are ordinary codegen, not a wrong toolchain.
+
+**Round-104 dead ends, each measured on the current body and reverted.**
+
+- `cm_ExCopyEntityData`'s `0xffff` sentinel: a shared `ushort free_slot` local
+  feeding both slot-guard compares, and the same with the comparison operands
+  swapped, are both **byte-identical to the baseline** (obj 880, match 525).
+  msvc6 rematerialises the immediate at both sites, as pass 3 of that file's own
+  notes already recorded.
+- Its epilogue spelling: `return (int) 1;`, `return 1u;`, `return (char) 1;`,
+  and routing the src-scan-exhausted return through an assigned `src_slot` are
+  all byte-identical (880).  The reference's third epilogue is not reachable
+  through the return expression.
+- `vfs_ReadCompressed`: 17 structural spellings (bottom-test polarity, `!= 0`,
+  `(int)` cast, `for(;;)+break`, top-tested loop, `while (i != n)`, `(volatile
+  int)` on inflate, swapped accumulator order, `n <= 0x3fff` clamp) leave the
+  real size at 497.  Only `avail_out` top-tested (502) and `<= 0x3fff` (500)
+  move at all, both the wrong way.  The plateau is a local one.
+- `m_AllocTracked`: 12 `#pragma` spellings of the memset/strcpy/strcmp
+  intrinsic/function split plus `optimize("a"/"w")`; every one is 654 or
+  smaller (615, 579, 650 ...), never the 657..672 the window needs.  A wide flag
+  sweep (`/Gs` `/Gi` `/Gz` `/Gv` `/Gr` `/Ge` `/GF` `/GA` `/GD` `/Oi-` `/Ob2`
+  `/Op` `/Og` `/Ox` `/Zd` `/G3..G6` `/GB` `/Gy` `/Gs /GF`, and `/O1` `/Os` `/Od`
+  which crater) leaves 654/656 except `/Ge` (658, rejected above) and `/G5`
+  `/G4` `/G3` `/GB` (656).
+- `vfs_ReadCompressed` pragmas: `optimize("a", on)` is the only one that moves
+  the size into the window (489/496, rejected above); `"w" "g" "t" "y" "p" "q"
+  "i" "b" "e" "n" "z"` are byte-identical, `"s"` 369, `"g",off` 736;
+  `function`/`intrinsic(memcpy)` and `(memset)` are inert.
+
 **Round-103: tool fix, and the `0xffff` sentinel is the next content item.**
 
 The gap tool was reporting relocation displacements as content differences: an
