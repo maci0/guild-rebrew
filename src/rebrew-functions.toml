@@ -200,9 +200,9 @@ status = "RELOC"
 ["SERVER.0x10008e40"]
 size = 472
 cflags = "/O2 /Gd /Oy- /DREBREW_ALLOW_NAKED"
-status = "PROVEN"
-blocker = "alignment-prefixed memcpy prelude — same pure-C wall as m_PoolAlloc (docs/msvc6-allocator.md); naive rep movsd/movsb only — parked"
-blocker_delta = 335
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-13T00:45:43+00:00"
 
 ["SERVER.0x10009020"]
 size = 667

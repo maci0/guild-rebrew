@@ -1,5 +1,59 @@
 # Blockers — 100% Round-Trip Goal
 
+## `vfs_ReadData` is DONE — the shadow struct, not the prelude, was the wall (2026-09-13, round 87)
+
+Every previous pass on `vfs_ReadData` (0x10008e40) concluded the residual was
+the hand-written memcpy prelude, wrote the prelude as the sanctioned `__asm`
+block, and parked the function at 446 bytes on the theory that "EXACT is not
+attainable from C".  The prelude was never the problem.  The frame was.
+
+Two changes take it to **RELOC, 472/472 bytes, exact size**.
+
+**1. The `sh` shadow struct allocated a slot the target does not have.**
+The header had `struct { volatile int zp; volatile int tv; } sh;` plus
+`sh.tv = total;` and `sh.tv = (int) avail;`, added long ago because the
+target homes the cursor at `[ebp-0xc]` and the byte count at `[ebp-8]`.  But
+the copy prelude names `total` as an asm operand, and MSVC6 gives every asm
+operand a memory home — so `total` lands on `[ebp-8]` by itself, and that is
+*the same slot the target reuses*: the reference's `mov [ebp-8],esi` at
+0x10008f00 is simultaneously the count's home and its shadow.  The `tv`
+member therefore bought a second, redundant dword:
+
+```
+                          frame    matched
+baseline (sh.tv + volatile) 0x110    112/472
+sh.zp plain, no sh.tv       0x10c    338/472     <- frame now exact
+```
+
+`rebrew diff`'s candidate column had reported the frame as fine all along
+because it truncates the candidate to the target's length; the give-away is
+`sub esp, 0x110` against the target's `sub esp, 0x10c` in the raw object.
+
+**2. The gzip magic was read at byte width.**  The reference compares a
+zero-extended byte against the *dword* at 0x10029450/0x10029454
+(`xor ecx,ecx; mov cl,[ebx]; cmp ecx,[0x10029450]` at 0x10008f92, and the
+same shape at 0x10008fa4), and `vfs_OpenStream.c` reads those two constants
+as ints as well.  Reading them as bytes cost the last four bytes.  The
+operands are 0..255, so the forms are behaviour-identical — this was
+previously measured as *worse* (136 at obj 450) only because the stale
+0x110 frame was charging four bytes the compare could not repay.
+
+**Generalisable lesson.**  An `__asm` block is not neutral to the frame: every
+C variable named inside it is forced to memory, so it *supplies* homes the
+surrounding C may already be faking with `volatile` shadows.  When a function
+with a prelude is one dword over, look for a shadow variable that the asm
+operand has made redundant — `rebrew diff` will not show it, because it
+truncates the candidate and hides the prologue.
+
+**Lint note.**  `rebrew lint` now reports W020 on this file ("inline `__asm`
+block but STATUS claims RELOC"), taking the warning count 3 -> 4.  It is a
+false positive of exactly the kind the rule's own docstring describes: a
+block-fill `__asm` body inside a function that does byte-match.  The rule's
+only escape is a recorded `blocker`, and there is no blocker — `rebrew test`
+cleared it when the function matched (`match_percent: 100.0`, `delta: 0`,
+7 relocs).  Gate still passes: 0 lint errors, 0 compile/link errors,
+`verify --full` 280/282.
+
 ## The frame hole is an aggregate, not alignment — `cm_ExSellObjekt` (2026-09-13, round 86)
 
 `cm_ExSellObjekt` (0x1000d930) has been parked for months on a 4-byte frame

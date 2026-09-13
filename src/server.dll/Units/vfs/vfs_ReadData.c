@@ -5,14 +5,43 @@
  * raw stream (flags & 8 → fcn_10003960) or a plain file (fcn_1001aa6a).
  * The stream handle/cursor is the first dword of the stream+0x100 zone.
  *
- * STATUS: PROVEN — semantic equivalence verified with `rebrew prove`
+ * STATUS: RELOC — 472/472 bytes matched (2026-09-13, round 86).
+ *
+ * RESOLVED.  Everything below is the history of how the last 26 bytes were
+ * chased; the two changes that closed them are these.
+ *
+ * 1. The `sh` shadow struct was over-built.  It had a `volatile int tv`
+ *    member and a `volatile int zp`, plus `sh.tv = total` / `sh.tv = avail`
+ *    stores, added years ago to force the target's [ebp-0xc]/[ebp-8] spill
+ *    pair.  But the hand-written copy prelude names `total` as an asm
+ *    operand, and MSVC6 homes every asm operand, so `total` already gets
+ *    [ebp-8] on its own -- and it is the SAME slot the target reuses
+ *    (`mov [ebp-8],esi` at 0x10008f00 is both the count home and its shadow).
+ *    The shadow member therefore allocated a second, redundant slot and
+ *    pushed the whole frame from 0x10c to 0x110 (four extra bytes, every
+ *    [ebp-N] operand off by four, 112/472 matched).  Deleting `sh.tv` and its
+ *    two stores and dropping `volatile` from `zp` gives the target frame
+ *    exactly and 338/472.
+ *
+ * 2. The gzip-magic compare was read at byte width.  The reference compares
+ *    a zero-extended byte against the *dword* at 0x10029450/0x10029454
+ *    (`xor ecx,ecx; mov cl,[ebx]; cmp ecx,[0x10029450]` at 0x10008f92 and
+ *    0x10008fa4), and reads the two constants as ints in vfs_OpenStream.c too.
+ *    Reading them as bytes cost the last four bytes.  Both operands are
+ *    0..255, so the two forms are behaviour-identical.
+ *
+ * Everything below is retained as history.  The "EXACT is not attainable for
+ * this function from C" conclusion below was drawn against the stale prologue;
+ * with the frame correct the function is byte-exact after relocation masking.
+ *
+ * ---- historical notes ----
+ *
+ * STATUS was PROVEN — semantic equivalence verified with `rebrew prove`
  * (EAX return-value equivalence via Z3 symbolic execution; 2 original +
- * 2 compiled states).  Byte-match (EXACT) remains blocked by the MSVC6
- * memcpy codegen fixed point below, so SIZE_MISMATCH was resolved via the
- * symbolic-proof path instead of further codegen forcing.
+ * 2 compiled states) — while the byte match was still blocked.
  *
  * Frame layout: the target homes the stream+0x100 pointer at [ebp-0xc] and
- * the byte count at [ebp-8], giving a 0x10c prologue.  The `sh.zp` and
+ * the byte count at [ebp-8], giving a 0x10c prologue.  The `zp` and
  * `sh.tv` volatile shadows reproduce both spill slots and the frame size.  A
  * plain local, a plain pointer alias, and `volatile` on `zstrm`/`total`
  * directly all leave the frame at 0x108 (102/472).
@@ -21,7 +50,7 @@
  * volatile ints: separate scalars park the cursor at [ebp-8] and the count
  * at [ebp-0xc] (141/472, both slots swapped against the target), while the
  * struct pins the target's assignment and matches instruction 14 (142/472).
- * Only `sh.zp` volatile with a plain `sh.tv` collapses to 107 at 440 bytes,
+ * Only `zp` volatile with a plain `sh.tv` collapses to 107 at 440 bytes,
  * so both members need the qualifier.
  *
  * Byte-level blocker: the target expands memcpy(buf, *zstrm, total) with a
@@ -304,7 +333,7 @@
  * guards, an explicit `(flags & 8) != 0`, `sh.tv = total = size * count` as
  * one chained assignment, an unsigned cast on the memcpy count, and spilling
  * the memcpy source into the dead `count` parameter (both `count = *(int*)
- * sh.zp` forms), which is the slot the target itself uses at 0x10008f00.
+ * zp` forms), which is the slot the target itself uses at 0x10008f00.
  * Regressions: reading the 0x104 clamp through `zstrm + 4` instead of
  * `stream + 0x104` (71, obj 437), routing the inflate-arm 0x10c/0x110 stores
  * through `zstrm` (68, obj 435), routing the memcpy-tail 0x104/0x108 pair
@@ -331,15 +360,10 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 	char name[0x100];
 	int result;
 	char* zstrm;
-	/* One struct, not two scalars: the target homes the cursor pointer at
-	 * [ebp-0xc] and the byte count at [ebp-8], and only adjacent members
-	 * reproduce that pair. Two separate volatile ints put the cursor at
-	 * [ebp-8]. */
-	// SIZE 0x8
-	struct {
-		volatile int zp;
-		volatile int tv;
-	} sh;
+	/* The target homes the cursor pointer at [ebp-0xc] and the byte count
+	 * at [ebp-8].  The count's home comes from the copy prelude, which
+	 * names it as an asm operand; this local supplies the cursor's. */
+	int zp;
 	int total;
 	char flags;
 
@@ -352,18 +376,16 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 		goto done;
 	}
 	zstrm = stream + 0x100;
-	sh.zp = (int) zstrm;
+	zp = (int) zstrm;
 	if (*(int*) zstrm == 0 && !(flags & 0x20)) {
 		goto done;
 	}
 	total = size * count;
-	sh.tv = total;
 	if ((flags & 0x20) && !(flags & 8)) {
 		unsigned int avail;
 
 		avail = *(unsigned int*) (stream + 0x104);
 		if (avail < (unsigned int) total) {
-			sh.tv = (int) avail;
 			total = (int) avail;
 		}
 	}
@@ -378,14 +400,14 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 		if (flags & 8) {
 			*(char**) (stream + 0x10c) = buf;
 			*(int*) (stream + 0x110) = total;
-			inflate((void*) sh.zp, 2);
+			inflate((void*) zp, 2);
 			result = total - *(int*) (stream + 0x110);
 			goto done;
 		}
 		{
 			char* fsrc;
 
-			fsrc = *(char**) sh.zp;
+			fsrc = *(char**) zp;
 			/* The original's copy is the 24-byte hand-written alignment
 			 * prelude (docs/msvc6-allocator.md Finding 19): dest-align,
 			 * then dwords, then the remainder, with a short-count fallback.
@@ -409,7 +431,7 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 			}
 		}
 		result = total;
-		*(char**) sh.zp += total;
+		*(char**) zp += total;
 		{
 			int avail;
 			int consumed;
@@ -432,8 +454,8 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 			goto done;
 		}
 		*(unsigned char*) (stream + 0x13c) = (unsigned char) (flags & ~4);
-		if (*(unsigned char*) buf != *(unsigned char*) 0x10029450 ||
-		    *(unsigned char*) (buf + 1) != *(unsigned char*) 0x10029454) {
+		if ((unsigned int) *(unsigned char*) buf != *(unsigned int*) 0x10029450 ||
+		    (unsigned int) *(unsigned char*) (buf + 1) != *(unsigned int*) 0x10029454) {
 			goto done;
 		}
 		sprintf(name, "vfs: gz-compressed file (\"%s\") in zip found!", stream);
