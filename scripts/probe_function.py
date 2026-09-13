@@ -88,8 +88,15 @@ def metadata_cflags(va: int) -> str | None:
     `/G6 /Oy-` function with the `/O2 /Gd` fallback reports the wrong code.
     """
     text = (ROOT / "src/rebrew-functions.toml").read_text()
-    m = re.search(rf'\["SERVER\.0x{va:08x}"\]\n(?:.*\n)*?cflags\s*=\s*"([^"]*)"', text)
-    return m.group(1) if m else None
+    # The entry ends at the next `[` line: an unbounded scan walks into the NEXT
+    # function's entry, so a function with no cflags of its own silently
+    # inherited its neighbour's (measured: cm_ExSellObjekt compiled 2304 bytes
+    # instead of 2064 and scored 519 instead of 558).
+    m = re.search(rf'\["SERVER\.0x{va:08x}"\]\n((?:(?!\[).*\n)*)', text)
+    if not m:
+        return None
+    c = re.search(r'cflags\s*=\s*"([^"]*)"', m.group(1))
+    return c.group(1) if c else None
 
 
 def wanted_symbol(va: int) -> str | None:

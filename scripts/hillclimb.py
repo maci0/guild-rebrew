@@ -187,10 +187,13 @@ def is_decl(unit: str) -> bool:
 def target_size(va: str) -> int:
     """The reference function's size, from the same metadata probe reads."""
     text = (ROOT / "src/rebrew-functions.toml").read_text()
-    m = re.search(rf'\["SERVER\.0x{int(va, 0):08x}"\]\n(?:.*\n)*?size\s*=\s*(\d+)', text)
-    if not m:
+    # Bounded to the entry: `(?:.*\n)*?` runs past it into the next function
+    # when this one lacks the key (same fault as probe_function.metadata_cflags).
+    m = re.search(rf'\["SERVER\.0x{int(va, 0):08x}"\]\n((?:(?!\[).*\n)*)', text)
+    s = re.search(r'^size\s*=\s*(\d+)', m.group(1), re.M) if m else None
+    if not s:
         sys.exit("no metadata size for that VA")
-    return int(m.group(1))
+    return int(s.group(1))
 
 
 # What a statement writes (cast-stripped destination text, plus the base object

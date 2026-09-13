@@ -469,8 +469,9 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	 * reference order is slot[0]=0xffff before slot[4]=-1; both must be
 	 * volatile or MSVC6 dead-store-eliminates slot[0]=0xffff. */
 	minus_one = -1;
-	*(volatile int*) (g_slot_table + slot_index * 0x21c + 4) = minus_one;
 	*(volatile unsigned short*) (g_slot_table + slot_index * 0x21c) = 0xffff;
+	*(volatile int*) (g_slot_table + slot_index * 0x21c + 4) = minus_one;
+	memset((void*) (g_slot_table + slot_index * 0x21c + 0x5c), minus_one, 0x20);
 
 	slot = (char*) (g_slot_table + slot_index * 0x21c);
 
@@ -495,15 +496,14 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 		*(int*) (slot + 4) = seq;
 		g_next_object_id = seq + 1;
 	}
-	memset((void*) (g_slot_table + slot_index * 0x21c + 0x5c), minus_one, 0x20);
-	*(char*) (slot + 0x216) = 0;
 
 	*(int*) (slot + 0x1f0) = 0;
 	*(int*) (slot + 0x210) = -1;
 	*(char*) (slot + 0x215) = 0;
-	*(char*) (slot + 0x218) = (char) one;
+	*(char*) (slot + 0x216) = 0;
 	*(char*) (slot + 0x217) = 0;
 	*(int*) (slot + 0x1e4) = 0x3f800000;
+	*(char*) (slot + 0x218) = (char) one;
 	*(char*) (slot + 8) = 0x64;
 	/* The volatile read forces the reference's separate `mov ecx,[esp+0x1c]`
 	 * at 0x1000bf48 instead of reusing a register that already holds the

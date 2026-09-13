@@ -71,6 +71,36 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-160: two climbs had broken the code, and the probe had a flag bug.**
+
+10,964 -> 10,963 differing bytes -- the number barely moves, because the round
+was spent making the tree *correct* again and re-deriving what the buggy tool
+had produced.
+
+*A committed break.*  `vfs_ReadCompressed` had `s = *(VFS_INFLATE**)(handle +
+0x7c);` moved below five uses of `s`, so `if (s == 0)` tested a stale value and
+`s->avail_out` wrote through an unassigned pointer.  Re-climbing it under the
+corrected guards is not enough -- the climb only ever accepts improvements, it
+never undoes an inversion -- so the function was reverted to the revision before
+its climb.  A precise re-audit of every climbed function (same destination text,
+a plain scalar that the other unit mentions, or a write through a base with a
+variable index) found genuine hazards in exactly three: `vfs_ReadCompressed`
+(4), `ahm_ExAllocAlchemist` (1) and `cm_ExSellObjekt` (2); those stay reverted.
+`gv_ExAllocGraveyardWorker` and `gm_CheckInventoryCapacity` had none -- their
+flags came from the conservative rule firing on provably disjoint constant-offset
+stores -- so their climbs were restored, which is why the total still fell.
+
+*The probe was resolving flags from the wrong entry.*  `metadata_cflags` scanned
+`rebrew-functions.toml` with an unbounded `(?:.*\n)*?`, so a function with no
+`cflags` of its own inherited the **next** entry's: `cm_ExSellObjekt` compiled to
+2304 bytes and scored 519 instead of 2064 / 558.  Both this and
+`hillclimb.target_size` now stop at the next `[`.  Every measurement taken
+between the last round and this fix is suspect for cflags-less functions; the
+ones that mattered were re-measured.
+
+`ServerMainThread` was climbed against the positional metric for the first time
+-- 2060 -> 2145 object bytes, linked 501 -> 379, the round's only real gain.
+
 **Round-158/159: the climb's guards were checked against the wrong sequence.**
 
 10,996 -> 10,964 differing bytes, but the useful part is that three faults in
