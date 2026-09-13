@@ -54,6 +54,27 @@ cleared it when the function matched (`match_percent: 100.0`, `delta: 0`,
 7 relocs).  Gate still passes: 0 lint errors, 0 compile/link errors,
 `verify --full` 280/282.
 
+**Same lever, second site: `m_AllocTracked` (0x10006580), 182 -> 263 of 658.**
+The identical mistake was there.  Its `volatile unsigned int sz` and
+`volatile int nodev` were shadowing two spill slots, but the zero-fill
+prelude names `sz` as an asm operand, so MSVC6 homes it anyway — and the
+shadow was paying for a second, redundant dword.  Dropping `volatile` from
+both shadows took the frame 0x120 -> 0x11c; shrinking `buf[0x14]` back to
+`buf[0x10]` closed the last four and gave the target frame exactly:
+
+```
+target   sub esp,0x118   node [ebp-4]   size [ebp-8]   buf [ebp-0x18]
+ours     0x120  ->  0x11c  ->  0x118  (exact)
+matched  182    ->  257    ->  263  of 658  (rebrew test)
+```
+
+Note the older note in that file argued *for* `buf[0x14]` on the previous
+0x120 frame — it was compensating for the shadow's extra slot.  The 0x10
+buffer is the reference's real size, which means the reference has a latent
+16-byte buffer overflow when a tag's first ':' is at index >= 15
+(`strncpy(buf, tag, taglen)` is not capped by the `taglen >= 0x10` warning
+above it).  That is reproduced as-is; bug-compatibility is byte identity.
+
 ## The frame hole is an aggregate, not alignment — `cm_ExSellObjekt` (2026-09-13, round 86)
 
 `cm_ExSellObjekt` (0x1000d930) has been parked for months on a 4-byte frame
