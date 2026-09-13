@@ -71,6 +71,38 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-179: attribution, and a wrong commit caught by re-measuring.**
+
+Residue **9,762** (from 9,820).  The round's value is mostly methodological.
+
+*A per-function delta is only attribution when exactly one object changed.*  A
+CrashDump hunk was link-tested at "-58" (CrashDump 1962 -> 1918, gm_AllocSpieler
+2905 -> 2901, the trailing bytes 42 -> 32) and committed on that reading.  It was
+wrong: re-measuring the same source in the same composition gives **+56** on
+CrashDump (1918 -> 1974) and +66 overall.  The -58 came from the *other* objects in
+the composition — cm_ExSellObjekt's and gm_AllocSpieler's layout — because
+`postlink_residual` attributes differing bytes by reference VA, and every symbol
+after a changed object moves.  `linktest.sh` recompiles only the files named, so a
+single-file run is clean **provided no other object has changed since the last full
+build**; once an agent has edited a second file, the per-function table mixes both
+effects and cannot be read as attribution.  The correct procedure is one file at a
+time against a freshly rebuilt baseline, or a full rebuild before each batch.
+`880bbb54` reverts the bad commit.
+
+*And on CrashDump neither object metric is safe.*  Its agent measured three
+states with the linked result: goto-only 162 honest / 562 reloc -> linked -13;
+hoisted 153 / 541 -> -21; `c0beebd3` 212 / 586 -> -27.  The first two are
+anti-correlated with *both* metrics, which is the opposite of the 4/4 finding on
+the earlier four cases.  So the rule cannot be "rank by matched-reloc" — it is
+"link-test everything", and `matched-reloc` is only a way to order the queue.
+
+*Warning gate worth reusing.*  The same agent gated every candidate on (a) the
+matched pattern occurring exactly once, (b) the moved statement landing on the
+unconditional path, (c) object size unchanged, (d) **a fresh compile with no new
+warning**.  (d) caught its best-looking number of the session — moving
+`excCode = ...ExceptionCode;` below the dispatch scored 200 honest / 576 reloc, but
+cl emitted C4700 and the code tested an uninitialised slot.
+
 **Round-177/178: a fresh build directory could not be linked, and a gate run
 rewrites metadata it does not own.**
 
