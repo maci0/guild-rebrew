@@ -394,7 +394,16 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			rep stosb
 		}
 	}
-	if (g_stat2 < g_array_count) {
+	/* The guard is `g_stat2 < g_array_count`, but a plain spelling lets msvc6
+	 * fold one side into `cmp dword ptr [mem], reg` and read g_stat2 twice --
+	 * once inside the compare and again into edi for the slot loop.  The
+	 * reference loads *both* into registers first
+	 * (`mov edi,[g_stat2]; mov eax,[g_array_count]; cmp eax,edi` at
+	 * 0x10006755), which is section 8b's lever: a volatile read on the
+	 * operand that must stay in a register.  obj_size 649 -> 654 against the
+	 * reference's 658 and the split pipeline's masked differing bytes
+	 * 6,528 -> 6,515. */
+	if (g_stat2 < *(volatile int*) &g_array_count) {
 		node = (struct GroupNode*) nodev;
 		slot = (char*) g_array_ptr;
 		i = 0;
