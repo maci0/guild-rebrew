@@ -1,5 +1,35 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-136: the ~390 CRT entries fail on *data* operands, and that is the blob
+strategy's own chicken-and-egg.**
+
+Sampling the failing entries of `fcn.10020943` (28 of them) shows what they are:
+
+```
+off 0x1f95b in fcn.10020943   ref value 0x10034028   built 0x10000000
+off 0x1f9a7 in fcn.10020943   ref value 0x10035744   built 0x10000054
+off 0x1f9bf in fcn.10020943   ref value 0x100356e8   built 0x10000000
+```
+
+Every failing value is an address inside `.data` (`0x10027xxx…0x1003xxxx`), and
+the built slot holds either the image base (`0x10000000`, i.e. the symbol
+resolved to RVA 0) or another low address — because our `.data` symbols do not
+sit at the reference's offsets.  That is deliberate: `data_restore.c`'s blob is
+the reference's raw bytes *followed by* our own data, and `rebrew postlink`'s
+`data` fixer rewrites exactly these `.text` operands once it runs.  The
+coverage gate runs **before** the fixers, so entries the fixer would repair
+count as failures: ~390 of them, 5 points of the 8.7 the gate needs.
+
+Two consequences worth carrying forward:
+
+* placement is not the CRT half's problem — 228 of the 229 split objects sit at
+  their reference VA, only `1001e7d4_.text.obj` is off (by 8 bytes), and the
+  `.text` surplus (0x2b2) is extra *tail* content (defs/commons/thunks objects)
+  which postlink trims anyway;
+* so a `.data` layout that reproduces the reference's symbol offsets would be
+  worth ~5 points on its own, and it is the same problem the blob solves for
+  content — the two want different things from the same section.
+
 **Round-135: the coverage gap, itemised — 1,396 failing entries, ~1,000 of them
 in the 19 functions and ~390 in the CRT.**
 
