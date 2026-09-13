@@ -2956,3 +2956,23 @@ and moving it between locals moves the frame.
 This is the practical caution for the `volatile`-at-use-site lever generally: it works
 (section 71 of the shapes doc, and the round-143 `ls_` win), but it is *per variable*, so a
 sweep that qualifies "the same kind of thing" elsewhere will not transfer.
+
+**Amendment (round 248) — the dominant term in `matched`'s one-sided gap is REL32 *call*
+relocations, not DIR32 data addresses.**  Finding 59 above attributed the gap to msvc6
+relocating memory operands but not absolute immediates.  Measured on two more functions, the
+larger term is simpler: **every `call` to a local function carries a COFF `REL32` in our
+object, while the linked reference has no `.reloc` entry there at all** — so those four bytes
+per call can never be counted by `matched`, no matter what the source says.
+
+Measured from the object's relocation table against the reference's `.reloc`:
+
+| function | ours-only bytes | of which REL32 calls | reference-only bytes | `matched` ceiling |
+|---|---|---|---|---|
+| `ahm_ExAllocAlchemist` (0x1000bdf0) | 74 | 52 (13 calls) | 70 | 858 |
+| `vfs_OpenStream` (0x10009020) | 39 | 28 (7 calls) | 31 | 597 |
+| `srv_LoadBuf` (0x1000a570) | 100 | — | — | 701 |
+
+So on `ahm_ExAllocAlchemist` the ceiling (858) equals its *current* `matched-reloc`, i.e. the
+object already matches everything it can; and `vfs_OpenStream` has 207 bytes of headroom that
+no code edit will move.  **Read this as headroom, not as a target** — and compute it before
+deciding that a low `matched` means a large codegen error.

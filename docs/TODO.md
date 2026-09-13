@@ -2,6 +2,49 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+**Round-248 (later): five more functions closed with nothing found, and the two walls that
+explain it are now measured.**
+
+`vfs_OpenStream` (245) and `ahm_ExAllocAlchemist` (201) were worked to exhaustion and no
+candidate beat HEAD; both are back at HEAD with the FINAL copies byte-identical to it.  Their
+gap curves oscillate and return to 0 (distributed), and **both frames are excluded as the
+cause by measurement** — `vfs`'s `sub esp,0xc` with slots `[esp+0x13/0x14/0x18]` and
+`ahm`'s `sub esp,8` with `[esp/0x10/0x14/0x18/0x1c]` match the reference exactly.  So Cause 2
+(cause: frame value) is ruled out on both; the residue is instruction choice and schedule.
+
+Two walls worth not re-deriving:
+
+- **`#pragma optimize("a", on)` is a wall here, not section 44's load/store-reorder lever.**
+  Exact spelling (the pragma before the definition, `#pragma optimize("", on)` after) takes
+  `ahm` 714 -> 480 with COMDAT 1008 -> **1024** and `vfs` 390 -> **83** with COMDAT 704 -> 720.
+  Both leave the admissible span, so they fail on layout as well as score.  Section 44's lever
+  does not transfer.
+- **A store's *value* spelling cannot move its materialisation earlier.**
+  `*(volatile unsigned short*)(..) = (unsigned short) minus_one;` against `= 0xffff;` is
+  byte-identical on `ahm` — msvc6 constant-propagates the local and re-folds the immediate.
+  Only a *use* of the value creates the live range.
+
+**Corrected constraints, from one compile each:** `vfs_OpenStream` carries 5 relocations past
+its last `ret`, so the **real** length binds at 701 (Finding 56's intra-object row) — any
+real-body change moves its jump table and case map.  `ahm_ExAllocAlchemist` has none, so the
+padded band binds with **no lower bound**, and its real body is already exactly at the
+admissible 1008 — meaning shrinkage is free and any growth is composition-breaking.  The
+`ahm` file header's "obj exactly 1002" invariant is over-strict.
+
+**And the `matched` ceiling is mostly REL32 calls, not data addresses** (allocator Finding
+59's amendment): every local `call` carries a COFF `REL32` that the linked reference does not
+relocate, so four bytes per call can never count.  `ahm`: 52 of its 74 ours-only bytes are 13
+calls, ceiling 858 = its current `matched-reloc`, i.e. **it already matches everything it
+can**.  `vfs`: 207 bytes of headroom no code edit will move.
+
+**Net effect on strategy:** five functions closed this round at a measured local optimum, all
+on allocator/scheduler ties.  With `gm_AllocSpieler`, `ls_LoadBuildingEntityState`,
+`cm_ExSellObjekt`, `cm_ExCopyEntityData`, `gv_ExAllocGraveyardWorker`, `gm_AllocGebaeude` and
+these five all closed, the live hope is `CrashDumpUnhandledExceptionFilter` (1,667, agent still
+working its frame) and the mid-size pair.  Everything else needs a *new* kind of lever, not
+another sweep.
+
+
 **Round-248: the small-function residues are register-allocation ties, and that is the
 general shape of what is left.**
 
