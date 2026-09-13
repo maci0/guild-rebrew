@@ -4,6 +4,20 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-280 (2026-09-13): round-trip run (first this session) + rebrew error
+fix.**
+
+- `rebrew round-trip --output /tmp/server.reasm.dll`: 227 spliced, 17
+  proven-skipped (by design), mismatches are the known CRT-name drift class
+  (`_fread` wrapper, `__srand` vs `__srand_impl`) — no game-code splice
+  failure. Byte coverage: 34.5% spliced / 54.4% passthrough. `match: false`
+  (expected: PROVEN + residue rows cannot splice).
+- Real rebrew bug fixed in the checkout (`88b4364`): default output next to
+  a read-only original died with bare errno 13 on the sibling temp.
+  `atomic_write_bytes` now raises an actionable message (directory
+  read-only → pass explicit output). 235 related tests pass.
+- Residue baseline unchanged: **9,209**.
+
 **Round-279 (2026-09-13): layout half verified; .scratch trawl negative.**
 
 - `rebrew verify --whole-binary`: sections/exports/imports/rsrc/headers
