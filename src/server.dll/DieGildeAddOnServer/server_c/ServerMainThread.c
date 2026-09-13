@@ -457,7 +457,7 @@ send_start_commands:
 						total_size = *(unsigned int*) 0x101deac0;
 						cmd_buffer_primary[0] = 8;
 						cmd_buffer_primary[3] = 0xff;
-						*(unsigned int*) (cmd_buffer_primary + 4) = sent_bytes;
+						*(volatile unsigned int*) (cmd_buffer_primary + 4) = sent_bytes;
 						*(unsigned int*) (cmd_buffer_primary + 0xc) = 0;
 						*(unsigned int*) (cmd_buffer_primary + 0x10) = total_size;
 						if (cm_QueuePlayerCommand(player_slot, cmd_buffer_primary) == -1) {
