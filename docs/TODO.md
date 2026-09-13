@@ -1,5 +1,53 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-117: the CRT half is not where the remaining failure is, and the game
+half is uniformly allocator-bound.**
+
+**The CRT's residual byte differences are address operands, not code.**  Taking
+the worst untracked window (text offset 0x1f000, VA 0x10020000, 144 invalid map
+entries) and listing its differing runs: 133 runs, 389 bytes, and nearly every
+one is a 4-byte absolute address -- `ref 4c647611` (0x1176644c) against
+`built 60a90310` (0x1003a960), or `80757611` against `2c990310`, repeating at a
+dozen sites.  Those are relocation slots whose value differs because our data
+placement differs, which is exactly what postlink's `data` fixer rewrites and
+what `_map_coverage` accepts as "a pointer into the reference's .rdata/.data
+span".  So a strict same-value comparison (`.scratch/mapcov.py`) overstates the
+CRT failure; the authoritative number stays postlink's 81.2%.
+
+**`ServerMainThread`'s residual, itemised.**  627 instructions on both sides,
+618 matched register-agnostically, 11 runs -- and every run is one of the four
+known classes:
+
+```
+T 0x100097fb mov [r+0x1c], r          vs  mov [r+0x1c], 0xffffffff   -1 caching
+T 0x1000984b lea r,[r+r]              vs  add r,r                    flags/lea
+T 0x100098e3 je <head>                vs  jne <exit>                 branch polarity
+T 0x10009baf mov [r+0x24],r / [r+0x20] / [r+0x30]
+                                      vs  [r+0x28] / [r+0x2c]        frame offsets
+```
+
+which is what the file's own note already records ("the wait-loop back edge
+(`je <head>` against our `jne <exit>`)", "three sync-packet store placements").
+
+**`gm_AllocSpieler`'s 12 `and r, 0xffff` sites are the same zero-register wall.**
+The register-agnostic gap counts six `and r,0xffff` in ours against four
+`xor r,r` in the target.  Reading the candidate disassembly, the shape is
+
+```
+0x8c9  mov  ax, word ptr [ebp]      ; a 16-bit local read
+0x8cd  and  eax, 0xffff             ; zero-extend the upper half
+```
+
+where the reference zeroes a register once and uses `mov reg16, [mem]` -- the
+constant-caching/zero-register behaviour `m_AllocTracked` records as
+unreachable from C, and the reason `ls_LoadBuildingEntityState` stays one byte
+long (round 116).
+
+Nothing in the three classes is source-steerable on the evidence so far: the
+one that *was* (cm_ExCopyEntityData's clamp arms, round 110) flipped because the
+store block was reached from several duplicated branches, and none of these
+functions has that shape.
+
 **Round-116: with the CRT order and the `.rdata` duplicate settled, postlink's
 gate is now bound by the game region.**
 
