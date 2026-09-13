@@ -4,6 +4,23 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-269 (2026-09-13): flag-sweep audit on the four unswept
+flag-sensitive functions; heuristic over-promises.**
+
+- `rebrew diff` reports `flag_sensitive: true` on 7 functions; SMT,
+  ExProdObjekt and Spieler have documented sweeps, the other four
+  (Graveyard, LoadBuf, Objects, ReadCompressed) did not. Ran
+  `rebrew match --flag-sweep-only --tier quick` (192 combos) on each:
+  all scores UNIFORM (no winner, no EXACT/RELOC) on every file, tree
+  untouched. Zero variance across 192 combos = no gradient to follow;
+  `targeted`+ tiers not run (principled stop, not budget).
+- Corollary for the docs: the `flag_sensitive` heuristic cannot distinguish
+  allocator-tie residue (mnemonic match 86-99%, structural ratio 1-42%)
+  from flag-responsive shape. On this tree it fires on pure register walls
+  (Objects: 99.1% mnemonics). Treat it as a necessary, not sufficient,
+  condition — require score variance in `quick` before spending `targeted`.
+- Residue baseline unchanged: **9,209**.
+
 **Round-268 (2026-09-13): TU theory retired (no LTO in c2); triple-rotation
 second probe inert.**
 
