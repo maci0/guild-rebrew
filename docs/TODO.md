@@ -71,6 +71,44 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-201: restoring the metadata file changes the compile flags, and can break
+the composition.**
+
+Residue **9,533**, composition at 246/319, gate green.
+
+The round went sideways and the detour is worth recording.  After a gate run I restored
+`src/rebrew-functions.toml` to HEAD (the correct-looking thing, since the gate rewrites
+it -- see round 178).  The next `cmake --build` then produced a composition with
+**0 of 319 symbols at their reference VA and 37% of `.text` differing**.  The cause:
+`CMakeLists.txt` has the metadata on `CMAKE_CONFIGURE_DEPENDS`, `rebrew cmake-flags`
+reads it at *configure* time, and `git checkout` bumps the file's mtime -- so restoring
+it triggers a reconfigure that regenerates every file's `COMPILE_FLAGS`.  The metadata
+HEAD carries therefore does not produce the same objects as the metadata a gate run
+leaves behind, and one of the two gives a broken layout.
+
+Two consequences, both worth acting on:
+
+- **Do not `git checkout` the metadata file as a reflex.**  It is not a neutral
+  restore; it is a build-configuration change.  Re-run the gate afterwards, or leave
+  the gate's version in place.
+- **The committed metadata and the good build are not obviously the same thing**, which
+  means a fresh clone may not reproduce the residue at all.  That is a reproducibility
+  bug at least as serious as the two `linktest.sh` guards fixed in rounds 180 and 196,
+  and it needs a clean-clone experiment to settle: the flags `rebrew cmake-flags`
+  emits from HEAD's metadata versus from the gate-written one, and which of the two the
+  last verified 9,533 came from.
+
+Recovery that worked: re-run `scripts/gate.sh` (which rebuilds and re-writes the
+metadata), then `scripts/split_link.sh` and `postlink_residual.py --write`.  That
+restored 246/319 and gave 9,533 -- better than the 9,573 before the round, because a
+`gm_AllocSpieler` candidate is in the working tree.
+
+**Concurrency warning.**  `gm_AllocSpieler.c` had two agents on it at once (one of them
+mine, from the round-199 fan-out, and one from the round-193 fan-out that had never
+stopped).  Both reported seeing the file change under them.  Two writers on one file
+wastes both agents' work and corrupts the baseline; the fan-out needs to track which
+agent owns which file, not just that assignments are disjoint.
+
 **Round-190: gm_AllocSpieler's biggest segment delta is a scheduler hoist, not a
 statement order.**
 
