@@ -71,6 +71,50 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-177/178: a fresh build directory could not be linked, and a gate run
+rewrites metadata it does not own.**
+
+Residue **9,820** (from 10,023).  Two `rebrew` bugs found and one fixed.
+
+*A fresh `build/` could never complete its first link.*  `scripts/pad_short_functions.py`
+read `build/split_poc.map` unconditionally, but that map is written by the split
+link itself (`/MAP:split_poc.map`, line 192 of `split_link.sh`) and the pad step
+runs *before* it — so on a clean tree it raised `FileNotFoundError` every run and
+the composition could not be bootstrapped at all.  It now reports and returns no
+pads on the first run; the map exists from then on and the next run pads as usual.
+This is what made a clean reconfigure look unrecoverable for a whole round.
+
+*Reconfiguring from scratch also needs the toolchain file.*  `cmake -S . -B build
+-DREBREW_DEBUG_INFO=OFF` — the form `AGENTS.md` documents — configures against a
+cache holding a native compiler and silently falls back to it: `MSVC for
+decompilation: FALSE`, then `fatal error: windows.h: No such file or directory`
+and no `objects1.rsp`, so `split_link.sh` cannot run.  The working invocation is
+
+```
+cmake -S . -B build --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake \
+      -DCMAKE_BUILD_TYPE=Release -DREBREW_DEBUG_INFO=OFF
+```
+
+**`rebrew verify` rewrites STATUS on entries that never claimed PROVEN.**  The gate
+runs `rebrew verify --full`, and one run demoted `["SERVER.0x10018850"]` from
+`SIZE_MISMATCH` to `STUB` and stamped `updated_by = "verify"` — a status the entry
+never held a claim to.  Two write sites in `verify.py`:
+`~line 1004` (`update_statuses_batch`, gated on `stale_proven` from `proven_vas`,
+which is built from entries whose status *is* `PROVEN`) and `~line 1794`
+(`should_promote_status(current_status, status)`).  Since the entry was
+`SIZE_MISMATCH` it should have been in neither set, so the lattice or the caller is
+treating `SIZE_MISMATCH -> STUB` as a promotion.  Not fixed here — a correct fix
+needs the lattice's intent and rebrew's own suite (6,503 tests) to validate — and
+the metadata was reverted.  **Every gate run will rewrite it again until this is
+fixed.**
+
+*CrashDump -27* (1989 -> 1962, net -23 with a +4 knock-on in the bytes after the
+function, which are its own jump table/byte map).  The hunk moves `nFrames = 0x800`
+up to the date-write block — a move, not a deletion: the initialiser is still there
+and still precedes every use — and adds two redundant stores (`frameInfo[1]` twice,
+`eip = pCtx->Eip` before the `unknown_exc` label) that match the reference's
+emission.  Both are semantically inert.
+
 **Round-174: the fan-out repeated with the ranking metric corrected, and the
 validation cycle made a command.**
 
