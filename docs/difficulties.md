@@ -236,6 +236,18 @@ These cost as much as the codegen walls, and most of them were learned by being 
    after a bare build means the artifact is simply gone.
 8. **`rebrew verify --full` rewrites `src/rebrew-functions.toml`** (it demotes `SIZE_MISMATCH` to
    `STUB`) and the file is mode 444, so restoring it needs `chmod u+w` first.
+9. **Three audit shapes that generate only false positives.**
+   - Naive same-mnemonic immediate comparison across a diff finds aligner
+     crossover (both sides contain both values in different interleave:
+     `cmp cl,2/6`, `shl 4/8`, push-constant runs). Without control-flow
+     awareness it cannot distinguish a constant bug from a phase shift.
+   - Polarity-pair text comparison is void: `rebrew diff` prints branch
+     targets as relative displacements, so equal strings are coincidence.
+   - Cross-image VA comparison is valid only for identical layouts. Byte-
+     decoding branch targets on both sides and comparing numerically
+     "found" three same-target polarity pairs; ground truth showed each
+     side's VA holds different code. Never compare addresses across two
+     differently-laid-out binaries.
 
 ---
 
