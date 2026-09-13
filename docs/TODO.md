@@ -1,5 +1,94 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-106: the CRT member set, and why `.text` size parity is a trap.**
+
+**The CMake link is missing 26 LIBCMT members the reference has.**  Joining
+`build/probe2.map` (a `/MAP` link of the current objects) against
+`build/split_poc/map_full.json` on member name gives 93 members in our link, 116
+in the reference, and 26 of the reference's absent.  Fifteen are absent as
+*symbols*, not merely as member names -- the rest are provided by the
+`crt_region/` local definitions rather than the library:
+
+```
+_strcspn _strpbrk _stricmp _strnicmp _tolower _memmove __mbscat _ecvt _strdup
+_fptostr _strgtold12 _atodbl _cfltcvt _controlfp __mbsdup
+```
+
+All but the last five are public in the toolchain's own `LIBCMT.lib`.  The
+reference also has `mlock.obj`, `sbheap.obj`, `cprintf.obj`, `wincrt0.obj`,
+`wwincrt0.obj`, `fpinit.obj`, `crtmbox.obj`, `popen.obj`, `wpopen.obj`,
+`fgetchar.obj`, `fgetwchr.obj` and `cwprintf.obj` whose symbols our link *does*
+define, from `src/server.dll/crt_region/*.c`.  Our link has three members the
+reference does not: `strcat.obj`, `strdup.obj`, `winxfltr.obj`.
+
+**Forcing them in fixes the size and nothing else.**  `/INCLUDE:` is already the
+project's mechanism for this (eight directives in `CMakeLists.txt`), so the
+marginal cost of each missing member was measured by relinking with one
+directive at a time:
+
+```
+baseline                0x223c6              _memmove   0x22706  (+832)
+_strcspn   0x22406 (+64)   _strpbrk  0x22406 (+64)   __mbscat 0x224b6 (+240)
+_strdup    0x223d0 (+10)   _tolower  0x22506 (+320)  _stricmp 0x225e2 (+540)
+_strnicmp  0x22613 (+589)  _ecvt     0x22855 (+1167) reference      0x22846
+```
+
+`_memmove` + `_tolower` is exactly `+832 +320 = +1152`, and the link then
+reports **`.text` 0x22846 -- the reference's size to the byte**.  It is worth
+nothing:
+
+```
+                       .text      same-offset raw match   drift at __CRT_INIT
+baseline (probe2.dll)  0x223c6    46644/140230 = 33.26%       --
++_memmove +_tolower    0x22846    46697/141382 = 33.03%      +9516
+```
+
+The raw match *falls*, and `__CRT_INIT` then sits 9516 bytes after its reference
+VA.  Size parity is not layout parity: what is wrong in the CRT region is the
+member **order**, and `/INCLUDE` cannot steer it -- the linker appends a forced
+member in the library's own index order, not in the order the directives appear.
+Only an explicit, ordered object list can, which is what `scripts/split_link.sh`
+builds and why its `.text` is +674 with the members roughly in place instead of
+scrambled.  Do not chase `.text` size here; chase the order.
+
+Two smaller notes from the same link: `/INCLUDE:__strdup` in `CMakeLists.txt`
+resolves nothing (the public symbol is `_strdup`; the member's alias is
+`__mbsdup`), so that directive is a no-op, measured at +10 bytes when corrected;
+and `strcat.obj` in our link against `mbscat.obj` in the reference is the same
+LIBCMT-version rename as `strdup.obj` / `mbsdup.obj`.
+
+**The honest per-function metric, for the record.**  `scripts/align_match.py`
+(alignment-corrected, so one inserted instruction does not desynchronise the
+count) ranks the non-exact functions:
+
+```
+ cm_ExProdObjekt            354 tgt / 369 cand   329 identical   92.9%
+ ls_LoadBuildingEntityState 499 / 495            443             88.8%
+ cm_ProcessCommandQueue     205 / 204            181             88.3%
+ gm_CheckInventoryCapacity  138 / 142            121             87.7%
+ ServerMainThread           627 / 641            545             86.9%
+ gm_ObjectsAvailble         229 / 235            197             86.0%
+ gm_CalculateProductionValue 123 / 127           102             82.9%
+ vfs_ReadCompressed         200 / 216            158             79.0%
+ cm_ExCopyEntityData        249 / 239            192             77.1%
+ ahm_ExAllocAlchemist       286 / 293            219             76.6%
+```
+
+The top of that table is *one instruction out of place*, not missing code.
+`cm_ExProdObjekt`'s entire residual (`scripts/regdiff2.py`: 351/354 matched,
+3 runs) is a three-instruction rotation -- the target loads `g_unknown_1de450`
+into edx *above* the volatile `loop_count` store, ours sinks it below.  Four
+spellings were compiled and are byte-identical at obj 993: splitting the load
+onto its own line above the store (`recipe_shift = g_unknown_1de450;`), the same
+through a `char* gsave` temp, moving the whole `recipe_shift` assignment above
+the store, and the baseline.  The volatile store is the scheduling barrier and
+the load cannot be hoisted across it from C -- the conclusion the file's own
+pass-7 note reaches from the other side (hoisting the *whole* address
+computation clears the 14 bytes but sinks the store past `lea edi,[eax+0x26]`,
+net 966).  `gm_CalculateProductionValue` is the same shape one slot wide:
+`cmp byte ptr [esi],0x17` interleaved into the x87 sequence, ours one
+instruction earlier, 122/123 matched.
+
 **Round-105: the three open spans must land together, and one of them is a
 compiler-phase difference.**
 
