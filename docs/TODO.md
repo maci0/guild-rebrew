@@ -4,6 +4,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-275 (2026-09-13): ExSell reuse-permutation deduction.**
+
+- The spill-slot permutation is NOT downstream of the out-param reuse: the
+  reference reuses the source's `resolved_dynamic` slot too and still gets
+  its own permutation. Recorded in the file header (comment-only, obj still
+  2055). Do not chase the permutation through the out-params; the eleven
+  initializer rotations already cover the homes axis.
+- Residue baseline unchanged: **9,209**.
+
 **Round-274 (2026-09-13): six-scout fan-out, 12 probes, all reverted.**
 
 - E (LoadBuf): byte-offset guard spelling + explicit memcpy-src local —

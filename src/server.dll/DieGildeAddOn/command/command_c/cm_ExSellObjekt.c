@@ -89,6 +89,12 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * resolved_dynamic untouched and made branch 2 test the wrong entity (real
  * semantic bug; the old code failed symbolic proving with EAX=1 vs 0).
  *
+ * Deduction 2026-09-13: the spill-slot permutation is NOT downstream of
+ * this reuse — the reference reuses the same slot and still gets its own
+ * permutation.  The permutation comes from the global slot assignment
+ * (other locals' homes), which eleven initializer rotations left
+ * byte-identical.  Do not chase the permutation through the out-params.
+ *
  * Byte-level: still SIZE_MISMATCH (obj 2055 vs target 2057) — the residual
  * deltas are the tail-merge shape (candidate inlines the two error tails;
  * reference shares one tail at 0x1000e00e), the case-block order, and the
