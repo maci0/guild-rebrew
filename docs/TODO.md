@@ -4,6 +4,20 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-265 (2026-09-13): ReadCompressed clamp diagnosed as c2 tail-duplication;
+fused assign-test probed and reverted.**
+
+- The `mov edi,eax; test edi,edi` vs `test eax,eax; mov edi,eax` hunk: c2
+  tail-duplicates the `if (i == 0)` test into its two predecessors — the
+  `i == 0x4000` copy folds away on the constant (no branch needed) and the
+  `i == n` copy tests eax. The reference keeps the join (materialize + test
+  the joined value). Probe: fuse as `if ((i = n) == 0)` — c2 still tests the
+  source first (448/468, aligned 191, identical metrics). Reverted. Defeating
+  the duplication needs a shape where duplicating is unprofitable; the
+  3-epilogue tail rules out result+goto. Nobody has found it; the 4 bytes
+  stand.
+- Residue baseline unchanged: **9,209**.
+
 **Round-264 (2026-09-13): link lever retired; matrix-clamp precedent probed.**
 
 - Link-level hypotheses measured and retired: no byte-identical function
