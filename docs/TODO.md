@@ -4,6 +4,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-286 (2026-09-13): outline hypothesis retired by coverage.**
+
+- Considered: residue as inlined blocks the reference outlined into
+  helpers. Retired without a probe: coverage is 565/565 (100%) — every
+  function in the binary is accounted for and reversed, so no absorbed
+  helper exists anywhere. Spot-checked PCQ's neighborhood
+  (`list_unlink_relink`, `LogWinsockError`, case labels): all present.
+  An outlined helper would be a 566th function; there isn't one.
+- Residue baseline unchanged: **9,209**.
+
 **Round-285 (2026-09-13): doc-freshness audit, two stale claims fixed.**
 
 - `cm_ExSellObjekt.c`: "best-effort 392/2057" predated the frame fix;
