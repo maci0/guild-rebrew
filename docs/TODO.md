@@ -29,8 +29,8 @@ wholesale; the pointer array in the new TU exists only to reference them
 without adding a `.text` function, and `data_restore.c`'s blob was left as-is
 because the section still ends inside the `(0xd000, 0xe000]` band.
 
-**Still not folded, and the remaining `.rdata` prefix surplus is now 0x178**
-(the import directory sits at `0x2780` where the reference has `0x2608`; the
+**Still not folded, and the remaining `.rdata` prefix surplus is now 0x170**
+(the import directory sits at `0x2778` where the reference has `0x2608`; the
 gate wants the region between the IAT and the import directory to be exactly
 `0x2468` bytes *and* byte-identical):
 
