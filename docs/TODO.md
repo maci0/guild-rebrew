@@ -65,6 +65,42 @@ reference's offsets, in the gap the blob then leaves.  That is the concrete next
 step on the `.rdata` half; the blob is one contiguous array, so it splits into
 `[0x252e8 .. 0x26110]` + literals + `[0x269b0 .. 0x26608]`.
 
+**Round-113: the `.rdata` duplicate, pinned down to a ready-to-execute step.**
+
+Three things measured this round sharpen round 112's finding.
+
+1. **The split pipeline already emits the strings.**  `build/split_poc/split/`
+   `1001fdf8_.text.obj` -- the object built from `crt0msg.obj`'s first section,
+   by `split_coff.py --with-data` -- carries **24 `.rdata` sections** with the
+   `??_C@...` symbols the library defines (`??_C@_0P@GGKG@runtime?5error?5?$AA@`,
+   `??_C@_0O@DELO@TLOSS?5error?$AN?6?$AA@`, ... `??_C@_0CF@EANP@R6028...`).
+   So the split set defines them; the duplicate survives anyway, which rules out
+   "the map never found the section" as the cause.
+2. **`/FORCE:MULTIPLE` is not the cause either.**  Relinking without it fails on
+   exactly four *non-COMDAT* duplicates -- `_putc` (link_stubs.c vs fputc.obj),
+   `__amsg_exit` and `__FF_MSGBANNER` (amsg_exit.c vs dllcrt0.obj/crt0msg.obj),
+   `___app_type` (link_stubs.c vs dllcrt0.obj) -- and no `??_C@...` symbol.
+   The string collision is COMDAT and would dedupe on its own.
+3. **The block is exactly reproducible.**  The reference's `crt0msg` string
+   table is 645 bytes at VA 0x10026110 -- blob offset 0xE28 -- holding the 17
+   strings packed at **4-byte** alignment, and the library's own copy at
+   0x10026724 is byte-for-byte the same 645 bytes (`"runtime error "` at +0,
+   `"R6028..."` at +0x40, ... `"R6002\r\n- floating point not loaded\r\n"` at
+   +0x260).  A TU of those literals therefore reproduces both the bytes and the
+   layout, and its identical mangled names make the linker discard LIBCMT's.
+
+The executable step, then: split `rdata_restore.c`'s 4896-byte array at 0xE28
+and 0x108D, emit the 17 literals from a new TU annotated
+`// DATA: SERVER 0x10026110` so `scripts/order_sources.py` places it in the gap,
+and drop the now-redundant bytes from `g_rdata_restore_252e8`.
+
+What round 112's `.scratch/keepcrt.c` experiment shows is that the *mechanism*
+alone is not enough: adding the literals without cutting the blob drops `.rdata`
+0x32d1 -> 0x3091 and removes `crt0msg.obj`'s data symbols from the map, but the
+same-offset `.rdata` match is unchanged (81.39% -> 81.32%) because the region
+then has to be refilled by postlink's import-bookkeeping copy.  Cutting the blob
+is what turns it into bytes.
+
 **Round-111: position alignment is complete, and the asm constraint is
 audited.**
 
