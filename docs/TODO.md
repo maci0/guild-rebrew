@@ -29,6 +29,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-322 (2026-09-13): size audit — methodology wrong, data right.**
+
+- Compared metadata SIZE against functions.txt for all 18 rows: 6 differ
+  (Spieler 3689/3696, LS 1463/1472, CopyData 912/901, FindNext 346/352,
+  ChkInv 395/400, Objects 714/720). But `verify --fix-sizes --dry-run`
+  reports ZERO divergences — the tool's canonical sizes come from symbol
+  spans, while functions.txt holds padded windows. The 6 gaps are
+  code-vs-window definitional differences (each matches its probe span).
+  Audit measured the wrong authority. No action.
+- Residue baseline unchanged: **9,209**.
+
 **Round-321 (2026-09-13): encoding-width hunt finds no same-operation pair.**
 
 - Same-mnemonic/same-registers/different-length audit across 10 best-
