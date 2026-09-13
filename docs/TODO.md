@@ -4,6 +4,23 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-277 (2026-09-13): partition search retired by mechanism; todo
+categories exhausted.**
+
+- A supervised 100s live `merge-sweep` run wrote nothing (tree clean).
+  Retiring the queued live search by reasoning, not budget: MSVC6 c2 has no
+  interprocedural optimization (no /GL until VS2005) and the tree has no
+  static helpers, so TU partition provably cannot change per-function
+  codegen — merge and split are layout-only, and layout is already
+  position-aligned (246 exactly at VA). The two inert neighbor probes are
+  the experimental confirmation. The remaining `split` candidates
+  (0x10008A50, 0x10009310, CRT boundaries) address no residue mechanism.
+- `rebrew todo` by category: start-function 0, compile-error 0,
+  extract-error 0, identify-library 0, setup 0, documented 0, data-drift 0,
+  missing-annotation 0, run-prover 0, fix-delta 0 — only the 2 known
+  improve-match items remain. The toolchain's own work list is exhausted.
+- Residue baseline unchanged: **9,209**.
+
 **Round-276 (2026-09-13): hill-climb on the closest function finds nothing.**
 
 - `rebrew climb` (aligned objective, 2 passes, 52 statements) on
