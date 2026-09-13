@@ -1,5 +1,29 @@
 /* gm_AllocGebaeude - allocate and initialize a building entity.
  *
+ * UPDATE 2026-09-13 (round 87): 438/1078 -> 571/1078 matched bytes, size still
+ * exactly 1078.  A sweep of the address-taken struct locals against the
+ * reference's operand shapes.  The rule the target follows: a pointer whose
+ * address is never taken is kept in a register and stored through repeatedly;
+ * a pointer that lives in an address-taken aggregate must be reloaded after
+ * every store through it, because a `char*` store may alias the field itself.
+ * Three sites were spelled the wrong way round:
+ *   - case 0x14 (the 0x1b5 sub-object): `s.record` was address-taken, so the
+ *     four field stores reloaded [ebp-8] three times.  The reference stores
+ *     none of them and issues all four from one register (`mov [eax+0x22],bl`
+ *     / `[eax+0x1c],cl` / `[eax+0x1d],cl` / `[eax+0x1e],ecx` at 0x100177a8).
+ *     A local `char* rec` reproduces it.
+ *   - case 0x1e (the 0x600 table): the reference writes the allocation only
+ *     to geb+0x71 and reads it back from that field, so the first store comes
+ *     from the call result still in eax and the second reloads
+ *     `mov ecx,[esi+0x71]` (0x1001785c-0x10017860).  Keeping a second copy in
+ *     `s.record` was one extra store plus three extra reloads.
+ *   - case 0x4b (the 0x3c record): same, a local `char* rec`.
+ * Separately, `*(int*) s.dest = ...` became `*(int*)(geb + 0x65) = ...` at the
+ * six switch sites that use it (not case 6/7, which really does go through the
+ * pointer -- that one measured 489 when made direct).  `s.dest` is assigned
+ * once (`geb + 0x65`) and never written again, so the two are equivalent, but
+ * the reference resolves the constant address and ours kept a live pointer.
+ *
  * NEAR_MATCHING / best-effort: verified flow - NULL guard on
  * g_entity_type_table; the 0x10017210 allocator with its LogMessageInternal
  * (0x10cb) failure path; the record header init (type byte, id counter at
@@ -282,39 +306,52 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 			*(int*) s.dest =
 			    *(int*) ((char*) 0x100358a4 + (unsigned short) owner * 0x21c);
 		else
-			*(int*) s.dest = -1;
+			*(int*) (geb + 0x65) = -1;
 		break;
 	case 0xb:
 	case 0xc:
 	case 0xd:
-		*(int*) s.dest = -1;
+		*(int*) (geb + 0x65) = -1;
 		break;
 	case 0xe:
 	case 0xf:
 	case 0x10:
-		*(int*) s.dest = 0xa;
+		*(int*) (geb + 0x65) = 0xa;
 		*(int*) (geb + 0x69) = 3;
 		*(int*) (geb + 0x6d) = 5;
 		break;
 	case 0x14:
 	case 0x15:
 	case 0x16:
-		s.record = (char*) gm_AllocObjekt(*(int*) (geb + 1), 0x1b5, 1);
-		if (s.record != NULL) {
-			s.record[0x22] = 0;
-			s.record[0x1c] = (char) -1;
-			s.record[0x1d] = (char) -1;
-			*(int*) (s.record + 0x1e) = -1;
+		{
+			/* The reference keeps this pointer in a register: there is no
+			 * store of it anywhere, and the four field stores issue from the
+			 * same register with no reload between them.  A local whose
+			 * address is never taken cannot be aliased by a store through
+			 * itself; an address-taken struct member can, which is why the
+			 * previous `s.record` spelling reloaded [ebp-8] three times. */
+			char* rec = (char*) gm_AllocObjekt(*(int*) (geb + 1), 0x1b5, 1);
+			if (rec != NULL) {
+				rec[0x22] = 0;
+				rec[0x1c] = (char) -1;
+				rec[0x1d] = (char) -1;
+				*(int*) (rec + 0x1e) = -1;
+			}
 		}
 		break;
 	case 0x1e:
-		s.record = (char*) m_AllocTracked(0x600, (const char*) 0x10031428);
-		*(int*) (geb + 0x71) = (int) s.record;
+		/* The reference writes the allocation only to geb+0x71 and then reads
+		 * the pointer back out of that field for every use: the first store
+		 * issues from the call's own result (still in eax), the second
+		 * reloads `mov ecx,[esi+0x71]` because the intervening char store may
+		 * alias the field.  Keeping a second copy in `s.record` was an extra
+		 * store plus three extra reloads. */
+		*(int*) (geb + 0x71) = (int) m_AllocTracked(0x600, (const char*) 0x10031428);
 		geb_type = 0;
 		while (geb_type < 0x600) {
 			geb_type += 0x18;
-			s.record[geb_type - 0xb] = (char) 0xff;
-			*(int*) (s.record + geb_type - 4) = 0;
+			*((char*) *(int*) (geb + 0x71) + (geb_type - 0xb)) = (char) 0xff;
+			*(int*) ((char*) *(int*) (geb + 0x71) + (geb_type - 4)) = 0;
 		}
 		/* fall through into 0x1f/0x20 stores */
 	case 0x1f:
@@ -325,7 +362,7 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	case 0x35:
 	case 0x36:
 	case 0x37:
-		*(int*) s.dest = 0;
+		*(int*) (geb + 0x65) = 0;
 		*(unsigned short*) (geb + 0x69) = 0;
 		*(unsigned short*) (geb + 0x6b) = 0;
 		*(int*) (geb + 0x6d) = 0;
@@ -336,15 +373,17 @@ char* __cdecl gm_AllocGebaeude(int geb_type, int owner)
 	case 0x48:
 	case 0x49:
 	case 0x4a:
-		*(int*) s.dest = gv_AllocGraveyardField(geb);
+		*(int*) (geb + 0x65) = gv_AllocGraveyardField(geb);
 		gv_SpawnEntities(geb, 3);
 		break;
 	case 0x4b:
 	case 0x4c:
 	case 0x4d:
-		s.record = (char*) m_AllocTracked(0x3c, (const char*) 0x1002d504);
-		*(int*) s.dest = (int) s.record;
-		*(int*) s.record = -1;
+		{
+			char* rec = (char*) m_AllocTracked(0x3c, (const char*) 0x1002d504);
+			*(int*) (geb + 0x65) = (int) rec;
+			*(int*) rec = -1;
+		}
 		break;
 	}
 	if (geb[0] == 0x26)
