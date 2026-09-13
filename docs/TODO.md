@@ -4,6 +4,23 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-292 (2026-09-13): LS + Gebaeude semantic reviews clean; three
+stale Gebaeude notes corrected.**
+
+- `ls_LoadBuildingEntityState`: CLEAN — all field offsets/sizes, version
+  gates + directions, dispatch bytes, graveyard/ahm/default paths, state
+  block contents, aux-entity math verified. No doc action.
+- `gm_AllocGebaeude`: CLEAN — block-fill byte-identical zero-fill
+  (dest/len/pattern + align paths), all header constants, loop bounds,
+  bit test (0x8000 correct), call args, all 10 switch groups + arm
+  outcomes, tail calls verified. The review exposed THREE stale header
+  notes describing reverted variants as current: post-loop AllocRaum
+  (in-loop call landed), switch-on-geb[0] (switches on s.type_id), and
+  STUB metadata (is PROVEN). All three corrected with provenance
+  (comment-only, obj still 1078, PROVEN sticky kept).
+- 7 of 19 residue functions now carry explicit behavioral verdicts.
+- Residue baseline unchanged: **9,209**.
+
 **Round-291 (2026-09-13): CopyData + Graveyard semantic reviews CLEAN.**
 
 - `cm_ExCopyEntityData`: full 901-byte walk — all 5 clamp arms' bounds

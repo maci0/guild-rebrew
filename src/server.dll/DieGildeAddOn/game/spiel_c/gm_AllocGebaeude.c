@@ -78,8 +78,12 @@
  * `s.record = rec` before the `nid` read (283); computing `rec` after `nid`
  * (243); `s.type_id` before `geb[0]` (360).
  *
- * Semantic correction found but NOT adopted, recorded because it is a real
- * behaviour difference rather than a codegen one.  The target has no
+ * Semantic correction ADOPTED 2026-09-13 (was "found but NOT adopted"
+ * below — the rewrite has since landed: the component loop now calls
+ * gm_AllocRaum(geb, comp & 0x7fff) inside the `comp & 0x8000` arm for
+ * types 2/6, verified against 0x100176cd by semantic review).  The
+ * target has no post-loop gm_AllocRaum call.  The old note describing
+ * the post-loop call is retained as history:
  * post-loop gm_AllocRaum call.  It calls it INSIDE the component
  * loop at 0x100176cd, in the `comp & 0x8000` arm, for prototype types 2 and 6
  * only, with the component index as the second argument
@@ -119,6 +123,10 @@
  * exactly what the switch in this file already spells, so the case
  * reconstruction needs no change.
  *
+ * The switch VALUE note below is also stale: the file now switches on
+ * `s.type_id` (matching the reference's [ebp-0xc] reload at 0x1001771b),
+ * verified by semantic review 2026-09-13.  Retained as history:
+ *
  * The switch VALUE is wrong, though: the target reloads the spilled
  * `s.type_id` from [ebp-0xc] at 0x1001771b, where this file re-reads
  * `geb[0]` and emits `xor eax,eax; mov al,[esi]`.  Switching on `s.type_id`
@@ -130,11 +138,15 @@
  * gm_AllocRaum correction below: this body's object is already
  * exactly 1078, so any growth reads as a regression.
  *
- * Status note: `rebrew test` and `rebrew verify` report STUB, and the
- * metadata status in src/rebrew-functions.toml is STUB: the old PROVEN claim
- * predated the 2026-09 body rewrites and was demoted by verify per the
- * documented rule once the bytes no longer backed it.  See the BLOCKER
- * field (set via `rebrew blocker set 0x100174d0`) for the wall. */
+ * Status note (corrected 2026-09-13): metadata status is PROVEN; the
+ * "STUB / old PROVEN demoted" sentence below predated the current body.
+ * See the BLOCKER
+ * field (set via `rebrew blocker set 0x100174d0`) for the wall.
+ *
+ * Old note, retained as history: `rebrew test` and `rebrew verify` report
+ * STUB, and the metadata status in src/rebrew-functions.toml is STUB: the
+ * old PROVEN claim predated the 2026-09 body rewrites and was demoted by
+ * verify per the documented rule once the bytes no longer backed it. */
 
 // FUNCTION: SERVER 0x100174d0
 
