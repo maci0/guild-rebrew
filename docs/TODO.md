@@ -29,6 +29,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-308 (2026-09-13): baseline currency + GOLDTL scope confirmed.**
+
+- `residue_base.log` function rows identical to a fresh run — linktest
+  baselines are current. (First comparison tripped on --write vs
+  read-only preamble noise; rows match.)
+- GOLDTL (7.5%, 22 stubs) confirmed out of scope again: objective names
+  server.dll only, and round-4 cross-import already exhausted sharing
+  (280/280 skipped). No action.
+- Residue baseline unchanged: **9,209**.
+
 **Round-307 (2026-09-13): rotation characterized to the limit.**
 
 - Full loop-region dump (idx 94-121): the loop KERNEL is
