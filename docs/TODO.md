@@ -4,6 +4,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-278 (2026-09-13): cross-compiler axis dead on first contact.**
+
+- `rebrew test --toolchain msvc-5.0-sp3 --dry-run` on `gm_ObjectsAvailble`
+  (the purest allocator wall): obj 717 vs 714, match 87 vs ~689 — MSVC5's
+  prologue already diverges (`push ebx` vs `push esi` at offset 3). A
+  whole-tree switch would break all 281 passing functions to chase residue
+  shaped by VS6's allocator. The compiler axis is retired empirically, not
+  just on ROI grounds. (`--dry-run` wrote nothing; tree verified clean.)
+- Residue baseline unchanged: **9,209**.
+
 **Round-277 (2026-09-13): partition search retired by mechanism; todo
 categories exhausted.**
 
