@@ -99,6 +99,51 @@ rsp.write_text(" ".join(tokens))
 print(f"fold object {obj} inserted at token 1")
 RSP
 
+echo "== data gap for this composition"
+# `data_restore.c`'s blob is sized for the CMake composition (its own .data
+# ends at 0xdf00 with a 0x9a00 blob).  The split objects carry more `.data`
+# (the members' bundled sections), so the CMake blob overshoots the reference's
+# 0xe000 raw size by 0x2460.  postlink overwrites `.data` wholesale, so only
+# the blob's LENGTH matters (docs/msvc6-link-layout.md section 2) - emit a
+# shorter one for this link and drop the CMake object.  Re-sweep the constant
+# when the composition's own `.data` changes.
+GAP=0x74a0
+python3 - "$GAP" "$WORK/data_restore_split.c" <<'BLOB'
+import struct, sys
+from pathlib import Path
+size = int(sys.argv[1], 0)
+out = Path(sys.argv[2])
+ref = Path("original/Server/server.dll").read_bytes()
+pe = struct.unpack_from("<I", ref, 0x3C)[0]
+count = struct.unpack_from("<H", ref, pe + 6)[0]
+opt = pe + 24
+for i in range(count):
+    off = opt + struct.unpack_from("<H", ref, pe + 20)[0] + i * 40
+    if ref[off : off + 8].rstrip(b"\0") == b".data":
+        raw = struct.unpack_from("<I", ref, off + 16)[0]
+        ptr = struct.unpack_from("<I", ref, off + 20)[0]
+        break
+blob = ref[ptr + raw - size : ptr + raw]
+lines = [f"unsigned char g_data_restore_gap[0x{size:x}] = {{"]
+for i in range(0, len(blob), 16):
+    lines.append("\t" + ",".join(f"0x{b:02x}" for b in blob[i : i + 16]) + ",")
+lines.append("};")
+out.write_text("\n".join(lines) + "\n")
+print(f"wrote {out} ({size:#x} bytes)")
+BLOB
+rebrew-cmake-cl /nologo /c /O2 /Gd /MT \
+    /Fo"$WORK/data_restore_split.obj" "$WORK/data_restore_split.c" >/dev/null
+python3 - "$WORK/rsp.rsp" "${WORK#build/}/data_restore_split.obj" <<'RSP'
+import shlex, sys
+from pathlib import Path
+rsp, obj = Path(sys.argv[1]), sys.argv[2]
+tokens = shlex.split(rsp.read_text())
+tokens = [t for t in tokens if not t.endswith("/crt_region/data_restore.c.obj")]
+tokens.insert(1, obj)
+rsp.write_text(" ".join(tokens))
+print(f"swapped the CMake data blob for {obj}")
+RSP
+
 cmd=$(sed "s#@CMakeFiles/server_dll.dir/objects1.rsp#@${WORK#build/}/rsp.rsp#;
            s#/out:server.dll#/out:split_poc.dll /MAP:split_poc.map#;
            s#/implib:server.lib#/implib:split_poc.lib#;

@@ -1,5 +1,40 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-128: the split composition's section geometry now matches the reference
+exactly — all four raw sizes, all four file offsets, no extra section.**
+
+Two fixes closed it, both in the pipeline rather than in the link:
+
+* **A composition-specific data gap.** `data_restore.c`'s blob is sized for the
+  CMake build's own `.data`; the split objects carry more, so the same blob
+  overshot the reference's raw size by `0x2460`.  Since postlink overwrites
+  `.data` wholesale, only the blob's length matters (round 119's rule), so
+  `split_link.sh` now emits a shorter blob (`0x74a0`, cut from the reference's
+  own `.data` tail) and swaps the CMake object out of the response file.
+* **`.CRT$` definition objects must not be linked.**  `emit_defs.py` emits one
+  object per missing symbol's defining section, including `___xc_a` and friends
+  from `crt0init.obj` section 7.  Those sections make LINK create a separate
+  `.CRT` *output* section (raw `0x1000`) after `.data`, which moves `.reloc` off
+  the reference's file offset; leaving them out lets LIBCMT's own
+  `crt0init.obj` supply the same symbols, merged into `.data` at section 3
+  offsets `0x0..0x30` exactly as the reference has them.
+  `make_split_rsp.py` now skips `--defs` objects whose sections are all
+  `.CRT$`.
+
+```
+build/split_poc.dll      .text raw 0x23000   .rdata raw 0x3000   .data raw 0xe000 @0x27000
+                         .reloc @0x35000     no extra section    members at VA 246/319
+reference                .text raw 0x23000   .rdata raw 0x3000   .data raw 0xe000 @0x27000
+                         .reloc raw 0x11000 @0x35000
+```
+
+`scripts/section_geometry.py` reports every row `ok`, and postlink's message on
+the vehicle is now the coverage gate rather than a geometry one: **6072/7463 =
+81.4%** (was 6060/81.2% before the fold).  What is left in this composition is
+the `.rdata` prefix surplus `0x168` (the split-blob piece, round 124) and the
+game region's 19 non-byte-matched functions, which are what cap the coverage
+short of 90%.
+
 **Round-127: the fold is part of the split pipeline now, and what it exposes is
 the split composition's `.data`.**
 

@@ -71,6 +71,29 @@ def _section_bytes(path: str, prefix: str) -> int:
     return total
 
 
+def _only_crt_sections(path) -> bool:
+    """True when every non-empty section of an object is a `.CRT$` one."""
+    try:
+        data = path.read_bytes()
+    except OSError:
+        return False
+    try:
+        count = struct.unpack_from("<H", data, 2)[0]
+        opt = struct.unpack_from("<H", data, 16)[0]
+    except struct.error:
+        return False
+    seen = False
+    for i in range(count):
+        off = 20 + opt + i * 40
+        name = data[off : off + 8].rstrip(b"\0").decode("ascii", "replace")
+        if struct.unpack_from("<I", data, off + 16)[0] == 0:
+            continue
+        if not name.startswith(".CRT$"):
+            return False
+        seen = True
+    return seen
+
+
 def va_of(entry: dict) -> int:
     v = entry.get("va")
     if isinstance(v, str):
@@ -133,6 +156,16 @@ def main() -> int:
     extra_objs = []
     if args.defs:
         for f in sorted((ROOT / args.defs).glob("*.obj")):
+            # A definition object whose sections are all `.CRT$` has to be left
+            # out: LINK then emits a separate `.CRT` *output* section (raw
+            # 0x1000) after `.data`, which moves `.reloc` off the reference's
+            # file offset.  LIBCMT's own `crt0init.obj` supplies the same
+            # symbols and merges into `.data` exactly as the reference has them
+            # (section 3 offsets 0x0..0x30), so dropping these costs nothing -
+            # measured: `.CRT` gone, `.data` 0xe000 at 0x27000 and `.reloc` back
+            # at 0x35000.
+            if _only_crt_sections(f):
+                continue
             extra_objs.append(f.relative_to(ROOT / "build").as_posix())
     if args.commons:
         for f in sorted((ROOT / args.commons).glob("*.obj")):
