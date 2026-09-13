@@ -4,6 +4,24 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-261 (2026-09-13): small rows audited against current numbers; PCQ
+volatile-held re-derived and reverted.**
+
+- `cm_ProcessCommandQueue` (15): the missing `test ebx,ebx; je` at recheck —
+  probed `volatile char* held` to force memory residency across the
+  `ahm_ProcessEntityChain` call: test still folds (single `test %ebx` in the
+  probe), metrics 584/624 + obj 640, worse. Reverted. This re-derives the
+  header's tenth-round result ("a volatile read of held at the test (128/648,
+  it homes held to the stack)"). The fold is control-flow (single
+  held!=0-proven predecessor after c2's join handling), not residency — the
+  header's eleven rounds already exhausted the CFG spellings. Closed.
+- `cm_ExProdObjekt` (21): 348/354, 3 hunks, all register class (`mov edx,[g]`
+  vs `mov ebx,[slot]`, `[esp+0x18],ebx` vs `,eax`). The ceiling claim stands.
+- `gm_CheckInventoryCapacity` (97): 125/138, 0 pure-register hunks but the
+  pairs are the documented walls (§73 second-site fold, list[0] peel,
+  prologue-init order — round-249's seven variants). Closed.
+- Residue baseline unchanged: **9,209**.
+
 **Round-260 (2026-09-13): lint at zero warnings; W020 resolved per the rule's
 own remedy, W007 with a verified struct size.**
 
