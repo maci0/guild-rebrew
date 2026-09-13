@@ -170,6 +170,9 @@ Together with the earlier work this function is now done as a target:
   reference lacks);
 - its main structural alternative -- the `do/while` dst-scan restructure -- was measured
   as **size-changing** (real body 900 -> 904) and rejected;
+  > **RETRACTED in round 242.**  904 and 912 both pad to COMDAT 912, so that variant is
+  > composition-neutral and the rejection above is wrong on its stated grounds.  The
+  > binding constraint is the padded COMDAT, not the real body.  See round 242.
 - the reference's three epilogues against our two is the documented cross-jump wall;
 - and an independent budgeted pass found nothing.
 
@@ -380,6 +383,14 @@ compiled while agents write), and this one (several candidates at once).  The ru
 suspected size-changers (the former's `do/while` restructure measured real 900 -> 904;
 the latter's added statement measured object 1104 against 1088) and neither has been
 measured alone.  Their candidates must be re-derived before they can be tested.
+
+> **Round-242 split verdict on the two cases above -- they are not the same kind of
+> size change, and only one of them survives as a rejection.**
+> `cm_ExCopyEntityData` real 900 -> 904 is *within* one 16-byte COMDAT bucket (both pad
+> to 912): composition-neutral, rejection retracted, variant is testable.
+> `gm_AllocGebaeude` object 1104 against 1088 is *across* buckets: a real change to the
+> composition, rejection stands.  When the recorded numbers are real-body lengths,
+> compare the padded values; when they are already object sizes, compare them directly.
 
 **Round-201: restoring the metadata file changes the compile flags, and can break
 the composition.**
