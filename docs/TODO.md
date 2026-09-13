@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+## `/OPT:REF` fails because the restore blobs have no relocations (2026-09-13, round 83)
+
+Round 82 blamed `/Gy` for `/OPT:REF` dropping 0x11248 of `.text`.  That is
+wrong, and the test is direct -- compile `spiel.c` three ways and count the
+`.text` sections:
+
+```
+flags          .text sections
+(none)              5
+/Gy-                5
+/Gy                 5
+```
+
+MSVC6 emits the per-function COMDAT `.text` sections in this configuration
+regardless, so `/Gy-` is not a lever and the flag cannot be turned off.
+
+The real cause is the blobs.  Both restore objects have **zero relocations**:
+
+```
+data_restore.c.obj    sections 2   relocations 0
+rdata_restore.c.obj   sections 2   relocations 0
+```
+
+The game's dispatch and function-pointer tables are baked into those arrays as
+raw bytes.  A table entry that should be a reference to a game function is just
+four bytes to the linker, so the reachability walk that `/OPT:REF` performs
+from the entry point never reaches the game functions and discards them.  This
+is why every `/OPT:REF` attempt collapses `.text`, and it is not fixable with
+linker flags: `/OPT:REF` and raw-byte data blobs are mutually exclusive by
+construction.
+
+So the `/OPT:REF` route needs the game's data tables reconstructed as **real C
+objects** -- arrays with initialisers naming the functions, which generate real
+relocations -- rather than as blobs.  Unlike rounds 76-82 that is not library
+code: it is the game's own `.data`, and it is exactly the work the goal wants.
+
 ## `/OPT:REF` needs `/Gy-` across the whole build, not just the split set (2026-09-13, round 82)
 
 Round 81 proposed emitting the split objects' `.text` sections as **non**-COMDAT
