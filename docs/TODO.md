@@ -1,5 +1,42 @@
 # Blockers — 100% Round-Trip Goal
 
+## The duplicated `.rdata` is load-bearing for symbols (2026-09-13, round 78)
+
+Round 76 pinned `.rdata`'s 0x480-byte duplicate block at 0x26bc and blamed the
+LIBCMT objects the link pulls for their code.  The map says exactly which
+split objects own those bytes:
+
+```
+1001fdf8_.text.obj 22   crt0msg.obj    1001f1a4_.text.obj  5   cvt.obj
+10022107_.text.obj  4   crtmbox.obj    10022a2f_.text.obj  4   heapinit.obj
+1001c19b_.text.obj  3   a_map.obj      1001d253_.text.obj  2   output.obj
+1001f20b_.text.obj  2   testfdiv.obj   1001f631_.text.obj  2   tzset.obj
+10020915_.text.obj  1                  1001d253_.text.obj      x10fout.obj
+```
+
+so a targeted exclusion is testable -- round 75's 80-byte result came from
+excluding `.rdata` on all 229 objects, which is not the same experiment.
+`split_coff.py`'s `data_secs` gate was narrowed to skip `.rdata` for exactly
+those nine members and the whole split set rebuilt:
+
+```
+                  .text                    .rdata                  .data
+split_poc    diff 86608  vsize 0x22af8   diff 2237  vsize 0x33b1   diff 25311  vsize 0x1746c28
+nine excluded  diff 86807  vsize 0x23309  diff 2217  vsize 0x33f1   diff 25311  vsize 0x1746da8
+```
+
+Worse on every axis: `.rdata` *grows* by 0x40, `.text` by 0x811.  The reason is
+that those sections are not only bytes -- they define symbols
+(`__real@8@...` float constants, `??_C@...` strings).  Dropping them leaves
+them undefined, `emit_defs` manufactures replacements, and the replacements
+cost more than the duplication did.
+
+So neither copy can simply be deleted: the blob is needed for the reference's
+byte layout and the member sections are needed for the symbol table.  A
+working fix has to make one set of symbols resolve to the other's bytes (an
+alias at the blob's addresses, so LINK can discard the member COMDATs) rather
+than removing either.  Reverted; tree clean.
+
 ## `vfs_ReadCompressed`: the accumulator placement is already right (2026-09-13, round 77)
 
 The file's own note says the target loads and tests `handle` *before* the two
