@@ -4,6 +4,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-279 (2026-09-13): layout half verified; .scratch trawl negative.**
+
+- `rebrew verify --whole-binary`: sections/exports/imports/rsrc/headers
+  all match. The layout package is reference-derived ground truth (not
+  tree-derived), so it cannot go stale; the check confirms it works.
+  No action on the deliverable's other half.
+- `.scratch/` trawl for unadopted linked wins (candidates rejected on
+  object metrics that mispredict): only climb logs found, no linktest
+  records with negative deltas. A systematic re-link of archived
+  candidates would be unbounded; not started.
+- Residue baseline unchanged: **9,209**.
+
 **Round-278 (2026-09-13): cross-compiler axis dead on first contact.**
 
 - `rebrew test --toolchain msvc-5.0-sp3 --dry-run` on `gm_ObjectsAvailble`
