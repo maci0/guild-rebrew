@@ -1,5 +1,57 @@
 # Blockers — 100% Round-Trip Goal
 
+## The crash-dump message data was absent too (2026-09-13, round 63)
+
+Same defect as round 62, twenty-eight strings wide.  `CrashDumpUnhandledExceptionFilter.c`
+addresses its message data by absolute VA throughout --
+`LogMessageInternal((char*) 0x10027104, 0x220, ...)`, the WriteFile argument
+table at 0x10027178..0x10027260, `CreateFileA((const char*) 0x10027318, ...)`
+-- and nothing defined any of it, so those reads landed outside the section.
+The reference has, in `.data[0x104:0x33c]`:
+
+```
+no dbg file   bad dbg file   no memory   bad (small) dbg file
+D:\Develop\Units\Error\Error.c   not open crashdump
+STACK_OVERFLOW  PRIV_INSTRUCTION  INT_OVERFLOW  INT_DIVIDE_BY_ZERO
+FLT_UNDERFLOW  FLT_STACK_CHECK  FLT_OVERFLOW  FLT_INVALID_OPERATION
+FLT_INEXACT_RESULT  FLT_DIVIDE_BY_ZERO  NONCONTINUABLE_EXCEPTION
+INVALID_DISPOSITION  FLT_DENORMAL_OPERAND  ARRAY_BOUNDS_EXCEEDED
+ILLEGAL_INSTRUCTION  IN_PAGE_ERROR  0x%08X  WRITE   READ
+ACCESS_VIOLATION   BREAKPOINT  SINGLE_STEP  __crashdump.log  --> 
+```
+
+`CrashDumpUnhandledExceptionFilter.c` now carries those 568 bytes as one array
+generated from the reference, under `// DATA: SERVER 0x10027104`.  The
+missing-string count over the reference's `.data` drops 44 -> 16, and what is
+left is one server/network group (`This is Gilde talking, can you hear me?`,
+`Sending data...`, `GamePath`, ..., 16 strings) for a later round.
+
+It costs placement, and re-sweeping the cut recovers most of it:
+
+```
+ cut    .data differing        cut    .data differing
+  86         27985              94         29779
+  90         27985              96         25311   <- optimum
+  92         29539              98         30195
+```
+
+`_BLOB_AT_DATA` is therefore 0x3400; the script picks 95, and 95 and 96 are
+equivalent because object 96 contributes no `.data`.  Net against the start of
+round 62:
+
+```
+          round 62 start   round 62   round 63
+.text          86600         86606      86608
+.rdata          2237          2237       2237
+.data          26799         24674      25311     (53.27% -> 55.86% equal)
+```
+
+`.data` is 637 bytes *worse* than round 62's peak and 568 bytes of previously
+absent referenced data are now present.  That is the right trade for this
+goal: the reference has those bytes, and once placement converges the content
+has to be there to match.  The same reasoning applies to every entry in this
+list -- produce the bytes first, then place them.
+
 ## The log-name table was truncated (2026-09-13, round 62)
 
 `Error.c` declared the log-name table as 13 bytes:

@@ -49,7 +49,7 @@ DROP = (
 #: costs thousands of bytes -- so the constant is measured, not derived; see
 #: the round-60 and round-62 tables in docs/TODO.md.  If an object's `.data`
 #: size changes, re-sweep rather than trusting this number.
-_BLOB_AT_DATA = 0x3050
+_BLOB_AT_DATA = 0x3400
 
 
 def _section_bytes(path: str, prefix: str) -> int:
