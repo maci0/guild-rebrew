@@ -71,6 +71,42 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-174: the fan-out repeated with the ranking metric corrected, and the
+validation cycle made a command.**
+
+*The cycle is now a script.*  Round 173's validation was done by hand three times
+and the compile flags were written from memory once — which mis-measured a link
+and produced the round's one wrong "no regression" reading.  `scripts/linktest.sh`
+does the whole thing: recompile exactly the named files with the command
+`build/CMakeFiles/server_dll.dir/build.make` records for them (so the flags cannot
+drift from what `cmake --build` uses), relink the per-reference-offset composition,
+apply `postlink_residual.py --write`, and diff the per-function table with
+`scripts/residue_diff.py` (promoted out of `.scratch/`, where a fresh clone loses
+it) against `.scratch/residue_base.log`.  `--new-base` adopts the result.
+
+*The archive re-ranked by the metric that actually tracks the linked residue — and
+there is nothing left in it.*  Round 173 re-judged the ~8,700 already-compiled
+probe objects under `.scratch/` by the LCS score; that ranking is now withdrawn,
+so they were re-judged by `matched-reloc`.  For sixteen of the eighteen holdouts
+the live tree ties or beats the best archived variant:
+
+```
+gm_AllocSpieler        live 1246  archive 1197  (-49)
+cm_ExSellObjekt        live  834  archive  373  (-461)
+ls_LoadBuildingEntityState 879 / 815, gm_AllocGebaeude 644/518,
+gv_ExAllocGraveyardWorker 660/655, m_AllocTracked 565/314,
+ServerMainThread 2149/1640, gm_CheckInventoryCapacity 298/293
+vfs_ReadCompressed, gm_FindNextFilteredEntity, srv_LoadBuf,
+cm_ExProdObjekt, cm_ProcessCommandQueue   live == archive
+cm_ExCopyEntityData    live  573  archive  576  (+3, the shipped object itself)
+CrashDump              live  523  archive  577  (+54, .scratch/flagprobe/cd_o2.obj)
+```
+
+The one outlier is a Sep-10 object with no preserved source beside it, and it is
+the round-162 profile: it is very likely the relocation-inflated class, since
+`matched-reloc` credits a byte under a relocation on either side.  Everything else
+confirms the tree is not leaving wins on the table in its own history.
+
 **Round-173: the eighteen holdouts fanned out across six subagents, and the
 object-level proxy caught pointing the wrong way four more times.**
 
@@ -133,11 +169,26 @@ and was a linked regression:
   351, **linked 21 -> 44** plus 36 bytes of collateral on `gm_AllocSpieler`
   because a size change in an earlier object moves everything after it.  Rejected.
 
-So `aligned` is a better gradient than the fixed-offset count (which saturates),
-but it is still a proxy, and the rule is now explicit: **a candidate is worth
-keeping only after the composition is relinked.**  The cheap way to honour it is
-to batch — probe many changes, then recompile exactly those files with their
-`build.make` command line and relink once.
+Taken together those four are a clean result and it is **not** the one round 172
+predicted.  In every case `matched-reloc` — the legacy fixed-offset count, the
+one this project has always used — moved the right way, and `aligned`, the LCS
+score added in round 172, moved the *wrong* way: it rose in all four while the
+linked residue grew.  So the ranking rule is **`matched-reloc` up**, with
+`aligned` demoted to a diagnostic; round 172's "`aligned` is the better gradient"
+is withdrawn.  `matched-reloc` has one known false positive, which is the reason
+the honest count now exists beside it: it credits a byte under a relocation on
+either side, so an instruction that introduces a new absolute address buys up to
+four bytes for free — round 162's CrashDump move (523 -> 575, ten linked bytes
+worse) is that case, and honest `matched` reads 147 -> 127 on it.
+
+Whatever the ranking says, the rule is explicit: **a candidate is worth keeping
+only after the composition is relinked.**  The cheap way to honour it is to batch
+— probe many changes, then recompile exactly those files with their `build.make`
+command line and relink once.  `scripts/linktest.sh` is that cycle in one command
+(recompile exactly the named files, relink the composition, apply postlink, diff
+`scripts/residue_diff.py` against `.scratch/residue_base.log`); round 173 was the
+first time the cycle was done by hand three times and the flags were written
+wrong once, which is why it is now a script.
 
 *The archive was re-judged and is mostly superseded.*  Every past campaign
 recorded "inert at N" from the fixed-offset count, so the ~8,700 already-compiled
