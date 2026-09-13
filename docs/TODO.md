@@ -2,7 +2,7 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
-### Session map, rounds 254–300 (2026-09-13; residue 9,209 throughout)
+### Session map, rounds 254–325 (2026-09-13; residue 9,209 throughout)
 
 - **Codegen probes (all reverted):** Spieler tail-order +53 · SMT packet ×2
   (§48) · CrashDump plain-locals (0x280 at 2059B) + decrypt counter ×2 ·
@@ -13,10 +13,15 @@
   CopyData decay ×2 inert + matrix clamp · Gebaeude ×2 inert · ExProdObjekt
   hunk-b ×2 (268 collapse) · PCQ volatile-held · Spieler slot[9] fix
   correct but +393 · fused clamp (ReadCompressed) · decl-swap/numbering
-  (Objects ×2) · matrix HIGH-first · recheck spellings.
-- **Retired levers:** TU theory (no LTO) · partition search (same reason) ·
-  link/ICF/order (~0) · cross-compiler (MSVC5 diverges) · outline (565/565)
-  · flag sweeps 4×flatline · climb/GA confirmed walls · spellings generally.
+  (Objects ×2) · matrix HIGH-first · recheck spellings · slot[9] ×3
+  length-neutral (3671/3679/3679) · combined fixes +402 · pressure-pad
+  inert · volatile grid (base inert, row/inner collapse) · join-store
+  clamp +8 · Tracked climb · CopyData matrix · case reorder +0.
+- **Retired levers:** TU theory (no LTO) · partition search (void, not
+  budget) · link/ICF/order (~0) · cross-compiler (MSVC5 diverges) ·
+  outline (565/565) · flag sweeps 4×flatline · climb/GA confirmed walls ·
+  spellings generally · intrinsic policy · call-form · statics (none in
+  game) · SEH (absent) · denominator (all code) · sizes (definitional).
 - **Tool fixes (rebrew checkout):** merge-sweep strict zip · case-label
   registry · atomic-write error (suite 6503 green).
 - **Verification:** gate green every round · whole-binary match · round-trip
@@ -28,6 +33,14 @@
   difficulties traps · ranked-leads revision · blockers synced.
 
 ### Continuation notes (written at the end of a long session; start here)
+
+**Round-325 (2026-09-13): false-positive shapes consolidated (note repaired
+round 74 — was commit-message-only).**
+
+- `docs/difficulties.md` §3 item 9: naive imm-diff crossover, relative-
+  target polarity text matching, cross-image VA comparison. Moved from
+  scattered round notes to the method-failure reference.
+- Residue baseline unchanged: **9,209**.
 
 **Round-324 (2026-09-13): VA-resolved polarity hunt void (cross-image).**
 
