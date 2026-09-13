@@ -1,5 +1,46 @@
 # Blockers — 100% Round-Trip Goal
 
+## The merged cluster compiles, and what it buys (2026-09-13, round 71)
+
+Finishing the canonicalisation from round 70 -- four more prototypes, one
+struct, one member, one preamble fragment -- gets the 25-file `spiel` merge to
+compile as a single translation unit.  The last four edits:
+
+```
+void __cdecl gm_AddObjekt(int,int,int);          -> int __cdecl
+int  __cdecl LogMessageInternal(char*,int,char*,int);
+                                                 -> void __cdecl (char*,unsigned,char*,int)
+                                                    (error.h already declares it void)
+char* __cdecl gm_GetEntityTableEntry(char*);     -> short* __cdecl
+void __cdecl gm_FreeObjectListRecursive(void*);  -> int __cdecl (char**)
+LinkedNode     defined twice; hoisted the complete one and dropped both
+DISPATCH_OBJ   the merge emitted the struct's tail without its head
+```
+
+Result, with the merged object compared against the 25 per-function objects:
+
+```
+             .text    .data
+originals    18896     1063
+merged       18864      916
+```
+
+**The merge is viable.**  `.data` drops 147 bytes for this cluster -- duplicate
+string literals collapsing -- and `.text` drops 32.
+
+That `.text` change is the important detail and it cuts both ways.  The 32
+bytes are the per-object 16-byte `.text` padding: 25 objects are padded
+individually, one object is padded once.  The reference was linked from *its*
+translation units, so it has whatever padding that partition implies.  Merging
+therefore does not simply remove waste -- it changes `.text` placement, and it
+is only correct if the merged unit matches the original partition.  That is
+exactly what `rebrew merge-sweep` searches for, and it is also why the merge
+cannot be adopted one cluster at a time on a metric.
+
+So: viable, small per cluster (147 bytes of `.data` here against the 4337
+measured project-wide), and gated on partition accuracy rather than on
+compilability.  The canonicalisation list above is the reusable part.
+
 ## Canonicalising the cluster's shared declarations: 22 -> 10 errors (2026-09-13, round 70)
 
 Round 69 left 22 errors over 14 symbols in the merged `spiel` cluster.
