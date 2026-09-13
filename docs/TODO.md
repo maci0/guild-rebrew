@@ -4,6 +4,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-266 (2026-09-13): ObjectsAvailble triple rotation probed inert.**
+
+- `gm_ObjectsAvailble` (25) is the purest wall in the tree: 214/229, mnemonic
+  match 99.13%, every hunk a register rename with an empty collapsed
+  multiset. The `(row, base, inner)` triple is a CYCLIC rotation —
+  ref (ebx, edi, esi) vs ours (esi, ebx, edi) — i.e. a numbering shift, not a
+  swap. Probe: swap `base`/`row` declaration order → byte-identical object
+  (same 188/23/0/18 diff). Declaration order inert here too (difficulties
+  §2.1's second instance). Reverted.
+- Residue baseline unchanged: **9,209**.
+
 **Round-265 (2026-09-13): ReadCompressed clamp diagnosed as c2 tail-duplication;
 fused assign-test probed and reverted.**
 
