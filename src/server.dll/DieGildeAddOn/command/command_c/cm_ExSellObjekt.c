@@ -104,6 +104,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	ushort* dest_object;
 	short* source_owner_entity;
 	int* linked_list_ptr;
+	short* source_dynamic_ref;
 	short* dest_owner_entity;
 	short* resolved_dynamic;
 	short* source_dynamic_entity;
@@ -286,15 +287,15 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			}
 		}
 	}
-	source_dynamic_entity = source_dynamic_entity;
+	source_dynamic_ref = source_dynamic_entity;
 	if (source_dynamic_entity != (short*)0) {
 		if (dest_owner_entity != (short*)0) {
 			parent_check = gm_ResolveParentEntity((short*)dest_object);
 			if (parent_check != dest_owner_entity && *(int*)(dest_object + 0xe) != 0) {
-				resolve_result = compute_size((char*)source_dynamic_entity, (int)*(ushort*)dest_object);
+				resolve_result = compute_size((char*)source_dynamic_ref, (int)*(ushort*)dest_object);
 				weight_fraction = (uint)(resolve_result * *(int*)(dest_object + 0xe)) >> 2;
-				amount = gm_GetMsgField((int)source_dynamic_entity, (int)dest_object);
-				source_dynamic_entity = source_dynamic_entity;
+				amount = gm_GetMsgField((int)source_dynamic_ref, (int)dest_object);
+				source_dynamic_ref = source_dynamic_entity;
 				if ((uint)amount - weight_fraction < (uint)*(int*)(cmd + 0x1f)) {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2d79, g_error_msg_sell_no_source, 8);
 					return 1;
@@ -342,11 +343,11 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				(uint) (unsigned short) g_entity_slot_table[(unsigned char) cmd[0x1e] * 189],
 				*(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f)
 			);
-			if (source_dynamic_entity != (short*)0) {
-				if (*source_dynamic_entity == 0x1db) {
+			if (source_dynamic_ref != (short*)0) {
+				if (*source_dynamic_ref == 0x1db) {
 					*(int*)(source_owner_entity + 0xd2) =
 						*(int*)(source_owner_entity + 0xd2) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
-				} else if (*source_dynamic_entity == 0x1dc) {
+				} else if (*source_dynamic_ref == 0x1dc) {
 					*(int*)(source_owner_entity + 0xd0) =
 						*(int*)(source_owner_entity + 0xd0) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
 				} else {
@@ -367,7 +368,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				*(int*)(capacity_check + 0x18) = *(int*)(capacity_check + 0x18) + *(int*)(cmd + 0x1f);
 			}
 		}
-		if (source_dynamic_entity != (short*)0 && *source_dynamic_entity == 0x1dd) {
+		if (source_dynamic_ref != (short*)0 && *source_dynamic_ref == 0x1dd) {
 			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(cmd + 0x18));
 			if (capacity_check != (char*)0) {
 				*(int*)(capacity_check + 0x1c) = *(int*)(capacity_check + 0x1c) + *(int*)(cmd + 0x1f);
