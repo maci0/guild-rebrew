@@ -1,5 +1,37 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-88 note: a positional win that is byte-neutral, measured both ways.**
+`gm_FindNextFilteredEntity` (0x10016f80) carries a redundant second `match = 0;`
+at its `candidate:` label — the first store dominates it.  Deleting it makes
+msvc6 see the entry store as live and emit the reference's third instruction
+exactly:
+
+```
+target  0  mov eax,[g_entity_ptr]      3  lea esi,[eax+0xa900]
+        1  push esi                    4  mov eax,[g_entity_type_table]
+        2  xor cl,cl                   5  test eax,eax
+variant identical at 0-5;  current body: 2 = lea esi, 6 = je <shared tail>
+```
+
+Against the reference's own size (346) the variant lands at 349 and the current
+body at 342, and the aligned instruction match is 76/118 against 75 — but
+`scripts/text_match.py --drift auto` gives the function **55 differing bytes
+either way**, so the variant closes nothing.  `rebrew test`'s positional count
+disagrees loudly (168 -> 105) purely because the 7-byte size change shifts every
+later operand.  Reverted; recorded so the next round does not re-run it.
+
+The wider lesson, which applies to every "measured and reverted" verdict in
+this file: those verdicts were taken with the positional count.  Where a variant
+changes the object size, that number can move by tens of bytes while the honest
+masked metric does not move at all.  **Any candidate that changes the size must
+be re-judged with the split pipeline**, not with `rebrew test`.
+
+**Round-88 metric** (`scripts/text_match.py --drift auto` after
+`scripts/split_link.sh`): game region **92.12% masked, 6,529 differing bytes**
+(the round-87 figure of 6,537 predates the `m_AllocTracked` `prev->next` fix,
+which is worth 8 bytes there: 258 -> 250 differing, 62.0%).  Split `.text` still
++0x292.
+
 **Round-87c, `m_AllocTracked` correct C: 263 -> 265/658.**  The reconstruction
 read an uninitialised pointer: `(*prev_slot)->next = node;`, where `prev_slot`
 is declared and never assigned.  `prev_slot` only ever appeared to help because
