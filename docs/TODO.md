@@ -4,6 +4,29 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-272 (2026-09-13): four-scout fan-out; ExSell header corrected.**
+
+- Scout A (ReadCompressed slots): `done`/`result` decl swap + `d` scope
+  hoist — both byte-identical, slots unmoved. Finding-55 slot map is a fixed
+  point on this body.
+- Scout B (ExSell zero): brief was STALE — head `xor edi,edi` + 9 stores +
+  `cmp eax,edi` all match; its 2 probes (struct-member init 127 crater;
+  short-ptr init identical) confirm zero is not the lever. Corrected the
+  file header: live divergence is the out-param-reuse slot permutation +
+  schedule drift. Link-tested the header edit: +0.
+- Scout C (Graveyard volatile): dropping either neighbour-loop volatile
+  craters (294 / 76 vs 541) — both qualifiers load-bearing; §52 confirmed.
+  Its `lea` sites untouched (budget spent).
+- Scout D (Alchemist pair): decl-swap inert (dupe of header), `*0x300`
+  derive regresses to 394, counter/stride role-swap inert (709) — pair is
+  allocator-fixed, no further role-swaps.
+- Follow-up (coordinator): Graveyard `lea` sites analyzed —
+  ref reloads col from its slot between the two leas (`mov eax,[esp+0x1c]`),
+  ours keeps it live in ecx. No unspent lever (volatile forbidden by
+  scout C; dummy uses are byte-fitting). Open, no probe.
+- All scout files reverted; only the ExSell header correction stays.
+- Residue baseline unchanged: **9,209**.
+
 **Round-271 (2026-09-13): verification round — data tools, locality, calls.**
 
 - `rebrew verify --data`: matched 0 / mismatched 0 / missing 0 — the

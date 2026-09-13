@@ -45,12 +45,17 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * only 229 bytes.
  *
  * Conversion state: pure C (naked wrapper removed).  The frame matches the
- * reference exactly as of 2026-09-13; the head diverges only on MSVC6's
- * register allocation -- the reference parks the zero constant in edi and
- * keeps it live across the first call (`cmp eax,edi`), ours parks it in ebx
- * and rematerializes `test eax,eax`, and the local->slot assignment is a
- * different permutation -- best-effort 392/2057 bytes
- * (docs/msvc6-allocator.md GRA class).
+ * reference exactly as of 2026-09-13.  CORRECTION 2026-09-13 (object-level
+ * probe + full-diff check): the head zero hunk described here is CLOSED —
+ * both sides emit `xor edi,edi`, the nine edi zero-stores (indices 13-21)
+ * and `cmp eax,edi` at index 43.  The live divergence is the downstream
+ * spill-slot permutation ([esp+0x18]<->[esp+0x14],
+ * [esp+0x20]<->[esp+0x24], index 29) cascading from the dest-call
+ * out-param reuse, plus scheduling drift from index 222 on.  Two further
+ * zero-spelling probes (struct-member init: 127/2057, desync; short-pointer
+ * init: byte-identical, no effect) confirm the zero itself is not the
+ * lever.  Best-effort 392/2057 bytes stand (docs/msvc6-allocator.md GRA
+ * class), but read them as slot-permutation + schedule, not zero-register.
  *
  * Frame layout, fixed 2026-09-13: the reference's 0x228 frame carries a
  * 4-byte hole between the spill block and the 512-byte log buffer.  It is
