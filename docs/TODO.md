@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+## Back to `.text`: `gm_FindNextFilteredEntity` (2026-09-13, round 74)
+
+The partition branch is closed for now, so this round went back to the 20
+functions.  `gm_FindNextFilteredEntity` (0x10016f80, 346 bytes) is among the
+smallest residues -- 55 differing bytes by the drift-aware metric -- and its
+object is 342 bytes, four short.
+
+The desync is at instruction 2, and it is a block-layout choice:
+
+```
+reference                          ours
+2  xor cl, cl                      lea esi, [eax + 0xa900]
+3  lea esi, [eax + 0xa900]         mov eax, [g_entity_type_table]
+4  mov eax, [g_entity_type_table]  test eax, eax
+5  test eax, eax                   je 0x152
+6  jne 0x1b                        cmp [g_dynasty_field_4c], 0x100
+7  xor eax, eax                    jg 0x152
+8  pop esi                         ...
+9  ret
+```
+
+The reference puts this first `return 0` **inline** and jumps over it to the
+body; ours merges the return with the three later ones and jumps forward to the
+shared block.  Four variants, all reverted, none of which moved it:
+
+```
+baseline      168/346 obj 342     swap the two guards        163/346 obj 342
+local for the table  168/346 obj 342     move `end` after the guard 162/346 obj 342
+add an unreachable guard  168/346 obj 342
+```
+
+Worth recording alongside: the positional score says 168/346 while the
+drift-aware comparison says 291 bytes equal.  The object being four bytes short
+desyncs everything after instruction 2, so `match_count` is not a usable
+progress signal on this file either.
+
 ## `merge-sweep` is blocked by a one-word tool bug (2026-09-13, round 73)
 
 Round 72 traced the registry and stopped at "a third source I did not
