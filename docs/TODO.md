@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-89: `m_AllocTracked`'s remaining gap is one unfolded null test.**
+265 -> 266/658 positional, aligned 207 -> 208 of 249, one fewer mismatch run.
+The `node_slot` alias on `node` was deleted — it is only ever assigned `&node`,
+so the double-indirection loop *is* the direct one, and the alias never bought
+the thing it was added for.
+
+What dominates the function's **250 remaining masked differing bytes** is a
+single 4-byte instruction shape at the search-loop head.  `.scratch/fdiff.py`
+(new) shows the differing runs are ten small ones in the first 180 bytes and
+then *everything* from offset 0xb4 to the end — i.e. one shift:
+
+```
+target 0x100066af  mov esi,0x117640a0
+       0x100066b4  mov eax,esi
+       0x100066b6  add esp,0xc
+       0x100066b9  test eax,eax        <- the loop-entry null test
+       0x100066bb  mov [ebp-4],esi
+       0x100066be  je  <alloc>
+       0x100066c0  jmp <loop body>
+ours                        add esp,0xc
+                            mov [ebp-4],esi
+                            jmp <loop body>          <- test proven away
+```
+
+`node` is assigned the literal `0x117640a0`, so msvc6 proves it non-null and
+drops the test; the reference keeps it.  That is 4 bytes, and because the
+object size is pinned at 658 the difference is repaid downstream, so every byte
+from 0xb4 on lands at the wrong offset.  Measured and inert on the way to this
+conclusion: `node = (struct GroupNode*) nodev;` before the increment (265),
+`volatile int count` (257), all four increment spellings, and the flag set
+`/O2 /Gd /Oy-`, `/O2 /Gd /G5 /Oy-`, `/O2 /Gd /G6`, `/O2 /Gd /GB /Oy-` (all
+265).  Reproducing the test needs msvc6 to lose the constant — the same
+escaped-pointer lever `gm_CheckInventoryCapacity` uses — but there is no spare
+local here and making `node_slot`'s own address escape has to be done without
+growing the 0x118 frame.
+
 **Round-88 note: a positional win that is byte-neutral, measured both ways.**
 `gm_FindNextFilteredEntity` (0x10016f80) carries a redundant second `match = 0;`
 at its `candidate:` label — the first store dominates it.  Deleting it makes
