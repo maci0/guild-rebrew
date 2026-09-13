@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+## `rebrew merge` works on the bodies, not the includes (2026-09-13, round 68)
+
+Round 67 concluded the `.data` duplication needs the objects' order corrected so
+the blob is unnecessary, which is what `rebrew merge` is for.  Tried on the
+largest cluster -- the 25 files that came out of the original `spiel.c`:
+`spiel.c`, `spiel2/3/5/6/62/622.c`, `spiel_dumpD.c`, `spiel_gm_DispatchCall.c`
+and the sixteen `spiel_c/*.c`:
+
+```
+$ rebrew merge <25 files> -o probe.c --dry-run --json
+count 84   input_count 25   extern_dropped 0   extern_conflicts 0
+```
+
+Clean: 84 functions, no dropped or conflicting externs.  But the merged output
+does not compile as written.
+
+```
+probe.c(26)  : error C2059: syntax error : '}'
+probe.c(151) : fatal error C1083: Cannot open include file:
+               '../../../Units/Error/error.h'
+```
+
+The second is the real blocker and it is structural: the inputs live at two
+different depths -- `game/*.c` uses `../../Units/...` and `game/spiel_c/*.c`
+uses `../../../Units/...` -- and the merged file can only sit at one of them,
+so the other group's relative includes stop resolving.  `--consolidate` hoists
+what it can but does not rewrite them, and introduces a header ordering error
+of its own (`rebrew_globals.h(107): syntax error : missing '{' before '*'`).
+
+So the merge needs include rewriting (normalise every input's relative includes
+to a single base, or move the merged TU and fix its own) before it can be
+tried for real.  That is a mechanical pass over the inputs, and it is the next
+step for the whole `.data` duplication problem -- the 105 extra string
+occurrences, the +0x4000 raw surplus and the blob overlap all go away if the
+original translation units are restored.
+
 ## The blob duplicates the objects placed after it (2026-09-13, round 67)
 
 Round 66 left the 0x4000 `.data` raw surplus unexplained.  Locating the blob
