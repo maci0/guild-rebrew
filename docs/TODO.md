@@ -1,5 +1,59 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-99: the content gap is small everywhere -- the mass is the allocator.**
+
+Round 97's tool counted register-role swaps as content differences.  Adding a
+second, register-agnostic pass (every register name canonicalised to `r`, so
+`mov ebx,[esi+0x18]` and `mov ebp,[esi+0x18]` compare equal while
+`[esi+0x18]` against `[esi+0x10]` still differs) changes the picture
+completely:
+
+```
+function                       tgt  cand  matched  runs  target-only  cand-only
+cm_ExProdObjekt                354   354    351      3        0           0
+srv_LoadBuf                    226   226    222      8        1           1
+m_AllocTracked                 249   245    232     27        5           1
+vfs_ReadCompressed             200   201    176     25        7           8
+gm_CheckInventoryCapacity      138   137    126     10        8           7
+vfs_OpenStream                 206   212    184     22       13          19
+gm_FindNextFilteredEntity      118   109     93     14       16           7
+gv_ExAllocGraveyardWorker      333   332    295     37       18          17
+ahm_ExAllocAlchemist           286   287    256     29       20          21
+gm_AllocGebaeude               346   359    303     29       27          40
+ls_LoadBuildingEntityState     499   487    466     22       29          17
+cm_ExCopyEntityData            249   239    198     31       39          29
+cm_ExSellObjekt                667   664    559     88       42          39
+gm_AllocSpieler               1056  1053    853    174       77          74
+```
+
+Compare the last two columns with round 97's -- `vfs_ReadCompressed` 21/22 ->
+7/8, `cm_ExSellObjekt` 103/100 -> 42/39, `gm_AllocSpieler` 218/215 -> 77/74,
+`cm_ExProdObjekt` 1/1 -> **0/0**.
+
+Three consequences:
+
+- **`cm_ExProdObjekt` is content-exact.**  Every instruction the reference has,
+  we have, with the same operands up to register naming.  Its 13 masked
+  differing bytes are entirely allocation and schedule -- which is exactly what
+  its file header says about the pre-loop dead-store interleave.  No source
+  change can close it.
+- **`gm_AllocSpieler`, the largest remaining function at 1,947 differing bytes,
+  has 77 target-only instructions out of 1,056** -- about 7% content, 93%
+  schedule/renaming.  Same for `cm_ExSellObjekt` (42 of 667) and
+  `ls_LoadBuildingEntityState` (29 of 499).
+- **Only five functions have a content gap above 25 instructions**, and only
+  `gm_AllocSpieler` is above 42.
+
+So the remaining ~6,500 differing bytes are overwhelmingly *not* content.  The
+enumerable source work left is: `gm_FindNextFilteredEntity` (16, layout-
+bound), `ahm_ExAllocAlchemist` (20), `gm_AllocGebaeude` (27), `ls_Load` (29,
+one allocator decision), `cm_ExCopyEntityData` (39), `cm_ExSellObjekt` (42) and
+`gm_AllocSpieler` (77).  Everything else is at or below 8.
+
+Practical reading: source reconstruction is essentially done; the goal now needs
+either the reference's exact source text or a way to steer msvc6's allocator,
+and neither has yielded to any measured lever in this session.
+
 **Round-98: the round-97 tool pays for itself -- `m_AllocTracked` 6,528 ->
 6,515.**
 
