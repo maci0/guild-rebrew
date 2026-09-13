@@ -414,6 +414,11 @@ nothing: `EXACT` is the strongest claim and `PROVEN` ranks below `RELOC` because
 function's bytes still differ (see the round-246 entry). The residue table below is the work
 list.
 
+**A written-up account of the obstacles themselves — compiler-level walls, measurement traps,
+process failures and the errors made along the way — is in `docs/difficulties.md`.  Read it
+before starting work; it exists to stop a fresh attempt repeating what has already been
+measured.
+
 **Regenerating the deliverable** (do this after any `cmake --build`, which *deletes*
 `build/server.dll` on its expected post-link failure):
 
