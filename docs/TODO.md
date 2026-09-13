@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-150: a diagnostic that says *what kind* of residual each function has.**
+
+`scripts/instr_diff.py` (new): aligns a function's reference and built
+instruction streams (LCS over relocation-masked bytes), splits the hunks into
+"same-kind (only registers/addresses differ)" versus "different-kind", and
+compares kind multisets with **absolute addresses collapsed**.  That fixes two
+blind spots the earlier measurements had — a raw mnemonic multiset counts every
+different string/global address as a different instruction kind, and a
+fixed-offset byte count loses everything after the first size difference:
+
+```
+$ python3 scripts/instr_diff.py 0x1000e140        # cm_ExProdObjekt
+  aligned match: 348/354 reference instructions (98.3%)
+  3 hunks | kind multiset: 0 reference-only, 0 built-only
+$ python3 scripts/instr_diff.py 0x1000aac0        # cm_ProcessCommandQueue
+  aligned match: 202/205 reference instructions (98.5%)
+  2 hunks | kind multiset: 2 reference-only, 0 built-only
+    ref-only x1: test R, R
+    ref-only x1: je ADDR
+$ python3 scripts/instr_diff.py 0x10019720        # gm_CalculateProductionValue
+  aligned match: 122/123 reference instructions (99.2%)  2 hunks
+```
+
+`cm_ExProdObjekt` has **no** kind-level difference at all: its 21-byte residual
+is pure register/order assignment, so only allocator steering can move it.
+`cm_ProcessCommandQueue` is missing exactly the `test ebx,ebx; je unlink` pair —
+the one thing its own note (round 9) says is produced by an explicit re-test but
+that then collapses the tail.
+
+*Re-verified with byte-level numbers*: `cm_ProcessCommandQueue` with
+`held = pkt; if (held == 0) goto unlink; goto advance;` emits the missing pair
+and drops the fixed-offset masked match from 97.7% to **34.0%** (the control-flow
+distance, not the spelling, blocks it — as the file's notes concluded); and
+`gm_AllocSpieler`'s early extra `mov ecx,8` sits inside a 20/29-kind spread, so
+it is not a stray statement to delete.
+
 **Round-149: the build produces the deliverable — `cmake --build build --target
 final` writes `build/server.dll`, identical except the 19 functions.**
 
