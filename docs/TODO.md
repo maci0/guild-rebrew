@@ -115,15 +115,30 @@ epilogue.  Two sites account for it, and the table/case map are byte-for-byte th
 same size in both objects (5 four-byte entries + a 13-byte map) — the table only
 *starts* 8 bytes early:
 
-- ref[79:82] at refoff 0x107, **7 bytes we do not emit at all** —
-  `jmp 0x1000912d; test bl,bl; je 0x100090ea`.  A forward jump over a two-
-  instruction test/branch-back, i.e. a CFG difference in the `check_header` /
-  `inflate_setup` region, not instruction selection.  Seven of the eight.
-- the finalize tail from ~0x246, where the gap collapses +6 -> -17 in one hunk:
-  the reference reloads `[esp+0x18]` (mode18) twice and its `g_stream_count` RMW is
-  the 5-byte `mov eax,[0x10034678]` form.
+The gap is **0 from refoff 0x118 through 0x246** — so everything between those
+points is exactly the reference's length, and the whole 8 bytes are in the finalize
+tail:
 
-The agent has been given both sites, with (1) to be attempted alone.
+```
+gap 0 at refoff 0x246  ->  gap -17 at refoff 0x260  ->  recovers to -8 by the epilogue
+```
+
+The reference there loads and masks mode18 **twice** — `mov edx,[esp+0x18]` at
+0x24b with `and edx,0xff` at 0x265 pushed as the first `sprintf` argument, then
+`mov eax,[esp+0x18]` again at 0x277 with `and eax,0xff` at 0x27b pushed as the
+second.  Our source's `sprintf(..., mode18, mode18)` CSEs into one eax pushed
+twice, which is the 17-byte shortfall.  The fix is the tail half of the rejected
+spelling only — `int mode18` with byte-width access and a volatile second argument,
+per this file's header lines 120-126 — *not* the flag-loop rewrite that cost the
+172 in-function bytes.  (My earlier note in this round blamed a 7-byte block at
+refoff 0x107; that was wrong.  The gap returns to 0 at 0x118, so adding that block
+would overshoot by 7.)
+
+**The running-gap trace is the right instrument for a length hypothesis** and found
+this in one run: align the two streams, and print our offset minus the reference's
+at the start of each equal block.  `probe_function` and `instr_diff` cannot see a
+length hypothesis at all — the object score for the spelling that fixes the length
+was 285 against a 451 baseline.
 
 **Round-180: a semantic break caught by reading the diff, and a neutral candidate
 discarded.**
