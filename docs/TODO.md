@@ -71,6 +71,38 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-165: locating the size difference, and two spellings measured shut.**
+
+`scripts/sizediff.py` answers a question the other tools only answer vaguely:
+walking the instruction alignment, where does the compiled function's size
+diverge from the reference's?  `instr_diff.py` says what *kind* of difference is
+left; this says which hunks spend or save bytes, with a running total.  First
+use, on the smallest size-exact function:
+
+```
+0x1000aac0 size 639 (cm_ProcessCommandQueue)
+  ref[21:24] test ebx,ebx / je / jmp   9B  ->  built jmp                5B   (-4)
+  ref[25:26] jne 0x1000aaff            2B  ->  built jne 0x1000ad08     6B   (+4)
+```
+
+-- i.e. the target re-tests `ebx` after assigning it and takes a *short* back
+edge, where our source folds the test away and needs a long one.  Net zero, which
+is why the function is size-exact, and the file's own notes record that every
+spelling of that CFG has been tried and collapses the match (natural if/else-if
+158, inverted arms 163, recheck-inline 153...).  The measurement agrees; the
+residual is a branch-layout fixed point, not a missed spelling.
+
+On `gm_AllocSpieler` the same tool showed the first real divergence: the
+reference computes the memset destination once (`lea edx,[edx+0x100358fc]` then
+`mov edi,edx`) where we recompute it (`lea edi,[edx+0x100358fc]`, 4 bytes more).
+That reads like a named pointer in the original, so three spellings were tried
+and measured against the 1246 baseline: a `clr` local holding the same
+expression 1246 (inert), `memset(slot + 0x5c, ...)` and `clr = slot + 0x5c`
+both **980** -- the `slot` base rebases the whole address computation off ebp
+and costs 266 matched bytes.  The shipped spelling stays.  (Same lesson as the
+earlier ones: the target's `edx` reuse is a whole-function allocation effect, not
+something the address expression controls.)
+
 **Round-164: a size objective, and the finding that reordering cannot fix a
 size.**
 
