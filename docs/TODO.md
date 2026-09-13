@@ -1,3 +1,48 @@
+# Blockers — 100% Round-Trip Goal
+
+**Round-91: `gm_FindNextFilteredEntity`'s head is not the loop.**
+
+`docs/msvc6-c-shapes.md` section 38 says the lever for a target that
+shrink-wraps is *loop register demand*, with the corollary "delete the loop and
+recompile; if the head then matches, the entry spelling is right and the loop is
+the blocker".  Applied here it says the opposite: **with the loop deleted the
+head still does not match.**  The reference's early returns are *inlined*
+(`xor eax,eax; pop esi; ret` at 0x10016f87 and 0x10016f93); ours jump to a
+shared tail (`je 0x...`).  That is an epilogue-merge decision, and section 7
+documents it as source-reachable -- two consecutive guards returning the same
+value give two epilogues -- yet our source already spells them as two
+consecutive `if (...) return 0;` guards and msvc6 still merges them here.
+
+What the reference does that ours does not, from the bytes at 0x10016fe1:
+
+```
+target  53            push ebx     8a1d 900b0310  mov bl,[g_query_filter_extra4]
+        55            push ebp     8b2d 8c0b0310  mov ebp,[g_query_filter_extra2]
+        56            push esi     8b3d 880b0310  mov edi,[g_query_filter_extra1]
+        57            push edi
+```
+
+-- three loop-invariant filter globals hoisted into callee-saved registers and
+three pushes shrink-wrapped to that block.  Measured this round, and worse:
+
+```
+explicit `qf1/qf2/qf4` locals read before the loop   95/354   aligned 65/118
+`while (*list_head == 0 || 1)` -> `do {} while (..==0)`  161/358
+baseline                                            168/346  aligned 75/118
+```
+
+So the hoist is the reference's *compiler* doing loop-invariant motion on
+globals that our build declines to move, and spelling it out makes it worse.  The
+`|| 1` in that loop is also load-bearing: the honest `do/while` that replaces it
+costs 16 bytes, because `|| 1` makes the loop body unconditional, which is what
+the reference's always-advance shape needs.
+
+**Also measured this round.**  `vfs_ReadCompressed` aligns at 164/200; the
+residue is the round-85 comparison flip (`cmp eax,edi / jae` against
+`cmp edi,eax / jbe`) plus a store/branch reorder at indices 160-180, where the
+reference loads two stack slots before the `[esi+0x50]`/`[esi+0x5c]` stores and
+ours stores first.
+
 **Round-90: the loop-entry test is not reachable by spelling, and a survey of
 where the remaining bytes actually live.**
 
