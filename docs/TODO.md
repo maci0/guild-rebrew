@@ -4,6 +4,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-295 (2026-09-13): ReadCompressed + ExProdObjekt reviews CLEAN.**
+
+- `vfs_ReadCompressed`: all 16 non-exact insns inside the 4 documented
+  walls; guards, clamp, fseek/fread args, copy/inflate paths, crc triple,
+  return protocol (incl. dead i==0 check both sides) verified. Clean.
+- `cm_ExProdObjekt`: 316 exact / 33 reloc; hunk-2 closed semantically
+  (`mov ebx,eax` precedes, stored value identical); loops, min-compare,
+  cap direction, material math, all 13 callees, log lines, result
+  effects, return paths verified. Clean.
+- 13 of 19 residue functions now carry explicit behavioral verdicts.
+- Residue baseline unchanged: **9,209**.
+
 **Round-294 (2026-09-13): Tracked + Objects semantic reviews CLEAN.**
 
 - `m_AllocTracked`: full 658-byte trace — guards, tag parse (16-byte
