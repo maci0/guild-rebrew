@@ -1,5 +1,57 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-107: a missing 16-byte function was holding the whole CRT region 16
+bytes early.  Whole-`.text` masked 63.66% -> 76.61%.**
+
+The reference has a 12-byte thunk at **0x1001a150** that our tree never had:
+
+```
+0x1001a150  mov eax, [esp+4]
+0x1001a154  push eax
+0x1001a155  call _srand            (0x1001b535)
+0x1001a15a  pop ecx
+0x1001a15b  ret
+```
+
+i.e. `void __cdecl srv_SeedRandom(unsigned int seed) { srand(seed); }`.  It is
+called from **six** command handlers -- `cm_ExAllocSpieler` 0x1000d476,
+`cm_ExAllocClientSpieler` 0x1000d58b, `cm_ExEmployWorker` 0x1000f74b,
+`cm_ExCreateCitizen` 0x1000f9b2, `cm_ExAllocGraveyardWorker` 0x10010328 and
+`cm_ExAllocAlchemist` 0x10010368 -- which our sources had calling the CRT
+`srand` directly.
+
+**Why it survived every previous pass.**  `rebrew test` masks the rel32 of every
+call, so `call _srand` and `call 0x1001a150` are the same object to it: all six
+callers are RELOC and stay RELOC either way.  The catalog made the same mistake
+in the other direction -- `library_msvc.h` and `CATALOG.md` record 0x1001A150 as
+LIBCMT's `_srand` (`LIBRARY/EXACT`), but `map_full.json` puts `rand.obj`'s
+`srand_impl` at 0x1001b535, so 0x1001a150 is not a library section at all.  And
+`functions.txt` lists it as `fcn.1001a150`, 12 bytes, untracked.
+
+**The whole CRT region was 16 bytes early because of it.**  The split set places
+`_fclose` at 0x1001a17a against the reference's 0x1001a18a: everything from
+`_fclose` back was short by exactly this object, and a uniform misplacement is
+invisible to a per-function match (each function still matches itself) while
+being fatal to a same-offset byte compare.
+
+```
+                        split exact-VA symbols   delta range      whole .text raw   masked
+before                  1 / 319                  -0x10..+0x30c    33.57%            63.66%
+after                   246 / 319                +0x0..+0x31c     58.45%            76.61%
+```
+
+Build `.text` 0x223c6 -> 0x223d6 (+16); game region unchanged at 92.16% / 6491
+differing, as it should be -- the fix is entirely in the CRT.  Gate: 186 lint
+files, 0 errors, `verify --full` **281/283** (baseline raised 280 -> 281).  The
+remaining split drift (`+0x0..+0x31c`) is now confined to the two closure-helper
+objects `1001b200_.text.obj` and `1001eab0_.text.obj`, whose internal symbol
+offsets differ by up to 0x31c while the objects themselves end in the right
+place.
+
+Landed: `src/server.dll/DieGildeAddOnServer/server_c/srv_SeedRandom.c`, an
+`extern` in `command_internal.h`, and the six call sites redirected from
+`srand` to `srv_SeedRandom`.
+
 **Round-106: the CRT member set, and why `.text` size parity is a trap.**
 
 **The CMake link is missing 26 LIBCMT members the reference has.**  Joining

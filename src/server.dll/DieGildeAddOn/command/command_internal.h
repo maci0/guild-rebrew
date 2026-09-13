@@ -50,4 +50,10 @@ extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern char* __cdecl gm_AllocObjekt(int, int, int);
 extern int __cdecl gm_RemoveObjectByType(void**, unsigned int);
+
+/* server_c/srv_SeedRandom.c -- the reference's srand(seed) thunk at
+ * 0x1001a150.  The command handlers call THIS, not the CRT `_srand`; calling
+ * `srand` directly is relocation-masked by `rebrew test`, so the difference
+ * hid behind six RELOC passes. */
+extern void __cdecl srv_SeedRandom(unsigned int seed);
 #endif /* COMMAND_INTERNAL_H */

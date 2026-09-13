@@ -36,7 +36,7 @@ int __cdecl cm_ExCreateCitizen(int cmd, char* result)
 		result[1] = 1;
 		*(int *) (result + 6) = 0;
 	}
-	srand(*(int *) (cmd + 0x22));
+	srv_SeedRandom(*(int *) (cmd + 0x22));
 	if (*(int *) (cmd + 0x17) != -1) {
 		field = gm_GetFieldByType((char *) cmd, *(int *) (cmd + 0x17));
 		*(int *) (cmd + 0x17) = field;

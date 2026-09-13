@@ -44,7 +44,7 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 		unsigned int kind;
 		*(int*)(c + 0x10) = g_next_object_id;
 		*(int*)(c + 0x45) = rand();
-		srand(*(int*)(c + 0x22));
+		srv_SeedRandom(*(int*)(c + 0x22));
 		if (result)
 			kind = 6;
 		else

@@ -82,7 +82,7 @@ int __cdecl cm_ExAllocSpieler(int cmd, char* result)
 	*(int*) (cmd + 0x10) = g_next_object_id;
 	seed = rand();
 	*(int*) (cmd + 0x26) = seed;
-	srand(seed);
+	srv_SeedRandom(seed);
 	seed = *(int*) (cmd + 0x1f);
 	if (seed == -1) {
 		seed = 0;

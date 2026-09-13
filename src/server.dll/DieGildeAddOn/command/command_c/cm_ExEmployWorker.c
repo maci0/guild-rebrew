@@ -36,7 +36,7 @@ int __cdecl cm_ExEmployWorker(int cmd, char* result)
 	*(int*) (cmd + 0x1f) = g_next_object_id;
 	random_seed = rand();
 	*(int*) (cmd + 0x23) = random_seed;
-	srand(random_seed);
+	srv_SeedRandom(random_seed);
 	building_entity = (ushort*) gm_StartFilteredEntitySearch(1, 1, *(int*) (cmd + 0x10));
 	if (building_entity == (ushort*) 0) {
 		LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x4d3a,

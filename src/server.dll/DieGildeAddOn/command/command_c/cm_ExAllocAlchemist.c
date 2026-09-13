@@ -41,7 +41,7 @@ int __cdecl cm_ExAllocAlchemist(int cmd, char* result)
 	*(int*) (cmd + 0x14) = g_next_object_id;
 	val = rand();
 	*(int*) (cmd + 0x10) = val;
-	srand(val);
+	srv_SeedRandom(val);
 	alloc_id = ahm_ExAllocAlchemist((void*) (cmd + 0x10));
 	alloc_id = alloc_id - 0xffff;
 	return (alloc_id != 0) - 1;
