@@ -1,27 +1,51 @@
 # Blockers — 100% Round-Trip Goal
 
-**Round-104: the four position-alignment breaks, and what fixing them is worth.**
+**Round-104: the four position-alignment breaks -- one fixed, three windowed.**
 
-Every remaining layout problem in the game region is **one object whose 16-byte
-COMDAT bucket differs from the reference's**.  `scripts/link_drift.py` on
-`build/probe.dll` shows the drift change exactly four times between
-`0x10001130` and `0x1001a0d0`, and each change is attributable to the object
-immediately before it:
+**`m_AllocTracked` is fixed and out of the list.**  Its window was 657..672 and
+its size deficit was not code at all: the group-list sentinel was written as the
+literal `(struct GroupNode*) 0x117640a0`, so msvc6 proved the address nonzero and
+folded the reference's loop-head null test (`mov esi,offset g_alloc_root; mov
+eax,esi; test eax,eax; je`) into an unconditional `jmp`.  Declaring the global
+`extern` (the address is not known until link, so it cannot be folded) and using
+`(struct GroupNode*) &g_alloc_root_name` -- the spelling `m_ReportGroupInfo.c`
+already uses on the same global -- gives
+
+```
+obj_size          654 -> 660        COMDAT span 656 -> 672  (= the reference's)
+rebrew test match 269 -> 451
+register-agnostic 232 matched / 5 target-only -> 235 / 2
+postlink layout coverage            8.2% -> 30.8%
+whole-.text masked                53.37% -> 63.66%   game 92.08% -> 92.16%
+game differing bytes                 6563 -> 6491
+```
+
+One object, +10.3 points of whole-`.text` masked match and 72 bytes in the game
+region.  The three breaks that remain:
 
 | function | ours | ref code | ours span | ref span | needs |
 |---|---|---|---|---|---|
 | `CrashDumpUnhandledExceptionFilter` @0x10002770 | 2137 | 2115 | 2144 | 2128 | 2113..2128 (shrink 9..24) |
-| `m_AllocTracked` @0x10006580 | 654 | 658 | 656 | 672 | 657..672 (grow 3..18) |
 | `vfs_ReadCompressed` @0x10008a90 | 497 | 492 | 512 | 496 | 481..496 (shrink 1..16) |
 | `cm_ExCopyEntityData` @0x1000ec00 | 880 | 901 | 880 | 912 | 897..912 (grow 17..32) |
 
-`span = align16(COMDAT length)`, and the span is exactly `next_ref_VA - ref_VA`
-for each of the four (`0x10002fc0-0x10002770 = 0x850`, `0x10006820-0x10006580 =
-0x2a0`, `0x10008c80-0x10008a90 = 0x1f0`, `0x1000ef90-0x1000ec00 = 0x390`), so
-**any** length inside the window re-aligns everything after it.  Read the
-`rebrew test` size as the code length and the window as the requirement: being
-4 bytes from the target's length is not a 4-byte problem, it is a 387-symbol
-problem.
+Every remaining layout problem in the game region is **one object whose 16-byte
+COMDAT bucket differs from the reference's**.  `scripts/link_drift.py` on the
+build *before* the fix above showed the drift change exactly four times between
+`0x10001130` and `0x1001a0d0`, and each change is attributable to the object
+immediately before it (`0x10002fc0-0x10002770 = 0x850`,
+`0x10006820-0x10006580 = 0x2a0` -- now fixed, `0x10008c80-0x10008a90 = 0x1f0`,
+`0x1000ef90-0x1000ec00 = 0x390`).  `span = align16(COMDAT length)` and the span
+is exactly `next_ref_VA - ref_VA`, so **any** length inside the window re-aligns
+everything after it.  Being 1 byte from the target's length is not a 1-byte
+problem, it is a 387-symbol problem.  The original table, for the record:
+
+| function | ours | ref code | ours span | ref span | needs |
+|---|---|---|---|---|---|
+| `CrashDumpUnhandledExceptionFilter` @0x10002770 | 2137 | 2115 | 2144 | 2128 | 2113..2128 (shrink 9..24) |
+| `m_AllocTracked` @0x10006580 | 654 | 658 | 656 | 672 | 657..672 (fixed above) |
+| `vfs_ReadCompressed` @0x10008a90 | 497 | 492 | 512 | 496 | 481..496 (shrink 1..16) |
+| `cm_ExCopyEntityData` @0x1000ec00 | 880 | 901 | 880 | 912 | 897..912 (grow 17..32) |
 
 **What that is worth, measured.**  `.scratch/padobj.py` rewrites the four
 objects' `.text` raw size to the reference span (nop-padding three, truncating
@@ -37,6 +61,9 @@ spans forced correct    115905/141382 = 81.98%     92.07%        6570
 Both rows are measured against the same `db/verify_results.json` (the game
 region's baseline reads 92.16% / 6495 against the previous DB revision), so the
 0.01-point game wobble is noise and the +28.6 points of whole-`.text` is not.
+`m_AllocTracked` of that set is now really fixed (above), which is where the
+63.66% comes from; the three still-open windows are the remaining gap between
+that and 81.98%.
 
 The gain is in the CRT region: the split objects there are placed `+16`
 early/late and the four sizes move the whole tail into place.  This is by a wide

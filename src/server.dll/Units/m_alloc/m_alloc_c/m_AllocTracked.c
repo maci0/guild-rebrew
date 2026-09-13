@@ -12,12 +12,42 @@ void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
 void __cdecl ReportMessage(char* msg); /* Single arg log? */
 void* __cdecl malloc(unsigned int size); /* 0x1001a7f7 - game malloc */
 extern int g_alloc_counter;
+extern int g_alloc_root_name; /* 0x117640a0 - root group node (extern: the
+ * reference cannot prove its address nonzero and keeps the loop-head test) */
 void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 /* Allocates tracked memory. Wraps the CRT allocator with allocation
  * tracking: records the source location string, updates group
  * counters, and maintains the allocation list. */
 
 // CFLAGS: /O2 /Gd /G6 /Oy-
+// FIXED 2026-09-13 (round 104): the group-list sentinel is an EXTERNAL symbol,
+// not a literal, and that is what the whole "unfolded null test" wall was.
+// The reference loads the root node's ADDRESS and then tests it:
+//
+//   0x10006634 mov esi, offset g_alloc_root      (0x117640a0)
+//   0x10006639 test eax, eax
+//   0x1000663e je   <malloc arm>          <- survives
+//
+// msvc6 folds that branch away when the address is written as the literal
+// `(struct GroupNode*) 0x117640a0`, because a constant is provably nonzero.  An
+// `extern` declaration is not: the compiler cannot know the address the linker
+// will bind, so `&g_alloc_root_name` keeps the test, exactly as the reference
+// has it.  (This is the same lever `m_ReportGroupInfo.c` already uses on the
+// same global.)
+//
+//   obj_size          654 -> 660   (COMDAT span 656 -> 672 = the reference's)
+//   rebrew test match 269 -> 451
+//   register-agnostic 232 matched / 5 target-only -> 235 / 2
+//   postlink layout coverage   8.2% -> 30.8%
+//   whole-.text masked        53.37% -> 63.66%   game 92.08% -> 92.16%
+//
+// The span fix is the point: 656 vs 672 broke position alignment for every
+// symbol after this object (docs/TODO.md round 104).  The file was never
+// "13 bytes short" -- it was 2 bytes short in code and 16 bytes short in span.
+//
+// The 2 remaining target-only items are allocator: the reference keeps the
+// size-load in `edi`/`ecx` across the g_stat1 add where ours reloads.
+//
 // SIZE CORRECTION 2026-09-13 (round 92): the object is 645 bytes, not 658.
 // `rebrew test`'s `total` field is the *comparison length* (the target's size),
 // not the candidate's; the honest field is `obj_size`, which is the function's
@@ -318,7 +348,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 		return 0;
 	}
 	g_alloc_counter++;
-	node = (struct GroupNode*) 0x117640a0;
+	node = (struct GroupNode*) &g_alloc_root_name;
 	if (tag != 0) {
 		p = strchr(tag, ':');
 		if (p != 0) {
@@ -329,7 +359,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			}
 			strncpy(buf, tag, taglen);
 			buf[taglen] = 0;
-			node = (struct GroupNode*) 0x117640a0;
+			node = (struct GroupNode*) &g_alloc_root_name;
 			while (node != 0) {
 				if (strcmp(buf, node->name) == 0) {
 					break;
