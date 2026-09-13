@@ -265,6 +265,37 @@ extern char g_relationship_matrix_secondary[];
  * window.  The three open spans (this one, vfs_ReadCompressed and CrashDump)
  * only work as a set; see docs/TODO.md round 110.
  */
+/* 2026-09-14 (round 242 pass): the type-2 arm re-spelled "in range first, then
+ * HIGH, then low" -- arms in that source order, per-arm stores kept:
+ *
+ *   if (rel_value >= -0x7f && rel_value < 0x7f)      { store }
+ *   else if (rel_value >= 0x7f) { rel_value = 0x7f;  store }
+ *   else                        { rel_value = -0x7f; store }
+ *
+ * (was `if (< -0x7f) low else if (< 0x7f) in-range else high`).  Exhaustive and
+ * mutually exclusive, so it is the same three cases with the same three stores.
+ * The reference emits this arm as `jl low / jge high / store / jmp` and we were
+ * emitting a two-arm `jge` fold; the reorder gives the reference's `jl`/`jge`
+ * pair with the in-range store in the middle, which is the shape the type-0 arm
+ * has had since round 110 (see that note).
+ *
+ *   honest matched 430 -> 443, object 912 -> 912, real body 900 -> 905
+ *   (COMDAT 912 either way: cl pads a COMDAT to 16, so real in 897..912 is
+ *   composition-neutral -- see docs/msvc6-allocator.md Finding 58)
+ *   matched-reloc 584 -> 567 and aligned 185 -> 184: both are fixed-offset
+ *   artefacts of the +5 body, the type-2 arm now emits one block per arm where
+ *   the fold emitted two.
+ *
+ * Measured on this body and reverted (each object-level probe, one at a time):
+ * the same arm with a single shared store after the join 897 B / 420 / 578;
+ * with the type-0 arm also per-arm 904 B / 440 / 572; adding the type-1
+ * secondary clamp reordered the same way 905 B (holds real 900 exactly) /
+ * 437 / 573 with aligned 195, the best alignment measured here; a shared
+ * `ushort empty = 0xffff` local feeding all four slot guards is byte-identical
+ * (msvc6 rematerialises the immediate); the dst slot scan top-tested restores
+ * the reference's unrotated loop but adds the entry guard, 904 B / 383 / 537
+ * with aligned 191; src scan bottom-tested 910 B / 350 / 514.  The matrix
+ * clamp's per-arm store form is a wash (429/583/187). */
 /* /Oa is not implied by the toml cflags and is worth 11 bytes here: see the
  * pass-5 note above. */
 #pragma optimize("a", on)
@@ -456,15 +487,15 @@ src_found:
 				temp = (int) (signed char) g_relationship_matrix_primary[dst_slot];
 				g_relationship_matrix_secondary[dst_slot] = 0;
 				rel_value = *(volatile int*) (cmd_ptr + 0x18) + temp;
-				if (rel_value < -0x7f) {
-					rel_value = -0x7f;
+				if (rel_value >= -0x7f && rel_value < 0x7f) {
 					g_relationship_matrix_primary[dst_slot] = (char) rel_value;
 				}
-				else if (rel_value < 0x7f) {
+				else if (rel_value >= 0x7f) {
+					rel_value = 0x7f;
 					g_relationship_matrix_primary[dst_slot] = (char) rel_value;
 				}
 				else {
-					rel_value = 0x7f;
+					rel_value = -0x7f;
 					g_relationship_matrix_primary[dst_slot] = (char) rel_value;
 				}
 			}
