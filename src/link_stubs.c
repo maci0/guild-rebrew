@@ -16,7 +16,11 @@ double _g_stat_max_d = 0;
 float _g_stat_min = 0;
 double _g_stat_min_d = 0;
 int fcn_1001a6a1 = 0;
-int fcn_10016ea0 = 0;
+/* fcn_10016ea0 was a 4-byte DATA stub for 0x10016ea0, which is the function
+ * gm_SubObjectNoKill (spiel_dumpD.c).  gv_HireProductionWorker.c and
+ * gv_ExtendProductionTime.c called it as a function, so the link resolved
+ * those calls to a data address.  Both now call gm_SubObjectNoKill directly.
+ * (scripts/gen_link_stubs.py no longer exists; edit by hand.) */
 float g_output_share[1] = {0.0f};
 int g_field_worker_count[1] = {0};
 int g_field_entry_count[1] = {0};

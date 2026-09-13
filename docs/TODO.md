@@ -1,5 +1,53 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-108: the rel32 blind spot bites a second time -- a call to a data stub.**
+
+`rebrew test` masks the rel32 of every call, so a call to the **wrong**
+function passes as RELOC.  Round 107's missing `srv_SeedRandom` thunk was one
+instance of that; a multiset compare of every tracked object's call targets
+against the reference's (`.scratch/callscan.py` for the sweep,
+`.scratch/callcmp.py` to print one function's lists side by side) turns up a
+second, and a worse one:
+
+```
+reference  gv_HireProductionWorker 0x10011337  call 0x10016ea0
+ours       gv_HireProductionWorker             call _fcn_10016ea0
+```
+
+0x10016ea0 is `gm_SubObjectNoKill` in `spiel_dumpD.c`, whose definition is
+`int __cdecl gm_SubObjectNoKill(int a, int b, int c)` -- the same three
+arguments the two call sites pass.  Our sources instead called
+`fcn_10016ea0`, and `src/link_stubs.c` defined that name as a **4-byte data
+variable** (`int fcn_10016ea0 = 0;`), auto-generated back when the function was
+still unreversed.  The link therefore resolved both calls to a data address: a
+call that would fault at run time, invisible to `rebrew test` (masked) and to
+postlink (it patches the rel32 to the reference value regardless).
+
+Fixed: `gv_HireProductionWorker.c` and `gv_ExtendProductionTime.c` declare and
+call `gm_SubObjectNoKill`, and the stub is gone.  Sizes are unchanged --
+`.text` 0x223d6, whole-`.text` masked 76.61%, game 92.16% / 6491 -- so the fix
+buys correctness of the built image, not a metric.  Note that
+`scripts/gen_link_stubs.py`, which the stub file's header says to regenerate
+with, no longer exists; `link_stubs.c` has to be edited by hand.
+
+**The same scan's other ~20 hits are labelling, not wrong callees.**  Do not
+"fix" them:
+
+- `library_msvc.h` mislabels `fclose.obj`'s first section (0x1001a18a) as
+  `_fflush` when it is `_fclose` -- the code there tests `[esi+0xc] & 0x40`,
+  locks the stream and calls `0x1001a1bb`, which `map_full.json` names
+  `fclose_lk`.  Eight call sites in six functions (`_DispatchLogOutput`,
+  `_InitializeLogAndErrorHandler` x2, `gm_Open` x2, `vfs_CloseStream`,
+  `vfs_DestroyEntity`, `CloseVfsStream`) are `fclose` in ours and resolve to
+  that same member section, byte for byte.
+- `ftell.obj`'s first section (0x1001a2eb) is the public `ftell` wrapper (lock,
+  call the 353-byte worker, unlock); our `_ftell` is that same wrapper, and the
+  353-byte worker is what `map_full.json` labels `ftell`.
+
+`map_full.json`'s **member** names are the authoritative side of that
+comparison; the per-function `name` field is a heuristic label and several are
+wrong.
+
 **Round-107: a missing 16-byte function was holding the whole CRT region 16
 bytes early.  Whole-`.text` masked 63.66% -> 76.61%.**
 

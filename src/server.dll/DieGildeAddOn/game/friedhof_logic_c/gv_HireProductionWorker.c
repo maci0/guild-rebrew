@@ -15,7 +15,7 @@ extern unsigned int g_entity_slot_table[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, int d, int e);
-extern int __cdecl fcn_10016ea0(int a, int b, int c);
+extern int __cdecl gm_SubObjectNoKill(int a, int b, int c); /* 0x10016ea0 */
 extern int __cdecl gm_AddObjekt(int a, int b, int c);
 extern int __cdecl _ftol(void);
 
@@ -69,7 +69,7 @@ int __cdecl gv_HireProductionWorker(void* req)
 	}
 	if (*(int*) ((char*) req + 0x13) > 0) {
 		word1 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
-		fcn_10016ea0(*(int*) ((char*) entity2 + 4), word1, *(int*) ((char*) req + 0x13));
+		gm_SubObjectNoKill(*(int*) ((char*) entity2 + 4), word1, *(int*) ((char*) req + 0x13));
 		word2 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x10035439 * 189];
 		ftol_val = (int) (*(int*) ((char*) req + 0x13) * g_output_share[*(int*) ((char*) req + 0xc)]);
 		gm_AddObjekt(*(int*) ((char*) 0x100358a4 + *(unsigned short*) ((char*) entity1 + 0x27) * 0x21c),
