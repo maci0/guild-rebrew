@@ -1,5 +1,41 @@
 # Blockers — 100% Round-Trip Goal
 
+## Dropping the split objects' data sections does not help (2026-09-13, round 66)
+
+The `.data` gap is bigger than the blob placement work has been addressing, and
+the raw section sizes say so plainly:
+
+```
+                        .data raw   .data vsize   .rdata raw   .rdata vsize
+reference                  57344      0x174059c       12288        0x2e81
+build/split_poc.dll        73728      0x1746c28       16384        0x33b1
+build/server_manual.dll    65536      0x17448b8       16384        0x32d1
+```
+
+`.data` raw is exactly 0x4000 too big and `.rdata` raw 0x1000 too big, in both
+builds.  Note the byte-level `.data` metric compares only
+`min(ours, reference)` = 57344 bytes, so everything past the reference's end is
+*invisible* to it -- the +0x4000 is not in the 25311 figure at all.
+
+Hypothesis tested and rejected: that the surplus is the 229 split LIBCMT
+member objects' own `.data` sections duplicating the blob.  Running the whole
+split pipeline without `split_coff --with-data` into a scratch directory:
+
+```
+              .text (differing/vsize)   .rdata diff   .data diff
+with data        0x22af8 / 86608            2237         25311
+without data     0x23e7a / 87188            7441         25311
+```
+
+`.text` gains 0x1634, `.rdata` agreement more than triples its disagreement, and
+`.data` is byte-identical in the compared range -- the member data sections are
+not where the surplus comes from.  (`--with-data` stays on.)  The `defs` group
+grows from 20 to 40 objects to compensate, which is most of the `.text` cost.
+
+So two different problems are open in `.data`: the 25311-byte disagreement
+inside the reference's 0xE000, and a 0x4000 raw surplus past its end that
+nothing currently measures.
+
 ## `rebrew verify-placement` is not usable on these binaries (2026-09-13, round 65)
 
 Looking for a per-symbol `.data` placement diagnostic, I ran
