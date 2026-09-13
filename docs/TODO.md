@@ -1,5 +1,70 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-144: the round-143 volatile lever does not generalise — three sweeps,
+all reverted; plus a first-divergence column for the residual table.**
+
+Round 143 beat `ls_LoadBuildingEntityState`'s constant-caching blocker by making
+a family of field reads volatile.  This round tried the same lever on the other
+two functions whose blockers are documented as allocation decisions, and it does
+not transfer.  Each variant was compiled with the file's own flags and compared
+at fixed offsets against the reference (relocation slots and branch targets
+masked):
+
+* **`CrashDumpUnhandledExceptionFilter`** (112 failing entries; frame `0x28c`
+  against the reference's `0x280`, four saved registers against two).  Declaring
+  each of its eight long-lived locals volatile — `hDbgFile`, `hCrashLog`,
+  `pDbgBuf`, `hProcess`, `pCtx`, `fail_msg`, `fail_line`, `nBytesWritten` — one
+  at a time and all at once never changes the prologue (still
+  `ebx/ebp/esi/edi`, frame `0x28c` or `0x290`) and moves the masked match from
+  24.7% to at best 29.6% (`hCrashLog`, object 2128 -> 2224, i.e. 100+ bytes
+  longer).  Its cascade is a frame/local-shape difference, not a residency one.
+* **`cm_ExSellObjekt`** (96 entries; its first difference is `0x1000d945`, the
+  zero register — `edi` in the reference, `ebx` in ours).  Volatile on the 54
+  `*(int*)(cmd + N)` reads: 20.4%.  On every `cmd` cast: 19.3%.  On the eleven
+  zero-initialised locals: 18.3% (and frame `0x228 -> 0x230`).  On both: 17.6%.
+  The baseline 18.8% stays best, which *confirms* the file's own note that no
+  formulation shifts the zero register off ebx.
+* **`ls_LoadBuildingEntityState`**'s store block: a `volatile int* state_ptr`
+  gives 58.4% at object 1488 (+16 bytes); direct `*(int*)(esi + 0x99 + 4k)`
+  stores are byte-identical to the current 1472/1463 at 58.5%.  Neutral or worse.
+
+**The remaining 59 entries of `ls_LoadBuildingEntityState` need a lever that
+separates two coupled decisions.**  Every spelling that reproduces the
+reference's loop shape (`load_result + field + N`, pointer arithmetic,
+field-first order, `4 + load_result + ...`) loses the `or ebp,-1` caching and
+drops to 24.0-24.1% masked match; every spelling that keeps the caching folds
+`+8` into the induction variable (`mov ebx,8; lea ebp,[ebx-8]` against the
+reference's plain `xor ebx,ebx` with `lea [ebx+edx+N]`).  Volatile at a single
+field site does not cache either; adding it to the store's own read kills it.
+`volatile` neg1 stores, `unsigned int` counters and `+=` vs `= ... +` are inert.
+
+**New tooling**: `scripts/postlink_residual.py` now reports the *first* differing
+offset per function, which separates systematic from late divergences:
+
+```
+gm_AllocSpieler                     3343  @0x100188f4      m_AllocTracked          256  @0x10006591
+CrashDumpUnhandledExceptionFilter   1988  @0x10002772      gm_FindNextFilteredEntity 232  @0x10016f86
+cm_ExSellObjekt                     1979  @0x1000d945      ahm_ExAllocAlchemist    217  @0x1000be64
+ServerMainThread                    1114  @0x10009767      gm_CheckInventoryCapacity 102  @0x10019ee3
+ls_LoadBuildingEntityState           775  @0x1001292c      srv_LoadBuf              49  @0x1000a5c0
+cm_ExCopyEntityData                  555  @0x1000ec30      gm_ObjectsAvailble       25  @0x1001607d
+gm_AllocGebaeude                     529  @0x10017530      cm_ExProdObjekt          21  @0x1000e20d
+gv_ExAllocGraveyardWorker            465  @0x10011ce9      cm_ProcessCommandQueue   15  @0x1000aaf7
+vfs_ReadCompressed                   348  @0x10008a93      gm_CalculateProductionValue 5 @0x10019804
+vfs_OpenStream                       263  @0x10009040                               (34 outside the 19)
+```
+
+`CrashDump` (byte 2) and `cm_ExSellObjekt` (0x15) differ in their *prologue*, so
+their whole bodies are shifted — a source-shape/frame job.  `gm_AllocSpieler`,
+the biggest bucket, does not diverge until `0x100188f4` (the statement-order
+plateau its note describes); `ls_LoadBuildingEntityState`'s first difference is
+only a branch displacement (`jle` target), i.e. stream length, not content.
+
+Standing after this round: **coverage 89.3%** (797 failing entries; the gate
+needs ≤746, so 51 to go), `.text` residual `0x301b` of `0x22846` (`0x2ff9` of it
+inside the 19), all other sections byte-identical after the fixers, gate green
+(lint 187/0 errors, 0 compile errors, `verify --full` 281/283).
+
 **Round-143: a volatile field read beats the constant-caching wall — coverage
 `88.6% -> 89.3%`, `ls_LoadBuildingEntityState` residual `1404 -> 775` bytes.**
 

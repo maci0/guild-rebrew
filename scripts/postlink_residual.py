@@ -113,13 +113,15 @@ def main() -> int:
         return None
 
     counts: dict[str, int] = {}
+    first: dict[str, int] = {}
     for i in diffs:
         key = owner(i) or "<outside the non-matching functions>"
         counts[key] = counts.get(key, 0) + 1
-    print(f"{'function':40s} {'bytes':>6s}")
+        first.setdefault(key, i)
+    print(f"{'function':40s} {'bytes':>6s} {'1st diff':>10s}")
     for name, count in sorted(counts.items(), key=lambda kv: -kv[1]):
         if args.verbose or count > 8 or name.startswith("<"):
-            print(f"{name[:40]:40s} {count:6d}")
+            print(f"{name[:40]:40s} {count:6d} {first[name] + t_rva + IMAGE_BASE:#10x}")
     outside = counts.get("<outside the non-matching functions>", 0)
     print(f"\n{len(diffs) - outside:#x} of {len(diffs):#x} differing bytes are inside the "
           f"{len(bad)} functions `rebrew verify` reports as not byte-matched; "
