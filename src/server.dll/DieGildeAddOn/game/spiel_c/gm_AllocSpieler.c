@@ -215,16 +215,16 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	*(int*) (slot + 0x1f0) = 0;
 	g_citizen_count++;
 	*(int*) (slot + 0x210) = -1;
+	sprintf(work, s_fmt_spid_100315e4, g_next_object_id, type);
 	slot[0x216] = 0;
 	slot[0x217] = 0;
 	slot[0x218] = 1;
-	sprintf(work, s_fmt_spid_100315e4, g_next_object_id, type);
 	slot[8] = 0x64;
 	*(int*) (slot + 4) = g_next_object_id;
 	g_next_object_id++;
-	LogMessageInternal(s_file_spiel_c_10031004, 0x2637, work, 8);
 	*(int*) (slot + 0x1e4) = 0x3f800000; /* 1.0f */
 	slot[0x164] = (char) arg6;
+	LogMessageInternal(s_file_spiel_c_10031004, 0x2637, work, 8);
 	*(unsigned short*) (slot + 0xa) = (unsigned short) arg4;
 	slot[0x166] = 0;
 	slot[0x165] = (char) arg7;

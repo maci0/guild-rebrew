@@ -71,6 +71,37 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-161: a splitter bug that only a timeout exposed, and the climb fanned
+out over subagents.**
+
+10,963 -> 10,949 differing bytes.  Four subagents each climbed one file (disjoint
+files, so no interference: the tool writes only its own source, and
+`probe_function.py`'s object is pid-scoped).  Two converged with zero moves
+(`ServerMainThread` 2145, `m_AllocTracked` 489, `vfs_ReadCompressed` 161, all
+already fixed points), `cm_ExSellObjekt` found +1 object byte and
+`gm_AllocSpieler` +6; in the link that is -1 and -13.
+
+The CrashDump agent's run **timed out after accepting one move**, which is how a
+real bug surfaced: `statements()` tracked brace depth but not PAREN depth, so
+`for (;;) {` ended at the first `;` *inside the header*.  A `for` loop therefore
+became two units (`for (;` and `;) { ... }`), and swapping them produced
+
+```c
+for (;
+nFrames = 0x800;) {
+```
+
+-- the loop condition became a nonzero assignment, i.e. an infinite loop, and it
+still compiled, so nothing rejected it.  The move was reverted and the splitter
+now tracks parentheses and brackets; `gm_AllocSpieler` drops from 132 to 118
+units, which is how many of them were `for`-header fragments.  Every accepted
+move was then re-checked against the end-of-run post-condition under the
+corrected splitter (both survived).
+
+That timeout also shows the post-condition is only reached when a run *finishes*:
+a killed climb leaves its last accepted move unvalidated, so an agent's work has
+to be re-checked by the parent (done here).
+
 **Round-160: two climbs had broken the code, and the probe had a flag bug.**
 
 10,964 -> 10,963 differing bytes -- the number barely moves, because the round

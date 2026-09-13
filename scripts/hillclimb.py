@@ -147,10 +147,19 @@ def statements(body: str) -> list[tuple[int, int]]:
             i += 1
         if i >= n:
             break
-        start, depth = prev, 0
+        start, depth, paren = prev, 0, 0
         while i < n:
             c = s[i]
-            if c == "{":
+            # Parentheses and brackets are tracked as well as braces: without
+            # paren depth, `for (;;) {` ended at the first `;` INSIDE the header,
+            # so a `for` loop became two bogus units (`for (;` and `;) { ... }`)
+            # and swapping them produced `for (;\n nFrames = 0x800;)` -- an
+            # infinite loop that still compiled, so nothing rejected it.
+            if c == "(" or c == "[":
+                paren += 1
+            elif c == ")" or c == "]":
+                paren = max(0, paren - 1)
+            elif c == "{":
                 depth += 1
             elif c == "}":
                 depth -= 1
@@ -162,7 +171,7 @@ def statements(body: str) -> list[tuple[int, int]]:
                     if s.startswith(("while", "else"), j):
                         continue
                     break
-            elif c == ";" and depth == 0:
+            elif c == ";" and depth == 0 and paren == 0:
                 i += 1
                 break
             i += 1
@@ -298,6 +307,15 @@ def move(order: list[int], i: int, j: int) -> list[int]:
     return o
 
 
+def apply_spec(order: list[int], spec: tuple) -> list[int]:
+    """('m', i, j) relocates; ('s', i, j) exchanges two units."""
+    if spec[0] == "m":
+        return move(order, spec[1], spec[2])
+    o = order[:]
+    o[spec[1]], o[spec[2]] = o[spec[2]], o[spec[1]]
+    return o
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--va", required=True)
@@ -305,6 +323,9 @@ def main() -> int:
     ap.add_argument("--symbol", default=None)
     ap.add_argument("--rounds", type=int, default=10)
     ap.add_argument("--reach", type=int, default=3, help="max displacement")
+    ap.add_argument("--swaps", action="store_true",
+                    help="also try exchanging two statements (a different "
+                         "neighbourhood from relocation, and cheap)")
     ap.add_argument("--jobs", type=int, default=4)
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
@@ -372,10 +393,10 @@ def main() -> int:
     def header(text: str) -> str:
         return re.sub(r"^// FUNCTION: SERVER .*\n", "", text, flags=re.M)
 
-    def submit(i: int, j: int) -> tuple[tuple[int, int], tuple[int, ...]]:
-        tmp = src.with_name(f"_hc_{name}_{i}_{j}.c")
-        tmp.write_text(header(head) + render(move(order, i, j)) + tail)
-        return (i, j), score(tmp, args.va)
+    def submit(spec) -> tuple[tuple, tuple[int, ...]]:
+        tmp = src.with_name(f"_hc_{name}_{spec[0]}{spec[1]}_{spec[2]}.c")
+        tmp.write_text(header(head) + render(apply_spec(order, spec)) + tail)
+        return spec, score(tmp, args.va)
 
     def seq(o):
         """The units in the order they currently appear.
@@ -395,7 +416,7 @@ def main() -> int:
         for rnd in range(args.rounds):
             cur = seq(order)
             cur_barrier = [barrier[k] for k in order]
-            cands = [(i, i + d) for i in range(len(units))
+            cands = [("m", i, i + d) for i in range(len(units))
                      for d in range(-args.reach, args.reach + 1) if d
                      and 0 <= i + d < len(units)
                      and not (i < ndec <= i + d)          # no decl after a stmt
@@ -412,8 +433,22 @@ def main() -> int:
                      and not any(conflicts(cur[i], cur[k])
                                  for k in range(min(i, i + d), max(i, i + d) + 1)
                                  if k != i)]
+            if args.swaps:
+                for i in range(len(units)):
+                    for j in range(i + 1, min(i + args.reach + 1, len(units))):
+                        if any(cur_barrier[i:j + 1]):
+                            continue
+                        # both units change sides, and the two trade places
+                        if (i < ndec <= j) or (i >= ndec > j):
+                            continue
+                        if conflicts(cur[i], cur[j]):
+                            continue
+                        if any(conflicts(cur[i], cur[k]) or conflicts(cur[j], cur[k])
+                               for k in range(i + 1, j)):
+                            continue
+                        cands.append(("s", i, j))
             with cf.ThreadPoolExecutor(max_workers=args.jobs) as ex:
-                results = list(ex.map(lambda ij: submit(*ij), cands))
+                results = list(ex.map(submit, cands))
             for p in src.parent.glob(f"_hc_{name}_*.c"):
                 p.unlink(missing_ok=True)
             best, best_move = base, None
@@ -424,11 +459,11 @@ def main() -> int:
                 print(f"round {rnd}: no improving move among {len(cands)}; "
                       f"converged at {base[1]}")
                 break
-            i, j = best_move
-            order = move(order, i, j)
+            order = apply_spec(order, best_move)
+            i, j = best_move[1], best_move[2]
             base = best
             src.write_text(head + render(order) + tail)
-            print(f"round {rnd}: {i} -> {j}   {base[1]} matched "
+            print(f"round {rnd}: {best_move[0]} {i} -> {j}   {base[1]} matched "
                   f"(insn {base[2]:+d})  "
                   f"{strip_literals(cur[i]).strip().splitlines()[0][:46]!r}")
     finally:

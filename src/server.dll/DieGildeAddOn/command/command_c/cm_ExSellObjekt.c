@@ -136,11 +136,11 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 	*(int*)(cmd + 0x1a) = g_next_object_id;
 	resolved_dynamic = (short*)0;
 	source_dynamic_entity = (short*)0;
+	dest_game_object = (ushort*)0;
 	dest_dynamic_entity = (short*)0;
 	dest_object = (ushort*)0;
 	source_container_ptr = (char**)0;
 	dest_owner_entity = (short*)0;
-	dest_game_object = (ushort*)0;
 	source_existing_entity = (void*)0;
 	dest_existing_entity = (char*)0;
 	source_static_entity = (short*)0;
