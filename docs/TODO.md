@@ -1,5 +1,61 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-87 net effect on the honest metric** (`scripts/text_match.py --drift
+auto`, after `scripts/split_link.sh`): the game region goes from 91.77% to
+**92.11% masked**, and its differing bytes from 6,851 to **6,537** — 314 bytes
+closed by three functions:
+
+```
+                       before            after
+vfs_ReadData           112/472 matched   RELOC 472/472, 100%
+m_AllocTracked          46.6% -> 51.4%   60.8% masked
+gm_AllocGebaeude        39.1% -> 41.6%   73.5% masked
+```
+
+The split `.text` also shortens from +0x2b2 to **+0x292** (0x22ad8 vs the
+reference's 0x22846).  Gate: 0 lint errors, 0 compile/link errors,
+`verify --full` 280/282.
+
+## `gm_AllocGebaeude` — address-taken struct members force reloads (2026-09-13, round 87b)
+
+438/1078 -> **571/1078** matched bytes at the exact object size, by applying the
+aliasing half of the round-87 finding.  The rule the reference follows, and the
+reconstruction did not:
+
+> A pointer held in a **plain local** is kept in a register and stored through
+> repeatedly.  A pointer held in an **address-taken aggregate member** must be
+> reloaded after every store through it, because a `char*` store may alias the
+> field itself.
+
+Three sites were spelled the wrong way round:
+
+- **case 0x14** (the 0x1b5 sub-object).  `s.record` is a member of the 0x410
+  address-taken struct, so the four field stores emitted three `mov
+  [ebp-8],...` reloads.  The reference stores the pointer *nowhere* and issues
+  all four stores from one register:
+
+  ```
+  target 0x100177a8  or ecx,0xffffffff ; mov [eax+0x22],bl
+                     mov [eax+0x1c],cl ; mov [eax+0x1d],cl ; mov [eax+0x1e],ecx
+  ours              mov ecx,[ebp-8] ; mov [ecx+0x1c],al
+                    mov edx,[ebp-8] ; mov [edx+0x1d],al
+                    mov ecx,[ebp-8] ; mov [ecx+0x1e],eax
+  ```
+
+  A local `char* rec` reproduces it.
+- **case 0x1e** (the 0x600 table).  The reference writes the allocation only to
+  `geb+0x71` and reads the pointer back out of that field: the first store comes
+  from the call result still in `eax`, the second reloads `mov ecx,[esi+0x71]`
+  because the intervening char store may alias the field.  Keeping a second
+  copy in `s.record` cost one extra store and three extra reloads.
+- **case 0x4b** (the 0x3c record): same shape, same fix.
+
+Separately, `*(int*) s.dest = ...` became `*(int*)(geb + 0x65) = ...` at the six
+switch sites that use it.  `s.dest` is assigned once (`geb + 0x65`) and never
+written again, so the two are equivalent, but the reference resolves the
+constant address where ours kept a live pointer.  **Not** case 6/7: that one
+really does go through the pointer, and making it direct measured 489.
+
 ## `vfs_ReadData` is DONE — the shadow struct, not the prelude, was the wall (2026-09-13, round 87)
 
 Every previous pass on `vfs_ReadData` (0x10008e40) concluded the residual was
