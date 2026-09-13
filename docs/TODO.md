@@ -29,6 +29,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-304 (2026-09-13): baseline pinned by compare-gate.**
+
+- `rebrew verify --compare`: 0 regressions, 0 improvements, 283 unchanged
+  vs the saved report. The baseline is pinned mechanically now, not just
+  by the gate's count check — any future drift in either direction will
+  show here first.
+- Residue baseline unchanged: **9,209**.
+
 **Round-303 (2026-09-13): live partition search retired definitively.**
 
 - Re-examined the 7 split candidates: the game-code ones (0x10008A50,
