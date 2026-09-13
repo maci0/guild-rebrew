@@ -1,5 +1,46 @@
 # Blockers — 100% Round-Trip Goal
 
+## Canonicalising the cluster's shared declarations: 22 -> 10 errors (2026-09-13, round 70)
+
+Round 69 left 22 errors over 14 symbols in the merged `spiel` cluster.
+Canonicalising eleven declarations — keeping the spelling that matches the
+definition in the same cluster — takes it to **10 errors over six symbols**:
+
+```
+  1  char* g_slot_table;                       drop (extern unsigned char [] is authoritative)
+  1  char g_entity_type_bytes;                 drop
+  1  int g_entity_table_end;                   drop
+  1  char g_entity_state_base;                 drop
+  2  void* gm_AllocObjekt(int,int,int);        -> char*  (matches its definition)
+  3  int   gm_AllocRaum(char*,int);            -> char*  (matches its definition)
+  1  void* gm_SearchStruct(void);              -> char*
+  1  char* gm_ResolveParentEntity(void*);      -> short* (short*)  (matches its definition)
+```
+
+What remains is a shorter list of the same kind, plus two structural ones:
+
+```
+gm_FreeObjectListRecursive   (3)   conflicting prototypes
+gm_AddObjekt                 (2)   int vs void*
+LogMessageInternal           (1)
+gm_GetEntityTableEntry       (1)
+LinkedNode                   (1)   struct defined twice, differently (C2011)
+'active'                     (1)   not a member of LinkedNode (C2039)
+```
+
+`LinkedNode` is the interesting one: two of our files define the same struct
+name with different members, so one of the two reconstructions is wrong
+independent of merging.  `gm_AllocRaum` and `gm_AllocObjekt` being declared
+`int`/`void*` where their own definitions say `char*` is the same signal at
+function granularity — the per-function files disagree with each other about
+the cluster's own interface.
+
+That is a bounded cleanup: four more prototypes, one struct, one member, and a
+preamble syntax error (`probe.c(41): '}'`).  The canonicalisation was applied
+to the probe only; the real fix belongs in the sources (ideally one shared
+header per cluster instead of repeated externs), and then the merge can be
+tried for real and the `.data` duplication measured.
+
 ## The include blocker is solved; the externs are next (2026-09-13, round 69)
 
 Round 68 left `rebrew merge` failing on relative includes that no longer
