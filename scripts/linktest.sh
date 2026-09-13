@@ -53,6 +53,21 @@ for f in "$@"; do
     echo "recompiled $rel"
 done
 
+# Attribution guard.  postlink_residual attributes differing bytes by reference
+# VA, and every symbol after a changed object moves, so a per-function delta is
+# attribution ONLY when no other object changed.  Round 179 committed a "-58"
+# that re-measured at "+56" for exactly this reason: another agent's source had
+# been edited by a previous run and its stale object sat in the link.  A source
+# that is modified in git but not named here is that contamination.
+for dirty in $(git status --porcelain -- '*.c' | awk '{print $2}'); do
+    case " $* " in
+        *" $dirty "*) ;;
+        *) echo "WARNING: $dirty is modified but not in this run -- the per-function" >&2
+           echo "         delta below will mix its contribution with these files'" >&2
+           echo "         (see docs/TODO.md round 179).  Name it too, or revert it." >&2 ;;
+    esac
+done
+
 if ! bash scripts/split_link.sh > .scratch/linktest-link.log 2>&1; then
     echo "link FAILED -- tail of .scratch/linktest-link.log:" >&2
     tail -12 .scratch/linktest-link.log >&2
