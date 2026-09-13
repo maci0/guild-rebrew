@@ -16,10 +16,21 @@ Both of those are also the two largest items in the linked-residue table, so the
 the byte-identical measure agree on *priority*.  But the headline number does not measure
 this goal, for two reasons, and a future round must not read it as near-completion:
 
-- **The status ordering is semantic, not byte-exact.**  `PROVEN` (semantically verified)
-  outranks `EXACT` (byte-perfect), so a function can be `PROVEN` and still differ
-  byte-for-byte.  `cm_ExCopyEntityData` is `PROVEN` and carries **462 bytes** of linked
-  residue.  `rebrew verify --full` passes a function on object-level equality *with
+- **`PROVEN` is not a byte match, and it must never be read as outranking `EXACT`.**
+  `EXACT` (byte-perfect) is the strongest claim; `PROVEN` (semantically verified) ranks
+  **below `RELOC`**, because a proven function still compiles to bytes that differ from the
+  target.  `cm_ExCopyEntityData` is `PROVEN` and carries **462 bytes** of linked residue.
+  The toolchain's code is unambiguous about this (`rebrew/verify.py`'s `_STATUS_RANK` is
+  `EXACT` 0, `RELOC` 1, `PROVEN` 2, with the comment "PROVEN is a post-verify semantic
+  promotion, NOT a byte match"; `catalog/grid.py` repeats it; and
+  `metadata.should_promote_status` lets `EXACT`/`RELOC` override sticky `PROVEN` so a
+  function that finally byte-matches does record the win).
+  **The generated `AGENTS.md` template said the opposite** — `PROVEN > EXACT > RELOC >
+  STUB` — and that is what propagated into this file on the first pass.  Fixed at source in
+  `rebrew/src/rebrew/AGENTS.md.template`, together with `status.py`'s `matched_pct`
+  docstring, its rendered `"byte-matched"` label, the `dashboard.py` comment and
+  `depgraph.py`'s node style (which coloured `PROVEN` as `exact`).
+  Separately, `rebrew verify --full` passes a function on object-level equality *with
   relocation slots masked*, while the linked image compares every byte after patching.
 - **`rebrew todo` lists only functions needing implementation work** (STUB, SIZE_MISMATCH,
   NEAR_MATCHING).  The other **17** functions carry linked residue while being semantically

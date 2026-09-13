@@ -105,8 +105,13 @@ note   = "inline asm detected"
 > CLI tools (`rebrew test`, `rebrew match`, `rebrew diff --fix-blocker`, etc.).  Manual
 > edits will be lost or corrupt the file and break tool workflows.
 
-**STATUS values**: `PROVEN` (semantically verified) > `EXACT` (byte-perfect) >
-`RELOC` (match after masking relocations) > `STUB` (incomplete). `SIZE_MISMATCH`
+**STATUS values**, strongest claim first: `EXACT` (byte-perfect) > `RELOC` (match after
+masking relocations) > `NEAR_MATCHING` (close) > `STUB` (incomplete). `PROVEN`
+(semantically verified) is **not** a byte match and does **not** outrank `EXACT`: it ranks
+**below** `RELOC`, because a proven function still compiles to bytes that differ from the
+target (every PROVEN entry carries a non-zero delta). PROVEN is sticky against automatic
+demotion, but `EXACT`/`RELOC` always override it, and it must never be counted, reported or
+labelled as byte-matched. `SIZE_MISMATCH`
 and `MISSING_SIZE` are stored when the object size disagrees with the binary.
 `NEAR_MATCHING` appears only in `rebrew verify` output, never in the metadata.
 
@@ -131,7 +136,7 @@ Build with `cmake -S . -B build -DREBREW_DEBUG_INFO=OFF && cmake --build build`.
 **Run `scripts/gate.sh` before committing.** It is the three checks that must
 pass: `rebrew lint`, the compile (the POST_BUILD postlink step is expected to
 fail until the tree is position-aligned, so only `error C####`/`error LNK####`
-count), and `rebrew verify --full` against a baseline of 278 passed. A drop
+count), and `rebrew verify --full` against a baseline of 281 passed. A drop
 below the baseline is a regression; raise `BASELINE` only when a change
 improves the number.
 
