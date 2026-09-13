@@ -71,6 +71,35 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-180: a semantic break caught by reading the diff, and a neutral candidate
+discarded.**
+
+Residue unchanged at **9,762**; tree back at the validated commit.
+
+*`m_AllocTracked`, rejected as a semantic break.*  The candidate rewrote
+
+```c
+if (g_stat2 - slots < 0)          /* g_stat2 <  slots */
+if (0 <= slots - g_stat2)         /* g_stat2 <= slots */
+```
+
+which is not the same guard: the equality case flips and the guarded body runs when
+`g_stat2 == slots`.  The original spelling is also the one the file's header records
+as load-bearing (`g_stat2 < slots` re-folds the volatile load into
+`cmp dword ptr [g],edi` and drops matched-reloc 565 -> 467).  **An algebraic rewrite
+of a comparison is only safe if it keeps the strict/non-strict boundary** — `a - b <
+0` is `a < b`, never `b <= a`; to change which operand folds, flip the operands of
+the same operator (`slots > g_stat2`).  Caught by reading the diff before linking,
+not by any score: at the object level it looked like an ordinary respelling.
+
+*`cm_ExSellObjekt`, neutral.*  Re-introducing a `source_dynamic_ref` local in place
+of the deliberate self-assignment `source_dynamic_entity = source_dynamic_entity;`,
+plus a polarity inversion of the `0xffff` guard, link-tested at exactly 0 (9,762 ->
+9,762), so it was reverted rather than kept as churn.
+
+Both were measured with the round-179 procedure: revert every other pending file
+first, then `linktest.sh` the single file, so the delta is attribution.
+
 **Round-179: attribution, and a wrong commit caught by re-measuring.**
 
 Residue **9,762** (from 9,820).  The round's value is mostly methodological.
