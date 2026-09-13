@@ -78,6 +78,27 @@ echo "== response file (final) and link"
 python3 scripts/make_split_rsp.py --split "$WORK/split" --objects "$OBJ_RSP" \
     --thunks "$WORK/thunks" --commons "$WORK/commons" --defs "$WORK/defs" \
     --out "$WORK/rsp.rsp"
+
+echo "== fold literals (member string COMDATs the blob already carries)"
+# msvc6 derives a `??_C@...` COMDAT name from the literal's contents and LINK
+# folds COMDATs by name, so re-declaring every member string here makes the
+# linker discard the members' copies: .rdata 0x33b1 -> 0x2fe1, raw 0x4000 ->
+# 0x3000, the reference's.  The generated array lands in `.data`, which
+# postlink overwrites wholesale.  See docs/msvc6-link-layout.md section 3.
+python3 scripts/gen_fold_literals.py --split-dir "$WORK/split" > "$WORK/fold_literals.c"
+rebrew-cmake-cl /nologo /c /O2 /Gd /MT /Fo"$WORK/fold_literals.obj" \
+    "$WORK/fold_literals.c" >/dev/null
+python3 - "$WORK/rsp.rsp" "${WORK#build/}/fold_literals.obj" <<'RSP'
+import shlex, sys
+from pathlib import Path
+rsp, obj = Path(sys.argv[1]), sys.argv[2]
+tokens = shlex.split(rsp.read_text())
+if obj not in tokens:
+    tokens.insert(1, obj)  # first, so our COMDATs are the ones kept
+rsp.write_text(" ".join(tokens))
+print(f"fold object {obj} inserted at token 1")
+RSP
+
 cmd=$(sed "s#@CMakeFiles/server_dll.dir/objects1.rsp#@${WORK#build/}/rsp.rsp#;
            s#/out:server.dll#/out:split_poc.dll /MAP:split_poc.map#;
            s#/implib:server.lib#/implib:split_poc.lib#;

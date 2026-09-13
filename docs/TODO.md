@@ -1,5 +1,35 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-127: the fold is part of the split pipeline now, and what it exposes is
+the split composition's `.data`.**
+
+`scripts/gen_fold_literals.py` gained a `--split-dir` mode that reads the
+`??_C@…` symbols straight out of `split_coff.py`'s per-section objects (each
+`??_C@` section is exactly the literal plus its terminator, so the section size
+recovers even the two strings whose first byte is NUL — a_map.obj's `"\0"` and
+`L"\0"`, which the map+DLL mode cannot see).  `scripts/split_link.sh` now
+generates, compiles and inserts that TU at token 1 of its response file, so the
+vehicle comes out with the reference's `.rdata` by default:
+
+```
+build/split_poc.dll    .text 0x22af8 (+690)   .rdata raw 0x3000   .data raw 0x11000
+                       members at their VA 246/319
+reference              .text 0x22846          .rdata raw 0x3000   .data raw 0xe000
+```
+
+The fold cost nothing to `.text` placement (unchanged) and fixed `.rdata`'s raw
+size, and it makes the composition's remaining `.data` surplus the visible one:
+`0x3000` over the reference, from the members' bundled `.data`/`.bss`
+(`0x2700` across the split objects) plus `emit_defs.py`'s definition objects.
+That content is *only* needed so the members' data symbols exist — postlink
+overwrites `.data` wholesale and rewrites the `.text` operands that point into
+it — so the same move that folded the strings applies: drop the bundled
+`.data`/`.bss` sections from the split objects and define their symbols with
+one-byte arrays of our own, iterating until no member is pulled back from
+`LIBCMT.lib` for an undefined symbol.  That is the next step, and it is the
+last piece of the member-section composition (`.text` placement ✓, `.rdata`
+raw ✓, `.data` raw ← this, prefix surplus `0x168` ← the split blob).
+
 **Round-126: the split composition can carry the reference's `.rdata` too — the
 two gates are not mutually exclusive after all.**
 
