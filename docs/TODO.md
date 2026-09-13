@@ -1,5 +1,63 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-105: the three open spans must land together, and one of them is a
+compiler-phase difference.**
+
+**A partial span fix is a regression.**  The three remaining errors sum to
+`+16 (CrashDump) +16 (vfs_ReadCompressed) -32 (cm_ExCopyEntityData) = 0`, which
+is *why* the CRT tail currently lands on the reference's offset at all.  Fix any
+strict subset and the net moves off zero and the 58 KB CRT region follows it.
+Measured with `.scratch/padobj.py` (vfs_ReadCompressed's object forced to span
+496, nothing else touched):
+
+```
+                          whole .text masked    whole raw    built .text delta
+current (net 0)           89997/141382 = 63.66%   33.57%          +674
+vfs span fixed (net -16)  69037/141382 = 48.83%    7.74%          +658
+```
+
+So the earlier "fixing vfs_ReadCompressed's span alone is worth +7.8 points"
+measurement (round 104) was made against the *pre-`m_AllocTracked`* tree, whose
+net was `-16`; with the net now correct, the same change costs 14.8 points.  The
+three have to move as one set, or not at all.
+
+**`cm_ExCopyEntityData`'s +17..32 is a compiler-phase difference, not source.**
+The reference materialises the clamp constants in a register in every cold arm
+(`mov eax,0xffffff81` / `mov eax,0x7f`, then `mov [mem],al`), roughly +5 bytes
+per arm over SP6's `mov byte ptr [mem],imm8`; this is exactly the
+"store-via-reg" fingerprint `rebrew toolchain detect` flags.  Probed on the
+current body and **byte-identical at obj 880**: `(int) val`, `(unsigned char)
+val`, `*(int*) &mat_row[inner_idx] = val`, dropping the `(char)` cast at each of
+the four clamp sites and at all of them together, plus round 104's four epilogue
+spellings.  SP6 forward-substitutes through the block duplication; the reference
+compiler did not.  Under the pinned toolchain this function's window is not
+reachable from C, which is what makes the whole set above blocked.
+
+**`vfs_ReadCompressed`'s honest fix exists, and must not be landed alone.**  The
+candidate re-reads the volatile `done` where the reference reuses `eax`:
+target `cmp eax,1 / je / test eax,eax / jne`, ours `cmp eax,1 / je / mov
+eax,[esp+0x14] / test eax,eax / jne`.  Hoisting the read into one local --
+`{ int d; d = done; if (d == 1) return result; if (d != 0) return d; }`, or the
+same through the dead `i` or `n` -- gives obj **481** (span 496 = the reference
+bucket) against 497, for a register-agnostic cost of 176 -> 171 matched
+(7 -> 13 target-only).  It is the right fix and it is currently unlandable,
+because by the first item it would move the net to -16.
+
+**`srv_LoadBuf`'s remaining gap is one instruction.**  Register-agnostic over the
+226-instruction function: 222 matched, 1 target-only, 1 cand-only.  The one
+difference is the frame offset -- target `lea ecx,[esp+0xb0]` against our
+`[esp+0xb4]`, with the frame size itself identical (`sub esp,0x2a0` on both
+sides).  All six permutations of the three buffer declarations
+(`logbuf_hi[256]`, `logbuf_lo[256]`, `pktbuf[156]`) are byte-identical, so the 4
+bytes are not declaration order.  The other 48 differing bytes are register
+roles.
+
+**Process note.**  `.scratch/padbak/*.obj` snapshots are taken from the *build
+tree*, so restoring them after a source fix silently reverts that object: the
+tree read `.text` 0x22ad8 instead of 0x22ae8 and the whole-`.text` metric fell
+back to 53.37%.  Rebuild the object from source after a source change; only use
+the snapshot to undo a padding experiment inside the same build revision.
+
 **Round-104: the four position-alignment breaks -- one fixed, three windowed.**
 
 **`m_AllocTracked` is fixed and out of the list.**  Its window was 657..672 and
@@ -81,9 +139,11 @@ the priority over any further per-function content work.
 reference's bytes, and CrashDump's truncation cuts real code.  It answers "how
 much is alignment worth", and the answer is "far more than the content gaps".
 
-Fixed one at a time the payoff is smaller but still large: forcing only
-`vfs_ReadCompressed`'s span to 496 gives whole `.text` raw 13.64% -> 26.78% and
-masked 53.37% -> **61.14%** (`delta range -0x30..+0x2ec`).  So each of the four
+Fixed one at a time the payoff is smaller but still large -- **superseded, see
+round 105: this was measured against the pre-`m_AllocTracked` tree, where the
+net offset was -16; with the net correct the same change is a regression**:
+forcing only `vfs_ReadCompressed`'s span to 496 gives whole `.text` raw
+13.64% -> 26.78% and masked 53.37% -> **61.14%** (`delta range -0x30..+0x2ec`).  So each of the four
 moves the CRT tail, and the four together are worth more than the sum of the
 parts -- the tail has to land on the reference's own offset, not merely closer
 to it.
