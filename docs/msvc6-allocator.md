@@ -2513,6 +2513,25 @@ The frame size is a *consequence* of which values are live at the first branch,
 not of the local declarations (Finding 52).  `msvc6-c-shapes.md` §38 states the
 same rule for the instruction shape.
 
+**Amendment — the frame only tracks bytes actually spilled.** On
+`CrashDumpUnhandledExceptionFilter` (0x10002770) the size moves with the
+*spill count*, not with the locals: enlarging `szSep[0x20]` and `szLine[8]`
+moves the frame to 0x290, while `szSep[0x1c]` (28 bytes) is *identical* to
+`szSep[0x1b]` (27 bytes) and both give 0x28c. Its reference frame is 0x280,
+i.e. the reference spills about three fewer 4-byte scalars. Dropping the two
+locals `fail_msg`/`fail_line` does not shrink the frame at all — they get
+registers; that half of the measurement is the deletion case of Finding 52, and
+this is the same cascade as the deferred `push ebx; push edi` above.
+
+**Amendment — flags and declaration order are both dead for that frame.**
+Twelve flag variants (`/O1` `/Ox` `/Os` `/Ot` `/Og` `/Ob1` `/Ob2` `/Oy` `/Oa`
+`/Ow` `/Op` and `/Og` combinations, all with `/Gd`) give a frame of 0x28c,
+0x298 or 0x2cc — never 0x280; and eight declaration permutations (pointer group
+first, byte locals last, arrays reversed, structs swapped) leave it at 0x28c.
+Record these as **two levers retired for this function**, not as a general claim
+(the earlier "~30 spellings and 18-variant flag sweep" line above is the
+summary of this sweep); Finding 52 is the general rule for the declaration half.
+
 ## Finding 49 — ls_InitNewDynastyEntity (0x100122e0): 768x768 fill induction-variable elimination
 
 Best C is 99/341 positional (5 formulations).  The resolve/flag-select
@@ -2703,6 +2722,19 @@ pointed one byte late, which was 22 of the 32 bytes of residue outside the named
 functions.  Fixing the length (not the pad) was worth -36 linked.  The pad buys
 the neighbours their VAs; out-of-line data inside the object needs the real
 length.
+
+**Amendment — a "length shortfall" misread when the trailing bytes are not
+padding.** `CrashDumpUnhandledExceptionFilter`'s ~0x117 bytes after the final
+`add esp,X; ret 4` are TWO switch jump tables (a 5-entry table with a 0x69-byte
+index map for cases 0,1,0x67,0x68, and a 10-entry table with an 8-byte 0..7
+index map for cases 0..7 plus 0x6e), not padding. Our two tables are emitted in
+the opposite order from the reference's, which is downstream of the block
+layout (`msvc6-c-shapes.md` §59); the built body is 11 bytes longer than the
+reference's (`ret` at 0x10002e9e against 0x10002e99) and that 11 is absorbed by
+trailing `0x09` padding, so the COMDAT span stays 2128 while the tables stay 11
+bytes late. The general point: before treating a tail as padding, check whether
+it is relocated table data. (`0x09` fill on this function, where others use
+`0x90`, is the caveat already recorded under Finding 15.)
 
 ## Finding 57 — reporting note: a per-function residue number is only comparable within one composition
 

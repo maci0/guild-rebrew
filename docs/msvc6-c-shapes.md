@@ -2116,3 +2116,83 @@ superseded by the `/Oa` measurement here, and `/Ox` is byte-identical on an
 individual function (section 46) while being load-bearing per file.
 
 `src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c`
+
+## 59. `if (cond) goto L;` compiles to `if (cond) { body }`; cold handlers are placed by block *creation* order
+
+`if (cond) goto L;` — a branch to a label — compiles to a byte-identical
+object to `if (cond) { body }` with the body inline. Both spellings of the same
+guard sequence were compiled and their COMDATs byte-compared: 2128 bytes each,
+identical. msvc6 normalises the `if`-goto form back into a plain `if` and still
+lays the then-block inline, so "I wrote a `goto`, so the handler must sit out
+of line" is false, and any note that credits a `goto` for a block's position is
+wrong.
+
+What actually places cold handlers at the tail — and in **reverse source
+order** — is block *creation* order: the front end creates `else`-blocks
+innermost-first. A sequence of guards written
+`if (failure) { error; goto done; }` therefore does not give the reference's
+layout, while `if (success) { body } else { error }` does; the handlers then
+materialise at the tail in reverse source order.
+
+Measured on `CrashDumpUnhandledExceptionFilter` (0x10002770): rewriting its
+guards in the `if (success) {...} else { error }` shape put all four
+`LogMessageInternal` sites at the tail, gave 44 calls (the reference's count)
+and was worth **-29 linked bytes**, size-neutral (COMDAT 2128, frame
+unchanged). The same change written as `if (cond) goto L;` with tail labels was
+byte-identical to the original and worth nothing.
+
+The reference's own cold blocks there sit at 0x10002db3, 0x10002de9,
+0x10002e1b, 0x10002e29, 0x10002e35, 0x10002e4d — reverse source order, which is
+the signature to look for on other functions whose cold handlers differ.
+
+This is the same family as section 54 (a guard inversion moves which site falls
+through, and with it the rel8/rel32 branch histogram) and section 50's
+branch-polarity item: block order, not statement shape. It also narrows section
+17, which recorded out-of-line placement as unsteerable from source — the
+`goto` label is not the lever, the `if`/`else` form that *creates* the block is.
+
+`src/server.dll/Units/Error/Error_c/CrashDumpUnhandledExceptionFilter.c`
+
+## 60. A volatile store's position is a dependency fixed point, not a statement-order choice
+
+On `cm_ExProdObjekt` (0x1000e140) the reference emits
+`mov edx,[0x101de450]` before the volatile dead store that follows, and we emit
+it after. Moving the volatile `loop_count` store below the
+`recipe_shift = g_unknown_1de450 + ...` statement — so that the global load
+precedes it in source order — produced a byte-identical object to the
+unmodified source. The scheduler places a volatile store by its dependence, not
+by where the statement sits, so a volatile store cannot be slid past a global
+load by rewriting the source order. The reference's global load is above a
+volatile store, and a store through a cast pointer is treated as aliasing every
+global, so the shipped msvc6 will not emit that order from any source shape
+tried: treat it as closed.
+
+This is the third site in this campaign where statement order was inert in
+exactly this way — the converse of section 51 (where the lever was moving the
+`volatile` *qualifier*, not the statement) and the same shape as section 57's
+loop case. Where a load/store transposition does have a lever, it is section
+44's `#pragma optimize("a", on)`, which switches the aliasing assumption off.
+
+Retired lever, not a general law: measured with `scripts/probe_function.py` and
+`scripts/instr_diff.py --obj`, and it did not move the linked residue.
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExProdObjekt.c`
+
+## 61. A shared guard the reference falls into cannot be reached by fall-through from C
+
+On `cm_ProcessCommandQueue` (0x1000aac0) the reference has a shared `recheck`
+guard (`test ebx,ebx; je <unlink>`) that arm 5 falls into after `held = pkt`.
+Our arm 5 does `goto advance` and skips it, so our `jne` retargets. Changing it
+to `held = pkt; goto recheck;` collapses the entire function — matched-reloc
+584 -> 142 on the object metric, 624 -> 204 — because msvc6 re-lays the block
+graph.
+
+Same family as section 59 (block order, not statement shape) and section 54:
+what is not reachable from C here is the *layout decision*, not the statement.
+A `goto` is normalised back into an `if` (section 59), so it cannot express
+"make this arm fall through into the guard the reference shares".
+
+Retired lever, not a general law: measured with `scripts/probe_function.py` and
+`scripts/instr_diff.py --obj`; neither spelling moved the linked residue.
+
+`src/server.dll/DieGildeAddOnServer/server_c/cm_ProcessCommandQueue.c`
