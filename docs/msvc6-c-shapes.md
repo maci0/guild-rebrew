@@ -578,6 +578,15 @@ lists and the call indices.
 
 ## 17. Out-of-line block placement is not steerable from source
 
+> **Narrowed in part by §59.**  The blanket claim holds for the *statement* used to
+> reach a block — spelling a guard as `if (cond) goto L;` compiles to a byte-identical
+> object to the inline `if`, so the label is not the lever.  It does **not** hold for
+> the block's *creation* order: writing the guards as `if (success) {...} else {
+> error }` makes the front end create the `else`-blocks innermost-first, which places
+> the cold handlers at the tail in reverse source order.  That was worth -29 linked
+> bytes on CrashDumpUnhandledExceptionFilter (0x10002770).  Read this section with
+> §59, not instead of it.
+
 MSVC 6.0 decides whether a `goto`-target block sits inline or out of line in
 its own layout pass. Source position does not influence it.
 

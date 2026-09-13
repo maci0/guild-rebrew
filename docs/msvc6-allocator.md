@@ -2508,7 +2508,7 @@ of their first use and restores them at each exit of that region — provable
 because one cold arm reaches the tail without them.  Ours has `ebx`/`edi` live
 before the first branch, so the deferral window never opens and the frame stays
 12 bytes larger (`sub esp,0x28c` against `0x280`), with the whole local slot map
-shifted downstream.  ~30 spellings and an 18-variant flag sweep did not move it.
+shifted downstream.  ~30 spellings and an 18-variant flag sweep did not move it.  (That 18-variant sweep is `scripts/flagsweep.py`'s standard list applied to this function; the twelve-variant sweep recorded in the amendment below is a separate run, so the two counts are two sweeps, not a contradiction.)
 The frame size is a *consequence* of which values are live at the first branch,
 not of the local declarations (Finding 52).  `msvc6-c-shapes.md` §38 states the
 same rule for the instruction shape.
