@@ -1,5 +1,33 @@
 # Blockers — 100% Round-Trip Goal
 
+## The split members' `.rdata` is not the `.rdata` surplus either (2026-09-13, round 75)
+
+Round 55 named seven LIBCMT objects (`crt0msg`, `testfdiv`, `x10fout`,
+`output`, `timeset`, `a_map`, `tzset`) whose `.rdata` lands after
+`rdata_restore.c`'s blob and duplicates it.  The direct test is to stop the
+split objects emitting `.rdata` at all -- `split_coff.py`'s `data_secs` set is
+`.data/.bss/.rdata/.CRT$`, so dropping `.rdata` from it is a one-line change --
+and rebuild the whole split set into a scratch directory:
+
+```
+                    .text                  .rdata                 .data
+split_poc     diff 86608  vsize 0x22af8   diff 2237  vsize 0x33b1   diff 25311  vsize 0x1746c28
+no member .rdata   diff 86813  vsize 0x23334  diff 2207  vsize 0x3361   diff 25311  vsize 0x1746da8
+```
+
+`.rdata` shrinks by 80 bytes and its disagreement by 30; `.text` grows by
+0x83c and its disagreement by 205; `.data` is untouched.  Strongly negative, so
+`--with-data` keeps `.rdata` as well as `.data`, and this is the second variant
+of "stop emitting the members' data" to fail (round 66 dropped all of it and
+made `.rdata` three times worse).
+
+The 80 bytes are also the answer to how much of the `.rdata` surplus those
+seven objects actually account for: not much.  The surplus is 0x530, and round
+55's 1600-byte estimate came from counting the seven objects' *section* sizes
+rather than their placed contributions.  So the `.rdata` surplus is still
+unexplained, and the next thing to measure is the same as for `.data` -- where
+the bytes after the reference's section end actually come from.
+
 ## Back to `.text`: `gm_FindNextFilteredEntity` (2026-09-13, round 74)
 
 The partition branch is closed for now, so this round went back to the 20
