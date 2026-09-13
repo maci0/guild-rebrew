@@ -1,5 +1,43 @@
 # Blockers — 100% Round-Trip Goal
 
+## Reconstructing the dispatch table is not enough for `/OPT:REF` (2026-09-13, round 84)
+
+Round 83 said the `/OPT:REF` route needs the game's data tables expressed as
+real C objects so the linker sees the references.  Sizing that first: of the
+data blob's 11,264 dwords, **222 point into `.text`**, in two runs --
+
+```
+blob +0x23f8   212 entries   first target 0x1000d2e0
+blob +0x9bb0     6 entries   first target 0x10021aad
+```
+
+-- and the 212-entry one is the command dispatch table
+(`cm_ChkCommandType`, `MarkAndReturn`, `RejectCommand`, ...), 848 bytes.
+
+Generating it as a real `DshFn const [212]` with function names, and linking it
+into the split set:
+
+```
+                        .text                    .rdata
+split_poc          diff 86608  vsize 0x22af8   diff 2237  vsize 0x33b1
+probe + /OPT:NOREF diff 86608  vsize 0x22af8   diff 2218  vsize 0x3701
+probe + /OPT:REF   diff 78416  vsize 0x13af0   diff 8554  vsize 0x3371
+```
+
+The references do help the walk -- `/OPT:REF` retains 0x2340 more `.text` than
+it did without them (0x118b0 -> 0x13af0) -- but it still drops 0xec08, so the
+dispatch table is not what anchors the game code.  `/OPT:REF` remains
+unusable, and reconstructing the last 872 bytes of pointer tables will not
+change that.
+
+Incidental but worth knowing: 47 of the 212 entries name symbols our build does
+not define, because `src/server.dll/functions.txt` carries the catalog names
+(`RejectCommand`) while the sources define their own (`cm_RejectCommand`).  A
+real-pointer reconstruction needs a reference-VA -> our-symbol map, not the
+catalog names.
+
+Probe removed, tree clean.
+
 ## `/OPT:REF` fails because the restore blobs have no relocations (2026-09-13, round 83)
 
 Round 82 blamed `/Gy` for `/OPT:REF` dropping 0x11248 of `.text`.  That is
