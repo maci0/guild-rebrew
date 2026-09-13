@@ -2,6 +2,40 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+**Round-248: `gm_AllocSpieler`'s largest hunk localised to an instruction, and one suspected
+source bug ruled out.**
+
+Four passes called this function's 2,861 bytes "distributed (168 hunks)" and left it there.
+The single biggest hunk (the +160 peak, and the +144 one has the same shape) is the
+**trait-interpolation loop** at `+0x5a0..+0x650`, and it is now localised to three concrete
+differences rather than "FPU operand forms":
+
+1. **The `slot+0x124`/`slot+0x128` FPU block is HOISTED above the loop in our object.**  Ours
+   computes it at `+0x5bd..+0x5e9` (then calls `0x1001a0f0`); the reference computes it
+   *after* the loop, at `+0x627..+0x657` (`call 0x1001a0f0`, `fadd qword [0x10025688]`, ...,
+   `fst dword [ebp+0x124]`).  That is ~8 instructions moved across the whole 14-iteration
+   loop, so it displaces everything in between -- which is why the aligner reports a huge
+   replace here rather than a small one.
+2. **The loop counter lives in memory in ours and in a register in the reference.**  Ours:
+   `mov eax,[esp+0x14]` / `dec eax` / `mov [esp+0x14],eax` at `+0x62b/+0x636/+0x637`; the
+   reference keeps it in `ebx` (`mov ebx,0xe` ... `dec ebx`).
+3. **Two FPU forms differ.**  The reference emits `fsubr qword [0x100257d8]` directly; ours
+   emits `fld qword [const]` then `fsub st(1)`, and carries an extra `fstp st(0)` after the
+   loop-body store.
+
+**One suspected source bug was ruled out, and the reasoning is worth keeping** so it is not
+re-investigated.  `src/.../gm_AllocSpieler.c:425` has `dst[-2] = (float)((double) dst[-3] *
+g_dbl_const_6d0);` sitting *outside* the 14-iteration `for` (brace depth 2 against the body's
+3), while the reference plainly executes the equivalent store **inside** the loop tail
+(`fld [esi-0xc]; fmul qword [0x100256d0]; fstp [esi-8]`, before its `jne`).  That looks like a
+misplaced statement.  It is not: the loop body already writes three floats per iteration
+(`dst[0]`, `dst[-1]`, and `dst[-2] = dst[-3] * const`), so line 425 recomputes element 40 --
+which the *last* iteration already wrote with the same value from the same input.  It is a
+redundant duplicate, hence dead, hence eliminated by the compiler.  Our object and the
+reference both write exactly three floats per iteration and both have the back edge after the
+third.  **Do not "fix" line 425 by moving it into the loop.**
+
+
 **Round-247: the whole image outside `.text` is verified byte-identical, and the fill-byte
 line is closed.**
 
