@@ -1,5 +1,32 @@
 # Blockers — 100% Round-Trip Goal
 
+## The flag space is closed: 36 pairs, all inert (2026-09-13, round 79)
+
+Round 51 swept nine individual optimisation flags over this project's 20
+residues and found nothing.  The remaining possibility was that the target
+needs a *combination*.  All 36 pairs of `/Ot /Os /Og /Oy /Ob1 /Ob2 /Oi /Op /Oa`
+on `gm_CalculateProductionValue` (the closest function -- two instructions,
+five bytes, by far the best candidate for a flag to tip over):
+
+```
+base  /O2 /Gd                    391/396 obj 396
+36 pairs, e.g.
+      /O2 /Gd /Ot /Ob2           391/396 obj 396
+      /O2 /Gd /Os /Og            391/396 obj 396
+      /O2 /Gd /Oi /Oa            391/396 obj 396
+BEST /O2 /Gd                     391/396 obj 396
+```
+
+Every pair reproduces the baseline byte-for-byte; not one moves a single byte.
+With round 51's single-flag sweep and its compiler-service-pack sweep (MSVC
+6.0 sp0..sp6 identical for four of five functions tested, a 3-byte step at sp4
+for the fifth), the flags-and-toolchain axis is now closed for these residues.
+
+That leaves exactly two things for the 20: MSVC6's block-sharing decisions,
+which source restructuring has not reached in any of the attempts logged
+(rounds 51, 70, 74, 77), and the `.rdata`/`.data` overlap, which round 78
+showed needs an alias rather than a deletion.
+
 ## The duplicated `.rdata` is load-bearing for symbols (2026-09-13, round 78)
 
 Round 76 pinned `.rdata`'s 0x480-byte duplicate block at 0x26bc and blamed the
