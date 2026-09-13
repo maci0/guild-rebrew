@@ -29,6 +29,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-320 (2026-09-13): cascade amplification quantified.**
+
+- pos/rel/aligned table for the top 8 rows: linked residue exceeds the
+  object-level reloc-masked gap uniformly by ×1.2–1.3 (Spieler 2861 vs
+  2379, CrashDump 1597 vs 1275, SMT 367 vs 281, ...). The link
+  multiplicatively amplifies object differences via positional desync —
+  no outlier row where code is "right but placed wrong" beyond the
+  cascade itself. Confirms the cascade framing numerically; no action.
+- Residue baseline unchanged: **9,209**.
+
 **Round-319 (2026-09-13): join-store clamp loses (+8 linked).**
 
 - Type-2 clamp restructured to the type-1 join-store shape (assign in
