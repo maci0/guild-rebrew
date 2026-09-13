@@ -1,5 +1,49 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-116: with the CRT order and the `.rdata` duplicate settled, postlink's
+gate is now bound by the game region.**
+
+Measured on the two builds after rounds 110 and 115:
+
+```
+                    postlink layout-map coverage   note
+CMake build (probe2)      4146/7463 = 55.6%        the artifact
+split set (split_poc)     6060/7463 = 81.2%        ordered CRT objects
+gate                      6716/7463 = 90%
+```
+
+The CMake build gained 24.8 points from the four span fixes alone (30.8% ->
+55.6%), so the game region was already carrying most of its coverage; the
+remaining 25.6-point gap to the split set is the CRT member order the CMake
+link does not control (round 106).  Either way both are short of 90%, and the
+per-function breakdown (round 111) puts the missing 656 entries where the
+game-region instruction differences are: `gm_AllocSpieler` 186,
+`CrashDump` 121, `ls_LoadBuildingEntityState` 114, `ServerMainThread` 105,
+`cm_ExSellObjekt` 97.
+
+**`.rdata` after the round-115 fix** (CMake build): VirtualSize 0x32d1 ->
+**0x3041** against the reference's 0x2e81, same-offset match 81.39% -> 81.71%.
+Windows `+0x2800` and `+0x2c00` still read 5.5% and 7.0%, but those are the
+import hint/name records and the export table, which postlink copies verbatim
+from the layout package -- they are not a source problem.  The remaining
++0x1c0 of surplus is the section running long after them.
+
+**`ls_LoadBuildingEntityState`'s -1 cache is not source-steerable.**  The file
+records the reference caching the sentinel in ebp (`or ebp,-1` once plus
+`mov [..], ebp` at three sites) where our build rematerialises
+`mov dword ptr [..], 0xffffffff` at each.  Six spellings measured on the
+current body, none better and one dangerous:
+
+```
+identity 1464   no-`register` 1464   unsigned 1464   assigned outside the
+guard 1465   `-1` written directly at all three sites 1464
+volatile 1473 -- and its COMDAT span moves 1472 -> 1488, which would break
+position alignment
+```
+
+So the function stays at 1464 against the target's 1463: the size flag is real
+and the deficit is the constant-caching codegen, as the file's own note says.
+
 **Round-115: the `.rdata` duplicate is fixed -- it was one missing
 underscore.**
 
