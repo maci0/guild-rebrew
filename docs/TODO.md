@@ -29,6 +29,13 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-316 (2026-09-13): SEH axis clean (vacuously).**
+
+- Audited all 18 residue diffs for SEH constructs (fs: chains,
+  RtlUnwind, scopetables, except handlers): ZERO on both sides.
+  No residue function uses SEH in either build — nothing to differ.
+- Residue baseline unchanged: **9,209**.
+
 **Round-315 (2026-09-13): call-form axis clean; game code has no statics.**
 
 - Direct-vs-indirect call audit across all 18 residue functions: ZERO
