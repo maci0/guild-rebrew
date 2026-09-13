@@ -2,6 +2,31 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
+### Session map, rounds 254–300 (2026-09-13; residue 9,209 throughout)
+
+- **Codegen probes (all reverted):** Spieler tail-order +53 · SMT packet ×2
+  (§48) · CrashDump plain-locals (0x280 at 2059B) + decrypt counter ×2 ·
+  LS nesting 4-site (+18 aligned, +672 linked, §72b) · vfs head exact
+  (+194 cascade) + 2 proof-breakers · ExSell zero ×2 · Graveyard volatile
+  ×2 (294/76) · Alchemist ×3 (decl dupe, ×0x300 regress 394, role-swap)
+  · Tracked sub/jns load-bearing · CheckInventory volatile ×2 collapse ·
+  CopyData decay ×2 inert + matrix clamp · Gebaeude ×2 inert · ExProdObjekt
+  hunk-b ×2 (268 collapse) · PCQ volatile-held · Spieler slot[9] fix
+  correct but +393 · fused clamp (ReadCompressed) · decl-swap/numbering
+  (Objects ×2) · matrix HIGH-first · recheck spellings.
+- **Retired levers:** TU theory (no LTO) · partition search (same reason) ·
+  link/ICF/order (~0) · cross-compiler (MSVC5 diverges) · outline (565/565)
+  · flag sweeps 4×flatline · climb/GA confirmed walls · spellings generally.
+- **Tool fixes (rebrew checkout):** merge-sweep strict zip · case-label
+  registry · atomic-write error (suite 6503 green).
+- **Verification:** gate green every round · whole-binary match · round-trip
+  227 spliced (drift class only) · Wine load + exports resolve · locality
+  4/4 · skipped slots benign · data tools N/A.
+- **Semantics:** verdicts 19/19 (`docs/behavioral-verdicts.md`); 2 live bugs
+  (Spieler slot[9] +393-unlandable, CrashDump State FIXED at +0).
+- **Docs:** lint 0/0 first clean · shapes §48/§52/§72b · Finding 54 ·
+  difficulties traps · ranked-leads revision · blockers synced.
+
 ### Continuation notes (written at the end of a long session; start here)
 
 **Round-299 (2026-09-13): deliverable loads under Wine.**
