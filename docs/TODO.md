@@ -29,6 +29,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-321 (2026-09-13): encoding-width hunt finds no same-operation pair.**
+
+- Same-mnemonic/same-registers/different-length audit across 10 best-
+  aligned functions: 3 candidates, all dissolve (packet-build desync,
+  Multisync scaling desync). No `test`-vs-`cmp-0`, `inc`-vs-`add-1`,
+  `jmp8`-vs-`jmp32` or equivalent same-operation width pair exists
+  outside desync noise. The residue has no single-byte encoding lever.
+- Residue baseline unchanged: **9,209**.
+
 **Round-320 (2026-09-13): cascade amplification quantified.**
 
 - pos/rel/aligned table for the top 8 rows: linked residue exceeds the
