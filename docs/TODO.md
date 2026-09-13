@@ -4,6 +4,19 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-293 (2026-09-13): OpenStream + LoadBuf semantic reviews CLEAN.**
+
+- `vfs_OpenStream`: all mode arms (N/R/W/Z bits), guards, loop mapping,
+  header magic, inflate/deflate/plain selection + stores, all call args,
+  finalize bit math, returns verified. No divergence.
+- `srv_LoadBuf`: state machine, masks (bitwise-verified), conn offsets,
+  call args/order, log lines (0x5df/0x5e5/0x5e9/0x609 — 0x756 is NOT in
+  this function), download bookkeeping, admin loop verified. The flagged
+  `int g_list_head;` is the link's single definition (used in m_alloc
+  files, extern in header) — NOT stray, do not remove.
+- 9 of 19 residue functions now carry explicit behavioral verdicts.
+- Residue baseline unchanged: **9,209**.
+
 **Round-292 (2026-09-13): LS + Gebaeude semantic reviews clean; three
 stale Gebaeude notes corrected.**
 
