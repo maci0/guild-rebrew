@@ -1,5 +1,58 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-95: the two remaining game-region size gaps are scheduling, not
+source shape.**
+
+**`cm_ExCopyEntityData`'s clamp is closed for now.**  Round 94 localised its
+-32 to the two folded constant stores per `ebx_type == 2` branch.  Four more
+spellings this round, all at obj 880:
+
+```
+one shared store after the clamp, original comparison order   877/505
+the same with `rel_value >= 0x7f`                             877/505
+clamp through `temp`, the int local that is live in other arms 880/525
+`long rel_value`                                               880/525
+```
+
+The one-store forms emit *one* store (msvc6 does not tail-duplicate it into the
+three branches), so the three-store source shape is right and the only wrong
+thing is the fold.  `volatile int rel_value` was re-confirmed as a regression
+(1004/194).  The `ebx_type == 0` arm remains the proof that a clamped,
+still-live value produces the reference's `mov eax,0xffffff81 / mov [mem],al`
+shape -- it has one store after the clamp and matches instruction for
+instruction -- so the `== 2` arm needs the same liveness, and no spelling that
+keeps its three stores has produced it.
+
+**`vfs_ReadCompressed`'s +5 is a prologue hoist.**  Its first two sizediff runs
+are the whole story:
+
+```
+target  0  sub esp,8
+        1  mov eax,[esp+0xc]      <- the `handle` parameter, BEFORE the pushes
+        2  push ebx   3 push ebp   4 push esi
+        5  test eax,eax
+        6  push edi
+        7  mov [esp+0x14],0       <- done = 0
+        8  mov [esp+0x10],0       <- result = 0
+        9  jne ...
+ours    0  sub esp,8
+        1  push ebx   2 push ebp   3 push esi   4 push edi
+        5  mov [esp+0x14],0
+        6  mov [esp+0x10],0
+        7  mov eax,[esp+0x1c]     <- loaded after the pushes and the stores
+        8  test eax,eax
+        9  jne ...
+```
+
+Same instructions, same slots, different schedule -- msvc6 hoists the parameter
+load above the prologue pushes in the reference.  Every statement permutation
+that could express that (moving `done = 0; result = 0;` above or below the
+`handle` test, splitting them) leaves the load where it is.
+
+**So the game region's four alignment blockers are three scheduling artefacts
+and one fold**, and the map's delta transitions (round 92) confirm the list is
+complete: nothing else between 0x10001130 and 0x1001a140 has a size error.
+
 **Round-94: `cm_ExCopyEntityData`'s -32 is two folded constant stores per
 clamp, and an object-level disassembly trap.**
 
