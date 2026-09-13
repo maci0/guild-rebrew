@@ -183,8 +183,11 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 			}
 		}
 	}
-	if (*(volatile int*) &done == 0) {
-		return *(volatile int*) &result;
+	{
+		int t_done = *(volatile int*) &done;
+		if (t_done == 0) {
+			return *(volatile int*) &result;
+		}
+		return t_done;
 	}
-	return *(volatile int*) &done;
 }
