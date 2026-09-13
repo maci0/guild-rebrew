@@ -71,6 +71,44 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-214: the linked image does not contain the committed object -- open
+integrity question.**
+
+Residue reported 9,533; **treat that as unverified for `gm_AllocSpieler` and possibly in
+total** until this is settled.
+
+The `gm_AllocSpieler` agent reported that `build/server.dll` is stale for its function
+and built a kept object to measure from instead.  Verified directly, and it is not
+staleness:
+
+```
+fresh compile (probe_function.py)   3696 object, real body 3689, 1054 instructions,
+                                    matched 736 / matched-reloc 1310
+build/server.dll at 0x10018850      reference 1056, BUILT 1014, aligned 618
+obj mtime 01:37:50 == source mtime 01:37:50;  COMDAT 3696 bytes, sym _gm_AllocSpieler
+```
+
+The object is current and carries the right symbol and size, so the composition is not
+placing that object's full body at the reference VA.  Forty instructions are absent
+from the linked image.  Possible causes, none yet tested: the composition trims an
+overrun (this object is 3696 against a 3689 slot, which is only 7 bytes), a pad object
+or a different object occupying that VA, or `postlink_residual`'s fixers rewriting
+bytes inside the body rather than only operand slots.
+
+**Why this matters more than the bytes:** every linked per-function number, and the
+9,533 total, are produced by measuring `build/server.dll`.  If the linked image can
+differ from the committed object by 40 instructions, then the campaign's headline metric
+is not measuring the tree.  The direct check is cheap and should be the first thing done
+next: disassemble the two streams side by side
+(`scripts/instr_diff.py 0x10018850 --obj <kept object>` versus `--built build/server.dll`)
+and find where they diverge, then compare the object list
+`build/split_poc/rsp_pad.rsp` against `objects1.rsp` for that TU.
+
+The agent left `.scratch/gm.obj` (warn-clean) and `.scratch/gm_build.sh` so a fresh
+single-function object can be produced without a full build; its frozen candidate is at
+`.scratch/gm_AllocSpieler.FINAL.c` (md5 26343bf9fc95f5477d0962ece227c8da), byte-identical
+to HEAD, and it found no improving size-neutral edit.
+
 **Round-209: an interrupted agent loses its candidate, and the isolation rule.**
 
 Residue **9,533**.
