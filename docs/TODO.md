@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-330 (2026-09-13): skill-layering decision (no edit).**
+
+- Considered encoding session measurement rules into
+  `.agents/skills/rebrew-matching/SKILL.md`: wrong layer — skills are
+  reusable across projects, session rules are guild-rebrew-specific and
+  already live in `docs/difficulties.md` §3. No edit. The
+  `flag_sensitive` over-fire is heuristic weakness, not a tool bug.
+- Residue baseline unchanged: **9,209**.
+
 **Round-329 (2026-09-13): big gaps come in two non-lever flavors.**
 
 - CrashDump's largest steps (-59 at 0x068a, -43/-42/-41 cluster) are
