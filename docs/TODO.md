@@ -4,6 +4,25 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-274 (2026-09-13): six-scout fan-out, 12 probes, all reverted.**
+
+- E (LoadBuf): byte-offset guard spelling + explicit memcpy-src local —
+  both byte-identical/inert. Clusters are scheduler fixed points (21st
+  pass stands).
+- F (Tracked): direct `g_stat2 < slots` AND swapped `slots > g_stat2` both
+  regress identically (230→218: `cmp [mem],reg` drops the eax load) — the
+  `sub`+`jns` spelling is load-bearing for the two-load shape. New.
+- G (CheckInventory): volatile scan-seed collapses to 50, volatile
+  zero-init to 133 (+16B frame) — head defects coupled, parking stands.
+- H (CopyData decay): compound-assign + reversed operands both
+  byte-identical — msvc6 normalizes all three decay spellings.
+- I (Gebaeude): dedicated counter + slot-sourced switch value both inert.
+  (Scout-reported "baseline drift" checked: none — 683 matched /
+  823 matched-reloc consistent with header.)
+- J (ExProdObjekt): saved-quantity clamp worse (store flips), use-after-
+  store collapses to 268 — hunk (b) is allocator-level, not shape.
+- Residue baseline unchanged: **9,209**.
+
 **Round-273 (2026-09-13): endgame pricing + switch-lever check.**
 
 - Priced all 18 residue rows (residue/hunks): small rows 2-9 bytes/hunk
