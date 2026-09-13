@@ -61,6 +61,28 @@
  * The content cost is real and was accepted only because the span is worth
  * +18 points of whole-.text match; docs/TODO.md round 110.
  */
+/* 2026-09-14 (matched 447 -> 448, matched-reloc 467 -> 468, aligned 191,
+ * obj 496, real body 496 = the reference's): the one remaining non-relocation
+ * byte in the head was the loop's ENTRY-guard displacement.  The reference's
+ * `jbe` at 0x10008b0f targets the *result* epilogue (0x10008c59), not the
+ * shared `done` test at 0x10008c51, because `done` is provably 0 on that edge.
+ * Our volatile read at the post-loop test blocked that fold, so the `jbe`
+ * landed on the merged test block.  Reading `done` PLAINLY at that one test --
+ * the two `return` reads stay volatile -- reproduces the reference's target and
+ * moves nothing else (the tail block 0x10008c51..0x10008c6f is unchanged, the
+ * frame is unchanged, and the two separate epilogues survive).  Making the
+ * whole tail plain instead collapses the frame (obj 480, matched 21): the
+ * volatile reads there are what keep `done`'s and `result`'s memory homes, so
+ * the qualifier is per *site*, not per variable (allocator Finding 61).
+ * Probed and much worse on this body, all with the frame and the two epilogues
+ * intact or not: ternary clamp (obj 512, matched 159), clamp through a second
+ * local (155), `i < 1` for the zero test (155), assign-first clamp (obj 512,
+ * 146), `n + acc` read through the volatile pointer for `acc` (416), dropping
+ * the `acc` local entirely (400), plain `done` store (25), the in-loop `d` read
+ * made plain (byte-identical), and hoisting the `s->cap`/`result` reads into
+ * locals above the volatile read (byte-identical -- the scheduler reschedules
+ * them back, so the 16-byte crc32-call schedule below is a fixed point).
+ */
 // FUNCTION: SERVER 0x10008A90
 // vfs_ReadCompressed
 
@@ -202,11 +224,8 @@ int __cdecl vfs_ReadCompressed(int handle, char* buf, unsigned int len)
 			}
 		}
 	}
-	{
-		int t_done = *(volatile int*) &done;
-		if (t_done == 0) {
-			return *(volatile int*) &result;
-		}
-		return *(volatile int*) &done;
+	if (done == 0) {
+		return *(volatile int*) &result;
 	}
+	return *(volatile int*) &done;
 }
