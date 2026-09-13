@@ -92,6 +92,12 @@ if(REBREW_BUILD_SERVER)
   )
 
   list(FILTER SERVER_SOURCES INCLUDE REGEX "\\.c$")
+  # A scratch file dropped in the tree (an agent's probe named _something.c) would
+  # be swept up by the recursive glob and linked as an extra object, which moves
+  # every symbol after it. This happened once. No tracked source has a leading
+  # underscore, so excluding the prefix makes a stray probe harmless instead of
+  # composition-breaking.
+  list(FILTER SERVER_SOURCES EXCLUDE REGEX "/_[^/]*\\.c$")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt/")
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/zlib/")
   # unknown/crc32.c is the reversed copy of zlib's crc32 (0x100011f0). It stays
