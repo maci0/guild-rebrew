@@ -18,6 +18,17 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
  * counters, and maintains the allocation list. */
 
 // CFLAGS: /O2 /Gd /G6 /Oy-
+// UPDATE 2026-09-13 (round 89): 265 -> 266/658, aligned 207 -> 208 of 249 and
+// one fewer mismatch run.  The `node_slot` alias on `node` was removed: it is
+// only ever assigned `&node`, so `while (*node_slot != 0) { ... prev =
+// *node_slot; *node_slot = (*node_slot)->next; }` is exactly the direct
+// `while (node != 0) { ... prev = node; node = node->next; }`.  The alias was
+// added to force the search-loop spill, and it still does not reproduce the
+// one thing the target has -- an unfolded null test at the loop head
+// (`mov esi,0x117640a0; mov eax,esi; test eax,eax; je` at 0x100066b4): ours
+// proves the sentinel is nonzero and emits an unconditional `jmp` into the
+// body.  That 4-byte difference is what shifts every later byte in this
+// function, so `node_slot` buys nothing and costs a run.
 // UPDATE 2026-09-13 (round 87b): 263 -> 265/658, and the reconstruction's
 // uninitialised-pointer read is gone.  `(*prev_slot)->next = node;` used
 // `prev_slot`, which the source never assigns -- undefined behaviour that only
@@ -285,7 +296,6 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 	void* mem;
 	char* slot;
 	char* p;
-	struct GroupNode** node_slot;
 	unsigned int sz;
 	int nodev;
 	void* cur;
@@ -310,13 +320,12 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			strncpy(buf, tag, taglen);
 			buf[taglen] = 0;
 			node = (struct GroupNode*) 0x117640a0;
-			node_slot = &node;
-			while (*node_slot != 0) {
-				if (strcmp(buf, (*node_slot)->name) == 0) {
+			while (node != 0) {
+				if (strcmp(buf, node->name) == 0) {
 					break;
 				}
-				prev = *node_slot;
-				*node_slot = (*node_slot)->next;
+				prev = node;
+				node = node->next;
 			}
 			if (node == 0) {
 				node = (struct GroupNode*) malloc(0x28);
