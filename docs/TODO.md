@@ -1,5 +1,48 @@
 # Blockers — 100% Round-Trip Goal
 
+**Round-102: a signedness bug, found by the register-agnostic gap list.**
+Game region 6,515 -> **6,495** differing bytes.
+
+The gap list for `cm_ExSellObjekt` had a pair that is a genuine type difference,
+not allocation:
+
+```
+target  mov  r, byte ptr [r + 0x1e]     (a byte register, zero-extended)
+ours    movsx r, byte ptr [r + 0x1e]    (sign-extended)
+```
+
+Both `gm_QueryEntitySum(*(int*)(... + 0xbc), cmd[0x1e])` call sites in that
+function passed a **signed** `char`, so msvc6 sign-extended it.  The reference
+zero-extends, and the two differ for every value >= 0x80:
+
+```c
+gm_QueryEntitySum(*(int*)(source_owner_entity + 0xbc), (unsigned char) cmd[0x1e]);
+```
+
+```
+obj_size        2055 -> 2057   (now exactly the target)
+register-agnostic target-only  42 -> 38
+split pipeline  6,515 -> 6,495 masked differing bytes, game 92.13% -> 92.16%
+```
+
+Gate: 0 lint errors, 0 compile/link errors, `verify --full` 280/282, metadata
+untouched (`status = "PROVEN"`).
+
+**The pattern does not repeat elsewhere.**  A scan of every remaining non-exact
+function's register-agnostic gap for `movsx` against a target byte load finds:
+`cm_ExCopyEntityData` 1/0, `gv_ExAllocGraveyardWorker` 1/0, `gm_AllocSpieler`
+0/2, `gm_CheckInventoryCapacity` 0/1, `gm_AllocGebaeude` 0/1, and nothing at all
+in the rest.  The only clean pair was `cm_ExSellObjekt`'s; the others are
+one-sided and belong to the `movsx` versus byte-register choice inside a larger
+expression, not to a parameter's signedness.
+
+**`vfs_OpenStream` cannot be measured with the gap tool.**  Its target stream
+disassembles into the 5-entry switch jump table and 13-byte case map that follow
+the `ret` (the catalogue's 667 excludes them, the doc's 701 includes them), so
+the tail of its "target-only" list is `adc byte ptr [r - 0x6f76f000], R` --
+data, not instructions.  Read that function's numbers from `rebrew test` and
+the file's own notes, not from `.scratch/relcat.py`.
+
 **Round-101: the climb tool is exhausted, and one more width lever regresses.**
 
 `rebrew climb --objective aligned --passes 3 --dry-run` on
