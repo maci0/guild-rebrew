@@ -95,7 +95,23 @@ def off(seq, i):
     return f"{seq[i][0]:#06x}" if i < len(seq) else "end"
 
 
-print(f"  reference {len(r)} insns, ours {len(b)};  last ref off {off(r, len(r)-1)}, ours {off(b, len(b)-1)}")
+def real_body(seq):
+    """Length of the decoded code: end of the last instruction.
+
+    NOT `len(seq)` as an instruction count -- both streams are decoded over their
+    whole window, and that window ends in alignment fill (cl rounds every COMDAT up
+    to 16, and the reference has its own pad before the next function).  Those fill
+    bytes decode as instructions (`nop`, or `add [eax],al` for 0x00), so the counts
+    read high and disagree between the sides even when the code is byte-aligned.
+    Compare this number, not the count.
+    """
+    return f"{seq[-1][0] + seq[-1][1]:#06x}" if seq else "0"
+
+
+print(f"  reference {len(r)} insns, ours {len(b)} "
+      f"(COUNTS INCLUDE TRAILING ALIGNMENT FILL -- do not use them for length);")
+print(f"  real code ends:  reference {real_body(r)}, ours {real_body(b)};  "
+      f"last insn off {off(r, len(r)-1)} / {off(b, len(b)-1)}")
 sm = difflib.SequenceMatcher(a=[x[2] for x in r], b=[x[2] for x in b], autojunk=False)
 last = None
 for tag, i1, i2, j1, j2 in sm.get_opcodes():
