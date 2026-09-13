@@ -71,6 +71,41 @@ conflicts, point `CMakeLists.txt` at the generated include, add
 "a bare rebuild reuses stale baked flags" footgun hit last round), and delete
 the inline `// CFLAGS:` lines.
 
+**Round-241: `gm_AllocSpieler` is closed to size-neutral work -- two independent
+passes found nothing.**
+
+Residue **9,533**.  The largest remaining function (2,861 bytes) is now retired from
+active effort, and the reason is worth stating because it redirects the campaign.
+
+The function has had **two independent agent passes** since the committed -40:
+
+- the round-210 pass reported, at checkpoint, "the committed baseline is currently the
+  best -- I have found no improving size-neutral edit yet", with the object at 3696 /
+  real body 3689 and 1054 instructions against the reference's 1056;
+- the round-223 pass ran from round 210 to round 241 -- thirty-one rounds -- without
+  ever writing `.scratch/gm_AllocSpieler.FINAL.c` or touching the tree, and did not
+  answer two checkpoint requests.  I interrupted it this round.
+
+Two passes, one explicit "no improving size-neutral edit" and one that produced nothing
+in thirty-one rounds, is enough to treat the size-neutral space here as empty.  Its
+`.scratch/gm_AllocSpieler.FINAL.c` is byte-identical to HEAD, so the file is already at
+its best known state.
+
+What is known about its residual, for anyone who returns with a new idea: the real body
+is already exactly the reference's 3689, so this is not a length problem; the two
+-instruction deficit (1054 against 1056) is **distributed**, not localised -- the
+running-gap trace swings between +48 across the `sprintf -> LogMessageInternal` region,
+-32 through the citizen path, and +7 net, i.e. dozens of compensating scheduling
+differences rather than one missing pair.  That is consistent with every large-function
+wall this campaign has hit: `CrashDump`'s frame, `gm_ObjectsAvailble`'s callee-saved
+pair, `ahm_ExAllocAlchemist`'s stride chain.
+
+**Two process notes, both learned expensively.**  A pass with no probe budget and no
+obligation to report "none found" will run indefinitely and deliver nothing -- the
+round-210 brief lacked both, and cost thirty-one rounds.  And an agent that never writes
+its candidate to a named path leaves the coordinator with no way to tell progress from a
+hang; both of the round-223 agent's failures were of that kind.
+
 **Round-236/237: `cm_ExCopyEntityData` is closed -- a budgeted pass found nothing.**
 
 Residue **9,533**.  The first result from the changed fan-out protocol, and worth
