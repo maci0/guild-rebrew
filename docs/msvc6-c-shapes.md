@@ -2017,6 +2017,17 @@ through a `volatile` pointer emits `mov r16,[mem]; and r,0xffff`. Seventeen
 spellings on msvc6 `/O2 /Gd` in a micro TU — global, cast, typed pointer, struct
 member — all follow the qualifier, not the syntax.
 
+**Corollary, and the reason this section exists: the idiom cannot be reached by
+spelling at all.** On `gm_AllocSpieler` (0x10018850) every attempt to write the
+reference's `xor r,r; mov r16,[mem]` form while keeping the `volatile` — `(int)(unsigned)*(volatile
+unsigned short*) p`, the same through a temp local, the same for a second site, and a
+`n = 0x3c + (idx < 6 ? 0x86 : 0)` temp for the paired `and edx,0x86` (6-byte imm32)
+against our `and edx,0xffffff86` — folded straight back to the current code. The
+qualifier wins every time, so a site whose reference form differs has to be fixed by
+removing the qualifier (and paying whatever hoist that causes) or by a size-compensated
+rewrite, never by casting around it. Check the qualifier before spending probes on the
+expression.
+
 So an `and r,0xffff` in our output is evidence the source reads that field
 `volatile`, and where the reference has `xor`/`mov` and we have `mov`/`and`,
 the residual is the qualifier, not the expression.
