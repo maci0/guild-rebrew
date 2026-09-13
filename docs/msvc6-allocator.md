@@ -1758,6 +1758,16 @@ length (COMDAT minus its trailing pad) as well as the reported object size.
 Caveat: not every function pads with `0x90`; `CrashDumpUnhandledExceptionFilter`
 (0x10002770) pads with `0x09`, so a naive strip gives a wrong real length there.
 
+> **The conclusion above is inverted — see Finding 58, and read it before acting
+> on this paragraph.**  The premise holds (the aligned object size does not reveal
+> the real body length) but the inference does not: `have` is
+> `16*ceil(real_code/16)`, so an *unchanged* reported size means an unchanged span
+> and **no** symbol movement.  Every real length from 3681 to 3696 in
+> `gm_AllocSpieler` is layout-identical against `want` 3689.  The real length does
+> still matter — for *intra-object* table placement (Finding 56) and for the
+> upward bucket test — but it is not evidence that a layout moved when the number
+> did not.
+
 ### 0x10014ee0 — word-table search (naked placeholder kept)
 
 The 80-byte helper searches a word table at 0x1002d878 (0x46-byte records,
@@ -2747,3 +2757,113 @@ total from a full rebuild (`cmake --build`, then `scripts/split_link.sh`, then
 `postlink_residual.py --write`) is comparable across rounds, and
 `scripts/linktest.sh` recompiles only the files it is named — so a run is
 attribution only when no other source has changed since the last full build.
+
+## Finding 58 — inter-object size: the constraint is `have <= padded(want)`, and every real body *below* the reference span is free
+
+The rule this campaign needed twenty rounds earlier, derived from the build's own
+arithmetic rather than from argument.  It replaces an enforced rule that was
+*strictly stronger than the composition requires* and that silently discarded
+candidates.
+
+**The quantities.**  `scripts/pad_short_functions.py` computes:
+
+- `want` = the sum of the reference sizes of the functions an object defines,
+  read from `src/rebrew-functions.toml` — i.e. the reference's *real* code
+  lengths, **not** rounded to 16;
+- `have` = the object's `.text` section size, which `cl` has already rounded
+  **up to a 16-byte multiple**, so `have == 16*ceil(real_code/16)`.
+
+It pads when `have < want`, by appending a separate zero-filled `.text` object of
+`want - have` bytes; it reports `LONG` and does nothing when `have > want`.
+The linker then aligns each `.text` contribution to 16.
+
+**Consequence.**  An object's contribution to the composed image is
+`max(have, 16*ceil(want/16))`.  The reference span is `16*ceil(want/16)`.  So:
+
+> the composition is preserved **iff `have <= 16*ceil(want/16)`**, i.e. iff the
+> real code length is at most the reference's *padded* span.
+
+Everything shorter is padded up and lands on the right VA; the pad bytes are
+zeros, so a short body costs residue **inside this function's own slot** and
+nothing else.  Only a real body exceeding the padded span moves the symbols
+after it.
+
+**The measurement that establishes it.**  `cm_ExCopyEntityData` (0x1000ec00) has
+`want`/reference size 912 (already 16-aligned), and its object's `.text` measures
+912.  Its band is therefore *every* real code length `<= 912`:
+
+```
+real 912 -> have 912 -> span 912   neutral
+real 905 -> have 912 -> span 912   neutral
+real 897 -> have 912 -> span 912   neutral
+real 913 -> have 928 -> span 928   composition-breaking
+```
+
+**A lower bound does not exist.**  An earlier note in this campaign recorded the
+admissible band as `[897, 912]`; 897 was merely the lowest value a probe had
+tested.  Any real body at or below the padded span is composition-neutral — a
+shorter body is padded, not rejected.  The reason to prefer a body *near* the
+span is residue, not layout, and that is a different argument.
+
+**The `LONG` list is mostly noise — filter it before believing it.**  Because
+`have` is 16-aligned and `want` is not, the pad step labels every object whose
+reference size happens to be unaligned as `LONG`.  A dry run today reports **149
+of 319** objects too long, including trivial false alarms — `gm_NoopRet2.c.obj:
+16 > 1 (+15)`, a one-byte function whose `have` is necessarily 16.  The signal is
+**not** `have > want` but `have > 16*ceil(want/16)`.  The genuine drags are the
+handful where that holds (`spiel622.c.obj: 2608 > 2496`, `spiel62.c.obj: 1408 >
+1328`), and those are what move symbols off their reference VAs.
+
+**Two rules, and confusing them is the error.**
+
+| what moves | binding quantity | bites |
+|---|---|---|
+| the following symbols' VAs | **padded** span: `have <= 16*ceil(want/16)` | inter-object, the rest of the image |
+| *this* object's own jump table / case map | the **real** body length | intra-object (Finding 56) |
+
+Finding 56 is the intra-object row: `vfs_OpenStream`'s 8-byte real-body shortfall
+put its own jump table and case map 8 bytes early and was worth -36 linked, and
+no amount of padding could fix it, because the pad lands *after* the tables.
+This finding is the inter-object row.  Applying either rule where the other binds
+is as wrong as applying neither.
+
+**How to tell which applies**, in order:
+
+1. Does the object carry relocated data after its code — a jump table, a case
+   map, anything the object's `.reloc` entries point into past the last
+   instruction?  If **yes**, the real length binds (Finding 56) and the padded
+   band does not apply.  `CrashDumpUnhandledExceptionFilter`'s two switch jump
+   tables are the standing example.
+2. If **no**, the padded band applies, and it is cheap to confirm: compile two
+   variants whose real code lengths differ by a few bytes and read the object's
+   `.text` size.  Unchanged ⇒ same bucket, the edit is layout-free.  Moved ⇒ you
+   crossed a boundary upward and the composition changes.
+
+**Operational rule.**  Never reject a candidate on a few bytes of real-body
+drift alone.  Compare `have` against `16*ceil(want/16)`; only exceeding it is a
+size rejection.
+
+### Correction to Finding 15's amendment
+
+Finding 15's amendment concludes: *"A candidate can therefore change the linked
+section size — and move every symbol after it — while every tool reports the size
+as unchanged."*  **The inference is inverted and should not be relied on.**  Its
+premise is correct — every real length 3681..3696 in `gm_AllocSpieler` (0x10018850)
+does report object size 3696, so the reported object size does not reveal the
+real body length.  But the conclusion does not follow: `have` is a function of
+the real length alone (`16*ceil(real/16)`), so *if the reported size is unchanged
+then `have` is unchanged, and the span is unchanged with it.*  All of 3681..3696
+give `have` 3696 against `want` 3689, `16*ceil(3689/16)` = 3696 — layout-identical
+in every case.  A genuine bucket crossing is *visible* in this tool: 3696 -> 3697
+reports 3696 -> 3712.
+
+What the amendment is reaching for is real but belongs to the other rule: the
+aligned object size cannot tell you whether a candidate changed the **real** body
+length, and that is the quantity that matters for **intra-object** table
+placement (Finding 56) and for the upward bucket test.  Use it for those;
+do not use it to infer that a layout moved when the number did not.
+
+This matters beyond tidiness: the amendment's inverted reading, together with the
+missing lower bound, is what produced the over-strict "real body must equal the
+reference's real body" rule that rejected admissible candidates (see the
+`cm_ExCopyEntityData` `do/while` case, real 900 -> 904, retracted in round 242).

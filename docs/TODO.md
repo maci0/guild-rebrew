@@ -89,12 +89,23 @@ real 897 -> COMDAT 912   composition-neutral
 real 913 -> COMDAT 928   composition-breaking
 ```
 
-So the admissible band is real body **[897, 912]** for that object, not "exactly 900".
-My instruction to its agent -- "hold object size 912 AND real body 900" -- was
+So the admissible band for that object is every real body **at or below 912**, not
+"exactly 900" and not even "[897, 912]" -- 897 was merely the lowest value a probe had
+tested.  My instruction to its agent -- "hold object size 912 AND real body 900" -- was
 **over-strict**, and the earlier verdict that its `do/while` dst-scan restructure was
 "size-changing (real 900 -> 904) and therefore rejected" was wrong on its stated
 grounds: 904 also yields COMDAT 912 and is composition-neutral.  **That variant should
 be re-tested.**
+
+Round 242 addendum, from reading `pad_short_functions.py` rather than arguing:
+`have` is cl's **16-aligned** object size (`16*ceil(real/16)`) while `want` is the
+**unaligned** sum of reference sizes, so the step labels 149 of 319 objects `LONG` as
+noise (`gm_NoopRet2.c.obj: 16 > 1`).  The genuine test is
+`have > 16*ceil(want/16)`, i.e. real code exceeding the reference's PADDED span --
+that, and only that, moves the following symbols.  Anything shorter is padded up at
+zero-byte cost to this function's own slot.  Full derivation in
+`docs/msvc6-allocator.md` Finding 58, which also records that **Finding 15's amendment
+has its inference inverted** and should not be relied on.
 
 The distinction that keeps this from being a blanket relaxation, and it matters:
 
