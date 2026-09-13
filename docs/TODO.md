@@ -1,4 +1,59 @@
-# Blockers — 100% Round-Trip Goal
+**Round-90: the loop-entry test is not reachable by spelling, and a survey of
+where the remaining bytes actually live.**
+
+`.scratch/fdiff.py` (round 89) gives, per function, the differing-byte *runs*
+between the linked split image and the reference at the best drift offset.  Run
+over all fourteen non-exact game functions, **raw** differing bytes (these
+include relocation slots, so they run above the masked figures in
+`text_match.py`) and the three largest runs:
+
+```
+                                   raw   drift    largest runs
+srv_LoadBuf            0x1000a570  108    +16      14, 11, 6
+gm_CheckInventoryCap   0x10019ed0  111    -16      28, 22, 18
+vfs_OpenStream         0x10009020  269    +16      83, 29, 27
+ahm_ExAllocAlchemist   0x1000bdf0  266    +16      51, 34, 25
+vfs_ReadCompressed     0x10008a90  314     -4      95, 37, 36
+gm_FindNextFilteredEnt 0x10016f80  258    -16      77, 43, 25
+cm_ExCopyEntityData    0x1000ec00  471    +16      73, 63, 54
+gv_ExAllocGraveyardWkr 0x10011bf0  485    -16      61, 46, 43
+gm_AllocGebaeude       0x100174d0  545    -16     121, 55, 54
+ls_LoadBuildingEntityS 0x100128f0  881    -21      52, 18, 4
+ServerMainThread       0x100093a0 1135    +16      80, 49, 42
+cm_ExSellObjekt        0x1000d930 1699    +18     110, 92, 83
+CrashDump              0x10002770 1868     +2     107, 105, 71
+gm_AllocSpieler        0x10018850 3190    -19     177, 132, 112
+```
+
+No function is a single-shift case like `m_AllocTracked`: `srv_LoadBuf` and
+`gm_CheckInventoryCapacity` are many 1-2 byte ModRM/register runs, and the rest
+are dozens of medium runs.  `ls_LoadBuildingEntityState` is the most
+concentrated (881 raw in a 52+18+4 profile) but 4 runs of <= 4 bytes means it is
+diffuse too.
+
+**`m_AllocTracked`'s loop-entry test, closed as unreachable.**  Round 89 found a
+4-byte `test eax,eax` the reference emits at 0x100066b9 on the literal sentinel
+`0x117640a0`, which msvc6 folds away in our build.  Confirmed first that the
+sentinel really is a literal and not a relocated symbol: the reference's
+`.reloc` table has no entry at 0x100066b1, and 0x117640a0 is not a relocation
+*target* either.  Seven spellings then measured against the exact byte pattern,
+each compiled and grepped for `85 c0` within 30 bytes of the `be a0 40 76 11`
+sentinel load:
+
+```
+baseline (direct `while (node != 0)`)          no-test
+`node = ...` / `node_slot = &node` swapped     no-test
+explicit `if (*node_slot != 0) { while ... }`  no-test
+sentinel through an int temp                   no-test
+`*(struct GroupNode* volatile*) &node = ...`   no-test
+the same plus a volatile read-back             no-test
+`struct GroupNode* volatile node`              no-test (and 720 bytes, +64)
+```
+
+So the test is a scheduling artefact of the reference build, not a source shape:
+msvc6 emits it around the `add esp,0xc` that cleans the `strncpy` args and folds
+it in every spelling we can write.  The ~200 bytes it shifts stay parked.
+
 
 **Round-89 metric** (`scripts/text_match.py --drift auto` after
 `scripts/split_link.sh`): game region **92.12% masked, 6,528 differing bytes**
