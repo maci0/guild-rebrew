@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-360 (2026-09-13): walk-gate + tail-merge lanes negative.**
+
+- CrashDump gate shapes: inverted -74, via-local -117, setup-order
+  -3. Gate not the driver; frame/spill cascade remains.
+- ExSell tail-merge: all three regress ~220+ (premise corrected —
+  reference INLINES both Not-enough tails; 0x1000e00e serves only
+  late sites we already replicate). Lane exhausted; redirect to
+  slot-permutation cascade per scout.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,149**.
+
 **Round-359 (2026-09-13): stored-branch + prelude lanes negative.**
 
 - ReadCompressed edi/n: reorder -9, out-live -24, recompute-n
