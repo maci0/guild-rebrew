@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-353 (2026-09-13): PCQ reload axis considered, declined.**
+
+- The only untested join axis (recheck reloading the global instead of
+  the local) would emit `mov ebx,[mem]` where the reference has
+  `mov ebx,esi` — trading matching arm5 bytes for join bytes, a wash
+  at best. Header's 72-way + scout's retire recommendation stand.
+  No probe; PCQ retired per round-100 scout.
+- Residue baseline unchanged: **9,149**.
+
 **Round-352 (2026-09-13): round 100 — block-order 1-for-11, PCQ localized.**
 
 - vfs block moves both regress hard (62, 84); source order load-bearing.
