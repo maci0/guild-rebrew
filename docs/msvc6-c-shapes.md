@@ -2730,9 +2730,23 @@ variants scored 352-382 against a 748 baseline.
 
 The shape is recorded because it is *reached*, not because it is kept: the
 object comes out 3680 against a 3689 real body and the link regresses +409.
-The residual nine bytes are the second multiply, where the reference uses
-`fild` + `fmul`-mem + `faddp` and this form emits `fild` + `fld st(2)` +
-`fmulp` + `faddp`.
+
+**Correction (round 173).** This section first claimed the residual nine bytes
+*were* the second multiply, where the reference uses `fild` + `fmul`-mem +
+`faddp` and the form above emits `fild` + `fld st(2)` + `fmulp` + `faddp`.
+That was wrong, and measuring it is what showed so. The memory form is
+reachable — give `acc` a `volatile float*` alias and msvc6 emits the
+reference's window verbatim, `[esp+0x14]` slot and shared int home included —
+and reaching it makes the object *larger* (3728, |Δ|=39 against 3680's |Δ|=9)
+instead of closing the gap. The second multiply is locally size-neutral
+(`fmul`-mem is 4 bytes against `fld st(2)`+`fmulp`'s 4); the growth is
+`volatile` pinning FPU ordering across the whole function for ~48 bytes of
+collateral. So the second multiply is a separate, solved, affordable problem
+and the nine bytes live elsewhere in the loop or its exit.
+
+The general lesson outlives this function: **a `volatile` qualifier buys a
+local instruction form and charges for it globally.** Measure the whole
+function, never the window you were aiming at.
 
 `src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c`
 
@@ -2760,3 +2774,41 @@ be re-derivable by a documented command: these were recovered with
 `docker create`/`docker cp` from the toolchain images.
 
 `scripts/postlink_residual.py`, `scripts/gate.sh`
+
+## 84. Sink a value's definition into the guard that uses it, and let the other region keep its own register
+
+The largest win on `cm_ExSellObjekt` after the season-block move (-173 linked,
+9,067 -> 8,894) was moving one assignment down into the block that reads it:
+
+```c
+-	dest_object = dest_game_object;
+ 	if (*(int*)(cmd + 0x14) != -1) {
+ 		/* source-finalize: reads the SOURCE object */
+ 	}
+ 	if (*(int*)(cmd + 0x10) != -1) {
++		dest_object = dest_game_object;
+```
+
+The reference loads the dest object at `0x1000df0a`, *inside* the
+`cmd+0x10` guard, and runs source-finalize at `0x1000de10` entirely on the
+source object in `ebx`. Defining the dest pointer above source-finalize made
+that whole region compete for the dest pointer's slot and drifted the schedule
+to the end of the function: object `685/911 -> 829/1047`, `rebrew test`
+`796 -> 971`.
+
+Two conditions are worth carrying to other functions:
+
+- **Placement inside the guard is the lever, not the statement order.** The
+  same assignment written at top level immediately *before* the `if` scores
+  92/2057 — catastrophic. msvc6 sinks a load into the taken arm only when the
+  source writes it inside that arm; written just above, it stays live across
+  the guard and pins a register.
+- **The object legitimately shrank** (real 2053 -> 2025, span 2064 -> 2032).
+  A real body below the reference span is composition-legal (allocator
+  Finding 58), so a shrinking object is not by itself a span break — but
+  fixed-offset scores cannot rank it, and only the link can.
+
+Diagnostic: when one region's diff is clean and everything after it drifts,
+look for a value defined before that region and used only after it.
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`

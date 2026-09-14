@@ -2,13 +2,15 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
-### Session map, rounds 254–419 (2026-09-14; residue 9,209 → 9,067 via 8 landed wins)
+### Session map, rounds 254–424 (2026-09-14; residue 9,209 → 8,894 via 9 landed wins)
 
-- **Landed wins (kept, all rebuilt-confirmed):** ExSell season-block
-  move -60 · Spieler grouped copies -4 · Tracked reversed stores -1 ·
-  Spieler father-wins order -1 · Spieler best_mother-first -8 ·
-  CrashDump nFrames move -2 · vfs finalize xor-xor -12 · LS zero-hoist
-  -53 · ExSell guard 06-first -1 · Spieler copy order -1.
+- **Landed wins (kept, all rebuilt-confirmed):** ExSell dest-object
+  sink **-173** (§84) · ExSell season-block move -60 · LS zero-hoist
+  -53 · vfs finalize xor-xor -12 · Spieler best_mother-first -8 ·
+  Spieler grouped copies -4 · CrashDump nFrames move -2 · Tracked
+  reversed stores -1 · Spieler father-wins order -1 · ExSell guard
+  06-first -1.  Every one is a statement/definition ORDER change;
+  no spelling change has ever landed.
 - **Codegen probes (all reverted):** Spieler tail-order +53 · SMT packet ×2
   (§48) · CrashDump plain-locals (0x280 at 2059B) + decrypt counter ×2 ·
   LS nesting 4-site (+18 aligned, +672 linked, §72b) · vfs head exact
@@ -43,6 +45,35 @@
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (written at the end of a long session; start here)
+
+**Round-424 (2026-09-14): LANDED — ExSell dest-object sink, -173 linked.
+Biggest win since round 93.**
+
+- Scout compared the reference's whole top-level block order against
+  the source and found ONE divergence: the reference loads the dest
+  object at 0x1000df0a *inside* the `cmd+0x10` guard, while ours
+  defined it above source-finalize (which runs entirely on the source
+  object). Sinking `dest_object = dest_game_object` into the guard:
+  object 685/911 -> 829/1047, rebrew test 796 -> 971, linked
+  1345 -> 1172. Residue **9,067 -> 8,894**, confirmed by a full clean
+  rebuild + gate. Documented as shapes section 84.
+  Placement is the lever: the same assignment written just ABOVE the
+  `if` scores 92/2057.
+  Semantics checked before keeping, not assumed: `dest_object` is
+  misnamed — line 232 assigns it the source-side `gm_ff_Objekt`
+  result (the reference's `ebx`), so source-finalize's read at the
+  old position is unaffected, and every later read is dominated by a
+  reassignment inside the dest block.
+- **Correction to my own shapes section 82.** I wrote that the fimul
+  variant's 9-byte deficit "is the second multiply". Wrong: the scout
+  reached the reference's `fmul`-mem form exactly (via a
+  `volatile float*` alias on `acc`) and the object grew to 3728
+  instead of closing on 3689. The second multiply is locally
+  size-neutral; `volatile` costs ~48 bytes of ordering collateral
+  across the function. The 9 bytes are elsewhere. Section 82 now
+  carries the correction and the general rule: a `volatile` buys a
+  local form and charges globally.
+- Residue baseline refreshed: **8,894**.
 
 **Round-423 (2026-09-14): fimul REACHED and rejected at the link; a
 five-round measurement regression found and fixed.**

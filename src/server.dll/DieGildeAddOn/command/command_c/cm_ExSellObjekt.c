@@ -119,7 +119,25 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * object +1/+1 both rulers, linked 1346 -> 1345 (-1, confirmed after
  * full rebuild).  Kept for the byte.
  *
- * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29. */
+ * 2026-09-14 (round 173): `dest_object = dest_game_object` moved from
+ * top level INTO the `cmd+0x10` dest-finalize block, as its first
+ * statement.  The reference defers that load to 0x1000df0a, inside the
+ * guard; source-finalize at 0x1000de10 runs entirely on the source
+ * object.  Hoisting it above source-finalize put that whole region on
+ * the dest pointer's slot and drifted the schedule to the function's
+ * end.  Object 685/911 -> 829/1047, rebrew test 796 -> 971, linked
+ * 1345 -> 1172 (-173, confirmed after a full clean rebuild).  Largest
+ * win on this function after the season move.  Note the object SHRANK
+ * (2053 -> 2025, span 2064 -> 2032): a real body below the reference
+ * span is legal (allocator Finding 58) and the link is what ranked it.
+ * Placement is load-bearing: the same assignment written at top level
+ * immediately BEFORE the `if` scores 92/2057 — msvc6 sinks the load
+ * into the taken arm only when it is written inside the guard.
+ *
+ * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29.
+ * The round-173 move preserves that: `dest_object` is read only inside
+ * the same `cmd+0x10` guard, so the assignment cannot be observed
+ * before its new position. */
 
 
 
@@ -365,7 +383,6 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			}
 		}
 	}
-	dest_object = dest_game_object;
 	if (*(int*)(cmd + 0x14) != -1) {
 		resolve_result = *(int*)(cmd + 0x1f);
 		amount = *(int*)(dest_object + 7) - resolve_result;
@@ -407,6 +424,12 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		}
 	}
 	if (*(int*)(cmd + 0x10) != -1) {
+		/* The reference defers this load to 0x1000df0a, inside the
+		 * dest-finalize guard: source-finalize at 0x1000de10 runs
+		 * entirely on the source object.  Hoisting it above that
+		 * block puts the whole source-finalize region on the dest
+		 * pointer's slot and drifts the schedule to the end. */
+		dest_object = dest_game_object;
 		if (dest_game_object != (ushort*)0) {
 			*(int*)(dest_game_object + 7) = *(int*)(dest_game_object + 7) + *(int*)(cmd + 0x1f);
 		} else {
