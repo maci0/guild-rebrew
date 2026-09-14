@@ -389,7 +389,29 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 				 * the reference and lifts aligned 225 -> 230/249,
 				 * span-neutral at 672 -- but costs +1 linked, so the
 				 * alignment gain is noise.  Left in the natural
-				 * order deliberately; do not "fix" it. */
+				 * order deliberately; do not "fix" it.
+				 *
+				 * Round 184 corrected the span arithmetic that had
+				 * been misdirecting this function's lanes.  The
+				 * plain `count_total > count_max` guard (which does
+				 * emit the reference's `cmp eax,ecx` and reaches
+				 * aligned 233/249, the best on this function) was
+				 * recorded as "-16 span".  It is really **-2 bytes
+				 * of CODE**: the reference body is 658 and pads to a
+				 * 672 COMDAT span with 14 nops, while 656 is already
+				 * 16-aligned and pads to itself.  At align 0x10,
+				 * 656 -> 656 but 657 -> 672, so the recoverable
+				 * quantity was +1 byte, never +16.
+				 * The whole 2-byte deficit is ONE instruction: the
+				 * reference copies count_total twice
+				 * (0x100067d8 `mov eax,edi`, then 0x100067e1
+				 * `mov ecx,edi`) and stores count_max from the
+				 * SECOND copy; we store from the first.
+				 * Supplying it with `count_max =
+				 * *(volatile int*)&count_total` DOES hold span 672
+				 * at aligned 233 -- the arithmetic works -- but the
+				 * volatile costs +40 linked, so the combination
+				 * still loses.  Measured; do not re-derive. */
 				node->next = 0;
 				node->count = 0;
 				node->size_max = 0;

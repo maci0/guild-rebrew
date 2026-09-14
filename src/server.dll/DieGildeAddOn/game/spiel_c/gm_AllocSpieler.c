@@ -513,7 +513,17 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 			 * 63fe71e5), so it runs once instead of fourteen times.
 			 * Moving it inside is CORRECT and makes the instruction
 			 * count exact (1054 -> 1056 against the reference's
-			 * 1056) -- and costs +420 linked bytes (8871 -> 9291),
+			 * 1056) while SHORTENING the real body by 14 bytes
+			 * (3689 -> 3675) -- note the two signs differ, and it
+			 * is the BYTE sign that matters for composition: a
+			 * round-184 lane read "adds instructions" as "adds
+			 * bytes" and tried to pair this with the -11 double-load
+			 * fix under shapes section 41.  Both are negative, they
+			 * overlap by 16 bytes (-11 and -14 compose to -9, not
+			 * -25), and together they regress the instruction count
+			 * back to 1054 because both rewrite the same FP
+			 * scheduling region.  Do not pair them.
+			 * It costs +420 linked bytes (8871 -> 9291),
 			 * because our surrounding schedule then diverges.
 			 * Third instance of correctness and byte-matching
 			 * pulling apart; see the slot[9] note above and

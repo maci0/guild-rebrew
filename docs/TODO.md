@@ -49,6 +49,41 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-435 (2026-09-14): §41 combinations tested; both premises were MINE
+and both were wrong. Two arithmetic corrections banked. Residue 8,666.**
+
+- **Spieler A+B: hypothesis falsified, and the error was mine.** I paired
+  the -11 double-load fix with the stranded-`dst[-2]` fix on the strength
+  of round 178's note that the latter "adds instructions (1054 -> 1056)".
+  That is an INSTRUCTION count; in BYTES it removes 14. Both levers are
+  negative, so §41 never applied. Worse, they overlap by 16 bytes (-11
+  and -14 compose to **-9**, not -25) and together regress the
+  instruction count back to 1054 because both rewrite the same FP
+  scheduling region. The only positive parked lever in that file (+4
+  ternary) reaches -5 and no further. Lane closed; the note now carries
+  its byte sign and a do-not-pair warning.
+- **Tracked: the "-16 span" was a COMDAT alignment artefact.** Real
+  deficit is **2 code bytes**. The reference body is 658 and pads to a
+  672 span with 14 nops; 656 is already 16-aligned and pads to itself.
+  At align 0x10, 657 -> 672 — so the recoverable quantity was **+1
+  byte**, never +16, and two rounds had been hunting sixteen bytes in a
+  658-byte function. The whole deficit is ONE instruction: the reference
+  copies count_total twice (0x100067d8 `mov eax,edi`, 0x100067e1
+  `mov ecx,edi`) and stores count_max from the second copy; we store
+  from the first. I verified that at the bytes.
+  Supplying it with `count_max = *(volatile int*)&count_total` **does**
+  hold span 672 at aligned 233/249 — the best alignment on this function,
+  arithmetic confirmed — and still costs **+40 linked**. Measured, closed.
+- **§41 extended** with both traps: composition needs opposite BYTE signs
+  (an instruction count is not a length), and overlapping levers do not
+  compose — a combination's delta must be measured, never added.
+- **§88 written**: separate code bytes from alignment round-up before
+  hunting a span deficit; state deficits in code bytes with the ceiling
+  spelled out; derive the target from the hunk list's own byte widths
+  rather than guessing which region is short.
+- §87 holds: the Tracked header's "-16" framing and the Spieler note's
+  missing byte sign were both corrected in place.
+
 **Round-434 (2026-09-14): two cross-cutting axes measured; both correct and
 both losing. Residue unchanged at 8,666.**
 

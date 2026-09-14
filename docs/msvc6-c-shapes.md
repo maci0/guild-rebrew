@@ -1547,6 +1547,27 @@ collapses positionally (section 19) and hides a real structural gain. Track
 one byte away from the target size, look for a second change that supplies
 exactly that byte rather than discarding the first.
 
+**Composition requires opposite BYTE signs, and deltas do not always add
+(round 184).** Two traps, both hit on `gm_AllocSpieler`:
+
+*Instructions and bytes have independent signs.* A round-178 note recorded that
+moving a stranded statement into its loop "makes the instruction count exact
+(1054 -> 1056), i.e. it ADDS instructions" — true, and irrelevant. The same change
+*shortens* the real body by 14 bytes, because the three FP ops it gains inside the
+loop are outweighed by the out-of-line copy it deletes and by the addressing
+collapsing to 3-byte `[esi-0xc]` forms. Pairing it with a -11 fix under this section
+was therefore doomed from the start: both are negative. **Record the byte delta
+explicitly whenever a note claims a length effect**; an instruction count is not a
+length.
+
+*Overlapping levers do not compose.* Those two fixes measured -11 and -14 alone and
+**-9 together**, not -25 — they overlap by 16 bytes because both rewrite the same FP
+scheduling region, and together they even regress the instruction count back to 1054
+from the 1056 one of them reached alone. So a combination's delta must be *measured*,
+never predicted by addition, and two levers that touch one region are candidates for
+fighting rather than composing. The case below works precisely because its two
+clusters were one fault seen twice; that is the configuration to look for.
+
 `gm_AllocRaum` (0x10017c40) sat at NEAR_MATCHING 677/742 for nine
 prior batches with 18 residual `**` in two clusters that were recorded as
 separate register-role problems: the scan cursor built as `lea ecx,[ebp+0x25]`
@@ -3121,3 +3142,49 @@ Practical rules:
   it, which readers hit second.
 - **Prefer facts that stay true** (byte sequences, addresses, measured scores with
   their date) over conclusions that expire ("the highest-value untried lever").
+
+## 88. A "span deficit" is code bytes plus alignment round-up — separate them before hunting
+
+COMDAT sections are padded to an alignment (0x10 here), so a span figure conflates
+two very different quantities. Confusing them sent two rounds hunting the wrong
+number on `m_AllocTracked` (0x10006580).
+
+The reference body is **658 bytes**, which pads to a **672** span with 14 trailing
+nops. A candidate emitting **656** is already 16-aligned, so it pads to itself and
+the span reads 656 — recorded at the time as a **"-16 span deficit"**. It is nothing
+of the kind: the code is 2 bytes short, and the ceiling arithmetic is
+
+```
+656 -> 656      657 -> 672      658 -> 672
+```
+
+so the recoverable quantity was **+1 byte**, not +16. Hunting sixteen bytes in a
+658-byte function is hopeless; finding one is a normal question.
+
+Worse, the hunt had been aimed at the wrong regions (a `repne scasb` block and a
+zero-register idiom, both length-exact on our side). The entire deficit was **one
+instruction**: the reference materialises the value twice —
+
+```
+0x100067d8  8bc7  mov eax,edi
+0x100067da  897e14 mov [esi+0x14],edi
+0x100067dd  3bc1  cmp eax,ecx
+0x100067df  7e28  jle
+0x100067e1  8bcf  mov ecx,edi      <-- ref-only: the whole 2 bytes
+0x100067e4  894e1c mov [esi+0x1c],ecx
+```
+
+— and stores the second field from the *second* copy, where we store from the first.
+Supplying it with `count_max = *(volatile int*) &count_total` does hold span 672 at
+aligned 233/249, the best figure on that function, which confirms the arithmetic. It
+still loses **+40 linked**, because the `volatile` costs more elsewhere than the
+alignment gains. So the lane closes on measurement rather than on a phantom.
+
+Practical rules: when a span looks short by exactly one alignment unit, compute
+`real_body` and the round-up separately before planning anything; state deficits in
+**code bytes** with the ceiling spelled out; and derive the target from the hunk
+list's own byte widths (here ref-only `8bcf`+`3bc1`+`0f8d..` = 10 against built-only
+`2bc7`+`0f89..` = 8, closing the gap exactly with no residual) rather than guessing
+which region is short.
+
+`src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`
