@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-404 (2026-09-13): out-param + pDbgBuf lanes negative.**
+
+- ExSell init motion: kill-resolved -107, narrow-init catastrophic
+  (194), group-move catastrophic (262). Head zero-init block is
+  load-bearing; init motion not the lever.
+- CrashDump pDbgBuf kill: frame-positive (offsets 2/9 match) but
+  -56/-56 matches. FOURTH confirmation every 0x280 costs ~50.
+  Declined link-test (certain loss).
+- Both files reverted by agents, tree verified clean. No link tests.
+- Residue baseline unchanged: **9,067**.
+
 **Round-403 (2026-09-13): eax-occupancy + FPU-surround lanes negative.**
 
 - ExSell dest-block webs: narrowing/killing all three leaves arm1
