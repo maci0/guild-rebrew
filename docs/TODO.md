@@ -34,6 +34,21 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-337 (2026-09-13): Alchemist faddp reachable-but-costly; LoadBuf
+use-shapes negative.**
+
+- Alchemist stack-occupancy lane: inline-v 691, hoisted-c2 390
+  (two cleanups), split-store 401 — but split-store EMITS `faddp`,
+  confirming the diagnosis (sum must die via store before subtract).
+  Costs more than it buys (extra store + still leaks). Reference tail
+  needs a different expression shape, not pressure tuning. New
+  mechanism-level finding.
+- LoadBuf lea use-shapes: sum-reuse craters to 437, single-pin 679/679
+  vs 701 baseline. Dual-volatile-received-first stays.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,209**.
+
 **Round-336 (2026-09-13): vfs arm-order + Grave col-lifetime lanes negative.**
 
 - vfs mode-arm store order is STRONGLY load-bearing: N/Z reorder
