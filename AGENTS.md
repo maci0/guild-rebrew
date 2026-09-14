@@ -18,6 +18,9 @@
   via `cmake/toolchain-msvc-6.0-sp6-docker.cmake`)
 - **Language**: C89 — follow compiler constraints below
 - **Config**: `rebrew-project.toml` (all tools read from here)
+- **Function inventory**: `src/<target>/function_structure.json` (`[{va, size, name}]`,
+  written by discoverer plugins — packaged: rizin, capstone, NE/MZ)
+- **Layout source of truth**: `layout/<target>/rebrew-layout.toml` (+ hex blobs)
 
 ## Quick Start
 
@@ -64,7 +67,7 @@ Use `--json` for structured output (preferred for agents).
 | `rebrew lint --json` | Validate annotations |
 | `rebrew data --json` | Inventory globals in .data/.rdata/.bss |
 | `rebrew graph --format summary` | Dependency graph stats and blockers |
-| `rebrew catalog --json` | Generate coverage catalog |
+| `rebrew catalog --json` | Coverage data + reccmp CSV (`db/data_<target>.json`) |
 | `rebrew flirt --json` | FLIRT scan for known library functions |
 | `rebrew lib-match --stock-lib LIBCMT.LIB` | Byte-level check that no reversed function duplicates a linked library |
 | `rebrew extract list --json` | Extract and disassemble functions (list/show/batch) |

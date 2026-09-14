@@ -12,7 +12,6 @@ format = "pe"
 arch = "x86_32"
 marker = "SERVER"
 reversed_dir = "src/server.dll"
-function_list = "src/server.dll/functions.txt"
 bin_dir = "bin/server.dll"
 iat_thunks = [
     0x1001A160, 0x1001A166, 0x1001A16C, 0x1001A172,
@@ -26,7 +25,6 @@ binary = "original/Europa1400Gold_TL.exe"
 format = "pe"
 arch = "x86_32"
 reversed_dir = "src/Europa1400Gold_TL.exe"
-function_list = "src/Europa1400Gold_TL.exe/functions.txt"
 bin_dir = "bin/Europa1400Gold_TL.exe"
 source_ext = ".c"
 origins = ["GAME"]
