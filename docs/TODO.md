@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-401 (2026-09-13): int-temp + Eip-temp lanes negative.**
+
+- LS int-temp: lea destination stays esi regardless of temp type
+  or increment order; unsigned-index catastrophic. Attack
+  lea-operand-order or dual-counter allocation next, not typings.
+- CrashDump Eip split-out: separate-local inert, recompute 0x280
+  but -104, late-store 0x280 but -60/-45. Third confirmation:
+  every 0x280 path costs ~50. Declined link-test (certain loss).
+- Both files reverted by agents, tree verified clean. No link tests.
+- Residue baseline unchanged: **9,067**.
+
 **Round-400 (2026-09-13): aux-head + rescan lanes negative.**
 
 - LS aux head: guard-do 615, global-first identical, char-ptr-temp
