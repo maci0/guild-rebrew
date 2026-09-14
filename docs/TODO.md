@@ -34,6 +34,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-379 (2026-09-13): shrink-liveness + float-store lanes negative.**
+
+- CrashDump hProcess reload hits 0x280 but -59/-43 matches (same
+  trade as `space`-drop: frame-exact costs ~50). Pattern confirmed:
+  every 0x280 path loses the bytes. No link-test (clearly negative).
+- Grave float/imm interleaves: float-last +2 noise only, split-flat,
+  split-imm -1. Scheduler pins float emission; fixed point.
+- Both files reverted by agents, tree verified clean. No link tests.
+- Residue baseline unchanged: **9,130**.
+
 **Round-378 (2026-09-13): spill-home + secondary-clamp lanes negative.**
 
 - CrashDump extra-use probes: no 0x280 hit (frame counts overlapping
