@@ -2,7 +2,7 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
-### Session map, rounds 254–425 (2026-09-14; residue 9,209 → 8,871 via 11 landed wins)
+### Session map, rounds 254–430 (2026-09-14; residue 9,209 → 8,866 via 13 landed wins)
 
 - **Landed wins (kept, all rebuilt-confirmed):** ExSell dest-object
   sink **-173** (§84) · ExSell season-block move -60 · LS zero-hoist
@@ -48,6 +48,42 @@
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (written at the end of a long session; start here)
+
+**Round-430 (2026-09-14): LANDED — ExSell error-tail order, -5
+(8,871 -> 8,866). Two censuses; a second header claim corrected.**
+
+- **Win: §59 reverse-source-order error tails.** The reference lays its
+  three error tails out in reverse source order (0x2e5d at 0x1000e009,
+  0x2e39 at 0x1000e0c2, 0x2e45 at 0x1000e12f past the ret); our
+  error-first null check on `gm_AllocRaum` put 0x2e45 ahead of 0x2e39.
+  Writing it success-first (`!= 0`, error in the `else`) reproduces the
+  reference order exactly: object 829/1047 -> 836/1052, rebrew test
+  971 -> 977, span-neutral, **linked -5**, confirmed by clean rebuild.
+  Semantics unchanged (same branches, inverted test). A companion probe
+  confirmed §59's rule that `if (cond) goto L;` normalises back to a
+  byte-identical object — only real block restructuring moves this class.
+- **ExSell census: 43% of the residual is real codegen.** Of ~1,221
+  fixed-offset differing bytes, ~525 sit in instruction hunks and ~644
+  (53%) are byte-identical instructions at the wrong address — closely
+  matching round 178's 54% on the sibling. **All the displacement traces
+  to ONE cliff**: delta runs 0..+8 for the first 0x5d0 bytes, jumps to
+  -147 at 0x1000dfc1 and stays. Cause: the reference runs the
+  slot-table + gm_SubObjekt body inline at 0x1000df2a, ours jumps away
+  and emits it ~147 bytes later. That single block placement is the
+  highest-value untried lever left on this function.
+- **Second header claim corrected.** The file blamed a "tail-merge
+  shape (reference shares one tail at 0x1000e00e)". The reference has
+  FIVE `add esp,0x228; ret` epilogues and so does our build — I counted
+  them directly. The tail-merge shape already matches and is not part
+  of the residual; the claim was misdirecting readers.
+- **Spieler 0x1003542c double-load: closable but not bankable.** Reading
+  the global once (mirroring the proven twin fix on 0x10035430)
+  reproduces the reference's four opcodes VERBATIM — the second load
+  does collapse — but costs 11 bytes (3689 -> 3678) and desyncs the
+  tail (matched -281, rebrew test -356, SIZE_MISMATCH). Parked in the
+  file with the exact edit; bankable once those 11 bytes are recovered
+  elsewhere in the citizen path.
+- Residue baseline refreshed: **8,866**.
 
 **Round-429 (2026-09-14): Spieler residue census; a real bug found; two
 link verdicts. Residue unchanged at 8,871.**

@@ -100,10 +100,32 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * Byte-level: still SIZE_MISMATCH (obj 2059 vs target 2057 — the "2055"
  * figure here predated the weight_fraction fix; span-neutral at COMDAT
  * 2064) — the residual
- * deltas are the tail-merge shape (candidate inlines the two error tails;
- * reference shares one tail at 0x1000e00e), the register-role/slot
- * cascade (the frame itself now matches; see above), and whatever
- * case-block order remains after the season-block move below.
+ * deltas are the register-role/slot cascade (the frame itself now
+ * matches; see above) and whatever case-block order remains after the
+ * season-block move below.
+ *
+ * CORRECTED round 179: this paragraph used to blame a "tail-merge shape
+ * (candidate inlines the two error tails; reference shares one tail at
+ * 0x1000e00e)".  That is misleading and sent readers down a dead end.
+ * The reference has FIVE `add esp,0x228; ret` epilogues (0x1000daa9,
+ * 0x1000db06, 0x1000db56, 0x1000e024, 0x1000e10a) and our build has the
+ * same five; the eight `jmp 0x1000e00e` sites are shared by both.  The
+ * tail-merge shape already matches -- it is not part of the residual.
+ *
+ * Round-179 census of the residual, for whoever picks this up:
+ * only ~43% of it is real codegen.  Of ~1,221 fixed-offset differing
+ * bytes, ~525 sit inside instruction hunks; ~644 (53%) are
+ * byte-identical instructions at the wrong address.  ALL of that
+ * displacement traces to ONE cliff: the offset delta runs 0..+8 for the
+ * first 0x5d0 bytes, then jumps to -147 at 0x1000dfc1 and stays there.
+ * The cause is a single block-placement decision -- the reference runs
+ * the slot-table update + gm_SubObjekt body inline at 0x1000df2a
+ * (verified: `xor ecx,ecx; mov cl,[esi+3];` ... `mov [eax*4+0x10442d08],ecx`)
+ * while ours jumps away and emits it ~147 bytes later at 0x1000e0cc.
+ * Moving that body up is the highest-value untried lever here.  The
+ * remaining clusters (the nine-slot zero-store permutation at
+ * 0x1000d959, the ~30 register/slot-name pairs, and the dead [esp+0x44]
+ * spill the reference materialises at 0x1000dd1f) are measured walls.
  *
  * 2026-09-13 (round 93): the dest-season `if (*(cmd+0x23))` block (both
  * FindSlotById arms) moved above `dest_object = dest_game_object`, ahead
@@ -133,6 +155,18 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * Placement is load-bearing: the same assignment written at top level
  * immediately BEFORE the `if` scores 92/2057 — msvc6 sinks the load
  * into the taken arm only when it is written inside the guard.
+ *
+ * 2026-09-14 (round 179): the `gm_AllocRaum` null check is written
+ * success-first (`!= 0` with the error in the `else`) rather than
+ * error-first.  The reference lays its three error tails out in REVERSE
+ * source order -- 0x2e5d at 0x1000e009, 0x2e39 at 0x1000e0c2, 0x2e45 at
+ * 0x1000e12f past the ret -- and the error-first spelling put 0x2e45
+ * ahead of 0x2e39.  This form reproduces the reference order exactly:
+ * object 829/1047 -> 836/1052, rebrew test 971 -> 977, span-neutral,
+ * linked 1172 -> 1167 (-5, confirmed after a full clean rebuild).
+ * Semantics are unchanged -- same two branches, inverted test.
+ * Note `if (cond) goto L;` normalises back to the same object (shapes
+ * §59), so only real block restructuring moves this class.
  *
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29.
  * The round-173 move preserves that: `dest_object` is read only inside
@@ -435,13 +469,21 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		} else {
 			obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
-				if (dest_existing_entity == (char*)0) {
+				/* Success-first form (shapes §59): the reference lays
+				 * its error tails out in REVERSE source order --
+				 * 0x2e5d at 0x1000e009, 0x2e39 at 0x1000e0c2, then
+				 * 0x2e45 at 0x1000e12f, past the ret.  Writing the
+				 * null check as `== 0` first put 0x2e45 ahead of
+				 * 0x2e39; this form reproduces the reference's
+				 * order exactly. */
+				if (dest_existing_entity != (char*)0) {
+					dest_object = (ushort*)gm_AllocRaum(dest_existing_entity, (uint)*(ushort*)(cmd + 0x18));
+					if (dest_object == (ushort*)0) {
+						LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e39, "cm_ExSellObjekt(): gm_AllocRaum failed", 8);
+						return 1;
+					}
+				} else {
 					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e45, g_error_msg_sell_failed, 8);
-					return 1;
-				}
-				dest_object = (ushort*)gm_AllocRaum(dest_existing_entity, (uint)*(ushort*)(cmd + 0x18));
-				if (dest_object == (ushort*)0) {
-					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e39, "cm_ExSellObjekt(): gm_AllocRaum failed", 8);
 					return 1;
 				}
 			} else {

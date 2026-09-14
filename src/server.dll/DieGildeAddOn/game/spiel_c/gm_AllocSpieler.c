@@ -340,6 +340,25 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 			*(int*) (slot + 0x80) = *(int*) (ent + 0x24);
 			*(char*) (slot + 0x84) = ent[0x28];
 			memcpy(slot + 0x88, ent + 0x2c, 0xa8);
+			/* The double read here is deliberate (round 179).  The
+			 * reference loads 0x1003542c ONCE at 0x10018afe and
+			 * reuses eax for both the 16-bit store and the inc:
+			 *   a12c540310 / 66894550 / 40 / a32c540310
+			 * Reading it once into `n` (mirroring the proven twin
+			 * fix on 0x10035430 below) reproduces those four
+			 * opcodes VERBATIM -- the second load does collapse.
+			 * But it costs 11 bytes (real body 3689 -> 3678), which
+			 * desyncs the whole tail: matched 766 -> 485, aligned
+			 * 662 -> 637, rebrew test 1004 -> 648, status STUB ->
+			 * SIZE_MISMATCH.  Bankable only once those 11 bytes are
+			 * recovered elsewhere in the citizen path.  The edit is
+			 *   n = *(int*) 0x1003542c;
+			 *   *(unsigned short*) (slot + 0x50) = (unsigned short) n;
+			 *   *(int*) 0x1003542c = n + 1;
+			 * (`n` already exists; a dedicated local measures the
+			 * same).  The reference also interleaves the [0x1c]
+			 * store and the fadd into this chain; forcing that from
+			 * source gets rescheduled back. */
 			*(unsigned short*) (slot + 0x50) =
 			    (unsigned short) (*(int*) 0x1003542c);
 			(*(int*) 0x1003542c)++;
