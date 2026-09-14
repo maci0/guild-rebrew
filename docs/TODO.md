@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-335 (2026-09-13): LS interleave + SMT sync-lifetime lanes negative.**
+
+- LS header-store interleaving (sink/hoist/split vs count/offset
+  neighbors): identical, -1, -1. No allocator effect. Reverted.
+- SMT sync locals: merge sent_bytes→sync_p0 identical (no-op);
+  split-timer and recompute-point-of-use both -27 aligned — the
+  pre-push grouping of all four sync locals is load-bearing. Reverted.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,209**.
+
 **Round-334 (2026-09-13): two pressure-lane pushes, all negative.**
 
 - Spieler FPU staging: narrow-guard 352 (collapse), widen-subtrahend
