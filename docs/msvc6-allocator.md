@@ -2998,3 +2998,23 @@ On the last two, `matched-reloc` already **equals** the ceiling, so their entire
 `matched` shortfall is one-sided relocation accounting and **zero** of it is codegen work.  That
 is the sharpest form of this finding: compute the ceiling first, and a function can be finished
 as far as any code edit can take it while its `matched` still looks far from the size.
+
+## Finding 62 — the ebx/edi rotation is unsteerable by construction (round 307)
+
+On `gm_ObjectsAvailble` (0x10015f70) the (row, base, inner) triple homes as
+(esi, ebx, edi) where the reference has (ebx, edi, esi), with identical kernel
+bytes and `base` shared in edx on both sides — only the three outer homes
+rotate. Declaration order, local removal, pressure pads, and volatile-homing
+each member are all inert or worse (volatile row/inner collapse the function).
+The IL is isomorphic; the colorer assigns homes the source cannot name. When
+a triple rotates with an identical kernel, stop: no C spelling reaches it.
+
+## Finding 63 — slot homes are canonicalized; live-set cardinality does not move them (round 361)
+
+On `cm_ExSellObjekt` (0x1000d930) splitting a live local is coalesced to
+byte-identical output, and dropping either of two pointer locals worsens
+identically (609/855/442, obj 2048) without touching the [esp+0x18]/[esp+0x14]/
+[esp+0x20]/[esp+0x24] permutation. Declaration reorder is likewise identical.
+The permutation is driven by declaration/type mix or call-sequence pressure
+outside the live set — changing which values are live in either direction
+does not move it.

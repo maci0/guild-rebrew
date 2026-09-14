@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-407 (2026-09-13): codegen knowledge mined (user request).**
+
+- `docs/msvc6-c-shapes.md` §§77–81: grouping rule + hit/miss scope,
+  one-token guard wins, position-beats-alignment ranking (2v1),
+  xor-xor RMW, CrashDump 0x280 frame rule.
+- `docs/msvc6-allocator.md` Findings 62–63: rotation unsteerable by
+  construction; slot homes canonicalized vs live-set cardinality.
+- Round-155 lanes (Grave rescan-count, CrashDump Analyze) both
+  negative, tree clean — recorded in passing.
+- Residue baseline unchanged: **9,067**.
+
 **Round-406 (2026-09-13): entry-search + aux-tail lanes negative.**
 
 - Grave entry cursor/entry shapes: 51, 37, 59 (vs 541) — all crater.

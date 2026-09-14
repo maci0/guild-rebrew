@@ -2615,3 +2615,83 @@ plain at *all* sites collapses the function: object 496 -> 480, real `0x1f0` -> 
 so one qualifier can be a lever and its neighbour load-bearing in the same five lines.
 
 `src/server.dll/Units/vfs/vfs_ReadCompressed.c`
+
+## 77. Group same-kind memory operations to match the reference's store sequence
+
+Two wins from one rule: when the reference performs same-kind stores adjacently
+and ours scatters them between other operations, regrouping to the reference's
+sequence closes bytes even when no single store is wrong.
+
+`cm_ExSellObjekt` (0x1000d930): the reference runs the season loops
+(FindSlotById at 0x1000ddc8/df9) BEFORE source-finalize (0x1000de10+); ours ran
+them after. Moving the whole dest-season block above `dest_object =
+dest_game_object` — object 613/861 → 684/910, linked 1404 → 1346 (-58, -2
+outside = -60). `gm_AllocSpieler` (0x10018850): the three byte-copies
+(slot[9]/[0x164]/[0xc]) grouped ahead of the three strcpys — linked 2861 →
+2857 (-4). `ls_LoadBuildingEntityState` (0x100128f0): `current_index = 0;`
+hoisted above the aux-count read, matching xor-zero/read/realloc/re-read/test
+— linked 728 → 675 (-53).
+
+The rule is order, not spelling: every spelling probe on the same regions had
+already failed. Read the reference's block/store sequence from disassembly
+first; move whole blocks to match. It is 1-for-13 as a blind method — it only
+pays where source order was never directly compared during reversing. Where
+source order already matches (Tracked, Objects, PCQ, Gebaeude, vfs mode arms),
+regrouping loses or is inert.
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c`
+`src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c`
+
+## 78. A one-token guard reorder can be worth one linked byte
+
+`cm_ExSellObjekt` (0x1000d930): the source-block category guard tests `'\x06'`
+first (`'\x06' || '\x02'`; dest-side twin keeps `'\x02'`-first) — object +1/+1
+both rulers, linked 1346 → 1345 (-1). The dest-twin mirror is byte-neutral, so
+the effect is positional, not logical: keep the twin that moves bytes, leave
+the twin that does not. `gm_AllocSpieler` (0x10018850): father-wins copies in
+0xc/0x1d0/0x217 order (was 0x217-first) — linked 2857 → 2856 (-1);
+per-trait selection best_mother-first — object +7/+7 with aligned -2, linked
+2856 → 2848 (-8). `m_AllocTracked` (0x10006580): node zero-stores reversed —
+object +1/+1, linked 93 → 92 (-1), even though the reversed order contradicts
+the target's emission (a downstream scheduling accident, not a region fix).
+
+Small wins compound the same way large ones do: verify each at the link
+(one-token changes can shift jump encodings ±bytes elsewhere), and keep a win
+whose mechanism note honestly says "scheduling accident".
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c`
+`src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`
+
+## 79. Position beats alignment, repeatedly
+
+Three landings (Spieler best_mother-first +7/-2 aligned → -8 linked; Tracked
+reversed stores +1/-5 aligned → -1 linked; CopyData secondary low-before-high
++11 aligned → +3 linked, reverted) establish the ranking: when object-level
+`matched` rises and `aligned` falls, the link is the only adjudicator, and it
+has favoured position twice against alignment once. Never keep or reject an
+aligned-positive/matched-negative candidate without `scripts/linktest.sh`;
+never cite aligned-only gains as wins.
+
+## 80. xor-xor RMW beats xor-then-or when the scheduler prefers it
+
+`vfs_OpenStream` (0x10009020): finalize as `g_stream_count = g_stream_count
++ 1` plus `& 0xf6 ^ m14 ^ m18<<3` instead of `^ m14 | m18<<3` — object +8/+13,
+linked 245 → 233 (-12). The target itself emits xor-then-or, so the gain is
+positional/scheduling, not opcode truth. Spelling the RMW to suit the
+scheduler rather than the reference is legitimate when the link confirms it;
+note the dishonesty in the header so the next reader does not "fix" it back.
+
+`src/server.dll/Units/vfs/vfs_OpenStream.c`
+
+## 81. CrashDump frame rule: every 0x280 path costs ~50 bytes
+
+Four independent routes to the target frame (`space`-drop, hProcess reload,
+pDbgBuf kill, nested-loop shape) all land `sub esp,0x280` exactly and all lose
+~45-60 matches on both rulers. The frame counts overlapping live ranges
+([esp+0x44] is a shared spill: hProcess across SetFilePointer, reused for the
+Eip temp), not use-count or declaration-count — adding uses cannot free it,
+dropping scalars shifts codegen elsewhere. Do not link-test another 0x280
+variant unless it also holds matches; the frame will close only together with
+the bytes, not before them.
