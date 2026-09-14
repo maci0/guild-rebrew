@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-376 (2026-09-13): Grave slot-order + neighbour-form lanes negative.**
+
+- Slot-init within-region orders: entity-swap inert, strcpy-swap
+  regresses + breaks size, float-sink -1. Scheduler placement resists
+  all source-order moves.
+- Neighbour zero-extend/index: cached-int 427, cached-short 421,
+  redundant-cast inert. Qualifier (not syntax) selects the form.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,130**.
+
 **Round-375 (2026-09-13): grave-scan + dispatch lanes negative.**
 
 - Grave scan loops: != bounds -2, do/while craters, inclusive -2.
