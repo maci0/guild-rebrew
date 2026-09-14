@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-402 (2026-09-13): lea-operand + arg-setup lanes negative.**
+
+- LS lea operand swaps: both absorbed byte-identical (canonicalized);
+  single-counter -11/+5 aligned noise. Dual-counter stays closest.
+- ExSell arg setup: swapped -1 (also semantically wrong), hoisted
+  -58, implicit-cast -72 (explicit casts load-bearing). Next: what
+  occupies eax at arm1 (resolve/amount live-range), not call-site.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-401 (2026-09-13): int-temp + Eip-temp lanes negative.**
 
 - LS int-temp: lea destination stays esi regardless of temp type
