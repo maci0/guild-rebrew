@@ -34,6 +34,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-391 (2026-09-13): dest-block + secondary-packet lanes negative.**
+
+- ExSell dest block: merged-guard -138, credit-temp -101,
+  hoisted-ternary -180. All strongly negative; dest structure stands.
+- SMT secondary packet: reversed-order -18, ternary-protocol
+  craters, hoisted-flags craters. Secondary construction stands.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-390 (2026-09-13): stored-add + loop2 lanes negative.**
 
 - RVC add-shape: `03 c7` order reachable via `store(acc+=n)` but
