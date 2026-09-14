@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-412 (2026-09-13): volatile-re-read + ST(0)-order lanes negative.**
+
+- CopyData: first-0x18 volatile inert, bp-volatile -97, guard-split
+  identical. Seed partially stale (second-0x18 volatile already
+  landed) — verify seeds against tree before delegating.
+- Spieler ST(0) order: mother-first craters, byte-first ×2
+  canonicalized. Scheduler's fld-dup + fild/fmulp insensitive to C
+  order; fimul 0 throughout.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-411 (2026-09-13): fimul-placement + cold-arm lanes negative.**
 
 - Spieler else-branch aliases: int-locals identical, float-coeff
