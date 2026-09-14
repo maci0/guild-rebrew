@@ -49,6 +49,41 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-426 (2026-09-14): §84's boundary mapped — two negatives that
+explain themselves. Residue unchanged at 8,871.**
+
+- Ran the §84 block-order method on the next two rows. Both produced a
+  complete ordering map and both came back negative, for reasons the
+  maps predicted. The method is now 2-for-4 on wins and 4-for-4 on
+  producing a durable map. Written up as shapes section 85.
+- **CopyData: the pinned value is a CONSTANT.** The reference does
+  `mov ebp,0xffff` at 0x1000edc0 and holds ebp across the src-scan
+  region for a guard 0x9c bytes later — the exact §84 signature, and
+  why its scan needs no entry guard. Declaring the shared `0xffff`
+  local *inside* the dst-valid guard (the correct §84 placement, never
+  tried before) is **byte-identical**: msvc6 rematerialises immediates
+  at each use regardless of scoping. §84 needs a value with a real
+  definition site — a pointer, a field load, a call result. Its order
+  already matches the reference at 12 of 16 top-level blocks; the four
+  differences are all allocator-downstream. Lane retired.
+- **LS: the shape was already spent.** Round 130 had put both §84
+  values (`offset`, `neg1`) inside their guard. The third candidate
+  shares `[esp+0x10]` with the outer loop's counter, so splitting the
+  live ranges forces a second slot (627 against a 690 baseline,
+  rebrew test -61).
+  **But the LS map found a real untried lane:** the three type-dispatch
+  arms are emitted in FULLY REVERSED order vs the reference
+  (ref DEFAULT -> AHM -> GRAVEYARD at 0x10012cc2/ce0/d2e; ours
+  GRAVEYARD -> AHM -> DEFAULT), ~180 bytes. Per §65 an if/else-if
+  chain and a real `switch` emit arms in opposite order, so rewriting
+  the `esi[0]` dispatch as a genuine `switch` is a STRUCTURE change,
+  not a spelling — untried and not header-exhausted. Next round.
+- **Tool fix:** `scripts/instr_diff.py` threw a raw `struct.error` when
+  handed a COMDAT object as `--built`, which cost the CopyData scout
+  time and a hand-rolled capstone reader — while `--obj` already did
+  the job. It now detects the missing MZ header and says which flag to
+  use. Normal path re-verified.
+
 **Round-425 (2026-09-14): LANDED — Spieler order moves, -23 (8,894 ->
 8,871). CrashDump frame CLOSED at 0x280 and still rejected (+66).**
 

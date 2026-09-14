@@ -53,6 +53,16 @@ ABSR = re.compile(r"0x1[0-9a-f]{7}")
 
 def sections(path: Path) -> dict:
     d = path.read_bytes()
+    # A COMDAT .obj is a bare COFF file with no MZ/PE header, so the e_lfanew
+    # read below lands on garbage and struct.unpack raises somewhere deep.
+    # Round 175: an agent lost time to that traceback and hand-rolled a
+    # capstone reader, not realising --obj already handles objects.  Say so.
+    if d[:2] != b"MZ":
+        sys.exit(
+            f"{path}: not a PE image (no MZ header).  To score a compiled "
+            f"object's COMDAT against the reference, pass it as --obj "
+            f"instead of --built."
+        )
     e = struct.unpack_from("<I", d, 0x3C)[0]
     n = struct.unpack_from("<H", d, e + 6)[0]
     opt = struct.unpack_from("<H", d, e + 20)[0]

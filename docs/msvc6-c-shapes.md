@@ -2837,3 +2837,45 @@ Diagnostic: when one region's diff is clean and everything after it drifts,
 look for a value defined before that region and used only after it.
 
 `src/server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`
+
+## 85. The boundary of section 84: it moves a value's definition, not a constant
+
+Section 84's lever — sink a definition into the guard that reads it — paid
+-173 on `cm_ExSellObjekt` and -23 on `gm_AllocSpieler`. Applying the same
+block-order mapping to two more functions found the shape present in both and
+unreachable in both, which fixes the rule's scope.
+
+**`cm_ExCopyEntityData` (0x1000ec00): the pinned value is a constant, so
+source scoping cannot move it.** The reference materialises `mov ebp,0xffff`
+at 0x1000edc0 and holds ebp across the whole src-scan region to serve a guard
+0x9c bytes later — a textbook section-84 signature, and the reason its src
+scan needs no entry guard (ebp is simply unavailable to the loop). Ours spells
+both guards as inline `cmp word ptr [...],0xffff`, which leaves ebp free, and
+msvc6 spends it on a 3-instruction scan entry guard.
+
+Declaring a shared `0xffff` local *inside* the dst-valid guard — the correct
+section-84 placement, which earlier passes had not tried — is **byte-identical**
+to the inline spelling. msvc6 rematerialises an immediate at each use however
+the source scopes it. A `volatile` variant (tried earlier) homes it to the
+stack, which is the wrong mechanism entirely.
+
+So the lever needs a value with a real definition site: a pointer, a loaded
+field, a call result. A constant has no definition to move.
+
+**`ls_LoadBuildingEntityState` (0x100128f0): the shape was already spent.**
+Round 130's hoist had put both of this function's section-84 values (`offset`,
+`neg1`) inside their guard already. A third candidate (`current_index` before
+the aux region) looked identical in form but is a *consequence* of the aux loop
+being its own region: that counter shares `[esp+0x10]` with the outer loop's,
+so splitting the live ranges forces a second slot and shifts the frame
+(probe: 627/1463 against a 690 baseline, `rebrew test` -61).
+
+Two practical rules follow. **Map first, probe second** — both lanes produced a
+complete ordering map, and in both cases the map explained the failure before
+the probes confirmed it. And **a function whose order already matches is done
+for this lever**: `cm_ExCopyEntityData` agrees with the reference at 12 of 16
+top-level blocks, and its four differences are all allocator-downstream
+(loop rotation, cross-jumped epilogues, the ebp guard, an address split).
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c`
+`src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c`
