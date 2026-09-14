@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-371 (2026-09-13): rotation-side + switch lanes negative.**
+
+- Objects side-inputs: guard truthiness inert, query-arg swap -2
+  (target asm confirms current order), do/break inert. Only
+  untried shapes now exhausted.
+- Gebaeude switch: subscript inert, volatile-reload regresses,
+  byte-compare regresses. Remaining gaps mapped (case-4 address
+  shape, 0x1e reg swap, epilogue xor-reg) — all allocator-level.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,144**.
+
 **Round-370 (2026-09-13): LANDED — Tracked reversed stores, -1 linked.**
 
 - Scout's V3 (node zero-stores reversed): object +1/+1 both rulers,
