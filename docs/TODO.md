@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-373 (2026-09-13): DOUBLE WIN — ExSell guard + Spieler copy order,
+-1/-1 linked.**
+
+- ExSell source-block guard `'\x06'`-first: +1/+1 both rulers, linked
+  1346→1345 (-1, rebuilt-confirmed). Kept.
+- Spieler father-wins copies in 0xc/0x1d0/0x217 order: +1/+1/+2,
+  linked 2857→2856 (-1). Kept. (Variant B +7/-2 held, not applied.)
+- Baseline refreshed. Residue: **9,130** (was 9,132).
+
 **Round-372 (2026-09-13): LANDED — vfs finalize xor-xor, -12 linked.**
 
 - Scout's V3 (`= +1` + xor-xor RMW): object +8/+13 both rulers,

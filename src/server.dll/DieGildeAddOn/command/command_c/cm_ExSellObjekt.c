@@ -114,6 +114,11 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * none of source-finalize's inputs, and the order now matches the
  * reference's own execution sequence.
  *
+ * 2026-09-13 (round 121): source-block category guard tests '\x06'
+ * first (`'\x06' || '\x02'`; dest-side twin keeps '\x02'-first) —
+ * object +1/+1 both rulers, linked 1346 -> 1345 (-1, confirmed after
+ * full rebuild).  Kept for the byte.
+ *
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29. */
 
 
@@ -367,7 +372,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		*(int*)(dest_object + 7) = amount;
 		if (amount <= 0) {
 			obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(cmd + 0x18) * 0x41);
-			if (obj_category == '\x02' || obj_category == '\x06') {
+			if (obj_category == '\x06' || obj_category == '\x02') {
 				if (source_existing_entity != (void*)0) {
 					gm_RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(cmd + 0x18));
 				} else {

@@ -49,6 +49,10 @@
  *     groups the three byte-copies (slot[9]/[0x164]/[0xc]) ahead of the
  *     three strcpys: object 736/1310 -> 740/1314, linked 2861 -> 2857
  *     (-4, confirmed after full rebuild).  Kept.
+ *   - 2026-09-13 (round 121): father-wins else-branch copies in
+ *     0xc/0x1d0/0x217 order (was 0x217/0xc/0x1d0), matching the
+ *     reference's store sequence — object 740/1314 -> 741/1315,
+ *     linked 2857 -> 2856 (-1).  Kept for the byte.
  *   - the idx>=6 selector must be the addition form,
  *     `0x3c + (idx < 6 ? 0x86 : 0)`, which emits the target's
  *     setge / dec / and 0x86 / add 0x3c.  The subtraction spelling
@@ -477,9 +481,9 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		*(int*) (slot + 0x1d0) = *(int*) (mother + 0x1d0);
 		slot[0x217] = mother[0x217];
 	} else {
-		slot[0x217] = father[0x217];
 		slot[0xc] = father[0xc];
 		*(int*) (slot + 0x1d0) = *(int*) (father + 0x1d0);
+		slot[0x217] = father[0x217];
 	}
 	slot[0xd] = 1;
 	*(float*) (slot + 0x124) =
