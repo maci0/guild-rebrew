@@ -34,6 +34,13 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-347 (2026-09-13): Spieler slot[0x58] hoist loses at link (+4).**
+
+- Round-94 holdover adjudicated: object mixed (-5/+3), link +4
+  (2861→2865). Reverted. The reference's early `mov [ebp+0x58],1`
+  is not reproduced by hoisting ours — different live-range context.
+- Residue baseline unchanged: **9,149**.
+
 **Round-346 (2026-09-13): rebrew fix — verify-cache patch refreshes guards.**
 
 - Per the standing objective ("as you encounter bugs in rebrew fix
