@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-388 (2026-09-13): CheckInventory head + LoadBuf mask lanes negative.**
+
+- CheckInventory head establishment: entity-early, += split,
+  commuted add — all inert. Head scheduler-locked.
+- LoadBuf mask scheduling: arg-store/comma inert, byte-mask + status
+  craters (confirm header priors). Mask-after-lea scheduler-fixed —
+  no C sequence point orders independent pushes vs stores.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-387 (2026-09-13): head + filter-chain lanes negative.**
 
 - Objects head establishment: split inert, order-swap -3,
