@@ -52,6 +52,12 @@ extern unsigned int ls_ID2Ptr(void);
  * failing postlink entries 114 -> 59, .text residual 1404 -> 775 bytes, and
  * whole-binary coverage 88.6% -> 89.3%.
  *
+ * 2026-09-13 (round 130): `current_index = 0;` hoisted ABOVE the
+ * aux-count read (was after realloc) — matches reference order
+ * (xor-zero, count read, realloc, re-read, test/jle): object 645/879
+ * -> 690/918, rebrew 774 -> 820, linked 728 -> 675 (-53, confirmed
+ * after full rebuild).  Kept.
+ *
  * The switch is fragile and global — swept, all reverted: volatile at any ONE
  * of the ten field sites leaves the constant rematerialized, the store's own
  * read volatile kills it again, and so do `4 + load_result + ...`, the
@@ -304,11 +310,11 @@ unsigned int __cdecl ls_LoadBuildingEntityState(unsigned int stream_ctx)
 		}
 	}
 
+	current_index = 0;
 	if (!ls_ReadVfsDataChecked(&g_aux_entity_count, 4, 1, (void*) stream_ctx)) {
 		return 0;
 	}
 
-	current_index = 0;
 	g_aux_entity_buffer = (int) realloc((void*) g_aux_entity_buffer, g_aux_entity_count * 0x60);
 	for (load_result = 0; load_result < g_aux_entity_count; load_result++) {
 		if (!ls_ReadVfsDataChecked((void*) (current_index + g_aux_entity_buffer), 0x40, 1, (void*) stream_ctx)) {

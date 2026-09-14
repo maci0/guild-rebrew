@@ -34,6 +34,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-382 (2026-09-13): LANDED — LS zero-hoist, -53 linked.**
+
+- Scout's V3 (`current_index = 0;` above aux-count read, matching
+  ref xor-zero/read/realloc/re-read/test): object +45/+39 probe,
+  +46 rebrew, linked 728→675 (-53, rebuilt-confirmed). Biggest win
+  since round 93. Kept with header note.
+- Grave epilogue: temp inert, hoist regresses, block-park inert.
+  Tail movsx encoding-locked; residual elsewhere per scout map.
+- Baseline refreshed. Residue: **9,067** (was 9,120).
+
 **Round-381 (2026-09-13): LANDED — CrashDump nFrames move, -2 linked.**
 
 - Scout's V2 (`nFrames = 0x800;` just before `for(;;)`): object +2/+2
