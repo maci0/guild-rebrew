@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-398 (2026-09-13): source-resolve + slot-scan lanes negative.**
+
+- ExSell source resolve: hoist-owner 504, container-first 286,
+  sunk-null 246 (vs 685). All strongly negative; resolve order stands.
+- Spieler slot scan: pointer-induction 245, pointer-bound 378,
+  polarity-flip identical. Strength-reduction already optimal;
+  hand-walking costs 20+ aligned points.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-397 (2026-09-13): inflate-branch + error-arm lanes negative.**
 
 - RVC inflate branch: drop-crc -7, hoist-above craters + frame
