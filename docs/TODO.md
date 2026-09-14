@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-400 (2026-09-13): aux-head + rescan lanes negative.**
+
+- LS aux head: guard-do 615, global-first identical, char-ptr-temp
+  689 (true lea form but wrong registers — seed for int-temp lane).
+- Grave rescan: &&-merge inert (folds back), tail-bump -9,
+  induction-walk craters + breaks ceiling. Rescan already
+  instruction-identical modulo ecx/edx naming — not a shape gap.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-399 (2026-09-13): decrypt-loop + type-1 lanes negative.**
 
 - CrashDump loop body: volatile-i -120, while-shape identical,
