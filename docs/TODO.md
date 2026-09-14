@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-384 (2026-09-13): type-0 arm + record-header lanes negative.**
+
+- CopyData type-0: sequential-ifs -12, scan_ptr-load mixed (-6/+7
+  aligned — judgment call declined), base+idx inert. jl/jge pair
+  never forms from these spellings.
+- Spieler head: -1-fill sink craters (314), [0xa]-early -43,
+  arg6-first exactly neutral. Current head order stands.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-383 (2026-09-13): game-loop + weight lanes negative.**
 
 - SMT outer walk: != bound -1, for-break identical (canonicalised),
