@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-405 (2026-09-13): div-block + unsynced-wait lanes negative.**
+
+- CopyData div/2: plain-temp -15, inverted identical, shr -11
+  (confirms true signed /2). Div block already matches
+  instruction-for-instruction — residual is the clamp arms.
+- SMT wait spin: condition-form identical, for-break craters,
+  bound-exit identical. Spin shape already optimal.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-404 (2026-09-13): out-param + pDbgBuf lanes negative.**
 
 - ExSell init motion: kill-resolved -107, narrow-init catastrophic
