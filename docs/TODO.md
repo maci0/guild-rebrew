@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-390 (2026-09-13): stored-add + loop2 lanes negative.**
+
+- RVC add-shape: `03 c7` order reachable via `store(acc+=n)` but
+  reschedules the block (-44 both rulers). Schedule-coupled, not a
+  local lever. Do not retry.
+- ExProd loop2: counter-after -4, byte-step + reload inert,
+  season-cast inert. Loop2 shapes exhausted.
+- Both lanes clean (scout's ExProd flag was concurrent-sibling
+  noise). No link tests (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-389 (2026-09-13): slot-scan + final-walk lanes negative.**
 
 - Tracked scan/stats: bound-swap -136, RMW-temps inert ×2.
