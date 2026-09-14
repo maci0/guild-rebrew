@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-385 (2026-09-13): classify-chain + finalize lanes negative.**
+
+- CrashDump chain restructures: if-chain 224, outlier-first identical
+  (case order invisible), ||-combine 205. Volatile excCode load-bearing
+  (drop costs 532→434).
+- LS finalize: all three identical codegen — finalize already matches
+  ref byte-for-byte; real gaps mapped outside lane (state_ptr else,
+  aux head/tail, 12B pad).
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-384 (2026-09-13): type-0 arm + record-header lanes negative.**
 
 - CopyData type-0: sequential-ifs -12, scan_ptr-load mixed (-6/+7
