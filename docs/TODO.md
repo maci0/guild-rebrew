@@ -49,6 +49,39 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-437 (2026-09-14): blocker audit — 11 of 19 stale, one REFUTED; the
+5 unattributed bytes solved; residue now 100% attributed. Residue 8,666.**
+
+- **Systematic audit of all 19 non-matching rows: 11 STALE, 6 ACCURATE, 2
+  ACCURATE-BUT-AT-RISK**, and `blocker_delta` wrong on 13/19. Spot-checks
+  had suggested a problem; the base rate is far worse.
+- **cm_ExSellObjekt's blocker was REFUTED, not merely stale.** It named a
+  frame wall `ref 0x228 vs msvc6 0x224`; I verified both sides emit
+  `sub esp,0x228`. Its own .c header had already recorded the frame as
+  fixed while the blocker kept advertising the phantom.
+- **Caught a trap before it cost anything:** `--fix-blocker` DELETES a
+  blocker when it finds no structural diffs, which is exactly the state
+  of the two best-characterised walls in the tree (gm_ObjectsAvailble's
+  single ebx/edi rename at 686/714 exact; srv_LoadBuf's three named
+  clusters). Blind-refreshing would have blanked them. Used
+  `rebrew blocker set` for all 10 rewrites instead, and confirmed both
+  at-risk blockers are still intact.
+- Carried forward the two figures that only existed in blockers
+  (Spieler's and SMT's ndiff/cdiff hunk counts) rather than letting the
+  refresh drop them. Verified the reasoning survives in the .c header for
+  every stale row before overwriting.
+- **The 5 unattributed residue bytes are solved**: vfs_OpenStream's switch
+  jump table, misfiled because `owner()` used BODY size while msvc6 emits
+  tables past the body — its extent ended one nop short of its own table.
+  Fixed the attribution in `postlink_residual.py`; the report now says
+  **0x21da of 0x21da inside, 0x0 not**, and that row's true count is 238
+  not 233. Total residue unchanged (accounting fix, not a byte gain).
+  The bytes trace to one origin at 0x10009056 (`cmp byte ptr [eax],0`
+  3 bytes vs our `mov al,[eax]; test al,al` 4) and removing it costs
+  match 450 -> 272 — five bytes for ~178. Closed question.
+- New §89 (attribute by COMDAT extent, not body size); §87 extended with
+  the audit base rate and the `--fix-blocker` deletion trap.
+
 **Round-436 (2026-09-14): three rows censused, all walls; two stale METADATA
 blockers corrected. Residue 8,666.**
 

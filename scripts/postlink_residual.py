@@ -195,9 +195,24 @@ def main() -> int:
     if not bad:
         return 0
 
+    # A function's recorded `size` is its BODY size, but msvc6 emits switch jump
+    # tables and case-index maps AFTER the body inside the same COMDAT.  Attributing
+    # strictly by [lo, lo+size) therefore files those trailing structures as
+    # "outside", which under-reports the owner and invents a phantom category.
+    # Round 186: vfs_OpenStream's five jump-table bytes at 0x100092bc read as
+    # unattributed because its body ends at +0x82bb -- one nop short of the table.
+    # Extend each extent to the next function start so a body's trailing tables are
+    # credited to it, while still never crossing into another tracked function.
+    starts = sorted(lo for lo, _size, _name in bad)
+    extents = []
+    for lo, size, name in bad:
+        nxt = next((s for s in starts if s > lo), None)
+        end = lo + size if nxt is None else min(max(lo + size, nxt), nxt)
+        extents.append((lo, end, name))
+
     def owner(off: int) -> str | None:
-        for lo, size, name in bad:
-            if lo <= off < lo + size:
+        for lo, end, name in extents:
+            if lo <= off < end:
                 return name
         return None
 

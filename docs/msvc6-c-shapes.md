@@ -3159,6 +3159,28 @@ sitting there long enough to redirect work:
   build that is gone. Detailed reasoning belongs in the `.c` header, which survives
   the refresh; the blocker should stay a measured one-liner.
 
+**Systematic audit (round 186): 11 of 19 blockers were stale.** Auditing every
+non-matching row against fresh measurement — rather than spot-checking — found the
+base rate is far worse than the anecdotes suggested, and `blocker_delta` disagreed
+with the current delta on 13 of 19. Two findings generalise:
+
+- **A refuted blocker is worse than a stale one.** `cm_ExSellObjekt`'s named a frame
+  wall, `ref 0x228 vs msvc6 0x224`. Both the reference and our object emit
+  `sub esp,0x228` — I verified both. Its own `.c` header had already recorded the
+  frame as fixed; the blocker went on advertising a wall that does not exist.
+- **`--fix-blocker` deletes a blocker when it finds no structural diffs**, which is
+  exactly the state of the two best-characterised walls in the tree
+  (`gm_ObjectsAvailble`'s single ebx/edi rename at 686/714 exact, `srv_LoadBuf`'s
+  three named clusters). Blind-refreshing would have traded precise knowledge for
+  blank. Use `rebrew blocker set <VA> "<text>" --delta N` to rewrite a blocker while
+  keeping it a measured one-liner, and reserve `--fix-blocker` for rows whose claim
+  is merely numeric.
+
+Before overwriting any blocker, confirm the *reasoning* survives in the `.c` header —
+on the 11 stale rows it did, except that two of them (`gm_AllocSpieler`,
+`ServerMainThread`) were the sole record of their ndiff/cdiff hunk figures, which were
+carried into the replacement text rather than dropped.
+
 The common mechanism is that a note is written as a *conclusion* at the moment it
 is measured, then outlives the state it described — usually because a later round
 fixed the thing without re-reading the bytes. Two of the four were actively
@@ -3222,3 +3244,37 @@ list's own byte widths (here ref-only `8bcf`+`3bc1`+`0f8d..` = 10 against built-
 which region is short.
 
 `src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`
+
+## 89. Attribute residue by COMDAT extent, not body size — msvc6 emits tables past the body
+
+`scripts/postlink_residual.py` attributed each differing `.text` byte to a function by
+testing `lo <= off < lo + size`, where `size` is the **body** size from
+`function_structure.json`. msvc6 emits switch jump tables and case-index maps *after*
+the body inside the same COMDAT, so those trailing structures fell outside every
+extent and were reported as a phantom `<outside the non-matching functions>` bucket.
+
+`vfs_OpenStream` (0x10009020) is the clean example. Its recorded size is 667, so the
+extent ended at `+0x82bb` — one `nop` short of its jump table at `+0x82bc`:
+
+```
+0x10009020..0x100092ba  body, 667 bytes      <- recorded size
+0x100092bb              90                   nop pad, identical both sides
+0x100092bc..0x100092cf  5 dwords             the "unattributed" bytes
+0x100092d0..0x100092dc  case index map       identical both sides
+0x100092dd..0x100092df  90 90 90             COMDAT 0x10 pad
+```
+
+Extending each extent to the next tracked function's start fixes it: the report went
+from `0x21d5 of 0x21da inside … 0x5 are not` to **`0x21da of 0x21da … 0x0 are not`**,
+and that function's true count is 238 rather than 233. The total residue is unchanged —
+this is an accounting fix, not a byte gain — but a phantom category invites rounds
+spent hunting a wall that is really part of a known one.
+
+The five bytes themselves are worth recording as a closed question: each is exactly
+`+1` in the low byte of a jump-table dword, all tracing to one origin at 0x10009056
+where the reference emits `cmp byte ptr [eax],0` (3 bytes) and we emit
+`mov al,[eax]; test al,al` (4). Removing that byte makes the loop and table byte-exact
+and shifts everything after it — measured at match 450 -> 272. Five bytes recovered
+for ~178 lost.
+
+`scripts/postlink_residual.py`

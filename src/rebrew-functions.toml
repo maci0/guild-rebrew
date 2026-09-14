@@ -15,8 +15,8 @@ analysis = "Core logging sink. Takes an output_mask bitfield: bit 0 writes to fi
 size = 2115
 status = "PROVEN"
 analysis = "Decrypts .dbg payload in-place using a 32-bit rolling XOR key (ROL15 per dword). | Validates the candidate instruction pointer is in a committed page before symbol emission. | Primary stack walk: read next return address from ESP-based stack slots (4-byte stride)."
-blocker = "SEH/exception filter: prologue 4-reg vs 2-reg deferred + frame 0x28c vs 0x280; PROVEN via prove path; size-matched structural wall — parked"
-blocker_delta = 1873
+blocker = "frame 0x284 vs ref 0x280 (the older 0x28c figure is wrong); every 0x280 route measured costs ~50 bytes (6 confirmations, shapes 81); body length-exact, tables byte-identical"
+blocker_delta = 1638
 
 ["SERVER.0x10002fc0"]
 size = 376
@@ -229,9 +229,10 @@ analysis = "Exported function called by the host engine to shut down the server 
 size = 2434
 status = "NEAR_MATCHING"
 analysis = "Core orchestration loop. Phase 1 (Lobby): Loops accepting connections until connected_players == g_max_players and every connected player has the 0x800 ready flag. Then transitions into Phase 2 (Transfer). | PHASE 0: Read game.ini config — server port (default 7531), game path, max players | Initialize server: thread priority, logging, packet pool, game data, listen socket | PHASE 1 — LOBBY: Wait for all players to connect and set ready flag (0x800). Broadcasts server info every 3 seconds. Processes network I/O. Handles disconnect requests (0x1000) and host disconnect (0x400 = terminate). | PHASE 3 — DATA RECEIVE: Wait for host to send savegame data (flag 0x08 cleared when done). Then call RecvGameSavegame to deserialize game state. | PHASE 5 — PLAYER ALLOCATION: Wait for each player to allocate their character entity (flag 0x10 set, cleared when cmd received). | PHASE 6 — GAME LOOP: Main simulation tick. Checks sync flags (0x40=sync data, 0x20=sync ready). Advances game clock, broadcasts sync packets (cmd 0x1E). Processes commands via ProcessAndBroadcastAllCommands. Speed controlled by g_game_speed_value. | PHASE 4 — DATA SEND: Stream savegame to all non-host clients in 128-byte chunks (cmd type 0x09). First sends total size (cmd type 0x08). Clears flag 0x04 when transfer complete per player."
-blocker = "obj 2434 = target exactly, 627/627 instructions. .scratch/ndiff.py aligns 602 in 18 hunks {sched 10, operand 1, instr 7}. With registers collapsed (.scratch/cdiff.py) 618 align in 11 hunks and the instruction multiset differs by six: the wait-loop back edge (`je <head>` against our `jne <exit>`) at 0x100098e3; `lea esi,[eax+ecx]` against `add esi,eax` at 0x1000984b; the cmd+4 store (register against the 8-byte immediate) at 0x100097fb; and three sync-packet store placements at 0x10009baf/0x10009bb7/0x10009bd6, where the target stores to the buffer before the argument pushes and ours hoists the cmd+0x18 store into the pre-push window. All six are c2 register or schedule decisions. Exhausted, each measured: statement order (climb accepted one swap, 601 -> 602 aligned, 19 -> 18 hunks), declaration order, flags (/Oa 2450 B/523 aligned, /Os 2235/350, /Ot /Ob0 /Ob2 /Og /Gs /Oi- inert, /Ow and /Oa /Ow byte-identical to the baseline), CPU targets (/G3 /G4 /G5 /GB inert, /G6 2432/571), toolchains (SP1-SP6 byte-identical), the GA (40 generations x 64 candidates, 1850 s, no exact match, best candidate worse than the source at 589/29), full-function prove (times out on the transfer loop, the prove lane is closed), and 25 source spellings (point-of-use reads of the sync globals 2433 B/597, load-store pairs 2433/597, all three inline 2436/603/19, yoda compare, index store, assignment inside the condition, moving the 0x101deac0 zero above the branch 601/19). Byte identity, not PROVEN, is what remains. A six-pass climb finds no further move. Also swept: /Ox, /GA, /Ob1 (byte-identical) and /O1 (2237 B, 297 aligned); lexical-scope spellings of the packet arm (a block-local copy of the new value, explicit nested blocks) are byte-identical. TU composition is inert: three neighbour functions before and after it give the identical object (2434 B, 602 aligned, 18 hunks)."
+blocker = "already in reference order (16/16 log landmarks byte-identical, zero block reorderings); residual is 3 intra-block scheduling sites + register pairs; ndiff 592/627 in 25 hunks, cdiff 614/627 in 15 (round 186)"
 updated_by = "verify"
 updated_at = "2026-09-13T05:17:26+00:00"
+blocker_delta = 515
 
 ["SERVER.0x10009d30"]
 size = 296
@@ -377,8 +378,8 @@ size = 1002
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 status = "PROVEN"
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
-blocker = "instruction folding (lea vs mov), loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 601
+blocker = "counter-block scheduling + register pairs; obj matches ref exactly at 1002"
+blocker_delta = 271
 
 ["SERVER.0x1000c1e0"]
 size = 160
@@ -529,8 +530,8 @@ status = "RELOC"
 ["SERVER.0x1000d930"]
 size = 2057
 status = "PROVEN"
-blocker = "GRA/frame wall: ref 0x228 edi-zeroed locals vs msvc6 0x224 ebx; exhaustive flag/formulation probes (source notes) — parked"
-blocker_delta = 1854
+blocker = "register/slot permutation + intra-block scheduling; frame matches (both sides sub esp,0x228, re-verified round 186); residual is 71% displaced bytes with no dominant cause -- see .c header"
+blocker_delta = 1066
 cflags = "/O2 /Gd /Ow"
 
 ["SERVER.0x1000e140"]
@@ -578,8 +579,8 @@ status = "RELOC"
 ["SERVER.0x1000ec00"]
 size = 912
 status = "PROVEN"
-blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
-blocker_delta = 530
+blocker = "clamp-arm layout + cross-jumped epilogues; 12 of 16 top-level blocks already ordered; ebp-pinned 0xffff constant is unreachable per shapes 85"
+blocker_delta = 481
 
 ["SERVER.0x1000ec00".prove_constraints.arg0]
 type = "pointer"
@@ -814,7 +815,8 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 status = "PROVEN"
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
-blocker = "three scheduler phase shifts, all instruction-identical to the reference (strcpy pair, 5-byte fill, field-init block); source order already matches, msvc6 scheduling is the wall — parked at 606/1040 at obj exactly 1040"
+blocker = "21 of 22 top-level blocks already in reference order; residual is fail-epilogue merge + 8B zero-extend idiom in the neighbour loop; the older 606/1040 figure predated later work"
+blocker_delta = 489
 
 ["SERVER.0x10012000"]
 size = 728
@@ -845,8 +847,8 @@ toolchain = "msvc-6.0"
 status = "PROVEN"
 analysis = "ls_LoadBuildingEntityState: Resets all entities, then deserializes building entities from savegame stream. Per-entity: type byte, ID, name (32b), position, dimensions, owner, state fields. Special handling: 0x1E=farm (plant map), H/I/J=graveyard, K/L/M=office. Also loads auxiliary entity list with realloc. Returns 1 on success."
 globals = "SERVER 0x100a8c34"
-blocker = "constant-caching blocker: ref or ebp,-1 + mov [..],ebp vs rematerialized 0xffffffff (+1B); prologue edi vs 3-reg; neg1/sc probes inert at 121/1464 — parked"
-blocker_delta = 1343
+blocker = "induction/operand layer + state_ptr store fold; dispatch arms already match; volatile reads load-bearing (round-143 recipe) -- see .c header"
+blocker_delta = 806
 
 ["SERVER.0x10012eb0"]
 size = 884
@@ -1112,8 +1114,8 @@ analysis = "Decrease tracked amount; delete entry if it reaches zero."
 ["SERVER.0x10016f80"]
 size = 346
 status = "PROVEN"
-blocker = "match in dl vs cl wall + entry prologue push layout; exhaustive probes plateau ~99-171/346 (source notes) — parked"
-blocker_delta = 285
+blocker = "dl-vs-cl register wall; body 342 vs ref 346; prologue-fidelity lever spent (shapes 75)"
+blocker_delta = 258
 
 ["SERVER.0x100170e0"]
 size = 304
@@ -1242,9 +1244,10 @@ size = 3689
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /Oa /Ow"
 status = "STUB"
 note = "SIZE 3209/3689 (480B short): full C reconstruction of the 3689-byte target (slot scan, refs zeroing, record header init, debug log, type-0x10 citizen path, gender/class checks, parent resolution, stat interpolation, per-type finalization, id assignment). Candidate contains the full tail (diff nulls are aligner drift) but msvc6 codegen diverges structurally: 909 vs 1056 instructions, edge_sim 7.6% (near-diag STRUCTURAL 92%), FPU scheduling + branch layout differences throughout. prove path-explodes (no terminal states, LB 10/20). Status promoted STUB->SIZE_MISMATCH 2026-08-30 (was stale from the naked-asm era). Semantics verified identical by hand."
-blocker = "obj 3689 = target (was -1; corr. 2026-09-13); .scratch/ndiff.py aligns 746 of 1056 in 177 hunks, 1053 instructions. With registers collapsed (.scratch/cdiff.py) 828 align and the multiset differs by seven: six extra `and reg,0xffff` (the reference zero-extends a 16-bit field as `xor eax,eax; mov ax,[mem]`, we emit `mov si,[mem]; and esi,0xffff`) against four missing `xor reg,reg`; `and edx,0xffffff86` (6 B) where the reference uses the 3-byte 8-bit-immediate form; four `add r,r` where it has `lea r,[r+r]`; and a 4-byte stack-layout shift on three `esp` leas (the frame itself is right: work[0x3fc] drives sub esp,0x41c, 0x400 -> 0x420, 0x3f8 -> 0x418). Compiles with /Oa /Ow; /Oa alone folds the slot[0x166] reload and is 22 instructions worse. Corrections landed 2026-09-12: InitNewDynastyEntity's 3rd argument is the 4th parameter; slot[0xd]=2 belongs to the 3||0x10||0x13 arm; the 0x7c store and rnd order; the citizen-path copy order; both family counters load once; the two gm_RandomMod(0x10) draws ahead of the stat guard; memset before ahm_ResetEntityState; the three FPU sites widen rnd from 16 bits; both acc clamps test <= 1.0; the location block tests type_entry != 1 with 0x170 out of line. Climb with the aligned objective plus the hunks tie-break accepted five affine swaps: 740 -> 746 aligned, 316 -> 310 differing, hunks 177 -> 179 -> 177; further sweeps find no move. Inert, each compiled: casts, addend swaps, pointer walks, mask removal, declaration reorders, colv/rowv type and widening changes, a 4-byte frame pad, /G3 /G4 /G5 /GB, six spellings of the ent+0x24 address (none emits the `lea`), and a local pointer for the memset destination. Rejected: positional 859->909 (ndiff 740->728), aligned-bytes 1886->2004 (740->743, 177->179). A six-pass climb finds no further move; /G6 measures 3701 B/692 against the baseline 3688/746. TU composition is inert (three neighbours before and after give the identical object); /Og- and /Oy- are far worse."
+blocker = "132 distributed schedule steps, no cliff; in-hunk clusters are parent-wins 344B, refs-scan 220B, no-parent trait 181B, record-header 140B; ndiff 731/1056 in 171 hunks, cdiff 808/1056 in 156 (round 186)"
 updated_by = "test"
 updated_at = "2026-09-13T18:49:57+00:00"
+blocker_delta = 2859
 
 ["SERVER.0x100196c0"]
 size = 81
@@ -1302,8 +1305,8 @@ status = "RELOC"
 size = 395
 status = "PROVEN"
 ghidra = "gm_KannObjektHergestellt"
-blocker = "entity-byte/list-init schedule mutually exclusive with ebp-first+edi roles; exhaustive probes plateau 291/395 (source notes) — parked"
-blocker_delta = 104
+blocker = "one spilled entity byte drives all 11 hunks; second hunk is constant remat (shapes 85, unreachable); plateau 298/395"
+blocker_delta = 125
 
 ["SERVER.0x1001a060"]
 size = 97
