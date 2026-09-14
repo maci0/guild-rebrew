@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-358 (2026-09-13): liveness + clock-copy lanes negative.**
+
+- ReadCompressed call-liveness: acc-across neutral, z-across harmful
+  (371/SPAN break), kill-crc -7/+1 aligned. crc-arg reg + add-esp
+  cluster unchanged by all. Next lane: stored-branch pre-call side.
+- SMT clock copy: interleave -17/-317, dword-p2 regress, load-reorder
+  neutral-negative. Register assignment allocator-driven, not
+  spelling-driven from this block.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,149**.
+
 **Round-357 (2026-09-13): coupling lanes negative; ExProd plateau named.**
 
 - ReadCompressed use-count changes: extra-acc -44, tail-volatile inert,
