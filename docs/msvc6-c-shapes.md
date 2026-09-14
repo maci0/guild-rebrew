@@ -2364,7 +2364,26 @@ the 1-byte `90` pad are all *consequences* of that layout and cannot be fixed di
 a region that looks like total mismatch and the source has a long `if/else if` chain over
 a dense integer key, try the `switch` form first.
 
+**Precondition (round 176) — check the reference for a jump table before applying this.**
+The win above worked because that reference *already had* two out-of-line tables, so
+`switch` matched the selection msvc6 had made originally. `ls_LoadBuildingEntityState`
+(0x100128f0) looked like the same situation and is the opposite: its reference dispatch is
+a linear `cmp al,0xNN` / `je` chain with the default falling through, and the if/else-if
+chain is the only C form that reproduces it. A genuine `switch` over the same key set
+({0x1e, 0x48-0x4a, 0x4b-0x4d}) is dense enough to trip msvc6's table heuristic, which
+emits `jmp DWORD PTR [ecx*4+...]` plus an index/address table: object 1472 -> 1520 (+48),
+matched 690 -> 573. So the rule is *match the reference's selection*, not "prefer switch".
+
+**And verify the arm order from the emitted bytes, never from the source text.** A round-175
+block-order map recorded this function's arms as fully reversed and queued the rewrite on
+that basis; objdump showed the baseline already emits them in the reference's order
+(uniform +2 drift, byte-identical compare chain including all six `je` displacements, zero
+hunks in the region). The map had compared source text order against emitted order. msvc6
+emits else-blocks innermost-first (section 59), so source order is *expected* to look
+inverted — reading it as a divergence manufactures work that does not exist.
+
 `src/server.dll/Units/Error/Error_c/CrashDumpUnhandledExceptionFilter.c`
+`src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c`
 
 ## 66. a dead store in the source appears as a store in the reference — comparing stores is a dead-code oracle
 
@@ -2877,5 +2896,24 @@ for this lever**: `cm_ExCopyEntityData` agrees with the reference at 12 of 16
 top-level blocks, and its four differences are all allocator-downstream
 (loop rotation, cross-jumped epilogues, the ebp guard, an address split).
 
+**Third and fourth boundary cases (round 176).** `gv_ExAllocGraveyardWorker`
+(0x10011bf0) maps as identical to the reference in 21 of 22 top-level blocks;
+its one difference is a three-store triple deliberately held *off* reference
+order because the positional ruler pays 671 for our order against 668 for the
+reference's. Its genuine section-84 candidate — `slot_ptr` defined above the
+count guard where the reference loads it inside, at exactly the reported first
+diff — is **byte-identical** when moved: msvc6 already sinks that load, and the
+writeback was dead. `ls_LoadBuildingEntityState`'s dispatch region likewise
+turned out to have zero hunks.
+
+So the lever's real precondition is: **the function's emitted block order must
+actually differ from the reference's.** Four of six functions mapped so far
+were already in reference order, and on those the method's value is the map
+itself — it retires the lane instead of funding more probes. Read the order
+from emitted bytes (`instr_diff`, objdump), never from source text: msvc6
+emits else-blocks innermost-first (section 59), so source order routinely
+*looks* inverted when the emitted order already matches.
+
 `src/server.dll/DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c`
 `src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c`
+`src/server.dll/DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c`

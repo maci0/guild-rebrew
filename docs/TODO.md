@@ -49,6 +49,42 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-427 (2026-09-14): a queued lead REFUTED by measurement; two more
+functions retired for the block-order lever. Residue unchanged at 8,871.**
+
+- **I queued a bad lead last round and the scout caught it.** Round 175's
+  LS map claimed the three dispatch arms were emitted in reversed order
+  (~180 bytes) and I queued a `switch` rewrite on that basis. objdump on
+  the baseline COMDAT shows the arms ALREADY match the reference:
+  uniform +2 drift across all four anchors, byte-identical compare chain
+  including all six `je` displacements, and `instr_diff -v` reports zero
+  hunks in that region (I re-ran it myself to confirm). The map had
+  compared *source text* order against *emitted* order — and msvc6 emits
+  else-blocks innermost-first (§59), so source order is expected to look
+  inverted. The round-175 note is struck in place.
+- **§65 gains a precondition, learned the expensive way.** The `switch`
+  rewrite was measured anyway: the reference's dispatch here is a linear
+  `cmp al,0xNN`/`je` chain with the default falling through, and a real
+  `switch` over {0x1e, 0x48-0x4a, 0x4b-0x4d} is dense enough to trip
+  msvc6's jump-table heuristic — `jmp [ecx*4+...]` plus an out-of-line
+  table, obj 1472 -> 1520 (+48), matched 690 -> 573. §65's win came from
+  a reference that already HAD tables. The rule is *match the
+  reference's selection*, not "prefer switch". Documented in §65.
+- **Graveyard retired for this lever.** 21 of 22 top-level blocks already
+  in reference order; the one difference is a triple deliberately held
+  off-reference because the ruler pays more for ours (671 vs 668). Its
+  real §84 candidate (`slot_ptr` above the count guard, reference loads
+  it inside — exactly at the first diff) is byte-identical when moved:
+  msvc6 already sinks it and the writeback was dead.
+- **Lever scope now measured: 4 of 6 functions mapped were already in
+  reference order.** On those the map's value is retiring the lane.
+  Recorded in §85.
+- **One genuinely untried lane surfaced:** LS's residue is dominated by
+  the 0x1e read loop's `lea [ebx+edx+4]` vs `[edx+ebx+4]` operand order
+  at three sites, driven by whether the `esi+0x71` load is hoisted above
+  the loop or re-read per iteration. The header exhausted the *volatile
+  spelling* of that load, not its *hoist position*. Next round.
+
 **Round-426 (2026-09-14): §84's boundary mapped — two negatives that
 explain themselves. Residue unchanged at 8,871.**
 
@@ -71,13 +107,14 @@ explain themselves. Residue unchanged at 8,871.**
   shares `[esp+0x10]` with the outer loop's counter, so splitting the
   live ranges forces a second slot (627 against a 690 baseline,
   rebrew test -61).
-  **But the LS map found a real untried lane:** the three type-dispatch
-  arms are emitted in FULLY REVERSED order vs the reference
-  (ref DEFAULT -> AHM -> GRAVEYARD at 0x10012cc2/ce0/d2e; ours
-  GRAVEYARD -> AHM -> DEFAULT), ~180 bytes. Per §65 an if/else-if
-  chain and a real `switch` emit arms in opposite order, so rewriting
-  the `esi[0]` dispatch as a genuine `switch` is a STRUCTURE change,
-  not a spelling — untried and not header-exhausted. Next round.
+  The LS map also claimed the three type-dispatch arms were emitted in
+  reversed order (~180 bytes) and proposed a `switch` rewrite.
+  **STRUCK — that claim is false; see round 427.** objdump shows the
+  arms already match the reference (uniform +2 drift, byte-identical
+  compare chain, zero hunks in the dispatch region). The map had read
+  *source text* order rather than *emitted* order; msvc6 emits
+  else-blocks innermost-first (§59), which already inverts one into
+  the other.
 - **Tool fix:** `scripts/instr_diff.py` threw a raw `struct.error` when
   handed a COMDAT object as `--built`, which cost the CopyData scout
   time and a hand-rolled capstone reader — while `--obj` already did
