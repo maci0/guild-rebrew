@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-408 (2026-09-13): layout compat fixed; lanes negative; fimul lead.**
+
+- Upstream `rebrew` renamed the layout package without fallback,
+  breaking native postlink. Fixed on our side via `git mv` to
+  `rebrew-layout.toml` (history preserved); native postlink verified
+  (0x236b unchanged). Upstream still needs a compat shim or migration.
+- ExSell season-multi: hoisted/factored products all -90. Spieler
+  sympathy math: cast-drop/temps/swap all neutral, store-swap -2/-5.
+  LEAD: reference uses `fimul` at 0x10018f4c; no tried shape emits it
+  — follow-up lane should target fimul emission specifically.
+- Residue baseline unchanged: **9,067**.
+
 **Round-407 (2026-09-13): codegen knowledge mined (user request).**
 
 - `docs/msvc6-c-shapes.md` §§77–81: grouping rule + hit/miss scope,
