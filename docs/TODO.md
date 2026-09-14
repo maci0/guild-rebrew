@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-392 (2026-09-13): cold-tails + state_ptr-else lanes negative.**
+
+- CrashDump cold tails: de-volatile -115, split-labels identical
+  (folded), unshare -114. Sharing load-bearing for span; tails don't
+  touch spill count.
+- LS else-block: temp-split -2, volatile-ptr gets reload/or shape
+  but wrong or-form +16B, split+volatile dup-store. Closest shape
+  still loses.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-391 (2026-09-13): dest-block + secondary-packet lanes negative.**
 
 - ExSell dest block: merged-guard -138, credit-temp -101,
