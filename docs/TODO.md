@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-351 (2026-09-13): block-order 1-for-9; method narrowed.**
+
+- Tracked: source order matches reference 1:1 — zero moves exist.
+  Objects: outside-rotation order already matches; head swap -3,
+  read swap inert. Both reverted, tree verified clean.
+- Block-order method now 1-for-9. Narrowed scope: only worth reading
+  reference order where source order was NEVER directly compared
+  (ExSell was such a case). Functions whose order was transcribed
+  during original reversing have nothing to find.
+- Residue baseline unchanged: **9,149**.
+
 **Round-350 (2026-09-13): FindNext lane negative; branchless audit clean.**
 
 - FindNext block moves: store-sunk worse on BOTH rulers (test 162→147,
