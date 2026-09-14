@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-348 (2026-09-13): block-order lanes negative; baseline refreshed.**
+
+- Gebaeude block moves both lose (679, 598). CopyData secondary
+  low-before-high: aligned 184→195 (best on record) but matched -6 and
+  link +3 (462→465) — reverted. Alignment without position is not a win.
+- Housekeeping: `residue_base.log` still held pre-round-93 numbers
+  (ExSell 1404) — refreshed to the 9,149 composition.
+- Residue baseline: **9,149** (refreshed; CopyData revert confirmed).
+
 **Round-347 (2026-09-13): Spieler slot[0x58] hoist loses at link (+4).**
 
 - Round-94 holdover adjudicated: object mixed (-5/+3), link +4
