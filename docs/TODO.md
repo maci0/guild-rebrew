@@ -34,6 +34,21 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-410 (2026-09-13): fimul EMITTED (×2) — placement wrong; store
+spelling dead.**
+
+- Spieler §8a lane: plain-alias `fb` home emits fimul ×2 — FIRST shape
+  on this function to do so — but at 362/542 (fast paths, not the
+  interpolation product). Residency lever works; placement wrong.
+  NEXT: move alias into else-branch product with ST(0) holding running
+  value (ref order fld/fsubr/fimul/fild/fmul/faddp).
+- ExSell store spelling: volatile-member/ plain+readback both fold
+  identical; split-halves crater. Store not the lever — value
+  lifetime or other locals' homes next.
+- Both files reverted by agents, tree verified clean. No link tests
+  (scores far below keep threshold).
+- Residue baseline unchanged: **9,067**.
+
 **Round-409 (2026-09-13): fimul + call-encoding lanes negative, both
 corrective.**
 
