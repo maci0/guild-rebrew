@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-370 (2026-09-13): LANDED — Tracked reversed stores, -1 linked.**
+
+- Scout's V3 (node zero-stores reversed): object +1/+1 both rulers,
+  linked 93→92 (-1, confirmed after full rebuild). Kept with header
+  note — a scheduling accident (contradicts target order), but a byte
+  is a byte. Position beat alignment again (230→225).
+- LoadBuf sprintf cluster: all three map to listed families, negative.
+- Residue baseline: **9,144** (was 9,145).
+
 **Round-369 (2026-09-13): head-composition + second-loop lanes negative.**
 
 - vfs head restructures: loop-invariant hoist tanks (215), head

@@ -40,6 +40,13 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 //   postlink layout coverage   8.2% -> 30.8%
 //   whole-.text masked        53.37% -> 63.66%   game 92.08% -> 92.16%
 //
+// 2026-09-13 (round 118): node zero-stores in REVERSE order (next/count/
+// size_max/count_max/size_total/count_total) — object +1/+1 both rulers,
+// linked 93 -> 92 (-1, confirmed after full rebuild).  The reversed order
+// contradicts the target's 0x14-first emission, so the gain is a downstream
+// scheduling accident, not a region fix; kept for the byte.  Aligned 230
+// -> 225 falls — position beat alignment again.
+//
 // The span fix is the point: 656 vs 672 broke position alignment for every
 // symbol after this object (docs/TODO.md round 104).  The file was never
 // "13 bytes short" -- it was 2 bytes short in code and 16 bytes short in span.
@@ -370,12 +377,12 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			if (node == 0) {
 				node = (struct GroupNode*) malloc(0x28);
 				strcpy(node->name, buf);
-				node->count_total = 0;
-				node->size_total = 0;
-				node->count_max = 0;
-				node->size_max = 0;
-				node->count = 0;
 				node->next = 0;
+				node->count = 0;
+				node->size_max = 0;
+				node->count_max = 0;
+				node->size_total = 0;
+				node->count_total = 0;
 				prev->next = node;
 			}
 		}
