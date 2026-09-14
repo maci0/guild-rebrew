@@ -101,8 +101,19 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * figure here predated the weight_fraction fix; span-neutral at COMDAT
  * 2064) — the residual
  * deltas are the tail-merge shape (candidate inlines the two error tails;
- * reference shares one tail at 0x1000e00e), the case-block order, and the
- * register-role/slot cascade (the frame itself now matches; see above).
+ * reference shares one tail at 0x1000e00e), the register-role/slot
+ * cascade (the frame itself now matches; see above), and whatever
+ * case-block order remains after the season-block move below.
+ *
+ * 2026-09-13 (round 93): the dest-season `if (*(cmd+0x23))` block (both
+ * FindSlotById arms) moved above `dest_object = dest_game_object`, ahead
+ * of source-finalize — the reference runs the season loops (FindSlotById
+ * at 0x1000ddc8/df9) before source-finalize (0x1000de10+), and ours ran
+ * them after.  Object 613/861 → 684/910, linked 1404 → 1346 (-58, plus
+ * -2 outside = -60 total).  Kept: same reads, the moved block touches
+ * none of source-finalize's inputs, and the order now matches the
+ * reference's own execution sequence.
+ *
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29. */
 
 
@@ -334,6 +345,21 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			}
 		}
 	}
+	if (*(int*)(cmd + 0x23) != 0) {
+		if (dest_dynamic_entity == (short*)0 && resolved_dynamic != (short*)0 &&
+			*resolved_dynamic == 0x1dd) {
+			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(cmd + 0x18));
+			if (capacity_check != (char*)0) {
+				*(int*)(capacity_check + 0x18) = *(int*)(capacity_check + 0x18) + *(int*)(cmd + 0x1f);
+			}
+		}
+		if (source_dynamic_ref != (short*)0 && *source_dynamic_ref == 0x1dd) {
+			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(cmd + 0x18));
+			if (capacity_check != (char*)0) {
+				*(int*)(capacity_check + 0x1c) = *(int*)(capacity_check + 0x1c) + *(int*)(cmd + 0x1f);
+			}
+		}
+	}
 	dest_object = dest_game_object;
 	if (*(int*)(cmd + 0x14) != -1) {
 		resolve_result = *(int*)(cmd + 0x1f);
@@ -372,21 +398,6 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			LAB_1000def2:
 				*(int*)(source_owner_entity + 0xce) =
 					*(int*)(source_owner_entity + 0xce) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
-			}
-		}
-	}
-	if (*(int*)(cmd + 0x23) != 0) {
-		if (dest_dynamic_entity == (short*)0 && resolved_dynamic != (short*)0 &&
-			*resolved_dynamic == 0x1dd) {
-			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(cmd + 0x18));
-			if (capacity_check != (char*)0) {
-				*(int*)(capacity_check + 0x18) = *(int*)(capacity_check + 0x18) + *(int*)(cmd + 0x1f);
-			}
-		}
-		if (source_dynamic_ref != (short*)0 && *source_dynamic_ref == 0x1dd) {
-			capacity_check = gm_FindSlotById((uint)g_current_season, (uint)*(ushort*)(cmd + 0x18));
-			if (capacity_check != (char*)0) {
-				*(int*)(capacity_check + 0x1c) = *(int*)(capacity_check + 0x1c) + *(int*)(cmd + 0x1f);
 			}
 		}
 	}

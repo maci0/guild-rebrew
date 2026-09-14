@@ -2,7 +2,7 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
-### Session map, rounds 254–325 (2026-09-13; residue 9,209 throughout)
+### Session map, rounds 254–345 (2026-09-13; residue 9,209 until round 93, now 9,149)
 
 - **Codegen probes (all reverted):** Spieler tail-order +53 · SMT packet ×2
   (§48) · CrashDump plain-locals (0x280 at 2059B) + decrypt counter ×2 ·
@@ -33,6 +33,18 @@
   difficulties traps · ranked-leads revision · blockers synced.
 
 ### Continuation notes (written at the end of a long session; start here)
+
+**Round-345 (2026-09-13): FIRST LANDED WIN in 93 rounds — ExSell season
+block move, -60 linked.**
+
+- Scout found reference runs season loops (FindSlotById 0x1000ddc8/df9)
+  BEFORE source-finalize (0x1000de10+); ours ran them after. Moved the
+  dest-season `if (*(cmd+0x23))` block above
+  `dest_object = dest_game_object`: object 613/861→684/910, test
+  738→795, obj 2059→2053 (span 2064 neutral), linked 1404→1346 (-58,
+  -2 outside = -60 total: 9,209→9,149). Confirmed after full rebuild.
+  Kept with header note. LS aux lane all negative.
+- Residue baseline: **9,149** (was 9,209).
 
 **Round-344 (2026-09-13): sympathy-index + epilogue lanes negative.**
 
