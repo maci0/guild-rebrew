@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-369 (2026-09-13): head-composition + second-loop lanes negative.**
+
+- vfs head restructures: loop-invariant hoist tanks (215), head
+  materializations recover only to 332 (vs 390 baseline). Current
+  composition is the local optimum.
+- Objects second loop: arg-temps inert, hoisted-temp craters (248),
+  read-at-top -9. Rotation untouched.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,145**.
+
 **Round-368 (2026-09-13): component-loop + grid-loop lanes negative.**
 
 - Gebaeude component loop: dup-store craters (362/+16B), idx-hoist
