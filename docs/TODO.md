@@ -49,6 +49,45 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-436 (2026-09-14): three rows censused, all walls; two stale METADATA
+blockers corrected. Residue 8,666.**
+
+- **Spieler cluster #13 (220B, never probed) is not order-addressable, and
+  its premise was false.** The round-178 census claimed the reference
+  emits the mother-type copies `0x50,0x58,0x54` against our
+  `0x58,0x50,0x54`. Our STORE order already matches (verified
+  0x1001904d/56/5c against our 0x10019052/56/6e) — the census had read
+  our LOAD order. Loads hoist freely; only stores carry order. The real
+  delta is msvc6 tail-merging the 0x54 store out of both if/else arms
+  into the join where the reference duplicates it per-arm. volatile on
+  the store side is byte-identical, on the load side -370. Three probes,
+  all at real body 3689 (span window 3681..3696), **zero code-byte
+  change in any** — so there is no length to recover there.
+  §86b gained the boundary: the lever needs the stores to differ in
+  SOURCE order; a compiler tail-merge is not a source-order difference.
+- **Gebaeude and vfs_OpenStream censused for the first time. Both walls,
+  and neither is size-blocked**: both real bodies and spans already equal
+  the reference exactly (1078/1088 and 701/704), so the §88 code-byte
+  deficit is 0 on both. Gebaeude has a genuine §86b candidate (stores
+  through the `gm_SearchStruct` pointer, ours the exact reverse of the
+  reference) which is span-neutral and moves two stores to their exact
+  reference addresses for +1 aligned — and costs 4 positional. Not
+  adopted, per §86b's own verdict. vfs's §86b block is already
+  byte-identical (its "descending order — no change" note was stale as a
+  negative), and a probe proved its dominant 166B cluster is
+  register-pressure, NOT positional: the plain hoist is CSE'd to
+  identical bytes while volatile shortens the body below the reference.
+- **Two stale metadata blockers found and refreshed via the CLI.** vfs's
+  claimed an `11B size gap (693 vs 704)` for a body that no longer
+  exists (it is 701 = reference, 197 vs 197 instructions); Gebaeude's
+  was stale by 265 bytes. Both rewritten by `rebrew diff --fix-blocker`.
+  §87 extended: blockers are evidence about the present, and the
+  detailed reasoning belongs in the `.c` header, which survives a
+  refresh — verified Gebaeude's 34B-prelude insight is preserved there
+  six times over before accepting the generic replacement.
+- §87 now **six for six** on prose headers, plus this first pair of
+  stale tool-managed blockers.
+
 **Round-435 (2026-09-14): §41 combinations tested; both premises were MINE
 and both were wrong. Two arithmetic corrections banked. Residue 8,666.**
 

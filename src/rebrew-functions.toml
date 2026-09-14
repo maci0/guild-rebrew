@@ -207,8 +207,8 @@ blocker = "partial __asm block reproduces the original's hand-written alignment-
 size = 667
 status = "PROVEN"
 analysis = "Virtual File System Read function. Handles reading from standard files, raw memory buffers (streamFlags & 0x20), and decompresses gzip streams on the fly (streamFlags & 0x08). Uses zlib inflation state machine to pull compressed file chunks."
-blocker = "frame/slot + cmp[mem],0 vs mov/test residual; loop/null-check probes regress to 129-272 from 450/701; 11B size gap (693 vs 704) — parked"
-blocker_delta = 256
+blocker = "loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+blocker_delta = 254
 
 ["SERVER.0x10009310"]
 size = 8
@@ -1142,7 +1142,8 @@ size = 1088
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 status = "PROVEN"
 ghidra = "gm_AllocGebaeude"
-blocker = "alignment-prefixed block-fill prelude (34B at 0x10017609) unreproducible in pure C (docs/msvc6-allocator.md Finding 19) shifts every downstream register; obj equals target 1078 so the two real semantic fixes grow it and score as regressions — parked at 418/1078"
+blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"
+blocker_delta = 435
 
 ["SERVER.0x10017910"]
 size = 145

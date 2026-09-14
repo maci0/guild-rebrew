@@ -3096,9 +3096,25 @@ Separately, the `- ... < 0` spelling of the slot guard is load-bearing for §8b
 register residency: the plain `<` lets msvc6 fold one side into the compare and costs
 99 on the reloc ruler.
 
+**Boundary: the stores must actually differ in SOURCE order (round 185).** This
+lever only exists when our source writes the stores in a different order than the
+reference emits them. Where the difference is instead msvc6 *tail-merging* a store
+common to both arms of an `if`/`else` into the join — while the reference duplicates
+it per arm — there is no source order to change, and `volatile` does not help:
+qualifying the store side is **byte-for-byte identical** to the baseline object, and
+qualifying the load side sinks the store back into the arms but at the wrong position,
+costing -370 matched.
+
+Diagnose it by reading the *stores* specifically. On `gm_AllocSpieler` a census
+recorded the mother-type copies as emitted `0x50, 0x58, 0x54` by the reference against
+our `0x58, 0x50, 0x54` and concluded this lever applied. It does not: our **store**
+order is already `0x50, 0x58, 0x54` (verified at 0x1001904d/0x10019056/0x1001905c
+against our 0x10019052/0x10019056/0x1001906e) — the census had read our **load** order
+off the disassembly. Loads get hoisted freely; only the stores carry the order.
+
 `src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`
 
-## 87. Audit a function's own header notes before trusting them — five for five
+## 87. Audit a function's own header notes before trusting them — six for six
 
 Every census run in rounds 178-182 found at least one false claim in the header of
 the file it was censusing. Four censuses, four bad claims, each of which had been
@@ -3124,6 +3140,24 @@ sitting there long enough to redirect work:
   srv_LoadBuf's by 109 matched bytes, and m_AllocTracked's aligned count was off by
   five with its round-118 store-order claim **inverted in sign** (recorded as +1 on
   both rulers; actually costs five aligned instructions).
+
+- `gm_AllocSpieler` a second time: the round-178 census built cluster #13's entire
+  220-byte premise on a store-order difference that does not exist — it had read our
+  *load* order as store order (see section 86b's boundary note). It also
+  double-counted that cluster's register-name and `and reg,0xffff` items as fresh
+  when the function's own blocker note already listed them.
+
+- `vfs_OpenStream` and `gm_AllocGebaeude`: **the tool-managed blockers were stale
+  too**, not just the prose headers. vfs's said `11B size gap (693 vs 704) — parked`
+  when its real body is 701 = the reference exactly, its span 704 = the reference,
+  and its instruction counts are equal at 197 vs 197 — the body it described no
+  longer exists, and it named size as the wall when size is not the wall.
+  Gebaeude's said `parked at 418/1078` against an actual 683/1088, stale by 265
+  bytes. Both were refreshed with `rebrew diff --fix-blocker` (never by hand — that
+  file is CLI-managed). The blocker field is *evidence about the present*; when a
+  function moves and nobody re-runs the tool, it silently becomes a claim about a
+  build that is gone. Detailed reasoning belongs in the `.c` header, which survives
+  the refresh; the blocker should stay a measured one-liner.
 
 The common mechanism is that a note is written as a *conclusion* at the moment it
 is measured, then outlives the state it described — usually because a later round
