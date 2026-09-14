@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-387 (2026-09-13): head + filter-chain lanes negative.**
+
+- Objects head establishment: split inert, order-swap -3,
+  hoist-above inert. Establishment allocator-inert here.
+- FindNext chain restructures: polarity-invert 52, ||-combine 47,
+  nesting 46 (vs 130 baseline). Linear jne-chain load-bearing;
+  chain-structure lane exhausted.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-386 (2026-09-13): epilogue + live-range lanes negative.**
 
 - Gebaeude epilogue arg respellings: int-local inert, uchar-local
