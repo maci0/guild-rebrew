@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-378 (2026-09-13): spill-home + secondary-clamp lanes negative.**
+
+- CrashDump extra-use probes: no 0x280 hit (frame counts overlapping
+  live ranges, not use-count). Key decode: [esp+0x44] is a SHARED spill
+  (hProcess across SetFilePointer, reused for Eip temp) — next lane
+  should SHRINK overlapping liveness, not add uses.
+- CopyData secondary clamp: all three flip alignment +7/+8 but lose
+  -7/-9 matched; no source spelling produces eax materialization.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,130**.
+
 **Round-377 (2026-09-13): finalize + dynasty-tail lanes negative.**
 
 - ExSell finalize: slot-store-after -86 (order confirmed as committed),
