@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-406 (2026-09-13): entry-search + aux-tail lanes negative.**
+
+- Grave entry cursor/entry shapes: 51, 37, 59 (vs 541) — all crater.
+  Exchange not steerable from cursor assignment; lever is rescan's
+  count/index expression (outside lane).
+- LS aux tail: inc-first -1, comma-add identical, comma-inc -1.
+  Current form (inc in update, add last in body) already optimal.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-405 (2026-09-13): div-block + unsynced-wait lanes negative.**
 
 - CopyData div/2: plain-temp -15, inverted identical, shr -11
