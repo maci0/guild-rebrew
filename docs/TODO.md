@@ -34,6 +34,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-339 (2026-09-13): Alchemist metric question reconciled — no regression.**
+
+- 823 (2026-09-08) was positional-matched at obj 1002; current 714 is
+  positional at obj 1008. Same-metric comparison: aligned 247/286 then
+  (residue table) vs 250/286 now — stable-to-better. The gap is metric
+  (+6 length desyncs positional) × era confusion, not a regression.
+  Residue row stable at 201. No edit to the header's dated log (it is
+  history, correctly left alone); the question from round 338 is closed.
+- Residue baseline unchanged: **9,209**.
+
 **Round-338 (2026-09-13): expression-shape hunts negative; Alchemist metric
 flag noted.**
 
