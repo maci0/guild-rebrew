@@ -34,6 +34,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-367 (2026-09-13): sympathy-loop + version-gate lanes negative.**
+
+- Grave neighbour loop: do-while inert, != bound -1, descending
+  catastrophic (428 + span break). Current form stands.
+- LS version gates: combined/ladder tank both rulers, inverted folds
+  identical. Two-independent-ifs stands.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,145**.
+
 **Round-366 (2026-09-13): matrix-loop + transfer-loop lanes negative.**
 
 - CopyData matrix loops: count-bound tails identical (normalized),
