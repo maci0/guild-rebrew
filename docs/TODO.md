@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-399 (2026-09-13): decrypt-loop + type-1 lanes negative.**
+
+- CrashDump loop body: volatile-i -120, while-shape identical,
+  countdown -81. Cascade closes only with frame-spill fix, not body.
+- CopyData type-1 unit: in-range-first LOSES here (obj 912→928,
+  defeats a fold) — the winning reorder is arm-specific, not
+  universal. Shared-secondary also loses.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-398 (2026-09-13): source-resolve + slot-scan lanes negative.**
 
 - ExSell source resolve: hoist-owner 504, container-first 286,
