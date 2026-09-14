@@ -2,7 +2,7 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
-### Session map, rounds 254–430 (2026-09-14; residue 9,209 → 8,866 via 13 landed wins)
+### Session map, rounds 254–431 (2026-09-14; residue 9,209 → 8,666 via 14 landed wins)
 
 - **Landed wins (kept, all rebuilt-confirmed):** ExSell dest-object
   sink **-173** (§84) · ExSell season-block move -60 · LS zero-hoist
@@ -48,6 +48,45 @@
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (written at the end of a long session; start here)
+
+**Round-431 (2026-09-14): LANDED — ExSell join reload, -200
+(8,866 -> 8,666). CrashDump proven a wall; a rebrew bug fixed.**
+
+- **Win: the -147 cliff is dead (§86, a new shape).** The round-179
+  census named this as the highest-value untried lever, and the cause
+  was not layout but register pressure at a join: msvc6 enregistered
+  `dest_dynamic_entity` in ebp across the then-arm, so that arm ended
+  `mov edi,[esp+0x10]; mov ebp,[esp+0x18]; jmp <join>` — and a block
+  ending in `jmp` cannot be the join's fall-through predecessor, so the
+  join (player-slot store + gm_SubObjekt) was exiled 147 bytes past the
+  else-region. The reference reloads from [esp+0x2c] at 0x1000df97 and
+  falls through. Forcing that one reload
+  (`*(short* volatile*)&dest_dynamic_entity`) reproduces it: object
+  836/1052 -> 1037/1217, **instruction count 678 -> 667 = reference
+  exactly**, **COMDAT span 2032 -> 2064 = reference exactly**, rebrew
+  test 977 -> 1149, **linked -200**. Semantics unchanged. Documented as
+  §86, the inverse of §84 (84 sinks a definition into a guard to free a
+  register; 86 forces a value out of one at a join).
+- **CrashDump is a measured wall, not a parked opportunity.** Its census
+  came back the inverse of the siblings: body length-exact (`ret 4` at
+  +0x729 = the reference's), all 279 tail-table bytes byte-identical in
+  the object, linked residue 1295 with **100% in the body and 0
+  displacement**. ~74% is genuine in-hunk difference, dominated by a
+  19-site `push 0` vs our `push edi` (msvc6 CSEs the zero into edi) —
+  §85 puts a constant out of the §84 lever's reach. Two untried levers
+  measured: switch-case reorder EXACTLY neutral (msvc6 normalises case
+  order completely), de-volatiling instrType/szDateLen loses ~130.
+- **Three false header claims corrected there** (all verified by me
+  against the bytes): the body is NOT 11 bytes long with late tables —
+  it is length-exact and the tables are byte-perfect; the call count is
+  43, not "the reference's 44"; and the tool-managed blocker still said
+  frame 0x28c when it is 0x284.
+- **rebrew bug fixed:** `validate()` applied the function-only
+  `size > 0` rule to every annotation, so one `// DATA:` marker made
+  `rebrew diff --fix-blocker` abort with "Invalid SIZE: 0" on a file
+  `rebrew lint` passes. DATA/GLOBAL are now exempt; regression test
+  verified red-then-green. Committed in the rebrew checkout (96806e1).
+- Residue baseline refreshed: **8,666**.
 
 **Round-430 (2026-09-14): LANDED — ExSell error-tail order, -5
 (8,871 -> 8,866). Two censuses; a second header claim corrected.**

@@ -96,12 +96,37 @@ extern void* g_crash_callback;
 // materialises the cold handlers in exactly the reference's tail order
 // (0x10002db3, 0x10002de9, 0x10002e1b, 0x10002e29, 0x10002e35, 0x10002e4d).
 // Nesting alone: linked residue 1918 -> 1889 bytes, COMDAT span unchanged at
-// 2128 (size-neutral) and the call count is now the reference's 44 with all
-// four LogMessageInternal sites at the tail.  The body itself is 11 bytes
-// longer (add esp/ret 4 at 0x10002e9e vs the reference's 0x10002e99), so the
-// two tail jump tables now sit 11 bytes late and their entries stay misplaced;
-// that 11 is absorbed by the trailing 0x09 padding, which is why the span is
-// unchanged.
+// 2128 (size-neutral), with all four LogMessageInternal sites at the tail.
+//
+// CORRECTED round 180 (measured, not inferred).  Two claims that stood here
+// are false and were making this function look actionable:
+//   * "the body is 11 bytes longer, so the two tail jump tables sit 11 bytes
+//     late and their entries stay misplaced" -- NO.  Built `add esp,0x284`
+//     is at +0x723 and `ret 4` at +0x729; the reference's `ret 4` is at
+//     0x10002e99 = +0x729.  The body is byte-length-exact at 1836, and all
+//     279 tail-table bytes are byte-IDENTICAL in the object (zero differing).
+//     The +13 object surplus is trailing 0x90 padding after the tables.
+//     There is no displacement lane here.
+//   * "the call count is now the reference's 44" -- NO.  Reference 44 in the
+//     body, ours 43; the missing one is the final indirect
+//     `call [0x10024008]` (UnhandledExceptionFilter).
+//
+// Round-180 census: the linked reloc-masked residue is 1295 bytes and 100% of
+// it sits in the body (0 in the tables), of which ~74% is genuine in-hunk
+// instruction difference -- the inverse of the sibling functions, where half
+// the residue was displacement.  The dominant cluster (514 of 1583 weight) is
+// the exception dispatch, and content-matching its 26 handler blocks gives
+// ref 415 / built 412 -- the weight is positional, and the one real repeated
+// difference is `push 0` (ref) against our `push edi`, 19 times, because
+// msvc6 CSEs the zero into edi across the dispatch.  A constant has no
+// definition site to sink, so shapes section 85 puts that out of reach.
+// Reordering the 19 switch cases into the reference's byte-verified emission
+// order is EXACTLY NEUTRAL on both rulers (msvc6 normalises case order
+// completely), and dropping `volatile` from instrType/szDateLen -- which
+// removes four store-then-reload pairs the reference does not have -- LOSES
+// (aligned 392 -> 363, rebrew test 633 -> 506).  The next 340 bytes are pure
+// [esp+N] frame-shift, which section 81 forbids chasing on six measurements.
+// This function is a measured wall, not a parked opportunity.
 //
 // Still open: the frame, 0x284 vs 0x280 (first divergence, byte 2; the
 // "0x28c" figure in older notes predates later work).  It is a

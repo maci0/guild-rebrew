@@ -2938,3 +2938,48 @@ emits else-blocks innermost-first (section 59), so source order routinely
 `src/server.dll/DieGildeAddOn/command/command_c/cm_ExCopyEntityData.c`
 `src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c`
 `src/server.dll/DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c`
+
+## 86. A join block is exiled when its fall-through predecessor must end in a reload + `jmp`
+
+The inverse of section 84, and worth -200 linked bytes on one function.
+
+`cm_ExSellObjekt` (0x1000d930) carried a -147 placement cliff: from 0x1000dfc1 to
+the end, every instruction was byte-identical to the reference and 147 bytes late.
+The round-179 census localised it but read it as a layout problem. It is not — it is
+**register pressure at a join**.
+
+msvc6 had enregistered `dest_dynamic_entity` in `ebp` across the `cmd+0x10` then-arm,
+so that arm had to end by restoring the registers the join expected:
+
+```
+mov edi,[esp+0x10]; mov ebp,[esp+0x18]; jmp <join>
+```
+
+A block that ends in `jmp` cannot be the join's fall-through predecessor. msvc6
+therefore laid the *else*-region inline and exiled the join — the player-slot store
+and the `gm_SubObjekt` body — 147 bytes past it. The reference keeps nothing live
+there: it reloads the pointer from `[esp+0x2c]` at the test (0x1000df97
+`mov eax,[esp+0x2c]; test eax,eax`), its then-arm falls straight through into
+0x1000df2a, and the else-region goes to the tail.
+
+Forcing that one reload from source reproduces the reference's block order:
+
+```c
+if (*(short* volatile*) &dest_dynamic_entity != (short*) 0) {
+```
+
+Object 836/1052 -> 1037/1217, instruction count 678 -> **667 = the reference's
+exactly**, COMDAT span 2032 -> **2064 = the reference's exactly**, `rebrew test`
+977 -> 1149, linked **-200**.
+
+Diagnostic: when a contiguous tail of the function is byte-identical but uniformly
+displaced, look for a *join* whose predecessor arm ends in register restores. The
+fix is to force the value out of a register at the post-join test — the opposite
+move from section 84, which sinks a definition *into* a guard to free one.
+
+Two cautions from the same lane. Reloading a second pointer as well
+(`dest_owner_entity`) also kills the cliff but costs ~150 bytes — reload only the
+value the join actually contends for. And duplicating the join body into both arms
+to delete the join outright is catastrophic (336/2057).
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`

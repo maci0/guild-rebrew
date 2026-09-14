@@ -168,6 +168,16 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * Note `if (cond) goto L;` normalises back to the same object (shapes
  * §59), so only real block restructuring moves this class.
  *
+ * 2026-09-14 (round 180): the post-join `dest_dynamic_entity` test is a
+ * VOLATILE reload (see the comment at the site).  This killed the -147
+ * placement cliff that the round-179 census named as the function's
+ * highest-value lever: object 836/1052 -> 1037/1217 with the instruction
+ * count landing on the reference's 667 exactly and the COMDAT span on
+ * 2064 exactly, rebrew test 977 -> 1149, linked 1167 -> 967 (-200,
+ * confirmed after a full clean rebuild).  Semantics unchanged: reading a
+ * local through a volatile-qualified pointer to its own address yields
+ * the same value and only forbids enregistration.
+ *
  * Semantically PROVEN equivalent (Z3, EAX) as of 2026-08-29.
  * The round-173 move preserves that: `dest_object` is read only inside
  * the same `cmd+0x10` guard, so the assignment cannot be observed
@@ -511,7 +521,18 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				(uint) (unsigned short) g_entity_slot_table[(unsigned char) cmd[0x1e] * 189],
 				*(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f)
 			);
-			if (dest_dynamic_entity != (short*)0) {
+			/* Volatile reload, not a spelling: without it msvc6 keeps
+			 * dest_dynamic_entity in ebp across this join, so the
+			 * cmd+0x10 then-arm has to end `mov edi,[esp+0x10];
+			 * mov ebp,[esp+0x18]; jmp <join>` -- and a block ending
+			 * in jmp cannot be the join's fall-through predecessor.
+			 * msvc6 then lays the else-region inline and exiles this
+			 * join (the player-slot store + gm_SubObjekt body) 147
+			 * bytes past it.  The reference keeps nothing live here:
+			 * it reloads from [esp+0x2c] at 0x1000df97 and falls
+			 * straight through into 0x1000df2a.  Forcing that one
+			 * reload restores the reference's block order. */
+			if (*(short* volatile*)&dest_dynamic_entity != (short*)0) {
 				if (*dest_dynamic_entity == 0x1db) {
 					*(int*)(dest_owner_entity + 0xd0) =
 						*(int*)(dest_owner_entity + 0xd0) + *(int*)(cmd + 0x23) * *(int*)(cmd + 0x1f);
