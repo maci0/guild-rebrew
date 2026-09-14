@@ -34,6 +34,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-363 (2026-09-13): packet regroup +1, reverted; base again stale.**
+
+- SMT +4-store regroup: aligned +2 but link +1 (367→368). Reverted.
+  Alchemist store-order lanes inert/negative; source order already
+  matches reference in all three windows.
+- Housekeeping: `residue_base.log` again predates the latest win
+  (round-110) — linktest compared against Spieler 2861. Refresh it
+  this round.
+- Residue baseline unchanged: **9,145**.
+
 **Round-362 (2026-09-13): LANDED — Spieler grouped copies, -4 linked.**
 
 - Scout's Variant B (three byte-copies grouped ahead of three strcpys):
