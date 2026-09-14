@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-377 (2026-09-13): finalize + dynasty-tail lanes negative.**
+
+- ExSell finalize: slot-store-after -86 (order confirmed as committed),
+  hoist-above semantically wrong (NULL deref, rejected), operand swap
+  identical. Residual is allocator/schedule, not statement order.
+- Spieler dynasty tail: volatile-return + table-hoist inert,
+  setne-spelling regresses. All three diffs are allocator choices
+  unmoved under /Oa /Ow.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,130**.
+
 **Round-376 (2026-09-13): Grave slot-order + neighbour-form lanes negative.**
 
 - Slot-init within-region orders: entity-swap inert, strcpy-swap
