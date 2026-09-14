@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-394 (2026-09-13): clear-loop + scan-loops lanes negative.**
+
+- Objects clear loop: count-up/count-down/stride-pointer all
+  byte-identical (msvc6 canonicalizes). Clear loop is not a steering
+  axis for the ebx/edi wall.
+- FindNext scans: classic do/while 41, goto-top inert, peeled-B 120.
+  Scan shapes exhausted.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-393 (2026-09-13): switch-tail + counter lanes negative.**
 
 - Gebaeude switch tail: default-break inert, inverted-branch inert,
