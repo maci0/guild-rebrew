@@ -34,6 +34,19 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-334 (2026-09-13): two pressure-lane pushes, all negative.**
+
+- Spieler FPU staging: narrow-guard 352 (collapse), widen-subtrahend
+  identical (folded), operand-swap 734/655 (net negative). Staging not
+  moved by width tweaks. (Side datum: split-statement spelling fails
+  C2143 under MSVC6 — no measurement exists.)
+- CrashDump loop pressure: +1 live 415, -1 live 501, extended-range
+  identical/worse — pressure moves away in both directions. Not
+  recoverable via live-count alone.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level regressions).
+- Residue baseline unchanged: **9,209**.
+
 **Round-333 (2026-09-13): two coordinated pushes, six probes, all negative.**
 
 - ExSell live-set lane: split-amount coalesced identical; drop
