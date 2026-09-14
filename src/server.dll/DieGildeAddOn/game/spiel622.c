@@ -970,7 +970,8 @@ limited:
 
 // FUNCTION: SERVER 0x10019ed0
 // gm_CheckInventoryCapacity
-//   NEAR_MATCHING 291/395, obj 395 == target size (was SIZE_MISMATCH 134/395).
+//   NEAR_MATCHING 298/395, obj 395 == target size (was SIZE_MISMATCH 134/395;
+//   291 at the time of writing; 2026-09-13 test says 298).
 //   Everything from offset 0x8f to the end is byte-identical; the only
 //   remaining differences are the seven relocation slots and the 0x1a-0x8e
 //   block described at the bottom.

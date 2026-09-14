@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-341 (2026-09-13): same-metric sweep part 2 — Spieler + CheckInventory
+fixed, ExProd defended.**
+
+- Spieler L24 "object 3681" → 3696-span note; CheckInventory 291→298
+  (test metric, +7 since writing). Both comment-only.
+- ExProdObjekt "staleness" refuted: `rebrew test` says 976/993 — the
+  header is current; the scout compared probe-span (888/1008) numbers.
+  Probe-span vs test-real is the newest metric-confusion pair: probe
+  reports padded COMDAT span, test reports real body. No edit.
+- Residue baseline unchanged: **9,209**.
+
 **Round-340 (2026-09-13): same-metric sweep — 4 files fixed, rest defended.**
 
 - Two-scout audit (10 files, fresh probes): fixed CopyData/Grave/

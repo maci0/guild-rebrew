@@ -21,7 +21,9 @@
  * finalization (refs scan, id assignment, trait loops, dynasty init) and the
  * final id assignment with the 0x10030b6c counter.
  *
- * Current state: object 3681 bytes against the target's 3689 (-8).  The
+ * Current state (2026-09-13 probe): object 3696 bytes (span; 3689
+ * real) against the target's 3689.  The "3681 (-8)" figure above predated
+ * later work; retired.  The
  * normalized instruction comparison (.scratch/ndiff.py) aligns 699 of the
  * target's 1056 instructions, in 192 hunks of 1-2 instructions each.  No
  * region is missing: the call sequences agree 55/55, so every statement has
