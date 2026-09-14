@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-389 (2026-09-13): slot-scan + final-walk lanes negative.**
+
+- Tracked scan/stats: bound-swap -136, RMW-temps inert ×2.
+  Scan/store shapes exhausted.
+- Objects final walk: for-forms inert ×2, pre-read -9. Walk region
+  already exact modulo relocs — residue is purely the upstream
+  ebx/edi rename. Close the walk lane.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-388 (2026-09-13): CheckInventory head + LoadBuf mask lanes negative.**
 
 - CheckInventory head establishment: entity-early, += split,
