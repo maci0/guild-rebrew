@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-374 (2026-09-13): decay + sync-packet lanes negative.**
+
+- CopyData decay: shift-assign -15 honest (bare sar vs cdq/sub/sar),
+  select-then-add craters, temp-split inert. Reference decay has no
+  shift — shift-assign can never match.
+- SMT sync-packet grouping: ref-order -23, interleave mirror
+  catastrophic (1296/SIZE_MISMATCH). Grouping exhausted here.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,130**.
+
 **Round-373 (2026-09-13): DOUBLE WIN — ExSell guard + Spieler copy order,
 -1/-1 linked.**
 
