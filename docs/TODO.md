@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-414 (2026-09-13): Eip-range + season-guard lanes negative.**
+
+- CrashDump Eip lifetime: store-last neutral, snapshot-kill 0x280
+  but -36/-44, fresh-local worse. ROOT CAUSE CONFIRMED: extra spill
+  is pCtx live across Analyze loop — but every 0x280 path loses
+  (fifth confirmation). Declined link-test.
+- ExSell season guards: split-guard -93 + span break, byte-load
+  craters, truthiness identical. Guard shape not the lever.
+- Both files reverted by agents, tree verified clean. No link tests.
+- Residue baseline unchanged: **9,067**.
+
 **Round-413 (2026-09-13): reload-schedule + count-table lanes negative.**
 
 - LS reloads: operand-normalize 82 (conflated volatile-strip),
