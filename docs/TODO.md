@@ -44,6 +44,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-421 (2026-09-13): esp-slot fimul + first-iteration lanes negative.**
+
+- Spieler esp-slot hypothesis false in all spellings (plain temps
+  emit no store, volatile craters, fimul 0). NEW LEAD: integer-domain
+  product before float conversion (not storage class).
+- CrashDump first-iteration: swapped identical, key-scalar +2/-2,
+  peeled -61. pCtx stays in esi regardless — spill pressure
+  elsewhere (register-freeing lane needed, not compare respell).
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-420 (2026-09-13): out-param order + FPU product order negative.**
 
 - ExSell out-param sequence already matches; head permutation mapped
