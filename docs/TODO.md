@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-403 (2026-09-13): eax-occupancy + FPU-surround lanes negative.**
+
+- ExSell dest-block webs: narrowing/killing all three leaves arm1
+  unchanged — eax occupant is ABOVE the dest block (out-param slots),
+  not in it. Redirect recorded.
+- Spieler FPU surroundings: float-temp split 377, hoisted-acc 378,
+  dead-int neutral. Staging fixed.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-402 (2026-09-13): lea-operand + arg-setup lanes negative.**
 
 - LS lea operand swaps: both absorbed byte-identical (canonicalized);
