@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-336 (2026-09-13): vfs arm-order + Grave col-lifetime lanes negative.**
+
+- vfs mode-arm store order is STRONGLY load-bearing: N/Z reorder
+  collapses to 88/106 (obj +16), R/W merge to 74 (+32). Committed
+  order is the optimum by hundreds of matches. New strong negative.
+- Grave col lifetime: two-statement/inline-assign inert, iv-direct
+  regresses -3. Copy + single-expression already optimal.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,209**.
+
 **Round-335 (2026-09-13): LS interleave + SMT sync-lifetime lanes negative.**
 
 - LS header-store interleaving (sink/hoist/split vs count/offset
