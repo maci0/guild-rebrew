@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-395 (2026-09-13): CheckInventory scan + LoadBuf head lanes negative.**
+
+- CheckInventory scan restructures: for/bottom 51, post-inc 57,
+  do/while 68 (vs 278) + span breaks. Committed for(;;)+lookahead
+  stays best.
+- LoadBuf head: pointer-compare -1, dword-guard identical,
+  hoisted-init identical. Head already ==; lane exhausted.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-394 (2026-09-13): clear-loop + scan-loops lanes negative.**
 
 - Objects clear loop: count-up/count-down/stride-pointer all
