@@ -124,8 +124,35 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * while ours jumps away and emits it ~147 bytes later at 0x1000e0cc.
  * Moving that body up is the highest-value untried lever here.  The
  * remaining clusters (the nine-slot zero-store permutation at
- * 0x1000d959, the ~30 register/slot-name pairs, and the dead [esp+0x44]
- * spill the reference materialises at 0x1000dd1f) are measured walls.
+ * 0x1000d959 and the ~30 register/slot-name pairs) are measured walls.
+ *
+ * CORRECTED round 182: this paragraph used to call [esp+0x44] a "dead
+ * spill the reference materialises at 0x1000dd1f".  Both halves are
+ * wrong.  The reference WRITES it at 0x1000dd2a and READS IT BACK at
+ * 0x1000dd33, across the intervening call -- a live cross-call spill.
+ * And we already occupy the same physical slot: tracking esp depth
+ * through the pushes, the reference's [esp+0x44] and our [esp+0x3c] are
+ * both frame+0x468.  The actual difference is that the reference
+ * computes the imul/shr AFTER `push ebx` and interleaves the spill
+ * between `push ebx` and `push edi`, while we compute it all before the
+ * pushes: an instruction-scheduling difference around a call setup, not
+ * a spill-materialisation one.  Aiming at "eliminate a store" instead of
+ * "push interleaving" is how two earlier rounds were burned.
+ *
+ * ALSO SUPERSEDED: the round-179 census paragraph above still asserts in
+ * the present tense that all displacement traces to one cliff and that
+ * moving that body up is the highest-value untried lever.  That lever
+ * was spent by the round-180 win.  Re-censused round 182: no second
+ * cliff exists.  The §86 screen fails at both steps -- the delta returns
+ * to zero five times and finishes at -1 (45 constant-delta runs across
+ * 557 aligned pairs, none holding to the end), and the jmp census is
+ * 22 against 22 with no built-only surplus (the one discrepancy at
+ * 0x1000dc16/dc20 is a swap: we jump to the store, the reference falls
+ * into it).  The residual is now 71.5% byte-identical instructions at
+ * the wrong address with NO dominant source -- four independent 1-4
+ * byte accumulations, the largest worth 163B -- and every cluster >=48B
+ * is register allocation or intra-block scheduling with no shapes-doc
+ * lever.  This function is retired for shape work.
  *
  * 2026-09-13 (round 93): the dest-season `if (*(cmd+0x23))` block (both
  * FindSlotById arms) moved above `dest_object = dest_game_object`, ahead

@@ -3021,4 +3021,67 @@ last aligned pair? (2) does the `jmp` census show a built-only surplus at that p
 (3) is the contended value dead across the predecessor arm? Three cheap commands;
 all three must pass.
 
+**The jump surplus must be inspected, not counted (round 182).** A raw count
+comparison mis-passes. Screening nine rows produced three apparent built-only
+surpluses and all three dissolved once aligned by source address: `ServerMainThread`
+had inverted branch polarity (reference `je` + `jmp` against our `jne` + `jmp`, equal
+counts), `ahm_ExAllocAlchemist` had a reference `cmp edi,5; jl` folded into one built
+`jmp`, and `vfs_OpenStream`'s "extra" jump was the shared jump table
+`jmp [ecx*4+0x100092bc]` present on both sides. In each case one built instruction
+stands where the reference has two — never a jump where the reference falls through.
+Counting alone would have sent two of them into step 3.
+
+**Measured rarity.** Twelve rows have now been screened against this signature and
+exactly one — `cm_ExSellObjekt` — has it. Eight of the nine screened in round 182
+finish at delta exactly 0; the ninth (`gm_FindNextFilteredEntity`) holds -4 for a
+single aligned pair, and its real problem is a body-shape mismatch at 57.6%
+alignment, not a displaced join. Treat section 86 as a rare, screened lever rather
+than a general lane: the profile read costs seconds per row and retired nine rows
+for zero probe rounds, which is exactly what the screen is for.
+
+One operational note for whoever runs this next: **screen the function's own VA and
+size**, not the mismatch-region start that residue tables report. `gm_AllocGebaeude`
+is 0x100174d0 size 1088; the 0x10017530 that appears in a residue listing is 529
+bytes into it and has no metadata entry of its own, so screening that address
+measures nothing.
+
 `src/server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`
+
+## 87. Audit a function's own header notes before trusting them — four for four
+
+Every census run in rounds 178-182 found at least one false claim in the header of
+the file it was censusing. Four censuses, four bad claims, each of which had been
+sitting there long enough to redirect work:
+
+- `gm_AllocSpieler`: the store-tail order was recorded backwards ([0xa] last,
+  [0x20c] third; the bytes put [0xa] second at 0x100189c4 and [0x20c] last at
+  0x100189f4).
+- `CrashDumpUnhandledExceptionFilter`: "the body is 11 bytes longer, so the tail
+  jump tables sit 11 bytes late" — the body is length-exact, `ret 4` sits at
+  +0x729 on both sides, and all 279 table bytes are byte-identical in the object.
+  Also "the call count is now the reference's 44": it is 43.
+- `ServerMainThread`: a rounds 6-9 verdict that its two cold blocks could not be
+  made to defer into gaps. A later round had fixed exactly that and nobody re-read
+  the object; both sit at identical offsets in no hunk.
+- `cm_ExSellObjekt`: a "dead [esp+0x44] spill the reference materialises" — the
+  reference writes it at 0x1000dd2a and reads it back at 0x1000dd33 across a call,
+  and esp-depth tracking shows our `[esp+0x3c]` is the same physical slot
+  (frame+0x468). The real difference is push interleaving.
+
+The common mechanism is that a note is written as a *conclusion* at the moment it
+is measured, then outlives the state it described — usually because a later round
+fixed the thing without re-reading the bytes. Two of the four were actively
+harmful: they named an axis ("eliminate the dead store", "the tables are late")
+that does not exist, and a round was spent aiming at it.
+
+Practical rules:
+
+- **Re-verify a header claim against `rebrew asm` before acting on it**, especially
+  claims about placement, ordering, counts and dead code. One `grep -c` is cheaper
+  than a probe round.
+- **Timestamp claims and mark superseded ones in place.** A claim that was true at
+  round 110 should say so, and when a later round spends the lever it describes,
+  the old paragraph needs a SUPERSEDED marker — not just a newer paragraph below
+  it, which readers hit second.
+- **Prefer facts that stay true** (byte sequences, addresses, measured scores with
+  their date) over conclusions that expire ("the highest-value untried lever").

@@ -49,6 +49,45 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-433 (2026-09-14): §86 screened to exhaustion (13 rows, 1 hit);
+ExSell retired for shape work; §87 written. Residue unchanged at 8,666.**
+
+- **Screen sweep: nine more rows, ZERO candidates, ZERO probes spent.**
+  Eight finish at delta exactly 0; the ninth holds -4 for a single
+  aligned pair. Combined with earlier rounds, §86 now stands at **13
+  rows screened for exactly one hit** (cm_ExSellObjekt). The lever is
+  rare, not general — but the profile read costs seconds per row and has
+  now retired twelve rows for zero probe rounds, which is what it is for.
+- **ExSell re-censused after the -200 win: no second cliff.** The screen
+  fails at both steps — delta returns to zero five times and finishes at
+  -1 (45 constant-delta runs, none holding to the end), and the jmp
+  census is 22 vs 22 with no built-only surplus. The win **fragmented**
+  the displacement rather than removing it: displaced share rose 53% ->
+  71.5% while its cause split from one 147-byte cliff into four
+  independent 1-4 byte accumulations, largest 163B. Only 20.7% of what
+  remains is real codegen, and every cluster >=48B is register
+  allocation or intra-block scheduling. **Retired for shape work.**
+  One probe spent there (both gm_QueryEntitySum sites emit a zero-extend
+  the reference lacks; the repo's own fix pattern from cm_ChkSellObjekt
+  applies): it made both sites byte-exact and closed 5 hunks, but the 6
+  bytes saved shift the tail -4 and displace 325B — locally correct,
+  globally losing. Measured wall.
+- **Two screen corrections folded into §86**: the jmp surplus must be
+  INSPECTED, not counted (three apparent surpluses all dissolved when
+  aligned by source address — folded compare, inverted polarity, shared
+  jump table), and screens must use the function's own VA/size, not the
+  mismatch-region start a residue table reports (gm_AllocGebaeude is
+  0x100174d0/1088; the 0x10017530 I passed is 529 bytes into it with no
+  metadata entry).
+- **§87 written: audit a function's header before trusting it.** Four
+  censuses in rounds 178-182 each found a false claim in the file they
+  were censusing, and two of the four actively named a non-existent axis
+  that cost a round. Latest: ExSell's "dead [esp+0x44] spill" — the
+  reference writes it at 0x1000dd2a and READS IT BACK at 0x1000dd33
+  across a call, and our [esp+0x3c] is the same physical slot
+  (frame+0x468). Corrected in place, with the stale round-179 census
+  paragraph marked SUPERSEDED.
+
 **Round-432 (2026-09-14): §86 screened across the three largest rows — no
 further cliffs. Lever scoped and retired. Residue unchanged at 8,666.**
 
