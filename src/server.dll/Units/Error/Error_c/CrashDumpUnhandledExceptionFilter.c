@@ -73,8 +73,10 @@ extern void* g_crash_callback;
 // and `if (*path_cursor == '.')` without the path_cursor>=pStart guard).  Compiled 2137 vs target
 // 2115 (-40 from the switch form).  Remaining deltas are the MSVC6 register-
 // allocation cascade: prologue saves 4 regs (ebx/ebp/esi/edi) vs 2 (ebp/esi)
-// with ebx/edi deferred in the reference, frame 0x28c vs 0x280 (hDbgFile
-// spilled at [esp+0x44] instead of kept in ebp), and the dispatch bodies stay
+// with ebx/edi deferred in the reference, frame 0x284 vs 0x280 (hDbgFile
+// spilled at [esp+0x44] instead of kept in ebp; the "0x28c" figure above
+// predated later work that already recovered one dword — 2026-09-13
+// probe confirms 0x284, one dword over target), and the dispatch bodies stay
 // inline (jbe/jne skips) where the reference lays the comparison chain
 // straight-line with handlers out of line.  Kept as proper C per batch policy.
 // STATUS: PROVEN — semantic equivalence verified with `rebrew prove`
@@ -101,11 +103,15 @@ extern void* g_crash_callback;
 // that 11 is absorbed by the trailing 0x09 padding, which is why the span is
 // unchanged.
 //
-// Still open: the frame, 0x28c vs 0x280 (first divergence, byte 2).  It is a
+// Still open: the frame, 0x284 vs 0x280 (first divergence, byte 2; the
+// "0x28c" figure in older notes predates later work).  It is a
 // spill-count difference, not a declaration-order or flag one -- 8 declaration
 // permutations, /O1 /Ox /Os /Ot /Og /Ob1 /Ob2 /Oy /Oa /Ow /Op and a /O2 /Gd
-// sweep all leave it at 0x28c, and `szSep[0x20]`/`szLine[8]` move it to 0x290,
-// so it only tracks bytes actually spilled.  Dropping the two shared-tail
+// sweep all leave it at 0x284, and `szSep[0x20]`/`szLine[8]` move it to 0x290,
+// so it only tracks bytes actually spilled.  Round-109 lane: dropping `space`
+// hits 0x280 exactly (frame counts ONE live spilled dword) but costs ~50
+// matches — the reference's missing spill is a different scalar kept in a
+// register, not `space`.  Dropping the two shared-tail
 // locals (fail_msg/fail_line, the only locals the reference lacks) does not
 // move it either -- they get registers, and the five call sites then cost
 // +32 object bytes.  So the reference spills ~3 fewer 4-byte scalars; that is

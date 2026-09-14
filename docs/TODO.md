@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-361 (2026-09-13): slot-homes canonicalized; frame counts one dword.**
+
+- ExSell decl-reorder + live-split both byte-identical (allocator
+  canonicalizes); width change -357. Slot homes insensitive to these.
+- CrashDump: block-scope identical ×2; dropping `space` hits frame
+  0x280 exactly (-1 scalar = one dword) but -57 matches — reference's
+  missing spill is a different scalar. Declined link-test (clearly
+  negative on bytes). Fixed stale 0x28c figures → 0x284 (comment-only,
+  test-confirmed 631/2115).
+- Both files reverted except header fixes, tree verified (only .c shown).
+- Residue baseline unchanged: **9,149**.
+
 **Round-360 (2026-09-13): walk-gate + tail-merge lanes negative.**
 
 - CrashDump gate shapes: inverted -74, via-local -117, setup-order
