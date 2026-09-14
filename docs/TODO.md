@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-349 (2026-09-13): corpus mined; SMT store-order swap inert.**
+
+- User pointed at `~/Desktop/ai-decomp` (74G wiki). Mined
+  `wiki/decomp/codegen.md`: MSVC6 table largely mirrors our shapes doc;
+  one untested suggestion (accumulator short-form `mov [esp+disp],eax`
+  5B vs `mov [esp+disp],edx` 6B at SMT idx-534) traced to the
+  sync-timer/p0 store order — swapping the two global reads is
+  byte-identical (1525/2153/576/2448). Inert, reverted.
+- CheckInventory lane negative (list-order moves -1/-10); FindNext lane
+  pending at round end.
+- Residue baseline unchanged: **9,149**.
+
 **Round-348 (2026-09-13): block-order lanes negative; baseline refreshed.**
 
 - Gebaeude block moves both lose (679, 598). CopyData secondary
