@@ -34,6 +34,19 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-409 (2026-09-13): fimul + call-encoding lanes negative, both
+corrective.**
+
+- Spieler fimul: bare-int/int-temp identical, int-coeff regressive —
+  fimul never emits (other operand already on FPU stack). LEAD: §8a
+  volatile/plain-alias residency trick unfired (over scout budget).
+- CrashDump call-encoding seed REFUTED: reference calls Analyze via
+  direct E8, same as ours; FF D0 sites match too (both are the
+  callback). dllimport moves the WRONG way. Lane closed on premise.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-408 (2026-09-13): layout compat fixed; lanes negative; fimul lead.**
 
 - Upstream `rebrew` renamed the layout package without fallback,
