@@ -34,6 +34,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-342 (2026-09-13): two-rulers rule documented + confirmed.**
+
+- `docs/difficulties.md` §3 item 10: probe reports padded COMDAT span,
+  test reports real body; test's match_count == probe's matched-reloc.
+  Confirmed on a second function (PCQ: 640/584 vs 639/624) after
+  ExProdObjekt. State the ruler before comparing figures.
+- Residue baseline unchanged: **9,209**.
+
 **Round-341 (2026-09-13): same-metric sweep part 2 — Spieler + CheckInventory
 fixed, ExProd defended.**
 

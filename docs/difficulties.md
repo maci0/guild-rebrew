@@ -248,6 +248,13 @@ These cost as much as the codegen walls, and most of them were learned by being 
      "found" three same-target polarity pairs; ground truth showed each
      side's VA holds different code. Never compare addresses across two
      differently-laid-out binaries.
+10. **probe-span vs test-real: two rulers, one truth.** `probe_function`
+    reports the padded COMDAT span as obj size (ExProdObjekt 1008, PCQ
+    640); `rebrew test` reports the real body (993, 639). Their match
+    counts differ accordingly (888 vs 976, 584 vs 624) — and test's
+    match_count equals probe's matched-reloc bucket. Same object,
+    different rulers. Always state which ruler a number comes from
+    before comparing two figures.
 
 ---
 
