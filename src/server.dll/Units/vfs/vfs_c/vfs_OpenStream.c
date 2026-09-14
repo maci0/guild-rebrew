@@ -25,6 +25,12 @@ extern int __cdecl crt_toupper(int current_char);
  *   - The inflateInit2_ result tested as `== 0` with the fallthrough to
  *     finalize matches the target's `je` polarity (neutral on score, correct
  *     shape).
+ *   - 2026-09-13 (round 120): finalize as `g_stream_count =
+ *     g_stream_count + 1` plus xor-xor RMW (`& 0xf6 ^ m14 ^ m18<<3`
+ *     instead of `^ m14 | m18<<3`) — object +8/+8, linked 245 -> 233
+ *     (-12, confirmed after full rebuild).  The xor-xor gain is
+ *     positional/scheduling, not opcode truth (target emits xor-then-or);
+ *     kept for the bytes.
  *
  * Residual: the target's frame is 0xc and ours is 8, so every [esp+...]
  * displacement is off by 4 from index 0 and the positional compare cannot
@@ -304,8 +310,8 @@ inflate_setup:
 	}
 finalize:
 	if (stream != 0) {
-		g_stream_count++;
-		*(unsigned char*) (stream + 0x13c) = (unsigned char) (((*(unsigned char*) (stream + 0x13c) & 0xf6) ^ (*(unsigned char*) &mode14 & 1)) | ((mode18 & 1) << 3));
+		g_stream_count = g_stream_count + 1;
+		*(unsigned char*) (stream + 0x13c) = (unsigned char) ((*(unsigned char*) (stream + 0x13c) & 0xf6) ^ (*(unsigned char*) &mode14 & 1) ^ (unsigned char) ((mode18 & 1) << 3));
 		/* The first argument is read as a dword and masked, not as the byte
 		 * local it is: the reference emits `mov edx,[esp+0x18]; and edx,0xff`
 		 * for this argument and `mov eax,[esp+0x18]; and eax,0xff` for the

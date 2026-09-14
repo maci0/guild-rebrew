@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-372 (2026-09-13): LANDED — vfs finalize xor-xor, -12 linked.**
+
+- Scout's V3 (`= +1` + xor-xor RMW): object +8/+13 both rulers,
+  linked 245→233 (-12, confirmed after full rebuild). Kept with
+  header note (scheduling gain, not opcode truth).
+- Alchemist matrix addresses: nested-stores crater (312), operand
+  swap + shift-nesting inert. Addresses at fixed point from C.
+- Baseline refreshed (Tracked 92 now in). Residue: **9,132** (was 9,144).
+
 **Round-371 (2026-09-13): rotation-side + switch lanes negative.**
 
 - Objects side-inputs: guard truthiness inert, query-arg swap -2
