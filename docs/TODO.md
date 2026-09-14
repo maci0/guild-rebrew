@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-397 (2026-09-13): inflate-branch + error-arm lanes negative.**
+
+- RVC inflate branch: drop-crc -7, hoist-above craters + frame
+  blowup, done-store-after craters. crc32-call schedule fixed point.
+- ExProd error arms: nested-guard inert, inverted null-checks
+  catastrophic (129/131 — break the cross-jump). Epilogue structure
+  confirmed optimal.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-396 (2026-09-13): OOM-tails + entity-loop lanes negative.**
 
 - Tracked tails: classic-guard -32 (aligned-only +3), plain-lt
