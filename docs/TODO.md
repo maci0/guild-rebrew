@@ -49,6 +49,39 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-428 (2026-09-14): a SECOND false lead refuted; SMT proven already
+ordered; a stale header verdict retracted. Residue unchanged at 8,871.**
+
+- **The other round-176 lead was also wrong.** It claimed the reference
+  hoists `mov edx,[esi+0x71]` above the LS 0x1e-arm loop while ours sinks
+  it. The reference re-reads that field at all NINE sites, exactly as we
+  do, and the loop back-edge lands on a load — I verified with
+  `grep -c` on the reference listing. Three probes built on that phantom
+  axis cost -344, -158 and -613 matched. The real difference is
+  load-versus-push scheduling inside each site (ref: load, `mov ecx,ebx`,
+  `push edi`, `push 1`, `add ecx,edx`, `push 4`, `push ecx`; ours pushes
+  first), and the `lea` operand order the map fixated on is a §70 symptom.
+  Both leads from that single mapping pass were false — §85 now carries a
+  standing warning to verify a map's claim against the disassembly before
+  funding a round on it.
+- **ServerMainThread is already in reference order.** 16 of 16
+  LogMessageInternal line-number landmarks at byte-identical offsets
+  (including 0x1df landing after 0x1ff/0x228 in both), 153 vs 154 basic
+  blocks with the extra being padding, zero reorderings. §84 has no
+  purchase: every register-pinned value is a constant (§85 case 1).
+  Probes: zero-store swap +1 byte with both instruction rulers unchanged
+  (coincidence, not structure — not kept); pointer hoist byte-identical;
+  sync-packet reorder -304 and breaks the object size.
+- **Retracted a stale verdict in that file's own header.** Rounds 6-9
+  concluded the two cold blocks could not be made to defer into gaps. A
+  later round fixed it and nobody re-read the object: both sit at +0x39a
+  and +0x7c6 in BOTH streams, instruction-for-instruction, and
+  `instr_diff -v` puts neither in any hunk. I verified this myself before
+  retracting. The old verdict is kept for its measurements, marked
+  superseded.
+- Five of seven functions mapped are now provably already in reference
+  order. The lever's remaining scope is small and known.
+
 **Round-427 (2026-09-14): a queued lead REFUTED by measurement; two more
 functions retired for the block-order lever. Residue unchanged at 8,871.**
 

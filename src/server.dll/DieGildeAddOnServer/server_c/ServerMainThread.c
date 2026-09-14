@@ -221,7 +221,23 @@ extern int g_tick_rate;    /* 0x11764088 */
  *     instructions of unoptimised code, unusable; no pragma letter steers
  *     the layout pass while the optimiser is on.
  *
- * Verdict after rounds 6-9 (every compiled variant measured): both cold
+ * RETRACTED 2026-09-14 (round 177): the round 6-9 verdict below said both
+ * cold blocks are emitted adjacent to their source chain while the original
+ * deferred them into gaps, i.e. that the deferral was unreproducible.  The
+ * bytes refute it.  A later round fixed the placement and nobody re-read
+ * the object: the host-slot store sits at +0x39a and the unsynced-player
+ * block at +0x7c6 in BOTH streams, instruction-for-instruction, in the same
+ * gaps; `instr_diff -v` puts neither inside any hunk.  More broadly all
+ * sixteen LogMessageInternal line-number landmarks are at byte-identical
+ * offsets, including 0x1df landing after 0x1ff/0x228 in both, and the
+ * basic-block sequence shows zero reorderings.  This function's layout
+ * MATCHES; the residue is intra-block scheduling (a `test al,4` interleaved
+ * between two zero-stores at +0x58f, the sync-global read order at +0x803,
+ * two swapped global loads at +0x904) plus register-name pairs.  Do not
+ * fund another layout or block-order lane here.
+ *
+ * Historical verdict after rounds 6-9 (kept for its measurements; its
+ * conclusion is superseded above): both cold
  * blocks are emitted by this msvc6 build adjacent to their source loop's
  * chain, and the original compile deferred them into gaps inside unrelated
  * chains.  No C structure tried (label position, branch polarity, guard

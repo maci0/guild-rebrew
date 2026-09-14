@@ -2896,6 +2896,27 @@ for this lever**: `cm_ExCopyEntityData` agrees with the reference at 12 of 16
 top-level blocks, and its four differences are all allocator-downstream
 (loop rotation, cross-jumped epilogues, the ebp guard, an address split).
 
+**A warning about maps produced in bulk (round 177).** Two leads from a single
+round-176 mapping pass were both false, and both were phrased confidently enough
+to fund a probe round each. The first claimed reversed dispatch arms (refuted:
+zero hunks in the region). The second claimed the reference *hoists*
+`mov edx,[esi+0x71]` above the 0x1e-arm loop while ours sinks it — the reference
+in fact re-reads that field at all nine sites, exactly as we do, and the loop
+back-edge lands on a load. Three probes built on the phantom axis cost
+-344, -158 and -613 matched.
+
+The real difference at those sites is *load-versus-push scheduling*: the
+reference emits `mov edx,[esi+0x71]; mov ecx,ebx; push edi; push 1; add ecx,edx;
+push 4; push ecx` — load first, address arithmetic interleaved with the pushes —
+while ours pushes first and then loads. The `lea` operand order that the map
+fixated on is a *symptom* of which register the load landed in (section 70:
+operand order in a commutative address expression is inert on its own).
+
+Rule: **verify a map's claim against the disassembly before spending a round on
+it**, especially a claim about hoisting, ordering, or duplication — those are
+exactly the properties that look different in source text and identical in
+emitted bytes. One `grep -c` on the reference listing would have caught both.
+
 **Third and fourth boundary cases (round 176).** `gv_ExAllocGraveyardWorker`
 (0x10011bf0) maps as identical to the reference in 21 of 22 top-level blocks;
 its one difference is a three-store triple deliberately held *off* reference
