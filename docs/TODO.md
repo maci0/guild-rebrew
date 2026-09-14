@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-359 (2026-09-13): stored-branch + prelude lanes negative.**
+
+- ReadCompressed edi/n: reorder -9, out-live -24, recompute-n
+  catastrophic (269/SPAN break). Coupled cluster insensitive to
+  stored-branch materialization from these spellings.
+- Gebaeude prelude: sprintf-arg inert, nid-hoist 683→263, inline
+  683→261. Spill-first/counter-second order load-bearing; prelude at
+  local optimum.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,149**.
+
 **Round-358 (2026-09-13): liveness + clock-copy lanes negative.**
 
 - ReadCompressed call-liveness: acc-across neutral, z-across harmful
