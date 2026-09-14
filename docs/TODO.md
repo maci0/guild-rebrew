@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-344 (2026-09-13): sympathy-index + epilogue lanes negative.**
+
+- Spieler index consumption reshapings: split folds identical, consume-
+  twice 654→648, two-constant 654→641. Addition form already emits the
+  target codegen; Finding-54 question settled for this site.
+- CrashDump tail variants (return-order, kill-early, ternary): all
+  byte-identical — epilogue fully determined by prologue save-placement,
+  not tail liveness. Pop gap is save/deferral, confirmed.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives/identical).
+- Residue baseline unchanged: **9,209**.
+
 **Round-343 (2026-09-13): span-break rejections re-examined, all stand.**
 
 - Re-examined every span-break rejection (volatile-inner 768, CopyData
