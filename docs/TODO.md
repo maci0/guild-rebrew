@@ -34,6 +34,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-418 (2026-09-13): stat-guard + scan-ptr lanes negative.**
+
+- Spieler guard: acc-hoist identical, fcomp-swap 378, int-diff 371.
+  Float guard stands.
+- CopyData per-arm *scan_ptr: rebrew +4/aligned +5 but probe -3,
+  link +3 (462→465) — reverted. Second data point: +4/+5/-3 loses
+  where +7/+7/-2 won. Threshold sharpens: link needs ~(matched gain
+  ≥ aligned loss × 3)?
+- Residue baseline unchanged: **9,067**.
+
 **Round-417 (2026-09-13): walk-setup + dest-resolve lanes negative.**
 
 - CrashDump setup order: pStack-first -1, nFrames-first -2,
