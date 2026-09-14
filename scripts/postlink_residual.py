@@ -54,6 +54,27 @@ def sections(raw: bytes) -> dict[str, tuple[int, int, int, int]]:
     return out
 
 
+def _refuse_if_stale(built: Path) -> None:
+    """Refuse to measure a link output older than the sources it should contain.
+
+    Round 172: `split_link.sh` died in its first step (a deleted LIBCMT copy)
+    while the caller chained it with `;`, so five rounds of "residue unchanged"
+    were actually re-measuring a stale binary.  A residue number is only
+    evidence if the thing measured was produced after the inputs changed.
+    """
+    if not built.exists():
+        sys.exit(f"postlink_residual: {built} does not exist -- the link step "
+                 f"did not produce it (check its exit status).")
+    built_ns = built.stat().st_mtime_ns
+    newer = [p for p in (ROOT / "src").rglob("*.c") if p.stat().st_mtime_ns > built_ns]
+    if newer:
+        sample = ", ".join(p.name for p in newer[:3])
+        sys.exit(f"postlink_residual: {built.name} is older than {len(newer)} "
+                 f"source file(s) ({sample}{'...' if len(newer) > 3 else ''}).  "
+                 f"Re-run the build and link before measuring; a stale binary "
+                 f"reports the previous round's residue.")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--built", default="build/split_poc.dll")
@@ -71,6 +92,7 @@ def main() -> int:
     args = ap.parse_args()
 
     built_path = ROOT / args.built
+    _refuse_if_stale(built_path)
     meta = load_package(ROOT / args.layout)
     info_b = load_binary(built_path)
     op_ok, op_tot, call_ok, call_tot = _map_coverage(bytes(load_binary(built_path).data), meta, info_b)

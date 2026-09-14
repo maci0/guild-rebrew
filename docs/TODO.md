@@ -44,6 +44,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-423 (2026-09-14): fimul REACHED and rejected at the link; a
+five-round measurement regression found and fixed.**
+
+- **fimul lands at the reference position.** Combining the §8a
+  plain-alias int home with a split product statement that keeps
+  (1-acc) live on ST(0) emits `fimul` in the per-trait else-branch —
+  the first time this function reproduces the reference's
+  0x10018f4c shape. It is still **rejected**: obj 3680 vs the 3689
+  real body (9 bytes short), and the link goes 9,067 -> 9,476
+  (+409). The int-domain half of the mechanism is now known; the
+  remaining gap is the SECOND multiply, where the reference uses
+  fild + `fmul`-mem + faddp and ours emits fild + fld st(2) + fmulp
+  + faddp. Recovering those 9 bytes is the next concrete objective —
+  this is a real shape lead, not another spelling sweep.
+- **Regression (mine, round 167):** the scratch cleanup deleted
+  `.scratch/libcmt/*.LIB`, which `split_link.sh` needs in its first
+  step. Rounds 168-171 chained `split_link.sh; postlink_residual.py`
+  with `;`, so the link died and the residue was re-read off the
+  round-166 binary. Those rounds were all source-negative, so 9,067
+  was accurate by luck, not by measurement.
+  Fixed three ways: the five LIBCMT variants re-extracted from the
+  toolchain images; `postlink_residual.py` now refuses a build older
+  than any `src/**/*.c` (exits 1 with the offending files); and
+  `scripts/gate.sh` runs the link + residue itself and fails when
+  either step does. Verified in both directions.
+- Grave rescan-loop roles: reused-index inert, hoist -11,
+  pointer-step -77 + breaks the 1040 ceiling.
+- Residue re-measured live: **9,067**.
+
 **Round-422 (2026-09-13): int-domain + induction-operand lanes negative.**
 
 - Spieler int-domain: all three crater (352-382), fimul 0 — lead

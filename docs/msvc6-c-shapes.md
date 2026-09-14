@@ -2695,3 +2695,68 @@ Eip temp), not use-count or declaration-count — adding uses cannot free it,
 dropping scalars shifts codegen elsewhere. Do not link-test another 0x280
 variant unless it also holds matches; the frame will close only together with
 the bytes, not before them.
+
+## 82. `fimul` needs an int memory home AND a live ST(0), supplied by two separate constructs
+
+`fimul dword [mem]` multiplies ST(0) by an integer read straight from memory.
+msvc6 emits it only when **both** conditions hold at the multiply, and each is
+produced by a different source construct:
+
+1. the integer operand has a *memory home* — a plain alias (`int v; int* a = &v;
+   *a = byte;`) supplies one, a bare `int` local does not (it stays in a
+   register), and `volatile` supplies one but also pins ordering and costs the
+   schedule;
+2. the running double is *still on the FPU stack* — which requires the product
+   to be split across statements so nothing forces a store between them.
+
+On `gm_AllocSpieler` (0x10018850) the reference's per-trait interpolation at
+0x10018f4c is `fld [esp+0x10]; fsubr qword[7d8]; fimul dword[esp+0x14]; fild;
+fmul dword[esp+0x10]; faddp`. Neither half alone reaches it: the alias home by
+itself emits `fimul` at the *fast paths* instead, and the ordering rewrites by
+themselves emit `fild`+`fmulp` everywhere. Together:
+
+```c
+double t; int fbh; int* fb_alias;
+fb_alias = &fbh;
+t = g_dbl_const_7d8 - (double) acc;      /* (1-acc) stays on ST(0) */
+*fb_alias = *(unsigned char*) (father + 0x80 + i);
+t = t * fbh;                             /* fimul dword [esp+...] */
+```
+
+**Integerizing the whole product is the opposite of the fix.** Computing
+`(cw*fb + w*mb)` in the int domain and converting once emits a single `fild`
+of the sum, so nothing is live on ST(0) and `fimul` cannot appear — three such
+variants scored 352-382 against a 748 baseline.
+
+The shape is recorded because it is *reached*, not because it is kept: the
+object comes out 3680 against a 3689 real body and the link regresses +409.
+The residual nine bytes are the second multiply, where the reference uses
+`fild` + `fmul`-mem + `faddp` and this form emits `fild` + `fld st(2)` +
+`fmulp` + `faddp`.
+
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c`
+
+## 83. A measurement pipeline must refuse stale inputs, or it will report the last good number
+
+`scripts/split_link.sh` reads five stock `LIBCMT` copies out of gitignored
+`.scratch/`. A scratch cleanup deleted them; the script died in its first step,
+and because the caller chained `split_link.sh; postlink_residual.py` with `;`,
+the residual tool happily re-measured the *previous* build and printed the same
+figure for five rounds.
+
+Two properties make a verification trustworthy, and this pipeline had neither:
+
+- **every stage's exit status is checked** — `;` between a producer and its
+  measurer hides the producer's failure, and `grep`-ing only the interesting
+  line hides the error text as well;
+- **the measurer validates its own inputs** — `postlink_residual.py` now
+  refuses a build older than any `src/**/*.c` and names the offending files,
+  so a binary that predates the edit under test can never be scored.
+
+`scripts/gate.sh` now performs the link and the residue measurement itself and
+fails on either, which makes the per-round residue an assertion rather than a
+recollection. Regenerable inputs that live in ignored directories should also
+be re-derivable by a documented command: these were recovered with
+`docker create`/`docker cp` from the toolchain images.
+
+`scripts/postlink_residual.py`, `scripts/gate.sh`

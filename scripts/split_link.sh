@@ -20,6 +20,16 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 WORK=${1:-build/split_poc}
+# These five stock archives live in gitignored .scratch/, so a clean checkout
+# (or a scratch cleanup -- round 172) will not have them.  Re-extract with:
+#   for p in sp6:6.0-sp6-win32:msvc6.0-sp6 sp5:6.0-sp5-win32:msvc6.0-sp5 \
+#            sp4:6.0-sp4-win32:msvc6.0-sp4 base:6.0-win32:msvc6.0; do
+#     n=${p%%:*}; r=${p#*:}; cid=$(docker create "rebrew/msvc:${r%%:*}")
+#     docker cp "$cid:/opt/${r#*:}/VC98/Lib/LIBCMT.LIB" ".scratch/libcmt/LIBCMT.$n.LIB"
+#     docker rm -f "$cid"
+#   done
+# (sp4's path is lowercase `lib/libcmt.lib`; vc7 comes from
+#  rebrew/msvc:7.0-win32 at /opt/msvc7.0/Vc7/lib/libcmt.lib.)
 LIBS=(
   --lib .scratch/libcmt/LIBCMT.sp6.LIB
   --lib .scratch/libcmt/LIBCMT.sp5.LIB

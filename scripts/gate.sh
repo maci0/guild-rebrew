@@ -7,9 +7,11 @@
 #                         see docs/TODO.md; only compile/link errors are fatal)
 #   rebrew verify --full  byte comparison of every annotated function, which
 #                         must stay at or above the recorded baseline
+#   deliverable link       split_link + postlink actually run, so the residue
+#                         reported each round is measured, not inherited
 #
 # Usage: scripts/gate.sh
-# Exit status: 0 when all three pass, 1 otherwise.
+# Exit status: 0 when all four pass, 1 otherwise.
 
 set -uo pipefail
 cd "$(cd "$(dirname "$0")/.." && pwd)"
@@ -39,6 +41,25 @@ elif [ "$passed" -lt "$BASELINE" ]; then
     rc=1
 else
     echo "baseline $BASELINE held"
+fi
+
+echo "== deliverable link + residue"
+# Round 172: split_link.sh once died in its first step while the caller chained
+# it with ';', and five rounds reported the previous binary's residue as if it
+# were fresh.  Both steps are checked here, and postlink_residual.py refuses a
+# build older than the sources.
+if bash scripts/split_link.sh > .scratch/gate-link.log 2>&1; then
+    res=$(.venv/bin/python scripts/postlink_residual.py --write build/server.dll \
+          2>.scratch/gate-residue.log | grep -E "^\.text differing")
+    if [ -n "$res" ]; then
+        echo "$res"
+    else
+        echo "residue not measured (see .scratch/gate-residue.log)"
+        rc=1
+    fi
+else
+    echo "split_link FAILED (see .scratch/gate-link.log)"
+    rc=1
 fi
 
 [ "$rc" -eq 0 ] && echo "GATE: pass" || echo "GATE: FAIL"
