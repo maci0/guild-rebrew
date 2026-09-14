@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-362 (2026-09-13): LANDED — Spieler grouped copies, -4 linked.**
+
+- Scout's Variant B (three byte-copies grouped ahead of three strcpys):
+  object 736/1310→740/1314, test 973→977, linked 2861→2857 (-4,
+  confirmed after full rebuild). Kept with header note.
+- CrashDump scalar-drop lane fully negative (slot-share worse,
+  block-scopes inert ×2) — scalar count doesn't drive the frame.
+- Residue baseline: **9,145** (was 9,149).
+
 **Round-361 (2026-09-13): slot-homes canonicalized; frame counts one dword.**
 
 - ExSell decl-reorder + live-split both byte-identical (allocator
