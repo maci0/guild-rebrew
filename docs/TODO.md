@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-350 (2026-09-13): FindNext lane negative; branchless audit clean.**
+
+- FindNext block moves: store-sunk worse on BOTH rulers (test 162→147,
+  probe 130→114), tail-clear inert. Reverted. Both rulers agree —
+  a clean negative.
+- Corpus branchless-idiom audit (neg/sbb in ref vs branches in ours):
+  zero hits across all 18 rows. No branchless-vs-branchy lever exists.
+- Residue baseline unchanged: **9,149**.
+
 **Round-349 (2026-09-13): corpus mined; SMT store-order swap inert.**
 
 - User pointed at `~/Desktop/ai-decomp` (74G wiki). Mined
