@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-393 (2026-09-13): switch-tail + counter lanes negative.**
+
+- Gebaeude switch tail: default-break inert, inverted-branch inert,
+  tail-in-case craters (391/+32B). Join not the lever; residue is
+  upstream (prelude shift + case-body allocation).
+- Alchemist counter block: seq-after-slot+2 -64, volatile slot+2
+  inert, volatile 0x16c inert. Counter sequence stands.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-392 (2026-09-13): cold-tails + state_ptr-else lanes negative.**
 
 - CrashDump cold tails: de-volatile -115, split-labels identical
