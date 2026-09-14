@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-357 (2026-09-13): coupling lanes negative; ExProd plateau named.**
+
+- ReadCompressed use-count changes: extra-acc -44, tail-volatile inert,
+  crc-hoist -7 (diagnostic: edx/ecx choice is live-range-driven; next
+  lane should change what's live ACROSS the call, not use-count).
+- ExProd barrier-crossing changes: extra-use inert, recompute inert,
+  sink-reload catastrophic (174). Plateau named: volatile store is both
+  the DSE survivor and the alias barrier — compiler-level, not order.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,149**.
+
 **Round-356 (2026-09-13): ReadCompressed + LoadBuf lanes negative.**
 
 - ReadCompressed spill slots: decl-swap -2, unsigned-acc inert,
