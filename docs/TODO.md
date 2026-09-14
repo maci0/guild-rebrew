@@ -34,6 +34,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-383 (2026-09-13): game-loop + weight lanes negative.**
+
+- SMT outer walk: != bound -1, for-break identical (canonicalised),
+  index induction craters. Bound/entry/induction exhausted.
+- ExSell weight math: all three spellings fold identical (mem-first
+  imul forced by volatile store). Retire pure weight-math restructures.
+- Both files reverted by agents, tree verified clean (incl. one-line
+  external AGENTS.md tweak reverted). No link tests (negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-382 (2026-09-13): LANDED — LS zero-hoist, -53 linked.**
 
 - Scout's V3 (`current_index = 0;` above aux-count read, matching
