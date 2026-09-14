@@ -34,6 +34,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-417 (2026-09-13): walk-setup + dest-resolve lanes negative.**
+
+- CrashDump setup order: pStack-first -1, nFrames-first -2,
+  zeros-first -2. Setup dominated by allocation cascade, not order.
+- ExSell dest resolve: early-goto -93, stmt-swap -86, explicit-init
+  -70 (size coincidence, not a win). Dest resolve stands.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-416 (2026-09-13): read-loop + float-block lanes negative.**
 
 - LS read loop: for/do/while restructures all byte-identical
