@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-365 (2026-09-13): season-arms + interpolation lanes negative.**
+
+- ExSell arm internals: compound-assign -72, shared-call -82 (also
+  not semantics-neutral), nested-guard identical. Register choice is
+  upstream GRA.
+- Spieler interpolation structure decoded: guard/loop-shape already
+  match; kdiv-hoist/for-init/hoist all big losses. Lane exhausted at
+  structure level too — remaining delta is the exhausted width staging.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,145**.
+
 **Round-364 (2026-09-13): grouping lever doesn't transfer; external
 rebrew breakage worked around.**
 
