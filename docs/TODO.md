@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-413 (2026-09-13): reload-schedule + count-table lanes negative.**
+
+- LS reloads: operand-normalize 82 (conflated volatile-strip),
+  temp-alias identical, volatile-strip 78. Schedule already matches;
+  volatile load-bearing. Close the reload lane.
+- Grave count-table: all three spellings fold identical (pure
+  ecx/edx naming). Lever is role allocation, not load syntax.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-412 (2026-09-13): volatile-re-read + ST(0)-order lanes negative.**
 
 - CopyData: first-0x18 volatile inert, bp-volatile -97, guard-split
