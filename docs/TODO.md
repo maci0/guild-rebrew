@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-366 (2026-09-13): matrix-loop + transfer-loop lanes negative.**
+
+- CopyData matrix loops: count-bound tails identical (normalized),
+  operand swap -1, nested guard -13. Lane skipped.
+- SMT transfer body: memcpy-first -3, cached-progress catastrophic,
+  pointer respell identical. Body is a fixed point; skip further
+  spellings per scout.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,145**.
+
 **Round-365 (2026-09-13): season-arms + interpolation lanes negative.**
 
 - ExSell arm internals: compound-assign -72, shared-call -82 (also
