@@ -49,6 +49,50 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-429 (2026-09-14): Spieler residue census; a real bug found; two
+link verdicts. Residue unchanged at 8,871.**
+
+- **Census of the largest row (2,825 B of 8,871).** Only **1,532 bytes
+  sit inside an actual instruction-level hunk** across 27 clusters; the
+  rest is downstream offset displacement that the fixed-offset ruler
+  counts as residue. Ranked: #11 parent-wins chain + trait loops (344 B,
+  insert/delete, measured wall), #13 refs-scan/sympathy (220 B), #18
+  no-parent trait loop (181 B), #0 record-header stores (140 B), #4
+  citizen path (101 B). Six clusters totalling 77 B are exact
+  permutations — allocator fixed points. **Zero constant-remat
+  instances**, confirming §85's scope empirically.
+- **A REAL BUG found and verified: `dst[-2]` is stranded outside the
+  14-iteration trait loop.** It is indented as if inside the body but
+  closes outside it (introduced malformed in 63fe71e5), so it runs ONCE
+  instead of fourteen times. I verified against the bytes myself: the
+  reference emits `fld [esi-0xc]; fmul [0x100256d0]; fstp [esi-8]` at
+  0x1001930d-16, BEFORE the back-edge `jne` at 0x10019319 — it is inside
+  the loop. Fixing it makes the instruction count EXACT (1054 -> 1056
+  against the reference's 1056) and costs **+420 linked** (8871 -> 9291).
+  Reverted, and documented in place at the offending line. Third
+  instance of correctness and byte-matching pulling apart (after
+  slot[9] +393 and the CrashDump State fix).
+- **A header claim refuted and corrected.** The file claimed the store
+  tail emits "[0x190], [0x194], [0xd], [0x18c], then [0xa]". The bytes
+  say [0xa] is SECOND (0x100189c4) and [0x20c] is LAST (0x100189f4) —
+  I checked both addresses directly. Our source has those two swapped.
+  Applying the true reference order is size-neutral, aligned +2, byte
+  rulers -43 — **link-tested: +43**. So the byte rulers were right and
+  aligned was noise; our "wrong" order is kept deliberately and the
+  header now says so.
+- **LS load/push lane retired with a diagnosis.** Getting the load to
+  issue before the pushes works (P1 emits the reference's
+  load-then-`add` form) but every spelling that does it names the value,
+  and any named value in that loop evicts the -1 sentinel from ebp,
+  killing the round-143 constant-cache: -613/-615/-693. It is not a
+  separate axis from the known ebp blocker — it is the same register
+  conflict from the other side. Prerequisite for any retry: free a
+  register in that loop first.
+- Best untried lever on the largest row: cluster #4's `0x1003542c`
+  double-load (reference loads once at 0x10018afe and reuses it for the
+  16-bit store and the `inc`; the identical fix is already documented
+  working in this file for its twin `0x10035430`).
+
 **Round-428 (2026-09-14): a SECOND false lead refuted; SMT proven already
 ordered; a stale header verdict retracted. Residue unchanged at 8,871.**
 

@@ -91,8 +91,18 @@
  *     3694.
  *   - the record-header stores are transcribed into the order the target
  *     *emits*, not the order that reads naturally: [0x170] before [0x16c],
- *     [0x215] after [0x210], [0x218]/slot[8] after the 0x2637 log, the tail as
- *     [0x190], [0x194], [0xd], [0x18c], then [0xa], plus
+ *     [0x215] after [0x210], [0x218]/slot[8] after the 0x2637 log, plus
+ *     (CORRECTED round 178 -- the tail claim that stood here was wrong.
+ *     The reference's actual sequence, read off 0x100189be-0x100189f4, is
+ *     slot[8], [0xa], [0x166], [0x165], [0x1f4], [0x190], [0x194], [0xd],
+ *     [0x18c], [0x20c]: [0xa] is SECOND at 0x100189c4 and [0x20c] is LAST
+ *     at 0x100189f4, where the old note put [0xa] last and [0x20c] third.
+ *     Our source still has those two swapped.  Applying the true order is
+ *     size-neutral and splits the rulers -- aligned 662 -> 664 but both
+ *     byte rulers -43.  LINK-TESTED round 178: +43 (8871 -> 8914), so the
+ *     byte rulers were right and the aligned gain was noise.  Our swapped
+ *     order is kept deliberately; do not "fix" it to match the reference.)
+ *     Also
  *     `ref = father + 0x68` ahead of the father 0x58 increment.  Measured with
  *     scripts/probe_function.py --va 0x10018850: 697 -> 736 of 3689 honest,
  *     matched-reloc 1277 -> 1310, aligned 646 -> 654 of 1056, object 3696 and
@@ -475,6 +485,21 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		*(float*) (slot + 0x124) =
 		    (float) ((gm_RandomFloat01() + g_dbl_const_688) *
 		             g_dbl_const_f90);
+			/* KNOWN BUG, deliberately left in place (round 178).
+			 * This line belongs INSIDE the loop above: the reference
+			 * emits fld [esi-0xc] / fmul [0x100256d0] / fstp [esi-8]
+			 * at 0x1001930d-0x10019316, before the back-edge jne at
+			 * 0x10019319.  It is indented as if it were in the body
+			 * but closes outside it (introduced malformed in
+			 * 63fe71e5), so it runs once instead of fourteen times.
+			 * Moving it inside is CORRECT and makes the instruction
+			 * count exact (1054 -> 1056 against the reference's
+			 * 1056) -- and costs +420 linked bytes (8871 -> 9291),
+			 * because our surrounding schedule then diverges.
+			 * Third instance of correctness and byte-matching
+			 * pulling apart; see the slot[9] note above and
+			 * docs/behavioral-verdicts.md.  Fix it when the
+			 * function's schedule is close enough to absorb it. */
 			dst[-2] = (float) ((double) dst[-3] * g_dbl_const_6d0);
 		*(float*) (slot + 0x128) =
 		    (float) ((double) *(float*) (slot + 0x124) *
