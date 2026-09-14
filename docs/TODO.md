@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-354 (2026-09-13): LS + ExProd block lanes negative.**
+
+- LS top-level order already matches reference; aux-zero-after-realloc
+  regresses -17, duplicate-zero neutral (folds). ExProd moves both
+  worse (946, 958 vs 976 test) — plateau is the volatile barrier, not
+  order. Both reverted, tree verified clean (scout's "pre-existing
+  modification" flag was its own stale read).
+- Residue baseline unchanged: **9,149**.
+
 **Round-353 (2026-09-13): PCQ reload axis considered, declined.**
 
 - The only untested join axis (recheck reloading the global instead of
