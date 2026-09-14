@@ -34,6 +34,16 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-415 (2026-09-13): loop-prologue + guard-split lanes negative.**
+
+- Spieler loop heads: pointer-walk 177, 1-based counter 378,
+  joint-head 744 (-4). Current head shapes all stand.
+- CopyData guards: nested-matrix + split-|| identical, type-1
+  per-arm +6 aligned but span-broken. Nothing link-testable.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-414 (2026-09-13): Eip-range + season-guard lanes negative.**
 
 - CrashDump Eip lifetime: store-last neutral, snapshot-kill 0x280
