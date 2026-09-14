@@ -34,6 +34,22 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-338 (2026-09-13): expression-shape hunts negative; Alchemist metric
+flag noted.**
+
+- Alchemist tail restructure (reassociate/sub-as-add/persistent-sum):
+  398, 390 regress; persistent-sum inert (folds back). Reference tail
+  shape not reachable by restructuring this expression.
+- CopyData value-paths: ternary 421, min/max 420 (= header's listed
+  shape, confirms currency), char-intermediate 424. All worse.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- OPEN QUESTION (not edited): Alchemist header quotes 823 (2026-09-08,
+  obj 1002) vs current 714/858 at obj 1008 — likely positional desync
+  from +6 length (reloc 858 exceeds 823), but unreconciled. Needs a
+  same-metric comparison before touching.
+- Residue baseline unchanged: **9,209**.
+
 **Round-337 (2026-09-13): Alchemist faddp reachable-but-costly; LoadBuf
 use-shapes negative.**
 
