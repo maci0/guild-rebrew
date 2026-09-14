@@ -3047,7 +3047,37 @@ measures nothing.
 
 `src/server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`
 
-## 87. Audit a function's own header notes before trusting them — four for four
+## 86b. Store order IS a lever through a fresh pointer, inert through a stack buffer
+
+Section 20 records that statement order does not move stores into the same buffer.
+That holds for a *stack* buffer, where msvc6 knows the object and schedules freely.
+It does not hold for stores through a pointer into memory the compiler cannot prove
+non-aliasing for — a freshly `malloc`'d node, for instance. There msvc6 emits the
+stores in exact source order, so their order is a lever.
+
+`m_AllocTracked` (0x10006580) zeroes six fields of a just-allocated node. The
+reference emits them `0x14, 0x10, 0x1c, 0x18, 0x20, 0x24` (verified at
+0x100066bc-0x100066cb: six `mov [edx+N],ebx`), which is the exact reverse of the
+natural declaration order the source used. Reversing the source makes the block
+byte-identical to the reference and lifts aligned 225 -> 230 of 249, span-neutral at
+obj 672.
+
+**And it still loses: +1 linked.** The alignment gain is noise, which the `matched`
+ruler said at the time (566 -> 565). The lever is real, the win is not — so the
+natural order is kept deliberately, with a note at the site.
+
+Two rejection modes worth naming from the same lane. An edit can win alignment and
+lose on COMDAT span: `node->count_total > node->count_max` in place of the
+`- ... > 0` form reached aligned 233 — the best figure measured on that function —
+and did emit the reference's `cmp eax,ecx`, but shrank the object 672 -> 656, a span
+that round 104 recorded as breaking position alignment for every later symbol.
+Separately, the `- ... < 0` spelling of the slot guard is load-bearing for §8b
+register residency: the plain `<` lets msvc6 fold one side into the compare and costs
+99 on the reloc ruler.
+
+`src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`
+
+## 87. Audit a function's own header notes before trusting them — five for five
 
 Every census run in rounds 178-182 found at least one false claim in the header of
 the file it was censusing. Four censuses, four bad claims, each of which had been
@@ -3067,6 +3097,12 @@ sitting there long enough to redirect work:
   reference writes it at 0x1000dd2a and reads it back at 0x1000dd33 across a call,
   and esp-depth tracking shows our `[esp+0x3c]` is the same physical slot
   (frame+0x468). The real difference is push interleaving.
+
+- The three tail rows (`srv_LoadBuf`, `m_AllocTracked`,
+  `gm_CheckInventoryCapacity`): all three headers carried stale baselines —
+  srv_LoadBuf's by 109 matched bytes, and m_AllocTracked's aligned count was off by
+  five with its round-118 store-order claim **inverted in sign** (recorded as +1 on
+  both rulers; actually costs five aligned instructions).
 
 The common mechanism is that a note is written as a *conclusion* at the moment it
 is measured, then outlives the state it described — usually because a later round

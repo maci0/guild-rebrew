@@ -20,6 +20,25 @@
 extern int __cdecl gm_GetFieldByType(char*, int);
 extern int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 extern int __cdecl gm_LookupEntityRecordById(int);
+/* NOTE (round 183): this declaration is WRONG and is kept deliberately.
+ * The original's second parameter is a BYTE: all four reference call
+ * sites push it bare with no zero-extend (0x1000cd8d
+ * `mov dl,[esi+0x1e]` straight into `push edx`), whereas the
+ * neighbouring gm_FindSlotById sites at 0x1000ddb8 do emit
+ * `xor edx,edx; xor eax,eax` first -- a deliberate contrast.  The
+ * callee cannot settle the width: it loads a dword and masks
+ * (`and edx,0xff` at 0x100196df), and both formals compile
+ * byte-identically.
+ *
+ * Declaring it `(int, unsigned char)` is semantically inert (no call
+ * site passes >255, and the callee masks anyway) and makes both
+ * cm_ExSellObjekt sites byte-exact -- but it costs +37 linked,
+ * because dropping those 6 bytes displaces ~325B of otherwise
+ * aligned tail in that function.  Measured round 183.  The two other
+ * callers already route around this decl -- cm_ChkSellObjekt.c via a
+ * function-pointer cast, cm_ChkMoveCredits.c via a file-local narrow
+ * declaration -- and both are RELOC; leave them alone.  Fix this only
+ * once cm_ExSellObjekt's tail alignment is solved. */
 extern int __cdecl gm_QueryEntitySum(int, int);
 extern unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 extern char* __cdecl gm_FindSlotById(unsigned int, unsigned int);

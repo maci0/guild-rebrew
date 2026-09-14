@@ -49,6 +49,46 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-434 (2026-09-14): two cross-cutting axes measured; both correct and
+both losing. Residue unchanged at 8,666.**
+
+- **Prototype-width survey: the tree has exactly ONE wrong prototype.**
+  Scanned all 23 headers (129 prototypes, 59 with scalar int params)
+  against every C call site AND every reference call site.
+  `gm_QueryEntitySum(int, int)` at command_internal.h:23 is wrong — the
+  original takes a BYTE. Proof is at the call sites, not the definition:
+  all four reference sites push it bare (0x1000cd8d `mov dl,[esi+0x1e]`
+  straight into `push edx`) while the neighbouring gm_FindSlotById sites
+  at 0x1000ddb8 DO emit `xor edx,edx; xor eax,eax` first. I verified that
+  contrast myself. The callee cannot settle it — it loads a dword and
+  masks (`and edx,0xff`), and both formals compile byte-identically.
+  **Rows 2-11 of the survey are all already correct** (the reference
+  zero-extends at each, which is what a wide prototype compiles to), so
+  the survey collapsed to one finding rather than eleven.
+  Correcting it is semantically inert and makes both ExSell sites
+  byte-exact — and costs **+37 linked**, because dropping 6 bytes
+  displaces ~325B of aligned tail. Reverted; recorded at the decl with
+  the measurement, plus the note that the other two callers already route
+  around it (fn-ptr cast, file-local decl) and are both RELOC.
+- **Tail-row closure: one real lever found, also losing.** m_AllocTracked's
+  six node zero-stores are emitted by the reference in the exact REVERSE
+  of our natural order (verified 0x100066bc-0x100066cb). Reversing them
+  makes the block byte-identical and lifts aligned 225 -> 230,
+  span-neutral — **+1 linked**. Kept in natural order with a note.
+  New §86b: store order IS a lever through a pointer into fresh malloc'd
+  memory (msvc6 cannot prove non-aliasing, so it emits source order),
+  inert through a stack buffer — a boundary on §20.
+- srv_LoadBuf and gm_CheckInventoryCapacity censused for the first time
+  and both are WALLS with single root causes: LoadBuf's four clusters are
+  all downstream of `conn` being homed at [ebp]; CheckInventory's eleven
+  hunks reduce to one spilled entity byte, and its second hunk is §85
+  constant remat. Zero probes spent on either — correct call.
+- **§87 now 5/5**: all three tail-row headers carried stale baselines,
+  and m_AllocTracked's round-118 store-order claim was recorded with the
+  WRONG SIGN (+1 both rulers; actually -5 aligned).
+- Also recorded: an edit can win alignment and lose on COMDAT span
+  (aligned 233, the session's best on that function, at obj 672 -> 656).
+
 **Round-433 (2026-09-14): §86 screened to exhaustion (13 rows, 1 hit);
 ExSell retired for shape work; §87 written. Residue unchanged at 8,666.**
 

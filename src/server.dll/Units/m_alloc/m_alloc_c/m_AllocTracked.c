@@ -377,6 +377,19 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 			if (node == 0) {
 				node = (struct GroupNode*) malloc(0x28);
 				strcpy(node->name, buf);
+				/* Round 183: the reference emits these six stores in
+				 * the order 0x14,0x10,0x1c,0x18,0x20,0x24 (verified
+				 * at 0x100066bc-0x100066cb), which is the exact
+				 * REVERSE of this natural order, and msvc6 emits
+				 * them in source order -- stores through a pointer
+				 * into freshly malloc'd memory cannot be reordered
+				 * by the compiler, so unlike a stack buffer (shapes
+				 * section 20) their order IS a lever here.
+				 * Reversing them makes the block byte-identical to
+				 * the reference and lifts aligned 225 -> 230/249,
+				 * span-neutral at 672 -- but costs +1 linked, so the
+				 * alignment gain is noise.  Left in the natural
+				 * order deliberately; do not "fix" it. */
 				node->next = 0;
 				node->count = 0;
 				node->size_max = 0;
