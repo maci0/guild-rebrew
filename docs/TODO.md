@@ -44,6 +44,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-422 (2026-09-13): int-domain + induction-operand lanes negative.**
+
+- Spieler int-domain: all three crater (352-382), fimul 0 — lead
+  INVERTED: integerizing destroys the stack condition fimul needs
+  (fild of sum, nothing live on ST(0)). NEXT: keep (1-acc) live on
+  FPU stack across father-byte load (residency + fsubr-live combined).
+- LS induction: base-first 82 (ebp-fold load-bearing for fixed),
+  swaps/temps identical. Fold stands.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-421 (2026-09-13): esp-slot fimul + first-iteration lanes negative.**
 
 - Spieler esp-slot hypothesis false in all spellings (plain temps
