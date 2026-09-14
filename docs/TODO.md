@@ -34,6 +34,14 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-352 (2026-09-13): round 100 — block-order 1-for-11, PCQ localized.**
+
+- vfs block moves both regress hard (62, 84); source order load-bearing.
+  PCQ: residual localized to EXACTLY the 15B join (offsets 55, 63-76);
+  order space exhausted by header's 72-way + 24-way sweeps. Both
+  reverted, tree verified clean.
+- Residue baseline unchanged: **9,149**.
+
 **Round-351 (2026-09-13): block-order 1-for-9; method narrowed.**
 
 - Tracked: source order matches reference 1:1 — zero moves exist.
