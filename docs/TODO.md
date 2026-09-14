@@ -2,15 +2,18 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
-### Session map, rounds 254–424 (2026-09-14; residue 9,209 → 8,894 via 9 landed wins)
+### Session map, rounds 254–425 (2026-09-14; residue 9,209 → 8,871 via 11 landed wins)
 
 - **Landed wins (kept, all rebuilt-confirmed):** ExSell dest-object
   sink **-173** (§84) · ExSell season-block move -60 · LS zero-hoist
-  -53 · vfs finalize xor-xor -12 · Spieler best_mother-first -8 ·
-  Spieler grouped copies -4 · CrashDump nFrames move -2 · Tracked
-  reversed stores -1 · Spieler father-wins order -1 · ExSell guard
-  06-first -1.  Every one is a statement/definition ORDER change;
-  no spelling change has ever landed.
+  -53 · Spieler order pair -23 (§84) · vfs finalize xor-xor -12 ·
+  Spieler best_mother-first -8 · Spieler grouped copies -4 ·
+  CrashDump nFrames move -2 · Tracked reversed stores -1 · Spieler
+  father-wins order -1 · ExSell guard 06-first -1.
+  Every one is a statement/definition ORDER change; no spelling
+  change has ever landed.  The two largest came from the §84 method:
+  disassemble, map the reference's top-level block order, diff it
+  against the source's, then move whole statements/blocks.
 - **Codegen probes (all reverted):** Spieler tail-order +53 · SMT packet ×2
   (§48) · CrashDump plain-locals (0x280 at 2059B) + decrypt counter ×2 ·
   LS nesting 4-site (+18 aligned, +672 linked, §72b) · vfs head exact
@@ -45,6 +48,53 @@
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (written at the end of a long session; start here)
+
+**Round-425 (2026-09-14): LANDED — Spieler order moves, -23 (8,894 ->
+8,871). CrashDump frame CLOSED at 0x280 and still rejected (+66).**
+
+- The section-84 method (map the reference's block order, diff it
+  against source order) was applied to both of the two largest rows.
+  It is now 2-for-2 on producing landable wins and 2-for-2 on
+  producing a complete ordering map even when probes fail.
+- **Spieler (-23, kept).** Three order divergences exist in the whole
+  function; two pay. `slot[0xd] = 1` hoisted above the parent-wins
+  chain; the `[0x124]`/`[0x128]` pair sunk below the 14-iteration
+  trait loop. The second is a **behavioural correction, not a byte
+  trick**: `[0x124]` draws from `gm_RandomFloat01()` and the reference
+  draws the loop's 14 samples first (`mov ebx,0xe` 0x10018e21,
+  back-edge `jne 0x10018e26`) then this one at 0x10018e77 — our RNG
+  sequence differed from the original program's. Object 748 -> 766,
+  aligned 652 -> 662, rebrew test 985 -> 1004, span-neutral.
+  Third divergence (RandomFloat01 inside the 5-iter selection loop) is
+  a scheduling artifact: sinking `acc` there scores 366. Do not retry.
+- **CrashDump: the frame is solved and worthless.** The map found
+  `pCtx` is the section-84 value — defined at entry, unread for ~1200
+  bytes, pinned in a register across the span the reference lets reuse
+  its slot. One token (`pCtx->Eip` ->
+  `pExceptionPointers->ContextRecord->Eip`) gives `sub esp,0x280`
+  exactly, with aligned RISING 392 -> 407 and obj 2128 -> 2123 — the
+  first 0x280 route that gains rather than loses ~50, so it earned the
+  link test section 81's proviso allows. Linked **+66**; reverted.
+  Sixth and sharpest confirmation: the frame is cheaply reachable and
+  closing it alone still costs, because a smaller frame moves every
+  later `[esp+N]`. Stop targeting the frame. Section 81 updated with
+  the mechanism and the two remaining real levers (deferred
+  `push ebx; push edi`; `Esp` parked in ebx from 0x10002931).
+- **`rebrew` bug found and fixed.** Mid-round, `rebrew verify --full`
+  dropped to 31/283 with `INTERNAL_ERROR: 'CompareResult' object has
+  no attribute 'va'` on a tree whose only edits were docs. Upstream
+  commit e1901e6 had added `log.debug` calls to `verify_entry`'s
+  diff_lines and similarity **best-effort** blocks referencing
+  `result.va`, which does not exist — so every unmatched function
+  raised out of a guard that exists precisely to swallow failures.
+  Fixed in the rebrew checkout: use `entry.va` (actually in scope)
+  and wrap both log calls in `contextlib.suppress` so a future
+  formatting mistake degrades a diagnostic rather than failing the
+  run. Added a regression test driving `verify_entry` with a raising
+  logger — verified red without the suppress, green with it. The
+  other three handlers from that commit are correct. Landed via a
+  concurrent agent's commit e6219a5; verify restored to 281/283.
+- Residue baseline refreshed: **8,871**.
 
 **Round-424 (2026-09-14): LANDED — ExSell dest-object sink, -173 linked.
 Biggest win since round 93.**

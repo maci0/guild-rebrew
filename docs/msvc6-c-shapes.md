@@ -2696,6 +2696,31 @@ dropping scalars shifts codegen elsewhere. Do not link-test another 0x280
 variant unless it also holds matches; the frame will close only together with
 the bytes, not before them.
 
+**Round 174 — the rule survives its strongest test, and the mechanism is now
+known.** A block-order map of this function found `pCtx` to be the section-84
+value: defined at entry, then unread for ~1200 bytes (CreateFile, ReadFile,
+VirtualAlloc, decrypt, date/time, dispatch). The reference lets that span
+*reuse* pCtx's spill slot (hDbgFile takes `[esp+0x28]` at 0x1000281d) and
+re-materialises pCtx from memory at each later use — `[esp+0x2c]` at the
+frameInfo fill and again inside the walk loop at 0x10002cb8. Ours pinned it in
+a register across the whole span, which is the surplus dword.
+
+Reading the loop guard through the parameter instead of the local ends that
+live range — a one-token edit, `pCtx->Eip` to
+`pExceptionPointers->ContextRecord->Eip` — and it produced `sub esp,0x280`
+exactly, with aligned instructions *rising* 392 -> 407 and the object shrinking
+2128 -> 2123. That is the first 0x280 route to gain alignment rather than lose
+~50, so it earned the link test the rule's proviso allows. **It still lost:
++66 linked (8,871 -> 8,937), the function's own row +58.**
+
+Sixth confirmation, and the sharpest: the frame is reachable, cheaply, without
+deleting anything — and closing it alone still costs bytes, because the smaller
+frame moves every subsequent `[esp+N]` displacement. Do not spend further
+rounds on the frame as a target. The remaining reference-order differences
+(deferred `push ebx; push edi` at 0x1000282c; `pCtx->Esp` parked in ebx from
+0x10002931 across the date/time region) are the real levers, and they would
+have to land *with* the frame in one change, not before it.
+
 ## 82. `fimul` needs an int memory home AND a live ST(0), supplied by two separate constructs
 
 `fimul dword [mem]` multiplies ST(0) by an integer read straight from memory.
