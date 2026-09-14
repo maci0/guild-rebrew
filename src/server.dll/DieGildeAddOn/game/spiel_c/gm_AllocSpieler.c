@@ -58,6 +58,30 @@
  *     first (was best_father-first) — object +7/+7, aligned -2,
  *     linked 2856 -> 2848 (-8, confirmed after full rebuild).
  *     Position beat alignment again.  Kept for the bytes.
+ *   - 2026-09-14 (round 174): two statement moves recovered by
+ *     comparing the reference's whole top-level block order against
+ *     this file (the method of shapes section 84).  Object 748/1322
+ *     -> 766/1338, aligned 652 -> 662, rebrew test 985 -> 1004, all
+ *     span-neutral; linked 8894 -> 8871 (-23, confirmed after a full
+ *     clean rebuild).
+ *       (1) `slot[0xd] = 1` hoisted ABOVE the parent-wins chain: the
+ *           reference stores it at 0x10018d5d, before the chain.  The
+ *           chain reads `mother+0xd`/`father+0xd`, never `slot[0xd]`.
+ *       (2) the [0x124]/[0x128] pair sunk BELOW the 14-iteration trait
+ *           loop.  This one is not merely cosmetic: [0x124]'s value
+ *           comes from `gm_RandomFloat01()`, and the reference draws
+ *           the loop's 14 samples first (`mov ebx,0xe` at 0x10018e21,
+ *           back-edge `jne 0x10018e26`) and only then draws this one
+ *           at 0x10018e77, storing at 0x10018ea7/0x10018eb3.  Our
+ *           order drew it first, so the RNG sequence differed from the
+ *           original program's.  The move corrects the behaviour as
+ *           well as the bytes.
+ *     The no-parent twin already had its own [0x124]/[0x128] pair
+ *     after its loop (0x1001931b); that asymmetry is what exposed the
+ *     difference.  A third divergence — the reference calls
+ *     RandomFloat01 inside the 5-iteration selection loop — is a
+ *     scheduling artifact, not a source-level per-iteration draw:
+ *     sinking `acc` into that loop scores 366/3689.  Do not retry it.
  *   - the idx>=6 selector must be the addition form,
  *     `0x3c + (idx < 6 ? 0x86 : 0)`, which emits the target's
  *     setge / dec / and 0x86 / add 0x3c.  The subtraction spelling
@@ -472,6 +496,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		    *(float*) 0x10025714;
 		goto stat_modifiers;
 	}
+	slot[0xd] = 1;
 	if (mother[2] == 6 || mother[2] == 7 || mother[2] == 5) {
 		slot[0xc] = mother[0xc];
 		*(int*) (slot + 0x1d0) = *(int*) (mother + 0x1d0);
@@ -490,13 +515,6 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		*(int*) (slot + 0x1d0) = *(int*) (father + 0x1d0);
 		slot[0x217] = father[0x217];
 	}
-	slot[0xd] = 1;
-	*(float*) (slot + 0x124) =
-	    (float) ((gm_RandomFloat01() + g_dbl_const_688) *
-	             g_dbl_const_f90);
-	*(float*) (slot + 0x128) =
-	    (float) ((double) *(float*) (slot + 0x124) *
-	             g_dbl_const_6d0);
 	/* 14-iteration parent trait interpolation; the 0x88/0x84/0x80 triple is
 	 * float, not byte: the reference stores them with fstp dword */
 	for (i = 0; i < 0xe; i++) {
@@ -514,6 +532,16 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		    (float) ((double) *(float*) (slot + 0x88 + i * 0xc) *
 		             g_dbl_const_6d0);
 	}
+	/* The reference draws this pair at 0x10018e77, AFTER the 14-iteration
+	 * trait loop -- the no-parent twin at 0x1001931b already sits after
+	 * its own loop, and that asymmetry is what exposed the difference.
+	 * Defined above the loop, [0x124] pins its schedule across it. */
+	*(float*) (slot + 0x124) =
+	    (float) ((gm_RandomFloat01() + g_dbl_const_688) *
+	             g_dbl_const_f90);
+	*(float*) (slot + 0x128) =
+	    (float) ((double) *(float*) (slot + 0x124) *
+	             g_dbl_const_6d0);
 	/* find the best trait index of each parent (quirky +1 indexing) */
 	best_mother = 0;
 	best_father = 0;
