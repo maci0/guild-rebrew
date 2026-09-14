@@ -2982,4 +2982,43 @@ Two cautions from the same lane. Reloading a second pointer as well
 value the join actually contends for. And duplicating the join body into both arms
 to delete the join outright is catastrophic (336/2057).
 
+**Screen candidates on the delta profile before funding a probe round (round 181).**
+The qualifying signature is *one step that holds to the last aligned pair* —
+`cm_ExSellObjekt` went to -147 at 0x1000dfc1 and stayed there to the final byte.
+Function size and hunk count do not predict it. Two functions screened against this
+rule and were correctly retired without spending a probe:
+
+- `ls_LoadBuildingEntityState`: its largest step (+144 at ref 0x02f5) survives six
+  instructions, collapses to -1, and the delta returns to **zero twice more** before
+  ending at -3. Scattered hunks, no exiled join. (Its +144 window is also the
+  `[esi+0x71]` load-versus-push region that section 85's round-177 warning already
+  refuted as an axis.)
+- `cm_ExCopyEntityData`: delta wobbles ±10 throughout, its +75 spike lasts two
+  instructions, and the tail sits at +4 in an object whose size equals the
+  reference exactly (912 = 912). A same-size object with a small wobble is
+  register/schedule noise, not a displaced join.
+
+A profile that returns to zero mid-body, or finishes within a few bytes of zero, has
+no join to un-exile. Reading the profile costs minutes; a probe round costs hours.
+
+**Second pre-check: the `jmp` census must show a built-only surplus.** The
+precondition is not "our build has a restore+`jmp`" — it is that *we* jump where the
+*reference falls through*. Align both `jmp` lists by source address and compare.
+`gm_AllocSpieler` was screened this way: reference 26 jumps, built 27, and the single
+built-only jump is a protected known bug, while the one restore-then-`jmp` join
+(0x10018c28 / 0x10018c23) is **byte-identical on both sides** — the reference ends
+that arm the same way we do. With no jump surplus there is no exiled join, and three
+volatile-reload probes duly cost -429/-389/-351 matched, each breaking the span by
++16 (a homed stack slot) and destabilising the FPU region.
+
+That last detail is the mechanism's real boundary: on `cm_ExSellObjekt` the contended
+pointer was **dead across the arm**, so forcing it to memory cost nothing. Where the
+value is *live* across surrounding loops, homing it buys a slot and reschedules
+everything near it. Check liveness before reaching for the reload.
+
+So the full screen, in order, before any probe: (1) does one delta step hold to the
+last aligned pair? (2) does the `jmp` census show a built-only surplus at that point?
+(3) is the contended value dead across the predecessor arm? Three cheap commands;
+all three must pass.
+
 `src/server.dll/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`

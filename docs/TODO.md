@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-432 (2026-09-14): §86 screened across the three largest rows — no
+further cliffs. Lever scoped and retired. Residue unchanged at 8,666.**
+
+- Applied last round's §86 diagnostic to gm_AllocSpieler (2,825),
+  ls_LoadBuildingEntityState (675) and cm_ExCopyEntityData (462).
+  **None has a cliff**, and both scouts said so plainly rather than
+  spending probe budget on noise — the right call.
+- **Spieler: 132 independent local steps, not one cliff.** Delta returns
+  to zero 197 times, changes sign 33 times, max |delta| 48, and the last
+  aligned pair (100% through the body) sits at **delta +0**. Round-178's
+  "~46% displacement" is real but DISTRIBUTED, so no placement lever can
+  grip it. Three probes run anyway on the one genuine enregistration
+  difference: -429/-389/-351 matched, each breaking span by +16.
+- **LS and CopyData: profiles return to zero mid-body.** LS's largest
+  step (+144) survives six instructions then collapses, and CopyData's
+  object size already equals the reference exactly (912 = 912) with a
+  ±4 tail wobble. Zero probes spent on either.
+- **§86 gained a complete screen** (three cheap commands, all must pass
+  before funding a probe): (1) one delta step that HOLDS to the last
+  aligned pair; (2) a built-only surplus in the `jmp` census aligned by
+  source address — the precondition is that WE jump where the reference
+  FALLS THROUGH, not merely that a restore+jmp exists (Spieler's one
+  such join is byte-identical on both sides); (3) the contended value
+  must be DEAD across the predecessor arm. On ExSell it was dead, which
+  is why the reload was free; where it is live, homing it costs a slot
+  and reschedules the neighbourhood.
+- Net: §86 is now a scoped, screened lever rather than an open lane, and
+  the three largest rows are each characterised — Spieler's bytes are in
+  its in-hunk clusters (parent-wins 344B, refs-scan 220B, no-parent
+  trait 181B, record-header 140B), CrashDump is a measured wall, and the
+  two mid-size rows are allocator-downstream.
+
 **Round-431 (2026-09-14): LANDED — ExSell join reload, -200
 (8,866 -> 8,666). CrashDump proven a wall; a rebrew bug fixed.**
 
