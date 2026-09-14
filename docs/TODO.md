@@ -34,6 +34,21 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-346 (2026-09-13): rebrew fix — verify-cache patch refreshes guards.**
+
+- Per the standing objective ("as you encounter bugs in rebrew fix
+  them"): `patch_verify_cache_entries` updated only the result payload,
+  leaving `mtime_ns`/`source_hash` from an earlier verify — a later
+  same-mtime edit re-serves the patch's metrics as current. Fixed in
+  rebrew commit `c1179ef` (refresh both guards from disk at patch time)
+  with regression test `test_patch_refreshes_freshness_guards`.
+  Rebrew suite: 6503 passed (1 pre-existing idempotency failure,
+  fails on clean tree too), ruff clean.
+- Round-94 scouts adjudicated: Spieler B (slot[0x58] hoist, -5/+3
+  mixed) not applied without a link-test; CrashDump block moves
+  negative/zero. Tree clean.
+- Residue baseline unchanged: **9,149**.
+
 **Round-345 (2026-09-13): FIRST LANDED WIN in 93 rounds — ExSell season
 block move, -60 linked.**
 
