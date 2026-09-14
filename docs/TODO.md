@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-343 (2026-09-13): span-break rejections re-examined, all stand.**
+
+- Re-examined every span-break rejection (volatile-inner 768, CopyData
+  matrix 928, CrashDump counter 2144) against the two-rulers rule: span
+  (not real body) IS the composition unit, so overshooting the reference
+  span is a genuine break in all three cases. No misjudged candidate;
+  the rejections hold.
+- Residue baseline unchanged: **9,209**.
+
 **Round-342 (2026-09-13): two-rulers rule documented + confirmed.**
 
 - `docs/difficulties.md` §3 item 10: probe reports padded COMDAT span,
