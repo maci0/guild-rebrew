@@ -34,6 +34,29 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-364 (2026-09-13): grouping lever doesn't transfer; external
+rebrew breakage worked around.**
+
+- LS finalize regroupings both -2; Grave reference-order probe 408 +
+  span break — S-M-F stands, scheduler moves the volatile regardless.
+- INCIDENT: rebrew checkout developed 47 dirty files with a syntax
+  break (`data.py:373`) from an EXTERNAL concurrent writer (mtimes
+  seconds fresh) — not this session. Left untouched; ran the round
+  through a `git worktree` at `c1179ef`, removed after. Gate passes,
+  deliverable unaffected.
+- Both lane files reverted by agents, tree verified clean. Residue
+  baseline unchanged: **9,145**.
+
+**Round-364 (2026-09-13): grouping lever doesn't transfer; S-M-F stands.**
+
+- LS finalize regroupings both -2 (fold-vs-reload is codegen, not
+  order). Grave reference-order probe collapses to 408 + span break —
+  current S-M-F strongly load-bearing; scheduler moves the volatile
+  regardless of source position.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,145**.
+
 **Round-363 (2026-09-13): packet regroup +1, reverted; base again stale.**
 
 - SMT +4-store regroup: aligned +2 but link +1 (367→368). Reverted.
