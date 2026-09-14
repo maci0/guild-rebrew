@@ -2,8 +2,13 @@
 
 ## CURRENT STATE (kept current; read this before the history below)
 
-### Session map, rounds 254–345 (2026-09-13; residue 9,209 until round 93, now 9,149)
+### Session map, rounds 254–419 (2026-09-14; residue 9,209 → 9,067 via 8 landed wins)
 
+- **Landed wins (kept, all rebuilt-confirmed):** ExSell season-block
+  move -60 · Spieler grouped copies -4 · Tracked reversed stores -1 ·
+  Spieler father-wins order -1 · Spieler best_mother-first -8 ·
+  CrashDump nFrames move -2 · vfs finalize xor-xor -12 · LS zero-hoist
+  -53 · ExSell guard 06-first -1 · Spieler copy order -1.
 - **Codegen probes (all reverted):** Spieler tail-order +53 · SMT packet ×2
   (§48) · CrashDump plain-locals (0x280 at 2059B) + decrypt counter ×2 ·
   LS nesting 4-site (+18 aligned, +672 linked, §72b) · vfs head exact
@@ -16,21 +21,26 @@
   (Objects ×2) · matrix HIGH-first · recheck spellings · slot[9] ×3
   length-neutral (3671/3679/3679) · combined fixes +402 · pressure-pad
   inert · volatile grid (base inert, row/inner collapse) · join-store
-  clamp +8 · Tracked climb · CopyData matrix · case reorder +0.
+  clamp +8 · Tracked climb · CopyData matrix · case reorder +0 ·
+  block-order lanes 1-for-13 (only uncompared orders pay) · grouping
+  lever (order, not spelling) · fimul emitted ×2 (placement wrong).
 - **Retired levers:** TU theory (no LTO) · partition search (void, not
   budget) · link/ICF/order (~0) · cross-compiler (MSVC5 diverges) ·
   outline (565/565) · flag sweeps 4×flatline · climb/GA confirmed walls ·
   spellings generally · intrinsic policy · call-form · statics (none in
-  game) · SEH (absent) · denominator (all code) · sizes (definitional).
+  game) · SEH (absent) · denominator (all code) · sizes (definitional) ·
+  CrashDump 0x280 (every path costs ~50) · PCQ join (72-way exhausted) ·
+  weight-math restructures · guard splits (fold identical).
 - **Tool fixes (rebrew checkout):** merge-sweep strict zip · case-label
-  registry · atomic-write error (suite 6503 green).
+  registry · atomic-write error · verify-cache patch guards (suite 6503
+  green) · layout rename compat (our side git-mv).
 - **Verification:** gate green every round · whole-binary match · round-trip
   227 spliced (drift class only) · Wine load + exports resolve · locality
   4/4 · skipped slots benign · data tools N/A.
 - **Semantics:** verdicts 19/19 (`docs/behavioral-verdicts.md`); 2 live bugs
   (Spieler slot[9] +393-unlandable, CrashDump State FIXED at +0).
-- **Docs:** lint 0/0 first clean · shapes §48/§52/§72b · Finding 54 ·
-  difficulties traps · ranked-leads revision · blockers synced.
+- **Docs:** lint 0/0 first clean · shapes §§77–81 · Findings 62–63 ·
+  difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (written at the end of a long session; start here)
 
@@ -2030,42 +2040,36 @@ finished: `vfs_ReadCompressed` was improved by **-1 linked** (residue 9,281 -> 9
 ceiling (allocator Finding 59's amendment).  **Check `list_agents` and `.scratch/*.FINAL.c`
 timestamps before starting new work**, so you do not collide with the CrashDump agent.
 
-**Ranked leads, most promising first (REVISED 2026-09-13 — rounds 254-266;
-supersedes the ranking below it, which is kept as history):**
+**Ranked leads, most promising first (REVISED 2026-09-14 — rounds 345-419;
+supersedes the 254-266 ranking below it, which is kept as history):**
 
-1. **New techniques, not more spellings.** Every live function is at a
-   measured wall (register-allocation/scheduling choices, epilogue merging,
-   tail duplication, CSE proofs, or cascades where a local fix recolors the
-   function). Fifteen rounds of source probes return exact-local-shapes that
-   lose at the link, or inert objects. What has NOT been tried: a different
-   compiler for the whole tree (SP1-SP6 measured byte-identical on one
-   function; anything further invalidates 281 passing functions), a live
-   TU-partition search (merge-sweep repaired round 263, dry-run only), and
-   allocator steering beyond `volatile` (qualifier direction/polarity
-   exhausted; numbering inert).
-2. **`gm_AllocSpieler` (2,861, 31%) — largest row, deepest wall.** Frame
-   correct (0x41c both sides); tail-order lead verified-then-reverted (+53);
-   the "`add` x4" inventory is now one register-cascaded pair (Finding 54
-   corrected). Ceiling ~3115 on one-sided relocs. Only a use-shape change
-   not yet imagined moves it.
-3. **`CrashDumpUnhandledExceptionFilter` (1,597) — HEAD is length-exact
-   (real code ends 0x0850 both sides, tables at 0x72c/0x7ac); the V2 +59
-   length plan is obsolete.** Frame now 0x284 vs 0x280 (F3's volatiles closed
-   half the 0x28c gap); plain-locals give 0x280 but cost the code length.
-   Remaining: frame + 4-reg-deferred prologue + distributed hunks.
-   CORRECTION 2026-09-13: bug 2 (dead decode block) is FIXED in the current
-   source — the walk region is byte-identical to V2 and the decode block is
-   live; the "still open" below and the round-251 note describe the
-   pre-rewrite spelling. Bug 1's fix verified present (arg order matches
-   0x10002d00 call). NEW bug 3 (round 290): walk gate tested
-   mbi.RegionSize, reference tests mbi.State — fixed at +0 linked.
-4. **Small rows with exact-local-fix/cascade-loss signatures** (LS nesting
-   §72b, vfs head §52-3rd-instance, ReadCompressed tail-duplication): each
-   has a verified local shape and a measured cascade. Landable only with a
-   plan for the downstream recoloring — the unit of work is the whole
-   function, not the hunk.
+1. **Reference-order block/copy moves.** 4 of the last 8 landed wins came
+   from reading the reference's block or store sequence and moving whole
+   blocks to match (ExSell season -60, Spieler copies -4, LS zero-hoist
+   -53, Tracked reversed stores -1). It pays only where source order was
+   never directly compared (1-for-13 blind); transcribed functions have
+   nothing to find. Uncompared regions remaining: ExSell out-param slots,
+   Spieler FPU product order, LS aux dual-counter, CrashDump first-iter
+   compare shape.
+2. **One-token / small reorder wins.** ExSell guard -1, Spieler copy -1,
+   Spieler best_mother -8, vfs xor-xor -12, CrashDump nFrames -2. Small
+   wins compound; verify each at the link. Position beats alignment 2v1 —
+   link-test matched-positive/aligned-negative candidates.
+3. **`gm_AllocSpieler` (2,848) — fimul lead open.** Plain-alias `fb` home
+   emits fimul ×2 on fast paths; need it in the else-branch product with
+   ST(0) holding the running value. Else-branch aliases tried (identical/
+   regress); combine residency + placement next.
+4. **`CrashDumpUnhandledExceptionFilter` (1,595) — frame rule stands.**
+   Every 0x280 path costs ~50 (5 confirmations); pCtx-live-across-loop
+   is the root cause. Frame closes only together with the bytes.
+   nFrames move landed -2. Volatile excCode load-bearing; call-encoding
+   premise refuted (E8==E8).
+5. **Arm-specific reorder wins don't transfer.** In-range-first won on
+   type-0/type-2/matrix but loses on type-1 (obj balloons); per-arm
+   stores win locally but lose at link. Treat each arm as its own
+   function for order questions.
 
-**Older ranking (rounds ≤253; superseded — kept as history):**
+**Previous ranking (rounds 254-266; superseded — kept as history):**
 
 1. **`CrashDumpUnhandledExceptionFilter` (1,668) — the only frame-size mismatch left, and the
    faithful version is in hand but unfinished.**  `.scratch/…V2-frame0x280.c` reproduces the
