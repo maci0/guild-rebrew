@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-375 (2026-09-13): grave-scan + dispatch lanes negative.**
+
+- Grave scan loops: != bounds -2, do/while craters, inclusive -2.
+  Key finding: scan loops already match reference
+  instruction-for-instruction; residual is downstream (slot-init,
+  strcpy, neighbour forms).
+- LS dispatch: hoisted-local identical, range-combines regress,
+  OR-chain identical. Chain already optimal.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,130**.
+
 **Round-374 (2026-09-13): decay + sync-packet lanes negative.**
 
 - CopyData decay: shift-assign -15 honest (bare sar vs cdq/sub/sar),
