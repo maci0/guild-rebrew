@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-416 (2026-09-13): read-loop + float-block lanes negative.**
+
+- LS read loop: for/do/while restructures all byte-identical
+  (msvc6 normalizes). Induction delta lives in operand layer, not
+  statement form.
+- Grave float block: addend/mul swaps inert, zero-hoist -2.
+  Scheduler-locked.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-415 (2026-09-13): loop-prologue + guard-split lanes negative.**
 
 - Spieler loop heads: pointer-walk 177, 1-based counter 378,
