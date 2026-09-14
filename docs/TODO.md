@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-396 (2026-09-13): OOM-tails + entity-loop lanes negative.**
+
+- Tracked tails: classic-guard -32 (aligned-only +3), plain-lt
+  craters, inverted-guard craters. `sub`-spellings load-bearing;
+  tail guards exhausted.
+- Objects entity loop: inverted-guard inert, folded-query -16,
+  for-header inert. Restructuring alone doesn't move ebx/edi.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-395 (2026-09-13): CheckInventory scan + LoadBuf head lanes negative.**
 
 - CheckInventory scan restructures: for/bottom 51, post-inc 57,
