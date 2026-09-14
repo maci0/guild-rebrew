@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-355 (2026-09-13): corpus FPU thin; Grave + Alchemist lanes negative.**
+
+- Rebrew MSVC6 FPU section is 3 lines, no faddp discipline — corpus
+  has nothing beyond our walls here.
+- Grave zero-materialization: shared-zero/mask/or-sentinel all INERT
+  (541/1040 ×3). Alchemist first-use order: all regress (709, 711,
+  687 — the hoist widens a live range across the float block).
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,149**.
+
 **Round-354 (2026-09-13): LS + ExProd block lanes negative.**
 
 - LS top-level order already matches reference; aux-zero-after-realloc
