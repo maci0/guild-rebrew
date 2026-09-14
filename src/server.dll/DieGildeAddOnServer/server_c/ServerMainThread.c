@@ -44,7 +44,8 @@ extern int g_tick_rate;    /* 0x11764088 */
  * STATUS: NEAR_MATCHING (metadata; "STUB" here predated promotion),
  * object 2434 bytes against a 2434 target (+0), 627 of 627
  * instructions.  The order-based diff (.scratch/ndiff.py) aligns 601 of the
- * 627 and leaves 19 hunks of one to five instructions: 10 reorderings, one
+ * 627 (ndiff-era figure; 2026-09-13 probe-aligned 576 — same wall, newer
+ * count) and leaves 19 hunks of one to five instructions: 10 reorderings, one
  * register name, and 8 substitutions (`lea esi,[eax+ecx]` against
  * `add esi,eax`, a `je`/`jne` polarity swap, an extra global reload).  An
  * adjacent-statement hill climb over the whole body finds no improving move,
@@ -69,7 +70,8 @@ extern int g_tick_rate;    /* 0x11764088 */
  *     not.  Hoisting 7 into a local instead widens it back to 32 bits.
  *
  * Root cause: not a size difference any more.  The object is 2434 bytes, the
- * target's exact length, and 601 of 627 instructions align.  The residue is
+ * target's exact length, and 601 of 627 instructions align (same ndiff-era
+ * figure as above; probe-aligned 576 now).  The residue is
  * register allocation and block layout that no C89 spelling has steered:
  * `lea esi,[eax+ecx]` where msvc6 emits `add esi,eax`, a `je`/`jne` swap on
  * the same two successors, a spilled global at [esp+0x28] against the

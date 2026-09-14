@@ -46,7 +46,9 @@ extern unsigned int ls_ID2Ptr(void);
  * desyncs.  Writing the eight `ls_ReadVfsDataChecked` field reads as
  * `*(volatile int*) (esi + 0x71)` (the store stays plain) makes /O2 emit the
  * cached form *and* keep the reference's per-call reloads: fixed-offset masked
- * match 347 -> 856 of 1463, object 1464 -> 1472 against the reference's 1463,
+ * match 347 -> 856 of 1463, object 1464 -> 1472 against the reference's 1463
+ * (2026-09-13 probe: 645 matched / 879 reloc; figures above predate later
+ * work, retained as the fix's record),
  * failing postlink entries 114 -> 59, .text residual 1404 -> 775 bytes, and
  * whole-binary coverage 88.6% -> 89.3%.
  *

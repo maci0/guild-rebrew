@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-340 (2026-09-13): same-metric sweep — 4 files fixed, rest defended.**
+
+- Two-scout audit (10 files, fresh probes): fixed CopyData/Grave/
+  Gebaeude top-liners + LS note + SMT ndiff annotations. LEFT after
+  scrutiny: Tracked round-104 (dated history), vfs size-701 (test
+  confirms it compares 701 — claim stands), LoadBuf 701/750 (is the
+  reloc number, current), ReadCompressed (exact), ExSell:100 (fixed
+  round 37). Lesson: half the flags dissolve on metric scrutiny
+  (span-vs-real, reloc-vs-positional, window differences) — compare
+  same metric before editing.
+- Residue baseline unchanged: **9,209**.
+
 **Round-339 (2026-09-13): Alchemist metric question reconciled — no regression.**
 
 - 823 (2026-09-08) was positional-matched at obj 1002; current 714 is

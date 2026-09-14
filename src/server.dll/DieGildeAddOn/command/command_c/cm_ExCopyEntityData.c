@@ -9,8 +9,10 @@ extern char g_relationship_matrix_secondary[];
  * payload into a resolved entity's memory. Used for bulk entity
  * state synchronization across network.
  *
- * Conversion state: 525/901 at obj 880 (target 901).  The stale metadata size
- * 912 includes 11 bytes of linker padding; the function itself is 901.  Each
+ * Conversion state (2026-09-13 probe): 443/912 matched, 567
+ * matched-reloc, obj 912.  The "525/901 at obj 880" figure above and
+ * the 11-bytes-padding theory predated later work that grew the object
+ * to 912; retired.  Each
  * dated pass below records the score it started and ended at.
  *
  * The duplicated dispatch guard IS steerable from C.  MSVC6 collapses the

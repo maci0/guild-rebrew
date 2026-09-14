@@ -1,5 +1,9 @@
 /* gm_AllocGebaeude - allocate and initialize a building entity.
  *
+ * STATE 2026-09-13 (probe): 683/1088 matched, 823 matched-reloc, obj
+ * 1088.  The round-87 figures below (571/1078) predate later work that
+ * grew the object; retired as current-state, retained as history.
+ *
  * UPDATE 2026-09-13 (round 87): 438/1078 -> 571/1078 matched bytes, size still
  * exactly 1078.  A sweep of the address-taken struct locals against the
  * reference's operand shapes.  The rule the target follows: a pointer whose

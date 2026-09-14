@@ -3,7 +3,9 @@
  * grave slot (or reuses one marked 0xf), initializes it from the matched
  * production entry, and returns the new grave id (0xffff on failure).
  *
- * Conversion state: 606/1040 at obj exactly 1040.  Each dated pass below
+ * Conversion state (2026-09-13 probe): 541/1040 matched, 667
+ * matched-reloc, obj exactly 1040.  The 606 figure predated later work;
+ * retired.  Each dated pass below
  * records the score it started and ended at.
  *
  * Shape notes (399/1040, from 393; size 1064 vs 1040):
