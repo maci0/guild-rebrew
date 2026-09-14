@@ -34,6 +34,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-356 (2026-09-13): ReadCompressed + LoadBuf lanes negative.**
+
+- ReadCompressed spill slots: decl-swap -2, unsigned-acc inert,
+  cap/result swap -7. Residual diagnosed as ONE coupled scheduler
+  decision (edx crc-arg + late add-esp + eax acc), not separable
+  single-line levers.
+- LoadBuf smallest clusters (D/E, 2 insns each): all three probes
+  inert on both rulers. Scheduler fixed points.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,149**.
+
 **Round-355 (2026-09-13): corpus FPU thin; Grave + Alchemist lanes negative.**
 
 - Rebrew MSVC6 FPU section is 3 lines, no faddp discipline — corpus
