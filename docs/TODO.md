@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-380 (2026-09-13): LANDED — Spieler best_mother-first, -8 linked.**
+
+- Scout's held Variant B (per-trait selection best_mother-first):
+  object +7/+7, aligned -2, linked 2856→2848 (-8, rebuilt-confirmed).
+  Position beat alignment AGAIN (third time). Kept with header note.
+- ExSell dest-twin guard neutral (byte-identical) — asymmetric with
+  the source-twin win; no interaction probed (gated on positive).
+- Mother-wins "OLD order" prose was stale (already reordered) —
+  corrected in header.
+- Baseline refreshed. Residue: **9,122** (was 9,130).
+
 **Round-379 (2026-09-13): shrink-liveness + float-store lanes negative.**
 
 - CrashDump hProcess reload hits 0x280 but -59/-43 matches (same

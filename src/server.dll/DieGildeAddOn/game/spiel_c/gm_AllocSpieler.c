@@ -52,7 +52,12 @@
  *   - 2026-09-13 (round 121): father-wins else-branch copies in
  *     0xc/0x1d0/0x217 order (was 0x217/0xc/0x1d0), matching the
  *     reference's store sequence — object 740/1314 -> 741/1315,
- *     linked 2857 -> 2856 (-1).  Kept for the byte.
+ *     linked 2857 -> 2856 (-1).  Kept for the byte.  (The mother
+ *     branches were already in that order — no twin change existed.)
+ *   - 2026-09-13 (round 128): per-trait selection tests best_mother
+ *     first (was best_father-first) — object +7/+7, aligned -2,
+ *     linked 2856 -> 2848 (-8, confirmed after full rebuild).
+ *     Position beat alignment again.  Kept for the bytes.
  *   - the idx>=6 selector must be the addition form,
  *     `0x3c + (idx < 6 ? 0x86 : 0)`, which emits the target's
  *     setge / dec / and 0x86 / add 0x3c.  The subtraction spelling
@@ -525,13 +530,13 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	/* per-trait selection: father best / mother best / interpolation */
 	acc = (float) gm_RandomFloat01();
 	for (i = 0; i < 5; i++) {
-		if (i == best_father) {
-			slot[0x80 + i] = (char) (
-			    (double) *(unsigned char*) (father + 0x80 + i) *
-			    *(float*) 0x100256b0);
-		} else if (i == best_mother) {
+		if (i == best_mother) {
 			slot[0x80 + i] = (char) (
 			    (double) *(unsigned char*) (mother + 0x80 + i) *
+			    *(float*) 0x100256b0);
+		} else if (i == best_father) {
+			slot[0x80 + i] = (char) (
+			    (double) *(unsigned char*) (father + 0x80 + i) *
 			    *(float*) 0x100256b0);
 		} else {
 			slot[0x80 + i] = (char) (
