@@ -34,6 +34,15 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-381 (2026-09-13): LANDED — CrashDump nFrames move, -2 linked.**
+
+- Scout's V2 (`nFrames = 0x800;` just before `for(;;)`): object +2/+2
+  both rulers, linked 1597→1595 (-2, rebuilt-confirmed). Kept.
+  (V1 direct induction -123; V3 nested-loop 0x280 exact but +48B.)
+- ExSell capacity lane: indexed-store identical, hoists regress.
+  Lever is arg-setup register choice, not store spelling.
+- Baseline refreshed. Residue: **9,120** (was 9,122).
+
 **Round-380 (2026-09-13): LANDED — Spieler best_mother-first, -8 linked.**
 
 - Scout's held Variant B (per-trait selection best_mother-first):

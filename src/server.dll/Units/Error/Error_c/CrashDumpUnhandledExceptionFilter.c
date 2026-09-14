@@ -111,7 +111,11 @@ extern void* g_crash_callback;
 // so it only tracks bytes actually spilled.  Round-109 lane: dropping `space`
 // hits 0x280 exactly (frame counts ONE live spilled dword) but costs ~50
 // matches — the reference's missing spill is a different scalar kept in a
-// register, not `space`.  Dropping the two shared-tail
+// register, not `space`.  Round-129 lane: moving `nFrames = 0x800;` from
+// above `/* Stack walk */` to just before `for (;;) {` (semantically
+// neutral single pre-loop store) — object +2/+2 both rulers, linked
+// 1597 -> 1595 (-2, confirmed after full rebuild).  Kept for the bytes.
+// Dropping the two shared-tail
 // locals (fail_msg/fail_line, the only locals the reference lacks) does not
 // move it either -- they get registers, and the five call sites then cost
 // +32 object bytes.  So the reference spills ~3 fewer 4-byte scalars; that is
@@ -328,7 +332,6 @@ write_nl:
 
 unknown_exc:
 
-							nFrames = 0x800;
 							/* Stack walk */
 							frameInfo[0] = (int) pDbgBuf;
 							frameInfo[1] = (int) hCrashLog;
@@ -338,6 +341,7 @@ unknown_exc:
 							frameInfo[5] = 0;
 							frameInfo[6] = 0;
 							pStack = (unsigned int*) (pCtx->Esp - 4);
+							nFrames = 0x800;
 
 							for (;;) {
 								VirtualQuery((const void*) frameInfo[2], &mbi, 0x1c);
