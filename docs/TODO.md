@@ -34,6 +34,19 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-411 (2026-09-13): fimul-placement + cold-arm lanes negative.**
+
+- Spieler else-branch aliases: int-locals identical, float-coeff
+  identical, double-alias regressive — fimul 0 throughout. The
+  fast-path home doesn't transfer: else-branch fld/fsubr ordering
+  leaves the stack otherwise. fimul needs int-in-memory × live ST(0).
+- CopyData cold arms: pointer-held identical, low-first -16 (still
+  movb-imm, no mov-eax), type-1 per-arm craters. Suggested: volatile
+  re-read on type-1 0x18 load, or the bp-vs-imm guard split.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-410 (2026-09-13): fimul EMITTED (×2) — placement wrong; store
 spelling dead.**
 
