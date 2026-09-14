@@ -44,6 +44,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-420 (2026-09-13): out-param order + FPU product order negative.**
+
+- ExSell out-param sequence already matches; head permutation mapped
+  precisely (two home swaps, ref lower both — reverse-decl model) but
+  decl order doesn't steer (byte-identical ×2). Do not pursue.
+- Spieler FPU op orders: all three canonicalized identical, fimul 0.
+  Suggested: esp-slot int stores or hoisted-double-temp next.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-418 (2026-09-13): stat-guard + scan-ptr lanes negative.**
 
 - Spieler guard: acc-hoist identical, fcomp-swap 378, int-diff 371.
