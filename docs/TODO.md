@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-386 (2026-09-13): epilogue + live-range lanes negative.**
+
+- Gebaeude epilogue arg respellings: int-local inert, uchar-local
+  regresses +16B, raw-deref regresses. xor-eax vs xor-edx is
+  downstream coloring, not source shape.
+- Alchemist live-range: counter-swap -3, kill-slot catastrophic
+  (138), merge-counters 312. ebp/edi roles unmoved by pressure.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,067**.
+
 **Round-385 (2026-09-13): classify-chain + finalize lanes negative.**
 
 - CrashDump chain restructures: if-chain 224, outlier-first identical
