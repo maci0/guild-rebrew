@@ -34,6 +34,17 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-368 (2026-09-13): component-loop + grid-loop lanes negative.**
+
+- Gebaeude component loop: dup-store craters (362/+16B), idx-hoist
+  inert, drop-local 407. Residual is allocator-level (cl-reload
+  collapse); missing store unrecoverable at span 1088 alone.
+- Alchemist grid loop: scoped-counter inert, step-counter -2,
+  block-stride inert. edi/ebp roles unmoved.
+- Both files reverted by agents, tree verified clean. No link tests
+  (object-level negatives).
+- Residue baseline unchanged: **9,145**.
+
 **Round-367 (2026-09-13): sympathy-loop + version-gate lanes negative.**
 
 - Grave neighbour loop: do-while inert, != bound -1, descending
