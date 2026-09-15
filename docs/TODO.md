@@ -49,6 +49,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-514 (data pass, round 8): prepend rb+gzip magic to vfs4.
+`.data` 23,779 -> 23,526 (-253). `.text` 8,635 -> 8,637 (+2).**
+
+- **Root cause:** vfs4's named strings started at `0x1002944c`; the reference wants
+  `"rb\0\0"` + gzip magic dwords `0x1f`/`0x8b` (12 bytes) first.
+- **Fix:** prepend `s_rb_1002944c` / `g_gzip_magic_*` in `vfs4.c`. Retarget
+  `vfs_ReadData.c` sprintf/LogMessageInternal to the named symbols so the gz
+  message is not also a `??_C@` COMDAT.
+- **Result:** `0x1002944c..0x100294a0` 84/84 MATCH.
+- Next miss: `0x100294a4` (format string vs `z_errmsg`). See §155.
+- RESIDUE 8635->8637, DATA 23,779->23,526.
+
 **Round-513 (data pass, round 7): data-only TU for winsock strings.
 `.data` 25,884 -> 23,779 (-2,105). `.text` 8,636 -> 8,635 (-1).**
 

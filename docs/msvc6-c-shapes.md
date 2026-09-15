@@ -7038,3 +7038,31 @@ Callers in `server4.c` / `server2.c` now reference the named symbols; they must 
 ### Next miss
 
 First divergence after the winsock run: `0x1002944c`, where the reference has `"rb"` + gzip magic (`0x1f 0x8b`) before the vfs path; the build has `vfs4.c`'s named strings starting early. Same class as unused named-string stubs (§153).
+
+## 155. Twelve bytes of fopen mode + gzip magic before the vfs path (round 8 of the data pass)
+
+§154 left the first miss at `0x1002944c`: the reference has `"rb\0\0"` then the gzip magic dwords `0x1f` / `0x8b`, then the vfs.c path. The build had `vfs4.c`'s named strings starting immediately at that VA — twelve bytes short.
+
+### The fix
+
+Prepend the three missing symbols in `vfs4.c` before the existing path/message arrays:
+
+```c
+char s_rb_1002944c[4] = { 'r', 'b', 0, 0 };
+unsigned int g_gzip_magic_1f_10029450 = 0x1f;
+unsigned int g_gzip_magic_8b_10029454 = 0x8b;
+```
+
+Callers already push/cmp the raw addresses (`gm_Open`, `vfs_OpenStream`, `vfs_ReadData`); nothing needs to name these symbols, they just have to occupy the span.
+
+Also retarget `vfs_ReadData.c`'s `sprintf`/`LogMessageInternal` to the named vfs4 symbols so the gz message is not also emitted as a `??_C@` COMDAT (same class as §151/§153).
+
+### Result
+
+- `0x1002944c..0x100294a0`: **84/84 matching (100%)**
+- `.data` **23,779 → 23,526 (−253)**
+- `.text` **8,635 → 8,637 (+2)** — codegen from switching the sprintf args from a literal+raw-address cast to named symbols (`vfs_ReadData.obj` md5 changes)
+
+### Next miss
+
+`0x100294a4`: reference has `"0x%08X -> length: %u, read: %u compressed: %u"`; build has `z_errmsg` from `zutil.c`. Same text-vs-data ordering class as §154.

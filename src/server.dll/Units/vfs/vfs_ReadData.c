@@ -353,6 +353,10 @@ extern int __cdecl vfs_ReadCompressed(int zstrm, char* buf, unsigned int total);
 extern int __cdecl gzread(void* handle, char* buf, unsigned int total);
 extern int __cdecl fread(char* buf, int size, int count, void* handle); /* 0x1001aa6a LIBCMT */
 extern int __cdecl inflate(void* zstrm, int flush); /* 0x100058d0, zlib */
+/* Named symbols from vfs4.c — use these instead of string literals / raw
+ * address casts so the gz message is not also emitted as a ??_C@ COMDAT. */
+extern char s_D__Develop_Units_vfs_vfs_c_10029458[];
+extern char s_vfs__gz_compressed_file____s___i_10029474[];
 
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 {
@@ -457,8 +461,8 @@ int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 		    (unsigned int) *(unsigned char*) (buf + 1) != *(unsigned int*) 0x10029454) {
 			goto done;
 		}
-		sprintf(name, "vfs: gz-compressed file (\"%s\") in zip found!", stream);
-		LogMessageInternal((char*) 0x10029458, 0x5b4, name, 1);
+		sprintf(name, s_vfs__gz_compressed_file____s___i_10029474, stream);
+		LogMessageInternal(s_D__Develop_Units_vfs_vfs_c_10029458, 0x5b4, name, 1);
 		goto done;
 	}
 	if (flags & 8) {

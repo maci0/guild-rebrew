@@ -135,10 +135,18 @@ int __cdecl CloseVfsStream(void* stream)
 }
 
 
-/* Reads raw data from a VFS stream. Low-level read that
- * handles buffering, refilling, and byte-by-byte reads
- * for variable-length data. */
+/* DATA: SERVER 0x1002944c..0x100294a0
+ *
+ * The reference places "rb\\0\\0" (fopen mode), then the gzip magic dwords
+ * 0x1f / 0x8b, then the vfs.c path and the gz-compressed-file message.
+ * Without the 12-byte prefix, this TU's named strings start at 0x1002944c
+ * and displace everything after them.  Callers already push/cmp the raw
+ * addresses (gm_Open, vfs_OpenStream, vfs_ReadData); nothing names these
+ * symbols, but they must occupy this exact span. */
 
+char s_rb_1002944c[4] = { 'r', 'b', 0, 0 };
+unsigned int g_gzip_magic_1f_10029450 = 0x1f;
+unsigned int g_gzip_magic_8b_10029454 = 0x8b;
 char s_D__Develop_Units_vfs_vfs_c_10029458[] = "D:\\Develop\\Units\\vfs\\vfs.c";
 char s_vfs__gz_compressed_file____s___i_10029474[] = "vfs: gz-compressed file (\"%s\") in zip found!";
 
