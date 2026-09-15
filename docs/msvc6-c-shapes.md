@@ -4736,3 +4736,45 @@ second range into its own `switch` does not buy it (406/2141, SIZE_MISMATCH): ms
 tables are one switch it split because the case values form two dense clusters (spans 0x68 and
 0x6e), and the duplicated tail is its own downstream layout decision, not something the keyword
 produces.
+
+## 113. Tree-wide call-inventory sweep: exactly one row has a real defect
+
+With the inventory automated (section 112), round 222 swept it across every measurable walled
+row — comparing the reference's per-callee counts against the same inventory computed from our
+objects, resolving register-cached imports on both sides.
+
+| row | reference | ours | |
+|---|---|---|---|
+| `gm_AllocSpieler` | 55 | **55** | ok |
+| `ServerMainThread` | 55 | **55** | ok |
+| `cm_ExSellObjekt` | 31 | **31** | ok |
+| `ls_LoadBuildingEntityState` | 45 | **45** | ok |
+| `cm_ExProdObjekt` | 21 | **21** | ok |
+| `gm_AllocGebaeude` | 18 | **18** | ok |
+| `srv_LoadBuf` | 17 | **17** | ok |
+| `gm_ObjectsAvailble` | 15 | **15** | ok |
+| `ahm_ExAllocAlchemist` | 13 | **13** | ok |
+| `m_AllocTracked` | 10 | **10** | ok |
+| `vfs_OpenStream`, `cm_ProcessCommandQueue`, `gv_ExAllocGraveyardWorker` | 7 | **7** | ok |
+| `gm_CheckInventoryCapacity` | 5 | **5** | ok |
+| `cm_ExCopyEntityData` | 3 | **3** | ok |
+| `gm_CalculateProductionValue` | 2 | **2** | ok |
+| `gm_FindNextFilteredEntity` | 0 | **0** | ok |
+| **`CrashDumpUnhandledExceptionFilter`** | **44** | **43** | **`WriteFile` 11 vs 10** |
+
+**Every row matches except one.** That is a strong negative result: whatever the remaining 8,664
+bytes are, they are almost entirely *not* missing or extra calls. Combined with section 104
+(direct-call counts equal, so nothing is inlined) and section 106 (the flag landscape is flat),
+the residue is confined to register allocation, instruction scheduling and block layout — with a
+single exception worth one `WriteFile` in `CrashDumpUnhandledExceptionFilter`'s exception-switch
+tail.
+
+Two measurement traps, both hit while running this sweep:
+
+- **Selecting a COMDAT by "largest `.text` section" is wrong on a multi-function file.**
+  `spiel622.c` has 16 functions, and picking the largest COMDAT reported 10 calls against the
+  reference's 2 — a phantom mismatch. Both apparent failures in this sweep were this artefact;
+  re-measured on the correct COMDAT they match exactly. Select by the section index the probe
+  reports, and note the COMDAT is sized by *span* (400) not code length (396).
+- The reference-side tool takes the function's **size from metadata**; passing a stale size
+  truncates the walk and undercounts silently.

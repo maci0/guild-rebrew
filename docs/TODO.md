@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-473 (2026-09-14): tree-wide call-inventory sweep — exactly ONE row
+has a real defect. Residue 8,664.**
+
+- Used round 472's new `--calls-from` inventory across every measurable
+  walled row, comparing the reference's per-callee counts against the same
+  inventory computed from our objects (register-cached imports resolved on
+  both sides).
+- **Every row matches except one**: AllocSpieler 55/55, ServerMainThread
+  55/55, ExSellObjekt 31/31, LoadBuildingEntityState 45/45, ExProdObjekt
+  21/21, Gebaeude 18/18, LoadBuf 17/17, ObjectsAvailble 15/15, Alchemist
+  13/13, Tracked 10/10, OpenStream & PCQ & Graveyard 7/7,
+  CheckInventoryCapacity 5/5, ExCopyEntityData 3/3,
+  CalculateProductionValue 2/2, FindNext 0/0.
+  **CrashDump is the sole exception: 43 vs 44, WriteFile 10 vs 11.**
+- **That is a strong negative**: the remaining 8,664 bytes are almost
+  entirely NOT missing or extra calls. With §104 (direct-call counts equal
+  => nothing inlined) and §106 (flag landscape flat), the residue is
+  confined to register allocation, scheduling and block layout — plus that
+  one WriteFile. New §113.
+- **Two measurement traps hit while sweeping**, both recorded: selecting a
+  COMDAT by "largest `.text` section" is WRONG on a multi-function file
+  (spiel622.c has 16; it reported 10 calls against the reference's 2 — both
+  apparent failures were this artefact, and re-measuring on the correct
+  COMDAT matched exactly), and the COMDAT is sized by SPAN (400) not code
+  length (396). The reference-side tool also takes its size from metadata,
+  so a stale size silently truncates the walk.
+
 **Round-472 (2026-09-14): built the tool that would have prevented three
 rounds of miscounting. Residue 8,664.**
 
