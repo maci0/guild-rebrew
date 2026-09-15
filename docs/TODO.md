@@ -14255,15 +14255,31 @@ session. Four things were wrong, all now fixed:
 (the two remaining are FLIRT signatures, which AGENTS.md says to answer with
 `rebrew lib-match` instead, and one unrelated note).
 
-**Do not run `rebrew sync --pull` on this tree without reviewing the dry-run.**
-It currently wants to:
-- create ~16 `case.0x1000ad61.*` "functions" — these are switch arms inside
-  already-RELOC/EXACT functions, discoverer artifacts, not real functions
-  (round 194 verified this);
-- resolve 10 name conflicts by renaming CRT symbols (`_initterm` ->
-  `___initterm`, `__DllMainCRTStartup@12` -> `_DllMain@12`, several
-  `___sbh_*` allocator internals).
+**Round 195 update: the `case.*` half of this WAS a bug, now fixed; the CRT
+half was my misreading.**
 
-Push is the useful direction here: this tree's annotations are the source of
-truth, and the state dir exists to feed Ghidra. Pull only with
-`--accept-local` and a reviewed dry-run.
+The 16 `case.0x1000ad61.*` "new functions" came from `binsync/export.py`
+merging the catalog with an exact-VA membership test (`va in reversed_vas`)
+instead of a containment test, so switch arms *inside* annotated functions were
+written into the shared state — and import read them straight back as proposals
+to create real functions inside already-EXACT code. Fixed upstream (`a9d8eb2`),
+same root cause as the `todo` bug in `663e541`. Export went 608 -> 590
+functions and the pull's `new_function` proposals went **16 -> 0**. An existing
+state dir needs one `rebrew-binsync-export binsync --clean` to drop the
+already-written orphans (it removed 18 here).
+
+**The 10 name conflicts are not a bug, and BinSync is right, not us.** Every
+one is library code where the state carries the *correct* LIBCMT/zlib symbol
+and our local name is a stale placeholder — verified with `rebrew lib-match`:
+0x1001a758 is `__initterm`, 0x1001d540 is `___sbh_free_block`, 0x1001d869 is
+`___sbh_alloc_block`, and 0x100011f0 is zlib's crc32 (annotated twice, as
+`crc32.c` and as a `// LIBRARY:` marker in `library_zlib.h`; CMakeLists
+deliberately excludes the `.c` from the link so zlib supplies those bytes).
+These sit in `crt_region/`, the 68 functions AGENTS.md records as LIBCMT
+reversed by mistake. So `--accept-binsync` would arguably *improve* the names.
+
+Push remains the useful direction — this tree's annotations are the source of
+truth for game code. One caveat found by actually running the pull: it also
+writes the **other target** (`Europa1400Gold_TL.exe` layout, `.def` and
+`crt_region/` files), which is out of scope here, so a pull needs those
+reverted. Verify held at 264 byte-matched through the experiment.
