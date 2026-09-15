@@ -49,6 +49,44 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-452 (2026-09-14): opened the `.data` lane §98 exposed. It is
+PLACEMENT-bound, and the mechanism is now known. Residue 8,666.**
+
+- **The `.data` gap is 61.3% (35,131 B) in the raw link, and 50.6% of the
+  section (29,024 B) is content we ALREADY EMIT but misplace.** Measured:
+  positional match 38.5%, content-multiset ceiling 89.1%. So the obvious
+  strategy is inverted — emitting correct content makes the number WORSE
+  until ordering is fixed. Six missing literals were spelled as C strings;
+  they emitted correctly and `.data` went 0x893b -> 0x89d2 (+151), because
+  each literal grows the section and shifts every later object. Reverted.
+- **Mechanism, verified by objdump**: MSVC6 puts every anonymous string
+  literal in its OWN COMDAT `.data`. `Error.c.obj` carries `.data` 0xa1
+  regular plus 0x3 and 0x6 COMDATs. The linker takes each object's regular
+  `.data` first and its COMDATs after, so all named globals precede all
+  literals per object — ours reads `_g_log_*` 0x7980..0x7a14 then `??_C@`
+  0x7a24, while the reference INTERLEAVES them in declaration order.
+- **Steerable, and only one way**: `/Gy` is irrelevant (`.text` only),
+  object order is already VA-sorted, `/Gf` changes nothing and `/GF` moves
+  literals to `.rdata` (worse). **Naming a literal as an initialised
+  `char[]` puts it in the regular `.data` in declaration order** —
+  probe-verified, and the tree already uses that convention. The lane must
+  be done WHOLE-TU at a time, gated on the `.data` figure. New §100.
+- **Two of my premises were wrong and are corrected**: the big cluster at
+  +0x2730 is NOT ordering — 288 of its 383 strings are absent from the
+  build entirely and appear nowhere in `src/`, so it is a content gap from
+  missing/stub TUs (a separate, larger lane); and my "8 missing literals"
+  list double-counted fragments split at `\t` (2 real strings, not 4) while
+  missing an 8th, `_main_:`, which is a wrong-type `extern int = 0` stub in
+  link_stubs.c. `"This is Gilde talking..."` has NO xref in the image and
+  sits between zlib z_errmsg entries — dead data.
+- **Tooling fix: `postlink_residual.py` now also checks OBJECT staleness.**
+  Its guard compared sources against the link output, missing the step in
+  between — `split_link.sh` reuses CMake's prebuilt objects, so editing a
+  source and re-linking without recompiling relinks the STALE object and the
+  figure does not move. That cost this round's first measurement (a false
+  null). Verified the new guard trips on a touched source and passes on a
+  current tree.
+
 **Round-451 (2026-09-14): fixed the measure-vs-ship divergence §98 found.
 Residue 8,666 (script) / 8,678 (pipeline, now understood).**
 

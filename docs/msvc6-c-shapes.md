@@ -3824,3 +3824,63 @@ General lesson, which is why this is worth a section: **a measuring tool that "n
 anything has forked from the thing it measures.** Every such normalisation is a silent claim
 that the pipeline will do the same, and that claim needs a test or it drifts. Two existed
 here; one was a real bug and one was load-bearing by design.
+
+## 100. `.data` is placement-bound: MSVC6 puts every string literal in its own COMDAT
+
+Section 98 showed the raw link gets **61.3% of `.data` wrong** (35,131 of 57,344 bytes) and
+that the shipped identity is copied from `layout/server.dll/data.hex`. Round 201 attacked it
+and the attempt *failed usefully*.
+
+**The measured shape of the problem:**
+
+| metric | value |
+|---|---|
+| positional match | 22,062 / 57,344 = **38.5%** |
+| content-multiset overlap (ceiling if bytes could be permuted) | 51,086 = **89.1%** |
+| ⇒ present but **misplaced** | **29,024 bytes (50.6%)** |
+
+So `.data` is **placement-bound, not content-bound**, and that inverts the obvious strategy.
+Six literals the build was failing to emit were converted to real C strings; they emitted
+correctly and `.data` got **worse** — 0x893b → 0x89d2 (+151 bytes) — because each added
+literal grows the section and shifts every later object. **Emitting correct content cannot
+improve this metric until ordering is solved.** Reverted.
+
+**The mechanism, verified by dumping an object.** MSVC6 emits every anonymous string literal
+into **its own COMDAT `.data` section**, separate from the object's single regular `.data`.
+`Error.c.obj` has `.data` 0xa1 (regular) plus `.data` 0x3 and `.data` 0x6 as COMDATs. The
+linker gathers each object's regular `.data` first and its COMDATs after, so **all named
+globals precede all string literals within every object** — our map reads `_g_log_level_table`
+0x7980 … `_g_log_default_name` 0x7a14 and only then `??_C@_02JNFB@at?$AA@` 0x7a24. The
+reference **interleaves them in declaration order**: at `.data+0x84..0x108` the strings
+`__server.log`, `gilde_server.log`, `__dbg.log`, `at`, `%s\%s` sit adjacent to the named
+tables, not gathered behind them.
+
+**What does and does not steer it:**
+
+- `/Gy` is absent and irrelevant — it governs `.text` COMDATs.
+- Object order is *already* steered (sources are VA-sorted), and the map confirms one
+  contiguous `.data` run per object in that order. Not the problem.
+- `/Gf` does **not** change COMDAT-ness; `/GF` moves literals to `.rdata` COMDATs, which is
+  worse since `.rdata` already matches.
+- **Naming a literal as an initialised `char[]` moves it into the object's regular `.data`,
+  in declaration order** — probe-verified, and it reproduces the reference's shape. The tree
+  already uses that convention (`char s_..._<VA>[]`).
+
+So the reference was almost certainly built from sources where these were named globals. The
+lane is real but must be done **whole-TU at a time**, gated on the `.data` figure: six
+literals lose, and the payoff only arrives once a TU stops shifting. ~29 KB is recoverable by
+placement alone, with no new bytes.
+
+Two scoping corrections from the same measurement. The large cluster at `+0x2730..0x6c4e` is
+**not** an ordering problem — of its 383 printable runs only 95 are emitted and **288 are
+absent from the build entirely** (`"Usefull Sync"`, `"GamePath"`, `"\game.ini"`, …), none
+appearing anywhere in `src/`: that is a content gap from missing or stubbed translation units,
+a separate and larger lane. And `"This is Gilde talking, can you hear me?"` has **no xref
+anywhere in the image** and sits between zlib's `z_errmsg` entries — dead data, unreachable by
+any C edit.
+
+The literals that *are* missing have three distinct causes, worth distinguishing before
+anyone re-opens this: five are absolute-address casts (`(char*)0x10027448`) so no data is
+emitted; `_main_:` is typed `extern int` and defined `= 0` in `link_stubs.c`, a wrong-type
+placeholder; and the dead string above. All five push sites in the reference *are* relocated,
+so C literals were the right shape.

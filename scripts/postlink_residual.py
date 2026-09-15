@@ -74,6 +74,29 @@ def _refuse_if_stale(built: Path) -> None:
                  f"Re-run the build and link before measuring; a stale binary "
                  f"reports the previous round's residue.")
 
+    # The check above compares sources against the LINK OUTPUT, which misses the
+    # step in between: `split_link.sh` consumes CMake's prebuilt objects, so
+    # editing a source and re-linking without re-compiling relinks the STALE
+    # object and the figure does not move.  Round 201 lost a measurement to
+    # exactly that -- a `.data` probe read as a false null until `cmake --build`
+    # was run first.  Compare each source against its own object too.
+    objdir = ROOT / "build/CMakeFiles/server_dll.dir/src"
+    if objdir.exists():
+        stale_objs = []
+        for src in (ROOT / "src").rglob("*.c"):
+            obj = objdir / src.relative_to(ROOT / "src")
+            obj = obj.with_name(obj.name + ".obj")
+            if obj.exists() and obj.stat().st_mtime_ns < src.stat().st_mtime_ns:
+                stale_objs.append(src.name)
+        if stale_objs:
+            sample = ", ".join(stale_objs[:3])
+            sys.exit(
+                f"postlink_residual: {len(stale_objs)} object(s) are older than "
+                f"their source ({sample}{'...' if len(stale_objs) > 3 else ''}).  "
+                f"split_link.sh reuses CMake's objects, so it would relink the "
+                f"stale ones: run `cmake --build build` before measuring."
+            )
+
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
