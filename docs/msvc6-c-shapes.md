@@ -3728,3 +3728,60 @@ Cleanup done in the same round: `/DREBREW_ALLOW_NAKED` sat in the cflags of 0x10
 0x10008e40 while appearing **zero** times in either source. Measured byte-identical with and
 without it (753/1078 and 472/472 unchanged), so it was dropped via `rebrew test --cflags` —
 it was reading like a live naked-asm escape hatch that does not exist.
+
+## 98. "Byte-identical outside `.text`" means *copied* outside `.text`
+
+The objective is a byte-identical **file**, and every round of this session has measured one
+section. Round 199 audited the rest, and the answer has two halves that must be stated
+together.
+
+**The deliverable is genuinely byte-identical outside `.text`.** Verified three independent
+ways (a standalone stdlib PE parser, `cmp -l`, and the project's own script, all agreeing on
+8,666 differing bytes with **100% attributed to `.text`**): headers, `.rdata`, `.data`,
+`.reloc`, all 4 section headers compared as raw 40-byte blocks, all 30 optional-header fields,
+all 16 data directories, the import table (**4 DLLs / 100 symbols, identical in order** — WS2_32
+imported by ordinal), the export table (`Exit` ord 1 → 0x9350, `Init` ord 2 → 0x9320), and the
+file size (286,720 both). Nothing there is broken and nothing needs fixing.
+
+**But that identity is copied, not produced.** The raw link's own non-`.text` output diverges
+from the reference by **43,705 bytes**, and the postlink fixers blit reference bytes over it
+from `layout/server.dll/`. I verified the package holds verbatim reference slices:
+`data.hex == ref[0x27000:]` and `reloc.hex == ref[0x35000:]`, both exactly `True`. So every
+`differing 0x0` outside `.text` was a tautology — the metric was grading its own answer key.
+
+Pre-fixer divergence, now printed by `scripts/postlink_residual.py` beside the `.text`
+residue so the number stops being self-certifying:
+
+```
+.rdata   0x4f4 of 0x3000 (10.3%)      .data  0x893b of 0xe000 (61.3%)
+.reloc  0x1bab of 0x9000 (19.2%)      headers  0xdf of 0x1000 (5.4%)
+```
+
+Four further gaps the residue number cannot show, worth knowing before anyone calls this done:
+
+- **The stored PE checksum is a stamped constant that is wrong for the built content** —
+  `0x4d328` shipped, `0x4b330` computed. It is the one header field that hashes the whole
+  file, so it currently masks the `.text` gap and will be the last thing to become genuinely
+  correct.
+- **`.reloc` is inconsistent with the image it ships with.** Of 3,499 relocation entries, 223
+  point at bytes that are not pointers in our build (RVA 0x278f: reference `0x10024040`
+  against our `0x404015ff`). Those targets sit inside unmatched functions, so the divergence
+  is already counted in the 8,666 — but nothing cross-validates `.reloc` against the shipped
+  image, so a reloc-only regression would be silent.
+- **1,978 bytes of the `.text` raw tail sit outside the measurement**, and the *measuring
+  script* — not `rebrew.postlink.FIXERS` — zeroes 638 nonzero emitted bytes there (a stub
+  DllMain `6a 01 58 c2 0c 00` plus ~100 `ff 25` IAT thunks). `rebrew postlink` would ship them.
+- **23.6 MB of `.data` VirtualSize has no file bytes at all** (VirtualSize 0x174059c against
+  raw 0xe000), so the BSS *size* matches but its runtime content is unverifiable from the file.
+  A naive `min(VirtualSize)` comparison loop runs past EOF here.
+
+Also corrected: AGENTS.md's "`.text` link shortfall … 0x3a84 short" is stale. The split-link
+path now **overshoots** by 0x282 (`0x22ac8` against `0x22846`), placing its own DllMain at
+0x23846, past the reference's `.text` end, where the fixer stamps the reference's
+`AddressOfEntryPoint` of 0x1b9d4 over it.
+
+Finally, a negative worth recording so nobody repeats the search: **neither binary has a Rich
+header.** The DOS stub runs straight from the standard message to the PE signature, and both
+stubs are byte-identical across all 0x80 bytes. So the exact MSVC build IDs cannot be
+recovered from file metadata, and the compiler-identity question stays where section 92 left
+it — answerable only from emitted bytes.

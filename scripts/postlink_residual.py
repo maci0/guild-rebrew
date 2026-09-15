@@ -178,6 +178,36 @@ def main() -> int:
     hdr = min(sr[".text"][2], sp[".text"][2])
     print(f"{'headers':9s} differing {sum(1 for i in range(hdr) if ref[i] != pat[i]):#x} of {hdr:#x}")
 
+    # The non-.text zeros above are SELF-CERTIFYING: the postlink fixers blit
+    # reference bytes shipped inside layout/server.dll/ over those regions
+    # (data.hex and reloc.hex are verbatim reference slices -- verified byte for
+    # byte in round 199).  So "differing 0x0" outside .text says nothing about
+    # whether the build can PRODUCE those bytes.  Report the raw link's own
+    # divergence too, measured before the fixers run, so the metric stops
+    # grading its own answer key.
+    # `pat` is the post-fixer image; built_path holds the raw link output.
+    if built_path.exists():
+        pre = built_path.read_bytes()
+        ss = sections(pre)
+        print("\nraw link vs reference (pre-fixer -- what the build actually produces):")
+        total = 0
+        for name in (".text", ".rdata", ".data", ".reloc"):
+            if name not in sr or name not in ss:
+                continue
+            _vr, _v_r, pr_r, rs_r = sr[name]
+            _vs, _v_s, pr_s, rs_s = ss[name]
+            span = min(rs_r, rs_s)
+            d = sum(1 for i in range(span) if ref[pr_r + i] != pre[pr_s + i])
+            if name != ".text":
+                total += d
+            print(f"  {name:9s} differing {d:#7x} of {span:#7x}"
+                  f" ({100.0 * d / span:.1f}%)")
+        h = min(sr[".text"][2], ss[".text"][2])
+        hd = sum(1 for i in range(h) if ref[i] != pre[i])
+        total += hd
+        print(f"  {'headers':9s} differing {hd:#7x} of {h:#7x} ({100.0 * hd / h:.1f}%)")
+        print(f"  non-.text total the fixers overwrite: {total:#x} ({total} bytes)")
+
     # ---- attribution of the remaining .text bytes ----
     t_rva, t_vs, t_ptr, _ = sr[".text"]
     p_rva, p_vs, p_ptr, _ = sp[".text"]

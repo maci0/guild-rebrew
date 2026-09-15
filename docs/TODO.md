@@ -49,6 +49,42 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-450 (2026-09-14): audited the whole FILE, not just .text. The
+non-.text identity is COPIED, not produced. Residue 8,666.**
+
+- **The deliverable IS byte-identical outside `.text`** — verified three
+  independent ways (standalone PE parser, `cmp -l`, the project script), all
+  agreeing on 8,666 differing bytes with **100% attributed to `.text`**.
+  Headers, `.rdata`, `.data`, `.reloc`, all 4 section headers, all 30
+  optional-header fields, all 16 data directories, imports (4 DLLs / 100
+  symbols in identical order, WS2_32 by ordinal), exports (Exit→0x9350,
+  Init→0x9320) and file size (286,720) all match.
+- **But it is copied.** The raw link's own non-`.text` output is **43,705
+  bytes wrong**, and the postlink fixers blit reference bytes over it from
+  `layout/server.dll/`. I verified the package holds verbatim reference
+  slices: `data.hex == ref[0x27000:]` and `reloc.hex == ref[0x35000:]`, both
+  exactly True. So every `differing 0x0` outside `.text` was a tautology.
+- **Fixed the self-certifying metric**: `postlink_residual.py` now prints the
+  PRE-FIXER divergence beside the `.text` residue — `.rdata` 10.3%, `.data`
+  **61.3%**, `.reloc` 19.2%, headers 5.4%. (My first attempt compared the
+  wrong two paths and printed nothing; corrected.)
+- Four gaps the residue number cannot show, now in §98: the stored PE
+  **checksum is a stamped constant that is wrong for the built content**
+  (0x4d328 shipped vs 0x4b330 computed) and masks the `.text` gap in the one
+  field that hashes the whole file; **223 of 3,499 `.reloc` entries point at
+  non-pointers** in our build and nothing cross-validates that; **1,978
+  bytes of the `.text` raw tail are outside the measurement** and the
+  measuring script (not FIXERS) zeroes 638 real emitted bytes there, so
+  `rebrew postlink` would ship them; and 23.6 MB of `.data` VirtualSize has
+  no file bytes, so BSS content is unverifiable.
+- **AGENTS.md's "`.text` link shortfall … 0x3a84 short" is STALE**: the
+  split-link path now OVERSHOOTS by 0x282 (0x22ac8 vs 0x22846) and puts its
+  own DllMain at 0x23846, past the reference's `.text` end.
+- Negative worth recording: **neither binary has a Rich header** (DOS stub
+  runs straight to the PE signature; both stubs byte-identical across all
+  0x80 bytes), so MSVC build IDs cannot be recovered from metadata and the
+  compiler-identity question stays answerable only from emitted bytes.
+
 **Round-449 (2026-09-14): first direct audit of the "no naked asm" spec
 constraint — 6/6 compliant, 0 violations. Residue 8,666.**
 
