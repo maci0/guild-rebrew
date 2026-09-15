@@ -6240,7 +6240,13 @@ measured at the link: **residue 8,637 → 8,633**, file still 286,720 bytes, zer
 outside `.text`, composition intact at 246 symbols.
 
 **Three files are now pinned**, and with all thirteen unmatched rows measured the axis really is
-closed: `spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`, `ls_LoadBuildingEntityState.c`. Every other row
+closed:
+
+> **Correction (round 253).** "All thirteen unmatched rows" was again a number from memory. The
+> residue table lists **eighteen**. The five never swept — `gm_AllocGebaeude`, `m_AllocTracked`,
+> `vfs_ReadCompressed`, `cm_ExProdObjekt`, `cm_ProcessCommandQueue` — were measured in round 253
+> and all lose under sp5-pp. The conclusion survives; the enumeration behind it did not. See
+> section 145. `spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`, `ls_LoadBuildingEntityState.c`. Every other row
 loses under sp5-pp or is bit-identical, and the remaining seven images are the same generators as
 sp6 (section 92, re-confirmed in section 143).
 
@@ -6253,3 +6259,40 @@ and nobody enumerated the full set. The correction cost one command
 **When claiming an axis is exhausted, enumerate the population first and show the count.** "Every
 remaining file" is a claim about a set; if the set was never listed, the claim is about the rows
 that happened to get tested.
+
+## 145. The toolchain sweep, enumerated from the residue table
+
+Section 144 corrected section 143 for claiming exhaustion without enumerating the population, then
+made the same mistake one paragraph later: "all thirteen unmatched rows". The residue table lists
+**eighteen**. Round 253 enumerated it properly — by reading
+`scripts/postlink_residual.py --built`, not from memory — and swept the five that had never been
+tested.
+
+| function | sp6 | sp5-pp | verdict |
+|---|---|---|---|
+| `gm_AllocGebaeude` | 753/1078, obj 1078 | 397/1078, obj 1074 | worse |
+| `m_AllocTracked` | 566/658, obj 658 | 266/658, obj 634 | worse |
+| `vfs_ReadCompressed` | 468/492, obj 492 | 461/492, obj 492 | worse |
+| `cm_ExProdObjekt` | 976/993, obj 993 | 722/993, obj 991 | worse |
+| `cm_ProcessCommandQueue` | 624/639, obj 639 | 425/639, obj 606 | worse |
+
+No further pins. **All eighteen rows in the residue table have now been measured under both
+generators**, and the three pinned files (`spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`,
+`ls_LoadBuildingEntityState.c`) are the complete set. The axis is closed, this time with the
+population written down.
+
+One incidental correction: section 90 recorded sp5-pp as reproducing `vfs_ReadCompressed`'s
+stack-cleanup tail. At whole-function granularity it scores **worse** (461 against 468, same
+object size), so whatever it fixes in the tail it breaks elsewhere in the same function. A
+fragment-level oracle is not a file-level one — and only the file level can be pinned.
+
+**Two rounds, the same error.** Both times the claim was "every remaining row", both times the set
+was assembled from whichever rows were recently in hand, and both times the correction cost one
+command and found something. The habit that catches it is mechanical: **enumerate from the
+artefact that defines the set** — here the residue table, which is generated, not remembered — and
+state the count in the claim so a reader can check it. "All eighteen rows in the residue table"
+is falsifiable; "every remaining file" is not.
+
+A methodological note for the next reader, since two sections in a row needed a correction block:
+leaving the wrong claim in place with a dated correction beneath it is deliberate. Deleting it
+would hide that the sweep was done twice, and the second sweep is why the third pin exists.

@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-504 (2026-09-14): enumerated the sweep properly — 18 rows, not 13.
+No further pins. Residue 8,633.**
+
+- §144 corrected §143 for claiming exhaustion without enumerating, then made
+  **the same mistake one paragraph later**: "all thirteen unmatched rows".
+  The residue table lists **eighteen**.
+- Enumerated from `postlink_residual.py --built` (generated, not
+  remembered) and swept the five never tested: **gm_AllocGebaeude
+  753 -> 397, m_AllocTracked 566 -> 266, vfs_ReadCompressed 468 -> 461,
+  cm_ExProdObjekt 976 -> 722, cm_ProcessCommandQueue 624 -> 425.** All
+  worse. No further pins.
+- **All 18 rows now measured under both generators.** The three pinned files
+  are the complete set. Axis closed, with the population written down this
+  time.
+- **Incidental correction**: §90 recorded sp5-pp as reproducing
+  vfs_ReadCompressed's stack-cleanup tail, but at whole-function granularity
+  it scores **worse** (461 vs 468, same obj size) — whatever it fixes in the
+  tail it breaks elsewhere. **A fragment-level oracle is not a file-level
+  one**, and only the file level can be pinned.
+- **Two rounds, the same error.** Both times "every remaining row", both
+  times the set was assembled from whatever was in hand, both times the
+  correction cost one command and found something. **Enumerate from the
+  artefact that defines the set and state the count**, so the claim is
+  falsifiable. New §145.
+- Note: the wrong claims are left in place with dated corrections beneath
+  them deliberately — deleting them would hide that the sweep ran twice, and
+  the second run is why the third pin exists.
+
 **Round-503 (2026-09-14): §143's "exhausted" was WRONG — found a third pin.
 Residue 8,637 -> 8,633.**
 
