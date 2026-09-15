@@ -4213,3 +4213,44 @@ Two practical notes for anyone running the engine here:
 - The sweep is per-*function* via `--va`, but it still compiles the whole translation unit
   each time, so cost scales with the file, not the function. `spiel622.c` (16 functions) takes
   ~6 s per combination.
+
+## 106. The flag landscape is flat on every walled row — five for five
+
+Section 105 ran the repaired flag sweep on one function and found all 20 combinations scoring
+identically. Round 208 asked whether that generalises. It does, and the result is worth having
+because it closes an entire class of "have we tried the flags?" questions.
+
+Sweeping the five largest walled rows, `targeted` tier, 20 combinations each:
+
+| function | residue | combos | distinct scores | best score |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | 2,824 | 20 | **1** | 3,849,233.33 |
+| `CrashDumpUnhandledExceptionFilter` | 1,595 | 20 | **1** | 2,224,585.73 |
+| `cm_ExSellObjekt` | 967 | 20 | **1** | 1,301,503.00 |
+| `vfs_ReadCompressed` | 24 | 20 | **1** | 35,900.00 |
+| `m_AllocTracked` | 92 | 20 | **1** | 34,500.00 |
+
+**Five for five, one distinct score each.** The flags genuinely vary — 20 distinct flag strings
+per row, verified (`/G3`, `/G3 /Gd`, `/G3 /Gd /Oy`, `/G3 /Gd /Oy /Op`, `/G3 /Gd /Oy-`, …) — the
+emitted code simply does not respond to any of them.
+
+The `targeted` tier covers `/G?`, `/Gd`, `/Op`, `/Oy`, `/Oy-`. To check the finding was not an
+artefact of that narrow set, `m_AllocTracked` was also swept at `thorough` tier, which reaches
+a different group — `/GX`, `/Gs`, `/ML`, `/Ob?`, `/Zp?` — and it is **still 1 distinct score**.
+That is **12 distinct flag axes and ~120 compilations, all inert**.
+
+**Why this matters more than any single row.** Every one of these rows was closed by byte-level
+analysis (sections 84-104) concluding the residue is register allocation, instruction
+scheduling, or an x87-stack decision. The sweep is an *independent instrument* reaching the
+same verdict without looking at a single byte: if a compiler flag could move these functions,
+a flat landscape is exactly what you would not see. Two methods agreeing from different
+directions is much stronger than either alone.
+
+It also retires a standing question cheaply. "Has anyone tried `/Ob2`? `/Zp1`? `/GX`?" now has
+a measured answer for the rows that matter, rather than an appeal to the CFLAGS sweeps recorded
+in individual file headers (which were per-function, undated, and in one case — section 94's
+`gm_AllocSpieler` note — found to be wrong about which flags were load-bearing).
+
+Practical caveat: a flat landscape says the *flags* are inert, not that the function is
+unreachable. It is silent about source shape, which is where every landed win in this session
+came from.

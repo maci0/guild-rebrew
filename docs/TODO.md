@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-458 (2026-09-14): the flag landscape is FLAT on every walled row —
+five for five, independently confirming the byte-level verdicts.
+Residue 8,664.**
+
+- With the sweep repaired (round 457), used it as a MEASUREMENT INSTRUMENT
+  across the five largest walled rows. Every one returns **exactly 1
+  distinct score across 20 flag combinations**: gm_AllocSpieler
+  (3,849,233), CrashDump (2,224,586), cm_ExSellObjekt (1,301,503),
+  vfs_ReadCompressed (35,900), m_AllocTracked (34,500).
+- **Verified the flags genuinely vary** — 20 distinct flag strings per row
+  (`/G3`, `/G3 /Gd`, `/G3 /Gd /Oy`, `/G3 /Gd /Oy /Op`, `/G3 /Gd /Oy-`, ...)
+  — so this is real inertness, not a scoring artefact.
+- **Checked it is not an artefact of the narrow tier.** `targeted` covers
+  `/G?`, `/Gd`, `/Op`, `/Oy`, `/Oy-`; re-swept m_AllocTracked at `thorough`,
+  which reaches `/GX`, `/Gs`, `/ML`, `/Ob?`, `/Zp?` — **still 1 distinct
+  score**. That is **12 flag axes and ~120 compilations, all inert**.
+- **Why it matters**: these rows were closed by byte-level analysis
+  (§§84-104) concluding register allocation / scheduling / x87-stack. The
+  sweep reaches the same verdict as an INDEPENDENT instrument without
+  looking at a byte — if a flag could move them, a flat landscape is
+  exactly what you would not see. It also retires "has anyone tried /Ob2,
+  /Zp1, /GX?" with a measurement rather than an appeal to the per-function
+  CFLAGS notes (one of which §94 already caught being wrong about which
+  flags were load-bearing).
+- Caveat recorded in §106: flat means the FLAGS are inert, not that the
+  function is unreachable — it says nothing about source shape, which is
+  where every landed win this session came from.
+
 **Round-457 (2026-09-14): fixed rebrew bug #7 and finally got a GA result.
 Residue 8,664.**
 
