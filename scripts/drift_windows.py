@@ -61,6 +61,7 @@ if not drifts:
     print('no aligned branch pairs with differing targets')
 else:
     print(f'{len(drifts)} aligned branches whose targets differ:')
+    spans = []
     for a,rt,ot,d in drifts[:6]:
         # The measured span runs between the jump and its target, in whichever
         # order they fall.  A BACKWARD jump (target < source) measures the drift
@@ -72,3 +73,33 @@ else:
         print(f'  at +{a:#06x}: ref->{rt:#06x} ours->{ot:#06x}  '
               f'drift {signed:+d} bytes in [{lo:#x}, {hi:#x})'
               + ('' if rt >= a else '  (backward)'))
+        spans.append((lo, hi, signed))
+
+    # Nested subtraction.  A window strictly inside another accounts for part of
+    # the outer window's drift, so the REMAINDER is attributable to the region
+    # the inner one does not cover -- and that remainder can have the opposite
+    # sign.  This is the only way to see a surplus the tool cannot report
+    # directly: on guild-rebrew's CrashDump every measured window was negative
+    # while the object was size-exact, and subtracting a -19 inner window from
+    # its -10 outer one exposed a ~+9 region with no positive window of its own
+    # (docs/msvc6-c-shapes.md section 137).
+    derived = []
+    for lo1, hi1, d1 in spans:
+        for lo2, hi2, d2 in spans:
+            if (lo1, hi1) == (lo2, hi2):
+                continue
+            if lo1 <= lo2 and hi2 <= hi1 and (hi2 - lo2) < (hi1 - lo1):
+                rest = d1 - d2
+                if rest:
+                    derived.append((lo1, hi1, lo2, hi2, rest, d1, d2))
+    if derived:
+        # Report the tightest containing pair per outer window only.
+        best = {}
+        for lo1, hi1, lo2, hi2, rest, d1, d2 in derived:
+            key = (lo1, hi1)
+            if key not in best or (hi2 - lo2) < (best[key][1] - best[key][0]):
+                best[key] = (lo2, hi2, rest, d1, d2)
+        print('\nderived by subtraction (regions with no window of their own):')
+        for (lo1, hi1), (lo2, hi2, rest, d1, d2) in sorted(best.items()):
+            print(f'  [{lo1:#x}, {hi1:#x}) {d1:+d} minus inner [{lo2:#x}, {hi2:#x}) '
+                  f'{d2:+d}  =>  {rest:+d} outside the inner window')

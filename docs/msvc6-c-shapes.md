@@ -5966,3 +5966,39 @@ neither is separately fixable. Two functions, same structure, reached from oppos
 Method worth keeping: **compare the magnitudes of nested windows, not just their signs.** An inner
 window with larger |drift| than its enclosing window is a positive region hiding between them, and
 that is the only way to see a surplus the tool cannot report directly.
+
+## 138. Nested subtraction, automated
+
+Section 137 derived a surplus by hand that no window reported: on
+`CrashDumpUnhandledExceptionFilter` every measured window was negative while the object was
+size-exact, and subtracting a `-19` inner window from its `-10` outer one exposed a `+9` region
+with no window of its own. That arithmetic is mechanical, so round 246 put it in the tool.
+
+`scripts/drift_windows.py` now reports, after the measured windows:
+
+```
+derived by subtraction (regions with no window of their own):
+  [0xda, 0x6b9) -10 minus inner [0x490, 0x4d0) -19  =>  +9 outside the inner window
+  [0xfc, 0x6ab) -11 minus inner [0x490, 0x4d0) -19  =>  +8 outside the inner window
+  [0x11c, 0x679)  -9 minus inner [0x490, 0x4d0) -19  =>  +10 outside the inner window
+```
+
+It reproduces the hand derivation exactly, and the three independent pairs bracketing the same
+region (+8, +9, +10) are a useful cross-check that a single derived number cannot give.
+
+**It found new regions on the other rows immediately.** `gm_AllocSpieler`'s `[0x85, 0xc8b)` is
+`+5` overall while its inner `[0x787, 0x794)` is `+13`, so the remainder carries **-8** — a
+shortfall no window reported, in the same neighbourhood and with the same sign as the `-53` spill
+region of section 136, which is consistent with that trade rather than a new fault.
+`cm_ExSellObjekt` yields a `+1` remainder.
+
+Two guards keep the output honest: only *strictly* contained windows are subtracted, and only the
+**tightest** inner window per outer one is reported, so a single region is not claimed several
+times over. Verified on `srv_LoadBuf` (NEAR_MATCHING, 701/750) that a function with no differing
+branch targets produces no windows and therefore no derivations — the inference cannot invent a
+region where none is measured.
+
+The general point is worth stating because it applies beyond this tool: **when a measurement can
+only report certain intervals, the arithmetic between those intervals is also data.** Here the
+regions that matter most are precisely the ones with no branch pair to measure them, and they are
+recoverable only by subtraction.

@@ -49,6 +49,30 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-497 (2026-09-14): automated §137's nested subtraction. Residue
+8,652.**
+
+- §137 derived a surplus by hand that no window reported. The arithmetic is
+  mechanical, so `drift_windows.py` now does it, printing a
+  **"derived by subtraction"** section after the measured windows.
+- **Reproduces the hand derivation exactly** on CrashDump (+9 outside
+  [0x490,0x4d0)), and three independent pairs bracket the same region at
+  **+8 / +9 / +10** — a cross-check a single derived number cannot give.
+- **Found new regions immediately**: gm_AllocSpieler's [0x85,0xc8b) is +5
+  overall while its inner [0x787,0x794) is +13, so the remainder carries
+  **-8** — a shortfall no window reported, same sign and neighbourhood as
+  §136's -53 spill region, so consistent with that trade rather than a new
+  fault. cm_ExSellObjekt yields +1.
+- **Two guards keep it honest**: only STRICTLY contained windows are
+  subtracted, and only the TIGHTEST inner window per outer one is reported,
+  so one region is not claimed several times. Verified on srv_LoadBuf
+  (no differing branch targets) that no windows means no derivations — the
+  inference cannot invent a region.
+- **General point in §138**: when a measurement can only report certain
+  intervals, the arithmetic BETWEEN those intervals is also data. The
+  regions that matter most here are exactly the ones with no branch pair to
+  measure them.
+
 **Round-496 (2026-09-14): swept window SIGNS tree-wide; found a surplus with
 no positive window. Residue 8,652.**
 
