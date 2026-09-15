@@ -6296,3 +6296,34 @@ is falsifiable; "every remaining file" is not.
 A methodological note for the next reader, since two sections in a row needed a correction block:
 leaving the wrong claim in place with a dated correction beneath it is deliberate. Deleting it
 would hide that the sweep was done twice, and the second sweep is why the third pin exists.
+
+## 146. File splitting would unlock nothing: the pin granularity was never the constraint
+
+Section 142 established that a toolchain is selected per translation unit, and that a pin is only
+legitimate when every function in the file survives it. That implies an untried lever: a file
+mixing functions which want *different* toolchains is blocked, and **splitting it** would unlock a
+pin. Round 254 evaluated that, enumerating from the residue table as section 145 requires.
+
+Of the eighteen rows, **sixteen live in single-function files** — already freely pinnable, with no
+file-mate that could veto anything. Only two files hold more than one function:
+
+| file | functions | status |
+|---|---|---|
+| `spiel622.c` | 16 | its residue row, `gm_CheckInventoryCapacity`, scores **298/395 at obj 395 under both toolchains** — identical |
+| `spiel_dumpD.c` | 4 | **already pinned**; three file-mates RELOC-perfect under sp5-pp (272/272, 186/186, 211/211), the fourth gains |
+
+So there is nothing to unlock. `spiel622.c`'s only unmatched function is indifferent to the
+toolchain, so splitting it buys a pin worth zero bytes; `spiel_dumpD.c` is already in the
+configuration that maximises it. **No file in the tree is blocked from a pin by its file-mates**,
+which means the per-file granularity was never the constraint — sp5-pp simply helps three files
+and hurts the rest.
+
+Worth recording as a closed lever because it is a plausible and non-obvious idea: after
+section 142 made "the toolchain is per file" explicit, splitting files to get finer granularity is
+the natural next thought, and it is the kind of large refactor that would be expensive to attempt
+and then abandon. The measurement that closes it is three `rebrew test` invocations.
+
+This also completes the toolchain axis properly. Sections 143 and 144 each claimed closure and
+each was corrected; the axis is closed now in a stronger sense than "no more pins found": **every
+row has been measured under both generators (section 145), and the only structural move that
+could change that result has been evaluated and yields nothing.**

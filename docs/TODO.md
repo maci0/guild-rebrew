@@ -49,6 +49,31 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-505 (2026-09-14): evaluated the file-splitting lever — it unlocks
+nothing. Residue 8,633.**
+
+- §142 made "a toolchain is chosen per FILE" explicit, which implies an
+  untried lever: a file mixing functions that want different toolchains is
+  blocked, so **splitting it would unlock a pin**. Evaluated it, enumerating
+  from the residue table per §145.
+- **16 of the 18 rows live in SINGLE-function files** — already freely
+  pinnable, no file-mate can veto anything. Only two files hold more than
+  one function:
+  - **spiel622.c** (16 funcs): its only residue row,
+    gm_CheckInventoryCapacity, scores **298/395 obj 395 under BOTH
+    toolchains** — identical, so splitting buys a pin worth zero.
+  - **spiel_dumpD.c** (4 funcs): **already pinned**, and optimally — three
+    file-mates RELOC-perfect under sp5-pp, the fourth gaining.
+- **So no file in the tree is blocked from a pin by its file-mates.** The
+  per-file granularity was never the constraint; sp5-pp simply helps three
+  files and hurts the rest.
+- **Worth closing explicitly** (§146): after §142, splitting files for finer
+  granularity is the natural next thought and would be an expensive refactor
+  to attempt then abandon. Three `rebrew test` invocations close it.
+- This completes the toolchain axis in a stronger sense than "no more pins
+  found": every row measured under both generators (§145), **and** the only
+  structural move that could change that has been evaluated.
+
 **Round-504 (2026-09-14): enumerated the sweep properly — 18 rows, not 13.
 No further pins. Residue 8,633.**
 
