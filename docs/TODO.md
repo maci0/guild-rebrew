@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-463 (2026-09-14): surfaced a SHIPPED SEMANTIC BUG in
+gm_AllocSpieler and measured the cost of fixing it. Residue 8,664.**
+
+- The file header carried a "KNOWN REAL BUG" note from a 2026-09-13 review
+  that had never been acted on. **Verified it at the bytes**: in the
+  `arg8 != 2` branch we store `slot[0x166]` (always 0) where the reference
+  stores **arg8 itself** — at 0x10018cd4 it loads arg8 into eax, the
+  0x10018cde `jne` skips the gm_RandomMod call leaving eax = arg8, and
+  0x10018cec stores al. **Observable whenever arg8 is neither 2 nor 0.**
+- **Measured the cost of correctness**, two spellings:
+  `slot[9] = (char) arg8` -> **565/3689, obj 3679**; the reference's
+  single-store shape (`n = arg8; if (arg8==2) n = call(); slot[9] = n;`)
+  -> **565/3689, obj 3679**. Identical, so the 10-byte deficit is
+  STRUCTURAL (the correct code is simply shorter), not a spelling that can
+  be tuned. An earlier attempt also measured +393 linked via tail desync.
+  Both reverted; baseline 1004/3689 restored and re-verified.
+- **Promoted the decision out of the file header into §110.** Sections 19,
+  41 and 94 say only the link decides, and that has correctly rejected many
+  byte-losing edits — but this is the one case where the rule is being
+  applied to a CORRECTNESS regression, not a stylistic one. The shipped
+  source is allowed to diverge from correct behaviour only because the
+  reference binary is the specification. Anyone using this tree as a SOURCE
+  release must fix this line first.
+- Also marked the defect **at its site** (it was documented 450 lines above
+  the actual line), with the measured numbers and the exact unblocking
+  condition: a correct spelling 10 bytes LONGER, or a resynced tail.
+- Side finding while tracing: after the block fill the reference addresses
+  everything off `ebp` (`[ebp+0x170]`, `[ebp+0x16c]`, `[ebp+0x1f0]`), which
+  confirms `slot` is a real pointer local held in ebp — consistent with
+  §109's reading that the `lea edx` / `mov edi,edx` split is scheduling,
+  not a different addressing model.
+
 **Round-462 (2026-09-14): located gm_AllocSpieler's FIRST fault exactly — a
 scheduler sink, not a statement order. Residue 8,664.**
 

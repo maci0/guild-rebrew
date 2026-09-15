@@ -452,6 +452,14 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	if (arg8 == 2) {
 		slot[9] = (char) gm_RandomMod((unsigned short) arg8);
 	} else {
+		/* KNOWN BUG, kept deliberately -- see docs/msvc6-c-shapes.md 110.
+		 * The reference stores arg8 here (0x10018cec `mov [ebp+9],al` with
+		 * eax still holding arg8 on the jne-skip path); this stores 0.
+		 * Correct spellings (`(char) arg8`, or the reference's single-store
+		 * `n = arg8; if (arg8==2) n = call(); slot[9] = (char) n;`) BOTH
+		 * measure 565/3689 at obj 3679 -- 10 bytes SHORT -- and an earlier
+		 * attempt cost +393 linked via tail desync.  Needs a correct
+		 * spelling that is 10 bytes longer, or a resynced tail. */
 		slot[9] = slot[0x166];
 	}
 	if (type < 4 || type == 0xb) {

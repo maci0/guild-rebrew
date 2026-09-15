@@ -4422,3 +4422,58 @@ Housekeeping from the same round: the metadata note claiming "SIZE 3209/3689 (48
 stale from the naked-asm era — the object is now **exactly 3689 bytes**, the target size — and
 an inert `/DREBREW_ALLOW_NAKED` was removed from its cflags (verified byte-identical at
 1004/3689 both ways), the last of the three section 97 identified.
+
+## 110. A deliberate semantic bug is shipped in `gm_AllocSpieler` — state it plainly
+
+This one is not a codegen fact; it is a standing decision that deserves to be visible outside
+a file header, because it trades **correctness for byte score**.
+
+`gm_AllocSpieler` contains a real bug. In the `arg8 != 2` branch we store a value that is
+always zero:
+
+```c
+if (arg8 == 2) {
+        slot[9] = (char) gm_RandomMod((unsigned short) arg8);
+} else {
+        slot[9] = slot[0x166];          /* always 0 -- WRONG */
+}
+```
+
+The reference stores **`arg8` itself**, which I verified at the bytes (round 213):
+
+```
+0x10018cd4  8b84244c040000  mov eax,[esp+0x44c]   ; arg8
+0x10018cdb  83f802          cmp eax,2
+0x10018cde  7509            jne 0x10018ce9        ; skips the call, eax still = arg8
+0x10018ce0  50              push eax
+0x10018ce1  e8ea130000      call gm_RandomMod
+0x10018ce9  83fe04          cmp esi,4
+0x10018cec  884509          mov byte ptr [ebp+9],al   ; stores arg8 when the call was skipped
+```
+
+`eax` holds `arg8` on the skip path, so the store writes the argument. Our version writes 0.
+**Observable whenever `arg8` is neither 2 nor 0.**
+
+Measured cost of being correct:
+
+| shape | `rebrew test` | obj |
+|---|---|---|
+| shipped (wrong) | **1004/3689** | 3689 |
+| `slot[9] = (char) arg8` | 565/3689 | **3679** |
+| reference's single-store shape (`n = arg8; if (...) n = call(...); slot[9] = (char) n;`) | 565/3689 | **3679** |
+
+Both correct spellings land **identically**, so the 10-byte deficit is structural — the correct
+code is simply shorter — not a spelling that can be tuned. An earlier attempt also measured
+**+393 linked** through tail desynchronisation.
+
+**Why this is worth a numbered section.** Sections 19, 41 and 94 established that only the link
+decides, and that rule has correctly rejected many byte-losing edits. This is the one case
+where the rule is being applied to a *correctness* regression rather than a stylistic one, and
+that is a different kind of decision: the objective is a byte-identical recompilation, so the
+shipped source is allowed to diverge from correct behaviour only because the reference binary
+is the specification. Anyone using this tree as a *source* release rather than a byte-matching
+exercise must fix this line first.
+
+The blocking condition is precise and worth restating: a correct spelling that is **10 bytes
+longer**, or a resynchronised tail that absorbs the shortfall. Until then the bug stays, and it
+should stay *documented here*, not only in a comment 450 lines above the defect.
