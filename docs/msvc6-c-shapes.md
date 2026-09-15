@@ -4821,6 +4821,31 @@ case to its own tail reaches the correct call count (44) and better alignment (+
 matched bytes and 4 bytes of size (**554/2119**); and writing the reference's exact seven-case
 group split compiles **byte-identical**, because msvc6 simply re-merges it.
 
+### Why the reference's spill reloads are not a storage signal
+
+Section 112 read the reference's `mov ebx,[esp+0x3c]` / `mov ebp,[esp+0x38]` between the two
+`CloseHandle` calls as evidence that the handles must live in distinct storage. **That inference
+does not hold**, and the bytes two instructions later say why:
+
+```
+0x10002da6  ff1510400210  call [0x10024010]   ; CloseHandle(hDbgFile)
+0x10002dac  5f            pop edi
+0x10002dad  5b            pop ebx
+0x10002dae  e9b3000000    jmp 0x10002e66
+```
+
+The reference reloads into `ebx`/`ebp` because it is **about to pop `edi`/`ebx` for the epilogue
+path** and needs those values back in registers first. Our build keeps the same values in
+`edx`/`eax`, in distinct stack slots (`[esp+0x2c]` and `[esp+0x58]`), and never spills — so the
+asymmetry the earlier reading treated as a source-level storage difference is pure register
+allocation. It follows that `volatile` on a handle could not have helped here, which is
+consistent with section 94's record of it losing four times out of four.
+
+Two further probes confirmed the dead end from a different arm partition: two `switch`
+statements sharing one newline write measured **336/2117**, and two switches each with their own
+inline newline write measured **338/2133** — and neither even bought the extra call, because the
+second `switch` keyword still cross-jumped into a single tail.
+
 So the duplicated tail is a *layout* consequence of how msvc6 placed the two arm clusters, not
 something the source requests directly — consistent with section 109's finding on
 `gm_AllocSpieler` and section 112's on the cleanup arms. It is worth one `WriteFile` plus about

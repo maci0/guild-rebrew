@@ -77,6 +77,18 @@ switch tails. Residue 8,664.**
   it was working from a pre-correction snapshot. Verified both docs already
   carry 5/5 from round 471. Its arm-cluster census was new and is the
   finding recorded above.
+- **Corrected §112's spill-slot reading.** It treated the reference's
+  `mov ebx,[esp+0x3c]` / `mov ebp,[esp+0x38]` between the two CloseHandle
+  calls as evidence the handles need distinct storage. **Verified at the
+  bytes that this is wrong**: two instructions later the reference does
+  `pop edi; pop ebx` — it reloads because those registers are about to be
+  popped for the epilogue. Ours keeps the same values in edx/eax in
+  distinct slots (`[esp+0x2c]`, `[esp+0x58]`) and never spills. Pure
+  register allocation, so `volatile` could not have helped (§94: 0-for-4).
+- Two more measured dead ends on the switch: two `switch` statements sharing
+  one newline write = **336/2117**; two switches each with their own inline
+  newline write = **338/2133**. **Neither bought the extra call** — the
+  second keyword still cross-jumped into one tail.
 
 **Round-473 (2026-09-14): tree-wide call-inventory sweep — exactly ONE row
 has a real defect. Residue 8,664.**
