@@ -4778,3 +4778,51 @@ Two measurement traps, both hit while running this sweep:
   reports, and note the COMDAT is sized by *span* (400) not code length (396).
 - The reference-side tool takes the function's **size from metadata**; passing a stale size
   truncates the walk and undercounts silently.
+
+## 114. The last call defect: two switch tails the reference keeps and we merge
+
+Section 113 established that exactly one row in the tree has a call-inventory defect —
+`CrashDumpUnhandledExceptionFilter`, `WriteFile` 11 against our 10. Round 223 located it
+exactly, and it is the clearest remaining *structural* difference in the function.
+
+The reference compiles the exception-code switch as **two jump tables, each with its own copy of
+the message-write tail**:
+
+```
+tail A  0x10002b7f  55 push ebp / ffd6 call esi   <- the WriteFile we never emit
+                    8d4c2410 lea ecx,[esp+0x10] ... 6a02 push 2
+tail B  0x10002c40  55 push ebp / ffd6 call esi
+                    8d442410 lea eax,[esp+0x10] ... 6a02 push 2
+```
+
+The two tails are **structurally identical and differ only in scratch register** (`ecx`/`edx`
+against `eax`/`ecx`), which is exactly why msvc6 did not fold them: they are reached in
+different register states. Fan-in, counted from the reference's own `jmp` targets:
+
+```
+jmp 0x10002b7f :  6 arms      jmp 0x10002c40 : 11 arms      jmp 0x10002c51 : 1 arm (newline)
+```
+
+Walking the jump tables confirms the split: table 1 at 0x10002e9c holds four real arm addresses
+(0x10002b31/41/51/61) before its index bytes, table 2 at 0x10002f1c holds eight
+(0x10002bb2…0x10002c22). Each arm pushes its own message pointer and length —
+`lea eax,[esp+0x10]; push 0; push eax; push 0x15; push 0x10027278` — then `jmp` to its group's
+tail, which supplies the handle and makes the call.
+
+**We emit both range tests at identical constants**, so our case partition already matches the
+reference; what we do not reproduce is the duplicated tail. Our source writes each case's
+message with its own `WriteFile(...)` followed by `break;`, and msvc6 cross-jumps every arm into
+a single shared tail — one call site where the reference has two.
+
+Known dead ends, so nobody re-spends them: spelling the second range as its own `switch`
+statement measures **406/2141 (SIZE_MISMATCH)**, because msvc6's two tables are *one* switch it
+split internally on dense case clusters rather than two source constructs; splitting a single
+case to its own tail reaches the correct call count (44) and better alignment (+13) but costs 79
+matched bytes and 4 bytes of size (**554/2119**); and writing the reference's exact seven-case
+group split compiles **byte-identical**, because msvc6 simply re-merges it.
+
+So the duplicated tail is a *layout* consequence of how msvc6 placed the two arm clusters, not
+something the source requests directly — consistent with section 109's finding on
+`gm_AllocSpieler` and section 112's on the cleanup arms. It is worth one `WriteFile` plus about
+twenty bytes of duplicated argument setup, and it sits exactly where this function's alignment
+deltas step from +21 to +43.

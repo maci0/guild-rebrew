@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-474 (2026-09-14): located the tree's last call defect exactly — two
+switch tails. Residue 8,664.**
+
+- §113 left exactly one call-inventory defect in the tree (CrashDump,
+  WriteFile 11 vs 10). Found it: the reference compiles the exception-code
+  switch as **two jump tables, each with its own copy of the message-write
+  tail** (0x10002b7f and 0x10002c40).
+- **The two tails are structurally identical and differ only in scratch
+  register** (ecx/edx vs eax/ecx) — which is precisely why msvc6 did not
+  fold them; they are reached in different register states. Verified the
+  fan-in from the reference's own jmp targets: **6 arms -> tail A, 11 ->
+  tail B, 1 -> the newline write**.
+- Walked both jump tables to confirm the split: table 1 (0x10002e9c) holds 4
+  real arm addresses, table 2 (0x10002f1c) holds 8. Each arm pushes its own
+  message pointer and length then jumps to its group's tail, which supplies
+  the handle and calls.
+- **We emit both range tests at identical constants** — our case partition
+  already matches — but our per-case `WriteFile(...); break;` lets msvc6
+  cross-jump every arm into ONE shared tail.
+- **Three dead ends recorded in §114** so they are not re-spent: a second
+  `switch` keyword = 406/2141 SIZE_MISMATCH; splitting one case to its own
+  tail = correct call count (44) and +13 aligned but **554/2119**; writing
+  the reference's exact 7-case group split compiles **byte-identical**
+  (msvc6 re-merges it).
+- Note: a probe lane reported the CloseHandle correction again this round —
+  it was working from a pre-correction snapshot. Verified both docs already
+  carry 5/5 from round 471. Its arm-cluster census was new and is the
+  finding recorded above.
+
 **Round-473 (2026-09-14): tree-wide call-inventory sweep — exactly ONE row
 has a real defect. Residue 8,664.**
 
