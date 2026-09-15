@@ -49,6 +49,44 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-476 (2026-09-14): LANDED +12 bytes — residue 8,664 -> 8,652. First
+gain on CrashDump this session.**
+
+- **The edit**: hoist `pStack = (unsigned int*)(pCtx->Esp - 4);` and
+  `nFrames = 0x800;` about 110 lines earlier, from just above the stack-walk
+  loop to just after the crash-log handle opens. That is where the reference
+  computes them (0x10002931/0x1000293a). **633 -> 643/2115, obj unchanged
+  at 2115**; at the link **8,664 -> 8,652**, file still 286,720 with ZERO
+  bytes differing outside `.text`. Baseline lowered to 8652. New §116.
+- **Why it works** (from the lane that found it): the reference commits
+  `ebx` to `Context->Esp` BEFORE the separator write, keeping three
+  long-lived values in callee-saved registers. Loading it after the switch
+  left `edi` free, so msvc6 filled it by caching constant 0. The hoist
+  recovers one of the three committed registers.
+- **How it was found is the process lesson.** The edit was sitting
+  UNCOMMITTED in the shared worktree. I noticed only because the residue
+  moved during unrelated toolchain work and I checked `git status` before
+  attributing it. Two habits saved it: gating on the RESIDUE (§99's guard,
+  round 215) and checking `git diff --stat` before trusting a measurement.
+- **§114 corrected structurally**: tail A does not end on its own — it
+  finishes `push edx; jmp 0x10002c51`, landing INSIDE tail B at its SECOND
+  `call esi`. The tails **share the newline write** and duplicate only the
+  **message** write (13 `call esi` for 19 arms; whole-tail duplication would
+  give 14). Any shape duplicating the whole tail is wrong before compiling.
+- **Three more measured dead ends** (new §117): `goto` per group
+  **526/2139**; newline inlined in all 19 arms **352/2267**; per-group
+  msg/len locals **631/2123** — the last DID produce two tails and
+  WriteFile 13/total 46, but msvc6 then materialises msg/len into registers
+  instead of pushing immediates. Arm reordering is exactly neutral (msvc6
+  sorts arms itself).
+- **My sp5-pp CMake experiment failed and is recorded as a dead end**:
+  `set_source_files_properties` REPLACES per-file flags, so the pin dropped
+  `/O2 /Gd` and compiled the file unoptimised (residue 39.6%); re-adding
+  them duplicated flags and made it worse (91%). It also contaminated many
+  objects, needing a full `find -name '*.obj' -delete` rebuild to recover.
+  The `/REBREW_TOOLCHAIN:` flag added to `cmake_tc.py` works, but the CMake
+  plumbing to use it safely does not exist.
+
 **Round-475 (2026-09-14): measured the sp5-pp toolchain axis §91 flagged —
 a REAL gain that CANNOT SHIP. Residue 8,664.**
 

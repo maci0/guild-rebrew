@@ -4814,6 +4814,12 @@ reference; what we do not reproduce is the duplicated tail. Our source writes ea
 message with its own `WriteFile(...)` followed by `break;`, and msvc6 cross-jumps every arm into
 a single shared tail — one call site where the reference has two.
 
+**Corrected by section 117 (round 225):** tail A does not run to its own end — it finishes
+`push edx; jmp 0x10002c51`, landing *inside* tail B at its **second** `call esi`. So the two
+tails **share the newline write** and duplicate only the **message** write. The reference has 13
+`call esi` sites for 19 arms; whole-tail duplication would give 14. Any shape that duplicates the
+whole tail is structurally wrong before it is compiled.
+
 Known dead ends, so nobody re-spends them: spelling the second range as its own `switch`
 statement measures **406/2141 (SIZE_MISMATCH)**, because msvc6's two tables are *one* switch it
 split internally on dense case clusters rather than two source constructs; splitting a single
@@ -4895,3 +4901,119 @@ its own target. That is a build-system change, not a source change, and it is wo
 The general rule, which generalises past this project: **a compiler pin that the build system
 cannot honour is a measurement setting, not a fix.** Check what the link actually uses before
 counting any toolchain result as progress.
+
+## 117. The two tails at 0x10002770 are a register-pressure artefact, not a source shape
+
+Section 113 left exactly one call-inventory defect in the tree: `CrashDumpUnhandledExceptionFilter`
+emits **10** `WriteFile` calls where the reference has **11**. The reference compiles the
+exception switch as two jump tables with two structurally identical tails that differ only in
+register assignment (tail A at 0x10002b7f uses `ecx`/`edx`, tail B at 0x10002c40 uses `eax`/`ecx`),
+so msvc6 declined to fold them.
+
+**The tail groups, walked from the `jmp` fan-in** (not the tables — the fan-in is unambiguous):
+
+| tail | arms | case values |
+|---|---|---|
+| A `0x10002b7f` | 7 | `0x80000003`, `0x80000004`, `0xc0000025`, `0xc0000026`, `0xc000008c`, `0xc000008d`, `0xc000008e` |
+| B `0x10002c40` | 12 | `0xc0000005`, `0xc0000006`, `0xc000001d`, `0xc000008f`–`0xc0000096`, `0xc00000fd` |
+
+Our source already splits at exactly this boundary — both range tests are emitted at the
+identical constants (`add eax,0x3fffffdb; cmp eax,0x68` and `add eax,0x3fffff71; cmp eax,0x6e`).
+**The case partition was never the problem.**
+
+**What the duplicated call actually is.** Tail A does not end in a `ret` or a jump past tail B —
+it ends `push edx; jmp 0x10002c51`, landing *inside* tail B at its **second** `call esi`. So the
+two tails share the newline `WriteFile` and duplicate only the **message** `WriteFile`. The
+reference has 13 `call esi` sites for 19 arms; a whole-tail duplication would give 14.
+
+**Three shapes measured against that, all rejected** (each from a clean
+`git checkout HEAD --`, baseline 633/2115):
+
+| attempt | result |
+|---|---|
+| `goto write_nl_a/b` — two labelled write sites, one per group | **526/2139**, SIZE_MISMATCH |
+| newline `WriteFile` inlined into all 19 arms instead of a shared tail | **352/2267**, SIZE_MISMATCH |
+| per-group locals (`exc_msg`/`exc_len` assigned per arm, one write per group) | **631/2123**, SIZE_MISMATCH |
+
+The `goto` variants are the instructive failures: a label per group **defeats tail merging
+outright** rather than splitting it — the object goes from 12 `call ebx` sites to 19, one per
+arm, because an explicit jump target stops msvc6 from threading the arms into a common tail at
+all. The per-group-local variant is the closest miss and the most informative: it does produce
+**two** tails and drives the inventory to `WriteFile` **13**, total **46**, but msvc6 then
+materialises the message/length into `eax`/`ecx` (`mov eax,0x10027208; mov ecx,0x12; jmp`) instead
+of pushing them as immediates per arm, which is what costs the bytes. **Routing the message
+through a variable is the wrong lever: the reference pushes immediates in every arm.**
+
+**The lever that did work is register pressure, not the switch at all.** The reference keeps three
+long-lived values in callee-saved registers across the switch (`esi` = `WriteFile`,
+`edi` = `pExceptionPointers`, **`ebx` = `Context->Esp`, loaded at 0x10002931 — before the separator
+write**, with the `-4` applied only at 0x10002c6c). Ours loaded `pCtx->Esp` after the switch, which
+left `edi` free, and msvc6 filled it by caching the constant `0` (`xor edi,edi`, then `push edi`
+for every `WriteFile` `lpOverlapped`). Hoisting the two stores to just above
+`hProcess = GetCurrentProcess();`:
+
+```c
+if (hCrashLog != (void*) -1) {
+        /* Write separator line */
+        pStack = (unsigned int*) (pCtx->Esp - 4);   /* hoisted: reference loads */
+        nFrames = 0x800;                            /* Context->Esp into ebx here */
+        hProcess = GetCurrentProcess();
+```
+
+measures **633 -> 643 / 2115**, obj_size unchanged at **2115**, probe matched 532 -> 555 and
+matched-reloc 842 -> 853. This is a pure statement-order move of two semantically dead-until-later
+stores, and it is the first improvement on this row since section 106 measured the flag landscape
+flat. **It does not add the call** — inventory is still `WriteFile` 10, total 43.
+
+**Conclusion for the next lane.** The missing `WriteFile` is downstream of register allocation: the
+two tails exist in the reference *because* three registers were already committed, leaving
+different scratch registers live at each group's exit. No arrangement of `break`/`goto`/locals in
+the switch reproduces it while the surrounding function still caches `0` in `edi`. The hoist above
+recovers one of the three committed registers and is kept for the bytes; the remaining gap is the
+same `ebx`/`edi` deferral cascade already named in the file header and section 81, **not** a
+property of the switch statement. Do not spend another lane reshaping the switch.
+
+## 116. A +10 win on CrashDump: hoist the stack-walk setup to the reference's computation point
+
+Round 225 found an uncommitted edit left in the worktree by a probe lane, measured it, and it is
+a genuine win — the first byte gain on `CrashDumpUnhandledExceptionFilter` in this session.
+
+The edit hoists two initialisations about 110 source lines earlier, from just before the
+stack-walk loop to immediately after the crash-log handle is opened:
+
+```c
+ if (hCrashLog != (void*) -1) {
++        pStack = (unsigned int*) (pCtx->Esp - 4);
++        nFrames = 0x800;
+         hProcess = GetCurrentProcess();
+         ...
+         frameInfo[6] = 0;
+-        pStack = (unsigned int*) (pCtx->Esp - 4);
+-        nFrames = 0x800;
+         for (;;) {
+```
+
+That is where the reference computes them (0x10002931/0x1000293a), far ahead of the loop that
+uses them.
+
+| | `rebrew test` | obj |
+|---|---|---|
+| before | 633/2115 | 2115 |
+| **after** | **643/2115** | **2115** |
+
+Measured at the link from a clean rebuild: **`.text` residue 8,664 → 8,652**, twelve bytes, with
+the shipped file still 286,720 bytes and **zero differing bytes outside `.text`**. The object
+size is unchanged, so this is pure placement, not extra or missing code.
+
+**Why it works.** Computing `pCtx->Esp - 4` early lets msvc6 keep the value in a register across
+the intervening block instead of rematerialising it at the loop head; the same class of lever as
+section 101's link-order wins and the opposite of section 109, where hoisting a `memset` call
+*cost* bytes because the call clobbered a live register. The distinction is that these two
+statements are pure computation with no call between them and their first use.
+
+**Process note, and it is the important part of this round.** The edit was sitting uncommitted
+and unreported in a shared worktree. It was only found because the residue moved unexpectedly
+during unrelated work and `git status` was checked before attributing the change. Two habits
+made that recovery possible: gating on the *residue* (section 99's guard, added round 215) and
+checking `git diff --stat` before trusting any measurement. Without them this would have been
+recorded as a toolchain result and the real cause would have been lost.

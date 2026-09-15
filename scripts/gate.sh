@@ -24,9 +24,9 @@ BASELINE=${BASELINE:-281}
 # and this gate green while the deliverable lost bytes.  Guard the byte-match
 # count separately (round 193).
 BYTE_BASELINE=${BYTE_BASELINE:-264}
-# .text residue baseline: 8664 (0x21d8) as of round 204.  Guarded below --
+# .text residue baseline: 8652 (0x21cc) as of round 225.  Guarded below --
 # lower it when a change improves the number, never raise it.
-RESIDUE_BASELINE=${RESIDUE_BASELINE:-8664}
+RESIDUE_BASELINE=${RESIDUE_BASELINE:-8652}
 rc=0
 
 echo "== rebrew lint"

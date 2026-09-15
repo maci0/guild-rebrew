@@ -256,6 +256,8 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 
 						if (hCrashLog != (void*) -1) {
 							/* Write separator line */
+							pStack = (unsigned int*) (pCtx->Esp - 4);
+							nFrames = 0x800;
 							hProcess = GetCurrentProcess();
 							/* Seek to end of crash log */
 							memcpy(szLine, "\r\n", 3);
@@ -365,8 +367,6 @@ unknown_exc:
 							frameInfo[4] = 0;
 							frameInfo[5] = 0;
 							frameInfo[6] = 0;
-							pStack = (unsigned int*) (pCtx->Esp - 4);
-							nFrames = 0x800;
 
 							for (;;) {
 								VirtualQuery((const void*) frameInfo[2], &mbi, 0x1c);
