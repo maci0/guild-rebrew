@@ -49,6 +49,44 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-510 (data pass, round 4): a symbol defined twice. Raw-link `.data`
+27,722 -> 26,372 (-1,350). `.text` 8,635 -> 8,636 (+1, pure placement).**
+
+- **Turned §150's map read into a classifier over EVERY object.** For each
+  object, collect the deltas `built_va - reference_va` of its annotated `.data`
+  symbols: **one distinct delta = the object's internal layout is right and
+  something upstream displaced it; more than one = the object itself emits the
+  wrong byte count.** `Error.c.obj` collapsing to a uniform `-0x4` is §150's
+  fix showing up in the classifier, which is what validates the rule.
+- **The bug (new §151)**: `EmitCrashModuleLine.c` defined `g_crash_newline`
+  (0x10027314) and `g_crash_space` (0x10027328) as separate arrays, but both
+  VAs fall **inside** `g_crashdump_data_10027104` (0x10027104..0x1002733c),
+  which already carries those exact bytes at offsets 528 and 548. The
+  reference has ONE copy; we emitted two. Fixed by aliasing into the blob.
+- **8 bytes removed, 1,350 recovered.** Positional match **51.6% -> 54.0%**,
+  misplaced 21,551 -> 19,962. The 8 bytes are not the win: removing them
+  shifts everything after the blob by -8, and that band was sitting +8 from
+  its reference position, so one deletion re-registered a long run of symbols
+  that were already correct in CONTENT. This is §100's 88.8% "present but
+  misplaced" reserve being cashed.
+- **Three data edits, near-identical sizes, opposite signs — position is the
+  variable, not size**: r508 -37 bytes = **+236 worse**; r509 -36 bytes =
+  **-231 better**; r510 -8 bytes = **-1,350 better**. Ask the map whether the
+  symbols AFTER the edit are displaced in the direction the edit will move
+  them; the payoff scales with how much of the section sits downstream.
+- **Quirk worth remembering**: `gm_AllocGebaeude` went 327 -> 328 differing
+  bytes and its **object file is byte-identical** (md5-verified). It embeds
+  `.data` addresses as immediates, so the -8 shift moved them and the
+  positional compare counted one more byte. **After a `.data`-only edit, hash
+  the object before calling a `.text` row a regression.**
+- **Quirk**: scanning blobs for contained symbols flags `g_data_restore_gap`
+  as "containing" ~40 of them. Not the same bug — that blob is a LENGTH-ONLY
+  pad whose content never ships (postlink overwrites `.data`, and split_link
+  substitutes a shorter `0x74a0` one). Only `g_crashdump_data_10027104` is a
+  content blob, so only its overlaps are real duplicates.
+- `RESIDUE_BASELINE` 8635 -> 8636, `DATA_BASELINE` 27,722 -> 26,372; both
+  rationales recorded in `gate.sh`. Gate green on all five checks.
+
 **Round-509 (data pass, round 3): the first `.data` win. Raw-link `.data`
 27,953 -> 27,722 (-231). `.text` 8,633 -> 8,635 (+2, deliberate).**
 

@@ -9,19 +9,14 @@
 
 char* __cdecl GetDebugRecordByIndex(char* arg1, unsigned int arg2);
 
-/* This TU's .data string pool copies of "\r\n" and " " (the same text
- * occurs earlier in .rdata, so content-scan binding would resolve to those
- * copies instead of the ones the local-array init reads here). */
-
-// DATA: SERVER 0x10027314
-char g_crash_newline[4] = {
-    0x0d, 0x0a, 0x00, 0x00,
-};
-
-// DATA: SERVER 0x10027328
-char g_crash_space[4] = {
-    0x20, 0x00, 0x00, 0x00,
-};
+/* "\r\n" and " ", at 0x10027314 and 0x10027328.  Both addresses fall INSIDE
+ * g_crashdump_data_10027104, which spans 0x10027104..0x1002733c and already
+ * carries these exact bytes at offsets 528 and 548.  The reference has ONE
+ * copy; defining them separately here emitted a second, and pushed every
+ * later symbol in the section.  Alias into the blob instead. */
+extern char g_crashdump_data_10027104[568];
+#define g_crash_newline (g_crashdump_data_10027104 + 528)
+#define g_crash_space   (g_crashdump_data_10027104 + 548)
 
 unsigned char __cdecl EmitCrashModuleLine(int* st)
 {

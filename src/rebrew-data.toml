@@ -488,7 +488,7 @@ status = "DRIFT"
 name = "g_str_10028888"
 section = ".data"
 type = "char[1]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10028b78"]
 name = "s_m_pool_get_free_tp_m_pool_10028b78"

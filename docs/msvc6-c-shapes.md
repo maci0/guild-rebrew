@@ -6764,3 +6764,97 @@ where the reference has it. Closing this needs the split-set machinery
 same mechanism already used for mapped `.text` sections. Left for a later round rather than
 bolted on; the `/INCLUDE:` probe was measured and reverted (`.data` 27,722 → 27,726, headers
 worse).
+
+## 151. A symbol defined twice: 8 duplicated bytes cost 1,350 (round 4 of the data pass)
+
+§150 read the linker map for one object. This round read it for **every** object, which turns
+the map into a classifier rather than a one-off diagnostic.
+
+### The per-object delta spread is the whole triage
+
+For each object, collect its annotated `.data` symbols and the set of deltas
+`built_va - reference_va`. **One delta means the object's internal layout is right and something
+upstream displaced it. More than one means the object itself emits the wrong number of bytes.**
+That single rule sorts the entire section:
+
+```
+object                              n   distinct deltas
+Error.c.obj                         4   {-0x4}                     <- fixed in §150, now uniform
+ErrorModule2.c.obj                  1   {0x30c}
+EmitCrashModuleLine.c.obj           2   {0x34, 0x44}               <- INTERNAL SPREAD
+ErrorModule.c.obj                   4   {0x14, 0x8c, 0x2c4}        <- INTERNAL SPREAD
+m_alloc2.c.obj                      9   {-0x68, -0x10, 0x4, 0x264} <- INTERNAL SPREAD
+gm_Open.c.obj                       6   {0x8cc, 0x8d0, 0x8d8, ...} <- INTERNAL SPREAD
+link_stubs.c.obj                   40   39 distinct                <- the stub file, by nature
+```
+
+`Error.c.obj` collapsing to a single `-0x4` is §150's fix showing up in the classifier, which is
+the confirmation that the rule reads true.
+
+### The bug: a symbol that exists twice
+
+`EmitCrashModuleLine.c` defined
+
+```c
+// DATA: SERVER 0x10027314
+char g_crash_newline[4] = { 0x0d, 0x0a, 0x00, 0x00 };
+// DATA: SERVER 0x10027328
+char g_crash_space[4]   = { 0x20, 0x00, 0x00, 0x00 };
+```
+
+Both VAs fall **inside** `g_crashdump_data_10027104`, which spans `0x10027104..0x1002733c` and
+already carries those exact bytes at offsets 528 and 548. The reference has **one** copy of
+each; we emitted a second. The fix is to alias into the blob rather than duplicate it:
+
+```c
+extern char g_crashdump_data_10027104[568];
+#define g_crash_newline (g_crashdump_data_10027104 + 528)
+#define g_crash_space   (g_crashdump_data_10027104 + 548)
+```
+
+### 8 bytes removed, 1,350 recovered — and why that is not a paradox
+
+Raw-link `.data` **27,722 → 26,372 (−1,350)**; positional match **51.6% → 54.0%**; present-but-
+misplaced **21,551 → 19,962**.
+
+The 8 bytes are not the win. Removing them shifts everything after the blob by −8, and that
+band of `.data` was sitting +8 away from its reference position — so one small deletion
+re-registered a long run of symbols that were **already correct in content**. This is §100's
+"present but misplaced" reserve being cashed: 88.8% of `.data`'s bytes are the right bytes, and
+any edit that moves a large block *toward* its reference offset converts a chunk of that reserve
+into positional matches at once.
+
+**The practical rule**, now demonstrated twice in opposite directions:
+
+| round | edit | size change | `.data` result |
+|---|---|---|---|
+| 508 | `loadsave3.c` filter cluster, correct scalar types | −37 | **+236 worse** |
+| 509 | `g_log_level_table` `int[12]` → `int[3]` | −36 | **−231 better** |
+| 510 | `g_crash_*` duplicates aliased into the blob | −8 | **−1,350 better** |
+
+Nearly identical magnitudes, wildly different outcomes. **Size is not the variable; position
+is.** Ask the map whether the symbols *after* the edit are displaced in the same direction the
+edit will move them. If yes, it pays, and the payoff scales with how much of the section sits
+downstream — not with the size of the edit.
+
+### Quirk: a `.text` byte that is not codegen
+
+`gm_AllocGebaeude` went 327 → 328 differing bytes, and its **object file is byte-identical**
+before and after (verified by md5). The function embeds `.data` addresses as immediates; the
+−8 shift moved them, and the positional `.text` compare counted one more differing byte. The
+compiler emitted exactly the same code.
+
+This is worth stating plainly because the residue table cannot distinguish the two cases, and
+"a function got worse" reads like a codegen regression. **When a `.text` row moves by a byte or
+two after a `.data`-only edit, hash the object before concluding anything.** Identical object =
+placement, and placement follows the data layout it points into.
+
+### Quirk: the gap blob overlaps ~40 real symbols, and that is correct
+
+Scanning every blob array for annotated symbols inside its span finds
+`g_data_restore_gap` "containing" about forty of them. That is **not** the same bug.
+`data_restore.c`'s blob is a LENGTH-ONLY pad whose content never reaches the output — postlink
+overwrites `.data` wholesale, and `split_link.sh` substitutes its own shorter `0x74a0` version
+for the split composition. Only `g_crashdump_data_10027104` is a content blob whose bytes ship,
+so only its overlaps are duplicates. A future audit of this class must check whether the blob's
+content is load-bearing before calling an overlap a defect.
