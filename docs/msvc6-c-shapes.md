@@ -5618,3 +5618,38 @@ So the 4-byte-per-read gap stays open, with its cause now stated precisely: **ms
 the accumulator.** The reference's form needs a *free* register at that point, which is an
 allocation state we do not reach — the same conclusion as sections 109, 120 and 128, reached
 from a different direction.
+
+## 130. The register-pressure cascade is one row's fact, not the tree's
+
+Sections 109, 120, 128 and 129 each closed a lead by attributing it to allocation state, and the
+phrase that recurs is that we commit more callee-saved registers than the reference, so its
+instruction forms are unreachable. Round 238 tested that directly, by comparing prologues rather
+than reasoning from downstream symptoms.
+
+| function | reference prologue | ours | claim |
+|---|---|---|---|
+| `CrashDumpUnhandledExceptionFilter` | `sub esp,0x280`, pushes `ebp esi` (**2**) | `sub esp,0x284`, pushes `ebx ebp esi` (**3**) | **true** |
+| `gv_ExAllocGraveyardWorker` | `sub esp,0x10`, `ebx ebp esi`, `edi` deferred to +0x0a | **byte-identical** | false |
+| `cm_ExCopyEntityData` | `sub esp,0xc`, `ebx ebp esi edi` | identical for 17 bytes | false |
+| `ahm_ExAllocAlchemist` | — | identical for 23 bytes | false |
+
+**Only `CrashDumpUnhandledExceptionFilter` actually commits a different register set.** On the
+other three the prologues match byte for byte — same registers, same frame, and on the Graveyard
+row even the same deferral of `edi` to +0x0a, which is a distinctive choice and a strong sign the
+allocator is in the same state we are.
+
+So section 81's frame rule is real but **local**: it is a fact about one function, and it was
+generalised into a tree-wide explanation. That matters for planning, because "the allocator is in
+a different state" is unfalsifiable at the point where it gets invoked, and it was being used to
+close leads on rows where the allocator demonstrably is *not* in a different state.
+
+The findings themselves stand — the `lea`/`add` fold (sections 122, 127), the zero-extend form
+(section 129), the loop shape (section 128) are all still measured losses. What changes is the
+*reason*: on those rows the divergence is a **local instruction-selection choice made from the
+same register state**, not a downstream consequence of a different prologue. That is a narrower
+and more hopeful conclusion, because instruction selection is driven by the expression shape
+reaching the selector, which is a source-level property — it simply has not been found yet.
+
+Method note worth keeping: **check the prologue before invoking allocation state.** It costs one
+`rebrew asm` and one probe disassembly, and it distinguishes a real cascade from a convenient
+explanation.

@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-489 (2026-09-14): tested the register-pressure explanation — it is
+ONE row's fact, not the tree's. Residue 8,652.**
+
+- §§109/120/128/129 each closed a lead by saying we commit more
+  callee-saved registers than the reference, so its forms are unreachable.
+  **Tested it directly by comparing prologues** instead of reasoning from
+  downstream symptoms.
+- **Only CrashDump is actually different**: reference `sub esp,0x280` with
+  **2** pushes (ebp/esi) against our `sub esp,0x284` with **3**
+  (ebx/ebp/esi). On the other three rows the prologues are **byte-identical**
+  — gv_ExAllocGraveyardWorker matches exactly, including the distinctive
+  deferral of `push edi` to +0x0a; cm_ExCopyEntityData for 17 bytes;
+  ahm_ExAllocAlchemist for 23.
+- **So §81's frame rule is real but LOCAL**, and had been generalised into a
+  tree-wide explanation. That matters because "the allocator is in a
+  different state" is unfalsifiable where it gets invoked, and it was
+  closing leads on rows where the allocator demonstrably is NOT in a
+  different state.
+- **The measured losses all stand** (lea/add fold §§122/127, zero-extend
+  §129, loop shape §128). What changes is the REASON: on those rows the
+  divergence is a **local instruction-selection choice made from the same
+  register state**, not a prologue cascade. That is narrower and more
+  hopeful — instruction selection follows the expression shape reaching the
+  selector, which is a source-level property not yet found.
+- Method note in §130: **check the prologue before invoking allocation
+  state.** One `rebrew asm` plus one probe disassembly separates a real
+  cascade from a convenient explanation.
+
 **Round-488 (2026-09-14): re-swept after the backward-jump fix; the
 Graveyard reload is uncacheable. Residue 8,652.**
 
