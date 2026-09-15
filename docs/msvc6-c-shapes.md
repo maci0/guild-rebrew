@@ -4477,3 +4477,32 @@ exercise must fix this line first.
 The blocking condition is precise and worth restating: a correct spelling that is **10 bytes
 longer**, or a resynchronised tail that absorbs the shortfall. Until then the bug stays, and it
 should stay *documented here*, not only in a comment 450 lines above the defect.
+
+### Round 214 correction: the size match is an accident of the bug
+
+The framing above — "being correct costs 10 bytes" — is misleading, and the instruction counts
+show why:
+
+| shape | instructions (ref 1056) | obj |
+|---|---|---|
+| shipped (buggy store) | 1054 — **2 short** | 3689 (**matches**) |
+| correct semantics | 1053 — **3 short** | 3679 (10 short) |
+
+Both shapes emit **fewer instructions than the reference**. The buggy `slot[9] = slot[0x166]`
+spelling loads from an absolute address, which emits one extra instruction worth ~10 bytes, and
+that coincidentally pads the object back to exactly 3689. **The size match is an artefact of the
+defect, not evidence that the shipped shape is right.**
+
+That inverts the correct reading of the deficit. It is not that correctness costs 10 bytes; it
+is that **the reference contains ~10 bytes of work we are not emitting anywhere**, and the wrong
+store has been masking that gap by accident. Chasing "a correct spelling 10 bytes longer" is
+therefore the wrong target — padding with a different wrong instruction would match the size
+just as accidentally.
+
+Where the missing work sits is already known. With correct semantics the first non-relocation
+divergence is still **+0xaa**, the section 109 scheduler sink, and the `jmp` at +0x85 carries
+displacement `0xc01` against our `0xbfc` — **exactly 5 bytes**, so the reference's jump target
+sits 5 bytes later than ours. Half the deficit is behind that one scheduling decision, which
+section 109 established C cannot request. (Relocation slots must be masked before reading any of
+this: unmasked, the first difference appears at +0x6d, which is only an unresolved `0x10035434`
+against zeros.)

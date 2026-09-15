@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-464 (2026-09-14): §110's framing was BACKWARDS — the size match is
+an accident of the bug. Residue 8,664.**
+
+- §110 said "being correct costs 10 bytes". The instruction counts refute
+  that: against the reference's **1056**, the shipped buggy shape emits
+  **1054** and the correct shape **1053**. BOTH are short. The buggy
+  `slot[9] = slot[0x166]` spelling needs an absolute load, which adds ~10
+  bytes and coincidentally pads the object back to exactly 3689.
+- **So obj 3689 is an artefact of the defect, not evidence the shape is
+  right.** The correct reading: the reference contains ~10 bytes of work we
+  do not emit ANYWHERE, and the wrong store has been masking the gap.
+  Chasing "a correct spelling 10 bytes longer" is the wrong target — it
+  would pad with a different wrong instruction and match the size just as
+  accidentally.
+- **Located half the deficit**: with correct semantics the first non-reloc
+  divergence is still **+0xaa** (the §109 scheduler sink), and the `jmp` at
+  +0x85 carries displacement **0xc01 against our 0xbfc — exactly 5 bytes**,
+  so the reference's jump target sits 5 bytes later. §109 already
+  established C cannot request that scheduling.
+- **Measurement note worth keeping**: relocation slots MUST be masked before
+  reading a first-divergence offset here. Unmasked, the first difference
+  appears at +0x6d, which is only an unresolved `0x10035434` against zeros —
+  not code. Masked (352 slots), the real first difference is +0xaa.
+- Corrected both §110 and the note at the defect site. Baseline 1004/3689
+  restored and re-verified; all probes reverted.
+- **The round-201 object-staleness guard earned its keep this round**: the
+  gate FAILED with "residue not measured" because `rebrew test` touches the
+  source file, leaving it newer than CMake's object. Without that guard the
+  residue step would have silently relinked a stale object and reported a
+  number that did not correspond to the tree. Re-running `cmake --build`
+  cleared it and the gate passed at 0x21d8. Worth remembering: a comment-only
+  edit still invalidates the object, and `rebrew test` alone does not refresh
+  it.
+
 **Round-463 (2026-09-14): surfaced a SHIPPED SEMANTIC BUG in
 gm_AllocSpieler and measured the cost of fixing it. Residue 8,664.**
 
