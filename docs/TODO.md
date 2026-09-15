@@ -49,6 +49,43 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-507 (data pass, round 1): the data-segment tooling was blind. Residue
+8,633 (unchanged, and expected to be).**
+
+- **`rebrew data --summary` reported `unknown 204 / annotated 0 / 0B`** against
+  a tree with 310 entries in `src/rebrew-data.toml` and 118 `// DATA:` markers.
+  That is not "0% coverage", it is **no measurement at all**, and every
+  data-segment claim made from it was uninformed. Three independent rebrew
+  defects, all fixed with tests (new §148):
+  1. `scan_globals` matched only `// GLOBAL:`; this tree uses `// DATA:`
+     exclusively, and `annotation.DATA_MARKERS` already treats them as one.
+  2. `_DECL_IDENT_RE` required a `;`, so it could not read a **definition with
+     an initialiser** (`char s_msg[] = "...";`, `char g_blob[568] = {`) — i.e.
+     exactly the globals whose bytes we emit. They became entries named
+     `unknown`.
+  3. Nothing consulted `rebrew-data.toml` when a marker had no declaration
+     under it (53 of 118 legitimately do not).
+  Now: **311 globals, 116 annotated**, `.data` 36, `.bss` 74, `.rdata` 5, and
+  `rebrew data --bss` yields a real 32-gap report. Zero unnameable globals.
+- **Re-measured the non-`.text` identity honestly.** Still copied, per §98:
+  the raw link is `.data` **48.7%** wrong, `.rdata` 10.3%, `.reloc` 19.2%,
+  headers 6.2% — 36,557 bytes the fixers blit from `layout/server.dll/`.
+- **Fixed a trap that had produced a wrong measurement this round**:
+  `postlink_residual.py --built build/server.dll` compares the *postlinked*
+  image and prints `.data` 0.0%, re-creating the self-certification round 450
+  removed. The script now **detects an already-postlinked input** (`.data`
+  byte-identical to the reference is impossible for a raw link) and says so on
+  stderr. The deliverable's raw link is `build/split_poc.dll`; run with no
+  `--built` to get it. `gate.sh`'s `--write` path is unaffected (verified).
+- **`.data` is 77% ordering, not content**: positional 51.3%, multiset ceiling
+  88.8%, so **21,551 of its 27,953 differing bytes are present but misplaced**.
+  Unlike rounds 453/454 there is no longer one dominant shift to cancel — the
+  bands drift in both directions (`+0xc4` over 359 chunks, `-0x28`, `-0x3e4`),
+  which means no single link-order move fixes it and the next win must come
+  from the missing-TU content §100 identified.
+- Gate green on all four checks: lint 187/187, 0 compile errors, 281 verified
+  (264 byte-matched), residue 8,633.
+
 **SESSION END (rounds 225-256). Residue 8,666 -> 8,633. Read this block
 first.**
 

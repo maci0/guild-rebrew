@@ -225,6 +225,23 @@ def main() -> int:
                 total += d
             print(f"  {name:9s} differing {d:#7x} of {span:#7x}"
                   f" ({100.0 * d / span:.1f}%)")
+        # Guard the guard.  This block only means anything when `built_path` is
+        # the RAW link.  `--write` rewrites its output in place, and the CMake
+        # POST_BUILD step does the same to build/server.dll, so pointing
+        # `--built` at an already-postlinked image makes every line below read
+        # 0.0% -- restoring precisely the self-certification this block was
+        # added (round 450) to prevent.  `.data` is blitted wholesale from the
+        # layout package, so a raw link matching it exactly is not a triumph,
+        # it is the tell that we are measuring the answer key.
+        _dr, _dvs, d_rp, d_rr = sr[".data"]
+        _sr2, _svs, d_sp, d_sr = ss[".data"]
+        if d_rr == d_sr and ref[d_rp : d_rp + d_rr] == pre[d_sp : d_sp + d_sr]:
+            print("  !! .data is byte-identical to the reference, which the raw link"
+                  " cannot produce.", file=sys.stderr)
+            print(f"  !! {built_path} looks ALREADY POSTLINKED, so the percentages"
+                  " below are meaningless.", file=sys.stderr)
+            print("  !! Pass the raw link instead (build/split_poc.dll), or run with"
+                  " no --built.", file=sys.stderr)
         h = min(sr[".text"][2], ss[".text"][2])
         hd = sum(1 for i in range(h) if ref[i] != pre[i])
         total += hd

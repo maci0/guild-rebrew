@@ -6367,3 +6367,132 @@ Two practical notes for whoever runs another:
 Taken with sections 145 and 146, both compiler-configuration axes are now closed on measured
 evidence: flags are flat wherever tested, and the toolchain choice has been swept across all
 eighteen rows with three pins found and no structural move left that could yield a fourth.
+
+## 148. The data-segment tooling was blind, and what it sees now (round 1 of the data pass)
+
+The round's brief was "data and other segments: types, structs". The first thing to measure was
+what the tools already knew, and the answer was **nothing** — `rebrew data --summary` reported
+
+```
+Section    Globals    Annotated     Bytes    % Coverage
+unknown        204            0    0B / —             —
+```
+
+204 globals, **zero** annotated, every one in section `unknown`, against a tree carrying 310
+entries in `src/rebrew-data.toml` (110 `.data`, 50 `.bss`, 33 `.rdata`, 84 `.idata`) and 118
+`// DATA:` markers in the sources. Three defects in `rebrew`, each of which independently
+zeroed the report:
+
+**1. `scan_globals` matched only `// GLOBAL:`.** This project spells every global `// DATA:`
+(118 markers, **zero** `GLOBAL:`), and rebrew treats the two as one concept everywhere else —
+`annotation.DATA_MARKERS` is `{"GLOBAL", "DATA"}` and `Annotation.is_data` accepts both. Only
+this one regex disagreed, so all 118 markers scanned as unannotated. Fixed by accepting either
+marker, which is what the rest of the codebase already assumes.
+
+**2. The identifier fallback could not read a definition with an initialiser.**
+`_DECL_IDENT_RE` required a `;` terminator:
+
+| declaration under the marker | old | new |
+|---|---|---|
+| `extern int g_x;` | `g_x` | `g_x` |
+| `char s_msg[] = "Unknown winsock error %u!!!";` | **None** | `s_msg` |
+| `char g_crashdump_data_10027104[568] = {` | **None** | `g_crashdump_data_10027104` |
+| `char g_t[4][8] = {` | **None** | `g_t` |
+
+A reversed source spells a global it *defines* with an initialiser, so the fallback failed on
+exactly the globals whose bytes we actually emit. Those became entries literally named
+`unknown`. The pattern now accepts repeated array extents and an `=` as well as a `;`.
+
+**3. Nothing consulted the metadata.** 53 of the 118 markers have no declaration beneath them —
+they annotate a global defined in another TU, or one the code only reaches by absolute address.
+Their name, type and section are already in `rebrew-data.toml`, which the scan never read. It
+now falls back to the metadata before giving up.
+
+The warning was also inverted: it fired on "no declaration on the following line", which is a
+*legitimate* shape here, and stayed silent when the global was genuinely unidentifiable. It now
+warns only when neither the source nor the metadata can name it — and on this tree that count is
+**zero**.
+
+After the three fixes, the same command reports:
+
+```
+Section    Globals    Annotated                   Bytes    % Coverage
+.data           36           36       39,708B / 57,344B         69.2%
+.rdata           5            5           17B / 11,905B          0.1%
+.bss            74           74    1,053B / 24,323,484B          0.0%
+unknown        196            1                  4B / —             —
+```
+
+311 globals, 116 annotated, attributed to real sections, and `rebrew data --bss` now produces a
+32-gap layout report instead of an empty one. The 196 remaining `unknown` are extern-only
+declarations with no VA (no annotation to place them), which is the honest reading, not a defect.
+
+**What this does and does not claim.** It buys no bytes. `.text` residue is unchanged at 8,633,
+and it was never going to move: this is the instrumentation for the data pass, not the pass.
+The point is that the previous number was not "0% coverage", it was *no measurement at all*, and
+the difference matters before anyone reasons about `.data` from it.
+
+### The non-`.text` identity is still copied — measured again, honestly
+
+Section 98 established this and it is worth re-measuring each time the pipeline changes, because
+the shipped artifact reports it away. `postlink_residual.py` on the deliverable prints
+
+```
+.data   differing 0x0    .rdata differing 0x0    .reloc differing 0x0    headers 0x0
+```
+
+and all four zeros are tautologies: the fixers blit `layout/server.dll/data.hex` and `reloc.hex`,
+which are verbatim reference slices, over those regions. The honest number is the raw link's,
+which the same script prints beneath (round 450 added this, and it is still correct):
+
+```
+raw link vs reference (pre-fixer -- what the build actually produces):
+  .text     differing  0x3872 of 0x23000 (10.1%)
+  .rdata    differing   0x4f4 of  0x3000 (10.3%)
+  .data     differing  0x6d31 of  0xe000 (48.7%)
+  .reloc    differing  0x1bab of  0x9000 (19.2%)
+  headers   differing    0xfd of  0x1000 (6.2%)
+  non-.text total the fixers overwrite: 0x8ecd (36557 bytes)
+```
+
+**A trap worth recording, because it cost this round a wrong measurement.** The script's
+`--built` argument is the *raw link*, and the CMake POST_BUILD step rewrites `build/server.dll`
+in place. Passing `--built build/server.dll` — which reads like the obvious thing to do, and is
+what `gate.sh` and `linktest.sh` pass, correctly, because they pair it with `--write` — makes the
+"pre-fixer" block compare the *postlinked* image against the reference and report `.data` 0.0%,
+i.e. the exact self-certification the block exists to prevent. The deliverable's real raw link
+is `build/split_poc.dll` (from `split_link.sh`); `.scratch/server.dll.prelayout` is the CMake
+link, a *different* composition. Run it with no arguments to get the right default.
+
+### `.data` and `.rdata` are placement-bound, restated with current numbers
+
+Section 100 measured this before the two link-order wins; the shape survives them:
+
+| section | positional | multiset ceiling | present-but-misplaced | differing |
+|---|---|---|---|---|
+| `.data` | 29,391 / 57,344 = **51.3%** | 50,942 = **88.8%** | **21,551** | 27,953 |
+| `.rdata` | 11,020 / 12,288 = **89.7%** | 12,201 = **99.3%** | **1,181** | 1,268 |
+
+The gap between the two columns is the content we already emit and put in the wrong place. For
+`.data` that is 21,551 bytes — **77% of its divergence is ordering, not missing content** — which
+is why §100's rule still holds: *emitting more correct content makes the number worse until the
+ordering is fixed*.
+
+Chunk-matching the built `.data` against the reference (32-byte windows, uniform runs skipped)
+localises the ordering into a handful of blocks rather than a uniform shift:
+
+```
+built [ 0x9e20, 0xa780] len 0x960  shift +0xc4
+built [  0x4c0,  0xdc0] len 0x900  shift -0x28
+built [ 0xce20, 0xd540] len 0x720  shift +0xc4
+built [ 0x2200, 0x2780] len 0x580  shift -0x3e4
+built [ 0x9780, 0x9c40] len 0x4c0  shift +0xc4
+```
+
+`+0xc4` dominates (359 of 950 located chunks), then `-0x28` and `-0x3e4`. This is the state
+*after* rounds 453/454 took the dominant displacement from `+0x7928` to `+0x20`: what is left is
+no longer one global offset that a single link-order move can cancel, but several bands drifting
+in **both** directions, which is the signature of size differences accumulating between them
+rather than one object sitting in the wrong place. A `+0xc4` band and a `-0x28` band cannot both
+be fixed by moving one object — the next `.data` win has to come from the content of whatever
+sits between them, and that is the missing-TU content §100 already identified.
