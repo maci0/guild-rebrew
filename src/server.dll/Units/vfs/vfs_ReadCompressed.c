@@ -73,6 +73,16 @@
  *     Shapes 86b does NOT apply -- its boundary requires the stores to
  *     differ in SOURCE order, and they do not; this is the scheduler sinking
  *     a stack cleanup, which C89 cannot express.
+ *     AMENDED round 188: the fixed point is the CLEANUP PLACEMENT, not the
+ *     argument reads.  A service-pack sweep found msvc-6.0-sp5-pp emits the
+ *     reference's tail verbatim (`8b5e5c / 8b542424 / 894650 / 8b442428 /
+ *     83c414`, i.e. pre-cleanup [esp+0x24]/[esp+0x28] with `add esp,0x14`
+ *     sunk four instructions) and its mismatch list ENDS at offset 395.
+ *     So group C is reachable -- just not from C89 under sp6.  Do not pin
+ *     sp5-pp: it scores 461/492 here because it wrecks the 270-360
+ *     midsection, and a per-function toolchain pin never reaches the linked
+ *     bytes anyway (the CMake compiler is fixed by the toolchain file).
+ *     See shapes 90.
  * Floor: 448/468 of 492 at real body 492 (= reference) and span 496.  Note
  * per shapes 88 that 496 is already the next multiple of 16 above 492, so
  * there is ZERO span headroom -- any edit adding one byte crosses to 512 and

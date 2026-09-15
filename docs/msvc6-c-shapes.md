@@ -3285,3 +3285,44 @@ and shifts everything after it — measured at match 450 -> 272. Five bytes reco
 for ~178 lost.
 
 `scripts/postlink_residual.py`
+
+## 90. Some "compiler fixed points" are service-pack decisions — sp5-pp as an oracle
+
+Two walls documented as compiler fixed points are reproduced *exactly* by a different
+MSVC6 service pack, without any source change. That reframes them: the reference's
+scheduling is reachable, our backend simply chose otherwise.
+
+A 3x8 sweep (`rebrew test --toolchain <name>`) over `msvc-6.0`, `sp1`-`sp5`, `sp5-pp`
+and `sp6`:
+
+- **Seven of the eight are byte-identical** on all three functions — same
+  `match_count`, same `obj_size`, identical mismatch lists. This is genuine codegen
+  stability, not a packaging duplicate: `C2.DLL` has five distinct md5s across those
+  images and `C1.DLL` four. It upgrades "SP1-SP6 byte-identical" from a one-function
+  anecdote to a measurement.
+- **`msvc-6.0-sp5-pp` is the outlier, and it reproduces two walls:**
+  - `vfs_ReadCompressed`'s stack-cleanup sinking. sp5-pp emits the reference's tail
+    verbatim — `8b5e5c / 8b542424 / 894650 / 8b442428 / 83c414` — reading args at the
+    pre-cleanup `[esp+0x24]`/`[esp+0x28]` with `add esp,0x14` sunk four instructions,
+    where sp6 leads with the cleanup. Its mismatch list *ends at offset 395*. So the
+    fixed point is the **cleanup placement**, not the argument reads — the earlier note
+    blaming the reads was aiming at the wrong thing.
+  - `cm_ExProdObjekt`'s global-load position. sp5-pp puts `mov edx,[global]` first at
+    +204 followed by `33c0 / 668b4514 / 8b5d16 / 8bc8 / 895c2418`, all identical to the
+    reference; sp6 sinks that load 13 bytes. First diff moves 205 -> 410.
+- **Two other walls are NOT version-sensitive**: `cm_ExProdObjekt`'s byte 410 (the
+  reference spends ebx, all 8 toolchains spend eax) and `m_AllocTracked`'s
+  double-materialisation. Those stay allocator-level.
+
+**Do not pin sp5-pp.** It is net-negative on all three functions (461/492, 722/991
+SIZE_MISMATCH, 266/634 SIZE_MISMATCH) because it wrecks other regions. And a
+per-function `toolchain` pin cannot change the deliverable anyway: the CMake build's
+compiler is fixed by the toolchain file, so a pin moves `rebrew test`/`verify` verdicts
+only — a divergence `rebrew cmake-flags` now reports rather than swallowing.
+
+The value is diagnostic: **sp5-pp is a cheap oracle for "am I fighting the scheduler or
+the source?"** If sp5-pp already emits the reference's shape for a region, no source
+spelling under sp6 is likely to, and the lane should be retired rather than probed.
+
+`src/server.dll/Units/vfs/vfs_ReadCompressed.c`,
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExProdObjekt.c`

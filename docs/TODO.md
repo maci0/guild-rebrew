@@ -49,6 +49,46 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-439 (2026-09-14): two "compiler fixed points" are service-pack
+decisions; a silent-divergence rebrew bug fixed. Residue 8,666.**
+
+- **The SP-sweep hypothesis was PARTLY VINDICATED, not retired.** The
+  standing claim "SP1-SP6 byte-identical" had been measured on ONE
+  function. A 3x8 sweep (three wall functions x eight 6.0 toolchains)
+  confirms seven of eight are byte-identical — same match_count, same
+  obj_size, identical mismatch lists — and that this is real codegen
+  stability, not packaging: C2.DLL has FIVE distinct md5s across those
+  images, C1.DLL four. Different compilers, identical output.
+- **`msvc-6.0-sp5-pp` reproduces TWO documented walls exactly**, with no
+  source change:
+  - vfs_ReadCompressed's stack-cleanup sinking — sp5-pp emits the
+    reference's tail verbatim (`8b5e5c / 8b542424 / 894650 / 8b442428 /
+    83c414`, pre-cleanup [esp+0x24]/[esp+0x28] with `add esp,0x14` sunk
+    four instructions) and its mismatch list ENDS at offset 395. So the
+    fixed point is the CLEANUP PLACEMENT, not the argument reads — the
+    earlier note blamed the wrong thing, and I amended it.
+  - cm_ExProdObjekt's global-load position — sp5-pp puts the load first
+    at +204 with the following five instructions identical to the
+    reference; first diff moves 205 -> 410.
+  Two other walls are NOT version-sensitive: ExProd's byte 410 (all eight
+  toolchains spend eax where the reference spends ebx) and Tracked's
+  double-materialisation. Those stay allocator-level.
+- **Do not pin sp5-pp**: net-negative on all three (461/492, 722/991
+  SIZE_MISMATCH, 266/634 SIZE_MISMATCH). The value is diagnostic — sp5-pp
+  is now a cheap ORACLE for "am I fighting the scheduler or the source?"
+  If sp5-pp already emits the reference's shape, no sp6 source spelling
+  will, and the lane should be retired rather than probed. New §90.
+- **rebrew bug fixed (silent divergence).** `cmake_flags.collect()`
+  resolved each function's effective toolchain and THREW IT AWAY
+  (`_tc, flags = ...`), emitting only flags. The CMake build's compiler
+  is fixed by the toolchain file, so a per-function `toolchain` pin moves
+  `rebrew test`/`verify` verdicts while the linked deliverable is built
+  by the global compiler — the same class as the CFLAGS bug that module's
+  own docstring describes (a function measured one score and linked 363
+  bytes behind). This tree has FIVE such pins, two naming plain
+  `msvc-6.0` against an sp6 build. Now reported as notes; regression test
+  verified red-then-green. Committed upstream as 0e99e4a.
+
 **Round-438 (2026-09-14): the two closest functions triaged to root cause;
 both retired. An audit artifact corrected. Residue 8,666.**
 

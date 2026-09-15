@@ -328,6 +328,15 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	 * costs matched-reloc 980 -> 966; link-tested at **+27**, so it is
 	 * rejected.  That also demonstrates the coupling empirically: clearing
 	 * the load order re-breaks the two stores.
+	 * AMENDED round 188: the transposition is service-pack-dependent, not a
+	 * compiler fixed point.  msvc-6.0-sp5-pp places the global load FIRST at
+	 * +204 (`8b15....` then `33c0 / 668b4514 / 8b5d16 / 8bc8 / 895c2418`,
+	 * all identical to the reference) and its first diff moves 205 -> 410.
+	 * Byte 410 is NOT version-sensitive: all eight 6.0 toolchains spend eax
+	 * where the reference spends ebx.  Do not pin sp5-pp -- it scores
+	 * 722/991 SIZE_MISMATCH here, and a per-function toolchain pin never
+	 * reaches the linked bytes (the CMake compiler is fixed by the toolchain
+	 * file).  See shapes 90.
 	 * Note per shapes 88 there is no span deficit -- real body 993 equals
 	 * the reference and any body of 993..1008 holds the 1008 span, giving
 	 * 15 bytes of unused slack.  Do not re-probe without a new
