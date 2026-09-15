@@ -3785,3 +3785,42 @@ header.** The DOS stub runs straight from the standard message to the PE signatu
 stubs are byte-identical across all 0x80 bytes. So the exact MSVC build IDs cannot be
 recovered from file metadata, and the compiler-identity question stays where section 92 left
 it — answerable only from emitted bytes.
+
+## 99. The measuring script and the shipping pipeline had drifted apart
+
+Section 98 found that `scripts/postlink_residual.py` zeroed 638 real emitted bytes in the
+`.text` raw tail while `rebrew postlink` shipped them. Round 200 chased that to the end, and
+the two halves of the answer are worth keeping together.
+
+**Fixed: the `.text` overshoot (638 bytes).** `_fix_data`'s tail trim starts at the
+reference's **raw** size (0x23000), so anything the link emitted between the reference's
+**VirtualSize** (0x22846) and that point survived — here a stub DllMain
+`6a 01 58 c2 0c 00` plus ~100 `ff 25` IAT thunks the original build dead-stripped. The
+script normalised the span for its own measurement, so the residue number looked clean while
+the shipped binary carried the bytes. Now zeroed in the fixer: verified on the real binary,
+638 nonzero → **0**.
+
+The guard turned out to matter more than the fix. My first attempt zeroed that span
+unconditionally and broke two existing tests — correctly, because **when the built `.text`
+does *not* overshoot, that region is the reference's own section padding, which real linkers
+fill with `0xCC`, not zeros.** Zeroing it would corrupt an already-matching build. The fix now
+acts only when `built .text VirtualSize > reference VirtualSize`.
+
+**Not fixable: the 3 stale operands (12 bytes).** The script also recovers operands whose
+surrounding instruction is byte-identical but whose value is stale (our
+`cmp eax,0x117f65b4` against the reference's `cmp eax,0x10139820`), using a locality test —
+twelve bytes either side must match outside other operand slots. Its own comment says "those
+are the fixer's job". They cannot be: that test needs the reference's `.text` bytes, and the
+layout package is designed to hold **zero binary bytes at rest** — `prefix.hex` is the
+`.rdata` prefix, not `.text`. I implemented it, measured it doing nothing, and reverted.
+
+So `rebrew postlink` lands at 8,678 differing bytes against the script's 8,666, and the
+remaining 12 are structural: closing them would mean shipping reference `.text` bytes inside
+the layout package, which defeats its purpose. **The right reading is that 8,666 is the
+script's number and 8,678 is the pipeline's**, and the gap is now understood rather than
+invisible.
+
+General lesson, which is why this is worth a section: **a measuring tool that "normalises"
+anything has forked from the thing it measures.** Every such normalisation is a silent claim
+that the pipeline will do the same, and that claim needs a test or it drifts. Two existed
+here; one was a real bug and one was load-bearing by design.

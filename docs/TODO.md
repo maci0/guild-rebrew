@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-451 (2026-09-14): fixed the measure-vs-ship divergence §98 found.
+Residue 8,666 (script) / 8,678 (pipeline, now understood).**
+
+- **rebrew bug #6 fixed: `postlink` shipped 638 bytes the reference does not
+  have.** `_fix_data`'s tail trim starts at the reference's RAW size, so
+  code the link emitted between the reference's VirtualSize (0x22846) and
+  0x23000 survived — a stub DllMain plus ~100 `ff 25` IAT thunks. The
+  measuring script zeroed that span for its own output, so the residue
+  number looked clean while the deliverable carried the bytes. Verified on
+  the real binary: 638 nonzero -> **0**. Upstream `fd842e8`.
+- **The guard mattered more than the fix.** My first attempt zeroed the span
+  unconditionally and broke two existing tests — correctly: when the built
+  `.text` does NOT overshoot, that region is the reference's own padding,
+  which real linkers fill with **0xCC**, and zeroing it would corrupt a
+  matching build. Now gated on `built vs > reference vs`.
+- **The other 12 bytes are structurally unfixable, and I proved it rather
+  than assuming.** The script also recovers 3 stale operands via a locality
+  test (12 bytes either side must match), and its own comment says "those
+  are the fixer's job". They cannot be: the test needs the reference's
+  `.text` bytes, and the layout package is designed to hold ZERO binary
+  bytes at rest (`prefix.hex` is the `.rdata` prefix, not `.text`). I
+  implemented it, measured it doing nothing, and reverted.
+- So the two paths legitimately differ: **8,666 is the script's number,
+  8,678 the pipeline's**, and the 12-byte gap is now understood instead of
+  invisible. New §99.
+- General lesson recorded: a measuring tool that "normalises" anything has
+  forked from the thing it measures. Each normalisation is a silent claim
+  the pipeline does the same, and needs a test or it drifts. Two existed
+  here — one a real bug, one load-bearing by design.
+
 **Round-450 (2026-09-14): audited the whole FILE, not just .text. The
 non-.text identity is COPIED, not produced. Residue 8,666.**
 
