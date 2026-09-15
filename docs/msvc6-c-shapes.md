@@ -5327,3 +5327,55 @@ as sections 92, 107 and 122.
 So the extra jump is real and localised, but not reachable by restructuring the conditional.
 The window is recorded for whoever attacks that row next: **19 bytes, one surplus byte, at
 +0x4c3**.
+
+## 124. Drift sweep across the remaining rows, and a build-state trap
+
+Round 232 ran `scripts/drift_windows.py` (section 123) across the rows it had not seen. The
+useful output is a set of localised windows for future work:
+
+| function | window | drift |
+|---|---|---|
+| `cm_ExCopyEntityData` | `[0x130, 0x165)` | **-9** |
+| `cm_ExCopyEntityData` | `[0x152, 0x15d)` | **-4** → so ~5 bytes short in `[0x130, 0x152)` |
+| `CrashDumpUnhandledExceptionFilter` | `[0x11c, 0x679)` | -9 |
+| `ServerMainThread` | `[0x406, 0x55c)` | +1 |
+| `gv_ExAllocGraveyardWorker` | `[0x128, 0x187)` | -156 |
+
+**The `cm_ExCopyEntityData` window resolved to a known shape.** Disassembling the 34 bytes shows
+our stream is byte-identical to the reference through +0x152; the shortfall is the *clamp*. The
+reference emits **both arms inline** with a shared store:
+
+```
+0x1000ed4d  jle  0x1000ed56
+0x1000ed4f  cmp  eax, 0x7f
+...
+0x1000ed56  b881ffffff  mov eax, 0xffffff81     <- low arm, inline
+0x1000ed5b  eb05        jmp 0x1000ed62
+0x1000ed5d  b87f000000  mov eax, 0x7f           <- high arm, inline
+0x1000ed62  88040a      mov byte ptr [edx+ecx], al
+```
+
+We branch away to an out-of-line low-clamp instead, which is 9 bytes shorter. Two spellings were
+measured at the link and both rejected: rewriting it as the reference's two-arm
+`if (val <= -0x7f) … else if (val >= 0x7f)` costs **+3**, and swapping the arms while keeping the
+in-range guard costs **+76,125** — that second one changed the semantics, and the damage spread
+across thirteen functions, which is exactly what a semantic break looks like in this metric.
+
+**The build-state trap is the more important finding.** After reverting that bad edit, a clean
+source tree still measured 57.7% residue, and a full `find -name '*.obj' -delete` plus rebuild
+did not fix it. The give-away was in `split_link.sh`'s own output:
+
+```
+placed split symbols: 319
+exactly at their reference VA: 0        <- should be 246
+```
+
+The stale artefact was **`build/split_poc/`**, the split-link workspace — deleting the CMake
+objects orphans it, and it is not regenerated on its own. `rm -rf build/split_poc` followed by
+`scripts/split_link.sh` restored `exactly at their reference VA: 246` and residue 8,652
+immediately.
+
+So the recovery procedure, in order, when residue is wildly wrong and the source is clean:
+**(1)** check `git status`; **(2)** rebuild objects; **(3)** check `exactly at their reference
+VA` in the link log — if it is 0, **`rm -rf build/split_poc`** and relink. Step 3 is the one that
+is easy to miss, because every other signal points at the source.

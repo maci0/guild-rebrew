@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-483 (2026-09-14): drift sweep over the remaining rows; recovered
+from a corrupted split-link workspace. Residue 8,652.**
+
+- Ran `drift_windows.py` across the rows §123 had not seen. Localised
+  windows recorded in §124 for future work: **cm_ExCopyEntityData
+  [0x130,0x165) = -9** (with an inner [0x152,0x15d) = -4, so ~5 bytes short
+  in [0x130,0x152)), CrashDump [0x11c,0x679) = -9, ServerMainThread
+  [0x406,0x55c) = +1, Graveyard [0x128,0x187) = -156.
+- **The ExCopyEntityData window resolved to the clamp.** Our stream is
+  byte-identical through +0x152; the reference emits **both clamp arms
+  inline** with a shared store (`mov eax,-0x7f; jmp; mov eax,0x7f; store`),
+  while we branch away to an out-of-line low-clamp — 9 bytes shorter.
+- **Two spellings measured, both rejected**: the reference's two-arm
+  `if (val <= -0x7f) … else if (val >= 0x7f)` = **+3**; swapping the arms
+  while keeping the in-range guard = **+76,125** across thirteen functions.
+  That second one CHANGED THE SEMANTICS — and the blast radius is what a
+  semantic break looks like in this metric.
+- **Build-state trap, and it cost most of the round.** After reverting the
+  bad edit a CLEAN source tree still measured 57.7%, and deleting every
+  object and rebuilding did NOT fix it. The give-away was in split_link's
+  own output: `exactly at their reference VA: 0` (should be 246). The stale
+  artefact was **`build/split_poc/`** — deleting the CMake objects orphans
+  that workspace and it is not regenerated on its own.
+  `rm -rf build/split_poc` + relink restored 246 and residue 8,652.
+- **Recovery order recorded in §124** for when residue is wildly wrong and
+  the source is clean: (1) `git status`; (2) rebuild objects; (3) **check
+  `exactly at their reference VA` in the link log — if 0, `rm -rf
+  build/split_poc` and relink.** Step 3 is easy to miss because every other
+  signal points at the source.
+
 **Round-482 (2026-09-14): scripted §122's technique — it is much sharper
 than the manual version. Residue 8,652.**
 
