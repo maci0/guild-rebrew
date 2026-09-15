@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-455 (2026-09-14): characterised `.rdata` and `.reloc` — both are
+DOWNSTREAM, not independently attackable. Residue 8,664.**
+
+- **`.rdata`'s entire 1,268-byte residue is the import table**, in five
+  clusters: the IAT at +0x0070 (297B), a partly-matching thunk array at
+  +0x2614 (90B), the OriginalFirstThunk array at +0x26dc (319B, identical
+  reference content to the IAT because they are copies of one list), and
+  the hint/name table at +0x2a06 (1,074B = 85%). I resolved the dwords to
+  confirm: they are RVAs pointing at the name entries in the largest
+  cluster.
+- **The import STRUCTURE is already correct**, which rules out the
+  link-order lever that paid 7,208 bytes on `.data`: DLL order matches
+  (KERNEL32/USER32/WS2_32/WINMM) and KERNEL32's 81 symbols are **81/81
+  positionally equal**. Only the name strings' placement inside the pool
+  differs, and each moves by its own amount (-0x1ac, -0xb4, -0x282,
+  +0x3c2), so there is no uniform displacement to remove. New §103.
+- **`.reloc` is a readout, not a fault**: our VirtualSize is 0x8370 against
+  the reference's 0x10374 — **less than half** — with 7 reference pages
+  missing outright (350 of 3,526 entries), and they are overwhelmingly
+  `.data` pages (0x029000, 0x02c000 with 212 entries, 0x031000, 0x033000,
+  0x034000). A missing reloc page means we do not emit the pointers that
+  live there, which is the same content gap §100 found (288 absent strings
+  from stubbed TUs). It will shrink as `.text`/`.data` do.
+- Net: the link-order lane is **exhausted for now**. `.data`'s remaining
+  0x6d33 is content (missing TUs), `.rdata` is import layout downstream of
+  `.text`, `.reloc` is downstream of both. The cheap uniform-displacement
+  wins were rounds 202-204 and they are banked.
+
 **Round-454 (2026-09-14): second link-order win — `.data` -1,200 more,
 `.text` 8,665 -> 8,664. Link order has now paid 7,208 bytes total.**
 

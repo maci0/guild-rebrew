@@ -4017,3 +4017,67 @@ The general rule, which generalises past this project: **an object whose only jo
 COMDAT name, or to pad a length, should be placed as late as its job allows.** Both objects
 here were placed at the extreme (token 1) when the requirement was merely "before the first
 competitor" or "anywhere at all", and each cost the section's whole prefix.
+
+## 103. `.rdata`'s whole residue is the import table, and the symbol order is already correct
+
+`.rdata` was never characterised before round 205. It has **1,268 differing bytes in only five
+clusters**, and all of them are one structure:
+
+| cluster | size | RVA | what it is |
+|---|---|---|---|
+| `+0x0000` | 2 B | — | trivial |
+| `+0x0070` | 297 B | 0x24070 | inside the **IAT** (dir 0x24000, size 0x1a0) |
+| `+0x2614` | 90 B | 0x26614 | thunk array, partly matching |
+| `+0x26dc` | 319 B | 0x266dc | **OriginalFirstThunk** array (same reference content as +0x0070) |
+| `+0x2a06` | 1074 B | 0x26a06 | **import hint/name table** |
+
+Resolving the dwords settles it: `+0x0070`'s entries are RVAs into `.rdata` pointing at
+`0x00026bb2 -> "\x50\x01GetStartupInfoA"`, `0x00026acc -> "\x9f\x01HeapFree"` and so on — the
+thunk arrays point at the very hint/name entries in the largest cluster. `+0x0070` and
+`+0x26dc` hold identical reference content because an IAT and its OriginalFirstThunk array are
+copies of the same list. **So 85% of `.rdata`'s gap is the name table and the remaining 15% is
+the two thunk arrays that index it.**
+
+**What is NOT wrong, checked directly:**
+
+- The **DLL order matches**: `KERNEL32.dll, USER32.dll, WS2_32.dll, WINMM.dll` on both sides.
+- The **symbol order matches exactly** — walking KERNEL32's thunk array on both sides gives the
+  same 81 names in the same positions, **81/81 positionally equal**, same set.
+
+So the raw link already produces the correct import *structure*; what differs is only **where
+each name string lands inside the name table**. And the strings are not block-displaced the way
+`.data`'s were — each moves by its own amount (`GetStartupInfoA` -0x1ac, `HeapFree` -0xb4,
+`GetLocalTime` -0x282, `timeGetTime` +0x3c2), so this is an internal permutation of the name
+pool, not a section-prefix problem.
+
+That matters for effort allocation: **the link-order lever that paid 7,208 bytes on `.data`
+does not apply here.** `.data`'s wins came from uniform displacements caused by an object
+sitting at the head of the section; `.rdata`'s residue has no uniform component to remove. The
+name-pool layout is chosen by LINK from the order symbols are *first referenced*, which is a
+property of the whole `.text` link rather than of any one object's position — and postlink's
+`imports` fixer already produces the correct bytes in the shipped binary, which is why the
+import table is byte-identical there (4 DLLs, 100 symbols, verified in section 98).
+
+Practical conclusion: `.rdata` is the *closest* non-`.text` section (1,268 bytes, 10.3%) but it
+is **not the cheapest** — it is import-table layout, downstream of reference order in `.text`,
+and it will likely converge on its own as `.text` does rather than repay direct attack.
+
+**`.reloc` is downstream too, and the evidence is unambiguous.** Our `.reloc` VirtualSize is
+`0x8370` against the reference's `0x10374` — **less than half** — with 41 relocation blocks
+against 44. Seven reference pages are missing entirely, and they are overwhelmingly `.data`
+pages:
+
+```
+page 0x025000    6 entries        page 0x02c000  212 entries
+page 0x026000   14 entries        page 0x031000   16 entries
+page 0x029000   16 entries        page 0x033000   28 entries
+page 0x034000   58 entries        (350 entries of the reference's 3,526)
+```
+
+A `.reloc` entry exists for every absolute address the image needs fixed up at load time, so a
+missing page means **we are not emitting the pointers that live on it**. Those pages sit in
+`.data` (RVA ≥ 0x27000), which is precisely the section section 100 showed is still missing 288
+strings' worth of content from stubbed translation units. `.reloc` therefore cannot be attacked
+directly: it is a *readout* of what `.text` and `.data` contain, and it will shrink toward the
+reference exactly as those do. Of the 37 pages we do emit, only 12 have identical entry counts,
+which is the same story at finer grain.
