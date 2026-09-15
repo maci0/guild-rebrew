@@ -49,6 +49,50 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**SESSION END (rounds 225-256). Residue 8,666 -> 8,633. Read this block
+first.**
+
+**State.** `build/server.dll` is **286,720 bytes** — the reference's exact
+size — with **8,633 differing bytes, ALL inside `.text`** and none in
+headers, imports, exports, `.rdata`, `.data` or `.reloc`. 264 functions
+byte-matched (31 EXACT + 233 RELOC), 17 PROVEN (all with non-zero deltas,
+verified individually in round 498), 19 rows unmatched. Gate passes on all
+four checks. 6 live `__asm` blocks, zero `__declspec(naked)`.
+
+**What moved this session (33 bytes, four landings).**
+- +2 link-order (rounds 202/204), **+12** the CrashDump statement hoist
+  (§116), **+11 / +4 / +4** the three sp5-pp per-file pins (§§142/144).
+- Everything else measured and reverted. That is the expected ratio here.
+
+**What the remaining 8,633 IS — the most useful fact in this file (§141).**
+Eight rows carry 85% of it, and their **net instruction difference is 15**.
+Three rows differ by **exactly zero** instructions yet hold 1,383 bytes.
+~492 differing bytes per net instruction difference. **The tree is
+semantically and structurally converged**; what remains is instruction ORDER
+(scheduler interleaving of argument pushes, 4 functions — §§122/127/140) and
+register CHOICE (§§135/136/137). **The path to 0 does not run through better
+C.**
+
+**Closed axes — do not re-open without new evidence.**
+- **Flags**: flat, six for six, 24 to 2,824 residual bytes (§§106/147).
+- **Toolchain**: all 18 rows swept under both generators; 3 pins found;
+  file-splitting evaluated and yields nothing (§§145/146).
+- **The zero-extend idiom**: nine spellings across two rows (§§129-135).
+- **srv_LoadBuf**: every reordering a C author can express, per its header.
+
+**Tools built here**: `scripts/drift_windows.py` (localise a byte fault from
+branch displacements, with nested subtraction — §§123/138), three new guards
+in `linktest.sh` (composition collapse §125, silent no-op §127), residue
+guard in `gate.sh`. Upstream: `/REBREW_TOOLCHAIN:` per-file pin flag
+(`821d5bb`), `xrefs --calls-from` (`bbf63f4`), postlink overshoot fix,
+`--timeout-min` threading.
+
+**If continuing**: the honest next step is not another C spelling. It is
+either (a) accepting 8,633 as the C-reachable floor for this toolchain, or
+(b) investigating whether a different msvc6 *build* (not service pack —
+those are three generators, §92) schedules pushes as the reference does.
+Every cheaper avenue is closed and documented above.
+
 **Round-506 (2026-09-14): flag landscape checked on a sixth row — still
 flat. Residue 8,633.**
 
