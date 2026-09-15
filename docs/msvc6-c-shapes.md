@@ -4176,3 +4176,40 @@ Two measurement traps from the same lane, both worth avoiding:
   `GAP` silently produced a 290,816-byte image and a false `.data` figure; re-sweeping
   `0x74a0` -> `0x732f` restored the exact 286,720 geometry. Any `.data` measurement taken
   without that check is void.
+
+## 105. The GA flag sweep, finally run — and why it says nothing new
+
+The objective names `rebrew match`, but no run of it had ever produced a result in this
+session: two attempts hung and were killed. The cause was a tool bug, now fixed upstream
+(`8820f1e`).
+
+**The bug:** `--timeout-min` was applied only around the GA run. `--flag-sweep-only` returns
+before reaching that code, so the flag was **silently inert on exactly the path where it
+matters** — a `targeted` tier is thousands of combinations and `thorough` is 258k. Measured
+here: `--timeout-min 6` was still running after 13 minutes with an empty output file;
+`--timeout-min 2` was still going at 7 minutes. With a cooperative deadline threaded through
+`flag_sweep` → `run_flag_sweep` → `_run_single_flag_sweep` → the CLI, the same command
+finishes in **126 seconds** and writes its JSON report.
+
+**The result, on `gm_CalculateProductionValue` (the 5-byte row):**
+
+```
+tier targeted, 20 flag combinations evaluated
+best_score 7500.0   best_flags "/G3 /Gd /Oy"   exact false
+... and all 20 combinations score exactly 7500.0
+```
+
+A perfectly flat landscape: `/G3`, `/G3 /Gd`, `/G3 /Oy`, `/G3 /Gd /Oy` and the empty set all
+score identically. That is independent confirmation of what section 92 concluded from the
+bytes — this row's residue is an **x87-stack allocator decision**, and no flag reaches it.
+A flat sweep is a genuinely useful negative: it separates "we have not found the flag" from
+"no flag exists", and this is the latter.
+
+Two practical notes for anyone running the engine here:
+
+- **Always pass `--timeout-min`** — and now it works. Without a bound, a sweep on a
+  multi-function file will outlive any wrapper `timeout` you put around it, because the
+  compiles it spawns survive the signal.
+- The sweep is per-*function* via `--va`, but it still compiles the whole translation unit
+  each time, so cost scales with the file, not the function. `spiel622.c` (16 functions) takes
+  ~6 s per combination.

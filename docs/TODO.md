@@ -49,6 +49,30 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-457 (2026-09-14): fixed rebrew bug #7 and finally got a GA result.
+Residue 8,664.**
+
+- **`--timeout-min` was silently inert on `--flag-sweep-only`.** The deadline
+  was computed inside the GA path only, and the flag-sweep path returns
+  before reaching it, so the sweep ran unbounded. Two runs this session had
+  to be killed (13 min at `--timeout-min 6`, 7 min at `--timeout-min 2`,
+  both with empty output). Threaded a cooperative deadline through
+  `flag_sweep` -> `run_flag_sweep` -> `_run_single_flag_sweep` -> the CLI:
+  the same command now finishes in **126 s** and writes its JSON.
+  Upstream `8820f1e`. The batch call site passes the kwarg only when set, so
+  the two existing tests that monkeypatch `run_flag_sweep` still work.
+- **First GA result of the session**, on gm_CalculateProductionValue: 20
+  combinations, **all scoring exactly 7500.0** — `/G3`, `/G3 /Gd`,
+  `/G3 /Oy`, `/G3 /Gd /Oy` and the empty set are indistinguishable. A flat
+  landscape independently confirms §92's byte-level finding that this row is
+  an x87-stack allocator decision no flag reaches. New §105.
+- Worth keeping: a flat sweep separates "we have not found the flag" from
+  "no flag exists" — this is the latter, so the row stays closed.
+- Note for future runs: the sweep is per-function via `--va` but recompiles
+  the whole TU each time, so cost scales with the FILE (spiel622.c, 16
+  functions, ~6 s per combination), and a wrapper `timeout` will not contain
+  it because the spawned compiles outlive the signal.
+
 **Round-456 (2026-09-14): answered "would inlining help?" — NO, measured.
 Link-order lane closed with its blocker named. Residue 8,664.**
 
