@@ -5653,3 +5653,47 @@ reaching the selector, which is a source-level property — it simply has not be
 Method note worth keeping: **check the prologue before invoking allocation state.** It costs one
 `rebrew asm` and one probe disassembly, and it distinguishes a real cascade from a convenient
 explanation.
+
+## 131. The Graveyard zero-extend is closed: four spellings, none reaches `xor`+`mov r16`
+
+Section 130 narrowed these divergences from "allocator cascade" to "local instruction-selection
+choice made from the same register state", which implies a source-level lever must exist.
+Round 239 tested that implication on the sharpest case — `gv_ExAllocGraveyardWorker`'s 16-bit
+read, where the reference uses 6 bytes and we use 10:
+
+```
+reference  0x10011f27  33c9      xor ecx,ecx
+           0x10011f2b  668b4d00  mov cx,word ptr [ebp]
+           0x10011f2f  8d3c31    lea edi,[ecx+esi]
+ours       +0x0332     mov si,word ptr [ebp]
+           +0x0336     and esi,0xffff
+```
+
+Reading the reference in context (re-anchored, after `rebrew asm` mid-instruction output
+produced convincing garbage — section 112's rule) shows `xor esi,esi` initialising the loop
+counter, so `lea edi,[ecx+esi]` sums *id + counter* into a third register.
+
+Four distinct source spellings have now been measured against it:
+
+| spelling | link delta |
+|---|---|
+| operand order `id + n`, matching `lea [ecx+esi]` | **+0** |
+| explicit `(unsigned int)` widening on the read | **+0** |
+| cache the id in an `unsigned short` local (round 237) | **+117** |
+| narrow the accumulator type only (round 237) | **+0** |
+
+Three are canonicalised away and the fourth is a large loss. **The reference's form is not
+reachable from this expression by any spelling tried**, which is now a measured statement rather
+than an appeal to allocator state.
+
+What distinguishes the two forms is which register receives the widened value: `xor`+`mov r16`
+needs a register that is *dead* at that point, while `and reg,0xffff` widens in place. Both
+compile from the same C; msvc6 picks by what is free. Since section 130 established the register
+state here is identical to the reference's, the remaining difference must come from **what else
+is live across the read** — i.e. from code outside this expression, which is why editing the
+expression cannot move it.
+
+The practical rule, and the reason to record a closed lead in full: **when three or more distinct
+spellings of the same intent all canonicalise to identical bytes, the lever is not in that
+expression.** Stop rewriting it and look at what surrounds it. Sections 122, 126, 127 and 129 all
+ended the same way, and naming the pattern is cheaper than rediscovering it a fifth time.

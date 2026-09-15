@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-490 (2026-09-14): closed the Graveyard zero-extend with four
+measured spellings. Residue 8,652.**
+
+- §130 implied a source lever must exist for these "local
+  instruction-selection" divergences. **Tested that on the sharpest case**:
+  the Graveyard 16-bit read, reference 6 bytes
+  (`xor ecx,ecx; mov cx,[ebp]`) against our 10
+  (`mov si,[ebp]; and esi,0xffff`).
+- Re-anchored the reference first — `rebrew asm` starting mid-instruction
+  produced convincing garbage again (§112). In context, `xor esi,esi`
+  initialises the loop counter and `lea edi,[ecx+esi]` sums id + counter
+  into a third register.
+- **Four distinct spellings now measured**: operand order `id + n` matching
+  the `lea` = **+0**; explicit `(unsigned int)` widening = **+0**; caching
+  the id in an `unsigned short` local = **+117** (round 237); narrowing the
+  accumulator = **+0** (round 237).
+- **So the reference's form is unreachable from this expression** — a
+  measured statement now, not an appeal to allocator state. The two forms
+  differ by which register receives the widened value: `xor`+`mov r16` needs
+  a register DEAD at that point, `and reg,0xffff` widens in place. Since
+  §130 showed the register state matches the reference's, the difference
+  must come from **what else is live across the read**, i.e. code outside
+  the expression.
+- **Rule recorded in §131**: when three or more distinct spellings of the
+  same intent all canonicalise to identical bytes, the lever is not in that
+  expression — stop rewriting it and look at what surrounds it. §§122, 126,
+  127 and 129 all ended this way; naming the pattern is cheaper than
+  rediscovering it a fifth time.
+
 **Round-489 (2026-09-14): tested the register-pressure explanation — it is
 ONE row's fact, not the tree's. Residue 8,652.**
 
