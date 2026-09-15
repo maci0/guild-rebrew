@@ -4320,6 +4320,27 @@ and the residue is an artefact. **That reading is wrong**, and the tool itself s
 next sentence: *"Most of the delta sits at relocation sites, but 17 real byte(s) differ — the
 match is NEAR_MATCHING-level, not RELOC."*
 
+**Round 211 pinned the exact mechanism**, because three rows disagree in *both* directions
+(56 vs 28, 36 vs 24, but 13 vs 15) and a one-way masking story cannot explain a sign flip.
+Ground truth on `cm_ProcessCommandQueue`, computed directly from the object and the reference:
+**75 raw differing bytes**, which `rebrew test` masks down to 15 and `near-diag` reports as 13.
+
+The cause is that the two tools count in **different units**:
+
+- `rebrew test` counts **individual differing bytes** after masking relocation slots.
+- `near-diag` walks aligned instruction pairs and adds each differing instruction's **whole
+  size** to a category (`reloc`, `register`, `encoding`, `equivalent`, `structural`), so one
+  mismatching 6-byte instruction contributes 6 to the total even if a single byte differs — and
+  contributes 0 to "real bytes" if it happens to carry a relocation, even when non-relocated
+  bytes inside it also differ.
+
+That is why the sign can flip: instruction-granular accounting over-counts a row whose
+differences are spread across long instructions (`gm_ObjectsAvailble`, 56 vs 28) and
+under-counts one whose differing bytes cluster inside relocated instructions
+(`cm_ProcessCommandQueue`, 13 vs 15). Neither tool is wrong; they answer different questions.
+**Use `rebrew test`'s number for "how many bytes differ" and `near-diag`'s categories for
+"what kind of difference is it".**
+
 The two numbers are different rulers over the same object, exactly as section 96 warned:
 
 - `rebrew test` reports the delta **after masking relocation slots** — 17 on `cm_ExProdObjekt`,

@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-461 (2026-09-14): chased the near-diag/test disagreement to its
+mechanism — different UNITS, not a bug. Residue 8,664.**
+
+- §108 left three rows where the two tools disagreed, and one flipped sign
+  (gm_ObjectsAvailble 56 vs 28, vfs_ReadCompressed 36 vs 24, but
+  cm_ProcessCommandQueue **13 vs 15**). A sign flip cannot be explained by
+  one tool simply masking more, so it was worth chasing.
+- **Computed ground truth directly** from the object and the reference on
+  cm_ProcessCommandQueue: **75 raw differing bytes**, which `rebrew test`
+  masks to 15 and near-diag categorises as 13.
+- **Mechanism**: `rebrew test` counts INDIVIDUAL DIFFERING BYTES after
+  masking reloc slots; near-diag walks aligned instruction pairs and adds
+  each differing instruction's WHOLE SIZE to a category, so a mismatching
+  6-byte instruction contributes 6 even if one byte differs — and
+  contributes 0 to "real bytes" if it carries a relocation, even when
+  non-relocated bytes inside it also differ. That is exactly why the sign
+  flips: instruction-granular accounting over-counts rows whose differences
+  spread across long instructions and under-counts rows whose differing
+  bytes cluster inside relocated ones.
+- **Neither tool is wrong** — use `rebrew test` for "how many bytes differ"
+  and near-diag's categories for "what kind of difference is it". §108
+  extended with the mechanism.
+- **Fixed the tool to say so** (upstream `c11e10d`): the RELOC-dominant
+  message now reads "N real byte(s) differ (instruction-granular; compare
+  `rebrew test` for the masked byte delta)". This had been reconciled by
+  hand twice before anyone wrote it down.
+- Noted: two upstream tests fail (`test_registry`, `test_toolchain`
+  dockerfile sanity) — verified PRE-EXISTING by stashing my change and
+  re-running; unrelated to near-diag.
+
 **Round-460 (2026-09-14): used `near-diag` for the first time — its verdict
 is a DIFFERENT RULER, and its structural flag agrees with five byte-level
 investigations. Residue 8,664.**
