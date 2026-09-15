@@ -1,5 +1,18 @@
 """Bound where bytes go missing or extra, from branch displacements alone.
 
+SUPERSEDED by `rebrew drift` (upstream 97c5777), which fixes three bugs in this
+script: it filtered branch operands on a "0x" prefix, but capstone renders small
+targets as bare decimal, so every window in a function under 0x10 bytes was
+silently dropped; it truncated the window list to six BEFORE deriving regions,
+so derivations were computed from incomplete data; and it subtracted the
+NARROWEST containing window, which gives a true remainder about a less useful
+region than the widest does.  Prefer:
+
+    rebrew drift --va <va> --json <source.c>
+
+Kept for provenance -- docs/msvc6-c-shapes.md sections 123, 138 and 145 quote
+its output.
+
 A jump whose *encoding* matches the reference but whose *target* differs is not
 a defect -- it is a measurement.  The difference in targets is exactly the byte
 drift accumulated between the jump and its target, so every such pair yields a
