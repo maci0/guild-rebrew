@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-496 (2026-09-14): swept window SIGNS tree-wide; found a surplus with
+no positive window. Residue 8,652.**
+
+- Applied §136's "negative = evidence, not defect" reading to every row.
+  Sign distribution: **CrashDump 6 negative / 0 positive**, cm_ExSellObjekt
+  0/6, gm_AllocSpieler 2/4, ls_LoadBuildingEntityState 2/2.
+- **CrashDump is the striking case**: every window says we are SHORTER, yet
+  the object is size-exact (2115 = 2115). Both can only hold if the
+  balancing surplus lies outside every measured window.
+- **Located it by comparing nested MAGNITUDES**: `[0x490,0x4d0)` is -19 in
+  64 bytes, but the enclosing `[0xda,0x6b9)` is only -10. An outer window
+  with SMALLER |drift| than an inner one proves a positive contribution
+  between them — so a **~9-byte surplus sits in [0x4d0,0x6b9) with no
+  positive window reported there**. Sign arithmetic finds what direct
+  measurement missed.
+- **What the -19 is**: the §114 switch arms. Reference `push 0` (2 bytes,
+  **49 sites**) against our `push edi` (1 byte, **37 sites**) — msvc6 parked
+  a zero in `edi`, exactly the free-register-gets-a-constant behaviour of
+  §§111/126. Our arms are shorter, correctly.
+- **Confirms §136's coupling on a SECOND independent function**: making the
+  arms match needs `edi` NOT free, the same global allocation trade seen on
+  gm_AllocSpieler. Shortfall and surplus are two consequences of one
+  register decision; neither is separately fixable.
+- **Method recorded in §137**: compare the MAGNITUDES of nested windows, not
+  just their signs. An inner window with larger |drift| than its enclosing
+  window is a positive region hiding between them — the only way to see a
+  surplus the tool cannot report directly.
+
 **Round-495 (2026-09-14): found a window where WE are shorter — and it
 constrains §135. Residue 8,652.**
 

@@ -5917,3 +5917,52 @@ we are shorter than the reference is not a defect and must not be "fixed"**. It 
 which register the allocator has free, and it bounds what any change to the opposing window can
 achieve. Read both signs before attributing a cause — section 135's explanation is correct about
 the mechanism and incomplete about the cost.
+
+## 137. Reading window signs across the tree, and a surplus with no positive window
+
+Section 136 established that a negative window is evidence rather than a defect. Round 245 applied
+that reading to every row, and the sign distribution is itself informative:
+
+| function | negative (we shorter) | positive (we longer) |
+|---|---|---|
+| `CrashDumpUnhandledExceptionFilter` | **6** | **0** |
+| `cm_ExSellObjekt` | 0 | 6 |
+| `gm_AllocSpieler` | 2 | 4 |
+| `ls_LoadBuildingEntityState` | 2 | 2 |
+
+`CrashDumpUnhandledExceptionFilter` is the striking case: **every measured window says we are
+shorter**, yet the object is size-exact (2115 = 2115). Both cannot be true unless the balancing
+surplus lies outside every window.
+
+**Nested subtraction locates it without a positive window existing.** The windows are:
+
+```
+[0x490, 0x4d0)  -19   <- tightest, 64 bytes
+[0x39f, 0x4d0)  -19   <- same value, wider
+[0xda,  0x6b9)  -10   <- SMALLER magnitude than the inner one
+```
+
+An outer window whose drift is *smaller in magnitude* than an inner one proves a positive
+contribution between them: `-19` inside plus roughly `+9` elsewhere gives the outer `-10`. So a
+~9-byte surplus sits in `[0x4d0, 0x6b9)` **even though no positive window is reported there** —
+the sign arithmetic finds what direct measurement missed.
+
+**What the -19 is.** Reading the tight window shows the switch arms of section 114:
+
+```
+reference  push 0            (2 bytes)   x49 across the function
+ours       push edi          (1 byte)    x37, edi holding a cached zero
+```
+
+We save a byte per site because msvc6 parked a zero in `edi` — precisely the behaviour sections
+111 and 126 recorded, where a free register gets filled with a constant. Our arms are shorter,
+and correctly so.
+
+**This confirms section 136's coupling on a second, independent function.** Making the arms match
+would require `edi` *not* to be free, which is the same global allocation trade seen on
+`gm_AllocSpieler`: the shortfall and the surplus are two consequences of one register decision, so
+neither is separately fixable. Two functions, same structure, reached from opposite directions.
+
+Method worth keeping: **compare the magnitudes of nested windows, not just their signs.** An inner
+window with larger |drift| than its enclosing window is a positive region hiding between them, and
+that is the only way to see a surplus the tool cannot report directly.
