@@ -49,6 +49,45 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-465 (2026-09-14): half the gm_AllocSpieler deficit was an ARGUMENT
+CAST, not the store. Residue 8,664.**
+
+- §110 evaluated the correct store while holding the rest of the expression
+  fixed. The call was spelled `gm_RandomMod((unsigned short) arg8)`, and
+  that cast turns out to be load-bearing **only when the store is correct**:
+
+      shipped (buggy store, masked arg)  1004/3689  obj 3689   0 short
+      correct store, masked arg           565/3689  obj 3679  10 short
+      correct store, UNMASKED arg         745/3689  obj 3684   5 short
+      buggy store, unmasked arg          1004/3689  obj 3689   0 short
+
+- **Dropping the cast recovers 180 matched bytes and HALVES the size
+  deficit** — but it is perfectly inert while the store stays buggy, which
+  is why it was never found: the cast can only be evaluated against a
+  correct store, and the correct store was rejected on its own numbers
+  before anyone varied the cast.
+- **The reference supports the unmasked form directly**: 0x10018cd4 loads
+  the full dword `mov eax,[esp+0x44c]` and pushes eax unmodified — no
+  16-bit narrowing anywhere.
+- **The unblocking condition is now 5 bytes, not 10**, and those 5 are the
+  §109 scheduler sink (the jmp disp 0xc01 vs 0xbfc measures exactly them).
+  Correct semantics still costs 259 matched vs the shipped bug so it does
+  not land yet, but the gap is half what it was and the whole remainder is
+  attributed to one known cause.
+- **Two process notes, both cost real time this round:**
+  1. Restoring from a /tmp snapshot taken BEFORE the previous round's
+     comment edit silently dropped round 214's site note — that round's
+     commit contained only docs. Re-applied both. When a round's edit is
+     comment-only, verify it survived into the COMMIT, not just the file.
+  2. **Never `touch` a source to force a rebuild.** Doing so to satisfy the
+     staleness guard produced a partial relink and the residue read
+     **0x2347 (9,031)** — a phantom 367-byte regression — while the source
+     was byte-identical to HEAD. The correct sequence is
+     `cmake --build build` then `scripts/split_link.sh` then measure; after
+     that the residue read 0x21d8 again. The gate PASSED during the phantom
+     reading because it does not guard the residue number, only lint,
+     compile errors and the two verify baselines.
+
 **Round-464 (2026-09-14): §110's framing was BACKWARDS — the size match is
 an accident of the bug. Residue 8,664.**
 

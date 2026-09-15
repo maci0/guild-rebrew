@@ -4499,6 +4499,35 @@ store has been masking that gap by accident. Chasing "a correct spelling 10 byte
 therefore the wrong target — padding with a different wrong instruction would match the size
 just as accidentally.
 
+### Round 215: half the deficit was the argument cast, not the store
+
+The "10 bytes short" figure assumed the only variable was the store. It was not. The call in
+the `arg8 == 2` arm was spelled `gm_RandomMod((unsigned short) arg8)`, and that cast is
+**load-bearing only when the store is correct**:
+
+| variant | `rebrew test` | obj | short by |
+|---|---|---|---|
+| shipped (buggy store, masked arg) | **1004/3689** | 3689 | 0 |
+| correct store, masked arg | 565/3689 | 3679 | 10 |
+| **correct store, unmasked arg** | **745/3689** | **3684** | **5** |
+| buggy store, unmasked arg | 1004/3689 | 3689 | 0 |
+
+Removing the cast recovers **180 matched bytes and half the size deficit** — but only in
+combination with the correct store. With the buggy store it is perfectly inert (1004/3689 both
+ways), which is why nobody found it: the cast can only be evaluated against a correct store,
+and the correct store was rejected on its own numbers before the cast was ever varied.
+
+The reference supports the unmasked form directly — at 0x10018cd4 it loads the full dword
+`mov eax,[esp+0x44c]` and pushes `eax` unmodified, with no 16-bit narrowing anywhere.
+
+**This changes the unblocking condition.** Section 110 asked for "a correct spelling 10 bytes
+longer", which the round-214 correction then showed was the wrong target anyway. The real
+target is now 5 bytes, not 10, and the remaining 5 are the section 109 scheduler sink — the
+`jmp` displacement evidence (`0xc01` against `0xbfc`) measures exactly that. Correct semantics
+still costs 259 matched bytes against the shipped bug, so it does not land yet, but the gap is
+half what it was and the residue is now attributed to a single known cause rather than an
+unexplained deficit.
+
 Where the missing work sits is already known. With correct semantics the first non-relocation
 divergence is still **+0xaa**, the section 109 scheduler sink, and the `jmp` at +0x85 carries
 displacement `0xc01` against our `0xbfc` — **exactly 5 bytes**, so the reference's jump target
