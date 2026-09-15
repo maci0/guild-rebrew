@@ -5157,3 +5157,59 @@ object were moving underneath. Two rules follow:
 
 Both were resolved by interrupting the lane, reverting with `git checkout HEAD -- <file>`, and
 re-measuring until `linktest.sh` reported `8652 -> 8652 (+0)`.
+
+## 121. `cm_ExSellObjekt`'s one-byte gap is a zero-extension, and the cast is load-bearing
+
+`cm_ExSellObjekt` (0x1000d930) has the smallest object-size gap in the tree — **obj 2056 against
+the reference's 2057, one byte** — with instruction counts equal at 667. That combination says
+exactly one instruction differs in encoding, so round 229 chased it.
+
+The streams agree through index 192. At **+0x236** the reference has:
+
+```
+0x1000db66  8a461e        mov al, byte ptr [esi+0x1e]     <- 3 bytes
+0x1000db69  8b8d78010000  mov ecx, dword ptr [ebp+0x178]
+0x1000db6f  50            push eax
+0x1000db70  51            push ecx
+0x1000db71  e84abb0000    call gm_QueryEntitySum
+```
+
+and we emit:
+
+```
++0x236  mov ecx, dword ptr [ebp+0x178]
++0x23c  xor eax, eax                    <- the extra instruction
++0x23e  mov al, byte ptr [esi+0x1e]
++0x241  push eax
++0x242  push ecx
+```
+
+So it is not a shorter encoding of the same instruction: **we emit an extra `xor eax,eax`** to
+zero-extend the byte, and the reference does not — it pushes `eax` with its upper bits
+undisturbed, i.e. the callee's second argument is effectively don't-care above the low byte.
+The reference also loads the byte *first* and the dword second; we do the reverse.
+
+Two shapes tested against that reading, both measured at the link and both rejected:
+
+| shape | link delta |
+|---|---|
+| narrow the prototype to `gm_QueryEntitySum(int, unsigned char)` | **+36** |
+| drop the `(unsigned char)` cast at all four call sites | **+448** |
+
+The second is the informative one. Dropping the cast is what "the reference doesn't zero-extend"
+naively suggests, and it is **catastrophically worse** — the cast is load-bearing and correct.
+A temporary local to force the reference's argument-evaluation order was also tried and lost
+(object 680/2062, obj +6).
+
+**What this actually means.** The reference's `xor`-free sequence is not reachable by changing
+the *type* of the argument; msvc6 emits the zero-extension because the C value genuinely is a
+narrowed byte, and every spelling that keeps that meaning emits it. The reference's form implies
+its source did **not** narrow at the call site — the byte was already in a register as a full
+word from an earlier operation, which is a property of the surrounding code, not of this
+expression.
+
+Recorded because the one-byte gap makes this row look like the cheapest win in the tree and it
+is not: **three shapes, +36 / +448 / object-worse, all reverted.** Also worth noting for the
+next reader, the header declares `gm_QueryEntitySum(int, int)` while the definition in
+`spiel622.c` is `(int, unsigned int)` — a real inconsistency, but narrowing the declaration to
+match the use measured worse, so it is documented rather than "fixed".

@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-480 (2026-09-14): chased the tree's smallest size gap — three
+shapes, all worse. Residue 8,652.**
+
+- **cm_ExSellObjekt has the smallest object-size gap in the tree**: obj 2056
+  vs 2057, ONE byte, with instruction counts equal at 667 — so exactly one
+  instruction differs in encoding. Looked like the cheapest win available.
+- **It is not an encoding difference.** The streams agree through index 192;
+  at +0x236 the reference does `mov al,[esi+0x1e]` then `mov ecx,[ebp+0x178]`,
+  while we emit `mov ecx,...`, then an extra **`xor eax,eax`**, then
+  `mov al,...`. We zero-extend the byte; the reference pushes `eax` with its
+  upper bits undisturbed.
+- **Three shapes measured, all rejected**: narrowing the prototype to
+  `(int, unsigned char)` = **+36** at the link; dropping the
+  `(unsigned char)` cast at all four call sites = **+448**; a temporary
+  local to force the reference's argument-evaluation order = object
+  680/2062 at obj +6.
+- **The +448 is the useful result**: dropping the cast is exactly what "the
+  reference doesn't zero-extend" naively suggests, and it is catastrophic.
+  **The cast is load-bearing and correct.** The reference's xor-free form
+  implies its source did not narrow at the call site — the byte was already
+  a full word from an earlier operation, a property of the surrounding code
+  rather than of this expression. New §121.
+- Noted for the record: the header declares `gm_QueryEntitySum(int, int)`
+  while the definition in spiel622.c is `(int, unsigned int)`. A real
+  inconsistency, but narrowing the declaration measured worse, so it is
+  documented rather than "fixed".
+
 **Round-479 (2026-09-14): first link-judged lane on gm_AllocSpieler — two
 dead ends closed, no win. Residue 8,652.**
 
