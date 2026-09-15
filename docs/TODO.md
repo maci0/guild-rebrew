@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-488 (2026-09-14): re-swept after the backward-jump fix; the
+Graveyard reload is uncacheable. Residue 8,652.**
+
+- **Re-ran every earlier sweep** after §128's fix, since a misreported
+  window is worse than none. Exactly **one** hidden window surfaced:
+  gv_ExAllocGraveyardWorker `[0x337,0x395)`, **+5 bytes in 94**. Useful
+  calibration — the bug distorted one row's reporting, not all of them.
+- **The window is the known zero-extend gap**: reference
+  `xor ecx,ecx; mov cx,[ebp]` (6 bytes) against our
+  `mov si,[ebp]; and esi,0xffff` (10). The file header already names it and
+  lists many failed attempts.
+- **Two shapes it does NOT list, measured this round**: hoisting the id into
+  an `unsigned short gid` local used by both sites = **+117**; narrowing
+  only the accumulator (`int a` -> `unsigned int a`) while keeping both
+  reloads = **+0**.
+- **The +117 is the finding**: the reference reads `word ptr [ebp]` TWICE,
+  once per use, and caching it in a local — exactly what "tidying" the code
+  would do — removes the second reload and costs 117 bytes. The two
+  `*(volatile unsigned short*)` reads exist precisely to defeat that CSE, so
+  this is §126's **load-bearing volatile READ**, confirmed by measurement.
+- Cause now stated precisely in §129: msvc6 picks `and reg,0xffff` over
+  `xor`+`mov r16` when the destination register is already in use as the
+  accumulator; the reference's form needs a FREE register there, which is an
+  allocation state we do not reach (same conclusion as §§109/120/128 from a
+  different direction).
+
 **Round-487 (2026-09-14): fixed a real bug in drift_windows.py; do/while
 costs +439. Residue 8,652.**
 

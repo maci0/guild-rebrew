@@ -5568,3 +5568,53 @@ Worth stating as a rule, since three sections now point the same way: **matching
 local shape is not the objective — matching its bytes is.** A construct can be demonstrably the
 one the original used and still be the wrong thing to write, because the surrounding allocation
 was produced by code we have not matched yet.
+
+## 129. Re-sweep after the backward-jump fix, and why the Graveyard reload cannot be cached
+
+Section 128 fixed `drift_windows.py`'s handling of backward jumps, which meant every earlier
+sweep had to be re-run: a misreported window is worse than no window. Re-sweeping the rows
+covered in sections 123 and 124 turned up **one** window that had been hidden —
+`gv_ExAllocGraveyardWorker`, `[0x337, 0x395)`, **+5 bytes in 94**. The other rows' backward jumps
+either did not exist or landed on the same targets already reported.
+
+That is a useful calibration of the bug's blast radius: it distorted one row's reporting, not
+all of them.
+
+**What the window shows.** The reference reads a 16-bit id with a zero-extending pair:
+
+```
+0x10011f27  33c9        xor ecx,ecx
+0x10011f2b  668b4d00    mov cx,word ptr [ebp]      <- 6 bytes total
+```
+
+and we emit:
+
+```
++0x0332  4B  mov si,word ptr [ebp]
++0x0336  6B  and esi,0xffff                        <- 10 bytes total
+```
+
+The file's own header already names this gap ("target `xor ecx,ecx; mov cx,[ebp]`, ours
+`mov si,[ebp]; and esi,0xffff`") and lists a long series of attempts against it. Two shapes it
+does **not** list were measured this round:
+
+| shape | link delta |
+|---|---|
+| hoist the id into an `unsigned short gid` local, used by both sites | **+117** |
+| narrow only the accumulator (`int a` → `unsigned int a`), keeping both reloads | **+0** |
+
+The **+117** is the informative one, and it explains why this gap is hard: the reference reads
+`word ptr [ebp]` **twice**, once per use, and caching it in a local is exactly what a reader
+"tidying" the code would do. That CSE removes the second reload and costs 117 bytes. The two
+`*(volatile unsigned short*)` reads in the source are there precisely to defeat that, and
+section 126's rule applies — this is a **volatile read that is load-bearing**, because the
+reference genuinely reloads.
+
+The `+0` confirms once more that a type narrowing which does not change what is loaded is
+canonicalised away (sections 122, 126, 127).
+
+So the 4-byte-per-read gap stays open, with its cause now stated precisely: **msvc6 chooses
+`and reg,0xffff` over `xor`+`mov r16` for a 16-bit read into a register it is already using for
+the accumulator.** The reference's form needs a *free* register at that point, which is an
+allocation state we do not reach — the same conclusion as sections 109, 120 and 128, reached
+from a different direction.
