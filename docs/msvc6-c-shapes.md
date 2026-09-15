@@ -6002,3 +6002,43 @@ The general point is worth stating because it applies beyond this tool: **when a
 only report certain intervals, the arithmetic between those intervals is also data.** Here the
 regions that matter most are precisely the ones with no branch pair to measure them, and they are
 recoverable only by subtraction.
+
+## 139. Verification checkpoint: what is actually true at residue 8,652
+
+Late in a long session it is worth separating what has been *measured* from what has been
+*inferred*, because several later sections build on earlier ones. Round 247 re-verified the load
+-bearing claims directly rather than trusting the narrative.
+
+**The deliverable.** `build/server.dll` is **286,720 bytes**, exactly the reference's size, with
+**8,652 differing bytes, all inside `.text`** and zero anywhere else. That is the headline number
+and it is reproducible from the committed tree.
+
+**The accounting is honest.** `rebrew verify --full` gives 31 EXACT + 233 RELOC = **264
+byte-matched**, plus 17 PROVEN and 2 remaining (1 NEAR_MATCHING, 1 STUB) across 283 results.
+Every one of the 17 PROVEN entries carries a **non-zero delta** — checked individually, none is a
+byte match mislabelled as proven, which is the failure mode AGENTS.md warns about.
+
+**Size claims that later sections depend on:**
+
+| function | object | reference | delta |
+|---|---|---|---|
+| `gm_AllocSpieler` | 3689 | 3689 | **0** |
+| `CrashDumpUnhandledExceptionFilter` | 2115 | 2115 | **0** |
+| `gv_ExAllocGraveyardWorker` | 1040 | 1040 | **0** |
+| `cm_ExSellObjekt` | 2056 | 2057 | -1 |
+| `ls_LoadBuildingEntityState` | 1460 | 1463 | -3 |
+
+The three size-exact rows matter because sections 136 and 137 reason from them: a size-exact
+object whose windows are all negative *must* hide a compensating surplus, and that inference is
+only valid if the size really is exact. It is.
+
+**The asm constraint holds.** Six live `__asm` blocks across six files, zero `__declspec(naked)`
+anywhere — unchanged from section 97's audit, which established each block reproduces an
+alignment-prefixed block-fill the reference itself contains. Three further files mention `__asm`
+only in comments.
+
+Nothing here is new work; it is confirmation that the session's later reasoning rests on measured
+ground. **The one thing worth carrying forward: 8,652 is a `.text`-only residue on a
+size-identical file, with the import table, exports, `.rdata`, `.data`, `.reloc` and all headers
+byte-identical** (section 98) — the remaining gap is entirely instruction-level codegen inside
+19 functions.

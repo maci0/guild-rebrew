@@ -49,6 +49,28 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-498 (2026-09-14): verification checkpoint — re-measured the claims
+later sections depend on. Residue 8,652.**
+
+- **Deliverable re-verified from the committed tree**: 286,720 bytes exactly
+  (reference size), **8,652 differing bytes, ALL inside `.text`**, zero
+  elsewhere.
+- **Accounting audited and honest**: 31 EXACT + 233 RELOC = **264
+  byte-matched**, 17 PROVEN, 2 remaining, 283 results. **Checked each PROVEN
+  entry individually — all 17 carry a non-zero delta**, so none is a byte
+  match mislabelled as proven (the failure mode AGENTS.md warns about).
+- **Size-exactness re-confirmed** for the three rows §§136/137 reason from:
+  gm_AllocSpieler 3689=3689, CrashDump 2115=2115, Graveyard 1040=1040.
+  That matters because "all windows negative + size-exact => hidden
+  surplus" is only valid if the size really is exact. It is.
+  (cm_ExSellObjekt -1, ls_LoadBuildingEntityState -3, as recorded.)
+- **Asm constraint holds**: 6 live `__asm` blocks, **zero
+  `__declspec(naked)`** — unchanged from §97's audit; 3 more files mention
+  `__asm` only in comments.
+- Nothing new, by design: this is confirmation that the session's later
+  reasoning rests on measured ground rather than on its own narrative.
+  New §139.
+
 **Round-497 (2026-09-14): automated §137's nested subtraction. Residue
 8,652.**
 
