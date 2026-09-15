@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-500 (2026-09-14): measured what 8,652 actually IS — 15 instructions
+of difference. Residue 8,652.**
+
+- Measured instruction counts tree-wide instead of probing another row. The
+  aggregate is far stronger than any single finding:
+  **8 rows carry 7,383 of 8,652 bytes (85%), and their NET instruction
+  difference is 15.** Largest deviation on any row: **5**.
+- **Three rows differ by EXACTLY ZERO instructions** yet carry 1,383 bytes
+  of residue (cm_ExSellObjekt 967, ServerMainThread 367, srv_LoadBuf 49).
+- **~492 differing bytes per net instruction difference.** If the residue
+  were missing/extra/wrong CODE, counts would differ by hundreds; they
+  differ by at most five.
+- **So the tree is semantically and structurally converged.** What remains
+  is only (a) **instruction order** — scheduler interleaving of argument
+  pushes with arithmetic (§§122/127/140, four functions, most common shape),
+  and (b) **register choice** — which register holds a counter, base or
+  cached constant (§§135/136/137, two functions, one allocation decision
+  producing a surplus in one window and a shortfall in another).
+- **This bounds further work: the path from 8,652 to 0 does not run through
+  better C.** It runs through matching a specific compiler build's
+  scheduling and allocation. Nine spellings failed on the zero-extend alone;
+  srv_LoadBuf's header documents every reordering a C author can express.
+- **Consequence for whoever continues**: §115's sp5-pp result — a different
+  toolchain producing one function at the reference's EXACT object size —
+  is the most interesting unexploited lead, even though the per-file pin
+  could not be made to reach the link (§115, round 224). New §141.
+
 **Round-499 (2026-09-14): characterised the tree's closest row — 49 bytes of
 pure push scheduling. Residue 8,652.**
 

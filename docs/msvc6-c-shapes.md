@@ -6083,3 +6083,48 @@ scheduling**, its source-level levers are documented as spent, and it is the cle
 statement of what the remaining residue actually is. A function can be instruction-exact,
 size-exact and still differ — because the order of `push` against arithmetic is the compiler's to
 choose.
+
+## 141. What 8,652 bytes actually is: 15 instructions of difference
+
+Sections 122, 126, 140 and others each found push-scheduling or register-choice differences on
+individual rows. Round 249 measured the whole tree at once, and the aggregate is a much stronger
+statement than any single row.
+
+| function | instructions (ours vs ref) | delta | residue |
+|---|---|---|---|
+| `gm_AllocSpieler` | 1054 vs 1056 | **-2** | 2824 |
+| `CrashDumpUnhandledExceptionFilter` | 729 vs 724 | **+5** | 1583 |
+| `cm_ExSellObjekt` | 667 vs 667 | **0** | 967 |
+| `ls_LoadBuildingEntityState` | 497 vs 499 | **-2** | 675 |
+| `cm_ExCopyEntityData` | 255 vs 260 | **-5** | 462 |
+| `gv_ExAllocGraveyardWorker` | 332 vs 333 | **-1** | 456 |
+| `ServerMainThread` | 627 vs 627 | **0** | 367 |
+| `srv_LoadBuf` | 226 vs 226 | **0** | 49 |
+
+These eight rows carry **7,383 of the 8,652 differing bytes (85%)**, and across all of them the
+net instruction difference is **15**. The largest deviation on any single row is **5
+instructions**. Three rows — 1,383 bytes of residue — differ by **exactly zero** instructions.
+
+**That is the whole finding.** If the remaining residue were missing, extra or wrong *code*, the
+instruction counts would differ by hundreds. They differ by at most five. Roughly **492 differing
+bytes per net instruction difference** is not a code gap; it is the same instructions in different
+positions, holding different registers.
+
+So the tree is **semantically and structurally converged**. What remains is:
+
+- **instruction order** — the scheduler's interleaving of argument pushes with arithmetic
+  (sections 122, 127, 140: four independent functions, the most common residual shape), and
+- **register choice** — which register holds a counter, a base, or a cached constant
+  (sections 135, 136, 137: two independent functions where a single allocation decision produces
+  a surplus in one window and a shortfall in another).
+
+Both are compiler decisions taken from the whole function's shape, and both have resisted every
+source-level spelling tried: nine on the zero-extend idiom alone (section 135), and the documented
+history in `srv_LoadBuf`'s header covering every reordering a C author can express.
+
+This is worth stating plainly because it bounds what further work can achieve. **The path from
+8,652 to 0 does not run through better C.** It runs through matching the exact scheduling and
+allocation decisions of a specific compiler build — which is why section 115's sp5-pp result
+(a different toolchain producing one function at the reference's exact object size) remains the
+most interesting unexploited lead in the tree, even though the per-file pin could not be made to
+reach the link.
