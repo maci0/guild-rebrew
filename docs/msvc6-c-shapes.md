@@ -6207,8 +6207,49 @@ loses or is unchanged, and the other seven images are the same two generators as
 are pinned; there is no third. That is worth stating as a closed door, because "try a different
 service pack" is an obvious idea that now has a measured answer for every row.
 
+> **Correction (round 252).** That claim was wrong when written. Six rows had never been
+> measured — including the two largest, `gm_AllocSpieler` and
+> `CrashDumpUnhandledExceptionFilter`. Testing them found a **third** pin
+> (`ls_LoadBuildingEntityState`, section 144). The phrase "every remaining file has been tested"
+> described the rows in the table above, not the tree. See section 144 for the complete sweep.
+
 What makes these two work is worth keeping in view: both are cases where sp5-pp produces the
 reference's **exact object size** (346 against sp6's 342) or a strictly better score at the *same*
 size. Neither is a general improvement — sp5-pp is dramatically worse on five of the seven rows
 tested. It is a per-file oracle, and the only reason it can be used at all is that the toolchain
 is selectable per translation unit and every function in those units was verified first.
+
+## 144. The complete toolchain sweep, and a correction
+
+Section 143 declared the toolchain axis exhausted after testing seven rows. Round 252 checked that
+claim before building on it and found **six rows had never been measured**, including the two
+largest in the tree. The claim was premature; the complete sweep is below.
+
+| function | sp6 | sp5-pp | verdict |
+|---|---|---|---|
+| `gm_AllocSpieler` | 1004/3689, obj 3689 | 450/3689, obj 3665 | much worse |
+| `CrashDumpUnhandledExceptionFilter` | 643/2115, obj 2115 | 568/2119, obj 2119 | worse |
+| **`ls_LoadBuildingEntityState`** | 820/1463, obj **1460** | **824/1463, obj 1460** | **better** |
+| `vfs_OpenStream` | 472/701, obj 701 | 118/693, obj 693 | much worse |
+| `gm_ObjectsAvailble` | 686/714, obj 714 | 342/719, obj 719 | much worse |
+| `gm_CheckInventoryCapacity` | 298/395, obj 395 | 298/395, obj 395 | identical |
+
+`ls_LoadBuildingEntityState` gains **+4 at an identical object size**, and its file holds exactly
+one function, so section 142's safety check is trivially satisfied. Pinned the same way, and
+measured at the link: **residue 8,637 → 8,633**, file still 286,720 bytes, zero differing bytes
+outside `.text`, composition intact at 246 symbols.
+
+**Three files are now pinned**, and with all thirteen unmatched rows measured the axis really is
+closed: `spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`, `ls_LoadBuildingEntityState.c`. Every other row
+loses under sp5-pp or is bit-identical, and the remaining seven images are the same generators as
+sp6 (section 92, re-confirmed in section 143).
+
+**The process point matters more than the 4 bytes.** Section 143's "exhausted" was written after a
+sweep that felt complete — a table of seven rows, every one a loss, an obvious conclusion. It was
+wrong because the sweep had been assembled from whichever rows were convenient across two rounds,
+and nobody enumerated the full set. The correction cost one command
+(`for va in <all rows>; do rebrew test --toolchain ...`) and returned a pin worth 4 bytes.
+
+**When claiming an axis is exhausted, enumerate the population first and show the count.** "Every
+remaining file" is a claim about a set; if the set was never listed, the claim is about the rows
+that happened to get tested.

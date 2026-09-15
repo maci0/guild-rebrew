@@ -303,6 +303,13 @@ if(REBREW_BUILD_SERVER)
     "${PROJECT_SOURCE_DIR}/src/server.dll/DieGildeAddOn/game/alchemistry_logic_c/ahm_ExAllocAlchemist.c"
     PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
 
+  # Third sp5-pp pin, same rule (section 142): ls_LoadBuildingEntityState
+  # scores 824/1463 under sp5-pp against 820/1463 under sp6 at an identical
+  # object size of 1460, and the file holds exactly one function.
+  set_source_files_properties(
+    "${PROJECT_SOURCE_DIR}/src/server.dll/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c"
+    PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
+
   if(MSVC)
     foreach(_zsrc IN LISTS ZLIB_SOURCES)
       set_source_files_properties("${_zsrc}" PROPERTIES COMPILE_FLAGS "/O2")

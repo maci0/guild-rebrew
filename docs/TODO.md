@@ -49,6 +49,31 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-503 (2026-09-14): §143's "exhausted" was WRONG — found a third pin.
+Residue 8,637 -> 8,633.**
+
+- Checked §143's claim before building on it: **six rows had never been
+  measured under sp5-pp**, including the two largest (gm_AllocSpieler,
+  CrashDump). The "exhausted" claim described the seven rows in its table,
+  not the tree. §143 corrected in place with a pointer to §144.
+- **Complete sweep now recorded (§144)**: gm_AllocSpieler 1004 -> 450,
+  CrashDump 643 -> 568, vfs_OpenStream 472 -> 118, gm_ObjectsAvailble
+  686 -> 342, gm_CheckInventoryCapacity identical — and
+  **ls_LoadBuildingEntityState 820 -> 824 at an IDENTICAL obj size (1460)**.
+- **Third pin landed**: that file holds exactly one function, so §142's
+  safety check is trivial. Measured at the link: **8,637 -> 8,633**, file
+  still 286,720 bytes, zero differing outside `.text`, composition 246.
+- **Three files pinned**: spiel_dumpD.c, ahm_ExAllocAlchemist.c,
+  ls_LoadBuildingEntityState.c. With all 13 unmatched rows now measured the
+  axis genuinely is closed.
+- **Process point worth more than the 4 bytes**: §143's conclusion felt
+  complete — seven rows, every one a loss — but the sweep had been assembled
+  from whichever rows were convenient across two rounds and the full set was
+  never enumerated. **When claiming an axis is exhausted, enumerate the
+  population first and show the count.** "Every remaining file" is a claim
+  about a set; if the set was never listed, it is only a claim about the
+  rows that happened to get tested.
+
 **Round-502 (2026-09-14): second sp5-pp pin — residue 8,641 -> 8,637. The
 toolchain axis is now exhausted.**
 
