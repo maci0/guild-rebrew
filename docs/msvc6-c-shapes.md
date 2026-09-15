@@ -3383,3 +3383,82 @@ source-bound. Retire the lane, not the row. Byte 410 stays allocator-level.
 Practical use: classify before probing. A row where sp5-pp's first mismatch moves
 *earlier* is source-bound; a region sp5-pp reproduces verbatim is scheduler-bound and
 should be written up as a wall instead of probed again.
+
+## 92. Three closures, and the codegen facts they establish
+
+Round 191 closed the three smallest-residue functions in the tree. None yielded a byte,
+but each produced a fact worth more than its residue, and two of them refuted claims this
+document or a file header had been carrying.
+
+### The image sweep is NINE generators, not eight
+
+Sections 90 and 91 swept eight MSVC6 images. A ninth exists and was missed:
+`rebrew/msvc:6.0-win9x-win32`, `C2.DLL` md5 `3c21de2c`, matching none of the other eight,
+`CL 12.00.8168`. It is **not registered as a rebrew toolchain**, so
+`rebrew test --toolchain msvc-6.0-win9x` errors and it must be driven through docker
+directly. On `cm_ProcessCommandQueue` it is byte-identical to sp6. Anyone re-running the
+oracle over the residue table should include it.
+
+### `cm_ProcessCommandQueue`: tail-sharing, not arm order — and a greedy layout pass
+
+Its header blamed "arm order" for 21 rounds. Our committed form **already has the
+reference's exact block order** (arm5 0x38, arm6 0x44, unlink 0x78 against 0x38/0x48/0x78,
+read off the objects). The real fault is **tail-sharing**: the reference shares one
+`jmp advance` between arm5's fallthrough and arm6's exit while we duplicate it. The
+arithmetic is exactly zero-sum — arm5+join 16B reference against our 12B, arm6 48B against
+our 52B — which is why 15 bytes differ at *identical size* and why fixing either side
+breaks the other.
+
+The mechanism is worth recording on its own: **sp6 fuses `je unlink` + `jmp advance` into
+one `0f85` even though the fusion is a net 3-byte loss.** It saves one byte locally and
+costs arm6 four, because a 2-byte backward edge becomes a 6-byte near jump. The layout
+pass is greedy per block, so no size-first flag declines it — `/Os`, `/O2 /Os`, `/Ox /Os`,
+`/Oxs`, `/Os /Ob2`, `/Og /Os /Oi` all score 112-130 because `/Os` reshapes the function
+wholesale. **A flag sweep cannot undo a greedy local decision that is globally wrong.**
+
+Building the live-join form under all seven distinct generators puts the join at 0x3f
+(reference-exact) in every one, but arm6 at 0x55 with unlink spliced into the freed
+fallthrough slot. The fusion is invariant.
+
+### `gm_ObjectsAvailble`: a downstream reschedule can be a rename's shadow
+
+Its 25 faulting bytes are **one** allocator tie-break, traced end to end. Both builds free
+exactly two registers into the match block: the target frees `{ebx, esi}` so row lands in
+`ebx` (verified: `0x100160d3 bb55000000 mov ebx,0x55`), we free `{edi, esi}` so row lands
+in `esi` — **and `esi` also holds `slot_base`**. So the `base = slot_base` copy must be
+emitted before `mov esi,0x55` clobbers it. That true data dependency pulls the copy early,
+consumes `edx`, displaces the item-def table into `edi`, and reorders the whole `shl`/`add`
+chain.
+
+The lesson generalises: **a 15-byte "second cluster" downstream of a register rename may be
+the rename's shadow rather than an independent fault.** Test it by asking whether our
+register choice collides with something already live. Four families of match-block
+reshaping (a1-a6, f1-f6, n1-n6, x1-x6) were inert here, and this is why.
+
+Also: 28 fixed-offset mismatches are **25 faulting bytes plus 3 collateral** — offsets
+0x168-0x16a hold `c1e106 shl ecx,6`, byte-identical in both builds and displaced only
+because a neighbour diverges in length. Quote which count is meant.
+
+### `ahm_ExAllocAlchemist`: `faddp` is unreachable from any C expression
+
+A 66-byte float-tail run reduces to **one byte**: ours `d8c1 fadd st(1)` against the
+reference's `dec1 faddp st(1)` at 0x1000c034. The trailing `ddd8 fstp st(0)` is not an
+independent fault — it is the cleanup msvc6 must add because non-popping `fadd` leaves the
+operand on the x87 stack. Fix the byte and the run closes with it, so section 88 slack is
+irrelevant: the correct form is two bytes *shorter*.
+
+msvc6 collapses six spellings into **three** objects, and those are the only outcomes:
+
+| shape | result |
+|---|---|
+| integer in a `float`/`double` local | correct `fild` first, but the local is live at the add, so msvc6 must use non-popping `fadd` |
+| integer *not* in a local | it stays memory-resident and the add fuses into `fiadd [esp+0x14]`, which pops and does delete the `fstp st(0)` — wrong instruction, and it costs the whole preceding schedule (699 -> 377) |
+| reassociated sub-first | `fsubr st(2)` + `fadd st(1)`, leaving two dead registers and emitting `fstp st(0)` **twice** |
+
+`faddp st(1)` needs the conversion to be *both* a distinct `fild` (which requires a local)
+*and* dead at the add (which requires no local). In msvc6's x87 model those are the same
+property, so **no C expression can satisfy both** — closed by construction, not merely
+inert. Two header claims died with it: that a `p1` local pinned `fld [esi+0x1c]; fmul`
+(it pins the pair's *position*, never its operand roles — our baseline loads the constant
+first) and that deleting `p1` reached 286 instructions at -15 (two different probes fused;
+the -15 body is 287, the 286 body scores 398).

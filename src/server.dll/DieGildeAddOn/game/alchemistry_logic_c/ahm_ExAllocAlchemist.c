@@ -392,16 +392,46 @@ typedef struct {
  *     *around* the `p1` local, and `p1` is itself what keeps the multiply's
  *     result live into the add (it was added in the 2026-09-08 pass for a
  *     different reason, to pin `fld [esi+0x1c]; fmul` at 0x1000c022).  The
- *     untried move is to DELETE p1, not regroup around it: inlining both
- *     slot+0x1c multiplies reaches **286 instructions = the reference's exact
- *     count**, a first for this function, at -15 on both rulers (828 -> 813,
- *     714 -> 699) with obj unchanged at 1002.  It sacrifices the pass-6
- *     fld/fmul pin, so the lane needs a spelling that drops p1 AND keeps that
- *     pin -- e.g. a p1 whose live range ends before the add, or an fsub-first
- *     regrouping.  This lane is OPEN, and per shapes 88 this function can
- *     afford it: body 1002 pads to 1008 with the reference's own 6 nops, so
- *     there are +6 bytes of genuine upward slack (its Graveyard sibling has
- *     ZERO -- 1040 is exactly 16-aligned).
+ *     untried move is to DELETE p1, not regroup around it.
+ *
+ *     CLOSED BY CONSTRUCTION, round 191, after six spellings -- and TWO of
+ *     the round-190 claims above are themselves wrong.  Corrected here:
+ *
+ *     (1) The "p1 pins fld [esi+0x1c]; fmul" claim is FALSE.  Our baseline
+ *         emits `d905b8560210 fld [0x100256b8]` then `d84e1c fmul [esi+0x1c]`
+ *         -- the CONSTANT first.  The reference is the reverse (0x1000c022
+ *         `d9461c fld [esi+0x1c]` then `d80db8560210 fmul [0x100256b8]`).
+ *         p1 pins the pair's POSITION, never its operand roles, so "keep the
+ *         pin" was aiming at something that does not exist.  Verified by
+ *         objdump of the baseline object.
+ *     (2) "Deleting p1 reaches 286 instructions at -15" fused two different
+ *         probes.  The -15 body is 287 instructions; the 286 body is the
+ *         fsub-first regrouping, which scores 398 (-316).  No single probe
+ *         achieved both.
+ *
+ *     THE ROOT CAUSE IS ONE BYTE, not the 51-66 byte run: ours `d8c1
+ *     fadd st(1)` against the reference's `dec1 faddp st(1)` at 0x1000c034.
+ *     The trailing `ddd8 fstp st(0)` is not an independent fault -- it is the
+ *     cleanup msvc6 must add because non-popping `fadd` leaves the operand on
+ *     the x87 stack.  Fix the one byte and the whole run closes with it, so
+ *     shapes-88 slack is irrelevant: the correct form is 2 bytes SHORTER.
+ *
+ *     Why no expression reaches it (msvc6 collapses six spellings into three
+ *     objects, so these are the only three outcomes):
+ *       - integer in a float/double local -> correct `fild` first, but the
+ *         local is live at the add, so msvc6 must use non-popping `fadd`;
+ *       - integer NOT in a local -> it stays memory-resident and msvc6 fuses
+ *         the add into `fiadd [esp+0x14]`, which pops and DOES delete the
+ *         `fstp st(0)` -- wrong instruction, and it costs the whole preceding
+ *         schedule (699 -> 377);
+ *       - reassociating sub-first -> `fsubr st(2)` + `fadd st(1)`, leaving TWO
+ *         dead registers and emitting `fstp st(0)` TWICE.
+ *     `faddp st(1)` needs the conversion to be both a distinct `fild` (which
+ *     requires a local) and dead at the add (which requires no local); in
+ *     msvc6's x87 model those are the same property, so no C expression can
+ *     satisfy both.  If ever reopened, attack the REGISTER PRESSURE that makes
+ *     edx/ebx spill around `mov [esi+0x18],edx` / `mov [esp+0x14],ebx`, not
+ *     the expression.
  *     Inert: `p1 + v`, `p1 += v`,
  *     accumulating into `v`, a `p2` local for the second multiply, both
  *     operand orders on both multiplies, `(v + p1)` parenthesised, `v` as

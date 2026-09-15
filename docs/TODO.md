@@ -49,6 +49,54 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-442 (2026-09-14): the three smallest rows all CLOSED as walls; four
+false claims retired; a 9th compiler found. Residue 8,666.**
+
+- **All three closures produced facts worth more than their bytes**, and none
+  yielded a byte. Written up as §92.
+- **A NINTH msvc6 generator exists** that §90/§91's sweep missed:
+  `rebrew/msvc:6.0-win9x-win32`, C2.DLL md5 3c21de2c, matching none of the
+  other eight, CL 12.00.8168, UNREGISTERED as a rebrew toolchain (must be
+  driven through docker directly). Byte-identical to sp6 on PCQ. Anyone
+  re-running the oracle should include it.
+- **cm_ProcessCommandQueue (15B, smallest in tree) — CLOSED.** Its header
+  blamed "arm order" for 21 rounds; our block order is ALREADY
+  reference-exact (0x38/0x44/0x78 vs 0x38/0x48/0x78). The fault is
+  TAIL-SHARING: the reference shares one `jmp advance` between arm5's
+  fallthrough and arm6's exit, we duplicate it, and the arithmetic is
+  exactly zero-sum (-4 one side, +4 the other) — which is why 15 bytes
+  differ at identical size and why fixing either side breaks the other.
+  New codegen fact: **sp6 fuses `je`+`jmp` into one `0f85` even though the
+  fusion is a net 3-byte LOSS** (saves 1 locally, costs arm6 4). The layout
+  pass is greedy per block, so no size-first flag declines it — six /Os
+  variants all score 112-130. The header's stated escape hatch ("a
+  different msvc6 build") is now empirically eliminated: the live-join form
+  under all seven distinct generators puts the join reference-exact at 0x3f
+  but arm6 at 0x55 every time.
+- **gm_ObjectsAvailble (25B) — CLOSED, causally traced.** All 25 bytes are
+  ONE allocator tie-break. Target frees {ebx,esi} so row lands in ebx (I
+  verified `0x100160d3 bb55000000 mov ebx,0x55`); we free {edi,esi} so row
+  lands in esi — **and esi also holds slot_base**, so the base copy must
+  precede `mov esi,0x55`. That true dependency pulls the copy early,
+  consumes edx, displaces the table into edi and reorders the shl/add
+  chain. **The 15-byte match block is the rename's SHADOW, not a second
+  fault** — which retroactively explains why four families of match-block
+  reshaping (a1-a6, f1-f6, n1-n6, x1-x6) were all inert. Also: 28
+  fixed-offset mismatches = 25 faulting + 3 collateral, and "18 structural"
+  = 15 register-only + 3 structural.
+- **ahm_ExAllocAlchemist float tail — CLOSED BY CONSTRUCTION**, and TWO of
+  my own round-190 claims were wrong: the `p1` local pins the fld/fmul
+  pair's POSITION, never its operand roles (our baseline loads the constant
+  first — verified by objdump), and "deleting p1 reaches 286 instructions
+  at -15" fused two probes (the -15 body is 287; the 286 body scores 398).
+  The 66-byte run reduces to ONE byte: ours `d8c1 fadd st(1)` vs the
+  reference's `dec1 faddp st(1)`. `faddp` needs the conversion to be both a
+  distinct `fild` (requires a local) and dead at the add (requires no
+  local) — the same property in msvc6's x87 model, so no C expression
+  reaches it. Reopen only from register pressure, never the expression.
+- Blocker for 0x10015f70 refreshed with the full causal chain via
+  `rebrew blocker set` so the match block is not re-attacked.
+
 **Round-441 (2026-09-14): the §88 ceiling ASYMMETRY — slack decides whether a
 lane can afford an edit. One lane reopened. Residue 8,666.**
 

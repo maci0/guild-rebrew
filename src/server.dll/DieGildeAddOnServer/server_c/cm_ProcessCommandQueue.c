@@ -487,10 +487,43 @@
  * 142-181 band contains the closest candidates, which is why six
  * rounds of score-driven search circled.
  *
- * What would actually move it: evidence that the target was built with
- * a different msvc6 build or flag set whose layout pass orders these
- * four blocks differently.  Nothing at the C level remains untried.
- * STATUS: PROVEN retained; not a byte match. */
+ * ROUND 191 -- THAT ESCAPE HATCH IS NOW EMPIRICALLY CLOSED, and the
+ * residual is misdescribed above.  Three findings, all measured:
+ *
+ * (1) It is NOT "arm order".  Our committed form ALREADY HAS the
+ *     reference's exact block order -- arm5 0x38, arm6 0x44, unlink
+ *     0x78 against the reference's 0x38 / 0x48 / 0x78, read off the
+ *     objects rather than inferred.  The fault is TAIL-SHARING: the
+ *     reference shares ONE `jmp advance` between arm5's fallthrough and
+ *     arm6's exit, and we duplicate it.  The arithmetic is exactly
+ *     zero-sum -- arm5+join is 16B in the reference against our 12B
+ *     (-4), arm6 is 48B against our 52B (+4) -- which is precisely why
+ *     15 bytes differ at identical size, and why fixing either side
+ *     breaks the other.  All 15 bytes are this one fault; byte 0x37 is
+ *     just the head displacement shifting because the 4-byte join is
+ *     absent.  (`rebrew diff`'s "173 structural" is the desync artifact;
+ *     instr_diff shows 2 hunks, 2 reference-only instructions.)
+ * (2) sp6 FUSES `je unlink` + `jmp advance` into one `0f85` even though
+ *     that is a net 3-byte LOSS: it saves 1 byte locally and costs arm6
+ *     4 (a 2-byte backward edge becomes a 6-byte near jump).  The layout
+ *     pass is greedy per block, so no size-first flag declines it --
+ *     /Os, /O2 /Os, /Ox /Os, /Oxs, /Os /Ob2 and /Og /Os /Oi all score
+ *     112-130, far worse, because /Os reshapes the whole function.
+ * (3) The hatch itself: a NINTH distinct msvc6 code generator exists
+ *     that shapes 90/91's eight-image sweep never included --
+ *     `rebrew/msvc:6.0-win9x-win32`, C2.DLL md5 3c21de2c, matching none
+ *     of the other eight, CL 12.00.8168, unregistered as a rebrew
+ *     toolchain.  It is BYTE-IDENTICAL to sp6 here.  And the live-join
+ *     form was then built under all seven distinct generators: every one
+ *     puts the join at 0x3f (reference-exact) but arm6 at 0x55 with
+ *     unlink spliced into the freed fallthrough slot.  The fusion is
+ *     invariant across every MSVC6 generator available and every flag.
+ *
+ * The reference needs the join alive AND unfused AND arm6 in the
+ * fallthrough slot; the fusion makes those mutually exclusive.  This is
+ * a codegen decision with no C-level or toolchain-level surface, so the
+ * lane is CLOSED -- retire it from the probe rotation rather than
+ * re-deriving it.  STATUS: PROVEN retained; not a byte match. */
 
 // FUNCTION: SERVER 0x1000aac0
 
