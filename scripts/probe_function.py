@@ -233,10 +233,20 @@ def main() -> int:
     )
     ri = sum(1 for _ in MD.disasm(bytes(rbody[:n]), va))
     ci = sum(1 for _ in MD.disasm(bytes(cb), va))
+    # Label this "comdat span", not "object size".  It INCLUDES the COMDAT's
+    # trailing alignment nops, so it is 0-15 bytes larger than the code length
+    # `rebrew test` reports as obj_size -- and quoting the two as if they were
+    # the same ruler is how a round-196 note wrongly concluded that this script
+    # compiles standalone (it does not; it builds the whole file, exactly as
+    # CMake does).  Print the trimmed code length alongside it so a reader
+    # cannot confuse them.  See docs/msvc6-c-shapes.md section 96.
+    span = len(body) - start
+    code_len = len(bytes(cb).rstrip(b"\x90"))
     print(f"0x{va:x} size {size}: section {si} +{start:#x}, "
           f"matched {matched}/{n} ({100.0 * matched / n:.1f}%), "
           f"matched-reloc {generous}/{n}, "
-          f"instructions {ci} vs {ri}, object size {len(body) - start}")
+          f"instructions {ci} vs {ri}, comdat span {span}"
+          + (f" (code {code_len})" if code_len != span else ""))
 
     # `matched` above is a FIXED-OFFSET compare, so one inserted byte makes every
     # later byte wrong.  On a large function it saturates near the first

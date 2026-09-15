@@ -3618,11 +3618,59 @@ be a body defect. The body is **byte-count exact** (315 reference bytes against 
 and the whole -4 sits in the retired region, so the body and the epilogue were one finding
 seen from two ends.
 
-Also recorded from that measurement, because both cost real time: `probe_function.py`
-compiles a function **standalone**, so on a multi-function file it can report figures that do
-not reproduce in-file (obj 352 and aligned 74/118 against the in-file 342 and 87/118) — use
-the CMake object for such rows. And `instr_diff.py` **under-reports alignment** because it
-does not mask unresolved `[0]` reloc operands against the reference's resolved addresses,
-reading 68/118 where the true figure is 87/118.
+Also recorded from that measurement — but **corrected in round 197, because the stated
+cause was wrong**: `probe_function.py` does *not* compile standalone. It passes `-c <src>`
+on the whole file (line 152) and every `.text` COMDAT body is md5-identical between
+probe-built and CMake-built objects across all 18 files, so there is no standalone-vs-in-file
+divergence to guard against. The 352-against-342 and 74-against-118 figures are the same
+object under different *rulers*, which is a different and more useful trap — see section 96.
 
 `src/server.dll/DieGildeAddOn/game/spiel_dumpD.c`
+
+## 96. Four rulers, one object — always state which convention a number used
+
+A round-197 audit measured all 19 non-matching rows two ways and found **zero** divergence
+between what `probe_function.py` builds and what CMake builds: every `.text` COMDAT body is
+md5-identical across all 18 files, including all 16 sections of `spiel622.c`. So no recorded
+verdict in this project is a compilation artifact, and **no measured wall needs re-opening on
+that basis.**
+
+What the audit did establish is that four defensible numbers coexist for the same bytes, and
+quoting one without its convention is how the confusion starts. On
+`gm_FindNextFilteredEntity` all four were reproduced from one identical object:
+
+| figure | convention |
+|---|---|
+| `obj 352` | COMDAT span, trailing alignment nops included |
+| `obj 342` | same object, `rstrip(b'\x90')` — code length |
+| `aligned 74/118` | probe's policy: union both sides' reloc masks |
+| `aligned 87/118` | each side masks only its **own** relocs |
+| `aligned 68/118` | both sides fully unioned |
+| `matched 130` vs `match_count 162` vs `matched-reloc 210` vs raw 88 | four masking strictnesses |
+
+Two rules follow.
+
+**A bare `obj N` is span-or-code ambiguous by 0-15 bytes.** The gap equals that COMDAT's
+trailing nop count on 18 of 19 rows. `m_AllocTracked.c` already documented this for itself in
+round 92 — "the honest field is `obj_size`, the function's object bytes with the COMDAT's
+trailing alignment nops trimmed" — and the same ambiguity applies to every other row. Only
+`gm_CheckInventoryCapacity` hides a *real* 1-byte code shortfall inside its gap (COMDAT 400,
+code 396, `rebrew test` 395).
+
+**A bare `aligned N` is mask-policy ambiguous by up to ±89 instructions, signed both ways.**
+Worst offenders if a quoted figure lacks its convention: `ServerMainThread` **-89**
+(576 against 487), `gm_AllocSpieler` **+36** (662 against 698), `cm_ExCopyEntityData` +19,
+`cm_ExSellObjekt` +17, `CrashDumpUnhandledExceptionFilter` +15, `gm_FindNextFilteredEntity`
++13. The two policies agree exactly on `m_AllocTracked`, `vfs_ReadCompressed`,
+`gm_ObjectsAvailble`, `gm_AllocGebaeude` and `gm_CheckInventoryCapacity`.
+
+And the standing rule this reinforces: **never compare a probe `matched` against a
+`rebrew test` match_count** — 130 against 162 on identical bytes, because `coff_reloc.py`
+masks only the object's validated relocs and compares over `min(obj_code, ref_size)`.
+
+One latent hazard found while verifying: `spiel622.c` contains two **400-byte** COMDATs
+(`_gm_CalculateProductionValue` and `_gm_CheckInventoryCapacity`), plus three 96-byte and
+three 112-byte collisions. `probe_function.py` disambiguates through `build/split_poc.map`
+and falls back to a prologue tie-break, which was verified to still pick correctly with the
+map removed — but any *other* script selecting a COMDAT by size alone on that file will pick
+the wrong one.

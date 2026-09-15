@@ -49,6 +49,48 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-448 (2026-09-14): audited measure-vs-link across all 19 rows. My
+round-196 claim was WRONG; the real finding is four rulers. Residue 8,666.**
+
+- **Zero divergence between what we measure and what we link.** All 19 rows
+  measured both ways: DELTA 0 on every field (matched, matched-reloc,
+  aligned, instructions, obj). Every `.text` COMDAT body is md5-identical
+  between probe-built and CMake-built objects across all 18 files,
+  including all 16 sections of spiel622.c. **So no measured wall is a
+  measurement artifact and no rejected edit was a hidden win** — none of
+  the 19 needs re-opening on that basis, which is worth knowing given how
+  many verdicts this session rests on those numbers.
+- **My round-196 "probe_function.py compiles standalone" note was wrong on
+  BOTH halves**, and I verified the refutation myself: line 152 passes
+  `-c <src>` on the whole file exactly as CMake does. Retracted in
+  docs/TODO.md, docs/msvc6-c-shapes.md §95, and at the site in
+  spiel_dumpD.c.
+- **The real trap is FOUR COEXISTING RULERS over one object** (new §96),
+  all four reproduced from identical bytes:
+  obj 352 = COMDAT span, obj 342 = same object with trailing nops trimmed;
+  aligned 74 = union both sides' reloc masks, 87 = each side masks only its
+  own, 68 = both fully unioned; and matched 130 vs match_count 162 vs
+  matched-reloc 210 vs raw 88 = four masking strictnesses.
+  A bare `obj N` is ambiguous by 0-15 bytes (the gap equals that COMDAT's
+  trailing nop count on 18/19 rows). A bare `aligned N` is ambiguous by up
+  to **±89**, signed both ways — ServerMainThread -89, gm_AllocSpieler +36.
+- **Fixed the output that invited the error**: `probe_function.py` printed
+  "object size" for a span. It now prints `comdat span 352 (code 342)`,
+  showing both rulers so they cannot be conflated.
+- Only real byte finding: gm_CheckInventoryCapacity's COMDAT 400 / code 396
+  / rebrew test 395 hides a genuine 1-byte shortfall; every other row's gap
+  is pure padding. (Re-measured with the new label: code 395 = size 395.)
+- Also ruled out as a lane: the two multi-function files carrying bad rows
+  (spiel622.c 16 functions, spiel_dumpD.c 4) have two distinct cflags each,
+  but the only difference is `/DREBREW_ALLOW_NAKED`, which `cmake-flags`
+  deliberately drops and which appears **0 times** in either source — so it
+  is byte-inert and there is no per-file flag divergence.
+- Latent hazard recorded: spiel622.c has two 400-byte COMDATs plus three
+  96-byte and three 112-byte collisions. probe_function.py disambiguates via
+  split_poc.map with a prologue tie-break fallback (verified to still pick
+  correctly with the map removed), but any script selecting a COMDAT by size
+  alone on that file will pick the wrong one.
+
 **Round-447 (2026-09-14): both remaining unprobed lanes closed with named
 mechanisms. Residue 8,666.**
 
@@ -90,11 +132,15 @@ mechanisms. Residue 8,666.**
 - **§94 is now 4 for 4, and the fourth broke span** rather than merely
   losing the link: a `volatile match` took the body 342 -> 393 (+51) and the
   span 352 -> 400 (+48).
-- Two measurement traps recorded: `probe_function.py` compiles standalone,
-  so on a multi-function row it can report figures that do not reproduce
-  in-file (obj 352 / aligned 74 vs the real 342 / 87); and
-  `instr_diff.py` under-reports alignment because it does not mask
-  unresolved `[0]` reloc operands against resolved reference addresses.
+- ~~Two measurement traps: `probe_function.py` compiles standalone...~~
+  **RETRACTED round 197 — this claim was wrong on BOTH halves.** See the
+  round-448 entry: the probe compiles the whole file exactly as CMake does
+  (`probe_function.py:152` passes `-c <src>`, and every `.text` COMDAT body
+  is md5-identical between probe-built and CMake-built objects across all 18
+  files). 352 vs 342 is trailing COMDAT nop padding on ONE object, and
+  74 vs 87 is a reloc-mask policy difference on the same bytes. Neither is a
+  compilation difference, and 87 is arguably the *less* correct figure since
+  it leaves the reference's relocs unmasked.
 
 **Round-445 (2026-09-14): a DESTRUCTIVE rebrew bug caught and fixed; §94
 prices the volatile lane. Residue 8,666.**

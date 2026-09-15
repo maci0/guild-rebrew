@@ -357,12 +357,17 @@ int __cdecl gm_SubObjectNoKill(int a, int b, int c)
  * `xor cl,cl` placement (shapes 85 -- a constant has no definition site to
  * move), the advance-loop bound tests (levers already spent), and the jcc
  * widths above (a consequence, not a fault).
- * Two measurement traps found here: `probe_function.py` is unusable on this
- * function because it compiles standalone and reports obj 352 / aligned
- * 74/118, which do not reproduce in-file; and `instr_diff.py` UNDER-reports
- * alignment (68/118 against a true 87/118) because it does not mask
- * unresolved `[0]` reloc operands against the reference's resolved
- * addresses. */
+ * CORRECTED round 197: the "probe_function.py compiles standalone" claim was
+ * wrong.  It passes `-c <src>` on the whole file exactly as CMake does, and
+ * every .text COMDAT body is md5-identical between probe-built and CMake-built
+ * objects across all 18 files -- there is NO standalone-vs-in-file divergence
+ * on any of the 19 rows.  The figures differ because they are different
+ * RULERS over one identical object: obj 352 is the COMDAT span and 342 is the
+ * same object with its 10 trailing 0x90 pad bytes trimmed, while aligned
+ * 74/87/68 are three reloc-mask policies (union both sides / each side its own
+ * / both fully unioned).  87 is arguably the least correct of the three, since
+ * it leaves the reference's relocs unmasked.  See shapes 96, and always state
+ * which convention a quoted number used. */
 
 // FUNCTION: SERVER 0x10016f80
 // gm_FindNextFilteredEntity
