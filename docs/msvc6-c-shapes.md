@@ -5017,3 +5017,73 @@ during unrelated work and `git status` was checked before attributing the change
 made that recovery possible: gating on the *residue* (section 99's guard, added round 215) and
 checking `git diff --stat` before trusting any measurement. Without them this would have been
 recorded as a toolchain result and the real cause would have been lost.
+
+## 118. Scope of the hoist lever: when it applies, and where it is already satisfied
+
+Section 116's hoist produced the first byte gain in 21 rounds, so round 226 tested how far it
+generalises. The selection rule matters more than the lever itself:
+
+**It applies only to pure computation with no call between the reference's computation point and
+first use.** Section 109 is the counter-example — hoisting a `memset` *call* on `gm_AllocSpieler`
+cost 371 matched bytes, because a call clobbers the very register the reference is keeping live.
+So the test is not "does the reference compute this earlier" but "does the reference commit a
+**callee-saved register** to it early, across code that does not clobber it".
+
+Surveying the remaining rows for candidates, most are already satisfied:
+
+- **`srv_LoadBuf`** (0x1000a570): the reference parks the connection table base in `ebp` at
+  0x1000a57c — `mov ebp,0x101deb00`, five instructions in — and uses it throughout
+  (`test byte ptr [ebp],1`, `mov eax,[ebp]`, `mov cl,[ebp+0x18]`). **Our source already computes
+  it at the same point**, in a `for`-initialiser:
+  `for (i = 0, conn = (unsigned int*) 0x101deb00; ...)`. Candidate dead — and the row is at
+  701/750 with only 49 residual bytes.
+- **`cm_ExProdObjekt`** (0x1000e140): the only early callee-saved load is
+  `mov ebp,[esp+0x1c]` at +0xa, which is ordinary parameter homing, not a hoistable computation.
+  At 976/993, 17 bytes off.
+- **`gm_ObjectsAvailble`** (0x10015f70): the prologue is a stack-array initialisation
+  (`mov dword ptr [esp+0x18],0x92` …), with no register commitment to hoist toward.
+
+That is the useful negative: **the lever is not a general-purpose sweep**. It fired on
+`CrashDumpUnhandledExceptionFilter` because that function computes a context value *after* a
+long block the reference spans with a committed register — an unusually large gap, created by the
+stack-walk setup sitting ~110 lines from its first use. Rows whose values are computed near their
+use, or homed in the prologue, have nothing to move.
+
+Practical rule for the next reader: before proposing a hoist, check three things in order —
+(1) the reference commits a **callee-saved** register, not a scratch one; (2) the span between
+computation and first use contains **no call**; (3) our source actually computes it **later**
+than the reference does. If any fails, the candidate is dead and costs a compile to prove it.
+
+### The `gm_AllocSpieler` near-miss, settled at the link
+
+One candidate passed all three tests and still lost, and it is worth recording because the
+object rulers said the opposite. The reference commits `arg4` to `edi` at 0x10018990 and first
+uses it at 0x100189c4 — 13 instructions, **zero calls between**, a textbook shape. Hoisting
+`*(unsigned short*)(slot+0xa) = (unsigned short) arg4;` to sit directly after `slot[8] = 0x64;`
+**reproduces the reference's instruction sequence exactly**: our object then emits
+`mov word ptr [ebp+0xa],di` immediately after `mov byte ptr [ebp+8],0x64`, as the reference does.
+
+Pursuing the neighbouring statements made the local block progressively more reference-like, and
+the two object rulers moved in **opposite directions**:
+
+| variant | match_count | aligned | obj |
+|---|---|---|---|
+| baseline | **1004** | 662/1056 | 3689 |
+| + `slot[0xa]` hoist | 962 | 663 | 3689 |
+| + `slot[0x20c]` sink | 961 | 664 | 3689 |
+| + `slot[0x218]` hoist | 947 | **665** | 3689 |
+
+`aligned` rises monotonically while `match_count` falls, with `obj_size` pinned — section 19/16
+in its purest form. That made the candidate genuinely ambiguous at object level: structurally
+correct, byte-neutral in size, and plausibly a link win masked by positional scoring.
+
+**Measured at the link, it is a clear loss: residue 8,652 → 8,694, forty-two bytes worse.**
+Reverted. So the anti-correlation was not hiding value — the moves shift byte offsets upstream
+of a large unmatched region and the displacement costs more downstream than the local agreement
+wins. **When `match_count` and `aligned` disagree, link and find out; do not reason about which
+ruler deserves trust.**
+
+Also dead on the same row, and it confirms an existing note generalises: hoisting the
+`0x100a8c30` global load through a new `unsigned char* type_base` local produced
+**byte-identical output** — 1004/3689, aligned 662, emitted instructions unchanged. msvc6 folds
+the local away entirely, exactly as section 109 (round 216) found for the `lea` split.

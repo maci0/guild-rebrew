@@ -49,6 +49,51 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-477 (2026-09-14): scoped the §116 hoist lever — it is NOT a general
+sweep. Residue 8,652.**
+
+- §116's hoist produced the first byte gain in 21 rounds, so this round
+  tested how far it generalises. **The selection rule is the finding**: it
+  applies only to PURE COMPUTATION with no call between the reference's
+  computation point and first use. §109 is the counter-example — hoisting a
+  `memset` CALL cost 371 matched bytes because a call clobbers the register
+  the reference keeps live.
+- **Surveyed the remaining rows; most are already satisfied**:
+  **srv_LoadBuf** parks the table base in `ebp` at 0x1000a57c (5
+  instructions in) and our source already computes it at the same point, in
+  a `for`-initialiser — candidate dead, and the row is at 701/750 with 49
+  residual bytes. **cm_ExProdObjekt**'s only early callee-saved load is
+  ordinary parameter homing (`mov ebp,[esp+0x1c]` at +0xa); it sits at
+  976/993, 17 off. **gm_ObjectsAvailble**'s prologue is a stack-array init
+  with no register commitment to hoist toward.
+- **Why CrashDump was special**: its stack-walk setup sat ~110 lines from
+  first use, an unusually large gap, and the reference spans exactly that
+  gap with a committed register. Rows computing values near their use have
+  nothing to move.
+- New §118 records the three-part test to apply BEFORE spending a compile:
+  (1) the reference commits a **callee-saved** register, not a scratch one;
+  (2) no call sits between computation and first use; (3) our source really
+  does compute it later.
+- **A delegated lane scripted that rule as an alignment oracle** (LCS of
+  reference vs our instructions; a def inside an `equal` block is already
+  positioned correctly) and swept three rows: **cm_ExSellObjekt has 14
+  long-span callee-saved defs and every zero-call one is already aligned**
+  — that row has no lever, do not re-derive it. **ls_LoadBuildingEntityState
+  has one real divergence and it is MIRRORED**: the reference computes
+  `current_index = 0` LATE, we compute it early; sinking it to match cost
+  60 bytes (820 -> 760).
+- **The gm_AllocSpieler near-miss was settled at the LINK, and that is this
+  round's most useful result.** Hoisting `slot[0xa]` passes all three tests
+  and reproduces the reference's instruction sequence exactly, and the two
+  object rulers then move in OPPOSITE directions — `aligned` 662 -> 665
+  while `match_count` 1004 -> 947, obj pinned at 3689 (§19/16). Genuinely
+  ambiguous at object level. **Linked: residue 8,652 -> 8,694, 42 bytes
+  WORSE.** Reverted. **When match_count and aligned disagree, link and find
+  out — do not reason about which ruler to trust.**
+- Also dead: hoisting the `0x100a8c30` load via a new `type_base` local
+  gives **byte-identical** output — msvc6 folds the local away, confirming
+  §109/round-216's note generalises beyond the `lea` split.
+
 **Round-476 (2026-09-14): LANDED +12 bytes — residue 8,664 -> 8,652. First
 gain on CrashDump this session.**
 
