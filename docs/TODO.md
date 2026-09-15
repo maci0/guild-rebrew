@@ -49,6 +49,48 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-438 (2026-09-14): the two closest functions triaged to root cause;
+both retired. An audit artifact corrected. Residue 8,666.**
+
+- **Corrected a contradiction in last round's audit.** It reported four
+  functions as having ZERO structural diffs while carrying linked residue
+  — impossible, since residue IS differing bytes. Invoking `rebrew diff`
+  directly: gm_ObjectsAvailble 18, srv_LoadBuf 25, vfs_ReadCompressed 11,
+  cm_ExProdObjekt 5. The `--fix-blocker` deletion risk is real in
+  principle and the `blocker set` advice stands, but no row is actually
+  in that state. §87 now says: when a measurement asserts something
+  structurally impossible, re-derive it with the tool before building on
+  it.
+- **cm_ExProdObjekt (21B, the closest function in the tree at 316/354
+  exact) — RETIRED.** Its "5 structural diffs" are TWO faults and they
+  are COUPLED: bytes 205-224 are ONE transposition (reference loads the
+  global first, stores [esp+0x18] later), and the dead store only
+  survives DSE when volatile — but a volatile store is also a
+  global-alias barrier, the very thing pinning the load below it. msvc6
+  has no store that survives DSE without aliasing globally. Byte 410 is
+  a register-name pair on two registers holding the same value.
+  §86b is inert here by its own boundary (both stores hit the same STACK
+  slot, not pointer memory). Hoisting the fold above the barrier DOES
+  clear the transposition (aligned 349 -> 351/354, span-neutral) and I
+  link-tested it against the scout's advice: **+27**. That also proves
+  the coupling empirically — clearing the load order re-breaks the
+  stores. Recorded at the site.
+- **vfs_ReadCompressed (24B, not 23) — RETIRED.** Its 11 structural diffs
+  reduce to THREE walls: the clamp order (§85 — the pinned value is the
+  constant 0x4000, no definition site to move, and every alternative
+  clamp shape is spent with two span-violating), the accumulator
+  direction (-44 when split), and ONE scheduling fact behind seven diffs
+  — the reference sinks `add esp,0x14` four instructions later, so it
+  reads at pre-cleanup [esp+0x24]/[esp+0x28] where we read post-cleanup
+  [esp+0x14]/[esp+0x10], the pairs differing by exactly the cleanup.
+  Hoisting the reads below the crc32 call is **byte-identical** to
+  baseline — an independent proof that this schedule is a compiler fixed
+  point. Note this function has ZERO span headroom (496 is already the
+  next multiple of 16 above 492), so span-neutrality is a hard constraint
+  there, not a preference.
+- Both scouts corrected my briefs: the vfs path I gave does not exist
+  (`Units/vfs/`, not `Units/vfs/vfs_c/`), and that residue is 24 bytes.
+
 **Round-437 (2026-09-14): blocker audit — 11 of 19 stale, one REFUTED; the
 5 unattributed bytes solved; residue now 100% attributed. Residue 8,666.**
 

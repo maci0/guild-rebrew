@@ -48,6 +48,35 @@
  * the reference's.  Probed and inert on this body: `n + acc` for `acc + n`,
  * the old `result` read into a local before the call, `result += n` moved
  * above the crc32 call, the `done` read after `s->cap -= n` (446-459).
+ *
+ * 2026-09-14 (round 187) -- CLOSED.  The 24 remaining bytes are THREE walls
+ * and nothing else; all 11 structural diffs reduce to them, so do not
+ * re-probe this function without a new allocator finding.
+ *   A (4B at 0x10008b2a, diffs 1-2): the clamp order above.  WALL per
+ *     shapes 85 -- the pinned value is the CONSTANT 0x4000 and msvc6
+ *     rematerialises an immediate at each use however the source scopes it,
+ *     so there is no definition site to move.  Every alternative clamp shape
+ *     is spent (ternary obj 512 = span violation/159, second local 155,
+ *     `i < 1` 155, assign-first obj 512/146).
+ *   B (2B at 0x10008be8, diffs 3-4): the accumulator direction; diff 4 is
+ *     purely downstream of diff 3.  WALL by measurement -- splitting the
+ *     spill (`acc = acc + n;` then the volatile store) scores 404/424, -44.
+ *   C (18B at 0x10008c10-0x10008c2f, diffs 5-11): ONE fact, not seven.  The
+ *     reference sinks `add esp,0x14` four instructions later, so it reads
+ *     `result`/`done` at PRE-cleanup displacements [esp+0x24]/[esp+0x28]
+ *     where we read post-cleanup [esp+0x14]/[esp+0x10] -- the pairs differ
+ *     by exactly the 0x14 cleanup, and the edx-vs-ecx scratch choice is the
+ *     same decision.  WALL, doubly confirmed: hoisting the reads below the
+ *     crc32 call is BYTE-IDENTICAL to baseline (an independent proof that
+ *     this schedule is a compiler fixed point), and a volatile `result` read
+ *     before the crc store scores 446/466, -2.
+ *     Shapes 86b does NOT apply -- its boundary requires the stores to
+ *     differ in SOURCE order, and they do not; this is the scheduler sinking
+ *     a stack cleanup, which C89 cannot express.
+ * Floor: 448/468 of 492 at real body 492 (= reference) and span 496.  Note
+ * per shapes 88 that 496 is already the next multiple of 16 above 492, so
+ * there is ZERO span headroom -- any edit adding one byte crosses to 512 and
+ * breaks position alignment for every later symbol.
  */
 
 /* 2026-09-13 (round 110): the span is fixed by reading the volatile `done`

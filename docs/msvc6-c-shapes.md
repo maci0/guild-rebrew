@@ -3168,13 +3168,20 @@ with the current delta on 13 of 19. Two findings generalise:
   wall, `ref 0x228 vs msvc6 0x224`. Both the reference and our object emit
   `sub esp,0x228` — I verified both. Its own `.c` header had already recorded the
   frame as fixed; the blocker went on advertising a wall that does not exist.
-- **`--fix-blocker` deletes a blocker when it finds no structural diffs**, which is
-  exactly the state of the two best-characterised walls in the tree
-  (`gm_ObjectsAvailble`'s single ebx/edi rename at 686/714 exact, `srv_LoadBuf`'s
-  three named clusters). Blind-refreshing would have traded precise knowledge for
-  blank. Use `rebrew blocker set <VA> "<text>" --delta N` to rewrite a blocker while
-  keeping it a measured one-liner, and reserve `--fix-blocker` for rows whose claim
-  is merely numeric.
+- **`--fix-blocker` deletes a blocker when it finds no structural diffs.** Use
+  `rebrew blocker set <VA> "<text>" --delta N` to rewrite a blocker while keeping it
+  a measured one-liner, and reserve `--fix-blocker` for rows whose claim is merely
+  numeric.
+
+  **Correction (round 187): the "no structural diffs" readings that motivated that
+  caution were themselves an artifact.** The audit had reported four functions as
+  having zero structural diffs despite carrying linked residue — a contradiction,
+  since residue *is* differing bytes. Invoking `rebrew diff <VA>` directly shows
+  `gm_ObjectsAvailble` 18 structural, `srv_LoadBuf` 25, `vfs_ReadCompressed` 11,
+  `cm_ExProdObjekt` 5. The deletion risk is real in principle and the `blocker set`
+  advice stands, but no row in this tree is currently in that state. When a
+  measurement asserts something structurally impossible — zero differences yet
+  non-zero residue — re-derive it with the tool directly before building on it.
 
 Before overwriting any blocker, confirm the *reasoning* survives in the `.c` header —
 on the 11 stale rows it did, except that two of them (`gm_AllocSpieler`,

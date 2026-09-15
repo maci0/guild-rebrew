@@ -309,6 +309,29 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 		);
 		return 1;
 	}
+	/* Statement order here is deliberate (round 187).  The 21-byte residue
+	 * is TWO faults, both below C, and they are COUPLED:
+	 *   - bytes 205-218/223-224 are ONE transposition, not four diffs: the
+	 *     reference loads g_unknown_1de450 first (0x1000e20c
+	 *     `8b1550e41d10`) and stores [esp+0x18] later; we do the reverse.
+	 *     The dead `[esp+0x18]` store only survives DSE when volatile, and
+	 *     a volatile store is also a global-alias barrier -- the same
+	 *     barrier that pins the load below it.  msvc6 has no store that
+	 *     survives DSE without aliasing globally, so neither half closes
+	 *     alone.  Shapes 86b is inert here by its own boundary: both
+	 *     stores target the same STACK slot, not pointer memory.
+	 *   - byte 410 is a register-name pair (ref spends ebx, we spend eax)
+	 *     on two registers provably holding the same value.  Allocator
+	 *     level; C cannot name which live copy a store spends.
+	 * Hoisting the address fold above the barrier DOES clear the
+	 * transposition (aligned 349 -> 351 of 354, span-neutral at 1008) and
+	 * costs matched-reloc 980 -> 966; link-tested at **+27**, so it is
+	 * rejected.  That also demonstrates the coupling empirically: clearing
+	 * the load order re-breaks the two stores.
+	 * Note per shapes 88 there is no span deficit -- real body 993 equals
+	 * the reference and any body of 993..1008 holds the 1008 span, giving
+	 * 15 bytes of unused slack.  Do not re-probe without a new
+	 * allocator-level finding. */
 	recipe_idx = (uint)*(ushort*)(msg + 0x14);
 	*(volatile int*)&loop_count = *(int*)(msg + 0x16);
 	recipe_shift = g_unknown_1de450 + (recipe_idx << 6);
