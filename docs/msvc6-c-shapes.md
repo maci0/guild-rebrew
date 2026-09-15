@@ -5833,3 +5833,45 @@ addressing hypothesis is now refuted, not confirmed.
 Worth noting as method: this only surfaced because a **negative** result (section 133's "costs
 nothing elsewhere") was followed up rather than filed. The row that disproved the mechanism is
 the one where our code already does the right thing.
+
+## 135. Why the reference's register is free: counter assignment, not pressure
+
+Section 134 refuted the addressing explanation and left the real question open — *why* does the
+reference have a free register for `xor ecx,ecx; mov cx,[ebp]` where we must reuse the
+accumulator? Round 243 answered it by reading what holds each register entering the loop.
+
+```
+reference  0x100190e5  33db      xor ebx,ebx        <- counter 1
+           0x100190ea  33f6      xor esi,esi        <- counter 2
+           0x10019104  8d3c31    lea edi,[ecx+esi]  <- ecx is SCRATCH, edx likewise at 0x10019129
+           0x10019136  81c600030000  add esi,0x300  \  two independent
+           0x1001913c  43            inc ebx        /  induction variables
+
+ours       +0x0893     xor ebx,ebx                  <- counter 1
+           +0x0895     xor edi,edi                  <- counter 2  (edi, not esi)
+           +0x08a7     mov si,word ptr [ebp]        <- esi is the only register left
+           +0x08ab     and esi,0xffff
+```
+
+**Both sides keep the same number of values live.** The difference is *which* registers hold the
+two loop counters: the reference puts them in `esi`/`ebx`, leaving `ecx` and `edx` free as widen
+scratch; we put them in `edi`/`ebx`, leaving only `esi` — which is also where the widened value
+must land, forcing `and esi,0xffff` instead of a zeroed scratch plus `mov r16`.
+
+So the answer to section 134's question is **register assignment, not register pressure.** That
+distinction matters: pressure would be unfixable without removing work, whereas assignment is
+chosen by the allocator from the loop's shape — which is at least in principle source-visible.
+
+It is not source-selectable in practice, though. The reference advances `esi += 0x300` and
+`ebx++` as two independent induction variables, testing `esi` against `0x90000`, while our source
+carries `j` and derives `j * 0x300`. Rewriting the loop to match exactly — an explicit
+`colstep` induction variable stepping by `0x300` to `0x90000` with `j++` alongside — measures
+**+0**: msvc6 derives the same induction variables either way and assigns the same registers.
+
+That is now **nine measured spellings** on this idiom across two rows (sections 129, 131, 132,
+134 and here), every one canonicalised or a loss. The mechanism is fully explained and the lever
+is absent: **msvc6's counter-to-register assignment is not expressible in C**, and everything
+downstream — the zero-extend form, the 4-to-5 byte gap per read — follows from it.
+
+Recorded as a complete answer rather than an open question. The remaining value in this idiom is
+zero, and knowing *why* is what prevents a tenth spelling.

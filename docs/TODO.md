@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-494 (2026-09-14): answered §134's open question — counter
+ASSIGNMENT, not pressure. Residue 8,652.**
+
+- §134 refuted the addressing explanation and asked why the reference has a
+  free register. **Answered by reading what holds each register entering the
+  loop**: the reference zeroes `ebx` and `esi` as its two counters, leaving
+  **`ecx`/`edx` free as widen scratch**; we zero `ebx` and **`edi`**, leaving
+  only `esi` — which is also where the widened value must land, forcing
+  `and esi,0xffff`.
+- **Both sides keep the same number of values live.** The difference is
+  WHICH registers hold the counters. So it is **register assignment, not
+  register pressure** — a distinction that matters, because pressure would
+  need work removed, while assignment follows from loop shape and is at
+  least in principle source-visible.
+- **In practice it is not.** The reference advances `esi += 0x300` and
+  `ebx++` as two independent induction variables testing against 0x90000;
+  our source carries `j` and derives `j * 0x300`. Rewriting the loop to
+  match exactly (explicit `colstep` stepping by 0x300, `j++` alongside)
+  measures **+0** — msvc6 derives the same induction variables either way.
+- **Nine measured spellings** on this idiom across two rows now (§§129, 131,
+  132, 134 and this one), all canonicalised or losses. Mechanism fully
+  explained, lever absent: **msvc6's counter-to-register assignment is not
+  expressible in C**, and the zero-extend form plus its 4-5 byte per-read
+  gap follow from it. New §135.
+- Closed as a complete answer rather than an open question — knowing WHY is
+  what prevents a tenth spelling.
+
 **Round-493 (2026-09-14): §132's mechanism REFUTED by a controlled
 comparison. Residue 8,652.**
 
