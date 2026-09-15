@@ -3865,11 +3865,22 @@ tables, not gathered behind them.
 - **Naming a literal as an initialised `char[]` moves it into the object's regular `.data`,
   in declaration order** — probe-verified, and it reproduces the reference's shape. The tree
   already uses that convention (`char s_..._<VA>[]`).
+- **Do not name a literal that several TUs share.** MSVC LINK folds identical `??_C@` COMDATs
+  by name, so a shared literal exists once in the image; naming it locally breaks the fold and
+  *adds* its length. `"D:\Develop\Units\m_alloc\m_alloc.c"` is shared by six TUs — naming it
+  would have added 35 bytes. Convert only literals unique to their TU.
 
 So the reference was almost certainly built from sources where these were named globals. The
 lane is real but must be done **whole-TU at a time**, gated on the `.data` figure: six
 literals lose, and the payoff only arrives once a TU stops shifting. ~29 KB is recoverable by
 placement alone, with no new bytes.
+
+**CORRECTED by section 101 (round 202): this framing has the dependency backwards.** A whole-TU
+conversion was run and measured **exactly zero** — because the lever is blocked *behind* a
+uniform section displacement, not ahead of it. Per-TU ordering is invisible while every object
+is shifted by more than its own `.data` size. Remove the displacement first; only then does
+within-object order become measurable, and only for TUs whose named globals and literals
+actually interleave in the reference.
 
 Two scoping corrections from the same measurement. The large cluster at `+0x2730..0x6c4e` is
 **not** an ordering problem — of its 383 printable runs only 95 are emitted and **288 are
@@ -3884,3 +3895,77 @@ anyone re-opens this: five are absolute-address casts (`(char*)0x10027448`) so n
 emitted; `_main_:` is typed `extern int` and defined `= 0` in `link_stubs.c`, a wrong-type
 placeholder; and the dead string above. All five push sites in the reference *are* relocated,
 so C literals were the right shape.
+
+## 101. `.data` placement was dominated by the link-order of the length pad, not by COMDATs
+
+Section 100 concluded the named-`char[]` lever had to be tried **whole-TU**. Round 202 did
+exactly that on `m_ReportGroupInfo.c` (the smallest TU with a meaningful literal count, 8
+anonymous `??_C@` COMDATs) and the result is a **clean negative with the mechanism confirmed**
+— plus the real cause found next door.
+
+**The lever works at the object level, exactly as §100 predicted.** Converting all 8 literals
+to named `char[]` collapsed the object from 9 COMDAT `.data` sections to one regular `.data`:
+
+```
+before:  .text 0x270 | .data 0x18 0x1a 0x18 0x46 0x39 0x1c 0x23 0x74 0x4c   (9 COMDATs)
+after:   .data 0x1ac (regular, all 8 in declaration order) | .text 0x270 | .data 0x23
+```
+
+The map confirms the named symbols replace the mangled ones at the same relative order, and
+the surviving `0x23` COMDAT is `"D:\Develop\Units\m_alloc\m_alloc.c"` — shared by six TUs and
+folded by the linker, so naming it locally would *add* 35 bytes and break the fold. Leave
+shared literals anonymous.
+
+**But `.data` did not move: 0x893b before, 0x893b after — a delta of exactly zero.** Not worse
+(unlike §100's six-literal attempt), just inert. The reason is that the strings' content was
+never wrong: at their build VAs the bytes are already byte-identical to the reference. They sat
+at `0x10030268` where the reference has `0x10028940` — a **uniform +0x7928 displacement**
+shared by every game `.data` symbol. Within-object ordering is invisible while the whole
+section is shifted by more than its own length.
+
+**The +0x7928 was `data_restore_split.obj`.** `split_link.sh` generates that object as a
+**length-only pad** (its bytes are a copy of the reference `.data` *tail*, and postlink
+overwrites `.data` wholesale, so only its size matters — §2 of `msvc6-link-layout.md`), then
+inserted it at rsp position 1. Its single regular `.data` is `0x74a0`, sitting at `0x10027030`
+and ending at exactly `0x1002e4d0`, the first game string. It was pushing all real data off
+the end of the section.
+
+**Appending the pad instead of prepending it is a one-token change and it is worth 6008 bytes:**
+
+| | `.data` differing | displacement of game data |
+|---|---|---|
+| pad first (old) | `0x893b` (61.3%) | `+0x7928` |
+| pad last | **`0x71e3` (50.8%)** | `+0x488` |
+
+`.text` also ticked `0x395d`→`0x395b`, `.data` raw stays `0xe000`, the shipped binary is still
+byte-identical (`delta +0`), and the gate holds (187/187 lint, 0 errors, 281 passed / 264
+byte-matched). Verified by a **control run with the conversion reverted**: pad-last alone gives
+`0x71e3`, so the entire gain is the pad move and the conversion contributes nothing. The
+conversion was reverted.
+
+**The residual `+0x488` is `fold_literals.obj`** (`0x45c` at `0x10027030`, also linked first).
+That object is a deliberate mechanism for folding member-library string COMDATs by name, not a
+defect, so the last 1160 bytes of displacement are not free the way the pad was.
+
+**What this means for the named-`char[]` lane.** It is not dead, but it is **blocked behind
+displacement, not ahead of it**, and §100's "convert whole TUs and the payoff arrives" framing
+has the dependency backwards. Per-TU conversion cannot pay while a uniform shift exceeds a
+TU's own `.data` (`0x1ac` here vs `0x488` remaining). The order is:
+
+1. Remove the displacement first — done for `0x74a0` of it; `fold_literals`' `0x45c` is what
+   is left, and it needs a way to keep the fold without occupying the section prefix.
+2. Only then does within-object ordering become measurable, and only for TUs whose named
+   globals and literals actually interleave in the reference. **This TU has no named `.data`
+   globals at all**, so there is nothing to interleave — converting it was always going to be
+   a no-op once displacement was gone. Pick TUs from §100's `+0x84..0x108` example instead,
+   where tables and strings genuinely alternate.
+
+**It also moved the shipped binary.** The lane measured only the pre-fixer figure; re-linking
+and re-measuring the deliverable gives **8,666 -> 8,665 differing bytes** in `.text`, with
+**zero differing bytes outside `.text`** and the file size still exactly 286,720. Small, but it
+is the first `.text` movement in this session that came from the *link* rather than from a
+source shape — and it is free, in the sense that no C was changed.
+
+Corollary worth keeping: **measure the displacement before attributing a `.data` figure to
+content or ordering.** A uniform delta across every object is a link-order bug, and it is
+cheaper to fix than any number of source edits.

@@ -183,7 +183,12 @@ from pathlib import Path
 rsp, obj = Path(sys.argv[1]), sys.argv[2]
 tokens = shlex.split(rsp.read_text())
 tokens = [t for t in tokens if not t.endswith("/crt_region/data_restore.c.obj")]
-tokens.insert(1, obj)
+# The pad is a LENGTH-only filler (its bytes are the reference .data tail and
+# postlink overwrites .data wholesale), but inserting it FIRST displaced every
+# game .data symbol by +0x74a0, which alone accounted for 0x1758 of the .data
+# residue.  Appending it instead keeps the geometry (raw still 0xe000) and drops
+# the uniform displacement to +0x488.  See docs/msvc6-c-shapes.md section 101.
+tokens.append(obj)
 rsp.write_text(" ".join(tokens))
 print(f"swapped the CMake data blob for {obj}")
 RSP
