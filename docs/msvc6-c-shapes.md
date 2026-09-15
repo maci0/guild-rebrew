@@ -5742,3 +5742,41 @@ work and cannot be removed.
 
 **This row is now closed with a complete mechanism** rather than an open lead — worth more than
 leaving it on the list, because the next reader would otherwise re-derive the same six probes.
+
+## 133. The `[reg + absolute]` pattern is common, but its cost is not
+
+Section 132 explained the Graveyard row through an addressing-mode difference: the reference
+keeps an array base as a constant displacement inside each store, while we fold it into the
+pointer, which pins a live address across a call and forces the wider zero-extend form. The
+obvious next question is whether that generalises, so round 241 counted it.
+
+The reference uses `[reg + absolute]` addressing widely — 14 such store sites in
+`cm_ExCopyEntityData`, 8 in `ahm_ExAllocAlchemist`, 12 in `gm_AllocSpieler`. So the *pattern* is
+not special to the Graveyard loop.
+
+**But the pattern's cost is.** Two checks say so:
+
+- Our objects carry 19 `DIR32` relocations in `ahm_ExAllocAlchemist` — i.e. we materialise
+  absolute addresses in comparable quantity. We are not systematically folding bases where the
+  reference does not.
+- `ahm_ExAllocAlchemist`'s drift windows are **unchanged** from section 128 (`[0x1c7,0x1de)` +2,
+  `[0x254,0x2b0)` -2). If the addressing choice were costing bytes there, the windows would have
+  moved when section 132's mechanism was understood — they did not.
+
+So the Graveyard case is specific: it needs an addressing choice **and** a call inside the loop
+**and** a 16-bit read competing for the same register. Remove any one and the pattern is free.
+That is the same shape of conclusion as section 130 — a real mechanism, correctly identified, but
+local rather than tree-wide.
+
+**Two counting traps, both hit this round and worth avoiding:**
+
+- `rebrew asm | grep -c "0x1[0-9a-f]{7}"` counts the **address column**, so every instruction
+  matches and the answer is meaningless (286 for a 1002-byte function). Strip the leading
+  `VA:` field first — the honest count was 64.
+- Even then, a reference "absolute operand" count is not comparable to our `DIR32` relocation
+  count: the reference's includes IAT slots and jump-table entries that never become relocations
+  in an object. **Compare like for like, or compare drift windows instead** — the windows are
+  already normalised against the reference.
+
+Recorded as a closed question rather than an open lead: the addressing pattern is real, it is
+understood, and outside the Graveyard loop it costs nothing.

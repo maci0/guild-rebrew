@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-492 (2026-09-14): tested whether §132's addressing pattern
+generalises — it does not. Residue 8,652.**
+
+- §132 explained the Graveyard row via an addressing-mode difference, so
+  this round asked whether it generalises. **The pattern is common**: the
+  reference uses `[reg + absolute]` stores at 14 sites in cm_ExCopyEntityData,
+  8 in ahm_ExAllocAlchemist, 12 in gm_AllocSpieler.
+- **But its cost is not.** Our objects carry 19 DIR32 relocations in
+  Alchemist — comparable materialisation, so we are not systematically
+  folding bases the reference keeps separate. And Alchemist's drift windows
+  are **unchanged** from §128; if the addressing choice were costing bytes
+  there, they would have moved.
+- **So the Graveyard case needs three things at once**: the addressing
+  choice, a call inside the loop, and a 16-bit read competing for the same
+  register. Remove any one and the pattern is free. Same shape of conclusion
+  as §130 — a real mechanism, correctly identified, but local.
+- **Two counting traps hit and recorded in §133**:
+  `rebrew asm | grep -c "0x1[0-9a-f]{7}"` counts the ADDRESS COLUMN, so
+  every instruction matches (286 for a 1002-byte function) — strip the
+  leading `VA:` field first, the honest count was 64. And even then a
+  reference absolute-operand count is not comparable to our DIR32 count,
+  because the reference's includes IAT slots and jump-table entries that
+  never become object relocations. **Compare like for like, or compare
+  drift windows**, which are already normalised.
+- Closed as a question rather than left as a lead: the pattern is real,
+  understood, and costs nothing outside the Graveyard loop.
+
 **Round-491 (2026-09-14): followed §131's pointer to the surrounding code —
 the Graveyard row is now CLOSED with a full mechanism. Residue 8,652.**
 
