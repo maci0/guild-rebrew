@@ -3478,3 +3478,60 @@ inert. Two header claims died with it: that a `p1` local pinned `fld [esi+0x1c];
 (it pins the pair's *position*, never its operand roles — our baseline loads the constant
 first) and that deleting `p1` reached 286 instructions at -15 (two different probes fused;
 the -15 body is 287, the 286 body scores 398).
+
+## 93. PROVEN is not a byte match, and the headline number hid that
+
+A process finding rather than a codegen one, but it was silently mis-scoring every round.
+
+`rebrew verify --full` printed `Verification: 281/283 passed, 2 failed`, and `scripts/gate.sh`
+guarded that 281. But `passed` folds **PROVEN** in with EXACT and RELOC, and `AGENTS.md` is
+explicit that PROVEN is semantic equivalence and *not* a byte match — every PROVEN entry
+carries a non-zero delta. The real split here is **264 byte-matched + 17 PROVEN**.
+
+That made the figure wrong in two directions at once:
+
+- it **overstates progress** against a byte-identical objective (281 reads as "done" for
+  264 functions that are, plus 17 that are not);
+- a **RELOC -> PROVEN regression is invisible**: `passed` stays at 281 while the
+  deliverable loses bytes, and a gate keyed on 281 stays green.
+
+Fixed in both places. Upstream, the summary now prints the split and the accounting lives in
+an importable `byte_match_counts()` helper, with a test that flips one RELOC to PROVEN and
+asserts the byte-match count drops even though `passed` would not (`ab50856`). In this tree,
+`scripts/gate.sh` gained a `BYTE_BASELINE` guard (264) checked independently of `BASELINE`,
+verified to trip when the threshold is raised by one.
+
+The general lesson for any metric this work leans on: **a status that is "good but not the
+goal" must never be summed into the goal's counter.** The JSON had carried
+`summary.byte_matched` correctly all along — the defect was only in the number humans and
+scripts actually read, which is exactly where it does the most damage.
+
+`scripts/gate.sh`
+
+### The 117 lint warnings were all rebrew's own false positives (round 193)
+
+Fixed upstream in `540b935`; the tree went from 117 warnings to **0**, with no
+annotation changed — which is the point, because every one of them was unactionable.
+
+**W028 treated the function inventory as ground truth.** That inventory is heuristic
+(rizin `aaa` plus a capstone sweep) and it *merges adjacent functions* when the only
+boundary is `ret` plus alignment padding. So the check fired on annotations that had
+already compiled and compared byte-for-byte at that VA, advising "re-annotate the marker
+VA" — which would have broken a matched function. 15 fired at once here, one of them
+EXACT; `cm_ExSellObjekt` at 0x1000d930 was reported as inside `fcn.1000d8a0` even though
+the reference has `ret` at 0x1000d92d followed by two `nop`s and a fresh
+`sub esp,0x228` prologue, which I verified before changing anything. EXACT, RELOC and
+PROVEN now outrank the inventory; every other status still warns, since there the
+inventory is the only evidence available.
+
+**The other 102 were a stale inventory**, truncated at 0x10012440 with 219 entries against
+543 real functions — every warning named a VA above that line. `rebrew discover-functions`
+refreshes it.
+
+**And that refresh exposed a third, destructive bug**: `layout` was missing from the
+known-target-key set, so a project carrying the position-alignment package warned
+`unrecognized keys: {'layout'}` on *every* rebrew invocation — and an unrecognised key is
+one a config rewriter silently drops. The discovery run deleted this tree's entire
+`layout` block (image base, section geometry, exports, all 100 imports) and it had to be
+restored from git. **An unrecognised-key warning is not cosmetic; it marks data the tools
+will eventually throw away.**

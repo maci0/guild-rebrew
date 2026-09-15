@@ -49,6 +49,49 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-444 (2026-09-14): lint 117 warnings -> 0, all rebrew false
+positives; PROVEN no longer inflates the headline. Residue 8,666.**
+
+- **All 117 lint warnings were rebrew's own bugs**, not corpus defects —
+  fixed upstream (`540b935`), zero annotations changed.
+  - **W028 treated the heuristic inventory as ground truth.** Discovery
+    (rizin + capstone sweep) MERGES adjacent functions when the boundary
+    is only `ret` + padding, so the check fired on annotations that had
+    already byte-matched at that VA, advising a "fix" that would break a
+    matched function. 15 fired at once, one EXACT. I verified
+    cm_ExSellObjekt's case at the bytes: `ret` at 0x1000d92d, two `nop`s,
+    then a fresh `sub esp,0x228` — separate functions, discoverer wrong.
+    EXACT/RELOC/PROVEN now outrank the inventory; other statuses still
+    warn.
+  - **102 were a stale inventory** truncated at 0x10012440 (219 entries
+    vs 543 real functions). Refreshed via `rebrew discover-functions`.
+- **That refresh exposed a DESTRUCTIVE third bug**: `layout` was not in
+  the known-target-key set, so every rebrew invocation warned
+  "unrecognized keys: {'layout'}" — and the discovery run then DELETED
+  this tree's whole layout block (image base, section geometry, exports,
+  all 100 imports). Restored from git immediately. Lesson recorded: an
+  unrecognised-key warning marks data the tools will eventually discard.
+- **PROVEN no longer inflates the headline (§93).** `rebrew verify` printed
+  `281/283 passed` where `passed` folds PROVEN in with EXACT/RELOC, so the
+  number overstated a byte-identical goal AND a RELOC -> PROVEN regression
+  would have left it unchanged while the deliverable lost bytes. Fixed
+  upstream (`ab50856`): the summary now reads
+  "281/283 passed (264 byte-matched + 17 PROVEN, which is not a byte
+  match)", with the accounting in an importable helper. `scripts/gate.sh`
+  also gained an independent BYTE_BASELINE=264 guard, verified to trip.
+- **ServerMainThread censused** (360B): 85% of the residue is ONE cluster
+  whose root cause is constant remat of `0xffffffff` pinned by the
+  `== 0xffffffff` comparison — §85-unreachable, and two probes confirmed
+  it by regressing to first-mismatch 586 (the sp5-pp signature). §88 slack
+  is +14 up but only -1 down, so every cluster-1 attack falls off a -16
+  cliff. Landed the one §86b store-order swap at 0x101deae8/0x101deac0
+  (reference order verified at 0x10009931/0x10009937): +1 on rebrew test,
+  span-neutral, EXACTLY NEUTRAL at the link — kept because it is the
+  reference's order, not for the byte.
+- Corrected that file's landmark claim: there are EIGHTEEN landmarks, not
+  sixteen, and three are displaced (+3/+2/+1) inside the bubble. The
+  round-177 retraction still stands — order is identical in both streams.
+
 **Round-443 (2026-09-14): registered the 9th image, then DISPROVED my own
 "9th generator" claim; PCQ upgraded to proven-unreachable. Residue 8,666.**
 

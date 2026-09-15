@@ -229,7 +229,14 @@ extern int g_tick_rate;    /* 0x11764088 */
  * block at +0x7c6 in BOTH streams, instruction-for-instruction, in the same
  * gaps; `instr_diff -v` puts neither inside any hunk.  More broadly all
  * sixteen LogMessageInternal line-number landmarks are at byte-identical
- * offsets, including 0x1df landing after 0x1ff/0x228 in both, and the
+ * offsets [CORRECTED round 193: there are EIGHTEEN, since 0x104 appears
+ * twice at +0xa and +0x66, and THREE are displaced rather than identical --
+ * 0x1df (ref +0x48e vs built +0x491), 0x228 (+0x4e8 vs +0x4ea) and 0x23a
+ * (+0x552 vs +0x553), all three inside the +0x445-0x597 displacement
+ * bubble.  Fifteen of eighteen are byte-identical and all eighteen are in
+ * identical ORDER, so the retraction below stands -- only this sentence's
+ * count and "byte-identical" wording were wrong],
+ * including 0x1df landing after 0x1ff/0x228 in both, and the
  * basic-block sequence shows zero reorderings.  This function's layout
  * MATCHES; the residue is intra-block scheduling (a `test al,4` interleaved
  * between two zero-stores at +0x58f, the sync-global read order at +0x803,
@@ -539,8 +546,18 @@ send_start_commands:
 	m_FreeTracked(*(void**) 0x101deae8);
 	host_flags = *(unsigned char*) 0x101de464;
 
-	*(unsigned int*) 0x101deac0 = 0;
+	/* Reference order, verified at 0x10009931/0x10009937: it stores
+	 * 0x101deae8 first (`892de8ea1d10`) then 0x101deac0
+	 * (`892dc0ea1d10`).  Two distinct globals through pointer casts
+	 * differing in source order is exactly shapes 86b's qualifying
+	 * case, and swapping them flips the object to reference order.
+	 * Worth +1 on rebrew test (2074 -> 2075), span- and aligned-neutral,
+	 * and EXACTLY NEUTRAL at the link (8,666 both ways) -- kept because
+	 * it is the reference's verified order, not for the byte.  The
+	 * `test al,4` still lands on the wrong side of the pair, so the
+	 * block is not byte-exact even after the swap. */
 	*(void**) 0x101deae8 = (void*) 0;
+	*(unsigned int*) 0x101deac0 = 0;
 	if ((host_flags & 4) == 0) {
 		LogMessageInternal((char*) 0x100298b0, 0x262, (char*) 0x100297bc, 1);
 		player_slot = (unsigned int*) 0x101deb00;
