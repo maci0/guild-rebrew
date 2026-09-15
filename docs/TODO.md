@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-508 (data pass, round 2): the first per-symbol view of `.data`.
+Residue 8,633 (held; one correct fix measured and reverted).**
+
+- **`rebrew verify --data` was comparing NOTHING and reporting success** —
+  `data: 0 matched, 0 mismatched, 0 missing`. Two defects (new §149): it
+  skipped every symbol with `size <= 0`, and this tree has **zero** `size`
+  fields across 310 entries (but 303 `type` fields); and it defaulted to the
+  postlinked `build/server.dll`, the §148 trap in a second tool. Now sizes
+  from the declared type and warns when the built section is byte-identical to
+  the reference. **0 symbols compared -> 83 (40,916 bytes).**
+- **The honest per-symbol score is 39 of 83 wrong (14,528 bytes)** against the
+  raw link, versus 0 of 83 against the postlinked binary. Classified:
+  **28 are our correct bytes at the wrong address**, 9 are zero-filled (never
+  emitted), **2 are genuinely wrong content**. Same `+0xc4` band as §148, now
+  with names: `g_next_object_id`, `g_entity_id_counter`, `g_query_filter_*`.
+- **`rebrew data --conflicts` reported 0 conflicts and was wrong**:
+  `find_extern_variables` parsed only `extern` declarations, so a global's
+  DEFINITION — where the real type lives — was invisible. Now finds **13**.
+- **Found a real byte bug, fixed it correctly, and reverted it anyway.**
+  `loadsave3.c` defines five filter globals as arrays while their consumer
+  declares and uses them as scalars; the reference's extent is **16 bytes**
+  and the array spelling emits **53**. The scalar spelling reproduces the
+  reference bytes exactly, padding included — and still measured `.text` +2,
+  `.data` 0x6d31 -> 0x6e1d (+236). **This is §100's sharpest case: the rule is
+  not "adding content hurts", it is that ANY size change in a misplaced
+  section hurts until ordering is fixed.** The metadata half was kept
+  (`rebrew-data.toml` does not feed the build), so the types are now right at
+  zero byte cost.
+- Also fixed: `__declspec(dllimport)` was never actually skipped (`_strip_cc`
+  removes the declspec before parsing, so the in-tree check could not fire),
+  and `char *` vs `char*` counted as a type conflict.
+- Gate green: lint 187/187, 0 compile errors, 281 verified (264 byte-matched),
+  residue 8,633.
+
 **Round-507 (data pass, round 1): the data-segment tooling was blind. Residue
 8,633 (unchanged, and expected to be).**
 

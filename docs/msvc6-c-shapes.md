@@ -6554,3 +6554,107 @@ obvious repair is wrong here.
 
 After both fixes `rebrew data --summary` warns about nothing and reports **zero** annotated
 globals in `unknown` — the 195 that remain there are extern-only declarations carrying no VA.
+
+## 149. Per-symbol `.data`: what 39 wrong symbols actually are (round 2 of the data pass)
+
+Section 148 repaired the scanner. This round repaired the *verifier*, which turned out to be
+in the same condition, and the result is the first per-symbol picture of `.data` this project
+has had.
+
+### `rebrew verify --data` was comparing nothing, and reporting success
+
+```
+data: 0 matched, 0 mismatched, 0 missing
+```
+
+Two independent defects:
+
+1. **`section_symbol_bytes` skipped every symbol with `size <= 0`.** `size` is an *optional*
+   metadata field and this tree carries **zero** of them across 310 entries — but 303 `type`
+   fields. So the comparison set was empty, and an empty comparison prints as a pass. The
+   declared type now sizes the symbol, through the same `estimate_type_size` the section
+   summary already used: **0 symbols compared → 83 (40,916 bytes)**.
+
+2. **It defaulted to `build/server.dll`, which postlink rewrites.** Same trap as §148's, in a
+   second tool. Measured on the identical symbol set:
+
+   | built binary | mismatched |
+   |---|---|
+   | `build/server.dll` (postlinked) | **0 of 83** |
+   | `build/split_poc.dll` (raw link) | **39 of 83 (14,528 bytes)** |
+
+   A *perfect* score on a section the build cannot yet produce is the tell. `--data` now
+   detects a built `.data`/`.rdata` that is byte-identical to the reference and says so.
+
+### The 39, classified
+
+Comparing each mismatched symbol's built bytes against the whole reference `.data`:
+
+| class | count | meaning |
+|---|---|---|
+| our bytes found elsewhere in the reference | **28** | correct content, **wrong address** |
+| zero-filled | **9** | not emitted at all |
+| genuinely different | **2** | wrong content |
+
+So **72% of the wrong symbols are right**, just misplaced — the symbol-level restatement of
+§100's byte-level 77%. The displacement histogram, per symbol rather than per 32-byte chunk:
+
+```
++0xc4   7 symbols     -0x20   2 symbols     -0x60   2 symbols     +0x8e19  1 symbol
+```
+
+which is the same `+0xc4` band §148 found, now with names attached (`g_next_object_id`,
+`g_entity_id_counter`, `g_query_filter_extra*`, …).
+
+### A real type bug, a correct fix, and why it was reverted anyway
+
+`rebrew data --conflicts` reported **0 conflicts**, which was wrong: `find_extern_variables`
+parsed only `extern` declarations, so a global's **definition** — where its real type lives —
+was invisible. Conflict detection that cannot see definitions cannot find the one mismatch
+that matters. With definitions in scope it finds **13** (16 before whitespace normalisation),
+and one cluster is a genuine byte bug:
+
+`loadsave3.c` **defines** five filter globals as arrays, while
+`gm_StartFilteredEntitySearch.c` **declares and uses** every one of them as a scalar
+(`g_query_filter_extra2 = 0x7fff;`, `= *(short*)(arg_ptr + 1)`). The reference gives the whole
+cluster a **16-byte** extent at `0x10030b84`; the array spelling emits **53**:
+
+```
+g_filter_extra5        char[1]     1        reference extent 0x10030b84..0x10030b94 = 16 bytes
+g_query_filter_extra1  int[4]     16        array spelling emits              = 53 bytes
+g_query_filter_extra2  int[4]     16        surplus                           = 37 bytes
+g_query_filter_extra3  short[2]    4
+g_query_filter_extra4  int[4]     16
+```
+
+The scalar spelling reproduces the reference bytes **exactly**, padding included:
+
+```
++0x00 unsigned char ff  (+3 pad)   +0x04 int ffffffff   +0x08 short ff7f
++0x0a short ff7f                   +0x0c unsigned char ff
+= ff000000 ffffffff ff7f ff7f ff   == reference
+```
+
+**And it still measured worse: `.text` +2, `.data` 0x6d31 → 0x6e1d (+236).** Reverted.
+
+This is §100's rule holding on its sharpest case yet. The previous demonstrations were
+*missing* literals being added; this one is a correct 37-byte **reduction**, provably matching
+the reference's own bytes — and it *still* loses, because shrinking a symbol displaces every
+symbol after it just as surely as growing one does. The rule is not "adding content hurts", it
+is **any size change in a misplaced section hurts until the ordering is fixed**. Nothing in
+`.data` can be judged by local correctness while 21,551 of its bytes are present-but-misplaced.
+
+**The metadata half was kept**, because `rebrew-data.toml` does not feed the build (only
+`rebrew-functions.toml` does): the five entries now carry the scalar types the reference and
+the consuming code agree on, which costs zero bytes and makes every future report more
+accurate. Worth separating — the type correction was right, the *layout consequence* of
+spelling it in C is what could not be afforded yet.
+
+### Two latent defects this uncovered
+
+- **`dllimport` was never actually skipped.** `_strip_cc` deletes the whole `__declspec(...)`
+  before tree-sitter parses, so the in-tree check could not fire; it only appeared to work
+  because such declarations were rejected for lacking `extern`. `extern __declspec(dllimport)
+  int g;` was being reported all along, against the documented intent.
+- **Pointer spelling counted as a type conflict.** `char *` vs `char*` produced three of the
+  sixteen rows. Compared on a whitespace-normalised key now.
