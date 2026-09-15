@@ -4041,8 +4041,13 @@ the two thunk arrays that index it.**
 **What is NOT wrong, checked directly:**
 
 - The **DLL order matches**: `KERNEL32.dll, USER32.dll, WS2_32.dll, WINMM.dll` on both sides.
-- The **symbol order matches exactly** — walking KERNEL32's thunk array on both sides gives the
-  same 81 names in the same positions, **81/81 positionally equal**, same set.
+- The **symbol order matches for the named imports** — walking KERNEL32's thunk array on both
+  sides gives the same 81 names in the same positions, same set. **Corrected round 206: that is
+  81 of 100, not all of them.** WS2_32's 16 ordinal-only entries *are* permuted, so the true
+  figure is **85/100 slots positionally correct**, costing exactly 30 bytes (15 in the IAT at
+  0x2415c..0x2419c, 15 in the INT at 0x267c8..0x26808). Those slots come from
+  `scripts/emit_thunks.py`'s `THUNKS` map and WS2_32.lib, **not** from `crt_imports.c`, and
+  attempting to reorder them there measured worse.
 
 So the raw link already produces the correct import *structure*; what differs is only **where
 each name string lands inside the name table**. And the strings are not block-displaced the way
@@ -4051,16 +4056,44 @@ each name string lands inside the name table**. And the strings are not block-di
 pool, not a section-prefix problem.
 
 That matters for effort allocation: **the link-order lever that paid 7,208 bytes on `.data`
-does not apply here.** `.data`'s wins came from uniform displacements caused by an object
+does apply in principle but is blocked in practice** — a sharper statement than the original
+"does not apply", and a testable one. `.data`'s wins came from uniform displacements caused by an object
 sitting at the head of the section; `.rdata`'s residue has no uniform component to remove. The
 name-pool layout is chosen by LINK from the order symbols are *first referenced*, which is a
 property of the whole `.text` link rather than of any one object's position — and postlink's
 `imports` fixer already produces the correct bytes in the shipped binary, which is why the
 import table is byte-identical there (4 DLLs, 100 symbols, verified in section 98).
 
+**Why it is blocked, measured (round 206).** Our name-pool order *is* literally the `/include`
+directive order in `src/server.dll/crt_region/crt_imports.c` — verified — so the pool is
+directly steerable. The reference's own law was derived and validated exactly: the pool runs
+`[imports a game object references, KERNEL32 group first] [the four DLL name strings]
+[the member-only LIBCMT imports]`, a clean partition with zero exceptions (31 game-referenced,
+53 member-only), with the DLL name strings *interleaved* at pool indices 28/31/32/34 rather
+than gathered. We cannot reproduce that shape because we pin all 100 imports up front as one
+contiguous run.
+
+The blocker is a hard coupling: `/include` order sets the **pool** order, but the **IAT slot**
+order is what `.text` is position-aligned against, and the baseline already has 85/100 slots
+correct. Three measured attempts:
+
+| edit | `.rdata` | `.text` |
+|---|---|---|
+| baseline | `0x4f4` | `0x3898` |
+| all 100 `/include` in reference pool order | 0x4e4 (-16) | 0x3954 (**+188**) |
+| pin only the game-referenced imports | 0x4d4 (-32) | 0x394c (**+180**) |
+| permute the three WS2_32 lines | 0x4f6 (+2) | +2 |
+
+Every one trades ≤32 bytes of `.rdata` for ~180 bytes of `.text`, and the first two break
+`cmake --build` outright (layout-map validation falls to 64.8%, i.e. they destroy position
+alignment). Pool order and IAT order are independently determined — in the reference,
+pool order != IAT order — so one cannot be fixed from `crt_imports.c` without disturbing the
+other.
+
 Practical conclusion: `.rdata` is the *closest* non-`.text` section (1,268 bytes, 10.3%) but it
-is **not the cheapest** — it is import-table layout, downstream of reference order in `.text`,
-and it will likely converge on its own as `.text` does rather than repay direct attack.
+is **not the cheapest**. It only closes once the pool can be reordered without moving IAT
+slots, which needs the reference's two-group link structure (game objects pinning their own
+imports, LIBCMT discovered afterwards) rather than a directive permutation.
 
 **`.reloc` is downstream too, and the evidence is unambiguous.** Our `.reloc` VirtualSize is
 `0x8370` against the reference's `0x10374` — **less than half** — with 41 relocation blocks
@@ -4081,3 +4114,65 @@ strings' worth of content from stubbed translation units. `.reloc` therefore can
 directly: it is a *readout* of what `.text` and `.data` contain, and it will shrink toward the
 reference exactly as those do. Of the 37 pages we do emit, only 12 have identical entry counts,
 which is the same story at finer grain.
+
+## 104. Inlining is not the residue: call counts already match
+
+A natural hypothesis for the three largest walled rows is that the reference inlined a callee
+we still call (or vice versa), which would explain a large, diffuse, un-spellable difference.
+**Measured, and it is false.** Counting `call` instructions in the reference against our own
+object for each row:
+
+| function | reference calls | our calls |
+|---|---|---|
+| `gm_AllocSpieler` | 55 | **55** |
+| `cm_ExSellObjekt` | 31 | **31** |
+| `CrashDumpUnhandledExceptionFilter` | 44 | **43** |
+
+Two match exactly, and the third is *one call short* — the wrong direction for an inlining
+story, since an un-inlined callee on our side would make us call **more**, not fewer.
+`gm_AllocSpieler`'s reference body also makes real calls to 14 distinct targets
+(0x10003640, 0x1000bd50, 0x1000c600, 0x100122e0, 0x10018130, 0x10018150, …), all of which we
+call too. There is no inlined callee to reproduce and no surplus call to eliminate.
+
+This rules out a whole class of proposed fixes — `__forceinline`, macro-ising a helper,
+manually pasting a callee's body — for these rows. It also reinforces what sections 84-99
+found from the other direction: the residue in the big rows is **register allocation and
+instruction scheduling inside blocks whose call structure already matches**, not a
+call-graph-shape difference.
+
+The missing call in `CrashDumpUnhandledExceptionFilter` is a separate, already-recorded fact:
+its own header notes the reference has 44 calls in the body against our 43, the absent one
+being the final indirect `call [0x10024008]` (`UnhandledExceptionFilter`).
+
+### The related question: does emitting missing `.data` content help `.text`?
+
+Also measured this round, on `ServerMainThread` — the TU with the most absolute-address string
+casts. Converting its 16 TU-unique `(char*) 0x...` references to real C literals (leaving two
+shared ones anonymous per the fold rule) **does** improve the function:
+
+| metric | before | after |
+|---|---|---|
+| `rebrew test` match_count | 2075/2434 | **2087** |
+| probe `matched` | 1525 (62.7%) | **1603 (65.9%)** |
+| reference `.data` strings present | 242/415 | **252** |
+| `.data` pre-fixer | 0x6d33 | 0x6f76 (**+579**) |
+| **linked `.text` residue** | **0x21d8** | **0x21d9 (+1)** |
+
+The 25 push sites become relocated operands matching the reference's shape, which is why the
+object-level rulers move so much. **But the shipped residue went up by one byte, so it is
+rejected** — `.text` residue is the objective's metric, `.data` pre-fixer is a diagnostic
+(§98: the shipped `.data` is blitted from the layout package either way). An edit that gains 78
+bytes on an object ruler and loses 1 byte at the link is a loss, and this is the clearest case
+yet of why only the link decides (§19, §41, §94).
+
+Two measurement traps from the same lane, both worth avoiding:
+
+- **The dominant `.data` shift is not every object's shift.** §102's `+0x20` is the largest
+  cluster (39 of ~400 strings), not a global property. `ServerMainThread`'s own block lands at
+  **-0xa08** — 2,568 bytes *early* — and **zero strings sit at their exact reference VA, before
+  or after the conversion**. Measure the specific TU's block before assuming the headline shift
+  applies to it.
+- **`split_link.sh`'s `GAP` must be re-swept when a TU's `.data` size changes.** An uncorrected
+  `GAP` silently produced a 290,816-byte image and a false `.data` figure; re-sweeping
+  `0x74a0` -> `0x732f` restored the exact 286,720 geometry. Any `.data` measurement taken
+  without that check is void.

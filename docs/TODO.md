@@ -49,6 +49,42 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-456 (2026-09-14): answered "would inlining help?" — NO, measured.
+Link-order lane closed with its blocker named. Residue 8,664.**
+
+- **Inlining is not the residue (new §104).** Counted `call` instructions in
+  the reference against our own objects for the three largest walled rows:
+  gm_AllocSpieler **55/55**, cm_ExSellObjekt **31/31**, CrashDump 44 vs our
+  **43**. Two match exactly and the third has us one call SHORT — the wrong
+  direction for an inlining story, since an un-inlined callee on our side
+  would make us call MORE. The reference's gm_AllocSpieler also makes real
+  calls to 14 distinct targets, all of which we call too. This rules out
+  `__forceinline`, macro-ising a helper, or hand-pasting a callee for these
+  rows, and reinforces §§84-99: the residue is register allocation and
+  intra-block scheduling inside a call structure that already matches.
+- **The `.rdata` link-order lane is closed with a MEASURED blocker, not a
+  guess.** Our name-pool order is literally the `/include` order in
+  `crt_imports.c` (verified), so it IS steerable — and the reference's law
+  was derived and validated exactly: `[game-referenced imports, KERNEL32
+  first] [the four DLL name strings] [member-only LIBCMT imports]`, zero
+  exceptions (31/53), with DLL names interleaved at pool indices
+  28/31/32/34. But `/include` order sets the POOL while IAT slot order is
+  what `.text` is position-aligned against (85/100 already correct), so
+  every fix trades <=32 bytes of `.rdata` for ~180 of `.text`, and two of
+  the three attempts broke `cmake --build` outright (layout validation to
+  64.8%).
+- **§103 corrected on two points**: "81/81 positionally equal" was scoped to
+  the named imports only — WS2_32's 16 ordinal-only entries ARE permuted, so
+  it is **85/100**, costing 30 bytes, and those slots come from
+  `emit_thunks.py`, not `crt_imports.c`. And the lever "does not apply" is
+  now the sharper, testable "applies but is blocked by the IAT/`.text`
+  coupling".
+- Confirmed for the record: commit 852ae958 was mine (coordinator-side),
+  not a stray lane commit.
+- **Standing conclusion**: the next real bytes are `.text`/`.data`
+  **content**, not link order. Link order paid 7,208 bytes in rounds
+  202-204 and is now genuinely exhausted.
+
 **Round-455 (2026-09-14): characterised `.rdata` and `.reloc` — both are
 DOWNSTREAM, not independently attackable. Residue 8,664.**
 
