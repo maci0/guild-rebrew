@@ -49,6 +49,41 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-472 (2026-09-14): built the tool that would have prevented three
+rounds of miscounting. Residue 8,664.**
+
+- I miscounted calls on the same function three times in four rounds
+  (grep -> relocations -> adjacency), and so did two probe lanes
+  independently. That is a **tooling gap**: nothing in `rebrew` reported a
+  correct per-callee call inventory.
+- **Added `rebrew xrefs <va> --calls-from <size>`** (upstream `bbf63f4`). It
+  walks the function, tracks which import each register currently holds
+  (`mov reg,[__imp__X]`), and attributes `call reg` to the same callee as a
+  direct call. On CrashDump it reports **WriteFile 11, CloseHandle 5,
+  VirtualFree 3, total 44** — matching the reference exactly and reproducing
+  in ONE COMMAND what took four rounds to derive by hand.
+- Two implementation bugs found while building it, both fixed:
+  `iter_instructions` needs explicit `(va, size)` bounds, and `Insn` exposes
+  `.va` not `.address`. Also fixed an import-table lookup that iterated the
+  dict as objects, which left every IAT slot unnamed.
+- **A THIRD lane confirmed the corrected inventory independently** this
+  round, from the opposite direction: our first cleanup arm's pair is
+  present at +0x62c/+0x637, not folded — it just uses a cached `esi` for
+  CloseHandle, so it is not two adjacent `ff15`s. **Three lanes, same
+  answer.**
+- **The `ff15` row is closed as a measurement artefact.** VirtualFree 3/3
+  and CloseHandle 5/5 already match; the only real delta is one WriteFile in
+  the exception-classifier switch.
+- Lane recommendation recorded: the residue profile is broad-spectrum (code
+  region 253/1836 while the jump tables are **279/279 perfect**), which is
+  the signature of the recorded frame delta (`sub esp,0x284` vs the
+  reference's `0x280`) shifting every `[esp+X]` displacement — not an
+  arm-local defect. §81 already burned six rounds there, so it is recorded
+  as the dominant cause rather than an open lane.
+- Noted: two upstream tests fail (`test_registry`, `test_toolchain`
+  dockerfile sanity) — verified PRE-EXISTING by stashing my change, same two
+  as round 211.
+
 **Round-471 (2026-09-14): my round-470 conclusion was WRONG — a relocation
 is not a call. Corrected, and the real target is now exact. Residue 8,664.**
 

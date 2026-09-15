@@ -4710,6 +4710,19 @@ is a *register-allocation* artefact (the reference caches three imports in calle
 registers, we cache four), not a source property, so the encoding ratio is a shadow worth
 chasing only after the call inventory matches.
 
+**Now automated (round 221).** Three separate probe lanes had to derive this inventory by hand,
+each time re-discovering the same trap, so it is now a command:
+
+```
+rebrew xrefs 0x10002770 --calls-from 2115
+  WriteFile 11 | CloseHandle 5 | 0x10003640 4 | VirtualFree 3 | ... | total 44
+```
+
+It walks the function, tracks which import each register currently holds (`mov reg,[__imp__X]`),
+and attributes a `call reg` to the same callee as a direct call — reproducing in one command
+what took four rounds and three wrong methods to establish. Use it before reasoning about call
+counts on any row.
+
 **Where the real missing call is.** The reference compiles the exception switch as **two jump
 tables, each with its own newline tail**: table 1 at 0x10002b2a (6 arms, tail 0x10002b7f,
 `call esi` at **0x10002b80** — the absent WriteFile) and table 2 at 0x10002bab (8 arms, tail
