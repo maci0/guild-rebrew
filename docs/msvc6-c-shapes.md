@@ -4418,6 +4418,36 @@ Worth stating plainly because it bounds expectations on the biggest row: the fir
 already match, the fault at 0xaa is not a source shape, and the 2,824-byte residue behind it is
 that one scheduling decision's displacement wake rather than 2,824 bytes of wrong code.
 
+### Round 216: the `lea` split is not source-reachable either
+
+The obvious remaining hypothesis was that the reference's `lea edx,[edx+0x100358fc]` followed
+by `mov edi,edx` means the destination is a **named C object** rather than an argument computed
+in place, and that we fuse into one `lea edi` because ours is anonymous.
+
+**Tracing `edx` in the reference kills the simplest version of that story.** `edx` is *dead*
+immediately after the copy — its next appearance is an unrelated `lea edx,[esp+0x3c]` at
+0x1001896f — and every statement after the fill is addressed off `ebp`, not off the scaled
+index. So the reference is not keeping a live value: it computes into `edx` and copies.
+
+Tested anyway, two ways:
+
+| shape | `rebrew test` | obj | `lea` at +0xaa |
+|---|---|---|---|
+| baseline | **1004/3689** | 3689 | fused (`8dbafc580310`) |
+| new `char* refs` local (round 465) | 595/3696 | 3696 | — frame grew, broke instruction #0 |
+| **reuse an existing pointer local** (`mother`) | 1004/3689 | 3689 | **still fused** |
+
+Reusing a local that already exists avoids the frame growth entirely — the object stays exactly
+3689 and the score is byte-identical — but msvc6 **folds the assignment away** and still emits
+the fused `lea edi`. So the split cannot be requested through a named destination: with a new
+local it costs 4 bytes of frame and breaks the prologue, and with an existing local it is
+optimised out.
+
+Combined with the seventeen-variant sweep (every one moved the first fault *earlier*), the
++0xaa fault is closed to source-level work on both of its tells — the store sink and the `lea`
+split. Section 109's narrowed claim stands: C can request the sink alone, but not while keeping
+the `0xffff` store alive, and the `lea` split is unreachable in either configuration.
+
 Housekeeping from the same round: the metadata note claiming "SIZE 3209/3689 (480B short)" was
 stale from the naked-asm era — the object is now **exactly 3689 bytes**, the target size — and
 an inert `/DREBREW_ALLOW_NAKED` was removed from its cflags (verified byte-identical at

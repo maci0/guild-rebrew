@@ -49,6 +49,31 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-467 (2026-09-14): closed the gm_AllocSpieler +0xaa fault on its
+second tell too. Residue 8,664.**
+
+- Followed the lane's recommended next probe: the reference's
+  `lea edx,[edx+0x100358fc]` + `mov edi,edx` split supposedly means the fill
+  destination is a NAMED C object kept live for a later scaled-index use.
+- **Traced `edx` in the reference and the premise fails**: edx is DEAD right
+  after the copy (next use is an unrelated `lea edx,[esp+0x3c]` at
+  0x1001896f), and every statement after the fill addresses off `ebp`, not
+  the scaled index. The reference computes into edx and copies — it is not
+  preserving anything.
+- **Tested it regardless, avoiding round 465's mistake.** A NEW local costs
+  4 bytes of frame and breaks instruction #0 (595/3696). **Reusing an
+  EXISTING pointer local** (`mother`) avoids frame growth entirely —
+  **1004/3689, obj exactly 3689, byte-identical** — but msvc6 FOLDS the
+  assignment and still emits the fused `lea edi`. Confirmed at the bytes:
+  ours `8dbafc580310` against the reference's `8d92fc580310 ... 8bfa`.
+- **So the `lea` split is not source-reachable in either configuration**:
+  new local breaks the prologue, existing local is optimised away. Combined
+  with the 17-variant sweep (all moved the fault earlier), the +0xaa fault
+  is now closed on BOTH tells — the store sink and the lea split. §109
+  extended.
+- Process: reverted with `git checkout HEAD -- <file>` per the rule written
+  last round, and verified the tree clean before and after.
+
 **Round-466 (2026-09-14): REVERTED a 409-byte regression I committed in
 round 465, and added the gate guard that would have stopped it.
 Residue back to 8,664.**
