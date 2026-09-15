@@ -21,40 +21,33 @@ char s_WSAECONNRESET_10028bf8[] =
 	"hard or abortive close. The application should close the socket as it is no "
 	"longer usable. On a UPD-datagram socket this error would indicate that a "
 	"previous send operation resulted in an ICMP >Port Unreachable< message.";
-char pad_10028bf8[3] = { 0 };
 
 /* DATA: SERVER 0x10028d24 */
 char s_WSAETIMEDOUT_10028d24[] =
 	"WSAETIMEDOUT: The connection has been dropped because of a network failure or "
 	"because the peer system failed to respond.";
-char pad_10028d24[3] = { 0 };
 
 /* DATA: SERVER 0x10028da0 */
 char s_WSAECONNABORTED_10028da0[] =
 	"WSAECONNABORTED: The virtual circuit was terminated due to a time-out or other "
 	"failure. The application should close the socket as it is no longer usable.";
-char pad_10028da0[1] = { 0 };
 
 /* DATA: SERVER 0x10028e3c */
 char s_WSAEINVAL_10028e3c[] =
 	"WSAEINVAL: The socket has not been bound with bind, or an unknown flag was "
 	"specified, or MSG_OOB was specified for a socket with SO_OOBINLINE enabled or "
 	"(for byte stream sockets only) len was zero or negative.";
-char pad_10028e3c[2] = { 0 };
 
 /* DATA: SERVER 0x10028f10 */
 char s_WSAEMSGSIZE_10028f10[] = "WSAEMSGSIZE: The message was too large to fit into the specified buffer and was truncated.";
-char pad_10028f10[1] = { 0 };
 
 /* DATA: SERVER 0x10028f6c */
 char s_WSAEWOULDBLOCK_10028f6c[] = "WSAEWOULDBLOCK: The socket is marked as nonblocking and the receive operation would block.";
-char pad_10028f6c[1] = { 0 };
 
 /* DATA: SERVER 0x10028fc8 */
 char s_WSAESHUTDOWN_10028fc8[] =
 	"WSAESHUTDOWN: The socket has been shut down; it is not possible to receive on a "
 	"socket after shutdown has been invoked with how set to SD_RECEIVE or SD_BOTH.";
-char pad_10028fc8[2] = { 0 };
 
 /* DATA: SERVER 0x10029068 */
 char s_WSAEOPNOTSUPP_10029068[] =
@@ -62,49 +55,38 @@ char s_WSAEOPNOTSUPP_10029068[] =
 	"as type SOCK_STREAM, OOB data is not supported in the communication domain "
 	"associated with this socket, or the socket is unidirectional and supports only "
 	"send operations.";
-char pad_10029068[3] = { 0 };
 
 /* DATA: SERVER 0x10029164 */
 char s_WSAENOTSOCK_10029164[] = "WSAENOTSOCK: The descriptor is not a socket.";
-char pad_10029164[3] = { 0 };
 
 /* DATA: SERVER 0x10029194 */
 char s_WSAENETRESET_10029194[] =
 	"WSAENETRESET: The connection has been broken due to the keep-alive activity "
 	"detecting a failure while the operation was in progress.";
-char pad_10029194[3] = { 0 };
 
 /* DATA: SERVER 0x1002921c */
 char s_WSAEINPROGRESS_1002921c[] =
 	"WSAEINPROGRESS: A blocking Windows Sockets 1.1 call is in progress, or the "
 	"service provider is still processing a callback function.";
-char pad_1002921c[3] = { 0 };
 
 /* DATA: SERVER 0x100292a4 */
 char s_WSAEINTR_100292a4[] = "WSAEINTR: The (blocking) call was canceled through WSACancelBlockingCall.";
-char pad_100292a4[2] = { 0 };
 
 /* DATA: SERVER 0x100292f0 */
 char s_WSAENOTCONN_100292f0[] = "WSAENOTCONN: The socket is not connected.";
-char pad_100292f0[2] = { 0 };
 
 /* DATA: SERVER 0x1002931c */
 char s_WSAEFAULT_1002931c[] = "WSAEFAULT: The buf parameter is not completely contained in a valid part of the user address space";
-char pad_1002931c[1] = { 0 };
 
 /* DATA: SERVER 0x10029380 */
 char s_WSAENETDOWN_10029380[] = "WSAENETDOWN: The network subsystem has failed!";
-char pad_10029380[1] = { 0 };
 
 /* DATA: SERVER 0x100293b0 */
 char s_WSANOTINITIALISED_100293b0[] = "WSANOTINITIALISED";
-char pad_100293b0[2] = { 0 };
 
 /* DATA: SERVER 0x100293c4 */
 char s_Cant_set_SO_SNDBUF_100293c4[] = "Can't set SO_SNDBUF on Socket";
-char pad_100293c4[2] = { 0 };
 
 /* DATA: SERVER 0x100293e4 */
 char s_Cant_set_SO_RCVBUF_100293e4[] = "Can't set SO_RCVBUF on Socket";
-char pad_100293e4[6] = { 0 };
 

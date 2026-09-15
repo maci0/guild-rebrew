@@ -49,6 +49,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-516 (data pass, round 10): drop redundant pad_* arrays.
+`.data` 23,472 -> 23,470 (-2). `.text` 8,634 -> 8,636 (+2).**
+
+- **Root cause:** explicit `char pad_*[N] = { 0 }` arrays are zero-init, so
+  MSVC6 parks them late (BSS). They duplicated natural 4-byte alignment
+  padding and polluted the empty-string slot `z_errmsg` points at.
+- **Fix:** delete all `pad_*` from `winsock_data.c` and `vfs_OpenStream.c`.
+  Every ref gap is exactly align-to-4 after the NUL.
+- Spans still 100% match. Empty BSS improved slightly but still late.
+- Next: `0x10027400` (−4 before `"need dictionary"`). See §157.
+- RESIDUE 8634->8636, DATA 23,472->23,470.
+
 **Round-515 (data pass, round 9): named format string in vfs_OpenStream.
 `.data` 23,526 -> 23,472 (-54). `.text` 8,637 -> 8,634 (-3).**
 

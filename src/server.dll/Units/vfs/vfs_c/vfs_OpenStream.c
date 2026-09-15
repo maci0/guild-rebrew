@@ -204,7 +204,6 @@ extern int __cdecl sprintf(char* buf, const char* fmt, ...);
  * z_errmsg.  A raw address cast emitted nothing and left the slot empty.
  * Declared before use — MSVC6 C requires it. */
 char s_0x_08X_length_100294a4[] = "0x%08X -> length: %u, read: %u compressed: %u";
-char pad_100294a4[2] = { 0 };
 
 
 int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)

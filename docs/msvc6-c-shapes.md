@@ -7106,3 +7106,35 @@ failure mode is "nothing emitted" rather than "emitted twice."
 `0x100294d4`: `z_errmsg` pointer table — reference and build both have the
 table, but some pointer values differ (`0x10024620` vs `0x10024f50`-class).
 Likely a reloc/string-VA mismatch inside zlib, not a missing string.
+
+## 157. Explicit zero-pad arrays are redundant under MSVC6 4-byte alignment (round 10 of the data pass)
+
+§153/§154 spelled inter-string padding as `char pad_...[N] = { 0 };` next to
+each named winsock string. Those arrays are zero-initialized, so MSVC6 puts
+them in BSS (or a separate zeroed `.data` contribution that the linker parks
+late). Map showed all 18 `pad_*` symbols clustered around `0x10034f00` —
+exactly where `z_errmsg`'s empty-string pointers were resolving late.
+
+### The fix
+
+Drop every `pad_*` array. Every inter-string gap in the reference
+`0x10028bdc..0x10029408` run is exactly the natural pad to the next 4-byte
+boundary after the string's NUL. MSVC6 aligns each subsequent `char[]` to 4
+bytes and fills the gap with zeros — same bytes, no named symbol, no late BSS.
+
+Same for `pad_100294a4[2]` after the vfs_OpenStream format string.
+
+### Result
+
+- Winsock / vfs4 / format spans still **100% matching**
+- `.data` **23,472 → 23,470 (−2)**
+- `.text` **8,634 → 8,636 (+2)** — placement
+- Empty-string BSS slot moved earlier (`0x10034f50` → `0x10034f00`) but is
+  still ~2.2 KB past the reference's `0x10034620`
+
+### Next miss
+
+`z_errmsg` pointer diffs remain: `"need dictionary"` at `0x10027534` vs
+reference `0x10027538` (−4), driven by an earlier divergence at `0x10027400`
+(Error-handler strings vs Fatal Error). Empty-string BSS is a separate
+cumulative gap.
