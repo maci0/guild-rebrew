@@ -49,6 +49,47 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-445 (2026-09-14): a DESTRUCTIVE rebrew bug caught and fixed; §94
+prices the volatile lane. Residue 8,666.**
+
+- **rebrew bug #3 this session, and the worst: `verify --fix-sizes`
+  demoted 12 byte-matched functions.** I ran it to backfill one
+  MISSING_SIZE entry; it rewrote **13 sizes** and byte-matched dropped
+  **264 -> 252**. Restored the metadata from git immediately. Root cause:
+  it applied every size divergence, taking heuristic discovery as
+  authority — but discovery merges adjacent functions on a `ret`+padding
+  boundary AND counts trailing jump tables the body excludes, so it
+  mis-sizes matched entries in both directions.
+  `_skip_validated_overcount` already guarded over-counts; the
+  UNDER-count direction (the jump-table case: vfs_OpenStream body 667 vs
+  canonical 704) was applied silently. Fixed upstream (`5d16b24`): all 13
+  are now reported as kept with the reason, zero rewritten, and PROVEN is
+  protected too since it also earns its status by compiling at that size.
+- **Verified the 196 unannotated functions contribute ZERO residue.** The
+  inventory refresh showed 543 discovered vs 366 annotated; 176 of the 196
+  are already covered by `// LIBRARY:` markers in the `#if 0` header
+  stubs, and the remaining 20 are discoverer artifacts — switch arms
+  inside already-RELOC/EXACT functions. Residue stays 100% inside the 19
+  known rows, so there is no hidden lane there. That also confirms the
+  ZLIB/LIBCMT link-don't-reverse strategy is sound: 39,653 bytes match
+  without a line of reversed source.
+- **Spieler parent-wins chain: one fault, not five, and not 344 bytes.**
+  The chain proper is 174 bytes and OUR SIDE IS ALSO 174 with an equal
+  byte multiset and equal kind multiset — a pure load-hoist in all four
+  arms. Volatile-pinning the six parent loads reproduces the reference's
+  exact LOAD,STORE pairing (verified at 0x10018d93), lifts aligned
+  662 -> 670, deletes 11 insert/delete hunks, is BYTE-NEUTRAL — and costs
+  **+2 linked**. Not applied; recorded at the site.
+- **§94 written: volatile wins alignment and loses the link, 3/3.** The
+  Spieler case removed every excuse (byte-neutral, hunk-deleting) and
+  still lost, so the rule is now priced: a volatile edit is worth landing
+  only when it changes BLOCK PLACEMENT (§86, which paid -200) rather than
+  re-pairing loads and stores inside a block, which is cosmetic to the
+  linker.
+- Also corrected: Spieler's header claimed a 20-variant CFLAGS sweep where
+  "every one scores identically". False — `/Ow` is load-bearing
+  (766 -> 317 without it), `/Oa` is entirely inert.
+
 **Round-444 (2026-09-14): lint 117 warnings -> 0, all rebrew false
 positives; PROVEN no longer inflates the headline. Residue 8,666.**
 

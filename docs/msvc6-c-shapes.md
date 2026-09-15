@@ -3535,3 +3535,44 @@ one a config rewriter silently drops. The discovery run deleted this tree's enti
 `layout` block (image base, section geometry, exports, all 100 imports) and it had to be
 restored from git. **An unrecognised-key warning is not cosmetic; it marks data the tools
 will eventually throw away.**
+
+## 94. `volatile` wins the alignment ruler and loses the link — three for three
+
+Every `volatile`-pinning lever measured so far improves the aligned-instruction ruler and
+then costs bytes at the link. The pattern is now consistent enough to price the lane before
+funding it:
+
+| function | what was pinned | aligned | link |
+|---|---|---|---|
+| `m_AllocTracked` | `count_total` through a volatile read | 225 -> **233/249**, the best on that function | **+40** |
+| `ServerMainThread` | two global zero-stores reordered (86b proper, no volatile) | neutral | **0** |
+| `gm_AllocSpieler` | six parent loads pinned to their stores | 662 -> **670/1056** | **+2** |
+
+The `gm_AllocSpieler` case is the cleanest test, because it removed every excuse: it is
+**byte-neutral** (real body 3689 both ways, so no §88 span risk), it *deletes* 11
+insert/delete hunks rather than trading registers, and it moves the chain from 17/45 to
+33/45 text-identical with the reference. It still cost +2.
+
+**Why the rulers disagree.** `volatile` forces each load to its use, which is exactly what
+the reference's schedule looks like locally — so the aligned ruler, which pairs
+instructions positionally, scores it up. But it also forbids msvc6 from reusing a loaded
+value anywhere else in the function, and the resulting register pressure shifts code
+*outside* the region being fixed. The alignment gain is real and local; the loss is real
+and remote.
+
+**Practical rule: treat an aligned-only gain from `volatile` as unproven until linked, and
+expect it to lose.** A `volatile` edit is worth landing only when it changes *block
+placement* (§86, which paid -200 on `cm_ExSellObjekt` by un-exiling a join) rather than
+merely re-pairing loads and stores inside a block. Re-pairing is cosmetic to the linker.
+
+Also from this lane, two corrections worth carrying:
+
+- The 344-byte "parent-wins cluster" was **174 bytes** of chain plus its displacement wake.
+  A census that sums a region's mismatching bytes will attribute the wake to the fault; the
+  chain's own byte multiset and kind multiset were *equal* to the reference's.
+- `gm_AllocSpieler`'s header claimed a 20-variant CFLAGS sweep in which "every one scores
+  identically". False: **`/Ow` is load-bearing** (766 -> 317 without it) and **`/Oa` is
+  entirely inert**. A sweep that reports a flat result is worth re-running before it is
+  cited as evidence.
+
+`src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c`

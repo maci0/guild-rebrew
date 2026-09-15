@@ -550,6 +550,30 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		    *(float*) 0x10025714;
 		goto stat_modifiers;
 	}
+	/* Round 194: the parent-wins chain is ONE fault, not the five the
+	 * round-429 census implied, and not 344 bytes -- the chain proper is
+	 * ref 0x10018d5d-0x10018e0b, 45 instructions / 174 bytes, and OURS IS
+	 * ALSO 174 bytes with an EQUAL byte multiset and an EQUAL kind
+	 * multiset.  Zero instruction-length difference: it is a pure
+	 * load-hoist repeated in all four arms.  The reference pairs each
+	 * LOAD with its own STORE (verified 0x10018d93: `mov dl,[esi+0xc]` /
+	 * `mov [ebp+0xc],dl` / `mov eax,[esi+0x1d0]` / `mov [ebp+0x1d0],eax` /
+	 * `mov cl,[esi+0x217]` / `mov [ebp+0x217],cl`); msvc6 hoists all three
+	 * loads above all three stores because `slot` and `mother`/`father`
+	 * are independent heap pointers it cannot prove non-aliasing for --
+	 * shapes 86b's mechanism seen from the LOAD side.  The STORES were
+	 * already in reference order on both sides; only the loads moved, so
+	 * do not re-diagnose this by reading store order.
+	 * Volatile-qualifying the six parent reads pins them: aligned
+	 * 662 -> 670, hunks 178 -> 166, insert/delete 117 -> 106, the chain
+	 * going 17/45 -> 33/45 text-identical with the reference's exact
+	 * LOAD,STORE pairing in all four arms, at real body 3689 both ways
+	 * (byte-neutral).  It costs **+2 linked**, so it is NOT applied.
+	 * Residue after it was 10 branch displacements all off by a constant
+	 * -3, inherited from upstream rather than from this chain.
+	 * ALSO CORRECTED: this file's header claimed a 20-variant CFLAGS sweep
+	 * where "every one scores identically".  False -- `/Ow` is heavily
+	 * load-bearing (766 -> 317 without it) while `/Oa` is entirely inert. */
 	slot[0xd] = 1;
 	if (mother[2] == 6 || mother[2] == 7 || mother[2] == 5) {
 		slot[0xc] = mother[0xc];
