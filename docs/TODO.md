@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-499 (2026-09-14): characterised the tree's closest row — 49 bytes of
+pure push scheduling. Residue 8,652.**
+
+- **srv_LoadBuf is the closest unmatched row**: 49 differing bytes of 750,
+  **obj 750 = size 750**, and **226 instructions against the reference's
+  226**. Equal counts and equal size mean nothing is missing, extra, or
+  differently encoded — every differing byte is an operand or a position.
+- **Nine clusters, all one shape.** The first: reference
+  `mov ecx,[ebp+4]; PUSH EAX; mov [ebp+0x2c],ecx; mov edx,[ebp];
+  and edx,0x400; PUSH EBP; neg edx; sbb edx,edx` against our identical
+  instructions with both pushes emitted AFTER the computation. The second
+  cluster is the same signature (`lea edx,[esp+0xb0]` computed between two
+  pushes); the rest are single bytes consistent with register fallout.
+- **This is §122's pattern on a FOURTH function** (after
+  ls_LoadBuildingEntityState, ServerMainThread, gm_AllocSpieler) — C can
+  request the operations but not their interleaving with argument pushes.
+  **It is now the most common residual shape in the tree.**
+- **Row already exhausted at source level**, per its own header: every cmd-3
+  respelling inert at 661-662; lobby sprintf/mask reorderings **crater**
+  (109 at 772, 301-302); memset split/total-first/recv-first 647-660; memcpy
+  addend swaps and volatile addends 661-662. Every reordering class a C
+  author can express has been tried.
+- Recorded rather than re-probed (§140). **A function can be
+  instruction-exact, size-exact and still differ**, because the order of
+  `push` against arithmetic is the compiler's to choose — that is the
+  cleanest available statement of what the remaining residue is.
+
 **Round-498 (2026-09-14): verification checkpoint — re-measured the claims
 later sections depend on. Residue 8,652.**
 

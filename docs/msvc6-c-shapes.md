@@ -6042,3 +6042,44 @@ ground. **The one thing worth carrying forward: 8,652 is a `.text`-only residue 
 size-identical file, with the import table, exports, `.rdata`, `.data`, `.reloc` and all headers
 byte-identical** (section 98) — the remaining gap is entirely instruction-level codegen inside
 19 functions.
+
+## 140. `srv_LoadBuf`: 49 bytes, zero length difference, nine push-scheduling clusters
+
+`srv_LoadBuf` (0x1000a570) is the closest unmatched row in the tree — **49 differing bytes** of
+750, with `obj 750 = size 750` and **226 instructions against the reference's 226**. Equal counts
+and equal size mean no instruction is missing, extra, or differently encoded: every differing byte
+is an operand or a position.
+
+The 49 bytes fall into **nine clusters**, and the first one is representative:
+
+```
+reference   mov ecx,[ebp+4] ; PUSH EAX ; mov [ebp+0x2c],ecx ; mov edx,[ebp]
+            and edx,0x400 ; PUSH EBP ; neg edx ; sbb edx,edx
+ours        mov ecx,[ebp+4] ; mov [ebp+0x2c],ecx ; mov edx,[ebp] ; and edx,0x400
+            PUSH EAX ; neg edx ; sbb edx,edx ; PUSH EBP
+```
+
+**Identical instructions, identical count, identical total size — only the two `push`es sit in
+different slots.** The reference interleaves argument setup into the computation; we emit the
+computation and then the pushes. The second cluster is the same signature
+(`lea edx,[esp+0xb0]` computed *between* `push ecx` and `push 0x10029a70`), and the remaining
+clusters are single bytes, consistent with register-choice fallout from the same scheduling.
+
+This is section 122's pattern — *C can request the operations but not their interleaving with the
+argument pushes* — appearing on a fourth independent function (after `ls_LoadBuildingEntityState`,
+`ServerMainThread` and `gm_AllocSpieler`). It is now the single most common residual shape in the
+tree.
+
+**The row is already exhausted at source level.** The file header records a long series of
+measured, reverted attempts against exactly these clusters: "every cmd-3 respelling (store order,
+guard byte-offset/element/index forms, c12-via-status, dword guard, hoisted packet/c1 locals,
+per-arm locals, c1-based arg, volatile loads) inert at 661-662; lobby sprintf/mask reorderings
+crater (status-arg 109 at 772, mask-via-status 301-302); memset split/total-first/recv-first
+647-660; memcpy dest addend swap, sum/buf/recv locals, volatile addends 661-662". Every class of
+reordering a C author can express has been tried here and either does nothing or craters.
+
+Recorded rather than re-probed: **the closest row in the tree is 49 bytes of pure push
+scheduling**, its source-level levers are documented as spent, and it is the cleanest available
+statement of what the remaining residue actually is. A function can be instruction-exact,
+size-exact and still differ — because the order of `push` against arithmetic is the compiler's to
+choose.
