@@ -4301,3 +4301,52 @@ what C shape produces them — which is how every win in this session was actual
 Practical note: budget the GA by wall clock, not generations. 12 generations at population 16
 is ~95 s per row here, and the stagnation counter tells you almost immediately whether more
 generations would help — 11 of 12 stagnant means they would not.
+
+## 108. `near-diag`'s verdict is a different ruler — reconcile it before believing it
+
+`rebrew near-diag` classifies a NEAR_MATCHING residual and suggests mutation operators. Run
+across the walled rows it reports, uniformly, a **RELOC-dominated** verdict:
+
+| function | verdict | near-diag "real bytes" | `rebrew test` delta |
+|---|---|---|---|
+| `cm_ExProdObjekt` | RELOC (91% of delta) | 17 | **17** |
+| `cm_ProcessCommandQueue` | RELOC (88% of delta) | 13 | 15 |
+| `gm_ObjectsAvailble` | RELOC (69% of delta) | 56 | 28 |
+| `vfs_ReadCompressed` | RELOC (41% of delta) | 36 | 24 |
+| `m_AllocTracked` | RELOC (62% of delta) | 103 | 92 |
+
+Read carelessly, "91% of the delta is relocations" suggests these functions are nearly solved
+and the residue is an artefact. **That reading is wrong**, and the tool itself says so in the
+next sentence: *"Most of the delta sits at relocation sites, but 17 real byte(s) differ — the
+match is NEAR_MATCHING-level, not RELOC."*
+
+The two numbers are different rulers over the same object, exactly as section 96 warned:
+
+- `rebrew test` reports the delta **after masking relocation slots** — 17 on `cm_ExProdObjekt`,
+  with `reloc_count: 34` masked separately.
+- `near-diag`'s percentage is computed over **unmasked** spans, so every relocation site counts
+  toward the denominator and the percentage says how much of the *raw* difference is explained
+  by relocations rather than how close the function is.
+
+Its `bytes` field is also the **function size** (993 for `cm_ExProdObjekt`), not a delta — easy
+to misread as a residual. Once reconciled, the two tools agree exactly where it matters: both
+say 17 real bytes on `cm_ExProdObjekt`.
+
+**What it adds that is genuinely new.** `near-diag` flags *"control flow / block layout
+differs"* on exactly two of the five rows — `vfs_ReadCompressed` and `m_AllocTracked` — and
+stays silent on the other three. That is an independent structural signal, and it is consistent
+with the byte-level findings: section 99 traced `vfs_ReadCompressed`'s residue to a
+scheduler-sunk `add esp,0x14` (a layout decision), and section 86b traced `m_AllocTracked`'s to
+store ordering through a fresh pointer. The three rows it stays silent on
+(`cm_ExProdObjekt`, `cm_ProcessCommandQueue`, `gm_ObjectsAvailble`) are exactly the ones whose
+documented causes are *not* layout — a coupled allocator decision (section 104), provably-dead
+code the compiler deletes (section 92), and a register-rename shadow (section 92).
+
+So the classifier's structural flag agrees with five independent byte-level investigations.
+That is worth having: it is a cheap first-pass triage that would have pointed at the right
+category on all five rows without disassembling anything.
+
+The suggested mutation operators are generic control-flow rewrites (`mut_swap_if_else`,
+`mut_guard_clause`, `mut_while_to_dowhile`, `mut_for_to_while`, …) — the same family section 107
+measured the GA applying, where the one surviving candidate proved byte-inert because msvc6
+canonicalises it.

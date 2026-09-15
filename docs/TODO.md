@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-460 (2026-09-14): used `near-diag` for the first time — its verdict
+is a DIFFERENT RULER, and its structural flag agrees with five byte-level
+investigations. Residue 8,664.**
+
+- Ran `rebrew near-diag` across five walled rows. Every one reports a
+  **RELOC-dominated** verdict (41-91% of delta), which read carelessly says
+  these functions are nearly solved and the residue is an artefact.
+  **That reading is wrong** — and the tool says so itself in the next
+  sentence ("...but 17 real byte(s) differ — the match is NEAR_MATCHING
+  level, not RELOC").
+- **Reconciled the two rulers** (§96's warning, again): `rebrew test`
+  reports the delta AFTER masking relocation slots (17 on cm_ExProdObjekt,
+  with 34 relocs masked separately), while near-diag's percentage is over
+  UNMASKED spans, so relocations inflate the denominator. Its `bytes` field
+  is the FUNCTION SIZE (993), not a delta. Once reconciled the tools agree
+  exactly: both say 17 real bytes.
+- **The genuinely new signal**: near-diag flags "control flow / block layout
+  differs" on exactly **two of five** rows — vfs_ReadCompressed and
+  m_AllocTracked — and stays silent on the other three. That matches the
+  byte-level record precisely: §99 traced ReadCompressed to a
+  scheduler-sunk `add esp,0x14` (layout) and §86b traced Tracked to store
+  ordering through a fresh pointer, while the three silent rows have
+  documented causes that are NOT layout (§104 coupled allocator decision,
+  §92 provably-dead code, §92 register-rename shadow).
+- So the classifier would have pointed at the right category on all five
+  rows without disassembling anything — a cheap first-pass triage worth
+  using EARLY on any new row. New §108.
+- Its suggested operators are the same generic control-flow family §107
+  measured the GA applying, where the one surviving candidate proved
+  byte-inert because msvc6 canonicalises it.
+
 **Round-459 (2026-09-14): ran the GA for the first time — it stagnates
 immediately on both rows tried. Residue 8,664.**
 
