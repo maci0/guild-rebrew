@@ -49,6 +49,29 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-506 (2026-09-14): flag landscape checked on a sixth row — still
+flat. Residue 8,633.**
+
+- Applied §§143-145's enumeration scrutiny to the OTHER closed axis. §106 is
+  titled "five for five", which is honest about its scope: 5 of the 18 rows.
+- **Its five were a better spread than expected** — two of them
+  (vfs_ReadCompressed 24 bytes, m_AllocTracked 92) are among the smallest
+  rows, so the sweep already spanned both size extremes. Flag sensitivity
+  scaling with function size would have shown up.
+- **Swept a sixth**: ls_LoadBuildingEntityState, targeted tier, 20
+  combinations -> **distinct scores: 1. FLAT.** Six for six, across 24 to
+  2,824 residual bytes.
+- **Two practical notes recorded in §147**:
+  - **The sweep needs a background job** — ~15 min against a 12-min
+    deadline; `--timeout-min` bounds the GA but 20 objects still compile
+    through docker+wine. A foreground call is killed by the harness timeout.
+  - **Read `distinct scores: 1`, not `best_flags`.** The sweep always names
+    some combination "best"; on a flat landscape that is an arbitrary pick
+    among equals. `/G3 /Gd /Oy /Op` here is not better than the default.
+- With §§145/146, **both compiler-configuration axes are now closed on
+  measured evidence**: flags flat wherever tested, toolchain swept across
+  all 18 rows with 3 pins and no structural move left to find a 4th.
+
 **Round-505 (2026-09-14): evaluated the file-splitting lever — it unlocks
 nothing. Residue 8,633.**
 

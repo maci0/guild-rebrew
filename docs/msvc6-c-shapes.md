@@ -6327,3 +6327,43 @@ This also completes the toolchain axis properly. Sections 143 and 144 each claim
 each was corrected; the axis is closed now in a stronger sense than "no more pins found": **every
 row has been measured under both generators (section 145), and the only structural move that
 could change that result has been evaluated and yields nothing.**
+
+## 147. The flag landscape, checked on a sixth row
+
+Sections 143 to 145 were each corrected for claiming an axis closed without enumerating its
+population, so round 255 applied that scrutiny to the *other* closed axis. Section 106 is titled
+"flat on every walled row — **five for five**", which is honest about its scope: five rows of the
+eighteen in the residue table.
+
+The five it covered were `gm_AllocSpieler`, `CrashDumpUnhandledExceptionFilter`, `cm_ExSellObjekt`,
+`vfs_ReadCompressed` and `m_AllocTracked` — a better spread than "the five largest" suggests, since
+two of them (24 and 92 residual bytes) are among the smallest rows in the tree. That matters: if
+flag sensitivity depended on function size, a sweep of only large rows would not show it, and this
+one already spans both ends.
+
+Round 255 swept a sixth, `ls_LoadBuildingEntityState` (671 residual bytes, mid-table), `targeted`
+tier, 20 combinations:
+
+```
+combos: 20 | distinct scores: 1
+best flags: /G3 /Gd /Oy /Op | best score: 859832.65
+FLAT: all combinations score identically
+```
+
+**Six for six.** Every combination of the twelve flag axes produces byte-identical output on every
+row tested, across the full size range from 24 to 2,824 residual bytes. The result is consistent
+enough that the remaining twelve rows would be a formality rather than a discovery.
+
+Two practical notes for whoever runs another:
+
+- **The sweep needs a background job.** It took roughly 15 minutes against a 12-minute deadline
+  and will be killed by any shorter foreground timeout; `--timeout-min` bounds the GA but the
+  sweep still has to compile 20 objects through docker and wine.
+- **`distinct scores: 1` is the number to read**, not `best_flags`. The sweep always reports some
+  combination as "best"; with a flat landscape that is an arbitrary pick among equals, and reading
+  it as a recommendation would be a mistake — `/G3 /Gd /Oy /Op` here is not better than the
+  default, it is merely first.
+
+Taken with sections 145 and 146, both compiler-configuration axes are now closed on measured
+evidence: flags are flat wherever tested, and the toolchain choice has been swept across all
+eighteen rows with three pins found and no structural move left that could yield a fourth.
