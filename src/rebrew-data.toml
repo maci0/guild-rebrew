@@ -476,13 +476,13 @@ status = "UNCHECKED"
 name = "g_str_10028b04"
 section = ".data"
 type = "char[1]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10028aec"]
 name = "g_str_10028aec"
 section = ".data"
 type = "char[1]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10028888"]
 name = "g_str_10028888"
@@ -494,13 +494,13 @@ status = "VERIFIED"
 name = "s_m_pool_get_free_tp_m_pool_10028b78"
 section = ".data"
 type = "char[27]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10028b60"]
 name = "s_m_pool_alloc_tp_m_pool_10028b60"
 section = ".data"
 type = "char[24]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10034678"]
 name = "g_stream_count"

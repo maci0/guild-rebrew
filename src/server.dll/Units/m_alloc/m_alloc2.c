@@ -294,18 +294,22 @@ void __cdecl m_pool_free(int* pool, int* block)
 	}
 }
 
-char g_str_10028888[1] = {
-    0x44,
-};
-char g_str_10028aec[1] = {
-    0x2d,
-};
-char g_str_10028b04[1] = {
-    0x5b,
-};
-extern char s_m_pool_alloc_tp_m_pool_10028b60[24] = {
-    0x6d,
-};
-extern char s_m_pool_get_free_tp_m_pool_10028b78[27] = {
-    0x6d,
-};
+/* Five truncated stub arrays used to live here -- g_str_10028888,
+ * g_str_10028aec, g_str_10028b04, s_m_pool_alloc_tp_m_pool_10028b60 and
+ * s_m_pool_get_free_tp_m_pool_10028b78 -- each holding only the FIRST BYTE of
+ * a string the reference has in full at that VA.  Every one of those strings
+ * is already emitted by this TU as a real `??_C@` COMDAT literal, from the
+ * call sites above:
+ *
+ *   0x10028888  "D:\Develop\Units\m_alloc\m_alloc.c"    (LogMessageInternal)
+ *   0x10028aec  "-> Pointer not freed:%s"               (sprintf)
+ *   0x10028b04  "[*] Memory-Shutdown-Anomaly: [*]..."   (sprintf)
+ *   0x10028b60  "m:pool_alloc(tp_m_pool)"               (m_AllocTracked)
+ *   0x10028b78  "m:pool_get_free(tp_m_pool)"            (m_AllocTracked)
+ *
+ * So the object emitted the text TWICE: 64 bytes of stubs in its regular
+ * `.data`, and the COMDATs after them -- where the reference has only the
+ * strings.  Nothing referenced the stub names.  Dropping them lets the COMDAT
+ * run slide down into the reference's addresses (section 100: an object's
+ * regular `.data` precedes its COMDATs, so the stubs were displacing the very
+ * text they stood in for). */

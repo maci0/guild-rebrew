@@ -20,10 +20,17 @@ extern int g_alloc_root_name_4;      /* 0x117640a4 */
  * link_stubs.c supplied two zeroed ints at 0x100366dc instead, so the eight
  * bytes the reference has here were absent from .data and the group name
  * arrived as zeros.  Defined here because this TU's own literals end exactly
- * at 0x10028938, which is where the reference puts the string. */
-char g_default_group_name_str[8] = { '_', 'm', 'a', 'i', 'n', '_', ':', '\0' };
-#define g_default_group_name   (*(int*) &g_default_group_name_str[0])
-#define g_default_group_name_4 (*(int*) &g_default_group_name_str[4])
+ * at 0x10028938, which is where the reference puts the string.
+ *
+ * It must be spelled as an anonymous string LITERAL, not a named array: msvc6
+ * puts a named global in the object's regular `.data` and every string literal
+ * in its own `??_C@` COMDAT, and the linker takes an object's regular `.data`
+ * before its COMDATs (section 100).  A named array therefore lands FIRST, at
+ * 0x100288e0, where the reference has "Memory-Underflow Error" -- which is
+ * what round 511's first attempt did.  The reference puts "_main_:" LAST in
+ * this TU's run, after both Memory* strings, so it has to be a literal too. */
+#define g_default_group_name   (*(const int*) "_main_:")
+#define g_default_group_name_4 (*(const int*) ("_main_:" + 4))
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* message);
 extern void __cdecl free(void* ptr);

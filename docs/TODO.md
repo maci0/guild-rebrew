@@ -49,6 +49,22 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-512 (data pass, round 6): named array lands first; five stubs duplicated COMDATs.
+`.data` 26,066 -> 25,884 (-182). `.text` 8,635 -> 8,636 (+1, placement).**
+
+- **§152's `"_main_:"` was in the wrong place inside its own TU.** A named `char[8]` goes in
+  regular `.data` and lands FIRST (msvc6: regular `.data` before `??_C@` COMDATs, §100). The
+  reference wants it LAST after the two Memory* strings. Spelled as an anonymous literal;
+  `0x100288e0..0x10028940` now byte-identical. `.data` -88.
+- **Five truncated stubs in `m_alloc2.c`** held only the first byte of strings this TU already
+  emits as COMDAT literals. Nothing referenced the names. Dropping them: all five VAs now MATCH.
+  `.data` -94 more.
+- **Quirk:** probe said best shift +28 at the cut after the stubs; shrinking by 64 still won,
+  because the stubs *were* the displacers of the content that belongs at the cut. "Best shift
+  +N" means the region after the cut wants +N relative to today, not "never shrink this object."
+- `.text` +1 is placement (objects md5-identical). `RESIDUE_BASELINE` 8635->8636,
+  `DATA_BASELINE` 26,066->25,884. See §153.
+
 **Round-511 (data pass, round 5): built the predictor, then used it. Raw-link
 `.data` 26,372 -> 26,066 (-306) AND `.text` 8,636 -> 8,635 (-1).**
 

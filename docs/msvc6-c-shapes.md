@@ -6942,3 +6942,70 @@ reference never used, and nothing in the build complains.
 **When the probe points at a region and the symbol there resolves to `link_stubs.c.obj`, that is
 the finding.** 40 annotated `.data` symbols still resolve there; each is a candidate for the same
 treatment — define it in the TU whose literals abut its reference VA.
+
+## 153. A named array lands first; a literal lands last (round 6 of the data pass)
+
+§152 defined `"_main_:"` as a named `char[8]` in `m_alloc.c` and got the bytes into the
+section. This round found that those bytes were in the **wrong place inside that TU's run**,
+and that five truncated stubs in `m_alloc2.c` were the same class of bug as §151.
+
+### The ordering bug in §152's own fix
+
+The reference's `m_alloc.c` literal run is:
+
+```
+0x100288e0  "Memory-Underflow Error"
+0x100288f8  "Memory freed more than once..."
+0x10028938  "_main_:"                 <- LAST
+```
+
+Round 511's named array `g_default_group_name_str[8]` landed at `0x100288e0` -- FIRST --
+because msvc6 puts a named global in the object's regular `.data` and every string literal in
+its own `??_C@` COMDAT, and the linker takes the object's regular `.data` before its COMDATs
+(§100). The probe then pointed at a `+28` opportunity whose first divergence was exactly that
+displaced `"Memory-Underflow Error"`.
+
+Spelling it as an anonymous literal:
+
+```c
+#define g_default_group_name   (*(const int*) "_main_:")
+#define g_default_group_name_4 (*(const int*) ("_main_:" + 4))
+```
+
+puts it in a COMDAT after the two Memory* strings. Result: `0x100288e0..0x10028940` is
+byte-identical to the reference, and `"_main_:"` sits at `0x10028938` exactly.
+`.data` **26,066 → 25,978 (−88)**.
+
+### Five truncated stubs that duplicated COMDAT literals
+
+`m_alloc2.c` defined five named arrays holding only the first byte of strings this TU already
+emits as `??_C@` COMDATs from real call sites:
+
+| VA | stub | real literal already in the TU |
+|---|---|---|
+| `0x10028888` | `g_str_10028888[1] = {0x44}` | `"D:\\Develop\\Units\\m_alloc\\m_alloc.c"` |
+| `0x10028aec` | `g_str_10028aec[1] = {0x2d}` | `"-> Pointer not freed:%s"` |
+| `0x10028b04` | `g_str_10028b04[1] = {0x5b}` | `"[*] Memory-Shutdown-Anomaly: [*]..."` |
+| `0x10028b60` | `s_m_pool_alloc...[24] = {0x6d}` | `"m:pool_alloc(tp_m_pool)"` |
+| `0x10028b78` | `s_m_pool_get_free...[27] = {0x6d}` | `"m:pool_get_free(tp_m_pool)"` |
+
+Nothing referenced the stub names. The object emitted the text twice: ~64 bytes of stubs in
+regular `.data`, then the COMDATs after them. Dropping the stubs lets the COMDAT run slide into
+the reference addresses. All five now MATCH at their exact VAs. `.data` **25,978 → 25,884
+(−94 more)**.
+
+### Quirk: the probe's +28 and a −64 shrink are not a contradiction
+
+The probe at `0x10028bf0` said best shift **+28**. Removing 64 bytes of stubs looks like the
+wrong direction. It is not: the stubs occupied the *start* of this object's contribution and
+displaced the COMDATs that belong there. Shrinking by deleting the displacers moves the *content
+that should be there* into place; the probe's +28 is the residual misalignment *after* that
+slide, still waiting on something further upstream or downstream. Do not read "best shift +N"
+as "never shrink this object" -- read it as "the region after the cut wants +N relative to
+today." An edit that removes bytes *before* the cut and lets later content fall into the cut
+can still win.
+
+### `.text` +1 is placement again
+
+`RESIDUE_BASELINE` 8635 → 8636. The three residue-table objects (`gm_AllocGebaeude`,
+`ahm_ExAllocAlchemist`, `spiel_dumpD`) are md5-identical before and after. Same class as §151.
