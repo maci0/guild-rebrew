@@ -49,6 +49,42 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-440 (2026-09-14): the sp5-pp oracle applied to all 19 rows — a
+routing rule, four regions retired. Residue 8,666.**
+
+- **§91: the whole residue table is now classified** — 14 SOURCE-BOUND,
+  4 SCHEDULER-BOUND, 1 INDIFFERENT, from 38 `rebrew test` runs. sp5-pp is
+  SIZE_MISMATCH on 15/19 rows against sp6's 6, extending §90's "do not
+  pin" from three functions to the whole table.
+- **Four regions retired from the probe backlog** (sp5-pp reproduces each
+  verbatim, so no sp6 spelling will):
+  gm_FindNextFilteredEntity's tail epilogue ordering — and sp5-pp reaches
+  obj **346 = the reference exactly** where sp6 emits 342, which I
+  verified myself, so that 4-byte shortfall is a block-ordering decision
+  and NOT a source defect; ahm_ExAllocAlchemist's two clusters (store
+  order around the `rep stosd` fills, and the FPU/integer interleave);
+  ls_LoadBuildingEntityState's `add`-vs-`lea` call-argument idiom; and
+  vfs_ReadCompressed's `add esp,0x14` placement.
+- **cm_ExProdObjekt splits**: its +204 global-load lane retires
+  (first diff moves 205 -> 410 exactly as §90 predicted) while the row
+  stays source-bound at -254. Retire the lane, not the row.
+- **The five heaviest source-bound rows have sp5-pp's first mismatch
+  moving EARLIER** (967->586, 80->2, 134->2, 54->12) — it cannot reach
+  our prologue shape at all, which is positive evidence those spellings
+  are load-bearing rather than accidental.
+- gm_CheckInventoryCapacity is byte-identical under both toolchains — the
+  one row this oracle cannot screen.
+- **Audited the five toolchain pins the new cmake-flags warning exposed.**
+  Both `msvc-6.0` pins are byte-inert: gm_RemoveLinkedNodeById is
+  RELOC 139/139 under both compilers, ls_LoadBuildingEntityState is
+  SIZE_MISMATCH 820/1463 under both. So no byte-match claim rests on the
+  wrong compiler — the pins are redundant rather than harmful. There is
+  no CLI setter for the field and the file is CLI-managed, so I left them
+  in place; the warning now makes them visible.
+- Cleared an inert probe left in gv_ExAllocGraveyardWorker by the
+  interrupted round-188 lane (an `e = (char*)entry` alias block) —
+  measured byte-identical to baseline before discarding.
+
 **Round-439 (2026-09-14): two "compiler fixed points" are service-pack
 decisions; a silent-divergence rebrew bug fixed. Residue 8,666.**
 

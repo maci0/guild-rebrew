@@ -3326,3 +3326,42 @@ spelling under sp6 is likely to, and the lane should be retired rather than prob
 
 `src/server.dll/Units/vfs/vfs_ReadCompressed.c`,
 `src/server.dll/DieGildeAddOn/command/command_c/cm_ExProdObjekt.c`
+
+## 91. The sp5-pp oracle, applied to the whole residue table: 14 source-bound, 4 scheduler-bound
+
+Section 90 established `msvc-6.0-sp5-pp` as a diagnostic: where it already emits the
+reference's shape, no sp6 source spelling is likely to, so that lane should be retired
+rather than probed. Running it over all 19 non-matching functions (38 `rebrew test`
+runs, `--no-promote`, each function's own VA and size) turns that into a routing rule.
+
+The screen is one-sided. sp5-pp is `SIZE_MISMATCH` on 15 of 19 rows against sp6's 6,
+which extends section 90's "do not pin" from three functions to the whole table. But
+the *classification* is the useful part:
+
+**SCHEDULER-BOUND (retire these regions)** — sp5-pp equals or beats sp6:
+
+| function | sp6 | sp5-pp | the region sp5-pp gets right |
+|---|---|---|---|
+| `gm_FindNextFilteredEntity` | 162/346, obj **342** | 171/346, obj **346** | tail epilogue ordering, +0x315-0x336: the cold `xor cl,cl; jmp` stub placed *after* the pop/ret (ref 0x100170bb `0f844effffff` / `5f 5d 5b 5e` / `c3` / `32c9` / `ebc7`). sp5-pp also fixes the 4-byte body shortfall, so that is a block-ordering decision, not a source defect. Probe the body, not the epilogue. |
+| `ahm_ExAllocAlchemist` | 828/1002 | 834/1002 | two clusters: the store order around the two `rep stosd` fills (ref 0x1000bee6 `83c8ff` / `66c706ffff` / `8982a4580310` / `8d92fc580310`), and the FPU chain interleaved with integer stores (ref 0x1000c01e `db442414` / `d9461c` / `d80db8560210` / `895618` / `895c2414` / `dec1`). |
+| `ls_LoadBuildingEntityState` | 820/1463 | 824/1463 | the `ls_ReadVfsDataChecked` argument idiom at +0x687-0x836 — `add ecx,edx` interleaved into the push run (ref 0x10012b9f `8b5671` / `8bcb` / `57` / `6a01` / `03ca`) against the folded `lea eax,[ebx+edx+4]` (0x10012bc4 `8d441304`). The per-site `add`-vs-`lea` choice is version-dependent. |
+| `vfs_ReadCompressed` | 468/492, diffs to 417 | 461/492, diffs **end at 395** | the `add esp,0x14` placement, confirming section 90. |
+
+**INDIFFERENT (1 row)** — `gm_CheckInventoryCapacity` is byte-for-byte identical under
+both toolchains (same 97 mismatches at the same offsets). The one row this oracle cannot
+screen at all.
+
+**SOURCE-BOUND (14 rows)** — sp6 wins, so our shape is doing real work and probing can
+pay. On the five heaviest (`ServerMainThread` -849, `srv_LoadBuf` -571,
+`gm_AllocSpieler` -554, `gm_AllocGebaeude` -356, `vfs_OpenStream` -354) sp5-pp's first
+mismatch moves *earlier* (967->586, 80->2, 134->2, 54->12) — it cannot even reach our
+current prologue shape, which is strong evidence those spellings are load-bearing.
+
+One row splits: `cm_ExProdObjekt`'s first diff moves 205 -> 410 exactly as section 90
+predicted, so its **+204 global-load lane is scheduler-bound and retires** — but the
+function as a whole is -254 and `SIZE_MISMATCH` under sp5-pp, so it classifies
+source-bound. Retire the lane, not the row. Byte 410 stays allocator-level.
+
+Practical use: classify before probing. A row where sp5-pp's first mismatch moves
+*earlier* is source-bound; a region sp5-pp reproduces verbatim is scheduler-bound and
+should be written up as a wall instead of probed again.
