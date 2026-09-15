@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-481 (2026-09-14): bounded a missing byte from a jump displacement;
+two shapes rejected. Residue 8,652.**
+
+- `ls_LoadBuildingEntityState` is 3 bytes short with its first non-reloc
+  divergence at **+0x3c** — which turns out to be a **readout, not a fault**:
+  the only differing bytes there are a `jle` displacement (ref `0x4ba`, ours
+  `0x4b8`), same instruction, different target.
+- **That gives an arithmetic bound for free**: ref jumps to +0x4fe, we jump
+  to +0x4fc, so **exactly 2 of the 3 missing bytes lie between +0x44 and
+  +0x4fe**, and the third is after it. A two-byte window located without
+  disassembling anything (same principle as §95).
+- Walking the window in lockstep: streams desync at **+0x2af** in a repeated
+  `ls_ReadVfsDataChecked` pattern. The reference computes the address in TWO
+  steps interleaved among the argument pushes (`mov ecx,ebx` … `add ecx,edx`
+  between `push 1` and `push 4`); we fold it into one `lea`, which is
+  shorter.
+- **Two shapes measured at the link, both rejected**: reordering the address
+  expression to the reference's operand order = **+0, byte-identical**
+  (msvc6 canonicalises addition order — same normalisation as §92's commuted
+  multiplies and §107's double negation); splitting it through an
+  `int field_addr` local = **+52** (the local pins the value where the
+  reference keeps it in flight between pushes).
+- So the `lea`-vs-`add` split is another §109/§120 case: **C can request the
+  operations but not their interleaving with argument pushes.** New §122.
+- Prior art re-confirmed on this row: the eight field reads are already
+  `*(volatile int*)(esi + 0x71)` — one of the rare places `volatile` WON,
+  forcing the reference's per-call reload.
+
 **Round-480 (2026-09-14): chased the tree's smallest size gap — three
 shapes, all worse. Residue 8,652.**
 

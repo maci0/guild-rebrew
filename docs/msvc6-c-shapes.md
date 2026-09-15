@@ -5213,3 +5213,63 @@ is not: **three shapes, +36 / +448 / object-worse, all reverted.** Also worth no
 next reader, the header declares `gm_QueryEntitySum(int, int)` while the definition in
 `spiel622.c` is `(int, unsigned int)` — a real inconsistency, but narrowing the declaration to
 match the use measured worse, so it is documented rather than "fixed".
+
+## 122. Bounding a missing byte with a jump displacement
+
+`ls_LoadBuildingEntityState` (0x100128f0) is 3 bytes short (obj 1460 against 1463) and its first
+non-relocation divergence is very early, at **+0x3c**. Early faults displace everything after
+them, so it looked like the highest-leverage target left. It is worth recording how the search
+was narrowed, because the technique is reusable and cost nothing.
+
+**The first divergence is not a fault — it is a readout.** At +0x3c the only differing bytes are
+inside a `jle` displacement: reference `0x4ba`, ours `0x4b8`. Both sides emit the same
+instruction; only the target differs. That immediately gives an arithmetic bound:
+
+```
+ref  jle -> +0x4fe        ours jle -> +0x4fc
+=> between +0x44 and +0x4fe we emit exactly 2 bytes fewer
+=> the third missing byte is somewhere after +0x4fe
+```
+
+So a two-byte window was located without disassembling anything, purely from a branch
+displacement (the same principle as section 95: a `jcc` width or target is a *measurement* of
+downstream layout, never a defect in itself).
+
+Walking that window in lockstep shows the streams desync at **+0x2af**, in a repeated
+`ls_ReadVfsDataChecked` call pattern. The reference computes the address in two steps,
+interleaved among the argument pushes:
+
+```
+0x10012b9f  8b5671    mov edx,[esi+0x71]
+0x10012ba2  8bcb      mov ecx,ebx            <- load_result
+0x10012ba4  57        push edi
+0x10012ba5  6a01      push 1
+0x10012ba7  03ca      add ecx,edx            <- second step, between the pushes
+0x10012ba9  6a04      push 4
+0x10012bab  51        push ecx
+```
+
+We fold the same expression into a single `lea`, which is shorter — that is where the two bytes
+go.
+
+Two shapes tested at the link, both rejected:
+
+| shape | link delta |
+|---|---|
+| reorder the address expression to `load_result + field + off` | **+0** (byte-identical) |
+| split it through an `int field_addr` local, two statements | **+52** |
+
+The `+0` is the more interesting one: **msvc6 canonicalises the addition order**, so writing the
+operands in the reference's order changes nothing — the same normalisation section 92 found for
+commuted multiplies and section 107 for a double-negated comparison. And forcing the two-step
+form through a local *defeats* the reference's scheduling rather than reproducing it, because
+the local pins the value where the reference keeps it in flight between pushes.
+
+That leaves the `lea`-vs-`add` split as another instance of the pattern in sections 109 and 120:
+**the reference's instruction sequence is a scheduling outcome, and C can request the operations
+but not their interleaving with the argument pushes.**
+
+Existing prior art on this row, worth not re-deriving: the eight field reads are already spelled
+`*(volatile int*)(esi + 0x71)` — one of the rare places where `volatile` *won* (section 94 records
+it losing 4 of 4 elsewhere), because it forces the reference's per-call reload instead of a
+cached register.
