@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-485 (2026-09-14): localised ServerMainThread's +3, and split
+`volatile` into two rules. Residue 8,652.**
+
+- Drift sweep gives ServerMainThread four nested windows; subtracting them:
+  outer [0x406,0x55c) is **+1** while inner [0x443,0x498) is **+3**, so
+  there is a **-2** elsewhere — two faults of opposite sign separated
+  without reading a byte.
+- **The +3 is a rematerialised constant.** In the 85-byte window we emit
+  `mov dword ptr [esp+0x14],0xffffffff` (**8 bytes**) where the reference
+  emits `mov dword ptr [esp+0x1c],eax` (**4 bytes**). The reference loads
+  `mov eax,[ebx]`, tests `cmp eax,-1`, and on the equal path reuses the
+  compared register as the stored value.
+- **The source already expresses that** (it stores `sent_bytes`, the very
+  variable the `if` compared), so the divergence is a `volatile`
+  interaction, not a missing idiom.
+- **Two probes split the lever**: dropping `volatile` on the **store** =
+  **+4**; dropping it on the **read** (line 481 only) = **+0,
+  byte-identical**. So the store's volatile is **load-bearing** and the
+  read's is **inert** at that site.
+- **That refines §94.** "volatile loses 4 of 4" treats it as one lever; the
+  §122 exception on ls_LoadBuildingEntityState where volatile WON is a
+  *read*. New rule in §126: **a volatile READ can be inert or load-bearing
+  depending on whether the reference reloads; a volatile STORE is
+  load-bearing wherever the reference writes through.**
+- The rematerialised constant itself is not source-reachable — msvc6 chooses
+  between reusing the compared register and re-emitting the immediate, and
+  both C spellings compile identically.
+- Process note: one probe's assertion failed because the target line occurs
+  **twice** in the file, and the run still printed `+0` — which is the
+  BASELINE, not a result. Caught it by checking the edit applied before
+  trusting the number.
+
 **Round-484 (2026-09-14): guarded the composition collapse that cost round
 232. Residue 8,652.**
 

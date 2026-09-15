@@ -5417,3 +5417,62 @@ added after a specific round was lost to the failure it catches:
 The general point, and the reason to keep adding them: **a measurement harness needs guards
 against its own stale state more than against bad input.** Every one of these three produced
 confident, plausible, completely wrong numbers, and in each case the tree looked clean.
+
+## 126. `ServerMainThread`'s +3 window: a rematerialised constant the reference carries in a register
+
+The drift sweep (section 123) gives `ServerMainThread` four nested windows, and subtracting them
+is what makes the lead usable:
+
+```
+[0x406, 0x55c)  +1        [0x438, 0x510)  +2
+[0x3c5, 0x487)  +3        [0x443, 0x498)  +3   <- 85 bytes, the tightest
+```
+
+The outer window is only **+1** while the inner one is **+3**, so there is a **-2** elsewhere in
+`[0x406,0x55c)` — two faults of opposite sign, again separated without reading a byte.
+
+Disassembling the tight window shows the surplus exactly. We emit:
+
+```
++0x0454  8B  mov dword ptr [esp+0x14], 0xffffffff     <- 8 bytes
+```
+
+where the reference emits:
+
+```
+0x100097fb  4B  mov dword ptr [esp+0x1c], eax          <- 4 bytes
+```
+
+The reference already has the value in `eax`: four instructions earlier it loads
+`mov eax,[ebx]` and tests `cmp eax,-1`, so on the equal path `eax` *is* -1 and it reuses the
+compared value as the stored value. We rematerialise the constant instead.
+
+**The source already expresses this correctly** — it stores `sent_bytes`, the same variable the
+`if` compared:
+
+```c
+sent_bytes = *(volatile unsigned int*) transfer_progress;
+if (sent_bytes == 0xffffffff) {
+        ...
+        *(volatile unsigned int*) (cmd_buffer_primary + 4) = sent_bytes;
+```
+
+so the divergence is not a missing idiom but a `volatile` interaction. Two probes settle which
+side matters:
+
+| change | link delta |
+|---|---|
+| drop `volatile` on the **store** | **+4** |
+| drop `volatile` on the **read** (line 481 only) | **+0**, byte-identical |
+
+So the store's `volatile` is **load-bearing** — it is what forces the value to memory in the
+reference's shape — while the read's `volatile` at that site is **inert**. That is a useful
+asymmetry to record, because section 94 treats `volatile` as a single lever that loses 4 times
+out of 4, and the row-level exception noted in section 122 (`ls_LoadBuildingEntityState`, where
+`volatile` won) is likewise a *read*. The rule is finer than "volatile loses": **a `volatile`
+read can be inert or load-bearing depending on whether the reference reloads; a `volatile` store
+is load-bearing wherever the reference writes through.**
+
+The rematerialised constant itself is not reachable from source here: msvc6 chooses whether to
+reuse the compared register or re-emit the immediate, and both C spellings that express the
+intent compile to the same bytes.
