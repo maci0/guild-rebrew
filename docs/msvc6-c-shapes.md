@@ -5124,3 +5124,36 @@ indistinguishable from a missing one**. Three rounds of this session built or ha
 measurement that already existed — the call inventory in section 112 was a genuine gap, but this
 was not. Before building a measurement, grep `scripts/` and read the header comments; they carry
 the rationale for why each one exists.
+
+## 120. Two dead ends on `gm_AllocSpieler`, and a caution about shared-worktree probing
+
+Round 228 ran the first link-judged lane on `gm_AllocSpieler` (2,824 residual bytes, 33% of the
+tree). No win; two shapes are now measured and closed.
+
+**The `work` buffer size is not a free knob.** Our source declares `char work[0x3fc]`, and the
+reference's frame is `sub esp,0x41c`. Rounding the buffer to `0x400` does bring the emitted
+frame to the reference's value — but it costs **+341 bytes at the link**. Matching the frame
+size is not the same as matching the code that uses it: every `[esp+X]` displacement in the
+function shifts, and the positional compare loses far more downstream than the prologue gains.
+This is the same trap section 81 recorded for the `0x284`/`0x280` question, now confirmed from
+the opposite direction — *making* the frame match is as costly as leaving it wrong.
+
+**`double` → `float` on the trait interpolation is also a loss.** Changing
+`(double) *(unsigned short*)(slot + 0xa)` to `(float)` in the comparison and the loop bound was
+measured in the same probe: still **+341**. The x87 sequence the reference emits is not reached
+by narrowing the C type here.
+
+**The process caution is the more useful output.** This lane ran in a worktree shared with the
+coordinator, and its intermediate states were visible as ordinary uncommitted edits. Measuring
+"the baseline" while it worked produced **+345, then +18, then +5, then +341** on successive
+runs of the same command against a nominally clean tree — because the source and the compiled
+object were moving underneath. Two rules follow:
+
+- **`git status` clean does not mean the build is at baseline.** `linktest.sh` recompiles the
+  named file, but the rest of the object tree can still carry another lane's probe. Confirm a
+  baseline by seeing `+0`, not by seeing an empty `git status`.
+- **A number measured while another lane is mid-probe is worthless.** If the same command gives
+  different answers on consecutive runs, stop measuring and settle the tree first.
+
+Both were resolved by interrupting the lane, reverting with `git checkout HEAD -- <file>`, and
+re-measuring until `linktest.sh` reported `8652 -> 8652 (+0)`.

@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-479 (2026-09-14): first link-judged lane on gm_AllocSpieler — two
+dead ends closed, no win. Residue 8,652.**
+
+- **`char work[0x3fc]` -> `[0x400]` is NOT a free knob.** It does bring the
+  emitted frame to the reference's `sub esp,0x41c`, but costs **+341 at the
+  link**. Matching the frame SIZE is not matching the code that uses it —
+  every `[esp+X]` displacement shifts and the positional compare loses more
+  downstream than the prologue gains. Same trap as §81's 0x284/0x280
+  question, now confirmed from the opposite direction: *making* the frame
+  match is as costly as leaving it wrong.
+- **`double` -> `float` on the trait interpolation is also a loss** (+341 in
+  the same probe). The reference's x87 sequence is not reached by narrowing
+  the C type. New §120.
+- **Process caution, and it cost most of this round.** The lane ran in a
+  worktree shared with me, so its intermediate probes were visible as
+  ordinary uncommitted edits. Running the SAME `linktest.sh` command against
+  a nominally clean tree gave **+345, +18, +5, +341** on successive runs,
+  because the source and the compiled object were moving underneath.
+  - **`git status` clean does NOT mean the build is at baseline** —
+    `linktest.sh` recompiles only the file you name; the rest of the object
+    tree can still carry another lane's probe. Confirm baseline by seeing
+    **+0**, not by seeing an empty `git status`.
+  - **A number measured while another lane is mid-probe is worthless.** If
+    the same command answers differently twice, settle the tree first.
+- Resolved by interrupting the lane, `git checkout HEAD -- <file>`, and
+  re-measuring to `8652 -> 8652 (+0)`.
+
 **Round-478 (2026-09-14): `linktest.sh` already existed — documented it and
 fixed its stale baseline. Residue 8,652.**
 
