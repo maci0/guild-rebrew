@@ -5273,3 +5273,57 @@ Existing prior art on this row, worth not re-deriving: the eight field reads are
 `*(volatile int*)(esi + 0x71)` — one of the rare places where `volatile` *won* (section 94 records
 it losing 4 of 4 elsewhere), because it forces the reference's per-call reload instead of a
 cached register.
+
+## 123. `drift_windows.py`: localise a byte fault without reading the bytes
+
+Section 122 bounded a missing byte using a single jump displacement. That technique is
+mechanical, so round 231 scripted it as `scripts/drift_windows.py` — and scripted, it is far
+sharper than the manual version, because **nested windows subtract**.
+
+The rule: a jump whose *encoding* matches the reference but whose *target* differs is not a
+defect, it is a measurement. The target difference is exactly the byte drift accumulated between
+the jump and its target, so every aligned pair yields a window `[jump, target)` with a signed
+byte count — for free, without disassembling the window's contents.
+
+```
+python3 scripts/probe_function.py --va <va> --file <src>     # builds the object
+python3 scripts/drift_windows.py <va> <size> build/objtest/probe_*.obj
+```
+
+Two filters matter and are built in: `call` targets are unresolved relocations in our object, so
+they are pure noise and are excluded; and a jump target outside the function is a tail-call, not
+a layout signal.
+
+**Validation — it rediscovered a known finding unaided.** On `cm_ExSellObjekt` three windows
+converge:
+
+```
+[0x49, 0x249)  +2      [0x230, 0x249)  +2      [0x234, 0x249)  +2
+```
+
+The surplus is inside the smallest, `[0x234, 0x249)` — **21 bytes**, which is exactly the
+`xor eax,eax` that section 121 found at +0x236 by hand. The script located it from branch
+targets alone.
+
+**Nested subtraction, on `ls_LoadBuildingEntityState`:**
+
+```
+[0x3a,  0x4fa)  -2        [0x292, 0x3b6)  +2        [0x543, 0x5aa)  -3
+```
+
+The outer window is 2 bytes short while an inner window is 2 bytes long, so the shortfall lives
+in `[0x3a,0x292)` or `[0x3b6,0x4fa)` and there is a *separate* surplus inside `[0x292,0x3b6)`.
+**Two independent faults, separated without reading an instruction** — section 122 saw only the
+outer window and therefore only one of them.
+
+**A new lead on the biggest row.** `gm_AllocSpieler` shows `[0x4c3, 0x4d6)` drifting **+1 in 19
+bytes**. Disassembling just those bytes shows we emit an extra 2-byte `jmp 0x4d7` that the
+reference does not have: our `if (arg7) … else if (arg6) …` chain enters the shared
+`slot[9] = (char) n;` store by branching over the second arm, where the reference falls into it.
+Rewriting the chain as two independent `if`s (with `arg7 == 0 &&` guarding the second) measured
+**+0 at the link** — msvc6 canonicalises the control flow straight back, the same normalisation
+as sections 92, 107 and 122.
+
+So the extra jump is real and localised, but not reachable by restructuring the conditional.
+The window is recorded for whoever attacks that row next: **19 bytes, one surplus byte, at
++0x4c3**.

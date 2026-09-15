@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-482 (2026-09-14): scripted §122's technique — it is much sharper
+than the manual version. Residue 8,652.**
+
+- **New `scripts/drift_windows.py`**: a jump whose ENCODING matches the
+  reference but whose TARGET differs is a measurement, not a defect — the
+  target difference is exactly the byte drift between jump and target. Every
+  aligned pair yields a signed window for free, without disassembling it.
+  Two filters built in: `call` targets are unresolved relocs (noise), and
+  out-of-function targets are tail-calls.
+- **Validation: it rediscovered §121 unaided.** On cm_ExSellObjekt three
+  windows converge — [0x49,0x249), [0x230,0x249), [0x234,0x249), all +2 — so
+  the surplus is inside the smallest, **21 bytes**, which is exactly the
+  `xor eax,eax` §121 found by hand at +0x236.
+- **Nested windows SUBTRACT, and that is what scripting buys.** On
+  ls_LoadBuildingEntityState: [0x3a,0x4fa) is **-2** while [0x292,0x3b6)
+  inside it is **+2**, so the shortfall is in [0x3a,0x292) or [0x3b6,0x4fa)
+  and there is a SEPARATE surplus in the inner window. **Two independent
+  faults**, where §122 saw only the outer window and therefore only one.
+- **New lead on the biggest row**: gm_AllocSpieler has [0x4c3,0x4d6)
+  drifting **+1 in 19 bytes**. Disassembling just those: we emit an extra
+  2-byte `jmp 0x4d7` the reference lacks — our
+  `if (arg7) … else if (arg6) …` chain branches over the second arm to reach
+  the shared `slot[9]` store, where the reference falls into it.
+- Rewriting it as two independent `if`s measured **+0 at the link** (msvc6
+  canonicalises the control flow back — §§92/107/122 again). The extra jump
+  is real and localised but not reachable by restructuring the conditional.
+  **Window recorded for the next attempt: 19 bytes, one surplus byte, at
+  +0x4c3.** New §123.
+
 **Round-481 (2026-09-14): bounded a missing byte from a jump displacement;
 two shapes rejected. Residue 8,652.**
 
