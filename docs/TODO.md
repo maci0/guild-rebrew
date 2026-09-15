@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-471 (2026-09-14): my round-470 conclusion was WRONG — a relocation
+is not a call. Corrected, and the real target is now exact. Residue 8,664.**
+
+- **`f4a73057` ("exactly one CloseHandle is missing") is retracted.** It
+  counted **relocation entries**, but a relocation marks where an address is
+  MATERIALISED, not where it is CALLED. When msvc6 caches an import in a
+  callee-saved register it emits ONE reloc (`8b35 mov esi,[__imp__X]`) and
+  then any number of `ffd6 call esi`.
+- **Verified in our own object** by classifying each reloc's preceding
+  opcode: `CloseHandle` = 3x `ff15` + 1x mov-CSE -> 3 relocs but **5 calls**;
+  `WriteFile` = 1 reloc but **10 calls**; `VirtualFree` = 3 and 3.
+- **Corrected inventory**: VirtualFree **3 vs 3**, CloseHandle **5 vs 5**,
+  WriteFile **11 vs 10**, everything else 1:1. So the ENTIRE call delta is
+  **one WriteFile**, and §§111/112's cleanup-arm story is retired — those
+  calls were never missing.
+- **Third correction to the counting method**, now in §112: count CALLS, not
+  relocations — resolve each `ffd?` by tracing the register back to its
+  defining `mov reg,[__imp__...]`. The `ff15`/`ffd?` ratio itself is a
+  register-allocation artefact (reference caches 3 imports, we cache 4), not
+  a source property.
+- **The real target**: the reference compiles the exception switch as TWO
+  jump tables each with its own newline tail — table 1 @0x10002b2a (6 arms,
+  tail 0x10002b7f, `call esi` @**0x10002b80** = the missing WriteFile) and
+  table 2 @0x10002bab (8 arms, tail 0x10002c40). Fan-in: 6x and 11x jmp. We
+  emit BOTH range tests at identical constants (our case partition already
+  matches) then funnel every arm into ONE tail. **We fold; the reference
+  keeps two copies** — inverted from the original guess.
+- Spelling it as a second `switch` does NOT work (406/2141, SIZE_MISMATCH):
+  msvc6's two tables are one switch it split because the case values form
+  two dense clusters (spans 0x68, 0x6e); the duplicated tail is its own
+  layout decision downstream of that split.
+- Also confirmed: do not re-open the frame/0x280 question (§81 burned six
+  rounds; a probe this round is the seventh confirmation).
+
 **Round-470 (2026-09-14): narrowed the CrashDump missing call to exactly
 ONE `CloseHandle`, and corrected my own counting method twice.
 Residue 8,664.**

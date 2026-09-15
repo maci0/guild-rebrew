@@ -4674,3 +4674,52 @@ story, while true about the arms differing, was not where the lost call lives.
 The method rule: **count call sites per import symbol** (from the reference's IAT slot and from
 the object's relocation symbols), never by positional adjacency. Adjacency is a property of
 scheduling; the per-symbol count is a property of the source.
+
+### Round 220: that rule is ALSO wrong — a relocation is not a call
+
+The per-symbol count above was measured from **relocation entries**, and a relocation marks
+where an address is *materialised*, not where it is *called*. When msvc6 caches an import in a
+callee-saved register it emits **one** relocation (`8b35 mov esi,[__imp__X]`) and then any
+number of `ffd6 call esi`. Two independent probe lanes caught this, and the object confirms it
+directly — our own breakdown by preceding opcode:
+
+```
+__imp__CloseHandle@4   ff15 x3  +  mov-CSE x1     -> 3 relocs but 5 calls
+__imp__WriteFile@20    mov-CSE x1                 -> 1 reloc  but 10 calls
+__imp__VirtualFree@12  ff15 x3                    -> 3 relocs and 3 calls
+```
+
+So "CloseHandle 5 vs 4, one missing" (round 219, committed in `f4a73057`) was an artefact of
+counting relocations. Resolved properly — by tracing each cached register back to the
+relocation that loaded it — the inventory is:
+
+| callee | reference | ours |
+|---|---|---|
+| `VirtualFree` | 3 | **3** |
+| `CloseHandle` | 5 | **5** |
+| `WriteFile` | 11 | **10** |
+| everything else | 1:1 | 1:1 |
+
+**`VirtualFree` and `CloseHandle` already match. The entire call delta is one `WriteFile`.**
+Sections 111 and 112's cleanup-arm story is therefore retired: those three and five calls are
+all present in our object, and there is nothing to win there.
+
+The corrected rule, third time: **count calls, not relocations** — resolve `ffd?` sites by
+tracing the register back to its defining `mov reg,[__imp__…]`. The `ff15`/`ffd?` ratio itself
+is a *register-allocation* artefact (the reference caches three imports in callee-saved
+registers, we cache four), not a source property, so the encoding ratio is a shadow worth
+chasing only after the call inventory matches.
+
+**Where the real missing call is.** The reference compiles the exception switch as **two jump
+tables, each with its own newline tail**: table 1 at 0x10002b2a (6 arms, tail 0x10002b7f,
+`call esi` at **0x10002b80** — the absent WriteFile) and table 2 at 0x10002bab (8 arms, tail
+0x10002c40). Fan-in confirms two joins: 6 × `jmp 0x10002b7f`, 11 × `jmp 0x10002c40`. We emit
+**both range tests at identical constants** — our case partition already matches — then funnel
+every arm into one shared tail.
+
+So the phenomenon is real but inverted from the original guess: **we fold, the reference keeps
+two copies**, and it lives in the switch message writes rather than the cleanup. Splitting the
+second range into its own `switch` does not buy it (406/2141, SIZE_MISMATCH): msvc6's two
+tables are one switch it split because the case values form two dense clusters (spans 0x68 and
+0x6e), and the duplicated tail is its own downstream layout decision, not something the keyword
+produces.
