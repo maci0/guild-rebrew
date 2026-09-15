@@ -4651,3 +4651,26 @@ them. Here arms 2 and 3 have identical six-instruction tails and different four-
 lead-ins, and it is the lead-ins that keep them apart. I nearly delegated a probe to "prevent
 cross-jumping" before reading the third arm aligned — the misalignment in
 `rebrew asm` output when starting mid-instruction is easy to mistake for real code.
+
+### Round 219: count call sites per IMPORT, not adjacent-call "pairs"
+
+The analysis above was still one abstraction too loose. Counting *adjacent `ff15` pairs* gave
+"reference 3, ours 2" and pointed at a missing cleanup arm — but the heuristic conflated two
+different sequences. Reference arm 1 actually runs
+`WriteFile` (via `esi`) → `CloseHandle(hCrashLog)` → `VirtualFree` → `CloseHandle(hDbgFile)`,
+so its "+0x62f pair" is `CloseHandle`+`VirtualFree`, not the cleanup pair at all.
+
+Counting **per import slot** settles it exactly:
+
+| import | slot | reference sites | our relocations |
+|---|---|---|---|
+| `VirtualFree` | 0x1002400c | 3 (+0x62f, +0x668, +0x69a) | **3** |
+| `CloseHandle` | 0x10024010 | 5 (+0x619, +0x636, +0x66f, +0x6a1, +0x6d3) | **4** |
+
+So `VirtualFree` already matches, and **exactly one `CloseHandle` call is missing**. Our source
+has five `CloseHandle` call sites, so msvc6 folded two of *those* — and the three-arm cleanup
+story, while true about the arms differing, was not where the lost call lives.
+
+The method rule: **count call sites per import symbol** (from the reference's IAT slot and from
+the object's relocation symbols), never by positional adjacency. Adjacency is a property of
+scheduling; the per-symbol count is a property of the source.

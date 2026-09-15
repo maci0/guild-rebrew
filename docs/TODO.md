@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-470 (2026-09-14): narrowed the CrashDump missing call to exactly
+ONE `CloseHandle`, and corrected my own counting method twice.
+Residue 8,664.**
+
+- §111/§112 attributed the `ff15` delta (19 ref vs 17 ours) to a folded
+  `VirtualFree`/`CloseHandle` cleanup arm. **That attribution was wrong**,
+  and so was the heuristic behind it.
+- Counting *adjacent `ff15` pairs* gave "ref 3, ours 2" — but it conflated
+  different sequences. Reference arm 1 actually runs `WriteFile` (via esi)
+  -> `CloseHandle(hCrashLog)` -> `VirtualFree` -> `CloseHandle(hDbgFile)`,
+  so its "+0x62f pair" is CloseHandle+VirtualFree, **not** the cleanup pair.
+- **Counting PER IMPORT SLOT settles it exactly**:
+  `VirtualFree` (0x1002400c) — reference 3 sites (+0x62f/+0x668/+0x69a),
+  ours **3 relocations**: already matches.
+  `CloseHandle` (0x10024010) — reference 5 sites
+  (+0x619/+0x636/+0x66f/+0x6a1/+0x6d3), ours **4**: exactly **one missing**.
+  Our source has 5 CloseHandle call sites, so msvc6 folded two of THOSE.
+- **Method rule now in §112**: count call sites **per import symbol** (from
+  the reference's IAT slot, and from the object's relocation symbols), never
+  by positional adjacency. Adjacency is a property of scheduling; the
+  per-symbol count is a property of the source.
+- The three-arm observation from §112 remains true (the arms really do reach
+  the cleanup in different register/stack states) — it just is not where the
+  lost call lives.
+- Lane hygiene: the probe left a whitespace-only diff in the source;
+  restored with `git checkout HEAD --` and re-verified 633/2115.
+
 **Round-469 (2026-09-14): found WHY the reference emits the CrashDump
 cleanup three times — the arms are not interchangeable. Residue 8,664.**
 
