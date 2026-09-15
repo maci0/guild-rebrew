@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-462 (2026-09-14): located gm_AllocSpieler's FIRST fault exactly — a
+scheduler sink, not a statement order. Residue 8,664.**
+
+- gm_AllocSpieler carries **2,824 of 8,664 residual bytes (33%)**, so its
+  first divergence is the highest-value question in the tree.
+- **Our object is byte-identical through +0xa9.** At +0xaa the reference has
+  `lea edx,[edx+0x100358fc]` while we emit `mov word ptr [ebp],bx` +
+  `xor ebx,ebx` first and then `lea edi,...`. The reference emits that same
+  pair at **0x10018918, AFTER the rep stosd** — same instructions, opposite
+  side of the block fill, and it keeps the scaled index in edx where we move
+  it to edi.
+- **Reordering the C to match is measurably worse**: hoisting the memset
+  above the idx store gives **633/3694** (−371 matched, +5 bytes), with or
+  without also moving the two zeroing stores. The memset CALL clobbers the
+  register the reference keeps live, so the scaled index has to be
+  rematerialised. Both variants reverted; baseline 1004/3689 restored and
+  re-verified.
+- **Conclusion**: msvc6 sinks the 16-bit store past the block fill on its
+  own. C cannot request it — any source order putting the store after the
+  fill also puts the CALL before it. Same class as §99 (scheduler-sunk
+  `add esp,0x14`) and §86b (store ordering), consistent with §106 (no flag
+  moves this row). New §109, recorded at the call site too.
+- **Bounds expectations on the biggest row**: the first 0xaa bytes already
+  match and the 2,824-byte residue behind them is that ONE scheduling
+  decision's displacement wake, not 2,824 bytes of wrong code.
+- Housekeeping: the metadata note "SIZE 3209/3689 (480B short)" was stale
+  from the naked-asm era — the object is now **exactly 3689 bytes**. Removed
+  an inert `/DREBREW_ALLOW_NAKED` from its cflags (byte-identical both ways),
+  the last of the three §97 identified.
+
 **Round-461 (2026-09-14): chased the near-diag/test disagreement to its
 mechanism — different UNITS, not a bug. Residue 8,664.**
 

@@ -289,7 +289,25 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	 * both. */
 	*(unsigned short*) slot = 0xffff;
 	*(int*) (0x100358a4 + idx * 0x21c) = -1;
-	/* record header init + debug sprintf/log */
+	/* record header init + debug sprintf/log.
+	 *
+	 * ROUND 212 -- the FIRST divergence is here, and it is NOT a missing or
+	 * extra statement.  Our object is byte-identical to the reference through
+	 * +0xa9; at +0xaa the reference has `8d92fc580310 lea edx,[edx+0x100358fc]`
+	 * while we emit `66895d00 mov word ptr [ebp],bx` + `33db xor ebx,ebx`
+	 * FIRST and then `8dbafc580310 lea edi,...`.  The reference emits that
+	 * same store/zero pair at 0x10018918 -- AFTER the rep stosd -- so the two
+	 * streams contain the same instructions in a different order, and the
+	 * reference keeps the scaled index in edx while we move it to edi.
+	 *
+	 * Reordering the C to match does NOT reproduce it.  Moving the memset
+	 * ahead of the idx store (both with and without also moving the two
+	 * zeroing stores) gives SIZE_MISMATCH 633/3694, obj 3694 -- 371 matched
+	 * bytes WORSE and 5 bytes longer, because hoisting the memset call forces
+	 * the scaled index to be rematerialised across it.  The ordering is a
+	 * SCHEDULER decision downstream of register pressure, not a statement
+	 * order we can dictate: msvc6 is sinking the 16-bit store past the block
+	 * fill on its own.  Baseline 1004/3689 restored.  See shapes 109. */
 	*(unsigned short*) (0x100358a0 + idx * 0x21c) = (unsigned short) idx;
 	*(int*) (slot + 0x170) = 0;
 	*(int*) (slot + 0x16c) = 0;

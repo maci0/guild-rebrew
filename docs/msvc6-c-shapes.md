@@ -4371,3 +4371,54 @@ The suggested mutation operators are generic control-flow rewrites (`mut_swap_if
 `mut_guard_clause`, `mut_while_to_dowhile`, `mut_for_to_while`, …) — the same family section 107
 measured the GA applying, where the one surviving candidate proved byte-inert because msvc6
 canonicalises it.
+
+## 109. `gm_AllocSpieler`'s first fault is a scheduler sink, not a statement order
+
+`gm_AllocSpieler` (0x10018850) carries **2,824 of the 8,664 residual bytes — 33% of everything
+left**, so its first divergence is the highest-value single question in the tree. Round 212
+located it exactly.
+
+**Our object is byte-identical to the reference through +0xa9.** At +0xaa the streams split:
+
+```
+reference +0xaa:  8d92fc580310   lea edx,[edx+0x100358fc]
+ours      +0xaa:  66895d00       mov word ptr [ebp],bx      <-- we emit these two
+                  33db           xor ebx,ebx                <--   first
+                  8dbafc580310   lea edi,[edx+0x100358fc]   (edi, not edx)
+```
+
+The reference emits that same `mov word ptr [ebp],bx` / `xor ebx,ebx` pair at **0x10018918 —
+after the `rep stosd`**. So neither side is missing an instruction: the same work is scheduled
+on opposite sides of the block fill, and the reference keeps the scaled index live in `edx`
+where we move it to `edi`.
+
+The corresponding C is the record-header init, where `*(unsigned short*)(0x100358a0 + idx *
+0x21c) = (unsigned short) idx;` precedes the `memset`.
+
+**Reordering the C to match makes it worse, measured:**
+
+| shape | `rebrew test` | obj |
+|---|---|---|
+| shipped (idx store before `memset`) | **1004/3689** | 3689 |
+| `memset` hoisted above the idx store | 633/3694 | 3694 |
+| same, also moving the two zeroing stores after | 633/3694 | 3694 |
+
+Both variants lose **371 matched bytes and grow the object by 5**, because hoisting the
+`memset` call forces the scaled index to be rematerialised across it — the call clobbers the
+register the reference is carefully keeping live.
+
+**So this is a scheduler decision downstream of register pressure, not a statement order.**
+msvc6 is sinking the 16-bit store past the block fill on its own, and C has no way to request
+that: the fill is a `memset` call, and any source order that puts the store after it also puts
+the call *before* it, which costs the register. This is the same class as section 99's
+`vfs_ReadCompressed` finding (a scheduler-sunk `add esp,0x14`) and section 86b's store
+ordering, and it is consistent with section 106 — no compiler flag moves this row either.
+
+Worth stating plainly because it bounds expectations on the biggest row: the first 0xaa bytes
+already match, the fault at 0xaa is not a source shape, and the 2,824-byte residue behind it is
+that one scheduling decision's displacement wake rather than 2,824 bytes of wrong code.
+
+Housekeeping from the same round: the metadata note claiming "SIZE 3209/3689 (480B short)" was
+stale from the naked-asm era — the object is now **exactly 3689 bytes**, the target size — and
+an inert `/DREBREW_ALLOW_NAKED` was removed from its cflags (verified byte-identical at
+1004/3689 both ways), the last of the three section 97 identified.
