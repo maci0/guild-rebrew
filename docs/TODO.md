@@ -49,6 +49,29 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-469 (2026-09-14): found WHY the reference emits the CrashDump
+cleanup three times — the arms are not interchangeable. Residue 8,664.**
+
+- §111 traced the `ff15` delta (19 ref vs 17 ours) to three `else` arms
+  ending in the same `VirtualFree(pDbgBuf,0,0x8000); CloseHandle(hDbgFile);`
+  pair, which msvc6 folds for us but emits three times in the reference.
+- **Reading all three arms ALIGNED gives the reason** (I first read only
+  two): each reaches the cleanup in a different register/stack state —
+  arm 1 reloads `ebx` AND `ebp`, arm 2 reloads `ebp` and does
+  `add esp,0x10`, arm 3 arrives with everything live. The call pair is
+  identical in all three but the enclosing blocks are not, so there is
+  nothing to fold. Ours reach all three arms in the SAME state, which is
+  what makes them foldable.
+- **So the lever is not "suppress cross-jumping"** — it is that the
+  reference's arms exit from different nesting depths and therefore restore
+  different amounts of stack/registers. Reproducing it means matching the
+  SCOPE STRUCTURE, not perturbing the cleanup statements.
+- **General caution now in §112**: two byte-identical sequences in the
+  reference are NOT evidence the compiler declined an optimisation — check
+  what PRECEDES them. Also: `rebrew asm` started mid-instruction produces
+  convincing-looking garbage (`les edx,ptr [eax]`, `inc esp`), which is easy
+  to mistake for real code; always start at a known instruction boundary.
+
 **Round-468 (2026-09-14): corrected §104's counting method and located the
 CrashDump call-kind delta exactly. Residue 8,664.**
 

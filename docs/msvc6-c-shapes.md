@@ -4611,3 +4611,43 @@ Reading the object's relocations gives the useful cross-check: we reference **15
 four relocations, i.e. msvc6 has already merged two of them — which is consistent with both the
 missing call and the extra register call being the same event: a repeated import getting cached
 into a register and one of its call sites folded.
+
+## 112. The reference does not cross-jump identical cleanup arms — and neither should we
+
+Section 111 traced `CrashDumpUnhandledExceptionFilter`'s call-kind delta (19 `ff15` in the
+reference against our 17) to three `else` arms that each end with the same two statements:
+
+```c
+VirtualFree(pDbgBuf, 0, 0x8000);
+CloseHandle(hDbgFile);
+```
+
+msvc6 folds two of ours into a shared tail. **The reference emits the pair three separate
+times**, at 0x10002d9f/0x10002da6, 0x10002dd8/0x10002ddf and 0x10002e0a/0x10002e11.
+
+The interesting part is *why*, and reading all three aligned (rather than two, as I first did)
+gives the answer — the arms are **not** interchangeable blocks:
+
+```
+arm 1  0x10002d96:  mov ebx,[esp+0x3c]  mov ebp,[esp+0x38]  push ebx  call VF  push ebp  call CH
+arm 2  0x10002dc9:  mov ebp,[esp+0x40]  add esp,0x10        push 0x8000 push 0 push ebx call VF ...
+arm 3  0x10002e02:                      push 0x8000 push 0  push ebx  call VF  push ebp  call CH
+```
+
+Each arm reaches the cleanup with a different register/stack state — arm 1 reloads both `ebx`
+and `ebp`, arm 2 reloads `ebp` and unwinds `esp` by 0x10, arm 3 arrives with everything live.
+The *call pair* is identical in all three, but the blocks containing it are not, so there is
+nothing for the compiler to fold. Our version reaches all three arms in the same state, which
+is what makes them foldable.
+
+**So the lever is not "stop msvc6 cross-jumping".** It is that the reference's three arms do
+genuinely different amounts of stack and register restoration before the cleanup, because they
+are exited from different nesting depths. Reproducing that means matching the *scope structure*
+that produces those different exits — not perturbing the cleanup statements themselves.
+
+Worth recording as a general caution: **two byte-identical instruction sequences in the
+reference are not evidence that the compiler declined an optimisation.** Check what precedes
+them. Here arms 2 and 3 have identical six-instruction tails and different four-instruction
+lead-ins, and it is the lead-ins that keep them apart. I nearly delegated a probe to "prevent
+cross-jumping" before reading the third arm aligned — the misalignment in
+`rebrew asm` output when starting mid-instruction is easy to mistake for real code.
