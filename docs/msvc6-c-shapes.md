@@ -4254,3 +4254,50 @@ in individual file headers (which were per-function, undated, and in one case �
 Practical caveat: a flat landscape says the *flags* are inert, not that the function is
 unreachable. It is silent about source shape, which is where every landed win in this session
 came from.
+
+## 107. The GA finds nothing either, and stagnates immediately
+
+Section 106 established that the flag landscape is flat on every walled row, but was explicit
+that this says nothing about **source shape** — the axis every landed win in this session came
+from. `rebrew match`'s GA mode mutates source, so it tests exactly that axis. Round 209 ran it
+for the first time (it was unusable before the round-457 timeout fix).
+
+Two rows, 12 generations, population 16, `--mutation-focus auto` (which reads the function's
+BLOCKER metadata to bias operator selection):
+
+| function | best score | stagnant generations | vs flag-sweep baseline |
+|---|---|---|---|
+| `m_AllocTracked` | 147,228.92 | **11 of 12** | 34,500 — **4x worse** |
+| `vfs_ReadCompressed` | 35,900.00 | **11 of 12** | 35,900 — **identical** |
+
+**Both stagnate after a single generation.** On `vfs_ReadCompressed` the GA never beat the
+unmutated source; on `m_AllocTracked` its best candidate ended four times worse than doing
+nothing, i.e. every mutation it kept was harmful and it simply had nothing better to fall back
+to within the budget.
+
+The one mutation that survived on `m_AllocTracked` is instructive:
+
+```c
+- while (i < slots) {
++ while (!(i >= slots)) {
+```
+
+Applied by hand and measured: **566/658, byte-identical to baseline.** msvc6 canonicalises the
+double-negated comparison straight back, which is the same normalisation section 92 found for
+commuted multiplies and section 59 for `if (c) goto L;`. The GA's "best" source change is
+provably a no-op.
+
+**What this adds to section 106.** The two instruments now cover both axes and agree:
+
+- flags — flat across 12 axes and ~120 compilations (section 106);
+- source mutations — immediate stagnation, no candidate better than the unmutated source.
+
+Neither is a proof of impossibility, and the GA's operator set is generic rather than aimed at
+the specific allocator decisions these rows are blocked on (sections 92, 94, 104). But it does
+mean the two *automated* search paths the toolchain offers are exhausted on these functions,
+and the remaining progress has to come from reading the reference's bytes and reasoning about
+what C shape produces them — which is how every win in this session was actually found.
+
+Practical note: budget the GA by wall clock, not generations. 12 generations at population 16
+is ~95 s per row here, and the stagnation counter tells you almost immediately whether more
+generations would help — 11 of 12 stagnant means they would not.

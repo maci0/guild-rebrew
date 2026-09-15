@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-459 (2026-09-14): ran the GA for the first time — it stagnates
+immediately on both rows tried. Residue 8,664.**
+
+- §106 closed the FLAG axis but was explicit it said nothing about SOURCE
+  SHAPE. `rebrew match`'s GA mode mutates source, so it tests exactly that,
+  and it was unusable until the round-457 timeout fix.
+- Two rows, 12 generations, pop 16, `--mutation-focus auto`:
+  **m_AllocTracked** best 147,228.92 with **11 of 12 generations stagnant**
+  — and that is **4x WORSE** than the flag-sweep baseline of 34,500, i.e.
+  every mutation it kept was harmful. **vfs_ReadCompressed** best 35,900
+  with 11 of 12 stagnant — exactly the unmutated baseline, never beaten.
+- **The one surviving mutation is provably a no-op**: the GA turned
+  `while (i < slots)` into `while (!(i >= slots))`. Applied by hand and
+  measured: **566/658, byte-identical**. msvc6 canonicalises it straight
+  back — the same normalisation §92 found for commuted multiplies and §59
+  for `if (c) goto L;`.
+- **Both automated search paths the toolchain offers are now exhausted on
+  these rows**: flags flat across 12 axes / ~120 compilations (§106), and
+  source mutation stagnating with no candidate better than doing nothing
+  (§107). Neither proves impossibility — the GA's operators are generic,
+  not aimed at the allocator decisions these rows are blocked on — but
+  remaining progress has to come from reading reference bytes and reasoning
+  about C shape, which is how every win this session was actually found.
+- Practical note: budget the GA by wall clock (~95 s per row at 12x16), and
+  read the stagnation counter — 11 of 12 means more generations will not
+  help.
+
 **Round-458 (2026-09-14): the flag landscape is FLAT on every walled row —
 five for five, independently confirming the byte-level verdicts.
 Residue 8,664.**
