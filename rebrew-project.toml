@@ -7,6 +7,12 @@ default_target = "server.dll"
 
 [targets."server.dll"]
 ghidra_program_path = "/server.dll"
+# Shared BinSync state dir: `functions/*.toml`, `global_vars.toml`,
+# `structs/*.toml`, write-locked 0444.  Configured here so `rebrew sync` and
+# `rebrew doctor` find it without `--state-dir` on every invocation.  The
+# directory itself stays gitignored -- it is regenerable with
+# `rebrew sync --push` -- while this pointer is versioned.
+binsync_state_dir = "binsync"
 binary = "original/Server/server.dll"
 format = "pe"
 arch = "x86_32"

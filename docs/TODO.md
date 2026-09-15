@@ -14227,3 +14227,43 @@ PLAN for the data phase:
   (2 extra kernel32 slots — likely our game's extra kernel32 imports).
 - NEXT: identify the 2 extra kernel32 slots (diff the IAT name tables),
   then the hint/name table positions, then the CRT strings + .data raw.
+
+### BinSync sync: configured and working (round 194)
+
+`rebrew doctor` warned "no BinSync state dir configured" for the whole
+session. Four things were wrong, all now fixed:
+
+1. **Not configured.** `targets."server.dll".binsync_state_dir = "binsync"`
+   is now set in `rebrew-project.toml`, so `rebrew sync` and `rebrew doctor`
+   find the dir without `--state-dir` on every invocation. The directory
+   itself stays gitignored — it is regenerable with `rebrew sync --push` —
+   while the pointer is versioned.
+2. **Not a git repo.** BinSync's plugin workflow relays changes through
+   commits in the state dir, so it must be its own repository. `git init`ed
+   inside `binsync/` with two commits (initial export, then the refresh).
+   This is nested-but-ignored by design, not an accident.
+3. **The `binsync` extra was missing**, so `--push`/`--pull` raised
+   `ImportError: declib is required` and could not run at all. The subtlety:
+   `rebrew` on PATH is a **uv tool install**
+   (`~/.local/share/uv/tools/rebrew/`), not the project venv — installing
+   declib into `rebrew/.venv` changed nothing. The fix is
+   `uv tool install --force --with 'declib>=4.5' --editable <rebrew checkout>`.
+4. **The state was stale** (586 functions, exported 2026-09-11). Re-pushed:
+   608 functions, 116 globals, 96 structs, 14 typedefs, 70 comments.
+
+`rebrew doctor` now reports **BinSync sync ✅ ready**, 19 passed / 2 warnings
+(the two remaining are FLIRT signatures, which AGENTS.md says to answer with
+`rebrew lib-match` instead, and one unrelated note).
+
+**Do not run `rebrew sync --pull` on this tree without reviewing the dry-run.**
+It currently wants to:
+- create ~16 `case.0x1000ad61.*` "functions" — these are switch arms inside
+  already-RELOC/EXACT functions, discoverer artifacts, not real functions
+  (round 194 verified this);
+- resolve 10 name conflicts by renaming CRT symbols (`_initterm` ->
+  `___initterm`, `__DllMainCRTStartup@12` -> `_DllMain@12`, several
+  `___sbh_*` allocator internals).
+
+Push is the useful direction here: this tree's annotations are the source of
+truth, and the state dir exists to feed Ghidra. Pull only with
+`--accept-local` and a reviewed dry-run.
