@@ -1815,12 +1815,6 @@ section = ".rdata"
 type = "unsigned int[256]"
 status = "UNCHECKED"
 
-["SERVER.0x00024000"]
-name = "g_iat_region"
-section = ".rdata"
-note = "IAT at .rdata start (crt_imports.c forcing region)"
-status = "UNCHECKED"
-
 ["SERVER.0x10025688"]
 name = "g_dbl_const_688"
 type = "double"

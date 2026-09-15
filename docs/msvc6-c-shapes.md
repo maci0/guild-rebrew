@@ -6496,3 +6496,61 @@ in **both** directions, which is the signature of size differences accumulating 
 rather than one object sitting in the wrong place. A `+0xc4` band and a `-0x28` band cannot both
 be fixed by moving one object — the next `.data` win has to come from the content of whatever
 sits between them, and that is the missing-TU content §100 already identified.
+
+### What the repaired tooling immediately showed: `rebrew data --layout-audit`
+
+The scan fix has a payoff beyond the summary table, because `--layout-audit` is built on the
+same `scan_globals` that was returning nothing. With globals attributed to sections it produces
+a per-TU feasibility report, and on `.data` it names **13 violations**:
+
+```
+Units/Error/Error.c.obj                       6  0x10027078 0x100270e8   0xaa   <== ORDER
+Units/Error/Error_c/EmitCrashModuleLine.c.obj 4  0x10027314 0x10027328   0x12   <== ORDER
+Units/Error/Error_c/ErrorModule.c.obj         4  0x100270fc 0x1002735c   0x77   <== ORDER
+Units/Error/Error_c/ErrorModule2.c.obj        8  0x100270f8 0x100270f8   0x92   <== ORDER
+Units/m_alloc/m_alloc2.c.obj                 15  0x10028888 0x10034634  0x14f   <== ORDER/SPAN
+DieGildeAddOn/loadsave/loadsave3.c.obj        7  0x10030b84 0x10031538   0x3d   <== ORDER
+DieGildeAddOn/game/spiel_c/gm_Open.c.obj     16  0x10034624 0x1003467c  0x13f   <== ORDER
+DieGildeAddOn/game/spiel.c.obj                2  0x10030b6c 0x10030b6c   0x2a   <== ORDER
+...gm_NextEntityQueryMatch.c.obj              2  0x10030b98 0x10030b9e    0x5   <== ORDER
+crt_region/mlock.c.obj                        1  0x10031aac 0x10031aac    0x4   <== ORDER
+src/link_stubs.c.obj                        199  0x1002c3f0 0x11766204   0x71   <== ORDER/SPAN
+violations: 13   unowned toml symbols: 31
+```
+
+Read against the displacement bands above, the four `Units/Error/*` rows are the interesting
+cluster: they own overlapping address ranges (`0x10027078..0x1002735c`) across four separate
+TUs, which is precisely the interleaving §100 described — the reference puts one TU's literals
+and named globals adjacent in declaration order, and a split across four objects cannot
+reproduce that, because the linker takes each object's regular `.data` before any of its
+COMDATs. `link_stubs.c.obj` spanning `0x1002c3f0..0x11766204` is the other structural one, and
+it is an artifact of the stub file owning globals that belong to TUs not yet reversed — the
+same missing-TU content, seen from the symbol side rather than the byte side.
+
+This is the concrete entry point for the next data round, and it did not exist as a readable
+signal before this round because the audit's input was empty.
+
+### One more defect the repaired scan caught: an RVA where a VA belongs
+
+With annotated globals finally landing in sections, `rebrew data` could run its cross-check that
+every annotated VA falls inside a real PE section range — and it immediately flagged one:
+
+```
+warning: 1 annotated global(s) fall outside every PE section range:
+g_iat_region@0x24000
+```
+
+`crt_region/crt_imports.c` is auto-generated, and `gen_crt_imports` was passing `Section.va` —
+an **RVA** — straight into a `// DATA:` marker, which is a **VA**. Every other generator in the
+same file adds the image base (`gen_data_restore` does `image_base + data_va + raw_start`). So
+the IAT, which lives at `0x10024000`, was annotated at `0x24000`: outside every section, and
+unresolvable to every tool that reads the annotation. Fixed in the generator, and the checked-in
+file corrected to `0x10024000`.
+
+The stale metadata entry keyed `SERVER.0x00024000` was removed rather than re-keyed: `0x10024000`
+was already occupied by the genuine first IAT slot (`__imp__GetLocalTime@4`, `.idata`), so
+re-keying would have overwritten a correct entry with a synthetic one. Worth stating because the
+obvious repair is wrong here.
+
+After both fixes `rebrew data --summary` warns about nothing and reports **zero** annotated
+globals in `unknown` — the 195 that remain there are extern-only declarations carrying no VA.
