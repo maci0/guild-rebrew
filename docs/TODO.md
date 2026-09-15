@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-468 (2026-09-14): corrected §104's counting method and located the
+CrashDump call-kind delta exactly. Residue 8,664.**
+
+- §104 ruled out inlining by grepping lines containing `call` — which also
+  matches operands and comments. **Counting strictly from the ENCODING
+  bytes** is correct and far more informative, because the three call forms
+  map to three different C constructs (`e8` = same-image call, `ff15` =
+  dllimport API by name, `ffd?` = call through a function-pointer value).
+- On **CrashDumpUnhandledExceptionFilter** (1,595 bytes, second largest):
+  direct `e8` **8 vs 8**, memory-indirect `ff15` **19 vs 17**, register
+  `ffd?` **17 vs 18**, total **44 vs 43**. So we make **two fewer calls
+  through the IAT and one more through a register**, and one call fewer
+  overall. §104's conclusion survives (direct calls match exactly, so
+  nothing is inlined) but its method is corrected. New §111.
+- **Cross-check from the object's relocations**: we reference **15 distinct
+  `__imp_` symbols** where the reference calls through **12 IAT slots**,
+  with CloseHandle x4 and VirtualFree x3 most repeated. The source has
+  **five** CloseHandle sites against four relocations — msvc6 already
+  merged two. That makes the missing call and the extra register call
+  plausibly the SAME event: a repeated import cached into a register with
+  one call site folded.
+- **Two measurement traps recorded**: our object's IAT slots are unresolved
+  zeros, so comparing call TARGETS reports every slot as differing — compare
+  by count and relocation symbol until after the link. And the reference's
+  13 `call esi` are not one cached import: esi is reloaded at least four
+  times in the body.
+
 **Round-467 (2026-09-14): closed the gm_AllocSpieler +0xaa fault on its
 second tell too. Residue 8,664.**
 

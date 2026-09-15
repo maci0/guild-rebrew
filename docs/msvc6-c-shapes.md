@@ -4565,3 +4565,49 @@ sits 5 bytes later than ours. Half the deficit is behind that one scheduling dec
 section 109 established C cannot request. (Relocation slots must be masked before reading any of
 this: unmasked, the first difference appears at +0x6d, which is only an unresolved `0x10035434`
 against zeros.)
+
+## 111. Count calls by ENCODING, not by grep — and what it shows on `CrashDumpUnhandledExceptionFilter`
+
+Section 104 compared call counts between the reference and our objects to rule out inlining.
+That comparison was right in its conclusion but sloppy in its method: it grepped lines
+containing `call`, which also matches operands and comments. Counting strictly from the
+**encoding bytes** is both correct and far more informative, because the three x86 call forms
+map onto three different C-level constructs:
+
+| form | encoding | C that produces it |
+|---|---|---|
+| direct | `e8 rel32` | a call to a function in the same image |
+| indirect through memory | `ff15 disp32` | a call to a `__declspec(dllimport)` API by name |
+| indirect through a register | `ffd?` | a call through a function-pointer *value* |
+
+On `CrashDumpUnhandledExceptionFilter` (0x10002770, 1,595 residual bytes — the second largest
+in the tree) the strict counts are:
+
+| kind | reference | ours |
+|---|---|---|
+| direct `e8` | 8 | 8 |
+| **memory-indirect `ff15`** | **19** | **17** |
+| **register `ffd?`** | **17** | **18** |
+| total | **44** | **43** |
+
+So the shape of the difference is precise: **we make two fewer calls straight through the IAT
+and one more through a register**, and we emit one call fewer overall. Direct calls match
+exactly, which again rules out an inlining difference (section 104's conclusion survives its
+method being corrected).
+
+Two measurement notes that cost time here and will cost it again:
+
+- **Our object's IAT slots are unresolved zeros**, so a naive comparison of call *targets*
+  reports every slot as differing (`ds:0x0` against `0x10024010`). Compare by count and by
+  relocation symbol, not by address, until after the link.
+- The reference calls 13 times through `esi`, which looks like one cached import but is not:
+  `esi` is reloaded at least four times in the body (`mov esi,[0x10024038]`,
+  `mov esi,[esp+0x20]`, `mov esi,0x100272f8`, `mov esi,[0x10024024]`). Several different values
+  flow through the same register.
+
+Reading the object's relocations gives the useful cross-check: we reference **15 distinct
+`__imp_` symbols** where the reference calls through **12 IAT slots**, with `CloseHandle` x4 and
+`VirtualFree` x3 the most repeated. The source has **five** `CloseHandle` call sites against
+four relocations, i.e. msvc6 has already merged two of them — which is consistent with both the
+missing call and the extra register call being the same event: a repeated import getting cached
+into a register and one of its call sites folded.
