@@ -3243,6 +3243,24 @@ aligned 233/249, the best figure on that function, which confirms the arithmetic
 still loses **+40 linked**, because the `volatile` costs more elsewhere than the
 alignment gains. So the lane closes on measurement rather than on a phantom.
 
+**The ceiling also decides whether a lane can AFFORD an edit at all (round 190).**
+Compute the upward slack, not just the deficit, before opening a lane. Two sibling
+functions triaged together show the asymmetry starkly:
+
+- `gv_ExAllocGraveyardWorker`: body **1040 = the reference exactly**, and 1040 is
+  *itself* 16-aligned, so it pads to itself and 1041 jumps to 1056. **Zero upward
+  slack.** Every one of its three faults is length-neutral, so there is nothing to buy
+  and any one-byte growth costs sixteen bytes of span. That is why every "restore the
+  missing bytes" idea on that function died, and it is the real reason it is a wall —
+  not the register-role difference its header blamed for seven consecutive passes while
+  the body had been length-exact since pass six.
+- `ahm_ExAllocAlchemist`: body **1002**, padding to 1008 with the reference's own six
+  trailing nops. **+6 bytes of genuine slack.** Its open float-tail lane can actually
+  afford an edit.
+
+So "length-exact with the reference" is not one condition but two: a body equal to the
+reference *and* the slack that body leaves. State both when parking or opening a lane.
+
 Practical rules: when a span looks short by exactly one alignment unit, compute
 `real_body` and the round-up separately before planning anything; state deficits in
 **code bytes** with the ceiling spelled out; and derive the target from the hunk

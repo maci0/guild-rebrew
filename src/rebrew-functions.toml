@@ -378,8 +378,8 @@ size = 1002
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 status = "PROVEN"
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
-blocker = "counter-block scheduling + register pairs; obj matches ref exactly at 1002"
-blocker_delta = 271
+blocker = "4 faults: field-init phase shift (48%, shapes 86b-excluded), 5-iteration fill loop form (15%, lever real but both signs negative so shapes 41 blocks composition), float tail fstp st(0) vs the reference faddp (29%, OPEN -- see .c header), stride lea chain (1%, strength reducer). Body 1002 pads to 1008 with the reference's own 6 nops, so shapes 88 gives +6 bytes of genuine upward slack -- unlike its Graveyard sibling"
+blocker_delta = 177
 
 ["SERVER.0x1000c1e0"]
 size = 160
@@ -815,8 +815,8 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 status = "PROVEN"
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
-blocker = "21 of 22 top-level blocks already in reference order; residual is fail-epilogue merge + 8B zero-extend idiom in the neighbour loop; the older 606/1040 figure predated later work"
-blocker_delta = 489
+blocker = "3 faults, all length-neutral: fail-epilogue merge (8B; no C89 construct sets a block's predecessor count), slot-init phase shift (shapes 86b excludes it -- source store order already matches, the delta is scheduler + a memset-destination fold), and neighbour-loop esi/edi roles + 16-bit zero-extend (95% of residue, shapes 85 wall). Body 1040 = ref exactly and 1040 is 16-aligned, so shapes 88 gives ZERO upward slack: nothing to buy, and +1 byte costs 16 of span"
+blocker_delta = 426
 
 ["SERVER.0x10012000"]
 size = 728

@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-441 (2026-09-14): the §88 ceiling ASYMMETRY — slack decides whether a
+lane can afford an edit. One lane reopened. Residue 8,666.**
+
+- The delayed round-188 triage landed: Alchemist's 175 structural diffs are
+  **4 faults**, Graveyard's 151 are **3** — both bodies length-exact, both
+  stored blocker deltas stale (271 vs 177, 489 vs 426), both now refreshed
+  via `rebrew blocker set`.
+- **The decisive finding neither header stated: upward slack.** I verified
+  it — Graveyard's body is 1040, which is *itself* 16-aligned, so it pads
+  to itself and 1041 jumps to 1056: **ZERO upward slack**. Every one of its
+  faults is length-neutral, so there is nothing to buy and +1 byte costs 16
+  of span. Alchemist's 1002 pads to 1008 with the reference's own 6 nops:
+  **+6 bytes of real slack**. Same "length-exact" description, opposite
+  ability to afford an edit. §88 now says to state both.
+- **Graveyard's recurring blocker claim retired.** Its header blamed "the
+  remaining N bytes are the zero-extend form" across SEVEN dated passes,
+  length-framed every time, while the function has been length-exact since
+  pass 6. It is register roles (esi/edi swapped throughout the neighbour
+  loop) under a zero-slack ceiling — a §85 wall, not a byte gap.
+- **Alchemist's float-tail blocker REFUTED, and the lane reopened.** The
+  header said "every spelling tried keeps the left operand live" — true,
+  but every spelling listed is an additive regrouping *around* a `p1` local
+  that is itself what keeps the value live (it was added for an unrelated
+  reason, to pin an `fld/fmul` pair). Deleting `p1` reaches **286
+  instructions = the reference's exact count**, a first for this function,
+  at -15. It sacrifices the old pin, so the lane needs a spelling that
+  drops p1 and keeps it — and per the slack finding, this function can
+  afford the attempt. Recorded at the site.
+- Two of the four probes went to proving Alchemist's fill-loop and both
+  Graveyard lanes are genuinely spent (byte-for-byte inert on every
+  ruler) — the round this triage method exists to save.
+
 **Round-440 (2026-09-14): the sp5-pp oracle applied to all 19 rows — a
 routing rule, four regions retired. Residue 8,666.**
 

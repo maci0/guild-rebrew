@@ -386,8 +386,23 @@ typedef struct {
  *     object-id read 754-756).  Declaration order is fully inert across four
  *     permutations.
  *   - float tail leaks `fstp st(0)` at 0x254 (0x243-0x284, 51B).  The
- *     reference's `faddp st(1)` needs the sum's left operand dead at the add;
- *     every spelling tried keeps it live.  Inert: `p1 + v`, `p1 += v`,
+ *     reference's `faddp st(1)` needs the sum's left operand dead at the add.
+ *     CORRECTED round 190: "every spelling tried keeps it live" was true but
+ *     misleading -- every spelling listed below is an ADDITIVE regrouping
+ *     *around* the `p1` local, and `p1` is itself what keeps the multiply's
+ *     result live into the add (it was added in the 2026-09-08 pass for a
+ *     different reason, to pin `fld [esi+0x1c]; fmul` at 0x1000c022).  The
+ *     untried move is to DELETE p1, not regroup around it: inlining both
+ *     slot+0x1c multiplies reaches **286 instructions = the reference's exact
+ *     count**, a first for this function, at -15 on both rulers (828 -> 813,
+ *     714 -> 699) with obj unchanged at 1002.  It sacrifices the pass-6
+ *     fld/fmul pin, so the lane needs a spelling that drops p1 AND keeps that
+ *     pin -- e.g. a p1 whose live range ends before the add, or an fsub-first
+ *     regrouping.  This lane is OPEN, and per shapes 88 this function can
+ *     afford it: body 1002 pads to 1008 with the reference's own 6 nops, so
+ *     there are +6 bytes of genuine upward slack (its Graveyard sibling has
+ *     ZERO -- 1040 is exactly 16-aligned).
+ *     Inert: `p1 + v`, `p1 += v`,
  *     accumulating into `v`, a `p2` local for the second multiply, both
  *     operand orders on both multiplies, `(v + p1)` parenthesised, `v` as
  *     double.  Regressions: separate p1/p2 locals evaluated before the
