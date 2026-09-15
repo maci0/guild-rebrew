@@ -7066,3 +7066,43 @@ Also retarget `vfs_ReadData.c`'s `sprintf`/`LogMessageInternal` to the named vfs
 ### Next miss
 
 `0x100294a4`: reference has `"0x%08X -> length: %u, read: %u compressed: %u"`; build has `z_errmsg` from `zutil.c`. Same text-vs-data ordering class as §154.
+
+## 156. A raw address cast emits no data; a named array in the right TU does (round 9 of the data pass)
+
+§155 left the first miss at `0x100294a4`: the reference has
+`"0x%08X -> length: %u, read: %u compressed: %u"` before `z_errmsg`. The build
+had `zutil.c`'s pointer table occupying that slot.
+
+### The fix
+
+`vfs_OpenStream.c` already linked immediately before `zutil.c.obj` (CMake
+`order-sources` / objects1.rsp). The sprintf used a raw address cast
+`(char*) 0x100294a4`, which emits **no** `.data` — nothing defined the bytes.
+Defining the string as a named array in that same TU places it right before
+`z_errmsg`:
+
+```c
+char s_0x_08X_length_100294a4[] = "0x%08X -> length: %u, read: %u compressed: %u";
+char pad_100294a4[2] = { 0 };
+```
+
+Declared before use (MSVC6 C requires it). sprintf retargeted to the symbol.
+
+### Result
+
+- `0x100294a4..0x100294d4`: **48/48 matching (100%)**
+- `.data` **23,526 → 23,472 (−54)**
+- `.text` **8,637 → 8,634 (−3)**
+
+### Quirk: raw address ≠ data
+
+A cast to a hard-coded VA is a reloc in `.text`, not a definition in `.data`.
+If nothing else defines those bytes, the slot stays empty / gets filled by the
+next object's contribution. Same class as the stub-duplication bugs, but the
+failure mode is "nothing emitted" rather than "emitted twice."
+
+### Next miss
+
+`0x100294d4`: `z_errmsg` pointer table — reference and build both have the
+table, but some pointer values differ (`0x10024620` vs `0x10024f50`-class).
+Likely a reloc/string-VA mismatch inside zlib, not a missing string.

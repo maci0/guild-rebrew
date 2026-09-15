@@ -24,7 +24,7 @@ BASELINE=${BASELINE:-281}
 # and this gate green while the deliverable lost bytes.  Guard the byte-match
 # count separately (round 193).
 BYTE_BASELINE=${BYTE_BASELINE:-264}
-# .text residue baseline: 8637 (0x21bd) as of round 514.  Guarded below --
+# .text residue baseline: 8634 (0x21ba) as of round 515.  Guarded below --
 # lower it when a change improves the number, never raise it.
 #
 # Raised twice, both times to buy a much larger .data gain, both recorded here
@@ -66,14 +66,18 @@ BYTE_BASELINE=${BYTE_BASELINE:-264}
 # .data 23,779 -> 23,526 (-253).  The +2 is codegen from switching the
 # sprintf/LogMessageInternal args from a literal+raw-address cast to named
 # symbols (vfs_ReadData.obj md5 changes).  See section 155.
-RESIDUE_BASELINE=${RESIDUE_BASELINE:-8637}
-# Raw-link .data divergence baseline (23,526 as of round 514).  The goal is a build that is
+#
+# Round 515 gave three bytes back (8637 -> 8634) and cut .data by 54 by
+# defining the vfs_OpenStream format string as a named array in that TU
+# (already linked before zutil).  See section 156.
+RESIDUE_BASELINE=${RESIDUE_BASELINE:-8634}
+# Raw-link .data divergence baseline (23,472 as of round 515).  The goal is a build that is
 # byte-identical WITHOUT postlink, but postlink blits .data wholesale from the
 # layout package, so the shipped file shows `.data differing 0x0` no matter what
 # the link produced -- and this gate, guarding .text alone, could not see .data
 # move at all.  Three rounds of data work were invisible to it.  Guard the raw
 # link's own .data so progress there is measured and regressions there caught.
-DATA_BASELINE=${DATA_BASELINE:-23526}
+DATA_BASELINE=${DATA_BASELINE:-23472}
 rc=0
 
 echo "== rebrew lint"

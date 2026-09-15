@@ -49,6 +49,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-515 (data pass, round 9): named format string in vfs_OpenStream.
+`.data` 23,526 -> 23,472 (-54). `.text` 8,637 -> 8,634 (-3).**
+
+- **Root cause:** sprintf used `(char*) 0x100294a4` — a reloc, not a definition.
+  Nothing emitted the format string; `z_errmsg` occupied the slot.
+- **Fix:** named array `s_0x_08X_length_100294a4` in `vfs_OpenStream.c` (already
+  linked before zutil). Declared before use for MSVC6 C.
+- **Result:** `0x100294a4..0x100294d4` 48/48 MATCH.
+- **Quirk:** raw address cast ≠ data. See §156.
+- Next miss: `0x100294d4` (z_errmsg pointer values). Both baselines LOWERED:
+  RESIDUE 8637->8634, DATA 23,526->23,472.
+
 **Round-514 (data pass, round 8): prepend rb+gzip magic to vfs4.
 `.data` 23,779 -> 23,526 (-253). `.text` 8,635 -> 8,637 (+2).**
 

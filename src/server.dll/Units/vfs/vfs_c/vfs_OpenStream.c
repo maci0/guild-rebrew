@@ -198,6 +198,15 @@ extern void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
 extern void __cdecl m_pool_free(void* pool, void* item);
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 
+/* DATA: SERVER 0x100294a4
+ * Must sit in this TU: link order already places vfs_OpenStream.c.obj
+ * immediately before zutil.c.obj, so a named array here lands right before
+ * z_errmsg.  A raw address cast emitted nothing and left the slot empty.
+ * Declared before use — MSVC6 C requires it. */
+char s_0x_08X_length_100294a4[] = "0x%08X -> length: %u, read: %u compressed: %u";
+char pad_100294a4[2] = { 0 };
+
+
 int __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
 {
 	char* stream;
@@ -322,7 +331,7 @@ finalize:
 		 * here and 32 -> 14 in the bytes after the function.  Widening the
 		 * local instead (`int mode18`) moves its stack slot and costs 16 bytes
 		 * of object.  Little-endian, so the masked low byte is mode18. */
-		sprintf(stream, (char*) 0x100294a4, buf, size, *(unsigned int*) &mode18 & 0xff, mode18);
+		sprintf(stream, s_0x_08X_length_100294a4, buf, size, *(unsigned int*) &mode18 & 0xff, mode18);
 	}
 	result = (int) stream;
 done:
@@ -331,5 +340,4 @@ cleanup:
 	m_pool_free((void*) 0x10034670, stream);
 	return 0;
 }
-
 
