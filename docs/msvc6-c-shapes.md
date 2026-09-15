@@ -5379,3 +5379,41 @@ So the recovery procedure, in order, when residue is wildly wrong and the source
 **(1)** check `git status`; **(2)** rebuild objects; **(3)** check `exactly at their reference
 VA` in the link log — if it is 0, **`rm -rf build/split_poc`** and relink. Step 3 is the one that
 is easy to miss, because every other signal points at the source.
+
+## 125. Guarding the composition collapse
+
+Section 124 recorded a failure mode that cost most of a round: the split link places each object
+at its reference VA, and when that collapses **every residue number is meaningless while nothing
+says so**. The residue simply reads ten times too high, and every other signal — clean
+`git status`, clean rebuild, zero compile errors — points at the source.
+
+The only evidence is one line in `split_link.sh`'s output:
+
+```
+placed split symbols: 319
+exactly at their reference VA: 0        <- should be 246
+```
+
+Round 233 turned that into a guard. `scripts/linktest.sh` now parses the line after linking and
+refuses to report anything if fewer than 100 symbols landed:
+
+```
+COMPOSITION COLLAPSED: only 0 symbols landed at their reference VA.
+         Every residue number below would be meaningless.  Fix with:
+             rm -rf build/split_poc && bash scripts/split_link.sh
+```
+
+Verified both directions: it passes at the real value (246) and trips on a collapsed log (0).
+
+This is the third guard on that script, and the set is worth reading together because each was
+added after a specific round was lost to the failure it catches:
+
+| guard | catches | cost when missing |
+|---|---|---|
+| stale-object | a source newer than its object (a revert without recompiling) | round 195 |
+| attribution | a `.c` modified but not named in the run | round 179 committed a "-58" that re-measured "+56" |
+| **composition** | the split workspace orphaned by an object delete | round 232 |
+
+The general point, and the reason to keep adding them: **a measurement harness needs guards
+against its own stale state more than against bad input.** Every one of these three produced
+confident, plausible, completely wrong numbers, and in each case the tree looked clean.

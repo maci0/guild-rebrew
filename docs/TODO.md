@@ -49,6 +49,30 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-484 (2026-09-14): guarded the composition collapse that cost round
+232. Residue 8,652.**
+
+- §124 recorded the failure mode; this round makes it impossible to hit
+  silently. `scripts/linktest.sh` now parses `exactly at their reference VA`
+  from the link log and **refuses to report any residue number if fewer than
+  100 symbols landed**, printing the exact fix
+  (`rm -rf build/split_poc && bash scripts/split_link.sh`).
+- **Verified both directions**: passes at the real value (246), trips on a
+  collapsed log (0). Confirmed the parser extracts the count correctly
+  end-to-end rather than just eyeballing the regex.
+- **This is the third guard on that script**, and together they are the
+  round's real lesson — each was added after a round was lost to exactly the
+  failure it now catches:
+  **stale-object** (a source newer than its object, i.e. a revert without a
+  recompile) — round 195; **attribution** (a `.c` modified but not named in
+  the run) — round 179 committed a "-58" that re-measured "+56";
+  **composition** (the split workspace orphaned by an object delete) —
+  round 232.
+- General point recorded in §125: **a measurement harness needs guards
+  against its own stale state more than against bad input.** All three
+  produced confident, plausible, completely wrong numbers while the tree
+  looked clean.
+
 **Round-483 (2026-09-14): drift sweep over the remaining rows; recovered
 from a corrupted split-link workspace. Residue 8,652.**
 

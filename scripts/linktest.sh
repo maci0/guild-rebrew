@@ -89,6 +89,23 @@ if ! bash scripts/split_link.sh > .scratch/linktest-link.log 2>&1; then
     tail -12 .scratch/linktest-link.log >&2
     exit 1
 fi
+# Composition guard.  The split link places each object at its reference VA; when
+# that collapses, EVERY number below is meaningless but nothing else says so --
+# the residue simply reads ten times too high and every other signal points at
+# the source.  Round 232 lost most of a round to this: the source tree was clean
+# and a full object rebuild did not help, because the stale artefact was
+# build/split_poc itself (deleting the CMake objects orphans that workspace and
+# it is not regenerated on its own).  The fix is `rm -rf build/split_poc`.
+placed=$(grep -oE "exactly at their reference VA: [0-9]+" .scratch/linktest-link.log \
+         | tail -1 | grep -oE "[0-9]+$")
+if [ -n "$placed" ] && [ "$placed" -lt 100 ]; then
+    echo "COMPOSITION COLLAPSED: only $placed symbols landed at their reference VA." >&2
+    echo "         Every residue number below would be meaningless.  Fix with:" >&2
+    echo "             rm -rf build/split_poc && bash scripts/split_link.sh" >&2
+    echo "         (see docs/msvc6-c-shapes.md section 124)" >&2
+    exit 1
+fi
+
 .venv/bin/python -u scripts/postlink_residual.py --write build/server.dll \
     > .scratch/linktest-residue.log 2>&1
 grep -E "^\.text differing" .scratch/linktest-residue.log
