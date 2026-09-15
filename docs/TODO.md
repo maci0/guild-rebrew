@@ -49,6 +49,21 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-513 (data pass, round 7): data-only TU for winsock strings.
+`.data` 25,884 -> 23,779 (-2,105). `.text` 8,636 -> 8,635 (-1).**
+
+- **Root cause:** winsock/SO_* strings lived in `server4.c`/`server2.c` (late `.text` VAs).
+  `rebrew order-sources` links by `.text` VA, so vfs/zlib/`trees` occupied `0x10028bdc`
+  and the 0x82c-byte run landed ~900 bytes late.
+- **Fix:** `winsock_data.c` — data-only, exact reference bytes `0x10028bdc..0x10029408`
+  (19 strings + pads). Ordered with `--first-va winsock_data.c=0x10006c80` between
+  m_alloc2 and trees. Callers use named symbols (no duplicate literals).
+- **Result:** that span 2092/2092 MATCH; trees at `0x10029408` MATCH.
+- **Quirk:** game-object link order is `.text` VA, not `.data` VA. Data that belongs
+  early needs either an early-text TU or a data-only file with an artificial `--first-va`.
+- Next miss: `0x1002944c` (vfs4 named strings early vs `"rb"` + gzip magic). See §154.
+- Both baselines LOWERED: RESIDUE 8636->8635, DATA 25,884->23,779.
+
 **Round-512 (data pass, round 6): named array lands first; five stubs duplicated COMDATs.
 `.data` 26,066 -> 25,884 (-182). `.text` 8,635 -> 8,636 (+1, placement).**
 

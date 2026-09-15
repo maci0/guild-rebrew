@@ -24,7 +24,7 @@ BASELINE=${BASELINE:-281}
 # and this gate green while the deliverable lost bytes.  Guard the byte-match
 # count separately (round 193).
 BYTE_BASELINE=${BYTE_BASELINE:-264}
-# .text residue baseline: 8636 (0x21bc) as of round 512.  Guarded below --
+# .text residue baseline: 8635 (0x21bb) as of round 513.  Guarded below --
 # lower it when a change improves the number, never raise it.
 #
 # Raised twice, both times to buy a much larger .data gain, both recorded here
@@ -56,14 +56,18 @@ BYTE_BASELINE=${BYTE_BASELINE:-264}
 # in m_alloc2.c that duplicated COMDAT literals.  .data 26,066 -> 25,884.
 # The +1 .text byte is pure link placement -- the three residue-table objects
 # are md5-identical.  See section 153.
-RESIDUE_BASELINE=${RESIDUE_BASELINE:-8636}
-# Raw-link .data divergence baseline (25,884 as of round 512).  The goal is a build that is
+#
+# Round 513 gave that byte back (8636 -> 8635) and cut .data by 2,105 by
+# extracting the winsock/SO_* string run into winsock_data.c, ordered via
+# --first-va between m_alloc2 and trees.  See section 154.
+RESIDUE_BASELINE=${RESIDUE_BASELINE:-8635}
+# Raw-link .data divergence baseline (23,779 as of round 513).  The goal is a build that is
 # byte-identical WITHOUT postlink, but postlink blits .data wholesale from the
 # layout package, so the shipped file shows `.data differing 0x0` no matter what
 # the link produced -- and this gate, guarding .text alone, could not see .data
 # move at all.  Three rounds of data work were invisible to it.  Guard the raw
 # link's own .data so progress there is measured and regressions there caught.
-DATA_BASELINE=${DATA_BASELINE:-25884}
+DATA_BASELINE=${DATA_BASELINE:-23779}
 rc=0
 
 echo "== rebrew lint"

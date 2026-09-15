@@ -42,8 +42,26 @@ extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 
-// DATA: SERVER 0x10028bdc
-char s_Unknown_winsock_error_u_10028bdc[] = "Unknown winsock error %u!!!";
+/* Winsock error strings live in winsock_data.c (ordered between m_alloc2 and
+ * trees so they land at 0x10028bdc).  Reference them by name — do NOT also
+ * spell the same text as a string literal or the bytes emit twice. */
+extern char s_Unknown_winsock_error_u_10028bdc[];
+extern char s_WSANOTINITIALISED_100293b0[];
+extern char s_WSAENETDOWN_10029380[];
+extern char s_WSAEFAULT_1002931c[];
+extern char s_WSAENOTCONN_100292f0[];
+extern char s_WSAEINTR_100292a4[];
+extern char s_WSAEINPROGRESS_1002921c[];
+extern char s_WSAENETRESET_10029194[];
+extern char s_WSAENOTSOCK_10029164[];
+extern char s_WSAEOPNOTSUPP_10029068[];
+extern char s_WSAESHUTDOWN_10028fc8[];
+extern char s_WSAEWOULDBLOCK_10028f6c[];
+extern char s_WSAEMSGSIZE_10028f10[];
+extern char s_WSAEINVAL_10028e3c[];
+extern char s_WSAECONNABORTED_10028da0[];
+extern char s_WSAETIMEDOUT_10028d24[];
+extern char s_WSAECONNRESET_10028bf8[];
 
 // FUNCTION: SERVER 0x1000ad40
 // srv_LogWinsockError
@@ -54,13 +72,13 @@ void __cdecl srv_LogWinsockError(int err_code)
 
 	switch (err_code) {
 	case 0x276d:
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x769, "WSANOTINITIALISED", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x769, s_WSANOTINITIALISED_100293b0, 1);
 		return;
 	case 0x2742:
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x76b,
-			"WSAENETDOWN: The network subsystem has failed!",
+			s_WSAENETDOWN_10029380,
 			1
 		);
 		return;
@@ -68,7 +86,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x76d,
-			"WSAEFAULT: The buf parameter is not completely contained in a valid part of the user address space",
+			s_WSAEFAULT_1002931c,
 			1
 		);
 		return;
@@ -76,7 +94,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x76f,
-			"WSAENOTCONN: The socket is not connected.",
+			s_WSAENOTCONN_100292f0,
 			1
 		);
 		return;
@@ -84,7 +102,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x771,
-			"WSAEINTR: The (blocking) call was canceled through WSACancelBlockingCall.",
+			s_WSAEINTR_100292a4,
 			1
 		);
 		return;
@@ -92,8 +110,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x773,
-			"WSAEINPROGRESS: A blocking Windows Sockets 1.1 call is in progress, or the service provider is still "
-			"processing a callback function.",
+			s_WSAEINPROGRESS_1002921c,
 			1
 		);
 		return;
@@ -101,8 +118,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x775,
-			"WSAENETRESET: The connection has been broken due to the keep-alive activity detecting a failure while the "
-			"operation was in progress.",
+			s_WSAENETRESET_10029194,
 			1
 		);
 		return;
@@ -110,7 +126,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x777,
-			"WSAENOTSOCK: The descriptor is not a socket.",
+			s_WSAENOTSOCK_10029164,
 			1
 		);
 		return;
@@ -118,9 +134,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x779,
-			"WSAEOPNOTSUPP: MSG_OOB was specified, but the socket is not stream-style such as type SOCK_STREAM, OOB "
-			"data is not supported in the communication domain associated with this socket, or the socket is "
-			"unidirectional and supports only send operations.",
+			s_WSAEOPNOTSUPP_10029068,
 			1
 		);
 		return;
@@ -128,8 +142,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x77b,
-			"WSAESHUTDOWN: The socket has been shut down; it is not possible to receive on a socket after shutdown has "
-			"been invoked with how set to SD_RECEIVE or SD_BOTH.",
+			s_WSAESHUTDOWN_10028fc8,
 			1
 		);
 		return;
@@ -137,7 +150,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x77d,
-			"WSAEWOULDBLOCK: The socket is marked as nonblocking and the receive operation would block.",
+			s_WSAEWOULDBLOCK_10028f6c,
 			1
 		);
 		return;
@@ -145,7 +158,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x77f,
-			"WSAEMSGSIZE: The message was too large to fit into the specified buffer and was truncated.",
+			s_WSAEMSGSIZE_10028f10,
 			1
 		);
 		return;
@@ -153,9 +166,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x781,
-			"WSAEINVAL: The socket has not been bound with bind, or an unknown flag was specified, or MSG_OOB was "
-			"specified for a socket with SO_OOBINLINE enabled or (for byte stream sockets only) len was zero or "
-			"negative.",
+			s_WSAEINVAL_10028e3c,
 			1
 		);
 		return;
@@ -163,8 +174,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x783,
-			"WSAECONNABORTED: The virtual circuit was terminated due to a time-out or other failure. The application "
-			"should close the socket as it is no longer usable.",
+			s_WSAECONNABORTED_10028da0,
 			1
 		);
 		return;
@@ -172,8 +182,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x785,
-			"WSAETIMEDOUT: The connection has been dropped because of a network failure or because the peer system "
-			"failed to respond.",
+			s_WSAETIMEDOUT_10028d24,
 			1
 		);
 		return;
@@ -181,9 +190,7 @@ void __cdecl srv_LogWinsockError(int err_code)
 		LogMessageInternal(
 			"D:\\Develop\\DieGildeAddOnServer\\server.c",
 			0x787,
-			"WSAECONNRESET: The virtual circuit was reset by the remote side executing a hard or abortive close. The "
-			"application should close the socket as it is no longer usable. On a UPD-datagram socket this error would "
-			"indicate that a previous send operation resulted in an ICMP >Port Unreachable< message.",
+			s_WSAECONNRESET_10028bf8,
 			1
 		);
 		return;

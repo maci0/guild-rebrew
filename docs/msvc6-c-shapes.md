@@ -7009,3 +7009,32 @@ can still win.
 
 `RESIDUE_BASELINE` 8635 → 8636. The three residue-table objects (`gm_AllocGebaeude`,
 `ahm_ExAllocAlchemist`, `spiel_dumpD`) are md5-identical before and after. Same class as §151.
+
+## 154. Data-only TUs beat text-ordered link for .data placement (round 7 of the data pass)
+
+§153 left a `+24` opportunity whose first divergence was `"Unknown winsock error %u!!!"` at `0x10028bdc`. The strings lived in `server4.c` / `server2.c`, whose first functions sit at `0x1000ad40` / `0x10009d30`. `rebrew order-sources` (CMakeLists.txt) orders game objects by `.text` VA, so those TUs link AFTER vfs/zlib (`trees.c` at `0x10006ec0`). Result: trees/vfs occupied the winsock slot and the 0x82c-byte run landed ~900 bytes late.
+
+### The fix: a data-only TU ordered between m_alloc2 and trees
+
+Extracted the exact reference bytes `0x10028bdc..0x10029408` (19 strings + pads, 2092 bytes) into `winsock_data.c` — no functions. Ordered it with:
+
+```
+--first-va winsock_data.c=0x10006c80   # between m_alloc2 (0x10006c00) and trees (0x10006ec0)
+```
+
+Callers in `server4.c` / `server2.c` now reference the named symbols; they must NOT also spell the same text as a string literal or the bytes emit twice (same class as §151/§153).
+
+### Result
+
+- `0x10028bdc..0x10029408`: **2092/2092 matching (100%)**
+- trees table at `0x10029408`: MATCH
+- `.data` **25,884 → 23,779 (−2,105)**
+- `.text` **8,636 → 8,635 (−1)** — gave back the placement byte §153 spent
+
+### Quirk: CMake object order is `.text` VA, not `.data` VA
+
+`make_split_rsp` sorts *split* LIBCMT objects by VA, but game objects keep CMake/`order-sources` order, which is driven by the first `// FUNCTION:` marker (or `--first-va`). A TU whose only contribution is `.data` that belongs early in the section must therefore either (a) live in a TU whose `.text` VA is also early, or (b) be a data-only file given an artificial `--first-va` between the neighbours that frame its reference run. (b) is the lazy path when the owning functions are late.
+
+### Next miss
+
+First divergence after the winsock run: `0x1002944c`, where the reference has `"rb"` + gzip magic (`0x1f 0x8b`) before the vfs path; the build has `vfs4.c`'s named strings starting early. Same class as unused named-string stubs (§153).

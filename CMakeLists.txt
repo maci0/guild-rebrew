@@ -211,6 +211,7 @@ if(REBREW_BUILD_SERVER)
       --first-va inflate.c=0x10005720
       --first-va inftrees.c=0x10005d00
       --first-va infutil.c=0x10006440
+      --first-va winsock_data.c=0x10006c80
       --first-va trees.c=0x10006ec0
       --first-va trees2.c=0x10008800
       --first-va zutil.c=0x100092e0

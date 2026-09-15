@@ -1,5 +1,7 @@
 #include "../Units/Error/error.h"
 #include "../Units/m_alloc/m_alloc.h"
+extern char s_Cant_set_SO_RCVBUF_100293e4[];
+extern char s_Cant_set_SO_SNDBUF_100293c4[];
 
 #include <stdio.h>
 #include <string.h>
@@ -128,7 +130,7 @@ int __cdecl srv_CreateListenSocket(int port)
 	optval = 0x20000;
 	if (setsockopt(sock, 0xFFFF, 0x1002, (const char*) &optval, 4) == -1) {
 		/* original source logs the RCVBUF text on this path */
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x424, "Can't set SO_RCVBUF on Socket", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x424, s_Cant_set_SO_RCVBUF_100293e4, 1);
 		goto close_sock;
 	}
 
@@ -136,7 +138,7 @@ int __cdecl srv_CreateListenSocket(int port)
 	optval = 0x20000;
 	if (setsockopt(sock, 0xFFFF, 0x1001, (const char*) &optval, 4) == -1) {
 		/* original source logs the SNDBUF text on this path */
-		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x42b, "Can't set SO_SNDBUF on Socket", 1);
+		LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x42b, s_Cant_set_SO_SNDBUF_100293c4, 1);
 		goto close_sock;
 	}
 
