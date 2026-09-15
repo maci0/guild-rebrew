@@ -5875,3 +5875,45 @@ downstream — the zero-extend form, the 4-to-5 byte gap per read — follows fr
 
 Recorded as a complete answer rather than an open question. The remaining value in this idiom is
 zero, and knowing *why* is what prevents a tenth spelling.
+
+## 136. A window where we are *shorter*, and why that constrains the whole function
+
+Section 135 closed the zero-extend idiom, but `gm_AllocSpieler` has a second backward window that
+had never been read: `[0x7a0, 0x7bf)`, **-53 bytes**. Its sign is the interesting part.
+
+Per section 128's backward-jump semantics, a negative drift on a backward jump means the span is
+**shorter on our side** — we emit 53 fewer bytes there than the reference. And since this object
+is **size-exact** (`obj 3689` against `size 3689`), those bytes must reappear as surplus
+elsewhere: the function is not uniformly too long or too short, it is redistributed.
+
+Reading the span explains where the reference spends them:
+
+```
+reference   0x10019013  8b4c2418  mov ecx,[esp+0x18]      <- reload the base
+            0x1001901a  8954b15c  mov [ecx+esi*4+0x5c],edx
+            0x10019020  8b4c2418  mov ecx,[esp+0x18]      <- reload again
+            0x1001902b  8b4c2418  mov ecx,[esp+0x18]      <- and again
+
+ours        +0x07cf              mov [esi+edi*4+0x5c],ecx <- base live in esi, no reload
+```
+
+The reference **spills the array base and reloads it 12 times across the function** (4 bytes
+each); we keep it in `esi` and never reload. Our code is genuinely shorter here, and correctly
+so.
+
+**This directly constrains section 135.** That section found the reference's counters in
+`esi`/`ebx` where ours are in `edi`/`ebx`, leaving us no free register for the widened read. But
+`esi` is exactly the register we are using to hold the base — the thing that makes *this* window
+53 bytes shorter. Adopting the reference's assignment would free a register for the zero-extend
+and simultaneously force the spill-and-reload pattern that costs it 48 bytes here.
+
+So the two windows are **coupled and opposed**: the +5 zero-extend surplus and the -53 spill
+shortfall are two consequences of one allocation choice, pulling in opposite directions. Neither
+can be judged alone, which is why nine spellings aimed at the zero-extend all failed — each was
+optimising one side of a trade the compiler makes globally.
+
+The practical consequence is a rule for this function, and probably for others: **a window where
+we are shorter than the reference is not a defect and must not be "fixed"**. It is evidence about
+which register the allocator has free, and it bounds what any change to the opposing window can
+achieve. Read both signs before attributing a cause — section 135's explanation is correct about
+the mechanism and incomplete about the cost.

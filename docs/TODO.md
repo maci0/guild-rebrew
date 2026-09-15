@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-495 (2026-09-14): found a window where WE are shorter — and it
+constrains §135. Residue 8,652.**
+
+- gm_AllocSpieler's other backward window, `[0x7a0,0x7bf)` at **-53 bytes**,
+  had never been read. Per §128's backward-jump semantics a negative drift
+  means the span is **shorter on OUR side** — we emit 53 fewer bytes there.
+- **The object is size-exact** (obj 3689 = size 3689), so those bytes must
+  reappear as surplus elsewhere: the function is **redistributed**, not
+  uniformly long or short.
+- **Where the reference spends them**: it spills the array base and reloads
+  `[esp+0x18]` **12 times across the function** (4 bytes each); we keep it
+  live in `esi` and never reload. Our code is genuinely shorter here, and
+  correctly so.
+- **This directly constrains §135.** That section found the reference's
+  counters in `esi`/`ebx` where ours are in `edi`/`ebx`, leaving no free
+  register for the widened read — but `esi` is exactly the register holding
+  our base, which is what makes THIS window 53 bytes shorter. Adopting the
+  reference's assignment would free a register for the zero-extend **and**
+  force the spill/reload pattern that costs it ~48 bytes here.
+- **So the two windows are coupled and opposed**: the +5 zero-extend surplus
+  and the -53 spill shortfall are two consequences of ONE allocation choice.
+  That is why nine spellings aimed at the zero-extend all failed — each
+  optimised one side of a trade the compiler makes globally.
+- **Rule recorded in §136**: a window where we are SHORTER than the
+  reference is not a defect and must not be "fixed". It is evidence about
+  which register is free and bounds what any change to the opposing window
+  can achieve. **Read both signs before attributing a cause.**
+
 **Round-494 (2026-09-14): answered §134's open question — counter
 ASSIGNMENT, not pressure. Residue 8,652.**
 
