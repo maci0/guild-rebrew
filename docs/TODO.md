@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-493 (2026-09-14): §132's mechanism REFUTED by a controlled
+comparison. Residue 8,652.**
+
+- Round 237's re-sweep skipped the two largest rows. Covered them, and
+  **gm_AllocSpieler had a hidden backward window**: `[0x8ac,0x900)`,
+  **+5 bytes in 84** — its sharpest lead yet.
+- It is the **same zero-extend idiom** as the Graveyard row: reference
+  `xor ecx,ecx; mov cx,[ebp]; lea edi,[ecx+esi]` against our
+  `mov si,[ebp]; and esi,0xffff`.
+- **But here we ALREADY use the reference's addressing** —
+  `mov byte ptr [esi+0x1014d8e0], 0`, base as a constant displacement — and
+  the gap is still there. §132 blamed the Graveyard gap on our folding the
+  base into the pointer; this row has no such folding and the same gap.
+- **So §132 mis-attributed the cause.** The addressing difference is real
+  but does not produce `and reg,0xffff`. §133 found it costs nothing
+  elsewhere; this is stronger — it does not cause the gap it was invoked to
+  explain.
+- Two shapes measured: hoisting the scaled counter into its own induction
+  variable = **+442**; explicit `(unsigned int)` widening = **+0**.
+  **Eight spellings across two rows now**, all canonicalised or losses.
+- **Honest current statement**: msvc6 emits `and reg,0xffff` wherever the
+  widened value's destination register is also its source, and no tried C
+  spelling separates them. **Why the reference's register is free is
+  unexplained** — the addressing hypothesis is refuted, not confirmed.
+- Method note in §134: this surfaced only because §133's NEGATIVE result was
+  followed up rather than filed. The row that disproved the mechanism is the
+  one where our code already does the right thing.
+
 **Round-492 (2026-09-14): tested whether §132's addressing pattern
 generalises — it does not. Residue 8,652.**
 

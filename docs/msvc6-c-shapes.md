@@ -5780,3 +5780,56 @@ local rather than tree-wide.
 
 Recorded as a closed question rather than an open lead: the addressing pattern is real, it is
 understood, and outside the Graveyard loop it costs nothing.
+
+## 134. The zero-extend gap is not caused by addressing — a controlled comparison
+
+Round 237's re-sweep after the backward-jump fix skipped the two largest rows. Round 242 covered
+them, and `gm_AllocSpieler` had a hidden backward window: `[0x8ac, 0x900)`, **+5 bytes in 84** —
+the sharpest lead on that function so far.
+
+Disassembling it shows **the same idiom** as the Graveyard row (section 129):
+
+```
+reference  0x100190fc  33c9      xor ecx,ecx
+           0x10019100  668b4d00  mov cx,word ptr [ebp]
+           0x10019104  8d3c31    lea edi,[ecx+esi]
+           0x1001910e            mov byte ptr [edi+0x1014d8e0], 0
+ours       +0x08a7     mov si,word ptr [ebp]
+           +0x08ab     and esi,0xffff
+           +0x08b5     mov byte ptr [esi+0x1014d8e0], 0
+```
+
+**But one thing differs, and it is decisive.** Section 132 attributed the Graveyard gap to
+addressing: we folded the array base into the pointer (`mov [esi], bl`), which pinned a live
+address and denied the widened read a free register. **Here we already use the reference's
+addressing** — `mov byte ptr [esi+0x1014d8e0], 0`, base as a constant displacement, exactly as
+the reference does — **and the zero-extend gap is still there.**
+
+That is a controlled comparison across two rows:
+
+| row | our addressing | zero-extend gap |
+|---|---|---|
+| `gv_ExAllocGraveyardWorker` | base folded into pointer | 4 bytes per read |
+| `gm_AllocSpieler` | **same as reference** | **still 5 bytes** |
+
+**So section 132's mechanism was mis-attributed.** The addressing difference on the Graveyard row
+is real, but it is not what produces the `and reg,0xffff` form — the form appears with and
+without it. Section 133 already found the addressing pattern costs nothing elsewhere; this is the
+stronger statement: it does not cause the gap it was invoked to explain.
+
+Two shapes measured here, neither reaching it:
+
+| shape | link delta |
+|---|---|
+| hoist the scaled counter into its own induction variable | **+442** |
+| explicit `(unsigned int)` widening on the id read | **+0** |
+
+That brings this idiom to **eight measured spellings across two rows**, all either canonicalised
+or losses. The honest current statement is narrower than section 132's: **msvc6 emits
+`and reg,0xffff` wherever the widened value's destination register is also its source, and no
+tried C spelling separates them.** Why the reference's register is free remains unexplained — the
+addressing hypothesis is now refuted, not confirmed.
+
+Worth noting as method: this only surfaced because a **negative** result (section 133's "costs
+nothing elsewhere") was followed up rather than filed. The row that disproved the mechanism is
+the one where our code already does the right thing.
