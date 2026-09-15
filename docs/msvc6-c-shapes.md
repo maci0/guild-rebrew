@@ -3969,3 +3969,51 @@ source shape — and it is free, in the sense that no C was changed.
 Corollary worth keeping: **measure the displacement before attributing a `.data` figure to
 content or ordering.** A uniform delta across every object is a link-order bug, and it is
 cheaper to fix than any number of source edits.
+
+## 102. Fold priority only needs to beat the first *member* COMDAT, not the whole link
+
+Section 101 removed the `.data` pad from the head of the section and paid 6,008 bytes. The
+same reasoning applies to the other object sitting there, and this one had a stated reason to
+be first — which turned out to be true but far stronger than necessary.
+
+`scripts/split_link.sh` generates `fold_literals.obj` (from `gen_fold_literals.py`) and
+inserted it at rsp token 1, commented *"first, so our COMDATs are the ones kept"*. The purpose
+is real: msvc6 derives a `??_C@` COMDAT name from the literal's contents and LINK folds
+COMDATs by name, so re-declaring every member-library string makes the linker discard the
+**members'** copies — that is what holds `.rdata` at the reference's size. But what the object
+contributes to `.data` is not the literals (those are COMDATs); it is the
+`const char* g_rdata_fold_refs[]` **pointer array**, which exists only to keep them referenced,
+and at token 1 that array displaced every game `.data` symbol by **+0x488**.
+
+**LINK keeps the first COMDAT of a given name, so the fold object only has to precede the
+first *member* object that defines one** — not every game object. Objects of ours that appear
+earlier are irrelevant: if one of them defines the literal first, the member's copy is
+discarded either way. Scanning the response file's member objects for a `??_C@` symbol
+(COFF symbol class 2, section > 0) and inserting immediately before the first hit puts the
+array at **token 263** instead of 1:
+
+| fold object at | `.data` differing | `.rdata` vsize/raw | dominant `.data` shift |
+|---|---|---|---|
+| token 1 (old) | `0x71e3` | 0x2e81 / 0x3000 | `+0x488` |
+| token 263 (before first member `??_C@`) | **`0x6d33`** | 0x2e81 / 0x3000 | **`+0x20`** |
+
+`.rdata` is unchanged at the reference's `0x2e81`/`0x3000`, which is the tell that the fold
+still holds — a `.data` gain bought by breaking the fold would show up there immediately.
+Shipped `.text` goes **8,665 → 8,664**, still zero differing bytes outside `.text`, file size
+exactly 286,720.
+
+**The cumulative effect of the two link-order fixes is the point.** Tracking the dominant
+displacement of game `.data` symbols across rounds 202-204:
+
+```
++0x7928  (pad at token 1)   ->  +0x488  (pad appended)  ->  +0x20  (fold object moved)
+```
+
+`.data` went `0x893b` → `0x71e3` → **`0x6d33`**, i.e. **7,208 bytes** recovered from link order
+alone, with no C changed. And `.rdata` is now 60 of 111 located strings at **shift 0** — it was
+never characterised before and is much closer than `.data`.
+
+The general rule, which generalises past this project: **an object whose only job is to win a
+COMDAT name, or to pad a length, should be placed as late as its job allows.** Both objects
+here were placed at the extreme (token 1) when the requirement was merely "before the first
+competitor" or "anywhere at all", and each cost the section's whole prefix.

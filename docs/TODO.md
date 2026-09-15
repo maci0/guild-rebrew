@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-454 (2026-09-14): second link-order win — `.data` -1,200 more,
+`.text` 8,665 -> 8,664. Link order has now paid 7,208 bytes total.**
+
+- **`fold_literals.obj` was linked at token 1 and did not need to be.** Its
+  comment said "first, so our COMDATs are the ones kept", which is true but
+  far stronger than required: LINK keeps the FIRST COMDAT of a given name,
+  so the fold object only has to precede the first **member** object that
+  defines a `??_C@` — earlier objects of OURS are irrelevant, since if one
+  defines the literal first the member's copy is discarded anyway.
+- Scanning member objects for a `??_C@` symbol (COFF class 2, section > 0)
+  and inserting just before the first hit moves it from token 1 to **token
+  263**: `.data` **0x71e3 -> 0x6d33 (-1,200)**, dominant game-data shift
+  **+0x488 -> +0x20**, shipped `.text` **8,665 -> 8,664**, still ZERO bytes
+  differing outside `.text`, size exactly 286,720.
+- **Verified the fold did NOT break**, which is the whole risk: `.rdata`
+  stays at the reference's 0x2e81/0x3000. A `.data` gain bought by losing
+  the fold would show there immediately. I re-measured this myself rather
+  than inherit it — the lane that made the edit never reported, and its
+  comment cited a §102 that did not exist until now.
+- **Cumulative link-order effect across rounds 202-204**: dominant
+  displacement +0x7928 -> +0x488 -> **+0x20**, `.data` 0x893b -> 0x71e3 ->
+  **0x6d33**, i.e. **7,208 bytes recovered with no C changed**. New §102.
+- **`.rdata` characterised for the first time**: 60 of 111 located strings
+  are at **shift 0** (against `.data`'s best of 39 at +0x20), so it is much
+  closer than `.data` and is the better next target.
+- General rule recorded: **an object whose only job is to win a COMDAT name,
+  or to pad a length, belongs as late as that job allows.** Both objects
+  here sat at token 1 when the real requirement was "before the first
+  competitor" or "anywhere at all", and each cost the section's whole
+  prefix.
+
 **Round-453 (2026-09-14): LANDED a link-order fix — `.data` -6008 bytes,
 `.text` 8,666 -> 8,665. First gain from the LINK, not from source.**
 

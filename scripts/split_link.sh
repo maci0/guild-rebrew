@@ -106,14 +106,55 @@ python3 scripts/gen_fold_literals.py --split-dir "$WORK/split" > "$WORK/fold_lit
 rebrew-cmake-cl /nologo /c /O2 /Gd /MT /Fo"$WORK/fold_literals.obj" \
     "$WORK/fold_literals.c" >/dev/null
 python3 - "$WORK/rsp.rsp" "${WORK#build/}/fold_literals.obj" <<'RSP'
-import shlex, sys
+import shlex, struct, sys
 from pathlib import Path
+
 rsp, obj = Path(sys.argv[1]), sys.argv[2]
 tokens = shlex.split(rsp.read_text())
+
+
+def defines_literal(token):
+    """True if this *member* object defines a `??_C@` COMDAT of its own.
+
+    Game objects are irrelevant to the boundary: if one of ours defines the
+    literal first, the member's copy is discarded either way.  Only a member
+    object winning the name ahead of us breaks the fold.
+    """
+    if not token.endswith(".obj"):
+        return False
+    if not ("split/" in token or "g_rdata_piece" in token or "rdata_restore" in token):
+        return False
+    try:
+        d = (Path("build") / token).read_bytes()
+        symoff = struct.unpack_from("<I", d, 8)[0]
+        nsym = struct.unpack_from("<I", d, 12)[0]
+        strtab = d[symoff + nsym * 18:]
+        for i in range(nsym):
+            e = d[symoff + i * 18:symoff + (i + 1) * 18]
+            if e[:4] == b"\0\0\0\0":
+                off = struct.unpack_from("<I", e, 4)[0]
+                name = strtab[off:].split(b"\0")[0].decode("latin1")
+            else:
+                name = e.split(b"\0")[0].decode("latin1")
+            _v, secno, _t, cls, _a = struct.unpack_from("<IhHBB", e, 8)
+            if cls == 2 and secno > 0 and name.startswith("??_C@"):
+                return True
+    except (OSError, struct.error):
+        pass
+    return False
+
+
 if obj not in tokens:
-    tokens.insert(1, obj)  # first, so our COMDATs are the ones kept
+    # LINK keeps the FIRST COMDAT of a given name, so this object only has to
+    # precede the first member object that defines a `??_C@` -- not the whole
+    # link.  Everything before that point is game code whose `.data` our array
+    # would otherwise displace: at token 1 it shifted every game symbol by
+    # +0x488; here it shifts almost none (game `.data` is 0x3d4a of 0x3dbb
+    # before the boundary).  Verified both ways -- see msvc6-c-shapes.md #102.
+    pos = next((i for i, t in enumerate(tokens) if defines_literal(t)), 1)
+    tokens.insert(pos, obj)
+    print(f"fold object {obj} inserted at token {pos} (before the first member ??_C@)")
 rsp.write_text(" ".join(tokens))
-print(f"fold object {obj} inserted at token 1")
 RSP
 
 if [ "${REBREW_SKIP_SPLIT_BLOB:-0}" != "1" ]; then
