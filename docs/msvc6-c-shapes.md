@@ -5527,3 +5527,44 @@ Recorded for the next reader: the reference **does** materialise `0xffffffff` in
 surplus 90 bytes earlier. The same constant is worth eight bytes in one place and four in
 another, purely by whether a compared register survives — more evidence that the choice is
 allocator state, not source shape.
+
+## 128. `drift_windows.py` was wrong on backward jumps
+
+The drift tool (section 123) assumed every jump runs forward, so it printed a window of
+`[jump, target)` and took the raw target difference as the drift. For a **backward** jump that is
+wrong in both halves: the measured span is `[target, jump)`, and the sign is inverted — if our
+backward target sits 2 bytes earlier than the reference's, the code between target and jump
+**grew** by 2, it did not shrink.
+
+On `ahm_ExAllocAlchemist` both of its windows are backward, so both were reported inside out:
+
+```
+before:  drift -2 bytes in [0x1de, 0x1c7)      <- a negative-width window, visibly wrong
+after:   drift +2 bytes in [0x1c7, 0x1de)  (backward)
+```
+
+The give-away was the negative width, which is worth watching for in any such tool. Fixed, with
+forward windows re-checked against section 126's known values (`[0x406,0x55c) +1`,
+`[0x443,0x498) +3`) to confirm the change was surgical.
+
+**What the corrected window shows.** The 23-byte span is a loop, and the difference is loop
+*shape*:
+
+```
+reference   body … inc edi ; cmp edi,5 ; jl back            <- bottom-tested, ONE branch
+ours        cmp edi,5 ; jge out ; body … inc edi ; jmp back <- top-tested, TWO branches
+```
+
+Our source spells it `while (1) { if (!(i < 5)) break; … }`. The reference's form is a plain
+`do/while`, and that is a genuine source-level lever rather than one of the canonicalised shapes
+in sections 122, 126 and 127.
+
+**It still loses: +439 at the link.** The file's own header already warned that "a do-while here
+cascades: 998 obj / 285 match" — but that was measured at *object* level, before `linktest.sh`
+existed, so the link number is new information and it is far worse than the object figure
+suggested. The loop shape is correct in isolation and the register allocation it forces is not.
+
+Worth stating as a rule, since three sections now point the same way: **matching the reference's
+local shape is not the objective — matching its bytes is.** A construct can be demonstrably the
+one the original used and still be the wrong thing to write, because the surrounding allocation
+was produced by code we have not matched yet.

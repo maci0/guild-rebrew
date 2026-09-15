@@ -62,4 +62,13 @@ if not drifts:
 else:
     print(f'{len(drifts)} aligned branches whose targets differ:')
     for a,rt,ot,d in drifts[:6]:
-        print(f'  at +{a:#06x}: ref->{rt:#06x} ours->{ot:#06x}  drift {d:+d} bytes in [{a:#x}, {rt:#x})')
+        # The measured span runs between the jump and its target, in whichever
+        # order they fall.  A BACKWARD jump (target < source) measures the drift
+        # accumulated in [target, jump) and its sign is inverted relative to a
+        # forward one: if our backward target sits 2 bytes earlier than the
+        # reference's, the code between target and jump grew by 2, not shrank.
+        lo, hi = (a, rt) if rt >= a else (rt, a)
+        signed = d if rt >= a else -d
+        print(f'  at +{a:#06x}: ref->{rt:#06x} ours->{ot:#06x}  '
+              f'drift {signed:+d} bytes in [{lo:#x}, {hi:#x})'
+              + ('' if rt >= a else '  (backward)'))

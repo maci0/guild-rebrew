@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-487 (2026-09-14): fixed a real bug in drift_windows.py; do/while
+costs +439. Residue 8,652.**
+
+- **Tool bug found and fixed**: `drift_windows.py` assumed every jump runs
+  forward. For a BACKWARD jump the window is `[target, jump)`, not
+  `[jump, target)`, **and the sign inverts** — our target sitting 2 bytes
+  earlier means the span GREW by 2. On ahm_ExAllocAlchemist both windows are
+  backward, so both were reported inside out (the give-away was a
+  **negative-width window**, worth watching for in any such tool).
+  Forward windows re-checked against §126's known values to confirm the fix
+  was surgical.
+- **The corrected window exposes a loop-shape difference** in 23 bytes:
+  reference is **bottom-tested** (`inc; cmp; jl back` — one branch), ours is
+  **top-tested** (`cmp; jge out; … jmp back` — two). Our source spells it
+  `while (1) { if (!(i < 5)) break; … }`; the reference's is a plain
+  `do/while`. Unlike §§122/126/127's canonicalised shapes, this IS a real
+  source-level lever.
+- **It still loses: +439 at the link.** The file header already warned the
+  do-while "cascades: 998 obj / 285 match" — but that was an OBJECT-level
+  measurement predating `linktest.sh`, so the link figure is new and much
+  worse than the object number implied.
+- **Rule recorded in §128**: matching the reference's local shape is not the
+  objective — matching its bytes is. A construct can be demonstrably the one
+  the original used and still be the wrong thing to write, because the
+  surrounding allocation comes from code we have not matched yet.
+
 **Round-486 (2026-09-14): guarded the silent no-op; located
 ServerMainThread's -2. Residue 8,652.**
 
