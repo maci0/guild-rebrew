@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-478 (2026-09-14): `linktest.sh` already existed — documented it and
+fixed its stale baseline. Residue 8,652.**
+
+- §118's rule ("when the object rulers disagree, link and find out") is only
+  actionable if linking a candidate is cheap. Every lane this session ran
+  object-only because a link measurement looked like a manual
+  rebuild-relink-measure cycle — **and I hand-rolled that cycle myself
+  several times**.
+- **`scripts/linktest.sh` has done exactly this all along**, and better: it
+  recompiles with the exact command `build.make` records (so flags cannot
+  drift), relinks, applies postlink, and prints a PER-FUNCTION residue
+  delta plus explicit `revert candidates`.
+- **Verified both directions**: `+0` on an unmodified file, and **+42
+  attributed to gm_AllocSpieler** when §118's known-bad hoist is re-applied
+  as a control.
+- **Two reasons it went unused, both fixed**: it was **absent from
+  AGENTS.md** (mentioned only thousands of lines into TODO.md) — now
+  documented in the Linking section beside `gate.sh` with a worked example;
+  and **its baseline snapshot was stale**, containing a 183-byte ERROR
+  MESSAGE instead of a residue table, so the delta report had nothing to
+  compare against. Re-snapshotted.
+- Also corrected AGENTS.md's gate description: it says three checks, but
+  `gate.sh` has had **four** since round 215 (lint, compile, verify, and the
+  residue baseline). Verified against the script and a live run.
+- **General lesson (new §119): a capability nobody knows about is
+  indistinguishable from a missing one.** Before building a measurement,
+  grep `scripts/` and read the header comments — they carry the rationale.
+  (§112's call inventory was a genuine gap; this was not.)
+
 **Round-477 (2026-09-14): scoped the §116 hoist lever — it is NOT a general
 sweep. Residue 8,652.**
 

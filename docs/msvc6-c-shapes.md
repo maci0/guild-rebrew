@@ -5087,3 +5087,40 @@ Also dead on the same row, and it confirms an existing note generalises: hoistin
 `0x100a8c30` global load through a new `unsigned char* type_base` local produced
 **byte-identical output** — 1004/3689, aligned 662, emitted instructions unchanged. msvc6 folds
 the local away entirely, exactly as section 109 (round 216) found for the `lea` split.
+
+## 119. `linktest.sh` already existed — the gap was that nobody was told
+
+Section 118 ended on a rule: when the object rulers disagree, link and find out. That rule is
+only actionable if linking a candidate is cheap, and every probe lane this session ran
+object-only because a link measurement looked like a manual rebuild-relink-measure cycle.
+
+**It is not. `scripts/linktest.sh` has done this all along**, and it is better than the manual
+cycle because it recompiles with the exact command `build.make` records — so the flags cannot
+drift — then relinks, applies postlink, and prints a per-function delta:
+
+```
+$ bash scripts/linktest.sh src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c
+function                                  before   after   delta
+gm_AllocSpieler                             2824    2866     +42  <-- worse
+.text total 8652 -> 8694  (+42)
+revert candidates: gm_AllocSpieler (+42)
+```
+
+Verified both directions this round: **+0 on an unmodified file**, and **+42 attributed to the
+right function** when section 118's known-bad hoist is re-applied as a control.
+
+Two reasons it went unused, both now fixed:
+
+- **It was absent from `AGENTS.md`**, the file every agent reads first, and mentioned only in
+  passing several thousand lines into `docs/TODO.md`. It is now documented in the Linking
+  section next to `gate.sh`, with the worked example above and the reason it matters.
+- **Its baseline snapshot was stale** — `.scratch/residue_base.log` contained a 183-byte
+  *error message* from a previous run ("split_poc.dll is older than 1 source file") rather than
+  a residue table, so the delta report had nothing to compare against. Re-snapshotted with
+  `.venv/bin/python scripts/postlink_residual.py --write build/server.dll > .scratch/residue_base.log`.
+
+The general lesson is worth more than the tool: **a capability nobody knows about is
+indistinguishable from a missing one**. Three rounds of this session built or hand-rolled
+measurement that already existed — the call inventory in section 112 was a genuine gap, but this
+was not. Before building a measurement, grep `scripts/` and read the header comments; they carry
+the rationale for why each one exists.

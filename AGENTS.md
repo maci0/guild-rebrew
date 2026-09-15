@@ -136,12 +136,36 @@ and `MISSING_SIZE` are stored when the object size disagrees with the binary.
 
 Build with `cmake -S . -B build -DREBREW_DEBUG_INFO=OFF && cmake --build build`.
 
-**Run `scripts/gate.sh` before committing.** It is the three checks that must
+**Run `scripts/gate.sh` before committing.** It is the four checks that must
 pass: `rebrew lint`, the compile (the POST_BUILD postlink step is expected to
 fail until the tree is position-aligned, so only `error C####`/`error LNK####`
-count), and `rebrew verify --full` against a baseline of 281 passed. A drop
-below the baseline is a regression; raise `BASELINE` only when a change
-improves the number.
+count), `rebrew verify --full` against a baseline of 281 passed, and the
+linked `.text` residue against `RESIDUE_BASELINE`. A drop below either
+baseline is a regression; lower `RESIDUE_BASELINE`, or raise `BASELINE`, only
+when a change improves the number.
+
+**Judge every candidate with `scripts/linktest.sh <file.c>`, not with object
+scores.** It recompiles the file with the exact command `build.make` records,
+relinks, applies postlink, and prints a per-function residue delta against
+`.scratch/residue_base.log`:
+
+```
+$ bash scripts/linktest.sh src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c
+function                                  before   after   delta
+gm_AllocSpieler                             2824    2866     +42  <-- worse
+.text total 8652 -> 8694  (+42)
+revert candidates: gm_AllocSpieler (+42)
+```
+
+This matters because the object rulers routinely disagree with the link and
+with each other. `rebrew test`'s `match_count` is a *positional* compare, so a
+size change anywhere moves every byte after it; `probe_function.py`'s `aligned`
+is structural. A measured case: hoisting one store in `gm_AllocSpieler`
+reproduced the reference's instruction sequence exactly and moved `aligned`
+662 → 665 while `match_count` fell 1004 → 947 with `obj_size` unchanged — and
+at the link it was **42 bytes worse**. When the two object rulers disagree,
+link and find out; do not reason about which one deserves trust
+(`docs/msvc6-c-shapes.md` sections 19, 116, 118).
 
 - **`REBREW_DEBUG_INFO` must be OFF.** With it ON, `/debug` adds a 0x1c-byte
   debug directory that grows `.rdata` past the reference, and the postlink
