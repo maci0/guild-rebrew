@@ -280,6 +280,21 @@ if(REBREW_BUILD_SERVER)
 
   target_sources(server_dll PRIVATE "${PROJECT_SOURCE_DIR}/src/server.dll/server.def")
 
+  # Per-file compiler pin.  msvc-6.0-sp5-pp reproduces gm_FindNextFilteredEntity
+  # (0x10016f80) at the reference's exact object size where sp6 runs four bytes
+  # short (171/346 at obj 346, against 162/346 at obj 342), and its three
+  # file-mates stay RELOC-perfect under it, so the whole translation unit is
+  # safe to switch.  Measured at the link: .text residue 8,652 -> 8,641.
+  #
+  # The flag is consumed by rebrew-cmake-cl and stripped before the real
+  # command line is built (rebrew commit 821d5bb).  It must be added WITHOUT
+  # disturbing the /O2 /Gd this build appends per file: round 224 pinned the
+  # toolchain via a COMPILE_FLAGS value that replaced them, compiled the file
+  # unoptimised and cost 39% residue.  See docs/msvc6-c-shapes.md section 142.
+  set_source_files_properties(
+    "${PROJECT_SOURCE_DIR}/src/server.dll/DieGildeAddOn/game/spiel_dumpD.c"
+    PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
+
   if(MSVC)
     foreach(_zsrc IN LISTS ZLIB_SOURCES)
       set_source_files_properties("${_zsrc}" PROPERTIES COMPILE_FLAGS "/O2")

@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-501 (2026-09-14): LANDED the sp5-pp pin — residue 8,652 -> 8,641.**
+
+- §141 named §115's sp5-pp result the most interesting unexploited lead.
+  Round 224 measured the gain but could not get it into the build; this
+  round did.
+- **Re-confirmed per function**: gm_FindNextFilteredEntity (0x10016f80) is
+  SIZE_MISMATCH 162/346 obj **342** under sp6, but STUB 171/346 obj **346
+  exact** under sp5-pp. **All three file-mates stay RELOC-perfect under
+  both** (272/272, 186/186, 211/211) — the check that makes a per-file pin
+  legitimate, since a toolchain is chosen per FILE.
+- **sp5-pp is not better generally**: srv_LoadBuf 701 -> 130,
+  ServerMainThread 2075 -> 1225, cm_ExSellObjekt 1149 -> 834. It is an
+  oracle for one file.
+- **Why round 224 failed**: it used `COMPILE_FLAGS`, which REPLACES the
+  per-file flags, so `/O2 /Gd` vanished and the file compiled unoptimised
+  (39% residue); re-adding them duplicated flags (91%). **The fix is
+  `COMPILE_OPTIONS`, which appends.** Verified in the generated build.make
+  that the command carries `/O2 /Gd` AND the pin.
+- The `/REBREW_TOOLCHAIN:` flag added upstream in round 224 (`821d5bb`) was
+  unused until now; `rebrew-cmake-cl` consumes and strips it.
+- **Result from a full `cmake --build`**: residue **8,641**, file still
+  286,720 bytes, **zero differing bytes outside `.text`**, composition
+  intact at 246. Baseline lowered to 8641, gate passes at 264 byte-matched.
+- **Generalisable (§142)**: a per-file compiler pin is legitimate when every
+  function in the translation unit is verified under the new toolchain, and
+  CMake's COMPILE_OPTIONS/COMPILE_FLAGS distinction is the difference
+  between an 11-byte win and a 39% regression.
+
 **Round-500 (2026-09-14): measured what 8,652 actually IS — 15 instructions
 of difference. Residue 8,652.**
 

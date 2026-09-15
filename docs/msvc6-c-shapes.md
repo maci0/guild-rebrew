@@ -6128,3 +6128,49 @@ allocation decisions of a specific compiler build — which is why section 115's
 (a different toolchain producing one function at the reference's exact object size) remains the
 most interesting unexploited lead in the tree, even though the per-file pin could not be made to
 reach the link.
+
+## 142. The sp5-pp pin lands: residue 8,652 -> 8,641
+
+Section 141 named section 115's sp5-pp result the most interesting unexploited lead: a different
+service-pack build compiles `gm_FindNextFilteredEntity` (0x10016f80) at the reference's *exact*
+object size where sp6 runs four bytes short. Round 224 measured the gain but could not get it
+into the build; round 250 did.
+
+**Re-confirmed per function** (`rebrew test --toolchain msvc-6.0-sp5-pp`):
+
+| | sp6 | sp5-pp |
+|---|---|---|
+| `gm_FindNextFilteredEntity` | SIZE_MISMATCH 162/346, obj **342** | STUB 171/346, obj **346** |
+
+and critically, the three file-mates in `spiel_dumpD.c` — 0x10016cd0, 0x10016de0, 0x10016ea0 —
+are **RELOC-perfect under both** (272/272, 186/186, 211/211), so the whole translation unit is
+safe to switch. That is the check that makes a per-file pin legitimate rather than a gamble:
+a toolchain is chosen per *file*, so every function in the file must survive it.
+
+sp5-pp is emphatically **not** better in general — measured the same round: `srv_LoadBuf`
+701 → 130, `ServerMainThread` 2075 → 1225, `cm_ExSellObjekt` 1149 → 834. It is an oracle for one
+file, nothing more.
+
+**Why round 224 failed and this did not.** That round pinned the toolchain with
+`set_source_files_properties(... COMPILE_FLAGS ...)`, which **replaces** the per-file flags — so
+`/O2 /Gd` vanished, the file compiled unoptimised, and residue went to 39%. Re-adding them by
+hand duplicated the flags and made it worse (91%). The fix is `COMPILE_OPTIONS`, which *appends*:
+
+```cmake
+set_source_files_properties(
+  "${PROJECT_SOURCE_DIR}/src/server.dll/DieGildeAddOn/game/spiel_dumpD.c"
+  PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
+```
+
+The flag itself is consumed and stripped by `rebrew-cmake-cl` (upstream `821d5bb`, added in
+round 224 and unused until now). Verified in the generated `build.make` that the emitted command
+carries `/O2 /Gd` **and** the pin.
+
+**Result, from a full `cmake --build`:** `.text` residue **8,652 → 8,641**, file still 286,720
+bytes, **zero differing bytes outside `.text`**, composition intact at 246 symbols placed at their
+reference VA. Baseline lowered; gate passes at 264 byte-matched.
+
+The lesson generalises past this one file: **a per-file compiler pin is a legitimate tool when
+every function in the translation unit is verified under the new toolchain**, and CMake's
+`COMPILE_OPTIONS`/`COMPILE_FLAGS` distinction is the difference between an 11-byte win and a
+39% regression.
