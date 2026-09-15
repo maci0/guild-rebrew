@@ -49,6 +49,45 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-509 (data pass, round 3): the first `.data` win. Raw-link `.data`
+27,953 -> 27,722 (-231). `.text` 8,633 -> 8,635 (+2, deliberate).**
+
+- **Read the linker's `/MAP`** — `split_link.sh` has always emitted
+  `split_poc.map` and nothing consumed it. It gives per-symbol placement and
+  the supplying object, which is what §148's byte histogram could only infer.
+  **Zero of 135 annotated `.data`/`.bss` symbols land at their reference VA.**
+- **The diagnostic that matters (new §150): a delta that changes WITHIN one
+  object is that object emitting the wrong byte count.** `g_log_level_table`
+  entered at **-4** and the next three symbols left at **+0x20**, all from
+  `Error.c.obj`. Cause: `int g_log_level_table[12]` where the initialiser is
+  the reference's twelve **BYTES** and the reference extent is **12 bytes**
+  (`g_log_format_table` starts 12 bytes later; the code only indexes [0..2]).
+  `int[3] = {1,2,8}` is correct, and the arithmetic closes exactly:
+  48-12 = 36 surplus, less the 4-byte early start = **+0x20** observed.
+- **Why this 36-byte fix PAYS where §149's 37-byte fix COST 236**: position.
+  §149's cluster is deep in the section with thousands of misplaced bytes
+  after it; this one is at `.data+0x78` and the symbols after it were
+  displaced by exactly this surplus. **The map tells you which case you are
+  in; the byte histogram does not.**
+- **`RESIDUE_BASELINE` raised 8633 -> 8635, the first raise ever, deliberately.**
+  The fix needs the declaration in `rebrew_globals.h` (every TU includes it;
+  the build refuses otherwise with C2369), and the two sp5-pp pinned files each
+  gain 1 byte inside functions that were ALREADY unmatched, at an unchanged
+  first-diff offset. Net **-229** toward a postlink-free build, which is the
+  objective; the shipped deliverable is unaffected because postlink overwrites
+  `.data` wholesale. Rationale recorded in `gate.sh` itself.
+- **The gate could not see `.data` AT ALL** — it guarded `.text`, the verify
+  baselines, lint and compile errors, and nothing else. Three rounds of data
+  work were invisible to the check that decides what may land. It now guards
+  the **raw link's** `.data` (`DATA_BASELINE`, 27,722).
+- **Remaining -4 traced, not closed**: the reference has `ff ff ff ff` at
+  `0x10027030`, unreferenced by any instruction; it is LIBCMT `__fileinfo`
+  (a member that is one 4-byte `.data` section). `/INCLUDE:__fileinfo` pulls
+  it but LINK places it by object order at `0x10034f1c`, not by address —
+  measured and reverted. Closing it needs the split-set machinery to place the
+  member explicitly, as it already does for mapped `.text` sections.
+- Gate green on all five checks.
+
 **Round-508 (data pass, round 2): the first per-symbol view of `.data`.
 Residue 8,633 (held; one correct fix measured and reverted).**
 

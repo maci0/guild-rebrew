@@ -32,8 +32,13 @@ void __cdecl write_log(char*, int, char*);
 // DATA: SERVER 0x11766204
 
 // DATA: SERVER 0x10027078
-int g_log_level_table[12] = {
-    0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00,
+/* THREE ints, not twelve.  The reference gives this table 12 bytes
+ * (0x10027078..0x10027084, where g_log_format_table begins) and DispatchLogOutput
+ * only ever indexes [0..2].  The initialiser was written as the twelve BYTES
+ * 01 00 00 00 02 00 00 00 08 00 00 00 but spelled `int[12]`, which emits 48
+ * bytes -- a 36-byte surplus that pushed every later symbol in the section. */
+int g_log_level_table[3] = {
+    0x01, 0x02, 0x08,
 };
 
 // DATA: SERVER 0x10027084

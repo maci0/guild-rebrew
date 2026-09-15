@@ -7,7 +7,7 @@
 #define REBREW_GLOBALS_H
 
 /* .data */
-extern int g_log_level_table[12]; /* 0x10027078 */
+extern int g_log_level_table[3]; /* 0x10027078 */
 extern char g_log_format_table[96]; /* 0x10027084, three 0x20-byte names */
 extern char g_log_newline[2]; /* 0x100270E4 */
 extern char g_log_default_name[13]; /* 0x100270E8 */

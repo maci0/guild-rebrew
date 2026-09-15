@@ -6658,3 +6658,109 @@ spelling it in C is what could not be afforded yet.
   int g;` was being reported all along, against the documented intent.
 - **Pointer spelling counted as a type conflict.** `char *` vs `char*` produced three of the
   sixteen rows. Compared on a whitespace-normalised key now.
+
+## 150. The first `.data` win: a declared size that was four times too large (round 3 of the data pass)
+
+Sections 148 and 149 built the instrumentation and found nothing affordable. This round used it
+to find and land a real bug, and the method that worked was the **linker's own map**, which
+nothing in this project had been reading.
+
+### Read `/MAP`, not the bytes
+
+`split_link.sh` already passes `/MAP:split_poc.map` and nothing consumed it. It answers
+directly what the byte-level chunk matching in §148 could only infer: for every symbol, which
+object supplied it and what address it got. Cross-referencing its section-3 lines against the
+annotated VAs in `rebrew-data.toml`:
+
+```
+135 annotated .data/.bss symbols located in the map
+  at the reference VA exactly: 0
+```
+
+and, sorted by reference VA, the top of `.data` reads:
+
+```
+symbol                       ref va      built     delta  object
+g_log_level_table        0x10027078 0x10027074        -4  Error.c.obj
+g_log_format_table       0x10027084 0x100270a4       +20  Error.c.obj
+g_log_newline            0x100270e4 0x10027104       +20  Error.c.obj
+g_log_default_name       0x100270e8 0x10027108       +20  Error.c.obj
+```
+
+**One symbol enters at −4 and the next three leave at +0x20.** A delta that changes *inside* one
+object is not link order — it is that object emitting the wrong number of bytes, and the map
+localises it to a single symbol pair.
+
+### The bug
+
+```c
+int g_log_level_table[12] = {
+    0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00,
+};
+```
+
+The initialiser is the reference's twelve **bytes**, but the declaration says twelve **ints** —
+48 bytes. The reference gives the table 12 bytes exactly: `g_log_format_table` begins at
+`0x10027084`, twelve bytes later, and `DispatchLogOutput` only ever indexes `[0..2]`. So this is
+`int[3] = {1, 2, 8}`, and the arithmetic closes exactly:
+
+```
+surplus emitted   48 - 12 = 36
+object starts     4 bytes early  (-4)
+net downstream    36 - 4  = 32 = +0x20   <- the observed shift
+```
+
+Result: `g_log_level_table` … `g_log_default_name` all collapse to a **uniform −4**, and the raw
+link's `.data` divergence goes **27,953 → 27,722 (−231)** — the first `.data` gain in three
+rounds of this pass.
+
+### Why a 36-byte fix pays 231 bytes, when §149's 37-byte fix cost 236
+
+Both were correct size reductions of almost identical magnitude. The difference is **what sits
+downstream**. §149's cluster (`loadsave3.c`, `0x10030b84`) is deep inside the section with
+thousands of already-misplaced bytes after it, so shrinking it re-misplaced more than it fixed.
+This one is at `.data + 0x78`, near the head, and the symbols after it were displaced by
+*exactly* this surplus — so removing it put four symbols right and shifted the rest toward, not
+away from, their reference addresses.
+
+**The rule §149 stated still holds and is now sharper**: a size change in a misplaced section is
+a gamble whose sign depends on whether the surplus you remove *is* the cause of the downstream
+displacement. The map tells you which case you are in; the byte histogram does not. When a
+delta changes **within one object**, that object is the cause and the fix pays. When every
+symbol in an object shares one delta, the cause is upstream of it and a local fix will not.
+
+### What it costs, and the baseline that had to move
+
+The fix requires changing the declaration in `rebrew_globals.h`, which **every TU includes**
+(the build refuses otherwise: `error C2369: redefinition; different subscripts`). Two sp5-pp
+pinned files each gain one byte, inside functions that were already unmatched and at an
+unchanged first-diff offset: `ahm_ExAllocAlchemist` 197→198, `gm_FindNextFilteredEntity`
+214→215. `.text` residue **8,633 → 8,635**.
+
+So `RESIDUE_BASELINE` was raised by 2 — the first raise in this project's history, deliberately,
+with the trade recorded in `gate.sh` itself. The justification is that the objective is a build
+that is byte-identical **without** postlink, and postlink overwrites `.data` wholesale: the
+shipped deliverable is identical either way, while the raw link is 229 bytes closer.
+
+### The gate could not see `.data` at all — fixed
+
+That trade exposed a structural blind spot. `gate.sh` guarded `.text` residue, the two verify
+baselines, lint and compile errors — and **nothing outside `.text`**. Since postlink blits
+`.data` from the layout package, the shipped file always reports `.data differing 0x0`, so three
+rounds of data work were invisible to the one check that decides whether a change may land. It
+now guards the **raw link's** `.data` (`DATA_BASELINE`, 27,722) alongside the `.text` residue.
+
+### The remaining −4, traced but not closed
+
+The whole cluster now sits 4 bytes early because the reference has `ff ff ff ff` at
+`0x10027030` that we do not emit. It is unreferenced by any instruction (`rebrew xrefs` finds
+nothing, and the dword does not appear as an immediate anywhere in the reference `.text`), and
+it is LIBCMT's `__fileinfo` — a member whose entire content is one 4-byte `.data` section.
+
+`/INCLUDE:__fileinfo` does pull it in, and it lands at `0x10034f1c`, not `0x10027030`: LINK
+places a pulled member by object order, not by address, so the directive alone cannot put it
+where the reference has it. Closing this needs the split-set machinery
+(`split_coff.py`/`make_split_rsp.py`) to place that member's section explicitly, which is the
+same mechanism already used for mapped `.text` sections. Left for a later round rather than
+bolted on; the `/INCLUDE:` probe was measured and reverted (`.data` 27,722 → 27,726, headers
+worse).

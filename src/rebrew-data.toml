@@ -403,13 +403,13 @@ status = "UNCHECKED"
 ["SERVER.0x10027078"]
 name = "g_log_level_table"
 section = ".data"
-type = "int[12]"
+type = "int[3]"
 status = "DRIFT"
 
 ["SERVER.0x10027084"]
 name = "g_log_format_table"
 section = ".data"
-type = "char[13]"
+type = "char[96]"
 status = "DRIFT"
 
 ["SERVER.0x100270e4"]
