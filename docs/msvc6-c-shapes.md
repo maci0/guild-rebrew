@@ -4851,3 +4851,47 @@ something the source requests directly — consistent with section 109's finding
 `gm_AllocSpieler` and section 112's on the cleanup arms. It is worth one `WriteFile` plus about
 twenty bytes of duplicated argument setup, and it sits exactly where this function's alignment
 deltas step from +21 to +43.
+
+## 115. The sp5-pp toolchain axis, finally measured — a real gain that cannot ship
+
+Section 91 recorded that `msvc-6.0-sp5-pp` reproduces `gm_FindNextFilteredEntity`'s tail verbatim
+and reaches obj 346, the reference's exact size, where sp6 emits 342. Nobody had measured it.
+Round 224 did, and the answer has two halves that must be kept together.
+
+**The gain is real.** On `gm_FindNextFilteredEntity` (0x10016f80):
+
+| toolchain | status | match | obj |
+|---|---|---|---|
+| msvc-6.0-sp6 (default) | SIZE_MISMATCH | 162/346 | 342 (**4 short**) |
+| **msvc-6.0-sp5-pp** | STUB | **171/346** | **346 — exact** |
+
+And the file is safe: all three of its file-mates (0x10016cd0, 0x10016de0, 0x10016ea0) stay
+**RELOC-perfect** under sp5-pp — 272/272, 186/186, 211/211 — so switching this one file would
+cost nothing elsewhere in it. That matters because section 12 established CFLAGS are per-file in
+practice, and a toolchain is per-file too.
+
+**But it is not a global win, and it cannot ship.** Two independent blockers:
+
+- **sp5-pp is much worse on other rows**, so it cannot be adopted project-wide:
+  `gm_CalculateProductionValue` 391/396 → **236/396**, `m_AllocTracked` 566/658 → **266/658**
+  (and obj 658 → 634), `vfs_ReadCompressed` 468/492 → 461/492. The nine MSVC6 images are three
+  distinct generators (section 92); sp5-pp is its own, and it disagrees with sp6 broadly.
+- **A per-function toolchain pin never reaches the link.** `rebrew cmake-flags` says so
+  explicitly: *"resolves toolchain 'msvc-6.0-sp6', but the CMake build's compiler is fixed by the
+  toolchain file — the pin affects `rebrew test`/`verify` only, never the linked bytes."* The
+  build selects one compiler through `cmake/toolchain-msvc-6.0-sp6-docker.cmake`, for every
+  translation unit.
+
+So this is the measure-vs-ship divergence of section 99 in a new place: a metadata pin can move
+`rebrew test` by +9 matched bytes and a perfect object size while the shipped binary does not
+change by one byte. **Recording the figure without that caveat would be recording a phantom
+win.**
+
+What it would take to bank it: per-file compiler selection in the CMake build — a second
+toolchain file plus a `set_source_files_properties`-style override, or splitting the file into
+its own target. That is a build-system change, not a source change, and it is worth exactly the
+4 bytes of size plus 9 matched bytes on one function, so it is recorded rather than pursued.
+
+The general rule, which generalises past this project: **a compiler pin that the build system
+cannot honour is a measurement setting, not a fix.** Check what the link actually uses before
+counting any toolchain result as progress.

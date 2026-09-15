@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-475 (2026-09-14): measured the sp5-pp toolchain axis §91 flagged —
+a REAL gain that CANNOT SHIP. Residue 8,664.**
+
+- §91 claimed sp5-pp reproduces gm_FindNextFilteredEntity's tail verbatim
+  and reaches the reference's exact obj 346. Never measured until now.
+  **Confirmed**: sp6 gives SIZE_MISMATCH 162/346 obj **342** (4 short);
+  sp5-pp gives **171/346 obj 346 — exact**.
+- **The file is safe**: all three file-mates stay RELOC-perfect under sp5-pp
+  (272/272, 186/186, 211/211), so switching this one file costs nothing
+  inside it. (Toolchain is per-file, like CFLAGS — §12.)
+- **But it cannot be adopted project-wide**: sp5-pp is much worse elsewhere
+  — CalculateProductionValue 391→**236**, m_AllocTracked 566→**266** (obj
+  658→634), ReadCompressed 468→461. The nine MSVC6 images are three
+  generators (§92) and sp5-pp is its own.
+- **And a per-function pin never reaches the link.** `rebrew cmake-flags`
+  says so explicitly: the CMake build's compiler is fixed by the toolchain
+  file, so a pin "affects `rebrew test`/`verify` only, never the linked
+  bytes". So this is §99's measure-vs-ship divergence in a new place —
+  +9 matched and a perfect object size, with **zero** change to the shipped
+  binary.
+- Banking it would need per-file compiler selection in CMake (a second
+  toolchain file plus a source-property override, or splitting the file into
+  its own target) — a build-system change worth 4 bytes of size and 9
+  matched bytes on one function. **Recorded in §115 rather than pursued.**
+- General rule recorded: **a compiler pin the build system cannot honour is
+  a measurement setting, not a fix** — check what the link actually uses
+  before counting a toolchain result as progress.
+
 **Round-474 (2026-09-14): located the tree's last call defect exactly — two
 switch tails. Residue 8,664.**
 
