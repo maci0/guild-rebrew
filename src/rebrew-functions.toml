@@ -197,7 +197,7 @@ status = "RELOC"
 
 ["SERVER.0x10008e40"]
 size = 472
-cflags = "/O2 /Gd /Oy- /DREBREW_ALLOW_NAKED"
+cflags = "/O2 /Gd /Oy-"
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-13T00:45:43+00:00"
@@ -1141,7 +1141,7 @@ status = "RELOC"
 
 ["SERVER.0x100174d0"]
 size = 1088
-cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
+cflags = "/O2 /Gd"
 status = "PROVEN"
 ghidra = "gm_AllocGebaeude"
 blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"

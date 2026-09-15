@@ -3674,3 +3674,57 @@ three 112-byte collisions. `probe_function.py` disambiguates through `build/spli
 and falls back to a prologue tie-break, which was verified to still pick correctly with the
 map removed — but any *other* script selecting a COMDAT by size alone on that file will pick
 the wrong one.
+
+## 97. Spec audit: every live `__asm` block is inside the "original used asm" carve-out
+
+The governing objective allows **no naked asm unless the original code was using it to**.
+Round 198 audited that directly for the first time. Result: **six live `__asm` blocks, all six
+compliant, zero naked functions.**
+
+| file | function | VA | status | reference contains it |
+|---|---|---|---|---|
+| `server4.c:448` | `srv_InitBuildingTypeTable` | 0x1000b040 | RELOC | yes, at 0x1000b057 |
+| `gm_AllocGebaeude.c:241` | `gm_AllocGebaeude` | 0x100174d0 | PROVEN | yes, at 0x10017611 |
+| `m_AllocTracked.c:451` | `m_AllocTracked` | 0x10006580 | PROVEN | yes, at 0x10006730 |
+| `m_alloc.c:220` | `m_init` | 0x100068e0 | RELOC | yes, at 0x10006929 |
+| `m_alloc2.c:232` | `m_PoolAlloc` | 0x10006d20 | RELOC | yes, at 0x10006e0d |
+| `vfs_ReadData.c:414` | `vfs_ReadData` | 0x10008e40 | RELOC | yes, at 0x10008f0c |
+
+All six are the same alignment-prefixed block-fill skeleton, byte-identical in the reference
+at every site:
+
+```
+8d0c7f lea ecx,[edi+edi*2]   83e103 and ecx,3   2bd9 sub ebx,ecx   7e0c jle
+f3aa rep stosb   8bcb mov ecx,ebx   83e303 and ebx,3   c1e902 shr ecx,2
+f3ab rep stosd   03cb add ecx,ebx   f3aa rep stosb
+```
+
+`vfs_ReadData` is the **copy** variant of the same skeleton — `f3a4 rep movsb` / `f3a5 rep
+movsd`, and correctly *no* `xor eax,eax` since there is no fill value (verified at
+0x10008f0c). Its C block spells movsb/movsd accordingly.
+
+**Why these are asm in the original, not our shortcut.** Three independent signals:
+the three-`rep` alignment pass (a plain `memset`/`memcpy` expansion emits two); the operand
+homing, which matches the C block's named operands at all six sites; and the use of
+callee-saved `ebx` as scratch, which no msvc6 `memset` expansion does. The template is also
+absent from LIBCMT and LIBC, so it is not an out-of-line CRT routine the linker inlined.
+
+**Independently re-measured rather than assumed.** On the cheapest block (`m_init`) all three
+C alternatives collapse to the plain two-`rep` form and fall 15-19 code bytes short:
+
+| shape | result | code length |
+|---|---|---|
+| `__asm` (shipped) | RELOC 162/162 | 162 |
+| `memset` | SIZE_MISMATCH 97/162 | 143 |
+| `char*` loop | SIZE_MISMATCH 98/162 | 147 |
+| dword `for` loop | SIZE_MISMATCH 98/162 | 146 |
+
+**The stronger prohibition is not violated either:** no `__declspec(naked)` and no
+`#pragma naked` anywhere in the tree. All six are `__asm` statements inside ordinary C
+functions, with `push ebp; mov ebp,esp` present on both sides. Every `naked` grep hit is
+historical prose; the naked-`_emit` era was converted at `93ecf29`.
+
+Cleanup done in the same round: `/DREBREW_ALLOW_NAKED` sat in the cflags of 0x100174d0 and
+0x10008e40 while appearing **zero** times in either source. Measured byte-identical with and
+without it (753/1078 and 472/472 unchanged), so it was dropped via `rebrew test --cflags` —
+it was reading like a live naked-asm escape hatch that does not exist.

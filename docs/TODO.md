@@ -49,6 +49,41 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-449 (2026-09-14): first direct audit of the "no naked asm" spec
+constraint — 6/6 compliant, 0 violations. Residue 8,666.**
+
+- **The objective's "no naked asm unless the original code was using it to"
+  had never been audited.** Done now, per block rather than in aggregate:
+  six live `__asm` blocks (server4.c, gm_AllocGebaeude.c, m_AllocTracked.c,
+  m_alloc.c, m_alloc2.c, vfs_ReadData.c) and **all six reproduce a sequence
+  the reference binary itself contains** — verified at 0x1000b057,
+  0x10017611, 0x10006730, 0x10006929, 0x10006e0d and 0x10008f0c. New §97.
+- **The stronger prohibition is clean too**: no `__declspec(naked)`, no
+  `#pragma naked` anywhere. I checked independently — every `naked` grep hit
+  is historical prose, and all six blocks sit inside ordinary C functions
+  with `push ebp; mov ebp,esp` on both sides. The three other files that
+  mention `__asm` do so only in comments.
+- **Three signals show these were asm in the ORIGINAL, not our shortcut**:
+  the three-`rep` alignment pass (a memset/memcpy expansion emits two), the
+  operand homing matching the C block's named operands at all six sites, and
+  the use of callee-saved `ebx` as scratch, which no msvc6 memset expansion
+  does. The template is also absent from LIBCMT and LIBC, so it is not an
+  out-of-line CRT routine the linker inlined.
+- The premise was re-measured rather than assumed: on m_init all three C
+  alternatives collapse to the plain two-`rep` form and land 143/147/146
+  code bytes against the `__asm` baseline's 162 — RELOC 162/162 becomes
+  SIZE_MISMATCH ~98/162.
+- **Cleanup: dropped an inert `/DREBREW_ALLOW_NAKED`** from the cflags of
+  0x100174d0 and 0x10008e40, where it appeared ZERO times in either source.
+  Measured byte-identical with and without (753/1078 and 472/472 unchanged)
+  before removing, and removed via `rebrew test --cflags` rather than by
+  hand. It was reading like a live naked-asm escape hatch that does not
+  exist.
+- Also corrected my own reading: 0x10017609 is the *operand reloads*
+  (`mov edi,s.dest; mov ebx,geb_type`), not the prelude — that starts at
+  0x10017611. And vfs_ReadData is the COPY variant of the skeleton
+  (`rep movsb`/`rep movsd`, no `xor eax,eax`), which I verified at the bytes.
+
 **Round-448 (2026-09-14): audited measure-vs-link across all 19 rows. My
 round-196 claim was WRONG; the real finding is four rulers. Residue 8,666.**
 
