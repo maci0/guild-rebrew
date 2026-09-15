@@ -5476,3 +5476,54 @@ is load-bearing wherever the reference writes through.**
 The rematerialised constant itself is not reachable from source here: msvc6 chooses whether to
 reuse the compared register or re-emit the immediate, and both C spellings that express the
 intent compile to the same bytes.
+
+## 127. Guarding the silent no-op, and locating `ServerMainThread`'s -2
+
+Round 234 nearly closed a live lead on a false negative: a probe's edit silently failed to apply
+(its target line occurred twice in the file, so the guarded replace refused), the run printed
+**`+0`**, and a byte-neutral result reads exactly like "harmless, move on". Nothing in the output
+distinguished *"this change is byte-neutral"* from *"there was no change"*.
+
+`scripts/linktest.sh` now checks each named file against HEAD before measuring:
+
+```
+NOTE: identical to HEAD, so any delta below is the BASELINE, not a result:
+        src/server.dll/DieGildeAddOnServer/server_c/ServerMainThread.c
+      (did the edit apply?  check with: git diff --stat -- <file>)
+```
+
+Verified both directions: the note appears for an unmodified file and is **absent** when a real
+edit is in place — including when that edit measures `+0`, which is the case that matters.
+
+**It paid immediately.** Chasing the `-2` that section 126's subtraction proved must exist,
+narrowing by overlap gives:
+
+```
+[0x406,0x55c) = +1   outer          [0x443,0x498) = +3   (section 126's surplus)
+[0x438,0x510) = +2                  => the -2 lies in [0x498, 0x510)
+```
+
+Disassembling those 120 bytes shows it:
+
+```
+reference  0x10009838  mov ecx,[0x101deae8]     lea esi,[eax+ecx]      (6 + 3)
+ours       +0x049b     mov esi,[0x101deae8]     add esi,eax            (6 + 2)
+```
+
+The reference loads into `ecx` and forms the sum into a **third** register with `lea`; we load
+into `esi` and accumulate in place. This is the `lea`-versus-`add` fold of section 122 running in
+the *opposite* direction — there the reference used two-step `add` where we folded into `lea`,
+here it uses `lea` where we use `add`. **Neither form is "the msvc6 way"; both appear in the same
+binary, chosen by which registers are live.**
+
+Splitting the C into `payload_base = (char*) *(void**) 0x101deae8;` then
+`payload_src = (unsigned int*) (payload_base + sent_bytes);` measured **+0** — and the absent
+no-op note confirms the edit really applied, so this is a genuine canonicalisation, not a failed
+probe. Same result as section 122's local, and the same reason: msvc6 folds the two statements
+back together.
+
+Recorded for the next reader: the reference **does** materialise `0xffffffff` in eight bytes at
+0x10009858 on this sibling path, which is the very instruction section 126 identified as *our*
+surplus 90 bytes earlier. The same constant is worth eight bytes in one place and four in
+another, purely by whether a compared register survives — more evidence that the choice is
+allocator state, not source shape.

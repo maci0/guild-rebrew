@@ -26,6 +26,23 @@ NEW_BASE=0
 if [ "${1:-}" = "--new-base" ]; then NEW_BASE=1; shift; fi
 [ $# -gt 0 ] || { sed -n '2,20p' "$0"; exit 2; }
 
+# No-op guard.  A file named here that is IDENTICAL to HEAD cannot produce a
+# delta, so the run reports the baseline -- and a baseline reads exactly like a
+# "byte-neutral, therefore harmless" result.  Round 234 nearly closed a live
+# lead that way: a probe's edit silently failed to apply (its target line
+# occurred twice in the file, so the guarded replace refused), and the run
+# printed "+0" which was read as a measurement.  An unmodified file is almost
+# always a mistake here, so say so loudly rather than measuring nothing.
+unmodified=""
+for f in "$@"; do
+    if git diff --quiet -- "$f" 2>/dev/null; then unmodified="$unmodified $f"; fi
+done
+if [ -n "$unmodified" ]; then
+    echo "NOTE: identical to HEAD, so any delta below is the BASELINE, not a result:" >&2
+    for f in $unmodified; do echo "        $f" >&2; done
+    echo "      (did the edit apply?  check with: git diff --stat -- <file>)" >&2
+fi
+
 for f in "$@"; do
     rel=${f#./}
     # build.make writes its targets relative to the build directory

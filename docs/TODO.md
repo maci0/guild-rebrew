@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-486 (2026-09-14): guarded the silent no-op; located
+ServerMainThread's -2. Residue 8,652.**
+
+- **The guard**: round 234 nearly closed a live lead because a probe's edit
+  silently failed to apply and the run printed `+0` — indistinguishable from
+  "byte-neutral, harmless". `linktest.sh` now compares each named file
+  against HEAD first and prints a NOTE that any delta is the BASELINE.
+  **Verified both ways**: note appears for an unmodified file, absent when a
+  real edit is present — including when that edit measures +0, which is the
+  case that matters.
+- **It paid the same round.** Narrowing §126's proven `-2` by window
+  overlap: outer [0x406,0x55c)=+1, inner [0x443,0x498)=+3,
+  [0x438,0x510)=+2 => **the -2 lies in [0x498,0x510)**, 120 bytes.
+- **Found it**: reference `mov ecx,[0x101deae8]; lea esi,[eax+ecx]` (6+3)
+  against our `mov esi,[0x101deae8]; add esi,eax` (6+2). The reference forms
+  the sum into a THIRD register via `lea`; we accumulate in place.
+- **This is §122's lea-vs-add fold running the OTHER WAY** — there the
+  reference used two-step `add` where we folded into `lea`. **Neither form
+  is "the msvc6 way"; both appear in the same binary**, chosen by which
+  registers are live.
+- Splitting the C into base + offset via a local measured **+0**, and the
+  ABSENT no-op note confirms the edit applied — a real canonicalisation, not
+  a failed probe. (§122's local behaved identically.)
+- Worth noting: the reference DOES materialise `0xffffffff` in 8 bytes at
+  0x10009858 — the very instruction §126 called our surplus 90 bytes
+  earlier. The same constant costs 8 bytes in one place and 4 in another,
+  purely by whether a compared register survives. New §127.
+
 **Round-485 (2026-09-14): localised ServerMainThread's +3, and split
 `volatile` into two rules. Residue 8,652.**
 
