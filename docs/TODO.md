@@ -49,6 +49,43 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-443 (2026-09-14): registered the 9th image, then DISPROVED my own
+"9th generator" claim; PCQ upgraded to proven-unreachable. Residue 8,666.**
+
+- **rebrew fix: registered `msvc-6.0-win9x`.** The image shipped with no
+  ToolchainSpec, so it was invisible to `--toolchain` and §90/§91's sweeps
+  silently covered eight of nine images. Its tree is flat
+  (`/opt/msvc6.0-win9x/Bin`, not `VC98/Bin`) and it runs under wibo, both
+  already handled by the compile path. Verified end to end. Regression test
+  asserts every `rebrew/msvc:6.0*` image has a spec. Upstream `26cccb1`.
+- **Then the sweep disproved the premise I registered it on.** Over all 19
+  rows (171 runs, comparing full mismatch LISTS not counts) win9x is
+  **byte-identical to base/sp1/sp2/sp3 on all 19** and beats sp6 on none
+  — 18 ties, 1 loss. I verified the mechanism myself: **win9x ships
+  `CL.EXE` byte-identical to sp3** (md5 `6e3f639e` both, vs sp6
+  `5a4ec02b`), i.e. the same 12.00.8168 frontend; the differing C2.DLL md5
+  is a repackaged build of the same generator.
+- **The durable rule: a distinct backend md5 counts IMAGES, not
+  GENERATORS — count generators by emitted bytes.** Nine images are
+  **three** real generators (pre-sp4 incl. win9x; sp4/sp5/sp6; sp5-pp).
+  No further image hunting is worth a round. §91's four scheduler-bound
+  retirements rest entirely on sp5-pp and are unaffected; the sweep
+  independently reproduced every §91 figure exactly.
+- **cm_ProcessCommandQueue upgraded from exhaustion-wall to
+  PROVEN-UNREACHABLE.** All 15 bytes are one fault: the join block at
+  0x3f that msvc6 deletes because **the test is provably-true dead code**
+  — both predecessors enter with ebx nonzero (arm5 from the while guard;
+  arm6 is reached only because the test was nonzero, and its backward
+  `jne` fires before the `xor ebx,ebx` at 0x6a). C cannot request a test
+  whose operand the compiler proves nonzero. Byte-neutral (14 vs 14), so
+  size was never the obstacle, and sp5-pp mismatches the IDENTICAL 15
+  offsets — dataflow, not sp6 scheduling. Blocker and header updated.
+- **gm_ObjectsAvailble: residue is 28 bytes, not 25** (I had briefed the
+  stale figure twice). Zero unattributed: 14 single-byte ModRM renames at
+  unchanged length + the 0x163-0x170 reschedule, which is the rename's
+  consequence. Confirmed source-bound (sp5-pp scores 83 mismatches in
+  that window against our 28).
+
 **Round-442 (2026-09-14): the three smallest rows all CLOSED as walls; four
 false claims retired; a 9th compiler found. Residue 8,666.**
 

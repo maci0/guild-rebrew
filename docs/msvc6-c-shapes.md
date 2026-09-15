@@ -3390,14 +3390,30 @@ Round 191 closed the three smallest-residue functions in the tree. None yielded 
 but each produced a fact worth more than its residue, and two of them refuted claims this
 document or a file header had been carrying.
 
-### The image sweep is NINE generators, not eight
+### The image sweep is nine IMAGES but only three GENERATORS
 
-Sections 90 and 91 swept eight MSVC6 images. A ninth exists and was missed:
-`rebrew/msvc:6.0-win9x-win32`, `C2.DLL` md5 `3c21de2c`, matching none of the other eight,
-`CL 12.00.8168`. It is **not registered as a rebrew toolchain**, so
-`rebrew test --toolchain msvc-6.0-win9x` errors and it must be driven through docker
-directly. On `cm_ProcessCommandQueue` it is byte-identical to sp6. Anyone re-running the
-oracle over the residue table should include it.
+Sections 90 and 91 swept eight MSVC6 images; a ninth existed
+(`rebrew/msvc:6.0-win9x-win32`, `C2.DLL` md5 `3c21de2c`, matching none of the other
+eight) and was missed. It is now registered as `msvc-6.0-win9x` so the CLI can reach it.
+
+**But it is not a ninth generator, and the inference that it was is wrong.** Swept over
+all 19 residue rows (171 runs, comparing full mismatch *lists* rather than counts), it is
+**byte-identical to base/sp1/sp2/sp3 on all 19** and beats sp6 on none: 18 ties and one
+loss. The mechanism: win9x ships `CL.EXE` byte-identical to sp3 — md5 `6e3f639e` on both,
+against sp6's `5a4ec02b`, which I verified directly — i.e. the same 12.00.8168 frontend,
+with the differing `C2.DLL` md5 being a differently-packaged build of the same code
+generator.
+
+**The rule this establishes: a distinct backend md5 counts IMAGES, not GENERATORS. Count
+generators by emitted bytes.** Across these nine images there are exactly **three** real
+generators on this table — the pre-sp4 class (base, sp1, sp2, sp3, win9x), the sp4/sp5/sp6
+class (all 12.00.8804), and sp5-pp. No further image hunting is worth a round, and
+section 91's four scheduler-bound retirements rest entirely on sp5-pp, unaffected.
+
+The one divergent row is a *loss*, so it retires nothing: `gm_ObjectsAvailble` scores 683
+under the pre-sp4 class against sp6's 686, three single-byte `[esp+N]`/register faults at
++0xa0, +0x111 and +0x19c that sp4's frontend bump *fixes*. Useful as confirmation that our
+sp6 spelling is not the limiter on those bytes.
 
 ### `cm_ProcessCommandQueue`: tail-sharing, not arm order — and a greedy layout pass
 

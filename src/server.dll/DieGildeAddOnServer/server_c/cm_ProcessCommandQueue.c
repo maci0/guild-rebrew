@@ -520,10 +520,28 @@
  *     invariant across every MSVC6 generator available and every flag.
  *
  * The reference needs the join alive AND unfused AND arm6 in the
- * fallthrough slot; the fusion makes those mutually exclusive.  This is
- * a codegen decision with no C-level or toolchain-level surface, so the
- * lane is CLOSED -- retire it from the probe rotation rather than
- * re-deriving it.  STATUS: PROVEN retained; not a byte match. */
+ * fallthrough slot; the fusion makes those mutually exclusive.
+ *
+ * WHY, PROVEN round 192 -- this is now a mechanism, not an exhaustion
+ * argument, and it is the strongest statement available: **the target's
+ * join test is provably-true dead code.**  Both predecessors enter with
+ * ebx != 0.  arm5 falls through from `mov ebx,esi` where `pkt != 0` is
+ * the while guard; arm6 is reached from the head precisely BECAUSE
+ * `test ebx,ebx` was nonzero, and its backward `jne` at 0x4b fires
+ * before both the call and the `xor ebx,ebx` at 0x6a.  So `je unlink`
+ * can never be taken on either path.  msvc6 constant-folds exactly this
+ * and deletes the block: **C cannot request a test whose operand the
+ * compiler can prove nonzero.**  The reference's bytes carry a redundant
+ * test its own optimiser would remove -- this is not a spelling we are
+ * failing to find.
+ * Corroborated from a second generator: sp5-pp mismatches the IDENTICAL
+ * 15 offsets (0x37 and 0x3f-0x4c), so the join's absence is a dataflow
+ * consequence and not an sp6 scheduling artefact.  The byte accounting
+ * is neutral (14 vs 14), so size was never the obstacle either.
+ * Only new information could reopen this: evidence the original was
+ * built with optimisation disabled over this region, or inline asm.
+ * CLOSED -- retire from the probe rotation rather than re-deriving it.
+ * STATUS: PROVEN retained; not a byte match. */
 
 // FUNCTION: SERVER 0x1000aac0
 

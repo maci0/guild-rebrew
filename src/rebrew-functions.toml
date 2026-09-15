@@ -299,7 +299,7 @@ size = 639
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "PROVEN"
 analysis = "Master Command Router. Iterates over every slot's incoming_cmd_queue. Evaluates commands via g_command_handlers. Upon validation, pushes valid commands to the sender's outgoing queue (to acknowledge) and broadcasts them to all other connected players' outgoing queues. Recognizes 0x05/0x06 to batch list and pass to ahm_ProcessEntityChain."
-blocker = "layout-pass 2-byte backward join §17; arm-5/arm-6 zero-sum — parked"
+blocker = "PROVEN-UNREACHABLE (round 192), not a search-depth wall: all 15 bytes are one fault, the join block 'test ebx,ebx; je unlink; jmp advance' at 0x3f that the reference keeps and msvc6 deletes -- because the test is provably-true dead code. Both predecessors enter with ebx nonzero (arm5 falls through from the while guard; arm6 is reached only because the test was nonzero, and its backward jne fires before the xor ebx,ebx at 0x6a), so 'je' can never be taken and msvc6 constant-folds it away. C cannot request a test whose operand the compiler proves nonzero. Byte-neutral (14 vs 14), so size is not the obstacle. sp5-pp mismatches the identical 15 offsets, confirming dataflow rather than sp6 scheduling. Block order is already reference-exact; the older 'arm order' framing was wrong. Reopens only on evidence of an unoptimised region or inline asm"
 blocker_delta = 15
 
 ["SERVER.0x1000ad40"]
