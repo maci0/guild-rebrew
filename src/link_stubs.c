@@ -64,8 +64,10 @@ unsigned char g_byte_table_30861 = 0;
 int g_console_handle = 0;
 float g_const_42_0 = 0;
 float g_const_1_over_32767 = 0;
-int g_default_group_name = 0;
-int g_default_group_name_4 = 0;
+/* g_default_group_name / _4 are gone: they are the two dwords of "_main_:" at
+ * 0x10028938, now DEFINED in Units/m_alloc/m_alloc.c as the real 8-byte string.
+ * Zeroed stubs here put them at 0x100366dc and left the reference's eight bytes
+ * missing from .data entirely. */
 int g_dispatch_table[1] = {0};
 int g_dispatch_table_a[1] = {0};
 int g_dispatch_table_b[1] = {0};

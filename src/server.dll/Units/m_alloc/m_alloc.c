@@ -14,8 +14,16 @@ extern int g_alloc_root_size_max;    /* 0x117640b8 */
 extern int g_alloc_root_field_20;    /* 0x117640c0 */
 extern int g_alloc_root_name;        /* 0x117640a0 */
 extern int g_alloc_root_name_4;      /* 0x117640a4 */
-extern int g_default_group_name;     /* 0x10028938 */
-extern int g_default_group_name_4;   /* 0x1002893c */
+/* "_main_:" at 0x10028938 -- the default allocation-group name.  m_init reads
+ * it as two dwords (`mov eax,[0x10028938]` / `mov ecx,[0x1002893c]`), which is
+ * why it was declared as a pair of ints -- but nothing DEFINED it.
+ * link_stubs.c supplied two zeroed ints at 0x100366dc instead, so the eight
+ * bytes the reference has here were absent from .data and the group name
+ * arrived as zeros.  Defined here because this TU's own literals end exactly
+ * at 0x10028938, which is where the reference puts the string. */
+char g_default_group_name_str[8] = { '_', 'm', 'a', 'i', 'n', '_', ':', '\0' };
+#define g_default_group_name   (*(int*) &g_default_group_name_str[0])
+#define g_default_group_name_4 (*(int*) &g_default_group_name_str[4])
 extern void __cdecl LogMessageInternal(char* file, unsigned int line, char* msg, int level);
 extern void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* message);
 extern void __cdecl free(void* ptr);

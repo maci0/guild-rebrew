@@ -24,7 +24,7 @@ BASELINE=${BASELINE:-281}
 # and this gate green while the deliverable lost bytes.  Guard the byte-match
 # count separately (round 193).
 BYTE_BASELINE=${BYTE_BASELINE:-264}
-# .text residue baseline: 8636 (0x21bc) as of round 510.  Guarded below --
+# .text residue baseline: 8635 (0x21bb) as of round 511.  Guarded below --
 # lower it when a change improves the number, never raise it.
 #
 # Raised twice, both times to buy a much larger .data gain, both recorded here
@@ -44,14 +44,18 @@ BYTE_BASELINE=${BYTE_BASELINE:-264}
 # Both trades are net progress toward a build that needs no postlink, which is
 # the objective; the shipped deliverable is unaffected either way because
 # postlink overwrites .data wholesale.
-RESIDUE_BASELINE=${RESIDUE_BASELINE:-8636}
-# Raw-link .data divergence baseline (26,372 as of round 510).  The goal is a build that is
+#
+# Round 511 gave one of those bytes back (8636 -> 8635) by DEFINING "_main_:"
+# at 0x10028938, which nothing defined: link_stubs.c had two zeroed ints
+# standing in for it.  .data -306 in the same change.  See section 152.
+RESIDUE_BASELINE=${RESIDUE_BASELINE:-8635}
+# Raw-link .data divergence baseline (26,066 as of round 511).  The goal is a build that is
 # byte-identical WITHOUT postlink, but postlink blits .data wholesale from the
 # layout package, so the shipped file shows `.data differing 0x0` no matter what
 # the link produced -- and this gate, guarding .text alone, could not see .data
 # move at all.  Three rounds of data work were invisible to it.  Guard the raw
 # link's own .data so progress there is measured and regressions there caught.
-DATA_BASELINE=${DATA_BASELINE:-26372}
+DATA_BASELINE=${DATA_BASELINE:-26066}
 rc=0
 
 echo "== rebrew lint"
