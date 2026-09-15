@@ -49,6 +49,53 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-447 (2026-09-14): both remaining unprobed lanes closed with named
+mechanisms. Residue 8,666.**
+
+- **gm_CalculateProductionValue (5 bytes, closest in the tree) — CLOSED at
+  its floor.** The five bytes are an ADJACENT PAIR SWAP with zero length
+  delta: our object contains all five reference bytes in the wrong order.
+  The reference emits `d9c9 fxch st(1)` at 0x10019804 then
+  `803e17 cmp byte ptr [esi],0x17` at 0x10019806; we emit them reversed. I
+  verified that at the bytes. `rebrew diff`'s "2 structural diffs" is the
+  same swap counted twice by a positional ruler.
+  **Mechanism (new): ONE COUPLED ALLOCATOR DECISION.** msvc6's x87-stack
+  allocator picks the `fxch` slot from the TYPE of the scaled operand, and
+  that same choice decides whether the [esi] compare FOLDS (`cmp byte ptr
+  [esi],0x17`, 3B) or unfolds (`mov al` + `cmp al`, 4B). Four reachable
+  classes: float-scaled = folded but fxch late (391, shipped); double =
+  fxch placed but unfolded (255 at obj 397); volatile = compare sunk past
+  fmulp (387); commuted multiply = BYTE-IDENTICAL (msvc6 canonicalises
+  operand order, so that is not an axis). The target's combination —
+  folded compare AFTER the fxch — is in none of them.
+- Two §87 corrections there: the header rejected the 397-byte shape "on
+  size", but §88 shows it is SPAN-NEUTRAL (+4 slack) — right conclusion,
+  wrong reason; and sp5-pp had never been swept on that shape (it diverges
+  from offset 76 and does not produce `fxch; cmp`, confirming SOURCE-BOUND
+  at region level). The round-183 prototype question also cannot matter
+  there: the reference uses arg1 full-width and unmasked, and both
+  residual instructions reference neither parameter.
+- **gm_FindNextFilteredEntity body — CLOSED, and it refutes my own §91
+  instruction by arithmetic.** §91 retired that row's epilogue ordering and
+  said "probe the body (1-314) instead". Measured: **body ref 315 vs ours
+  315, EXACT; tail ref 31 vs ours 27, the whole -4**. So no body-local edit
+  can supply the 4 bytes, and the +10 span slack that would pay for one is
+  only reachable by moving the no_match stub — the retired decision. The
+  body and the epilogue are ONE finding seen from two ends.
+- **New §95: a jcc width difference is a readout of stub distance, never a
+  source lever.** All three filter-arm widths are exactly what their
+  displacements mandate, 7/7 on both sides, and the -4 reconciles from the
+  widths alone (two early jcc -8, extra arm +4). Never open a lane on a
+  width difference.
+- **§94 is now 4 for 4, and the fourth broke span** rather than merely
+  losing the link: a `volatile match` took the body 342 -> 393 (+51) and the
+  span 352 -> 400 (+48).
+- Two measurement traps recorded: `probe_function.py` compiles standalone,
+  so on a multi-function row it can report figures that do not reproduce
+  in-file (obj 352 / aligned 74 vs the real 342 / 87); and
+  `instr_diff.py` under-reports alignment because it does not mask
+  unresolved `[0]` reloc operands against resolved reference addresses.
+
 **Round-445 (2026-09-14): a DESTRUCTIVE rebrew bug caught and fixed; §94
 prices the volatile lane. Residue 8,666.**
 

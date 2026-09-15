@@ -331,7 +331,38 @@ int __cdecl gm_SubObjectNoKill(int a, int b, int c)
  * after the guards (zk1), if/else arm spellings (aa1/aa2), per-arm inline
  * `match = 0` instead of the shared label (aq1), a named extra3 local
  * (ab1), and `continue`/goto loop-back spellings (zo1/zp1).
- * File at 168/346, obj 342.  Probe harness: .scratch/l7-fnfe/. */
+ * File at 168/346, obj 342.  Probe harness: .scratch/l7-fnfe/.
+ *
+ * ROUND 196 -- THE BODY IS CLOSED, by arithmetic rather than exhaustion.
+ * Shapes 91 retired this function's tail epilogue ordering (sp5-pp reproduces
+ * it verbatim AND reaches obj 346 = the reference, where sp6 emits 342) and
+ * said to probe the body 1..314 instead, on the assumption the 4-byte
+ * shortfall might be a body defect.  Measured, it is not:
+ *     BODY 0..314 : ref 315  ours 315  delta  +0   <-- EXACT
+ *     TAIL 315..  : ref  31  ours  27  delta  -4   <-- the whole deficit
+ * So no body-local edit can supply the 4 bytes.  Per shapes 88 the slack that
+ * would pay for one is real (any body length 342..352 pads to the same span
+ * 352, i.e. +10 upward) but it is only reachable by moving the no_match stub,
+ * which IS the retired tail-ordering decision.
+ * The filter-arm `jne` widths at +168/+184/+225 are NOT a source lever: they
+ * are forced by rel8 range against the stub's position, and are correct 7/7 on
+ * both sides.  Reference stub at +326 gives disp 152/136 -> NEAR 6B and
+ * 121/99 -> short 2B; ours at +223 gives 49/37/22 -> all short 2B.  The -4
+ * reconciles exactly: two early jcc 12 vs 4 = -8, extra3 arm 2 vs 6 = +4.
+ * So the body and the epilogue are ONE finding seen from two ends, and the
+ * SCHEDULER-BOUND classification is confirmed from the body side.
+ * Residual split over 1..314 (229 bytes): 89 in real hunks (38.9%), 64
+ * aligned-but-displaced (27.9%), 76 reloc slots (33.2%).  Remaining body
+ * clusters are all closed: entry-guard epilogue inlining (shapes 17), the
+ * `xor cl,cl` placement (shapes 85 -- a constant has no definition site to
+ * move), the advance-loop bound tests (levers already spent), and the jcc
+ * widths above (a consequence, not a fault).
+ * Two measurement traps found here: `probe_function.py` is unusable on this
+ * function because it compiles standalone and reports obj 352 / aligned
+ * 74/118, which do not reproduce in-file; and `instr_diff.py` UNDER-reports
+ * alignment (68/118 against a true 87/118) because it does not mask
+ * unresolved `[0]` reloc operands against the reference's resolved
+ * addresses. */
 
 // FUNCTION: SERVER 0x10016f80
 // gm_FindNextFilteredEntity

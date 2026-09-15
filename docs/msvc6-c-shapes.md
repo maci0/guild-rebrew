@@ -3560,6 +3560,13 @@ value anywhere else in the function, and the resulting register pressure shifts 
 *outside* the region being fixed. The alignment gain is real and local; the loss is real
 and remote.
 
+**Round 196 makes it four for four, and the fourth is worse than a link loss.** A
+`volatile match` on `gm_FindNextFilteredEntity` — the only candidate on that function that
+qualified under the block-placement clause below — took the real body from 342 to **393
+(+51)** and the span from 352 to **400 (+48)**, breaking the alignment ceiling outright
+rather than merely costing bytes at the link. So the lane now has three link losses and one
+span break, with no wins outside section 86's join-exile case.
+
 **Practical rule: treat an aligned-only gain from `volatile` as unproven until linked, and
 expect it to lose.** A `volatile` edit is worth landing only when it changes *block
 placement* (§86, which paid -200 on `cm_ExSellObjekt` by un-exiling a join) rather than
@@ -3576,3 +3583,46 @@ Also from this lane, two corrections worth carrying:
   cited as evidence.
 
 `src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c`
+
+## 95. A jcc width difference is a readout of stub distance, never a source lever
+
+Branch-encoding width differences look like codegen faults and are not. `jcc` takes a
+2-byte `rel8` form when the target is within ±127 bytes and a 6-byte near form otherwise, so
+a width difference is *arithmetic* on the distance to the target — it reports where the
+target block landed and nothing about the source.
+
+`gm_FindNextFilteredEntity` (0x10016f80) shows it cleanly. The filter arms at +168, +184 and
++225 differ in width between the streams, and every width is exactly what its displacement
+mandates on both sides — 7 of 7 correct, no encoding defect either way:
+
+```
+reference, no_match stub at +326:  +168 (disp 152) -> near 6B   +184 (136) -> near 6B
+                                   +203 (121)      -> short 2B  +225 ( 99) -> short 2B
+ours,      no_match stub at +223:  +172 ( 49)      -> short 2B  +184 ( 37) -> short 2B
+                                   +199 ( 22)      -> short 2B
+```
+
+And the function's entire 4-byte length deficit reconciles from those widths alone: the two
+early `jcc` are 6+6 in the reference against our 2+2 (**-8**), and the extra arm is a 2-byte
+`jne` against our 6-byte `je`/`xor`/`jmp` (**+4**), netting **-4**. So the deficit is
+downstream of *stub placement*, which section 17 already owns.
+
+**Two consequences.** Never open a lane on a width difference: fix the block placement and
+the widths follow, or accept the placement and the widths are correct as they stand. And
+when a byte deficit reconciles exactly against branch widths, the fault is not where the
+bytes are missing — it is wherever the branch target moved.
+
+This also refutes by arithmetic an instruction section 91 gave: it retired that function's
+epilogue ordering and said to probe the body instead, on the assumption the shortfall might
+be a body defect. The body is **byte-count exact** (315 reference bytes against 315 of ours)
+and the whole -4 sits in the retired region, so the body and the epilogue were one finding
+seen from two ends.
+
+Also recorded from that measurement, because both cost real time: `probe_function.py`
+compiles a function **standalone**, so on a multi-function file it can report figures that do
+not reproduce in-file (obj 352 and aligned 74/118 against the in-file 342 and 87/118) — use
+the CMake object for such rows. And `instr_diff.py` **under-reports alignment** because it
+does not mask unresolved `[0]` reloc operands against the reference's resolved addresses,
+reading 68/118 where the true figure is 87/118.
+
+`src/server.dll/DieGildeAddOn/game/spiel_dumpD.c`

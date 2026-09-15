@@ -244,8 +244,42 @@ int __cdecl gm_QueryEntitySum(int entity, unsigned int obj_type)
 //     puts the [esi] access after the fxch, matching the target's order, but
 //     msvc6 then splits it into `mov al,[esi]` plus a later `cmp al,0x17`,
 //     which is one byte longer: obj 397, SIZE_MISMATCH at 255.
+//     CORRECTED round 196: rejecting the 397 shape "on size" was the wrong
+//     reason, though the conclusion holds.  Per shapes 88 the real body is 396
+//     and the COMDAT span is 400 (4 pad bytes), so the ceiling runs
+//     396/397/398/400 -> 400 and only 401 -> 416: there is **+4 bytes of
+//     upward slack** and 397 is SPAN-NEUTRAL.  It is affordable and still
+//     loses, because unfolding the compare shifts every byte after 230 and
+//     takes the structural diffs from 2 to 53.  Re-measured: 255 at obj 397,
+//     aligned 118/123 against the baseline's 122/123.
 //     A volatile `value` store lands the fxch correctly too but sinks the
 //     compare two slots, past `fmulp`/`fstp` (387/396, 3 structural diffs).
+//   ROUND 196 -- CLOSED, with the mechanism named.  The five residual bytes
+//   are an ADJACENT PAIR SWAP with zero length delta: our object contains all
+//   five reference bytes, in the wrong order.  The reference emits
+//   0x10019804 `d9c9 fxch st(1)` and THEN 0x10019806 `803e17 cmp byte ptr
+//   [esi],0x17`; we emit them reversed.  `rebrew diff`'s "2 structural diffs"
+//   is the same swap counted twice by a positional ruler.
+//   The mechanism is ONE COUPLED ALLOCATOR DECISION: msvc6's x87-stack
+//   allocator picks the `fxch` fixup position from the TYPE of the scaled
+//   operand, and that same type choice decides whether the [esi] byte compare
+//   folds into `cmp byte ptr [esi],0x17` (3 bytes) or unfolds into
+//   `mov al,[esi]` + `cmp al,0x17` (4 bytes).  The four reachable classes:
+//     float-scaled  -> folded compare, fxch one slot LATE   (391, shipped)
+//     double-scaled -> fxch placed, compare UNFOLDED        (255 at obj 397)
+//     volatile      -> fxch placed, compare sunk past fmulp (387)
+//     commuted mul  -> byte-identical to baseline (391) -- msvc6 canonicalises
+//                      operand order, so it is not a source-reachable axis
+//   The target's combination -- a FOLDED compare AFTER the fxch -- is in none
+//   of them.  No C89 handle exists, so this is allocator-level and the row is
+//   retired at its 5-byte floor.
+//   Also closed: sp5-pp was never swept on this shape.  At region level it
+//   diverges from offset 76 and does NOT produce `fxch; cmp`, confirming the
+//   shapes-91 SOURCE-BOUND classification by region rather than by score.
+//   And the round-183 prototype question cannot matter here: the reference
+//   uses arg1 FULL-WIDTH and unmasked (`mov eax,[ecx*4+0x101dd8e0]`), so
+//   `(int, int)` is correct, param2's byte-ness is an in-body `and eax,0xff`,
+//   and BOTH residual instructions reference neither parameter.
 //   Ruled out against the 391 base, each holding 391 or worse:
 //   - CFLAGS: /G3 /G4 /G5 /GB /Ox /Ot /Oa /Ow /Gy /Oi- /Ob1 /QIfdiv- emit
 //     BYTE-IDENTICAL objects (compared hex, not just the score), so no flag
