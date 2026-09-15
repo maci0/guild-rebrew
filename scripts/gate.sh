@@ -24,7 +24,9 @@ BASELINE=${BASELINE:-281}
 # and this gate green while the deliverable lost bytes.  Guard the byte-match
 # count separately (round 193).
 BYTE_BASELINE=${BYTE_BASELINE:-264}
-# .text residue baseline: 8664 (0x21d8) as of round 204.
+# .text residue baseline: 8664 (0x21d8) as of round 204.  Guarded below --
+# lower it when a change improves the number, never raise it.
+RESIDUE_BASELINE=${RESIDUE_BASELINE:-8664}
 rc=0
 
 echo "== rebrew lint"
@@ -73,6 +75,19 @@ if bash scripts/split_link.sh > .scratch/gate-link.log 2>&1; then
           2>.scratch/gate-residue.log | grep -E "^\.text differing")
     if [ -n "$res" ]; then
         echo "$res"
+        # Guard the residue too.  Round 215: a phantom 367-byte regression
+        # (0x2347 against the 0x21d8 baseline) passed the gate untouched,
+        # because only lint, compile errors and the two verify baselines were
+        # checked.  It came from `touch`ing a source to force a rebuild, which
+        # produced a partial relink; the source was byte-identical to HEAD.
+        now=$(printf '%d' "$(echo "$res" | sed -E 's/.*differing (0x[0-9a-f]+) .*/\1/')")
+        if [ "$now" -gt "$RESIDUE_BASELINE" ]; then
+            echo "REGRESSION: residue $now (0x$(printf '%x' "$now")), baseline is" \
+                 "$RESIDUE_BASELINE (0x$(printf '%x' "$RESIDUE_BASELINE"))"
+            rc=1
+        else
+            echo "residue $now, baseline $RESIDUE_BASELINE held"
+        fi
     else
         echo "residue not measured (see .scratch/gate-residue.log)"
         rc=1

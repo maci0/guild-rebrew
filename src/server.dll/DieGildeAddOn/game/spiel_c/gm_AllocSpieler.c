@@ -231,7 +231,6 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	char* slot;
 	char* mother;
 	char* father;
-	char* refs;
 	char work[0x3fc];
 	int idx;
 	int j;
@@ -312,8 +311,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	*(unsigned short*) (0x100358a0 + idx * 0x21c) = (unsigned short) idx;
 	*(int*) (slot + 0x170) = 0;
 	*(int*) (slot + 0x16c) = 0;
-	refs = (char*) (0x100358fc + idx * 0x21c);
-	memset(refs, 0xff, 0x20);
+	memset((void*) (0x100358fc + idx * 0x21c), 0xff, 0x20);
 	slot[2] = (char) type;
 	*(int*) (slot + 0x1f0) = 0;
 	g_citizen_count++;
@@ -806,7 +804,7 @@ stat_modifiers:
 		slot[0xd] = *(char*) (0x10030ba5 +
 		                      *(unsigned char*) (slot + 0x164) * 6);
 	}
-	memset(refs, 0xff, 0x20);
+	memset(slot + 0x5c, 0xff, 0x20);
 	if (father != (char*) 0) {
 		int* ref;
 

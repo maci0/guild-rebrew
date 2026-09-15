@@ -49,6 +49,45 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-466 (2026-09-14): REVERTED a 409-byte regression I committed in
+round 465, and added the gate guard that would have stopped it.
+Residue back to 8,664.**
+
+- **Round 465 committed a code change I never measured.** Restoring
+  `gm_AllocSpieler.c` from a `/tmp` snapshot pulled in a stale probe — a
+  `char* refs` local plus two rewritten `memset` calls — and I committed it
+  believing the round was comment-only. Measured: **595/3696 against the
+  correct 1004/3689**, obj +7. The extra local grows the frame so the very
+  FIRST instruction breaks: reference `81ec1c040000 sub esp,0x41c` against
+  our `81ec20040000 sub esp,0x420`. The first fault moved from +0xaa to
+  **+0x0** — it regressed the entire function.
+- **Reverted**; 1004/3689 and residue 0x21d8 both restored and re-verified.
+- **Two independent signals caught it**, which is the reassuring part: the
+  residue guard I added this round read **9,102 vs baseline 8,664**, and a
+  probe lane independently hit the identical shape as its own variant and
+  measured the same 595/3696.
+- **New gate guard**: `scripts/gate.sh` now checks the residue against
+  `RESIDUE_BASELINE` (8664). Previously the gate passed a 367-byte phantom
+  regression untouched because it only checked lint, compile errors and the
+  two verify baselines. Verified it trips (REGRESSION line, exit 1) and
+  passes at baseline.
+- **Three process rules earned the hard way this round:**
+  1. **Never restore a source from a `/tmp` snapshot.** Use
+     `git checkout HEAD -- <file>`. The snapshot predated an edit and
+     silently reintroduced an unmeasured probe.
+  2. **Never `touch` a source to satisfy the staleness guard** — it
+     produces a partial relink and a phantom residue reading.
+  3. **`git diff --stat` before every commit**, even when the round is
+     "comment-only". `git show --stat` afterwards is how this was found.
+- Substantive finding preserved from the lane: **§109's "C cannot request
+  the sink" should be narrowed.** Spelling the idx store through `slot`
+  DOES make msvc6 sink it past the `rep stosd` — but msvc6 then
+  dead-store-eliminates the earlier `0xffff` store, and restoring that via
+  the scaled index re-fuses the `lea`. Both halves cannot hold at once
+  through source spelling. 17 variants were swept; **every one moved the
+  first fault EARLIER**, so baseline +0xaa remains the best on all four
+  rulers.
+
 **Round-465 (2026-09-14): half the gm_AllocSpieler deficit was an ARGUMENT
 CAST, not the store. Residue 8,664.**
 
