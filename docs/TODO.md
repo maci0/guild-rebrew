@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-502 (2026-09-14): second sp5-pp pin — residue 8,641 -> 8,637. The
+toolchain axis is now exhausted.**
+
+- §142's safety check (every function in the file must survive) is cheap, so
+  swept the whole toolchain axis across the remaining unmatched rows.
+- **Re-confirmed §92 directly**: on cm_ExSellObjekt, `msvc-6.0`, `-sp5` and
+  `-win9x` all give **1149/2057 obj 2056** — identical to sp6. The nine
+  images really are three generators, so the sweep reduces to "does sp5-pp
+  help this file?"
+- **Mostly no**: cm_ExCopyEntityData 508 -> 439 (obj 905 -> 922),
+  gv_Graveyard 615 -> 458, srv_LoadBuf 701 -> 130, ServerMainThread
+  2075 -> 1225.
+- **One gain: ahm_ExAllocAlchemist 828 -> 834 at an IDENTICAL obj size
+  (1002).** Its file holds exactly one function, so §142's check is
+  trivially satisfied. Pinned via `COMPILE_OPTIONS` (never COMPILE_FLAGS —
+  §142) and measured at the link: **8,641 -> 8,637**, file still 286,720
+  bytes, zero differing outside `.text`, composition intact at 246.
+- **The technique is now exhausted**: every remaining file tested under
+  sp5-pp either loses or is unchanged, and the other seven images are the
+  same generators as sp6. **Two files pinned, there is no third.** Recorded
+  as a closed door so "try another service pack" is not re-attempted.
+- Both wins share a shape: sp5-pp hits the reference's EXACT object size
+  (346 vs sp6's 342) or a better score at the SAME size. It is a per-file
+  oracle, not a better compiler — dramatically worse on five of seven rows.
+  New §143.
+
 **Round-501 (2026-09-14): LANDED the sp5-pp pin — residue 8,652 -> 8,641.**
 
 - §141 named §115's sp5-pp result the most interesting unexploited lead.

@@ -295,6 +295,14 @@ if(REBREW_BUILD_SERVER)
     "${PROJECT_SOURCE_DIR}/src/server.dll/DieGildeAddOn/game/spiel_dumpD.c"
     PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
 
+  # Second sp5-pp pin, same rule (section 142): ahm_ExAllocAlchemist scores
+  # 834/1002 under sp5-pp against 828/1002 under sp6 at an identical object
+  # size, and the file holds exactly one function, so there are no file-mates
+  # to regress.
+  set_source_files_properties(
+    "${PROJECT_SOURCE_DIR}/src/server.dll/DieGildeAddOn/game/alchemistry_logic_c/ahm_ExAllocAlchemist.c"
+    PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
+
   if(MSVC)
     foreach(_zsrc IN LISTS ZLIB_SOURCES)
       set_source_files_properties("${_zsrc}" PROPERTIES COMPILE_FLAGS "/O2")

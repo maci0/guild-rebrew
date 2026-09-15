@@ -6174,3 +6174,41 @@ The lesson generalises past this one file: **a per-file compiler pin is a legiti
 every function in the translation unit is verified under the new toolchain**, and CMake's
 `COMPILE_OPTIONS`/`COMPILE_FLAGS` distinction is the difference between an 11-byte win and a
 39% regression.
+
+## 143. Sweeping the toolchain axis: a second pin, and the limit of the technique
+
+Section 142 landed a per-file sp5-pp pin worth 11 bytes. The verification it requires — every
+function in the translation unit must survive the switch — is cheap, so round 251 swept the whole
+toolchain axis across the remaining unmatched rows.
+
+**The nine msvc6 images are still three generators** (section 92), re-confirmed directly: on
+`cm_ExSellObjekt`, `msvc-6.0`, `-sp5` and `-win9x` all produce **1149/2057 at obj 2056**, exactly
+the sp6 baseline. Only `sp5-pp` diverges (834/2060). So the sweep reduces to one question per
+file: does sp5-pp help?
+
+Mostly it does not:
+
+| function | sp6 | sp5-pp |
+|---|---|---|
+| `cm_ExCopyEntityData` | 508/905, obj 905 | 439/922, obj 922 |
+| `gv_ExAllocGraveyardWorker` | 615/1040, obj 1040 | 458/1040, obj **1000** |
+| `srv_LoadBuf` | 701/750 | 130/750 |
+| `ServerMainThread` | 2075/2434 | 1225/2435 |
+| **`ahm_ExAllocAlchemist`** | 828/1002, obj 1002 | **834/1002, obj 1002** |
+
+`ahm_ExAllocAlchemist` is the one gain: **+6 at an identical object size**. Its file holds exactly
+one function, so the section 142 safety check is trivially satisfied — there are no file-mates to
+regress. Pinned the same way (`COMPILE_OPTIONS`, never `COMPILE_FLAGS`), and measured at the link:
+**residue 8,641 → 8,637**, file still 286,720 bytes, zero differing bytes outside `.text`,
+composition intact at 246 symbols.
+
+**The technique is now exhausted.** Every remaining file has been tested under sp5-pp and either
+loses or is unchanged, and the other seven images are the same two generators as sp6. Two files
+are pinned; there is no third. That is worth stating as a closed door, because "try a different
+service pack" is an obvious idea that now has a measured answer for every row.
+
+What makes these two work is worth keeping in view: both are cases where sp5-pp produces the
+reference's **exact object size** (346 against sp6's 342) or a strictly better score at the *same*
+size. Neither is a general improvement — sp5-pp is dramatically worse on five of the seven rows
+tested. It is a per-file oracle, and the only reason it can be used at all is that the toolchain
+is selectable per translation unit and every function in those units was verified first.
