@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-491 (2026-09-14): followed §131's pointer to the surrounding code —
+the Graveyard row is now CLOSED with a full mechanism. Residue 8,652.**
+
+- §131 said stop rewriting the expression and look at what surrounds it.
+  Looked, and the answer is the **addressing mode of the two stores**:
+  the reference keeps the array base as a **constant displacement**
+  (`mov byte ptr [edi+0x1014d8e0], bl`) and carries only `id + counter` in a
+  register, while we fold the base into the pointer and store through
+  `[esi]`.
+- **That is why the register is unavailable**: our `esi` holds a complete
+  address that must stay live across the `gm_RandomMod` call, so the widened
+  read has nowhere to go but back into `esi` — forcing `and esi,0xffff`
+  instead of `xor ecx,ecx; mov cx,[ebp]`.
+- **Chain fully explained**: addressing mode -> register occupancy ->
+  zero-extend form. §129's 4-byte-per-read gap is a CONSEQUENCE, not a cause.
+- **Two more spellings measured, both +0**: stores as
+  `*(char*)(0x1014d8e0 + a)` (explicit base + index), and a narrowed
+  store-value cast. **Six distinct spellings on this row now** — five
+  byte-identical, one a +117 loss.
+- **Sharper conclusion than "not source-reachable"**: msvc6 materialises the
+  array base into the pointer and no C spelling changes that —
+  `extern char[]` indexed by a variable, an absolute-address cast, and a
+  base-plus-index cast all emit identical bytes. The decision comes from the
+  whole loop's pressure, and the only remaining lever is changing what else
+  the loop keeps live, which is its real work.
+- **Row closed with a mechanism (§132)** rather than left as an open lead —
+  otherwise the next reader re-derives the same six probes.
+
 **Round-490 (2026-09-14): closed the Graveyard zero-extend with four
 measured spellings. Residue 8,652.**
 

@@ -5697,3 +5697,48 @@ The practical rule, and the reason to record a closed lead in full: **when three
 spellings of the same intent all canonicalise to identical bytes, the lever is not in that
 expression.** Stop rewriting it and look at what surrounds it. Sections 122, 126, 127 and 129 all
 ended the same way, and naming the pattern is cheaper than rediscovering it a fifth time.
+
+## 132. What surrounds the Graveyard read: an addressing-mode choice, also not source-selectable
+
+Section 131 closed the read itself and pointed at the surrounding code, since that is what decides
+which register is free. Round 240 looked, and found the answer — it is the **addressing mode of
+the two stores**, not anything about the read:
+
+```
+reference   0x10011f2f  8d3c31          lea edi,[ecx+esi]              <- edi = INDEX only
+            0x10011f39  889fe0d81410    mov byte ptr [edi+0x1014d8e0], bl
+            0x10011f3f  888720980a10    mov byte ptr [edi+0x100a9820], al
+
+ours        +0x033e     add esi,edi                                    <- esi = FULL ADDRESS
+            +0x0347     mov byte ptr [esi], bl
+            +0x034d     mov byte ptr [esi], al
+```
+
+The reference keeps the array base as a **constant displacement** in each store and carries only
+`id + counter` in a register. We fold the base into the pointer, so our register holds a complete
+address that must stay live across the `gm_RandomMod` call — and that is precisely why the
+widened read has nowhere to go but back into `esi`, forcing `and esi,0xffff` instead of
+`xor`+`mov cx`.
+
+So the chain is now fully explained: **addressing mode → register occupancy → zero-extend form**,
+and the 4-byte-per-read gap of section 129 is a consequence, not a cause.
+
+Two more spellings were measured against it, both aimed at the addressing rather than the read:
+
+| spelling | link delta |
+|---|---|
+| stores written as `*(char*)(0x1014d8e0 + a)` — explicit base + index | **+0** |
+| narrowed store-value cast `(char)(random_value - 0x20)` | **+0** |
+
+Both canonicalise. **That makes six distinct spellings measured on this one row** (four in
+sections 129 and 131, two here), five byte-identical and one a 117-byte loss.
+
+The conclusion is sharper than "not source-reachable": msvc6 chose to materialise the array base
+into the pointer, and **no way of writing the C changes that decision** — `extern char[]` indexed
+by a variable, an explicit absolute-address cast, and a base-plus-index cast all emit the same
+bytes. The choice is made by the code generator from the *whole loop's* pressure, and the only
+remaining lever would be changing what else the loop keeps live, which is the loop body's real
+work and cannot be removed.
+
+**This row is now closed with a complete mechanism** rather than an open lead — worth more than
+leaving it on the list, because the next reader would otherwise re-derive the same six probes.
