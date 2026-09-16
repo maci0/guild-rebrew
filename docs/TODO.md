@@ -49,6 +49,18 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-517 (data pass, round 11): named 0xffffffff + broadcast strings.
+`.data` 23,470 -> 22,541 (-929). `.text` 8,636 held.**
+
+- **Root cause:** anonymous `??_C@` COMDATs for the broadcast path/msg
+  omitted the leading `dword 0xffffffff` at `0x10027030`, shifting every
+  later `.data` symbol by −4 (`need dictionary`, crashdump blob, …).
+- **Fix:** named `g_broadcast_ff_10027030` + path/msg arrays in
+  `broadcast.c`; pass them to `LogMessageInternal`.
+- Winsock/vfs4/fmt still 100%. `need dictionary` aligned.
+- Next: CrashDump/EmitCrash COMDATs in LogFile slot (+136). See §158.
+- RESIDUE held 8636, DATA 23,470->22,541.
+
 **Round-516 (data pass, round 10): drop redundant pad_* arrays.
 `.data` 23,472 -> 23,470 (-2). `.text` 8,634 -> 8,636 (+2).**
 

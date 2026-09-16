@@ -72,18 +72,17 @@ BYTE_BASELINE=${BYTE_BASELINE:-264}
 # (already linked before zutil).  See section 156.
 #
 # Round 516 raised it again (8634 -> 8636, +2) while dropping the explicit
-# pad_* arrays from winsock_data.c / vfs_OpenStream.c -- MSVC6's 4-byte
-# alignment already supplies those zeros, and the named pad arrays were
-# landing in late BSS (polluting the empty-string slot z_errmsg points at).
-# .data 23,472 -> 23,470 (-2).  See section 157.
+# broadcast.c named dword 0xffffffff + path/msg arrays -- anonymous COMDATs
+# omitted the leading dword and shifted every later .data symbol by -4.
+# .data 23,470 -> 22,541 (-929).  See section 158.
 RESIDUE_BASELINE=${RESIDUE_BASELINE:-8636}
-# Raw-link .data divergence baseline (23,470 as of round 516).  The goal is a build that is
+# Raw-link .data divergence baseline (22,541 as of round 517).  The goal is a build that is
 # byte-identical WITHOUT postlink, but postlink blits .data wholesale from the
 # layout package, so the shipped file shows `.data differing 0x0` no matter what
 # the link produced -- and this gate, guarding .text alone, could not see .data
 # move at all.  Three rounds of data work were invisible to it.  Guard the raw
 # link's own .data so progress there is measured and regressions there caught.
-DATA_BASELINE=${DATA_BASELINE:-23470}
+DATA_BASELINE=${DATA_BASELINE:-22541}
 rc=0
 
 echo "== rebrew lint"

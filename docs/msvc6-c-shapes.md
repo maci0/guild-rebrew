@@ -7134,7 +7134,53 @@ Same for `pad_100294a4[2]` after the vfs_OpenStream format string.
 
 ### Next miss
 
-`z_errmsg` pointer diffs remain: `"need dictionary"` at `0x10027534` vs
-reference `0x10027538` (−4), driven by an earlier divergence at `0x10027400`
-(Error-handler strings vs Fatal Error). Empty-string BSS is a separate
-cumulative gap.
+Fixed in §158 (`"need dictionary"` now lands at `0x10027538`). Remaining:
+CrashDump/EmitCrash `??_C@` COMDATs still occupy the LogFile slot at
+`0x1002733c` (+136). Empty-string BSS is a separate cumulative gap.
+
+## 158. Named dword before first string COMDAT (round 11 of the data pass)
+
+First `.data` miss at `0x10027030`: reference has `dword 0xffffffff` then
+`D:\Develop\Units\net\broadcast.c` then `Sending Broadcast`. Build emitted
+only the two anonymous `??_C@` COMDATs from `LogMessageInternal(...)`
+string literals — the leading dword was missing, so every later `.data`
+symbol sat −4 (`"need dictionary"` at `0x10027534` vs `0x10027538`,
+`g_crashdump_data` at `0x10027100` vs `0x10027104`, …).
+
+### The fix
+
+In `broadcast.c`, emit named symbols in REF order and pass them to
+`LogMessageInternal` (kills the anonymous COMDATs):
+
+```c
+unsigned int g_broadcast_ff_10027030 = 0xffffffff;
+char s_broadcast_path_10027034[] = "D:\\Develop\\Units\\net\\broadcast.c";
+char s_Sending_Broadcast_10027058[] = "Sending Broadcast";
+```
+
+Same pattern as §154–§156: named symbol in the TU that already links at
+the right place; never rely on a raw VA cast for data emission.
+
+### Result
+
+- Broadcast span `0x10027030..0x1002706c` now matches (60/68; residual
+  is `1.1.3` / Error.c reordering, not the −4)
+- `"need dictionary"` **aligned** (`0x10027538`)
+- Winsock / vfs4 / format spans still **100% matching**
+- `.data` **23,470 → 22,541 (−929)**
+- `.text` **8,636 held**
+
+### Failed approaches (do not retry without new evidence)
+
+- Broad ErrorModule string reorder → `.data` ballooned to `0x6e80`
+- CrashDump/EmitCrash COMDAT kill via blob `#define` aliases, pointer
+  aliases, raw VA casts, or stack byte-inits → `.text`/`.data` both
+  regressed (`0x6e0d`). Parked until a shape that preserves CrashDump
+  codegen is found.
+
+### Next miss
+
+CrashDump/EmitCrash duplicate `??_C@` COMDATs (`\r\n` / separator /
+`--> ` / `??? `) still sit in the LogFile slot at `0x1002733c` (+136).
+Those bytes already live inside `g_crashdump_data_10027104`; the hard
+part is killing the second emission without blowing CrashDump `.text`.
