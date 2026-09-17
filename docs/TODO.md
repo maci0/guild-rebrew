@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-865: classified the 19 carriers' divergence mechanically. My round-30 "register-home" claim was too narrow.**
+
+- **Tested round 30's conclusion instead of accepting it.** That round inferred from two carriers
+  that the remaining divergence is register-home, which §84 cannot reach. Classified all of
+  `gm_AllocSpieler`'s mismatches mechanically instead:
+  - `rebrew diff` reports **973 mismatching instructions, only 37 register-name-only** — so 936
+    are something else, and the round-30 generalisation was wrong for the largest carrier.
+  - Breaking those down by opcode identity: **753 "different mnemonic", 218 same-mnemonic, 2
+    target-only**. The 753 is the alignment desynchronising, not 753 real differences —
+    `rebrew diff` aligns positionally and a length difference anywhere desynchronises everything
+    after it.
+- **Used the sound instrument (`scripts/seqdiff.py`, sequence alignment) for the real number:**
+  `gm_AllocSpieler` is **731 of 1,056 instructions aligned identical, 470 differing, with 38
+  inserts and 38 deletes** — i.e. the two sides genuinely differ in instruction *count* in
+  places, not only in register names.
+- **The first divergence is statement-order, not register-home** — so §84 looked applicable:
+  ```
+  T[48] lea edx,[edx+g]        C[48] mov WORD [ebp],bx ; xor ebx,ebx
+  T[51] mov edi,edx            C[52] lea edi,[edx+g] ; mov [ebp+0x170],ebx ; mov [ebp+0x16c],ebx
+  T[55] mov WORD [ebp],bx      (the reference emits this LATER; ours emits it here)
+  ```
+- **It is not applicable, and the file header already says why.** `gm_AllocSpieler.c:300-308`
+  documents this exact site: the 16-bit store is **being sunk past the block fill by msvc6's
+  scheduler**, the reorder was tried in both forms, and it measured **SIZE_MISMATCH 633/3694,
+  371 matched bytes worse**. The header's conclusion — *"a SCHEDULER decision downstream of
+  register pressure, not a statement order we can dictate"* — is right, and my classification
+  could not see that from the instruction stream alone.
+- **Corrected framing that matters for the next reader:** the 19 carriers are not uniformly
+  register-home (§84-inaccessible) as round 30 implied. They are a **mix**, and the only way to
+  tell which is which is to read the enclosing file header, which in several cases has already
+  recorded the attempt and its cost. Classify by header first, instruction stream second.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-864: applied the §84 method (§84) to a carrier. One probe, inert-or-worse; one near-miss self-inflicted bug caught before commit.**
 
 - **Re-read how the biggest wins were actually found** rather than assuming the well was dry.
