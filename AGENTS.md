@@ -209,6 +209,23 @@ Read `msvc6-c-shapes.md` before reshaping a function that compiles but does
 not match. It catalogues the patterns that have closed real mismatches, each
 with a verified call site.
 
+**Look the address up first — do not grep the docs by keyword.** The entries
+are keyed by address, and a `grep` only works if you already know the words the
+entry used. Round 853 spent a whole round re-deriving `msvc6-c-shapes.md`
+section 127, whose exact instruction pair and decisive probe were already
+recorded, because the shapes doc was searched last rather than first:
+
+```
+python3 scripts/whathas.py 0x10009838              # what is recorded at this VA
+python3 scripts/whathas.py 0x10009838 --window 64  # widen the band
+python3 scripts/whathas.py --va 0x10018850 0x10019730   # a function's whole span
+```
+
+It searches the four codegen docs and `TODO.md` and cites section + line. Run it
+on the anchor address *and* on the enclosing function's span before probing
+either. "No documented probe" is not proof of novelty — still check the file
+header — but a hit means the round is already written.
+
 ## Agent Skills
 
 Detailed workflow instructions are in `.agents/skills/`:

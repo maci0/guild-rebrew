@@ -49,6 +49,39 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-854: built `scripts/whathas.py` so a round cannot re-derive a documented wall. Wired into AGENTS.md.**
+
+- **Fixed the process failure instead of logging it again.** Round 853 cost a whole round
+  re-deriving `msvc6-c-shapes.md` §127 because the shapes doc was searched *last*. The rule
+  ("read shapes first") is unenforceable when the four codegen docs plus a 23,000-line TODO
+  have to be grepped by keyword and a `grep` only works if you already know the words the
+  entry used. The entries are keyed by **address**, so the index should be the address.
+- **`python3 scripts/whathas.py 0x<VA> [--window N] [--va START END] [--json]`.** Searches
+  `msvc6-c-shapes.md`, `msvc6-allocator.md`, `codegen-walls.md`, `measure-traps.md`,
+  `workflow-traps.md` and `TODO.md` for any line citing a VA in range, and prints the citing
+  file, line number, nearest markdown heading and the line itself. Verified against the case
+  that motivated it — `0x10009838` returns **4 hits**, including §127 *and* §48, a second
+  entry at the adjacent address `0x10009846` about the same `if` arm that round 853 never
+  found at all (it records an additional amendment with two more reverted probes).
+- **Fixed a bug in the tool before shipping it.** The first regex was
+  `0x(1000[0-9a-f]{4})` — one `0` too many, so it matched 9 hex digits and silently returned
+  "no documented probe" for `0x10018850`, a function with 29 citations. Caught it by testing
+  against a known-documented VA rather than only against the motivating case. Worth
+  recording: a search tool that silently under-reports is worse than none, because it
+  manufactures false novelty.
+- **Wired into `AGENTS.md`** under Codegen References, with the concrete commands and the
+  reason. The rule now has a step that can be followed rather than a doc that must be
+  remembered.
+- **Applied it to all 9 carriers** and recorded the result, including the nuance that the
+  result is easy to over-read: five carriers have a first-dirty VA with no citation
+  (`gm_AllocSpieler` `0x100188be`, `cm_ExSellObjekt` `0x1000d937`, `gv_ExAllocGraveyardWorker`
+  `0x10011c5a`, `ServerMainThread` `0x100093c4`, `gm_AllocGebaeude` `0x100174da`), but
+  **"unprobed address" is not "unexplored function"** — `--window 256` around
+  `gm_AllocSpieler`'s anchor returns **44 hits** across §§15/49/52/58/77. The tool's own
+  "no documented probe" footer says this; do not read a miss as novelty.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-853: worked round 17's `ServerMainThread` anchor. It is shapes §127, already recorded; two probes re-derived it, reverted.**
 
 - **Followed the localization to the site.** Round 17 put the whole `ServerMainThread` residue in
