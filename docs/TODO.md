@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-877: chased a documented flag lead. Found the real flags already in effect, and that persisting them as metadata crashes the compiler.**
+
+- **Followed the one flag lead the docs mark as live.** TODO round-163's table says
+  `ls_LoadBuildingEntityState` is *"the only function `/Oa` helps; it is the only one whose column
+  should be read as a lead"* — 713/1463 under `/Oa` against 125/1464 under plain `/O2 /Gd`. The
+  metadata carried **no `cflags` field** for it and the source has no `#pragma optimize`, so on
+  paper the file was compiling with the project default and the lead looked unclaimed.
+- **Re-measured with `rebrew test --cflags` and the numbers had moved** (later source work):
+  `/O2 /Gd` 818/1460, `/O2 /Gd /Oa` 715/1465, **`/O2 /Gd /Oa /Ow` 822/1460** — so the doc's 713
+  is stale but the *direction* is right, a small same-size gain.
+- **The lead was already taken, and the tooling cannot see it.** `build/CMakeFiles/server_dll.dir/
+  build.make` shows this file already compiles with **`/O2 /Gd /Oa /Ow /REBREW_TOOLCHAIN:
+  msvc-6.0-sp5-pp`** — it is one of the three sp5-pp-pinned files from round 842 *and* already
+  carries the `/Oa /Ow` pair. `rebrew test` reads neither the CMake pin nor that flag pair, which
+  is exactly the gap round 842 recorded for the toolchain pin and extends it to the flags.
+- **Persisting the flags as metadata breaks the build, and that is the round's sharpest result.**
+  `rebrew test --cflags "/O2 /Gd /Oa /Ow"` wrote the field into `rebrew-functions.toml` (the tool
+  owns that file and does this), and the next `gate.sh` went **FAIL** with
+  **`fatal error C1001: INTERNAL COMPILER ERROR`** plus a C1083. The file compiles fine through
+  the CMake path with the *same* flag pair appended to the *same* defaults, so the crash is not
+  "`/Oa /Ow` is bad" — it is that the metadata path and the CMake path do not build the same
+  command line, and only one of them works. Reverted (`chmod u+w` first, as the file is 444);
+  gate green again, `.text` 8,634, verify 281/264, raw-link `.data` 21,836.
+- **Recorded as a measure-trap for the next reader:** do not add `cflags` to a file that is
+  CMake-flag-pinned. Check `build.make` for the file first — the metadata is *documented* as the
+  source of truth for flags, but for the pinned files it is not, and writing the true flags there
+  is what breaks the compile.
+- **Gate:** pass (after revert) — lint 188/188, compile errors 0, verify 281/264 held, residue and
+  raw-link `.data` both held.
+
 **Round-876: tested whether any C89 lever still lands. The documented "exhausted" claim holds up under independent check.**
 
 - **Seven consecutive rounds (868-875) of probes were inert or worse, so I checked the premise

@@ -241,6 +241,24 @@ Rounds 868-870 were spent on `gm_FindNextFilteredEntity`, which is in `spiel_dum
 **three blocked** files. The right move was to work an unblocked carrier, and the check that would
 have shown that costs one command. **Run it before choosing a function, not after a failed probe.**
 
+## 6e. `cflags` in the metadata can crash the compiler on a CMake-flag-pinned file (round 877)
+
+`os_LoadBuildingEntityState` (`0x100128f0`) compiles in the real build with
+`/O2 /Gd /Oa /Ow /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`, set by `CMakeLists.txt` — it is one of the
+three sp5-pp-pinned files. Its metadata carried **no `cflags` field**, and the docs record
+`CMakeLists.txt` as the place where per-file flags live for exactly these files.
+
+Persisting the same flags into the metadata with `rebrew test --cflags "/O2 /Gd /Oa /Ow"` — the
+tool writes the field itself — makes `scripts/gate.sh` go **FAIL** with
+**`fatal error C1001: INTERNAL COMPILER ERROR`** and a C1083. The identical flags appended to the
+identical defaults work through the CMake path, so `/Oa /Ow` is not the problem: **the metadata
+path and the CMake path do not construct the same command line, and only the CMake one compiles
+this file.**
+
+**Check `grep '<file>.c.obj:' -A40 build/CMakeFiles/server_dll.dir/build.make` before adding any
+`cflags`**, and do not add a field that merely restates a CMake pin. Note also that
+`rebrew-functions.toml` is mode 444 — reverting needs `chmod u+w` first.
+
 ## 7. The size rule has two branches, and mixing them discards good work
 
 `cl` pads each COMDAT to 16 bytes, so for an object with **no** relocated data after its code
