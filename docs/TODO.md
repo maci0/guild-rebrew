@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-849: finished the dead-declaration sweep (3 more symbols, 24 lines). Residue-neutral. Also closed the string-extern class as not-worth-doing.**
+
+- **Completed round 848's class.** The remaining `extern`-in-8-spiel-TUs declarations with
+  zero uses were `g_array_base` (the real symbol is `g_array_ptr`; `g_array_base` appears
+  exactly 8 times in the tree, all declarations), `s_gm_AddObjekt____obj____ob_NULL_10031358`
+  and `s_gm_AddObjekt____Parent_not_found_10031390`. Dropped from all 8 TUs, 24 lines.
+  `test --all` 281/264 with zero demotions; **link `.text` 8634 -> 8634 (+0)**.
+- **Chased the 19 single-decl `extern char s_<msg>_<addr>[]` rows and stopped, with a reason.**
+  These are different from the dead globals and looked promising: each is declared once with a
+  reference VA in its name and **never used**, while the call site passes the same literal
+  inline —
+  ```c
+  extern char s_cm_ExSellObjekt___Lager_voll_1002cdac[];      /* line 27, never referenced */
+  LogMessageInternal("...command.c", 0x2d1b, "cm_ExSellObjekt() Lager voll", 8);  /* line 384 */
+  ```
+  and the reference really does carry the string at that VA (`0x1002cdac` =
+  `"cm_ExSellObjekt() Lager voll"`). So it reads like the anon->named opportunity.
+  **Checked the shipped bytes before editing: `0x1002cdac`, `0x1002cef4` and `0x1002d33c` are
+  already byte-identical in `build/server.dll`.** Postlink places them regardless of which
+  COMDAT the call binds to. Retargeting the call sites is therefore pure risk for zero
+  deliverable gain, and rounds 837/839 already measured this class net-negative. Left alone.
+- **General rule this round confirms:** for anything in `.data`/`.rdata`, compare the **shipped**
+  file's bytes before treating a naming mismatch as a defect. Three times now (rounds 834, 839,
+  849) a clean-looking `.data` finding has dissolved against the postlink copy. The check costs
+  one command.
+- **Gate:** pass — lint 188/188, compile errors 0, verify 281/264 held, residue 8634 and
+  raw-link .data 21,836 held.
+
 **Round-848: dropped 11 dead cross-TU globals from the 8 spiel TUs. Residue-neutral, 88 lines gone.**
 
 - **Went back to the objective's stated focus (data and types) and found real work there.**

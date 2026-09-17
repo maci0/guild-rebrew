@@ -24,7 +24,6 @@ void __cdecl m_FreeTracked(void*);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-extern char* g_array_base;
 // DATA: SERVER 0x100358a0
 extern unsigned char g_slot_table[];
 void __cdecl gm_NoopRet2(char* slot);
@@ -32,8 +31,6 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 int g_next_object_id = 1;
 int g_current_year;
 char s_D__Develop_DieGildeAddOn_game_sp_10031004[] = "D:\\Develop\\DieGildeAddOn\\game\\spiel.c";
-extern char s_gm_AddObjekt____obj____ob_NULL_10031390[];
-extern char s_gm_AddObjekt____Parent_not_found_10031358[];
 extern int g_query_state_a0c[];
 extern unsigned char g_byte_table_30861;
 int __cdecl gm_GetBuildingTypeCategory(int);

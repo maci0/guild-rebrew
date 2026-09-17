@@ -15,15 +15,12 @@
 extern int g_query_limit;
 
 
-extern char* g_array_base;
 extern unsigned char g_slot_table[];
 
 
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;
 extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; /* defined in spiel.c */
-extern char s_gm_AddObjekt____obj____ob_NULL_10031390[];
-extern char s_gm_AddObjekt____Parent_not_found_10031358[];
 
 extern int g_query_state_a0c[];
 extern unsigned char g_byte_table_30861;
