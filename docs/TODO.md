@@ -49,6 +49,49 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-875: worked round 40's block-order lead. Inert; and round 40's ranking method was too narrow.**
+
+- **Corrected my own round-40 measurement first.** That round ranked carriers by counting probe
+  markers in each file's *leading comment block* with the vocabulary
+  `inert|reverted|probe|measured`. Both restrictions were wrong:
+  - **Header-only misses in-body notes.** `gm_ObjectsAvailble` shows 2 header lines but ~90 probes
+    in the body; `m_AllocTracked` likewise.
+  - **The vocabulary missed the words these notes actually use.** `ls_LoadBuildingEntityState`'s
+    note reads *"the switch is fragile and global - **swept**, all reverted ... contradicts the note
+    in docs/TODO.md round 24 that a volatile read **regresses**"* — none of which my pattern
+    matched, so the file scored 2 when it is one of the better-documented carriers.
+  Re-ran **whole-file** with the wider vocabulary (`inert|reverted|probe|measured|plateau|swept|
+  tried|attempt|regress|identical|worse|kept|blocker|beaten|fragile|residual|remaining|stuck`):
+  ```
+  CrashDump 12 · ls_LoadBuildingEntityState 12 · cm_ExSellObjekt 20 · vfs_ReadCompressed 21 ·
+  gm_AllocGebaeude 23 · gm_AllocSpieler 30 · ServerMainThread 34 · cm_ExProdObjekt 44 ·
+  m_AllocTracked 60 · cm_ExCopyEntityData 77 · cm_ProcessCommandQueue 86 ·
+  ahm_ExAllocAlchemist 89 · gm_ObjectsAvailble 122 · gv_ExAllocGraveyardWorker 128 · srv_LoadBuf 151
+  ```
+  **The target choice survives** — `ls_LoadBuildingEntityState` is joint-least-documented at 12 —
+  but the "2 probe-words" figure I published last round was a measurement artifact, and the
+  header/bimodal framing was wrong.
+- **Worked the lead anyway.** Round 40 identified `T[461:472]` — twelve reference instructions we
+  emit later in the function, with `lea eax,[esi+edx] / push / call / test / je / mov ecx,[g] /
+  push edi / push 1 / push 0x10 / lea edx,[esi+ecx+0x40]` ahead of a `lea` we emit first. Traced
+  it to `ebx = (int*) (esi + 0x41)` established **before** the `ls_ReadVfsDataChecked(ebx, ...)`
+  call at line 126.
+- **Probe: establish the pointer after the call** instead (inline the first `esi + 0x41`
+  argument, assign `ebx` after). **Inert at both rulers** — object 1460 / match 818 unchanged,
+  link `8634 -> 8634 (+0)`. Reverted; file identical to HEAD.
+- **What the divergence actually is, now that the naive readings are eliminated:** the reference's
+  block is not a *source*-order statement we can permute — the twelve instructions include an
+  entire call-and-check sequence that appears displaced by roughly the width of one `lea`. That is
+  the same class as round 869's `ServerMainThread` finding: a **block-graph layout** difference, not
+  a statement order. §84 moves statements; it cannot move a call across a block boundary msvc6
+  chose.
+- **Next:** this carrier's remaining divergence is 17 replaces / 8 inserts / 5 deletes over 499
+  instructions, and both of the two concrete leads (the missing store, the displaced call block)
+  are now measured inert to statement-order changes. It needs a different class of lever, or it
+  stays parked. `CrashDump` is the other joint-least-documented carrier at the same count.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-874: ranked the carriers by header exhaustiveness instead of by delta. Never-probed territory found; two probes on the best one, both neutral.**
 
 - **Rounds 872-873 both ended at "the header already covers it", so I tested whether that was a
