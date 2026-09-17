@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-885: sectioned 33 misplaced symbols and sized 50 `.bss`; matched 108 → 122; the lane is now only `.idata`.**
+
+- **Tried:** the last fixable class in the `start-data` lane — 33 entries carrying `name` and
+  `type` but **no `section`**, which `data_verify` filters on and so skipped unconditionally.
+- **Byte-compared all 33 against the reference first. Zero differ.** Mapped each VA to its real
+  section from the PE headers: **5 belong in `.rdata`** (`0x10025680`–`0x100257c8`, the float
+  constants) and **28 in `.data`**. Wrote the section for each from the binary's own map rather
+  than from the tool's guess, and a size from the declared type.
+- **Then the 50 `.bss` entries**, which had `section` but no `size`. Sized all 50.
+- **Measured:** `verify --data` matched **108 → 122** from the 33 sectioned entries. **The 50
+  `.bss` sizes moved the count by exactly zero**, which is the expected result and confirms
+  round 884's finding: `.bss` is zero-fill, so a byte compare is vacuous. Both sets were
+  byte-compared against the reference anyway — 33 + 50 entries, **0 diffs**.
+- **A useful negative: this PE has no `.bss` section at all.** Both files carry only
+  `.text` / `.rdata` / `.data` / `.reloc`, and every one of the 50 `.bss` VAs lies inside
+  `.data`'s `vsize 0x174059c`. `.bss` here is `rebrew`'s label for the zero-fill hole above
+  `.data`'s `rawsize 0xe000`, not a section in the file. So "is it `.bss`?" is not a question the
+  binary can answer — only the raw/vsize split can.
+- **Gate:** pass. residue 8,634, raw-link `.data` 21,836, verify 281/283, byte-matched 264,
+  imports 100 — all held. Metadata only; no output byte changed.
+- **Lane after this round: 167 → 84, and all 84 are `.idata`.** That is the end of the road for
+  this lane by naming: IAT slots are linker output, and their bytes were confirmed identical to
+  the reference in round 883. Three rounds have now added 37 verified symbols and moved the
+  output by zero bytes — which is the honest summary of the data lane on this target. Residue
+  (8,634, all inside `.text`) is the only number that still reflects work.
+
 **Round-884: sized 57 `.data` symbols; matched 105 → 108; the rest of the lane is unverifiable by construction.**
 
 - **Tried:** the 224 `start-data` items that remained after round 883. Of those, 57 are `.data`,

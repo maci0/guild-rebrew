@@ -562,37 +562,51 @@ status = "VERIFIED"
 ["SERVER.0x10030b94"]
 name = "g_query_filter_max_id"
 type = "int"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10030b9c"]
 name = "g_query_filter_type"
 type = "short"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".data"
+size = 2
 
 ["SERVER.0x1003543c"]
 name = "g_active_player_count"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x101398a0"]
 name = "g_dispatch_table_b"
 type = "int*"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x1013989c"]
 name = "g_dispatch_table_a"
 type = "int*"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10034638"]
 name = "g_alloc_counter"
 type = "int"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10035450"]
 name = "g_query_limit"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x101de5a0"]
 name = "g_office_slots"
@@ -604,122 +618,170 @@ size = 4
 ["SERVER.0x100256bc"]
 name = "g_float_const_bc"
 type = "float"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".rdata"
+size = 4
 
 ["SERVER.0x100256cc"]
 name = "g_float_const_cc"
 type = "float"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".rdata"
+size = 4
 
 ["SERVER.0x117640a0"]
 name = "g_alloc_root_name"
 type = "char"
 status = "UNCHECKED"
+section = ".data"
+size = 1
 
 ["SERVER.0x117640b0"]
 name = "g_alloc_root_size_total"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x117640b4"]
 name = "g_alloc_root_count"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x117640b8"]
 name = "g_alloc_root_size_max"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x117640bc"]
 name = "g_alloc_root_count_max"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x117640c0"]
 name = "g_alloc_root_field_20"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x1003540c"]
 name = "g_dynamic_count"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x1002c050"]
 name = "g_alchemy_entity_table"
 type = "int"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10028938"]
 name = "g_default_group_name"
 type = "char"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".data"
+size = 1
 
 ["SERVER.0x1002893c"]
 name = "g_default_group_name_4"
 type = "int"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".data"
+size = 4
 
 ["SERVER.0x117640a4"]
 name = "g_alloc_root_name_4"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10035478"]
 name = "g_save_extra_field"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10025680"]
 name = "g_gv_const_5680"
 type = "float"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".rdata"
+size = 4
 
 ["SERVER.0x100257c4"]
 name = "g_gv_const_57c4"
 type = "float"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".rdata"
+size = 4
 
 ["SERVER.0x100257c8"]
 name = "g_gv_const_57c8"
 type = "float"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".rdata"
+size = 4
 
 ["SERVER.0x10035a0c"]
 name = "g_query_state_a0c"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10035470"]
 name = "g_save_extra_70"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10035474"]
 name = "g_save_extra_74"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10030861"]
 name = "g_byte_table_30861"
 type = "unsigned char"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".data"
+size = 1
 
 ["SERVER.0x1003542c"]
 name = "g_dynasty_field_2c"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10035430"]
 name = "g_dynasty_generation_counter"
 type = "int"
 status = "UNCHECKED"
+section = ".data"
+size = 4
 
 ["SERVER.0x10035a05"]
 name = "g_stat_b_array"
 type = "char"
 status = "UNCHECKED"
+section = ".data"
+size = 1
 
 ["SERVER.0x10025fa0"]
 name = "g_const_5fa0"
@@ -778,7 +840,9 @@ section = ".rdata"
 ["SERVER.0x10029bb8"]
 name = "g_str_29bb8"
 type = "char"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".data"
+size = 1
 
 ["SERVER.0x1009aca0"]
 name = "g_entity_base"
@@ -893,7 +957,9 @@ status = "UNCHECKED"
 ["SERVER.0x100313fc"]
 name = "g_100313fc"
 type = "char"
-status = "UNCHECKED"
+status = "VERIFIED"
+section = ".data"
+size = 1
 
 ["SERVER.0x10024000"]
 name = "__imp__GetLocalTime@4"
@@ -1365,6 +1431,7 @@ type = "unsigned int"
 section = ".bss"
 note = "block alloc threshold (allocator mode 2)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354b4"]
 name = "_osver"
@@ -1372,6 +1439,7 @@ type = "unsigned int"
 section = ".bss"
 note = "OS version dword (GetVersion)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354b8"]
 name = "_winver"
@@ -1379,6 +1447,7 @@ type = "unsigned int"
 section = ".bss"
 note = "(major << 8) | minor"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354bc"]
 name = "_winmajor"
@@ -1386,6 +1455,7 @@ type = "unsigned int"
 section = ".bss"
 note = "OS major"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354c0"]
 name = "_winminor"
@@ -1393,6 +1463,7 @@ type = "unsigned int"
 section = ".bss"
 note = "OS minor"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354ec"]
 name = "_C_Termination_Done"
@@ -1400,6 +1471,7 @@ type = "int"
 section = ".bss"
 note = "_cexit-already-ran flag"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354fc"]
 name = "__proc_attached"
@@ -1407,6 +1479,7 @@ type = "int"
 section = ".bss"
 note = "__CRT_INIT attach/detach refcount"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10035500"]
 name = "_aenvptr"
@@ -1414,6 +1487,7 @@ type = "void *"
 section = ".bss"
 note = "environment strings ptr"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1003559c"]
 name = "g_1003559c"
@@ -1421,6 +1495,7 @@ type = "int"
 section = ".bss"
 note = "new-handler retry flag (_callnewh)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11766448"]
 name = "g_max_pool_alloc_size"
@@ -1428,6 +1503,7 @@ type = "unsigned int"
 section = ".bss"
 note = "max pool allocation size (allocator mode 3)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1176644c"]
 name = "_crtheap"
@@ -1435,6 +1511,7 @@ type = "void *"
 section = ".bss"
 note = "process heap handle"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11766450"]
 name = "__active_heap"
@@ -1442,6 +1519,7 @@ type = "int"
 section = ".bss"
 note = "allocator mode: 3=pool, 2=block"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11767584"]
 name = "_acmdln"
@@ -1449,6 +1527,7 @@ type = "void *"
 section = ".bss"
 note = "GetCommandLineA result"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11767588"]
 name = "g_11767588"
@@ -1456,6 +1535,7 @@ type = "int (__stdcall *)(void *, unsigned int, void *)"
 section = ".bss"
 note = "DllMain user handler fnptr"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100317f8"]
 name = "g_lock_stream_table"
@@ -1480,6 +1560,7 @@ type = "void *"
 section = ".bss"
 note = "pool: region scan cursor (ptr into array)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11766440"]
 name = "__sbh_cntHeaderList"
@@ -1487,6 +1568,7 @@ type = "int"
 section = ".bss"
 note = "pool: region count"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11766444"]
 name = "__sbh_pHeaderList"
@@ -1494,6 +1576,7 @@ type = "void *"
 section = ".bss"
 note = "pool: region descriptor array"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11766430"]
 name = "__sbh_sizeHeaderList"
@@ -1501,6 +1584,7 @@ type = "int"
 section = ".bss"
 note = "__sbh_sizeHeaderList - allocated header-list size"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11766434"]
 name = "__sbh_indGroupDefer"
@@ -1508,6 +1592,7 @@ type = "int"
 section = ".bss"
 note = "__sbh_indGroupDefer - deferred group index"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1176643c"]
 name = "__sbh_pHeaderDefer"
@@ -1515,6 +1600,7 @@ type = "void *"
 section = ".bss"
 note = "__sbh_pHeaderDefer - deferred group header"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11766460"]
 name = "g_11766460"
@@ -1522,6 +1608,7 @@ type = "int[0x40]"
 section = ".bss"
 note = "stream group ptr table (0x11766460..0x1176655c, 0x40 entries)"
 status = "UNCHECKED"
+size = 256
 
 ["SERVER.0x11766560"]
 name = "g_11766560"
@@ -1529,6 +1616,7 @@ type = "int"
 section = ".bss"
 note = "current stream count"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11767580"]
 name = "g_11767580"
@@ -1536,6 +1624,7 @@ type = "int"
 section = ".bss"
 note = "tracked-block table count"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1176758c"]
 name = "g_1176758c"
@@ -1543,6 +1632,7 @@ type = "int"
 section = ".bss"
 note = "__envp built flag"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11767590"]
 name = "g_11767590"
@@ -1550,6 +1640,7 @@ type = "int"
 section = ".bss"
 note = "cmdline/env parsed flag"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10031b6c"]
 name = "g_10031b6c"
@@ -1557,6 +1648,7 @@ type = "int"
 section = ".bss"
 note = "TLS index (__tlsindex)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10031b78"]
 name = "g_old_sbh_region_head"
@@ -1564,6 +1656,7 @@ type = "char"
 section = ".bss"
 note = "block allocator region-list head node"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x10033b98"]
 name = "__old_sbh_p_starting_region"
@@ -1571,6 +1664,7 @@ type = "OldSbhRegion *"
 section = ".bss"
 note = "__old_sbh_p_starting_region (V5 sbh rover)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100317d8"]
 name = "_FPinit"
@@ -1585,6 +1679,7 @@ type = "void (__cdecl *)(int)"
 section = ".bss"
 note = "_exit hook fnptr"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354c4"]
 name = "g_100354c4"
@@ -1592,6 +1687,7 @@ type = "int"
 section = ".bss"
 note = "__argc"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354c8"]
 name = "g_100354c8"
@@ -1599,6 +1695,7 @@ type = "int"
 section = ".bss"
 note = "__argv"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354d0"]
 name = "g_100354d0"
@@ -1606,6 +1703,7 @@ type = "int"
 section = ".bss"
 note = "__envp"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354e0"]
 name = "g_100354e0"
@@ -1613,6 +1711,7 @@ type = "int"
 section = ".bss"
 note = "_pgmptr"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100354e8"]
 name = "g_100354e8"
@@ -1620,6 +1719,7 @@ type = "char"
 section = ".bss"
 note = "0x1001bb4c tail flag"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x10035508"]
 name = "__error_mode"
@@ -1627,6 +1727,7 @@ type = "int"
 section = ".bss"
 note = "__amsg_exit report-mode flag"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1003550c"]
 name = "__app_type"
@@ -1634,6 +1735,7 @@ type = "int"
 section = ".bss"
 note = "__amsg_exit report-mode flag 2"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100355a4"]
 name = "__old_sbh_decommitable_pages"
@@ -1641,6 +1743,7 @@ type = "int"
 section = ".bss"
 note = "fully-free page count (SBH)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100355d8"]
 name = "g_100355d8"
@@ -1648,6 +1751,7 @@ type = "char[0x104]"
 section = ".bss"
 note = "module filename buffer (0x104)"
 status = "UNCHECKED"
+size = 260
 
 ["SERVER.0x100356dc"]
 name = "g_100356dc"
@@ -1655,6 +1759,7 @@ type = "int"
 section = ".bss"
 note = "env mode: 0=uninit, 1=W, 2=A"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100356e0"]
 name = "g_100356e0"
@@ -1662,6 +1767,7 @@ type = "void (*)(void)"
 section = ".bss"
 note = "_crt_runtime_error user hook (0x1001fdf8)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100355a0"]
 name = "g_100355a0"
@@ -1669,6 +1775,7 @@ type = "void *"
 section = ".bss"
 note = "_pnhheap new-handler fnptr (0x1001d238)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10033ef0"]
 name = "g_rterrlist"
@@ -1683,6 +1790,7 @@ type = "void *"
 section = ".bss"
 note = "cached MessageBoxA proc (0x10022107)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1003583c"]
 name = "pfnGetActiveWindow"
@@ -1690,6 +1798,7 @@ type = "void *"
 section = ".bss"
 note = "cached GetActiveWindow proc (0x10022107)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10035840"]
 name = "pfnGetLastActivePopup"
@@ -1697,6 +1806,7 @@ type = "void *"
 section = ".bss"
 note = "cached GetLastActivePopup proc (0x10022107)"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11766564"]
 name = "g_11766564"
@@ -1704,6 +1814,7 @@ type = "void **"
 section = ".bss"
 note = "tracked-block (stream) table ptr - __flsall/_fcloseall walk this"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10028bdc"]
 section = ".data"
@@ -1736,6 +1847,7 @@ name = "g_chain_id_start"
 section = ".bss"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10025690"]
 name = "_g_stat_max_d"
@@ -1792,6 +1904,7 @@ name = "g_max_players"
 section = ".bss"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100256d0"]
 name = "g_dbl_const_6d0"
@@ -1830,6 +1943,7 @@ name = "g_thread_handle"
 section = ".bss"
 type = "void *"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10034680"]
 name = "g_handler_started"
@@ -1855,12 +1969,14 @@ name = "g_owner_window"
 section = ".bss"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x117640e0"]
 name = "g_log_message_buffer"
 section = ".bss"
 type = "char"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x1002d4f0"]
 name = "g_save_header_tail"
