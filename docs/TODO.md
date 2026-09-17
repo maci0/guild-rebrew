@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-886: left the data lane (exhausted) for `.text`; three probes on `srv_LoadBuf`, all reverted.**
+
+- **Why the lane changed.** `verify --data` now reports `mismatched []` and `missing []` with 122
+  symbols verified, and the whole remaining `start-data` pool is 84 `.idata` entries that no source
+  symbol can verify. Three rounds of data work moved the output by zero bytes. Residue — 8,634
+  bytes, **all inside `.text`** — is the only number that still reflects work, so this round went
+  there despite the round brief's data focus.
+- **Checked the cheapest carriers against the docs before probing either.** `cm_ProcessCommandQueue`
+  (15 bytes) has 15 rounds in its header and a measured plateau; `cm_ExProdObjekt` (21 bytes) has
+  six passes, a 112-order topological sweep and a documented "compiler-level property of this
+  block, not a statement order that has not been tried yet". Both were skipped rather than
+  re-probed.
+- **Probed `srv_LoadBuf`** (`0x1000a570`, 49 bytes, `obj 750 = size 750`, 226 instructions both
+  sides) because `instr_diff` named a lead the push-scheduling summary hides: hunk 4 is
+  `and dl,0x7f` in the reference against a whole-dword `and` in the build.
+- **Measured, all reverted** (shapes §140 now tabulates them): caching `status` before the mask
+  **701, inert**; adding a byte-width `*(unsigned char*) conn &= 0x7f` after the dword mask
+  **obj 763, match 309 — crater**; masking into `status` then storing **701, inert**. The two
+  spellings that keep a dword mask compile byte-identically to the committed body, so the `and`'s
+  destination register is an allocation property, not an expression one.
+- **Restored and confirmed:** `rebrew test` back to `match 701/750, obj 750`; `git status` clean.
+- **Gate:** pass after the revert. residue 8,634, raw-link `.data` 21,836, verify 281/283,
+  byte-matched 264, imports 100 — all held.
+- **Where this leaves the tree, stated plainly.** The 8 top carriers hold 7,383 of 8,634 bytes and
+  differ from the reference by **at most 5 instructions each**; three of them differ by **zero**.
+  The residual is operand/position, and the documented lever classes (statement order, spelling,
+  flags, block layout, register shaping) have all been measured on these rows. I have no untried
+  lever, and I am not going to invent one: further rounds on these rows would be re-probes, which
+  the goal explicitly forbids without new evidence.
+
 **Round-885: sectioned 33 misplaced symbols and sized 50 `.bss`; matched 108 → 122; the lane is now only `.idata`.**
 
 - **Tried:** the last fixable class in the `start-data` lane — 33 entries carrying `name` and

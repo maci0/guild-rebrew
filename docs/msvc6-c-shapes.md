@@ -6173,6 +6173,24 @@ statement of what the remaining residue actually is. A function can be instructi
 size-exact and still differ — because the order of `push` against arithmetic is the compiler's to
 choose.
 
+**Re-confirmed 2026-09-17 (round 886), from the instruction diff rather than from scores.** The
+hunk list names one real lead the push-scheduling summary hides: the reference masks the lobby
+status with `and dl,0x7f` — a *byte* register — where the build emits a whole-dword `and`. That is
+hunk 4 of 10, at the `*conn & 0xffffff7f` in the lobby-exit branch. Three spellings targeted at it,
+every one measured, every one reverted:
+
+| spelling | obj | match |
+|---|---|---|
+| `status = *conn; *conn = status & 0xffffff7f;` | 750 | 701 (**inert**) |
+| `*conn = *conn & 0xffffff7f;` then `*(unsigned char*) conn &= 0x7f;` | 763 | 309 (**crater**) |
+| `status = *conn & 0xffffff7f; *conn = status;` | 750 | 701 (**inert**) |
+
+The byte-width form is the only one that touches `dl` at all and it costs 13 bytes and half the
+match: msvc6 narrows the whole live range, not just the store's source. The two forms that keep the
+dword mask compile byte-identically to each other and to the committed body, so the destination
+register of that `and` is a property of the allocation, not of the expression. Consistent with
+§§122/140 — this row stays recorded, not re-probed.
+
 ## 141. What 8,652 bytes actually is: 15 instructions of difference
 
 Sections 122, 126, 140 and others each found push-scheduling or register-choice differences on
