@@ -49,6 +49,42 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-856: §82's two-condition rule is wrong — condition 2 alone triggers `fimul`. Corrected; applying it at the real site is net-negative.**
+
+- **Followed round 855's lead** (a doc rule that named the wrong cause) to the next conjunctive
+  claim, `msvc6-c-shapes.md` §82: "msvc6 emits `fimul` only when **both** conditions hold — the
+  integer has a memory home AND the double is still on ST(0)."
+- **Condition 1 is unnecessary.** Isolated the pair in the testbed with `byte` as a bare `int`
+  **global** — no alias, no pointer, no `volatile`:
+  ```
+  return d * (double) byte;              -> fildl + fmull
+  t = acc; return t * (double) byte;     -> fildl + fmull
+  t = d + acc; return t * (double) byte; -> fldl + faddl + fimull
+  t = d - acc; return t * (double) byte; -> fsubl + fimull
+  t = d * acc; return t * (double) byte; -> fmull + fimull
+  ```
+  So the sole trigger is **a prior FPU arithmetic op leaving a double on ST(0)** — the operation
+  is irrelevant (sub, add and mul all work), and the integer needs no memory-home construct at
+  all. §82's aliases were supplying an operand the code already had. A plain `fld` does **not**
+  count, so the condition is specifically *arithmetic on the stack*, not `ST(0)` occupancy.
+  Corrected §82 in place with the table.
+- **Checked the real site, and the reference confirms the site rather than the rule.** `§82`'s
+  target `0x10018f4c` really is `fimul dword ptr [esp+0x14]`, and ours is
+  `fild [esp+0x10]` + `fmulp` — the sequence the rule explains. Testbed reproduction of the
+  reference's exact prefix (`fildl`+`fsubrl`+`fimull`) comes from `t = d - (double) acc;
+  t * (double) byte;`.
+- **Applied it at the real site: worse, reverted.** Split the subtraction into its own
+  `double inv_acc` local at `gm_AllocSpieler.c:673`. Object stays exactly 3689, `match` stays
+  1004, but matched bytes fall **865 -> 839** and the site itself is still 0/40 — the split
+  moved the schedule without reaching `fimul`, because the second factor's `(double)` cast
+  still forces an `fild` between the `fsubr` and the multiply. Reverted; baseline re-confirmed.
+- **Two rounds, two doc rules, both wrong about their cause** (855's §122, 856's §82). Worth
+  stating plainly: the *causes* in these docs are less reliable than the *observations*. The
+  tables of emitted sequences are good; the "because" sentences attached to them are
+  hypotheses that were never isolated, and two of them have now failed a direct test.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-855: isolated the `lea`-vs-`add` trigger, corrected shapes §122, and tested the prediction.**
 
 - **Used round 854's tool on the five "unprobed anchor" candidates and found all five are in

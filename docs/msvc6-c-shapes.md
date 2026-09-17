@@ -2838,6 +2838,31 @@ produced by a different source construct:
 2. the running double is *still on the FPU stack* — which requires the product
    to be split across statements so nothing forces a store between them.
 
+**Condition 2 is the whole trigger; condition 1 is not needed (round 856, isolated).**
+Rebuilt the pair in the round-844 testbed and swept it. The discriminating table, with `byte`
+an `int` **global** throughout:
+
+| source | emitted |
+|---|---|
+| `return d * (double) byte;` | `fildl` + `fmull` |
+| `t = acc; return t * (double) byte;` | `fildl` + `fmull` |
+| `t = d + acc; return t * (double) byte;` | `fldl` + `faddl` + **`fimull`** |
+| `t = d - acc; return t * (double) byte;` | `fsubl` + **`fimull`** |
+| `return (d - acc) * (double) byte;` | `fsubl` + **`fimull`** |
+| `t = d * acc; return t * (double) byte;` | `fmull` + **`fimull`** |
+
+So `fimul` needs only that **a prior FPU arithmetic op left a double on ST(0)** — subtract, add
+and multiply all produce it, so the operation is irrelevant. And the integer operand needs *no*
+memory-home construct at all: a bare `int` **global** works. That is why condition 1's aliases
+were a red herring — they were supplying a memory operand the code already had. A plain `fld`
+of a value already in memory does **not** count (`t = acc` gives `fildl`+`fmull`), so the
+trigger is specifically *arithmetic already on the stack*, not merely `ST(0)` being occupied.
+
+This matters at the real site: §82's remedy was to add an alias, which the table shows is
+unnecessary, and the paragraph immediately below records that the alias by itself emits `fimul`
+at the *wrong* sites. Reading condition 2 as the sole trigger explains that, and says which
+statement split is needed — the double-arithmetic one — rather than a memory home.
+
 On `gm_AllocSpieler` (0x10018850) the reference's per-trait interpolation at
 0x10018f4c is `fld [esp+0x10]; fsubr qword[7d8]; fimul dword[esp+0x14]; fild;
 fmul dword[esp+0x10]; faddp`. Neither half alone reaches it: the alias home by
