@@ -49,6 +49,43 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-878: audited every per-file flag in the build against the metadata. One correction to round 43, no disagreements.**
+
+- **Filed round 43's defect upstream** in the rebrew ideas file (`docs/IDEAS-GUILD.md`): `test`/
+  `verify` must read the CMake per-file options, and `--cflags` on a CMake-pinned file should be a
+  loud error rather than a silent metadata write that then fails with C1001. Evidence pointers
+  included.
+- **Then audited the whole tree for the disagreement round 43 implied.** Extracted every
+  `rebrew-cmake-cl` command line from `build/CMakeFiles/server_dll.dir/build.make` (199 compile
+  lines, 14 with non-default flags) and compared each file's real flags against its metadata
+  `cflags`, matching by the file's `// FUNCTION:` VA.
+  ```
+  cm_ExProdObjekt /Ox /Gd · cm_ExSellObjekt /O2 /Gd /Ow · gm_AllocSpieler /O2 /Gd /Oa /Ow ·
+  ProcessSendData /O2 /Gd /Ow · m_AllocTracked /O2 /Gd /G6 /Oy- · dllmain /O1 /Oy- /Gd ·
+  initterm /O1 /Gd · mlock /O1 /Oy- /Gd · sbh_pool /O1 /Gd   -- all agree
+  ls_LoadBuildingEntityState /O2 /Gd + sp5-pp pin                -- metadata has no cflags
+  link_stubs.c, vfs_ReadData.c                                   -- no FUNCTION marker (first-va table)
+  ```
+  **No semantic disagreement anywhere.** The build and the metadata agree on every file that has
+  both, which is a better result than round 43 implied.
+- **Corrected round 43's own error, which is the round's real product.** That round reported
+  `ls_LoadBuildingEntityState` compiles with `/O2 /Gd /Oa /Ow /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`.
+  It does not: the build line is **`/O2 /Gd /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`** — the toolchain pin
+  only, **no `/Oa /Ow`**. My extraction regex matched a flag tail from a neighbouring compile line.
+  The *mechanism* round 43 found survives (a CMake pin the metadata lacks, and a `--cflags` write
+  that produces C1001), but the flag pair does not belong to that file, and anyone acting on the
+  claim "the `/Oa /Ow` is already applied" would have been misled.
+- **`measure-traps.md` §6e corrected in place** with the misreading noted, so the section's
+  evidence is not carried forward wrong.
+- **Interesting side fact, not yet acted on:** `ls_LoadBuildingEntityState` is one of the three
+  files pinned to **sp5-pp**, and round 163's table shows `/Oa` helping it (713 vs 125). Since the
+  file is *not* built with `/Oa`, but its metadata has no `cflags` either, the CMake pin is the
+  only per-file option in play. Whether adding `/Oa` through the CMake route (not the metadata
+  route that crashed) is worth trying is a real open question — the crash in round 43 was on the
+  metadata path, and the CMake path is the one that compiles.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-877: chased a documented flag lead. Found the real flags already in effect, and that persisting them as metadata crashes the compiler.**
 
 - **Followed the one flag lead the docs mark as live.** TODO round-163's table says

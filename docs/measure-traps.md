@@ -243,6 +243,12 @@ have shown that costs one command. **Run it before choosing a function, not afte
 
 ## 6e. `cflags` in the metadata can crash the compiler on a CMake-flag-pinned file (round 877)
 
+**Correction (round 878): the flags in this entry were misread.** `ls_LoadBuildingEntityState`
+(`0x100128f0`) compiles with **`/O2 /Gd /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`** — the sp5-pp toolchain
+pin only, **no `/Oa /Ow`**. Round 877 read a neighbouring file's flag tail. The mechanism this
+section describes still holds (a CMake pin the metadata does not carry, and a `--cflags` write that
+breaks the compile), but the specific flag pair does not belong to this file.
+
 `os_LoadBuildingEntityState` (`0x100128f0`) compiles in the real build with
 `/O2 /Gd /Oa /Ow /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`, set by `CMakeLists.txt` — it is one of the
 three sp5-pp-pinned files. Its metadata carried **no `cflags` field**, and the docs record
