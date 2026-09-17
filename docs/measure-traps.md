@@ -316,6 +316,22 @@ before comparing two figures.
   automatically and can be many rounds stale.** A `+1` in that table is meaningless until the
   baseline is refreshed; `bash scripts/linktest.sh --new-base <file.c>` rewrites it (and prints no
   delta). Cross-check by reverting the edit and confirming the baseline reproduces.
+- **`rebrew verify --data` prints a `UserWarning` per `DATA` marker whose VA has no `name` in
+  `src/rebrew-data.toml`, and the marker is then dropped from the inventory as `unknown`.** The
+  warning text — "has no declaration on the following line and no name in the data metadata" —
+  reads like a *source* defect, but the marker can sit over a perfectly good definition; the
+  missing field is the metadata. Round 882: `vfs4.c` `0x1002944c` (`s_rb_1002944c` and four
+  siblings) and `vfs_OpenStream.c` `0x100294a4` (`s_0x_08X_length_100294a4`) both warned while
+  the definitions were present and relocating correctly. A previous `lint --fix` had written
+  **`section` only** into those two entries (TODO round 559, W016), and `scan_globals` needs
+  `name`, not `section`, to attribute the marker. Writing `name`/`type`/`size` through
+  `rebrew.data_metadata.set_data_field` (the same API `--fix` uses; run it from
+  `~/.local/share/uv/tools/rebrew/bin/python`, the repo venv lacks `zstandard`) cleared both
+  warnings and raised `verify --data` matched **83 -> 85**. A warning count here is not a
+  `.text` or `.data` measure: the gate held 8,634 / 21,836 unchanged across the edit.
+- **`rebrew verify --data` warnings go to stderr and are invisible to `--json` consumers that
+  pipe stdout only.** `2>/dev/null` drops them; the `matched` count is the only surviving signal,
+  and a silent drop lowers it rather than printing anything. Grep stderr when the count moves.
 
 ---
 

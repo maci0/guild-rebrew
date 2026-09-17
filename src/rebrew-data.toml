@@ -3,7 +3,7 @@ note = "connection counter"
 name = "g_connection_counter"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x101deaec"]
 note = "listen socket"
@@ -86,7 +86,7 @@ status = "UNCHECKED"
 name = "g_next_object_id"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10035434"]
 name = "g_citizen_count"
@@ -104,7 +104,7 @@ status = "UNCHECKED"
 name = "g_1002a0f8"
 section = ".data"
 type = "char"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100256b4"]
 name = "g_float_const_b4"
@@ -200,7 +200,7 @@ status = "UNCHECKED"
 name = "g_producer_id_table"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x1009b770"]
 name = "g_slot_array"
@@ -212,13 +212,13 @@ status = "UNCHECKED"
 section = ".data"
 name = "g_query_filter_owner"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10030b9e"]
 section = ".data"
 name = "g_query_filter_state"
 type = "unsigned char"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x1003545e"]
 section = ".data"
@@ -266,31 +266,31 @@ status = "UNCHECKED"
 section = ".data"
 name = "g_query_filter_extra2"
 type = "short"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10030b8e"]
 section = ".data"
 name = "g_query_filter_extra3"
 type = "short"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10030b84"]
 section = ".data"
 name = "g_filter_extra5"
 type = "unsigned char"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10030b88"]
 section = ".data"
 name = "g_query_filter_extra1"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10030b90"]
 section = ".data"
 name = "g_query_filter_extra4"
 type = "unsigned char"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10035444"]
 section = ".data"
@@ -362,13 +362,13 @@ status = "UNCHECKED"
 name = "g_str_10031500"
 section = ".data"
 type = "char[1]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10031538"]
 name = "g_str_10031538"
 section = ".data"
 type = "char[1]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10035a04"]
 name = "g_entity_type_bytes"
@@ -386,7 +386,7 @@ status = "UNCHECKED"
 name = "g_file_version"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x11766100"]
 name = "g_log_buffer"
@@ -404,31 +404,31 @@ status = "UNCHECKED"
 name = "g_log_level_table"
 section = ".data"
 type = "int[3]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10027084"]
 name = "g_log_format_table"
 section = ".data"
 type = "char[96]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100270e4"]
 name = "g_log_newline"
 section = ".data"
 type = "char[2]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100270e8"]
 name = "g_log_default_name"
 section = ".data"
 type = "char[13]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10034624"]
 name = "g_array_count"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10034628"]
 name = "g_stat1"
@@ -440,7 +440,7 @@ status = "VERIFIED"
 name = "g_stat2"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10034630"]
 name = "g_stat3"
@@ -464,7 +464,7 @@ status = "VERIFIED"
 name = "g_array_ptr"
 section = ".data"
 type = "void*"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x117640c4"]
 name = "g_list_head"
@@ -476,43 +476,43 @@ status = "UNCHECKED"
 name = "g_str_10028b04"
 section = ".data"
 type = "char[1]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10028aec"]
 name = "g_str_10028aec"
 section = ".data"
 type = "char[1]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10028888"]
 name = "g_str_10028888"
 section = ".data"
 type = "char[1]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10028b78"]
 name = "s_m_pool_get_free_tp_m_pool_10028b78"
 section = ".data"
 type = "char[27]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10028b60"]
 name = "s_m_pool_alloc_tp_m_pool_10028b60"
 section = ".data"
 type = "char[24]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10034678"]
 name = "g_stream_count"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10034670"]
 name = "g_stream_pool"
 section = ".data"
 type = "char"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10030b94"]
 name = "g_query_filter_max_id"
@@ -1259,43 +1259,43 @@ status = "UNCHECKED"
 name = "s__________________________________1002735c"
 type = "char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100270fc"]
 name = "s__s__s_100270fc"
 type = "char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10027358"]
 name = "g_file_write_mode"
 type = "unsigned char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100270f8"]
 name = "g_file_append_mode"
 type = "unsigned char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x1002733c"]
 name = "s_LogFile_has_been_deleted__1002733c"
 type = "char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10027314"]
 name = "g_crash_newline"
 type = "char[4]"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10027328"]
 name = "g_crash_space"
 type = "char[4]"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100252e8"]
 section = ".rdata"
@@ -1306,7 +1306,7 @@ type = "const unsigned char[]"
 ["SERVER.0x1002b600"]
 section = ".data"
 name = "g_data_restore_gap"
-status = "DRIFT"
+status = "VERIFIED"
 
 # ---- GROUP C: CRT-startup + allocator-pool globals (data_globals.c) ----
 type = "unsigned char[0x9a00]"
@@ -1414,7 +1414,7 @@ name = "g_lock_stream_table"
 type = "char"
 section = ".data"
 note = "stream lock-pointer table anchor (0x100317f8..0x10031a58, stride 0x20)"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10031aac"]
 name = "locktable"
@@ -1528,7 +1528,7 @@ name = "_FPinit"
 type = "void *"
 section = ".data"
 note = "first init fnptr"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100317f0"]
 name = "g_100317f0"
@@ -1626,7 +1626,7 @@ name = "g_rterrlist"
 type = "struct rterr_entry[18]"
 section = ".data"
 note = "_NMSG_WRITE runtime-error table (0x1001fe31)"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10035838"]
 name = "pfnMessageBoxA"
@@ -1663,13 +1663,13 @@ section = ".data"
 name = "g_plant_info_table"
 section = ".data"
 type = "unsigned char"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10030b70"]
 name = "g_entity_id_counter"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10035408"]
 name = "g_sequence_counter"
@@ -1717,13 +1717,13 @@ status = "VERIFIED"
 name = "g_game_speed_value"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x1002c3f4"]
 name = "g_game_speed_index"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100a8c94"]
 name = "g_entity_slot_table"
@@ -1777,13 +1777,13 @@ status = "UNCHECKED"
 name = "g_handler_started"
 section = ".data"
 type = "int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10034618"]
 name = "g_log_mode_flags"
 section = ".data"
 type = "unsigned int"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10034610"]
 name = "g_panic_callback"
@@ -1807,7 +1807,7 @@ status = "UNCHECKED"
 name = "g_save_header_tail"
 section = ".data"
 type = "char"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100241a0"]
 name = "g_crc_table_241a0"
@@ -1860,7 +1860,7 @@ status = "UNCHECKED"
 name = "s_ls_tmp_1002d4fc"
 type = "char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x11764088"]
 name = "g_tick_rate"
@@ -1927,6 +1927,14 @@ section = ".data"
 
 ["SERVER.0x1002944c"]
 section = ".data"
+name = "s_rb_1002944c"
+type = "char[4]"
+size = 84
+status = "VERIFIED"
 
 ["SERVER.0x100294a4"]
 section = ".data"
+name = "s_0x_08X_length_100294a4"
+type = "char[]"
+size = 48
+status = "VERIFIED"

@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-882: closed the two `verify --data` attribution warnings; matched 83 → 85, no byte moved.**
+
+- **Tried:** attribute the two `DATA` markers that `rebrew verify --data` warns about —
+  `vfs4.c` `0x1002944c`, `vfs_OpenStream.c` `0x100294a4` — and confirm the span really is covered.
+- **Found: the source was already correct; the metadata was the gap.** Both markers sat over live
+  named definitions (`s_rb_1002944c` + four siblings at `0x1002944c`; `s_0x_08X_length_100294a4` at
+  `0x100294a4`), and reference bytes at both VAs match the definitions (`rb\0\0` + gzip magic
+  `1f`/`8b` + the `vfs.c` path; the `0x%08X -> length:` format string). Round 559's `lint --fix`
+  W016 had written **`section` only** into those two `rebrew-data.toml` entries, and
+  `scan_globals` needs `name` to attribute a marker, so both landed as `unknown` and dropped out of
+  the inventory.
+- **Fix:** wrote `name`/`type`/`size` for both entries via `set_data_field` (the API `--fix`
+  itself uses; needs `~/.local/share/uv/tools/rebrew/bin/python` — the repo venv lacks
+  `zstandard`).
+- **Measured:** `verify --data` warnings **2 → 0**, matched **83 → 85**. Gate held
+  `.text` residue 8,634 and raw-link `.data` 21,836 — **no byte of output changed**, which is the
+  expected result for a pure attribution repair.
+- **Follow-on with the larger number: the 47 `data-drift` todo items were the same artifact and
+  are gone.** `rebrew todo` at round start listed **47 data-drift / 246 start-data / 2
+  improve-match**; after the metadata write it lists **0 / 244 / 2**. Byte-compared the highest-ROI
+  ones before believing it — `0x10027078`, `0x10027084`, `0x100270e4`, `0x100270e8`, `0x100270f8`,
+  `0x100270fc`, `0x10027314`, `0x10027328` are **byte-identical between `original/Server/server.dll`
+  and `build/server.dll`**, 24 bytes each. `verify --data` reports `mismatched: []`, `missing: []`.
+  An unattributed marker poisons both lists, so the drift count was never a measurement.
+- **Recorded:** measure-traps §9, two bullets (the `section`-only trap; the stderr visibility
+  trap). No rebrew change needed — the API path worked; the gap is in what `lint --fix` writes and
+  is filed as an ideas entry.
+
 **Round-881: verified the two objective clauses nothing enforced, and added the import check to the gate.**
 
 - **`gate.sh` covered lint, compile, verify and residue — but not the import table and not Wine
