@@ -1658,6 +1658,10 @@ status = "UNCHECKED"
 
 ["SERVER.0x10028bdc"]
 section = ".data"
+name = "s_Unknown_winsock_error_u_10028bdc"
+type = "char[]"
+size = 28
+status = "VERIFIED"
 
 ["SERVER.0x1002d878"]
 name = "g_plant_info_table"
@@ -1870,60 +1874,136 @@ status = "UNCHECKED"
 
 ["SERVER.0x10027104"]
 section = ".data"
+name = "g_crashdump_data_10027104"
+type = "char[]"
+size = 568
+status = "VERIFIED"
 
 ["SERVER.0x10028bf8"]
 section = ".data"
+name = "s_WSAECONNRESET_10028bf8"
+type = "char[]"
+size = 300
+status = "VERIFIED"
 
 ["SERVER.0x10028d24"]
 section = ".data"
+name = "s_WSAETIMEDOUT_10028d24"
+type = "char[]"
+size = 124
+status = "VERIFIED"
 
 ["SERVER.0x10028da0"]
 section = ".data"
+name = "s_WSAECONNABORTED_10028da0"
+type = "char[]"
+size = 156
+status = "VERIFIED"
 
 ["SERVER.0x10028e3c"]
 section = ".data"
+name = "s_WSAEINVAL_10028e3c"
+type = "char[]"
+size = 212
+status = "VERIFIED"
 
 ["SERVER.0x10028f10"]
 section = ".data"
+name = "s_WSAEMSGSIZE_10028f10"
+type = "char[]"
+size = 92
+status = "VERIFIED"
 
 ["SERVER.0x10028f6c"]
 section = ".data"
+name = "s_WSAEWOULDBLOCK_10028f6c"
+type = "char[]"
+size = 92
+status = "VERIFIED"
 
 ["SERVER.0x10028fc8"]
 section = ".data"
+name = "s_WSAESHUTDOWN_10028fc8"
+type = "char[]"
+size = 160
+status = "VERIFIED"
 
 ["SERVER.0x10029068"]
 section = ".data"
+name = "s_WSAEOPNOTSUPP_10029068"
+type = "char[]"
+size = 252
+status = "VERIFIED"
 
 ["SERVER.0x10029164"]
 section = ".data"
+name = "s_WSAENOTSOCK_10029164"
+type = "char[]"
+size = 48
+status = "VERIFIED"
 
 ["SERVER.0x10029194"]
 section = ".data"
+name = "s_WSAENETRESET_10029194"
+type = "char[]"
+size = 136
+status = "VERIFIED"
 
 ["SERVER.0x1002921c"]
 section = ".data"
+name = "s_WSAEINPROGRESS_1002921c"
+type = "char[]"
+size = 136
+status = "VERIFIED"
 
 ["SERVER.0x100292a4"]
 section = ".data"
+name = "s_WSAEINTR_100292a4"
+type = "char[]"
+size = 76
+status = "VERIFIED"
 
 ["SERVER.0x100292f0"]
 section = ".data"
+name = "s_WSAENOTCONN_100292f0"
+type = "char[]"
+size = 44
+status = "VERIFIED"
 
 ["SERVER.0x1002931c"]
 section = ".data"
+name = "s_WSAEFAULT_1002931c"
+type = "char[]"
+size = 100
+status = "VERIFIED"
 
 ["SERVER.0x10029380"]
 section = ".data"
+name = "s_WSAENETDOWN_10029380"
+type = "char[]"
+size = 48
+status = "VERIFIED"
 
 ["SERVER.0x100293b0"]
 section = ".data"
+name = "s_WSANOTINITIALISED_100293b0"
+type = "char[]"
+size = 20
+status = "VERIFIED"
 
 ["SERVER.0x100293c4"]
 section = ".data"
+name = "s_Cant_set_SO_SNDBUF_100293c4"
+type = "char[]"
+size = 32
+status = "VERIFIED"
 
 ["SERVER.0x100293e4"]
 section = ".data"
+name = "s_Cant_set_SO_RCVBUF_100293e4"
+type = "char[]"
+size = 36
+status = "VERIFIED"
 
 ["SERVER.0x1002944c"]
 section = ".data"

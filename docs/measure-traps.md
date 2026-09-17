@@ -332,6 +332,21 @@ before comparing two figures.
 - **`rebrew verify --data` warnings go to stderr and are invisible to `--json` consumers that
   pipe stdout only.** `2>/dev/null` drops them; the `matched` count is the only surviving signal,
   and a silent drop lowers it rather than printing anything. Grep stderr when the count moves.
+- **`verify --data` compares only symbols that carry a name *and* a resolvable size, and it drops
+  the rest without saying so.** `data_verify.section_symbol_bytes` skips an entry with no `name`;
+  with no `size` it falls back to `estimate_type_size(type)`, and skips again if that fails. So
+  `matched` is a count of *attributable* symbols, not of `.data` symbols, and the number is not
+  comparable between rounds where naming changed. Round 883: 20 `.data` entries had `section`
+  only, were skipped unconditionally, and all 20 turned out to be byte-identical — `matched` went
+  **85 → 105** with no output change whatsoever. Read `matched` as coverage, never as correctness;
+  a `mismatched`/`missing` list is the only verdict here.
+- **`rebrew todo`'s `start-data` lane and `verify --data` are not the same set, and the lane can
+  never empty for link-produced data.** `start-data` is every metadata entry with a blank or
+  `UNCHECKED` status (`todo.py` `_collect_start_data`). The 18 `__imp__*` IAT slots qualify and
+  always will: they are linker output, not source definitions, so no source symbol can "verify"
+  them. Their bytes were confirmed identical to the reference at `0x10024000..0x10024044` in round
+  883. Treat a `start-data` item whose VA is in `.idata` as permanently unactionable rather than
+  as pending work.
 
 ---
 

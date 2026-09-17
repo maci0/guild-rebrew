@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-883: attributed 20 unnamed `.data` symbols; `verify --data` coverage 85 → 105.**
+
+- **Tried:** close the gap between `rebrew todo`'s 244 `start-data` items and `verify --data`'s
+  85 matched. Every `start-data` item is a metadata entry with no status, and `verify --data`
+  reports on a narrower set than that, so the two counts were not measuring the same thing.
+- **Root cause found in `data_verify.py`:** `section_symbol_bytes` skips an entry when it has no
+  `name`, no `size` **and** no usable `type`, or no `size` and an unsizeable type. One hundred and
+  sixty of the 162 `.data`/`.rdata` entries carry no `size`, so they ride on the `type` fallback;
+  the 20 with **no `name` at all** were skipped unconditionally and could never be verified.
+- **Byte-compared all 20 against the reference first.** All 20 already matched, so this is a
+  coverage repair, not a bug hunt — but until they were named, nothing checked them.
+- **Named them from the source, which already declared every one.** 19 are the winsock error
+  strings in `winsock_data.c` (`s_WSAECONNRESET_10028bf8` … `s_Cant_set_SO_RCVBUF_100293e4`); the
+  twentieth is `g_crashdump_data_10027104` (568 bytes) in
+  `CrashDumpUnhandledExceptionFilter.c`. Sizes taken from the reference spans (4-byte aligned;
+  `0x10028e3c` confirmed by reading the pad tail) rather than from the source, so the size records
+  what the binary holds.
+- **Measured:** `verify --data` matched **85 → 105**, `mismatched []`, `missing []`. `rebrew todo`
+  total **246 → 226**. Re-byte-compared every `.data`/`.rdata` symbol that now carries a size: **22
+  checked, 0 mismatched** — including all 20 new ones.
+- **Gate:** pass. residue 8,634, raw-link `.data` 21,836, verify 281/283, byte-matched 264, imports
+  100 — all held. No output byte changed; the edit is metadata only.
+- **What is left, honestly:** the remaining 224 `start-data` items are 18 `__imp__*` IAT slots plus
+  `.idata`/`.bss` entries. The IAT 18 are link-produced, not source-defined, and I byte-compared
+  `0x10024000..0x10024044` between reference and build: **identical**. They cannot be "verified" by
+  naming a source symbol, so they will sit in this lane forever — a candidate for a `todo`
+  exclusion, not more naming.
+
 **Round-882: closed the two `verify --data` attribution warnings; matched 83 → 85, no byte moved.**
 
 - **Tried:** attribute the two `DATA` markers that `rebrew verify --data` warns about —
