@@ -49,6 +49,41 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-864: applied the §84 method (§84) to a carrier. One probe, inert-or-worse; one near-miss self-inflicted bug caught before commit.**
+
+- **Re-read how the biggest wins were actually found** rather than assuming the well was dry.
+  Two rounds dominate: **424** (`cm_ExSellObjekt` dest-object sink, **-173 linked**, biggest since
+  round 93) and **173** (eight functions in one batch, **-748**). Both used the same repeatable
+  procedure — **the §84 method: read the reference's whole top-level block order, diff it against
+  the source, move whole statements**. Round 173's batch also used a specific acceptance rule
+  worth restating: *probe-only subagents, keep a change only when an object metric rose **and**
+  the object's size did not change, then relink the whole composition.*
+- **Applied it to `vfs_ReadCompressed`** (492 bytes, 468 matching). Found a clean
+  same-instructions-swapped pair at index 65/66:
+  ```
+  REF  mov edi,eax ; test edi,edi
+  OURS test eax,eax ; mov edi,eax
+  ```
+  That is the clamp at `vfs_ReadCompressed.c:203`, `i = 0x4000; if (n < 0x4000) i = n; if (i == 0)`.
+  The reference homes `i` in `edi` and tests the copy; we test the original in `eax`.
+- **Probe: rewrote the clamp as `i = n; if (i > 0x4000) i = 0x4000;`** — object 497 against the
+  reference's 492, `match` 468 -> **158**. Reverted. The header already records that clamping `n`
+  in place gives the other min shape and drops the check (`shapes §85`), so this is consistent
+  with a known wall rather than a new one: the `test eax,eax`/`test edi,edi` difference is a
+  **register-home** difference (allocator naming, Finding 62's class), not a statement-order one,
+  and statement order cannot move it.
+- **Caught a self-inflicted bug.** The second probe meant to extend `i`'s live range by adding
+  `s->avail_in = i;` after the `fread` — but that line **already exists four lines below** at 219.
+  The edit would have duplicated a real store. Reverted before compiling it, and worth recording:
+  a live-range probe in a function this dense needs the surrounding block read first, not just
+  the target line.
+- **Where the method stands:** §84 is proven and repeatable, but it needs a *statement-order*
+  divergence to work on. The carriers that remain diverged at first contact in this session
+  (`srv_LoadBuf` 862, `vfs_ReadCompressed` here) both turned out to be register-home differences,
+  which §84 cannot reach.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-863: explained round 27's 196-function gap. It is library code plus switch-arm artifacts.**
 
 - **Followed round 27's own finding** — 196 discovered functions absent from the toml — and asked
