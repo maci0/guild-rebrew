@@ -49,6 +49,48 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-874: ranked the carriers by header exhaustiveness instead of by delta. Never-probed territory found; two probes on the best one, both neutral.**
+
+- **Rounds 872-873 both ended at "the header already covers it", so I tested whether that was a
+  sampling artifact.** Counted probe/revert/inert markers in each unblocked carrier's leading
+  comment block. It is: the documentation is **bimodal**.
+  ```
+  header lines:  0    0    0    0    0    0    1    2    58   124  154  185  468  545
+  carrier:      ServerMainThread, ahm_ExAllocAlchemist, cm_ExCopyEntityData, cm_ExProdObjekt,
+                cm_ExSellObjekt, ls_LoadBuildingEntityState, srv_LoadBuf, gm_ObjectsAvailble,
+                CrashDump (58), vfs_ReadCompressed (124), gm_AllocGebaeude (154),
+                gm_AllocSpieler (185), gv_ExAllocGraveyardWorker (468), cm_ProcessCommandQueue (545)
+  ```
+  **Seven carriers have zero header lines.** My last three rounds picked from the documented end
+  of that list — `gm_ObjectsAvailble` (2 lines, ~90 probes *buried in the body*),
+  `m_AllocTracked` (probes in the body). Delta size is the wrong sort key; **header length plus
+  in-body probe count is the right one**, and `ls_LoadBuildingEntityState` is the standout:
+  **2 probe-words in 316 lines**, the least-documented carrier with a large delta (645).
+- **Worked `ls_LoadBuildingEntityState` and it is the best-shaped carrier measured so far.**
+  `scripts/seqdiff.py` (sequence alignment — the sound ruler): **457 of 499 instructions aligned
+  identical, only 59 differing, candidate 5 instructions short.** Nothing else in the tree is
+  close to that ratio.
+- **Byte-level: three 1-byte diffs then a 596-byte run that resynchronizes at `+0x504`** — so the
+  3-byte size gap is a *net* effect of several local differences, not one length change. Checked the
+  shift hypothesis explicitly (nearest fit is 235/596 at shift +2, i.e. no clean shift) before
+  concluding that.
+- **Two probes, both neutral at the link (`8634 -> 8634`), both reverted.**
+  - Index 33 is `lea esi,[edx+ecx]` where we emit `lea esi,[ecx+edx]` — same 3 bytes, operand order
+    only. Source is `esi = (char*)(offset + g_entity_ptr)` at line 87; swapping to
+    `(g_entity_ptr + offset)` is **byte-identical** at obj 1460 / match 818 and `+0` at the link.
+    A commuted `lea` is not a spelling lever.
+  - The concrete defect is a **missing store**: `seqdiff` shows `T[416] mov DWORD [eax],ecx` absent
+    from ours, in a read-modify-write the reference does as `mov ecx,[eax]; or ecx,1; mov [eax],ecx`
+    where we emit `xor eax,eax; mov [esi+0x99],1`. Source at lines 281-285,
+    `state_ptr[0] = 0; ...; state_ptr[0] |= 1;`. Reordering the zeroing so `state_ptr[0]` lands
+    after `[1..3]` is **inert** (obj 1460, match 818, link `+0`).
+- **Next, with the shape now known:** the remaining divergence is 17 replaces, 8 inserts and 5
+  deletes. The largest single group is `T[461:472]` — 12 reference instructions we emit elsewhere
+  in the function — which is a **block-order** divergence, not a register one, and therefore the
+  §84 lever. That is where the next probe should go, not at the store.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-873: worked `gm_ObjectsAvailble` (25 residue bytes, unblocked). Documented closed after ~90 probes; my read of the residual was already in the header.**
 
 - **Picked it as round 38 directed** — an unblocked carrier with a small delta (28 by `verify`,
