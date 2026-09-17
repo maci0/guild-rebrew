@@ -194,6 +194,29 @@ flips the branch sense (`jne` to `je`):
 
 `src/server.dll/DieGildeAddOn/game/friedhof_logic_c/AssignProductionSlot.c:56`
 
+**The merge needs *every* fail path to share the exit — mixing `return` with `goto`
+un-merges it (round 844, isolated probe).** Section 7 above gives the short-circuit
+spelling for the two-guard case. The general rule, measured on a minimal function
+compiled by this toolchain with `/O2 /Gd` and disassembled:
+
+| source | epilogues emitted |
+|---|---|
+| `if (a==0) return -1;` … `if (g()==0) goto fail;` … `fail: return -1;` | **two** (`or eax,-1; ret` twice) |
+| `if (a==0) goto fail;` … `if (g()==0) goto fail;` … `fail: return -1;` | **one** (shared at the fail label) |
+
+So a `goto` to a trailing label *does* produce the shared exit — it is not the goto
+that fails, it is leaving **one** of the fail paths as a direct `return`. Converting
+every fail path in the function to the same `goto`, or collapsing them into one
+short-circuit condition per §7, is what merges. This matters for
+`gv_ExAllocGraveyardWorker`, whose header records the opposite conclusion for the
+mixed form (`if (!slot) goto fail_ffff;` "collapses the epilogue pair", 246) — that
+measurement is consistent with this rule rather than in conflict with it, because the
+file's non-`goto` fail paths remained direct returns.
+
+Probe recipe, since this is cheap to re-check: compile a four-line function with the
+`cl` wrapper in the msvc6 image and `objdump -d` it — the epilogue count is visible
+without touching the tree.
+
 ## 8. Loop shape: `for(;;)` with early return vs `do/while` with a tail return
 
 The exit structure decides branch layout and total size. A `for(;;)` with

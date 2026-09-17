@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-844: built an isolated compiler testbed; isolated the epilogue-merge rule that `gv_ExAllocGraveyardWorker` has been fighting.**
+
+- **New instrument, worth keeping.** `.scratch/epi/` holds a four-line C file compiled
+  through the msvc6 image (`docker run --entrypoint bash rebrew/msvc:6.0-sp6-win32`,
+  `INCLUDE`/`LIB` under `Z:\opt\msvc6.0-sp6\VC98\`) and disassembled with `objdump -d`.
+  Compiler-behaviour questions now cost one command instead of a probe inside a
+  1,000-byte function, where every change also moves the frame and the schedule.
+- **Probed the `gv_ExAllocGraveyardWorker` epilogue wall.** Two probes on the cursor
+  loops (`char*` advanced in place; a split live range over the same walk) were
+  **byte-identical at 1040 / match 615** — and the region was wrong anyway: the first
+  substantive divergence is at index 145, `pop edi/pop esi/pop ebp` before
+  `mov eax,0xffff` where ours hoists the constant to the block top. The file header
+  already names this exactly ("the mechanism to beat"), so those probes re-derived
+  known ground.
+- **Isolated the mechanism instead, and it produced a real rule.** Section 7 of
+  `msvc6-c-shapes.md` documents the short-circuit spelling for the two-guard case. What
+  was missing is *when* a `goto` merges at all:
+  ```
+  if (a==0) return -1;  ... if (g()==0) goto fail; ... fail: return -1;   -> TWO epilogues
+  if (a==0) goto fail;  ... if (g()==0) goto fail; ... fail: return -1;   -> ONE shared
+  ```
+  So the goto is not what fails — it is leaving **one** fail path as a direct `return`.
+  Every fail path must share the exit. Added to shapes §7.
+- **This reconciles a recorded contradiction rather than adding one.** The gv header
+  records `if (!slot) goto fail_ffff;` as collapsing the epilogue pair (246). Under this
+  rule that is exactly right: the file's *other* fail paths were still direct returns, so
+  converting one made the mix worse, not better. Recorded in the same shapes entry.
+- **Not yet a byte win.** The rule is a fact about the compiler, and applying it to gv
+  means converting all its fail paths at once — a real edit with a real regression risk,
+  not a probe. Left for a round with budget to measure it properly at the link.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0.
+
 **Round-843: swept `#pragma optimize` on the largest carrier (inert, with a working control); wrote up the measured floor as `codegen-walls.md` §8.**
 
 - **Closed one axis that had no record on the biggest function.** `gm_AllocSpieler`
