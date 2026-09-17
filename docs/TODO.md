@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-843: swept `#pragma optimize` on the largest carrier (inert, with a working control); wrote up the measured floor as `codegen-walls.md` §8.**
+
+- **Closed one axis that had no record on the biggest function.** `gm_AllocSpieler`
+  (2,824 bytes, 33% of the residue) carried **no `#pragma optimize` entry anywhere** —
+  the class was documented on CrashDump, `srv_LoadBuf`, `server4` and others, but never
+  here. Swept seven forms around the function: `a,on` `a,off` `y,off` `g,off` `t,off`
+  `w,off` `p,off`. **All seven byte-identical: obj 3689, match 1004/3689.**
+  - **Control, because inertness and a broken probe look alike:**
+    `#pragma optimize("", off)` gives **obj 6668, match 184/6668**. The pragma is honoured
+    and the instrument can see it change, so the seven are genuinely inert.
+  - Reverted; baseline re-confirmed at 3689/1004.
+- **Verified the objective's section claim end-to-end on the shipped file:**
+  `original/Server/server.dll` vs `build/server.dll`, both 286,720 bytes, **8,634 differing
+  bytes and every one inside `.text`** — 0 differing outside. So `.data`, `.rdata`,
+  `.reloc`, the import layer and all PE metadata are byte-identical in the deliverable.
+- **Wrote `docs/codegen-walls.md` §8: the measured floor of this constraint set.** Records
+  the floor (8,634 bytes, 18 functions), the residue's shape (610 runs, median 5, 254
+  singletons, top 2 carrying 51%), and an axis table with the verdict and evidence pointer
+  for each: spelling, statement order, flags, `#pragma optimize`, service pack, compiler
+  build, size gaps, and the `.text` post-pass. Also **struck the three stale entries in
+  §7** ("what would actually move the needle") that rounds 833-842 closed — items 2, 3 and
+  4 were still reading as live leads, which is precisely how a closed axis gets re-probed.
+  The reason this matters: §7's item 2 is what cost rounds 837-842 to re-close.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-842: re-swept the sp5-pp axis over all 16 unpinned rows. No fourth pin; and `rebrew verify` measures a different compile than the link ships.**
 
 - **Did the sweep, did not trust round 503's "axis closed".** Round 503 itself was a
