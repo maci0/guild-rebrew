@@ -2494,6 +2494,21 @@ mechanism with the same effect -- an extra local that extends a live range, a
 that changes which block is created first (section 59).  Those are C, and their effect on
 the scheduler is explainable.
 
+**The "extra local extends a live range" mechanism measured inert on the barrier's exact
+site (round 839).** A named `char* item_base` holding the table address before the
+multiply, so the base load and `comp & 0x7fff` evaluate as separate statements:
+
+```c
+item_base = (char*) g_item_def_table;
+comp_rec = item_base + (comp & 0x7fff) * 0x41;
+```
+
+is **byte-identical to HEAD** -- COMDAT 1078 (reference 1088), `matched` 753, no change on
+either ruler.  The live-range extension it was meant to create does not happen, so
+`mov ebx,[g_item_def_table]` stays where it was.  The remaining -10 is the barrier's
+rel8->rel32 flip and is not reachable by naming.  Recorded so the suggestion is not read
+as untried on this body: it is tried, and it is inert here.
+
 `src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocGebaeude.c`
 
 ## 70. operand order in a commutative address expression is inert; only the *nesting* steers

@@ -49,6 +49,65 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-839: worked the size-gap list to the end. All five gaps are documented walls. No source change.**
+
+- **Took round 837's `Next`** — the five size-mismatched carriers, on round
+  163's frame that a size fix is what unlocks shape/flag wins. Current gaps,
+  re-measured with `rebrew test --no-promote`:
+  ```
+  vfs_OpenStream            obj  701  ref  667   +34
+  gm_AllocGebaeude          obj 1078  ref 1088   -10
+  cm_ExCopyEntityData       obj  905  ref  912    -7
+  ls_LoadBuildingEntityState obj 1460 ref 1463    -3
+  cm_ExSellObjekt           obj 2056  ref 2057    -1
+  ```
+- **`vfs_OpenStream` +34: the byte is not separable from the shift.** `msvc6-c-shapes.md`
+  §89 locates it exactly — at `0x10009056` the reference emits
+  `cmp byte ptr [eax],0` (3 bytes) and we emit `mov al,[eax]; test al,al`
+  (4). Reading `*p` in the switch recovers the byte and makes the loop and jump
+  table byte-exact, but shifts every following block: **match 450 -> 272**.
+  Three loop spellings that keep the hoist all reproduce the wide test, and a
+  `do/while` with the `*p` entry guard gives the narrow test at the same 272.
+  450/701 is recorded as "the maximum for the aligned-body family". Closed.
+- **`gm_AllocGebaeude` -10: the gap is the `__asm` nop barrier, and it is
+  off-limits.** §69: inserting `__asm { nop nop nop }` between
+  `idx = comp & 0x7fff;` and the `g_item_def_table` address expression made
+  msvc6 move `mov ebx,[g_item_def_table]` across the surrounding instructions,
+  flipping the loop's `je` from rel8 to rel32 and realigning a 129-byte body
+  onto the reference's offsets — `matched` 683 -> 830, and it is what takes the
+  COMDAT from 1072/1078 to the reference's **1088**. The constraint forbids it:
+  it manufactures a schedule no C spelling produces. **Re-probed the two
+  legitimate mechanisms §69 names** — a named `char* item_base` holding the
+  table address before the multiply (**byte-identical: 1078, match 753**), and
+  the doc's own conclusion holds. The remaining lever is a source mechanism
+  with the same scheduler effect, and both named ones are now measured inert on
+  this body.
+- **`cm_ExSellObjekt` -1** was closed in round 838 (zero-block order is coupled
+  to slot assignment).
+- **Pattern, and why this is the end of the axis:** all three probed gaps resolve
+  to the same thing — a 1-4 byte scheduling/lowering difference whose *position*
+  is load-bearing, so recovering the bytes costs far more matched bytes than it
+  gains. §89's "5 bytes recovered for ~178 lost" and §69's "4 bytes worth 327
+  matched bytes" are the same finding from opposite directions. The size-gap
+  list is not a list of closable gaps; it is the residue, expressed as size.
+- **Cross-check that nothing has rotted:** `rebrew verify --full` 281/283, 264
+  byte-matched, lint 188/0/0, residue 8,634, raw-link `.data` 21,836 — all at
+  baseline before and after.
+- **Gate:** no edit.
+
+**Standing conclusion for the next session (all three options now measured):**
+the 8,634 remaining bytes are split across 18 functions, every one of which is
+either a documented wall (`codegen-walls.md`, numbered sections in
+`msvc6-c-shapes.md`) or a size/lowering gap whose recovery is net-negative at
+the link. The two levers that would move it are both outside the C-only
+constraint: a scheduling barrier (`__asm`, §69) and a backend
+cross-jump/instruction-selection control (the `cm_ExCopyEntityData` epilogue
+finding, 2 epilogues vs the reference's 3). Flag sweeps are flat on 12 axes,
+SP6 is the confirmed compiler, and the SP5/SP5++ axis has 3 landed pins out of
+18 rows enumerated. **Do not re-open these by spelling.** If the number is to
+move, it needs a *post-pass* over the linked `.text` — which is a change to the
+deliverable pipeline, not to the source, and needs an explicit decision.
+
 **Round-838: probed `cm_ExSellObjekt`'s zero-block order. Inert, and the coupling is now characterised.**
 
 - **What was tried:** round 837 left `cm_ExSellObjekt` (-1 size gap, the cheapest
