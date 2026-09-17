@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-872: applied the budget check to all 19 carriers. 16 are in budget, 3 are blocked — and my last three rounds worked a blocked one.**
+
+- **Ran round 37's pre-check across the whole carrier list** rather than reaching for a function:
+  ```
+  blocked (LONG file)          within budget
+  vfs_OpenStream     by  32    gm_AllocSpieler, CrashDump, cm_ExSellObjekt, ls_LoadBuildingEntityState,
+  spiel_dumpD        by  16    gv_ExAllocGraveyardWorker, cm_ExCopyEntityData, ServerMainThread,
+  spiel622           by 112    gm_AllocGebaeude, ahm_ExAllocAlchemist, m_AllocTracked, srv_LoadBuf,
+                               gm_ObjectsAvailble, vfs_ReadCompressed, cm_ExProdObjekt,
+                               cm_ProcessCommandQueue        (15)
+  ```
+- **This is a prioritisation error of mine, and worth recording as one.** Rounds 868, 869 and 870
+  all worked `gm_FindNextFilteredEntity` in `spiel_dumpD.c` — one of the **three blocked** files,
+  where no size increase can land at all. Sixteen carriers were available the whole time. The
+  check that reveals this costs one `grep`; I ran it three rounds late.
+- **Worked an unblocked carrier and it is documented closed.** `m_AllocTracked` (delta 92, in
+  budget): the two statement-order divergences at the head are `push esi` moving across
+  `cmp eax,ebx`, i.e. a register-live-range difference. The file header has already attacked
+  exactly that — *"the `zero` register was re-attacked from the value side rather than the
+  live-range side, all inert at 233"*, listing the seven guard spellings and three initialiser
+  placements tried — and names the real blocker: **"`node` staying live across the malloc, not
+  how the zeros are spelled."** No probe run.
+- **Added the carrier split to `measure-traps.md` §6d** with the explicit instruction to run the
+  check *before* choosing a function. The next round can pick from 15 unblocked carriers, several
+  of which (`srv_LoadBuf` 49, `gm_ObjectsAvailble` 28, `vfs_ReadCompressed` 24) have small,
+  localised deltas.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-871: corrected round 36's overage figure — 816 bytes real, not 6,671. Three of the 28 LONG lines are a reporting artifact.**
 
 - **Checked where the 6,671 bytes actually sat, and found the headline was inflated.**

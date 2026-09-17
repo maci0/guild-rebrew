@@ -225,6 +225,22 @@ file in the pad report (`grep '<file>.obj' .scratch/gate-link.log`). A `LONG` li
 cannot absorb a size change at all and the only adoptable edits are ones that *shrink* it by at
 least the stated overage. A file with no line either is within budget or was padded.
 
+**Applied to the 19 carriers (round 872): 16 are in files WITHIN budget and only 3 are blocked.**
+
+```
+blocked (LONG file)                 within budget
+vfs_OpenStream        by  32        gm_AllocSpieler, CrashDump, cm_ExSellObjekt,
+spiel_dumpD           by  16        ls_LoadBuildingEntityState, gv_ExAllocGraveyardWorker,
+spiel622              by 112        cm_ExCopyEntityData, ServerMainThread, gm_AllocGebaeude,
+                                    ahm_ExAllocAlchemist, m_AllocTracked, srv_LoadBuf,
+                                    gm_ObjectsAvailble, vfs_ReadCompressed, cm_ExProdObjekt,
+                                    cm_ProcessCommandQueue          (15 total)
+```
+
+Rounds 868-870 were spent on `gm_FindNextFilteredEntity`, which is in `spiel_dumpD` — one of the
+**three blocked** files. The right move was to work an unblocked carrier, and the check that would
+have shown that costs one command. **Run it before choosing a function, not after a failed probe.**
+
 ## 7. The size rule has two branches, and mixing them discards good work
 
 `cl` pads each COMDAT to 16 bytes, so for an object with **no** relocated data after its code
