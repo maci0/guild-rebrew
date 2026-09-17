@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-861: the carrier list is 19 functions, not 18 — the difference is untracked functions.**
+
+- **Validated the residue instrument first, by hand.** `original/Server/server.dll` against
+  `build/server.dll`: **8,634 differing bytes, all inside `.text`, 0 outside**, both files
+  286,720 bytes. The number is real and the instrument is sound.
+- **Then audited the *attribution*, which had never been checked.** Attributing residue by the
+  sizes recorded in `rebrew-functions.toml` left **54 bytes belonging to no function**, plus
+  44,292 bytes of `.text` outside every entry. Cause: the toml lists **366** entries but
+  `function_structure.json` discovers **543** — 196 functions and ~39,653 bytes are untracked,
+  and the toml sizes truncate functions that are actually longer.
+  ```
+  0x100092bc      5 bytes   jump table after vfs_OpenStream (shapes §89 already documents this)
+  0x1000a490    224 bytes  fcn.1000a490  -- UNTRACKED, and 224/224 bytes already matching
+  0x1000a570    752 bytes  fcn.1000a570  -- UNTRACKED, 703/752 matching (93%), 49 residue bytes
+  ```
+- **Re-attributed against the complete inventory: 8,634 of 8,634 bytes, across exactly 19
+  functions, no gaps.** This confirms `rebrew verify`'s own carrier count of **19** (its deltas
+  sum to 8,158, which is a positional metric and not a byte count — the two are different
+  rulers, both now consistent in *count*).
+- **Correction to my own earlier analysis.** Rounds 17/835 reported "18 carriers" from the toml
+  sizes. That list was one function short and 54 bytes incomplete. The four functions that were
+  missing or truncated are all untracked-but-matching, which is why the error was invisible:
+  they contribute residue without contributing a failing `verify` row.
+- **What it changes:** nothing about the residue total or the walls, but the work list was wrong
+  by one function, and two untracked functions (`0x1000a490` at 100%, `0x1000a570` at 93%) are
+  better candidates than several rows I have been treating as primary. Also worth noting for
+  tooling: a 196-function gap between the discovered inventory and the tracked metadata is
+  large enough to matter for any by-size attribution.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-860: audited metadata against bytes, produced a false alarm, and recorded the instrument error.**
 
 - **Went looking for the reverse of round 859's staleness** — metadata claiming `RELOC`/`EXACT`
