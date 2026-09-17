@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-841: probed `gm_AllocSpieler`'s FPU-spill loop. Both landings worse; reverted.**
+
+- **Target:** the single longest residue run (189 bytes at `0x10018be0`), inside the
+  largest carrier. Root cause read off the bytes:
+  ```
+  REF  mov ecx,[ebp+0x14] / mov [esp+0x28],ecx / ... fld [esp+0x28] / fdiv st(1)
+  BLD  fld [ebp+0x14] / ... / fdiv st(1)
+  ```
+  The reference **spills `slot+0x14` to `[esp+0x28]` and reloads it inside the loop**;
+  we keep it resident in the FPU stack. Source is the two-read expression at
+  `gm_AllocSpieler.c:413-414`:
+  ```c
+  acc = acc - *(float*)(slot + 0x14) + *(float*)(slot + 0x14) / acc;
+  ```
+  msvc6 CSEs the two loads into one x87 register; the reference kept the memory operand.
+- **Probes (both reverted):**
+  - `volatile` on **both** reads: obj 3689 -> **3691**, `match` 1004 -> **570**.
+  - `volatile` on the **first** read only: obj -> **3683**, `match` -> **553**.
+  Both collapse. Same direction as `codegen-walls.md` §3's warning that the `volatile`
+  direction is easy to invert and that on this function sweeping the qualifier in is
+  worse at every site count tried (736 -> 488/408/365 at 1/8/17 sites).
+- **Reverted** to obj 3689 (= reference), `match` 1004. The file's own note that sinking
+  `acc` into the loop scores 366/3689 predicts this family is closed; now measured on the
+  exact body rather than inferred.
+- **Gate:** no edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0.
+
 **Round-840: characterised the residue's shape. My own frame-cascade reading was wrong; measured, not asserted.**
 
 - **Corrected a claim from round 839.** I wrote that the remaining gap "needs a post-pass
