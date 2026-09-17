@@ -4,30 +4,32 @@
 #include "../../game_common.h"
 #include "../../game_structs.h"
 
-/* Slot Management */
-extern int __cdecl ahm_AllocateEntitySlot(void);
-extern void __cdecl gm_InitEntitySlots(void);
-extern int __cdecl gv_CheckSlotActive(int slot_id);
+/* Shared entity/slot globals — majority types across TUs (Round-558). */
+extern unsigned short* g_entity_table_end; /* 0x1003546c */
+extern unsigned char g_slot_table[];
+extern char g_entity_state_base[];
+extern unsigned char g_entity_type_bytes[];
+
+// SIZE 0x21c — 768 entries at g_slot_table (0x100358a0). Pads match types.h.
+typedef struct EntityStruct {
+	unsigned short word0; /* +0x00 entity_index */
+	unsigned char byte2;  /* +0x02 entity_state */
+	unsigned char pad3;
+	int id;     /* +0x04 entity_id */
+	char byte8; /* +0x08 health */
+	char pad9[0x28 - 9];
+	unsigned short word28; /* +0x28 season_born */
+	char pad2a[0x5c - 0x2a];
+	int table5c[8]; /* +0x5C ref_table */
+	char pad7c[0x178 - 0x7c];
+	char field178; /* +0x178 linked_list_head */
+	char pad179[0x21c - 0x179];
+} EntityStruct;
 
 /* ID and Pointer Resolution */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-extern int __cdecl cm_AssignEntityId(void* entity_ptr);
-extern void* __cdecl gm_LookupEntityInTable(int id);
-
-/* Entity Lifecycle */
-extern void __cdecl ahm_InitRandomEntity(void* entity);
-extern int __cdecl gm_InitEntityIfValid(void* entity);
-extern void __cdecl gm_DeallocEntity(unsigned int index, int param_2);
-extern void __cdecl vfs_DestroyEntity(void* entity);
-
-/* Chain and Link Processing */
-extern void __cdecl gm_ProcessEntityChain(void);
-extern int __cdecl gm_WalkEntityChain(int raw_idx);
-extern void __cdecl amt_ClearEntityLinks(void* entity);
-extern void __cdecl amt_UpdateEntityLinks(void* entity);
 
 /* State Reset */
 extern int __cdecl gm_ResetAllEntities(void);
-extern void __cdecl gm_CleanupAllEntities(void);
 
 #endif /* ENTITY_H */

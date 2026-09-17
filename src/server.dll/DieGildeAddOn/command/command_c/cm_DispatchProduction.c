@@ -48,8 +48,6 @@
 
 #include "../command_internal.h"
 
-typedef unsigned int uint32_t;
-
 unsigned int __cdecl AssignProductionSlot(void*);
 unsigned int __cdecl gv_HireProductionWorker(int);
 unsigned int __cdecl gv_ExtendProductionTime(uint32_t*);

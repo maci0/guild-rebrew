@@ -4,13 +4,14 @@
 
 char* __cdecl gm_ResolveParentEntity(char*);
 
-char s_cm_ChkSellObjekt___Invalid__quel_1002c8dc[] = "cm_ChkSellObjekt() Invalid 'quell_besitzer_id'";
-char s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4[] = "cm_ChkSellObjekt() No Objekts at source";
-char s_cm_ChkSellObjekt___Not_enough_Ob_1002c884[] = "cm_ChkSellObjekt() Not enough Objekts at source";
-char s_cm_ChkSellObjekt___Invalid__ziel_1002c854[] = "cm_ChkSellObjekt() Invalid 'ziel_besitzer_id'";
+/* Round-531: ascending REF VA decl order (R521 amt_fio lever; mid-pocket after alchemistry). */
+char s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8[] = "cm_ChkSellObjekt() Not enough Credits at destination";
 char s_cm_ChkSellObjekt___Inventory_vol_1002c810[] = "cm_ChkSellObjekt() Inventory voll";
 char s_cm_ChkSellObjekt___Lager_voll_1002c834[] = "cm_ChkSellObjekt() Lager voll";
-char s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8[] = "cm_ChkSellObjekt() Not enough Credits at destination";
+char s_cm_ChkSellObjekt___Invalid__ziel_1002c854[] = "cm_ChkSellObjekt() Invalid 'ziel_besitzer_id'";
+char s_cm_ChkSellObjekt___Not_enough_Ob_1002c884[] = "cm_ChkSellObjekt() Not enough Objekts at source";
+char s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4[] = "cm_ChkSellObjekt() No Objekts at source";
+char s_cm_ChkSellObjekt___Invalid__quel_1002c8dc[] = "cm_ChkSellObjekt() Invalid 'quell_besitzer_id'";
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 
 /* Validation handler: checks preconditions for selling an object.

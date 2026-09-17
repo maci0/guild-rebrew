@@ -212,7 +212,6 @@ int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl ahm_ResetEntityState(char*);
 void __cdecl InitNewDynastyEntity(int, void*, unsigned short, void*);
-int __cdecl _ftol(void);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl LogMessageInternal(char*, int, char*, int);
 

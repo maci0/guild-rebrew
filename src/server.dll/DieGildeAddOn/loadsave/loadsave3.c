@@ -7,34 +7,14 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-int __cdecl gv_AllocGraveyardField(int);
-extern void amt_FindEntity26(int);
-extern void amt_FindEntity27(int);
-extern char gm_RandomMod(int);
-extern unsigned char _ftol();
-extern void gm_AddObjekt(int, int, int);
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-extern int g_file_version;
-int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 extern int g_file_version; /* 0x1002d4ec */
-extern int g_aux_entity_count; /* 0x101de454 */
-extern int g_aux_entity_buffer; /* 0x101de55c */
 extern unsigned int gm_LookupEntityRecordById(unsigned int);
 extern int gm_ResolveEntityById(void**, void**, void**, int);
 extern void gm_EntitySetField(void);
-extern int g_save_info[2];
-extern int vfs_OpenStream(char*, char*, int);
 /* Defined in loadsave2.c; same literals, same VAs. */
 extern char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[];
 extern char s_D__Develop_DieGildeAddOn_loadsav_1002d550[];
 extern char s_ls_ID2Ptr____Houston__wir_haben_e_1002d520[];
-int ls_LoadSavegameHeader(int, char*);
-int ls_LoadExistingEntities(int);
-unsigned int ls_LoadBuildingEntityState(unsigned int);
-int ls_LoadDynamicEntities(void*);
-int ls_LoadEntities(int);
-int ls_LoadTownData(int);
-extern int amt_fio_LoadAemter(int, int);
 extern unsigned int ls_ID2Ptr(void);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 
@@ -158,10 +138,8 @@ unsigned int ls_ID2Ptr(void)
 }
 
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
-extern int g_stream_pool; /* 0x10034670 */
+extern char g_stream_pool[1]; /* 0x10034670 */
 extern int g_stream_count; /* 0x10034678 */
-/* Canonical definition lives in DieGildeAddOn/game/spiel.c. */
-extern int g_next_object_id;
 char g_filter_extra5[1] = {
     0xff,
 };

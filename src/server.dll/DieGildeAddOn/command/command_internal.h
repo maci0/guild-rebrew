@@ -12,8 +12,10 @@
  * gm_AllocObjekt, gm_StartEntityQuery, etc.) must remain declared locally.
  *
  * NOTE: game_structs.h provides PlayerSlot with data at offset 8.
- * Files that define local player_slot/TradePlayerSlot structs with custom
- * field layouts (e.g. data at 0x264200) must keep those local definitions.
+ * command/player_slot.h provides player_slot with data at 0x264204
+ * (shared by cm_ExAllocRaum.c / cm_ExCreateGeb.c). Files with other
+ * layouts (e.g. cm_ExSetSyncFlags.c, flags at offset 0) must keep
+ * those local definitions.
  */
 
 /* Entity resolution and lookup */
@@ -47,9 +49,7 @@ extern char* __cdecl gm_FindSlotById(unsigned int, unsigned int);
 extern int __cdecl gm_SubObjekt(void*, unsigned int, int);
 extern int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 extern void __cdecl gm_RemoveEntityLink(int);
-extern void __cdecl gm_DeallocEntity(unsigned int, int);
 extern int __cdecl gm_CheckInventoryCapacity(char*, unsigned int, int);
-extern int __cdecl gm_KannObjektHergestellt(char*, unsigned int, int);
 extern int __cdecl gm_GetMsgField(int, int);
 extern short* __cdecl gm_GetEntityTableEntry(char*);
 extern void* __cdecl gm_FindRecordById(int);
@@ -65,7 +65,6 @@ extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
 
 
 /* Entity query and search (correct signatures from spiel.c definitions) */
-extern unsigned short* __cdecl gm_StartEntityQuery(int, int, int, ...);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern char* __cdecl gm_AllocObjekt(int, int, int);
 extern int __cdecl gm_RemoveObjectByType(void**, unsigned int);

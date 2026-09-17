@@ -2,6 +2,7 @@
  * settings, installs the crash-dump filter, resolves the log file
  * directory, and installs per-level log file handles. */
 
+extern unsigned char g_file_write_mode[3];
 // FUNCTION: SERVER 0x10003320
 // InitializeLogAndErrorHandler
 // SIZE: 404
@@ -53,7 +54,7 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 				fseek(file, 0, 2);
 				if (ftell(file) > 0x10000) {
 					fclose(file);
-					file = fopen(buf, "wt");
+					file = fopen(buf, (const char*) g_file_write_mode);
 					fputs((char*) 0x1002733c, file);
 				}
 				fclose(file);

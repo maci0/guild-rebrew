@@ -2,14 +2,10 @@
 #include "../../Units/m_alloc/m_alloc.h"
 
 #include <string.h>
-int __cdecl _ftol(void);
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
-extern char* g_table;
-int __cdecl gm_ResolveEntityById(void** dynamic, int zero1, int zero2, int id);
 int __cdecl gm_RandomMod(int range);
-float __cdecl gm_RandomFloat01(void);
 void __cdecl gm_AddObjekt(int p1, int p2, int p3);
 int __cdecl gm_ObjectsAvailble(int season);
 int __cdecl gm_LookupEntityRecordById(int);
@@ -23,7 +19,6 @@ extern float g_const_1_0;
 extern double g_dbl_const_6d0; /* 0x100256d0 */
 extern int g_alchemy_entity_table[];
 int* __cdecl ahm_LookupEntityInTable(int);
-extern dispatch_fn g_chain_handler_table[];
 
 // SIZE 0x8
 typedef struct {
@@ -254,6 +249,11 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 
 // DATA: SERVER 0x1002a0f8
 char s_ahm_AllocAhmInfo_1002a0f8[] = "ahm_AllocAhmInfo";
+/* Round-522: REF 0x1002a10c..0x1002a19c — path + ExAlloc msgs missing from BLD. */
+char s_D__Develop_DieGildeAddOn_game_al_1002a10c[] = "D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c";
+char s_ahm_ExAllocAlchemist__array_over_1002a140[] = "ahm_ExAllocAlchemist: array overflow...";
+char s_ahm_ExAllocAlchemist__wrong_type_1002a168[] = "ahm_ExAllocAlchemist: wrong type of target geb...";
+char s_ahm_ExAllocAlchemist__cant_find_1002a19c[] = "ahm_ExAllocAlchemist: cant find target geb...";
 
 // FUNCTION: SERVER 0x1000c4d0
 // SIZE: 295

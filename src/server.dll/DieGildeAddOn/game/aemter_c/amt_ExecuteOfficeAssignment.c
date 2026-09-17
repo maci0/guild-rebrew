@@ -1,21 +1,6 @@
 // FUNCTION: SERVER 0x1000b4d0
 #include "../../../Units/Error/error.h"
-
-// SIZE 0x18
-#pragma pack(push, 1)
-// SIZE 0x18
-typedef struct {
-	char type;
-	char pad0[3];
-	int entityId;
-	char role;
-	char pad1[3];
-	int count;
-	char state;
-	char pad2[3];
-	int assignmentId;
-} OfficeSlot;
-#pragma pack(pop)
+#include "../office_slot.h"
 
 extern char g_office_slots[]; /* 0x101de5a0 */
 void* __cdecl gm_LookupEntityRecordById(int);

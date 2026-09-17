@@ -7,33 +7,14 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-int __cdecl gv_AllocGraveyardField(int);
-extern void amt_FindEntity26(int);
-extern void amt_FindEntity27(int);
-extern char gm_RandomMod(int);
-extern unsigned char _ftol();
-extern void gm_AddObjekt(int, int, int);
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-extern int g_file_version;
-int __cdecl ls_LoadGraveyardData(int stream_ctx, int dest_buf);
 extern int g_file_version; /* 0x1002d4ec */
-extern int g_aux_entity_count; /* 0x101de454 */
-extern int g_aux_entity_buffer; /* 0x101de55c */
-extern unsigned int gm_LookupEntityRecordById(unsigned int);
-extern int gm_ResolveEntityById(void**, void**, void**, int);
-extern void gm_EntitySetField(void);
-extern int g_save_info[2];
-extern int vfs_OpenStream(char*, char*, int);
-char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[] = "ls_ID2Ptr(): Stadtspieler Id not found";
-char s_D__Develop_DieGildeAddOn_loadsav_1002d550[] = "D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c";
+/* Round-535: ascending REF VA decl order (R521/R531/R532/R534 mid-pocket lever). */
 char s_ls_ID2Ptr____Houston__wir_haben_e_1002d520[] = "ls_ID2Ptr(): Houston, wir haben ein Problem...";
-int ls_LoadSavegameHeader(int, char*);
+char s_D__Develop_DieGildeAddOn_loadsav_1002d550[] = "D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c";
+char s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580[] = "ls_ID2Ptr(): Stadtspieler Id not found";
 int ls_LoadExistingEntities(int);
-unsigned int ls_LoadBuildingEntityState(unsigned int);
-int ls_LoadDynamicEntities(void*);
 int ls_LoadEntities(int);
-int ls_LoadTownData(int);
-extern int amt_fio_LoadAemter(int, int);
 extern unsigned int ls_ID2Ptr(void);
 
 /* Loads graveyard-specific data from a save file. Reads
@@ -93,7 +74,6 @@ int __cdecl ls_LoadExistingEntities(int arg1)
  * state for each building entity. */
 
 extern int g_citizen_count;
-unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 #if 0 /* split to loadsave_c/ls_LoadEntities.c */
 int __cdecl ls_LoadEntities(int arg1)

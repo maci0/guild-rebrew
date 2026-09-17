@@ -5,16 +5,10 @@
 #endif
 
 #include "../command_internal.h"
+#include "../player_slot.h"
 #include "../../../Units/Error/error.h"
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-
-// SIZE 0x264264
-typedef struct player_slot {
-	char gap_0000[0x264204];
-	int data;
-	char gap_264208[0x5c];
-} player_slot;
 
 // SIZE 0x30
 typedef struct copy_12_dwords {

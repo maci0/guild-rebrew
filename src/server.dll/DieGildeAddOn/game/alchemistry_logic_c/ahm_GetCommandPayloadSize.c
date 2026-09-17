@@ -1,22 +1,4 @@
 #include <string.h>
-typedef int(__cdecl* dispatch_fn)(unsigned char*);
-
-extern float g_color_scale;
-extern double g_dbl_const_6d0; /* 0x100256d0 */
-extern dispatch_fn g_chain_handler_table[];
-
-// SIZE 0x8
-typedef struct {
-	int key;
-	int val;
-} PAIR;
-
-// SIZE 0x14
-// SIZE 0x3c
-typedef struct {
-	char hdr[0xc];
-	PAIR entries[6];
-} TGT;
 
 /* Resets an alchemy entity to its initial state by zeroing
  * out its operational fields via memset. */

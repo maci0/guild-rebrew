@@ -2,26 +2,9 @@
 #include "../../Units/Error/error.h"
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+#include "office_slot.h"
 
 void* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, int streamCtx);
-void __cdecl srv_InitBuildingTypeTable(void);
-
-/* Office slot table at 0x101de5a0, 42 entries of 0x18 bytes. */
-#pragma pack(push, 1)
-// SIZE 0x18
-typedef struct {
-	char type;         /* +0 */
-	char pad0[3];
-	int entityId;      /* +4 */
-	char role;         /* +8 */
-	char pad1[3];
-	int count;         /* +0xc */
-	char state;        /* +0x10 */
-	char pad2[3];
-	int assignmentId;  /* +0x14 */
-} OfficeSlot;
-#pragma pack(pop)
 
 extern char g_office_slots[]; /* 0x101de5a0 */
 
@@ -229,14 +212,13 @@ void __cdecl amt_UpdateEntityLinks(char* entity, int arg2)
  * holder assignments from a save file via VFS and populates
  * the runtime office tables. */
 
-char s_amt_fio_LoadAemter____Can_t_load_1002a0c8[] = "amt_fio_LoadAemter(): Can't load count";
-char s_D__Develop_DieGildeAddOn_game_ae_1002a0a0[] = "D:\\Develop\\DieGildeAddOn\\game\\aemter.c";
-char s_amt_fio_LoadAemter____count_read_1002a06c[] = "amt_fio_LoadAemter(): count read is %i, expected %i";
-char s_amt_fio_LoadAemter____Can_t_load_1002a048[] = "amt_fio_LoadAemter(): Can't load id";
-char s_amt_fio_LoadAemter____Can_t_load_1002a01c[] = "amt_fio_LoadAemter(): Can't load mplayerid";
-char s_amt_fio_LoadAemter____Can_t_load_10029ff4[] = "amt_fio_LoadAemter(): Can't load mamt";
-char s_amt_fio_LoadAemter____Can_t_load_10029fcc[] = "amt_fio_LoadAemter(): Can't load pcount";
-char s_amt_fio_LoadAemter____Can_t_load_10029fa4[] = "amt_fio_LoadAemter(): Can't load status";
 char s_amt_fio_LoadAemter____Can_t_load_10029f78[] = "amt_fio_LoadAemter(): Can't load msetter";
-extern int __cdecl sprintf(char*, const char*, ...);
+char s_amt_fio_LoadAemter____Can_t_load_10029fa4[] = "amt_fio_LoadAemter(): Can't load status";
+char s_amt_fio_LoadAemter____Can_t_load_10029fcc[] = "amt_fio_LoadAemter(): Can't load pcount";
+char s_amt_fio_LoadAemter____Can_t_load_10029ff4[] = "amt_fio_LoadAemter(): Can't load mamt";
+char s_amt_fio_LoadAemter____Can_t_load_1002a01c[] = "amt_fio_LoadAemter(): Can't load mplayerid";
+char s_amt_fio_LoadAemter____Can_t_load_1002a048[] = "amt_fio_LoadAemter(): Can't load id";
+char s_amt_fio_LoadAemter____count_read_1002a06c[] = "amt_fio_LoadAemter(): count read is %i, expected %i";
+char s_D__Develop_DieGildeAddOn_game_ae_1002a0a0[] = "D:\\Develop\\DieGildeAddOn\\game\\aemter.c";
+char s_amt_fio_LoadAemter____Can_t_load_1002a0c8[] = "amt_fio_LoadAemter(): Can't load count";
 

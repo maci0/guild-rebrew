@@ -9,7 +9,6 @@ int g_list_head;
 #include <winsock2.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-unsigned int __stdcall timeGetTime(void);
 
 /* Command layer (local externs — server.header uses different signatures) */
 int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
@@ -19,12 +18,9 @@ int __cdecl lb_ExLobbyServerCommand(unsigned int*, int);
 /* Entity lifecycle (local externs) */
 /* Network functions (local externs — signatures differ from net.h) */
 int __cdecl srv_LoadBuf(void);
-int __cdecl srv_ReceivePacketHeader(unsigned int* conn);
-typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
+#include "../server_internal.h"
 
-extern DWORD WINAPI thread_proc(LPVOID);
 int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 extern int srv_ReceivePacketHeader(unsigned int* conn);
 extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt);
 

@@ -7,38 +7,10 @@
 #include <winsock2.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-unsigned int __stdcall timeGetTime(void);
-
-/* Command layer (local externs — server.c uses different signatures) */
-int __cdecl cm_QueuePlayerCommand(unsigned int* player, unsigned char* data);
-int __cdecl cm_ClosePlayerConnection(unsigned int* player_slot);
-/* Entity lifecycle (local externs) */
-void __cdecl gm_ResetAllEntities(void);
-void __cdecl gm_CleanupAllEntities(void);
-void __cdecl gm_CleanupObjectEntities(void);
-void __cdecl gm_InitEntitySlots(void);
-/* Network functions (local externs — signatures differ from net.h) */
-int __cdecl srv_AcceptConnections(void);
-void __cdecl srv_CleanupSockets(void);
-int __cdecl ProcessSendData(void);
-int __cdecl srv_ReceivePacketHeader(unsigned int* conn);
-void __cdecl srv_LogWinsockError(int err_code);
-
-typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
+#include "server_internal.h"
 
 int __stdcall ServerMainThread(void* lpThreadParameter);
 extern int g_handler_started;
-void __cdecl srv_InitBuildingTypeTable(void);
-int __cdecl srv_Init(void);
-void __cdecl m_ShutdownAllocator();
-int __cdecl gm_Open(char*, char*);
-int __cdecl srv_CreateListenSocket(int port);
-void __cdecl m_init(int);
-int __cdecl srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt); /* 0x1000a8f0 */
-int __cdecl srv_SendPlayerData(unsigned int*);
-void __cdecl FreeCommandBuffer(unsigned int*, int);
-int ahm_GetCommandPayloadSize(unsigned char* cmd_payload);
-extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 

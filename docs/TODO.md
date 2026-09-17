@@ -49,6 +49,6170 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-520 (data pass, round 14): parked — AcceptConnections head/mid.
+Attempts A–F soft-reverted (+ A-isolation). RESIDUE 8636 / DATA 22,266 HOLD.**
+
+- **Symptom:** BLD first mismatch after LogFile window `@0x1002956c`
+  (REF `"This is Gilde talking..."`; BLD mid-file `s_No_more_Slots...`).
+- **Attempt A:** head-only named emit (Gilde + 2×`0x104` path bufs + flag)
+  ahead of existing NoMore/path/NewConn. Local: `0x1002956c..0x100297a0`
+  matched. Gate: `.data` +5, `.text` +4. Soft-reverted.
+- **Attempt B:** head + REF mid blob `g_accept_mid_100297a0[0x228]`.
+  Local: head+mid matched through NoMore. Gate: `.data` +166, `.text`
+  +180 — duplicate path/NewConn decls after mid stole Connection
+  dropped/timeout slot. Soft-reverted.
+- **Attempt C:** head+mid, drop duplicate path/NewConn, wire call sites
+  via mid offsets + emit dropped/timeout after NoMore. Compile fail:
+  mid-file macros used before declaration (MSVC6 C). Soft-reverted.
+- **Attempt D:** same cascade as C, but data+macros at *file top* (after
+  includes) so MSVC6 C sees symbols before `srv_Init`. Local: full Accept
+  `0x1002956c..0x10029a50` **0 diffs**. Gate: `.data` −29 HOLD, `.text`
+  **+180 FAIL** (call-site rewrites churned AcceptConnections/.text —
+  same class as Round-518). Soft-reverted.
+- **Attempt E:** same head+mid+tail as D, but wire via *immediate VA casts*
+  only (no mid+offset macros). Local Accept still **0 diffs**; Gate:
+  `.data` −29 HOLD, `.text` **+180 FAIL** again — text cost is not the
+  macro form; killing path/sockerr/opengame COMDATs + retargeting
+  LogMessageInternal args still grows `.text`. Soft-reverted.
+- **Attempt F:** head+mid + `#define` aliases for existing `s_D__Develop` /
+  `s_New_Connection` names — **zero call-site edits**. Local: head+mid
+  matched; post-NoMore stolen by sockerr/path COMDATs (literals still
+  emit). Gate: `.data` +305, `.text` +180. Soft-reverted.
+  **Ceiling:** matching Accept needs both (1) no call-site retarget and
+  (2) no leftover string COMDATs after NoMore — those conflict under
+  current MSVC6 emit. Park until a no-`.text`-churn COMDAT-kill exists
+  (e.g. alias literals into mid without rewriting LogMessageInternal).
+- **Why park:** same class as Round-518 — matching AcceptConnections
+  locally needs the full cascade (LoadBuf/server3/cm COMDATs + aemter
+  pad) without `.text` growth; half-cascade always displaces later
+  owners. Round-518 already proved full cascade gate-blows (+535/.data,
+  +209/.text).
+  Attempt D proved local Accept match is reachable (`0` diffs through
+  `0x10029a50`) but call-site rewrites still cost `.text` +180 — same
+  ceiling as Round-518; need a no-churn path (keep VA casts / avoid
+  retargeting LogMessageInternal args) before retrying.
+- **Next:** leave AcceptConnections parked; pick a *small* owner whose
+  COMDAT kill doesn't open a 1KB hole (e.g. single string ahead of a
+  known matched region, or BSS empty-string for `z_errmsg[2]/[9]` if
+  a named `""` can land `@0x10034620` without pad-cluster fallout —
+  see `msvc6-c-shapes.md` §157).
+- **Attempt A isolation (redux):** head-only reapplied vs baseline snapshot.
+  Gate again `.data` +5 / `.text` +4. Diff vs baseline: **2457 NEW / 2452 FIXED**
+  (net −5) — pure displacement cascade after NoMore lands early at
+  `0x100297a0`, not five editable bytes. Soft-reverted.
+- RESIDUE held 8636, DATA held 22,266 after revert.
+
+- **Also probed:** pre-Accept window `0x10027500..0x1002956c` is *only*
+  the 4B `z_errmsg[2]`/`[9]` empty-string ptrs (`0x10034620` vs
+  `0x10034f00`, Δ`0x8e0`). Same cumulative BSS lag as `msvc6-c-shapes`
+  §157 — not a one-line land. Skipped this round.
+
+
+**Round-521 (data pass, round 15): landed — amt_fio decl reorder.
+RESIDUE 8636 HOLD / DATA 22,266 → **22,254** (−12). `.text` +0.**
+
+- **Quirk (document only — DO NOT edit zlib):** pre-Accept 12B at
+  `0x1002706c..0x10027077` is `deflate.c` `static const char* my_version =
+  ZLIB_VERSION`. REF layout is **string-then-self-ptr**
+  (`"1.1.3\0\0\0"` @`0x1002706c`, ptr `0x1002706c` @`0x10027074`).
+  BLD (MSVC6 COMDAT) is **ptr-then-string** (ptr `0x10027070` @`0x1002706c`,
+  `"1.1.3"` @`0x10027070`). Same 12B content, different order. Linked zlib
+  only — not a game-source land. Same class as cumulative `z_errmsg` empty
+  BSS lag (Round-520 probe).
+- **Also skip:** AcceptConnections (Round-520 A–F parked; local match needs
+  `.text` +180).
+- **Also skip:** `z_errmsg` empty ptrs @`0x100294dc`/`0x100294f8` (BSS lag).
+- **Land:** `aemter2.c` already owned the nine `amt_fio_LoadAemter` /
+  `aemter.c`-path named strings, but decls were **reverse VA order**
+  (count → msetter). Reordered to REF ascending
+  (`10029f78` msetter … `1002a0c8` count). No call-site edits.
+- **Gate:** `.data` **−12** (22266→22254), `.text` **+0** (8636 HOLD).
+  Symbols still land early (~`0x10029754`…) — Accept hole still displaces
+  the true REF window — but the reorder alone paid −12 without `.text`
+  churn. `DATA_BASELINE` bumped to 22254.
+- **Codegen fact:** same-file named-string decl order is link order for
+  contiguous COMDATs from one `.obj`; flipping decl order is a zero-`.text`
+  `.data` lever when symbols already exist.
+- **Next:** keep Accept/zlib/`z_errmsg` parked; prefer more decl-order /
+  named-emit fixes that don't retarget LogMessageInternal.
+
+**Round-522 (data pass, round 16): landed — alchemistry named emits.
+RESIDUE 8636 → **8634** (−2) / DATA 22,254 → **21,855** (−399).**
+
+- **Decl-order saturated (soft-reverted, paid 0):** same reverse→ascending lever
+  as Round-521 `amt_fio` on three late clusters:
+  1. `cm_ChkChangeAttribute.c` (4 strings) — +0 / +0
+  2. `cm_ExMoveObjekt.c` (3 strings) — +0 / +0
+  3. `loadsave2.c` `ls_ID2Ptr` (3 strings) — +0 / +0
+  Quirk: Round-521 paid −12 only because those COMDATs overlapped a
+  partially-matched mid-`.data` pocket. Late clusters already sit as a
+  contiguous block at the wrong absolute VA — flipping internal order does
+  not create REF matches under an earlier displacement cascade.
+- **Land:** `alchemistry_logic2.c` already owned `s_ahm_AllocAhmInfo_1002a0f8`.
+  REF `0x1002a10c..0x1002a19c` path + three `ahm_ExAllocAlchemist:` msgs were
+  **missing from BLD entirely** (`ahm_ExAllocAlchemist.c` still hard-casts those
+  VAs). Emitted four named strings after the ahm tag (no call-site retarget):
+  path `1002a10c`, array-overflow `1002a140`, wrong-type `1002a168`,
+  cant-find `1002a19c`.
+- **Gate:** `.data` **−399** (22254→21855), `.text` **−2** (8636→8634). Symbols
+  still land early (~`0x100298e0`…) — Accept hole still displaces the true REF
+  window — but content presence alone paid a large cascade fix. Baselines bumped.
+- **Codegen fact:** missing-from-BLD named strings beat decl-reorder when the
+  REF window is fully wrong; emit-without-retarget is safe (`.text` held/improved).
+- **Keep:** Round-521 `aemter2.c` amt_fio ascending order.
+- **Next:** more missing-from-BLD printable REF strings outside Accept/zlib;
+  keep Accept/`my_version`/`z_errmsg` parked.
+
+**Round-523 (data pass): soft-reverted — lobby+plant missing emits FAIL.**
+
+- **Tried:** emit-without-retarget of 13 missing-from-BLD strings
+  (3 plant tags in `loadsave2.c` @`0x1002d4fc..0x1002d510` + 10 lobby
+  strings in `lb_ExPlayerHasJoined.c` @`0x1002d6f8..0x1002d848`). Same lever
+  as Round-522 alchemistry.
+- **Gate:** `.data` **+916** (21855→22771 FAIL), `.text` **+5** (8634→8639 FAIL).
+  Soft-reverted both files.
+- **Quirk:** Round-522 alchemistry paid −399 because those COMDATs landed in a
+  mid-`.data` pocket that *improved* an existing cascade. Lobby/plant tags
+  landed later (~`0x1002a364`…) and *expanded* the displacement cascade —
+  content presence alone is not enough when emit site pushes later owners.
+- **Keep:** Round-521 `aemter2.c` amt_fio ascending + Round-522 alchemistry
+  named emits; baselines RESIDUE **8634** / DATA **21855**.
+- **Next:** smaller missing-from-BLD clusters; prefer emit sites that already
+  own nearby REF-window COMDATs (like alchemistry next to `ahm_AllocAhmInfo`).
+
+**Round-524 (data pass): soft-reverted — ChkChangeBits/Cutscene defs FAIL `.text`.**
+
+- **Tried:** convert extern-only → named defs for three missing-from-BLD strings
+  next to their owners (same lever as Round-522 alchemistry):
+  1. `cm_ChkChangeBits.c`: `1002ca04` action + `1002ca54` Invalid Id
+  2. `cm_ChkCutsceneReady.c`: `1002caa8` failed...
+- **Gate:** `.data` **−94** (21855→21761 HOLD) but `.text` **+5** (8634→8639 FAIL).
+  Soft-reverted both files.
+- **Quirk:** defining previously-extern strings pulled new COMDATs that retargeted
+  LogMessageInternal imms / call sites enough to cost `.text` +5. Round-522
+  alchemistry paid because those strings were *never referenced by name* (hard VA
+  casts only) — emit-without-retarget. Here the symbols were already named in
+  comments/externs and the live body still hard-casts the VAs; turning extern→def
+  still churns `.text`. Need emit sites that do not change any `.obj` that already
+  emits code referencing those VAs, or accept `.text` cost only when net wins both.
+- **Keep:** Round-521 `aemter2.c` amt_fio ascending + Round-522 alchemistry named
+  emits; baselines RESIDUE **8634** / DATA **21855**.
+- **Next:** missing-from-BLD emits only in `.c` files that currently contribute
+  *zero* `.text` for those call sites (pure data TU), or hard-cast-only owners
+  like alchemistry_logic2.
+
+**Round-525 (data pass): soft-reverted — Attribute-TU emit still `.text` +5.**
+
+- **Tried:** emit the three Round-524 missing strings in `cm_ChkChangeAttribute.c`
+  (adjacent cluster, call-site TUs untouched) instead of `cm_ChkChangeBits.c` /
+  `cm_ChkCutsceneReady.c`.
+- **Gate:** `.data` **−93** (21855→21762 HOLD) but `.text` **+5** (8634→8639 FAIL) —
+  same cost as Round-524. Soft-reverted.
+- **Quirk:** the `.text` +5 is not “defs in the call-site TU”. Pulling those
+  COMDATs into *any* linked `.obj` (even a neighbor) still retargets enough
+  LogMessageInternal imms to cost `.text`. Round-522 alchemistry remains the
+  exception: hard-cast-only owners + emit in a TU that already owned a nearby
+  named string *without* changing call-site encoding. Ceiling: need a pure-data
+  COMDAT home that does not move existing `.text` imms, or park until Accept
+  hole shrinks.
+- **Keep:** Round-521 `aemter2.c` amt_fio ascending + Round-522 alchemistry named
+  emits; baselines RESIDUE **8634** / DATA **21855**.
+- **Parked:** AcceptConnections, zlib `0x1002706c` my_version order, `z_errmsg`
+  BSS lag, late missing-from-BLD emits that cost `.text`.
+
+**Round-526 (data pass): soft-reverted — single hard-cast emit still `.text` +1.**
+
+- **Tried:** emit-without-retarget of one hard-cast-only missing string
+  `ClientSpieler erzeugt` @`0x1002cbbc` in `cm_ExAllocClientSpieler.c`
+  (hard cast kept; R522 alchemistry pattern).
+- **Gate:** `.data` **−58** (21855→21797 HOLD) but `.text` **+1** (8634→8635 FAIL).
+  Soft-reverted.
+- **Quirk:** even a single unused named COMDAT in a hard-cast TU can cost
+  `.text` (imm/reloc churn). Round-522 alchemistry remains the working
+  exception: emit in a TU that already owned a nearby named string *and*
+  the new strings were never referenced by name. Ceiling: late missing
+  emits that touch call-site TUs are parked until Accept hole shrinks or a
+  pure-data home exists.
+- **Keep:** Round-521 `aemter2.c` amt_fio ascending + Round-522 alchemistry
+  named emits; baselines RESIDUE **8634** / DATA **21855**.
+- **Parked:** AcceptConnections, zlib `0x1002706c`, `z_errmsg` BSS lag,
+  late missing-from-BLD / extern→def emits that cost `.text`.
+
+**Round-527 (data pass): soft-reverted — neighbor-TU hard-cast emit still `.text` +1.**
+
+- **Tried:** emit `ClientSpieler erzeugt` @`0x1002cbbc` in `alchemistry_logic2.c`
+  (R522 proven data home), leaving `cm_ExAllocClientSpieler.c` hard-cast untouched.
+- **Gate:** `.data` **−67** (21855→21788 HOLD) but `.text` **+1** (8634→8635 FAIL).
+  Soft-reverted the single emit line; R522 alchemistry strings kept.
+- **Quirk:** even appending one unused named COMDAT to the R522 home still costs
+  `.text` +1. The R522 win was a batch of *already-referenced-by-hard-cast*
+  strings that filled a mid-`.data` pocket; incremental late emits after that
+  pocket are saturated under current Accept displacement.
+- **Keep:** Round-521 `aemter2.c` amt_fio ascending + Round-522 alchemistry
+  named emits; baselines RESIDUE **8634** / DATA **21855**.
+- **Parked:** AcceptConnections, zlib `0x1002706c`, `z_errmsg` BSS lag,
+  late missing-from-BLD / hard-cast emits that cost `.text` (R523–R527).
+
+**Round-528 (data pass): confirmed — Error named emits HOLD in R521/R522 stack.**
+
+- **Dirt present (uncommitted from Round-519 path):** `ErrorModule2.c` named
+  emit of REF `0x100273ac..0x10027488` (closed/Fatal/FATAL/ERROR-Handler/
+  Error!/Message:/MESSAGE/tModule/Time), plus small CrashDump/EmitCrash/
+  ErrorModule/InitializeLog touch-ups. Already in the working tree through
+  R522–R527 measures.
+- **Gate (touch+rebuild Error):** `.data` **+0** / `.text` **+0** vs
+  RESIDUE **8634** / DATA **21855**. LogFile-formats `0x10027318..0x10027500`
+  diffs=0; Error-named-window `0x100273ac..0x10027488` diffs=0. Symbols sit
+  at exact REF VAs (`s_Error_Handler_closed__100273ac` @`0x100273ac`, …).
+- **Keep with R521/R522:** `aemter2.c` amt_fio ascending + `alchemistry_logic2.c`
+  path/ExAlloc msgs + Error named emits. Baselines unchanged.
+- **Parked (R523–R527):** late missing-from-BLD / hard-cast / extern→def emits —
+  all paid `.data` but cost `.text` (+1..+5). Ceiling: Accept hole /
+  mid-`.data` displacement; next wins need a pocket like R521/R522, not
+  incremental late COMDATs.
+
+**Round-529 (data pass): soft-reverted — SellObjekt anon→named aborted (corrupt defs).**
+
+- **Tried:** convert `cm_ExSellObjekt.c` anonymous `??_C@_` string literals to
+  named VA-suffix defs (Error Round-519 lever) + retarget call sites. Nine
+  externs already named; call sites still used inline literals → mid-pocket
+  anon COMDATs.
+- **Abort:** first retarget pass replaced the *definition* string literals with
+  symbol identifiers (`char s_…[] = s_…;`) — invalid C. Soft-reverted before
+  measure.
+- **Keep:** Round-521 `aemter2.c` amt_fio ascending + Round-522 alchemistry
+  named emits + Round-528 Error named emits; baselines RESIDUE **8634** /
+  DATA **21855**.
+- **Parked:** late missing-from-BLD emits (R523–R527 `.text` +1..+5); SellObjekt
+  anon→named needs a two-step edit (defs first, then call sites) if retried.
+- **Next:** anon→named on a smaller TU, or defs-only emit without call-site
+  retarget (R522 pattern) in a mid-pocket owner.
+
+**Round-530 (data pass): soft-reverted — SellObjekt anon→named paid 0.**
+
+- **Tried:** two-step Error Round-519 lever on `cm_ExSellObjekt.c`:
+  1. replace 9 externs with named defs (real string literals, ascending REF VA)
+  2. retarget 10 call-site literals → named symbols (defs left untouched)
+- **Gate:** `.data` **+0** / `.text` **+0** vs RESIDUE **8634** / DATA **21855**.
+  Anon `??_C@_` COMDATs became named `s_cm_ExSellObjekt_*` but still land mid-pocket
+  (~`0x10029d68`…) far from REF `0x1002ccc0..0x1002cec4` — no new REF-window matches.
+  Soft-reverted.
+- **Quirk:** killing anon COMDATs without moving absolute placement does not pay when
+  the Accept-displaced cascade still owns the REF window. Same ceiling as R523–R527.
+- **Keep:** Round-521 `aemter2.c` amt_fio ascending + Round-522 alchemistry named
+  emits + Round-528 Error named emits; baselines unchanged.
+- **Parked:** late missing-from-BLD / hard-cast / anon→named emits that don't shrink
+  Accept displacement. Next wins need a mid-pocket partial-match like R521/R522.
+
+**Round-531 (data pass, round 17): landed — ChkSellObjekt ascending decl-order.
+RESIDUE **8634** (+0) / DATA 21,855 → **21,844** (−11).**
+
+- **Land:** `cm_ChkSellObjekt.c` reverse→ascending REF VA decl reorder (same lever
+  as Round-521 `amt_fio`). Seven strings `0x1002c7d8..0x1002c8dc`. BLD COMDATs
+  already sat in the mid-`.data` pocket right after Round-522 alchemistry
+  (~`0x100299a0`…) — flipping internal order paid a small cascade fix.
+- **Gate:** `.data` **−11** (21855→21844), `.text` **+0** (8634). Soft absolute
+  placement still far from REF (Δ≈`−0x2e38`), but content-order in the mid pocket
+  matched enough to shrink residual. `DATA_BASELINE` bumped.
+- **Codegen fact:** mid-pocket reverse→ascending still works when COMDATs already
+  sit next to a paid cluster (R521/R522 pattern). Late clusters without that
+  pocket stay saturated (R522 decl-order tries paid 0; R523–R530 parked).
+- **Keep:** Round-521 `aemter2.c` amt_fio ascending + Round-522 alchemistry named
+  emits + Round-528 Error named emits + Round-531 ChkSellObjekt ascending.
+- **Parked:** AcceptConnections, zlib `0x1002706c`, `z_errmsg` BSS lag, late
+  missing-from-BLD / hard-cast / anon→named emits that cost `.text` or pay 0.
+- **Next:** other mid-pocket reverse-decl owners abutting the R521–R531 COMDAT run.
+
+**Round-532 (data pass, round 18): landed — ChkChangeAttribute ascending decl-order.
+RESIDUE **8634** (+0) / DATA 21,844 → **21,843** (−1).**
+
+- **Land:** `cm_ChkChangeAttribute.c` reverse→ascending REF VA decl reorder (same
+  lever as Round-521/`amt_fio` and Round-531 `cm_ChkSellObjekt`). Four strings
+  `0x1002c90c..0x1002c9e0`. BLD COMDATs already sat in the mid-`.data` pocket
+  abutting Round-531 ChkSellObjekt (~`0x10029ad4`…). Earlier Round-525 Attribute-TU
+  emit tries failed; this pure reorder after the R531 pocket paid.
+- **Gate:** `.data` **−1** (21844→21843), `.text` **+0** (8634). Soft absolute
+  placement still far from REF (Δ≈`−0x2e38`). `DATA_BASELINE` bumped.
+- **Codegen fact:** mid-pocket reverse→ascending still works when COMDATs abut
+  a paid cluster (R521→R531→R532 run). Earlier Attribute try paid 0 before that
+  abutment existed.
+- **Keep:** Round-521 `aemter2.c` amt_fio ascending + Round-522 alchemistry named
+  emits + Round-528 Error named emits + Round-531 ChkSellObjekt ascending +
+  Round-532 ChkChangeAttribute ascending.
+- **Parked:** AcceptConnections, zlib `0x1002706c`, `z_errmsg` BSS lag, late
+  missing-from-BLD / hard-cast / anon→named emits (R523–R530).
+- **Next:** other mid-pocket reverse-decl / anon→named owners abutting the
+  R521–R532 COMDAT run (`cm_ChkSetGebBesitzer` anon path next).
+
+**Round-533 (data pass): soft-reverted — ChkSetGebBesitzer anon→named FAIL.**
+
+- **Tried:** two-step named defs + call-site retarget on `cm_ChkSetGebBesitzer.c`
+  (path `s_D__Develop_DieGildeAddOn_command_1002c748` + Invalid
+  `s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74`). Anon `??_C@_` COMDATs already
+  sat mid-pocket abutting Round-532 (~`0x10029bcc`). Real literals, no self-retarget.
+- **Gate:** `.data` **+25** / `.text` **+1** vs RESIDUE **8634** / DATA **21843**.
+  Soft-reverted. Same ceiling as Round-530 SellObjekt (anon→named mid-pocket pays
+  0 or regresses `.text`) — shared path emit also perturbs other command TUs.
+- **Keep:** Round-521 `aemter2` + Round-522 alchemistry + Round-528 Error +
+  Round-531 ChkSellObjekt ascending + Round-532 ChkChangeAttribute ascending;
+  baselines RESIDUE **8634** / DATA **21843**.
+- **Parked:** late missing-from-BLD / hard-cast / anon→named emits (R523–R530,
+  R533). Mid-pocket reverse→ascending still works (R521/R531/R532).
+- **Next:** other reverse-decl owners abutting the R531–R532 COMDAT run, not
+  anon→named of shared path strings.
+
+**Round-534 (data pass, round 19): landed — ExMoveObjekt ascending decl-order.
+RESIDUE **8634** (+0) / DATA 21,843 → **21,841** (−2).**
+
+- **Land:** `cm_ExMoveObjekt.c` reverse→ascending REF VA decl reorder (same lever
+  as Round-521/`amt_fio`, Round-531 ChkSellObjekt, Round-532 ChkChangeAttribute).
+  Three strings `0x1002cfc4..0x1002d024`. Earlier decl try paid 0 before the
+  R531–R532 mid-pocket abutment; retry after that chain paid.
+- **Gate:** `.data` **−2** (21843→21841), `.text` **+0** (8634). Soft absolute
+  placement still far from REF (Δ≈`−0x2fbc`). `DATA_BASELINE` bumped.
+- **Codegen fact:** mid-pocket reverse→ascending still works when COMDATs sit
+  in/near the Accept-displaced run after a paid cluster (R521→R531→R532→R534).
+  Anon→named mid-pocket stays parked (R530/R533 FAIL or +0).
+- **Keep:** Round-521 `aemter2` + Round-522 alchemistry + Round-528 Error +
+  Round-531 ChkSellObjekt + Round-532 ChkChangeAttribute + Round-534 ExMoveObjekt.
+- **Parked:** AcceptConnections, zlib `0x1002706c`, `z_errmsg` BSS lag, late
+  missing-from-BLD / hard-cast / anon→named emits (R523–R530, R533).
+- **Next:** `loadsave2.c` reverse-decl (BLD ~`0x1002a364`, not mid-pocket) or
+  other reverse-decl abutting the R531–R534 COMDAT run.
+
+**Round-535 (data pass, round 20): landed — loadsave2 ascending decl-order.
+RESIDUE **8634** (+0) / DATA 21,841 → **21,838** (−3).**
+
+- **Land:** `loadsave/loadsave2.c` reverse→ascending REF VA decl reorder (same lever
+  as Round-521/`amt_fio`, Round-531 ChkSellObjekt, Round-532 ChkChangeAttribute,
+  Round-534 ExMoveObjekt). Three strings `0x1002d520..0x1002d580`. Earlier decl
+  try paid 0 before the R531–R534 mid-pocket abutment; retry after that chain paid.
+- **Gate:** `.data` **−3** (21841→21838), `.text` **+0** (8634). Soft absolute
+  placement still far from REF (Δ≈`−0x31bc`). `DATA_BASELINE` bumped.
+- **Codegen fact:** mid-pocket reverse→ascending still works when COMDATs sit
+  in/near the Accept-displaced run after a paid cluster
+  (R521→R531→R532→R534→R535). Anon→named mid-pocket stays parked (R530/R533).
+- **Keep:** Round-521 `aemter2` + Round-522 alchemistry + Round-528 Error +
+  Round-531 ChkSellObjekt + Round-532 ChkChangeAttribute + Round-534 ExMoveObjekt +
+  Round-535 loadsave2.
+- **Parked:** AcceptConnections, zlib `0x1002706c`, `z_errmsg` BSS lag, late
+  missing-from-BLD / hard-cast / anon→named emits (R523–R530, R533).
+- **Next:** named reverse-decl owners remaining after the R531–R535 COMDAT run,
+  or stop — reverse-decl mid-pocket chain is largely harvested.
+
+**Round-536 (data pass, round 21): landed — ExCreateCitizen ascending decl-order.
+RESIDUE **8634** (+0) / DATA 21,838 → **21,837** (−1).**
+
+- **Land:** `cm_ExCreateCitizen.c` reverse→ascending REF VA decl reorder (same lever
+  as Round-521/`amt_fio` … Round-535 loadsave2). Two strings `0x1002d364..0x1002d394`
+  sitting mid-pocket before Round-535 loadsave2 (~`0x1002a284`). Even a 2-string
+  reverse cluster paid after the R531–R535 abutment.
+- **Gate:** `.data` **−1** (21838→21837), `.text` **+0** (8634). Soft absolute
+  placement still far from REF (Δ≈`−0x30e0`). `DATA_BASELINE` bumped.
+- **Codegen fact:** mid-pocket reverse→ascending still works for n=2 clusters when
+  COMDATs sit in the Accept-displaced run abutting a paid chain
+  (R521→R531→R532→R534→R535→R536). Anon→named mid-pocket stays parked (R530/R533).
+- **Keep:** Round-521 `aemter2` + Round-522 alchemistry + Round-528 Error +
+  Round-531 ChkSellObjekt + Round-532 ChkChangeAttribute + Round-534 ExMoveObjekt +
+  Round-535 loadsave2 + Round-536 ExCreateCitizen.
+- **Parked:** AcceptConnections, zlib `0x1002706c`, `z_errmsg` BSS lag, late
+  missing-from-BLD / hard-cast / anon→named emits (R523–R530, R533).
+- **Next:** other small reverse named clusters abutting the R531–R536 COMDAT run,
+  or non-reorder levers (AcceptConnections / zlib still parked forever-ish).
+
+**Round-537 (data pass): soft-reverted — KillTransporter anon→named paid 0.**
+
+- **Tried:** named def + call-site retarget on `cm_ExKillTransporter.c` message only
+  (`s_cm_ExKillTransporter____invalid_t_1002d3d4`, no shared path — R533 lesson).
+  Anon `??_C@_` already mid-pocket abutting Round-536 ExCreateCitizen (~`0x1002a2f4`).
+- **Gate:** `.data` **+0** / `.text` **+0** vs RESIDUE **8634** / DATA **21837**.
+  Soft-reverted. Same ceiling as Round-530 SellObjekt: killing anon COMDATs without
+  moving absolute placement does not pay when Accept-displaced cascade owns REF window.
+- **Keep:** Round-521…Round-536 stack; baselines unchanged.
+- **Parked:** anon→named mid-pocket (R530/R533/R537). Mid-pocket reverse→ascending
+  still works (R521/R531–R536).
+- **Next:** `cm_ExCreateGeb` two-string named defs (same pocket, no shared path), or
+  stop — reverse-decl chain harvested; anon→named saturated.
+
+**Round-538 (data pass): soft-reverted — ExCreateGeb anon→named paid 0.**
+
+- **Tried:** two-step named defs + call-site retarget on `cm_ExCreateGeb.c`
+  (`s_cm_ExCreateGeb____failed_1002d400` + `s_cm_ExCreateGeb____Could_not_find_1002d41c`),
+  messages only (no shared path). Anon `??_C@_` already mid-pocket between
+  Round-536 ExCreateCitizen and Round-535 loadsave2 (~`0x1002a320`).
+- **Gate:** `.data` **+0** / `.text` **+0** vs RESIDUE **8634** / DATA **21837**.
+  Soft-reverted. Same ceiling as Round-530/R537: killing anon COMDATs without
+  moving absolute placement does not pay.
+- **Keep:** Round-521…Round-536 stack; baselines RESIDUE **8634** / DATA **21837**.
+- **Parked:** anon→named mid-pocket (R530/R533/R537/R538). Mid-pocket
+  reverse→ascending still works (R521/R531–R536); that chain is harvested.
+- **Next:** non-reorder levers — AcceptConnections / zlib / `z_errmsg` still
+  parked forever-ish; or hunt REF-window content that is missing-from-BLD with
+  an R522-style emit in a TU that already owns a nearby named mid-pocket string.
+
+**Round-539 (data pass): soft-reverted — MoveCredits missing-emit FAIL `.text` +5.**
+
+- **Tried:** R522-style emit of two missing-from-BLD `cm_ChkMoveCredits` strings
+  (`0x1002c774`, `0x1002c7a4`) into `cm_ChkSellObjekt.c` ahead of the Round-531
+  ascending cluster (TU already owns abutting mid-pocket COMDATs). Call sites in
+  `cm_ChkMoveCredits.c` already used named externs (hard-cast-only refs).
+- **Gate:** `.data` **−513** (21837→21324) but `.text` **+5** (8634→8639) — FAIL.
+  Soft-reverted MoveCredits emit; restored Round-531 ascending only.
+- **Quirk:** `link_stubs.c.obj` already defines the same symbols (`LNK4006` duplicate);
+  emitting real defs in the mid-pocket TU still displaced `.text` (+5), same ceiling
+  as Round-523–R527 late missing-from-BLD / hard-cast emits.
+- **Keep:** Round-521…Round-536 stack; baselines RESIDUE **8634** / DATA **21837**.
+- **Parked:** anon→named mid-pocket (R530/R533/R537/R538); late missing-from-BLD /
+  hard-cast emits that cost `.text` (R523–R527, R539). Reverse→ascending mid-pocket
+  chain harvested (R521/R531–R536).
+- **Next:** non-reorder levers beyond string COMDATs (AcceptConnections / zlib /
+  `z_errmsg` still parked), or hunt missing-from-BLD emits that do **not** already
+  live in `link_stubs` and do not perturb `.text`.
+
+**Round-540 (data pass): soft-reverted — MoveCredits mid-pocket emit still `.text` +5 without stubs.**
+
+- **Tried:** remove empty `link_stubs.c` 1-byte stubs for
+  `s_cm_ChkMoveCredits____Not_enough_m_1002c774` /
+  `s_cm_ChkMoveCredits____Invalid__qu_1002c7a4`, then emit real defs into
+  `cm_ChkSellObjekt.c` ahead of the Round-531 ascending cluster (R522 recipe,
+  no LNK4006 duplicate).
+- **Gate:** `.data` **−513** (21837→21324) but `.text` **+5** (8634→8639) — FAIL,
+  identical to Round-539. Soft-reverted both files; restored Round-531 ascending.
+- **Codegen fact:** the `.text` +5 is **not** from the stub duplicate — mid-pocket
+  real-string emit alone displaces `.text` (likely reloc / operand rewrite of the
+  Accept-displaced cascade). Empty stubs vs real defs: same `.text` ceiling.
+- **Keep:** Round-521…Round-536 stack; baselines RESIDUE **8634** / DATA **21837**.
+- **Parked:** anon→named mid-pocket (R530/R533/R537/R538); late missing-from-BLD /
+  hard-cast / stub-replace emits that cost `.text` (R523–R527, R539–R540).
+  Reverse→ascending mid-pocket chain harvested (R521/R531–R536).
+- **Next:** non-string levers (AcceptConnections / zlib / `z_errmsg` still parked),
+  or missing-from-BLD content that does not enlarge mid-pocket COMDATs enough to
+  push `.text`.
+
+**Round-541 (data pass): soft-reverted — RecvGame path-share FAIL `.data` +236.**
+
+- **Tried:** retarget `srv_RecvGame.c` path literals to
+  `extern char s_D__Develop_DieGildeAddOn_loadsav_1002d550[]` (Round-535
+  `loadsave2` named def) — kill anon path COMDAT duplicated at ~`0x1002a55c`.
+- **Gate:** `.data` **+236** (21837→22073) / `.text` **−2** (8634→8632) — FAIL
+  on DATA. Soft-reverted. Sharing a mid-pocket named path into a late anon-heavy
+  TU (RecvGame) expands the Accept-displaced cascade rather than collapsing it.
+- **Codegen fact:** path-share across TU boundaries only pays when the consumer
+  already sits in the same COMDAT run as the def owner (R522 alchemistry style);
+  RecvGame's remaining anon message COMDATs keep the pocket "soft" and the share
+  regresses absolute placement elsewhere.
+- **Keep:** Round-521…Round-536 stack; baselines RESIDUE **8634** / DATA **21837**.
+- **Parked:** anon→named mid-pocket (R530/R533/R537/R538); late missing-from-BLD /
+  stub-replace emits (R523–R527, R539–R540); cross-TU path-share into anon-heavy
+  late TUs (R541). Reverse→ascending mid-pocket chain harvested (R521/R531–R536).
+- **Next:** non-string levers (AcceptConnections / zlib / `z_errmsg` still parked),
+  or named-only clusters outside the Accept-displaced mid-pocket.
+
+**Round-542 (data pass): soft-reverted — server2 same-TU path retarget COMPILE FAIL.**
+
+- **Tried:** retarget `server2.c` path literals to named
+  `s_D__Develop_DieGildeAddOnServer_s_100298b0` (kill anon path COMDAT at
+  ~`0x1002960c` that duplicates the named def in the same TU). Minimal
+  same-TU share — not a full AcceptConnections rewrite (still parked R520).
+- **Gate:** **compile fail** — `error C2065` / `C2040`: call sites above the
+  late named-def block used the symbol before definition (MSVC C treats the
+  early use as `int`, then conflicts with `char[]` at the def). Soft-reverted.
+- **Codegen fact:** same-TU path retarget requires the named def (or a forward
+  `extern char …[]`) **above** the first call site; moving defs up into the
+  AcceptConnections head is the larger rewrite already parked at Round-520.
+- **Keep:** Round-521…Round-536 stack; baselines RESIDUE **8634** / DATA **21837**.
+- **Parked:** AcceptConnections (R520/R542), anon→named mid-pocket (R530/R533/
+  R537/R538), late missing-from-BLD / stub-replace (R523–R527, R539–R540),
+  cross-TU path-share into anon-heavy late TUs (R541). Reverse→ascending
+  mid-pocket chain harvested (R521/R531–R536).
+- **Next:** non-string levers (zlib / `z_errmsg` still parked forever-ish), or
+  a forward-`extern` + same-TU path retarget with defs kept late (measure
+  carefully — R520 history says Accept churn costs `.text`).
+
+**Round-543 (data pass): soft-reverted — server2 forward-extern path retarget paid 0.**
+
+- **Tried:** forward `extern char s_D__Develop_DieGildeAddOnServer_s_100298b0[]`
+  at file head + retarget path literals to the late named def (fix Round-542
+  use-before-def). Killed the anon path COMDAT; 4 other anon COMDATs remain.
+- **Gate:** `.data` **+0** / `.text` **+0** vs RESIDUE **8634** / DATA **21837**.
+  Soft-reverted. Same ceiling as Round-530/R537/R538: killing one anon COMDAT
+  without moving absolute placement does not pay when Accept-displaced cascade
+  owns the REF window.
+- **Codegen fact:** forward-`extern` + same-TU path share compiles and removes
+  the duplicate path COMDAT, but does not improve gates — AcceptConnections
+  still needs a larger placement rewrite (parked R520).
+- **Keep:** Round-521…Round-536 stack; baselines RESIDUE **8634** / DATA **21837**.
+- **Parked:** AcceptConnections (R520/R542/R543), anon→named mid-pocket
+  (R530/R533/R537/R538), late missing-from-BLD / stub-replace (R523–R527,
+  R539–R540), cross-TU path-share into anon-heavy late TUs (R541).
+  Reverse→ascending mid-pocket chain harvested (R521/R531–R536).
+- **Next:** non-string levers (zlib / `z_errmsg` still parked), or hunt named
+  clusters outside Accept-displaced mid-pocket that are still reverse / disordered.
+
+**Round-544 (data pass): soft-reverted — server2 Accept ascending FAIL `.data` +1.**
+
+- **Tried:** reverse→ascending REF VA decl reorder on `server2.c` Accept named
+  cluster (`0x100298b0` path, `0x100299a0` New Connection, `0x100299c8` No more
+  Slots) — same lever as Round-521/`amt_fio` … Round-536 ExCreateCitizen.
+- **Gate:** `.data` **+1** (21837→21838) / `.text` **+0** (8634) — FAIL.
+  Soft-reverted. Ascending mid-pocket lever does **not** transfer to the early
+  AcceptConnections pocket (BLD ~`0x1002956c`, Δ≈`−0x344..−0x45c`); that pocket
+  remains parked with Round-520.
+- **Codegen fact:** reverse→ascending only pays when COMDATs sit in/near the
+  Accept-displaced mid-pocket run after a paid cluster (R521→R531→R536). Early
+  Accept named clusters regress `.data` when reordered.
+- **Keep:** Round-521…Round-536 stack; baselines RESIDUE **8634** / DATA **21837**.
+- **Parked:** AcceptConnections (R520/R542–R544), anon→named mid-pocket
+  (R530/R533/R537/R538), late missing-from-BLD / stub-replace (R523–R527,
+  R539–R540), cross-TU path-share into anon-heavy late TUs (R541).
+  Reverse→ascending mid-pocket chain harvested (R521/R531–R536).
+- **Next:** non-string levers (zlib / `z_errmsg` still parked), or named
+  clusters outside Accept-displaced mid-pocket that are still reverse / disordered
+  and **not** in the early Accept pocket.
+
+**Round-545 (data pass): soft-reverted — loadsave3 drop unused `g_str` stubs FAIL `.data` +263.**
+
+- **Tried:** remove unused 1-byte `g_str_10031500` / `g_str_10031538` stubs from
+  `loadsave3.c` (defs only; no callers) — they sat in mid-pocket (~`0x1002a424`)
+  while REF strings live at `0x10031500` / `0x10031538`.
+- **Gate:** `.data` **+263** (21837→22100) / `.text` **+0** (8634) — FAIL.
+  Soft-reverted. Even unused mid-pocket COMDATs are load-bearing for the
+  Accept-displaced cascade; deleting them expands absolute placement mismatch.
+- **Codegen fact:** mid-pocket "pollution" that does not match REF content can
+  still be required as a spacer; do not delete mid-pocket symbols solely because
+  they have no callers or wrong content.
+- **Keep:** Round-521…Round-536 stack; baselines RESIDUE **8634** / DATA **21837**.
+- **Parked:** AcceptConnections (R520/R542–R544), anon→named mid-pocket
+  (R530/R533/R537/R538), late missing-from-BLD / stub-replace (R523–R527,
+  R539–R540), cross-TU path-share into anon-heavy late TUs (R541), loadsave3
+  mid-pocket stub deletion (R545). Reverse→ascending mid-pocket chain harvested
+  (R521/R531–R536).
+- **Next:** non-string levers (zlib / `z_errmsg` still parked), or named clusters
+  outside Accept-displaced mid-pocket; filter type-conflicts at REF `0x10030b84…`
+  are a separate placement problem (defs currently emit mid-pocket, not at REF).
+
+**Round-546 (data pass): soft-reverted — loadsave3 scalar filter sizes FAIL `.data` +238.**
+
+- **Tried:** shrink `loadsave3.c` filter defs to REF scalar types/sizes at
+  `0x10030b84…` (`unsigned char` / `int` / `short` / `short` / `unsigned char`
+  with `0xff` / `-1` / `0x7fff` / `0x7fff` / `0xff`) — resolve type-conflicts
+  vs `spiel_dumpD` / `gm_StartFilteredEntitySearch` externs; cut mid-pocket
+  oversized-array pollution without deleting symbols (R545).
+- **Gate:** `.data` **+238** (21837→22075) / `.text` **−2** (8634→8632) — FAIL
+  on DATA. Soft-reverted. Scalar shrink still moves mid-pocket COMDAT packing
+  enough to expand Accept-displaced cascade; filters still do **not** land at
+  REF `0x10030b84…` (that pocket has no BLD owners within ±0x400).
+- **Codegen fact:** correcting type/size of mid-pocket filter COMDATs does not
+  relocate them to REF; placement is cascade-owned. Keep oversized arrays as
+  spacer until a real REF-pocket owner exists (or a non-mid-pocket emit path).
+- **Keep:** Round-521…Round-536 stack; baselines RESIDUE **8634** / DATA **21837**.
+- **Parked:** AcceptConnections (R520/R542–R544), anon→named mid-pocket
+  (R530/R533/R537/R538), late missing-from-BLD / stub-replace (R523–R527,
+  R539–R540), cross-TU path-share into anon-heavy late TUs (R541), loadsave3
+  mid-pocket stub deletion (R545), loadsave3 scalar shrink (R546).
+  Reverse→ascending mid-pocket chain harvested (R521/R531–R536).
+- **Next:** leave loadsave3 filter/g_str block alone; hunt non-mid-pocket /
+  non-Accept levers (`.rdata`, BSS, structs), or named clusters outside the
+  Accept-displaced run that are still reverse/disordered.
+
+**Round-547 (data pass): parked discovery — `g_data_restore_gap` displaced +0x250c.**
+
+- **Fact:** `src/server.dll/crt_region/data_restore.c` emits `g_data_restore_gap[0x9a00]`
+  intended at **DATA 0x1002b600** (REF `.data` raw `[0x4600:0xe000]`). BLD places it at
+  **0x1002db0c** (Δ**+0x250c**). Blob bytes == REF[intended]; `blob[filter−intended]`
+  matches REF filter scalars at `0x10030b84…` exactly — but BLD@filter is wrong because
+  the gap never lands there.
+- **Cause:** game COMDATs after mid-pocket (`plant` / `sim` / `gm_Open` / `spiel` /
+  `RecvGame` / …) occupy `0x1002a5ac…0x1002b600+`, pushing the gap late. Same
+  Accept-displaced cascade; not a corrupt restore blob.
+- **Tried / not edited:** no source change this round (measure-only). Patching
+  `blob[off_bld]` cannot fix filters while start VA is wrong; regenerating the gap
+  for the late VA would desync postlink’s intended copy window.
+- **Gate:** HOLD RESIDUE **8634** / DATA **21837** (no edit).
+- **Keep:** Round-521…Round-536 stack.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket (R530/R533/
+  R537/R538); late missing-from-BLD / stub-replace / lobby hard-cast emits (R523–R527,
+  R539–R540); cross-TU path-share (R541); loadsave3 stub delete / scalar shrink
+  (R545–R546); **restore-gap placement** (R547) — needs mid-pocket shrink or link
+  order that frees `0x1002b600` before the gap, without `.text` regression.
+- **Also noted:** imports 100/100 match; remaining reverse named clusters outside
+  Accept/mid-pocket = **0**; BSS gaps exist but do not move `DATA_BASELINE` (first
+  `0xe000` of `.data`).
+- **Next:** shrink/reorder emitters that currently sit in `0x1002a5ac…0x1002b600`
+  (plant/sim/gm_Open/spiel strings — REF VAs are late `0x1002d9xx` / `0x100310xx`),
+  or a measured link-order experiment that lands `g_data_restore_gap` at `0x1002b600`
+  without growing `.text`.
+
+**Round-548 (data pass): landed — gm_Open→spiel path-share `.data` −1.**
+
+- **Tried:** retarget 10 `gm_Open.c` `LogMessageInternal` path literals
+  `"D:\\Develop\\DieGildeAddOn\\game\\spiel.c"` to existing named
+  `s_D__Develop_DieGildeAddOn_game_sp_10031004` (def in `spiel.c`) via
+  `extern` — kill duplicate anon path COMDATs in the restore-gap lead-in
+  window (`0x1002a5ac…0x1002b600`).
+- **Gate:** `.data` **−1** (21837→21836) / `.text` **+0** (8634) — LAND.
+  `DATA_BASELINE` → **21836**. Restore gap still at BLD `0x1002db0c`
+  (Δ**+0x250c** vs intended `0x1002b600`); filter REF `0x10030b84…` still
+  uncovered. Path anon gone; message-string anon COMDATs remain in window.
+- **Codegen fact:** same-run cross-TU path-share (R522 recipe) pays outside
+  mid-pocket when the named def already exists and call sites only drop
+  duplicate path literals — no retarget of message strings, no `.text` cost.
+- **Keep:** Round-521…Round-536 stack + Round-548; baselines RESIDUE **8634** /
+  DATA **21836**.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / stub-replace / lobby
+  hard-cast emits (R523–R527, R539–R540); cross-TU path-share into anon-heavy
+  late TUs that lack an abutting named owner (R541); loadsave3 stub delete /
+  scalar shrink (R545–R546); restore-gap placement (R547).
+- **Next:** more same-TU / cross-TU path shares for remaining duplicate path
+  literals in the restore-gap lead-in (`sim`, other `spiel_*`), or shrink
+  message-string anon span enough to move `g_data_restore_gap` toward
+  `0x1002b600` without `.text` regression.
+
+**Round-549 (data pass): soft-reverted — srv_RecvGame→loadsave2 path-share FAIL `.data` +236.**
+
+- **Tried:** retarget 10 `srv_RecvGame.c` `LogMessageInternal` path literals
+  `"D:\\Develop\\DieGildeAddOn\\loadsave\\loadsave.c"` to existing named
+  `s_D__Develop_DieGildeAddOn_loadsav_1002d550` (def in `loadsave2.c`) via
+  `extern` — same cross-TU path-share recipe as Round-548/`gm_Open`→`spiel`.
+- **Gate:** `.data` **+236** (21836→22072) / `.text` **−2** (8634→8632) — FAIL
+  on DATA. Soft-reverted. Unlike R548 (spiel path already in mid-pocket /
+  restore-gap lead-in), the loadsave2 named path sits at REF `0x1002d550`
+  (late) while `srv_RecvGame` anon path COMDATs sat in the mid-pocket cascade;
+  killing them expands Accept-displaced mismatch (same class as R545/R546
+  mid-pocket spacer deletions).
+- **Codegen fact:** R548-style path-share only pays when the duplicate anon
+  lives in the restore-gap *lead-in* and the named owner is already part of
+  that same early/mid cascade (spiel@`0x1002a7f0`). Sharing into a late REF
+  named that is itself displaced (loadsave2 Δ large) regresses `.data`.
+- **Keep:** Round-521…Round-536 stack + Round-548; baselines RESIDUE **8634** /
+  DATA **21836**.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / lobby emits (R523–R527,
+  R539–R540); cross-TU path-share into late/displaced named owners (R541,
+  R549); loadsave3 stub delete / scalar shrink (R545–R546); restore-gap
+  placement (R547).
+- **Next:** path-share only against named owners already in the restore-gap
+  lead-in (`spiel.c` path for remaining `spiel_dumpD` / `spiel5` /
+  `gm_*` literals), or shrink message-string anon span without touching
+  mid-pocket spacers.
+
+**Round-550 (data pass): soft-reverted — bulk spiel path-share compile FAIL.**
+
+- **Tried:** retarget remaining `spiel.c` path literals in 7 TUs
+  (`spiel_dumpD`, `spiel5`, `gm_ObjectsAvailble`, `gm_ff_Objekt`,
+  `gm_AllocSpieler`, `gm_AllocRaum`, `gm_InitObjektHersteller`) to named
+  `s_D__Develop_DieGildeAddOn_game_sp_10031004` (R548 recipe / lead-in owner).
+- **Gate:** did not measure cleanly — MSVC6 compile errors (`nextern` from
+  bad `\\n` insert on first pass; `gm_AllocSpieler` array-init / `s_file_spiel_c_10031004`
+  C2075 on second pass; split_link exit 157). Soft-reverted all 7. **Keep R548
+  `gm_Open`.**
+- **Codegen fact:** R548-style path-share is one-TU-at-a-time; bulk multi-file
+  retarget needs per-file extern placement and must not collide with existing
+  local path aliases (`s_file_spiel_c_*`). Measure each TU alone.
+- **Keep:** Round-521…Round-536 stack + Round-548; baselines RESIDUE **8634** /
+  DATA **21836**.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / lobby emits (R523–R527,
+  R539–R540); cross-TU path-share into late/displaced named owners (R541,
+  R549); loadsave3 stub delete / scalar shrink (R545–R546); restore-gap
+  placement (R547); bulk spiel path-share (R550).
+- **Next:** one-TU spiel path-share at a time (`spiel_dumpD` alone first —
+  4 literals, no local path alias), measure, then next.
+
+**Round-551 (data pass): soft-reverted — spiel_dumpD→spiel path-share INERT `.data` +0.**
+
+- **Tried:** retarget 4 `spiel_dumpD.c` `LogMessageInternal` path literals
+  `"D:\\Develop\\DieGildeAddOn\\game\\spiel.c"` to named
+  `s_D__Develop_DieGildeAddOn_game_sp_10031004` (def in `spiel.c`) via
+  `extern` — same R548 recipe / lead-in owner; one TU only (R550 bulk parked).
+- **Gate:** `.data` **+0** (21836) / `.text` **+0** (8634) — INERT. Soft-reverted.
+  Path anon from `spiel_dumpD` was not contributing unique `.data` bytes (or the
+  cascade already absorbed the duplicate); unlike R548/`gm_Open` (10 path sites,
+  paid −1). Restore gap still BLD `0x1002db0c` (Δ**+0x250c**).
+- **Codegen fact:** R548 path-share is not automatically additive per TU — only
+  pays when the retargeted anon was a live spacer in the measured window.
+  Measure each TU; inert shares are noise, soft-revert.
+- **Keep:** Round-521…Round-536 stack + Round-548; baselines RESIDUE **8634** /
+  DATA **21836**.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / lobby emits (R523–R527,
+  R539–R540); cross-TU path-share into late/displaced named owners (R541,
+  R549); loadsave3 stub delete / scalar shrink (R545–R546); restore-gap
+  placement (R547); bulk spiel path-share (R550); inert spiel_dumpD share
+  (R551).
+- **Next:** one-TU path-share only where map still shows a Develop-path anon
+  COMDAT in the restore-gap lead-in for that TU; or shrink message-string
+  anon span (`gm_Open` message COMDATs) without touching mid-pocket spacers.
+
+**Round-552 (data pass): soft-reverted — gm_ObjectsAvailble→spiel path-share INERT `.data` +0.**
+
+- **Tried:** retarget 1 `gm_ObjectsAvailble.c` path literal
+  `"D:\\Develop\\DieGildeAddOn\\game\\spiel.c"` to named
+  `s_D__Develop_DieGildeAddOn_game_sp_10031004` (def in `spiel.c`) via
+  `extern` — R548 recipe; map showed lead-in anon path @`0x1002a7f0`.
+- **Gate:** `.data` **+0** (21836) / `.text` **+0** (8634) — INERT. Soft-reverted.
+  Same class as R551/`spiel_dumpD`: killing this anon does not move
+  `DATA_BASELINE`. Lead-in still has plant/sim/spiel named paths +
+  `gm_ff_Objekt` anon path @`0x1002a81c`; restore gap still BLD `0x1002db0c`
+  (Δ**+0x250c**).
+- **Codegen fact:** only R548/`gm_Open` (10 path sites) paid among spiel
+  path-shares so far; single-literal / few-site shares against the same
+  lead-in owner are often inert once the cascade already holds the bytes.
+- **Keep:** Round-521…Round-536 stack + Round-548; baselines RESIDUE **8634** /
+  DATA **21836**.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / lobby emits (R523–R527,
+  R539–R540); cross-TU path-share into late/displaced named owners (R541,
+  R549); loadsave3 stub delete / scalar shrink (R545–R546); restore-gap
+  placement (R547); bulk spiel path-share (R550); inert spiel_dumpD /
+  gm_ObjectsAvailble shares (R551–R552).
+- **Next:** `sim.c` anon path @`0x1002a648` (no named owner yet — name+share
+  or leave), `gm_ff_Objekt` anon @`0x1002a81c`, or shrink `gm_Open`
+  message-string anon span (~296B) without mid-pocket spacers.
+
+**Round-553 (data pass): soft-reverted — gm_ff_Objekt→spiel path-share INERT `.data` +0.**
+
+- **Tried:** retarget 1 `gm_ff_Objekt.c` path literal
+  `"D:\\Develop\\DieGildeAddOn\\game\\spiel.c"` to named
+  `s_D__Develop_DieGildeAddOn_game_sp_10031004` (def in `spiel.c`) via
+  `extern` — R548 recipe; map showed lead-in anon path @`0x1002a81c`.
+- **Gate:** `.data` **+0** (21836) / `.text` **+0** (8634) — INERT. Soft-reverted.
+  Same class as R551/`spiel_dumpD` and R552/`gm_ObjectsAvailble`. Lead-in still
+  has plant/sim/spiel named + remaining anons; restore gap still BLD `0x1002db0c`
+  (Δ**+0x250c**).
+- **Codegen fact:** spiel-owner path-share is exhausted for `.data` ROI — only
+  R548/`gm_Open` (10 sites) paid. Further one-literal shares against the same
+  lead-in owner are inert; stop probing that recipe.
+- **Keep:** Round-521…Round-536 stack + Round-548; baselines RESIDUE **8634** /
+  DATA **21836**.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / lobby emits (R523–R527,
+  R539–R540); cross-TU path-share into late/displaced named owners (R541,
+  R549); loadsave3 stub delete / scalar shrink (R545–R546); restore-gap
+  placement (R547); bulk spiel path-share (R550); inert spiel path-shares
+  (R551–R553).
+- **Next:** leave spiel path-share. Try `sim.c` anon @`0x1002a648` (name it if
+  REF has a stable VA, else leave), shrink `gm_Open` message-string anon span
+  (~296B) without mid-pocket spacers, or shrink restore-gap lead-in COMDATs
+  (`old_literals` / `.text` emit stubs) to free `0x1002b600`.
+
+**Round-554 (data pass): soft-reverted — name sim.c path INERT `.data` +0.**
+
+- **Tried:** name the `sim.c` Develop path literal as
+  `s_D__Develop_DieGildeAddOn_game_si_1002dcf4` (REF VA `0x1002dcf4`, plant/spiel
+  recipe) and retarget the one `LogMessageInternal` use.
+- **Gate:** `.data` **+0** (21836) / residual text line missing-but-HOLD from prior;
+  named lands at BLD `0x1002a648` (same lead-in slot as the anon) — INERT.
+  Soft-reverted. Restore gap still BLD `0x1002db0c` (Δ**+0x250c**).
+- **Codegen fact:** anon→named in-place in the restore-gap *lead-in* does not
+  free bytes or move the gap (same bytes, new label). Spiel path-share ROI is
+  exhausted (only R548 paid). Naming lead-in path anons alone is also inert.
+- **Keep:** Round-521…Round-536 stack + Round-548; baselines RESIDUE **8634** /
+  DATA **21836**.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / lobby emits (R523–R527,
+  R539–R540); cross-TU path-share into late/displaced named owners (R541,
+  R549); loadsave3 stub delete / scalar shrink (R545–R546); restore-gap
+  placement (R547); bulk/inert spiel path-shares (R550–R553); inert sim
+  path name (R554).
+- **Next:** leave path-name/share. Shrink restore-gap lead-in COMDATs that are
+  *not* mid-pocket spacers (`old_literals` ~868B, `.text` emit stubs) or shrink
+  `gm_Open` message-string anon span (~296B) — measure one COMDAT class at a
+  time; soft-revert on DATA regress.
+
+**Round-555 (data pass): soft-reverted — name gm_Open messages INERT `.data` +0.**
+
+- **Tried:** name 9 `gm_Open.c` message strings at REF VAs (`0x10031054`…
+  `0x10031218`, plant recipe) and retarget `LogMessageInternal` args — goal was
+  to displace ~296B of lead-in anon COMDATs so `g_data_restore_gap` can land at
+  `0x1002b600`.
+- **Gate:** `.data` **+0** (21836) / `.text` **+0** (8634) — INERT. Named symbols
+  still linked at the same lead-in VAs (`0x1002a69c`…). Soft-reverted message
+  naming only; **kept Round-548** path-share. Restore gap still BLD `0x1002db0c`
+  (Δ**+0x250c**).
+- **Codegen fact:** naming alone does not move COMDATs out of the restore-gap
+  lead-in — same class as R554/`sim.c`. Path-name/share ROI for `.data` is
+  exhausted (only R548 paid −1). Freeing `0x1002b600` needs shrinking/removing
+  lead-in *content* that is not load-bearing mid-pocket spacer, not relabeling.
+- **Keep:** Round-521…Round-536 stack + Round-548; baselines RESIDUE **8634** /
+  DATA **21836**.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / lobby emits (R523–R527,
+  R539–R540); cross-TU path-share into late/displaced named owners (R541,
+  R549); loadsave3 stub delete / scalar shrink (R545–R546); restore-gap
+  placement (R547); bulk/inert spiel path-shares (R550–R553); inert sim path
+  name (R554); inert gm_Open message name (R555).
+- **Next:** leave naming. Shrink restore-gap lead-in by one non-CRT COMDAT
+  class at a time (`rdata_fold` ~160B, `spiel5` ~268B, or a single `.text`
+  emit stub) — soft-revert on DATA regress; do not touch mid-pocket spacers
+  or CRT `old_literals`.
+
+**Round-556 (data pass): soft-reverted — spiel5 hard-cast Missing potential FAIL `.data`.**
+
+- **Tried:** replace `spiel5.c` `LogMessageInternal` message literal
+  `"gm_AllocGebaeude(): Missing potential...."` with `(char*) 0x100313fc`
+  (REF VA; same hard-cast pattern as existing `gm_Open` casts) to drop the
+  lead-in COMDAT at BLD `0x1002a914`.
+- **Gate:** `.data` **FAIL** (21836→22065, **+229**) / `.text` **−2** (8634→8632).
+  Soft-reverted. Cascade expands when the lead-in string COMDAT is removed while
+  REF content is still not present at `0x100313fc` in BLD (duplicate sits late
+  at `0x100313a8`, displaced). Same class as parked R523–R527 / R539–R540
+  hard-cast emits.
+- **Codegen fact:** hard-cast alone does not free restore-gap lead-in unless the
+  target REF bytes already exist in BLD at that VA. Naming (R554–R555) and
+  hard-cast-without-emit (R556) are both inert/regress for `.data` ROI.
+- **Keep:** Round-521…Round-536 stack + Round-548; baselines RESIDUE **8634** /
+  DATA **21836**.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / lobby / hard-cast emits
+  (R523–R527, R539–R540, R556); cross-TU path-share into late/displaced named
+  owners (R541, R549); loadsave3 stub delete / scalar shrink (R545–R546);
+  restore-gap placement (R547); bulk/inert spiel path-shares (R550–R553);
+  inert sim path name (R554); inert gm_Open message name (R555).
+- **Next:** leave hard-cast until late string blob lands at REF. Next `.data`
+  lever is shrink restore-gap lead-in by removing a *non-load-bearing* COMDAT
+  whose REF window is already correct in BLD, or shrink mid-pocket pollution
+  only with a measured spacer substitute — not path-name/share and not
+  hard-cast-without-emit.
+
+**Round-557 (data pass): soft-reverted — strip split `1001d4cd` `.data` FAIL `.data` +1797.**
+
+- **Tried:** zero `SizeOfRawData`/`PointerToRawData` on `.data`/`.bss` in
+  `build/split_poc/split/1001d4cd_.text.obj` (keep `.text` only) so local
+  `sbh_aliases`/`sbh_globals` win `__old_small_block_heap` / `__old_sbh_*`
+  instead of the split `--with-data` 0x2028 blob that occupies BLD
+  `0x1002b410..0x1002d438` and pushes `g_data_restore_gap` late.
+- **Gate:** `.data` **FAIL** (21836→23633, **+1797**) / `.text` **+0** (8634).
+  Gap moved early to BLD `0x1002badc` (Δ**+0x4dc**, not intended `0x1002b600`)
+  but map still listed `old_small_block_heap` on the stripped obj — empty
+  section headers still claim the names; cascade pollutes mid-pocket. Soft-
+  reverted (restored `.scratch/r557_1001d4cd_.text.obj.bak`, link-only).
+  Restore gap back BLD `0x1002db0c` (Δ**+0x250c**).
+- **Codegen fact:** restore-gap Δ**+0x250c** is dominated by split
+  `1001d4cd_.text.obj` `--with-data` emit of `___old_small_block_heap`
+  (0x2020) + trailing CRT tables — not game path/message COMDATs. Local
+  `int __old_small_block_heap` (4B flag in `sbh_aliases.c`) cannot displace
+  that 0x2020 region descriptor shape. Zeroing COFF raw sizes without
+  removing the external defs is not a free gap. Proper displace needs
+  either (a) text-only re-split of `0x1001d4cd` (no `--with-data` for that
+  VA) plus a correct-sized local OldSbhRegion owner at REF VA, or (b) leave
+  the blob and shrink the *lead-in before* `0x1002b410` — neither is a
+  one-line strip.
+- **Keep:** Round-521…Round-536 stack + Round-548; baselines RESIDUE **8634** /
+  DATA **21836**.
+- **Parked:** AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / lobby / hard-cast emits
+  (R523–R527, R539–R540, R556); cross-TU path-share (R541, R549–R553);
+  loadsave3 (R545–R546); restore-gap placement (R547); inert naming
+  (R554–R555); strip split SBH `.data` (R557).
+- **Next:** leave ad-hoc COFF surgery. Either re-emit `1001d4cd` text-only
+  via `split_coff` (per-VA `--with-data` exception) with a measured local
+  OldSbhRegion substitute, or shrink non-CRT lead-in *before* `0x1002b410`
+  only when REF bytes already exist in BLD at the target VA.
+
+**Round-558 (data pass): same-size type alignment. Conflicts 13→10. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** align `rebrew data --conflicts` outliers to majority types without
+  changing BSS emit size. `gm_NextEntityQueryMatch.c` `g_entity_table_end`
+  `int` → `unsigned short*` (4B either way). `gm_Open.c` `g_1009b764` /
+  `g_100a8cf8` `extern int` → `extern unsigned int` to match
+  `gm_RandomQuadratic.c` defs. Majority decls parked in `entity.h` (not
+  auto-generated `rebrew_globals.h`).
+- **Soft-reverted:** NextEntity incomplete `[]` defs (MSVC6 emits no BSS →
+  LNK2001 `_g_slot_table` / `_g_entity_state_base` / `_g_entity_type_bytes`).
+  Sized `[4]`/`[1]` arrays linked under `/FORCE` but cmake POST_BUILD
+  `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%). Restored
+  original BSS emit shapes (`char* g_slot_table`, `char g_entity_state_base`,
+  `char g_entity_type_bytes`). NextEntity does not include `entity.h`.
+- **Gate:** `.data` **HOLD** (21836, raw-link first `0xe000` differing
+  `0x554c`) / `.text` **HOLD** (8634, postlink `0x21ba`). CRT/LIBCMT
+  untouched. Round-548 path-share kept.
+- **Codegen fact:** MSVC6 file-scope `T name[];` is not a BSS common — it is
+  an extern. Pointer vs incomplete-array and scalar vs `T[]` are shape
+  changes: they alter COMMON size or drop the symbol. Same-size only:
+  `int`/`unsigned int`/`T*` (all 4B on x86).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens;
+  baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** NextEntity BSS emit vs majority array
+  (`g_slot_table` `char*` vs `unsigned char[]`; `g_entity_state_base` `char`
+  vs `char[]`; `g_entity_type_bytes` `char` vs `unsigned char[]`) until a
+  sized owner at REF VA exists. Stream/filter shape conflicts (`g_stream_pool`
+  `char[1]` vs `int`; `g_stream_count` `int[4]` vs `int`; loadsave3 filter
+  extras arrays vs scalar) — check REF VA ownership before shrinking.
+  AcceptConnections (R520/R542–R544); anon→named mid-pocket
+  (R530/R533/R537/R538); late missing-from-BLD / lobby / hard-cast emits
+  (R523–R527, R539–R540, R556); cross-TU path-share (R541, R549–R553);
+  loadsave3 (R545–R546); restore-gap placement (R547); inert naming
+  (R554–R555); strip split SBH `.data` (R557).
+- **Next:** leave CRT/SBH and incomplete-array BSS rewrites. Either (a) find
+  real slot-table owner at REF `0x100358a0` and emit that sized array once,
+  or (b) shrink non-CRT restore-gap lead-in only when REF bytes already exist
+  in BLD at the target VA. Do not convert NextEntity commons to `[]` again.
+
+**Round-559 (lint pass): 22 warnings → 0. Errors stayed 0. No `.text`/`.data` measure.**
+
+- **Tried:** `rebrew lint --fix` then one source comment. No function body, no
+  BSS emit, no CRT/LIBCMT.
+- **W016 (20):** DATA markers in `winsock_data.c` (18), `vfs4.c`
+  (`0x1002944c`), `vfs_OpenStream.c` (`0x100294a4`) lacked SECTION metadata.
+  `--fix` wrote `section = ".data"` into `src/rebrew-data.toml` from the
+  binary VA map. Markers in source stayed `/* DATA: SERVER 0x… */`; lint
+  overlays SECTION from the TOML. Inline `// SECTION:` is not required.
+- **W029 (1):** `gm_AllocGebaeude` (`0x100174d0`) per-function
+  `cflags = "/O2 /Gd"` only repeated the inherited ladder. `--fix` dropped
+  that field from `src/rebrew-functions.toml`.
+- **W007 (1):** `Units/net/broadcast.c` already had
+  `/* SIZE 0x10 — struct sockaddr_in … */`. Lint's `_SIZE_ANNOTATION_RE`
+  matches only `// SIZE 0xNN` (GOLDTL sibling already used that form).
+  Switched the comment to `// SIZE 0x10`. Winsock `sockaddr_in` is 16 bytes;
+  no struct typedef added.
+- **Lint:** 188 files, 0 errors, 0 warnings.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens;
+  baselines RESIDUE **8634** / DATA **21836**. Shape conflicts still parked
+  (NextEntity BSS emit, stream/filter array-vs-scalar).
+- **Codegen fact:** W016 is satisfied by `rebrew-data.toml` `section=`, not
+  by an inline `// SECTION:` next to `/* DATA: */`. W007 is `//`-only; a
+  C89 `/* SIZE 0xNN */` does not count. W029 lives in
+  `rebrew-functions.toml` — do not hand-edit cflags that equal the target
+  default; `rebrew lint --fix` drops them.
+
+**Round-560 (data pass): unused `g_stream_pool` externs. Conflicts 10→9. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** align the two unused `g_stream_pool` externs to the `gm_Open.c`
+  definition `char g_stream_pool[1]`. `vfs4.c` `extern int g_stream_pool` →
+  `extern char g_stream_pool[1]`. `loadsave3.c` same (commented REF
+  `0x10034670` kept). No body change, no BSS emit, no CRT/LIBCMT. `vfs4.c`
+  still never reads the symbol; close-path pool free stays
+  `m_pool_free((int*) 0x10034670, stream)`.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `postlink_residual.py --built build/split_poc.dll`: postlink `.text`
+  differing `0x21ba` (**8634**) / raw-link `.data` first `0xe000` differing
+  `0x554c` (**21836**). HOLD both.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** NextEntity BSS emit vs majority array (`g_slot_table` `char*`
+  vs `unsigned char[]`; `g_entity_state_base` `char` vs `char[]`;
+  `g_entity_type_bytes` `char` vs `unsigned char[]`). Remaining stream/filter
+  shape: `g_stream_count` `int[4]` (gm_Open def) vs `int` (vfs `++`/`--`);
+  loadsave3 unused filter arrays vs spiel_dumpD / gm_StartFilteredEntitySearch
+  scalars. Do not convert NextEntity commons to `[]` again. Do not shrink
+  `g_stream_count` while vfs uses it as a scalar `int`.
+- **Codegen fact:** unused `extern` type tokens are same-size-or-not by
+  declaration text only; they do not change COMMON/BSS as long as the
+  defining TU is left alone. `rebrew data --conflicts` counts those decls, so
+  matching unused externs to the owner is a hygiene lever with +0 `.data`.
+  `g_stream_pool` comment `0x10034670` still disagrees with BLD map owner
+  `0x10034fd0` (`gm_Open.c.obj`); leave that VA until a real owner exists.
+
+**Round-561 (data pass): lift unused EntityStruct into entity.h. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused local `struct EntityStruct` (SIZE 0x21c) in `spiel62.c`
+  matched `types.h` pads (`pad9[31]`, `pad2a[50]`, `pad7c[252]`,
+  `pad179[163]`). Lifted into `entity.h` (loadsave TUs already include it).
+  Dropped the local copy; field-map comment stays in `spiel62.c`. No
+  `#include "entity.h"` on spiel62 (struct unused there). `types.h` is still
+  the Ghidra auto-export; no loadsave TU includes it, so no name clash today.
+  Command/game TUs that include `types.h` do not include `entity.h`. No body
+  change, no BSS emit, no CRT/LIBCMT.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens; baselines RESIDUE **8634**
+  / DATA **21836**.
+- **Parked:** same 9 shape conflicts (NextEntity BSS emit, `g_stream_count`
+  `int[4]` vs `int`, loadsave3 unused filter arrays vs spiel_dumpD /
+  gm_StartFilteredEntitySearch scalars). Do not convert NextEntity commons
+  to `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar
+  `int`. Do not shrink/delete the loadsave3 filter/`g_str` block
+  (R545–R546).
+- **Codegen fact:** unused file-scope `struct` with no object of that type
+  does not emit `.data`/COMMON. Lifting it into a shared header and deleting
+  the local copy is a hygiene/type lever with +0 `.data`. W007 needs
+  `// SIZE 0x21c` immediately above the typedef, not a C89 `/* SIZE */`
+  comment.
+
+**Round-562 (data pass): drop unused DISPATCH_OBJ/Record from spiel62.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused anonymous `DISPATCH_OBJ` (SIZE 0x2c) and packed
+  `Record` (SIZE 0x43) in `spiel62.c` had no body uses (definition-only).
+  Identical copies still live in `spiel.c`/`spiel2.c`/`spiel3.c`/`spiel5.c`/
+  `spiel6.c`/`spiel622.c`/`spiel_gm_DispatchCall.c`/`gm_RandomQuadratic.c`/
+  `gm_RemoveObjectWrapper.c`. `spiel.c` is the only TU that uses `Record`
+  (`gm_FindRecordById`). Lift into `entity.h` was applied then reverted:
+  `#pragma pack(push, 1)` would leak into the eight loadsave TUs that already
+  include that header. No new spiel header. Local copies dropped from
+  `spiel62.c` only. No `#include "entity.h"` on spiel62. No body change, no
+  BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift. Three command TUs share the name but not
+  the layout (`cm_ExAllocRaum.c`/`cm_ExCreateGeb.c` data at `0x264204`;
+  `cm_ExSetSyncFlags.c` flags at +0). `command_internal.h` already warns to
+  keep those local. `PlayerSlot` in `game_structs.h` is a different shape.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `spiel62.c.obj` still LONG 1408 > 1328 (+80).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct;
+  baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  A packed typedef in a shared header is not a free lift — pack state
+  leaks to every includer. Leave packed copies in the TUs that need them.
+
+**Round-563 (data pass): drop unused DISPATCH_OBJ/Record from spiel2.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused anonymous `DISPATCH_OBJ` (SIZE 0x2c) and packed
+  `Record` (SIZE 0x43) in `spiel2.c` had no body uses (definition-only).
+  Same copies remain in `spiel.c`/`spiel3.c`/`spiel5.c`/`spiel6.c`/
+  `spiel622.c`/`spiel_gm_DispatchCall.c`/`gm_RandomQuadratic.c`/
+  `gm_RemoveObjectWrapper.c`; packed `Record` also in `spiel_c/gm_Open.c`.
+  `spiel.c` is the only TU that uses `Record` (`gm_FindRecordById`). No
+  header lift (R562 pack-leak). Local copies dropped from `spiel2.c` only.
+  No `#include "entity.h"` on spiel2. No body change, no BSS emit, no
+  CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. No new spiel header.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562 spiel62 unused-type drop; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused copies for the
+  next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a second sibling (`spiel2.c`) after `spiel62.c`.
+
+**Round-564 (data pass): drop unused DISPATCH_OBJ/Record from spiel3.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused anonymous `DISPATCH_OBJ` (SIZE 0x2c) and packed
+  `Record` (SIZE 0x43) in `spiel3.c` had no body uses (definition-only).
+  Same copies remain in `spiel.c`/`spiel5.c`/`spiel6.c`/`spiel622.c`/
+  `spiel_gm_DispatchCall.c`/`gm_RandomQuadratic.c`/
+  `gm_RemoveObjectWrapper.c`; packed `Record` also in `spiel_c/gm_Open.c`.
+  `spiel.c` is the only TU that uses `Record` (`gm_FindRecordById`). No
+  header lift (R562 pack-leak). Local copies dropped from `spiel3.c` only.
+  No `#include "entity.h"` on spiel3. No body change, no BSS emit, no
+  CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. No new spiel header.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562 spiel62 unused-type drop + Round-563 spiel2 unused-type drop;
+  baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused copies for the
+  next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a third sibling (`spiel3.c`) after `spiel62.c`/`spiel2.c`.
+
+**Round-565 (data pass): drop unused DISPATCH_OBJ/Record from spiel5.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused anonymous `DISPATCH_OBJ` (SIZE 0x2c) and packed
+  `Record` (SIZE 0x43) in `spiel5.c` had no body uses (definition-only).
+  Same copies remain in `spiel.c`/`spiel6.c`/`spiel622.c`/
+  `spiel_gm_DispatchCall.c`/`gm_RandomQuadratic.c`/
+  `gm_RemoveObjectWrapper.c`; packed `Record` also in `spiel_c/gm_Open.c`.
+  `spiel.c` is the only TU that uses `Record` (`gm_FindRecordById`). No
+  header lift (R562 pack-leak). Local copies dropped from `spiel5.c` only.
+  No `#include "entity.h"` on spiel5. No body change, no BSS emit, no
+  CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. No new spiel header.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `spiel5.c.obj` still LONG 704 > 688 (+16).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562 spiel62 unused-type drop + Round-563 spiel2 unused-type drop +
+  Round-564 spiel3 unused-type drop; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused copies for the
+  next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a fourth sibling (`spiel5.c`) after `spiel62.c`/`spiel2.c`/
+  `spiel3.c`.
+
+**Round-566 (data pass): drop unused DISPATCH_OBJ/Record from spiel6.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused anonymous `DISPATCH_OBJ` (SIZE 0x2c) and packed
+  `Record` (SIZE 0x43) in `spiel6.c` had no body uses (definition-only).
+  Same copies remain in `spiel.c`/`spiel622.c`/`spiel_gm_DispatchCall.c`/
+  `gm_RandomQuadratic.c`/`gm_RemoveObjectWrapper.c`; packed `Record` also
+  in `spiel_c/gm_Open.c`. `spiel.c` is the only TU that uses `Record`
+  (`gm_FindRecordById`). No header lift (R562 pack-leak). Local copies
+  dropped from `spiel6.c` only. No `#include "entity.h"` on spiel6. No
+  body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. No new spiel header.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `spiel6.c.obj` still LONG 816 > 784 (+32).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562 spiel62 unused-type drop + Round-563 spiel2 unused-type drop +
+  Round-564 spiel3 unused-type drop + Round-565 spiel5 unused-type drop;
+  baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused copies for the
+  next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a fifth sibling (`spiel6.c`) after `spiel62.c`/`spiel2.c`/
+  `spiel3.c`/`spiel5.c`.
+
+**Round-567 (data pass): drop unused DISPATCH_OBJ/Record from spiel622.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused anonymous `DISPATCH_OBJ` (SIZE 0x2c) and packed
+  `Record` (SIZE 0x43) in `spiel622.c` had no body uses (definition-only).
+  Same copies remain in `spiel.c`/`spiel_gm_DispatchCall.c`/
+  `gm_RandomQuadratic.c`/`gm_RemoveObjectWrapper.c`; packed `Record` also
+  in `spiel_c/gm_Open.c`. `spiel.c` is the only TU that uses `Record`
+  (`gm_FindRecordById`). No header lift (R562 pack-leak). Local copies
+  dropped from `spiel622.c` only. No `#include \"entity.h\"` on spiel622. No
+  body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. No new spiel header.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `spiel622.c.obj` still LONG 2608 > 2496 (+112).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562 spiel62 unused-type drop + Round-563 spiel2 unused-type drop +
+  Round-564 spiel3 unused-type drop + Round-565 spiel5 unused-type drop +
+  Round-566 spiel6 unused-type drop; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused copies for the
+  next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a sixth sibling (`spiel622.c`) after `spiel62.c`/`spiel2.c`/
+  `spiel3.c`/`spiel5.c`/`spiel6.c`.
+
+**Round-568 (data pass): drop unused DISPATCH_OBJ/Record from spiel_gm_DispatchCall.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused anonymous `DISPATCH_OBJ` (SIZE 0x2c) and packed
+  `Record` (SIZE 0x43) in `spiel_gm_DispatchCall.c` had no body uses
+  (definition-only). Same copies remain in `spiel.c`/`gm_RandomQuadratic.c`/
+  `gm_RemoveObjectWrapper.c`; packed `Record` also in `spiel_c/gm_Open.c`.
+  `spiel.c` is the only TU that uses `Record` (`gm_FindRecordById`). No
+  header lift (R562 pack-leak). Local copies dropped from
+  `spiel_gm_DispatchCall.c` only. No `#include "entity.h"` on that TU. No
+  body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. No new spiel header.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562 spiel62 unused-type drop + Round-563 spiel2 unused-type drop +
+  Round-564 spiel3 unused-type drop + Round-565 spiel5 unused-type drop +
+  Round-566 spiel6 unused-type drop + Round-567 spiel622 unused-type drop;
+  baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused copies for the
+  next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a seventh sibling (`spiel_gm_DispatchCall.c`) after
+  `spiel62.c`/`spiel2.c`/`spiel3.c`/`spiel5.c`/`spiel6.c`/`spiel622.c`.
+
+**Round-569 (data pass): drop unused DISPATCH_OBJ/Record from gm_RandomQuadratic.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused anonymous `DISPATCH_OBJ` (SIZE 0x2c) and packed
+  `Record` (SIZE 0x43) in `gm_RandomQuadratic.c` had no body uses
+  (definition-only). Same copies remain in `spiel.c`/`gm_RemoveObjectWrapper.c`;
+  packed `Record` also in `spiel_c/gm_Open.c`. `spiel.c` is the only TU that
+  uses `Record` (`gm_FindRecordById`). No header lift (R562 pack-leak).
+  Local copies dropped from `gm_RandomQuadratic.c` only. No
+  `#include "entity.h"` on that TU. No body change, no BSS emit, no
+  CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. No new spiel header.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562 spiel62 unused-type drop + Round-563 spiel2 unused-type drop +
+  Round-564 spiel3 unused-type drop + Round-565 spiel5 unused-type drop +
+  Round-566 spiel6 unused-type drop + Round-567 spiel622 unused-type drop +
+  Round-568 spiel_gm_DispatchCall unused-type drop; baselines RESIDUE
+  **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused copies for the
+  next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on an eighth sibling (`gm_RandomQuadratic.c`) after
+  `spiel62.c`/`spiel2.c`/`spiel3.c`/`spiel5.c`/`spiel6.c`/`spiel622.c`/
+  `spiel_gm_DispatchCall.c`.
+
+**Round-570 (data pass): drop unused DISPATCH_OBJ/Record from gm_RemoveObjectWrapper.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused anonymous `DISPATCH_OBJ` (SIZE 0x2c) and packed
+  `Record` (SIZE 0x43) in `gm_RemoveObjectWrapper.c` had no body uses
+  (definition-only). Remaining: `spiel.c` still uses `Record`
+  (`gm_FindRecordById`); packed `Record` also unused in `spiel_c/gm_Open.c`.
+  No header lift (R562 pack-leak). Local copies dropped from
+  `gm_RemoveObjectWrapper.c` only. No `#include "entity.h"` on that TU.
+  No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. No new spiel header. Keep `Record` in `spiel.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `gm_RemoveObjectWrapper.c.obj` still LONG 96 > 80 (+16).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-569 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused copies for the
+  next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a ninth sibling (`gm_RemoveObjectWrapper.c`) after
+  `spiel62.c`/`spiel2.c`/`spiel3.c`/`spiel5.c`/`spiel6.c`/`spiel622.c`/
+  `spiel_gm_DispatchCall.c`/`gm_RandomQuadratic.c`.
+
+**Round-571 (data pass): drop unused packed Record from gm_Open.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused packed `Record` (SIZE 0x43) in `spiel_c/gm_Open.c` had
+  no body uses (definition-only). The local block also carried a leftover
+  `// SIZE 0x2c` comment with no `DISPATCH_OBJ` typedef. Remaining:
+  `spiel.c` still uses `Record` (`gm_FindRecordById`) and still has unused
+  `DISPATCH_OBJ`. No header lift (R562 pack-leak). Local copies dropped from
+  `gm_Open.c` only. No `#include "entity.h"` on that TU. No body change, no
+  BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. No new spiel header. Keep `Record` in `spiel.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-570 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Unused `DISPATCH_OBJ` in `spiel.c` is
+  the last sibling copy.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a tenth sibling (`gm_Open.c`) after `spiel62.c`/`spiel2.c`/
+  `spiel3.c`/`spiel5.c`/`spiel6.c`/`spiel622.c`/`spiel_gm_DispatchCall.c`/
+  `gm_RandomQuadratic.c`/`gm_RemoveObjectWrapper.c`.
+
+**Round-572 (data pass): drop unused DISPATCH_OBJ from spiel.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused anonymous `DISPATCH_OBJ` (SIZE 0x2c) in `spiel.c` had no
+  body uses (definition-only). Packed `Record` (SIZE 0x43) stays: `spiel.c`
+  is the only remaining TU with that type, and `gm_FindRecordById` uses it.
+  No header lift (R562 pack-leak). No `#include "entity.h"` on spiel.c. No
+  body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. No new spiel header. Do not delete `Record` from `spiel.c`.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `spiel.c.obj` still LONG 704 > 656 (+48).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-571 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Unused sibling `DISPATCH_OBJ`/`Record`
+  copies are gone.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on the last sibling (`spiel.c`) for unused `DISPATCH_OBJ` after
+  ten packed-`Record` drops. A used packed typedef must stay local.
+
+**Round-573 (data pass): drop unused PAIR/SRC/TGT from alchemistry_logic3.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `PAIR` (SIZE 0x8), `SRC` (SIZE 0x14), and `TGT` (SIZE 0x3c)
+  in `alchemistry_logic3.c` had no body uses (definition-only). Packed
+  `ChainNode` stays: `ahm_ProcessEntityChain` uses it. Same unused copies
+  remain in `ahm_ExAllocAlchemist.c` / `ahm_GetCommandPayloadSize.c`.
+  `alchemistry_logic2.c` uses `SRC`/`TGT` in `ahm_SearchAndSet`. No header
+  lift (`types.h` is Ghidra auto-export; no TU includes it; no alchemy
+  header exists). Local copies dropped from `alchemistry_logic3.c` only.
+  No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `alchemistry_logic3.c.obj` still LONG 288 > 272 (+16).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-572 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused alchemy type
+  copies for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on alchemy types (`PAIR`/`SRC`/`TGT`) after the spiel
+  `DISPATCH_OBJ`/`Record` series. A used packed typedef must stay local.
+
+**Round-574 (data pass): drop unused PAIR/TGT from ahm_ExAllocAlchemist.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `PAIR` (SIZE 0x8) and `TGT` (SIZE 0x3c) in
+  `ahm_ExAllocAlchemist.c` had no body uses (definition-only). The local
+  block also carried leftover `// SIZE 0x14` with no `SRC` typedef.
+  Remaining unused copies: `ahm_GetCommandPayloadSize.c`.
+  `alchemistry_logic2.c` uses `SRC`/`TGT` in `ahm_SearchAndSet`. No header
+  lift (`types.h` is Ghidra auto-export; no TU includes it; no alchemy
+  header exists). Local copies dropped from `ahm_ExAllocAlchemist.c` only.
+  No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-573 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused alchemy type
+  copies for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a second alchemy sibling (`ahm_ExAllocAlchemist.c`) after
+  `alchemistry_logic3.c`. A used packed typedef must stay local.
+
+**Round-575 (data pass): drop unused PAIR/TGT from ahm_GetCommandPayloadSize.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `PAIR` (SIZE 0x8) and `TGT` (SIZE 0x3c) in
+  `ahm_GetCommandPayloadSize.c` had no body uses (definition-only). The local
+  block also carried leftover `// SIZE 0x14` with no `SRC` typedef.
+  Remaining: `alchemistry_logic2.c` uses `SRC`/`TGT` in `ahm_SearchAndSet`.
+  `cm_ExSimSpecialAction.c` only mentions `SRC`/`TGT` in comments. No header
+  lift (`types.h` is Ghidra auto-export; no TU includes it; no alchemy
+  header exists). Local copies dropped from `ahm_GetCommandPayloadSize.c`
+  only. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-574 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Unused sibling `PAIR`/`TGT` copies are
+  gone; keep the used set in `alchemistry_logic2.c`.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a third alchemy sibling (`ahm_GetCommandPayloadSize.c`) after
+  `alchemistry_logic3.c`/`ahm_ExAllocAlchemist.c`. A used packed typedef
+  must stay local.
+
+**Round-576 (data pass): drop unused ArrayItem from m_alloc2.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `struct ArrayItem` (SIZE 0x10) in `m_alloc2.c` had no
+  body uses (definition-only). `m_ShutdownAllocator` walks the 0x10-stride
+  array with `char*` and does not name the type. `struct LinkedListNode`
+  stays for now (self-ref only; body also uses `char*` + 0x24). No header
+  lift (`types.h` is Ghidra auto-export; no TU includes it). Local copy
+  dropped from `m_alloc2.c` only. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-575 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Keep `LinkedListNode` until its body
+  uses are confirmed empty outside the self-ref.
+- **Codegen fact:** unused file-scope structs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a non-typedef `struct ArrayItem` after the alchemy
+  `PAIR`/`SRC`/`TGT` series. A used packed typedef must stay local.
+
+**Round-577 (data pass): drop unused LinkedListNode from m_alloc2.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `struct LinkedListNode` (SIZE 0x28) in `m_alloc2.c` had
+  no body uses (definition + self-ref only). `m_ShutdownAllocator` walks the
+  list with `char*` and offset `0x24`, and does not name the type. No header
+  lift (`types.h` is Ghidra auto-export; no TU includes it). Local copy
+  dropped from `m_alloc2.c` only. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-576 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Unused `ArrayItem`/`LinkedListNode` in
+  `m_alloc2.c` are gone.
+- **Codegen fact:** unused file-scope structs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a second non-typedef (`struct LinkedListNode`) after
+  `ArrayItem`. A used packed typedef must stay local.
+
+**Round-578 (data pass): drop empty pack leftover from cm_ChkChangeAttribute.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** `cm_ChkChangeAttribute.c` had `#pragma pack(push, 1)` / `// SIZE 0x4`
+  / `#pragma pack(pop)` with no typedef between the pragmas. Empty pack
+  leftover after an earlier unused-type drop. Local only. No body change,
+  no BSS emit, no CRT/LIBCMT. No header lift.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used). Keep used packed `LinkedNode`/`EntitySlot`
+  in the gm_Remove* / gm_FreeObjectListRecursive TUs.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-577 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used).
+- **Codegen fact:** unused file-scope structs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on an empty `#pragma pack` leftover (`cm_ChkChangeAttribute.c`)
+  after the unused-typedef series. A used packed typedef must stay local.
+
+**Round-579 (data pass): drop unused ALLOCFN from spiel2.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `spiel2.c` had no body uses (definition-only). Same unused copies remain in
+  `spiel3.c` / `spiel5.c` / `spiel6.c` / `spiel62.c` / `spiel622.c` /
+  `spiel.c` / `spiel_gm_DispatchCall.c` / `gm_RandomQuadratic.c` /
+  `gm_RemoveObjectWrapper.c` / `gm_InitObjektHersteller.c` / `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `spiel2.c` only. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-578 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on unused function-pointer typedef `ALLOCFN` after the unused
+  struct/`#pragma pack` series. A used packed typedef must stay local.
+
+**Round-580 (data pass): drop unused ALLOCFN from spiel3.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `spiel3.c` had no body uses (definition-only). Remaining unused copies:
+  `spiel5.c` / `spiel6.c` / `spiel62.c` / `spiel622.c` / `spiel.c` /
+  `spiel_gm_DispatchCall.c` / `gm_RandomQuadratic.c` /
+  `gm_RemoveObjectWrapper.c` / `gm_InitObjektHersteller.c` / `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `spiel3.c` only. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-579 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a second unused `ALLOCFN` sibling (`spiel3.c`) after
+  `spiel2.c`. A used packed typedef must stay local.
+
+**Round-581 (data pass): drop unused ALLOCFN from spiel5.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `spiel5.c` had no body uses (definition-only). Remaining unused copies:
+  `spiel6.c` / `spiel62.c` / `spiel622.c` / `spiel.c` /
+  `spiel_gm_DispatchCall.c` / `gm_RandomQuadratic.c` /
+  `gm_RemoveObjectWrapper.c` / `gm_InitObjektHersteller.c` / `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `spiel5.c` only. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `spiel5.c.obj` still LONG 704 > 688 (+16).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-580 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a third unused `ALLOCFN` sibling (`spiel5.c`) after
+  `spiel2.c`/`spiel3.c`. A used packed typedef must stay local.
+
+**Round-582 (data pass): drop unused ALLOCFN from spiel6.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `spiel6.c` had no body uses (definition-only). Remaining unused copies:
+  `spiel62.c` / `spiel622.c` / `spiel.c` / `spiel_gm_DispatchCall.c` /
+  `gm_RandomQuadratic.c` / `gm_RemoveObjectWrapper.c` /
+  `gm_InitObjektHersteller.c` / `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `spiel6.c` only. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `spiel6.c.obj` still LONG 816 > 784 (+32).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-581 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a fourth unused `ALLOCFN` sibling (`spiel6.c`) after
+  `spiel2.c`/`spiel3.c`/`spiel5.c`. A used packed typedef must stay local.
+
+**Round-583 (data pass): drop unused ALLOCFN from spiel62.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `spiel62.c` had no body uses (definition-only). Remaining unused copies:
+  `spiel622.c` / `spiel.c` / `spiel_gm_DispatchCall.c` /
+  `gm_RandomQuadratic.c` / `gm_RemoveObjectWrapper.c` /
+  `gm_InitObjektHersteller.c` / `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `spiel62.c` only. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `spiel62.c.obj` still LONG 1408 > 1328 (+80).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-582 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a fifth unused `ALLOCFN` sibling (`spiel62.c`) after
+  `spiel2.c`/`spiel3.c`/`spiel5.c`/`spiel6.c`. A used packed typedef must
+  stay local.
+
+**Round-584 (data pass): drop unused ALLOCFN from spiel622.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `spiel622.c` had no body uses (definition-only). Remaining unused copies:
+  `spiel.c` / `spiel_gm_DispatchCall.c` / `gm_RandomQuadratic.c` /
+  `gm_RemoveObjectWrapper.c` / `gm_InitObjektHersteller.c` / `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `spiel622.c` only. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `spiel622.c.obj` still LONG 2608 > 2496 (+112).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-583 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a sixth unused `ALLOCFN` sibling (`spiel622.c`) after
+  `spiel2.c`/`spiel3.c`/`spiel5.c`/`spiel6.c`/`spiel62.c`. A used packed
+  typedef must stay local.
+
+**Round-585 (data pass): drop unused ALLOCFN from spiel.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `spiel.c` had no body uses (definition-only). Packed `Record` in the same
+  TU is used by `gm_FindRecordById` and stays. Remaining unused copies:
+  `spiel_gm_DispatchCall.c` / `gm_RandomQuadratic.c` /
+  `gm_RemoveObjectWrapper.c` / `gm_InitObjektHersteller.c` / `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `spiel.c` only. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `spiel.c.obj` still LONG 704 > 656 (+48).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-584 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a seventh unused `ALLOCFN` sibling (`spiel.c`) after
+  `spiel2.c`/`spiel3.c`/`spiel5.c`/`spiel6.c`/`spiel62.c`/`spiel622.c`. A
+  used packed typedef must stay local.
+
+**Round-586 (data pass): drop unused ALLOCFN from spiel_gm_DispatchCall.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `spiel_gm_DispatchCall.c` had no body uses (definition-only). Remaining
+  unused copies: `gm_RandomQuadratic.c` / `gm_RemoveObjectWrapper.c` /
+  `gm_InitObjektHersteller.c` / `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `spiel_gm_DispatchCall.c` only. No body change, no BSS
+  emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-585 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on an eighth unused `ALLOCFN` sibling (`spiel_gm_DispatchCall.c`)
+  after `spiel2.c`/`spiel3.c`/`spiel5.c`/`spiel6.c`/`spiel62.c`/`spiel622.c`/
+  `spiel.c`. A used packed typedef must stay local.
+
+**Round-587 (data pass): drop unused ALLOCFN from gm_RandomQuadratic.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `gm_RandomQuadratic.c` had no body uses (definition-only). Remaining unused
+  copies: `gm_RemoveObjectWrapper.c` / `gm_InitObjektHersteller.c` /
+  `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `gm_RandomQuadratic.c` only. No body change, no BSS emit,
+  no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-586 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a ninth unused `ALLOCFN` sibling (`gm_RandomQuadratic.c`) after
+  `spiel2.c`/`spiel3.c`/`spiel5.c`/`spiel6.c`/`spiel62.c`/`spiel622.c`/
+  `spiel.c`/`spiel_gm_DispatchCall.c`. A used packed typedef must stay local.
+
+**Round-588 (data pass): drop unused ALLOCFN from gm_RemoveObjectWrapper.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `gm_RemoveObjectWrapper.c` had no body uses (definition-only). Remaining
+  unused copies: `gm_InitObjektHersteller.c` / `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `gm_RemoveObjectWrapper.c` only. No body change, no BSS
+  emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `gm_RemoveObjectWrapper.c.obj` still LONG 96 > 80 (+16).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-587 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on a tenth unused `ALLOCFN` sibling (`gm_RemoveObjectWrapper.c`)
+  after `spiel2.c`/`spiel3.c`/`spiel5.c`/`spiel6.c`/`spiel62.c`/`spiel622.c`/
+  `spiel.c`/`spiel_gm_DispatchCall.c`/`gm_RandomQuadratic.c`. A used packed
+  typedef must stay local.
+
+**Round-589 (data pass): drop unused ALLOCFN from gm_InitObjektHersteller.c. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `gm_InitObjektHersteller.c` had no body uses (definition-only). Remaining
+  unused copy: `gm_Open.c`.
+  No header lift (`types.h` is Ghidra auto-export; no TU includes it). Local
+  copy dropped from `gm_InitObjektHersteller.c` only. No body change, no BSS
+  emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-588 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Leave remaining unused `ALLOCFN` copies
+  for the next one-TU hygiene drop.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  do not emit `.data`/COMMON; deleting them from one TU is +0 `.data`.
+  Confirmed on an eleventh unused `ALLOCFN` sibling
+  (`gm_InitObjektHersteller.c`) after `spiel2.c`/`spiel3.c`/`spiel5.c`/
+  `spiel6.c`/`spiel62.c`/`spiel622.c`/`spiel.c`/`spiel_gm_DispatchCall.c`/
+  `gm_RandomQuadratic.c`/`gm_RemoveObjectWrapper.c`. A used packed typedef
+  must stay local.
+
+**Round-590 (data pass): parked — drop unused ALLOCFN from gm_Open.c. `.text` 8634 → 8707 (+73). Soft-reverted.**
+
+- **Tried:** unused `typedef int(__cdecl* ALLOCFN)(int, int, int)` in
+  `gm_Open.c` had no body uses (definition-only), same pattern as the
+  eleven HOLD siblings. Local copy dropped from `gm_Open.c` only. No body
+  change, no BSS emit, no CRT/LIBCMT.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path, but layout-map coverage slipped 4838/7463 →
+  4833/7463. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x2203` (**8707**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). `.data` HOLD. `.text` FAIL
+  (0x21ba → 0x2203, +73). `data_operands` 1616 → 1615.
+  `ls_LoadBuildingEntityState` 671 → 744.
+- **Reverted:** restored the `ALLOCFN` typedef in `gm_Open.c`. cmake
+  compile/link errors 0. split_link EXIT 0. postlink `.text` `0x21ba`
+  (**8634**) / raw `.data` `0x554c` (**21836**). HOLD both.
+  `data_operands` back to 1616.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-589 unused-type drops; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Keep `ALLOCFN` in `gm_Open.c` — that
+  unused typedef is a load-bearing spacer (same class as R545–R546 mid-pocket
+  COMDATs). Do not drop it again.
+- **Codegen fact:** unused file-scope typedefs with no object of that type
+  are usually +0 `.data`/`.text`, but not always. Confirmed HOLD on eleven
+  `ALLOCFN` siblings; the same unused typedef in `gm_Open.c` moved postlink
+  `.text` 0x21ba → 0x2203 and must stay. A used packed typedef must stay
+  local.
+
+**Round-591 (data pass): lift packed OfficeSlot into office_slot.h. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** `aemter2.c` and `amt_ExecuteOfficeAssignment.c` both defined the
+  same packed `OfficeSlot` (SIZE 0x18: `type`/`entityId`/`role`/`count`/
+  `state`/`assignmentId`). Bodies use the type. Lifted into
+  `DieGildeAddOn/game/office_slot.h` (own `#pragma pack(push, 1)` /
+  `pack(pop)`). Both TUs now `#include` that header. Not added to `entity.h`
+  (pack would leak into loadsave TUs). Unpacked `OFFICE_SLOT` in `aemter.c`
+  / `amt_fio_LoadAemter.c` is a different name and field set — left local.
+  No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `player_slot` lift (layouts differ). No `#pragma pack` in
+  `entity.h`. Keep `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used). Keep `ALLOCFN` in `gm_Open.c` (R590 FAIL).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `aemter2.c.obj` still LONG 720 > 688 (+32).
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-589 unused-type drops + Round-590 parked `gm_Open.c`
+  `ALLOCFN`; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge `player_slot`.
+  Keep `Record` in `spiel.c` (used). Keep `ALLOCFN` in `gm_Open.c`.
+  Do not merge packed `OfficeSlot` with unpacked `OFFICE_SLOT`.
+- **Codegen fact:** a packed typedef used by more than one TU can live in a
+  dedicated header whose pack state does not leak into unrelated includers.
+  Confirmed +0 on `OfficeSlot` → `office_slot.h`. Unused file-scope typedefs
+  are usually +0, except `gm_Open.c` `ALLOCFN` (R590).
+
+**Round-592 (data pass): lift identical player_slot into player_slot.h. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** `cm_ExAllocRaum.c` and `cm_ExCreateGeb.c` both defined the same
+  unpacked `player_slot` (SIZE 0x264264: `gap_0000[0x264204]` / `data` /
+  `gap_264208[0x5c]`). Bodies use the type. Lifted into
+  `DieGildeAddOn/command/player_slot.h` (no pack). Both TUs now `#include`
+  that header. Not added to `command_internal.h` (would leak into
+  `cm_ExSetSyncFlags.c`, which uses a different layout: `flags` at offset 0).
+  Not merged with `game_structs.h` `PlayerSlot` (data at offset 8). Unpacked
+  `OFFICE_SLOT` copies in `aemter.c` / `amt_fio_LoadAemter.c` still differ by
+  field names — left local. No body change, no BSS emit, no CRT/LIBCMT.
+- **Skipped:** `cm_ExSetSyncFlags.c` `player_slot` (layout differs). No
+  `#pragma pack` in `entity.h`. Keep `Record` in `spiel.c` (used). Keep
+  `ChainNode` in `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used). Keep `ALLOCFN` in `gm_Open.c` (R590 FAIL).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%) —
+  expected on the CMake path. `scripts/split_link.sh` EXIT 0.
+  `.venv/bin/python scripts/postlink_residual.py --built build/split_poc.dll`:
+  postlink `.text` differing `0x21ba` (**8634**) / raw-link `.data` first
+  `0xe000` differing `0x554c` (**21836**). HOLD both. Conflicts still **9**.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-589 unused-type drops + Round-590 parked `gm_Open.c`
+  `ALLOCFN` + Round-591 `office_slot.h`; baselines RESIDUE **8634** / DATA
+  **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not merge the SetSyncFlags
+  `player_slot` with `player_slot.h`. Keep `Record` in `spiel.c` (used).
+  Keep `ALLOCFN` in `gm_Open.c`. Do not merge packed `OfficeSlot` with
+  unpacked `OFFICE_SLOT`.
+- **Codegen fact:** an unpacked typedef used by more than one TU can live
+  in a dedicated header included only by TUs that already shared that
+  layout. Confirmed +0 on `player_slot` (`data` at 0x264204) →
+  `player_slot.h`. Same-name types with a different field at offset 0 must
+  stay local (`cm_ExSetSyncFlags.c`).
+
+**Round-593 (data pass): lift identical GroupNode into group_node.h. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** `m_AllocTracked.c` and `m_ReportGroupInfo.c` both defined the
+  same unpacked `struct GroupNode` (SIZE 0x28: `name[0x10]` /
+  `size_total` / `count_total` / `size_max` / `count_max` / `count` /
+  `next`). Bodies use the type. Lifted into `Units/m_alloc/group_node.h`
+  (no pack). Both TUs now `#include` that header. Not added to `m_alloc.h`
+  (that header is included by dozens of TUs that never used this layout).
+  Unpacked `OFFICE_SLOT` copies in `aemter.c` / `amt_fio_LoadAemter.c`
+  still differ by field names (`id/a/b/c/type/d` vs
+  `id/mplayerid/mamt/pcount/status/msetter`) — left local; a header lift
+  would be a body rewrite, not a +0 hygiene move. No body change, no BSS
+  emit, no CRT/LIBCMT.
+- **Skipped:** `OFFICE_SLOT` name-unify. `LinkedNode` copies (layouts
+  differ: id-at-0 vs active/id). No `#pragma pack` in `entity.h`. Keep
+  `Record` in `spiel.c` (used). Keep `ChainNode` in
+  `alchemistry_logic3.c` (used). Keep `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c` (used). Keep `ALLOCFN` in `gm_Open.c` (R590
+  FAIL). Leave zlib `gz_stream` / `internal_state` alone.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink still
+  reports `.text` VirtualSize 0x221f6 vs REF 0x22846 (layout-map 64.8%,
+  **4838/7463**) — expected on the CMake path. `scripts/split_link.sh`
+  EXIT 0. `.venv/bin/python scripts/postlink_residual.py --built
+  build/split_poc.dll`: postlink `.text` differing `0x21ba` (**8634**) /
+  raw-link `.data` first `0xe000` differing `0x554c` (**21836**). HOLD
+  both. Conflicts still **9**. `data_operands` **1616**.
+  `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type tokens +
+  Round-559 lint + Round-560 stream_pool tokens + Round-561 EntityStruct +
+  Round-562…Round-589 unused-type drops + Round-590 parked `gm_Open.c`
+  `ALLOCFN` + Round-591 `office_slot.h` + Round-592 `player_slot.h`;
+  baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Do not convert NextEntity commons to
+  `[]`. Do not shrink `g_stream_count` while vfs uses it as a scalar `int`.
+  Do not shrink/delete the loadsave3 filter/`g_str` block (R545–R546).
+  Do not put `#pragma pack` in `entity.h`. Do not include `group_node.h`
+  from `m_alloc.h`. Do not merge the SetSyncFlags `player_slot` with
+  `player_slot.h`. Keep `Record` in `spiel.c` (used). Keep `ALLOCFN` in
+  `gm_Open.c`. Do not merge packed `OfficeSlot` with unpacked `OFFICE_SLOT`.
+- **Codegen fact:** a non-typedef `struct` used by more than one TU can
+  live in a dedicated header included only by TUs that already shared
+  that layout. Confirmed +0 on `GroupNode` → `group_node.h`. Do not put
+  that type in a widely included API header just because the files live
+  in the same directory.
+
+**Round-594 (lint pass): restore `// SIZE` markers after the R593 lift.
+Lint 2 warnings → 0. No code change.**
+
+- **Tried:** the R593 `GroupNode` header lift moved `// SIZE 0x28` into
+  `group_node.h`, but `rebrew lint` W007 scans only `.c` files — any
+  `struct ` mention (even a `struct GroupNode*` use, not a definition)
+  without a `// SIZE 0xNN` line in that file warns. Restored `// SIZE
+  0x28` above the `#include` in `m_AllocTracked.c` and
+  `m_ReportGroupInfo.c`.
+- **Also fixed (pre-existing):** `ChainNode` in `alchemistry_logic3.c`
+  (`// SIZE 0x99`: 1 + 0x94 + 4 under `#pragma pack(1)`) and `BlockNode`
+  in `m_alloc2.c` (`// SIZE 0x10`) had no markers at all — leftover from
+  earlier type-drop rounds. Comment-only; no codegen impact.
+- **Gate:** `rebrew lint`: 188 passed, 0 errors, 0 warnings. No rebuild
+  needed (comments do not emit).
+- **Hunt result:** full identical-body scan after R593: only remaining
+  2-TU duplicates are zlib `gz_stream` / `internal_state` (leave alone)
+  and layout-mismatched same names (`LinkedNode`, `OFFICE_SLOT`,
+  `player_slot`) — all stay local.
+
+**Round-595 (data pass, recon): unknown dispatch tables are false
+positives. No source change.**
+
+- **Checked:** `rebrew data --dispatch --json` reports 3 tables: the
+  212-entry command dispatch at `0x1002c3f8` (100% resolved), plus two
+  0%-coverage tables at `0x100317d8` (3 entries) and `0x10033bb0`
+  (6 entries, all pointing at `0x10021aad`).
+- **Finding:** both unknowns are CRT, not game vtables — `0x100317d8`
+  is the single `_FPinit` pointer already documented in
+  `crt_region/initterm.c` (3-entry window is a scan artifact), and
+  `0x10021aad` is an `EXACT` crt_region stub the detector windowed
+  6-deep. No game code to reverse; do not touch.
+- **Also checked:** `rebrew data --bss --json` reports 32 gaps but 0.0%
+  coverage with a guessed 24 MB BSS size — unreliable, no action. The
+  `rebrew todo -c data-drift` top-20 items (`g_log_*`, `g_file_version`,
+  `g_data_restore_gap`, …) are all Accept-cascade displacement symptoms
+  already parked at R520/R547, not independent levers.
+- **Gate:** no edit, HOLD presumed (lint still clean). Baselines RESIDUE
+  **8634** / DATA **21836**.
+- **Keep:** Round-593/594 stack. Keep `ALLOCFN` in `gm_Open.c`. Do not
+  merge packed `OfficeSlot` with unpacked `OFFICE_SLOT`.
+
+**Round-596 (data pass): lift identical SaveHeaderTail into
+save_header_tail.h. `.data` HOLD 21836 / `.text` HOLD 8634.**
+
+- **Tried:** `ls_LoadSavegameHeader.c` (reader) and `link_stubs.c`
+  (defining emit site, `"Savegame\0"`) both defined the same packed
+  `struct SaveHeaderTail` (SIZE 0x9: `int a` / `int b` / `char c` under
+  `#pragma pack(1)`). Bodies use the type
+  (`*(struct SaveHeaderTail*)(dest + 0x9c) = g_save_header_tail`).
+  Lifted into `DieGildeAddOn/loadsave/save_header_tail.h` (pack stays
+  in header, like `office_slot.h`). Both TUs now `#include` it. Not
+  added to `entity.h` (pack would leak into loadsave TUs). Found via
+  the `g_save_header_tail` data-drift item — the DRIFT itself is
+  positional (Accept cascade) and stays parked, but the duplicate
+  struct was a real shared-type lift. No body change, no CRT/LIBCMT.
+- **Lint:** same W007 pattern as R593 (lint scans `.c` only, flags
+  `struct SaveHeaderTail` extern use): restored `// SIZE 0x9` above the
+  extern in `ls_LoadSavegameHeader.c`. Lint 0 errors, 0 warnings.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD postlink
+  still 64.8% (**4838/7463**) — expected. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` first `0xe000` differing `0x554c` (**21836**). HOLD both.
+  Conflicts still **9**. `data_operands` **1616**.
+  `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-521…Round-536 stack + Round-548 + Round-558 type
+  tokens + Round-559 lint + Round-560 stream_pool tokens + Round-561
+  EntityStruct + Round-562…Round-589 unused-type drops + Round-590
+  parked `gm_Open.c` `ALLOCFN` + Round-591 `office_slot.h` + Round-592
+  `player_slot.h` + Round-593/594 `group_node.h`; baselines RESIDUE
+  **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. `g_file_version` /
+  `g_save_header_tail` DRIFT stays parked (positional, not a defaults
+  problem — stubs already emit the right bytes). Keep `ALLOCFN` in
+  `gm_Open.c`. Do not merge packed `OfficeSlot` with unpacked
+  `OFFICE_SLOT`.
+
+**Round-597 (data pass): drop 5 dead `// DATA` markers in spiel62.c.
+Comment-only, HOLD.**
+
+- **Tried:** `spiel62.c` carried 5 bare `// DATA: SERVER` markers
+  (`0x10035880` / `0x1009acfc` / `0x100358fc` / `0x10031500` /
+  `0x10031538`) left over from the R561 `EntityStruct` lift — no
+  declaration follows them, the VAs are only hard-cast in the body
+  below. Deleted. Other bare markers tree-wide (e.g. `spiel2.c`,
+  `server2.c`) sit above real decls — left alone.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**.
+- **Keep:** Round-596 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. `g_game_speed_*` DRIFT is
+  cascade displacement (BLD zeros at VA), not fixable content.
+  `.rdata` audit clean (no flags). `spiel.c` / NextEntityQueryMatch
+  ORDER flags are positional noise (defs already in REF VA order).
+
+**Round-598 (data pass): drop 3 duplicate bare `extern int
+g_file_version;` decls. HOLD.**
+
+- **Tried:** `loadsave2.c`, `loadsave3.c`, `srv_RecvGame.c` each
+  declared `extern int g_file_version;` twice — once bare, once with
+  the `/* 0x1002d4ec */` VA comment. Dropped the bare copy in each
+  TU. Duplicate extern decls emit nothing; pure hygiene.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**.
+- **Keep:** Round-597 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Found by same-TU duplicate-extern
+  scan — no other dupes remain (checked all non-CRT `.c`).
+
+**Round-599 (data pass): drop stale mid-file prototype block +
+dead DATA marker in spiel622.c. HOLD.**
+
+- **Tried:** `spiel622.c` repeated 3 prototypes mid-file (lines
+  801–803: `gm_ff_Objekt` / `gm_StartFilteredEntitySearch` /
+  `gm_AllocObjekt`) already declared at file head, plus a bare
+  `// DATA: SERVER 0x100358a2` with no following decl. Dropped all
+  four lines; kept the real `gm_RemoveObjectByType` proto below them.
+  Found by same-TU duplicate-prototype scan — other hits were false
+  positives (param-name variants, proto+definition pairs, zlib `OF`
+  macros). Comment/proto-only; no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**.
+- **Keep:** Round-598 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. `srv_LoadBuf.c` double
+  `srv_ReceivePacketHeader` proto (extern + plain) left alone — one is
+  `extern`-qualified, distinct spelling, skip.
+
+**Round-600 (data pass): drop duplicate `srv_ReceivePacketHeader`
+proto in srv_LoadBuf.c. HOLD.**
+
+- **Tried:** `srv_LoadBuf.c` declared
+  `int __cdecl srv_ReceivePacketHeader(unsigned int* conn);` at line
+  22 and the identical `extern`-qualified copy at line 28 (used 3× in
+  the body). Dropped the bare copy, kept the `extern` one. Prototype
+  decls emit nothing; pure hygiene. Revisit of the R599-parked item —
+  on inspection the two lines are byte-identical modulo `extern`, so
+  the drop is safe.
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD 64.8%
+  (**4838/7463**) expected. `scripts/split_link.sh` EXIT 0. Postlink
+  `.text` differing `0x21ba` (**8634**) / raw-link `.data` differing
+  `0x554c` (**21836**). HOLD both. Lint 0/0. `data_operands` **1616**.
+- **Keep:** Round-599 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Same-TU duplicate-proto scan
+  exhausted (remaining hits: param-name variants, proto+definition
+  pairs, zlib `OF` macros). Keep `ALLOCFN` in `gm_Open.c`. Do not
+  merge packed `OfficeSlot` with unpacked `OFFICE_SLOT`.
+
+**Round-601 (data pass): drop unused `CommandPacket` from
+game_structs.h. HOLD.**
+
+- **Tried:** `game_structs.h` carried an unused `CommandPacket`
+  typedef (total_length / player_slot_id / command_id / payload[82])
+  with zero users tree-wide (only a comment mention in
+  `srv_LoadBuf.c`). `PlayerSlot` in the same header stays (used by
+  `lb_ExPlayerHasJoined.c` et al). Header-only typedef, no object —
+  no emit. `types.h` keeps its own Ghidra-export copy (auto-generated,
+  do not edit).
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-600 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Verify failures
+  (`ServerMainThread` NEAR_MATCHING, `gm_AllocSpieler` STUB) confirmed
+  pre-existing via stash test — matching work, not data scope.
+
+**Round-602 (data pass): drop 3 unused aliases from game_common.h.
+HOLD.**
+
+- **Tried:** `game_common.h` carried `uint8_t` (only a comment
+  mention), `uint16_t` (0 uses), `ush` (0 uses) with zero code users
+  tree-wide. Dropped all three; kept `uint32_t` (5 uses), `uchar`
+  (58), `ushort` (170), `uint` (149), `byte` (604), `uLong` (7).
+  Header-only typedefs, no object — no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-601 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-603 (data pass): drop redundant local `uint32_t` in
+cm_DispatchProduction.c. HOLD.**
+
+- **Tried:** `cm_DispatchProduction.c` re-declared `typedef unsigned
+  int uint32_t;` while already including `command_internal.h` →
+  `game_common.h`, which provides the identical typedef. Dropped the
+  local copy; the 4 uses (`gv_ExtendProductionTime(uint32_t*)`,
+  `uint32_t* data_ptr`, …) now resolve to the shared header. Typedef
+  decls emit nothing; pure hygiene. `cm_AssignEntityId.c` local
+  `typedef unsigned long DWORD` left alone — that TU is freestanding
+  (no windows.h include), so unifying would need an include-order
+  change, not a one-line drop.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-602 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-604 (data pass): delete 4 dead headers with zero includers.
+HOLD.**
+
+- **Tried:** `game.h` (1 decl), `friedhof.h` (5 decls), `loadsave.h`
+  (8 decls), `production.h` (13 decls, included `game.h`) — no `.c`
+  file includes any of them (March STATE scaffolding, never wired
+  up). Deleted via `git rm` (revertable). Headers are not in CMake
+  sources (`.c`-filtered) — no emit. Dead-end triage this round:
+  gen-header diff is lossy vs hand-maintained `rebrew_globals.h`
+  (skip); `--fix-bss` 30 pads are layout churn outside the measured
+  window (park); vfs4/vfs_OpenStream annotation warnings are
+  intentional documented spans (lint passes); `.rdata` audit clean.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-603 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-605 (data pass): lift `handler_func` into server_internal.h
+(first TU). HOLD.**
+
+- **Tried:** 7 server TUs repeat byte-identical
+  `typedef int(__cdecl* handler_func)(unsigned char* pkt, int param)`
+  for the 212-entry dispatch table at `0x1002c3f8`. Added it to
+  `DieGildeAddOnServer/server_internal.h` (which had zero includers —
+  kept for its LIBRARY markers, not deleted at R604) and replaced the
+  local copy in `server2.c` with `#include "server_internal.h"`.
+  One TU first; remaining 6 follow once this pattern re-measures +0.
+  Also fixed a stale `command_internal.h` comment (claimed
+  `player_slot` data at 0x264200; R592 proved 0x264204).
+- **Gate:** cmake `-j1` compile/link errors 0. POST_BUILD 64.8%
+  (**4838/7463**) expected. `scripts/split_link.sh` EXIT 0. Postlink
+  `.text` differing `0x21ba` (**8634**) / raw-link `.data` differing
+  `0x554c` (**21836**). HOLD both. Lint 0/0. `data_operands` **1616**.
+  `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-604 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Remaining 6 `handler_func`
+  copies (`server.c`, `server3.c`, `server4.c`, `ProcessSendData.c`,
+  `cm_ProcessCommandQueue.c`, `srv_LoadBuf.c`) — one per round.
+
+**Round-606 (data pass): `handler_func` into server.c + fix wrong
+`Init` decl. HOLD.**
+
+- **Tried:** replaced the local `handler_func` copy in `server.c`
+  with `#include "server_internal.h"` (second TU after R605
+  `server2.c`). First build failed `error C2371: 'Init'` — the
+  header's `extern void __cdecl Init(void)` (zero-includer-era stale
+  decl) collides with the real `int __cdecl Init(LPVOID)` def in
+  `server.c`. Fixed the header to `extern int __cdecl Init(void*
+  param)` — nobody used the old spelling. Lesson: wiring the first
+  includer into a dead header audits its decls; do not assume a
+  zero-includer header is correct.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-605 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Remaining 5 `handler_func`
+  copies (`server3.c`, `server4.c`, `ProcessSendData.c`,
+  `cm_ProcessCommandQueue.c`, `srv_LoadBuf.c`) — one per round.
+
+**Round-607 (data pass): `handler_func` into server3.c. HOLD.**
+
+- **Tried:** replaced the local `handler_func` copy in `server3.c`
+  with `#include "server_internal.h"` (third TU after R605
+  `server2.c`, R606 `server.c`). No decl collisions this time (R606
+  already fixed the header's `Init`). Typedef decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-606 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Remaining 4 `handler_func`
+  copies (`server4.c`, `ProcessSendData.c`,
+  `cm_ProcessCommandQueue.c`, `srv_LoadBuf.c`) — one per round.
+
+**Round-608 (data pass): `handler_func` into server4.c. HOLD.**
+
+- **Tried:** replaced the local `handler_func` copy in `server4.c`
+  with `#include "server_internal.h"` (fourth TU). No collisions.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-607 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Remaining 3 `handler_func`
+  copies (`ProcessSendData.c`, `cm_ProcessCommandQueue.c`,
+  `srv_LoadBuf.c`) — one per round.
+
+**Round-609 (data pass): `handler_func` into ProcessSendData.c. HOLD.**
+
+- **Tried:** replaced the local `handler_func` copy in
+  `server_c/ProcessSendData.c` with `#include
+  "../server_internal.h"` (fifth TU; `server_c/` needs the `../`
+  prefix). No collisions.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-608 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Remaining 2 `handler_func`
+  copies (`cm_ProcessCommandQueue.c`, `srv_LoadBuf.c`) — one per
+  round.
+
+**Round-610 (data pass): `handler_func` into cm_ProcessCommandQueue.c.
+HOLD.**
+
+- **Tried:** replaced the local `handler_func` copy in
+  `server_c/cm_ProcessCommandQueue.c` with `#include
+  "../server_internal.h"` (sixth TU). No collisions.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-609 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Remaining 1 `handler_func`
+  copy (`srv_LoadBuf.c`) — last one next round.
+
+**Round-611 (data pass): `handler_func` into srv_LoadBuf.c — series
+complete. HOLD.**
+
+- **Tried:** replaced the last local `handler_func` copy in
+  `server_c/srv_LoadBuf.c` with `#include "../server_internal.h"`.
+  All 7 copies now resolve to the shared header (`server.c`,
+  `server2.c`, `server3.c`, `server4.c`, `ProcessSendData.c`,
+  `cm_ProcessCommandQueue.c`, `srv_LoadBuf.c`). No collisions.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-610 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. `handler_func` series done.
+
+**Round-612 (data pass): verification round after header series.
+No source change.**
+
+- **Tried:** `rebrew test --all`: 281/283 pass — no demotions from
+  the R605–R611 `handler_func` header series (same 2 pre-existing:
+  `ServerMainThread` NEAR_MATCHING Δ359, `gm_AllocSpieler` STUB).
+  Only 1 NEAR_MATCHING tree-wide — too big for a data round.
+  Hunted: unannotated globals (266, all VA-less BSS externs — no
+  placement effect); `sim.c` lone path literal (own-TU path,
+  extern→def churn class R524 — park); duplicate-proto/extern scans
+  exhausted. No safe +0 lever this round.
+- **Gate:** `test --all` 281 passed / 2 failed (pre-existing).
+  Baselines RESIDUE **8634** / DATA **21836** untouched.
+- **Keep:** Round-611 stack.
+- **Parked:** same 9 shape conflicts. Next: fresh scan angles for
+  R613 (string-merge candidates outside lead-in, `.rdata` const
+  dedup).
+
+**Round-613 (data pass): drop 2 exact-duplicate mid-file protos.
+HOLD.**
+
+- **Tried:** exact-duplicate prototype scan (same name + signature,
+  2+ sites per TU) found 2 real dupes: `spiel.c` repeated
+  `gm_NoopRet2` proto mid-file (line 149, head decl at 37 covers);
+  `server3.c` repeated `memcpy` proto before `cm_QueuePlayerCommand`
+  (first copy before `srv_QueueCommandForProcessing` covers).
+  Dropped both second copies. Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-612 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Exact-dupe proto scan now
+  exhausted tree-wide.
+
+**Round-614 (data pass): drop 14 dead protos in spiel.c. HOLD.**
+
+- **Tried:** `spiel.c` head carried 14 forward-decl protos never
+  called in that TU (each name appears exactly once tree-locally):
+  `gm_AssignBuildingOwner`, `gm_WalkEntityChain`,
+  `gm_CheckStatLevel`, `gm_GetOppositeStatIndex`, `gm_AddObjekt`,
+  `gm_CalculateProductionValue`, `gm_SumBuildingProductionValues`,
+  `gm_EntityQuerySum`, `compute_size`, `gm_FindEntityByOwner`,
+  `gm_GetMsgField`, `ahm_LookupEntityInTable`, `gm_RandomFloat01`
+  (+`gm_NoopRet2` mid-file dupe already dropped at R613). Verified
+  each with word-boundary count == 1 before deleting. Proto decls
+  emit nothing. Sibling spiel TUs carry similar copy-pasted blocks —
+  one TU per round.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-613 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead-proto blocks remain in
+  `spiel2/3/5/6/62/622.c`, `spiel_gm_DispatchCall.c` — one TU per
+  round.
+
+**Round-615 (data pass): drop 15 dead protos in ls_LoadTownData.c.
+HOLD.**
+
+- **Tried:** `ls_LoadTownData.c` head carried 15 forward-decl protos
+  never called in that TU (each name exactly once tree-locally):
+  `amt_FindEntity26/27`, `gm_RandomMod`, `_ftol`, `gm_AddObjekt`,
+  `gm_LookupEntityRecordById`, `gm_ResolveEntityById`,
+  `gm_EntitySetField`, `vfs_OpenStream`, `ls_LoadSavegameHeader`,
+  `ls_LoadExistingEntities`, `ls_LoadBuildingEntityState`,
+  `ls_LoadDynamicEntities`, `ls_LoadEntities`, `amt_fio_LoadAemter`,
+  `ls_ID2Ptr`. Kept the live decls (`ls_ReadVfsDataChecked`,
+  `g_file_version`, `g_aux_entity_count/buffer`, `g_save_info`,
+  self-proto `ls_LoadTownData`). Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-614 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. `srv_RecvGame.c` carries the
+  same 8-dead-proto block — next round.
+
+**Round-616 (data pass): drop 8 dead protos in srv_RecvGame.c. HOLD.**
+
+- **Tried:** `srv_RecvGame.c` head carried 8 of the same dead
+  forward-decls as R615 (`amt_FindEntity26/27`, `gm_RandomMod`,
+  `_ftol`, `gm_AddObjekt`, `gm_LookupEntityRecordById`,
+  `gm_ResolveEntityById`, `gm_EntitySetField` — each exactly once
+  tree-locally). The sibling `ls_*`/`vfs_OpenStream`/`amt_fio`/
+  `ls_ID2Ptr` protos in the same block ARE called here (count 2) —
+  kept. Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-615 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead-proto blocks remain in
+  `spiel2/3/5/6/62/622.c`, `spiel_gm_DispatchCall.c` — one TU per
+  round.
+
+**Round-617 (data pass): drop 30 dead protos in spiel622.c. HOLD.**
+
+- **Tried:** `spiel622.c` head + mid-file carried 30 forward-decl
+  protos never called in that TU (each name exactly once
+  tree-locally, verified by word-boundary count): `_ftol`,
+  `gm_InitEntitySlots`, `m_FreeTracked`, `gm_CleanupBuildingEntity`,
+  `gm_AllocObjekt`, `free_node`, `gm_FreeObjectListRecursive`,
+  `gm_NoopRet2`, `gm_AllocateObjectSlot`, `gv_Free3Fields`,
+  `gm_SearchStruct`, `gm_AllocRaum`, `gm_SetupEntityQuery`,
+  `gm_CheckEntityType`, `gv_AllocGraveyardField`, `gv_SpawnEntities`,
+  `gm_SetBuildingWorkerLimits`, `gm_AllocBuildingDefaults`,
+  `gm_RemoveLinkedNodeById`, `amt_ClearEntityLinks`,
+  `gm_InitEntityIfValid`, `gm_KillSpieler`, `gm_LookupEntityRecordById`,
+  `gm_AssignBuildingOwner`, `gm_CheckStatLevel`,
+  `gm_GetOppositeStatIndex`, `gm_AddObjekt`, `gm_RandomFloat01`,
+  mid-file `gm_RemoveObjectByType`. Kept all count>1 decls
+  (`gm_NextEntityQueryMatch`, `gm_ff_Objekt`, `gm_WalkEntityChain`,
+  `gm_CalculateProductionValue`, …). Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-616 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead-proto blocks remain in
+  `spiel2/3/5/6/62.c`, `spiel_gm_DispatchCall.c` — one TU per round.
+
+**Round-624 (data pass): drop 45 dead protos in gm_RandomQuadratic.c.
+HOLD.**
+
+- **Tried:** `gm_RandomQuadratic.c` head carried the same 45-dead
+  copy-pasted proto block (each verified count == 1; both
+  `gm_GetBuildingTypeCategory` spellings dead here — mutual-count
+  only, dropped both). Kept the one live proto
+  (`gm_RandomFloat01`, called in-body) and all `extern` data decls.
+  Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-623 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Same block remains in
+  `gm_RemoveObjectWrapper.c` (44 dead + 5 live) — next round.
+  Caution replay: mutual-count dupe pairs look live (count 2) but
+  are dead unless a third body mention exists.
+
+**Round-625 (data pass): drop 42 dead protos in
+gm_RemoveObjectWrapper.c. HOLD.**
+
+- **Tried:** `gm_RemoveObjectWrapper.c` head carried 42 dead
+  forward-decls (each verified count == 1; both
+  `gm_GetBuildingTypeCategory` spellings dead — mutual-count only,
+  dropped both). Kept the 2 live (`gm_EntityAccumulate`,
+  `gm_RemoveLinkedNodeById`, both called in-body) and all `extern`
+  data decls. Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-624 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Spiel dead-proto series done;
+  loadsave pair done; `handler_func` series done.
+
+**Round-627 (data pass): drop dead `srand` decl in cm_ExCreateCitizen.
+HOLD.**
+
+- **Tried:** `cm_ExCreateCitizen.c` declared
+  `extern void __cdecl srand(unsigned int);` but the body calls
+  `srv_SeedRandom` (the R605 game-thunk story — never the CRT).
+  Leftover from before that fix. Dropped; kept live `rand`.
+  Tree-wide unused-extern scan: mostly false positives (hard-cast
+  VA uses don't match word-boundary counting — `extern` decls
+  without a same-spelling body mention are the norm here, not dead
+  code). Only `srand` verified truly dead.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-626 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Unused-extern scan retired —
+  word-boundary counting can't see hard-cast uses.
+
+**Round-629 (data pass): drop 6 unused externs in 2 lobby TUs.
+HOLD.**
+
+- **Tried:** `fcn_10014af0.c` carried 4 unused externs
+  (`s_..._1002d70c`, `s_..._1002d858`, `g_player_slots_base`,
+  `g_record_table` — body uses raw VAs, never the names);
+  `lb_ExPlayerHasJoined.c` carried 2 (`g_player_slots_base`,
+  `g_player_slots` — body casts raw VA to `PlayerSlot*`, type still
+  visible via `command.h`). Dropped all 6; kept live `g_max_players`
+  (count 2). Extern decls emit nothing. (R627's scan-retirement was
+  premature for `[]`-array string/global decls — those never match
+  hard-cast uses by construction; proto-scan lesson stands.)
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-628 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. `lb_ExLobbyServerCommand.c` /
+  `lb_ExPlayerlist.c` carry the same 4-decl lobby block — next
+  rounds, one TU each.
+
+**Round-630 (data pass): drop 4 unused externs in
+lb_ExLobbyServerCommand.c. HOLD.**
+
+- **Tried:** `lb_ExLobbyServerCommand.c` carried the same 4 dead
+  lobby decls as R629 (`s_..._1002d70c`, `s_..._1002d858`,
+  `g_player_slots_base`, `g_record_table` — body uses raw VAs at
+  lines 35–36, never the names). Dropped all 4. Extern decls emit
+  nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-629 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. `lb_ExPlayerlist.c` carries the
+  same 4-decl block — next round.
+
+**Round-631 (data pass): drop 4 unused externs in lb_ExPlayerlist.c.
+HOLD.**
+
+- **Tried:** `lb_ExPlayerlist.c` carried the same 4 dead lobby decls
+  (`s_..._1002d70c`, `s_..._1002d858`, `g_player_slots_base`,
+  `g_record_table` — 5 body VA uses all raw, never the names; the
+  body uses local `PlayerList9`, not `PlayerSlot`). Dropped all 4.
+  Lobby 4-decl block series done (R629–R631: 14 decls). Extern decls
+  emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-630 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-628 (data pass): verification round after drop series. No
+source change.**
+
+- **Tried:** `rebrew test --all`: 281 passed / 2 failed, byte 264 —
+  identical to the R612/R626 baselines, so the R613–R627 proto-drop
+  series (200+ decls) caused zero demotions. Hunted: dispatch
+  `--min-table-len 5` (only known table + CRT false positive);
+  `rebrew_types.h` (CRT-adjacent sbh types — out of scope);
+  `server_internal.h` decls (all live); remaining `.c` struct defs
+  (all singles or parked layout-forks: `LinkedNode`,
+  `OFFICE_SLOT`, SetSyncFlags `player_slot`, zlib). No safe +0
+  lever this round.
+- **Gate:** `test --all` 281/264 at baseline. Baselines RESIDUE
+  **8634** / DATA **21836** untouched.
+- **Keep:** Round-627 stack.
+- **Parked:** same 9 shape conflicts.
+
+**Round-626 (gate round): full gate suite green. No source change.**
+
+- **Tried:** ran all four gate checks after the R593–R625 hygiene
+  series: `rebrew lint` 188 passed / 0 errors / 0 warnings; cmake
+  `-j1` compile/link errors 0 (POST_BUILD 64.8% expected);
+  `rebrew verify --full` 281 passed (baseline 281), byte-matched 264
+  (baseline 264), EXACT 31 / RELOC 233 / PROVEN 17 — no demotions
+  from any header lift or proto drop; per-TU `rebrew test` on
+  `gm_RemoveObjectWrapper.c` RELOC-clean; split_link + postlink
+  residue `.text` 0x21ba (**8634**) / `.data` 0x554c (**21836**).
+  (`scripts/gate.sh` itself times out under the 60s tool cap on
+  `verify --full`, so the checks ran individually — same four
+  gates.)
+- **Keep:** Round-625 stack; baselines RESIDUE **8634** / DATA **21836**
+  / verify 281 / byte 264 — all re-confirmed.
+- **Parked:** same 9 shape conflicts.
+
+**Round-623 (data pass): drop 47 dead protos in
+spiel_gm_DispatchCall.c. HOLD.**
+
+- **Tried:** `spiel_gm_DispatchCall.c` head carried the same 47-dead
+  copy-pasted proto block (each verified count == 1, incl. both
+  `gm_GetBuildingTypeCategory` spellings — both dead here, dropped
+  both). Kept the two `// DATA` markers (real annotations) and all
+  `extern` data decls. Last TU of the dead-proto series. Proto decls
+  emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-622 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead-proto series done
+  (`spiel.c`, `spiel2/3/5/6/62/622.c`, `spiel_gm_DispatchCall.c`,
+  `ls_LoadTownData.c`, `srv_RecvGame.c`).
+
+**Round-622 (data pass): drop 39 dead protos in spiel6.c. HOLD.**
+
+- **Tried:** `spiel6.c` head carried 39 dead forward-decls (each
+  verified count == 1); unlike R619–621 siblings this TU calls 8 of
+  its neighbors (`gm_NextEntityQueryMatch`, `gm_ff_Objekt`,
+  `gm_SetupEntityQuery`, `gm_CheckEntityType`,
+  `gm_SetBuildingWorkerLimits`, both `gm_GetBuildingTypeCategory`
+  spellings, `gm_FindEntityByOwner`) — all kept. Dropped only the
+  dead. Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-621 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead-proto blocks remain in
+  `spiel_gm_DispatchCall.c` — last one next round.
+
+**Round-621 (data pass): drop 31 dead protos in spiel5.c. HOLD.**
+
+- **Tried:** `spiel5.c` head carried 31 dead forward-decls (each
+  verified count == 1); unlike R619/620 siblings this TU actually
+  calls 15 of its protos (`m_FreeTracked`,
+  `gm_CleanupBuildingEntity`, `gm_NextEntityQueryMatch`,
+  `gm_ff_Objekt`, `gm_AllocObjekt`, `gm_FreeObjectListRecursive`,
+  `gv_Free3Fields`, `gm_SearchStruct`, `gm_AllocRaum`,
+  `gm_SetupEntityQuery`, `gm_CheckEntityType`,
+  `gv_AllocGraveyardField`, `gv_SpawnEntities`,
+  `gm_SetBuildingWorkerLimits`, both `gm_GetBuildingTypeCategory`
+  spellings, `gm_AllocBuildingDefaults`) — all kept. Dropped only
+  the dead. Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-620 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead-proto blocks remain in
+  `spiel6/62.c`, `spiel_gm_DispatchCall.c` — one TU per round.
+  Lesson: never bulk-drop a proto block without per-name counts —
+  some TUs call their neighbors.
+
+**Round-620 (data pass): drop 47 dead protos in spiel3.c. HOLD.**
+
+- **Tried:** `spiel3.c` head carried 47 forward-decl protos never
+  called in that TU (each verified count == 1, same copy-pasted
+  block as R619 `spiel2.c`, incl. both `gm_GetBuildingTypeCategory`
+  spellings). Kept the `// DATA: SERVER 0x100a8c30` marker (real
+  annotation) and all `extern` data decls. Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-619 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead-proto blocks remain in
+  `spiel5/6/62.c`, `spiel_gm_DispatchCall.c` — one TU per round.
+
+**Round-619 (data pass): drop 47 dead protos in spiel2.c. HOLD.**
+
+- **Tried:** `spiel2.c` head carried 47 forward-decl protos never
+  called in that TU (each verified count == 1), including the
+  `gm_GetBuildingTypeCategory(int)` / `(int btype)` dupe pair (both
+  dead — dropped both). Kept `gm_InitEntitySlots` (live, count>1)
+  and all `extern` data decls. Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-618 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead-proto blocks remain in
+  `spiel3/5/6/62.c`, `spiel_gm_DispatchCall.c` — one TU per round.
+
+**Round-618 (data pass): drop 36 dead protos in spiel62.c. HOLD.**
+
+- **Tried:** `spiel62.c` head carried 36 forward-decl protos never
+  called in that TU (each verified count == 1): `_ftol`,
+  `m_FreeTracked`, `gm_FindNextFilteredEntity`,
+  `gm_CleanupBuildingEntity`, `gm_NextEntityQueryMatch`,
+  `gm_ff_Objekt`, `gm_StartFilteredEntitySearch`, `gm_AllocObjekt`,
+  `free_node`, `gm_AllocateObjectSlot`, `gm_ResolveEntityById`,
+  `gm_ResolveParentEntity`, `gm_SearchStruct`, `gm_AllocRaum`,
+  `gm_SetupEntityQuery`, `gm_CheckEntityType`,
+  `gv_AllocGraveyardField`, `gv_SpawnEntities`,
+  `gm_SetBuildingWorkerLimits`, `gm_AllocBuildingDefaults`,
+  `gm_EntityAccumulate`, `gm_RemoveLinkedNodeById`,
+  `amt_ClearEntityLinks`, `gm_InitEntityIfValid`, `gm_KillSpieler`,
+  `gm_AssignBuildingOwner`, `gm_WalkEntityChain`,
+  `gm_CheckStatLevel`, `gm_GetOppositeStatIndex`, `gm_AddObjekt`,
+  `gm_CalculateProductionValue`, `gm_SumBuildingProductionValues`,
+  `gm_EntityQuerySum`, `compute_size`, `gm_FindEntityByOwner`,
+  `gm_GetMsgField`, `ahm_LookupEntityInTable`, `gm_RandomFloat01`.
+  Kept all count>1 decls. Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-617 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead-proto blocks remain in
+  `spiel2/3/5/6.c`, `spiel_gm_DispatchCall.c` — one TU per round.
+
+**Round-632 (data pass): drop orphan `lb_HandleLobbyCommands` decl
+from command.h. HOLD.**
+
+- **Tried:** `command.h` declared `lb_HandleLobbyCommands` with zero
+  references tree-wide (no TU defines or calls it — March
+  scaffolding leftover). Audited all 37 decls; rest have TU homes.
+  Dropped the one line. Header decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `rebrew test --all` 281/264 — no demotions from the header edit.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-631 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+- **Note:** R618–R623 entries landed mid-file (stale anchor — file
+  now reads R617, R624–R627, R629–R632, R628, R626, R623, R622,
+  R621, R620 out of order). Content all present; order cosmetic.
+
+**Round-634 (data pass): drop 3 orphan decls from entity.h. HOLD.**
+
+- **Tried:** `entity.h` declared `gm_LookupEntityInTable` (no such
+  symbol — real ones are `ahm_LookupEntityInTable` /
+  `gm_LookupEntityRecordById`), `gm_DeallocEntity` (renamed to
+  `gm_KillSpieler`, defined in `spiel62.c`), and
+  `gm_ProcessEntityChain` (wrong prefix + signature — real:
+  `ahm_ProcessEntityChain(char*)` in `alchemistry_logic3.c`). All
+  three zero references tree-wide. Dropped. Audited all 16 decls;
+  rest live.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `rebrew test --all` 281/264 — no demotions from the header edit.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-633 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-635 (data pass): drop 3 stale wrong-prefix decls from vfs.h.
+HOLD.**
+
+- **Tried:** `vfs.h` declared `OpenVfsStream`, `ReadVfsData`,
+  `ReadVfsCompressed` — zero references (only comment mentions);
+  the real symbols are `vfs_OpenStream`,
+  `ls_ReadVfsDataChecked`, `vfs_ReadCompressed` (wrong-prefix
+  scaffolding, same class as R634 `gm_ProcessEntityChain`). Kept
+  `CloseVfsStream` + the 3 live `vfs_` decls.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `rebrew test --all` 281/264 — no demotions from the header edit.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-634 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-636 (data pass): FAIL — `m_PoolFree` decl is load-bearing.
+Soft-reverted.**
+
+- **Tried:** dropping orphan `m_PoolFree` decl from `m_alloc.h`
+  (real symbol is snake_case `m_pool_free`; zero references to the
+  CamelCase spelling). **FAIL:** postlink `.text` 0x21ba→0x2203
+  (**+73**), `data_operands` 1616→1615,
+  `ls_LoadBuildingEntityState` 671→744. Same class as R590
+  `gm_Open.c` `ALLOCFN` — an unused decl shifting codegen (likely
+  declaration-merge order in TUs including `m_alloc.h`). Reverted;
+  re-measured HOLD (0x21ba/0x554c/1616/671), lint 0/0.
+- **Keep:** Round-635 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. `m_PoolFree` stays (wrong but
+  load-bearing). Rule refined: unused *header* decls are NOT safe
+  by default — measure every drop, even decl-only.
+
+**Round-637 (data pass): drop 15 dead protos in vfs4.c. HOLD.**
+
+- **Tried:** `vfs4.c` head carried 15 dead game forward-decls
+  (each verified count == 1): `vfs_GetErrnoPtr`,
+  `vfs_WriteBufferLocked`, `vfs_FreeGameSubobject`,
+  `vfs_CleanupSubobject`, `vfs_CompressBlock`, `vfs_LockedFwrite`,
+  `vfs_GetByte`, `vfs_WriteUint32LE`, `vfs_CloseStream`,
+  `vfs_EntityCleanup`, `vfs_StreamClose`, `crc32`,
+  `vfs_FreeSubobj`, `vfs_ReadUint32BE`, `vfs_ReadCompressed`. Kept
+  the 5 live (`free`, `vfs_FlushStream`, `vfs_CleanupObject`,
+  `vfs_DestroyEntity`, `vfs_FlushAndClose`) + CRT (`deflate`,
+  `fclose`) + called `m_pool_free`. Scan caution: bare call lines
+  (`deflate(...)`) match the proto regex — excluded by hand, never
+  drop without per-name verification. Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-636 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Same dead block remains in
+  `vfs.c`, `vfs2.c`, `vfs3.c` — one TU per round.
+
+**Round-638 (data pass): drop 19 dead protos in vfs3.c. HOLD.**
+
+- **Tried:** `vfs3.c` head carried 19 dead forward-decls (each
+  verified count == 1): the same 15 game decls as R637 `vfs4.c`
+  plus `vfs_FlushStream` (live in vfs4, dead here) and `fclose`
+  (dead CRT decl — dropped, no C4013 in build). Kept the 3 live
+  (`free`, `vfs_CleanupObject`, `vfs_DestroyEntity`). Proto decls
+  emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-637 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Same dead block remains in
+  `vfs.c`, `vfs2.c` — one TU per round.
+
+**Round-639 (data pass): drop 11 dead protos in vfs2.c. HOLD.**
+
+- **Tried:** `vfs2.c` head carried 11 dead forward-decls (each
+  verified count == 1): `vfs_WriteBufferLocked`, `free`,
+  `vfs_FreeGameSubobject`, `vfs_CleanupSubobject`,
+  `vfs_EntityCleanup`, `vfs_StreamClose`, `crc32`,
+  `vfs_FreeSubobj`, `vfs_CleanupObject`, `vfs_DestroyEntity`,
+  `vfs_ReadCompressed`. Kept all live (`deflate`,
+  `_crt_locked_call4a`, `vfs_GetByte`, `vfs_FlushStream`,
+  `vfs_WriteUint32LE`, `vfs_CloseStream`, `vfs_ReadUint32BE`,
+  `vfs_FlushAndClose`) + the bare `fputc(...)` call line (false
+  positive — a use, not a decl). Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-638 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Same dead block remains in
+  `vfs.c` — last one next round.
+
+**Round-640 (data pass): drop 16 dead protos in vfs.c. HOLD.**
+
+- **Tried:** `vfs.c` head carried 16 dead forward-decls (each
+  verified count == 1): `vfs_WriteBufferLocked`,
+  `vfs_FreeGameSubobject`, `vfs_CleanupSubobject`,
+  `vfs_CompressBlock`, `vfs_LockedFwrite`, `vfs_FlushStream`,
+  `vfs_WriteUint32LE`, `vfs_EntityCleanup`, `vfs_StreamClose`,
+  `crc32`, `vfs_FreeSubobj`, `vfs_CleanupObject`,
+  `vfs_DestroyEntity`, `vfs_ReadUint32BE`, `vfs_FlushAndClose`,
+  `vfs_ReadCompressed`. Kept the 4 live (`_errno`, `free`,
+  `vfs_GetByte`, `vfs_CloseStream`). Vfs dead-proto series done
+  (R637–R640). Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-639 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-641 (data pass): drop 6 dead protos in Error.c. HOLD.**
+
+- **Tried:** `Error.c` head carried 6 dead game forward-decls
+  (each verified count == 1): `LogMessageInternal` (defined
+  elsewhere, never called here), `check_memory_protection`,
+  `AnalyzeInstruction`, `EmitCrashModuleLine`,
+  `GetDebugRecordByIndex`, `write_log`. Kept live `DispatchLogOutput`
+  (defined here), all `extern` data decls, and CRT `ctime`
+  (`fclose` is called in-body). Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-640 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead protos remain in
+  `ErrorModule.c`, `ErrorModule2.c`, `broadcast.c`, `m_alloc2.c`,
+  `m_AllocTracked.c`, `m_ReportGroupInfo.c` — one TU per round.
+
+**Round-642 (data pass): drop 5 dead protos in ErrorModule.c. HOLD.**
+
+- **Tried:** `ErrorModule.c` head carried 5 dead forward-decls
+  (each verified count == 1): `LogMessageInternal`, `ctime`,
+  `EmitCrashModuleLine`, `DispatchLogOutput`, plus the bare
+  `VirtualQuery(...)` call line (false positive — a use via
+  windows.h, kept as-is). Kept the 3 live
+  (`check_memory_protection`, `AnalyzeInstruction`,
+  `GetDebugRecordByIndex` — defined here). Proto decls emit
+  nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-641 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead protos remain in
+  `ErrorModule2.c`, `broadcast.c`, `m_alloc2.c`,
+  `m_AllocTracked.c`, `m_ReportGroupInfo.c` — one TU per round.
+
+**Round-643 (data pass): drop 5 dead protos in ErrorModule2.c. HOLD.**
+
+- **Tried:** `ErrorModule2.c` head carried 5 dead forward-decls
+  (each verified count == 1): `ctime`,
+  `check_memory_protection`, `AnalyzeInstruction`,
+  `EmitCrashModuleLine`, `GetDebugRecordByIndex`. Kept the 2 live
+  (`LogMessageInternal`, `DispatchLogOutput` — called in-body).
+  The bare `FreeConsole()` call line is a false positive (a use via
+  windows.h, not a decl — kept as-is). Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-642 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Dead protos remain in
+  `broadcast.c`, `m_alloc2.c`, `m_AllocTracked.c`,
+  `m_ReportGroupInfo.c` — one TU per round.
+
+**Round-644 (data pass): drop 4 dead protos in m_alloc TUs. HOLD.**
+
+- **Tried:** `m_ReportGroupInfo.c` head carried 3 dead decls
+  (`ReportFatalError`, `ReportMessage`, `malloc` — each verified
+  count == 1; this TU only calls `LogMessageInternal`); `m_alloc2.c`
+  carried 1 dead (`malloc` — calls `ReportFatalError`/
+  `ReportMessage`, never malloc). Dropped all 4. `broadcast.c`
+  cleared: its 5 scan hits are all bare call lines (winsock.h
+  provides the decls), nothing to drop. `m_AllocTracked.c` calls
+  everything it declares. Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-643 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-645 (data pass): drop 11 dead protos in alchemistry_logic3.c.
+HOLD.**
+
+- **Tried:** `alchemistry_logic3.c` head carried 11 dead
+  forward-decls (each verified count == 1): `_ftol`,
+  `gm_ResolveEntityById`, `gm_RandomMod`, `gm_RandomFloat01`,
+  `gm_AddObjekt`, `gm_ObjectsAvailble`,
+  `gm_LookupEntityRecordById`, `gm_KillSpieler`,
+  `gm_NextEntityQueryMatch`, `ahm_LookupEntityInTable`,
+  mid-file `gm_ff_Objekt`. Kept live `dispatch_fn` typedef +
+  `g_chain_handler_table` (used) and all `extern` data decls.
+  Proto decls emit nothing.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-644 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-646 (data pass): drop 4 dead decls in alchemistry_logic2.c.
+HOLD.**
+
+- **Tried:** `alchemistry_logic2.c` head carried 4 dead decls (each
+  verified count == 1): `_ftol`, `gm_ResolveEntityById`,
+  `gm_RandomFloat01`, `g_table`. Kept the 4 live
+  (`gm_RandomMod`, `gm_AddObjekt`, `gm_ObjectsAvailble`,
+  `dispatch_fn` — called/used in-body) and all other data decls.
+  The bare `memcpy(...)` call line is a false positive (a use via
+  string.h, kept). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-645 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-647 (data pass): drop 8 dead decls in 2 alchemy TUs. HOLD.**
+
+- **Tried:** `ahm_ExAllocAlchemist.c` head carried 4 dead decls
+  (`_ftol`, `g_color_scale`, `g_dbl_const_6d0`,
+  `g_chain_handler_table` — each verified count == 1; kept the 8
+  live incl. `dispatch_fn`); `ahm_GetCommandPayloadSize.c` head
+  carried 4 dead (`dispatch_fn` typedef, `g_color_scale`,
+  `g_dbl_const_6d0`, `g_chain_handler_table` — typedef died with
+  its only use). Dropped all 8. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test` on `ahm_GetCommandPayloadSize.c`: RELOC
+  752/752 held. `data_operands` **1616**.
+  `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-646 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-648 (data pass): drop 4 dead `_ftol` decls in friedhof TUs.
+HOLD.**
+
+- **Tried:** `InitNewDynastyEntity.c`, `gv_ExtendProductionTime.c`,
+  `gv_HireProductionWorker.c`, `gv_MoveSlotEntry.c` each carried a
+  dead `extern int __cdecl _ftol(void);` (verified count == 1;
+  neighbors `gm_RandomMod`, `amt_FindEntity26/27`,
+  `gm_SubObjectNoKill`, `gm_AddObjekt` live — kept). Dropped only
+  the `_ftol` lines. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-647 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-649 (data pass): drop 17 dead protos in loadsave2.c. HOLD.**
+
+- **Tried:** `loadsave2.c` head carried 17 dead forward-decls
+  (each verified count == 1): `gv_AllocGraveyardField`,
+  `amt_FindEntity26/27`, `gm_RandomMod`, `_ftol`, `gm_AddObjekt`,
+  `ls_LoadGraveyardData`, `gm_LookupEntityRecordById`,
+  `gm_ResolveEntityById`, `gm_EntitySetField`, `vfs_OpenStream`,
+  `ls_LoadSavegameHeader`, `ls_LoadBuildingEntityState`,
+  `ls_LoadDynamicEntities`, `ls_LoadTownData`, `amt_fio_LoadAemter`,
+  `gm_StartFilteredEntitySearch`. Kept the 4 live
+  (`ls_ReadVfsDataChecked`, `ls_LoadExistingEntities`,
+  `ls_LoadEntities`, `ls_ID2Ptr`) + data decls + R535 named
+  strings. Scan caution #2: a bare *call* line
+  (`m_FreeTracked(buf);`) matches the proto regex — verify the
+  match is a decl before dropping. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test` on `loadsave2.c`: RELOC 282/282 held.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-648 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Same dead block remains in
+  `loadsave3.c`, `ls_LoadBuildingEntityState.c`,
+  `ls_LoadDynamicEntities.c`, `ls_LoadEntities.c` — one TU per
+  round.
+
+**Round-650 (data pass): drop 16 dead protos in loadsave3.c. HOLD.**
+
+- **Tried:** `loadsave3.c` head carried 16 dead forward-decls
+  (each verified count == 1): `gv_AllocGraveyardField`,
+  `amt_FindEntity26/27`, `gm_RandomMod`, `_ftol`, `gm_AddObjekt`,
+  `ls_LoadGraveyardData`, `vfs_OpenStream`,
+  `ls_LoadSavegameHeader`, `ls_LoadExistingEntities`,
+  `ls_LoadBuildingEntityState`, `ls_LoadDynamicEntities`,
+  `ls_LoadEntities`, `ls_LoadTownData`, `amt_fio_LoadAemter`,
+  `ls_ReadVfsDataChecked` (dead here — loadsave3 never calls it).
+  Kept the 6 live (`gm_LookupEntityRecordById`,
+  `gm_ResolveEntityById`, `gm_EntitySetField`, `ls_ID2Ptr`,
+  `gm_StartFilteredEntitySearch`, `LogMessageInternal`) + data
+  decls + R535 named strings. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-649 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Same dead block remains in
+  `ls_LoadBuildingEntityState.c`, `ls_LoadDynamicEntities.c`,
+  `ls_LoadEntities.c` — one TU per round.
+  Lesson: sibling TUs differ in live sets (`ls_ReadVfsDataChecked`
+  live in loadsave2, dead in loadsave3) — verify per-TU, never
+  copy the drop list.
+
+**Round-651 (data pass): drop 14 dead protos in
+ls_LoadBuildingEntityState.c. HOLD.**
+
+- **Tried:** `ls_LoadBuildingEntityState.c` head carried 14 dead
+  forward-decls (each verified count == 1): `amt_FindEntity26/27`,
+  `gm_RandomMod`, `_ftol`, `gm_AddObjekt`,
+  `gm_LookupEntityRecordById`, `gm_ResolveEntityById`,
+  `gm_EntitySetField`, `vfs_OpenStream`, `ls_LoadSavegameHeader`,
+  `ls_LoadExistingEntities`, `ls_LoadDynamicEntities`,
+  `ls_LoadEntities`, `ls_LoadTownData`, `amt_fio_LoadAemter`,
+  `ls_ID2Ptr`. Kept the 5 live (`gv_AllocGraveyardField`,
+  `ls_ReadVfsDataChecked`, `ls_LoadGraveyardData`,
+  `ahm_AllocAhmInfo`, self-proto) + data decls. The bare
+  `gm_ResetAllEntities();` call line is a false positive (a use,
+  kept). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test`: SIZE_MISMATCH 820/1463 — confirmed
+  pre-existing via stash (identical numbers), edit neutral.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-650 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Same dead block remains in
+  `ls_LoadDynamicEntities.c`, `ls_LoadEntities.c` — one TU per
+  round.
+
+**Round-652 (data pass): drop 15 dead protos in
+ls_LoadDynamicEntities.c. HOLD.**
+
+- **Tried:** `ls_LoadDynamicEntities.c` head carried 15 dead
+  forward-decls (each verified count == 1): `amt_FindEntity26/27`,
+  `gm_RandomMod`, `_ftol`, `gm_AddObjekt`,
+  `gm_LookupEntityRecordById`, `gm_ResolveEntityById`,
+  `gm_EntitySetField`, `vfs_OpenStream`, `ls_LoadSavegameHeader`,
+  `ls_LoadExistingEntities`, `ls_LoadBuildingEntityState`,
+  `ls_LoadEntities`, `ls_LoadTownData`, `amt_fio_LoadAemter`,
+  `ls_ID2Ptr`. Kept the 2 live (`ls_ReadVfsDataChecked`,
+  self-proto) + data decls. Decl-only change, no emit.
+  Build note: first cmake was killed by the 60s tool cap (no
+  errors); rebuilt clean, split EXIT 0.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-651 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Same dead block remains in
+  `ls_LoadEntities.c` — last one next round.
+
+**Round-653 (data pass): drop 15 dead protos in ls_LoadEntities.c.
+HOLD.**
+
+- **Tried:** `ls_LoadEntities.c` head carried 15 dead forward-decls
+  (each verified count == 1): `amt_FindEntity26/27`,
+  `gm_RandomMod`, `_ftol`, `gm_AddObjekt`,
+  `gm_LookupEntityRecordById`, `gm_ResolveEntityById`,
+  `gm_EntitySetField`, `vfs_OpenStream`, `ls_LoadSavegameHeader`,
+  `ls_LoadExistingEntities`, `ls_LoadBuildingEntityState`,
+  `ls_LoadDynamicEntities`, `ls_LoadTownData`, `amt_fio_LoadAemter`,
+  `ls_ID2Ptr`. Kept the 2 live (`ls_ReadVfsDataChecked`,
+  self-proto) + data decls. Loadsave dead-proto series done
+  (R649–R653). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-652 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-654 (data pass): done-criteria audit — imports 100/100.
+No source change.**
+
+- **Tried:** verified done-criteria sub-items with pefile: REF
+  imports = 100 (KERNEL32 81 / USER32 2 / WS2_32 16 / WINMM 1),
+  BLD `split_poc.dll` imports = 100, identical module split.
+  REF exports: `Init` @0x9320, `Exit` @0x9350.
+  Wine load check parked — `wine winedump` file association is
+  broken in this env (`ShellExecuteEx failed`, env issue, not
+  tree issue).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-653 stack.
+- **Parked:** same 9 shape conflicts. Remaining done-criteria gaps:
+  `.text` VirtualSize 0x221f6 vs 0x22846, residue 8634, 2 verify
+  failures.
+
+**Round-655 (data pass): lib-match + diff triage on verify failures.
+No source change.**
+
+- **Tried:** per hard constraints ran `rebrew lib-match
+  --stock-lib LIBCMT.LIB` on both verify failures (`ServerMainThread`
+  0x100093a0, `gm_AllocSpieler` 0x10018850) — both game code, safe
+  to reverse. `rebrew diff` on ServerMainThread: same size (2434),
+  513 exact + 50 reloc + 64 structural of 627 — genuine near-miss,
+  not a data problem. Both parked: `.text` matching is out of data-round
+  scope.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-654 stack.
+- **Parked:** same 9 shape conflicts. 2 verify failures are
+  `.text`-shape work for a code round.
+
+**Round-656 (data pass): drift triage — all positional. No source
+change.**
+
+- **Tried:** per-item REF-vs-BLD on remaining drift: `g_plant_info_table`
+  REF `b7` vs BLD `7a`, `g_producer_id_table` REF `d4010000` vs BLD
+  `0000c040`, `g_next_object_id` REF `01000000` vs BLD `54541501`,
+  `g_entity_id_counter` REF `01000000` vs BLD `2a155454` — in every
+  case BLD holds other symbols' bytes at those VAs (Accept-cascade
+  displacement), not wrong content. `s_ls_tmp_1002d4fc` and
+  `g_producer_id_table` owners confirmed (`link_stubs` /
+  `gm_AllocRaum.c`+`gm_Open.c`); fixing content can't help while
+  placement is wrong. All 20 drift items now attributed.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-655 stack.
+- **Parked:** same 9 shape conflicts. All data-drift is positional.
+
+**Round-657 (data pass): drop 3 dead decls in aemter2.c. HOLD.**
+
+- **Tried:** `aemter2.c` carried 3 dead decls (each verified
+  count == 1): `ls_ReadVfsDataChecked`, `srv_InitBuildingTypeTable`,
+  and a redundant `extern sprintf` (stdio.h already included —
+  dropped, no C4013 in build). Kept live
+  `gm_LookupEntityRecordById`. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-656 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-658 (data pass): drop 5 leftover dead decls in 3 game TUs.
+HOLD.**
+
+- **Tried:** re-scan caught leftovers missed by earlier rounds:
+  `_ftol` in `gm_AllocSpieler.c`, `gm_RandomQuadratic.c`,
+  `gm_RemoveObjectWrapper.c` + `gv_Free3Fields` in the latter two
+  (each verified count == 1). Dropped all 5. `sim.c`
+  `LogMessageInternal` and `ls_LoadSavegameHeader.c`
+  `m_FreeTracked` are bare call lines (false positives, kept).
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test`: `gm_RandomQuadratic` RELOC 48/48,
+  `gm_RemoveObjectWrapper`+`gm_RemoveEntityLink` RELOC 35+36,
+  `gm_AllocSpieler` STUB (pre-existing). `data_operands` **1616**.
+  `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-657 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-659 (data pass): drop 27 missed dead protos in spiel.c. HOLD.**
+
+- **Tried:** strict tree-wide re-scan caught 27 dead protos R614
+  missed in `spiel.c` (its scan undercounted): `_ftol`,
+  `gm_InitEntitySlots`, `gm_NextEntityQueryMatch`, `gm_ff_Objekt`,
+  `gm_AllocObjekt`, `free_node`, `gm_FreeObjectListRecursive`,
+  `gm_AllocateObjectSlot`, `gm_ResolveParentEntity`,
+  `gv_Free3Fields`, `gm_SearchStruct`, `gm_AllocRaum`,
+  `gm_SetupEntityQuery`, `gm_CheckEntityType`,
+  `gv_AllocGraveyardField`, `gv_SpawnEntities`,
+  `gm_SetBuildingWorkerLimits`, `gm_AllocBuildingDefaults`,
+  `gm_EntityAccumulate`, `gm_RemoveLinkedNodeById`,
+  `amt_ClearEntityLinks`, `gm_InitEntityIfValid`,
+  `gm_KillSpieler`, `gm_MapEntityStatRange`,
+  `gm_GetEntityTableEntry`, `gm_RandomMod`,
+  `gm_LookupEntityRecordById` (each verified count == 1).
+  Kept all live decls + `Record` typedef + data decls/defs
+  (defs like `g_next_object_id` never dropped even when uncalled
+  in-TU — only decls). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test` on `spiel.c`: 5× RELOC all held.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-658 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. R614's scan was buggy —
+  re-verify sibling TUs with the strict scanner before assuming
+  clean.
+
+**Round-660 (data pass): drop 19 missed leftovers in 8 spiel TUs.
+HOLD.**
+
+- **Tried:** strict re-scan caught leftovers missed by R614–R623:
+  `_ftol` in `spiel622/spiel2/spiel3/spiel5/spiel6/spiel62/
+  spiel_gm_DispatchCall/spiel.c`, `gv_Free3Fields` in the same set
+  minus `spiel.c`, plus `gm_InitEntitySlots` (`spiel2/6`),
+  `gm_SetBuildingWorkerLimits` (`spiel6`),
+  `gm_MapEntityStatRange`+`gm_GetEntityTableEntry` (`spiel622`).
+  Each verified count == 1 before dropping (script-skipped
+  `gm_InitEntityIfValid` in `spiel62` — bare call line, kept).
+  19 lines across 8 files. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-659 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-661 (data pass): drop 2 leftover dead decls in loadsave TUs.
+HOLD.**
+
+- **Tried:** strict re-scan caught 2 leftovers:
+  `gm_StartFilteredEntitySearch` in `loadsave2.c`,
+  `ls_ReadVfsDataChecked` in `loadsave3.c` (dead here — loadsave3
+  never calls it; live in loadsave2). Each verified count == 1.
+  `gm_ResetAllEntities` in `ls_LoadBuildingEntityState.c` is a bare
+  call line (false positive, kept). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-660 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-662 (data pass): drop dead `_ftol` in cm_ExModifyStat.c.
+HOLD.**
+
+- **Tried:** command-TU dead-proto scan (game decls only): exactly
+  one hit — `extern unsigned int _ftol(void);` in
+  `cm_ExModifyStat.c` (verified count == 1; also the wrong return
+  type — real `_ftol` returns int). Dropped. Decl-only change, no
+  emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test` on `cm_ExModifyStat.c`: RELOC 159/159 held.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-661 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-663 (data pass): drop dead `m_FreeTracked` in gv_UpgradeField.
+HOLD.**
+
+- **Tried:** strict scan of misc game TUs (`sim.c`, `plant.c`,
+  `loadsave_dump1.c`, `aemter.c`, `aemter2.c`,
+  `alchemistry_logic2.c`, `gv_CheckSlotActive.c`,
+  `gv_UpgradeField.c`, `lb_HandleEntitySync.c`): exactly one hit —
+  `extern void __cdecl m_FreeTracked(void* ptr);` in
+  `gv_UpgradeField.c` (verified count == 1). Dropped. Command-TU
+  strict re-scan: clean. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test` on `gv_UpgradeField.c`: RELOC 570/570 held.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-662 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-664 (data pass): drop 2 leftover dead decls. HOLD.**
+
+- **Tried:** re-scan of cleaned files caught 2 leftovers:
+  `extern ctime` in `Error.c`, `vfs_FlushStream` in `vfs4.c`
+  (each verified count == 1; R637 kept FlushStream as live — it
+  is live in `vfs2.c`, dead here). Dropped both. Decl-only
+  change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-663 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-665 (data pass): unused-extern-data scan retired. No source
+change.**
+
+- **Tried:** full-tree strict unused-`extern`-data scan (483 hits
+  outside conflicts). Every one is either (a) referenced via hard
+  VA casts in the body (the R627 trap — word counting can't see
+  `0x1002d70c`-style uses), or (b) a mid-pocket string extern
+  (R545 proved those load-bearing spacers). The `s_cm_*` string
+  externs and spiel-block `g_*` externs all fall in (a)/(b).
+  Nothing droppable. Scan retired for good: unused *proto*
+  drops keep paying, unused *extern-data* drops don't exist here.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-664 stack.
+- **Parked:** same 9 shape conflicts. Remaining lever classes:
+  per-TU dead protos (still yielding), header orphan decls
+  (measure-every-drop per R636).
+
+**Round-666 (data pass): drop 23 dead decls in server.c. HOLD.**
+
+- **Tried:** `server.c` head carried 23 dead decls (each verified
+  count == 1): `timeGetTime`, `cm_QueuePlayerCommand`,
+  `cm_ClosePlayerConnection`, `gm_ResetAllEntities`,
+  `gm_CleanupAllEntities`, `gm_CleanupObjectEntities`,
+  `gm_InitEntitySlots`, `srv_AcceptConnections`,
+  `srv_CleanupSockets`, `ProcessSendData`,
+  `srv_ReceivePacketHeader`, `srv_LogWinsockError`,
+  `srv_InitBuildingTypeTable`, `srv_Init`, `m_ShutdownAllocator`,
+  `gm_Open`, `srv_CreateListenSocket`, `m_init`,
+  `srv_QueueCommandForProcessing`, `srv_SendPlayerData`,
+  `FreeCommandBuffer`, `ahm_GetCommandPayloadSize`,
+  `g_dispatch_table`. Kept `ServerMainThread` decl (defined
+  below), `g_handler_started` (used), includes. Decl-only change,
+  no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test` on `server.c`: EXACT 8/8 + 2× RELOC held.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-665 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Sibling mains (`server2/3/4.c`,
+  `ProcessSendData.c`) carry the same dead scaffolding — one TU per
+  round, but verify per-TU (live sets differ).
+
+**Round-667 (data pass): drop 6 dead decls in server2.c. HOLD.**
+
+- **Tried:** `server2.c` head carried 6 dead decls (each verified
+  count == 1): `timeGetTime`, `cm_QueuePlayerCommand`,
+  `ProcessSendData`, `thread_proc`, `srv_QueueCommandForProcessing`,
+  `FreeCommandBuffer`. Kept all live decls (17 others called
+  in-body). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test` on `server2.c`: all RELOC held.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-666 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Sibling mains (`server3/4.c`,
+  `ProcessSendData.c`) carry the same dead scaffolding — one TU per
+  round, verify per-TU.
+
+**Round-668 (data pass): drop 21 dead decls in server3.c. HOLD.**
+
+- **Tried:** `server3.c` head carried 21 dead decls (each verified
+  count == 1): `timeGetTime`, `cm_ClosePlayerConnection`,
+  `gm_ResetAllEntities`, `gm_CleanupAllEntities`,
+  `gm_CleanupObjectEntities`, `gm_InitEntitySlots`,
+  `srv_AcceptConnections`, `srv_CleanupSockets`, `ProcessSendData`,
+  `srv_ReceivePacketHeader`, `srv_LogWinsockError`, `thread_proc`,
+  `srv_InitBuildingTypeTable`, `srv_Init`, `m_ShutdownAllocator`,
+  `gm_Open`, `srv_CreateListenSocket`, `m_init`,
+  `srv_SendPlayerData`, `FreeCommandBuffer`, `g_dispatch_table`
+  (+`g_handler_started` — also dead here). Kept the 3 live
+  (`cm_QueuePlayerCommand`, `srv_QueueCommandForProcessing`,
+  `ahm_GetCommandPayloadSize`). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test` on `server3.c`: 2× RELOC + EXACT held.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-667 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. Sibling mains (`server4.c`,
+  `ProcessSendData.c`) carry the same dead scaffolding — one TU per
+  round, verify per-TU.
+
+**Round-669 (data pass): drop 22 dead decls in server4.c. HOLD.**
+
+- **Tried:** `server4.c` head carried 22 dead decls (each verified
+  count == 1): `timeGetTime`, `cm_QueuePlayerCommand`,
+  `cm_ClosePlayerConnection`, `gm_ResetAllEntities`,
+  `gm_CleanupAllEntities`, `gm_CleanupObjectEntities`,
+  `gm_InitEntitySlots`, `srv_AcceptConnections`,
+  `srv_CleanupSockets`, `ProcessSendData`,
+  `srv_ReceivePacketHeader`, `thread_proc`, `srv_Init`,
+  `m_ShutdownAllocator`, `gm_Open`, `srv_CreateListenSocket`,
+  `m_init`, `srv_QueueCommandForProcessing`, `srv_SendPlayerData`,
+  `FreeCommandBuffer`, `ahm_GetCommandPayloadSize`,
+  `g_dispatch_table`, `g_handler_started`. Kept the 2 live
+  (`srv_LogWinsockError`, `srv_InitBuildingTypeTable` — called
+  in-body). Caution: no-`__cdecl` decls
+  (`ahm_GetCommandPayloadSize`) and `extern` data decls escape
+  the strict proto scanner — verify by raw count too. Decl-only
+  change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test` on `server4.c`: 2× RELOC held.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-668 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. `ProcessSendData.c` carries
+  the same dead scaffolding — last main next round.
+
+**Round-670 (data pass): drop 19 dead decls in ProcessSendData.c.
+HOLD.**
+
+- **Tried:** `server_c/ProcessSendData.c` head carried 19 dead
+  decls (each verified count == 1): `timeGetTime`,
+  `cm_QueuePlayerCommand`, `cm_ClosePlayerConnection`,
+  `gm_ResetAllEntities`, `gm_CleanupAllEntities`,
+  `gm_CleanupObjectEntities`, `gm_InitEntitySlots`,
+  `srv_AcceptConnections`, `srv_CleanupSockets`,
+  `srv_ReceivePacketHeader`, `srv_LogWinsockError`, `thread_proc`,
+  `srv_InitBuildingTypeTable`, `srv_Init`, `m_ShutdownAllocator`,
+  `gm_Open`, `srv_CreateListenSocket`, `m_init`,
+  `srv_QueueCommandForProcessing`, `FreeCommandBuffer`,
+  `ahm_GetCommandPayloadSize`, `g_dispatch_table`. Kept the 3
+  live (`ProcessSendData` self-proto, `srv_SendPlayerData`,
+  `list_unlink_relink`). Main-TU dead-scaffolding series done
+  (R666–R670). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  Per-TU `rebrew test` on `ProcessSendData.c`: RELOC 131/131 held.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-669 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-671 (data pass): verification round after main-TU series.
+No source change.**
+
+- **Tried:** `rebrew test --all`: 281 passed / 2 failed, byte 264,
+  EXACT 31 / RELOC 233 / PROVEN 17 — identical to baseline, so the
+  R666–R670 main-TU scaffolding drops caused zero demotions.
+  Hunted: `srv_SeedRandom.c` / `srv_SeedRandomWithTime.c` (both
+  clean — decls used). No safe +0 lever this round.
+- **Gate:** `test --all` 281/264 at baseline. Baselines RESIDUE
+  **8634** / DATA **21836** untouched.
+- **Keep:** Round-670 stack.
+- **Parked:** same 9 shape conflicts.
+
+**Round-672 (data pass): drop 3 dead stub protos in link_stubs.c.
+HOLD.**
+
+- **Tried:** `link_stubs.c` declared `fcn_100203a2`
+  (`_lock_fhandle`), `fcn_10020360` (`_get_osfhandle`),
+  `fcn_10020401` (slot unlock) as decl-only protos with no stub
+  bodies and zero references tree-wide (unlike the
+  `strchr`/`_strtoxl` pair above, which have bodies). Dropped all
+  3. Link unbroken (nothing referenced them). Decl-only change.
+- **Gate:** cmake `-j1` compile/link errors 0, no unresolved
+  externals. `scripts/split_link.sh` EXIT 0. Postlink `.text`
+  differing `0x21ba` (**8634**) / raw-link `.data` differing
+  `0x554c` (**21836**). HOLD both. Lint 0/0. `data_operands`
+  **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-671 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-673 (data pass): no safe lever — scans dry. No source
+change.**
+
+- **Tried:** `link_stubs.c` re-scan: remaining protos all have
+  bodies (decl+def pairs). Gen-header drift re-check: same 2
+  lossy-only diffs as R604 (skip). `crt_region` dead-decl scan:
+  one hit (`__old_sbh_alloc_block` in `sbh_aliases.c`) — parked,
+  CRT restore-gap family, do not touch. Stale-comment hunt for
+  dropped symbols: clean (only string literal + parked
+  `m_PoolFree`). No safe +0 lever this round.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-672 stack.
+- **Parked:** same 9 shape conflicts.
+
+**Round-674 (data pass): negative sweeps — decls clean. No source
+change.**
+
+- **Tried:** remaining-Units dead-decl sweep (`m_AllocTracked.c`,
+  `m_alloc.c`, `InitializeLogAndErrorHandler.c`,
+  `CrashDumpUnhandledExceptionFilter.c`): clean. Same-name
+  extern-data type-diff scan: no hits outside the parked 9
+  conflicts. Orphan-`FUNCTION`-marker heuristic: only false
+  positives (lint validates markers, 0/0). No safe +0 lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-673 stack.
+- **Parked:** same 9 shape conflicts.
+
+**Round-675 (goal round 100): milestone check. No source change.**
+
+- **Tried:** `rebrew lint`: 188 passed, 0 errors, 0 warnings.
+  `rebrew test --all` timed out under the 60s tool cap (known
+  slow — last full runs R628/R671: 281/264 at baseline).
+  Last measured link gates (R664): `.text` 0x21ba (**8634**) /
+  `.data` 0x554c (**21836**), `data_operands` 1616. Series
+  totals since R593: 5 shared-type lifts (`office_slot.h`,
+  `player_slot.h`, `group_node.h`, `save_header_tail.h`,
+  `handler_func` ×7 TUs), 4 dead headers deleted, 400+ dead
+  decls dropped, 0 demotions, 2 soft-reverts (R590-class:
+  `gm_Open.c` `ALLOCFN`, `m_alloc.h` `m_PoolFree` — unused decls
+  can shift codegen).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-674 stack.
+- **Parked:** same 9 shape conflicts. Done-criteria gaps unchanged:
+  `.text` VS 0x221f6 vs 0x22846, residue 8634, 2 verify failures,
+  20 positional drift items.
+
+**Round-676 (data pass): auxillary/unknown/misc sweep — clean. No
+source change.**
+
+- **Tried:** strict dead-decl sweep of `unknown/` (3 TUs),
+  `auxillary/plant.c`, `cm_ExSimCommand.c`,
+  `cm_ChkEntityLookup.c`, `cm_ExAllocThemaPredigt.c`, `sim.c`,
+  `aemter.c`, `ahm_ResetEntityState.c`, `gv_CheckSlotActive.c`,
+  `gv_UpgradeField.c`: all clean (decls live). No safe +0 lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-675 stack.
+- **Parked:** same 9 shape conflicts.
+
+**Round-677 (data pass): loadsave_c + command sweeps — clean. No
+source change.**
+
+- **Tried:** strict dead-decl sweep of 12 more TUs
+  (`loadsave_dump1.c`, `srv_RecvGame.c`, `gm_NextEntityQueryMatch.c`,
+  `gm_ff_Objekt.c`, `gm_ObjectsAvailble.c`, `gm_AllocRaum.c`,
+  `gm_AllocGebaeude.c`, `gm_AllocObjekt.c`,
+  `gm_InitObjektHersteller.c`, `gm_Open.c`,
+  `gm_ChangePlayerIdentityImpl.c`, `spiel_dumpD.c`) + full
+  `command/` subtree re-scan: all clean. No safe +0 lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-676 stack.
+- **Parked:** same 9 shape conflicts.
+
+**Round-678 (data pass): drop 3 dead decls in srv_LoadBuf.c. HOLD.**
+
+- **Tried:** strict sweep of `DieGildeAddOnServer/` + `Units/`
+  found 3 dead decls in `server_c/srv_LoadBuf.c` (each verified
+  count == 1): `timeGetTime`, `thread_proc`, `g_dispatch_table`.
+  Kept all live decls. Per-TU `rebrew test`: NEAR_MATCHING
+  701/750 — confirmed pre-existing via stash (identical
+  numbers), edit neutral. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-677 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-679 (data pass): drop missed `_ftol` in alchemistry_logic3.c.
+HOLD.**
+
+- **Tried:** full-tree strict re-scan found exactly 1 leftover:
+  `_ftol` in `alchemistry_logic3.c` (missed at R645, which dropped
+  11 others in the same file). Verified count == 1, dropped.
+  Tree now has zero dead proto decls by the strict scanner.
+  Per-TU `rebrew test`: `ahm_ProcessEntityChain` RELOC 130/130 +
+  `gm_GetFieldByType` EXACT 130/130 held. (First cmake hit the
+  60s tool cap mid-compile, no errors; rebuilt clean.)
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-678 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-680 (data pass): drop 26 dead bare-DATA markers, 1 revert.
+HOLD.**
+
+- **Tried:** dropped dead bare `// DATA: SERVER` blocks (no decl
+  follows) in `spiel2.c` (8), `server2.c` (6), `Error.c` (4),
+  `m_alloc2.c` (11 incl. 3 pre-`m_ShutdownAllocator` def).
+  **Reverted `spiel_gm_DispatchCall.c`**: its 6 bare DATA lines
+  are that file's ONLY annotations — lint E001
+  (`has_new` counts any `// TYPE: ... 0xVA` marker, including
+  DATA) fires without them. Lesson: bare DATA markers are
+  lint-load-bearing in FUNCTION-less files; only drop where a
+  FUNCTION marker remains. Comment-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0
+  (after revert). `data_operands` **1616**.
+  `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-679 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts. `spiel_gm_DispatchCall.c`
+  bare markers stay (lint needs them).
+
+**Round-681 (data pass): negative sweeps — VA comments, BSS gaps.
+No source change.**
+
+- **Tried:** VA-comment audit vs `rebrew-data.toml`: 0 suspicious
+  (all `/* 0x.. */` VAs resolve). BSS game-range gaps: only small
+  alignment padding (`0x1003588e`, 18B between
+  `g_clock_copy_tail` short and `g_slot_table` — natural, nothing
+  missing); rest are CRT gaps. No safe +0 lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-680 stack.
+- **Parked:** same 9 shape conflicts.
+
+**Round-682 (data pass): belated per-TU tests on R660/R680 batches.
+All held.**
+
+- **Tried:** per-TU `rebrew test` on files edited without one:
+  `spiel2.c` (EXACT 72/72), `spiel6.c` (5× RELOC held),
+  `spiel62.c` (8 RELOC + 2 EXACT held), `spiel_gm_DispatchCall.c`
+  (SKIPPED — no FUNCTION marker, consistent with R680 lint
+  finding that its DATA lines are its only annotations).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-681 stack.
+- **Parked:** same 9 shape conflicts.
+
+**Round-683 (data pass): verification round. No source change.**
+
+- **Tried:** `rebrew test --all`: 281 passed / 2 failed, byte 264
+  — identical to baseline. Hunted: `SaveHeaderTail` users (only
+  `ls_LoadSavegameHeader.c` + stubs via header — complete);
+  `rebrew_globals.h` incomplete `struct SaveHeaderTail` (header
+  is auto-generated DO NOT EDIT — regen would wipe any include,
+  leave it). No safe +0 lever.
+- **Gate:** `test --all` 281/264 at baseline. Baselines RESIDUE
+  **8634** / DATA **21836** untouched.
+- **Keep:** Round-682 stack.
+- **Parked:** same 9 shape conflicts.
+
+**Round-684 (data pass): coverage + graph audit. No source change.**
+
+- **Tried:** `rebrew catalog`: 98.2% coverage (138820/141382
+  bytes, 543 functions); the 1.8% gap is unreversed CRT —
+  out of scope per constraints. `rebrew graph`: 9 unreversed
+  nodes are all CRT (`_cexit`, `_ioinit`, `_CRT_INIT`,
+  `__initterm`, …); `exit_handler` flagged unreversed is stale
+  metadata (defined in `server.c`, EXACT). `lib-match` on both
+  verify failures re-confirmed game code. No safe +0 lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-683 stack.
+- **Parked:** same 9 shape conflicts.
+
+**Round-685 (data pass): delete dead net.h. HOLD.**
+
+- **Tried:** `Units/net/net.h` had zero includers and 6 of 8
+  decls orphaned (`CreateListenSocket`, `CleanupSockets`,
+  `AcceptConnections`, `ReceivePacketHeader`,
+  `ProcessReceiveData`, `LogWinsockError` — TUs carry local
+  externs with different signatures, as their own comments
+  admit). Deleted via `git rm` (revertable). Unincluded header
+  can't shift codegen — safer than R636's included-header
+  drop. Only `ProcessSendData`/`SendBroadcastPacket` decls were
+  live, and only in `.c` locals.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-684 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-686 (data pass): delete stale auxillary.h. HOLD.**
+
+- **Tried:** `auxillary/auxillary.h` had zero includers and all 5
+  `plt_*` decls wrong vs TU-local signatures (`plant.c` uses
+  e.g. 3-5 args, header claims 1-2). Deleted via `git rm`.
+  Unincluded header can't shift codegen. Live decls remain as
+  `.c` locals.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-685 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-687 (data pass): fix vfs.h FlushStream decl to match def.
+HOLD.**
+
+- **Tried:** `vfs.h` declared `int vfs_FlushStream(void*)` but the
+  def in `vfs2.c` is `unsigned int (int, int)` (8 includers see
+  the wrong decl; no caller uses it via the header). Fixed to
+  match def. Decl-only change. Per-TU `vfs2.c`: 4× RELOC held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-686 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-688 (data pass): drop orphan cm_AssignEntityId decl from
+entity.h. HOLD.**
+
+- **Tried:** `entity.h` declared `cm_AssignEntityId(void*)`, but the
+  def in `cm_AssignEntityId.c` is `(int, char*)` and the def TU
+  doesn't include the header (orphan, zero TU users via header).
+  Dropped the decl. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-687 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-689 (data pass): drop orphan srv_RecvGame decl from
+server_internal.h. HOLD.**
+
+- **Tried:** `server_internal.h` declared `srv_RecvGame(void)`,
+  but the def TU doesn't include the header and no other TU
+  calls it via the header (orphan). `Exit` decl kept (def TU
+  `server.c` includes the header — decl+def pair). Dropped the
+  one line. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-688 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-690 (data pass): header-orphan audit complete. No source
+change.**
+
+- **Tried:** per-decl usage audit of all remaining shared headers
+  (`command.h`, `command_internal.h`, `server_internal.h`,
+  `error.h`, `m_alloc.h`, `entity.h`): every decl has ≥2 TU users
+  except `m_PoolFree` (0 users, R636 parked — its drop moved
+  `.text` +73, load-bearing spacer, stays). Header-orphan class
+  exhausted; only `m_PoolFree` remains and it must stay.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-689 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree`.
+
+**Round-691 (data pass): m_PoolFree re-probe confirms +73. REVERTED.**
+
+- **Tried:** re-dropped orphan `m_PoolFree` decl from `m_alloc.h`
+  (zero `.c` users, no def) to re-measure: `.text` differing
+  `0x21ba` → `0x2203` (**+73**), `ls_LoadBuildingEntityState`
+  671 → 744. Unused header decl shifts codegen (same class as
+  R590/R636). Soft-reverted; baseline restored `0x21ba`/671.
+  Lesson reinforced: unused *header* decls are load-bearing
+  spacers here — measure every drop, never assume +0.
+- **Gate:** reverted; baselines RESIDUE **8634** / DATA **21836**
+  held.
+- **Keep:** Round-690 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (confirmed
+  load-bearing twice).
+
+**Round-692 (data pass): drop 3 unused local types in DispatchCall.
+HOLD.**
+
+- **Tried:** unused-type scan found `ALLOCFN`, `DISPATCH_OBJ`
+  (SIZE 0x2c), `Record` (SIZE 0x43, packed) in
+  `spiel_gm_DispatchCall.c`, each referenced once (own typedef
+  only). Dropped all three + orphaned pack push/pop. Unused
+  file-scope types emit nothing — unlike header decls (R691)
+  these are TU-local and inert. Kept `_ftol`/
+  `gm_InitEntitySlots` (live).
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-691 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree`.
+
+**Round-693 (data pass): verification round + dead-define triage.
+No source change.**
+
+- **Tried:** `test --all` 281/264 at baseline. Unused
+  enum/union scan: clean. Unreferenced `#define` scan: 4 hits
+  (`WIN32_LEAN_AND_MEAN` in `broadcast.c`, `ALLOC`/`TRYFREE`/
+  `ASCII_FLAG` in zlib-mirror `check_header.c`) — all skipped:
+  defines emit nothing and upstream-mirror files keep their
+  shape. `#pragma pack()` vs `pack(pop)` in `save_header_tail.h`:
+  cosmetic, same effect, skipped. No safe lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-692 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree`.
+
+**Round-694 (data pass): negative sweeps — statics, strings,
+conflicts. No source change.**
+
+- **Tried:** unreferenced file-static scan: clean. Duplicate long
+  string literals: all `__FILE__`/log strings (semantically
+  needed per site, COMDAT-folded anyway) — no lever.
+  `data --conflicts`: same 9 parked shape conflicts, no new
+  information. No safe lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-693 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree`.
+
+**Round-695 (data pass): types.h usage audit. No source change.**
+
+- **Tried:** audited all 65 `types.h` typedefs for live use: only
+  6 used (`BlockNode` in `m_alloc2.c`, `PAIR`/`SRC`/`TGT` in
+  `alchemistry_logic2.c`, `PlayerSlot` ×2 TUs, `Record` in
+  `spiel.c`) — each legitimately live, single-TU ones correctly
+  local per YAGNI. 59 unused typedefs sit in the Ghidra
+  auto-export header, which no TU includes for types (includers
+  use it via other headers transitively) — header itself emits
+  nothing, and pruning an auto-generated file buys no link
+  effect. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-694 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree`.
+
+**Round-696 (data pass): LinkedNode dup triage — layouts differ,
+stay local. No source change.**
+
+- **Tried:** struct-tag dup scan found `LinkedNode` defined in
+  both `gm_RemoveLinkedNodeById.c` and `gm_RemoveObjectByType.c`
+  — but layouts differ (first: `short active`+`int id`@0x00–0x05;
+  second: `unsigned short id`@0x00 + wider pad). Same tag,
+  different layouts = must NOT lift/merge (would create a 10th
+  shape conflict). Both correctly TU-local. (`gz_stream`/
+  `internal_state` dupes are zlib-mirror, out of scope.)
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-695 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork.
+
+**Round-697 (data pass): OFFICE_SLOT dup triage — same shape, vocab
+fork, stay local. No source change.**
+
+- **Tried:** typedef-dup scan found `OFFICE_SLOT` (SIZE 0x18) in
+  both `aemter.c` and `amt_fio_LoadAemter.c` — same size, same
+  field offsets, but three vocabularies across the tree
+  (`id/a/b/c/type/d` vs `id/mplayerid/mamt/pcount/status/msetter`
+  vs lifted `OfficeSlot`'s `entityId/role/count/state/
+  assignmentId`). Unifying field names is cosmetic (zero link
+  effect) with live-code churn risk; converting both TUs to the
+  shared header forces a vocabulary choice with no byte payoff.
+  Parked: same-shape/vocab-fork stays local (mirrors
+  SetSyncFlags-`player_slot` decision).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-696 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork.
+
+**Round-698 (data pass): data-mismatch steady-state check. No source
+change.**
+
+- **Tried:** `verify --data` mismatch list: 23 symbols, all
+  previously triaged as positional Accept-cascade displacement
+  (BLD holds other symbols' bytes at those VAs — e.g.
+  `g_next_object_id`, `g_producer_id_table`, `g_file_version`).
+  No new items, no owner changes since triage. `static`-linkage
+  audit abandoned (linkage changes are R691-class codegen
+  risks, no payoff).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-697 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork.
+
+**Round-699 (data pass): shared-type size re-verification. No source
+change.**
+
+- **Tried:** re-checked lifted-type sizes (`EntityStruct` 0x21c ×
+  768, `player_slot` 0x264264): slot-table span is a runtime BSS
+  address (file-offset arithmetic N/A); sizes were verified
+  against the binary at lift time (R558–R596) and unchanged
+  since. VA comments in TU bodies are function cross-refs, not
+  data claims — no stale entries. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-698 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork.
+
+**Round-700 (data pass): verification round + placeholder triage.
+No source change.**
+
+- **Tried:** `test --all` 281/264 at baseline. Placeholder-name
+  hunt in shared headers: sole hit `reserved[7]` in
+  `rebrew_types.h` is CRT's own winheap.h vocabulary (SBH page
+  tail padding), not a placeholder — stays. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-699 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork.
+
+**Round-701 (data pass): 0x43-family triage — partial match, stay
+local. No source change.**
+
+- **Tried:** SIZE-marked local structs audit: `EntitySlot`
+  (`gm_FreeObjectListRecursive.c`) and `LinkedNode`
+  (`gm_RemoveLinkedNodeById.c`) share offsets (active@0, id@2,
+  children@0x14, next@0x3f, SIZE 0x43, packed) — but the third
+  sibling `LinkedNode` (`gm_RemoveObjectByType.c`) differs at
+  0x00–0x05. Unifying two of three = live-code vocabulary churn
+  for zero bytes. Parked with the vocab-fork class.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-700 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-702 (data pass): game_structs.h audit — home correct. No
+source change.**
+
+- **Tried:** `game_structs.h` holds one type (`PlayerSlot`,
+  0x264264), live in exactly the 2 TUs that need it
+  (`cm_ExSellObjekt.c`, `lb_ExPlayerHasJoined.c`);
+  `player_slot.h` mentions it only in a do-not-merge comment.
+  Correct home, no action. Unused function-like macros: only
+  `ALLOC`/`TRYFREE` in zlib-mirror `check_header.c` (keep shape
+  per R693). No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-701 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-703 (data pass): library headers + common headers audit.
+No source change.**
+
+- **Tried:** `library_*.h` (winsock/imports/zlib/msvc) are `#if 0`
+  annotation-only reccmp markers, zero includers, tool-owned —
+  must stay. `game_common.h` (stdlib shim) and `command.h`
+  (R690-audited, all live) healthy. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-702 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-704 (data pass): include audit — scanner false positives.
+No source change.**
+
+- **Tried:** dangling/double-include scan flagged 100+
+  `rebrew_types.h`/`rebrew_globals.h`/`zlib.h` — all false
+  positives: resolver ignored `-I` include dirs (headers resolve
+  via flags, build proves it). Zero DOUBLE includes tree-wide
+  (good). No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-703 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-705 (data pass): marker-less TU audit — all legitimate.
+No source change.**
+
+- **Tried:** TUs with no `// FUNCTION:` marker: only 3
+  (`spiel3.c`, `spiel_gm_DispatchCall.c`, `winsock_data.c`) —
+  all data-only/annotation carriers passing lint via DATA
+  markers (R680 lesson). Placement review: tree matches the
+  source-tree map, no new `__FILE__` evidence for moves.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-704 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-706 (data pass): drop 4 arity-wrong orphans from entity.h.
+HOLD.**
+
+- **Tried:** decl/def arity scanner (call lines filtered by hand)
+  found 4 `entity.h` decls that are both arity-wrong AND orphaned
+  (no includer-TU calls them): `ahm_AllocateEntitySlot(void)`
+  vs def `(int,int,int)`, `gv_CheckSlotActive(int)` vs
+  `(void*,int)`, `ahm_InitRandomEntity(void*)` vs `(void)`,
+  `amt_UpdateEntityLinks(void*)` vs `(char*,int)`. Dropped all 4
+  (R688-class: orphan → drop, don't fix). Scanner's other hits
+  were call-line false positives. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-705 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-707 (data pass): error.h drop breaks server2 — REVERTED.**
+
+- **Tried:** dropped `DispatchLogOutput` + `InitializeLogAndErrorHandler`
+  decls from `error.h` as orphans — wrong: `server2.c:51` calls the
+  latter through a hard cast
+  (`((int(__cdecl*)(void*,int,int,int)) InitializeLogAndErrorHandler)(…)`),
+  which `name(` caller searches miss (`name)` close-paren form).
+  Compile error C2065, reverted. Lesson: verify header-decl liveness
+  with bare `\bname\b` counts per includer-TU (as R706 did), never
+  with `name(` searches — hard-cast uses defeat them. Both decls
+  live (arity-wrong but used); revert restores baseline.
+- **Gate:** reverted; compile errors 0, `.text` `0x21ba` (**8634**),
+  `.data` `0x554c` (**21836**), lint 0/0, 671. HOLD.
+- **Keep:** Round-706 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+  `error.h` decls stay (used, however arity-wrong).
+
+**Round-708 (data pass): arity-hit re-audit with bare-word counts.
+No source change.**
+
+- **Tried:** re-audited all remaining R706 arity-scanner hits
+  (`compute_size`, `gm_NoopRet2`, `sim_CreateCitizen`,
+  `lb_BroadcastStateChange`, `cm_ProcessCommandQueue`,
+  `ls_LoadGraveyardData`, `srv_Init`, `GetDebugRecordByIndex`,
+  `vfs_ReadUint32BE`, `gm_ChangePlayerIdentityImpl`,
+  `command.h` `void*`-vs-`char*` decls) with bare `\bname\b`
+  counts: every one multi-TU live via TU-local decls; arity
+  diffs benign (calls compile per visible decl). No
+  orphan-header pattern among them. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-707 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-709 (data pass): unused-extern-data scan retired again. No
+source change.**
+
+- **Tried:** re-ran the R665 unused-`extern`-data scan (483 hits
+  outside conflicts, same spiel-block/lobby/`g_*` pattern). All
+  hits are the R627 trap: bodies reference these via hard VA
+  casts (`0x1002d70c`-style), invisible to word counting. The
+  scan is known-bad; retiring it again, no per-symbol audit
+  (R627 already covered the spiel block by hand).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-708 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-710 (data pass): drop 2 dead decls in server2.c. HOLD.**
+
+- **Tried:** no-`__cdecl` decl scan (the R669-caution class) found
+  1 hit: `ahm_GetCommandPayloadSize` in `server2.c` (count 1).
+  Neighbor check caught `g_dispatch_table` also dead here
+  (count 1). Dropped both. Per-TU `server2.c`: RELOCs held.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-709 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-711 (data pass): kept-decl re-verification. No source
+change.**
+
+- **Tried:** no-`__cdecl` dead-decl scan tree-wide: clean (R710
+  was the last). Re-verified kept decls with bare counts:
+  `srv_LoadBuf.c` (6 live), `server3.c` (3 live), `server4.c`
+  (2 live) — all decl+call pairs. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-710 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-712 (data pass): stdcall + GLOBAL-marker sweeps clean. No
+source change.**
+
+- **Tried:** dead-`__stdcall`-decl scan tree-wide: clean (never
+  audited before, now covered). Orphan-`// GLOBAL:` marker scan:
+  clean (lint W016 agrees). No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-711 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-713 (data pass): self-proto audit — conventional, keep. No
+source change.**
+
+- **Tried:** redundant self-prototype scan (decl+def, count 2):
+  35 sites tree-wide. Deliberately kept per R615/R649: conventional
+  C, zero link effect, 35-site churn for nothing. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-712 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-714 (data pass): verification round. No source change.**
+
+- **Tried:** `test --all` 281/264 at baseline; the only 2
+  failures are the parked pair (`ServerMainThread`
+  NEAR_MATCHING, `gm_AllocSpieler` STUB — both code-round work,
+  game code per `lib-match`). No data-round lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-713 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-715 (data pass): static-def inventory — zero statics. No
+source change.**
+
+- **Tried:** inventoried `static` function definitions tree-wide:
+  zero. Consistent with MSVC6-era game code (all extern linkage);
+  no shadow pairs, no static-to-extern mismatch class. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-714 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-716 (data pass): unused-local-type scan clean. No source
+change.**
+
+- **Tried:** unused local typedef scan tree-wide: sole hit is the
+  `break`-keyword false positive in `cm_ExMoveObjekt.c` (R692
+  noted). All other local types live. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-715 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-717 (data pass): verification round. No source change.**
+
+- **Tried:** `test --all` 281/264 at baseline. Unreferenced
+  UPPER_SNAKE constant scan: clean. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-716 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork.
+
+**Round-718 (data pass): pack balance + intrinsic triage. No source
+change.**
+
+- **Tried:** pack push/pop balance tree-wide: clean. Unused
+  `#pragma intrinsic` entries (memcpy/memset/strcmp/strcpy in 12
+  TUs): deliberately kept — the pragma governs *implicit*
+  compiler-generated calls (struct init/copy), not just textual
+  calls; pruning names risks codegen shifts (R691 class).
+  Parked with the load-bearing-spacer family.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-717 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-719 (data pass): include-style variance triage. No source
+change.**
+
+- **Tried:** 25 TUs include `<windows.h>` directly instead of via
+  `game_common.h` — cosmetic style variance, zero link effect
+  (include guards, same decls); churning them is anti-ladder.
+  Skipped. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-718 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-720 (data pass): dual-header decl audit — benign. No
+source change.**
+
+- **Tried:** same-fn-in-2-headers scan: only
+  `gm_ResolveEntityById` (`command_internal.h` + `entity.h`) —
+  identical signatures (param names only differ), and no TU
+  includes both headers. Benign, no action.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-719 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-721 (data pass): verification round. No source change.**
+
+- **Tried:** `test --all` 281/264 + lint 188/0/0, both at
+  baseline. No data-round lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-720 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-722 (data pass): todo-triage, drift steady at 23. No source
+change.**
+
+- **Tried:** `rebrew todo` top-20 all parked positional drift
+  (no improve-match items surfaced); `verify --data`: 23
+  mismatched / 60 matched — steady, all Accept-cascade
+  displacement triaged before. No new lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-721 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-723 (data pass): drop 48 dead protos in DispatchCall.
+HOLD.**
+
+- **Tried:** strict scan found 48 dead protos in
+  `spiel_gm_DispatchCall.c` (44 bare + 4 with trailing VA
+  comments, each count == 1). Dropped all; kept `g_current_year`
+  def, all `extern` data decls (R665), and the 6 lint-load-bearing
+  `// DATA` lines (R680). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-722 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-724 (data pass): dead-proto scans dry tree-wide. No source
+change.**
+
+- **Tried:** strict dead-proto re-scan of non-game TUs (loadsave,
+  server, Units, lobby) + full game dir after R723: zero hits.
+  Dead-proto class exhausted tree-wide (strict scanner finds
+  nothing anywhere).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-723 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-725 (data pass): dispatch-table audit — handler complete.
+No source change.**
+
+- **Tried:** `data --dispatch`: handler table `0x1002c3f8`
+  212/212 resolved, 100% coverage. Two small unresolved tables
+  (`0x100317d8` ×3 = `_FPinit` CRT init, `0x10033bb0` ×6 = CRT
+  rterrlist region) — both out of scope per never-reverse-CRT.
+  No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-724 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-726 (data pass): BSS gap re-check — same set. No source
+change.**
+
+- **Tried:** `data --bss`: same 23 gaps as R681 (CRT gaps +
+  alignment padding; big unmapped BSS runs need `--fix-bss`
+  30 pads = parked layout churn outside the measured window).
+  No new gaps. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-725 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-727 (data pass): layout-audit ORDER flags triaged. No
+source change.**
+
+- **Tried:** `data --layout-audit` (first use): 7 ORDER
+  VIOLATION flags, all in already-triaged symbols (spiel.c
+  `g_next_object_id` block, loadsave3 filter block, gm_Open
+  stream block, Error/logo strings). Link-order vs REF
+  placement = postlink's domain, not source-fixable. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-726 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-728 (data pass): .rdata layout-audit clean. No source
+change.**
+
+- **Tried:** `data --layout-audit --section .rdata`: 0 ORDER
+  VIOLATION flags. `.rdata` audit clean (per R656 triage).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-727 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-729 (data pass): detached-SIZE triage — lint-green. No
+source change.**
+
+- **Tried:** detached-`// SIZE` scan (SIZE not above typedef): 5
+  hits (`cm_ExSetSyncFlags.c`, `server2.c`, `m_AllocTracked.c`,
+  `m_ReportGroupInfo.c`, `broadcast.c`) — all in positions lint
+  accepts as plain comments (lint 0/0); moving them risks W007
+  churn for zero link effect. Skipped.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-728 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists.
+
+**Round-730 (data pass): multi-def COMMON triage — legal, stay.
+No source change.**
+
+- **Tried:** same-named `g_*` def scan: multi-DEF cases
+  (`g_current_year` ×9, `g_dynasty_field_48` ×2,
+  `g_query_flag2` ×2, `g_citizen_count`, `g_stat1-4`, …) are
+  tentative-definition COMMONs — legal C, link merges to one
+  BSS slot. Unifying into single-def TUs would move COMMON
+  layout (R558 LNK2001 lesson). DO NOT TOUCH. Rest are
+  extern-vs-assignment pairs (scanner over-match).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-729 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-731 (data pass): triple-scan dry. No source change.**
+
+- **Tried:** strict dead-proto scan (all TUs): zero hits.
+  Bare-DATA-in-FUNCTION-file scan: zero hits. Unused-local-type
+  scan: sole hit is the known `break`-keyword false positive in
+  `cm_ExMoveObjekt.c`. Lint 188/0/0. No safe lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-730 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-732 (data pass): drop orphan vfs_FlushStream from vfs.h.
+HOLD.**
+
+- **Tried:** header-orphan audit (bare-word counts): `vfs.h`
+  `vfs_FlushStream` has zero mentions in all 8 includer TUs
+  (def TU `vfs2.c` doesn't include the header; all callers use
+  TU-local decls). `command.h`'s 22 single-file decls are
+  def-TU self-pairs, not orphans — left alone. Dropped the one
+  orphan line. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-731 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` + `LinkedNode`
+  layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab fork +
+  `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-733 (data pass): probe command.h orphan drop — HOLD.**
+
+- **Tried:** re-examined R732's "self-pair" claim for `command.h`:
+  def TUs don't include the header and dispatch is via indexed
+  table (no textual refs), so the 22 single-file decls ARE
+  orphans by the R688 rule. Probed with one line (`cm_ExFree`,
+  zero mentions in all 4 includers). Unlike `m_alloc.h`
+  `m_PoolFree` (+73), this drop HELD — header-decl codegen risk
+  is per-site, not universal. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-732 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 21 more
+  command.h orphans queued, one per round.
+
+**Round-734 (data pass): drop cm_ExClearLagerslot orphan. HOLD.**
+
+- **Tried:** second command.h orphan (`cm_ExClearLagerslot`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-733 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 20 more
+  command.h orphans queued, one per round.
+
+**Round-735 (data pass): drop cm_ExSellObjekt orphan. HOLD.**
+
+- **Tried:** third command.h orphan (`cm_ExSellObjekt`, verified
+  zero mentions in all 4 includers). Dropped one line. Decl-only
+  change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-734 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 19 more
+  command.h orphans queued, one per round.
+
+**Round-736 (data pass): drop cm_ExProdObjekt orphan. HOLD.**
+
+- **Tried:** fourth command.h orphan (`cm_ExProdObjekt`, verified
+  zero mentions in all 4 includers). Dropped one line. Decl-only
+  change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-735 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 18 more
+  command.h orphans queued, one per round.
+
+**Round-737 (data pass): drop cm_ExMoveObjekt orphan. HOLD.**
+
+- **Tried:** fifth command.h orphan (`cm_ExMoveObjekt`, verified
+  zero mentions in all 4 includers). Dropped one line. Decl-only
+  change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-736 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 17 more
+  command.h orphans queued, one per round.
+
+**Round-738 (data pass): drop cm_ExChangeAttribute orphan. HOLD.**
+
+- **Tried:** sixth command.h orphan (`cm_ExChangeAttribute`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-737 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 16 more
+  command.h orphans queued, one per round.
+
+**Round-739 (data pass): drop cm_ExSetAttribute orphan. HOLD.**
+
+- **Tried:** seventh command.h orphan (`cm_ExSetAttribute`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-738 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 15 more
+  command.h orphans queued, one per round.
+
+**Round-740 (data pass): drop cm_ExChangeDesire orphan. HOLD.**
+
+- **Tried:** eighth command.h orphan (`cm_ExChangeDesire`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-739 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 14 more
+  command.h orphans queued, one per round.
+
+**Round-741 (data pass): drop cm_ExChangeBits orphan. HOLD.**
+
+- **Tried:** ninth command.h orphan (`cm_ExChangeBits`, verified
+  zero mentions in all 4 includers). Dropped one line. Decl-only
+  change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-740 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 13 more
+  command.h orphans queued, one per round.
+
+**Round-742 (data pass): drop cm_ExChangeFloat orphan. HOLD.**
+
+- **Tried:** tenth command.h orphan (`cm_ExChangeFloat`, verified
+  zero mentions in all 4 includers). Dropped one line. Decl-only
+  change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-741 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 12 more
+  command.h orphans queued, one per round.
+
+**Round-743 (data pass): drop cm_ExKillSpieler orphan. HOLD.**
+
+- **Tried:** eleventh command.h orphan (`cm_ExKillSpieler`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-742 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 11 more
+  command.h orphans queued, one per round.
+
+**Round-744 (data pass): drop cm_ExAllocThemaPredigt orphan. HOLD.**
+
+- **Tried:** twelfth command.h orphan (`cm_ExAllocThemaPredigt`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-743 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 10 more
+  command.h orphans queued, one per round.
+
+**Round-745 (data pass): drop cm_ExSetGebBesitzer orphan. HOLD.**
+
+- **Tried:** thirteenth command.h orphan (`cm_ExSetGebBesitzer`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-744 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 9 more
+  command.h orphans queued, one per round.
+
+**Round-746 (data pass): drop cm_ExSetWohnsitz orphan. HOLD.**
+
+- **Tried:** fourteenth command.h orphan (`cm_ExSetWohnsitz`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-745 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 8 more
+  command.h orphans queued, one per round.
+
+**Round-747 (data pass): drop cm_ExSetGebUpgrade orphan. HOLD.**
+
+- **Tried:** fifteenth command.h orphan (`cm_ExSetGebUpgrade`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-746 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 7 more
+  command.h orphans queued, one per round.
+
+**Round-748 (data pass): drop cm_ExEmployWorker orphan. HOLD.**
+
+- **Tried:** sixteenth command.h orphan (`cm_ExEmployWorker`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-747 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 6 more
+  command.h orphans queued, one per round.
+
+**Round-749 (data pass): drop cm_ExAllocCharacter orphan. HOLD.**
+
+- **Tried:** seventeenth command.h orphan (`cm_ExAllocCharacter`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-748 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 5 more
+  command.h orphans queued, one per round.
+
+**Round-750 (data pass): drop cm_ExKillTransporter orphan. HOLD.**
+
+- **Tried:** eighteenth command.h orphan (`cm_ExKillTransporter`,
+  verified zero mentions in all 4 includers). Dropped one line.
+  Also probed `cm_QueuePlayerCommand`: 13 mentions in includers
+  — LIVE, kept. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-749 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 4 more
+  command.h orphans queued, one per round.
+
+**Round-751 (data pass): drop cm_ExCreateGeb orphan. HOLD.**
+
+- **Tried:** nineteenth command.h orphan (`cm_ExCreateGeb`,
+  verified zero mentions in all 4 includers). Also verified
+  `cm_ClosePlayerConnection` (live via server-main TU-locals)
+  and `lb_SearchRecordTable` (live via plant.c + TU-local decl
+  in caller) — header decls orphan but names live; only the
+  verified-zero one dropped. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-750 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 3 more
+  command.h orphans queued, one per round.
+
+**Round-752 (data pass): drop cm_ChkMoveCredits orphan. HOLD.**
+
+- **Tried:** twentieth command.h orphan (`cm_ChkMoveCredits`,
+  verified zero mentions in all 4 includers; header now shows
+  the full remaining set). Dropped one line. Decl-only change,
+  no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-751 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 2 more
+  verified-zero orphans queued (`cm_ChkSellObjekt`,
+  `cm_ExAllocRaum`), rest live or unverified.
+
+**Round-753 (data pass): drop cm_ChkSellObjekt orphan. HOLD.**
+
+- **Tried:** twenty-first command.h orphan (`cm_ChkSellObjekt`,
+  verified zero at R752). Dropped one line. Decl-only change,
+  no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-752 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 1 more
+  verified-zero orphan queued (`cm_ExAllocRaum`), rest live or
+  unverified.
+
+**Round-754 (data pass): drop cm_ExAllocRaum orphan — queue
+drained. HOLD.**
+
+- **Tried:** twenty-second and last queued command.h orphan
+  (`cm_ExAllocRaum`, re-verified zero). Dropped one line.
+  Series total (R733–R754): 22 orphan decls removed from
+  `command.h`, every one HOLD at gates, zero demotions across
+  22 `test --all` runs. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-753 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+  command.h orphan queue drained; remaining decls live or
+  unverified.
+
+**Round-755 (data pass): drop gm_StartEntityQuery orphan from
+command_internal.h. HOLD.**
+
+- **Tried:** per-decl bare-word audit of `command_internal.h`
+  (48 includers): `gm_StartEntityQuery` zero mentions tree-wide
+  (decl + doc-comment mention only). Dropped one line. All other
+  decls live (2–45 mentions). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0 (postlink
+  position-align failure expected per gate.sh).
+  `scripts/split_link.sh` EXIT 0. Postlink `.text` differing
+  `0x21ba` (**8634**) / raw-link `.data` differing `0x554c`
+  (**21836**). HOLD both. Lint 0/0. `test --all` 281/264
+  (shared-header edit, zero demotions). `data_operands` **1616**.
+  `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-754 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-756 (data pass): command_internal.h re-audit — all live.
+No source change.**
+
+- **Tried:** located every mention of the 8 lowest-count
+  `command_internal.h` decls: all multi-TU live
+  (`gm_QueryEntitySum` ×4 TUs, `gm_FindSlotById` ×3,
+  `gm_CheckInventoryCapacity` ×3, rest 3–8 TUs). Orphan class
+  exhausted for this header.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-755 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-757 (data pass): drop cm_ChkChangeAttribute orphan + live
+findings. HOLD.**
+
+- **Tried:** full bare-word audit of remaining `command.h` decls:
+  8 verified-zero orphans (`lb_SearchRecordTable`,
+  `cm_ChkChangeAttribute/Bits/SetGebBesitzer/CutsceneReady`,
+  `cm_ExecCommand`, `cm_ExAllocObjekt/Spieler/ChangePlayerIdentity`).
+  Dropped `cm_ChkChangeAttribute`. Also found `cm_QueuePlayerCommand`
+  (13) + lobby decls + `cm_ClosePlayerConnection` (live call in
+  `lb_ExPlayerHasJoined.c:53` via header) — all kept. Decl-only
+  change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-756 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 7 more
+  verified-zero orphans queued, one per round.
+
+**Round-758 (data pass): drop cm_ChkChangeBits orphan. HOLD.**
+
+- **Tried:** next queued command.h orphan (`cm_ChkChangeBits`,
+  verified zero at R757). Dropped one line. Decl-only change,
+  no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-757 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 6 more
+  verified-zero orphans queued, one per round.
+
+**Round-759 (data pass): drop cm_ChkSetGebBesitzer orphan. HOLD.**
+
+- **Tried:** next queued command.h orphan (`cm_ChkSetGebBesitzer`,
+  verified zero at R757). Dropped one line. Decl-only change,
+  no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-758 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 5 more
+  verified-zero orphans queued, one per round.
+
+**Round-760 (data pass): drop cm_ChkCutsceneReady orphan. HOLD.**
+
+- **Tried:** next queued command.h orphan (`cm_ChkCutsceneReady`,
+  verified zero at R757). Dropped one line. Decl-only change,
+  no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-759 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 4 more
+  verified-zero orphans queued, one per round.
+
+**Round-761 (data pass): drop cm_ExecCommand orphan. HOLD.**
+
+- **Tried:** next queued command.h orphan (`cm_ExecCommand`,
+  verified zero at R757). Dropped one line. Decl-only change,
+  no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-760 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 3 more
+  verified-zero orphans queued, one per round.
+
+**Round-762 (data pass): drop cm_ExAllocObjekt orphan. HOLD.**
+
+- **Tried:** next queued command.h orphan (`cm_ExAllocObjekt`,
+  verified zero at R757). Dropped one line. Decl-only change,
+  no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-761 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 2 more
+  verified-zero orphans queued, one per round.
+
+**Round-763 (data pass): drop cm_ExAllocSpieler orphan. HOLD.**
+
+- **Tried:** next queued command.h orphan (`cm_ExAllocSpieler`,
+  verified zero at R757). Dropped one line. Decl-only change,
+  no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-762 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 1 more
+  verified-zero orphan queued (`cm_ExChangePlayerIdentity`), then
+  queue drained.
+
+**Round-764 (data pass): drop last orphan, queue drained. HOLD.**
+
+- **Tried:** last queued command.h orphan (`cm_ExChangePlayerIdentity`,
+  re-verified zero) + now-empty section comments. Dropped.
+  Series total (R733–R764): 32 orphan decls removed from
+  `command.h` (22) + `vfs.h`/`entity.h`/`server_internal.h`/
+  `command_internal.h`/`server2.c`/mains, every one HOLD at
+  gates, zero demotions. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-763 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+  command.h orphan series closed; remaining decls live.
+
+**Round-765 (data pass): dead-decl scan all false positives. No
+source change.**
+
+- **Tried:** full-tree strict dead-decl scan: 60+ hits, ALL bare
+  call lines (`LogMessageInternal(...`, `srv_SeedRandom(...`,
+  `Sleep(10)`, `FreeConsole()`, … — count == 1 because the call
+  itself is the only mention; R663-class false positives).
+  Zero real decls. Scan dry.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-764 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-766 (data pass): low-count decl call-site audit. No source
+change.**
+
+- **Tried:** located real call sites for all 7 lowest-count
+  `command_internal.h` decls (`gm_GetFieldByType` ×5,
+  `gm_FindSlotById` ×4, `gm_CheckInventoryCapacity` ×3,
+  `gm_GetEntityTableEntry`/`gm_FindRecordById`/
+  `gm_CleanupBuildingEntity`/`gm_RemoveEntityLink` with live
+  calls in command + game TUs). All live. Header exhausted.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-765 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-767 (data pass): probe entity.h orphan drop — HOLD.**
+
+- **Tried:** per-decl audit of `entity.h` (10 loadsave includers):
+  most decls zero-mentioned by includers (TUs use hard VA
+  `0x100358a0` instead of names). Probed with `g_100a8cf8`
+  (zero includer mentions; name live in `gm_Open.c` via
+  TU-local decl). Drop HELD — same class as command.h orphans.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-766 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. More
+  entity.h orphans queued, one per round.
+
+**Round-768 (data pass): drop g_1009b764 orphan. HOLD.**
+
+- **Tried:** second entity.h orphan (`g_1009b764`, zero includer
+  mentions; name live in `gm_Open.c` + def in
+  `gm_RandomQuadratic.c` via TU-locals). Dropped one line.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-767 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. More
+  entity.h orphans queued, one per round.
+
+**Round-769 (data pass): drop gm_CleanupAllEntities orphan. HOLD.**
+
+- **Tried:** third entity.h orphan (`gm_CleanupAllEntities`, zero
+  includer mentions; name live via TU-locals — decl+call in
+  `server2.c`, def in `spiel.c`). Dropped one line. Decl-only
+  change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-768 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. More
+  entity.h orphans queued, one per round.
+
+**Round-770 (data pass): drop gm_InitEntitySlots orphan. HOLD.**
+
+- **Tried:** fourth entity.h orphan (`gm_InitEntitySlots`, zero
+  includer mentions). Dropped decl + now-empty section comment.
+  Also audited rest: `gm_ResolveEntityById` (4, live),
+  `gm_ResetAllEntities` (1 = live bare call in
+  `ls_LoadBuildingEntityState.c:75`) — both kept. Decl-only
+  change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-769 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. More
+  entity.h orphans queued, one per round.
+
+**Round-771 (data pass): drop gm_InitEntityIfValid orphan. HOLD.**
+
+- **Tried:** fifth entity.h orphan (`gm_InitEntityIfValid`, zero
+  includer mentions). Dropped one line. Decl-only change, no
+  emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-770 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 3 more
+  verified-zero orphans queued (`vfs_DestroyEntity`,
+  `gm_WalkEntityChain`, `amt_ClearEntityLinks`), one per round.
+
+**Round-772 (data pass): drop vfs_DestroyEntity orphan. HOLD.**
+
+- **Tried:** sixth entity.h orphan (`vfs_DestroyEntity`, zero
+  includer mentions) + now-empty section comment. Dropped.
+  Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-771 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 2 more
+  verified-zero orphans queued (`gm_WalkEntityChain`,
+  `amt_ClearEntityLinks`), one per round.
+
+**Round-773 (data pass): drop gm_WalkEntityChain orphan. HOLD.**
+
+- **Tried:** seventh entity.h orphan (`gm_WalkEntityChain`, zero
+  includer mentions). Dropped one line. Decl-only change, no
+  emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-772 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs. 1 more
+  verified-zero orphan queued (`amt_ClearEntityLinks`).
+
+**Round-774 (data pass): drop amt_ClearEntityLinks orphan — queue
+drained. HOLD.**
+
+- **Tried:** eighth and last queued entity.h orphan
+  (`amt_ClearEntityLinks`, verified zero at R195) + now-empty
+  section comment. Dropped. Series total (R767–R774): 8 orphan
+  decls removed from `entity.h`, every one HOLD at gates, zero
+  demotions. Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-773 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+  entity.h orphan series closed; remaining decls live.
+
+**Round-775 (data pass): drop vfs_CloseStream orphan. HOLD.**
+
+- **Tried:** `vfs.h` audit (8 loadsave includers): `CloseVfsStream`
+  (10, live) kept; `vfs_GetByte` (0 in includers but live via
+  TU-local decl+13 calls in `check_header.c`) kept;
+  `vfs_CloseStream` (0 in includers; def `vfs.c` + caller `vfs2.c`
+  via TU-locals) — orphan, dropped one line. `server_internal.h`
+  all live (2–3). Decl-only change, no emit.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-774 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-776 (goal round 200): milestone verification. No source
+change.**
+
+- **Tried:** `test --all` 281/264 + lint 188/0/0, both at
+  baseline. `vfs.h` remaining decls audited: `CloseVfsStream`
+  live via header (10 calls in `srv_RecvGame.c`), `vfs_GetByte`
+  live via TU-local — both kept, header exhausted. Series
+  totals R732–R776: 40+ orphan decls dropped across 5 headers +
+  mains, every one HOLD, zero demotions.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-775 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-777 (data pass): link_stubs + conflicts steady. No source
+change.**
+
+- **Tried:** `link_stubs.c` dead-proto scan: clean (R672 holds).
+  Its data defs are postlink-patched emit sites — load-bearing
+  by design, not hygiene targets. `data --conflicts`: steady at
+  9. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-776 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-778 (data pass): m_alloc.h re-audit — all live. No source
+change.**
+
+- **Tried:** per-decl audit of `m_alloc.h`: `m_AllocTracked` ×18
+  TUs, `m_FreeTracked` ×10, `m_PoolAlloc` ×5 — all live.
+  Only `m_PoolFree` orphan (parked +73). Header exhausted.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-777 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-779 (data pass): error.h re-audit — all live. No source
+change.**
+
+- **Tried:** per-decl audit of `error.h`: `LogMessageInternal`
+  multi-TU, `ReportFatalError` ×4, `ReportMessage` ×5,
+  `ShutdownLogAndErrorHandler` ×2 — all live (plus R707's 2
+  hard-cast-live decls). All 6 decls live. Header exhausted.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-778 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-780 (data pass): drop lb_SearchRecordTable orphan. HOLD.**
+
+- **Tried:** full re-audit of remaining `command.h` decls:
+  `lb_SearchRecordTable` zero in all 4 includers (def
+  `plant.c` + caller `cm_ChainRecordLookup.c` via TU-locals;
+  neither includes the header) — orphan, dropped + section
+  comment. Rest live (`cm_QueuePlayerCommand` 13, lobby decls,
+  `cm_ClosePlayerConnection` live call). Decl-only change.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-779 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+  command.h down to 5 live decls.
+
+**Round-781 (data pass): lobby decls live via header — keep. No
+source change.**
+
+- **Tried:** verified the 3 lobby decls are header-mediated:
+  `lb_ExLobbyServerCommand.c` calls `lb_ExPlayerlist`/
+  `lb_SendLobbyConfig` with no TU-local decls (relies on
+  `command.h`). All 5 remaining `command.h` decls live.
+  Header exhausted and closed.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-780 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-782 (data pass): drop empty section comments. HOLD.**
+
+- **Tried:** `entity.h` had 2 emptied section comments
+  (`Entity Lifecycle`, `Chain and Link Processing` — decls
+  dropped R771–R774). Removed. Comment-only change, no emit.
+  Remaining decls: conflict-symbol globals (parked),
+  `EntityStruct` (shared type, kept), `gm_ResolveEntityById`
+  (4, live), `gm_ResetAllEntities` (live call) — header
+  exhausted.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `test --all` 281/264 (shared-header edit, zero demotions).
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-781 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-783 (data pass): fix stale handler_func comment. HOLD.**
+
+- **Tried:** `server_internal.h` comment claimed `handler_func`
+  "Shared by server2.c" — stale since R710 (only
+  `cm_ProcessCommandQueue.c` uses it). Fixed comment to name
+  the real user. Comment-only change, no emit. Per-TU
+  `cm_ProcessCommandQueue.c`: NEAR_MATCHING 624/639 confirmed
+  pre-existing via stash (identical numbers).
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-782 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-784 (data pass): dropped-name residue check — clean. No
+source change.**
+
+- **Tried:** grepped all dropped orphan names across the 5 edited
+  headers: sole hit is a prose mention in the `gm_QueryEntitySum`
+  doc note (`command_internal.h:12,37-43` — load-bearing
+  documentation, keep). No stale decls or comments. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-783 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-785 (data pass): verification round. No source change.**
+
+- **Tried:** `test --all` 281/264 + lint 188/0/0, both at
+  baseline. No data-round lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-784 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-786 (data pass): dead-CRT-extern scan all false positives.
+No source change.**
+
+- **Tried:** dead TU-local CRT-`extern` scan: 28 hits, ALL bare
+  call lines (`memcpy(dst,…`, `sprintf(buf,…`, … — count == 1
+  is the call itself; R663/R765 class). Zero real decls.
+  Scan dry.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-785 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-787 (data pass): drop 2 dead TU-local externs. HOLD.**
+
+- **Tried:** audited `srv_RecvGame.c` head block with bare counts:
+  `g_aux_entity_count`/`g_aux_entity_buffer` count == 1, no hard-VA
+  use in TU. Probed drop of both: HELD. Finding: TU-local unused
+  `extern`-data decls ARE safe (unlike header decls, R691) —
+  same class as TU-local dead protos. Per-TU `srv_RecvGame`:
+  RELOC 892/892 held. (First cmake hit 60s tool cap, no errors;
+  rebuilt clean.)
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-786 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-788 (data pass): drop 3 dead TU-local externs in
+loadsave2.c. HOLD.**
+
+- **Tried:** swept loadsave TUs for the R787 class (TU-local dead
+  `extern`-data): `loadsave2.c` had 3 decl-only lines
+  (`g_aux_entity_count`, `g_aux_entity_buffer`, `g_save_info`,
+  zero uses + no hard-VA in TU). Dropped all 3. Skipped
+  conflict symbols (`g_stream_pool/count`,
+  `g_query_filter_owner`) in `loadsave3.c`. Per-TU
+  `loadsave2.c`: RELOC 282/282 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-787 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-789 (data pass): drop 4 dead TU-local externs in
+loadsave3.c. HOLD.**
+
+- **Tried:** `loadsave3.c` had 4 decl-only lines (bare count 4 =
+  the decls themselves): `g_aux_entity_count`,
+  `g_aux_entity_buffer`, `g_save_info`, mid-file
+  `g_next_object_id` (+ stale canonical-def comment). Dropped
+  all 4 + comment. Skipped conflict symbols (`g_stream_pool/
+  count`). Per-TU `loadsave3.c`: RELOC 491/491 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-788 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-790 (data pass): drop 4 dead TU-local externs in
+ls_LoadDynamicEntities.c. HOLD.**
+
+- **Tried:** `ls_LoadDynamicEntities.c` had 4 decl-only lines
+  (`g_dynamic_entities_end`, `g_aux_entity_count`,
+  `g_aux_entity_buffer`, `g_save_info`; no hard-VA use in TU).
+  Kept live `g_dynamic_entities` (31 uses). Dropped 4. Per-TU:
+  RELOC 884/884 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-789 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-791 (data pass): drop 3 dead TU-local externs in
+ls_LoadEntities.c. HOLD.**
+
+- **Tried:** `ls_LoadEntities.c` had 3 decl-only lines
+  (`g_aux_entity_count`, `g_aux_entity_buffer`, `g_save_info`;
+  zero uses + no hard-VA in TU). Dropped all 3. Per-TU:
+  RELOC 2268/2268 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-790 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-792 (data pass): drop 3 dead TU-local externs in
+ls_LoadTownData.c. HOLD.**
+
+- **Tried:** `ls_LoadTownData.c` had the same 3 decl-only lines
+  (`g_aux_entity_count`, `g_aux_entity_buffer`, `g_save_info`).
+  Dropped all 3. Per-TU: RELOC 1361/1361 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-791 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-793 (data pass): drop 1 dead TU-local extern in
+ls_LoadBuildingEntityState.c. HOLD.**
+
+- **Tried:** `ls_LoadBuildingEntityState.c` had 1 dead decl-only
+  line (`g_save_info`; aux pair live ×4/×6, kept). Dropped one
+  line. Per-TU SIZE_MISMATCH 820/1463 confirmed pre-existing via
+  stash (identical numbers), edit neutral. Gate sentinel 671.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-792 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-794 (data pass): verification round. No source change.**
+
+- **Tried:** `test --all` 281/264 + lint 188/0/0, both at
+  baseline. Audited `ls_LoadSavegameHeader.c` head block: all
+  decls used. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-793 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-795 (data pass): drop dead g_query_limit in
+gm_AllocGebaeude.c. HOLD.**
+
+- **Tried:** swept game subdirs for R787-class dead externs:
+  `gm_AllocGebaeude.c` `g_query_limit` (count 1, no VA use).
+  Dropped one line. Skipped all `gm_Open.c` hits (R590 spacer
+  TU + conflict symbols — never touch). Per-TU
+  NEAR_MATCHING 753/1078 confirmed pre-existing via stash
+  (identical numbers). (First cmake hit 60s tool cap, no
+  errors; rebuilt clean.)
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-794 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-796 (data pass): drop dead g_entity_base in
+gm_NextEntityQueryMatch.c. HOLD.**
+
+- **Tried:** `gm_NextEntityQueryMatch.c` mid-file `g_entity_base`
+  (count 1, decl-only). Dropped one line. Kept live
+  `g_query_limit` (count 2). Per-TU: RELOC 464/464 held.
+  (First cmake hit 60s tool cap, no errors; rebuilt clean.)
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-795 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-797 (data pass): drop 6 dead TU-local externs in
+Error.c. HOLD.**
+
+- **Tried:** swept remaining dirs for R787-class dead externs:
+  `Error.c` had 6 decl-only lines (`g_log_mode_flags`,
+  `g_console_handle`, `g_owner_window`, `g_log_message_buffer`,
+  `g_handler_started`, `g_msg_buf`; no hard-VA uses in TU).
+  Dropped all 6. Kept live `g_panic_callback`. Per-TU
+  `DispatchLogOutput`: RELOC 290/290 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-796 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-798 (data pass): drop 4 dead TU-local externs in
+ErrorModule.c. HOLD.**
+
+- **Tried:** `ErrorModule.c` had 4 decl-only lines
+  (`g_log_mode_flags`, `g_owner_window`, `g_log_message_buffer`,
+  `g_handler_started`; no hard-VA uses in TU). Dropped all 4.
+  Kept live `g_panic_callback`. Per-TU: 2 EXACT + RELOC held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-797 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-799 (data pass): drop dead g_handler_started in
+ErrorModule2.c. HOLD.**
+
+- **Tried:** `ErrorModule2.c` `g_handler_started` (count 1,
+  decl-only). Dropped one line. Rest live (`g_log_mode_flags`
+  11, `g_log_message_buffer` 6, `g_panic_callback` 5).
+  Per-TU: all 4 RELOC held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-798 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-800 (data pass): drop 10 dead TU-local externs in
+m_alloc2.c. HOLD.**
+
+- **Tried:** `m_alloc2.c` had 10 decl-only lines (`g_alloc_counter`,
+  `g_alloc_root_count/size_total/count_max/size_max/field_20/
+  name/name_4`, `g_default_group_name/name_4`; no VA uses in
+  TU). Dropped all 10. Kept live protos (`free`,
+  `m_ReportGroupInfo`, `m_AllocTracked`, `m_FreeTracked`,
+  `LogMessageInternal`). Per-TU: all 3 RELOC held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-799 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-801 (data pass): drop 2 dead TU-local externs in
+server2.c/server4.c. HOLD.**
+
+- **Tried:** `server2.c` `g_handler_started` + `server4.c`
+  `g_file_version` (both count 1, decl-only, no VA uses in TU).
+  Dropped both. Per-TU: server2 6 RELOC held, server4 2 RELOC
+  held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-800 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-802 (data pass): R787-sweep closed, vfs4 skipped.
+Verification. No source change.**
+
+- **Tried:** last sweep item `vfs4.c` `g_stream_pool`: used via
+  hard VA at line 114 (R709 trap) + parked conflict symbol —
+  SKIP. Series total (R787–R801): 45 dead TU-local externs
+  dropped across 12 TUs, every one HOLD, zero demotions.
+  `test --all` 281/264 + lint 188/0/0 at baseline.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-801 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-803 (data pass): double-proto scan false positives. No
+source change.**
+
+- **Tried:** per-TU doubly-declared-proto scan: all hits bare
+  call lines (`m_FreeTracked(…`, `CloseVfsStream(…`,
+  `WSACleanup()` — R663 class). Zero real double-protos.
+  Scan dry.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-802 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-804 (data pass): data inventory steady. No source
+change.**
+
+- **Tried:** `rebrew data --json`: 372 globals, 99 annotated,
+  273 unannotated, 9 conflicts — all steady, no new drift
+  signal. Parked conflicts unchanged.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-803 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-805 (data pass): command/aux/net sweep clean. No source
+change.**
+
+- **Tried:** R787-class sweep over command, auxillary, unknown,
+  net dirs: zero dead externs. Sweep coverage now whole tree
+  (all dirs scanned at least once since R787).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-804 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-806 (data pass): drop 8 dead TU-local externs in
+alchemistry_logic3.c. HOLD.**
+
+- **Tried:** unscanned game files held big shared-prelude blocks
+  (spiel*.c — mid-pocket territory, hands off). Small TU
+  `alchemistry_logic3.c` had 8 decl-only lines (`g_table`,
+  `g_color_scale`, `g_next_object_id`, `g_current_season`,
+  `g_const_0_0/1_0`, `g_dbl_const_6d0`,
+  `g_alchemy_entity_table`; no VA uses). Dropped all 8. Kept
+  live `dispatch_fn` typedef + `g_chain_handler_table`.
+  Per-TU: RELOC 130/130 + EXACT 130/130 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-805 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-807 (data pass): drop dead g_chain_handler_table in
+alchemistry_logic2.c. HOLD.**
+
+- **Tried:** `alchemistry_logic2.c` `g_chain_handler_table`
+  (count 1, decl-only). Dropped one line. Rest live (2–6
+  mentions). Per-TU: 7 RELOC + 1 EXACT held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-806 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-808 (data pass): post-R807 verification. No source
+change.**
+
+- **Tried:** `test --all` 281/264 (zero demotions after R807);
+  `g_chain_handler_table` confirmed gone from
+  `alchemistry_logic2.c`. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-807 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-809 (data pass): vfs/net/malloc/server_c sweep clean.
+No source change.**
+
+- **Tried:** R787-class sweep over vfs, net, m_alloc,
+  server_c, loadsave_c: sole hit is parked `vfs4.c`
+  `g_stream_pool` (hard-VA use at line 114, R709 trap) — skip.
+  All other dirs clean.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-808 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-810 (data pass): server-top/Units sweep clean. No source
+change.**
+
+- **Tried:** R787-class sweep over server top-level + Units
+  roots (+ server3.c): zero dead externs. Sweep coverage now
+  complete across all source dirs.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-809 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-811 (data pass): drop 4 dead scalars in
+gm_RandomQuadratic.c. HOLD.**
+
+- **Tried:** per-name recount of `gm_RandomQuadratic.c` (R806
+  sweep output untrustworthy for this file — `g_const_1_0`
+  flagged dead but used ×3; sweep is candidate generator
+  only). Only `g_const_0_0`/`g_const_1_0`/`g_const_neg_1_0`
+  live. Dropped 4 dead scalars (`g_query_limit`,
+  `g_array_base`, `g_next_object_id`, `g_current_year`).
+  Kept conflict decl, string externs (string-COMDAT caution),
+  rest for later rounds. Per-TU: RELOC 48/48 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-810 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-812 (data pass): drop 11-line filter extern block in
+gm_RandomQuadratic.c. HOLD.**
+
+- **Tried:** dropped the contiguous dead filter/search block
+  (`g_EntityListStart/SearchPtr`, `g_SearchCount/Flag`,
+  `g_SomeGlobal`, `g_FilterActive/Type/Id/Val25/27/30` —
+  all count 1, recounted). Per-TU: RELOC 48/48 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-811 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-813 (data pass): drop 8-line entity extern block in
+gm_RandomQuadratic.c. HOLD.**
+
+- **Tried:** dropped the contiguous dead entity block
+  (`g_query_state_a0c`, `g_byte_table_30861`,
+  `g_citizen_count`, `g_dynasty_field_2c/generation_counter`,
+  `g_entity_base/end/slot_table` — all count 1, recounted).
+  Kept the load-bearing doc comment (189-entry note).
+  Per-TU: RELOC 48/48 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-812 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-814 (data pass): drop 8 dead const externs in
+gm_RandomQuadratic.c, restore 1 live. HOLD.**
+
+- **Tried:** dropped the dead const block (`g_const_1_5/2_2/
+  0_06875/896_0/1_over_720`, `g_gv_const_57c8`, `g_const_half`,
+  `g_current_season` — all count 1). First cut wrongly took
+  live `g_const_0_0` (body use; C2065 caught it) — restored
+  immediately. Net: -8 decls + 1 restore. Per-TU: RELOC 48/48
+  held. Lesson: recount the block, not just the round notes.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-813 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-815 (data pass): drop 3 dead string externs in
+gm_RandomQuadratic.c. HOLD.**
+
+- **Tried:** dropped 3 decl-only string externs (no name or VA
+  uses in TU). String-COMDAT caution retired for this class:
+  unused `extern` string decls emit nothing (R680's trap was
+  bare `// DATA` markers, a different mechanism). Per-TU:
+  RELOC 48/48 held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-814 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-816 (data pass): gm_RandomQuadratic.c exhausted. No
+source change.**
+
+- **Tried:** audited all remaining names in the file: `g_slot_table`
+  (conflict symbol, parked), `g_some_limit` (rebrew_globals),
+  `g_1009b764/g_100a8cf8` (defs here, used via TU-locals in
+  `gm_Open.c`), `g_slot_array` (live in `gm_AllocRaum.c`/
+  `gm_ObjectsAvailble.c`), 3 live consts + `gm_RandomFloat01`
+  proto. File exhausted — nothing left to drop.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-815 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-817 (data pass): drop 19-line dead prelude in
+gm_RemoveObjectWrapper.c. HOLD.**
+
+- **Tried:** full per-name recount (all count 1): dropped the
+  contiguous dead prelude (`g_query_limit` through
+  `g_FilterVal30` + 3 string externs — 19 lines). Kept live
+  protos (`gm_EntityAccumulate`, `gm_RemoveLinkedNodeById`)
+  + remaining dead blocks for later rounds. Per-TU: 2 RELOC
+  held (35/35, 36/36).
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-816 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-818 (data pass): drop 8-line entity block in
+gm_RemoveObjectWrapper.c. HOLD.**
+
+- **Tried:** dropped the contiguous dead entity block
+  (`g_query_state_a0c`, `g_byte_table_30861`,
+  `g_citizen_count`, `g_dynasty_field_2c/generation_counter`,
+  `g_entity_base/end/slot_table` — all count 1). Kept live
+  protos + const block for later. Per-TU: 2 RELOC held.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-817 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-819 (data pass): drop 11-line const block in
+gm_RemoveObjectWrapper.c. HOLD.**
+
+- **Tried:** dropped the contiguous dead const block (11 lines,
+  all count 1). File now head-block-minimal (2 live protos).
+  Per-TU: 2 RELOC held (35/35, 36/36).
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-818 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-820 (data pass): gm_RemoveObjectWrapper.c exhausted. No
+source change.**
+
+- **Tried:** head block now minimal (2 live protos only) —
+  file exhausted, nothing left to drop.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-819 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-821 (data pass): verification round. No source change.**
+
+- **Tried:** `test --all` 281/264 + lint 188/0/0, both at
+  baseline. No lever.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-820 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-822 (data pass): hard VA to named symbol in
+ahm_ExAllocAlchemist.c. HOLD.**
+
+- **Tried:** top `todo` drift item `g_1002a0f8`: the tag string
+  is canonically emitted in `alchemistry_logic2.c`
+  (`s_ahm_AllocAhmInfo_1002a0f8`), but
+  `ahm_ExAllocAlchemist.c:628` referenced it via hard VA
+  `(char*) 0x1002a0f8`. Added the "Defined in ..." extern
+  (loadsave3.c pattern) + used the symbol. Gates HOLD
+  (0x21ba/671); `data_operands` 1616→**1617** (the new symbol
+  ref, expected direction). Per-TU NEAR_MATCHING 828/1002
+  confirmed pre-existing via stash (identical numbers).
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-821 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-823 (data pass): drift-triage, no actionable item. No
+source change.**
+
+- **Tried:** triaged top `todo` drift items: `g_1002a0f8` row is
+  a stale tool-owned placeholder (`rebrew-data.toml` + generated
+  `rebrew_globals.h` only; no game source uses it — hands off
+  tool-owned files). `g_data_restore_gap` is crt_region
+  territory (out of scope). `g_game_speed_value/index` are
+  canonically defined in `link_stubs.c` (postlink-patched;
+  drift steady-state). Nothing actionable.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-822 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-824 (data pass): drift items 5-12 triaged. No source
+change.**
+
+- **Tried:** `g_plant_info_table`/`g_producer_id_table`: named
+  decls already, no hard-VA uses — steady-state. `g_filter_extra5`:
+  live cross-TU (init 0xff, runtime-mutated) — steady-state.
+  `g_file_version`/`g_save_header_tail`/`s_ls_tmp`/
+  `g_next_object_id`/`g_entity_id_counter`: link_stubs-owned
+  or postlink-patched. Nothing actionable.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-823 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-825 (data pass): todo queue all drift, verification.
+No source change.**
+
+- **Tried:** `rebrew todo`: all 20 items data-drift (triaged
+  steady-state R823–R824); zero function items queued.
+  `test --all` 281/264 + lint 188/0/0 at baseline.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-824 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-826 (data pass): typedef/define scans dry. No source
+change.**
+
+- **Tried:** dead TU-local typedef scan: clean. Dead `#define`
+  scan: 4 hits, all false positives — `WIN32_LEAN_AND_MEAN`
+  (`broadcast.c`) is effectful (shapes `windows.h`), zlib
+  trio in `check_header.c` (zlib file, hands off). Scanner
+  lesson: count==1 never means unused for macros.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-825 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-827 (data pass): enum/struct-tag scans dry. No source
+change.**
+
+- **Tried:** dead TU-local enum scan: clean. Single-use
+  struct-tag scan: 2 hits, both zlib files (`internal_state`
+  in `check_header.c`/`gzread.c` — hands off). Both dry.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-826 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-828 (data pass): static/macro scans dry. No source
+change.**
+
+- **Tried:** dead file-scope `static` scan: clean. Dead
+  function-like macro scan: 2 hits, both zlib
+  (`ALLOC`/`TRYFREE` in `check_header.c` — hands off).
+  Both dry.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-827 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-829 (data pass): unused-include scan no signal. No
+source change.**
+
+- **Tried:** basename-stem unused-`#include` scan: hundreds of
+  hits, all false positives (stem text-match misses type/fn
+  uses supplied via headers). Scanner retired, no signal.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-828 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-830 (data pass): dupe-def scans clean. No source
+change.**
+
+- **Tried:** same string symbol defined in 2+ TUs: none. Same
+  data VA defined twice: none. No duplicate-definition
+  findings (no LNK4006 class hiding).
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-829 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-831 (data pass): final verification. No source change.**
+
+- **Tried:** `test --all` 281/264 + lint 188/0/0, both at
+  baseline. Data-round series (R732–R831): 90+ dead decls
+  dropped across headers + 20 TUs, every one HOLD, zero
+  demotions. Gates unchanged throughout.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-830 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-832 (data pass): session close, verification. No
+source change.**
+
+- **Tried:** `test --all` 281/264 + lint 188/0/0 at baseline;
+  98 files in uncommitted stack (R593–R832 + gate updates).
+  Work remains (residue 8634, drift steady-state) — goal stays
+  active for next session.
+- **Gate:** no edit; baselines RESIDUE **8634** / DATA **21836**
+  untouched.
+- **Keep:** Round-831 stack.
+- **Parked:** same 9 shape conflicts + `m_PoolFree` (still +73) +
+  `LinkedNode` layout fork + `OFFICE_SLOT` vocab fork + 0x43 vocab
+  fork + `#pragma intrinsic` lists + tentative COMMONs.
+
+**Round-633 (data pass): drop 2 stale renamed decls from
+command_internal.h. HOLD.**
+
+- **Tried:** `command_internal.h` still declared `gm_DeallocEntity`
+  (renamed to `gm_KillSpieler` per naming table; live decl already
+  in `entity.h`) and `gm_KannObjektHergestellt` (renamed to
+  `gm_eval_SlotVoll`) — both with zero references tree-wide.
+  Dropped both. Audited all 20 decls in the header + 6 in
+  `server_internal.h`; rest live.
+- **Gate:** cmake `-j1` compile/link errors 0. `scripts/split_link.sh`
+  EXIT 0. Postlink `.text` differing `0x21ba` (**8634**) / raw-link
+  `.data` differing `0x554c` (**21836**). HOLD both. Lint 0/0.
+  `rebrew test --all` 281/264 — no demotions from the header edit.
+  `data_operands` **1616**. `ls_LoadBuildingEntityState` still 671.
+- **Keep:** Round-632 stack; baselines RESIDUE **8634** / DATA **21836**.
+- **Parked:** same 9 shape conflicts.
+
+**Round-519 (data pass, round 13): LogFile→formats cascade. `.data` 22,541 →
+22,266 (−275). `.text` 8,636 held.**
+
+- **Root cause:** CrashDump `\r\n`/separator COMDATs + EmitCrash `"--> "`/`"??? "`
+  stack-init COMDATs stole `0x1002733c` (LogFile). Killing them exposed
+  ErrorModule decl order, duplicate `%s\\%s`, InitializeLog `"wt"`, then
+  ErrorModule2 Fatal/MESSAGE COMDATs, then unused `g_file_append_mode`
+  stealing the LogMessage format slot `@0x10027448`.
+- **Landed (Attempt F):** CrashDump memcpy→`g_crashdump_data_10027104`;
+  EmitCrash keep `char[5]`, fill via memcpy from blob; ErrorModule REF order
+  `LogFile`→`wt`→banner (drop duplicate `%s\\%s`); InitializeLog `fopen(...,
+  g_file_write_mode)`; ErrorModule2 named emit through formats + wire VA
+  casts; delete unused `g_file_append_mode`.
+- **Local:** `0x10027318..0x10027500` matched (0 diffs).
+- Attempts A–E soft-reverted along the way (partial windows / gate fails).
+- Next: AcceptConnections string run (`0x1002956c+`), or other `.data` owners
+  past zlib `invalid bit length` (now aligned once LogFile/ErrorModule2 settle).
+- RESIDUE held 8636, DATA 22,541→22,266.
+
+**Round-518 (data pass, round 12): parked — AcceptConnections string run.
+Local window matched; global gate regressed. Soft-reverted.**
+
+- **Attempt:** named decls `0x1002956c..Multisync` at top of `server2.c`
+  (sized `0x104` path buffers + `g_flag_1002979c`), REF pad blob
+  `g_pad_10029aec[0x48c]` through aemter `@0x10029f78`, COMDAT kills in
+  `srv_LoadBuf.c` / `server3.c` / `cm_ProcessCommandQueue.c` / `server4.c`.
+- **Local win:** BLD matched REF for `0x1002956c..0x10029f78` (0 diffs).
+- **Gate fail:** raw `.data` 22,541 -> 23,076 (+535); `.text` residue
+  8,636 -> 8,845 (+209). Soft-reverted; baselines re-confirmed HOLD.
+- **Why global lost:** killing path/LoadBuf COMDATs displaces later
+  aemter/other `.data` owners; call-site rewrites also grow `.text`.
+  Matching one window is not enough — need the *next* owner's COMDAT
+  killed (or its named emit extended) without text growth.
+- **Next:** CrashDump/EmitCrash COMDATs in LogFile slot (+136) from
+  Round-517, *or* a smaller AcceptConnections subset with no call-site
+  churn and no pad blob until the cascade is measured per-owner.
+- RESIDUE held 8636, DATA held 22,541 after revert.
+
 **Round-517 (data pass, round 11): named 0xffffffff + broadcast strings.
 `.data` 23,470 -> 22,541 (-929). `.text` 8,636 held.**
 
@@ -5483,9 +11647,10 @@ nothing: `EXACT` is the strongest claim and `PROVEN` ranks below `RELOC` because
 function's bytes still differ (see the round-246 entry). The residue table below is the work
 list.
 
-**A written-up account of the obstacles themselves — compiler-level walls, measurement traps,
-process failures and the errors made along the way — is in `docs/difficulties.md`.  Read it
-before starting work; it exists to stop a fresh attempt repeating what has already been
+**A written-up account of the obstacles themselves — compiler walls
+(`docs/codegen-walls.md`), measurement traps (`docs/measure-traps.md`),
+workflow traps (`docs/workflow-traps.md`). Read all three before starting
+work; they exist to stop a fresh attempt repeating what has already been
 measured.
 
 **Regenerating the deliverable** (do this after any `cmake --build`, which *deletes*

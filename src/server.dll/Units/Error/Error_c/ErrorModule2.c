@@ -5,24 +5,29 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
-extern char* __cdecl ctime(const time_t*);
 
-char __cdecl check_memory_protection(unsigned int);
-char __cdecl AnalyzeInstruction(int, int, int, int*);
-unsigned int __cdecl EmitCrashModuleLine(int*);
-char* __cdecl GetDebugRecordByIndex();
 void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 extern unsigned int g_log_mode_flags;
 extern int g_owner_window;
 extern void (*g_panic_callback)(void);
 extern char g_log_message_buffer[];
-extern int g_handler_started;
 
 /* Dispatches a log message to the configured output handlers
  * (file, debugger, etc.). Routes based on severity level. */
 
 /* string referenced by ShutdownLogAndErrorHandler asm (was in the init body) */
-static char s_Error_Handler_closed__100273ac[] = "Error-Handler closed.\n";
+
+
+/* REF 0x100273ac..0x10027488 — named emit; kill anonymous COMDATs in this TU. */
+char s_Error_Handler_closed__100273ac[] = "Error-Handler closed.\n";
+char s_Fatal_Error_Abort_Program_100273c4[] = "Fatal Error! Abort Program?";
+char s_FATAL_ERROR_s_lu_s_100273e0[] = "FATAL ERROR (%s:%lu):\n%s\n";
+char s_ERROR_Handler_has_not_been_100273fc[] = "ERROR-Handler has not been started...";
+char s_Error_10027424[] = "Error!";
+char s_Message_1002742c[] = "Message:";
+char s_MESSAGE_s_10027438[] = "MESSAGE: %s\n";
+char s_tModule_s_Line_lu_s_10027448[] = "tModule '%s':\tLine:%lu:\t%s";
+char s_Time_8lu_Module_s_Line_10027464[] = "Time:%8lu\tModule '%s':\tLine:%lu:\t%s";
 
 // FUNCTION: SERVER 0x100034c0
 // ShutdownLogAndErrorHandler
@@ -31,7 +36,7 @@ void __cdecl ShutdownLogAndErrorHandler(void)
 	int i;
 
 	for (i = 0; i < 3; i++) {
-		DispatchLogOutput((char*) 0x100273ac, g_log_mode_flags, g_log_level_table[i]);
+		DispatchLogOutput(s_Error_Handler_closed__100273ac, g_log_mode_flags, g_log_level_table[i]);
 	}
 	if (g_log_mode_flags & 8) {
 		FreeConsole();
@@ -56,7 +61,7 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 	int dialogResult;
 
 	if (g_panic_callback == 0) {
-		MessageBoxA((HWND) 0, "ERROR-Handler has not been started...", "Error!", 0x30);
+		MessageBoxA((HWND) 0, s_ERROR_Handler_has_not_been_100273fc, s_Error_10027424, 0x30);
 		return;
 	}
 	flags = g_log_mode_flags;
@@ -64,7 +69,7 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 		return;
 	}
 	if ((flags & 0xf) != 0) {
-		sprintf(g_log_message_buffer, "FATAL ERROR (%s:%lu):\n%s\n", modulePath, lineNumber, message);
+		sprintf(g_log_message_buffer, s_FATAL_ERROR_s_lu_s_100273e0, modulePath, lineNumber, message);
 		flags = g_log_mode_flags;
 	}
 	if ((flags & 0xd) != 0) {
@@ -74,7 +79,7 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 	if ((flags & 2) == 0) {
 		return;
 	}
-	dialogResult = MessageBoxA((HWND) g_owner_window, g_log_message_buffer, "Fatal Error! Abort Program?", 0x124);
+	dialogResult = MessageBoxA((HWND) g_owner_window, g_log_message_buffer, s_Fatal_Error_Abort_Program_100273c4, 0x124);
 	if (dialogResult != 6) {
 		return;
 	}
@@ -91,18 +96,18 @@ void __cdecl ReportFatalError(char* modulePath, unsigned int lineNumber, char* m
 void __cdecl ReportMessage(char* msg)
 {
 	if (!g_panic_callback) {
-		MessageBoxA(0, "ERROR-Handler has not been started...", "Error!", 0x10030);
+		MessageBoxA(0, s_ERROR_Handler_has_not_been_100273fc, s_Error_10027424, 0x10030);
 		return;
 	}
 	if (!g_log_mode_flags) {
 		return;
 	}
 	if (g_log_mode_flags & 0x0d) {
-		sprintf(g_log_message_buffer, "MESSAGE: %s\n", msg);
+		sprintf(g_log_message_buffer, s_MESSAGE_s_10027438, msg);
 		DispatchLogOutput(g_log_message_buffer, g_log_mode_flags, 1);
 	}
 	if (g_log_mode_flags & 2) {
-		MessageBoxA(0, msg, "Message:", 0x1030);
+		MessageBoxA(0, msg, s_Message_1002742c, 0x1030);
 	}
 }
 
@@ -118,19 +123,16 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 	unsigned char flags;
 
 	if (*(int*) 0x10034610 == 0) {
-		((void (__stdcall*)(int, char*, char*, int)) *(void**) 0x10024148)(0, (char*) 0x100273fc, (char*) 0x10027424, 0x10030);
+		((void (__stdcall*)(int, char*, char*, int)) *(void**) 0x10024148)(0, s_ERROR_Handler_has_not_been_100273fc, s_Error_10027424, 0x10030);
 		return;
 	}
 	flags = *(unsigned char*) 0x10034618;
 	if (flags & 1) {
 		if (flags & 0x20) {
-			sprintf((char*) 0x117640e0, (char*) 0x10027464, ((int (__cdecl*)(void)) *(void**) 0x10024154)(), module, line, msg);
+			sprintf((char*) 0x117640e0, s_Time_8lu_Module_s_Line_10027464, ((int (__cdecl*)(void)) *(void**) 0x10024154)(), module, line, msg);
 		} else {
-			sprintf((char*) 0x117640e0, (char*) 0x10027448, module, line, msg);
+			sprintf((char*) 0x117640e0, s_tModule_s_Line_lu_s_10027448, module, line, msg);
 		}
 		DispatchLogOutput((char*) 0x117640e0, *(int*) 0x10034618, severity);
 	}
 }
-unsigned char g_file_append_mode[1] = {
-    0x61,
-};

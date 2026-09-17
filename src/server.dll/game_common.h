@@ -10,8 +10,6 @@
 #include <string.h>
 
 /* Rebrew/Ghidra exported standard types */
-typedef unsigned char  uint8_t;
-typedef unsigned short uint16_t;
 typedef unsigned int   uint32_t;
 
 /* Common Ghidra-isms */
@@ -19,7 +17,6 @@ typedef unsigned char  uchar;
 typedef unsigned short ushort;
 typedef unsigned int   uint;
 typedef unsigned char  byte;
-typedef unsigned short ush;
 typedef unsigned long  uLong;
 
 /*

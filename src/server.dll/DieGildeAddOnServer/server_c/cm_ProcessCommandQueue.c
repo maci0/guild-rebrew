@@ -549,7 +549,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
+#include "../server_internal.h"
 
 extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */
 int __cdecl ahm_ProcessEntityChain(char* cmd_payload);

@@ -6,11 +6,14 @@
 /* Server Core Lifecycle */
 extern int __cdecl srv_Init(int port);
 extern int __stdcall ServerMainThread(void* param);
-extern int __cdecl srv_RecvGame(void);
 
 /* Global Initialization */
-extern void __cdecl Init(void);
+extern int __cdecl Init(void* param);
 extern void __cdecl Exit(void);
+
+/* Command-dispatch handler fn type (212-entry table at 0x1002c3f8).
+ * Used by cm_ProcessCommandQueue.c. */
+typedef int(__cdecl* handler_func)(unsigned char* pkt, int param);
 
 /* Round-trip catalog names.  exit_handler and ServerMainThread are __stdcall,
  * so every cross-TU reference is decorated with @N (DllMain calls

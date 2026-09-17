@@ -181,7 +181,6 @@ unsigned short* g_query_cursor;
 int g_query_filter_owner = 0xffffffff;
 unsigned char g_query_filter_state = 255;
 char g_query_flag2;
-extern unsigned char g_entity_base[];
 int g_citizen_count;
 unsigned char g_current_season;
 int g_dynasty_field_44;
@@ -189,7 +188,9 @@ char g_dynasty_field_48;
 char g_dynasty_field_49;
 int g_dynasty_field_4c;
 unsigned char* g_query_filter_base;
-int g_entity_table_end;
+/* Round-558: same-size majority types that still emit BSS commons.
+ * Incomplete [] does not emit; sized arrays broke .text layout. */
+unsigned short* g_entity_table_end;
 int g_current_year;
 unsigned short g_current_hour;
 int g_clock_copy_mid;

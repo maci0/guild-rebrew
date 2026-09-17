@@ -8,22 +8,11 @@
 
 void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
 void __cdecl ReportMessage(char* msg); /* Single arg log? */
-void* __cdecl malloc(unsigned int size); /* 0x1001a7f7 - game malloc */
 int g_stat1 = 0;
 int g_stat2 = 0;
 int g_stat3 = 0;
 int g_stat4 = 0;
-extern int g_alloc_counter;
 void __cdecl free(void* ptr);
-extern int g_alloc_root_count;
-extern int g_alloc_root_size_total;
-extern int g_alloc_root_count_max;
-extern int g_alloc_root_size_max;
-extern int g_alloc_root_field_20;
-extern int g_alloc_root_name;
-extern int g_alloc_root_name_4;
-extern int g_default_group_name;
-extern int g_default_group_name_4;
 void __cdecl m_ReportGroupInfo(const char* toggle);
 void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 void __cdecl m_FreeTracked(void*);
@@ -35,35 +24,6 @@ extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 
 // FUNCTION: SERVER 0x10006c00
 // m_ShutdownAllocator
-
-// DATA: SERVER 0x10034624
-// DATA: SERVER 0x10034628
-// DATA: SERVER 0x1003462c
-// DATA: SERVER 0x10034630
-// DATA: SERVER 0x10034634
-// DATA: SERVER 0x1003463c
-
-// SIZE 0x10
-struct ArrayItem {
-	int field0;
-	int field4;
-	void* ptr8;
-	int fieldC;
-};
-
-// DATA: SERVER 0x10034640
-
-// SIZE 0x28
-struct LinkedListNode {
-	char data[0x24];
-	struct LinkedListNode* next;
-};
-
-// DATA: SERVER 0x117640c4
-
-// DATA: SERVER 0x10028b04
-// DATA: SERVER 0x10028aec
-// DATA: SERVER 0x10028888
 
 void __cdecl m_ShutdownAllocator(void)
 {
@@ -127,6 +87,7 @@ cleanup:
 
 // DATA: SERVER 0x10028b60
 
+// SIZE 0x10
 struct BlockNode {
 	int count;
 	int max;

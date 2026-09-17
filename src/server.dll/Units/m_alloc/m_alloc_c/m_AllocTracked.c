@@ -321,15 +321,7 @@ void* __cdecl m_AllocTracked(unsigned int size, const char* file_and_line);
 // already in the target's 0x14/0x10/0x1c/0x18/0x20/0x24 order.
 
 // SIZE 0x28
-struct GroupNode {
-	char name[0x10];
-	int size_total;   /* 0x10 */
-	int count_total;  /* 0x14 */
-	int size_max;     /* 0x18 */
-	int count_max;    /* 0x1c */
-	int count;        /* 0x20 */
-	struct GroupNode* next; /* 0x24 */
-};
+#include "../group_node.h"
 
 void* __cdecl m_AllocTracked(unsigned int size, const char* tag)
 {

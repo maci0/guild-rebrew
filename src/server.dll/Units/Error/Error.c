@@ -4,22 +4,9 @@
 #include <windows.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
-extern char* __cdecl ctime(const time_t*);
 
-char __cdecl check_memory_protection(unsigned int);
-char __cdecl AnalyzeInstruction(int, int, int, int*);
-unsigned int __cdecl EmitCrashModuleLine(int*);
-char* __cdecl GetDebugRecordByIndex();
 void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
-extern unsigned int g_log_mode_flags;
-extern int g_console_handle;
-extern int g_owner_window;
 extern void (*g_panic_callback)(void);
-extern char g_log_message_buffer[];
-extern int g_handler_started;
-extern char g_msg_buf[];
-void __cdecl write_log(char*, int, char*);
 
 /* Dispatches a log message to the configured output handlers
  * (file, debugger, etc.). Routes based on severity level. */
@@ -27,11 +14,8 @@ void __cdecl write_log(char*, int, char*);
 // FUNCTION: SERVER 0x10002640
 // DispatchLogOutput
 
-// DATA: SERVER 0x11766100
 
-// DATA: SERVER 0x11766204
 
-// DATA: SERVER 0x10027078
 /* THREE ints, not twelve.  The reference gives this table 12 bytes
  * (0x10027078..0x10027084, where g_log_format_table begins) and DispatchLogOutput
  * only ever indexes [0..2].  The initialiser was written as the twelve BYTES
@@ -41,7 +25,6 @@ int g_log_level_table[3] = {
     0x01, 0x02, 0x08,
 };
 
-// DATA: SERVER 0x10027084
 /* Three 0x20-byte log-file names, not one.  InitializeLogAndErrorHandler walks
  * this table from 0x10027084 in 0x20 steps until 0x100270e4 and DispatchLogOutput
  * indexes it as `g_log_format_table + idx * 32`, and the reference has

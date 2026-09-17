@@ -9,14 +9,11 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-char s_cm_ChkChangeAttribute___Invalid_I_1002c9e0[] = "cm_ChkChangeAttribute() Invalid Id";
-char s_cm_ChkChangeAttribute___Error_i_1002c9a0[] = "cm_ChkChangeAttribute() Invalid action on player <<Change ID>>";
-char s_cm_ChkChangeAttribute___Source_obj_1002c958[] = "cm_ChkChangeAttribute() Invalid action on player <<ID does not exist>>";
+/* Round-532: ascending REF VA decl order (R521/R531 mid-pocket lever; abuts ChkSellObjekt). */
 char s_cm_ChkChangeAttribute___Target_obj_1002c90c[] = "cm_ChkChangeAttribute() Invalid action on player <<PartnerID already set>>";
-
-#pragma pack(push, 1)
-// SIZE 0x4
-#pragma pack(pop)
+char s_cm_ChkChangeAttribute___Source_obj_1002c958[] = "cm_ChkChangeAttribute() Invalid action on player <<ID does not exist>>";
+char s_cm_ChkChangeAttribute___Error_i_1002c9a0[] = "cm_ChkChangeAttribute() Invalid action on player <<Change ID>>";
+char s_cm_ChkChangeAttribute___Invalid_I_1002c9e0[] = "cm_ChkChangeAttribute() Invalid Id";
 
 /* Validation handler: resolves entity by ID and validates each
  * attribute field descriptor (kind/value/offset) in the command

@@ -5,7 +5,6 @@
 #include <string.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-typedef int(__cdecl* ALLOCFN)(int, int, int);
 
 #pragma intrinsic(memcpy, memset)
 

@@ -5,7 +5,6 @@
 #include <string.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-int __cdecl _ftol(void);
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
@@ -14,11 +13,8 @@ int __cdecl gm_RandomMod(int range);
 float __cdecl gm_RandomQuadratic(void);
 void __cdecl gm_AddObjekt(int p1, int p2, int p3);
 int __cdecl gm_ObjectsAvailble(int season);
-extern float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
-extern double g_dbl_const_6d0; /* 0x100256d0 */
-extern dispatch_fn g_chain_handler_table[];
 
 extern int g_citizen_count;
 extern unsigned char g_slot_table[];
@@ -27,19 +23,8 @@ extern char g_relationship_matrix_secondary[];
 extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
 void* __cdecl m_AllocTracked(unsigned int size, const char* source);
-
-// SIZE 0x8
-typedef struct {
-	int key;
-	int val;
-} PAIR;
-
-// SIZE 0x14
-// SIZE 0x3c
-typedef struct {
-	char hdr[0xc];
-	PAIR entries[6];
-} TGT;
+/* Defined in alchemistry_logic2.c; same literal, same VA. */
+extern char s_ahm_AllocAhmInfo_1002a0f8[];
 
 /* Allocates a new alchemy entity: resolves the parent building record,
  * finds a free slot in the static entity table (0x100358a0, stride 0x21c),
@@ -642,7 +627,7 @@ unsigned int __cdecl ahm_ExAllocAlchemist(int cmd_payload)
 	} while (rand_iter < 0x90000);
 
 	if (*(int*) ((char*) dynamic + 0x65) == 0) {
-		*(int*) ((char*) dynamic + 0x65) = (int) m_AllocTracked(0x3c, (char*) 0x1002a0f8);
+		*(int*) ((char*) dynamic + 0x65) = (int) m_AllocTracked(0x3c, s_ahm_AllocAhmInfo_1002a0f8);
 	}
 
 	alch_data_ptr = *(int*) ((char*) dynamic + 0x65);

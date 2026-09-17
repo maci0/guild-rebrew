@@ -4,11 +4,6 @@
 #include "../command.h"
 #include "../../../Units/Error/error.h"
 
-/* Module-specific external strings and data */
-
-/* Module-specific globals with complex types */
-extern PlayerSlot g_player_slots_base[8];
-extern void* g_player_slots;
 extern int g_max_players;
 
 /* Lobby handler: sends the current player list to a client.

@@ -77,3 +77,6 @@ build-*/
 
 # BinSync state dir: regenerable from the metadata (rebrew sync --push --state-dir binsync)
 /binsync/
+
+# FLIRT signature packs (vendored, re-downloadable via rebrew flirt --fetch)
+/flirt_sigs/

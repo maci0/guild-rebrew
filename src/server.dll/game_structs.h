@@ -5,14 +5,6 @@
 
 /* --- Core Game Structures --- */
 
-/* Command Packet used for network synchronization */
-typedef struct CommandPacket {
-    unsigned int total_length;
-    unsigned int player_slot_id;
-    unsigned char command_id;
-    unsigned char payload[82];
-} CommandPacket;
-
 /* Player Slot structure - handles player state and data */
 typedef struct PlayerSlot {
     unsigned int flags;

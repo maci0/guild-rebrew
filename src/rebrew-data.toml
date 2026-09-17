@@ -404,25 +404,25 @@ status = "UNCHECKED"
 name = "g_log_level_table"
 section = ".data"
 type = "int[3]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10027084"]
 name = "g_log_format_table"
 section = ".data"
 type = "char[96]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100270e4"]
 name = "g_log_newline"
 section = ".data"
 type = "char[2]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100270e8"]
 name = "g_log_default_name"
 section = ".data"
 type = "char[13]"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10034624"]
 name = "g_array_count"
@@ -1259,43 +1259,43 @@ status = "UNCHECKED"
 name = "s__________________________________1002735c"
 type = "char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100270fc"]
 name = "s__s__s_100270fc"
 type = "char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10027358"]
 name = "g_file_write_mode"
 type = "unsigned char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100270f8"]
 name = "g_file_append_mode"
 type = "unsigned char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x1002733c"]
 name = "s_LogFile_has_been_deleted__1002733c"
 type = "char"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10027314"]
 name = "g_crash_newline"
 type = "char[4]"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x10027328"]
 name = "g_crash_space"
 type = "char[4]"
 section = ".data"
-status = "DRIFT"
+status = "VERIFIED"
 
 ["SERVER.0x100252e8"]
 section = ".rdata"
@@ -1869,4 +1869,64 @@ section = ".data"
 status = "UNCHECKED"
 
 ["SERVER.0x10027104"]
+section = ".data"
+
+["SERVER.0x10028bf8"]
+section = ".data"
+
+["SERVER.0x10028d24"]
+section = ".data"
+
+["SERVER.0x10028da0"]
+section = ".data"
+
+["SERVER.0x10028e3c"]
+section = ".data"
+
+["SERVER.0x10028f10"]
+section = ".data"
+
+["SERVER.0x10028f6c"]
+section = ".data"
+
+["SERVER.0x10028fc8"]
+section = ".data"
+
+["SERVER.0x10029068"]
+section = ".data"
+
+["SERVER.0x10029164"]
+section = ".data"
+
+["SERVER.0x10029194"]
+section = ".data"
+
+["SERVER.0x1002921c"]
+section = ".data"
+
+["SERVER.0x100292a4"]
+section = ".data"
+
+["SERVER.0x100292f0"]
+section = ".data"
+
+["SERVER.0x1002931c"]
+section = ".data"
+
+["SERVER.0x10029380"]
+section = ".data"
+
+["SERVER.0x100293b0"]
+section = ".data"
+
+["SERVER.0x100293c4"]
+section = ".data"
+
+["SERVER.0x100293e4"]
+section = ".data"
+
+["SERVER.0x1002944c"]
+section = ".data"
+
+["SERVER.0x100294a4"]
 section = ".data"

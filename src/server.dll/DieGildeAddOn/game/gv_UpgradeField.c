@@ -9,7 +9,6 @@
 // FUNCTION: SERVER 0x10010d10
 // SIZE: 570
 
-extern void __cdecl m_FreeTracked(void* ptr);
 int __cdecl gv_AllocGraveyardField(unsigned char* field);
 void __cdecl gv_Free3Fields(int* slot);
 

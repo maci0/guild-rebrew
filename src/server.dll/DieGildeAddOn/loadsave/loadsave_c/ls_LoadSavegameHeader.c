@@ -34,16 +34,8 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
 extern int g_file_version; /* 0x1002d4ec */
 extern char s_ls_tmp_1002d4fc; /* 0x1002d4fc */
 
-/* The 0x1002d4f0/f4/f8 defaults for the header tail, as one object: the
- * three fields are adjacent and always written together. */
-#pragma pack(1)
+#include "../save_header_tail.h"
 // SIZE 0x9
-struct SaveHeaderTail {
-	int a;
-	int b;
-	char c;
-};
-#pragma pack()
 extern struct SaveHeaderTail g_save_header_tail; /* 0x1002d4f0 */
 
 int __cdecl ls_LoadSavegameHeader(int stream, char* dest)

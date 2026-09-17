@@ -16,7 +16,7 @@ unsigned int g_broadcast_ff_10027030 = 0xffffffff;
 char s_broadcast_path_10027034[] = "D:\\Develop\\Units\\net\\broadcast.c";
 char s_Sending_Broadcast_10027058[] = "Sending Broadcast";
 
-/* SIZE 0x10 — struct sockaddr_in (Winsock system struct) */
+// SIZE 0x10 — struct sockaddr_in (Winsock system struct)
 void __cdecl SendBroadcastPacket(int port, char* buf)
 {
 	SOCKET s;

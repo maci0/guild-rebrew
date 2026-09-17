@@ -253,9 +253,6 @@ char* __cdecl fcn_1001af30(const char* s, int c); /* 0x1001af30 - strchr */
 char* __cdecl fcn_1001af30(const char* s, int c) { return 0; }
 unsigned long __cdecl fcn_10020ff8(const char*, char**, int, void*); /* 0x10020ff8 - _strtoxl */
 unsigned long __cdecl fcn_10020ff8(const char* s, char** e, int b, void* l) { return 0; }
-void __cdecl fcn_100203a2(int fd);             /* 0x100203a2 - _lock_fhandle */
-void* __cdecl fcn_10020360(int fd);            /* 0x10020360 - _get_osfhandle */
-void __cdecl fcn_10020401(int fd);             /* 0x10020401 - slot unlock */
 
 /* --- CRT malloc stub: satisfy _malloc without pulling crt_region/malloc.c
  * (__try SEH-cookie .rdata that inflates the IAT→IMPORT gap). Postlink
@@ -339,15 +336,9 @@ float g_const_1_5 = 1.5f;
 float g_const_0_01 = 0.01f;
 
 /* Savegame header tail: the 9 bytes "Savegame\0" copied into the header at
- * +0x9c by ls_LoadSavegameHeader. Layout must match its struct SaveHeaderTail
- * (int, int, char) under #pragma pack(1). */
-#pragma pack(1)
-struct SaveHeaderTail {
-	int a;
-	int b;
-	char c;
-};
-#pragma pack()
+ * +0x9c by ls_LoadSavegameHeader. Layout lives in
+ * DieGildeAddOn/loadsave/save_header_tail.h. */
+#include "server.dll/DieGildeAddOn/loadsave/save_header_tail.h"
 // DATA: SERVER 0x1002d4f0
 struct SaveHeaderTail g_save_header_tail = { 0x65766153, 0x656d6167, 0 };
 

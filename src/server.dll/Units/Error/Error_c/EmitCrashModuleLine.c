@@ -17,6 +17,8 @@ char* __cdecl GetDebugRecordByIndex(char* arg1, unsigned int arg2);
 extern char g_crashdump_data_10027104[568];
 #define g_crash_newline (g_crashdump_data_10027104 + 528)
 #define g_crash_space   (g_crashdump_data_10027104 + 548)
+#define g_crash_arrow   (g_crashdump_data_10027104 + 552) /* REF 0x1002732c */
+#define g_crash_unknown (g_crashdump_data_10027104 + 560) /* REF 0x10027334 */
 
 unsigned char __cdecl EmitCrashModuleLine(int* st)
 {
@@ -46,8 +48,11 @@ unsigned char __cdecl EmitCrashModuleLine(int* st)
 	return 0;
 found:
 	{
-		char unknown[5] = "??? ";
-		char arrow[5] = "--> ";
+		char unknown[5];
+		char arrow[5];
+
+		memcpy(unknown, g_crash_unknown, 5);
+		memcpy(arrow, g_crash_arrow, 5);
 
 		st4 = st[4];
 		flag = *(char*) 0x1003461c;

@@ -159,7 +159,6 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-extern int g_query_limit;
 void* __cdecl gm_AllocObjekt(int, int, int);
 char* __cdecl gm_AllocRaum(char*, int);
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);

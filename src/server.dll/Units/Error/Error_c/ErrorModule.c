@@ -4,19 +4,10 @@
 #include <windows.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
-extern char* __cdecl ctime(const time_t*);
-
 char __cdecl check_memory_protection(unsigned int);
 char __cdecl AnalyzeInstruction(int, int, int, int*);
-unsigned int __cdecl EmitCrashModuleLine(int*);
 char* __cdecl GetDebugRecordByIndex();
-void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
-extern unsigned int g_log_mode_flags;
-extern int g_owner_window;
 extern void (*g_panic_callback)(void);
-extern char g_log_message_buffer[];
-extern int g_handler_started;
 
 /* Dispatches a log message to the configured output handlers
  * (file, debugger, etc.). Routes based on severity level. */
@@ -95,10 +86,9 @@ char __cdecl AnalyzeInstruction(int arg1, int arg2, int arg3, int* arg4)
  * Opens log files, sets up exception handlers, and configures
  * output severity filters. */
 
-char s__________________________________1002735c[] = "* ------------------------------------------------------------ *\n[%s], Date: %s";
-char s__s__s_100270fc[] = "%s\\%s";
 char s_LogFile_has_been_deleted__1002733c[] = "LogFile has been deleted!\n";
 unsigned char g_file_write_mode[3] = {
     0x77, 0x74, 0x00,
 };
+char s__________________________________1002735c[] = "* ------------------------------------------------------------ *\n[%s], Date: %s";
 

@@ -14,7 +14,6 @@
 // FUNCTION: SERVER 0x100122e0
 
 extern int __cdecl gm_RandomMod(int n);
-extern int __cdecl _ftol(void);
 extern int __cdecl amt_FindEntity26(int entity_id);
 extern int __cdecl amt_FindEntity27(int entity_id);
 extern int __cdecl gm_AddObjekt(int a, int b, int c);

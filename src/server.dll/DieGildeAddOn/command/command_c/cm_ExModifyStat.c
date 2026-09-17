@@ -36,7 +36,6 @@
 
 extern float g_color_scale; /* 0x100256a4: stat upper bound, 252.0 */
 extern float g_const_0_0; /* 0x100256cc: stat lower bound, 0.0 */
-extern unsigned int _ftol(void);
 
 /* Execution handler: modifies a character stat by index.
  * Reads entity ID, stat index, and delta from the command

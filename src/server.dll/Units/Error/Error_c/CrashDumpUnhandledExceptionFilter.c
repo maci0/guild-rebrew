@@ -260,9 +260,9 @@ int WINAPI CrashDumpUnhandledExceptionFilter(EXCEPTION_POINTERS* pExceptionPoint
 							nFrames = 0x800;
 							hProcess = GetCurrentProcess();
 							/* Seek to end of crash log */
-							memcpy(szLine, "\r\n", 3);
+							memcpy(szLine, g_crashdump_data_10027104 + 524, 3); /* REF 0x10027310 */
 							space = ' ';
-							memcpy(szSep, "------------------------\r\n", 0x1b);
+							memcpy(szSep, g_crashdump_data_10027104 + 500, 0x1b); /* REF 0x100272f8 */
 							SetFilePointer(hCrashLog, -1, 0, 2);
 							WriteFile(hCrashLog, szSep, 0x1a, &nBytesWritten, 0);
 

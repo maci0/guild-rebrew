@@ -17,7 +17,6 @@ extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, int d, int e);
 extern int __cdecl gm_SubObjectNoKill(int a, int b, int c); /* 0x10016ea0 */
 extern int __cdecl gm_AddObjekt(int a, int b, int c);
-extern int __cdecl _ftol(void);
 
 int __cdecl gv_HireProductionWorker(void* req)
 {

@@ -22,7 +22,6 @@ void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor
                                     void* filter, int type);
 int __cdecl gm_SubObjectNoKill(int a, int b, int c);
 int __cdecl gm_AddObjekt(int a, int b, int c);
-int __cdecl _ftol(void);
 
 /* Moves a graveyard worker's slot entry to the field it currently works
  * in: finds the source entry and a free destination slot, copies the

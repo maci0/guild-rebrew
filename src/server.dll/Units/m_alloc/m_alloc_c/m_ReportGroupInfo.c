@@ -6,22 +6,11 @@
 
 #pragma intrinsic(memset, strcmp, strcpy)
 
-void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
-void __cdecl ReportMessage(char* msg);
-void* __cdecl malloc(unsigned int size); /* 0x1001a7f7 - game malloc */
 void __cdecl m_ReportGroupInfo(const char* toggle);
 extern void __cdecl LogMessageInternal(const char*, int, const char*, int);
 
 // SIZE 0x28
-struct GroupNode {
-	char name[0x10];
-	int size_total;   /* 0x10 */
-	int count_total;  /* 0x14 */
-	int size_max;     /* 0x18 */
-	int count_max;    /* 0x1c */
-	int count;        /* 0x20 */
-	struct GroupNode* next; /* 0x24 */
-};
+#include "../group_node.h"
 
 extern int g_alloc_root_name; /* 0x117640a0 - root group node */
 

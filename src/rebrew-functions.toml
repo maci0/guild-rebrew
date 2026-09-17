@@ -1141,7 +1141,6 @@ status = "RELOC"
 
 ["SERVER.0x100174d0"]
 size = 1088
-cflags = "/O2 /Gd"
 status = "PROVEN"
 ghidra = "gm_AllocGebaeude"
 blocker = "comparison direction swap, instruction folding (lea vs mov), jump condition swap, loop rotation / branch layout, zero-extend pattern (xor vs mov)"

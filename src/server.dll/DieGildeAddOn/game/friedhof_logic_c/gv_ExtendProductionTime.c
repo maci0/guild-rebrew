@@ -14,7 +14,6 @@ extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
 extern int __cdecl gm_SubObjectNoKill(int a, int b, int c); /* 0x10016ea0 */
 extern int __cdecl gm_AddObjekt(int a, int b, int c);
-extern int __cdecl _ftol(void);
 
 /* Extends a production slot's remaining time: resolves the building's
  * entity, verifies the grave slot, then adds the building's production
