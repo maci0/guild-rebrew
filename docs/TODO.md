@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-858: scoped the init-order slot rule, and tested it on the one carrier with a wrong frame.**
+
+- **Hunted the rule's prerequisite: a carrier with wrong slots and `= 0` locals.** Compared each
+  carrier's first instruction against the reference — only **`CrashDumpUnhandledExceptionFilter`
+  differs**, and by exactly one 4-byte slot (`sub esp,0x284` against `0x280`). Every other
+  carrier's prologue is byte-identical, so there is no slot to steer in them.
+- **Refined the rule's scope with a mixed-type probe.** With a `char` and two `int`s, all
+  address-taken and all assigned runtime values, the compiler emits `a -> 0x8`, `sp -> 0x3`,
+  `b -> 0x4`: the two `int`s follow the pool sequence while the `char` is packed independently
+  at `0x3`. So the sequence applies **within each size class** — a `char` among `int`s does not
+  consume an `int` position. Recorded as the rule's scope, which matters for applying it.
+- **Tested it at CrashDump and it does not reach.** That function has an address-taken
+  `char space` and its header records **8 declaration permutations** all leaving the frame at
+  `0x284` — the right control per Finding 52, but the wrong list. Probed both movable things:
+  swapping `fCanContinue = 0;` past `pCtx = ...` is byte-identical (obj 2115, `match` 643), and
+  moving `space = ' ';` ahead of the two `memcpy`s takes `match` 643 -> **641** with the frame
+  still `0x284`. Reverted; baseline re-confirmed at 2115/643 (or 643 positional).
+- **The negative is informative.** CrashDump's frame really is a spill-count difference, as its
+  header says, not a slot-assignment one — so this rule does not reach it. And its "8
+  declaration permutations" note is still true, just for the reason Finding 52 gives: the
+  declaration list was never the control in the first place.
+- **Where the rule stands:** validated in isolation for same-size address-taken locals, with the
+  per-pool scope now pinned, and with **one real carrier tested and excluded**. It has no
+  current application in the tree — every other carrier's slots already match.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-857: turned Finding 52's "init order is the exception" into a deterministic rule.**
 
 - **Third doc claim tested, and this one improves.** Finding 52 hedged correctly ("declaration

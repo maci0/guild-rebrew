@@ -2715,6 +2715,30 @@ Scope limit: measured with `= 0` initializers on address-taken `int`s. A local w
 is a non-constant, or that is not address-taken, was not part of this sweep; the earlier
 findings' null results for *deleting* locals still stand.
 
+**Refined scope: the sequence is per *type pool*, not per function (round 858, isolated).**
+Mixed a `char` and two `int`s, all address-taken and all assigned a runtime value:
+
+```c
+char sp; int a; int b;
+a = src; sp = (char) src; b = src;
+```
+emits `a -> 0x8`, `sp -> 0x3`, `b -> 0x4`. The two `int`s follow the `0x8, 0x4` sequence (a
+2-local run in their own pool) while the `char` is placed **independently** at `0x3`, packed
+below them. So the init-order sequence applies **within each size class**, and a `char` among
+`int`s does not consume an `int` position. Read the rule as: *for locals of the same size, the
+j-th initialized takes the j-th slot of that pool's sequence* — not as a single function-wide
+ordering.
+
+**Tested at `CrashDumpUnhandledExceptionFilter` and it did not apply (round 858).** That function
+is the one carrier whose frame differs from the reference (`sub esp,0x284` against `0x280`,
+exactly one 4-byte slot), it has an address-taken `char space`, and its header records that
+**8 declaration permutations** all leave the frame at `0x284` — the right control per this
+finding, but the wrong list. Probed both movable things anyway: swapping `fCanContinue = 0;`
+past `pCtx = ...` (byte-identical, obj 2115, `match` 643), and moving `space = ' ';` ahead of
+the two `memcpy`s (`match` 643 -> **641**, frame still `0x284`). Reverted. The frame there is a
+spill-count difference as its header says, not a slot-assignment one — this finding does not
+reach it, and the "8 declaration permutations" note is still true, just for the wrong reason.
+
 ## Finding 53 — callee-saved assignment can be an allocator tie-break that no C names
 
 `gm_ObjectsAvailble` (0x10015f70): `slot_base` is `esi` on both sides, and the
