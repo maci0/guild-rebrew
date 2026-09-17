@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-855: isolated the `lea`-vs-`add` trigger, corrected shapes §122, and tested the prediction.**
+
+- **Used round 854's tool on the five "unprobed anchor" candidates and found all five are in
+  documented territory** — `0x1000d937` 25 hits in a 192-byte window, `0x10011c5a` 8,
+  `0x100174da` 19. Round 19's own caveat was right: an uncited address is not an unexplored
+  function. So the tool's honest verdict is that the carriers contain no unprobed site, and I
+  stopped looking for one.
+- **Went at §122's `lea`-vs-`add` rule instead, and it is wrong about the cause.** §122 says
+  "c2 picks `lea` when the flags are live". Isolated it in the round-844 testbed and swept the
+  spellings — `base + off`, `&base[off]`, `off + (int)base`, `(char*)base + (unsigned)off` all
+  emit `add` when the sum is the function's last act. The `lea` appears when the **offset
+  operand is used again after the sum**:
+  ```c
+  g = (int*)(base + off); g2 = (int*)off;    /* -> lea (%eax,%ecx,1),%edx  */
+  g = (int*)(base + off); g2 = (int*)base;   /* -> add %eax,%ecx          */
+  ```
+  Flags-liveness is neither necessary nor sufficient: `lea` appears with the flags dead
+  (`return off;`) and `add` with them live. The rule also predicts the *destination* — a third
+  register, which matches the reference's `lea esi,[eax+ecx]` at `0x1000984b`. Corrected §122 in
+  place, with the §127 consequence: our `payload_src` has no later use, so no spelling of the
+  sum reaches the reference's `lea`.
+- **Tested the prediction instead of asserting it, and it lost.** Added a genuine second read of
+  `sent_bytes` after the sum at §127's site. The code **did** change (band diffs 308 -> **311**),
+  so the rule predicted the codegen correctly, but the change is net-negative. That is the
+  consistent reading: the rule says what *triggers* `lea`, not that adding a use helps — the
+  reference's extra use is a property of the original program, and manufacturing one costs more
+  than it recovers. Reverted; baseline re-confirmed at obj 2434 / `match` 2075.
+- One probe was invalid and is worth recording: `sent_bytes = sent_bytes;` is a self-assignment
+  msvc6 eliminates, so it measured nothing. The valid probe was a real read.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-854: built `scripts/whathas.py` so a round cannot re-derive a documented wall. Wired into AGENTS.md.**
 
 - **Fixed the process failure instead of logging it again.** Round 853 cost a whole round

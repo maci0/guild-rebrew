@@ -2012,6 +2012,26 @@ shapes.  Quoting target disassembly first, ours second:
   (`docs/msvc6-allocator.md`).
 * **`lea r,[r+r]` vs `add r,r`.** c2 picks `lea` when the flags are live;
   a spelling that kills the flags register is the only lever found.
+
+  **Refined (round 855, isolated): the trigger is a live *offset operand*, not the flags.**
+  Built the minimal case in the round-844 testbed and swept the spellings —
+  `base + off`, `&base[off]`, `off + (int)base`, `(char*)base + (unsigned)off` all give
+  `add` when the sum is the last thing the function does. The `lea` appears when **`off`
+  itself is used again after the sum**:
+  ```c
+  int* g; int* g2;
+  void f(void) { g = (int*)(base + off); g2 = (int*)off; }   /* -> lea (%eax,%ecx,1),%edx */
+  void f(void) { g = (int*)(base + off); g2 = (int*)base; }  /* -> add %eax,%ecx        */
+  ```
+  Two things follow. First, the `lea` target is a **third** register (`edx` here,
+  `esi` at the real site), which is what the reference does at `0x1000984b` — so the rule
+  predicts the register as well as the opcode. Second, flags-liveness is neither necessary
+  nor sufficient: I get `lea` with the flags dead (`return off;`) and `add` with them live.
+  §122's sentence is the right shape but names the wrong cause, and the wrong cause is what
+  sent round 853 after a spelling instead of after the second use.
+  **Consequence for §127's site:** our `payload_src` has no later use, so no spelling of the
+  sum reaches the reference's `lea`; the fix would be a second *use* of `sent_bytes` after
+  the sum, which the surrounding code does not have.
 * **Branch polarity** (see also section 7).  `je <head>` against our
   `jne <exit>` is a block-placement consequence, not a source choice — except
   where several guards share an error tail, where a guard inversion decides
