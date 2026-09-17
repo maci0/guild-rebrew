@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-868: tested round 33's `char`-flag hypothesis on `gm_FindNextFilteredEntity`. It closes the size gap and costs +114 at the link.**
+
+- **Probed the specific hypothesis round 33 left**: the reference's shared tail is reached by a
+  `cl`-flag jump (a *char*), we emit a private `xor eax,eax` + return at each early exit, and the
+  register width was the suspected reason. Routed the `do/while`'s early `return 0;` through the
+  shared tail (`match = 0; goto done;`, label placed before the existing
+  `if (match == 0) { ... }` block).
+- **It closes the size gap exactly.** Object **342 -> 347**, against the target's 346 — the
+  4-byte deficit is gone, and the file's other three functions (`gm_AddObjekt`, `gm_SubObjekt`,
+  `gm_SubObjectNoKill`) stay at 272/186/211 untouched.
+- **And it is +114 worse at the link.** `scripts/linktest.sh` reports
+  `gm_FindNextFilteredEntity` **215 -> 329**, `.text` **8,634 -> 8,748**. Reverted; the no-op
+  guard confirms the file is back to HEAD and `.text` is 8,634.
+- **The lesson is the round's actual product.** "The object size now matches" is not evidence of
+  progress on this function — it is the case where the object ruler points the *opposite* way
+  from the link. Recorded as `measure-traps.md` §6c, with the numbers, because the project's own
+  guidance ("the two object rulers disagree with each other and with the link") previously had no
+  concrete instance where the *size* gap closed and the link regressed.
+- **Where the size gap really is:** still open, and now better understood. The reference's `cl`
+  flag means the early paths must fall through to one tail; my spelling introduced a `goto` that
+  changed which blocks msvc6 keeps inline, and the 4 recovered bytes cost 114 elsewhere. The next
+  form to try is reaching the tail **without a new label** — e.g. restructuring the `do/while` so
+  its exit edge already lands on the shared code, rather than adding a second edge to it.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-867: worked `gm_FindNextFilteredEntity` — a genuinely unprobed carrier with a size gap. Deficit characterised; the obvious form loses.**
 
 - **Found it by the round-32 sweep**: the only carriers whose header carries *no* verdict are in

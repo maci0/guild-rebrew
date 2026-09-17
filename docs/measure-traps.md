@@ -169,6 +169,23 @@ This is why `rebrew test --symbol <name>` can report a size the metadata never h
 `rebrew verify` say 396/400. When a size looks wrong, check it against **the next tracked VA**
 (`0x10019720 + 400 == 0x100198b0`) — that is the ground truth, not either inventory.
 
+## 6c. Object size can move toward the target while the link moves away (round 868)
+
+`gm_FindNextFilteredEntity` (`0x10016f80`) is 4 bytes short of the reference: object **342**
+against target **346**, and the deficit is a *missing block* — 8 instructions the reference has
+and we do not (`jne` + a full epilogue: `xor eax,eax` / store / four pops / `ret`). The reference
+reaches **one shared epilogue via a `cl`-flag jump**; we emit a private return at each early exit.
+
+Routing the offending early `return 0;` through the shared tail (`match = 0; goto done;`) moves the
+object **342 -> 347** — past the target by one, i.e. the size gap closes. At the link it is
+**+114 worse** (`gm_FindNextFilteredEntity` 215 -> 329, `.text` 8,634 -> 8,748).
+
+So "the object size now matches" is not evidence of progress, and on this function it is
+positively misleading: the same edit that fixes the size adds 114 residue bytes, because the new
+`goto` re-lays the block graph and the shared tail stops being reachable the way the reference
+reaches it. **Measure at the link or do not claim a direction** — this is the concrete case behind
+the AGENTS.md warning that the two object rulers disagree with each other and with the link.
+
 ## 7. The size rule has two branches, and mixing them discards good work
 
 `cl` pads each COMDAT to 16 bytes, so for an object with **no** relocated data after its code
