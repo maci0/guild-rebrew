@@ -217,8 +217,6 @@ void* g_array_ptr = 0;
 char g_stream_pool[1] = {
     0x00,
 };
-int g_stream_count[4] = {
-    0x00, 0x00, 0x00, 0x00,
-};
+int g_stream_count = 0; /* 0x10034678 */
 int g_connection_counter = 0;
 

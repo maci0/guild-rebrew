@@ -124,6 +124,16 @@ before comparing two figures.
   after a bare build means the artifact is simply gone.
 - **`rebrew verify --full` rewrites `src/rebrew-functions.toml`** (it demotes `SIZE_MISMATCH` to
   `STUB`) and the file is mode 444, so restoring it needs `chmod u+w` first.
+- **`scripts/linktest.sh` measures `.text` only, and a data-type change can be `.text`-neutral
+  while costing `.data`.** Round 521 replaced five overlapping array definitions in
+  `loadsave3.c` with correctly-typed scalars: `linktest.sh` reported `8634 -> 8634 (+0)`, and the
+  gate's `.data` ceiling caught **21,836 -> 22,072 (+236)** in the same change. `linktest.sh`
+  reads `.text`; only `gate.sh` reads the raw-link `.data`, and it is the only ruler that saw it.
+  Measure a data edit with `gate.sh`, not `linktest.sh`.
+- **The `.scratch/residue_base.log` that `linktest.sh` diffs against is not regenerated
+  automatically and can be many rounds stale.** A `+1` in that table is meaningless until the
+  baseline is refreshed; `bash scripts/linktest.sh --new-base <file.c>` rewrites it (and prints no
+  delta). Cross-check by reverting the edit and confirming the baseline reproduces.
 
 ---
 

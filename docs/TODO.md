@@ -49,6 +49,49 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-521 (types): one landed, one reverted. RESIDUE 8634 / DATA 21,836 HOLD.**
+
+- **Worked the type-conflict list first** (`rebrew data --json`: 10 conflicts,
+  every one a duplicate spelling of one address across TUs).
+- **LANDED — `gm_Open.c`: `int g_stream_count[4] = {0,0,0,0}` -> `int g_stream_count = 0`.**
+  `vfs4.c:113` does `g_stream_count--` and `vfs_OpenStream.c:321` does
+  `g_stream_count = g_stream_count + 1`, both under `extern int`. The array
+  definition was a duplicate-symbol class mismatch (LNK4006 family), not a
+  layout choice. Reference bytes `@0x10034678` are all zero, so the scalar
+  zero-initializer is also the byte-correct form. Measured: `.text` 8634 ->
+  8634 (+0), `.data` 21,836 -> 21,836 (+0). Conflicts 10 -> 9.
+- **REVERTED — `loadsave3.c`: five filter globals array -> scalar.**
+  `g_filter_extra5`/`g_query_filter_extra1`/`_extra2`/`_extra3`/`_extra4` were
+  defined as `char[1]`/`int[4]`/`int[4]`/`short[2]`/`int[4]` overlapping one
+  another, while `gm_StartFilteredEntitySearch.c` and `spiel_dumpD.c` declare
+  each as a scalar at its own VA. The scalar form is type-correct and the
+  reference bytes agree with it (`0x10030b84` `ff`; `0x10030b88` `ffffffff`;
+  `0x10030b8c` `ff7f`; `0x10030b8e` `ff7f`; `0x10030b90` `ff`), but landing it
+  costs **`.data` 21,836 -> 22,072 (+236)**: the contiguous array block packed
+  five symbols with no padding, and scalars make the compiler re-emit `.data`
+  with alignment, displacing every later symbol. Reverted on the measured
+  regression. Conflicts back to 10 for these five.
+  **Ceiling:** the correct types cannot land until the `.data` around
+  `0x10030b84` is owned so the five scalars emit at their reference offsets
+  without a displacement cascade.
+- **Also tried and reverted — `rebrew_globals.h`: dropped the orphan
+  `extern char g_1002a0f8`** (0 users; the real definition is
+  `s_ahm_AllocAhmInfo_1002a0f8` in `alchemistry_logic2.c`, already carrying a
+  `// DATA:` annotation). `ls_LoadBuildingEntityState` went **+72** — nothing in
+  that TU references the symbol, so it is pure COMDAT-literal churn from the
+  header edit. Reverted. The stale data-toml entry `["SERVER.0x1002a0f8"]` /
+  `name = "g_1002a0f8"` remains and is the thing to fix, by annotating rather
+  than by editing the header.
+- **Method notes landed in `docs/measure-traps.md` §9:** `linktest.sh` reads
+  `.text` only and reported `+0` on the change that cost `.data` +236 — the gate
+  is the only ruler that sees a data edit; and `.scratch/residue_base.log` was
+  **three rounds stale** (it said 8636 while the tree was at 8634), making its
+  `+1`/`-1` column meaningless until `linktest.sh --new-base` refreshes it.
+- **Side finding:** the gate's compile error count went 2 -> 0. The two were
+  transient `fatal error C1083: Cannot open compiler intermediate file`
+  (temp-dir collision), not source errors.
+- RESIDUE held 8634, DATA held 21,836. Gate pass.
+
 **Round-520 (data pass, round 14): parked — AcceptConnections head/mid.
 Attempts A–F soft-reverted (+ A-isolation). RESIDUE 8636 / DATA 22,266 HOLD.**
 
