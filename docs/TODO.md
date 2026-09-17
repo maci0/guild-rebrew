@@ -49,6 +49,75 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-837: both "if continuing" options closed by measurement; size map refreshed. No source change.**
+
+- **Round 836 named two options: a post-pass, or the original build's compiler
+  or flag set. Both are now closed.**
+  - **Compiler build: SP6 is correct.** `rebrew toolchain detect
+    original/Server/server.dll` reports `profile msvc-6.0-sp6, aligned true`,
+    and its one suggestive signal — "5 pre-6.0 constant-hoist sites" — is a
+    **documented false positive** (TODO round ~104): our own SP6 build
+    reproduces 4 of the 5 at the same VAs, and **3 of those 5 are in zlib**,
+    which this project does not reverse. One is in `gm_Open`, already
+    RELOC-matched. The detector's other note, "both wrapper styles present —
+    per-file mixed optimization; use per-function flag sweeps", is exactly
+    what the flag-sweep axis already did.
+  - **Flags: flat, and on more rows than round 458's five.** Round 458 swept
+    20 combinations on the five largest walled rows and got **1 distinct score
+    each**; re-swept one at `thorough` (12 flag axes, ~120 compilations) with
+    the same result. Round 163 swept all 18 rows under 18 variants and pinned
+    the only three that moved. The axis is closed with the population
+    enumerated — which is the standard round 503/§145 set.
+  - Note `rebrew diff` prints `flag_sensitive: True` for `ServerMainThread`;
+    that is a heuristic and the measured sweep contradicts it. Do not treat
+    the field as evidence.
+- **Size map refreshed (round 163's frame — size-exact rows are shape-closable,
+  mismatched rows need a size fix first).** Measured with
+  `rebrew test --no-promote`:
+  ```
+  SIZE-EXACT                                  SIZE-MISMATCH
+  gm_AllocSpieler     3689/3689  2685         vfs_OpenStream           +34
+  gv_ExAllocGraveyard 1040/1040   425         gm_AllocGebaeude         -10
+  ServerMainThread    2434/2434   359         cm_ExCopyEntityData       -7
+  ahm_ExAllocAlchemist1002/1002   174         cm_ExSellObjekt           -1
+  gm_ObjectsAvailble   714/714     28         ls_LoadBuildingEntityState -3
+  srv_LoadBuf          750/750     49
+  cm_ExProdObjekt      993/993     17
+  cm_ProcessCommandQueue 639/639   15
+  m_AllocTracked       658/658     92
+  vfs_ReadCompressed   492/492     24
+  ```
+  Nine size-exact, five mismatched. The mismatch list is where a size fix
+  buys reachability — round 163's `CrashDump` `/Oy-` note (a real 66-byte win
+  that needs the size right first) is the model.
+- **One probe on `ServerMainThread` (359, the largest size-exact row not
+  already walled), reverted.** `seqdiff.py` — the sound metric here, since
+  `rebrew diff` aligns by byte offset and the "older pattern-based numbers
+  should not be compared" caveat in the open-functions table applies — gives
+  **592/627 aligned identical**, better than the 582 recorded, so nothing has
+  drifted. First divergence is a `cm_QueuePlayerCommand` message build where
+  the target materialises `total_size` into `ecx` and takes the buffer
+  address (`lea edx,[esp+0x10]` / `push edx`) **before** filling the struct,
+  while we interleave the stores first. Tried forcing the address early with
+  a local `unsigned char* msg = cmd_buffer_primary;` used at every site:
+  **byte-identical, 592/627 and 48 differing on both sides.** Inert — same
+  class as the doc's "spellings have never landed".
+- **Method note (measure-traps).** Compared `rebrew diff`'s pattern-based
+  alignment (576/627) against the recorded 582/627 and briefly read it as a
+  6-instruction regression. It is a **metric mismatch**, not drift: the 582
+  comes from `.scratch/wall.py`'s reloc-masked count and the table says in
+  place that the two must not be compared. `.scratch/` is gitignored and was
+  cleaned, so `wall.py` no longer exists; `scripts/seqdiff.py` is the
+  surviving sound instrument. Always state which ruler produced a number.
+- **Gate:** no edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+- **Next:** the only measured-reachable direction left is the **size-mismatch
+  list** — five rows, four of them 1-3 bytes short (`cm_ExSellObjekt` -1,
+  `ls_LoadBuildingEntityState` -3, `cm_ExCopyEntityData` -7, `gm_AllocGebaeude`
+  -10) plus `vfs_OpenStream` +34. Closing a size gap is what round 163 showed
+  unlocks flag/scheduling wins; a 1-byte gap is the cheapest target in the
+  tree.
+
 **Round-836: re-measured every objective clause. The deliverable satisfies all but byte-residue.**
 
 - **Ran the whole done-criteria list against the current `build/server.dll`
