@@ -49,6 +49,43 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-857: turned Finding 52's "init order is the exception" into a deterministic rule.**
+
+- **Third doc claim tested, and this one improves.** Finding 52 hedged correctly ("declaration
+  order is *usually* inert") and named the right exception (init-statement order), but left it
+  as an observation from one function. Built the minimal case in the testbed — three
+  address-taken `int`s initialized `= 0` — and swept all six init permutations. **Slots are
+  handed out in initialization order, by a fixed sequence, independent of declaration order:**
+  ```
+  init a b c -> a=0x0 b=0x8 c=0x4      init b a c -> b=0x8 a=0x0 c=0x4
+  init c b a -> c=0x4 b=0x8 a=0x0      init c a b -> c=0x4 a=0x0 b=0x8
+  init a c b -> a=0x0 c=0x4 b=0x8      init b c a -> b=0x8 c=0x4 a=0x0
+  ```
+  Read any row: **1st-initialized gets `0x0`, last gets `0x4`**, middles fill downward from the
+  top. Sequence by count: 2 -> `0,4`; 3 -> `0,8,4`; 4 -> `0,c,8,4`.
+- **This explains the null results rather than contradicting them.** Every declaration-order
+  sweep in the allocator doc came back byte-identical because declaration order genuinely does
+  not steer slots — the previous rounds were permuting the wrong list. The movable list is the
+  initializer sequence, and it is fully steppable: to place a variable in a target slot, change
+  how many locals are initialized before it. Recorded under Finding 52, with the scope limit
+  (measured on `= 0` initializers over address-taken `int`s; non-constant initializers and
+  non-address-taken locals were not swept, and the "deleting locals does not shrink the frame"
+  results still stand).
+- **Checked the real site that Finding 52 cites as a counter-example.**
+  `ls_LoadBuildingEntityState`'s prologue is **byte-identical** (`lea eax,[esp+0x14]` matches the
+  reference exactly), so its slots are already correct and there is nothing to move — it is not
+  evidence against the rule, it is a case where no move is needed. Its stated
+  "the two slots cannot be swapped by declaring them in the other order" is consistent: the
+  declaration list was never the control.
+- **Not yet applied to a real row.** The rule needs a carrier whose slots are *wrong* and whose
+  locals are `= 0`-initialized; `ls` is right already and `cm_ExSellObjekt`'s cited case is a
+  pointer store through `[esi+0x99]`, not a local. Candidate hunt for the next round.
+- **Running tally on the docs' causal claims:** three tested (855 §122, 856 §82, 857 Finding 52).
+  Two named the wrong cause, one was right but under-specified. The *observations* have been
+  reliable every time.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-856: §82's two-condition rule is wrong — condition 2 alone triggers `fimul`. Corrected; applying it at the real site is net-negative.**
 
 - **Followed round 855's lead** (a doc rule that named the wrong cause) to the next conjunctive

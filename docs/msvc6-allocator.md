@@ -2682,6 +2682,39 @@ live-range mechanism as Finding 48's prologue split.
 (round 110); on the sites above it was inert — try live ranges and initialiser
 placement first.
 
+**The exception is now a rule, not an observation (round 857, isolated).** Finding 52 recorded
+that init-statement order moves a slot on one real function. Built the minimal case — three
+address-taken `int`s, initialized `= 0`, all used — and swept all six permutations. **Slots are
+handed out in initialization order by a fixed sequence that does not depend on declaration
+order at all:**
+
+```
+init order a b c  ->  a=0x0  b=0x8  c=0x4
+init order c b a  ->  c=0x4  b=0x8  a=0x0
+init order b a c  ->  b=0x8  a=0x0  c=0x4
+init order c a b  ->  c=0x4  a=0x0  b=0x8
+init order a c b  ->  a=0x0  c=0x4  b=0x8
+init order b c a  ->  b=0x8  c=0x4  a=0x0
+```
+
+Reading any row: the **1st-initialized gets `0x0`**, the **last gets `0x4`**, and the ones in
+between fill downward from the top. The sequence by count:
+
+| initialized locals | slot sequence, in init order |
+|---|---|
+| 2 | `0x0, 0x4` |
+| 3 | `0x0, 0x8, 0x4` |
+| 4 | `0x0, 0xc, 0x8, 0x4` |
+
+So it is fully deterministic and steppable: **to move a variable to a target slot, change how
+many locals are initialized before it.** Declaration position is irrelevant, which is why every
+declaration-order sweep in this document came back byte-identical — the previous rounds were
+permuting the wrong list.
+
+Scope limit: measured with `= 0` initializers on address-taken `int`s. A local whose initializer
+is a non-constant, or that is not address-taken, was not part of this sweep; the earlier
+findings' null results for *deleting* locals still stand.
+
 ## Finding 53 — callee-saved assignment can be an allocator tie-break that no C names
 
 `gm_ObjectsAvailble` (0x10015f70): `slot_base` is `esi` on both sides, and the
