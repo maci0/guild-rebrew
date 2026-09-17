@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-848: dropped 11 dead cross-TU globals from the 8 spiel TUs. Residue-neutral, 88 lines gone.**
+
+- **Went back to the objective's stated focus (data and types) and found real work there.**
+  `rebrew data --json` reported 272 unannotated globals; enumerating them turned up a clean
+  class: **11 named game globals declared `extern` in all 8 spiel TUs with zero uses
+  anywhere in the tree** — `g_EntityListStart`, `g_EntitySearchPtr`, `g_SearchCount`,
+  `g_SearchFlag`, `g_SomeGlobal`, `g_FilterActive`, `g_FilterType`, `g_FilterId`,
+  `g_FilterVal25`, `g_FilterVal27`, `g_FilterVal30`. 88 declaration lines, no definition,
+  no reference: they appear in no object file. Exactly the "no placeholders past first pass"
+  class the objective names.
+- **Re-verified the premise before spending the round on it:** `.data` and `.rdata` in the
+  *shipped* file are byte-identical to the reference (0 differing bytes each), confirming
+  round 834 — so the 47 data-drift items cannot move the deliverable, and the dead globals
+  are the actionable part of this section.
+- **Measured before and after, on both rulers.** `spiel.c` alone: all 5 functions unchanged
+  (RELOC 57/194/55/135/211). All 8 TUs: `rebrew test --all` **281 passed / 264 byte-matched,
+  zero demotions**, then the link — `scripts/linktest.sh` over all 8 — **`.text` 8634 -> 8634
+  (+0)**. Raw-link `.data` 0x554c and `.text` 0x21ba both unchanged.
+- **Why this is safe where the docs' other decl drops were not.** The file header rule is
+  that unused *header* decls are not safe by default (`m_PoolFree` +73, `gm_Open.c` ALLOCFN),
+  because those shift declaration-merge order in every TU that includes the header. These 11
+  were **file-local `extern` lines in 8 sibling .c files**, each removed only from the TU that
+  carried it, and the measurement confirms zero effect on either ruler. The distinction is
+  worth keeping: a dead decl in a widely-included header is a codegen risk; a dead decl
+  lexically local to one TU that never mentions it is not.
+- **Gate:** pass — lint 188/188, compile errors 0, verify 281/264 held, residue 8634 and
+  raw-link .data 21,836 held.
+- **Next:** the remaining unannotated list is mostly CRT (stock library, out of scope) and 22
+  string decls; the 9 type conflicts are the `loadsave3.c` filter block (measured net-negative
+  to fix, round 838) and the 3 NextEntity BSS-emit rows (parked, round 558).
+
 **Round-847: found the immediate cause of the accumulator rotation (role competition for `esi`), and bounded it.**
 
 - **Followed round 846's live lever (cardinality) to its actual mechanism.** Disassembled the
