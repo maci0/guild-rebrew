@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-887: closed the open hypothesis on `gm_AllocSpieler`; the two banked fixes are additive, not complementary.**
+
+- **Tried:** `gm_AllocSpieler` (2,685 residue bytes — 31% of the tree, the single highest-value row)
+  by attacking the one hypothesis its documentation left open.
+- **Checked the docs first, which saved the round from re-treading.** 99 documented mentions, and
+  the file header records: the +0xaa first divergence is a **scheduler sink**, not a statement
+  order (§109), reordering it measures 371 bytes worse; the `lea` split is **not source-reachable**
+  (§216); and the row ships a **deliberate semantic bug** whose correct spelling is 10 bytes short
+  (§110). Three separate documented walls on one function.
+- **Found the genuinely open question.** Two *known-correct* edits are each short of the target by
+  a similar amount — the `arg8` single-store form (−10) and a single read of `0x1003542c` (−11) —
+  so the untested possibility was that they are complementary and would cancel.
+- **Measured, four ways** (shapes §110 now tabulates): shipped **1004 / obj 3689**; single-read
+  alone **646 / 3678**; correct `arg8` alone **563 / 3679**; **both together 524 / 3668**.
+- **Result: additive, not complementary.** −11 and −10 give −21, so these are independent missing
+  instructions, not two spellings of one gap. The "recover 10 here to pay for 11 there" plan is
+  dead, and the real obstacle is ~21 bytes of reference code that no spelling of this source
+  produces. That is a useful negative: it collapses the row's remaining search space rather than
+  adding another failed spelling to it.
+- **Also probed and reverted (all inert at 1004/3689):** widening the `arg4` store to `int` (579,
+  obj 3688); routing the zero-extend through a declared `unsigned short` temp (**byte-identical**,
+  confirming msvc6 already materialises that zero-extend the same way); addressing the second byte
+  of the 5-byte copy as `ent+0x24+4`; and a named `SpielerName5` struct copy for that 5-byte block
+  (1002, obj 3689).
+- **Restored and confirmed:** `rebrew test` back to `match 1004/3689, obj 3689`; `git status` clean.
+- **Gate:** pass. residue 8,634, raw-link `.data` 21,836, verify 281/283, byte-matched 264, imports
+  100 — all held.
+
 **Round-886: left the data lane (exhausted) for `.text`; three probes on `srv_LoadBuf`, all reverted.**
 
 - **Why the lane changed.** `verify --data` now reports `mismatched []` and `missing []` with 122

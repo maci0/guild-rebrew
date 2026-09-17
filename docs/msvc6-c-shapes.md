@@ -4597,6 +4597,28 @@ The blocking condition is precise and worth restating: a correct spelling that i
 longer**, or a resynchronised tail that absorbs the shortfall. Until then the bug stays, and it
 should stay *documented here*, not only in a comment 450 lines above the defect.
 
+**Round 887 closed the one hypothesis that section left open.** The file header also banks a
+second 11-byte-short fix — reading `*(int*) 0x1003542c` once instead of twice profits four verbatim
+opcodes but costs 11 bytes (3689 → 3678). Both deficits are *missing* code of the same order, so
+the obvious hope was that they are complementary and would cancel. Measured, applied one at a time
+and then together:
+
+| shape | `rebrew test` | obj |
+|---|---|---|
+| shipped | 1004/3689 | 3689 |
+| single-read `0x1003542c` alone | 646/3689 | **3678** (−11) |
+| correct `arg8` store alone | 563/3689 | **3679** (−10) |
+| **both applied** | 524/3689 | **3668** (−21) |
+
+**They are additive, not complementary.** −11 and −10 give −21, so the two shortfalls are
+independent missing instructions rather than two spellings of one gap. That kills the "recover 10
+bytes here to pay for 11 there" plan and says the real obstacle is ~21 bytes of code the reference
+contains and no spelling of this source produces. Combined with §109's finding that the +0xaa
+divergence is a scheduler sink rather than a statement order, the row's residue is not
+source-reachable by any of the levers this tree has: the two known-correct edits are correct *and*
+smaller, and no ordering or spelling recovers the difference. Consistent with §§109/216/110,
+recorded rather than re-probed.
+
 ### Round 214 correction: the size match is an accident of the bug
 
 The framing above — "being correct costs 10 bytes" — is misleading, and the instruction counts
