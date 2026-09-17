@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-881: verified the two objective clauses nothing enforced, and added the import check to the gate.**
+
+- **`gate.sh` covered lint, compile, verify and residue — but not the import table and not Wine
+  load/exports, both of which are objective done-criteria.** Nothing would have caught a change
+  that pulled in a library object the original did not have, and neither shows up in the residue.
+- **Verified both now.**
+  - **Import table: 100 imports, identical names, identical order, identical DLLs.** My first walk
+    reported 0 because I read `FirstThunk`; this binary zeroes it and uses `OriginalFirstThunk`.
+  - **Wine: `LOAD OK h=10000000`, `Init=10009320 Exit=10009350`, `EXPORTS RESOLVE OK`** — both VAs
+    equal the reference's exported addresses.
+- **Added the import check to `scripts/gate.sh`** (pure python in a heredoc, no new dependency):
+  it walks both files' `OriginalFirstThunk` chains and prints either `imports match the reference
+  (100)` or a `REGRESSION` line with the first differing name, and sets `rc=1`.
+- **Verified the guard fires, which took three attempts and is worth recording.** A tampered
+  `build/server.dll` (one byte of `KERNEL32.dll` flipped to `X`) was installed and the check still
+  printed "match". It was not a broken guard: **`gate.sh` runs `split_link.sh` earlier in the same
+  invocation, which rebuilds `build/server.dll`** and overwrote the tamper before the check ran.
+  Run standalone against the tampered file, the identical snippet correctly reported
+  `DIFF ref=100 bld=100 / first: ref KERNEL32.dll!GetLocalTime bld XERNAL32.dll!GetLocalTime`.
+  **A guard can only be tested on an input the surrounding pipeline does not regenerate.**
+- **Side effect worth knowing:** copying over `build/server.dll` leaves it mode 444, and
+  `split_link.sh` then cannot overwrite it — the gate reports `residue not measured`, which reads
+  like a regression. `chmod 644 build/server.dll` fixes it.
+- **Gate:** pass — lint 188/188, compile errors 0, verify 281/264 held, residue 8634, raw-link
+  `.data` 21,836 held, **imports match (100)**.
+
 **Round-880: audited the CMake flag plumbing end to end. Sound; and the 48 "missing" tokens are a benign repeat.**
 
 - **Round 45 found that `COMPILE_OPTIONS` silently drops a second argument, which means a flag

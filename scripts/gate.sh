@@ -172,5 +172,66 @@ else
     rc=1
 fi
 
+# Import table against the reference.  Was a done-criterion with nothing
+# enforcing it until round 881: an extra import means a library object came in
+# the original did not have, a missing one means the opposite, and neither shows
+# up in the residue.  The reference has exactly 100 over four descriptors.
+echo "== import table"
+if [ -f build/server.dll ]; then
+    IMP=$("${REBREW_PY:-python3}" - <<'PYEOF'
+import struct, sys
+def imports(p):
+    d = open(p, 'rb').read()
+    pe = struct.unpack_from('<I', d, 0x3c)[0]
+    n = struct.unpack_from('<H', d, pe + 6)[0]
+    hs = struct.unpack_from('<H', d, pe + 20)[0]
+    secs = []
+    for i in range(n):
+        o = pe + 24 + hs + i * 40
+        vs, va, raw, ptr = struct.unpack_from('<IIII', d, o + 8)
+        secs.append((va, vs, ptr, raw))
+    def r2f(rva):
+        for va, vs, ptr, raw in secs:
+            if va <= rva < va + max(vs, raw):
+                return ptr + (rva - va)
+    opt = pe + 24
+    irva, _ = struct.unpack_from('<II', d, opt + 96 + 8)
+    k, out = irva, []
+    while True:
+        f = r2f(k)
+        oft, ts, fc, nm, ft = struct.unpack_from('<IIIII', d, f)
+        if not nm:
+            break
+        dll = d[r2f(nm):d.find(b'\0', r2f(nm))].decode()
+        j, c = r2f(oft), 0
+        while True:
+            v = struct.unpack_from('<I', d, j + c * 4)[0]
+            if v == 0:
+                break
+            out.append(dll + '!' + ('ord%d' % (v & 0xffff) if v & 0x80000000
+                                    else d[r2f(v) + 2:d.find(b'\0', r2f(v) + 2)].decode()))
+            c += 1
+        k += 20
+    return out
+a = imports('original/Server/server.dll')
+b = imports('build/server.dll')
+if a == b:
+    print("OK %d" % len(b))
+else:
+    print("DIFF ref=%d bld=%d" % (len(a), len(b)))
+    for x, y in zip(a, b):
+        if x != y:
+            print("  first: ref %s bld %s" % (x, y))
+            break
+PYEOF
+)
+    case "$IMP" in
+        "OK 100") echo "imports match the reference (100)" ;;
+        *) echo "REGRESSION: import table differs -- $IMP"; rc=1 ;;
+    esac
+else
+    echo "imports not measured (build/server.dll missing)"
+fi
+
 [ "$rc" -eq 0 ] && echo "GATE: pass" || echo "GATE: FAIL"
 exit "$rc"
