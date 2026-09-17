@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-873: worked `gm_ObjectsAvailble` (25 residue bytes, unblocked). Documented closed after ~90 probes; my read of the residual was already in the header.**
+
+- **Picked it as round 38 directed** — an unblocked carrier with a small delta (28 by `verify`,
+  25 bytes measured over the real extent). The residue is **12 runs**, and **10 of them are single
+  bytes at ~0x12 intervals**, which is the signature of one cause rather than ten defects.
+  Confirmed by inspection: every single-byte run is a **ModRM/register byte** —
+  `89 5c` vs `89 7c`, `8b fe` vs `8b de`, `8b 07` vs `8b 03`, `8b 43 14` vs `8b 47 14` — i.e. the
+  **`ebx`↔`edi` rotation**, not independent bugs. The one substantive run (14 bytes at
+  `+0x163`) is the same rotation plus a reordered `mov ebx,0x55`:
+  ```
+  REF  mov ebx,0x55 ; shl ecx,6 ; add edx,ecx ; add eax,edx ; mov edx,esi ; lea ecx,[eax+0x2e]
+  OURS mov edx,esi  ; shl ecx,6 ; add edi,ecx ; mov esi,0x55 ; add eax,edi ; lea ecx,[eax+0x2e]
+  ```
+- **The header already names it and has probed it to exhaustion.** Its residual line reads
+  *"slot_cursor/slot in edi/ebx vs target ebx/edi"*, and the surrounding notes record **~90
+  isolated probes** in `.scratch/gmprobe/` all plateauing at the same score, with the conclusion
+  *"declaration order, hoist positions, extra-copy and cursor splits all inert"*. This is
+  allocator Finding 62's case, which explicitly says the rotation is unsteerable.
+- **No probe run.** The one lever round 23 added to the allocator doc — init-statement order —
+  cannot apply here: the function's locals are established by assignment in dependency order and
+  the file records the copy/reorder variants as inert, so there is no *sequence* left to permute.
+- **Incidental correction the header supplied:** the 720-byte extent I measured includes **6
+  trailing `0x90` pad bytes**; the function's real body is 714, which is what the object and
+  `verify` both say. Worth keeping in mind for any per-function byte counting on this file.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-872: applied the budget check to all 19 carriers. 16 are in budget, 3 are blocked — and my last three rounds worked a blocked one.**
 
 - **Ran round 37's pre-check across the whole carrier list** rather than reaching for a function:
