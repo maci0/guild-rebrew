@@ -49,6 +49,30 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-862: worked round 27's best lead (`srv_LoadBuf`). Probe moved the code and lost; re-hit the prelayout trap.**
+
+- **Corrected round 27's "untracked" claim about `0x1000a570`.** It is **not** untracked: it is
+  `srv_LoadBuf` in `server_c/srv_LoadBuf.c`, `PROVEN`, recorded size **750** against the
+  inventory's 752. The 2-byte extent difference is what made the by-size attribution report a
+  gap. `0x1000a490` is genuinely absent from the toml, so round 27's count of untracked
+  functions was one high; the residue re-attribution (8,634 / 19 carriers) still stands.
+- **Worked the function's own named blocker** — "cmd-3 push eax after the two stores". Found the
+  site: a comma expression inside the call argument at `srv_LoadBuf.c:577`,
+  `(header[0xb] = status, header[0xc] = ... ? 1 : 2, header)`. The target emits
+  `push eax` **before** the two stores; we emit the stores first.
+- **Probe: hoisted the two stores out of the comma expression into plain statements.**
+  The codegen genuinely moved (`push eax` moved relative to the `and edx,0x400`), so the
+  spelling is a real control — and it is **worse**, `match` 701 -> do not keep. Reverted; the
+  file is identical to HEAD and `linktest.sh` confirms `.text` 8634 -> 8634 (+0).
+- **Re-hit the round-26 instrument trap, and it is worth recording that I did.** Measuring
+  residue by hand against `.scratch/server.dll.prelayout` gave **121** for this function, the
+  same bytes against `build/split_poc.dll` gave **103**, and the tool's masked comparison says
+  **701/750** (49). The prelayout copy is the pre-postlink output and is not a valid oracle for
+  a single function's residue — exactly what measure-traps §6 now says. I wrote that section
+  last round and then used the wrong instrument anyway. **The tool's number is the one to use.**
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-861: the carrier list is 19 functions, not 18 — the difference is untracked functions.**
 
 - **Validated the residue instrument first, by hand.** `original/Server/server.dll` against
