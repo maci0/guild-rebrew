@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-860: audited metadata against bytes, produced a false alarm, and recorded the instrument error.**
+
+- **Went looking for the reverse of round 859's staleness** — metadata claiming `RELOC`/`EXACT`
+  for functions whose bytes no longer match. Compared all 351 tracked entries' recorded sizes
+  against the shipped `.text` byte for byte. **241 of the 264 matched entries showed diffs.**
+- **The finding was wrong, and the way it was wrong is the useful part.** I was diffing against
+  `.scratch/server.dll.prelayout`, which is the **pre-postlink** output — its absolute
+  `mov`/`call` operands hold the *linker's* values, not the reference's, so every relocated
+  function differs by construction. Worse, I then tuned a "is this a relocation?" heuristic to
+  explain the diffs, and the count moved as I tuned it (241 -> 158 -> 121 unexplained), which is
+  the signature of a broken instrument rather than bad data. **Three iterations of the same
+  wrong measurement before checking the tool.**
+- **The tool settles it in one command.** `rebrew verify --json`: **0 entries with a nonzero
+  delta** across all 264 `RELOC`/`EXACT` entries. `rebrew test` on one of the "suspects"
+  (`broadcast.c`, 0x10001130) returns `match_count 179/179`, `mismatches []`, `reloc_count 12` —
+  fully matched. The metadata is consistent; the raw byte diff was not.
+- **Recorded in `docs/measure-traps.md` §6**, with the practical rule: `rebrew test`/`verify`
+  already implement "equal after masking relocations" — do not re-derive it by hand from a
+  prelayout copy. A raw comparison against `build/server.dll` is fine (that is the
+  post-postlink output); against `.scratch/server.dll.prelayout` it is not.
+- **This is the second round this session** (with 852) where a raw byte reading produced a
+  confident false finding that the tool's own number refuted. Both are now written up in the
+  same section, which is the right home: it is an instrument trap, not a codegen fact.
+- **No source edit; nothing was actually wrong.** The audit's negative result is that the
+  metadata is fully consistent — which is worth knowing, since round 859 had just found 14
+  stale *doc* entries and it would have been plausible for the metadata to have drifted too.
+- **Gate:** pass — lint 188/188, compile errors 0, verify 281/264 held, residue 8634 and
+  raw-link `.data` 21,836 held.
+
 **Round-859: audited the docs for stale "blocked" entries — 14 corrected. They were describing finished work.**
 
 - **Mechanised the audit instead of spot-checking.** Parsed every `status = ` from

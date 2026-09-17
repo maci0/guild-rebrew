@@ -131,6 +131,21 @@ the 8,634 as one cascade.
   "found" three same-target polarity pairs; ground truth showed each
   side's VA holds different code. Never compare addresses across two
   differently-laid-out binaries.
+- **Raw-byte diffing against `.scratch/server.dll.prelayout` invents mismatches in every
+  relocated function (round 860).** That file is the *pre-postlink* link output, so its
+  absolute `mov`/`call` operands hold the linker's own values, not the reference's. Comparing
+  bytes directly made **241 of the 264 `RELOC`/`EXACT` entries look stale**, and tuning the
+  "is this a relocation?" heuristic only moved the count around (241 → 158 → 121 unexplained) —
+  the clearest sign the *instrument* was wrong rather than the data. Checked with the tool:
+  `rebrew verify` reports **0 entries with a nonzero delta**, and `rebrew test` on one of the
+  "suspects" returns `match_count 179/179, mismatches []` with `reloc_count 12`. The metadata
+  is consistent; the raw diff was not.
+  **Use the tool's own masked comparison.** `rebrew test`/`verify` already implement "equal
+  after masking relocations" — do not re-derive it by hand from a prelayout copy. If a raw
+  comparison against `build/server.dll` is wanted instead, that file is the *post*-postlink
+  output and its bytes are comparable; the prelayout copy is not.
+  This is the second round this session (with 852) where a raw byte reading produced a
+  confident false finding that the tool's own number refuted.
 
 ## 7. The size rule has two branches, and mixing them discards good work
 
