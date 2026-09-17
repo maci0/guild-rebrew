@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-870: measured the composition slack round 35 asked for. 28 objects are over budget, and that is why edits collapse.**
+
+- **Did the measurement round 35 said was missing** rather than trying a third spelling blind.
+  Read `scripts/pad_short_functions.py`'s contract and the pad report from `split_link.sh`:
+  **only SHORT objects can be padded** — "a longer one cannot be cut without losing code" — so the
+  relevant number is which files are already over their padded span.
+- **The answer: 28 objects, and the tree is 6,671 bytes over budget.**
+  ```
+  28 objects, 31,312 bytes against a 24,641-byte padded budget
+  spiel_dumpD.c.obj: 1040 > 1024 (+16 over the padded span; want 1015) -- not padded
+  ErrorModule2.c.obj: 528 > 496 (+32; want 494) · vfs.c.obj: 320 > 304 (+16; want 291)
+  infblock.c.obj: 3680 > 3392 (+288; want 3385) · ... 24 more
+  ```
+- **This is the mechanism behind round 869's collapse, and it retro-explains several rounds.**
+  `spiel_dumpD.c.obj` is **already 16 bytes over** its padded span with **25 bytes wanted**. Round
+  869's edit took it from 1015 to 1024 — 9 more bytes on a file with nothing left to give — and the
+  link reported "only 0 symbols landed at their reference VA". The round-868 form (1015 -> 1024 by
+  a different route) hit the same ceiling, which is why both spellings failed for what looked like
+  different reasons: **the file cannot absorb any size change at all**, so `gm_FindNextFilteredEntity`
+  is not editable until `spiel_dumpD.c` shrinks by at least 16 bytes elsewhere.
+- **Recorded as `measure-traps.md` §6d, with the check to run first:** before reshaping any
+  function, `grep '<file>.obj' .scratch/gate-link.log`. A `LONG` line means that file's only
+  adoptable edits are ones that shrink it by at least the stated overage.
+- **This reframes the remaining work.** Several of the 19 carriers live in `LONG` files, so their
+  size gaps are not independently fixable — the file must first come *under* budget. That is a
+  different and more constrained problem than "find the right spelling", and it is worth knowing
+  before spending further rounds on individual functions inside those files.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-869: tried round 34's "reach the tail without a new label". It breaks the composition instead.**
 
 - **The form round 34 asked for:** restructure the `else` branch's `do/while` so its exit edge

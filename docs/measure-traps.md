@@ -186,6 +186,34 @@ positively misleading: the same edit that fixes the size adds 114 residue bytes,
 reaches it. **Measure at the link or do not claim a direction** — this is the concrete case behind
 the AGENTS.md warning that the two object rulers disagree with each other and with the link.
 
+## 6d. 28 objects are over the composition budget, and that is what makes source edits collapse (round 870)
+
+`scripts/split_link.sh`'s pad step prints one line per object it cannot fit. On the current tree it
+prints **28 `LONG` lines**, and they are not a rounding detail:
+
+```
+28 objects, 31,312 bytes of object against a 24,641-byte padded budget -> 6,671 bytes over
+spiel_dumpD.c.obj: 1040 > 1024 (+16 over the padded span; want 1015) -- not padded
+ErrorModule2.c.obj: 528 > 496 (+32 over the padded span; want 494) -- not padded
+infblock.c.obj: 3680 > 3392 (+288 over the padded span; want 3385) -- not padded
+```
+
+**Only SHORT objects can be padded** — `pad_short_functions.py`'s own docstring says a longer one
+"cannot be cut without losing code". So for these 28 files the composition has *no slack*: any
+edit that grows the object, and on a file already over budget even an edit that keeps its size,
+moves the symbols after it.
+
+That is the mechanism behind three rounds of failures. Round 869's `gm_FindNextFilteredEntity`
+change took `spiel_dumpD.c.obj` from 1015 to 1024 bytes and the link reported "COMPOSITION
+COLLAPSED: only 0 symbols landed at their reference VA" — because that file was **already 16 bytes
+over**, so the composition had nothing left to absorb. The same applies to `LONG` file-mates in
+`ErrorModule2.c`, `vfs.c`, `vfs2.c`, `infblock.c` and 23 others.
+
+**Practical consequence, and the check to run first:** before reshaping any function, look up its
+file in the pad report (`grep '<file>.obj' .scratch/gate-link.log`). A `LONG` line means that file
+cannot absorb a size change at all and the only adoptable edits are ones that *shrink* it by at
+least the stated overage. A file with no line either is within budget or was padded.
+
 ## 7. The size rule has two branches, and mixing them discards good work
 
 `cl` pads each COMDAT to 16 bytes, so for an object with **no** relocated data after its code
