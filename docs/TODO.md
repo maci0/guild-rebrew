@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-859: audited the docs for stale "blocked" entries — 14 corrected. They were describing finished work.**
+
+- **Mechanised the audit instead of spot-checking.** Parsed every `status = ` from
+  `src/rebrew-functions.toml` (351 tracked functions), then swept the three codegen docs for
+  headings that cite a VA *and* claim `blocked`/`FENCED`/`still open` where the function is now
+  `RELOC` or `EXACT`. **Found 16; corrected 14 sections**, each now headed `— SOLVED` with a note
+  giving the current status and keeping the mechanism text, because the mechanism is still
+  instructive even though the function is closed. Two remain and both are benign: one line
+  already reads "is no longer blocked", the other is a quotation of a past state.
+- **Verified three by hand before the bulk edit** — `srv_ReceivePacketHeader` (0x1000a340),
+  `ProcessSendData` (0x1000a860) and `amt_SwapOfficeHolders` (0x1000b880) are all `RELOC` with
+  **delta 0**, i.e. byte-matched, while their headings said "blocked (cross-jump + branch
+  polarity)", "blocked (rep-movsd src register role)" and "blocked (epilogue merging + frame)".
+- **Why this matters more than it looks.** Four of the last six rounds went after mechanisms in
+  these entries. A stale "blocked" heading is a positive invitation to re-derive settled work,
+  and it is invisible to the `whathas.py` lookup I built in round 854 — that tool answers "has
+  this address been *written up*", which returns a hit for a stale entry just as readily as for
+  a live one. Both failure modes now have a check: `whathas.py` for "is it documented", this
+  audit for "is the documentation still true".
+- **Also chased §82's neighbour and corrected it.** The `cm_ExAllocThemaPredigt` entry claimed
+  the redundant `obj[0x22] = 0` store survives dead-store elimination "only when written via
+  DISTINCT pointer expressions". Swept it: the *same* expression text twice also survives
+  (2 stores), so distinctness is not the discriminator — what matters is whether the **base
+  pointer is reloaded** between the stores (3 loads -> 2 survive; a named pointer in a register
+  -> 1, eliminated). Corrected. And the real site contradicts even that: `esi` holds `obj`
+  in a register across the whole body and the store survives anyway, because the inlined
+  `memcpy` wrote adjacent bytes. `cm_ExAllocThemaPredigt` is itself `RELOC 172/172` and its
+  bytes at `0x1000f379` are identical to the reference.
+- **Gate:** pass — lint 188/188, compile errors 0, verify 281/264 held, residue 8634 and
+  raw-link `.data` 21,836 held. No source edit.
+
 **Round-858: scoped the init-order slot rule, and tested it on the one carrier with a wrong frame.**
 
 - **Hunted the rule's prerequisite: a carrier with wrong slots and `= 0` locals.** Compared each

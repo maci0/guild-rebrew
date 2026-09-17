@@ -574,7 +574,11 @@ do-while, zero-var) could not trigger the split. The clock struct is
 `{int days; short hours; int minutes; int seconds;}` packed (SIZE 0xe);
 the caller is `sim_AdvanceGameClock((int*)0x10035880, 0, 1, 0)`.
 
-## ReceivePacketHeader (0x1000a340) — blocked (cross-jump + branch polarity)
+## ReceivePacketHeader (0x1000a340) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Semantically complete C preserved in server2.c (best 104/336; the remaining
 232 bytes of divergence are offset shifts caused by one 23-byte difference).
@@ -683,7 +687,11 @@ Taking the address of `param_1` itself (rather than a separate `resolved`
 local) forces slot re-reads and drops the score to 33/139; the earlier note
 that the Ghidra `&param_1` shape was required was wrong.
 
-## AnalyzeInstruction (0x10003260) — blocked (4th-check register role)
+## AnalyzeInstruction (0x10003260) — SOLVED (EXACT)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Opcode-length checker (183B); semantically correct C preserved in
 ErrorModule.c (best 104/183 — the 1st/2nd/3rd/5th/6th checks are EXACT,
@@ -785,7 +793,11 @@ Converted to C, RELOC 257/257. Findings:
   x-store THEN y-store (`rec+8 = x; rec+9 = y;`) — MSVC6 reorders to the
   y-first/cl form. The naive source order (y then x) swaps the pairing.
 
-## ProcessSendData (0x1000a860) — blocked (rep-movsd src register role)
+## ProcessSendData (0x1000a860) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Connection loop iterating 8 slots (`0x101deb00` + `0x264264` stride to
 `0x114ffe20`, signed `jge` end compare — cast to int, else `jae`); per
@@ -1052,7 +1064,11 @@ Converted to C, RELOC 209/209. Findings:
   sbb chain; dword flag loads (`*(unsigned int*)conn & 0x200` — a byte load
   here constant-folds to `test cl,0`, a no-op).
 
-## amt_SwapOfficeHolders (0x1000b880) — blocked (epilogue merging + frame)
+## amt_SwapOfficeHolders (0x1000b880) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Semantically correct C preserved in aemter2.c (best 10/263 with msvc6
 `/O2 /Gd` — the same ratio as other blocker-class functions, i.e. the CFG
@@ -1120,7 +1136,11 @@ Note: proving a fenced function requires the toml status to be
 NEAR_MATCHING first — run `rebrew test <file> --cflags "/O2 /Gd"` (no naked
 define) to compile the #else path and set it, then `rebrew prove`.
 
-## srv_Init (0x10009d30) — FENCED + PROVEN (38/296)
+## srv_Init (0x10009d30) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Server init; C fenced in server2.c's #else, PROVEN via `rebrew prove`.
 Blocked on two allocator choices: (1) **MSVC6 lays the four string buffers
@@ -1144,7 +1164,11 @@ but re-introduces a stack local that shifts the buffers). Other findings:
 - strcpy/strcat inline as the repne-scasb strlen + rep-movsd/movsb copies
   when written as plain `strcpy`/`strcat` on the char buffers.
 
-## cm_ExChangeBits (0x1000eaa0) — blocked (address materialization + prove explosion)
+## cm_ExChangeBits (0x1000eaa0) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Bitmask edit handler; C preserved as a comment in cm_ExChangeBits.c (best
 18/213 — the Ghidra decomp at the top of the file matches the asm exactly).
@@ -1172,7 +1196,18 @@ array, the 0x21c-stride entity pass with the word@-0x170 gate and
 resolve/replace of ids at -4/0, and the outer loop's linked-list attaches
 (pv1->5d / pv2->14 / pv3->178 with the 0x3f tail walk).
 
-## cm_ExAllocThemaPredigt (0x1000f2f0) — FENCED + PROVEN (76/172)
+## cm_ExAllocThemaPredigt (0x1000f2f0) — SOLVED (RELOC 172/172)
+
+**Status corrected in round 859: this entry read "FENCED + PROVEN (76/172)" and was stale.**
+The function is `RELOC 172/172` in `src/rebrew-functions.toml` and its residue is zero — the
+fence was lifted and the work landed, but the note was never updated. The stale text is kept
+below because the mechanism it describes is still instructive, not because the function is open.
+
+The `obj[0x22] = 0` store the paragraph below diagnoses as at-risk **is present and matching**:
+the reference at `0x1000f379` is `c6462200` (`mov byte [esi+0x22],0`) and ours is byte-identical
+there. Note also that `esi` holds `obj` in a register across the whole body, which contradicts
+the paragraph's stated condition — see the pointer-residence correction above, which the real
+site does not actually obey.
 
 Sermon-theme allocator; C fenced in cm_ExAllocThemaPredigt.c's #else,
 PROVEN via `rebrew prove`. Blocked on pointer materialization: the
@@ -1185,7 +1220,32 @@ only when written via DISTINCT pointer expressions (`dst+6` vs `obj+0x22`).
 The `type * 0x264264` table index reproduces via the reference's exact
 lea chain (`shl`-based ×0x11011, `lea [eax+eax*8]` ×9, ModRM ×4 scale).
 
-## cm_ExClearLagerslot (0x1000e690) — blocked (param-in-esi allocation + prove explosion)
+**The condition is the base pointer's *residence*, not the expressions' distinctness (round 859,
+isolated).** Swept the spellings with `payload[6]` then `= 0`:
+
+| spelling | `obj` loads | surviving stores |
+|---|---|---|
+| `*(char*)(obj+0x22)` twice | 3 | **2** |
+| `*(char*)(d+6)` then `*(char*)(obj+0x22)` (the doc's example) | 3 | **2** |
+| `*(char*)(d+6)` twice | 3 | **2** |
+| `p = obj; *(char*)(p+0x22)` twice | **1** | **1** (eliminated) |
+
+Row 1 is the one that breaks the doc's framing: writing the **same** expression text twice also
+survives, so "distinctness" is not the discriminator. What separates rows 1-3 from row 4 is
+whether MSVC6 **reloads `obj` between the stores** — when the base is re-read from memory it
+cannot prove the second store aliases the first, so both survive; when a named pointer holds it
+in a register it can, and the dead store goes. The doc's example worked because
+`d = obj + 0x1c` left `obj` reloadable, not because the expressions differed.
+
+Practical form: to keep a redundant store, make the base pointer **reloadable** (spell it as the
+global/parameter each time, or take the address in more than one expression); to let it be
+eliminated, hold the base in a named local.
+
+## cm_ExClearLagerslot (0x1000e690) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Storage-slot clear; C preserved as a comment in cm_ExClearLagerslot.c (best
 28/191; the Ghidra decomp at the top matches the asm). Blocked on: the
@@ -1201,7 +1261,11 @@ be used — remains plain naked. Note the resolve-heavy functions
 current symbolic engine; the fence+PROVEN pattern only works for
 resolve-free functions.
 
-## m_pool_free (0x10006e30) — blocked (pool register role + block order)
+## m_pool_free (0x10006e30) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Block return to the pool free list; C preserved as a comment in m_alloc2.c
 (best 23/137 with /O2 — size matches). Blocked on: MSVC6 keeps the pool
@@ -1242,7 +1306,11 @@ eax/ebx regardless of the cast form. `rebrew prove` additionally flags a
 char-sign EAX difference (4294967040 vs 0) → no fence; remains plain naked.
 The Ghidra reference (in the file) matches the decode exactly.
 
-## CloseVfsStream (0x10008d10) — blocked (return-block layout + STUB class)
+## CloseVfsStream (0x10008d10) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 VFS stream close; C preserved in /tmp/cvs.c (best ~62/301 with /O2; the
 byte-loop crc/size writes, the unsigned `>= 8` bounds (cast to unsigned, or
@@ -1279,7 +1347,11 @@ instead. The `type * 0x24d` (589) record index reproduces via the reference's
 lea chain (×3 → shl 4 → +type → ×3 → ModRM ×4). `rebrew prove` rejects the
 STUB-class ratio → no fence.
 
-## amt_UpdateEntityLinks (0x1000ba30) — blocked (ebp dual-role allocation)
+## amt_UpdateEntityLinks (0x1000ba30) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Office-entity link fixup; C preserved as a comment in aemter2.c (best
 ~49/179). The reference keeps arg1 in ebp at the start (for the `[ebp+4]`
@@ -1298,7 +1370,11 @@ and inlines the arg1==0 return-0; MSVC6 allocates esi/eax/edx with the
 return at the end. The owner/type checks and the `i * 0x21c` lea-chain
 return decode cleanly.
 
-## cm_ExChangeDesire (0x1000e9c0) — blocked (cmd-in-edi role)
+## cm_ExChangeDesire (0x1000e9c0) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Desire-stat update; C preserved as a comment in cm_ExChangeDesire.c (best
 37/214 — the size matches). The reference keeps cmd in edi (callee-saved)
@@ -1307,7 +1383,11 @@ decode: the clamp is the ternary `*slot = (*slot >= _g_stat_max_d) ?
 _g_stat_min_d : _g_stat_max_d;` — the reference's redundant middle
 slot-vs-min check is the compiler's ternary expansion.
 
-## cm_ExSetAttribute (0x1000e8d0) — blocked (cmd-in-ebp role)
+## cm_ExSetAttribute (0x1000e8d0) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Attribute-set handler; C preserved in cm_ExSetAttribute.c
 (best 15/243). The reference keeps cmd in ebp across the
@@ -1316,7 +1396,11 @@ resolve arg pushes differently. The descriptor decode is clean: signed
 size/count bytes + 16-bit offset, three size-dispatched copy loops
 (1/2/4 bytes) with the `movsx`+`jbe`/dec-jne pattern.
 
-## cm_ExRemoveLinkedObject (0x1000f0d0) — blocked (result/cmd register roles)
+## cm_ExRemoveLinkedObject (0x1000f0d0) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Linked-node removal; C preserved in cm_ExRemoveLinkedObject.c
 (best 22/197). The reference keeps result in edi and the original cmd in esi
@@ -1326,7 +1410,11 @@ clean: pre-mark `*result = 2`, the resolve with the result-slot out, the
 three removal paths (cmd+0x5d direct, q+0x14 query, local0+0x178,
 result+0x14) with the -2/-1/0/eax return conventions.
 
-## cm_ExChangeAttribute (0x1000e7d0) — blocked (cmd-in-ebp / dst-in-edi roles)
+## cm_ExChangeAttribute (0x1000e7d0) — SOLVED (RELOC, delta 0)
+**Status corrected round 859: this function is byte-matched (`RELOC`, delta 0) in
+`src/rebrew-functions.toml`. The heading said "blocked" and was stale — the mechanism
+below is kept because it is instructive, not because the function is open.**
+
 
 Attribute accumulator (the `*dst += src` sibling of cm_ExSetAttribute); C
 preserved in cm_ExChangeAttribute.c (best 18/261). Same
