@@ -189,14 +189,25 @@ the AGENTS.md warning that the two object rulers disagree with each other and wi
 ## 6d. 28 objects are over the composition budget, and that is what makes source edits collapse (round 870)
 
 `scripts/split_link.sh`'s pad step prints one line per object it cannot fit. On the current tree it
-prints **28 `LONG` lines**, and they are not a rounding detail:
+prints **28 `LONG` lines**:
 
 ```
-28 objects, 31,312 bytes of object against a 24,641-byte padded budget -> 6,671 bytes over
 spiel_dumpD.c.obj: 1040 > 1024 (+16 over the padded span; want 1015) -- not padded
 ErrorModule2.c.obj: 528 > 496 (+32 over the padded span; want 494) -- not padded
-infblock.c.obj: 3680 > 3392 (+288 over the padded span; want 3385) -- not padded
+trees.c.obj: 6464 > 1088 (+5376 over the padded span; want 1083) -- not padded
 ```
+
+**But the total is 816 bytes, not 6,671 — three of the 28 lines are a reporting artifact
+(round 871).** `want` is summed from the metadata's per-function sizes, and **zlib's sources carry
+no `// FUNCTION:` markers at all** (0 markers in all 18 files under `references/zlib-1.1.3/`), so
+for `trees.c`, `infblock.c` and `infcodes.c` the padding target collapses to whatever little the
+metadata happens to know. `trees.c` reports `+5376 over` while its object is **exactly the span
+between its own VAs** (`0x10008800 - 0x10006ec0 = 6464`), i.e. it is not over at all. The script's
+own docstring warns about this at the `want` computation ("`want` is only as complete as the
+metadata ... and then `want` understates the reference span").
+
+Split correctly: **25 game files, 816 bytes of genuine overage**, against **3 zlib files, 5,680
+bytes of phantom overage**. Read the game lines; ignore the zlib ones.
 
 **Only SHORT objects can be padded** — `pad_short_functions.py`'s own docstring says a longer one
 "cannot be cut without losing code". So for these 28 files the composition has *no slack*: any

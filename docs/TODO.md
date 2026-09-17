@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-871: corrected round 36's overage figure — 816 bytes real, not 6,671. Three of the 28 LONG lines are a reporting artifact.**
+
+- **Checked where the 6,671 bytes actually sat, and found the headline was inflated.**
+  Classifying the 28 `LONG` lines by provenance: **25 are game files** and **3 are zlib**
+  (`trees.c`, `infblock.c`, `infcodes.c`). Split correctly:
+  ```
+  game files LONG: 25, total overage   816
+  zlib files LONG:  3, total "overage" 5680   <- artifact
+  ```
+- **The artifact's mechanism, confirmed against the source.** `trees.c.obj` reports
+  `6464 > 1088 (+5376 over the padded span; want 1083)`, but its object is **exactly the span
+  between its own configured VAs**: `0x10008800 - 0x10006ec0 = 6464`. It is not over. The cause is
+  that `want` is summed from the metadata's per-function sizes, and **all 18 files under
+  `references/zlib-1.1.3/` carry zero `// FUNCTION:` markers**, so for them the padding target
+  collapses to whatever little the metadata knows. `pad_short_functions.py`'s own docstring warns
+  about exactly this at the `want` computation.
+- **Corrected `measure-traps.md` §6d in place** rather than leaving the larger, wrong number
+  standing — it is the number a future reader would act on, and 816 is actionable where 6,671
+  reads like a structural crisis. Kept the artifact documented so the next person reading a
+  `LONG` line knows to check provenance first.
+- **What survives unchanged:** the mechanism round 36 identified is real and still explains round
+  869's collapse. `spiel_dumpD.c.obj` is **16 bytes over** a genuine budget, with 25 wanted, so
+  `gm_FindNextFilteredEntity` cannot absorb any size increase — that file is one of the 25, and
+  its overage is part of the 816.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-870: measured the composition slack round 35 asked for. 28 objects are over budget, and that is why edits collapse.**
 
 - **Did the measurement round 35 said was missing** rather than trying a third spelling blind.
