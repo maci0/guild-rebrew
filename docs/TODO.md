@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-853: worked round 17's `ServerMainThread` anchor. It is shapes §127, already recorded; two probes re-derived it, reverted.**
+
+- **Followed the localization to the site.** Round 17 put the whole `ServerMainThread` residue in
+  `+0x3c7..+0x597` with the first differing byte a branch displacement at `+0x3c7`
+  (`0f 84 bc` vs `0f 84 bf`, targets 3 bytes apart). Followed the target to `0x10009838` and read
+  the exact shape:
+  ```
+  reference  0x10009838  mov ecx,[0x101deae8]   lea edx,[esp+0x10]   lea edi,[esp+0x20]
+                         mov byte [esp+0x10],9  lea esi,[eax+ecx]    mov ecx,0x20
+  ours       +0x049b     mov esi,[0x101deae8]   ...                  add esi,eax
+  ```
+  The reference loads the base into `ecx` and forms the sum into a **third** register with `lea`;
+  we load into `esi` and accumulate in place.
+- **This is `msvc6-c-shapes.md` §127, in full.** The doc already records that exact pair, the
+  conclusion that it is the §122 `lea`-versus-`add` fold running in the opposite direction, and
+  the probe that matters: splitting the C into `payload_base = ...; payload_src = payload_base +
+  sent_bytes;` measured **+0**, because msvc6 folds the two statements back together. So the
+  reference's `lea` is *allocator state*, not source shape.
+- **Two probes, both inert, both reverted.** Swapping `payload_dst`/`payload_src` assignment
+  order: byte-identical (obj 2434, `match` 2075). Rewriting the sum as a subscript,
+  `&((char*) *(void**) 0x101deae8)[sent_bytes]`: also byte-identical at 2075. Both are the same
+  canonicalisation §127 already documents, and the file header separately records the operand
+  orderings as inert ("identical bytes each time").
+- **Process note, and the reason this round cost what it did:** I should have grepped the shapes
+  doc for the *instruction pair* before probing. The objective's own rule is "before reshaping a
+  compiling-but-mismatched function, read shapes first" — I read the allocator doc and the file
+  header, but searched the shapes doc only after the probes. A one-line grep for
+  `lea esi, \[eax + ecx\]` would have found §127 immediately. The localization from round 17 is
+  still the useful artefact; the site itself is closed.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-852: mapped the residue's *shape* per function. Two classes, and ServerMainThread is one 24-run band with a clean tail.**
 
 - **Measured match density and clean-stretch length for all 9 carriers** (built vs reference
