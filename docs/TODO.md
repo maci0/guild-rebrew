@@ -49,6 +49,31 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-880: audited the CMake flag plumbing end to end. Sound; and the 48 "missing" tokens are a benign repeat.**
+
+- **Round 45 found that `COMPILE_OPTIONS` silently drops a second argument, which means a flag
+  experiment can be "run" without the flag ever reaching the compiler.** That is a process hazard
+  over the whole tree, so I audited it rather than leave it as a note.
+- **Every per-file declaration in `CMakeLists.txt` reaches its real command line.** The three
+  `COMPILE_OPTIONS` pins (`spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`, `ls_LoadBuildingEntityState.c`)
+  all show `REBREW_TOOLCHAIN:msvc-6.0-sp5-pp` in `build.make`. The zlib `COMPILE_FLAGS "/O2"` uses
+  the *replacing* property, as its comment says: `adler32.c.obj` builds with `/O2 /Gd`, not
+  `/O2 /Gd /O2`.
+- **Then checked the other half — that metadata `cflags` reach the build.** Compared all 57 files
+  carrying a `cflags` field against their generated command lines: **48 tokens "missing", and every
+  one is `/DREBREW_ALLOW_NAKED`.** That is a **define**, and `C_DEFINES` already supplies
+  `-DREBREW_ALLOW_NAKED=1` globally for the whole target, so the metadata repeat is redundant and
+  harmless — not a drop. Filtering defines and include paths out: **0 real flags missing.**
+- **Why this mattered enough to spend a round:** the failure mode is invisible. A dropped flag
+  produces a successful configure, a successful build, a normal-looking measurement, and a wrong
+  conclusion — which is how round 45 nearly reported "`/Oa` is inert" from a run where `/Oa` was
+  never passed. Now the plumbing is verified from both ends and the check is written down.
+- **Negative result worth keeping:** the metadata/CMake flag split is sound *except* for the one
+  case round 43 hit — persisting a flag into the metadata of a CMake-pinned file, which crashes
+  with C1001. That is a defect in the write path, not in the read path, and it is filed upstream.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-879: tested round 44's one open question — `/Oa` on `ls_LoadBuildingEntityState` via the CMake route. +121 worse; closed.**
 
 - **The lead was real and untested.** TODO round-163's table records `ls_LoadBuildingEntityState` as

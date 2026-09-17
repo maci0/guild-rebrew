@@ -265,6 +265,21 @@ this file.**
 `cflags`**, and do not add a field that merely restates a CMake pin. Note also that
 `rebrew-functions.toml` is mode 444 — reverting needs `chmod u+w` first.
 
+## 6f. A dropped per-file flag produces a normal-looking measurement (rounds 879-880)
+
+`set_source_files_properties(... COMPILE_OPTIONS "/A" "/B")` **silently drops `/B`** — CMake wants a
+`;`-separated list. Configure succeeds, the build succeeds, `build.make` simply lacks the flag, and
+any measurement taken is of a *different compile than the one intended*, with no error anywhere.
+Round 45 nearly concluded "`/Oa` is inert" from exactly such a run.
+
+**Check the generated command line, not the CMake source, before believing a flag experiment:**
+`grep -A40 '<file>.c.obj:' build/CMakeFiles/server_dll.dir/build.make`.
+
+The plumbing was audited afterwards and is otherwise sound: all three `COMPILE_OPTIONS` pins and
+the zlib `COMPILE_FLAGS` reach their command lines, and of 57 files carrying metadata `cflags`, **0
+real flags are missing** — the 48 apparent misses are all `/DREBREW_ALLOW_NAKED`, which
+`C_DEFINES` supplies globally as `-DREBREW_ALLOW_NAKED=1`.
+
 ## 7. The size rule has two branches, and mixing them discards good work
 
 `cl` pads each COMDAT to 16 bytes, so for an object with **no** relocated data after its code
