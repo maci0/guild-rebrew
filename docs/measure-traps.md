@@ -100,6 +100,18 @@ the 8,634 as one cascade.
   invents instructions by decoding our own table bytes. It now derives the window itself.
 - `gaptrace`'s instruction counts include cl's trailing alignment fill and read high; it now
   prints the real code end and labels the counts.
+- **`rebrew test`/`verify` ignore the CMake per-file toolchain pin, so a pinned file's
+  per-function numbers describe a compile that does not ship (round 842).**
+  `CMakeLists.txt` pins three files to `/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp` and the link
+  honours it (visible in `build/CMakeFiles/server_dll.dir/build.make`), but `test`/`verify`
+  compile with the project default sp6. Measured on `gm_FindNextFilteredEntity`
+  (`spiel_dumpD.c`, pinned): verify reports `obj 342`, SIZE_MISMATCH, `delta 186`; the
+  shipped DLL measures **215/346** at that VA, and compiling with the pin gives `obj 346` —
+  the reference's exact size — at `match` 171/346. The whole-tree residue is safe because
+  it is measured on the shipped bytes; **per-function claims about the three pinned files
+  are not.** Check `CMakeLists.txt` before quoting a `verify` number for
+  `spiel_dumpD.c`, `ahm_ExAllocAlchemist.c` or `ls_LoadBuildingEntityState.c`.
+  Filed upstream in the rebrew ideas file.
 - `instr_diff` decoded without `skipdata` and halted on a stray byte, understating alignment
   for the rest of a function (one function went 618 -> 646 once fixed).
 - `gaptrace` was once accused of comparing instruction offsets rather than bytes, and rebuilt;

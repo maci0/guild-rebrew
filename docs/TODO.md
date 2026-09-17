@@ -49,6 +49,47 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-842: re-swept the sp5-pp axis over all 16 unpinned rows. No fourth pin; and `rebrew verify` measures a different compile than the link ships.**
+
+- **Did the sweep, did not trust round 503's "axis closed".** Round 503 itself was a
+  correction of a wrong "exhausted" claim, so the population was enumerated first:
+  **18 carriers, 3 already pinned, 16 unpinned rows swept** (15 single-function files plus
+  `CrashDumpUnhandledExceptionFilter` by symbol). Instrument validated first — the two
+  existing pins still improve under sp5-pp (`ahm_ExAllocAlchemist` 828 -> 834,
+  `ls_LoadBuildingEntityState` 818 -> 822), so the sweep can see a win when there is one.
+- **Result: 16 of 16 unpinned rows are worse under sp5-pp. No fourth pin.** Object sizes
+  and matches (sp6 -> sp5-pp):
+  ```
+  gm_AllocSpieler        3689/1004 -> 3665/447      cm_ExProdObjekt      993/976 -> 991/721
+  CrashDump              2115/643  -> 2119/567      ServerMainThread    2434/2075 -> 2435/1224
+  cm_ExSellObjekt        2056/1148 -> 2060/833      vfs_OpenStream       701/449 -> 693/118
+  cm_ExCopyEntityData     905/506  ->  922/429      m_AllocTracked       658/566 -> 634/256
+  gv_ExAllocGraveyard   1040/615  -> 1000/440       vfs_ReadCompressed   492/468 -> 492/461
+  gm_AllocGebaeude      1078/753  -> 1074/396       srv_LoadBuf          750/701 -> 726/126
+  cm_ProcessCommandQueue 639/624  ->  606/403       gm_ObjectsAvailble   714/686 -> 719/340
+  ```
+  The axis is now closed with the population stated, per the round 503/§145 standard.
+- **New finding — the third pin is doing more than its entry records.**
+  `spiel_dumpD.c`'s `gm_FindNextFilteredEntity`: sp6 gives obj **342**, SIZE_MISMATCH,
+  `match` 160/346; sp5-pp gives obj **346 — the reference's exact size** — and
+  `match` 171/346. So the pin converts a size mismatch into a size-exact row. Not
+  recorded anywhere; the pin's entry only claims the file-level win.
+- **New finding — `rebrew verify` and the link measure different compiles.**
+  `rebrew verify` reports `gm_FindNextFilteredEntity` with `delta 186` and `obj 342`,
+  which is the **sp6** compile. The shipped `build/server.dll` — built through CMake,
+  which applies `/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp` (confirmed in
+  `build/CMakeFiles/server_dll.dir/build.make:2274`) — measures **215/346** at that VA.
+  `rebrew test`/`verify` default to sp6 and do not read the per-file pin, so **every
+  figure for the three pinned files in `rebrew-functions.toml` and in `verify` output is
+  an sp6 number, not what ships.** The residue total is unaffected (it is measured on the
+  shipped bytes), but any per-function claim about a pinned file is unreliable. Worth a
+  tool fix: `test`/`verify` should honour `CMakeLists.txt`'s per-file toolchain pins, or
+  the metadata should record which toolchain produced `obj_size`.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+- **Next:** the sp5-pp axis is closed. The remaining measured-reachable work is the two
+  documented walls' unlocks, both outside the C-only constraint.
+
 **Round-841: probed `gm_AllocSpieler`'s FPU-spill loop. Both landings worse; reverted.**
 
 - **Target:** the single longest residue run (189 bytes at `0x10018be0`), inside the
