@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-866: applied round 31's "read the header first" rule as a sweep. Two artifacts characterised, one wall confirmed closed.**
+
+- **Swept all 19 carriers' headers for a recorded verdict** before touching anything, per round
+  31's lesson. Result: the headers split into two classes — those with a written "tried and
+  failed" summary (`gm_AllocSpieler` 185 lines, `gv_ExAllocGraveyardWorker` 468,
+  `spiel622.c` 124+, `cm_ProcessCommandQueue` 545, `gm_AllocGebaeude` 154) and those whose
+  leading block is just declarations (0 verdict lines). The latter are the less-probed territory.
+- **Worked `gm_CalculateProductionValue`** (0x10019720), one of the two carriers in `spiel622.c`
+  whose header carries no verdict. Its residue is **5 bytes at 0x10019804**, and the divergence
+  is exactly one transposition:
+  ```
+  REF  fmul qword[0x100257d0] ; fxch st(1) ; cmp byte [esi],0x17 ; fmulp st(1)
+  OURS fmul qword[0x100257d0] ; cmp byte [esi],0x17 ; fxch st(1) ; fmulp st(1)
+  ```
+  Same four instructions, `fxch` sited one slot either side of an unrelated integer compare.
+- **The header already closed it, with a count.** `spiel622.c:329` records a *residual re-audit*
+  of this exact transposition: **"22 new probes across five categories, all 391 or worse; the
+  order is a pure msvc6 scheduler choice with no C89 spelling."** It even documents why
+  `#pragma` cannot help (C2156 — no per-statement pragma; whole-function scope regresses the
+  epilogue to 383). Confirmed closed; no probe run.
+- **Characterised two counting artifacts that have been producing false leads.**
+  - **`function_structure.json` sizes are 16-byte-padded.** 163 of 351 tracked entries disagree
+    with the toml, **always** with the discovered size larger, and 160 of those are an exact
+    multiple of 16. This is what generated round 27's "196-function gap" and round 861's "54
+    unattributed bytes". Recorded as `measure-traps.md` §6b, with the ground truth stated: a
+    function's real extent is `next tracked VA - this VA`
+    (`0x10019720 + 400 == 0x100198b0`), not either inventory's number.
+  - **`rebrew test --symbol` can report a size the metadata never had** — it returned `ref 81`
+    for this function where both inventories and `rebrew verify` say 396/400. Same section.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-865: classified the 19 carriers' divergence mechanically. My round-30 "register-home" claim was too narrow.**
 
 - **Tested round 30's conclusion instead of accepting it.** That round inferred from two carriers

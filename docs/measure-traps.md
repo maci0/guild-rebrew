@@ -151,6 +151,24 @@ the 8,634 as one cascade.
   This is the second round this session (with 852) where a raw byte reading produced a
   confident false finding that the tool's own number refuted.
 
+## 6b. `function_structure.json` sizes are 16-byte-padded; the toml's are real (round 866)
+
+Comparing a function's recorded size across the two inventories looks like it finds defects and
+does not. Across all 351 tracked entries, **163 disagree, always with the discovered size larger,
+and 160 of those discovered sizes are an exact multiple of 16** while 157 of the toml sizes are
+not. The discoverer rounds each extent up to a 16-byte boundary; `rebrew-functions.toml` records
+the real function length.
+
+Consequence: any by-size arithmetic over the discovered inventory silently over-runs into the
+next function, which is what produced round 861's "54 unattributed residue bytes" and round 27's
+"196-function gap" reading. Use the toml size for a function's real extent, and the discovered
+inventory only for *finding* functions the toml does not list.
+
+This is why `rebrew test --symbol <name>` can report a size the metadata never had:
+`gm_CalculateProductionValue` came back as `ref 81` there while both inventories and
+`rebrew verify` say 396/400. When a size looks wrong, check it against **the next tracked VA**
+(`0x10019720 + 400 == 0x100198b0`) — that is the ground truth, not either inventory.
+
 ## 7. The size rule has two branches, and mixing them discards good work
 
 `cl` pads each COMDAT to 16 bytes, so for an object with **no** relocated data after its code
