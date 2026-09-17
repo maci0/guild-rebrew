@@ -144,6 +144,10 @@ the 8,634 as one cascade.
   after masking relocations" — do not re-derive it by hand from a prelayout copy. If a raw
   comparison against `build/server.dll` is wanted instead, that file is the *post*-postlink
   output and its bytes are comparable; the prelayout copy is not.
+  **The whole-`.text` total is also wrong from the prelayout copy: it reads 50,296 against the
+  shipped file's 8,634** (round 863), because every unresolved relocation counts. So the
+  prelayout copy is not an oracle for a per-function residue *or* for the tree total — only
+  `build/server.dll` (and `rebrew verify`) are.
   This is the second round this session (with 852) where a raw byte reading produced a
   confident false finding that the tool's own number refuted.
 

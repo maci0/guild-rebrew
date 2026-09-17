@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-863: explained round 27's 196-function gap. It is library code plus switch-arm artifacts.**
+
+- **Followed round 27's own finding** — 196 discovered functions absent from the toml — and asked
+  the only question that matters: is any of it reverse-able game code?
+- **The residue inside untracked functions is 23,461 bytes** by prelayout measurement, far more
+  than the 8,634 attributed to the 19 carriers, so this looked like the largest unexplored pool
+  in the tree. It is not.
+  - **Ran `rebrew lib-match` on the nine largest**, per the objective's mandatory check:
+    **8 of 9 are LIBCMT library code** ("Do not reverse it; the linker supplies these bytes").
+    They cluster in `0x1001a000`..`0x10023000`, the CRT block.
+  - **The ninth (`0x1001c19b`) is CRT by shape, not game code**: `sub esp,0x248`, `mov edi,[ebp+0xc]`,
+    a varargs frame — `printf`-family. `lib-match` misses it because that variant is not in the
+    stock index; the disassembly identifies it.
+  - **The rest of the low-VA group is a counting artifact.** The largest entries are
+    `case.0x1000ad61.*` — 17 "functions" of 32 bytes each. Checked their containers: they lie
+    **inside the tracked function at `0x1000ad40`** (size 768, ends `0x1000b040`). The discoverer
+    splits switch arms out as separate entries, so they are double-counted, not missing. This is
+    the same class round 195 recorded for `case.*` orphans.
+- **Corrected the prelayout trap again, and this time for the tree total.** Measuring the whole
+  `.text` residue against `.scratch/server.dll.prelayout` gives **50,296**; the shipped
+  `build/server.dll` gives **8,634**. The prelayout copy is not an oracle for a per-function
+  figure (round 862) *or* for the tree total (this round) — every unresolved relocation counts.
+  Extended the measure-traps entry accordingly.
+- **Net result:** the 196-function gap contains no reverse-able game code. The work list stands at
+  the 19 carriers, all previously audited.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-862: worked round 27's best lead (`srv_LoadBuf`). Probe moved the code and lost; re-hit the prelayout trap.**
 
 - **Corrected round 27's "untracked" claim about `0x1000a570`.** It is **not** untracked: it is
