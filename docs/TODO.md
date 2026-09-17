@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-846: swept the callee-saved rotation in isolation. It is an invariant of value count; no source variable reaches it.**
+
+- **Attacked the dominant obstacle (§1 / Findings 62-63: the colourer assigns homes the
+  source cannot name) with the round-844 testbed** instead of another whole-function probe.
+  Built a three-accumulator loop around one call — the shape Findings 62/63 describe — and
+  swept every variable that could plausibly steer the homes. **Every one is inert, with
+  identical output:**
+  ```
+  declaration order, 6 permutations of row/base/inner   -> xor ebp / xor ebx / xor edi
+  first-use order in the loop, 3 permutations           -> identical
+  tail use multipliers (1,2,3 / 3,2,1 / 2,3,1)          -> identical
+  a call before the initialisers instead of in-loop     -> identical
+  ```
+  So the assignment is not declaration order, first use, use weight, or initialiser
+  position. It is a **deterministic function of value count and call pressure** — a stronger
+  statement than "unsteerable", and the one to quote.
+- **Found the variable that does move it: cardinality.** With four accumulators the zeroing
+  becomes `xor edi / xor ebp / xor ebx` — different order, and `esi` takes a role. That
+  makes Findings 62/63 mechanical rather than mysterious: the rotation seen *between two
+  functions* is the same rule at a different live-set size. Recorded as
+  `msvc6-allocator.md` Finding 64, with the probe recipe, so it is not re-swept.
+- **Did not produce an edit, and that is the finding.** If the reference homes a triple
+  `(ebx,edi,esi)` where we home `(esi,ebx,edi)` at the *same* cardinality, the divergence is
+  upstream of the homes — cardinality, call pressure or the kernel — and the sweep says no
+  source-level naming reaches it.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-845: applied the round-844 merge rule to `gv_ExAllocGraveyardWorker`. It does not transfer; reverted.**
 
 - **Did the edit the rule implies, rather than only describing it.** The only

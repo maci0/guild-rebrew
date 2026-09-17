@@ -3018,3 +3018,38 @@ identically (609/855/442, obj 2048) without touching the [esp+0x18]/[esp+0x14]/
 The permutation is driven by declaration/type mix or call-sequence pressure
 outside the live set — changing which values are live in either direction
 does not move it.
+
+## Finding 64 — the callee-saved home order is a fixed invariant of *value count*, not of anything in the source (round 846, isolated)
+
+Finding 63 says declaration reorder is inert on a real body. Rebuilt the shape in isolation
+(`.scratch/epi/`, the round-844 testbed: a three-accumulator loop around one call) and swept
+every variable that could plausibly steer it. **All of them are inert, and the homes are
+identical every time.**
+
+| varied | result |
+|---|---|
+| declaration order, 6 permutations of `row`/`base`/`inner` | `xor ebp,ebp` / `xor ebx,ebx` / `xor edi,edi` — identical |
+| first-use order in the loop, 3 permutations | identical |
+| use multipliers in the tail (`1,2,3` / `3,2,1` / `2,3,1`) | identical |
+| a call placed before the initialisers instead of only inside the loop | identical |
+
+So the assignment is not steered by declaration order, first use, use weight, or
+initialiser position — it is a **deterministic function of the value count and the call
+pressure**, which is a stronger statement than "unsteerable" and is the one to quote: for
+three call-crossing accumulators in this shape, MSVC6 SP6 *always* homes them `ebp, ebx,
+edi` in that order.
+
+**Cardinality is the variable that does move it.** With four accumulators the zeroing
+becomes `xor edi,edi` / `xor ebp,ebp` / `xor ebx,ebx` — a different order, and `esi` takes a
+role. Consistent with Findings 62/63: the rotation seen *between two functions* is the same
+rule evaluated at a different live-set size, not noise and not a colourer whim.
+
+**Consequence for the walled rows, and why this does not unlock them.** If the reference
+homes a triple `(ebx, edi, esi)` where we home `(esi, ebx, edi)` at the *same* cardinality,
+the difference is upstream of the homes — cardinality, call pressure, or the kernel — and
+the sweep above says no source-level naming reaches it. This is the mechanical form of
+Finding 62's "stop: no C spelling reaches it". Recorded so the invariant is not re-swept.
+
+Probe recipe: `.scratch/epi/b2.sh` (one `cl` call through the msvc6 image) plus
+`objdump -d | grep 'xor +%e'`. Three accumulators around a `sink(i)` call reproduce the
+whole family in under a minute.
