@@ -49,6 +49,41 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-888: audited every remaining carrier against the docs; independently re-verified the floor. Nothing probed, because everything still open is already closed.**
+
+- **Tried:** pick the next-highest-ROI target by reading each remaining carrier's documented state
+  *before* touching code, per the goal's "re-probe only with new evidence" rule.
+- **Every unexamined carrier is a recorded wall with an explicit do-not-reopen.** Read in order:
+  - `gm_AllocSpieler` (2,824) — §109 scheduler sink, §216 `lea` not source-reachable, §110 semantic
+    bug 10 bytes short. Round 887 closed the last open hypothesis (the two banked fixes are
+    additive). Walls §7 item 4: "Both probed and closed… do not re-open it as one."
+  - `CrashDumpUnhandledExceptionFilter` (1,583) — six independent measurements on the frame, each
+    costing ~50 matched bytes. Walls §7 item 3: register homes are a *consequence* of the frame,
+    not a lever on it; "Do not reopen as a register problem." The file's own header ends: "This
+    function is a measured wall, not a parked opportunity."
+  - `srv_LoadBuf` (49) — round 886's three spellings, all inert or crater; §140 tabulates them.
+- **Independently re-verified the floor claim by direct measurement** rather than trusting the
+  docs, since a stale "we are done" claim would be the most expensive possible error here:
+
+  | section | reference | built | differing bytes |
+  |---|---|---|---|
+  | `.text` | vsize `0x22846` | vsize `0x22846` | **8,634** |
+  | `.rdata` | `0x2e81` | `0x2e81` | **0** |
+  | `.data` | `0x174059c` | `0x174059c` | **0** |
+  | `.reloc` | `0x10374` | `0x10374` | **0** |
+
+  Every byte of difference in the deliverable is inside `.text`, and `.text` VirtualSize already
+  equals the reference's exactly. This is walls §8's floor restated by measurement across the whole
+  image in this round, not by citation.
+- **Nothing was probed and nothing changed.** `git status` clean, residue 8,634 unmoved.
+- **What this round is, stated honestly:** a negative result and a confirmation, not progress
+  toward zero. Rounds 886, 887 and 888 each ended with the residue at exactly 8,634. The blockers
+  are not effort-limited — walls §8 records that the only two mechanisms that would move the floor
+  are a scheduling barrier (`__asm`, measured at **+147 matched** and forbidden by the C-only hard
+  constraint) and backend cross-jump control (six probe passes, ~20 spellings, all at 2 epilogues
+  against the reference's 3). Reaching zero needs a lever this constraint set excludes.
+- **Gate:** pass, all four baselines held.
+
 **Round-887: closed the open hypothesis on `gm_AllocSpieler`; the two banked fixes are additive, not complementary.**
 
 - **Tried:** `gm_AllocSpieler` (2,685 residue bytes — 31% of the tree, the single highest-value row)
