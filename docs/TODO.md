@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-879: tested round 44's one open question — `/Oa` on `ls_LoadBuildingEntityState` via the CMake route. +121 worse; closed.**
+
+- **The lead was real and untested.** TODO round-163's table records `ls_LoadBuildingEntityState` as
+  *"the only function `/Oa` helps; the only one whose column should be read as a lead"*
+  (713/1463 under `/Oa` against 125/1464 under `/O2 /Gd`). Round 43 tried to apply it through the
+  **metadata** route and got a C1001 crash; round 44 established the file is compiled by the
+  **CMake** route (`/O2 /Gd /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`), which is the path that works. So
+  the two facts together left one legitimate experiment undone.
+- **Ran it.** Added `/Oa` to the file's CMake pin via `set_source_files_properties(... COMPILE_OPTIONS
+  "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp;/Oa")`, confirmed `/Oa` reached the real command line in
+  `build.make`, and measured: **`ls_LoadBuildingEntityState` 671 -> 792, `.text` 8,634 -> 8,755
+  (+121)**. Reverted; `baselines` back to 8634 and the no-op guard confirms the file is at HEAD.
+- **The doc's table is stale in the same way its numbers were.** It was measured on an earlier body
+  (obj 1464/1463); the current object is 1460 and `/Oa` now *loses*. Both Round-163's `/Oa` figure
+  and Round-43's 713 were taken against a body that has since changed, and neither was re-measured.
+  Recorded so the lead is not re-opened a third time.
+- **CMake trap found while doing it, worth keeping:** `COMPILE_OPTIONS` takes a **`;`-separated
+  list**, not multiple arguments. Writing
+  `set_source_files_properties(... COMPILE_OPTIONS "/REBREW_TOOLCHAIN:..." "/Oa")` **silently
+  drops the second option** — the configure step succeeds and the flag is simply absent from
+  `build.make`, so an experiment can be "run" without ever testing the flag. Verified by reading the
+  generated compile line both before and after the fix.
+- **What this closes:** the `/Oa` axis on this file, from both routes (metadata: C1001; CMake: +121).
+  The file's remaining divergence is the register/addressing-form and block-placement class
+  established in round 876.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-878: audited every per-file flag in the build against the metadata. One correction to round 43, no disagreements.**
 
 - **Filed round 43's defect upstream** in the rebrew ideas file (`docs/IDEAS-GUILD.md`): `test`/
