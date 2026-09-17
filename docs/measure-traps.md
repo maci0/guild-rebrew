@@ -347,6 +347,18 @@ before comparing two figures.
   them. Their bytes were confirmed identical to the reference at `0x10024000..0x10024044` in round
   883. Treat a `start-data` item whose VA is in `.idata` as permanently unactionable rather than
   as pending work.
+- **Most of this binary's "`.data`" is really BSS, so a `matched` tick on those symbols proves
+  nothing.** `.data` carries `rawsize 0xe000` over a `vsize 0x174059c`, so only
+  `0x10027000..0x10035000` has file bytes; every `.data` symbol above that is zero-fill.
+  `rebrew verify --data` compares via `pefile`-style section reads, and on a zero-fill VA it
+  compares zero against zero — a guaranteed match. Round 884 sized 57 `.data` symbols and
+  `matched` rose 105 → 108, but **54 of the 57 are above `0x10035000`**: the rise is accounting,
+  not verification. Before treating a data `matched` increase as evidence, check the symbol's VA
+  against the section's raw extent. `.bss` and `.idata` entries are in the same category.
+- **The built binary's `.text` / `.rdata` / `.reloc` VirtualSize already equal the reference's**
+  (`0x22846` / `0x2e81` / `0x10374`). A size-mismatch hunt on this target is a dead end; the
+  deliverable's remaining gap is *content* — 8,634 residue bytes inside `.text` — so measure with
+  residue, not with section sizes.
 
 ---
 

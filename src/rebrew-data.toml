@@ -11,6 +11,7 @@ name = "g_net_socket"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x101deb00"]
 note = "first player slot (stride 0x264264 bytes)"
@@ -18,6 +19,7 @@ name = "g_connections"
 section = ".data"
 type = "unsigned char[]"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x114ffe20"]
 note = "overflow slot"
@@ -25,42 +27,49 @@ name = "g_player_slot_overflow"
 section = ".data"
 type = "unsigned int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x101deb14"]
 name = "g_player_slot_field"
 section = ".data"
 type = "unsigned int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x101deac0"]
 name = "g_download_total_size"
 section = ".data"
 type = "unsigned int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x101deac4"]
 name = "g_download_received"
 section = ".data"
 type = "unsigned int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x101deac8"]
 name = "g_download_slots"
 section = ".data"
 type = "unsigned int[8]"
 status = "UNCHECKED"
+size = 32
 
 ["SERVER.0x101deae8"]
 name = "g_download_buffer"
 section = ".data"
 type = "unsigned int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x101de5a4"]
 name = "g_aemter_table"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x101de454"]
 note = "auxiliary entity count (loadsave)"
@@ -68,6 +77,7 @@ name = "g_101de454"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x101de55c"]
 note = "auxiliary entity buffer (realloc'd)"
@@ -75,12 +85,14 @@ name = "g_101de55c"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100a8c30"]
 name = "g_entity_type_table"
 section = ".data"
 type = "char*"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10030b6c"]
 name = "g_next_object_id"
@@ -93,12 +105,14 @@ name = "g_citizen_count"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10035439"]
 name = "g_current_season"
 section = ".data"
 type = "unsigned char"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x1002a0f8"]
 name = "g_1002a0f8"
@@ -159,42 +173,49 @@ name = "g_entity_table_end"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100358a0"]
 name = "g_slot_table"
 section = ".data"
 type = ""
 status = "UNCHECKED"
+size = 2
 
 ["SERVER.0x1014d8c0"]
 name = "g_entity_ptr"
 section = ".data"
 type = "unsigned char*"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x101de450"]
 name = "g_item_def_table"
 section = ".data"
 type = "char*"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100a8c34"]
 name = "g_query_base"
 section = ".data"
 type = "unsigned short*"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100a8cf8"]
 name = "g_100a8cf8"
 section = ".data"
 type = ""
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1009b764"]
 name = "g_1009b764"
 section = ".data"
 type = ""
 status = "UNCHECKED"
+size = 12
 
 ["SERVER.0x1002dde0"]
 name = "g_producer_id_table"
@@ -207,6 +228,7 @@ name = "g_slot_array"
 section = ".data"
 type = "char*"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10030b98"]
 section = ".data"
@@ -225,42 +247,49 @@ section = ".data"
 name = "g_query_flag3"
 type = "char"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x1003545c"]
 section = ".data"
 name = "g_query_flag1"
 type = "char"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x1003545d"]
 section = ".data"
 name = "g_query_flag2"
 type = "char"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x10035454"]
 section = ".data"
 name = "g_query_active"
 type = "char"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x10035458"]
 section = ".data"
 name = "g_query_count"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100a8c38"]
 section = ".data"
 name = "g_query_match_count"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10035468"]
 section = ".data"
 name = "g_query_cursor"
 type = "unsigned short*"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10030b8c"]
 section = ".data"
@@ -297,66 +326,77 @@ section = ".data"
 name = "g_dynasty_field_44"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10035449"]
 section = ".data"
 name = "g_dynasty_field_49"
 type = "char"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x1003544c"]
 section = ".data"
 name = "g_dynasty_field_4c"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10035448"]
 section = ".data"
 name = "g_dynasty_field_48"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10035464"]
 section = ".data"
 name = "g_query_filter_base"
 type = "unsigned char*"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10035880"]
 name = "g_current_year"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10035884"]
 name = "g_current_hour"
 section = ".data"
 type = "unsigned short"
 status = "UNCHECKED"
+size = 2
 
 ["SERVER.0x10035888"]
 name = "g_clock_copy_mid"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1003588c"]
 name = "g_clock_copy_tail"
 section = ".data"
 type = "short"
 status = "UNCHECKED"
+size = 2
 
 ["SERVER.0x1009acfc"]
 name = "g_some_limit"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100358fc"]
 name = "g_entity_ref_table"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10031500"]
 name = "g_str_10031500"
@@ -375,12 +415,14 @@ name = "g_entity_type_bytes"
 section = ".data"
 type = ""
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100358a2"]
 name = "g_entity_state_base"
 section = ".data"
 type = ""
 status = "UNCHECKED"
+size = 2
 
 ["SERVER.0x1002d4ec"]
 name = "g_file_version"
@@ -393,12 +435,14 @@ name = "g_log_buffer"
 section = ".data"
 type = "char[256]"
 status = "UNCHECKED"
+size = 256
 
 ["SERVER.0x11766204"]
 name = "g_log_file_handle"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10027078"]
 name = "g_log_level_table"
@@ -471,6 +515,7 @@ name = "g_list_head"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10028b04"]
 name = "g_str_10028b04"
@@ -554,6 +599,7 @@ name = "g_office_slots"
 type = "char*"
 status = "UNCHECKED"
 section = ".data"
+size = 4
 
 ["SERVER.0x100256bc"]
 name = "g_float_const_bc"
@@ -739,12 +785,14 @@ name = "g_entity_base"
 type = "unsigned char[]"
 section = ".data"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x1009b760"]
 name = "g_entity_end"
 type = "unsigned char"
 section = ".data"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x1002415c"]
 name = "__imp__accept@12"
@@ -1418,12 +1466,13 @@ status = "VERIFIED"
 
 ["SERVER.0x10031aac"]
 name = "locktable"
-type = ""
+type = "CRITICAL_SECTION*[0x40]"
 section = ".data"
 note = "per-lock CRITICAL_SECTION ptr table (0x40 entries)"
 
 # ---- extra globals referenced by the crt_region CRT-startup/allocator fns ----
-status = "UNCHECKED"
+status = "VERIFIED"
+size = 256
 
 ["SERVER.0x11766438"]
 name = "__sbh_pHeaderScan"
@@ -1680,6 +1729,7 @@ name = "g_sequence_counter"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1176408c"]
 name = "g_chain_id_start"
@@ -1704,6 +1754,7 @@ name = "g_entity_id_field"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100256a4"]
 name = "g_color_scale"
@@ -1734,6 +1785,7 @@ name = "g_entity_slot_table"
 section = ".data"
 type = "unsigned int[]"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11764084"]
 name = "g_max_players"
@@ -1764,12 +1816,14 @@ name = "g_dynamic_entities"
 section = ".data"
 type = "unsigned char"
 status = "UNCHECKED"
+size = 1
 
 ["SERVER.0x101de460"]
 name = "g_save_info"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x11764094"]
 name = "g_thread_handle"
@@ -1792,8 +1846,9 @@ status = "VERIFIED"
 ["SERVER.0x10034610"]
 name = "g_panic_callback"
 section = ".data"
-type = ""
-status = "UNCHECKED"
+type = "void(*)(void)"
+status = "VERIFIED"
+size = 4
 
 ["SERVER.0x117660e0"]
 name = "g_owner_window"
@@ -1858,7 +1913,9 @@ status = "VERIFIED"
 ["SERVER.0x1002c3f8"]
 name = "g_dispatch_table"
 section = ".data"
-status = "UNCHECKED"
+status = "VERIFIED"
+type = "handler_func[]"
+size = 256
 
 ["SERVER.0x1002d4fc"]
 name = "s_ls_tmp_1002d4fc"
@@ -1871,6 +1928,7 @@ name = "g_tick_rate"
 type = "int"
 section = ".data"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10027104"]
 section = ".data"

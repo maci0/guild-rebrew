@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-884: sized 57 `.data` symbols; matched 105 → 108; the rest of the lane is unverifiable by construction.**
+
+- **Tried:** the 224 `start-data` items that remained after round 883. Of those, 57 are `.data`,
+  84 `.idata`, 50 `.bss`, 33 with no section — so the `.data` 57 were the only real target.
+- **Byte-compared all 57 against the reference before touching anything.** Zero differ, including
+  the three that hold real raw bytes (`g_dispatch_table` at `0x1002c3f8` — 64 function pointers
+  into `.text`; `locktable` at `0x10031aac`; `g_panic_callback` at `0x10034610`).
+- **Named the sizes.** 49 already had a resolvable `type`; six more got one from a tight neighbour
+  gap; the three raw entries got their real declared types from the source
+  (`handler_func[]` — `server_internal.h`; `CRITICAL_POINT`-style `CRITICAL_SECTION*[0x40]` —
+  `crt_region/data_globals.c`; `void(*)(void)` — `src/link_stubs.c`) with sizes matching their
+  declarations. 57 of 57 now carry `name` + `type` + `size`.
+- **Measured:** `verify --data` matched **105 → 108**, `mismatched []`, `missing []`. Gate held
+  residue 8,634, raw-link `.data` 21,836, verify 281/283, byte-matched 264. No output byte moved.
+- **Two findings worth more than the naming.**
+  - **The built `.text` VirtualSize is already exactly 0x22846**, identical to the reference, as is
+    `.rdata` (0x2e81) and `.reloc` (0x10374). The objective's `.text` size clause is met by the
+    postlink deliverable; what is *not* met is residue (8,634) inside it. Do not "fix" a size
+    mismatch that does not exist — the remaining gap is content, entirely inside the 19 carriers.
+  - **54 of the 57 are BSS-in-`.data` and can never be byte-verified.** `.data` has
+    `rawsize 0xe000` covering `0x10027000..0x10035000`; everything above that in the same section
+    is zero-fill, so `pefile.get_data` returns empty and any "compare" is vacuously true. Adding a
+    `size` only moves the entry into the `matched` count; it proves nothing. Reported honestly
+    rather than banked as progress.
+- **Lane after this round: 224 → 167** (84 `.idata` + 50 `.bss` + 33 sectionless), none of it
+  reachable by naming. A `todo` exclusion for linker-owned and zero-fill entries is the only thing
+  that will move this number; filed in the ideas file in round 883.
+
 **Round-883: attributed 20 unnamed `.data` symbols; `verify --data` coverage 85 → 105.**
 
 - **Tried:** close the gap between `rebrew todo`'s 244 `start-data` items and `verify --data`'s
