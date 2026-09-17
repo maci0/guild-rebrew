@@ -49,6 +49,46 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-867: worked `gm_FindNextFilteredEntity` — a genuinely unprobed carrier with a size gap. Deficit characterised; the obvious form loses.**
+
+- **Found it by the round-32 sweep**: the only carriers whose header carries *no* verdict are in
+  `spiel622.c` and `spiel_dumpD.c`. The `spiel622.c` pair both turned out to be thoroughly
+  documented (see below), leaving `gm_FindNextFilteredEntity` (`0x10016f80`) as the genuinely
+  unprobed one.
+- **The `spiel622.c` carriers are closed, and their headers verified accurate:**
+  `gm_CheckInventoryCapacity`'s claim that "everything from offset 0x8f to the end is
+  byte-identical" checks out exactly — **0 differing bytes from `+0x8f` on, all 97 inside
+  `+0x0..0x8f`**; and `gm_CalculateProductionValue`'s `fxch`/`cmp` transposition is already
+  closed by a recorded residual re-audit of 22 probes. Neither was touched.
+- **`gm_FindNextFilteredEntity` has a real, unworked size gap.** Three sizes disagree —
+  `rebrew verify` 346, `rebrew test --symbol` 342, and the real extent **352** (next tracked VA
+  `0x100170e0` minus `0x10016f80`). Residue in the real extent: **215 bytes**.
+- **The deficit is 4 bytes and it is a *missing block*, not a sizing detail.** Aligning the
+  candidate to the target shows **8 instructions present in the reference and absent from ours,
+  and 0 extra**:
+  ```
+  MISSING: jne 0x155 ; xor eax,eax ; mov [g_query_filter_base],eax ; pop edi ; pop ebp ; pop ebx ; pop esi ; ret
+  ```
+  Context at target index 107-110:
+  ```
+  T  107 xor cl,cl      C 107 xor eax,eax
+  T  108 jmp 0x111      C 108 pop esi
+  T  109 test cl,cl     C 109 ret
+  T  110 jne 0x155      C 110 (absent)
+  ```
+  The reference keeps **one shared epilogue** reached by a `cl`-flag jump; we emit a private
+  `xor eax,eax` + return at each early exit. `cl` (not `eax`) is the flag, which is why the
+  reference's early paths fall through to the common tail.
+- **Probe: rewrote the `g_dynasty_field_4c > 0x100` early return as `match = 0; goto done;` with a
+  shared `done:` tail.** Object **342 -> 376** (34 bytes *worse*) and `match` 160 -> 69.
+  Reverted; baseline re-confirmed at 342/160. The shared-tail shape is right in principle but this
+  spelling changes the block graph enough to cost far more than the 4 bytes it recovers.
+- **Next, concretely:** the target's `cl` is a *char* flag, so the shared tail is reached by
+  `if (flag) goto tail`. The form to try is making the early exits set a **char** local and jump,
+  rather than a `void*` `match` — the register width is the likely reason `eax`/`cl` disagree.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-866: applied round 31's "read the header first" rule as a sweep. Two artifacts characterised, one wall confirmed closed.**
 
 - **Swept all 19 carriers' headers for a recorded verdict** before touching anything, per round
