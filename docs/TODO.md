@@ -49,6 +49,49 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-852: mapped the residue's *shape* per function. Two classes, and ServerMainThread is one 24-run band with a clean tail.**
+
+- **Measured match density and clean-stretch length for all 9 carriers** (built vs reference
+  `.text`, per function). The single most useful table of the session, because it separates
+  two kinds of wall that the residue number alone conflates:
+  ```
+  function                      match  size   pct  runs  longest clean stretch
+  gm_AllocSpieler                 865  3689   23%   134   170
+  CrashDump                       532  2115   25%   108   114
+  cm_ExSellObjekt                1091  2057   53%    89   173
+  ls_LoadBuildingEntityState      792  1463   54%    38   573
+  cm_ExCopyEntityData             459   912   50%    26   238
+  gv_ExAllocGraveyardWorker       584  1040   56%    39   263
+  ServerMainThread               2067  2434   84%    37   967
+  gm_AllocGebaeude                761  1088   69%    19   161
+  vfs_OpenStream                  434   667   65%    16   262
+  ```
+  **Class A — structurally divergent** (`gm_AllocSpieler` 23%, `CrashDump` 25%): the whole
+  function past the prologue differs. `gm_AllocSpieler` matches only 865 of 3,689 bytes and
+  has **3 clean stretches over 64 bytes**; its 134 runs have a **median gap of 16 bytes**. This
+  is not "nearly matching with a few bad spots" — it is uniformly different, which is what
+  §1/Finding 62 describe and why spelling probes keep failing on it.
+  **Class B — locally divergent** (50-84% match with long clean stretches): the drift sits in
+  identifiable pockets. `ServerMainThread` is clean for **967 bytes**, then dirty, then clean
+  for 155 / 237 / 195 / 130 / 119.
+- **`ServerMainThread` localised exactly: the entire 2,434-byte residue is 24 runs totalling
+  308 bytes, all inside `+0x3c7..+0x597`** (VA `0x10009767..0x10009936`). Everything from
+  `+0x597` to the end of the function is **100% clean** (155/155, 237/237, 195/195 verified).
+  The first differing byte is a **branch displacement** at `+0x3c7` (`0f 84 bc..` vs
+  `0f 84 bf..`, targets 3 bytes apart), and the bulk is a contiguous run `+0x444..+0x45b`
+  (22 bytes) plus 23 smaller ones.
+- **One reading error caught and corrected while doing this.** I first took `+0x408`
+  (`50` vs `51`) for an *extra byte* in our build and started hunting a length difference.
+  Tested for a shift directly — `ref[i:] == bld[i+1:]` for every offset in the band — and
+  **found none**, so the two sides are the same length and that byte is a branch
+  *displacement*, a consequence of a target difference rather than a cause. The anchor is
+  `+0x3c7`, not `+0x408`. Worth recording because the extra-byte reading looked convincing
+  and would have sent the next round after a phantom.
+- **No edit.** The value is a precise boundary and a two-class split; Class B rows now have a
+  measurable target band rather than a whole-function number.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-851: verified every annotated struct size against the compiler. 8/8 correct.**
 
 - **Ran the check the objective asks for and nobody had run.** The rule is "verify sizes
