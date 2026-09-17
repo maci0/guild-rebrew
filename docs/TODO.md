@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-850: removed the stale Ghidra `types.h`; documented the three-layout `PlayerSlot` split.**
+
+- **Audited the objective's struct clause for the first time this session** and found the
+  placeholder problem it names, in one file. `src/server.dll/types.h` (613 lines,
+  "Auto-generated from Ghidra via rebrew sync --pull-structs", 85 structures) was **included
+  by nothing** — every `types.h` grep hit in the tree is `rebrew_types.h`, a different and
+  genuinely hand-written header. Checked what it provided that was in use: of the 12 game
+  types it defines, only `PlayerSlot` (15 uses), `EntityStruct` (4) and `CommandPacket` (1)
+  are referenced anywhere, and all three already resolve elsewhere —
+  `PlayerSlot`/`EntityStruct` to `game_structs.h` / `entity.h`, `CommandPacket` to a comment.
+- **It also cannot compile.** Line 133 is `uint8_t[4][8] rgrange;` and lines 270/306/312 are
+  `-BAD-` placeholders. Confirmed against the toolchain in the isolated testbed: `cl` returns
+  **C2143 `missing ':' before '['` + C2059 `syntax error : '['`**. So the file was dead *and*
+  un-includable, and its `_4i` (line 12), `field_0x`-style names and `pad01[34]` scatter are
+  exactly the placeholders the objective says must not survive a first pass.
+- **Action:** removed the file. `rebrew test --all` 281/264 with no demotions, and the gate is
+  green (lint 188/188, compile errors 0, residue 8634, raw-link `.data` 21,836 — all held).
+  Nothing referenced it, so removal is inert; the value is that the tree no longer carries a
+  613-line invalid artifact that reads like a type source of truth.
+- **The real finding underneath it: there are THREE distinct `PlayerSlot` layouts for the same
+  0x264264-byte row, and the split is deliberate.** All three are size-correct (verified by
+  arithmetic — `0x264264`, `0x264264`, and types.h's padded form = 2507364 = `0x264264`):
+  ```
+  game_structs.h  PlayerSlot   { flags@0, id@4, data[0x26425C] }
+  player_slot.h   player_slot  { gap[0x264204], data@0x264204, gap[0x5c] }
+  types.h         PlayerSlot   { state_flags@0, ... data@8, queue ptrs@0x2641f0 }
+  ```
+  `player_slot.h`'s header already documents why it must not merge with `game_structs.h`'s
+  (different offset for `data`), and `command_internal.h` notes the third. So this is a
+  **documented access-pattern split, not a naming collision** — the objective's "one word, one
+  meaning" cannot be satisfied by merging them, and the divergences are load-bearing.
+- **Gate:** pass — lint 188/188, compile errors 0, verify 281/264 held, residue and raw-link
+  `.data` both held.
+
 **Round-849: finished the dead-declaration sweep (3 more symbols, 24 lines). Residue-neutral. Also closed the string-extern class as not-worth-doing.**
 
 - **Completed round 848's class.** The remaining `extern`-in-8-spiel-TUs declarations with
