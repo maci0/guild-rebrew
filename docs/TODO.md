@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-847: found the immediate cause of the accumulator rotation (role competition for `esi`), and bounded it.**
+
+- **Followed round 846's live lever (cardinality) to its actual mechanism.** Disassembled the
+  whole family end to end and found cardinality is a *proxy*: the homes turn on which loop
+  role takes `esi`/`edi` first.
+  ```
+  2 accumulators + int i counter   a->ebx  b->ebp  i->esi  walker edi   NO spill
+  3 accumulators + int i counter   b->ebx  c->ebp  walker esi           a SPILLED to stack
+  3 accumulators, pointer-driven   a->ebx  b->ebp  c->edi  walker esi   no spill
+  ```
+  With only `ebx`/`ebp`/`edi` left for three accumulators, one **must** go to memory — and
+  which one spills is what changes the visible assignment. Confirmed by finding the same
+  slot used as both a load and a store inside the loop body
+  (`mov 0x14(%esp),%ecx` in, `mov %ecx,0x10(%esp)` out, every iteration). Recorded as
+  Finding 65.
+- **Bounded it rather than overclaiming.** Checked it against Finding 62's actual case,
+  `gm_ObjectsAvailble` — and it does **not** apply: disassembled the prologue and `esi` there
+  holds the *address of a local array*, not a walker and not a counter. Wrote that scope limit
+  into Finding 65 so the new mechanism is not cited as the cause of a rotation it does not
+  explain. Finding 62's own measurement still stands unexplained.
+- **Method correction.** Counted `push` instructions per cardinality and got a flat 5 for
+  n=1..6 — but my pattern matched the `pop` mirrors too. Recounted on the body: the compiler
+  saves the same set regardless of cardinality and never grows it, so **push count is not a
+  cardinality signal at all**. Noted in the finding, since the wrong reading looked like a
+  clean result.
+- **No edit.** The reachable half of this is a loop-shape question (walker vs counter owning
+  `esi`, shapes §8), not a naming one; nothing in the current carriers has that shape.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-846: swept the callee-saved rotation in isolation. It is an invariant of value count; no source variable reaches it.**
 
 - **Attacked the dominant obstacle (§1 / Findings 62-63: the colourer assigns homes the

@@ -3053,3 +3053,43 @@ Finding 62's "stop: no C spelling reaches it". Recorded so the invariant is not 
 Probe recipe: `.scratch/epi/b2.sh` (one `cl` call through the msvc6 image) plus
 `objdump -d | grep 'xor +%e'`. Three accumulators around a `sink(i)` call reproduce the
 whole family in under a minute.
+
+## Finding 65 — the accumulator homes are decided by *role competition for `esi` and `edi`*, not by cardinality (round 847, isolated)
+
+Finding 64 said cardinality moves the homes. It does, but cardinality is a proxy — the
+immediate cause is **which loop role claims `esi`/`edi` first**. Disassembled the family end
+to end; the roles are accumulator(s), the induction counter, and the array walker (MSVC6
+strength-reduces `t[i]` into a walking pointer).
+
+| shape | homes | spill |
+|---|---|---|
+| 2 accumulators + `int i` counter | `a->ebx`, `b->ebp`, `i->esi`, walker `edi` | **none** — all four callee-saved, one per role |
+| 3 accumulators + `int i` counter | `b->ebx`, `c->ebp`, walker `esi`; `a` in a stack slot | **one** — `mov 0x14(%esp),%ecx` in, `mov %ecx,0x10(%esp)` out, every iteration |
+| 3 accumulators, pointer-driven (`while (p < end)`) | `a->ebx`, `b->ebp`, `c->edi`, walker `esi` | none |
+
+So the homes do not rotate because the live-set got bigger; they rotate because the walker
+takes `esi`, **and with only `ebx`/`ebp`/`edi` left for three accumulators one must go to
+memory**. Which one spills is what changes the visible assignment.
+
+**This is checkable and it explains the walled rows.** Read the reference: if it keeps its
+accumulators all register-resident and the candidate spills one, the divergence is the
+**role that owns `esi`**, not the accumulator names — and per Finding 64 no renaming reaches
+it. The reachable question is only whether the *walker* or the *counter* is the value that
+holds `esi`, which is a loop-shape decision (shapes §8), not a naming one.
+
+**Scope limit — this does NOT explain Finding 62's rotation (checked, round 847).**
+`gm_ObjectsAvailble` (0x10015f70) is the case Finding 62 records as `(esi, ebx, edi)` against
+the reference's `(ebx, edi, esi)`. Disassembled its prologue: `esi` there holds the **address
+of a local array** (`mov dword ptr [esp+0x18],0x92` … `call gm_StartFilteredEntitySearch`),
+not a walking pointer and not a loop counter. So the competition this finding describes is
+not the one operating in that function. Do not cite this finding as the cause of the
+`gm_ObjectsAvailble` rotation; the mechanism there is still unidentified, and Finding 62's
+"stop: no C spelling reaches it" continues to stand on its own measurement.
+
+**Negative result worth keeping:** the number of `push` instructions is **5 for every n from
+1 to 6** — the compiler always saves the same set and never grows it. Counting pushes is
+therefore not a cardinality signal, and an early attempt in this round read the `pop` mirrors
+as extra pushes and got a flat 5 for the wrong reason. Count the *body*, not the file.
+
+Probe recipe as Finding 64, plus: to see a spill, grep the loop body for the same
+`0xNN(%esp)` slot appearing as both a load and a store.
