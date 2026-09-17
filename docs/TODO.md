@@ -49,6 +49,91 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-836: re-measured every objective clause. The deliverable satisfies all but byte-residue.**
+
+- **Ran the whole done-criteria list against the current `build/server.dll`
+  (286,720 bytes) rather than the residue proxy. Results:**
+  - **`.text` VirtualSize `0x22846`** — exact, and all four section headers
+    match the reference field-for-field (`.text` 0x22846/0x23000, `.rdata`
+    0x2e81/0x3000, `.data` 0x174059c/0xe000, `.reloc` 0x10374/0x11000). This
+    had not been asserted directly in recent rounds — the residue number was
+    standing in for it.
+  - **Import table: 100 imports over the same 4 descriptors** (KERNEL32 81,
+    WS2_32 16, USER32 2, WINMM 1) in the same order, matching
+    `rebrew-project.toml`. The objective's "exactly the reference 100" holds.
+  - **Exports: `Exit`, `Init`, ordbase 1, two addresses** — identical to the
+    reference.
+  - **Wine load + exports resolve — the objective's last clause, now actually
+    run.** Built a loader with the project's msvc6 image
+    (`docker run --entrypoint bash rebrew/msvc:6.0-sp6-win32`, `INCLUDE` =
+    `Z:\opt\msvc6.0-sp6\VC98\Include`, `LIB` = `...\Lib` — the entrypoint
+    wrapper eats a `-c` argument, so the entrypoint has to be overridden).
+    Result: `LOAD OK h=10000000`, `Init=10009320 Exit=10009350`,
+    `EXPORTS RESOLVE OK`. Both VAs equal the reference's exported addresses
+    exactly. The harness lives in `.scratch/wine-t/` (gitignored).
+  - **`rebrew verify --full`: 281/283, 264 byte-matched, 17 PROVEN, 1 STUB.**
+  - **Residue 8,634; raw-link `.data` 21,836** — both at baseline.
+- **What is actually left:** the `.text` residue only, 0x21ba, inside the 18
+  functions round 835 audited. Every other clause of the objective is met and
+  now has a direct measurement behind it instead of an inference.
+- **Method note:** five clauses were being tracked by proxy. `.text`
+  VirtualSize was inferred from the residue, imports from `sitecustomize`/
+  config, Wine from historical rounds. Running the actual checks took one
+  round and changed nothing about the numbers — but it is the difference
+  between "should hold" and "measured". Re-run this list at session close.
+- **Gate:** no edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0.
+
+**Round-835 (`.text` audit): all 18 residue carriers are documented walls. No source change.**
+
+- **What was tried:** took round 834's own "Next" and audited the 18 functions
+  carrying the whole 0x21ba residue, looking for unprobed levers. Four probes,
+  all negative; the audit is the product.
+- **§61 re-confirmed at a worse number (new data).** `cm_ProcessCommandQueue`
+  (0x1000aac0, 15 bytes): the reference's arm 5 *falls into* a shared
+  `recheck` guard. `msvc6-c-shapes.md` §61 retires the goto spelling at
+  624 -> 204. Tried the same idea as a real loop instead —
+  `while (held != 0) { if (type != 6) goto unlink; ... held = 0; }` — to match
+  the reference's `0x1000aaff test ebx,ebx / je unlink` ... `0x1000ab0b
+  jne 0x1000aaff` back-edge. **624 -> 131** (obj 639 -> 635): worse than the
+  goto spelling. msvc6 hoists the `test ebx,ebx` because `held = pkt` is
+  provably non-zero there; the reference keeps it. Wall confirmed, spelling
+  closed for good.
+- **`CrashDumpUnhandledExceptionFilter` (1,583 bytes): the doc's named unlock
+  is real but the frame is upstream of it.** Verified the target caches
+  **`CreateFileA`** in `esi` (`mov esi,[__imp__CreateFileA@28]` at
+  `0x10002952`, 12+ `call esi`) where we cache in `ebx` from the prologue,
+  and the reference pushes only `ebp`/`esi` where we push `ebx`/`ebp`/`esi`.
+  That is exactly the `codegen-walls.md` §3 item 3 condition. **But the first
+  divergence is byte 2: frame `0x284` vs `0x280`** — the register homes are a
+  *consequence* of the spill-count difference, not a lever on it. The file
+  header records 8 declaration permutations, 11 flag combos and two named
+  lanes (drop `space` -> 0x280 at ~50 matches lost; move `nFrames = 0x800`)
+  all exhausted. Do not reopen as a register problem.
+- **`cm_ExCopyEntityData` (462): `walls=0` in the walls doc is not "unprobed".**
+  The clamp work is in the file header — six probe passes, ~20 spellings, and
+  a diagnosed cause: msvc6 folds our clamp arms into byte-immediate stores and
+  cross-jumps the tails where the reference materializes in `eax` and jumps to
+  a shared store. Epilogue count 2 vs the reference's 3 is the backend
+  cross-jump pass. A per-function doc grep is not a coverage test — check the
+  file header and all three codegen docs before calling a function unprobed.
+- **Coverage map (grep counts, walls/shapes/allocator):** all 18 carriers are
+  documented in at least one codegen doc; the four with `walls=0`
+  (`cm_ExCopyEntityData`, `gv_ExAllocGraveyardWorker`, `m_AllocTracked`,
+  `srv_LoadBuf`) hold their notes in `msvc6-c-shapes.md` or the file header.
+- **Honest state:** every one of the 18 sits at a measured wall. The remaining
+  8,634 bytes are not reachable by source-level spelling under `/O2 /Gd` on
+  msvc6 SP6. The two unlocked-looking items in `codegen-walls.md` "what would
+  unlock the rest" are (1) a backend-cross-jump/instruction-selection control
+  — a compiler extension or a post-pass, not C — and (2) the original build's
+  exact compiler or flag set, which the reference's own metadata cannot answer
+  (no Rich header in either binary, per round 449).
+- **Gate:** no edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+- **Next:** do not re-probe these 18 by spelling. Either measure a
+  *post-pass* idea against the linked residue, or work the objective's other
+  clauses — the import table (100/100 already matching) and Wine load/exports
+  — and treat residue 8634 as the documented floor of the current toolchain.
+
 **Round-833 (types): one landed, one reverted. RESIDUE 8634 / DATA 21,836 HOLD.**
 (Numbering note: an earlier and unrelated Round-521 exists further down this
 file -- the round numbers here are not strictly ordered, and the log is
