@@ -49,6 +49,31 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-838: probed `cm_ExSellObjekt`'s zero-block order. Inert, and the coupling is now characterised.**
+
+- **What was tried:** round 837 left `cm_ExSellObjekt` (-1 size gap, the cheapest
+  size target in the tree) as the next lead. Its first divergence is a
+  **nine-store zero block** — same nine slots on both sides, different emission
+  order:
+  ```
+  target  0x10 0x14 0x2c 0x18 0x20 0x28 0x30 0x1c 0x24
+  ours    0x10 0x24 0x30 0x14 0x1c 0x28 0x2c 0x18 0x20
+  ```
+  The required reordering of our sequence is `[2,5,6,7,4,1,3,0]`.
+- **Fact established:** MSVC6 emits these stores in **assignment order**, not
+  slot order — confirmed by permuting the twelve assignments in the source and
+  watching the emission order change. So the lever looked real.
+- **Why it is inert anyway:** the slot *assignment* is coupled to the same
+  declaration order, so reordering the assignments moves the slots too. The
+  probe produced `0x18 0x20 0x2c 0x10 0x28 0x1c 0x14 0x30 0x24` — still nine
+  permuted slots, now with the first store at `0x18` where the target has
+  `0x10`. Object size unchanged at 2056 (target 2057). Two variables, one
+  control: the same coupling the file header already records as "the spill-slot
+  permutation cascading from the dest-call out-param reuse". Reverted.
+- **Consequence for the -1 size gap:** the gap is downstream of that cascade,
+  not of the zero block. Do not attack the zero block to close it.
+- **Gate:** no edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0.
+
 **Round-837: both "if continuing" options closed by measurement; size map refreshed. No source change.**
 
 - **Round 836 named two options: a post-pass, or the original build's compiler
