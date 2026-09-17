@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-869: tried round 34's "reach the tail without a new label". It breaks the composition instead.**
+
+- **The form round 34 asked for:** restructure the `else` branch's `do/while` so its exit edge
+  already lands on the shared code, with no added label. Replaced
+  ```c
+  do { list_head += 0xa9; g_query_filter_base = list_head;
+       if (list_head < end) goto a2; return 0; a2: ; } while (*list_head == 0);
+  ```
+  with a `for (;;)` whose two exits both `break` — one setting `match = 0`, one when
+  `*list_head != 0` — so control falls out of the branch into the existing shared tail.
+  No label, no extra edge.
+- **The object grows to 355** (target 346, so 9 over) and `match` is 86.
+- **At the link the composition collapses outright:** `scripts/linktest.sh` reports
+  **"COMPOSITION COLLAPSED: only 0 symbols landed at their reference VA. Every residue number
+  below would be meaningless."** The guard is `msvc6-c-shapes.md` §124's, and it is doing exactly
+  its job — a 9-byte overrun moved enough of the file to destroy symbol placement, so no residue
+  number would have meant anything.
+- **Checked it was not stale state before believing it:** `rm -rf build/split_poc` plus a full
+  `split_link.sh` rebuild reproduced the collapse, so it is the edit, not the build tree.
+  Reverted; rebuild restores `.text` 8,634 and `linktest.sh`'s no-op guard confirms the file is
+  back at HEAD.
+- **Two forms tried on this lead, two losses, and they fail differently** — round 868 closed the
+  size gap and cost +114; this one overshoots the size and destroys the composition. Read
+  together: the reference's `cl`-flag tail is reachable in the *binary*, but every C spelling that
+  reroutes the early exit either adds an edge msvc6 keeps inline (868) or changes the branch's
+  exit count enough to move the following symbols (869). The block-graph cost is the binding
+  constraint, not the 4 bytes.
+- **Next, only with new evidence:** the collapse in this round suggests the file's *composition*
+  is sensitive to this function's size at the byte level, so before another spelling attempt it
+  is worth knowing how many bytes of slack `spiel_dumpD.c`'s neighbours have — `pad_short_functions.py`
+  and `measure-traps.md` §7's two-branch size rule are the tools for that.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-868: tested round 33's `char`-flag hypothesis on `gm_FindNextFilteredEntity`. It closes the size gap and costs +114 at the link.**
 
 - **Probed the specific hypothesis round 33 left**: the reference's shared tail is reached by a
