@@ -49,6 +49,43 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-876: tested whether any C89 lever still lands. The documented "exhausted" claim holds up under independent check.**
+
+- **Seven consecutive rounds (868-875) of probes were inert or worse, so I checked the premise
+  rather than assume it.** Established the last `.text` improvement on record:
+  **8636 -> 8634 in round 522**, and that was a **declaration-order** change (an `.data`/COMDAT-order
+  lever), not a code-spelling probe. Everything since has been `.data` work or reverted probes.
+- **Read what the docs already concluded, and it is unusually specific** (TODO round-163's row):
+  *"Every lever derivable from the reference's disassembly has been tried and measured: loop
+  **form** (which did work, twice) is exhausted, operand **width** worked once, and CFLAGS are
+  fully swept (/O1, /Og-, /Os, /G6, /Ge, /Oa all lose; /Ot, /Ob2, /Oy, /Ox, /Ow, /Og, /Op, /G3,
+  /G4, /G5, /GB, /GA, /Gi inert), as are declaration order, TU composition, statement swapping and
+  loop spelling."* It also retracts an earlier "no C89 lever" verdict for `ServerMainThread` and
+  names the two levers that did work — loop form and operand width — which is the strongest
+  available statement that the lever set is closed.
+- **Checked the claim independently on the least-documented carrier** rather than take it on
+  faith. `ls_LoadBuildingEntityState` has **one loop** (line 86, a top-tested `while`), so if a
+  loop-form lever remained anywhere it would be visible here. Compared loop back-edges by scanning
+  both streams:
+  ```
+  REF  back-edges: +0xd8 -6 · +0x1d0 -7 · +0x2b1 -117 · +0x2da -8 · +0x399 -125 · +0x3ab -258
+  BLD  back-edges: +0xd8 -6 · +0x1d0 -7 ·                  +0x2d8 -8 · +0x35d -115 · +0x398 -125 · +0x3aa -257
+  ```
+  The reference has an edge at `+0x2b1` (`-117`, targeting `+0x23e`) that ours lacks, and ours has
+  one at `+0x35d` (`-115`, targeting `+0x2ec`) that the reference lacks — same *count*, different
+  *placement*. That is the region being laid out differently, not a loop-shape choice.
+- **The call inventory matches exactly: 38 `ls_ReadVfsDataChecked` calls on both sides.** So the
+  divergence is not missing or extra calls — the reference and candidate agree on *what* the
+  function does and differ on how the region is arranged. Its lea offsets (`+8`, `+9`, `+0x10`,
+  `+0xc`) do not appear in our stream at all because we use a different addressing form for the
+  same offsets.
+- **Conclusion, with evidence:** the remaining divergence on this carrier is register/addressing
+  form and block placement, which is the class §84 cannot reach and which rounds 868-875 have now
+  measured inert on four separate carriers. The documented "levers exhausted" claim survives an
+  independent check.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held.
+
 **Round-875: worked round 40's block-order lead. Inert; and round 40's ranking method was too narrow.**
 
 - **Corrected my own round-40 measurement first.** That round ranked carriers by counting probe
