@@ -207,11 +207,17 @@ compiled by this toolchain with `/O2 /Gd` and disassembled:
 So a `goto` to a trailing label *does* produce the shared exit — it is not the goto
 that fails, it is leaving **one** of the fail paths as a direct `return`. Converting
 every fail path in the function to the same `goto`, or collapsing them into one
-short-circuit condition per §7, is what merges. This matters for
-`gv_ExAllocGraveyardWorker`, whose header records the opposite conclusion for the
-mixed form (`if (!slot) goto fail_ffff;` "collapses the epilogue pair", 246) — that
-measurement is consistent with this rule rather than in conflict with it, because the
-file's non-`goto` fail paths remained direct returns.
+short-circuit condition per §7, is what merges.
+
+**But exit-sharing is necessary, not sufficient — position decides (round 845).** Applying
+this to `gv_ExAllocGraveyardWorker` by converting its last direct `return 0xffff` to
+`goto fail_ffff` gives `match` 615 -> **302** and shrinks the object 1040 -> **1031**,
+below the reference. The `!slot` test sits *before* the `j >= count` guard that already
+jumps to `fail_ffff`, so the reference's shared epilogue is reachable from below and an
+equal-but-earlier jump does not share it. The file's own record of the same edit
+(`if (!slot) goto fail_ffff;` collapsing the pair, 246) is the same finding on a later
+body. **Read the merge rule as "this is when msvc6 shares an exit", not "this edit will
+work"** — measure every application at the link.
 
 Probe recipe, since this is cheap to re-check: compile a four-line function with the
 `cl` wrapper in the msvc6 image and `objdump -d` it — the epilogue count is visible

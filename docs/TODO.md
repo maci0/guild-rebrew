@@ -49,6 +49,28 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-845: applied the round-844 merge rule to `gv_ExAllocGraveyardWorker`. It does not transfer; reverted.**
+
+- **Did the edit the rule implies, rather than only describing it.** The only
+  `0xffff` fail path left as a direct `return` was `if (!slot) return 0xffff;`
+  (`gv_ExAllocGraveyardWorker.c:523`); the other two were already `goto fail_ffff`. Converting it
+  to `goto fail_ffff` is exactly what round 844's isolated rule predicts merges the pair.
+  **Measured: `match` 615 -> 302, and the object SHRINKS 1040 -> 1031.** Reverted;
+  baseline re-confirmed at 1040 / 615.
+- **What that means.** The rule is real in isolation (round 844) but does not transfer to this
+  body, and the failure mode is informative: the object *shrinks below* the reference, so the
+  merge removes a block the reference keeps rather than re-siting one. The `!slot` test sits
+  **before** the `j >= count` guard that already jumps to `fail_ffff` — so the reference's
+  shared epilogue is reachable from below, and an equal-but-earlier jump does not share it.
+  **Position, not exit-sharing, is the binding constraint here.**
+- **Reconciles the header's recorded 246** for the same edit: same direction, and my 302 is a
+  later body, so the file's number was right and mine is just current.
+- **This is the second time in three rounds** that an isolated compiler fact failed to transfer
+  to a real body (round 841's `volatile`, this round's merge). The isolated testbed is good for
+  *refuting* mechanisms cheaply; it is not evidence that a mechanism lands. Link-measure every
+  application, per the objective's own ruler rule.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0.
+
 **Round-844: built an isolated compiler testbed; isolated the epilogue-merge rule that `gv_ExAllocGraveyardWorker` has been fighting.**
 
 - **New instrument, worth keeping.** `.scratch/epi/` holds a four-line C file compiled
