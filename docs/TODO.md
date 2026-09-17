@@ -49,6 +49,42 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-840: characterised the residue's shape. My own frame-cascade reading was wrong; measured, not asserted.**
+
+- **Corrected a claim from round 839.** I wrote that the remaining gap "needs a post-pass
+  over the linked `.text`". Re-read `docs/msvc6-link-layout.md` §6: postlink's `.text`
+  entry is *"trims to the reference's raw size, sets raw/VirtualSize, rewrites absolute
+  data operands and E8/E9 targets. **Content is largely ours.**"* So a `.text` content
+  post-pass is a **change to the deliverable's definition**, not a pipeline tweak — it
+  would make the bytes copied rather than compiled, which is the whole point of the
+  objective. The C-only constraint is not the obstacle; the objective's premise is.
+  Withdrawn as an option.
+- **Ran the whole-tree `.text` diff-shape measurement**, which the docs did not have:
+  - **610 contiguous differing runs over 8,634 bytes.** Median 5, mean 14.2, longest 189
+    (`0x10018be0`), and **254 runs are exactly one byte**.
+  - Runs of 1-4 bytes: 298 of 610 runs but only 385 of 8,634 bytes.
+  - **Concentration:** the nine largest carriers hold 7,880 (91%); the top two
+    (`gm_AllocSpieler` 2,824, `CrashDump` 1,583) hold 4,407 (51%).
+  - **Read:** fragmented in *position*, concentrated in *cause*. Neither "one early
+    cascade" nor "610 independent problems".
+- **Walked into §4's trap one level down, and measured my way out.** The most common
+  short-run context is `8b4424 20` vs `8b4424 18` — `mov eax,[esp+0x20]` vs `[esp+0x18]` —
+  which reads as a frame-offset cascade, and I nearly wrote it up that way. Counted
+  directly instead: bytes attributable to an `[esp+disp8]` slot offset are **54 of 8,634
+  (0.6%)**. The frequent pattern was the most *visible* one, not the bulk. Same error §4
+  records, one level down.
+- **Also checked and negative:** the `CrashDump` frame is not recoverable by slot chasing
+  — only 10 of its 595 mismatching instructions differ *solely* by `[esp+N]`; the other
+  585 are scheduling. Consistent with the file header's spill-count conclusion.
+- **Byte-histogram cross-check:** built vs reference `.text` byte frequencies differ by at
+  most 61 in 141,382 bytes (`0x10` 4,789 vs 4,728). No missing or invented instruction
+  class; the residue is encoding and schedule variation, not structure.
+- **Landed:** the histogram method in `docs/measure-traps.md` §4, with the
+  "classify by counting, never by the top of a frequency list" rule.
+- **Gate:** no source edit; RESIDUE **8634** / DATA **21,836** untouched, lint 188/0/0,
+  verify 281/264 held. Postlink re-run confirms `.data`/`.rdata`/`.reloc`/headers all
+  `differing 0x0` and `.text` `0x21ba`.
+
 **Round-839: worked the size-gap list to the end. All five gaps are documented walls. No source change.**
 
 - **Took round 837's `Next`** — the five size-mismatched carriers, on round

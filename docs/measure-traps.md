@@ -63,6 +63,28 @@ a mission brief, and both refuted it with measurements — `CrashDump`'s first d
 is a frame *value*, and `gm_AllocSpieler`'s gap returns to 0 repeatedly across 168 hunks. Two
 agent budgets were spent at a cliff that was not there.
 
+**The run-length histogram is the cheap discriminator (round 839, whole tree).** Count the
+contiguous differing runs between built and reference `.text` and look at their lengths.
+Measured on the current tree: **610 runs over 8,634 bytes, median 5, mean 14.2, longest
+189, and 254 of them exactly one byte.** That shape rules *out* a single early length
+cascade — a cascade produces one long run from its start to the next realignment, not 254
+scattered singletons — and rules *out* "one frame value per function", because a frame
+value changes every `esp`-relative operand in that function at once.
+
+**Do not infer the cause from the most common short-run context.** The top of that list is
+dominated by `mov eax,[esp+0x20]` vs `[esp+0x18]`, which reads as a frame-offset cascade.
+Measured directly, the bytes attributable to an `[esp+disp8]` slot offset are **54 of
+8,634** (0.6%). The frequent pattern was the most *visible* one, not the bulk — the same
+mistake §4 records, one level down. Classify by counting, never by the top of a frequency
+list.
+
+**Concentration is the other half.** The nine largest carriers hold **7,880 of 8,634 (91%)**
+and the top two (`gm_AllocSpieler` 2,824, `CrashDump` 1,583) hold **4,407 (51%)**. So the
+residue is simultaneously *fragmented in position* and *concentrated in cause*: many small
+scattered differences, grouped into a handful of functions, each with its own documented
+root. Any plan that treats the 610 runs as 610 problems is wrong; so is any plan that treats
+the 8,634 as one cascade.
+
 ## 5. Tool traps that produced wrong readings
 
 - `build/objtest/<name>.obj` is stale after `rebrew test`: disassembling it
