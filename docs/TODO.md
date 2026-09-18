@@ -27783,3 +27783,31 @@ mostly-negative answer on five carriers (`srv_LoadBuf` `"a",on` → 180; `server
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; `src/` unmodified; no
 baseline moved.
+
+## Round 997 — `rebrew test --toolchain` persisted a pin into tool-owned metadata; reverted
+
+Tested whether a different msvc6 backend avoids the §2 epilogue merge on `cm_ExCopyEntityData` (the one
+carrier where a non-default backend might plausibly help, since §2 says no C spelling defeats the cross-jump).
+`rebrew test ... --toolchain msvc-6.0-sp5-pp --json` printed:
+
+```
+SIZE persisted → 912
+TOOLCHAIN persisted → msvc-6.0-sp5-pp
+```
+
+and wrote `toolchain = "msvc-6.0-sp5-pp"` into `src/rebrew-functions.toml` for that function. **Reverted**
+(`git checkout -- src/rebrew-functions.toml`); gate re-run and passing; metadata back to its 7 pre-existing
+TU-level pins.
+
+This would have been a real break, not a cosmetic one: a per-*function* toolchain pin contradicts the
+per-*translation-unit* rule, and `rebrew cmake-flags` **fails the configure** when one TU's functions resolve
+to different flags. A one-line addition to a generated file is exactly what survives a careless `git add -A`.
+→ workflow-traps §15.
+
+**Measurement note.** The toolchain axis itself is unchanged: §143-§146 swept all nine msvc6 images (three
+real generators) with the population enumerated, and three TU-level pins landed. This round's result does not
+add a pin — it adds a hazard.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. `src/rebrew-functions.toml` reverted and
+verified clean; `src/` otherwise unmodified; no baseline moved.

@@ -1,7 +1,9 @@
 # Workflow traps — agents, concurrency, tooling, past mistakes
 
 Process failures and the errors made along the way. Codegen walls live in
-`codegen-walls.md`, measurement traps in `measure-traps.md`.
+`codegen-walls.md`, measurement traps in `measure-traps.md` (start at §1:
+only the linked residue decides). Constraint cost of the C-only / no-asm
+rule is walls §6b.
 
 ---
 
@@ -574,3 +576,52 @@ budget to plan against. A round that budgets work from a header's byte figure is
 
 `scripts/linktest.sh` makes the re-measurement cost one command; there is no excuse for planning on the
 number instead.
+
+## 15. `rebrew test --json` PERSISTS state — including a per-function toolchain pin (round 997)
+
+`rebrew test <file>` reads like a measurement command. It is not: it writes back to
+`src/rebrew-functions.toml`. Round 997 ran it with an explicit `--toolchain msvc-6.0-sp5-pp` to test whether a
+different backend avoids the epilogue merge (§2), and the tool **persisted the pin into the metadata**:
+
+```
+$ rebrew test src/server.dll/.../cm_ExCopyEntityData.c --toolchain msvc-6.0-sp5-pp --json
+SIZE persisted → 912
+TOOLCHAIN persisted → msvc-6.0-sp5-pp
+```
+
+leaving a new line in the tool-owned file:
+
+```diff
+ ["SERVER.0x1000ec00"]
+ size = 912
+ status = "PROVEN"
+ blocker = "..."
+ blocker_delta = 481
++toolchain = "msvc-6.0-sp5-pp"
+```
+
+**Why this matters more than an ordinary stray write.** A per-*function* toolchain pin contradicts this
+project's rule that the toolchain is chosen per *translation unit* (`CMakeLists.txt` pins whole files via
+`COMPILE_OPTIONS`, and §142 requires every function in the file to survive the switch). `rebrew cmake-flags`
+**fails the configure** when one TU's functions resolve to different flags, so committing this line would
+have broken the build for a reason with no connection to the change that caused it — and the diff is one line
+in a 3,000-line generated file, which is exactly the kind of thing that rides along in a `git add -A`.
+
+Caught by reading the tool's banner output rather than only the JSON, and reverted with
+`git checkout -- src/rebrew-functions.toml`.
+
+**The rule.** `rebrew test`, `rebrew match` and `rebrew diff` are **writers**. Before any probe batch:
+
+```bash
+git status --short src/rebrew-functions.toml src/rebrew-data.toml   # must be clean before
+# ... run probes ...
+git diff src/rebrew-functions.toml src/rebrew-data.toml            # must be UNCHANGED after
+```
+
+The second check is the one that matters, and it is not covered by `gate.sh` — the gate runs `lint` and
+`verify`, neither of which flags a syntactically valid extra metadata key. A probe batch that leaves the
+metadata dirty is a probe batch whose measurements may also have been taken under a different backend than
+the one the build uses.
+
+**Related:** this is why `rebrew verify --full` is safe to run freely and `rebrew test --toolchain` is not —
+`verify` reads, `test` writes.
