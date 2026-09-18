@@ -49,6 +49,44 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-909: tried lifting 79 duplicated globals into a header — the single-symbol probe was +0, but the full lift broke the link and was reverted.**
+
+- **Tried the mandate's own criterion:** "if two or more TUs use a layout, it leaves the .c file."
+  `rebrew data` reports **79 globals declared in more than one TU with no shared header** —
+  `g_current_season` in 19 files, `g_citizen_count` in 15, `g_next_object_id` in 15. Types agree
+  across every declaration, so these are consistent duplicates rather than conflicts, and the
+  conflict detector correctly stays silent on them.
+- **Probed one symbol first, and it worked.** Moving `g_current_season` into `entity.h` and deleting
+  the local `extern` from `spiel62.c`: `rebrew test` unchanged (278/278 among others) and
+  **`linktest.sh` +0**. So the transformation is byte-neutral in isolation — an `extern` emits no
+  code.
+- **Scaled it to 27 symbols / 145 declaration sites, and it failed.** Build reached clean, but the
+  gate reported:
+  - **2 link errors** — `LNK2001: unresolved external symbol _ls_LoadBuildingEntityState`;
+  - **a demotion**, 281 → 280 passed and 264 → 263 byte-matched;
+  - and in the failure log, **`LNK4006` duplicate-definition warnings** between
+    `ls_LoadBuildingEntityState.c.obj` and `loadsave2.c.obj` for `_ls_LoadExistingEntities` and
+    three `s_...` strings — the objective's rule is explicit that LNK4006 is *a finding, never
+    noise*, and that it means "the same global is defined in several translation units".
+- **Two mechanisms, both from header plumbing rather than from the lift itself:**
+  1. `ahm_ExAllocAlchemist.c` hit **`C1001: INTERNAL COMPILER ERROR`** the moment it gained an
+     include — the documented interaction with its sp5-pp toolchain pin (`measure-traps.md` §6e).
+     Restoring that file alone was not enough; the damage spread.
+  2. `ls_LoadBuildingEntityState.c` is the **third sp5-pinned file**, and pulling `entity.h` into
+     that TU's include graph changed which objects define what, producing the LNK4006/LNK2001 pair.
+- **Also caught my own unsound guard twice.** The script that decided "which TUs already get these
+  declarations" used `'entity.h' in text`, which matched a **comment** in `spiel62.c`, and counted
+  `rebrew_globals.h` as sufficient when that header includes nothing. Both produced false negatives
+  that only the compiler found; the fix was to iterate the build until no `C2065` remained rather
+  than trust a text scan.
+- **Reverted the whole change**; baseline restored exactly — gate pass, residue **8,634**,
+  raw-link `.data` **21,836**, verify 281/283, byte-matched 264.
+- **Lesson, and it contradicts the usual rule here:** a **+0 single-symbol probe does not generalise**
+  when the change widens include graphs across two pinned toolchains. `docs/msvc6-c-shapes.md` §84
+  says order changes land and spellings do not, but this is neither — it is a *build-graph* change,
+  and the thing that decides is which objects end up defining which symbols. The correct scope is
+  probably one TU at a time, or excluding the three pinned files entirely; not attempted here.
+
 **Round-908: audited the remaining gate guards, then closed the last gap in the extent check.**
 
 - **Falsified the two guards round 907 did not reach, and confirmed the baselines are tight.**

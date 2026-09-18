@@ -418,6 +418,22 @@ have shown that costs one command. **Run it before choosing a function, not afte
 
 ## 6e. `cflags` in the metadata can crash the compiler on a CMake-flag-pinned file (round 877)
 
+**Round 909 extension: the pins also make *header* changes unsafe, and a +0 single-symbol probe does
+not generalise to them.** Lifting 27 duplicated globals into `entity.h` and deleting 145 local
+`extern` lines was **+0 at the link on one TU** (`spiel62.c`), so it looked safe by the project's
+usual standard. Scaled up it failed the gate: **`C1001: INTERNAL COMPILER ERROR`** as soon as
+`ahm_ExAllocAlchemist.c` gained the include (the round-877 mechanism, on a *different* pinned file),
+and **`LNK4006` duplicate definitions plus `LNK2001: unresolved _ls_LoadBuildingEntityState`** once
+`ls_LoadBuildingEntityState.c` — the third pin — had its include graph widened. Restoring the two
+pinned files individually did not help, because the damage is to *which objects define which
+symbols*, not to either file alone.
+
+**Rule:** the three sp5-pp-pinned files (`spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`,
+`ls_LoadBuildingEntityState.c`) should be excluded from any change that alters what a TU includes.
+And note the shape of the mistake: `linktest.sh` measures `.text` residue, which an `extern` line
+cannot move — so a passing probe says nothing about a build-graph change. **A +0 probe certifies the
+axis it measured and no other.** See round 909 in `TODO.md`.
+
 **Correction (round 878): the flags in this entry were misread.** `ls_LoadBuildingEntityState`
 (`0x100128f0`) compiles with **`/O2 /Gd /REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`** — the sp5-pp toolchain
 pin only, **no `/Oa /Ow`**. Round 877 read a neighbouring file's flag tail. The mechanism this
