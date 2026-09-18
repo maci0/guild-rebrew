@@ -86,7 +86,28 @@ DATA_BASELINE=${DATA_BASELINE:-21836}
 rc=0
 
 echo "== rebrew lint"
-rebrew lint 2>&1 | tail -1
+# Round 907: this check printed lint's output but never tested it, so it could
+# not fail the gate.  Proven inert: a deliberately broken FUNCTION identity
+# header produced "1 warnings" here and the gate still reported pass on every
+# other axis.  The objective is explicit that "zero warnings is the only
+# acceptable state", so the count is now read and enforced.  Lint exits 0 even
+# with warnings, so the exit code alone is not enough -- parse the summary.
+lint_out=$(rebrew lint 2>&1 | tail -1)
+echo "$lint_out"
+lint_bad=$(echo "$lint_out" | sed -n 's/.*: [0-9]* passed, \([0-9]*\) errors, \([0-9]*\) warnings.*/\1 \2/p')
+if [ -z "$lint_bad" ]; then
+    echo "could not read the lint summary"
+    rc=1
+else
+    lint_errs=${lint_bad% *}
+    lint_warns=${lint_bad#* }
+    if [ "$lint_errs" -ne 0 ] || [ "$lint_warns" -ne 0 ]; then
+        echo "REGRESSION: lint $lint_errs errors, $lint_warns warnings (both must be 0)"
+        rc=1
+    else
+        echo "lint clean: 0 errors, 0 warnings"
+    fi
+fi
 
 echo "== build (compile errors only)"
 cmake --build build -j8 > .scratch/gate-build.log 2>&1

@@ -120,6 +120,18 @@ the 8,634 as one cascade.
 
 ## 6. Three audit shapes that generate only false positives
 
+- **A check that only prints its result is not a check (round 907).** `gate.sh`'s lint step ran
+  `rebrew lint 2>&1 | tail -1` and echoed the line, with **no `rc=1` anywhere near it** — so it could
+  never fail the gate, on an objective whose stated rule is "zero warnings is the only acceptable
+  state". Two further traps in the same spot:
+  - **`rebrew lint` exits 0 even when it reports warnings**, so testing `$?` would not have fixed it.
+    The `N passed, E errors, W warnings` summary must be parsed.
+  - **A failing lint can look like a different failure.** Injecting a broken `FUNCTION:` VA did make
+    the gate fail — with `REGRESSION: 263 byte-matched`, because the bogus VA also demoted a function.
+    The gate went red for the wrong reason, and a warning that perturbed nothing would have passed
+    silently. **When a guard fires, confirm it fired for the reason you intended.**
+  **Rule: falsify every guard against a state where it must fire, and check the attribution, not just
+  the exit code.**
 - **A metadata size that crosses the next tracked symbol is wrong by construction — and the check is
   one command (round 905).** Sorting the sized `.data`/`.rdata` entries by VA and asking whether
   `va + size > next_va` found **exactly two** defects in the whole tree, both real, both invisible to

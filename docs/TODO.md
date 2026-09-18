@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-907: applied round 906's rule to the gate's own checks — the lint guard had never been able to fail.**
+
+- **Tried:** round 906's lesson was "a guard must be tested against a state where it should fire."
+  That was learned on `data_extent_check.py`, but it applies to every guard in `gate.sh`, and three
+  of the six had never been falsified. Audited all six.
+- **Found a real defect: the lint check was decorative.** It read
+  `rebrew lint 2>&1 | tail -1` and printed the line, with **no `rc=1` anywhere near it**. The
+  objective states "zero warnings is the only acceptable state", so this was a binding check that
+  could not bind.
+- **Proved it rather than asserting it.** Injected a broken `FUNCTION:` identity header
+  (`0x10017210` → `0xDEADBEEF`) in `spiel5.c`:
+  - lint reported **`1 warnings`** and the old gate line printed it verbatim;
+  - the gate did fail — but for the **wrong reason**: `REGRESSION: 263 byte-matched (EXACT+RELOC),
+    baseline is 264`, i.e. the bogus VA demoted a function. **Nothing attributed the failure to
+    lint.** With a warning that did *not* perturb a function, the gate would have passed.
+  - Also established that `rebrew lint` **exits 0 even with warnings**, so checking `$?` would not
+    have fixed it either — the summary line must be parsed.
+- **Fixed:** parse `N passed, E errors, W warnings` and fail when either is non-zero. Re-falsified
+  with the same injection: now prints `REGRESSION: lint 0 errors, 1 warnings (both must be 0)` and
+  sets `rc=1` — **the failure is attributed to lint for the first time**. Clean tree still prints
+  `lint clean: 0 errors, 0 warnings` and passes.
+- **Falsified a second guard for completeness.** The compile-error count
+  (`grep -cE "error C[0-9]+|error LNK"`) does set `rc`; injecting `this is not C;` produced **12
+  errors** and the guard fired. The verify-baseline guard was already exercised incidentally — it
+  caught the 264 → 263 demotion above.
+- **Measured:** gate pass with all six checks active — lint clean, 0 compile errors, verify 281/283,
+  byte-matched 264, residue **8,634**, raw-link `.data` **21,836**, data extents 195 checked, imports
+  100. No source or metadata change; both probe injections reverted and the tree is clean.
+
 **Round-906: turned round 905's one-off check into `scripts/data_extent_check.py`, wired into the gate — and fixed the check's own false negatives twice.**
 
 - **Tried:** round 905's overlap check lived as prose and two shell one-liners. This round made it a
