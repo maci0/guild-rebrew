@@ -97,3 +97,21 @@ Each cost real budget and each is the kind of mistake the next attempt would rep
   the declaration left the definition unattached. **The check is one grep:**
   `grep -rn '^[a-z].* g_<name>;' src/server.dll/`. Neither the `LONG` label (round 916) nor
   "zero slack" predicts this — only the definition's location does.
+- **Three pre-checks for a declaration lift, and where each came from.** All three are needed; the
+  first two cost a reverted batch apiece to learn:
+  1. **one identical spelling** across every declaring TU — otherwise the TUs disagree and it is a
+     type-conflict question, not a lift;
+  2. **the defining TU is not the BSS-commons block** (`gm_NextEntityQueryMatch.c`, the "Round-558"
+     comment) — moving the declaration leaves the definition unattached and the link reshuffles
+     (round 917: residue 8,634 → 91,327);
+  3. **the header agrees with every TU that will newly see it** (round 911: `C2371`).
+  **And a warning about the filter itself:** the candidate scan that applies these has been wrong
+  twice — a regex missed `int x = 0;` and reported 17 symbols as undefined, then placed a definition
+  in the wrong TU. **Use it to order candidates, not to decide.** The decision is lift → build →
+  gate.
+- **Check the *size* of a work-vein before spending rounds in it (round 918).** Five rounds
+  (909-913) went into a declaration-lift refactor before anyone counted the population: of 44
+  candidate symbols, **6 are blocked, 31 have a single declaration site** (not a dedup), leaving ~7.
+  Fifteen symbols were lifted at zero byte cost. **One `rebrew data --json` query would have shown
+  the vein was nearly empty before the third failed batch.** When a vein's payoff is "provably
+  byte-neutral", that is a signal it is not on the critical path — measure the population first.

@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-918: applied all three pre-checks — one more symbol landed, and the lift vein is now measured as exhausted.**
+
+- **Built the three pre-checks into one filter and ran it over the 66 remaining multi-TU globals:**
+  one identical spelling everywhere; the defining TU is not the BSS-commons block (round 917); the
+  header agrees with every TU (round 911). Result: **44 have a single spelling, of which 6 are
+  BSS-blocked.**
+- **Landed one genuinely new case: `g_stream_count`.** Its definition lives in `gm_Open.c` while
+  every declaration is in a *different* TU (`loadsave3.c`, `vfs_OpenStream.c`, `vfs4.c`) — a shape
+  none of the earlier batches covered. Gate pass, **byte-neutral**: residue **8,634**, raw-link
+  `.data` **21,836**, verify 281/283, byte-matched 264.
+- **Measured the population rather than guessing at it, and it is small.** Of the 44 single-spelling
+  candidates: 6 blocked on the BSS block, and of the rest only **7 have more than one declaration
+  site** — the other 31 are single-site string literals, where lifting a declaration used once is not
+  a dedup at all. So the remaining liftable population is roughly seven symbols, not dozens.
+- **Found my own candidate scan unreliable, twice, and stopped trusting it.** The definition-finder
+  first reported **17 symbols with no definition anywhere** — all false negatives from a regex that
+  missed `int x = 0;`. Fixed, it then placed `g_next_object_id`'s definition in
+  `cm_ExAllocAlchemist.c` when `grep` shows `spiel.c:33`. **A heuristic that has been wrong twice is
+  not evidence**, so the landing decision was made by lifting and gating, not by the filter —
+  the filter only ordered the candidates.
+- **Where the vein stands, stated with numbers rather than as a feeling.** Across rounds 909-918:
+  **15 symbols lifted, 0 bytes moved, 0 regressions kept**, against **six failed or reverted
+  attempts** and roughly four rounds spent discovering the three pre-checks. The remaining work is
+  ~7 symbols of the same kind, each byte-neutral. **This is not a path toward the objective** — it is
+  source hygiene that happens to be provably safe. Residue has been 8,634 for every round in this
+  stretch.
+- **Recommendation for the next round:** stop lifting. The objective's remaining clause is residue,
+  and the documented floor (`codegen-walls.md` §8) says the levers that would move it are excluded by
+  the constraints. Either a new lever appears or the completion bar needs redefining — but more
+  declaration moves will not change the number.
+
 **Round-917: found the *real* reason `g_current_season` can't be lifted — and wrecked the build directory doing it.**
 
 - **Retried the symbol round 915 excluded**, since round 916 had shown the `LONG` reason was bogus.

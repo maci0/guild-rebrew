@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "../../DieGildeAddOn/game/entity.h"
 
 void __cdecl free(void*);
 int __cdecl vfs_CleanupObject(char*);
@@ -54,7 +55,6 @@ int __cdecl vfs_CleanupObject(char* obj)
 // CloseVfsStream
 
 
-extern int g_stream_count;
 extern char g_stream_pool[1];
 
 int __cdecl CloseVfsStream(void* stream)

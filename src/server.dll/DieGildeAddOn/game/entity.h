@@ -7,6 +7,7 @@
 /* Shared entity/slot globals — majority types across TUs (Round-558). */
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern unsigned char g_slot_table[];
+extern int g_stream_count;
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 extern float g_output_share[];

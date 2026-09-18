@@ -5,6 +5,7 @@
 
 #include <ctype.h>
 #include <stdio.h>
+#include "../../../DieGildeAddOn/game/entity.h"
 extern unsigned int __cdecl crc32(unsigned int crc, unsigned char* buf, unsigned int len);
 extern int __cdecl crt_toupper(int current_char);
 /* Opens a VFS stream over a caller buffer. Parses the mode flags
@@ -193,7 +194,6 @@ extern int __cdecl crt_toupper(int current_char);
  * reload does emit the target's two `[esp+0x18]` loads and its push order,
  * but costs 4 bytes of object (obj 705) for no match_count. */
 
-extern int g_stream_count;
 extern void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
 extern void __cdecl m_pool_free(void* pool, void* item);
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
