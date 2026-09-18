@@ -49,6 +49,44 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-942: settled the `/Ow` axis one carrier at a time — 2 inert, 1 harmful, 1 breaks the budget. No source change.**
+
+- **Round 941 left the axis half-tested**: `/Ow` paid on `gv_ExAllocGraveyardWorker` (-5) but its
+  six-carrier sweep collapsed the composition, so those six were unresolved. Tested **one at a time**
+  this round, each with the flag confirmed on the emitted command line first, then build + link + gate:
+  | carrier | residue | verdict |
+  |---|---|---|
+  | `cm_ExCopyEntityData` | 462 | **inert** — 8,628 unchanged, composition healthy (246 placed) |
+  | `ServerMainThread` | 367 | **inert** — 8,628 unchanged, 246 placed |
+  | `gm_AllocGebaeude` | 327 | **harmful — 8,628 -> 9,113 (+485)**, reverted |
+  | `vfs_OpenStream` | 238 | **breaks the composition** — `VA: 0`, 74.59% residue, reverted |
+  | `spiel_dumpD`, `ahm_ExAllocAlchemist` | — | not reached; both are sp5-pp pinned (see below) |
+  **`/Ow` is now fully enumerated across all 12 carriers: 3 gains, 4 inert-or-worse, and the rest either
+  pinned or unable to take it.** `gm_AllocGebaeude`'s **+485** is the largest single regression this
+  axis has produced and alone explains a third of round 941's collapsed aggregate.
+- **A real CMake trap found while testing the pinned files, and it invalidates round 941's sweep reasoning
+  in part.** `set_source_files_properties(... COMPILE_OPTIONS ...)` **replaces** the whole option list for
+  that source — it does not append. Round 941's sweep added `/Ow` to three files, two of which
+  (`spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`) already carried
+  `/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp`: the new call **silently dropped the toolchain pin**, exactly the
+  trap rounds 879-880 recorded (measure-traps §6f). So part of that collapse was not `/Ow` at all.
+  **To add a flag to a pinned file the pin and the flag must go in ONE list** —
+  `COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp;/Ow"`.
+- **Self-inflicted error worth recording.** While removing my duplicate `spiel_dumpD.c` entry I deleted
+  the line from the *existing pin* instead, leaving `set_source_files_properties(PROPERTIES ...)` with no
+  file argument — a silent no-op that would have **un-pinned `spiel_dumpD.c`**. Caught by grepping the
+  emitted command line for `/REBREW_TOOLCHAIN`, not by any build error (it compiles either way).
+  Recovered with `git checkout -- CMakeLists.txt`; all **3 pins verified intact** afterwards.
+  **The guard is to check the emitted command line for every flag a file is supposed to carry, both the
+  old and the new one** — this is the second time this session that reading `build.make` caught what the
+  build said nothing about.
+- **Also re-confirmed round 941's §12 lesson twice:** after each flag revert, `rm -rf build/split_poc`
+  alone was insufficient (stale CMake objects kept the old flag: `VA: 0`, 61-75% residue); only
+  `rm -rf build` + reconfigure + relink restored 8,628.
+- **Measured:** tree restored to the committed round-941 state and verified — gate pass, composition 246
+  placed, residue **8,628**, raw-link `.data` **21,481**, verify 281/283, byte-matched 264, imports 100,
+  wine load OK. No net source change.
+
 **Round-941: `/Ow` pays on one more carrier — residue 8,633 -> 8,628 (-5). Second win of the session.**
 
 - **Found by extending rounds 919-920's `/Ow` sweep to a carrier they never tested.**

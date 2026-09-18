@@ -544,6 +544,37 @@ the zlib `COMPILE_FLAGS` reach their command lines, and of 57 files carrying met
 real flags are missing** — the 48 apparent misses are all `/DREBREW_ALLOW_NAKED`, which
 `C_DEFINES` supplies globally as `-DREBREW_ALLOW_NAKED=1`.
 
+## 6f-bis. `COMPILE_OPTIONS` REPLACES a source's option list — adding a flag can silently drop a pin (round 942)
+
+`set_source_files_properties(<src> PROPERTIES COMPILE_OPTIONS "/Ow")` **replaces** whatever
+`COMPILE_OPTIONS` that source already had. It does not append. Three files in this tree carry a
+per-file toolchain pin as `COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp"`, so adding a second
+`set_source_files_properties` call for one of them **silently removes the pin** — the build succeeds,
+the file compiles, and every measurement taken is of the wrong toolchain. Round 941's `/Ow` sweep did
+exactly this to `spiel_dumpD.c` and `ahm_ExAllocAlchemist.c`, which is why part of that sweep's collapse
+was not `/Ow` at all.
+
+**To add a flag to a pinned file, put both in ONE list:**
+
+```cmake
+set_source_files_properties(
+  "${PROJECT_SOURCE_DIR}/src/server.dll/.../file.c"
+  PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp;/Ow")
+```
+
+**And verify on the emitted command line, not in CMakeLists:**
+
+```sh
+awk '/<file>.c.obj: \/home/{f=1} f&&/rebrew-cmake-cl/{print; exit}' \
+    build/CMakeFiles/server_dll.dir/build.make | tr ' ' '\n' | grep -E '^/(REBREW|Ow|O2|Gd)'
+```
+
+That must show **both** the old flag and the new one. A missing `/REBREW_TOOLCHAIN` is invisible to the
+compiler — nothing warns, because the flag is consumed by `rebrew-cmake-cl` and stripped before the real
+compile. Note also that `set_source_files_properties(PROPERTIES ...)` **with no source argument** is a
+silent no-op; that is the shape that results if the source line is deleted from an existing pin while
+trying to remove a duplicate.
+
 ## 6g. Two ways a whole-image instruction census lies, and both look like a finding (round 923)
 
 A mnemonic census over both images is a good instrument — it converts "residue is 6% of `.text`"
