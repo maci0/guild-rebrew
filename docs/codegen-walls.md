@@ -400,6 +400,42 @@ The source has `list[2] = 0x12;` early, between `base = ...` and `entity = ...`;
 elsewhere. Moving it to the end of the initialiser block was probed and measures **8,628 -> 8,641 (+13)**,
 so the shipped position stays.
 
+**Round 975 replaced the proxy with the real signal.** Instead of the first target-differing branch, each
+carrier's **first differing byte** is located and the instruction covering it is read from each side:
+
+| carrier | first byte | reference | ours | kind |
+|---|---|---|---|---|
+| `_gm_AllocSpieler` | +0xaa | `lea edx,[edx+0x100358fc]` | `mov [ebp],bx` | different mnemonic |
+| `CrashDump` | +0x2 | `sub esp,0x280` | `sub esp,0x284` | operand |
+| `cm_ExSellObjekt` | +0x2c | `mov [esp+0x14],edi` | `mov [esp+0x24],edi` | operand |
+| `ls_LoadBuildingEntityState` | +0x3c | `jle 0x10012dea` | `jle 0x10012de8` | branch target |
+| `cm_ExCopyEntityData` | +0x30 | `jne 0x1000ed8e` | `jne 0x1000ed8c` | branch target |
+| `gv_ExAllocGraveyardWorker` | +0x107 | `jle 0x10011d77` | `jle 0x10011cdb` | branch target |
+| `ServerMainThread` | +0x3c7 | `je 0x10009827` | `je 0x1000982a` | branch target |
+| `gm_AllocGebaeude` | +0x60 | `mov edx,[0x10030b6c]` | `mov [ebp-0xc],eax` | operand |
+| `vfs_OpenStream` | +0x36 | `cmp byte [eax],0` | `mov al,[eax]` | different mnemonic |
+| `gm_FindNextFilteredEntity` | +0x6 | `xor cl,cl` | `test eax,eax` | different mnemonic |
+| `ahm_ExAllocAlchemist` | +0xcc | `lea edx,[eax+eax*8]` | `lea eax,[eax+eax*8]` | operand (register) |
+| `gm_CheckInventoryCapacity` | +0x13 | `xor ebp,ebp` | `mov [esp+0x18],0x12` | different mnemonic |
+| `m_AllocTracked` | +0x11 | `push esi` | `cmp eax,ebx` | **two instructions swapped** |
+| `srv_LoadBuf` | +0x50 | `push eax` | `mov [ebp+0x2c],ecx` | different mnemonic |
+| `gm_ObjectsAvailble` | +0x10d | `test ebx,ebx` | `test edi,edi` | operand (register) |
+| `vfs_ReadCompressed` | +0x9a | `mov edi,eax` | `test eax,eax` | different mnemonic |
+| `cm_ExProdObjekt` | +0xcd | `mov edx,[0x101de450]` | `mov ebx,[ebp+0x16]` | operand |
+| `cm_ProcessCommandQueue` | +0x37 | `jne 0x1000ab08` | `jne 0x1000ab04` | branch target |
+| `gm_CalculateProductionValue` | +0xe4 | `fxch st(1)` | `cmp [esi],0x17` | **adjacent pair swap** |
+
+**This is the table to work from**, not the branch census: eight carriers diverge on something other than
+a branch target, and three (`m_AllocTracked`, `gm_CalculateProductionValue`, and `gm_CheckInventoryCapacity`)
+on something the branch census could not see at all.
+
+**And `m_AllocTracked` is the sharpest example of the proxy's failure.** It has **zero** target-differing
+branches, so round 973 filed it under register-role rotation — but its first differing byte is two
+instructions **swapped in the prologue** (`push esi` before `cmp eax,ebx` in the reference, after it in
+ours), which is *scheduling*, not register naming. Hoisting `g_alloc_counter++;` above the guard to
+reproduce it was probed and measures **8,628 -> 8,699 (+71)**, so the shipped order stays; the file's own
+header already lists the neighbouring spellings as inert.
+
 **So the census classifies by the *first target-differing branch*, which is a proxy, not by the first
 divergence.** That is still useful for partitioning the set (a carrier with zero such branches cannot be a
 placement story) but it must not be used to order *work*: for a carrier with one or two target-differing

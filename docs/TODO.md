@@ -49,6 +49,30 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-975: replaced the class proxy with each carrier's real first divergence; found a second misclassification.**
+
+- **Round 974 showed the branch census is a proxy.** This round located each carrier's **first differing
+  byte** and read the instruction covering it on both sides — the unambiguous signal. The resulting table
+  is recorded in `codegen-walls.md` §13 and is what a future round should work from.
+- **It differs from the census on eight carriers.** Three diverge on something the branch census could
+  not see at all:
+  - **`m_AllocTracked`** — **zero** target-differing branches, so round 973 filed it under register-role
+    rotation. Its real first divergence is **two instructions swapped in the prologue**: reference
+    `push esi` *then* `cmp eax,ebx`; ours the reverse. That is **scheduling**, not register naming.
+    **Probed hoisting `g_alloc_counter++;` above the guard: 8,628 -> 8,699 (+71)**, reverted; the file's
+    header already lists the neighbouring spellings as inert.
+  - **`gm_CalculateProductionValue`** — the known adjacent `fxch`/`cmp` pair swap (rounds 954/196).
+  - **`gm_CheckInventoryCapacity`** — the statement-order divergence round 974 found.
+- **The measurement method, worth reusing:** don't compare instruction streams positionally (they desync —
+  measure-traps §13). Take the **lowest byte offset where the two images differ**, then find the
+  instruction whose `[address, address+size)` covers it on *each* side. That gives the true first
+  divergence and each side's instruction there, without any alignment assumption.
+- **Reclassification:** block placement 8, instruction-form 7, branch-target 5 (overlapping), register-role
+  6, scheduling 1, statement order 1 — and the important part is not the counts but that **every carrier's
+  first divergence is now read from the binary rather than inferred from a proxy**.
+- **Measured:** probe reverted; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-974: audited the classification and found one carrier misclassified — the census uses a proxy.**
 
 - **Round 973 classified all 19 carriers into three classes. Tested whether that map is right** by
