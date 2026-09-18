@@ -1313,3 +1313,49 @@ reference VA") is what surfaced it — that guard earned its place.
 both `slot+0x20` and `slot+0x14`) still measures **+16 obj / span overflow**, so the +16 is caused by the
 single extra frame slot, not by the number of cached values. Any caching fix on that carrier must first free
 16 bytes elsewhere in the same object.
+
+## 23. Counting instructions from the shipped image measures postlink's output, not the object (round 990)
+
+Round 990 set out to free the 16 bytes blocking `gm_AllocSpieler`'s caching fix, and began by asking where
+our object is larger than the reference. Decoding both images from `0x10018850` gave:
+
+```
+REF insns 1056 (bytes 3689)   BLD insns 1014 (bytes 3577)
+```
+
+which reads as "our object is 112 bytes *shorter*, with 119 bytes of padding" — and that is wrong. Both
+numbers describe the **shipped** `build/server.dll`, which postlink has already rewritten; they are not the
+object the linker lays out.
+
+**The object, read directly from the COFF:**
+
+```
+.text raw 3696 bytes, 1061 instructions decoded, code ends at offset 0xe70 = 3696
+trailing nop padding: 7 bytes (90909090909090), matching the reference span
+```
+
+**1061 instructions filling all 3696 bytes — zero headroom**, exactly as `object_span_check.py` says. The
+"1014 instructions / 119 bytes of padding" figure was an artifact of the decode window: disassembling 3696
+bytes from `0x10018850` in the *shipped* image stops early because postlink has rewritten bytes the stream
+crosses.
+
+**The reliable way to count**, which also resolves the discrepancy with §141:
+
+| source | instructions | note |
+|---|---|---|
+| reference **image**, 3696-byte span, from the function entry | **1063** | truth for the reference |
+| our **object** `.text`, decoded from its start | **1061** | truth for ours |
+| our **shipped image**, same window | 1014 | postlink-rewritten; **not** a measure of code size |
+
+Net difference: **2 instructions** — which agrees with §141's "15 net instructions across the eight heaviest
+rows" in spirit, while §141's per-row `1054 vs 1056` figures came from the same shipped-image decode and
+carry the same caveat.
+
+**Two lessons.** (1) `build/server.dll` is postlink output; never count instructions in it and call the
+number the object's. Read `build/CMakeFiles/server_dll.dir/<...>.c.obj` instead. (2) A disassembly window
+that "ends early" is a signal that the stream desynchronised, not evidence about how much code exists —
+§21 is the same failure one level up.
+
+**Outcome for the round's actual goal:** the 16 bytes cannot be found by shrinking, because the object is
+already exactly at its span and its code fills it. Any editing fix must be **size-neutral**, not merely
+"small enough" — which is why both caching probes measured +16 and the composition collapsed.
