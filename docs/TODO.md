@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-973: the residue map is complete and classified — all residue is inside the unmatched functions, in three walled classes.**
+
+- **Answered "is anything outside the unmatched functions?"** with the tool's own attribution:
+  ```
+  0x21b4 of 0x21b4 differing bytes are inside the 19 functions `rebrew verify`
+  reports as not byte-matched; 0x0 are not
+  ```
+  **Nothing spills outside them** — no pad byte, no inter-function gap, no table, no section. Shipped
+  `.data`/`.rdata`/`.reloc`/headers differ by `0x0` (round 936 §9b). So the `.text` residue attribution
+  has no measurement gap, and the "646 bytes elsewhere" class of worry is closed.
+- **Combined rounds 970-972 into a complete class map** (`scripts/branch_census.py` + hand checks), now
+  recorded as `codegen-walls.md` §13:
+  | class | carriers |
+  |---|---|
+  | **block placement** | `gm_AllocSpieler` (21 target-differing branches), `ServerMainThread` (14), `cm_ExCopyEntityData` (8), `cm_ExSellObjekt` (7), `CrashDump` (7), `gm_AllocGebaeude` (4), `gm_FindNextFilteredEntity` (3), `ls_LoadBuildingEntityState` (2), `cm_ProcessCommandQueue` (2), `gm_CheckInventoryCapacity` (1) |
+  | **epilogue merge** | `gv_ExAllocGraveyardWorker` |
+  | **register-role rotation** | the **eight carriers with zero target-differing branches** |
+  **Every carrier is assigned a class, and every class has a named mechanism** — backend layout pass,
+  §2's epilogue folding, and allocator Findings 62-65 — not merely an exhaustion argument.
+- **The point of recording it as one section:** a future round should not re-derive the map. The open
+  question is not *which* carrier or *what kind* of divergence, both of which are now measured, but
+  whether any lever exists for a class whose every member has been probed — and for three independent
+  classes the answer so far is no.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-972: verified the zero-branch-difference carriers are all the same closed class.**
 
 - **Round 971's census partitioned the carriers: eight have zero branch-target differences.** Checked the

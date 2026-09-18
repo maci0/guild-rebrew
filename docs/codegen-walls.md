@@ -362,6 +362,38 @@ every later symbol and fails the composition check. That is not a hypothesis: it
    scores 277 against the shipped 450, and "`/G3`..`/G4` with `/Gd /Oy /Op` … so there is no CFLAGS
    lever"). So the headroom exists and is deliberately unused.
 
+### 13. The residue is fully attributed and classified (round 973)
+
+Three questions have now been answered by measurement rather than by argument: *where* the residue is,
+*whether* it is inside the functions it is attributed to, and *what kind* each carrier's divergence is.
+
+**Where.** All 8,628 differing bytes, attributed per function:
+
+```
+0x21b4 of 0x21b4 differing bytes are inside the 19 functions `rebrew verify`
+reports as not byte-matched; 0x0 are not
+```
+
+**Nothing spills outside the unmatched functions** — no pad, no inter-function gap, no table. And the
+shipped `.data`, `.rdata`, `.reloc` and headers differ by `0x0` (section 9b).
+
+**What kind**, by the round-971 branch-target census (`scripts/branch_census.py`):
+
+| class | carriers | evidence |
+|---|---|---|
+| **block placement** | `gm_AllocSpieler` (21 target-differing branches), `ServerMainThread` (14), `cm_ExSellObjekt` (7), `CrashDump` (7), `cm_ExCopyEntityData` (8), `gm_AllocGebaeude` (4), `gm_FindNextFilteredEntity` (3), `ls_LoadBuildingEntityState` (2), `cm_ProcessCommandQueue` (2), `gm_CheckInventoryCapacity` (1) | a branch whose mnemonic matches but whose destination does not |
+| **epilogue merge** | `gv_ExAllocGraveyardWorker` (3 branches to a duplicate epilogue 0x9c away) | §2 |
+| **register-role rotation** | `vfs_OpenStream`, `ahm_ExAllocAlchemist`, `m_AllocTracked`, `srv_LoadBuf`, `gm_ObjectsAvailble`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue` — **zero** target-differing branches | Findings 62/63; verified on `gm_ObjectsAvailble` (a consistent `ebx`/`edi` exchange, 235 instructions both sides) |
+
+**Every class is walled, and each has a named mechanism rather than an exhaustion argument:** block
+placement is the backend layout pass (§17 of the shapes doc; and `cm_ProcessCommandQueue` is closed by
+proof — the target's join test is provably-true dead code); epilogue merge is §2; register rotation is
+allocator Findings 62-65, whose sweep showed no source-level naming reaches the choice.
+
+**Consequence.** A future round should not re-derive the map. The open question is not *which* carrier or
+*what kind*, but whether any lever exists for a class whose every member has been measured — and for three
+independent classes the answer so far is no.
+
 **Read this as a limit of the toolchain-plus-constraints, not of the source.** Every function
 compiles, links at the reference's exact VA, and the deliverable is byte-identical outside
 `.text` (8,634 of 8,634 differing bytes are inside `.text`; `.data`, `.rdata`, `.reloc`,
