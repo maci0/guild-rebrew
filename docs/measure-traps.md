@@ -1098,3 +1098,72 @@ Two tells that the failure is the designed one, not a real break:
 (round 958 at the time), a `git bisect` on "build fails" would report that commit and send the next round
 hunting a source change that never happened. Confirm the *designed* failure first by checking for a compile
 error and by diffing the tree, then build `--target final` and read the residue table.
+
+## 18. A raw dword scan and a disassembler op_str scan disagree — neither alone is proof of absence (round 977)
+
+Chasing whether `g_query_limit`'s recorded VA (`0x10035450`, `src/rebrew-data.toml:606`) was real, two scans
+of the *same* reference gave opposite answers:
+
+- A `capstone` scan of every `.text` instruction, testing `hex(0x10035450) in ins.op_str`, reported
+  **zero** hits for `0x10035450` and two for `0x100a8c30`.
+- A raw 4-byte little-endian scan of the whole file reported **15** hits for `0x10035450`.
+
+The capstone result was taken as evidence that the toml carried a wrong address for the symbol, and that
+`rebrew data --json` had collided two symbols under one name. Both conclusions were wrong.
+
+**The capstone scan was the broken one**, twice over:
+
+1. It was handed `tdata = d[ptr:]` (a slice starting at the section's **file** offset) but disassembled at
+   `tva` and then compared against `ins.op_str`. The scan loop iterated the slice from index 0 while the
+   addresses it printed came from `tva`; every per-hit offset needed `tva + h`, not `h`. Hits were real but
+   the printed addresses were shifted by the section VA, so they never matched the pattern being searched.
+2. Independently, `mov eax, dword ptr [0x10035450]` **is** rendered by this capstone build as an absolute
+   operand, so a correct scan *would* have found it — the failure was purely the indexing error above.
+
+Decoding the raw hits directly settled it: `0x10035450` is a real `.bss` counter, and the reference touches
+it 15 times (`mov eax,[0x10035450]` at `0x10014239` and `0x10015f2e`, `inc`/`dec` forms at `0x10015d82`
+and `0x10015d89`, among others). The toml address is correct and `rebrew data --json` is not lying.
+
+**The check, before concluding a tool is wrong from an absence:** confirm the absence with a scan that
+shares no code with the first one.
+
+```bash
+# raw dword scan: independent of any disassembler's operand formatting and of slicing bugs
+python3 -c "d=open('original/Server/server.dll','rb').read(); \
+  print(sum(1 for i in range(len(d)) if d[i:i+4]==(0x10035450).to_bytes(4,'little')))"
+```
+
+An "address is never referenced" result from a single disassembler scan is not evidence of absence — it is
+evidence about that scan. This is the fourth self-inflicted measurement error recorded in this document,
+and like the others it produced a plausible, confident, wrong finding (a claimed `rebrew` bug) that only a
+second independent check dissolved.
+
+## 19. `rebrew todo`'s ROI score is flat across `start-data`, so its ordering carries no signal (round 977)
+
+`rebrew todo --json` is the objective's designated "pick highest-ROI item first" tool, and the round brief
+routes work by its order. For the `start-data` category that order is **meaningless**: every one of the 207
+items scores exactly `10.0`.
+
+```
+start-data roi_score histogram: {10.0: 207}
+```
+
+The top-20 page therefore reads as a ranked list while being an arbitrary sample — and this round's brief
+pointed at it ("`rebrew todo` shows 246 start-data items and 34 data-drift"). Worked in that order, a round
+starts on `__imp__GetLocalTime@4`, an **IAT slot at the head of `.rdata`** (`0x10024000`+) that the linker
+supplies and no C source can affect. 84 of the 207 are `__imp_*` of this kind.
+
+`improve-match` is not flat — `gm_AllocSpieler` scores 39.1 and `ServerMainThread` 15.9, both real. The
+flatness is specific to `start-data`.
+
+**The check.** Histogram the ROI column before trusting the order:
+
+```bash
+rebrew todo -c start-data -n 300 --json | \
+  python3 -c "import json,sys,collections; \
+  print(collections.Counter(i['roi_score'] for i in json.load(sys.stdin)['items']))"
+```
+
+A single-valued histogram means the ranking is not a ranking. Rank by measured residue instead
+(`scripts/linktest.sh` / `scripts/first_divergence.py`), which is what the objective's own "judge candidates
+at the link, not with object scores" rule already says.

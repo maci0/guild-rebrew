@@ -571,3 +571,41 @@ leaving a hole.
 - **`.data` residue is invisible to a `.text`-only objective check.** The gate could not see this
   half of the win until round 863 added the raw-link `.data` ceiling. When a source change alters
   a literal's placement, measure both sections.
+
+### 14. The `.data` axis is closed: the shipped file's non-`.text` bytes already match exactly (round 977)
+
+The round brief routes work to `.data`/`.rdata`/`.bss`, types and structs. Measured this round, that vein
+is **already empty in the deliverable**, and the round-977 numbers say so independently of `rebrew`:
+
+```
+$ cmp -l original/Server/server.dll build/server.dll | wc -l
+8628
+```
+
+All 8,628 differing bytes are inside `.text`. Every non-`.text` byte already matches — confirmed three ways
+that share no code:
+
+| check | result |
+|---|---|
+| `postlink_residual.py`, shipped file | `.data` differing `0x0`, `.rdata` `0x0`, `.reloc` `0x0`, headers `0x0` |
+| `cmp` over the whole file (above) | 8,628, i.e. exactly the `.text` residue 0x21b4 |
+| `cmp` over `.data`+`.bss` alone (from `0x22846` to `0x174059c`) | **0** differing bytes |
+
+**Why the round brief's `.data` framing is now a dead end.** `rebrew postlink`'s data fixer *copies* the
+reference's `.data` wholesale — the baseline log records `0x7806` non-`.text` bytes overwritten per link.
+So the raw-link `.data` figure the gate enforces as a ceiling (`21,481`) measures the **build's**
+placement, not the deliverable's content. The objective's "every data byte matching" clause is satisfied
+in the shipped file today; the raw-link number can only be driven to 0 by reconstructing the original's
+`.data` COMDAT order, which is linker-hash-driven (documented at `CMakeLists.txt:443-448`) and not
+reachable from C.
+
+**Consequence for the remaining work.** The objective's only unmet clause is `residue at zero`, and the
+residue is 100% `.text` inside 19 functions across the three walled classes in §13. `.data`, types and
+structs cannot move it. A round that spends its budget on `rebrew todo`'s `start-data` list is spending it
+on a vein that is already mined out.
+
+**The `start-data` list itself.** `rebrew todo -c start-data -n 300` returns 207 items: 84 are `__imp_*`
+IAT slots at the head of `.rdata` (`0x10024000`+), which are linker-supplied and not reversible; the other
+123 are `extern`-only declarations whose addresses are already correct in `src/rebrew-data.toml`. Both
+kinds show `status: "UNCHECKED"` and ROI 10.0 regardless of difficulty, so the list's ordering carries no
+signal — see measure-traps §19.

@@ -27148,3 +27148,38 @@ the anchor that reproduces it. The `m_AllocTracked` result matches its bisected 
 residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Baseline re-snapshotted
 (`.scratch/residue_base.log`) after the clean rebuild; the copy in the tree was from Sep 17 and predated
 round 975.
+
+## Round 977 — the `.data` vein is already mined out; `rebrew todo`'s start-data order is flat
+
+The brief routed this round to `.data`/`.rdata`/`.bss`, types and structs. Measured, that vein is **empty in
+the deliverable**, and it is settled by three checks sharing no code:
+
+| check | result |
+|---|---|
+| `cmp -l original/Server/server.dll build/server.dll \| wc -l` | 8628 — exactly the `.text` residue, so all of it is `.text` |
+| `cmp` over `.data`+`.bss` alone (`0x22846`..`0x174059c`) | **0** differing bytes |
+| `postlink_residual.py` on the shipped file | `.data` `0x0`, `.rdata` `0x0`, `.reloc` `0x0`, headers `0x0` |
+
+The objective's "every data byte matching" clause is therefore **already satisfied in the shipped file**.
+The gate's raw-link `.data` ceiling (21,481) measures the *build's* placement, not the deliverable's
+content: `rebrew postlink`'s data fixer copies the reference's `.data` wholesale (`0x7806` non-`.text`
+bytes overwritten per link). Driving that number to 0 needs the original's `.data` COMDAT order, which is
+linker-hash-driven (`CMakeLists.txt:443-448`) and unreachable from C. → codegen-walls §14.
+
+**The `start-data` list is not a work queue.** `rebrew todo -c start-data -n 300 --json` returns 207 items
+all scoring exactly **10.0**, so the "highest-ROI first" order carries no signal: 84 are `__imp_*` IAT slots
+at the head of `.rdata` (`0x10024000`+, linker-supplied, not reversible) and the other 123 are `extern`-only
+declarations whose addresses `src/rebrew-data.toml` already holds correctly. Ranked by measured residue the
+only two live items are `gm_AllocSpieler` (39.1) and `ServerMainThread` (15.9), both `improve-match`. →
+measure-traps §19.
+
+**Self-inflicted measurement error #4 (round 977).** Concluding `g_query_limit`'s recorded VA was wrong took
+two bad scans: a `capstone` sweep that sliced `.text` at its *file* offset but printed offsets relative to
+its *VA* (so every hit missed the pattern), and a conclusion drawn from that single absence. The raw dword
+scan found `0x10035450` referenced **15 times** in `.text` (`mov eax,[0x10035450]` at `0x10014239` and
+`0x10015f2e`, `inc`/`dec` at `0x10015d82`/`0x10015d89`). The toml was right; the scan was wrong; the
+"`rebrew` collision bug" never existed. → measure-traps §18.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, data extents 195 clean, imports 100, wine load OK. No source edit this
+round; no baseline moved.
