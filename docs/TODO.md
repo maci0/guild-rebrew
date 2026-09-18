@@ -49,6 +49,29 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-929: ran shapes §38's diagnostic on CrashDump — the register demand is the stack-walk loop.**
+
+- **Took round 928's open half (the surplus callee-saved register) and applied §38's own procedure:**
+  "delete the loop and recompile; if the head then matches, the loop is the blocker". This function has
+  four loops; removed one at a time, reading only the object's prologue bytes:
+  | loop neutralised | prologue |
+  |---|---|
+  | none (baseline) | `81 ec 84 02 00 00` = `sub esp,0x284` |
+  | decrypt dword loop (`key` rotate-XOR) | `sub esp,0x284` — not the blocker |
+  | inner `while (nInstr--)` ReadProcessMemory probe | `sub esp,0x284` — not the blocker |
+  | outer stack-walk `for (;;)` (leading `break`) | `81 ec 5c 02 00 00` = **`sub esp,0x25c`** |
+  **The whole surplus is the stack-walk loop's live set, located rather than inferred.** The two loops
+  that *look* heavier in the source are excluded, which is the point of running the diagnostic: a round
+  budgeting for the decrypt loop or the probe loop would have spent both cheap candidates and found
+  nothing.
+- **One reduction attempt, rejected.** Dropping `volatile` from `nFrames` (live across the whole walk:
+  `nFrames = 0x800` before, `nFrames--` and `<= 0` inside) measures **residue 8,633 -> 8,682 (+49)**.
+  The volatile read is load-bearing, as shapes §3 and allocator Finding 61 predict. The loop's demand
+  must come down by removing *values*, not by requalifying them.
+- **Measured:** all probes reverted (file byte-identical to HEAD, verified with `git show HEAD:...` and
+  `diff`); residue **8,633**, raw-link `.data` **21,481**, verify 281/283, byte-matched 264. No source
+  change.
+
 **Round-928: the frame and the register surplus are separate readouts — reproduced §81 and split it in two.**
 
 - **Confirmed the round's data focus is exhausted before spending the round on it:** `rebrew verify --data`

@@ -2844,7 +2844,33 @@ That matters for targeting: a round that goes after the frame is chasing the hal
 that is already known-reachable-and-still-losing, while the register count is the
 half no edit has yet touched. Per section 38 the entry push set is decided by the
 *loop's* register demand, so the lever is reducing how many callee-saved values the
-body needs — not respelling the entry, which every probe here has shown inert. The remaining reference-order differences
+body needs — not respelling the entry, which every probe here has shown inert.
+
+**Round 929 then ran section 38's own diagnostic here, and it localised the demand.**
+The procedure is "delete the loop and recompile; if the head then matches, the loop
+is the blocker". Applied to this function's four loops, one at a time, reading only
+the object's prologue bytes:
+
+| loop removed | prologue |
+|---|---|
+| none (baseline) | `81 ec 84 02 00 00` = `sub esp,0x284` |
+| decrypt dword loop (the `key` rotate-XOR) | `sub esp,0x284` — **not the blocker** |
+| inner `while (nInstr--)` ReadProcessMemory probe | `sub esp,0x284` — **not the blocker** |
+| the outer stack-walk `for (;;)` (neutralised with a leading `break`) | `81 ec 5c 02 00 00` = **`sub esp,0x25c`** |
+
+So the entire surplus is the **stack-walk loop's** live set, and it is located rather
+than inferred. That is the loop to reduce, and it is worth stating why the others
+are excluded: a round that budgeted for "the decrypt loop" or "the probe loop" — both
+of which look heavier in the source — would have found nothing, and the two cheap
+candidates would have been consumed before the real one was tried.
+
+**One reduction attempt, rejected on measurement.** `nFrames` is declared `volatile`
+and live across the whole walk (`nFrames = 0x800` before it, `nFrames--` and the `<= 0`
+test inside). Dropping the qualifier is the most direct way to cut its register
+pressure, and it measures **residue 8,633 -> 8,682 (+49)**: the volatile read is
+load-bearing here as section 3 and allocator Finding 61 predict, and the file header's
+round-129 note records a related `nFrames` probe. The loop's demand has to come down
+by removing *values*, not by changing how they are qualified. The remaining reference-order differences
 (deferred `push ebx; push edi` at 0x1000282c; `pCtx->Esp` parked in ebx from
 0x10002931 across the date/time region) are the real levers, and they would
 have to land *with* the frame in one change, not before it.
