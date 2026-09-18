@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-952: re-measured the documented `gm_AllocSpieler` slot[9] bug fix — still loses, now +184 — and named what the shape difference actually is.**
+
+- **Targeted the one open problem statement in the tree that is both a real bug and a size reducer.**
+  `gm_AllocSpieler.c`'s header records a **known semantic bug** (the `arg8 != 2` arm stores `slot[0x166]`
+  = 0 where the reference stores `arg8`) with a fix that "compiles 10 bytes shorter (obj 3689 -> 3679) and
+  costs +393 linked via tail desync", and says: *"Revisit only with a length-neutral spelling or a
+  resynced tail."* Round 950's span filter says only a size-neutral or shrinking edit can land, and this
+  is a shrinker, so it was the best remaining candidate.
+- **Spelled out the reference's own shape in full and measured it.** Disassembled
+  `0x10018cd4`-`0x10018cec` and found the true form:
+  ```
+  mov  eax,[esp+0x44c]      ; load arg8
+  cmp  eax,2
+  jne  <skip the call>      ; skips ONLY the call, not the store
+  ...
+  mov  [ebp+9],al           ; ONE store after the join, reusing eax
+  ```
+  Implemented exactly that (`n = arg8; if (arg8 == 2) n = call(); slot[9] = (char) n;`):
+  **residue 8,628 -> 8,812 (+184)**, object 10 bytes short as recorded. Reverted. **The archived +393 is
+  stale but the sign is confirmed on a second, independent tree state — this shape has now been measured
+  twice and should not be re-probed.**
+- **The disassembly also settled what the residual difference IS, which the prose had not.** We emit the
+  compare **folded into memory** (`cmp dword ptr [esp+0x44c],2`) and then **two stores in separate arms**;
+  the reference loads into eax, folds nothing, and uses **one store after the join**. So the value bug and
+  the shape divergence are one defect — fixing the value alone necessarily moves the tail, which is
+  exactly the +184. Recorded inline in the source so the next round does not treat them as separable.
+- **Housekeeping: found and reverted a stale probe.** `CrashDumpUnhandledExceptionFilter.c` still carried
+  round 930's byte-neutral `instrType`/`mbi` live-range move, which was measured neutral then never
+  reverted. Removed; tree now differs from HEAD only by the intended comment.
+- **Measured:** probe reverted; gate pass; residue **8,628**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100, wine load OK.
+
 **Round-951: independent byte-level verification of the deliverable; zero-extend class checked on `gm_AllocGebaeude`.**
 
 - **Verified the headline numbers without going through the project's own tooling** — a plain

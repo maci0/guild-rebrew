@@ -9,6 +9,22 @@
  * (`slot[9] = (char)arg8`) compiles 10 bytes shorter (obj 3689 -> 3679)
  * and costs +393 linked via tail desync — reverted per the link rule.
  * Revisit only with a length-neutral spelling or a resynced tail.
+ *
+ * RE-MEASURED round 952 on the current tree, with the reference's own shape
+ * spelled out in full (`n = arg8; if (arg8 == 2) n = call(); slot[9] =
+ * (char) n;` — one store AFTER the join, which is what the reference does at
+ * 0x10018cd4-0x10018cec: `mov eax,[esp+0x44c]; cmp eax,2; jne <skip the
+ * call>; mov [ebp+9],al`).  The sign is unchanged and the swing is worse than
+ * the archived figure: **residue 8,628 -> 8,812 (+184)**, object 10 bytes
+ * short as recorded.  The +393 in this note is stale history; do not re-probe
+ * without a NEW shape, because this one has now been measured twice.
+ *
+ * The disassembly also settles what the residual difference IS, which the
+ * prose here had not: we emit the compare FOLDED into memory
+ * (`cmp [esp+0x44c],2`) and then TWO stores in separate arms, where the
+ * reference loads into eax, folds nothing, and uses ONE store placed after
+ * the join.  So the bug and the shape are the same defect, and fixing the
+ * value by itself will always move the tail.
  * (Second finding from the same review — tail log/sprintf order — is the
  * already-recorded +53 lead below.)
  *
