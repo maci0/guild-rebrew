@@ -449,6 +449,11 @@ rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
 | `0x101de5a4` | `g_office_slots_00_entityId` | renamed from the misleading `g_aemter_table`; it is `g_office_slots + 4`, record 0's `entityId`, not a second table |
 | `0x10028b04` | `s_Memory_Shutdown_Anomaly_10028b04` | renamed from `g_str_10028b04`; literal `"[*] Memory-Shutdown-Anomaly: [*]\nUsed %i blocks in %i bytes.\n\n%i"` read from the reference. Convention is `s_<content>_<addr>` for strings, not `g_str_` |
 | `0x10028aec` | `s_Pointer_not_freed_10028aec` | renamed from `g_str_10028aec`; literal `"-> Pointer not freed:%s"` read from the reference |
+| `0x100354c4` | `__argc` | renamed from `g_100354c4`; CRT name was in the metadata note. Present in LIBCMT but displaced by the `_CRT_REGION_KEEP` local definition, same as `__error_mode` |
+| `0x100354c8` | `__argv` | renamed from `g_100354c8`; also fixed a latent **type** error — was declared `int`, MSVC6 requires `char**`. Renaming is what exposed it |
+| `0x100354d0` | `__envp` | renamed from `g_100354d0`; `char**`, same fix |
+| `0x100354e0` | `_pgmptr` | renamed from `g_100354e0`; `char*`, same fix |
+| `0x10031b6c` | `__tlsindex` | renamed from `g_10031b6c`; CRT TLS index |
 
 `0x10017330` and `0x100174d0` both push an `"gm_AllocGebaeude(): ..."`
 string. `0x100174d0` is the caller (`call 0x10017330` at `0x1001787f`), so it

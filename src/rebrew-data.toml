@@ -1643,7 +1643,7 @@ status = "UNCHECKED"
 size = 4
 
 ["SERVER.0x10031b6c"]
-name = "g_10031b6c"
+name = "__tlsindex"
 type = "int"
 section = ".bss"
 note = "TLS index (__tlsindex)"
@@ -1682,7 +1682,7 @@ status = "UNCHECKED"
 size = 4
 
 ["SERVER.0x100354c4"]
-name = "g_100354c4"
+name = "__argc"
 type = "int"
 section = ".bss"
 note = "__argc"
@@ -1690,24 +1690,24 @@ status = "UNCHECKED"
 size = 4
 
 ["SERVER.0x100354c8"]
-name = "g_100354c8"
-type = "int"
+name = "__argv"
+type = "char**"
 section = ".bss"
 note = "__argv"
 status = "UNCHECKED"
 size = 4
 
 ["SERVER.0x100354d0"]
-name = "g_100354d0"
-type = "int"
+name = "__envp"
+type = "char**"
 section = ".bss"
 note = "__envp"
 status = "UNCHECKED"
 size = 4
 
 ["SERVER.0x100354e0"]
-name = "g_100354e0"
-type = "int"
+name = "_pgmptr"
+type = "char*"
 section = ".bss"
 note = "_pgmptr"
 status = "UNCHECKED"

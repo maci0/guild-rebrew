@@ -78,7 +78,7 @@ int g_1176758c;            /* __envp built flag */
 // DATA: SERVER 0x11767590
 int g_11767590;            /* cmdline/env parsed flag */
 // DATA: SERVER 0x10031b6c
-int g_10031b6c;            /* TLS index (__tlsindex) */
+int __tlsindex;            /* TLS index (__tlsindex) */
 // DATA: SERVER 0x10031b78
 char g_old_sbh_region_head;           /* block allocator region-list head node */
 // DATA: SERVER 0x100317d8
@@ -86,13 +86,13 @@ void* _FPinit;          /* first init fnptr */
 // DATA: SERVER 0x100317f0
 void (__cdecl* g_100317f0)(int); /* _exit hook fnptr */
 // DATA: SERVER 0x100354c4
-int g_100354c4;            /* __argc */
+int __argc;            /* __argc */
 // DATA: SERVER 0x100354c8
-int g_100354c8;            /* __argv */
+char** __argv;          /* __argv */
 // DATA: SERVER 0x100354d0
-int g_100354d0;            /* __envp */
+char** __envp;          /* __envp */
 // DATA: SERVER 0x100354e0
-int g_100354e0;            /* _pgmptr */
+char* _pgmptr;           /* _pgmptr */
 // DATA: SERVER 0x100354e8
 char g_100354e8;           /* 0x1001bb4c tail flag */
 // DATA: SERVER 0x10035508

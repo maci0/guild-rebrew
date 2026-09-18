@@ -102,7 +102,7 @@ extern float g_const_1_over_32767; /* 0x10025FBC */
 
 /* .bss */
 extern void (__cdecl *g_100317f0)(int); /* 0x100317F0, _exit hook fnptr */
-extern int g_10031b6c; /* 0x10031B6C, TLS index (__tlsindex) */
+extern int __tlsindex; /* 0x10031B6C, TLS index */
 extern char g_old_sbh_region_head; /* 0x10031B78, block allocator region-list head node */
 extern OldSbhRegion * __old_sbh_p_starting_region; /* 0x10033B98, __old_sbh_p_starting_region (V5 sbh rover) */
 extern unsigned int g_10033b9c; /* 0x10033B9C, block alloc threshold (allocator mode 2) */
@@ -110,10 +110,10 @@ extern unsigned int _osver; /* 0x100354B4, OS version dword (GetVersion) */
 extern unsigned int _winver; /* 0x100354B8, (major << 8) | minor */
 extern unsigned int _winmajor; /* 0x100354BC, OS major */
 extern unsigned int _winminor; /* 0x100354C0, OS minor */
-extern int g_100354c4; /* 0x100354C4, __argc */
-extern int g_100354c8; /* 0x100354C8, __argv */
-extern int g_100354d0; /* 0x100354D0, __envp */
-extern int g_100354e0; /* 0x100354E0, _pgmptr */
+extern int __argc; /* 0x100354C4 */
+extern char** __argv; /* 0x100354C8 */
+extern char** __envp; /* 0x100354D0 */
+extern char* _pgmptr; /* 0x100354E0 */
 extern char g_100354e8; /* 0x100354E8, 0x1001bb4c tail flag */
 extern int _C_Termination_Done; /* 0x100354EC, _cexit-already-ran flag */
 extern int __proc_attached; /* 0x100354FC, __CRT_INIT attach/detach refcount */

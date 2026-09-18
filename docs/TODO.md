@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-900: named five CRT globals after their own metadata notes — and the rename exposed two latent type errors.**
+
+- **Continued round 899's method on the remaining 26 placeholders.** Most carry the real symbol name
+  in their metadata note while the placeholder name survived: `__argc`, `__argv`, `__envp`,
+  `_pgmptr`, `__tlsindex`. Renamed all five with `rebrew rename --data`.
+- **Checked library ownership before renaming, because two of them are LIBCMT symbols.** `__argc`
+  and `_pgmptr` (and `__argv`, `__error_mode`) **are present in LIBCMT.LIB**. That is not a
+  blocker: `data_globals.c` is in `CMakeLists.txt`'s `_CRT_REGION_KEEP`, the displacement mechanism
+  the objective names, and `__error_mode` is already used by that name in `amsg_exit.c` with **zero
+  LNK4006/LNK2005 in the build log** — established precedent, verified before acting rather than
+  after.
+- **The rename exposed two real type errors that the placeholder names were hiding.** The gate
+  **FAILED with 2 compile errors**:
+  ```
+  data_globals.c(91) : error C2040: '__argv' : 'int ' differs in levels of indirection from 'char ** '
+  data_globals.c(95) : error C2040: '_pgmptr' : 'int ' differs in levels of indirection from 'char *'
+  ```
+  **This is not a rename artifact — it is a latent bug the placeholders masked.** MSVC6 only
+  type-checks against its own CRT declarations when the name matches, so `int g_100354c8;` compiled
+  clean for as long as it was called `g_100354c8`. Both are 4 bytes on x86-32, so the layout was
+  always right and no byte ever differed; the *declared type* was wrong and unusable by any code
+  that wanted a real pointer. Fixed to `char** __argv`, `char** __envp`, `char* _pgmptr` in the
+  definition, the metadata (`rebrew data` fields) and the `rebrew_globals.h` externs, which were
+  still naming the old placeholders.
+- **Why this matters beyond tidiness:** the objective's own rules make a name collision meaningful —
+  "a duplicate-symbol LNK4006 is a finding (shared type not lifted, or library symbol
+  reimplemented), never silenced". Restoring the attested names is what makes that check *possible*
+  for these five; under a placeholder they were invisible to it.
+- **Verified:** gate pass, residue **8,634 unchanged**, raw-link `.data` **21,836 unchanged**, verify
+  281/283, byte-matched 264, imports 100. `rebrew test --all` still 233 RELOC + 31 EXACT = 264.
+- **Note for the next round:** 21 placeholders remain and most have no attested name in their notes.
+
 **Round-899: re-opened the data lane and found five names the source had already earned — three were placeholders, two were misspelled strings.**
 
 - **Tried:** re-testing my own "data lane is exhausted" conclusion instead of re-citing it for a

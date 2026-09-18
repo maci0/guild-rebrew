@@ -120,6 +120,20 @@ the 8,634 as one cascade.
 
 ## 6. Three audit shapes that generate only false positives
 
+- **A placeholder name hides a type error the compiler would otherwise catch (round 900).**
+  `data_globals.c` carried `int g_100354c8;` and `int g_100354e0;` compiled clean for as long as
+  those globals were called by their placeholder names. Renaming them to their attested CRT names
+  failed the build immediately:
+  ```
+  error C2040: '__argv' : 'int ' differs in levels of indirection from 'char ** '
+  error C2040: '_pgmptr' : 'int ' differs in levels of indirection from 'char *'
+  ```
+  MSVC6 type-checks a declaration against its *own* CRT header only when the identifier matches, so
+  the placeholder name made the conflict invisible. Both slots are 4 bytes on x86-32, so the layout
+  was always right and no byte ever differed — but the declared type was wrong, and no code could
+  have used it as a real pointer. **Consequence:** a `g_<hex>` name is not merely cosmetic debt; it
+  suppresses the compiler's ability to check the declaration at all. Expect renames of
+  CRT-named globals to surface C2040s, and fix the type rather than the name.
 - **A hand-rolled struct-size calculator reports garbage on this tree — use the compiler instead
   (round 895).** Two successive versions of a Python `sizeof` estimator flagged **18 then 7**
   structs whose `// SIZE` comment disagreed with their declared extent. **All 25 were the
