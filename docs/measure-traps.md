@@ -752,6 +752,15 @@ authoritative answer was available the whole time and cost nothing — the link 
 passes, and `link_stubs.c` documents its placeholder scheme in its own header. Prefer the toolchain's
 verdict over any grep.
 
+**And a fifth trap sat underneath all four: a COFF COMMON symbol looks undefined.**
+`int x;` at file scope is a *tentative definition*; the compiler emits it with `SectionNumber = 0`
+and `Value = size`, which is the same shape an undefined reference has. Every detector above counted
+those as missing. Verified directly on the object that defines them
+(`spiel_c/gm_NextEntityQueryMatch.c.obj`): `_g_slot_table`, `_g_entity_state_base` and
+`_g_entity_type_bytes` all report `secn=0` **in the file that defines them.** They are correct C89 and
+the linker allocates them. A detector built on "undefined in the object symbol table" cannot
+distinguish a tentative definition from a missing one; the linker can, which is why the link is green.
+
 **So the test is not "is this symbol undefined" but "does it have a definition *anywhere*".**
 `grep -rn '<symbol>' src/` and look for a non-`extern` line — `link_stubs.c` is where they live. A
 symbol defined there as `[1] = ""` is finished work, not a defect; a symbol with *no* definition

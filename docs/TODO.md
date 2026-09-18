@@ -25672,3 +25672,50 @@ reverted. Verify held at 264 byte-matched through the experiment.
   these alongside real width mismatches; **read the types before treating a conflict as a bug.**
 - **Measured:** gate pass, residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
   byte-matched 264, imports 100, lint 188/188.
+
+**Round-926: closed the `g_error_msg_sell_*` symbol family — the same fix that helped once costs bytes twice.**
+
+- **Found two more live uses of undefined symbols** in `cm_ExSellObjekt.c` (lines 419 and 467,
+  `g_error_msg_sell_no_source` / `g_error_msg_sell_no_dest`), the same defect class round 924 fixed
+  for `g_error_msg_sell_failed`. Located both sites' true messages in the reference by their source
+  line-number immediates: `0x2d79` -> `0x1002cd48` `"cm_ExSellObjekt() Verkaufslimit \xfcberschritten"`
+  and `0x2def` -> `0x1002cd14` `"cm_ExSellObjekt(): Quell-Besitzer ist kein Geb\xe4ude"`, each
+  confirmed by the adjacent `push 0x1002c748` (the file-path argument) and the following `jmp`.
+- **Applied it and measured worse: `.text` 8,633 -> 8,636 (+3), raw-link `.data` 21,481 -> 21,745
+  (+264).** Reverted.
+- **Verified the strings were never the problem**: all four `.data` objects (`0x1002cc8c`,
+  `0x1002cd14`, `0x1002cd48`, `0x1002c748`) are **already present and byte-correct in the built image**,
+  because the layout package blits `.data`. Writing them as literals in the source only changes the
+  `.text` push encoding — and here it changes it for the worse.
+- **So the round-924 win does not generalise, and the difference is per-site, not per-class.** The same
+  edit at `0x2e45` (round 924) measured **-1 `.text` / -355 `.data`**; at `0x2d79` and `0x2def` it
+  measures **+3 / +264**. Three sites in one function, same defect, opposite verdicts. **The
+  `g_error_msg_sell_*` family is now closed**: one site landed, two reverted on measurement, and the
+  declarations are left as-is because removing them is what the reverted probes did.
+- **Generalisation for the next round, stated because it cost this one:** "undefined symbol -> replace
+  with the reference's literal" is a *hypothesis about the push encoding*, not a fix. Test it per site
+  with `gate.sh`'s two numbers; the round-924 result is one data point, not a rule.
+- **Also swept the 243 `rebrew data` "unannotated" entries and the 11 type conflicts again**: the 243
+  have no VA and no section — they are names *declared in TUs but absent from `rebrew-data.toml`*, not
+  binary objects, and 136 are single-TU game declarations. They are not actionable without a tool-side
+  metadata write, which the brief forbids doing by hand.
+- **Measured:** reverted to residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264. No source change this round.
+
+**Round-926 addendum: a COFF COMMON symbol is not an undefined one — why five sweeps mis-sized this population.**
+
+- Parsed every object's symbol table directly (no grep, no regex) and cross-checked definitions the
+  same way: **166 symbols are undefined and defined in no object, 40 of them game-looking**. That is
+  still not a bug list.
+- **The reason is `secn=0`.** `int x;` at file scope is a C89 *tentative* definition; the compiler
+  emits `SectionNumber = 0, Value = size`, which is byte-identical in shape to an undefined reference.
+  Confirmed on the defining object itself (`spiel_c/gm_NextEntityQueryMatch.c.obj`):
+  `_g_slot_table`, `_g_entity_state_base`, `_g_entity_type_bytes` all report `secn=0` **in the file
+  that defines them** — including after round 925's `[2]`/`[1]` rewrites, which kept the tentative
+  form. The linker allocates them; nothing is missing.
+- **So "undefined in the object symbol table" cannot distinguish a tentative definition from a missing
+  one.** A detector built on it is structurally incapable of sizing this class, which is why the
+  counts went 22 -> 37 -> 60 -> 160 -> 166 across five attempts at the same question. **Do not write a
+  sixth.** The only sound discriminator is the linker's own verdict, plus the round-924 signature:
+  an operand that emitted as a bare immediate instead of a relocated reference.
+- Recorded as measure-traps §6h (fifth bullet).
