@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-917: found the *real* reason `g_current_season` can't be lifted — and wrecked the build directory doing it.**
+
+- **Retried the symbol round 915 excluded**, since round 916 had shown the `LONG` reason was bogus.
+  Measured the six files it touches: **all six have exactly zero slack** (span == text), so the
+  exclusion still looked right but for the wrong reason. Then tested directly:
+  - a **bare include** into `spiel62.c` → object unchanged at 1408, **byte-neutral**;
+  - the **full 16-site lift** → build clean, 0 errors.
+  So neither the `LONG` label nor zero slack explained it, and the build said the lift was fine.
+- **The gate said otherwise, catastrophically: residue 8,634 → 91,327, raw-link `.data`
+  +412, and a demotion (281→280, 264→263).** A 10× residue blow-up from a declaration change means
+  the symbol stopped resolving, not that code moved.
+- **Root cause, and it is a genuine rule:** `g_current_season` is **defined in
+  `gm_NextEntityQueryMatch.c:185`**, inside the block its own comment introduces as *"Round-558:
+  same-size majority types that still emit BSS commons. Incomplete `[]` does not emit; sized arrays
+  broke .text layout."* That TU **cannot include a header** without changing what it emits — which is
+  why it does not include `entity.h` today. Lifting the `extern` to the header therefore left the
+  *definition* unattached, and the link reshuffled.
+  **The rule to check before any future lift: find the symbol's defining TU, and if that TU is this
+  BSS-commons block, stop.** `grep '^[a-z].* g_<name>;' src/server.dll/` finds the definition in one
+  command.
+- **Self-inflicted damage, worth recording as a trap.** Recovering from the failure, I ran
+  `rm -rf build && cmake -S . -B build -DREBREW_DEBUG_INFO=OFF` — **dropping the `--toolchain`
+  flag**, so CMake configured for the *host* compiler and the tree failed with
+  `windows.h: No such file or directory`. `scripts/build-win.sh` has the correct invocation
+  (`--toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake`); I re-derived the command instead of
+  reading it. Three further gate runs then failed on the known transients (`C1001`, `C1083`) before
+  a serial rebuild cleared them.
+- **Baseline fully restored:** gate pass, residue **8,634**, raw-link `.data` **21,836**, verify
+  281/283, byte-matched 264, imports 100. Tree clean.
+- **Net: no source change this round.** One real rule established (the BSS-commons definition blocks
+  a lift), one `LONG` myth already retired in round 916, and one build-directory mistake of my own.
+
 **Round-916: the "28 objects over the composition budget" claim is wrong — measured against the real span, zero are over.**
 
 - **Checked the premise round 915 used to exclude candidates.** It filtered three candidates out on

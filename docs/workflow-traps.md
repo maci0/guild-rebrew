@@ -79,3 +79,21 @@ Each cost real budget and each is the kind of mistake the next attempt would rep
   20 files, 84 declarations removed, **byte-neutral at the gate**. So the sequence is: *check the
   header against the tree first, then move declarations in measured batches.* The check is one grep
   and would have replaced three rounds.
+- **Do not re-derive the CMake configure command — read `scripts/build-win.sh` (round 917).**
+  Recovering from a failed experiment I ran
+  `rm -rf build && cmake -S . -B build -DREBREW_DEBUG_INFO=OFF`, **omitting `--toolchain
+  cmake/toolchain-msvc-6.0-sp6-docker.cmake`**. CMake silently configured for the *host* compiler and
+  the whole tree failed with `windows.h: No such file or directory` — 27 build errors that look like
+  a source catastrophe and are nothing of the sort. The correct invocation is in `build-win.sh`
+  lines 59-62. **`build/` is a derived directory with non-obvious required flags; delete it only via
+  that script.** Recovery cost three gate runs on top of the mistake, because a fresh configure also
+  surfaces the known `C1001` — `C1083` transients before a serial rebuild clears them.
+- **Before lifting a duplicated `extern`, find its *defining* TU, and stop if that TU is the
+  BSS-commons block (round 917).** Lifting `g_current_season` — declared in 16 TUs, so a perfect
+  candidate by every other test — took residue from **8,634 to 91,327** and demoted a function. Its
+  definition lives in `gm_NextEntityQueryMatch.c:185`, inside the block commented *"Round-558:
+  same-size majority types that still emit BSS commons. Incomplete `[]` does not emit; sized arrays
+  broke .text layout."* That TU **cannot include a header** without changing what it emits, so moving
+  the declaration left the definition unattached. **The check is one grep:**
+  `grep -rn '^[a-z].* g_<name>;' src/server.dll/`. Neither the `LONG` label (round 916) nor
+  "zero slack" predicts this — only the definition's location does.
