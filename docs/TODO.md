@@ -25719,3 +25719,35 @@ reverted. Verify held at 264 byte-matched through the experiment.
   sixth.** The only sound discriminator is the linker's own verdict, plus the round-924 signature:
   an operand that emitted as a bare immediate instead of a relocated reference.
 - Recorded as measure-traps §6h (fifth bullet).
+
+**Round-927: built an operand-kind census; confirmed two more walls and located the exact register-count readout.**
+
+- **New instrument, saved as `scripts/operand_census.py`: compare operand *kind*
+  (REG / MEM / ABS / IMM) at VAs where both sides emit the same mnemonic.** Round 923 counted mnemonics; this counts how each instruction addresses its
+  operands, which is what found round 924's bad push. Run over the 14 largest carriers.
+- **The result is mostly post-divergence noise, and that is worth knowing.** Once a function drifts,
+  addresses coincide but instructions do not correspond, so `CrashDump`'s "32 mismatches" and
+  `gm_AllocSpieler`'s "10" are largely false pairs. The signal is only in the first few VAs.
+- **Two real readouts, both already walled — confirmed rather than re-probed:**
+  - `CrashDumpUnhandledExceptionFilter` (0x10002770): the reference prologue is
+    `sub esp,0x280; push ebp; push esi; push 0`, mine is
+    `sub esp,0x284; push ebx; push ebp; push esi; push edi; push 0`. **The frame difference is 2 extra
+    callee-saved registers, not merely 4 stack bytes** — this is the sharpest statement of the
+    function's first divergence (+0x2) that any round has recorded, and it is a *register-count*
+    readout rather than a byte-count one. Shapes §81 stands unchanged: the 0x280 frame is reachable
+    (round 174 hit it exactly via `pExceptionPointers->ContextRecord->Eip`) and still lost **+66**, the
+    sixth confirmation, and §81 already names the two remaining levers (deferred `push ebx; push edi`
+    at 0x1000282c, and `pCtx->Esp` parked in ebx from 0x10002931) as ones that must land *with* the
+    frame, not before it. Shapes §38 says the entry is inert while loop demand stands.
+  - `ls_LoadBuildingEntityState` (0x100128f0): the reference interleaves `add ecx,edx` between argument
+    pushes where we fold to a `lea`. Shapes §122 already records both shapes tested (`+0` and `+52`).
+- **Two probes, both reverted on measurement:**
+  - hoisting the decrypt loop bound (`dwBytesRead / 4 - 4` into a local so the ref's `shr edx,2;
+    sub edx,4` hoist is reproduced): **residue 8,633 -> 8,655 (+22)**. The reference recomputes the
+    bound inside the loop and ours is already the closer form; the disassembly read favours the
+    reference but the link says otherwise.
+  - `frameInfo[7]`/`mbi` live-range shortening: not attempted — the only place they are used is
+    behind the `write_nl:` / `unknown_exc:` **goto labels**, and C89 forbids declarations in a block
+    that is a jump target.
+- **Measured:** both probes reverted; gate-equivalent residue **8,633**, raw-link `.data` **21,481**.
+  No source change.
