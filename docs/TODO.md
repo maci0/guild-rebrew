@@ -27265,3 +27265,43 @@ the point of use.
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, data extents 195 clean, imports 100, wine load OK. No source edit kept;
 no baseline moved.
+
+## Round 980 — raw-link `.data` is a size-only filler; and the `.data` pass already existed
+
+**Tested the hypothesis from round 979** rather than accepting the wall: *if sp6 cannot reach these shapes
+but sp5-pp can, the reference may not be sp6 for those regions.* It was already answered — and the answer
+was already in the build.
+
+- `CMakeLists.txt:293-322` carries **three** `/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp` pins (`spiel_dumpD.c`,
+  `ahm_ExAllocAlchemist.c`, `ls_LoadBuildingEntityState.c`), all verified present in
+  `build/CMakeFiles/server_dll.dir/build.make` alongside `/O2 /Gd`.
+- `msvc6-c-shapes.md` §142-§146 records the axis landing (residue 8,652 → 8,641 → 8,637 → 8,633), the
+  complete sweep with the population enumerated from the residue table, and the evaluation of file-splitting
+  as a finer-granularity route.
+- **§90's claim that "a per-function toolchain pin cannot change the deliverable" is obsolete** — §142
+  superseded it, and `rebrew-cmake-cl` strips the flag before building the real command line. §143/§144/§145
+  each contain a correction block for claiming "exhausted" from a remembered row count; §145 is the one
+  that enumerated properly.
+
+**New finding: raw-link `.data` is a size-only filler and cannot reach zero.** `split_link.sh:196-221`
+generates `data_restore_split.c` from the reference's `.data` *tail* (`GAP=0x74a0`) purely so the raw size
+lands on `0xe000`; postlink then overwrites `.data` wholesale. Attributing the raw-link diff by object:
+`data_restore_split.obj` 6,207 bytes, `fold_literals.obj` 833 — both generated shims. So the 21,481
+`DATA_BASELINE` is mostly filler plus COMDAT-hash-ordered game `.data`, and `gate.sh:160` correctly enforces
+it as a **ceiling** (`-gt` fails, `-le` passes), not an equality. → measure-traps §20.
+
+**One real byte-level `.data` defect found, and out of scope.** First divergence `0x1002706c`: the string
+`"1.1.3"` and its own pointer are **swapped** (REF string-then-pointer, BLD pointer-then-string). Our
+`broadcast.c` span is correct — `s_Sending_Broadcast` ends exactly at `0x1002706c`. The swap is inside the
+`??_C@_05NLJN@1?41?43?$AA@` COMDAT and `zlib_version` pointer emitted by
+`references/zlib-1.1.3/deflate.c` (`zlib.h:40 ZLIB_VERSION "1.1.3"`) — stock zlib, which the objective
+forbids reversing.
+
+**Method failure worth recording.** `msvc6-c-shapes.md` §148-§158 is an **eleven-round `.data` pass**
+(matching the brief's assigned direction exactly) that fixed three `rebrew` tool defects and produced two
+real size wins. Round 977 declared that vein "mined out" after reading only the shipped file's byte deltas,
+never having read that series. → measure-traps §20, final paragraph.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, data extents 195 clean, imports 100, wine load OK. No source edit; no
+baseline moved.

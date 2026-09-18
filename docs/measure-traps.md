@@ -1167,3 +1167,57 @@ rebrew todo -c start-data -n 300 --json | \
 A single-valued histogram means the ranking is not a ranking. Rank by measured residue instead
 (`scripts/linktest.sh` / `scripts/first_divergence.py`), which is what the objective's own "judge candidates
 at the link, not with object scores" rule already says.
+
+## 20. Raw-link `.data` is a size-only filler and cannot reach zero — the ceiling is the right check (round 980)
+
+Round 977 reported "all 8628 differing bytes are in `.text`" and concluded the `.data` axis was closed. That
+is true of the **shipped** file but was stated without the mechanism, and the mechanism matters because it
+says the *raw-link* number is not a target at all.
+
+`scripts/split_link.sh:196-221` generates `data_restore_split.c` — a blob whose bytes are copied from the
+reference's `.data` **tail** — and appends it to the link:
+
+```
+# The pad is a LENGTH-only filler (its bytes are the reference .data tail and
+# postlink overwrites .data wholesale), but inserting it FIRST displaced every
+# game .data symbol by +0x74a0 ...
+GAP=0x74a0
+```
+
+So `data_restore_split.obj` exists to make the raw `.data` **size** land on the reference's `0xe000`, not to
+reproduce its bytes. Attributing the raw-link `.data` diff by owning object makes that explicit:
+
+| object | differing bytes | what it is |
+|---|---|---|
+| `data_restore_split.obj` | 6,207 | the length-only filler above |
+| `fold_literals.obj` | 833 | `gen_fold_literals.py` shim |
+| `deflate.c.obj` (stock zlib) | — | `ZLIB_VERSION "1.1.3"` COMDAT |
+
+The 21,481 the gate enforces as `DATA_BASELINE` is therefore **mostly the filler's own bytes plus game
+`.data` that the link places by COMDAT hash order** (`CMakeLists.txt:443-448`). It cannot be driven to zero
+while a filler is present, and the filler is present because the raw size must be `0xe000`.
+
+**The gate already models this correctly** — `scripts/gate.sh:160` fails on `-gt` and passes on `-le`, i.e. a
+*ceiling*, not an equality. Reading it as a progress target is the error.
+
+**One in-scope defect found and correctly left alone.** The first `.data` divergence is at `0x1002706c`, and
+it is a genuine byte-level difference, not a filler artifact:
+
+```
+REF  0x10027058  "Sending Broadcast\0\0\0" "1.1.3\0\0\0" <ptr->0x1002706c> 01 00 00 00 02 ...
+BLD  0x10027058  "Sending Broadcast\0\0\0" <ptr->0x10027070> "1.1.3\0\0\0" 01 00 00 00 02 ...
+```
+
+The string and its own pointer are **swapped**. Our `broadcast.c` span is correct (`s_Sending_Broadcast`
+ends at `0x1002706c`, matching the reference); the swap is inside the `??_C@_05NLJN@1?41?43?$AA@` COMDAT and
+the `zlib_version` pointer emitted by **`references/zlib-1.1.3/deflate.c`** (`zlib.h:40`
+`#define ZLIB_VERSION "1.1.3"`). That is stock zlib, which the objective forbids reversing and which links
+as a stock library. **In scope it is not**, and it is the one place in the section that could have been
+mistaken for game-source work.
+
+**Method point.** Sections 148-158 of `msvc6-c-shapes.md` are a full `.data` pass — eleven rounds that fixed
+three `rebrew` tool defects, produced `int g_log_level_table[3]` (a 36-byte surplus costing 231), the
+`g_log_format_table[96]` fix, and took raw-link `.data` from 27,953 downward. Round 977 declared the `.data`
+vein "mined out" after reading only the shipped file's byte deltas and never reading that pass. **Check for
+an existing section series on the round's assigned topic before declaring it exhausted** — the brief's
+".data / types / structs" direction had a dedicated eleven-round history the round-977 work did not consult.
