@@ -11,6 +11,11 @@ Companion reading: `msvc6-c-shapes.md` (front-end shapes that do work),
 
 ## 1. Register allocation and scheduling are not steerable from C
 
+This is the default for **homes** (which callee-saved register, equal-count
+slot transpositions). Statement and definition *order* can still move which
+value is computed where (`msvc6-c-shapes.md` §84). Do not read this section
+as "order never matters."
+
 The single largest class. `msvc6` picks which local lives in which slot and which
 callee-saved register by its own colouring, and the source has almost no influence.
 
@@ -794,3 +799,33 @@ not the evidence at all.
 the work was hardest.** A carrier with a long header and a short `docs/` presence (small function, many
 probes, no standalone section) is the normal shape for thoroughly-worked rows, not an unexplored one.
 `scripts/preprobe.sh` prints both counts for this reason.
+
+### 2 addendum — a fourth instance, with branch counts: `cm_ExCopyEntityData` (round 995)
+
+§2 had three instances (`gm_FindNextFilteredEntity` five `ret` sites, `gv_ExAllocGraveyardWorker` two
+byte-identical copies, and the recurring "reference keeps N epilogues" note). Round 995 found a fourth, and
+this one is the clearest because the two epilogues are **not** byte-identical — they differ only in the
+return value:
+
+```
+reference A @ 0x1000eda8   5f 5e 5d b8 01 00 00 00 5b 83 c4 0c c3
+  pop edi; pop esi; pop ebp; mov eax,1;  pop ebx; add esp,0xc; ret
+
+reference B @ 0x1000ef7b   5f 5e 5d 31 c0 5b 83 c4 0c c3
+  pop edi; pop esi; pop ebp; xor eax,eax; pop ebx; add esp,0xc; ret
+```
+
+Everything after the return-value materialisation is identical, so msvc6 merges them; the reference keeps
+both. **Branch counts in the reference: 4 branches reach A (return 1), 1 reaches B (return 0).** Our object
+has **2 `ret` sites** where the reference has **3** (`0x1000edb4`, `0x1000ee48`, `0x1000ef84`).
+
+Our surviving epilogue is byte-identical to reference B — it is not wrong code, it is a *missing copy*. That
+is why this instance adds something the others did not: the earlier three involve byte-identical epilogues,
+so a reader can suspect the difference is in the exits themselves. Here the exits provably differ by five
+bytes and the compiler still folds them.
+
+**No new lever.** §2 is closed with eight return spellings compiled across two passes, all inert, and a
+352-byte standalone TU reproducing the reference's guard/loop structure that still folds all three exits.
+This instance was found *by* `scripts/instr_diff.py` reporting `ref-only x4: pop R`, which is a cheap screen
+for the class: **a carrier with `ref-only` `pop`/`ret` counts is an epilogue-merge instance, not an operand
+problem.** Worth running before probing any carrier.

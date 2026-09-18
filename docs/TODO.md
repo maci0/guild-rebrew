@@ -25602,11 +25602,11 @@ spinning (`docker ps` name `rebrew-93321f0d944a`), pinning one core.
 replaced the proven producible-count tail with a `count_p` pointer local.
 Restoring the inline double spelling of `g_entity_type_table + row_index *
 0x24d + 0x21` brings it back to RELOC 861/861: the multiply form is what gives
-the byte counter the SIB base role (docs/msvc6-c-shapes.md section 34), and
+the byte counter the SIB base role (docs/msvc6-c-shapes.md section 161), and
 routing the read-modify-write through a pointer local forces a `lea` and lands
 2 bytes short.  verify --full 277/280 -> 278/280.
 
-## `.text` link shortfall (2026-09-11) — the build is not byte-identical
+## Archive (2026-09-11): `.text` link shortfall — not the live tree
 
 The raw link's `.text` is 2,197 B short of the reference's 0x22846 (0x21fb1,
 3,269 B before the `/INCLUDE:` change below).  `rebrew postlink` used to pad it
@@ -27500,3 +27500,261 @@ a budget to plan against.
 `docs/TODO.md`, `scripts/gate.sh`) — accurate documentation corrections from a parallel session, including
 fixes to `AGENTS.md`'s `.text`-shortfall paragraph that reflect this session's findings. Gate passes with
 them in place. Left untouched and uncommitted by this round; they are not mine to claim.
+
+## Round 988 — the residue's instruction mix (and a linear-sweep trap that nearly faked a finding)
+
+**Question:** is the residue dominated by a few recurring instruction patterns (a systemic, fixable cause)
+or is it a long tail (scheduler noise)? That distinction decides whether more probing is worth anything.
+
+**First attempt was invalid, and looked spectacular.** A linear `capstone` sweep from `.text` start
+classified 6,063 of 8,628 differing bytes (70.3%) as "not inside any instruction" — which would have meant
+most of the residue is not code. It is an artifact: `msvc6` pads between functions and `.text` does not
+begin on an instruction boundary, so a linear sweep desynchronises immediately and mislabels real code as
+data. The "uncovered" bytes printed as `89 7c 24 10 / 89 7c 24 14 / ...` — obviously `mov [esp+N],edi`.
+Decoding each carrier from its **own function entry** gives the truth: **8,498 of 8,628 (98.5%) are inside
+real instructions**, 130 (1.5%) are inter-function padding. → measure-traps §21.
+
+This is `first_divergence.py`'s documented rule ("decode each image from its own function entry")
+rediscovered the hard way; the ad-hoc analysis did not reuse the script that already implements it.
+
+**The real answer: a long tail, not a systemic cause.** Differing bytes by the reference instruction that
+contains them:
+
+| instruction | bytes | share |
+|---|---|---|
+| `mov` | 2,971 | 34.4% |
+| `push` | 827 | 9.6% |
+| `lea` | 645 | 7.5% |
+| `call` | 626 | 7.3% |
+| `cmp` | 600 | 7.0% |
+| `add` | 450 | 5.2% |
+| `je` | 443 | 5.1% |
+| `jmp` | 245 | 2.8% |
+| `test` / `jne` / `xor` / `fmul` | 167/149/148/146 | ~1.7% each |
+| padding | 130 | 1.5% |
+
+**64 distinct mnemonics** touched; the top eight carry 76%. That is the mix the documented scheduler /
+register-role classification predicts. No mnemonic dominates enough to indicate a single systemic defect, so
+there is no "one fix unlocks many functions" hypothesis left to test on this evidence.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Independent verifier
+(`scripts/verify_objective.py`) green: file size, all four section VirtualSizes, import symbol count 100,
+export names/VAs, all diffs inside `.text`, `Init`/`Exit` bodies byte-identical. No source edit; no baseline
+moved.
+
+**Note:** the parallel session's uncommitted doc edits (`AGENTS.md`, `README.md`, `docs/msvc6-c-shapes.md`,
+`docs/msvc6-allocator.md`, `scripts/gate.sh`) were reviewed this round — comment-only accuracy fixes, all
+four gate baselines unchanged, gate and the independent verifier both green with them in place. Left
+uncommitted; not this round's work to claim.
+
+## Round 989 — the span filter can read a stale object; the §159 reading reproduces at +16
+
+**Analysed the residue's run structure.** 8,628 differing bytes form **612 runs**; 255 are single bytes, but
+37 runs of ≥50 bytes carry 3,146 bytes (36.5%). The largest is **189 bytes at `0x10018be0`**, in
+`gm_AllocSpieler` — the run its header calls the longest single residue run.
+
+**The 189-byte run is the §159 caching decision, at instruction level.** The reference does
+
+```
+0x10018be0  mov ecx,[ebp+0x14]        <- reads the LOCAL
+0x10018be3  mov [esp+0x28],ecx        <- copies it out once
+0x10018be7  call __ftol
+    ...  loop: fld [esp+0x28] / fdiv st(1) / fxch / fsub [esp+0x28] / faddp ...
+```
+
+where ours reads `[ebp+0x14]` directly inside the loop. Same instruction count, 5-byte displacement shift.
+The source is `gm_AllocSpieler.c:435-441`, where `*(float*)(slot + 0x14)` is read three times per iteration.
+
+**Probed caching only `slot+0x14`** (rather than both fields, as in §159). Result: **+16 over span again** —
+so the overflow is caused by the single extra frame slot, not by how many values are cached. The +
+carrier still needs 16 bytes freed elsewhere before any caching fix can ship.
+
+**New trap found (measure-traps §22).** `scripts/object_span_check.py` reported this probe as *exactly at
+span*, which is why it was run at all — then the link collapsed the composition with the carrier at **+16**.
+Cause: `linktest.sh` recompiles into its own work directory and does **not** refresh CMake's
+`build/**.obj`, and the span checker measures the CMake object. It was reading an object 65s older than the
+source. Verified by mtime. **Any tool reading `build/` describes the last CMake build, not the working
+tree** — run `cmake --build build` before `object_span_check.py`.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Independent verifier green. Probe reverted;
+composition rebuilt to 246 symbols at their reference VA; `src/` unmodified; no baseline moved.
+
+## Round 990 — the 16-byte hunt: no headroom exists, and the count that suggested otherwise was postlink output
+
+Round 989 left a concrete task: free 16 bytes in `gm_AllocSpieler` so its caching fix (shapes §159, the
+189-byte run at `0x10018be0`) can ship. This round hunted that slack.
+
+**The hunt's first measurement was wrong.** Decoding both images from `0x10018850` gave
+`REF 1056 insns / 3689 bytes` against `BLD 1014 insns / 3577 bytes` — implying our object is 112 bytes
+*shorter* with 119 bytes of padding, i.e. plenty of room. Both figures describe the **shipped**
+`build/server.dll`, which postlink has already rewritten.
+
+**Read from the COFF instead:** `.text` raw **3696**, **1061 instructions**, code ends at offset `0xe70` =
+3696, with 7 bytes of trailing `nop`. The object fills its span exactly — **zero headroom**, as
+`object_span_check.py` had said all along. The reference image holds 1063 instructions in the same span, so
+the net difference is **2 instructions**. → measure-traps §23.
+
+**Consequence for the caching fix: it must be size-NEUTRAL, not merely small.** There is no shrink budget to
+find. Both probes (§159 caching two fields, §989 caching one) measured **+16 obj / composition collapse** for
+exactly this reason. The 16 bytes would have to come from an edit that removes 16 bytes of emitted code
+elsewhere *and* keeps that region byte-exact — no candidate for that is recorded on this carrier.
+
+**Two traps now on the record from this line of work**, both about measuring the wrong artefact:
+§21 (decoding `.text` from section start) and §23 (counting instructions in postlink output). Both produced
+confident, plausible numbers that were about the tool rather than the target.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Independent verifier green. No source edit;
+`src/` unmodified; no baseline moved. Probe scratch files in `.scratch/` only.
+
+## Round 991 — "missing code" was a decoder artifact; every carrier is exactly at its span
+
+Round 990 concluded the residue is the same instructions in different positions. This round tried to falsify
+that by comparing instruction **multisets** per carrier, and appeared to succeed: 14 of 19 carriers showed
+unequal multisets, with `gm_AllocSpieler` "missing" 7 `nop`s, 8 `pop`s, 2 `ret`s and 11 `push`es, and
+`CrashDumpUnhandledExceptionFilter` appearing to lack an entire second `ret` plus a `popal`.
+
+**All of it was decoder garbage.** The reference's `popal` at `0x10002e9c` sits immediately after a `ret 4` at
+`0x10002e99`; our build's apparent `push 0xfe811004` sits after its own `ret 4`. Both decoders ran past the
+function end into padding and reported the bytes as instructions.
+
+**The count changed with every truncation rule** — 1056/1014, 1056/917, 1063/1014 for the same function —
+which is the signature of a method artifact rather than a measurement. → measure-traps §24.
+
+**The desync-free check** is the object's `.text` raw size from the COFF against the reference span:
+
+| carrier | span | our object `.text` raw | delta |
+|---|---|---|---|
+| `gm_AllocSpieler` | 3696 | 3696 | **+0** |
+| `CrashDumpUnhandledExceptionFilter` | 2128 | 2128 | **+0** |
+| `cm_ExSellObjekt` | 2064 | 2064 | **+0** |
+
+Every carrier is **exactly at its span**. No decoding, no stop rule, no ambiguity. Round 990's conclusion
+stands and is now confirmed by a measurement that cannot desync.
+
+**Third instance of this class this session** (§21 decoding `.text` from section start, §23 counting in
+postlink output, §24 counting across images). The common cause: a disassembler always emits *something*, and
+desynchronised output is syntactically valid — so it reads like a finding. All three were caught before being
+written up as results, but two of them nearly were.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 992 — CrashDump's register difference is 4 deferred restores, not a prologue shape
+
+**Used `scripts/instr_diff.py`** (LCS over relocation-masked bytes, addresses collapsed) instead of the
+hand-rolled stream comparison that wasted round 991. It immediately surfaced a systematic signal:
+
+```
+0x10002770 size 2115: reference 725 instructions, built 729
+  ref-only x33: push ADDR      built-only x29: push R
+  ref-only x5: lea R,[R+0x90]  built-only x5: lea R,[R+0x94]
+```
+
+**Located the real structure.** §927 recorded "the frame difference is 2 extra callee-saved registers".
+This round found **where the reference's `ebx`/`edi` live**: saved once at `0x1000282c`, ~190 bytes into the
+function, and restored at **four** sites (`0x10002dac`, `0x10002de5`, `0x10002e17`, `0x10002e49`), each
+immediately after `call dword ptr [0x10024010]` (`CloseHandle`) and each ending `pop edi; pop ebx;
+jmp 0x10002e66`. Ours saves both in the prologue and emits one interleaved epilogue.
+
+So the difference is not a prologue shape but a **liveness window bounded by the four cleanup paths** —
+which is what §81's two named levers ("deferred `push ebx; push edi` at 0x1000282c", "`pCtx->Esp` parked in
+ebx from 0x10002931") describe, now with the restore count and their common target pinned down. →
+allocator Finding 66.
+
+**Self-caught error mid-round.** I first read the `push ebx`/`push edi` at `0x1000287e` and `0x10002cdc` as
+further deferred saves and reported "9 paired save/restore sites". They are **call arguments** —
+`push ebp; call edi` at `0x1000287f`, `push eax; call [0x10024014]` at `0x10002ce5`. Corrected before
+recording. `instr_diff.py`'s own output ("ref-only x33: push ADDR") is what made the argument/save
+distinction worth checking at all.
+
+**Not landed.** The carrier is at its span (2128, verified), and §81 already records 8 declaration
+permutations, 11 flag combinations, and the round-174 attempt that hit `0x280` exactly but lost **+66**.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 993 — CrashDump's deferred save is a register-ROLE swap; the header's −2 is +30
+
+Round 992 found the reference saves `ebx`/`edi` at `0x1000282c` instead of in the prologue. This round found
+**why**, and it is not a save placement:
+
+| | reference | ours |
+|---|---|---|
+| `hDbgFile` (CreateFileA result) | **ebp** — `mov ebp,eax` @0x1000281d | **edi** — `mov edi,eax` @0x1000281f |
+| save pair | `push ebx; push edi` @0x1000282c | prologue |
+
+The reference parks `hDbgFile` in **ebp** and keeps **edi** free for its own later use (`mov edi,[0x10024034]`
+then `call edi`). We hold `edi` from byte ~0xAF, so msvc6 saves it at entry. → allocator Finding 67.
+
+**Probe, reverted (byte-identical):** giving `hDbgFile` a tighter block-local scope so its live range ends
+before the walk measures **+0** — msvc6 folds the alias and keeps the allocation. The register role is not
+C-steerable, consistent with §1.
+
+**Header correction (fourth stale delta in four rounds).** `CrashDumpUnhandledExceptionFilter.c:139-142`
+records a round-129 lane claiming moving `nFrames = 0x800;` before the walk loop gives **−2**. Applied exactly
+as written: **+30** (residue 8,628 → 8,658). Reverted. The note's `1597 -> 1595` predates the round-110 span
+fix; the carrier now sits at 1,583. → allocator Finding 67, workflow-traps §14.
+
+| round | carrier | header claim | measured |
+|---|---|---|---|
+| 982 | `ls_LoadBuildingEntityState` | −53 | **+505** |
+| 985 | `gm_AllocSpieler` | "bankable" | span overflow |
+| 986 | `gm_AllocSpieler` | 11 | **+343** |
+| 993 | `CrashDumpUnhandledExceptionFilter` | −2 | **+30** |
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; `src/` unmodified; no
+baseline moved.
+
+## Round 994 — CrashDump's swapped pair is ebp/edi; three C levers, none reach it
+
+Completed Finding 67 by pinning both registers: the reference keeps `hDbgFile` in **ebp** and the
+`[0x10024034]` function pointer in **edi**; we have exactly the opposite. Three probes, all measured:
+
+| probe | delta |
+|---|---|
+| swap `hProcess`/`hDbgFile` declaration order | **+0** (byte-identical) |
+| block-local alias shortening `hDbgFile`'s live range (Finding 67) | **+0** (byte-identical) |
+| hoist `hProcess = GetCurrentProcess()` above `CreateFileA` | **+109** — and semantically wrong (runs on paths the reference does not call it on) |
+
+Declaration order is inert (confirming the header's "8 declaration permutations"), scope is folded away, and
+the one construct that changes first-use order changes the program. → allocator Finding 67 addendum. The row
+is closed as an allocator wall with three measured attempts on record.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. All probes reverted; `src/` unmodified; no
+baseline moved.
+
+## Round 995 — a fourth epilogue-merge instance, found by screening; no new lever
+
+Rather than re-probe a known wall, this round screened the four mid-size carriers with
+`scripts/instr_diff.py` and looked for the signature `ref-only xN: pop R` / `ret`.
+
+**`cm_ExCopyEntityData` (0x1000ec00) is a fourth §2 instance.** Reference: **3 `ret` sites**; ours: **2**. The
+two epilogues differ only in the return value:
+
+```
+REF A @0x1000eda8  pop edi; pop esi; pop ebp; mov eax,1;  pop ebx; add esp,0xc; ret   <- 4 branches reach it
+REF B @0x1000ef7b  pop edi; pop esi; pop ebp; xor eax,eax; pop ebx; add esp,0xc; ret  <- 1 branch
+```
+
+Our surviving epilogue is **byte-identical to B** — so it is a *missing copy*, not wrong code. This is the
+cleanest instance yet: the earlier three involve byte-identical epilogues, so the exits themselves could be
+suspected; here they provably differ by five bytes and msvc6 still folds them. → codegen-walls §2 addendum.
+
+**No new lever.** §2 is closed (eight return spellings inert; a standalone TU reproducing the reference's
+structure still folds all three exits).
+
+**Useful by-product: a cheap screen.** `instr_diff.py` reporting `ref-only xN: pop R` or `ret` identifies an
+epilogue-merge carrier immediately. That is worth running before probing *any* carrier, since it separates
+the §2 class from the operand class in one command.
+
+**Screened and not epilogue-related:** `cm_ExSellObjekt` (82.0% aligned, 0 `ret` delta),
+`ls_LoadBuildingEntityState` (87.8%, 0), `gv_ExAllocGraveyardWorker` (76.0%, 0 — consistent with §2's
+existing entry, where the epilogues are byte-identical and only the branch *targets* differ).
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
