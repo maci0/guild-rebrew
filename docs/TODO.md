@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-946: tried to sweep round 945's symbol-clash class tree-wide — it does not sweep, and the population is misleading. No source change.**
+
+- **Round 945's `locktable` bug came from a COFF COMMON losing to a real definition.** Attempted the
+  obvious generalisation: parse every object's symbol table and list symbols carrying both. **419
+  symbols** matched.
+- **Essentially all 419 are ordinary C.** A function *declared* in a TU and *defined* in another
+  produces exactly this shape — one real symbol plus N COMMONs — and the linker picking the real one is
+  correct behaviour. Every cross-TU call in the program looks like this.
+- **Narrowing to data objects did not help**: it still reported ~200 rows, because `link_stubs.c`
+  deliberately defines ~176 placeholder globals in one shared `.bss`, and the symbol "size" for those is
+  the *remaining section length* (values like `24,314,872`), not the object's size — so a size filter
+  cannot separate them either.
+- **A second filter — "defined in link_stubs and referenced nowhere else" — produced 39 candidates, and
+  the first one checked was wrong.** `_g_stat_min_d` is referenced by `cm_ExChangeDesire.c`; my detector
+  stripped comments *after* collecting the names rather than before, so comment mentions counted as uses.
+  That is the same class of self-inflicted detector bug as rounds 924/926/931 — **the fourth this
+  session** — and the honest conclusion is that this sweep shape is not worth a fifth attempt.
+- **What actually distinguishes the `locktable` case** is not "a COMMON clash exists" but "the COMMON
+  has the **correct** layout while a real definition has a **different** one" — a per-symbol question
+  needing the metadata's recorded size and type. There was exactly **one** such case in the tree, and it
+  is fixed.
+- **Recorded as measure-traps §6f-quinquies** so the next round does not re-run this sweep: prefer
+  `build/split_poc.map` for the winner and check the metadata layout, never a grep-derived population.
+- **Measured:** no source change; tree at the committed round-945 state — residue **8,628**, raw-link
+  `.data` **21,481**, verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-945: `locktable` was silently hijacked by a COFF COMMON vs real-definition clash; two data defects closed. No metric change.**
 
 - **Audited the metadata `cflags` against the emitted command lines** — the round-944 lesson — and found

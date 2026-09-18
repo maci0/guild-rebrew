@@ -625,6 +625,35 @@ objdump -t <obj> | grep -i '<symbol>'         # sec 0 = COMMON, sec N = real def
 A `sec 0` entry is a tentative definition whose size is in the value column; a `sec N` entry is a real
 one. If the object with the *correct* layout has `sec 0` and another has `sec N`, the other one wins.
 
+## 6f-quinquies. "Defined in two objects" is normal C, not a defect list (round 946)
+
+Round 945 found a real bug with the COFF COMMON-vs-definition mechanism (§6f-quater) and round 946
+tried to turn it into a tree-wide sweep. The sweep reported **419** symbols carrying both a real
+definition and a COMMON. **Essentially all of them are ordinary C**, not defects:
+
+```c
+/* spiel622.c */   int gm_RandomMod(int);          /* declaration -> COMMON */
+/* spiel622.c */   int gm_RandomMod(int n) { ... } /* definition  -> sec N */
+/* sim.c */        extern int gm_RandomMod(int);   /* declaration -> COMMON */
+```
+
+Every cross-TU function call in the program has this shape. A function declared and defined produces
+one real symbol and N COMMONs; the linker picks the real one, which is exactly right. Narrowing to data
+objects still reported ~200 rows, because `link_stubs.c` deliberately defines ~176 placeholder globals
+in one shared `.bss`, and the "size" column for those is the *remaining section length* (values like
+24,314,872), not the object's size — so a size-based filter does not separate them either.
+
+**The discriminator that worked in §6f-quater is not "does a COMMON clash exist" but "does the COMMON
+have the CORRECT layout while a real definition has a different one".** That is a per-symbol question
+requiring the metadata's recorded size and type, and there were exactly **one** such case in the tree
+(`locktable`). A second sweep attempt with a "referenced nowhere else" filter produced 39 candidates and
+**the first one checked was wrong** (`_g_stat_min_d` is referenced by `cm_ExChangeDesire.c` — the
+detector had stripped comments after collecting rather than before).
+
+**So: do not sweep for this class tree-wide.** Check the specific shape — a symbol whose metadata layout
+disagrees with the definition that wins the link — and prefer the tooling's own view of the winner
+(`build/split_poc.map`) over any grep-derived population.
+
 ## 6g. Two ways a whole-image instruction census lies, and both look like a finding (round 923)
 
 A mnemonic census over both images is a good instrument — it converts "residue is 6% of `.text`"
