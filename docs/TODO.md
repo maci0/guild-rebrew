@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-922: extended the census to x87 forms — `fmulp` is excess by placement, not by spelling.**
+
+- **Applied round 921's census trick to the other idiom pairs the docs name**, counting each on both
+  sides of the whole image:
+  ```
+  lea r,[r+r]    REF  7   BLD  7      <- exact
+  add r,r        REF 583  BLD 593
+  and r,0xffff   REF 16   BLD 19      (round 921)
+  xor r,r        REF 556  BLD 550
+  fsubr qword    REF 26   BLD 26      <- exact
+  fmulp st(1)    REF  4   BLD  7      <- 3 extra
+  ```
+  Three pairs match exactly, which is itself useful: the census distinguishes idiom families that are
+  closed from the one or two that are not.
+- **Located every `fmulp` and attributed it to a function.** The reference's four are at
+  `0x100192e2` (`gm_AllocSpieler`), `0x10019809`, `0x1001a132`, `0x1001a13d`. All four appear in my
+  object at the same VAs — **and `gm_AllocSpieler` carries three more**, at `0x10018f1f`,
+  `0x10018f5d`, `0x10018f65`.
+- **Diagnosed exactly what those three are, by disassembling both images at the site.** At
+  `0x10018f1b` both sides emit `fild dword ptr [esp+0x10]`; the reference then **jumps**
+  (`0x10018f1f jmp 0x10018f5e`) while mine inserts `fmulp st(1)` and jumps at `0x10018f21`. The
+  reference performs that multiply later as **`fmul dword ptr [0x100256b0]`** at `0x10018f5e` — a
+  memory-operand form. So my object spills the byte to `[esp+0x10]`, multiplies it, and loses the
+  constant-operand multiply the reference keeps.
+- **Two spellings tried against that, both worse or inert:**
+  - wrapping the product so the float multiply reads memory — **inert at 1004, obj 3689**;
+  - shapes §8a's own documented remedy, a `volatile` alias on the byte to force residency —
+    **606 / 3689, obj 3685**. The section's lever does not reach this site.
+- **Conclusion: these three are placement, not form.** The reference defers a multiply out of one arm
+  and my object folds it in; no expression shape moves it, which is the same class as the
+  scheduling/placement findings the walls doc already records. Recorded rather than re-probed.
+- **Measured:** both probes reverted; gate pass, residue **8,634**, raw-link `.data` **21,836**,
+  verify 281/283, byte-matched 264. No source change.
+
 **Round-921: counted the `volatile` zero-extend excess image-wide — three sites, all located, none reachable.**
 
 - **Found a lever class with a *quantified* target rather than a guessed one.** `msvc6-c-shapes.md`

@@ -257,6 +257,25 @@ converts "the residue is 6% of `.text`" into "three instructions differ in form"
 that can be closed. `and`/`xor` was the first try; the same treatment is available for any idiom pair
 the shapes doc names.
 
+**Counted, round 922** — six pairs, three closed outright and one newly explained:
+
+| idiom | REF | BLD | verdict |
+|---|---|---|---|
+| `lea r,[r+r]` | 7 | 7 | exact |
+| `fsubr qword` | 26 | 26 | exact |
+| `and r,0xffff` | 16 | 19 | 3 extra, all located (round 921) |
+| `xor r,r` | 556 | 550 | the same 3, from the other side |
+| `fmulp st(1)` | 4 | 7 | 3 extra, **placement not spelling** |
+| `add r,r` | 583 | 593 | 10 extra; the idiom is too common in library code for a count to attribute |
+
+The `fmulp` three are the instructive case. All four of the reference's sites appear at the same VAs
+in my object; `gm_AllocSpieler` adds three at `0x10018f1f`, `0x10018f5d`, `0x10018f65`. Disassembling
+both images shows why: at `0x10018f1b` both sides emit `fild [esp+0x10]`, then the **reference jumps**
+while mine inserts `fmulp st(1)` — the reference performs the multiply later, as
+`fmul dword ptr [0x100256b0]` at `0x10018f5e`. **A folded multiply, not a different form.** Shapes
+§8a's documented `volatile`-alias remedy scores **606/3689** here and does not reach it. Recorded as
+placement; do not re-spell it.
+
 **Read this as a limit of the toolchain-plus-constraints, not of the source.** Every function
 compiles, links at the reference's exact VA, and the deliverable is byte-identical outside
 `.text` (8,634 of 8,634 differing bytes are inside `.text`; `.data`, `.rdata`, `.reloc`,
