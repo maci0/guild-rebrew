@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-920: finished the `/Ow` sweep across the carriers — it is real but weak, and inert on the largest flag-free file.**
+
+- **Completed round 919's question.** That round tested `/Ow` on two carriers; this one enumerated the
+  build flags for all ten and found only two carry it (`gm_AllocSpieler`, `cm_ExSellObjekt`), so the
+  other eight were *untested* rather than *inert* — the distinction that decides whether the axis is
+  closed.
+- **`cm_ExSellObjekt`: `/Ow` is real but small.** `1148` with it against `1145` without, same object
+  size (2056) and same `SIZE_MISMATCH`. Compare `gm_AllocSpieler`'s **511-byte** swing. So the lever
+  exists on a second carrier and is two orders of magnitude weaker there.
+- **`ls_LoadBuildingEntityState`: inert — and this is the answer that matters**, because it is the
+  largest carrier without `/Ow` (1,463 bytes, 671 residue) and one of the three pinned files.
+  Tested it the only sound way: added `;/Ow` to its CMake `COMPILE_OPTIONS` (the list is
+  `;`-separated — measure-traps §6f), verified **both** `REBREW_TOOLCHAIN:msvc-6.0-sp5-pp` **and**
+  `/Ow` appear on the emitted compile line, rebuilt, and gated: **residue 8,634 unchanged, gate pass.**
+  Reverted.
+- **Caught a probe-invalidating trap mid-round.** `rebrew test <file> --cflags` **drops the pinned
+  toolchain** — it printed `TOOLCHAIN persisted → msvc-6.0` on a file whose CMake pin is
+  `msvc-6.0-sp5-pp`. So my first three attempts to sweep the pinned files measured *the wrong
+  compiler*, exactly the failure `measure-traps.md` §6e describes. Those numbers are void; the CMake
+  route above is the sound one, and it is why the answer for `ls_LoadBuildingEntityState` is worth
+  more than the ones from `--cflags`.
+- **Also restored the tool-owned metadata twice** (`chmod u+w`, `git checkout`, `chmod 444`) after
+  those probes wrote to it, and reconfigured the build from scratch afterwards — with
+  `--toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake`, not the flag-less form round 917 got
+  wrong.
+- **Measured:** gate pass, residue **8,634**, raw-link `.data` **21,836**, verify 281/283, byte-matched
+  264, imports 100. No source change.
+- **Verdict on the axis:** `/Ow` helps exactly one carrier meaningfully, marginally on a second, and
+  is inert on the largest untested one. Combined with round 919's `CrashDump` result, the per-file
+  flag axis is now measured on the carriers that matter — it is not a route to the residue.
+
 **Round-919: re-probed the flag axis on two carriers — the documented per-file finding holds, and `--cflags` dirties tool-owned metadata.**
 
 - **Set out to re-examine the constraint set rather than lift more declarations.** The first target was

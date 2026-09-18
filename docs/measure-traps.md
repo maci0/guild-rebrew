@@ -503,6 +503,16 @@ data` reported `/Ox /Gd` for `gm_AllocSpieler` while the compile line carried `/
 was my own probe. **After any `--cflags` sweep, `git diff src/rebrew-functions.toml` before drawing
 any conclusion from a flag value**, and restore with `chmod u+w` first.
 
+**`--cflags` also DROPS a per-file toolchain pin, so it cannot be used on the three sp5-pp files
+(round 920).** On `ls_LoadBuildingEntityState.c` — whose CMake `COMPILE_OPTIONS` is
+`/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp` — the command printed `TOOLCHAIN persisted → msvc-6.0` and
+proceeded to measure **a different compiler's output**. Every number from such a run is void, and
+nothing in the output marks it as invalid. **The sound route for a pinned file is CMake:** append the
+flag to that file's `COMPILE_OPTIONS` (`;`-separated — §6f), reconfigure, **grep the emitted
+`build.make` line to confirm both the pin and the new flag survived**, then build and gate. That is
+how `/Ow` was measured as inert on this carrier (residue 8,634 unchanged); the three `--cflags`
+attempts that preceded it were measuring `msvc-6.0` and were discarded.
+
 **A flag finding is per-carrier until measured otherwise (round 919).** `codegen-walls.md` §8 lists
 `flags | flat | 12 axes, ~120 compilations`, and shapes §94 says `/Ow` is load-bearing on
 `gm_AllocSpieler` while `/Oa` is inert. Both are true and neither generalises: re-measured,
