@@ -12,6 +12,7 @@
 #include <windows.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+#include "entity.h"
 
 #pragma intrinsic(memcpy, memset)
 
@@ -19,8 +20,6 @@ extern unsigned char g_slot_table[];
 
 double __cdecl gm_RandomFloat01(void);
 extern float g_const_0_0; /* 0x100256cc */
-extern float g_const_1_0;
-extern float g_const_neg_1_0;
 
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */

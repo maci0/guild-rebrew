@@ -7,6 +7,15 @@
 /* Shared entity/slot globals — majority types across TUs (Round-558). */
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern unsigned char g_slot_table[];
+extern char g_entity_end[];
+extern float g_const_1_0;
+extern float g_const_neg_1_0;
+extern int g_dynasty_field_2c;
+extern int g_dynasty_generation_counter;
+extern int g_query_state_a0c[];
+extern unsigned char g_byte_table_30861;
+extern unsigned char g_entity_base[];
+extern unsigned int g_entity_slot_table[];
 extern char g_entity_state_base[];
 extern unsigned char g_entity_type_bytes[];
 

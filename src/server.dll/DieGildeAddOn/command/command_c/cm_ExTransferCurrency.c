@@ -1,3 +1,4 @@
+#include "../../game/entity.h"
 
 /*
  * Ghidra decompilation reference:
@@ -48,7 +49,6 @@
 
 void* __cdecl gm_AddObjekt(int, unsigned int, int);
 
-extern unsigned int g_entity_slot_table[];
 
 #ifdef __clang__
 #pragma clang diagnostic push

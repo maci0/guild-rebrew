@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-912: the duplicated-globals lift finally lands — 9 symbols, 84 declarations, byte-neutral.**
+
+- **Applied round 911's own conclusion.** That round ended with the blocker stated precisely: "make
+  the header agree with every TU first, per declaration, then widen its use." So this round ran that
+  check first — every `extern` **function** declaration in every header against every definition
+  tree-wide — and got **0 disagreements** (round 911's `gm_ResetAllEntities` fix had cleared the only
+  one). With the header now inert, the lift was retried.
+- **Lifted 9 symbols across 20 files, in two measured steps.**
+  - `g_entity_slot_table` alone (15 sites) — build clean on the first try, **gate pass, byte-neutral**.
+    That single result disproved rounds 909/910's attribution of the failure to pinned toolchains.
+  - Then the remaining 8 (`g_const_1_0` 10 sites, `g_query_state_a0c` 10, `g_const_neg_1_0` 9,
+    `g_byte_table_30861`, `g_dynasty_field_2c`, `g_dynasty_generation_counter`, `g_entity_base`,
+    `g_entity_end`, 8 each) — also clean.
+- **Result: 20 files changed, 28 insertions, 84 deletions; `rebrew data` reports multi-TU globals
+  79 → 70.** Every symbol had one identical spelling across all its sites, which is what made the
+  move mechanical rather than judgemental.
+- **Measured: gate pass and byte-neutral** — residue **8,634 unchanged**, raw-link `.data` **21,836
+  unchanged**, verify 281/283, byte-matched 264, `rebrew test --all` still 233 RELOC + 31 EXACT,
+  lint clean, imports 100, data extents 195. Expected: an `extern` declaration emits no code, so
+  nothing can move as long as the declarations are correct — which is exactly what round 911's
+  header fix guaranteed.
+- **The three-round arc, stated plainly:** 909 batched 27 symbols and broke; 910 measured the
+  `LNK4006` baseline while suspecting the pins; 911 found the actual cause (`entity.h` disagreeing
+  with a defining TU) and fixed it; 912 landed the same refactor. **The cost of not checking the
+  header first was three rounds** — and the check is one grep, now written into
+  `workflow-traps.md` §3 so the next attempt starts there.
+- **70 duplicated globals remain** (the rest need includes added to TUs, or sit in the three sp5-pp
+  pinned files, which round 909 showed must be left alone). The method is now known-good and
+  incremental; each further batch is a measured step rather than a guess.
+
 **Round-911: found why the header lift keeps failing — no inert header exists — and landed one real declaration fix at zero cost.**
 
 - **Tried the safe subset of round 909's lift.** That round failed because it widened include graphs;

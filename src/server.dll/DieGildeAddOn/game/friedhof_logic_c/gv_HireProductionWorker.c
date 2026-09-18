@@ -7,11 +7,11 @@
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+#include "../entity.h"
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int g_worker_entry_count[];
 extern float g_output_share[];
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
-extern unsigned int g_entity_slot_table[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, int d, int e);

@@ -1,12 +1,12 @@
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
+#include "../../game/entity.h"
 
 ushort __cdecl gm_AllocSpieler(uint, int, int, ushort, int, uint, uint, uint);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern int __cdecl rand(void);
-extern int g_query_state_a0c[];
 extern char g_entity_state_base[];
 extern int g_entity_id_field; /* 0x100358A4 */
 extern unsigned char g_slot_table[];

@@ -8,6 +8,7 @@
 #include <windows.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+#include "entity.h"
 
 #pragma intrinsic(memcpy, memset)
 
@@ -32,16 +33,9 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 int g_next_object_id = 1;
 int g_current_year;
 char s_D__Develop_DieGildeAddOn_game_sp_10031004[] = "D:\\Develop\\DieGildeAddOn\\game\\spiel.c";
-extern int g_query_state_a0c[];
-extern unsigned char g_byte_table_30861;
 int __cdecl gm_GetBuildingTypeCategory(int);
 extern int g_citizen_count;
-extern int g_dynasty_field_2c;
-extern int g_dynasty_generation_counter;
-extern unsigned char g_entity_base[];
-extern char g_entity_end[];
 int __cdecl gm_GetBuildingTypeCategory(int btype);
-extern unsigned int g_entity_slot_table[];
 extern float g_const_1_5; /* 0x10025fb4 */
 extern float g_const_2_2; /* 0x10025fb0 */
 extern float g_const_0_06875; /* 0x10025fac */
@@ -51,8 +45,6 @@ extern float g_const_0_0; /* 0x100256cc */
 extern float g_gv_const_57c8; /* 0x100257c8 */
 extern double g_const_half; /* 0x100257d0 */
 extern unsigned char g_current_season;
-extern float g_const_1_0;
-extern float g_const_neg_1_0;
 
 /* Allocates and initializes a game entity structure. Allocates
  * memory via m_AllocTracked and zeroes the initial fields. */

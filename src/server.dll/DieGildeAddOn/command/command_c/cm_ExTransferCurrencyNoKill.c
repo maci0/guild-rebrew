@@ -37,11 +37,11 @@
  */
 
 #include "../command_internal.h"
+#include "../../game/entity.h"
 
 void __cdecl gm_SubObjectNoKill(unsigned int, unsigned int, unsigned int);
 void __cdecl gm_AddObjekt(int, unsigned int, int);
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
-extern unsigned int g_entity_slot_table[];
 
 /* Execution handler: transfers currency without killing the source
  * object. Like cm_ExTransferCurrency but uses gm_SubObjectNoKill

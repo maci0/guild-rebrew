@@ -2,8 +2,8 @@
 
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
+#include "../../game/entity.h"
 
-extern unsigned int g_entity_slot_table[];
 extern char* g_unknown_1de450;
 extern unsigned char g_current_season;
 

@@ -74,3 +74,8 @@ Each cost real budget and each is the kind of mistake the next attempt would rep
   against the TUs it was entering.
   The blocker is now stated precisely rather than worked around: make the header agree with every
   TU first, per declaration, then widen its use.
+  **Resolved in round 912.** The check — every `extern` function declaration in every header against
+  every definition tree-wide — returned **0 disagreements**, and with that the lift landed: 9 symbols,
+  20 files, 84 declarations removed, **byte-neutral at the gate**. So the sequence is: *check the
+  header against the tree first, then move declarations in measured batches.* The check is one grep
+  and would have replaced three rounds.

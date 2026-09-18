@@ -1,3 +1,4 @@
+#include "../entity.h"
 /* InitNewDynastyEntity - initializes a dynasty entity: sets its link flags,
  * fills the static field buffers with random height values, initializes the
  * entity's geometry/speed fields and spawn stats (5 values), then links it
@@ -21,7 +22,6 @@ extern unsigned char g_current_season;
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
-extern unsigned int g_entity_slot_table[];
 
 void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, void* entity)
 {

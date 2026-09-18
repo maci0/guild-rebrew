@@ -2,6 +2,7 @@
 #include "../../Units/m_alloc/m_alloc.h"
 
 #include <string.h>
+#include "entity.h"
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
@@ -15,7 +16,6 @@ extern float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
 extern float g_const_0_0;
-extern float g_const_1_0;
 extern double g_dbl_const_6d0; /* 0x100256d0 */
 extern int g_alchemy_entity_table[];
 int* __cdecl ahm_LookupEntityInTable(int);
