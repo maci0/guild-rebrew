@@ -362,6 +362,64 @@ every later symbol and fails the composition check. That is not a hypothesis: it
    scores 277 against the shipped 450, and "`/G3`..`/G4` with `/Gd /Oy /Op` … so there is no CFLAGS
    lever"). So the headroom exists and is deliberately unused.
 
+### 12b. Every one of the 19 carriers' divergence sites is already documented (round 978)
+
+The round-975 first-divergence table made it possible to ask a question earlier rounds could not: **is any
+carrier's actual divergence site undocumented?** Round 978 checked all 19 with
+`scripts/whathas.py <va> --window 48`. Result: **none are new**. The one apparent exception was instructive.
+
+| carrier | bytes | first divergence | documented at |
+|---|---|---|---|
+| `gm_AllocSpieler` | 2823 | `+0xaa` store sink across `rep stosd` | shapes §109: 17-variant sweep, closed |
+| `CrashDumpUnhandledExceptionFilter` | 1583 | `+0x2` frame `0x280` vs `0x284` | shapes §81 frame rule |
+| `cm_ExSellObjekt` | 966 | `+0x2c` slot displacement | allocator Finding 61 |
+| `ls_LoadBuildingEntityState` | 671 | `+0x3c` branch target | §13 block placement |
+| `cm_ExCopyEntityData` | 462 | `+0x30` branch target | shapes §124 |
+| `gv_ExAllocGraveyardWorker` | 451 | `+0x107` branch target | §2 epilogue merge |
+| `ServerMainThread` | 367 | `+0x3c7` branch target | §13 block placement |
+| `gm_AllocGebaeude` | 327 | `+0x60` operand | §13 |
+| `vfs_OpenStream` | 238 | `+0x36` `cmp [eax],0` vs `mov al,t` | §13 |
+| `gm_FindNextFilteredEntity` | 215 | `+0x6` xor/test | §13 |
+| `ahm_ExAllocAlchemist` | 198 | `+0xcc` `lea` accumulator | **the file's own header, lines 63-70** |
+| `gm_CheckInventoryCapacity` | 97 | `+0x13` store order | TODO round 974 |
+| `m_AllocTracked` | 92 | `+0x11` callee-save vs compare | allocator Finding 51 |
+| `srv_LoadBuf` | 49 | `+0x50` store/arg order | in-source, round 956 |
+| `gm_ObjectsAvailble` | 25 | `+0x10d` `ebx`/`edi` | §1 of this file |
+| `vfs_ReadCompressed` | 23 | `+0x9a` clamp order | shapes §85, round 187 |
+| `cm_ExProdObjekt` | 21 | `+0xcd` load hoist | §13 |
+| `cm_ProcessCommandQueue` | 15 | `+0x37` arm order | in-source, 18 rounds |
+| `gm_CalculateProductionValue` | 5 | `+0xe4` `fxch`/`cmp` swap | TODO: "CLOSED at its floor", 4 classes |
+
+**The instructive exception: `ahm_ExAllocAlchemist`.** `whathas.py` reported *"no documented probe in 6
+docs"* at `0x1000bebc`, which reads as an unworked carrier. It is not — the divergence is documented at
+**`ahm_ExAllocAlchemist.c:63-70`**, in the file's own header comment rather than in `docs/`. The comment
+names the exact instruction pair and the exact probe:
+
+```
+ * That fold and the `lea edx,[eax+eax*8]` vs `lea eax,[eax+eax*8]` split at
+ * index 66 are both register-pressure consequences: in isolation a named
+ * offset local, a base-pointer local and a regrouped `i*0x87*4` all emit the
+ * candidate's form, so neither is steerable from the expression alone.
+ * ... a `slot_off = slot_index * 0x21c` local shared by the guard, both
+ * memsets and the two -1 stores, to force the target's single edx stride at
+ * 0x1000bebb, 109;
+```
+
+So a per-file header comment is a **second store of probe history that `whathas.py` does not index** — the
+tool searches `docs/` only. A carrier whose history lives in its `.c` header reads as fresh work, and an
+agent that trusts the tool will re-run a probe already measured at 109 against a shipped 452.
+
+**The check, before treating a carrier as unworked:**
+
+```bash
+python3 scripts/whathas.py 0x<va> --window 48     # searches docs/ only
+sed -n '1,120p' <the carrier's .c>                # the per-file header is the other half
+```
+
+Small carriers resist this best — their whole history fits in a header comment, so it never needed a
+`docs/` entry. Round 976 lost budget to exactly this: it probed `srv_LoadBuf` (`+0x50`) and
+`m_AllocTracked`'s guard order, both already in-source, and measured +574 and +539.
+
 ### 13. The residue is fully attributed and classified (round 973)
 
 Three questions have now been answered by measurement rather than by argument: *where* the residue is,

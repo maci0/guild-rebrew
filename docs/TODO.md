@@ -27183,3 +27183,42 @@ scan found `0x10035450` referenced **15 times** in `.text` (`mov eax,[0x10035450
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, data extents 195 clean, imports 100, wine load OK. No source edit this
 round; no baseline moved.
+
+## Round 978 — all 19 carriers are closed; the per-file header is unindexed probe history
+
+**Every carrier's divergence site is already documented**, checked one by one with
+`scripts/whathas.py <va> --window 48` against the round-975 first-divergence table. No new vein. The
+classification in codegen-walls §13 stands unchanged; the 19 carriers sum to **exactly 8628** bytes.
+
+**The one apparent exception was the finding.** `whathas.py 0x1000bebc` (the `ahm_ExAllocAlchemist`
+divergence) reports *"no documented probe in 6 docs"*, which reads as untouched work. It is fully
+documented at **`ahm_ExAllocAlchemist.c:63-70`** — in the file's own header comment, which names the exact
+instruction pair (`lea edx,[eax+eax*8]` against `lea eax,[eax+eax*8]`, "index 66"), classifies it as a
+register-pressure consequence, and records the probe that tests it at **109** against a shipped **452**.
+
+`whathas.py` searches `docs/` only. A carrier whose history lives in its `.c` header is invisible to it —
+and small carriers are the most exposed, because their whole history fits in a header comment and so never
+earned a `docs/` entry. `cm_ProcessCommandQueue` (18 rounds, in-source at lines 100-320) and `srv_LoadBuf`
+are the same shape.
+
+**This is what round 976 cost.** Round 976 opened by probing `srv_LoadBuf`'s assignment order and
+`m_AllocTracked`'s guard order — both already closed in their own headers — and measured +574 and +539 for
+work that could not have landed. → codegen-walls §12b, workflow-traps §8.
+
+**Objective state, measured this round and independently of `rebrew`:**
+
+| criterion | state |
+|---|---|
+| `.text` VirtualSize 0x22846 | **met** — both reference and build read 0x22846 |
+| import table exactly 100 | **met** — gate reports 100, matches |
+| data bytes matching | **met** — all 8628 differing bytes are inside `.text` (direct `cmp`, round 977) |
+| residue at zero | not met — 8628, all `.text`, 19 carriers |
+| all functions EXACT | not met — 32 EXACT + 244 RELOC byte-matched, 18 PROVEN, 1 NEAR_MATCHING (`ServerMainThread`), 1 STUB (`gm_AllocSpieler`) |
+| gate green | **met** |
+
+Only 2 functions sit below byte-matched, and both are the named scheduler/register-pressure classes
+(shapes §109 for `gm_AllocSpieler`; §13 block placement for `ServerMainThread`). The remaining residue is
+inside 17 PROVEN/RELOC carriers, each closed at a documented wall.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283, residue 8628, raw-link `.data`
+21481, data extents 195 clean, imports 100, wine load OK. No source edit; no baseline moved.

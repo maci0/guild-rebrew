@@ -293,3 +293,37 @@ search, not just the compile.
 **Always end a mutating sweep by restoring the source and re-running the gate** — a sweep that leaves a
 candidate in the tree, or a stale object in `build/`, produces a residue reading that has nothing to do
 with what is committed.
+
+## 8. Probe history lives in TWO places; `whathas.py` indexes only one (round 978)
+
+`scripts/whathas.py` searches the four codegen docs, `naming_conventions.md` and `TODO.md` — all under
+`docs/`. But a carrier's probe history is also, and often *only*, in the **header comment of its own `.c`
+file**: the instruction pair, the probe variants, and the score each one produced. `whathas.py` cannot see
+any of that, and neither can a `grep` of `docs/`.
+
+**Measured on `ahm_ExAllocAlchemist`.** `whathas.py 0x1000bebc --window 48` reports *"no documented probe
+in 6 docs"*, which reads as an untouched carrier. The divergence is in fact fully documented in the file
+header, `src/server.dll/DieGildeAddOn/game/alchemy_logic_c/ahm_ExAllocAlchemist.c:63-70`, including the
+exact instruction pair (`lea edx,[eax+eax*8]` against `lea eax,[eax+eax*8]`) and the exact probe that
+tests it, measured at **109** against a shipped **452**.
+
+**Two carriers' whole histories are like this**, and both are small — which is why they were missed: a
+small function's probe history fits in its header comment, so it never earned a `docs/` entry.
+`cm_ProcessCommandQueue` (18 rounds of history, `cm_ProcessCommandQueue.c:100-320`) and `srv_LoadBuf`
+(round 956) are the same shape.
+
+**The cost is concrete.** Round 976 opened by probing two carriers that were already closed in-source —
+`srv_LoadBuf`'s `header[0xb]`/`header[0xc]` order (documented in its own header) and `m_AllocTracked`'s
+guard order (bisected in its header, allocator Finding 51). Both probes ran, both were reverted, and
+neither could have landed: **+574** and **+539**.
+
+**The rule.** Before probing a carrier, read both stores:
+
+```bash
+python3 scripts/whathas.py 0x<va> --window 48    # docs/ only — necessary, not sufficient
+sed -n '1,120p' ""<carrier>.c                    # the per-file header, always
+```
+
+Treat "no documented probe" from `whathas.py` as *"no `docs/` entry"*, never as *"unworked"*. The round
+brief's own wording — read the file header before probing, since "no documented probe" is not proof of
+novelty — already says this; round 976 is what happens when only the tool is consulted.
