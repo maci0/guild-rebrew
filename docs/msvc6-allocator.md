@@ -3283,11 +3283,28 @@ landscape is not flat, and the axis is searchable. But the climb stops at a stri
 multi-restart version was **abandoned on cost**: each restart is ~36 candidates per sweep with ~28
 accepted moves at 0.85 s, roughly a quarter of an hour, so 25 restarts is impractical in a round.
 
-**What a future attempt should do instead of more hill-climbing:** the mapping from initialiser sequence
-to slot assignment is deterministic and cheap to sample, so **fit it** -- sample a few hundred orders,
-regress which positional features predict each slot, then *construct* the order rather than search it.
-The reference's own assignment is strictly ascending, which suggests the original simply declared the nine
-pointers in an order our reconstruction does not have.
+**Round 967 sampled the map instead of searching it, and that CLOSES the ordering hypothesis on a
+structural argument, not an exhaustion one.** Sixty random orders were compiled and their slot runs read
+back. Two invariants hold in every sample:
+
+```
+position 7 of the nine-initialiser run -> ALWAYS 0x18
+position 8                              -> ALWAYS 0x20
+positions 0..6                          -> any slot EXCEPT 0x18 and 0x20
+```
+
+**So `0x18` and `0x20` are not free slots in this run: they are pinned to its last two initialisers.**
+The reference's assignment is `0x10, 0x14, 0x2c, 0x18, 0x20, 0x28, 0x30, 0x1c, 0x24` -- it puts `0x18` at
+**position 3** and `0x20` at **position 4**. That is unreachable by *any* permutation of this run, which is
+why the 5,040-order sweep (round 964) and the hill-climb (round 966, 2/9 -> 5/9 then stuck) both failed:
+**the axis was never a pure permutation.** Sixty random orders produced sixty distinct assignments with a
+maximum positional score of **2 of 9**, and none matched.
+
+**The conclusion is that the reference's `0x18`/`0x20` are claimed by something other than the 8th and 9th
+initialisers of our run** -- a different variable, a different declaration, or a different statement
+grouping in the original. The ordering axis is **closed**; further permutation is provably futile, and
+the search should move to *what occupies those two slots* rather than *in what order the initialisers
+appear*.
 
 **Method that made this affordable, and worth reusing:** the full link cycle costs minutes per candidate,
 but an initialiser permutation only needs the **single translation unit compiled to an object** -- 0.85 s,

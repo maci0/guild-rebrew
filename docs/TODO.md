@@ -49,6 +49,31 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-967: sampled the map and CLOSED the ordering hypothesis structurally — the axis was never a pure permutation.**
+
+- **Took round 966's own recommendation and fitted the map instead of climbing it.** Compiled 60 random
+  initialiser orders (0.85 s each) and read back the nine emitted slots. Two invariants hold in **every**
+  sample:
+  ```
+  position 7 of the run  ->  ALWAYS 0x18
+  position 8             ->  ALWAYS 0x20
+  positions 0..6         ->  any slot EXCEPT 0x18 and 0x20
+  ```
+- **That is decisive, and it is a structural argument rather than an exhaustion one.** `0x18` and `0x20`
+  are **pinned to the last two initialisers** of this run, so no permutation of the run can place them
+  anywhere else. The reference's assignment is `0x10,0x14,0x2c,0x18,0x20,0x28,0x30,0x1c,0x24` — `0x18` at
+  **position 3**, `0x20` at **position 4** — which is **unreachable by any permutation**.
+- **That explains the previous three rounds' failures at once:** round 964's 5,040-order sweep and round
+  966's hill-climb (2/9 → 5/9 then stuck) were not unlucky and not searching a hard landscape — **they were
+  searching a space that cannot contain the answer.** Sixty random orders gave sixty distinct assignments,
+  max positional score **2 of 9**, none matching.
+- **The axis is closed.** The reference's `0x18`/`0x20` are claimed by something other than the 8th and 9th
+  initialisers of our run — a different variable, a different declaration, or a different statement
+  grouping in the original. **The next question is what occupies those two slots, not in what order the
+  initialisers appear.**
+- **Measured:** no source change; tree verified clean after the sweep and re-gated at residue **8,628**,
+  raw-link `.data` **21,481**, verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-966: hill-climbed the nine-slot assignment — 2/9 -> 5/9 in two swaps, then a local optimum.**
 
 - **Round 965 left the axis open at 9! = 362,880 orderings.** Instead of enumerating, ran a hill-climb over
