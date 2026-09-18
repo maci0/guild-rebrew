@@ -667,3 +667,54 @@ IAT slots at the head of `.rdata` (`0x10024000`+), which are linker-supplied and
 123 are `extern`-only declarations whose addresses are already correct in `src/rebrew-data.toml`. Both
 kinds show `status: "UNCHECKED"` and ROI 10.0 regardless of difficulty, so the list's ordering carries no
 signal — see measure-traps §19.
+
+### 12c. The fault-versus-symptom split, and the tool that makes it mechanical (round 979)
+
+Section 12b said all 19 carriers are documented. It is worth making that claim *reproducible*, because it is
+easy to reproduce wrongly: **looking up the symptom address instead of the fault address makes a closed
+carrier read as open work.**
+
+- **Symptom** — the lowest differing **byte**. On this tree it is usually a branch displacement or a
+  displaced operand, i.e. downstream of the real fault. Its address frequently has no `docs/` entry, or only
+  residue-table mentions.
+- **Fault** — the first instruction whose `(mnemonic, op_str, size)` actually disagrees when both streams are
+  walked from the function entry. That is the address to look up.
+
+`scripts/fault_address.py` prints both columns for all 19 carriers, so the split is mechanical:
+
+```
+carrier                                symptom      FAULT        fault instruction
+_gm_AllocSpieler                       0x100188fa   0x100188fa   lea edx, [edx + 0x100358fc]
+_CrashDumpUnhandledExceptionFilter@4   0x10002772   0x10002770   sub esp, 0x280
+_cm_ExProdObjekt                       0x1000e20d   0x1000e20c   mov edx, [0x101de450]
+_vfs_ReadCompressed                    0x10008b2a   0x10008b2a   mov edi, eax
+...
+```
+
+The two addresses usually coincide; they separate exactly where the fault is a size change that displaces
+everything after it. Every fault address carries documentation:
+
+| fault address | doc hits | | fault address | doc hits |
+|---|---|---|---|---|
+| `gm_AllocSpieler` `0x100188fa` | 7 | | `ahm_ExAllocAlchemist` `0x1000bebb` | 4 |
+| `CrashDump` `0x10002770` | 33 | | `gm_CheckInventoryCapacity` `0x10019ee3` | 7 |
+| `cm_ExSellObjekt` `0x1000d959` | 4 | | `m_AllocTracked` `0x10006591` | 18 |
+| `ls_LoadBuildingEntityState` `0x1001292a` | 3 | | `srv_LoadBuf` `0x1000a5c0` | 2 |
+| `cm_ExCopyEntityData` `0x1000ec2e` | 2 | | `gm_ObjectsAvailble` `0x1001607c` | 3 |
+| `gv_ExAllocGraveyardWorker` `0x10011cf6` | 14 | | `vfs_ReadCompressed` `0x10008b2a` | 2 |
+| `gm_AllocGebaeude` `0x10017530` | 3 | | `cm_ExProdObjekt` `0x1000e20c` | 1 |
+| `vfs_OpenStream` `0x10009056` | 4 | | `cm_ProcessCommandQueue` `0x1000aaf6` | 6 |
+| `gm_FindNextFilteredEntity` `0x10016f86` | 20 | | `gm_CalculateProductionValue` `0x10019804` | 5 |
+
+**The two low-hit rows were checked by hand and both are covered**, in their own file headers rather than by
+a standalone `docs/` section:
+
+- `vfs_ReadCompressed` `0x10008b2a` — the clamp order, shapes §85 plus the round-187 closure in the file
+  header ("three walls and nothing else; do not re-probe without a new allocator finding").
+- `cm_ExProdObjekt` `0x1000e20c` — `src/server.dll/DieGildeAddOn/command/command_c/cm_ExProdObjekt.c:147-160`:
+  *"the dead store goes through a cast volatile pointer, which msvc6 treats as aliasing every global, so the
+  global load is pinned below it"*, with ~50 measured variants all landing on the identical mismatch set
+  (205-218, 223-224, 410). §91's sp5-pp screening independently calls this "the +204 global-load lane is
+  scheduler-bound and retires".
+
+So §12b's conclusion holds and is now checkable two ways rather than asserted.

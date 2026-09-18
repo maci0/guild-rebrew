@@ -27222,3 +27222,46 @@ inside 17 PROVEN/RELOC carriers, each closed at a documented wall.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283, residue 8628, raw-link `.data`
 21481, data extents 195 clean, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 979 — fault vs symptom, made mechanical; three probes reverted (all already documented)
+
+**Worked `ServerMainThread`** (classified source-bound by the sp5-pp oracle, shapes §91). Byte analysis
+narrowed the fault to `+0x454`: the reference emits `mov ecx,[0x101deac0]` (6B) where we emit
+`mov eax,[0x101deac0]` (5B), desyncing the downstream packet-build block by 3. Three probes:
+
+| probe | link delta |
+|---|---|
+| named `unsigned char* qbuf` alias for `cmd_buffer_primary` across the stores | **+0** (byte-identical — msvc6 folds the alias) |
+| the same alias assigned *before* the `total_size` load | **+0** (byte-identical) |
+| `total_size` load moved below the first four stores | **+861** |
+
+All three were already recorded. The fault is shapes **§126** ("`ServerMainThread`'s +3 window"), which
+names the exact site, explains the mechanism, and carries the `volatile` probe table that settles it (store
+`volatile` load-bearing, **+4** if dropped; read `volatile` inert, **+0**). The alias-fold result matches
+`ahm_ExAllocAlchemist.c:63-70`. The file header at `ServerMainThread.c:122-129` states the mechanism
+verbatim. **Round 978's own rule was written and then broken one round later** — the tool was consulted on
+the *symptom* (`0x10009767`, 4 `TODO.md` hits that read as "known, unprobed") instead of the *fault*
+(`0x100097f4`, which returns shapes §126). → workflow-traps §9.
+
+**New tool: `scripts/fault_address.py`.** Prints both columns for all 19 carriers, so the split is
+mechanical rather than a judgement call:
+
+```
+carrier                                symptom      FAULT        fault instruction
+_ServerMainThread@4                    0x100096aa   0x100096a8   je 0x10009d0e
+_vfs_ReadCompressed                    0x10008b2a   0x10008b2a   mov edi, eax
+```
+
+Every fault address carries documentation (1-33 hits). The two low-hit rows were checked by hand and both
+are covered in their own file headers: `vfs_ReadCompressed` `0x10008b2a` (clamp order, shapes §85 + the
+round-187 closure) and `cm_ExProdObjekt` `0x1000e20c` (`cm_ExProdObjekt.c:147-160`: the cast-volatile dead
+store aliases every global, pinning the load below it; ~50 variants, identical mismatch set). So round
+978's "all 19 closed" conclusion holds and is now checkable two independent ways. → codegen-walls §12c.
+
+**Also corrected the round-978 tool note.** `whathas.py` now prints *"Check the file header for the
+enclosing function before assuming it is unexplored"* on a no-hit result, so the §8 trap is signposted at
+the point of use.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, data extents 195 clean, imports 100, wine load OK. No source edit kept;
+no baseline moved.

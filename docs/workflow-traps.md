@@ -327,3 +327,49 @@ sed -n '1,120p' ""<carrier>.c                    # the per-file header, always
 Treat "no documented probe" from `whathas.py` as *"no `docs/` entry"*, never as *"unworked"*. The round
 brief's own wording — read the file header before probing, since "no documented probe" is not proof of
 novelty — already says this; round 976 is what happens when only the tool is consulted.
+
+## 9. The round-978 rule was written and then broken in the same session (round 979)
+
+Round 978 established: *"no documented probe" from `whathas.py` means "no `docs/` entry", never
+"unworked" — read the carrier's `.c` header too* (workflow-traps §8). Round 979 read the tool, skipped the
+header, and spent its budget re-deriving three already-recorded results.
+
+**What happened.** Working `ServerMainThread` (classified source-bound by the sp5-pp oracle, §91), the
+first-divergence table gave `+0x3c7`, and byte analysis narrowed the real fault to `+0x454`: the reference
+emits `mov ecx,[0x101deac0]` (6B) where we emit `mov eax,[0x101deac0]` (5B), desyncing the downstream
+block by 3. Three probes followed, all reverted:
+
+| probe | link delta |
+|---|---|
+| named `unsigned char* qbuf` alias for `cmd_buffer_primary` across the stores | **+0** (byte-identical — msvc6 folds the alias) |
+| the same alias assigned *before* the `total_size` load | **+0** (byte-identical) |
+| `total_size` load moved below the first four stores | **+861** |
+
+All three were already recorded. The fault is `docs/msvc6-c-shapes.md` **§126** ("`ServerMainThread`'s +3
+window: a rematerialised constant the reference carries in a register"), which names the exact site
+(`0x100097fb  mov [esp+0x1c],eax` against our 8-byte `mov [esp+0x14],0xffffffff`), explains the mechanism,
+and already carries the `volatile` probe table that settles it (store `volatile` load-bearing, +4 if
+dropped; read `volatile` inert, +0). The alias-fold result is the same one `ahm_ExAllocAlchemist.c:63-70`
+records. And the file's own header at `ServerMainThread.c:122-129` states the mechanism verbatim: *"msvc6
+propagates the compared constant into the cmd+4 store … Moving the comparison off `sent_bytes` removes the
+propagation but also hoists the cmd+0x10 store ahead of the argument pushes, so neither spelling matches
+yet."*
+
+`whathas.py 0x100097f4` **does** return a hit — shapes §126. The tool was not at fault this time; it was
+consulted on `0x10009767` (the branch-displacement symptom) rather than on `0x100097f4` (the fault), and
+the symptom's four `TODO.md` hits read as "known, unprobed".
+
+**The refined rule.** On this tree the *first differing byte* is usually a **symptom**, and a symptom whose
+target is displaced will not be documented. Find the fault — the lowest byte where the two **instruction
+streams** stop agreeing, not where the first byte differs — and look *that* address up before probing:
+
+```bash
+python3 scripts/first_divergence.py <symbol>        # symptom: lowest differing byte
+# then decode both sides and find the first STRUCTURALLY different instruction
+python3 scripts/whathas.py <that fault address> --window 48
+sed -n '1,140p' <carrier>.c                          # §8's second store
+```
+
+On `ServerMainThread` the symptom address had 6 hits and the fault address had 3, one of them the
+dedicated section. Looking up the symptom instead of the fault is what made a fully-closed carrier read as
+open.
