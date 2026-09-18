@@ -829,3 +829,31 @@ bytes and the compiler still folds them.
 This instance was found *by* `scripts/instr_diff.py` reporting `ref-only x4: pop R`, which is a cheap screen
 for the class: **a carrier with `ref-only` `pop`/`ret` counts is an epilogue-merge instance, not an operand
 problem.** Worth running before probing any carrier.
+
+### 5 addendum — the `#pragma optimize` axis, swept on `ls_LoadBuildingEntityState` (round 996)
+
+§5 records that flags are not a general lever, and the `#pragma optimize` letter axis has landed once
+(`cm_ExCopyEntityData` pass 5: `"a", on` took 512 → 523, because **`/Oa` is not part of `/O2` or `/Ox`** and
+the toml cflags apply per translation unit, so the pragma is the only way to reach it). Because that lever
+*did* pay once, it is worth knowing whether it pays on the other carriers. Round 996 tested it on
+`ls_LoadBuildingEntityState` — the carrier with the highest aligned-match rate of the four mid-size rows
+(87.8%, 17 of 33 hunks same-kind) and, until now, **no `#pragma optimize` anywhere in the file**.
+
+| pragma | residue | delta |
+|---|---|---|
+| none (baseline) | 8,628 | — |
+| `#pragma optimize("a", on)` | 8,749 | **+121** |
+| `#pragma optimize("y", off)` | 9,366 | **+738** |
+
+Both reverted. `"y", off` is the letter that reproduced `server4.c`'s `[ebp-4]` slot and it is catastrophic
+here; `"a", on` is the letter that landed on `cm_ExCopyEntityData` and costs 121 here.
+
+**This is consistent with §5 and worth recording as a per-carrier fact rather than a general one.** The
+`#pragma optimize` letter axis is not a lever that transfers: each letter's effect depends on the function's
+own shape, and on these two carriers both of the letters that have paid elsewhere are large regressions.
+Combined with the existing sweeps (`srv_LoadBuf`: `"a", on` → 180; `server4.c`: `"y", off` already applied;
+`ServerMainThread`: `optimize("", off)` → 847), the axis now has a measured, mostly-negative answer on five
+carriers.
+
+**Do not sweep this axis again without a new reason.** The one case where it paid
+(`cm_ExCopyEntityData`, /Oa) is documented and already in the source.

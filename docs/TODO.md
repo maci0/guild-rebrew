@@ -27758,3 +27758,28 @@ existing entry, where the epilogues are byte-identical and only the branch *targ
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 996 — the `#pragma optimize` axis is swept on a fifth carrier; both letters regress
+
+`#pragma optimize` has landed exactly once (`cm_ExCopyEntityData` pass 5, `"a", on`, 512 → 523 — because
+`/Oa` is not implied by `/O2` or `/Ox`, so the pragma is the only route to it). Since it *did* pay once, this
+round tested it on `ls_LoadBuildingEntityState`, which had **no pragma in the file** and the best
+aligned-match rate of the mid-size carriers (87.8%).
+
+| pragma | residue | delta |
+|---|---|---|
+| none (baseline) | 8,628 | — |
+| `#pragma optimize("a", on)` | 8,749 | **+121** |
+| `#pragma optimize("y", off)` | 9,366 | **+738** |
+
+Both reverted. The letter that landed elsewhere (`"a"`) costs 121 here; the letter that reproduced
+`server4.c`'s frame slot (`"y", off`) costs 738. → codegen-walls §5 addendum.
+
+**Conclusion: the axis does not transfer between carriers.** With this, `#pragma optimize` has a measured,
+mostly-negative answer on five carriers (`srv_LoadBuf` `"a",on` → 180; `server4.c` `"y",off` already applied;
+`ServerMainThread` `optimize("",off)` → 847; `cm_ExCopyEntityData` `"a",on` → 523, the one win; and now
+`ls_LoadBuildingEntityState` at +121/+738). Recorded so it is not swept again without new evidence.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; `src/` unmodified; no
+baseline moved.
