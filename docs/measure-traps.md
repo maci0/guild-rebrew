@@ -132,6 +132,19 @@ the 8,634 as one cascade.
     silently. **When a guard fires, confirm it fired for the reason you intended.**
   **Rule: falsify every guard against a state where it must fire, and check the attribution, not just
   the exit code.**
+- **A probe that fails to fire is not evidence the guard is broken — check the probe first
+  (round 908).** Three successive attempts to falsify one new check all "passed", and all three were
+  the *probe's* fault: the entry was still inside the section, the TOML had a duplicate key so it
+  never loaded, and a `str.replace` matched a different entry than intended. The guard was correct
+  every time. **Before concluding a check is dead, confirm the input actually reaches it** — print
+  the parsed row, not just the exit code. This is the mirror of round 907's finding (a real dead
+  guard, where the *gate* was wrong); the two look identical from the outside and are separated only
+  by inspecting the input.
+- **Editing a file to change nothing is not a no-op (round 908).** A docstring-only edit to
+  `data_extent_check.py` collapsed a line and produced
+  `end = cur["va"] + cur["size"]        if end <= nxt["va"]:`. `ast.parse` caught it in one command;
+  without that check it would have failed at runtime in the gate, where the symptom (`could not read`
+  / non-zero exit) points at the tree rather than the tool.
 - **A metadata size that crosses the next tracked symbol is wrong by construction — and the check is
   one command (round 905).** Sorting the sized `.data`/`.rdata` entries by VA and asking whether
   `va + size > next_va` found **exactly two** defects in the whole tree, both real, both invisible to

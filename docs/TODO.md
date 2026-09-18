@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-908: audited the remaining gate guards, then closed the last gap in the extent check.**
+
+- **Falsified the two guards round 907 did not reach, and confirmed the baselines are tight.**
+  - **Baselines vs actuals:** `BASELINE=281`, `BYTE_BASELINE=264`, `RESIDUE_BASELINE=8634`,
+    `DATA_BASELINE=21836` — **all four equal the measured values exactly**, so no baseline has
+    drifted loose into "passes for the wrong reason".
+  - **Residue guard:** read in full. It parses the hex out of the `.text differing` line, compares
+    **numerically**, sets `rc=1` on regression *and* `rc=1` when the measurement is missing. Sound on
+    both failure modes.
+  - This completes the audit: all six gate checks are now falsified or read line by line (round 881
+    the import check, 906 the extent check, 907 lint + compile, this round residue + baselines).
+- **Ran the extent check over every section, not just `.data`/`.rdata`.
+  `.bss` 50 sized entries, `.data` 107, `.rdata` 5 — zero crossings in all three.**
+- **Found and closed the check's last blind spot: a last-in-section entry has no neighbour to
+  cross.** `data_extent_check.py` compared each entry only against the *next tracked symbol*, so an
+  entry that overran its own section end while being last would pass. Added `section_bounds()` —
+  which reads the ranges from the reference binary rather than hardcoding them — plus a
+  section-extent comparison.
+  - **Falsified it:** a synthetic entry at `0x10026e40` with `size 256` produces
+    `BUG: g_overrun_probe @0x10026e40 size=256 runs past .rdata end 0x10026e81 by 0xbf`, exit 1.
+  - **Current tree:** 195 entries, 0 overruns, exit 0.
+- **Two self-inflicted errors worth recording, both caught by re-running the tool.**
+  - A "no-op" edit to the script's docstring silently mangled a code line
+    (`end = cur["va"] + cur["size"]        if end <= nxt["va"]:`), which `ast.parse` caught
+    immediately. Editing a file to change nothing is not a no-op; verify syntax after any edit.
+  - The first three attempts to *falsify* the new check were themselves broken (entry still inside
+    the section, a duplicate TOML key, a substitution that hit the wrong entry). The guard was right
+    each time; the probes were wrong. **A probe that fails to fire is not evidence the guard is
+    broken** — check the probe first.
+- **Measured:** gate pass, residue **8,634**, raw-link `.data` **21,836**, verify 281/283,
+  byte-matched 264, imports 100, lint clean. No source or metadata change.
+
 **Round-907: applied round 906's rule to the gate's own checks — the lint guard had never been able to fail.**
 
 - **Tried:** round 906's lesson was "a guard must be tested against a state where it should fire."

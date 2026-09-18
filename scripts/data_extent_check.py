@@ -104,6 +104,35 @@ def load_rows(toml_path):
     return rows
 
 
+def section_bounds():
+    """Reference section VA ranges, read from the binary rather than hardcoded.
+
+    An entry can also be wrong by running past its own section's virtual extent,
+    which no neighbour comparison catches when the entry is the last one.
+    """
+    import pefile
+
+    ref = REPO / "original" / "Server" / "server.dll"
+    if not ref.exists():
+        return {}
+    pe = pefile.PE(str(ref), fast_load=True)
+    base = pe.OPTIONAL_HEADER.ImageBase
+    bounds = {}
+    for sec in pe.sections:
+        name = sec.Name.rstrip(b"\x00").decode()
+        lo = base + sec.VirtualAddress
+        bounds[name] = (lo, lo + sec.Misc_VirtualSize)
+    return bounds
+
+
+def section_of(va, bounds):
+    """Which reference section contains *va*, or None."""
+    for name, (lo, hi) in bounds.items():
+        if lo <= va < hi:
+            return name
+    return None
+
+
 def classify(rows):
     """Split crossings into (contained, overlaps).
 
@@ -220,6 +249,24 @@ def main():
         return 1 if bugs else 0
 
     print(f"checked {len(rows)} sized .data/.rdata entries")
+
+    # A last-in-section entry has no neighbour to cross, so check the section
+    # extent as well.  Round 908: all 162 entries were inside their section.
+    bounds = section_bounds()
+    for row in rows:
+        sec = section_of(row["va"], bounds)
+        if sec is None:
+            continue
+        lo, hi = bounds[sec]
+        if not (lo <= row["va"] < hi):
+            continue
+        if row["va"] + row["size"] > hi:
+            print(
+                f"\nBUG: {row['name']} @0x{row['va']:x} size={row['size']} "
+                f"runs past {sec} end 0x{hi:x} by "
+                f"0x{row['va'] + row['size'] - hi:x}"
+            )
+            return 1
 
     views = [(c, n, e) for c, n, e in contained + overlaps if (c, n, e) not in bugs]
     if views:
