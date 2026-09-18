@@ -65,7 +65,7 @@ status = "UNCHECKED"
 size = 4
 
 ["SERVER.0x101de5a4"]
-name = "g_aemter_table"
+name = "g_office_slots_00_entityId"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
@@ -73,7 +73,7 @@ size = 4
 
 ["SERVER.0x101de454"]
 note = "auxiliary entity count (loadsave)"
-name = "g_101de454"
+name = "g_aux_entity_count"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
@@ -81,7 +81,7 @@ size = 4
 
 ["SERVER.0x101de55c"]
 note = "auxiliary entity buffer (realloc'd)"
-name = "g_101de55c"
+name = "g_aux_entity_buffer"
 section = ".data"
 type = "int"
 status = "UNCHECKED"
@@ -518,13 +518,13 @@ status = "UNCHECKED"
 size = 4
 
 ["SERVER.0x10028b04"]
-name = "g_str_10028b04"
+name = "s_Memory_Shutdown_Anomaly_10028b04"
 section = ".data"
 type = "char[1]"
 status = "VERIFIED"
 
 ["SERVER.0x10028aec"]
-name = "g_str_10028aec"
+name = "s_Pointer_not_freed_10028aec"
 section = ".data"
 type = "char[1]"
 status = "VERIFIED"

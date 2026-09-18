@@ -444,6 +444,11 @@ rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
 | `0x10017fb0` | `gm_KillSpieler` | renamed from `gm_DeallocEntity` |
 | `0x10018850` | `gm_AllocSpieler` | renamed from `gm_CreateEntityFromParents` |
 | `0x10019d30` | `gm_eval_SlotVoll` | renamed from `gm_KannObjektHergestellt` |
+| `0x101de454` | `g_aux_entity_count` | renamed from the placeholder `g_101de454`; the name was already declared in `ls_LoadBuildingEntityState.c` and the metadata note said "auxiliary entity count (loadsave)" |
+| `0x101de55c` | `g_aux_entity_buffer` | renamed from the placeholder `g_101de55c`; declared in the same TU, note "auxiliary entity buffer (realloc'd)" |
+| `0x101de5a4` | `g_office_slots_00_entityId` | renamed from the misleading `g_aemter_table`; it is `g_office_slots + 4`, record 0's `entityId`, not a second table |
+| `0x10028b04` | `s_Memory_Shutdown_Anomaly_10028b04` | renamed from `g_str_10028b04`; literal `"[*] Memory-Shutdown-Anomaly: [*]\nUsed %i blocks in %i bytes.\n\n%i"` read from the reference. Convention is `s_<content>_<addr>` for strings, not `g_str_` |
+| `0x10028aec` | `s_Pointer_not_freed_10028aec` | renamed from `g_str_10028aec`; literal `"-> Pointer not freed:%s"` read from the reference |
 
 `0x10017330` and `0x100174d0` both push an `"gm_AllocGebaeude(): ..."`
 string. `0x100174d0` is the caller (`call 0x10017330` at `0x1001787f`), so it

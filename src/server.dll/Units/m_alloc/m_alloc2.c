@@ -256,7 +256,7 @@ void __cdecl m_pool_free(int* pool, int* block)
 }
 
 /* Five truncated stub arrays used to live here -- g_str_10028888,
- * g_str_10028aec, g_str_10028b04, s_m_pool_alloc_tp_m_pool_10028b60 and
+ * s_Pointer_not_freed_10028aec, s_Memory_Shutdown_Anomaly_10028b04, s_m_pool_alloc_tp_m_pool_10028b60 and
  * s_m_pool_get_free_tp_m_pool_10028b78 -- each holding only the FIRST BYTE of
  * a string the reference has in full at that VA.  Every one of those strings
  * is already emitted by this TU as a real `??_C@` COMDAT literal, from the

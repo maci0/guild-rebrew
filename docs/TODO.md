@@ -49,6 +49,47 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-899: re-opened the data lane and found five names the source had already earned — three were placeholders, two were misspelled strings.**
+
+- **Tried:** re-testing my own "data lane is exhausted" conclusion instead of re-citing it for a
+  fourth round. The narrow version was right — `verify --data` reports `mismatched []`, `missing []`
+  — but I had been reading the 84 `.idata` entries as the *whole* remainder. The metadata actually
+  holds **73 UNCHECKED `.data` entries** as well.
+- **Split them by the section geometry rather than by name.** All 73 sit above `.data`'s
+  `rawsize 0xe000` boundary (`0x10035000`), i.e. in the zero-fill tail, and `pefile` returns **no
+  file bytes** for them — confirmed by reading three of them directly rather than asserting it. So
+  byte comparison there is vacuous and the round-884 conclusion stands. **But that only rules out
+  byte-checking, and I had been treating it as "nothing to do."**
+- **Cross-checked the 73 names against source, which is where the real defect was.** Three appear in
+  no source file at all:
+  - `0x101de454` / `0x101de55c` were named `g_101de454` / `g_101de55c` while
+    `ls_LoadBuildingEntityState.c` already declares them as `g_aux_entity_count` /
+    `g_aux_entity_buffer`. The metadata's **own notes** say "auxiliary entity count (loadsave)" — the
+    placeholder name was simply never promoted. **The source had earned the better name and the
+    metadata had not caught up.**
+  - `0x101de5a4` was `g_aemter_table`, which is **wrong rather than merely vague**: it is
+    `g_office_slots + 4`, i.e. the `entityId` field of record 0. Verified against the geometry —
+    `aemter2.c` casts `0x101de5a0` to `OfficeSlot*`, and `amt_ExecuteOfficeAssignment.c` scans from
+    `0x101de5a8`, which is exactly record 0's `role` at base+8. A name for an interior address makes
+    the table look like two globals.
+- **Renamed all three with `rebrew rename --data`** (the mandate requires the tool, and it keeps
+  cross-references): `g_aux_entity_count`, `g_aux_entity_buffer`, `g_office_slots_00_entityId`.
+- **Then swept the remaining placeholders and found two more real ones.** Of 30 `g_1xxxxxxx`-style
+  names, two are strings whose literal content is in the reference and whose metadata name
+  contradicted the naming doc ("Strings stay `s_<content>_<addr>`"):
+  - `0x10028b04` → `s_Memory_Shutdown_Anomaly_10028b04` — `"[*] Memory-Shutdown-Anomaly: [*]\nUsed
+    %i blocks in %i bytes.\n\n%i"`, read out of the reference;
+  - `0x10028aec` → `s_Pointer_not_freed_10028aec` — `"-> Pointer not freed:%s"`.
+  Both were `g_str_<addr>` and both were used by code, so this was a live naming violation, not
+  cosmetic.
+- **One source comment updated automatically** by `rebrew rename` (`m_alloc2.c`, a list of the old
+  stub names). Re-tested that TU: `m_ShutdownAllocator` 283/283, `m_PoolAlloc` 270/270,
+  `m_pool_free` 137/137 — unchanged.
+- **Measured:** gate pass, residue **8,634 unchanged**, raw-link `.data` **21,836 unchanged**, verify
+  281/283, byte-matched 264, imports 100.
+- **28 placeholder-style names remain**; the other 26 have no better name attested, so they stay
+  `g_<hex>` per the convention rather than being invented.
+
 **Round-898: two more type-wiring sites landed at +0 — and round 897's rule was too broad, corrected by measurement.**
 
 - **Tried:** the remaining raw `0xa9` walks, applying round 897's rule ("typing a record is
