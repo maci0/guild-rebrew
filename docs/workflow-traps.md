@@ -502,3 +502,33 @@ sides emit **exactly three** `LogMessageInternal` calls and **exactly six** line
 (`0x2c05, 0x2c2f, 0x2c53, 0x2c75, 0x2c97, 0x2cdd`) — identical. The sites are dead branches in both. The
 initial "our build has 2, reference has 3" reading was a **truncated disassembly window**, the same
 off-by-one class as measure-traps §18.
+
+## 13. `cl /FAs` writes its listing to the CWD, not next to `/Fo` (round 984)
+
+The probe rule is "probes go in `.scratch/`, never in the tree." Round 984 broke it without noticing: six
+throwaway compilations were run as
+
+```bash
+rebrew-cmake-cl /nologo /c /O2 /Gd /MT /FAs /Fo.scratch/align.obj .scratch/align.c
+```
+
+which put the object in `.scratch/` **and the assembly listing in the repository root** as `align.asm`,
+`align2.asm`, `mstest.asm`, `mstest4.asm`, `mstest5.asm`, `mstest6.asm`. `/FAs` takes no directory: it
+writes `<basename>.asm` relative to the **current working directory**, regardless of where `/Fo` points.
+
+`git status` caught them at commit time, six untracked files in the root. Nothing was committed, but a
+round that ran `git add -A` without reading `git status --short` would have committed all six.
+
+**The check, before any `git add`:**
+
+```bash
+git status --short          # untracked probe artifacts show up here
+git add -A docs/ scripts/   # scope the add to what the round actually changed
+```
+
+The second line is the one that matters for this project: `git add -A` is how the leak would reach a commit,
+and every round here commits only docs (plus the occasional script), so scoping the add costs nothing and
+closes the hole.
+
+**Fix for probes:** pass an explicit listing path, `-Fa.scratch/<name>.asm`, or run with
+`cd .scratch && rebrew-cmake-cl ... <file>`. Verified locally that `/Fa` with a path does redirect.
