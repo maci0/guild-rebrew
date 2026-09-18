@@ -384,6 +384,27 @@ shipped `.data`, `.rdata`, `.reloc` and headers differ by `0x0` (section 9b).
 | **block placement** | `gm_AllocSpieler` (21 target-differing branches), `ServerMainThread` (14), `cm_ExSellObjekt` (7), `CrashDump` (7), `cm_ExCopyEntityData` (8), `gm_AllocGebaeude` (4), `gm_FindNextFilteredEntity` (3), `ls_LoadBuildingEntityState` (2), `cm_ProcessCommandQueue` (2), `gm_CheckInventoryCapacity` (1) | a branch whose mnemonic matches but whose destination does not |
 | **epilogue merge** | `gv_ExAllocGraveyardWorker` (3 branches to a duplicate epilogue 0x9c away) | §2 |
 | **register-role rotation** | `vfs_OpenStream`, `ahm_ExAllocAlchemist`, `m_AllocTracked`, `srv_LoadBuf`, `gm_ObjectsAvailble`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue` — **zero** target-differing branches | Findings 62/63; verified on `gm_ObjectsAvailble` (a consistent `ebx`/`edi` exchange, 235 instructions both sides) |
+| **statement order** | `gm_CheckInventoryCapacity` (1 target-differing branch, but that is *downstream*) | round 974: its actual first divergence is `list[2] = 0x12` placed differently — see below |
+
+**Round 974 corrected one entry and it matters for how the census is read.** The table above was
+assembled from each carrier's *first branch whose target differs*, which is not necessarily its first
+divergence. `gm_CheckInventoryCapacity` has one such branch, so it was filed under block placement — but
+its real first divergence is at `0x10019ee3`:
+
+```
+reference  xor ebp, ebp                     (in_list = 0)
+ours       mov dword ptr [esp+0x18], 0x12   (list[2] = 0x12)
+```
+
+The source has `list[2] = 0x12;` early, between `base = ...` and `entity = ...`; the reference emits it
+elsewhere. Moving it to the end of the initialiser block was probed and measures **8,628 -> 8,641 (+13)**,
+so the shipped position stays.
+
+**So the census classifies by the *first target-differing branch*, which is a proxy, not by the first
+divergence.** That is still useful for partitioning the set (a carrier with zero such branches cannot be a
+placement story) but it must not be used to order *work*: for a carrier with one or two target-differing
+branches, read the actual first divergence — it may be a statement-order or instruction-form difference
+that the branch census cannot see.
 
 **Every class is walled, and each has a named mechanism rather than an exhaustion argument:** block
 placement is the backend layout pass (§17 of the shapes doc; and `cm_ProcessCommandQueue` is closed by

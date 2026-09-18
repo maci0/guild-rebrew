@@ -49,6 +49,31 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-974: audited the classification and found one carrier misclassified — the census uses a proxy.**
+
+- **Round 973 classified all 19 carriers into three classes. Tested whether that map is right** by
+  checking the two carriers with the *fewest* target-differing branches (1 and 2), where a
+  misclassification is most likely. `ls_LoadBuildingEntityState`'s single `jle` off-by-2 is the documented
+  3-byte shortfall (shapes §122) — correctly filed. **`gm_CheckInventoryCapacity` is not.**
+- **Its real first divergence is a statement order, not a branch:**
+  ```
+  reference  xor ebp, ebp                     (in_list = 0)
+  ours       mov dword ptr [esp+0x18], 0x12   (list[2] = 0x12)
+  ```
+  The source has `list[2] = 0x12;` early — between `base = (char*) g_item_def_table + entity_index * 0x40;`
+  and `entity = base + entity_index;` — while the reference emits it elsewhere. **Probed moving it to the
+  end of the initialiser block: residue 8,628 -> 8,641 (+13)**, so the shipped position stays. Reverted.
+- **The methodological correction, recorded in §13:** the class table was assembled from each carrier's
+  *first branch whose target differs*, which is a **proxy for** the first divergence, not the same thing.
+  It is still useful for partitioning — a carrier with **zero** such branches cannot be a placement story,
+  which is what round 972 used it for — but it must not be used to order work. **For a carrier with one or
+  two target-differing branches, read the actual first divergence; it may be a statement-order or
+  instruction-form difference the branch census cannot see.**
+- **That makes the classification four classes, not three:** block placement (9 carriers), epilogue merge
+  (1), register-role rotation (8), statement order (1).
+- **Measured:** probe reverted; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-973: the residue map is complete and classified — all residue is inside the unmatched functions, in three walled classes.**
 
 - **Answered "is anything outside the unmatched functions?"** with the tool's own attribution:
