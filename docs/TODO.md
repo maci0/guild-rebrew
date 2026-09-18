@@ -27305,3 +27305,37 @@ never having read that series. → measure-traps §20, final paragraph.
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, data extents 195 clean, imports 100, wine load OK. No source edit; no
 baseline moved.
+
+## Round 981 — `/Os` on the flagship carrier (+0xbfae); the `/O` axis was already swept
+
+**Tested the one flag axis that a scheduling-limited residual suggests.** `msvc6-c-shapes.md` §141 measures
+the whole tree at once: across the eight rows carrying 85% of the residue the **net instruction difference
+is 15**, and three rows differ by **exactly zero** instructions. That says the residual is placement and
+register choice, not missing code — so `/O` flags, which govern exactly that, were worth re-testing on the
+largest carrier.
+
+`gm_AllocSpieler` (2,823 bytes = 33% of the residue) already carries `/O2 /Gd /Oa /Ow`. Adding `/Os` via
+CMake `COMPILE_OPTIONS` (which appends — §142's rule):
+
+| probe | result |
+|---|---|
+| `gm_AllocSpieler` + `/Os` | **0xbfae differing bytes** (from 0x21b4) — catastrophic |
+
+Reverted; baseline rebuilt and re-verified at 8,628 by direct `cmp`.
+
+**The axis was already documented.** §3639-3640 records `/Os`, `/O2 /Os`, `/Ox /Os`, `/Oxs`, `/Os /Ob2` and
+`/Og /Os /Oi` all scoring 112-130 on that class because `/Os` reshapes the function; `codegen-walls.md:77`
+records `/O1`, `/O2 /Os`, `/O2 /Og-` and `/O2 /Ot /Oy-` all folding three exits that the reference keeps;
+§1843-1844 and §1982 record a long inert list (`/Ob2`, `/Ot`, `/Oi`, `/Oi-`, `/Oa-`, `/G5`, `/GB` → obj 3688,
+853). The probe re-derived a measured result.
+
+**Process point, and it is now the dominant failure mode of this stretch.** Rounds 976-981 each opened by
+probing a carrier or axis that was already measured: `srv_LoadBuf` order (+574) and `m_AllocTracked` guards
+(+539) in 976; `ServerMainThread`'s packet block (+0/+0/+861) in 979; `/Os` (+0xbfae) in 981. In every case
+the result was recorded in `docs/` **or** the carrier's own `.c` header, and in every case the round read
+neither before probing. The two rules that would have prevented all four are already written down —
+workflow-traps §8 (read the file header too) and §9 (look up the fault address, not the symptom) — which
+means the gap is not knowledge but *procedure*: no step in the round's opening forces the lookup.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. `/Os` probe reverted; no baseline moved.

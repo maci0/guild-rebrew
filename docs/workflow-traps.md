@@ -373,3 +373,43 @@ sed -n '1,140p' <carrier>.c                          # §8's second store
 On `ServerMainThread` the symptom address had 6 hits and the fault address had 3, one of them the
 dedicated section. Looking up the symptom instead of the fault is what made a fully-closed carrier read as
 open.
+
+## 10. Four wasted rounds share one cause: no opening step forced the lookup (round 981)
+
+Rounds 976-981 each spent their budget probing a carrier or axis whose result was **already recorded**:
+
+| round | probe | result | where it was already written |
+|---|---|---|---|
+| 976 | `srv_LoadBuf` assignment order | +574 | `srv_LoadBuf.c` header (round 956) |
+| 976 | `m_AllocTracked` guard order | +539 | `m_AllocTracked.c` header, allocator Finding 51 |
+| 979 | `ServerMainThread` packet block (three spellings) | +0, +0, +861 | `ServerMainThread.c:122-129`, shapes §126 |
+| 981 | `/Os` on `gm_AllocSpieler` | **+0xbfae** | shapes §3639-3640, §1966, codegen-walls §77 |
+
+Every result was in `docs/` **or** in the carrier's own `.c` header. Both rules existed before the failures —
+workflow-traps §8 ("read the file header too") and §9 ("look up the fault address, not the symptom"). They
+were written and then not followed, four times.
+
+**So the defect is procedural, not informational.** Writing a fifth rule changes nothing; what was missing is
+a step in the round's *opening* that cannot be skipped. `scripts/preprobe.sh <carrier.c> [fault-addr]` is that
+step — it runs the `docs/` lookup, then greps the carrier's own header for the words that mark a closed lane
+(`revert`, `inert`, `worse`, `measured`, `closed`, `do not`, `dead end`, `section N`), and prints the
+fault-vs-symptom reminder:
+
+```
+$ bash scripts/preprobe.sh src/server.dll/.../gm_AllocSpieler.c
+== 1. docs/ lookup (whathas.py)
+0x10018850: 30 documented mention(s) (window 48)
+  [49. A CFLAGS sweep on one function: inert, negative, and one near miss]
+  [58. `/Ox` versus `/O2` is per-file and load-bearing]
+  [109. gm_AllocSpieler's first fault is a scheduler sink, not a statement order]
+...
+== 2. the carrier's OWN HEADER -- whathas.py does NOT index this (workflow-traps 8)
+```
+
+Run it as the **first command** of any round that names a carrier. It costs seconds; the four probes above
+cost most of four rounds. A round that has not run it has not established that its probe is novel.
+
+**A generalisation worth keeping.** This tree has accumulated enough probe history that *most plausible moves
+are already measured*. The expected value of a probe now depends far more on checking the record than on the
+probe's design — the opposite of the position in the early rounds, where the record was thin and probing was
+cheap. Rounds should budget for that shift explicitly rather than treating the lookup as an optional courtesy.
