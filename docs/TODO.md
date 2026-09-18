@@ -27373,3 +27373,31 @@ BASELINE`) and reported `+0`. That is precisely the failure the guard was built 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; tree clean; no baseline
 moved.
+
+## Round 983 — swept the dangling-`extern` class: 7 candidates, all inert; one self-caught false alarm
+
+Extended round 982's method (read source, don't probe) to the class workflow-traps §3b named. Scanned all
+`extern ...[]` declarations in `src/server.dll/`: **52 have no definition in the tree, 32 are referenced,
+and 7 of those resolve to a scalar stub in `src/link_stubs.c`** — the round-924 shape that produced a
+−355-byte `.data` fix when it was found once.
+
+The seven: `g_log_message_buffer` (`char[]` stub `char = 0`, used as a `sprintf` destination and
+`MessageBoxA` text), `g_office_role_templates` (`COPY24[]` stub `int = 0`, indexed at a 24-byte stride),
+`g_field_worker_count_wt0..3` (`int[]` stub `int = 0`, scaled by 20), and
+`g_error_msg_sell_no_source` / `_no_dest` (`char[]` stubs `int = 0`, passed as message pointers).
+
+**All seven measured inert, with a mechanism.** The operand a wrong-type stub produces is an **address**, and
+address operands are relocation slots — exactly what `rebrew postlink` rewrites. Verified on
+`g_log_message_buffer`: five `.text` dwords hold its VA `0x117640e0` and every enclosing function is RELOC
+(byte-matched). A stub only becomes visible if it changes the code *shape* (size, instruction form,
+displacement). Recorded as a latent hazard with the two-candidate effect it would have if used where the
+type drives codegen. → workflow-traps §12.
+
+**Self-caught false alarm.** `cm_ExSellObjekt.c:431,479` looked like two extra `LogMessageInternal` calls the
+reference lacks. Both sides emit exactly three `LogMessageInternal` calls and exactly six line-number pushes
+(`0x2c05, 0x2c2f, 0x2c53, 0x2c75, 0x2c97, 0x2cdd`) — identical; the sites are dead branches in both. My
+"2 vs 3" reading came from a **truncated disassembly window**, the same off-by-one class as measure-traps
+§18. Caught by re-running with the full span before writing anything down.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.

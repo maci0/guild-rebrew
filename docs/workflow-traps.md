@@ -455,3 +455,50 @@ round and 505 bytes.
 match string and silently did not apply; `linktest.sh` printed its round-127 guard
 (`NOTE: identical to HEAD, so any delta below is the BASELINE, not a result`) and reported `+0`. That is
 exactly the failure §127 built the guard for, caught in the wild.
+
+## 12. 32 dangling `extern` array declarations are latent hazards; all 7 with scalar stubs are currently inert (round 983)
+
+Workflow-traps §3b found one undefined `extern char[]` producing a silently wrong operand (round 924, worth
+−355 raw-link `.data`). Round 983 swept the whole class to see whether more remained. **52 `extern ...[]`
+declarations in `src/server.dll/` have no definition anywhere in the tree; 32 of those are actually
+referenced.** Seven of the 32 resolve to a **scalar** definition in `src/link_stubs.c`, which is the shape
+that produces a wrong operand:
+
+| symbol | declared | stub | used as |
+|---|---|---|---|
+| `g_log_message_buffer` | `char[]` | `char g_log_message_buffer = 0` | `sprintf` destination, `MessageBoxA` text |
+| `g_office_role_templates` | `COPY24[]` | `int g_office_role_templates = 0` | array indexed by 24-byte elements |
+| `g_field_worker_count_wt0..3` | `int[]` | `int g_... = 0` | indexed limit table |
+| `g_error_msg_sell_no_source` | `char[]` | `int g_... = 0` | `LogMessageInternal` message pointer |
+| `g_error_msg_sell_no_dest` | `char[]` | `int g_... = 0` | `LogMessageInternal` message pointer |
+
+**All seven are inert today, and the reason is worth recording:** the operand a wrong-type stub produces is
+an *address*, and address operands are exactly what the postlink fixer rewrites. Measured on
+`g_log_message_buffer`: five `.text` dwords hold `0x117640e0`, and every enclosing function is **RELOC**
+(byte-matched) — the stub's address is a relocation slot, not a byte the comparison sees. Only a stub that
+changes the *shape* (a size, an instruction form, a displacement) would be visible, and these do not.
+
+So the class is a **latent hazard, not an active defect**: it becomes a real bug the moment such a symbol is
+used where the type changes codegen — a `sizeof`, a pointer arithmetic stride, an array index scaling. Two
+of the seven are already in that position textually (`g_office_role_templates` indexes with a 24-byte
+stride; `g_field_worker_count_wt0` scales by 20), and they are inert only because the enclosing functions
+happen to compile correctly anyway.
+
+**The check, cheap enough to keep:**
+
+```bash
+# declarations with no definition and a scalar stub -- the round-924 shape
+grep -rn 'extern char \w*\[\]' src/server.dll --include=*.c
+grep -nE '^\s*(int|char|short)\s+\w+\s*=\s*0;' src/link_stubs.c
+```
+
+Treat each hit as a finding to *verify*, not to fix blind: confirm the enclosing function's status first.
+If it is RELOC/EXACT the address is a relocation slot and the type is cosmetic; if it is unmatched, the type
+may be part of why.
+
+**Also recorded: a `cm_ExSellObjekt` false alarm, self-caught.** Two dangling `extern char[]` at
+`cm_ExSellObjekt.c:431,479` looked like extra `LogMessageInternal` calls the reference does not have. Both
+sides emit **exactly three** `LogMessageInternal` calls and **exactly six** line-number pushes
+(`0x2c05, 0x2c2f, 0x2c53, 0x2c75, 0x2c97, 0x2cdd`) — identical. The sites are dead branches in both. The
+initial "our build has 2, reference has 3" reading was a **truncated disassembly window**, the same
+off-by-one class as measure-traps §18.
