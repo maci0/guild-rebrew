@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-938: populated `general-knowledge.md` — it was a shell — and sharpened the SP6 citation.**
+
+- **The mandate says `general-knowledge.md` holds toolchain observations and is "appended on discovery,
+  not at session end".** It had 31 lines: headings, a few original-build facts, and empty
+  "(Add findings here)" stubs. Nothing from the toolchain or deliverable-mechanics work was in it.
+- **Added two sections, every number verified by re-running the command rather than copied from prose:**
+  - **Toolchain.** Nine MSVC6 images exist locally but are **three real generators** — `msvc-6.0`,
+    `-sp1`…`-sp5` and `-win9x` compile a shared row to byte-identical objects (round 502:
+    1149/2057, obj 2056), so a service-pack sweep has only three stops. `-sp5-pp` is a **per-file**
+    pin on exactly **three** files (verified against `CMakeLists.txt` lines 297/305/312:
+    `spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`, `ls_LoadBuildingEntityState.c`), worth 4 bytes net,
+    with 16 of 16 unpinned rows worse under it.
+  - **Deliverable mechanics.** What ships is not what links: `rebrew postlink` writes `.data`,
+    `.rdata`, `.reloc` and the headers from the layout package (shipped `0x0` each; raw link 21,481 /
+    1,268 / 7,107 / 267 = 30,123 overwritten). 286,720 bytes, 8,633 differing, all inside `.text`.
+- **One doc claim was weaker than it read, and is now corrected.** `codegen-walls.md`'s lever table
+  cited "`rebrew toolchain detect`" as the evidence for "compiler build: SP6 confirmed" — but that
+  tool's own output is **hedged**: on `original/Server/server.dll` it returns `"confidence": "high"`
+  while its `version_hint` says the compiler "may be MSVC 4.x/5.0", and one of its own evidence lines
+  reports **5 pre-6.0 constant-hoist sites**. It cannot separate SP0-SP6 within the family. The row now
+  states the real argument (elimination across three generators, round 502, corroborated by round 837's
+  zlib cross-check) and names the residual risk (the original could be MSVC 4.x/5.0, which no available
+  image provides).
+- **Detector evidence recorded verbatim because it is reproducible**: 142 `rep movs/stos`, 94
+  `push ebp; mov ebp,esp` prologues, 30 `int3` pad runs, 16 `mov edi,edi` 2-byte nops, 2 alignment
+  nops, 9 x87 `[esp+N]` loads, and **both wrapper styles (4 push-`[mem]`, 3 load-first)** — the last
+  being the machine-readable form of this project's "per-file flags vary" finding.
+- **Measured:** no source change; residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100, wine load OK.
+
 **Round-937: recovered all 14 attested original source paths; the `_c` directory suffixes are unattested.**
 
 - **Worked the naming/tree brief instead of residue for one round.** Audited the type/struct side first

@@ -24,6 +24,42 @@ this file holds the rest.
 - `.text` VirtualSize `0x22846`. CRT: LIBCMT static. Compression: zlib
   1.1.3 vendored (`references/zlib-1.1.3`).
 
+
+## Toolchain observations (verified with commands; round 938)
+
+- **Nine MSVC6 images are available locally**, and they are *not* nine distinct
+  generators: `msvc-6.0`, `-sp1` … `-sp5` and `-win9x` compile a shared row to
+  **byte-identical objects** (measured round 502: 1149/2057, obj 2056 on
+  `cm_ExSellObjekt`). So a service-pack sweep has only three real stops: the
+  base group, `-sp5-pp`, and `-sp6`. Evidence: `docs/TODO.md` round 502.
+- **`rebrew toolchain detect` is a hint, not a verdict.** On
+  `original/Server/server.dll` it returns `"confidence": "high"` while its own
+  `version_hint` says the compiler "may be MSVC 4.x/5.0", and one of its own
+  evidence lines reports **5 pre-6.0 constant-hoist sites**. It cannot separate
+  SP0-SP6 within the family. Do not cite it alone as proof of a service pack.
+  Evidence: run it; the output contradicts the `confidence` field.
+- Detector evidence it does report, all reproducible: 142 `rep movs/stos`,
+  94 `push ebp; mov ebp,esp` prologues, 30 `int3` pad runs, 16 `mov edi,edi`
+  2-byte nops, both wrapper styles (4 push-`[mem]`, 3 load-first) —
+  which is the machine-readable form of the project-wide "per-file flags
+  vary" finding. Evidence: `rebrew toolchain detect original/Server/server.dll --json`.
+- **`-sp5-pp` is a per-file pin, not a project setting, and it is worth 4
+  bytes net.** Three files carry it (`spiel_dumpD.c`, `ahm_ExAllocAlchemist.c`,
+  `ls_LoadBuildingEntityState.c`); 16 of 16 unpinned rows are *worse* under it,
+  with `ServerMainThread` 2075 -> 1224 matched. Evidence: rounds 502/842,
+  `docs/codegen-walls.md` §196.
+
+## Deliverable mechanics
+
+- **The shipped `build/server.dll` is not what the linker produces.**
+  `rebrew postlink` writes `.data`, `.rdata`, `.reloc` and the headers from the
+  layout package. Shipped: all four `differing 0x0`; **raw link: `.data`
+  21,481, `.rdata` 1,268, `.reloc` 7,107, headers 267** = 30,123 bytes the
+  fixers overwrite. `.text` is the only section the build must get right.
+  Evidence: `scripts/postlink_residual.py --write build/server.dll`.
+- The deliverable is **286,720 bytes**, the reference's exact size, with
+  **8,633 differing bytes, all inside `.text`**. Evidence: `scripts/gate.sh`.
+
 ## Game domain
 
 - Two-phase command architecture: `cm_Chk*` validate, `cm_Ex*` execute.

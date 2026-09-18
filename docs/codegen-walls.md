@@ -235,7 +235,7 @@ Every axis that could move it has been measured shut:
 | flags | flat | 12 axes, ~120 compilations, 1 distinct score (round 458) |
 | `#pragma optimize` per function | inert | 7 forms byte-identical on the largest carrier, with a working control (round 843) |
 | service pack (sp5-pp per file) | closed | 18 rows enumerated, 3 pins, 16/16 unpinned worse (rounds 503/842) |
-| compiler build | SP6 confirmed | `rebrew toolchain detect` + the zlib cross-check (round 837) |
+| compiler build | SP6, by elimination within the MSVC6 family | `rebrew toolchain detect` gives a **hedged** answer (its own `version_hint` reads "may be MSVC 4.x/5.0" and it reports 5 pre-6.0 constant-hoist sites), so the citation is weaker than "confirmed" implies. What actually settles it is round 502: `msvc-6.0`, `-sp1`..`-sp5` and `-win9x` produce **byte-identical objects** on a shared row (1149/2057 obj 2056), i.e. **the nine images are three generators**, and the project sits on the one that matches. Round 837's zlib cross-check is the corroboration. The residual risk is that the original was MSVC 4.x/5.0, which no image here provides |
 | size gaps | net-negative to close | shapes §89 (5 bytes recovered, ~178 lost); §69 (4 bytes worth 327 matched) |
 | `.text` content post-pass | contradicts the objective | link-layout §6: postlink's `.text` content "is largely ours"; copying it makes the bytes copied, not compiled |
 
