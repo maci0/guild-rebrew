@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-915: applied round 914's two pre-checks — they worked, and two more symbols landed.**
+
+- **Turned round 914's post-mortem into a filter, and ran it before touching anything.** That round
+  ended with two conditions a candidate must satisfy: (a) the header agrees with every declaration
+  the TU already makes, and (b) the TU is not near its composition span. Both are mechanical, so this
+  round applied them to all 5 remaining candidates **before** any edit:
+  ```
+  g_current_season                16 sites  LONG-file: alchemistry_logic2, spiel, spiel5, spiel6, spiel62, spiel622
+  g_citizen_count                 12 sites  LONG-file: spiel, spiel5, spiel6, spiel62, spiel622
+  g_next_object_id                 5 sites  LONG-file: alchemistry_logic2
+  g_relationship_matrix_primary    4 sites  ok
+  g_relationship_matrix_secondary  4 sites  ok
+  ```
+  **Only two are safe**, and (b) alone eliminated the other three — which is the check that cost
+  round 914 two reverted batches and round 913 a whole batch. It now runs in one command against
+  `gate-link.log` before any edit.
+- **Landed both safe candidates** (`g_relationship_matrix_primary`,
+  `g_relationship_matrix_secondary`, 4 sites each).
+- **Measured: gate pass and byte-neutral** — residue **8,634 unchanged**, raw-link `.data` **21,836
+  unchanged**, verify 281/283, byte-matched 264, imports 100, data extents 195. Multi-TU globals
+  **70 → 66**.
+- **Cumulative across rounds 912-915: 14 symbols lifted, 0 bytes moved, 0 regressions kept.** The
+  method is now: pick candidates with one identical spelling everywhere; drop any whose declaring
+  file is `LONG`; drop any whose header declaration disagrees with a definition the TU makes; lift;
+  build; gate. Every step is a command rather than a judgement, which is what the first three
+  attempts lacked.
+- **The remaining 66 are now *characterised*, not merely pending.** Three of the five candidates just
+  measured are blocked purely by composition budget (`spiel.c`, `spiel5.c`, `spiel6.c`, `spiel62.c`,
+  `spiel622.c`, `alchemistry_logic2.c` are all `LONG`), so they need the budget relieved before any
+  declaration can move — a different problem from the one this vein solves. That is a concrete,
+  checkable reason rather than an open question.
+
 **Round-914: diagnosed round 913's failed batch — two real declaration bugs, and a third cause nobody had recorded.**
 
 - **Chased the 13 `LNK2001`s round 913 could not explain.** They named symbols the edit never touched

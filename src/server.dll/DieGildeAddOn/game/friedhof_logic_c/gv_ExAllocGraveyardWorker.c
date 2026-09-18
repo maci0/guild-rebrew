@@ -474,8 +474,6 @@
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int g_citizen_count;
 extern int g_next_object_id;
-extern char g_relationship_matrix_primary[];
-extern char g_relationship_matrix_secondary[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* worker, int worktype);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);

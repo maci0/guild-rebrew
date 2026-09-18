@@ -19,8 +19,6 @@ extern int __cdecl amt_FindEntity26(int entity_id);
 extern int __cdecl amt_FindEntity27(int entity_id);
 extern int __cdecl gm_AddObjekt(int a, int b, int c);
 extern unsigned char g_current_season;
-extern char g_relationship_matrix_primary[];
-extern char g_relationship_matrix_secondary[];
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 
 void __cdecl InitNewDynastyEntity(int a, void* unused, unsigned short word_arg, void* entity)

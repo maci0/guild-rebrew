@@ -1,9 +1,8 @@
 // FUNCTION: SERVER 0x1000ec00
 
 #include "../command_internal.h"
+#include "../../game/entity.h"
 
-extern char g_relationship_matrix_primary[];
-extern char g_relationship_matrix_secondary[];
 
 /* Execution handler: copies a block of raw data from the command
  * payload into a resolved entity's memory. Used for bulk entity

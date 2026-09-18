@@ -5,6 +5,7 @@
 #include <string.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+#include "../entity.h"
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
@@ -18,8 +19,6 @@ extern unsigned char g_current_season;
 
 extern int g_citizen_count;
 extern unsigned char g_slot_table[];
-extern char g_relationship_matrix_primary[];
-extern char g_relationship_matrix_secondary[];
 extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
 void* __cdecl m_AllocTracked(unsigned int size, const char* source);
