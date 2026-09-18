@@ -25,6 +25,16 @@
  * reference loads into eax, folds nothing, and uses ONE store placed after
  * the join.  So the bug and the shape are the same defect, and fixing the
  * value by itself will always move the tail.
+ *
+ * ROUND 953 separated the two, and the SHAPE is what costs.  Keeping the
+ * value exactly as shipped (`n = slot[0x166]; if (arg8 == 2) n = call();
+ * slot[9] = (char) n;`) -- i.e. the reference's single-store structure with
+ * our existing stored value, no semantic change at all -- measures
+ * **8,628 -> 8,809 (+181)**, against the full fix's +184.  So ~98% of the
+ * loss is the one-store restructure, not the `arg8` value.  Conclusion: the
+ * reference's `mov eax,[esp+0x44c]` load is NOT reproducible from this
+ * source, and the two-store form, though not the reference's, is the one
+ * that scores.  Do not re-probe either direction.
  * (Second finding from the same review — tail log/sprintf order — is the
  * already-recorded +53 lead below.)
  *

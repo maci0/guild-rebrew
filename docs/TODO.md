@@ -49,6 +49,30 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-953: separated `gm_AllocSpieler`'s value bug from its shape — the SHAPE is what costs, by ~98% of the loss.**
+
+- **Round 952 left an ambiguity**: it measured the full fix (reference shape + correct value) at **+184**,
+  and the prose concluded "the bug and the shape are the same defect". That is a testable claim, so this
+  round separated them.
+- **Probe: keep the shipped value, adopt only the reference's single-store structure.**
+  `n = slot[0x166]; if (arg8 == 2) n = call(); slot[9] = (char) n;` — no semantic change whatsoever,
+  purely the one-store-after-the-join shape the reference uses. Measured **8,628 -> 8,809 (+181)**,
+  against the full fix's **+184**.
+- **So ~98% of the loss is the restructure, not the value.** The value bug is nearly free; what costs the
+  bytes is replacing our two-store form with the reference's single-store form. Round 952's "same defect"
+  framing was wrong, and is corrected inline in the source.
+- **The actionable conclusion, recorded in the file header:** *the reference's `mov eax,[esp+0x44c]` load
+  is not reproducible from this source*, and the two-store form — though demonstrably not what the
+  reference does — is the one that scores. Both directions now have measurements, so neither should be
+  re-probed.
+- **The methodological point, which is the round's real product:** round 952's own file already carried
+  the lesson "a rejection is only valid for the compilation it was measured on" (from the `type_entry == 1`
+  case, rejected at 770 and later found correct). **The same discipline applies to a *conclusion*: "these
+  two things are one defect" is a hypothesis, and one probe that holds the value fixed and varies only the
+  shape decides it.** That probe cost one round and replaced a wrong causal claim with two numbers.
+- **Measured:** probe reverted, comment updated; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-952: re-measured the documented `gm_AllocSpieler` slot[9] bug fix — still loses, now +184 — and named what the shape difference actually is.**
 
 - **Targeted the one open problem statement in the tree that is both a real bug and a size reducer.**
