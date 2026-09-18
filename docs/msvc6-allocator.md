@@ -3183,6 +3183,35 @@ zero-stores, identical in mnemonic, order and count, differing only in the slot 
 This is **not** a permutation of a fixed slot set: the reference uses `0x20` where we use
 `0x24`, so one local occupies 4 bytes more in our frame and the rest shift around it.
 
+**Round 959 read the full table and corrected that last inference.** Both sides emit the **same eight
+stores in the same order**; only the slot assigned to each differs:
+
+| store # | reference | ours |
+|---|---|---|
+| 1 | `0x10` | `0x10` |
+| 2 | `0x14` | `0x24` |
+| 3 | `0x2c` | `0x30` |
+| 4 | `0x18` | `0x14` |
+| 5 | `0x20` | `0x1c` |
+| 6 | `0x28` | `0x28` |
+| 7 | `0x30` | `0x2c` |
+| 8 | `0x1c` | `0x18` |
+
+The reference's slot **set** is `{0x10, 0x14, 0x18, 0x1c, 0x20, 0x28, 0x2c, 0x30}` and ours is
+`{0x10, 0x14, 0x18, 0x1c, 0x24, 0x28, 0x2c, 0x30}` -- **the same set except that we use `0x24` where
+the reference uses `0x20`**, and the store *order* is the same while the slot *assigned to each store*
+differs. So the correct statement of the divergence is: one local lands in a different slot and the
+remaining seven are permuted around it. The earlier "one local occupies 4 bytes more" phrasing is not
+supported by this table -- all eight stores are pointer-width writes to pointer-typed locals, so the
+widths are uniform -- but the `0x20`/`0x24` difference itself is real and is the only slot the two sets
+do not share.
+
+**And the axis is inert, measured at instruction level.** Moving the one non-pointer statement
+(`*(int*)(cmd + 0x1a) = g_next_object_id;`) out of the middle of the eight initialiser statements
+changes the compiled output **not at all**: the eight stores come out at the same addresses with the
+same slots and the same order, byte-identical to the shipped object. msvc6 canonicalises the run. That
+is Finding 63's "declaration reorder is inert" re-confirmed with a disassembly rather than a score.
+
 **And the one structural candidate is now measured rather than argued.** The file models
 `log_buffer` as a synthetic `struct SLogBuffer { uint weight_fraction; char text[512]; }`
 whose leading dword is never read as a member but reserves the reference's 4-byte hole.

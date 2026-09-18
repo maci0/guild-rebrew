@@ -49,6 +49,42 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-959: read `cm_ExSellObjekt`'s slot table in full; the reorder axis is inert at instruction level.**
+
+- **Round 958 established this function's first divergence is the eight-store zero run at index 14.**
+  Read the whole table this round — both sides emit the **same eight stores in the same order**, only the
+  slot numbers differ:
+  | store # | reference | ours |
+  |---|---|---|
+  | 1 | `0x10` | `0x10` |
+  | 2 | `0x14` | `0x24` |
+  | 3 | `0x2c` | `0x30` |
+  | 4 | `0x18` | `0x14` |
+  | 5 | `0x20` | `0x1c` |
+  | 6 | `0x28` | `0x28` |
+  | 7 | `0x30` | `0x2c` |
+  | 8 | `0x1c` | `0x18` |
+  The reference's slot **set** is `{0x10,0x14,0x18,0x1c,0x20,0x28,0x2c,0x30}` and ours is
+  `{0x10,0x14,0x18,0x1c,0x24,0x28,0x2c,0x30}` — **the same set except we use `0x24` where the reference
+  uses `0x20`**, with the same store order but a different slot per store. (First written as "the
+  reference's set is strictly ascending" — checked and that was wrong: its third store is `0x2c`, not
+  `0x18`, so the order is not ascending either.)
+- **That corrects round 933's inference.** It read the `0x20`-vs-`0x24` difference as "one local occupies
+  4 bytes more in our frame, so the rest shift around it". The table does not support that: all eight
+  stores are pointer-width writes to pointer-typed locals, so the widths are uniform and the scramble is
+  a **colouring** result, not a size one. Corrected in allocator Finding 63.
+- **Probed the one axis the table suggests and Finding 63 had not isolated at instruction level:**
+  moving the single non-pointer statement (`*(int*)(cmd + 0x1a) = g_next_object_id;`) out of the middle of
+  the eight initialisers. The compiled output is **byte-identical** — same addresses, same slots, same
+  order — so msvc6 canonicalises the run. Reverted (byte-neutral, and it is an unnecessary semantic
+  change). That is Finding 63's "declaration reorder is inert" re-confirmed with a disassembly rather
+  than a score.
+- **Where this leaves the row:** the scramble is a pure colouring outcome, the axes Finding 63 closed
+  (split local, dropped pointers, declaration reorder) are the ones available, and one more is now closed
+  at instruction level. Recorded so the next round does not re-derive the table or retry the reorder.
+- **Measured:** probe reverted; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-958: fourth stale-header case — `cm_ExSellObjekt`'s "highest-value untried lever" no longer exists.**
 
 - **Finished the stale-claim sweep with the highest-consequence instance yet.** `cm_ExSellObjekt.c`'s
