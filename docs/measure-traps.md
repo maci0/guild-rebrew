@@ -1059,3 +1059,42 @@ Round 971 ran it across all 19 residue carriers. **Eight have zero** — their r
 at all — while `gm_AllocSpieler` (21) and `ServerMainThread` (14) hold most of the branch-related
 divergence. That partition is worth having before choosing a target: a carrier with many target-differing
 branches is a block-placement story, one with none is an instruction-form story.
+
+## 17. `cmake --build build` failing at postlink is the DESIGNED state, not a broken tree (round 976)
+
+A clean `rm -rf build` + configure + `cmake --build build` fails:
+
+```
+error: postlink failed: built .text is not position-aligned with the reference — only
+4847/7463 layout-map entries validate (64.9%, minimum 90%). .text VirtualSize built
+0x221f6 vs reference 0x22846.
+```
+
+`.text` 0x221f6 is **0x650 short of the reference**, and every symptom reads like a real regression: the
+linker deletes `server.dll`, `build/server.dll` does not exist, and the coverage gate refuses. Round 976
+spent its opening on this and nearly bisected the source tree looking for the commit that broke it.
+
+**Nothing is broken.** `CMakeLists.txt:442-468` attaches `rebrew postlink --layout` as a POST_BUILD step of
+the `server_dll` target, and that step is expected to fail until the tree is position-aligned — the
+coverage gate exists precisely so a wrong-offset patch cannot be written silently. The plain CMake link
+lays `.text` out in compile order, which is not the reference's order, so it can never pass.
+
+**The deliverable is the `final` target, not `server_dll`:**
+
+```
+cmake --build build --target final
+```
+
+`final` (`CMakeLists.txt:566-578`) links `split_link.sh`'s per-reference-offset composition and then runs
+`postlink_residual.py --write build/server.dll`. Only that path produces `build/server.dll`.
+
+Two tells that the failure is the designed one, not a real break:
+
+- The error names **position alignment**, not a compile or link error. No `error C####` / `error LNK####`
+  appears anywhere in the build log.
+- `git diff --stat` against `HEAD` is empty. A tree that compiles every object can still fail this step.
+
+**Bisecting on this symptom is pure waste**: because the last source-touching commit is many rounds back
+(round 958 at the time), a `git bisect` on "build fails" would report that commit and send the next round
+hunting a source change that never happened. Confirm the *designed* failure first by checking for a compile
+error and by diffing the tree, then build `--target final` and read the residue table.

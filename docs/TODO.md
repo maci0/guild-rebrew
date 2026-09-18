@@ -27113,3 +27113,38 @@ reverted. Verify held at 264 byte-matched through the experiment.
     that is a jump target.
 - **Measured:** both probes reverted; gate-equivalent residue **8,633**, raw-link `.data` **21,481**.
   No source change.
+
+## Round 976 — the "broken build" was the designed postlink refusal; two carrier probes reverted
+
+**Finding (measure-traps §17).** A clean `rm -rf build` + configure + `cmake --build build` fails with
+`postlink failed: built .text is not position-aligned ... 64.9%, minimum 90%. .text VirtualSize built
+0x221f6 vs reference 0x22846`. `.text` 0x221f6 looks like a 0x650-byte regression, the linker deletes
+`server.dll`, and `build/server.dll` does not exist. Nothing is broken: `CMakeLists.txt:442-468` attaches
+`rebrew postlink --layout` as a POST_BUILD step of the `server_dll` target, and the coverage gate is
+*designed* to refuse the plain compile-order link. The deliverable comes from **`cmake --build build
+--target final`** (`CMakeLists.txt:566-578`), which links `split_link.sh`'s per-reference-offset
+composition and then runs `postlink_residual.py --write build/server.dll`.
+
+Two tells it is the designed failure, not a real break: no `error C####`/`error LNK####` anywhere in the
+log, and `git diff --stat` against HEAD is empty. The last source-touching commit was round 958, so a
+`git bisect` on "build fails" would have blamed it and sent the next round hunting a source change that
+never happened. Cost this round: roughly half its budget.
+
+**Probes, both reverted (+/- bytes at the link):**
+
+| carrier | probe | delta |
+|---|---|---|
+| `srv_LoadBuf` | swap the `header[0xb]`/`header[0xc]` assignment pair | **+574** |
+| `m_AllocTracked` | swap the `g_array_ptr` and `size` guards | **+539** |
+| `vfs_OpenStream` | drop the loop-entry `current_char` initialiser | **+375** |
+| `vfs_OpenStream` | loop test reads `mode_flags[0]` directly | composition collapsed |
+
+The `srv_LoadBuf` result is diagnostic rather than merely negative: the swap breaks the function's whole
+shape (the ref's `push eax` at 0x1000a5c0 is what *orders* that pair), so the existing spelling is already
+the anchor that reproduces it. The `m_AllocTracked` result matches its bisected history — the axis is
+`node`'s live range across the malloc, documented in the file, and guard order only perturbs it.
+
+**State after the round:** gate pass. lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched),
+residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Baseline re-snapshotted
+(`.scratch/residue_base.log`) after the clean rebuild; the copy in the tree was from Sep 17 and predated
+round 975.
