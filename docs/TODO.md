@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-954: verified the smallest remaining residual is closed — ~1,030 documented compiles on 5 bytes.**
+
+- **Went after the most bounded gap left: `gm_CalculateProductionValue`'s 5 bytes** (98.7% match, the
+  highest-scoring unmatched function per round 948). Re-disassembled the site in both images and the
+  headline closure holds exactly:
+  ```
+  REF  10019804 fxch st(1)   [d9c9]      BLD  10019804 cmp byte ptr [esi],0x17  [803e17]
+       10019806 cmp  [esi],0x17 [803e17]       10019807 fxch st(1)               [d9c9]
+  ```
+  Same five bytes on both sides, in the opposite order — precisely the adjacent pair swap recorded at
+  round 196, and both residual instructions present.
+- **The documentation behind it is the most thorough in the tree**, and checking it was the round's work:
+  | axis | probed |
+  |---|---|
+  | four reachable x87 classes | enumerated (`float`-scaled 391 shipped, `double`-scaled 255@397, `volatile` 387, commuted-mul byte-identical) — **the target's combination is in none** |
+  | CFLAGS | `/G3 /G4 /G5 /GB /Ox /Ot /Oa /Ow /Gy /Oi- /Ob1 /QIfdiv-` emit **byte-identical objects**, "compared hex, not just the score" |
+  | `#pragma optimize` | 20 combinations |
+  | service packs | all four images produce the identical 391/396 object, on an isolated probe |
+  | tail permutations | **312 generated**, plus a second pass of **700+ compiles** (`330 + 700+` = **~1,030**) |
+  | others | 14 declaration orders, compare spellings, branch shapes, reaching definitions, filler placement |
+- **Conclusion recorded rather than re-derived:** the row is retired at its 5-byte floor, and the file's
+  own standard is the right one — *"a rejection is only valid for the compilation it was measured on"*
+  is why the axes are re-verified, but ~1,030 compiles across four service packs is not a stale
+  measurement, it is a closed question. **Do not spend a round here.**
+- **The proportionate-effort point:** this round cost one disassembly to confirm a row that would have
+  cost a round to re-probe, because the file states its compile count. **Where a residual's history
+  quantifies its own exhaustion, read the count before designing a probe** — the same discipline round
+  939 applied to the small carriers, now applied to the smallest residual in the tree.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-953: separated `gm_AllocSpieler`'s value bug from its shape — the SHAPE is what costs, by ~98% of the loss.**
 
 - **Round 952 left an ambiguity**: it measured the full fix (reference shape + correct value) at **+184**,
