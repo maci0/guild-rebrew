@@ -279,6 +279,34 @@ while mine inserts `fmulp st(1)` — the reference performs the multiply later, 
 §8a's documented `volatile`-alias remedy scores **606/3689** here and does not reach it. Recorded as
 placement; do not re-spell it.
 
+### 11. The residue's shape, quantified — and why the small carriers are not a shortcut (round 939)
+
+The natural instinct when the big carriers are walled is to work the tail. Measured, that is a dead end,
+and the population makes it obvious:
+
+| band | carriers | bytes | share |
+|---|---|---|---|
+| top 5 (`gm_AllocSpieler` 2,823 · `CrashDump` 1,583 · `cm_ExSellObjekt` 966 · `ls_LoadBuildingEntityState` 671 · `cm_ExCopyEntityData` 462) | 5 | **6,505** | **75%** |
+| the other 14 carriers | 14 | 2,128 | 25% |
+| of which the 8 smallest (<=100 bytes each) | 8 | **327** | **3.8%** |
+
+**Every one of the eight small carriers has a file header that already names its residual with a
+mechanism and a probe history** — checked individually this round:
+
+- `gm_CalculateProductionValue` (5 B) — an adjacent `fxch st(1)` / `cmp [esi],0x17` pair swap, **closed
+  at round 196** after ~330 compiles, with the four reachable classes enumerated: the x87-stack
+  allocator picks the `fxch` fixup position from the *type* of the scaled operand, and that same choice
+  decides whether the compare folds (3 B) or unfolds (4 B).
+- `gm_CheckInventoryCapacity` (97) · `m_AllocTracked` (92) · `srv_LoadBuf` (49) · `gm_ObjectsAvailble` (25)
+  · `vfs_ReadCompressed` (23) · `cm_ExProdObjekt` (21) · `cm_ProcessCommandQueue` (15) — each header
+  states its residual cluster and the variants rejected.
+
+**So the tail is not unexplored — it is explored and closed, one file at a time, by rounds that wrote
+the result down.** Re-walking it costs a round per carrier to re-derive a known answer, and the whole
+band is worth 327 bytes. The only carriers worth a round are the top five, and each of those has a
+measured wall: §81/§1 for `CrashDump` and `gm_AllocSpieler`, allocator Finding 63 for `cm_ExSellObjekt`,
+shapes §122 for `ls_LoadBuildingEntityState`.
+
 **Read this as a limit of the toolchain-plus-constraints, not of the source.** Every function
 compiles, links at the reference's exact VA, and the deliverable is byte-identical outside
 `.text` (8,634 of 8,634 differing bytes are inside `.text`; `.data`, `.rdata`, `.reloc`,

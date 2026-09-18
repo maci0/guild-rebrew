@@ -49,6 +49,31 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-939: audited the residue tail — the eight small carriers are all closed, and worth 327 bytes total.**
+
+- **Tested the obvious escape from the walled big carriers: work the small ones.** Measured the whole
+  distribution first:
+  | band | carriers | bytes | share |
+  |---|---|---|---|
+  | top 5 | 5 | **6,505** | **75%** |
+  | other 14 | 14 | 2,128 | 25% |
+  | the 8 smallest (<=100 B) | 8 | **327** | **3.8%** |
+- **All eight small carriers carry a file header that already names its residual with a mechanism and a
+  probe history.** Checked each individually: `gm_CalculateProductionValue` (5 B) is an adjacent
+  `fxch st(1)` / `cmp [esi],0x17` pair swap **closed at round 196** after ~330 compiles, with the four
+  reachable x87 classes enumerated (`float`-scaled -> folded compare + late fxch, 391; `double`-scaled ->
+  fxch placed + compare unfolded, 255 at obj 397; `volatile` -> compare sunk past `fmulp`, 387; commuted
+  multiply -> byte-identical). The other seven each state their cluster and rejected variants.
+- **`gm_CalculateProductionValue` was the round's best candidate and is the instructive case**: 127
+  instructions on **both** sides, five differing bytes, first divergence a two-instruction transposition
+  — exactly the shape a round hopes to fix. It is the *fourth* independent wall in the same file, and
+  the header records why. Re-deriving it would have cost a round to reach a documented answer.
+- **Recorded as `codegen-walls.md` §11** so the next round does not re-walk the tail: the small
+  carriers are explored-and-closed, the band is worth 327 bytes, and the only carriers worth a round
+  are the top five, each with a named measured wall (§81/§1, allocator Finding 63, shapes §122).
+- **Measured:** no source change; residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100, wine load OK.
+
 **Round-938: populated `general-knowledge.md` — it was a shell — and sharpened the SP6 citation.**
 
 - **The mandate says `general-knowledge.md` holds toolchain observations and is "appended on discovery,
