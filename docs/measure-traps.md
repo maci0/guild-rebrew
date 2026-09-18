@@ -968,3 +968,41 @@ change appears to blow the budget, clean-rebuild before concluding anything abou
 **And two transient compiler errors to expect on a parallel rebuild:** `C1083: Cannot open compiler
 intermediate file 'a00032xx'` and `C1001: INTERNAL COMPILER ERROR`. Both appeared on `-j4` and both
 cleared on `-j1` / serial `TMPDIR=/tmp` rebuilds with no source change. Neither is a defect in the tree.
+
+
+## 13. A positional comparator cannot classify a divergence (rounds 927, 955, 963)
+
+Three times this session a script was written to *label* a divergence — "slot vs form", "first differing
+instruction kind" — by comparing the two instruction streams element by element. All three produced
+garbage, and for the same reason: **the streams desynchronise at the first divergence**, so every index
+after it pairs unrelated instructions.
+
+Measured round 963: classifying all 19 residue carriers' first divergence as `SLOT` (same mnemonic,
+operand differs only in a hex literal) or `form` labelled **every carrier `form`** — including ones whose
+actual difference is a single rotated stack slot. Typical false pair:
+`push ebp` against `push ebx`, or `test ebx,ebx` against a bare jump target.
+
+**A label is a claim about aligned correspondence, so it needs alignment first.** The working methods in
+this project all align on something that survives drift:
+
+- **decode each image from its own function entry** (never the reference at our VA — that produced a
+  coincidental `lea`/`add` "match" in round 955);
+- **compare by source address** via `build/split_poc.map`, not by stream index;
+- **or compare counts** over a whole function (round 961's slot-use histogram: reference `[esp+0x20]` 7 /
+  `[esp+0x24]` 3 against our 5 / 4, which is what actually located the three-reference rotation).
+
+**When a classifier answers "all of them are the same kind", suspect the classifier, not the data.**
+
+## 14. An apparent missing instruction can be a compiler-proved-dead block (round 963)
+
+`cm_ProcessCommandQueue` shows the reference emitting `test ebx,ebx; je <unlink>` before a `jmp`, where we
+jump straight through — which reads as five bytes of missing code. It is not.
+
+The header proves the target's join test is **provably-true dead code**: both predecessors enter with
+`ebx != 0`, msvc6 constant-folds that, and deletes the block. **C cannot request a test whose operand the
+compiler can prove nonzero**, so no spelling reaches those bytes. Corroborated by sp5-pp mismatching the
+identical 15 offsets, and the fusion is invariant across every available MSVC6 generator and flag.
+
+**Before treating absent instructions as missing source, check whether the compiler can prove the block
+dead.** A redundant test in the reference is a *consequence* of how the original was written or built, not
+a thing to spell.

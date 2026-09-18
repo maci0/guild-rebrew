@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-963: swept the carriers' first divergences by kind; the classifier is unreliable and `cm_ProcessCommandQueue` is closed by proof.**
+
+- **Applied round 962's new lever (initialiser sequence steers the slot map) by looking for carriers whose
+  FIRST divergence is a slot-only difference.** Built a classifier that compares each carrier's first
+  divergence and labels it `SLOT` (same mnemonic, operand differs only in a hex literal) or `form`.
+  **It labelled all 19 carriers `form`** — which is the tell that the classifier is broken: the streams
+  desync at the first divergence, so every subsequent comparison is misaligned. That is the sixth
+  instance this session of the same instrumentation trap (rounds 927, 955, and now 963), and the third
+  time a "kind" classifier has produced an unusable answer. **A positional comparator cannot classify a
+  divergence; it needs a real alignment.**
+- **One row was worth reading by hand anyway**, and it found a real-looking difference:
+  `cm_ProcessCommandQueue` at `0xaaff` — the reference has `test ebx,ebx; je 0x1000ab38` then
+  `jmp 0x1000ad08`, while we jump straight to `0x1000ad08`, apparently dropping a 5-byte test/guard pair.
+- **It is already closed, and closed by proof rather than exhaustion.** The header records the whole
+  diagnosis: the 15 differing bytes are **one fault — tail-sharing**, with exactly zero-sum arithmetic
+  (arm5+join 16B reference vs our 12B, arm6 48B vs our 52B), and the decisive part: **"the target's join
+  test is provably-true dead code. Both predecessors enter with ebx != 0 … msvc6 constant-folds exactly
+  this and deletes the block: C cannot request a test whose operand the compiler can prove nonzero."**
+  Corroborated on a second generator (sp5-pp mismatches the identical 15 offsets), and the fusion is
+  invariant across all 8+ available MSVC6 generators and every flag tried. **"Only new information could
+  reopen this: evidence the original was built with optimisation disabled over this region, or inline
+  asm."** That is the strongest closure statement in the tree.
+- **So the round's product is negative on two counts and useful for both:** the sweep found no open
+  slot-first carrier, and it re-confirmed that the most tempting remaining difference in the smallest
+  carrier is a compiler-consequence, not a spelling. Recorded here so the classifier is not rebuilt a
+  fourth time.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-962: targeted the two rotated variables directly — declaration order is inert, initialiser order is not.**
 
 - **Round 961 narrowed the divergence to a three-reference rotation between `[esp+0x20]` and `[esp+0x24]`.**
