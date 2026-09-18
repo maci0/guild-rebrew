@@ -3164,6 +3164,35 @@ The permutation is driven by declaration/type mix or call-sequence pressure
 outside the live set — changing which values are live in either direction
 does not move it.
 
+**Round 933 pinned the divergence down instruction-by-instruction and confirmed the
+closure.** Aligning the two bodies shows **674 instructions on each side** (so nothing
+is missing), with the first difference at index 14 — eight consecutive `mov [esp+N],edi`
+zero-stores, identical in mnemonic, order and count, differing only in the slot number:
+
+| store | reference | ours |
+|---|---|---|
+| 1 | `+0x10` | `+0x10` |
+| 2 | `+0x14` | `+0x24` |
+| 3 | `+0x2c` | `+0x30` |
+| 4 | `+0x18` | `+0x14` |
+| 5 | `+0x20` | `+0x1c` |
+| 6 | `+0x28` | `+0x28` |
+| 7 | `+0x30` | `+0x2c` |
+| 8 | `+0x1c` | `+0x18` |
+
+This is **not** a permutation of a fixed slot set: the reference uses `0x20` where we use
+`0x24`, so one local occupies 4 bytes more in our frame and the rest shift around it.
+
+**And the one structural candidate is now measured rather than argued.** The file models
+`log_buffer` as a synthetic `struct SLogBuffer { uint weight_fraction; char text[512]; }`
+whose leading dword is never read as a member but reserves the reference's 4-byte hole.
+That construct was invented to reproduce `sub esp,0x228`, so it deserved a probe:
+replacing it with a plain `char log_buffer[512]` plus a separate `uint weight_fraction`
+local (semantically identical) drops the frame to `sub esp,0x224` — proving the leading
+dword is what allocates the hole — and measures **residue 8,633 -> 8,642 (+9)**. Reverted.
+The synthetic aggregate is load-bearing, exactly as the file claimed; the `0x20`/`0x24`
+difference is not reachable by un-modelling it.
+
 ## Finding 64 — the callee-saved home order is a fixed invariant of *value count*, not of anything in the source (round 846, isolated)
 
 Finding 63 says declaration reorder is inert on a real body. Rebuilt the shape in isolation

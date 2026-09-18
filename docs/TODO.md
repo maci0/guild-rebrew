@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-933: `cm_ExSellObjekt`'s residue is slot numbering (674/674 instructions), and its synthetic struct is load-bearing.**
+
+- **Pinned the divergence to instruction index 14.** Aligning both bodies by mnemonic+operand:
+  **674 instructions on each side**, i.e. nothing missing and nothing extra. The first difference is
+  eight consecutive `mov [esp+N],edi` zero-stores — same mnemonic, same order, same count — differing
+  only in the slot number (`+0x14` vs `+0x24`, `+0x2c` vs `+0x30`, `+0x18` vs `+0x14`, `+0x20` vs
+  `+0x1c`, `+0x30` vs `+0x2c`, `+0x1c` vs `+0x18`; two match).
+- **It is not a permutation of a fixed slot set.** The reference uses `esp+0x20` where we use
+  `esp+0x24`, so one local occupies 4 bytes more on our side and the remaining slots shift around it.
+  This is allocator Finding 63's class, and Finding 63 **already names these four addresses**
+  (`[esp+0x18]/[esp+0x14]/[esp+0x20]/[esp+0x24]`) and closes them: split live local, dropped pointer
+  locals and declaration reorder were all inert there (round 361). Nearly re-probed a closed wall —
+  the guard is to look the *address* up before probing it, and `whathas.py 0x1000d959` returns nothing
+  while the allocator doc's Finding 63 text has it, so the doc search must be by the *slot* too.
+- **Probed the one structural candidate that Finding 63 had not covered.** The file models
+  `log_buffer` as a synthetic `struct SLogBuffer { uint weight_fraction; char text[512]; }` invented to
+  reserve the reference's 4-byte hole. Replacing it with `char log_buffer[512]` plus a separate
+  `uint weight_fraction` (semantically identical) gives `sub esp,0x224` — **proving the leading dword is
+  what allocates the hole** — and measures **residue 8,633 -> 8,642 (+9)**. Reverted; the synthetic
+  aggregate is load-bearing exactly as the file documented. Recorded in allocator Finding 63.
+- **One instrument attempted and discarded rather than shipped.** A script classifying every carrier's
+  first divergence as "slot" vs "form" produced nonsense (`push ebp | ebx`) because it compares
+  instruction streams positionally after they have already desynced; a trustworthy version needs a real
+  alignment algorithm. Deleted rather than committed — a check that reports false categories is worse
+  than no check (measure-traps §6d).
+- **Measured:** probe reverted; residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264. No source change.
+
 **Round-932: removed the duplicate definition; found `cm_ExSellObjekt`'s residue is stack-slot numbering, not missing code.**
 
 - **Removed `int g_unknown_1de450 = 0;` from `src/link_stubs.c`** — round 931's side finding. It was a
