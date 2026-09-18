@@ -3306,6 +3306,33 @@ grouping in the original. The ordering axis is **closed**; further permutation i
 the search should move to *what occupies those two slots* rather than *in what order the initialisers
 appear*.
 
+**Round 968 located that difference precisely, and it is not the zero-store run at all.** The first
+divergence the ordering work was chasing is at **`0x1000d986`**, and reading the surrounding call shows it
+is the **address of a call argument**:
+
+```
+                     reference        ours
+0x1000d986  lea ecx, [esp + 0x2c]   [esp + 0x28]
+0x1000d98e  lea edx, [esp + 0x20]   [esp + 0x20]   <- IDENTICAL
+0x1000d993  lea eax, [esp + 0x40]   [esp + 0x3c]
+0x1000d999  call 0x10015e90                        <- gm_ResolveEntityById
+```
+
+The **middle argument's address is identical on both sides**; the 1st and 3rd differ by exactly **4 bytes**.
+The call's arguments are `&source_existing_entity`, `&resolved_dynamic`, `&source_static_entity` -- three
+**address-taken** locals, and the middle one is the only one whose slot matches.
+
+**So the divergence is an address-taken-slot layout difference, and it is a different mechanism from the
+zero-store run.** Round 967's pinned `0x18`/`0x20` are downstream of it, not the cause: our extra dword
+sits between `0x20` and `0x28`, which is exactly the `0x24` slot the run showed pinned to
+`source_container_ptr`.
+
+**And the initialiser axis does not reach these slots.** Moving `source_static_entity`'s initialiser to the
+front of the run (round 968 probe) leaves all three `lea` addresses **unchanged** (`0x28`, `0x20`, `0x3c`).
+That is consistent and worth stating: the zero-store run's order steers *those* stores, while
+**address-taken locals are allocated by a different rule**. Chasing the run's order cannot fix an argument
+address.
+
 **Method that made this affordable, and worth reusing:** the full link cycle costs minutes per candidate,
 but an initialiser permutation only needs the **single translation unit compiled to an object** -- 0.85 s,
 read back with a small `.text` scanner that extracts the consecutive `mov [esp+N],edi` stores. A 5,040-point

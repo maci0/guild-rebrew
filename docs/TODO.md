@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-968: located the real first divergence — three call-argument addresses, not the zero-store run.**
+
+- **Round 967 closed the initialiser-ordering axis and said the next question was what occupies `0x18`/`0x20`.**
+  Went after it and found the divergence is **upstream** of the store run entirely, at `0x1000d986`:
+  ```
+                       reference        ours
+  0x1000d986  lea ecx, [esp + 0x2c]   [esp + 0x28]
+  0x1000d98e  lea edx, [esp + 0x20]   [esp + 0x20]   <- IDENTICAL
+  0x1000d993  lea eax, [esp + 0x40]   [esp + 0x3c]
+  0x1000d999  call 0x10015e90                        <- gm_ResolveEntityById
+  ```
+  These are the **addresses of the three call arguments** — `&source_existing_entity`, `&resolved_dynamic`,
+  `&source_static_entity`. **The middle one is identical on both sides; the 1st and 3rd differ by exactly
+  4 bytes.** So our frame has one extra dword between `0x20` and `0x28` — which is precisely the `0x24`
+  slot round 967 found pinned — and the reference's extra dword is elsewhere.
+- **That reframes rounds 959-967.** They worked the nine-store zero run because it was the first
+  *differing byte*, but the run's slot scramble is **downstream** of this argument-address difference.
+  The pinned `0x18`/`0x20` are a consequence, not the cause.
+- **And the initialiser axis does not reach these slots, measured.** Moving `source_static_entity`'s
+  initialiser to the front of the run leaves all three `lea` addresses **unchanged** (`0x28`, `0x20`,
+  `0x3c`). Consistent with the distinction the round established: **the zero-store run's order steers those
+  stores; address-taken locals are allocated by a different rule.** Chasing the run's order cannot fix an
+  argument address — which also explains why rounds 964-966 found no answer in that space.
+- **Where the axis now points:** the `0x24` dword that our frame has and the reference does not place
+  there. That is a frame-layout question about an address-taken local, and it is the honest target for a
+  future round — not the initialiser sequence.
+- **Measured:** probe reverted, source verified clean; gate pass; residue **8,628**, raw-link `.data`
+  **21,481**, verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-967: sampled the map and CLOSED the ordering hypothesis structurally — the axis was never a pure permutation.**
 
 - **Took round 966's own recommendation and fitted the map instead of climbing it.** Compiled 60 random
