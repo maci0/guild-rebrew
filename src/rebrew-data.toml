@@ -345,9 +345,10 @@ size = 4
 ["SERVER.0x10035448"]
 section = ".data"
 name = "g_dynasty_field_48"
-type = "int"
+type = "char"
 status = "UNCHECKED"
-size = 4
+size = 1
+note = "byte, not int: reference reads/writes it with mov dl,[0x10035448] and mov [0x10035448],dl (0x1001700f/0x10017130)"
 
 ["SERVER.0x10035464"]
 section = ".data"
@@ -413,9 +414,10 @@ status = "VERIFIED"
 ["SERVER.0x10035a04"]
 name = "g_entity_type_bytes"
 section = ".data"
-type = ""
+type = "unsigned char"
 status = "UNCHECKED"
-size = 4
+size = 1
+note = "byte: reference writes it with mov byte ptr [ecx+0x10035a04],dl (0x10015542), beside the +0x10035a05 byte store"
 
 ["SERVER.0x100358a2"]
 name = "g_entity_state_base"

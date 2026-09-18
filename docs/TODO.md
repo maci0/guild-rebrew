@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-905: generalized round 904's result into a check — found and fixed two real width errors; both landed byte-neutral.**
+
+- **Tried:** round 904 established that a size defect *can* be fixed at zero cost when no code
+  depends on the extent. That suggests a systematic check rather than one-off archaeology, so this
+  round tested **every sized `.data`/`.rdata` metadata entry for overlap with its neighbour** — an
+  entry whose declared size runs past the next tracked symbol is wrong by construction, and the
+  check needs no disassembly and no judgement.
+- **Found two, both real.** Of all sized entries, exactly two overlap, and both are the same defect:
+  a 4-byte `size` on a field the reference accesses as a **single byte**.
+  - `g_dynasty_field_48` at `0x10035448`, typed `int`/size 4, running into `g_dynasty_field_49` at
+    `0x10035449` (a `char`). The reference is unambiguous:
+    ```
+    0x1001700f  mov dl, byte ptr [0x10035448]
+    0x10017130  mov byte ptr [0x10035448], dl
+    0x10035449  mov byte ptr [0x10035449], 0
+    ```
+    Both byte accesses; every source that uses it already declares `char`. The metadata was the
+    outlier.
+  - `g_entity_type_bytes` at `0x10035a04`, size 4, running into `g_stat_b_array` at `0x10035a05`.
+    Same shape: `mov byte ptr [ecx + 0x10035a04], dl` at `0x10015542` beside the `+0x10035a05` byte
+    store at `0x10015538`. It was even typed **empty**.
+- **Fixed both** (`type` and `size` to `char`/`unsigned char` + 1, notes carrying the instruction
+  addresses as evidence). **Re-ran the overlap check: zero remaining.**
+- **Measured: gate pass and byte-neutral** — residue **8,634 unchanged**, raw-link `.data` **21,836
+  unchanged**, verify 281/283, byte-matched 264, `verify --data` still `mismatched []`. **Two for
+  two on round 904's pattern:** metadata-only width corrections cost nothing, which is what
+  distinguishes them from round 902's composition-budget changes.
+- **The check is the deliverable.** "Any sized entry whose extent crosses the next tracked symbol is
+  wrong" is mechanical, needs no disassembly, and found two defects that three rounds of type-conflict
+  analysis (902-904) walked past because they never appeared as *conflicts* — an entry can be
+  internally wrong without disagreeing with any other TU.
+
 **Round-904: fixed the one measured defect round 903 left — `locktable`'s size — and it landed byte-neutral.**
 
 - **Round 903 ended with one concrete, measured defect and a reason not to fix it in the same

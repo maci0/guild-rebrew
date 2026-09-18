@@ -120,6 +120,24 @@ the 8,634 as one cascade.
 
 ## 6. Three audit shapes that generate only false positives
 
+- **A metadata size that crosses the next tracked symbol is wrong by construction — and the check is
+  one command (round 905).** Sorting the sized `.data`/`.rdata` entries by VA and asking whether
+  `va + size > next_va` found **exactly two** defects in the whole tree, both real, both invisible to
+  three rounds of *type-conflict* analysis (902-904) because an entry can be internally wrong while
+  agreeing with every other TU:
+  - `g_dynasty_field_48` typed `int`/size 4 at `0x10035448`, overlapping `g_dynasty_field_49` at
+    `0x10035449`. The reference does `mov dl, byte ptr [0x10035448]` (`0x1001700f`) and
+    `mov byte ptr [0x10035448], dl` (`0x10017130`) — **one byte**.
+  - `g_entity_type_bytes` size 4 at `0x10035a04`, overlapping `g_stat_b_array` at `0x10035a05`, and
+    typed empty. Reference: `mov byte ptr [ecx + 0x10035a04], dl` (`0x10015542`).
+  **A declared extent that runs past the next known symbol cannot be right**, and unlike a byte diff
+  or a size estimator this needs no disassembly and no assumptions. Run it after any metadata work.
+- **Metadata-only width corrections are byte-neutral; composition-budget changes are not
+  (rounds 904-905).** Four such fixes have now landed — `locktable` 256→192, `g_dynasty_field_48`
+  4→1, `g_entity_type_bytes` 4→1, plus round 900's type corrections — every one with residue and
+  raw-link `.data` **unchanged**. Contrast round 902, where changing objects the composition budget
+  relies on cost **+236 `.data`** and **14 `LNK2001`**. The distinguishing question is not "is the
+  metadata wrong" but **"does any code or layout decision depend on the value being wrong"**.
 - **An unrolled loop presents its unrolled tail as if it were the termination condition
   (round 903).** Reading the reference cleanup loop at `0x1001cfd2`:
   ```
