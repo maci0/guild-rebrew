@@ -242,6 +242,21 @@ C-only rule) and a **backend cross-jump / instruction-selection control** (the
 `cm_ExCopyEntityData` epilogue finding: 2 epilogues against the reference's 3, six probe
 passes and ~20 spellings all leaving it at 2).
 
+**Rounds 916-921 closed the four axes that remained open on the *method* side**, each by counting
+rather than by impression, so none needs re-probing:
+
+| axis | verdict | evidence |
+|---|---|---|
+| composition budget | **no object is over its span** | rounds 916: all 25 `LONG` objects re-measured; 23 exactly at span, 2 under, 0 over. The `LONG` label compares against the wrong baseline |
+| per-file flags | **carrier-specific, nearly closed** | rounds 919-920: `/Ow` +511 on `gm_AllocSpieler`, +3 on `cm_ExSellObjekt`, **0** on `CrashDump` and on `ls_LoadBuildingEntityState` (the largest flag-free carrier, tested through CMake because `--cflags` drops the toolchain pin) |
+| duplicated declarations | **15 symbols lifted, 0 bytes moved** | rounds 909-918; population measured at ~7 remaining, and lifting is provably inert |
+| `volatile` zero-extend excess | **3 sites, located, both tested ones closed** | round 921: image-wide census `and r,0xffff` 16 vs 19 and `xor r,r` 556 vs 550; the sites are `0x10011f26`, `0x100190fb`, `0x1001934a` |
+
+**The census trick generalises and is worth reusing:** counting an idiom image-wide on both sides
+converts "the residue is 6% of `.text`" into "three instructions differ in form", which is a claim
+that can be closed. `and`/`xor` was the first try; the same treatment is available for any idiom pair
+the shapes doc names.
+
 **Read this as a limit of the toolchain-plus-constraints, not of the source.** Every function
 compiles, links at the reference's exact VA, and the deliverable is byte-identical outside
 `.text` (8,634 of 8,634 differing bytes are inside `.text`; `.data`, `.rdata`, `.reloc`,

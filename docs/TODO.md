@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-921: counted the `volatile` zero-extend excess image-wide — three sites, all located, none reachable.**
+
+- **Found a lever class with a *quantified* target rather than a guessed one.** `msvc6-c-shapes.md`
+  §52 says a plain `unsigned short` load emits `xor r,r; mov r16,[mem]` while a `volatile` one emits
+  `mov r16,[mem]; and r,0xffff`, and that `and r,0xffff` is therefore **evidence the source read the
+  field `volatile`**. Counting both idioms across the whole image turns that into a number:
+  ```
+  REF:  and r,0xffff = 16    xor r,r = 556
+  BLD:  and r,0xffff = 19    xor r,r = 550
+  ```
+  **I emit three extra `and`-form sites and six fewer `xor`-form ones** — a precise, bounded
+  difference rather than a residue percentage.
+- **Located all three, and they are two functions:**
+  `0x10011f26` → `gv_ExAllocGraveyardWorker`; `0x100190fb` and `0x1001934a` → `gm_AllocSpieler`.
+  The `gm_AllocSpieler` pair is exactly where §52 predicts: at `0x100190fb` the reference has
+  `mov cx, word ptr [ebp]` after `xor ecx,ecx`, and my object has `and esi, 0xffff` — a different
+  register *and* the wrong extend form, from `rowv = ((*(volatile unsigned short*) slot * 3) << 8) + j`.
+- **Probed the two sites the fix would need, and both are worse.**
+  - dropping the qualifier on **both** reads in the first sympathy loop: `863 / 3689`, **obj 3682**
+    (7 bytes short);
+  - dropping it on the `rowv` read alone in the second loop: `554 / 3689`, obj 3678.
+  Both regress badly, and the second loop's own comment already records why the reference *reloads*
+  there — so the qualifier is load-bearing at both sites, which is round 897's result repeating.
+- **The census is the deliverable.** Three sites, two functions, each individually located; the two
+  tested are closed by measurement and the third is the one round 891 addressed
+  (`gv_ExAllocGraveyardWorker`'s `mov si,[ebp]; and esi,0xffff`), whose header already records two
+  failed spellings. `and`/`xor` counts are now a cheap audit: **3 vs 16 is small enough to state as
+  closed rather than as pending.**
+- **Measured:** both probes reverted; gate pass, residue **8,634**, raw-link `.data` **21,836**,
+  verify 281/283, byte-matched 264, imports 100. No source change.
+
 **Round-920: finished the `/Ow` sweep across the carriers — it is real but weak, and inert on the largest flag-free file.**
 
 - **Completed round 919's question.** That round tested `/Ow` on two carriers; this one enumerated the
