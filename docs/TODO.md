@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-943: audited per-file flags across all 13 carriers; `/Oy` measured inert, and the flag axis is closed. No source change.**
+
+- **Inventoried what flags each carrier actually carries** by reading the emitted command lines (not
+  CMakeLists — measure-traps §6f-bis). Two findings:
+  - **`m_AllocTracked` is the only file in the tree carrying `/G6 /Oy`** — the tree's only `/Oy` user and
+    its only `/G6` user. Those were tuned for that file and never tested elsewhere.
+  - Eight carriers carry `/O2 /Gd` and nothing else; three carry `/Ow`; two are sp5-pp pinned.
+- **Tested `/Oy` on a carrier that lacks it** (`cm_ExCopyEntityData`, 462 residue, `/O2 /Gd` only).
+  Applied via a **separate** `set_source_files_properties` call, verified on the emitted command line as
+  `/Oy` for that file **and `/Ow` still present for `gv_ExAllocGraveyardWorker`**, then full clean
+  rebuild + link: **residue 8,628 unchanged, composition healthy (246 placed), `.data` 21,481 unchanged.**
+  **`/Oy` is inert here.** Reverted; tree restored and re-verified at 8,628.
+- **Why `/Oy` looked worth one probe:** it is a prologue/epilogue lever and several walls in
+  `codegen-walls.md` are about frame and register shape. It is *also* the flag `m_AllocTracked` uniquely
+  enables, so it was the one flag in the tree whose effect had never been isolated on a second file.
+  The allocator doc's `/Oy-` record is a 96-combination sweep on **one** function
+  (`srv_InitBuildingTypeTable`), which is not a tree-wide claim — so the probe was not a re-derivation.
+- **The flag axis is now closed with the population stated**, per the round-503/§145 standard:
+  | flag | carriers checked | verdict |
+  |---|---|---|
+  | `/Ow` | 12 | 3 gains (`gm_AllocSpieler` +511, `cm_ExSellObjekt` +3, `gv_ExAllocGraveyardWorker` -5), 4 inert or worse (`gm_AllocGebaeude` **+485**), rest pinned/unavailable |
+  | `/Oy` | 2 (`m_AllocTracked` as shipped, `cm_ExCopyEntityData` this round) | **inert** |
+  | `/O1 /Ox /Os /Ot /Og-`, `/G3`-`/G6`, `/GB`, `/Zp1`, `/Ob0/1/2` | ~96-combination sweep on the flag-sensitive body | zero hits (allocator doc) |
+  | service pack | 9 images, 3 real generators | 3 pins, 16/16 unpinned worse |
+- **Re-hit the round-942 trap on my own first edit and caught it by the documented guard**: replacing the
+  `gv` entry with a combined one silently dropped its `/Ow` *and* applied `/Oy` to both files. Caught by
+  reading `build.make` for both files before building, not by any build error. Fixed with separate calls.
+  Second time in two rounds — the guard is doing its job, and it is the only thing that would have.
+- **Measured:** tree restored to the committed round-942 state and verified — gate pass, composition 246
+  placed, residue **8,628**, raw-link `.data` **21,481**, verify 281/283, byte-matched 264, imports 100,
+  wine load OK.
+
 **Round-942: settled the `/Ow` axis one carrier at a time — 2 inert, 1 harmful, 1 breaks the budget. No source change.**
 
 - **Round 941 left the axis half-tested**: `/Ow` paid on `gv_ExAllocGraveyardWorker` (-5) but its
