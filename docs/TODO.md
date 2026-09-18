@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-949: measured slack per carrier; the span check's only "OVER" is an untracked-function artifact.**
+
+- **Round 948 showed `cm_ExCopyEntityData` sits exactly at its 912-byte span**, which raised the useful
+  question for every carrier: which have *no* room for a size-increasing change and which have slack?
+  Ran `scripts/object_span_check.py` (the tool built for exactly this) over all 174 objects:
+  **167 exactly at span, 6 under, 1 over** — and the 25 `LONG`-flagged objects are all within span, as
+  round 916 found.
+- **The single "OVER" is a false positive, and the mechanism is worth recording.** `mlock.c.obj` reports
+  span 118 vs text 212 (+94). `mlock.c` defines **three** functions but marks only **two** with
+  `// FUNCTION: SERVER` (`__lock` 97, `__unlock` 21 = 118); `_lockerr_exit` has **no marker**. The object
+  carries **eight separate `.text` sections** (8, 15, 43, 97, 21, 14, 14, …) summing to 212, so the
+  check adds untracked helpers' bytes to the tracked span. **The split link confirms it**: both tracked
+  functions land at their reference VAs exactly (`__lock 1001d036`, `__unlock 1001d097`), because
+  `split_link.sh` places functions individually, not objects wholesale.
+- **Also verified this is not my doing**: stashing the working tree and re-running reproduces the same
+  `mlock.c.obj +94`, so it predates round 945's edit to that file (which touched only a data alias).
+- **The 6 "under span" objects are where growth is affordable** — `m_alloc2.c` (-5376), `sbh_pool.c`
+  (-2590), `initterm.c` (-347), `vfs2.c` (-288), `vfs_OpenStream.c` (-48), `srv_SeedRandom.c` (-42).
+  None of these is a residue carrier, so this is context rather than a lead: **every carrier that holds
+  residue is at or over its span, which is why size-increasing edits to them keep failing the
+  composition budget** (`/Ow` on `gm_AllocGebaeude` at +485, on `vfs_OpenStream` collapsing outright —
+  rounds 941/942).
+- **Recorded as measure-traps §6f-sexies** so the next round does not read the lone `OVER` as a budget
+  violation and go hunting in `mlock.c`.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-948: `rebrew test --all` and `rebrew verify --full` agree per-function — 283/283, zero disagreements.**
 
 - **Ran the other mandated tool this session had never invoked** (`rebrew test --all --json`) and

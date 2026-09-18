@@ -654,6 +654,33 @@ detector had stripped comments after collecting rather than before).
 disagrees with the definition that wins the link — and prefer the tooling's own view of the winner
 (`build/split_poc.map`) over any grep-derived population.
 
+## 6f-sexies. `object_span_check.py`'s one "OVER" result is an artifact of untracked functions (round 949)
+
+`scripts/object_span_check.py` reports, out of 174 objects: 167 exactly at span, 6 under, and
+**one over — `mlock.c.obj`, span 118, text 212, +94**. That reads as a real budget violation and is the
+only one in the tree. It is not.
+
+`mlock.c` defines **three** functions but marks only **two** with `// FUNCTION: SERVER`:
+
+```
+50:// FUNCTION: SERVER 0x1001d036     -> __lock     span 97
+72:// FUNCTION: SERVER 0x1001d097     -> __unlock   span 21
+   (and `_lockerr_exit`, defined at line 25, with no marker)
+```
+
+The object therefore carries **eight separate `.text` sections** (this build emits function-level
+sections): `8, 15, 43, 97, 21, 14, 14, ...` summing to 212, while the *tracked* span is only
+97 + 21 = 118. The 94-byte difference is `_lockerr_exit` and the other untracked helpers, which have no
+reference VA to be measured against.
+
+**And the split link confirms the artifact**: both tracked functions land at their reference VAs exactly
+(`__lock 1001d036`, `__unlock 1001d097`), because `split_link.sh` places each function individually
+rather than the object as a whole.
+
+**So read `object_span_check.py`'s output as "objects whose tracked functions fit", and treat a single
+outlier as a question about *untracked functions in that file*, not as a budget failure.** The check
+cannot distinguish the two, because it sums every `.text` section in the object.
+
 ## 6g. Two ways a whole-image instruction census lies, and both look like a finding (round 923)
 
 A mnemonic census over both images is a good instrument — it converts "residue is 6% of `.text`"
