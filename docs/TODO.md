@@ -49,6 +49,47 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-891: worked the composition-budget lever; confirmed 15/18 carriers are editable, and probed the one carrier with no recorded probe. All reverted.**
+
+- **Tried a lever the previous rounds had not exploited:** `measure-traps.md` §6d says 28 objects are
+  over the composition budget and that this is *what makes source edits collapse* — so a carrier in
+  a `LONG` file cannot absorb any size change. That prediction was never re-verified against the
+  current tree, and it determines which of the 18 carriers are editable at all.
+- **Re-derived the carrier/ budget mapping from scratch**, since my first two attempts returned
+  vacuous results (the residue log's third column is the **first-diff address, not the function
+  VA** — mapping by equality finds nothing; it needs address *containment* against the
+  `FUNCTION:` headers). Correct mapping:
+
+  ```
+  BLOCKED (LONG file)                          free (15)
+  vfs_OpenStream        +32                    gm_AllocSpieler, CrashDump, cm_ExSellObjekt,
+  gm_FindNextFilteredEntity (spiel_dumpD) +16  ls_LoadBuildingEntityState, cm_ExCopyEntityData,
+  gm_CheckInventoryCapacity (spiel622) +112    gv_ExAllocGraveyardWorker, ServerMainThread,
+                                               gm_AllocGebaeude, ahm_ExAllocAlchemist,
+                                               m_AllocTracked, srv_LoadBuf, gm_ObjectsAvailble,
+                                               vfs_ReadCompressed, cm_ExProdObjekt,
+                                               cm_ProcessCommandQueue
+  ```
+
+  §6d's "16 within budget / 3 blocked" reproduces **exactly**. Useful negative: it means rounds
+  886-887's `srv_LoadBuf` and `gm_AllocSpieler` probes were on *editable* carriers, so budget was
+  never the reason they failed — the walls are genuinely the walls.
+- **Probed the one free carrier with no recorded probe.** `gv_ExAllocGraveyardWorker` (456 bytes,
+  free file) — `whathas.py --va 0x10011cf7` reported "no documented probe". Its file header turned
+  out to document the blocker precisely: the neighbour loop's zero-extend form, reference
+  `xor ecx,ecx; mov cx,[ebp]` (4 bytes) against msvc6's `mov si,[ebp]; and esi,0xffff` (7).
+- **Confirmed the reference side by disassembly** at `0x10011f27`: `xor ecx,ecx` / `mov cx,word
+  ptr [ebp]` / `lea edi,[ecx+esi]` — the unmasked form, verbatim as the header says.
+  `instr_diff` isolates it as `ref-only x2: xor R,R` against `built-only x2: and R,0xffff`, exactly
+  two occurrences, plus the documented `add R,R` vs `lea R,[R+R]` strength-reduction pair.
+- **Two new spellings tried and reverted** (baseline STUB 615/1040, obj exactly 1040):
+  a `unsigned short gid` temp for the id read → **508/1041, SIZE_MISMATCH**; a signed `volatile
+  short` read → **503/1034**. Both worse, so the qualifier is load-bearing for the reload, which
+  is the tension the header already names. `docs/msvc6-c-shapes.md` §52's direction rule does not
+  apply here because removing the qualifier also removes the operand reload the reference has.
+- **Restored and verified:** back to 615/1040 obj 1040; `git status` clean; gate pass with residue
+  8,634, raw-link `.data` 21,836, verify 281/283, byte-matched 264.
+
 **Round-890: closed the inline-asm spec question with independent evidence; the carve-out is correct and all six blocks are load-bearing.**
 
 - **Tried:** resolve the tension round 889 escalated (user asked to remove all six `__asm` blocks
