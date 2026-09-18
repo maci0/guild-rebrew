@@ -1272,3 +1272,44 @@ analysis without reusing it, and paid for the omission.
 **64 distinct mnemonics** are touched, with the top eight carrying 76%. A long tail across integer,
 branch and x87 instructions is what the documented scheduler/register-role classification predicts; it is
 **not** the shape of a single systemic cause, and no mnemonic dominates enough to be one.
+
+## 22. `object_span_check.py` reads CMake's object, but `linktest.sh` recompiles elsewhere (round 989)
+
+The span filter is applied *before* probing, and it is the check that stops a size-increasing edit from
+collapsing the composition. Round 989 ran it on a live probe and it reported the carrier **exactly at its
+span** — so the probe looked free, and the span filter passed it. The link then collapsed the composition,
+and the carrier was in fact **+16 over span**, identical to the unprobed §159 measurement.
+
+**Why.** `scripts/linktest.sh` recompiles the named file with the command `build.make` records, but writes
+its object into its own work directory; it does **not** refresh
+`build/CMakeFiles/server_dll.dir/<path>.c.obj`. `scripts/object_span_check.py` measures that CMake object.
+So running the checker after `linktest.sh` measures the **previous** build:
+
+```
+src/.../gm_AllocSpieler.c          21:54:41   <- source reverted
+build/.../gm_AllocSpieler.c.obj    21:53:36   <- object is 65s older
+```
+
+The stale object still held the pre-probe shape, so the checker said "exactly at span" about source that had
+already grown +16.
+
+**The rule.** `object_span_check.py` is only meaningful against objects CMake itself just built. Before
+trusting it:
+
+```bash
+cmake --build build            # refresh CMake's objects FIRST
+python3 scripts/object_span_check.py
+```
+
+Running it after a `linktest.sh` probe measures the wrong artefact. This is measure-traps §12's class
+("after a flag change, the CMake objects are stale") generalised: **any tool that reads `build/` is telling
+you about the last CMake build, not about your working tree.**
+
+**Cost this round:** a probe that looked span-neutral was actually +16; catching it required a full rebuild
+and a composition collapse to notice. The `linktest.sh` collapse message ("only 0 symbols landed at their
+reference VA") is what surfaced it — that guard earned its place.
+
+**Also confirmed:** the §159 probing result reproduces exactly. Caching **only** `slot+0x14` (rather than
+both `slot+0x20` and `slot+0x14`) still measures **+16 obj / span overflow**, so the +16 is caused by the
+single extra frame slot, not by the number of cached values. Any caching fix on that carrier must first free
+16 bytes elsewhere in the same object.
