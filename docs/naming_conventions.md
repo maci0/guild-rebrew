@@ -69,6 +69,46 @@ Note: TL.exe shares the same game logic as server.dll (the `cm_*`, `gm_*`
 functions appear in both) but is built from `DieGildeAddOnVc\` instead of
 `DieGildeAddOn\`. The `Units\` directory is shared across all three binaries.
 
+### Attested original source paths (round 937)
+
+The `__FILE__` strings the compiler embedded give the original tree directly — **14 paths**, extracted
+with:
+
+```sh
+python3 - <<'PY'
+import re, collections
+d = open('original/Server/server.dll','rb').read()
+c = collections.Counter()
+for m in re.finditer(rb'D:\\Develop\\[ -~]{4,90}', d):
+    c[m.group(0).decode('latin1')] += 1
+for k, v in c.most_common():
+    print(v, k)
+PY
+```
+
+```
+Units\net\broadcast.c              Units\Error\Error.c
+Units\m_alloc\m_alloc.c            Units\vfs\vfs.c
+DieGildeAddOnServer\server.c       DieGildeAddOn\auxillary\plant.c
+DieGildeAddOn\command\command.c    DieGildeAddOn\command\lobbycommands.c
+DieGildeAddOn\game\aemter.c        DieGildeAddOn\game\alchemistry_logic.c
+DieGildeAddOn\game\friedhof_logic.c
+DieGildeAddOn\game\sim.c           DieGildeAddOn\game\spiel.c
+DieGildeAddOn\loadsave\loadsave.c
+```
+
+(all under the `D:\Develop\` root the binary spells out). Every entry of the merged tree below is
+attested by one of these. **This list is the authority**; the tree is not speculation where it agrees
+with it.
+
+**The `_c` directory suffixes in this repository's working tree are NOT attested.** Our files live
+under `game/spiel_c/`, `command/command_c/`, `loadsave/loadsave_c/` and so on, but no `__FILE__` string
+contains `_c\` — the originals were `spiel.c`, `command.c`, `loadsave.c` in the plain directories shown
+above. The suffixes are a decompiler-era artefact of splitting one original translation unit into many
+files, kept because moving ~140 files would churn every path in the metadata for no gain. They should
+not be read as evidence about the original layout, and a future round that reorganises the tree should
+target the attested names. Recorded so the difference reads as deliberate rather than as attestation.
+
 ### Merged Source Tree (speculative)
 
 Combining all three binaries into a single view of the original development

@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-937: recovered all 14 attested original source paths; the `_c` directory suffixes are unattested.**
+
+- **Worked the naming/tree brief instead of residue for one round.** Audited the type/struct side first
+  and found it **clean**: zero `field_0xN`/`_4i` placeholders survive anywhere, and the 16 remaining
+  `g_<hex>` globals are CRT-internal statics whose metadata types the source already matches
+  (`g_100317f0` `void(__cdecl*)(int)`, `g_100355d8` `char[0x104]`, `g_100356e0` `void(*)(void)` …), each
+  carrying a descriptive comment. Those are the naming mandate's correct terminal state ("unknown =
+  `g_<hex>`"), not work.
+- **The tree side had a real gap.** The `__FILE__` strings embedded by the compiler spell the original
+  development tree out entirely — **14 distinct paths** — and that list was recorded nowhere in the docs,
+  even though `naming_conventions.md`'s merged tree is built on exactly those paths and the mandate
+  requires attested entries to carry a string pointer.
+- **Extracted them and recorded the extraction command** in `naming_conventions.md`, verified by
+  re-running it: `Units\net\broadcast.c`, `Units\Error\Error.c`, `Units\m_alloc\m_alloc.c`,
+  `Units\vfs\vfs.c`, `DieGildeAddOnServer\server.c`, `DieGildeAddOn\auxillary\plant.c`,
+  `DieGildeAddOn\command\{command,lobbycommands}.c`,
+  `DieGildeAddOn\game\{aemter,alchemistry_logic,friedhof_logic,sim,spiel}.c`,
+  `DieGildeAddOn\loadsave\loadsave.c` — all under `D:\Develop\`.
+- **And the finding that matters: our `_c` suffixes are not in that list.** We keep files under
+  `game/spiel_c/`, `command/command_c/`, `loadsave/loadsave_c/`, but **no `__FILE__` string contains
+  `_c\`**. The originals were `spiel.c`, `command.c`, `loadsave.c` in the plain directories. The suffixes
+  are a decompiler-era artefact of splitting one original TU into many files — kept deliberately, since
+  moving ~140 files would churn every metadata path for no byte gain, but **they must not be read as
+  evidence about the original layout.** Recorded so a future reorganisation targets the attested names
+  rather than propagating the artefact.
+- **Measured:** no source change; residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100, wine load OK.
+
 **Round-936: the objective's "every data byte matching" clause is satisfied by copying, not compiling — stated plainly.**
 
 - **Finished auditing the objective's criteria as a set** (rounds 934-935 covered the two unmatched
