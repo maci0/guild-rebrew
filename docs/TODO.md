@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-913: continued the lift — 3 more symbols landed; a 7-symbol batch broke and was bisected.**
+
+- **Continued round 912's method on the remaining 70 multi-TU globals.** Rebuilt the candidate set
+  from scratch (one identical spelling everywhere, ≥3 sites): **7 new symbols**.
+- **Bisected rather than batched, and it paid.** Split the 7 into two groups by risk:
+  - `g_worker_entry_count`, `g_output_share` — no pinned file involved. **Build clean.**
+  - `g_next_object_id` — declares in `ahm_ExAllocAlchemist.c`, one of the three sp5-pp pins, so it
+    tested round 909's warning that pinned files must be left alone. **Build clean, 0 errors** —
+    so the pin was *not* the problem; the conflicting `gm_ResetAllEntities` declaration was.
+  - The remaining four (`g_current_season` 16 sites, `g_citizen_count` 12, both
+    `g_relationship_matrix_*`) — **broke the link with 13 errors**, all `LNK2001` for symbols I had
+    *not* lifted (`_s_ahm_AllocAhmInfo_1002a0f8`, `_ahm_QueryEntityBuildingType`,
+    `_ahm_AllocateEntitySlot`). That signature — unresolved names unrelated to the edit — means the
+    include change altered what some TU emits, not that the declarations were wrong.
+- **Reverted to the verified 3-symbol snapshot and committed that**, rather than losing the working
+  increment to a failing batch. `git` alone could not express this (it would have reverted all 6
+  files); a filesystem snapshot of `src/server.dll` taken before the risky batch is what made the
+  rollback surgical.
+- **Measured: gate pass and byte-neutral** — residue **8,634 unchanged**, raw-link `.data` **21,836
+  unchanged**, verify 281/283, byte-matched 264, imports 100, data extents 195.
+  `rebrew test --all` still 233 RELOC + 31 EXACT.
+- **New finding about the pins, and it corrects round 909/910.** A TU that merely *includes* a header
+  is fine even when it is one of the three sp5-pp-pinned files; `g_next_object_id`'s lift touched
+  `ahm_ExAllocAlchemist.c` and built clean. **The `C1001` in round 909 came from the header being
+  wrong, not from the pin.** The pin constrains what *flags* a file compiles under; it does not make
+  an include unsafe.
+- **What the failing batch actually indicates**, recorded as an open question rather than a
+  conclusion: four symbols at 4-16 sites produced unresolved externals elsewhere, which points at an
+  include-order or conditional-compilation effect rather than at the declarations. The next attempt
+  should lift those one at a time with the same snapshot discipline.
+
 **Round-912: the duplicated-globals lift finally lands — 9 symbols, 84 declarations, byte-neutral.**
 
 - **Applied round 911's own conclusion.** That round ended with the blocker stated precisely: "make

@@ -12,8 +12,6 @@
 
 extern unsigned short* g_entity_table_end;
 extern int g_next_object_id;
-extern int g_worker_entry_count[];
-extern float g_output_share[];
 extern unsigned char g_current_season;
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);

@@ -1,3 +1,4 @@
+#include "../entity.h"
 /* gv_ExAllocGraveyardWorker - allocates a graveyard worker entity of type
  * 0x1b/0x1c: validates the request against the resolved entity, finds a free
  * grave slot (or reuses one marked 0xf), initializes it from the matched
@@ -473,7 +474,6 @@
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 extern int g_citizen_count;
 extern int g_next_object_id;
-extern int g_worker_entry_count[];
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);

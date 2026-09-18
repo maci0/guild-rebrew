@@ -8,7 +8,6 @@
 #include "../entity.h"
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
-extern float g_output_share[];
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);

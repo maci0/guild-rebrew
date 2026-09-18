@@ -456,8 +456,16 @@ this file.**
 `cflags`**, and do not add a field that merely restates a CMake pin. Note also that
 `rebrew-functions.toml` is mode 444 — reverting needs `chmod u+w` first.
 
-## 6f. A dropped per-file flag produces a normal-looking measurement (rounds 879-880)
+**Round 913 correction: an sp5-pp pin does not make an *include* unsafe.** Round 909's
+`C1001: INTERNAL COMPILER ERROR` appeared right after `ahm_ExAllocAlchemist.c` (a pinned file) gained
+an include, and was recorded here as the pin interacting with header changes. It was not the pin.
+Round 913 lifted `g_next_object_id` into that same file's include graph and built **clean, 0 errors**
+— and round 911 then showed the real cause was a *wrong declaration* in `entity.h`
+(`gm_ResetAllEntities` as `int` against a `void` definition). **The pin constrains the flags a file
+compiles under; it says nothing about what it may include.** Do not exclude pinned files from
+header work; fix the header instead.
 
+## 6f. A dropped per-file flag produces a normal-looking measurement (rounds 879-880)
 `set_source_files_properties(... COMPILE_OPTIONS "/A" "/B")` **silently drops `/B`** — CMake wants a
 `;`-separated list. Configure succeeds, the build succeeds, `build.make` simply lacks the flag, and
 any measurement taken is of a *different compile than the one intended*, with no error anywhere.
