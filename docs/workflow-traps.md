@@ -413,3 +413,45 @@ cost most of four rounds. A round that has not run it has not established that i
 are already measured*. The expected value of a probe now depends far more on checking the record than on the
 probe's design — the opposite of the position in the early rounds, where the record was thin and probing was
 cheap. Rounds should budget for that shift explicitly rather than treating the lookup as an optional courtesy.
+
+## 11. A stale in-source note can describe a state the source no longer has (round 982)
+
+`ls_LoadBuildingEntityState.c:38` records:
+
+```
+ * 2026-09-13 (round 130): `current_index = 0;` hoisted ABOVE the
+ * aux-count read (was after realloc) — matches reference order
+ * (xor-zero, count read, realloc, re-read, test/jle): ... linked 728 -> 675 (-53)
+```
+
+**The source does not contain that hoist.** The assignment sits *below* the count read, and it appears
+**twice** (lines 80 and 82, separated by a blank line) — a stray duplicate left behind when the hoist was
+reverted. Both were measured this round:
+
+| probe | link delta |
+|---|---|
+| delete the duplicate assignment (keep one, below the read) | **+0** (byte-identical — msvc6 folds it) |
+| apply round 130's documented hoist (one assignment, above the read) | **+505** |
+
+So the note's `-53` describes a configuration the file no longer has, and re-applying it is a large
+regression. The `-53` was presumably real against the round-130 baseline (which the same header records as
+"linked 728"); the tree has since moved to 6xx, and the hoist is no longer a win.
+
+**This is workflow-traps §6's class** ("a header records a true observation about a compilation that no
+longer exists") with a sharper edge: §6 was about a *stale claim in a header*, this is a stale claim whose
+suggested action is now a −505 regression. A reader who trusted the note and applied it would lose half a
+round and 505 bytes.
+
+**Two rules follow.**
+
+1. **Never apply a recorded fix from a note without re-measuring it.** The note records what was true when
+   written, against the baseline of that round. Numbers in headers are history, not instructions.
+2. **A duplicated statement is a revert artifact, not an optimisation.** `current_index = 0;` twice in a row
+   is dead source that should be cleaned — it is byte-neutral here (measured **+0**), so cleaning it is free,
+   but it must never be mistaken for a deliberate shape. Grep for adjacent duplicate assignments when reading
+   a header that mentions an ordering change.
+
+**Also useful:** the accidental no-op proved a tool works. The first attempt at the hoist had a malformed
+match string and silently did not apply; `linktest.sh` printed its round-127 guard
+(`NOTE: identical to HEAD, so any delta below is the BASELINE, not a result`) and reported `+0`. That is
+exactly the failure §127 built the guard for, caught in the wild.

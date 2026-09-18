@@ -27339,3 +27339,37 @@ means the gap is not knowledge but *procedure*: no step in the round's opening f
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. `/Os` probe reverted; no baseline moved.
+
+## Round 982 — a stale note whose "fix" is now −505; the 12b coverage table partly counted itself
+
+Opened with `scripts/preprobe.sh` (round 981's guard) as the first command, per the brief's own rule.
+
+**Real source defect found.** `ls_LoadBuildingEntityState.c` has `current_index = 0;` **twice** in a row
+(lines 80 and 82, blank line between) — a stray duplicate left by a reverted reorder. Its header
+(`:38-43`) records round 130 hoisting that assignment *above* the aux-count read for **−53 linked**, but the
+current source has it *below* the read, so the note describes a configuration the file no longer has. Both
+readings measured at the link:
+
+| probe | link delta |
+|---|---|
+| delete the duplicate (keep one, below the read) | **+0** (byte-identical) |
+| apply the documented round-130 hoist | **+505** |
+
+So the recorded fix is now a half-round regression, and the duplicated statement is dead source that is free
+to remove but must not be mistaken for a deliberate shape. → workflow-traps §11.
+
+**Corrected an overclaim in rounds 978/979.** The §12b/§12c "doc hits per carrier" tables **counted
+themselves** — `whathas.py` finds those sections because they list the same addresses. Re-scored with them
+excluded, four carriers show 0-1 real `docs/` hits: `ServerMainThread` (0), `srv_LoadBuf` (0),
+`cm_ExProdObjekt` (0), `ahm_ExAllocAlchemist` (1), `vfs_ReadCompressed` (1). Each has substantial
+**in-header** history instead (`srv_LoadBuf`: **sixteen passes**; `ServerMainThread`: 8 markers;
+`cm_ExProdObjekt`: 15). The §12b conclusion survives; its evidence was partly circular. →
+codegen-walls §12d.
+
+**Incidental confirmation.** The first attempt at the hoist had a malformed match string and silently did not
+apply; `linktest.sh` printed its round-127 guard (`NOTE: identical to HEAD, so any delta below is the
+BASELINE`) and reported `+0`. That is precisely the failure the guard was built for, caught in the wild.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; tree clean; no baseline
+moved.

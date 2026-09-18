@@ -718,3 +718,44 @@ a standalone `docs/` section:
   scheduler-bound and retires".
 
 So §12b's conclusion holds and is now checkable two ways rather than asserted.
+
+### 12d. The 12b/12c coverage table partly counted itself (round 982)
+
+Sections 12b and 12c tabulated "doc hits" per carrier fault address to argue that all 19 are documented.
+**That count included the tables themselves** — `whathas.py` finds §12b/§12c because those sections list the
+same addresses, so eight carriers' scores were inflated by the very tables making the claim.
+
+Re-scored with `12b.`/`12c.`/`Round 97x`/`Round 98x` excluded, and cross-checked against each carrier's
+**own `.c` header** (which `whathas.py` does not index — workflow-traps §8):
+
+| carrier | fault | real doc hits | header probe-history markers |
+|---|---|---|---|
+| `_CrashDumpUnhandledExceptionFilter@4` | `0x10002770` | 34 | — |
+| `_cm_ExSellObjekt` | `0x1000d959` | 32 | — |
+| `_cm_ExCopyEntityData` | `0x1000ec2e` | 21 | — |
+| `_gm_FindNextFilteredEntity` | `0x10016f86` | 19 | — |
+| `_m_AllocTracked` | `0x10006591` | 18 | — |
+| `_gm_AllocSpieler` | `0x100188fa` | 11 | — |
+| `_gv_ExAllocGraveyardWorker` | `0x10011cf6` | 9 | — |
+| `_vfs_OpenStream` | `0x10009056` | 6 | — |
+| `_gm_CheckInventoryCapacity` | `0x10019ee3` | 6 | — |
+| `_cm_ProcessCommandQueue` | `0x1000aaf6` | 5 | — |
+| `_gm_CalculateProductionValue` | `0x10019804` | 5 | — |
+| `_ls_LoadBuildingEntityState` | `0x1001292a` | 3 | **1** |
+| `_gm_AllocGebaeude` | `0x10017530` | 3 | 10 |
+| `_gm_ObjectsAvailble` | `0x1001607c` | 2 | 69 |
+| `_ahm_ExAllocAlchemist` | `0x1000bebb` | 1 | 15+ |
+| `_vfs_ReadCompressed` | `0x10008b2a` | 1 | 15+ |
+| `_ServerMainThread@4` | `0x100096a8` | **0** | 8 |
+| `_srv_LoadBuf` | `0x1000a5c0` | **0** | **16 passes** |
+| `_cm_ExProdObjekt` | `0x1000e20c` | **0** | 15 |
+
+**The three zero-hit carriers all have substantial in-header history**, and `srv_LoadBuf`'s header documents
+**sixteen passes** of probes with the score of each. So the conclusion of §12b survives — but the *evidence*
+for it was partly circular, and the corrected table shows that for 8 of 19 carriers the `docs/` count is
+not the evidence at all.
+
+**The practical reading: `docs/` hits under-count on this tree, and the under-count is largest exactly where
+the work was hardest.** A carrier with a long header and a short `docs/` presence (small function, many
+probes, no standalone section) is the normal shape for thoroughly-worked rows, not an unexplored one.
+`scripts/preprobe.sh` prints both counts for this reason.
