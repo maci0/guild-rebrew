@@ -1,3 +1,4 @@
+#include "../../game_structs.h"
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
 
@@ -62,10 +63,10 @@ extern float g_const_neg_1_0;
 void __cdecl gm_ResetAllEntities(void)
 {
 	int i;
-	char* entity_cursor;
+	EntityQueryRecord* entity_cursor;
 	for (i = 0; i < 0x100; i++) {
-		entity_cursor = g_entity_ptr + i * 0xa9;
-		if (*entity_cursor != 0) {
+		entity_cursor = (EntityQueryRecord*) g_entity_ptr + i;
+		if (entity_cursor->type != 0) {
 			gm_CleanupBuildingEntity((unsigned char*) entity_cursor);
 		}
 	}
@@ -191,6 +192,7 @@ void __cdecl gm_CleanupAllEntities(void)
 
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id)
 {
+	EntityQueryRecord* query_cursor;
 	int i;
 	char* entity_cursor;
 
@@ -215,10 +217,10 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 		}
 	}
 	if (dynamic != NULL) {
-		entity_cursor = (char*) g_entity_ptr;
-		for (i = 0; i < 0x100; i++, entity_cursor += 0xa9) {
-			if (*(char*) entity_cursor != 0 && *(int*) (entity_cursor + 1) == entity_id) {
-				*dynamic = entity_cursor;
+		query_cursor = (EntityQueryRecord*) g_entity_ptr;
+		for (i = 0; i < 0x100; i++, query_cursor++) {
+			if (query_cursor->type != 0 && query_cursor->entity_id == entity_id) {
+				*dynamic = query_cursor;
 				return 1;
 			}
 		}

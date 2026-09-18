@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-898: two more type-wiring sites landed at +0 — and round 897's rule was too broad, corrected by measurement.**
+
+- **Tried:** the remaining raw `0xa9` walks, applying round 897's rule ("typing a record is
+  byte-neutral only when the rewrite preserves the same liveness") and measuring each site, as that
+  round requires.
+- **All three `spiel.c`-area sites cleared, one file landed.** `spiel.c`'s two walks were retyped to
+  `EntityQueryRecord*`:
+  - `gm_ResetAllEntities` — `g_entity_ptr + i * 0xa9` → `(EntityQueryRecord*) g_entity_ptr + i`
+    with `entity_cursor->type`;
+  - `gm_ResolveEntityById` — the `+= 0xa9` / `*(int*)(cursor + 1)` walk → `query_cursor++` with
+    `->entity_id`.
+  `rebrew test` shows every function unchanged (57/57, 211/211 among them) and **`linktest.sh`
+  measures +0 (8,634 → 8,634)**. Kept.
+- **Round 897's rule was too broad, and the counterexample is mine.** That rule says an index used in
+  the *return* expression is what makes the rewrite unsafe. `gm_ResetAllEntities` **does** use `i`
+  in its address computation and yet lands at +0 — because `i` still bounds the loop, so it stays
+  live. Re-reading the `spiel6.c` failure: what killed it was `i` becoming **entirely dead** (the
+  return was rewritten to the pointer, so nothing referenced the index). The precise rule is
+  **deadness, not index-algebra presence**:
+  - `spiel5.c gm_SearchStruct` — no index at all → +0;
+  - `spiel.c gm_ResetAllEntities` — index used *and* still bounds the loop → +0;
+  - `spiel6.c gm_SearchTable67` — index became dead → obj 62 → 38, match 62 → 8.
+  Corrected in `codegen-walls.md` §1.
+- **Checked a stale round-start claim.** The brief listed `ls_LoadBuildingEntityState` among the
+  budget-blocked carriers; the current pad report says **`ls_LoadBuildingEntityState.c.obj` is NOT
+  LONG** — only `spiel622.c.obj`, `spiel_dumpD.c.obj` and `vfs_OpenStream.c.obj` are, matching round
+  891's corrected mapping. Its `0xa9` site is an `offset += 0xa9` accumulator paired with a separate
+  `current_index` counter, not a typed walk, so it was left alone rather than forced.
+- **Measured:** gate pass, residue **8,634 unchanged**, raw-link `.data` **21,836 unchanged**, verify
+  281/283, byte-matched 264, imports 100.
+- **Fourth landed source change in thirteen rounds.** The type work is now: both conflations closed,
+  all 48 size annotations compiler-verified, one documented mechanical trap, and four call sites
+  actually using the new type instead of raw casts.
+
 **Round-897: wired the new type into real code — one site byte-neutral and kept, one site breaks codegen and was reverted.**
 
 - **Tried:** the defect rounds 894-896 left behind. Both new types (`EntityStruct`,
