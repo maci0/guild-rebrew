@@ -7453,3 +7453,51 @@ CrashDump/EmitCrash duplicate `??_C@` COMDATs (`\r\n` / separator /
 `--> ` / `??? `) still sit in the LogFile slot at `0x1002733c` (+136).
 Those bytes already live inside `g_crashdump_data_10027104`; the hard
 part is killing the second emission without blowing CrashDump `.text`.
+
+
+## 159. `gm_AllocSpieler`'s interpolation loop: the reference caches two floats in locals (round 985)
+
+The second `__ftol` site in the flagship carrier carries a divergence the file header did not name. Both
+sides emit exactly six `__ftol` calls at identical instruction positions, so the `(int)` cast lane is
+already correct (re-confirmed: a plain `(int) d` emits `fld` + `jmp __ftol`, and ours match the reference's
+six). The **operands** differ:
+
+```
+reference                             ours
+0x10018bc8  fcomp dword ptr [ebp+0x20]      fld  dword ptr [ebp+0x20]
+0x10018bcb  fnstsw ax                       fxch st(1)
+0x10018bcd  test ah,0x41                    fcompp
+                                            fnstsw ax
+                                            test ah,0x41
+0x10018bdd  fsub  dword ptr [ebp+0x20]      fsubr qword ptr [esp+0x24]
+```
+
+The reference compares and subtracts **`[ebp+0x20]`** — a *stack local* — where we read `[ebp+0x1c]`/`[ebp+0x20]`
+off the slot. So the reference cached two `slot` fields into locals before the loop; we re-read them from
+memory each iteration, which also forces `fld`/`fxch`/`fcompp` instead of a direct memory compare.
+
+**The source site** (`gm_AllocSpieler.c:434-441`):
+
+```c
+if ((double) *(unsigned short*) (slot + 0xa) > *(float*) (slot + 0x20)) {
+        acc = *(float*) (slot + 0x1c);
+        for (n = (int) ((double) *(unsigned short*) (slot + 0xa) - *(float*) (slot + 0x20));
+             n > 0; n--) {
+                acc = acc - *(float*) (slot + 0x14) + *(float*) (slot + 0x14) / acc;
+        }
+```
+
+**Probed and reverted: introducing the two locals overflows the carrier's span.** Caching `slot+0x20` and
+`slot+0x14` in `float` locals and using them at all four sites measures
+**obj 3712 against the reference span 3696 (+16)**, which collapses the composition — `split_poc` lands
+0 symbols at their reference VA and every residue number becomes meaningless. `gm_AllocSpieler` is exactly
+at its span, so it has **zero** headroom: any edit that adds frame must recover the bytes elsewhere in the
+same object.
+
+So the divergence is characterised but not bankable on its own. It is worth recording because it is the one
+`gm_AllocSpieler` lead that is a *caching* decision rather than a scheduling one, and because the
++16 figure makes the size budget explicit: a future edit must remove 16 bytes elsewhere in the citizen path
+before this shape can ship. The file header already records one candidate for that ("bankable only once
+those 11 bytes are recovered elsewhere"), which is 5 bytes short of what this needs.
+
+**Measured:** probe +16 obj (span violation, composition collapse), reverted; residue back to 8,628.

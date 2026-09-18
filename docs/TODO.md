@@ -27429,3 +27429,32 @@ baseline stays 8,628; the six sites stay; do not re-litigate. Recorded in codege
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Probe files in `.scratch/` only; no source
 edit; no baseline moved.
+
+## Round 985 — the flagship carrier's float-caching divergence; probe overflows the span
+
+Used the locally-readable VC6 CRT source (`rebrew/.cache/gh-org/msvc600_sp3/VC98/crt/src/`) to settle two
+questions, then found one real lead.
+
+**CRT-source checks (both negative, cheaply).** All 19 residue carriers report "Safe to reverse" under
+`rebrew lib-match --stock-lib LIBCMT.LIB` — none is library code that should have been skipped. And the
+`(int)` cast lane on the flagship is already correct: a plain `(int) d` emits `fld` + **`jmp __ftol`**
+(tail jump, verified by compiling the shape), the reference uses **`call __ftol`** at six sites, and our
+build emits exactly those six at identical instruction positions. `__ftol` itself
+(`0x1001b564`) and `_sprintf` (`0x1001a299`) are stock LIBCMT.
+
+**Real lead: `gm_AllocSpieler`'s interpolation loop caches two floats the reference keeps in locals.**
+Reference is `fcomp dword ptr [ebp+0x20]` / `fsub dword ptr [ebp+0x20]`; ours is
+`fld [ebp+0x20]; fxch st(1); fcompp` and `fsubr qword ptr [esp+0x24]`. Source at
+`gm_AllocSpieler.c:434-441` re-reads `*(float*)(slot + 0x20)` and `slot + 0x14` from memory each iteration.
+This is a **caching** decision, not a scheduling one — the only such lead on that carrier.
+
+**Probed and reverted: it overflows the span.** Caching both fields in `float` locals across the four use
+sites measures **obj 3712 against the reference span 3696 (+16)**, which collapses the composition
+(`split_poc` lands 0 symbols at their reference VA; every residue number becomes meaningless). The carrier is
+exactly at its span, so it has zero headroom. → shapes §159.
+
+The budget is now explicit: a future edit must free **16 bytes** elsewhere in the citizen path before this
+shape can ship. The header already names a candidate worth 11 — 5 short.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Probe reverted; tree clean; no baseline moved.
