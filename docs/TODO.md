@@ -49,6 +49,43 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-894: completed the entity slot type — 7 fields to 45, with a measured width fix. First landed source change in nine rounds.**
+
+- **Acted on round 893's findings.** The `.data` lane is exhausted, so types/structs are the
+  mandate's live remainder, and `EntityStruct` (`game/entity.h`) was declared with `// SIZE 0x21c`
+  while covering 7 of the 98 offsets in use.
+- **Resolved the conflation before extending anything**, since a wrong base would have made the
+  struct worse than the stub. Traced the `+0x27` word through the reference:
+  `gm_FindNextFilteredEntity` walks with **stride 0xa9** (`list_head += 0xa9`, reading `+0x25`/
+  `+0x27`), and `gm_StartFilteredEntitySearch` returns *that* record. A 2-byte field at 0x27 cannot
+  coexist with a 4-byte `season_born` at 0x28, so `+0x27` is **not** a slot field and was
+  deliberately left out of the struct.
+- **Found and fixed a real width bug.** The old stub declared `+0x28` as `unsigned short`. It is a
+  4-byte `int`: `0x10016978` is `mov edx,[0x10035880]` (g_current_year) / `dec edx` /
+  `mov [esi+0x28],edx`, and `[r+0x28]` appears with **66 dword encodings against 2 word
+  encodings** in the reference. At the old width every field past `+0x28` was addressed 2 bytes
+  early — the struct was not merely thin, it was wrong.
+- **Merged two independent sources, then checked each against the reference** rather than trusting
+  either: the tree-wide offset sweep (scalars the map omits) and the EXE-derived map in
+  `spiel62.c`'s header (large blocks the sweep cannot see). They agree on every shared offset.
+- **Result: 7 fields to 45**, `sizeof(EntityStruct) == 0x21c` asserted through the MSVC6 compiler
+  (`char a_size[sizeof(EntityStruct)==0x21c?1:-1]` compiles clean), names are game-domain
+  (`season_born`, `home_building`, `ref_table`, `stats_block`, `patrol_target`), and the pads are
+  kept where evidence is absent rather than guessed.
+- **Two build failures caught and fixed before commit, both real:**
+  - My generator emitted C89-invalid `int[8] ref_table;` (array size before the name) — **40
+    compile errors** across the including TUs. Fixed to `int ref_table[8];`.
+  - A later run showed `C1083: Cannot open compiler intermediate file 'a00032gl'` — **a transient
+    parallel-build temp-file collision, not a code error.** A serial `-j4` rebuild produced **0**
+    errors and the gate then passed. Worth remembering: a lone `C1083` with no source location is
+    the build harness, not the source. (measure-traps §9.)
+- **Measured:** gate pass, residue **8,634 unchanged**, raw-link `.data` **21,836 unchanged**,
+  verify 281/283, byte-matched 264, imports 100. Confirms the header edit is byte-neutral, as
+  expected for a type only comments referenced.
+- **This is the first landed source change in nine rounds** (the rest were probes, all reverted).
+  It moves no bytes to zero, but it retires a wrong type — which is what this round's brief asks
+  for and what a future reader needs to avoid re-deriving the layout.
+
 **Round-893: the struct-layout audit — two records were being conflated, and the header type is dead code.**
 
 - **Returned to the round brief's actual mandate** (`.data`/types/structs, not `.text`): the `.data`

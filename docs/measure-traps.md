@@ -327,6 +327,14 @@ before comparing two figures.
 
 ## 9. Build and verify side effects that burn
 
+- **A lone `C1083: Cannot open compiler intermediate file '<garbage>.tmp'` with no source location
+  is the build harness, not the source (round 894).** It appeared in a `gate.sh` run immediately
+  after a header change and read exactly like a compile-error regression introduced by that change.
+  It is a **transient parallel-build temp-file collision**: re-running the build produced **0**
+  errors and the gate then passed with all baselines held. The tell is the filename — `a00032gl`,
+  not a path, and not a `.c` file — and the absence of any line/column. Before treating a C1083 as
+  a finding, check whether any `error C####` line names a *source* file; if none does, rebuild
+  before touching the code. Setting `TMPDIR` or dropping to `-j4` avoids it.
 - **`cmake --build build` fails by design at the post-link layout step** with no
   `error C####`/`LNK####`, and `make` then **deletes `build/server.dll`**. The deliverable must
   be regenerated with `scripts/split_link.sh` + `postlink_residual.py --write`. Leaving the tree
