@@ -3533,3 +3533,44 @@ the round-174 attempt that hit `0x280` exactly losing **+66**. Recorded so the n
 liveness window rather than from the frame number.
 
 **Measured this round:** no source edit; residue 8,628 unchanged.
+
+## Finding 67 — `CrashDump`'s deferred save is a REGISTER-ROLE assignment, and the header's −2 is stale (round 993)
+
+Finding 66 established that the reference saves `ebx`/`edi` at `0x1000282c` rather than in the prologue.
+Round 993 located the cause, and it is not a save placement.
+
+**The two builds give the same value to different registers:**
+
+| | reference | ours |
+|---|---|---|
+| `hDbgFile` = `CreateFileA(...)` result | **`mov ebp, eax`** @ `0x1000281d` | **`mov edi, eax`** @ `0x1000281f` |
+| the save pair | `push ebx; push edi` @ `0x1000282c`, *after* the CreateFile result is in ebp | `push ebx; ...; push edi` in the prologue |
+
+The reference parks `hDbgFile` in **ebp** and frees **edi** for its later, separate use (`mov edi,
+[0x10024034]` at `0x1000282e`, then `call edi` at `0x10002843`/`0x10002880`). We occupy `edi` with
+`hDbgFile` from byte ~0xAF onward, so msvc6 must save it at entry.
+
+**Probed, and the role is not steerable.** Giving `hDbgFile` a tighter C scope (a block-local alias so its
+live range ends before the walk) measures **+0 — byte-identical**. msvc6 folds the alias and keeps the same
+allocation, which is §1's standing result for this class.
+
+So Finding 66's "liveness window" reading is correct but not actionable: the window is real, and the choice
+of *which* register holds `hDbgFile` is the compiler's.
+
+**Header correction.** `CrashDumpUnhandledExceptionFilter.c:139-142` records a round-129 lane:
+
+```
+ * Round-129 lane: moving `nFrames = 0x800;` from
+ * above `/* Stack walk */` to just before `for (;;) {` (semantically
+ * neutral single pre-loop store) — object +2/+2 both rulers, linked
+ * 1597 -> 1595 (-2, confirmed after full rebuild).  Kept for the bytes.
+```
+
+**Re-measured this round: +30, not −2.** Applied exactly as described (store moved from its position in the
+`hCrashLog != -1` block to immediately before the walk loop): residue **8,628 → 8,658**. Reverted. The note's
+`1597 -> 1595` describes a tree state from before the round-110 span fix and the round-180 corrections; the
+tree has since moved to 1,583 for this carrier and the same edit now costs 30 bytes.
+
+This is the **fourth** stale-header delta found in four rounds (982: −53 → +505; 985: "bankable" → span
+overflow; 986: 11 → +343; 993: −2 → +30). See workflow-traps §14 — the rule stands, and this carrier's
+header is not exempt from it despite being the most carefully maintained in the tree.
