@@ -1359,3 +1359,42 @@ that "ends early" is a signal that the stream desynchronised, not evidence about
 **Outcome for the round's actual goal:** the 16 bytes cannot be found by shrinking, because the object is
 already exactly at its span and its code fills it. Any editing fix must be **size-neutral**, not merely
 "small enough" — which is why both caching probes measured +16 and the composition collapsed.
+
+## 24. Instruction counts across two images are not comparable — the decoder's stop rule decides the answer (round 991)
+
+Chasing whether any carrier is *missing code* rather than *reordered code*, round 991 compared instruction
+counts between the reference and our build for all 19 carriers. **The answer changed with every truncation
+rule**, which is the tell that the measurement is about the method, not the target:
+
+| stop rule | `gm_AllocSpieler` ref / bld | total delta |
+|---|---|---|
+| full span, no truncation | 1063 / 1014 (−49) | −121 |
+| truncate at last `ret`, drop trailing `nop` | 1056 / 1014 (−42) | −121 |
+| truncate at last `ret` before padding | 1056 / 917 (−139) | −216 |
+| `scripts/first_divergence.py` (decodes over the span) | 1063 / 1014 | — |
+
+A −42 or a −139 for the same function is not a measurement; it is three different bugs. Every rule decodes
+past the function's true end and then reports the garbage as code — in the reference that produced a bogus
+`popal` at `0x10002e9c`, in ours a bogus `push 0xfe811004`.
+
+**The desync-free measurement is the object's `.text` raw size**, read from the COFF, against the reference
+span:
+
+```
+gm_AllocSpieler   span 3696   our object .text raw 3696   +0
+CrashDump         span 2128   our object .text raw 2128   +0
+cm_ExSellObjekt   span 2064   our object .text raw 2064   +0
+```
+
+Every carrier is **exactly at its span**. That is unambiguous — no decoding, no stop rule — and it confirms
+§23 and round 990.
+
+**The rule.** Do not compare instruction *counts* between two images. A count depends on where you stop, and
+where you stop requires knowing the function's end, which is exactly what is in doubt. Compare **byte
+lengths from the object**, which are declared, or compare instruction *streams* with an alignment-aware
+tool. The mnemonics-multiset comparison used this round returned "differs by 87" for `gm_AllocSpieler`,
+including 7 `nop`s and 2 extra `ret`s — all of them decoder garbage past the `ret` at `0x100196b8`.
+
+**Third instance of this class** (§21 decoding from section start, §23 counting in postlink output, §24
+counting across images). The common cause is that a disassembler always produces *something*; desynchronised
+output is syntactically valid and reads like a finding.
