@@ -49,6 +49,42 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-896: defined the entity query record — the second of the two conflated layouts, now typed.**
+
+- **Picked up round 893's open half.** That round proved the `+0x27` slot-index word belongs not to
+  `g_slot_table` but to the record `gm_StartFilteredEntitySearch` returns, and that two records were
+  being read as one. Round 894 typed the first (`EntityStruct`, 0x21c). This round types the second.
+- **Gathered the layout from all its users, then verified each offset in the reference.** Six TUs
+  index it at the same **0xa9** stride (`spiel.c`, `spiel5.c`, `spiel6.c`,
+  `gm_ChangePlayerIdentityImpl.c`; `spiel_dumpD.c` reads its filter words), and `gm_Open.c` allocates
+  `0xa900` = 0x100 × 0xa9 and zero-fills it.
+  Reference confirmation at `0x10017210` (`gm_SearchStruct`):
+  ```
+  lea  ecx, [eax + 0xa900]     ; total span
+  add  eax, 0xa9               ; stride
+  cmp  byte ptr [eax], 0       ; the +0x00 type byte
+  ```
+  plus `0x1000fe86 mov cx, word ptr [eax+0x27]` and `0x1000fea0 lea ecx,[ecx*4+0x100358a0]`.
+- **One real discovery: the record must be `#pragma pack(1)`.** The reference reads a **word at
+  +0x27, an odd offset**. Unpacked, MSVC6 pads `int entity_id` to offset 4 and every later field
+  moves — my first draft failed the size assertion for exactly that reason. The layout is only
+  expressible with 1-byte packing, which is independent evidence about how the original compiled it.
+  Same pattern as `office_slot.h`.
+- **Verified with the compiler, the instrument round 895 established.** `sizeof == 0xa9` and every
+  field offset asserted: `type` 0x00, `entity_id` 0x01, `filter_25` 0x25, `slot_index` 0x27 — all
+  clean under `rebrew-cmake-cl`, and `PlayerSlot` still 0x264264.
+- **Placed in `game_structs.h`** (the designated home for domain structs, and already the shared
+  include root). Naming follows the brief: UPPER_CASE struct, game-domain field names, no `field_0x`
+  placeholders surviving.
+- **Recorded the confusion explicitly in the header**, because it is the trap: both records have a
+  field near 0x28, which is what made them look like one struct. The type comment now says so and
+  points at `measure-traps.md` §6.
+- **Measured:** gate pass, residue **8,634 unchanged**, raw-link `.data` **21,836 unchanged**, verify
+  281/283, byte-matched 264, imports 100. Byte-neutral, as expected — the type was referenced only
+  by comments and raw casts before.
+- **Second landed source change in eleven rounds,** and like round 894 it comes from the *types*
+  half of the mandate rather than `.text`. Both conflation halves are now closed.
+
 **Round-895: audited all 48 struct SIZE annotations with the compiler — every one correct. The 25 "mismatches" were my own tool.**
 
 - **Tried:** the type/struct mandate, one step past round 894. There are 48 `// SIZE 0xNN` struct
