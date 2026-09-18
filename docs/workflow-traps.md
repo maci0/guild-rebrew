@@ -184,3 +184,29 @@ definition is used in its own file.
 **A C89 trap this hit:** `unsigned char g_slot_table[];` at file scope is an *incomplete* tentative
 definition and emits **no symbol at all** — 11 `LNK2001`s, not a warning. A defining TU needs an
 explicit size even when every declaring TU uses the unsized form.
+
+
+## 4. An objective criterion with no check will silently stay unverified (round 934)
+
+`gate.sh` had six checks and none of them loaded the DLL. The 100% objective's own done-criteria list
+ends with **"Wine load + exports (Init, Exit) resolve"** — and for the whole of this session nothing
+verified it. Every round could report "gate pass" while that criterion was untested, which is the
+distinction between *green* and *verified*.
+
+**Audit the objective's criteria as a set, not one at a time.** The cheap form: write the done-criteria
+list out and mark, next to each, the exact command that decides it. Anything with no command is
+unverified regardless of how long the suite has been green.
+
+Two traps met while writing the missing check, both already documented separately and both hit anyway:
+
+- **A check whose failure test is a grep for absence passes on a run that never happened.** v1 ran the
+  loader under an unwritable `WINEPREFIX`, so Wine produced no output at all; `grep -q MISSING` found
+  nothing and the script printed OK. **Test the exit code and require non-empty output.**
+- **A harness limitation looks exactly like a finding.** The same v1 reported
+  `LOAD FAILED err=193` (BAD_EXE_FORMAT) for our DLL — and for **the reference DLL too**. When a check
+  fails, re-run it against the known-good artefact before believing it: that control cost one command
+  and prevented a round being spent "fixing" a non-defect. Here the real cause was Wine's `Z:` path
+  handling; copying to a short temp path loads all three DLLs correctly.
+
+**Then prove the new check fails.** A truncated 4,096-byte copy gives exit 1; the real artefact gives
+`Init resolved / Exit resolved` and exit 0.

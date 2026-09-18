@@ -271,5 +271,19 @@ else
     echo "imports not measured (build/server.dll missing)"
 fi
 
+# Round 934: the objective's last criterion -- "Wine load + exports (Init, Exit)
+# resolve" -- had no check anywhere.  lint/compile/verify/residue all pass on a
+# DLL that cannot be loaded, and "it linked" is not "it loads" when postlink
+# rewrites operands and blits sections.  The check is skipped (not failed) when
+# wine or the cross-compiler is absent, so the gate stays usable off this host.
+echo "== wine load + exports"
+if bash scripts/wine_load_check.sh build/server.dll > .scratch/gate-wine.log 2>&1; then
+    tail -1 .scratch/gate-wine.log
+else
+    echo "REGRESSION: wine load check failed --"
+    cat .scratch/gate-wine.log
+    rc=1
+fi
+
 [ "$rc" -eq 0 ] && echo "GATE: pass" || echo "GATE: FAIL"
 exit "$rc"

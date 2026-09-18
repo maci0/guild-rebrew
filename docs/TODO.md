@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-934: found the objective's last done-criterion had no check anywhere; wrote it, and it passes.**
+
+- **Audited the objective's criteria as a set instead of chasing residue.** `.text` VirtualSize is
+  **exactly 0x22846** on both sides, the import table matches at 100, residue is at baseline — but
+  **"Wine load + exports (Init, Exit) resolve" was checked by nothing**: `gate.sh` covers lint,
+  compile, verify, residue, data extents and imports, and no script in `scripts/` had ever loaded the
+  built DLL. A DLL can be byte-perfect in `.text` and still fail to load, and "it linked" is not
+  "it loads" when postlink rewrites operands and blits sections.
+- **Wrote `scripts/wine_load_check.sh`** — builds a tiny LoadLibrary/GetProcAddress loader with the
+  host cross-compiler and runs it under Wine against the deliverable with `Init` and `Exit`.
+- **The first two versions were traps in exactly the way this project documents.**
+  - v1 tested the failure with `grep -q MISSING` on captured output, and its Wine prefix was
+    unwritable, so Wine printed nothing and the check **passed on a run that never happened**.
+    A check that cannot fail is not a check (measure-traps §6d, and round 907's lint guard).
+  - It also reported a spurious `LOAD FAILED err=193` (BAD_EXE_FORMAT) — which turned out to be a
+    **harness artefact, not a property of the file**: passing `Z:` with a deep path fails on this host
+    *for the reference DLL too*. Copying to a short temp path loads correctly.
+  - v2 tests the loader's **exit code** and requires non-empty output, so an empty run fails.
+- **Proved it can fail, then proved it passes.** Truncating the deliverable to 4,096 bytes gives
+  `LOAD FAILED err=193` and exit 1; the real artefact gives
+  ```
+    Init   resolved
+    Exit   resolved
+  ```
+  and exit 0. Control test — **reference, `build/split_poc.dll` and `build/server.dll` all load and
+  resolve both exports**, so this is not a case of our build differing from the original; the
+  criterion is genuinely satisfied.
+- **Wired into `gate.sh` as a sixth check**, skipped (not failed) when wine or the cross-compiler is
+  absent so the gate stays usable where they are not installed.
+- **Measured:** gate pass on all six checks; residue **8,633**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100. No game-source change.
+
 **Round-933: `cm_ExSellObjekt`'s residue is slot numbering (674/674 instructions), and its synthetic struct is load-bearing.**
 
 - **Pinned the divergence to instruction index 14.** Aligning both bodies by mnemonic+operand:
