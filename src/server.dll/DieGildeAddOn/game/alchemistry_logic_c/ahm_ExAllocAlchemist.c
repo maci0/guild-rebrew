@@ -381,10 +381,16 @@ extern char s_ahm_AllocAhmInfo_1002a0f8[];
  *     CLOSED BY CONSTRUCTION, round 191, after six spellings -- and TWO of
  *     the round-190 claims above are themselves wrong.  Corrected here:
  *
- *     (1) The "p1 pins fld [esi+0x1c]; fmul" claim is FALSE.  Our baseline
- *         emits `d905b8560210 fld [0x100256b8]` then `d84e1c fmul [esi+0x1c]`
- *         -- the CONSTANT first.  The reference is the reverse (0x1000c022
- *         `d9461c fld [esi+0x1c]` then `d80db8560210 fmul [0x100256b8]`).
+ *     (1) The "p1 pins fld [esi+0x1c]; fmul" claim is FALSE.  At the time,
+ *         our baseline emitted `d905b8560210 fld [0x100256b8]` then
+ *         `d84e1c fmul [esi+0x1c]` -- the CONSTANT first -- against the
+ *         reference's `d9461c fld [esi+0x1c]` then `d80db8560210 fmul
+ *         [0x100256b8]`.
+ *         STALE as of round 957: the current build contains NO
+ *         `d905b8560210` at all, and both sides emit the reference's order at
+ *         0x1000c022/0x1000c025 (`d9461c` then `d80db8560210`, byte-identical).
+ *         The operand-role half of this item is CLOSED; only the `d8c1`/`dec1`
+ *         root cause stated below still stands.
  *         p1 pins the pair's POSITION, never its operand roles, so "keep the
  *         pin" was aiming at something that does not exist.  Verified by
  *         objdump of the baseline object.

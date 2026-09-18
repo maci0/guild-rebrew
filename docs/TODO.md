@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-957: finished the stale-claim sweep — `ahm_ExAllocAlchemist`'s closed sub-item annotated, its root cause re-verified.**
+
+- **Continued round 956's sweep to the other verifiable assertion class: byte-sequence claims in
+  headers.** Grepped for hex runs and checked the sites with addresses.
+- **`ahm_ExAllocAlchemist`'s note says "our baseline emits `d905b8560210 fld [0x100256b8]` … the
+  CONSTANT first", against the reference's `d9461c` then `d80db8560210`.** Measured:
+  - **`d905b8560210` does not occur anywhere in the current build** (searched the whole file, not just
+    the function);
+  - at `0x1000c022`/`0x1000c025` **both sides now emit the reference's order**
+    (`d9461c` then `d80db8560210`, byte-identical).
+  So that sub-item is **CLOSED** and its description describes a baseline that no longer exists.
+  Annotated STALE in place, with the measurement.
+- **The same note's stated root cause was re-verified and STANDS**, which is why the annotation is
+  surgical rather than a blanket retraction: at `0x1000c034` the reference has `dec1 faddp st(1)` and we
+  have `d8c1 fadd st(1)` — same address, same length, different opcode, exactly as recorded.
+- **Three rounds, three instances of the same defect class**, now with a clear statement of it:
+  | round | instance | kind |
+  |---|---|---|
+  | 940 | `gm_AllocGebaeude` listed two fixes as *rejected* that had since been **adopted** | stale rejection |
+  | 955/956 | `ServerMainThread` and `srv_LoadBuf` state a `lea`/`add` **direction** the binary contradicts | stale direction |
+  | 957 | `ahm_ExAllocAlchemist` describes a **baseline byte sequence that no longer exists** | stale baseline |
+  **The class is: a header records a true observation about a compilation that no longer exists.** The
+  cheap guard is the one used here — decode the site in the *current* object before designing a probe
+  from any header claim, and prefer the binary over the note when they disagree.
+- **Measured:** comment-only change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-956: swept the carriers' direction claims against the binary — one stale, two accurate.**
 
 - **Round 955 found a wall description stating the `lea`/`add` direction backwards.** That makes

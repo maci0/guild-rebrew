@@ -239,3 +239,34 @@ python3 -c "import json,re; d=json.load(open('/tmp/lm.json')); \
   a=set(m.lower() for m in re.findall(r'0x[0-9a-fA-F]+', open('scripts/library_code_allowlist.txt').read())); \
   print([x['va'] for x in d['findings'] if x['va'].lower() not in a])"
 ```
+
+
+## 6. A header records a true observation about a compilation that no longer exists (rounds 940, 955-957)
+
+Three separate instances in three rounds, each found by checking a header claim against the **current**
+object rather than trusting the note:
+
+| round | file | the claim | what the binary says now |
+|---|---|---|---|
+| 940 | `gm_AllocGebaeude.c` | lists `switch (s.type_id)` and the in-loop `gm_AllocRaum` among **rejected** probes | both were later **adopted**; line 309 reads `switch (s.type_id)` and `0x1001771b` is byte-identical |
+| 955-956 | `ServerMainThread.c`, `srv_LoadBuf.c` | describe the target's `lea` "against our `add`" | `ServerMainThread`: the direction was **backwards** (target has the `lea`); `srv_LoadBuf`: we emit **no `add` at all**, both sides have the identical `lea` |
+| 957 | `ahm_ExAllocAlchemist.c` | "our baseline emits `d905b8560210 fld [0x100256b8]`" | that byte sequence **does not occur anywhere in the build**; both sides now emit the reference's order |
+
+**The class.** Headers here are meticulous about *what was measured* — compile counts, scores, byte
+sequences — and that is exactly why a stale one is dangerous: it reads as evidence. But an entry is a
+snapshot of one compilation, and the source moves underneath it. Round 952's own file states the
+principle for rejections ("a rejection is only valid for the compilation it was measured on"); the same
+applies to **every** claim, including direction, baseline bytes, and which of two spellings is shipped.
+
+**The guard, and it is cheap:**
+
+1. Grep the carrier for verifiable claims — hex byte runs, `where we emit` / `against our`, `rejected`,
+   `not adopted`.
+2. **Decode each image from its own entry point** (decoding the reference at our VA yields garbage and
+   coincidental matches — this produced a false `lea`/`add` "match" in round 955).
+3. Compare against the current object. Where they disagree, **the binary wins**, and the note gets an
+   inline STALE marker with the address and the measurement.
+
+**Do not blanket-retract.** In round 957 the stale sub-item sat in the same paragraph as a root-cause
+claim that re-verified exactly (`dec1 faddp st(1)` vs `d8c1 fadd st(1)` at `0x1000c034`). Annotate the
+part that moved; keep the part that did not.
