@@ -201,7 +201,42 @@ assumed. But the *writer* was almost certainly the compiler vendor, not the game
 idiom at six independent call sites is a CRT `memset` expansion, and the enclosing function is not
 library code (`rebrew lib-match --stock-lib LIBCMT.LIB --va 0x1000b040` reports "Safe to reverse").
 So the strict reading of the clause and the byte objective pull apart, and the cost of choosing the
-strict reading is 108,180 bytes. Left in place pending the user's decision; both numbers recorded.
+strict reading is 108,180 bytes.
+
+**DECIDED (round 984, by the user): keep the asm.** The clause's "a code shape no MSVC6 C output can
+produce" is treated as sufficient positive evidence on its own, without requiring that the *original
+author* hand-wrote it. Recorded so this is not re-litigated: the six sites stay, the residue baseline
+stays at 8,628, and no round should re-open the question of removing them to satisfy a strict reading
+of "the game wrote asm".
+
+> **Correction (round 984).** The sentence above says "the same 24-byte idiom at six independent call
+> sites is a CRT `memset` expansion". **That is wrong on the mechanism, and the conclusion survives it.**
+> The VC6 CRT source is in the local cache and readable:
+> `rebrew/.cache/gh-org/msvc600_sp3/VC98/crt/src/platform/memset.asm`. Its align-up code is
+> `neg ecx` / `and ecx,3` / a **byte loop** (`adjust_loop: mov [edi],al / inc edi / dec ecx / jnz`),
+> then `shr ecx,2` / `rep stosd`. The reference's prelude is different:
+>
+> ```
+> 0x1000b057  lea ecx,[edi+edi*2]   <- edi*3, not `neg`
+> 0x1000b05a  and ecx,3
+> 0x1000b05d  sub ebx,ecx
+> 0x1000b05f  jle ...
+> 0x1000b061  rep stosb             <- string op for the alignment bytes, not a byte loop
+> ```
+>
+> `(edi*3)&3 == (-edi)&3` for every `edi` (verified 0..8), so it *is* an alignment computation — just
+> written as a ×3 multiply, which msvc6 strength-reduces into `lea`. §6b's CRT attribution is
+> therefore unsupported: **the idiom is not the CRT `memset`, and it is not a `memset` intrinsic
+> expansion either** (three fresh probes this round under `/O2`, with the function's own
+> `#pragma optimize("y", off)`, and with runtime `dest`/`size`, all emit `shr ecx,2; rep stosd;
+> and ecx,3; rep stosb`).
+>
+> It is still unreachable from C, re-confirmed: spelling the alignment as `(-(int) d) & 3` emits
+> `neg ecx; and ecx,3`, and spelling it as `(unsigned) d * 3u & 3u` is **canonicalised back to `neg`**
+> by msvc6. So the prelude's `lea`-based form has no C source, and the 108,180-byte cost of removing
+> the asm stands. §6b's *decision* is unaffected; its *evidence* was wrong, and the distinction
+> matters because "a CRT expansion" would imply the game never wrote asm while "an unreachable
+> strength-reduction" does not.
 
 ---
 

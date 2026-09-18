@@ -27401,3 +27401,31 @@ reference lacks. Both sides emit exactly three `LogMessageInternal` calls and ex
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 984 — §6b's mechanism corrected; the asm question decided (keep the asm)
+
+**Re-verified §6b's core claim, with three fresh probes.** MSVC6's `memset` inlining emits
+`shr ecx,2; rep stosd; and ecx,3; rep stosb` — never the reference's align-up prelude. Confirmed under
+`/O2` alone, with the enclosing function's own `#pragma optimize("y", off)`, and with runtime
+`dest`/`size` arguments. The prelude at `0x1000b057` is unreachable from C.
+
+**Corrected §6b's stated mechanism.** It attributed the 24-byte idiom to "a CRT `memset` expansion." The VC6
+CRT source is in the local cache and readable
+(`rebrew/.cache/gh-org/msvc600_sp3/VC98/crt/src/platform/memset.asm`): its align-up code is `neg ecx` /
+`and ecx,3` / a **byte loop** (`adjust_loop`), then `shr ecx,2` / `rep stosd`. The reference instead uses
+`lea ecx,[edi+edi*2]` (`= edi*3`, verified `(edi*3)&3 == (-edi)&3` for all `edi`) and `rep stosb` for the
+alignment bytes. So it is **neither the CRT `memset` nor a `memset` intrinsic expansion**. §6b's decision is
+unaffected; its evidence was wrong, and the distinction matters — "a CRT expansion" implies the game never
+wrote asm, while "an unreachable strength-reduction" does not.
+
+**Also re-confirmed the C-unreachability directly**: `(-(int) d) & 3` emits `neg ecx; and ecx,3`, and
+`(unsigned) d * 3u & 3u` is **canonicalised back to `neg`** by msvc6. So the `lea`-based prelude has no C
+source.
+
+**DECISION (user, round 984): keep the asm.** The clause's "a code shape no MSVC6 C output can produce" is
+sufficient positive evidence on its own, without requiring that the original author hand-wrote it. Residue
+baseline stays 8,628; the six sites stay; do not re-litigate. Recorded in codegen-walls §6b.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Probe files in `.scratch/` only; no source
+edit; no baseline moved.
