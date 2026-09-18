@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-916: the "28 objects over the composition budget" claim is wrong — measured against the real span, zero are over.**
+
+- **Checked the premise round 915 used to exclude candidates.** It filtered three candidates out on
+  the pad report's `LONG` label, so this round asked what `LONG` actually means.
+- **Measured all 25 checkable `LONG` objects against their real reference span** (next tracked VA
+  after the file's *last* function, minus its first):
+  - **23 sit exactly at their span** (over = 0);
+  - **2 are under it** (`vfs2.c` −288, `vfs_OpenStream.c` −48);
+  - **0 are over.**
+- **Found the cause: the pad report's `want` is the wrong baseline.** `split_link.sh` computes
+  `span = 16 * ceil(sum(sizes)/16)` — padding the **sum** — but an object pads **each function** to a
+  16-byte boundary, so its `.text` is the per-function-padded sum. For `spiel62.c` those are
+  **1328** and **1408**, and the report printed `+80 over the padded span` for a file sitting exactly
+  at its span. Verified on all 25: **`per-func-pad == objtext` for every one.**
+- **This invalidates a constraint three rounds acted on.** `measure-traps.md` §6d's "28 objects over
+  budget, and that is what makes source edits collapse" was used by rounds 909-915 to exclude files
+  from the declaration lift. Those exclusions were unjustified — and the real reasons those lifts
+  failed were different checks entirely (a header declaration disagreeing with a definition; a TU
+  whose object grew once an include was added). Corrected in §6d, with the historical text kept
+  because the *mechanism* it describes is real.
+- **Wrote `scripts/object_span_check.py`** to answer the question that actually matters before
+  editing a file: does the object fit between its first function's VA and the next tracked VA?
+  Reports `over`/`at`/`under` per object and cross-checks the `LONG` label.
+- **The script was wrong on its first run, and I caught it by disagreeing with my own manual
+  result.** It reported 24 of 25 `LONG` objects over; my hand calculation said 0. Cause: it took
+  `span = next_va_after_first_function − first_va`, which is one *function's* size, not the file's.
+  Corrected to use the file's **last** function. Re-run: **0 over, 167 exactly at span, 6 under**,
+  matching the manual result. The bug is recorded in the script's own comment.
+- **One genuine anomaly, checked and explained rather than reported as a bug:** `mlock.c.obj`'s text
+  (212) exceeds its declared functions' span (118), because the VAs following its two functions are
+  metadata entries with no `// FUNCTION:` marker in any file — its object legitimately covers them.
+- **Measured:** gate pass, residue **8,634**, raw-link `.data` **21,836**, verify 281/283,
+  byte-matched 264, imports 100. No source change.
+
 **Round-915: applied round 914's two pre-checks — they worked, and two more symbols landed.**
 
 - **Turned round 914's post-mortem into a filter, and ran it before touching anything.** That round

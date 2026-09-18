@@ -384,6 +384,17 @@ the AGENTS.md warning that the two object rulers disagree with each other and wi
 
 ## 6d. 28 objects are over the composition budget, and that is what makes source edits collapse (round 870)
 
+> **CORRECTION (round 916): the `LONG` label does not mean "over the budget".** Measured against the
+> objects' *actual reference spans* (next tracked VA minus this file's first VA), **zero of the 25
+> checkable `LONG` objects are over** — 23 sit *exactly* at their span and two (`vfs2.c` −288,
+> `vfs_OpenStream.c` −48) are **under** it, i.e. have room to spare. The pad report's `want` is the
+> raw sum of metadata sizes, while the object is the **per-function-16-byte-padded** sum; for
+> `spiel62.c` those are 1328 and 1408, so the report printed `+80 over` for a file that is exactly
+> at its span. Verified on all 25: `per-func-pad == objtext` for every one. **Do not treat a `LONG`
+> line as "this file cannot absorb a change"** — compute the span. See the new section below for the
+> corrected test. The historical text is kept because the *mechanism* it describes is real; only the
+> count and the inference are wrong.
+
 `scripts/split_link.sh`'s pad step prints one line per object it cannot fit. On the current tree it
 prints **28 `LONG` lines**:
 
@@ -420,6 +431,13 @@ over**, so the composition had nothing left to absorb. The same applies to `LONG
 file in the pad report (`grep '<file>.obj' .scratch/gate-link.log`). A `LONG` line means that file
 cannot absorb a size change at all and the only adoptable edits are ones that *shrink* it by at
 least the stated overage. A file with no line either is within budget or was padded.
+
+> **This inference is superseded by the round-916 correction above.** A `LONG` line does *not* mean
+> the file is over budget — 23 of the 25 checkable `LONG` objects are exactly at their reference span
+> and two are under it. The reliable test is the span comparison, which is what the round-916 section
+> describes. Rounds 909-915 excluded files on the `LONG` label; that exclusion was unjustified, and
+> **the real reason those lifts failed was a different check entirely** (a header declaration that
+> disagreed with a definition, and a TU whose *object* grew past its span once an include was added).
 
 **Applied to the 19 carriers (round 872): 16 are in files WITHIN budget and only 3 are blocked.**
 
