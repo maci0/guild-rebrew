@@ -120,6 +120,26 @@ the 8,634 as one cascade.
 
 ## 6. Three audit shapes that generate only false positives
 
+- **An unrolled loop presents its unrolled tail as if it were the termination condition
+  (round 903).** Reading the reference cleanup loop at `0x1001cfd2`:
+  ```
+  mov  esi, 0x10031aac
+  ...  cmp esi, 0x10031af0 ; je exit      <- four exit checks, 0x10 apart
+  ...  cmp esi, 0x10031ae0 ; je exit
+  ...  cmp esi, 0x10031ad0 ; je exit
+  ...  cmp esi, 0x10031ab0 ; je exit
+  ...  add esi, 4 ; cmp esi, 0x10031b6c ; jl loop
+  ```
+  The four `cmp … 0x10031aX0` are the **4-way-unrolled body's** per-iteration checks; the loop
+  actually ends at `0x10031b6c`. Reading the first exit as the bound gives **68 entries**; the true
+  array is **48** (`0xC0` bytes). **Read the `add`/`cmp`/`jl` tail, not the first `cmp` you meet.**
+- **A conflict report cannot express "two objects, one name, two consumers" (round 903).**
+  `rebrew data` flagged `locktable` as `CRITICAL_SECTION*[0x40]` vs `CRITICAL_SECTION**`. Both are
+  intentional: `data_globals.c` defines the array the binary's own cleanup loop walks, and
+  `mlock.c` defines `CRITICAL_SECTION** locktable = __locktable` because **LIBCMT's `tidtable.obj`**
+  (pulled in via `_getptd`) references `_locktable` as a `CRITICAL_SECTION**`. `_locktable` is
+  verified present in `LIBCMT.LIB`. Third case this session where "fixing" a reported type conflict
+  would have broken the link.
 - **`rebrew data`'s type-conflict count is a signal, not a work queue (round 902).** Eleven entries
   looked like eleven mismatches to fix. Chasing them found at least three different situations, and
   the "fix" was wrong in two of the three:

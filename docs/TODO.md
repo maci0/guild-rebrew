@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-903: the last two unexamined conflicts are both intentional — and one reading of the reference was an unrolling artifact.**
+
+- **Applied round 902's rule** ("read the defining TU before touching a conflicted global") to the two
+  conflicts that round did not reach: `locktable` and `g_crashdump_data_10027104`.
+- **`locktable` is deliberate, and the conflict report cannot express that.** `data_globals.c`
+  declares `CRITICAL_SECTION* locktable[0x40]`; `mlock.c` declares
+  `CRITICAL_SECTION* __locktable[_TOTAL_LOCKS]` **plus** `CRITICAL_SECTION** locktable = __locktable`.
+  Both are needed: `_locktable` is a **LIBCMT symbol** (verified present in `LIBCMT.LIB`), and
+  LIBCMT's `tidtable.obj` — pulled in via `_getptd` — references it as a `CRITICAL_SECTION**`.
+  The alias is what satisfies that consumer. No game TU references `locktable` at all, so nothing
+  is broken; the "conflict" is two objects with one name serving two consumers. **Third instance of
+  round 902's "deliberate" category**, and another case where fixing the count would have broken
+  the link.
+- **A measurement error caught mid-round, worth recording as a method trap.** I read the reference
+  loop at `0x1001cfd2` and concluded the array ran to `0x10031af0`, i.e. **0x44 = 68 entries**, then
+  noticed `_TOTAL_LOCKS` is 44 and thought I had found a numeric bug. I had not: the loop is
+  **4-way unrolled**, with four separate `cmp esi, 0x10031aX0` exit checks before an
+  `add esi,4; cmp esi,0x10031b6c; jl`. The **real** bound is `0x10031b6c`, so the array is
+  `0xC0` bytes = **48 entries**. An unrolled loop presents its unrolled tail as if it were the
+  termination condition — the same class as measure-traps §6's other false positives, and the
+  second time this session that a first reading of a loop bound was wrong.
+- **The residual, real discrepancy is in the metadata, not the source.**
+  `rebrew-data.toml` gives `locktable` **size 256** (64 entries), which would end at `0x10031bac`
+  and **overlap `__tlsindex` at `0x10031b6c`**. The measured extent is 192 bytes. Left as-is and
+  recorded here: correcting a `.data` metadata size has previously moved raw-link `.data`
+  (rounds 884/902), so it needs its own measured round rather than a same-round tweak.
+- **`g_crashdump_data_10027104`** is the other conflict and is benign: `char[]` against
+  `char[568]` on the same object, both from the round-884 work, differing only in whether the
+  extent is spelled.
+- **Measured:** gate pass, residue **8,634**, raw-link `.data` **21,836**, verify 281/283,
+  byte-matched 264. No source change; the round is two negatives and one metadata finding.
+
 **Round-902: chased the 11 `rebrew data` type conflicts to their source; two fixes measured, both reverted for cost.**
 
 - **Tried:** `rebrew data --json` reports **11 type conflicts** (up from 9 in round 883), and the
