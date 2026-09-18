@@ -81,6 +81,30 @@ the reference's *prologue byte-for-byte* and still folds all three exits. `/O1`,
 wall behind the recurring "the reference keeps N epilogues and we keep one" note in this
 project's file headers (`msvc6-c-shapes.md` §74).
 
+**A third instance, and the cleanest one, from round 970.** `gv_ExAllocGraveyardWorker`'s entry-search
+loop is **instruction-for-instruction identical** between the two images across indices 99-118 --
+except that **three branches target different addresses for the same code**:
+
+| index | reference target | ours |
+|---|---|---|
+| 103 (`jle`) | `0x10011d77` | `0x10011cdb` |
+| 116 (`je`) | `0x10011d77` | `0x10011cdb` |
+| 118 (`jne`) | `0x10011d77` | `0x10011cdb` |
+
+Both targets are the **byte-identical epilogue**
+`pop edi; pop esi; pop ebp; mov eax,0xffff; pop ebx; add esp,0x10; ret` -- the reference keeps **two
+copies** of it (`0x10011cdb` and `0x10011d77`, 0x9c apart) and routes the loop's three exits to the later
+one; we emit **one** and fold all three into it. The folding is this section's mechanism, and it is
+invisible to every positional ruler because **the instruction stream matches at every index** -- only the
+`rel8` operands differ.
+
+**This is also why the carrier's own header mis-diagnosed the row.** It records the residual as *"an
+ecx<->edx role exchange … the loop is otherwise instruction-for-instruction identical, so this is a
+register-naming difference, not a shape difference"*. The registers are in fact identical at every index;
+what differs is **which copy of the epilogue three branches reach**. A stream diff that compares mnemonics
+and operands cannot see it either -- it compares `jle` to `jle` -- so the check that finds it is
+comparing **branch targets**, not instructions.
+
 ### 3. The `volatile` idiom has a direction, and a per-site wall
 
 `volatile` on a 16-bit load selects `mov r16,[mem]; and r,0xffff`; a plain load selects

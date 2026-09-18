@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-970: returned to residue work — found a third epilogue-merge instance and a header mis-diagnosis.**
+
+- **Moved off `cm_ExSellObjekt` (rounds 959-969) to a carrier not worked structurally this session:**
+  `gv_ExAllocGraveyardWorker` (456 residue). Its first divergence is at **index 103**, and the streams are
+  **identical at every index except three branch targets**:
+  | index | reference | ours |
+  |---|---|---|
+  | 103 `jle` | `0x10011d77` | `0x10011cdb` |
+  | 116 `je` | `0x10011d77` | `0x10011cdb` |
+  | 118 `jne` | `0x10011d77` | `0x10011cdb` |
+- **Both targets are the byte-identical epilogue**
+  `pop edi; pop esi; pop ebp; mov eax,0xffff; pop ebx; add esp,0x10; ret`. The reference keeps **two
+  copies**, 0x9c apart, and routes the loop's three exits to the later one; we keep **one** and fold all
+  three into it. **This is codegen-walls §2's mechanism — msvc6 merges byte-identical epilogues
+  unconditionally, the reference does not — and it is a third independent instance of it.**
+- **The instance is invisible to both rulers the project normally uses.** Every mnemonic and operand
+  matches at every index; only the `rel8` **operands of the jumps** differ. `rebrew diff` and the
+  positional score both compare `jle` to `jle` and see nothing. **The check that finds it is comparing
+  branch *targets*, not instructions** — now recorded in §2.
+- **And the carrier's own header has the row mis-diagnosed.** It states: *"an ecx<->edx role exchange at
+  the entry-search loop (diff 99-118, the target loads count through `mov edx,[edx*4+0x1002574c]` and
+  counts in ecx, ours is the reverse). The loop is otherwise instruction-for-instruction identical, so
+  this is a register-naming difference, not a shape difference."* **The registers are identical at every
+  index** — indices 99-101 are `mov edx,[esi+0xc]` / `xor ecx,ecx` / `mov edx,[edx*4+…]` on **both**
+  sides. The real difference is which epilogue copy three branches reach. Corrected in §2; the header's
+  claim is a fourth instance of the stale/incorrect-claim class from rounds 940-958.
+- **No probe: this is the documented wall, not a new lever.** The section already records eight return
+  spellings compiled across two passes, all inert, and the mechanism is a post-front-end decision. The
+  value here is the **detection method** (branch-target compare) and the correction.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-969: chased the extra frame dword — found a phantom, and a measurement trap worth its own entry.**
 
 - **Round 968 said our frame has an extra dword between `0x20` and `0x28`.** Counted slot use across the
