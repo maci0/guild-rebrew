@@ -58,3 +58,19 @@ Each cost real budget and each is the kind of mistake the next attempt would rep
 - **A tool was blamed for what was my own invocation.** A `gaptrace` run with the metadata size
   produced "37 bytes too long, 20 extra instructions", reported as a finding before being
   recognised as an artefact of the truncated window.
+- **The same refactor was attempted three times before its real blocker was identified
+  (rounds 909-911).** The goal was to lift duplicated `extern` declarations into a shared header —
+  plainly right by the mandate, and **byte-neutral when probed on one TU (`linktest.sh` +0)**. It
+  failed at 27 symbols, then at one symbol, and the failures were blamed first on the pinned
+  toolchains and then on include plumbing. **The actual cause surfaced only on the third attempt:
+  the target header is not inert.** `entity.h` declared `gm_ResetAllEntities` returning `int` while
+  the defining TU had `void`, so *including* the header converted a silent disagreement into
+  `C2371: redefinition; different basic types`. Nothing had ever compared them, because no TU that
+  defines the function includes the header.
+  **Two lessons.** (1) Before widening a header's use, grep its declared names against the tree and
+  check they agree with every definition that will newly see it — one command, and it would have
+  replaced three rounds. (2) A `+0` probe on a single TU certifies only the axis it measured: an
+  `extern` line cannot move `.text`, so the probe said nothing about whether the header *compiles*
+  against the TUs it was entering.
+  The blocker is now stated precisely rather than worked around: make the header agree with every
+  TU first, per declaration, then widen its use.

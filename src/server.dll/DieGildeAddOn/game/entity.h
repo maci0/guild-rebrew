@@ -88,6 +88,6 @@ typedef struct EntityStruct {
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 
 /* State Reset */
-extern int __cdecl gm_ResetAllEntities(void);
+extern void __cdecl gm_ResetAllEntities(void);
 
 #endif /* ENTITY_H */

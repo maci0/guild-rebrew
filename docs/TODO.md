@@ -49,6 +49,41 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-911: found why the header lift keeps failing — no inert header exists — and landed one real declaration fix at zero cost.**
+
+- **Tried the safe subset of round 909's lift.** That round failed because it widened include graphs;
+  so first I checked whether any subset needs *no* include change — symbols whose every declaring TU
+  already includes `entity.h`. **Measured: exactly one site in the whole tree.** So any meaningful
+  lift here must edit includes, and that is precisely what breaks.
+- **Confirmed the mechanism with a single symbol.** Lifting just `g_entity_slot_table` (15 sites, none
+  in a pinned file) still required adding 15 includes, and the build broke immediately:
+  `spiel.c(64) : error C2371: 'gm_ResetAllEntities' : redefinition; different basic types`.
+  **Root cause: `entity.h` is not an inert declaration bag.** It declares
+  `extern int __cdecl gm_ResetAllEntities(void)`, while `spiel.c` *defines* the same function as
+  `void`. Pulling the header into `spiel.c` turns a silent disagreement into a compile error. The
+  header was never included by that TU, so nothing had ever checked them against each other.
+  **This is the real reason three lift attempts failed** — not the pinned toolchains, which were a
+  secondary effect.
+- **Fixed the one genuine defect the failure exposed, with evidence.**
+  `gm_ResetAllEntities` is declared `int` in `entity.h` but **`void` in both callers
+  (`server2.c:15`, and `ls_LoadBuildingEntityState.c` calls it discarding the result) and in its
+  definition (`spiel.c:63`)**. Three sources against one; the header was the outlier. Verified the
+  definition is byte-exact first (`RELOC 57/57`), then changed the declaration to `void`.
+  - **Measured:** gate pass and **byte-neutral** — residue **8,634**, raw-link `.data` **21,836**,
+    verify 281/283, byte-matched 264. Expected, since no TU currently reaches the header from
+    `spiel.c`.
+- **Swept for the same defect class across the header:** exactly **one** return-type disagreement
+  between `entity.h`'s function declarations and any definition in the tree. So this is isolated, not
+  a systemic problem.
+- **Hit the transient `C1083` again and it cost two gate runs.** The first attempt reported
+  `GATE: FAIL` with `split_link FAILED`; a serial `-j4` rebuild gave **0** errors and the gate then
+  passed. Round 894 documented the tell (a C1083 with no source location is the harness) — it still
+  took a second run to apply.
+- **Where this leaves the lift:** the blocker is now precisely stated — `entity.h` carries function
+  declarations that conflict with definitions in TUs that would need to include it. The correct
+  sequence is to make the header *agree* with every TU before widening its use, and that is a
+  per-declaration audit rather than a mechanical move.
+
 **Round-910: measured the real `LNK4006` baseline — six occurrences, three symbols, all library displacement.**
 
 - **Tried:** round 909 failed on `LNK4006`/`LNK2001` after a header change, which made the *baseline*
