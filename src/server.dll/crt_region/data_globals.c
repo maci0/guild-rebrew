@@ -70,9 +70,9 @@ void* __sbh_pHeaderList; /* was __sbh_pHeaderList */          /* pool: region de
 // DATA: SERVER 0x11766460
 int g_11766460[0x40];      /* stream group ptr table (0x11766460..0x1176655c) */
 // DATA: SERVER 0x11766560
-int g_11766560;            /* current stream count */
+int __nfile;            /* current stream count */
 // DATA: SERVER 0x11767580
-int g_11767580;            /* tracked-block table count */
+int __nstream;            /* tracked-block table count */
 // DATA: SERVER 0x1176758c
 int g_1176758c;            /* __envp built flag */
 // DATA: SERVER 0x11767590
@@ -119,4 +119,4 @@ void* pfnGetActiveWindow;          /* cached GetActiveWindow proc (0x10022107) *
 // DATA: SERVER 0x10035840
 void* pfnGetLastActivePopup;          /* cached GetLastActivePopup proc (0x10022107) */
 // DATA: SERVER 0x11766564
-void** g_11766564;         /* tracked-block (stream) table ptr - __flsall/_fcloseall walk this */
+void** __pioinfo;         /* tracked-block (stream) table ptr - __flsall/_fcloseall walk this */

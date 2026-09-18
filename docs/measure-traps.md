@@ -134,6 +134,18 @@ the 8,634 as one cascade.
   have used it as a real pointer. **Consequence:** a `g_<hex>` name is not merely cosmetic debt; it
   suppresses the compiler's ability to check the declaration at all. Expect renames of
   CRT-named globals to surface C2040s, and fix the type rather than the name.
+  **But the hazard is not universal (round 901).** Restoring `__pioinfo`, `_nfile` and `__nstream`
+  on three more CRT globals compiled **clean on the first try**. It bites only where MSVC6 also
+  declares the same identifier itself (`__argv`, `_pgmptr`); for names it does not,
+  the rename is safe and the risk is ordinary. Do not assume every placeholder hides a type error —
+  test, and check the build log rather than reasoning about which is which.
+- **A metadata note can be confidently wrong, so identify a symbol from its use sites (round 901).**
+  `0x11766564` was noted as "tracked-block (stream) table ptr" and is in fact `__pioinfo`, the CRT
+  per-handle file table — established from `mov eax,[__pioinfo]; mov eax,[eax + esi*4];
+  test byte [eax+0xc],0x83` at `0x1001ad4b`, not from the note. `0x11766560` was noted as "current
+  stream count" and is a handle **bound** (`cmp esi,[_nfile]; jae`, init `0x20`). Two of three notes
+  were wrong about what the symbol *is*, while both were right that something was there.
+  Disassemble the use site before naming; a note is a lead, not evidence.
 - **A hand-rolled struct-size calculator reports garbage on this tree — use the compiler instead
   (round 895).** Two successive versions of a Python `sizeof` estimator flagged **18 then 7**
   structs whose `// SIZE` comment disagreed with their declared extent. **All 25 were the

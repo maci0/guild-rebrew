@@ -1611,7 +1611,7 @@ status = "UNCHECKED"
 size = 256
 
 ["SERVER.0x11766560"]
-name = "g_11766560"
+name = "__nfile"
 type = "int"
 section = ".bss"
 note = "current stream count"
@@ -1619,7 +1619,7 @@ status = "UNCHECKED"
 size = 4
 
 ["SERVER.0x11767580"]
-name = "g_11767580"
+name = "__nstream"
 type = "int"
 section = ".bss"
 note = "tracked-block table count"
@@ -1809,7 +1809,7 @@ status = "UNCHECKED"
 size = 4
 
 ["SERVER.0x11766564"]
-name = "g_11766564"
+name = "__pioinfo"
 type = "void **"
 section = ".bss"
 note = "tracked-block (stream) table ptr - __flsall/_fcloseall walk this"

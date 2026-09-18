@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-901: identified three CRT stream internals by their use sites, not their notes — and the notes were wrong about two of them.**
+
+- **Continued the CRT-naming vein.** Three `.bss` globals sat under placeholders with descriptive
+  notes: "current stream count", "tracked-block table count", "tracked-block (stream) table ptr".
+  Instead of trusting the notes, **read the reference's use sites**, which is what identified them —
+  and contradicted the notes:
+  - `0x11766564` — `mov eax,[0x11766564]; mov eax,[eax + esi*4]; test byte [eax+0xc],0x83` at
+    `0x1001ad4b`. A pointer to an array of pointers to records with flags at `+0xc`, indexed by
+    handle. That is **`__pioinfo`**, the CRT per-handle file table — **not** a "tracked-block
+    table".
+  - `0x11766560` — `cmp esi,[0x11766560]; jae` (a bounds check) and initialised to `0x20` at
+    `0x1001c9cd`. A handle bound, not a "stream count". Renamed **`_nfile`**.
+  - `0x11767580` — `cmp [0x11767580],esi; jle` guarding the `__pioinfo` walk. Renamed
+    **`__nstream`**.
+  Renamed all three with `rebrew rename --data` and updated the three stale externs in
+  `rebrew_globals.h`.
+- **Also decoded `0x11766460`'s geometry** for the record: `sar ecx,5` / `and eax,0x1f` at
+  `0x1001bc15` is divide-by-32 plus mod-32 over a 0x40-dword array — a 2048-bit handle bitmask, with
+  `0x11766464` used as a scan base at `0x1001ca3d`. Left its name alone: the current note
+  ("stream group ptr table") is wrong but I have no attested symbol for it, and inventing one is
+  worse than the honest placeholder.
+- **Round 900's prediction did not repeat, and that is the useful result.** That round's rename
+  surfaced two `C2040` type errors; these three compiled clean on the first try. So the placeholder
+  hazard is real but **not universal** — it bites only where MSVC6 has its own declaration of the
+  same identifier (`__argv`, `_pgmptr`). `__pioinfo`/`_nfile`/`__nstream` are not in that position,
+  so the names were safe to restore. Recorded rather than generalised.
+- **Hit the transient `C1083` again** (round 894's trap: `"Cannot open compiler intermediate file:
+  'a00032in'"`, no source location). A serial `-j4` rebuild gave **0** errors and the gate then
+  passed. Second occurrence in eight rounds; the documented tell worked.
+- **Measured:** gate pass, residue **8,634 unchanged**, raw-link `.data` **21,836 unchanged**, verify
+  281/283, byte-matched 264, imports 100; `rebrew test --all` still 233 RELOC + 31 EXACT = 264.
+- **18 placeholders remain**, none with an attested symbol name. Two have notes that are now known
+  wrong (`0x11766460`) and are flagged as such rather than guessed at.
+
 **Round-900: named five CRT globals after their own metadata notes — and the rename exposed two latent type errors.**
 
 - **Continued round 899's method on the remaining 26 placeholders.** Most carry the real symbol name

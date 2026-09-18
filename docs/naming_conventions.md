@@ -454,6 +454,9 @@ rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
 | `0x100354d0` | `__envp` | renamed from `g_100354d0`; `char**`, same fix |
 | `0x100354e0` | `_pgmptr` | renamed from `g_100354e0`; `char*`, same fix |
 | `0x10031b6c` | `__tlsindex` | renamed from `g_10031b6c`; CRT TLS index |
+| `0x11766564` | `__pioinfo` | renamed from `g_11766564`; identified from the use site (`[__pioinfo][handle]`, flag byte at `+0xc`), NOT from the note, which called it a "tracked-block table" |
+| `0x11766560` | `_nfile` | renamed from `g_11766560`; a handle bound (`cmp esi,[_nfile]; jae`, init 0x20), not the "current stream count" the note claimed |
+| `0x11767580` | `__nstream` | renamed from `g_11767580`; guards the `__pioinfo` walk |
 
 `0x10017330` and `0x100174d0` both push an `"gm_AllocGebaeude(): ..."`
 string. `0x100174d0` is the caller (`call 0x10017330` at `0x1001787f`), so it
