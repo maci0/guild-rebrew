@@ -3206,11 +3206,28 @@ supported by this table -- all eight stores are pointer-width writes to pointer-
 widths are uniform -- but the `0x20`/`0x24` difference itself is real and is the only slot the two sets
 do not share.
 
-**And the axis is inert, measured at instruction level.** Moving the one non-pointer statement
-(`*(int*)(cmd + 0x1a) = g_next_object_id;`) out of the middle of the eight initialiser statements
-changes the compiled output **not at all**: the eight stores come out at the same addresses with the
-same slots and the same order, byte-identical to the shipped object. msvc6 canonicalises the run. That
-is Finding 63's "declaration reorder is inert" re-confirmed with a disassembly rather than a score.
+**Moving the one non-pointer statement out of the run is inert** — `*(int*)(cmd + 0x1a) =
+g_next_object_id;` relocated past the eight initialisers produces a **byte-identical** object: same
+addresses, same slots, same order (round 959).
+
+**But reordering the eight *initialisers* is NOT inert, and that corrects this Finding's headline**
+(round 960). Two permutations were compiled and the slot assignment moved both times:
+
+| order of the eight `= 0` initialisers | slots emitted, in store order |
+|---|---|
+| shipped order | `0x10, 0x24, 0x30, 0x14, 0x1c, 0x28, 0x2c, 0x18` |
+| ascending-by-our-slot | `0x30, 0x28, 0x14, 0x10, 0x1c, 0x24, 0x2c, 0x18` |
+| ascending-by-target-slot | `0x10, 0x30, 0x28, 0x14, 0x24, 0x1c, 0x2c, 0x18` |
+
+So **the initialiser sequence is a live lever on the slot map**, contrary to "declaration reorder is
+likewise identical" above. Neither permutation reproduced the reference's assignment, and the third
+measured **8,629 against the 8,628 baseline — a regression the gate caught** (round 960; the round first
+misread `0x21b5` as an improvement before `gate.sh` refused it). What is closed is the claim of
+*inertness*; the axis itself is open and is the place to look if this row is ever revisited.
+
+**Method note:** this is why a score read from one ruler is not a result. The residue went **up** by one
+byte and the hex `0x21b4 -> 0x21b5` was briefly read as a gain; `gate.sh`'s baseline comparison, not the
+transcription, is authoritative.
 
 **And the one structural candidate is now measured rather than argued.** The file models
 `log_buffer` as a synthetic `struct SLogBuffer { uint weight_fraction; char text[512]; }`

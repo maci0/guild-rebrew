@@ -49,6 +49,29 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-960: FOUND that initialiser order DOES steer the slot map — contradicting Finding 63's "reorder is inert" — but every permutation measured is a loss.**
+
+- **Tested round 959's concrete claim** (ours uses slot `0x24` where the reference uses `0x20`, the other
+  seven permuted). The natural hypothesis was that the eight `= 0` initialisers are allocated in source
+  order, so a different order should move the slots. **It did — this is the finding.**
+  | initialiser order | slots emitted, in store order | residue |
+  |---|---|---|
+  | shipped | `0x10, 0x24, 0x30, 0x14, 0x1c, 0x28, 0x2c, 0x18` | **8,628** (baseline) |
+  | ascending-by-our-slot | `0x30, 0x28, 0x14, 0x10, 0x1c, 0x24, 0x2c, 0x18` | **8,630** (+2) |
+  | ascending-by-target-slot | `0x10, 0x30, 0x28, 0x14, 0x24, 0x1c, 0x2c, 0x18` | **8,629** (+1) |
+- **So allocator Finding 63's headline — "declaration reorder is likewise identical" — is wrong for this
+  function.** The initialiser sequence is a live lever on the slot map. Corrected in the allocator doc,
+  with the three measured rows, so the axis is recorded as *open* rather than *closed*. Neither
+  permutation reproduced the reference's assignment, and both are losses, so the shipped order stays.
+- **A transcription error caught by the gate, worth recording because it is the session's recurring
+  failure mode.** The third permutation reported `0x21b5` against the `0x21b4` baseline and I first read
+  it as "−1, a real improvement" — it is **+1, a regression**, and `gate.sh` refused the commit with
+  `REGRESSION: residue 8629 (0x21b5), baseline is 8628 (0x21b4)`. **The gate's baseline comparison, not
+  my reading of the hex, is authoritative**; had I committed on the reading, the baseline would have been
+  raised by one byte on a loss.
+- **Measured:** both probes reverted; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-959: read `cm_ExSellObjekt`'s slot table in full; the reorder axis is inert at instruction level.**
 
 - **Round 958 established this function's first divergence is the eight-store zero run at index 14.**
