@@ -159,3 +159,28 @@ one of them, so the shared-symbol shape was correct and only its missing definit
 Two failures in this class, two different correct answers: `cm_ExSellObjekt` needed a literal
 (the reference relocates a per-site string), `gm_Open` needed a defined address. Read the reference's
 pushes first.
+
+
+## 3c. `rebrew data`'s type-conflict list is a signal, not a work queue (round 925)
+
+The tool reports 11 conflicts over 342 globals. They are **not** 11 bugs, and triaging them by count
+rather than by reading costs rounds in both directions:
+
+- **Three were real wrong-width definitions**, all in the same file and all unused there:
+  `char* g_slot_table` against 13 TUs' `unsigned char[]`, `char g_entity_state_base` against two TUs
+  indexing it, `char g_entity_type_bytes` against three. All three fixed **byte-neutrally**.
+- **One was fixed, measured, and reverted**: the `loadsave3.c` `g_query_filter_extra*` block. The
+  scalars the other two TUs use are *provably* the right layout (the reference bytes at `0x10030b84`
+  are `ff | ffffffff | ff7f | ff7f | ff`), but rewriting the definitions to match measured
+  **+1 residue and +375 raw-link `.data`**. A semantically-correct change that emits *fewer* matching
+  bytes is still a loss under this objective.
+- **The rest are cosmetic**: `T[]` vs `T[N]` where element type and size agree, a string whose content
+  was verified at its VA, and a CRITICAL_SECTION pointer-element vs pointer-to-pointer spelling.
+
+**So sort the list by "do the types disagree on width or only on spelling" before doing anything.**
+The cheap discriminator is the reference bytes at each symbol's VA plus a grep for whether the
+definition is used in its own file.
+
+**A C89 trap this hit:** `unsigned char g_slot_table[];` at file scope is an *incomplete* tentative
+definition and emits **no symbol at all** — 11 `LNK2001`s, not a warning. A defining TU needs an
+explicit size even when every declaring TU uses the unsized form.

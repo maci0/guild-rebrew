@@ -25636,3 +25636,39 @@ reverted. Verify held at 264 byte-matched through the experiment.
   `CrashDump`'s 0x280 frame rule, and the record/history docs.
 - **Measured:** gate pass, residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
   byte-matched 264, imports 100.
+
+**Round-925: worked the `rebrew data` type-conflict list — three wrong-width definitions fixed, byte-neutrally.**
+
+- **The brief's ROI order says data drift first.** `rebrew verify --data` reports **122 matched, 0
+  mismatched, 0 missing** — that queue is empty — so the work is the other half of `rebrew data --json`:
+  **11 type conflicts** over 342 globals (99 annotated, 243 unannotated).
+- **Three conflicts were real wrong-width definitions**, all three in
+  `spiel_c/gm_NextEntityQueryMatch.c`, and all three were used **nowhere in the file that defines
+  them** — the merge-artifact pattern this tree keeps producing:
+  | symbol | was | now | evidence |
+  |---|---|---|---|
+  | `g_slot_table` | `char*` (a pointer, 4 bytes) | `unsigned char[2]` | 13 other TUs declare `unsigned char[]`; metadata records a 2-byte object at 0x100358a0 |
+  | `g_entity_state_base` | `char` | `char[2]` | `cm_ExCreateCitizen.c` and `gm_Open.c` index it; metadata: 2 bytes at 0x100358a2 |
+  | `g_entity_type_bytes` | `char` | `unsigned char[1]` | `sim.c`, `spiel62.c`, `gm_Open.c` index it; metadata: 1 byte at 0x10035a04 |
+  **All three measured byte-neutral**: residue **8,633** and raw-link `.data` **21,481**, both unchanged,
+  confirmed by a full `gate.sh`. The `g_slot_table` fix needed a size on the definition — an
+  unsized `unsigned char g_slot_table[];` at file scope emits **no symbol** in C89 and produced 11
+  `LNK2001`s.
+- **One conflict was fixed and then reverted, because the fix costs bytes.** `loadsave3.c` *defines*
+  the `g_query_filter_extra*` block as arrays (`int[4]`, `int[4]`, `short[2]`, `int[4]`) while
+  `gm_StartFilteredEntitySearch.c` and `spiel_dumpD.c` declare the individual members as scalars
+  (`short`, `short`, `unsigned char`). Reading the reference bytes at `0x10030b84`
+  (`ff | ffffffff | ff7f | ff7f | ff`) shows the **scalars are right** and `g_query_filter_extra2`'s
+  `int[4]` claims 8 bytes where only the 2-byte short at `0x10030b8c` belongs to it
+  (`0x10030b8e` is `g_query_filter_extra3`). Rewriting the definitions to the correct scalars measured
+  **residue 8,633 -> 8,634 and raw-link `.data` 21,481 -> 21,856 (+375)**. Reverted. **The array
+  definitions emit more of the reference's byte pattern than the semantically-correct scalars do**,
+  which is the layout-package coupling the round brief warns about; leave them and do not "fix" this
+  again without a measurement showing otherwise.
+- **The remaining conflicts are cosmetic**, not width errors: `T[]` vs `T[N]` where both agree on the
+  element type and the size is known (`g_crashdump_data_10027104` `char[]`/`char[568]`,
+  `s_ahm_AllocAhmInfo_1002a0f8` whose content was verified as `"ahm_AllocAhmInfo"` at 0x1002a0f8),
+  and `locktable`'s `CRITICAL_SECTION*[0x30]` vs `CRITICAL_SECTION **`. The tool's conflict list counts
+  these alongside real width mismatches; **read the types before treating a conflict as a bug.**
+- **Measured:** gate pass, residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100, lint 188/188.

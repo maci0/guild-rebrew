@@ -195,8 +195,15 @@ int g_current_year;
 unsigned short g_current_hour;
 int g_clock_copy_mid;
 short g_clock_copy_tail;
-char* g_slot_table;
-char g_entity_state_base;
+/* 13 other TUs declare this `unsigned char g_slot_table[]` and the metadata
+   records a 2-byte object at 0x100358a0; a pointer definition was the only
+   outlier (round 925). */
+unsigned char g_slot_table[2];
+/* Indexed as `char g_entity_state_base[]` by cm_ExCreateCitizen.c and
+   gm_Open.c; metadata records a 2-byte object at 0x100358a2 (round 925). */
+char g_entity_state_base[2];
 int g_entity_ref_table;
-char g_entity_type_bytes;
+/* Indexed as `unsigned char g_entity_type_bytes[]` by sim.c, spiel62.c and
+   gm_Open.c; metadata: 1-byte object at 0x10035a04 (round 925). */
+unsigned char g_entity_type_bytes[1];
 
