@@ -40,6 +40,17 @@ callee-saved register by its own colouring, and the source has almost no influen
 - **A callee-saved sentinel and a CSE can be one mechanism.** On
   `ls_LoadBuildingEntityState` the `ebp`-cached `-1` and the read loop's CSE vanish together:
   matched 645 -> 79. The 2-instruction form being chased is the *cheap* half of a decision.
+- **Typing a record is byte-neutral only when the rewrite preserves the same liveness (round 897).**
+  Replacing `char* p; p += 0xa9; *p == 0` with `EntityQueryRecord* p; p++; p->type == 0` landed
+  **+0 linked** on `spiel5.c`'s `gm_SearchStruct` (39/39 before and after) — the walk had no index
+  to lose. The *same* transformation on `spiel6.c`'s `gm_SearchTable67` took it
+  **obj 62 → 38, match 62 → 8**. The reference at `0x10017a70` keeps **both** the index
+  (`inc eax; cmp eax,0x100`) and the pointer (`add ecx,0xa9`) and computes its return as
+  `g_entity_ptr + i*0xa9` through a strength-reduced `lea` chain
+  (`lea ecx,[eax*8]; add esi,eax; sub ecx,eax; lea ecx,[ecx+ecx*2]; lea eax,[esi+ecx*8]`).
+  Returning the pointer directly makes `i` **dead**, so msvc6 deletes the loop shape entirely.
+  The raw byte-stride form is load-bearing: it is what keeps the index live. **A type change is a
+  codegen edit — measure every site with `linktest.sh`, never batch them.**
 
 **Why this is a wall and not a puzzle:** these are choices made after the C front end, over
 information (live ranges, use counts) that the source cannot address. Every measured attempt

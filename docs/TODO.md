@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-897: wired the new type into real code — one site byte-neutral and kept, one site breaks codegen and was reverted.**
+
+- **Tried:** the defect rounds 894-896 left behind. Both new types (`EntityStruct`,
+  `EntityQueryRecord`) were still referenced **only by comments** — the same "declared but dead"
+  problem this session flagged in `EntityStruct`. Defining a type is not using one, so this round
+  wired `EntityQueryRecord` into actual accesses.
+- **Site 1, `spiel5.c` `gm_SearchStruct` — landed.** Replaced the byte-stride walk
+  (`char*` + `+= 0xa9`, `*p == 0`) with pointer arithmetic on the record
+  (`EntityQueryRecord*` + `++`, `p->type == 0`). `rebrew test` unchanged at 39/39 and
+  **`linktest.sh` measures +0 (8,634 → 8,634)**, so the typed form is byte-identical through the
+  link. Kept.
+- **Site 2, `spiel6.c` `gm_SearchTable67` — reverted, and the failure is instructive.** Same
+  transformation, same file, all five functions byte-exact before: `gm_SearchTable67` went
+  **obj 62 → 38, match 62 → 8**.
+- **Isolated the cause by bisection, not guesswork.** Adding only the `#include` left all five
+  functions at their exact sizes (so the header is not the problem); re-applying only the typed
+  code reproduced the break. Disassembling the reference at `0x10017a70` shows why: it keeps
+  **both** the index (`inc eax`, `cmp eax,0x100`) **and** the pointer (`add ecx,0xa9`), then
+  computes the return as `g_entity_ptr + i*0xa9` via a strength-reduced `lea` chain
+  (`lea ecx,[eax*8]; add esi,eax; sub ecx,eax; lea ecx,[ecx+ecx*2]; lea eax,[esi+ecx*8]`).
+  Returning the pointer directly makes `i` **dead**, so msvc6 drops the whole loop shape — 24 bytes
+  gone. **The raw form is load-bearing here: it is what keeps the index live.**
+- **The general rule, now recorded:** typing a record is byte-neutral only when the typed rewrite
+  preserves the same liveness. `spiel5.c`'s walk had no index to lose; `spiel6.c`'s return value is
+  computed *from* the index, so removing it changes the register allocation. Check `instr_diff`
+  or `linktest.sh` per site; do not assume the transformation is free.
+- **Measured:** gate pass, residue **8,634 unchanged**, raw-link `.data` **21,836 unchanged**, verify
+  281/283, byte-matched 264, imports 100. `rebrew-functions.toml` was touched by the probes and
+  restored to the committed state (it is tool-owned).
+- **Third landed source change in twelve rounds,** and the first that both types *and uses* a record.
+
 **Round-896: defined the entity query record — the second of the two conflated layouts, now typed.**
 
 - **Picked up round 893's open half.** That round proved the `+0x27` slot-index word belongs not to

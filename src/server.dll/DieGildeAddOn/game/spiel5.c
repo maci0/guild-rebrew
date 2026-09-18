@@ -1,3 +1,4 @@
+#include "../../game_structs.h"
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
 
@@ -60,15 +61,15 @@ extern float g_const_neg_1_0;
 
 char* __cdecl gm_SearchStruct(void)
 {
-	char* entity_cursor;
-	char* end;
-	entity_cursor = (char*) g_entity_ptr;
-	end = entity_cursor + 0xa900;
+	EntityQueryRecord* entity_cursor;
+	EntityQueryRecord* end;
+	entity_cursor = (EntityQueryRecord*) g_entity_ptr;
+	end = entity_cursor + 0x100;
 	while (entity_cursor < end) {
-		if (*entity_cursor == 0) {
+		if (entity_cursor->type == 0) {
 			break;
 		}
-		entity_cursor += 0xa9;
+		entity_cursor++;
 	}
 	if (entity_cursor < end) {
 		return entity_cursor;
