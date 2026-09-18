@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-892: probed `ServerMainThread`'s field-offset divergence; the frame is identical, so it is allocation, not layout. Three spellings inert.**
+
+- **Applied round 891's budget filter and picked the largest free carrier not yet probed in this
+  session:** `ServerMainThread` (367 residue bytes, 2,434 total, `obj 2434` exactly, NEAR_MATCHING
+  2075/2434).
+- **`instr_diff` showed a clean, specific signature** — reference writes the outgoing command
+  buffer at `[esp+0x18]`/`[esp+0x1b]`/`[esp+0x1c]`, ours at `[esp+0x10]`/`[esp+0x13]`/`[esp+0x28]`:
+  same values, same instruction count, same store count, one displacement wrong by `+0xc`.
+- **Ruled out the obvious explanation before probing.** Disassembled both prologues: **both are
+  `sub esp,0x1e4; push ebx; push ebp; push esi; push edi` — byte-identical.** So the frame is the
+  same and the buffer's absolute slot is the same; the divergence is which store receives which
+  displacement, i.e. a colouring choice, not a frame or layout problem. That is the same class as
+  walls §1's `gm_ObjectsAvailble` (one register rename) and `cm_ExSellObjekt` slot transposition.
+- **Three spellings measured, all inert at 2075/2434, obj 2434:**
+  - hoisting `unsigned char cmd_buffer_primary[0x99]` to the head of the declaration block;
+  - a block-local `unsigned char* buf = cmd_buffer_primary;` alias for the store sequence and the
+    call argument;
+  - `*(unsigned int*) &cmd_buffer_primary[0x10]` in place of the `+ 0x10` addend form.
+
+  The subscript and addend forms compile **byte-identically**, which is the same result walls §4
+  records for `base + idx` folding — the addressing mode is chosen after the front end.
+- **Restored and verified:** back to 2075/2434 obj 2434; `git status` clean; gate pass, residue
+  8,634, raw-link `.data` 21,836, verify 281/283, byte-matched 264.
+- **Running total, stated plainly:** rounds 886-892 have produced **zero** byte progress, seven
+  rounds of well-documented negatives. Every free carrier of any size has now been probed in this
+  session or has a header recording an equivalently thorough prior history. The budget filter from
+  round 891 confirmed the earlier probes were legitimate. I have no untried lever, and I am not
+  going to keep manufacturing rounds that re-confirm this.
+
 **Round-891: worked the composition-budget lever; confirmed 15/18 carriers are editable, and probed the one carrier with no recorded probe. All reverted.**
 
 - **Tried a lever the previous rounds had not exploited:** `measure-traps.md` §6d says 28 objects are
