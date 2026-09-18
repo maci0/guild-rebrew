@@ -544,6 +544,35 @@ the zlib `COMPILE_FLAGS` reach their command lines, and of 57 files carrying met
 real flags are missing** — the 48 apparent misses are all `/DREBREW_ALLOW_NAKED`, which
 `C_DEFINES` supplies globally as `-DREBREW_ALLOW_NAKED=1`.
 
+## 6g. Two ways a whole-image instruction census lies, and both look like a finding (round 923)
+
+A mnemonic census over both images is a good instrument — it converts "residue is 6% of `.text`"
+into a countable claim. It produced three large fake signals before it produced a real one.
+
+- **Do not decode the linked image at the reference's VA.** The build is position-aligned at
+  *function* granularity, not byte granularity. If our object placed a body at a different internal
+  offset, decoding that function's `size` bytes from the reference's VA reads someone else's code.
+  Measured: `gm_AllocSpieler` out of `build/server.dll` decoded to 1,014 instructions and **52
+  calls**; its object holds **55** calls, which is the reference's number. The census's conclusion
+  flipped from "three calls are missing" to "the ruler is reading the wrong bytes". **Take the
+  symbol→VA alignment from `build/split_poc.map` and the body from the `.obj`.**
+- **Trailing section bytes decode as instructions.** A COFF `.text` section ends in jump tables and
+  padding, and both disassemble into plausible opcodes: the reference's `0x09` fill reads as
+  `or dword ptr [ecx], ecx` (50 consecutive after `CrashDumpUnhandledExceptionFilter`'s tables),
+  and `gm_AllocGebaeude`'s tail reads as `adc ch, dh` / `adc byte ptr [edx-0x3aeffe89], cl`. These
+  produced the image-wide figures **`or` -51**, **`adc` -43** and **`add` +108** — all filler, none
+  of it real. Requiring the span to decode end to end does **not** catch it, because garbage
+  decodes end to end too. Cut every body at its **last `ret`**.
+
+With both fixed, over the 102 functions both sides decode as real `push`-prologue bodies, the
+whole-image difference is **+3 instructions** and **Σ|mnemonic delta| = 13**, with exactly **one**
+function differing at all. `scripts/opcode_census.py` implements it; treat any function in its
+final table as the only remaining place a code-shape claim can be true.
+
+**General form:** when a census first reports a big, tempting number, the next question is not
+"how do I fix it" but "what else could produce this number". Here the answer was padding, and the
+size of the fake signal (-51) was larger than any real one the method found (+3).
+
 ## 7. The size rule has two branches, and mixing them discards good work
 
 `cl` pads each COMDAT to 16 bytes, so for an object with **no** relocated data after its code

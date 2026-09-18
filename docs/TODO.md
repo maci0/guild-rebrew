@@ -49,6 +49,45 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-923: counted EVERY mnemonic image-wide — the residue is not a code-shape deficit anywhere.**
+
+- **Asked the prior question the idiom census never asked:** not "which idiom differs" but "is any
+  function missing code at all". Extended the census from idiom pairs to the full mnemonic
+  vocabulary. New tool: `scripts/opcode_census.py`.
+- **Two instrument bugs found and fixed by measurement, both of which had produced large fake
+  signals:**
+  - **The linked image is the wrong ruler.** Decoding a function's `size` from the reference's VA
+    in `build/server.dll` reads the wrong bytes whenever our object placed that body at a
+    different internal offset. It reported `gm_AllocSpieler` at 1,014 instructions and **52 calls**
+    — the object holds **55**, the reference's own number, so §104 was right and my ruler was
+    wrong. Alignment now comes from `build/split_poc.map` (exact, regenerated every link).
+  - **Trailing section bytes decode as instructions.** The reference's `0x09` filler reads as
+    `or dword ptr [ecx], ecx` — 50 of them after `CrashDumpUnhandledExceptionFilter`'s jump
+    tables — and `gm_AllocGebaeude`'s tail reads as `adc ch, dh`. This produced "-51 `or`",
+    "-43 `adc`", "+108 `add`" image-wide. **All three were filler.** A fully-decoded-span filter
+    does not catch it, because garbage also decodes end to end; cutting each body at its last
+    `ret` does.
+- **Measured, 102 functions both sides decode as real `push`-prologue bodies:**
+
+  | metric | value |
+  |---|---|
+  | instructions REF | 8,986 |
+  | instructions BLD | 8,989 |
+  | net difference | **+3** |
+  | Σ abs mnemonic-count difference | **13** |
+  | functions with any count difference | **1** (`gm_AllocGebaeude`, +3 of 295) |
+
+- **This closes a vein rather than opening one.** 8,634 residue bytes against a +3 instruction
+  deficit means no carrier is missing source: the residue is encoding length, register choice and
+  scheduling inside bodies whose instruction counts already match — the class walls §§1-7 record.
+  **"This large carrier is simply incomplete / missing its tail" is retired as a lead**, and that
+  includes `gm_AllocSpieler`, whose own header had claimed 480 bytes short and whose object in fact
+  emits all 55 of the reference's calls.
+- **Two earlier round-922 numbers are superseded:** the `fmulp` 4-vs-7 count survives (real x87
+  forms, verified against the object), but any mnemonic figure taken from the *linked* image in
+  round 921/922 must be re-derived with this script before use.
+- **Measured:** no source change; tree clean; residue 8,634.
+
 **Round-922: extended the census to x87 forms — `fmulp` is excess by placement, not by spelling.**
 
 - **Applied round 921's census trick to the other idiom pairs the docs name**, counting each on both

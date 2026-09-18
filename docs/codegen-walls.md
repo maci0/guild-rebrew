@@ -280,3 +280,50 @@ placement; do not re-spell it.
 compiles, links at the reference's exact VA, and the deliverable is byte-identical outside
 `.text` (8,634 of 8,634 differing bytes are inside `.text`; `.data`, `.rdata`, `.reloc`,
 headers all `differing 0x0`). Reaching zero needs a lever this constraint set forbids.
+
+### 9. The residue is not a code-shape deficit anywhere (round 923)
+
+The census of section 8 counted idiom *pairs*. Round 923 counted **every mnemonic** over the
+whole image, which answers a different and prior question: is any function missing code?
+No.
+
+The instrument is `scripts/opcode_census.py`. Two things make it honest, and both were
+learned by getting them wrong first:
+
+- **Decode the object, not the linked image.** The linked build is position-aligned at
+  *function* granularity, so decoding a function's `size` from the reference's VA reads the
+  wrong bytes whenever our object placed that body at a different internal offset. Decoding
+  `gm_AllocSpieler` out of `build/server.dll` this way reported 1,014 instructions and 52
+  calls; the object holds **55** calls — the reference's own number. Alignment comes from
+  `build/split_poc.map`, which is exact and regenerated every link.
+- **Cut each body at its last `ret`.** A COFF `.text` section ends in jump-table and padding
+  bytes that decode as plausible instructions: the reference's `0x09` filler reads as
+  `or dword ptr [ecx], ecx` (50 of them after `CrashDumpUnhandledExceptionFilter`'s tables)
+  and `gm_AllocGebaeude`'s tail reads as `adc ch, dh`. Counting those gave "-51 `or`,
+  -43 `adc`, +108 `add`" image-wide. **All three were filler.** Filtering on a fully-decoded
+  span is not enough to catch it — garbage also "decodes" end to end.
+
+Measured, over the 102 functions both sides decode as real `push`-prologue bodies:
+
+| metric | value |
+|---|---|
+| instructions, reference | 8,986 |
+| instructions, our build | 8,989 |
+| total difference | **+3** |
+| Σ \|mnemonic count difference\| over all mnemonics | **13** |
+| functions with any instruction-count difference | **1** |
+
+The one function is `gm_AllocGebaeude` (0x100174d0), +3 instructions in 295.
+
+**Consequence, and the reason this closes a vein rather than opening one.** 8,634 residue
+bytes against a +3 instruction deficit means the residue is *not* unassembled or missing
+source anywhere. It is encoding length, register choice and scheduling inside bodies whose
+instruction counts already match — which is exactly the class sections 1-7 record as walled.
+The remaining hypothesis that a large carrier is simply incomplete is now **measured false**,
+so "this function is missing its tail" is retired as a lead. The file-local claim in
+`gm_AllocSpieler.c`'s header ("no region is missing: the call sequences agree 55/55") is
+correct after all; shapes §104's table stands.
+
+**Reuse:** this script is the cheap whole-image audit. Run it after any change that could
+alter codegen globally, and treat any function appearing in its final table as the only place
+a code-shape story can still be true.
