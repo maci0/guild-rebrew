@@ -4,7 +4,7 @@
 #include "../../../Units/Error/error.h"
 #include "../../game/entity.h"
 
-extern char* g_unknown_1de450;
+extern char* g_item_def_table; /* 0x101de450, attested in rebrew-data.toml */
 extern unsigned char g_current_season;
 
 extern PlayerSlot g_player_slots_base[8];
@@ -393,7 +393,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 			linked_list_ptr = (int*)(source_static_entity + 0xbc);
 			dest_owner_entity = source_static_entity;
 		}
-		if (*(g_unknown_1de450 + (uint)*(ushort*)(cmd + 0x18) * 0x41) == '\x1d') {
+		if (*(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41) == '\x1d') {
 			dest_game_object = (ushort*)0;
 		} else {
 			dest_game_object = (ushort*)gm_ff_Objekt(*linked_list_ptr, 1, 0, (uint)*(ushort*)(cmd + 0x18));
@@ -459,7 +459,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		amount = *(int*)(dest_object + 7) - resolve_result;
 		*(int*)(dest_object + 7) = amount;
 		if (amount <= 0) {
-			obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(cmd + 0x18) * 0x41);
+			obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 			if (obj_category == '\x06' || obj_category == '\x02') {
 				if (source_existing_entity != (void*)0) {
 					gm_RemoveObjectWrapper((int)source_existing_entity, (uint)*(ushort*)(cmd + 0x18));
@@ -504,7 +504,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 		if (dest_game_object != (ushort*)0) {
 			*(int*)(dest_game_object + 7) = *(int*)(dest_game_object + 7) + *(int*)(cmd + 0x1f);
 		} else {
-			obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(cmd + 0x18) * 0x41);
+			obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 			if (obj_category == '\x02' || obj_category == '\x06') {
 				/* Success-first form (shapes §59): the reference lays
 				 * its error tails out in REVERSE source order --
@@ -531,7 +531,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				}
 				if (dest_dynamic_entity != (short*)0) {
 					*(int*)(dest_object + 7) = *(int*)(dest_object + 7) + 1;
-					obj_category = *(g_unknown_1de450 + (uint)*(ushort*)(cmd + 0x18) * 0x41);
+					obj_category = *(g_item_def_table + (uint)*(ushort*)(cmd + 0x18) * 0x41);
 					if ((obj_category == '\x17' || obj_category == '%') &&
 						(*dest_dynamic_entity == 0x2a || *dest_dynamic_entity == 0x116) &&
 						dest_owner_entity != (short*)0 &&

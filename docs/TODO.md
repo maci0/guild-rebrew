@@ -49,6 +49,39 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-931: found an unattested-anonymous global that already had an attested name — and a duplicate definition of it.**
+
+- **Applied the instrument that has actually produced a win (round 924's operand reading) to a carrier I had
+  not touched: `cm_ExSellObjekt`.** The operand census reported one mismatch at `0x1000dc9a`, which turned
+  out to be a **false pair** — the streams desync by 2 bytes there (`shl ecx,6` is present in ours and
+  partly absent in the reference at that VA), so instruction boundaries do not correspond. Round 927's
+  documented caveat, re-confirmed.
+- **Widening the window found the real thing.** At `0x1000dc72` the reference emits
+  `mov edx, dword ptr [0x101de450]`; ours emitted `mov edx, dword ptr [0x11766664]` — a different address,
+  in the stub region. `cm_ExSellObjekt.c` (and `cm_ExProdObjekt.c`) declared
+  `extern char* g_unknown_1de450;`, an **anonymous placeholder**, while
+  `src/rebrew-data.toml` already attests the symbol at that address:
+  `["SERVER.0x101de450"] name = "g_item_def_table" type = "char*" section = ".data" size = 4`.
+- **Renamed in both files to the attested name.** Live uses: 4 in `cm_ExSellObjekt.c`, 1 in
+  `cm_ExProdObjekt.c` (docstring mentions left alone).
+  - Builds clean; `rebrew verify --full` unchanged at **281/283**.
+  - **Byte-neutral: residue 8,633 and raw-link `.data` 21,481 unchanged, both confirmed by a full
+    `gate.sh`.** The emitted operand did move from `[0x11766664]` (stub region) to `[0x100367bc]`
+    (inside `.data`), so the reference is being approached, but it still is not the reference's
+    `[0x101de450]` — that address is assigned by the layout package (`0x101de450` lies inside the
+    layout's `.data` extent `0x10027000..0x1176759c` and `layout/server.dll/operands.txt` mentions it
+    33 times), so the placement is not source-addressable. Recorded; not pursued.
+- **Side finding worth fixing later: `g_item_def_table` is defined TWICE, with different types.**
+  `src/link_stubs.c:78` has `char* g_item_def_table = 0;` and `src/link_stubs.c:211` has
+  `int g_unknown_1de450 = 0;` — **two symbols for the same address, one of them the anonymous
+  placeholder and wrongly typed.** That is the naming mandate's "one word, one meaning" violated at the
+  data level, and it is the mechanism that kept the operand in the stub region. It is in
+  `link_stubs.c`, whose header warns that growing or moving entries overshoots the `.data` VirtualSize
+  budget (round 139, and round 924 measured a `+2` from a 43-byte string stub), so it wants a measured
+  change on its own round rather than a drive-by edit.
+- **Measured:** gate pass, residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100, lint 188/188.
+
 **Round-930: corrected rounds 927-929 — the reference saves the same four registers, it just defers two.**
 
 - **The correction matters and it invalidates the framing of three rounds.** Counting every callee-saved

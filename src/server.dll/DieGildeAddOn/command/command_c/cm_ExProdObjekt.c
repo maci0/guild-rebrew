@@ -19,7 +19,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern char* g_unknown_1de450;
+extern char* g_item_def_table; /* 0x101de450, attested in rebrew-data.toml */
 extern unsigned char g_current_season;
 
 short* __cdecl gm_ResolveParentEntity(short*);
@@ -343,7 +343,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	 * allocator-level finding. */
 	recipe_idx = (uint)*(ushort*)(msg + 0x14);
 	*(volatile int*)&loop_count = *(int*)(msg + 0x16);
-	recipe_shift = g_unknown_1de450 + (recipe_idx << 6);
+	recipe_shift = g_item_def_table + (recipe_idx << 6);
 	loop_count = 4;
 	recipe_def = recipe_shift + recipe_idx;
 	material_iter = (ushort*)(recipe_def + 0x26);
