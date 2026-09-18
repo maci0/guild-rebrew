@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-930: corrected rounds 927-929 — the reference saves the same four registers, it just defers two.**
+
+- **The correction matters and it invalidates the framing of three rounds.** Counting every callee-saved
+  `push` in the reference body of `CrashDumpUnhandledExceptionFilter`:
+  ```
+  0x1000277d push ebp      <- entry        0x10002dac pop edi
+  0x1000277e push esi      <- entry        0x10002dad pop ebx
+  0x1000282c push ebx      <- DEFERRED     0x10002e6b pop esi
+  0x1000282d push edi      <- DEFERRED     0x10002e6e pop ebp
+  ```
+  **The reference uses all four callee-saved registers too.** Rounds 927-929 said it saves
+  only `ebp,esi` and called the difference a "register surplus" that no edit had touched. That is
+  wrong: the reference is **shrink-wrapped** (`push ebx; push edi` arrive at `0x1000282c`, after the
+  two early-return calls), and our object pushes all four at entry. Shapes §38 is the mechanism, and
+  §81's own closing paragraph already named it ("deferred `push ebx; push edi` at 0x1000282c") — the
+  later rounds had drifted off that and onto a count that does not exist.
+- **Corrected in `docs/msvc6-c-shapes.md` §81** in three places, with an explicit note that the
+  earlier framing was wrong, so nobody re-derives it. The conclusion survives and is strengthened:
+  §38 says the entry push set follows from the loop's register demand, so both routes point at the
+  same lever — reduce what stays live across the early guards and the loop.
+- **Two more reduction attempts this round, both rejected:**
+  - moving `instrType` and `mbi` from the function block into the `for (;;)` body (legal C89, both
+    used only there): compiles, object stays 2,128 bytes, frame stays `sub esp,0x284`, linked residue
+    **8,633 unchanged while the object bytes differ** — a no-op under the link rule, reverted rather
+    than kept as free tidy-up.
+  - Nothing else applied; file left byte-identical to HEAD.
+- **Also verified the reference walk loop's own live set** (`0x10002c87`-`0x10002d5d`, back-edge
+  `jne 0x10002d5d`): every carried value sits in a stack slot (`[esp+0x44]` frameInfo[2],
+  `[esp+0x58]` mbi, `[esp+0x68]` mbi.State, `[esp+0x6c]` instrType, `[esp+0x2c]` pCtx, `[esp+0x40]`
+  pStack). Within the body `esi` and `ebp` are used **0 times**; `edi` 6 and `ebx` 3, each
+  re-initialised inside the loop (an earlier draft of this sentence claimed only `edi` was touched —
+  corrected before it went in the doc).
+- **Measured:** residue **8,633**, raw-link `.data` **21,481**, verify 281/283, byte-matched 264.
+
 **Round-929: ran shapes §38's diagnostic on CrashDump — the register demand is the stack-walk loop.**
 
 - **Took round 928's open half (the surplus callee-saved register) and applied §38's own procedure:**

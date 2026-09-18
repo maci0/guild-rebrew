@@ -2822,6 +2822,35 @@ deleting anything — and closing it alone still costs bytes, because the smalle
 frame moves every subsequent `[esp+N]` displacement. Do not spend further
 rounds on the frame as a target.
 
+**Round 930 correction first, because it changes how to read everything below.**
+The reference **does** save `ebx` and `edi` — it saves them *later*. Counting every
+callee-saved `push` in the reference body:
+
+```
+0x1000277d push ebp      <- entry
+0x1000277e push esi      <- entry
+0x1000282c push ebx      <- DEFERRED, after the two early-return calls
+0x1000282d push edi      <- DEFERRED
+...
+0x10002dac pop edi ; 0x10002dad pop ebx
+0x10002e6b pop esi ; 0x10002e6e pop ebp
+```
+
+So the reference is shrink-wrapped: two registers at entry, two more once the function
+is past the paths that return without needing them. Our object pushes all four at
+entry instead. **The divergence is therefore not "we save a register the reference does
+not" — that framing (rounds 927-929) is wrong and is corrected here. It is that the
+reference defers two saves and we do not**, which is section 38's shrink-wrap threshold
+and the same mechanism section 81's own closing paragraph already names
+("deferred `push ebx; push edi` at 0x1000282c").
+
+This *strengthens* rather than weakens the earlier conclusion, because section 38 says
+the entry push set follows from the *loop's* register demand: a body whose values stay
+live across the guards must save at entry. Both section-38 routes therefore point at
+the same thing — reduce what is live across the early guards and the loop — and the
+round-928/929 probes that tried to move the frame or the live ranges are the measured
+evidence that neither the frame bytes nor the qualifiers reach it.
+
 **Round 928 reproduced this on the current tree, and the reproduction separates two
 things this section had run together.** Re-applying the same one-token edit
 (`pCtx->Eip` -> `pExceptionPointers->ContextRecord->Eip`, both sites) still produces
@@ -2833,18 +2862,20 @@ the reference's frame **exactly** —
 
 — and now measures **+21 linked (8,633 -> 8,654)** rather than round 174's `+66`, the
 magnitude having moved with the rest of the tree while the sign did not. What the
-edit does *not* fix is the register surplus: the prologue becomes
-`push ebx; push ebp; push esi` (`53 55 56`) where the reference has only
-`push ebp; push esi` (`55 56`). **So `sub esp,0x280` and the entry push set are two
-independent readouts, and this lever reaches only the first.** The frame is the
-*visible* half of the divergence and the cheaper one to close; the surplus
-callee-saved register is the half that persists after the frame is right.
+edit does *not* fix is the **deferred saves**: the prologue becomes
+`push ebx; push ebp; push esi` (`53 55 56`) where the reference's entry is only
+`push ebp; push esi` (`55 56`), the other two arriving at `0x1000282c`. **So
+`sub esp,0x280` and the entry push *placement* are two independent readouts, and this
+lever reaches only the first.** (Rounds 927-929 called the second one a "register
+surplus" — see the correction above; the reference saves the same four registers, just
+two of them later.)
 
 That matters for targeting: a round that goes after the frame is chasing the half
-that is already known-reachable-and-still-losing, while the register count is the
-half no edit has yet touched. Per section 38 the entry push set is decided by the
-*loop's* register demand, so the lever is reducing how many callee-saved values the
-body needs — not respelling the entry, which every probe here has shown inert.
+that is already known-reachable-and-still-losing, while the *shrink-wrap* is the half
+no edit has yet touched. Per section 38 the entry push set is decided by the *loop's*
+register demand, so the lever is reducing how many values stay live across the early
+guards and the loop — not respelling the entry, which every probe here has shown
+inert.
 
 **Round 929 then ran section 38's own diagnostic here, and it localised the demand.**
 The procedure is "delete the loop and recompile; if the head then matches, the loop
@@ -2858,8 +2889,11 @@ the object's prologue bytes:
 | inner `while (nInstr--)` ReadProcessMemory probe | `sub esp,0x284` — **not the blocker** |
 | the outer stack-walk `for (;;)` (neutralised with a leading `break`) | `81 ec 5c 02 00 00` = **`sub esp,0x25c`** |
 
-So the entire surplus is the **stack-walk loop's** live set, and it is located rather
-than inferred. That is the loop to reduce, and it is worth stating why the others
+So the whole of the frame difference is the **stack-walk loop's** live set, and it is
+located rather than inferred. (The diagnostic reads the *frame*; the corresponding
+effect on the deferred saves is inferred from section 38, not measured here — removing
+the loop also removes the code that would need the registers, so the push set cannot be
+read off this experiment.) That is the loop to reduce, and it is worth stating why the others
 are excluded: a round that budgeted for "the decrypt loop" or "the probe loop" — both
 of which look heavier in the source — would have found nothing, and the two cheap
 candidates would have been consumed before the real one was tried.
@@ -2870,7 +2904,42 @@ test inside). Dropping the qualifier is the most direct way to cut its register
 pressure, and it measures **residue 8,633 -> 8,682 (+49)**: the volatile read is
 load-bearing here as section 3 and allocator Finding 61 predict, and the file header's
 round-129 note records a related `nFrames` probe. The loop's demand has to come down
-by removing *values*, not by changing how they are qualified. The remaining reference-order differences
+by removing *values*, not by changing how they are qualified.
+
+**A second reduction attempt, byte-neutral and therefore also not kept.** `instrType`
+and `mbi` are used *only* inside the walk loop, so both were moved from the function
+block to a declaration inside the `for (;;)` body — legal C89, and the obvious way to
+shorten a live range the prologue has to preserve. It compiles, the object stays
+2,128 bytes, the frame stays `sub esp,0x284`, and the linked residue is **8,633,
+unchanged** — while the *object bytes* do differ from the baseline's. So the edit moves
+codegen without moving the objective's metric: a no-op under the link rule, reverted
+rather than kept as "free tidy-up".
+
+**And the mechanism, read off the reference's own loop.** The walk loop closes with
+`jne 0x10002d5d -> 0x10002c87`, and disassembling that body settles what its live set
+is: the reference keeps **every** carried value in a stack slot —
+
+```
+[esp+0x44] frameInfo[2]      [esp+0x58] mbi          [esp+0x68] mbi.State
+[esp+0x6c] instrType         [esp+0x2c] pCtx         [esp+0x40] pStack
+```
+
+— and the loop body's callee-saved usage is **re-initialised every iteration rather
+than carried**. Counted over the whole body (`0x10002c87`-`0x10002d5d`): `esi` and
+`ebp` are used **zero** times; `edi` appears 6 times and `ebx` 3, and both are set
+*inside* the loop before use (`mov edi,7` at `0x10002cc8`; `lea ebx,[esp+0x90]` at
+`0x10002ccd`, a stack address for `szDateBuf`). So no callee-saved value crosses the
+back-edge. (An earlier draft of this paragraph said "the only one touched is `edi`" —
+that was wrong, `ebx` is used too; the point survives because both are loop-local, but
+state it from the count, not from impression.)
+
+That is *why* the reference's prologue needs only `push ebp; push esi`, and it is the
+mechanical answer to round 929's open question: the deferred saves are not a colouring
+difference to be pleaded with, they are the cost of our body keeping values live across
+the early guards where the reference does not.
+msvc6 chose differently from the same source, and sections 61-65's fixed-point findings
+say no C spelling reaches that choice — which is consistent with both reduction
+attempts above measuring zero or worse. The remaining reference-order differences
 (deferred `push ebx; push edi` at 0x1000282c; `pCtx->Esp` parked in ebx from
 0x10002931 across the date/time region) are the real levers, and they would
 have to land *with* the frame in one change, not before it.
