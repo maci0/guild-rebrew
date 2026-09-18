@@ -126,6 +126,44 @@ barrier** (shapes §69). The same class of lever is unavailable everywhere.
 
 ---
 
+## 6b. The inline-asm zero-fill/memcpy prelude: measured cost of the constraint
+
+Six sites in the tree (`server4.c`, `gm_AllocGebaeude.c`, `m_AllocTracked.c`, `m_alloc.c`,
+`m_alloc2.c`, `vfs_ReadData.c`) carry the same hand-written align-up block-fill:
+
+```
+lea ecx,[edi+edi*2] ; and ecx,3 ; sub ebx,ecx ; jle L
+rep stosb ; mov ecx,ebx ; and ebx,3 ; shr ecx,2 ; rep stosd ; L: add ecx,ebx ; rep stosb
+```
+
+**The shape is confirmed unreachable from C, re-derived 2026-09-17 rather than cited.** Compiling
+the exact call shape under `/O2`, `/Oi`, `/O2 /Oi`, `/Ox`, `/O2 /Ow`, `/O2 /Oa` and `/O1` gives
+`shr ecx,2; rep stosd; and ecx,3; rep stosb` in every case — never the align-up prelude. The
+reference at `0x1000b040` contains the prelude verbatim.
+
+**Measured cost of removing them, through `gate.sh` (round 889):**
+
+| metric | with asm (shipped) | asm removed |
+|---|---|---|
+| verify passed | 281/283 | 277/283 |
+| byte-matched | 264 | 260 |
+| residue | 8,634 | **116,814** (+108,180) |
+| raw-link `.data` | 21,836 | 21,842 |
+
+**108,180 bytes is 12.5x the entire remaining residue.** Three functions go SIZE_MISMATCH (short):
+`srv_InitBuildingTypeTable` 372 to 358, `m_init` 162 to 143, `m_PoolAlloc` 270 to 248.
+
+**Judgement, marked as judgement.** The objective's asm clause permits asm "only when certain the
+original game source used raw asm at the same site," with "a code shape no MSVC6 C output can
+produce" as the example of positive evidence. That condition is satisfied here — measured, not
+assumed. But the *writer* was almost certainly the compiler vendor, not the game: the same 24-byte
+idiom at six independent call sites is a CRT `memset` expansion, and the enclosing function is not
+library code (`rebrew lib-match --stock-lib LIBCMT.LIB --va 0x1000b040` reports "Safe to reverse").
+So the strict reading of the clause and the byte objective pull apart, and the cost of choosing the
+strict reading is 108,180 bytes. Left in place pending the user's decision; both numbers recorded.
+
+---
+
 ## 7. What would actually move the needle
 
 Ordered by what the evidence says is most likely to pay.

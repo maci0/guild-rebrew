@@ -49,6 +49,42 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-889: measured the cost of removing the six inline-asm blocks — 108,180 residue bytes. User instruction and evidence conflict; recorded, not acted on.**
+
+- **Context.** Six live `__asm` blocks remain in the tree (`server4.c`, `gm_AllocGebaeude.c`,
+  `m_AllocTracked.c`, `m_alloc.c`, `m_alloc2.c`, `vfs_ReadData.c`). All six are the same
+  hand-written align-up memset/memcpy expansion. Asked the user whether to keep or remove them;
+  the answer was **remove all six to plain C**, with **zero residue** kept as the bar.
+- **Re-derived the justification myself rather than trusting the header notes.** Compiled the exact
+  call shape under `/O2`, `/Oi`, `/O2 /Oi`, `/Ox`, `/O2 /Ow`, `/O2 /Oa`, `/O1` through the project's
+  own `rebrew-cmake-cl`. **Every variant emits `shr ecx,2; rep stosd; and ecx,3; rep stosb`**;
+  none emits the reference's `lea ecx,[edi+edi*2]; and ecx,3; sub ebx,ecx; jle`. Confirmed the
+  reference side by disassembling `0x1000b040` directly: it contains the prelude verbatim. So the
+  documentation's claim is correct — this shape is not reachable from C.
+- **Converted all six and measured through `gate.sh`:**
+
+  | metric | with asm (shipped) | asm removed |
+  |---|---|---|
+  | verify passed | **281**/283 | 277/283 |
+  | byte-matched | **264** | 260 |
+  | residue | **8,634** | **116,814** (+108,180) |
+  | raw-link `.data` | **21,836** | 21,842 (+6) |
+
+  Per-function object sizes confirm why: each converted function goes SIZE_MISMATCH (short) —
+  `srv_InitBuildingTypeTable` 372→358, `m_init` 162→143, `m_PoolAlloc` 270→248.
+- **Reverted all six; baseline restored exactly** (gate pass, residue 8,634, verify 281/264).
+  The blocks cost **108,180 bytes to remove — 12.5× the entire remaining residue.** The instruction
+  and the evidence are in direct conflict: removing them cannot hold `RESIDUE_BASELINE` at 8,634,
+  which the same conversation named as the bar. **Not acted on; escalated to the user with both
+  numbers.**
+- **New measurement trap found and diagnosed (the round's most transferable result).**
+  `cmake --build build -j8` **alone** deletes `build/server.dll` and leaves the split state
+  degraded. Residue read **58,614** and **116,814** from that state — both garbage. The real
+  sequence is `rm -rf build/split_poc build/server.dll` then a full `gate.sh`. Two independent
+  misleading readings were taken before this was spotted; the tell is `split_link.sh` printing
+  `exactly at their reference VA: 0`. Recorded in measure-traps §9.
+- **Gate:** pass (after revert). All four baselines held.
+
 **Round-888: audited every remaining carrier against the docs; independently re-verified the floor. Nothing probed, because everything still open is already closed.**
 
 - **Tried:** pick the next-highest-ROI target by reading each remaining carrier's documented state

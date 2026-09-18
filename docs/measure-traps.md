@@ -316,6 +316,21 @@ before comparing two figures.
   automatically and can be many rounds stale.** A `+1` in that table is meaningless until the
   baseline is refreshed; `bash scripts/linktest.sh --new-base <file.c>` rewrites it (and prints no
   delta). Cross-check by reverting the edit and confirming the baseline reproduces.
+- **`cmake --build build -j8` on its own leaves the tree in a state that reports garbage residue.**
+  The post-link layout step fails by design and `make` then **deletes `build/server.dll`**, while
+  `build/split_poc/` keeps the object set from the previous run. Residue read from that state is
+  meaningless — round 889 measured **58,614** and then **116,814** from two such states, when the
+  true value was 8,634. Worse, it is *sticky*: `git checkout` of the sources restores `verify`
+  (281/283) but not the residue, so the tree looks reverted and still reports a false number. The
+  recovery is to delete the split state and take a full gate pass:
+  `rm -rf build/split_poc build/server.dll && bash scripts/gate.sh`.
+  **The tell is `split_link.sh` printing `exactly at their reference VA: 0`** — the same
+  composition-collapse signal `linktest.sh` refuses to measure through
+  (`msvc6-c-shapes.md` §124). Treat any residue number taken without a fresh `postlink_residual.py`
+  run after a source change as unmeasured, not as a regression.
+- **A `cmake --build` also deletes the deliverable**, so a round that builds to test something and
+  then compares residue is comparing a missing or stale artifact. Always rebuild the split state
+  before reading residue; never carry a number across a bare build.
 - **`rebrew verify --data` prints a `UserWarning` per `DATA` marker whose VA has no `name` in
   `src/rebrew-data.toml`, and the marker is then dropped from the inventory as `unknown`.** The
   warning text — "has no declaration on the following line and no name in the data metadata" —
