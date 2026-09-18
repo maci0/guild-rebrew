@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-940: walked the 11 mid/large carriers — all worked; fixed stale 'rejected' history that a round would have re-probed.**
+
+- **Round 939's map said the top five are walled and the tail is closed; the untested band was the six
+  carriers between 100 and 500 bytes.** Examined all of them this round:
+  | carrier | bytes | verdict |
+  |---|---|---|
+  | `gv_ExAllocGraveyardWorker` | 456 | documented: "10 bytes over target, still the `and eax,0xffff` zero-extend … resists every C spelling" |
+  | `ServerMainThread` | 367 | §81's sibling row, worked through rounds 927-930 |
+  | `gm_AllocGebaeude` | 327 | metadata blocker names five classes; see below |
+  | `vfs_OpenStream` | 238 | **exhaustively closed** — the entry `cmp byte ptr [eax],0` vs our `mov al,[eax]; test al,al` is a *separable-looking* one-byte fold, and the file records that removing it "makes the loop byte-exact through the jump table, but the same byte then shifts every following block", with three loop spellings tried; "the byte is not separable from the shift, and 450 is the maximum for the aligned-body family" |
+  | `gm_FindNextFilteredEntity` | 215 | shapes §75/§122 |
+  | `ahm_ExAllocAlchemist` | 198 | a pure `lea`-chain register rotation (`edx` vs `eax`), the allocator class |
+- **`vfs_OpenStream` is the round's instructive case.** Its divergence is a *fold*, not a schedule, so it
+  looked addressable — and the file's header had already measured exactly that, including the interaction
+  (the fold and the alignment are one decision). Re-deriving it would have cost a round.
+- **A genuine documentation defect fixed: stale "rejected" bullets in `gm_AllocGebaeude.c`.** Its history
+  lists `switching on s.type_id instead of geb[0] (333)` and the in-loop `gm_AllocRaum` among *rejected*
+  probes, both rejected on the size rule ("this body's object is already exactly 1078, so any growth reads
+  as a regression"). **Both have since been adopted**: line 309 reads `switch (s.type_id)`, and the
+  emitted code at `0x1001771b`-`0x10017721` is **byte-identical to the reference** (`mov eax,[ebp-0xc];
+  add eax,-4; cmp eax,0x49`). A future round reading those bullets would re-probe work already in the
+  tree. Added an inline `ADOPTED since` note marking them stale history.
+- **Also worth recording:** the rejection reasoning itself is now obsolete — the project's size rule was
+  corrected afterwards (real body vs padded COMDAT span, measure-traps §7 / shapes §88), so "the object
+  is exactly 1078" no longer implies "any growth is a regression". The adoptions landed anyway, but the
+  bullets they sit next to still assert the old rule.
+- **Measured:** comment-only change; residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100, wine load OK.
+
 **Round-939: audited the residue tail — the eight small carriers are all closed, and worth 327 bytes total.**
 
 - **Tested the obvious escape from the walled big carriers: work the small ones.** Measured the whole

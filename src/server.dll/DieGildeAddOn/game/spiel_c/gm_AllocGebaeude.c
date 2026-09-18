@@ -129,6 +129,10 @@
  *
  * The switch VALUE note below is also stale: the file now switches on
  * `s.type_id` (matching the reference's [ebp-0xc] reload at 0x1001771b),
+ * ADOPTED since (round 940 verified the emitted code is byte-identical to the
+ * reference at 0x1001771b-0x10017721), so the 'rejected' bullets below that
+ * list `s.type_id` and the in-loop `gm_AllocRaum` are STALE HISTORY — do not
+ * re-probe them.
  * verified by semantic review 2026-09-13.  Retained as history:
  *
  * The switch VALUE is wrong, though: the target reloads the spilled
