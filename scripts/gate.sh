@@ -172,6 +172,23 @@ else
     rc=1
 fi
 
+# Data extents that cross the next tracked symbol.  Added round 906: two real
+# width defects (a 4-byte `size` on a byte-wide field) sat in the metadata while
+# residue, verify and lint all stayed green, because an entry can be internally
+# wrong while agreeing with every other TU.  The check needs no disassembly, so
+# it costs a second and belongs here rather than in a periodic audit.
+# See docs/measure-traps.md section 6.
+echo "== data extents"
+if [ -f src/rebrew-data.toml ]; then
+    if EXT=$("${REBREW_PY:-.venv/bin/python}" scripts/data_extent_check.py 2>&1); then
+        echo "$EXT" | head -1
+    else
+        echo "REGRESSION: metadata extent claims bytes another symbol owns:"
+        echo "$EXT" | sed -n '/BUGS/,$p' | head -20
+        rc=1
+    fi
+fi
+
 # Import table against the reference.  Was a done-criterion with nothing
 # enforcing it until round 881: an extra import means a library object came in
 # the original did not have, a missing one means the opposite, and neither shows

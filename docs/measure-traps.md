@@ -124,14 +124,30 @@ the 8,634 as one cascade.
   one command (round 905).** Sorting the sized `.data`/`.rdata` entries by VA and asking whether
   `va + size > next_va` found **exactly two** defects in the whole tree, both real, both invisible to
   three rounds of *type-conflict* analysis (902-904) because an entry can be internally wrong while
-  agreeing with every other TU:
-  - `g_dynasty_field_48` typed `int`/size 4 at `0x10035448`, overlapping `g_dynasty_field_49` at
+  agreeing with every other TU:  - `g_dynasty_field_48` typed `int`/size 4 at `0x10035448`, overlapping `g_dynasty_field_49` at
     `0x10035449`. The reference does `mov dl, byte ptr [0x10035448]` (`0x1001700f`) and
     `mov byte ptr [0x10035448], dl` (`0x10017130`) — **one byte**.
   - `g_entity_type_bytes` size 4 at `0x10035a04`, overlapping `g_stat_b_array` at `0x10035a05`, and
     typed empty. Reference: `mov byte ptr [ecx + 0x10035a04], dl` (`0x10015542`).
   **A declared extent that runs past the next known symbol cannot be right**, and unlike a byte diff
   or a size estimator this needs no disassembly and no assumptions. Run it after any metadata work.
+  **Now automated:** `.venv/bin/python scripts/data_extent_check.py`, wired into `gate.sh` as the
+  `== data extents` check (round 906).
+- **Geometry alone cannot classify a crossing, and the naive discriminators each miss real bugs
+  (round 906).** Two legitimate shapes look exactly like a wrong size:
+  `g_data_restore_gap` (`+0x9a00`) contains `g_alchemy_entity_table` at `+0xa50`, and
+  `g_crashdump_data_10027104` (`+568`) contains `g_crash_newline`, which is a `#define` offset. Both
+  are views inside a blob that is *supposed* to cover those bytes. The two blind alleys, both caught
+  only by running the check against the **pre-fix** tree:
+  - treating a *fully contained* symbol as benign — misses both round-905 defects, because a 4-byte
+    `int` size swallowing a 1-byte neighbour is geometrically identical to a blob swallowing a view;
+  - treating `extern` as evidence of a view — misses `g_entity_type_bytes`, because
+    `g_stat_b_array` is `extern unsigned char g_stat_b_array[]`, a *separate object* that merely sits
+    next door. **An `extern` declaration is not evidence of anything about ownership.**
+  The working rule requires **positive** evidence of a view (a `#define` naming an offset) plus a
+  verified allowlist of the gap blobs. **Lesson: a guard must be tested against a state where it
+  should fire.** This one was written twice while the tree was already fixed, and both early versions
+  would have shipped silently passing.
 - **Metadata-only width corrections are byte-neutral; composition-budget changes are not
   (rounds 904-905).** Four such fixes have now landed — `locktable` 256→192, `g_dynasty_field_48`
   4→1, `g_entity_type_bytes` 4→1, plus round 900's type corrections — every one with residue and

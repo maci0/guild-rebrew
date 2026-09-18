@@ -49,6 +49,38 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-906: turned round 905's one-off check into `scripts/data_extent_check.py`, wired into the gate — and fixed the check's own false negatives twice.**
+
+- **Tried:** round 905's overlap check lived as prose and two shell one-liners. This round made it a
+  script so it runs every gate rather than on whoever remembers.
+- **Extended the check to type-derived sizes** (`verify --data` falls back to
+  `estimate_type_size`), which surfaced **two more crossings** the sized-only version could not see:
+  `g_crashdump_data_10027104` and `g_data_restore_gap`.
+- **Both are legitimate, and establishing that is the finding.** Neither is a defect:
+  - `g_data_restore_gap` spans `0x1002b600..0x10035000` = exactly `0x9a00` bytes = the rest of raw
+    `.data`, which is its stated job (`gen-layout --data-gap`, header says `[0x4600:0xe000]`).
+    `g_alchemy_entity_table` at `+0xa50` is an `extern`-only *view* inside it.
+  - `g_crashdump_data_10027104` spans `0x10027104..0x1002733c` = the 568 bytes its own header
+    documents; `g_crash_newline` is literally `#define g_crash_newline
+    (g_crashdump_data_10027104 + 528)`.
+- **The first version of the script was wrong, twice, and testing caught both.**
+  - v1 classified a *fully* contained symbol as benign. Run against the **pre-fix** metadata it
+    therefore **missed both round-905 defects** (`g_dynasty_field_48` size 4 containing
+    `g_dynasty_field_49` looks geometrically identical to a blob containing a view). Geometry cannot
+    decide this.
+  - v2 used "is the inner symbol `extern`?" as the discriminator. That is ambiguous and made it
+    **still miss `g_entity_type_bytes`**, because `g_stat_b_array` is
+    `extern unsigned char g_stat_b_array[]` — a separate object, not a view.
+  - v3 requires **positive** evidence of a view (a `#define` offset) and otherwise assumes the inner
+    symbol owns storage, plus an explicit verified allowlist for the two gap blobs.
+  - **Verified both directions:** against the pre-fix metadata it reports **exactly the 2 real
+    defects** and exits 1; against the current tree it reports **0** and exits 0. A check that had
+    only ever been run on the fixed tree would have shipped with two false negatives.
+- **Wired into `scripts/gate.sh`** as a fifth check (`== data extents`), so this class is now
+  enforced rather than remembered. Smoke-tested in the gate: prints its count and passes.
+- **Measured:** gate pass, residue **8,634**, raw-link `.data` **21,836**, verify 281/283,
+  byte-matched 264, imports 100. Metadata untouched.
+
 **Round-905: generalized round 904's result into a check — found and fixed two real width errors; both landed byte-neutral.**
 
 - **Tried:** round 904 established that a size defect *can* be fixed at zero cost when no code
