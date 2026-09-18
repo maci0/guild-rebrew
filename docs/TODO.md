@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-958: fourth stale-header case — `cm_ExSellObjekt`'s "highest-value untried lever" no longer exists.**
+
+- **Finished the stale-claim sweep with the highest-consequence instance yet.** `cm_ExSellObjekt.c`'s
+  header names a **"highest-value untried lever"**: a single block-placement decision where "the
+  reference runs the slot-table update + `gm_SubObjekt` body inline at `0x1000df2a` … **while ours jumps
+  away and emits it ~147 bytes later at `0x1000e0cc`**." A future round would have gone straight at it.
+- **Both halves are now false.**
+  - The inlined body **is present in ours at `0x1000df2a`** — the reference's own address — differing only
+    by one extra `mov edi,[esp+0x10]` before the `xor ecx,ecx`.
+  - `0x1000e0cc` **is not a block start in our object at all**; it falls mid-instruction, after the
+    `jmp 0x1000e00e` at `0x1000e0c6`.
+- **And the real first divergence is elsewhere**, which is the part that matters for targeting: aligning
+  both streams (674 instructions each) puts it at **index 14**,
+  `mov dword ptr [esp+0x14],edi` against our `mov dword ptr [esp+0x24],edi` — the **nine-slot zero-store
+  permutation** the same paragraph dismisses as a mere "residual cluster". That is allocator **Finding
+  63**'s class, closed by round 361 (split local, dropped pointers, declaration reorder all inert), and
+  round 933 re-confirmed it and pinned the exact slot table. So the note had the priority **inverted**:
+  it offered a lever that no longer exists and called the actual first fault a leftover cluster.
+- **Corrected in place** with the measurements, the addresses, and a pointer to Finding 63, so the next
+  round neither chases the phantom cliff nor re-derives the permutation.
+- **The sweep's tally is now four for four rounds** — 940 (stale rejection), 955-956 (stale direction),
+  957 (stale baseline), 958 (stale lever). Recorded as workflow-traps §6; the guard is unchanged and
+  cheap: decode the site in the **current** object before designing a probe from any header claim.
+- **Measured:** comment-only change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-957: finished the stale-claim sweep — `ahm_ExAllocAlchemist`'s closed sub-item annotated, its root cause re-verified.**
 
 - **Continued round 956's sweep to the other verifiable assertion class: byte-sequence claims in

@@ -126,6 +126,18 @@ int __cdecl gm_RemoveObjectByType(void**, unsigned int);
  * remaining clusters (the nine-slot zero-store permutation at
  * 0x1000d959 and the ~30 register/slot-name pairs) are measured walls.
  *
+ * STALE as of round 958: the paragraph above describes a layout that no
+ * longer exists.  Rechecked against the current object -- the inlined body IS
+ * present in ours at 0x1000df2a (the reference's own address), differing from
+ * the reference only by one extra `mov edi,[esp+0x10]`; and 0x1000e0cc is not
+ * a block start at all in our object, it falls mid-instruction after the
+ * `jmp 0x1000e00e` at 0x1000e0c6.  The real current first divergence is
+ * index 14, `mov [esp+0x14],edi` against our `mov [esp+0x24],edi` -- the
+ * nine-slot zero-store PERMUTATION named in the previous sentence, which
+ * allocator Finding 63 closed (split local, dropped pointers and declaration
+ * reorder all inert).  So the "block-placement cliff" is not the lever and
+ * the permutation is not merely a residual cluster; it is the first fault.
+ *
  * CORRECTED round 182: this paragraph used to call [esp+0x44] a "dead
  * spill the reference materialises at 0x1000dd1f".  Both halves are
  * wrong.  The reference WRITES it at 0x1000dd2a and READS IT BACK at
