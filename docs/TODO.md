@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-936: the objective's "every data byte matching" clause is satisfied by copying, not compiling — stated plainly.**
+
+- **Finished auditing the objective's criteria as a set** (rounds 934-935 covered the two unmatched
+  ones). The remaining claim is "every data byte matching", and the same command reports two different
+  answers depending on which artefact is meant:
+  | section | shipped `build/server.dll` | **raw link, pre-fixer** |
+  |---|---|---|
+  | `.data` | differing `0x0` | differing **21,481** (`0x53e9` of `0xe000`) |
+  | `.rdata` | differing `0x0` | differing **1,268** (`0x4f4`) |
+  | `.reloc` | differing `0x0` | differing **7,107** (`0x1bc3`) |
+  | `headers` | differing `0x0` | differing **267** (`0x10b`) |
+  | `.text` | differing `0x21b9` | differing `0x3810` |
+  **`rebrew postlink` writes the first four from the layout package** — copied, not compiled; the raw
+  link produces 30,123 bytes the fixers overwrite. So "every data byte matching" is met **by
+  construction**, and no data-section measurement can ever be evidence about codegen.
+- **This is not a defect and it is not concealed** — measure-traps §6h and `rebrew verify --data`'s own
+  warning both state it. It was nonetheless missing from `codegen-walls`, which is where the limit
+  section lives and where a reader arrives with the claim "byte-identical outside `.text`". Added there
+  as **§9b**, with the two-column table and the honest single-number summary: **the deliverable matches
+  the reference except for 8,633 bytes, all inside `.text`, and `.text` is the only section the build
+  has to get right.**
+- **Arithmetic checked rather than eyeballed.** The first draft of the new table said `.data`
+  *15,481* — a transcription slip from `0x53e9`. Recomputed all four: 21,481 + 1,268 + 7,107 + 267 =
+  **30,123** = `0x75ab`, exactly the "non-.text total the fixers overwrite" figure the tool prints
+  independently. That cross-check is now the reason the table is trustworthy.
+- **Measured:** no source change; residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100, wine load OK.
+
 **Round-935: audited the coverage claim itself — the metadata carries 83 stale blocks, and `orphans` does not flag them.**
 
 - **Continued round 934's set-audit of the objective's criteria to the one that says "all functions

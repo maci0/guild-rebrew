@@ -331,6 +331,32 @@ correct after all; shapes §104's table stands.
 alter codegen globally, and treat any function appearing in its final table as the only place
 a code-shape story can still be true.
 
+### 9b. "Byte-identical outside `.text`" is true of the *shipped file*, not of what the build produces (round 936)
+
+The headline result reads "`.data`, `.rdata`, `.reloc` and headers all `differing 0x0`". That sentence
+is correct about `build/server.dll` and **misleading about the build**, and the difference decides how
+to read the whole objective. Measured on the current tree, the same command reports both numbers:
+
+| section | shipped file | **raw link, pre-fixer** |
+|---|---|---|
+| `.data` | differing `0x0` | differing **21,481** (`0x53e9` of `0xe000`) |
+| `.rdata` | differing `0x0` | differing **1,268** (`0x4f4`) |
+| `.reloc` | differing `0x0` | differing **7,107** (`0x1bc3`) |
+| `headers` | differing `0x0` | differing **267** (`0x10b`) |
+| `.text` | differing `0x21b9` | differing `0x3810` |
+
+**`rebrew postlink` writes those four sections from the layout package.** They are copied, not
+compiled; the raw link produces 30,123 bytes the fixers overwrite. So the objective's "every data byte
+matching" is satisfied **by construction**, and no measurement of the data sections can ever be
+evidence about codegen. This is not a defect and it is not hidden — `measure-traps` §6h and the
+`rebrew verify --data` warning both say it — but it belongs in this section too, because "the
+deliverable is byte-identical outside `.text`" is the claim a reader arrives with.
+
+**What it means for the objective's other clauses.** "Residue at zero" is a `.text` claim and is
+unaffected. "Every data byte matching" is trivially met and should not be quoted as progress. The
+honest single-number summary of this project is: **the deliverable matches the reference except for
+8,633 bytes, all of them inside `.text`, and `.text` is the only section the build has to get right.**
+
 ### 10. A function-argument that was an undefined stub, found by reading the emitted operand (round 924)
 
 The first residue movement since round 901, and it came from the section-9 instrument: decoding
