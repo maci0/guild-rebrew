@@ -3225,6 +3225,20 @@ So **the initialiser sequence is a live lever on the slot map**, contrary to "de
 likewise identical" above. What is closed is the claim of *inertness*; the axis itself is open. Three
 permutations measured, **all three losses**, none reproducing the reference's assignment.
 
+**Round 962 separated declaration order from initialiser order on the two variables actually rotated
+(`dest_owner_entity` and `resolved_dynamic`, adjacent declarations at lines 240/241 whose slots `0x20`
+and `0x24` are the only two the sets do not share):**
+
+| probe | object | slots emitted | residue |
+|---|---|---|---|
+| swap the two **declarations** | **byte-identical** to shipped | unchanged (`0x24` first) | 8,628 |
+| swap the two **initialisers** | changed | rotated | **8,629** (+1) |
+
+So the distinction is sharp and worth stating: **declaration order is inert here, the initialiser
+sequence is not** -- which is exactly consistent with the table above and explains why Finding 63's
+declaration-reorder sweep came out flat while this axis moves. The shipped order is nonetheless kept,
+because every alternative measured is a loss.
+
 **And the divergence is smaller than "a permutation" suggests.** Counting uses of the two slots the sets
 do not share, over the whole 674-instruction body:
 

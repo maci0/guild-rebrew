@@ -49,6 +49,27 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-962: targeted the two rotated variables directly — declaration order is inert, initialiser order is not.**
+
+- **Round 961 narrowed the divergence to a three-reference rotation between `[esp+0x20]` and `[esp+0x24]`.**
+  This round identified the two variables involved (`dest_owner_entity` and `resolved_dynamic` — adjacent
+  declarations at lines 240/241) and tested each ordering axis on exactly them:
+  | probe | object vs shipped | slots | residue |
+  |---|---|---|---|
+  | swap the two **declarations** | **byte-identical** | unchanged | 8,628 |
+  | swap the two **initialisers** | changed | rotated | **8,629** (+1) |
+- **That is a clean, generalisable distinction and it resolves an apparent contradiction between rounds
+  960 and Finding 63.** Finding 63 swept *declaration reorder* and found it identical; round 960 found
+  *initialiser order* moves the map. Both are right: **declaration order is inert here, the initialiser
+  sequence is not.** Recorded in the allocator doc with the two-row table.
+- **Both probes reverted** (byte-neutral and a loss respectively). The shipped initialiser order stands.
+- **The axis is now measured on five orderings** (shipped, two ascending forms, reversed, and the
+  two-variable swap) with the shipped order best in every comparison, and the divergence characterised as
+  a **three-reference rotation between two adjacent dwords** rather than a wholesale permutation. If this
+  row is revisited, that is the target — not another order sweep.
+- **Measured:** probes reverted; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-961: third initialiser permutation measured (also a loss); the divergence narrowed to a three-reference rotation.**
 
 - **Round 960 established that initialiser order steers the slot map. This round measured the reverse
