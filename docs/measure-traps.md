@@ -140,6 +140,33 @@ the 8,634 as one cascade.
   `rebrew verify` reports **0 entries with a nonzero delta**, and `rebrew test` on one of the
   "suspects" returns `match_count 179/179, mismatches []` with `reloc_count 12`. The metadata
   is consistent; the raw diff was not.
+- **A field-offset histogram cannot type a struct, and merging two histograms invents a layout.**
+  Round 893 collected every `slot + 0xNN` offset in the tree (98 distinct, `0x170` alone in 12
+  files) and merged it with the field map written in `spiel62.c`'s header. The merge *collided* —
+  `parent_index` (2 bytes at `0x27`) ran into `season_born` at `0x28` — and the tempting reading
+  was "one of the two sources is wrong." **Neither is: they describe different records.**
+  Disassembly settles it, and a histogram cannot. At `0x1000fe86`:
+  ```
+  0x1000fe76  call gm_StartFilteredEntitySearch   ; result in eax
+  0x1000fe86  mov  cx, word ptr [eax + 0x27]      ; a SLOT INDEX, 2 bytes
+  0x1000fe8a  cmp  cx, 0xffff
+  0x1000fea0  lea  ecx, [ecx*4 + 0x100358a0]      ; scaled by 540 -> g_slot_table
+  ```
+  So the record `gm_StartFilteredEntitySearch` returns carries a slot index at `+0x27` and is
+  **not** a `g_slot_table` element. The `g_slot_table` element separately has a 4-byte field at
+  `+0x28` (`0x1000fc9c  mov [eax+0x28], ecx` after `dec ecx`, the season store). A word at `0x27`
+  and a dword at `0x28` cannot coexist in one struct, so two types are in play.
+  **Rules this yields:** (1) `offsetof`-style sweeps tell you which offsets are *used*, never
+  which struct they belong to — same-base offsets from different functions may not share a base;
+  (2) when two field maps collide, disassemble the *producer* of the pointer (here, the call that
+  fills `eax`) before deciding which map is wrong; (3) a half-remembered regex is not a negative
+  result — `mov [r+0x28],r32` appeared absent because the pattern only matched the `disp8`
+  encoding, and the store exists.
+- **A type defined in a header is not a type in use.** `EntityStruct` (`game/entity.h`) is declared
+  with `// SIZE 0x21c` and referenced **three times tree-wide — its own definition and two
+  comments**. `entity.h` is included by 9+ TUs, but only for its `extern` globals. Do not count a
+  header type as "the layout is defined"; grep for *instantiations and member accesses*, which is
+  zero here. The same check applied to `PlayerSlot` gives 13 references and is real.
   **Use the tool's own masked comparison.** `rebrew test`/`verify` already implement "equal
   after masking relocations" — do not re-derive it by hand from a prelayout copy. If a raw
   comparison against `build/server.dll` is wanted instead, that file is the *post*-postlink

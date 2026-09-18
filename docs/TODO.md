@@ -49,6 +49,47 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-893: the struct-layout audit — two records were being conflated, and the header type is dead code.**
+
+- **Returned to the round brief's actual mandate** (`.data`/types/structs, not `.text`): the `.data`
+  lane is exhausted (all 207 remaining items are `.idata`, unverifiable), so the substance left is
+  **types and structs**, which no round this session had touched.
+- **Measured the typing debt:** 425 raw `(char*)ptr + 0xNN` casts, 98 distinct offsets into the
+  entity record, no `field_0x` placeholders surviving. Top offsets by file spread: `0x170` in 12
+  files, `0x16c` in 10, `0x1cc` in 6 — genuinely multi-TU.
+- **Tested the naming doc's claim rather than accepting it** (the user challenged it). It says
+  "struct definitions are local per translation unit (no shared headers for game structs in the
+  decompiled code)". **Confirmed, with better evidence than the doc gives:** `LinkedNode` is
+  declared separately in `gm_RemoveLinkedNodeById.c` and `gm_RemoveObjectByType.c` with the **same
+  byte layout (0x43; `children` at 0x14, `next` at 0x3f) but different field decomposition** — one
+  has `short active; int id`, the other `unsigned short id`. A shared header would have forced them
+  identical; independent per-TU definitions look exactly like this. Also `tagRegion`/`tagEntry`
+  duplicated across `sbh_globals.c`/`sbh_pool.c`. **The doc is right, so lifting a shared
+  `SLOT_RECORD` would have been the wrong move** (and would have been the LNK4006 "shared type not
+  lifted / reimplemented" finding in reverse).
+- **Found the real defect instead: `EntityStruct` (`game/entity.h`) is declared and never used.**
+  Three references tree-wide — its definition plus two comments pointing at it. `entity.h` is
+  included by 9+ TUs but only for its `extern` globals. The header even says
+  `// SIZE 0x21c — 768 entries`, so the type *looks* done. It covers 7 fields; the tree uses 98
+  offsets. `PlayerSlot` by contrast has 13 references and is real.
+- **Found a genuine conflation bug — and it is in my own work first.** Merging the offset histogram
+  with the field map written in `spiel62.c`'s header collided (`parent_index` 2 bytes at `0x27`
+  runs into `season_born` at `0x28`), and the tempting reading was "one source is wrong".
+  **Disassembly says neither is: they are different records.** At `0x1000fe86`:
+  `call gm_StartFilteredEntitySearch` → `mov cx, word ptr [eax+0x27]` → `lea ecx,[ecx*4+0x100358a0]`.
+  The search result carries a **slot index** at `+0x27` and is not a `g_slot_table` element; the
+  slot separately has a 4-byte field at `+0x28`. A word at `0x27` and a dword at `0x28` cannot
+  coexist, so two types are in play and the `spiel62.c` map is a slot map, not a search-result map.
+- **A near-miss worth recording:** my first check for `mov [r+0x28],r32` in the reference returned
+  0 hits and I nearly concluded `season_born` was invented. The regex only matched the `disp8`
+  encoding; the store exists (`0x1000fc9c`). A half-remembered pattern is not a negative result.
+- **Reverted the header draft I started** — my own `SLOT_RECORD` had a size error under MSVC6
+  (compiler aligns `int`/`float`, so byte-counted pads drift) and would have duplicated a layout
+  the naming doc says was per-TU anyway. `git status` clean; nothing landed.
+- **Recorded:** measure-traps §6, three new traps (offset histograms cannot type a struct; two
+  colliding field maps mean two structs until disassembly says otherwise; a header type is not a
+  type in use). Gate pass, residue 8,634 unchanged.
+
 **Round-892: probed `ServerMainThread`'s field-offset divergence; the frame is identical, so it is allocation, not layout. Three spellings inert.**
 
 - **Applied round 891's budget filter and picked the largest free carrier not yet probed in this
