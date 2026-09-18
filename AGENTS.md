@@ -180,9 +180,18 @@ link and find out; do not reason about which one deserves trust
 - **A duplicate-symbol warning is a finding, not noise.** `LNK4006` usually
   means either the same global is defined in several translation units, or
   something the library already provides has been reimplemented. Resolve it
-  rather than silencing it with `/FORCE:MULTIPLE`. Two cases remain here
-  (`___app_type`, `__amsg_exit`): `dllmain.c` calls `_CRT_INIT`, which pulls
-  LIBCMT `dllcrt0.obj`, and that object defines both.
+  rather than silencing it with `/FORCE:MULTIPLE`. **Measured on a full
+  `--clean-first` rebuild (round 910): six `LNK4006` occurrences over three
+  symbols, all library displacement rather than game-TU duplication** —
+  `_putc` (`LIBCMT.lib(fputc.obj)` against `link_stubs.c.obj`), `__amsg_exit`
+  and `___app_type` (both `LIBCMT.lib(dllcrt0.obj)` against `amsg_exit.c.obj`
+  and `link_stubs.c.obj`): `dllmain.c` calls `_CRT_INIT`, which pulls
+  `dllcrt0.obj`. Earlier notes here said "two cases"; the real count is three
+  symbols, and note that an *incremental* build prints none of them, so the
+  count is only visible after `--clean-first`. When triaging a new warning,
+  check whether the losing definition is a `LIBCMT.lib(...)` object — that is
+  the displacement pattern; a warning between two game `.obj`s is the
+  duplication pattern the rule is about.
 - **Compare the import table against the reference** after any link change.
   An extra import means a library object came in that the original did not
   have; a missing one means the opposite. The reference has exactly 100.

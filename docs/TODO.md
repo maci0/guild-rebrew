@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-910: measured the real `LNK4006` baseline — six occurrences, three symbols, all library displacement.**
+
+- **Tried:** round 909 failed on `LNK4006`/`LNK2001` after a header change, which made the *baseline*
+  question urgent — how many duplicate-symbol warnings does the shipped tree already have? `AGENTS.md`
+  said "two cases remain (`___app_type`, `__amsg_exit`)".
+- **Measured on a full `--clean-first` rebuild: six occurrences over three symbols**, not two:
+  - `_putc` — `LIBCMT.lib(fputc.obj)` against `link_stubs.c.obj`
+  - `__amsg_exit` and `___app_type` — both `LIBCMT.lib(dllcrt0.obj)` against `amsg_exit.c.obj` and
+    `link_stubs.c.obj` (via `_CRT_INIT`, which pulls `dllcrt0.obj`)
+  **All three are library displacement, not game-TU duplication.**
+- **A measurement subtlety worth recording: an incremental build prints none of them.** The
+  `gate-build.log` from a no-op `cmake --build` is 31 bytes (`[100%] Built target server_dll`), so
+  three rounds of gate runs showed zero warnings while the tree actually has six. **The count is only
+  visible after `--clean-first`** — the same class as round 894's transient `C1083`, where the build
+  log was mistaken for a measurement.
+- **Corrected `AGENTS.md`** with the measured count, the `LIBCMT.lib(...)` discriminator, and the
+  `--clean-first` caveat. The triage rule now distinguishes the two patterns the original text
+  conflated: a warning whose *losing* definition is a `LIBCMT.lib(...)` object is displacement (here,
+  benign and longstanding); a warning **between two game `.obj`s** is the duplication the rule is
+  about — and that is what round 909 produced.
+- **Attempted to falsify the gate's coverage of that second pattern, and did not succeed.** Defined
+  `g_current_season` a second time in `spiel5.c` (whose twin lives in `gm_NextEntityQueryMatch.c`),
+  first uninitialised then with an initialiser: **the linker emitted no new warning in either case,
+  still 6 of 6**. So I cannot claim the gate misses it — I could not construct the trigger. Recorded
+  as an open question rather than a finding, and the probe was reverted.
+- **Also confirmed the gate does not grep for `LNK4006`** (its compile check matches
+  `error C[0-9]+|error LNK` only), so whether a duplicate surfaces depends on the linker escalating
+  it to an error or demoting a function, as it did in round 909's `LNK2001`.
+- **Measured:** gate pass on a clean rebuild — residue **8,634**, raw-link `.data` **21,836**,
+  verify 281/283, byte-matched 264, imports 100, data extents 195. No source change.
+
 **Round-909: tried lifting 79 duplicated globals into a header — the single-symbol probe was +0, but the full lift broke the link and was reverted.**
 
 - **Tried the mandate's own criterion:** "if two or more TUs use a layout, it leaves the .c file."

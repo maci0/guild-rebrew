@@ -491,6 +491,15 @@ before comparing two figures.
 
 ## 9. Build and verify side effects that burn
 
+- **A no-op `cmake --build` prints no linker warnings, so the build log is not a warning census
+  (round 910).** `gate.sh` writes `.scratch/gate-build.log` on every run, and when nothing needs
+  rebuilding that file contains one line: `[100%] Built target server_dll`. The shipped tree actually
+  emits **six `LNK4006` warnings over three symbols** (`_putc`, `__amsg_exit`, `___app_type`, all
+  `LIBCMT.lib(...)` against a local object), and they appear only after
+  `cmake --build build --clean-first`. Grepping an incremental log for warnings therefore returns
+  "zero" on a tree that has six — and that log is exactly what the gate's compile check reads.
+  **Rule: to count warnings, force a clean rebuild first; otherwise you are reading a cache.**
+  Same family as the transient `C1083` below — a build log mistaken for a measurement.
 - **A lone `C1083: Cannot open compiler intermediate file '<garbage>.tmp'` with no source location
   is the build harness, not the source (round 894).** It appeared in a `gate.sh` run immediately
   after a header change and read exactly like a compile-error regression introduced by that change.
