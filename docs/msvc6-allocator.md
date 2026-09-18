@@ -3,28 +3,34 @@
 Reverse-engineering notes on how the MSVC 6.0 (CL 12.00) code generator
 assigns `eax/ecx/edx` vs the callee-saved `ebx/esi/edi`, derived from
 minimal probe functions compiled against the real toolchain
-(`rebrew/msvc:6.0-win32`, wine) and byte-compared with the original
+(`rebrew/msvc:6.0-sp6-win32`, wine) and byte-compared with the original
 `server.dll` (target `gm_ff_Objekt` 0x10016460, `gm_NextEntityQueryMatch`
 0x10016290 and friends).
 
-This complements `rebrew/docs/codegen/msvc/msvc-6.md`. Where that doc
-describes instruction *shapes*, this one documents the *allocation
-decisions* that pick registers — which is what decides whether a
-C function compiles to the original bytes at all.
+**Read this first.** Findings 1–8e and the "Practical recipe" below are
+`gm_ff_Objekt` lab notes. Current GRA policy is `codegen-walls.md` §1 plus
+Findings 52–65: callee-saved *homes* are not a C knob. Function status is
+`src/rebrew-functions.toml`, not a "fenced-naked" sentence later in this
+file. There are no Findings 9–11.
+
+This complements the rebrew package doc `docs/codegen/msvc/msvc-6.md`
+(not in this workspace). This file documents the *allocation decisions*
+that pick registers.
 
 ## Methodology
 
-Every probe is a self-contained `.c` with the same externs as the target
-function and one candidate body. It is compiled in the project build dir:
+Ship path:
 
 ```sh
-cd build
-cp /tmp/probeNN.c _v.c
-/home/maci/.local/bin/rebrew-cmake-cl /nologo \
-  -I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll \
-  /W3 -MT /O2 /Gd /Fo"_v.obj" /Fd. -c _v.c
-objdump -d _v.obj | sed -n '/<_gm_ff_Objekt>:/,/^$/p'
+python3 scripts/whathas.py 0x<VA>
+python3 scripts/probe_function.py --va 0x<VA> --file <file.c>
+bash scripts/linktest.sh <file.c>
 ```
+
+Isolated mechanism probes go in `.scratch/` via `rebrew-cmake-cl` on PATH
+(same wrapper CMake uses). Do not copy onto `build/_v.c` or hardcode
+`/home/maci/.local/bin`. Image is SP6 (`12.00.8804`); notes that say
+"8168 will not reproduce" describe a different backend.
 
 Reference bytes come from `rebrew asm 0x10016460 --size 200 --json`.
 
@@ -210,6 +216,10 @@ from the error's `xor eax,eax`; query before error → `edx` reuse).
 
 ## Practical recipe for writing matching C
 
+Scoped to `gm_ff_Objekt` (0x10016460), which is RELOC in toml. Do not
+treat flag `dl`/`bl` or post-loop `return 0` merge as GRA law. For
+homes, stop at walls §1 / Findings 62–64.
+
 1. Identify every literal `return 0` in the original and their *paths*.
    Any post-loop literal-0 return reachable without a call in between will
    merge with the entry return and flip the whole allocation. Restructure
@@ -357,6 +367,8 @@ never take the address of a base you also keep across a call; pass the
 value.
 
 ## Finding 8e — a CONVERTIBLE recipe (verified)
+
+(No Findings 9, 10, or 11. Next numbered finding is 12.)
 
 `amt_ValidateOfficeCandidate` (0x1000b1c0, 205B) converted to C with a
 **RELOC 205/205** match. The winning recipe, in order:
@@ -2756,7 +2768,7 @@ nothing, and *deleting* live locals does not necessarily shrink the frame.
   reversed order, char-first, and several retypings are all byte-identical, and
   deleting live locals does not shrink its 0x28c frame.
 - `gm_ObjectsAvailble` (0x10015f70) — 10 declaration orders byte-identical.
-- `ls_LoadBuildingEntityState` (0x128f0) — the two slots the reference has at
+- `ls_LoadBuildingEntityState` (0x100128f0) — the two slots the reference has at
   `[esp+0x14]`/`[esp+0x18]` cannot be swapped by declaring them in the other
   order.
 
@@ -3109,7 +3121,7 @@ This is the practical caution for the `volatile`-at-use-site lever generally: it
 (section 71 of the shapes doc, and the round-143 `ls_` win), but it is *per variable*, so a
 sweep that qualifies "the same kind of thing" elsewhere will not transfer.
 
-**Amendment (round 248) — the dominant term in `matched`'s one-sided gap is REL32 *call*
+**Amendment to Finding 59 (round 248) — the dominant term in `matched`'s one-sided gap is REL32 *call*
 relocations, not DIR32 data addresses.**  Finding 59 above attributed the gap to msvc6
 relocating memory operands but not absolute immediates.  Measured on two more functions, the
 larger term is simpler: **every `call` to a local function carries a COFF `REL32` in our
@@ -3471,3 +3483,53 @@ as extra pushes and got a flat 5 for the wrong reason. Count the *body*, not the
 
 Probe recipe as Finding 64, plus: to see a spill, grep the loop body for the same
 `0xNN(%esp)` slot appearing as both a load and a store.
+
+## Finding 66 — `CrashDump`'s 2-register frame difference is FOUR deferred restores, not a prologue shape (round 992)
+
+Round 927 recorded the sharpest prior statement of this carrier's first divergence: *"the frame difference is
+2 extra callee-saved registers, not merely 4 stack bytes"* — the reference is
+`sub esp,0x280; push ebp; push esi`, ours is `sub esp,0x284; push ebx; push ebp; push esi; push edi`.
+Round 992 located **where the reference's `ebx`/`edi` actually live**, and it is not the prologue.
+
+**The reference saves `ebx`/`edi` at `0x1000282c` — ~190 bytes into the function — and restores them at four
+separate sites:**
+
+```
+0x1000282c  push ebx
+0x1000282d  push edi          <- deferred save, once
+...
+0x10002dac  pop edi
+0x10002dad  pop ebx
+0x10002dae  jmp 0x10002e66    <- restore site 1
+
+0x10002de5  pop edi
+0x10002de6  pop ebx
+0x10002de7  jmp 0x10002e66    <- restore site 2
+
+0x10002e17  pop edi
+0x10002e18  pop ebx
+0x10002e19  jmp 0x10002e66    <- restore site 3
+
+0x10002e49  pop edi
+0x10002e4a  pop ebx
+0x10002e4b  jmp 0x10002e66    <- restore site 4
+```
+
+**All four restores are immediately preceded by `call dword ptr [0x10024010]` (`CloseHandle`)** and all jump
+to the common exit `0x10002e66`. Our build instead saves both registers in the prologue and emits a single
+interleaved epilogue (`pop edi; pop esi; pop ebp; pop ebx` straddling `test eax,eax` at `0x10002e68-0x10002e6d`).
+
+**Why this matters and what it changes.** It converts "2 extra callee-saved registers" from a *frame
+observation* into a **liveness fact**: in the reference, `ebx` and `edi` are live only across the region
+between `0x1000282c` and the four `CloseHandle` cleanups — i.e. across the mini-dump walk and its error
+paths. Our C keeps whatever holds `ebx`/`edi` live across the whole function, so msvc6 allocates them at
+entry. §81's two named levers are exactly this; the new information is that the **restore count is four and
+they all sit on `CloseHandle` sites**, so the liveness window is bounded by the cleanup paths, not by the
+frame.
+
+**Not yet reachable from source.** The carrier is at its span (2128 = reference span exactly, verified this
+round), and shapes §81 records 8 declaration permutations and 11 flag combinations already exhausted, with
+the round-174 attempt that hit `0x280` exactly losing **+66**. Recorded so the next attempt starts from the
+liveness window rather than from the frame number.
+
+**Measured this round:** no source edit; residue 8,628 unchanged.
