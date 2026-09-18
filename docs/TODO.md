@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-950: crossed the residue map with the span map — exactly one carrier can absorb growth, and it has no better variant.**
+
+- **Round 949 established every residue carrier is at or over its span**, which raised the follow-up:
+  *which* of them, if any, could take a size-increasing change? Cross-referenced the per-function
+  residue attribution against `object_span_check.py`'s per-object slack:
+  | object | slack | residue |
+  |---|---|---|
+  | `vfs_OpenStream.c.obj` | **-48** | **238** |
+  | `srv_SeedRandom.c.obj` | -42 | 0 |
+  | `vfs2.c.obj` | -288 | 0 |
+  | `initterm.c.obj` | -347 | 0 |
+  | `sbh_pool.c.obj` | -2590 | 0 |
+  | `m_alloc2.c.obj` | -5376 | 0 |
+  | all other carriers | **0 (exactly at span)** | **8,390 of 8,628 (97%)** |
+- **So exactly one residue carrier has headroom**, and the other five under-span objects carry no residue
+  at all. Two of those five (`srv_SeedRandom`, and `mlock` from round 949) are "under span" only because
+  their files define more functions than are tracked — the same artifact, not real room.
+- **`vfs_OpenStream`'s headroom is deliberate and already spent.** Its header records that the
+  size-correct 701-byte form exists and scores **277 against the shipped 450**, and that the flag axis is
+  closed for it independently: "`/G3`..`/G4` with `/Gd /Oy /Op` … so there is no CFLAGS lever". Verified
+  its object has a single 0x2c0 `.text` section against a 752-byte span, so the -48 is real, not the
+  untracked-function artifact.
+- **Recorded as `codegen-walls.md` §12**, with the two consequences stated as a pre-probe filter: a
+  carrier at its span can only be improved by a size-neutral or size-reducing change, and this is why
+  `/Ow` measured +485 on `gm_AllocGebaeude` and collapsed on `vfs_OpenStream` while paying -5 on
+  `gv_ExAllocGraveyardWorker`.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-949: measured slack per carrier; the span check's only "OVER" is an untracked-function artifact.**
 
 - **Round 948 showed `cm_ExCopyEntityData` sits exactly at its 912-byte span**, which raised the useful

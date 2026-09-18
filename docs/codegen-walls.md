@@ -307,6 +307,37 @@ band is worth 327 bytes. The only carriers worth a round are the top five, and e
 measured wall: §81/§1 for `CrashDump` and `gm_AllocSpieler`, allocator Finding 63 for `cm_ExSellObjekt`,
 shapes §122 for `ls_LoadBuildingEntityState`.
 
+### 12. Only one residue carrier has room to grow (round 950)
+
+Section 11 mapped the residue by function; `object_span_check.py` maps it by *budget*. Cross-referencing
+the two gives the constraint that decides which edits are even admissible:
+
+| object | span | text | slack | residue it carries |
+|---|---|---|---|---|
+| `vfs_OpenStream.c.obj` | 752 | 704 | **-48** | **238** |
+| `srv_SeedRandom.c.obj` | 58 | 16 | -42 | 0 |
+| `vfs2.c.obj` | 688 | 400 | -288 | 0 |
+| `initterm.c.obj` | 418 | 71 | -347 | 0 |
+| `sbh_pool.c.obj` | 7146 | 4556 | -2590 | 0 |
+| `m_alloc2.c.obj` | 6080 | 704 | -5376 | 0 |
+| *(all other carriers)* | — | — | **exactly at span** | 8,390 of 8,628 |
+
+**Exactly one residue carrier -- `vfs_OpenStream` -- has headroom; the other five under-span objects carry
+no residue at all.** Every other carrier sits precisely at its span, so *any* edit that grows it moves
+every later symbol and fails the composition check. That is not a hypothesis: it is why `/Ow` on
+`gm_AllocGebaeude` costs **+485** and on `vfs_OpenStream` collapses outright, while the same flag on
+`gv_ExAllocGraveyardWorker` (at span, but net-shrinking) pays −5.
+
+**Two consequences for targeting.**
+
+1. **A carrier at its span can only be improved by a change that is size-neutral or size-reducing.** This
+   is a hard filter that has been rediscovered by measurement several times (`gm_AllocGebaeude` +485,
+   `vfs_OpenStream` collapse); apply it *before* probing, not after.
+2. **`vfs_OpenStream` is the one carrier where a size-increasing change is affordable** -- and its
+   header already records that every such variant was tried and is worse (the 701-byte size-correct form
+   scores 277 against the shipped 450, and "`/G3`..`/G4` with `/Gd /Oy /Op` … so there is no CFLAGS
+   lever"). So the headroom exists and is deliberately unused.
+
 **Read this as a limit of the toolchain-plus-constraints, not of the source.** Every function
 compiles, links at the reference's exact VA, and the deliverable is byte-identical outside
 `.text` (8,634 of 8,634 differing bytes are inside `.text`; `.data`, `.rdata`, `.reloc`,
