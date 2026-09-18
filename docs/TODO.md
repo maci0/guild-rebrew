@@ -1,8 +1,23 @@
 # Blockers — 100% Round-Trip Goal
 
-## CURRENT STATE (kept current; read this before the history below)
+## CURRENT STATE
 
-### Session map, rounds 254–431 (2026-09-14; residue 9,209 → 8,666 via 14 landed wins)
+Live numbers are `scripts/gate.sh` defaults. A residue, verify count, or `.text` VirtualSize written as "today" anywhere else is stale until it matches the gate. Address lookup: `python3 scripts/whathas.py 0x<VA>`.
+
+| Quantity | Value | Source |
+|---|---|---|
+| verify `passed` (EXACT+RELOC+PROVEN) | 281 | `BASELINE` |
+| byte-matched (EXACT+RELOC) | 264 | `BYTE_BASELINE` |
+| `.text` residue | 8,628 | `RESIDUE_BASELINE` |
+| raw-link `.data` divergence | 21,481 | `DATA_BASELINE` |
+| imports | 100 | reference PE |
+| reference `.text` VirtualSize | `0x22846` | `original/Server/server.dll` |
+
+**Start here:** the latest `**Round-N:**` heading under Continuation notes (Round-975 as of this dashboard). The 254–431 session map below is archive. Object scores (`match_count`, `aligned`) are not the ship ruler — `scripts/linktest.sh`. Do not "fix" `gm_AllocSpieler` slot[9]; see `docs/msvc6-c-shapes.md` §110 and that file's header.
+
+### Archive: session map, rounds 254–431 (2026-09-14; residue 9,209 → 8,666)
+
+Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "No spelling change has ever landed" is this window only. "data tools N/A" is false (`DATA_BASELINE` exists). CrashDump is not a live bug (fixed at +0; see `docs/behavioral-verdicts.md`).
 
 - **Landed wins (kept, all rebuilt-confirmed):** ExSell dest-object
   sink **-173** (§84) · ExSell season-block move -60 · LS zero-hoist
@@ -47,7 +62,7 @@
 - **Docs:** lint 0/0 first clean · shapes §§77–81 · Findings 62–63 ·
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
-### Continuation notes (written at the end of a long session; start here)
+### Continuation notes (live log, newest first — start here)
 
 **Round-975: replaced the class proxy with each carrier's real first divergence; found a second misclassification.**
 
@@ -27458,3 +27473,30 @@ shape can ship. The header already names a candidate worth 11 — 5 short.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Probe reverted; tree clean; no baseline moved.
+
+## Round 986 — the "bankable 11-byte fix" is actually +343; three stale-header instances now confirmed
+
+Round 985's finding set the task: free 16 bytes in `gm_AllocSpieler`'s citizen path. The header names an
+11-byte candidate (`gm_AllocSpieler.c:391-399`) — the `n = *(int*) 0x1003542c;` collapse that reproduces
+four opcodes verbatim — described as "bankable only once those 11 bytes are recovered elsewhere".
+
+Applied it and measured: **+343** at the link, against a header claim of 11. The object stays at span 3696,
+so the deficit is not a frame issue. The edit is 31x worse than recorded, and the "recover 11 bytes" plan it
+invites would not have helped even if the 11 had been found.
+
+| metric | header claim | measured |
+|---|---|---|
+| `.text` residue delta | ≈ +11 | **+343** |
+
+**Third instance of the stale-header class** (982: −53 → +505; 985: "bankable" → span still overflowed;
+986: 11 → +343). Recorded as workflow-traps §14 with the rule stated explicitly: every number in a header is
+a historical measurement against a baseline that no longer exists, so it is a hypothesis to re-measure, never
+a budget to plan against.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Probe reverted; `src/` unmodified.
+
+**Note:** four tracked files were already modified when this round started (`AGENTS.md`, `README.md`,
+`docs/TODO.md`, `scripts/gate.sh`) — accurate documentation corrections from a parallel session, including
+fixes to `AGENTS.md`'s `.text`-shortfall paragraph that reflect this session's findings. Gate passes with
+them in place. Left untouched and uncommitted by this round; they are not mine to claim.

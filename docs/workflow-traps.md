@@ -532,3 +532,45 @@ closes the hole.
 
 **Fix for probes:** pass an explicit listing path, `-Fa.scratch/<name>.asm`, or run with
 `cd .scratch && rebrew-cmake-cl ... <file>`. Verified locally that `/Fa` with a path does redirect.
+
+## 14. A header's "bankable once N bytes are recovered" can itself be stale (round 986)
+
+`gm_AllocSpieler.c:391-399` records a fix as **costing 11 bytes and being bankable once those bytes are
+recovered elsewhere in the citizen path**:
+
+```
+ * But it costs 11 bytes (real body 3689 -> 3678), which
+ * desyncs the whole tail: matched 766 -> 485, aligned
+ * 662 -> 637, rebrew test 1004 -> 648, status STUB ->
+ * SIZE_MISMATCH.  Bankable only once those 11 bytes are
+ * recovered elsewhere in the citizen path.
+```
+
+Round 986 applied exactly that edit (`n = *(int*) 0x1003542c;` then the two stores through `n`) and measured
+it at the link:
+
+| metric | claimed by the header | measured (round 986) |
+|---|---|---|
+| object span | — | **3696, still exactly at span** |
+| `.text` residue delta | "costs 11 bytes", i.e. expected ≈ +11 | **+343** |
+
+So the edit is **31x worse than recorded**, and the "recover 11 bytes elsewhere" plan it invites would not
+have helped even if the 11 bytes had been found. The header's numbers date from an earlier tree state; the
+carrier has since been reshaped (round 941's `/Ow`, the round-178/179 tail fixes), and the same edit now
+lands differently.
+
+**This is the third instance of the same class**, and the pattern is now unambiguous:
+
+| round | stale claim | claimed | measured |
+|---|---|---|---|
+| 982 | `ls_LoadBuildingEntityState` hoist | −53 | **+505** |
+| 985 | `gm_AllocSpieler` +16 fix | "bankable" | span still overflowed |
+| 986 | `gm_AllocSpieler` 11-byte fix | 11 bytes | **+343** |
+
+**The rule, stated so it stops being relearned:** in this tree, *any* number in a header comment — including
+one that describes the cost of a fix rather than the fix itself — is a historical measurement against a
+baseline that no longer exists. Treat every recorded delta as a **hypothesis to re-measure**, never as a
+budget to plan against. A round that budgets work from a header's byte figure is planning on noise.
+
+`scripts/linktest.sh` makes the re-measurement cost one command; there is no excuse for planning on the
+number instead.
