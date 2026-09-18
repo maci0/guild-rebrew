@@ -771,3 +771,35 @@ the difference between a 1-item fix (done) and a 20-item vein (does not exist).
 and the reference does push one shared address (`0x10031004`) at every one of them — so the shape was
 right and only the definition was missing. Rewritten to the `(char*) 0x10031004` cast the rest of the
 tree uses for that string: **byte-neutral**, 11 undefined operands removed.
+
+
+## 11. A stale operand can be a *consequence*, not a cause — read the fixer before chasing it (round 932)
+
+Round 931 found an operand that read `[0x11766664]` (the stub region) where the reference reads
+`[0x101de450]`, fixed the symbol name, and round 932 removed the duplicate definition that was
+displacing it — and the operand **still** did not move. Disassembling `scripts/postlink_residual.py`
+explains it and saves the next round from the same chase:
+
+```python
+def _same(lo, hi):
+    return all(ref[i] == text[i] for i in range(lo, hi) if i not in slots)
+...
+if not _same(i - 12, i) or not _same(i + 4, i + 16):
+    continue          # do NOT rewrite this slot
+struct.pack_into("<I", text, i, val)
+```
+
+The postlink operand fixer rewrites a slot **only when the 12 bytes before and 16 bytes after it already
+match the reference**. At a site inside a function that has diverged, the neighbourhood does not match,
+so the fixer correctly declines and the slot keeps whatever our link produced. **The stale operand is
+downstream of the function's divergence; fixing the symbol changes nothing about placement.**
+
+Measured on `cm_ExSellObjekt`: aligning the two instruction streams by mnemonic+operand shows **674
+instructions on each side** with the first differences being stack-slot offsets
+(`mov [esp+0x14],edi` vs `mov [esp+0x24],edi`). No missing code, no wrong instruction — different slot
+numbers, which is allocator Finding 63's class.
+
+**So: before treating a mismatched operand as the target, check whether the fixer would even accept a
+rewrite there.** If the surrounding bytes differ, the operand is a readout of the divergence, not a
+lever on it. The cheap test is the locality window itself — compare 12 bytes before and 16 after the
+slot on both sides.

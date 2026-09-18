@@ -49,6 +49,33 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-932: removed the duplicate definition; found `cm_ExSellObjekt`'s residue is stack-slot numbering, not missing code.**
+
+- **Removed `int g_unknown_1de450 = 0;` from `src/link_stubs.c`** — round 931's side finding. It was a
+  second definition of the same `.data` address as `char* g_item_def_table` (line 78) and wrongly typed
+  `int` against that `char*`. Builds clean, `verify --full` unchanged at 281/283, and **byte-neutral:
+  residue 8,633 and raw-link `.data` 21,481, confirmed by a full `gate.sh`.** One symbol per address now,
+  which is the naming rule's "one word, one meaning" satisfied at the data level.
+- **The expected operand improvement did not appear, and the reason is worth recording.** The operand is
+  still `[0x100367bc]`; the reference wants `[0x101de450]`. Reading
+  `scripts/postlink_residual.py` explains why nothing source-side can fix it: the operand fixer
+  **only rewrites a slot when 12 bytes before and 4-16 bytes after it already match the reference**
+  (`_same(...)` locality test). At that slot the neighbourhood does not match, so the fixer correctly
+  refuses, and the slot stays stale. This is a *consequence* of the function's divergence, not a cause.
+- **And the divergence itself is now precisely characterized.** Aligning `cm_ExSellObjekt`'s instruction
+  streams by mnemonic+operand: **both sides decode to exactly 674 instructions**, and the first
+  divergences are pure stack-slot offsets —
+  `mov [esp+0x14],edi` vs `mov [esp+0x24],edi`, `mov [esp+0x2c],edi` vs `mov [esp+0x30],edi`,
+  `mov [esp+0x18],edi` vs `mov [esp+0x14],edi`. So there is **no missing code and no bad instruction**:
+  the two bodies are instruction-for-instruction the same length and differ in how msvc6 numbered the
+  frame slots. That is allocator Findings 55/63's class (the frame can be right while the slot map is
+  not), and it is why the operand fixer cannot reach the slot.
+- **The observable 2-byte lag** (`0x1000dc50` in the reference is `mov ecx,[esp+0x14]`, in ours `0x1000dc52`)
+  follows from those slot-offset differences shifting displacements, not from a bytes-short body — the
+  same caution shapes §122 records for a different function.
+- **Measured:** gate pass, residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100, lint 188/188.
+
 **Round-931: found an unattested-anonymous global that already had an attested name — and a duplicate definition of it.**
 
 - **Applied the instrument that has actually produced a win (round 924's operand reading) to a carrier I had

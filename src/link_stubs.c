@@ -208,7 +208,11 @@ int g_relationship_matrix_primary = 0;
 int g_relationship_matrix_secondary = 0;
 int g_sim_ents = 0;
 int g_office_role_templates = 0;
-int g_unknown_1de450 = 0;
+/* g_unknown_1de450 removed round 932: it was a SECOND definition of the same
+   address as `char* g_item_def_table` above (line 78), and wrongly typed `int`
+   against that `char*`.  Two symbols for one .data address is the naming rule's
+   "one word, one meaning" broken, and it is why operands naming it resolved into
+   the stub region instead of the attested symbol. */
 /* inflate_blocks / inflate_blocks_free are provided by the vendored
  * references/zlib-1.1.3/infblock.c; stubs here would shadow the real ones. */
 int g_chain_handler_table[1] = {0};
