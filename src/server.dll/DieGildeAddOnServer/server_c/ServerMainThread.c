@@ -46,8 +46,10 @@ extern int g_tick_rate;    /* 0x11764088 */
  * instructions.  The order-based diff (.scratch/ndiff.py) aligns 601 of the
  * 627 (ndiff-era figure; 2026-09-13 probe-aligned 576 — same wall, newer
  * count) and leaves 19 hunks of one to five instructions: 10 reorderings, one
- * register name, and 8 substitutions (`lea esi,[eax+ecx]` against
- * `add esi,eax`, a `je`/`jne` polarity swap, an extra global reload).  An
+ * register name, and 8 substitutions (the TARGET has `lea esi,[eax+ecx]` and
+ * we emit `add esi,eax` -- round 955 checked the direction, which this note
+ * previously stated ambiguously; a `je`/`jne` polarity swap, an extra global
+ * reload).  An
  * adjacent-statement hill climb over the whole body finds no improving move,
  * so statement order is exhausted as a lever.
  *
@@ -73,7 +75,9 @@ extern int g_tick_rate;    /* 0x11764088 */
  * target's exact length, and 601 of 627 instructions align (same ndiff-era
  * figure as above; probe-aligned 576 now).  The residue is
  * register allocation and block layout that no C89 spelling has steered:
- * `lea esi,[eax+ecx]` where msvc6 emits `add esi,eax`, a `je`/`jne` swap on
+ * `lea esi,[eax+ecx]` in the target where we emit `add esi,eax` (verified
+ * round 955 by decoding each stream from its own entry point: target
+ * 0x1000984b `lea`, ours 0x10009845 `add`), a `je`/`jne` swap on
  * the same two successors, a spilled global at [esp+0x28] against the
  * target's [esp+0x20], and ten reorderings of independent instructions.
  * The earlier "single-instruction 3-byte deficit" reading here described a
@@ -91,6 +95,11 @@ extern int g_tick_rate;    /* 0x11764088 */
  *     `sbb al,al`/`and al,bl` to `sbb eax,eax`/`and eax,ebx`. 1122.
  *   - payload_src/payload_dst locals inlined into the `memcpy` call:
  *     1120, worse. Reverted.
+ *   - payload_src respelled as a SUBSCRIPT (`&((unsigned int*) *(void**)
+ *     0x101deae8)[sent_bytes >> 2]`) to try to force the target's single
+ *     `lea esi,[eax+ecx]` fold: **residue 8,628 -> 9,540 (+912)**, the worst
+ *     single regression measured on this function. Reverted (round 955). The
+ *     `add`/`lea` choice is not reachable by respelling the address.
  *   - loop rewritten as `do/while` and as `for(;;)` with two breaks:
  *     byte-identical output both times; MSVC canonicalises this loop
  *     regardless of the source shape.

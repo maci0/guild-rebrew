@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-955: corrected a wrong direction in `ServerMainThread`'s wall description; the respelling it implied measures +912.**
+
+- **`rebrew todo` names only two real items** (`gm_AllocSpieler`, closed rounds 952-953, and
+  `ServerMainThread`); the other 18 are the `__imp_*` IAT slots already shown to be false positives.
+  So this round examined the second item, the last unresidue-audited carrier.
+- **The header described its `lea`/`add` residual ambiguously, and the direction it implied is
+  backwards.** Both notes read "`lea esi,[eax+ecx]` where msvc6 emits `add esi,eax`", which parses as
+  *ours = lea, target = add*. **Decoding each stream from its own function entry** (the only valid
+  method — decoding the reference at our offset produces garbage) gives the opposite:
+  ```
+  target  0x1000984b  lea esi,[eax+ecx]
+  ours    0x10009845  add esi,eax
+  ```
+  Corrected in both places, with the addresses and the method recorded.
+- **Then tested the respelling the ambiguous note implied**, under round 950's span filter (both forms
+  are 2-3 bytes, so a shrink is admissible): `payload_src` respelled as a subscript,
+  `&((unsigned int*) *(void**) 0x101deae8)[sent_bytes >> 2]`, to try to force the target's single-`lea`
+  fold. **Residue 8,628 -> 9,540 (+912)** — the worst single regression measured on this function.
+  Reverted, and recorded under the header's failed-attempts list so it is not retried.
+- **Also re-confirmed the two rules this round depended on.** (1) Decode each image from its own entry
+  point: my first `lea`/`add` "match" came from reading the reference at our VA, where the stream had
+  desynced and the hit was coincidental — measure-traps §6g's lesson in a new guise. (2) `rebrew todo`'s
+  20 items are 2 real plus 18 IAT false positives, so ROI order has to be read with that filter.
+- **Measured:** probe reverted, comments corrected; gate pass; residue **8,628**, raw-link `.data`
+  **21,481**, verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-954: verified the smallest remaining residual is closed — ~1,030 documented compiles on 5 bytes.**
 
 - **Went after the most bounded gap left: `gm_CalculateProductionValue`'s 5 bytes** (98.7% match, the
