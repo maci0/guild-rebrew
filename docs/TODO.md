@@ -49,6 +49,28 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-944: closed the last two flag candidates — `/G6` documented, `/Oy-` confirmed; found a flag-grep trap. No source change.**
+
+- **Round 943's inventory said `m_AllocTracked` "carries `/G6 /Oy`, the only file in the tree with
+  either".** Followed both up:
+  - **`/G6` is already closed** — `codegen-walls.md` §130 records it in the repeatedly-swept set with
+    "**`/G6` crashes to 135 at object 1056**", and allocator doc 846/860 records `/G3 /G4 /G5 /G6 /GB`
+    in a 96-combination sweep with zero hits. Independently checked the premise: **the reference
+    contains zero `cmov` instructions**, so a Pentium Pro codegen flag cannot be the original's setting.
+  - **`/Oy`: the file carries `/Oy-`, not `/Oy`.** The metadata says `cflags = "/O2 /Gd /G6 /Oy-"` and
+    the emitted command line reads `/O2 /Gd /G6 /Oy-` — they agree. Round 943's inventory row was wrong.
+- **Root cause of that wrong row, and a method trap worth its own entry: `/Oy` is a prefix of `/Oy-`.**
+  `grep -oE '/Oy'` matches inside the disabled form. Same for every negated MSVC flag spelled with a
+  trailing `-` (`/Og-`, `/Ot-`) and for `X`/`X-` pairs. **Match with a terminator**
+  (`grep -oE '/Oy([^A-Za-z0-9]|$)'`) **and audit from the raw command line**, not from an extracted
+  list. Recorded as measure-traps §6f-ter. This is the third CMake/flag trap this session and the
+  second that produced a *plausible but wrong finding* rather than a build error.
+- **Net effect: the flag axis is closed with no open candidates.** `/Ow` 3-of-12 gains, `/Oy`
+  inert-and-inapplicable, `/G6` documented-crash and precluded by the absent `cmov`, the `/O*` and
+  `/G*` family swept to zero hits, service pack pinned three ways. Nothing left to sweep.
+- **Measured:** no source change; tree at the committed round-943 state — residue **8,628**, raw-link
+  `.data` **21,481**, verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-943: audited per-file flags across all 13 carriers; `/Oy` measured inert, and the flag axis is closed. No source change.**
 
 - **Inventoried what flags each carrier actually carries** by reading the emitted command lines (not

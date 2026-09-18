@@ -575,6 +575,28 @@ compile. Note also that `set_source_files_properties(PROPERTIES ...)` **with no 
 silent no-op; that is the shape that results if the source line is deleted from an existing pin while
 trying to remove a duplicate.
 
+## 6f-ter. `/Oy` is a prefix of `/Oy-` — a flag grep with plain substring matching reads the opposite (round 944)
+
+Auditing per-file flags with `grep -oE '/Oy'` against the emitted command line reported `/Oy` for
+`m_AllocTracked`, whose actual flags are `/O2 /Gd /G6 /Oy-` — the flag **disabled**. The substring
+matches inside `/Oy-`. The same trap applies to every negated MSVC flag that is spelled as a suffix:
+`/Og-`, `/Ot-`, `/Ob0`, and any `X` / `X-` pair.
+
+**Match the flag with its terminator, not with a bare substring:**
+
+```sh
+# wrong: reads /Oy- as /Oy
+grep -oE '/Oy' build/CMakeFiles/server_dll.dir/build.make
+
+# right: require a non-word character (or end) after the flag
+grep -oE '/Oy([^A-Za-z0-9]|$)'
+```
+
+Consequence when it bit: a table of per-file flags came out with one row reading "carries `/Oy`" when
+the file carries `/Oy-`. Nothing downstream failed — it was caught only by printing the **whole**
+command line next to the extracted flags. **Print the raw line when auditing, and use the extracted
+list as a summary, never as the evidence.**
+
 ## 6g. Two ways a whole-image instruction census lies, and both look like a finding (round 923)
 
 A mnemonic census over both images is a good instrument — it converts "residue is 6% of `.text`"
