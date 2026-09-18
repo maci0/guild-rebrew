@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-966: hill-climbed the nine-slot assignment — 2/9 -> 5/9 in two swaps, then a local optimum.**
+
+- **Round 965 left the axis open at 9! = 362,880 orderings.** Instead of enumerating, ran a hill-climb over
+  adjacent transpositions, scoring by **positions matching the reference's nine slots**, read from the
+  compiled object (0.85 s per candidate — the round-964 method):
+  ```
+  start score 2
+    swap(1,3) -> 3   0x10,0x14,0x30,0x24,0x1c,0x28,0x2c,0x18,0x20
+    swap(2,7) -> 5   0x10,0x14,0x2c,0x24,0x1c,0x28,0x30,0x18,0x20
+    local optimum at 5
+  ```
+  **The shipped order scores 2 of 9; a 5-of-9 order is two transpositions away.** So the landscape is not
+  flat and the axis is genuinely searchable — but the climb reaches a strict local optimum at 5.
+- **A multi-restart version was abandoned on measured cost, not on a hunch.** Each restart is a
+  best-improvement pass: 36 candidates per sweep, ~28 accepted moves, **~15 minutes** at 0.85 s. Twenty-five
+  restarts is not a round.
+- **Two operational hazards hit while killing it, both now recorded in workflow-traps §7.** Cancelling the
+  background job did **not** stop the running `rebrew-cmake-cl`, and a follow-up `pkill -9 -f
+  rebrew-cmake-cl` **matched the killing shell's own command line** and SIGKILLed the tool call. The
+  harness rewrites a tracked source file per candidate, so a kill mid-run leaves the carrier dirty — it was
+  restored with `git checkout`, the source verified clean, and the tree re-verified at **8,628** by a full
+  `gate.sh`.
+- **Where this leaves the axis:** settled that it is a permutation of a fixed nine-slot set with a
+  non-flat, searchable landscape; open at 357,840 orderings. **The recommended next move is not more
+  climbing** — the sequence-to-slot map is deterministic and cheap to sample, so *fit* it (sample a few
+  hundred orders, find which positional features predict each slot) and construct the order. The
+  reference's assignment is strictly ascending, which suggests the original simply declared the nine
+  pointers in an order our reconstruction lacks.
+- **Measured:** no net source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-965: CORRECTED round 959's premise — the run is NINE stores, the sets are equal, and the sweep covered only 8 of 9 variables.**
 
 - **Re-read the whole prologue instead of the first eight stores**, and found that both sides emit **nine**

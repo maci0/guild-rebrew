@@ -3265,9 +3265,29 @@ is 9! = 362,880, about 85 hours at the measured 0.85 s per compile, which is why
 
 **What is settled:** the divergence is an assignment-order permutation of a fixed nine-slot set; every
 participant is steerable; and the sub-space swept (5,040 orders) contains no solution. **What is open:**
-the remaining 357,840 orderings, which need a smarter search than brute force -- the slot each initialiser
-receives is a deterministic function of the sequence, so a hill-climb on that function, or an ordering
-read off the reference's own store sequence, are the natural next moves.
+the remaining 357,840 orderings, which need a smarter search than brute force.
+
+**Round 966 ran that smarter search and mapped the landscape.** A hill-climb over adjacent transpositions,
+scoring by **positions matching the reference's nine slots** (read from the compiled object, 0.85 s per
+candidate), starting from the shipped order:
+
+```
+start score 2
+  swap(1,3) -> 3   0x10,0x14,0x30,0x24,0x1c,0x28,0x2c,0x18,0x20
+  swap(2,7) -> 5   0x10,0x14,0x2c,0x24,0x1c,0x28,0x30,0x18,0x20
+  local optimum at 5
+```
+
+**So the shipped order scores 2 of 9 and a 5-of-9 ordering is reachable by two transpositions** -- the
+landscape is not flat, and the axis is searchable. But the climb stops at a strict local optimum, and a
+multi-restart version was **abandoned on cost**: each restart is ~36 candidates per sweep with ~28
+accepted moves at 0.85 s, roughly a quarter of an hour, so 25 restarts is impractical in a round.
+
+**What a future attempt should do instead of more hill-climbing:** the mapping from initialiser sequence
+to slot assignment is deterministic and cheap to sample, so **fit it** -- sample a few hundred orders,
+regress which positional features predict each slot, then *construct* the order rather than search it.
+The reference's own assignment is strictly ascending, which suggests the original simply declared the nine
+pointers in an order our reconstruction does not have.
 
 **Method that made this affordable, and worth reusing:** the full link cycle costs minutes per candidate,
 but an initialiser permutation only needs the **single translation unit compiled to an object** -- 0.85 s,

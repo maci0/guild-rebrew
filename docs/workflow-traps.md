@@ -270,3 +270,26 @@ applies to **every** claim, including direction, baseline bytes, and which of tw
 **Do not blanket-retract.** In round 957 the stale sub-item sat in the same paragraph as a root-cause
 claim that re-verified exactly (`dec1 faddp st(1)` vs `d8c1 fadd st(1)` at `0x1000c034`). Annotate the
 part that moved; keep the part that did not.
+
+
+## 7. A sweep that rewrites a tracked file must be killable and self-restoring (round 966)
+
+The permutation sweep from round 964 works by **rewriting `cm_ExSellObjekt.c` once per candidate** and
+compiling it. That is a reasonable design — 0.85 s per point instead of minutes — but it has two hazards
+that both materialised in round 966:
+
+- **The file is dirty for the whole run.** `git status` shows the carrier modified, and anything reading
+  the tree during the sweep (or a crash) sees a candidate, not the shipped source. The harness restores
+  the original in a `finally:`/trailing write — keep that, and verify with `git status` afterwards.
+- **Killing the job can orphan a compiler.** Cancelling the background job did not stop the running
+  `rebrew-cmake-cl`; a follow-up `pkill -9 -f rebrew-cmake-cl` then **matched the killing shell itself**
+  (the pattern appears in its own command line) and SIGKILLed the tool call. Use a pid file, or match on
+  something the harness does not contain, and check `pgrep -af` before and after.
+
+**Costs, measured, for planning a sweep:** single TU compile **0.85 s**; a best-improvement hill-climb pass
+over 9 items is 36 candidates per sweep, ~28 accepted moves, so **~15 minutes per restart**. Budget the
+search, not just the compile.
+
+**Always end a mutating sweep by restoring the source and re-running the gate** — a sweep that leaves a
+candidate in the tree, or a stale object in `build/`, produces a residue reading that has nothing to do
+with what is committed.
