@@ -304,6 +304,16 @@ if(REBREW_BUILD_SERVER)
     "${PROJECT_SOURCE_DIR}/src/server.dll/DieGildeAddOn/game/alchemistry_logic_c/ahm_ExAllocAlchemist.c"
     PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
 
+  # Round 941: /Ow on gv_ExAllocGraveyardWorker, measured 8,633 -> 8,628 (-5).
+  # The other six carriers that lack /Ow were swept as a group and the sweep
+  # COLLAPSED the composition (".text 0x22f18, 18 objects too long"), so /Ow is
+  # not a free win on them -- it grows objects past their spans.  Do not add
+  # them without measuring one at a time.  CrashDump and ls_LoadBuildingEntityState
+  # were already known inert from rounds 919-920.
+  set_source_files_properties(
+    "${PROJECT_SOURCE_DIR}/src/server.dll/DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c"
+    PROPERTIES COMPILE_OPTIONS "/Ow")
+
   # Third sp5-pp pin, same rule (section 142): ls_LoadBuildingEntityState
   # scores 824/1463 under sp5-pp against 820/1463 under sp6 at an identical
   # object size of 1460, and the file holds exactly one function.

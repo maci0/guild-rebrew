@@ -803,3 +803,31 @@ numbers, which is allocator Finding 63's class.
 rewrite there.** If the surrounding bytes differ, the operand is a readout of the divergence, not a
 lever on it. The cheap test is the locality window itself — compare 12 bytes before and 16 after the
 slot on both sides.
+
+
+## 12. After a flag change, the CMake *objects* are stale even when `split_poc` is not (round 941)
+
+`rm -rf build/split_poc` is the documented recovery for a collapsed composition, and it is **not
+sufficient after a per-file flag change**. The objects themselves were compiled with the old flag, and
+deleting only the split workspace leaves them in place. Measured: after reducing a `/Ow` sweep from seven
+files back to one and deleting `build/split_poc`, the link still reported
+`exactly at their reference VA: 0` and **"22 objects too long"** — because six objects still carried
+`/Ow` from the previous build. Touching the sources did not help either; CMake rebuilt them, but other
+objects from the swept set were untouched.
+
+**The only reliable recovery is the full cycle:**
+
+```sh
+rm -rf build
+cmake -B build --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake \
+      -DCMAKE_BUILD_TYPE=Release -DREBREW_DEBUG_INFO=OFF
+rm -rf build/split_poc && bash scripts/split_link.sh
+```
+
+**The tell is the same as always** — `exactly at their reference VA: 0` and a residue above ~50% — and
+the danger is that this state is *indistinguishable from a genuine composition failure*. If a flag
+change appears to blow the budget, clean-rebuild before concluding anything about the flag.
+
+**And two transient compiler errors to expect on a parallel rebuild:** `C1083: Cannot open compiler
+intermediate file 'a00032xx'` and `C1001: INTERNAL COMPILER ERROR`. Both appeared on `-j4` and both
+cleared on `-j1` / serial `TMPDIR=/tmp` rebuilds with no source change. Neither is a defect in the tree.

@@ -75,7 +75,7 @@ BYTE_BASELINE=${BYTE_BASELINE:-264}
 # broadcast.c named dword 0xffffffff + path/msg arrays -- anonymous COMDATs
 # omitted the leading dword and shifted every later .data symbol by -4.
 # .data 23,470 -> 22,541 (-929).  See section 158.
-RESIDUE_BASELINE=${RESIDUE_BASELINE:-8633}
+RESIDUE_BASELINE=${RESIDUE_BASELINE:-8628}
 # Raw-link .data divergence baseline (22,266 as of round 519).  The goal is a build that is
 # byte-identical WITHOUT postlink, but postlink blits .data wholesale from the
 # layout package, so the shipped file shows `.data differing 0x0` no matter what

@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-941: `/Ow` pays on one more carrier — residue 8,633 -> 8,628 (-5). Second win of the session.**
+
+- **Found by extending rounds 919-920's `/Ow` sweep to a carrier they never tested.**
+  `gv_ExAllocGraveyardWorker` (456 residue) was built `/O2 /Gd` with no `/Ow`, and the flag had been
+  measured on only four carriers (two gains, two inert). Applied via CMake `COMPILE_OPTIONS`, confirmed
+  **`/Ow` reached the emitted command line** before measuring (measure-traps §6f), and it is a real
+  **-5 linked**.
+- **Baseline lowered: `RESIDUE_BASELINE` 8,633 -> 8,628**, per the rule that it moves only on a measured
+  improvement. `gate.sh` green on all six checks.
+- **The obvious follow-up — sweep `/Ow` across the six other carriers that lack it — COLLAPSED THE
+  COMPOSITION.** Adding `/Ow` to `cm_ExCopyEntityData`, `ServerMainThread`, `gm_AllocGebaeude`,
+  `vfs_OpenStream`, `spiel_dumpD` and `ahm_ExAllocAlchemist` together produced
+  `.text 0x22f18 (+1746)`, `exactly at their reference VA: 0`, **"18 objects too long"**, and a residue of
+  0x19c0f (74%) — the composition-budget rejection measure-traps §6d warns about, not a measurement.
+  Reduced back to the single proven carrier and the tree recovered to 8,628.
+- **Two traps re-hit while recovering, both already documented, both worth restating:**
+  - `rm -rf build/split_poc` is **not sufficient** after a flag change — the CMake **objects** still
+    carry the old flag. Only a full `rm -rf build && cmake -B build --toolchain ...` fixed it. The
+    intermediate state (`exactly at their reference VA: 0`, "22 objects too long") is indistinguishable
+    from a genuine composition failure.
+  - `C1083` (`Cannot open compiler intermediate file a00032xx`) and `C1001` (`INTERNAL COMPILER ERROR`)
+    both appeared on the `-j4` rebuilds and both cleared on a **`-j1` or serial `TMPDIR=/tmp` rebuild**.
+    Neither is a source defect.
+- **The `/Ow` axis is now fully enumerated: 12 carriers checked, 3 gains** (`gm_AllocSpieler` +511,
+  `cm_ExSellObjekt` +3, `gv_ExAllocGraveyardWorker` -5 linked), **2 known-inert** (`CrashDump`,
+  `ls_LoadBuildingEntityState`), **and 6 that cannot take it without overshooting their spans**. Do not
+  re-sweep it as a group.
+- **Measured:** gate pass, residue **8,628**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100, wine load OK.
+
 **Round-940: walked the 11 mid/large carriers — all worked; fixed stale 'rejected' history that a round would have re-probed.**
 
 - **Round 939's map said the top five are walled and the tail is closed; the untested band was the six
