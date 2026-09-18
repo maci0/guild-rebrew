@@ -210,3 +210,32 @@ Two traps met while writing the missing check, both already documented separatel
 
 **Then prove the new check fails.** A truncated 4,096-byte copy gives exit 1; the real artefact gives
 `Init resolved / Exit resolved` and exit 0.
+
+
+## 5. `rebrew lib-match` without `--allow` is not a finding (round 947)
+
+Run bare, the check reports **20 reversed functions whose bytes come from LIBCMT** and prints
+"These do not need reversing: the linker supplies them. Delete the source...". That reads like a serious
+scope violation — the exact anti-pattern AGENTS.md opens with. **It is not.** Every one of the 20 is
+already recorded in `scripts/library_code_allowlist.txt` with a link-side reason (the `sbh_pool.c` /
+`mlock.c` / `crt_heap.c` group, kept because the stock objects drag in imports the reference does not
+have).
+
+The allowlist is consumed by `.pre-commit-config.yaml`, which invokes the tool **with** the flag:
+
+```
+rebrew lib-match --stock-lib LIBCMT.LIB --allow scripts/library_code_allowlist.txt
+```
+
+Run that way the answer is `No reversed function matches a linked library.` — clean.
+
+**So always run the check the way the hook runs it.** A bare invocation is not "the check failing"; it
+is a different question being asked. Cross-check coverage directly when in doubt: extract the reported
+VAs and confirm each appears in the allowlist (all 20 did, round 947).
+
+```sh
+rebrew lib-match --stock-lib LIBCMT.LIB --json > /tmp/lm.json
+python3 -c "import json,re; d=json.load(open('/tmp/lm.json')); \
+  a=set(m.lower() for m in re.findall(r'0x[0-9a-fA-F]+', open('scripts/library_code_allowlist.txt').read())); \
+  print([x['va'] for x in d['findings'] if x['va'].lower() not in a])"
+```

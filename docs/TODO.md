@@ -49,6 +49,28 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-947: ran the mandated `lib-match` check for the first time this session — clean, and the bare invocation is misleading.**
+
+- **The objective mandates `rebrew lib-match --stock-lib LIBCMT.LIB` before touching any function**, and
+  no round this session had run it. Ran it: **20 reversed functions whose bytes come from LIBCMT**,
+  with the tool advising "Delete the source" — which reads as the exact anti-pattern AGENTS.md opens
+  with (reversing library code is wasted work).
+- **It is not a finding.** All 20 are already in `scripts/library_code_allowlist.txt` with link-side
+  reasons: 18 are the `sbh_pool.c` / `crt_heap.c` / `mlock.c` group, kept **because the stock LIBCMT
+  objects drag in imports the reference does not have** (`__imp__IsBadWritePtr@8` for `sbheap.obj`,
+  `FatalAppExitA` for `mlock.obj`). Verified coverage programmatically: **20 reported, 0 absent** from
+  the allowlist.
+- **The cause is my invocation, not the tree.** `.pre-commit-config.yaml` calls the tool **with**
+  `--allow scripts/library_code_allowlist.txt`; bare, it reports everything the allowlist exists to
+  excuse. Run the hook's form and the answer is **"No reversed function matches a linked library."**
+  This is the same class of self-inflicted error as round 944's `/Oy`-prefix grep and round 946's
+  comment-stripping detector — **the fifth this session**, and like the others it produced a
+  plausible-looking finding that a single re-run with the right arguments dissolved.
+- **Recorded as workflow-traps §5**, with the coverage cross-check, so a future round does not read the
+  bare output as a scope violation and start deleting link-bearing CRT sources.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-946: tried to sweep round 945's symbol-clash class tree-wide — it does not sweep, and the population is misleading. No source change.**
 
 - **Round 945's `locktable` bug came from a COFF COMMON losing to a real definition.** Attempted the
