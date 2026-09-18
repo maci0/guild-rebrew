@@ -3239,18 +3239,35 @@ sequence is not** -- which is exactly consistent with the table above and explai
 declaration-reorder sweep came out flat while this axis moves. The shipped order is nonetheless kept,
 because every alternative measured is a loss.
 
-**Round 964 then swept the axis EXHAUSTIVELY, and it is closed.** All **5,040** orderings of the seven
-initialisers were compiled and their slot runs read back from the object:
+**Round 964 swept the axis, round 965 corrected the premise it ran on -- and the correction matters more
+than the sweep.**
+
+**First, the table above is incomplete: the run is NINE stores, not eight.**
 
 ```
-total 5040, exact matches: 0
+reference  0x10, 0x14, 0x2c, 0x18, 0x20, 0x28, 0x30, 0x1c, 0x24
+ours       0x10, 0x24, 0x30, 0x14, 0x1c, 0x28, 0x2c, 0x18, 0x20
 ```
 
-**No ordering of these initialisers produces the reference's assignment.** That is a complete negative
-over the axis round 960 opened, and it costs the axis its status as "open": the reference's slot set
-contains `0x20` where ours contains `0x24`, and no permutation of the seven zero-initialisers reaches it.
-The remaining candidate is the *other* declaration -- `source_owner_entity`, which is initialised first
-and is not part of the seven -- or a variable outside this run entirely.
+Both sides use **the identical nine-slot set**, and in fact `{0x10, 0x14, ..., 0x30}` -- the contiguous
+dwords, all nine. The two sets are **equal** (checked by sorting). So the reading given above and in round
+959, "we use `0x24` where the reference uses `0x20`", was an artefact of truncating the run at eight
+stores; there is no missing or extra slot, only a different **assignment order**.
+
+**Second, the nine-slot divergence is a pure order permutation, and the reference's order is ascending.**
+Our nine assignments are a shuffle of the same nine dwords.
+
+**Third, all nine initialisers participate.** Moving `source_existing_entity` -- the one variable the
+round-964 sweep held fixed -- to the front of the run changes the first emitted slot from `0x10` to
+`0x2c`. So the sweep's 5,040-point negative covers only **eight** of the nine participants and therefore
+does **not** close the axis; it closes the seven-variable sub-space it actually enumerated. The full space
+is 9! = 362,880, about 85 hours at the measured 0.85 s per compile, which is why it was not enumerated.
+
+**What is settled:** the divergence is an assignment-order permutation of a fixed nine-slot set; every
+participant is steerable; and the sub-space swept (5,040 orders) contains no solution. **What is open:**
+the remaining 357,840 orderings, which need a smarter search than brute force -- the slot each initialiser
+receives is a deterministic function of the sequence, so a hill-climb on that function, or an ordering
+read off the reference's own store sequence, are the natural next moves.
 
 **Method that made this affordable, and worth reusing:** the full link cycle costs minutes per candidate,
 but an initialiser permutation only needs the **single translation unit compiled to an object** -- 0.85 s,

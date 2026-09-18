@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-965: CORRECTED round 959's premise — the run is NINE stores, the sets are equal, and the sweep covered only 8 of 9 variables.**
+
+- **Re-read the whole prologue instead of the first eight stores**, and found that both sides emit **nine**
+  consecutive `mov [esp+N],edi` stores, not eight:
+  ```
+  reference  0x10, 0x14, 0x2c, 0x18, 0x20, 0x28, 0x30, 0x1c, 0x24
+  ours       0x10, 0x24, 0x30, 0x14, 0x1c, 0x28, 0x2c, 0x18, 0x20
+  ```
+- **The two slot SETS are identical** — both are `{0x10, 0x14, 0x18, 0x1c, 0x20, 0x24, 0x28, 0x2c, 0x30}`,
+  the nine contiguous dwords (verified by sorting). So **round 959's "we use `0x24` where the reference
+  uses `0x20`" was a truncation artefact**, and rounds 960-964 inherited it. There is no missing or extra
+  slot: the divergence is purely the **assignment order** of a fixed nine-slot set, and the reference's
+  order is ascending.
+- **And all nine initialisers participate**, which invalidates round 964's claim of closure. Moving
+  `source_existing_entity` — the one variable that sweep held fixed, because it sat just outside the
+  replaced block — **to the front of the run changes the first emitted slot from `0x10` to `0x2c`.**
+  So the 5,040-point negative covers **eight** of the nine participants and closes only that sub-space.
+  The full space is **9! = 362,880**, about 85 hours at the measured 0.85 s per compile — not enumerable
+  this way.
+- **Corrected in `msvc6-allocator.md`** with the nine-row data, the set-equality check, and an explicit
+  statement of what is settled (assignment-order permutation of a fixed nine-slot set; every participant
+  steerable; the 5,040-order sub-space empty) versus open (the remaining 357,840 orders).
+- **The method note that follows from this:** round 964's sweep was efficient *and* wrong, because its
+  input list was transcribed from an earlier round's eight-store reading rather than re-derived from the
+  binary. **A sweep is only as correct as the space it enumerates** — re-derive the participant set from
+  the disassembly before spending an hour on permutations of it.
+- **Measured:** probe reverted, tree clean; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-964: swept cm_ExSellObjekt's initialiser axis EXHAUSTIVELY — 5,040 orderings, zero matches. Axis closed.**
 
 - **Round 960 opened the axis** (initialiser order steers the slot map, contradicting Finding 63's
