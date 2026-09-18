@@ -6260,8 +6260,9 @@ Late in a long session it is worth separating what has been *measured* from what
 -bearing claims directly rather than trusting the narrative.
 
 **The deliverable.** `build/server.dll` is **286,720 bytes**, exactly the reference's size, with
-**8,652 differing bytes, all inside `.text`** and zero anywhere else. That is the headline number
-and it is reproducible from the committed tree.
+**8,633 differing bytes, all inside `.text`** and zero anywhere else. That is the headline number
+and it is reproducible from the committed tree. (Rounds 924-934 moved it 8,652 -> 8,633; this
+paragraph is updated rather than left to rot, and `gate.sh` guards the live figure.)
 
 **The accounting is honest.** `rebrew verify --full` gives 31 EXACT + 233 RELOC = **264
 byte-matched**, plus 17 PROVEN and 2 remaining (1 NEAR_MATCHING, 1 STUB) across 283 results.

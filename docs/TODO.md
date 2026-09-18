@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-935: audited the coverage claim itself — the metadata carries 83 stale blocks, and `orphans` does not flag them.**
+
+- **Continued round 934's set-audit of the objective's criteria to the one that says "all functions
+  EXACT, zero drift".** Reconciled three different populations that had never been compared:
+  | population | count |
+  |---|---|
+  | `// FUNCTION: SERVER` markers in the source tree | **283** |
+  | results from `rebrew verify --full` | **283** |
+  | `["SERVER.0x..."]` blocks in `src/rebrew-functions.toml` | **377** |
+  The first two agree exactly — **0 marked-but-unverified, 0 verified-but-unmarked** — so verification
+  covers every function the tree actually has.
+- **The extra 94 blocks are the finding.** 83 `SERVER` blocks exist in the metadata with **no source
+  marker anywhere**, and they carry matched statuses from an earlier era: **22 claim `EXACT`**, 37
+  `RELOC`, plus `PROVEN`/`MISSING_SIZE`/`SIZE_MISMATCH`. Five of them still carry
+  `cflags = "/O2 /Gd /DREBREAK_ALLOW_NAKED"`-era `DREBREW_ALLOW_NAKED`, i.e. the `_emit`/naked-asm
+  period the objective explicitly requires to be converted to C.
+- **`rebrew orphans` reports zero for `rebrew-functions.toml`** — it flags 149 orphans, all in
+  `rebrew-data.toml` (85 `VERIFIED`, 64 `UNCHECKED`). So the tool's orphan definition does not cover
+  this case, and the 83 are invisible to it. It does offer `--include-matched`, which exists precisely
+  because pruning these loses the record that those VAs once matched.
+- **Disposition: NOT pruned.** They are history, they cost nothing at the gate, and the flags are
+  destructive. What matters is that the *claim* is not inflated — and it is not: `docs/msvc6-c-shapes.md`
+  already records the honest accounting, **31 EXACT + 233 RELOC = 264 byte-matched, 17 PROVEN**, which
+  matches `verify --full` exactly. The stale "313 EXACT" figure lives only in the round brief, not in
+  the repository.
+- **One genuine rot fixed:** the same section still said "**8,652 differing bytes**", four rounds out of
+  date. Corrected to **8,633**.
+- **Measured:** no source change; residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100.
+
 **Round-934: found the objective's last done-criterion had no check anywhere; wrote it, and it passes.**
 
 - **Audited the objective's criteria as a set instead of chasing residue.** `.text` VirtualSize is
