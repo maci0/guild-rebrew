@@ -1006,3 +1006,23 @@ identical 15 offsets, and the fusion is invariant across every available MSVC6 g
 **Before treating absent instructions as missing source, check whether the compiler can prove the block
 dead.** A redundant test in the reference is a *consequence* of how the original was written or built, not
 a thing to spell.
+
+
+## 15. `[esp+N]` is not comparable between two images without normalising esp depth (round 969)
+
+A per-slot frequency table over a function — "how many instructions touch `[esp+0x34]` here versus there"
+— is a tempting way to find an extra or missing stack slot. Measured on `cm_ExSellObjekt`, it reports
+`0x34` and `0x3c` used **only by our build** and `0x40` **only by the reference**, which reads as a frame
+difference.
+
+**It is an artefact: `esp` moves, so the same physical slot appears as different displacements on the two
+sides.** The carrier's own header had already recorded this for the same two sites — *"tracking esp depth
+through the pushes, the reference's `[esp+0x44]` and our `[esp+0x3c]` are both frame+0x468"* — and round
+969 rediscovered it the expensive way.
+
+**Every site that sits on a different push depth will show a phantom difference**, which is most of them:
+the two `lea` sites at `0x1000d986`/`0x1000d993` are argument addresses whose displacements differ partly
+because the pushes *between* them differ.
+
+**So: normalise to the frame base before comparing slots, or compare only sites known to be at equal esp
+depth.** A raw displacement table is not evidence about frame layout.

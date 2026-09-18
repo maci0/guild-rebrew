@@ -3333,6 +3333,22 @@ That is consistent and worth stating: the zero-store run's order steers *those* 
 **address-taken locals are allocated by a different rule**. Chasing the run's order cannot fix an argument
 address.
 
+**Round 969 counted slot use across the whole frame to find the extra dword, and the answer is a
+measurement trap rather than a finding.** A per-slot frequency table over the 674 instructions shows
+`0x34` and `0x3c` used **only by us** and `0x40` only by the reference -- which looks like a missing or
+extra stack slot. It is not:
+
+- **`[esp+N]` displacements are not comparable across the two images**, because `esp` moves. The file's
+  own round-182 note already records this for exactly these two sites: *"tracking esp depth through the
+  pushes, the reference's `[esp+0x44]` and our `[esp+0x3c]` are both frame+0x468"* -- **the same physical
+  slot written two ways.** The `0x34`/`0x40` pair is the same story.
+- So the two `lea` sites at `0x1000d986`/`0x1000d993` are argument addresses whose *displacements* differ
+  partly because the pushes between them differ, not because the frame has a different number of locals.
+
+**Corollary for this file and generally: compare frame slots after normalising esp depth, or compare
+against the frame base -- never by the raw `[esp+N]` literal.** A raw displacement table will show phantom
+differences at every site that sits on a different push depth, which is most of them.
+
 **Method that made this affordable, and worth reusing:** the full link cycle costs minutes per candidate,
 but an initialiser permutation only needs the **single translation unit compiled to an object** -- 0.85 s,
 read back with a small `.text` scanner that extracts the consecutive `mov [esp+N],edi` stores. A 5,040-point

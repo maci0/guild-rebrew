@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-969: chased the extra frame dword — found a phantom, and a measurement trap worth its own entry.**
+
+- **Round 968 said our frame has an extra dword between `0x20` and `0x28`.** Counted slot use across the
+  whole 674-instruction function to locate it:
+  | slot | REF | BLD |
+  |---|---|---|
+  | `0x34` | 0 | **1** |
+  | `0x3c` | 0 | **2** |
+  | `0x40` | **1** | 0 |
+  Read naively that is a missing/extra stack slot.
+- **It is an esp-depth artefact, and the file had already recorded it.** Round 182's note on this exact
+  pair of sites: *"tracking esp depth through the pushes, the reference's `[esp+0x44]` and our
+  `[esp+0x3c]` are both frame+0x468"* — **the same physical slot, written two ways.** The `0x34`/`0x40`
+  pair is the same story: displacements differ because the pushes between the sites differ, not because
+  the frame has different locals.
+- **Also re-confirmed the decode-from-own-entry rule.** Reading both images at an interior address
+  (`0x1000dd20`) produced garbage on *both* sides — `rcl`, `scasd`, `ljmp` — and I nearly drew a
+  comparison from it. Decoding each stream from its own function start gave the real sites
+  (`0x1000dd2a`/`0x1000dd33`), which is the fourth time this session that rule has saved a wrong read.
+- **The genuinely useful output is the trap, now `measure-traps` §15:** *`[esp+N]` is not comparable
+  between two images without normalising esp depth.* Every site on a different push depth shows a phantom
+  difference — most sites — so a raw displacement table is not evidence about frame layout. That also
+  retro-explains why the round-968 argument-address reading looked like "one extra dword between `0x20`
+  and `0x28`".
+- **Where that leaves the real divergence:** not a frame-size difference. Round 182's mechanism stands —
+  the reference interleaves the spill between `push ebx` and `push edi` while we compute before the
+  pushes: **an instruction-scheduling difference around a call setup.** That is the scheduling class, not
+  the allocator class, and it is already documented as such.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-968: located the real first divergence — three call-argument addresses, not the zero-store run.**
 
 - **Round 967 closed the initialiser-ordering axis and said the next question was what occupies `0x18`/`0x20`.**
