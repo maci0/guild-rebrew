@@ -58,7 +58,10 @@ this file holds the rest.
   fixers overwrite. `.text` is the only section the build must get right.
   Evidence: `scripts/postlink_residual.py --write build/server.dll`.
 - The deliverable is **286,720 bytes**, the reference's exact size, with
-  **8,633 differing bytes, all inside `.text`**. Evidence: `scripts/gate.sh`.
+  **8,628 differing bytes, all inside `.text`**. Evidence: `scripts/gate.sh`.
+- **Independently re-verified by direct byte comparison** (round 951), without the layout package,
+  the fixer, or `rebrew`: file sizes equal, **8,628** differing, `.text` 8,628 and
+  `.rdata` / `.data` / `.reloc` / headers **0 / 0 / 0 / 0**. Two methods, one answer.
 
 ## Game domain
 

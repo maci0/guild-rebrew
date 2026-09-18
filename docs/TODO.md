@@ -49,6 +49,36 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-951: independent byte-level verification of the deliverable; zero-extend class checked on `gm_AllocGebaeude`.**
+
+- **Verified the headline numbers without going through the project's own tooling** — a plain
+  section-by-section byte comparison of `build/server.dll` against `reference`:
+  | | |
+  |---|---|
+  | file sizes | **286,720 vs 286,720 — equal** |
+  | differing bytes | **8,628** |
+  | `.text` | 8,628 |
+  | `.rdata` / `.data` / `.reloc` / headers | **0 / 0 / 0 / 0** |
+
+  Rounds 934–950 established the gate, `verify --full`, `test --all`, `lib-match`, Wine load and the
+  span check; this adds a check that shares no code with any of them. **"All 8,628 differing bytes are
+  inside `.text`, and zero anywhere else" is now confirmed by two methods that do not use the layout
+  package, the fixer, or `rebrew` at all.**
+- **Applied round 950's span filter to `gm_AllocGebaeude`** (327 residue, object `.text` = 0x440 = 1,088,
+  **exactly its span**, so only a size-neutral or shrinking edit is admissible). Its blocker names
+  "zero-extend pattern (xor vs mov)" among five classes, and shapes §52 makes that class *size-relevant*:
+  a plain `unsigned short` load emits `xor r,r; mov r16,[mem]` (5B) where a `volatile` one emits
+  `mov r16,[mem]; and r,0xffff` (7B). **Measured both images at the function's span: each contains
+  exactly ONE `and eax,0xffff`** (`0x1001776d` reference, `0x1001776b` ours — same instruction, the 2-byte
+  offset being earlier drift). So there is no surplus masked load to remove and no 2 bytes to reclaim
+  there; that class is clean in this function.
+- **Note for the next round:** the two `volatile` lvalues that remain (lines 220-221, the
+  `0x10030b6c` counter read and its increment) are documented as deliberate — the header records that
+  "the read and its increment go through volatile lvalues so msvc6 emits the" reference's two-load
+  sequence — so they are not candidates either.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-950: crossed the residue map with the span map — exactly one carrier can absorb growth, and it has no better variant.**
 
 - **Round 949 established every residue carrier is at or over its span**, which raised the follow-up:
