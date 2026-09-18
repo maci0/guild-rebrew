@@ -49,6 +49,39 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-919: re-probed the flag axis on two carriers — the documented per-file finding holds, and `--cflags` dirties tool-owned metadata.**
+
+- **Set out to re-examine the constraint set rather than lift more declarations.** The first target was
+  the `codegen-walls.md` §8 table row `flags | flat | 12 axes, ~120 compilations`, since a flat-flag
+  claim is the cheapest thing to falsify.
+- **Found a real disagreement between the metadata and the build, and it was mine.** `rebrew data`
+  showed `gm_AllocSpieler` with `cflags = "/Ox /Gd"`, but `build/rebrew-cflags.cmake` and the actual
+  compile line carry `/O2 /Gd /Oa /Ow`. **`git diff` showed the working tree differed from HEAD** —
+  `rebrew test --cflags` had written the probe's value into `src/rebrew-functions.toml`. Restored it
+  (mode 444, so `chmod u+w` first) and the disagreement vanished. **The build was never wrong.**
+- **Separated the two flags rather than testing them together**, which the docs' own adjacent finding
+  demands (§94 records `/Ow` load-bearing and `/Oa` inert on this file):
+  ```
+  /O2 /Gd /Oa /Ow   1004 / 3689   obj 3689
+  /O2 /Gd /Ow       1004 / 3689   obj 3689   <- /Oa makes no difference
+  /O2 /Gd /Oa        471 / 3689   obj 3647
+  /O2 /Gd            493 / 3689   obj 3660   <- /Ow is worth 511 bytes
+  ```
+  **Independently reproduces the documented result:** `/Ow` load-bearing, `/Oa` inert. The docs are
+  right on this one.
+- **Tested whether either flag generalises to another carrier, which was not on record.**
+  `CrashDumpUnhandledExceptionFilter` scores **643 / 2115 with and without `/Ow`** — byte-identical.
+  So the lever is **carrier-specific**, which is what makes the §8 "flags flat" row true as a
+  *general* statement while `/Ow` remains load-bearing on one file. Both can hold, and the docs'
+  wording conflates them.
+- **Measured:** gate pass, residue **8,634**, raw-link `.data` **21,836**, verify 281/283, byte-matched
+  264, imports 100. No source change; `src/rebrew-functions.toml` restored to HEAD.
+- **The trap worth recording:** `rebrew test <file> --cflags <flags>` **persists** the value into the
+  tool-owned metadata rather than testing in memory. Two probes left the file dirty against HEAD, and
+  the first symptom looked like a genuine metadata/build divergence. `measure-traps.md` §9 already
+  covers reverting that file (mode 444); this round adds the reason one reaches for it in the first
+  place — a `--cflags` probe is a write, not a measurement.
+
 **Round-918: applied all three pre-checks — one more symbol landed, and the lift vein is now measured as exhausted.**
 
 - **Built the three pre-checks into one filter and ran it over the 66 remaining multi-TU globals:**

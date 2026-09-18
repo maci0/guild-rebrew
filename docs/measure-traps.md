@@ -495,6 +495,22 @@ this file.**
 `cflags`**, and do not add a field that merely restates a CMake pin. Note also that
 `rebrew-functions.toml` is mode 444 — reverting needs `chmod u+w` first.
 
+**`rebrew test <file> --cflags <flags>` is a WRITE, not a measurement (round 919).** It persists the
+flags into the tool-owned `src/rebrew-functions.toml` instead of testing in memory. Two sweeps left
+the file dirty against `HEAD`, and because the CMake build consumes a separately generated table
+(`build/rebrew-cflags.cmake`), the result *looked* like a real metadata/build divergence — `rebrew
+data` reported `/Ox /Gd` for `gm_AllocSpieler` while the compile line carried `/O2 /Gd /Oa /Ow`. It
+was my own probe. **After any `--cflags` sweep, `git diff src/rebrew-functions.toml` before drawing
+any conclusion from a flag value**, and restore with `chmod u+w` first.
+
+**A flag finding is per-carrier until measured otherwise (round 919).** `codegen-walls.md` §8 lists
+`flags | flat | 12 axes, ~120 compilations`, and shapes §94 says `/Ow` is load-bearing on
+`gm_AllocSpieler` while `/Oa` is inert. Both are true and neither generalises: re-measured,
+`/O2 /Gd /Ow` and `/O2 /Gd /Oa /Ow` both score 1004/3689 while `/O2 /Gd` gives 493 — and the same
+`/Ow` on `CrashDumpUnhandledExceptionFilter` scores **643/2115 either way, byte-identical**. So
+"flags are flat" is a statement about *aggregate sweep results*, not a licence to skip a per-file
+test.
+
 **Round 913 correction: an sp5-pp pin does not make an *include* unsafe.** Round 909's
 `C1001: INTERNAL COMPILER ERROR` appeared right after `ahm_ExAllocAlchemist.c` (a pinned file) gained
 an include, and was recorded here as the pin interacting with header changes. It was not the pin.
