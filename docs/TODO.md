@@ -49,6 +49,39 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-895: audited all 48 struct SIZE annotations with the compiler — every one correct. The 25 "mismatches" were my own tool.**
+
+- **Tried:** the type/struct mandate, one step past round 894. There are 48 `// SIZE 0xNN` struct
+  annotations in the tree; I wrote an estimator to flag any whose declared extent disagreed with
+  its comment, on the theory that a wrong `sizeof` mis-addresses every field past the error.
+- **The estimator produced 18 flags, then 7 after a fix, then 0 after the compiler check. All 25
+  were the instrument, across three independent failure modes:**
+  - double-counting array members (`PlayerList9 { int count; int ids[8]; }` computes 0x24; my first
+    version said 0x80 — exactly 2x, the tell I should have caught immediately);
+  - unresolved nested struct types (`SbhRegion.grpHeadList[32]` of `SbhGroup` at 0x204:
+    0x144 + 32*0x204 = **0x41c4**, which the header states correctly; my estimator assumed 4 bytes
+    per element);
+  - one-line struct bodies parsed as a single token pair.
+- **Switched instruments to the compiler, which cannot be fooled.** Wrote
+  `char chk[sizeof(T)==0xNN?1:-1];`, included each defining TU, and compiled with
+  `rebrew-cmake-cl`. **48 of 48 annotations verify**, including the largest and most consequential:
+  `SbhRegion` 0x41c4, `SbhGroup` 0x204, `EntityStruct` 0x21c, `OfficeSlot` 0x18, `TGT` 0x3c,
+  `SRC` 0x14, `VFS_INFLATE` 0x6c, `gz_stream` 0x64, `PlayerList9` 0x24, `EntitySlot` 0x43,
+  `LinkedNode` 0x43.
+- **Second instrument trap, same round:** `gz_stream`'s check printed "NOT 0x64" — but the probe had
+  failed to compile (`C1083: cannot open include file 'zutil.h'`) and the assertion never ran. With
+  `-I references/zlib` it passes. "Did not build" and "wrong size" look identical in that output.
+- **Also checked `office_slot.h` and `gm_FreeObjectListRecursive.c`'s pack pragmas** (a `(pop)` with
+  no visible `(push)` looked suspicious — it is correctly paired, my grep just missed the push line).
+- **Verified a positive too, not only negatives:** `server4.c` initialises the office table with
+  cursor+0x10 = record +0x14 = `assignmentId`, consistent with `OfficeSlot`'s declared offsets. No
+  bug, but it is now checked rather than assumed.
+- **Recorded:** measure-traps §6, two new traps — a hand-rolled struct-size estimator is not a
+  measure (three failure modes, 25 false flags, all refuted by the compiler), and a failed include
+  in a size probe masquerades as a size failure. **Nothing changed in the source**; the audit found
+  no defect.
+- **Gate:** pass, residue 8,634, raw-link `.data` 21,836, verify 281/283, byte-matched 264.
+
 **Round-894: completed the entity slot type — 7 fields to 45, with a measured width fix. First landed source change in nine rounds.**
 
 - **Acted on round 893's findings.** The `.data` lane is exhausted, so types/structs are the

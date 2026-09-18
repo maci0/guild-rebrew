@@ -120,6 +120,26 @@ the 8,634 as one cascade.
 
 ## 6. Three audit shapes that generate only false positives
 
+- **A hand-rolled struct-size calculator reports garbage on this tree — use the compiler instead
+  (round 895).** Two successive versions of a Python `sizeof` estimator flagged **18 then 7**
+  structs whose `// SIZE` comment disagreed with their declared extent. **All 25 were the
+  instrument.** Three separate failure modes, each invisible in the output:
+  - the first version double-counted array members (`PlayerList9 { int count; int ids[8]; }`
+    computes 0x24; it said 0x80 = exactly 2x);
+  - the second could not resolve a member whose *type is another struct*
+    (`SbhRegion.grpHeadList[32]` of `SbhGroup` at 0x204: 0x144 + 32*0x204 = 0x41c4, which the
+    header states correctly; the estimator assumed 4 bytes per element);
+  - one-line bodies (`typedef struct { int count; int ids[8]; } PlayerList9;`) parsed as a single
+    token pair.
+  **The compiler cannot be fooled and costs one invocation per type.** Write
+  `char chk[sizeof(T)==0xNN?1:-1];`, include the defining TU, and compile with
+  `rebrew-cmake-cl`. Doing that for the flagged types returned **48 of 48 correct**, including
+  `SbhRegion` 0x41c4, `SbhGroup` 0x204, `TGT` 0x3c and `gz_stream` 0x64. A regex over C is a
+  hypothesis about C; `sizeof` is a fact about it.
+- **A `C1083: cannot open include file` inside a size probe looks exactly like a size failure.**
+  `gz_stream`'s check failed until `-I references/zlib` was added — the assertion never compiled,
+  so "NOT 0x64" meant "did not build". Always separate *compile status* from *assertion result*
+  before reporting a type as wrong.
 - Naive same-mnemonic immediate comparison across a diff finds aligner
   crossover (both sides contain both values in different interleave:
   `cmp cl,2/6`, `shl 4/8`, push-constant runs). Without control-flow
