@@ -1,7 +1,9 @@
 # Measure traps — the method's own failure modes
 
 These cost as much as the codegen walls, and most of them were learned by being burned.
-For what the compiler itself blocks, see `codegen-walls.md`.
+For what the compiler itself blocks, see `codegen-walls.md`. Live residue /
+verify / `.data` numbers are `scripts/gate.sh` defaults, not a figure later
+in this file.
 
 Companion reading: `msvc6-c-shapes.md` (front-end shapes), `msvc6-allocator.md`
 (register allocation and slot maps), `TODO.md` (round-by-round history).
@@ -1221,3 +1223,52 @@ three `rebrew` tool defects, produced `int g_log_level_table[3]` (a 36-byte surp
 vein "mined out" after reading only the shipped file's byte deltas and never reading that pass. **Check for
 an existing section series on the round's assigned topic before declaring it exhausted** — the brief's
 ".data / types / structs" direction had a dedicated eleven-round history the round-977 work did not consult.
+
+## 21. Disassembling `.text` from its start gives wrong instruction boundaries — every statistic built on it is junk (round 988)
+
+`msvc6` pads between functions, and `.text` begins with bytes that are not a valid instruction stream at
+offset 0. A linear sweep from section start therefore desynchronises within the first few hundred bytes and
+**mis-classifies real instructions as data for the entire section**.
+
+Measured this round. Attributing each of the 8,628 differing bytes to the instruction that contains it:
+
+| decode origin | bytes "inside an instruction" | bytes "not covered" |
+|---|---|---|
+| `.text` start (linear sweep) | 2,565 (29.7%) | **6,063 (70.3%)** |
+| each carrier's **own function entry** | 8,498 (98.5%) | 130 (1.5%) |
+
+The first figure is not a finding about the residue; it is a finding about the sweep. It reads as a dramatic
+result — "70% of the residue is not code at all" — and it is false. Decoding from the known entry points
+shows the truth: **98.5% of the differing bytes are inside real instructions**, and the remaining 130 are
+inter-function padding.
+
+The tell was on screen and I nearly wrote it up anyway: the "uncovered" bytes printed as
+`89 7c 24 10 89 7c 24 14 ...`, which is `mov [esp+0x10],edi` / `mov [esp+0x14],edi` repeated. Real code,
+labelled DATA by a broken sweep.
+
+**This is `first_divergence.py`'s documented rule, applied to a statistic instead of a diff.** That script
+decodes each image from its own function entry and says so in its header; round 988 rebuilt an ad-hoc
+analysis without reusing it, and paid for the omission.
+
+**The check:** never disassemble `.text` from its start. Use the function inventory's entries, or
+`scripts/first_divergence.py` / `scripts/fault_address.py`, which already do it correctly.
+
+**The correct classification** (per-instruction, decoded from entries):
+
+| reference instruction | differing bytes | share |
+|---|---|---|
+| `mov` | 2,971 | 34.4% |
+| `push` | 827 | 9.6% |
+| `lea` | 645 | 7.5% |
+| `call` | 626 | 7.3% |
+| `cmp` | 600 | 7.0% |
+| `add` | 450 | 5.2% |
+| `je` | 443 | 5.1% |
+| `jmp` | 245 | 2.8% |
+| `test` / `jne` / `xor` | 167 / 149 / 148 | ~1.8% each |
+| `fmul` | 146 | 1.7% |
+| inter-function padding | 130 | 1.5% |
+
+**64 distinct mnemonics** are touched, with the top eight carrying 76%. A long tail across integer,
+branch and x87 instructions is what the documented scheduler/register-role classification predicts; it is
+**not** the shape of a single systemic cause, and no mnemonic dominates enough to be one.
