@@ -120,6 +120,21 @@ the 8,634 as one cascade.
 
 ## 6. Three audit shapes that generate only false positives
 
+- **`rebrew data`'s type-conflict count is a signal, not a work queue (round 902).** Eleven entries
+  looked like eleven mismatches to fix. Chasing them found at least three different situations, and
+  the "fix" was wrong in two of the three:
+  - **a real layout impossibility** — `loadsave3.c` *defined* five filter globals as arrays summing
+    to 53 bytes inside a 16-byte span. Correcting them to scalars cleared 5 conflicts and was
+    byte-neutral through `linktest.sh` (**+0**), but cost **+236 `.data`** at the gate. The array
+    forms are load-bearing for the raw `.data` size, and only the gate's raw-link number sees it.
+  - **a deliberate defining-TU choice** — `gm_NextEntityQueryMatch.c` "mismatched" 13 TUs on three
+    globals because it is the file that *defines* them, and its own comment says the scalar types
+    were chosen so the TU **emits BSS commons** ("Incomplete `[]` does not emit; sized arrays broke
+    .text layout"). Correcting the types produced **14 `LNK2001` unresolved externals**. The comment
+    predicted the failure exactly; it had to be read before probing, not after.
+  - **genuine mismatches** — the remainder, which are actually wrong.
+  **Rule:** open the defining TU and read its comment before touching a conflicted global. The
+  report cannot distinguish "wrong type" from "the only definition, deliberately typed".
 - **A placeholder name hides a type error the compiler would otherwise catch (round 900).**
   `data_globals.c` carried `int g_100354c8;` and `int g_100354e0;` compiled clean for as long as
   those globals were called by their placeholder names. Renaming them to their attested CRT names

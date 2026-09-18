@@ -49,6 +49,35 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-902: chased the 11 `rebrew data` type conflicts to their source; two fixes measured, both reverted for cost.**
+
+- **Tried:** `rebrew data --json` reports **11 type conflicts** (up from 9 in round 883), and the
+  mandate names "same type name for the same layout everywhere" as a binding rule. Worked them to
+  their source rather than leaving the count as a number.
+- **Found and fixed a genuine impossibility in `loadsave3.c`, then reverted it for cost.** Five
+  filter globals were *defined* there as arrays — `g_filter_extra5[1]`, `g_query_filter_extra1[4]`,
+  `g_query_filter_extra2[4]`, `g_query_filter_extra3[2]`, `g_query_filter_extra4[4]` — summing to
+  **53 bytes inside a 16-byte span** (`0x10030b84..0x10030b94`). Every other use in the tree is
+  scalar, and the reference bytes `ff 00 00 00 | ff ff ff ff | ff 7f | ff 7f | ff 00 00 00` are
+  exactly the `-1` / `0x7fff` sentinels the code tests. Rewriting them as scalars dropped the
+  conflict count **11 → 6** and held `rebrew test` at 491/491 and `linktest.sh` at **+0** — but the
+  gate then failed on a **`.data` regression, 21,836 → 22,072 (+236)**, isolated by stashing the
+  other change. The array/initialiser forms are load-bearing for `.data` raw size. Reverted.
+- **Second fix, also reverted: `gm_NextEntityQueryMatch.c` was the defining TU for three globals
+  under "wrong" types.** It declared `char* g_slot_table`, `char g_entity_state_base`,
+  `char g_entity_type_bytes` against 13 TUs using `unsigned char[]`. Correcting them to the majority
+  types broke the link outright — **14 `LNK2001: unresolved external symbol _g_slot_table`** —
+  because the file's comment already said why: *"Incomplete `[]` does not emit; sized arrays broke
+  .text layout."* The scalar types were chosen so the TU **emits BSS commons**; making them
+  declarations removes the only definition. **The comment predicted the failure and I probed
+  without reading it closely enough** — the round's own lesson, recorded rather than glossed.
+- **What the conflict list actually is, then:** not 11 mistakes to fix but at least three distinct
+  situations — a real layout impossibility (`loadsave3.c`), a deliberate defining-TU choice
+  (`gm_NextEntityQueryMatch.c`), and genuine majority mismatches. Treating the count as a work queue
+  would have been wrong in two of three cases.
+- **Measured:** both probes reverted; gate pass, residue **8,634**, raw-link `.data` **21,836**,
+  verify 281/283, byte-matched 264. No source change landed this round.
+
 **Round-901: identified three CRT stream internals by their use sites, not their notes — and the notes were wrong about two of them.**
 
 - **Continued the CRT-naming vein.** Three `.bss` globals sat under placeholders with descriptive
