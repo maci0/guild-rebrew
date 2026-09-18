@@ -3439,6 +3439,22 @@ accumulators all register-resident and the candidate spills one, the divergence 
 it. The reachable question is only whether the *walker* or the *counter* is the value that
 holds `esi`, which is a loop-shape decision (shapes §8), not a naming one.
 
+**Round 972 checked the zero-branch-difference carriers from the round-971 census and they are all this
+class.** `gm_ObjectsAvailble` (25 residue, 0 branch-target differences) diverges at index 73 and the
+divergence is a **consistent `ebx`/`edi` role exchange**:
+
+| index | reference | ours |
+|---|---|---|
+| 73 | `test ebx, ebx` | `test edi, edi` |
+| 77 | `mov edi, esi` | `mov ebx, esi` |
+| 80 | `mov ax, word ptr [edi]` | `mov ax, word ptr [ebx]` |
+
+Both sides are 235 instructions; the roles are simply exchanged. The carrier's header already records it
+as residue and lists what was tried -- *"declaration order, hoist positions, extra-copy and cursor splits
+all inert"*, and *"up/down/indexed/derived-def and decl-order variants all keep our roles"* -- which is
+this Finding's mechanism, and it is why the file's residue has resisted. **So a carrier with zero
+branch-target differences and a register-only divergence is a Finding 62/63 case, not a placement case.**
+
 **Scope limit — this does NOT explain Finding 62's rotation (checked, round 847).**
 `gm_ObjectsAvailble` (0x10015f70) is the case Finding 62 records as `(esi, ebx, edi)` against
 the reference's `(ebx, edi, esi)`. Disassembled its prologue: `esi` there holds the **address

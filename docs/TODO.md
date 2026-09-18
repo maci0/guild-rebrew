@@ -49,6 +49,29 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-972: verified the zero-branch-difference carriers are all the same closed class.**
+
+- **Round 971's census partitioned the carriers: eight have zero branch-target differences.** Checked the
+  smallest of them, `gm_ObjectsAvailble` (25 residue), and its divergence is a **consistent `ebx`/`edi`
+  role exchange** starting at index 73:
+  | index | reference | ours |
+  |---|---|---|
+  | 73 | `test ebx, ebx` | `test edi, edi` |
+  | 77 | `mov edi, esi` | `mov ebx, esi` |
+  | 80 | `mov ax, word ptr [edi]` | `mov ax, word ptr [ebx]` |
+  Both sides are **235 instructions**; the roles are exchanged and nothing else changes.
+- **Already documented and closed in the carrier's own header**: *"the slot_cursor/slot ebx/edi swap …
+  declaration order, hoist positions, extra-copy and cursor splits all inert"*, and *"up/down/indexed/
+  derived-def and decl-order variants all keep our roles"*. That is allocator Findings 62/63's mechanism.
+- **The generalisation, now recorded in the allocator doc:** a carrier with **zero branch-target
+  differences and a register-only divergence is a Finding 62/63 case, not a placement case** — so the
+  round-971 census plus this check together tell a future round which class to reach for without probing.
+- **Together with round 971, the open-carrier set is now characterised by class rather than by size:**
+  block-placement (many target-differing branches: `gm_AllocSpieler` 21, `ServerMainThread` 14),
+  epilogue-merge (§2), and register-role rotation (Findings 62/63) — all three documented as walls.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-971: branch-target census across all 19 carriers — it separates branch-related residue from the rest.**
 
 - **Round 970 found a detection method (compare branch *targets*, not instructions). Applied it to the
