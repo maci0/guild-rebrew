@@ -3239,6 +3239,25 @@ sequence is not** -- which is exactly consistent with the table above and explai
 declaration-reorder sweep came out flat while this axis moves. The shipped order is nonetheless kept,
 because every alternative measured is a loss.
 
+**Round 964 then swept the axis EXHAUSTIVELY, and it is closed.** All **5,040** orderings of the seven
+initialisers were compiled and their slot runs read back from the object:
+
+```
+total 5040, exact matches: 0
+```
+
+**No ordering of these initialisers produces the reference's assignment.** That is a complete negative
+over the axis round 960 opened, and it costs the axis its status as "open": the reference's slot set
+contains `0x20` where ours contains `0x24`, and no permutation of the seven zero-initialisers reaches it.
+The remaining candidate is the *other* declaration -- `source_owner_entity`, which is initialised first
+and is not part of the seven -- or a variable outside this run entirely.
+
+**Method that made this affordable, and worth reusing:** the full link cycle costs minutes per candidate,
+but an initialiser permutation only needs the **single translation unit compiled to an object** -- 0.85 s,
+read back with a small `.text` scanner that extracts the consecutive `mov [esp+N],edi` stores. A 5,040-point
+sweep took ~70 minutes in the background instead of days. **Before declaring a permutation axis
+infeasible, check whether the metric can be read from the object rather than the link.**
+
 **And the divergence is smaller than "a permutation" suggests.** Counting uses of the two slots the sets
 do not share, over the whole 674-instruction body:
 

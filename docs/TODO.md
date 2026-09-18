@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-964: swept cm_ExSellObjekt's initialiser axis EXHAUSTIVELY — 5,040 orderings, zero matches. Axis closed.**
+
+- **Round 960 opened the axis** (initialiser order steers the slot map, contradicting Finding 63's
+  inertness claim) and rounds 961-962 measured four orderings, all losses. The natural close was to
+  enumerate the space rather than keep guessing.
+- **Made it affordable by changing the metric's source.** A full link cycle costs minutes per candidate;
+  an initialiser permutation only needs the **single TU compiled to an object** — measured **0.85 s** — and
+  the slot run read back with a small scanner for consecutive `mov [esp+N],edi` stores. Verified first
+  that the scanner reproduces the known shipped slots exactly
+  (`0x10,0x24,0x30,0x14,0x1c,0x28,0x2c,0x18`) before trusting it.
+- **Result: all 5,040 orderings of the seven initialisers compiled; ZERO produce the reference's slot
+  assignment.**
+  ```
+  total 5040, exact matches: 0
+  ```
+  ~70 minutes in the background. **The axis is closed by exhaustion, not by sampling** — the reference's
+  set contains `0x20` where ours contains `0x24`, and no permutation of those seven reaches it.
+- **What that leaves.** The one variable in the run not permuted is `source_owner_entity`, initialised
+  first and always landing at `0x10` on both sides; or the `0x20`/`0x24` dword is claimed by something
+  outside the initialiser run. Either way the *ordering* hypothesis is dead, which is what the sweep was
+  for.
+- **Tree verified unharmed.** The harness rewrites the source file once per permutation; it restores the
+  original at the end, and `git status` showed the file clean afterwards, with a full `gate.sh` pass at
+  residue **8,628**, raw-link `.data` **21,481**, verify 281/283, byte-matched 264, imports 100, wine OK.
+- **Reusable method, recorded in the allocator doc:** before declaring a permutation axis infeasible,
+  check whether the metric can be read from the **object** rather than the link — 0.85 s versus minutes
+  turned an intractable sweep into a background job.
+
 **Round-963: swept the carriers' first divergences by kind; the classifier is unreliable and `cm_ProcessCommandQueue` is closed by proof.**
 
 - **Applied round 962's new lever (initialiser sequence steers the slot map) by looking for carriers whose
