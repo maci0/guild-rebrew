@@ -49,6 +49,30 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-956: swept the carriers' direction claims against the binary — one stale, two accurate.**
+
+- **Round 955 found a wall description stating the `lea`/`add` direction backwards.** That makes
+  "direction claims in headers" a defect class worth one sweep, and the sweep is cheap: grep for
+  "where we emit / against our / ours emits", then decode **each image from its own entry point** and
+  compare.
+- **Three carriers make verifiable direction claims. Results:**
+  | file | claim | verdict |
+  |---|---|---|
+  | `srv_LoadBuf.c` (both occurrences) | target `lea edi,[ecx+eax]` "against our `add edi,ecx`" | **STALE** — see below |
+  | `gm_AllocSpieler.c` | ours emits `mov word ptr [ebp],bx` + `xor ebx,ebx` at the first divergence while the reference has `lea edx,[edx+0x100358fc]` | **accurate** — verified byte-for-byte at `0x100188f9`: reference `8d 92 fc 58 03`, ours `66 89 5d 00` / `33 db` |
+  | `cm_ExProdObjekt.c` | target `jl` back edge where we emit `jge` + long `jmp` | **accurate** as stated, and already correctly attributed to the out-of-line layout pass (shapes §17), not to source |
+- **`srv_LoadBuf`'s claim has outlived its code.** It says the target's `lea` is "against our `add
+  edi,ecx`", but **we emit no `add edi` at all** — checked every `add`/`lea` in the function: ours is
+  `lea edi,[ecx+eax]` at `0x1000a6fc`, the target's is the identical `lea` at `0x1000a6ff`. So the
+  residual the text describes is **closed**, and a future round reading it would hunt a difference that
+  no longer exists. Both occurrences annotated STALE with the addresses and the decoding method.
+- **The pattern, now seen twice in two rounds:** a header can be accurate about its *measurements* and
+  still be wrong about *what the binary currently does*, because the code moved underneath the note.
+  **A direction claim is a snapshot; re-verify it against the binary before designing a probe from it.**
+  This is round 940's "stale rejected history" and round 954's "rejections expire" in a third form.
+- **Measured:** comment-only change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-955: corrected a wrong direction in `ServerMainThread`'s wall description; the respelling it implied measures +912.**
 
 - **`rebrew todo` names only two real items** (`gm_AllocSpieler`, closed rounds 952-953, and

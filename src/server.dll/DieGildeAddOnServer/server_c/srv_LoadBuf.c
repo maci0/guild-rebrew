@@ -66,8 +66,12 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * conn[1] as *(unsigned int*)((char*)conn + 4) 492 (inert, same CSE); hoisting
  * conn[1] into a block-local temp before both stores 491; writing the memcpy
  * destination as g_download_received + g_download_buffer instead of the
- * reverse 492 (inert — the target's `lea edi,[ecx+eax]` against our `add
- * edi,ecx` is a register-role consequence, not an addend-order one).
+ * reverse 492 (inert).  NOTE round 956: this and the later note describe the
+ * target's `lea edi,[ecx+eax]` "against our `add edi,ecx`", but that is STALE —
+ * we no longer emit any `add edi`, and both sides now emit the identical
+ * `lea edi,[ecx+eax]` (target 0x1000a6ff, ours 0x1000a6fc, verified by
+ * decoding each stream from its own entry).  The residual this text describes
+ * is closed; do not re-probe it.
  *
  * The admin loop was also rewritten as an if-guarded do/while so the bottom
  * bit-0 test merges with the entry test the way the target's single `test
@@ -178,8 +182,8 @@ extern int srv_QueueCommandForProcessing(unsigned int* conn, unsigned char* pkt)
  * (total-size store before the memset 479, both stores plain rather than
  * volatile 473). The memcpy destination was spelled three more ways (addend
  * order reversed, the received count hoisted into a local, and a char-pointer
- * base): all inert at 492, so the target's `lea edi,[ecx+eax]` against our
- * `add edi,ecx` stays a register-role consequence. The srv_QueueCommandForProcessing
+ * base): all inert at 492.  The `lea`/`add` claim that followed is stale as of
+ * round 956 (see the note above) — both sides emit the same `lea` now. The srv_QueueCommandForProcessing
  * arg hoist was probed three more ways (slot store hoisted above the branch
  * with the two arms kept, the same as an explicit if/else, and the 0x10
  * predicate computed into a temp before the store): 490 each. Reordering the
