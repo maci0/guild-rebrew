@@ -49,6 +49,32 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-928: the frame and the register surplus are separate readouts — reproduced §81 and split it in two.**
+
+- **Confirmed the round's data focus is exhausted before spending the round on it:** `rebrew verify --data`
+  reports **122 matched, 0 mismatched, 0 missing**, and `.venv/bin/python scripts/data_extent_check.py`
+  reports **0 entries claiming bytes owned by another** (2 documented benign `views`). Nothing left to
+  do on `.data`/`.rdata`/`.bss`, so the round went to `.text`.
+- **Swept the entry push set of all 19 residue carriers.** Exactly **one** has a surplus:
+  `CrashDumpUnhandledExceptionFilter@4` saves `ebx,ebp,esi,edi` where the reference saves `ebp,esi`.
+  The other 18 match the reference's push set instruction for instruction. That turns round 927's
+  incidental observation into a measured uniqueness claim.
+- **Re-ran shapes §81's one-token lever on today's tree** (`pCtx->Eip` ->
+  `pExceptionPointers->ContextRecord->Eip`, both sites, round 174's edit):
+  - the object's first bytes become `81 ec 80 02 00 00` = **`sub esp,0x280`, the reference's frame
+    exactly** — §81's central claim reproduces;
+  - it still loses: **residue 8,633 -> 8,654 (+21)**. Round 174 measured `+66`; the magnitude moved
+    with the tree, the sign did not. **Seventh confirmation, reached independently.**
+- **The new fact: the frame closes and the register surplus does not.** With the edit applied the
+  prologue is `push ebx; push ebp; push esi` (`53 55 56`); the reference is `push ebp; push esi`
+  (`55 56`). So `sub esp,0x280` and the entry push set are **two independent readouts**, and this
+  lever reaches only the first. §81 previously ran them together; it now records the split, which
+  matters for targeting — the frame is the known-reachable half that still loses, while the surplus
+  callee-saved register is the half no edit has touched. Per shapes §38 the entry push set follows
+  from the *loop's* register demand, so the lever is reducing the body's callee-saved demand.
+- **Measured:** probe reverted; residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264. No source change.
+
 **Round-923: counted EVERY mnemonic image-wide — the residue is not a code-shape deficit anywhere.**
 
 - **Asked the prior question the idiom census never asked:** not "which idiom differs" but "is any

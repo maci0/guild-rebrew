@@ -2820,7 +2820,31 @@ exactly, with aligned instructions *rising* 392 -> 407 and the object shrinking
 Sixth confirmation, and the sharpest: the frame is reachable, cheaply, without
 deleting anything — and closing it alone still costs bytes, because the smaller
 frame moves every subsequent `[esp+N]` displacement. Do not spend further
-rounds on the frame as a target. The remaining reference-order differences
+rounds on the frame as a target.
+
+**Round 928 reproduced this on the current tree, and the reproduction separates two
+things this section had run together.** Re-applying the same one-token edit
+(`pCtx->Eip` -> `pExceptionPointers->ContextRecord->Eip`, both sites) still produces
+the reference's frame **exactly** —
+
+```
+81 ec 80 02 00 00    sub esp,0x280
+```
+
+— and now measures **+21 linked (8,633 -> 8,654)** rather than round 174's `+66`, the
+magnitude having moved with the rest of the tree while the sign did not. What the
+edit does *not* fix is the register surplus: the prologue becomes
+`push ebx; push ebp; push esi` (`53 55 56`) where the reference has only
+`push ebp; push esi` (`55 56`). **So `sub esp,0x280` and the entry push set are two
+independent readouts, and this lever reaches only the first.** The frame is the
+*visible* half of the divergence and the cheaper one to close; the surplus
+callee-saved register is the half that persists after the frame is right.
+
+That matters for targeting: a round that goes after the frame is chasing the half
+that is already known-reachable-and-still-losing, while the register count is the
+half no edit has yet touched. Per section 38 the entry push set is decided by the
+*loop's* register demand, so the lever is reducing how many callee-saved values the
+body needs — not respelling the entry, which every probe here has shown inert. The remaining reference-order differences
 (deferred `push ebx; push edi` at 0x1000282c; `pCtx->Esp` parked in ebx from
 0x10002931 across the date/time region) are the real levers, and they would
 have to land *with* the frame in one change, not before it.
