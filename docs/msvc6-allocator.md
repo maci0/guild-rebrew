@@ -3574,3 +3574,37 @@ tree has since moved to 1,583 for this carrier and the same edit now costs 30 by
 This is the **fourth** stale-header delta found in four rounds (982: −53 → +505; 985: "bankable" → span
 overflow; 986: 11 → +343; 993: −2 → +30). See workflow-traps §14 — the rule stands, and this carrier's
 header is not exempt from it despite being the most carefully maintained in the tree.
+
+### Finding 67 addendum — the swapped pair is `ebp`/`edi`, and three probes confirm no C lever (round 994)
+
+Finding 67 named the mechanism but not the full pair. Round 994 pinned both registers and tested every
+plausible C lever.
+
+**The two builds have exchanged the roles of `ebp` and `edi`:**
+
+| value | reference | ours |
+|---|---|---|
+| `hDbgFile` (CreateFileA result) | **`ebp`** — `mov ebp,eax` @ `0x1000281d`, tested at `0x1000281f` | `edi` @ `0x1000281f` |
+| `[0x10024034]` (function pointer, `call`ed at `0x10002843`/`0x10002880`) | **`edi`** — `mov edi,[0x10024034]` @ `0x1000282e` | `ebp` @ `0x1000282e` |
+
+Non-push/pop uses: reference `ebp` 6 sites (`0x1000281d`..`0x10002f18`), ours 8; the first use of each
+register is exactly the other's variable.
+
+**Three probes, all measured at the link:**
+
+| probe | delta |
+|---|---|
+| swap `hProcess`/`hDbgFile` declaration order (header says 8 permutations were tried; this is the pair that matches the reference's *first-use* order) | **+0**, byte-identical |
+| block-local alias giving `hDbgFile` a shorter live range (Finding 67) | **+0**, byte-identical |
+| hoist `hProcess = GetCurrentProcess()` above `CreateFileA` so `hProcess` is assigned first | **+109** (8,628 → 8,737) |
+
+The third is worse for a semantic reason, not a codegen one: `GetCurrentProcess` would then execute on paths
+the reference does not call it on. The first two are byte-identical because msvc6 folds the aliases.
+
+**Conclusion, and it is the same as §1's.** Which of two same-typed pointers receives `ebp` versus `edi` is
+decided by the allocator's own heuristics over the whole function's live ranges. Declaration order does not
+reach it, scope does not reach it, and the one construct that changes the order (`GetCurrentProcess` earlier)
+also changes the program. This row is closed as an allocator wall, with three measured attempts recorded so
+it is not re-probed.
+
+**Measured:** all three reverted; residue 8,628 unchanged; `src/` unmodified.
