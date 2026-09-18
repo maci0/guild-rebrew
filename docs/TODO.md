@@ -49,6 +49,42 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-948: `rebrew test --all` and `rebrew verify --full` agree per-function — 283/283, zero disagreements.**
+
+- **Ran the other mandated tool this session had never invoked** (`rebrew test --all --json`) and
+  cross-checked it against `rebrew verify --full --json` **at the per-function level**, not just the
+  summary. Compared two independently produced 283-row sets:
+  | check | result |
+  |---|---|
+  | VAs in both / only in one | **283 / 0 / 0** |
+  | per-function status disagreements | **0** |
+  | summary fields | identical field-for-field: `total 283, passed 281, exact 31, reloc 233, proven 17, stub 1, matching 1, byte_matched 264` |
+  These two tools take different routes to the same answer, so their agreement is real evidence about
+  the baseline rather than a tautology. **The tree's headline numbers are now confirmed by two
+  independent rulers**, which no earlier round this session had established.
+- **Also used the run to rank the unmatched functions by object score**, to see where the rulers
+  disagree most:
+  | VA | status | match% | object delta |
+  |---|---|---|---|
+  | `0x10019720` `gm_CalculateProductionValue` | PROVEN | **98.7** | 5 |
+  | `0x1000e140` `cm_ExProdObjekt` | PROVEN | 98.3 | 17 |
+  | `0x1000aac0` `cm_ProcessCommandQueue` | PROVEN | 97.7 | 15 |
+  | `0x10015f70` `gm_ObjectsAvailble` | PROVEN | 96.1 | 28 |
+  | `0x1000ec00` `cm_ExCopyEntityData` | PROVEN | **56.2** | **399** |
+  The top four are the small carriers round 939 showed document-closed. **`cm_ExCopyEntityData` is the
+  instructive row**: 56.2% match but a 399-byte object delta, i.e. the two rulers point in opposite
+  directions on the same function — the positional score is dominated by a size mismatch, not by how
+  much code is wrong.
+- **Chased that row and closed it the same day.** Its object `.text` is **0x390 = 912 bytes, exactly the
+  metadata size**, so it sits precisely at its span and *any* growth fails the composition budget —
+  which retro-explains why round 942 measured `/Ow` as inert there rather than harmful. Its header
+  already records 443/912 with four landed fixes and names the residual mechanism: MSVC6 collapses the
+  reference's shared-store clamp arms (`mov eax,0x7f; jmp; mov eax,-0x7f; jmp`) into a fallthrough,
+  saving one `jmp` per arm, with a per-cluster size map (`82-248, +24B = the whole gap`) and ten dead-end
+  spellings listed. Documented-closed; not re-probed.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-947: ran the mandated `lib-match` check for the first time this session — clean, and the bare invocation is misleading.**
 
 - **The objective mandates `rebrew lib-match --stock-lib LIBCMT.LIB` before touching any function**, and
