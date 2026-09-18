@@ -1026,3 +1026,36 @@ because the pushes *between* them differ.
 
 **So: normalise to the frame base before comparing slots, or compare only sites known to be at equal esp
 depth.** A raw displacement table is not evidence about frame layout.
+
+
+## 16. Compare branch TARGETS, not instructions, when a loop diverges (rounds 970-971)
+
+A stream comparison of two images compares `jle` against `jle` and reports a match — so a divergence that
+consists **only of where the branches go** is invisible to it, and invisible to `rebrew diff` too. Both
+rulers agree the instructions are identical and the score stays high while the bytes differ.
+
+Measured on `gv_ExAllocGraveyardWorker` (round 970): indices 99-118 match mnemonic-for-mnemonic and
+operand-for-operand, but **three branches target different addresses**:
+
+| index | reference | ours |
+|---|---|---|
+| 103 `jle` | `0x10011d77` | `0x10011cdb` |
+| 116 `je` | `0x10011d77` | `0x10011cdb` |
+| 118 `jne` | `0x10011d77` | `0x10011cdb` |
+
+Both targets are the byte-identical 13-byte epilogue, 0x9c apart: the reference keeps two copies and
+routes the loop's exits to the later one; we keep one. That is codegen-walls §2's mechanism, and it is
+**only visible by comparing `op_str` of the jump instructions**.
+
+**The check:**
+
+```python
+for x, y in zip(ref_insns, bld_insns):
+    if x.mnemonic.startswith('j') and x.mnemonic == y.mnemonic and x.op_str != y.op_str:
+        ...   # same branch, different destination
+```
+
+Round 971 ran it across all 19 residue carriers. **Eight have zero** — their residue is not branch-related
+at all — while `gm_AllocSpieler` (21) and `ServerMainThread` (14) hold most of the branch-related
+divergence. That partition is worth having before choosing a target: a carrier with many target-differing
+branches is a block-placement story, one with none is an instruction-form story.

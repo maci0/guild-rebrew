@@ -49,6 +49,40 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-971: branch-target census across all 19 carriers — it separates branch-related residue from the rest.**
+
+- **Round 970 found a detection method (compare branch *targets*, not instructions). Applied it to the
+  whole carrier set**, counting branches whose mnemonic matches but whose target differs:
+  | carrier | branches | target-differing | first |
+  |---|---|---|---|
+  | `gm_AllocSpieler` | 122 | **21** | `0x10018c53 je` |
+  | `ServerMainThread` | 106 | **14** | `0x10009765 je` |
+  | `cm_ExSellObjekt` | 103 | 7 | `0x1000d979 je` |
+  | `CrashDumpUnhandledExceptionFilter` | 67 | 7 | `0x1000284a jne` |
+  | `cm_ExCopyEntityData` | 60 | 8 | `0x1000ec2e jne` |
+  | `gm_AllocGebaeude` | 38 | 4 | `0x1001763c je` |
+  | `gv_ExAllocGraveyardWorker` | 29 | 3 | `0x10011cf6 jle` |
+  | `gm_FindNextFilteredEntity` | 27 | 3 | `0x10016fc2 jae` |
+  | `cm_ProcessCommandQueue` | 30 | 2 | `0x1000aaf6 jne` |
+  | `ls_LoadBuildingEntityState` | 65 | 2 | `0x1001292a jle` |
+  | `gm_CheckInventoryCapacity` | 17 | 1 | `0x10019f5b jne` |
+  | **`vfs_OpenStream`, `ahm_ExAllocAlchemist`, `m_AllocTracked`, `srv_LoadBuf`, `gm_ObjectsAvailble`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue`** | 9-34 | **0** | — |
+- **Eight carriers have ZERO branch-target differences**, so their residue is not branch-related at all —
+  a useful partition this project did not previously have. **The two biggest carriers by branch count
+  (`gm_AllocSpieler` 21, `ServerMainThread` 14) hold the majority of the branch-related divergence.**
+- **Checked the zero-diff carriers' first divergences by hand** (the stream compare is unreliable past a
+  desync — measure-traps §13). Genuine ones, each single-instruction and already documented:
+  `vfs_OpenStream` `cmp byte [eax],0` vs `mov al,[eax]` (the round-940 fold); `gm_ObjectsAvailble`
+  `test ebx,ebx` vs `test edi,edi` (register-only); `ahm_ExAllocAlchemist` `lea edx,[eax+eax*8]` vs
+  `lea eax,[eax+eax*8]` — the stride chain at indices 65-68.
+- **And that last one is already closed.** Its header records it precisely and states the verdict:
+  *"the stride lea chain at diff 66-67 … is not steerable from the expression: **five groupings of the
+  0x21c multiply were probed against the real scan-loop context and all five emit the candidate's
+  order**, so msvc6's strength reducer fixes it."* Same math, different destination register, 2 bytes.
+  Not re-probed.
+- **Measured:** no source change; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-970: returned to residue work — found a third epilogue-merge instance and a header mis-diagnosis.**
 
 - **Moved off `cm_ExSellObjekt` (rounds 959-969) to a carrier not worked structurally this session:**
