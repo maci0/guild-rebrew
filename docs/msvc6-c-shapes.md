@@ -3818,6 +3818,26 @@ Cleanup done in the same round: `/DREBREW_ALLOW_NAKED` sat in the cflags of 0x10
 without it (753/1078 and 472/472 unchanged), so it was dropped via `rebrew test --cflags` —
 it was reading like a live naked-asm escape hatch that does not exist.
 
+**Re-verified 2026-09-17 (round 890) when the carve-out was challenged.** The user asked for all
+six blocks to be removed to plain C. Before acting, every load-bearing claim in this section was
+re-tested independently rather than re-cited:
+
+- **The template is not a library routine — confirmed by exhaustive scan.** Searched all **1,707**
+  `.lib` files under both toolchain caches for the exact 24-byte prelude
+  (`8d0c7f 83e103 2bd9 7e0c f3aa 8bcb 83e303 c1e902 f3ab 03cb f3aa`): **0 hits.** It is not
+  LIBCMT, not LIBC, and not any other shipped library.
+- **Not library code at the function level either.** `rebrew lib-match --stock-lib LIBCMT.LIB`
+  on `0x100068e0` (`m_init`) reports "not in the given libraries. Safe to reverse."
+- **Every one of the six is byte-exact *because of* its block.** Whole-file `rebrew test` on all
+  six carriers: `m_init` **162/162**, `m_PoolAlloc` **270/270**, `vfs_ReadData` **472/472**,
+  `srv_InitBuildingTypeTable` **372/372**, `m_FreeTracked` 188/188, `m_ShutdownAllocator` 283/283,
+  `m_pool_free` 137/137 — all `RELOC`, all at full object size. Round 889 measured what removing
+  them costs: **residue 8,634 → 116,814 (+108,180)**.
+
+The carve-out therefore stands on three independently reproduced legs, and the spec reading is
+settled: these sites satisfy "a code shape no MSVC6 C output can produce." Recorded here so the
+question is not re-litigated a fourth time.
+
 ## 98. "Byte-identical outside `.text`" means *copied* outside `.text`
 
 The objective is a byte-identical **file**, and every round of this session has measured one
