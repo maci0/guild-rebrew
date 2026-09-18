@@ -64,7 +64,7 @@ void __cdecl ahm_ApplyColorComponent(void*, void*);
 void __cdecl ahm_FireEntityAndCleanup(void*, void*, void*);
 void __cdecl ahm_ClampFloatValue(void*, void*);
 void __cdecl ahm_SlotClearMatch(void*, void*, void*);
-void __cdecl ahm_AllocateEntitySlot(void*, void*, void*);
+int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src); /* returns 1 on slot found, 0 otherwise (alchemistry_logic2.c:81) */
 
 /* Execution handler: dispatches special simulation actions
  * based on a 4-byte action type code. Handles alchemy search

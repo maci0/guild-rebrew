@@ -241,6 +241,27 @@ the 8,634 as one cascade.
   declares the same identifier itself (`__argv`, `_pgmptr`); for names it does not,
   the rename is safe and the risk is ordinary. Do not assume every placeholder hides a type error —
   test, and check the build log rather than reasoning about which is which.
+- **A header edit can push a TU over its composition span, and the symptom is an unrelated
+  `LNK2001` (round 914).** Adding an include to `gv_MoveSlotEntry.c` grew its object **688 → 1008
+  bytes (+320)**, past the padded span the split-link can place, and the build failed with
+  `LNK2001: unresolved external symbol _gv_MoveSlotEntry` — a symbol whose declaration was perfectly
+  fine. §6d's composition-budget mechanism normally arrives from a *code* edit; it applies just as
+  well to headers, and it is invisible until the link because the TU compiles cleanly.
+  **Three symptoms now point at the same underlying budget:** `LNK2001` for a symbol you did not
+  touch, a `LONG <file>.c.obj` line in the pad report, and a `split_link FAILED` with no `error C*`.
+  **Check `grep '<file>.c.obj' .scratch/gate-link.log` *before* lifting into a file, not after** —
+  and note the report only shows files that are *already* over, so a file 300 bytes under its span
+  can still be tipped over by a header.
+- **A `LNK2001` naming a symbol you did not edit is a declaration mismatch, not a missing definition
+  (round 914).** Round 913 saw thirteen of them for `_s_ahm_AllocAhmInfo_1002a0f8`,
+  `_ahm_QueryEntityBuildingType` and `_ahm_AllocateEntitySlot`, and recorded the cause as unknown.
+  Each was a **return-type disagreement** between a caller's `extern` line and the defining TU —
+  `int*` against `int`, `void` against `int` — and each was decidable from the reference rather than
+  by preference (`0x1000c6a0` returns `ahm_LookupEntityInTable`'s `eax`, a pointer). **The diagnostic
+  is cheap:** for each unresolved name, `grep` every declaration and the definition, and compare
+  return types. This is round 911's `gm_ResetAllEntities` class, and it recurs wherever two TUs
+  declare the same function independently — which is the norm in this tree, since the original kept
+  declarations local.
 - **A metadata note can be confidently wrong, so identify a symbol from its use sites (round 901).**
   `0x11766564` was noted as "tracked-block (stream) table ptr" and is in fact `__pioinfo`, the CRT
   per-handle file table — established from `mov eax,[__pioinfo]; mov eax,[eax + esi*4];

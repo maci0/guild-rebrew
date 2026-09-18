@@ -49,6 +49,37 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-914: diagnosed round 913's failed batch — two real declaration bugs, and a third cause nobody had recorded.**
+
+- **Chased the 13 `LNK2001`s round 913 could not explain.** They named symbols the edit never touched
+  (`_s_ahm_AllocAhmInfo_1002a0f8`, `_ahm_QueryEntityBuildingType`, `_ahm_AllocateEntitySlot`), which
+  is why that round recorded them as an open question. They are all **declaration mismatches** — the
+  same defect class round 911 found in `entity.h`, one layer deeper in the TUs.
+- **Two were genuine bugs, both settled against the reference rather than by preference:**
+  - `ahm_QueryEntityBuildingType` — **declared `int` in `alchemistry_logic2.c:347` but the function
+    body `return entry;` returns an `int*`**, and `cm_ExEmployWorker.c` dereferences the result
+    (`*building_type_ptr == 0`). The reference settles it: `0x1000c6a0` ends
+    `call ahm_LookupEntityInTable; add esp,4; pop esi; ret`, returning that call's `eax` — a pointer.
+    **Fixed the definition to `int*`**; `rebrew test` unchanged at 102/102.
+  - `ahm_AllocateEntitySlot` — declared `void` in `cm_ExSimSpecialAction.c:67`, but the definition
+    returns `return 1;` / `return 0;`. **Fixed the caller's declaration to `int`**, with the body's
+    semantics in a comment.
+- **Found a third, previously unrecorded cause, and it is the one that actually blocked the batch.**
+  After both fixes the batch still failed, and the reason was not a mismatch at all:
+  `LONG gv_MoveSlotEntry.c.obj: 1008 > 688 (+320 over the padded span) -- not padded`. **Adding the
+  include grew that object from 688 to 1008 bytes**, past its composition-budget span, so the
+  split-link could no longer place it. That is `measure-traps.md` §6d's mechanism arriving from a
+  *header* edit rather than a code edit — and it is invisible until the link, because the TU compiles
+  cleanly.
+- **So the batch had two independent blockers, and only one was the thing I was chasing.** The
+  declaration bugs masked the size problem: fixing them did not unblock the batch, and reverting the
+  batch was necessary to keep the two fixes.
+- **Landed the two declaration fixes; reverted the batch.** Gate pass and **byte-neutral** — residue
+  **8,634 unchanged**, raw-link `.data` **21,836 unchanged**, verify 281/283, byte-matched 264.
+- **Revised guidance for the next attempt:** before lifting a symbol into a TU, check both (a) that
+  the header agrees with every declaration that TU already makes, and (b) that the TU is not near its
+  composition span. `gv_MoveSlotEntry.c` fails (b) and must be excluded.
+
 **Round-913: continued the lift — 3 more symbols landed; a 7-symbol batch broke and was bisected.**
 
 - **Continued round 912's method on the remaining 70 multi-TU globals.** Rebuilt the candidate set

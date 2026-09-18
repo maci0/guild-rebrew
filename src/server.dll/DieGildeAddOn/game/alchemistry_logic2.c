@@ -344,7 +344,7 @@ int* __cdecl ahm_LookupEntityInTable(int entity_id)
 // FUNCTION: SERVER 0x1000c6a0
 // SIZE: 102
 
-int __cdecl ahm_QueryEntityBuildingType(int arg1)
+int* __cdecl ahm_QueryEntityBuildingType(int arg1)
 {
 	unsigned short* query;
 	int* entry;
