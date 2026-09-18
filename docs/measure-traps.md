@@ -597,6 +597,34 @@ the file carries `/Oy-`. Nothing downstream failed — it was caught only by pri
 command line next to the extracted flags. **Print the raw line when auditing, and use the extracted
 list as a summary, never as the evidence.**
 
+## 6f-quater. A real definition beats a COFF COMMON silently — the `LNK4006` rule cannot see it (round 945)
+
+Two translation units defined `locktable`: one as a 192-byte
+`CRITICAL_SECTION* locktable[0x30]`, one as `CRITICALSECTION** locktable = __locktable;` where the
+second was referenced by nothing. The symbol tables looked like this:
+
+```
+mlock.c.obj:        _locktable  sec 2  val 0x0     <- a REAL definition
+data_globals.c.obj: _locktable  sec 0  val 0xc0    <- a COFF COMMON (tentative definition)
+```
+
+**A real definition beats a COMMON**, so the unwanted 4-byte pointer silently won, the 192-byte table
+was discarded, and **no `LNK4006` was emitted** — because resolving a COMMON against a definition is
+legal, not a duplicate. AGENTS.md's rule ("a duplicate-symbol warning is a finding") is correct but
+**cannot fire on this shape**. The tree links green, `verify` passes, and the symbol resolves to the
+wrong storage.
+
+**So symbol-duplication auditing needs a second check beyond the warning count:** for any global defined
+in more than one TU, look at **which one the map picked**.
+
+```sh
+grep '_<symbol>' build/split_poc.map          # the winner and where it came from
+objdump -t <obj> | grep -i '<symbol>'         # sec 0 = COMMON, sec N = real definition
+```
+
+A `sec 0` entry is a tentative definition whose size is in the value column; a `sec N` entry is a real
+one. If the object with the *correct* layout has `sec 0` and another has `sec N`, the other one wins.
+
 ## 6g. Two ways a whole-image instruction census lies, and both look like a finding (round 923)
 
 A mnemonic census over both images is a good instrument — it converts "residue is 6% of `.text`"

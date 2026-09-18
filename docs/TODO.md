@@ -49,6 +49,39 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-945: `locktable` was silently hijacked by a COFF COMMON vs real-definition clash; two data defects closed. No metric change.**
+
+- **Audited the metadata `cflags` against the emitted command lines** — the round-944 lesson — and found
+  **21 live functions carrying `/O1` or `/Ox`** where the CMake default is `/O2`. That looked like a
+  metadata/build divergence. **It is not**: CMakeLists runs `rebrew cmake-flags` to generate per-file
+  flags from `src/rebrew-functions.toml`, and that step **fails the configure** if one TU's functions
+  resolve to different flags. Verified on two files (`initterm.c` -> `/O1 /Gd`,
+  `cm_ExProdObjket.c` -> `/Ox /Gd`): the emitted lines match the metadata exactly. No defect.
+- **`locktable` was a real silent defect, and the mechanism is worth recording.** The symbol is defined
+  **twice**:
+  - `crt_region/data_globals.c:63` — `CRITICAL_SECTION* locktable[0x30]`, which the metadata records
+    (`0x10031aac`, 192 bytes) and which the reference bytes confirm (4-byte pointer values at 4-byte
+    strides: `0x10035538`, `0x10035568`, ...);
+  - `crt_region/mlock.c:9` — `CRITICAL_SECTION** locktable = __locktable;`, **referenced by nothing**.
+
+  The symbol table shows the clash and why it was invisible:
+  ```
+  mlock.c.obj:        _locktable  sec 2  val 0x0     <- a REAL definition
+  data_globals.c.obj: _locktable  sec 0  val 0xc0    <- a COFF COMMON (tentative)
+  ```
+  **A real definition beats a COMMON, so `mlock.c` won the link and the 192-byte table was discarded —
+  and because COMMON-vs-definition is a legal resolution, there was no `LNK4006` to show for it.** This
+  is the failure mode the "LNK4006 is a finding" rule cannot see. Removed the alias; the build still
+  links clean (0 errors), confirming nothing used it, and `_locktable` now resolves as `<common>` for
+  the layout package to place instead of aliasing `__locktable` at `0x1002b374`.
+- **The loadsave3 `g_query_filter_extra*` widths got their note, not a change.** Round 925 measured that
+  "fixing" the wide array definitions to the semantically-correct scalars costs **+375 raw-link `.data`
+  and +1 `.text`**. The reference bytes (`ff | ffffffff | ff7f | ff7f | ff`) confirm the readers' scalar
+  widths, so the definitions are knowingly wider than the readers use — now documented inline with the
+  measurement and an explicit "do not fix without re-measuring", so the next round does not repeat 925.
+- **Measured:** gate pass; residue **8,628** and raw-link `.data` **21,481** unchanged (both fixes are
+  byte-neutral), composition 246 placed, verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-944: closed the last two flag candidates — `/G6` documented, `/Oy-` confirmed; found a flag-grep trap. No source change.**
 
 - **Round 943's inventory said `m_AllocTracked` "carries `/G6 /Oy`, the only file in the tree with

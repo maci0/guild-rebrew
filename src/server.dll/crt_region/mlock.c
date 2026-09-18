@@ -5,8 +5,14 @@
 #define _TOTAL_LOCKS 44
 
 CRITICAL_SECTION* __locktable[_TOTAL_LOCKS];
-/* Game-side copies (tidtable.c) reference locktable[] as CRITICAL_SECTION**. */
-CRITICAL_SECTION** locktable = __locktable;
+/* `locktable` is defined in crt_region/data_globals.c as
+   `CRITICAL_SECTION* locktable[0x30]` (0x10031aac, 192 bytes), which is what the
+   metadata records and what the reference bytes show (4-byte pointer values at
+   4-byte strides).  A `CRITICAL_SECTION** locktable = __locktable;` alias used to
+   live here; nothing referenced it, and because it was a real definition while
+   data_globals.c's is a COFF COMMON, it SILENTLY WON THE LINK -- the 192-byte
+   table was discarded and the symbol resolved to a 4-byte pointer, with no
+   LNK4006 to show for it.  Removed round 945. */
 
 extern void* __cdecl malloc(unsigned int);
 extern void __cdecl free(void*);

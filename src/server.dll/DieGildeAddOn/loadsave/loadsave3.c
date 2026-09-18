@@ -140,6 +140,17 @@ unsigned int ls_ID2Ptr(void)
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
 extern char g_stream_pool[1]; /* 0x10034670 */
 extern int g_stream_count; /* 0x10034678 */
+/* These five definitions are WIDER than the readers use, deliberately.  The
+   consumers (spiel_dumpD.c, gm_StartFilteredEntitySearch.c) declare each as a
+   scalar and the reference bytes at 0x10030b84 -- `ff | ffffffff | ff7f | ff7f
+   | ff` -- confirm those scalar widths are the real layout.  Rewriting these
+   definitions to the matching scalars is semantically right and MEASURED WORSE:
+   `.text` 8,633 -> 8,634 and raw-link `.data` 21,481 -> 21,856 (+375)
+   (round 925).  The array forms emit more of the reference's byte pattern than
+   the correct scalars do, because `.data` is sized by these definitions while
+   the shipped section is blitted from the layout package.  Left as-is on
+   measurement, not on preference -- do not "fix" it again without re-measuring
+   both numbers. */
 char g_filter_extra5[1] = {
     0xff,
 };
