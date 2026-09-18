@@ -1546,13 +1546,13 @@ status = "VERIFIED"
 
 ["SERVER.0x10031aac"]
 name = "locktable"
-type = "CRITICAL_SECTION*[0x40]"
+type = "CRITICAL_SECTION*[0x30]"
 section = ".data"
-note = "per-lock CRITICAL_SECTION ptr table (0x40 entries)"
+note = "per-lock CRITICAL_SECTION ptr table (0x30 = 48 entries, 0x10031aac..0x10031b6c)"
 
 # ---- extra globals referenced by the crt_region CRT-startup/allocator fns ----
 status = "VERIFIED"
-size = 256
+size = 192
 
 ["SERVER.0x11766438"]
 name = "__sbh_pHeaderScan"

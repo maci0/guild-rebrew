@@ -49,6 +49,39 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-904: fixed the one measured defect round 903 left — `locktable`'s size — and it landed byte-neutral.**
+
+- **Round 903 ended with one concrete, measured defect and a reason not to fix it in the same
+  round** ("correcting a `.data` metadata size has moved raw-link `.data` before"). This round gave
+  it that measurement.
+- **Re-verified the extent by a second, independent method** rather than reusing round 903's
+  disassembly read — the right precaution, since that round's *first* reading of this same loop was
+  the unrolling artifact. Scanned `.text` for every immediate of the form `base + 0x10k`:
+  ```
+  base+0x000  (the array start)
+  base+0x0c0  (192 -- the loop bound, = __tlsindex at 0x10031b6c)
+  base+0x0d0  (208 -- the next object)
+  ```
+  **No `base+0x100` appears**, so 256 was never reachable. Two methods, same answer: **192 bytes,
+  48 entries.**
+- **Fixed both the metadata and the source:**
+  - `rebrew-data.toml`: `size` 256 → **192**, type `CRITICAL_SECTION*[0x40]` → `[0x30]`, note updated
+    with the span and the evidence.
+  - `data_globals.c`: `CRITICAL_SECTION* locktable[0x40]` → `[0x30]`, with the loop bound and the
+    second-method scan recorded in a comment, including **why `[0x40]` is wrong** (it would overlap
+    `__tlsindex`).
+- **Measured: gate pass and byte-neutral** — residue **8,634 unchanged**, raw-link `.data` **21,836
+  unchanged**, verify 281/283, byte-matched 264. **The first type-consistency fix this session that
+  costs nothing**, against round 902's two `+236 .data` / 14-`LNK2001` attempts. The difference is
+  that this one corrected a *fact* (the extent) that no code depended on for sizing, whereas the
+  earlier two changed objects that the composition budget actually relies on.
+- **`locktable` still reports as a conflict after the fix, and that is correct.** `mlock.c`'s
+  `CRITICAL_SECTION** locktable = __locktable` alias is deliberate — LIBCMT's `tidtable.obj`
+  references `_locktable` with that type. **The size error and the type conflict were two separate
+  things sharing a name**; fixing the first does not and should not silence the second. Worth
+  stating because a future reader will see this entry in `rebrew data` and re-open it otherwise.
+- **Conflict count stays 11**, with one entry now internally consistent.
+
 **Round-903: the last two unexamined conflicts are both intentional — and one reading of the reference was an unrolling artifact.**
 
 - **Applied round 902's rule** ("read the defining TU before touching a conflicted global") to the two

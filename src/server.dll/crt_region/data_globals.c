@@ -55,7 +55,12 @@ int (__stdcall* g_11767588)(void* hmod, unsigned int reason, void* reserved); /*
 char g_lock_stream_table;  /* stream lock-pointer table anchor */
 
 // DATA: SERVER 0x10031aac
-CRITICAL_SECTION* locktable[0x40]; /* per-lock CRITICAL_SECTION ptrs */
+/* 48 entries, not 64: the reference's own cleanup loop bounds this array with
+ * `cmp esi,0x10031b6c; jl` (0x1001d00b), i.e. 0x10031aac + 0xc0 = 192 bytes.
+ * Confirmed by a second method -- the only base+NN immediates in .text are
+ * +0x0, +0xc0 (the bound) and +0xd0 (the next object); no +0x100 appears.  A
+ * [0x40] spelling would overlap __tlsindex at 0x10031b6c. */
+CRITICAL_SECTION* locktable[0x30]; /* per-lock CRITICAL_SECTION ptrs (48) */
 
 /* --- additional globals referenced by the crt_region CRT-startup and
  * allocator functions (data_restore.c covers the .data raw gap; these live

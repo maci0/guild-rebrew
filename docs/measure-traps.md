@@ -133,6 +133,14 @@ the 8,634 as one cascade.
   The four `cmp … 0x10031aX0` are the **4-way-unrolled body's** per-iteration checks; the loop
   actually ends at `0x10031b6c`. Reading the first exit as the bound gives **68 entries**; the true
   array is **48** (`0xC0` bytes). **Read the `add`/`cmp`/`jl` tail, not the first `cmp` you meet.**
+- **Confirm a size claim by a second, structurally different method before editing anything
+  (round 904).** The same array's extent was needed twice — once misread by disassembly (above), and
+  again a round later to justify a metadata fix. The second time it was cross-checked by scanning
+  `.text` for immediates of the form `base + 0x10k`, which needs no control-flow reasoning at all:
+  only `+0x0`, `+0x0c0` (the bound) and `+0x0d0` (the next object) appear, and **no `+0x100`**, which
+  is what the old metadata claimed. **The check cost one command and would have caught round 903's
+  error before it was written up.** When a fix depends on "how big is this object", get the number
+  two ways.
 - **A conflict report cannot express "two objects, one name, two consumers" (round 903).**
   `rebrew data` flagged `locktable` as `CRITICAL_SECTION*[0x40]` vs `CRITICAL_SECTION**`. Both are
   intentional: `data_globals.c` defines the array the binary's own cleanup loop walks, and
