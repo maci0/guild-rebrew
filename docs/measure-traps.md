@@ -573,6 +573,10 @@ final table as the only remaining place a code-shape claim can be true.
 "how do I fix it" but "what else could produce this number". Here the answer was padding, and the
 size of the fake signal (-51) was larger than any real one the method found (+3).
 
+The same caution applies to operands, and cost part of round 924: an operands-level census showed a
+nonsense `push` immediate and a real bug behind it, but the "37 undefined symbols" population that
+looked like the same bug 20 more times was mostly `link_stubs.c` placeholders. See §6h.
+
 ## 7. The size rule has two branches, and mixing them discards good work
 
 `cl` pads each COMDAT to 16 bytes, so for an object with **no** relocated data after its code
@@ -698,3 +702,63 @@ before comparing two figures.
 - Slot maps: the sentinel-initial probe (`msvc6-allocator.md` Finding 60).
 - Gate: `bash scripts/gate.sh` (lint + compile errors only + `verify --full` against a 281
   baseline). Expect the build's post-link step to fail; only `error C####`/`LNK####` count.
+
+## 6h. An "undefined symbol" in this tree usually is not one — check `link_stubs.c` first (round 924)
+
+Round 924 found a real bug with a tempting generalisation attached, and the generalisation was
+wrong. Recording both halves.
+
+**The real bug.** `cm_ExSellObjekt.c` called
+
+```c
+LogMessageInternal("D:\\...\\command.c", 0x2e45, g_error_msg_sell_failed, 8);
+```
+
+where `g_error_msg_sell_failed` is declared `extern char[]` and has **no definition in the tree and
+no entry in `rebrew-data.toml`**. It therefore never reaches the linker as a named reference at all;
+the operand came out as a bare immediate (`push 0x11766604`) where the reference has a relocated
+`push 0x1002cc8c`. Fixing it to a literal moved linked `.text` residue **8,634 -> 8,633** and
+raw-link `.data` differing **21,836 -> 21,481**.
+
+**The wrong generalisation.** Every COFF object in the build reports **587 distinct undefined
+externals**, among them a large `_s_..._1002xxxx` string family — e.g.
+`_s_D__Develop_DieGildeAddOn_command_1002c748` is undefined in 12 places, and
+`_s_amt_fio_LoadAemter____Can_t_load_10029f78` in one. That *looks* like the same bug repeated 20
+times. It is not:
+
+- **Those symbols are defined — in `src/link_stubs.c`, as 1-byte empty strings.**
+  `char s_D__Develop_DieGildeAddOn_command_1002c748[1] = "";` and 10 more like it. They are
+  deliberate placeholders whose only job is to give the linker a symbol; their *content* is
+  irrelevant because the shipped `.data` is blitted wholesale from the layout package.
+- **Giving one its real content is a measured loss.** Replacing the 1-byte stub with the reference's
+  actual 43-byte `"D:\Develop\DieGildeAddOn\command\command.c"` grew `.data` and pushed the common
+  symbols past their span: **residue 8,633 -> 8,635 (+2)**. Reverted.
+- `link_stubs.c`'s own header already says why: `.data`'s pad budget is compared against the
+  reference's `.data` **VirtualSize**, so any stub that grows overshoots and every operand naming a
+  common symbol fails (round 139).
+
+**Four sweep detectors were written for this and all four were wrong**, which is itself the finding:
+
+| detector | reported | why it was wrong |
+|---|---|---|
+| regex `extern` vs `defined` over `src/**` | 22 pairs | counted symbols merely *named in docstrings* until comments were stripped; then 5 |
+| same, comments stripped | 37 pairs | treated the `(char*) 0x10031004` cast convention as a definition it had not seen |
+| object COFF `*UND*` list, minus a `src/` definition scan | 60 | the scan missed `link_stubs.c`'s own declaration forms, so it re-flagged symbols that file defines |
+| same, with `link_stubs.c` defs extracted | 160 | still flagged common symbols the **layout package** resolves (`g_entity_type_table`, 29 uses) that the linker is perfectly happy with |
+
+The last one is the tell: when a detector reports 160 "missing" symbols in a tree whose link is green
+and whose import table matches the reference exactly, **the detector is wrong, not the tree**. The
+authoritative answer was available the whole time and cost nothing — the link succeeds, `gate.sh`
+passes, and `link_stubs.c` documents its placeholder scheme in its own header. Prefer the toolchain's
+verdict over any grep.
+
+**So the test is not "is this symbol undefined" but "does it have a definition *anywhere*".**
+`grep -rn '<symbol>' src/` and look for a non-`extern` line — `link_stubs.c` is where they live. A
+symbol defined there as `[1] = ""` is finished work, not a defect; a symbol with *no* definition
+anywhere is the bug. Distinguishing those two took most of this round, and the count difference is
+the difference between a 1-item fix (done) and a 20-item vein (does not exist).
+
+**One genuine residue remains in the neighbourhood:** `gm_Open.c` used the shared symbol at 11 sites,
+and the reference does push one shared address (`0x10031004`) at every one of them — so the shape was
+right and only the definition was missing. Rewritten to the `(char*) 0x10031004` cast the rest of the
+tree uses for that string: **byte-neutral**, 11 undefined operands removed.

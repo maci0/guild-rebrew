@@ -19,8 +19,13 @@ extern unsigned int g_1009b764;
  * provided it as `getpid` before run_000.c was dropped (c77489a). */
 extern void __cdecl srv_SeedRandomWithTime(void);
 
-/* Round-548: cross-TU path share with spiel named def — kill gm_Open anon path COMDATs in restore-gap window. */
-extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[];
+/* Round-548: cross-TU path share with the spiel module's named definition.  The
+   reference pushes the SAME address (0x10031004, "D:\Develop\DieGildeAddOn\game\
+   spiel.c") at every log site, so it is one shared object, not an anonymous
+   per-site literal.  Expressed as the raw-address cast the rest of the tree uses
+   for this exact string; the earlier `extern char s_...[]` form had no definition
+   anywhere, so every one of the 11 sites emitted an unrelocatable operand
+   (round 924). */
 
 // FUNCTION: SERVER 0x10015950
 // gm_Open
@@ -86,11 +91,11 @@ int __cdecl gm_Open(int map_id)
 	char* def_row;
 	char* cat_p;
 
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x4d3, "gm_Open(): enter", 1);
+	LogMessageInternal((char*) 0x10031004, 0x4d3, "gm_Open(): enter", 1);
 	/* 0x10031204 is "gm_Open(): St\344dte" (Latin-1 a-umlaut, byte 0xe4).  The
 	   text sits in a relocation slot, so a wrong string still scores RELOC;
 	   see docs/msvc6-c-shapes.md section 36. */
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x4d6, "gm_Open(): St\344dte", 1);
+	LogMessageInternal((char*) 0x10031004, 0x4d6, "gm_Open(): St\344dte", 1);
 	src_player_ptr = (unsigned int*) &g_100a8cf8;
 	dst_player_ptr = (unsigned int*) &g_1009b764;
 	do {
@@ -108,10 +113,10 @@ int __cdecl gm_Open(int map_id)
 		dst_player_ptr = dst_player_ptr + 0xaa4;
 	} while ((int) src_player_ptr < (int) 0x100a9bbc);
 	/* 0x100311f0 is "gm_Open(): Geb\344ude" (Latin-1 a-umlaut, byte 0xe4). */
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x4e3, "gm_Open(): Geb\344ude", 1);
+	LogMessageInternal((char*) 0x10031004, 0x4e3, "gm_Open(): Geb\344ude", 1);
 	g_entity_type_table = (char*) m_AllocTracked(0xca78, (const char*) 0x100311d8);
 	if (g_entity_type_table == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x4e8, "Memory could not be allocated!", 1);
+		LogMessageInternal((char*) 0x10031004, 0x4e8, "Memory could not be allocated!", 1);
 		return -1;
 	}
 	g_entity_ptr = (unsigned char*) m_AllocTracked(0xa900, (const char*) 0x100311a0);
@@ -122,7 +127,7 @@ int __cdecl gm_Open(int map_id)
 	sprintf((char*) path_buf, (char*) 0x1003118c, map_id, (char*) 0x10031194);
 	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
-		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x4f5, (char*) 0x10031154, 1);
+		LogMessageInternal((char*) 0x10031004, 0x4f5, (char*) 0x10031154, 1);
 		return -3;
 	}
 	fread((void*) g_entity_type_table, 0x24d, 0x58, file_handle);
@@ -140,7 +145,7 @@ int __cdecl gm_Open(int map_id)
 	file_handle = fopen((char*) path_buf, (char*) 0x1002944c);
 	if (file_handle == 0) {
 		LogMessageInternal(
-			s_D__Develop_DieGildeAddOn_game_sp_10031004,
+			(char*) 0x10031004,
 			0x52d,
 			"Objekt-Daten konnten nicht geladen werden! (A_Obj.dat)",
 			1
@@ -149,12 +154,12 @@ int __cdecl gm_Open(int map_id)
 	}
 	fread((void*) g_item_def_table, 0x41, 0x2dc, file_handle);
 	fclose(file_handle);
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x536, "gm_Open(): gm_InitObjektHersteller", 1);
+	LogMessageInternal((char*) 0x10031004, 0x536, "gm_Open(): gm_InitObjektHersteller", 1);
 	gm_InitObjektHersteller();
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x53a, "gm_Open(): gm_KillAllSpieler", 1);
+	LogMessageInternal((char*) 0x10031004, 0x53a, "gm_Open(): gm_KillAllSpieler", 1);
 	gm_InitEntitySlots();
 	LogMessageInternal(
-		s_D__Develop_DieGildeAddOn_game_sp_10031004,
+		(char*) 0x10031004,
 		0x53e,
 		"gm_Open(): ---- Das dusselige Datendesign hinbiegen !! -----",
 		1
@@ -187,7 +192,7 @@ int __cdecl gm_Open(int map_id)
 	/* Original seeds the RNG from the system timer before the exit log
 	 * (fcn.1001a140 = srand(timeGetTime())). */
 	srv_SeedRandomWithTime();
-	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x588, "gm_Open(): exit", 1);
+	LogMessageInternal((char*) 0x10031004, 0x588, "gm_Open(): exit", 1);
 	return 0;
 }
 

@@ -218,6 +218,9 @@ Ordered by what the evidence says is most likely to pay.
 Established 2026-09-17 after rounds 833-843, by exhaustion with the population stated at each
 step rather than by assertion. **Under C89, MSVC6 SP6, `/O2 /Gd`, no asm, no naked, no `_emit`:
 the whole-tree `.text` residue floor for this binary is 8,634 bytes**, all inside 18 functions.
+(Round 924 lowered the *actual* residue to **8,633** and the raw-link `.data` differing count
+from 21,836 to **21,481** — see §10. The 8,634 floor above remains the figure rounds 833-843
+measured and is what those rounds' evidence supports; it is not re-derived here.)
 
 The shape of that floor (round 840, whole tree): **610 contiguous differing runs, median 5,
 mean 14.2, longest 189, 254 of them exactly one byte**, with the nine largest carriers holding
@@ -327,3 +330,46 @@ correct after all; shapes §104's table stands.
 **Reuse:** this script is the cheap whole-image audit. Run it after any change that could
 alter codegen globally, and treat any function appearing in its final table as the only place
 a code-shape story can still be true.
+
+### 10. A function-argument that was an undefined stub, found by reading the emitted operand (round 924)
+
+The first residue movement since round 901, and it came from the section-9 instrument: decoding
+*mnemonics* does not see it, but decoding **operands** does.
+
+At `0x1000e12a` in `cm_ExSellObjekt` the reference emits `push 0x1002cc8c` (`68 8c cc 02 10`) —
+a relocated reference to the message string `"cm_ExSellObjekt(): Ziel-Besitzer ist kein
+Gebaeude"`. Our build emitted `push 0x11766604` (`68 04 66 76 11`) — a nonsense immediate.
+The source line was
+
+```c
+LogMessageInternal("D:\\...\\command.c", 0x2e45, g_error_msg_sell_failed, 8);
+```
+
+and **`g_error_msg_sell_failed` is declared `extern char[]` at the top of the file but never
+defined and never present in `src/rebrew-data.toml`.** An undeclared-in-practice array decays to
+an address the compiler cannot relocate, so the push became an immediate. The other 11
+`LogMessageInternal` sites in the same file pass **string literals**, which is what produces the
+reference's relocated `push`.
+
+Substituting the reference's own message as a literal:
+
+| metric | before | after |
+|---|---|---|
+| linked `.text` residue | 8,634 | **8,633** |
+| raw-link `.data` differing bytes | 21,836 | **21,481** |
+
+Both improved, so both baselines were lowered. The `.data` gain is 355 bytes — much larger than
+the `.text` gain — because the literal now participates in the merged string pool instead of
+leaving a hole.
+
+**Two lessons, both general:**
+
+- **An `extern` declaration that has no definition is a silent operand bug.** `lint` passes (the
+  header is well-formed), the compile passes (a warning at most), the object size is unchanged
+  (`0x810` both ways), and only the *operand bytes* are wrong. **Grep every `extern char[]` in a
+  file and check each one is either defined in the tree or in `rebrew-data.toml`.** This file
+  alone carries 9 such declarations for strings at `0x1002cdxx`-`0x1002cexx`; the one that was
+  *used* was the broken one, which is why it went unnoticed.
+- **`.data` residue is invisible to a `.text`-only objective check.** The gate could not see this
+  half of the win until round 863 added the raw-link `.data` ceiling. When a source change alters
+  a literal's placement, measure both sections.

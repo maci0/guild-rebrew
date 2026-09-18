@@ -25589,3 +25589,50 @@ truth for game code. One caveat found by actually running the pull: it also
 writes the **other target** (`Europa1400Gold_TL.exe` layout, `.def` and
 `crt_region/` files), which is out of scope here, so a pull needs those
 reverted. Verify held at 264 byte-matched through the experiment.
+
+**Round-924: found a real operand bug class — `extern` declarations with no definition. Residue 8,634 -> 8,633, raw-link `.data` 21,836 -> 21,481.**
+
+- **Opened by round 923's instrument, at the operand level rather than the mnemonic level.** Decoding
+  `cm_ExSellObjekt` against the reference showed the reference emitting `push 0x1002cc8c`
+  (`68 8c cc 02 10`, a relocated reference to `"cm_ExSellObjekt(): Ziel-Besitzer ist kein Gebaeude"`)
+  where my build emitted `push 0x11766604` (`68 04 66 76 11`) — a nonsense immediate. The source line
+  passed `g_error_msg_sell_failed`, which is **declared `extern char[]` and never defined anywhere**,
+  so it decayed to an unrelocatable operand. The other 11 `LogMessageInternal` sites in the same file
+  pass literals, which is what produces the reference's relocated push.
+- **Measured, on the two-ruler rule:** linked `.text` residue **8,634 -> 8,633** and raw-link `.data`
+  differing **21,836 -> 21,481 (-355)**, both re-confirmed by a full `gate.sh` after a clean rebuild.
+  Both baselines lowered in `scripts/gate.sh` (the `.data` gain is 355x the `.text` gain because the
+  literal now joins the merged string pool instead of leaving a hole).
+- **Why nothing had caught it:** lint passes (the header is well-formed), the compile passes bar a
+  `C4013`-class warning, and the **object size is identical** (`0x810` before and after). Only the
+  operand bytes differ, and the `.text`-only objective check could not see the `.data` half.
+- **Chased the population and found it much smaller than it first looked — read this before
+  re-sweeping.** A grep-level sweep reported "37 live uses of undefined `extern` declarations", but the
+  authoritative check (parse every object's COFF symbol table: **587 distinct undefined externals**)
+  showed most of them *are* defined — in `src/link_stubs.c`, as deliberate **1-byte empty strings**
+  (`char s_..._1002c748[1] = "";` and 10 more). Those are placeholders whose content is irrelevant
+  because the shipped `.data` is blitted from the layout package, and `link_stubs.c`'s own header
+  records that growing one overshoots the `.data` VirtualSize budget.
+- **Proved that by measurement rather than assuming it:** replaced the 1-byte stub for
+  `s_D__Develop_DieGildeAddOn_command_1002c748` with the reference's real 43-byte content
+  (`"D:\Develop\DieGildeAddOn\command\command.c"`) — **residue 8,633 -> 8,635 (+2)**. Reverted.
+  So the stub-content axis is **closed**, and the rule is: a symbol defined anywhere (including
+  `link_stubs.c`) is finished work; only a symbol with **no** definition anywhere is a bug. The real
+  population was the 1 item fixed below, not 20. Recorded as measure-traps §6h.
+- **Fixed a second one, byte-neutrally.** `gm_Open.c` passed
+  `s_D__Develop_DieGildeAddOn_game_sp_10031004` at all 11 sites. The reference genuinely pushes the
+  **same** address `0x10031004` at every site (verified: 5+ identical `push 0x10031004`), so round
+  548's *shared-symbol* choice was right in form — the defect was only that the symbol has no
+  definition. Rewritten to the raw-address cast `(char*) 0x10031004` that the rest of the tree uses for
+  this exact string (`gm_AllocObjekt.c`, `gm_AllocRaum.c`), removing 11 undefined operands at **+0
+  bytes**, which is the correct outcome for a correctness fix with no codegen consequence.
+- **CLOSED: this is not a vein, and three attempts to size it as one all failed.** Grep-level
+  sweeps gave 37, then 22, then 60, then 160 "undefined and used" symbols; **every one of those
+  detectors was wrong**, in both directions, and the honest number is the one the toolchain already
+  reports: the link resolves, 100 imports match, gate is green, and `link_stubs.c` supplies the
+  placeholder definitions by design. Round 924's real yield was exactly two edits — `cm_ExSellObjekt`
+  (-1 `.text`, -355 raw-link `.data`) and `gm_Open.c` (byte-neutral, 11 operands cleaned). **Do not
+  re-open this from any undefined-symbol list.** The remaining work is the 19 `.text` carriers,
+  `CrashDump`'s 0x280 frame rule, and the record/history docs.
+- **Measured:** gate pass, residue **8,633**, raw-link `.data` **21,481**, verify 281/283,
+  byte-matched 264, imports 100.

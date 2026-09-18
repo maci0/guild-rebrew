@@ -520,7 +520,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 						return 1;
 					}
 				} else {
-					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e45, g_error_msg_sell_failed, 8);
+					LogMessageInternal("D:\\Develop\\DieGildeAddOn\\command\\command.c", 0x2e45, "cm_ExSellObjekt(): Ziel-Besitzer ist kein Geb\xe4ude", 8);
 					return 1;
 				}
 			} else {

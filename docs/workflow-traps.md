@@ -115,3 +115,47 @@ Each cost real budget and each is the kind of mistake the next attempt would rep
   Fifteen symbols were lifted at zero byte cost. **One `rebrew data --json` query would have shown
   the vein was nearly empty before the third failed batch.** When a vein's payoff is "provably
   byte-neutral", that is a signal it is not on the critical path — measure the population first.
+
+## 3b. A declaration is not a definition: sweep for undefined `extern` operands (round 924)
+
+Two `gate.sh` checks and `rebrew lint` can all be green while a translation unit references a symbol
+that **does not exist anywhere**. `extern char name[];` at the top of a file, never defined in the
+tree and never named in `src/rebrew-data.toml` — and then *used* — decays to an operand the compiler
+cannot relocate. The emitted bytes are wrong, and nothing reports it:
+
+- `rebrew lint` passes: the identity header and marker contract are about the function, not its operands.
+- the compile passes: at worst a warning, and `C4013` for a missing *function*.
+- **the object size is unchanged** — measured on `cm_ExSellObjekt`, `.text` was `0x810` both with the
+  broken operand and with the fix. So every size-based ruler is blind to it.
+- only the `.text` residue moves (and, when the operand was a string, the raw-link `.data` too).
+
+**Run this before believing a file is finished:**
+
+```
+python3 - <<'PY'
+import re, glob
+defined=set()
+for p in glob.glob('src/**/*.c')+glob.glob('src/**/*.h'):
+    t=open(p,errors='replace').read()
+    for m in re.finditer(r'^\s*(?!extern\b|static\b)[A-Za-z_][\w \t\*]*\b(\w+)\s*(\[[^\]]*\]|=[^;]*)\s*;',t,re.M):
+        defined.add(m.group(1))
+meta=set(re.findall(r'name\s*=\s*"(\w+)"',open('src/rebrew-data.toml').read()))
+for p in glob.glob('src/**/*.c'):
+    code=re.sub(r'//[^\n]*','',re.sub(r'/\*.*?\*/','',open(p,errors='replace').read(),flags=re.S))
+    for n in set(re.findall(r'^\s*extern\s+[^;]*?\b(\w+)\s*\[',code,re.M)):
+        if n not in defined and n not in meta:
+            uses=len(re.findall(r'\b%s\b'%n,code))-len(re.findall(r'extern\s+[^;]*\b%s\b'%n,code))
+            if uses: print(uses, n, p)
+PY
+```
+
+Measured round 924: **37 live uses in the `server.dll` tree** (plus 4 data globals — a separate
+sub-class worth checking the same way). Strip comments first, or every symbol merely *named in a
+docstring* counts as a use and the list is four times too long.
+
+**Do not "fix" these by inlining literals without checking what the reference pushes.** `gm_Open.c`
+passed one shared symbol at 11 sites; the reference pushes the **same address** `0x10031004` at every
+one of them, so the shared-symbol shape was correct and only its missing definition was the defect.
+Two failures in this class, two different correct answers: `cm_ExSellObjekt` needed a literal
+(the reference relocates a per-site string), `gm_Open` needed a defined address. Read the reference's
+pushes first.
