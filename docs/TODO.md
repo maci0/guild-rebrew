@@ -49,6 +49,34 @@
 
 ### Continuation notes (written at the end of a long session; start here)
 
+**Round-961: third initialiser permutation measured (also a loss); the divergence narrowed to a three-reference rotation.**
+
+- **Round 960 established that initialiser order steers the slot map. This round measured the reverse
+  order** — the most informative single permutation left — and it is also a loss:
+  | initialiser order | slots in store order | residue |
+  |---|---|---|
+  | shipped | `0x10, 0x24, 0x30, 0x14, 0x1c, 0x28, 0x2c, 0x18` | **8,628** (baseline) |
+  | ascending-by-our-slot | `0x30, 0x28, 0x14, 0x10, 0x1c, 0x24, 0x2c, 0x18` | 8,630 (+2) |
+  | ascending-by-target-slot | `0x10, 0x30, 0x28, 0x14, 0x24, 0x1c, 0x2c, 0x18` | 8,629 (+1) |
+  | **reversed** | `0x28, 0x1c, 0x14, 0x30, 0x24, 0x10, 0x2c, 0x18` | **8,630 (+2)** |
+  Four assignments, four distinct slot maps, **all three alternatives worse than the shipped order**.
+  Reverted; the axis is live but unproductive in the orders tried.
+- **Narrowed what the divergence actually is**, which is the useful part for any future attempt.
+  Counting uses of the two slots the sets do not share, across the whole 674-instruction body:
+  | | `[esp+0x20]` | `[esp+0x24]` |
+  |---|---|---|
+  | reference | 7 | 3 |
+  | ours | 5 | 4 |
+  **Both slots are live on both sides** — no variable is missing, and the difference is a
+  **three-reference rotation between two adjacent dwords**, not the wholesale permutation the eight-store
+  table suggests. Recorded in allocator Finding 63.
+- **Stop condition for this axis:** three permutations of 7! is not a search worth running blind when
+  each costs a full rebuild, and the two informative orders (both ascending, and reversed) are done.
+  **The narrowing is the deliverable:** a future round should target the two-slot rotation directly
+  rather than sweeping orders.
+- **Measured:** probe reverted; gate pass; residue **8,628**, raw-link `.data` **21,481**,
+  verify 281/283, byte-matched 264, imports 100, wine load OK.
+
 **Round-960: FOUND that initialiser order DOES steer the slot map — contradicting Finding 63's "reorder is inert" — but every permutation measured is a loss.**
 
 - **Tested round 959's concrete claim** (ours uses slot `0x24` where the reference uses `0x20`, the other

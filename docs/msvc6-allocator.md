@@ -3219,11 +3219,23 @@ addresses, same slots, same order (round 959).
 | ascending-by-our-slot | `0x30, 0x28, 0x14, 0x10, 0x1c, 0x24, 0x2c, 0x18` |
 | ascending-by-target-slot | `0x10, 0x30, 0x28, 0x14, 0x24, 0x1c, 0x2c, 0x18` |
 
+| reversed | `0x28, 0x1c, 0x14, 0x30, 0x24, 0x10, 0x2c, 0x18` | **8,630** (+2) |
+
 So **the initialiser sequence is a live lever on the slot map**, contrary to "declaration reorder is
-likewise identical" above. Neither permutation reproduced the reference's assignment, and the third
-measured **8,629 against the 8,628 baseline — a regression the gate caught** (round 960; the round first
-misread `0x21b5` as an improvement before `gate.sh` refused it). What is closed is the claim of
-*inertness*; the axis itself is open and is the place to look if this row is ever revisited.
+likewise identical" above. What is closed is the claim of *inertness*; the axis itself is open. Three
+permutations measured, **all three losses**, none reproducing the reference's assignment.
+
+**And the divergence is smaller than "a permutation" suggests.** Counting uses of the two slots the sets
+do not share, over the whole 674-instruction body:
+
+| | `[esp+0x20]` | `[esp+0x24]` |
+|---|---|---|
+| reference | 7 | 3 |
+| ours | 5 | 4 |
+
+Both slots are live on both sides, so no variable is missing — it is a **three-reference rotation**
+between two adjacent dwords. That is the precise target if this row is revisited, and it is much
+narrower than the eight-store table implies.
 
 **Method note:** this is why a score read from one ruler is not a result. The residue went **up** by one
 byte and the hex `0x21b4 -> 0x21b5` was briefly read as a gain; `gate.sh`'s baseline comparison, not the
