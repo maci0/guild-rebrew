@@ -2339,3 +2339,45 @@ plausibly before reading any count from a narrow window.
 
 Both traps share a shape with §24 ("instruction counts across two images are not comparable — the decoder's
 stop rule decides the answer") and §42 ("check whether a looser measurement counts the same population").
+
+## 45. `difflib.SequenceMatcher` reports 100% equal on streams that differ at instruction 21 (round 1048)
+
+Round 1047 introduced instruction-level alignment (mnemonic + operand with `0x...` normalised) as the sound
+instrument for "is this region displaced", replacing the byte-level test of §38/§44. It used
+`difflib.SequenceMatcher` to count matching instructions. **That library call is not an alignment and its
+"equal" count is not a measurement.**
+
+**Measured, on `cm_ProcessCommandQueue` (`0x1000aac0`):**
+
+```
+SequenceMatcher equal count : 342 of 342  -> reported 100.0%
+direct prefix walk          : first modulo-address difference at index 21
+```
+
+SequenceMatcher achieved 342/342 with **two** matching blocks and one delete, i.e. it found a long matching
+block *after* the divergence, matched everything on both sides of a gap, and never reported the gap as a
+difference at that granularity. The streams differ at instruction 21 — the reference has
+`test ebx,ebx; je 0x1000ab38` there (the shared `recheck` guard of shapes §61) and we go straight to
+`jmp 0x1000ad08`.
+
+**The sound instrument has two parts, and the second is the one that matters:**
+
+1. **Direct prefix walk** — advance `k` while `norm(ref[k]) == norm(our[k])`. This cannot skip a divergence
+   and gives the true first difference. It carries no alignment assumption at all.
+2. **Resync scan after `k`** — for each instruction offset in a bounded window, count how much of the tail
+   matches. This is what says *how much* of the rest is displaced, and at which offset.
+
+Applied to `cm_ProcessCommandQueue`, part 2 finds **319/319 exact tail match at offset +2**: after the
+2-instruction divergence our stream equals the reference's exactly, shifted by 2 instructions. So the
+carrier's *entire* residue is those two instructions, and everything after is displacement. That is a far
+sharper statement than the SequenceMatcher table's "100%".
+
+**The rule.** Never read a `SequenceMatcher` ratio as an alignment result. A matching-blocks ratio is
+**monotone in similarity, not in alignment** — it skips gaps by construction, which is exactly the quantity
+being measured. Use a direct walk for "where do the streams first differ" and an explicit offset scan for
+"how much of the tail is displaced". Block-matching libraries are for diff display, not for measuring
+displacement.
+
+This is measure-traps §31 ("exact isomorphism over ADDRESSES answers the wrong question — establish
+correspondence first") in a new form: here the correspondence method itself silently suppressed the
+difference it was meant to find.

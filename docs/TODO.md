@@ -29629,3 +29629,54 @@ spellings targeting the first cluster's neighbourhood remain measured and losing
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1048 — the corrected instrument's first run was itself unsound; replaced, and all 19 carriers re-profiled
+
+Round 1047 replaced the byte-level displacement test with instruction-level comparison using
+`difflib.SequenceMatcher`. Applied across all 19 carriers this round, it reported **`cm_ProcessCommandQueue`
+as 100.0% equal (342/342)** — a carrier with 15 residue bytes. That is impossible, so the instrument was
+checked before the table was believed.
+
+**It was the instrument.** A direct prefix walk finds the first modulo-address difference at **index 21**;
+SequenceMatcher had found two long matching blocks that skip the divergence entirely and reported 100%.
+Recorded as measure-traps §45: a matching-blocks ratio is monotone in similarity, not in alignment, and must
+never be read as an alignment result.
+
+**Sound instrument, two parts:** (1) a **direct prefix walk** giving the true first difference — it carries no
+alignment assumption; (2) a **resync offset scan** on the tail, giving how much of the rest is displaced and
+at what offset.
+
+**Re-profiled, all 19 carriers:**
+
+| carrier | ref i | our i | 1st diff | prefix % | tail @ best offset |
+|---|---|---|---|---|---|
+| `gm_AllocSpieler` | 1056 | 1014 | 48 | 4.7% | 227/964 |
+| `CrashDump` | 733 | 656 | 2 | 0.3% | 130/654 |
+| `cm_ExSellObjekt` | 674 | 674 | 193 | 28.6% | 176/481 |
+| `ls_LoadBuildingEntityState` | 508 | 506 | 33 | 6.5% | 143/473 |
+| `cm_ExCopyEntityData` | 120 | 114 | 64 | 56.1% | 11/47 |
+| `gv_ExAllocGraveyardWorker` | 171 | 171 | 145 | **84.8%** | 4/26 |
+| `ServerMainThread` | 641 | 641 | 279 | 43.5% | 35/361 |
+| `gm_AllocGebaeude` | 346 | 349 | 38 | 11.0% | 139/308 |
+| `vfs_OpenStream` | 209 | 209 | 18 | 8.6% | 44/191 |
+| `gm_FindNextFilteredEntity` | 124 | 120 | 2 | 1.7% | 45/113 |
+| `ahm_ExAllocAlchemist` | 176 | 177 | 66 | 37.5% | 19/110 |
+| `gm_CheckInventoryCapacity` | 138 | 137 | 8 | 5.8% | 107/128 |
+| `m_AllocTracked` | 263 | 263 | 6 | 2.3% | 47/256 |
+| `srv_LoadBuf` | 228 | 228 | 26 | 11.4% | 17/180 |
+| `gm_ObjectsAvailble` | 235 | 235 | 73 | 31.1% | 16/116 |
+| `vfs_ReadCompressed` | 187 | 187 | 65 | 34.8% | 5/76 |
+| `cm_ExProdObjekt` | 369 | 369 | 73 | 19.8% | 18/294 |
+| `cm_ProcessCommandQueue` | 344 | 342 | 21 | 6.1% | **319/319** |
+| `gm_CalculateProductionValue` | 127 | 127 | 68 | 53.5% | 5/58 |
+
+**The sharpest row is `cm_ProcessCommandQueue`:** the resync scan finds **319/319 exact tail match at offset
++2**, so its entire residue is the 2 instructions at index 21 — the shared `recheck` guard
+(`test ebx,ebx; je 0x1000ab38`) that the reference falls into and we skip. **That is already documented and
+closed**: shapes §61 records the same guard, the `held = pkt; goto recheck;` spelling, and that it "collapses
+the entire function — matched-reloc 584 -> 142". No probe spent.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
