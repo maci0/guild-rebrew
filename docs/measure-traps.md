@@ -1430,3 +1430,63 @@ round-999 conclusions hold. What changes is the *magnitude* — a 49.2% alignmen
 
 **The rule.** Use `--obj build/CMakeFiles/server_dll.dir/<path>.c.obj` when the question is about codegen, and
 remember to `cmake --build build` first (measure-traps §22 — a stale object measures the previous edit).
+
+## 26. `spiel622.c` holds 16 functions in one object — a per-function span reader must pick the right COMDAT (round 1001)
+
+Round 1001 verified `gm_CalculateProductionValue`'s recorded **"+4 bytes of upward slack"** and found the
+figure stale — but reaching that conclusion required noticing that the naive reader is wrong on this file,
+which is worth recording separately because two of this project's scripts read objects that way.
+
+`spiel622.c` contains **16 functions**, each its own COMDAT `.text` section in one object:
+
+```
+COMDAT .text[2] raw=96   [4] raw=400   [6] raw=368   [8] raw=80   [10] raw=112
+[12] raw=96   [14] raw=64   [16] raw=96   [18] raw=128   [20] raw=112
+[22] raw=48   [24] raw=48   [26] raw=416   [28] raw=400   [30] raw=112   [32] raw=32
+```
+
+A reader that sums or takes the **first** `.text` section gets 96 — and a reader that loops without breaking
+reports the last one. Both give a number unrelated to the function being asked about. The correct read is the
+COMDAT whose size matches the function's placement:
+
+```
+gm_CalculateProductionValue  0x10019720 .. 0x100198b0  = 400 bytes  ->  COMDAT .text[4] raw=400
+```
+
+**Slack is 0, not +4.** The header at `spiel622.c:174-178` records:
+
+```
+ * Per shapes 88 the real body is 396 and the COMDAT span is 400 (4 pad bytes),
+ * so the ceiling runs 396/397/398/400 -> 400 and only 401 -> 416: there is
+ * **+4 bytes of upward slack** and 397 is SPAN-NEUTRAL.
+```
+
+The COMDAT is already **400** — it fills the span exactly, and the 4 trailing `nop`s are *inside* it, not spare
+capacity. A 397-byte variant would fit in the 400-byte COMDAT only if it were padded back to 400; a 401-byte
+one would push the COMDAT to 416 and displace every later function in the file. So the "upward slack" reading
+inverts the geometry: there is no room to grow, and the recorded reason for the 397 variant being affordable
+does not hold.
+
+**The practical consequence on that carrier is nil** — the 397 shape was already recorded as losing on
+*structure*, not size: *"unfolding the compare shifts every byte after 230 and takes the structural diffs from
+2 to 53"*, re-measured at **255** aligned against the baseline's **122/123**. The row is retired at its 5-byte
+floor for reasons that do not depend on the slack figure. But the figure itself is the **sixth stale header
+quantity** found this session, and the first in a multi-function object, where it is easier to get wrong.
+
+**The check.** Read the COMDAT whose raw size matches the function's placement, not the first or last `.text`:
+
+```bash
+python3 -c "
+import struct,json
+fs=json.load(open('src/server.dll/function_structure.json'))
+vas=sorted(f['va'] for f in fs); V=0x<VA>
+span=next(v for v in vas if v>V)-V
+d=open('build/CMakeFiles/server_dll.dir/src/server.dll/<path>.c.obj','rb').read()
+n=struct.unpack_from('<H',d,2)[0]; off=20+struct.unpack_from('<H',d,16)[0]
+m=[struct.unpack_from('<I',d,off+i*40+12)[0] for i in range(n)
+   if d[off+i*40:off+i*40+8].rstrip(b'\0')==b'.text']
+print('span',span,'comdats',m,'matching',[x for x in m if x==span])"
+```
+
+If no COMDAT matches the span, the object is stale (measure-traps §22) or the metadata size is wrong — do not
+read a slack figure from it.

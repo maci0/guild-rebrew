@@ -27901,3 +27901,44 @@ reader instead of using it.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1001 — re-screened with the corrected ruler; the smallest carrier's "upward slack" is stale
+
+**Re-ran the full 19-carrier screen with `--obj`** (round 1000's correction — the default reads the postlink
+composition, not the object). Alignment improves across the board and the ranking reorders at the top:
+
+| carrier | aligned (object) | hunks |
+|---|---|---|
+| `gm_CalculateProductionValue` | **122/123 (99.2%)** | 0 same-kind, **0 different-kind**, 3 insert/delete |
+| `cm_ExProdObjekt` | 349/354 (98.6%) | 1 same-kind, 0 different-kind |
+| `cm_ProcessCommandQueue` | 202/205 (98.5%) | 1 same-kind, 0 different-kind |
+| `vfs_ReadCompressed` | 191/200 (95.5%) | 4 same-kind, 0 different-kind |
+| `CrashDumpUnhandledExceptionFilter` | 371/725 (51.2%) | 20 same-kind, 35 different-kind, 67 insert/delete |
+
+`gm_CalculateProductionValue` is now the **best-aligned function in the tree** and was not previously ranked
+first. Its residue is fully isolated:
+
+- **3 hunks, and two are artifacts.** The `built-only x4: nop` is trailing padding *inside* the COMDAT — the
+  reference's tail is `pop esi; pop ebx; add esp,8; ret` followed by the **same 4 `nop`s**, byte-identical. The
+  tool compares past the `ret`.
+- **One real difference: two adjacent instructions swapped.** At `0x10019804` the reference emits
+  `fxch st(1)` then `cmp byte ptr [esi],0x17`; we emit them reversed. Raw differing bytes in the whole span:
+  **5**, at offsets `0xe4`-`0xe8`.
+
+**Re-verified the closure** (the source header documents it at `spiel622.c:145-200`): **~330 compiles**, four
+enumerated allocator classes (float-scaled / double-scaled / volatile / commuted-mul), sp5-pp swept on the
+shape, and the "rejected on size" reasoning explicitly corrected. The target's combination — a *folded*
+compare *after* the `fxch` — is in none of them. Genuine closure, not a stale note.
+
+**But one recorded figure in it is stale.** The header claims "**+4 bytes of upward slack**" (ceiling
+396/397/398/400 → 400). Measured: `spiel622.c` holds 16 functions, and `gm_CalculateProductionValue`'s COMDAT
+is `raw=400` — it **fills its span exactly**. The 4 trailing `nop`s are inside it, not spare capacity. A
+397-byte variant would have to be padded back to 400; a 401-byte one would push the COMDAT to 416 and displace
+every later function in the file. So the slack figure inverts the geometry. → measure-traps §26.
+
+The row's conclusion is unaffected (the 397 shape loses on *structure*: re-measured 255 vs 122/123), but this
+is the **sixth stale header quantity** this session — and the first in a multi-function object, where the naive
+"read the `.text` section" gives 96, not 400.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
