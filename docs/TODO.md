@@ -31152,3 +31152,53 @@ function-wide.
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. No source change; nothing to revert.
+
+## Round 1087 — measured the run distribution across ten carriers: no carrier is one wall
+
+Rounds 1082-1086 each located a single dominant divergence in one carrier, which invites the conclusion that
+each carrier is "one wall" and a handful of levers would clear them. This round measured the run distribution
+across **ten** carriers to test that, and it does not hold.
+
+Method: capstone on the reference against the raw-linked `build/split_poc.dll`, matching on
+`(mnemonic, register-normalised operand text)`, resyncing within 6 instructions, runs sorted by length.
+
+| carrier | differing instrs | runs | largest | share |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | 949 | 50 | 159 | 17% |
+| `CrashDumpUnhandledExceptionFilter` | 500 | 52 | 131 | 26% |
+| `cm_ExSellObjekt` | 344 | 31 | 113 | 33% |
+| `ls_LoadBuildingEntityState` | 244 | 12 | 62 | 25% |
+| `vfs_OpenStream` | 61 | 3 | 30 | 49% |
+| `gm_FindNextFilteredEntity` | 42 | 4 | 16 | 38% |
+| `cm_ExCopyEntityData` | 37 | 3 | 19 | 51% |
+| `ServerMainThread` | 26 | 9 | 7 | 27% |
+| `gm_AllocGebaeude` | 13 | 4 | 9 | 69% |
+| `gv_ExAllocGraveyardWorker` | 12 | 3 | 10 | 83% |
+| **total** | **2,228** | **171** | — | **25%** |
+
+**The large carriers are one run plus a long tail; the small ones are nearly all one run** — and the small ones
+are precisely the carriers already near byte-exact. In `gm_AllocSpieler`, 10 of the 48 runs are ≤3
+instructions, and sampling them shows the *same* classes as the big run: the §34/§35 `xor eax,eax`+`mov ax`
+zero-extend (`0x10019361`), frame-slot offsets (`[esp+0x28]` vs `[esp+0x20]` at `0x10018ee6`), and register
+choices (`mov eax,[esp+…]` vs `mov ecx,[esp+…]` at `0x10018fd9`). So the tail is not a second problem class
+awaiting a second lever; it is the same decisions at smaller scale, each independently placed. Fixing a
+carrier's largest run leaves 67-83% of its differences untouched.
+
+**This is the third independent measurement reaching the same conclusion:** §16 (67.5% of residue bytes are
+register-role), §23 (carriers fail individually; 130/137 file-mates are byte-identical), and now §36 (25% max
+concentration). That agreement is the argument, not any single number.
+
+**Method caveat, recorded in §36.** The sizes passed to the disassembler were windows rather than always the
+true extent, since rounds 1084-1085 established inventory sizes can overrun into padding. The absolute counts
+are therefore window-dependent; the *share* column is a ratio within one window and carries the argument. The
+first pass at this table used a guessed size of 499 for `ls_LoadBuildingEntityState` and reported **zero runs**
+for a carrier with 671 residue bytes — the real size is 1463, which gives 10 runs with the largest at 60. Both
+figures re-measured and confirmed.
+
+**No probes this round; no source change.** The output is the measurement and its doc entry.
+
+**Docs:** codegen-walls §36.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged.

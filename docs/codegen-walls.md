@@ -1885,3 +1885,58 @@ reference reloads `*slot` twice per iteration, and only a volatile read stops ms
 class as §16's "67.5% register-role" bucket. The wall is now located to a single instruction and its cause
 named, but no C spelling reaches it — the remaining options are a post-pass over the emitted bytes (outside
 the C-only constraint) or accepting the floor.
+
+### 36. No carrier is one wall: the largest run holds 17-83% of a carrier's differing instructions, and 25% across all ten measured (round 1087)
+
+Rounds 1082-1086 located a single dominant divergence in each carrier they examined, which invites the
+conclusion that each carrier is "one wall" and a handful of levers would clear them all. **Measuring the run
+distribution across ten carriers says otherwise.**
+
+Method: capstone on the reference and on the raw-linked `build/split_poc.dll`, matching on
+`(mnemonic, operand-string-with-registers-normalised)`, resyncing within 6 instructions, then sorting the
+differing runs by length.
+
+| carrier | differing instrs | runs | largest run | largest share | mean run |
+|---|---|---|---|---|---|
+| `gm_AllocSpieler` | 949 | 50 | 159 | 17% | 19.0 |
+| `CrashDumpUnhandledExceptionFilter` | 500 | 52 | 131 | 26% | 9.6 |
+| `cm_ExSellObjekt` | 344 | 31 | 113 | 33% | 11.1 |
+| `ls_LoadBuildingEntityState` | 244 | 12 | 62 | 25% | 20.3 |
+| `vfs_OpenStream` | 61 | 3 | 30 | 49% | 20.3 |
+| `gm_FindNextFilteredEntity` | 42 | 4 | 16 | 38% | 10.5 |
+| `cm_ExCopyEntityData` | 37 | 3 | 19 | 51% | 12.3 |
+| `ServerMainThread` | 26 | 9 | 7 | 27% | 2.9 |
+| `gm_AllocGebaeude` | 13 | 4 | 9 | 69% | 3.2 |
+| `gv_ExAllocGraveyardWorker` | 12 | 3 | 10 | 83% | 4.0 |
+| **total** | **2,228** | **171** | — | **25%** | — |
+
+**The shapes differ, and that is the point.** The large carriers are *one big run plus a long tail*: in
+`gm_AllocSpieler` the 159-instruction run holds 17% of the differences, and 10 of its 48 runs are 3
+instructions or shorter. The small carriers are *almost entirely one run*
+(`gv_ExAllocGraveyardWorker` 83%, `gm_AllocGebaeude` 69%) — and those are exactly the ones already close to
+byte-exact.
+
+**What the tail runs are made of**, sampled from `gm_AllocSpieler`, is the same material as the big runs:
+
+| site | reference | ours | class |
+|---|---|---|---|
+| `0x10019361` | `xor eax,eax` + `mov ax,[ebp]` | `mov ax,[ebp]` + `and eax,0xffff` | §34/§35 zero-extend |
+| `0x10018ee6` | `mov [esp+0x28], …` | `mov [esp+0x20], …` | frame-slot offset |
+| `0x10018fd9` | `mov eax, [esp+…]` | `mov ecx, [esp+…]` | register choice |
+| `0x10018f29` | `mov dl, [edi]` | `mov cl, [ebx+edx]` | register + addressing |
+
+So the tail is not a different kind of problem that a second lever addresses; it is the *same* register and
+frame decisions repeated at smaller scale, each independently placed. Fixing the largest run in a carrier
+leaves the other 75-83% of its differences untouched.
+
+**The consequence for planning, stated as judgement:** no carrier is cleared by locating its dominant run, and
+no lever found in one carrier transfers as a single edit to another. §16's 67.5% register-role bucket is the
+same conclusion from the byte side, and §23's "the carriers fail individually, not from a shared cause" is the
+same conclusion from the file-mate side. Three independent measurements now agree, which is why the remaining
+work is not a matter of finding the last lever.
+
+**Caveat on the method.** The sizes passed to the disassembler were windows, not always the true function
+extent (rounds 1084-1085 established that inventory sizes can overrun into padding), so the absolute run
+counts are window-dependent. The *share* column is robust to that, since it is a ratio within the same window,
+and it is the share that carries the argument. A first pass at this table using guessed sizes produced one
+entry with zero runs for a carrier with 671 residue bytes; the real size was 1463 rather than the 499 assumed.
