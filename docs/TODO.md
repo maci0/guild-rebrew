@@ -30224,3 +30224,28 @@ stronger statement than the previous rounds could make.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1063 — falsified the last predictor hypothesis: residue does not track x87, call, or branch density
+
+Every prior round characterised carriers **individually**. This tested whether any **structural property
+predicts residue size across the set** — the cheapest possible lead if it existed, and never tabulated.
+
+| property | test | verdict |
+|---|---|---|
+| x87 instruction count | 2 x87-heavy carriers sit at **opposite extremes**: `gm_AllocSpieler` (128 ops) 2.67 residue/insn, `gm_CalculateProductionValue` (29 ops) **0.04**, the lowest in the set. Mean density x87-bearing **0.97** vs other fifteen **1.16** | **no correlation** |
+| call count | highest-density carrier has **2 calls**; the two highest call counts (55) sit at 2.67 and **0.57**; `gm_FindNextFilteredEntity` has **zero calls** at 1.73 | **no correlation** |
+| branch density | highest `jcc` count (96, `gm_AllocSpieler`) is high-density; second (88, `ServerMainThread`) is 0.57 — opposite ends | **no correlation** |
+
+**What this rules out:** any explanation that is a function of instruction *mix*. Together with §23 (carriers
+fail individually; 130/137 file-mates byte-identical), the residue is not predictable from gross structure. It
+is a property of **specific scheduling and allocation decisions** in each function — which is exactly what the
+per-carrier sections describe, and why no shortcut to them exists.
+
+**Recorded as `codegen-walls.md` §27** with the full 19-row table. Six consecutive rounds re-confirmed
+individual walls; this is the first that tested the *set* and came back negative. That is worth having
+precisely because a positive correlation would have been the cheapest possible lead.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

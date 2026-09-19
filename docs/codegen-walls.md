@@ -1461,3 +1461,50 @@ not tracked).
 
 **Judgement:** no unexplored toolchain lever remains on this tree. The three pinned files are optimal, the
 other 16 carriers have no expressible toolchain axis, and the five non-pp images are mutually identical.
+
+### 27. The residue does not correlate with x87 density, branch count, or call count (round 1063)
+
+Steps 1-26 characterise each carrier individually. This asks whether any **structural property** predicts
+residue size across the set, which no round has tabulated. Properties measured on the reference stream, per
+carrier, against residue:
+
+| carrier | x87 insns | calls | jcc | jmp | residue | residue/insn |
+|---|---|---|---|---|---|---|
+| `cm_ExCopyEntityData` | 0 | 2 | 20 | 8 | 462 | **3.85** |
+| `gm_AllocSpieler` | **128** | 55 | 96 | 26 | 2823 | **2.67** |
+| `gv_ExAllocGraveyardWorker` | 0 | 4 | 21 | 0 | 451 | 2.64 |
+| `CrashDump` | 0 | 44 | 40 | 27 | 1583 | 2.16 |
+| `gm_FindNextFilteredEntity` | 0 | 0 | 25 | 2 | 215 | 1.73 |
+| `cm_ExSellObjekt` | 0 | 31 | 81 | 22 | 966 | 1.43 |
+| `ls_LoadBuildingEntityState` | 0 | 45 | 59 | 6 | 671 | 1.32 |
+| `vfs_OpenStream` | 0 | 7 | 17 | 9 | 238 | 1.14 |
+| `ahm_ExAllocAlchemist` | 14 | 8 | 10 | 2 | 198 | 1.12 |
+| `gm_AllocGebaeude` | 0 | 18 | 27 | 11 | 327 | 0.95 |
+| `gm_CheckInventoryCapacity` | 0 | 5 | 16 | 1 | 97 | 0.70 |
+| `ServerMainThread` | 0 | 55 | 88 | 18 | 367 | 0.57 |
+| `m_AllocTracked` | 0 | 10 | 23 | 3 | 92 | 0.35 |
+| `srv_LoadBuf` | 0 | 17 | 25 | 6 | 49 | 0.21 |
+| `vfs_ReadCompressed` | 0 | 5 | 20 | 1 | 23 | 0.12 |
+| `gm_ObjectsAvailble` | 0 | 15 | 24 | 1 | 25 | 0.11 |
+| `cm_ExProdObjekt` | 1 | 21 | 31 | 3 | 21 | 0.06 |
+| `cm_ProcessCommandQueue` | 0 | 23 | 26 | 6 | 15 | 0.04 |
+| `gm_CalculateProductionValue` | **29** | 2 | 8 | 1 | 5 | **0.04** |
+
+**Falsified: x87 density does not predict residue.** The two x87-heavy carriers sit at **opposite extremes** —
+`gm_AllocSpieler` (128 x87 ops) at 2.67 residue/insn, `gm_CalculateProductionValue` (29) at **0.04**, the
+lowest in the set. Mean density for x87-bearing carriers **0.97**, for the other fifteen **1.16** — no
+separation.
+
+**Falsified: call and branch counts do not predict it either.** The highest-density carrier has **2 calls**
+(`cm_ExCopyEntityData`), and the two highest call counts (55, in `gm_AllocSpieler` and `ServerMainThread`) sit
+at 2.67 and **0.57** — opposite ends. `gm_FindNextFilteredEntity` has **zero calls** and 1.73.
+
+**What this rules out.** Any explanation of the residue that is a function of instruction *mix* — x87
+content, call density, branch density, loop count. Combined with §23 (carriers fail individually, file-mates
+are byte-identical at 130/137), the residue is not predictable from gross structure at all. It is a property
+of **specific scheduling and allocation decisions** in each function, which is what the per-carrier sections
+describe and why there is no shortcut to them.
+
+**Value of a negative result here.** Six rounds have re-confirmed individual walls; this is the first that
+tests whether the *set* has a shared predictor, and it does not. That is worth recording precisely because a
+positive correlation would have been the cheapest possible lead.
