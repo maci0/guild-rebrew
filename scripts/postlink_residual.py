@@ -293,9 +293,24 @@ def main() -> int:
         counts[key] = counts.get(key, 0) + 1
         first.setdefault(key, i)
     print(f"{'function':40s} {'bytes':>6s} {'1st diff':>10s}")
+    hidden = 0
     for name, count in sorted(counts.items(), key=lambda kv: -kv[1]):
         if args.verbose or count > 8 or name.startswith("<"):
             print(f"{name[:40]:40s} {count:6d} {first[name] + t_rva + IMAGE_BASE:#10x}")
+        else:
+            hidden += 1
+    # A row that is filtered out is still residue.  Round 1073: the default view
+    # hid every carrier at or below 8 bytes -- `gm_CalculateProductionValue` (5) --
+    # so the table read 18 rows summing to 8623 while the summary line below said
+    # all 8628 were inside the 19 functions.  Nothing was wrong with the
+    # measurement, but the table could not be reconciled with it, and a reader who
+    # summed the rows would conclude the tool was broken.  Say how many rows are
+    # suppressed and what they total, so the column always reconciles.
+    if hidden:
+        hid = sum(c for n, c in counts.items() if c <= 8 and not n.startswith("<"))
+        print(f"{'(' + str(hidden) + ' more carrier(s) <= 8 bytes, hidden':40s} "
+              f"{hid:6d} {'':>10s}")
+    print(f"{'total':40s} {sum(counts.values()):6d}")
     outside = counts.get("<outside the non-matching functions>", 0)
     print(f"\n{len(diffs) - outside:#x} of {len(diffs):#x} differing bytes are inside the "
           f"{len(bad)} functions `rebrew verify` reports as not byte-matched; "

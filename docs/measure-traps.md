@@ -2431,3 +2431,50 @@ The give-away was the total: **7,874 instead of 8,628**. The correct span comes 
 `function_structure.json`'s next tracked VA, and with it the total is exactly 8,628 and the
 off-instruction count is exactly 0. **Check that a per-carrier sum reproduces the known total before trusting
 any per-carrier ratio.**
+
+## 47. The residue table silently hid every carrier under 9 bytes — 18 rows summing to 8623 against a 8628 total (round 1073)
+
+`scripts/postlink_residual.py` is the per-carrier ruler this project quotes in every round. Its default table
+filtered rows:
+
+```python
+if args.verbose or count > 8 or name.startswith("<"):
+    print(...)          # else: silently dropped
+```
+
+**So any carrier with 8 or fewer residue bytes was omitted.** Exactly one qualifies —
+`gm_CalculateProductionValue` (5 bytes) — and the consequences were:
+
+```
+table rows printed : 18
+sum of those rows  : 8623
+summary line below : "0x21b4 of 0x21b4 differing bytes are inside the 19 functions"
+0x21b4             : 8628
+```
+
+**The table could not be reconciled with its own summary.** Nothing was wrong with the *measurement* — the
+summary is computed over the full set — but a reader who summed the printed rows would find a 5-byte gap and
+no explanation for it. This project has used that table as a primary ruler for many rounds, and the carrier it
+hid is one of the 19 named in §33.
+
+**How it surfaced.** Round 1072's rule — *check that a per-carrier sum reproduces the known total* — was
+applied to the tool's own output rather than to a hand-built table, and the sum came out 8623.
+
+**Fixed:** the default view now prints the suppressed count and their byte total, and a `total` row:
+
+```
+cm_ProcessCommandQueue                       15 0x1000aaf7
+(1 more carrier(s) <= 8 bytes, hidden         5
+total                                      8628
+```
+
+`-v` always showed all 19; the fix is to the **default**, so the column reconciles without the flag.
+
+**The rule, generalised.** A display filter is not a measurement, but it is what a reader measures. **Any
+table that can drop rows must print the dropped count and their total, or state the total it is a subset of.**
+This is the same failure shape as workflow-traps §22 (a check that cannot fail) and §23's message problem: the
+tooling's *reporting* costing more than its computation.
+
+Found by applying round 1072's own arithmetic cross-check to the tool rather than to a script written in the
+same round — which is the first time this session that discipline caught a defect in shared tooling instead of
+in my own ad-hoc code.

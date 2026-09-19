@@ -30553,3 +30553,44 @@ tracked VA gives exactly 8,628 and exactly 0 off-instruction. Recorded as measur
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1073 — found a defect in the residue ruler itself: the table hid a carrier and did not sum
+
+Applied round 1072's rule (*check that a per-carrier sum reproduces the known total*) to **the tool** rather
+than to a hand-built table. It failed:
+
+```
+table rows printed : 18
+sum of those rows  : 8623
+summary line       : "0x21b4 of 0x21b4 differing bytes are inside the 19 functions"
+0x21b4             : 8628
+```
+
+**Cause:** `postlink_residual.py`'s default table filtered rows with `if args.verbose or count > 8`. Every
+carrier at or below **8** bytes was silently dropped, and exactly one qualifies —
+`gm_CalculateProductionValue` (5 bytes), one of the 19 named in `codegen-walls.md` §33.
+
+**Why it matters beyond the cosmetic gap.** The table and its own summary line could not be reconciled: 18
+rows, 8623 bytes, against "all 8628 are inside the 19 functions". Nothing was wrong with the *measurement* —
+the summary is computed over the full set — but the printed column was a subset with no indication of it, and
+this project has quoted that column as a primary ruler for many rounds.
+
+**Fixed:** the default view now prints the suppressed count and their byte total plus a `total` row:
+
+```
+cm_ProcessCommandQueue                       15 0x1000aaf7
+(1 more carrier(s) <= 8 bytes, hidden         5
+total                                      8628
+```
+
+`-v` always showed all 19; the fix is to the **default**, which is what rounds actually read. Gate re-run and
+green.
+
+Recorded as measure-traps §47 with the rule: **a display filter is not a measurement, but it is what a reader
+measures — any table that can drop rows must print the dropped count and their total.**
+
+**This is the first time this session that the arithmetic cross-check caught a defect in shared tooling rather
+than in my own ad-hoc code**, which is the more useful version of the discipline.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
