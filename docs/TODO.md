@@ -28168,3 +28168,30 @@ run to run.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1009 — the smallest CFG difference is branch polarity, not topology; two probes (+0, +228)
+
+Took the smallest carrier from round 1008's list — `gm_CheckInventoryCapacity` (97 bytes, the only one whose
+block counts match exactly, 25 vs 25) — and chased its one-block CFG difference.
+
+**It reduces to a polarity swap on the same two destinations.** The reference closes its first list-scan loop
+with `jne 0x10019f4f` (back) + `jmp 0x10019f64` (exit); ours uses `je 0x10019f64` (exit) + `jne` back-edge. Same
+targets, opposite encoding — §50's class. → codegen-walls §17.
+
+| probe | result |
+|---|---|
+| `if (elem != 0) continue; break;` | **+0, byte-identical** |
+| `list_cursor++; elem = *list_cursor;` | **+228** (8,628 → 8,857) |
+
+The second confirms the file header's account (*"the entry compare is load-bearing for correctness"*, recorded
+291-292 for the `do/while` family) by independent re-measurement.
+
+**Correction to how the 13/6 split should be read.** `cfg_compare.py` collapses conditional *polarity* in its
+kind, but a polarity swap still changes whether a node ends in `jmp` or `jcc`, which is enough to separate the
+graphs. So **DIFFERS is necessary but not sufficient for a topological difference** — before treating any of the
+13 as structural, check whether the difference is a polarity swap on the same destination pair. One carrier
+checked so far; it is.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; deliverable rebuilt and
+re-verified (`scripts/verify_objective.py`: all structural criteria hold); `src/` unmodified; no baseline moved.

@@ -925,3 +925,48 @@ There is no third class.
 The second is the useful one: blockers in this project's docs are normally left as assertions, and this one
 ("Writing `ent = base + idx*0x40; ent += idx;` is strength-reduced right back") was re-derived independently
 and **held**.
+
+### 17. Several of the 13 "differing CFG" carriers differ only by branch POLARITY (round 1009)
+
+`cfg_compare.py` (rounds 1006-1008) reports **13 carriers whose control-flow graph is not isomorphic** to the
+reference's. That verdict is built on a canonical form that deliberately **collapses conditional polarity**
+(`je` and `jne` reaching the same two successors are one shape), so a DIFFERS verdict means the graphs differ
+in *topology*, not merely in encoding. This round checked the smallest case and found the distinction is
+narrower than the count suggests.
+
+**`gm_CheckInventoryCapacity` — the one carrier whose block counts match exactly (25 vs 25), 97 bytes.**
+Its entire CFG difference is the first list-scan loop's tail:
+
+```
+reference                        ours
+0x10019f4f  cmp eax, edx         0x10019f4f  cmp eax, edx
+0x10019f51  je  0x10019f5f       0x10019f4c  je  0x10019f5f
+0x10019f53  mov eax,[ecx+4]      0x10019f52  mov eax,[ecx+4]     (approximately)
+0x10019f56  add ecx,4            ...
+0x10019f59  cmp eax, ebp         0x10019f59  cmp eax, ebp
+0x10019f5b  jne 0x10019f4f       0x10019f5d  jne 0x10019f52
+0x10019f5d  jmp 0x10019f64       0x10019f59  je  0x10019f64
+```
+
+**Same two destinations in both** — the hit test exits to `0x10019f5f`, the sentinel test loops to the scan
+top or falls to the exit at `0x10019f64`. The reference reaches the exit by an explicit `jmp` after a `jne`
+back-edge; ours uses `je` to the exit and lets the loop close with `jne`. That is **§50's branch-polarity
+class**, and it is an *encoding* difference even though the successor-set canonical form separates the graphs
+(it sees `{loop, exit}` with a `jmp` node where we have a second `jcc`).
+
+**Two probes, both reverted:**
+
+| probe | result |
+|---|---|
+| `if (elem != 0) continue; break;` (polarity inverted) | **+0, byte-identical** — msvc6 normalises it |
+| `list_cursor++; elem = *list_cursor;` (bump-then-read) | **+228** (residue 8,628 → 8,857) |
+
+The second matches the file header's account exactly: *"the bump as `list_cursor++; elem = *list_cursor;` … the
+bottom-compare form is structurally closer (one byte), but the entry compare is load-bearing for correctness"*,
+with recorded scores of 291-292 for the `do/while` family.
+
+**What to take from it.** A `cfg_compare.py` DIFFERS verdict is a **necessary** condition for a real
+topological difference, not proof of one: the canonical form collapses polarity but a polarity swap still
+changes which node is a `jmp` versus a `jcc`, and that is enough to separate the graphs. Before treating any of
+the 13 as topological, check whether its difference reduces to a polarity swap on the same destination pair —
+`gm_CheckInventoryCapacity` does, and its two available C spellings are +0 and +228.
