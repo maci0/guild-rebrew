@@ -118,3 +118,42 @@ documented wall.
 Evidence: enumeration of every annotated VA inside each span, with per-function residue measured against
 `original/Server/server.dll` and `build/server.dll`; `grep` of `FUNCTION: SERVER` across `src/server.dll`;
 `rebrew asm` at each VA.
+
+## The build is bit-reproducible from scratch, and the correct clean recipe is `--target final`
+
+Verified round 1039: a **full clean rebuild reproduces the shipped `server.dll` byte-for-byte.**
+
+```
+cmake --build build --clean-first          # fails at POST_BUILD postlink BY DESIGN (see below)
+cmake --build build --target final         # the deliverable; split_link.sh + postlink
+cmp <pre-clean server.dll> build/server.dll   -> identical
+md5sum                                        -> 3febd2c4ca080a3749c12d4bf7452fbe (both)
+```
+
+Residue after the clean rebuild: **8628** (`0x21b4`), unchanged.
+
+**The `--clean-first` failure is expected and is not a broken tree** (measure-traps §17). It fails at the
+POST_BUILD step with:
+
+```
+error: postlink failed: built .text is not position-aligned with the reference —
+only 4847/7463 layout-map entries validate (64.9%, minimum 90%).
+.text VirtualSize built 0x221f6 vs reference 0x22846.
+```
+
+That message describes the **plain CMake link** (`0x221f6`), which is not the deliverable. The deliverable is
+`--target final`, which runs `scripts/split_link.sh` (per-reference-offset composition, LIBCMT placed as
+stock objects) and then `postlink_residual.py`. `rebrew postlink` in the POST_BUILD step refuses a
+non-position-aligned `.text`, and the plain CMake link is exactly that — by design.
+
+**Why this is worth recording.** Two properties follow, and both matter for trusting every number this
+project reports:
+
+- **The 8628 baseline is not an artefact of stale objects.** A clean rebuild from source produces the same
+  bytes, so the residue is a property of the sources, not of the incremental build state.
+- **The tree is reproducible by a fresh clone.** No gitignored intermediate is load-bearing for the
+  deliverable (the five stock LIBCMT archives in `.scratch/libcmt/` are extracted from the toolchain images
+  as `split_link.sh`'s header documents, and are the only external inputs).
+
+Evidence: `cmake --build build --clean-first` then `--target final`; `cmp` and `md5sum` against the
+pre-clean artefact; `postlink_residual.py --write build/server.dll`.
