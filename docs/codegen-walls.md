@@ -2266,3 +2266,59 @@ this project established elsewhere, now located at the function tail.
 positional shift. It is real and it is source-shaped, but it is not the path to zero, and seven failed spellings
 say the remaining work here is block-order search rather than statement recovery. Recording that so the next
 round does not re-run these seven.
+
+### 44. WHAT THE 8,628 BYTES ACTUALLY ARE: 938 differing instructions, 567 of them a different mnemonic (round 1100)
+
+§42 left the question open — 122 missing instructions and 4 missing exits cannot account for 8,628 bytes. This
+round measured the residue directly on the **deliverable**, not on the raw link, and decomposed every differing
+instruction.
+
+**First correction: about 10% of the earlier counts were relocation artifacts.** Comparing the twelve largest
+carriers at the same address:
+
+| artifact | same-address differing instructions |
+|---|---|
+| raw link (`build/split_poc.dll`) | **1,042** |
+| deliverable (`build/server.dll`) | **938** |
+
+`.data`/`.bss`-addressed operands sit at provisional addresses in the raw link, and `postlink` rewrites them. So
+an operand like `dec dword ptr [0x117665e4]` in the raw link is `dec dword ptr [0x10035434]` in the deliverable —
+**identical to the reference**. Six of the twelve carriers' *first* divergence were exactly this: identical
+instructions, different symbol addresses. Everything in §34-§43 that counted differences positionally should be
+read from the deliverable; §53 said this for `.data`-addressed operands and this confirms it applies to
+`.text` operands that *reference* `.data` too.
+
+**The decomposition of the shipped residue, twelve carriers covering 8,538 of the 8,628 bytes:**
+
+| class | instructions | bytes | what it means |
+|---|---|---|---|
+| **mnemonic differs** | **567** | **2,152** | a genuinely different instruction is emitted |
+| operand other | 138 | 540 | same mnemonic, different addressing form |
+| register only | 128 | 386 | same mnemonic and form, other register |
+| immediate only | 105 | 407 | same mnemonic and form, other displacement/constant |
+| **total** | **938** | **3,485** | |
+
+**Read the classes in order of how hard they are to reach, not by size:**
+
+- **`register only` (386 bytes) and `immediate only` (407)** are the backend's allocation and frame decisions —
+  §16's bucket, and the two classes this project has measured shut repeatedly (five negatives on
+  `gm_AllocSpieler` alone, §34/§35).
+- **`operand other` (540)** is the addressing-form choice, §70's "nesting steers, operand order is inert".
+- **`mnemonic differs` (2,152) is the only class that is unambiguously source-shaped**, and it is the largest.
+  567 sites where the reference executes a different *kind* of instruction — a `lea` where we emit a `mov`, a
+  `cmp [mem]` where we emit `mov`+`test`, an inlined sequence where we call. Each is a statement the original
+  wrote differently or a construct msvc6 inlined and we did not.
+
+**The bytes-per-instruction arithmetic is the missing link.** 938 instructions differ and the residue is 8,628
+bytes — that is 9.2 bytes per differing instruction, well above the ~3 bytes an instruction occupies. The gap is
+**positional**: once an instruction differs in length, every later byte in that function is compared against the
+wrong instruction, and the byte-level ruler counts the whole misaligned stretch. That is why 938 real
+differences produce 8,628 counted bytes, and it is the same mechanism §34/§36 described as "runs" without
+accounting for the byte inflation. **The lever count is 938 instructions, not 8,628 bytes** — and the actionable
+subset is the 567 `mnemonic differs`.
+
+**What this changes about the plan.** The earlier framing (find the missing instructions) was right in kind but
+wrong in magnitude: only 122 instructions are *absent*, while 567 are *present but different*, and it is the
+latter that dominates. So the work is not primarily "recover what we deleted" but "find the source spelling that
+makes msvc6 choose the reference's instruction at these 567 sites" — which is the `msvc6-c-shapes` problem, and
+narrower than the whole function.
