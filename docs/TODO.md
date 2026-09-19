@@ -29190,3 +29190,36 @@ where the streams are known to be aligned, and call-target multisets must not sp
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1036 — "compare the data operands" gives 0, 707 or 9,855 depending on the offset filter
+
+Set out to re-verify round 1030's claim that postlink's `.text` operand rewrite is complete (0 mismatched of
+4398). Re-asked it a looser way and got 707 — which looked like a contradiction. It is not: the three
+numbers are three different populations, and only one is a set of operands.
+
+| population | rule | size | mismatched |
+|---|---|---|---|
+| **A — operands** | dword is a data address in **both** images | 4,398 | **0** |
+| B — either image | data address in the reference **or** the shipped file | 5,105 | 707 |
+| C — no filter | every offset where the two dwords differ | — | 9,855 |
+
+**Round 1030's number is confirmed: population A is 4398 / 0 mismatched.** A and B/C disagree because a
+dword read at an arbitrary offset usually straddles two instructions; if the surrounding bytes differ — which
+they do throughout the residue — the straddling dword differs too, and classifies as a "data address" only
+by coincidence. Those are not operands.
+
+Recorded as measure-traps §42 with the rule: a byte-offset sweep is not an instruction sweep, and when a
+looser re-measurement contradicts an earlier tight one, check whether the two count the same population
+before believing either.
+
+**Also verified:** postlink's `locality` pass reports **4 stale operands recovered** deterministically on
+every run — `.text+0xae64`, `+0xae85`, `+0x11378`, `+0x12209`, all 4-byte data addresses inside
+`cmp reg,imm32`. Every one lands correctly in the shipped file (`0x1009aca0`, `0x1009aca2`, `0x10139820`,
+`0x1009b762`). `0x1009aca2` is **odd-aligned** — a byte-level comparison against a struct's second byte —
+which is exactly why a 4-aligned generic sweep needs a second, locality-driven pass. The pass works as
+designed; the four are not defects.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

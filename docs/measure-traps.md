@@ -2222,3 +2222,47 @@ streams are aligned at the region being compared. For a per-carrier callee audit
 within a region known to be aligned**, or establish alignment first by the local-context method of §38;
 never compare a whole-function multiset across a known divergence. Both directions of error here are the
 §13/§24 family: the comparison silently measures the desync, not the code.
+
+## 42. "Compare the data operands" gives 0, 707 or 9,855 depending on the offset filter (round 1036)
+
+Round 1030 asked whether postlink's `.text` operand rewrite is complete and answered **0 mismatched of
+4,398**. Round 1036 re-asked the same question a looser way and got **707** (or **9,855**), which looked like
+a contradiction. It is not — the three numbers come from three different populations, and only one of them
+is a set of operands.
+
+**Method.** For every byte offset `i` in `.text`, read the little-endian dword at `i` in the reference and in
+the shipped file, classify each as a data-range address (`0x10024000..0x11768000`), and count:
+
+| population | rule | size | mismatched |
+|---|---|---|---|
+| **A — the operand set** | dword is a data address in **both** images | 4,398 | **0** |
+| B — either image | dword is a data address in the reference **or** the shipped file | 5,105 | 707 |
+| C — no filter | every offset where the two dwords differ | — | 9,855 |
+
+**Population A is the only one that is a set of operands, and it is the one round 1030 used.** At a
+genuinely operand-aligned offset the two images hold the same immediate, so both classify it as a data
+address and it enters A. **Zero mismatches** — postlink's rewrite is complete, confirmed a second time.
+
+**Populations B and C are dominated by dwords that straddle instruction boundaries.** A dword read at an
+arbitrary offset is usually two halves of adjacent instructions; if the surrounding bytes differ (which they
+do across the whole residue), the straddling dword differs too, while classifying as a data address only by
+coincidence. Those entries are not operands and their "mismatch" is the residue showing through at a
+misaligned window.
+
+**The rule.** A byte-offset sweep is not an instruction sweep. Before counting anything from raw offsets,
+say which offsets can be operands — either decode the instructions and test the operand fields, or use the
+both-images classification as a cheap proxy, which works precisely *because* a real operand agrees in both
+images. **When a looser re-measurement contradicts an earlier tight one, check whether the two are counting
+the same population before believing either.**
+
+This is measure-traps §21 ("disassembling `.text` from its start gives wrong instruction boundaries — every
+statistic built on it is junk") applied to operand extraction rather than disassembly, and it is the second
+time this session that a fixed instrument has been re-derived at a different threshold (§26's per-function
+span reader is the first).
+
+**Also verified this round:** postlink's `locality` pass reports **4 stale operands recovered** on every
+run, deterministically — `.text+0xae64`, `+0xae85`, `+0x11378`, `+0x12209`, all 4-byte data addresses
+inside `cmp reg,imm32`. Every one lands correctly in the shipped file (`0x1009aca0`, `0x1009aca2`,
+`0x10139820`, `0x1009b762`). Note `0x1009aca2` is **odd-aligned** — a byte-level comparison against a
+struct's second byte — which is why the generic 4-aligned sweep needs a second, locality-driven pass to
+catch it. The pass is working as designed; the four are not defects.
