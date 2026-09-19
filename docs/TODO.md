@@ -27842,3 +27842,30 @@ have authorised a probe rather than merely mispriced one.
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Probe reverted; `src/` unmodified; no baseline
 moved.
+
+## Round 999 — screened all carriers for an asm-eligible single instruction; there are none
+
+Acting on the clarified asm scope (padding, single instructions, the six memset preludes — never whole-function
+asm), this round asked the eligibility question directly: **does any of the 19 carriers contain an instruction
+that msvc6 cannot emit at that site in any C spelling?**
+
+**Answer: no.** The six existing asm sites are in functions that are already byte-exact. The residue is
+register-role (8), block-placement (10) and epilogue-merge (1) — in all three classes the differing
+instructions *are* emitted by msvc6 elsewhere in the same function, so no site needs asm to produce them.
+→ codegen-walls §15.
+
+**Screened by hunk count instead of file size — the efficient order.** Two carriers came closest to a
+single-instruction difference; both probed, both **+0**:
+
+| carrier | alignment | hunks | probe | result |
+|---|---|---|---|---|
+| `cm_ExProdObjekt` `0x1000e140` | 348/354 (98.3%) | 3, `ref-only 0 / built-only 0` | three-instruction ordering | **+0**, resolved back |
+| `ls_LoadBuildingEntityState` `0x100128f0` | 438/499 (87.8%) | 33, only **1** different-kind | name the `esi+0x34` arg pointer to match the reference's `mov ecx,ebx; add ecx,edx` | **+0**, folded |
+
+Both confirm recorded closures rather than stale notes: `cm_ExProdObjekt`'s header documents a **complete**
+enumeration ("all 112 topological orderings … none beats 976"), and `ls_LoadBuildingEntityState`'s `lea`
+operand swap is shapes §70's inert class with that site recorded as already optimal.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; `src/` unmodified; no
+baseline moved.

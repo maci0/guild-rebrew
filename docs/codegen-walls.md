@@ -857,3 +857,41 @@ carriers.
 
 **Do not sweep this axis again without a new reason.** The one case where it paid
 (`cm_ExCopyEntityData`, /Oa) is documented and already in the source.
+
+### 15. The asm clause has no applicant among the 19 carriers (round 999)
+
+The user clarified the asm carve-out: raw asm is permitted where C cannot reach the shape — padding, single
+instructions, the six memset preludes — never whole-function asm. That is a **narrower** permission than
+"write the function in asm", and it is worth testing what it actually unlocks.
+
+**It unlocks nothing among the residue.** The six existing asm sites are inside `srv_InitBuildingTypeTable`,
+`gm_AllocGebaeude`, `m_AllocTracked`, `m_alloc`, `m_alloc2` and `vfs_ReadData` — and the functions that
+*contain* those sites are already byte-exact. The 8,628 residual bytes live in 19 different functions, and
+none of them is an instruction-shape problem:
+
+| carrier class | count | is a single instruction unreachable from C? |
+|---|---|---|
+| register-role rotation | 8 | no — the instructions are all C-producible; the *register* differs |
+| block placement / branch target | 10 | no — same instructions, different addresses |
+| epilogue merge | 1 | no — same epilogue bytes, one copy folded away |
+| **total with an asm-eligible shape** | **0** | |
+
+The test for eligibility is not "is the byte wrong" but "**could a C compiler emit this instruction at this
+site at all, in any spelling**". Every differing instruction in the 19 carriers is emitted by msvc6
+*somewhere* in the same function — that is what the register-role and epilogue classes mean. An asm block
+would be a whole-function escape, which the carve-out excludes.
+
+**Screened by hunk count rather than file size, which is the efficient order.** The two closest to a
+single-instruction fix are `cm_ExProdObjekt` (`0x1000e140`, 348/354 aligned, 3 hunks, `ref-only 0 /
+built-only 0`) and `ls_LoadBuildingEntityState` (`0x100128f0`, 438/499, 33 hunks but only **1
+different-kind**). Both probed this round, both **+0**:
+
+- `cm_ExProdObjekt`: the three-instruction ordering hunk. Header records a *complete* enumeration — "all 112
+  topological orderings of the seven statements … none beats 976". Genuine closure.
+- `ls_LoadBuildingEntityState`: the `lea esi,[edx+ecx]` vs `[ecx+edx]` operand swaps are §70's inert class
+  ("operand order in a commutative address expression is inert"), and naming the `esi + 0x34` argument pointer
+  to match the reference's `mov ecx,ebx; add ecx,edx` form is **byte-identical** — §70's "this site was
+  already at its optimum" reproduces.
+
+**Conclusion.** The asm permission is a constraint clarification, not a lever. No carrier among the 19 has a
+site where asm would be both permitted and useful.
