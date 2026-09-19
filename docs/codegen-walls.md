@@ -2089,3 +2089,48 @@ collapse — not merely to be written twice.
 
 **Also re-confirmed:** the flag axis is closed for this file. `/Ox, /O1, /Oy-, /Ot /Og, /Gs, /Gf, /Gy, /Ob0`
 and `/Og /Oi /Ot /Ob1` were all swept on it (file header, line 288), and it carries the `sp5-pp` pin.
+
+### 40. The epilogue-merge class: three carriers, one mechanism, and it is the SAME mechanism in all three (round 1096)
+
+Round 1094 found reference-only `ret`s and `pop`s. Rounds 1095-1096 established the mechanism is one thing,
+present in three carriers, and it is worth stating once:
+
+**The reference keeps early returns INLINE; our build merges them into one shared exit.**
+
+| carrier | reference epilogue clusters | ours | missing exits |
+|---|---|---|---|
+| `gm_FindNextFilteredEntity` | 3 — `0x10016f99`, `0x10016fa9`, `0x10016ff7` | 1 — shared `0x100170d6` | 2 |
+| `cm_ExCopyEntityData` | 3 — `0x1000eda8`, `0x1000ee3c`, `0x1000ef7b` | 2 — `0x1000ee46`, `0x1000ef7f` | 1 |
+| `gv_ExAllocGraveyardWorker` | (same class, 451 bytes) | — | — |
+
+**The mechanism, from `cm_ExCopyEntityData`.** Its source has three `return 1;` sites in a row
+(`cm_ExCopyEntityData.c:449`, `452`, `455`). msvc6 folds all three into one epilogue block. The reference does
+not: it emits `pop edi; pop esi; pop ebp; mov eax,1; pop ebx; add esp,0xc; ret` **inline at `0x1000eda8`**,
+reached by falling out of the scan loop at line 448.
+
+The cost is positional. In `gm_FindNextFilteredEntity` the reference's three inline epilogues occupy 6 more
+bytes than our single shared one, ahead of the second half's `push ebx`/`push ebp`/`push edi`, so **every byte
+after the first guard is shifted by 4**. That is the file header's "no byte after offset 3 can match, which
+holds the score at 99/346 **despite obj size being exactly right at 346**" — the statement count is correct and
+the internal layout is not.
+
+**Probed (rounds 1095-1096), all reverted:**
+
+| probe | result |
+|---|---|
+| reorder so `end` is computed before the guard | **+6** |
+| duplicate the second guard verbatim | **+0** — msvc6 folds two identical guards into one |
+| `volatile` double-load of the guard global | **+0** — already recorded inert here (probes z1-z4, w2/w3/w6, v1-v5) |
+| give one return a distinct value (`temp = 1; return temp;`) | object **905** vs target 912 — **7 bytes short** |
+| value-preserving expression (`return (int)(dst_slot == 0x300) \| 1;`) | object **956** — **44 bytes long** |
+
+**What the probes establish.** Respelling the *value* changes codegen but never lands: the two attempts bracket
+the target (905 and 956 around 912) without hitting it, and the duplicate-guard case proves two *identical*
+returns collapse. So the merge is not breakable by how the value is written. Matching the reference requires the
+three returns to differ **structurally** — a different statement between them, or a control-flow shape msvc6
+treats as a barrier — which is a source-recovery question about what the original `cm_ExCopyEntityData` and
+`gm_FindNextFilteredEntity` actually contained at those sites.
+
+**This is the most tractable remaining lever**, because the gap is identifiable from the disassembly alone: for
+each carrier, count the reference's `pop`/`ret` clusters, compare with ours, and the difference names the
+number of missing exits. No search space is involved.

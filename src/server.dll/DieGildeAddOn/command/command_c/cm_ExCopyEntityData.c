@@ -446,6 +446,18 @@ level_done:
 			scan_ptr += 0x21c;
 			dst_slot++;
 		} while ((uint) scan_ptr < 0x1009aca4);
+		/* The reference reaches its epilogue at 0x1000eda8 by FALLING OUT of
+		 * this loop, inline (`pop edi; pop esi; pop ebp; mov eax,1; pop ebx;
+		 * add esp,0xc; ret`), where our build jumps to a shared exit that the
+		 * three `return 1;` sites below also use.  Probe A4 (round 1095)
+		 * measured both ways to break the fold: giving this site a distinct
+		 * value (`temp = 1; return temp;`) compiles the object 7 bytes SHORT
+		 * (905 against 912), and a value-preserving expression
+		 * (`return (int) (dst_slot == 0x300) | 1;`) compiles it 44 bytes LONG
+		 * (956).  Both change codegen and neither reaches the reference's
+		 * layout, so the merge is not breakable by respelling the value.
+		 * Matching the reference needs the three returns to differ
+		 * STRUCTURALLY -- see codegen-walls section 39. */
 		return 1;
 dst_found:
 		if (dst_slot >= 0x300) {
