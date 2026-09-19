@@ -1398,3 +1398,35 @@ including 7 `nop`s and 2 extra `ret`s — all of them decoder garbage past the `
 **Third instance of this class** (§21 decoding from section start, §23 counting in postlink output, §24
 counting across images). The common cause is that a disassembler always produces *something*; desynchronised
 output is syntactically valid and reads like a finding.
+
+## 25. `instr_diff.py`'s default `--built` reads the postlink composition, not the object (round 1000)
+
+`scripts/instr_diff.py` defaults to `BUILT = build/split_poc.dll`. That is the per-reference-offset **composition**
+— postlink's output — not the object the linker lays out. Round 990 found the same distinction for instruction
+*counts* (measure-traps §23); this is the same trap one tool over, and this tool's default path is the wrong one.
+
+Measured on four carriers, image vs `--obj`:
+
+| carrier | image: ref / built | object: ref / built | image aligned | object aligned |
+|---|---|---|---|---|
+| `cm_ExProdObjekt` `0x1000e140` | 354 / 354 | 354 / **369** | 348/354 (98.3%) | **349/354 (98.6%)** |
+| `ls_LoadBuildingEntityState` `0x100128f0` | 499 / 497 | 499 / **506** | 438/499 (87.8%) | **448/499 (89.8%)** |
+| `cm_ProcessCommandQueue` `0x1000aac0` | 205 / 203 | 205 / **204** | 202/205 | 202/205 |
+| `CrashDumpUnhandledExceptionFilter` `0x10002770` | 725 / 729 | 725 / **738** | 357/725 (49.2%) | **371/725 (51.2%)** |
+
+The object consistently holds **more** built instructions than the image (369 vs 354, 506 vs 497, 738 vs 729)
+and aligns **better** against the reference (up to +2 points). The composition has already been rewritten by
+postlink, and bytes the object's decoder crosses are not the bytes postlink emits.
+
+**Which is right depends on the question.** For "what does the compiler emit" — the reversing question — the
+**object** is correct. For "what does the shipped DLL contain", the image is. Every ranking or alignment figure
+in this project's docs that came from `instr_diff.py` without `--obj` is therefore the *shipped* view.
+
+**What this does and does not change.** The round-999 ranking (which carriers have the fewest hunks) is
+**stable** across both paths, and the key signal identities survive: `CrashDump`'s `ref-only x33: push ADDR` is
+the same on both paths, and `cm_ExProdObjekt`'s three-instruction ordering hunk appears either way. So the
+round-999 conclusions hold. What changes is the *magnitude* — a 49.2% alignment is really 51.2%, and a
+"354 built instructions" is really 369.
+
+**The rule.** Use `--obj build/CMakeFiles/server_dll.dir/<path>.c.obj` when the question is about codegen, and
+remember to `cmake --build build` first (measure-traps §22 — a stale object measures the previous edit).

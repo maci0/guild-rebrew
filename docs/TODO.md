@@ -27869,3 +27869,35 @@ operand swap is shapes §70's inert class with that site recorded as already opt
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; `src/` unmodified; no
 baseline moved.
+
+## Round 1000 — instr_diff.py's default ruler is the postlink composition, not the object
+
+Audited the tool whose hunk counts round 999 used for ranking. Its default `--built` is
+`build/split_poc.dll` — the per-reference-offset **composition**, i.e. postlink's output, not the object the
+linker lays out. This is measure-traps §23's trap one tool over.
+
+Measured four carriers both ways:
+
+| carrier | image ref/built | object ref/built | image aligned | object aligned |
+|---|---|---|---|---|
+| `cm_ExProdObjekt` | 354 / 354 | 354 / **369** | 98.3% | **98.6%** |
+| `ls_LoadBuildingEntityState` | 499 / 497 | 499 / **506** | 87.8% | **89.8%** |
+| `CrashDumpUnhandledExceptionFilter` | 725 / 729 | 725 / **738** | 49.2% | **51.2%** |
+| `cm_ProcessCommandQueue` | 205 / 203 | 205 / **204** | 98.5% | 98.5% |
+
+The object holds consistently more built instructions and aligns better by up to two points. → measure-traps
+§25.
+
+**Round 999's conclusions survive, and the tool's own notes say why they should.** The ranking by hunk count is
+stable across both paths, and the two signal identities are path-independent: `CrashDump`'s
+`ref-only x33: push ADDR` (round 992's finding) reports identically, and `cm_ExProdObjekt`'s three-instruction
+ordering hunk appears on both. What was wrong was the *magnitude* — "354 built instructions" is really 369, and
+49.2% is really 51.2%.
+
+**Also confirmed the tool handles the decode-truncation hazard correctly:** it sets `md.skipdata = True` with an
+in-source note that without it the decode halted 112 bytes early and reported 1014 against a true 1054 — the
+exact figure that misled round 991. That failure mode is already fixed in the tool; round 991 hand-rolled a
+reader instead of using it.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
