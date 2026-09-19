@@ -120,3 +120,44 @@ bytes (see measure-traps §35 for the ruler and TODO round 1022 for the per-span
 
 Evidence: `ret`-position + branch-target + prologue scan of the reference's `.text`; `rebrew verify
 --json` `size_divergences`; `rebrew asm` at each sibling start; `rebrew lib-match`.
+
+## Global placement is postlink's job, not the linker's — and it is complete
+
+`src/link_stubs.c` (header: "Stub definitions for unresolved external symbols", auto-generated, "DO NOT edit
+manually") supplies only **placeholder** definitions for globals. Each carries a `// DATA: SERVER 0x<VA>`
+comment, but that comment is **documentation for the tooling, not a placement directive** — no `#pragma
+section`, no linker ordering key. The linker therefore places these symbols wherever its own COMDAT ordering
+puts them, and `rebrew postlink --layout` subsequently rewrites every `.text` operand that points at them to
+the reference's address, using the layout package.
+
+**Measured: the rewrite is complete.** Every dword in `.text` whose value falls inside the data range
+(`0x10024000..0x11768000`), compared between the reference and the shipped file:
+
+```
+data-address dwords present in both .text:  4398
+mismatched in the shipped image:               0
+```
+
+So a wrong global address in `build/split_poc.dll` (the raw link) is **expected and by design**, not a
+defect. Concrete example — `g_file_version`, canonical VA `0x1002d4ec` per `rebrew-data.toml` and
+`rebrew_globals.h:24`:
+
+| artifact | dwords equal to `0x1002d4ec` | equal to the stub's own address `0x100373c4` |
+|---|---|---|
+| reference | 23 | 0 |
+| raw link (`split_poc.dll`) | 0 | 37 |
+| shipped (`server.dll`) | 23 | 0 |
+
+The raw link binds *every* site to the stub's placement; postlink restores all 23.
+
+**Why this matters when reading the raw link.** Measure-traps §35 recommends the raw link as the
+"capability" ruler, and §36 warns against assuming a carrier's VA. This adds the third trap in the same
+family: **a wrong data operand in the raw link is not evidence of a wrong symbol in the source.** It is the
+designed intermediate state. Chasing it wastes a round — it cannot be fixed by editing the definition,
+because the definition is not what determines the address.
+
+**Corollary for the duplicate-definition audit.** Ten bare tentative definitions (`int g_file_version;` in
+`gv_CheckSlotActive.c`, `int g_current_year;` in nine `spiel*.c`) shadow canonical declarations but were
+**measured byte-neutral** when removed (residue 8628 -> 8628 in both cases). They are hygiene, not codegen:
+the linker merges tentative definitions and postlink overwrites the operands anyway. Do not expect a residue
+change from removing them.
