@@ -3652,3 +3652,40 @@ confirmed with the pressure dimension ruled out as the cause.
 pushes (`push ebx` as a call argument) as if they were saves. `ahm_ExAllocAlchemist` reported `ebx ebp ebx ebx`
 under that reading; its actual prologue is `push ebx; push ebp`, and the extra `push ebx` operands are call
 arguments. Read the prologue region explicitly, or filter to pushes that precede the first `call`.
+
+## Finding 69 — `gm_ObjectsAvailble`'s `ebx`/`edi` roles: three new spellings, none lands; "inert" in the header is not always exactly 0 (round 1029)
+
+`gm_ObjectsAvailble` (`0x10015f70`, 720 B, 25 residue) is the cleanest register-role carrier in the tree:
+**220 of 235 instructions are identical**, the instruction count matches exactly (235 both sides), and the
+15 differences are a pure `ebx`↔`edi` exchange plus an `edx`/`edi` rotation. The reference tests
+`slot_cursor` in **ebx** and holds `slot_base` in **edi**; we have the two reversed.
+
+```
+idx 73  ref test ebx, ebx                  | bld test edi, edi
+idx 77  ref mov  edi, esi                  | bld mov  ebx, esi
+idx 85  ref mov  eax, [ebx + 0x14]         | bld mov  eax, [edi + 0x14]
+```
+
+The header lists declaration reorder, hoist positions, extra-copy and cursor splits as inert. Three
+spellings were re-measured **at the link** this round, all reverted:
+
+| spelling | header's label | measured |
+|---|---|---|
+| `slot_base = ...;` before `slot_cursor = 0;` (init order swapped) | inert | **+4** |
+| `slot_cursor` declared second (after `slot_base`) | inert ("inert") | **+0** — confirmed |
+| `slot_base` given an early `slot = slot_base;` use above the branch | not listed | **+4** |
+
+**Two things worth keeping.**
+
+1. **The header's "inert" labels are accurate in kind but not always zero.** The declaration-order spelling
+   is exactly 0; the initialiser-order spelling labelled inert is actually **+4**. Inert and mildly negative
+   are different categories, and only one of them is safe to compose with other edits. Verify, do not
+   inherit, an "inert" claim when building a multi-part candidate.
+2. **Two different spellings landing on the identical +4 is the signature of a collapse, not a measurement.**
+   Swapping the initialiser order and hoisting a first use both produce the same schedule, which means the
+   allocator's choice here is a fixed point of the entry block rather than a function of either statement.
+   Consistent with Findings 62/63: the roles are chosen from the whole-frame assignment.
+
+**Judgement:** with 220/235 instructions identical, exact instruction-count parity, and all six known
+spellings landing at 0 or worse, this row's remaining 25 bytes are the allocator's register *choice* under a
+frame layout that already matches. No C lever named. Not re-probed without a new allocator finding.

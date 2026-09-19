@@ -28894,3 +28894,30 @@ the work, and the two reorders it flagged most favourably both cost.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1029 — gm_ObjectsAvailble: 220/235 identical, three new spellings, none lands; one "inert" claim is +4
+
+`gm_ObjectsAvailble` (`0x10015f70`, 720 B, 25 residue) is the cleanest register-role carrier in the tree —
+**220 of 235 instructions identical, instruction counts equal (235/235)**, with the 15 differences a pure
+`ebx`↔`edi` exchange. Reference tests `slot_cursor` in `ebx` and holds `slot_base` in `edi`; ours is reversed.
+
+Three spellings re-measured at the link, all reverted:
+
+| spelling | header's label | measured |
+|---|---|---|
+| `slot_base = ...;` before `slot_cursor = 0;` (initialiser order) | inert | **+4** |
+| `slot_cursor` declared after `slot_base` | "inert" | **+0** — label confirmed |
+| `slot_base` given an early use above the branch | not listed | **+4** |
+
+**The header's "inert" labels are right in kind, not always zero.** One is exactly 0; the other is +4.
+Recorded as allocator Finding 69 and, as a process rule, workflow-traps §18: an "inert" label means "already
+tried", not "neutral under the current object", and it must be re-measured when a candidate stacks it with
+another edit.
+
+**The cheaper diagnostic, and what actually closed the row:** two *different* reorderings both landed on
+exactly **+4**. Identical deltas from different edits is the signature of a **collapse** — the compiler
+canonicalised both into one schedule, so the thing being varied is not a lever. That, plus 220/235 identity
+and exact instruction-count parity, is a stronger closure argument than the sign of any single number.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

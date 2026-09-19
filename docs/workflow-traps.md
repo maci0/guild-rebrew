@@ -716,3 +716,29 @@ does not generate at a finer granularity. Until the tool is fixed, the ten VAs a
 **Not fixed here:** rebrew is installed as a wheel (`rebrew-2.5.0.dist-info`), not a checkout, so there is
 no source tree to patch in this session. Filed to `docs/IDEAS-GUILD.md` in the rebrew checkout when one
 exists; recorded here meanwhile.
+
+## 18. "Inert" in a header is a measurement, not a category — re-verify it before composing (round 1029)
+
+Round 1029 re-measured three spellings on `gm_ObjectsAvailble` whose file header labels two of them inert:
+
+| spelling | header label | measured |
+|---|---|---|
+| `slot_base = ...;` before `slot_cursor = 0;` | inert | **+4** |
+| `slot_cursor` declared after `slot_base` | "inert" | **+0** |
+| `slot_base` given an early use above the branch | not listed | **+4** |
+
+**Two of three match the label; one does not.** A spelling recorded as inert and one measured at +4 are
+different in kind, and the difference matters exactly when a round composes several edits: an inert edit can
+be stacked with a real one and the total is still interpretable, whereas a +4 edit silently absorbs the
+budget of anything stacked on it.
+
+**The rule.** "Inert" tells you the edit was *tried* and moved nothing observable on the ruler used at the
+time. It does not mean the edit is neutral under the current object, and it does not mean the label used the
+same ruler you are using. Treat it as "already tried" — the useful part — and re-measure it if it is load
+bearing for a candidate. This is the same family as §16 (a header's headroom figure is a measurement) and
+§14 (a header's delta is historical), applied to the weakest of the three labels.
+
+**Corollary, and the cheaper diagnostic.** When two *different* spellings produce the **identical** delta,
+that is a collapse, not a coincidence: the compiler canonicalised both into one schedule, so the thing being
+varied is not a lever. On `gm_ObjectsAvailble` two distinct reorderings both landed on exactly +4, which is
+what closed the row — not the sign of the number but its insensitivity to the edit.
