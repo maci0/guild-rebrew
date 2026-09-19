@@ -1681,3 +1681,45 @@ So closing it would move **one byte of 8,628**, and would require `__asm { cld }
 exhausted in both directions: it cannot be reached from C, and reaching it from asm buys one byte.
 
 `src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`
+
+### 32. `std` before a rep sequence appears 11 times and we match all 11 — the `cld` miss is specific, not a prefix gap
+
+§29-31 closed the `cld` at `m_AllocTracked`'s `0x100066a0` as positive asm-clause evidence worth one byte.
+This round asks whether we have a **general** weakness with direction-flag prefixes, which would be a much
+bigger and more interesting finding.
+
+**Contrast measured.** Scanned the reference for a direction prefix immediately followed by a rep sequence:
+
+| prefix | reference | ours | verdict |
+|---|---|---|---|
+| `std` (`fd`) + `f2`/`f3` | **11 sites** | **11 sites** | **all 11 byte-identical in our build** |
+| `cld` (`fc`) + rep | **1 site** | **0 sites** | the §29 miss |
+
+The eleven `std` sites and their neighbours match exactly:
+
+```
+0x10011dad  ref=c0 8b fd f3 ab 83 c8 ff   our=identical
+0x100188e8  ref=c0 8b fd f3 ab 83 ce ff   our=identical
+0x1001a555  ref=45 0c fd f2 ae 47 38 07   our=identical
+0x1001b3b3 / 0x1001b40a / 0x1001b434 / 0x1001b466 (and 0x1001ec63 / ba / e4 / 0x1001ed16)
+            ref=72 0d fd f3 a5 fc ff 24   our=identical
+```
+
+**So there is no general prefix gap.** Our msvc6 emits `std` before `rep stosd`/`rep movsd` exactly where the
+reference does, eleven times out of eleven, and the *reference itself* emits `cld` before a rep sequence only
+once in the whole binary (§30).
+
+**What this rules out.** The plausible broader hypothesis — "this compiler handles the direction-flag prefixes
+differently from the reference's, so any rep-sequence site is suspect" — is **false**, and it is false by a
+wide margin: 11/11 versus 0/1. The `cld` is a single site with a single-byte consequence, not the visible
+edge of a systemic difference.
+
+**This closes the prefix direction of the investigation.** Combined with §31 (the `cld` is not the cause of
+the carrier's other clusters), the finding is now bounded on every side: one site, one byte, specific rather
+than general, and not reachable from C.
+
+**Measured with a byte-level scan, with the caveat that raw byte counts are not instruction counts** — `fc`,
+`fd` and `f0` occur inside immediates and displacements, so a naive count of those bytes in the two images
+disagrees (reference 467 `fc` vs our 465) for reasons unrelated to prefixes. The table above counts only the
+meaningful pattern (direction prefix *immediately followed by* a rep opcode), which is why it is trustworthy
+where the raw count is not.

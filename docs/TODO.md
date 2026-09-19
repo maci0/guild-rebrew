@@ -30465,3 +30465,35 @@ Recorded as `codegen-walls.md` §31.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1070 — no general prefix gap: `std`+rep appears 11 times and we match all 11
+
+After §29-31 closed the `cld` as one-byte evidence, the interesting follow-up was whether we have a **general**
+direction-flag prefix weakness — a far bigger finding if true. **Measured and false.**
+
+| prefix | reference | ours | verdict |
+|---|---|---|---|
+| `std` (`fd`) + `f2`/`f3` | **11 sites** | **11 sites** | **all 11 byte-identical** |
+| `cld` (`fc`) + rep | **1 site** | **0 sites** | the §29 miss |
+
+The eleven `std` sites match **exactly**, neighbours included (`0x10011dad`, `0x100188e8`, `0x1001a555`,
+`0x1001b3b3`/`40a`/`434`/`466`, `0x1001ec63`/`cba`/`ce4`/`0x1001ed16` — 11 identical, 0 differ).
+
+**So there is no general prefix gap.** Our msvc6 emits `std` before `rep stosd`/`rep movsd` exactly where the
+reference does, 11/11, and the reference emits `cld` before a rep sequence **once** in the entire binary. The
+hypothesis "any rep-sequence site is suspect" is false by 11/1.
+
+**Method caveat worth recording.** The first attempt compared **raw byte counts** of `fc`/`fd`/`f0`/`f3`
+across the two images and found them all disagreeing (reference 467 `fc` vs our 465, and five more). Those
+counts are meaningless: `fc`, `fd` and `f0` occur inside immediates and displacements, not only as opcodes.
+The table above counts only the meaningful pattern — a direction prefix **immediately followed by** a rep
+opcode — which is why it is trustworthy where the raw count is not. The naive version would have supported a
+false "systemic prefix difference" finding.
+
+**This closes the prefix direction.** With §31 (the `cld` is not the cause of the carrier's other clusters),
+the finding is bounded on every side: one site, one byte, specific rather than general, unreachable from C.
+
+Recorded as `codegen-walls.md` §32.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
