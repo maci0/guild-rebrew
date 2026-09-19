@@ -31246,3 +31246,47 @@ denominator).
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged.
+
+## Round 1089 — section-by-section parity: every non-`.text` section is byte-identical
+
+With every source lever closed and three rounds left, this round measured the objective's two halves directly
+on the shipped deliverable rather than inferring them from tool summaries.
+
+| section | raw size | differing | SHA-256 prefix (ref = built) |
+|---|---|---|---|
+| `.text` | `0x23000` | **8,628** | `60c51e08a3c4` |
+| `.rdata` | `0x3000` | **0** | `8046aaa446c8` |
+| `.data` | `0xe000` | **0** | `e1f56d0d50af` |
+| `.reloc` | `0x11000` | **0** | `d8cf33e18c1a` |
+
+File size 286,720 in both; all four section headers byte-identical. The whole-file SHA-256 differs, and the
+difference is **exactly** the `.text` residue — no other byte in the image contributes.
+
+**`verify --data`'s 37% is the maximum coverage, not a shortfall.** Its "122 of 329 symbols compared" decomposes
+exactly as 85 `.data` + 37 `.rdata` = every symbol with file bytes. The 207 not compared are 73 `.data` symbols
+in the virtual tail (`0x10035000`+, past `rawsize` `0xe000`), 84 import slots, and 50 `.bss` — and **none of the
+73 is inside the file-backed region** `0x10027000`..`0x10035000`, measured directly. There is no further
+coverage to obtain; the remainder is data the PE file does not carry. This closes the question round 1079
+opened when the denominator first became visible.
+
+**Done-criteria audit, clause by clause:**
+
+| criterion | status |
+|---|---|
+| every data byte matching | **satisfied**, independently verified by section hash |
+| `.text` VirtualSize exactly `0x22846` | **satisfied** (`0x22846` in both) |
+| import table exactly 100 | **satisfied** |
+| `scripts/gate.sh` green | **satisfied** |
+| Wine load + `Init`/`Exit` resolve | **satisfied** |
+| residue at zero | **not met** — 8,628 bytes |
+| all functions EXACT | **not met** — same 8,628 bytes |
+
+The last two are one clause, not two. Everything else in the objective is met and measured.
+
+**No probes this round; no source change.**
+
+**Docs:** general-knowledge (the parity table and the coverage decomposition).
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged.

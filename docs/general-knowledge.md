@@ -279,3 +279,30 @@ the other 207 are not comparable, and `--json` carries `total`/`compared`/`not_c
 that fix the coverage figure was absent entirely and had to be reconstructed by calling
 `section_symbol_bytes` on both images and counting `ref_sizes`; see `docs/measure-traps.md` §51 for why a
 zero in a diff-shaped result is never a statement about the whole tree.
+
+## Section-by-section parity: every non-`.text` section is byte-identical (round 1089)
+
+The objective has two halves — data bytes and `.text` residue. This is the direct measurement of the data
+half, taken on the shipped deliverable rather than inferred from a tool summary:
+
+| section | SizeOfRawData | differing bytes | SHA-256 (ref = built) |
+|---|---|---|---|
+| `.text` | `0x23000` | **8,628** | differs |
+| `.rdata` | `0x3000` | **0** | `8046aaa446c8…` |
+| `.data` | `0xe000` | **0** | `e1f56d0d50af…` |
+| `.reloc` | `0x11000` | **0** | `d8cf33e18c1a…` |
+
+File size is 286,720 bytes in both, and all four section headers are byte-identical. The whole-file SHA-256
+still differs, and the difference is **exactly** the `.text` residue — nothing else in the image contributes.
+
+**`rebrew verify --data`'s 37% coverage is the maximum, not a shortfall.** Its report reads
+"122 of 329 symbols compared". The 207 it does not compare decompose as: **73** symbols declared `.data` that
+sit past `rawsize` `0xe000` in the virtual tail (`0x10035000`+), **84** import slots, **50** `.bss`. Measured
+directly: **none of the 73 is inside the file-backed region** `0x10027000`..`0x10035000`. The 122 compared are
+85 `.data` + 37 `.rdata`, which is every symbol that has file bytes in either image to compare against. There
+is no additional coverage to be had — the remainder is symbols the file format does not carry.
+
+**What this means for the done-criteria.** "Every data byte matching" is satisfied and independently verified.
+"`.text` VirtualSize exactly `0x22846`" is satisfied (`0x22846` in both). "Import table exactly 100" is
+satisfied. "residue at zero" and "all functions EXACT" are the two clauses that are not, and they are the same
+clause: the 8,628 bytes above.
