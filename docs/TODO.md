@@ -30363,3 +30363,43 @@ characterised rather than cited as a rejection reason.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1067 — positive evidence for the asm clause: the reference's `strcpy` carries a `cld` msvc6 never emits
+
+Round 1066 located `m_AllocTracked`'s `strcpy`-inlining divergence at `0x100066a0`. This round probed its
+**first cause**: the reference begins `cld; repne scasb`; ours begins at `repne scasb`.
+
+**Tested whether any C spelling produces the `cld`** — three independent compiles under this file's own flags,
+each isolating the expansion:
+
+| spelling | emitted head |
+|---|---|
+| `strcpy(dst, src)` with `<string.h>` | `83 c9 ff 33 c0 f2 ae f7 d1 2b f9 8b c1 8b f7 ...` |
+| same + `#pragma intrinsic(strcpy)` | identical |
+| same, `dst`/`src` as parameters | identical shape |
+
+**None emits `cld`.** All three go `33 c0` → `f2 ae`. The reference is `fc f2 ae f7 d1 2b f9 8b c1 ...` —
+**`cld` followed by byte-for-byte what all three spellings produce** (`ref_head == b'\xfc' + our_head` is
+`True`). The in-situ build agrees: our compiled `m_AllocTracked` has the expansion starting
+`8d 7d e8 f2 ae f7 d1 ...`, no `cld` adjacent.
+
+**Why this is real evidence rather than a quirk.** The x86 ABI guarantees DF=0 on entry, so a compiler
+emitting `repne scasb` — including an *inlined* `strcpy` — has no need to clear it. msvc6's expansion does not
+emit `cld` in any of three forms tested. The reference emits it anyway. That is precisely the objective's
+allowed justification: *"a code shape no MSVC6 C output can produce"*.
+
+**A caveat found while testing, recorded because it nearly misled the round.** The isolated compiles schedule
+`shr ecx,2` **after** `mov esi,edi`; the in-situ build places it **before**. So the expansion's schedule is
+**context-dependent**, and isolated probes answer the `cld` question (all three agree on its absence) but must
+not be used to reason about `shr` ordering, which §28 measured in situ.
+
+**Why it is still not a lever.** One byte, on a carrier whose 92 residue bytes span **12 clusters**; the
+surrounding schedule difference is a separate context-dependent cause that no pragma reaches. Closing it
+would need `__asm { cld }` at that site and would still leave eleven clusters. **Recorded as evidence, not as
+a probe target** — a distinction the objective makes explicitly, and the first time this project has had
+positive grounds for it on a residual site.
+
+Recorded as `codegen-walls.md` §29.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

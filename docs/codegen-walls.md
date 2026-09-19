@@ -1553,3 +1553,49 @@ row whose every reachable pragma/type spelling has been measured and the `memset
 is that the `strcpy` half is now precisely located and characterised, rather than cited.
 
 `src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`
+
+### 29. The reference's inlined `strcpy` carries a `cld` our msvc6 never emits — positive evidence for the asm clause
+
+§28 located the divergence at `m_AllocTracked`'s `0x100066a0`. This probes its **first cause**: the reference
+begins the expansion with `cld; repne scasb`, and ours begins at `repne scasb`.
+
+**Tested whether any C spelling produces the `cld`.** Three independent compiles under this file's own flags
+(`/O2 /Gd /MT`), each isolating the expansion:
+
+| spelling | expansion head emitted |
+|---|---|
+| `void f(void) { strcpy(dst, src); }` with `<string.h>` | `83 c9 ff 33 c0 **f2 ae** f7 d1 2b f9 8b c1 8b f7 ...` |
+| same, plus `#pragma intrinsic(strcpy)` | identical |
+| same, taking `dst`/`src` as parameters | identical shape |
+
+**None emits `cld`.** All three go `... 33 c0` → `f2 ae`, with no `fc` between. The reference is
+`fc f2 ae f7 d1 2b f9 8b c1 ...` — that is, **`cld` followed by a sequence that is byte-for-byte what all
+three spellings produce.** Verified: `ref_head == b'\xfc' + our_head` is `True`.
+
+**And the in-situ build agrees.** Searching our compiled `m_AllocTracked` around the site finds the expansion
+starting `8d 7d e8 f2 ae f7 d1 ...` — no `cld` adjacent, in situ as well as isolated.
+
+**Why `cld` here is a genuine codegen choice, not a requirement.** The x86 ABI guarantees DF=0 on function
+entry, so a compiler emitting `repne scasb` has no need to clear it first — and an *inlined* `strcpy` at a
+call site inherits that guarantee. msvc6's own `strcpy` expansion does not emit `cld` in any of the three
+forms tested. The reference emits it anyway.
+
+**A caveat about the isolated test, recorded because it nearly misled this round.** The isolated compiles
+schedule `shr ecx,2` **after** `mov esi,edi` (`... 8b c1 8b f7 8b 3d ... c1 e9 02`), while the in-situ build
+places it **before** that move (`... 8b c1 c1 e9 02 8b f7`). So the expansion's schedule is
+**context-dependent**, and the isolated compiles are not a faithful stand-in for the in-situ one. They do
+answer the `cld` question — all three agree on its absence — but they must not be used to reason about the
+`shr` ordering, which §28 measured in situ.
+
+**Judgement — and this is the first entry in this doc that supports the asm clause.** The objective permits
+raw asm only on *"positive evidence (for example a code shape no MSVC6 C output can produce, or a
+corroborating string/symbol), not a hunch from a hard match"*. **`cld` before `repne scasb` is exactly that
+shape**: an optional prefix byte with no semantic effect under the ABI, absent from every C spelling tested,
+present in the reference. It is **one byte**, on a carrier whose 92 residue bytes span 12 clusters, and the
+surrounding schedule difference (`shr` placement) is a separate, context-dependent cause that no pragma
+reaches. So it is not a lever worth spending: closing it would need `__asm { cld }` at that site *and* would
+still leave the other eleven clusters.
+
+Recorded as evidence, not as a probe target.
+
+`src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`
