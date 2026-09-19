@@ -2134,3 +2134,51 @@ correction.**
 This is the same failure mode as measure-traps §24 ("instruction counts across two images are not
 comparable — the decoder's stop rule decides the answer") arriving in a matching metric rather than a
 counting one: **the denominator was doing the work, and it was not reported.**
+
+## 40. A carrier has TWO first divergences — the raw link's and the shipped file's (round 1033)
+
+Measure-traps §35 established that the raw link and the shipped file answer different questions, and §37
+that the graded residue is a proper subset of the raw link's divergence. Neither says what happens to the
+**first-divergence address**, which is the address every carrier's documentation is keyed by. It turns out
+that address is ruler-dependent, and for most carriers the two do not agree.
+
+**Measured, per carrier:** walk both the raw link and the shipped file against the reference from the
+carrier's entry and record the first differing offset on each.
+
+| carrier | raw first diff | shipped first diff | bytes postlink corrected between them |
+|---|---|---|---|
+| `gm_AllocSpieler` | `+0x6d` | `+0xaa` | 8 |
+| `cm_ExSellObjekt` | `+0x7` | `+0x2c` | 3 |
+| `gv_ExAllocGraveyardWorker` | `+0x6a` | `+0x107` | 10 |
+| `ServerMainThread` | `+0x80` | `+0x3c7` | 4 |
+| `gm_AllocGebaeude` | `+0xa` | `+0x60` | 8 |
+| `gm_FindNextFilteredEntity` | `+0x1` | `+0x6` | 4 |
+| `ahm_ExAllocAlchemist` | `+0x38` | `+0xcc` | 20 |
+| `gm_CheckInventoryCapacity` | `+0x76` | `+0x83` | 3 |
+| `m_AllocTracked` | `+0xa` | `+0x11` | 2 |
+| `gm_ObjectsAvailble` | `+0x53` | `+0x10d` | 21 |
+| `cm_ExProdObjekt` | `+0x4` | `+0xcd` | 21 |
+| `gm_CalculateProductionValue` | `+0x6` | `+0xe4` | 23 |
+| `CrashDump`, `ls_LoadBuildingEntityState`, `cm_ExCopyEntityData`, `vfs_OpenStream`, `srv_LoadBuf`, `vfs_ReadCompressed`, `cm_ProcessCommandQueue` | — | — | **agree** |
+
+**Eleven of nineteen carriers disagree**, and in every case the raw link's divergence is *earlier* and is
+a 2-23 byte window of data operands postlink restores.
+
+**Worked example, `gm_AllocSpieler`.** At `+0x6d` the raw link has `e4 65 76 11` (`0x117665e4`, our
+stub placement) where the reference has `34 54 03 10` (`0x10035434`). The shipped file has the reference's
+`34 54 03 10` — and the two streams are byte-identical through `+0x90` across that whole window. So the
+raw link reports a divergence at `+0x6d` that **the carrier does not have in the deliverable**.
+
+**The rule.** `fault_address.py` measures the shipped file (correct — it is the deliverable), and every
+carrier's header is keyed by the shipped file's fault. A round that studies a carrier on the raw link —
+which §35 recommends, and which is the only way to see what the *build* produces — will land on a
+**different, earlier, postlink-supplied address** and read it as the carrier's problem. Check which ruler
+produced any fault address before looking it up.
+
+**Concretely:** use the raw link for "does our build produce these bytes" (capability) and the shipped file
+for "which byte is the carrier failing on" (deliverable). Do not carry a raw-link fault address into a doc
+lookup; `whathas.py` is indexed by the shipped-file address.
+
+This is measure-traps §35 and §36 in their address-level form: §35 said the two rulers differ in
+*magnitude*, §36 said a carrier's VA must not be assumed, and this says they differ in *the address itself*
+for 11 of 19 carriers.
