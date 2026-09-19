@@ -14,6 +14,19 @@ So `LONG` does not mean "over budget".  This script answers the question that
 matters before editing a file: does the object fit between its first function's
 reference VA and the next tracked VA?
 
+**Re-measured round 1058: 1 object is over, not zero.**  `mlock.c.obj` reports
+`span 118, text 212, +94`.  That is *correct and expected*: `mlock.c` is a local
+LIBCMT replacement (the `_CRT_REGION_KEEP` pattern -- it exists so the linker
+never pulls LIBCMT's `mlock.obj`, which imports `FatalAppExitA`/`IsBadWritePtr`),
+so its object carries CRT support code the two annotated functions do not
+describe.  The extra 43-byte section at `0x1001d0ac` is **byte-correct in the
+deliverable** (0 differing bytes), so the overshoot does not move later symbols
+and is not a defect.  The header's earlier "zero are over" was true of the 25
+`LONG`-flagged objects at the time and is not true tree-wide.
+
+Read `over > 0` on a *replacement* object as "this file also carries displaced
+library code", not as a fault: check the bytes before acting.
+
     over > 0   the object does not fit -- edits that grow it will move later symbols
     over == 0  exactly at the span -- any growth moves later symbols
     over < 0   room to spare (this many bytes)

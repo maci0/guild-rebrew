@@ -30038,3 +30038,43 @@ what makes the regression detectable.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1058 — audited the remaining helper scripts for silent passes; corrected one stale docstring
+
+Applied the last three rounds' lesson (test the tooling, not just the target) to the project's other
+measurement scripts.
+
+**Exit codes, run from the repo root:**
+
+| script | exit | reading |
+|---|---|---|
+| `verify_objective.py` | 0 | correct — independent PE verification passes |
+| `object_span_check.py` | 1 | **correct** — one object is genuinely over its span (below) |
+| `data_extent_check.py` | 1 | needs the venv (`ModuleNotFoundError: rebrew`) — invocation, not a defect |
+| `section_geometry.py` | 1 | correct — `.reloc` raw `-0x9000` vs reference, which postlink replaces |
+
+**`object_span_check.py` found a real, explainable datum.** Its docstring claimed the object measurement
+treats **"zero are over"**; the tree now reports **1**:
+
+```
+OVER their span (1):
+  mlock.c.obj      span 118   text 212   +94
+```
+
+**Investigated and it is not a defect.** `mlock.c` is a local LIBCMT replacement — the `_CRT_REGION_KEEP`
+pattern, existing so the linker never pulls LIBCMT's `mlock.obj` (which imports
+`FatalAppExitA`/`IsBadWritePtr`). Its object therefore carries CRT support code the two annotated functions
+(`_mlock` at `0x1001d036`, `_munlock` at `0x1001d097`) do not describe. The extra 43-byte section sits at
+`0x1001d0ac` and is **byte-correct in the deliverable** (0 differing bytes measured), so the overshoot does
+not move later symbols.
+
+**Docstring corrected** to record the measured state and to tell a reader that `over > 0` on a *replacement*
+object means "this file also carries displaced library code", not "this file is broken". Checking the bytes
+before acting is the discriminator.
+
+**Also confirmed:** the "objects whose .text exceeds their annotated size" sweep is **empty** for every other
+`.c.obj` in the build — `mlock.c` is the only such file, and for the reason above. So there is no
+unannotated-code gap anywhere in the tree.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
