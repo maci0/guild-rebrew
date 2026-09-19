@@ -87,7 +87,15 @@ add_c_warning(parentheses)
 # ---------------------------------------------------------------------------
 
 if(REBREW_BUILD_SERVER)
-  file(GLOB_RECURSE SERVER_SOURCES
+  # CONFIGURE_DEPENDS makes the build system re-glob on every build. Without it
+  # CMake expands the glob once at configure time, so renaming or adding a source
+  # leaves build.make, objects1.rsp and link.txt pointing at a .obj that no
+  # longer compiles. The build then fails with no obvious cause while
+  # `rebrew build-check` still reports clean, because that check compares flags
+  # on the objects CMake already listed -- it cannot see an object that should
+  # have left the list. Measured in round 1080: `rebrew rename` renamed a .c,
+  # split_link.sh died at exit 157, and the fix was a re-configure.
+  file(GLOB_RECURSE SERVER_SOURCES CONFIGURE_DEPENDS
     "src/server.dll/*.c"
   )
 
@@ -352,7 +360,7 @@ endif()
 # ---------------------------------------------------------------------------
 
 if(REBREW_BUILD_GOLD)
-  file(GLOB_RECURSE GOLD_SOURCES
+  file(GLOB_RECURSE GOLD_SOURCES CONFIGURE_DEPENDS
     "src/Europa1400Gold/*.c"
   )
 
@@ -377,7 +385,7 @@ endif()
 # ---------------------------------------------------------------------------
 
 if(REBREW_BUILD_GOLDTL)
-  file(GLOB_RECURSE GOLDTL_SOURCES
+  file(GLOB_RECURSE GOLDTL_SOURCES CONFIGURE_DEPENDS
     "src/Europa1400Gold_TL/*.c"
   )
 
@@ -535,7 +543,7 @@ if(EXISTS "${CLANGFORMAT_BIN}")
     set(CLANGFORMAT_VERSION_REQUIRED "17.0")
     message(DEBUG "Found clang-format version ${CLANGFORMAT_VERSION} (needs ${CLANGFORMAT_VERSION_REQUIRED})")
     if(CLANGFORMAT_VERSION VERSION_GREATER_EQUAL "${CLANGFORMAT_VERSION_REQUIRED}")
-      file(GLOB_RECURSE rebrew_sources
+      file(GLOB_RECURSE rebrew_sources CONFIGURE_DEPENDS
         "${PROJECT_SOURCE_DIR}/src/*.c"
         "${PROJECT_SOURCE_DIR}/src/*.h"
       )

@@ -309,6 +309,32 @@ Additional patterns seen in the binary:
 | `cm_Set*`         | Write a flag or field                         |
 | `Cmd*`            | Likely the compiled name for some cm_Ex       |
 
+### Lobby command dispatch
+
+`lb_ExLobbyServerCommand` (`0x10014db0`) is a **7-way switch on the lobby command id**, read as
+`*(int*)(msg + 0x10)`. It is the single best anchor for the `lb_` module's vocabulary: every case is a
+sibling handler, and the numbering is fixed by the binary rather than guessed. Recovered in round 1080 by
+reading the jump table at `0x10014ebc` against the case bodies. The dispatcher bounds the id first
+(`cmp eax,6` / `ja 0x10014eae`) and each case ends in its own `pop esi` / `add esp,0x80` / `ret`, so the
+order below is the table order, not an inference from the C source:
+
+| id | handler | address | role |
+|---|---|---|---|
+| 0 | `lb_ExPlayerlist` | `0x100145e0` | send the player list |
+| 1 | `lb_SendLobbyConfig` | `0x100146c0` | send lobby configuration |
+| 2 | `lb_ExPlayerHasJoined` | `0x100147b0` | a player joined |
+| 3 | `lb_BroadcastStateChange` | `0x10014a50` | broadcast a state change |
+| 4 | `lb_ExPlayerRecordBroadcast` | `0x10014af0` | distribute one player's record to the others |
+| 5 | `lb_HandleEntitySync` | `0x10014bf0` | entity synchronisation |
+| 6 | `cm_RouteCommand` | `0x10014ca0` | hand off to the `cm_` layer |
+
+The call sites carry the symbol names directly (`call 0x100146c0  ; lb_SendLobbyConfig`), so this table is
+attested rather than reconstructed. Two consequences worth keeping: `lb_` and `cm_` are **one dispatch
+chain**, not independent modules — case 6 crosses into `cm_`, so a `cm_` rename can reach lobby code. And
+`lb_SendLobbyConfig` has no `.c` of its own; it shares `lb_ExPlayerlist.c`. The dispatcher's own log string
+(`0x1002d858`, `"lb_ExLobbyServerCommand: %i"`) confirms the name it prints is the real symbol, which is why
+that row in the attested table reads "already correct".
+
 ### Verb Vocabulary
 
 Verbs are English. Nouns are German when they name game concepts:
@@ -467,6 +493,7 @@ rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
 | `0x10014070` | `ls_ID2Ptr` | already correct |
 | `0x10014260` | `srv_RecvGame` | already correct; the same body also logs `LoadGame():` and `ls_RecvGame():` |
 | `0x100147b0` | `lb_ExPlayerHasJoined` | renamed from `lb_HandleLobbyCommands` |
+| `0x10014af0` | `lb_ExPlayerRecordBroadcast` | renamed from `fcn_10014af0`; the site pushes `__FILE__` = `...\command\lobbycommands.c` and logs `"invalid client state"`; is `case 4` of the `lb_ExLobbyServerCommand` switch |
 | `0x10014db0` | `lb_ExLobbyServerCommand` | already correct |
 | `0x100150a0` | `plt_SetPlantMap` | already correct |
 | `0x10015500` | `sim_CreateCitizen` | already correct |

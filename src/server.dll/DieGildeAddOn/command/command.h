@@ -12,5 +12,6 @@ extern void __cdecl cm_ClosePlayerConnection(char* player_ptr);
 extern int __cdecl lb_ExPlayerlist(unsigned int* cmd, unsigned char* result);
 extern int __cdecl lb_SendLobbyConfig(unsigned int* cmd, unsigned char* result);
 extern int __cdecl lb_ExLobbyServerCommand(unsigned int* cmd, int result);
+extern int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg);
 
 #endif /* COMMAND_H */
