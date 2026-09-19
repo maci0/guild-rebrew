@@ -29009,3 +29009,44 @@ more useful one: the profile is now a **triage tool** for choosing which carrier
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1032 — a displacement profile needs its match rate; "one run" on an unmatched carrier means nothing
+
+§38's table listed six carriers as "a single displacement cliff". Re-measured them with a **second, independent
+axis**: how much of our stream appears in the reference **at all**. For every 4th offset, take an 8-byte
+context and search the whole reference `.text`:
+
+| carrier | 8-byte contexts found | reading |
+|---|---|---|
+| `vfs_OpenStream` | **102/134 (76.1%)** | mostly displaced |
+| `gm_AllocGebaeude` | 176/270 (65.2%) | mostly displaced |
+| `ls_LoadBuildingEntityState` | 218/366 (59.6%) | mostly displaced |
+| `gm_AllocSpieler` | 313/918 (34.1%) | mixed |
+| `CrashDump` | 139/530 (26.2%) | mostly different code |
+| **`gm_FindNextFilteredEntity`** | **11/86 (12.8%)** | **mostly different code** |
+
+**`gm_FindNextFilteredEntity` had no displacement profile to read.** Its §38 row said "1 value, 1 run" — but
+only **4 of 82** samples matched anything, and a 24-byte context finds *nothing* in the entire reference.
+The single run was an artefact of an almost-empty sample. Its 245 differing bytes are substantially new
+code, which is consistent with round 1027's probe: the entry reorder genuinely applied and still cost +6,
+because the rest of the function is not that code shifted.
+
+**`vfs_OpenStream` is the clean case**, exactly as §38 read it: 76.1% matched, one run, one byte, with our
+code 1 byte *longer* at +0x44..+0x78 and re-syncing after. Its header already documents the lever and the
+trade, and this round confirmed the header rather than finding anything new:
+
+**Probe on `vfs_OpenStream`, reverted (+199).** The header records that `switch (crt_toupper(*p))` with the
+loop reading `*p` directly emits the target's `cmp byte ptr [eax],0` entry test and makes the flag loop
+byte-exact. The header also records that this is **one of two mutually exclusive forms**: the size-correct
+form is 277/701 against the retained 450/701, and the header says so explicitly ("the two forms are mutually
+exclusive and the boundary is now located exactly"). I re-measured the first half alone — naming only that
+file — and got **+199**, which is the recorded misalignment cost, not a new result. **The header was right;
+the probe was redundant.** Recorded so the next round does not repeat it.
+
+**Recorded as measure-traps §39**, with a cross-reference added at the head of §38's table so the triage
+tool is not read without its denominator.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

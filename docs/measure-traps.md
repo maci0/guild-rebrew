@@ -2078,8 +2078,59 @@ claimed the wake framing does not reproduce, when in fact it reproduces for six 
 the largest. Recorded because the corrected version is more useful: the profile table is now a *triage
 tool* — a carrier with one run is a §109-style single decision, a carrier with many runs is not.
 
+**READ §39 BEFORE USING THIS TABLE.** The profile is only interpretable alongside its match rate: a
+carrier whose code is genuinely different rather than shifted produces few matched samples, and a low
+sample count can show as "one run" for the wrong reason. `gm_FindNextFilteredEntity`, listed here as a
+single-run carrier, is 12.8% context-matched and has no profile to read.
+
 **The rule.** "It is all downstream of fault X" is an attribution claim and needs the measurement any
 other claim does. Sample the interior: one or two displacement values means a genuine single-cause wake;
 many values means the fault explains the first run and nothing after it. And check your image origin
 before believing a surprising table — the wrong slice produced a confident, wrong headline in this very
 section.
+
+## 39. "One displacement run" does not mean "one shifted byte" — check context presence too (round 1032)
+
+Measure-traps §38 introduced a displacement profile as a triage tool: sample our image, find the same
+24-byte context in the reference nearby, and count the distinct distances. One value in one run was read as
+"a single cliff, therefore a single local difference to attack".
+
+**That reading is wrong for at least one carrier, and the reason is that a displacement match is only
+possible where our bytes exist in the reference at all.** A carrier whose code is genuinely *different* —
+not shifted — has few searchable contexts, and a small number of samples can easily land in one run purely
+because so little matched.
+
+**Second measurement: how much of our stream appears anywhere in the reference `.text`.** Sample every 4th
+offset, take an 8-byte context, and search the whole reference:
+
+| carrier | 8-byte contexts found in the reference | reading |
+|---|---|---|
+| `vfs_OpenStream` | **102/134 (76.1%)** | mostly displaced — §38's reading is right |
+| `gm_AllocGebaeude` | 176/270 (65.2%) | mostly displaced |
+| `ls_LoadBuildingEntityState` | 218/366 (59.6%) | mostly displaced |
+| `gm_AllocSpieler` | 313/918 (34.1%) | mixed |
+| `CrashDump` | 139/530 (26.2%) | mostly different code |
+| **`gm_FindNextFilteredEntity`** | **11/86 (12.8%)** | **mostly different code** |
+
+`gm_FindNextFilteredEntity` reported a single displacement run in §38 only because **only 4 of its 82
+samples matched anything at all** — a sample count far too small to distinguish "one run" from "almost
+nothing to measure". At 8-byte context it is 11/86, and a 24-byte context finds **nothing** in the entire
+reference. Its 245 differing bytes are substantially new code, and the entry-order probe it motivated
+(`codegen-walls` §21) returned +6 with the reorder genuinely applied.
+
+**The rule.** A displacement profile is only interpretable alongside its **match rate**. Report both:
+
+- **Match rate** — does our code exist in the reference at all? Low means the carrier needs *code* work, and
+  no displacement profile describes it.
+- **Distinct displacements and runs**, among the samples that *did* match — only this measures how many
+  independent local shifts there are.
+
+A carrier with a high match rate and one run is §38's clean case (`vfs_OpenStream`: 76.1%, one run, one
+byte). A carrier with a low match rate has no profile to read, and a "1 run / 1 value" result on it is an
+artefact of the sample being nearly empty. **Six of eight §38 rows were recomputed here; the two that were
+not were `cm_ExSellObjekt` and `ServerMainThread`, both of which had 2-5 runs and are unaffected by this
+correction.**
+
+This is the same failure mode as measure-traps §24 ("instruction counts across two images are not
+comparable — the decoder's stop rule decides the answer") arriving in a matching metric rather than a
+counting one: **the denominator was doing the work, and it was not reported.**
