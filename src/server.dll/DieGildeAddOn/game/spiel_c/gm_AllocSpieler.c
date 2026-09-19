@@ -55,6 +55,28 @@
  * region is missing: the call sequences agree 55/55, so every statement has
  * a counterpart and the residue is spelling, order and register choice.
  *
+ * THE "192 HUNKS" FIGURE ABOVE MISREAD THE SHAPE -- round 1082 replaced it.
+ * That helper is no longer in the tree.  Re-measured with capstone, aligning
+ * the reference against the raw-linked split_poc and matching on mnemonic plus
+ * register-normalised operands (resync window 6): 1056 reference instructions,
+ * 1054 ours, **48 differing runs, largest 159**.  Two of every three differing
+ * instructions sit in ONE contiguous block at 0x1001910e.  The function is not
+ * uniformly rough; it has one large wall and a scatter of small ones.  Hunk
+ * count depends on where the aligner resyncs, so it cannot answer "one wall or
+ * many" -- run-size distribution can, and that is what to quote.
+ *
+ * The wall is a two-register role swap (edi/esi) whose single upstream cause is
+ * the third instruction of the block: the reference zero-extends the
+ * `unsigned short` load with `xor eax,eax` + `mov ax,[ebp]`, we emit
+ * `and eax,0xffff`.  That is the colv/rowv sympathy loop below.  Three probes,
+ * all measured at the link and all negative -- do not re-probe:
+ *   drop `volatile` from both loads          -> +426 (volatile is load-bearing)
+ *   explicit `(int)` cast on the first load  -> +0 (inert)
+ *   hoist `rowv` above the first gm_RandomMod call (the reference's order)
+ *                                            -> composition collapses,
+ *                                               .text +658, 0/319 at ref VA
+ * See codegen-walls section 34.
+ *
  * Statement order is the dominant lever in this function.  msvc6 schedules
  * the record-header stores and the citizen-path field copies in source
  * order, so relocating single statements by one to three lines moves the
