@@ -75,58 +75,48 @@ this file holds the rest.
 `rebrew verify --full` reports "13 function(s) have annotation SIZE differing from the binary-derived
 size". Twelve of them are `command_c/*.c`, all with `binary_size > annotation_size`, and the cause is not
 codegen: **the discoverer merged a contiguous run of small command functions into one symbol.** Our source
-implements the first function; the rest of the span is several sibling functions that have no VA of their
-own and therefore never appear in `function_structure.json`.
+implements the first function; the rest of the span holds sibling functions that have no VA of their own
+and therefore never appear in `function_structure.json`.
 
-Counted by scanning each span for `ret` (`0xc3`) bytes:
+**Exactly 10 sibling functions, not 51.** The first count (round 1022) split each span at every `ret`
+(`0xc3`) and got 51. That is wrong: most `ret`s in these spans are **branch targets** — return sites
+*inside* a larger function. Confirm a start with three conditions together:
 
-| VA | span | `ret`s | functions in span | ours |
-|---|---|---|---|---|
-| `0x10010260` | 176 | 9 | 9 | 144 B (first) |
-| `0x1000f3b0` | 720 | 8 | 8 | 206 B |
-| `0x100100a0` | 448 | 8 | 8 | 159 B |
-| `0x1000d8a0` | 2208 | 6 | 6 | 142 B |
-| `0x1000e690` | 320 | 6 | 6 | 191 B |
-| `0x1000d6e0` | 272 | 5 | 5 | 78 B |
-| `0x1000e8d0`, `0x1000eaa0`, `0x1000f980` | 464/352/432 | 4 | 4 each | 239/208/335 B |
-| `0x1000cfe0`, `0x10010010` | 96/144 | 3 | 3 each | 64/110 B |
-| `0x1000d330` | 32 | 2 | 2 | 14 B |
+1. preceded by at least one `90` pad byte;
+2. **not** a target of any `e8`/`e9`/`eb`/`7x`/`0f 8x` branch in the image (a referenced address is
+   mid-function);
+3. carries a plausible msvc6 prologue (`55`/`56`/`57`/`53`, `81 ec`/`83 ec`, `6a`/`68`, `a1`, `8b 44`,
+   `b8`, `33 c9`).
 
-**50 extra reference functions** sit inside these 12 spans with no inventory entry. They are game code, not
-library: they use `g_next_object_id` (`0x10030b6c`), `g_unknown_1de450` (`0x101de450`) and `g_item_def_table`,
-and call game functions such as `0x10019cd0`, `0x100196c0`, `0x10019b80`.
+| confirmed start | span | prologue |
+|---|---|---|
+| `0x1000d340` | `0x1000cfe0` | `mov eax,imm` |
+| `0x1000d730` | `0x1000d6e0` | `sub esp,imm8` |
+| `0x1000d930` | `0x1000d8a0` | `sub esp,imm32` |
+| `0x1000e750` | `0x1000e690` | `mov eax,[abs]` |
+| `0x1000e9c0` | `0x1000e8d0` | `push edi` |
+| `0x1000f480`, `0x1000f590` | `0x1000f3b0` | `sub esp,imm8`, `mov eax,[esp+x]` |
+| `0x1000fad0` | `0x1000f980` | `mov eax,[esp+x]` |
+| `0x10010080` | `0x10010010` | `mov eax,[esp+x]` |
+| `0x10010140` | `0x100100a0` | `mov eax,[abs]` |
+
+Two of the twelve spans (`0x1000d330`, `0x10010260`) hold only padding after their first function — no
+siblings.
 
 **The extreme case is `cm_MarkAndReturn`** (`0x1000d330`): our 14-byte function is **EXACT**, and the
 reference's remaining 18 bytes are `90 90 | b8 01 00 00 00 c3 | 90...` — a second complete function
-(`mov eax,1; ret`) followed by padding. The 32-byte "binary size" is the gap to the next entry, not this
-function's length. An `EXACT` status with a size divergence is therefore not a contradiction.
+(`mov eax,1; ret`) followed by padding, referenced from nowhere (dead code or table-dispatched). The
+32-byte "binary size" is the gap to the next inventory entry, not this function's length. An `EXACT`
+status with a size divergence is therefore not a contradiction.
 
-**Consequence for the objective.** `rebrew verify --full`'s denominator (283) counts discovery symbols, not
-reference functions. Closing these 12 spans means implementing ~50 functions that no tool will hand out via
-`rebrew skeleton`, because they have no VA in `function_structure.json`.
+They are game code, not library: they use `g_next_object_id` (`0x10030b6c`), `g_unknown_1de450`
+(`0x101de450`) and `g_item_def_table`, and call game functions such as `0x10019cd0`, `0x100196c0`,
+`0x10019b80`. `rebrew lib-match --stock-lib LIBCMT.LIB` clears every one.
 
-**They do cost residue — but only 694 of the raw link's 14,347 bytes.** Measured against the raw link
-(`build/split_poc.dll`), not the shipped file:
+**Consequence for the objective.** `rebrew verify --full`'s denominator (283) counts discovery symbols,
+not reference functions. Closing these 10 spans means implementing 10 functions that no tool will hand out
+via `rebrew skeleton`, because they have no VA in `function_structure.json`. Their raw-link cost is 694
+bytes (see measure-traps §35 for the ruler and TODO round 1022 for the per-span table).
 
-| span | raw-link differing bytes |
-|---|---|
-| `0x1000d8a0` (2208 B) | 569 |
-| `0x1000eaa0`, `0x1000e8d0`, `0x1000f980`, `0x1000e690` | 24, 21, 16, 15 |
-| the other seven spans | 4-12 each, `0x10010010` zero |
-| **total** | **694** |
-
-The other 13,653 raw-link differences lie outside these spans — in the 19 carriers and in library
-placement.
-
-**Do not measure this on the shipped file.** `build/server.dll` reads **0** differing bytes across all
-twelve spans, because postlink rewrites the `.text` data operands and `E8`/`E9` targets from the layout
-package. The shipped file is the graded artefact and its number is correct for the objective, but it is
-the wrong ruler for "does our build produce these bytes" — the same self-certification trap
-`postlink_residual.py` documents for `.data`, in its `.text` form. Three artifacts, three answers for the
-same bytes: `.scratch/server.dll.prelayout` 50,285 (plain CMake link), `build/split_poc.dll` 14,347
-(split-set composition, LIBCMT placed as stock objects at reference offsets), `build/server.dll` 8,628
-(after postlink's operand rewrite).
-
-Evidence: `python3 -c` scan of the reference's `.text` for `0xc3` within each span; `rebrew verify --json`
-`size_divergences`; `rebrew asm` at each sibling start; per-span byte compare of `original/Server/server.dll`
-against `build/split_poc.dll` and `build/server.dll`.
+Evidence: `ret`-position + branch-target + prologue scan of the reference's `.text`; `rebrew verify
+--json` `size_divergences`; `rebrew asm` at each sibling start; `rebrew lib-match`.

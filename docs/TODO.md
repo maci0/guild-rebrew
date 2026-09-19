@@ -28582,7 +28582,59 @@ carrying no `va` and no `section`; they are not VA-addressed globals and no anno
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
 
-## Round 1022 — the capability ruler: 50 hidden functions cost 694 raw-link bytes, and fn4 is 514 of them
+## Round 1023 — round 1022's "50 hidden functions / fn4 is 514 bytes" is wrong: it is 10 functions
+
+Round 1022 split the twelve over-wide discovery spans at every `ret` (`0xc3`) and got 51 sibling
+functions, with "fn4" at `0x1000db5d` (1230 B) carrying 514 of the 694 raw-link bytes. **Both numbers are
+wrong**, and the method that produced them is unsound.
+
+**Why.** In these spans most `ret`s are **branch targets** — return sites inside one larger function. Split
+on `ret` and a single multi-return function becomes several phantom "functions".
+
+Checked `0x1000db5d`, round 1022's headline lever: **not a function start at all.** The bytes immediately
+before it are `... 5f 5e 5d 5b 81 c4 28 02 00 00 c3` — a complete `add esp,0x228; ret` epilogue — and
+`0x1000db5d` opens `39 7e 23 74 17` (`cmp [esi+0x23],edi; je ...`), which continues an expression already
+in progress. Nothing in the image references `0x1000db5d`.
+
+**The sound test.** A start needs three conditions together: preceded by `90` padding; **not** targeted by
+any `e8`/`e9`/`eb`/`7x`/`0f 8x` branch anywhere in the image; and a plausible msvc6 prologue. Applied to all
+twelve spans:
+
+| confirmed start | span | prologue |
+|---|---|---|
+| `0x1000d340` | `0x1000cfe0` | `mov eax,imm` |
+| `0x1000d730` | `0x1000d6e0` | `sub esp,imm8` |
+| `0x1000d930` | `0x1000d8a0` | `sub esp,imm32` |
+| `0x1000e750` | `0x1000e690` | `mov eax,[abs]` |
+| `0x1000e9c0` | `0x1000e8d0` | `push edi` |
+| `0x1000f480`, `0x1000f590` | `0x1000f3b0` | `sub esp,imm8` / `mov eax,[esp+x]` |
+| `0x1000fad0` | `0x1000f980` | `mov eax,[esp+x]` |
+| `0x10010080` | `0x10010010` | `mov eax,[esp+x]` |
+| `0x10010140` | `0x100100a0` | `mov eax,[abs]` |
+
+**10 functions, not 51.** `0x1000d330` and `0x10010260` hold only padding after their first function.
+
+Corroboration on the known case: `cm_MarkAndReturn` (`0x1000d330`) is EXACT at 14 bytes, and its "sibling"
+is `90 90 | b8 01 00 00 00 c3` — a genuine second function, referenced from nowhere. That one is real; it
+is also the only case where `ret+1` coincides with a function start.
+
+**One number survives.** The 694 raw-link bytes for the twelve spans were measured by byte compare over the
+whole span, not by the split, so that total stands. Only its *attribution* to 51 functions and to "fn4" was
+wrong. The largest single span is `0x1000d8a0` at 569 bytes, and it is **one** function of 2064 bytes
+starting at `0x1000d930` (ends `pop esi; ret` before the pad at `0x1000e74f`), not six.
+
+Corrections applied to `docs/general-knowledge.md` in place. **No source, metadata or `build.make` change
+was made this round; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1022 — the capability ruler: the twelve over-wide spans cost 694 raw-link bytes
+
+> **CORRECTED by round 1023.** The per-sibling table below is unsound: it split spans at every `ret`, but
+> most of those `ret`s are branch targets inside larger functions. The real count is **10 sibling
+> functions**, and "fn4" at `0x1000db5d` is not a function start at all. The **694-byte total stands**
+> (measured by byte compare over each whole span, independent of the split). Read round 1023 above.
 
 Round 1021's closing claim ("they are not part of our residue") was measured on `build/server.dll` and is
 **wrong**. Postlink rewrites the `.text` data operands and `E8`/`E9` targets from the layout package
@@ -28601,25 +28653,12 @@ Three artifacts for the same bytes: `.scratch/server.dll.prelayout` **50,285** (
 The gate's baseline is the third and is correct for the objective; it is the wrong ruler for "does our
 build produce this". Written up as measure-traps §35.
 
-**The lever.** Inside the 2208-byte `cm_ExTransferCurrencyNoKill` span there are six functions; only the
-first (142 B) is implemented. Per-sibling raw-link residue:
-
-| sibling | VA | len | raw-link differing |
-|---|---|---|---|
-| fn1 | `0x1000d92e` | 386 | 23 |
-| fn2 | `0x1000dab0` | 93 | 8 |
-| fn3 | `0x1000db0d` | 80 | **0** |
-| **fn4** | **`0x1000db5d`** | **1230** | **514** |
-| fn5 | `0x1000e02b` | 230 | 16 |
-
-**`fn4` alone is 514 bytes — 74% of the whole 694-byte opportunity, and the largest single unclaimed
-lever on this tree.** It is a command-dispatch function (61 instructions in its first 200 bytes, `cmp`/
-`je` chains over the command type, calls at `0x1000db71` and `0x1000db87`). It is not library code:
-`rebrew lib-match --stock-lib LIBCMT.LIB` clears all five siblings.
+**The lever.** The largest single span is `0x1000d8a0` at **569** of the 694 bytes. Per round 1023 it is
+one function of 2064 bytes starting at `0x1000d930`, not six.
 
 **What this costs.** These 694 bytes are *not* in the graded residue, so closing them does not move
 `RESIDUE_BASELINE`. They matter only under the objective's own "every function EXACT" clause, and closing
-them means implementing ~50 functions that `rebrew skeleton` cannot address because they have no VA in
+them means implementing 10 functions that `rebrew skeleton` cannot address because they have no VA in
 `function_structure.json` — plus repair of the discovery boundary so the inventory lists them.
 
 **Reverted: nothing to revert.** No source, no metadata and no `build.make` change retained this round;
