@@ -2182,3 +2182,43 @@ lookup; `whathas.py` is indexed by the shipped-file address.
 This is measure-traps §35 and §36 in their address-level form: §35 said the two rulers differ in
 *magnitude*, §36 said a carrier's VA must not be assumed, and this says they differ in *the address itself*
 for 11 of 19 carriers.
+
+## 41. A call-target multiset comparison inherits every desync — and a shifted stream invents wrong callees (round 1035)
+
+Comparing the multiset of `call` targets between the reference and a built image looks like a cheap
+"is any callee missing or wrong" check. **It is not:** after any size difference the streams desync, and
+every instruction after the fault is decoded from the wrong offset — so the comparison reports phantom
+missing calls and phantom wrong callees. Two measured examples, one for each direction.
+
+**Direction 1 — phantom *missing* calls (`gm_AllocSpieler`).** The multiset says the shipped file is missing
+three calls (`0x1001a299`, `0x10003640`, `0x100122e0`) that the raw link has:
+
+```
+ref      1056 instructions, 55 calls
+raw link 1054 instructions, 55 calls
+shipped  1014 instructions, 52 calls
+```
+
+The raw link has 55 calls and the shipped file 52 — but **the shipped stream decodes to 42 fewer
+instructions**, so it is desynced and its multiset is not comparable. There is no missing call. This is
+measure-traps §24 ("instruction counts across two images are not comparable") applied to call targets.
+
+**Direction 2 — phantom *wrong* callee (`vfs_OpenStream`).** Its multiset shows the reference calling
+`0x1001b0c0` (`crt_toupper`, real code) where we call `0x1002387d` (`.rdata`, zeros) — which reads as a
+wrong symbol and would send a round hunting the C. It is the +1 displacement from §38's single-byte cliff:
+
+```
+ref  +0x5f  call 0x1001b0c0      (e8 5c 20 .. at +0x3f)
+ship +0x5f  push eax             (50 at +0x3f)
+ship +0x60  call 0x1002387d      (e8 18 .. at +0x40)
+```
+
+Our `call` is the reference's `call` **one byte later**, at the offset the shift puts it. The decoded target
+is garbage because the decoder started the instruction one byte off. Nothing is wrong with the callee; the
+earlier fault (`cmp byte [eax],0` vs `mov al,[eax]`, one byte shorter) is the whole difference.
+
+**The rule.** Any comparison built on *decoded instructions* is only valid after establishing that the two
+streams are aligned at the region being compared. For a per-carrier callee audit, compare **call counts
+within a region known to be aligned**, or establish alignment first by the local-context method of §38;
+never compare a whole-function multiset across a known divergence. Both directions of error here are the
+§13/§24 family: the comparison silently measures the desync, not the code.

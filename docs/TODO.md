@@ -29141,3 +29141,52 @@ the last probe was "locally correct, globally losing". Both rows are documented 
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1035 — a call-target multiset audit produces phantom results in both directions
+
+Tried a cheap "is any callee missing or wrong" screen: compare the multiset of `call` targets per carrier
+between the reference and the built image. **The screen is invalid across any known divergence**, and this
+round measured both failure directions.
+
+**Direction 1 — phantom missing calls (`gm_AllocSpieler`).** The multiset reported the shipped file missing
+three calls the raw link has:
+
+| image | instructions | calls |
+|---|---|---|
+| reference | 1056 | 55 |
+| raw link | 1054 | 55 |
+| shipped | **1014** | **52** |
+
+The shipped stream decodes to 42 fewer instructions, so it is desynced and its multiset is not comparable.
+No call is missing. (measure-traps §24, in call-target form.)
+
+**Direction 2 — phantom wrong callee (`vfs_OpenStream`).** The multiset showed the reference calling
+`0x1001b0c0` (`crt_toupper`, real code) where we call `0x1002387d` (`.rdata`, zeros) — which reads as a
+wrong symbol and would send a round hunting the C. It is the **+1 displacement** from §38's single-byte
+cliff:
+
+```
+ref  +0x5f  call 0x1001b0c0   (e8 5c 20  at +0x3f)
+ship +0x5f  push eax          (50        at +0x3f)
+ship +0x60  call 0x1002387d   (e8 18 ..  at +0x40)
+```
+
+Our call *is* the reference's call, one byte later. The decoded target is garbage because the decoder began
+the instruction one byte off. Nothing is wrong with the callee.
+
+**A useful by-product:** the audit did correctly identify that the other 17 carriers' call multisets match
+once the two known-desynced rows are discounted, and that the genuinely-aligned rows
+(`ls_LoadBuildingEntityState`, `cm_ExCopyEntityData`, `gv_ExAllocGraveyardWorker`, `ServerMainThread`,
+`gm_AllocGebaeude`, `ahm_ExAllocAlchemist`, `m_AllocTracked`, `srv_LoadBuf`, `gm_ObjectsAvailble`,
+`vfs_ReadCompressed`, `cm_ExProdObjekt`, `cm_ProcessCommandQueue`, `gm_CalculateProductionValue`,
+`gm_CheckInventoryCapacity`) show **no missing or extra call at all**. So no carrier is missing a call to a
+function the reference invokes — a negative result that is worth having, since "the reconstruction forgot a
+call" was the one structural failure mode this screen could have caught.
+
+**Recorded as measure-traps §41**, with the rule: any comparison built on decoded instructions is valid only
+where the streams are known to be aligned, and call-target multisets must not span a known divergence.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
