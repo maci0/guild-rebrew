@@ -1992,3 +1992,56 @@ would still be unmet afterwards.
 **Judgement, labelled as judgement:** authorising the post-pass would trade a constraint for ~16%, and the
 remaining 84% would then need the recompilation work that the constraint was protecting. That is a bad trade,
 and it is now a measured bad trade rather than an assumed one.
+
+### 38. THE LEVER THAT WAS MISSING: the residue contains 109 instructions the reference has and we do not emit at all (round 1094)
+
+Rounds 1082-1090 classified the residue by **byte counts** and by whether differing sites shared a mnemonic.
+Both are order-sensitive measures taken at aligned *positions*, and neither answers the question that decides
+what kind of problem this is:
+
+> **Does the reference contain instructions that our build does not emit anywhere in the function?**
+
+If the answer is yes, the difference is not a compiler decision — a compiler choosing differently still emits
+*some* instruction at every point. An instruction present on one side and absent from the other means the two
+programs are not the same program, and the gap is **missing or surplus SOURCE**.
+
+**Measured (order-insensitive instruction multiset, reference vs raw link, per carrier):**
+
+| carrier | shared (mnemonic) | ref-only | our-only | verdict |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | 1,032 | **24** | 22 | different set |
+| `CrashDumpUnhandledExceptionFilter` | 632 | **41** | 24 | different set |
+| `cm_ExSellObjekt` | 663 | 4 | 4 | different set |
+| `ls_LoadBuildingEntityState` | 492 | 7 | 5 | different set |
+| `gm_FindNextFilteredEntity` | 97 | **13** | 6 | different set |
+| `gv_ExAllocGraveyardWorker` | 175 | 0 | 1 | different set |
+| **10 carriers total** | — | **109** | **79** | |
+
+**What the missing instructions look like — and why each is a missing statement, not a codegen choice:**
+
+| carrier | reference-only instructions | reading |
+|---|---|---|
+| `gm_FindNextFilteredEntity` | `pop` ×3, **`ret` ×3**, `xor` ×3 | **three epilogues where our C has one** |
+| `cm_ExCopyEntityData` | `pop` ×4, `mov`, `add`, `jmp`, `jge` | same: extra exits folded away in our source |
+| `CrashDump` | **`adc` ×10**, `push` ×8, `pop` ×6, `sub` ×6, `test` ×4 | a whole carry-chain block we never wrote |
+| `gm_AllocSpieler` | `mov` ×9, `lea` ×7, `xor` ×4 | statements absent from our reconstruction |
+| `cm_ExSellObjekt` | `mov` ×2, `add`, `jne` | one missing statement and its branch |
+
+**`ret` ×3 is decisive.** A function whose reference has three return paths and whose C has one is not
+experiencing a scheduling disagreement — our source is missing the branches that reach the other two.
+
+**Nothing about this contradicts the toolchain.** 264 of 283 functions are byte-perfect under this exact
+msvc6, which is proof the compiler reproduces this binary when the C is right. A compiler wall would produce
+the same instruction *set* in a different order; it cannot produce a set that is missing three `ret`s. So the
+residue is **source-recovery work**, and source recovery is the one thing the constraints fully permit.
+
+**Why rounds 1082-1090 read it otherwise.** §16's 67.5% "register-role" figure, §36's run distribution and
+§37's 16% post-pass bound all measure *aligned positions* and *byte counts*. Both are blind to an instruction
+that exists on only one side: an `adc` chain is counted as "bytes that differ", never as "an instruction we do
+not have". The correct first question for any carrier is the multiset question above, and it should have been
+asked before the position-based analyses, not after them.
+
+**The lever, stated plainly.** For each carrier: list the reference-only instructions, read the region they sit
+in, and recover the source that produces them. Start with the epilogue carriers — `gm_FindNextFilteredEntity`
+(3 `ret`s) and `cm_ExCopyEntityData` (4 `pop`s) — because a missing early-return is a structural gap that is
+identifiable from the disassembly alone, with no search.
