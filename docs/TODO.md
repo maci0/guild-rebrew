@@ -29050,3 +29050,47 @@ tool is not read without its denominator.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1033 — a carrier has two first divergences: 11 of 19 disagree between the raw link and the shipped file
+
+Rounds 1031-1032 built a displacement-profile triage tool on the raw link. This round asked a prior
+question: **is the raw link's first divergence the same address as the shipped file's?** For every carrier,
+walked both images against the reference from the carrier's entry:
+
+| carrier | raw first diff | shipped first diff | bytes postlink corrected between |
+|---|---|---|---|
+| `gm_AllocSpieler` | `+0x6d` | `+0xaa` | 8 |
+| `cm_ExSellObjekt` | `+0x7` | `+0x2c` | 3 |
+| `gv_ExAllocGraveyardWorker` | `+0x6a` | `+0x107` | 10 |
+| `ServerMainThread` | `+0x80` | `+0x3c7` | 4 |
+| `gm_AllocGebaeude` | `+0xa` | `+0x60` | 8 |
+| `gm_FindNextFilteredEntity` | `+0x1` | `+0x6` | 4 |
+| `ahm_ExAllocAlchemist` | `+0x38` | `+0xcc` | 20 |
+| `gm_CheckInventoryCapacity` | `+0x76` | `+0x83` | 3 |
+| `m_AllocTracked` | `+0xa` | `+0x11` | 2 |
+| `gm_ObjectsAvailble` | `+0x53` | `+0x10d` | 21 |
+| `cm_ExProdObjekt` | `+0x4` | `+0xcd` | 21 |
+| `gm_CalculateProductionValue` | `+0x6` | `+0xe4` | 23 |
+| `CrashDump`, `ls_LoadBuildingEntityState`, `cm_ExCopyEntityData`, `vfs_OpenStream`, `srv_LoadBuf`, `vfs_ReadCompressed`, `cm_ProcessCommandQueue` | — | — | **agree** |
+
+**Eleven of nineteen disagree**, and the raw link's divergence is always *earlier* — a 2-23 byte window of
+data operands that postlink restores.
+
+**Worked example, `gm_AllocSpieler`.** At `+0x6d` the raw link has `e4 65 76 11` (`0x117665e4`, our stub
+placement); reference and shipped both have `34 54 03 10` (`0x10035434`). The streams are byte-identical
+through `+0x90`, so **the raw link reports a divergence at `+0x6d` that the deliverable does not have.**
+
+**Why this matters for method.** §35 recommends the raw link as the capability ruler, and it is the only
+way to see what the build produces. But every carrier's documentation is keyed by the **shipped file's**
+fault, and `fault_address.py` measures the shipped file. So a round studying a carrier on the raw link lands
+on a different, earlier, postlink-supplied address and can read it as the carrier's problem — which is
+exactly the class of error rounds 1030 and 1032 each spent budget on.
+
+**Recorded as measure-traps §40** with the operational rule: raw link for "does the build produce these
+bytes", shipped file for "which byte is the carrier failing on", and never carry a raw-link fault address
+into a doc lookup.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
