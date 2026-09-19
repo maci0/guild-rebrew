@@ -2031,7 +2031,7 @@ function's own prologue begins at `0x10016f8a`. `fault_address.py` walks the str
 reports the first disagreement at `0x10016f86`; that is correct, and a first attempt to call this row
 "the wrong span" was wrong. Decode the streams, do not read the bytes at the entry.
 
-## 38. "Displacement wake" is a hypothesis to measure, not a property to assume (round 1031)
+## 38. The residue's displacement profile is measurable, and most carriers ARE a single cliff (round 1031)
 
 `msvc6-c-shapes.md` §109 closes `gm_AllocSpieler` (the largest carrier, 2,823 of 8,628 residue bytes)
 with a framing that bounds expectations:
@@ -2039,51 +2039,47 @@ with a framing that bounds expectations:
 > the 2,824-byte residue behind it is that one scheduling decision's **displacement wake** rather
 > than 2,824 bytes of wrong code
 
-That is plausible and it is the kind of claim that changes what a future round should attempt — if the
-residue is one decision's displaced wake, the lever is that decision; if it is many independent local
-shifts, no single lever reaches it. So it is worth measuring, and it **does not reproduce**.
+That claim changes what a future round should attempt: if the residue is one decision's displaced wake,
+the lever is that decision; if it is many independent local shifts, no single lever reaches it. It is
+therefore worth measuring rather than inheriting.
 
-**Method.** For each sampled offset in our image, search the reference within ±0x800 for the same 24-byte
-context. The distance at which the context is found is the local displacement at that position. A single
-cliff produces very few distinct displacement values and very few runs; many independent shifts produce
-many of both.
+**Method.** For each sampled offset in the built image, search the reference within ±0x800 for the same
+24-byte context. The distance at which it is found is the local displacement. A single cliff yields one or
+two distinct values in one or two runs; many independent shifts yield many of both.
 
-**Result on `gm_AllocSpieler` (raw link, 0xaa..0xe30):**
+**Result — the profile differs sharply by carrier, and most are a single cliff:**
 
-```
-98 of 873 sampled positions matched a 24-byte context
-displacement values: 0 (x35), +5 (x13), -5 (x12), -3 (x8), +11 (x7), +7 (x7),
-                     +3 (x7), -13 (x5), +4 (x3), +2 (x1)
-distinct values: 10
-displacement runs: 12
-```
+| carrier | sampled | matched | distinct values | runs |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | 916 | 710 | **4** | **7** |
+| `cm_ExSellObjekt` | 510 | 248 | 5 | 8 |
+| `ServerMainThread` | 606 | 406 | 2 | 5 |
+| `cm_ExCopyEntityData` | 109 | 96 | 2 | 3 |
+| **`CrashDump`** | 526 | 501 | **1** | **1** |
+| **`ls_LoadBuildingEntityState`** | 362 | 330 | **1** | **1** |
+| **`gm_AllocGebaeude`** | 263 | 223 | **1** | **1** |
+| **`vfs_OpenStream`** | 170 | 102 | **1** | **1** |
+| **`gm_FindNextFilteredEntity`** | 82 | 75 | **1** | **1** |
+| `gv_ExAllocGraveyardWorker` | 114 | 4 | 1 | 1 (only 4 matched — unresolved) |
 
-```
-+0x17a..+0x18a  +0      +0x42a..+0x442  +7      +0xb82..+0xbd2  -13
-+0x1aa..+0x1aa  +2      +0x512..+0x52a  +3      +0xc4e..+0xca2  -5
-+0x22e..+0x246  +11     +0x912..+0x9c2  +0      +0xd9e..+0xe4e  +0
-+0x32a..+0x346  -3      +0xa62..+0xa6a  +4
-+0x3ae..+0x3de  +5
-```
+**Six carriers show exactly one displacement value across the whole function.** For those, the residue
+really is one local difference plus its wake — §109's framing is correct *for them*, and the single cliff
+is the thing to attack. `gm_AllocSpieler` is **not** one of them (4 values, 7 runs), so §109's own carrier
+is where the framing is weakest.
 
-**Twelve runs with ten distinct values, and the signs alternate.** Our stream is *shorter* than the
-reference in some regions and *longer* in others, and it re-syncs (+0) three separate times
-(`+0x17a`, `+0x912`, `+0xd9e`). That is not one scheduling decision's wake; it is a series of independent
-local differences that each displace until the next re-sync.
+**A global-shift test fails outright on `gm_AllocSpieler`:** our bytes after the first divergence match the
+reference at a constant offset in at best **310 of 3,519** cases (delta +5) — chance level. So there is no
+rigid displacement to find there either.
 
-**Also, a global-shift test fails outright.** Checking whether our bytes after the first divergence equal
-the reference at a constant offset gives a best of **310/3519** at delta +5 — chance level. There is no
-rigid displacement to find.
+**A correction to this section's first draft.** It reported `gm_AllocSpieler` as 12 runs / 10 distinct
+values. That came from slicing the image with the wrong origin. The numbers above use `ref[va - imagebase]`,
+verified against a known function's bytes. **The first draft's headline reversed the conclusion**: it
+claimed the wake framing does not reproduce, when in fact it reproduces for six carriers and fails only on
+the largest. Recorded because the corrected version is more useful: the profile table is now a *triage
+tool* — a carrier with one run is a §109-style single decision, a carrier with many runs is not.
 
-**What this changes.** §109's *mechanism* conclusion (the fault at `+0xaa` is a scheduler decision, and the
-three recorded reorderings all lose 371 matched bytes) stands — it is separately measured and I did not
-re-probe it. What does not stand is the **extrapolation** from that fault to the shape of the remaining
-2,823 bytes. The residue is not one wake to be unwound; it is ~12 local differences to be closed
-individually, of which the first is the one §109 closed.
-
-**The rule.** "It is all downstream of fault X" is a claim about *attribution*, and it needs the same
-measurement any other claim does. Before accepting it, sample the interior: a genuine single-cause wake
-shows one or two displacement values; many values with alternating signs means the fault explains the
-first run and nothing after it. This is measure-traps §13 (positional comparison desyncs) turned into a
-constructive measurement — the local-context search is what turns "the streams desync" into a numeric
-displacement profile.
+**The rule.** "It is all downstream of fault X" is an attribution claim and needs the measurement any
+other claim does. Sample the interior: one or two displacement values means a genuine single-cause wake;
+many values means the fault explains the first run and nothing after it. And check your image origin
+before believing a surprising table — the wrong slice produced a confident, wrong headline in this very
+section.
