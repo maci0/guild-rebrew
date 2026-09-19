@@ -2045,3 +2045,47 @@ asked before the position-based analyses, not after them.
 in, and recover the source that produces them. Start with the epilogue carriers — `gm_FindNextFilteredEntity`
 (3 `ret`s) and `cm_ExCopyEntityData` (4 `pop`s) — because a missing early-return is a structural gap that is
 identifiable from the disassembly alone, with no search.
+
+### 39. `gm_FindNextFilteredEntity`: the three epilogues are NOT merged in the reference, and the merge is what shifts every later byte (round 1095)
+
+Round 1094 found 13 reference-only instructions here, including **three `ret`s against our one**. Reading the
+two streams side by side gives the exact mechanism.
+
+**The reference keeps three inline epilogues; our build shares one.**
+
+| | reference | ours |
+|---|---|---|
+| `pop esi` sites | **3** — `0x10016f99`, `0x10016fa9`, `0x10016ff7` | **1** — at the shared exit `0x100170d6` |
+| first epilogue reached by | `test eax,eax` / **`jne` skip** / fall into `xor eax,eax; pop esi; ret` | `test eax,eax` / **`je` shared_exit** |
+| `push ebx` | `0x10016ff9` | `0x10016ffd` — **4 bytes later** |
+
+The reference's shape is `jne <carry on>` with the return *falling through*; ours is `je <shared exit>` with the
+return *jumped to*. The reference therefore materialises `xor eax,eax; pop esi; ret` three times (3 bytes each,
+6 bytes more than ours), and because those bytes sit ahead of the `push ebx`/`push ebp`/`push edi` prologue of
+the second half, **every byte after the first guard is positionally shifted by 4**. That is what the file's
+header recorded as "with every post-entry byte positionally shifted behind the three misplaced pushes, no byte
+after offset 3 can match, which holds the score at 99/346 despite obj size being exactly right at 346."
+
+So the *object size matches* (346 = 346) while the *internal layout* does not: we spend the same bytes on one
+shared epilogue plus padding, where the reference spends them on three inline ones.
+
+**The lever, precisely stated.** msvc6 merges three identical `return 0;` tails into one block. The reference
+did not. Something in the original source made those three returns *not* interchangeable — a distinct statement
+between them, a different expression reaching them, or a construct the compiler treats as a barrier. Matching
+the object size proves we have the right statement *count*; the merge decision is downstream of source
+structure we have not yet reproduced.
+
+**Probed this round, all reverted:**
+
+| probe | delta |
+|---|---|
+| reorder so `end` is computed before the guard (the reference's apparent order) | **+6** |
+| duplicate the second guard's `return 0;` (test whether two returns stay separate) | **+0** — msvc6 folded the duplicate away, since both are the same test |
+| `volatile` double-load of `g_entity_type_table` to force the reference's two loads | **+0** — the file header records volatile reads as already probed inert here (probes z1-z4, w2/w3/w6, v1-v5) |
+
+The duplicate-guard probe is the informative one: **two identical guards collapse**, which is why the merge
+happens. Reaching the reference's three epilogues needs the three sites to differ in a way msvc6 cannot
+collapse — not merely to be written twice.
+
+**Also re-confirmed:** the flag axis is closed for this file. `/Ox, /O1, /Oy-, /Ot /Og, /Gs, /Gf, /Gy, /Ob0`
+and `/Og /Oi /Ot /Ob1` were all swept on it (file header, line 288), and it carries the `sp5-pp` pin.
