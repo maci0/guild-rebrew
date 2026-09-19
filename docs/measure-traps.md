@@ -2381,3 +2381,53 @@ displacement.
 This is measure-traps §31 ("exact isomorphism over ADDRESSES answers the wrong question — establish
 correspondence first") in a new form: here the correspondence method itself silently suppressed the
 difference it was meant to find.
+
+## 46. The residue is 100.00% instruction-aligned — every differing byte lies inside a reference instruction (round 1072)
+
+A property the project has never stated or checked: **is every residue byte covered by a reference
+instruction?** If any differing byte sat in *padding* or in the gap between functions, the residue would
+include something that is not a codegen difference at all, and the whole per-carrier analysis would be
+incomplete.
+
+**Measured over all 19 carriers**, decoding the reference from each entry and building the set of byte
+offsets covered by its instructions, then intersecting with the residue:
+
+| carrier | span | residue | on-instruction | |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | 3696 | 2823 | 2823 | 100% |
+| `CrashDump` | 2128 | 1583 | 1583 | 100% |
+| `cm_ExSellObjekt` | 2064 | 966 | 966 | 100% |
+| `ls_LoadBuildingEntityState` | 1472 | 671 | 671 | 100% |
+| `cm_ExCopyEntityData` | 912 | 462 | 462 | 100% |
+| `gv_ExAllocGraveyardWorker` | 1040 | 451 | 451 | 100% |
+| `ServerMainThread` | 2448 | 367 | 367 | 100% |
+| `gm_AllocGebaeude` | 1088 | 327 | 327 | 100% |
+| `vfs_OpenStream` | 704 | 238 | 238 | 100% |
+| `gm_FindNextFilteredEntity` | 352 | 215 | 215 | 100% |
+| `ahm_ExAllocAlchemist` | 1008 | 198 | 198 | 100% |
+| `gm_CheckInventoryCapacity` | 400 | 97 | 97 | 100% |
+| `m_AllocTracked` | 672 | 92 | 92 | 100% |
+| `srv_LoadBuf` | 752 | 49 | 49 | 100% |
+| `gm_ObjectsAvailble` | 720 | 25 | 25 | 100% |
+| `vfs_ReadCompressed` | 496 | 23 | 23 | 100% |
+| `cm_ExProdObjekt` | 1008 | 21 | 21 | 100% |
+| `cm_ProcessCommandQueue` | 640 | 15 | 15 | 100% |
+| `gm_CalculateProductionValue` | 400 | 5 | 5 | 100% |
+| **total** | | **8628** | **8628** | **100.00%** |
+
+**Zero bytes in padding, zero in an inter-function gap, zero outside a function.** Every residue byte is a
+difference *within* an instruction the reference actually emits — consistent with §13's attribution
+(0x21b4 of 0x21b4 inside the 19 carriers) and now confirmed at instruction granularity rather than function
+granularity.
+
+**Why this closes a class of doubt.** If even a few bytes had landed off-instruction, the reading would be
+"some residue is not codegen" — a different problem with a different fix. It is not. The residue is 8,628
+bytes of *instruction content*, which is exactly what the per-carrier sections describe.
+
+**A method error caught while measuring, recorded because it nearly produced a false result.** The first run
+used a hand-written size window per carrier (480 bytes for `gv_ExAllocGraveyardWorker`) instead of the real
+span (1,040), which truncated that carrier's residue to 41 bytes and left 2 bytes apparently off-instruction.
+The give-away was the total: **7,874 instead of 8,628**. The correct span comes from
+`function_structure.json`'s next tracked VA, and with it the total is exactly 8,628 and the
+off-instruction count is exactly 0. **Check that a per-carrier sum reproduces the known total before trusting
+any per-carrier ratio.**

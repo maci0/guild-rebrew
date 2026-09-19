@@ -30528,3 +30528,28 @@ worth having precisely because recent rounds kept finding my single-method measu
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1072 — the residue is 100.00% instruction-aligned; measured and the sum checks
+
+Checked a property never stated or tested: **is every residue byte covered by a reference instruction?** If
+any differing byte sat in padding or an inter-function gap, part of the residue would not be codegen at all
+and the per-carrier analysis would be incomplete.
+
+**Result: 8,628 of 8,628 bytes (100.00%) lie on reference instruction boundaries.** Per carrier, every one is
+100% — including `gv_ExAllocGraveyardWorker` (451/451) and `gm_AllocSpieler` (2823/2823). **Zero bytes in
+padding, zero in a gap, zero outside a function.**
+
+This closes a class of doubt: the residue is 8,628 bytes of *instruction content*, matching §13's attribution
+(0x21b4 of 0x21b4 inside the 19 carriers) at instruction granularity rather than function granularity.
+
+**A method error caught mid-round, which is the reason the result is trustworthy.** The first run used
+hand-written per-carrier windows from memory — 480 bytes for `gv_ExAllocGraveyardWorker` instead of its real
+1,040-byte span — which truncated that carrier to 41 residue bytes and left 2 bytes apparently off-instruction.
+The give-away was the **total: 7,874 instead of 8,628.** Taking the span from `function_structure.json`'s next
+tracked VA gives exactly 8,628 and exactly 0 off-instruction. Recorded as measure-traps §46 with the rule:
+**check that a per-carrier sum reproduces the known total before trusting any per-carrier ratio.**
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
