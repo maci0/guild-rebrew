@@ -625,3 +625,53 @@ the one the build uses.
 
 **Related:** this is why `rebrew verify --full` is safe to run freely and `rebrew test --toolchain` is not —
 `verify` reads, `test` writes.
+
+## 16. A header's "unused slack" figure is a stale measurement too (round 998)
+
+Workflow-traps §14 established that a header's recorded **delta** is a historical measurement, not a budget.
+Round 998 found the same is true of a recorded **headroom** figure, and this one is more dangerous because it
+licenses work rather than describing it.
+
+`cm_ExProdObjekt.c:341-343` records:
+
+```
+ * ... the reference and any body of 993..1008 holds the 1008 span, giving
+ * 15 bytes of unused slack.  Do not re-probe without a new
+ * allocator-level finding.
+```
+
+Round 998 measured the span from the artefact rather than the note:
+
+```
+span: 1008 (0x1000e140..0x1000e530)
+our object .text raw: 1008  (slack 0)
+```
+
+**Slack is 0, not 15.** Our object fills all 1008 bytes of its span, exactly like every other carrier
+(round 991 measured the same for the three largest). A round that read the note and planned a size-increasing
+edit would have hit a composition collapse and lost its budget before learning why.
+
+**Why this is worse than a stale delta.** A stale *delta* misleads a round about what an edit will cost; the
+round still measures and finds out. A stale *slack* figure tells a round that a class of edit is available —
+"this carrier can grow" — when it cannot. It is the same failure as measure-traps §22 (reading the object
+size from the wrong artefact), arriving through prose instead of through a tool.
+
+**The check.** Slack is `span - object .text raw`, and both come from artefacts:
+
+```bash
+python3 -c "
+import json,struct
+fs=json.load(open('src/server.dll/function_structure.json'))
+vas=sorted(f['va'] for f in fs); V=0x<VA>
+nxt=next(v for v in vas if v>V)
+d=open('build/CMakeFiles/server_dll.dir/src/server.dll/<path>.c.obj','rb').read()
+n=struct.unpack_from('<H',d,2)[0]; off=20+struct.unpack_from('<H',d,16)[0]
+for i in range(n):
+    o=off+i*40
+    if d[o:o+8].rstrip(b'\0')==b'.text':
+        rs=struct.unpack_from('<I',d,o+12)[0]
+print('span',nxt-V,'obj',rs,'slack',(nxt-V)-rs)"
+```
+
+Run it **after** `cmake --build build` (measure-traps §22 — the object must not be stale). For every carrier
+measured this session the answer is slack 0; assume 0 until this command says otherwise.

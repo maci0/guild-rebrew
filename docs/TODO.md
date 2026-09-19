@@ -27811,3 +27811,34 @@ add a pin — it adds a hazard.
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. `src/rebrew-functions.toml` reverted and
 verified clean; `src/` otherwise unmodified; no baseline moved.
+
+## Round 998 — asm scope confirmed; two header figures re-measured, both stale
+
+The user clarified the asm clause: raw asm is permitted only where C cannot reach the shape — padding, single
+instructions, the six memset preludes — never whole-function asm. That matches the six existing fenced sites
+(`server4.c`, `gm_AllocGebaeude.c`, `m_AllocTracked.c`, `m_alloc.c`, `m_alloc2.c`, `vfs_ReadData.c`).
+
+**Screened the carriers for the smallest C-unreachable residue**, using `instr_diff.py`'s hunk counts rather
+than file size. The two smallest are `cm_ExProdObjekt` (`0x1000e140`, 348/354 aligned, **3 hunks**,
+`ref-only 0 / built-only 0`) and `cm_ProcessCommandQueue` (`0x1000aac0`, 202/205, **1 insert/delete hunk**).
+
+**`cm_ExProdObjekt`'s remaining difference is pure statement order** — our `mov ax,[ebp+0x14]` / `xor eax,eax`
+/ `mov ebx,[ebp+0x16]` sit before `mov ecx,eax`; the reference places them after. Probed one ordering; result
+**+0 (byte-identical — msvc6 rescheduled it back)**. The header already records the axis as *exhausted* —
+"a dependency-ordered sweep of the pre-loop block enumerated **all 112 topological orderings** … Every
+ordering is size-exact and none beats 976" — so this is a genuine closure, not a stale note. Reverted.
+
+**Two header figures re-measured; both stale:**
+
+| header claim | measured |
+|---|---|
+| `cm_ExProdObjekt.c:342` — "15 bytes of unused slack" in the 1008 span | span 1008, our object `.text` raw **1008, slack 0** |
+| the same header's plateau figures (976/993) | consistent with the current 993-byte target; no conflict found |
+
+The slack claim matters because it *licenses* a class of edit ("this carrier can grow"); it cannot.
+→ workflow-traps §16. This is the fifth stale header figure found in five rounds, and the first that would
+have authorised a probe rather than merely mispriced one.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Probe reverted; `src/` unmodified; no baseline
+moved.
