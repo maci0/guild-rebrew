@@ -29721,3 +29721,50 @@ stream diff (and a positional ruler) cannot see it — the check that finds it i
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1050 — tested whether §2's epilogue-merge wall generalises; it does not, and the one row it touched is closed
+
+Round 1049 confirmed codegen-walls §2 on `gv_ExAllocGraveyardWorker` (the reference keeps two copies of a
+13-byte epilogue, we keep one). If that wall were general, it would explain residue on many carriers at once,
+so it was worth testing across all 19.
+
+**Method.** Count the characteristic epilogue signature `pop edi; pop esi; pop ebp` (`5f 5e 5d`) in the
+reference against ours, per carrier.
+
+**Result: it touches two rows, and one of them is a false positive.**
+
+| carrier | reference | ours | |
+|---|---|---|---|
+| `cm_ExCopyEntityData` | 1 | 0 | real, but **a different wall** — see below |
+| `CrashDump` | 0 | 1 | **false positive**: the function tails are byte-identical; the count differs only because my window has different extents for the two images |
+
+The other 17 carriers show equal counts. **§2's wall is per-site, not general** — consistent with its own
+record that it merges only *byte-identical* exits, which is rare.
+
+**`cm_ExCopyEntityData` was examined and is already closed.** Its reference has two `ret` sites
+(`0x1000ed7c`, `0x1000edb4`) against our one, so it initially looked like a third §2 instance. Disassembling
+`0x1000ed40..` shows the actual divergence is **the clamp**, not an epilogue:
+
+```
+ref  0x1000ed4d jle 0x1000ed56 ; cmp eax,0x7f ; jge 0x1000ed5d ; jmp 0x1000ed62
+     0x1000ed56 mov eax,0xffffff81 ; jmp 0x1000ed62      <- low arm, inline
+     0x1000ed5d mov eax,0x7f                            <- high arm, inline
+     0x1000ed62 mov byte ptr [edx+ecx], al
+our  0x1000ed4d jle 0x1000ed85 ; cmp eax,0x7f ; jl 0x1000ed59 ; mov eax,0x7f
+     0x1000ed59 mov byte ptr [ecx+edx], al
+```
+
+We branch away to an out-of-line low clamp that is **9 bytes shorter**. This is documented in full at
+**shapes §124** — including both arms, the shared store, the 9-byte shortfall, and the two spellings measured
+at the link and rejected (**+3** for the reference's two-arm form, and **+76,125** for an arm swap that
+changed semantics and spread damage across thirteen functions). Cross-checked: `scripts/whathas.py` lists
+shapes §62, §63, §64, §85 and §124 for this row, and §63's own rule is "a clamp's winning arm order is
+per-site, not per-function".
+
+**No probe spent, and none warranted.** Recorded so the §2-generalisation hypothesis is not re-tried: it is
+per-site, it touches two rows, and both are accounted for.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
