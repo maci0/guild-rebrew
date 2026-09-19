@@ -2004,7 +2004,7 @@ Two facts worth having:
   magnitude. A round may therefore use the raw link to study a carrier's divergence and the shipped file
   to score it, and the two will not contradict each other.
 
-**Worked example — the 5,081 class, at `0x10015f80`.** `gm_FindNextFilteredEntity` (annotation VA
+**Worked example — the 5,081 class, at `0x10015f80` (inside `gm_ObjectsAvailble`).** `gm_FindNextFilteredEntity` (annotation VA
 `0x10016f80`; the real entry is `0x10015f80`, see below) opens:
 
 ```
@@ -2024,9 +2024,11 @@ reasonably chase it as a live bug — the address is plausible, the symbol is re
 "capability" ruler §35 recommends. It is postlink-supplied and unfixable by editing the definition.
 **Check the shipped image before treating any raw-link operand difference as work.**
 
-**Also: the `fault_address.py` entry for this carrier is not its entry point.** The tool reports the fault at
-`0x10016f86` with instruction `xor cl, cl`, and the annotation says `0x10016f80`. Bytes at both addresses are
-**identical** in the two images — they sit in the epilogue and padding of the *preceding* function. The real
-`gm_FindNextFilteredEntity` entry is `0x10015f80` (its prologue `a1 c0 d8 14 10 56 32 c9` occurs there), and
-its true first divergence is `0x10015f80+4`. The `fault_address.py` row for this carrier is measuring the
-wrong span; every other row reproduces.
+**A note on `0x10016f80`.** `gm_FindNextFilteredEntity`'s annotation VA is `0x10016f80` and the
+inventory agrees (`fcn.10016f80`, 352 bytes). The bytes at its entry are `c4 08 5e c3` followed by ten `90`s —
+**identical in both images** — because that is the shared epilogue tail the previous function's layout leaves
+there; the function's own prologue begins at `0x10016f8a`. So this carrier has no divergence in its first 16
+bytes, and a round reading the bytes at the annotation VA would be reading the epilogue of the function
+before it. Two separate first-round errors came from exactly that (assuming the VA, and assuming the bytes at
+it are the function's own) — confirm a carrier's first divergence from `fault_address.py`, whose other 18 rows
+all reproduce.

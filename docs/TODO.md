@@ -28718,6 +28718,50 @@ the check behind it (`object .text raw == span`) is tautological because msvc6 p
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
 
+## Round 1026 — the graded residue and the raw-link residue are an exact partition: 8628 + 5081, zero overlap
+
+Decomposed `.text`'s 0x22846 bytes across three artifacts, comparing every offset in the reference, the raw
+link (`build/split_poc.dll`) and the shipped file (`build/server.dll`):
+
+| class | count | meaning |
+|---|---|---|
+| raw differs, shipped matches | **5,081** | postlink supplied the reference byte |
+| raw differs, shipped differs | **8,628** | the graded residue |
+| raw matches, shipped differs | **0** | postlink introduces nothing |
+
+`8628 + 5081 = 13,709` — the raw link's total divergence, exactly. Two consequences:
+
+- **Postlink is a pure repair step.** The shipped-only class is empty, so it never corrupts a byte the build
+  got right. The graded residue is precisely the subset of the production gap it could not repair.
+- **The 8,628 is a subset of the 13,709.** Every graded-residue byte is also wrong in the raw link, so the two
+  rulers agree on *which* carriers fail even though they disagree on magnitude. A round may study a carrier on
+  the raw link and score it on the shipped file without the two contradicting each other.
+
+**Worked example of the 5,081 class, at `0x10015f80` (inside `gm_ObjectsAvailble`).** Reference and shipped
+both read `mov eax,[0x1014d8c0]` (`g_entity_ptr`); the raw link reads `mov eax,[0x11766ae8]`, because our
+`link_stubs.c:198` stub is placed at `0x11766ae8` while the reference's symbol lives at `0x1014d8c0`. Postlink
+rewrites the operand, so **the shipped byte is already correct and this is not residue**. A round studying
+that offset on the raw link would chase a plausible-looking wrong global that cannot be fixed by editing the
+definition.
+
+**Two of my own errors, corrected in place while writing this up:**
+
+1. I first read `0x10015f80` as `gm_FindNextFilteredEntity`'s real entry because the prologue bytes
+   `a1 c0 d8 14 10 56 32 c9` occur there. They do — but `0x10015f80` is inside `gm_ObjectsAvailble`
+   (`0x10015f70`, 720 bytes, ends `0x10016240`), and the match is a false positive.
+2. `gm_FindNextFilteredEntity` genuinely starts at `0x10016f80` (inventory `fcn.10016f80`, 352 bytes), and
+   its first bytes `c4 08 5e c3` + ten `90`s are **identical on both sides** — that is the shared epilogue
+   tail the layout leaves at the entry. Its prologue begins at `0x10016f8a`. So there is no divergence in its
+   first 16 bytes, and `fault_address.py`'s other 18 rows all reproduce.
+
+Both recorded in measure-traps §37, which also states the operative rule: **check the shipped image before
+treating a raw-link operand difference as work.**
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
 ## Round 1025 — independently reproduced every §13 carrier offset: 11/11 exact, table is current
 
 The live log at `docs/TODO.md:65` ("Continuation notes, newest first — start here") is the real handoff and
