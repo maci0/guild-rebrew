@@ -28008,3 +28008,30 @@ Both major classes are decisions taken *after* the C front end. → codegen-wall
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; `src/` unmodified; no
 baseline moved.
+
+## Round 1004 — register pressure matches on 18 of 19 carriers; the class is pure register choice
+
+Tested the assumption behind the 67.5% register-role classification (round 1003): is the difference in *which*
+register a value receives, or in *how many* the function needs? Only the second is C-addressable, since it is
+live-range pressure.
+
+**Measured the callee-saved save sequence on all 19 carriers, reference vs ours: 18 are identical, including
+save ORDER.** (`ebx ebp esi edi` on most; `gm_AllocGebaeude` and `m_AllocTracked` `ebp ebx esi edi`;
+`gm_FindNextFilteredEntity` `esi ebx ebp edi`; `gm_ObjectsAvailble` `esi ebx edi ebp`; `gm_CalculateProductionValue`
+`ebx esi ebp edi` — each matching its reference exactly.)
+
+The single exception is `CrashDumpUnhandledExceptionFilter`, whose cause is already isolated (Finding 67:
+`hDbgFile` in `ebp` vs `edi`, which is what lets the reference defer the `ebx`/`edi` pair).
+
+**So register pressure is already right on 18 of 19.** The 5,825 register-class bytes are not a "needs a
+different number of registers" problem — they are the allocator choosing differently among registers it already
+has. That is §1's class, now with the pressure dimension ruled out as the cause by measurement rather than
+assumption. → allocator Finding 68.
+
+**Self-caught measurement error.** My first reading took the first four `push` of any callee-saved register and
+reported `ahm_ExAllocAlchemist` as `ebx ebp ebx ebx`. That is wrong — the later `push ebx` operands are call
+*arguments*, not saves. Its real prologue is `push ebx; push ebp`, matching ours. Corrected before recording;
+the method note is in the finding so the next reader does not repeat it.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.

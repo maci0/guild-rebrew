@@ -3608,3 +3608,47 @@ also changes the program. This row is closed as an allocator wall, with three me
 it is not re-probed.
 
 **Measured:** all three reverted; residue 8,628 unchanged; `src/` unmodified.
+
+## Finding 68 — register PRESSURE matches on all 19 carriers; the residue is pure register CHOICE (round 1004)
+
+Section 16 of `codegen-walls.md` measures the residue as 67.5% register-role. That classification rests on an
+assumption worth testing directly: is the difference in *which register* a value gets, or in *how many*
+registers the function needs? Only the second is addressable from C, because it is live-range pressure.
+
+**Measured — the callee-saved save sequence, per carrier, reference vs ours:**
+
+| carrier | reference | ours | |
+|---|---|---|---|
+| `gm_AllocSpieler` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `cm_ExSellObjekt` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `ls_LoadBuildingEntityState` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `cm_ExCopyEntityData` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `gv_ExAllocGraveyardWorker` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `ServerMainThread` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `gm_AllocGebaeude` | `ebp ebx esi edi` | `ebp ebx esi edi` | |
+| `vfs_OpenStream` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `gm_FindNextFilteredEntity` | `esi ebx ebp edi` | `esi ebx ebp edi` | |
+| `gm_CheckInventoryCapacity` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `m_AllocTracked` | `ebp ebx esi edi` | `ebp ebx esi edi` | |
+| `srv_LoadBuf` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `gm_ObjectsAvailble` | `esi ebx edi ebp` | `esi ebx edi ebp` | |
+| `vfs_ReadCompressed` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `cm_ExProdObjekt` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `cm_ProcessCommandQueue` | `ebx ebp esi edi` | `ebx ebp esi edi` | |
+| `gm_CalculateProductionValue` | `ebx esi ebp edi` | `ebx esi ebp edi` | |
+| `CrashDumpUnhandledExceptionFilter` | `ebp esi` + deferred `ebx edi` | `ebx ebp esi edi` | **differs** |
+
+**18 of 19 are identical, including save ORDER.** The single exception is `CrashDump`, and its cause is already
+isolated (Finding 67: `hDbgFile` in `ebp` vs `edi`, so the reference can defer the `ebx`/`edi` pair to
+`0x1000282c`).
+
+**What this establishes.** Register *pressure* — how many callee-saved registers the function needs, and in
+which order msvc6 saves them — is **already correct on 18 of 19 carriers**. So the 5,825 register-class bytes
+are not "our function needs a different number of registers"; they are the allocator choosing differently among
+registers it already has. That is §1's class, and §1's evidence is that no C spelling reaches it — now
+confirmed with the pressure dimension ruled out as the cause.
+
+**Method note.** A naive "first four `push` of a callee-saved register" reading is wrong: it catches argument
+pushes (`push ebx` as a call argument) as if they were saves. `ahm_ExAllocAlchemist` reported `ebx ebp ebx ebx`
+under that reading; its actual prologue is `push ebx; push ebp`, and the extra `push ebx` operands are call
+arguments. Read the prologue region explicitly, or filter to pushes that precede the first `call`.
