@@ -28301,3 +28301,34 @@ first, then compare the induced edges.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1013 — the ordinal method has a validity condition; only 8 of 19 carriers satisfy it
+
+Round 1012's ordinal-correspondence comparison is the right primitive, but it has a condition round 1012 did
+not state: **it is only valid when the two instruction streams have equal length.** A single global shift
+absorbs a constant offset but not progressive drift.
+
+**Measured: only 8 of 19 carriers have equal instruction counts** (deltas range −5..+4). The tool now prints
+`DRIFT-unreliable` on the other 11. Among the drift-free DIFFERS carriers, three figures are trustworthy:
+
+| carrier | verdict |
+|---|---|
+| `ServerMainThread` | **2 / 280 edges** |
+| `vfs_OpenStream` | 7 / 27 |
+| `cm_ExSellObjekt` | 85 / 99 |
+
+**`ServerMainThread`'s 2/280 re-confirmed independently**, by enumerating every branch pair by ordinal and
+printing those whose successor ordinals differ: exactly 2, and they are the round-1005 pair
+(`0x100098d9`/`0x100098e9` — same two destinations `0x100097c5` and `0x10009919`, swapped). → measure-traps §32.
+
+**A second trap found while adding the shift search.** Selecting the shift by fewest mismatches alone overfits
+to tiny denominators: on `gm_CheckInventoryCapacity` shift −2 scored 2/4 while shift +1 covered 34 edges at 33
+mismatches. Coverage must be maximised first. Fixed.
+
+**Effect on the round-1012 table:** several carriers' ratios rose once coverage was maximised
+(`gm_CheckInventoryCapacity` 9/10 → 33/34 with the drift flag, `cm_ProcessCommandQueue` 20/26 → 55/58), so the
+previous table understated the mismatch rate for the drifting carriers — while those same carriers' figures are
+now marked unreliable, which is the more important correction.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.

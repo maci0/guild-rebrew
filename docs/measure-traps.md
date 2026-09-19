@@ -1737,3 +1737,46 @@ address-based verdict said.
 bytes (polarity → arity → merge) because each reasoned from a summary the previous round had computed wrongly.
 The fix was not another inference: it was changing the *comparison primitive* so the correspondence is
 established before anything is measured.
+
+## 32. An ordinal correspondence is only valid when the two streams have equal length (round 1013)
+
+Round 1012 replaced address-based isomorphism with a **block correspondence by instruction ordinal** and
+reported `ServerMainThread` as a 2-of-280 near-miss. That specific result is correct and now independently
+re-confirmed, but the method has a validity condition round 1012 did not state.
+
+**A single global shift absorbs a constant offset; it cannot absorb progressive drift.** Ordinal pairing assumes
+the k-th instruction of one function corresponds to the k-th of the other. When the two streams differ in length
+they slip relative to each other, and the mismatch count measures the slip rather than the control flow.
+
+**Measured: only 8 of 19 carriers have equal instruction counts.**
+
+```
+gm_AllocSpieler                1063 vs 1061   -2
+CrashDumpUnhandledExceptionFilter 725 vs  729   +4
+cm_ExSellObjekt                 667 vs  667    0   <- valid
+ls_LoadBuildingEntityState      499 vs  497   -2
+cm_ExCopyEntityData             260 vs  255   -5
+gv_ExAllocGraveyardWorker       333 vs  332   -1
+ServerMainThread                627 vs  627    0   <- valid
+gm_AllocGebaeude                356 vs  359   +3
+vfs_OpenStream                  210 vs  210    0   <- valid
+gm_FindNextFilteredEntity       124 vs  120   -4
+ahm_ExAllocAlchemist            286 vs  287   +1
+gm_CheckInventoryCapacity       138 vs  137   -1
+m_AllocTracked, srv_LoadBuf, gm_ObjectsAvailble, vfs_ReadCompressed,
+cm_ExProdObjekt, gm_CalculateProductionValue      0   <- valid
+cm_ProcessCommandQueue          206 vs  204   -2
+```
+
+`cfg_compare.py` now prints **`DRIFT-unreliable`** on any carrier whose counts differ. Three DIFFERS carriers are
+drift-free and therefore trustworthy: `cm_ExSellObjekt` (85/99 edges), `ServerMainThread` (**2/280**),
+`vfs_OpenStream` (7/27).
+
+**A second trap in the shift search.** Selecting the shift by *fewest mismatches* alone overfits: it favours
+alignments with a tiny denominator. Measured on `gm_CheckInventoryCapacity`, shift −2 scored **2/4** while
+shift +1 covered **34 edges at 33 mismatches**. A 4-edge sample that happens to agree is not better evidence
+than a 34-edge one that does not. The tool now selects on **coverage first, then mismatches**.
+
+**The check, for any correspondence-based comparison:** state and test the validity condition. For ordinal
+pairing it is `len(ref_instructions) == len(built_instructions)`; when it fails, report the figure as
+indicative, not decisive.

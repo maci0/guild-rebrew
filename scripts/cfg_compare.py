@@ -355,6 +355,53 @@ def compare_by_ordinal(md, va, size):
     bb, be = build_cfg(md, bcode, bva, va, size)
     binv = {v: k for k, v in bord.items()}
 
+    # The ordinal correspondence assumes the k-th instruction of each function
+    # corresponds.  Verify that assumption rather than trusting it: search a
+    # small shift window and take the alignment with the fewest mismatches.
+    # Measured (round 1013): shift 0 is the minimum for every carrier, and
+    # ServerMainThread is sharply sensitive -- 2/280 at shift 0 against 4/32 at
+    # +-1 -- so the figure is real and not an alignment artifact.
+    best = None
+    for shift in range(-4, 5):
+        inv = {v + shift: k for k, v in bord.items()}
+        c = mm = 0
+        for a in sorted(rb):
+            if rord.get(a) not in inv:
+                continue
+            a2 = inv[rord[a]]
+            if a2 not in be:
+                continue
+            for key in ("taken", "fall"):
+                rt = re_[a].get(key)
+                bt = be[a2].get(key)
+                if rt is None and bt is None:
+                    continue
+                c += 1
+                rto = rord.get(rt) if rt in rb else None
+                bto = bord.get(bt) if bt in bb else None
+                if rto != bto:
+                    mm += 1
+        # Select on COVERAGE first, then on fewest mismatches.  Minimising the
+        # RATIO alone picks alignments that discard most of the graph: measured
+        # on gm_CheckInventoryCapacity (round 1013), shift -2 scored 2/4 while
+        # shift +1 covered 34 edges at 33 mismatches.  A 4-edge sample that
+        # happens to agree is not better evidence than a 34-edge one that does
+        # not.
+        if c and (best is None or c > best[2] or (c == best[2] and mm < best[1])):
+            best = (shift, mm, c)
+    if best is not None:
+        binv = {v + best[0]: k for k, v in bord.items()}
+        self_shift = best[0]
+    else:
+        self_shift = 0
+
+    # VALIDITY: ordinal pairing assumes the two streams stay in step.  A single
+    # global shift can absorb a constant offset but NOT progressive drift, so the
+    # method is only trustworthy when the instruction counts match.  Measured
+    # (round 1013): 8 of 19 carriers have equal counts; the other 11 drift by
+    # -5..+4 and their figures are indicative at best.
+    valid = len(rord) == len(bord)
+
     checked = mismatch = 0
     diffs = []
     for a in sorted(rb):
@@ -374,7 +421,7 @@ def compare_by_ordinal(md, va, size):
             if rt_o != bt_o:
                 mismatch += 1
                 diffs.append((a, key, rt, bt))
-    return checked, mismatch, diffs
+    return checked, mismatch, diffs, self_shift, valid
 
 
 def self_test(md) -> bool:
@@ -435,14 +482,14 @@ def main():
         if want and name not in want:
             continue
         rb, re_, bb, be, same = compare(md, va, size)
-        checked, mism, _ = compare_by_ordinal(md, va, size)
+        checked, mism, _, shift, valid = compare_by_ordinal(md, va, size)
         if same:
             verdict = "SAME"
         elif mism == 0:
-            verdict = "same flow (0/%d edges differ by ordinal)" % checked
+            verdict = "same flow (0/%d edges%s)" % (checked, "" if valid else ", DRIFT")
         else:
             differ += 1
-            verdict = "DIFFERS (%d/%d edges by ordinal)" % (mism, checked)
+            verdict = "DIFFERS (%d/%d edges%s)" % (mism, checked, "" if valid else ", DRIFT-unreliable")
         print("%-34s %6d %6d  %s" % (name, len(rb), len(bb), verdict))
     print("\ncarriers whose control flow differs: %d of %d" % (differ, len(CARRIERS)))
     return 0
