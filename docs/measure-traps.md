@@ -1939,3 +1939,44 @@ Verify with:
 # the "raw link vs reference" block is the capability number; the
 # ".text differing" line at the top is the deliverable number
 ```
+
+## 36. A carrier's VA is not guessable from its neighbours — resolve it from the annotation (round 1025)
+
+Round 1025 set out to re-verify `codegen-walls.md` §13's recorded first-divergence offsets against the
+current build, since the log is many rounds old and the code has moved. The first attempt reported
+**13 of 13 mismatched** — every carrier wrong. All 13 mismatches were the check's own fault.
+
+**Two independent errors, either of which alone produces a full table of false alarms:**
+
+1. **The VAs were assumed, not resolved.** I took each carrier's start from memory and by rounding
+   (`0x10011c00` for `gv_ExAllocGraveyardWorker`, `0x1000d8a0` for `cm_ExSellObjekt`, `0x10019e80` for
+   `gm_CheckInventoryCapacity`). The real values are `0x10011bf0`, `0x1000d930`, `0x10019e60` — off by
+   `0x10` to `0x100`. Every derived offset was then wrong by exactly that amount, and offsets are
+   *relative*, so the error is invisible in the output: it looks like a stale table, not a bad baseline.
+2. **The wrong artifact.** Two carriers (`m_AllocTracked`, `cm_ExCopyEntityData`) showed *no differing byte
+   at all* in the image I measured, which is impossible for a carrier with non-zero residue. That should
+   have been the tell; it is measure-traps §35's deliverable-vs-capability confusion arriving before §35
+   was written.
+
+**The correct method** — let the artefacts supply both endpoints:
+
+```bash
+# fault address, attributed per carrier, from the tool that computes the residue
+.venv/bin/python scripts/postlink_residual.py --write build/server.dll | tail -22
+# function start, from the annotation that lint already validates
+grep -m1 'FUNCTION: SERVER' src/server.dll/<path>/<carrier>.c
+# offset = fault - start
+```
+
+With both resolved properly, **all 11 recorded §13 offsets reproduce exactly** — `0xaa`, `0x2`, `0x2c`,
+`0x3c`, `0x30`, `0x107`, `0x3c7`, `0x60`, `0x36`, `0xcc`, `0x11`. Zero mismatches. The table is accurate
+and current.
+
+**The rule.** A fault address is a *VA*; an offset is a *difference*; a wrong start corrupts the second
+while leaving the first plausible. Never carry a carrier VA in your head across rounds — resolve it from
+the source annotation, which `rebrew lint` already keeps honest, and take the fault address from the tool
+rather than from a `grep` of the docs (which are keyed by the fault, not the start — workflow-traps §8's
+two-store problem).
+
+This is also why the round's negative result was worth obtaining: the log's offsets being independently
+reproducible is what earns the trust the next round will place in the class map built on top of them.
