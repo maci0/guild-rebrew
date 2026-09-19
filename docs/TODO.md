@@ -29416,3 +29416,35 @@ method, and the original text kept beneath it for history. Comment-only: lint 18
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1042 — tried to automate the stale-note audit; the regex found zero and invented two
+
+Round 1041 found a genuinely stale frame note by **reading** (`vfs_OpenStream`: "ours is 8" when ours is
+`0xc`). This round tried to automate that class: extract every `sub esp,0xNN` from each carrier's header and
+compare it to the frame the binary emits.
+
+**Two hits, both false positives, both the same mistake:**
+
+| file | regex found | binary | the actual sentence |
+|---|---|---|---|
+| `cm_ExCopyEntityData.c:73` | `0x10` | `0xc` | "drops one frame dword (`sub esp,0x10` -> `0xc`)" — **documents the change** |
+| `cm_ExProdObjekt.c:221` | `0x14` | `0x10` | "widens the frame to `sub esp,0x14` and moves every esp displacement, scoring 815" — **a rejected probe** |
+
+A carrier's header is a **probe history**: it records spells that were tried, values that were fixed, and
+variants that lost. Quoting a number from it usually does *not* assert that number is current — often the
+opposite, because the entry exists to say it was wrong or rejected.
+
+**The audit is withdrawn.** One real stale note was found this session and it was found by reading; the
+regex found none and invented two. Recorded as measure-traps §43 with the rule: a header's numbers are
+evidence about the past, so an extraction must carry the surrounding polarity ("is" vs "was", "gives" vs
+"scored", `->` for a change, "rejected/lost" for a retired probe). Default expectation for any extracted
+figure should be "not current" until the sentence says otherwise.
+
+**The frame survey itself still stands** (round 1041, allocator Finding 70): **18 of 19 carriers have the
+reference's exact frame**, `CrashDump` being the only exception at `0x284` vs `0x280`, and that row is the
+documented shapes §81 wall (+66 linked, row +58 when the frame was closed).
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

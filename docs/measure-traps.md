@@ -2266,3 +2266,33 @@ inside `cmp reg,imm32`. Every one lands correctly in the shipped file (`0x1009ac
 `0x10139820`, `0x1009b762`). Note `0x1009aca2` is **odd-aligned** — a byte-level comparison against a
 struct's second byte — which is why the generic 4-aligned sweep needs a second, locality-driven pass to
 catch it. The pass is working as designed; the four are not defects.
+
+## 43. A header records *history*, so a claim-extraction regex finds rejected variants, not current state (round 1042)
+
+Round 1041 found one genuinely stale frame note by hand (`vfs_OpenStream`: "ours is 8" when ours is `0xc`).
+Round 1042 tried to automate that audit: extract every `sub esp,0xNN` from each carrier's header and compare
+it against the frame the binary actually emits. **The automation produced two false positives out of two
+hits, and both were the same mistake.**
+
+| file | regex found | binary | verdict |
+|---|---|---|---|
+| `cm_ExCopyEntityData.c:73` | `sub esp,0x10` | `0xc` | **not stale** — the line reads "one frame dword (`sub esp,0x10` -> `0xc`)", i.e. it *documents the change* |
+| `cm_ExProdObjek.c:221` | `sub esp,0x14` | `0x10` | **not stale** — the line reads "the object at 993 but widens the frame to `sub esp,0x14` and moves every esp displacement, scoring 815", a *rejected probe* |
+
+A carrier's header is a **probe history**: it records spells that were tried, values that were fixed, and
+variants that lost. Quoting a number from it does not assert that number is current — often the opposite,
+because the entry exists precisely to say it was wrong or rejected.
+
+**The rule.** A header's numbers are **evidence about the past**, and an audit that extracts them must also
+extract the surrounding verb: "is/was", "gives/scored", "->" (a change), "rejected/lost" (a retired probe).
+Round 1041 succeeded by **reading the sentence**, not by matching the token. Any regex over these headers
+needs to carry the polarity or it will report every documented change and every rejected probe as a stale
+claim.
+
+**Companion to workflow-traps §16 and §14.** Those say a header's headroom and delta figures are historical
+measurements. This says the *reason* a number appears in a header is usually that it is historical — so the
+default expectation for any extracted figure should be "not current" until the sentence says otherwise,
+rather than "current until proven stale".
+
+**Consequence:** the automated audit is withdrawn. One real stale note was found this session
+(`vfs_OpenStream`, round 1041) and it was found by reading; the regex found none and invented two.
