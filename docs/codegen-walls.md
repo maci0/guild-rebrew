@@ -1940,3 +1940,55 @@ extent (rounds 1084-1085 established that inventory sizes can overrun into paddi
 counts are window-dependent. The *share* column is robust to that, since it is a ratio within the same window,
 and it is the share that carries the argument. A first pass at this table using guessed sizes produced one
 entry with zero runs for a carrier with 671 residue bytes; the real size was 1463 rather than the 499 assumed.
+
+### 37. A register-rename post-pass has a measured ceiling of ~16% of the residue, and the other 84% is structural (round 1090)
+
+The standing question this project has carried is whether to authorise a **non-C post-pass** over the residue
+carriers — rewriting operands after compilation. That departs from the C-only constraint, so it cannot be
+self-authorised, but its **value can be bounded without authorising it**, and this round bounded it.
+
+Method: for each carrier, index both disassemblies by **address** (not by position), keep the addresses present
+in both, and split the those where the bytes differ into two classes:
+
+- **operand-only** — same mnemonic, different encoding. A register rename or addressing-form rewrite can fix
+  these without recompiling.
+- **structure** — different mnemonic. Only a recompilation can produce these.
+
+| carrier | differing (same addr) | operand-only | operand-only bytes | structure bytes |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | 276 | 32% | 364 | 767 |
+| `CrashDumpUnhandledExceptionFilter` | 204 | 45% | 296 | 440 |
+| `cm_ExSellObjekt` | 146 | 56% | 317 | 222 |
+| `ls_LoadBuildingEntityState` | 92 | 32% | 114 | 246 |
+| `cm_ExCopyEntityData` | 19 | 53% | 37 | 41 |
+| `gv_ExAllocGraveyardWorker` | 11 | 91% | 42 | 5 |
+| `ServerMainThread` | 41 | 56% | 115 | 71 |
+| `gm_AllocGebaeude` | 10 | 100% | 47 | 0 |
+| `vfs_OpenStream` | 10 | 20% | 11 | 30 |
+| `gm_FindNextFilteredEntity` | 21 | 14% | 17 | 72 |
+| **total** | **930** | — | **1,360** | **1,894** |
+
+**The ceiling is ~1,360 bytes, or 16% of the 8,628-byte residue** — and that is a *perfect* post-pass, one that
+renames every register correctly with no alignment cost. The remaining ~84% differs in **mnemonic**, which is
+not reachable by operand rewriting at all: those sites need the compiler to emit different instructions.
+
+**Two caveats that make 16% an over-estimate, not an under-estimate:**
+
+1. These are 10 of the 19 carriers, holding 8,103 of the 8,628 residue bytes. The other nine are smaller and
+   were not decomposed here.
+2. The table counts only addresses present in **both** streams. Where the two have different instruction
+   counts the alignment shifts and those bytes are attributed to neither class — the operand + structure
+   columns sum to 3,254, well under the 8,628 the residue ruler reports. So the measured 1,360 is a floor on
+   what is *not* fixable by register rename and a ceiling on what is, taken from the subset both streams agree
+   on spatially.
+
+**Why this matters for the decision.** The post-pass was the one remaining option that could move the number
+without new C. It is now bounded: **it cannot reach zero, and it cannot even reach half.** Combined with §16
+(67.5% of residue bytes are register-role *by byte count* — a different, looser classification that counts
+whole functions rather than same-address sites), the two measurements agree on the direction and differ only in
+granularity: the post-pass buys roughly a sixth of the residue, and the objective's "residue at zero" clause
+would still be unmet afterwards.
+
+**Judgement, labelled as judgement:** authorising the post-pass would trade a constraint for ~16%, and the
+remaining 84% would then need the recompilation work that the constraint was protecting. That is a bad trade,
+and it is now a measured bad trade rather than an assumed one.

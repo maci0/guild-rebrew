@@ -31290,3 +31290,52 @@ The last two are one clause, not two. Everything else in the objective is met an
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged.
+
+## Round 1090 — bounded the non-C post-pass: a perfect register rename recovers 16%, and 84% is structural
+
+The standing question this project has carried for many rounds is whether to authorise a **non-C post-pass**
+over the residue carriers. It departs from the C-only constraint, so it cannot be self-authorised — but its
+**value can be measured without authorising it**, and that is what this round did.
+
+Method: index both disassemblies by **address** rather than by position, keep the addresses present in both, and
+split the differing ones by whether the **mnemonic** matches. Same mnemonic means the encoding differs only in
+operands or register — reachable by an operand rewrite. Different mnemonic means a different instruction is
+being emitted, which only recompilation produces.
+
+| carrier | differing | operand-only | operand-only bytes | structure bytes |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | 276 | 32% | 364 | 767 |
+| `CrashDumpUnhandledExceptionFilter` | 204 | 45% | 296 | 440 |
+| `cm_ExSellObjekt` | 146 | 56% | 317 | 222 |
+| `ls_LoadBuildingEntityState` | 92 | 32% | 114 | 246 |
+| `cm_ExCopyEntityData` | 19 | 53% | 37 | 41 |
+| `gv_ExAllocGraveyardWorker` | 11 | 91% | 42 | 5 |
+| `ServerMainThread` | 41 | 56% | 115 | 71 |
+| `gm_AllocGebaeude` | 10 | 100% | 47 | 0 |
+| `vfs_OpenStream` | 10 | 20% | 11 | 30 |
+| `gm_FindNextFilteredEntity` | 21 | 14% | 17 | 72 |
+| **total** | **930** | — | **1,360** | **1,894** |
+
+**The ceiling is 1,360 bytes = 15.8% of the residue**, and that is a *perfect* post-pass with no alignment cost.
+A perfect post-pass would leave **7,268 bytes (84%)** untouched. The operand and structure columns sum to 3,254,
+well under the 8,628 the residue ruler reports, because the table counts only addresses present in both streams
+— where instruction counts differ the alignment shifts and those bytes are attributed to neither class. So
+1,360 is a floor on the unfixable and a ceiling on the fixable, taken from the subset both streams agree on.
+
+**The decision this settles.** The post-pass was the last option that could move the number without new C. It is
+now bounded: it cannot reach zero, and it cannot reach half. It buys about a sixth, and the objective's "residue
+at zero" clause would still be unmet afterwards — while the constraint that protected the C-only rule would
+already be spent. **Judgement, labelled as judgement:** that is a bad trade, and it is now a measured bad trade
+rather than an assumed one. Recorded as codegen-walls §37 so the question is closed by evidence rather than by
+waiting.
+
+It also agrees in direction with §16 (67.5% of residue bytes register-role, a looser whole-function
+classification), differing only in granularity.
+
+**No source change; no probes.** The output is the measurement.
+
+**Docs:** codegen-walls §37.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged.
