@@ -29591,3 +29591,41 @@ fault address.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1047 — corrected round 1046: the two biggest clusters ARE displacement; the test was byte-level
+
+Round 1046 concluded `gm_AllocSpieler`'s clusters are "not displaced code" from a byte-level rigid-offset
+test (best match 17.0% / 13.9%). **That conclusion was wrong**, and the error was granularity.
+
+Re-measured by comparing **instruction streams with every `0x...` normalised to `A`**, so branch and data
+displacements are not counted as differences:
+
+| cluster | bytes | ref insns | our insns | equal modulo address |
+|---|---|---|---|---|
+| `+0x1a4..+0x5f6` | 1,107 | 323 | 322 | **251/322 = 78.0%** |
+| `+0xa0d..+0xd72` | 870 | 248 | 247 | **177/247 = 71.7%** |
+| `+0x6cf..+0x8db` | 525 | 157 | 157 | 79/157 = 50.3% |
+
+**The two large clusters are displaced code**, at 78% and 72% with instruction counts within 1. The byte test
+failed because **every differing branch displacement breaks byte-window matching** — a window spanning a
+`jne rel32` cannot match at any offset once the target moves, and branch displacements are dense in this
+loop-heavy code. So the byte match rate collapsed to chance precisely on the best-aligned regions.
+
+**A second artefact found and corrected in the same pass.** One 192-byte cluster reported **1 reference
+instruction vs our 52**, which reads as a 51-instruction surplus and a strong probe candidate. It is a
+**capstone desync**: the reference's first bytes there are `24 83` (`and al,0x83`), after which the decoder
+stops emitting valid instructions. The raw bytes are ordinary code. **A near-zero count is a desync, not a
+surplus.**
+
+Both recorded as measure-traps §44, with the rule: byte-level context search answers "how much of our byte
+stream exists in the reference" and **must not** be read as "N% of this function is different code";
+instruction-level comparison with address normalisation is the tool for "is this region displaced".
+
+**Net effect on the row:** §109's original characterisation stands — the residue is displacement plus small
+local differences — and round 1046's "four independent different-code regions" is withdrawn. All six
+spellings targeting the first cluster's neighbourhood remain measured and losing (§24).
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

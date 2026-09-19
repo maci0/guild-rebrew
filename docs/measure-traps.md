@@ -2296,3 +2296,46 @@ rather than "current until proven stale".
 
 **Consequence:** the automated audit is withdrawn. One real stale note was found this session
 (`vfs_OpenStream`, round 1041) and it was found by reading; the regex found none and invented two.
+
+## 44. Byte-level displacement tests and instruction-level ones answer different questions (round 1047)
+
+Measure-traps §38 introduced a byte-level "local-context displacement profile" as a triage tool, and §39
+added the match rate as its denominator. Both remain useful, but round 1047 found their **limit**, by
+comparing the two granularities on the same clusters of `gm_AllocSpieler`.
+
+**Byte-level result:** the two largest clusters peak at 17.0% and 13.9% match under their best rigid offset —
+chance level — which reads as "not displaced code, genuinely different code".
+
+**Instruction-level result on the same clusters**, comparing mnemonic + operand with every `0x...` normalised
+to `A`:
+
+| cluster | bytes | ref insns | our insns | equal modulo address |
+|---|---|---|---|---|
+| `+0x1a4..+0x5f6` | 1,107 | 323 | 322 | **251/322 = 78.0%** |
+| `+0xa0d..+0xd72` | 870 | 248 | 247 | **177/247 = 71.7%** |
+| `+0x6cf..+0x8db` | 525 | 157 | 157 | 79/157 = 50.3% |
+
+**The two large clusters are displaced code.** The byte test said otherwise because **every differing branch
+displacement breaks byte-window matching**: a 16- or 24-byte window spanning a `jne rel32` cannot match at
+any offset once the target differs, even though the surrounding instruction stream is aligned. Branch
+displacements are dense in loop-heavy code, so the byte-level match rate collapses to chance on exactly the
+regions that are most aligned.
+
+**The rule.** Two questions, two tools:
+
+- **"Is this region our code shifted?"** → compare **instruction streams with address normalisation**. This
+  is the only version that survives differing embedded displacements, and it is what tells you whether a
+  region is displacement or new code.
+- **"How much of our byte stream exists in the reference?"** → the byte-level context search of §38. Keep it
+  for that literal question and **do not** read its match rate as "N% of this function is different code" —
+  §39's correction said the rate needed reporting; this says what it must not be used to conclude.
+
+**A second, arithmetic trap found in the same measurement.** One 192-byte cluster reported **1 reference
+instruction against our 52**, which looks like a 51-instruction surplus and a strong probe candidate. It is a
+**decoder desync**: the reference's first two bytes there are `24 83` (`and al,0x83`), after which capstone
+stops emitting valid instructions and returns a single item. The raw bytes are ordinary code. **A cluster
+whose instruction count is near zero is a desync, not a surplus** — check that the first few bytes decode
+plausibly before reading any count from a narrow window.
+
+Both traps share a shape with §24 ("instruction counts across two images are not comparable — the decoder's
+stop rule decides the answer") and §42 ("check whether a looser measurement counts the same population").

@@ -1369,8 +1369,53 @@ mechanism for the fault at `+0xaa` stands** (it is separately measured, and roun
 perturbation space), but its extrapolation to the remaining 2,823 bytes does not: they are four independent
 regions of different code, not one decision's wake.
 
-**Judgement:** with four clusters rather than one, and each showing no rigid displacement, the row needs four
-independent local fixes, not one. All six spellings that target the first cluster's neighbourhood are
+**CORRECTION (round 1047): the "not displaced code" conclusion above is WRONG — the test was byte-level and
+the clusters are displaced at the INSTRUCTION level.**
+
+Re-measured by comparing instruction streams (mnemonic + operand with every `0x...` normalised to `A`, so
+branch and data displacements do not count as differences):
+
+| cluster | bytes | ref insns | our insns | delta | equal modulo address |
+|---|---|---|---|---|---|
+| `+0x1a4..+0x5f6` | 1,107 | 323 | 322 | −1 | **251/322 = 78.0%** |
+| `+0xa0d..+0xd72` | 870 | 248 | 247 | −1 | **177/247 = 71.7%** |
+| `+0x6cf..+0x8db` | 525 | 157 | 157 | 0 | 79/157 = 50.3% |
+| `+0x607..+0x6c6` | 192 | 1* | 52 | — | *decode artefact, see below |
+| `+0xaa..+0x125` | 124 | 30 | 31 | +1 | 12/30 = 40.0% |
+| `+0x130..+0x177` | 72 | 15 | 13 | −2 | 3/13 = 23.1% |
+| `+0xdd0..+0xe33` | 100 | 27 | 10 | −17 | 5/10 = 50.0% |
+
+**The two large clusters are mostly displacement, not different code.** `+0x1a4` is 323 vs 322 instructions
+with 78% equal modulo address; `+0xa0d` is 248 vs 247 with 72%. The best rigid *byte* delta matched only
+17% because **every differing branch displacement breaks byte-window matching** — a 16-byte window spanning a
+`jne rel32` cannot match at any offset once the target changes, even though the instruction stream is aligned.
+
+**Why the byte test failed.** Byte-level autocorrelation answers "is this region a shifted copy", which is
+false as soon as *any* embedded displacement differs. Instruction-level comparison with address
+normalisation answers "is this the same code with different constants", which is the question that matters
+for deciding whether a region is displacement or new code. **§38's local-context method has the same
+limitation** — it searches for byte contexts, so it under-reports alignment exactly where branch targets
+differ, and its "match rate" (34.1% for this carrier) is a byte-level statistic that must not be read as
+"66% of this function is different code".
+
+**Re-classification of the row:** clusters `+0x1a4` (39.2%) and `+0xa0d` (30.8%) are **displacement**;
+`+0x6cf` (18.6%) is mixed; the small clusters are genuinely different. `+0x607` is the one outlier where we
+have 51 more instructions than the reference in a 192-byte window — 1 vs 52 — which is a real structural
+difference worth a probe.
+
+**The `+0x607` row is a decoding artefact, not a finding.** Capstone reports 1 reference instruction there
+because the cluster's first two bytes are `24 83` (`and al,0x83`), after which the decoder desynchronises and
+stops emitting valid instructions — the reference's raw bytes at that offset are ordinary code
+(`24 83 c6 0c db 44 24 24 ...`), and ours (`20 8b 44 24 14 db 44 24 20 ...`) is a different but equally real
+stream. **A cluster whose instruction count comes out near zero is a desync, not a 51-instruction surplus.**
+Verify the first bytes decode plausibly before reading any count from a narrow window.
+
+**Judgement, revised:** the row's two largest clusters are **displacement** (78.0% and 71.7% equal modulo
+address, instruction counts within 1); the first cluster's perturbation space is fully enumerated and losing
+(§24); `+0x6cf` (18.6%) is mixed at 50.3%; and the small clusters are genuinely different. **No cluster on
+this row has an unprobed lever with a clear signal.** The row is displacement plus small local differences,
+which is what §109 said, and the six spellings targeting the first cluster's neighbourhood are all measured
+and all lose. All six spellings that target the first cluster's neighbourhood are
 measured and lose (§24), and the other three clusters have no probe on record. This is where a future round
 would start if it takes this row up again — but the ordering is by cluster size, not by fault address, and
 the first cluster at 39.2% is the one with a fully enumerated and fully losing perturbation space.
