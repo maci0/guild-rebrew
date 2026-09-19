@@ -28666,3 +28666,54 @@ baselines re-measured at 8628 / 264 / 281 after the §35 diff.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1024 — the missing ten have a root cause: a pad threshold of 3 in the discoverer
+
+Round 1023 established there are 10 missing sibling functions, not 51. This round found **why** they are
+missing, and it is a one-line defect, not a discovery limit.
+
+**Root cause.** `rebrew/discover.py::_capstone_sweep` step 2 promotes a candidate only when the preceding
+padding run is `>= 3` bytes:
+
+```python
+if j - i >= 3 and j < n:
+    starts.add(va_base + j)
+```
+
+All ten missing starts are preceded by **1 or 2** `90` bytes — measured, every one — so that step drops
+them. Steps 3 and 4 do not recover them: they use prologues other than `55 8b ec` (`81 ec`, `83 ec`, `a1`,
+`8b 44`, `b8`, `33 c9`, `5x`) and are reached only through tables or not at all.
+
+| missing start | pad before | prologue |
+|---|---|---|
+| `0x1000d340` | 2 | `mov eax,imm` |
+| `0x1000d730` | 2 | `sub esp,imm8` |
+| `0x1000d930` | 2 | `sub esp,imm32` |
+| `0x1000e750` | 1 | `mov eax,[abs]` |
+| `0x1000e9c0` | 1 | `push edi` |
+| `0x1000f480` | 2 | `sub esp,imm8` |
+| `0x1000f590` | 1 | `mov eax,[esp+x]` |
+| `0x1000fad0` | 1 | `mov eax,[esp+x]` |
+| `0x10010080` | 2 | `mov eax,[esp+x]` |
+| `0x10010140` | 1 | `mov eax,[abs]` |
+
+**Re-discovery is not a workaround.** Re-ran `rebrew discover-functions` and got the identical 543 entries.
+`--min-size 4` gives 565 and still contains none of the ten. The merge is deterministic.
+
+**The fix, measured on the binary.** Lowering the threshold to 1 alone adds **380** starts, nearly all
+mid-instruction `90` bytes. Threshold 1 **plus** (a) not-a-branch-target and (b) a valid prologue gives
+**820** starts from 800 — all ten recovered, 20 new candidates instead of 380.
+
+**Not applied:** rebrew here is an installed wheel (`rebrew-2.5.0.dist-info`), not a checkout, so there is
+no source tree to patch. Written up as workflow-traps §17 with the root cause, the measured fix and the
+false-positive count. Also carried into `docs/general-knowledge.md`.
+
+**Also corrected this round:** `docs/workflow-traps.md` §16 still asserted "slack is 0, not 15" and told
+future rounds to assume 0. That was round 998's claim, repeated by round 1017, and disproved by round 1018 —
+the check behind it (`object .text raw == span`) is tautological because msvc6 pads the COMDAT to the span.
+§16 now records the correct measure and the correct conclusion (headroom is capacity, not affordance).
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
