@@ -29972,3 +29972,25 @@ Experiments cleaned up (`dosdevices/d:` removed, scratch dirs deleted).
 **State:** `build/server.dll` is the restored known-good file; the gate fails on the **pre-existing
 composition bug** characterised in round 1053 (`.text` +1264, `.rdata` +64 on a fresh composition), which
 remains the open item.
+
+## Round 1056 — confirmed the composition fix is durable; added a gate guard for the bug I introduced
+
+Round 1055's fix holds: `split_link.sh` + `postlink_residual.py` reproduce residue **8628** and the shipped
+file is **bit-identical** to the known-good copy (`cmp` clean). `emit_defs` converges in **2 passes**
+(73 missing, then 0), confirming the emit code is back inside the loop.
+
+**New permanent guard.** `scripts/gate.sh` now checks that `split_link.sh` reports **at least 2** `pass N:`
+lines. That is the one signal that distinguishes a working fixed-point loop from the round-1053 bug, where
+the emit code was dedented out of the loop (definitions emitted once, `.rdata` +0x40, postlink refusing the
+build with a misleading `/debug` message). Verified by simulating a pass-less log.
+
+**Swept for the same construct elsewhere** — `map_libcmt.py:271` and `split_blob.py:115` use `for ... else`
+correctly (search loops: `break` on mismatch, `else` = found), and the eight in rebrew are pre-existing and
+tested. The bug was an insertion error, not the construct.
+
+Recorded as workflow-traps §22, including the two rounds spent reporting it as pre-existing. A
+self-inflicted regression is the first hypothesis to test when the tree breaks right after your own tooling
+edit — and the evidence was available from the start (stashing the edit restored `.rdata`).
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

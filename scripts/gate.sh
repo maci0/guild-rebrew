@@ -172,6 +172,21 @@ echo "== deliverable link + residue"
 # were fresh.  Both steps are checked here, and postlink_residual.py refuses a
 # build older than the sources.
 if bash scripts/split_link.sh > .scratch/gate-link.log 2>&1; then
+    # emit_defs fixed-point guard.  The definition cascade MUST iterate: emitting
+    # __CRT_INIT@12 introduces a reference to _DllMain@12, so one pass leaves
+    # symbols behind.  Round 1055 put the iteration's guard clause in the wrong
+    # place and silently dedented the emit code OUT of the loop -- definitions
+    # were then emitted once, .rdata grew 0x40, and postlink refused the build
+    # with a message about /debug.  Every other check passed; only this one sees
+    # it.  Two passes is the steady state (73 missing, then 0).
+    epasses=$(grep -cE "^pass [0-9]+: " .scratch/gate-link.log || true)
+    if [ "${epasses:-0}" -lt 2 ]; then
+        echo "REGRESSION: split_link's definition cascade ran $epasses pass(es);"
+        echo "  it must iterate (2 is the steady state).  A single pass means the"
+        echo "  emit code has fallen out of emit_defs.py's fixed-point loop, which"
+        echo "  silently grows .rdata and makes postlink refuse the build."
+        rc=1
+    fi
     full=$(.venv/bin/python scripts/postlink_residual.py --write build/server.dll \
            2>.scratch/gate-residue.log)
     res=$(echo "$full" | grep -E "^\.text differing")

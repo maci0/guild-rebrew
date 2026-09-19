@@ -811,3 +811,49 @@ expected*, and *the distinguishing test between the candidate causes*.
 **Companion to workflow-traps §19.** That one is about a work queue that is 90% noise; this is about an
 error message that is 100% one hypothesis. Both are cases where the tooling's *reporting* costs more than
 its *computation*.
+
+## 22. Inserting a `for ... else` mid-body dedents the rest of the loop — and no other check sees it (round 1055)
+
+**What happened.** Round 1053 added a convergence guard to `scripts/emit_defs.py`, whose definition cascade
+loops to a fixed point:
+
+```python
+for _round in range(6):
+    defined, undefined = scan(...)
+    missing = sorted(...)
+    print(f"pass {_round}: ...")
+    if not missing:
+        break
+    done.update(missing)
+
+    defs = ...          # the emit work -- part of the loop body
+    ...
+```
+
+The guard was written as `for ... else`, which must follow the **whole** loop. Inserted right after the
+`break`, it terminated the loop body there — the emit code below was silently **dedented out of the loop**.
+Python accepts this: no syntax error, no lint warning, no test failure.
+
+**The symptom was two steps removed from the cause.** Definitions were emitted from a single pass instead of
+iterating, which grew `.rdata` by `0x40`. `postlink` then refused the build with the `/debug` message
+(workflow-traps §21). Round 1054 spent a full round diagnosing that as a "pre-existing composition failure"
+— it was this, and it was self-inflicted.
+
+**Why nothing caught it.** The `.rdata` overshoot is only visible at the *end* of the link pipeline, and the
+guard that would have reported "did not converge" was the very clause that broke the loop.
+
+**The fixes, both permanent:**
+
+- The guard is now a plain `if missing: raise` **after** the loop, with a comment naming the exact mistake.
+- `scripts/gate.sh` gained an **emit_defs fixed-point guard**: `split_link.sh` must report at least 2
+  `pass N:` lines, because the cascade genuinely needs iteration (73 missing, then 0). One pass means the
+  emit code fell out of the loop. Verified by simulating a pass-less log.
+
+**The rule.** A `for ... else` clause is part of the loop's *structure*, not its body — adding one, or
+converting `break`/`else` logic near the end of a loop, is a **control-flow edit to everything after the
+insertion point**, not a local addition. When a fixed-point or accumulator loop is edited, check what else
+was in the body, and add a check that the loop still *iterates* — not just that it terminates.
+
+**And the honest part:** two rounds were spent reporting this as pre-existing and diagnosing the wrong
+layer. A self-inflicted regression is the first hypothesis to test when the tree breaks immediately after
+your own tooling edit, and the evidence was available from the start — stashing the edit restored `.rdata`.
