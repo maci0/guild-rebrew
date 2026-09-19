@@ -43,6 +43,28 @@ if [ -n "$unmodified" ]; then
     echo "      (did the edit apply?  check with: git diff --stat -- <file>)" >&2
 fi
 
+# build.make integrity guard.  This script recompiles with the exact line CMake
+# wrote, which is what makes its deltas comparable to the real build -- and that
+# trust is only sound while build.make still says what CMake generated.  It is a
+# GENERATED file in a gitignored directory, so a round that hand-edits it (to
+# sweep a per-file flag, a toolchain pin, an /O option) changes what every later
+# measurement MEANS while `git status` stays clean.  Round 1051 did exactly that
+# sweeping toolchain pins and left the tree measuring 58% residue.
+#
+# scripts/build_tree_check.py holds the whole-tree check (also run by gate.sh);
+# it is invoked here too so a measurement can never be taken from a drifted tree.
+if [ -f scripts/build_tree_check.py ] && [ -f build/CMakeFiles/server_dll.dir/flags.make ]; then
+    if ! drift=$(python3 scripts/build_tree_check.py 2>&1); then
+        echo "$drift" >&2
+        echo "  build.make has been hand-edited, so this script would measure a" >&2
+        echo "  build the tree cannot reproduce.  Restore with:" >&2
+        echo "    rm -rf build && cmake -B build -S . \\" >&2
+        echo "      --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake \\" >&2
+        echo "      -DCMAKE_BUILD_TYPE=Release -DREBREW_DEBUG_INFO=OFF" >&2
+        exit 4
+    fi
+fi
+
 for f in "$@"; do
     rel=${f#./}
     # build.make writes its targets relative to the build directory

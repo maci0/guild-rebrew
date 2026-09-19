@@ -85,6 +85,34 @@ RESIDUE_BASELINE=${RESIDUE_BASELINE:-8628}
 DATA_BASELINE=${DATA_BASELINE:-21481}
 rc=0
 
+# Build-tree integrity.  build/ is gitignored, so NO other check in this gate can
+# see it: a hand-edited build.make or flags.make leaves `git status` clean, lint
+# clean, verify unchanged, and `cmake --build` still "succeeding" -- while every
+# measurement taken from the tree describes a build no fresh clone reproduces.
+# Round 1051 hit this while sweeping toolchain pins: the tree measured 58% residue
+# and a 290,816-byte deliverable instead of 286,720 / 8628.
+#
+# The test: CMake's own record of each object's custom flags (the `Custom` comments
+# in flags.make, regenerated alongside build.make) must cover every codegen flag
+# token build.make's compile line carries.  A token in one and not the other was
+# hand-added.  `scripts/linktest.sh` enforces the same thing per named file; this
+# is the whole-tree version, so the failure surfaces at gate time.
+echo "== build-tree integrity"
+if [ -f build/CMakeFiles/server_dll.dir/flags.make ]; then
+    drift=$(python3 scripts/build_tree_check.py 2>&1)
+    echo "$drift"
+    if echo "$drift" | grep -q "DRIFT"; then
+        echo "REGRESSION: build.make has been hand-edited -- the tree no longer"
+        echo "  describes a reproducible build.  Restore with:"
+        echo "    rm -rf build && cmake -B build -S . \\"
+        echo "      --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake \\"
+        echo "      -DCMAKE_BUILD_TYPE=Release -DREBREW_DEBUG_INFO=OFF"
+        rc=1
+    fi
+else
+    echo "(not configured -- skipped)"
+fi
+
 echo "== rebrew lint"
 # Round 907: this check printed lint's output but never tested it, so it could
 # not fail the gate.  Proven inert: a deliberately broken FUNCTION identity

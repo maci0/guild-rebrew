@@ -29808,3 +29808,49 @@ Recorded as `codegen-walls.md` §26.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1052 — fixed the build-tree drift bug; added gate + linktest guards; restored the tree
+
+**The incident.** Round 1051's toolchain sweep substituted `/REBREW_TOOLCHAIN:<name>` in
+`build/CMakeFiles/server_dll.dir/build.make` to test nine msvc6 images. Restoring the file was **not
+sufficient**: the objects had been recompiled under swept flags, and `build/split_poc` held a stale
+composition. The tree was left measuring **58% residue** (`0x14063`) and a **290,816-byte** deliverable,
+against the correct **8628** and **286,720**.
+
+**Restored.** `rm -rf build`, then a clean
+`cmake -B build -S . --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake -DCMAKE_BUILD_TYPE=Release
+-DREBREW_DEBUG_INFO=OFF`, full build, `--target final`. Verified:
+
+```
+residue 8628, raw-link .data 21481, verify 281/283, byte-matched 264, imports 100
+cmp .scratch/shipped.before.dll build/server.dll  ->  BIT-IDENTICAL
+md5sum                                            ->  3febd2c4ca080a3749c12d4bf7452fbe (both)
+```
+
+**The bug fixed.** `build/` is gitignored, so a hand-edited `build.make` is invisible to `git status`,
+lint, verify and `cmake --build` alike, while silently redefining what every `linktest.sh` measurement
+means. New **`scripts/build_tree_check.py`** compares CMake's own per-object flag record (`flags.make`'s
+`# Custom flags: <obj>_FLAGS = ...` comments) against the compile line `build.make` carries, and reports any
+codegen flag token that is in one and not the other. Wired into **`gate.sh`** as `== build-tree integrity`
+(fails the gate) and into **`linktest.sh`** (exit 4, refuses to measure).
+
+**Verified both directions:**
+
+| test | result |
+|---|---|
+| clean tree | `build.make agrees with flags.make (198 object(s) with recorded flags)`, exit 0 |
+| one injected `/Ob1` in one object's rule | `DRIFT: 1 unrecorded flag token(s)`, gate fails, linktest exits 4 |
+
+**A second bug, found while writing the checker.** `parse_recorded` compiled its pattern **without `re.M`**,
+so `$` anchored to end-of-*string* and it matched **zero** of the 202 `Custom` comments — the checker
+printed "agrees" while comparing nothing. A guard that silently checks nothing is worse than no guard. Fixed,
+and the summary now prints the count it compared so a zero is visible.
+
+**Not an upstream `rebrew` bug:** grepped the installed package — `rebrew` never reads `build.make`, so the
+exposure is entirely in this project's scripts, and that is where the fix lives.
+
+Recorded as workflow-traps §20. Committed: `scripts/build_tree_check.py`, `scripts/gate.sh`,
+`scripts/linktest.sh`.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

@@ -726,3 +726,50 @@ above, both in the same 18-carrier residue set this project has already characte
 
 This is workflow-traps §10's "no opening step forced the lookup" in its tooling form: a work queue that is
 90% noise will keep generating rounds unless the filter is applied before the queue is read.
+
+## 20. `build/` is gitignored, so a hand-edited `build.make` is invisible to every check (round 1051)
+
+**The trap.** `scripts/linktest.sh` recompiles with the exact command `build.make` records — that is what
+makes its deltas comparable to the real build — and `scripts/split_link.sh` consumes the objects that
+command produced. Both treat `build.make` as **ground truth**. But `build.make` lives in `build/`, which is
+gitignored:
+
+```
+.gitignore:20  build/
+```
+
+So a round that hand-edits it changes what every later measurement **means**, while:
+
+- `git status` stays clean,
+- `rebrew lint` stays clean,
+- `rebrew verify --full` is unchanged (it compiles from source, not from `build/`),
+- and `cmake --build build` still nominally succeeds.
+
+Nothing in the project could see it. Round 1051 did exactly this while sweeping per-file toolchain pins,
+substituting `/REBREW_TOOLCHAIN:<name>` in `build.make` to test the nine msvc6 images. After restoring, the
+tree was left measuring **58% residue and a 290,816-byte deliverable**, against the correct **286,720 bytes
+and 8628**. The cause was a stale `build/split_poc` plus objects compiled under the swept flags; the fix was
+a full `rm -rf build` and reconfigure.
+
+**The fix, now in the tree.** `scripts/build_tree_check.py` compares CMake's own record of each object's
+flags against the compile line `build.make` carries:
+
+- CMake regenerates `flags.make` beside `build.make` and records per-object flags there as
+  `# Custom flags: <obj>_FLAGS = ...` and `# Custom options: <obj>_OPTIONS = ...`.
+- Any codegen flag token (`/` + uppercase) in the compile line that the corresponding Custom comment does
+  not list was hand-added.
+
+It is wired into **`gate.sh`** (`== build-tree integrity`, whole tree, fails the gate) and into
+**`linktest.sh`** (refuses to measure, exit 4). Verified both directions: silent on the clean tree —
+**198 objects compared** — and firing on a single injected `/Ob1` in one object's rule.
+
+**A second bug found while writing the checker, worth recording because it produced a silent pass.**
+`parse_recorded` used `re.compile(r"...$")` with **no `re.M` flag**. Without multiline, `$` anchors to
+end-of-*string*, so on a `flags.make` containing **202** `Custom` comments it matched **zero** objects — and
+the checker then printed "agrees" while comparing nothing. A guard that silently checks nothing is worse than
+no guard. The tell was the summary line reading `0 object(s) with recorded flags`; the summary now reports
+the count it actually compared, so a zero is visible.
+
+**Also worth keeping:** the composition guard in `linktest.sh` (rounds 232/1051) caught the collapse and
+said so, and `cmake --build` failing at POST_BUILD postlink is by design (measure-traps §17) — neither is
+the problem. The problem is that no check looked at the *inputs* to those steps.
