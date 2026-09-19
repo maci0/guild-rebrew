@@ -2225,3 +2225,44 @@ tables and padding.
 **The method rule this adds to §52 and §53:** before counting anything per function, establish the extent from
 `function_structure.json`'s *next entry*, not from a guessed size or from the first padding run — a span can
 contain both padding **and** jump tables, and the first padding run does not mark the end.
+
+### 43. The missing early exits resist three further spellings; the mechanism is backend block placement (round 1099)
+
+§42 established the real gap is **4 missing exit paths** across the 19 carriers — small, but the one clearly
+source-shaped difference left. This round tried three more spellings at the two smallest instances. All failed,
+and the pattern of failures is now informative enough to stop probing blind.
+
+**The instance, precisely.** `gm_FindNextFilteredEntity` (`0x10016f80`, 346 bytes): the reference has **five**
+`ret` sites — `0x10016f9a`, `0x10016faa`, `0x10016ff8` (three early, each an inline
+`xor eax,eax; pop esi; ret` reached by falling through its guard) plus `0x100170c5`, `0x100170d9`. Our build has
+**three**: `0x100170c5`, `0x100170d5`, `0x100170d9`. All three of our early guards jump to a late exit.
+
+**Probes, all measured, all reverted:**
+
+| probe | result |
+|---|---|
+| reorder so `end` is computed before the guard (§39, round 1095) | **+6** |
+| duplicate the second guard verbatim | **+0** — identical guards fold |
+| `volatile` double-load of the guard global | **+0** — already inert here (probes z1-z4, w2/w3/w6, v1-v5) |
+| **scoped `end`** (`{ unsigned char* end_tmp = …; if (guard) return 0; end = end_tmp; }`, so both guards precede its use) | **+6**, and the `ret` count stayed **3** |
+| route a return to its own label (`goto scan_failed; … scan_failed: return 1;`, `cm_ExCopyEntityData`) | obj **905** vs target 912 |
+| distinct return value (`temp = 1; return temp;`) | obj **905** |
+| value-preserving expression (`return (int)(… == 0x300) \| 1;`) | obj **956** |
+
+**What the failures have in common.** Every spelling that changes the *tail structure* costs +6 (a positional
+shift with no structural gain), and every spelling that changes the *returned value's form* moves the object
+size without reaching the target's block count. Two independent carriers now show the same thing, and in
+`cm_ExCopyEntityData` two different spellings landed on the **identical** 905 — meaning they removed the same
+bytes rather than arranging them differently.
+
+**The mechanism, stated as narrowly as the evidence supports.** The reference materialises more copies of the
+same epilogue than we do. Which branches reach which copy, and how many copies exist, is decided by the
+backend's block-placement pass over the whole function. No local spelling at a return site changes that count —
+probes on two carriers and seven spellings confirm it. Changing it means changing the block structure the
+backend sees *around* the returns, which is the "statement/definition ORDER is the only lever that lands" rule
+this project established elsewhere, now located at the function tail.
+
+**Judgement, labelled as judgement:** with 4 exits across 8,628 bytes, this lever is worth roughly 24 bytes plus
+positional shift. It is real and it is source-shaped, but it is not the path to zero, and seven failed spellings
+say the remaining work here is block-order search rather than statement recovery. Recording that so the next
+round does not re-run these seven.
