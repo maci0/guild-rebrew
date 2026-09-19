@@ -28533,3 +28533,51 @@ Reverted; `build.make` restored from `.scratch/build.make.bak`; baseline re-meas
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit retained.
+
+## Round 1021 — the 10 data type-conflicts and 17 zero-size annotations are all already correct
+
+The brief's "34 data-drift" items resolve to `rebrew data`'s `type_conflicts`, of which there are **10**.
+All ten are the same shape and all ten are **round-925 findings already recorded in the defining TU**, so
+this round audited them rather than re-probing.
+
+**Verified against reference bytes, not against the notes:**
+
+| global | VA | declared | reference bytes | verdict |
+|---|---|---|---|---|
+| `g_filter_extra5` | `0x10030b84` | `char[1]` | `ff` | correct |
+| `g_query_filter_extra1` | `0x10030b88` | `int[4]` | `ffffffff` | correct |
+| `g_query_filter_extra2` | `0x10030b8c` | `int[4]` | `ff7f` + next entry | correct wide form |
+| `g_query_filter_extra3` | `0x10030b8e` | `short[2]` | `ff7f` | correct |
+| `g_slot_table` | `0x100358a0` | `unsigned char[2]` | `88 39` -> `0x3988` | correct |
+| `g_entity_state_base` | `0x100358a2` | `char[2]` | `8c 39` -> `0x398c` | correct |
+| `g_entity_type_bytes` | `0x10035a04` | `unsigned char[1]` | `d4 3a` | correct |
+
+The `0x10030b84` region decodes to `ff | ffffffff | ff7f | ff7f | ff000000`, which is exactly what
+`loadsave3.c:143-153` says it is, and exactly the declared widths. **The two readings agree**, so the
+"wider than the readers use" forms are deliberate and the note is current.
+
+`0x100358a0`/`0x100358a2` sit inside a contiguous pointer table (`0x3984 0x3988 0x398c 0x3990`), so `[2]` is
+literally the next entry's low half — the array width is a layout artefact, not a wrong type. `loadsave3.c`
+records the correct scalars as **measured worse** (round 925: `.text` 8633 -> 8634, raw-link `.data`
+21481 -> 21856, **+375**). Do not "fix" it again.
+
+**17 zero-size data annotations** were also checked and are all `[]` *incomplete array* declarations with
+string initializers — `size == 0` is the correct report for an incomplete type, not a defect. Spot-read
+against the reference, all five game ones are complete and byte-exact:
+
+```
+0x1002a0f8  "ahm_AllocAhmInfo\0"
+0x100270e4  "\n\0"
+0x100270e8  "__server.log\0"
+0x10028b60  "m:pool_alloc(tp_m_pool)\0"
+0x10028b78  "m:pool_get_free(tp_m_pool)\0"
+```
+
+The remaining 12 are `.rdata`/`.data` fixtures in `data_restore.c`/`rdata_restore.c` (postlink scaffolding)
+and `crt_imports.c`.
+
+**No data edit was made and none is available.** The 242 "unannotated" globals are local/static definitions
+carrying no `va` and no `section`; they are not VA-addressed globals and no annotation is missing.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
