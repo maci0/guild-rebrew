@@ -1295,6 +1295,32 @@ does; forcing either side of the transposition from C costs more than the transp
 directions, by margins of 5 to 361 bytes. **Eighteen rounds have now probed this row or its siblings from
 every angle and the row has moved zero bytes.**
 
+**The complete cost map for this one transposition (round 1045 closes it).** Every spelling that perturbs
+the `id store / two zero-stores / memset` group, measured at the link:
+
+| spelling | link delta |
+|---|---|
+| `*(slot+0x16c) = 0;` moved below the `memset` (only that one store) | **+3** |
+| `*(slot+0x170) = 0;` moved below the `memset` (only that one store) | **+3** |
+| both zero-stores moved below the `memset` | **+361** |
+| `memset` hoisted above the id store and both zero-stores | **+368** |
+| `memset` hoisted above the two zero-stores only | **+361** |
+| explicit `int scaled = idx * 0x21c;` local | **+5** |
+| explicit `char* fill = (char*)0x100358a4 + idx*0x21c;` | **+0** (inert) |
+
+**Two structural facts fall out of the table.**
+
+1. **The two single-store moves give the *identical* delta (+3).** Different edits, same number, is the
+   collapse signature recorded in `workflow-traps` §18: msvc6 canonicalised both into one schedule, so
+   *which* zero-store you move is not a degree of freedom — only *how many* are moved is.
+2. **Hoisting the `memset` costs ~365 whichever side it lands on** (+361, +368), while moving zero-stores
+   costs `3n`-ish for n = 1 (3) and n = 2 (361). The two halves of the transposition are not symmetric: the
+   `memset` is the expensive operand because hoisting it forces the scaled index to be rematerialised across
+   the call, exactly as §109 states.
+
+**So the transposition is fully enumerated and every point on it loses.** The cheapest perturbation is +3,
+the dearest +368, and the only inert spelling is the one that does not touch the schedule at all.
+
 **Judgement:** with §109's two reorderings, these three, and the whole-carrier probes of rounds 1025-1031,
 `gm_AllocSpieler` has no C-expressible lever at its fault. The 2,823 bytes behind it are that
 scheduling decision's displacement wake (measured in measure-traps §38 as a multi-run profile, 4 distinct

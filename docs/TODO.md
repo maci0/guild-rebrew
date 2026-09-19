@@ -29509,3 +29509,37 @@ Recorded as `codegen-walls.md` §24. **No source, metadata or `build.make` chang
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1045 — gm_AllocSpieler's +0xaa transposition is now fully enumerated; every point loses
+
+Round 1044 measured the transposition from the opposite direction (+361). This round closed the middle of
+the space — partial moves — and the complete cost map is:
+
+| spelling | link delta |
+|---|---|
+| `*(slot+0x16c) = 0;` moved below the `memset` (one store) | **+3** |
+| `*(slot+0x170) = 0;` moved below the `memset` (one store) | **+3** |
+| both zero-stores moved below the `memset` | **+361** |
+| `memset` hoisted above the id store and both zero-stores | **+368** |
+| `memset` hoisted above the two zero-stores only | **+361** |
+| explicit `int scaled = idx * 0x21c;` local | **+5** |
+| explicit `char* fill = (char*)0x100358a4 + idx*0x21c;` | **+0** (inert) |
+
+**Two structural facts fall out:**
+
+1. **The two single-store moves give the *identical* delta (+3).** Different edits, same number — the
+   collapse signature from workflow-traps §18. msvc6 canonicalised both into one schedule, so *which*
+   zero-store is moved is not a degree of freedom; only *how many* is.
+2. **Hoisting the `memset` costs ~365 whichever side it lands on** (+361, +368), while moving zero-stores
+   costs ~3 per store for the first and +361 for the second. The halves are asymmetric: the `memset` is the
+   expensive operand because hoisting it forces the scaled index to be rematerialised across the call —
+   exactly §109's stated mechanism, now confirmed from five points rather than one.
+
+**The transposition is fully enumerated and every point on it loses.** Cheapest perturbation +3, dearest
++368, and the only inert spelling is the one that does not touch the schedule at all. Recorded in
+`codegen-walls.md` §24.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
