@@ -28476,3 +28476,32 @@ reopens a class of probes I had been filtering out.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1019 — the headroom is real but not spendable: the one span-neutral variant links +13
+
+Round 1018 established that carriers have 2-15 bytes of real headroom and that `cm_ExProdObjekt`'s
+"15 bytes of unused slack" note was correct. This round spent it.
+
+**The candidate.** The header records exactly one variant that clears the 205-218 transposition:
+hoisting the address fold above the volatile barrier, "aligned 349 -> 351 of 354, span-neutral at 1008",
+rejected at **matched-reloc 980 -> 966**. That rejection is an *object* ruler. The judge is the link, so
+the single-expression fold was rebuilt and link-tested:
+
+```c
+recipe_def = g_item_def_table + (recipe_idx * 0x41);
+```
+
+**Measured at the link: `cm_ExProdObjekt` 21 -> 34, +13.** `.text differing` 0x21b4 -> 0x21c1.
+
+Reverted; gate pass, residue 8628.
+
+**What it means.** The header's coupling claim survives the ruler it was never tested against: clearing
+the load order re-breaks the two stores, and at the link the trade is strictly worse. So the 15 bytes of
+headroom are real but **not spendable on this carrier** — the only known size-neutral consumer of them is
+the one variant that loses 13 bytes elsewhere. Headroom is a *capacity* fact, not an *affordance* one.
+
+This also closes the last object-ruler-vs-link question on this row: `matched-reloc 966` and the link
+**agree in sign** here (+13 worse). The ruler was right; it just was not evidence.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit retained.

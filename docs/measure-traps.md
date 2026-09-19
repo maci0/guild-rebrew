@@ -1876,15 +1876,23 @@ Three answers from three methods, only the third sound:
 | COMDAT raw vs span (rounds 1001, 1017) | 0 | **self-fulfilling**, measures the pad |
 | last non-`nop` instruction's end vs span (round 1018) | 2-15 bytes | **correct** |
 
-**The rule.** A size budget must come from an artefact, not from arithmetic over a disassembly — but the
+**The rule.** A size budget must come from an artefact, never from arithmetic over a disassembly — but the
 artefact must be the *code extent*, not the container's padded size. The container's raw size is what msvc6
-pads to; the code's end is the last non-`nop` instruction.
+pads **to**; `raw == span` is therefore a tautology and cannot be evidence about our code. The code's extent is
+the end of the last non-`nop` instruction.
 
 | claim | method | valid? |
 |---|---|---|
 | "119 bytes of slack" (round 990) | `span - sum(sizes)`, decoder stopped early | **no** |
-| "slack 0" (rounds 1001, 1017) | COMDAT raw == span, read from the COFF | **yes** |
-| "both decode to the span end" (this round) | sum of sizes == span on both sides | **yes** |
+| "slack 0" (rounds 1001, 1017) | COMDAT raw == span | **no** — tautological, measures the pad |
+| "sum of sizes == span on both sides" (round 1017) | decode arithmetic | **no** — same tautology, and §24 shows the sum moves with the decoder's stop rule |
+| "last non-`nop` end vs span" (round 1018) | object bytes | **yes** |
 
-Three methods, two answers; only the artefact-based ones agree. This is the fourth time this session that a
-figure derived from disassembly arithmetic rather than from the container has been wrong (§§21, 23, 24, 26).
+**Note on the earlier text above.** The round-1017 section still says the zero-remainder decode "proves there
+is no padding and no slack". It proves the *decode* consumed the span; it does not bound our code, because the
+trailing `nop`s are the pad. Both statements in that section that conclude "no slack" are superseded by the
+table above.
+
+This is the fifth time this session that a figure derived from disassembly arithmetic rather than from the
+container has been wrong (§§21, 23, 24, 26), and the second time (§§26, 34) that the *container* figure was
+wrong in the opposite direction because it measures a quantity msvc6 defines rather than one we control.
