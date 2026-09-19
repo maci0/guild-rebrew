@@ -2510,3 +2510,34 @@ complement: it bounds the defect to the one place it was found.
 **The rule.** A reported figure should either be checkable against another reported figure, or say what it is a
 subset of. Apply the check to the tooling's output, not only to hand-built tables — that is how round 1073
 found this one.
+
+## 49. Auditing docs for "missing evidence" by regex measures word choice, not evidence (round 1075)
+
+Round 1074's discipline was applied to the **claim** side: does every wall in the docs have a recorded
+measurement behind it? A regex was written for "a number with a unit, an address, or an explicit round" and
+run over three docs. It flagged eight sections as lacking evidence.
+
+**All eight have evidence. The regex was the defect, exactly as in §§43, 44 and 46.**
+
+| section | why the regex missed it | what is actually there |
+|---|---|---|
+| `codegen-walls` §4 | "**Nineteen** spellings" — a word, not a digit | nineteen spellings enumerated, two named sites, per-site byte counts |
+| `codegen-walls` §5 | scores written `714 -> 480`, `888 -> 279` | specific functions, scores, object sizes, and the composition-band consequence |
+| `codegen-walls` §6 | title contains "measured" but body cites a constraint | a named constraint and the win it forbade |
+| `measure-traps` §2 | the figure is a **re-measurement** (`"−58" re-measured at +56`) | the defect and its correction |
+| `measure-traps` §3 | figures are in prose (`four bytes per call`) | a word-number, plus a named finding |
+| `measure-traps` §8 | two score pairs on one line | four figures and the rule they justify |
+| `measure-traps` §10 | it is a **procedure list**, so it contains commands not measurements | commands, which is the correct content for "how to check" |
+
+**The finding is therefore negative and worth stating: every wall in `codegen-walls` (40 sections),
+`measure-traps` (60) and `workflow-traps` (25) carries a numeric, address-based, or round-based
+justification.** The documentation's evidence discipline holds across 125 sections.
+
+**The method lesson — the fourth instance this session.** A regex over prose measures the *words used to
+describe* evidence, not the presence of evidence. This is §§43 (header history), 44 (byte vs instruction
+granularity), 46 (span windows) and now 49: **every attempt to automate "is this documented?" by keyword has
+produced false positives, and in each case the correct instrument was reading the section.** The audit that
+works here is a human-readable one, and this round performed it by hand after the regex flagged candidates.
+
+**Practical rule.** Use a regex to *narrow* the set to inspect, never to conclude. State a keyword-based
+audit's result as "N sections need eyeballing", not "N sections lack evidence".

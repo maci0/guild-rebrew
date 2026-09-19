@@ -30624,3 +30624,36 @@ hand-built tables.**
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1075 — audited the docs' claim side; every wall carries evidence, and the audit's regex was the defect
+
+Round 1074 checked the *measurement* side (do the rulers reconcile). This checked the *claim* side: does every
+wall in the docs have a recorded measurement behind it?
+
+**Result: yes, across all 125 sections** — `codegen-walls` (40), `measure-traps` (60), `workflow-traps` (25).
+Every one carries a numeric figure, an address, an enumerated spelling set, or an explicit round reference.
+
+**But the audit's first pass was wrong, and that is the finding worth recording.** A regex for "a number with a
+unit, an address, or a round" flagged **eight** sections as lacking evidence. All eight have it; the regex
+measured word choice:
+
+| section | why it was flagged |
+|---|---|
+| `codegen-walls` §4 | "**Nineteen** spellings" — a word, not a digit |
+| `codegen-walls` §5 | scores written `714 -> 480`, `888 -> 279` |
+| `measure-traps` §2 | the figure is a *re-measurement* (`"−58" re-measured at +56`) |
+| `measure-traps` §3 | "four bytes per call" — a word-number |
+| `measure-traps` §10 | it is a **procedure list**, so it correctly contains commands not measurements |
+
+**This is the fourth time this session that a keyword-based audit produced false positives** — after §§43
+(header history), 44 (byte vs instruction granularity) and 46 (span windows). In every case the correct
+instrument was **reading the section**, and the regex was only ever useful for narrowing what to read.
+
+Recorded as measure-traps §49 with the rule: **use a regex to narrow the set to inspect, never to conclude** —
+state its output as "N sections need eyeballing", not "N sections lack evidence".
+
+**Net:** a category of doubt is closed (the documentation's evidence discipline holds, 125/125) and a
+recurring method trap is on record for the fourth time with the same remedy.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
