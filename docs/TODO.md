@@ -30805,3 +30805,56 @@ applied).
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1080 — `rebrew rename` staled the build tree; named the lobby record-broadcast handler
+
+Data and types being closed, this round took the naming axis the brief calls for: 32 distinct `fcn_`-style
+placeholders survive in `server.dll`. The best target was `fcn_10014af0` (RELOC, 247 bytes, called from two
+files, and — per `whathas.py` — never probed in any doc).
+
+**Named from evidence, at the strongest tier.** The site pushes two strings. `0x1002d740` is
+`"invalid client state"`, the guard's own message. `0x1002d70c` is the `__FILE__`,
+`D:\Develop\DieGildeAddOn\command\lobbycommands.c`, which fixes the module and therefore the `lb_` prefix.
+And the caller `lb_ExLobbyServerCommand` is a 7-way switch on `*(int*)(msg + 0x10)` in which this function is
+`case 4`. Disassembling the jump table at `0x10014ebc` confirmed all seven cases **in table order**, each
+call site carrying its symbol name:
+
+| id | handler | address |
+|---|---|---|
+| 0 | `lb_ExPlayerlist` | `0x100145e0` |
+| 1 | `lb_SendLobbyConfig` | `0x100146c0` |
+| 2 | `lb_ExPlayerHasJoined` | `0x100147b0` |
+| 3 | `lb_BroadcastStateChange` | `0x10014a50` |
+| 4 | `lb_ExPlayerRecordBroadcast` | `0x10014af0` |
+| 5 | `lb_HandleEntitySync` | `0x10014bf0` |
+| 6 | `cm_RouteCommand` | `0x10014ca0` |
+
+Renamed `fcn_10014af0` → `lb_ExPlayerRecordBroadcast` via `rebrew rename` (2 files updated, plus the file
+itself). The security half is attested; the broadcast half is read from the body (the second loop walks all
+player slots calling `cm_QueuePlayerCommand`) and is labelled as read, not attested, in the file header.
+`lb_SendLobbyConfig` has no `.c` of its own — it shares `lb_ExPlayerlist.c`. Recorded in
+`naming_conventions.md` as a new "Lobby command dispatch" section, since it is the anchor for the whole `lb_`
+vocabulary, plus the `0x10014af0` row in the attested table.
+
+**A wrong comment fixed on the way.** The file's header claimed "sends the current player list" — copied
+from `lb_ExPlayerlist`, case 0. This function does not send a player list. Byte-neutral (comment only).
+
+**The rename exposed a real build defect.** After renaming, `split_link.sh` died at exit **157**, its last log
+line reading `0 object(s) padded, 28 too long` — a message from `pad_short_functions.py`, which had
+*succeeded*. The actual cause: `rebrew rename` does not touch gitignored `build/`, so `build.make`,
+`objects1.rsp` and `link.txt` still named the old `.obj`. The subshell running the link discards its output,
+so the error was invisible. **Both guards passed anyway** — the gate, because the residue was unchanged
+(rename is byte-neutral); `rebrew build-check`, because it compares flags on the objects CMake already listed
+and cannot see an object that should have left the list.
+
+Fixed at the root: all four `file(GLOB_RECURSE ...)` calls now pass `CONFIGURE_DEPENDS`. Verified by renaming
+a file and building with no configure step — CMake printed `-- GLOB mismatch!` and regenerated — then
+renaming back byte-identical. Recorded as workflow-traps §25, whose generalisable form is: **a guard that
+compares the contents of a list cannot detect a wrong list** — the same shape as round 1078's `verify --data`
+measuring 37% of the metadata, where the population was assumed and only the contents verified.
+
+**Docs:** workflow-traps §25, `naming_conventions.md` (dispatch table + attested row).
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. `fcn_10014af0` was RELOC 247 before and after.

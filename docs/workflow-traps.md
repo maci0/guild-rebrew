@@ -954,3 +954,45 @@ the message has to name both fixes.
 **Measured outcome:** `#pragma function(memset)` on `gm_AllocSpieler` is not a lead — it cannot be measured
 at all on this tree, because the out-of-line call breaks the composition before any residue number exists.
 That is a stronger statement than "it measured worse".
+
+## 25. `rebrew rename` leaves the CMake tree stale, and both guards miss it (round 1080)
+
+`rebrew rename` renames the `.c` file and rewrites every cross-reference. It does **not** touch `build/`,
+which is gitignored — and `build/` is what `split_link.sh`, `linktest.sh` and `postlink` all read. Rename a
+file and the build system keeps pointing at an object that no longer compiles.
+
+**How it presents, and why that is the expensive part.** `scripts/split_link.sh` died with exit **157** and
+its last log line read:
+
+```
+0 object(s) padded, 28 too long -> build/split_poc/rsp_pad.rsp
+```
+
+That message comes from `pad_short_functions.py`, which *succeeded* — it is simply the last step that prints
+before the link. The eye goes to the pad step, which is innocent. Exit 157 is `128+29`, a signal from the
+subshell running the link inside `( cd build && eval "$cmd" >/dev/null 2>&1 )`, whose output is discarded, so
+the real error is unreadable.
+
+**Both existing guards pass anyway**, which is the finding:
+
+- `scripts/gate.sh` ran `cmake --build` and the **residue was unchanged** (8628 — the rename is byte-neutral),
+  so nothing looked wrong.
+- `rebrew build-check` reported clean. It compares flag tokens in `build.make` against CMake's `Custom`
+  comments, and a renamed source changes the **object set**, not any object's flags. An object that should
+  have left the list is never inspected, because the check only looks at objects that are still there.
+
+**Fix, one word per glob.** All four `file(GLOB_RECURSE ...)` calls in `CMakeLists.txt` now pass
+`CONFIGURE_DEPENDS`, so the build system re-globs and reconfigures by itself. Verified by renaming a file and
+building with no configure step: CMake printed `-- GLOB mismatch!` and regenerated. Without
+`CONFIGURE_DEPENDS` a glob expands once at configure time and never notices a new, renamed or deleted source.
+
+**The transferable lesson: a guard that compares the contents of a list cannot detect a wrong list.** The
+`sections`-style checks in this project — residue per carrier, flags per object, extents per symbol — are all
+content comparisons. Round 1078 found `verify --data` measuring 37% of the metadata and calling it a pass;
+this round found `build-check` inspecting the objects present and never the objects missing. Both are the same
+shape of bug: the population is assumed, the contents are verified. When adding a check, ask what happens to
+it when the *set* changes, not just the values.
+
+**Recovery:** after any `rebrew rename`, re-run the configure step (or rely on `CONFIGURE_DEPENDS` now being
+set). `cmake -B build -S . --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake -DCMAKE_BUILD_TYPE=Release
+-DREBREW_DEBUG_INFO=OFF`.
