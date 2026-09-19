@@ -40,7 +40,7 @@ from __future__ import annotations
 
 import struct
 import sys
-from collections import deque
+from collections import Counter, deque
 from pathlib import Path
 
 import capstone
@@ -173,63 +173,182 @@ def build_cfg(md, code, base, start, size):
     return blocks, edges
 
 
-def canon(blocks, edges):
-    """Order-independent canonical form of the CFG.
+def _wl1(blocks, edges):
+    """1-dimensional colour refinement.  Returns {node: colour}.
 
-    BFS labelling does NOT work here: visiting a node's two successors in the
-    other order changes every downstream label.  Measured on the SAME reference
-    graph, swapping the successor visit order moved 452 of the edge set
-    (round 1006).  Any labelling derived from a traversal is therefore not
-    canonical, and comparing two such labellings reports differences that are
-    artifacts of traversal, not of control flow.
-
-    Instead emit an order-independent summary: for every block, its KIND and its
-    (in-degree, out-degree) profile, plus the set of kind-pairs across edges.
-    Two CFGs with the same block-kind multiset, the same degree profile and the
-    same edge-kind multiset have the same shape at the granularity this question
-    needs.  A finer isomorphism test can be added later if this proves too
-    coarse -- the self-test guards against it being too coarse to notice.
+    Canonical (independent of input order) but NOT a complete isomorphism test:
+    an exhaustive search over all 3-node CFGs found 272,473 non-isomorphic pairs
+    it cannot separate -- the classic 1-WL limitation, hit here by graphs where
+    every node is a 2-successor branch and all successors share one colour
+    (round 1007).  It is used as a fast PARTITION pre-filter; exact
+    isomorphism below decides the answer.
     """
+    def kind(a):
+        ends = blocks[a][1]
+        return "branch2" if ends.startswith("jcc:") else ends
+
+    colour = {a: kind(a) for a in blocks}
+    for _ in range(len(blocks) + 2):
+        sig = {}
+        for a in blocks:
+            succs = []
+            for key in ("taken", "fall"):
+                s = edges.get(a, {}).get(key)
+                succs.append((key, colour[s] if s is not None and s in blocks else None))
+            sig[a] = (kind(a), tuple(sorted(succs, key=lambda x: (x[0], str(x[1])))))
+        uniq = {s: i for i, s in enumerate(sorted(set(sig.values()), key=str))}
+        new = {a: uniq[sig[a]] for a in blocks}
+        if all((colour[a] == colour[b]) == (new[a] == new[b])
+               for a in blocks for b in blocks):
+            return new
+        colour = new
+    return colour
+
+
+def _neighbour_sig(blocks, edges, a, assign, fin):
+    """Signature of a node under a partial assignment, for backtracking."""
+    out = []
+    for key in ("taken", "fall"):
+        s = edges.get(a, {}).get(key)
+        out.append((key, fin[s] if s is not None and s in blocks else None))
+    return tuple(sorted(out, key=lambda x: (x[0], str(x[1]))))
+
+
+def isomorphic(blocks_a, edges_a, blocks_b, edges_b):
+    """Exact isomorphism check by backtracking within WL-1 colour classes.
+
+    1-WL is incomplete (round 1007), so this decides.  Nodes are matched only
+    within the same WL-1 colour; within a class, candidates are tried in a
+    deterministic order and adjacency is verified against the partial map.  Real
+    function CFGs are far from regular, so the colour classes are small.
+    """
+    if len(blocks_a) != len(blocks_b):
+        return False
+    ca = _wl1(blocks_a, edges_a)
+    cb = _wl1(blocks_b, edges_b)
+    # Do NOT compare colour VALUES across graphs: _wl1 interns signatures to
+    # dense ids per call, so ids from two calls are unrelated.  Comparing them
+    # rejected the unmutated build against the reference for gm_AllocSpieler
+    # (round 1007).  Compare the PARTITION SHAPE (class-size multiset) instead,
+    # which is id-independent, and let the backtracking below decide.
+    if sorted(Counter(ca.values()).values(), reverse=True) != \
+       sorted(Counter(cb.values()).values(), reverse=True):
+        return False
+    groups = {}
+    for n, c in ca.items():
+        groups.setdefault(c, []).append(n)
+    order = sorted(groups, key=lambda c: len(groups[c]))
+    b_by_colour = {}
+    for n, c in cb.items():
+        b_by_colour.setdefault(c, []).append(n)
+
+    def kind_of(blocks, a):
+        ends = blocks[a][1]
+        return "branch2" if ends.startswith("jcc:") else ends
+
+    # candidate list per colour, stable
+    cand = {c: sorted(b_by_colour.get(c, [])) for c in order}
+    deg = {a: (sum(1 for k in ("taken", "fall") if edges_a.get(a, {}).get(k) in blocks_a),
+               sum(1 for k in ("taken", "fall") if edges_b.get(a, {}).get(k) in blocks_b))
+           for a in blocks_a}
+
+    # Recurse over a FLAT list of (colour, node) pairs.  An earlier revision
+    # recursed per colour and iterated `for a in sorted(groups[c])` with only an
+    # `a in mapping` test, so within one colour class it re-tried nodes already
+    # placed by an outer call and mis-assigned them -- which made
+    # ServerMainThread (identical WL-1 partition, identical kind counts) report
+    # non-isomorphic (round 1007).
+    slots = []
+    for c in order:
+        for a in sorted(groups[c]):
+            slots.append((c, a))
+
+    mapping = {}
+    used = set()
+
+    def outdeg(blocks, edges, n):
+        return sum(1 for k in ("taken", "fall") if edges.get(n, {}).get(k) in blocks)
+
+    def bt(i):
+        if i == len(slots):
+            return True
+        c, a = slots[i]
+        for b in cand[c]:
+            if b in used:
+                continue
+            if kind_of(blocks_a, a) != kind_of(blocks_b, b):
+                continue
+            if outdeg(blocks_a, edges_a, a) != outdeg(blocks_b, edges_b, b):
+                continue
+            ok = True
+            for key in ("taken", "fall"):
+                sa = edges_a.get(a, {}).get(key)
+                sb = edges_b.get(b, {}).get(key)
+                if (sa in blocks_a) != (sb in blocks_b):
+                    ok = False
+                    break
+                if sa in blocks_a and sa in mapping and mapping[sa] != sb:
+                    ok = False
+                    break
+                # also check the reverse direction: any already-mapped
+                # predecessor of this pair must agree
+                for pa, pb in list(mapping.items()):
+                    for k2 in ("taken", "fall"):
+                        if edges_a.get(pa, {}).get(k2) == a:
+                            if edges_b.get(pb, {}).get(k2) != b:
+                                ok = False
+                                break
+                    if not ok:
+                        break
+                if not ok:
+                    break
+            if not ok:
+                continue
+            mapping[a] = b
+            used.add(b)
+            if bt(i + 1):
+                return True
+            del mapping[a]
+            used.discard(b)
+        return False
+
+    return bt(0)
+
+
+def canon(blocks, edges):
+    """Kept for callers that want a cheap fingerprint; NOT used for verdicts."""
     if not blocks:
         return (), ()
-    indeg = {a: 0 for a in blocks}
-    kinds = {}
-    for a, (n, ends) in blocks.items():
-        kinds[a] = "branch2" if ends.startswith("jcc:") else ends
-    for a, es in edges.items():
-        for key in ("taken", "fall"):
-            s = es.get(key)
-            if s is not None and s in blocks:
-                indeg[s] += 1
-    profile = sorted((kinds[a], indeg[a], sum(
-        1 for key in ("taken", "fall")
-        if edges.get(a, {}).get(key) in blocks)) for a in blocks)
-    edge_kinds = sorted((kinds[a], kinds[s])
-                        for a, es in edges.items()
-                        for key in ("taken", "fall")
-                        for s in [es.get(key)]
-                        if s is not None and s in blocks)
-    return tuple(profile), tuple(edge_kinds)
+    colour = _wl1(blocks, edges)
+    return tuple(sorted(colour.values())), ()
 
 
 def compare(md, va, size):
     rcode, rva = textof(REFERENCE)
     bcode, bva = textof(BUILT)
-    return (canon(*build_cfg(md, rcode, rva, va, size)),
-            canon(*build_cfg(md, bcode, bva, va, size)))
+    rb, re_ = build_cfg(md, rcode, rva, va, size)
+    bb, be = build_cfg(md, bcode, bva, va, size)
+    return rb, re_, bb, be, isomorphic(rb, re_, bb, be)
 
 
 def self_test(md) -> bool:
-    """Prove the tool reports a difference when the control flow really differs.
+    """Prove the tool discriminates: a graph vs ITSELF is isomorphic, and the
+    same graph with one branch redirected is not.
 
-    Redirects one branch in an in-memory copy of the build so its successor
-    changes, and checks the canonical edge set changes.  Without this, an
-    always-zero tool would look like a clean result.
+    An earlier revision asserted that the unmutated *build* is isomorphic to the
+    reference, which is false for gm_AllocSpieler (and is the tool's finding, not
+    a bug).  The self-test must not assume the answer it is testing for.
     """
-    bcode, bva = textof(BUILT)
+    rcode, rva = textof(REFERENCE)
     va, size = 0x10018850, 3696
-    ref_form = compare(md, va, size)[0]
+    rb, re_ = build_cfg(md, rcode, rva, va, size)
 
+    ok = True
+    if not isomorphic(rb, re_, rb, re_):
+        print("SELF-TEST FAIL: a graph is not isomorphic to itself")
+        ok = False
+
+    bcode, bva = textof(BUILT)
     mutated = bytearray(bcode)
     patched = None
     ins = list(md.disasm(bytes(mutated[va - bva:va - bva + size]), va))
@@ -248,12 +367,14 @@ def self_test(md) -> bool:
     if patched is None:
         print("SELF-TEST INCONCLUSIVE: no 6-byte conditional to patch")
         return False
-    mut_form = canon(*build_cfg(md, bytes(mutated), bva, va, size))
-    changed = mut_form != ref_form
-    print("SELF-TEST: redirected branch at 0x%x -> canonical form %s (%d blocks)"
-          % (patched, "CHANGED (tool discriminates)" if changed
-             else "UNCHANGED (TOOL IS BROKEN)", mut_form[1] and len(mut_form[0]) or 0))
-    return changed
+    mb, me = build_cfg(md, bytes(mutated), bva, va, size)
+    changed = not isomorphic(rb, re_, mb, me)
+    if not changed:
+        print("SELF-TEST FAIL: a redirected branch was not detected")
+        ok = False
+    print("SELF-TEST: reflexive=yes; redirected branch at 0x%x detected=%s"
+          % (patched, "yes" if changed else "NO"))
+    return ok
 
 
 def main():
@@ -267,14 +388,13 @@ def main():
     for name, va, size in CARRIERS:
         if want and name not in want:
             continue
-        (rprof, redge), (bprof, bedge) = compare(md, va, size)
-        if (rprof, redge) == (bprof, bedge):
-            print("%-34s %6d %6d  SAME" % (name, len(rprof), len(bprof)))
+        rb, re_, bb, be, same = compare(md, va, size)
+        if same:
+            print("%-34s %6d %6d  SAME" % (name, len(rb), len(bb)))
         else:
             differ += 1
-            dp = abs(len(rprof) - len(bprof))
-            print("%-34s %6d %6d  DIFFERS (profile delta %d, edges %d vs %d)"
-                  % (name, len(rprof), len(bprof), dp, len(redge), len(bedge)))
+            print("%-34s %6d %6d  DIFFERS (blocks %d vs %d)"
+                  % (name, len(rb), len(bb), len(rb), len(bb)))
     print("\ncarriers whose control flow differs: %d of %d" % (differ, len(CARRIERS)))
     return 0
 

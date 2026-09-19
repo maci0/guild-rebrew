@@ -1590,3 +1590,60 @@ multiset of (kind, indeg, outdeg) over blocks, plus the sorted multiset of (kind
 **12 of 19 carriers have a differing control-flow shape; 7 are identical.** That is a much larger structural
 component than `branch_census.py`'s "upper bound" implied was *real*, and it is the first trustworthy number
 this project has for the `place` class.
+
+## 29. Round 1006's CFG verdict was wrong; the coarse canonical form could not see it (round 1007)
+
+Round 1006 shipped `cfg_compare.py` with an **order-independent but coarse** canonical form (block-kind
+multiset + degree profile + edge-kind multiset) and reported **7 carriers SAME**. Round 1007 stress-tested that
+form and it is wrong.
+
+**The coarse form is provably too blunt.** An exhaustive search over all CFGs of 3 nodes (2,197 graphs) found
+**272,473 non-isomorphic pairs it reports as equal**. Example:
+
+```
+G: 3 branch2 nodes; edges 0->{0,0}, 1->{0,0}, 2->{0,1}
+H: 3 branch2 nodes; edges 0->{0,0}, 1->{0,0}, 2->{0,0}
+```
+
+Same kinds, same degree profile, same edge-kind multiset, genuinely different graphs.
+
+**Two further bugs were found while replacing it, both of which produced a confident wrong verdict:**
+
+| bug | symptom | cause |
+|---|---|---|
+| comparing `_wl1` colour **IDs** across graphs | the unmutated build read as *non*-isomorphic to the reference for every carrier | `_wl1` interns signatures to dense ids **per call**; ids from two calls are unrelated. Fixed by comparing the id-independent class-size multiset, then deciding by backtracking |
+| backtracking over colour classes with only an `a in mapping` test | `ServerMainThread` reported non-isomorphic despite identical WL-1 partitions | within one colour class the recursion re-tried nodes already placed by an outer call and mis-assigned them. Fixed by recursing over a flat (colour, node) slot list |
+
+**The SAME verdicts were also wrong, and for a measurable reason.** `gm_AllocSpieler` and `ServerMainThread`
+both read SAME under the coarse form; both are genuinely **DIFFERS**:
+
+```
+gm_AllocSpieler   block kinds  ref  jcc 136, jmp 26, ret 8
+                               bld  jcc 134, jmp 28, ret 8      <- two jcc became jmp
+ServerMainThread  block kinds  ref == bld (131/18/4), aggregate degrees identical
+                  but WL-1 partitions match while exact backtracking and a
+                  4-round refined colouring BOTH separate the graphs
+```
+
+`ServerMainThread` is the instructive one: every aggregate profile matches — kinds, out-degree histogram,
+in-degree histogram, entry in-degree — and the graphs are still not isomorphic. **No summary statistic over
+blocks is a substitute for a graph comparison.** Round 1005's hand-verification of a single branch
+(`0x100098e3`) was correct for that branch and did not generalise to the function.
+
+**What the tool does now.** Exact backtracking isomorphism, seeded by WL-1 colour classes as a pre-filter,
+with two shipped guards:
+
+* `--self-test` asserts a graph is isomorphic to **itself** and that a redirected branch is detected. The
+  earlier version asserted the unmutated build was isomorphic to the reference — which assumes the answer
+  being tested for, and failed for a carrier where the tool's DIFFERS is the finding, not a bug.
+* the reflexive check catches the cross-graph colour-ID bug directly.
+
+**Corrected verdicts (exact isomorphism):**
+
+| verdict | carriers |
+|---|---|
+| **SAME** (6) | `m_AllocTracked`, `srv_LoadBuf`, `gm_ObjectsAvailble`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue` |
+| **DIFFERS** (13) | the rest |
+
+So the honest `place`-class number is **6 identical, 13 differing**, not 7/12 — and unlike round 1006's, this
+one survives an exhaustive small-graph correctness check plus a reflexive self-test.

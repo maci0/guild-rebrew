@@ -28109,3 +28109,40 @@ census implied, and it is the first version of this measurement that survives bo
 
 **Note:** a stray `build/server.dll.bak` created by a failed negative test was removed and the deliverable
 verified byte-identical to the pre-test copy before deletion.
+
+## Round 1007 — round 1006's CFG tool was wrong; replaced with exact isomorphism (two more bugs found)
+
+Round 1006 shipped `cfg_compare.py` and reported 7 carriers with identical control flow. **That verdict was
+unsound**, and this round found out why by stress-testing the tool instead of using it.
+
+**The coarse canonical form is provably too blunt.** Exhaustive search over all CFGs of 3 nodes (2,197 graphs):
+**272,473 non-isomorphic pairs it reports as equal.** The form was block-kind multiset + degree profile +
+edge-kind multiset, which cannot distinguish graphs that differ only in *where* an edge attaches among
+same-kind, same-degree nodes.
+
+**Replacing it surfaced two more bugs, each of which had produced a confident wrong answer:**
+
+| bug | symptom | fix |
+|---|---|---|
+| comparing WL-1 colour **IDs** across graphs | unmutated build read *non*-isomorphic to the reference for every carrier | `_wl1` interns to dense ids per call; compare the class-size multiset instead |
+| backtracking with only an `a in mapping` test | `ServerMainThread` non-isomorphic despite identical WL-1 partitions | recurse over a flat (colour, node) slot list so a class is not re-entered |
+
+**The corrected answer, verified three ways.** `gm_AllocSpieler` and `ServerMainThread` — both SAME in round
+1006 — are genuinely DIFFERS. For `gm_AllocSpieler` the block kinds differ directly
+(`ref jcc 136/jmp 26` vs `bld jcc 134/jmp 28`). For `ServerMainThread` every aggregate matches (kinds,
+out-degree histogram, in-degree histogram, entry in-degree) yet **exact backtracking and an independent
+4-round refined colouring both separate the graphs** — no summary statistic over blocks substitutes for a
+graph comparison. → measure-traps §29.
+
+Round 1005's hand-verification of `ServerMainThread`'s branch at `0x100098e3` was correct *for that branch*
+and did not generalise to the function.
+
+**Corrected `place`-class number: 6 SAME, 13 DIFFERS** (was reported 7/12). `m_AllocTracked`, `srv_LoadBuf`,
+`gm_ObjectsAvailble`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue` are identical.
+
+**Both guards now ship and pass:** `--self-test` asserts a graph is isomorphic to itself and that a redirected
+branch is detected; the earlier version asserted the unmutated build was isomorphic to the reference, which
+assumes the answer under test and failed for a carrier where DIFFERS is the finding.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
