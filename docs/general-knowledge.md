@@ -280,10 +280,26 @@ that fix the coverage figure was absent entirely and had to be reconstructed by 
 `section_symbol_bytes` on both images and counting `ref_sizes`; see `docs/measure-traps.md` §51 for why a
 zero in a diff-shaped result is never a statement about the whole tree.
 
-## Section-by-section parity: every non-`.text` section is byte-identical (round 1089)
+## Section-by-section parity: the shipped file is byte-identical outside `.text` — BY COPYING, NOT BY COMPILING (round 1089, corrected round 1092)
 
-The objective has two halves — data bytes and `.text` residue. This is the direct measurement of the data
-half, taken on the shipped deliverable rather than inferred from a tool summary:
+**Read the raw-link column before drawing any conclusion from this.** The zeros below are produced by
+`rebrew postlink` writing those sections from the layout package (`layout/server.dll/*.hex`), which holds the
+reference's own bytes. They are **not** evidence that the compiler and linker reproduce them. Round 936
+recorded this correctly; the round-1089 version of this entry did not, and is corrected here.
+
+| section | shipped deliverable | **raw link (real compile + link), pre-fixer** |
+|---|---|---|
+| `.text` | differing 8,628 | differing **14,347** |
+| `.rdata` | differing 0 | differing **1,268** |
+| `.data` | differing 0 | differing **21,481** |
+| `.reloc` | differing 0 | differing **7,103** |
+
+"A zero here is a tautology, not a match" — and `rebrew verify --data` says so itself, in its own output:
+*"server.dll's .data is byte-identical to the reference. If the build postlinks by copying that section, these
+results are tautological — point --built at the raw link instead."*
+
+The measurements below are still true **of the shipped artifact**, and that is the artifact the objective
+names. They simply cannot be evidence about codegen. For the shipped deliverable:
 
 | section | SizeOfRawData | differing bytes | SHA-256 (ref = built) |
 |---|---|---|---|

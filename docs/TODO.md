@@ -31273,7 +31273,7 @@ opened when the denominator first became visible.
 
 | criterion | status |
 |---|---|
-| every data byte matching | **satisfied**, independently verified by section hash |
+| every data byte matching | **satisfied in the shipped file — BY COPYING, not by compiling**; the raw link differs on 21,481 `.data` / 1,268 `.rdata` / 7,103 `.reloc` bytes, which `rebrew postlink` overwrites from the layout package. See the correction at round 1092. |
 | `.text` VirtualSize exactly `0x22846` | **satisfied** (`0x22846` in both) |
 | import table exactly 100 | **satisfied** |
 | `scripts/gate.sh` green | **satisfied** |
@@ -31368,7 +31368,7 @@ recorded where the work stands, so the next session does not have to re-derive a
 
 | criterion | status |
 |---|---|
-| every data byte matching | **met** — §round 1089, verified by section hash |
+| every data byte matching | **met in the shipped file, by COPYING** — `postlink` writes `.rdata`/`.data`/`.reloc` from `layout/server.dll/*.hex`. The raw link differs on 21,481 / 1,268 / 7,103 bytes. Not evidence about codegen. |
 | `.text` VirtualSize exactly `0x22846` | **met** |
 | import table exactly the reference 100 | **met** |
 | `scripts/gate.sh` green | **met** |
@@ -31445,7 +31445,8 @@ working tree          clean
 
 **What is done.** Every clause of the objective is met except the residue clause:
 
-- every data byte matching — `.rdata`, `.data`, `.reloc` all **0 differing**, verified by section hash
+- every data byte matching — `.rdata`, `.data`, `.reloc` all **0 differing** in the shipped file, by
+  `postlink` copying them from the layout package; the raw link differs on 1,268 / 21,481 / 7,103 bytes
 - `.text` VirtualSize exactly `0x22846` — exact
 - import table exactly 100 — exact
 - `scripts/gate.sh` green; wine load + `Init`/`Exit` resolve
@@ -31488,3 +31489,50 @@ permanent false positives, and seven rebrew defects fixed with tests — `verify
 `CONFIGURE_DEPENDS` on every source glob (`5fe40a71`), asm extent truncation (`5affe80c`). Five measurement
 traps recorded (`measure-traps` §51-§54), each an instance of one family: the population is assumed while only
 the values are checked.
+
+## Round 1093 — correction: "every data byte matching" is by COPYING, and rounds 1089/1091 overstated it
+
+Asked directly whether the zero differences in `.data`/`.rdata`/`.reloc` mean the compiler and linker produce
+matching sections, the answer is **no**, and the question exposed an overstatement I had introduced two rounds
+earlier.
+
+**The measurement that settles it.** Both artifacts, per section, against the reference:
+
+| section | raw link (real compile + link, pre-fixer) | shipped deliverable |
+|---|---|---|
+| `.text` | **14,347** differing | 8,628 |
+| `.rdata` | **1,268** differing | 0 |
+| `.data` | **21,481** differing | 0 |
+| `.reloc` | **7,103** differing | 0 |
+
+`rebrew postlink` produces the right-hand column by writing those sections from the layout package
+(`layout/server.dll/data.hex`, `reloc.hex`, `iat.hex`, `header.hex`, …), which holds the reference's own bytes.
+The raw link produces 30,123 bytes that the fixers overwrite. So the zeros are a **tautology about the shipped
+file**, not a match produced by compilation.
+
+**`rebrew verify --data` says so itself** — its own output carries the warning:
+
+> server.dll's .data is byte-identical to the reference. If the build postlinks by copying that section, these
+> results are tautological — point --built at the raw link instead.
+
+**This was already recorded correctly at round 936** ("satisfied by copying, not compiling — stated plainly"),
+with the same raw-link figures. Rounds 1089 and 1091 wrote it up as "every data byte matching — satisfied,
+independently verified by section hash" and as an audit row reading **met**, which reads as a codegen claim.
+That was wrong, and it is the same failure this project has now recorded five times in `measure-traps`: **the
+population was assumed while only the values were checked.** Here the population was "bytes our build produces",
+and the artifact measured was one where those bytes had been replaced.
+
+**Corrected in three places:** `general-knowledge.md`'s parity section (now leads with the raw-link table and
+names the copying), and the round-1089 and round-1091 audit tables in this file (both now state the mechanism
+and both figures). The shipped-file measurements themselves stand — they are true of the deliverable, which is
+what the objective names; they simply cannot be evidence about codegen.
+
+**What the objective's data clause actually means, precisely.** The shipped `server.dll` has every data byte
+matching the reference, and that is achieved by `postlink` transcription rather than by compilation. That
+satisfies the clause's letter for the artifact it names, and it is not a claim that the C source reproduces
+those sections. Any future statement about data-section codegen must use the raw-link column.
+
+**Docs:** general-knowledge (corrected), TODO rounds 1089/1091 (corrected), this entry.
+
+**State:** unchanged — gate pass, lint 188/188, verify 281/283 (264 byte-matched), residue 8628 (`0x21b4`),
+imports 100, wine load OK, deliverable `md5 3febd2c4ca080a3749c12d4bf7452fbe`, tree clean.
