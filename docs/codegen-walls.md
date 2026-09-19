@@ -1508,3 +1508,48 @@ describe and why there is no shortcut to them.
 **Value of a negative result here.** Six rounds have re-confirmed individual walls; this is the first that
 tests whether the *set* has a shared predictor, and it does not. That is worth recording precisely because a
 positive correlation would have been the cheapest possible lead.
+
+### 28. `m_AllocTracked`'s inlined `strcpy` differs from the reference in TWO ways at 0x100066a0 (round 1066)
+
+The row's header documents its `memset`/`rep stos` side exhaustively (`#pragma function(memset)` mandated,
+three intrinsic spellings all regressed) and mentions `0x100066a0-0x100066b7` only as the *reason*
+`#pragma function(memset, strcpy)` was rejected. Decoding that address in **the shipped form** shows a live
+divergence the record does not describe — the reference and our build emit msvc6's inlined `strcpy`
+differently:
+
+```
+reference                     ours
+0x100066a0 cld                0x100066a0 not  ecx
+0x100066a1 repne scasb        0x100066a2 sub  edi, ecx
+0x100066a3 not   ecx          0x100066a4 mov  eax, ecx
+0x100066a5 sub   edi, ecx     0x100066a6 shr  ecx, 2      <-- ours: here
+0x100066a7 mov   eax, ecx     0x100066a9 mov  esi, edi
+0x100066a9 mov   esi, edi     0x100066ab mov  edi, edx
+0x100066ab mov   edi, edx     0x100066ad rep  movsd
+0x100066ad shr   ecx, 2       0x100066af mov  ecx, eax     <-- ref: here
+0x100066b0 rep   movsd        ...
+```
+
+**Two independent differences:**
+
+1. **The reference has `cld; repne scasb` (4 bytes) at the head of the sequence; ours does not.**
+2. **`shr ecx,2` is scheduled differently** — the reference emits it *after* `mov edi,edx`; we emit it *after*
+   `mov eax,ecx`, i.e. two instructions earlier.
+
+**21 of the 25 bytes at `0x100066a0..0x100066b9` differ.** The carrier's 92 residue bytes form **12 clusters**
+across the function (`+0x11`, `+0x2e`, `+0xfa`, `+0x113..0x128`, `+0x12d..0x141`, `+0x147..0x14d`, `+0x179`,
+`+0x19f`, `+0x1d5`, `+0x1fb`, `+0x22d`, `+0x252..0x265`), so this site is one cluster, not the whole row.
+
+**Why this is worth recording rather than probing.** `cld` before `repne scasb` is *optional* — the ABI
+guarantees DF=0 on entry — so its presence is a codegen choice, not a semantic requirement. The `shr ecx,2`
+position is a scheduler decision. Both are the class this project has measured repeatedly as unreachable from
+C (shapes §§60, 109; measure-traps §44). The row's header already establishes that the two available pragma
+splits are mutually exclusive, and that the target's combination "was not built with the msvc6 SP6 codegen
+this project has" — which is the *evidence-based* claim this divergence independently supports: the
+reference's `strcpy` expansion has a `cld` preamble our compiler does not emit there.
+
+**Judgement:** record, do not probe. The divergence is a codegen difference in an intrinsic expansion, on a
+row whose every reachable pragma/type spelling has been measured and the `memset` half is closed. What is new
+is that the `strcpy` half is now precisely located and characterised, rather than cited.
+
+`src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`

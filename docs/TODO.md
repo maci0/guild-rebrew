@@ -30322,3 +30322,44 @@ the only improvement available is to make the message name both fixes — which 
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1066 — located the `strcpy`-inlining divergence on m_AllocTracked; it has two independent causes
+
+Surveyed pragma usage after round 1064 (`m_AllocTracked.c` carries **10 pragmas**, the most in the tree). Its
+header documents the `memset` half exhaustively and mentions `0x100066a0-0x100066b7` only as the reason
+`#pragma function(memset, strcpy)` was rejected. **Decoding that address in the shipped form shows a live
+divergence the record does not describe** — the reference and our build emit msvc6's inlined `strcpy`
+differently:
+
+```
+reference                     ours
+0x100066a0 cld                0x100066a0 not  ecx
+0x100066a1 repne scasb        0x100066a2 sub  edi, ecx
+0x100066a3 not   ecx          0x100066a4 mov  eax, ecx
+0x100066a5 sub   edi, ecx     0x100066a6 shr  ecx, 2      <- ours schedules it here
+0x100066a9 mov   esi, edi     0x100066a9 mov  esi, edi
+0x100066ab mov   edi, edx     0x100066ab mov  edi, edx
+0x100066ad shr   ecx, 2       0x100066ad rep  movsd
+0x100066b0 rep   movsd        ...                          <- reference schedules it here
+```
+
+**Two independent differences:** the reference has **`cld; repne scasb`** (4 bytes) at the head where ours has
+nothing, **and** `shr ecx,2` is scheduled two instructions apart.
+
+**Quantified:** 21 of the 25 bytes at that site differ. The carrier's **92 residue bytes form 12 clusters**
+(`+0x11`, `+0x2e`, `+0xfa`, `+0x113..0x128`, `+0x12d..0x141`, `+0x147..0x14d`, `+0x179`, `+0x19f`, `+0x1d5`,
+`+0x1fb`, `+0x22d`, `+0x252..0x265`), so this is one cluster of twelve, not the whole row.
+
+**Recorded, not probed — and the reasoning matters.** `cld` before `repne scasb` is **optional** (the ABI
+guarantees DF=0 on entry), so its presence is a codegen choice rather than a semantic need; the `shr ecx,2`
+position is a scheduler decision. Both are the class this project has measured repeatedly as unreachable from
+C on this compiler. The header already establishes the two pragma splits are mutually exclusive and states the
+target's combination *"was not built with the msvc6 SP6 codegen this project has"* — this divergence is
+**independent supporting evidence** for that claim: the reference's `strcpy` expansion carries a `cld`
+preamble our compiler does not emit there.
+
+Recorded as `codegen-walls.md` §28. What is new is that the `strcpy` half is now precisely located and
+characterised rather than cited as a rejection reason.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
