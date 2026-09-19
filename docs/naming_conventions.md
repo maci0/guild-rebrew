@@ -360,6 +360,25 @@ Verbs are English. Nouns are German when they name game concepts:
 | Load     | Read from file/stream (`amt_fio_LoadAemter`, `ls_LoadCharacter`) |
 | Save     | Write to file/stream (`amt_fio_SaveAemter`)       |
 
+### Filter callbacks
+
+A function the reference never `call`s directly is still reachable: its **address** is passed as an argument
+and the callee invokes it indirectly. `FindSlotEntryFiltered` (`0x10010710`) takes one as its fourth
+parameter and calls it as
+
+```c
+if (((int (__cdecl*) (void*, void*)) filter)(filter_arg, cursor)) { ... }
+```
+
+so the callback contract is `filter(arg, entry)`, non-zero meaning *accept*. Three functions pass an address
+there (`gv_SpawnEntities.c:41`, `gv_HireProductionWorker.c:55`, `gv_MoveSlotEntry.c:121`).
+
+**This is a naming trap worth knowing.** `grep` for `call` finds none of them, the catalogue carries no name
+for them (`fcn.10010700`), and a header comment can end up asserting "It has no caller" — which is what
+happened here and stood for many rounds. Before concluding a tiny unnamed function is dead code, grep for its
+**address** in the tree, not just for a call. Give it the `_eval_` predicate name and record the callee's
+callback signature in the header.
+
 ### German Noun Vocabulary
 
 | German          | Abbreviation | English          | Example                    |
@@ -488,6 +507,7 @@ rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
 | `0x1000d260` | `cm_ChkCutsceneReady` | already correct |
 | `0x1000f030` | `cm_ExKillSpieler` | already correct |
 | `0x1000fb30` | `cm_ExCreateGeb` | already correct |
+| `0x10010700` | `gv_eval_SlotFrei` | renamed from `fcn_10010700`; a `FindSlotEntryFiltered` filter callback (address taken by 3 callers, so no `call` reaches it); true when the entry's owner id at +4 is -1 |
 | `0x100109d0` | `gv_AllocGraveyardField` | renamed from `gv_AllocField` |
 | `0x10011bf0` | `gv_ExAllocGraveyardWorker` | already correct |
 | `0x10014070` | `ls_ID2Ptr` | already correct |

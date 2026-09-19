@@ -54,15 +54,33 @@ void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job)
 	return 0;
 }
 
-/* 14-byte unnamed helper the reference has at 0x10010700, between this
- * function and FindSlotEntryFiltered.  It has no caller and no catalog name,
- * but it is part of the same translation unit in the reference, and the 7
+/* gv_eval_SlotFrei -- 14 bytes at 0x10010700, between this function and
+ * FindSlotEntryFiltered, in the same translation unit in the reference.  The 7
  * bytes of `nop` that separate the two are msvc6's 16-byte intra-section
- * function alignment.  Returns whether the dword at p+4 is -1. */
+ * function alignment.
+ *
+ * It is a filter CALLBACK, not an unreferenced helper.  An earlier version of
+ * this comment said "no caller", which was wrong: it has three, none of them a
+ * `call` instruction, because all three pass its ADDRESS as the fourth argument
+ * of FindSlotEntryFiltered -- gv_SpawnEntities.c:41, gv_HireProductionWorker.c:55
+ * and gv_MoveSlotEntry.c:121.  That is also why the catalogue has no name for it
+ * and why the callee invokes it indirectly:
+ *
+ *     if (((int (__cdecl*) (void*, void*)) filter)(filter_arg, cursor)) { ... }
+ *
+ * The contract is therefore the callee's: `filter(arg, entry)` returns non-zero
+ * to accept `entry`.  This one accepts an entry whose owner id is -1, i.e. one
+ * with no owner assigned.
+ *
+ * Named for that.  `_eval_` is this tree's predicate idiom
+ * (`gm_eval_SlotVoll`, `gm_eval_ObjektBesitzer`); German `frei` parallels that
+ * name's `Voll`, and the +4 field is the owner id -- gv_ReplaceProductionWorker
+ * tests the same dword with `!= -1` before resolving it through
+ * gm_ResolveEntityById and storing it into `slot + 4`. */
 
 // FUNCTION: SERVER 0x10010700
 
-int __cdecl fcn_10010700(void* unused, int* p)
+int __cdecl gv_eval_SlotFrei(void* unused, int* p)
 {
 	(void) unused;
 	return *(int*) ((char*) p + 4) == -1;

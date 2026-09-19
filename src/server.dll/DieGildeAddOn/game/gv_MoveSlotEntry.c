@@ -16,6 +16,7 @@ extern unsigned char g_current_season;
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
+int __cdecl gv_eval_SlotFrei(void* unused, int* p);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
 int __cdecl gm_SubObjectNoKill(int a, int b, int c);
@@ -118,7 +119,7 @@ int __cdecl gv_MoveSlotEntry(void* a)
 	/* The source bound is computed before the call (0x10011a4d) and spilled
 	 * to [esp+0x10]. */
 	src_count = g_worker_entry_count[*(int*) ((char*) cmd + 8)];
-	found2 = FindSlotEntryFiltered(a, rec2, 0, (void*) 0x10010700,
+	found2 = FindSlotEntryFiltered(a, rec2, 0, (void*) gv_eval_SlotFrei,
 	                               *(int*) ((char*) cmd + 0xd));
 	if (found2 == 0)
 		goto fail7;

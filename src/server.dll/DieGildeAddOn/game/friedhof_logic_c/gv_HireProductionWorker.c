@@ -11,6 +11,7 @@
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 /* 189 4-byte entries per object type; only the low word of each entry is read. */
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+extern int __cdecl gv_eval_SlotFrei(void* unused, int* p);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, int d, int e);
 extern int __cdecl gm_SubObjectNoKill(int a, int b, int c); /* 0x10016ea0 */
@@ -52,7 +53,7 @@ int __cdecl gv_HireProductionWorker(void* req)
 	if (*(int*) ((char*) req + 0xc) < 0 || *(int*) ((char*) req + 0xc) > 3) {
 		return -5;
 	}
-	slot = FindSlotEntryFiltered(entity2, entity1, 0, 0x10010700, *(int*) ((char*) req + 0xc));
+	slot = FindSlotEntryFiltered(entity2, entity1, 0, (void*) gv_eval_SlotFrei, *(int*) ((char*) req + 0xc));
 	if (!slot) {
 		return -7;
 	}

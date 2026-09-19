@@ -30858,3 +30858,58 @@ measuring 37% of the metadata, where the population was assumed and only the con
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. `fcn_10014af0` was RELOC 247 before and after.
+
+## Round 1081 — the "dead" 14-byte helper has three callers; named `gv_eval_SlotFrei`
+
+This round took the remaining naming axis. The 32 distinct `fcn_`-style placeholders in `server.dll` are **not
+31 in-scope targets**: 29 are in `crt_region/` (LIBCMT library code, explicitly out of scope, and already
+annotated with their real CRT names — `__sbh_alloc_new_region`, `strcat`, `__cmsg_write`) and two more are
+stale *comment* mentions of functions that already have names. Exactly one genuine in-scope placeholder
+remained: `fcn_10010700`.
+
+**The file header was wrong, and had been for many rounds.** It read "It has no caller and no catalog name",
+which is why nobody probed it. It has **three** callers:
+
+| caller | line |
+|---|---|
+| `gv_SpawnEntities.c` | 41 |
+| `gv_HireProductionWorker.c` | 55 |
+| `gv_MoveSlotEntry.c` | 121 |
+
+None is a `call` instruction, because all three pass its **address** as the fourth argument of
+`FindSlotEntryFiltered`, which invokes it indirectly:
+
+```c
+if (((int (__cdecl*) (void*, void*)) filter)(filter_arg, cursor)) { ... }
+```
+
+That is also why the catalogue has no name for it. A `grep` for `call` finds nothing; the address is the only
+handle. **The transferable rule, now recorded in `naming_conventions.md`: before concluding a tiny unnamed
+function is dead code, grep for its ADDRESS in the tree, not just for a call site.**
+
+**Named from the callee's contract.** The callback accepts an entry; this one accepts when the owner id at
+`+4` is `-1`. That field is the owner: `gv_ReplaceProductionWorker` tests the same dword with `!= -1`, resolves
+it through `gm_ResolveEntityById` and stores it into `slot + 4`. So `-1` means *unowned*, and the predicate is
+"slot entry is free". Named `gv_eval_SlotFrei` — `_eval_` is this tree's attested predicate idiom
+(`gm_eval_SlotVoll` at `0x10019d30`, `gm_eval_ObjektBesitzer`), German `frei` parallels `SlotVoll`. The header
+comment was rewritten with the real contract and its three callers. Also noted: the doc's gloss of `_eval_` as
+"a predicate" is loose — `gm_eval_SlotVoll` returns a capacity *number*, not a boolean.
+
+**The three call sites now use the symbol instead of the raw literal.** Measured at the link, together:
+`.text total 8628 -> 8628 (+0)`. Not assumed — `scripts/linktest.sh` on all three callers, plus
+`rebrew verify` showing `gv_eval_SlotFrei` EXACT 14 and `gv_SpawnEntities` RELOC 370 delta 0.
+
+**A stale-object trap on the way.** The first link failed with `error LNK2001: unresolved external symbol
+_gv_eval_SlotFrei`, and it presented as `build/split_poc.map` being 0 bytes with the pad step reporting
+`0 object(s) padded, 0 too long` against the usual 28 — because the pad step reads the map the link writes, so
+a failed link silently disables padding too. The cause was an object from the rename that had not been
+recompiled; `cmake --build` fixed it. Worth recording because the symptom (map empty, pad finds nothing) points
+at the wrong script entirely. This is the same family as round 1080's workflow-traps §25: the failure surfaces
+in the step *after* the one that broke.
+
+**Docs:** `naming_conventions.md` — new "Filter callbacks" subsection, the `0x10010700` attested row, and the
+callback-signature convention. `docs/TODO.md` (this entry).
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged.

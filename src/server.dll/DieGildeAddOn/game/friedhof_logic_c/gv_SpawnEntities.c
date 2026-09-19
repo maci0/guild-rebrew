@@ -9,6 +9,7 @@ extern int g_next_object_id;
 int __cdecl gm_RandomMod(int range);
 void* __cdecl FindSlotEntryFiltered(void* filter_arg, void* entity, void* cursor,
                                     void* filter, int type);
+int __cdecl gv_eval_SlotFrei(void* unused, int* p);
 
 /* Spawns up to *count* graveyard workers for the entity.  Validates the
  * entity type (0x1d) and maturity level (1..3), then fills each spawned
@@ -38,7 +39,7 @@ int __cdecl gv_SpawnEntities(void* entity, int count)
 	if ((*taddr == 0x1d) && (*(taddr + 0x247) >= 1) && (*(taddr + 0x247) <= 3)) {
 		spawned = 0;
 		while (spawned < count) {
-			slot = FindSlotEntryFiltered(0, entity, 0, (void*) 0x10010700, 0);
+			slot = FindSlotEntryFiltered(0, entity, 0, (void*) gv_eval_SlotFrei, 0);
 			if (slot == 0)
 				break;
 			*(int*) *(int*) ((char*) slot + 0x10) = g_next_object_id;
