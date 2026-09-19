@@ -895,3 +895,33 @@ different-kind**). Both probed this round, both **+0**:
 
 **Conclusion.** The asm permission is a constraint clarification, not a lever. No carrier among the 19 has a
 site where asm would be both permitted and useful.
+
+### 16. The residue quantified by lever availability: 67.5% register-role, 32.5% placement (round 1003)
+
+Section 13 classifies the 19 carriers; this assigns the **byte counts** to each class, which is what decides
+whether any remaining work is worth doing. Total must equal 8,628.
+
+| class | bytes | share | carriers |
+|---|---|---|---|
+| **register-role** | **5,825** | **67.5%** | `gm_AllocSpieler` 2823, `CrashDump` 1583, `ls_LoadBuildingEntityState` 671, `vfs_OpenStream` 238, `ahm_ExAllocAlchemist` 198, `gm_CheckInventoryCapacity` 97, `m_AllocTracked` 92, `srv_LoadBuf` 49, `gm_ObjectsAvailble` 25, `vfs_ReadCompressed` 23, `cm_ExProdObjekt` 21, `gm_CalculateProductionValue` 5 |
+| **block placement** | **1,675** | **19.4%** | `cm_ExSellObjekt` 966, `ServerMainThread` 367, `gm_AllocGebaeude` 327, `cm_ProcessCommandQueue` 15 |
+| **epilogue merge** | **1,128** | **13.1%** | `cm_ExCopyEntityData` 462, `gv_ExAllocGraveyardWorker` 451, `gm_FindNextFilteredEntity` 215 |
+
+**Both major classes are compiler decisions taken after the C front end** — register colouring and the
+backend cross-jump pass. Neither is addressed by any C spelling: §1 records that for register-role across many
+carriers, and §2 for the epilogue merge across four instances and eight return spellings.
+
+**The list is worth reading as a budget, not a work queue.** 67.5% of the residue sits in the class with the
+most thoroughly-probed negative result in the project; the remaining 32.5% is split between two backend passes.
+There is no third class.
+
+**Two probes this round, both +0**, on carriers whose classification the byte split makes most attractive:
+
+| probe | carrier | result |
+|---|---|---|
+| `volatile char` local for the compare operand | `gm_CalculateProductionValue` (5 bytes, 99.2% aligned) | **+16 object**, composition collapse |
+| force the separate `add` via an `unsigned int` intermediate (`eoff = base; eoff += idx;`) to defeat the fold the recorded blocker names | `gm_CheckInventoryCapacity` (97 bytes) | **+0**, byte-identical — msvc6 strength-reduces it back, confirming the blocker's claim by direct measurement rather than citation |
+
+The second is the useful one: blockers in this project's docs are normally left as assertions, and this one
+("Writing `ent = base + idx*0x40; ent += idx;` is strength-reduced right back") was re-derived independently
+and **held**.

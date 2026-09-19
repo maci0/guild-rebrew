@@ -27978,3 +27978,33 @@ in none.
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Probe reverted; `src/` unmodified; no baseline
 moved.
+
+## Round 1003 — the residue quantified by class; two probes at +0, one confirming a recorded blocker
+
+**Quantified the residue by lever availability** rather than by carrier size — the number that decides whether
+remaining work can pay. Total 8,628, split exactly three ways:
+
+| class | bytes | share |
+|---|---|---|
+| register-role | **5,825** | **67.5%** |
+| block placement | 1,675 | 19.4% |
+| epilogue merge | 1,128 | 13.1% |
+
+Both major classes are decisions taken *after* the C front end. → codegen-walls §16.
+
+**Two probes, both +0.**
+
+1. `gm_CalculateProductionValue` (5 bytes, 99.2% aligned, the tree's best) — `volatile char` local for the
+   compare operand: **+16 object**, composition collapse. Recorded last round.
+2. `gm_CheckInventoryCapacity` (97 bytes) — the documented blocker says *"Writing
+   `ent = base + idx*0x40; ent += idx;` is strength-reduced right back."* Forced the separate add through an
+   `unsigned int` intermediate (`eoff = (unsigned int) base; eoff += entity_index; entity = (char*) eoff;`):
+   **+0, byte-identical**. The blocker's claim **held under independent re-measurement** — useful because these
+   blockers are normally left as assertions.
+
+   First attempt used `intptr_t` and failed to compile (not available in this C89/MSVC6 environment); retried
+   with `unsigned int`.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; `src/` unmodified; no
+baseline moved.
