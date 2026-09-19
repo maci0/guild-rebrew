@@ -29484,3 +29484,28 @@ Recorded in `general-knowledge.md`. **No source, metadata or `build.make` change
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1044 — gm_AllocSpieler: three further spellings at the +0xaa fault, none lands (+361 / +5 / +0)
+
+Went at the largest carrier's first divergence with the three spellings its header does not list.
+All measured **at the link**, all reverted:
+
+| spelling | link delta | verdict |
+|---|---|---|
+| `memset` hoisted above the two zero-stores | **+361** | worst — 5.4x §109's recorded loss |
+| explicit `int scaled = idx * 0x21c;` for the `-1` fill | **+5** | worse |
+| explicit `char* fill = (char*)0x100358a4 + idx*0x21c;` for the `-1` fill | **+0** | inert |
+
+**The first row is the new datum.** §109 moved the `memset` *call* and measured a 371-matched-byte loss.
+Moving the **two zero-stores instead** — the same transposition from the other direction — costs **+361**
+at the link. Both directions of the transposition are now measured, and both lose by margins far exceeding
+the local gain. Verified the harness first with a no-op edit (**+0**), so the readings are not phantom.
+
+**The `+0` row is the converse:** naming the scaled index explicitly is inert, so the register the reference
+keeps live in `edx` is not reachable by giving it a name. Consistent with §109's conclusion that the ordering
+is a scheduler decision downstream of register pressure.
+
+Recorded as `codegen-walls.md` §24. **No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

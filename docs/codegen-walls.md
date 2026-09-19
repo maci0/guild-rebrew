@@ -1267,3 +1267,35 @@ that, and register-role rotation is one mechanism across eight carriers. The cla
 **Method note.** This is the cheapest high-value test run this session — two `grep`s and a byte compare per
 file — and it closes the last structural hypothesis about the residue's shape. Worth running whenever a
 residue is described as having "a" cause.
+
+### 24. `gm_AllocSpieler`'s +0xaa fault: three further spellings, none lands (round 1044)
+
+Shapes §109 closed this row's first divergence (at `+0xaa`: the reference emits
+`lea edx,[edx+0x100358fc]` where we emit `mov word ptr [ebp],bx` + `xor ebx,ebx` first, then
+`lea edi,...`) and measured two reorderings that lose 371 matched bytes and grow the object by 5. Three
+further spellings were measured **at the link** this round, all reverted:
+
+| spelling | link delta | verdict |
+|---|---|---|
+| `memset` hoisted above the two zero-stores (`*(int*)(slot+0x170)`, `*(int*)(slot+0x16c)`) | **+361** | worst — 5.4x §109's recorded loss |
+| explicit `int scaled = idx * 0x21c;` local, used for the `-1` fill | **+5** | worse |
+| explicit `char* fill = (char*)0x100358a4 + idx*0x21c;` for the `-1` fill | **+0** | inert |
+
+**The first row is the important one.** §109 moved the `memset` call and measured 633/3694 (371 matched
+bytes lost). Moving the **two zero-stores instead** — leaving the `memset` where it is — is the same
+transposition from the other direction, and at the link it costs **+361**, seven times the local gain
+available and far worse than the reorder §109 tried. Both directions are now measured and both lose.
+
+**The `+0` row is the converse datum:** naming the scaled index explicitly is *inert*, so the register the
+reference keeps live in `edx` is not reachable by giving it a name. Consistent with §109's conclusion that
+the ordering is a scheduler decision downstream of register pressure.
+
+**The mechanism, restated with the new measurement.** Sinking a 16-bit store past a block fill is what msvc6
+does; forcing either side of the transposition from C costs more than the transposition is worth, in both
+directions, by margins of 5 to 361 bytes. **Eighteen rounds have now probed this row or its siblings from
+every angle and the row has moved zero bytes.**
+
+**Judgement:** with §109's two reorderings, these three, and the whole-carrier probes of rounds 1025-1031,
+`gm_AllocSpieler` has no C-expressible lever at its fault. The 2,823 bytes behind it are that
+scheduling decision's displacement wake (measured in measure-traps §38 as a multi-run profile, 4 distinct
+displacement values across 7 runs). Not re-probed without a new allocator finding.
