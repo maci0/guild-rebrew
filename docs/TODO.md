@@ -28972,3 +28972,40 @@ definition.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1031 — measured every carrier's displacement profile; six are a single cliff, the largest is not
+
+`msvc6-c-shapes.md` §109 closes `gm_AllocSpieler` by saying its 2,823-byte residue "is that one scheduling
+decision's displacement wake rather than 2,824 bytes of wrong code". That framing decides what a future
+round should attempt, so it was measured rather than inherited.
+
+**Method.** For each sampled offset in the built image, search the reference within ±0x800 for the same
+24-byte context; the distance found is the local displacement. One cliff gives one value in one run.
+
+| carrier | sampled | matched | distinct values | runs |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | 916 | 710 | **4** | **7** |
+| `cm_ExSellObjekt` | 510 | 248 | 5 | 8 |
+| `ServerMainThread` | 606 | 406 | 2 | 5 |
+| `cm_ExCopyEntityData` | 109 | 96 | 2 | 3 |
+| `CrashDump` | 526 | 501 | **1** | **1** |
+| `ls_LoadBuildingEntityState` | 362 | 330 | **1** | **1** |
+| `gm_AllocGebaeude` | 263 | 223 | **1** | **1** |
+| `vfs_OpenStream` | 170 | 102 | **1** | **1** |
+| `gm_FindNextFilteredEntity` | 82 | 75 | **1** | **1** |
+| `gv_ExAllocGraveyardWorker` | 114 | 4 | 1 | 1 (unresolved — 4 matches) |
+
+**Six carriers are a single displacement cliff**, so §109's framing is correct for them and the cliff is
+the thing to attack. **`gm_AllocSpieler` is not one of them** — 4 values, 7 runs — which is where the
+framing is weakest. A global-shift test on it also fails: best match 310/3519 at delta +5, chance level.
+
+**This section's first draft reported `gm_AllocSpieler` as 12 runs / 10 values and concluded the wake
+framing does not reproduce.** That was wrong — the image was sliced from the wrong origin. The corrected
+table above reverses the headline: the framing reproduces for six carriers and fails only on the largest.
+The error and its correction are both recorded in measure-traps §38, because the corrected version is the
+more useful one: the profile is now a **triage tool** for choosing which carrier to attack.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
