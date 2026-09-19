@@ -30430,3 +30430,38 @@ Recorded as `codegen-walls.md` §30.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1069 — the missing `cld` does not explain the carrier's other clusters; the lead is exhausted
+
+§29-30 established the `cld` at `m_AllocTracked`'s `0x100066a0` as positive evidence for the asm clause and
+measured its scale (1 of 18 `repne scasb` sites). The natural follow-up: **is it the cause of the carrier's
+other residue?** A missing byte would displace everything after it, and the remaining 11 clusters could be
+that displacement rather than independent differences. Testable, and **false**.
+
+**Test.** The `cld` sits at function offset `+0x120` of 672. Correlate our stream after that offset against
+the reference at several shifts:
+
+| shift | tail match (bytes `+0x120..0x29f`) |
+|---|---|
+| **0** | **316/383 = 82.5%** |
+| +1 | 23/383 = 6.0% |
+| −1 | 22/383 = 5.7% |
+
+**Shift 0 wins by a wide margin; ±1 collapses to chance.** The tail is not displaced by a missing byte — the
+residue after `0x100066a0` is a set of local differences, not one insertion's ripple. Inserting the `cld`
+would fix the byte at `+0x120` and change nothing else.
+
+**The lead is now exhausted in both directions**, which is what makes this worth recording:
+
+- **not reachable from C** — three independent compiles under this file's own flags, none emitting `cld` (§29);
+- **one site in eighteen** across the whole reference binary (§30);
+- **not the cause of the other eleven clusters** — they are not a ±1 displacement (§31).
+
+Closing it would move **one byte of 8,628** and would need `__asm { cld }` to do it. So the asm clause's
+first genuine applicant is not a lever: reaching it from asm buys one byte, and it answers none of the
+carrier's remaining eleven clusters.
+
+Recorded as `codegen-walls.md` §31.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

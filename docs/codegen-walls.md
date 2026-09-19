@@ -1648,3 +1648,36 @@ overstated the evidence and is recorded here rather than quietly dropped.
 the reference has it once. What this section adds is its **scale**: one site out of eighteen `repne scasb`
 expansions in the whole binary, on a carrier that still has eleven other residue clusters. It is evidence, not
 a lever, and the arithmetic is now explicit.
+
+### 31. The missing `cld` does NOT explain `m_AllocTracked`'s other eleven clusters (round 1069)
+
+§29-30 established the `cld` at `0x100066a0` as positive evidence for the asm clause and measured its scale
+(1 of 18 `repne scasb` sites). The obvious next question: **is it the cause of the carrier's other residue?**
+If our stream is missing one byte there, everything after it would be displaced by one, and the remaining
+clusters would be that displacement rather than independent differences. That is testable and it is **false**.
+
+**Test.** The `cld` sits at function offset `+0x120` of 672. Correlate our byte stream after that offset
+against the reference's at several shifts:
+
+| shift | tail match (bytes `+0x120..0x29f`) |
+|---|---|
+| **0** | **316/383 = 82.5%** |
+| +1 | 23/383 = 6.0% |
+| −1 | 22/383 = 5.7% |
+
+**Shift 0 wins by a wide margin; ±1 collapses to chance.** So the tail is *not* displaced by a missing byte —
+the residue after `0x100066a0` is a set of **local differences**, not one insertion's ripple. Inserting the
+`cld` would fix the byte at `+0x120` and change nothing else.
+
+**This closes the lead with evidence rather than by assertion.** Combined with §30's scale measurement, the
+`cld` is now known to be:
+
+- genuine positive evidence for the objective's asm clause — no C spelling emits it, confirmed across three
+  independent compiles (§29);
+- a single site out of eighteen in the whole binary (§30);
+- **not** the cause of the carrier's other eleven clusters, since those are not a ±1 displacement (§31).
+
+So closing it would move **one byte of 8,628**, and would require `__asm { cld }` to do it. The lead is
+exhausted in both directions: it cannot be reached from C, and reaching it from asm buys one byte.
+
+`src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`
