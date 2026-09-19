@@ -996,3 +996,36 @@ it when the *set* changes, not just the values.
 **Recovery:** after any `rebrew rename`, re-run the configure step (or rely on `CONFIGURE_DEPENDS` now being
 set). `cmake -B build -S . --toolchain cmake/toolchain-msvc-6.0-sp6-docker.cmake -DCMAKE_BUILD_TYPE=Release
 -DREBREW_DEBUG_INFO=OFF`.
+
+## 26. `cmake --build build --target final` needed two passes after a clean configure, and reported a fake residue of 86,676 (round 1102)
+
+`final` is the only target that produces the deliverable. Its first command is a nested
+`cmake --build build --target server_dll -j`, which **must be allowed to fail**: the `server_dll` POST_BUILD
+postlink step refuses a non-position-aligned link by design, and that is precisely the condition `final` exists
+to fix. The target carried a single `|| true` for this.
+
+**That is not enough, and it fails in the worst possible way.** The nested build runs `-j` parallel; when
+postlink fails, make aborts *mid-way through the object list*, leaving objects unbuilt. `|| true` then swallows
+the failure, `final` proceeds, and `split_link.sh` composes from an **incomplete object set** — reporting
+residue **86,676** (`0x15294`) against the 8,628 baseline, with the deliverable at the wrong `md5`.
+
+Measured: after `rm -rf build` + configure, a single `--target final` produced md5 `66cc6980…` and residue
+`0x15294`. Running `cmake --build build` once first, then `--target final`, produced the correct
+`3febd2c4ca080a3749c12d4bf7452fbe` and 8,628.
+
+**Fix applied to `CMakeLists.txt`:** the nested build now retries, and the last attempt drops `-j`:
+
+```cmake
+COMMAND bash -c "${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll -j || \
+                 ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll -j || \
+                 ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll || true"
+```
+
+Verified by the full recipe from scratch — `rm -rf build`, configure, `--target final` alone — which now yields
+the correct md5 and residue. Each retry is cheap once the objects are current.
+
+**Why this matters beyond convenience.** The failure is silent and the number looks like a real regression: a
+residue an order of magnitude above baseline. Anyone reading it would think the code had broken, not the
+target. It is the same shape as measure-traps §55 (a stale composition reporting 81,229) and §47/§51/§52/§53/§54
+— **the artifact was wrong, and the ruler did not say so.** The invariant that catches it in both cases: 100% of
+residue must lie inside the 19 carriers, and any total far above 8,628 means re-compose before believing it.

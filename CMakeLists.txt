@@ -573,8 +573,19 @@ if(MSVC_FOR_DECOMP AND TARGET server_dll)
   if(NOT EXISTS "${REBREW_PY}")
     set(REBREW_PY python3)
   endif()
+  # The nested build MUST be able to fail without stopping the target: the
+  # POST_BUILD postlink step refuses a non-position-aligned link by design, so
+  # `cmake --build --target server_dll` always exits non-zero on a tree whose
+  # composition is not yet aligned -- which is exactly the case `final` exists
+  # to fix.  It is therefore run up to three times: the first pass with -j
+  # aborts mid-way through the object list when postlink fails, leaving the
+  # remaining objects unbuilt, and the retries finish them.  Measured
+  # (round 1102): after `rm -rf build` + configure, a single `--target final`
+  # left objects incomplete and reported residue 0x15294 (86,676) against the
+  # 8,628 baseline; running the plain build first, or the retry below, restores
+  # it.  Each retry is cheap once the objects are up to date.
   add_custom_target(final
-    COMMAND bash -c "${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll -j || true"
+    COMMAND bash -c "${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll -j || ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll -j || ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target server_dll || true"
     COMMAND bash "${PROJECT_SOURCE_DIR}/scripts/split_link.sh"
     COMMAND "${REBREW_PY}" "${PROJECT_SOURCE_DIR}/scripts/postlink_residual.py"
             --write build/server.dll
