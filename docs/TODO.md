@@ -31019,3 +31019,41 @@ post-front-end allocation decision).
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. No source change; nothing to revert.
+
+## Round 1084 — the per-function instruction count was inflated by inter-function padding
+
+With the biggest carrier's wall measured out (rounds 1082-1083), this round analysed the **second**-largest
+carrier, `CrashDumpUnhandledExceptionFilter` (`0x10002770`, 1,583 residue bytes = 18%).
+
+**Two measurement errors, both caught, one worth a doc entry.** The analysis disassembled the function over
+`function_structure.json`'s inventory span (size 2128, ending at `0x10002fc0`). That span runs **116 bytes
+past the function's real end into `0x09` padding**, and `09 09` decodes as `or dword ptr [ecx], ecx` — so the
+padding was decoded as code. The first wrong conclusion was that the reference contains **52 `or` and 1
+`call` against our 43 calls**, which reads as an entirely different calling convention. All 50 surplus `or`s
+were one contiguous padding run at `0x10002f4e` upward, each spelled `or dword ptr [ecx], ecx`. The second
+error was arithmetic off those bad numbers (a "68-instruction shortfall", actually 18).
+
+Corrected counts: **673 reference instructions vs 656 ours**, an 18-instruction shortfall, with a
+131-instruction divergence run at `0x10002aaf`. That is the **same shape** rounds 1082-1083 found in
+`gm_AllocSpieler` — a large coherent run at a `sprintf`/`WriteFile` sequence — not a calling-convention
+difference.
+
+**Three probes on this function, all measured at the link, all +0:**
+- hoist `strlen(szDateBuf)` into a declared `unsigned int dwLen` local
+- route the same expression through the existing `fail_msg` pointer local
+- (plus the pre-existing abort at that site)
+
+All reverted; tree byte-identical to HEAD, deliverable `md5` unchanged.
+
+**The durable finding is the trap, now measure-traps §52:** the unit of analysis must be the function's real
+extent, and the inventory does not give it. Sizes there are gaps to the *next* entry, so an entry can be wider
+than its function (round 1040-1046 established it can also be narrower). The check is to scan for the padding
+run — `0x09` (or `0xcc`) — and stop. Any long run of `or dword ptr [ecx], ecx` is padding, not code.
+This is the third instance of one family: §47 (residue ≠ error size), §51 (a zero over an unstated
+denominator), §52 (**a count over an unstated boundary**).
+
+**Docs:** measure-traps §52.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. No source change; nothing to revert.

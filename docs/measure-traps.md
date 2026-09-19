@@ -2634,3 +2634,47 @@ compare the result count against the metadata entry count; 122 against 329 is th
 pending work in round briefs, and `start-data` was the largest category in `rebrew todo` for hundreds of
 rounds. Every item in it was un-clearable. Round 1076's "the table is stable across rebuilds" is the correct
 kind of check; this is its data-side counterpart — verify the *denominator*, not just the difference.
+
+## 52. Decoding a function by its INVENTORY SPAN swallows inter-function padding and fabricates instructions (round 1084)
+
+Disassembling a function by taking `function_structure.json`'s `(va, size)` and running a linear sweep over
+that window is a measurement trap, because **the inventory span can extend past the function's real end into
+`0x09` padding.** `09 09` decodes as `or dword ptr [ecx], ecx`, so the padding is not skipped — it becomes
+instructions, and every derived count is wrong.
+
+Measured on `CrashDumpUnhandledExceptionFilter` (`0x10002770`, inventory size 2128, so the span ends at
+`0x10002fc0`):
+
+| | |
+|---|---|
+| real code end (first run of `0x09` padding) | `0x10002f4c` |
+| bytes of padding inside the inventory span | **116** |
+| instructions counted over the full span | **724** |
+| instructions counted to the real end | **673** |
+
+**The fabricated instructions are not random noise — they cluster into a specific mnemonic.** Sweeping the
+whole span made it appear that the reference contains **52 `or` instructions and only 1 `call`, against our
+43 `call`s** — which reads as a completely different calling convention and sent this round chasing a
+"register-argument-passing" hypothesis for a while. **All 50 of the surplus `or`s were the padding**: they
+appear as one contiguous run at `0x10002f4e` upward, each with the identical text `or dword ptr [ecx], ecx`.
+A quick test for exactly this:
+
+```python
+bad = [i for i in ins if i.mnemonic == "or" and i.op_str == "dword ptr [ecx], ecx"]
+```
+
+Any long run of those is `0x09` padding, not code. The tell in the byte dump is simpler still: look for a run
+of `09` bytes.
+
+**Corrected, the function is far less interesting than the artifact suggested.** 673 vs 656 instructions is an
+18-instruction shortfall, and the largest divergence run is 131 instructions — the same *shape* §34/§35 found
+in `gm_AllocSpieler`, not a calling-convention difference. The `sprintf`/`WriteFile` order at `0x10002aaf` is
+the divergence, matching the "tail log/sprintf order" class already recorded for `gm_AllocSpieler`.
+
+**The transferable trap: the unit of analysis has to be the function's real extent, which the inventory does
+not give you.** Round 1040-1046 established that the inventory is *coarser* than the annotations (543 entries
+against 283). This round adds the other direction: an inventory entry can also be **wider** than the function,
+because sizes are gaps to the next entry. Before trusting any per-function instruction count, find the
+padding: scan for runs of `0x09` (or `0xcc`) and stop there. Two other spellings of the same mistake were
+already on record — `docs/measure-traps.md` §47 (residue ≠ error size) and §51 (a zero over an unstated
+denominator). This is the third: **a count over an unstated boundary.**
