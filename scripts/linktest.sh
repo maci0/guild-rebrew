@@ -48,13 +48,13 @@ fi
 # trust is only sound while build.make still says what CMake generated.  It is a
 # GENERATED file in a gitignored directory, so a round that hand-edits it (to
 # sweep a per-file flag, a toolchain pin, an /O option) changes what every later
-# measurement MEANS while `git status` stays clean.  Round 1051 did exactly that
-# sweeping toolchain pins and left the tree measuring 58% residue.
+# measurement MEANS while `git status` stays clean.  Round 1051 did that sweeping
+# toolchain pins and left the tree measuring 58% residue.
 #
-# scripts/build_tree_check.py holds the whole-tree check (also run by gate.sh);
-# it is invoked here too so a measurement can never be taken from a drifted tree.
-if [ -f scripts/build_tree_check.py ] && [ -f build/CMakeFiles/server_dll.dir/flags.make ]; then
-    if ! drift=$(python3 scripts/build_tree_check.py 2>&1); then
+# The check lives in rebrew (round 1055 moved it there from a project script), so
+# it is available in every rebrew project.  Refuse to measure a drifted tree.
+if [ -f build/CMakeFiles/server_dll.dir/flags.make ]; then
+    if ! drift=$(rebrew build-check 2>&1); then
         echo "$drift" >&2
         echo "  build.make has been hand-edited, so this script would measure a" >&2
         echo "  build the tree cannot reproduce.  Restore with:" >&2
