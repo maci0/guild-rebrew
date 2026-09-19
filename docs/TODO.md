@@ -28332,3 +28332,33 @@ now marked unreliable, which is the more important correction.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1014 — ServerMainThread's last 2 edges are loop-polarity, not steerable from C
+
+Acted on round 1013's isolation: `ServerMainThread`'s entire control-flow difference is **2 of 280 edges**, a
+polarity swap on the same two destinations (`0x100097c5` continue / `0x10009919` exit).
+
+The reference encodes the **taken** edge as the loop-continuing one (`test esi,esi` / `je continue` / `jmp exit`);
+we encode the exiting one as taken (`jne exit` / `jmp continue`).
+
+**Three source spellings compiled, all byte-identical (+0):**
+
+| spelling | delta |
+|---|---|
+| `} while (!(phase_complete != 0));` | **+0** |
+| `if (phase_complete) break; } while (1);` | **+0** |
+| inner scan as `for (;;) { if (phase_complete == 0) break; ... }` | **+0** |
+
+A fourth attempt was malformed and did not compile — not a valid probe, recorded as such.
+
+**msvc6 canonicalises loop-condition polarity**: it decides which edge is the taken branch from the loop's
+shape, not from the spelling of the C condition. → codegen-walls §19.
+
+**This closes `ServerMainThread`'s control-flow lane.** Its CFG differs from the reference in exactly 2 branch
+*encodings* out of 280 edges, both polarity, and that polarity is not addressable from C89. Its 367 residual
+bytes are therefore block-placement and register-role work, consistent with its existing classification, not a
+structural defect.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. All four probes reverted; deliverable rebuilt and
+re-verified; `src/` unmodified; no baseline moved.

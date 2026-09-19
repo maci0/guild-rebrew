@@ -1069,3 +1069,42 @@ Counter(sum(1 for k in ('taken','fall') if edges[a].get(k) in blocks) for a in b
 
 Identical histograms but non-isomorphic means the carrier is in the merge class; a differing histogram means a
 branch's shape is wrong.
+
+### 19. Loop-condition POLARITY is not steerable — four spellings, all byte-identical (round 1014)
+
+Round 1013 isolated `ServerMainThread`'s entire control-flow difference to **2 of 280 edges**, a polarity swap
+on the same two destinations. The reference tails a loop with
+
+```
+0x100098e1  test esi, esi
+0x100098e3  je   0x100097c5     <- taken edge CONTINUES the loop
+0x100098e9  jmp  0x10009919     <- fallthrough EXITS
+```
+
+and we emit the mirror image:
+
+```
+0x100098e3  test esi, esi
+0x100098e5  jne  0x1000991a     <- taken edge EXITS
+0x100098e7  jmp  0x100097c5     <- fallthrough CONTINUES
+```
+
+Both encode the same two edges. Four source spellings were compiled to try to reach the reference's form:
+
+| spelling of the tail | link delta |
+|---|---|
+| `} while (phase_complete == 0);` (shipped) | — |
+| `} while (!(phase_complete != 0));` | **+0**, byte-identical |
+| `if (phase_complete) break; } while (1);` | **+0**, byte-identical |
+| inner scan inverted: `for (;;) { if (phase_complete == 0) break; ... }` | **+0**, byte-identical |
+| outer `if (phase_complete != 0) { break; } } for (;;) {` | compile error (malformed); not a valid probe |
+
+All three that compiled are byte-identical, so **msvc6 canonicalises loop-condition polarity**: it picks which
+edge to encode as the taken branch from the loop's shape, not from how the C condition is written. This is the
+same class as §50 (branch polarity) but specific to *loop back-edges*, and it is the reason `ServerMainThread`'s
+last 2 edges are unreachable from source.
+
+**This closes `ServerMainThread`'s control-flow lane.** The carrier's 367 residual bytes are not a structural
+problem: its CFG differs from the reference's in exactly 2 branch *encodings* out of 280 edges, both polarity,
+and the polarity is not addressable from C89. Its remaining residue is the block-placement and register-role
+work already documented for it.
