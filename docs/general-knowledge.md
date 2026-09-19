@@ -273,6 +273,9 @@ byte comparison — 84 import slots (all dwords identical), 111 in the zero-fill
 (identical), 7 sizeless. The 18 `__imp__` items and the 123 `start-data` items that `rebrew todo` used to
 list were artefacts of that gap; both lanes are now empty and only the 2 known `.text` carriers remain.
 
-**`rebrew verify --data` prints no denominator.** Its "122 matched, 0 mismatched, 0 missing" covers 37% of the
-metadata. Read it as a bound on what was compared, never as a whole-tree statement — see
-`docs/measure-traps.md` §51.
+**`rebrew verify --data` now prints its denominator** (fixed round 1079, rebrew commit `3f7cefea`). The
+summary reads `data: 122 matched, 0 mismatched, 0 missing (122 of 329 symbols compared, 37%)` and names why
+the other 207 are not comparable, and `--json` carries `total`/`compared`/`not_comparable`/`coverage`. Before
+that fix the coverage figure was absent entirely and had to be reconstructed by calling
+`section_symbol_bytes` on both images and counting `ref_sizes`; see `docs/measure-traps.md` §51 for why a
+zero in a diff-shaped result is never a statement about the whole tree.

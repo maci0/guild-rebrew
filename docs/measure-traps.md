@@ -2612,6 +2612,18 @@ A skipped VA never enters `ref_sizes`. `verify.py`'s write-back builds `matched_
 Zero differences anywhere. **The data lane for this binary is complete**, and the 123 `todo` items that
 claimed otherwise were an artefact of the ruler, not work.
 
+**Fixed in rebrew (round 1079, commit `3f7cefea`).** The report now carries `total`, `compared`,
+`not_comparable` and `coverage`, and the summary prints the denominator:
+
+```
+data: 122 matched, 0 mismatched, 0 missing (122 of 329 symbols compared, 37%)
+  207 symbol(s) not comparable: no file bytes (zero-fill tail) or outside .data/.rdata —
+  a zero above bounds only what was compared
+```
+
+The trap below is still worth knowing, because it generalises past this tool to every "0 differ" result:
+the fix makes *this* denominator visible, not every future one.
+
 **The transferable trap: a zero in a diff-shaped result is not a zero in coverage.** "0 mismatched" bounds
 only the population the tool chose to look at. Before treating such a number as "this axis is done", find the
 denominator — here it was absent from the output entirely and had to be reconstructed by calling

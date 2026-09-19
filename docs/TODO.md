@@ -30767,3 +30767,41 @@ now names the shapes doc. Commit `e2488b64`.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1079 — `verify --data` now reports the denominator it was hiding
+
+Round 1078 found that `rebrew verify --data` had been printing "122 matched, 0 mismatched, 0 missing" over
+329 metadata symbols. That is a statement about 37% of the tree presented as a whole-tree pass, and it is the
+direct cause of the 123-item phantom `start-data` lane. Last round the coverage figure had to be reconstructed
+by calling `section_symbol_bytes` on both images and counting `ref_sizes` by hand. This round it is reported.
+
+**The change (rebrew `3f7cefea`).** `verify_data_bytes` already had every symbol name in `names`; it just
+iterated `sizes` (the comparable subset) without ever counting the difference. The returned report now carries
+`total`, `compared`, `not_comparable` and `coverage`. The human summary prints the denominator and the reason,
+and `--json` passes all four fields through. Measured on this project:
+
+```
+data: 122 matched, 0 mismatched, 0 missing (122 of 329 symbols compared, 37%)
+  207 symbol(s) not comparable: no file bytes (zero-fill tail) or outside .data/.rdata —
+  a zero above bounds only what was compared
+```
+
+Five tests added: full coverage, a symbol with no file bytes (the guild-rebrew case, exactly 50% coverage in
+miniature), an out-of-scope section, empty metadata (no divide-by-zero), and unnamed inventory (excluded from
+the total, since attribution is impossible). Two pre-existing tests asserted the report dict by exact equality
+and were updated to assert the coverage fields — a stricter check than before, not a relaxation.
+
+**Why this is worth a round on a project whose data is already correct.** The objective binds on
+`rebrew verify --full` and on a residue number, and both are of the same family as this one: a figure that
+means less than it appears to. A tool that reports "0 mismatched" over an undisclosed subset is exactly the
+failure mode this project has paid for repeatedly — measure-traps §47, §50 and §51 are all instances of a
+ruler whose reading did not mean what it looked like. The data axis closes at zero differences *and* the
+instrument that measures it now says so out loud.
+
+**Docs:** measure-traps §51 (fix recorded), general-knowledge, rebrew `docs/IDEAS-GUILD.md` (item marked
+applied).
+
+**No source, metadata or link change in this repo; nothing to revert.**
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
