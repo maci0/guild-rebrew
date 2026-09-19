@@ -929,6 +929,28 @@ treat the object as poisoned: revert the source **and** run `cmake --build build
 else. A collapsed composition that survives a clean `split_link.sh` is the tell — and the fix is the full
 build, not another `split_link.sh`.
 
+**The guard now says so (round 1065).** `scripts/linktest.sh`'s collapse message previously gave only the
+round-232 fix (`rm -rf build/split_poc && split_link.sh`), which is *insufficient* for the stale-object case
+and cost round 1064 three recovery cycles. It now prints a two-step escalation:
+
+```
+COMPOSITION COLLAPSED: only N symbols landed at their reference VA.
+         Every residue number below would be meaningless.
+         Try, in this order:
+             1) rm -rf build/split_poc && bash scripts/split_link.sh
+                (if that restores the placement, the workspace was stale)
+             2) cmake --build build   # recompile EVERY object
+                Needed when the collapse survives step 1: a source
+                experiment that changed a pragma/intrinsic/codegen flag
+                leaves the OBJECT holding the experimental code, and no
+                mtime check catches it (workflow-traps §24).
+```
+
+Verified by simulating a collapse in the link log: the guard parses `placed=0` and fires. There is no way to
+detect the stale object directly — a pragma leaves **no trace** in the `.obj` to grep for (checked), and the
+mtime comparison passes once `git checkout` and a build have both run — so the collapse *is* the signal, and
+the message has to name both fixes.
+
 **Measured outcome:** `#pragma function(memset)` on `gm_AllocSpieler` is not a lead — it cannot be measured
 at all on this tree, because the out-of-line call breaks the composition before any residue number exists.
 That is a stronger statement than "it measured worse".

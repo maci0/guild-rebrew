@@ -131,16 +131,32 @@ fi
 # Composition guard.  The split link places each object at its reference VA; when
 # that collapses, EVERY number below is meaningless but nothing else says so --
 # the residue simply reads ten times too high and every other signal points at
-# the source.  Round 232 lost most of a round to this: the source tree was clean
-# and a full object rebuild did not help, because the stale artefact was
-# build/split_poc itself (deleting the CMake objects orphans that workspace and
-# it is not regenerated on its own).  The fix is `rm -rf build/split_poc`.
+# the source.
+#
+# TWO causes, and the fix differs.  Round 232: the stale artefact was
+# build/split_poc itself (deleting the CMake objects orphans that workspace and it
+# is not regenerated on its own) -- fix: remove and relink.  Round 1064: a source
+# experiment changed a PRAGMA (intrinsic -> function(memset)); reverting the
+# source left the OBJECT holding the experimental code, and NOTHING detects that
+# -- linktest's stale check compares source mtime against object mtime, and after
+# `git checkout` + a build those end up consistent.  A pragma leaves no trace in
+# the object to grep for.  Fix: recompile the objects.
+#
+# So try the cheap fix first, and if the collapse survives it, say plainly that
+# the objects are the suspect and a full build is required.
 placed=$(grep -oE "exactly at their reference VA: [0-9]+" .scratch/linktest-link.log \
          | tail -1 | grep -oE "[0-9]+$")
 if [ -n "$placed" ] && [ "$placed" -lt 100 ]; then
     echo "COMPOSITION COLLAPSED: only $placed symbols landed at their reference VA." >&2
-    echo "         Every residue number below would be meaningless.  Fix with:" >&2
-    echo "             rm -rf build/split_poc && bash scripts/split_link.sh" >&2
+    echo "         Every residue number below would be meaningless." >&2
+    echo "         Try, in this order:" >&2
+    echo "             1) rm -rf build/split_poc && bash scripts/split_link.sh" >&2
+    echo "                (if that restores the placement, the workspace was stale)" >&2
+    echo "             2) cmake --build build   # recompile EVERY object" >&2
+    echo "                Needed when the collapse survives step 1: a source" >&2
+    echo "                experiment that changed a pragma/intrinsic/codegen flag" >&2
+    echo "                leaves the OBJECT holding the experimental code, and no" >&2
+    echo "                mtime check catches it (workflow-traps §24)." >&2
     echo "         (see docs/msvc6-c-shapes.md section 124)" >&2
     exit 1
 fi

@@ -30283,3 +30283,42 @@ A collapse that survives a clean `split_link.sh` is the tell.
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Source tree
 clean (`git status -- src/` empty).
+
+## Round 1065 — linktest's collapse message now names both fixes, not just the one that does not work
+
+Round 1064 cost three recovery cycles because `linktest.sh`'s composition-collapse message gave only the
+round-232 fix:
+
+```
+Fix with:  rm -rf build/split_poc && bash scripts/split_link.sh
+```
+
+That is correct for a stale *workspace* and **insufficient** for a stale *object* — the pragma case, where
+the collapse survives it and only a full `cmake --build build` recovers. The message sent me to the fix that
+does not work, three times.
+
+**Now it escalates:**
+
+```
+COMPOSITION COLLAPSED: only N symbols landed at their reference VA.
+         Every residue number below would be meaningless.
+         Try, in this order:
+             1) rm -rf build/split_poc && bash scripts/split_link.sh
+                (if that restores the placement, the workspace was stale)
+             2) cmake --build build   # recompile EVERY object
+                Needed when the collapse survives step 1: a source experiment
+                that changed a pragma/intrinsic/codegen flag leaves the OBJECT
+                holding the experimental code, and no mtime check catches it.
+```
+
+**Verified:** simulated a collapse in `.scratch/linktest-link.log` (rewrote `246` to `0`); the guard parses
+`placed=0` and fires with the new text. Restored the log; `linktest.sh` clean at **+0** and the gate passes.
+
+**Why the message is the right place rather than a new check.** Checked directly whether a stale object can
+be detected: it **cannot**. A pragma leaves **no trace** in the `.obj` to grep for (`strings` on
+`gm_AllocSpieler.c.obj` finds no pragma/intrinsic/memset reference), and the existing mtime comparison passes
+once `git checkout` rewrites the source and a build updates the object. So the collapse *is* the signal, and
+the only improvement available is to make the message name both fixes — which it now does.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
