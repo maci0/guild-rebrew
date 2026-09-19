@@ -2678,3 +2678,16 @@ because sizes are gaps to the next entry. Before trusting any per-function instr
 padding: scan for runs of `0x09` (or `0xcc`) and stop there. Two other spellings of the same mistake were
 already on record — `docs/measure-traps.md` §47 (residue ≠ error size) and §51 (a zero over an unstated
 denominator). This is the third: **a count over an unstated boundary.**
+
+**Corollary: measure the boundary before counting (round 1085).** Round 1084's correction is only useful if applied. Analysing the second carrier with the real extent (2012 bytes, stopping at the `0x09` padding) gives **673 reference instructions against our 656**, with the largest divergence run 131 instructions at `0x10002aaf` — the same shape §34/§35 found in `gm_AllocSpieler`. Counting over the padded inventory span instead gave 724 and made the run look like an 18-instruction shortfall plus a calling-convention difference. The corrected reading is: a `sprintf` argument-ordering difference, one instruction deep, cascading through the call's argument setup:
+
+```
+ref                                   ours
+push 0x100272b4   (format)            mov edx, dword ptr [ecx + 0x18]
+push eax                              push edx
+call sprintf                          push 0x100272b4
+add esp, 0xc                          push eax
+lea ecx, [esp + 0x10]                 call sprintf
+```
+
+The reference pushes the format string first and loads the third argument after; we load it first. Everything downstream rotates from that.
