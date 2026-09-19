@@ -2541,3 +2541,34 @@ works here is a human-readable one, and this round performed it by hand after th
 
 **Practical rule.** Use a regex to *narrow* the set to inspect, never to conclude. State a keyword-based
 audit's result as "N sections need eyeballing", not "N sections lack evidence".
+
+## 50. The per-carrier table is stable across a full object rebuild, and the deliverable is bit-identical (round 1076)
+
+Round 1039 verified that a clean rebuild reproduces the shipped `server.dll` byte-for-byte. What it did *not*
+check is the stronger property every round actually depends on: **are the per-carrier numbers themselves
+stable?** If a carrier's residue drifted between builds, the "floor" would not be a floor and every per-round
+comparison would be against a moving target.
+
+**Measured, three builds:**
+
+| build | deliverable | per-carrier table |
+|---|---|---|
+| baseline | `md5 3febd2c4ca080a3749c12d4bf7452fbe` | reference table |
+| full relink (`rm -rf build/split_poc` + `split_link.sh` + postlink) | — | **identical** (`diff` clean) |
+| full **object** rebuild (`cmake --build build`) + relink + postlink | `md5 3febd2c4ca080a3749c12d4bf7452fbe` | **identical** (`diff` clean) |
+
+So the 19 per-carrier figures — 2823, 1583, 966, 671, 462, 451, 367, 327, 238, 215, 198, 97, 92, 49, 25, 23,
+21, 15, 5 — are **reproducible**, not a snapshot of one build's state. That is what makes
+`RESIDUE_BASELINE` a meaningful floor: any per-round delta measured by `linktest.sh` is attributable to the
+source edit, not to build noise.
+
+**Why this is worth recording rather than assumed.** Round 1055 was a case where a source revert left a stale
+object in the tree, and every downstream number described a build no clean checkout would produce. The
+verification there was ad hoc. This is the systematic version: **compare the per-carrier table, not only the
+file hash** — the table is what the rounds quote, and it is a strictly stronger check than the hash because it
+localises any difference to a carrier.
+
+**Method.** `postlink_residual.py`'s table after each of the three builds, diffed with `diff` (not summed —
+the sum check is §47's job, and these two checks catch different failures).
+
+**This closes the reproducibility question at the granularity the project measures at.**

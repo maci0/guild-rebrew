@@ -30657,3 +30657,30 @@ recurring method trap is on record for the fourth time with the same remedy.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1076 — the per-carrier table is stable across a full rebuild; the deliverable is bit-identical
+
+Round 1039 verified a clean rebuild reproduces the shipped DLL byte-for-byte. What it did not check is the
+property every round actually depends on: **are the per-carrier numbers stable?** If a carrier's figure drifted
+between builds, "the floor" would be a moving target and every per-round delta would be measured against it.
+
+**Measured, three builds:**
+
+| build | deliverable | per-carrier table |
+|---|---|---|
+| baseline | `md5 3febd2c4…` | reference |
+| full relink (`rm -rf build/split_poc` + `split_link.sh` + postlink) | — | **identical** (`diff` clean) |
+| full **object** rebuild (`cmake --build build`) + relink + postlink | **same `md5`** | **identical** (`diff` clean) |
+
+So the 19 figures — 2823, 1583, 966, 671, 462, 451, 367, 327, 238, 215, 198, 97, 92, 49, 25, 23, 21, 15, 5 —
+are reproducible, not a snapshot. That is what makes `RESIDUE_BASELINE` a meaningful floor.
+
+**Why the table and not just the hash.** Round 1055 was a stale-object case where every downstream number
+described a build no clean checkout produces, and that verification was ad hoc. **Comparing the per-carrier
+table is strictly stronger than comparing the file hash**, because it localises any difference to a carrier
+instead of reporting "the file differs". Recorded as measure-traps §50.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
