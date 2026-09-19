@@ -27942,3 +27942,39 @@ is the **sixth stale header quantity** this session — and the first in a multi
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1002 — re-probed the smallest carrier's 2-instruction swap; the operand-form axis also costs size
+
+`gm_CalculateProductionValue` (`0x10019720`) is the tree's best-aligned function (122/123 = 99.2%, **0
+different-kind hunks**, 5 raw differing bytes at offsets `0xe4`-`0xe8`). Its only real difference is two
+adjacent instructions swapped at `0x10019804`:
+
+```
+reference   d9c9 fxch st(1)  then  803e17 cmp byte ptr [esi],0x17
+ours        803e17           then  d9c9
+```
+
+**Probed one class the ~330-compile sweep does not appear to cover: changing the compare's *operand form*
+rather than the scaled operand's *type*.** Reading `*(char*) entity` through a `volatile char` local:
+
+| probe | result |
+|---|---|
+| `volatile char kind2; kind2 = *(char*) entity; if (kind2 == 0x17)` | **object .text total 2608 → 2624 (+16)**; composition collapses (0 symbols land at their reference VA) |
+
+Reverted; baseline rebuilt and verified at 8,628.
+
+**What this adds.** The recorded closure enumerates four classes keyed on the *scaled operand's type*
+(float / double / volatile / commuted). This probe varies the *compare side* instead — and it is worse in a way
+none of the four classes predicts: the extra local costs 16 bytes of object, which on a carrier whose COMDAT
+already fills its 400-byte span (round 1001) collapses the composition outright rather than merely scoring
+worse. So the operand-form axis is not a gap in the sweep; it fails earlier, on size.
+
+**The recorded closure is confirmed, not merely trusted.** Between rounds 1001-1002 its three load-bearing
+claims were each re-measured: (a) the 5-byte swap is real and is the *whole* residue; (b) the "+4 bytes of
+upward slack" is stale — the COMDAT fills its span, and this round demonstrated the consequence directly by
+overflowing it; (c) the four-class enumeration is sourced from ~330 compiles and the target's combination is
+in none.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Probe reverted; `src/` unmodified; no baseline
+moved.
