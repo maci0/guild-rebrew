@@ -29304,3 +29304,44 @@ correct), and the filter must be applied before the list is read as work.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1039 — full clean rebuild reproduces the deliverable byte-for-byte (MD5 confirmed)
+
+Twenty rounds have reported residue 8628 without ever testing whether that number survives a **clean**
+build rather than an incremental one. Tested it.
+
+```
+cmake --build build --clean-first     -> fails at POST_BUILD postlink, BY DESIGN
+cmake --build build --target final    -> succeeds
+cmp <pre-clean build/server.dll> build/server.dll   -> identical
+md5sum                                               -> 3febd2c4ca080a3749c12d4bf7452fbe (both)
+```
+
+**Residue after the clean rebuild: 8628 (`0x21b4`), unchanged.**
+
+**The `--clean-first` failure is measure-traps §17**, and the message names the reason:
+
+```
+error: postlink failed: built .text is not position-aligned with the reference —
+only 4847/7463 layout-map entries validate (64.9%, minimum 90%).
+.text VirtualSize built 0x221f6 vs reference 0x22846.
+```
+
+That `0x221f6` is the **plain CMake link**, which is not the deliverable. The deliverable is
+`--target final`, which runs `scripts/split_link.sh` and then `postlink_residual.py`.
+
+**Two properties follow, and they are what makes the baseline trustworthy:**
+
+- **8628 is not an artefact of stale objects.** A clean rebuild from source produces the same bytes, so the
+  residue is a property of the sources. Every per-carrier delta this session measured with
+  `linktest.sh`/`split_link.sh` inherits that assurance.
+- **The tree is reproducible by a fresh clone.** The only external inputs are the five stock LIBCMT archives
+  in `.scratch/libcmt/`, extracted from the toolchain images as `split_link.sh`'s header documents.
+
+Recorded in `general-knowledge.md` with the correct clean recipe, since the `--clean-first` failure has
+misled at least one earlier round (976) into reading the tree as broken.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
