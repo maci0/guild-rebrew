@@ -700,3 +700,29 @@ including a proposed upstream tool fix for a defect that does not exist.
 **Second-order lesson.** Both rounds that "found" missing functions measured their evidence without ever
 asking `rebrew verify`'s own population — the annotation list — for the same VAs. A claim of the form "X is
 missing" needs a check against the authoritative list of X, not against a proxy that is known to be coarser.
+
+## 19. `rebrew todo`'s 20 items are 2 real carriers and 18 false positives — verified again (rounds 955, 1038)
+
+`rebrew todo --json` returns 20 `improve-match` / `start-data` items. Round 955 recorded that 18 of them
+are `__imp__*` IAT slots and false positives. Round 1038 re-verified that against the binary rather than
+trusting the note:
+
+**The 18 `start-data` items are IAT slots at `0x10024000..0x10024044`, and all 18 are already
+byte-identical in the shipped file** — read directly, 18 of 18 matching. They appear as "UNCHECKED" because
+the dispatcher rewrite installs the reference's IAT, not because anything is undone.
+
+**The two real items are both documented walls, with quantified blockers:**
+
+| VA | name | status | match | recorded blocker |
+|---|---|---|---|---|
+| `0x10018850` | `_gm_AllocSpieler` | STUB | 27.2% | "132 distributed schedule steps, no cliff; in-hunk clusters are parent-wins 344B, refs-scan 220B, no-parent trait 181B, record-header 140B; ndiff 731/1056 in 171 hunks, cdiff 808/1056 in 156" |
+| `0x100093a0` | `_ServerMainThread@4` | NEAR_MATCHING | 85.3% | "already in reference order (16/16 log landmarks byte-identical, zero block reorderings); residual is 3 intra-block scheduling sites + register pairs; ndiff 592/627 in 25 hunks, cdiff 614/627 in 15" |
+
+**The rule.** `rebrew todo`'s ROI ordering carries no signal on this tree — its top-scoring items are IAT
+slots that are already correct. Filter to the annotated carriers before reading the list as work, and
+re-check the IAT claim against the binary rather than inheriting it: **the 18 are byte-identical, measured,
+not assumed.** With that filter the queue is empty except for the two carriers whose walls are recorded
+above, both in the same 18-carrier residue set this project has already characterised.
+
+This is workflow-traps §10's "no opening step forced the lookup" in its tooling form: a work queue that is
+90% noise will keep generating rounds unless the filter is applied before the queue is read.

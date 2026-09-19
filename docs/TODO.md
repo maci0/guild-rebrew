@@ -29274,3 +29274,33 @@ falsified it four rounds ago.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1038 — `rebrew todo`'s 20 items: 2 real carriers, 18 IAT false positives (re-verified against the binary)
+
+Round 1037's lesson was to check claims against the authoritative source. Applied it to the one work queue
+not yet re-verified: `rebrew todo --json`, which returns 20 items and has been the documented starting point
+for every round.
+
+**The 18 `start-data` items are `__imp__*` IAT slots at `0x10024000..0x10024044`, and all 18 are already
+byte-identical in the shipped file** — read directly from both images, 18 of 18 matching. They are marked
+`UNCHECKED` because the dispatcher rewrite installs the reference's IAT, not because anything is undone.
+Round 955's note is confirmed against the binary rather than inherited.
+
+**The two real items are both documented walls with quantified blockers:**
+
+| VA | name | status | match | blocker |
+|---|---|---|---|---|
+| `0x10018850` | `_gm_AllocSpieler` | STUB | 27.2% | "132 distributed schedule steps, no cliff; in-hunk clusters are parent-wins 344B, refs-scan 220B, no-parent trait 181B, record-header 140B; ndiff 731/1056 in 171 hunks, cdiff 808/1056 in 156" |
+| `0x100093a0` | `_ServerMainThread@4` | NEAR_MATCHING | 85.3% | "already in reference order (16/16 log landmarks byte-identical, zero block reorderings); residual is 3 intra-block scheduling sites + register pairs; ndiff 592/627 in 25 hunks, cdiff 614/627 in 15" |
+
+Both are among the 18 residue carriers, and both blockers are round-186 measurements still current.
+
+**So the work queue is empty.** Filtering `rebrew todo` to annotated carriers leaves exactly two rows, and
+both are carriers whose walls this project has already characterised and probed. Recorded as
+workflow-traps §19: the ROI ordering carries no signal here (its top items are IAT slots that are already
+correct), and the filter must be applied before the list is read as work.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
