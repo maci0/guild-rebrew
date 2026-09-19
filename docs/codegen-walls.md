@@ -2182,3 +2182,46 @@ available at the return site.
 with no source change present: the reported object size does not track what `cmake --build` produces for it. The
 gate, which measures the real composition, is unaffected. Recorded so the tool's number is not read as a
 regression.
+
+### 42. Correcting §38/§40/§41: the missing-instruction counts were inflated by jump-table decoding, and the real exit-path gap is 4 (round 1098)
+
+Rounds 1094-1097 reported "109 reference-only instructions", "10 `adc` the reference has and we do not", and
+"3 epilogues vs our 1". Re-measuring with the **true function extents** cuts all three down, and the correction
+matters more than the original claim.
+
+**The inflation was jump tables decoded as code.** A linear sweep over an inventory span passes through
+embedded jump tables, and table bytes decode into plausible-looking instructions:
+
+| what §38/§40 claimed | what was really there |
+|---|---|
+| `CrashDump`: **`or` ×50** | a run of `0x09` padding — `09 09` is `or dword ptr [ecx], ecx` (measure-traps §52) |
+| `CrashDump`: **`adc` ×10** | a **jump table** at `0x10002e9c`..`0x10002f1f`; `popal`/`sub eax,[eax]`/`adc [ecx+0x2b],dl` is table data, not code |
+| `CrashDump` ref-only total: 41, then 91 | **24** with the extent corrected |
+
+**And the exit-path gap is 4, not 5.** Counting `ret`/`retf`/`iret` per carrier at the inventory extent
+(`function_structure.json`, which is authoritative here because it bounds the span at the next entry):
+
+| carrier | reference `ret` sites | ours | delta |
+|---|---|---|---|
+| `CrashDumpUnhandledExceptionFilter` | 2 | 1 | −1 |
+| `cm_ExCopyEntityData` | 3 | 2 | −1 |
+| `gm_FindNextFilteredEntity` | 5 | 3 | −2 |
+| **all 19 carriers** | **71** | **67** | **−4** |
+
+So the reference has **four** more exit paths than our build across the whole residue, not one per carrier per
+function as §40 implied. Four extra epilogues is on the order of 4 × 6 bytes = **~24 bytes of `.text`**, plus
+whatever positional shift they cause — a real but *small* lever, and not the explanation for 8,628 bytes.
+
+**The corrected reading of the whole residue.** Total reference-only instructions across the 19 carriers is
+**122**, not 189, once the padding and table artifacts are removed (189 was measured with two bad extents over
+the same set). 122 missing instructions cannot account for 8,628 differing bytes either — the rest is the
+aligned-position differences that §34-§37 already characterised.
+
+**What remains true from §38.** The multiset test is still the right *first* question, and it still shows the two
+programs differ in instruction *set*, not merely in ordering — which is what makes this source-recovery work
+rather than a compiler wall. What §38 got wrong was the magnitude, because it measured over spans containing
+tables and padding.
+
+**The method rule this adds to §52 and §53:** before counting anything per function, establish the extent from
+`function_structure.json`'s *next entry*, not from a guessed size or from the first padding run — a span can
+contain both padding **and** jump tables, and the first padding run does not mark the end.
