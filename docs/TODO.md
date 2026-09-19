@@ -31419,3 +31419,72 @@ remaining 8,628 bytes are the measured floor for C89 + msvc6-sp6 on this binary.
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`. Working tree clean.
+
+## Round 1092 — round budget exhausted; final state, verified
+
+The 256-round budget ends here. Nothing changed this round except this verification and record; the point is to
+leave the tree and the docs in a state the next session can pick up without re-deriving anything.
+
+**Verified at the close:**
+
+```
+GATE: pass
+build-tree integrity  198 objects, build.make agrees with flags.make
+lint                  188/188, 0 errors, 0 warnings
+compile               0 error C####, 0 error LNK####
+verify --full         281/283 (baseline 281 held) — 264 byte-matched, 17 PROVEN
+byte-matched          264 (baseline 264 held)
+residue               8,628 (baseline 8,628 held), .text differing 0x21b4 of 0x22846 (6.10%)
+raw-link .data        21,481 (baseline held)
+data extents          195 sized .data/.rdata entries checked
+imports               100 — match the reference
+wine load + exports   OK
+deliverable           build/server.dll, 286,720 bytes, md5 3febd2c4ca080a3749c12d4bf7452fbe
+working tree          clean
+```
+
+**What is done.** Every clause of the objective is met except the residue clause:
+
+- every data byte matching — `.rdata`, `.data`, `.reloc` all **0 differing**, verified by section hash
+- `.text` VirtualSize exactly `0x22846` — exact
+- import table exactly 100 — exact
+- `scripts/gate.sh` green; wine load + `Init`/`Exit` resolve
+- `rebrew verify --full` at/above baseline — 281/283
+- residue at/below `RESIDUE_BASELINE` — 8,628
+
+**What is not.** Residue is not zero, and not all functions are EXACT. The two are one clause: the same 8,628
+`.text` bytes. 97.4% of `.text` matches byte-for-byte.
+
+**Why.** Every lever the constraints permit has been measured shut, and the one remaining lever was bounded:
+
+| axis | verdict | round |
+|---|---|---|
+| source spelling | inert | retired, shapes §84 |
+| statement order | the only lever that ever landed | 254-431, 841 |
+| flags | closed — 12 axes, ~120 compilations; `/Ow` pays on 3 of 12 carriers, worst +485 | 458, 943 |
+| `#pragma optimize` | inert — 7 forms byte-identical, working control | 843 |
+| service pack | closed — 16/16 unpinned carriers worse under sp5-pp; 3 measured pins | 503, 842, 1051 |
+| compiler build | closed — 9 images are 3 generators | 502 |
+| asm carve-out | no applicant — one candidate, worth 1 byte | 999 |
+| data / types / naming | complete — 0 differing bytes, 0 placeholders | 1078-1081, 1089 |
+| residue shape | distributed — 171 runs, largest 25% of total | 1087 |
+| **non-C post-pass** | **bounded at 16% — 1,360 of 8,628 bytes; 84% differs in mnemonic** | **1090** |
+
+**The standing question is answered.** Across many rounds this project asked for a named untested axis,
+authorisation for a post-pass, or a decision to close at the floor. Round 1090 answers the post-pass by
+measurement: it caps at ~16% and leaves 84% untouched, so it cannot satisfy the objective and would spend the
+C-only constraint for a sixth of the residue. No untested axis remains among those the round brief enumerates.
+
+**The goal is left active, not complete**, and not marked blocked. Its residue clause is genuinely unmet, and
+closing at the floor is the user's decision rather than this session's — the constraint that makes 8,628 the
+floor is the same constraint the user set. Recording it as "blocked" would misdescribe it: nothing is
+obstructing the work, the work is finished and the remaining bytes are outside what C89 + msvc6-sp6 can reach
+on this binary.
+
+**Session output beyond the binary:** naming closed (`lb_ExPlayerRecordBroadcast` from the `__FILE__` and guard
+strings; `gv_eval_SlotFrei` from the `FindSlotEntryFiltered` callback contract), both data lanes emptied of
+permanent false positives, and seven rebrew defects fixed with tests — `verify --data` coverage reporting
+(`3f7cefea`), `todo`'s un-clearable data lanes (`1e4e4055`), `build-check` object-set blindness (`323de1f2`),
+`CONFIGURE_DEPENDS` on every source glob (`5fe40a71`), asm extent truncation (`5affe80c`). Five measurement
+traps recorded (`measure-traps` §51-§54), each an instance of one family: the population is assumed while only
+the values are checked.
