@@ -29926,3 +29926,49 @@ Section geometry of the fresh composition against the reference:
 this is fixed, which is the work item this round hands forward.
 
 Committed: `scripts/map_libcmt.py`, `scripts/emit_defs.py`, rebrew's `postlink.py`, `docs/workflow-traps.md`.
+
+## Round 1054 — faking the original `D:\` path is possible (verified) and currently unnecessary (measured)
+
+Answering "can we fake the original folder structure through cmake/docker/wine?" — **yes, two lines, verified
+by experiment**, and **it changes nothing today**.
+
+**The technique.** The wineprefix is a host directory mounted into the container, and wine reads drives from
+`{prefix}/dosdevices/`. A fresh prefix has only `c:` and `z:`; adding a `d:` symlink creates the drive:
+
+```bash
+mkdir -p .scratch/Ddrive/Develop/DieGildeAddOnServer
+ln -s $PWD/.scratch/Ddrive ~/.cache/rebrew-msvc-6.0-sp6-wineprefix/dosdevices/d:
+rebrew-cmake-cl /nologo /c /O2 /Gd /MT /Foout.obj "D:\\Develop\\DieGildeAddOnServer\\server.c"
+strings out.obj | grep server.c
+#   D:\Develop\DieGildeAddOnServer\server.c      <- byte-identical to the reference
+```
+
+**Constraint found by experiment:** the `d:` target must live inside a directory the container already
+mounts. `_docker_run` mounts exactly two — the project root and the wineprefix — so a `d:` pointing at
+`/tmp` fails with `C1083` even though the symlink itself is correct. Verified both ways.
+
+**The measurement that makes it unnecessary.** `__FILE__` appears **nowhere** in the tree (`grep -rn
+"__FILE__" src/server.dll` finds one hit, in a comment). Every `D:\Develop\...` string is a **hand-written
+literal**:
+
+```c
+LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x5df, "LOBBY mode", 1);
+```
+
+- **14** `D:\Develop\...`-shaped strings exist in the reference, and **all 14 are already present in the
+  shipped file** (scanned both images).
+- **11** distinct literals are written out in the sources.
+
+So the path axis is closed by construction. The original almost certainly used literals too — had it used
+`__FILE__`, the strings would carry MSVC's own `D:\`-relative layout and `/FC` would have been needed.
+
+**When it would matter:** if a round ever converts one of these literals to `__FILE__` (while tidying, or
+because a decompiler emitted `__FILE__` for a path argument), the build would silently emit `Z:\home\maci\...`
+and break `.rdata` strings that match today. The `d:` mapping above is the fix at that point.
+
+Recorded in `general-knowledge.md` with the mechanism, the mount constraint, and the reason it is unused.
+Experiments cleaned up (`dosdevices/d:` removed, scratch dirs deleted).
+
+**State:** `build/server.dll` is the restored known-good file; the gate fails on the **pre-existing
+composition bug** characterised in round 1053 (`.text` +1264, `.rdata` +64 on a fresh composition), which
+remains the open item.

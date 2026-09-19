@@ -196,3 +196,52 @@ unmet criteria are the same quantity: the 8,628-byte residue on 18 carriers, whi
 this session has characterised from six independent angles (per-carrier class map, fault reproduction,
 displacement profiles, operand completeness, work-queue emptiness, per-function independence) and which no
 lever found in rounds 1025-1042 moves.
+
+## Faking the original `D:\` build path through wine is possible — and unnecessary (round 1054)
+
+**The question.** The game was built from `D:\Develop\...`, the reconstruction lives in a Linux checkout, and
+`__FILE__` under wine expands to a POSIX path mapped as `Z:\home\...`. Can the original path be faked?
+
+**Yes, and it is a two-line change.** Verified by experiment:
+
+```
+$ mkdir -p .scratch/Ddrive/Develop/DieGildeAddOnServer
+$ ln -s $PWD/.scratch/Ddrive ~/.cache/rebrew-msvc-6.0-sp6-wineprefix/dosdevices/d:
+$ rebrew-cmake-cl /nologo /c /O2 /Gd /MT /Foout.obj "D:\Develop\DieGildeAddOnServer\server.c"
+$ strings out.obj | grep server.c
+D:\Develop\DieGildeAddOnServer\server.c
+```
+
+`__FILE__` then expands **byte-identically** to the reference's string. The mechanism, from
+`rebrew/cmake_tc.py`: the wineprefix is a host directory mounted into the container
+(`-v {prefix}:{prefix}`), and wine reads its drives from `{prefix}/dosdevices/`. A fresh prefix has only
+`c:` and `z:`; adding a `d:` symlink there creates the drive. The target must live **inside a directory the
+container already mounts** — the project root or the wineprefix — because `_docker_run` mounts only those
+two; a `d:` pointing at `/tmp` fails with `C1083` even though the symlink is correct.
+
+**But it is unnecessary, and here is the measurement.** `__FILE__` is used **nowhere** in this tree —
+`grep -rn "__FILE__" src/server.dll` finds exactly one hit, and it is in a comment. Every `D:\Develop\...`
+string is a **hand-written literal** passed to `LogMessageInternal`, escaped in the source:
+
+```c
+LogMessageInternal("D:\\Develop\\DieGildeAddOnServer\\server.c", 0x5df, "LOBBY mode", 1);
+```
+
+All **14** `D:\Develop\...`-shaped strings in the reference are **already present in the shipped file** —
+verified by scanning both images — and all 11 distinct literals are written out in the sources.
+
+**So the path axis is already closed by construction, not by luck.** The reconstruction reproduces these
+strings by typing them, which is what the original source did too (the original called
+`LogMessageInternal("D:\\Develop\\...", ...)` with a literal, not `__FILE__` — if it had used `__FILE__`, the
+strings would carry the SDK's own layout, and `/FC` would have been required).
+
+**When this WOULD matter.** If a round ever converts one of these literals to `__FILE__` — for instance while
+tidying, or because a decompiler emitted `__FILE__` for a path argument — the build would silently start
+emitting `Z:\home\maci\...` instead of `D:\Develop\...`, breaking strings that currently match, and the
+failure would appear only in `.rdata`. The `d:` mapping above is the fix if that ever happens. Recorded so
+the technique is available and the reason it is currently unused is explicit.
+
+**Corollary for `__FILE__`-bearing code generally:** under wine, `__FILE__` reflects the path spelled on the
+`cl` command line. CMake passes an **absolute** POSIX path, so without `/FC` a `__FILE__` would still be the
+absolute path (wine maps it to `Z:`), not a relative one. Any TU that needs a specific `__FILE__` string must
+either take the `D:`-drive route above or pass a relative path, and neither is currently needed.
