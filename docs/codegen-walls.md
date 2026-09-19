@@ -2134,3 +2134,51 @@ treats as a barrier — which is a source-recovery question about what the origi
 **This is the most tractable remaining lever**, because the gap is identifiable from the disassembly alone: for
 each carrier, count the reference's `pop`/`ret` clusters, compare with ours, and the difference names the
 number of missing exits. No search space is involved.
+
+### 41. `cm_ExCopyEntityData`: the third epilogue is a *duplicated shared exit*, and two structural probes are both 905 vs 912 (round 1097)
+
+Round 1096 counted the epilogues and left the mechanism as "msvc6 folds three returns into one; the reference
+keeps them inline". Reading the branch targets shows that is **not quite right**, and the correction matters.
+
+**The reference's exits are shared too — it just materialises one of them three times.** In the reference:
+
+| site | instruction | target |
+|---|---|---|
+| `0x1000eda0` | `cmp edx, 0x1009aca4` / `jb 0x1000ed95` | loop back |
+| `0x1000eda6` | falls through | `pop edi` at `0x1000eda8` — epilogue **#1** |
+| `0x1000edbb` | `jae 0x1000eda8` | **jumps back to #1** |
+| `0x1000ee3a` | `jb` loop back, then falls through to `pop edi` at `0x1000ee3c` | epilogue **#2** |
+| `0x1000ef7b` | — | epilogue **#3** |
+
+Our build has **two** epilogue blocks (`0x1000ee46`, `0x1000ef7f`) where the reference has three, and our first
+loop exit emits `jae 0x1000ee46` — jumping *forward* to the shared exit — where the reference *falls through*
+into its own copy. So the difference is not "merged vs inline": it is **how many copies of the same epilogue the
+backend chose to materialise**, and which branch reaches which copy.
+
+**Two structural probes, both reverted, both `905` against a target of `912`:**
+
+| probe | result |
+|---|---|
+| route the loop-fallthrough exit to its own label (`goto scan_failed; … scan_failed: return 1;`) | obj **905** |
+| give that return a distinct value (`temp = 1; return temp;`) — round 1095 | obj **905** |
+| value-preserving expression (`return (int)(dst_slot == 0x300) \| 1;`) — round 1095 | obj **956** |
+
+Two different structural spellings landing on the **same** 905 says the shortfall is not the shape of that one
+statement — both remove the same 7 bytes, i.e. both collapse the same code. The target needs those 7 bytes spent
+elsewhere, which is the layout question above: a third epilogue copy.
+
+**What this means for the lever.** The epilogue count is fixed by the backend's block-placement pass over the
+whole function, not by any local spelling at the return site. Reaching three copies means changing what the
+backend sees *around* the returns — the surrounding block order — which is the same "statement/definition order
+is the only lever that lands" conclusion this project reached for other carriers, applied at the function's
+tail rather than its head.
+
+**The tractable residue in this function is now separated from the intractable part.** The 5 stride sites and
+the two epilogue clusters match instruction-for-instruction; the divergence is which of the two-or-three
+epilogue copies each branch reaches. That is a countable difference — 2 vs 3 — and it is not a source edit
+available at the return site.
+
+**Build note.** `rebrew test` reports `SIZE_MISMATCH` (obj 905 vs target 912) for this file **at HEAD as well**,
+with no source change present: the reported object size does not track what `cmake --build` produces for it. The
+gate, which measures the real composition, is unaffected. Recorded so the tool's number is not read as a
+regression.
