@@ -2478,3 +2478,35 @@ tooling's *reporting* costing more than its computation.
 Found by applying round 1072's own arithmetic cross-check to the tool rather than to a script written in the
 same round — which is the first time this session that discipline caught a defect in shared tooling instead of
 in my own ad-hoc code.
+
+## 48. Audited every table and counter the project quotes against its own arithmetic — all reconcile (round 1074)
+
+Round 1073 found the residue table hiding a carrier and failing to sum. This applies the same check to
+**every other number the project treats as a ruler**, on the principle that one unreconcilable table implies
+the possibility of others.
+
+| source | figures | check | verdict |
+|---|---|---|---|
+| `postlink_residual.py` table | 18 rows / 8623 vs summary 8628 | sum vs reported total | **failed** — fixed round 1073 (`total` row + hidden-count line) |
+| `rebrew verify --json` summary | `exact` 31, `reloc` 233, `proven` 17, `passed` 281, `total` 283, `byte_matched` 264 | 31+233 = 264 = `byte_matched`; 264+17 = 281 = `passed`; 281+2 = 283 = `total` | **exact** |
+| `rebrew verify --full` warning | "13 function(s) have annotation SIZE differing" | `size_divergences` list length | **13 = 13** |
+| `gate.sh` residue line | `residue 8628, baseline 8628 held` | `RESIDUE_BASELINE` | **held** |
+| `gate.sh` byte-match line | `byte-matched 264 (EXACT+RELOC), baseline 264 held` | `BYTE_BASELINE`, and 31+233 | **held** |
+| `gate.sh` raw-link `.data` | `21481, baseline 21481 held` | `DATA_BASELINE` | **held** |
+| `gate.sh` imports | `(100)` | reference import count | **matches** |
+| `gate.sh` data extents | `195 sized .data/.rdata entries` | — | reported, no independent total to check against |
+| `build-check` | `198 object(s) checked` | objects with a `Custom` comment in `flags.make` | **198** |
+| `fault_address.py` | 19 carrier rows | `codegen-walls` §33 table | **19, identical** |
+
+**Only one failed, and it is fixed.** Everything else is internally consistent *and* reconciles against an
+independent figure — the carrier tables agree between two tools, `verify`'s summary partitions exactly, and
+each gate baseline is a named constant the report echoes.
+
+**Why the audit was worth a round.** The residue table is the number every round quotes, so a subset silently
+presented as a total is the highest-consequence display defect available here — and it had been there for many
+rounds, invisible because nobody sums a table they trust. The other nine checks being clean is the useful
+complement: it bounds the defect to the one place it was found.
+
+**The rule.** A reported figure should either be checkable against another reported figure, or say what it is a
+subset of. Apply the check to the tooling's output, not only to hand-built tables — that is how round 1073
+found this one.

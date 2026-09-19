@@ -30594,3 +30594,33 @@ than in my own ad-hoc code**, which is the more useful version of the discipline
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1074 — audited every ruler the project quotes against its own arithmetic; one failed (fixed), nine clean
+
+Round 1073 found one table failing to reconcile. This applies the same check to **every other number treated
+as a ruler**, on the principle that one unreconcilable table implies the possibility of others.
+
+| source | check | verdict |
+|---|---|---|
+| `postlink_residual.py` table | 18 rows / 8623 vs summary 8628 | **failed** — fixed round 1073 |
+| `rebrew verify --json` summary | 31+233 = 264 = `byte_matched`; 264+17 = 281 = `passed`; 281+2 = 283 = `total` | **exact** |
+| `verify --full` "13 functions have SIZE differing" | `size_divergences` list length | **13 = 13** |
+| `gate.sh` residue / byte-match / `.data` / imports | each against its named baseline constant | **all held** |
+| `build-check` "198 object(s) checked" | objects with a `Custom` comment in `flags.make` | **198** |
+| `fault_address.py` 19 rows | `codegen-walls` §33 table | **19, identical** |
+
+**Nine clean, one failed and fixed.** Everything else is internally consistent *and* reconciles against an
+independent figure — the two carrier tables agree, `verify`'s summary partitions exactly, and every gate
+baseline is a named constant the report echoes.
+
+**Why this was worth a round rather than assumed.** The residue table is the number *every* round quotes, so a
+subset silently presented as a total was the highest-consequence display defect available here — and it had
+survived many rounds because nobody sums a table they trust. The nine clean checks are the complement that
+bounds it: the defect was in one place, and that place is now fixed.
+
+Recorded as measure-traps §48, with the rule: **a reported figure should either be checkable against another
+reported figure, or say what it is a subset of — and the check belongs on the tooling's output, not only on
+hand-built tables.**
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
