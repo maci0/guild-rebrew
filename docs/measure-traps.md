@@ -1686,3 +1686,54 @@ opposite. Both are silent without this check.
 
 **Also confirmed:** `--self-test` passes both guards (reflexive isomorphism, redirected-branch detection) and
 the 13-differ / 6-same split is reproducible run to run.
+
+## 31. Exact isomorphism over ADDRESSES answers the wrong question — establish correspondence first (round 1012)
+
+`cfg_compare.py` compared two CFGs by exact isomorphism over block **addresses**. That is not the question the
+tool exists to answer. Two builds whose blocks sit at different addresses — because intervening code differs in
+length — produce a non-isomorphic verdict for a purely encoding-level reason.
+
+**Measured on `ServerMainThread`.** Under an exact address-based isomorphism the graphs are not isomorphic, and
+round 1011 read that as a "merge-point" difference from the neighbourhood profiles. Comparing instead under a
+**block correspondence by instruction ordinal** (the k-th instruction of the reference corresponds to the k-th of
+ours):
+
+```
+successor pairs compared: 280
+mismatches:                  2
+```
+
+**278 of 280 edges match.** The two that differ are the pair already hand-verified in round 1005:
+
+```
+reference  0x100098e3  je  0x100097c5   then  0x100098e9  jmp 0x10009919
+ours       0x100098e5  jne 0x1000991a   then  0x100098e7  jmp 0x100097c5
+```
+
+Same two destinations, swapped polarity. So `ServerMainThread` is **polarity-only on 2 of 280 edges** — exactly
+round 1005's conclusion — and rounds 1010/1011's "arity"/"merge" readings were both artifacts of comparing
+addresses.
+
+**The rule.** An isomorphism test must run on a **correspondence**, not on raw identities. Before comparing any
+two compiled artifacts: establish which node corresponds to which (by ordinal, by canonical role, by matched
+canonical form), *then* compare the induced edges. Comparing addresses compares layout, not structure.
+
+**The tool now reports a graded verdict** — `mismatches / edges-checked` under ordinal correspondence — which is
+far more informative than SAME/DIFFERS:
+
+| carrier | differing edges by ordinal |
+|---|---|
+| `ServerMainThread` | **2 / 280 (0.7%)** |
+| `ahm_ExAllocAlchemist` | 6 / 30 |
+| `vfs_OpenStream` | 7 / 27 |
+| `gm_CheckInventoryCapacity` | 9 / 10 |
+| `gm_AllocSpieler` | 75 / 132 |
+| (6 carriers) | **0 — control flow identical** |
+
+`ServerMainThread` is now visibly a near-miss, not a structural outlier, which is the opposite of what the
+address-based verdict said.
+
+**Three rounds, one root cause.** Rounds 1009, 1010 and 1011 each reached a different mechanism for the same
+bytes (polarity → arity → merge) because each reasoned from a summary the previous round had computed wrongly.
+The fix was not another inference: it was changing the *comparison primitive* so the correspondence is
+established before anything is measured.

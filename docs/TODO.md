@@ -28266,3 +28266,38 @@ shape of one difference; the measurement says no carrier is polarity-only, and e
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1012 — address-based isomorphism was the wrong primitive; `ServerMainThread` is a 2-of-280 near-miss
+
+Round 1011 classified `ServerMainThread` as the tree's only "merge-class" carrier, from its neighbourhood
+profiles. **That was an artifact**, and this round found the cause by changing the comparison primitive.
+
+**Compared under a block correspondence by instruction ordinal** (k-th instruction of the reference ↔ k-th of
+ours) instead of by address: **278 of 280 successor pairs match**. The two that differ are the pair hand-verified
+back in round 1005 at `0x100098e3`/`0x100098e9` — `je 0x100097c5` + `jmp 0x10009919` against
+`jne 0x1000991a` + `jmp 0x100097c5`: same two destinations, swapped polarity.
+
+So `ServerMainThread` is **polarity-only on 2 of 280 edges**, which is what round 1005 said. Rounds 1010's
+"arity" reading and 1011's "merge" reading were both artifacts of comparing **addresses**: our blocks sit 2-3
+bytes earlier, so their targets land on different addresses for a reason downstream of an encoding choice.
+
+**The tool now reports a graded verdict, `mismatches / edges-checked`:**
+
+| carrier | differing edges by ordinal |
+|---|---|
+| `ServerMainThread` | **2 / 280 (0.7%)** |
+| `ahm_ExAllocAlchemist` | 6 / 30 |
+| `vfs_OpenStream` | 7 / 27 |
+| `gm_CheckInventoryCapacity` | 9 / 10 |
+| `gm_AllocSpieler` | 75 / 132 |
+| `m_AllocTracked`, `srv_LoadBuf`, `gm_ObjectsAvailble`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue` | **0** |
+
+→ measure-traps §31; codegen-walls §18 carries a dated correction over the superseded merge reading.
+
+**Three rounds, one root cause.** 1009, 1010 and 1011 each named a different mechanism for the same bytes
+(polarity → arity → merge) because each reasoned from a summary the previous round had computed with the wrong
+primitive. The fix was not a better inference but a better comparison: establish the block correspondence
+first, then compare the induced edges.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.

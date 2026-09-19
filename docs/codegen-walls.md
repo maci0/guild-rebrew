@@ -1024,9 +1024,29 @@ reports as non-isomorphic, which classifies them without guessing.
 reverse), i.e. the *shape* of a branch differs, not its polarity. That is §84's statement-order class at the
 branch level, and it is why the successor-set canonical form separates them despite collapsing polarity.
 
-**`ServerMainThread` is the one exception, and it is the most interesting.** Its out-degree histograms,
-undirected edge counts **and** directed edge-kind multisets are all *identical*, yet the graphs are not
-isomorphic. The difference is in the neighbourhood profiles:
+**`ServerMainThread` is the one exception — and round 1012 showed the "merge" reading here was an artifact.**
+
+> **CORRECTION (round 1012).** The neighbourhood-profile table below was read as a *merge-point* difference.
+> It is not. Comparing the two graphs under a **block correspondence by instruction ordinal** (rather than by
+> address) shows **278 of 280 successor pairs match**. The two that differ are the pair already hand-verified in
+> round 1005 at `0x100098e3` / `0x100098e9`:
+>
+> ```
+> reference  0x100098e3  je  0x100097c5   then  0x100098e9  jmp 0x10009919
+> ours       0x100098e5  jne 0x1000991a   then  0x100098e7  jmp 0x100097c5
+> ```
+>
+> Same two destinations, swapped polarity. So `ServerMainThread` is **polarity-only**, exactly as round 1005
+> concluded. The exact-isomorphism test rejects it because the reference reaches `0x100097c5` by a taken branch
+> where we reach it by a fallthrough, and the two blocks sit at *different instruction ordinals* as a result —
+> an address-level difference that is downstream of an encoding choice, not of topology.
+>
+> **The lesson, which is the same one rounds 1009-1011 kept relearning:** an exact isomorphism test on
+> *addresses* answers "are these the same graph at the same addresses", not "is the control flow the same". The
+> correspondence has to be established first (by ordinal or by canonical role), and only then compared. The
+> neighbourhood table below is real data but was over-read.
+
+**The original neighbourhood-profile reading (superseded, kept for the record):**
 
 | neighbourhood (kind, successor kinds, predecessor kinds) | ref | ours |
 |---|---|---|

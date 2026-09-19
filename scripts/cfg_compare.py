@@ -331,6 +331,52 @@ def compare(md, va, size):
     return rb, re_, bb, be, isomorphic(rb, re_, bb, be)
 
 
+def compare_by_ordinal(md, va, size):
+    """Compare CFGs under a block correspondence by INSTRUCTION ORDINAL.
+
+    Why this is the primary verdict (round 1012).  Exact isomorphism over
+    addresses answers "are these the same graph at the same addresses", which is
+    NOT the question.  Two builds whose blocks sit at different addresses because
+    intervening code differs in length produce a non-isomorphic verdict for a
+    purely encoding-level reason -- measured on ServerMainThread, where 278 of
+    280 successor pairs matched under an ordinal correspondence and the two that
+    did not were a polarity swap on the same two destinations (round 1005).
+
+    Correspondence: the k-th instruction of the reference's function corresponds
+    to the k-th of ours.  A block then corresponds to the block starting at the
+    corresponding ordinal.  Successors are compared as ordinals, so ±2-3 byte
+    drift cancels.
+    """
+    rcode, rva = textof(REFERENCE)
+    bcode, bva = textof(BUILT)
+    rord = {i.address: k for k, i in enumerate(md.disasm(rcode[va - rva:va - rva + size], va))}
+    bord = {i.address: k for k, i in enumerate(md.disasm(bcode[va - bva:va - bva + size], va))}
+    rb, re_ = build_cfg(md, rcode, rva, va, size)
+    bb, be = build_cfg(md, bcode, bva, va, size)
+    binv = {v: k for k, v in bord.items()}
+
+    checked = mismatch = 0
+    diffs = []
+    for a in sorted(rb):
+        if rord.get(a) not in binv:
+            continue
+        a2 = binv[rord[a]]
+        if a2 not in be:
+            continue
+        for key in ("taken", "fall"):
+            rt = re_[a].get(key)
+            bt = be[a2].get(key)
+            if rt is None and bt is None:
+                continue
+            checked += 1
+            rt_o = rord.get(rt) if rt in rb else None
+            bt_o = bord.get(bt) if bt in bb else None
+            if rt_o != bt_o:
+                mismatch += 1
+                diffs.append((a, key, rt, bt))
+    return checked, mismatch, diffs
+
+
 def self_test(md) -> bool:
     """Prove the tool discriminates: a graph vs ITSELF is isomorphic, and the
     same graph with one branch redirected is not.
@@ -389,12 +435,15 @@ def main():
         if want and name not in want:
             continue
         rb, re_, bb, be, same = compare(md, va, size)
+        checked, mism, _ = compare_by_ordinal(md, va, size)
         if same:
-            print("%-34s %6d %6d  SAME" % (name, len(rb), len(bb)))
+            verdict = "SAME"
+        elif mism == 0:
+            verdict = "same flow (0/%d edges differ by ordinal)" % checked
         else:
             differ += 1
-            print("%-34s %6d %6d  DIFFERS (blocks %d vs %d)"
-                  % (name, len(rb), len(bb), len(rb), len(bb)))
+            verdict = "DIFFERS (%d/%d edges by ordinal)" % (mism, checked)
+        print("%-34s %6d %6d  %s" % (name, len(rb), len(bb), verdict))
     print("\ncarriers whose control flow differs: %d of %d" % (differ, len(CARRIERS)))
     return 0
 
