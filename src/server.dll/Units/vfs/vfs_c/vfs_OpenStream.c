@@ -33,12 +33,19 @@ extern int __cdecl crt_toupper(int current_char);
  *     positional/scheduling, not opcode truth (target emits xor-then-or);
  *     kept for the bytes.
  *
- * Residual: the target's frame is 0xc and ours is 8, so every [esp+...]
- * displacement is off by 4 from index 0 and the positional compare cannot
- * recover. The extra dword is a slot msvc6 reserves for a fourth live value
- * that no source shape reproduced: unused padding locals are eliminated
- * (94), widening mode14/mode18 to int changes the slot count but not the
- * layout (92/94), int mode13 gives 97, and the `sp` alias gives 97 without
+ * STALE (round 1041): the paragraph below says "ours is 8" -- it is not. Ours
+ * is `sub esp,0xc`, matching the reference, verified by decoding both
+ * prologues. The `int mode14` fix recorded further down this same header
+ * ("gives the target's sub esp,0xc frame") is the one that is current, so the
+ * header contradicts itself here and this paragraph is the outdated half. Do
+ * not chase a 4-byte frame mismatch on this function; there is none.
+ *
+ * Original text, kept for history: the target's frame is 0xc and ours is 8, so
+ * every [esp+...] displacement is off by 4 from index 0 and the positional
+ * compare cannot recover. The extra dword is a slot msvc6 reserves for a fourth
+ * live value that no source shape reproduced: unused padding locals are
+ * eliminated (94), widening mode14/mode18 to int changes the slot count but not
+ * the layout (92/94), int mode13 gives 97, and the `sp` alias gives 97 without
  * widening the frame.
  * Other dead ends, each re-tested: descending header-byte store order to
  * match the target's [edi+8]..[edi+3] (155, no change), a `zp` pointer local

@@ -29382,3 +29382,37 @@ Recorded as `codegen-walls.md` §23. The test itself is the cheapest high-value 
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1041 — surveyed every carrier's frame: 18 of 19 match exactly; found and annotated a stale frame note
+
+Frame size is the coarsest allocator decision, so a differing frame would explain a register-role divergence
+on every carrier it touched. Surveyed each carrier's prologue `sub esp,<imm>` in the reference against the
+shipped file.
+
+**Result: 18 of 19 frames match exactly.** `gm_AllocSpieler` `0x41c`, `cm_ExSellObjekt` `0x228`,
+`ServerMainThread` `0x1e4`, `srv_LoadBuf` `0x2a0`, `m_AllocTracked` `0x118`, `gm_AllocGebaeude` `0x410`,
+`gm_CheckInventoryCapacity` `0x20`, `gm_ObjectsAvailble` `0x28`, `ls_LoadBuildingEntityState` /
+`cm_ExCopyEntityData` / `vfs_OpenStream` `0xc`, `gv_ExAllocGraveyardWorker` `0x10`, the small ones `8`/`0x10`,
+`gm_FindNextFilteredEntity` no `sub esp` — all exact. The single exception is
+**`CrashDumpUnhandledExceptionFilter`: `0x280` (ref) vs `0x284` (ours).**
+
+**What this sharpens.** The register-role rotations on the eight zero-branch carriers happen under a frame
+that is already correct, so they are a pure colouring choice among equally-valid allocations, not a
+consequence of slot assignment. Consistent with Finding 67 (18 of 19 carriers have identical save order and
+register pressure). Recorded as allocator Finding 70.
+
+**The one exception is already a wall.** `CrashDump`'s surplus is shapes §81: four independent routes to
+`sub esp,0x280` all reach the frame and all lose ~45-60 matches, the round-174 mechanism (read the walk
+loop's guard through the parameter) reaches it with alignment *rising* 392 -> 407, and it was link-tested
+under the rule's own proviso — **+66 linked, the row +58**. Sixth confirmation. Not re-probed.
+
+**A stale note found and annotated.** `vfs_OpenStream`'s header paragraph at line 36 says *"the target's
+frame is 0xc and ours is 8, so every [esp+...] displacement is off by 4"*. **Ours is `esp,0xc` — it
+matches.** The same header, 23 lines later, records the `int mode14` fix that produced `sub esp,0xc`, so the
+header contradicts itself and the newer entry is right. Annotated STALE in place with the verification
+method, and the original text kept beneath it for history. Comment-only: lint 188/188, link **+0**.
+
+**No functional source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

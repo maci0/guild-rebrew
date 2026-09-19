@@ -3689,3 +3689,43 @@ spellings were re-measured **at the link** this round, all reverted:
 **Judgement:** with 220/235 instructions identical, exact instruction-count parity, and all six known
 spellings landing at 0 or worse, this row's remaining 25 bytes are the allocator's register *choice* under a
 frame layout that already matches. No C lever named. Not re-probed without a new allocator finding.
+
+## Finding 70 — 18 of 19 carriers have the reference's exact frame; only CrashDump differs (round 1041)
+
+Frame size is the coarsest allocator decision and the one most likely to explain a register-role divergence:
+if a carrier's stack frame differs, slot assignment differs, and the register colouring follows. Surveyed
+every carrier's prologue `sub esp,<imm>` in the reference against the shipped file:
+
+| carrier | reference | shipped | |
+|---|---|---|---|
+| `gm_AllocSpieler` | `esp,0x41c` | `esp,0x41c` | ok |
+| `cm_ExSellObjekt` | `esp,0x228` | `esp,0x228` | ok |
+| `ServerMainThread` | `esp,0x1e4` | `esp,0x1e4` | ok |
+| `srv_LoadBuf` | `esp,0x2a0` | `esp,0x2a0` | ok |
+| `m_AllocTracked` | `esp,0x118` | `esp,0x118` | ok |
+| `gm_AllocGebaeude` | `esp,0x410` | `esp,0x410` | ok |
+| `gm_CheckInventoryCapacity`, `gm_ObjectsAvailble` | `esp,0x20`, `esp,0x28` | same | ok |
+| `ls_LoadBuildingEntityState`, `cm_ExCopyEntityData`, `vfs_OpenStream` | `esp,0xc` | `esp,0xc` | ok |
+| `gv_ExAllocGraveyardWorker` | `esp,0x10` | `esp,0x10` | ok |
+| `ahm_ExAllocAlchemist`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `cm_ProcessCommandQueue`, `gm_CalculateProductionValue` | `esp,8`/`0x10` | same | ok |
+| `gm_FindNextFilteredEntity` | (no `sub esp`) | same | ok |
+| **`CrashDumpUnhandledExceptionFilter`** | **`esp,0x280`** | **`esp,0x284`** | **DIFF** |
+
+**Eighteen of nineteen frames match exactly.** So the residue is *not* a frame-layout cascade on any carrier
+but one, which sharpens Findings 62/63: the register-role rotations on the eight zero-branch carriers happen
+under a frame that is already correct, so they are a pure colouring choice among equally-valid allocations
+rather than a consequence of slot assignment. That is consistent with Finding 67's observation that 18 of 19
+carriers have identical save order and register pressure.
+
+**The one exception is already a documented wall.** `CrashDump`'s 4-byte surplus is shapes §81, which
+records four independent routes to `sub esp,0x280` (space-drop, hProcess reload, pDbgBuf kill, nested-loop
+shape) plus the round-174 mechanism — reading the walk loop's guard through the parameter instead of the
+local ends `pCtx`'s live range and produces `sub esp,0x280` exactly with aligned instructions *rising*
+392 → 407. It was link-tested under the rule's own proviso: **+66 linked, the row +58.** Sixth confirmation
+that closing the frame alone still costs bytes.
+
+**A stale note found by the survey.** `vfs_OpenStream`'s header states *"the target's frame is 0xc and ours
+is 8, so every [esp+...] displacement is off by 4 from index 0"*. **Ours is `esp,0xc` — it matches.** The
+note predates the `int mode14` fix recorded later in the same header ("gives the target's `sub esp,0xc`
+frame with the same 0x13/0x14/0x18 slots"), so the header contradicts itself and the newer entry is correct.
+A future round reading the older paragraph would chase a frame mismatch that no longer exists.
