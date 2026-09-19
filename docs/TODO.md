@@ -30684,3 +30684,36 @@ instead of reporting "the file differs". Recorded as measure-traps §50.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1077 — the `ls_LoadBuildingEntityState` `lea` swap is §70's inert class, not a new shape
+
+Round 1077 opened on the second divergence inside `ls_LoadBuildingEntityState` (`0x100128f0`), the first `jcc`
+carrier: at `0x10012944` the reference reads `lea esi,[edx+ecx]` where we emit `lea esi,[ecx+edx]`. Same three
+bytes, swapped operand order in a commutative address expression. `whathas.py 0x10012944` returned only two
+incidental TODO hits, neither about this shape, which made it look unrecorded.
+
+**It is recorded — twice, from two directions:**
+
+- `docs/msvc6-c-shapes.md` §70, "operand order in a commutative address expression is inert; only the *nesting*
+  steers" (`msvc6-c-shapes.md:2622`): a sweep over operand orders is wasted budget by construction.
+- `docs/codegen-walls.md` §15 stated the same finding for this exact carrier, with a **working probe**: naming
+  the `esi + 0x34` argument pointer to match the reference's `mov ecx,ebx; add ecx,edx` form is
+  **byte-identical**, i.e. the site was already at its optimum.
+
+**The one real defect was in the citation, not the claim.** §15 wrote a bare "§70", which in a file whose own
+headings stop at §33 reads as a dangling reference into itself. Fixed in place: the citation now names
+`msvc6-c-shapes.md` explicitly and says why the bare form is ambiguous. This is a documentation defect of the
+same family as round 875's stale cross-references — a correct claim carrying a reference the reader cannot
+resolve.
+
+**Both divergences in this function are now accounted for and neither is a lever.** The other is the branch
+target `jle 0x10012dea` (ref) vs `0x10012de8` at `0x1001292a`, carried in §13 and §33. The carrier's 671 bytes
+are therefore fully classified: operand-order (inert) plus branch target (post-front-end placement).
+`whathas.py` returning "no documented probe" was again not proof of novelty — the lesson AGENTS.md already
+records, restated here because this round re-earned it.
+
+**No source, metadata or link change; nothing to revert.** The edit is comment-only prose in
+`docs/codegen-walls.md`.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

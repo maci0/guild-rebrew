@@ -888,10 +888,13 @@ different-kind**). Both probed this round, both **+0**:
 
 - `cm_ExProdObjekt`: the three-instruction ordering hunk. Header records a *complete* enumeration — "all 112
   topological orderings of the seven statements … none beats 976". Genuine closure.
-- `ls_LoadBuildingEntityState`: the `lea esi,[edx+ecx]` vs `[ecx+edx]` operand swaps are §70's inert class
-  ("operand order in a commutative address expression is inert"), and naming the `esi + 0x34` argument pointer
-  to match the reference's `mov ecx,ebx; add ecx,edx` form is **byte-identical** — §70's "this site was
-  already at its optimum" reproduces.
+- `ls_LoadBuildingEntityState`: the `lea esi,[edx+ecx]` vs `[ecx+edx]` operand swaps are **`msvc6-c-shapes.md`
+  §70**'s inert class ("operand order in a commutative address expression is inert"; the section number lives
+  in the shapes doc, not here — codegen-walls has no §70, so a bare "§70" in this file reads as a dangling
+  reference), and naming the `esi + 0x34` argument pointer to match the reference's `mov ecx,ebx; add ecx,edx`
+  form is **byte-identical** — shapes §70's "this site was already at its optimum" reproduces. Re-confirmed
+  round 1077: the swap sits at `0x10012944`, paired with the `jle 0x10012dea` / `0x10012de8` branch-target
+  divergence at `0x1001292a` already carried in §33. Both are accounted for; the function yields no new lever.
 
 **Conclusion.** The asm permission is a constraint clarification, not a lever. No carrier among the 19 has a
 site where asm would be both permitted and useful.
