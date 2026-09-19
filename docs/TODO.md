@@ -30497,3 +30497,34 @@ Recorded as `codegen-walls.md` §32.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1071 — consolidated all 19 first divergences; reproduced independently, two methods agree
+
+Built the first-differing-instruction table for all nineteen carriers from the current shipped file (byte
+compare for the first differing offset, then the reference instruction covering it) and **cross-checked it
+against `scripts/fault_address.py`**, which uses a different method (walk both streams from each entry, report
+the first structural disagreement). **Both agree on every instruction and every address.**
+
+Classified by instruction kind:
+
+| kind | count | carriers |
+|---|---|---|
+| branch target (`jcc`) | **5** | `ls_LoadBuildingEntityState`, `cm_ExCopyEntityData`, `gv_ExAllocGraveyardWorker`, `ServerMainThread`, `cm_ProcessCommandQueue` |
+| operand (`mov`/`lea`) | 6 | `cm_ExSellObjekt`, `gm_AllocGebaeude`, `ahm_ExAllocAlchemist`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_AllocSpieler` |
+| stack/frame | 3 | `CrashDump`, `m_AllocTracked`, `srv_LoadBuf` |
+| compare/zero | 3 | `vfs_OpenStream`, `gm_FindNextFilteredEntity`, `gm_CheckInventoryCapacity` |
+| register role | 1 | `gm_ObjectsAvailble` |
+| x87 | 1 | `gm_CalculateProductionValue` |
+
+**Nineteen instructions, five of them `jcc`** — the branch-target class whose mechanism is the backend layout
+pass, not anything expressible in C. Recorded as `codegen-walls.md` §33 so a future round reads the table
+rather than re-deriving the set.
+
+**The cross-check is the substance of this round.** Two independent methods, same nineteen answers — which
+means the *description* of the residue is now verified twice, independently, on the current build. That is
+worth having precisely because recent rounds kept finding my single-method measurements needed correction.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

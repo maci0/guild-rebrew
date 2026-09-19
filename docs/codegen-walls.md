@@ -1723,3 +1723,52 @@ than general, and not reachable from C.
 disagrees (reference 467 `fc` vs our 465) for reasons unrelated to prefixes. The table above counts only the
 meaningful pattern (direction prefix *immediately followed by* a rep opcode), which is why it is trustworthy
 where the raw count is not.
+
+### 33. All 19 first divergences in one table, independently reproduced (round 1071)
+
+§13 and §12c state each carrier's divergence site; this consolidates **the first differing instruction** for
+all nineteen in one place, re-derived from the current shipped file and **cross-checked against
+`scripts/fault_address.py`** — a tool written at a different time from a different method. Both agree on every
+instruction and every address.
+
+| carrier | first diff | instruction (reference) |
+|---|---|---|
+| `gm_AllocSpieler` | `+0x00aa` | `lea edx, [edx + 0x100358fc]` |
+| `CrashDump` | `+0x0002` | `sub esp, 0x280` |
+| `cm_ExSellObjekt` | `+0x002c` | `mov dword ptr [esp + 0x14], edi` |
+| `ls_LoadBuildingEntityState` | `+0x003c` | `jle 0x10012dea` |
+| `cm_ExCopyEntityData` | `+0x0030` | `jne 0x1000ed8e` |
+| `gv_ExAllocGraveyardWorker` | `+0x0107` | `jle 0x10011d77` |
+| `ServerMainThread` | `+0x03c7` | `je 0x10009827` |
+| `gm_AllocGebaeude` | `+0x0060` | `mov edx, dword ptr [0x10030b6c]` |
+| `vfs_OpenStream` | `+0x0036` | `cmp byte ptr [eax], 0` |
+| `gm_FindNextFilteredEntity` | `+0x0006` | `xor cl, cl` |
+| `ahm_ExAllocAlchemist` | `+0x00cc` | `lea edx, [eax + eax*8]` |
+| `gm_CheckInventoryCapacity` | `+0x0013` | `xor ebp, ebp` |
+| `m_AllocTracked` | `+0x0011` | `push esi` |
+| `srv_LoadBuf` | `+0x0050` | `push eax` |
+| `gm_ObjectsAvailble` | `+0x010d` | `test ebx, ebx` |
+| `vfs_ReadCompressed` | `+0x009a` | `mov edi, eax` |
+| `cm_ExProdObjekt` | `+0x00cd` | `mov edx, dword ptr [0x101de450]` |
+| `cm_ProcessCommandQueue` | `+0x0037` | `jne 0x1000ab08` |
+| `gm_CalculateProductionValue` | `+0x00e4` | `fxch st(1)` |
+
+**Classified by the instruction's kind:**
+
+| kind | count | carriers |
+|---|---|---|
+| branch target (`jcc`) | 5 | `ls_LoadBuildingEntityState`, `cm_ExCopyEntityData`, `gv_ExAllocGraveyardWorker`, `ServerMainThread`, `cm_ProcessCommandQueue` |
+| operand (`mov`/`lea`) | 6 | `cm_ExSellObjekt`, `gm_AllocGebaeude`, `ahm_ExAllocAlchemist`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_AllocSpieler` |
+| stack/frame | 3 | `CrashDump` (`sub esp`), `m_AllocTracked` (`push esi`), `srv_LoadBuf` (`push eax`) |
+| compare/zero | 3 | `vfs_OpenStream` (`cmp [eax],0`), `gm_FindNextFilteredEntity` (`xor cl,cl`), `gm_CheckInventoryCapacity` (`xor ebp,ebp`) |
+| register role | 1 | `gm_ObjectsAvailble` (`test ebx,ebx`) |
+| x87 | 1 | `gm_CalculateProductionValue` (`fxch st(1)`) |
+
+**Why the table is worth having in one place.** It is the most compact statement of what remains: nineteen
+instructions, each already characterised in its own section, and **five of them are `jcc`** — the branch-target
+class whose mechanism is the backend layout pass rather than anything in C. Any future round can read this
+table instead of re-deriving the set.
+
+**The cross-check is the point.** `fault_address.py` walks both instruction streams from each entry and reports
+the first structural disagreement; the table above was built by a different method (byte compare for the first
+differing offset, then the reference instruction covering it). Two independent methods, same nineteen answers.
