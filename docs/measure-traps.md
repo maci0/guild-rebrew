@@ -2030,3 +2030,60 @@ inventory agrees (`fcn.10016f80`, 352 bytes). The bytes at its entry are `c4 08 
 function's own prologue begins at `0x10016f8a`. `fault_address.py` walks the streams from `0x10016f80` and
 reports the first disagreement at `0x10016f86`; that is correct, and a first attempt to call this row
 "the wrong span" was wrong. Decode the streams, do not read the bytes at the entry.
+
+## 38. "Displacement wake" is a hypothesis to measure, not a property to assume (round 1031)
+
+`msvc6-c-shapes.md` §109 closes `gm_AllocSpieler` (the largest carrier, 2,823 of 8,628 residue bytes)
+with a framing that bounds expectations:
+
+> the 2,824-byte residue behind it is that one scheduling decision's **displacement wake** rather
+> than 2,824 bytes of wrong code
+
+That is plausible and it is the kind of claim that changes what a future round should attempt — if the
+residue is one decision's displaced wake, the lever is that decision; if it is many independent local
+shifts, no single lever reaches it. So it is worth measuring, and it **does not reproduce**.
+
+**Method.** For each sampled offset in our image, search the reference within ±0x800 for the same 24-byte
+context. The distance at which the context is found is the local displacement at that position. A single
+cliff produces very few distinct displacement values and very few runs; many independent shifts produce
+many of both.
+
+**Result on `gm_AllocSpieler` (raw link, 0xaa..0xe30):**
+
+```
+98 of 873 sampled positions matched a 24-byte context
+displacement values: 0 (x35), +5 (x13), -5 (x12), -3 (x8), +11 (x7), +7 (x7),
+                     +3 (x7), -13 (x5), +4 (x3), +2 (x1)
+distinct values: 10
+displacement runs: 12
+```
+
+```
++0x17a..+0x18a  +0      +0x42a..+0x442  +7      +0xb82..+0xbd2  -13
++0x1aa..+0x1aa  +2      +0x512..+0x52a  +3      +0xc4e..+0xca2  -5
++0x22e..+0x246  +11     +0x912..+0x9c2  +0      +0xd9e..+0xe4e  +0
++0x32a..+0x346  -3      +0xa62..+0xa6a  +4
++0x3ae..+0x3de  +5
+```
+
+**Twelve runs with ten distinct values, and the signs alternate.** Our stream is *shorter* than the
+reference in some regions and *longer* in others, and it re-syncs (+0) three separate times
+(`+0x17a`, `+0x912`, `+0xd9e`). That is not one scheduling decision's wake; it is a series of independent
+local differences that each displace until the next re-sync.
+
+**Also, a global-shift test fails outright.** Checking whether our bytes after the first divergence equal
+the reference at a constant offset gives a best of **310/3519** at delta +5 — chance level. There is no
+rigid displacement to find.
+
+**What this changes.** §109's *mechanism* conclusion (the fault at `+0xaa` is a scheduler decision, and the
+three recorded reorderings all lose 371 matched bytes) stands — it is separately measured and I did not
+re-probe it. What does not stand is the **extrapolation** from that fault to the shape of the remaining
+2,823 bytes. The residue is not one wake to be unwound; it is ~12 local differences to be closed
+individually, of which the first is the one §109 closed.
+
+**The rule.** "It is all downstream of fault X" is a claim about *attribution*, and it needs the same
+measurement any other claim does. Before accepting it, sample the interior: a genuine single-cause wake
+shows one or two displacement values; many values with alternating signs means the fault explains the
+first run and nothing after it. This is measure-traps §13 (positional comparison desyncs) turned into a
+constructive measurement — the local-context search is what turns "the streams desync" into a numeric
+displacement profile.
