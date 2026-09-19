@@ -30078,3 +30078,50 @@ unannotated-code gap anywhere in the tree.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1059 — re-profiled the two spiel622.c carriers with the sound instrument; both confirm documented walls
+
+Applied round 1048's corrected instrument (direct prefix walk + resync scan; **not** `SequenceMatcher`,
+which measure-traps §45 shows reports 100% on streams that diverge at instruction 21) to the two carriers
+that share `spiel622.c`, and decoded the exact divergence in each:
+
+**`gm_CalculateProductionValue` (`0x10019720`, 5 residue)** — 127 instructions both sides, first difference at
+index 68 (54% prefix), tail resync 5/58 at offset +1:
+
+```
+ref  fxch st(1)                    our  cmp byte ptr [esi], 0x17
+ref  cmp byte ptr [esi], 0x17      our  fxch st(1)
+```
+
+An **adjacent pair swap**, exactly as `msvc6-c-shapes.md` §46 records: the `fxch` slot and the compare fold
+are set by **one type choice** — a `float` local folds the compare but schedules it ahead of the `fxch`; a
+`double` local gets the order right but loses the fold and emits `mov al,[esi]` + a later `cmp al,0x17`, one
+byte longer. **The two cannot be steered apart.** The file header documents both spellings and their scores
+across ~200 lines (lines 83-277). Measured now, reverted never — nothing was probed.
+
+**`gm_CheckInventoryCapacity` (`0x10019ed0`, 97 residue)** — 138 vs 137 instructions, first difference at
+index 8 (6% prefix), tail resync **107/128 at offset +1**:
+
+```
+ref  xor ebp, ebp                  our  mov dword ptr [esp+0x18], 0x12
+```
+
+The `in_list = 0` placement documented at round 1034, whose crux probe (hoisting `in_list` and `cap` with
+`list[7] = in_list`) measured **+0** with the carrier unchanged.
+
+**Neither row moved and neither has an unprobed lever.** Both are documented from multiple angles, and both
+are among the 18 carriers whose walls this project has characterised.
+
+**Also verified this round — the objective's load criterion at the byte level.** The built DLL's two exports,
+located through the reference's own export directory:
+
+| export | VA | 64-byte body |
+|---|---|---|
+| `Init` | `0x10009320` | **0 differing bytes** |
+| `Exit` | `0x10009350` | **0 differing bytes** |
+
+So the functions the DLL actually exposes are byte-identical, not merely loadable — which is the strongest
+form of the "Wine load + exports resolve" criterion.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
