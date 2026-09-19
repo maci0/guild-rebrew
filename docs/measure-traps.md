@@ -1821,3 +1821,38 @@ If identical, the divergence is placement. Only a difference in the *shipped* fi
 **This is the third time this section has been re-derived** (rounds 977, 980, 1015), each from a slightly
 different angle. The stable answer: shipped `.data` is exact; raw-link `.data` is a placement metric that the
 gate correctly enforces as a *ceiling*, not a target.
+
+## 34. Both decoders reaching the span end proves there is no hidden slack (round 1017)
+
+Round 990 computed "119 bytes of padding" for `gm_AllocSpieler` from `span - sum(instruction sizes)` and
+concluded the object had room. That arithmetic is unsound: a linear disassembly that stops early produces
+exactly that kind of phantom gap.
+
+**The sound test is whether both decoders reach the span end exactly.**
+
+```
+reference  1063 instructions, sizes summing to 3696   (span 3696)
+built      1061 instructions, sizes summing to 3696   (span 3696)
+```
+
+Both consume the span with **zero remainder**, so there is no padding and no slack. Our stream has **two fewer
+instructions** than the reference, offset by larger encodings — that difference, not a size deficit, is what the
+2,823-byte residue consists of.
+
+**Both tails are byte-identical**, which is the check that makes the count meaningful:
+
+```
+reference  0x100196b8  ret   then 7x nop   -> 0x100196c0
+built      0x100196b8  ret   then 7x nop   -> 0x100196c0
+```
+
+**The rule.** A size budget must come from an artefact, not from arithmetic over a disassembly:
+
+| claim | method | valid? |
+|---|---|---|
+| "119 bytes of slack" (round 990) | `span - sum(sizes)`, decoder stopped early | **no** |
+| "slack 0" (rounds 1001, 1017) | COMDAT raw == span, read from the COFF | **yes** |
+| "both decode to the span end" (this round) | sum of sizes == span on both sides | **yes** |
+
+Three methods, two answers; only the artefact-based ones agree. This is the fourth time this session that a
+figure derived from disassembly arithmetic rather than from the container has been wrong (§§21, 23, 24, 26).

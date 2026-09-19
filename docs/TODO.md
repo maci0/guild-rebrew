@@ -28408,3 +28408,31 @@ because the difference between those two is what three rounds kept tripping over
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1017 — re-tested the "no slack" conclusion by trying to falsify it; it holds, and round 990's arithmetic was unsound
+
+Tried to falsify my own claim that no carrier has size headroom, by looking for removable bytes rather than
+accepting the span measurement.
+
+**Screened all 19 carriers for span slack** (COMDAT raw vs next-tracked-VA span): **zero have slack**; 167 objects
+are exactly at span and 6 are under. No carrier can accept a size-increasing edit.
+
+**`gm_AllocSpieler`'s "119 bytes of padding" was an arithmetic artifact.** Round 990 computed
+`span - sum(instruction sizes)` and got 119 because the linear decoder stopped early. The sound test:
+
+```
+reference  1063 instructions summing to 3696   (span 3696, remainder 0)
+built      1061 instructions summing to 3696   (span 3696, remainder 0)
+```
+
+Both decoders consume the span exactly, so there is no padding. Our stream has **two fewer instructions**,
+offset by larger encodings — that is what the 2,823-byte residue consists of, not a size deficit. Both tails are
+byte-identical (`ret` + 7 nops ending at `0x100196c0`). → measure-traps §34.
+
+**This makes the constraint precise rather than vague.** The carrier is not "16 bytes short of room"; it is a
+fixed 3,696-byte span containing the same instruction sequence with 2 fewer instructions and different register
+encodings. Any fix must be **size-neutral** — which is why every size-increasing probe across rounds 990-1002
+collapsed the composition.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
