@@ -626,52 +626,93 @@ the one the build uses.
 **Related:** this is why `rebrew verify --full` is safe to run freely and `rebrew test --toolchain` is not —
 `verify` reads, `test` writes.
 
-## 16. A header's "unused slack" figure is a stale measurement too (round 998)
+## 16. A header's "unused slack" figure was CORRECT — the check that "disproved" it was tautological (rounds 998, 1017, 1018)
 
 Workflow-traps §14 established that a header's recorded **delta** is a historical measurement, not a budget.
-Round 998 found the same is true of a recorded **headroom** figure, and this one is more dangerous because it
-licenses work rather than describing it.
+Round 998 extended that to a recorded **headroom** figure and concluded `cm_ExProdObjekt.c:341-343`'s
+"15 bytes of unused slack" was stale, because the object's `.text` raw size equalled the span.
 
-`cm_ExProdObjekt.c:341-343` records:
+**That conclusion is wrong, and the check that produced it measures nothing.** msvc6 pads a COMDAT to the
+span with trailing `nop`s, so `object .text raw == span` holds **by construction** for every function in
+its own COMDAT. The comparison cannot distinguish "our code fills the span" from "our code is short and
+msvc6 padded it".
 
+Round 1017 repeated the same check on two decoders and confirmed "slack 0" a second time — still
+tautological. Round 1018 measured the right quantity, the end of the last non-`nop` instruction:
+
+| carrier | reference code | our code | span | real headroom |
+|---|---|---|---|---|
+| `cm_ExProdObjekt` | 1008 | **993** | 1008 | **15** |
+| `ServerMainThread` | 2434 | 2434 | 2448 | 14 |
+| `ls_LoadBuildingEntityState` | 1463 | 1460 | 1472 | 12 |
+| `CrashDump`, `cm_ExSellObjekt` | 2115, 2057 | 2120, 2056 | 2128, 2064 | 8 |
+| `gm_AllocSpieler` | 3689 | 3689 | 3696 | 7 |
+| `srv_LoadBuf` | 750 | 750 | 752 | 2 |
+
+**So the header's 15 bytes were right and three rounds of "correction" were wrong.** The rule that
+survives is the opposite of round 998's:
+
+- A recorded **delta** is historical; re-measure it.
+- A recorded **headroom** is checkable, but only against the *code end* (`last non-nop end - span`), never
+  against the COMDAT's raw size, which is msvc6's padding target and therefore always equal to the span.
+- Three methods gave three answers here; only the artefact-based code-end measure is sound
+  (measure-traps §34).
+
+**Headroom is capacity, not affordance.** Round 1019 spent `cm_ExProdObjekt`'s 15 bytes on the one
+size-neutral variant the header records and it link-tested at **+13**. Having room to grow does not mean a
+profitable edit exists. (Round 1020 then closed the aliasing lever on the same row at **+658**.)
+
+
+## 17. `rebrew discover-functions` misses every function aligned with a short pad (round 1024)
+
+**Defect.** `rebrew/discover.py::_capstone_sweep`, step 2, promotes a candidate only after a padding run of
+**`>= 3`** bytes:
+
+```python
+if j - i >= 3 and j < n:
+    starts.add(va_base + j)
 ```
- * ... the reference and any body of 993..1008 holds the 1008 span, giving
- * 15 bytes of unused slack.  Do not re-probe without a new
- * allocator-level finding.
-```
 
-Round 998 measured the span from the artefact rather than the note:
+msvc6 aligns many small functions with only **1 or 2** `90` bytes. Every such function start is silently
+dropped by that step. Steps 3 (`55 8b ec`) and 4 (`e8 rel32` call targets) do not recover them: these
+functions use other prologues (`81 ec`, `83 ec`, `a1`, `8b 44`, `b8`, `33 c9`, `5x`) and are reached only
+through tables or not at all.
 
-```
-span: 1008 (0x1000e140..0x1000e530)
-our object .text raw: 1008  (slack 0)
-```
+**Measured on `server.dll`.** Twelve `command_c` inventory entries are blocks of contiguous functions with
+no inner boundary — `rebrew verify --full` reports them as "annotation SIZE differing from the binary-derived
+size". Ten sibling functions are missing, all with a 1-2 byte pad:
 
-**Slack is 0, not 15.** Our object fills all 1008 bytes of its span, exactly like every other carrier
-(round 991 measured the same for the three largest). A round that read the note and planned a size-increasing
-edit would have hit a composition collapse and lost its budget before learning why.
+| missing start | pad run before it | prologue |
+|---|---|---|
+| `0x1000d340` | 2 | `mov eax,imm` |
+| `0x1000d730` | 2 | `sub esp,imm8` |
+| `0x1000d930` | 2 | `sub esp,imm32` |
+| `0x1000e750` | 1 | `mov eax,[abs]` |
+| `0x1000e9c0` | 1 | `push edi` |
+| `0x1000f480` | 2 | `sub esp,imm8` |
+| `0x1000f590` | 1 | `mov eax,[esp+x]` |
+| `0x1000fad0` | 1 | `mov eax,[esp+x]` |
+| `0x10010080` | 2 | `mov eax,[esp+x]` |
+| `0x10010140` | 1 | `mov eax,[abs]` |
 
-**Why this is worse than a stale delta.** A stale *delta* misleads a round about what an edit will cost; the
-round still measures and finds out. A stale *slack* figure tells a round that a class of edit is available —
-"this carrier can grow" — when it cannot. It is the same failure as measure-traps §22 (reading the object
-size from the wrong artefact), arriving through prose instead of through a tool.
+Re-running the discoverer reproduces the identical 543-entry inventory, and `--min-size 4` (565 entries)
+still contains none of the ten. The merge is deterministic, so re-discovery is not a workaround.
 
-**The check.** Slack is `span - object .text raw`, and both come from artefacts:
+**The fix, measured.** Lowering the threshold to 1 alone is wrong — it admits **380** new starts, nearly all
+mid-instruction `90` bytes. The threshold is only sound when paired with the two conditions that
+distinguish a real start from a byte that merely follows a `90`:
 
-```bash
-python3 -c "
-import json,struct
-fs=json.load(open('src/server.dll/function_structure.json'))
-vas=sorted(f['va'] for f in fs); V=0x<VA>
-nxt=next(v for v in vas if v>V)
-d=open('build/CMakeFiles/server_dll.dir/src/server.dll/<path>.c.obj','rb').read()
-n=struct.unpack_from('<H',d,2)[0]; off=20+struct.unpack_from('<H',d,16)[0]
-for i in range(n):
-    o=off+i*40
-    if d[o:o+8].rstrip(b'\0')==b'.text':
-        rs=struct.unpack_from('<I',d,o+12)[0]
-print('span',nxt-V,'obj',rs,'slack',(nxt-V)-rs)"
-```
+1. the candidate is **not** a target of any `e8`/`e9`/`eb`/`7x`/`0f 8x` branch (a referenced address is
+   mid-function);
+2. the candidate carries a plausible prologue (`55`/`56`/`57`/`53`, `81 ec`, `83 ec`, `6a`, `68`, `a1`,
+   `8b 44`, `b8`, `33 c9`).
 
-Run it **after** `cmake --build build` (measure-traps §22 — the object must not be stale). For every carrier
-measured this session the answer is slack 0; assume 0 until this command says otherwise.
+With all three: **820** starts (from 800), all ten recovered, **20** new candidates total instead of 380.
+
+**Workaround in-tree.** None is honest — the entries are missing from a committed inventory this project
+does not generate at a finer granularity. Until the tool is fixed, the ten VAs are recorded here and in
+`docs/general-knowledge.md`, and `rebrew skeleton` cannot address them.
+
+**Not fixed here:** rebrew is installed as a wheel (`rebrew-2.5.0.dist-info`), not a checkout, so there is
+no source tree to patch in this session. Filed to `docs/IDEAS-GUILD.md` in the rebrew checkout when one
+exists; recorded here meanwhile.
