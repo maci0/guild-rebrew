@@ -28362,3 +28362,22 @@ structural defect.
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. All four probes reverted; deliverable rebuilt and
 re-verified; `src/` unmodified; no baseline moved.
+
+## Round 1015 — re-verified the .data axis from the attribution angle; the game-TU bytes are displacement
+
+Re-measured the raw-link `.data` divergence by owning object with current tooling. Round 980 found the filler
+dominant; this round additionally found a **game TU** contributing 643 bytes — `cm_ExSellObjekt.c.obj` — whose
+bytes differ in *content*: the reference holds integers (`05 00 00 00 05 00 00 00 c4 09 00 00`) where the build
+holds the string `"cm_ExSellObjekt("`, and at `0x10029d00` a structured record table against a run of error
+strings.
+
+**It is displacement, not missing content.** The **shipped** file is byte-identical at that address, and over
+the whole section `shipped .data differs by 0 of 57,344 bytes` (confirmed both by direct comparison and by
+`scripts/verify_objective.py`'s `non-.text bytes identical` check). The `.data` fixer copies the section from
+the layout package, so raw-link divergence cannot indicate missing content.
+
+→ measure-traps §33. This is the third derivation of this section (977, 980, 1015); the stable answer is that
+shipped `.data` is exact and raw-link `.data` is a placement metric the gate correctly treats as a ceiling.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.

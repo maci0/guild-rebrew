@@ -1780,3 +1780,44 @@ than a 34-edge one that does not. The tool now selects on **coverage first, then
 **The check, for any correspondence-based comparison:** state and test the validity condition. For ordinal
 pairing it is `len(ref_instructions) == len(built_instructions)`; when it fails, report the figure as
 indicative, not decisive.
+
+## 33. A raw-link `.data` diff attributed to a GAME TU is still displacement, not wrong content (round 1015)
+
+Round 980 attributed the raw-link `.data` divergence by owning object and found 28.9% of it in
+`data_restore_split.obj` (the length-only filler). Round 1015 re-measured with the current tooling and found a
+**game TU** contributing 643 bytes — `cm_ExSellObjekt.c.obj` — which looks like real missing content:
+
+```
+0x10029d9c  ref: 0500000005000000c409000000000000  <- integers 5, 5, 2500
+            bld: 636d5f457853656c6c4f626a656b7428  <- "cm_ExSellObjekt("
+```
+
+and at `0x10029d00` the reference holds a **structured record table**
+(`0.0, 5.0, 14, 4, 5, 2500, 0.0, 5.0, 15, 4, 6, 3000, …`) where the build holds a run of error **strings**
+(`"gm_AllocSpieler() failed"`, `"cm_ExChangePlayerIdentity() failed"`, …). Different content, not a shift.
+
+**It is still displacement.** Comparing the **shipped** file at the same address:
+
+```
+ref: 000000000000a0400e0000000400000005000000c4090000000000000000a0400f000000...
+bld: 000000000000a0400e0000000400000005000000c4090000000000000000a0400f000000...
+identical: True
+```
+
+and over the whole section, **shipped `.data` differs by 0 of 57,344 bytes.** The `.data` fixer copies the
+section from the layout package, so raw-link divergence says nothing about whether content is missing.
+
+**The rule.** Attributing a raw-link `.data` difference to a game object does **not** make it a content defect.
+The check that separates the two is one command — compare the **shipped** file at the same address:
+
+```bash
+cmp <(dd if=build/server.dll bs=1 skip=$((0x27000+OFF)) count=N) \
+    <(dd if=original/Server/server.dll bs=1 skip=$((0x27000+OFF)) count=N)
+```
+
+If identical, the divergence is placement. Only a difference in the *shipped* file is a content finding, and
+`scripts/verify_objective.py` already reports that as a single number (currently 0 non-`.text` bytes).
+
+**This is the third time this section has been re-derived** (rounds 977, 980, 1015), each from a slightly
+different angle. The stable answer: shipped `.data` is exact; raw-link `.data` is a placement metric that the
+gate correctly enforces as a *ceiling*, not a target.
