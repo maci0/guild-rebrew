@@ -892,3 +892,43 @@ you here; the discipline is.
 **Re-locking after a manual fix.** If a round needs to undo something in the metadata by hand, it must
 `chmod u+w`, edit, then `chmod u-w` to restore `0444` — round 1060 did exactly that and the file's
 `git diff` is empty.
+
+## 24. Some source experiments need a full object rebuild to recover from, and `linktest.sh` cannot tell you (round 1064)
+
+**The experiment.** `gm_AllocSpieler` (the largest carrier, 2,823 of 8,628 residue bytes) declares:
+
+```c
+#pragma intrinsic(memcpy, memset, strlen, strcpy)
+```
+
+Its header repeatedly calls this "the memset call", and §109's mechanism turns on hoisting that call past a
+block fill. No round had tried the opposite pragma — forcing a real out-of-line call:
+
+```c
+#pragma function(memset)
+```
+
+**Both the experiment and its aftermath are the finding.**
+
+- With `#pragma function(memset)`: `linktest.sh` reports **`COMPOSITION COLLAPSED: only 0 symbols landed at
+  their reference VA`** (the round-232 guard, working).
+- **Reverting the source is not enough.** With the file restored and `git diff` clean, the composition still
+  collapsed — repeatedly, across a fresh `rm -rf build/split_poc && split_link.sh`. The cause is the **stale
+  object**: `build/CMakeFiles/.../gm_AllocSpieler.c.obj` still contained the version-compiled under the other
+  pragma, and `split_link.sh` links those objects, not the source.
+- **Recovery is a full `cmake --build build`** (objects recompiled), then `rm -rf build/split_poc && bash
+  scripts/split_link.sh`. That restored `exactly at their reference VA: 246` and residue **8628**.
+
+**Why `linktest.sh` cannot warn you.** Its stale-object guard compares source mtime against object mtime and
+warns when the *source is newer*. Here the source and object timestamps end up consistent after a revert
+(`git checkout` rewrites the source, then a later build updates the object), so no warning fires — the
+object holds the experiment's code while every signal says the tree is clean.
+
+**The rule.** After any experiment that changes a **pragma, an inline/intrinsic choice, or a codegen flag**,
+treat the object as poisoned: revert the source **and** run `cmake --build build` before measuring anything
+else. A collapsed composition that survives a clean `split_link.sh` is the tell — and the fix is the full
+build, not another `split_link.sh`.
+
+**Measured outcome:** `#pragma function(memset)` on `gm_AllocSpieler` is not a lead — it cannot be measured
+at all on this tree, because the out-of-line call breaks the composition before any residue number exists.
+That is a stronger statement than "it measured worse".

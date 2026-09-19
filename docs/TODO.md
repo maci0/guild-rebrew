@@ -30249,3 +30249,37 @@ precisely because a positive correlation would have been the cheapest possible l
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1064 — `#pragma function(memset)` on the largest carrier: cannot be measured (composition breaks)
+
+`gm_AllocSpieler` (2,823 of 8,628 residue bytes) declares `#pragma intrinsic(memcpy, memset, strlen, strcpy)`,
+and its header plus shapes §109 both reason about "the memset call". No round had tried the opposite —
+forcing a real out-of-line call with `#pragma function(memset)`. Tried it.
+
+**Result: the experiment cannot produce a number.** `linktest.sh` reports the round-232 guard:
+
+```
+COMPOSITION COLLAPSED: only 0 symbols landed at their reference VA.
+```
+
+The out-of-line `memset` reference breaks the per-reference-offset composition before any residue
+measurement exists. That is a stronger statement than "it measured worse" — the spelling is not merely
+inferior, it is incompatible with the link this tree requires.
+
+**The aftermath is the more useful finding.** Reverting the source was **not enough**: with the file restored
+and `git diff` clean, the composition still collapsed across a fresh `rm -rf build/split_poc &&
+split_link.sh`, repeatedly. Cause: the **stale object** still held the version compiled under the other
+pragma, and `split_link.sh` links objects, not source. **Recovery required a full `cmake --build build`**,
+after which `exactly at their reference VA: 246` and residue **8628** returned.
+
+**`linktest.sh`'s stale-object guard does not catch this.** It warns when the *source is newer* than the
+object. After a revert the timestamps end up consistent, so no warning fires while the object holds the
+experiment's code. Recorded as workflow-traps §24 with the rule: after any pragma / intrinsic / codegen-flag
+change, treat the object as poisoned — revert the source **and** run `cmake --build build` before measuring.
+A collapse that survives a clean `split_link.sh` is the tell.
+
+**Cost:** three recovery cycles in this round, all self-inflicted by measuring before rebuilding.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Source tree
+clean (`git status -- src/` empty).
