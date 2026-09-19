@@ -1896,3 +1896,46 @@ table above.
 This is the fifth time this session that a figure derived from disassembly arithmetic rather than from the
 container has been wrong (§§21, 23, 24, 26), and the second time (§§26, 34) that the *container* figure was
 wrong in the opposite direction because it measures a quantity msvc6 defines rather than one we control.
+
+## 35. The shipped `.text` reads byte-perfect wherever postlink rewrote the operands (round 1022)
+
+`postlink_residual.py` already warns that the non-`.text` zeros are **self-certifying**: the postlink
+fixers blit reference bytes over `.data`/`.rdata`/`.reloc`, so "differing 0x0" there says nothing about
+whether the build can produce those bytes. **The same trap exists inside `.text`, it is just smaller and
+better hidden.**
+
+`cm(MakeLists.txt:442-460)` documents the mechanism: `rebrew postlink --layout` "rewrites the remaining
+`.text` data operands / E8-E9 targets" from the layout package. So every `.text` byte that is an absolute
+operand or a call target is restored to the reference's value regardless of what our objects emitted.
+
+**Measured, same byte range, three artifacts:**
+
+| artifact | what it is | `.text` differing |
+|---|---|---|
+| `.scratch/server.dll.prelayout` | plain CMake link | **50,285** |
+| `build/split_poc.dll` | split-set composition (LIBCMT placed as stock objects at reference offsets) | **14,347** |
+| `build/server.dll` | after `postlink_residual.py --write` | **8,628** |
+
+The gate's `RESIDUE_BASELINE` is the third number, and that is **correct**: the objective's shipped
+artefact is the postlinked one. The trap is using it to answer a different question.
+
+**The concrete failure (round 1021).** Twelve `command_c` discovery symbols are blocks of contiguous
+functions (see general-knowledge). Measuring those spans on `build/server.dll` gave **0 differing bytes**,
+which I read as "our build emits these bytes correctly". It does not. Postlink had rewritten them. The raw
+link differs in **694** of those bytes.
+
+**The rule.** Any per-region `.text` claim of the form "our build emits this correctly" must be measured on
+`build/split_poc.dll` or `.scratch/server.dll.prelayout`, never on `build/server.dll`. The shipped file is
+the *deliverable* ruler; the split composition is the *capability* ruler. They answer different questions
+and differ by 5,719 bytes.
+
+This is the third distinct self-certification in this project, after `.data` (round 199) and the
+`--built`-points-at-a-postlinked-image guard (round 450).
+
+Verify with:
+
+```
+.venv/bin/python scripts/postlink_residual.py --write build/server.dll
+# the "raw link vs reference" block is the capability number; the
+# ".text differing" line at the top is the deliverable number
+```

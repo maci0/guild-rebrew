@@ -28581,3 +28581,49 @@ carrying no `va` and no `section`; they are not VA-addressed globals and no anno
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1022 — the capability ruler: 50 hidden functions cost 694 raw-link bytes, and fn4 is 514 of them
+
+Round 1021's closing claim ("they are not part of our residue") was measured on `build/server.dll` and is
+**wrong**. Postlink rewrites the `.text` data operands and `E8`/`E9` targets from the layout package
+(`CMakeLists.txt:442-460`), so the shipped file reads 0 differing bytes across all twelve spans no matter
+what our objects emit. Re-measured against the raw link (`build/split_poc.dll`):
+
+| span | raw-link differing |
+|---|---|
+| `0x1000d8a0` (2208 B) | **569** |
+| `0x1000eaa0` / `0x1000e8d0` / `0x1000f980` / `0x1000e690` | 24 / 21 / 16 / 15 |
+| seven more | 4-12 each (`0x10010010` zero) |
+| **total** | **694** |
+
+Three artifacts for the same bytes: `.scratch/server.dll.prelayout` **50,285** (plain CMake link),
+`build/split_poc.dll` **14,347** (split-set composition), `build/server.dll` **8,628** (post-postlink).
+The gate's baseline is the third and is correct for the objective; it is the wrong ruler for "does our
+build produce this". Written up as measure-traps §35.
+
+**The lever.** Inside the 2208-byte `cm_ExTransferCurrencyNoKill` span there are six functions; only the
+first (142 B) is implemented. Per-sibling raw-link residue:
+
+| sibling | VA | len | raw-link differing |
+|---|---|---|---|
+| fn1 | `0x1000d92e` | 386 | 23 |
+| fn2 | `0x1000dab0` | 93 | 8 |
+| fn3 | `0x1000db0d` | 80 | **0** |
+| **fn4** | **`0x1000db5d`** | **1230** | **514** |
+| fn5 | `0x1000e02b` | 230 | 16 |
+
+**`fn4` alone is 514 bytes — 74% of the whole 694-byte opportunity, and the largest single unclaimed
+lever on this tree.** It is a command-dispatch function (61 instructions in its first 200 bytes, `cmp`/
+`je` chains over the command type, calls at `0x1000db71` and `0x1000db87`). It is not library code:
+`rebrew lib-match --stock-lib LIBCMT.LIB` clears all five siblings.
+
+**What this costs.** These 694 bytes are *not* in the graded residue, so closing them does not move
+`RESIDUE_BASELINE`. They matter only under the objective's own "every function EXACT" clause, and closing
+them means implementing ~50 functions that `rebrew skeleton` cannot address because they have no VA in
+`function_structure.json` — plus repair of the discovery boundary so the inventory lists them.
+
+**Reverted: nothing to revert.** No source, no metadata and no `build.make` change retained this round;
+baselines re-measured at 8628 / 264 / 281 after the §35 diff.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

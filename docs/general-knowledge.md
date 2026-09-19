@@ -103,9 +103,30 @@ function's length. An `EXACT` status with a size divergence is therefore not a c
 
 **Consequence for the objective.** `rebrew verify --full`'s denominator (283) counts discovery symbols, not
 reference functions. Closing these 12 spans means implementing ~50 functions that no tool will hand out via
-`rebrew skeleton`, because they have no VA in `function_structure.json`. Separately, the `.text` these
-functions occupy is already emitted correctly by the reference's own bytes — they are not part of our
-residue, which is confined to the 19 carriers.
+`rebrew skeleton`, because they have no VA in `function_structure.json`.
+
+**They do cost residue — but only 694 of the raw link's 14,347 bytes.** Measured against the raw link
+(`build/split_poc.dll`), not the shipped file:
+
+| span | raw-link differing bytes |
+|---|---|
+| `0x1000d8a0` (2208 B) | 569 |
+| `0x1000eaa0`, `0x1000e8d0`, `0x1000f980`, `0x1000e690` | 24, 21, 16, 15 |
+| the other seven spans | 4-12 each, `0x10010010` zero |
+| **total** | **694** |
+
+The other 13,653 raw-link differences lie outside these spans — in the 19 carriers and in library
+placement.
+
+**Do not measure this on the shipped file.** `build/server.dll` reads **0** differing bytes across all
+twelve spans, because postlink rewrites the `.text` data operands and `E8`/`E9` targets from the layout
+package. The shipped file is the graded artefact and its number is correct for the objective, but it is
+the wrong ruler for "does our build produce these bytes" — the same self-certification trap
+`postlink_residual.py` documents for `.data`, in its `.text` form. Three artifacts, three answers for the
+same bytes: `.scratch/server.dll.prelayout` 50,285 (plain CMake link), `build/split_poc.dll` 14,347
+(split-set composition, LIBCMT placed as stock objects at reference offsets), `build/server.dll` 8,628
+(after postlink's operand rewrite).
 
 Evidence: `python3 -c` scan of the reference's `.text` for `0xc3` within each span; `rebrew verify --json`
-`size_divergences`; `rebrew asm` at each sibling start.
+`size_divergences`; `rebrew asm` at each sibling start; per-span byte compare of `original/Server/server.dll`
+against `build/split_poc.dll` and `build/server.dll`.
