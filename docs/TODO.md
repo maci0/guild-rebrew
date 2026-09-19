@@ -28146,3 +28146,25 @@ assumes the answer under test and failed for a carrier where DIFFERS is the find
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1008 — validated the CFG construction; the 13/6 split is trustworthy
+
+Round 1007 fixed `cfg_compare.py`'s canonical form and its two bookkeeping bugs, then reported 13 carriers with
+differing control flow. That number rested on an unvalidated assumption: that `build_cfg` produces the right
+**graph**. A correct isomorphism test over a wrong graph still gives wrong verdicts, so this round checked the
+construction itself.
+
+| check | result |
+|---|---|
+| blocks non-empty, on real instruction boundaries (`gm_AllocSpieler`) | 170 blocks, **0 empty**, **0 off-boundary** |
+| block count vs an independent count (entry + branch targets + fallthroughs) | 171 independent vs 170 from `build_cfg` |
+| the 1-block difference | `0x100196b9`, a `nop` in padding after the final `ret` — unreachable, and **dropped identically on both sides** |
+
+So the extra start cannot affect a comparison, the construction is sound, and the **13 DIFFERS / 6 SAME** split
+stands. → measure-traps §30.
+
+`--self-test` passes both guards (reflexive isomorphism; redirected-branch detection) and the split reproduces
+run to run.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.

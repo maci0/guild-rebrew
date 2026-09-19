@@ -1647,3 +1647,42 @@ with two shipped guards:
 
 So the honest `place`-class number is **6 identical, 13 differing**, not 7/12 — and unlike round 1006's, this
 one survives an exhaustive small-graph correctness check plus a reflexive self-test.
+
+## 30. Validating a CFG against the linear decode before trusting its verdicts (round 1008)
+
+Round 1007 replaced `cfg_compare.py`'s canonical form and re-ran the guards, but never checked that the **CFG
+construction itself** produces the right graph. A correct isomorphism test over a wrong graph still gives
+wrong verdicts, so this round validated the construction three ways before accepting the 13/6 split.
+
+**1. Blocks are non-empty and on real boundaries.** For `gm_AllocSpieler` (3,696-byte span): 170 blocks,
+**0 zero-instruction blocks**, and **0 block entries off the linear-decode instruction boundaries**.
+
+**2. Block count reconciles with the branch count.** The linear decode finds 1,063 instructions and 122
+branches; the recursive descent finds 170 blocks. An independent count — entry, plus every branch target, plus
+every fallthrough after a branch or terminator — gives **171**.
+
+**3. The one-block difference is correct and symmetric.** The extra start is `0x100196b9`, a `nop` in the
+trailing padding after the function's final `ret`. `build_cfg` never queues a fallthrough after a `ret`
+(both successors are `None`), because code after a `ret` is unreachable. Crucially the **same block is dropped
+on both sides**, so it cannot affect a comparison:
+
+```
+REF: independent 171, build_cfg 170, missing ['0x100196b9']
+BLD: independent 171, build_cfg 170, missing ['0x196b9']
+```
+
+**The check, worth running after any change to `build_cfg`:**
+
+```python
+# block starts from a linear decode must match the recursive-descent blocks,
+# up to unreachable code after a terminator
+starts = {entry} | {branch targets} | {fallthroughs after branch/terminator}
+assert set(build_cfg(...)) <= starts          # no invented blocks
+assert starts - set(build_cfg(...)) == set()  # or explain each missing one
+```
+
+An invented block would add edges and could flip a SAME to DIFFERS; a dropped *reachable* block would do the
+opposite. Both are silent without this check.
+
+**Also confirmed:** `--self-test` passes both guards (reflexive isomorphism, redirected-branch detection) and
+the 13-differ / 6-same split is reproducible run to run.
