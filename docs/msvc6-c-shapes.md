@@ -9,14 +9,26 @@ this file covers declaration types, operand forms, statement order, and loop
 shape. Both are empirical, derived from compile-and-compare against the
 target, not from documentation.
 
-Verify any change with `rebrew diff <VA>` and `rebrew test <file>`. A `**`
+Verify any change with `rebrew diff <file>` and `rebrew test <file>`. A `**`
 match code marks a genuine structural difference; `~~` is relocation-only and
-counts as a match.
+counts as a match. Object scores are not the ship ruler — see §19 / §118 and
+`scripts/linktest.sh`. PROVEN is not a byte match — see §93.
+
+**Look the address up first:** `python3 scripts/whathas.py 0x<VA>`.
 
 ## How to probe a hypothesis
 
-Compile an isolated file rather than iterating on the real function. Seconds
-instead of minutes, and it isolates one variable:
+Ship path (the compile that actually links):
+
+```sh
+python3 scripts/whathas.py 0x<VA>
+python3 scripts/probe_function.py --va 0x<VA> --file <file.c>
+bash scripts/linktest.sh <file.c>
+```
+
+Never add a `// CFLAGS:` header (per-file, not per-function — §12). Isolated
+`.scratch` probes are for *mechanism* only and miss TU flags and CMake
+toolchain pins (`measure-traps.md` §5):
 
 ```sh
 cd .scratch
@@ -24,8 +36,7 @@ rebrew-cmake-cl /nologo /c /MT /O2 /Gd probe.c
 objdump -d probe.obj
 ```
 
-Put every probe in `.scratch/`. Ground truth for a target comes from
-`rebrew asm <VA> --size N --json`.
+Ground truth for a target comes from `rebrew asm <VA> --size N --json`.
 
 ---
 
@@ -229,9 +240,15 @@ The exit structure decides branch layout and total size. A `for(;;)` with
 returns inside the body emits an epilogue per return; a `do/while` with a
 shared tail return emits one. Read the target's exits and mirror the count
 before tuning anything else. When the residual is a back-edge encoding rather
-than an epilogue count, section 57 is the discriminator.
+than an epilogue count, section 57 is the discriminator. When the reference
+keeps N identical epilogues and we merge them, that is walls §2 / this file
+§74 — not a loop-shape spelling.
 
 ## 8a. x87 memory-operand forms: `fimul`/`fidiv` vs `fild` + `fmulp`/`fdivp`
+
+**Object-only until linked.** `volatile` pins here raise `aligned` and usually
+lose at the link (§94). Qualifier direction is §52, not "add volatile to get
+`xor`/`mov`".
 
 MSVC 6.0 fuses an integer operand into `fimul <mem>` or `fidiv <mem>` only
 when that operand is memory-resident at the FPU op. When its last use is the
@@ -309,6 +326,9 @@ cached = cached * (int) *p2_alias;      /* mov al,... ; fimul ... ; cmp al,3 */
 the session.
 
 ## 8c. A volatile read pins load order between two field reads
+
+**Object-only until linked.** Default expect a link loss (§94). Qualifier
+direction is §52.
 
 Section 10 covers reordering adjacent field reads by moving the C statements.
 When that is not enough, because a neighbouring volatile access or an FPU op
@@ -723,12 +743,12 @@ What *does* move is the order in which distinct globals are first read, since
 that sets register roles. Reordering the sync-packet loads changed the object
 size from 2431 to 2432 and the score from 1122 to 1121. Real lever, wrong
 direction here, but worth trying when register roles are the mismatch.
+Stores through a *fresh pointer* can move (§86b) — still measure at the link.
 
-## 16. `match_count` is a positional byte compare, not an alignment-aware score
+## 19a. `match_count` is a positional byte compare (same rule as §19)
 
-`match_count` counts byte positions that agree after masking relocation slots
-(`rebrew/src/rebrew/core/matching.py:488`). It does not realign after an
-insertion or deletion.
+Restates §19. `match_count` counts byte positions that agree after masking
+relocation slots. It does not realign after an insertion or deletion.
 
 One extra or missing instruction early in a function therefore shifts every
 later byte and collapses the score, even when the whole remainder is
@@ -821,6 +841,9 @@ and operands, look for a value the target holds across a call that your source
 only ever spells inside an argument.
 
 ## 22. `volatile` on the store target pins a store against loop scheduling
+
+**Object-only until linked.** Default expect a link loss (§94). Qualifier
+direction is §52.
 
 MSVC 6.0 sinks a store past a pointer bump when it can rewrite the address as
 a negative displacement, turning `fstp [eax]; add eax,0xc` into `add eax,0xc;
@@ -1073,6 +1096,9 @@ Three size cases fixed the same way took 126/208 to 202/208.
 
 ## 30. `volatile` at the load site defeats displacement folding
 
+**Object-only until linked.** Default expect a link loss (§94). Qualifier
+direction is §52.
+
 msvc6 folds a constant field offset into a scaled load,
 `mov al,[esi+eax*4+0x247]`, where the target materializes the record address
 first:
@@ -1185,7 +1211,7 @@ jq -r '.results[] | select(.status=="PROVEN")
 A small delta on a large function means a long correct prefix and one late
 cluster. A low match percentage on a small function means it diverges near
 instruction 0. Both are more tractable than the percentage suggests, because
-`match_count` does not realign after an insertion (section 16).
+`match_count` does not realign after an insertion (section 19).
 
 ## 33. Statement order decides which register holds a value
 
@@ -1391,7 +1417,7 @@ On 0x10016290 that isolated it to a single `if (g_flag) is_match = 1;` joining
 a scan loop and an early return (`.scratch/w_l2/g/k1.c` against `k2.c`), which
 no amount of entry rewriting could have found.
 
-## 34. SIB base/index roles follow the induction variable's form
+## 161. SIB base/index roles follow the induction variable's form
 
 When the target and the candidate differ only by which register is base and
 which is index in the same addressing mode (`[esi+eax+0x21]` against
@@ -1416,7 +1442,7 @@ A read-modify-write in the same loop keeps its address as two direct
 a `lea` into a register plus `[reg]` accesses; in `gm_Open` that shape is 2
 bytes shorter than the reference (859/861) while the double spelling is exact.
 
-## 35. PROVEN status is lost by a STUB result, and that is a real regression
+## 160. PROVEN status is lost by a STUB result, and that is a real regression
 
 `rebrew verify` overlays a metadata `PROVEN` status onto a byte result only
 when that result is `NEAR_MATCHING` or `SIZE_MISMATCH` (`verify.py:1325`).
@@ -1434,7 +1460,7 @@ When editing a PROVEN function, treat its status as the floor: a higher
 percentage that lands on STUB is a loss, not a gain. Revert to baseline
 instead.
 
-## 36. Relocation masking can hide a wrong symbol: the false RELOC
+## 162. Relocation masking can hide a wrong symbol: the false RELOC (same rule as §34)
 
 `rebrew diff` masks the 4-byte relocation slot, so an instruction whose only
 difference lies inside that slot is reported `~~` and counted as a match. A
@@ -1981,9 +2007,8 @@ a byte-identical object.
 | `/Zp1 /Zp2 /Zp4 /Zp8` | 3688 | 853 | inert |
 | `/Ob2`, `/Ot`, `/Oi`, `/Oi-`, `/Oa-`, `/G5`, `/GB` | 3688 | 853 | inert |
 
-A later campaign measures `/Oa` and `/Ow` as load-bearing on this function and
-`/O2`-class flags as inert on it (section 58), which supersedes the `/Oa-` row
-above.
+Section 94 is the last word: `/Ow` load-bearing, `/Oa` inert. The `/Oa-` row
+above and section 58's earlier "both load-bearing" claim are superseded.
 
 The lesson is the general one: on this codebase a flag that moves the size
 towards the target has so far always moved the *bytes* away from it, because
@@ -2199,7 +2224,7 @@ diff, not by any score.
 To change which operand folds, flip the operands of the same operator
 (`slots > g_stat2`), never the operator's sense.
 
-Same blind spot as sections 34 and 36: `match_count` and the `~~` mask cannot
+Same blind spot as section 34 (wrong global behind `~~`): `match_count` and the `~~` mask cannot
 see it. The candidate's VA was not recorded; the finding is a diff-reading
 habit, not a site.
 
@@ -2244,14 +2269,14 @@ Read the diff for a live-value difference before reshaping a loop; sections 8,
 
 `/O2` enables `/Og`, which makes msvc6 tail-merge early error blocks the
 reference keeps separate; `/Ox` is what several command-handler files need.
-`/Oa` and `/Ow` are load-bearing on `gm_AllocSpieler` (0x10018850), and
-`/O2`-class flags are inert on it.
+On `gm_AllocSpieler` (0x10018850), **`/Ow` is load-bearing** and **`/Oa` is
+entirely inert** (section 94). `/O2`-class flags are inert on it.
 
 Flags are per-file in practice, not per-function: a flag one function needs can
-break a file-mate. Section 12 is that conflict, and section 49 is the measured
-flag sweep on `gm_AllocSpieler` — where the same flag set's `/Oa-` row is
-superseded by the `/Oa` measurement here, and `/Ox` is byte-identical on an
-individual function (section 46) while being load-bearing per file.
+break a file-mate. Section 12 is that conflict. Section 49's `/Oa-` row and
+the earlier "both `/Oa` and `/Ow` load-bearing" claim here are superseded by
+section 94. `/Ox` is byte-identical on an individual function (section 46)
+while being load-bearing per file.
 
 `src/server.dll/DieGildeAddOn/game/spiel_c/gm_AllocSpieler.c`
 
@@ -2313,6 +2338,40 @@ loop case. Where a load/store transposition does have a lever, it is section
 
 Retired lever, not a general law: measured with `scripts/probe_function.py` and
 `scripts/instr_diff.py --obj`, and it did not move the linked residue.
+
+`src/server.dll/DieGildeAddOn/command/command_c/cm_ExProdObjekt.c`
+
+## 61a. The aliasing lever is a wall when the function has more than the one transposition (round 1020)
+
+Section 44 makes `#pragma optimize("a", on)` the lever for "a pure transposition of a load and a store to
+the same object". `cm_ExProdObjekt` (0x1000e140) has exactly that signature — the reference loads
+`g_unknown_1de450` at `0x1000e20c` **before** the volatile dead store, we emit it after — and section 60
+had already closed every source-order spelling. So the aliasing switch was the last untried lever, and it
+was measured two ways.
+
+**Both spellings, at the link:**
+
+| form | object | linked `cm_ExProdObjekt` | delta |
+|---|---|---|---|
+| baseline `/Ox /Gd` | 2897 | 21 | — |
+| `#pragma optimize("a", on)` in source | — | 679 | **+658** |
+| `/Oa` on the compile line | 2881 | 679 | **+658** |
+
+They agree byte for byte, which is the useful part: the pragma and `/Oa` are the *same* switch reaching the
+same scheduler state, so neither is an independent lever.
+
+**The rule.** Section 44 applies when the transposition is the *only* thing the aliasing assumption is
+holding in place. `cm_ExProdObjekt` carries three residual clusters (`0x1000e20c` load order, 223-224,
+byte 410) and a large loop; switching the assumption off re-schedules all of them at once, and the three
+bytes it fixes cost 658. **Screen for cluster count before reaching for `"a"`** — on a single-transposition
+site it is a clean lever (section 44's `sim_AdvanceGameClock`: 187 -> 194/197), on a multi-cluster site it
+is worse than the transposition it removes.
+
+`/Ow` was measured too and is inert here (object 2897, unchanged), consistent with section 44's note that
+`"w"` scores the same as `"a"` only where `"a"` already helps.
+
+Retired lever on this row, not a general law: both spellings measured at the link with `scripts/linktest.sh`
+and reverted.
 
 `src/server.dll/DieGildeAddOn/command/command_c/cm_ExProdObjekt.c`
 
@@ -4003,10 +4062,12 @@ Four further gaps the residue number cannot show, worth knowing before anyone ca
   raw 0xe000), so the BSS *size* matches but its runtime content is unverifiable from the file.
   A naive `min(VirtualSize)` comparison loop runs past EOF here.
 
-Also corrected: AGENTS.md's "`.text` link shortfall … 0x3a84 short" is stale. The split-link
-path now **overshoots** by 0x282 (`0x22ac8` against `0x22846`), placing its own DllMain at
-0x23846, past the reference's `.text` end, where the fixer stamps the reference's
-`AddressOfEntryPoint` of 0x1b9d4 over it.
+Also corrected: AGENTS.md's "`.text` link shortfall … 0x3a84 short" was stale
+even when this section was written. Do not cite a VirtualSize from this
+paragraph as "today" — measure with `python3 scripts/section_geometry.py`.
+The historical overshoot (`0x22ac8` against `0x22846`) is one era of the
+split-link; later prelayouts have been short (`0x221f6`) or exact. Residue
+is `scripts/gate.sh` `RESIDUE_BASELINE`.
 
 Finally, a negative worth recording so nobody repeats the search: **neither binary has a Rich
 header.** The DOS stub runs straight from the standard message to the PE signature, and both
@@ -7501,3 +7562,6 @@ before this shape can ship. The file header already records one candidate for th
 those 11 bytes are recovered elsewhere"), which is 5 bytes short of what this needs.
 
 **Measured:** probe +16 obj (span violation, composition collapse), reverted; residue back to 8,628.
+
+Section 44's aliasing lever was tested on `cm_ExProdObjekt` and is a wall there, not a lever. See
+section 61a.

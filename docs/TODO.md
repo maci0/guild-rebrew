@@ -28505,3 +28505,31 @@ This also closes the last object-ruler-vs-link question on this row: `matched-re
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit retained.
+
+## Round 1020 — the aliasing lever was the last untried spelling on cm_ExProdObjekt; it is a wall, +658
+
+Shapes §44 makes `#pragma optimize("a", on)` the lever for "a pure transposition of a load and a store to
+the same object". `cm_ExProdObjekt` has exactly that signature — ref loads `g_unknown_1de450` at
+`0x1000e20c` before the volatile dead store, we emit it after — and shapes §60 had closed every
+source-order spelling. The aliasing switch was therefore the one lever never tried on this row, and the
+`/Oa` screen in the carrier table (TODO:23260) covers the other eighteen carriers, not this one.
+
+Measured both spellings at the link:
+
+| form | object | linked | delta |
+|---|---|---|---|
+| baseline `/Ox /Gd` | 2897 | 21 | — |
+| `#pragma optimize("a", on)` | — | 679 | **+658** |
+| `/Oa` on the compile line | 2881 | 679 | **+658** |
+
+The two agree byte for byte: the pragma and `/Oa` are the same switch. `/Ow` is inert (object 2897).
+
+**Why §44 does not transfer.** §44's verified site (`sim_AdvanceGameClock`) has *one* transposition, so
+switching the assumption off fixes it and nothing else moves. `cm_ExProdObjekt` has three residual clusters
+plus a large loop; the switch re-schedules all of them, and the bytes it fixes cost 658. **Cluster count is
+the gate on the `"a"` lever.**
+
+Reverted; `build.make` restored from `.scratch/build.make.bak`; baseline re-measured at 8628.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit retained.
