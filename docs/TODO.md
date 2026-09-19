@@ -28921,3 +28921,54 @@ and exact instruction-count parity, is a stronger closure argument than the sign
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1030 — the raw link's wrong global operands are by design; postlink's rewrite is complete (4398/4398)
+
+Started from §22's `ls_LoadBuildingEntityState` diff, which showed our stream emitting
+`cmp dword ptr [0x100373c4],0x10047` where the reference has `[0x1002d4ec]`. Same instruction, same
+immediate, different global — which reads as a wrong-symbol defect in our source.
+
+**It is not.** Traced to `src/link_stubs.c:81-82`:
+
+```c
+// DATA: SERVER 0x1002d4ec
+int g_file_version = 0;
+```
+
+The `// DATA:` comment is **documentation for the tooling, not a placement directive** — no `#pragma
+section`, no linker ordering key. The linker places the stub wherever its COMDAT ordering puts it and
+`rebrew postlink --layout` rewrites every `.text` operand back to the reference address.
+
+| artifact | dwords equal to `0x1002d4ec` | equal to the stub placement `0x100373c4` |
+|---|---|---|
+| reference | 23 | 0 |
+| raw link (`split_poc.dll`) | 0 | 37 |
+| shipped (`server.dll`) | 23 | 0 |
+
+**The rewrite is complete.** Compared every dword in `.text` whose value lies in the data range
+(`0x10024000..0x11768000`) between the reference and the shipped file: **4398 present in both, 0
+mismatched.**
+
+**Two dead ends this round, both worth recording so they are not repeated:**
+
+1. **Removing the stray duplicate definition does not change it.** `gv_CheckSlotActive.c` carried an
+   unannotated `int g_file_version;` shadowing the canonical declaration — removed, link-tested **+0**,
+   reverted. Then nine `spiel*.c` files each carry `int g_current_year;` (canonical `0x10035880`), and all
+   nine were removed and link-tested together: **+0**, reverted. Both are hygiene, not codegen, because
+   postlink overwrites the operands regardless of which definition the linker picks.
+2. **The `g_current_year` count looked like a defect and is not.** The reference has 17 `.text` dwords
+   equal to `0x10035880`; the raw link has 9. But the 8 "missing" sites are in functions that read the
+   global through a different operand form, not mis-bound — confirmed by locating every site in both
+   images. A count difference between two images is only a finding after the sites are located, which is
+   measure-traps §24's rule in its operand form.
+
+**Recorded as `general-knowledge.md`** (placement architecture + the 4398/4398 measurement), which also
+adds the third trap to the raw-link family: measure-traps §35 (raw vs shipped answer different questions),
+§36 (do not assume a carrier's VA), and now **a wrong data operand in the raw link is not evidence of a
+wrong symbol in the source** — it is the designed intermediate state and cannot be fixed by editing the
+definition.
+
+**No source change retained. No metadata or `build.make` change. Nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
