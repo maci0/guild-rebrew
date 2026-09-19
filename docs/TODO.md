@@ -28234,3 +28234,35 @@ pair had: inferring a mechanism from a summary statistic instead of decoding the
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable rebuilt and re-verified;
 `src/` unmodified; no baseline moved.
+
+## Round 1011 — all 13 non-isomorphic carriers classified: 12 arity, 1 merge
+
+Applied round 1010's lesson (measure, do not infer) to all 13 carriers `cfg_compare.py` reports as
+non-isomorphic, using the out-degree histogram and undirected edge count. Both are one command and neither
+needs a hypothesis.
+
+**Twelve carriers differ in ARITY** — an out-degree count changes, i.e. a `jcc` where the reference has a `jmp`
+or the reverse. Largest: `gm_AllocSpieler` has one fewer `ret`-terminated block and two more branches; smallest:
+`gm_CheckInventoryCapacity` {5,1,19} vs {5,0,20}. This is §84's statement-order class at the branch level, and
+it is why the successor-set form separates them although it collapses polarity.
+
+**`ServerMainThread` is the one exception, and it is a MERGE difference.** Out-degree histograms, undirected
+edge counts *and* directed edge-kind multisets are all identical, yet the graphs differ. The neighbourhood
+profiles localise it:
+
+| `(kind, succ kinds, pred kinds)` | ref | ours |
+|---|---|---|
+| `(b2, (b2,b2), (b2,))` | 37 | 36 |
+| `(b2, (b2,b2), (b2,b2,b2))` | 11 | 12 |
+| `(b2, (b2,b2), (b2,b2,jmp))` | 2 | 1 |
+| `(b2, (b2,b2), (jmp,))` | 2 | 3 |
+
+Nodes and edges are conserved; one block has one predecessor where the reference gives it three, another has
+three where the reference gives one. So its difference is a **merge point's fan-in**, not a branch shape — the
+only carrier of its kind in the tree. → codegen-walls §18.
+
+**This settles the round-1009/1010 confusion at the population level.** Round 1009 guessed "polarity" from the
+shape of one difference; the measurement says no carrier is polarity-only, and exactly one is not arity.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.

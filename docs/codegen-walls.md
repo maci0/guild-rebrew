@@ -997,3 +997,55 @@ topological difference, not proof of one: the canonical form collapses polarity 
 changes which node is a `jmp` versus a `jcc`, and that is enough to separate the graphs. Before treating any of
 the 13 as topological, check whether its difference reduces to a polarity swap on the same destination pair —
 `gm_CheckInventoryCapacity` does, and its two available C spellings are +0 and +228.
+
+### 18. All 13 non-isomorphic carriers differ in ARITY or MERGE, never in polarity alone (round 1011)
+
+Round 1009 claimed one carrier's CFG difference was branch polarity; round 1010 showed it was arity. Round 1011
+measured the **out-degree histogram** and the **undirected edge count** for all 13 carriers `cfg_compare.py`
+reports as non-isomorphic, which classifies them without guessing.
+
+| carrier | ref out-degree {0,1,2} | ours | undirected ref/bld | class |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | {0:8, 1:26, 2:136} | {0:9, 1:27, 2:134} | 295/290 | **arity** |
+| `CrashDumpUnhandledExceptionFilter` | {2, 21, 49} | {2, 21, 50} | 117/119 | **arity** |
+| `cm_ExSellObjekt` | {8, 23, 96} | {8, 23, 98} | 215/219 | **arity** |
+| `ls_LoadBuildingEntityState` | {3, 6, 65} | {3, 6, 64} | 136/134 | **arity** |
+| `cm_ExCopyEntityData` | {4, 19, 56} | {4, 17, 60} | 126/132 | **arity** |
+| `gv_ExAllocGraveyardWorker` | {10, 1, 35} | {9, 1, 35} | 67/67 | **arity** (ret/blocks differ) |
+| `ServerMainThread` | {4, 18, 131} | {4, 18, 131} | 257/257 | **merge** |
+| `gm_AllocGebaeude` | {4, 5, 28} | {4, 4, 30} | 60/63 | **arity** |
+| `vfs_OpenStream` | {4, 8, 19} | {4, 6, 20} | 45/45 | **arity** |
+| `gm_FindNextFilteredEntity` | {6, 2, 33} | {4, 2, 33} | 65/65 | **arity** (ret count differs) |
+| `ahm_ExAllocAlchemist` | {4, 2, 22} | {4, 3, 22} | 44/44 | **arity** |
+| `gm_CheckInventoryCapacity` | {5, 1, 19} | {5, 0, 20} | 36/37 | **arity** |
+| `cm_ProcessCommandQueue` | {2, 5, 32} | {2, 5, 30} | 67/63 | **arity** |
+
+**Twelve of the thirteen change an out-degree count**: a `jcc` where the reference has a `jmp` (or the
+reverse), i.e. the *shape* of a branch differs, not its polarity. That is §84's statement-order class at the
+branch level, and it is why the successor-set canonical form separates them despite collapsing polarity.
+
+**`ServerMainThread` is the one exception, and it is the most interesting.** Its out-degree histograms,
+undirected edge counts **and** directed edge-kind multisets are all *identical*, yet the graphs are not
+isomorphic. The difference is in the neighbourhood profiles:
+
+| neighbourhood (kind, successor kinds, predecessor kinds) | ref | ours |
+|---|---|---|
+| `(b2, (b2,b2), (b2,))` | 37 | 36 |
+| `(b2, (b2,b2), (b2,b2,b2))` | 11 | 12 |
+| `(b2, (b2,b2), (b2,b2,jmp))` | 2 | 1 |
+| `(b2, (b2,b2), (jmp,))` | 2 | 3 |
+
+So the difference is a **merge point**: one block has one predecessor where the reference gives it three, and
+another has three where the reference gives it one. Nodes and edges are conserved; their *wiring* is not. That
+is a real structural difference in the `place` class and the only carrier of its kind in the tree.
+
+**Practical consequence.** "Non-isomorphic CFG" is not one phenomenon: twelve carriers differ by a branch's
+arity (candidate: statement order, §84) and one by a merge point's fan-in. Before probing any of them, read the
+out-degree histogram — it separates the two classes in one command:
+
+```python
+Counter(sum(1 for k in ('taken','fall') if edges[a].get(k) in blocks) for a in blocks)
+```
+
+Identical histograms but non-isomorphic means the carrier is in the merge class; a differing histogram means a
+branch's shape is wrong.
