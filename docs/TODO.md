@@ -30136,7 +30136,7 @@ from `scripts/linktest.sh` with the restore command — the guard added in round
 That also means `build.make` editing is no longer an available experiment path, which is the intended
 trade. Restored from backup; `rebrew build-check` clean (198 objects).
 
-**2. A real rebrew bug: the read-only metadata is not a guard.** `src/rebrew-functions.toml` is
+**2. RETRACTED (round 1061): the read-only metadata is the DESIGNED write-lock, not a bug.** `src/rebrew-functions.toml` is
 `-r--r--r--`, which stops a shell redirect or an editor — but not `rebrew`:
 
 ```
@@ -30173,3 +30173,19 @@ it is not one here.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+**CORRECTION (round 1061).** The read-only mode is **rebrew's write-lock discipline**, not a bug:
+`rebrew.utils.atomic_write_locked` chmods the file writable, writes atomically, and re-locks to `0444` so
+*hand* edits fail while the CLI is the sanctioned path. The explicit chmod-before is also required on
+Windows, where `os.replace` over a read-only target fails, so it is load-bearing for atomicity rather than
+policy. **Nothing to fix.**
+
+Verified end to end: a `rebrew test` write updates the mtime (16:42 -> 16:44), restores mode `0444`, and
+leaves the content hash unchanged (`bc846afe7505e0b92707aff505ac9520`) for a no-op update — the unlock/write/
+re-lock cycle working exactly as documented. `workflow-traps.md` §23 is rewritten in place.
+
+What **survives** from round 1060 and is the actually useful part: `rebrew test --cflags` **persists** a
+per-function flag pin as a side effect of measuring, and that pin silently changes the flags the whole tree
+resolves for that function — so every later `linktest.sh`/`gate.sh` measurement inherits it. Snapshot
+`src/rebrew-functions.toml` before any `--cflags` probe and diff afterwards (workflow-traps §15). The file
+mode is not what protects you here; the discipline is.
