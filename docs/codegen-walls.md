@@ -1229,3 +1229,41 @@ automatically the best target, even when the swapped instructions are adjacent a
 prologue is byte-identical. The reorder is a symptom of a liveness/scheduling decision; reproducing it from
 source requires moving a statement that other blocks depend on, and the dependent cost exceeds the local
 gain in both cases measured.
+
+### 23. The 18 carriers fail individually, not from a shared cause — file-mates are byte-identical (round 1040)
+
+An untested hypothesis this session never falsified: that the residue has a **common cause** — a shared
+header, a preamble spelling, a flag, or a codegen state introduced once and propagating. If true, one fix
+would close all 18 carriers, and the per-carrier wall documentation would be a red herring.
+
+**Falsified. Carriers fail independently of their translation unit.**
+
+**Test 1 — carriers are spread across 11 directories.** `spiel_c` 3, `command_c` 3, `server_c` 3, `game` 2,
+and one each in `Error_c`, `loadsave_c`, `friedhof_logic_c`, `vfs_c`, `alchemistry_logic_c`, `m_alloc_c`,
+plus `spiel_dumpD.c`. No single TU, module or header set is common to them.
+
+**Test 2 — file-mates of carriers are byte-identical.** Across all 30 multi-function files,
+**130 of 137 functions (94.9%)** are byte-identical. The decisive cases are the two files that hold a
+carrier *and* other functions:
+
+| file | carriers | file-mates, all residue 0 |
+|---|---|---|
+| `spiel622.c` | `gm_CalculateProductionValue` `0x10019720`, `gm_CheckInventoryCapacity` `0x10019ed0` | `0x100196c0`, `0x100198b0`, `0x10019a20`, `0x10019a70`, `0x10019ae0`, `0x10019b40`, `0x10019b80`, `0x10019be0`, `0x10019c60`, `0x10019cd0`, `0x10019d00`, `0x10019d30`, `0x1001a060`, `0x1001a0d0` — **14 functions** |
+| `spiel_dumpD.c` | `gm_FindNextFilteredEntity` `0x10016f80` | `0x10016cd0`, `0x10016de0`, `0x10016ea0` — **3 functions** |
+
+Same translation unit, same headers, same compiler flags, same object file — and in `spiel622.c`
+**14 functions are byte-identical while two are not.**
+
+**What this rules out.** Any explanation of the residue that is a property of the *environment* — a header,
+an include order, a `#pragma`, a flag, a toolchain state, a shared type or struct layout — because those are
+common to every function in the TU, including the 94.9% that match. **The residue is a property of each
+carrier's own code**, which is what the per-carrier class map (`codegen-walls` §13) and the allocator
+findings already describe, and it is why 18 separate walls is the correct model rather than one.
+
+**What it does not rule out.** That two carriers can share a *mechanism* — §13's four classes are exactly
+that, and register-role rotation is one mechanism across eight carriers. The claim falsified here is a shared
+**cause** reachable by a single edit, not a shared **class**.
+
+**Method note.** This is the cheapest high-value test run this session — two `grep`s and a byte compare per
+file — and it closes the last structural hypothesis about the residue's shape. Worth running whenever a
+residue is described as having "a" cause.

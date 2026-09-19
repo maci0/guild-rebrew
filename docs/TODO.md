@@ -29345,3 +29345,40 @@ misled at least one earlier round (976) into reading the tree as broken.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1040 — falsified the "shared cause" hypothesis: in spiel622.c, 14 file-mates are exact and 2 carriers are not
+
+Every round this session has treated the 18 carriers as 18 independent walls, but that was never *tested* —
+and a common cause (a header, a preamble spelling, a flag, a codegen state) would mean one fix closes all 18
+and the per-carrier documentation is a red herring. Tested it, twice.
+
+**Test 1 — carriers are spread across 11 directories.** `spiel_c` 3, `command_c` 3, `server_c` 3, `game` 2,
+one each in `Error_c`, `loadsave_c`, `friedhof_logic_c`, `vfs_c`, `alchemistry_logic_c`, `m_alloc_c`, plus
+`spiel_dumpD.c`. No common TU, module or header set.
+
+**Test 2 — file-mates of carriers are byte-identical.** Across all 30 multi-function files,
+**130 of 137 functions (94.9%) are byte-identical.** The decisive cases:
+
+| file | carriers | file-mates (all residue 0) |
+|---|---|---|
+| `spiel622.c` | `gm_CalculateProductionValue`, `gm_CheckInventoryCapacity` | **14 functions** |
+| `spiel_dumpD.c` | `gm_FindNextFilteredEntity` | **3 functions** |
+
+Same translation unit, same headers, same flags, same object — and in `spiel622.c` **14 functions are
+byte-identical while two are not.**
+
+**What this rules out:** any explanation that is a property of the *environment* — header, include order,
+`#pragma`, flag, toolchain state, shared type or struct layout — because those are common to every function
+in the TU, including the 94.9% that match. **The residue is a property of each carrier's own code.**
+
+**What it does not rule out:** that carriers share a *mechanism*. §13's four classes are exactly that, and
+register-role rotation is one mechanism across eight carriers. What is falsified is a shared **cause**
+reachable by one edit, not a shared **class**.
+
+Recorded as `codegen-walls.md` §23. The test itself is the cheapest high-value one run this session — two
+`grep`s and a byte compare per file — and it closes the last structural hypothesis about the residue's shape.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
