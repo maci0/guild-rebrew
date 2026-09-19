@@ -1835,3 +1835,53 @@ distributed divergence, but counting runs depends on where the aligner resyncs; 
 instructions, which merges many neighbouring small hunks into the 159-instruction run. **Neither count is
 wrong, but only the run-size distribution answers the question that matters** — is there one wall or many?
 The 192-hunk figure was used to argue "many", and the wall is real.
+
+### 35. The sympathy-loop wall is a mid-argument register choice; four type and structure spellings are measured and none lands (round 1083)
+
+Section 34 located `gm_AllocSpieler`'s 159-instruction wall and identified its single upstream tell: the
+reference zero-extends the `unsigned short` load with `xor eax,eax` + `mov ax,[ebp]`, we emit
+`and eax,0xffff`. This round probed whether that zero-extend is reachable from C. **It is not, by any of the
+four shapes tried.**
+
+**What the wall actually is, precisely.** Both sympathy loops open with the same pattern, and comparing the
+reference against the raw-linked build at the loop head (`0x10019342`, the no-parent path) makes the cause
+exact:
+
+```
+reference                              ours
+xor eax, eax                           mov si, word ptr [ebp]
+push 0x40                              and esi, 0xffff
+mov ax, word ptr [ebp]                 add esi, edi
+lea edi, [eax + esi]                   push 0x40
+call gm_RandomMod                      call gm_RandomMod
+```
+
+The reference **clears a register, pushes the `0x40` argument, and only then loads the word into it**; ours
+loads into the low half of the register it will accumulate into (`si` in `esi`) and masks afterwards. That one
+choice determines the whole register assignment for the loop body — `edi` becomes the reference's address
+base and `esi` the stride accumulator, and ours has them the other way — which is why 159 consecutive
+instructions differ while being otherwise instruction-for-instruction identical.
+
+**Four probes, all measured at the link, all negative:**
+
+| probe | linked delta |
+|---|---|
+| `volatile` dropped from both loads (§34) | **+426** |
+| `colv`/`rowv` declared `unsigned short` | **+455** |
+| bind the slot id into a local `int` once per iteration, both uses reading it | **+470** |
+| `colv`/`rowv` declared `unsigned int` | **+0** (inert) |
+| explicit `(int)` cast on the load (§34) | **+0** (inert) |
+
+All reverted; tree byte-identical to HEAD, deliverable `md5` unchanged.
+
+**The negatives are the finding.** The reference's shape needs the loaded value in a *different* register from
+the accumulator, live across the `push` of the call argument. Every C spelling that widens or renames the
+value (`unsigned short`, `unsigned int`, a cast, a bound local) either changes the width back to what we
+already emit (**+0**) or forces msvc6 to keep the value in one register across the call, which costs far more
+than the swap it was meant to fix (**+426/~+455/+470**). The `volatile` double-load is load-bearing: the
+reference reloads `*slot` twice per iteration, and only a volatile read stops msvc6 hoisting it.
+
+**Judgement, labelled as such:** this is a register-allocation decision taken after the front end, in the same
+class as §16's "67.5% register-role" bucket. The wall is now located to a single instruction and its cause
+named, but no C spelling reaches it — the remaining options are a post-pass over the emitted bytes (outside
+the C-only constraint) or accepting the floor.

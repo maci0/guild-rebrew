@@ -30969,3 +30969,53 @@ the hunk-count reading misled).
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. No source change; nothing to revert.
+
+## Round 1083 — the sympathy-loop wall is a mid-argument register choice; four more spellings, all negative
+
+Round 1082 found the wall (159 instructions at `0x1001910e`) and its tell: the reference zero-extends the
+`unsigned short` load with `xor eax,eax` + `mov ax,[ebp]` where we emit `and eax,0xffff`. This round probed
+whether that zero-extend is reachable from C.
+
+**First, the cause made exact.** Comparing the no-parent sympathy loop head (`0x10019342`) side by side:
+
+```
+reference                              ours
+xor eax, eax                           mov si, word ptr [ebp]
+push 0x40                              and esi, 0xffff
+mov ax, word ptr [ebp]                 add esi, edi
+lea edi, [eax + esi]                   push 0x40
+```
+
+The reference clears a register, **pushes the `0x40` argument, and only then loads the word into it**. Ours
+loads into the low half of the register it accumulates into (`si` in `esi`) and masks after. That single
+choice fixes the whole loop's register assignment — `edi` as the reference's address base, `esi` as the
+stride accumulator, ours the other way — which is why 159 consecutive instructions differ while being
+otherwise identical.
+
+**Four probes, measured at the link, all negative, all reverted:**
+
+| probe | delta |
+|---|---|
+| `colv`/`rowv` declared `unsigned short` | **+455** |
+| bind the slot id into a local `int` once, both uses reading it | **+470** |
+| `colv`/`rowv` declared `unsigned int` | **+0** (inert) |
+| explicit `(int)` cast on the load | **+0** (inert) |
+
+With round 1082's `volatile` drop (**+426**), this wall now has **five measured negatives**. The pattern is
+consistent and worth recording: every spelling that widens or renames the value either re-emits the width we
+already have (**+0**) or forces msvc6 to keep the value live in one register across the call argument push
+(**+426 to +470**). The reference needs the loaded word in a *different* register from the accumulator, live
+across the `push` — a mid-argument register decision.
+
+**Build hygiene, again.** Every probe needed the object deleted explicitly (`rm -f <obj>`) before
+`cmake --build` would honour it; without that, `cmake` reported "0 objects built", the composition stayed
+collapsed, and a reverted experiment looked exactly like a live regression. Third round in a row where this
+cost time; the guard in `linktest.sh` names it correctly, and the fix is to delete the object, not to re-read
+the diff.
+
+**Docs:** codegen-walls §35 (the side-by-side, the five negatives, the judgement that this is a
+post-front-end allocation decision).
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. No source change; nothing to revert.
