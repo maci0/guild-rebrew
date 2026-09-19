@@ -773,3 +773,41 @@ the count it actually compared, so a zero is visible.
 **Also worth keeping:** the composition guard in `linktest.sh` (rounds 232/1051) caught the collapse and
 said so, and `cmake --build` failing at POST_BUILD postlink is by design (measure-traps §17) — neither is
 the problem. The problem is that no check looked at the *inputs* to those steps.
+
+## 21. A misleading error message is a defect: postlink's `.rdata` prefix check named one cause and hid the measurement (round 1053)
+
+`rebrew.postlink._fix_imports` guards the `.rdata` prefix between the IAT and the import directory
+against the layout package's recorded prefix length. When the lengths disagree it raised:
+
+```
+built .rdata prefix size does not match the reference — check the debug directory:
+builds with /debug carry an extra 0x1c-byte directory that shifts everything
+```
+
+**It reports a hypothesis and withholds the numbers.** In guild-rebrew's tree this round the actual
+discrepancy was **+64 bytes**, and `DataDirectory[6]` was **0 in both the reference and the built image** —
+there was no debug directory at all. The message sent the reader after `/debug` while the real fault was a
+different `.rdata` length.
+
+**Fixed in the rebrew checkout** (`src/rebrew/postlink.py`): the error now reports the measured sizes and
+distinguishes the two cases:
+
+- **exactly `0x1c` short** → that IS the `/debug` directory, and the original advice applies;
+- **any other value** → the built `.rdata` is itself a different length, and the message says to compare
+  VirtualSize against the reference and find what added or dropped the bytes.
+
+Measured after the fix, same tree:
+
+```
+built 9384 byte(s) between the IAT (0x24000, size 0x1a0) and the import directory (0x26648);
+the reference has 9320.
+```
+
+**The general point.** A guard's error text is part of its interface. One that names a single hypothesis
+and omits the measurement converts a five-minute diagnosis into a wrong lead — and this one is reached by
+every round that touches the composition, so the cost recurs. Prefer: *what was measured*, *what was
+expected*, and *the distinguishing test between the candidate causes*.
+
+**Companion to workflow-traps §19.** That one is about a work queue that is 90% noise; this is about an
+error message that is 100% one hypothesis. Both are cases where the tooling's *reporting* costs more than
+its *computation*.

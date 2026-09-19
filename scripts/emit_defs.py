@@ -130,6 +130,17 @@ def main() -> int:
         if not missing:
             break
         done.update(missing)
+    else:
+        # The cap was reached with symbols still missing.  Exiting silently here
+        # would hand the link an incomplete definition set and the failure would
+        # surface as a composition collapse or a phantom residue, not as this.
+        # Measured 2026-09-19: the real tree converges in 2 passes (73 -> 0), so
+        # this branch is unreachable today -- it exists so that if it ever is
+        # reached, it says so.  See docs/workflow-traps.md section 21.
+        raise SystemExit(
+            f"emit_defs: NOT converged after 6 passes -- {len(missing)} symbol(s) "
+            f"still undefined, first: {missing[:5]}.  The definition cascade did "
+            f"not reach a fixed point, so the link would use an incomplete set.")
 
         defs: dict[str, tuple[str, int]] = {}   # symbol -> (member name, section)
         absolutes: dict[str, int] = {}

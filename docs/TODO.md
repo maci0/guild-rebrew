@@ -29854,3 +29854,75 @@ Recorded as workflow-traps §20. Committed: `scripts/build_tree_check.py`, `scri
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1053 — three real bugs fixed in tooling; tree composition failure diagnosed (pre-existing, unfixed)
+
+Started from the user's instruction to fix every rebrew bug encountered and keep docs current. Three
+genuine bugs found and fixed, and one **pre-existing, reproducible composition failure** characterised.
+
+### Bug 1 — `map_libcmt.py` crashed on any VA absent from the catalog (FIXED)
+
+```
+File "scripts/map_libcmt.py", line 450, in <genexpr>
+    ids = sorted(order[v] for v, _ in funcs)
+KeyError: 268545824        # 0x1001af20
+```
+
+`order` is built from the catalog `rows`, while `funcs` are matched hits; a hit can sit at a VA the
+catalog does not list (`0x1001af20` is not in `db/server.dll_functions.csv`). The lookup aborted the entire
+report. Fixed to compute contiguity over the VAs that are present and **name** the absent ones, so a
+catalog gap is visible rather than fatal.
+
+### Bug 2 — `emit_defs.py` could exit its fixed-point loop silently (FIXED)
+
+`for _round in range(6): ... if not missing: break` had no failure path: exhausting the cap left the link
+with an incomplete definition set and the failure surfaced later as a composition collapse or phantom
+residue, never as "did not converge". Added a `for...else` that raises with the count and the first few
+missing symbols. Measured: the real tree converges in **2 passes** (73 -> 0), so the branch is unreachable
+today — it exists so that if it is ever reached, it says so.
+
+### Bug 3 — postlink's `.rdata` prefix error named one cause and hid the measurement (FIXED in the rebrew checkout)
+
+The message said "check the debug directory: builds with /debug carry an extra 0x1c-byte directory". The
+actual discrepancy here was **+64 bytes** with `DataDirectory[6] == 0` in **both** images — no debug
+directory. Fixed in `/home/maci/Desktop/Projects/relumea/rebrew/src/rebrew/postlink.py` to report the
+measured prefix length, the IAT and import-directory RVAs, and the reference's expected length, and to
+state that **exactly 0x1c** is the `/debug` case while **any other value** means the built `.rdata` is a
+different length. Recorded as workflow-traps §21.
+
+### The composition failure (diagnosed, NOT fixed)
+
+`cmake --build build --target final` fails on a **completely clean** rebuild:
+
+```
+cmake --build build --clean-first / rm -rf build + reconfigure + full build
+cmake --build build --target final   ->  ValueError: built .rdata prefix ...
+```
+
+Section geometry of the fresh composition against the reference:
+
+| section | reference | built | delta |
+|---|---|---|---|
+| `.text` | `0x22846` | `0x22d36` | **+1264** |
+| `.rdata` | `0x2e81` | `0x2ec1` | **+64** |
+| `.data` | `0x174059c` | `0x1740338` | −612 |
+| `.reloc` | `0x10374` | `0x83dc` | −32664 |
+
+**Ruled out as causes:**
+
+- `/debug` — `DataDirectory[6]` is 0 in both images (now reported by the fixed message).
+- `pad_short_functions` — "0 padded, 28 too long" is its documented steady state (the LONG lines are
+  diagnostics; `want` is understated where the metadata is incomplete).
+- **246/319 symbols at reference VA is CORRECT, not a regression** — `docs/TODO.md` round 154 records
+  `246/319 -> 0/319, residue 11,138 -> 48,600` when a TU split reordered the link, so 246/319 is the
+  expected value for this tree.
+- The missing `g_rdata_piece_4.obj` is **by design**: `split_blob.py` emits no object where two placed
+  sections are adjacent (`if a == b: piece_tokens.append(None)`), so 5 objects for 6 slots is correct.
+- My own script edits are not implicated: the same `.text`/`.rdata` sizes reproduce with both changes
+  stashed.
+
+**State left:** `build/server.dll` restored from `.scratch/shipped.before.dll` and verified
+**bit-identical** (`md5 3febd2c4ca080a3749c12d4bf7452fbe`). The gate cannot pass on a fresh composition until
+this is fixed, which is the work item this round hands forward.
+
+Committed: `scripts/map_libcmt.py`, `scripts/emit_defs.py`, rebrew's `postlink.py`, `docs/workflow-traps.md`.

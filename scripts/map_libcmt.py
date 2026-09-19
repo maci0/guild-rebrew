@@ -447,8 +447,19 @@ def main() -> int:
             by_member.setdefault(member, []).append((va, sym))
     for member, funcs in sorted(by_member.items(), key=lambda kv: min(v for v, _ in kv[1])):
         order = {v: i for i, (v, _n, _s) in enumerate(sorted((r for r in rows)))}
-        ids = sorted(order[v] for v, _ in funcs)
-        flag = "" if all(ids[i + 1] - ids[i] == 1 for i in range(len(ids) - 1)) else "  NON-CONTIGUOUS"
+        # `rows` is the catalog; `funcs` are matched hits.  A hit can sit at a VA
+        # the catalog does not list (the catalog is a curated subset, not every
+        # function in the reference), and the previous `order[v]` raised
+        # KeyError: 268545824 (0x1001af20) on exactly that, aborting the whole
+        # report.  Report contiguity over the VAs we can locate and name the ones
+        # we cannot, so a catalog gap is visible instead of fatal.
+        known = [(v, s) for v, s in funcs if v in order]
+        missing = sorted(v for v, _ in funcs if v not in order)
+        ids = sorted(order[v] for v, _ in known)
+        flag = "" if len(ids) < 2 or all(ids[i + 1] - ids[i] == 1 for i in range(len(ids) - 1)) \
+            else "  NON-CONTIGUOUS"
+        if missing:
+            flag += f"  {len(missing)} VA(s) absent from the catalog, first 0x{missing[0]:x}"
         print(f"  {member:28s} {len(funcs):3d} funcs  first 0x{min(v for v,_ in funcs):x}{flag}")
     return 0
 
