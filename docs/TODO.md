@@ -30125,3 +30125,51 @@ form of the "Wine load + exports resolve" criterion.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1060 — a read-only metadata file does not stop rebrew; /O1 closed on gm_AllocGebaeude
+
+**Set out to sweep `/O1` across the nine carriers using default flags** — a bounded, real experiment on the
+compiler-flag axis, which no round has run per-carrier. Two things came out of it, neither being the sweep.
+
+**1. The build-check guard works and blocked the sweep.** Editing `build.make` to switch flags now exits 4
+from `scripts/linktest.sh` with the restore command — the guard added in round 1052 doing exactly its job.
+That also means `build.make` editing is no longer an available experiment path, which is the intended
+trade. Restored from backup; `rebrew build-check` clean (198 objects).
+
+**2. A real rebrew bug: the read-only metadata is not a guard.** `src/rebrew-functions.toml` is
+`-r--r--r--`, which stops a shell redirect or an editor — but not `rebrew`:
+
+```
+rebrew test <file> --cflags "/O1 /Gd"   ->  persisted `cflags = "/O1 /Gd"` into the metadata
+```
+
+Mechanism, **verified directly rather than inferred**: `rebrew.utils.atomic_write_text` writes a sibling temp
+file and `os.replace()`s it onto the target. `os.replace` needs *directory* write permission, not file write
+permission:
+
+```
+$ chmod 444 .scratch/rotest
+$ python3 -c "import os,pathlib; p=pathlib.Path('.scratch/rotest'); t=p.with_name('rotest.tmp'); \
+              t.write_text('replaced'); os.replace(t,p)"
+os.replace SUCCEEDED on a 444 file -> replaced
+-rw-r--r-- 1 maci maci 8 ... rotest        <- and the read-only mode is gone
+```
+
+So a read-only metadata file is not a safety boundary. `chmod u+w` was needed to undo it. Reverted: pin
+removed, mode restored, `git diff` on the file empty. Recorded as workflow-traps §23, with the safe
+measurement procedure (snapshot and diff around every `rebrew test --cflags`).
+
+**What the sweep measured before it had to stop.** `/O1 /Gd` on `gm_AllocGebaeude`, against the current
+`/O2 /Gd`:
+
+| flag set | status | match | obj |
+|---|---|---|---|
+| `/O2 /Gd` (current) | NEAR_MATCHING | **753** | 1078 |
+| `/O1 /Gd` | SIZE_MISMATCH | **54** | 953 |
+
+Catastrophically worse — 8.4% of the match count. That closes the `/O1` lead on this carrier without needing
+the other eight; `/O1` is the flag 64 functions in this tree carry, so it was the plausible alternative, and
+it is not one here.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

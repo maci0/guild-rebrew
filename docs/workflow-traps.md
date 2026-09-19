@@ -857,3 +857,45 @@ was in the body, and add a check that the loop still *iterates* — not just tha
 **And the honest part:** two rounds were spent reporting this as pre-existing and diagnosing the wrong
 layer. A self-inflicted regression is the first hypothesis to test when the tree breaks immediately after
 your own tooling edit, and the evidence was available from the start — stashing the edit restored `.rdata`.
+
+## 23. A read-only metadata file does not stop `rebrew` writing it — `os.replace` bypasses the mode (round 1060)
+
+`src/rebrew-functions.toml` is `-r--r--r--` in this checkout. That looks like a guard against hand-editing,
+and it does stop a shell redirect or an editor. **It does not stop `rebrew`.**
+
+Measured this round. `rebrew test <file> --cflags "/O1 /Gd"` **persisted** `cflags = "/O1 /Gd"` into the
+metadata (workflow-traps §15 documents that `rebrew test` writes state; this is the mode interaction):
+
+```
+$ ls -la src/rebrew-functions.toml
+-r--r--r-- 1 maci maci 52697 src/rebrew-functions.toml
+$ rebrew test ... --cflags "/O1 /Gd"
+$ git diff --stat -- src/rebrew-functions.toml
+ src/rebrew-functions.toml | 1 +
+```
+
+The mechanism is `rebrew.utils.atomic_write_text`: it writes a sibling temp file and `os.replace()`s it onto
+the target. `os.replace` needs **directory** write permission, not file write permission, so a read-only
+target is replaced without complaint. `chmod u+w` was then required to undo it with a script.
+
+**Consequences.** A read-only metadata file is not a safety boundary here. A round that runs `rebrew test
+--cflags` to measure a candidate flag set silently changes the flags the **whole tree** resolves for that
+function, and every later `linktest.sh`/`gate.sh` measurement inherits it. The `--cflags` help text warns
+about exactly this; the file mode does not enforce it.
+
+**How to measure a candidate flag set safely on this tree:**
+
+1. `rebrew test <file> --cflags "<set>"` **writes** the pin — so snapshot first
+   (`cp src/rebrew-functions.toml .scratch/`) and diff after every call.
+2. Or edit `build.make` and use `rebrew linktest`-style measurement — but `rebrew build-check` (and
+   `scripts/linktest.sh`, exit 4) now **refuse** a hand-edited `build.make`, which is the correct behaviour
+   and was confirmed this round: the guard blocked the sweep.
+3. The clean path for a link-level flag sweep does not exist yet; see `docs/IDEAS-GUILD.md`.
+
+**What was measured before the pin was reverted:** `/O1 /Gd` on `gm_AllocGebaeude` gives
+`SIZE_MISMATCH, match 54, obj 953` against the current `/O2 /Gd` `NEAR_MATCHING, match 753, obj 1078` —
+catastrophically worse, 8.4% of the match count. So `/O1` on that carrier is not a lead, and the sweep is
+closed for that row without needing the other eight.
+
+**Reverted:** the pin was removed and the mode restored to `-r--r--r--`; `git diff` on
+`src/rebrew-functions.toml` is empty.
