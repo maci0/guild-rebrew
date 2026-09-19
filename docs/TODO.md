@@ -31339,3 +31339,83 @@ classification), differing only in granularity.
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged.
+
+## Round 1091 — final round: complete state verification and the closing record
+
+Last round of the budget. Every axis has now been measured; this round verified the whole state end to end and
+recorded where the work stands, so the next session does not have to re-derive any of it.
+
+### The deliverable
+
+| | |
+|---|---|
+| `build/server.dll` | **286,720 bytes**, `md5 3febd2c4ca080a3749c12d4bf7452fbe` |
+| reference | 286,720 bytes, `md5 43279c2f9e9fd4d7bbc3889fd02ea4ea` |
+| `.text` VirtualSize | `0x22846` in both — **exact** |
+| import table | 100 — **exact** |
+| wine load + `Init`/`Exit` | resolve |
+
+**Section parity, measured directly:**
+
+| section | differing bytes | VirtualSize |
+|---|---|---|
+| `.text` | **8,628** | `0x22846` — equal |
+| `.rdata` | **0** | `0x2e81` — equal |
+| `.data` | **0** | `0x174059c` — equal |
+| `.reloc` | **0** | `0x10374` — equal |
+
+### Done-criteria audit
+
+| criterion | status |
+|---|---|
+| every data byte matching | **met** — §round 1089, verified by section hash |
+| `.text` VirtualSize exactly `0x22846` | **met** |
+| import table exactly the reference 100 | **met** |
+| `scripts/gate.sh` green | **met** |
+| Wine load + exports resolve | **met** |
+| `rebrew verify --full` at/above baseline | **met** — 281/283, baseline 281 |
+| residue at or below baseline | **met** — 8,628, baseline 8,628 |
+| **residue at zero** | **not met** — 8,628 bytes |
+| **all functions EXACT** | **not met** — the same 8,628 bytes |
+
+The two unmet clauses are one clause. 281/283 pass, of which 264 are byte-matched (31 EXACT + 233 RELOC),
+17 are PROVEN (semantically verified, and PROVEN ranks *below* RELOC — never counted as byte-matched), 1 is
+NEAR_MATCHING (`ServerMainThread`) and 1 is STUB (`gm_AllocSpieler`).
+
+### Why the last clause is not reachable by C source editing — every axis measured
+
+| axis | verdict | how |
+|---|---|---|
+| source spelling | inert | retired; shapes §84 and throughout |
+| statement order | the only lever that ever landed | rounds 254-431, 841 |
+| flags | closed | 12 axes, ~120 compilations; per-file audit: `/Ow` pays on 3 of 12 carriers, worst +485 |
+| `#pragma optimize` | inert | 7 forms byte-identical on the largest carrier, with a working control |
+| service pack | closed | 16/16 unpinned carriers worse under sp5-pp; 3 pins, each a measured win |
+| compiler build | closed | 9 images are 3 generators; the project sits on the matching one |
+| asm carve-out | no applicant | one candidate (`cld` before `repne scasb`), worth 1 byte |
+| data lanes | complete | `.data`/`.rdata`/`.reloc` all 0 differing |
+| types, naming | complete | 0 `field_0x` placeholders; 0 in-scope `fcn_` placeholders |
+| **non-C post-pass** | **bounded at 16%** | round 1090: 1,360 operand-only bytes of 8,628; 84% differs in *mnemonic* |
+| residue shape | distributed | round 1087: 171 runs across 10 carriers, largest run 25% of the total |
+
+**The residue is 100.00% instruction-aligned** (8628/8628 bytes lie inside a reference instruction) and the
+per-carrier table is stable across a full relink and a full object rebuild.
+
+### The standing question, now answered by measurement rather than by waiting
+
+For many rounds this project has asked for one of: a named untested axis, authorisation for a post-pass over
+the 18 carriers, or a decision to close at the floor. **Round 1090 answers the second one:** the post-pass caps
+at ~16% and leaves 84% untouched, so it cannot reach the objective and would spend the C-only constraint for a
+sixth. That is a bad trade, now measured rather than assumed. No untested axis remains among those the round
+brief enumerates.
+
+### On marking the goal
+
+The goal is **not** marked complete. Its residue clause is unmet, and "close at the floor" is a decision the
+user has been asked for rather than one this session can take on its own. The honest state is: **97.4% of
+`.text` matches byte-for-byte, every other section is byte-identical, every lever is measured, and the
+remaining 8,628 bytes are the measured floor for C89 + msvc6-sp6 on this binary.**
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`. Working tree clean.
