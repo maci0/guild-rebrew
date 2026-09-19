@@ -29448,3 +29448,39 @@ documented shapes §81 wall (+66 linked, row +58 when the frame was closed).
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1043 — independently verified every done-criterion; the two unmet ones are the same quantity
+
+Rounds 1025-1042 worked the residue lane without movement. This round stepped back and verified the
+objective's five done criteria **from outside the project's own tooling**, so the status is a measurement
+rather than a restatement of the gate.
+
+| criterion | status | evidence |
+|---|---|---|
+| `.text` VirtualSize exactly `0x22846` | **MET** | independent PE parse |
+| residue at or below `RESIDUE_BASELINE` | **MET** | 8628 = baseline |
+| `rebrew verify --full` at or above `BASELINE` | **MET** | 281/283, 264 byte-matched |
+| import table exactly 100 | **MET** | 100 symbols, 4 DLLs |
+| Wine load + exports (Init, Exit) resolve | **MET** | `LoadLibraryA` OK, both `GetProcAddress` resolve |
+| all functions EXACT, zero drift | **NOT MET** | 264 of 283 byte-matched; 17 PROVEN are not byte matches |
+| residue at zero | **NOT MET** | 8628 |
+
+**`scripts/verify_objective.py`** (an independent PE parser sharing no code with project tooling) confirms
+all structural criteria, including details not previously reported: `non-.text bytes identical`, `no exported
+entry point lies in the residue`, and **both exports' bodies byte-identical** (`Exit` and `Init`, 0x40 bytes
+each).
+
+**`rebrew test --all`**: 283 total, **0 compile errors, 0 missing files**, 31 exact, 233 reloc, 17 proven,
+264 byte-matched.
+
+**`scripts/wine_load_check.sh`**: run directly rather than read from the gate's summary line —
+`LoadLibraryA` succeeds and both exports resolve, exit 0.
+
+**The shape of what remains.** The two unmet criteria are **the same quantity**: the 8,628-byte residue on
+18 carriers. Everything else in the objective is met and now independently verified. Rounds 1025-1042
+characterised that residue from six independent angles and moved it by zero bytes.
+
+Recorded in `general-knowledge.md`. **No source, metadata or `build.make` change.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
