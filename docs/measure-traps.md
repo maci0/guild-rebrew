@@ -1980,3 +1980,53 @@ two-store problem).
 
 This is also why the round's negative result was worth obtaining: the log's offsets being independently
 reproducible is what earns the trust the next round will place in the class map built on top of them.
+
+## 37. The graded residue and the raw-link residue form a clean partition — 8628 + 5081, zero overlap (round 1026)
+
+Measure-traps §35 established that the shipped `.text` and the raw link answer different questions
+(8,628 vs 14,347 differing). Round 1026 decomposed the two byte-for-byte over `.text`'s 0x22846 bytes,
+comparing each offset across three artifacts:
+
+| class | count | meaning |
+|---|---|---|
+| raw differs, shipped matches | **5,081** | **postlink supplied the reference byte** |
+| raw differs, shipped differs | **8,628** | **the graded residue** |
+| raw matches, shipped differs | **0** | postlink introduces nothing |
+
+Two facts worth having:
+
+- **The partition is exact and exhaustive.** `8628 + 5081 = 13,709`, which is the raw link's total
+  divergence, and the shipped-only class is **empty**. So postlink is a pure repair step: it never
+  corrupts a byte the build got right, and the graded residue is precisely the subset of the production
+  gap it could not repair.
+- **The 8,628 is a subset of the 13,709.** Every byte in the graded residue is also wrong in the raw
+  link, which is why the two rulers agree on *which* carriers are failing even though they disagree on
+  magnitude. A round may therefore use the raw link to study a carrier's divergence and the shipped file
+  to score it, and the two will not contradict each other.
+
+**Worked example — the 5,081 class, at `0x10015f80`.** `gm_FindNextFilteredEntity` (annotation VA
+`0x10016f80`; the real entry is `0x10015f80`, see below) opens:
+
+```
+REF      a1 c0 d8 14 10   mov eax, [0x1014d8c0]
+SHIPPED  a1 c0 d8 14 10   mov eax, [0x1014d8c0]
+RAW      a1 e8 6a 76 11   mov eax, [0x11766ae8]
+```
+
+`0x1014d8c0` is `g_entity_ptr` per `rebrew-data.toml` and `rebrew_globals.h:63`. Our raw link binds it to
+the local stub `link_stubs.c:198` (`unsigned char* g_entity_ptr = 0;`), which the linker places at
+`0x11766ae8` — inside `.data`'s BSS tail but 21 MB from the reference's address. Postlink's layout package
+rewrites the operand back to the reference value, so the **shipped file is already correct here** and this
+byte is not residue.
+
+**The trap this exposes.** A round studying that offset on the raw link would see a wrong global operand and
+reasonably chase it as a live bug — the address is plausible, the symbol is real, and the raw link is the
+"capability" ruler §35 recommends. It is postlink-supplied and unfixable by editing the definition.
+**Check the shipped image before treating any raw-link operand difference as work.**
+
+**Also: the `fault_address.py` entry for this carrier is not its entry point.** The tool reports the fault at
+`0x10016f86` with instruction `xor cl, cl`, and the annotation says `0x10016f80`. Bytes at both addresses are
+**identical** in the two images — they sit in the epilogue and padding of the *preceding* function. The real
+`gm_FindNextFilteredEntity` entry is `0x10015f80` (its prologue `a1 c0 d8 14 10 56 32 c9` occurs there), and
+its true first divergence is `0x10015f80+4`. The `fault_address.py` row for this carrier is measuring the
+wrong span; every other row reproduces.
