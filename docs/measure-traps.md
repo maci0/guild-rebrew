@@ -2759,3 +2759,39 @@ trap is that it reads as a finding rather than as a broken measurement.
 are checked: §47 (residue ≠ error size), §51 (a zero over an unstated denominator), §52 (a count over an
 unstated boundary), §53 (the right number from the wrong artifact), §54 (a rate over a fabricated
 denominator).
+
+## 55. `postlink_residual.py` measures the raw link, so a stale composition reports a fake residue of 81,229 (round 1101)
+
+`scripts/postlink_residual.py` defaults to `--built build/split_poc.dll` — the **raw link**, not the deliverable
+— because that is the artifact where `.text` is unrewritten. That is correct for its purpose and it is also a
+trap: `build/split_poc.dll` is regenerated only by `scripts/split_link.sh`, so after any object rebuild the file
+on disk is whatever the last composition produced.
+
+Measured this round: a `--clean-first` rebuild plus a probe left one object holding experimental code. The
+composition then failed to place (0 of 319 symbols at reference VA, `.text` `0x22b08` against `0x22846`), and
+`postlink_residual.py` reported **total 81,229** with `0x9401` differing bytes *outside* the 19 known carriers.
+
+**Two independent checks said the tree was fine**, and both were right:
+
+| check | reading |
+|---|---|
+| `build/server.dll` `.data` vs reference | **0 differing** → the deliverable *is* correctly postlinked |
+| `.text` VirtualSize, imports, file size | `0x22846`, 100, 286,720 — all correct |
+| `rebrew build-check` | clean |
+
+So the 81,229 was entirely about a collapsed intermediate, not about the deliverable.
+
+**The tell.** A residue total that is *an order of magnitude* above the baseline — 81,229 against 8,628 — and a
+"differing bytes outside the 19 carriers" count that is large (`0x9401` against a baseline of `0x0`). The
+baseline invariant is that **100% of residue lies inside the 19 carriers**; when that ratio breaks, the
+intermediate is stale, not the code.
+
+**Recovery, in order:** `rm -rf build/split_poc && bash scripts/split_link.sh`, which prints
+`exactly at their reference VA: 246`. That count is the composition's own health check — **246/319 means good,
+0/319 means collapsed** — and it appears before the residue number, so read it first.
+
+**The distinct failure that caused it.** `linktest.sh`'s and the gate's stale-object guard both fired, and every
+`rm -f <obj>` plus `cmake --build` is what eventually recovered it. This is the fourth round in this session
+where a stale object cost time (workflow-traps §24, rounds 1082-1084). The reliable recipe is: after any probe,
+`rm -f` the object explicitly, rebuild, then `rm -rf build/split_poc` and relink before reading **any** residue
+number.
