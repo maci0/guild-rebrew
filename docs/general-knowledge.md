@@ -17,8 +17,9 @@ this file holds the rest.
 
 ## Original build
 
-- Compiler: MSVC6. Flags: `/O2 /Gd` default project-wide (per-file variance
-  suspected but unattested — see codegen-walls §needle-2).
+- Compiler: MSVC6. Flags: `/O2 /Gd` default project-wide. Per-file variance
+  was swept (codegen-walls §7 item 2, CLOSED): SP6 confirmed, flag axis
+  flat, three `sp5-pp` file pins remain. Do not re-open.
 - Image base `0x10000000`. Exports: `Init` (0x10009320), `Exit`
   (0x10009350). Imports: exactly 100, inside `.rdata`/`.data` (no `.idata`).
 - `.text` VirtualSize `0x22846`. CRT: LIBCMT static. Compression: zlib
@@ -68,3 +69,43 @@ this file holds the rest.
 - Two-phase command architecture: `cm_Chk*` validate, `cm_Ex*` execute.
 - Seasons: `GM_WINTER/SPRING/SUMMER/AUTUMN`. Sim events: `HE_SIM_*`.
 - (Add findings here with evidence: string VA, function VA, or doc pointer.)
+
+## Discovery boundaries: 12 symbols in `command_c` are blocks of contiguous functions
+
+`rebrew verify --full` reports "13 function(s) have annotation SIZE differing from the binary-derived
+size". Twelve of them are `command_c/*.c`, all with `binary_size > annotation_size`, and the cause is not
+codegen: **the discoverer merged a contiguous run of small command functions into one symbol.** Our source
+implements the first function; the rest of the span is several sibling functions that have no VA of their
+own and therefore never appear in `function_structure.json`.
+
+Counted by scanning each span for `ret` (`0xc3`) bytes:
+
+| VA | span | `ret`s | functions in span | ours |
+|---|---|---|---|---|
+| `0x10010260` | 176 | 9 | 9 | 144 B (first) |
+| `0x1000f3b0` | 720 | 8 | 8 | 206 B |
+| `0x100100a0` | 448 | 8 | 8 | 159 B |
+| `0x1000d8a0` | 2208 | 6 | 6 | 142 B |
+| `0x1000e690` | 320 | 6 | 6 | 191 B |
+| `0x1000d6e0` | 272 | 5 | 5 | 78 B |
+| `0x1000e8d0`, `0x1000eaa0`, `0x1000f980` | 464/352/432 | 4 | 4 each | 239/208/335 B |
+| `0x1000cfe0`, `0x10010010` | 96/144 | 3 | 3 each | 64/110 B |
+| `0x1000d330` | 32 | 2 | 2 | 14 B |
+
+**50 extra reference functions** sit inside these 12 spans with no inventory entry. They are game code, not
+library: they use `g_next_object_id` (`0x10030b6c`), `g_unknown_1de450` (`0x101de450`) and `g_item_def_table`,
+and call game functions such as `0x10019cd0`, `0x100196c0`, `0x10019b80`.
+
+**The extreme case is `cm_MarkAndReturn`** (`0x1000d330`): our 14-byte function is **EXACT**, and the
+reference's remaining 18 bytes are `90 90 | b8 01 00 00 00 c3 | 90...` — a second complete function
+(`mov eax,1; ret`) followed by padding. The 32-byte "binary size" is the gap to the next entry, not this
+function's length. An `EXACT` status with a size divergence is therefore not a contradiction.
+
+**Consequence for the objective.** `rebrew verify --full`'s denominator (283) counts discovery symbols, not
+reference functions. Closing these 12 spans means implementing ~50 functions that no tool will hand out via
+`rebrew skeleton`, because they have no VA in `function_structure.json`. Separately, the `.text` these
+functions occupy is already emitted correctly by the reference's own bytes — they are not part of our
+residue, which is confined to the 19 carriers.
+
+Evidence: `python3 -c` scan of the reference's `.text` for `0xc3` within each span; `rebrew verify --json`
+`size_divergences`; `rebrew asm` at each sibling start.
