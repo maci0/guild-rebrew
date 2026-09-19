@@ -31057,3 +31057,55 @@ denominator), §52 (**a count over an unstated boundary**).
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. No source change; nothing to revert.
+
+## Round 1085 — the extent walker cannot be fixed by following forward jumps; second carrier analysed
+
+Round 1084 filed the follow-up (the walk stops at the first `jmp`, so it cannot bound a branch-heavy
+function). This round attempted it and **reverted it**, which is the finding.
+
+**The attempt.** One worklist walk that follows a forward `jmp` target and keeps going. It fixes the reported
+carrier (742 → 1836) and breaks the contract the other five callers depend on, in three ways measured with the
+suite:
+
+| regression | expected | got |
+|---|---|---|
+| thunk that IS a tail jump is followed out of the function | `(10, "jmp")` | `(3988, "jmp")` |
+| unterminated buffer | `None` | `4` |
+| MIPS / 16-bit walkers | inherit both | 4 failures |
+
+It also **overshoots the very function it was written for**: the real epilogue is `ret 4` at `0x10002e99`
+(extent 1835) and the walk reported 1836, having decoded a jump table as code. Six tests caught all of it;
+suite restored to 7188 passed. Recorded in rebrew `docs/IDEAS-GUILD.md` so it is not re-probed.
+
+The signal any fix needs is "is this `jmp` a tail call or an intra-function branch" — precisely what the
+current conservative walk refuses to guess, and the six callers were written against that refusal. A real fix
+means auditing all six and deciding per caller.
+
+**Then applied round 1084's own correction to the second carrier.** Analysing
+`CrashDumpUnhandledExceptionFilter` at its true extent (2012 bytes, stopping at the `0x09` padding) gives
+**673 reference instructions against our 656**, largest divergence run **131 at `0x10002aaf`** — the same
+shape §34/§35 found in `gm_AllocSpieler`. The 131-run is a `sprintf` argument-ordering difference one
+instruction deep:
+
+```
+ref                                   ours
+push 0x100272b4   (format)            mov edx, dword ptr [ecx + 0x18]
+push eax                              push edx
+call sprintf                          push 0x100272b4
+add esp, 0xc                          push eax
+                                      call sprintf
+```
+
+The reference pushes the format string first and loads the third argument after; we load it first, and the
+call setup rotates from there.
+
+**One probe, measured at the link, +0, reverted:** bind `ExceptionInformation[1]` to a local `unsigned int n`
+before the `sprintf`, to try to move the load after the format push. Inert, consistent with the rule that
+spelling and hoist changes do not land.
+
+**Docs:** measure-traps §52 (corollary recording the corrected second-carrier analysis), rebrew
+`docs/IDEAS-GUILD.md` (the reverted walker).
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. No source change; nothing to revert.
