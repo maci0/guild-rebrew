@@ -1490,3 +1490,47 @@ print('span',span,'comdats',m,'matching',[x for x in m if x==span])"
 
 If no COMDAT matches the span, the object is stale (measure-traps §22) or the metadata size is wrong — do not
 read a slack figure from it.
+
+## 27. `branch_census.py`'s "targetdiff" counts polarity swaps and ±1 drift as structural difference (round 1005)
+
+`scripts/branch_census.py` aligns branch instructions by index and counts those whose target differs. Used as
+a classifier (codegen-walls §13) and as a screen, it **overstates** structural difference in two ways, both
+measured this round on `ServerMainThread` (106 branches, 14 reported target-differing).
+
+**1. The deltas are mostly ±1..3, not different blocks.** The set of target deltas is
+`{-1 x5, -2 x5, -3 x3, +340 x1}`. Nine of the fourteen are a one-to-three-byte displacement drift from a
+locally shorter or longer block — the branch reaches the *same* block, one or three bytes off.
+
+**2. The `+340` outlier is a PAIRING artifact, not a different target.** Aligning by index pairs the wrong
+instructions once the streams desynchronise by one:
+
+```
+reference  0x100098e3  je  0x100097c5     (esi == 0 -> loop back)
+           0x100098e9  jmp 0x10009919     (else      -> exit)
+ours       0x100098e5  jne 0x1000991a     (esi != 0 -> exit)
+           0x100098e7  jmp 0x100097c5     (else      -> loop back)
+```
+
+The index-aligned pairs are `je`/`jne` and `jmp`/`jmp`, which subtracts a taken-branch target from a
+fallthrough target and yields 340. **Decoded properly, the control flow is identical**: both images send
+`esi == 0` to `0x100097c5` and the other edge to the exit block — the reference via `je` + fallthrough, ours
+via `jne` + fallthrough. That is §50's documented branch-polarity class, and the two exit targets differ by
+exactly **1 byte** (`0x10009919` vs `0x1000991a`) because our block is one byte shorter locally.
+
+**So `branch_census.py`'s count is an upper bound on structural difference, not a measurement of it.** The
+round-971 table built from it — `gm_AllocSpieler` 21, `ServerMainThread` 14, `cm_ExSellObjekt` 7, … — should be
+read as "branches whose *encoding* differs", which includes polarity and drift. The classifier's four classes
+survive because the carriers with **zero** target-differing branches are genuinely zero
+(`vfs_OpenStream`, `ahm_ExAllocAlchemist`, `m_AllocTracked`, `srv_LoadBuf`, `gm_ObjectsAvailble`,
+`vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue`), and the split at zero is what §13 uses.
+
+**The check, before calling a branch target a structural difference:**
+
+```python
+# decode both streams from the function entry and compare CONTROL FLOW, not index:
+# for each branch, resolve (condition, taken_dest, fallthrough_dest) and compare
+# the destinations as *sets of basic blocks*, not as addresses.
+```
+
+A pair that differs by a few bytes reaches the same block. A pair where the *mnemonic polarity swapped* is
+§50. Only a pair whose destinations resolve to different basic blocks is a placement finding.

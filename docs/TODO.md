@@ -28035,3 +28035,35 @@ the method note is in the finding so the next reader does not repeat it.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1005 — branch_census.py overstates structural difference; ServerMainThread's "+340" is a pairing artifact
+
+Tested the `place` class (19.4% of residue) by examining `ServerMainThread`'s 14 reported target-differing
+branches. **Most are not structural differences.**
+
+**The deltas are ±1..3, not different blocks:** `{-1 x5, -2 x5, -3 x3, +340 x1}`. Nine of fourteen are a
+one-to-three-byte displacement drift — the branch reaches the same block, a few bytes off.
+
+**The `+340` outlier is a PAIRING artifact.** Aligning by index pairs the wrong instructions once the streams
+desynchronise by one:
+
+```
+reference  0x100098e3  je  0x100097c5    (esi == 0 -> loop back)
+           0x100098e9  jmp 0x10009919    (else      -> exit)
+ours       0x100098e5  jne 0x1000991a    (esi != 0 -> exit)
+           0x100098e7  jmp 0x100097c5    (else      -> loop back)
+```
+
+Index alignment subtracts a *taken-branch* target from a *fallthrough* target and yields 340. **Decoded
+properly the control flow is identical** — both images send `esi == 0` to `0x100097c5` and the other edge to the
+exit block; the reference uses `je` + fallthrough, ours `jne` + fallthrough. That is §50's branch-polarity
+class, and the exit targets differ by exactly 1 byte because our block is 1 byte shorter locally.
+
+**What this changes.** `branch_census.py`'s count is an **upper bound** on structural difference, not a
+measurement — it counts branches whose *encoding* differs, including polarity and drift. The round-971 table
+(`gm_AllocSpieler` 21, `ServerMainThread` 14, `cm_ExSellObjekt` 7, …) should be read that way. §13's four-class
+classifier survives, because what it actually uses is the split at **zero**: the eight carriers with no
+target-differing branches are genuinely zero. → measure-traps §27.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
