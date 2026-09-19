@@ -1191,3 +1191,41 @@ fault-instruction identity is a diagnostic, not a target.
 **Judgement:** with the entry order reproduced and still worse, and the remaining divergence being the
 scheduler's placement of a single `xor`, this row has no C-expressible lever at its fault. Not re-probed
 without new evidence.
+
+### 22. `m_AllocTracked`'s prologue is a pure 2-instruction swap, and both source levers cost (round 1028)
+
+`m_AllocTracked` (`0x10006580`, 92 residue) carries the most isolated divergence on the tree: an **adjacent
+swap of exactly two instructions** at prologue index 6-7, with everything else in the first 12 instructions
+identical.
+
+```
+ref  ... mov eax,[0x10034640]; push ebx; xor ebx,ebx; push esi; cmp eax,ebx; push edi; jne ...
+bld  ... mov eax,[0x10034640]; push ebx; xor ebx,ebx; cmp eax,ebx; push esi; push edi; jne ...
+```
+
+`ref[6] == bld[7]` and `ref[7] == bld[6]` — verified by decoding both streams. The reference saves `esi`
+before the `g_array_ptr == 0` test; we test first.
+
+Two source-order spellings of the entry were measured **at the link**, both reverted:
+
+| variant | link delta |
+|---|---|
+| swap the two entry guards (`if (size == 0)` before `if (g_array_ptr == 0)`) | **+539** |
+| hoist `node = (struct GraphNode*) &g_alloc_root_name;` above both guards | **+61** |
+
+Both are worse, and the second is worse by an amount that tracks nothing local. `push esi` is a callee-save
+whose **position** is chosen by the scheduler from liveness; the `cmp` is a guard whose position is chosen
+from the source, but moving the guard moves every dependent block with it. **The 2-instruction swap is not
+a 2-byte edit to source — it is a scheduling difference whose local form cannot be reproduced without
+re-laying the function.**
+
+This is shapes §60's rule ("the scheduler places a store by its dependence, not by where the statement
+sits") in its *prologue* form: a callee-save's placement is a liveness decision, and no C spelling names it.
+The header's existing "these 2 remaining target-only items are allocator" verdict is **confirmed
+independently**, and both spellings are now retired rather than untried.
+
+**Generalisation, after two measured cases (this and §21).** A carrier whose fault is a *reorder* is not
+automatically the best target, even when the swapped instructions are adjacent and the rest of the
+prologue is byte-identical. The reorder is a symptom of a liveness/scheduling decision; reproducing it from
+source requires moving a statement that other blocks depend on, and the dependent cost exceeds the local
+gain in both cases measured.

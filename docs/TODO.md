@@ -28837,3 +28837,60 @@ function.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1028 — swept all 19 carriers' fault instruction kind; m_AllocTracked is a pure 2-instruction swap and both levers cost
+
+Round 1027's lesson was that a fault-match can still cost, so this round classified every carrier's fault
+**by instruction kind** rather than by the branch-census class, walking both streams from each entry with
+capstone aligned on address:
+
+| carrier | idx | reference | ours | kind |
+|---|---|---|---|---|
+| `gm_AllocSpieler` | 48 | `lea edx,[edx+0x100358fc]` | `mov [ebp],bx` | reorder |
+| `CrashDump` | 0 | `sub esp,0x280` | `sub esp,0x284` | frame size |
+| `cm_ExSellObjekt` | 14 | `mov [esp+0x14],edi` | `mov [esp+0x24],edi` | slot |
+| `ls_LoadBuildingEntityState` | 26 | `jle` | `jle` (target -2) | branch target |
+| `cm_ExCopyEntityData` | 19 | `jne` | `jne` (target -2) | branch target |
+| `gv_ExAllocGraveyardWorker` | 103 | `jle` | `jle` (differs) | branch target |
+| `ServerMainThread` | 247 | `je` | `je` (target +3) | branch target |
+| `gm_AllocGebaeude` | 38 | `mov edx,[0x10030b6c]` | `mov [ebp-0xc],eax` | reorder |
+| `vfs_OpenStream` | 18 | `cmp byte [eax],0` | `mov al,[eax]` | fold |
+| `gm_FindNextFilteredEntity` | 2 | `xor cl,cl` | `test eax,eax` | reorder (**+6**, round 1027) |
+| `ahm_ExAllocAlchemist` | 66 | `lea edx,[eax+eax*8]` | `lea eax,[eax+eax*8]` | dest register |
+| `gm_CheckInventoryCapacity` | 8 | `xor ebp,ebp` | `mov [esp+0x18],0x12` | statement order |
+| **`m_AllocTracked`** | **6** | **`push esi`** | **`cmp eax,ebx`** | **pure adjacent swap** |
+| `srv_LoadBuf` | 26 | `push eax` | `mov [ebp+0x2c],ecx` | reorder |
+| `gm_ObjectsAvailble` | 73 | `test ebx,ebx` | `test edi,edi` | register role |
+| `vfs_ReadCompressed` | 65 | `mov edi,eax` | `test eax,eax` | reorder |
+| `cm_ExProdObjekt` | 73 | `mov edx,[0x101de450]` | `mov ebx,[ebp+0x16]` | reorder (barrier) |
+| `cm_ProcessCommandQueue` | 17 | `jne` | `jne` (target -4) | branch target |
+| `gm_CalculateProductionValue` | 68 | `fxch st(1)` | `cmp byte [esi],0x17` | x87 fold |
+
+**The best candidate on this table is `m_AllocTracked`**: a swap of **exactly two adjacent instructions**,
+with `ref[6]==bld[7]` and `ref[7]==bld[6]` verified by decoding both streams, and the rest of the first 12
+instructions byte-identical. Reference saves `esi` before the `g_array_ptr == 0` test; we test first.
+
+Two source spellings measured at the link, both reverted:
+
+| variant | link delta |
+|---|---|
+| swap the entry guards (`if (size == 0)` before `if (g_array_ptr == 0)`) | **+539** |
+| hoist `node = &g_alloc_root_name;` above both guards | **+61** |
+
+**Neither is close.** `push esi` is a callee-save placed by liveness; the `cmp` is a guard placed by source,
+but moving it drags every dependent block. The header's existing "these 2 remaining target-only items are
+allocator" verdict is now **independently confirmed**, and both spellings are retired rather than untried.
+Recorded as `codegen-walls.md` §22.
+
+**The generalisation, now from two measured cases (this and §21):** a carrier whose fault is a *reorder* is
+not automatically the best target even when the swapped pair is adjacent and the surrounding bytes match.
+The reorder is a symptom of a liveness/scheduling decision, and reproducing it from source costs more than
+the local gain.
+
+**Sweep method note.** This table is a useful diagnostic because the *kind* of the differing instruction
+suggests which lever to reach for (branch target -> §13 block placement; register-only -> allocator
+Findings 62/63; `cmp`/`mov` fold -> shapes; reorder -> liveness, no C lever). It does not by itself order
+the work, and the two reorders it flagged most favourably both cost.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
