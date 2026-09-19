@@ -29680,3 +29680,44 @@ the entire function — matched-reloc 584 -> 142". No probe spent.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1049 — verified codegen-walls §2's epilogue-merge claim byte-for-byte; the row's divergence is that wall
+
+Round 1048's sound instrument put `gv_ExAllocGraveyardWorker` at an 84.8% prefix with its first
+modulo-address difference at instruction 145, where the reference reads `pop edi; pop esi; pop ebp;
+mov eax,0xffff` and ours reads `mov eax,0xffff; pop edi; pop esi; pop ebp`. That looks like a four-instruction
+epilogue reorder.
+
+**It is codegen-walls §2, verified exactly.** The 13-byte epilogue
+
+```
+5f 5e 5d b8 ff ff 00 00 5b 83 c4 10 c3
+pop edi; pop esi; pop ebp; mov eax,0xffff; pop ebx; add esp,0x10; ret
+```
+
+occurs **twice** in the reference `.text` — at `0x10011cdb` and `0x10011d77` — and **once** in ours
+(`0x10011cdb`). The reference keeps two copies and routes the entry-search loop's three exits to the later
+one; we emit one and fold all three into it. My measured "reorder" is our single copy starting at the offset
+where the reference's *second* copy starts.
+
+**Three spellings measured at the link on this epilogue, all reverted:**
+
+| spelling | link delta |
+|---|---|
+| `fail_ffff:` returns via an `unsigned short fail_val = 0xffff;` temp | **+0** (optimised away, order unchanged) |
+| the direct `return 0xffff` at line 521 converted to `goto fail_ffff` | **+321** |
+| (a `gv_fail_code()` call variant was drafted and **not** tested — it changes semantics and so cannot be byte-identical even if it scored well) | not run |
+
+The +0 row is the informative one: giving the constant a named temp does not delay its materialisation, so
+the epilogue's order is not a statement-order property. The +321 row reproduces §2's mechanism from the
+source side — merging the two exits explicitly makes the object much worse.
+
+**Also confirmed:** the carrier's own header mis-diagnoses this row as "an ecx<->edx role exchange … a
+register-naming difference, not a shape difference". The registers are identical at every index; what differs
+is which epilogue copy three branches reach. §2 already records that mis-diagnosis and the reason a
+stream diff (and a positional ruler) cannot see it — the check that finds it is comparing **branch targets**.
+
+**No source, metadata or `build.make` change retained; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
