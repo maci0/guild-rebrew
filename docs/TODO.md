@@ -28717,3 +28717,41 @@ the check behind it (`object .text raw == span`) is tautological because msvc6 p
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1025 — independently reproduced every §13 carrier offset: 11/11 exact, table is current
+
+The live log at `docs/TODO.md:65` ("Continuation notes, newest first — start here") is the real handoff and
+this round read it end to end for the first time. Its open question (round 975) is: *not* which carrier or
+what class — both measured — but whether any lever exists for a class whose every member has been probed.
+
+Before spending budget against that class map, I re-verified its foundation: `codegen-walls.md` §13's
+recorded per-carrier first-divergence offsets, which were measured many rounds ago.
+
+**Result: 11 of 11 reproduce exactly.** `0xaa`, `0x2`, `0x2c`, `0x3c`, `0x30`, `0x107`, `0x3c7`, `0x60`,
+`0x36`, `0xcc`, `0x11` — zero mismatches, against the current build.
+
+**My first attempt reported 13 of 13 wrong.** Every one of those was the check's own error, from two
+independent causes, either sufficient alone:
+
+1. **Carrier VAs assumed rather than resolved.** `gv_ExAllocGraveyardWorker` is `0x10011bf0` (I used
+   `0x10011c00`), `cm_ExSellObjekt` is `0x1000d930` (I used `0x1000d8a0`), `gm_AllocGebaeude` is
+   `0x100174d0` (I used `0x10017530`), `ls_LoadBuildingEntityState` is `0x100128f0` (I used `0x10012900`).
+   Offsets are *relative*, so a wrong start shifts every number silently and the output reads as a stale
+   table rather than a bad baseline.
+2. **The wrong artifact** — two carriers showed no differing byte at all, which is impossible for a
+   non-zero-residue carrier. That was the tell, and it is measure-traps §35's deliverable-vs-capability
+   confusion arriving before §35 was written.
+
+The correct method takes both endpoints from artefacts: the fault address from
+`postlink_residual.py`'s own per-carrier attribution, the start from the `FUNCTION: SERVER` annotation
+that `rebrew lint` already validates. Recorded as measure-traps §36.
+
+**Why a negative result was the right use of the round.** The class map in §13 is what every future
+residue round will work from; establishing that its underlying offsets are independently reproducible
+is what earns that trust. It also confirms nothing has drifted underneath the log during the rounds
+since 975.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
