@@ -2322,3 +2322,63 @@ wrong in magnitude: only 122 instructions are *absent*, while 567 are *present b
 latter that dominates. So the work is not primarily "recover what we deleted" but "find the source spelling that
 makes msvc6 choose the reference's instruction at these 567 sites" — which is the `msvc6-c-shapes` problem, and
 narrower than the whole function.
+
+### 45. Most of the residual difference is PAIRS OF SWAPPED INSTRUCTIONS, not different code (round 1103, fresh-eyes survey)
+
+Going carrier-by-carrier produced a misleading picture: each one looked like a different problem. Comparing all
+nineteen **by address on the deliverable** shows one shape repeated everywhere — the same instructions in the
+opposite order.
+
+**`cm_ExProdObjekt` is the cleanest example: 2 differing instructions out of 349 shared addresses, 21 residue
+bytes, and the entire difference is one schedule swap.**
+
+```
+reference                              ours
+0x1000e20c mov edx,[g_item_def_table]  0x1000e20c mov ebx,[ebp+0x16]
+0x1000e212 xor eax,eax                 0x1000e20f xor eax,eax
+0x1000e214 mov ax,[ebp+0x14]           0x1000e211 mov ax,[ebp+0x14]
+0x1000e218 mov ebx,[ebp+0x16]          0x1000e215 mov [esp+0x18],ebx
+0x1000e21b mov ecx,eax                 0x1000e219 mov edx,[0x100367bc]
+0x1000e21d mov [esp+0x18],ebx          0x1000e21f mov ecx,eax
+```
+
+The reference hoists the **table-pointer load to the top**; ours issues it fourth. Nothing is missing, nothing
+is different in kind — one load is scheduled earlier.
+
+**The same shape in the other carriers examined this session:**
+
+| carrier | the swap |
+|---|---|
+| `cm_ExProdObjekt` | `mov edx,[global]` first vs fourth (2 of 349 differ) |
+| `vfs_ReadCompressed` | `mov edi,eax; test edi,edi` vs `test eax,eax; mov edi,eax` |
+| `srv_LoadBuf` | `push eax` at idx 26 vs idx 29 (its whole 49-byte residue) |
+| `gm_AllocSpieler` | `rep stosd` before vs after the slot stores (round 212) |
+| `CrashDump` | `push ebp` / `mov [ebp],ecx` order |
+| `gm_ObjectsAvailble` | `ebx`/`edi` roles swapped across two pointers |
+
+**Two consequences that change the plan.**
+
+1. **The address-indexed `mnemonic differs` count of 567 (§44) overstates the semantic gap.** When two
+   adjacent instructions swap, both addresses report a *different mnemonic*, so a one-instruction schedule
+   change is counted twice and looks like two pieces of different code. The real count of genuinely different
+   instruction *kinds* is smaller than 567.
+2. **`cm_ExProdObjekt`'s operand `0x100367bc` is not a symbol** — it is absent from `rebrew-data.toml`, while the
+   reference's `0x101de450` is `g_item_def_table`. That is not a wrong global in the source: `postlink`
+   rewrites `.data` operands **by `.text`-relative offset**, so when a preceding instruction changes length the
+   rewrite lands on the neighbouring instruction. **Fix the swap and the operand corrects itself.** Reading it
+   as a wrong-global bug would send the search into the data declarations, which are already exact (0 differing).
+
+**Probed this round, all reverted, all negative:**
+
+| carrier | probe | result |
+|---|---|---|
+| `cm_ExProdObjekt` | hoist `g_item_def_table` into a block local before both msg loads, so the source reads it first | **+0**, and the instruction order was **unchanged** — the scheduler rescheduled it back |
+| `vfs_ReadCompressed` | volatile use-site on the `i == 0` test, the file's own technique | object grew past the 512 span, composition collapsed |
+| `CrashDump` | typed `(OVERLAPPED*) 0` at one `WriteFile` | (probe abandoned, reverted) |
+
+**The conclusion this supports, stated as judgement:** the residual is dominated by msvc6's **scheduler**, not
+by source content. The instructions are all present and semantically equivalent (17 of the 19 carriers are
+PROVEN); what differs is the order the backend emits them in, and the order is set after the front end by
+register pressure and the instruction scheduler. Five carriers, three rounds, and roughly a dozen spellings now
+show the same thing: no C-level respelling moves a pinned schedule, because the schedule is not derived from
+the spelling.
