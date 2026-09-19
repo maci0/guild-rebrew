@@ -28799,3 +28799,41 @@ since 975.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1027 — gm_FindNextFilteredEntity: the entry reorder reproduces the reference's instruction order and still scores +6
+
+Round 1026's decomposition pointed at `0x10015f80`/`0x10016f80`. Walking the two streams from
+`gm_FindNextFilteredEntity`'s entry (`0x10016f80`, 352 B) with capstone, aligned on address, the third
+instruction disagrees:
+
+```
+ref  mov eax, [0x1014d8c0]; push esi; xor cl, cl; lea esi,[eax+0xa900]; mov eax,[0x100a8c30]; test eax,eax
+bld  mov eax, [0x1014d8c0]; push esi; test eax,eax; je 0x100170d6; lea esi,[eax+0xa900]; mov eax,[0x100a8c30]
+```
+
+The reference forms `end` before testing `g_entity_type_table`; ours tests the table first. That is a
+statement-order divergence — the class the objective says to attack first — so three spellings were
+measured, **at the link**, all reverted:
+
+| variant | link delta |
+|---|---|
+| `match = 0; end = ...; if (table == 0) return 0;` (reorder the guard below `end`) | **+6** |
+| `end = ...; if (table == 0) return 0; if (dynasty > 0x100) return 0; match = 0;` | **+6** |
+| `end` split into a braced block with its own `entity_base` temp, guard left in place | **+6** |
+
+**The result worth keeping is not the +6, it is that variant 1 worked and did not pay.** Verified by
+re-disassembling the recomposed image: the reorder moved `lea esi,[eax+0xa900]` from instruction **5 to
+instruction 2**, which is exactly where the reference has it, and the fault instruction count still moved
+by +6. So the cost is downstream of the fault and larger than the local gain — **a carrier can have a fault
+whose removal is not a win.**
+
+Recorded as `codegen-walls.md` §21, with the corollary: the fault-instruction identity is a *diagnostic*,
+not a target. Score at the link before treating a fault-match as progress.
+
+**Also from this round:** `fault_address.py`'s `gm_FindNextFilteredEntity` row was checked against the
+streams and is correct — my round-1026 note calling it "the wrong span" was wrong and is corrected. The
+bytes at `0x10016f80` being a shared epilogue tail is normal; the prologue is at `0x10016f8a`, inside the
+function.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

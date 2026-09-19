@@ -2025,10 +2025,8 @@ reasonably chase it as a live bug — the address is plausible, the symbol is re
 **Check the shipped image before treating any raw-link operand difference as work.**
 
 **A note on `0x10016f80`.** `gm_FindNextFilteredEntity`'s annotation VA is `0x10016f80` and the
-inventory agrees (`fcn.10016f80`, 352 bytes). The bytes at its entry are `c4 08 5e c3` followed by ten `90`s —
-**identical in both images** — because that is the shared epilogue tail the previous function's layout leaves
-there; the function's own prologue begins at `0x10016f8a`. So this carrier has no divergence in its first 16
-bytes, and a round reading the bytes at the annotation VA would be reading the epilogue of the function
-before it. Two separate first-round errors came from exactly that (assuming the VA, and assuming the bytes at
-it are the function's own) — confirm a carrier's first divergence from `fault_address.py`, whose other 18 rows
-all reproduce.
+inventory agrees (`fcn.10016f80`, 352 bytes). The bytes at its entry are `c4 08 5e c3` followed by ten `90`s,
+**identical in both images** — a shared epilogue tail left by the preceding function's layout — and the
+function's own prologue begins at `0x10016f8a`. `fault_address.py` walks the streams from `0x10016f80` and
+reports the first disagreement at `0x10016f86`; that is correct, and a first attempt to call this row
+"the wrong span" was wrong. Decode the streams, do not read the bytes at the entry.

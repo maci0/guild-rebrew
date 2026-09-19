@@ -1146,3 +1146,48 @@ postlink overwrites the section either way.
 already exact and the raw-link number is a ceiling the gate enforces correctly. The only route to changing
 raw-link `.data` would be reproducing the original's `.data` COMDAT order, which is linker-hash-driven
 (`CMakeLists.txt:443-448`) and unreachable from C.
+
+### 21. `gm_FindNextFilteredEntity`'s entry order moves the fault instruction but scores +6 (round 1027)
+
+`gm_FindNextFilteredEntity` (`0x10016f80`, 352 B, 215 residue) opens with a guarded prologue. The two
+streams disagree at the **third** instruction:
+
+```
+ref  mov eax, [0x1014d8c0]     ; g_entity_ptr
+     push esi
+     xor cl, cl                ; match = 0
+     lea esi, [eax + 0xa900]   ; end
+     mov eax, [0x100a8c30]     ; g_entity_type_table
+     test eax, eax
+bld  mov eax, [0x1014d8c0]
+     push esi
+     test eax, eax             ; <-- table guard hoisted above match = 0
+     je 0x100170d6
+     lea esi, [eax + 0xa900]
+     mov eax, [0x100a8c30]
+```
+
+The reference forms `end` before testing the table; ours tests the table first. Three spellings were
+measured **at the link**, all reverted:
+
+| variant | result |
+|---|---|
+| `match = 0; end = ...; if (table == 0) return 0;` | **+6** |
+| `end = ...; if (table == 0) return 0; ...; match = 0;` | **+6** |
+| `end` split into a braced block with its own `entity_base` temp | **+6** |
+
+**Why this is not an ordinary canonicalisation.** Variant 1 *did* change the emitted order — it moved
+`lea esi,[eax+0xa900]` from instruction 5 to instruction 2, which is where the reference has it. The
+streams got **closer** at the fault and the link score still moved by exactly +6, identically for all
+three spellings. So the +6 is not "the reorder failed"; it is a downstream cost that the reorder does not
+touch, and it is larger than the local gain.
+
+**The reading.** `xor cl, cl` is placed by the scheduler on data dependence (shapes §60), so its position
+relative to the guard is not expressible in C — but the *guard's* position is, and moving it reproduces the
+reference's own instruction order while making the function 6 bytes worse. **A carrier can have a fault
+whose removal is not a win.** Score at the link before concluding that a fault-match is progress; the
+fault-instruction identity is a diagnostic, not a target.
+
+**Judgement:** with the entry order reproduced and still worse, and the remaining divergence being the
+scheduler's placement of a single `xor`, this row has no C-expressible lever at its fault. Not re-probed
+without new evidence.
