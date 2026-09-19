@@ -30717,3 +30717,53 @@ records, restated here because this round re-earned it.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1078 — the whole "start-data" lane was false positives: 123 items, zero of them real work
+
+The round brief named `.data`/`.rdata`/`.bss` as the focus and quoted "246 start-data items and 34
+data-drift" as the queue. Both numbers were stale, and the real finding is much larger than an inventory
+correction: **every item in the lane was un-clearable, and every one was already correct.** After the fix
+both data lanes are empty — `rebrew todo --count 500` returns 2 items, both `improve-match`, the two known
+`.text` carriers. There is no data work left to pick up.
+
+**`verify --data` reports 122 matched of 329 metadata symbols and prints no denominator.** It compares only
+symbols `section_symbol_bytes` can read bytes for — `section` in `(".data", ".rdata")` *and* the extent inside
+the section's `raw_size`. A symbol past `raw_size` (the zero-fill tail, no file bytes) is skipped with an
+explicit `continue  # zero-fill tail (BSS): no file bytes to read`. Skipped VAs never reach `ref_sizes`, and
+`verify.py` builds its `matched_names` by iterating `ref_sizes` — so they can never be written back as
+VERIFIED. They stay `UNCHECKED` forever, and that set *is* the `start-data` lane.
+
+**Measured the population directly, three ways.** Rather than trust the tool's own summary, the metadata
+was partitioned and each group byte-compared between `original/Server/server.dll` and `build/server.dll`:
+
+| group | count | status of its bytes |
+|---|---|---|
+| `__imp__` IAT slots (`section = ".idata"`) | 84 | all 84 dwords byte-identical; no `.idata` section exists |
+| zero-fill tail at `0x10035000`+ (incl. `section = ".bss"`) | 111 | past `.data` raw extent `0xE000`; zero-filled in both images |
+| sized with real file bytes | 5 | byte-identical |
+| no size and no type | 7 | nothing to compare |
+| **total UNCHECKED** | **207** | **zero differences** |
+
+The arithmetic closes exactly: `.data` is `vaddr 0x27000`, `vsize 0x174059c`, `rawsize 0xe000`, so the
+zero-fill tail begins at VA `0x10035000`; all four section headers are byte-identical between the two images,
+including `.data`'s `0x174059c`. `verify --data`'s own 122 matched symbols are all already `VERIFIED` — the
+122/207 split is clean by construction, not a coincidence.
+
+**Two rebrew bugs found and one fixed.** `rebrew todo`'s `_collect_start_data` surfaced entries that
+`rebrew verify --data` structurally cannot clear, so the lane could never empty and its size meant nothing.
+Fixed in the rebrew checkout (`1e4e4055`): skip `__imp_` names, `section = ".idata"`, `section = ".bss"`, and
+any symbol in a section's zero-fill tail, computed from the binary once and lazily. The lane went **123 items
+→ 0**, leaving only the 2 real `.text` carriers. Four tests added, two of which fail with the filter removed.
+The deeper coverage-reporting gap is recorded as a new item in rebrew's `docs/IDEAS-GUILD.md`.
+
+**Also this round:** round 1077 closed — the `lea esi,[edx+ecx]` / `[ecx+edx]` swap at `0x10012944` is
+`msvc6-c-shapes.md` §70's inert class and had already been probed byte-identically at §15. The only defect was
+§15's bare "§70", which reads as a dangling self-reference in a file whose headings stop at §33; the citation
+now names the shapes doc. Commit `e2488b64`.
+
+**Docs:** measure-traps §51 (the coverage-denominator trap), rebrew `docs/IDEAS-GUILD.md`.
+
+**No source, metadata or link change in this repo; nothing to revert.**
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

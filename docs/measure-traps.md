@@ -2572,3 +2572,53 @@ localises any difference to a carrier.
 the sum check is §47's job, and these two checks catch different failures).
 
 **This closes the reproducibility question at the granularity the project measures at.**
+
+## 51. A "0 mismatched" data verdict measured 37% of the metadata, and said nothing about it (round 1078)
+
+`rebrew verify --data` printed:
+
+```
+data: 122 matched, 0 mismatched, 0 missing
+```
+
+Read as a whole-tree statement that is a full pass. It is not. `src/rebrew-data.toml` held **329**
+symbols at the time; the check had compared **122** of them and reported no denominator, so nothing in the
+output distinguished "every symbol verified" from "a third of them, chosen by a rule the reader cannot see".
+
+**The rule is in `data_verify.section_symbol_bytes`, and it is deliberate.** It skips a symbol when
+
+- its `section` is not in `(".data", ".rdata")`, or
+- its extent runs past the section's `raw_size` — the zero-fill tail, which has no file bytes:
+
+```python
+if offset + size > sec.raw_size:
+    continue  # zero-fill tail (BSS): no file bytes to read
+```
+
+A skipped VA never enters `ref_sizes`. `verify.py`'s write-back builds `matched_names` by iterating
+`ref_sizes`, so a skipped symbol is never a candidate for `DATA_STATUS_VERIFIED` and stays `UNCHECKED`
+**permanently** — no run of any command can move it. Those permanently-UNCHECKED entries are exactly what
+`rebrew todo`'s `start-data` lane is built from, which is why that lane could never empty.
+
+**Measured, guild-rebrew: 329 metadata symbols → 207 UNCHECKED → all 207 un-clearable.**
+
+| group | count | why it cannot clear | independently confirmed correct |
+|---|---|---|---|
+| import slots (`__imp__…`, `section = ".idata"`) | 84 | linker output; the image has no `.idata` section | all 84 IAT dwords byte-identical |
+| zero-fill tail (`0x10035000`+, incl. `section = ".bss"`) | 111 | past `.data`'s `raw_size = 0xE000`; no file bytes | zero-filled in both images by construction |
+| sized with real file bytes | 5 | — (these *are* comparable) | byte-identical |
+| no size and no usable type | 7 | nothing to compare | n/a |
+
+Zero differences anywhere. **The data lane for this binary is complete**, and the 123 `todo` items that
+claimed otherwise were an artefact of the ruler, not work.
+
+**The transferable trap: a zero in a diff-shaped result is not a zero in coverage.** "0 mismatched" bounds
+only the population the tool chose to look at. Before treating such a number as "this axis is done", find the
+denominator — here it was absent from the output entirely and had to be reconstructed by calling
+`section_symbol_bytes` directly on both images and counting `ref_sizes`. A cheap version of that check:
+compare the result count against the metadata entry count; 122 against 329 is the tell.
+
+**The trap bit for the whole project, not one round.** The lane's "123 start-data items" was quoted as
+pending work in round briefs, and `start-data` was the largest category in `rebrew todo` for hundreds of
+rounds. Every item in it was un-clearable. Round 1076's "the table is stable across rebuilds" is the correct
+kind of check; this is its data-side counterpart — verify the *denominator*, not just the difference.
