@@ -29223,3 +29223,54 @@ designed; the four are not defects.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1037 — rounds 1022-1024 were wrong: there are NO missing functions; the inventory is just coarser
+
+Went to work the "10 missing sibling functions / 694 capability bytes" from rounds 1022-1024 and found the
+premise false.
+
+**Every function inside the twelve over-wide spans is already implemented, annotated and byte-identical.**
+Enumerated every annotated VA inside each span, with its length to the next annotated VA and its residue in
+the shipped file:
+
+| annotated functions inside the 12 spans | 25 |
+|---|---|
+| residue 0 (**byte-identical**) | **24** |
+| with residue | 1 — `cm_ExSellObjekt` (`0x1000d930`, 966 bytes) |
+
+Total residue inside all twelve spans: **966**, all of it `cm_ExSellObjekt` — already a carrier in the
+residue table. Nothing is missing.
+
+**The ten VAs I named as missing all have annotations:**
+
+| VA | function |
+|---|---|
+| `0x1000d340` | `cm_RejectCommand` |
+| `0x1000d730` | `cm_ExFree` |
+| `0x1000d930` | `cm_ExSellObjekt` |
+| `0x1000e750` | `cm_ExAllocObjekt` |
+| `0x1000f480` | `cm_ExSetWohnsitz` |
+| `0x10010080` | `cm_ExSimCommand` |
+| `0x1000e9c0`, `0x1000f590`, `0x1000fad0`, `0x10010140` | also annotated |
+
+**The real fact:** `function_structure.json` holds **543 entries against 283 annotated functions** — a
+coarser partition, where each entry's size is the gap to the next *inventory* entry. `0x1000d8a0` is one
+2008-byte inventory entry containing **two** annotated functions: `cm_ExTransferCurrencyNoKill`
+(`0x1000d8a0`, 144 bytes, verified **0 differing bytes**) and `cm_ExSellObjekt` (`0x1000d930`). So
+`binary_size > annotation_size` is expected, not evidence of anything.
+
+**What this retracts.** Rounds 1021-1024 claimed a 51-function then 10-function coverage gap, built a
+root-cause story on `discover.py`'s `>= 3` padding threshold, and proposed an upstream tool fix for a defect
+that does not exist. `workflow-traps.md` §17 is rewritten in place to record the correction, and the
+`general-knowledge.md` entry is replaced. The tool-fix proposal is withdrawn.
+
+**The second-order lesson, and it is the valuable part.** Both "missing function" findings were measured
+against a proxy (`function_structure.json`, known to be discoverer-owned) without ever checking the
+authoritative population — `rebrew verify`'s own annotation list — for the same VAs. **A claim that X is
+missing needs a check against the authoritative list of X.** One `grep "FUNCTION: SERVER 0x<VA>"` would have
+falsified it four rounds ago.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

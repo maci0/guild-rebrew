@@ -70,94 +70,51 @@ this file holds the rest.
 - Seasons: `GM_WINTER/SPRING/SUMMER/AUTUMN`. Sim events: `HE_SIM_*`.
 - (Add findings here with evidence: string VA, function VA, or doc pointer.)
 
-## Discovery boundaries: 12 symbols in `command_c` are blocks of contiguous functions
+## The `command_c` discovery boundaries are an INVENTORY artefact, not a coverage gap
 
 `rebrew verify --full` reports "13 function(s) have annotation SIZE differing from the binary-derived
-size". Twelve of them are `command_c/*.c`, all with `binary_size > annotation_size`, and the cause is not
-codegen: **the discoverer merged a contiguous run of small command functions into one symbol.** Our source
-implements the first function; the rest of the span holds sibling functions that have no VA of their own
-and therefore never appear in `function_structure.json`.
+size". Twelve are `command_c/*.c` with `binary_size > annotation_size`. Rounds 1021-1024 read this as a
+coverage gap and reported 51, then 10, "missing sibling functions" hidden inside over-wide discovery
+symbols. **That conclusion was wrong**, and this entry replaces it.
 
-**Exactly 10 sibling functions, not 51.** The first count (round 1022) split each span at every `ret`
-(`0xc3`) and got 51. That is wrong: most `ret`s in these spans are **branch targets** — return sites
-*inside* a larger function. Confirm a start with three conditions together:
+**Every function inside those spans is already implemented, annotated, and byte-identical.** Measured — for
+each of the 12 spans, every annotated VA inside it, with its length to the next annotated VA and its
+residue in the shipped file:
 
-1. preceded by at least one `90` pad byte;
-2. **not** a target of any `e8`/`e9`/`eb`/`7x`/`0f 8x` branch in the image (a referenced address is
-   mid-function);
-3. carries a plausible msvc6 prologue (`55`/`56`/`57`/`53`, `81 ec`/`83 ec`, `6a`/`68`, `a1`, `8b 44`,
-   `b8`, `33 c9`).
+| annotated functions inside the 12 spans | 25 |
+|---|---|
+| byte-identical (residue 0) | **24** |
+| with residue | 1 — `cm_ExSellObjekt` (`0x1000d930`, 966 bytes) |
 
-| confirmed start | span | prologue |
-|---|---|---|
-| `0x1000d340` | `0x1000cfe0` | `mov eax,imm` |
-| `0x1000d730` | `0x1000d6e0` | `sub esp,imm8` |
-| `0x1000d930` | `0x1000d8a0` | `sub esp,imm32` |
-| `0x1000e750` | `0x1000e690` | `mov eax,[abs]` |
-| `0x1000e9c0` | `0x1000e8d0` | `push edi` |
-| `0x1000f480`, `0x1000f590` | `0x1000f3b0` | `sub esp,imm8`, `mov eax,[esp+x]` |
-| `0x1000fad0` | `0x1000f980` | `mov eax,[esp+x]` |
-| `0x10010080` | `0x10010010` | `mov eax,[esp+x]` |
-| `0x10010140` | `0x100100a0` | `mov eax,[abs]` |
+Total residue inside all twelve spans: **966 bytes**, all of it `cm_ExSellObjekt` — a carrier already in the
+residue table. Nothing is missing.
 
-Two of the twelve spans (`0x1000d330`, `0x10010260`) hold only padding after their first function — no
-siblings.
+**The ten VAs rounds 1022-1024 named as "missing" are all present in the tree:**
 
-**The extreme case is `cm_MarkAndReturn`** (`0x1000d330`): our 14-byte function is **EXACT**, and the
-reference's remaining 18 bytes are `90 90 | b8 01 00 00 00 c3 | 90...` — a second complete function
-(`mov eax,1; ret`) followed by padding, referenced from nowhere (dead code or table-dispatched). The
-32-byte "binary size" is the gap to the next inventory entry, not this function's length. An `EXACT`
-status with a size divergence is therefore not a contradiction.
+| VA | file |
+|---|---|
+| `0x1000d340` | `cm_RejectCommand.c` |
+| `0x1000d730` | `cm_ExFree.c` |
+| `0x1000d930` | `cm_ExSellObjekt.c` |
+| `0x1000e750` | `cm_ExAllocObjekt.c` |
+| `0x1000f480` | `cm_ExSetWohnsitz.c` |
+| `0x10010080` | `cm_ExSimCommand.c` |
+| `0x1000e9c0`, `0x1000f590`, `0x1000fad0`, `0x10010140` | also annotated |
 
-They are game code, not library: they use `g_next_object_id` (`0x10030b6c`), `g_unknown_1de450`
-(`0x101de450`) and `g_item_def_table`, and call game functions such as `0x10019cd0`, `0x100196c0`,
-`0x10019b80`. `rebrew lib-match --stock-lib LIBCMT.LIB` clears every one.
+**The real artefact is that `function_structure.json` is stale, not that code is missing.** It holds 543
+entries against 283 annotated functions — a *coarser* partition than the annotations. `0x1000d8a0` is one
+2008-byte entry in the inventory, while the tree annotates **two** functions inside it:
+`cm_ExTransferCurrencyNoKill` at `0x1000d8a0` (144 bytes, byte-identical) and `cm_ExSellObjekt` at
+`0x1000d930`. The inventory entry's size is the gap to the *next inventory entry*, so it overlaps functions
+the annotations already separate.
 
-**Consequence for the objective.** `rebrew verify --full`'s denominator (283) counts discovery symbols,
-not reference functions. Closing these 10 spans means implementing 10 functions that no tool will hand out
-via `rebrew skeleton`, because they have no VA in `function_structure.json`. Their raw-link cost is 694
-bytes (see measure-traps §35 for the ruler and TODO round 1022 for the per-span table).
+**Consequence for the earlier rounds.** `rebrew verify`'s denominator (283) counts annotations, which is the
+right population. Nothing was ever unreachable via `rebrew skeleton`; the ten VAs simply had annotations
+already. The "694 raw-link capability bytes" of round 1022 are real as a *measurement* (those bytes differ in
+the raw link) but they are **not** un-implemented code, and closing them is not a coverage task — it is the
+same codegen work as any other carrier, and `cm_ExSellObjekt`'s 966 bytes are already the subject of a
+documented wall.
 
-Evidence: `ret`-position + branch-target + prologue scan of the reference's `.text`; `rebrew verify
---json` `size_divergences`; `rebrew asm` at each sibling start; `rebrew lib-match`.
-
-## Global placement is postlink's job, not the linker's — and it is complete
-
-`src/link_stubs.c` (header: "Stub definitions for unresolved external symbols", auto-generated, "DO NOT edit
-manually") supplies only **placeholder** definitions for globals. Each carries a `// DATA: SERVER 0x<VA>`
-comment, but that comment is **documentation for the tooling, not a placement directive** — no `#pragma
-section`, no linker ordering key. The linker therefore places these symbols wherever its own COMDAT ordering
-puts them, and `rebrew postlink --layout` subsequently rewrites every `.text` operand that points at them to
-the reference's address, using the layout package.
-
-**Measured: the rewrite is complete.** Every dword in `.text` whose value falls inside the data range
-(`0x10024000..0x11768000`), compared between the reference and the shipped file:
-
-```
-data-address dwords present in both .text:  4398
-mismatched in the shipped image:               0
-```
-
-So a wrong global address in `build/split_poc.dll` (the raw link) is **expected and by design**, not a
-defect. Concrete example — `g_file_version`, canonical VA `0x1002d4ec` per `rebrew-data.toml` and
-`rebrew_globals.h:24`:
-
-| artifact | dwords equal to `0x1002d4ec` | equal to the stub's own address `0x100373c4` |
-|---|---|---|
-| reference | 23 | 0 |
-| raw link (`split_poc.dll`) | 0 | 37 |
-| shipped (`server.dll`) | 23 | 0 |
-
-The raw link binds *every* site to the stub's placement; postlink restores all 23.
-
-**Why this matters when reading the raw link.** Measure-traps §35 recommends the raw link as the
-"capability" ruler, and §36 warns against assuming a carrier's VA. This adds the third trap in the same
-family: **a wrong data operand in the raw link is not evidence of a wrong symbol in the source.** It is the
-designed intermediate state. Chasing it wastes a round — it cannot be fixed by editing the definition,
-because the definition is not what determines the address.
-
-**Corollary for the duplicate-definition audit.** Ten bare tentative definitions (`int g_file_version;` in
-`gv_CheckSlotActive.c`, `int g_current_year;` in nine `spiel*.c`) shadow canonical declarations but were
-**measured byte-neutral** when removed (residue 8628 -> 8628 in both cases). They are hygiene, not codegen:
-the linker merges tentative definitions and postlink overwrites the operands anyway. Do not expect a residue
-change from removing them.
+Evidence: enumeration of every annotated VA inside each span, with per-function residue measured against
+`original/Server/server.dll` and `build/server.dll`; `grep` of `FUNCTION: SERVER` across `src/server.dll`;
+`rebrew asm` at each VA.

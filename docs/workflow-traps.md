@@ -663,82 +663,40 @@ size-neutral variant the header records and it link-tested at **+13**. Having ro
 profitable edit exists. (Round 1020 then closed the aliasing lever on the same row at **+658**.)
 
 
-## 17. `rebrew discover-functions` misses every function aligned with a short pad (round 1024)
+## 17. A stale inventory is not a coverage gap — check the annotations before claiming missing functions (rounds 1021-1024, corrected round 1037)
 
-**Defect.** `rebrew/discover.py::_capstone_sweep`, step 2, promotes a candidate only after a padding run of
-**`>= 3`** bytes:
+`rebrew verify --full` reports 13 functions whose annotation SIZE differs from the binary-derived size.
+Twelve are `command_c/*.c`. Rounds 1021-1024 read this as **missing functions**: first 51, then 10, "hidden
+inside over-wide discovery symbols", and built a root-cause story on it (`discover.py`'s `>= 3` padding
+threshold) plus a proposed tool fix.
 
-```python
-if j - i >= 3 and j < n:
-    starts.add(va_base + j)
+**There are no missing functions.** Every annotated VA inside those twelve spans is implemented and
+**byte-identical** — 25 annotated functions, 24 with zero residue, and the only residue is
+`cm_ExSellObjekt`'s 966 bytes, a carrier already in the residue table. The ten VAs the earlier rounds named
+(`0x1000d340`, `0x1000d730`, `0x1000d930`, `0x1000e750`, `0x1000e9c0`, `0x1000f480`, `0x1000f590`,
+`0x1000fad0`, `0x10010080`, `0x10010140`) all have annotations — `cm_RejectCommand`, `cm_ExFree`,
+`cm_ExSellObjekt`, `cm_ExAllocObjekt`, `cm_ExSetWohnsitz`, `cm_ExSimCommand` and four more.
+
+**What the size divergence actually is.** `src/server.dll/function_structure.json` holds **543 entries**
+against **283 annotated functions** — it is a *coarser* partition, and its entries' sizes are the gap to the
+next *inventory* entry, not to the next function. `0x1000d8a0` is one 2008-byte inventory entry while the
+tree annotates two functions inside it (`cm_ExTransferCurrencyNoKill` 144 bytes, byte-identical, and
+`cm_ExSellObjekt`). So `binary_size > annotation_size` is expected whenever the discoverer merged functions
+the annotations already separate.
+
+**The rule.** `function_structure.json` is a **discovery** artefact and is allowed to be coarser than the
+annotations; it is not the list of what exists in the reconstruction. Before concluding that a function is
+missing, grep the annotations:
+
+```bash
+grep -rn "FUNCTION: SERVER 0x<VA>" src/server.dll     # does it exist?
+python3 -c "import json;d=json.load(open('src/server.dll/function_structure.json'));print(len(d))"
 ```
 
-msvc6 aligns many small functions with only **1 or 2** `90` bytes. Every such function start is silently
-dropped by that step. Steps 3 (`55 8b ec`) and 4 (`e8 rel32` call targets) do not recover them: these
-functions use other prologues (`81 ec`, `83 ec`, `a1`, `8b 44`, `b8`, `33 c9`, `5x`) and are reached only
-through tables or not at all.
+If the VA has an annotation, it is implemented and `rebrew verify` is already scoring it — the size
+divergence is an inventory-coarseness fact, and it is not work. **This trap cost four rounds** (1021-1024),
+including a proposed upstream tool fix for a defect that does not exist.
 
-**Measured on `server.dll`.** Twelve `command_c` inventory entries are blocks of contiguous functions with
-no inner boundary — `rebrew verify --full` reports them as "annotation SIZE differing from the binary-derived
-size". Ten sibling functions are missing, all with a 1-2 byte pad:
-
-| missing start | pad run before it | prologue |
-|---|---|---|
-| `0x1000d340` | 2 | `mov eax,imm` |
-| `0x1000d730` | 2 | `sub esp,imm8` |
-| `0x1000d930` | 2 | `sub esp,imm32` |
-| `0x1000e750` | 1 | `mov eax,[abs]` |
-| `0x1000e9c0` | 1 | `push edi` |
-| `0x1000f480` | 2 | `sub esp,imm8` |
-| `0x1000f590` | 1 | `mov eax,[esp+x]` |
-| `0x1000fad0` | 1 | `mov eax,[esp+x]` |
-| `0x10010080` | 2 | `mov eax,[esp+x]` |
-| `0x10010140` | 1 | `mov eax,[abs]` |
-
-Re-running the discoverer reproduces the identical 543-entry inventory, and `--min-size 4` (565 entries)
-still contains none of the ten. The merge is deterministic, so re-discovery is not a workaround.
-
-**The fix, measured.** Lowering the threshold to 1 alone is wrong — it admits **380** new starts, nearly all
-mid-instruction `90` bytes. The threshold is only sound when paired with the two conditions that
-distinguish a real start from a byte that merely follows a `90`:
-
-1. the candidate is **not** a target of any `e8`/`e9`/`eb`/`7x`/`0f 8x` branch (a referenced address is
-   mid-function);
-2. the candidate carries a plausible prologue (`55`/`56`/`57`/`53`, `81 ec`, `83 ec`, `6a`, `68`, `a1`,
-   `8b 44`, `b8`, `33 c9`).
-
-With all three: **820** starts (from 800), all ten recovered, **20** new candidates total instead of 380.
-
-**Workaround in-tree.** None is honest — the entries are missing from a committed inventory this project
-does not generate at a finer granularity. Until the tool is fixed, the ten VAs are recorded here and in
-`docs/general-knowledge.md`, and `rebrew skeleton` cannot address them.
-
-**Not fixed here:** rebrew is installed as a wheel (`rebrew-2.5.0.dist-info`), not a checkout, so there is
-no source tree to patch in this session. Filed to `docs/IDEAS-GUILD.md` in the rebrew checkout when one
-exists; recorded here meanwhile.
-
-## 18. "Inert" in a header is a measurement, not a category — re-verify it before composing (round 1029)
-
-Round 1029 re-measured three spellings on `gm_ObjectsAvailble` whose file header labels two of them inert:
-
-| spelling | header label | measured |
-|---|---|---|
-| `slot_base = ...;` before `slot_cursor = 0;` | inert | **+4** |
-| `slot_cursor` declared after `slot_base` | "inert" | **+0** |
-| `slot_base` given an early use above the branch | not listed | **+4** |
-
-**Two of three match the label; one does not.** A spelling recorded as inert and one measured at +4 are
-different in kind, and the difference matters exactly when a round composes several edits: an inert edit can
-be stacked with a real one and the total is still interpretable, whereas a +4 edit silently absorbs the
-budget of anything stacked on it.
-
-**The rule.** "Inert" tells you the edit was *tried* and moved nothing observable on the ruler used at the
-time. It does not mean the edit is neutral under the current object, and it does not mean the label used the
-same ruler you are using. Treat it as "already tried" — the useful part — and re-measure it if it is load
-bearing for a candidate. This is the same family as §16 (a header's headroom figure is a measurement) and
-§14 (a header's delta is historical), applied to the weakest of the three labels.
-
-**Corollary, and the cheaper diagnostic.** When two *different* spellings produce the **identical** delta,
-that is a collapse, not a coincidence: the compiler canonicalised both into one schedule, so the thing being
-varied is not a lever. On `gm_ObjectsAvailble` two distinct reorderings both landed on exactly +4, which is
-what closed the row — not the sign of the number but its insensitivity to the edit.
+**Second-order lesson.** Both rounds that "found" missing functions measured their evidence without ever
+asking `rebrew verify`'s own population — the annotation list — for the same VAs. A claim of the form "X is
+missing" needs a check against the authoritative list of X, not against a proxy that is known to be coarser.
