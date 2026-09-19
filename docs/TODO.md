@@ -31109,3 +31109,46 @@ spelling and hoist changes do not land.
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. No source change; nothing to revert.
+
+## Round 1086 — the raw link is the wrong artifact for `.data`-addressed operands; `cm_ExSellObjekt` re-measured
+
+Applied the §34/§35 alignment technique to the third carrier, `cm_ExSellObjekt` (`0x1000d930`, PROVEN, 2057
+bytes, classified "block placement"). It has **no inter-function padding** — the declared span is all code —
+so the padding correction of round 1084 does not apply here.
+
+**Counts: 667 reference instructions against our 667**, /31 differing runs, largest **113** at `0x1000dc30`.
+The function is instruction-for-instruction the same length; the divergence is placement.
+
+**The false lead, and the trap it produced.** The largest run showed the two sides pushing what looked like
+different message pointers — reference `0x1002cdac`, ours `0x10029e24` — which reads as a wrong string literal
+at `cm_ExSellObjekt.c:396`. Dereferencing both in the three artifacts settled it:
+
+| file | `0x1002cdac` | `0x10029e24` |
+|---|---|---|
+| reference | `"cm_ExSellObjekt() Lager voll"` | unrelated data |
+| **deliverable** | `"cm_ExSellObjekt() Lager voll"` | unrelated data |
+| raw link | zeros | `"cm_ExSellObjekt() Lager voll"` |
+
+The deliverable matches the reference **at both addresses**; only the raw link has them swapped, because
+COMDAT string material is placed differently before `rebrew postlink` rewrites the `.data` operands. The
+source was already correct. Recorded as measure-traps §53: **`.text` residue must be read from the raw link,
+but anything that dereferences a pointer into `.data` must be read from the deliverable** — the two artifacts
+answer different questions.
+
+**What the run actually is.** Instruction-for-instruction identical except that the reference emits
+`push ecx` for `gm_eval_SlotVoll`'s first argument at `0x1000dc2f` while ours emits it as `push ecx` one
+instruction later, after a reload — a scheduling difference in the call's argument setup, the same class as
+`CrashDumpUnhandledExceptionFilter` (round 1085) and the `gm_AllocSpieler` tail.
+
+**One probe, measured at the link, +470, reverted.** The function's header records that a volatile reload at a
+*join* was worth **-200 linked** (round 180), so the same recipe was tried at this call site: pass argument 1
+as `(char*)*(short* volatile*)&dest_dynamic_entity` instead of `(char*)resolved_dynamic`. It is the wrong
+site — the -200 lever is at `0x1000df97`, a different join — and it costs **+470**. Reverted; the header's
+existing note stands and now has a companion data point that the volatile recipe is site-specific, not
+function-wide.
+
+**Docs:** measure-traps §53.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. No source change; nothing to revert.

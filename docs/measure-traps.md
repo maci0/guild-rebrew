@@ -2691,3 +2691,35 @@ lea ecx, [esp + 0x10]                 call sprintf
 ```
 
 The reference pushes the format string first and loads the third argument after; we load it first. Everything downstream rotates from that.
+
+## 53. The raw link is the wrong artifact for a `.data`-addressed operand comparison (round 1086)
+
+The alignment technique of §34/§35 and the two rounds after it disassembles `build/split_poc.dll` — the raw
+link, before postlink. That is correct **for `.text`**, which is what those rounds compare, because postlink
+does not rewrite code. It is wrong the moment the comparison touches an operand that resolves into `.data`.
+
+Measured, `cm_ExSellObjekt` (`0x1000d930`): the `LogMessageInternal` call site pushes the message pointer. In
+the raw link and the reference that pointer is **the same immediate**, because it is an absolute VA baked into
+the instruction — but the *string it points at* is at a different place:
+
+| file | bytes at `0x1002cdac` | bytes at `0x10029e24` |
+|---|---|---|
+| reference | `"cm_ExSellObjekt() Lager voll"` | unrelated data |
+| **deliverable** (`build/server.dll`) | `"cm_ExSellObjekt() Lager voll"` | unrelated data |
+| raw link (`build/split_poc.dll`) | **zeros** | `"cm_ExSellObjekt() Lager voll"` |
+
+The deliverable matches the reference **at both addresses**. Only the raw link has them swapped -- COMDAT
+string material lands elsewhere before `rebrew postlink` rewrites the `.data` operands (4398/4398 of them,
+verified in an earlier round).
+
+**Why this nearly became a false finding.** Reading the raw link's disassembly alongside the reference's, the
+two call sites appear to pass *different string literals* — the reference pushes `0x1002cdac`, ours pushes
+`0x10029e24` — which reads as a wrong literal in the source and sent this round to the source line. The source
+was already correct (`cm_ExSellObjekt.c:396`), and so is the build.
+
+**The rule.** `.text` residue must be measured on the raw link, because that is the only artifact where the
+code has not had operands rewritten. Anything that dereferences a pointer into `.data` — string addresses,
+table bases, global pointers — must be measured on the **deliverable**, after postlink. The two artifacts
+answer different questions and this round asked the wrong one of the wrong file. Cross-check before reporting:
+`docs/measure-traps.md` §20 already establishes that the whole raw-link `.data` divergence is
+postlink-supplied, so a `.data`-addressed difference in the raw link is expected and carries no information.
