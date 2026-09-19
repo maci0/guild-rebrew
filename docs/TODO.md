@@ -29543,3 +29543,51 @@ the space — partial moves — and the complete cost map is:
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1046 — gm_AllocSpieler's 2,823 bytes are FOUR clusters and they are not displaced code
+
+The row is described as "132 distributed schedule steps, no cliff" and its residue as a "displacement wake".
+Both suggest many small scattered differences. Measured, it is neither.
+
+**Cluster structure (17 clusters at gap <= 8):**
+
+| cluster | size | share |
+|---|---|---|
+| `+0x1a4..+0x5f6` | **1,107** | **39.2%** |
+| `+0xa0d..+0xd72` | **870** | **30.8%** |
+| `+0x6cf..+0x8db` | **525** | **18.6%** |
+| `+0x607..+0x6c6` | 192 | 6.8% |
+| `+0xaa..+0x125`, `+0x130..+0x177` | 124, 72 | 4.4%, 2.6% |
+| `+0xdd0..+0xe33` | 100 | 3.5% |
+| eleven small/singleton | 5-27 each | 2.0% |
+
+**Four clusters hold 90% of the residue** — not 132 scattered steps.
+
+**Rigid-displacement test:** for each big cluster, the single offset `delta` maximising byte-match against the
+reference:
+
+| cluster | best delta | match |
+|---|---|---|
+| `+0x1a4..+0x5f6` (1,107 B) | +5 | **17.0%** |
+| `+0x6cf..+0x8db` (525 B) | −13 | **13.9%** |
+| `+0x607..+0x6c6` (192 B) | −8 | 18.3% |
+| `+0xaa..+0x125` (124 B) | −16 | 20.3% |
+
+**No cluster is a displaced copy.** A shifted region would match near 100% at its own delta; these peak at
+14-20%, chance level for x86 byte comparison. The large clusters are **genuinely different code**.
+
+**Reconciliation.** Measure-traps §38 profiled 4 displacement values across 7 runs and §39 corrected it by
+showing only 34.1% of the carrier's contexts are findable in the reference. This is that correction made
+concrete: the findable 34% sits in the small clusters; the four large ones are the unfindable 66%.
+**§109's mechanism for the `+0xaa` fault stands** (round 1045 enumerated its whole perturbation space); its
+extrapolation to the remaining bytes does not.
+
+**So the row needs four independent local fixes, not one** — and only the first cluster's neighbourhood has
+been probed (six spellings, all losing). The other three have no probe on record. Recorded as
+`codegen-walls.md` §25, with the ordering note: future work on this row should go by cluster size, not by
+fault address.
+
+**No source, metadata or `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

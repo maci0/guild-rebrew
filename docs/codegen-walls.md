@@ -1325,3 +1325,52 @@ the dearest +368, and the only inert spelling is the one that does not touch the
 `gm_AllocSpieler` has no C-expressible lever at its fault. The 2,823 bytes behind it are that
 scheduling decision's displacement wake (measured in measure-traps §38 as a multi-run profile, 4 distinct
 displacement values across 7 runs). Not re-probed without a new allocator finding.
+
+### 25. `gm_AllocSpieler`'s 2,823 bytes are FOUR clusters, and they are not displaced code (round 1046)
+
+The row is described as "132 distributed schedule steps, no cliff" (`rebrew todo`) and its residue as a
+"scheduling decision's displacement wake" (shapes §109). Both readings suggest many small scattered
+differences. Measured, the residue is **highly concentrated and not displaced at all**.
+
+**Cluster structure** (17 clusters at gap ≤ 8):
+
+| cluster | size | share |
+|---|---|---|
+| `+0x1a4..+0x5f6` | **1,107** | **39.2%** |
+| `+0xa0d..+0xd72` | **870** | **30.8%** |
+| `+0x6cf..+0x8db` | **525** | **18.6%** |
+| `+0x607..+0x6c6` | 192 | 6.8% |
+| `+0xaa..+0x125`, `+0x130..+0x177` | 124, 72 | 4.4%, 2.6% |
+| `+0xdd0..+0xe33` | 100 | 3.5% |
+| eight singletons + `+0x8e7`, `+0x9ff`, `+0xd8c` | 5-27 each | 2.0% |
+
+**Four clusters hold 90% of the residue.** Not 132 scattered steps.
+
+**Rigid-displacement test on the big clusters** — for each, the best single offset `delta` maximising
+byte-match between our cluster and the reference:
+
+| cluster | best rigid delta | bytes matching |
+|---|---|---|
+| `+0x1a4..+0x5f6` (1,107 B) | +5 | **17.0%** |
+| `+0x6cf..+0x8db` (525 B) | −13 | **13.9%** |
+| `+0x607..+0x6c6` (192 B) | −8 | 18.3% |
+| `+0xaa..+0x125` (124 B) | −16 | 20.3% |
+
+**No cluster is a displaced copy.** A genuinely shifted region would match near 100% at its own delta; these
+peak at 14-20% under their best offset, which is chance level for x86 byte comparison. So the large clusters
+are **genuinely different code**, not our code at a shifted address — and the "displacement wake" description
+does not hold for them.
+
+**Reconciling with the other measurements.** Measure-traps §38 profiled this carrier as 4 distinct
+displacement values across 7 runs, and §39 corrected the reading by showing the carrier's context-match rate
+is only 34.1%. This section is that correction made concrete: the 34% of our stream that *is* findable in the
+reference sits mostly in the small clusters, and the 66% that is not is the four large ones. **§109's
+mechanism for the fault at `+0xaa` stands** (it is separately measured, and round 1045 enumerated its whole
+perturbation space), but its extrapolation to the remaining 2,823 bytes does not: they are four independent
+regions of different code, not one decision's wake.
+
+**Judgement:** with four clusters rather than one, and each showing no rigid displacement, the row needs four
+independent local fixes, not one. All six spellings that target the first cluster's neighbourhood are
+measured and lose (§24), and the other three clusters have no probe on record. This is where a future round
+would start if it takes this row up again — but the ordering is by cluster size, not by fault address, and
+the first cluster at 39.2% is the one with a fully enumerated and fully losing perturbation space.
