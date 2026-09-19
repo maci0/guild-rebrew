@@ -29094,3 +29094,50 @@ into a doc lookup.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1034 — gm_CheckInventoryCapacity: header's byte-identity claim verified exactly; the crux probe is inert
+
+`gm_CheckInventoryCapacity` (`0x10019ed0`, 395 B, 97 residue — it lives inside the 16-function
+`spiel622.c` object, so `rebrew test` cannot score it per-function). Its header claims:
+
+> Everything from offset 0x8f to the end is byte-identical; the only remaining differences are the seven
+> relocation slots and the 0x1a-0x8e block.
+
+**Verified against the shipped file, exactly:**
+
+```
+differing bytes 97 of 395
+first +0x13   last +0x8e
+clusters: (0x13..0x1f), (0x30..0x8e)
+inside 0x1a..0x8e : 90
+outside           :  7, all at +0x13..+0x19
+bytes past +0x8e  :  0
+```
+
+The seven outside the block are at `+0x13..+0x19` — the header's seven relocation slots — and **nothing
+differs past `+0x8e`**. The claim is exact.
+
+**The fault, decoded from both streams:** at prologue index 8 the reference has `xor ebp,ebp`
+(`in_list = 0`) where ours has `mov dword ptr [esp+0x18],0x12` (`list[2]`). Our source already puts
+`in_list = 0;` first, so the scheduler sinks the store below the following `list[]` initialisers.
+
+**The crux probe, reverted (+0 at the link, carrier unchanged).** The header records the three invariants it
+could not satisfy together — *ebp-first order*, *edi roles*, *list[7] from ebp* — and states "27 combos of
+in_list/cap positions, declaration order, base removal, cap-late, in_list=cap all measured, none gives
+ebp-first + edi + ebp-list7 together". I tested one combination it lists but describes as unreachable:
+`in_list = 0;` **and** `cap = 0;` moved to the top, with `list[7]` sourced from `in_list` instead of `0`.
+
+Result: **`+0` at the link, and the carrier still has 97 differing bytes with the identical fault at index 8.**
+So the store is not moved by that spelling either. Measured, reverted, and it confirms the header rather than
+extending it — the source order does not reach the schedule.
+
+**Also confirmed this round:** the header's 9-slot read-position sweep, its 12-spelling address grid and its
+10-declaration-order grid are more complete than anything I would devise for this row. `cm_ExSellObjekt`'s
+neighbouring record is equally settled — after its −200 win the cliff "fragmented into four independent 1-4
+byte accumulations, largest 163B", every cluster ≥48B is register allocation or intra-block scheduling, and
+the last probe was "locally correct, globally losing". Both rows are documented walls.
+
+**No source, metadata or `build.make` change retained; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
