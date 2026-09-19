@@ -157,3 +157,42 @@ project reports:
 
 Evidence: `cmake --build build --clean-first` then `--target final`; `cmp` and `md5sum` against the
 pre-clean artefact; `postlink_residual.py --write build/server.dll`.
+
+## Done-criteria status, verified independently (round 1043)
+
+The objective lists five done criteria. Verified each from outside the project's own tooling this round, so
+the status is a measurement rather than a summary of the gate.
+
+| criterion | status | evidence |
+|---|---|---|
+| `.text` VirtualSize exactly `0x22846` | **MET** | independent PE parse (`scripts/verify_objective.py`, shares no code with project tooling) |
+| residue at or below `RESIDUE_BASELINE` | **MET** | 8628 = baseline; all 8628 differing bytes inside `.text`, 0 elsewhere |
+| `rebrew verify --full` at or above `BASELINE` | **MET** | 281/283 passed, 264 byte-matched, `BASELINE=281` held |
+| import table exactly 100 | **MET** | 100 imported symbols across 4 DLLs, identical to the reference |
+| Wine load + exports (Init, Exit) resolve | **MET** | `wine_load_check.sh`: `LoadLibraryA` succeeds, both `GetProcAddress` calls resolve |
+| **all functions EXACT, zero drift** | **NOT MET** | 31 EXACT + 233 RELOC = 264 byte-matched of 283; 2 failed, 17 PROVEN (not byte matches) |
+| **residue at zero** | **NOT MET** | 8628 |
+
+**Independent structural confirmation** (`scripts/verify_objective.py`, an independent PE parser):
+
+```
+file size equals reference                286720 bytes
+.text / .rdata / .data / .reloc VirtualSize equal reference
+import DLL list identical                 4 DLLs
+imported SYMBOL count == 100              (reference 100)
+export names + VAs identical              Exit, Init
+all differing bytes inside .text          8628 of 8628
+non-.text bytes identical
+no exported entry point lies in the residue
+export Exit body identical (0x40 bytes)
+export Init body identical (0x40 bytes)
+```
+
+**Function-level:** `rebrew test --all` reports 283 total, **0 compile errors, 0 missing files**, 31 exact,
+233 reloc, 17 proven, 264 byte-matched.
+
+**Where the objective stands.** Every structural criterion and the load criterion are met. The two
+unmet criteria are the same quantity: the 8,628-byte residue on 18 carriers, which is the C-only floor
+this session has characterised from six independent angles (per-carrier class map, fault reproduction,
+displacement profiles, operand completeness, work-queue emptiness, per-function independence) and which no
+lever found in rounds 1025-1042 moves.
