@@ -29994,3 +29994,47 @@ edit — and the evidence was available from the start (stashing the edit restor
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1057 — fixed a silent-pass defect in the build-check I just added
+
+Applied last round's lesson (test your own tooling as hard as the target) to `rebrew build-check`, and found
+a defect in the direction that matters: **a mistyped `--build-dir` exited 0.**
+
+```
+$ rebrew build-check --build-dir /nonexistent
+build-check: /nonexistent is not configured -- nothing to check
+$ echo $?
+0
+```
+
+That is the *same failure shape the command exists to catch*: an unverifiable state reported as success.
+Worse, it was reachable from the gate, which calls it as `if ! bc=$(rebrew build-check 2>&1)` — an
+unconfigured tree would have passed the integrity check silently.
+
+**Fixed:**
+
+- `check()` now reports **which** file is missing (`build.make` vs `flags.make`) rather than saying the
+  directory is "not configured", so a typo is diagnosable.
+- `main()` exits non-zero unless the status is `ok` — drift **and** not-configured both fail.
+- Five new tests, including `test_cli_exits_nonzero_when_not_configured`,
+  `test_cli_exits_zero_on_a_clean_tree`, and `test_cli_exits_nonzero_on_drift`, which invoke the real Typer
+  app through `CliRunner` and assert on `exit_code`.
+
+**Verified through the installed CLI after reinstall:**
+
+| invocation | output | exit |
+|---|---|---|
+| from `/tmp` (no project) | `... build.make does not exist -- build is not configured` | **1** |
+| from the project, clean tree | `build.make agrees with flags.make (198 object(s) checked)` | **0** |
+
+**Rebrew suite: 7167 passed**, one pre-existing failure (missing Dockerfiles for three unrelated
+toolchains — confirmed by stashing). All pre-commit hooks pass.
+
+**This is the third defect found in my own build-check work** (after the missing `re.M` flag that made it
+compare zero objects, and the `emit_defs` mid-body insertion that broke the composition). The pattern in all
+three: **a check that cannot fail is indistinguishable from a check that passes**, and I introduced it while
+building something whose entire purpose was to close that gap. The tests now pin the exit codes, which is
+what makes the regression detectable.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
