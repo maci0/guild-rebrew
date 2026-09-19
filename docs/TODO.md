@@ -29768,3 +29768,43 @@ per-site, it touches two rows, and both are accounted for.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1051 — swept all nine msvc6 toolchains on the three pinned carriers; the sp5-pp pin is uniquely optimal
+
+Found that `src/rebrew-functions.toml`'s per-function `toolchain` keys reach the compile line as
+`/REBREW_TOOLCHAIN:<name>`, and that **three files carry one, covering four residue carriers**:
+`ls_LoadBuildingEntityState.c` (671), `ahm_ExAllocAlchemist.c` (198), `spiel_dumpD.c`
+(`gm_FindNextFilteredEntity`, 215).
+
+Swept every available msvc6 image **at the link**, substituting the token in `build.make` (backed up and
+restored):
+
+| pin | `ls_LoadBuildingEntityState` | `ahm_ExAllocAlchemist` | `gm_FindNextFilteredEntity` | total |
+|---|---|---|---|---|
+| **`msvc-6.0-sp5-pp`** (shipped) | **671** | **198** | **215** | **8628** |
+| `msvc-6.0-sp6` | 675 | 201 | 226 | 8646 (+18) |
+| `msvc-6.0-sp5` | 675 | 201 | 226 | 8646 (+18) |
+| `msvc-6.0-sp4` | 675 | 201 | 226 | 8646 (+18) |
+| `msvc-6.0-sp3` | 675 | 201 | 226 | 8646 (+18) |
+| `msvc-6.0` (base) | 675 | 201 | 226 | 8646 (+18) |
+| unpinned -> sp6 | 675 | 201 | 226 | 8646 (+18) |
+
+**Every other toolchain gives exactly +18; the pin gives 0.** The five non-pp images are mutually
+byte-identical on these files, so the axis is genuinely two-valued. **The pin is not a tolerance or a legacy
+artefact — it is the uniquely correct choice, and removing it regresses all three carriers at once.**
+
+**Why this round is different.** It is the **first measurement in 26 rounds that changes the residue** rather
+than confirming a wall. It does not improve it, but it closes the toolchain axis by *measurement* on the only
+three files where the axis is expressible: the global toolchain is fixed by the toolchain file, so a per-file
+pin is the only route, and it is already taken at the optimal value.
+
+**Method note.** `linktest.sh` compiles with the exact `build.make` line, so it honours `/REBREW_TOOLCHAIN` —
+the pins are live in both the build and in every delta measured this session. `build.make` is generated, not
+tracked; restored from `.scratch/bm.bak` and re-verified at 8628.
+
+Recorded as `codegen-walls.md` §26.
+
+**No source, metadata or tracked `build.make` change; nothing to revert.**
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

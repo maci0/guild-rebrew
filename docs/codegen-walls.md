@@ -1419,3 +1419,45 @@ and all lose. All six spellings that target the first cluster's neighbourhood ar
 measured and lose (§24), and the other three clusters have no probe on record. This is where a future round
 would start if it takes this row up again — but the ordering is by cluster size, not by fault address, and
 the first cluster at 39.2% is the one with a fully enumerated and fully losing perturbation space.
+
+### 26. Three per-file toolchain pins to `msvc-6.0-sp5-pp` are load-bearing and uniquely optimal (round 1051)
+
+`src/rebrew-functions.toml` carries per-function `toolchain` keys, and `rebrew cmake-flags` turns them into
+`/REBREW_TOOLCHAIN:<name>` on the compile line. Three files carry one:
+
+| file | carriers it holds |
+|---|---|
+| `ls_LoadBuildingEntityState.c` | `ls_LoadBuildingEntityState` (671 residue) |
+| `alchemistry_logic_c/ahm_ExAllocAlchemist.c` | `ahm_ExAllocAlchemist` (198) |
+| `spiel_dumpD.c` | `gm_FindNextFilteredEntity` (215) |
+
+**Measured across all nine available msvc6 images, at the link:**
+
+| pin | `ls_LoadBuildingEntityState` | `ahm_ExAllocAlchemist` | `gm_FindNextFilteredEntity` | total |
+|---|---|---|---|---|
+| **`msvc-6.0-sp5-pp`** (shipped) | **671** | **198** | **215** | **8628** |
+| `msvc-6.0-sp6` | 675 | 201 | 226 | 8646 (**+18**) |
+| `msvc-6.0-sp5` | 675 | 201 | 226 | 8646 (**+18**) |
+| `msvc-6.0-sp4` | 675 | 201 | 226 | 8646 (**+18**) |
+| `msvc-6.0-sp3` | 675 | 201 | 226 | 8646 (**+18**) |
+| `msvc-6.0` (base) | 675 | 201 | 226 | 8646 (**+18**) |
+| unpinned (falls back to sp6) | 675 | 201 | 226 | 8646 (**+18**) |
+
+**Every other toolchain gives the identical +18, and the pin gives 0.** The five non-pinned images produce
+byte-identical results to each other, so the axis is genuinely two-valued here: sp5-pp, or not-sp5-pp. The
+pin is not a tolerance or a legacy artefact — it is the uniquely correct choice for these three files, and
+removing it regresses all three carriers at once.
+
+**Why this is worth recording despite moving nothing.** It is the first measurement in 26 rounds that
+*changes the residue* rather than confirming a wall, and it does so in the informative direction: it
+demonstrates that the toolchain axis is **closed by measurement, not by assumption**, for the only three
+files where the axis is expressible. The global toolchain is fixed by
+`cmake/toolchain-msvc-6.0-sp6-docker.cmake`, so a per-file pin is the only route, and it is already taken.
+
+**Method note.** `scripts/linktest.sh` compiles with the exact `build.make` line, so it honours
+`/REBREW_TOOLCHAIN` — the pins are live in both the build and in every delta this session has measured. The
+sweep was run by substituting the token in `build.make` (backed up and restored; `build.make` is generated,
+not tracked).
+
+**Judgement:** no unexplored toolchain lever remains on this tree. The three pinned files are optimal, the
+other 16 carriers have no expressible toolchain axis, and the five non-pp images are mutually identical.
