@@ -2723,3 +2723,39 @@ table bases, global pointers — must be measured on the **deliverable**, after 
 answer different questions and this round asked the wrong one of the wrong file. Cross-check before reporting:
 `docs/measure-traps.md` §20 already establishes that the whole raw-link `.data` divergence is
 postlink-supplied, so a `.data`-addressed difference in the raw link is expected and carries no information.
+
+## 54. A whole-section idiom census cannot use the raw link's `.text`, and cannot compare rates at all (round 1088)
+
+§33's "census trick" — count an idiom image-wide on both sides to turn a byte residue into a small
+instruction-level claim — is recorded as reusable. Reusing it on the **whole `.text`** does not work, and the
+failure is silent.
+
+**The raw link's `.text` is mostly not yet code.** A linear sweep of `.text` over its raw extent gives:
+
+| file | `.text` VirtualSize | raw extent | instructions from a linear sweep |
+|---|---|---|---|
+| reference | `0x22846` | `0x23000` | **16,472** |
+| raw link (`build/split_poc.dll`) | `0x22ac8` | `0x23000` | **2,916** |
+
+The built image's region is largely unpopulated at the point the sweep passes through it — the composition
+places objects at reference VAs, so the gaps are zeros — and decoding zeros yields long runs of `add [eax], al`
+rather than nothing. The result is a 5.6x difference in "instruction count" that is entirely an artefact.
+
+**Why that makes rate comparison meaningless, not merely noisy.** The obvious next step is to normalise
+(`idiom occurrences / total instructions`) and compare the ratio, since absolute counts track the 10% of
+`.text` that already differs. But the denominator is wrong by 5.6x on one side, so every ratio is wrong by a
+factor that has nothing to do with the idiom. Measured, that produced a table reading "`and` ratio 1.50,
+`xor` ratio 1.49, `push` ratio 1.25" — which looks like four findings and is one artefact. The `call` and `cmp`
+rows came out at 1.01 and 1.00, and `fs:`/`gs:` at 0.00/0.00, which is the tell: a real difference does not
+produce three ratios of exactly 1.00.
+
+**The rule.** The census works on a region both sides genuinely produce, which is why the recorded successes
+were per-idiom counts over the whole *image* on matched functions (round 921's `and r,0xffff` 16 vs 19 and
+`xor r,r` 556 vs 550), not over a section one side has not filled. Before using a census here, confirm the two
+denominators are within a few percent; a large gap means the population includes undecoded padding, and the
+trap is that it reads as a finding rather than as a broken measurement.
+
+**This is the fifth instance of one family in this project** — the population is assumed while only the values
+are checked: §47 (residue ≠ error size), §51 (a zero over an unstated denominator), §52 (a count over an
+unstated boundary), §53 (the right number from the wrong artifact), §54 (a rate over a fabricated
+denominator).

@@ -31202,3 +31202,47 @@ figures re-measured and confirmed.
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged.
+
+## Round 1088 — verified the closed-axis ledger, then hit a fifth measurement trap reusing the census trick
+
+With four rounds left and every per-carrier lever measured negative, this round checked whether any axis in
+the closed-lever ledger was closed on stale evidence, and then tried the one approach the docs themselves
+invite.
+
+**The ledger holds.** Re-read `docs/codegen-walls.md`'s summaries and confirmed each closure is a measurement,
+not an impression:
+
+| axis | closure |
+|---|---|
+| source spelling | inert (retired; shapes §84) |
+| flags | 12 axes, ~120 compilations; per-file audit round 943 — `/Ow` pays on 3 of 12 carriers (best −5, worst +485) |
+| `#pragma optimize` | inert, 7 forms byte-identical on the largest carrier with a working control |
+| service pack | **16/16 unpinned carriers worse** under sp5-pp (rounds 503/842) |
+| compiler build | 9 images are 3 generators; the project sits on the matching one |
+| `.text` content post-pass | contradicts the objective (makes bytes copied, not compiled) |
+| asm carve-out | one applicant, worth 1 byte, not C-reachable |
+
+The three pins' rationale was re-read in `CMakeLists.txt`: `ahm_ExAllocAlchemist` 834/1002 under sp5-pp vs
+828 under sp6, `ls_LoadBuildingEntityState` 824/1463 vs 820, `spiel_dumpD` exact-size. Each is a measured
+small win, already applied. No axis is closed on stale evidence.
+
+**Then the trial, and the trap.** `codegen-walls` §33 says the census trick "generalises… the same treatment is
+available for any idiom pair the shapes doc names". Applied to the whole `.text`, it fails silently: the raw
+link's `.text` is largely unpopulated, so a linear sweep decodes **2,916** instructions against the reference's
+**16,472** (5.65x), because zeros decode as long `add [eax], al` runs rather than as nothing. Normalising to
+rates — the obvious next step — divides by a denominator wrong by 5.65x, and produced a table reading
+"`and` 1.50, `xor` 1.49, `push` 1.25", which looks like four findings and is one artefact. The tell was
+`call` 1.01, `cmp` 1.00 and `fs:`/`gs:` 0.00 — a real difference does not give three ratios of exactly 1.00.
+
+Recorded as measure-traps §54, and it is the **fifth instance of one family**: the population is assumed while
+only the values are checked — §47 (residue ≠ error size), §51 (a zero over an unstated denominator), §52 (a
+count over an unstated boundary), §53 (the right number from the wrong artifact), §54 (a rate over a fabricated
+denominator).
+
+**No source change this round.** The output is the ledger verification and the trap.
+
+**Docs:** measure-traps §54.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged.
