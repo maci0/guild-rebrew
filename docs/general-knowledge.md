@@ -245,3 +245,34 @@ the technique is available and the reason it is currently unused is explicit.
 `cl` command line. CMake passes an **absolute** POSIX path, so without `/FC` a `__FILE__` would still be the
 absolute path (wine maps it to `Z:`), not a relative one. Any TU that needs a specific `__FILE__` string must
 either take the `D:`-drive route above or pass a relative path, and neither is currently needed.
+
+## The data sections are complete, and `rebrew todo` was reporting 123 phantoms (round 1078)
+
+The exact section layout, which every data question resolves against. All four section headers are
+**byte-identical** between `original/Server/server.dll` and the built `build/server.dll`:
+
+| section | VirtualAddress | VirtualSize | SizeOfRawData | file bytes cover |
+|---|---|---|---|---|
+| `.text` | `0x00001000` | `0x00022846` | `0x00023000` | RVA `0x1000`..`0x24000` |
+| `.rdata` | `0x00024000` | `0x00002e81` | `0x00003000` | RVA `0x24000`..`0x27000` (the IAT is its head) |
+| `.data` | `0x00027000` | `0x0174059c` | `0x0000e000` | RVA `0x27000`..`0x35000` |
+| `.reloc` | `0x01768000` | `0x00010374` | `0x00011000` | its `rawptr` is `0x35000` |
+
+Two consequences that are easy to get wrong:
+
+- **There is no `.idata` section**, despite 84 metadata entries claiming `section = ".idata"`. The import
+  address table lives at the head of `.rdata` (`DataDirectory[12]` = RVA `0x24000`, size `416`).
+- **`.data`'s virtual tail begins at VA `0x10035000`** (`vaddr + rawsize`). Everything from there to
+  `0x1176759c` — `.bss` in ordinary terms — has no file bytes in either image and is zero-filled by the
+  loader. `section_symbol_bytes` skips it deliberately (`# zero-fill tail (BSS): no file bytes to read`), so
+  `rebrew verify --data` cannot compare those symbols and never marks them VERIFIED.
+
+**Data state: 329 metadata symbols, 0 differences from the reference.** 122 are `VERIFIED` by
+`verify --data`; the other 207 are `UNCHECKED` and un-clearable, but were checked independently by direct
+byte comparison — 84 import slots (all dwords identical), 111 in the zero-fill tail, 5 with file bytes
+(identical), 7 sizeless. The 18 `__imp__` items and the 123 `start-data` items that `rebrew todo` used to
+list were artefacts of that gap; both lanes are now empty and only the 2 known `.text` carriers remain.
+
+**`rebrew verify --data` prints no denominator.** Its "122 matched, 0 mismatched, 0 missing" covers 37% of the
+metadata. Read it as a bound on what was compared, never as a whole-tree statement — see
+`docs/measure-traps.md` §51.
