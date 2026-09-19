@@ -30189,3 +30189,38 @@ per-function flag pin as a side effect of measuring, and that pin silently chang
 resolves for that function — so every later `linktest.sh`/`gate.sh` measurement inherits it. Snapshot
 `src/rebrew-functions.toml` before any `--cflags` probe and diff afterwards (workflow-traps §15). The file
 mode is not what protects you here; the discipline is.
+
+## Round 1062 — verified the flag axis is closed by measurement, not by assumption
+
+Two rounds ago I closed `/O1` on `gm_AllocGebaeude` and flagged the remaining flag sweep as unexplored.
+Reading the record properly before spending probes: **it is not unexplored, it is enumerated.**
+
+`codegen-walls.md` §12 records the flag axis as *"12 axes, ~120 compilations, 1 distinct score (round 458)"*,
+plus a **per-file audit at round 943**: `/Ow` pays on **3 of 12 carriers** (best **−5 linked**, worst
+**+485**), `/Oy` inert, and a **~96-combination sweep with zero hits**. Rounds 919-920 have the per-carrier
+numbers: `/Ow` **+511** on `gm_AllocSpieler`, **+3** on `cm_ExSellObjekt`, **0** on `CrashDump` and
+`ls_LoadBuildingEntityState`.
+
+**Verified the conclusions are live in the build rather than resting on the note:** the one carrier where
+`/Ow` measurably pays carries it —
+
+```
+# Custom flags: .../cm_ExSellObjekt.c.obj_FLAGS = /O2 /Gd /Ow
+```
+
+and `gm_AllocSpieler` carries `/O2 /Gd /Oa /Ow` (where `/Oa` is documented inert-but-required and `/Ow`
+load-bearing). So the audit's findings are applied, and no carrier is silently missing a flag the record says
+it wants.
+
+**The data lanes are likewise closed**, re-checked this round: `rebrew data` reports **10 conflicts** and
+**17 zero-size annotations**, all round-925 findings previously verified against reference bytes; and
+`rebrew verify --data` reports **13 size divergences**, which round 1037 established are inventory-coarseness
+facts (`function_structure.json` is 543 entries against 283 annotated functions), with **24 of the 25
+functions inside those spans byte-identical**. Neither lane has an open item.
+
+**Net for the round:** two axes re-confirmed closed, zero probes spent, zero bytes moved. The flag axis in
+particular is now closed with the *numbers* in hand rather than by my not having found a lever — which is a
+stronger statement than the previous rounds could make.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
