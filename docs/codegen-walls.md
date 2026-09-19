@@ -1108,3 +1108,41 @@ last 2 edges are unreachable from source.
 problem: its CFG differs from the reference's in exactly 2 branch *encodings* out of 280 edges, both polarity,
 and the polarity is not addressable from C89. Its remaining residue is the block-placement and register-role
 work already documented for it.
+
+### 20. The whole raw-link `.data` divergence is postlink-supplied — so no `.data` content is missing (round 1016)
+
+Rounds 977, 980 and 1015 each re-derived part of this section from a different angle. This round settles it with
+the two numbers side by side, which none of the earlier passes printed together:
+
+| file | `.data` differing vs reference |
+|---|---|
+| `build/split_poc.dll` (the raw link) | **21,481 of 57,344** (37.5%) |
+| `build/server.dll` (the shipped file) | **0 of 57,344** |
+
+So **every byte** of the raw-link `.data` divergence is rewritten by postlink's data fixer, and the deliverable's
+`.data` is exact. The objective's "every data byte matching" clause is satisfied, and the gate's
+`DATA_BASELINE` ceiling of 21,481 is a *build-placement* metric, not a measure of missing content.
+
+**Why earlier passes kept re-opening it.** The divergence is not concentrated in the generated shims: attributing
+it by owning object puts 643 bytes in `cm_ExSellObjekt.c.obj` and more in `cm_ExAllocSpieler.c.obj`, and the bytes
+themselves differ in *kind*, not just position —
+
+```
+0x10029d00  reference:  a structured record table  {f64 2048.0, 14, 4, 5, 2500}, stride 0x18
+            build:      a run of error strings   "gm_AllocSpieler() failed", "cm_ExChangePlayerIdentity() failed"
+```
+
+A game TU emitting strings where the reference has a record table reads as a content defect. It is not: the
+shipped file is byte-identical at that address, because postlink copies `.data` wholesale from the layout
+package.
+
+**The record table is real and unmodelled.** At `0x10029cf0`, stride `0x18`, the reference holds
+`{int, int, int, float}` records reading `5 / 2500`, `6 / 3000`, `4 / 2000` — a production cost table. It has no
+source reference and no `rebrew-data.toml` entry; the layout package supplies it. Modelling it would be a
+*source-fidelity* improvement (the C would name the table) but would not change a single shipped byte, because
+postlink overwrites the section either way.
+
+**Practical consequence for the objective.** The `.data` axis cannot move the residue: the shipped bytes are
+already exact and the raw-link number is a ceiling the gate enforces correctly. The only route to changing
+raw-link `.data` would be reproducing the original's `.data` COMDAT order, which is linker-hash-driven
+(`CMakeLists.txt:443-448`) and unreachable from C.

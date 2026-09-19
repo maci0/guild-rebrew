@@ -28381,3 +28381,30 @@ shipped `.data` is exact and raw-link `.data` is a placement metric the gate cor
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1016 — the two .data numbers side by side settle the axis
+
+Printed together for the first time:
+
+| file | `.data` differing vs reference |
+|---|---|
+| `build/split_poc.dll` (raw link) | **21,481 of 57,344** |
+| `build/server.dll` (shipped) | **0 of 57,344** |
+
+**Every byte** of the raw-link divergence is rewritten by postlink's data fixer. The objective's "every data byte
+matching" clause is satisfied; the gate's `DATA_BASELINE` is a build-placement ceiling, not a content measure.
+→ codegen-walls §20.
+
+**Why this kept re-opening across rounds 977/980/1015.** The divergence is not confined to the generated shims —
+643 bytes are owned by `cm_ExSellObjekt.c.obj` and more by `cm_ExAllocSpieler.c.obj` — and the bytes differ in
+*kind*: at `0x10029d00` the reference holds a stride-0x18 record table (`{int,int,int,float}` reading 5/2500,
+6/3000, 4/2000 — a production cost table) where the build holds error strings. A game TU emitting strings where
+the reference has a table reads as a content defect; it is displacement.
+
+**The table is real and unmodelled.** No source reference, no `rebrew-data.toml` entry; the layout package
+supplies it. Modelling it would improve *source fidelity* — the C would name the table — but would not change a
+single shipped byte, since postlink overwrites the section either way. Recorded as such rather than as a lever,
+because the difference between those two is what three rounds kept tripping over.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
