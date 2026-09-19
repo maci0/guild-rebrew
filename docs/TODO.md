@@ -28436,3 +28436,43 @@ collapsed the composition.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1018 — round 1017 was wrong: there IS headroom, and cm_ExProdObjekt's "15 bytes" was right
+
+Round 1017 concluded "slack 0" on every carrier by comparing the COMDAT **raw** size against the span. That is
+self-fulfilling — msvc6 pads the COMDAT to the span with trailing `nop`s, so the two are equal by construction
+and the comparison measures the pad, not our code.
+
+**The correct measure is our code up to and including the final `ret`:**
+
+| carrier | reference code | our code | span | **real headroom** |
+|---|---|---|---|---|
+| `cm_ExProdObjekt` | 1008 | **993** | 1008 | **15** |
+| `ServerMainThread` | 2434 | 2434 | 2448 | 14 |
+| `ls_LoadBuildingEntityState` | 1463 | 1460 | 1472 | 12 |
+| `CrashDump` | 2115 | 2120 | 2128 | 8 |
+| `cm_ExSellObjekt` | 2057 | 2056 | 2064 | 8 |
+| `gm_AllocSpieler` | 3689 | 3689 | 3696 | 7 |
+| `srv_LoadBuf` | 750 | 750 | 752 | 2 |
+
+`cm_ExProdObjekt`'s recorded `size = 993` confirms it: the reference is 1008, we emit 993, and 15 bytes are
+available. **Its header's "15 bytes of unused slack" was correct**, and round 1016's dismissal of that claim as
+stale was wrong.
+
+**Three methods, three answers — only the third sound:**
+
+| method | answer | verdict |
+|---|---|---|
+| `span - sum(sizes)` after a truncated decode (990) | 119 | over-counts |
+| COMDAT raw vs span (1001, 1017) | 0 | self-fulfilling: measures the pad |
+| last non-`nop` end vs span (1018) | 2-15 | **correct** |
+
+→ measure-traps §34, corrected in place.
+
+**What this changes.** The "every carrier is exactly at span, so only size-neutral edits can land" constraint —
+which I have repeated for many rounds and used to justify rejecting probes — is **false**. Size-increasing edits
+of up to 15 bytes are available on `cm_ExProdObjekt`, 14 on `ServerMainThread`, and 7-12 on most others. That
+reopens a class of probes I had been filtering out.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.

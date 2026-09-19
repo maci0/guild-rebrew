@@ -1846,7 +1846,39 @@ reference  0x100196b8  ret   then 7x nop   -> 0x100196c0
 built      0x100196b8  ret   then 7x nop   -> 0x100196c0
 ```
 
-**The rule.** A size budget must come from an artefact, not from arithmetic over a disassembly:
+**CORRECTION (round 1018): the COMDAT raw is the SPAN, not our code length, and there IS headroom.**
+
+Round 1017 concluded "slack 0" by comparing the COMDAT *raw* against the span. That comparison is
+self-fulfilling: msvc6 pads the COMDAT to the span with trailing `nop`s, so `raw == span` by construction and
+says nothing about how much code we emit.
+
+The number that matters is **our code up to and including the final `ret`**, and it is smaller:
+
+| carrier | reference code | our code | span | real headroom |
+|---|---|---|---|---|
+| `cm_ExProdObjekt` | 1008 | **993** (its recorded `size`) | 1008 | **15** |
+| `ServerMainThread` | 2434 | 2434 | 2448 | 14 |
+| `ls_LoadBuildingEntityState` | 1463 | 1460 | 1472 | 12 |
+| `CrashDump` | 2115 | 2120 | 2128 | 8 |
+| `cm_ExSellObjekt` | 2057 | 2056 | 2064 | 8 |
+| `gm_AllocSpieler` | 3689 | 3689 | 3696 | 7 |
+| `srv_LoadBuf` | 750 | 750 | 752 | 2 |
+
+Every carrier is padded with 2-15 trailing `nop`s. So **`cm_ExProdObjekt`'s header claim of "15 bytes of unused
+slack" was correct**, and round 1016's dismissal of it as stale was wrong — the same mistake in the opposite
+direction from round 990, which over-counted slack from a truncated decode.
+
+Three answers from three methods, only the third sound:
+
+| method | answer | verdict |
+|---|---|---|
+| `span - sum(sizes)` after an early-stopped decode (round 990) | 119 bytes | wrong, over-counts |
+| COMDAT raw vs span (rounds 1001, 1017) | 0 | **self-fulfilling**, measures the pad |
+| last non-`nop` instruction's end vs span (round 1018) | 2-15 bytes | **correct** |
+
+**The rule.** A size budget must come from an artefact, not from arithmetic over a disassembly — but the
+artefact must be the *code extent*, not the container's padded size. The container's raw size is what msvc6
+pads to; the code's end is the last non-`nop` instruction.
 
 | claim | method | valid? |
 |---|---|---|
