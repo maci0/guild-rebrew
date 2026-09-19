@@ -30403,3 +30403,30 @@ Recorded as `codegen-walls.md` §29.
 
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.
+
+## Round 1068 — the `cld` is one site in eighteen; scale measured, and my own summary corrected
+
+Round 1067 established that the reference's inlined `strcpy` at `m_AllocTracked` carries a `cld` our msvc6
+never emits. This round measured whether that is a compiler habit or a one-off.
+
+**Scanned the whole reference `.text` for `f2 ae` (`repne scasb`): 18 sites. Exactly ONE is preceded by `cld`
+(`0x100066a0`). Our build emits `cld; repne scasb` zero times.**
+
+The 15 other sites share the same `83 c9 ff 33 c0` prologue idiom; the `cld` site is the only one whose
+preceding byte is `55` (an unrelated `push ebp`). So the `cld` is **not** a systematic codegen variant — it is
+one site, which strengthens §29's reading: no C spelling produces it, and the reference has it once.
+
+**A correction to my own round-1067 closing summary.** I wrote "the 17 normal sites are byte-correct in our
+build; only the `cld` site is not." **Wrong: 6 of the 17 differ.** Those six sit inside residue carriers, so
+their difference is expected displacement rather than a `cld` matter — but the sentence overstated the
+evidence as measured, and it is corrected in place in `codegen-walls.md` §30 rather than dropped.
+
+**The arithmetic, now explicit.** One byte, at one of eighteen `repne scasb` sites, on a carrier whose 92
+residue bytes span **12 clusters** — eleven of which have nothing to do with this. `cld` remains genuine
+positive evidence for the objective's asm clause (no C spelling emitted it), and it is decisively **not** a
+lever.
+
+Recorded as `codegen-walls.md` §30.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK.

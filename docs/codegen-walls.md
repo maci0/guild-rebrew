@@ -1599,3 +1599,52 @@ still leave the other eleven clusters.
 Recorded as evidence, not as a probe target.
 
 `src/server.dll/Units/m_alloc/m_alloc_c/m_AllocTracked.c`
+
+### 30. The `cld` at `0x100066a0` is a ONE-OFF in the reference: 1 of 18 `repne scasb` sites
+
+§29 established that the reference's inlined `strcpy` at `m_AllocTracked` carries a `cld` our msvc6 never
+emits. This measures whether that is a compiler habit or a single site.
+
+**Scanned the whole reference `.text` for `f2 ae` (`repne scasb`): 18 sites.** Of those, the count preceded by
+`fc` (`cld`) is **one**:
+
+```
+VA           prev  context
+0x10002730   11 76
+0x10002ad7   00 00
+0x100066a1   fc 55     <-- the ONLY cld
+0x10006a95   10 24
+0x10009d70   20 24
+0x10009d96   ff c9
+0x10009da5   ff c9
+0x100110f3   ff c9
+0x1001111a   ff c9
+0x10011eae   c0 33
+0x10011ed5   ff c9
+0x1001717e   c0 33
+0x10018a6e   30 55
+0x10018a91   ff c9
+0x10018ab4   ff c9
+0x1001a54c   ff c9
+0x1001a556   fd 0c
+0x10021214   c0 33
+```
+
+**Our build emits `cld; repne scasb` zero times.**
+
+**Two readings, and the data supports the second.** Either (a) msvc6 emits `cld` before `repne scasb` only in
+some context we have not reproduced, or (b) the reference's byte at that site was produced by something other
+than this compiler's `strcpy` expansion. Reading (a) would predict the 17 other sites to show some variation
+in prologue; they do not — **15 of 18 share the same `83 c9 ff 33 c0` idiom** (`ff c9` / `c0 33` in the
+`prev`/`prev2` columns), and the one `cld` site is the only one whose preceding byte is `55` (a `push ebp`
+from an unrelated instruction). So the `cld` is not a systematic codegen variant; it is **one site**.
+
+**A correction to this section's first draft.** It reported "the 17 normal sites are byte-correct in our
+build; only the `cld` site is not." **That is wrong: 6 of the 17 differ.** Those six sit inside residue
+carriers, so their difference is expected displacement, not a `cld` question — but the sentence as written
+overstated the evidence and is recorded here rather than quietly dropped.
+
+**Net.** The `cld` remains genuine positive evidence for the asm clause (§29) — no C spelling produced it, and
+the reference has it once. What this section adds is its **scale**: one site out of eighteen `repne scasb`
+expansions in the whole binary, on a carrier that still has eleven other residue clusters. It is evidence, not
+a lever, and the arithmetic is now explicit.
