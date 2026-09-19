@@ -28067,3 +28067,45 @@ target-differing branches are genuinely zero. → measure-traps §27.
 
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+## Round 1006 — built a correct CFG comparator (six attempts, five rejected); the honest `place` number
+
+`branch_census.py` overstates structural difference (§27), so this round built the replacement properly.
+Getting there took six formulations; five were wrong and each looked plausible. All six are recorded in
+measure-traps §28 — the failures are the useful part, because four of them were caught only by a check I
+had to think to run.
+
+**The killer was #5, BFS canonical labelling.** A labelling derived from a traversal is *not* canonical:
+visiting a node's two successors in the other order changed **452 edges on the same reference graph**. It
+looks correct — deterministic, standard, stable for identical input — and it over-reported
+`gm_AllocSpieler` as having 187-214 differing edges against a block-kind histogram matching within 2 nodes.
+
+**The two guards now shipped in the tool:**
+
+| guard | catches |
+|---|---|
+| `--self-test` | an always-zero tool: redirects one branch in an in-memory copy of the build and asserts the canonical form changes |
+| order-swap invariant test | a non-canonical labelling: shuffle the input dicts on the SAME graph; the canonical form must not change |
+
+**Result — the first trustworthy number for the `place` class:**
+
+| verdict | carriers |
+|---|---|
+| **SAME control-flow shape** (7) | `ServerMainThread`, `m_AllocTracked`, `srv_LoadBuf`, `gm_ObjectsAvailble`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue` |
+| **DIFFERS** (12) | the rest, profile delta 1-2 blocks each |
+
+`ServerMainThread` reading **SAME** is the headline: `branch_census.py` called it 14 target-differing branches,
+round 1005 hand-decoded one as a pairing artifact, and the correct tool says its control flow is identical.
+Also hand-verified `gm_CheckInventoryCapacity` (reference `jcc 19, ret 5, jmp 1` vs ours `jcc 20, ret 5` — one
+`jmp` became a `jcc`) so the tool is not merely permissive.
+
+**What this changes.** The `place` class (19.4% of residue, 1,675 bytes) splits into 7 carriers whose control
+flow is already correct — so their residual is drift/encoding, not structure — and 12 with a real shape
+difference of 1-2 blocks. That is a **smaller and more precise** structural component than the index-based
+census implied, and it is the first version of this measurement that survives both guards.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. No source edit; no baseline moved.
+
+**Note:** a stray `build/server.dll.bak` created by a failed negative test was removed and the deliverable
+verified byte-identical to the pre-test copy before deletion.

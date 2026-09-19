@@ -1534,3 +1534,59 @@ survive because the carriers with **zero** target-differing branches are genuine
 
 A pair that differs by a few bytes reaches the same block. A pair where the *mnemonic polarity swapped* is
 §50. Only a pair whose destinations resolve to different basic blocks is a placement finding.
+
+## 28. How NOT to compare two control-flow graphs — five rejected formulations (round 1006)
+
+`branch_census.py` counts branches whose encoding differs, which overstates structural difference (§27).
+Replacing it needs a real CFG comparison, and getting there took **six attempts**, five of which were wrong in
+ways that each looked plausible:
+
+| # | formulation | why it failed | how it was caught |
+|---|---|---|---|
+| 1 | compare branch targets **by index** | polarity swaps, ±1..3 drift, and pairing artifacts all read as differences | hand-decoded ServerMainThread `0x100098e3` |
+| 2 | compare successor **directions** (`fwd`/`back`) | direction FLIPS with polarity, so a polarity swap still differs | same case: reference `je`+back vs our `jne`+forward is one two-way branch |
+| 3 | compare block **bodies** | a body differs for non-CFG reasons (register name, one extra insn) — `gm_CalculateProductionValue` reported 6 different edges when its flow is identical | its known-good status |
+| 4 | group **`jcc`+`jmp`** as one two-way branch | a `jmp` after a `jcc` often belongs to a *different* case; grouping corrupted alignment and regressed `ServerMainThread` from SAME to DIFFERS | re-measurement after the change |
+| 5 | **BFS canonical labelling** + edge sets | **not canonical**: visiting a node's two successors in the other order changed 452 of the edge set on the SAME reference graph | explicit order-swap experiment |
+| 6 | **order-independent signature** (block-kind multiset + degree profile + edge-kind multiset) | — | holds; see below |
+
+**The generalisable trap is #5, because it is invisible without an explicit test.** A BFS labelling *looks*
+canonical — it is deterministic, it is the standard recipe, and it gives identical output for identical input.
+It only fails when two graphs differ slightly, and then it over-reports massively: `gm_AllocSpieler` showed
+187-214 "differing edges" against a block-kind histogram that matched within 2 nodes.
+
+**The test that catches it** (and that the tool now ships as `--self-test` plus this experiment):
+
+```python
+# canonical form must be invariant to iteration order on the SAME graph
+a = canon(blocks, edges)
+shuffled = dict(random.sample(list(blocks.items()), len(blocks)))
+b = canon(shuffled, {k: edges[k] for k in shuffled})
+assert a == b        # a BFS labelling FAILS this
+```
+
+A canonical form is only canonical if permuting the input does not change it. Check that property directly;
+do not infer it from the algorithm's name.
+
+**Also required: prove the tool is not always-zero.** A comparison that returns "SAME" for everything would
+look like a clean result. `--self-test` redirects one branch in an in-memory copy of the build and asserts the
+canonical form changes.
+
+**The working formulation** (order-independent, no traversal): for each block, its **kind**
+(`branch2` for any conditional, `jmp`, `ret`, `falloff`) and its **(in-degree, out-degree)**; then the sorted
+multiset of (kind, indeg, outdeg) over blocks, plus the sorted multiset of (kind, kind) across edges. Condition
+*polarity* is deliberately not part of the kind — `je` and `jne` to the same two successors are one shape.
+
+**Results, with the two guards in place** (`nodeR`/`nodeB` are block counts):
+
+| carrier | verdict | note |
+|---|---|---|
+| `ServerMainThread` | **SAME** | matches the hand decode; the tool's index-based predecessor called this 14 different |
+| `m_AllocTracked` | **SAME** | kinds identical: `jcc 33, ret 6, jmp 3` both sides |
+| `srv_LoadBuf`, `gm_ObjectsAvailble`, `vfs_ReadCompressed`, `cm_ExProdObjekt`, `gm_CalculateProductionValue` | **SAME** | all five known-near-exact carriers |
+| `gm_CheckInventoryCapacity` | DIFFERS | hand-verified: reference `jcc 19, ret 5, jmp 1` vs ours `jcc 20, ret 5` — one `jmp` became a `jcc` |
+| 11 others | DIFFERS | profile delta 1-2 blocks |
+
+**12 of 19 carriers have a differing control-flow shape; 7 are identical.** That is a much larger structural
+component than `branch_census.py`'s "upper bound" implied was *real*, and it is the first trustworthy number
+this project has for the `place` class.
