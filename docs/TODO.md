@@ -30913,3 +30913,59 @@ callback-signature convention. `docs/TODO.md` (this entry).
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged.
+
+## Round 1082 — `gm_AllocSpieler` is one 159-instruction wall, not 192 scattered hunks
+
+Data, types and naming are all closed (rounds 1078-1081), so this round went at the residue itself. The
+largest carrier, `gm_AllocSpieler` (2,823 of 8,628 bytes, 33%), had been described in its own header as
+"192 hunks of 1-2 instructions each" — a reading that says *uniformly rough, no single wall*, and that is what
+justified leaving it alone.
+
+**Re-measured the shape directly and the reading is wrong.** Aligned the reference against the raw-linked
+`build/split_poc.dll` with capstone, matching on mnemonic plus register-normalised operand text, resyncing
+within 6 instructions:
+
+| | |
+|---|---|
+| reference instructions | 1,056 |
+| ours | 1,054 |
+| differing runs | **48** |
+| largest run | **159 instructions** |
+
+Two of every three differing instructions sit in **one** contiguous block at `0x1001910e`. The function has a
+large coherent divergence plus a scatter of small ones — not a uniform field.
+
+**The block is a two-register role swap with a single upstream cause.** Instruction-for-instruction identical
+across all 159 except that `edi` and `esi` trade jobs, and the tell is the third instruction: the reference
+zero-extends with `xor eax,eax` + `mov ax,[ebp]`, we emit `and eax,0xffff`. That is the `colv`/`rowv`
+sympathy-matrix loop at `gm_AllocSpieler.c:588`, both operands `*(volatile unsigned short*) slot`.
+
+**Three probes, all measured at the link:**
+
+| probe | delta |
+|---|---|
+| drop `volatile` from both loads | **+426** |
+| explicit `(int)` cast on the first load | **+0** (inert) |
+| hoist `rowv` above the first `gm_RandomMod` call (the reference's order) | **composition collapses** — `.text` +658, 0/319 at reference VA |
+
+The first is the decisive negative: `volatile` is **load-bearing** here, and removing it to chase the
+reference's cleaner zero-extend makes the match far worse. That independently confirms the archived
+`gm_AllocSpieler.c:169-172` note that volatile reads score 627 against 652. The third shows the reference's
+statement *order* is not reachable by moving that one statement — the hoist re-schedules enough to lose
+position alignment outright, so it is not a local edit.
+
+**All three reverted; the tree is byte-identical to HEAD and the deliverable md5 is unchanged.**
+
+**A build-hygiene trap that cost most of the round.** `linktest.sh`'s stale-object guard fired three times,
+and the middle failure looked like a real regression (composition collapse, `.text` +658) when it was a stale
+`.obj` still holding the hoisted code. `cmake --build` reported "0 objects built" because the object's mtime
+was newer than the restored source; deleting the `.obj` explicitly was what recovered it (246/319 symbols back
+at reference VA). This is workflow-traps §24's exact case, and the guard's own message names it — the lesson is
+to believe the guard and force the object, not to re-read the source diff.
+
+**Docs:** codegen-walls §34 (the run-size measurement, the register-swap anatomy, the three negatives, and why
+the hunk-count reading misled).
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`, unchanged. No source change; nothing to revert.

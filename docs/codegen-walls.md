@@ -1775,3 +1775,63 @@ table instead of re-deriving the set.
 **The cross-check is the point.** `fault_address.py` walks both instruction streams from each entry and reports
 the first structural disagreement; the table above was built by a different method (byte compare for the first
 differing offset, then the reference instruction covering it). Two independent methods, same nineteen answers.
+
+### 34. `gm_AllocSpieler`'s 2,823 bytes are dominated by ONE 159-instruction run, and it is a register swap the `volatile` qualifier fixes in place (round 1082)
+
+The 2,823-byte carrier had been described as "192 hunks of 1-2 instructions" — i.e. an evenly distributed
+divergence with no single wall, which is the reading that justified not attacking it. **That is wrong.**
+Aligning the two instruction streams directly (capstone on the reference and on the raw-linked
+`build/split_poc.dll`, matching on `(mnemonic, operand-string-with-registers-normalised)`, resyncing within a
+6-instruction window) gives:
+
+| | |
+|---|---|
+| reference instructions | 1,056 |
+| ours | 1,054 |
+| differing runs | **48** |
+| largest run | **159 instructions** |
+| run-size mean | 19.0 |
+
+So 2 of 3 differing instructions sit in one contiguous block starting at **`0x1001910e`**. The function is not
+uniformly rough; it has a large coherent divergence and a scatter of small ones.
+
+**What the big run actually is: a two-register role swap.** The reference and our code are instruction-for-
+instruction identical across it except that `edi` and `esi` exchange jobs:
+
+```
+ref    0x1001910e  mov byte ptr [edi + 0x1014d8e0], 0
+our    0x10019113  mov byte ptr [esi + 0x100a9820], al
+ref    0x10019115  mov byte ptr [edi + 0x100a9820], al
+our    0x10019119  mov      ax, word ptr [ebp]
+ref    0x1001911b  xor      eax, eax            <-- the tell
+ref    0x1001911d  mov      ax, word ptr [ebp]  <-- zero-extend, no mask
+our    0x1001911d  and      eax, 0xffff         <-- mask instead
+ref    0x10019123  lea      edx, [eax + eax*2]
+our    0x10019124  lea      esi, [eax + eax*2]
+```
+
+The reference zero-extends the `unsigned short` load with `xor eax,eax` + `mov ax,[ebp]`; ours masks with
+`and eax,0xffff`. From that one difference everything downstream rotates — the cursor lands in `edi` in the
+reference and `esi` in ours, and every address in the run follows. The C is the `colv`/`rowv` sympathy-matrix
+loop at `gm_AllocSpieler.c:588`, where both operands are `*(volatile unsigned short*) slot`.
+
+**Two levers probed, both measured, both negative. Do not re-probe:**
+
+| probe | linked delta |
+|---|---|
+| drop `volatile` from both loads in the loop | **+426** |
+| explicit `(int)` cast on the first load | **+0** (inert) |
+| hoist `rowv` above the first `gm_RandomMod` call, matching the reference's order | **collapses the composition** (`.text` +658, 0/319 symbols at reference VA) |
+
+The first is the important negative: `volatile` is **load-bearing here**, and removing it to chase the
+reference's *cleaner* zero-extend makes the match far worse. The regression list already recorded volatile
+reads as 627 (worse than 652) at `gm_AllocSpieler.c:169-172`; this is an independent confirmation from the
+opposite direction. The third shows the reference's *order* is not reachable by moving that statement: the
+hoist is not a local change, it re-schedules enough of the function to lose position alignment outright.
+
+**Why the earlier "192 hunks" reading misled.** It came from `ndiff.py`, a normalised instruction comparison
+that is no longer in the tree (`.scratch/ndiff.py` is absent). Its hunk count was taken as evidence of
+distributed divergence, but counting runs depends on where the aligner resyncs; the resync window here is 6
+instructions, which merges many neighbouring small hunks into the 159-instruction run. **Neither count is
+wrong, but only the run-size distribution answers the question that matters** — is there one wall or many?
+The 192-hunk figure was used to argue "many", and the wall is real.
