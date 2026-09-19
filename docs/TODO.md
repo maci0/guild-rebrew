@@ -28195,3 +28195,42 @@ checked so far; it is.
 **State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Both probes reverted; deliverable rebuilt and
 re-verified (`scripts/verify_objective.py`: all structural criteria hold); `src/` unmodified; no baseline moved.
+
+## Round 1010 — round 1009's mechanism was wrong: it is test ORDER + arity, not polarity
+
+Round 1009 concluded that `gm_CheckInventoryCapacity`'s one-block CFG difference was shapes §50's
+branch-polarity class. **That was wrong**, and testing it directly showed why.
+
+**The undirected-edge count differs** (reference 36, ours 37), so the graphs are not related by a polarity
+swap alone. The out-degree histograms over the same 25 blocks give the mechanism:
+
+| | out-degree 2 | out-degree 1 | out-degree 0 |
+|---|---|---|---|
+| reference | 19 | **1** | 5 |
+| ours | **20** | **0** | 5 |
+
+Decoding both loop tails in full shows the reference runs the **sentinel test (`cmp eax,edx`) first**, then the
+hit test; ours runs the **hit test (`cmp eax,ebp`) first**. The swap changes the exit edge's **arity** — an
+unconditional `jmp` in the reference, a second `jcc` in ours. That is §84's statement-order class, not §50.
+→ codegen-walls §17, corrected in place with the mechanism written out.
+
+**Probe on the corrected mechanism:** `list_cursor++; elem = list_cursor[1]; if (elem == 0) break; if (elem ==
+type) ...` (sentinel test moved first) measures **+243** (residue 8,628 → 8,873). Reverted. The file header's
+account holds — *"the entry compare is load-bearing for correctness"*.
+
+| probe (this carrier) | result |
+|---|---|
+| invert the sentinel test's polarity (`!= 0 continue`) | +0, byte-identical |
+| `list_cursor++; elem = *list_cursor;` | +228 |
+| move the sentinel test first | **+243** |
+
+All three reverted; baseline rebuilt and verified at 8,628.
+
+**Process note worth keeping.** Two consecutive rounds (1009, 1010) reached opposite conclusions about the same
+16 bytes, because 1009 reasoned from the *shape* of the difference and 1010 *measured* it (undirected edge
+count + out-degree histograms). The measurement took one command. This is the same failure the round-978/979
+pair had: inferring a mechanism from a summary statistic instead of decoding the region.
+
+**State:** gate pass — lint 188/188, compile 0 errors, verify 281/283 (264 byte-matched), residue 8628
+(`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable rebuilt and re-verified;
+`src/` unmodified; no baseline moved.

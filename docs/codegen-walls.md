@@ -948,11 +948,38 @@ reference                        ours
 0x10019f5d  jmp 0x10019f64       0x10019f59  je  0x10019f64
 ```
 
-**Same two destinations in both** — the hit test exits to `0x10019f5f`, the sentinel test loops to the scan
-top or falls to the exit at `0x10019f64`. The reference reaches the exit by an explicit `jmp` after a `jne`
-back-edge; ours uses `je` to the exit and lets the loop close with `jne`. That is **§50's branch-polarity
-class**, and it is an *encoding* difference even though the successor-set canonical form separates the graphs
-(it sees `{loop, exit}` with a `jmp` node where we have a second `jcc`).
+**CORRECTION (round 1010): the difference is NOT polarity — it is statement order plus arity, and the
+first draft of this section said otherwise.** Decoding both tails in full:
+
+```
+reference                          ours
+0x10019f4f  cmp eax, edx           0x10019f52  mov eax, [ecx]
+0x10019f51  je  0x10019f5f         0x10019f54  add ecx, 4
+0x10019f53  mov eax, [ecx+4]       0x10019f57  cmp eax, ebp
+0x10019f56  add ecx, 4             0x10019f59  je  0x10019f64
+0x10019f59  cmp eax, ebp           0x10019f5b  cmp eax, edx
+0x10019f5b  jne 0x10019f4f         0x10019f5d  jne 0x10019f52
+0x10019f5d  jmp 0x10019f64         0x10019f5f  mov esi, 1
+0x10019f5f  mov esi, 1             0x10019f64  ...
+```
+
+The reference runs the **sentinel test (`cmp eax,edx`) first**, then the hit test; ours runs the **hit test
+(`cmp eax,ebp`) first**. So the loop's two tests are swapped in the source, and the swap changes each node's
+**arity** — the reference's exit edge is an unconditional `jmp` (out-degree 1), ours is a second `jcc`
+(out-degree 2). Measured out-degree histograms over the same 25 blocks:
+
+| | out-degree 2 | out-degree 1 | out-degree 0 |
+|---|---|---|---|
+| reference | 19 | **1** | 5 |
+| ours | **20** | **0** | 5 |
+
+That is why the graphs are non-isomorphic: not a polarity swap on one node, but a `jcc` where the reference
+has a `jmp`. The `cfg_compare.py` kind collapses polarity but still records `jmp` vs `branch2`, and this node
+is the latter.
+
+**The two probes stand** (+0 for the polarity-inverted spelling, +228 for bump-then-read), but the +0 is now
+explained differently: inverting the *sentinel test's* polarity lands the same bytes because the test ORDER is
+unchanged. Reordering the tests is the lever, and that is §84's statement-order class.
 
 **Two probes, both reverted:**
 
