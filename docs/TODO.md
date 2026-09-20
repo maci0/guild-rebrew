@@ -63,6 +63,19 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1131 (GOLD intake): Lua hits confirmed out-of-scope for shared tree. No source change.**
+
+- **Tried:** checked whether the 2 Lua FLIRT hits (`_expr` 0x00462c40, `_getupvalue`
+  0x005af2f0) are shared-tree candidates. The server.dll tree carries no Lua
+  (the two "lua" greps are `sbb al,al`-style false positives in comments); Lua
+  is client-only, like the d2/d3 units. Per the brief, client-only code is out
+  of scope for server symbols — and it is also not shared game logic, so it
+  stays GOLD-local when reversed, never lifted into the shared tree. The other
+  8 non-LIBCMT hits (cintrindisp/mbscpy/filbuf/twoToTOS/set_errno/allshl et al.)
+  are CRT-adjacent small helpers, still unowned.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1130 stack.
 **Round-1130 (GOLD intake): lib-match sweep over all 34 FLIRT hits — 24 library, 10 game/Lua.**
 
 - **Tried:** `rebrew lib-match --stock-lib LIBCMT.LIB --target Europa1400Gold.exe`
