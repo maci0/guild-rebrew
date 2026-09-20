@@ -2192,3 +2192,57 @@ size = 16
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-20T15:50:36+00:00"
+
+["GOLD.0x00428d00"]
+size = 16
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:52:25+00:00"
+
+["GOLD.0x0043fed0"]
+size = 16
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:52:23+00:00"
+
+["GOLD.0x0046df7e"]
+size = 16
+
+["GOLD.0x004941c0"]
+size = 16
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:52:21+00:00"
+
+["GOLD.0x004be930"]
+size = 16
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:52:19+00:00"
+
+["GOLD.0x004ebf50"]
+size = 16
+
+["GOLD.0x0052fa20"]
+size = 16
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:52:14+00:00"
+
+["GOLD.0x0052fa30"]
+size = 16
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:52:12+00:00"
+
+["GOLD.0x005af2f0"]
+size = 16
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:52:10+00:00"
+
+["GOLD.0x005af300"]
+size = 16
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:52:08+00:00"

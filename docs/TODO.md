@@ -63,6 +63,19 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1135 (GOLD intake): batch 5 — 10 more, 9 matched (2 EXACT), 1 walled. Coverage 0.8%.**
+
+- **Tried:** next 10 smallest. Matched: four Lua-style two-arg forwarders, +0x100
+  adder, -1-triple setter, masked-call reader, call-then-zero setter, +0xc84 zero
+  store (2 EXACT + 7 RELOC). One needed a fix (tail-jump file still held the
+  skeleton body — the fill regex missed its extra comment line; caught by test).
+- **Walled:** `fcn_004ebf50` — reference stores the bumped arg to `[esp+4]` then
+  `jmp`s; call spellings emit push/call. Parked with in-file comment.
+- **Measured:** GOLD lint 0/0 (one SIZE fixed 15 -> 16); coverage 0.6 -> 0.8%
+  (9 EXACT + 28 RELOC). Server gate green (verify 281/283, residue 8,628).
+- **Next:** user prioritizes GOLD_TL over GOLD — TL triage is the next lane
+  (7.5% matched: 3 RELOC + 7 matching + 22 STUB + 73 start-data).
+- **Keep:** Round-1134 stack.
 **Round-1134 (GOLD intake): batch 4 — 10 more, 8 matched (3 EXACT), 2 library. Coverage 0.6%.**
 
 - **Tried:** next 10 smallest. Two (`fcn_005e6fec`, `fcn_005e6fde`) lib-matched as
