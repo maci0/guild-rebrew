@@ -63,6 +63,17 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1120 (data pass): anonymous-struct body sweep — no dupes beyond record. No source change.**
+
+- **Tried:** swept all anonymous `typedef struct {...}` bodies for identical layouts
+  across TUs. The remaining anonymous structs (SIM_CLOCK, PAIR/SRC/TGT triad,
+  PlayerList9, field block in loadsave_dump1, copy_12_dwords) are each confined to
+  one TU or already recorded (copy_12_dwords is byte-identical to lifted
+  OFFICE_ROLE_TEMPLATE's span but its fields are unread by any code — lift kept
+  minimal on that basis).
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1119 stack.
 **Round-1119 (data pass): Sbh* CRT-region dupes checked — lift NOT applicable. No source change.**
 
 - **Tried:** the five `Sbh*` typedefs are defined twice each, in `crt_region/sbh_globals.c`
