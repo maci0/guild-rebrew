@@ -63,6 +63,21 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1130 (GOLD intake): lib-match sweep over all 34 FLIRT hits — 24 library, 10 game/Lua.**
+
+- **Tried:** `rebrew lib-match --stock-lib LIBCMT.LIB --target Europa1400Gold.exe`
+  on every FLIRT hit. 24 confirm as LIBCMT (memset/memcpy/strstr/strncpy/strncat/
+  strrchr/strncmp/strcmp/stricmp/alldiv/allmul/aulldiv/aullrem/alloca_probe/
+  heap_select/old_sbh_release/cfltcvt/trandisp/fdiv_main/setenvp/except_handler3/
+  mbscat) — linker supplies those bytes, never reverse. 10 do NOT match LIBCMT:
+  `_expr`+`_getupvalue` (0x00462c40/0x005af2f0, Lua — FLIRT's lua50.sig, expected),
+  `__cintrindisp2`, `__mbscpy`, `__filbuf`, `__startTwoArgErrorHandling`,
+  `__twoToTOS`, `__set_errno`, `__allshl`, `__strnicmp` — game or other-lib code,
+  safe to reverse when reached. `cfg detect-crt` finds no CRT sources under
+  toolchain/, so `crt-match --all` cannot annotate yet (matches recorded here).
+- **Gate:** no tree edit besides this log; server gate green (verify 281/283,
+  residue 8,628, imports 100, wine OK).
+- **Keep:** Round-1129 stack.
 **Round-1129 (intake): Europa1400Gold.exe onboarded as third target (GOLD), first 5 functions RELOC.**
 
 - **Onboarded:** `rebrew cfg add-target Europa1400Gold.exe --binary original/Europa1400Gold.exe`
