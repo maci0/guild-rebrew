@@ -63,6 +63,19 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1139 (GOLDTL): gm_FindSlotById EXACT — leaked server VA was the whole delta. TL 37.5%.**
+
+- **Tried:** TL `gm_FindSlotById` (0x005027d0) was NEAR 64/72 with the imported body
+  spelling table base `0x1009b770` — a server-image VA leaked by the import. The
+  reference folds `0x85ab90` into its lea/shl strength-reduced index chain. One
+  literal swap → EXACT 72/72. Lesson recorded in-file: TL imports must have every
+  `0x100xxxxx` literal re-derived from the TL disassembly, never trusted.
+- **Also swept:** other `0x100xxxxx` literals in TL code are confined to the
+  (already-flagged) `InitializeLogAndErrorHandler.c` import — same leak class,
+  queued as the next fix, not attempted this round.
+- **Measured:** TL 35.0 -> 37.5% matched (6 EXACT + 9 RELOC of 40). Server gate
+  green (verify 281/283, residue 8,628).
+- **Keep:** Round-1138 stack.
 **Round-1138 (GOLDTL): cm_ChkEntityLookup RELOC; import misattribution caught. TL 35%.**
 
 - **Tried:** `cm_ChkEntityLookup` TL twin decoded honestly: the TL build passes the

@@ -116,9 +116,10 @@ extern float g_const_1_0;
 extern float g_const_neg_1_0;
 
 /* Scans the per-entity slot table for an entry whose 16-bit id
- * matches arg2. Each entity owns 0x2a90 bytes at 0x1009b770,
+ * matches arg2. Each entity owns 0x2a90 bytes at 0x85ab90 (TL image),
  * holding 0x55 slots of 0x80 bytes; returns the matching slot
- * pointer or NULL. */
+ * pointer or NULL. The imported body had leaked the server VA
+ * 0x1009b770 — the reference folds 0x85ab90 into the lea chain. */
 
 // CFLAGS: /O2 /Gd
 // FUNCTION: GOLDTL 0x5027d0
@@ -131,8 +132,8 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 	int i;
 
 	for (i = 0; i < 0x55; i++) {
-		if (*(unsigned short*) (0x1009b770 + arg1 * 0x2a90 + i * 0x80) == arg2) {
-			return (char*) (0x1009b770 + arg1 * 0x2a90 + i * 0x80);
+		if (*(unsigned short*) (0x85ab90 + arg1 * 0x2a90 + i * 0x80) == arg2) {
+			return (char*) (0x85ab90 + arg1 * 0x2a90 + i * 0x80);
 		}
 	}
 	return 0;

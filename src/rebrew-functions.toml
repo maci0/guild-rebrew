@@ -1999,9 +1999,10 @@ size = 128
 
 ["GOLDTL.0x005027d0"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
-status = "NEAR_MATCHING"
-updated_by = "verify"
-updated_at = "2026-09-12T15:09:44+00:00"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T16:09:16+00:00"
+size = 80
 
 ["GOLDTL.0x00503e80"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
