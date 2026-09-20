@@ -63,6 +63,16 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1141 (GOLDTL): vfs_ReadCompressed guard-first reorder tried, reverted. TL holds.**
+
+- **Tried:** TL `vfs_ReadCompressed` (144/499) — the reference tests `handle` before
+  the two volatile zero-stores, so moved the guard above the stores. Measured
+  144 -> 37 matched at obj 483: the stores-first order is load-bearing for the
+  frame shape (target slots sit at frame top after the callee-save pushes).
+  Reverted immediately; file byte-identical to round start.
+- **Gate:** reverted; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1140 stack.
 **Round-1140 (GOLDTL): InitializeLogAndErrorHandler import-VA leak fixed — 189→397/404.**
 
 - **Tried:** the TL file carried ~14 server-image VAs. Re-derived each from TL
