@@ -21,9 +21,20 @@ Usage:
 
 from __future__ import annotations
 
+#: How far either side of a reference operand slot the symbol pass may look for a
+#: shifted copy of it.  A compile difference moves an instruction by a byte or
+#: two, rarely more; the bound keeps the search inside the instruction.
+_SYM_WINDOW = 16
+
+#: The reference's `.data` VA range.  `.rdata`/IAT slots below it belong to the
+#: imports fixer and must not be re-pointed here.
+_DATA_LO = 0x10027000
+_DATA_HI = 0x1176759C
+
 import argparse
 import contextlib
 import json
+import re
 import struct
 import sys
 from pathlib import Path
@@ -102,6 +113,15 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--built", default="build/split_poc.dll")
     ap.add_argument("--reference", default="original/Server/server.dll")
+    ap.add_argument("--symbol-pass", action="store_true",
+                    help="re-point stale .data operands by linker-map symbol instead of "
+                         "by offset.  Default OFF: measured residue 8,628 -> 8,629 "
+                         "(net +1), so it is a correctness fix, not a residue win "
+                         "-- see docs/codegen-walls.md section 47")
+    ap.add_argument("--link-map", default="build/split_poc.map",
+                    help="linker map naming the symbol at each raw-link address; "
+                         "lets the symbol pass recover operands the offset-based "
+                         "fixers cannot reach")
     ap.add_argument("--layout", default="layout/server.dll")
     ap.add_argument("--results", default=".scratch/verify_full.json",
                     help="rebrew verify --full --json output, for attribution")
@@ -171,6 +191,86 @@ def main() -> int:
         pat = bytes(text)
         print(f"locality    recovered {len(recovered)} stale operand(s): "
               + ", ".join(f".text+{o:#x} {c:#x}->{v:#x}" for o, c, v in recovered))
+
+    # ---- symbol-addressed operands the offset-based fixers cannot reach ----
+    # `_fix_data` and the locality pass above both work by reference OFFSET, so
+    # both miss an operand whose instruction has shifted.  That happens whenever
+    # a function's codegen differs by a byte or two: the reference's operand slot
+    # and ours are at different addresses, the rewrite lands on the neighbour,
+    # and the value stays at its RAW-LINK address.  Measured on gm_AllocSpieler:
+    # the reference's `mov edi,[0x10035434]` (g_citizen_count) appears in the
+    # deliverable as `mov edi,[0x117665e4]`.
+    #
+    # This is a correctness defect, not only residue.  `_fix_data` copies the
+    # reference's `.data` over ours, so a raw-link address now points at whatever
+    # the REFERENCE holds there -- a different global.  The shipped DLL reads the
+    # wrong variable.
+    #
+    # The linker map is the way out: it records the symbol each raw-link address
+    # belongs to, and the data metadata gives that symbol's reference address, so
+    # the rewrite does not need position at all.
+    sym_recovered: list[tuple[int, int, int, str]] = []
+    map_path = ROOT / args.link_map
+    if args.symbol_pass and map_path.exists():
+        raw_to_sym: dict[int, str] = {}
+        _sym_re = re.compile(
+            r"^\s+[0-9a-f]{4}:[0-9a-f]{8}\s+(\S+)\s+([0-9a-f]{8})\s+(\S+)"
+        )
+        for line in map_path.read_text(errors="replace").splitlines():
+            m = _sym_re.match(line)
+            if m:
+                raw_to_sym[int(m.group(2), 16)] = m.group(1).lstrip("_")
+        name_to_ref: dict[str, int] = {}
+        _meta_path = ROOT / "src/rebrew-data.toml"
+        if _meta_path.exists():
+            for _key, _body in re.findall(
+                r'\["SERVER\.(0x[0-9a-f]+)"\]\n((?:[^\[]*))', _meta_path.read_text()
+            ):
+                _n = re.search(r'name = "([^"]+)"', _body)
+                if _n:
+                    name_to_ref[_n.group(1).lstrip("_")] = int(_key, 16)
+        if raw_to_sym and name_to_ref:
+            tb = bytearray(pat)
+            _tva2, _tvs2, _tptr2, _traw2 = sections(pat)[".text"]
+            # Only positions in the neighbourhood of a REFERENCE operand slot are
+            # eligible.  A blind sweep of `.text` also walks jump tables, and a
+            # table entry that happens to equal a raw-link symbol address gets
+            # rewritten into nonsense -- measured: a blind sweep rewrote 88 values
+            # and took the residue UP by 29 bytes.  `meta.operands` holds only real
+            # operand slots, so a window around them is the safe search space.
+            eligible = {
+                _tptr2 + off + d
+                for off in meta.operands
+                for d in range(-_SYM_WINDOW, _SYM_WINDOW + 1)
+                if 0 <= off + d < _traw2 - 4
+            }
+            for i in sorted(eligible):
+                cur = struct.unpack_from("<I", tb, i)[0]
+                sym = raw_to_sym.get(cur)
+                if not sym:
+                    continue
+                ref_va = name_to_ref.get(sym)
+                if ref_va is None or ref_va == cur:
+                    continue
+                # `.rdata`/IAT slots belong to `_fix_imports`, which already
+                # rewrites them correctly; our map's symbol ordering there does
+                # NOT reproduce the reference's IAT layout, so re-pointing them
+                # from this pass undoes that fixer's work (measured: it takes the
+                # residue UP).  Only `.data`-resident symbols are ours.
+                if ref_va < _DATA_LO or ref_va >= _DATA_HI:
+                    continue
+                if not (_DATA_LO <= cur < _DATA_HI):
+                    continue
+                struct.pack_into("<I", tb, i, ref_va)
+                sym_recovered.append((i - _tptr2, cur, ref_va, sym))
+            if sym_recovered:
+                pat = bytes(tb)
+                print(f"symbols     recovered {len(sym_recovered)} stale operand(s) "
+                      f"by linker map, e.g. "
+                      + ", ".join(
+                          f".text+{o:#x} {c:#x}->{v:#x} ({s})"
+                          for o, c, v, s in sym_recovered[:4]
+                      ))
 
     print(f"\nreference {len(ref)} bytes, patched {len(pat)} bytes, delta {len(pat) - len(ref):+d}")
     sr, sp = sections(ref), sections(pat)

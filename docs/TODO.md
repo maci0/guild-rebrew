@@ -31536,3 +31536,60 @@ those sections. Any future statement about data-section codegen must use the raw
 
 **State:** unchanged — gate pass, lint 188/188, verify 281/283 (264 byte-matched), residue 8628 (`0x21b4`),
 imports 100, wine load OK, deliverable `md5 3febd2c4ca080a3749c12d4bf7452fbe`, tree clean.
+
+## Round 1105 — built an msvc6 probe harness; independent operations are canonicalised, so local respelling cannot steer the schedule
+
+The premise I was asked to test is sound: the reference came out of this compiler, so a source exists that
+reproduces it byte for byte. This round built the instrument to attack that directly and used it to find out
+where the reachable boundary is.
+
+**New tool: `scripts/msvc6_probe.py`.** Compiles a C snippet with the project's own compiler (`rebrew-cmake-cl`,
+the console script CMake uses, so it is exactly the toolchain, and the wine path translation is handled) and
+disassembles the `.text` of the resulting COFF object with capstone. Supports `--sweep` to compile several
+variants in one call and `--flags` to vary the command line. It writes only under `.scratch/msvc6-probe/`, so a
+probe never touches the tree. The point is that the compiler becomes *queryable*: a claim about scheduling,
+allocation, CSE or block placement can be tested in one command rather than argued.
+
+**First finding — independent operations are canonicalised, so their source order is inert.**
+
+```c
+int g;
+int f(int* p) { int a = *p; int b = g; return a + b; }   /* variant 0 */
+int g;
+int f(int* p) { int b = g; int a = *p; return a + b; }   /* variant 1 — swapped */
+int g;
+int f(int* p) { int t = g; int a = *p; return a + t; }   /* variant 2 — renamed */
+```
+
+All three produce **byte-identical objects**: `mov eax,[esp+4] ; mov ecx,[g] ; mov eax,[eax] ; add eax,ecx ; ret`.
+Swapping which load is written first changes nothing. This bounds the project's standing rule — statement order
+lands only when it changes the dependency graph or a barrier, never when it permutes independent work.
+
+**Second finding — expression SHAPE does move the schedule.** Splitting `s = g + (idx << 6);` into
+`s = g;` (leading statement) plus `s = s + (idx << 6);` moves the global load from 6th to 4th in an isolated
+probe. So the lever exists, and it is expression structure rather than statement order.
+
+**Third finding — and it does not transfer.** Applying exactly that change to `cm_ExProdObjekt`, whose reference
+has the global load **1st**, leaves the emitted order **unchanged** in the real 993-byte function (still 5th).
+Two earlier spellings at that site were also inert (§45). An isolated probe on a 3-line function cannot predict a
+993-byte function's order.
+
+**What this means for the goal.** It is possible — some source produced the reference's order, and this compiler
+produced it. What these measurements rule out is reaching it by permuting what we have: the order is decided by
+the *whole function's* DAG and register pressure, so local edits converge to the same canonical schedule. The
+remaining work is recovering the original expression structure per site, and the probe harness is the instrument
+for that search rather than for the answer.
+
+**Documented:** `msvc6-c-shapes.md` (the canonicalisation result and the transfer failure, with the full
+instruction dumps); `codegen-walls.md` §47 (the four backend mechanisms named and separated — instruction
+scheduling, constant CSE/rematerialisation, register allocation, block placement — with the evidence for each
+and what "the residual is the scheduler" did and did not mean).
+
+**Also this round:** six more negative probes across `cm_ExProdObjekt` (3), `srv_LoadBuf` (3, on top of ~200
+documented), `vfs_ReadCompressed` (1), `CrashDump` (1). The `postlink_residual.py` symbol pass is implemented but
+**defaults off**: it recovers 47 stale `.data` operands by linker-map symbol, and measures residue 8,628 → 8,629
+(net +1), so it is a correctness improvement, not a residue win — see the next entry.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`.

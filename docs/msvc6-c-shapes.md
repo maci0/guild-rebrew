@@ -7565,3 +7565,94 @@ those 11 bytes are recovered elsewhere"), which is 5 bytes short of what this ne
 
 Section 44's aliasing lever was tested on `cm_ExProdObjekt` and is a wall there, not a lever. See
 section 61a.
+
+## msvc6 canonicalises independent operations — the ORDER of two independent statements is inert (round 1105)
+
+This project's standing rule is "statement order is the only lever that has ever landed". Measuring directly
+against the compiler puts a boundary on it: **for two independent operations, source order is inert, and the
+emitted order is canonical.** Statement order lands only when it changes the *dependency graph or a barrier*,
+not when it permutes independent work.
+
+**Experiment** (`scripts/msvc6_probe.py`, `/O2 /Gd`, the project's own compiler):
+
+```c
+int g;
+int f(int* p) { int a = *p; int b = g; return a + b; }   /* variant 0 */
+int g;
+int f(int* p) { int b = g; int a = *p; return a + b; }   /* variant 1 — swapped */
+int g;
+int f(int* p) { int t = g; int a = *p; return a + t; }   /* variant 2 — renamed */
+```
+
+All three compile to **byte-identical objects**:
+
+```
+mov  eax, [esp + 4]
+mov  ecx, [g]
+mov  eax, [eax]
+add  eax, ecx
+ret
+```
+
+The compiler emits the argument load, then the global load, then the dereference — regardless of the order the
+two loads were written in. **A sweep over source order cannot reach a site the scheduler has canonicalised.**
+
+**What does drive it: the expression DAG's shape, not the statement sequence.** Moving the global read out of
+the expression into its own statement *does* change the schedule, in an isolated probe:
+
+```c
+char* g;
+int f(unsigned char* m) { unsigned idx; int lc; char* s;
+  idx = *(unsigned short*)(m + 0x14);
+  *(volatile int*)&lc = *(int*)(m + 0x16);
+  s = g + (idx << 6);                       /* one expression */
+  return (int)(s + idx); }
+```
+```
+mov  ecx, [esp + 4]
+xor  eax, eax
+mov  ax,  [ecx + 0x14]
+mov  ecx, [ecx + 0x16]
+mov  [esp + 4], ecx
+mov  ecx, [g]              <-- the global load, 6th
+mov  edx, eax
+shl  edx, 6
+add  ecx, edx
+add  eax, ecx
+```
+
+Against the same code with `s = g;` as its own leading statement and `s = s + (idx << 6);` later, which moves the
+global load to **4th**:
+
+```
+mov  ecx, [esp + 4]
+mov  eax, [ecx + 0x16]
+mov  [esp + 4], eax
+mov  edx, [g]              <-- 4th
+xor  eax, eax
+mov  ax,  [ecx + 0x14]
+mov  ecx, eax
+shl  ecx, 6
+add  edx, ecx
+add  eax, edx
+```
+
+So the lever exists, but it is **expression structure**, and it is weak.
+
+**And it does not transfer to a large function.** Applying exactly that change to `cm_ExProdObjekt`
+(`recipe_shift = g_item_def_table;` as a leading statement, then `recipe_shift = recipe_shift + (recipe_idx << 6);`
+after the `msg` loads) leaves the emitted order **unchanged** in the real 993-byte function: the global load stays
+5th where the reference has it 1st. Two other spellings at that site are also inert (rounds 1103-1105).
+
+**The rule this yields.** msvc6's schedule is a function of the **whole function's** DAG and register pressure.
+Two independent operations have no ordering in the DAG, so the compiler fixes one — and once a function has more
+than a handful of live values, that fixed order is decided by global pressure rather than by anything local. A
+probe on a 3-line function therefore cannot predict a 993-byte function's order, and local respelling cannot
+steer it. **Matching the reference's order means matching the whole function's DAG** — which is a source-recovery
+problem, not a spelling problem.
+
+**Consequence for the "it must be possible" argument.** It is possible: the reference came out of this compiler
+from *some* source, and that source's DAG produced this order. What the measurements rule out is reaching it by
+permuting what we have. The remaining work is recovering the original expression structure at each differing
+site, and `scripts/msvc6_probe.py` is the instrument for that: it compiles a snippet with the project's compiler
+and dumps the instructions, so a candidate shape can be tested in isolation before it is applied.

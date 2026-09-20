@@ -2437,3 +2437,33 @@ never going to be one. Fixing the schedule class would leave 75% of the differen
 leave 79%. The residue is the aggregate of three backend passes disagreeing at a few hundred sites each, which
 is why every per-carrier probe this project has run (hundreds of them, documented across these docs) moved a
 carrier by a few bytes at most or cost more than it recovered.
+
+### 47. The four backend mechanisms, named and separated (round 1105)
+
+Earlier rounds used "the scheduler" as a catch-all. It hides four distinct passes, and they differ in whether
+source can reach them. Naming them separately is what makes the attribution table in §46 readable.
+
+| mechanism | what it decides | evidence it exists | reachable from source? |
+|---|---|---|---|
+| **instruction scheduling** | the order of instructions with no dependency between them, within one basic block | `cm_ExProdObjekt`: both streams hold the same instructions in one basic block — the nearest branch is `ret` before and `je` after — and only the order differs | weakly: expression *shape* moves it, statement order does not (shapes, round 1105) |
+| **constant CSE / rematerialisation** | whether a constant gets a register or is re-materialised at each use | `CrashDump`: reference `push 0` × 49 / `push edi` × 3; ours × 18 / × 37. Note the reference emits the *larger* encoding (`push 0` is 2 bytes, `push edi` 1) | no known lever; a constant has no definition site to sink (shapes §85) |
+| **register allocation** | which register each value gets | `gm_ObjectsAvailble`: 79% of its differences are register-only — same mnemonic, same operand shape, different register | only through liveness, and ~120 declaration permutations measured inert there |
+| **block placement / tail merging** | how many copies of an epilogue exist and which branch reaches which | `cm_ExCopyEntityData`: reference materialises the same epilogue 3 times, ours 2, with ours branching forward to a shared copy where the reference falls through | no: a CFG-layout consequence, not a knob |
+
+**Why the distinction matters.** Each fails differently. A scheduling difference is a permutation of the same
+instructions; an allocation difference swaps registers; a CSE difference changes an encoding's *length*; a block
+difference changes the *number* of instructions. Fixing one leaves the others, which is why no single lever has
+ever moved more than a few bytes:
+
+- fixing scheduling alone would leave ~75% of the attributed difference (§46)
+- fixing allocation alone would leave ~79%
+
+**What "the residual is the scheduler" actually meant.** It meant "a pass after the front end, working on a
+representation that does not preserve my statement order" — which is true of scheduling and block placement, and
+false of CSE (value numbering) and allocation. The corrected statement is in §46: the difference splits roughly
+evenly across scheduling, allocation and immediate/displacement, so no one pass owns it.
+
+**The instrument.** `scripts/msvc6_probe.py` compiles a snippet with the project's own compiler and dumps the
+resulting instructions, so a claim about any of these four can be tested against the compiler instead of argued.
+What it showed on first use is in `msvc6-c-shapes.md` (round 1105): independent operations are canonicalised, so
+their source order is inert, and an isolated probe cannot predict a large function's order.
