@@ -63,6 +63,15 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1142 (GOLDTL): vfs_ReadData name[0x10c] probe reverted. TL holds.**
+
+- **Tried:** TL `vfs_ReadData` frame gap (target `sub esp,0x318` vs ours `0x30c`,
+  12 bytes). Probed `name[0x100]` -> `name[0x10c]`: 32 -> 33 matched, obj 446.
+  The 12 bytes are not buffer length — reverted, file byte-identical to round
+  start. (Frame-slot map from the reference: string buffer at `[ebp-0x118]`.)
+- **Gate:** reverted; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1141 stack.
 **Round-1141 (GOLDTL): vfs_ReadCompressed guard-first reorder tried, reverted. TL holds.**
 
 - **Tried:** TL `vfs_ReadCompressed` (144/499) — the reference tests `handle` before
