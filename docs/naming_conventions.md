@@ -187,6 +187,9 @@ compiled directly into it or loaded from a separate DLL not captured here.
   - `gz_stream` (0x64, round 1104): `Units/vfs/vfs_c/check_header.c` and
     `Units/vfs/vfs_c/gzread.c` byte-identical zlib-gzio copies -> header
     `Units/vfs/gz_stream.h` next to its users.
+  - round 1105-1106 collapsed the last two 0x43-byte node spellings
+    (`EntitySlot` in `gm_FreeObjectListRecursive.c`, anonymous `Record` in
+    `spiel.c`) onto the lifted `LinkedNode`; one layout, one name.
 - German nouns for gameplay concepts: `spiel` (game), `aemter` (offices),
   `friedhof` (graveyard)
 - English for technical/infrastructure: `server`, `lobbycommands`, `loadsave`

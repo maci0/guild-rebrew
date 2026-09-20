@@ -63,6 +63,18 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1106 (data pass): spiel.c's anonymous 0x43 node spells LinkedNode. Link +0.**
+
+- **Tried:** `game/spiel.c` carried a fourth 0x43-byte copy as an anonymous
+  `Record` (`active/id/pad[0x3d]`) used only by `gm_FindRecordById` (reads
+  the two head fields). Swapped to `#include "game_structs.h"` +
+  `#define Record LinkedNode`, fields renamed to `type`/`entity_id`.
+  The `#define` keeps `Record* __cdecl gm_FindRecordById` — the prototype
+  name — intact; renaming the FUNCTION would need `rebrew rename` and has
+  no string evidence.
+- **Measured:** linktest: 8,628 -> 8,628 **(+0)**; all 5 functions in the TU
+  stay RELOC; lint 0/0; gate green.
+- **Keep:** Round-1105 stack.
 **Round-1105 (data pass): gm_FreeObjectListRecursive now spells LinkedNode. Link +0.**
 
 - **Tried:** the third 0x43-byte node spelling, `EntitySlot`

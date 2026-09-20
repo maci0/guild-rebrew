@@ -12,14 +12,11 @@
 
 #pragma intrinsic(memcpy, memset)
 
-#pragma pack(push, 1)
-// SIZE 0x43
-typedef struct {
-	short active;
-	int id;
-	char pad[0x3d];
-} Record;
-#pragma pack(pop)
+/* 0x43-byte node; same layout as LinkedNode in game_structs.h (the remove
+ * helpers and gm_FreeObjectListRecursive spell it). This TU only reads the
+ * two head fields, so it uses LinkedNode directly. */
+#include "game_structs.h"
+#define Record LinkedNode
 
 extern int g_query_limit;
 void __cdecl m_FreeTracked(void*);
@@ -132,7 +129,7 @@ Record* __cdecl gm_FindRecordById(int id)
 	i = 0;
 	entity_cursor = (Record*) g_query_base;
 	while (i < 0x5008) {
-		if (entity_cursor->active != 0 && entity_cursor->id == id) {
+		if (entity_cursor->type != 0 && entity_cursor->entity_id == id) {
 			return (Record*) ((char*) g_query_base + i * 0x43);
 		}
 		i++;
