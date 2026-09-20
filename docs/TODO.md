@@ -63,6 +63,13 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1111 (data pass): hygiene re-run. No source change.**
+
+- **Tried:** lint + residue + whole-binary invariants after the upstream ideas commits.
+  Lint 188/188, residue **8,628** with 100% of differing bytes inside the 19 carriers
+  and 0x0 outside — the attribution invariant held.
+- **Gate:** pass; verify 281/283, byte-matched 264, raw `.data` 21,481, imports 100.
+- **Keep:** Round-1110 stack.
 **Round-1110 (data pass): both carriers re-triaged to their recorded walls; prove-harness idea filed. No source change.**
 
 - **Tried:** re-read both improve-match carriers' full status notes before touching anything.
