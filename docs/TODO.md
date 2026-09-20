@@ -63,6 +63,23 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1132 (GOLD intake): batch 2 — 10 more, 9 matched (3 EXACT), 1 walled. Coverage 0.3%.**
+
+- **Tried:** skeleton batch of the next 10 smallest. Seven trivial bodies matched
+  first try (counter-inc store, +0x40 store, two 0/1 flag setters, zero setter,
+  +0x200 reader, -1 setter: 2 EXACT + 5 RELOC). Two thin wrappers matched
+  (`fcn_00468780` needed its arg in the second slot — the first-slot `int value`
+  read `[esp+4]` vs target `[esp+8]`; fixed by `(dummy, value)` signature).
+- **EXACT:** the IAT forwarder `fcn_00410430` (`mov/push/call [0x005eb008]/ret`)
+  matched via a `__stdcall` function-pointer typedef — no caller cleanup, which
+  also documents that IAT slot as stdcall for future client reversals.
+- **Walled:** `fcn_005df7d1` — reference is single-insn `push dword [esp+4]`;
+  prototyped, unprototyped, and address-arithmetic spellings all emit
+  `mov eax,[esp+4]; push eax`. Needs the callee body visible in-TU; parked with
+  an in-file comment until `fcn_005df746` is reversed alongside.
+- **Measured:** GOLD lint 0/0; coverage 0.1 -> 0.3% (3 EXACT + 11 RELOC + 1 walled).
+  Server gate green (verify 281/283, residue 8,628).
+- **Keep:** Round-1131 stack.
 **Round-1131 (GOLD intake): Lua hits confirmed out-of-scope for shared tree. No source change.**
 
 - **Tried:** checked whether the 2 Lua FLIRT hits (`_expr` 0x00462c40, `_getupvalue`

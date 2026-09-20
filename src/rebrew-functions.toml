@@ -2030,3 +2030,60 @@ size = 10
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-20T15:14:56+00:00"
+
+["GOLD.0x0042b710"]
+size = 11
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:41:32+00:00"
+
+["GOLD.0x004ceb70"]
+size = 11
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:41:29+00:00"
+
+["GOLD.0x0052ef00"]
+size = 11
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:41:27+00:00"
+
+["GOLD.0x005762e0"]
+size = 11
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:41:25+00:00"
+
+["GOLD.0x005762f0"]
+size = 11
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:41:23+00:00"
+
+["GOLD.0x005df7d1"]
+size = 11
+
+["GOLD.0x00410430"]
+size = 12
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:43:44+00:00"
+
+["GOLD.0x00417e00"]
+size = 12
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:41:21+00:00"
+
+["GOLD.0x00468780"]
+size = 12
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:42:20+00:00"
+
+["GOLD.0x004c3b30"]
+size = 12
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:41:19+00:00"
