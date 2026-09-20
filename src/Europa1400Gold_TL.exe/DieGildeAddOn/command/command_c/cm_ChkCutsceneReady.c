@@ -40,16 +40,17 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern char s_cm_ChkCutsceneReady____failed____1002caa8[];
-
-/* Validation handler: checks if up to 16 entities referenced
- * by IDs in the command payload are all in cutscene-ready state
- * (entity type 0x06 or 0x07). Returns 0 when all are ready,
- * 1 if any entity is missing or not ready. */
+/* NOTE (round 1138): the GOLDTL 0x4f6520 bytes are NOT ChkCutsceneReady's body —
+ * the import carried the server twin verbatim. The real body is a table-scan
+ * counter: validate arg `b` via fcn_00508e40, index table 0x7f4ca0 by
+ * (a & 0xffff)*540, walk rows [0x99f804, 0x9a3804) matching [row-4] against
+ * [base+4], call fcn_004f5810 per hit, count while [eax*0x2d+0x9a3816]==b
+ * (cap 0x20). Misattribution documented; real name pending string evidence.
+ * Kept filename until the true owner is attested. */
 
 // FUNCTION: GOLDTL 0x4f6520
 // SIZE: 128
-// cm_ChkCutsceneReady
+// BLOCKER: misattributed import — real body is a table-scan counter, needs rewrite from asm
 int __cdecl cm_ChkCutsceneReady(char* obj)
 {
 	int entity_ptr;

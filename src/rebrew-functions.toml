@@ -1963,6 +1963,9 @@ cflags = "/O2 /Gd /G6 /Oy- /I/home/maci/Desktop/Projects/relumea/guild-rebrew/sr
 ["GOLDTL.0x004ec850"]
 size = 80
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/alchemistry_logic_c"
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-20T16:04:58+00:00"
 
 ["GOLDTL.0x004959f0"]
 size = 32
@@ -1985,9 +1988,14 @@ cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.
 
 ["GOLDTL.0x004cc490"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+size = 44
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T16:02:31+00:00"
 
 ["GOLDTL.0x004f6520"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+size = 128
 
 ["GOLDTL.0x005027d0"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"

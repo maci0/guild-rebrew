@@ -27,21 +27,25 @@
 
 #include "../command_internal.h"
 
-/* Validation handler: looks up an entity by ID from offset 0x10
- * of the command. Returns 1 (fail) if no entity found, 0 on
- * success. Clears param_2[1] if result buffer is non-null. */
+/* Validation handler (TL build): looks up an entity by ID from offset 0x10.
+ * Differs from the server twin: the lookup runs FIRST, and on a null result
+ * buffer the function returns 0 without touching anything. With a buffer it
+ * clears result[1] and result[6..9] to 0 and writes result[0] = found ? 1 : 2.
+ * Per-build body under the shared name; the server twin keeps its own. */
 
 // FUNCTION: GOLDTL 0x4cc490
 // SIZE: 44
+int __cdecl gm_LookupEntityRecordById(char* idPtr);
+
 int __cdecl cm_ChkEntityLookup(int cmd, char* result)
 {
 	int found;
 
+	found = gm_LookupEntityRecordById((char*) cmd + 0x10);
 	if (result != (char*) 0x0) {
-		*result = '\x02';
 		result[1] = '\0';
+		*result = (char) ((found == 0) + 1);
 		*(int*) (result + 6) = 0;
 	}
-	found = gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
-	return (unsigned int) (found == 0);
+	return 0;
 }

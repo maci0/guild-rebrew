@@ -63,6 +63,20 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1138 (GOLDTL): cm_ChkEntityLookup RELOC; import misattribution caught. TL 35%.**
+
+- **Tried:** `cm_ChkEntityLookup` TL twin decoded honestly: the TL build passes the
+  `cmd+0x10` address (not the deref), computes `result[0] = (found==0)+1` branchless
+  via `sete/inc`, and returns the stored byte. Two iterations (scaled-arithmetic
+  fix, address-vs-deref, branchless tail) → RELOC 44/44. The honest-return
+  restructure (`return *result`) cost +4 linked and was reverted — bytes rule.
+- **Caught:** TL `cm_ChkCutsceneReady.c` is a verbatim server-twin import but the
+  TL bytes are a table-scan counter (0x7f4ca0 index, [0x99f804,0x9a3804) row walk,
+  0x20 cap). Misattribution documented with BLOCKER + decoded shape; real name
+  pending string evidence, file kept until attested.
+- **Measured:** TL 32.5 -> 35.0% matched (5 EXACT + 9 RELOC). Server gate green
+  (verify 281/283, residue 8,628).
+- **Keep:** Round-1137 stack.
 **Round-1137 (GOLDTL): first shared-name/divergent-body case — cm_MarkAndReturn EXACT. TL 32.5%.**
 
 - **Tried:** `cm_MarkAndReturn` (TL 0x004959f0, 23B) vs the server twin (14B):

@@ -8,38 +8,28 @@
  * clears the link list head, marks the terminal link as -1 and bumps the
  * link counter. */
 
+/* The GOLDTL 0x4ec850 bytes are this CheckFlag body (NEAR 59/70: the
+ * `pop esi` placement around the 0x1e branch is a layout decision — two
+ * spellings emit identical bytes) (flag test at +0x1cc,
+ * chain at +0x16c, type-table walk, +0x65 pointer test) — not the server
+ * ResetEntityState shape. Shared file, per-build marker: only CheckFlag
+ * carries GOLDTL here. */
+
 // FUNCTION: GOLDTL 0x4ec850
 // SIZE: 80
-
-
-void __cdecl ahm_ResetEntityState(void* a)
-{
-	if (*(unsigned char*) ((char*) a + 2) == 1 ||
-	    *(unsigned char*) ((char*) a + 2) == 2) {
-		if (*(unsigned char*) ((char*) a + 0x164) != 0) {
-			memset((char*) a + 0x1b4, 0, 0x10);
-			*(int*) ((char*) a + 0x1c0) = -1;
-			*(int*) ((char*) a + 0x1b4) |= 1;
-		}
-	}
-}
-
-/* Checks the flag state of an alchemy entity's linked record.  Returns
- * non-zero when the entity type table marks it as an alchemy building
- * (0x1e) and the record carries an allocated data pointer. */
-
-
-
 int __cdecl ahm_CheckFlag(void* a)
 {
 	char* rec;
+	unsigned char type;
 
 	if (*(int*) ((char*) a + 0x1cc) & 4) {
 		rec = *(char**) ((char*) a + 0x16c);
 		if (rec != 0) {
-			if (*(unsigned char*) (g_entity_type_table +
-			    *(unsigned char*) rec + *(unsigned char*) rec * 0x24c) == 0x1e)
+			type = *(unsigned char*) (g_entity_type_table +
+			    *(unsigned char*) rec + *(unsigned char*) rec * 0x24c);
+			if (type == 0x1e) {
 				return *(int*) (rec + 0x65) != 0;
+			}
 		}
 	}
 	return 0;

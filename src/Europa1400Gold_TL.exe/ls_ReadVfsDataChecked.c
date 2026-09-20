@@ -1,4 +1,6 @@
-/* ls_ReadVfsDataChecked — wrapper around vfs_ReadData, nonzero on success. */
+/* ls_ReadVfsDataChecked — wrapper around vfs_ReadData, nonzero on success.
+ * Identical body to the server twin; the single residual (call rel32 at +21)
+ * is an unmasked reloc slot (callee 0x4306b0 not in catalog), not a byte miss. */
 
 // FUNCTION: GOLDTL 0x5218f0
 // SIZE: 37
