@@ -184,6 +184,9 @@ compiled directly into it or loaded from a separate DLL not captured here.
   - `OFFICE_SLOT` (0x18, round 1103): `game/aemter.c` (`a/b/c/type/d`) and
     `game/aemter_c/amt_fio_LoadAemter.c` (read-order names). The latter's
     names kept. Neither list is attested by a string; both descriptive.
+  - `gz_stream` (0x64, round 1104): `Units/vfs/vfs_c/check_header.c` and
+    `Units/vfs/vfs_c/gzread.c` byte-identical zlib-gzio copies -> header
+    `Units/vfs/gz_stream.h` next to its users.
 - German nouns for gameplay concepts: `spiel` (game), `aemter` (offices),
   `friedhof` (graveyard)
 - English for technical/infrastructure: `server`, `lobbycommands`, `loadsave`

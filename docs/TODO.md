@@ -63,6 +63,17 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1104 (data pass): lifted gz_stream into Units/vfs/gz_stream.h. Link +0.**
+
+- **Tried:** `Units/vfs/vfs_c/check_header.c` and `Units/vfs/vfs_c/gzread.c`
+  carried byte-identical `typedef struct gz_stream` copies (zlib 1.1.3 gzio
+  internals, tree-stage split). Lifted to a new header
+  `Units/vfs/gz_stream.h` next to its two users; the SIZE-note carried over.
+- **Measured:** linktest both TUs: `.text` 8,628 -> 8,628 **(+0)**. Gate green;
+  verify 281/283, byte-matched 264, residue 8,628, raw `.data` 21,481,
+  imports 100, wine OK. Naming doc's "lifts on record" list updated
+  (round-1103 note extended with `gz_stream`).
+- **Keep:** Round-1103 stack.
 **Round-1103 (data pass): lifted the two duplicate domain types into game_structs.h. Link +0.**
 
 - **Tried:** two domain layouts were spelled twice with DIVERGING field names:

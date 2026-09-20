@@ -18,6 +18,7 @@
 #include <stdio.h>
 
 #include "zutil.h"
+#include "../gz_stream.h"
 
 /* SIZE 0x4 */
 // SIZE 0x4
@@ -32,21 +33,6 @@ struct internal_state {int dummy;}; /* for buggy compilers */
 #endif
 
 // SIZE 0x64 (sizeof gz_stream on 32-bit: z_stream 0x38 + 9 ptr/int + mode + startpos; verified with i686-mingw probe)
-typedef struct gz_stream {
-    z_stream stream;
-    int      z_err;   /* error code for last stream operation */
-    int      z_eof;   /* set if end of input file */
-    FILE     *file;   /* .gz file */
-    Byte     *inbuf;  /* input buffer */
-    Byte     *outbuf; /* output buffer */
-    uLong    crc;     /* crc32 of uncompressed data */
-    char     *msg;    /* error message */
-    char     *path;   /* path name for debugging only */
-    int      transparent; /* 1 if input file is not a .gz file */
-    char     mode;    /* 'w' or 'r' */
-    long     startpos; /* start of compressed data in file (header skipped) */
-} gz_stream;
-
 /* The reference's gzread calls the shared header checker (0x100036d0) and
  * the shared 32-bit big-endian reader (0x10003c50). */
 void check_header(gz_stream *s);
