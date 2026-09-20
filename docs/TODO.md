@@ -63,6 +63,18 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1115 (data pass): re-read the two cosmetic type conflicts, confirmed benign. No source change.**
+
+- **Tried:** re-examined the two remaining `rebrew data` conflicts not already documented
+  as deliberate. `s_ahm_AllocAhmInfo_1002a0f8`: definition `char[]` with initializer
+  (alchemistry_logic2.c:251) against `extern char[]` (ahm_ExAllocAlchemist.c:26) — the
+  `char` vs `char[]` listing is the parser's unsized-vs-inferred distinction, same layout,
+  no emit difference. `g_crashdump_data_10027104`: both sides declare `char[568]`,
+  conflict is metadata `char[]` vs sized — cosmetic. Touching either spelling buys
+  COMDAT churn with zero signal, so both stay.
+- **Gate:** pass; verify 281/283, byte-matched 264, residue 8,628, raw `.data` 21,481,
+  imports 100, wine OK.
+- **Keep:** Round-1114 stack.
 **Round-1114 (data pass): state reconciliation. No source change.**
 
 - **Tried:** cross-checked both checkouts against the session log. guild-rebrew is clean
