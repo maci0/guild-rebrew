@@ -2813,3 +2813,21 @@ produces statuses that are wrong and persistent. Recovery: `git checkout src/reb
 (`5a 00 01 00 53 61 76 65 67 61 6d 65`): reference holds them at `0x2d4f0`, raw link holds them identical at
 `0x2db30`; same content, different VA. `g_dispatch_table` is zeros in the raw link because `data_restore`/
 postlink supplies it. Nothing was content-drift.
+
+## 57. A relative include deeper than the tool's staging depth compiles unpacked — silently (round 1103)
+
+`#include "../../../game_structs.h"` from `spiel_c/` is correct in the plain CMake build (`flags.make`
+bind-mounts the tree at the same path, so the depth resolves exactly as on the host). Under `rebrew
+test`/`rebrew diff`, the source is staged flat in a temp workdir; the depth-3 quoted include no longer
+reaches the tree and the same bare-name include does — but the depth-3 spelling compiled anyway, because
+the runner adds `src_parent` and the include dir as `/I` paths, and one of those resolutions (measured:
+`target 0x3f got 0x41`, `8b7641` vs `8b763f`) returned a DIFFERENT body — pointer slots shifted +2 as if
+`#pragma pack(1)` was absent — with `0 structural diffs` nowhere, a RELOC → NEAR_MATCHING demotion, and no
+`error C####` anywhere in the log.
+
+**The rule.** Project headers included from deep source files must be spelled as bare quoted names
+(`#include "game_structs.h"`), resolved via `-I src/server.dll` — the one spelling that is correct in the
+CMake build, the flat workdir, and the remote recompile service. A depth-2 `../../include` spelling in
+files at `game/` depth works today only because the staging depth happens to match; do not copy it deeper.
+**Cross-check after any include-spelling change to a reversed TU:** `rebrew diff` must read `0 structural,
+0 register`; a `target<R got got<R+2` pointer-slot pattern is the unpacked tell.
