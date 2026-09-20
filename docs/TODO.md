@@ -63,6 +63,14 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1127 (data pass): placeholder-identifier sweep — zero survivors. No source change.**
+
+- **Tried:** grepped the tree for placeholder vocabulary (`_4i`, `field_0x*`, `_2s`,
+  `_1c` outside comments/annotations): **zero hits**. The brief's "no placeholders
+  surviving past first pass" criterion is met tree-wide as of this round.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1126 stack.
 **Round-1126 (data pass): todo categories + raw-link writeback reconfirmed. No source change.**
 
 - **Tried:** `rebrew todo --json`: only the 2 walled improve-match items, zero
