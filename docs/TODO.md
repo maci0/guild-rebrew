@@ -63,6 +63,21 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1133 (GOLD intake): batch 3 — 10 more, 8 matched (1 EXACT), 2 walled. Coverage 0.5%.**
+
+- **Tried:** next 10 smallest. Matched first or second try: null-test/setne reader,
+  double-zero setter, imul-of-globals reader, +0x70 zero store, counter-inc twin,
+  and three thin forwarders (global-arg call, IAT-arg call, const-push call) —
+  1 EXACT + 7 RELOC.
+- **Walled (2):** `fcn_005e7cf1` — reference prologue `push edi; mov edi,[esp+8]`
+  + 3x `stosd`; plain stores, struct-assign, memset, and `*p++` loop all emit
+  different prologues. `fcn_005e19ef` — COM vtable-thunk needs eax live across
+  `add [eax],4` + two loads (13B); param-slot reload costs a second mov (17B)
+  under both spellings. Both parked with in-file comments.
+- **Measured:** GOLD lint 0/0 (fixed one SIZE annotation, 13 -> 12); coverage
+  0.3 -> 0.5% (4 EXACT + 18 RELOC). Server gate green (verify 281/283,
+  residue 8,628).
+- **Keep:** Round-1132 stack.
 **Round-1132 (GOLD intake): batch 2 — 10 more, 9 matched (3 EXACT), 1 walled. Coverage 0.3%.**
 
 - **Tried:** skeleton batch of the next 10 smallest. Seven trivial bodies matched
