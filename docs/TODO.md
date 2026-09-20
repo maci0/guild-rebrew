@@ -63,6 +63,22 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1110 (data pass): both carriers re-triaged to their recorded walls; prove-harness idea filed. No source change.**
+
+- **Tried:** re-read both improve-match carriers' full status notes before touching anything.
+  - `ServerMainThread` (359 B): 13 register + 51 structural, with the two cold blocks already
+    at the reference's gaps (round-177 retraction). Statement order exhausted; layout lever
+    nonexistent in C89; the only named path to PROVEN is import-thunk stubbing in prove.py.
+  - `gm_AllocSpieler` (2685 B): 132 distributed schedule steps, no cliff; the one bankable
+    11-byte single-load edit is documented as bankable only once the citizen path recovers
+    those bytes elsewhere. Both rulers' levers retired.
+- **Filed (rebrew checkout):** the import-thunk-stubbing pain as an IDEAS-GUILD entry —
+  `prove` should seed import thunks with unconstrained stubs so call-bearing functions can
+  reach terminal states; evidence = the control case (call-free 123B proves in seconds,
+  162B single-call fails identically to the 2434B carrier).
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**, raw
+  `.data` 21,481, imports 100, wine load OK — all baselines held.
+- **Keep:** Round-1109 stack.
 **Round-1109 (data pass): second ObjektNr2 spelling probed and reverted — the wall is the ACCESS FORM, not the name.**
 
 - **Tried:** the round-1108 revert left the attested name `gm_objekt_nr2_minimal_hersteller`
