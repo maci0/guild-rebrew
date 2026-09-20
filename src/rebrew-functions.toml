@@ -1967,6 +1967,9 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/gui
 ["GOLDTL.0x004959f0"]
 size = 32
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:58:06+00:00"
 
 ["GOLDTL.0x00430580"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"

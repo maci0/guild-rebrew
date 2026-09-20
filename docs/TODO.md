@@ -63,6 +63,16 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1137 (GOLDTL): first shared-name/divergent-body case — cm_MarkAndReturn EXACT. TL 32.5%.**
+
+- **Tried:** `cm_MarkAndReturn` (TL 0x004959f0, 23B) vs the server twin (14B):
+  the client build passes an extra arg and tests both (`if (a) return 0;
+  return b == 0`). Same name, per-build body, per-build marker — the goal's
+  shared-tree case working as designed. EXACT 23/23 on first spelling.
+- **Measured:** TL batch test: 5 EXACT + 8 RELOC of 40 covered (32.5% matched);
+  lint 0 errors (6 warnings: 5 pre-existing CFLAGS drift + 1 new). Server gate
+  green (verify 281/283, residue 8,628).
+- **Keep:** Round-1136 stack.
 **Round-1136 (GOLDTL): ten 16-byte stubs — 9 matched (4 EXACT), 1 walled. TL 30% matched.**
 
 - **Tried:** the ten smallest TL improve-match items. Three +0xc84 const stores
