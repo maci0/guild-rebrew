@@ -28,41 +28,57 @@ int __cdecl vfs_FlushAndClose(int);
 
 int __cdecl vfs_ReadCompressed(int, int, unsigned int);
 
-/* Reads a single byte from a VFS stream. Advances the read
- * position and returns the byte value, or error on EOF. */
+/* TL-side stream dispatcher. Shared name with the server twin
+ * (SERVER vfs_GetByte), per-build body: null->-2 guard, callback slots,
+ * 'w'/'r' mode dispatch, tag check, final notify; returns edi.
+ * 82/177: head 0..41 byte-exact; residual is downstream branch fallout. */
 
 // FUNCTION: GOLDTL 0x45f2c0
 // SIZE: 192
 // vfs_GetByte
 
-unsigned int __cdecl vfs_GetByte(int* stream)
-{
-	int* errno_ptr;
-	int bytes_read;
+void __cdecl fcn_0064dfda(void* p);
+int __cdecl fcn_0045df20(int* stream);
+int __cdecl fcn_00461560(int* stream);
+int __cdecl fcn_0064e1fd(void* p);
+int __cdecl fcn_0064d6f8(void);
 
-	if (stream[0xf] != 0) {
-		return (unsigned int) -1;
+int __cdecl vfs_GetByte(int* stream)
+{
+	int result;
+
+	result = 0;
+	if (stream == 0) {
+		return -2;
 	}
-	if (stream[1] == 0) {
-		errno_ptr = _errno();
-		*errno_ptr = 0;
-		bytes_read = (int) fread((void*) stream[0x11], 1, 0x4000, (FILE*) stream[0x10]);
-		stream[1] = bytes_read;
-		if (bytes_read == 0) {
-			stream[0xf] = 1;
-			if ((*(unsigned char*) (stream[0x10] + 0xc) & 0x20) != 0) {
-				stream[0xe] = -1;
-			}
-			return (unsigned int) -1;
+	if (stream[0x14] != 0) {
+		fcn_0064dfda((void*) stream[0x14]);
+	}
+	if (stream[7] != 0) {
+		if (*(unsigned char*) ((char*) stream + 0x5c) == 0x77) {
+			fcn_0045df20(stream);
 		}
-		stream[0] = stream[0x11];
+		else if (*(unsigned char*) ((char*) stream + 0x5c) == 0x72) {
+			result = fcn_00461560(stream);
+		}
 	}
-	/* The read cursor is post-incremented in place through a pointer alias
-	 * of stream[0]. Copying it into a local first makes MSVC6 hold the
-	 * cursor in ecx and zero-extend the byte into eax, which loses the
-	 * target's reuse of eax for both the count temp and the cursor. */
-	stream[1] = stream[1] - 1;
-	return *(*(unsigned char**) &stream[0])++;
+	if (stream[0x10] != 0) {
+		fcn_0064e1fd((void*) stream[0x10]);
+		if (fcn_0064d6f8() != 0x1d) {
+			result = -1;
+		}
+	}
+	if (stream[0xe] != 0) {
+		fcn_0064dfda((void*) stream[0xe]);
+	}
+	if (stream[0x12] != 0) {
+		fcn_0064dfda((void*) stream[0x12]);
+	}
+	if (stream[0x15] != 0) {
+		fcn_0064dfda((void*) stream[0x15]);
+	}
+	fcn_0064dfda(stream);
+	return result;
 }
 
 /* Closes a VFS stream and releases associated resources.

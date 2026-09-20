@@ -63,6 +63,17 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1143 (GOLDTL): vfs_GetByte duplicate-VA resolved the shared-tree way. TL holds.**
+
+- **Tried:** TL `vfs_GetByte` (0x0045f2c0): my new `vfs_GetByte_TL.c` duplicated the
+  VA already claimed by the imported server-twin body in `Units/vfs/vfs.c`
+  (E013). Resolution per the shared-tree rule: deleted my file, replaced the
+  body under the existing marker with the decoded TL dispatcher shape (82/177,
+  head 0..41 exact). Same name, per-build body — the cm_MarkAndReturn precedent.
+  Lint error cleared.
+- **Measured:** TL 37.5% matched holds; server gate green (verify 281/283,
+  residue 8,628).
+- **Keep:** Round-1142 stack.
 **Round-1142 (GOLDTL): vfs_ReadData name[0x10c] probe reverted. TL holds.**
 
 - **Tried:** TL `vfs_ReadData` frame gap (target `sub esp,0x318` vs ours `0x30c`,
