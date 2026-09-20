@@ -63,6 +63,15 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1105 (data pass): gm_FreeObjectListRecursive now spells LinkedNode. Link +0.**
+
+- **Tried:** the third 0x43-byte node spelling, `EntitySlot`
+  (`active/id/child`) in `spiel_c/gm_FreeObjectListRecursive.c`, is the same
+  layout as the lifted LinkedNode — `child` at 0x14 is LinkedNode's
+  `children`. Swapped the TU to `#include "game_structs.h"` + LinkedNode
+  (trap §57 spelling).
+- **Measured:** linktest: 8,628 -> 8,628 **(+0)**; gate green.
+- **Keep:** Round-1104 stack.
 **Round-1104 (data pass): lifted gz_stream into Units/vfs/gz_stream.h. Link +0.**
 
 - **Tried:** `Units/vfs/vfs_c/check_header.c` and `Units/vfs/vfs_c/gzread.c`

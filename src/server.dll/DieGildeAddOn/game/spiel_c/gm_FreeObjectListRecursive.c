@@ -7,23 +7,16 @@
 
 #include <stdlib.h>
 
-#pragma pack(push, 1)
-// SIZE 0x43
-typedef struct EntitySlot {
-	short active;               /* 0x00 */
-	int id;                     /* 0x02 */
-	char pad[0x0e];             /* 0x06 */
-	void* child;                /* 0x14 */
-	char pad2[0x3f - 0x18];     /* 0x18 */
-	struct EntitySlot* next;    /* 0x3f */
-} EntitySlot;
-#pragma pack(pop)
+/* This 0x43-byte node is the LinkedNode layout of game_structs.h (the two
+ * remove helpers and this TU spell it; this copy had `active/id/child`).
+ * It is spelled here as LinkedNode directly. */
+#include "game_structs.h"
 
 void __cdecl gm_NoopRet2(void* node);
 
-int __cdecl gm_FreeObjectListRecursive(EntitySlot** head)
+int __cdecl gm_FreeObjectListRecursive(LinkedNode** head)
 {
-	EntitySlot* node;
+	LinkedNode* node;
 
 	if (head == NULL)
 		return 0;
@@ -32,8 +25,8 @@ int __cdecl gm_FreeObjectListRecursive(EntitySlot** head)
 		return -1;
 	do {
 		*head = node->next;
-		if (node->child != NULL)
-			gm_FreeObjectListRecursive((EntitySlot**) &node->child);
+		if (node->children != NULL)
+			gm_FreeObjectListRecursive((LinkedNode**) &node->children);
 		gm_NoopRet2(node);
 		node = *head;
 	} while (node != NULL);
