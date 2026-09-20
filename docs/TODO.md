@@ -63,6 +63,16 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1119 (data pass): Sbh* CRT-region dupes checked — lift NOT applicable. No source change.**
+
+- **Tried:** the five `Sbh*` typedefs are defined twice each, in `crt_region/sbh_globals.c`
+  and `crt_region/sbh_pool.c` — apparent duplicates. They are CRT heap internals
+  (`winheap.h` vocabulary), not game-domain layouts, and the brief's no-reverse-CRT
+  rule plus the existing homes (`rebrew_types.h` OldSbh* family) already cover the
+  vocabulary. Lifting game-style would violate the CRT-vs-game boundary the tree keeps.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1118 stack.
 **Round-1118 (data pass): .data ORDER violations re-counted (11 + 1 SPAN), triage stands. No source change.**
 
 - **Tried:** `rebrew data --layout-audit --section .data` now reports 12 flags
