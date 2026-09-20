@@ -1,6 +1,12 @@
 /* Initializes the log/error handler: stores the module/severity
  * settings, installs the crash-dump filter, resolves the log file
- * directory, and installs per-level log file handles. */
+ * directory, and installs per-level log file handles.
+ * TL import carried server VAs throughout; re-derived from TL disasm
+ * (round 1140): filter 0x41cbc0, IAT slots 0x6622d4/0x6620c0/0x662088/
+ * 0x66205c, tables 0x677948->0x677ac8 and 0x677918->0x677948, fmts
+ * 0x677cc8/0x677adc/0x677ca8/0x677ad8. NEAR 397/404: the >0x10000 reopen
+ * branch differs structurally (TL: fclose+sprintf+f(0x677ca8,count)+fclose;
+ * server twin: fclose+fopen+fputs) — rare path, parked. */
 
 // FUNCTION: GOLDTL 0x41d6b0
 // SIZE: 404
@@ -13,7 +19,7 @@
 
 extern int g_panic_callback;
 extern void* g_crash_callback;
-extern unsigned int g_log_mode_flags; /* 0x10034618 */
+extern unsigned int g_log_mode_flags; /* TL image: re-derive VA from TL disasm, not 0x10034618 */
 extern char g_crash_dump_all_frames;
 extern int g_owner_window;
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
@@ -39,36 +45,36 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 	g_crash_callback = b;
 	g_owner_window = c;
 	g_crash_dump_all_frames = (d >> 4) & 1;
-	SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER) 0x10002770);
+	SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER) 0x0041cbc0);
 	now = time(0);
 	GetWindowTextA((HWND) c, path, 0x100);
-	((void (__stdcall*)(int, const char*, int)) *(void**) 0x1002403c)(0, (const char*) 0x11766100, 0x104);
-	*strrchr((char*) 0x11766100, 0x5c) = 0;
-	sprintf((char*) 0x117640e0, (char*) 0x1002735c, path, ctime((long*) &now));
+	((void (__stdcall*)(int, const char*, int)) *(void**) 0x006620c0)(0, (const char*) 0x14ce620, 0x104);
+	*strrchr((char*) 0x14ce620, 0x5c) = 0;
+	sprintf((char*) 0x14cc600, (char*) 0x677cc8, path, ctime((long*) &now));
 	if (g_log_mode_flags & 1) {
-		string_cursor = (char*) 0x10027084;
+		string_cursor = (char*) 0x677948;
 		do {
-			sprintf(buf, (char*) 0x100270fc, (char*) 0x11766100, string_cursor);
+			sprintf(buf, (char*) 0x677ca8, (char*) 0x14ce620, string_cursor);
 			file = fopen(buf, "at");
 			if (file != 0) {
 				fseek(file, 0, 2);
 				if (ftell(file) > 0x10000) {
 					fclose(file);
 					file = fopen(buf, "wt");
-					fputs((char*) 0x1002733c, file);
+					fputs((char*) 0x677ad8, file);
 				}
 				fclose(file);
 			}
 			string_cursor += 0x20;
-		} while ((int) string_cursor < 0x100270e4);
+		} while ((int) string_cursor < 0x677ac8);
 	}
 	if (g_log_mode_flags & 8) {
-		((void (__stdcall*)(void)) *(void**) 0x10024048)();
-		g_log_file_handle = ((int (__stdcall*)(int)) *(void**) 0x10024044)(-0xb);
+		((void (__stdcall*)(void)) *(void**) 0x006622d4)();
+		g_log_file_handle = ((int (__stdcall*)(int)) *(void**) 0x00662088)(-0xb);
 	}
-	string_cursor = (char*) 0x10027078;
+	string_cursor = (char*) 0x677918;
 	do {
-		DispatchLogOutput((char*) 0x117640e0, g_log_mode_flags, *(int*) string_cursor);
+		DispatchLogOutput((char*) 0x14cc600, g_log_mode_flags, *(int*) string_cursor);
 		string_cursor += 4;
-	} while ((int) string_cursor < 0x10027084);
+	} while ((int) string_cursor < 0x677948);
 }

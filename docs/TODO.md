@@ -63,6 +63,23 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1140 (GOLDTL): InitializeLogAndErrorHandler import-VA leak fixed — 189→397/404.**
+
+- **Tried:** the TL file carried ~14 server-image VAs. Re-derived each from TL
+  disassembly: crash filter `0x41cbc0` (not `0x10002770`), IAT slots
+  `0x6622d4/0x6620c0/0x662088/0x66205c`, string table `0x677cc8/0x677adc/
+  0x677ca8/0x677ad8`, tables `0x677948->0x677ac8` and `0x677918->0x677948`
+  (the import had cursor/bound pairs crossed: `0x677ca8/0x677cc4`). Two traps
+  hit: near-identical addresses `0x677ca8` (fmt) vs `0x677ac8` (bound) vs
+  `0x677cc4` (no-arg fmt) — verify each against its own push site, never by
+  prefix; and the second sprintf needed its own decode, not symmetry with
+  the first.
+- **Parked:** the `>0x10000` reopen branch differs structurally (TL does
+  fclose+sprintf+f(0x677ca8,count)+fclose where the twin does
+  fclose+fopen+fputs) — rare path, NEAR 397/404 stands with analysis in-file.
+- **Measured:** TL 37.5% matched holds; server gate green (verify 281/283,
+  residue 8,628).
+- **Keep:** Round-1139 stack.
 **Round-1139 (GOLDTL): gm_FindSlotById EXACT — leaked server VA was the whole delta. TL 37.5%.**
 
 - **Tried:** TL `gm_FindSlotById` (0x005027d0) was NEAR 64/72 with the imported body
