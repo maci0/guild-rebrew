@@ -63,6 +63,21 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1107 (data pass): attested rename g_dynasty_generation_counter -> gm_CurrentHumanFamilyCount. Byte-neutral.**
+
+- **Evidence:** the only corpus string naming a counter is
+  `"gm_AllocSpieler(): gm_CurrentHumanFamilyCount overflow"` (`0x100315ac`),
+  and the confirmed-push check ties it to the branch that guards
+  `*(int*) 0x10035430 >= 0x10` (gm_AllocSpieler type 5/6/7) — the strongest
+  evidence class. Renamed via `rebrew rename --data` (toml + cross-refs);
+  hand-fixed `entity.h`, `spiel62.c` extern, and the `link_stubs.c`
+  definition (the rename pass only reached the spiel62 use site; the LNK2001
+  was the finding, not silenced).
+- **0x1003542c stays `g_dynasty_field_2c`:** no string attests it; the
+  descriptive name survives per the no-invented-prefix rule.
+- **Measured:** gate green (verify 281/283, byte-matched 264, residue 8,628,
+  raw `.data` 21,481, imports 100, wine OK) — renames emit nothing, so the
+  byte state is unchanged by construction and confirmed by the gate.
 **Round-1106 (data pass): spiel.c's anonymous 0x43 node spells LinkedNode. Link +0.**
 
 - **Tried:** `game/spiel.c` carried a fourth 0x43-byte copy as an anonymous

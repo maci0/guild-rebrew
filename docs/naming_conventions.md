@@ -181,6 +181,8 @@ compiled directly into it or loaded from a separate DLL not captured here.
     passed to `gm_RemoveObjectByType` by cm_ExClearLagerslot / cm_ExProdObjekt /
     ahm_ExAllocAlchemist), +0x02 int = `entity_id` (`*(int*)(entity + 2)` at
     `gm_RemoveObjectWrapper`); removal clears the type word.
+  - `gm_CurrentHumanFamilyCount` (round 1107): attested by the confirmed-push
+    overflow log in gm_AllocSpieler; renamed from `g_dynasty_generation_counter`.
   - `OFFICE_SLOT` (0x18, round 1103): `game/aemter.c` (`a/b/c/type/d`) and
     `game/aemter_c/amt_fio_LoadAemter.c` (read-order names). The latter's
     names kept. Neither list is attested by a string; both descriptive.

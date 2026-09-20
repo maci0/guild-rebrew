@@ -21,6 +21,7 @@ extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; /* defined in spiel.c
 
 int __cdecl gm_GetBuildingTypeCategory(int);
 extern int g_citizen_count;
+extern int gm_CurrentHumanFamilyCount; /* 0x10035430 */
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
 short* __cdecl gm_GetEntityTableEntry(char*);
@@ -161,7 +162,7 @@ void __cdecl gm_InitEntitySlots(void)
 
 	g_citizen_count = 0;
 	g_dynasty_field_2c = 0;
-	g_dynasty_generation_counter = 0;
+	gm_CurrentHumanFamilyCount = 0;
 }
 
 /* Checks if a value is within a range [min, max]. Returns

@@ -73,7 +73,7 @@ int g_dispatch_table_a[1] = {0};
 int g_dispatch_table_b[1] = {0};
 int g_dynamic_count = 0;
 int g_dynasty_field_2c = 0;
-int g_dynasty_generation_counter = 0;
+int gm_CurrentHumanFamilyCount = 0;
 // DATA: SERVER 0x101de450
 char* g_item_def_table = 0;
 int g_entity_id_counter = 0;

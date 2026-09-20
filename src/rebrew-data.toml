@@ -772,7 +772,7 @@ section = ".data"
 size = 4
 
 ["SERVER.0x10035430"]
-name = "g_dynasty_generation_counter"
+name = "gm_CurrentHumanFamilyCount"
 type = "int"
 status = "UNCHECKED"
 section = ".data"
