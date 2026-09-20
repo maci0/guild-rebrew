@@ -63,6 +63,16 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1124 (data pass): .bss gap table re-read — all gaps are named spans. No source change.**
+
+- **Tried:** re-read the full `rebrew data --bss` gap table. Every gap is bounded by
+  named symbols on both sides (entity tables, slot arrays, query records, player
+  slots, CRT heap tails) — no anonymous hole that would indicate an un-annotated
+  global. The three large spans (417KB entity bytes, 674KB query records, 20MB
+  player slots) are the game's real bulk arrays, all previously attributed.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1123 stack.
 **Round-1123 (data pass): full-link LNK4006 scan — zero game-TU dupes. No source change.**
 
 - **Tried:** per the brief's duplicate-definition rule, grepped a full `cmake --build`
