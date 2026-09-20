@@ -2467,3 +2467,25 @@ evenly across scheduling, allocation and immediate/displacement, so no one pass 
 resulting instructions, so a claim about any of these four can be tested against the compiler instead of argued.
 What it showed on first use is in `msvc6-c-shapes.md` (round 1105): independent operations are canonicalised, so
 their source order is inert, and an isolated probe cannot predict a large function's order.
+
+### 48. The ObjektNr2 literal wall: `0x101dd8e0` is load-bearing at three sites (rounds 1108-1109, judgement)
+
+The reference corpus string-attests `gm_ObjektNr2MinimalHersteller` (732 ints, zeroed to 0x58 by
+`gm_InitObjektHersteller`; the log string `"...Initialisiere gm_ObjektNr2MinimalHersteller[Objekte_MAX]"`
+names the array). Two probes named the symbol and replaced the raw VAs in the three use sites
+(`gm_InitObjektHersteller.c` fill/scan/store loops, `spiel622.c` `gm_CalculateProductionValue`):
+
+| spelling | object rulers | linked residue |
+|---|---|---|
+| literal `0x101dd8e0` (shipped) | clean | **8,628** |
+| `(int) symbol` in address arithmetic (round 1108) | clean (0 structural, 0 register, RELOC held) | **9,235 (+607)** |
+| array-decay addressing (round 1109) | clean (0 structural, 0 register) | **9,237 (+609)** |
+
+Both named-symbol forms displace the walled `gm_CalculateProductionValue` carrier out of the
+attribution table entirely — the +607/+609 is not new damage at those sites, it is everything
+after spiel622.c moving.
+
+**Judgement, marked as judgement:** every named-symbol access form probed (cast and decay) changes
+what msvc6 materialises, so the literal stays until a spelling is found that folds the base into the
+instruction displacement the way the literal does. The attested name remains in
+`naming_conventions.md`; do not re-probe the two spellings above without new evidence.
