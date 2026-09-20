@@ -50,6 +50,22 @@ typedef struct {
 	int msetter;             /* +0x14 */
 } OFFICE_SLOT;
 
+/* --- Office role template row (0x18 bytes, six dwords) ---
+ *
+ * The 24-byte copy payload fetched from the g_office_role_templates table
+ * by aemter.c (whole-struct copy). cm_ExAllocRaum.c's copy_12_dwords is
+ * byte-identical for the 0x18 span it touches (office row at building+0x65);
+ * this copy names the only two fields any surviving code reads. */
+// SIZE 0x18
+typedef struct {
+	int f0;    /* +0x00  compared against arg1_value & 0xff */
+	int f4;    /* +0x04  */
+	int f8;    /* +0x08  */
+	int fc;    /* +0x0c  */
+	int f10;   /* +0x10  zero test */
+	int f14;   /* +0x14  */
+} OFFICE_ROLE_TEMPLATE;
+
 /* --- Entity query record ---
  *
  * The 0x100-entry, 0xa9-stride table behind g_entity_ptr: 0x100 * 0xa9 == 0xa900,

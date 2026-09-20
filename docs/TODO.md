@@ -63,6 +63,17 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1116 (data pass): COPY24 lifted as OFFICE_ROLE_TEMPLATE. Link +0.**
+
+- **Tried:** `game/aemter.c`'s local `COPY24` (six-dword office-template row) matches
+  `cm_ExAllocRaum.c`'s `copy_12_dwords` byte-for-byte over the 0x18 span, so it left
+  the .c file — lifted to game_structs.h as OFFICE_ROLE_TEMPLATE, keeping the two
+  field names (`f0`, `f10`) any surviving code reads. TU renamed `COPY24 copy` /
+  `extern COPY24[]` to the lifted type.
+- **Measured:** per-TU tests hold all three RELOC; linktest 8,628 -> 8,628 (+0);
+  gate green (verify 281/283, byte-matched 264, residue 8,628, raw `.data` 21,481,
+  imports 100, wine OK).
+- **Keep:** Round-1115 stack.
 **Round-1115 (data pass): re-read the two cosmetic type conflicts, confirmed benign. No source change.**
 
 - **Tried:** re-examined the two remaining `rebrew data` conflicts not already documented

@@ -8,19 +8,13 @@
  * names are the ones kept). */
 #include "game_structs.h"
 
-/* 24-byte copy payload fetched from the g_office_role_templates template table. */
-// SIZE 0x18
-typedef struct {
-	int f0;
-	int f4;
-	int f8;
-	int fc;
-	int f10;
-	int f14;
-} COPY24;
+/* 24-byte copy payload fetched from the g_office_role_templates template table.
+ * Lifted to game_structs.h (shared-layout rule: cm_ExAllocRaum.c's
+ * copy_12_dwords is byte-identical, this copy names the touched fields). */
+#include "game_structs.h"
 
 extern char g_office_slots[]; /* 0x101de5a0 */
-extern COPY24 g_office_role_templates[];
+extern OFFICE_ROLE_TEMPLATE g_office_role_templates[];
 void* __cdecl gm_LookupEntityRecordById(int entityId);
 
 /* Validates whether an entity can take an office position.  Scans the
@@ -118,7 +112,7 @@ unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* arg1)
 	unsigned char x5;
 	unsigned int arg1_value;
 	int f0v;
-	COPY24 copy;
+	OFFICE_ROLE_TEMPLATE copy;
 	int i;
 	int j;
 	cmd = (unsigned char*) arg1;
