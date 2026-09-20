@@ -63,6 +63,18 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1121 (data pass): LinkedNode six-TU audit — layout single, naming unified. No source change.**
+
+- **Tried:** re-audited all six TUs touching the 0x43-byte node: four spell it via the
+  lifted LinkedNode (both remove helpers, FreeObjectListRecursive, spiel.c Record
+  define), two reach it only through removal-helper prototypes with `(int*)`/`(void**)`
+  args (cm_ExRemoveLinkedObject, gm_RemoveObjectWrapper) — no layout spelled, nothing
+  to lift. The old "LinkedNode layout fork" parked item is resolved by the round-1103
+  header evidence; "OFFICE_SLOT vocab fork" and "0x43 vocab fork" likewise closed by
+  the 1103/1105/1106 lifts.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1120 stack.
 **Round-1120 (data pass): anonymous-struct body sweep — no dupes beyond record. No source change.**
 
 - **Tried:** swept all anonymous `typedef struct {...}` bodies for identical layouts
