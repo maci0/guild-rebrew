@@ -63,6 +63,18 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1114 (data pass): state reconciliation. No source change.**
+
+- **Tried:** cross-checked both checkouts against the session log. guild-rebrew is clean
+  at 79a500dd (gitignored outputs/ the only untracked path); the rebrew checkout holds
+  both upstream idea entries (verify --data raw-link write-gate at 8cd783af, prove
+  import-thunk stubbing at 6275b81f). Everything matches — no drift, no defect found
+  in the on-record evidence.
+- **Position:** the data/segment lane is exhausted; both improve-match items sit
+  behind named walls (CFG-layout artifact; angr harness). Concrete progress now
+  requires either a displacement-folding spelling for the three 0x101dd8e0 sites
+  or implementation work in rebrew's prove.py — not a source change here.
+- **Gate:** pass; verify 281/283, byte-matched 264, residue 8,628, imports 100, wine OK.
 **Round-1111 (data pass): hygiene re-run. No source change.**
 
 - **Tried:** lint + residue + whole-binary invariants after the upstream ideas commits.
