@@ -63,6 +63,25 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1108 (data pass): attested-name hunt over the corpus; ObjektNr2 symbol swap REVERTED (+607).**
+
+- **Tried (docs):** swept every `"name(): "` / `"name: "` / `snake_Mixed` identifier in the
+  reference corpus; added six already-correct rows (`cm_ExAllocThemaPredigt` `0x1000f2f0`,
+  `cm_ExSetGebBesitzer` `0x1000f3b0`, `cm_ExSetGebUpgrade` `0x1000f590`, `cm_ExEmployWorker`
+  `0x1000f730`, `cm_ExKillTransporter` `0x1000fad0`) and one log-prefix-only row
+  (`cm_ExAllocCharacter` at `0x1000f980`, kept as `cm_ExCreateCitizen`). Corpus also confirms
+  `gm_CurrentHumanFamilyCount`, `gm_KillAllSpieler`, `gm_ObjektNr2MinimalHersteller[Objekte_MAX]`.
+- **Tried (code):** replaced raw `0x101dd8e0` with the attested `gm_ObjektNr2MinimalHersteller`
+  symbol (732 ints, link_stubs definition + extern). Object scores stayed clean (0 structural,
+  0 register, RELOC held in both TUs) but the LINK regressed **8,628 -> 9,235 (+607)**: the
+  `(int) symbol` addressing form shifts bytes inside spiel622.c, displacing the walled
+  `gm_CalculateProductionValue` carrier out of the attribution table entirely. Reverted both
+  TUs and the stub definition; gate back to **8,628**.
+- **Landed:** naming-doc rows only. The attested name is now ON RECORD for the next attempt —
+  the swap needs an addressing form that folds the base into the displacement like the literal
+  does (shapes-doc problem, not a naming problem).
+- **Measured:** gate green after revert: verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK.
 **Round-1107 (data pass): attested rename g_dynasty_generation_counter -> gm_CurrentHumanFamilyCount. Byte-neutral.**
 
 - **Evidence:** the only corpus string naming a counter is

@@ -526,6 +526,12 @@ rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
 | `0x1000c4d0` | `ahm_AllocAhmInfo` | already correct (mangled symbol `?ahm_AllocAhmInfo`) |
 | `0x1000d260` | `cm_ChkCutsceneReady` | already correct |
 | `0x1000f030` | `cm_ExKillSpieler` | already correct |
+| `0x1000f2f0` | `cm_ExAllocThemaPredigt` | already correct (round 1108) |
+| `0x1000f3b0` | `cm_ExSetGebBesitzer` | already correct (round 1108) |
+| `0x1000f590` | `cm_ExSetGebUpgrade` | already correct (round 1108) |
+| `0x1000f730` | `cm_ExEmployWorker` | already correct (round 1108) |
+| `0x1000f980` | `cm_ExAllocCharacter` (log prefix only) | kept as `cm_ExCreateCitizen`; the body logs `"cm_ExAllocCharacter():gm_AllocSpieler() failed"` (`0x1002d364`) — log-prefix-only attestation, same standing as `gm_AllocGebaeude` at `0x10017330` |
+| `0x1000fad0` | `cm_ExKillTransporter` | already correct (round 1108) |
 | `0x1000fb30` | `cm_ExCreateGeb` | already correct |
 | `0x10010700` | `gv_eval_SlotFrei` | renamed from `fcn_10010700`; a `FindSlotEntryFiltered` filter callback (address taken by 3 callers, so no `call` reaches it); true when the entry's owner id at +4 is -1 |
 | `0x100109d0` | `gv_AllocGraveyardField` | renamed from `gv_AllocField` |
