@@ -1,8 +1,12 @@
 // FUNCTION: GOLDTL 0x004edcd0
-int __cdecl fcn_004edcd0(void)
+// SIZE: 16
+/* Arg+3 tail-jump forwarder into fcn_00501490.
+ * Wall (same class as GOLD fcn_004ebf50): reference stores to [esp+4] then
+ * `jmp`; call spellings emit push/call. Parked. */
+void __cdecl fcn_00501490(int value);
+
+void __cdecl fcn_004edcd0(int value)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* ends in a tail call — write the body; match the callee's signature if it takes args (forwarding pattern) */
-    /* Ghidra name: fcn.004edcd0 */
-    return 0;
+    value += 3;
+    fcn_00501490(value);
 }

@@ -1,7 +1,8 @@
 // FUNCTION: GOLDTL 0x00535550
-int __cdecl fcn_00535550(void)
+// SIZE: 16
+void __cdecl fcn_00535270(void* obj, int n);
+
+void __cdecl fcn_00535550(void* obj)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.00535550 */
-    return 0;
+    fcn_00535270(obj, 2);
 }

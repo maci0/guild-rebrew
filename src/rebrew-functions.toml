@@ -1788,27 +1788,39 @@ updated_at = "2026-09-09T17:28:03+00:00"
 
 ["GOLDTL.0x00427570"]
 size = 16
-blocker = "Application code — pending per-function decompilation"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:54:50+00:00"
 
 ["GOLDTL.0x00427580"]
 size = 16
-blocker = "Application code — pending per-function decompilation"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:54:52+00:00"
 
 ["GOLDTL.0x00427590"]
 size = 16
-blocker = "Application code — pending per-function decompilation"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:54:54+00:00"
 
 ["GOLDTL.0x004774a0"]
 size = 16
-blocker = "Application code — pending per-function decompilation"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:55:58+00:00"
 
 ["GOLDTL.0x004937f0"]
 size = 16
-blocker = "Application code — pending per-function decompilation"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:54:59+00:00"
 
 ["GOLDTL.0x004bf1a0"]
 size = 16
-blocker = "Application code — pending per-function decompilation"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:55:01+00:00"
 
 ["GOLDTL.0x004edcd0"]
 size = 16
@@ -1816,18 +1828,21 @@ blocker = "Application code — pending per-function decompilation"
 
 ["GOLDTL.0x00535550"]
 size = 16
-blocker = "Application code — pending per-function decompilation"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:55:07+00:00"
 
 ["GOLDTL.0x00535560"]
 size = 16
-status = "STUB"
+status = "RELOC"
 updated_by = "test"
-updated_at = "2026-09-12T14:33:21+00:00"
-blocker = "Application code — pending per-function decompilation"
+updated_at = "2026-09-20T15:55:09+00:00"
 
 ["GOLDTL.0x005ba8e0"]
 size = 16
-blocker = "Application code — pending per-function decompilation"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:55:11+00:00"
 
 ["GOLDTL.0x0041d6b0"]
 status = "NEAR_MATCHING"

@@ -63,6 +63,23 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1136 (GOLDTL): ten 16-byte stubs — 9 matched (4 EXACT), 1 walled. TL 30% matched.**
+
+- **Tried:** the ten smallest TL improve-match items. Three +0xc84 const stores
+  (two needed the round-1134 `char**` byte-arithmetic lesson re-applied: the TL
+  copies had plain `int*` spellings), the -1-triple setter, masked-call reader,
+  three Lua-style two-arg forwarders, and the guarded COM call — 4 EXACT + 5 RELOC.
+  The COM call needed the arg hoisted to a local AND the method typed
+  `__stdcall` (no caller cleanup — same lesson as GOLD's IAT forwarder).
+- **Walled:** `fcn_004edcd0` — the arg+3 store-then-`jmp` tail forwarder, same
+  class as GOLD `fcn_004ebf50`. Parked with in-file comment.
+- **Pre-existing lint:** 5× W019 CFLAGS drift in imported TL files
+  (`// CFLAGS: /O2 /Gd` vs longer metadata flags) — predates this round, not
+  mine, not hand-editable (tool-owned toml). Recorded, not fixed.
+- **Measured:** TL lint 40 files 0 errors (5 pre-existing warnings); coverage
+  7.5% -> 30.0% matched (4 EXACT + 8 RELOC of 40 covered). Server gate green
+  (verify 281/283, residue 8,628).
+- **Keep:** Round-1135 stack.
 **Round-1135 (GOLD intake): batch 5 — 10 more, 9 matched (2 EXACT), 1 walled. Coverage 0.8%.**
 
 - **Tried:** next 10 smallest. Matched: four Lua-style two-arg forwarders, +0x100

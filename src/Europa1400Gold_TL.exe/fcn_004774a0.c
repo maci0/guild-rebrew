@@ -1,7 +1,13 @@
 // FUNCTION: GOLDTL 0x004774a0
-int __fastcall fcn_004774a0(void *self)
+// SIZE: 16
+/* Guarded COM call: if g_007725ec is set, call [ecx+0x1c] with it. */
+extern int g_007725ec; /* 0x007725ec */
+typedef void (__stdcall *comfn_t)(int self);
+
+void __cdecl fcn_004774a0(void)
 {
-    /* TODO: Implement based on Ghidra decompilation */
-    /* Ghidra name: fcn.004774a0 */
-    return 0;
+    int self = g_007725ec;
+    if (self != 0) {
+        ((comfn_t) *(void**) (*(int*) self + 0x1c))(self);
+    }
 }
