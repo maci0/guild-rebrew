@@ -172,6 +172,18 @@ compiled directly into it or loaded from a separate DLL not captured here.
 
 ### File Naming Patterns
 
+- A shared domain type spelled identically in two TUs leaves the `.c` files
+  (rebrew_types.h holds globals support types, game_structs.h domain types).
+  Lifts on record:
+  - `LinkedNode` (0x43, packed, round 1103): `spiel_c/gm_RemoveLinkedNodeById.c`
+    and `spiel_c/gm_RemoveObjectByType.c`. Both local copies invented names;
+    the CALLERS fix the evidence: +0x00 word = `type` (16-bit object types
+    passed to `gm_RemoveObjectByType` by cm_ExClearLagerslot / cm_ExProdObjekt /
+    ahm_ExAllocAlchemist), +0x02 int = `entity_id` (`*(int*)(entity + 2)` at
+    `gm_RemoveObjectWrapper`); removal clears the type word.
+  - `OFFICE_SLOT` (0x18, round 1103): `game/aemter.c` (`a/b/c/type/d`) and
+    `game/aemter_c/amt_fio_LoadAemter.c` (read-order names). The latter's
+    names kept. Neither list is attested by a string; both descriptive.
 - German nouns for gameplay concepts: `spiel` (game), `aemter` (offices),
   `friedhof` (graveyard)
 - English for technical/infrastructure: `server`, `lobbycommands`, `loadsave`

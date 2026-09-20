@@ -3,19 +3,9 @@
 // FUNCTION: SERVER 0x1000baf0
 // SIZE: 606
 
-/* Office slot table entry - 0x18 bytes per slot. */
-// SIZE 0x18
-typedef struct {
-	unsigned char id;        /* +0x00 */
-	unsigned char pad1[3];
-	int mplayerid;           /* +0x04 */
-	unsigned char mamt;      /* +0x08 */
-	unsigned char pad2[3];
-	int pcount;              /* +0x0c */
-	unsigned char status;    /* +0x10 */
-	unsigned char pad3[3];
-	int msetter;             /* +0x14 */
-} OFFICE_SLOT;
+/* Office slot entry lifted to game_structs.h (this TU's read-order field
+ * names are the ones kept; the aemter.c twin had `a/b/c/type/d`). */
+#include "game_structs.h"
 
 extern char g_office_slots[]; /* 0x101de5a0 */
 extern int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize,

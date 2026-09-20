@@ -9,18 +9,10 @@ extern int g_query_limit; /* 0x10035450 */
 void __cdecl gm_FreeObjectListRecursive(void* children);
 void __cdecl gm_NoopRet2(void* node);
 
-/* Linked-list node: active flag, unique id, child-list head, next pointer. */
-#pragma pack(push, 1)
-// SIZE 0x43
-typedef struct LinkedNode {
-	short active;             /* 0x00 */
-	int id;                   /* 0x02 */
-	char pad0[0x0e];          /* 0x06 */
-	struct LinkedNode* children; /* 0x14 */
-	char pad1[0x27];          /* 0x18 */
-	struct LinkedNode* next;  /* 0x3f */
-} LinkedNode;
-#pragma pack(pop)
+/* LinkedNode lifted to game_structs.h: the gm_RemoveObjectByType twin named
+ * the +0x00 word `id` and this copy named it `active`; the callers fix both
+ * words (this one matches the +0x02 entity id, ByType the +0x00 type). */
+#include "game_structs.h"
 
 /* Removes the node whose id equals b from the list headed by *a.
  * Returns 0 on success, -1 if the list is empty, -2 if the id is
@@ -39,7 +31,7 @@ int __cdecl gm_RemoveLinkedNodeById(int a, int b, int c)
 		return -1;
 	index = 0;
 
-	while (node != NULL && node->id != b) {
+	while (node != NULL && node->entity_id != b) {
 		prev = node;
 		node = node->next;
 		index++;
@@ -54,7 +46,7 @@ int __cdecl gm_RemoveLinkedNodeById(int a, int b, int c)
 		*head = node->next;
 	else
 		prev->next = node->next;
-	node->active = 0;
+	node->type = 0;
 	g_query_limit--;
 	return 0;
 }

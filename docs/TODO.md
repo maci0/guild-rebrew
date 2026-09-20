@@ -63,6 +63,28 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1103 (data pass): lifted the two duplicate domain types into game_structs.h. Link +0.**
+
+- **Tried:** two domain layouts were spelled twice with DIVERGING field names:
+  `OFFICE_SLOT` (0x18; `game/aemter.c` `a/b/c/type/d` vs
+  `game/aemter_c/amt_fio_LoadAemter.c` read-order names) and `LinkedNode`
+  (0x43 packed; `spiel_c/gm_RemoveLinkedNodeById.c` `active/short` vs
+  `spiel_c/gm_RemoveObjectByType.c` `unsigned short id`). Neither byte layout
+  moved — only naming forked. Lifted both into `game_structs.h` with use-based
+  evidence for LinkedNode: +0x00 word = `type` (16-bit object types at the
+  gm_RemoveObjectByType callers), +0x02 int = `entity_id`; removal clears the
+  type word. OFFICE_SLOT kept the read-order twin's names.
+- **Include-spelling trap (measure-traps candidate):** relative
+  `../../../game_structs.h` compiles in the plain CMake build but resolves
+  WRONG under `rebrew test`'s flat workdir copy — laughter aside, the symptom
+  was silently UNPACKED pointer offsets (`target 0x3f got 0x41`) plus a
+  RELOC → NEAR_MATCHING demotion that no error C#### ever surfaced. Bare
+  quoted `#include "game_structs.h"` (resolved via `-I src/server.dll`) is
+  correct in both contexts.
+- **Measured:** linktest on the four TUs: `.text` 8,628 -> 8,628 **(+0)** — no
+  COMDAT churn. LNK4006 count after `--clean-first`-class build: same three
+  library-displacement symbols as round 910. Gate green; verify 281/283,
+  byte-matched 264, residue 8,628, raw `.data` 21,481, imports 100, wine OK.
 
 **Round-1102 (data pass): raw-link `.data` mismatch list re-triaged — 30/30 displacement, no content drift. No source change.**
 

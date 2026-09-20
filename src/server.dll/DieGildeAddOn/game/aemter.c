@@ -1,21 +1,12 @@
-/* aemter.c - office slot table helpers (proper C) */
+/* aemter - office slot table helpers (proper C) */
 
 #include <stdio.h>
 #include "../../Units/Error/error.h"
 
-/* Office slot table entry - 0x18 bytes per slot. */
-// SIZE 0x18
-typedef struct {
-	unsigned char id;      /* +0x00 */
-	unsigned char pad1[3];
-	int a;                 /* +0x04 */
-	unsigned char b;       /* +0x08 */
-	unsigned char pad2[3];
-	int c;                 /* +0x0c */
-	unsigned char type;    /* +0x10 */
-	unsigned char pad3[3];
-	int d;                 /* +0x14 */
-} OFFICE_SLOT;
+/* Office slot entry lifted to game_structs.h (this TU had spelled the
+ * six fields `a/b/c/type/d`; the amt_fio_LoadAemter twin's read-order
+ * names are the ones kept). */
+#include "game_structs.h"
 
 /* 24-byte copy payload fetched from the g_office_role_templates template table. */
 // SIZE 0x18
@@ -60,11 +51,11 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 	if (i >= 30)
 		return 0;
 
-	if (((OFFICE_SLOT*) g_office_slots)[i].a != -1 ||
-	    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
-	    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4)
+	if (((OFFICE_SLOT*) g_office_slots)[i].mplayerid != -1 ||
+	    ((OFFICE_SLOT*) g_office_slots)[i].status != 3 ||
+	    ((OFFICE_SLOT*) g_office_slots)[i].pcount >= 4)
 		return 0;
-	holder = ((OFFICE_SLOT*) g_office_slots)[i].b;
+	holder = ((OFFICE_SLOT*) g_office_slots)[i].mamt;
 	if (((unsigned char*) arg1)[6] != holder)
 		return 0;
 
@@ -77,10 +68,10 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 		if (i >= 30)
 			return 0;
 
-		if (holder != ((OFFICE_SLOT*) g_office_slots)[i].b ||
-		    ((OFFICE_SLOT*) g_office_slots)[i].a != -1 ||
-		    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
-		    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4)
+		if (holder != ((OFFICE_SLOT*) g_office_slots)[i].mamt ||
+		    ((OFFICE_SLOT*) g_office_slots)[i].mplayerid != -1 ||
+		    ((OFFICE_SLOT*) g_office_slots)[i].status != 3 ||
+		    ((OFFICE_SLOT*) g_office_slots)[i].pcount >= 4)
 			return 0;
 	}
 	return 1;
@@ -99,8 +90,8 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 //       (`*(unsigned char*) &arg1 = cmd[6]`).  The original reloads it as a
 //       dword for both the copy compare and the +0x168 store, which is what
 //       makes it use a 0x18 frame with `push edi` in the prologue;
-//     - the copy index is spelled `g_office_role_templates[((OFFICE_SLOT*) g_office_slots)[i].b]`, not
-//       through a row pointer, so it CSEs with the `.b` the guard left in al
+//     - the copy index is spelled `g_office_role_templates[((OFFICE_SLOT*) g_office_slots)[i].mamt]`, not
+//       through a row pointer, so it CSEs with the `.mamt` the guard left in al
 //       and emits `and eax,0xff` / `lea ecx,[eax+eax*2]`;
 //     - the home dword is re-read through a `unsigned int*` local taken
 //       immediately before the read (`hp = (unsigned int*) &arg1; hw = *hp`),
@@ -146,7 +137,7 @@ unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* arg1)
 	if (i >= 30)
 		return 0;
 	*(unsigned char*) &arg1 = cmd[6];
-	if (*(unsigned char*) &arg1 != ((OFFICE_SLOT*) g_office_slots)[i].b)
+	if (*(unsigned char*) &arg1 != ((OFFICE_SLOT*) g_office_slots)[i].mamt)
 		return 0;
 	x5 = cmd[5];
 	if (x5 != 0xff) {
@@ -156,9 +147,9 @@ unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* arg1)
 		}
 		if (j >= 30)
 			return 0;
-		if (((OFFICE_SLOT*) g_office_slots)[i].b != ((OFFICE_SLOT*) g_office_slots)[j].b)
+		if (((OFFICE_SLOT*) g_office_slots)[i].mamt != ((OFFICE_SLOT*) g_office_slots)[j].mamt)
 			return 0;
-		copy = g_office_role_templates[((OFFICE_SLOT*) g_office_slots)[i].b];
+		copy = g_office_role_templates[((OFFICE_SLOT*) g_office_slots)[i].mamt];
 		arg1_alias = (unsigned int*) &arg1;
 		arg1_value = *arg1_alias;
 		f0v = copy.f0;
@@ -167,29 +158,29 @@ unsigned int __cdecl amt_ValidateAndAssignOffice(unsigned int* arg1)
 		{
 			int type_i;
 			int type_j;
-			type_i = ((OFFICE_SLOT*) g_office_slots)[i].a;
-			type_j = ((OFFICE_SLOT*) g_office_slots)[j].a;
+			type_i = ((OFFICE_SLOT*) g_office_slots)[i].mplayerid;
+			type_j = ((OFFICE_SLOT*) g_office_slots)[j].mplayerid;
 			if (type_i != -1 ||
-			    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
-			    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4 ||
+			    ((OFFICE_SLOT*) g_office_slots)[i].status != 3 ||
+			    ((OFFICE_SLOT*) g_office_slots)[i].pcount >= 4 ||
 			    type_j != -1 ||
-			    ((OFFICE_SLOT*) g_office_slots)[j].c >= 4)
+			    ((OFFICE_SLOT*) g_office_slots)[j].pcount >= 4)
 				return 0;
 			rec[0x168] = (unsigned char) arg1_value;
-			((OFFICE_SLOT*) g_office_slots)[i].c++;
-			((OFFICE_SLOT*) g_office_slots)[j].c++;
+			((OFFICE_SLOT*) g_office_slots)[i].pcount++;
+			((OFFICE_SLOT*) g_office_slots)[j].pcount++;
 			return 1;
 		}
 	}
 	{
 		int type_i;
-		type_i = ((OFFICE_SLOT*) g_office_slots)[i].a;
+		type_i = ((OFFICE_SLOT*) g_office_slots)[i].mplayerid;
 		if (type_i != -1 ||
-		    ((OFFICE_SLOT*) g_office_slots)[i].type != 3 ||
-		    ((OFFICE_SLOT*) g_office_slots)[i].c >= 4)
+		    ((OFFICE_SLOT*) g_office_slots)[i].status != 3 ||
+		    ((OFFICE_SLOT*) g_office_slots)[i].pcount >= 4)
 			return 0;
 		rec[0x168] = *(unsigned char*) &arg1;
-		((OFFICE_SLOT*) g_office_slots)[i].c++;
+		((OFFICE_SLOT*) g_office_slots)[i].pcount++;
 		return 1;
 	}
 }
@@ -216,9 +207,9 @@ int __cdecl amt_ValidateCommand(char* arg1)
 	if (i >= 42)
 		return 0;
 
-	if (((OFFICE_SLOT*) g_office_slots)[i].type != 1)
+	if (((OFFICE_SLOT*) g_office_slots)[i].status != 1)
 		return 0;
-	if (((OFFICE_SLOT*) g_office_slots)[i].d != -1)
+	if (((OFFICE_SLOT*) g_office_slots)[i].msetter != -1)
 		return 0;
 	if (*(int*) (arg1 + 7) != -1) {
 		if (gm_LookupEntityRecordById(*(int*) (arg1 + 7)) == 0)

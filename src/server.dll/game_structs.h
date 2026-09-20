@@ -12,6 +12,44 @@ typedef struct PlayerSlot {
     unsigned char data[0x26425C]; /* Total size 0x264264 */
 } PlayerSlot;
 
+/* --- Linked-list node (0x43 bytes, 1-byte packed) ---
+ *
+ * Two TUs spell this layout and four more reach it through the removal
+ * helpers, so it leaves the .c files.  The two local copies disagreed ONLY on
+ * naming; together the callers fix both words' evidence:
+ *   +0x00 word is a TYPE: gm_RemoveObjectByType matches it against 16-bit
+ *   object types (cm_ExClearLagerslot `cmd[0x14/2]`, cm_ExProdObjekt
+ *   `*material_iter`, cm_ExSellObjekt `*(ushort*)(cmd + 0x18)`).
+ *   +0x02 int is a unique entity ID: gm_RemoveLinkedNodeById matches it
+ *   against `*(int*)(entity + 2)` (gm_RemoveObjectWrapper).
+ * Removal clears the type word — that is the `active = 0` / `id = 0` store
+ * both bodies end with.  Naming follows EntityQueryRecord's vocabulary. */
+#pragma pack(push, 1)
+// SIZE 0x43
+typedef struct LinkedNode {
+	unsigned short type;         /* 0x00  cleared by both remove helpers */
+	int entity_id;               /* 0x02  */
+	char pad0[0x0e];             /* 0x06  */
+	struct LinkedNode* children; /* 0x14  */
+	char pad1[0x27];             /* 0x18  */
+	struct LinkedNode* next;     /* 0x3f  */
+} LinkedNode;
+#pragma pack(pop)
+
+/* --- Office slot table entry (0x18 bytes) --- */
+// SIZE 0x18
+typedef struct {
+	unsigned char id;        /* +0x00 */
+	unsigned char pad1[3];
+	int mplayerid;           /* +0x04 */
+	unsigned char mamt;      /* +0x08 */
+	unsigned char pad2[3];
+	int pcount;              /* +0x0c */
+	unsigned char status;    /* +0x10 */
+	unsigned char pad3[3];
+	int msetter;             /* +0x14 */
+} OFFICE_SLOT;
+
 /* --- Entity query record ---
  *
  * The 0x100-entry, 0xa9-stride table behind g_entity_ptr: 0x100 * 0xa9 == 0xa900,
