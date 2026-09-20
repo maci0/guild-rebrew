@@ -63,6 +63,15 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1118 (data pass): .data ORDER violations re-counted (11 + 1 SPAN), triage stands. No source change.**
+
+- **Tried:** `rebrew data --layout-audit --section .data` now reports 12 flags
+  (11 ORDER + 1 ORDER/SPAN at 0x11766204) vs 7 triaged in round 727 — same symbol
+  families (state/filter/stream/logo blocks), count grew with coverage, not with
+  new defects. Link-order vs reference placement stays postlink's domain, no lever.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1117 stack.
 **Round-1117 (data pass): rdata layout audit clean, 36 unowned toml symbols checked. No source change.**
 
 - **Tried:** `rebrew data --layout-audit --section .rdata`: **0 violations**; the 36
