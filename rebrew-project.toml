@@ -35,6 +35,20 @@ bin_dir = "bin/Europa1400Gold_TL.exe"
 source_ext = ".c"
 origins = ["GAME"]
 marker = "GOLDTL"
+
+[targets."Europa1400Gold.exe"]
+# Client (non-TL) build of the same game. Shares game logic with server.dll
+# (DieGildeAddOn) and the TL client; client-only units (ch_, ai_, he_, d2_,
+# d3_, nt_, ob_, gs_, am_) are out of scope for server symbols but in scope
+# here. Marker GOLD distinguishes its annotations from SERVER/GOLDTL.
+marker = "GOLD"
+binary = "original/Europa1400Gold.exe"
+format = "pe"
+arch = "x86_32"
+reversed_dir = "src/Europa1400Gold.exe"
+bin_dir = "bin/Europa1400Gold.exe"
+source_ext = ".c"
+origins = ["GAME"]
 [compiler]
 profile = "msvc-6.0-sp6"
 # Docker-only toolchain: CL.EXE runs inside rebrew/msvc:6.0-win32 (the

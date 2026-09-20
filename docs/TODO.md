@@ -63,6 +63,34 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1129 (intake): Europa1400Gold.exe onboarded as third target (GOLD), first 5 functions RELOC.**
+
+- **Onboarded:** `rebrew cfg add-target Europa1400Gold.exe --binary original/Europa1400Gold.exe`
+  (PE32 x86, 2.3 MB) + `marker = "GOLD"` in rebrew-project.toml (config comment notes
+  the client-only prefixes are in scope here, unlike server). `rebrew doctor` 14/0/7
+  (warns: no inventory, no sources, no layout, no angr, FLIRT sig gaps, no ghidra path,
+  no binsync dir — all expected at intake). `discover-functions`: **4638 functions**.
+  FLIRT: 34 library matches, 4 ambiguous skipped.
+- **First five:** skeleton batch of the 5 smallest; three are global byte/dword stores
+  and one an LCG-style setter — all four RELOC 10/10 on first spell. The fifth
+  (`fcn_0042ec70`, `call + fld/fmulp/ret`) matched as `v * v` through a declared
+  `double` callee prototype. Coverage 0.0 -> 0.1% (5 RELOC).
+- **Measured:** TL/GOLD lints 0/0; server gate still green (verify 281/283,
+  residue 8,628, imports 100, wine OK). Tool-owned GOLD.* blocks appended to
+  src/rebrew-functions.toml by `rebrew test` (not hand-written).
+- **Keep:** Round-1128 stack.
+**Round-1128 (data pass): 0x101de580 read site checked — intentional raw VA. No source change.**
+
+- **Tried:** the one raw-VA data use in scope, `srv_RecvGame.c:86`
+  `ls_ReadVfsDataChecked((void*) 0x101de580, 0x18, 1, ...)` — 0x18 bytes at
+  0x101de580 = the first office-slot record (g_office_slots + 0, stride 0x18,
+  the lifted OFFICE_SLOT). Not naming it: the TU otherwise never touches the
+  office table, and a single-use extern for a bare sub-record address adds a
+  declaration with no evidence for what the original called this row. The
+  OFFICE_SLOT type record in game_structs.h stands; the literal stays.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1127 stack.
 **Round-1127 (data pass): placeholder-identifier sweep — zero survivors. No source change.**
 
 - **Tried:** grepped the tree for placeholder vocabulary (`_4i`, `field_0x*`, `_2s`,
