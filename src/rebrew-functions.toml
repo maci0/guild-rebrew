@@ -2141,3 +2141,54 @@ size = 14
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-20T15:45:32+00:00"
+
+["GOLD.0x0042ec80"]
+size = 14
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:50:20+00:00"
+
+["GOLD.0x00578430"]
+size = 14
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:49:52+00:00"
+
+["GOLD.0x005896d0"]
+size = 14
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:49:50+00:00"
+
+["GOLD.0x005e1a0c"]
+size = 14
+
+["GOLD.0x005e6fde"]
+size = 14
+
+["GOLD.0x00410610"]
+size = 15
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:49:45+00:00"
+
+["GOLD.0x004e3640"]
+size = 15
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-20T15:50:18+00:00"
+
+["GOLD.0x005e6fec"]
+size = 15
+
+["GOLD.0x00428ce0"]
+size = 16
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:50:38+00:00"
+
+["GOLD.0x00428cf0"]
+size = 16
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-20T15:50:36+00:00"

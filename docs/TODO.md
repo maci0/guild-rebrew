@@ -63,6 +63,21 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1134 (GOLD intake): batch 4 — 10 more, 8 matched (3 EXACT), 2 library. Coverage 0.6%.**
+
+- **Tried:** next 10 smallest. Two (`fcn_005e6fec`, `fcn_005e6fde`) lib-matched as
+  LIBCMT `__clrfp`/`__statfp` before touching — linker supplies them, skeletons
+  left as documentation. Of the other eight, six matched first try (+0xc84 const
+  stores, guarded tail-call, +0x100 adder, -1/-1 pair setter, null-test reader,
+  IAT-chain into the RELOC LCG setter) and two needed one fix each: the +0xc84
+  pair had an `int*`-arithmetic scale bug (`*(int**)+0xc84` multiplies by 4 —
+  byte arithmetic via `char**` gives the reference disp; both EXACT after).
+- **Walled carry-over:** `fcn_005e1a0c` (word-sized COM thunk, second mov) still
+  open from the batch-3 shape; not re-probed this round.
+- **Measured:** GOLD lint 0/0 (two SIZE annotations fixed, 17 -> 16); coverage
+  0.5 -> 0.6% (7 EXACT + 22 RELOC). Server gate green (verify 281/283,
+  residue 8,628).
+- **Keep:** Round-1133 stack.
 **Round-1133 (GOLD intake): batch 3 — 10 more, 8 matched (1 EXACT), 2 walled. Coverage 0.5%.**
 
 - **Tried:** next 10 smallest. Matched first or second try: null-test/setne reader,
