@@ -63,6 +63,16 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1126 (data pass): todo categories + raw-link writeback reconfirmed. No source change.**
+
+- **Tried:** `rebrew todo --json`: only the 2 walled improve-match items, zero
+  start-data / data-drift categories — the brief's "246 start-data / 34 drift"
+  counts are stale history, not live queues. Raw-link `--built` check still the
+  known 30-displacement set; the tool's DRIFT writeback into tool-owned
+  rebrew-data.toml reverted immediately (`git checkout`).
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1125 stack.
 **Round-1125 (data pass): EntityStruct +0x24 field probed for a name, stays field_24. No source change.**
 
 - **Tried:** the one surviving placeholder, `field_24` (+0x024, entity.h). Writers:
