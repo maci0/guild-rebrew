@@ -63,6 +63,16 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1123 (data pass): full-link LNK4006 scan — zero game-TU dupes. No source change.**
+
+- **Tried:** per the brief's duplicate-definition rule, grepped a full `cmake --build`
+  log for LNK4006 outside LIBCMT displacement: **zero hits**. All remaining
+  duplicate-symbol warnings are the documented library-displacement pattern
+  (`dllcrt0`/`fputc` objects vs local stubs). No shared type left un-lifted is
+  surfacing as a link warning.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1122 stack.
 **Round-1122 (data pass): conflict #5 re-triaged — the loadsave3 filter-extra block. No source change.**
 
 - **Tried:** re-read the five `g_query_filter_extra*` / `g_filter_extra5` conflicts
