@@ -2382,3 +2382,58 @@ PROVEN); what differs is the order the backend emits them in, and the order is s
 register pressure and the instruction scheduler. Five carriers, three rounds, and roughly a dozen spellings now
 show the same thing: no C-level respelling moves a pinned schedule, because the schedule is not derived from
 the spelling.
+
+### 46. Per-difference attribution: the residue is split evenly across THREE mechanisms, and §45 overstated the scheduler (round 1104)
+
+§45 concluded from a handful of carriers that "the residual is dominated by msvc6's scheduler". That was an
+extrapolation from the carriers that happened to be examined. `scripts/attribution.py` now attributes **every**
+difference across all nineteen carriers, and the conclusion changes.
+
+**Method.** Both streams are disassembled from the deliverable and the reference, then aligned on instruction
+*shape* — mnemonic plus operands with registers **and** immediates abstracted. Aligning on shape is what makes a
+register swap and an immediate difference land as aligned pairs rather than as unrelated instructions. Aligned
+pairs differing in bytes are classified by how much of the operand text differs; the leftovers are matched
+across the two streams by shape, and a leftover whose shape exists on the other side is the same operation at a
+different position — a schedule difference.
+
+**Result, all 19 carriers (2,025 attributed sites):**
+
+| class | sites | bytes~ | share | what it is |
+|---|---|---|---|---|
+| **schedule** | 488 | 1,742 | **24.7%** | same instruction, different position |
+| **register** | 502 | 1,623 | **23.0%** | same instruction, different register |
+| **immediate** | 359 | 1,494 | **21.2%** | same instruction, different displacement/constant |
+| missing | 299 | 838 | 11.9% | reference instruction with no counterpart |
+| encoding | 144 | 698 | 9.9% | identical operand text, different bytes |
+| extra | 188 | 580 | 8.2% | our instruction with no counterpart |
+| operand-order | 14 | 42 | 0.6% | commutative address order (§70) |
+| epilogue | 31 | 33 | 0.5% | materialised exits |
+| **total** | **2,025** | **7,050** | | vs the ruler's 8,628 |
+
+**The three leaders are within four points of each other.** No mechanism owns the residue. §45's "dominated by
+the scheduler" was wrong — the scheduler is the largest single class at a quarter, not a majority, and the
+allocation classes (`register` + `immediate`) together are **44%**, larger than scheduling.
+
+**The sum is 7,050 against the ruler's 8,628 (82%).** The gap is the positional inflation §44 described: this
+counts one entry per differing instruction, while the byte ruler counts the whole misaligned stretch that a
+length change produces. Both are correct answers to different questions.
+
+**Two secondary results worth keeping:**
+
+- **`operand-order` is 0.6%.** §70 recorded commutative operand order as inert on a handful of probes; this is
+  the first whole-tree measurement of how much of the residue it accounts for, and it is negligible. The doc's
+  judgement is quantitatively confirmed rather than merely asserted.
+- **`encoding` is 9.9%** — identical operand *text*, different bytes. Those sites cannot be register, immediate
+  or order differences by construction, so they are something else (relocation slots, prefix bytes). It was not
+  a class anyone had looked for.
+
+**Validated against known cases before use:** `cm_ExProdObjekt` attributes 5 sites / 20 bytes against the
+ruler's 21, and `srv_LoadBuf` 14 sites / 42 against 49. Both are the carriers whose differences were traced by
+hand in §45, and both agree. The script carries a `--self-test` covering the classifier's contract and the
+shape-abstraction rule.
+
+**What this means for effort allocation, stated as judgement:** there is no single lever left, and there was
+never going to be one. Fixing the schedule class would leave 75% of the difference; fixing allocation would
+leave 79%. The residue is the aggregate of three backend passes disagreeing at a few hundred sites each, which
+is why every per-carrier probe this project has run (hundreds of them, documented across these docs) moved a
+carrier by a few bytes at most or cost more than it recovered.
