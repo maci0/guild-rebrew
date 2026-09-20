@@ -63,6 +63,23 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1122 (data pass): conflict #5 re-triaged — the loadsave3 filter-extra block. No source change.**
+
+- **Tried:** re-read the five `g_query_filter_extra*` / `g_filter_extra5` conflicts
+  with fresh eyes instead of trusting the file comment. loadsave3.c owns
+  `char[1]` / `int[4]` / `short[2]` definitions while the two consumer TUs declare
+  scalars — but the in-file comment (round 925) already documents this exact shape
+  with reference bytes (`0x10030b84`: `ff | ffffffff | ff7f | ff7f | ff`) AND both
+  measured numbers: scalar definitions cost `.text` +1 and raw-link `.data` +375.
+  The wider definitions stay emitted while the scalar declarations read. Verified
+  the byte claim stands; per the brief, re-measure before any retry, not this round.
+- **Remaining conflicts inventory:** crashdump (`char[]` metadata vs `char[568]`
+  both sides), ahm string (unsized vs sized array), slot table + type bytes +
+  state base (bss commons, round-925 comments), filter-extras ×5 (this round).
+  All 10 triaged, none actionable without re-measurement.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1121 stack.
 **Round-1121 (data pass): LinkedNode six-TU audit — layout single, naming unified. No source change.**
 
 - **Tried:** re-audited all six TUs touching the 0x43-byte node: four spell it via the
