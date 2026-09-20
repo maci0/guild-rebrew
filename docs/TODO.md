@@ -63,6 +63,21 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1109 (data pass): second ObjektNr2 spelling probed and reverted — the wall is the ACCESS FORM, not the name.**
+
+- **Tried:** the round-1108 revert left the attested name `gm_objekt_nr2_minimal_hersteller`
+  on record; this round retried with array-decay addressing (`table_cursor = name;`,
+  `name[ent_idx]`) instead of the `(int) symbol` casts, on the theory that decay folds the
+  base into the displacement like the literal. Object rulers stayed clean (642/642 RELOC,
+  0 structural, 0 register; spiel622 0/0/3-reloc) — but the LINK still regressed
+  **8,628 -> 9,237 (+609)**. Reverted both TUs and the stub definition.
+- **Conclusion:** the regression is not the symbol (link_stubs gained ~2.9 KB of .data either
+  way and both probes shifted bytes inside spiel622.c identically). The literal `0x101dd8e0`
+  in these three sites is LOAD-BEARING for byte placement — msvc6 materializes it differently
+  than any named-symbol form probed so far. Filed as a codegen-wall candidate; the attested
+  name stays in the docs for when an access-form spelling is found.
+- **Measured:** gate green after revert: verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK.
 **Round-1108 (data pass): attested-name hunt over the corpus; ObjektNr2 symbol swap REVERTED (+607).**
 
 - **Tried (docs):** swept every `"name(): "` / `"name: "` / `snake_Mixed` identifier in the
