@@ -63,6 +63,18 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1125 (data pass): EntityStruct +0x24 field probed for a name, stays field_24. No source change.**
+
+- **Tried:** the one surviving placeholder, `field_24` (+0x024, entity.h). Writers:
+  gm_AllocObjekt (init -1 beside 0x20 in the 0x12c/0x12d arms) and cm_ExElectionOrTrade
+  (death-year reset: `+0x1c/-1, +0x20/-1, +0x24/-1, +0x28/year-1`). The +0x20 word is
+  `rotation` and +0x28 is `season_born`; +0x24 is always written -1 alongside them and
+  never read as a value by any surviving code — no use-site fixes a semantic (term
+  limit? tenure? a second date?). Per the no-invented-names rule for unattested fields,
+  the honest placeholder with its init note survives this pass.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1124 stack.
 **Round-1124 (data pass): .bss gap table re-read — all gaps are named spans. No source change.**
 
 - **Tried:** re-read the full `rebrew data --bss` gap table. Every gap is bounded by
