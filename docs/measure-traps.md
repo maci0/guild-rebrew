@@ -2795,3 +2795,21 @@ intermediate is stale, not the code.
 where a stale object cost time (workflow-traps §24, rounds 1082-1084). The reliable recipe is: after any probe,
 `rm -f` the object explicitly, rebuild, then `rm -rf build/split_poc` and relink before reading **any** residue
 number.
+
+## 56. `verify --data --built <raw link>` rewrites VERIFIED statuses to DRIFT in the tool-owned toml (round 1102)
+
+Pointing `--built` at `build/split_poc.dll` to get a non-tautological `.data` check is tempting — but the
+comparison is the §20/§53 displacement artifact, and the tool **writes back**: every displaced symbol's
+`status` in `src/rebrew-data.toml` moves `VERIFIED` → `DRIFT` (measured: `g_next_object_id`,
+`g_producer_id_table`, `g_file_version`, the filter group, 30 in total against the round-698 steady state of
+23). `git status -- src/rebrew-data.toml` went dirty from a read-shaped command.
+
+**The rule.** `verify --data` is only meaningful on the deliverable (`build/server.dll`, postlinked). The
+raw-link `.data` divergence is postlink-supplied by §20's own proof; running the check against the raw link
+produces statuses that are wrong and persistent. Recovery: `git checkout src/rebrew-data.toml`, or re-run
+`rebrew verify --data` (deliverable) which writes `VERIFIED` back to all displaceable symbols.
+
+**All 30 mismatches were triaged to the displacement class** — spot-checked `g_file_version`'s bytes
+(`5a 00 01 00 53 61 76 65 67 61 6d 65`): reference holds them at `0x2d4f0`, raw link holds them identical at
+`0x2db30`; same content, different VA. `g_dispatch_table` is zeros in the raw link because `data_restore`/
+postlink supplies it. Nothing was content-drift.

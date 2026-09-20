@@ -64,6 +64,25 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
 
 ### Continuation notes (live log, newest first — start here)
 
+**Round-1102 (data pass): raw-link `.data` mismatch list re-triaged — 30/30 displacement, no content drift. No source change.**
+
+- **Tried:** `rebrew verify --data --built build/split_poc.dll` (raw link, non-tautological check): **92
+  matched, 30 mismatched**, every mismatch `first_diff +0`. Spot-check `g_file_version` (`0x1002d4ec`,
+  bytes `5a 00 01 00` + `"Savegame"`): reference holds them at file offset `0x2d4f0`, raw link holds the
+  identical bytes at `0x2db30`. Same content, different VA — the round-698 Accept-cascade displacement
+  class. `g_dispatch_table` is zeros in the raw link (`data_restore`/postlink supplies it). The count grew
+  round-698's 23 because the compare population/statuses changed, not because content drifted.
+- **Tool side effect recorded (measure-traps §56):** the raw-link run *writes back* — 30 symbols moved
+  `VERIFIED` → `DRIFT` in the tool-owned `src/rebrew-data.toml`. Recovered with `git checkout` +
+  re-running `rebrew verify --data` on the deliverable (back to 122 matched, 0 mismatched).
+- **Type conflicts still 10, all deliberate:** the five `g_query_filter*`/`g_filter_extra5` scalars
+  (round-925 measured note in `loadsave3.c`), `g_slot_table`/`g_entity_state_base`/`g_entity_type_bytes`
+  sizes (round-925 comments in `gm_NextEntityQueryMatch.c`), and two cosmetic decl-width pairs
+  (`s_ahm_AllocAhmInfo_1002a0f8` char = char[] from its initializer; `g_crashdump_data_10027104` both
+  sides declare `char[568]`). No lever.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**, raw-link `.data`
+  **21,481**, imports 100, wine load OK — all baselines held.
+- **Keep:** Round-975 stack.
 **Round-975: replaced the class proxy with each carrier's real first divergence; found a second misclassification.**
 
 - **Round 974 showed the branch census is a proxy.** This round located each carrier's **first differing
