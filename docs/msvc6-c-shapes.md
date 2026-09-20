@@ -7656,3 +7656,107 @@ from *some* source, and that source's DAG produced this order. What the measurem
 permuting what we have. The remaining work is recovering the original expression structure at each differing
 site, and `scripts/msvc6_probe.py` is the instrument for that: it compiles a snippet with the project's compiler
 and dumps the instructions, so a candidate shape can be tested in isolation before it is applied.
+
+## msvc6 SINKS a load past an intervening store, and hoists it back when the value is USED first (round 1106)
+
+This is the first backend rule this project has derived by querying the compiler rather than inferring it from
+a diff, and it explains a whole class of "the global load is in the wrong place" divergences.
+
+**The rule.** msvc6 does not move a load above a preceding store — it has no alias information that would let
+it. A load whose value is only needed *later* is therefore scheduled after the store. Give that value a use
+*before* the store and the load is hoisted to the top of the block.
+
+**Evidence 1 — a copy is not a use.** Source `s = g;` as its own leading statement, followed by a store:
+
+```c
+char* g;
+int f(unsigned char* m) { unsigned idx; int lc; char* s;
+  s = g;
+  idx = *(unsigned short*)(m + 0x14);
+  *(volatile int*)&lc = *(int*)(m + 0x16);
+  s = s + (idx << 6);
+  return (int)(s + idx); }
+```
+```
+mov  ecx, [esp + 4]
+xor  eax, eax
+mov  ax,  [ecx + 0x14]
+mov  ecx, [ecx + 0x16]
+mov  [esp + 4], ecx        <-- the store
+mov  ecx, [g]              <-- the load lands AFTER it
+```
+The `s = g;` assignment was copy-propagated away, so the load had no consumer above the store and sank.
+
+**Evidence 2 — a real use hoists it.** The same source with one dereference added:
+
+```c
+  s = g;
+  first = *(int*) s;       /* <-- the only change */
+  idx = *(unsigned short*)(m + 0x14);
+  ...
+```
+```
+mov  eax, [esp + 4]
+mov  edx, [g]              <-- the load, now SECOND, ahead of the store
+xor  ecx, ecx
+mov  cx,  [eax + 0x14]
+mov  eax, [eax + 0x16]
+mov  [esp + 4], eax        <-- the store, now sixth
+```
+
+**Evidence 3 — it lands on the real function.** `cm_ExProdObjekt`'s source had the table pointer's only uses
+*after* the volatile store:
+
+```c
+recipe_idx = (uint)*(ushort*)(msg + 0x14);
+*(volatile int*)&loop_count = *(int*)(msg + 0x16);
+recipe_shift = g_item_def_table + (recipe_idx << 6);
+```
+and the load sank to 5th, where the reference has it **1st**. Giving the table pointer both of its real uses
+before the store —
+
+```c
+recipe_idx = (uint)*(ushort*)(msg + 0x14);
+recipe_shift = g_item_def_table + (recipe_idx << 6);
+recipe_def   = recipe_shift + recipe_idx;
+*(volatile int*)&loop_count = *(int*)(msg + 0x16);
+```
+
+— moves the emitted block from this:
+
+```
+mov ebx,[ebp+0x16]   mov edx,[g_item_def_table]     <-- 5th, reference has it 1st
+xor eax,eax          xor eax,eax
+mov ax,[ebp+0x14]    mov ax,[ebp+0x14]
+mov [esp+0x18],ebx   mov ebx,[ebp+0x16]
+mov edx,[g]          mov ecx,eax
+mov ecx,eax          shl ecx,6
+shl ecx,6            add edx,ecx
+add edx,ecx          add eax,edx
+```
+
+to this, which matches the reference for its **first five instructions**:
+
+```
+mov edx, [g_item_def_table]
+xor eax, eax
+mov ax,  [ebp + 0x14]
+mov ebx, [ebp + 0x16]
+mov ecx, eax
+```
+
+**The linked result is +6, and that is the informative part.** The head now matches but the *store* moved too
+late — the reference interleaves it at `0x1000e21d`, between `mov ecx,eax` and `shl ecx,6`, where the same
+restructure puts it after. So the rule is necessary but not sufficient: hoisting the load also changes where the
+store lands, and the two must be matched together. The site is now a two-variable problem instead of a
+canonicalised one, which is progress of a kind this project had not previously been able to make.
+
+**Why this matters for the standing "is it possible" question.** It is possible, and this is the proof of
+mechanism: a source-level change moved an emitted instruction to the reference's exact position, for a reason
+that was predicted from the compiler's behaviour before the change was made. The remaining matches need the same
+treatment — recover the original's use structure, not permute our statements.
+
+**Method note.** All three experiments came from `scripts/msvc6_probe.py` in one command each. Rounds 1082-1104
+spent ~20 probes across five carriers without finding this, because they varied *spellings of the whole
+function* and read the link delta; this varied *one structural property* and read the emitted instructions.
+The instrument choice was the difference.

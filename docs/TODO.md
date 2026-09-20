@@ -31593,3 +31593,52 @@ documented), `vfs_ReadCompressed` (1), `CrashDump` (1). The `postlink_residual.p
 **State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
 (264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
 `md5 3febd2c4ca080a3749c12d4bf7452fbe`.
+
+## Round 1106 — found and verified the first backend RULE by querying the compiler: msvc6 sinks loads past stores
+
+The probe harness built last round paid off immediately. This round derived the first actual rule about msvc6's
+backend from the compiler rather than from a diff, and confirmed it lands on a real carrier.
+
+**The rule.** msvc6 will not move a load above a preceding store — it has no alias information permitting that.
+A load whose value is only needed later is scheduled *after* the store. Give the value a use before the store
+and the load is hoisted to the top of the block.
+
+**Three experiments, one command each:**
+
+| experiment | result |
+|---|---|
+| `s = g;` as a leading statement, then a store | load lands **6th**, after the store — the assignment was copy-propagated away, so it is not a use |
+| the same, plus `first = *(int*) s;` | load moves to **2nd**, ahead of the store |
+| applied to `cm_ExProdObjekt` | `mov edx,[g_item_def_table]` moves 5th → **1st**, matching the reference |
+
+**The real carrier now matches the reference for its first five instructions**, where before the whole block was
+misaligned:
+
+```
+mov edx, [g_item_def_table]     <- was 5th, now 1st — the reference's position
+xor eax, eax
+mov ax,  [ebp + 0x14]
+mov ebx, [ebp + 0x16]
+mov ecx, eax
+```
+
+**The linked delta is +6, and that is the informative part.** Hoisting the load also moves the *store*: the
+reference interleaves it at `0x1000e21d`, between `mov ecx,eax` and `shl ecx,6`, where the restructure puts it
+after. So the rule is necessary but not sufficient — the load and the store have to be matched together, and the
+site is now a two-variable problem instead of a canonicalised one. Reverted to hold the baseline; the shape is
+recorded in `msvc6-c-shapes.md` for whoever picks it up.
+
+**Why this answers the "it must be possible" argument properly.** A source-level change moved an emitted
+instruction to the reference's exact position, for a reason predicted from the compiler *before* the change was
+made. That is mechanism, not coincidence. The remaining matches need the same treatment: recover the original's
+use structure rather than permute our statements.
+
+**The method difference, and it is worth recording.** Rounds 1082-1104 ran ~20 probes across five carriers and
+found nothing, because each varied a *spelling of the whole function* and read the link delta. This round varied
+*one structural property* and read the *emitted instructions*. Same compiler, same budget — the instrument
+choice was the difference. `scripts/msvc6_probe.py` is now the first tool to reach for any "the backend put this
+instruction in the wrong place" question.
+
+**State:** gate pass — build-tree integrity OK, lint 188/188, compile 0 errors, verify 281/283
+(264 byte-matched), residue 8628 (`0x21b4`), raw-link `.data` 21481, imports 100, wine load OK. Deliverable
+`md5 3febd2c4ca080a3749c12d4bf7452fbe`. All probes reverted.
