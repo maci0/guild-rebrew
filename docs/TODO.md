@@ -63,6 +63,17 @@ Frozen window, not the live floor. Residue 8,666 is behind `RESIDUE_BASELINE`. "
   difficulties traps (§3 items 9–10) · ranked-leads revision · blockers synced.
 
 ### Continuation notes (live log, newest first — start here)
+**Round-1117 (data pass): rdata layout audit clean, 36 unowned toml symbols checked. No source change.**
+
+- **Tried:** `rebrew data --layout-audit --section .rdata`: **0 violations**; the 36
+  unowned toml symbols spot-checked to owned-by-link_stubs or owned-TU declarations
+  (e.g. `g_crc_table_241a0[256]` consumed by unknown/crc32.c, defined in link_stubs.c).
+  Unowned-in-audit means covered by the restore/patch path, not missing — the shipped
+  `.rdata` matches the reference per the deliverable check, and verify --data on the
+  deliverable stays 122/0.
+- **Gate:** no edit; lint 0/0, verify 281/283, byte-matched 264, residue **8,628**,
+  raw `.data` 21,481, imports 100, wine OK — all baselines held.
+- **Keep:** Round-1116 stack.
 **Round-1116 (data pass): COPY24 lifted as OFFICE_ROLE_TEMPLATE. Link +0.**
 
 - **Tried:** `game/aemter.c`'s local `COPY24` (six-dword office-template row) matches
