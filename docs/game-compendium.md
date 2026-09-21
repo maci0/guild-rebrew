@@ -52,9 +52,11 @@ all URLs 200 except the private MCP repo (404 for non-members) and the wiki
 - Multiplayer at release "unreif": bugs blocked internet play, JoWooD dropped
   support months after the addon (de wiki) — matches the netcode findings in §7.
   [Gamer.no](https://www.gamer.no/artikler/europa-1400-the-guild/2243/3) (Feb 2003):
-  LAN-only in practice, worked only over NetBEUI (not TCP/IP or IPX/SPX) in
-  their test; music "satisfying" but synthetic orchestra, profession-specific
-  melodies; verdict 4/5 ("fire tomler opp").
+  LAN-only in practice; their test network got it working only with NetBEUI
+  transport (binaries themselves are pure TCP/IP: AF_INET/SOCK_STREAM, zero
+  NetBEUI/IPX/DirectPlay strings — the NetBEUI bit was their LAN setup, not
+  the game's protocol); music "satisfying" but synthetic orchestra,
+  profession-specific melodies; verdict 4/5 ("fire tomler opp").
 - Reception: GameRankings 78.83%, Metacritic 82% ("generally favorable",
   14 reviews). Scores: GameSpot 8.5, IGN 8.5 (Editors' Choice), Game Informer
   8.5, Action Trip 8.5, GameZone 8.3, CGW 4/5, Adrenaline Vault 3.5/5,
