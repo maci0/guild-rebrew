@@ -4255,6 +4255,10 @@ cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.
 
 ["GOLDTL.0x0040ce80"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+size = 82
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T14:31:23+00:00"
 
 ["GOLDTL.0x0040f3d0"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"

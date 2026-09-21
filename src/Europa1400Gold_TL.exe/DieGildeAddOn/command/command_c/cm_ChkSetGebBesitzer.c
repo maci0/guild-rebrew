@@ -30,20 +30,21 @@
 #include "../../../Units/Error/error.h"
 
 // FUNCTION: GOLDTL 0x40ce80
-// SIZE: 96
-int __cdecl cm_ChkSetGebBesitzer(char* obj)
-{
-	ushort* building;
+// SIZE: 82
+void* __cdecl fcn_00422460(void*, int);
+void* __cdecl ahm_AllocateEntitySlot(void*, int, int, float);
 
-	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0x10));
-	if ((building != (ushort*) 0x0) && ((building[0x2d] & 2) != 0)) {
-		return 0;
+void __cdecl cm_ChkSetGebBesitzer(char* cmd)
+{
+	void* e;
+	void* r;
+	e = *(void**) (cmd + 0x14);
+	r = fcn_00422460(0, cmd + 0x130);
+	if (r != 0) {
+		if (*(int*) 0x6b8300 != 0) {
+			ahm_AllocateEntitySlot(r, *(int*) ((char*) e + 0x34), 0x7f, 3000.0f);
+		} else {
+			ahm_AllocateEntitySlot(r, *(int*) ((char*) e + 0x34), 0x7f, 1000.0f);
+		}
 	}
-	LogMessageInternal(
-		"D:\\Develop\\DieGildeAddOn\\command\\command.c",
-		0x256b,
-		"cm_ChkSetGebBesitzer() Invalid Id or inavlid status",
-		1
-	);
-	return 1;
 }
