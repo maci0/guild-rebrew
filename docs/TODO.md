@@ -33309,3 +33309,11 @@ instruction in the wrong place" question.
 - **cm_ChkSetGebBesitzer (0xce80):** target is a different builder (fcn_00422460 check +
   ahm_AllocateEntitySlot call with float const 0x453b8000); source file not found at marker.
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 105 (47 exact/58 reloc), lint err 0. Tree clean.
+
+### Round 1266 / session R129-130 (GOLDTL: gm_ResetAllEntities RELOC 59/59)
+- **GOLDTL 105 -> 106.** gm_ResetAllEntities (0x4297c0, spiel.c) RELOC 59/59. The server-import body
+  (EntityQueryRecord walk + gm_CleanupBuildingEntity + zero-fill) was a DIFFERENT function. Real GOLDTL:
+  `for(i=0;i<0x64c00;i+=0xc98){ e=*(unsigned char**)0x6b7e94 + i; if(e[0x124]&1){ *(char**)0x6b7e98=e;
+  fcn_00429670(e);} } *(char**)0x6b7e98=0;` — stride-0xc98 pointer-table scan, store-anchor-then-call.
+  Base is a VALUE at 0x6b7e94 (deref), anchor g_entity_query 0x6b7e98 store.
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 106 (47 exact/59 reloc), lint err 0.

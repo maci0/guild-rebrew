@@ -27,26 +27,18 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 // FUNCTION: GOLDTL 0x4297c0
 // SIZE: 59
 // gm_ResetAllEntities
-
+extern void __cdecl fcn_00429670(unsigned char*);
 void __cdecl gm_ResetAllEntities(void)
 {
 	int i;
-	EntityQueryRecord* entity_cursor;
-	for (i = 0; i < 0x100; i++) {
-		entity_cursor = (EntityQueryRecord*) g_entity_ptr + i;
-		if (entity_cursor->type != 0) {
-			gm_CleanupBuildingEntity((unsigned char*) entity_cursor);
+	unsigned char* e;
+	for (i = 0; i < 0x64c00; i += 0xc98) {
+		e = (unsigned char*) *(unsigned int*) 0x6b7e94 + i;
+		if (e[0x124] & 1) {
+			*(unsigned char**) 0x6b7e98 = e;
+			fcn_00429670(e);
 		}
 	}
-	{
-		int* dst;
-		int n;
-		dst = (int*) g_entity_ptr;
-		for (n = 0; n < 0x2a40; n++) {
-			*dst++ = 0;
-		}
-	}
+	*(unsigned char**) 0x6b7e98 = 0;
 }
 
-/* Cleans up object entities. Frees inventory objects and
- * linked item chains from all active entities. */
