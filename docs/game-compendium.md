@@ -92,8 +92,9 @@ artefact).
   [server.dll.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/server.dll.md)
   uses different names — `srv_GameLoop`, `srv_InitServer` — unverified here;
   tree names above are what `src/server.dll` annotates.)
-- Two-phase commands: `cm_Chk*` validate, `cm_Ex*` execute, both
-  `int __cdecl f(void* cmd, void* result)` (0 OK, 1 reject/fail).
+- Two-phase commands: `cm_Chk*` validate, `cm_Ex*` execute; handlers return int
+  (0 OK, 1 reject/fail), typically `(cmd, result)` pointer pairs — exact
+  parameter spellings vary per TU in the tree.
 - Lobby dispatch `lb_ExLobbyServerCommand` (0x10014db0): 7-way switch on
   `*(int*)(msg+0x10)`: 0 Playerlist, 1 LobbyConfig, 2 PlayerHasJoined,
   3 BroadcastStateChange, 4 PlayerRecordBroadcast, 5 EntitySync, 6 route to `cm_`.
