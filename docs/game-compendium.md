@@ -23,13 +23,14 @@ private MCP repo (404 for non-members) and the wiki (502).
 
 - Life sim + realtime + role-play + nonlinear. Full 3D engine, bird's-eye
   camera, zoom, interiors enterable. Left-click select, right-click deselect.
-- Self-created protagonist, 12 professions (press claim; server.dll has no
+- Self-created protagonist, 12 professions / career paths
+  ([Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild); server.dll has no
   profession list — zero hits for smith/tailor/mason/priest/tavern/thief;
   only `alchemistry_logic`/`ahm_ExAllocAlchemist` strings), missions or
   open-ended sim.
-- Dynasty to power/wealth in historic European cities. Multiplayer to 8 players
-  (press claim; server binary defaults `g_max_players` 2, lobby enforces the
-  passed-in value).
+- Dynasty to power/wealth in historic European cities. Multiplayer up to 8 players
+  ([Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild), citing Gamespot E3 preshow;
+  server binary defaults `g_max_players` 2, lobby enforces the passed-in value).
 - Playable cities: London (easiest), Berlin, Madrid, Nuremberg, Paris, Milan
   (hardest). Game ends ~1800–1815 (end of feudal era framing).
 - Professions in three groups (per [C.O.R.E. guide](https://core-rpg.net/articles/the-guild-guide)):
