@@ -80,3 +80,4 @@ build-*/
 
 # FLIRT signature packs (vendored, re-downloadable via rebrew flirt --fetch)
 /flirt_sigs/
+references/dxsdk8/
