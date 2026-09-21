@@ -55,7 +55,7 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
 | Binary | Role | Status here |
 |---|---|---|
 | `original/Server/server.dll` | Dedicated server, game logic | Active reversing target, 283 annotated (of 543 discovered) |
-| `original/Europa1400Gold_TL.exe` | T&L client, shared game logic | Active focus, 6335 discovered, 175 annotated |
+| `original/Europa1400Gold_TL.exe` | T&L client, shared game logic | Active focus, 6335 discovered, 174 annotated |
 | `original/Europa1400Gold.exe` | Base client | Validation target, 4638 discovered, 330 annotated |
 
 `server.dll` exports: `Init` (0x10009320), `Exit` (0x10009350). Image base
@@ -159,7 +159,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [europa1400-database](https://github.com/europa1400-community/europa1400-database) | Editions/versions/patches/executables YAML + mkdocs |
 | [europa1400-decompilation](https://github.com/europa1400-community/europa1400-decompilation) | server.dll outline, function table, network.md (confidence-scored, partly renamed); full `server.dll.c` pseudo-C dump (~1 MB) |
 | [fuse_file_access_monitor](https://github.com/europa1400-community/fuse_file_access_monitor) | FUSE file-access monitor prototype (fusers+iced), supports asset research |
-| [Europa1400.Tools](https://github.com/europa1400-community/Europa1400.Tools) | .NET asset tools; structs Ageb Aobj Bgf Gfx Sbf Vector3 |
+| [Europa1400.Tools](https://github.com/europa1400-community/Europa1400.Tools) | .NET asset tools; structs cover Ageb (buildings/coords), Bgf (faces/polygons/skeleton/models), Gfx (graphics/shapebanks), Sbf (soundbanks), Aobj, Vector3 |
 | [europa1400-tools](https://github.com/europa1400-community/europa1400-tools) | Python asset decode/convert/export: formats ageb aobj baf bgf ed3 gfx ogr sbf txs; converters incl. bgf→gltf/wavefront |
 | [europa1400-imhex](https://github.com/europa1400-community/europa1400-imhex) | ImHex patterns: ageb aobj baf bgf cty ed3 form gfx ogr res sbf scr txs |
 | [europa1400-hooks](https://github.com/europa1400-community/europa1400-hooks) | HookDLL netfix predecessor (MinHook, Zig) |
