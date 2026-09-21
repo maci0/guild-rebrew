@@ -33325,3 +33325,11 @@ instruction in the wrong place" question.
   to cast form (73/81). gm_StartFilteredEntitySearch IS RELOC (header) — its STUB status is stale, no
   unlock needed for gm_QueryEntitySum.
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 106 (47 exact/59 reloc), lint err 0. Tree clean.
+
+### Round 1268 / session R133 (GOLDTL: cm_ExKillSpieler RELOC 65/65)
+- **GOLDTL 106 -> 107.** cm_ExKillSpieler (0x40fcd0, cm_ExKillSpieler.c) RELOC 65/65. The server-import
+  shape (gm_LookupEntityRecordById/gm_KillSpieler + inline "D:\Develop..." string) was a DIFFERENT
+  body. Real GOLDTL: `e=fcn_0041dd90(*(int*)cmd); if(e) fcn_00452420(*(int*)cmd);
+  else fcn_00425bf0(*(char**)0x6b7e98, *(int*)(base+0x118), (char*)0x676988); return 0;` — no error
+  string literal, the log goes through the 0x6b7e98 context object with a const string VA.
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 107 (47 exact/60 reloc), lint err 0.

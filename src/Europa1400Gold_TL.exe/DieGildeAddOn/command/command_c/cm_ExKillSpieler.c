@@ -27,21 +27,19 @@
 #include "../../../Units/Error/error.h"
 
 // FUNCTION: GOLDTL 0x40fcd0
-// SIZE: 80
+// SIZE: 65
+void* __cdecl fcn_0041dd90(int);
+int __cdecl fcn_00452420(int);
+int __cdecl fcn_00425bf0(void*, int, char*);
+
 int __cdecl cm_ExKillSpieler(int cmd)
 {
-	ushort* entity;
-
-	entity = (ushort*) gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
-	if (entity != (ushort*) 0x0) {
-		gm_KillSpieler((uint) *entity, *(int*) (cmd + 0x14));
-		return 0;
+	void* e;
+	e = fcn_0041dd90(*(int*) cmd);
+	if (e != 0) {
+		fcn_00452420(*(int*) cmd);
+	} else {
+		fcn_00425bf0(*(void**) 0x6b7e98, *(int*) ((char*) *(void**) 0x6b7e98 + 0x118), (char*) 0x676988);
 	}
-	LogMessageInternal(
-		"D:\\Develop\\DieGildeAddOn\\command\\command.c",
-		0x397d,
-		"cm_ExKillSpieler():Could not find SpielerID!",
-		1
-	);
 	return 0;
 }
