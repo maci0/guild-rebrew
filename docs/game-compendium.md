@@ -174,7 +174,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [europa1400-memory-editor](https://github.com/europa1400-community/europa1400-memory-editor) | Memory editor (x86 C++ DLL injected via LordPE/Cheat Engine) |
 | [europa1400-ghidra-mcp](https://github.com/europa1400-community/europa1400-ghidra-mcp) | Ghidra MCP (private) |
 | [die-gulde](https://github.com/europa1400-community/die-gulde) | Unity (6000.0.43f1) remake homage, early development, not yet playable |
-| [networkfix](https://github.com/maci0/europa1400-networkfix) | Supported netfix .asi, harness-tested 15 game-years; docs: architecture, problem-analysis, server-dll-versions, configuration |
+| [networkfix](https://github.com/maci0/europa1400-networkfix) | Supported netfix .asi, 15 game-years VPN-stable; headless harness (2 Wine containers, xdotool-driven, A/B baseline via `NETWORKFIX_DISABLE=1`); docs: architecture, problem-analysis, server-dll-versions, configuration |
 | [europa1400-lua](https://github.com/maci0/europa1400-lua) | In-process LuaJIT RE console: 51 modules (memory/code/PE/domain/workflow); catalog candidates all `status="candidate"`, none with verified address; console is OEM code page (German needles = Latin-1 escapes); docs: API, USAGE, EXAMPLES, TROUBLESHOOTING |
 | [rebrew](https://github.com/maci0/rebrew) | This repo's decomp toolchain (MSVC6-in-Docker matching) |
 | [rebrew-toolchains](https://github.com/maci0/rebrew-toolchains) | Standalone legacy-compiler Docker images (MSVC 1.0–11.0, Borland, Watcom, Delphi); MSVC6 image is what `rebrew-cmake-cl` runs through |
