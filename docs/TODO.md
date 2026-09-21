@@ -33389,3 +33389,8 @@ instruction in the wrong place" question.
 - **Negative:** server->GOLDTL cross-import is destructive here — overwrote gm_RandomQuadratic const-swap fix with stale server copy + EXTRACT_ERROR churn. Reverted wholesale. Per-VA import only.
 - **Negative:** cm_ExCreateCitizen/cm_ExModifyStat compile once externs added but wrong-body SIZE (68/441, 30/438). Reverted.
 - **Gates:** GOLDTL 111 (47 exact/64 reloc), lint 0, tree clean.
+
+### Round 1281 / session R258 (GOLDTL: amt_ValidateOfficeCandidate RELOC 205/205)
+- **GOLDTL 111 -> 112.** amt_ValidateOfficeCandidate (0x4e7f20): added `extern char g_office_slots[]` (was COMPILE_ERROR), then wrong-callee fix — target calls fcn_00508e40, not gm_LookupEntityRecordById. All 70 instructions exact, RELOC 205/205.
+- **Negative:** gv_AllocGraveyardField / ahm_ProcessEntityChain compile with bare externs but wrong-body (1/276, 1/46). Reverted.
+- **Gates:** GOLDTL 112 (47 exact/65 reloc), lint 0.
