@@ -350,7 +350,8 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   `textbin_german.bin`), `Movie/`, `msx/`.
 - Renderer: Direct3D 8 (GOLD links d3dx8 statically — 910 `LIBRARY: D3DX8`
   markers in `library_d3dx8.h` round 80 (was 907 round 39; header untracked,
-  parallel churn); DX8.1 SDK).
+  parallel churn); DX8.1 SDK). Note: `AGENTS.md` + `docs/TODO.md` still say 907 —
+  session logs are history (not rewritten); AGENTS correction left to tree owners.
   Import census round 40: GOLD.exe 212 imports / 10 DLLs (adds ADVAPI32, DDRAW,
   DINPUT, GDI32, ole32 to server's 4); TL.exe 275 imports / 11 DLLs (DINPUT→
   DINPUT8, adds d3d8). TL has 5 sections (extra D3DX), others 4.
