@@ -35,20 +35,26 @@
 
 // FUNCTION: GOLDTL 0x406510
 // SIZE: 80
-int __cdecl cm_ExModifyHealth(int cmd)
-{
-	int entity;
-	uint health;
+void* __cdecl fcn_0040c0a0(int);
 
-	entity = gm_LookupEntityRecordById(*(int*) (cmd + 0x10));
-	if (entity == 0) {
-		return 1;
+int __cdecl cm_ExModifyHealth(int cmd, char* name)
+{
+	unsigned char* obj;
+	char* d;
+	char* s;
+
+	obj = (unsigned char*) fcn_0040c0a0(cmd);
+	if (obj != 0) {
+		*(int*) (obj + 0x14) = cmd;
+		*(int*) (obj + 0xc) = 0;
+		*(void**) (obj + 0) = (void*) 0x406410;
+		obj[9] = 0x2f;
+		*(int*) (obj + 0x28) = 0;
+		obj[0x10] = 0;
+		d = (char*) obj + 0xf0;
+		s = name;
+		while ((*d++ = *s++) != 0) {
+		}
 	}
-	health = *(int*) (cmd + 0x14) + *(int*) (entity + 0x194);
-	health = health & ((int) health < 0) - 1;
-	if ((int) health >= 0x32) {
-		health = 0x32;
-	}
-	*(uint*) (entity + 0x194) = health;
 	return 0;
 }

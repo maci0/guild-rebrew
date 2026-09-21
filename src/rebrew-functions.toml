@@ -4249,6 +4249,7 @@ cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.
 
 ["GOLDTL.0x00406510"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+size = 80
 
 ["GOLDTL.0x00406560"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
@@ -4287,6 +4288,7 @@ cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.
 status = "SIZE_MISMATCH"
 updated_by = "verify"
 updated_at = "2026-09-21T10:32:44+00:00"
+size = 144
 
 ["GOLDTL.0x0041caa0"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/Error"
