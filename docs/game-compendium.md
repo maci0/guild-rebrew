@@ -50,11 +50,13 @@ still down).
   + site fetch round 33.
 - Multiplayer at release "unreif": bugs blocked internet play, JoWooD dropped
   support months after the addon (de wiki) — matches the netcode findings in §7.
-- Reception: GameRankings 78.83%, Metacritic 82% ("generally favorable"). IGN
-  Editors' Choice ("fascinatingly different, complex and addictive"), PC Action
-  Gold Award. Gamespot 2nd-best PC game Jan 2003. Electric Playground 2002 Best
-  Sim nominee (lost to MechWarrior 4: Mercenaries). 100,000 copies shipped
-  first week (not sold-through).
+- Reception: GameRankings 78.83%, Metacritic 82% ("generally favorable",
+  14 reviews). Scores: GameSpot 8.5, IGN 8.5 (Editors' Choice), Game Informer
+  8.5, Action Trip 8.5, GameZone 8.3, CGW 4/5, Adrenaline Vault 3.5/5,
+  Electric Playground 7.5, PC Gamer UK 73%, PC Action 85% (Gold Award),
+  the-laser B+, Eurogamer 5/10. Gamespot 2nd-best PC game Jan 2003.
+  Electric Playground 2002 Best Sim nominee (lost to MechWarrior 4:
+  Mercenaries). 100,000 copies shipped first week (not sold-through).
 - Sources: [Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
   [Worthplaying facts](https://worthplaying.com/article/2002/10/17/news/6404-europa-1400the-guild-facts-features/).
 
