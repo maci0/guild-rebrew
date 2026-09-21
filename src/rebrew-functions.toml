@@ -4322,9 +4322,10 @@ updated_at = "2026-09-21T10:32:44+00:00"
 
 ["GOLDTL.0x00420700"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
-status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T14:41:09+00:00"
+size = 81
 
 ["GOLDTL.0x00422150"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
@@ -4518,6 +4519,7 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /I/home/maci/Desktop/Projects/relumea/gui
 
 ["GOLDTL.0x004f1320"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+size = 128
 
 ["GOLDTL.0x004f15d0"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"

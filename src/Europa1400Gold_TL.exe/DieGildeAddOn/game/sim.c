@@ -10,24 +10,22 @@ extern unsigned char g_entity_type_bytes[1];
 // FUNCTION: GOLDTL 0x420700
 // SIZE: 81
 // sim_PriorityUpdate
+void __cdecl fcn_0042b040(int, void*);
 
-void __cdecl sim_PriorityUpdate(char* ctx, char* entity)
+void __cdecl sim_PriorityUpdate(char* entity, char* data)
 {
-	unsigned short tmp[4];
-	char* old;
-
-	plt_TableLookup((unsigned char) entity[0], tmp);
-	if ((unsigned short) (unsigned char) entity[0x65] < tmp[0]) {
-		old = *(char**) (ctx + 0x170);
-		if (old != 0) {
-			if ((unsigned char) old[0x65] > 0)
-				old[0x65]--;
-		}
-		*(char**) (ctx + 0x170) = entity;
-		entity[0x65]++;
+	if (entity == 0) {
+		return;
 	}
+	if (entity[0x104] == 0) {
+		return;
+	}
+	if (data == 0) {
+		return;
+	}
+	fcn_0042b040(*(int*) (entity + 0x100), entity + 0x10c);
+	*(int*) (entity + 0x110) = *(int*) (entity + 0x10c);
+	*(int*) (entity + 0x120) = *(int*) (entity + 0x11c);
+	*(char**) (entity + 0x114) = data;
 }
 
-/* Starts an entity query filtered by type byte from arg1.
- * Dispatches entity iteration across buildings, citizens, or
- * other entity categories based on the type selector. */

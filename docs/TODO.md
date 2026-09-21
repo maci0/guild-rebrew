@@ -33342,3 +33342,11 @@ instruction in the wrong place" question.
   Remaining 3B+22 structural: `ent` cross-call callee-save spill (mine edi, target keeps ecx) —
   documented register-allocator wall. Kept (obj still 90; near-promotable later).
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 108 (47 exact/61 reloc), lint err 0.
+
+### Round 1272 / session R144 (GOLDTL: sim_PriorityUpdate RELOC 81/81)
+- **GOLDTL 108 -> 109.** sim_PriorityUpdate (0x420700, sim.c) RELOC 81/81. Wrong-body (server
+  plt_TableLookup + ctx[0x170] swap). Real GOLDTL: keyed queue lookup —
+  guard chain entity!=0 && entity[0x104]!=0 && data!=0; `fcn_0042b040(entity[0x100], entity+0x10c);
+  entity[0x110]=entity[0x10c]; entity[0x120]=entity[0x11c]; entity[0x114]=data;`. 2-arg lookup into a
+  scratch, then 3 field copies. Straight rewrite; exact arg order (push edi; push eax = (key, buf)).
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 109 (47 exact/62 reloc), lint err 0.
