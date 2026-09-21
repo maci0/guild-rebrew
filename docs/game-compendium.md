@@ -9,6 +9,9 @@ private MCP repo (404 for non-members) and the wiki (502).
 
 - Title: Europa 1400: The Guild (German: Die Gilde). First of The Guild series.
 - Developer: 4HEAD Studios, Hannover. Publisher: JoWooD Productions.
+- Concept from 1997 (Lars Martensen), dev start autumn 1997, team 2 → 10 by
+  spring 2002 ([Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
+  citing Gamespy interview 12-2002).
 - Design: Lars Martensen. Code: Tobias Severin. Art: Thomas Bömelt.
 - Music: Gerhard Ottmer, Christoph Isermann, Lars Martensen (~2h09m, 46 tracks).
 - Release: UK 2002-10-18, US 2002-10-30, Windows. Genre: life simulation.
