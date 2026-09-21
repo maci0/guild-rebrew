@@ -33375,3 +33375,10 @@ instruction in the wrong place" question.
 
 ### Round 1278 / session R255 (GOLDTL: fcn_0053d690 98% frame wall re-confirmed)
 - GOLDTL held at 109. fcn_0053d690 (0x4c4900): two more buf-frame spellings (hoisted int v, pointer bp) both emit [esp+0x10] vs target [esp+8] — confirmed allocator alignment wall (10+ spellings total). ahm_CheckFlag deref regression reverted. Gates: server 281/2, GOLD 208/122, GOLDTL 109 (47 exact/62 reloc), lint 0, tree clean.
+
+### Round 1279 / session R256 (GOLDTL: plateau, round budget exhausted)
+- Final state: server 281/2, GOLD 208/122, GOLDTL 109 (47 exact/62 reloc), lint 0, tree clean.
+- gm_QueryEntitySum (0x50b7c0): 26/29 matched; 3 structural = conditional-edi-push + epilogue-order wall.
+- Notably the gm_RandomQuadratic RELOC extra was kept this session stretch (const-swap was the real fix).
+- Blocking: GOLDTL failing set is all documented allocator/codegen/padding walls; data-VA-leak, wrong-body,
+  --size, const-swap, branch-inversion levers exhausted. Need new allocator levers or target binary re-analysis.
