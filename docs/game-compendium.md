@@ -262,6 +262,9 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   tree). Calls used: WSAStartup/WSACleanup, socket, setsockopt, ioctlsocket,
   htons/htonl, bind, listen, accept, send/sendto, recv, closesocket, shutdown.
   LAN discovery: UDP broadcast 255.255.255.255 (`SendBroadcastPacket`, 0x10001130).
+  Timing: `timeGetTime` for 3 s announce gate, `GetTickCount` for sync,
+  `Sleep(0x1e)` loop pump + `Sleep(2000)` pre-start (all in `ServerMainThread.c`;
+  netfix clamps the 30 ms pump to 1 ms).
   Host = slot with flag 0x400 (`host_slot_found` scan in `ServerMainThread.c`),
   not "first connected" — community `server.dll.md` says first-connected,
   unverified here.
