@@ -190,6 +190,12 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   `gm_CheckEntityType`, `gm_CheckInventoryCapacity`, `gm_eval_SlotVoll`,
   `gm_ff_Objekt`), random (`gm_RandomFloat01`, `gm_RandomQuadratic`,
   `gm_RandomStatModifier`).
+- Shared types (`src/server.dll/game_structs.h`, sizes compiler-verified):
+  `PlayerSlot` (0x264264: flags + id + data), `LinkedNode` (0x43 packed:
+  type + entity_id + children + next), `OFFICE_SLOT` (0x18),
+  `OFFICE_ROLE_TEMPLATE` (0x18), `EntityQueryRecord` (0xa9 packed, 0x100-entry
+  table at `g_entity_ptr`) — distinct from `EntityStruct` (0x21c stride at
+  `g_slot_table`).
 - Lobby dispatch `lb_ExLobbyServerCommand` (0x10014db0): 7-way switch on
   `*(int*)(msg+0x10)`: 0 Playerlist, 1 LobbyConfig, 2 PlayerHasJoined,
   3 BroadcastStateChange, 4 PlayerRecordBroadcast, 5 EntitySync, 6 route to `cm_`.
