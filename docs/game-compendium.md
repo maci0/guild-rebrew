@@ -227,7 +227,18 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 - Savegame carries version-gated conditional blocks (community `handleLoad*Data`
   notes); quicksave slot 0 auto-writes daily 6:00, key Q (C.O.R.E. guide).
 
-## 9. Assets and engine
+## 9. Diagnostics (error/logging)
+
+- Unit `Units/Error/Error.c`: `LogMessageInternal(module, line, msg, severity)`,
+  `ReportFatalError`, `ReportMessage`, `DispatchLogOutput`,
+  `InitializeLogAndErrorHandler`, `ShutdownLogAndErrorHandler`,
+  `CrashDumpUnhandledExceptionFilter`, `EmitCrashModuleLine`,
+  `GetDebugRecordByIndex`, `AnalyzeInstruction`, `check_memory_protection`.
+- Every game function logs via `LogMessageInternal(__FILE__, line,
+  "<func>(): msg", severity)` — the log prefix is the strongest name evidence
+  (see §6). Crash dumps walk the stack with the Analyzer helpers.
+
+## 10. Assets and engine
 
 - Formats (ImHex patterns + Python construct parsers agree): ageb, aobj, baf,
   bgf, cty, ed3, form, gfx, ogr, res, sbf, scr, txs.
@@ -244,7 +255,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   Audio: Miles (mss32 `_AIL_stream_*`; ASI scan only when audio init succeeds
   per netfix harness). 2D fallback: DirectDraw/VESA (`dd_vesa`).
 
-## 10. Community ecosystem
+## 11. Community ecosystem
 
 | Repo | What |
 |---|---|
@@ -270,7 +281,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [ghidra-cli](https://github.com/maci0/ghidra-cli) | Headless Ghidra automation (functions/symbols/strings/xrefs) for RE agents |
 | Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502) |
 
-## 11. Repo doc map (this checkout)
+## 12. Repo doc map (this checkout)
 
 - `docs/general-knowledge.md` build/game facts. `docs/naming_conventions.md`
   source tree + attested names. `docs/msvc6-c-shapes.md` C→bytes.
