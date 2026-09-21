@@ -388,7 +388,7 @@ All 14 `europa1400-community` org repos covered below (round 83 audit; incl.
   (different game), `ct-recomp` (Chrono Trigger), `splat` (fork, N64-only),
   `ai-decomp` (general RE method wiki), `decompedia` (stub), `ghidra-65816`
   (65816 CPU module), rest are infra/LLM/electronics.
-| Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502; no Wayback snapshot round 84; still down) |
+- Wiki: [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502; no Wayback snapshot round 84; still down).
 
 ## 14. Repo doc map (this checkout)
 
@@ -402,4 +402,5 @@ All 14 `europa1400-community` org repos covered below (round 83 audit; incl.
   confirmed-push string check (`rebrew asm` + literal push).
 - Maintenance: annotated counts drift with reversing churn — re-verify with
   `grep -r "FUNCTION: <MARKER>" src/<target> --include="*.c" | wc -l` before
-  citing. Link health last swept round 19 (re-sweep when touching URLs).
+  citing. Link health swept round 19, re-swept round 57 (press/store/reboot
+  green, wiki 502).
