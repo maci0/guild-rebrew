@@ -17,8 +17,11 @@ private MCP repo (404 for non-members) and the wiki (502).
 - Release: UK 2002-10-18, US 2002-10-30, Windows. Genre: life simulation.
 - Expansion (2003-03): Trade, Greediness and Intrigue. Gold Edition (2005-11):
   base + expansion. Nintendo DS port (2009).
-- Reception: GameRankings 78.83%, Metacritic 82%. IGN Editors' Choice, PC Action
-  Gold Award. 100,000 copies shipped first week (not sold-through).
+- Reception: GameRankings 78.83%, Metacritic 82% ("generally favorable"). IGN
+  Editors' Choice ("fascinatingly different, complex and addictive"), PC Action
+  Gold Award. Gamespot 2nd-best PC game Jan 2003. Electric Playground 2002 Best
+  Sim nominee (lost to MechWarrior 4: Mercenaries). 100,000 copies shipped
+  first week (not sold-through).
 - Sources: [Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
   [Worthplaying facts](https://worthplaying.com/article/2002/10/17/news/6404-europa-1400the-guild-facts-features/).
 
