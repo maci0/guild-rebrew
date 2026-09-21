@@ -100,7 +100,8 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
   (555 reviews, 73%). Community hub: 249 discussion topics, active (graphics
   mods, T&L fix, multiplayer stability threads). Guides: 12 total incl.
   multiplayer netfix guides, window-mode (`game.ini Bildmodus=DIRECTWINDOW`,
-  `show_intro=0`), thief/smith occupation guides, RU fix collection.
+  `show_intro=0` — both keys verified present in GOLD.exe strings round 60),
+  thief/smith occupation guides, RU fix collection.
   GOG: [Gold Edition](https://www.gog.com/en/game/the_guild_gold_edition)
   (sku 1207658720, listed 2014-12-19, 4.2/5 over 793 ratings). Humble Store
   also listed (fr wiki).
