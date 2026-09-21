@@ -24,7 +24,8 @@ private MCP repo (404 for non-members) and the wiki (502).
   Per [de wiki](https://de.wikipedia.org/wiki/Die_Gilde).
 - Design: Lars Martensen. Code: Tobias Severin. Art: Thomas Bömelt.
 - Music: Gerhard Ottmer, Christoph Isermann, Lars Martensen (~2h09m, 46 tracks).
-- Release: UK 2002-10-18, US 2002-10-30, Windows. Genre: life simulation.
+- Release: UK 2002-10-18, US 2002-10-30, Windows. Genre: life simulation (en wiki)
+  / economic sim (de wiki: Wirtschaftssimulation) — sources differ, both cited.
 - Expansion (2003): Trade, Greediness and Intrigue (de: Gaukler, Gruften und
   Geschütze) — adds Nuremberg + tailor/jester/gravedigger professions + imperial
   politics level. Gold Edition (2005-11): base + expansion.
@@ -147,11 +148,11 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 - Naming: verbs English, game nouns German (Spieler, Objekt, Gebaeude/Geb, Raum,
   Lagerslot, Wohnsitz, Aemter, Friedhof). Preserve misspellings
   (`gm_ObjectsAvailble`, `gm_SubObjectNoKill` vs `gm_SubObjekt`).
-- Seasons `GM_WINTER/SPRING/SUMMER/AUTUMN`, events `HE_SIM_*`, objects
-  `ob_*`, commands `cmdt_*` — speculative working names from
-  `docs/naming_conventions.md`; no string literal found in server.dll
-  (zero hits for `GM_WINTER`, `HE_SIM`, `EINWANDERUNG`). Errors via
-  `LogMessageInternal(__FILE__, line,
+- Seasons `GM_*`, events `HE_SIM_*`, objects `ob_*`, commands `cmdt_*` —
+  speculative working names from `docs/naming_conventions.md`; only `ob_` /
+  `cmdt_` / `pef_` have string hits in server.dll (`ob_MARKTSTAND`,
+  `cmdt_ALLOC`, `pef_GELIEBTE`); `GM_WINTER`, `HE_SIM`, `EINWANDERUNG` have
+  zero hits. Errors via `LogMessageInternal(__FILE__, line,
   "<func>(): msg", severity)` — log prefix is strongest name evidence.
 
 ## 7. Network
