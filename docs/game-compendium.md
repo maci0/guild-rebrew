@@ -18,7 +18,11 @@ private MCP repo (404 for non-members) and the wiki (502).
 - Developer: 4HEAD Studios, Hannover. Publisher: JoWooD Productions.
 - Concept from 1997 (Lars Martensen), dev start autumn 1997, team 2 → 10 by
   spring 2002 ([Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
-  citing Gamespy interview 12-2002).
+  citing Gamespy interview 12-2002). Founders: Severin + Martensen, autumn 1997;
+  late-medieval setting (Reformation, Hundred Years' War; limited historic maps;
+  historian/archive consults). €100,000 loan; demo after 1 year; Infogrames deal
+  collapsed after FR-office "chaos"; JoWooD signed winter 2001. RU publisher:
+  Руссобит-М. Per [ru wiki](https://ru.wikipedia.org/wiki/Europa_1400:_The_Guild).
 - Ratings/media: USK 0, PEGI 3+. Languages: German + English. Media:
   CD-ROM/DVD-ROM/download. Controls: keyboard + mouse. Entry at MobyGames
   (bot-walled, 403 on fetch — search "Europa 1400: The Guild" there).
@@ -78,6 +82,8 @@ private MCP repo (404 for non-members) and the wiki (502).
   with de wiki's multiplayer verdict and §7 netcode.
 - Attributes (0–6 stars): Negotiation, Handicraft, Stealth/Guile, Combat,
   Rhetoric. Heir takes over at death (age 12+); childless death = game over.
+  Time: one game day ages character one year (ru wiki). RU reviews: Igromania
+  9.0/10, PlayGround 9.5/10, Absolute Games 75%, Strana Igr 7.0/10; MobyRank 77.
 - Note: guide-level claims above are press/community, not binary-derived.
 
 ## 3. Editions, versions, executables, patches
