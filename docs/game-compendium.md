@@ -88,6 +88,19 @@ still down).
   Rhetoric. Heir takes over at death (age 12+); childless death = game over.
   Time: one game day ages character one year (ru wiki). RU reviews: Igromania
   9.0/10, PlayGround 9.5/10, Absolute Games 75%, Strana Igr 7.0/10; MobyRank 77.
+- Action points ([cs wiki](https://cs.wikipedia.org/wiki/Europa_1400:_The_Guild)):
+  4/round base, raisable via items, house upgrades, 6th mastery level; spent on
+  mastery study, skill training, office powers, firefighting, confession.
+  6th skill point costs 12 AB; each skill trains in a house room (study free,
+  others must be built, only one fits the starter house). Mastery: 6 levels at
+  4 AB each; enterprise upgrade at 3rd and 5th; career switch costs 8 AB.
+- Career ([cs wiki](https://cs.wikipedia.org/wiki/Europa_1400:_The_Guild)): starts at
+  10,000 gold fortune + 500 gold citizen rights; offices pay yearly income;
+  top post sovereign (addon: pope/emperor appointments).
+- Platforms per cs wiki: Win 98/ME/2000/XP. Rating ESRB Teen (vs USK 0/PEGI 3).
+  Cities per cs wiki: 6 with traits (London short herb distance, Nuremberg
+  double area addon-only); professions 8 base + 3 addon (gravedigger, tailor,
+  itinerant entertainer) = 11.
 - Note: guide-level claims above are press/community, not binary-derived.
 
 ## 3. Editions, versions, executables, patches
