@@ -120,8 +120,8 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
 
 - Editions: Standard, Gold. Languages: en, de, ru. Distributions: Steam, GOG, retail.
 - Steam: [app 39520](https://store.steampowered.com/app/39520/The_Guild_Gold_Edition/),
-  publisher now THQ Nordic, release 18 Nov 2002, EN+DE full audio, tags
-  Simulation/Strategy, single+multiplayer + Family Sharing, Mostly Positive
+  publisher now THQ Nordic, original release 18 Nov 2002, Steam release
+  9 Sep 2014 (official API), EN+DE full audio, tags Simulation/Strategy, single+multiplayer + Family Sharing, Mostly Positive
   (555 reviews, 73%). Community hub: 249 discussion topics, active (graphics
   mods, T&L fix, multiplayer stability threads). Guides: 12 total incl.
   multiplayer netfix guides, window-mode (`game.ini Bildmodus=DIRECTWINDOW`,
