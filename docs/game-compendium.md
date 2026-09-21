@@ -96,10 +96,7 @@ still down round 70).
   Per [uk wiki](https://uk.wikipedia.org/wiki/Europa_1400:_The_Guild): exactly ONE heir;
   school at 8 (profession), university at 12 (stats); market = supply/demand +
   random events; low Handicraft → hire master (profit drops); titles unlock
-  residences/palaces/castles; mastery upgrade every 4 years. Cities (uk, 6):
-  Berlin, London, Madrid, Milan, Nuremberg, Paris. Release (uk): 25 Oct 2002.
-  Per [vi wiki](https://vi.wikipedia.org/wiki/Europa_1400:_The_Guild): domestic Feb 2002,
-  international later; span 1400–1815.
+  residences/palaces/castles; mastery upgrade every 4 years.
   Time: one game day ages character one year (ru wiki). RU reviews: Igromania
   9.0/10, PlayGround 9.5/10, Absolute Games 75%, Strana Igr 7.0/10; MobyRank 77.
 - Action points ([cs wiki](https://cs.wikipedia.org/wiki/Europa_1400:_The_Guild)):
@@ -111,10 +108,8 @@ still down round 70).
 - Career ([cs wiki](https://cs.wikipedia.org/wiki/Europa_1400:_The_Guild)): starts at
   10,000 gold fortune + 500 gold citizen rights; offices pay yearly income;
   top post sovereign (addon: pope/emperor appointments).
-- Platforms per cs wiki: Win 98/ME/2000/XP. Rating ESRB Teen (vs USK 0/PEGI 3).
-  Cities per cs wiki: 6 with traits (London short herb distance, Nuremberg
-  double area addon-only); professions 8 base + 3 addon (gravedigger, tailor,
-  itinerant entertainer) = 11.
+- Platforms per cs wiki: Win 98/ME/2000/XP. Cities per cs wiki: 6 with traits
+  (London short herb distance, Nuremberg double area addon-only).
 - Note: guide-level claims above are press/community, not binary-derived.
 
 ## 3. Editions, versions, executables, patches
