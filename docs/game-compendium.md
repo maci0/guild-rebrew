@@ -54,7 +54,7 @@ still down).
   14 reviews). Scores: GameSpot 8.5, IGN 8.5 (Editors' Choice), Game Informer
   8.5, Action Trip 8.5, GameZone 8.3, CGW 4/5, Adrenaline Vault 3.5/5,
   Electric Playground 7.5, PC Gamer UK 73%, PC Action 85% (Gold Award),
-  the-laser B+, Eurogamer 5/10. Gamespot 2nd-best PC game Jan 2003.
+  the-laser B+, Eurogamer 5/10, Jeuxvideo.com 15/20. Gamespot 2nd-best PC game Jan 2003.
   Electric Playground 2002 Best Sim nominee (lost to MechWarrior 4:
   Mercenaries). 100,000 copies shipped first week (not sold-through).
 - Sources: [Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
