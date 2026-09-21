@@ -33300,3 +33300,12 @@ instruction in the wrong place" question.
   into callee-save edi before the lea-chain index; mine uses ebx+fold). Documented wall class.
   Match +75 in one file.
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 105 (47 exact/58 reloc), lint err 0.
+
+### Round 1265 / session R128 (GOLDTL: flat — gv_ExtendProductionTime deref regress reverted)
+- **GOLDTL held at 105.** Tried applying the gv_ValidateEntityAction pointer-deref lesson to
+  gv_ExtendProductionTime's g_entity_type_table (`(char*)*(unsigned int*)0x868050`): REGRESSED
+  (363->111, obj 394) — MSVC6 folds the deref into a longer sequence there (allocator picks a
+  different layout than gv_ValidateEntityAction). Reverted to the constant-array form (363 NEAR).
+- **cm_ChkSetGebBesitzer (0xce80):** target is a different builder (fcn_00422460 check +
+  ahm_AllocateEntitySlot call with float const 0x453b8000); source file not found at marker.
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 105 (47 exact/58 reloc), lint err 0. Tree clean.
