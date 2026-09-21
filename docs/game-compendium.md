@@ -32,8 +32,9 @@ still down).
   Per [de wiki](https://de.wikipedia.org/wiki/Die_Gilde).
 - Design: Lars Martensen. Code: Tobias Severin. Art: Thomas Bömelt.
 - Music: Gerhard Ottmer, Christoph Isermann, Lars Martensen (~2h09m, 46 tracks).
-- Release: UK 2002-10-18, US 2002-10-30, Windows. Genre: life simulation (en wiki)
-  / economic sim (de wiki: Wirtschaftssimulation) — sources differ, both cited.
+- Release: UK 2002-10-18, US 2002-10-30, Windows (pl wiki: EU 18 Oct 2002).
+  Genre: life simulation (en wiki) / economic sim (de wiki) / strategy+RPG (pl wiki)
+  — sources differ, all cited.
 - Expansion (2003): Trade, Greediness and Intrigue (de: Gaukler, Gruften und
   Geschütze) — adds Nuremberg + tailor/jester/gravedigger professions + imperial
   politics level. Gold Edition (2005-11): base + expansion.
