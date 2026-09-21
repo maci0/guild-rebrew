@@ -112,6 +112,12 @@ all URLs 200 except the private MCP repo (404 for non-members) and the wiki
   top post sovereign (addon: pope/emperor appointments).
 - Platforms per cs wiki: Win 98/ME/2000/XP. Cities per cs wiki: 6 with traits
   (London short herb distance, Nuremberg double area addon-only).
+- Contemporary [4Players review](https://www.4p.de/test/die_gilde/3032795) (Jörg Luibl,
+  Mar 2002): 8 careers at launch (smith/carpenter/mason + alchemist/perfumer/
+  innkeeper + preacher/thief), dynasty 1400–1600, talents Verhandeln/
+  Handwerkskunst/Nacht & Nebel/Kampf/Rhetorik, yearly P&L + titles
+  (Bürger/Edelmann/Patrizier), 5 start cities (Köln/Dresden/Hannover/Berlin/
+  Augsburg); praises variety/replay, warns long learning curve + hard AI.
 - Note: guide-level claims above are press/community, not binary-derived.
 
 ## 3. Editions, versions, executables, patches
