@@ -33382,3 +33382,10 @@ instruction in the wrong place" question.
 - Notably the gm_RandomQuadratic RELOC extra was kept this session stretch (const-swap was the real fix).
 - Blocking: GOLDTL failing set is all documented allocator/codegen/padding walls; data-VA-leak, wrong-body,
   --size, const-swap, branch-inversion levers exhausted. Need new allocator levers or target binary re-analysis.
+
+### Round 1280 / session R257 (GOLDTL: m_init + ReportFatalError RELOC via missing-extern fix)
+- **GOLDTL 109 -> 111.** Two COMPILE_ERROR files fixed with bare externs (no GLOBAL VA, sibling-file pattern):
+  m_init (0x41de50) RELOC 162/162, ReportFatalError (0x41d8b0) RELOC 155/155.
+- **Negative:** server->GOLDTL cross-import is destructive here — overwrote gm_RandomQuadratic const-swap fix with stale server copy + EXTRACT_ERROR churn. Reverted wholesale. Per-VA import only.
+- **Negative:** cm_ExCreateCitizen/cm_ExModifyStat compile once externs added but wrong-body SIZE (68/441, 30/438). Reverted.
+- **Gates:** GOLDTL 111 (47 exact/64 reloc), lint 0, tree clean.
