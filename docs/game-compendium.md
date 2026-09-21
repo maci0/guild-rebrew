@@ -385,6 +385,10 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [resembl](https://github.com/maci0/resembl) | Assembly similarity search |
 | [ghidra-cli](https://github.com/maci0/ghidra-cli) | Headless Ghidra automation (functions/symbols/strings/xrefs) for RE agents |
 | [openmiles](https://github.com/maci0/openmiles) | Drop-in mss32.dll replacement (Zig, v3–v9 export parity) — directly relevant: GOLD.exe imports 31 `_AIL_*` (sample + stream + `waveOutClose`); no mss32 ships in `original/`, version string unconfirmed |
+- Negative sweep round 82 (owned repos checked, not relevant): `openholiday`
+  (different game), `ct-recomp` (Chrono Trigger), `splat` (fork, N64-only),
+  `ai-decomp` (general RE method wiki), `decompedia` (stub), `ghidra-65816`
+  (65816 CPU module), rest are infra/LLM/electronics.
 | Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502) |
 
 ## 14. Repo doc map (this checkout)
