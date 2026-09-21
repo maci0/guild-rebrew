@@ -33372,3 +33372,6 @@ instruction in the wrong place" question.
 
 ### Round 1277 / session R230-237 (flat)
 - GOLDTL held at 109. Padding walls (cm_ChkEntityLookup, cm_ChkJoinLeaveElection) not --size-promotable; fcn_0053d690 98% frame wall; CloseVfsStream big+protected. Gates server 281/2, GOLD 208/122, GOLDTL 109, lint 0, tree clean.
+
+### Round 1278 / session R255 (GOLDTL: fcn_0053d690 98% frame wall re-confirmed)
+- GOLDTL held at 109. fcn_0053d690 (0x4c4900): two more buf-frame spellings (hoisted int v, pointer bp) both emit [esp+0x10] vs target [esp+8] — confirmed allocator alignment wall (10+ spellings total). ahm_CheckFlag deref regression reverted. Gates: server 281/2, GOLD 208/122, GOLDTL 109 (47 exact/62 reloc), lint 0, tree clean.
