@@ -195,7 +195,10 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   type + entity_id + children + next), `OFFICE_SLOT` (0x18),
   `OFFICE_ROLE_TEMPLATE` (0x18), `EntityQueryRecord` (0xa9 packed, 0x100-entry
   table at `g_entity_ptr`) — distinct from `EntityStruct` (0x21c stride at
-  `g_slot_table`).
+  `g_slot_table`). Key globals: `g_current_year` (0x10035880) + clock words,
+  `g_file_version` (0x1002D4EC, savegame gate), `g_office_slots` (0x101DE5A0),
+  `g_max_players` (0x11764084), `g_tick_rate`, player slots at 0x101DEB00
+  (stride 0x264264). Data state: 329 metadata symbols, 0 differences.
 - Lobby dispatch `lb_ExLobbyServerCommand` (0x10014db0): 7-way switch on
   `*(int*)(msg+0x10)`: 0 Playerlist, 1 LobbyConfig, 2 PlayerHasJoined,
   3 BroadcastStateChange, 4 PlayerRecordBroadcast, 5 EntitySync, 6 route to `cm_`.
