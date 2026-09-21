@@ -348,8 +348,9 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   `Maps/`, `Gilde_add_on_german.gfx`), `Resources/` (`animations.bin`,
   `groups.bin`, `objects.bin`, `scenes.bin`, `scripts.bin`,
   `textbin_german.bin`), `Movie/`, `msx/`.
-- Renderer: Direct3D 8 (GOLD links d3dx8 statically — 907 `LIBRARY: D3DX8`
-  markers in `library_d3dx8.h`, count re-verified round 39; DX8.1 SDK).
+- Renderer: Direct3D 8 (GOLD links d3dx8 statically — 910 `LIBRARY: D3DX8`
+  markers in `library_d3dx8.h` round 80 (was 907 round 39; header untracked,
+  parallel churn); DX8.1 SDK).
   Import census round 40: GOLD.exe 212 imports / 10 DLLs (adds ADVAPI32, DDRAW,
   DINPUT, GDI32, ole32 to server's 4); TL.exe 275 imports / 11 DLLs (DINPUT→
   DINPUT8, adds d3d8). TL has 5 sections (extra D3DX), others 4.
