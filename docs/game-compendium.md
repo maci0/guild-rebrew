@@ -68,7 +68,9 @@ Round-10 independent PE re-parse confirms: 4 sections (.text/.rdata/.data/.reloc
 100 imports, base, both exports. CRT static LIBCMT, zlib 1.1.3 vendored
 (community origins:
 [zlib_functions.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/zlib_functions.md) —
-never reverse, links as stock).
+never reverse, links as stock). Compiler MSVC6 (`/O2 /Gd` project-wide;
+SP6 confirmed, three per-file `-sp5-pp` pins; nine local images collapse to
+three real stops: base group, `-sp5-pp`, `-sp6`).
 Evidence: `docs/general-knowledge.md`, `rebrew-project.toml`.
 
 ## 5. Original source tree (attested)
