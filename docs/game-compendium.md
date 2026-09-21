@@ -10,8 +10,11 @@ private MCP repo (404 for non-members) and the wiki (502).
 - Title: Europa 1400: The Guild (German: Die Gilde). First of The Guild series.
   Spiritual successor to Die Fugger II. Genre per German wiki: economic sim
   ([de](https://de.wikipedia.org/wiki/Die_Gilde)).
-- German-base cities: Augsburg, Berlin, Dresden, Hannover, Köln (vs international
-  London/Madrid/Milan/Nuremberg/Paris set — editions differ; both lists cited).
+- Cities: German-base set per de wiki (Augsburg, Berlin, Dresden, Hannover,
+  Köln); international set per C.O.R.E. guide (London/Berlin/Madrid/Nuremberg/
+  Paris/Milan). Binaries carry no city list — GOLD.exe holds only `Augsburg`
+  (config default `STADT=`) and `_STADTWAPPEN_BERLIN` (crest asset); city data
+  ships in game data files, not the exes.
 - Developer: 4HEAD Studios, Hannover. Publisher: JoWooD Productions.
 - Concept from 1997 (Lars Martensen), dev start autumn 1997, team 2 → 10 by
   spring 2002 ([Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
