@@ -40,7 +40,9 @@ private MCP repo (404 for non-members) and the wiki (502).
   (2008) + Renaissance (2010, ex-fan-mod); Gilde 1400 browser (Gameforge,
   2009–2012); Die Gilde DS (2009-04, turn-based not realtime); The Guild 3
   (2022-06-14, GolemLabs→Purple Lamp). Reboot: Die Gilde – Europa 1410
-  (Ashborne Games, announced 2026). Per [de wiki](https://de.wikipedia.org/wiki/Die_Gilde).
+  (Ashborne Games) — official site [theguild.thqnordic.com](https://theguild.thqnordic.com)
+  live, Early Access on Steam, Discord active. Per [de wiki](https://de.wikipedia.org/wiki/Die_Gilde)
+  + site fetch round 33.
 - Multiplayer at release "unreif": bugs blocked internet play, JoWooD dropped
   support months after the addon (de wiki) — matches the netcode findings in §7.
 - Reception: GameRankings 78.83%, Metacritic 82% ("generally favorable"). IGN
