@@ -1,5 +1,5 @@
 // FUNCTION: GOLDTL 0x506df0
-// SIZE: 47
+// SIZE: 32
 // gm_IsInRange
 
 int __cdecl gm_MapEntityStatRange(int);

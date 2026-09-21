@@ -33258,3 +33258,14 @@ instruction in the wrong place" question.
   target exactly (z-path reloads stream from stack, nz-path holds esi=stream/edi=value). 19 exact + 1 reloc.
 - **Also:** fcn_0053d690 parked at NEAR 49/50 (buf frame-offset [esp+0x10] vs [esp+8] wall).
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 103 (46 exact/57 reloc), lint err 0.
+
+### Round 1261 / session R123 (GOLDTL: gm_IsInRange RELOC 32/32 via --size override)
+- **GOLDTL 103 -> 104.** gm_IsInRange (0x506df0, fcn_00503f30.c) -> RELOC 32/32 (1 reloc).
+  Body already byte-identical (0 diffs, `if(10<=r<=14)return 0; else return 2;` matches target
+  exactly) but stuck SIZE_MISMATCH because rebrew metadata size=48 (discovery over-merged
+  0x506e10 into the span; real span is 32). `rebrew test --size 32` writes compiled size + promotes.
+  Note: `--fix-sizes` alone did NOT promote on stale discovery-size md; explicit `--size` override does.
+- **Parked (walls):** fcn_0053d690 (buf [esp+0x10] vs [esp+8] frame wall), m_alloc CE (no GOLDTL
+  allocator data defined), ahm_AllocateEntitySlot (complex float builder), cm_ChkEntityLookup 0x4cc490
+  (padding wall), CloseVfsStream/vfs_OpenStream STUBs (big flag-driven builders).
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 104 (46 exact/58 reloc), lint err 0.

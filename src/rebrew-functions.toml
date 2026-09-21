@@ -3970,6 +3970,9 @@ size = 45
 ["GOLDTL.0x004c4900"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
 size = 50
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T14:01:23+00:00"
 
 ["GOLDTL.0x004cc450"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
@@ -4078,10 +4081,10 @@ size = 23
 
 ["GOLDTL.0x00506df0"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
-status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
-size = 48
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T14:09:29+00:00"
+size = 32
 
 ["GOLDTL.0x00508e80"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
@@ -4264,9 +4267,9 @@ cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.
 
 ["GOLDTL.0x00419390"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"
-status = "SIZE_MISMATCH"
-updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T14:03:59+00:00"
 size = 48
 
 ["GOLDTL.0x004193f0"]
