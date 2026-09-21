@@ -370,7 +370,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [recoverage](https://github.com/maci0/recoverage) | Coverage dashboard for binary-matching decomp (per-byte .text/.data/.bss grid) |
 | [resembl](https://github.com/maci0/resembl) | Assembly similarity search |
 | [ghidra-cli](https://github.com/maci0/ghidra-cli) | Headless Ghidra automation (functions/symbols/strings/xrefs) for RE agents |
-| [openmiles](https://github.com/maci0/openmiles) | Drop-in mss32.dll replacement (Zig, v3–v9 export parity) — directly relevant: game imports Miles `_AIL_stream_*`; replaces ASI audio path under Wine |
+| [openmiles](https://github.com/maci0/openmiles) | Drop-in mss32.dll replacement (Zig, v3–v9 export parity) — directly relevant: GOLD.exe imports 31 `_AIL_*` (sample + stream + `waveOutClose`); no mss32 ships in `original/`, version string unconfirmed |
 | Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502) |
 
 ## 14. Repo doc map (this checkout)
