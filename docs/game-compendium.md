@@ -8,6 +8,10 @@ private MCP repo (404 for non-members) and the wiki (502).
 ## 1. Game identity
 
 - Title: Europa 1400: The Guild (German: Die Gilde). First of The Guild series.
+  Spiritual successor to Die Fugger II. Genre per German wiki: economic sim
+  ([de](https://de.wikipedia.org/wiki/Die_Gilde)).
+- German-base cities: Augsburg, Berlin, Dresden, Hannover, Köln (vs international
+  London/Madrid/Milan/Nuremberg/Paris set — editions differ; both lists cited).
 - Developer: 4HEAD Studios, Hannover. Publisher: JoWooD Productions.
 - Concept from 1997 (Lars Martensen), dev start autumn 1997, team 2 → 10 by
   spring 2002 ([Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
@@ -15,8 +19,16 @@ private MCP repo (404 for non-members) and the wiki (502).
 - Design: Lars Martensen. Code: Tobias Severin. Art: Thomas Bömelt.
 - Music: Gerhard Ottmer, Christoph Isermann, Lars Martensen (~2h09m, 46 tracks).
 - Release: UK 2002-10-18, US 2002-10-30, Windows. Genre: life simulation.
-- Expansion (2003-03): Trade, Greediness and Intrigue. Gold Edition (2005-11):
-  base + expansion. Nintendo DS port (2009).
+- Expansion (2003): Trade, Greediness and Intrigue (de: Gaukler, Gruften und
+  Geschütze) — adds Nuremberg + tailor/jester/gravedigger professions + imperial
+  politics level. Gold Edition (2005-11): base + expansion.
+- Sequels: The Guild 2 (2006-09) + Pirates of the European Seas (2007) + Venice
+  (2008) + Renaissance (2010, ex-fan-mod); Gilde 1400 browser (Gameforge,
+  2009–2012); Die Gilde DS (2009-04, turn-based not realtime); The Guild 3
+  (2022-06-14, GolemLabs→Purple Lamp). Reboot: Die Gilde – Europa 1410
+  (Ashborne Games, announced 2026). Per [de wiki](https://de.wikipedia.org/wiki/Die_Gilde).
+- Multiplayer at release "unreif": bugs blocked internet play, JoWooD dropped
+  support months after the addon (de wiki) — matches the netcode findings in §7.
 - Reception: GameRankings 78.83%, Metacritic 82% ("generally favorable"). IGN
   Editors' Choice ("fascinatingly different, complex and addictive"), PC Action
   Gold Award. Gamespot 2nd-best PC game Jan 2003. Electric Playground 2002 Best
