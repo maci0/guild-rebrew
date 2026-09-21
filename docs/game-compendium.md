@@ -22,7 +22,10 @@ entries marked as such.
 
 - Life sim + realtime + role-play + nonlinear. Full 3D engine, bird's-eye
   camera, zoom, interiors enterable. Left-click select, right-click deselect.
-- Self-created protagonist, 12 professions, missions or open-ended sim.
+- Self-created protagonist, 12 professions (press claim; server.dll has no
+  profession list — zero hits for smith/tailor/mason/priest/tavern/thief;
+  only `alchemistry_logic`/`ahm_ExAllocAlchemist` strings), missions or
+  open-ended sim.
 - Dynasty to power/wealth in historic European cities. Multiplayer to 8 players
   (press claim; server binary defaults `g_max_players` 2, lobby enforces the
   passed-in value).
