@@ -49,28 +49,26 @@ int __cdecl cm_ChkCutsceneReady(char*);
 
 // FUNCTION: GOLDTL 0x406560
 // SIZE: 87
-int __cdecl cm_ExCutsceneUpdate(int cmd, char* result)
-{
-	int readyResult;
-	int entityRecord;
-	int* entityIdPtr;
+void* __cdecl fcn_00402aa0(void*);
+void __cdecl fcn_00435500(void*, void*);
 
-	readyResult = cm_ChkCutsceneReady((char*) cmd);
-	if (readyResult != 0) {
-		if (result != (char*) 0x0) {
-			*result = '\x02';
+void __cdecl cm_ExCutsceneUpdate(unsigned char* cmd)
+{
+	unsigned char* p;
+	int* ent;
+	void* q;
+
+	if ((cmd[0x8c] & 0x10) != 0) {
+		p = *(unsigned char**) (cmd + 0x74);
+		if (p != 0) {
+			ent = *(int**) (cmd + 0x34);
+			if (ent[0x73] == 0)
+				p = fcn_00402aa0(cmd);
+			q = *(void**) (p + 0x68);
+			if (q != 0)
+				fcn_00435500(q, (void*) (ent[0x7b] + 0xf4));
+			*(void**) (cmd + 0x74) = 0;
 		}
-		return 1;
+		cmd[0x8c] &= 0xef;
 	}
-	entityIdPtr = (int*) (cmd + 0x14);
-	readyResult = 0x10;
-	do {
-		entityRecord = gm_LookupEntityRecordById(*entityIdPtr);
-		if (entityRecord != 0) {
-			*(int*) (entityRecord + 0x20c) = *(int*) (cmd + 0x10);
-		}
-		entityIdPtr = entityIdPtr + 1;
-		readyResult = readyResult + -1;
-	} while (readyResult != 0);
-	return 0;
 }

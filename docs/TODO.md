@@ -33333,3 +33333,12 @@ instruction in the wrong place" question.
   else fcn_00425bf0(*(char**)0x6b7e98, *(int*)(base+0x118), (char*)0x676988); return 0;` — no error
   string literal, the log goes through the 0x6b7e98 context object with a const string VA.
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 107 (47 exact/60 reloc), lint err 0.
+
+### Round 1270 / session R139 (GOLDTL: cm_ExCutsceneUpdate wrong-body decode 7->37, allocator wall)
+- **cm_ExCutsceneUpdate (0x406560):** SIZE -> improved (match 7->37, obj 90 vs 87). Wrong-body
+  (server cm_ChkCutsceneReady+entity-loop). Real GOLDTL: cutscene-object update — `if(cmd[0x8c]&0x10){
+  p=cmd[0x74]; if(p){ ent=cmd[0x34]; if(ent[0x1cc]==0) p=fcn_00402aa0(cmd); q=p[0x68]; if(q)
+  fcn_00435500(q, ent[0x1ec]+0xf4); cmd[0x74]=0; } cmd[0x8c]&=0xef; }` (void ret).
+  Remaining 3B+22 structural: `ent` cross-call callee-save spill (mine edi, target keeps ecx) —
+  documented register-allocator wall. Kept (obj still 90; near-promotable later).
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 108 (47 exact/61 reloc), lint err 0.
