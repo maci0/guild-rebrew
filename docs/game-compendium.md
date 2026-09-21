@@ -268,6 +268,9 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   Host = slot with flag 0x400 (`host_slot_found` scan in `ServerMainThread.c`),
   not "first connected" — community `server.dll.md` says first-connected,
   unverified here.
+- Player slots: base 0x101DEB00, stride 0x264264 (== `sizeof(PlayerSlot)`),
+  bound 0x114FFE20 (admin record); flags 0x400 host, 0x1000 disconnect,
+  0x08 host-savegame-wait; start mark `& ~0x200 | 0x4004`.
 - Original code assumes clean delivery; packet loss / `WSAEWOULDBLOCK` /
   partial send cause "out of sync" / disconnect.
 - Fixes: [networkfix](https://github.com/maci0/europa1400-networkfix) (recv→0-byte,
