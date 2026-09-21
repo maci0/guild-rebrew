@@ -16,7 +16,10 @@ still down).
   Paris/Milan). Binaries carry no city list — GOLD.exe holds only `Augsburg`
   (config default `STADT=`) and `_STADTWAPPEN_BERLIN` (crest asset); city data
   ships in game data files, not the exes.
-- Developer: 4HEAD Studios, Hannover. Publisher: JoWooD Productions.
+- Developer: 4HEAD Studios, Hannover (later Cranberry Production lineage per
+  [lld wiki](https://lld.wikipedia.org/wiki/Europa_1400:_The_Guild)/[Wikidata Q1213047](https://www.wikidata.org/wiki/Q1213047)).
+  Publisher: JoWooD Productions. Release-date variants: UK 18 Oct / US 30 Oct /
+  25 Oct (uk/en-wikidata/lld) / EU 18 Oct (pl) / domestic Feb 2002 (vi).
 - Concept from 1997 (Lars Martensen), dev start autumn 1997, team 2 → 10 by
   spring 2002 ([Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
   citing Gamespy interview 12-2002). Founders: Severin + Martensen, autumn 1997;
