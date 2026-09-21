@@ -96,7 +96,8 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
 - Steam: [app 39520](https://store.steampowered.com/app/39520/The_Guild_Gold_Edition/),
   publisher now THQ Nordic, release 18 Nov 2002, EN+DE full audio, tags
   Simulation/Strategy, single+multiplayer + Family Sharing, Mostly Positive
-  (555 reviews, 73%). Humble Store also listed (fr wiki).
+  (555 reviews, 73%). Community hub: 249 discussion topics, active (graphics
+  mods, T&L fix, multiplayer stability threads). Humble Store also listed (fr wiki).
 - DRM: none, SecuROM, Steam.
 - Versions: v1.01, v1.02, v1.03b, v1.04, v1.05b, v2.01–v2.06.
 - Executables: Gilde.exe / Gilde_TL.exe (de standard), GildeGold.exe /
