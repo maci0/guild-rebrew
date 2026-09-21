@@ -92,6 +92,8 @@ still down).
   random events; low Handicraft → hire master (profit drops); titles unlock
   residences/palaces/castles; mastery upgrade every 4 years. Cities (uk, 6):
   Berlin, London, Madrid, Milan, Nuremberg, Paris. Release (uk): 25 Oct 2002.
+  Per [vi wiki](https://vi.wikipedia.org/wiki/Europa_1400:_The_Guild): domestic Feb 2002,
+  international later; span 1400–1815.
   Time: one game day ages character one year (ru wiki). RU reviews: Igromania
   9.0/10, PlayGround 9.5/10, Absolute Games 75%, Strana Igr 7.0/10; MobyRank 77.
 - Action points ([cs wiki](https://cs.wikipedia.org/wiki/Europa_1400:_The_Guild)):
