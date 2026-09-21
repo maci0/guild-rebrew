@@ -98,7 +98,9 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
   publisher now THQ Nordic, release 18 Nov 2002, EN+DE full audio, tags
   Simulation/Strategy, single+multiplayer + Family Sharing, Mostly Positive
   (555 reviews, 73%). Community hub: 249 discussion topics, active (graphics
-  mods, T&L fix, multiplayer stability threads). Humble Store also listed (fr wiki).
+  mods, T&L fix, multiplayer stability threads). GOG: [Gold Edition](https://www.gog.com/en/game/the_guild_gold_edition)
+  (sku 1207658720, listed 2014-12-19, 4.2/5 over 793 ratings). Humble Store
+  also listed (fr wiki).
 - DRM: none, SecuROM, Steam.
 - Versions: v1.01, v1.02, v1.03b, v1.04, v1.05b, v2.01–v2.06.
 - Executables: Gilde.exe / Gilde_TL.exe (de standard), GildeGold.exe /
