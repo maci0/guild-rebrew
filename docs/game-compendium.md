@@ -16,6 +16,12 @@ private MCP repo (404 for non-members) and the wiki (502).
 - Concept from 1997 (Lars Martensen), dev start autumn 1997, team 2 → 10 by
   spring 2002 ([Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
   citing Gamespy interview 12-2002).
+- Ratings/media: USK 0, PEGI 3+. Languages: German + English. Media:
+  CD-ROM/DVD-ROM/download. Controls: keyboard + mouse. Entry at MobyGames
+  (bot-walled, 403 on fetch — search "Europa 1400: The Guild" there).
+  Official sites (archived): [diegilde.de](https://web.archive.org/web/20161018162253/http://www.diegilde.de/),
+  [theguildgame.com](https://web.archive.org/web/20240229175511/https://theguildgame.com/de/).
+  Per [de wiki](https://de.wikipedia.org/wiki/Die_Gilde).
 - Design: Lars Martensen. Code: Tobias Severin. Art: Thomas Bömelt.
 - Music: Gerhard Ottmer, Christoph Isermann, Lars Martensen (~2h09m, 46 tracks).
 - Release: UK 2002-10-18, US 2002-10-30, Windows. Genre: life simulation.
