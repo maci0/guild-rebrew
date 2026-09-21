@@ -238,7 +238,17 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   "<func>(): msg", severity)` — the log prefix is the strongest name evidence
   (see §6). Crash dumps walk the stack with the Analyzer helpers.
 
-## 10. Assets and engine
+## 10. Memory (m_alloc)
+
+- Unit `Units/m_alloc/m_alloc.c`, snake_case (not `m_VerbNoun`): `m_init(n)`
+  sets slot count + table; `m_AllocTracked(size, file:line)` is the tracked
+  implementation behind the `m_alloc` macro; `m_FreeTracked`, `m_PoolAlloc`,
+  `m_pool_free`, `m_ReportGroupInfo`, `m_ShutdownAllocator`.
+- `m_alloc` refuses before `m_init`. Shutdown anomaly string:
+  `"[*] Memory-Shutdown-Anomaly: [*]\nUsed %i blocks in %i bytes.\n\n%i"`.
+  `m_alloc_debug` is a block-group name (sprintf), not a symbol.
+
+## 11. Assets and engine
 
 - Formats (ImHex patterns + Python construct parsers agree): ageb, aobj, baf,
   bgf, cty, ed3, form, gfx, ogr, res, sbf, scr, txs.
@@ -255,7 +265,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   Audio: Miles (mss32 `_AIL_stream_*`; ASI scan only when audio init succeeds
   per netfix harness). 2D fallback: DirectDraw/VESA (`dd_vesa`).
 
-## 11. Community ecosystem
+## 12. Community ecosystem
 
 | Repo | What |
 |---|---|
@@ -281,7 +291,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [ghidra-cli](https://github.com/maci0/ghidra-cli) | Headless Ghidra automation (functions/symbols/strings/xrefs) for RE agents |
 | Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502) |
 
-## 12. Repo doc map (this checkout)
+## 13. Repo doc map (this checkout)
 
 - `docs/general-knowledge.md` build/game facts. `docs/naming_conventions.md`
   source tree + attested names. `docs/msvc6-c-shapes.md` C→bytes.
