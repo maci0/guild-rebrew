@@ -248,7 +248,15 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   `"[*] Memory-Shutdown-Anomaly: [*]\nUsed %i blocks in %i bytes.\n\n%i"`.
   `m_alloc_debug` is a block-group name (sprintf), not a symbol.
 
-## 11. Assets and engine
+## 11. Files (vfs)
+
+- Unit `Units/vfs/vfs.c`: `vfs_OpenStream`, `vfs_CloseStream`,
+  `vfs_FlushAndClose`, `vfs_ReadData`, `vfs_ReadCompressed`, `vfs_GetByte`,
+  `vfs_ReadUint32BE`, `vfs_CleanupObject`, `vfs_DestroyEntity`; zlib gzio
+  wrappers (`gzread`, `check_header`); shared `gz_stream` (0x64) header lifted
+  to `Units/vfs/gz_stream.h`.
+
+## 12. Assets and engine
 
 - Formats (ImHex patterns + Python construct parsers agree): ageb, aobj, baf,
   bgf, cty, ed3, form, gfx, ogr, res, sbf, scr, txs.
@@ -265,7 +273,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   Audio: Miles (mss32 `_AIL_stream_*`; ASI scan only when audio init succeeds
   per netfix harness). 2D fallback: DirectDraw/VESA (`dd_vesa`).
 
-## 12. Community ecosystem
+## 13. Community ecosystem
 
 | Repo | What |
 |---|---|
@@ -291,7 +299,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [ghidra-cli](https://github.com/maci0/ghidra-cli) | Headless Ghidra automation (functions/symbols/strings/xrefs) for RE agents |
 | Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502) |
 
-## 13. Repo doc map (this checkout)
+## 14. Repo doc map (this checkout)
 
 - `docs/general-knowledge.md` build/game facts. `docs/naming_conventions.md`
   source tree + attested names. `docs/msvc6-c-shapes.md` C→bytes.
