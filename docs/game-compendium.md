@@ -164,6 +164,15 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 - Two-phase commands: `cm_Chk*` validate, `cm_Ex*` execute; handlers return int
   (0 OK, 1 reject/fail), typically `(cmd, result)` pointer pairs — exact
   parameter spellings vary per TU in the tree.
+- Subsystems (all in `src/server.dll/DieGildeAddOn/`): `sim_` citizen sim
+  (`sim_AdvanceGameClock`, `sim_SetSyncParams`, `sim_PriorityUpdate`;
+  `sim_CreateCitizen` 0x10015500); `amt_` offices/elections
+  (`amt_ValidateOfficeCandidate`, `amt_ValidateAndAssignOffice`,
+  `amt_SwapOfficeHolders`, `amt_fio_LoadAemter/SaveAemter`); `ahm_` alchemy
+  (`ahm_ExAllocAlchemist`, `ahm_AllocAhmInfo`); `gv_` graveyard
+  (`gv_ExAllocGraveyardWorker`, `gv_AllocGraveyardField`,
+  `gv_SpawnEntities`, filter `gv_eval_SlotFrei`); `plt_` plant/zones
+  (`plt_SetPlantMap`, `plt_FindRecord`, `plt_CheckZoneAvailability`).
 - Lobby dispatch `lb_ExLobbyServerCommand` (0x10014db0): 7-way switch on
   `*(int*)(msg+0x10)`: 0 Playerlist, 1 LobbyConfig, 2 PlayerHasJoined,
   3 BroadcastStateChange, 4 PlayerRecordBroadcast, 5 EntitySync, 6 route to `cm_`.
