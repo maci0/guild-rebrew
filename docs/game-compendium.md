@@ -65,6 +65,17 @@ private MCP repo (404 for non-members) and the wiki (502).
   crafts (alchemy, carpentry, smithing, perfumery, tailoring, masonry), crafts
   with twists (priesthood, taverns, long-distance trade, moneylending,
   vagrancy), rogues/niche (necromancy, thievery, robbery, law service).
+  French wiki names 12 explicitly ([fr](https://fr.wikipedia.org/wiki/Europa_1400_:_Les_Marchands_du_Moyen_%C3%82ge)):
+  blacksmith, carpenter, mason, alchemist, perfumer, tavern-keeper, thief, cleric,
+  usurer, merchant, brigand, guard — 6 mastery levels each, 3 enterprise tiers
+  (e.g. church→abbey→cathedral).
+- Noble ranks: serf → citizen → patrician → noble → baron → count (fr wiki).
+  Offices (treasurer, judge…) pay monthly wage + perks (bodyguard, tax breaks).
+- French city order by difficulty: London, Berlin, Paris, Milan, Madrid (fr wiki
+  omits Nuremberg — pre-addon list).
+- Launch state: "tout simplement injouable" for 10–20 min sessions until patches
+  weeks later; latest known = beta-3 patch, never final (fr wiki) — consistent
+  with de wiki's multiplayer verdict and §7 netcode.
 - Attributes (0–6 stars): Negotiation, Handicraft, Stealth/Guile, Combat,
   Rhetoric. Heir takes over at death (age 12+); childless death = game over.
 - Note: guide-level claims above are press/community, not binary-derived.
