@@ -111,9 +111,9 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
 
 | Binary | Role | Status here |
 |---|---|---|
-| `original/Server/server.dll` | Dedicated server, game logic | Active reversing target, 283 annotated (of 543 discovered) |
-| `original/Europa1400Gold_TL.exe` | T&L client, shared game logic | Active focus, 6335 discovered, 174 annotated |
-| `original/Europa1400Gold.exe` | Base client | Validation target, 4638 discovered, 330 annotated |
+| `original/Server/server.dll` (286,720 bytes) | Dedicated server, game logic | Active reversing target, 283 annotated (of 543 discovered) |
+| `original/Europa1400Gold_TL.exe` (2,850,888 bytes) | T&L client, shared game logic | Active focus, 6335 discovered, 174 annotated |
+| `original/Europa1400Gold.exe` (2,301,952 bytes) | Base client | Validation target, 4638 discovered, 330 annotated |
 
 `server.dll` exports: `Init` (0x10009320), `Exit` (0x10009350). Image base
 0x10000000. Exactly 100 imports, 4 DLLs (KERNEL32, USER32, WS2_32, WINMM),
