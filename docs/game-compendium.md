@@ -165,10 +165,10 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [europa1400-hooks](https://github.com/europa1400-community/europa1400-hooks) | HookDLL netfix predecessor (MinHook, Zig) |
 | [europa1400-manager](https://github.com/europa1400-community/europa1400-manager) | Manager/launcher (Python+GUI): modules config/info/license/overview/patch; patch types archive/simple; consumes europa1400-database YAMLs |
 | [europa1400-docker](https://github.com/europa1400-community/europa1400-docker) | Docker run env (empty repo) |
-| [europa1400-network-bridge](https://github.com/europa1400-community/europa1400-network-bridge) | Network bridge (Python spec + package) |
+| [europa1400-network-bridge](https://github.com/europa1400-community/europa1400-network-bridge) | Asyncio TCP proxy bridge (server/client port-forward roles, GUI+config) |
 | [europa1400-memory-editor](https://github.com/europa1400-community/europa1400-memory-editor) | Memory editor (x86 C++ DLL injected via LordPE/Cheat Engine) |
 | [europa1400-ghidra-mcp](https://github.com/europa1400-community/europa1400-ghidra-mcp) | Ghidra MCP (private) |
-| [die-gulde](https://github.com/europa1400-community/die-gulde) | Unity remake homage |
+| [die-gulde](https://github.com/europa1400-community/die-gulde) | Unity (6000.0.43f1) remake homage, early development, not yet playable |
 | [networkfix](https://github.com/maci0/europa1400-networkfix) | Supported netfix .asi, harness-tested 15 game-years; docs: architecture, problem-analysis, server-dll-versions, configuration |
 | [europa1400-lua](https://github.com/maci0/europa1400-lua) | In-process LuaJIT RE console: 51 modules (memory/code/PE/domain/workflow); catalog candidates all `status="candidate"`, none with verified address; console is OEM code page (German needles = Latin-1 escapes); docs: API, USAGE, EXAMPLES, TROUBLESHOOTING |
 | [rebrew](https://github.com/maci0/rebrew) | This repo's decomp toolchain (MSVC6-in-Docker matching) |
