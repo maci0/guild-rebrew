@@ -216,7 +216,18 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   `NETWORKFIX_FASTSYNC`. Version table (SHA256 + hook RVAs) in
   [server-dll-versions](https://github.com/maci0/europa1400-networkfix/blob/main/docs/server-dll-versions.md).
 
-## 8. Community ecosystem
+## 8. Persistence (save/load)
+
+- Chain in `src/server.dll/DieGildeAddOn/loadsave/`: `ls_LoadSavegameHeader`
+  (0x10012470) → `ls_ReadVfsDataChecked` (0x10012440) → `ls_LoadExistingEntities`
+  (0x100127d0) → `ls_LoadBuildingEntityState` (0x100128f0) →
+  `ls_LoadDynamicEntities` (0x10012eb0) → `ls_LoadEntities` (0x10013230) →
+  `ls_LoadTownData` (0x10013b10); pointer fixup `ls_ID2Ptr` (0x10014070);
+  network receive `srv_RecvGame` (0x10014260, also logs `LoadGame():`).
+- Savegame carries version-gated conditional blocks (community `handleLoad*Data`
+  notes); quicksave slot 0 auto-writes daily 6:00, key Q (C.O.R.E. guide).
+
+## 9. Community ecosystem
 
 | Repo | What |
 |---|---|
@@ -242,7 +253,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [ghidra-cli](https://github.com/maci0/ghidra-cli) | Headless Ghidra automation (functions/symbols/strings/xrefs) for RE agents |
 | Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502) |
 
-## 9. Repo doc map (this checkout)
+## 10. Repo doc map (this checkout)
 
 - `docs/general-knowledge.md` build/game facts. `docs/naming_conventions.md`
   source tree + attested names. `docs/msvc6-c-shapes.md` C→bytes.
