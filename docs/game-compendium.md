@@ -344,3 +344,6 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   `docs/TODO.md` session log. `goal.md` durable objective.
 - Community tables use own names/confidence; do not import names without
   confirmed-push string check (`rebrew asm` + literal push).
+- Maintenance: annotated counts drift with reversing churn — re-verify with
+  `grep -r "FUNCTION: <MARKER>" src/<target> --include="*.c" | wc -l` before
+  citing. Link health last swept round 19 (re-sweep when touching URLs).
