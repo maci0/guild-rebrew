@@ -7,16 +7,17 @@
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-#define g_entity_table_end ((unsigned short*) 0x773da8)
-#define g_entity_type_table ((unsigned char*) 0x868050)
+#define g_entity_table_end (*(unsigned int*) 0x773da8)
+#define g_entity_type_table ((char*) *(unsigned int*) 0x868050)
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-extern int __cdecl gv_SpawnEntities(void* building, int count);
+extern int __cdecl fcn_004f1ad0(void* entity, int cmd_arg);
 
 int __cdecl gv_ValidateEntityAction(void* cmd)
 {
 	void* entity;
 	unsigned short grave_id;
 	unsigned char field_id;
+	int v;
 
 	gm_ResolveEntityById(&entity, 0, 0, *(int*) ((char*) cmd + 8));
 	if (entity) {
@@ -30,7 +31,8 @@ int __cdecl gv_ValidateEntityAction(void* cmd)
 				if (*(void**) ((char*) entity + 0x65) == 0) {
 					return -3;
 				}
-				return gv_SpawnEntities(entity, *(int*) ((char*) cmd + 0x13)) > 0 ? 0 : -4;
+				v = fcn_004f1ad0(entity, *(int*) ((char*) cmd + 0x13));
+				return v <= 0 ? -4 : 0;
 			}
 		}
 	}

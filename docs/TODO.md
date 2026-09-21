@@ -33289,3 +33289,14 @@ instruction in the wrong place" question.
 - **--size lever (2 this stretch):** gm_IsInRange, cm_MarkAndReturn are the proven byte-perfect-then-
   size-stuck wins; no further clean SIZE candidates found this scan (rest are real wrong-shape).
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 105 (47 exact/58 reloc), lint err 0.
+
+### Round 1264 / session R127 (GOLDTL: gv_ValidateEntityAction 63 -> 138 NEAR)
+- **gv_ValidateEntityAction (0x4f2ee0):** SIZE -> NEAR 138/161 (was 63/159). Three fixes:
+  1. `g_entity_table_end` -> deref `*(unsigned int*)0x773da8` (was const-folded `cmp ecx,imm`) — value-hold pattern R110.
+  2. `g_entity_type_table` -> pointer-deref `(char*)*(unsigned int*)0x868050` (target `mov edi,[0x868050]`).
+  3. WRONG CALLEE: source called gv_SpawnEntities; target calls `fcn_004f1ad0(entity,cmd+0x13)`; plus
+     branchless tail `setg/dec/and-4` = `v<=0?-4:0` (inverted ternary flips setle->setg).
+  Result: 50 exact + 2 reloc, 10 structural — ALL in the type-table allocator block (target loads base
+  into callee-save edi before the lea-chain index; mine uses ebx+fold). Documented wall class.
+  Match +75 in one file.
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 105 (47 exact/58 reloc), lint err 0.
