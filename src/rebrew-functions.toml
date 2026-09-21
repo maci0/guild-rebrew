@@ -1843,6 +1843,7 @@ updated_at = "2026-09-20T15:55:01+00:00"
 ["GOLDTL.0x004edcd0"]
 size = 16
 blocker = "Application code — pending per-function decompilation"
+cflags = "/O2 /Og /Gd"
 
 ["GOLDTL.0x00535550"]
 size = 16

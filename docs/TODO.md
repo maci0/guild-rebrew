@@ -33278,3 +33278,14 @@ instruction in the wrong place" question.
   promotes (--fix-sizes alone does not handle wrong-size claims including a trailing pad). Applies to any
   SIZE_MISMATCH with match==obj and 0 true diffs. gm_IsInRange was the first; this is the second.
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 105 (47 exact/58 reloc), lint err 0.
+
+### Round 1263 / session R125-126 (GOLDTL: fcn_004edcd0 tail-jump wall re-confirmed, flat)
+- **GOLDTL held at 105.** fcn_004edcd0 (0x4edcd0): pure tail-jump `value+=3; jmp fcn_00501490`.
+  Target is `mov [esp+4],eax; jmp` (16B, in-place arg patch). Tried int-return tail-call, /Og, and
+  void forms — MSVC6 always emits the non-tail `push eax; call` (obj 17 int / 15 void). The in-place
+  arg-patch tail-jmp is a hard MSVC6 lever (documented GOLD fcn_004ebf50 same class). Re-parked to
+  void form (15B, byte-closer than int 17B). gm_QueryEntitySum depends on gm_StartFilteredEntitySearch
+  STUB — not independent.
+- **--size lever (2 this stretch):** gm_IsInRange, cm_MarkAndReturn are the proven byte-perfect-then-
+  size-stuck wins; no further clean SIZE candidates found this scan (rest are real wrong-shape).
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 105 (47 exact/58 reloc), lint err 0.
