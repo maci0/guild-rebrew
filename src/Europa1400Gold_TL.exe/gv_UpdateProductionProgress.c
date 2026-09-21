@@ -6,7 +6,7 @@
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-extern unsigned short* g_entity_table_end; /* 0x1003546c */
+#define g_entity_table_end ((unsigned short*) *(unsigned int*) 0x773da8)
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
@@ -25,7 +25,7 @@ int __cdecl gv_UpdateProductionProgress(void* building)
 	if (entity) {
 		grave_id = *(unsigned short*) ((char*) entity + 0x27);
 		if (grave_id != 0xffff) {
-			if ((char*) 0x100358a0 + grave_id * 0x21c != (char*) g_entity_table_end) {
+			if ((char*) 0x7f4ca0 + grave_id * 0x21c != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
 				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
 					return -2;

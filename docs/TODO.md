@@ -33350,3 +33350,12 @@ instruction in the wrong place" question.
   entity[0x110]=entity[0x10c]; entity[0x120]=entity[0x11c]; entity[0x114]=data;`. 2-arg lookup into a
   scratch, then 3 field copies. Straight rewrite; exact arg order (push edi; push eax = (key, buf)).
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 109 (47 exact/62 reloc), lint err 0.
+
+### Round 1274 / session R146-149 (GOLDTL: gv_UpdateProductionProgress 162->165 via end-VA)
+- **gv_UpdateProductionProgress (0x4f2d90):** SIZE -> improved (162->165 match, obj 242 vs 240).
+  Fixed the imported `g_entity_table_end` extern (was 0x1003546c server VA) to the GOLDTL value-slot
+  deref `*(unsigned int*)0x773da8` (target `mov eax,[0x773da8]`) and the grave base 0x100358a0->0x7f4ca0.
+  Head (gm_ResolveEntityById->fcn_005015e0) now matches. Remaining: +5-byte body length + register
+  rotations (target uses edx for workers across gv_CheckSlotActive, esi for slot across gv_GetSlotEntry;
+  mine picks different callee-saves) — multi-call register-allocator wall. Parked at 165.
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 109 (47 exact/62 reloc), lint err 0.
