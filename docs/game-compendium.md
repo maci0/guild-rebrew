@@ -163,7 +163,15 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   tree names above are what `src/server.dll` annotates.)
 - Two-phase commands: `cm_Chk*` validate, `cm_Ex*` execute; handlers return int
   (0 OK, 1 reject/fail), typically `(cmd, result)` pointer pairs — exact
-  parameter spellings vary per TU in the tree.
+  parameter spellings vary per TU in the tree. 69 `cm_` handlers annotated in
+  `command_c/`: lifecycle (AllocSpieler/Free/KillSpieler/KillTransporter/
+  CreateCitizen/AllocCharacter), property (AllocObjekt/MoveObjekt/SellObjekt/
+  ProdObjekt/ClearLagerslot/TransferCurrency), buildings (CreateGeb/
+  AllocRaum/DestroyBuilding/SetGebBesitzer/SetGebUpgrade/SetWohnsitz),
+  staff (EmployWorker), politics (AssignOffice/ExecuteOffice/JoinLeaveElection/
+  ElectionOrTrade), character (ChangeDesire/ChangeAttribute/ChangeBits/
+  ChangeFloat/ModifyHealth/ModifyStamina/ModifyStat), system (SimCommand,
+  WarEvent, ThemaPredigt, Cutscene, CopyEntityData, SetSyncFlags).
 - Subsystems (all in `src/server.dll/DieGildeAddOn/`): `sim_` citizen sim
   (`sim_AdvanceGameClock`, `sim_SetSyncParams`, `sim_PriorityUpdate`;
   `sim_CreateCitizen` 0x10015500); `amt_` offices/elections
