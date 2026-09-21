@@ -284,7 +284,8 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   adds client→server IDs and names, unverified here.
 - Root-cause detail (per
   [problem-analysis](https://github.com/maci0/europa1400-networkfix/blob/main/docs/problem-analysis.md)):
-  packet validator at server.dll RVA 0x3720 sets persistent `ctx[0xE]` error
+  packet validator at server.dll RVA 0x3720 (Steam; GOG build: RVA 0x3960)
+  sets persistent `ctx[0xE]` error
   flags (-3 checksum, -1 stream) with no recovery; `GetTickCount` sync assumes
   LAN timing; town-data transfer throttled by `Sleep(30)` pump
   (`NETWORKFIX_FASTSYNC` clamps to 1 ms).
