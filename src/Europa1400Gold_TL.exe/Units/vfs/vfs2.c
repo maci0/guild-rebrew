@@ -20,17 +20,14 @@ int __cdecl vfs_FlushAndClose(int);
 
 // FUNCTION: GOLDTL 0x419390
 // SIZE: 48
-// vfs_WriteUint32LE
-
-void __cdecl fcn_004192b0(int, int, int, int);
-
 void __cdecl vfs_WriteUint32LE(int stream, unsigned int value)
 {
-	if (value == 0)
-		return;
-	fcn_004192b0(stream, 0, 0, 0);
+	if (value != 0)
+		fcn_004192b0(stream, 0, 0, 0);
 	*(unsigned int*) (stream + 0x50) = value;
 }
+
+
 
 /* Destroys a VFS entity (file/directory node). Frees the
  * entity's name string and the entity struct itself. */

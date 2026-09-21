@@ -33249,3 +33249,12 @@ instruction in the wrong place" question.
   8 spellings (cast/no-cast/width/reverse/buf-size/buf[]-variants) all land the same slot;
   franche allocator frame-layout wall. Registered for future RR leverage; obj is byte-exact-50.
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 102 (46 exact/56 reloc), lint err 0.
+
+### Round 1260 / session R122 (GOLDTL: vfs_WriteUint32LE RELOC 44/44)
+- **GOLDTL 102 -> 103.** vfs_WriteUint32LE (0x419390, Units/vfs/vfs2.c) RELOC 44/44 structural 0.
+  The earlier 34/35 SIZE was a WRONG SHAPE (guard+store-reload). Real GOLDTL: ALWAYS store
+  `*(int*)(stream+0x50)=value` (both branches), call `fcn_004192b0(stream,0,0,0)` only if value!=0.
+  Trailing-common-store spelling `if(value!=0) fcn(...); *(int*)(stream+0x50)=value;` emits the
+  target exactly (z-path reloads stream from stack, nz-path holds esi=stream/edi=value). 19 exact + 1 reloc.
+- **Also:** fcn_0053d690 parked at NEAR 49/50 (buf frame-offset [esp+0x10] vs [esp+8] wall).
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 103 (46 exact/57 reloc), lint err 0.
