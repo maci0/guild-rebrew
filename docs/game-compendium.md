@@ -85,11 +85,13 @@ artefact).
 
 ## 6. Architecture
 
-- server.dll: `Init` spawns thread `srv_GameLoop` (0x100093a0); reads game.ini;
-  `srv_InitServer` (0x10009d30); loop: accept clients, broadcast status ~3s,
+- server.dll: `Init` spawns thread `ServerMainThread` (0x100093a0); reads game.ini;
+  `srv_Init` (0x10009d30); loop: accept clients, broadcast status ~3s,
   process commands, send queued, timeouts, sim tick; `Exit` flags shutdown.
-  Community outline:
-  [server.dll.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/server.dll.md).
+  (Community
+  [server.dll.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/server.dll.md)
+  uses different names — `srv_GameLoop`, `srv_InitServer` — unverified here;
+  tree names above are what `src/server.dll` annotates.)
 - Two-phase commands: `cm_Chk*` validate, `cm_Ex*` execute, both
   `int __cdecl f(void* cmd, void* result)` (0 OK, 1 reject/fail).
 - Lobby dispatch `lb_ExLobbyServerCommand` (0x10014db0): 7-way switch on
@@ -104,7 +106,10 @@ artefact).
   Lagerslot, Wohnsitz, Aemter, Friedhof). Preserve misspellings
   (`gm_ObjectsAvailble`, `gm_SubObjectNoKill` vs `gm_SubObjekt`).
 - Seasons `GM_WINTER/SPRING/SUMMER/AUTUMN`, events `HE_SIM_*`, objects
-  `ob_*`, commands `cmdt_*`. Errors via `LogMessageInternal(__FILE__, line,
+  `ob_*`, commands `cmdt_*` — speculative working names from
+  `docs/naming_conventions.md`; no string literal found in server.dll
+  (zero hits for `GM_WINTER`, `HE_SIM`, `EINWANDERUNG`). Errors via
+  `LogMessageInternal(__FILE__, line,
   "<func>(): msg", severity)` — log prefix is strongest name evidence.
 
 ## 7. Network
