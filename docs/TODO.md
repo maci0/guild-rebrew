@@ -33317,3 +33317,11 @@ instruction in the wrong place" question.
   fcn_00429670(e);} } *(char**)0x6b7e98=0;` — stride-0xc98 pointer-table scan, store-anchor-then-call.
   Base is a VALUE at 0x6b7e94 (deref), anchor g_entity_query 0x6b7e98 store.
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 106 (47 exact/59 reloc), lint err 0.
+
+### Round 1267 / session R131-132 (GOLDTL: flat — gm_QueryEntitySum 73/81, (unsigned short) regressed)
+- **GOLDTL held at 106.** gm_QueryEntitySum (0x50b7c0, spiel622.c): 26/29 instr matched (23 exact+3 reloc),
+  only 3 structural — je +0x4 (loop len) + epilogue `pop edi; mov eax,esi` order wall. Tried the slot
+  read as `(unsigned short)` (target `mov cx,[edi*4+0x8680b4]` word read): REGRESSED (73->51). Reverted
+  to cast form (73/81). gm_StartFilteredEntitySearch IS RELOC (header) — its STUB status is stale, no
+  unlock needed for gm_QueryEntitySum.
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 106 (47 exact/59 reloc), lint err 0. Tree clean.
