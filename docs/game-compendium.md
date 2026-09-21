@@ -124,8 +124,10 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 ## 7. Network
 
 - TCP Winsock, non-blocking socket, `bind` + `listen` backlog 5. LAN discovery:
-  UDP broadcast 255.255.255.255 (`send_broadcast_message`, 0x10001130).
-  First client = serving host.
+  UDP broadcast 255.255.255.255 (`SendBroadcastPacket`, 0x10001130).
+  Host = slot with flag 0x400 (`host_slot_found` scan in `ServerMainThread.c`),
+  not "first connected" — community `server.dll.md` says first-connected,
+  unverified here.
 - Original code assumes clean delivery; packet loss / `WSAEWOULDBLOCK` /
   partial send cause "out of sync" / disconnect.
 - Fixes: [networkfix](https://github.com/maci0/europa1400-networkfix) (recv→0-byte,
