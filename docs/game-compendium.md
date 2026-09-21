@@ -79,11 +79,15 @@ DieGildeAddOnServer\server.c
 Units\net\broadcast.c, Error\Error.c, m_alloc\m_alloc.c, vfs\vfs.c
 ```
 
-Client build uses `DieGildeAddOnVc\` (+ `Release\Europa1400Exp_TL.pdb` in TL.exe);
-engine `Units\` shared: `d2.v1\GFX.C`, `d3\d3_d3d.c d3_engine.c d3_interface.c
-d3_sky.c ts_texture.c`, `d3_tools\d3_tools.c`, `dd_vesa\Dd_vesa.c`, `Msx\msx.c`,
-`net\net.c`. This repo's `_c` directory suffixes are NOT attested (split-TU
-artefact).
+Client build uses `DieGildeAddOnVc\` (TL.exe embeds exactly 3 `D:\develop\`
+paths, verified by regex scan: `DieGildeAddOnVc\Release\Europa1400Exp_TL.pdb`
+via NB10 debug header, `units\Msx\msx.c`, `units\net\net.c`). GOLD.exe embeds
+10 paths (verified same way): `Units\d2.v`, `Units\d3\d3_d3d.c`,
+`Units\d3\d3_engine.c`, `Units\d3\d3_interface.c`, `Units\d3\d3_sky.c`,
+`Units\d3\ts_texture.c`, `Units\d3_tools\d3_tools.c`,
+`Units\dd_vesa\Dd_vesa.c`, `units\Msx\msx.c`, `units\net\net.c`.
+(`d2.v1\GFX.C` per naming doc reads as the truncated `Units\d2.v` hit.)
+This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 
 ## 6. Architecture
 
