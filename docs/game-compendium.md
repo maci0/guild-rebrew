@@ -130,7 +130,8 @@ Evidence: `docs/general-knowledge.md`, `rebrew-project.toml`.
 ## 5. Original source tree (attested)
 
 Root `D:\Develop\` (case varies). 14 `__FILE__` paths embedded in server.dll
-are authority (`docs/naming_conventions.md` round 937). The attested-name table
+are authority (`docs/naming_conventions.md` round 937; re-verified by regex
+scan round 52 — exactly 14 distinct hits). The attested-name table
 there holds ~50 entries (VA + standing: renamed vs already-correct), each verified
 by confirmed literal push, not RevEng attribution alone:
 
