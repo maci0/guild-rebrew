@@ -59,11 +59,12 @@ still down).
 
 - Life sim + realtime + role-play + nonlinear. Full 3D engine, bird's-eye
   camera, zoom, interiors enterable. Left-click select, right-click deselect.
-- Self-created protagonist, 12 professions / career paths
-  ([Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild); server.dll has no
-  profession list — zero hits for smith/tailor/mason/priest/tavern/thief;
-  only `alchemistry_logic`/`ahm_ExAllocAlchemist` strings), missions or
-  open-ended sim.
+- Self-created protagonist, 12 professions / career paths per en wiki
+  (fr wiki lists 12 by name; cs wiki counts 8 base + 3 addon = 11 playable,
+  C.O.R.E. guide notes 11 creatable of 15 with 4 exclusive via career change;
+  server.dll has no profession list — zero hits for smith/tailor/mason/priest/
+  tavern/thief; only `alchemistry_logic`/`ahm_ExAllocAlchemist` strings),
+  missions or open-ended sim.
 - Dynasty to power/wealth in historic European cities. Multiplayer up to 8 players
   ([Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild), citing Gamespot E3 preshow;
   server binary defaults `g_max_players` 2, lobby enforces the passed-in value).
