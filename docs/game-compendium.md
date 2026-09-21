@@ -57,7 +57,9 @@ all URLs 200 except the private MCP repo (404 for non-members) and the wiki
   Electric Playground 7.5, PC Gamer UK 73%, PC Action 85% (Gold Award),
   the-laser B+, Eurogamer 5/10, Jeuxvideo.com 15/20. Gamespot 2nd-best PC game Jan 2003.
   Electric Playground 2002 Best Sim nominee (lost to MechWarrior 4:
-  Mercenaries). 100,000 copies shipped first week (not sold-through).
+  Mercenaries). 100,000 copies shipped (not sold) first week — Reuters reported
+  sell-through, JoWooD corrected to trade shipments ([GamesMarket](https://www.gamesmarket.global/klein-aber-fein-die-gilde-100000-mal-vershippt-nicht-verkauft-d8be45b9fc84163790313e714229e4fa/),
+  Mar 2002).
 - Sources: [Wikipedia](https://en.wikipedia.org/wiki/Europa_1400:_The_Guild),
   [Worthplaying facts](https://worthplaying.com/article/2002/10/17/news/6404-europa-1400the-guild-facts-features/).
 
