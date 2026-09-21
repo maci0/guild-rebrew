@@ -118,6 +118,8 @@ all URLs 200 except the private MCP repo (404 for non-members) and the wiki
   Handwerkskunst/Nacht & Nebel/Kampf/Rhetorik, yearly P&L + titles
   (Bürger/Edelmann/Patrizier), 5 start cities (Köln/Dresden/Hannover/Berlin/
   Augsburg); praises variety/replay, warns long learning curve + hard AI.
+  Fazit: congratulates 4Head (Fugger-makers), praises 3D econ-sim + career/RPG
+  mix, music, intuitive UI; wants multi-city expansion; warns patience/difficulty.
 - Note: guide-level claims above are press/community, not binary-derived.
 
 ## 3. Editions, versions, executables, patches
