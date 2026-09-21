@@ -196,12 +196,16 @@ unsigned char g_entity_base[1] = {0};
 int g_entity_end = 0;
 // DATA: SERVER 0x1014d8c0
 unsigned char* g_entity_ptr = 0;
-int g_error_msg_sell_failed = 0;
-int g_error_msg_sell_no_dest = 0;
-int g_error_msg_sell_no_source = 0;
+/* Sell msgs: real .data strings (ExSell imm32); overlay GLOBAL on alchemistry_logic2.c */
+// DATA: SERVER 0x1002cd48
+char g_error_msg_sell_failed[] = "cm_ExSellObjekt() Verkaufslimit \xfc" "berschritten";
+// DATA: SERVER 0x1002cc8c
+char g_error_msg_sell_no_dest[] = "cm_ExSellObjekt(): Ziel-Besitzer ist kein Geb\xe4ude";
+// DATA: SERVER 0x1002cd14
+char g_error_msg_sell_no_source[] = "cm_ExSellObjekt(): Quell-Besitzer ist kein Geb\xe4ude";
 int g_log_buffer = 0;
 int g_log_file_handle = 0;
-int g_player_slots_base = 0;
+/* g_player_slots_base removed: ExSell uses g_connections@0x101deb00 */
 int g_query_count = 0;
 int g_query_match_count = 0;
 int g_relationship_matrix_primary = 0;

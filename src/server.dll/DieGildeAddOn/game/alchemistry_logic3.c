@@ -5,6 +5,7 @@
 
 typedef int(__cdecl* dispatch_fn)(unsigned char*);
 
+// GLOBAL: SERVER 0x1002c5a0
 extern dispatch_fn g_chain_handler_table[];
 
 /* Resets an alchemy entity to its initial state by zeroing

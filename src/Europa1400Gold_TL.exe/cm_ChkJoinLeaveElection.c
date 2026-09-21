@@ -6,7 +6,7 @@
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
-extern unsigned short* g_entity_table_end; /* 0x1003546c */
+#define g_entity_table_end ((unsigned short*) *(unsigned int*) 0x773da8)
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
@@ -62,7 +62,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 		if (query_result == 0) return 1;
 		slot_index = *(unsigned short *) (query_result + 0x27);
 		if (slot_index != 0xffff) {
-			rec = (char *) (0x100358a0 + slot_index * 0x21c);
+			rec = (char *) (0x7f4ca0 + slot_index * 0x21c);
 			if (rec == 0) goto cler_query;
 			if (rec == (char *) g_entity_table_end) goto cler_query;
 			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;

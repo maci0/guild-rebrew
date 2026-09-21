@@ -6,10 +6,6 @@
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-extern int g_field_worker_count_wt0[];
-extern int g_field_worker_count_wt1[];
-extern int g_field_worker_count_wt2[];
-extern int g_field_worker_count_wt3[];
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern int __cdecl cm_GetBuildingStatCount(unsigned char* entity);
 

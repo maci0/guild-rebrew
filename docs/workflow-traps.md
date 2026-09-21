@@ -1029,3 +1029,44 @@ residue an order of magnitude above baseline. Anyone reading it would think the 
 target. It is the same shape as measure-traps §55 (a stale composition reporting 81,229) and §47/§51/§52/§53/§54
 — **the artifact was wrong, and the ruler did not say so.** The invariant that catches it in both cases: 100% of
 residue must lie inside the 19 carriers, and any total far above 8,628 means re-compose before believing it.
+
+## 27. The GOLDTL client statically links D3DX8 — run `lib-match` against `d3dx8.lib`, not just LIBCMT (round 1143)
+
+The pre-commit `no-library-code` hook and `rebrew lib-match --stock-lib LIBCMT.LIB` only check the *default*
+target (`server.dll`) against LIBCMT. **The client targets link other static libraries** that LIBCMT never
+covers, and one of them silently supplies a large chunk of `.text`.
+
+`Europa1400Gold_TL.exe` (GOLDTL) was built against the **DX8.1 SDK**: it statically links `d3dx8.lib` (the
+SDK's mesh/PNG/JPEG/zlib/effect helpers), shader assembler `"Version 0.91"`. Its bodies sit in `.text`
+indistinguishable from game code. **907 functions, ~273 KB total** — 905 of them in the `.text` band
+`0x5e0000–0x64ffff`, plus two zlib stubs D3DX8 embeds (`_gzeof` at `0x45fa70`,
+`inflate_blocks_sync_point` at `0x460a40`). Each byte-matches a `d3dx8.lib` object (reloc-masked, ≥50% fixed
+bytes, whole body then 32-byte prefix retry, the same method `lib_match` uses for LIBCMT). Upstream library
+pollution, exactly the shape AGENTS.md warns
+about: reversing those bytes is wasted work because the linker supplies them.
+
+The cost was measured, not hypothetical. A GOLDTL function was being reversed at `0x63e931` under the name
+`m_AllocTracked` — a week of `near-diag`/flag sweeps / `rebrew prove` against a body that **never byte-matched**
+and never would: it is D3DX8 `_jpeg_calc_output_dimensions` (495 bytes, byte-identical to `d3dx8.lib`), not
+the game's allocator (which is shared-tree `m_AllocTracked` at server `0x10006580`). The reversal wasted effort
+on linker-supplied code.
+
+**The other client (`Europa1400Gold.exe`, GOLD) does NOT need this.** Its DirectX is pure DLL-import
+(`DDRAW`, `DINPUT.dll`, `mss32`); a `d3dx8`-style scan finds no real static-DX bodies. The apparent GOLD hits
+(`$L52809` etc.) are mostly-relocation data tables caught by `lib_match`'s 50%-fixed guard.
+
+**The fix (round 1143):**
+- Vendored the matching SDK `d3dx8.lib` under `references/dxsdk8/lib/` (XPSP1 SDK i386, `sha256 c02e4fed…`),
+  so a fresh clone can reproduce the check.
+- Generated `src/Europa1400Gold_TL.exe/library_d3dx8.h` with `// LIBRARY: D3DX8` markers for all 907 matched
+  VAs. `lib_match` skips LIBRARY-marked functions, so it now returns nothing on GOLDTL.
+- Deleted the mislabeled `m_AllocTracked.c` (its VA is now LIBRARY-marked; the real allocator is shared-tree).
+- Added a `lib-match d3dx8 (GOLDTL)` step to `scripts/gate.sh` that fails on any new GOLDTL function whose
+  bytes collide with a `d3dx8.lib` body — same role the LIBCMT hook plays for server.
+
+**The lesson:** when a target statically links libraries beyond the CRT, the LIBCMT-only hook cannot see them.
+Ask *what libraries this binary actually linked*, not "is it LIBCMT?". TL's required answer is
+`rebrew lib-match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe`; GOLD's is "no static
+DX, skip". The import table (pefile) shows which DLLs are imported, but static-link library code is invisible
+to imports — you must look for it in `.text` by its strings (here the `D3DXERR_*` / `D3DX8 shader assembler`
+strings in `.text` at `0x4b5xxx`) and byte-match the bodies.

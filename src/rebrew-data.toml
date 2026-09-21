@@ -115,10 +115,11 @@ status = "UNCHECKED"
 size = 1
 
 ["SERVER.0x1002a0f8"]
-name = "g_1002a0f8"
+name = "s_ahm_AllocAhmInfo_1002a0f8"
 section = ".data"
-type = "char"
+type = "char[]"
 status = "VERIFIED"
+size = 17
 
 ["SERVER.0x100256b4"]
 name = "g_float_const_b4"
@@ -171,14 +172,14 @@ status = "VERIFIED"
 ["SERVER.0x1003546c"]
 name = "g_entity_table_end"
 section = ".data"
-type = "int"
+type = "unsigned short*"
 status = "UNCHECKED"
 size = 4
 
 ["SERVER.0x100358a0"]
 name = "g_slot_table"
 section = ".data"
-type = ""
+type = "unsigned char[2]"
 status = "UNCHECKED"
 size = 2
 
@@ -414,7 +415,7 @@ status = "VERIFIED"
 ["SERVER.0x10035a04"]
 name = "g_entity_type_bytes"
 section = ".data"
-type = "unsigned char"
+type = "unsigned char[1]"
 status = "UNCHECKED"
 size = 1
 note = "byte: reference writes it with mov byte ptr [ecx+0x10035a04],dl (0x10015542), beside the +0x10035a05 byte store"
@@ -422,7 +423,7 @@ note = "byte: reference writes it with mov byte ptr [ecx+0x10035a04],dl (0x10015
 ["SERVER.0x100358a2"]
 name = "g_entity_state_base"
 section = ".data"
-type = ""
+type = "char[2]"
 status = "UNCHECKED"
 size = 2
 
@@ -522,14 +523,16 @@ size = 4
 ["SERVER.0x10028b04"]
 name = "s_Memory_Shutdown_Anomaly_10028b04"
 section = ".data"
-type = "char[1]"
+type = "char[]"
 status = "VERIFIED"
+size = 1
 
 ["SERVER.0x10028aec"]
 name = "s_Pointer_not_freed_10028aec"
 section = ".data"
-type = "char[1]"
+type = "char[]"
 status = "VERIFIED"
+size = 1
 
 ["SERVER.0x10028888"]
 name = "g_str_10028888"
@@ -540,14 +543,16 @@ status = "VERIFIED"
 ["SERVER.0x10028b78"]
 name = "s_m_pool_get_free_tp_m_pool_10028b78"
 section = ".data"
-type = "char[27]"
+type = "char[]"
 status = "VERIFIED"
+size = 27
 
 ["SERVER.0x10028b60"]
 name = "s_m_pool_alloc_tp_m_pool_10028b60"
 section = ".data"
-type = "char[24]"
+type = "char[]"
 status = "VERIFIED"
+size = 24
 
 ["SERVER.0x10034678"]
 name = "g_stream_count"
@@ -558,7 +563,7 @@ status = "VERIFIED"
 ["SERVER.0x10034670"]
 name = "g_stream_pool"
 section = ".data"
-type = "char"
+type = "char[1]"
 status = "VERIFIED"
 
 ["SERVER.0x10030b94"]
@@ -612,7 +617,7 @@ size = 4
 
 ["SERVER.0x101de5a0"]
 name = "g_office_slots"
-type = "char*"
+type = "char[]"
 status = "UNCHECKED"
 section = ".data"
 size = 4
@@ -633,7 +638,7 @@ size = 4
 
 ["SERVER.0x117640a0"]
 name = "g_alloc_root_name"
-type = "char"
+type = "int"
 status = "UNCHECKED"
 section = ".data"
 size = 1
@@ -840,8 +845,8 @@ status = "VERIFIED"
 section = ".rdata"
 
 ["SERVER.0x10029bb8"]
-name = "g_str_29bb8"
-type = "char"
+name = "g_office_role_templates"
+type = "OFFICE_ROLE_TEMPLATE[]"
 status = "VERIFIED"
 section = ".data"
 size = 1
@@ -865,96 +870,112 @@ name = "__imp__accept@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024160"]
 name = "__imp__listen@8"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024164"]
 name = "__imp__send@16"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024168"]
 name = "__imp__recv@16"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002416c"]
 name = "__imp__ioctlsocket@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024170"]
 name = "__imp__WSAGetLastError@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024174"]
 name = "__imp__shutdown@8"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024178"]
 name = "__imp__WSAStartup@8"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002417c"]
 name = "__imp__WSACleanup@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024180"]
 name = "__imp__socket@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024184"]
 name = "__imp__setsockopt@20"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024188"]
 name = "__imp__htonl@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002418c"]
 name = "__imp__htons@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024190"]
 name = "__imp__bind@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024194"]
 name = "__imp__sendto@24"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024198"]
 name = "__imp__closesocket@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100313fc"]
 name = "g_100313fc"
@@ -968,408 +989,476 @@ name = "__imp__GetLocalTime@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024004"]
 name = "__imp__OutputDebugStringA@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024008"]
 name = "__imp__UnhandledExceptionFilter@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002400c"]
 name = "__imp__VirtualFree@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024010"]
 name = "__imp__CloseHandle@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024014"]
 name = "__imp__ReadProcessMemory@20"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024018"]
 name = "__imp__VirtualQuery@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002401c"]
 name = "__imp__GetTimeFormatA@24"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024020"]
 name = "__imp__GetDateFormatA@24"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024024"]
 name = "__imp__WriteFile@20"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024028"]
 name = "__imp__SetFilePointer@16"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002402c"]
 name = "__imp__GetCurrentProcess@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024030"]
 name = "__imp__VirtualAlloc@16"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024034"]
 name = "__imp__ReadFile@20"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024038"]
 name = "__imp__CreateFileA@28"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002403c"]
 name = "__imp__GetModuleFileNameA@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024040"]
 name = "__imp__SetUnhandledExceptionFilter@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024044"]
 name = "__imp__GetStdHandle@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024048"]
 name = "__imp__AllocConsole@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002404c"]
 name = "__imp__FreeConsole@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024050"]
 name = "__imp__CreateThread@24"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024054"]
 name = "__imp__TerminateThread@8"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024058"]
 name = "__imp__Sleep@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002405c"]
 name = "__imp__GetTickCount@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024060"]
 name = "__imp__GetPrivateProfileStringA@24"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024064"]
 name = "__imp__GetPrivateProfileIntA@16"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024068"]
 name = "__imp__SetThreadPriority@8"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002406c"]
 name = "__imp__GetCurrentThread@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024070"]
 name = "__imp__GetStartupInfoA@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024074"]
 name = "__imp__HeapFree@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024078"]
 name = "__imp__LCMapStringW@24"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024088"]
 name = "__imp__SetEndOfFile@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002408c"]
 name = "__imp__LoadLibraryA@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024090"]
 name = "__imp__GetOEMCP@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024094"]
 name = "__imp__GetACP@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024098"]
 name = "__imp__GetStringTypeW@16"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002409c"]
 name = "__imp__GetStringTypeA@20"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240a0"]
 name = "__imp__GetCPInfo@8"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240c0"]
 name = "__imp__WriteConsoleA@20"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240c4"]
 name = "__imp__ExitProcess@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240cc"]
 name = "__imp__HeapAlloc@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240d0"]
 name = "__imp__TlsSetValue@8"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240d4"]
 name = "__imp__InterlockedDecrement@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240d8"]
 name = "__imp__InterlockedIncrement@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240dc"]
 name = "__imp__GetLastError@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240e0"]
 name = "__imp__HeapReAlloc@16"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240e4"]
 name = "__imp__GetCommandLineA@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240e8"]
 name = "__imp__GetVersion@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240ec"]
 name = "__imp__EnterCriticalSection@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240f0"]
 name = "__imp__LeaveCriticalSection@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x100240f4"]
 name = "__imp__InitializeCriticalSection@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024104"]
 name = "__imp__DeleteCriticalSection@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024108"]
 name = "__imp__GetCurrentThreadId@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002410c"]
 name = "__imp__HeapDestroy@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024110"]
 name = "__imp__TlsAlloc@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024114"]
 name = "__imp__TlsFree@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024118"]
 name = "__imp__SetLastError@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002411c"]
 name = "__imp__TlsGetValue@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024124"]
 name = "__imp__RtlUnwind@16"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002412c"]
 name = "__imp__FlushFileBuffers@4"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024130"]
 name = "__imp__HeapCreate@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024134"]
 name = "__imp__MultiByteToWideChar@24"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024138"]
 name = "__imp__GetProcAddress@8"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002413c"]
 name = "__imp__WideCharToMultiByte@32"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024140"]
 name = "__imp__LCMapStringA@24"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024148"]
 name = "__imp__MessageBoxA@16"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002414c"]
 name = "__imp__GetWindowTextA@12"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x10024154"]
 name = "__imp__timeGetTime@0"
 type = "void*"
 section = ".idata"
 status = "UNCHECKED"
+size = 4
 
 ["SERVER.0x1002735c"]
 name = "s__________________________________1002735c"
@@ -1385,7 +1474,7 @@ status = "VERIFIED"
 
 ["SERVER.0x10027358"]
 name = "g_file_write_mode"
-type = "unsigned char"
+type = "unsigned char[3]"
 section = ".data"
 status = "VERIFIED"
 
@@ -2051,7 +2140,7 @@ size = 4
 ["SERVER.0x10027104"]
 section = ".data"
 name = "g_crashdump_data_10027104"
-type = "char[]"
+type = "char[568]"
 size = 568
 status = "VERIFIED"
 
@@ -2184,7 +2273,7 @@ status = "VERIFIED"
 ["SERVER.0x1002944c"]
 section = ".data"
 name = "s_rb_1002944c"
-type = "char[4]"
+type = "char[]"
 size = 84
 status = "VERIFIED"
 
@@ -2193,4 +2282,911 @@ section = ".data"
 name = "s_0x_08X_length_100294a4"
 type = "char[]"
 size = 48
+status = "VERIFIED"
+
+["SERVER.0x10031004"]
+type = "char[]"
+section = ".data"
+name = "s_D__Develop_DieGildeAddOn_game_sp_10031004"
+status = "VERIFIED"
+size = 38
+
+["SERVER.0x1002d990"]
+section = ".data"
+name = "s_plt_SetPlantMap____Could_not_fin_1002d990"
+status = "VERIFIED"
+type = "char[]"
+size = 45
+
+["SERVER.0x1002d9c0"]
+section = ".data"
+name = "s_D__Develop_DieGildeAddOn_auxilla_1002d9c0"
+status = "VERIFIED"
+type = "char[]"
+size = 43
+
+["SERVER.0x1002d9ec"]
+section = ".data"
+name = "s_plt_SetPlantMap____Map_is_not_al_1002d9ec"
+status = "VERIFIED"
+type = "char[]"
+size = 64
+
+["SERVER.0x1002c90c"]
+section = ".data"
+name = "s_cm_ChkChangeAttribute___Target_obj_1002c90c"
+status = "VERIFIED"
+type = "char[]"
+size = 75
+
+["SERVER.0x1002c958"]
+section = ".data"
+name = "s_cm_ChkChangeAttribute___Source_obj_1002c958"
+status = "VERIFIED"
+type = "char[]"
+size = 71
+
+["SERVER.0x1002c9a0"]
+section = ".data"
+name = "s_cm_ChkChangeAttribute___Error_i_1002c9a0"
+status = "VERIFIED"
+type = "char[]"
+size = 63
+
+["SERVER.0x1002c9e0"]
+section = ".data"
+name = "s_cm_ChkChangeAttribute___Invalid_I_1002c9e0"
+status = "VERIFIED"
+type = "char[]"
+size = 35
+
+["SERVER.0x1002c7d8"]
+section = ".data"
+name = "s_cm_ChkSellObjekt___Not_enough_Cr_1002c7d8"
+status = "VERIFIED"
+type = "char[]"
+size = 53
+
+["SERVER.0x1002c810"]
+section = ".data"
+name = "s_cm_ChkSellObjekt___Inventory_vol_1002c810"
+status = "VERIFIED"
+type = "char[]"
+size = 34
+
+["SERVER.0x1002c834"]
+section = ".data"
+name = "s_cm_ChkSellObjekt___Lager_voll_1002c834"
+status = "VERIFIED"
+type = "char[]"
+size = 30
+
+["SERVER.0x1002c854"]
+section = ".data"
+name = "s_cm_ChkSellObjekt___Invalid__ziel_1002c854"
+status = "VERIFIED"
+type = "char[]"
+size = 46
+
+["SERVER.0x1002c884"]
+section = ".data"
+name = "s_cm_ChkSellObjekt___Not_enough_Ob_1002c884"
+status = "VERIFIED"
+type = "char[]"
+size = 48
+
+["SERVER.0x1002c8b4"]
+section = ".data"
+name = "s_cm_ChkSellObjekt___No_Objekts_at_1002c8b4"
+status = "VERIFIED"
+type = "char[]"
+size = 40
+
+["SERVER.0x1002c8dc"]
+section = ".data"
+name = "s_cm_ChkSellObjekt___Invalid__quel_1002c8dc"
+status = "VERIFIED"
+type = "char[]"
+size = 47
+
+["SERVER.0x1002d364"]
+section = ".data"
+name = "s_cm_ExAllocCharacter___gm_AllocSp_1002d364"
+status = "VERIFIED"
+type = "char[]"
+size = 47
+
+["SERVER.0x1002d394"]
+section = ".data"
+name = "s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394"
+status = "VERIFIED"
+type = "char[]"
+size = 61
+
+["SERVER.0x1002cfc4"]
+section = ".data"
+name = "s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4"
+status = "VERIFIED"
+type = "char[]"
+size = 45
+
+["SERVER.0x1002cff4"]
+section = ".data"
+name = "s_cm_ExMoveObjekt___Invalid__ziel__1002cff4"
+status = "VERIFIED"
+type = "char[]"
+size = 45
+
+["SERVER.0x1002d024"]
+section = ".data"
+name = "s_cm_ExMoveObjekt___Invalid__quell_1002d024"
+status = "VERIFIED"
+type = "char[]"
+size = 46
+
+["SERVER.0x10029f78"]
+section = ".data"
+name = "s_amt_fio_LoadAemter____Can_t_load_10029f78"
+status = "VERIFIED"
+type = "char[]"
+size = 41
+
+["SERVER.0x10029fa4"]
+section = ".data"
+name = "s_amt_fio_LoadAemter____Can_t_load_10029fa4"
+status = "VERIFIED"
+type = "char[]"
+size = 40
+
+["SERVER.0x10029fcc"]
+section = ".data"
+name = "s_amt_fio_LoadAemter____Can_t_load_10029fcc"
+status = "VERIFIED"
+type = "char[]"
+size = 40
+
+["SERVER.0x10029ff4"]
+section = ".data"
+name = "s_amt_fio_LoadAemter____Can_t_load_10029ff4"
+status = "VERIFIED"
+type = "char[]"
+size = 38
+
+["SERVER.0x1002a01c"]
+section = ".data"
+name = "s_amt_fio_LoadAemter____Can_t_load_1002a01c"
+status = "VERIFIED"
+type = "char[]"
+size = 43
+
+["SERVER.0x1002a048"]
+section = ".data"
+name = "s_amt_fio_LoadAemter____Can_t_load_1002a048"
+status = "VERIFIED"
+type = "char[]"
+size = 36
+
+["SERVER.0x1002a06c"]
+section = ".data"
+name = "s_amt_fio_LoadAemter____count_read_1002a06c"
+status = "VERIFIED"
+type = "char[]"
+size = 52
+
+["SERVER.0x1002a0a0"]
+section = ".data"
+name = "s_D__Develop_DieGildeAddOn_game_ae_1002a0a0"
+status = "VERIFIED"
+type = "char[]"
+size = 39
+
+["SERVER.0x1002a0c8"]
+section = ".data"
+name = "s_amt_fio_LoadAemter____Can_t_load_1002a0c8"
+status = "VERIFIED"
+type = "char[]"
+size = 39
+
+["SERVER.0x1002a10c"]
+section = ".data"
+name = "s_D__Develop_DieGildeAddOn_game_al_1002a10c"
+status = "VERIFIED"
+type = "char[]"
+size = 50
+
+["SERVER.0x1002a140"]
+section = ".data"
+name = "s_ahm_ExAllocAlchemist__array_over_1002a140"
+status = "VERIFIED"
+type = "char[]"
+size = 40
+
+["SERVER.0x1002a168"]
+section = ".data"
+name = "s_ahm_ExAllocAlchemist__wrong_type_1002a168"
+status = "VERIFIED"
+type = "char[]"
+size = 50
+
+["SERVER.0x1002a19c"]
+section = ".data"
+name = "s_ahm_ExAllocAlchemist__cant_find_1002a19c"
+status = "VERIFIED"
+type = "char[]"
+size = 46
+
+["SERVER.0x10031628"]
+section = ".data"
+name = "s_gm_KannObjektHergestellt___pCObj_10031628"
+status = "VERIFIED"
+type = "char[]"
+size = 48
+
+["SERVER.0x10031604"]
+section = ".data"
+name = "s_gm_AllocSpieler_array_overflow_10031604"
+size = 35
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x10031594"]
+section = ".data"
+name = "s_gm_AllocSpieler_bug_10031594"
+size = 21
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002d520"]
+section = ".data"
+name = "s_ls_ID2Ptr____Houston__wir_haben_e_1002d520"
+status = "VERIFIED"
+type = "char[]"
+size = 47
+
+["SERVER.0x1002d550"]
+section = ".data"
+name = "s_D__Develop_DieGildeAddOn_loadsav_1002d550"
+status = "VERIFIED"
+type = "char[]"
+size = 45
+
+["SERVER.0x1002d580"]
+section = ".data"
+name = "s_ls_ID2Ptr____Stadtspieler_Id_not_1002d580"
+status = "VERIFIED"
+type = "char[]"
+size = 39
+
+["SERVER.0x100299c8"]
+section = ".data"
+name = "s_No_more_Slots_for_new_Connection_100299c8"
+status = "VERIFIED"
+type = "char[]"
+size = 36
+
+["SERVER.0x100298b0"]
+section = ".data"
+name = "s_D__Develop_DieGildeAddOnServer_s_100298b0"
+status = "VERIFIED"
+type = "char[]"
+size = 40
+
+["SERVER.0x100299a0"]
+section = ".data"
+name = "s_New_Connection_from__li__li__li__100299a0"
+status = "VERIFIED"
+type = "char[]"
+size = 37
+
+["SERVER.0x100273ac"]
+section = ".data"
+name = "s_Error_Handler_closed__100273ac"
+status = "VERIFIED"
+type = "char[]"
+size = 23
+
+["SERVER.0x100273c4"]
+section = ".data"
+name = "s_Fatal_Error_Abort_Program_100273c4"
+status = "VERIFIED"
+type = "char[]"
+size = 28
+
+["SERVER.0x100273e0"]
+section = ".data"
+name = "s_FATAL_ERROR_s_lu_s_100273e0"
+status = "VERIFIED"
+type = "char[]"
+size = 26
+
+["SERVER.0x100273fc"]
+section = ".data"
+name = "s_ERROR_Handler_has_not_been_100273fc"
+status = "VERIFIED"
+type = "char[]"
+size = 38
+
+["SERVER.0x10027424"]
+section = ".data"
+name = "s_Error_10027424"
+status = "VERIFIED"
+type = "char[]"
+size = 7
+
+["SERVER.0x1002742c"]
+section = ".data"
+name = "s_Message_1002742c"
+status = "VERIFIED"
+type = "char[]"
+size = 9
+
+["SERVER.0x10027438"]
+section = ".data"
+name = "s_MESSAGE_s_10027438"
+status = "VERIFIED"
+type = "char[]"
+size = 13
+
+["SERVER.0x10027448"]
+section = ".data"
+name = "s_tModule_s_Line_lu_s_10027448"
+status = "VERIFIED"
+type = "char[]"
+size = 27
+
+["SERVER.0x10027464"]
+section = ".data"
+name = "s_Time_8lu_Module_s_Line_10027464"
+status = "VERIFIED"
+type = "char[]"
+size = 36
+
+["SERVER.0x10027034"]
+section = ".data"
+name = "s_broadcast_path_10027034"
+status = "VERIFIED"
+type = "char[]"
+size = 33
+
+["SERVER.0x10027058"]
+section = ".data"
+name = "s_Sending_Broadcast_10027058"
+status = "VERIFIED"
+type = "char[]"
+size = 18
+
+["SERVER.0x10029458"]
+section = ".data"
+name = "s_D__Develop_Units_vfs_vfs_c_10029458"
+status = "VERIFIED"
+type = "char[]"
+size = 27
+
+["SERVER.0x10029474"]
+section = ".data"
+name = "s_vfs__gz_compressed_file____s___i_10029474"
+status = "VERIFIED"
+type = "char[]"
+size = 45
+
+["SERVER.0x100315e4"]
+section = ".data"
+name = "s_SpID_i_playermode_i_100315e4"
+size = 30
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x10031570"]
+section = ".data"
+name = "s_PlayerID_i_PlayerName_s_10031570"
+size = 34
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x100315ac"]
+section = ".data"
+name = "s_gm_AllocSpieler_gm_CurrentHumanFamilyCou_100315ac"
+size = 55
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x10027030"]
+section = ".data"
+name = "g_broadcast_ff_10027030"
+status = "VERIFIED"
+type = "char[4]"
+size = 4
+
+["SERVER.0x10029450"]
+section = ".data"
+name = "g_gzip_magic_1f_10029450"
+status = "VERIFIED"
+type = "char[]"
+size = 4
+
+["SERVER.0x10029454"]
+section = ".data"
+name = "g_gzip_magic_8b_10029454"
+status = "VERIFIED"
+type = "char[]"
+size = 4
+
+["SERVER.0x1002ca54"]
+section = ".data"
+name = "s_cm_ChkChangeBits___Invalid_Id_1002ca54"
+status = "VERIFIED"
+size = 30
+type = "char[]"
+
+["SERVER.0x1002ca04"]
+section = ".data"
+name = "s_cm_ChkChangeBits___Invalid_actio_1002ca04"
+status = "VERIFIED"
+size = 79
+type = "char[]"
+
+["SERVER.0x1002cacc"]
+section = ".data"
+name = "s_Invalid_Commandtype_in_Execution_1002cacc"
+status = "VERIFIED"
+size = 33
+type = "char[]"
+
+["SERVER.0x1002caa8"]
+section = ".data"
+name = "s_cm_ChkCutsceneReady____failed____1002caa8"
+status = "VERIFIED"
+size = 33
+type = "char[]"
+
+["SERVER.0x1002c748"]
+section = ".data"
+name = "s_D__Develop_DieGildeAddOn_command_1002c748"
+status = "VERIFIED"
+size = 43
+type = "char[]"
+
+["SERVER.0x1002c7a4"]
+section = ".data"
+name = "s_cm_ChkMoveCredits____Invalid__qu_1002c7a4"
+status = "VERIFIED"
+size = 49
+type = "char[]"
+
+["SERVER.0x1002c774"]
+section = ".data"
+name = "s_cm_ChkMoveCredits____Not_enough_m_1002c774"
+status = "VERIFIED"
+size = 48
+type = "char[]"
+
+["SERVER.0x1002ca74"]
+section = ".data"
+name = "s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74"
+status = "VERIFIED"
+size = 52
+type = "char[]"
+
+["SERVER.0x1002cb34"]
+section = ".data"
+name = "s_gm_AllocGebaeude___failed_1002cb34"
+status = "VERIFIED"
+size = 26
+type = "char[]"
+
+["SERVER.0x1002caf0"]
+section = ".data"
+name = "s_Invalid__GI_Id__for_cmdt_ALLOC_B_1002caf0"
+status = "VERIFIED"
+size = 67
+type = "char[]"
+
+["SERVER.0x1002cb50"]
+section = ".data"
+name = "s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50"
+status = "VERIFIED"
+size = 59
+type = "char[]"
+
+["SERVER.0x1002cb8c"]
+section = ".data"
+name = "s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c"
+status = "VERIFIED"
+size = 45
+type = "char[]"
+
+["SERVER.0x1002d184"]
+section = ".data"
+name = "s_cm_ExAllocThemaPredigt____Execut_1002d184"
+status = "VERIFIED"
+size = 35
+type = "char[]"
+
+["SERVER.0x1002d0b0"]
+section = ".data"
+name = "s_cm_ExChangeAttribute___Invalid_I_1002d0b0"
+status = "VERIFIED"
+size = 34
+type = "char[]"
+
+["SERVER.0x1002d114"]
+section = ".data"
+name = "s_cm_ExChangeBits___Invalid_Id_1002d114"
+status = "VERIFIED"
+size = 29
+type = "char[]"
+
+["SERVER.0x1002d0f4"]
+section = ".data"
+name = "s_cm_ExChangeDesire___Invalid_I_1002d0f4"
+status = "VERIFIED"
+size = 31
+type = "char[]"
+
+["SERVER.0x1002d134"]
+section = ".data"
+name = "s_cm_ExChangeFloat___Invalid_Id_1002d134"
+status = "VERIFIED"
+size = 30
+type = "char[]"
+
+["SERVER.0x1002cc14"]
+section = ".data"
+name = "s_cm_ExChangePlayerIdentity___exec_1002cc14"
+status = "VERIFIED"
+size = 37
+type = "char[]"
+
+["SERVER.0x1002cbf0"]
+section = ".data"
+name = "s_cm_ExChangePlayerIdentity___fail_1002cbf0"
+status = "VERIFIED"
+size = 35
+type = "char[]"
+
+["SERVER.0x1002d088"]
+section = ".data"
+name = "s_cm_ExClearLagerslot___Invalid__L_1002d088"
+status = "VERIFIED"
+size = 40
+type = "char[]"
+
+["SERVER.0x1002d054"]
+section = ".data"
+name = "s_cm_ExClearLagerslot___Lager_has_n_1002d054"
+status = "VERIFIED"
+size = 50
+type = "char[]"
+
+["SERVER.0x1002d41c"]
+section = ".data"
+name = "s_cm_ExCreateGeb____Could_not_find_1002d41c"
+status = "VERIFIED"
+size = 40
+type = "char[]"
+
+["SERVER.0x1002d400"]
+section = ".data"
+name = "s_cm_ExCreateGeb____failed_1002d400"
+status = "VERIFIED"
+size = 25
+type = "char[]"
+
+["SERVER.0x1002d2ec"]
+section = ".data"
+name = "s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec"
+status = "VERIFIED"
+size = 41
+type = "char[]"
+
+["SERVER.0x1002d33c"]
+section = ".data"
+name = "s_cm_ExEmployWorker____Illegal_geb_1002d33c"
+status = "VERIFIED"
+size = 37
+type = "char[]"
+
+["SERVER.0x1002d318"]
+section = ".data"
+name = "s_cm_ExEmployWorker____Illegal_gw__1002d318"
+status = "VERIFIED"
+size = 36
+type = "char[]"
+
+["SERVER.0x1002d154"]
+section = ".data"
+name = "s_cm_ExKillSpieler___Could_not_fin_1002d154"
+status = "VERIFIED"
+size = 45
+type = "char[]"
+
+["SERVER.0x1002d3d4"]
+section = ".data"
+name = "s_cm_ExKillTransporter____invalid_t_1002d3d4"
+status = "VERIFIED"
+size = 42
+type = "char[]"
+
+["SERVER.0x1002cf9c"]
+section = ".data"
+name = "s_cm_ExProdObjekt_Invalid_lager_id_1002cf9c"
+size = 37
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002cf74"]
+section = ".data"
+name = "s_cm_ExProdObjekt_Lager_has_wrong_Type_1002cf74"
+size = 39
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002cf48"]
+section = ".data"
+name = "s_cm_ExProdObjekt_Lager_hat_keinen_Besitze_1002cf48"
+size = 44
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002cf1c"]
+section = ".data"
+name = "s_cm_ExProdObjekt_Nicht_gen_gend_Rohstoffe_1002cf1c"
+size = 44
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002cef4"]
+section = ".data"
+name = "s_cm_ExProdObjekt_Rohstoff_verschwunden_1002cef4"
+size = 40
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002cec4"]
+section = ".data"
+name = "s_cm_ExSellObjekt_Invalid_quell_besitzer_i_1002cec4"
+size = 46
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002ce90"]
+section = ".data"
+name = "s_cm_ExSellObjekt_Invalid_gm_eval_ObjektBe_1002ce90"
+size = 51
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002ce4c"]
+section = ".data"
+name = "s_cm_ExSellObjekt_Object_not_found_ObjProt_1002ce4c"
+size = 65
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002cdfc"]
+section = ".data"
+name = "s_cm_ExSellObjekt_Not_enough_Objekts_at_so_1002cdfc"
+size = 78
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002cdcc"]
+section = ".data"
+name = "s_cm_ExSellObjekt_Invalid_ziel_besitzer_id_1002cdcc"
+size = 45
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002cdac"]
+section = ".data"
+name = "s_cm_ExSellObjekt_Lager_voll_1002cdac"
+size = 29
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002cd78"]
+section = ".data"
+name = "s_cm_ExSellObjekt_Not_enough_Credits_at_de_1002cd78"
+size = 52
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002ccc0"]
+section = ".data"
+name = "s_cm_ExSellObjekt_gm_AllocRaum_failed_1002ccc0"
+size = 39
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002cce8"]
+section = ".data"
+name = "s_cm_ExSellObjekt_gm_AllocObjekt_failed_1002cce8"
+size = 41
+type = "char[]"
+status = "VERIFIED"
+
+["SERVER.0x1002d0d4"]
+section = ".data"
+name = "s_cm_ExSetAttribute___Invalid_Id_1002d0d4"
+status = "VERIFIED"
+size = 31
+type = "char[]"
+
+["SERVER.0x1002d214"]
+section = ".data"
+name = "s_cm_ExSetGebBesitzer____Could_not_1002d214"
+status = "VERIFIED"
+size = 42
+type = "char[]"
+
+["SERVER.0x1002d1e0"]
+section = ".data"
+name = "s_cm_ExSetGebBesitzer____Could_not_1002d1e0"
+status = "VERIFIED"
+size = 50
+type = "char[]"
+
+["SERVER.0x1002d1a8"]
+section = ".data"
+name = "s_cm_ExSetGebBesitzer____Could_not_1002d1a8"
+status = "VERIFIED"
+size = 53
+type = "char[]"
+
+["SERVER.0x1002d2c0"]
+section = ".data"
+name = "s_cm_ExSetGebUpgrade____already_hi_1002d2c0"
+status = "VERIFIED"
+size = 44
+type = "char[]"
+
+["SERVER.0x1002d298"]
+section = ".data"
+name = "s_cm_ExSetWohnsitz____Could_not_fi_1002d298"
+status = "VERIFIED"
+size = 39
+type = "char[]"
+
+["SERVER.0x1002d268"]
+section = ".data"
+name = "s_cm_ExSetWohnsitz____Could_not_fi_1002d268"
+status = "VERIFIED"
+size = 45
+type = "char[]"
+
+["SERVER.0x1002d240"]
+section = ".data"
+name = "s_cm_ExSetWohnsitz____Residence_is_1002d240"
+status = "VERIFIED"
+size = 38
+type = "char[]"
+
+["SERVER.0x10034614"]
+type = "void *"
+section = ".data"
+name = "g_crash_callback"
+status = "VERIFIED"
+
+["SERVER.0x1003461c"]
+type = "char"
+section = ".data"
+name = "g_crash_dump_all_frames"
+status = "VERIFIED"
+
+["SERVER.0x101de560"]
+type = "int"
+section = ".data"
+name = "g_recv_game_buffer"
+status = "UNCHECKED"
+size = 4
+
+["SERVER.0x1002c5a0"]
+type = "dispatch_fn[]"
+section = ".data"
+name = "g_chain_handler_table"
+status = "VERIFIED"
+
+["SERVER.0x1002577c"]
+section = ".rdata"
+type = "int[]"
+name = "g_field_worker_count_wt0"
+status = "VERIFIED"
+
+["SERVER.0x1002578c"]
+section = ".rdata"
+type = "int[]"
+name = "g_field_worker_count_wt1"
+status = "VERIFIED"
+
+["SERVER.0x1002579c"]
+section = ".rdata"
+type = "int[]"
+name = "g_field_worker_count_wt2"
+status = "VERIFIED"
+
+["SERVER.0x100257ac"]
+section = ".rdata"
+type = "int[]"
+name = "g_field_worker_count_wt3"
+status = "VERIFIED"
+
+["SERVER.0x1002575c"]
+section = ".rdata"
+type = "int[]"
+name = "g_field_worker_count"
+status = "VERIFIED"
+
+["SERVER.0x1002576c"]
+section = ".rdata"
+type = "int[]"
+name = "g_field_entry_count"
+status = "VERIFIED"
+
+["SERVER.0x10027488"]
+section = ".data"
+type = "int[2]"
+name = "gz_magic"
+status = "VERIFIED"
+
+["SERVER.0x1002b374"]
+section = ".data"
+name = "__locktable"
+type = "CRITICAL_SECTION*[]"
+size = 176
+status = "VERIFIED"
+
+["SERVER.0x1002aa84"]
+name = "g_rdata_fold_refs"
+type = "const char*[]"
+size = 48
+section = ".data"
+status = "VERIFIED"
+
+["SERVER.0x1002b440"]
+name = "__old_small_block_heap"
+type = "int"
+size = 4
+section = ".data"
+status = "VERIFIED"
+
+["SERVER.0x1002d464"]
+name = "__old_sbh_threshold"
+type = "unsigned int"
+size = 4
+section = ".data"
+status = "VERIFIED"
+
+["SERVER.0x100366a8"]
+name = "__sbh_threshold"
+type = "unsigned int"
+size = 4
+section = ".data"
+status = "UNCHECKED"
+
+["SERVER.0x100366b8"]
+name = "__sbh_initialized"
+type = "int"
+size = 4
+section = ".data"
+status = "UNCHECKED"
+
+["SERVER.0x1002cd14"]
+name = "g_error_msg_sell_no_source"
+type = "char[]"
+size = 51
+section = ".data"
+status = "VERIFIED"
+
+["SERVER.0x1002cc8c"]
+name = "g_error_msg_sell_no_dest"
+type = "char[]"
+size = 50
+section = ".data"
+status = "VERIFIED"
+
+["SERVER.0x1002cd48"]
+name = "g_error_msg_sell_failed"
+type = "char[]"
+size = 46
+section = ".data"
 status = "VERIFIED"

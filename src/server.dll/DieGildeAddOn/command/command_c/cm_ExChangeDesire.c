@@ -3,8 +3,11 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x10025698
 extern double _g_stat_min_d;
+// GLOBAL: SERVER 0x10025690
 extern double _g_stat_max_d;
+// GLOBAL: SERVER 0x1002d0f4
 extern char s_cm_ExChangeDesire___Invalid_I_1002d0f4[];
 
 /* Byte offset off the resolved base, not a cached float*: `resolved` is

@@ -44,9 +44,13 @@ extern int __cdecl fcn_1001e638(OldSbhRegion* preg, OldSbhPage* ppage, unsigned 
 
 /* Threshold / init flags + old-sbh enable flag (LIBCMT data symbols).
  * MSVC6 ignores /alternatename, so these must be real definitions. */
+// GLOBAL: SERVER 0x100366a8
 unsigned int __sbh_threshold;
+// GLOBAL: SERVER 0x1002d464
 unsigned int __old_sbh_threshold;
+// GLOBAL: SERVER 0x100366b8
 int __sbh_initialized;
+// GLOBAL: SERVER 0x1002b440
 int __old_small_block_heap;
 
 unsigned int __cdecl _get_sbh_threshold(void)

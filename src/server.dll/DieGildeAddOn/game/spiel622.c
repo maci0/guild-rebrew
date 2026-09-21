@@ -11,7 +11,7 @@
 #pragma intrinsic(memcpy, memset)
 
 extern int g_query_limit;
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;
 extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; /* defined in spiel.c */
@@ -805,6 +805,7 @@ int __cdecl compute_size(char* pkt)
  * Validates recipe requirements, ingredient availability,
  * worker skills, and building capability. */
 
+// DATA: SERVER 0x10031628
 char s_gm_KannObjektHergestellt___pCObj_10031628[] = "gm_eval_SlotVoll(): Lager ist in keinem Geb\344ude";
 
 // FUNCTION: SERVER 0x10019d30

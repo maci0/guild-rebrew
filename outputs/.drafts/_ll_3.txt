@@ -1,0 +1,92 @@
+ 280|| `/INCLUDE:<sym>` | forces a LIBCMT object in for its *code* — `__ms_p5_mp_test_fdiv` is one of the eight here — and the object's `.data`/`.rdata` COMDATs come with it. |
+ 281|| `/debug` | adds a `0x1c`-byte debug directory that shifts `.rdata`; `REBREW_DEBUG_INFO` must stay OFF. |
+ 282|
+ 283|## 6. What postlink is allowed to overwrite (and what it is not)
+ 284|
+ 285|| region | postlink behaviour |
+ 286||--------|--------------------|
+ 287|| `.text` | trims to the reference's raw size, sets raw/VirtualSize, rewrites absolute data operands and E8/E9 targets from the sparse maps. Content is largely ours. |
+ 288|| `.rdata` | **only** the IAT and import bookkeeping are copied. The rest must already match byte-for-byte — hence the prefix gate. |
+ 289|| `.data` | overwritten wholesale with `data.hex` (`0xe000`), raw size set to the reference's. |
+ 290|| `.reloc` | replaced with the reference's (grows to raw `0x11000`) at the **built** file's `.reloc` offset. |
+ 291|| PE metadata | DOS stub, `e_lfanew`, TimeDateStamp, CheckSum, `.data` VirtualSize, `.reloc` VA, SizeOfImage. |
+ 292|
+ 293|The practical reading: `.data`, `.reloc` and the import layer are already
+ 294|solved *at the content level*; `.rdata`'s body and `.text`'s bytes are not.
+ 295|Which is why the remaining raw-size work is worth doing — with `.rdata` raw at
+ 296|`0x3000` and `.data` raw at `0xe000`, the built `.reloc` lands at file offset
+ 297|`0x35000`, exactly the reference's, and the post-postlink file is `0x46000`
+ 298|bytes, exactly the reference's size:
+ 299|
+ 300|```
+ 301|reference      0x1000 + 0x23000 + 0x3000 + 0xe000 + 0x11000 = 0x46000
+ 302|built (now)    0x1000 + 0x23000 + 0x4000 + 0xe000 + 0x08000 = 0x3e000
+ 303|built (target) 0x1000 + 0x23000 + 0x3000 + 0xe000 + 0x11000 = 0x46000
+ 304|```
+ 305|
+ 306|## 7. Measuring it (recipes)
+ 307|
+ 308|A failed postlink **deletes** `server.dll`, but the POST_BUILD step copies the
+ 309|honest link output to `.scratch/server.dll.prelayout` one command earlier.
+ 310|`scripts/section_geometry.py` reads that file and prints the whole table
+ 311|above, exiting non-zero when a raw size still differs from the reference:
+ 312|
+ 313|```sh
+ 314|python3 scripts/section_geometry.py                 # .scratch/server.dll.prelayout
+ 315|python3 scripts/section_geometry.py build/x.dll     # or an explicit file
+ 316|```
+ 317|
+ 318|```sh
+ 319|cmake --build build -j8
+ 320|python3 - <<'PY'
+ 321|import struct
+ 322|d = open('.scratch/server.dll.prelayout','rb').read()
+ 323|pe = struct.unpack_from('<I', d, 0x3c)[0]
+ 324|n  = struct.unpack_from('<H', d, pe + 6)[0]
+ 325|opt = pe + 24
+ 326|for i in range(n):
+ 327|    o = opt + struct.unpack_from('<H', d, pe + 20)[0] + i*40
+ 328|    print(d[o:o+8].rstrip(b'\0').decode(),
+ 329|          *[hex(x) for x in struct.unpack_from('<IIII', d, o+8)])   # vs, va, raw, ptr
+ 330|PY
+ 331|```
+ 332|
+ 333|For a map (per-symbol objects, and the `.bss` content-end line), relink the
+ 334|same objects with `/MAP` — the response file is already written for you:
+ 335|
+ 336|```sh
+ 337|cd build
+ 338|sed -e 's#/out:server\.dll#/out:server_probe.dll#' \
+ 339|    -e 's#/implib:server\.lib#/implib:server_probe.lib#' \
+ 340|    -e 's#/pdb:[^ ]*#/pdb:server_probe.pdb#' \
+ 341|    -e 's#/nologo#/nologo /MAP:server_probe.map#' \
+ 342|    CMakeFiles/server_dll.dir/link.txt > /tmp/link_probe.txt
+ 343|bash /tmp/link_probe.txt
+ 344|```
+ 345|
+ 346|The map's `Publics by Value` columns are
+ 347|`section:offset name Rva+Base flags object`; library symbols have an empty
+ 348|flags column, so parse the object as the last whitespace-separated field, not
+ 349|by fixed column.
+ 350|
+ 351|## 8. Traps
+ 352|
+ 353|* **`rebrew gen-layout` is not output-stable.** Two of the files it rewrites
+ 354|  (`crt_region/crt_imports.c`'s `/include:` order and the `layout` block in
+ 355|  `rebrew-project.toml`) come out in set-iteration order, which changes
+ 356|  between processes. Regenerating `data_restore.c` with `--data-gap` also
+ 357|  churns those two; check `git status` and revert them unless the change is
+ 358|  intended.
+ 359|* **A `// DATA:` marker that is not in `src/rebrew-data.toml` is a lint
+ 360|  warning (W016).** The gap blob's VA is a function of its size, so re-tuning
+ 361|  it means moving the registry entry too (key, `section`, `name`, `type`).
+ 362|* **`data_restore.c`/`rdata_restore.c` contents are scaffold.** Editing the
+ 363|  bytes by hand cannot help (postlink overwrites `.data`; `.rdata`'s copy
+ 364|  must line up with meta.prefix); the only knob is the blob's *length*.
+ 365|* **Rebuild objects after touching `data_restore.c`.** Restores from
+ 366|  `.scratch/padbak` have silently reverted this object before; always rerun
+ 367|  `cmake --build` and re-read the map.
+ 368|* **`.text` VirtualSize is the cheap link-health check**: the reference is
+ 369|  `0x22846`. A built value below it means the link is not emitting code the
+ 370|  reference contains, and no downstream section measurement is meaningful
+ 371|  until that is understood.

@@ -1,0 +1,120 @@
+   1|# Measure traps — the method's own failure modes
+   2|
+   3|These cost as much as the codegen walls, and most of them were learned by being burned.
+   4|For what the compiler itself blocks, see `codegen-walls.md`.
+   5|
+   6|Companion reading: `msvc6-c-shapes.md` (front-end shapes), `msvc6-allocator.md`
+   7|(register allocation and slot maps), `TODO.md` (round-by-round history).
+   8|
+   9|---
+  10|
+  11|## 1. Only the linked residue decides
+  12|
+  13|Object metrics are proxies and have pointed the wrong way repeatedly — at least six
+  14|recorded instances, including one where the *positional* metric (`aligned`) picked the
+  15|losing candidate by 3 linked bytes, and one where `matched` rose by 6 while the link fell
+  16|by 1. But they are not useless: on `CrashDump`'s V2 the object metric was much worse *and
+  17|so was the link* (+131), because the mechanism — a 59-byte shortfall displacing the
+  18|function's own jump tables — was understood. **The rule that survives: neither accept nor
+  19|reject on a metric alone.**
+  20|
+  21|## 2. One candidate, one full rebuild, one number
+  22|
+  23|A batch attributes nothing. Two rounds of "wins" were later found to be layout shifts from
+  24|*other* objects (a committed "−58" re-measured at +56).
+  25|
+  26|## 3. Relocation accounting makes the object metrics lie about what is left
+  27|
+  28|`matched` credits a byte only when **both** sides relocate it or **neither** does. `msvc6`
+  29|relocates *memory operands* but not absolute immediates, and every local `call` carries a COFF
+  30|`REL32` that the linked reference does not relocate. So four bytes per call are permanently
+  31|uncountable, plus one-sided data slots (`msvc6-allocator.md` Finding 59 and its amendment).
+  32|
+  33|Concrete ceilings, computed per window from the reference's HIGHLOW count:
+  34|
+  35|| function | reference HIGHLOW | `matched` ceiling | HEAD `matched` / `matched-reloc` |
+  36||---|---|---|---|
+  37|| `vfs_ReadCompressed` | 0 | 492 | 447 / 467 |
+  38|| `cm_ExProdObjekt` | 13 | 980 | 888 / **980** |
+  39|| `cm_ProcessCommandQueue` | 15 | 624 | 584 / **624** |
+  40|
+  41|On the last two, `matched-reloc` **already equals the ceiling**: their entire remaining
+  42|`matched` shortfall is accounting, and **zero** of it is codegen work. A function can be
+  43|finished as far as any code edit can take it while its `matched` still looks far from its size.
+  44|`gm_AllocSpieler`'s ceiling is ~3115 of 3689 — the distance from 736 was never reachable.
+  45|
+  46|A recognition that some residue is unreachable by any code edit — the one-sided
+  47|relocation bytes (`cm_ExProdObjekt` 92, `cm_ProcessCommandQueue` 40, `gm_AllocSpieler`
+  48|~574). Byte-identity in the *linked image* is what the objective measures, and those bytes
+  49|already match there; the metric simply cannot see them.
+  50|
+  51|## 4. A residue number is not the size of the error
+  52|
+  53|It is the distance from the first divergence to the end of the function. `gm_AllocSpieler`
+  54|is 2,861 differing bytes over a 3,689-byte function *with a two-instruction deficit*; one
+  55|early encoding of a different length shifts everything after it. But the ratio does not tell
+  56|you *which* of three causes you have: a length cascade, a frame **value** difference (which
+  57|changes every `esp`-relative operand and no length at all — `sub esp,0x28c` vs `0x280` are
+  58|both 6 bytes), or genuinely distributed differences. `scripts/gaptrace.py`'s **curve shape**
+  59|discriminates; the ratio does not.
+  60|
+  61|A high residue was once read as "one early encoding shifts the tail", sent to two agents as
+  62|a mission brief, and both refuted it with measurements — `CrashDump`'s first differing byte
+  63|is a frame *value*, and `gm_AllocSpieler`'s gap returns to 0 repeatedly across 168 hunks. Two
+  64|agent budgets were spent at a cliff that was not there.
+  65|
+  66|**The run-length histogram is the cheap discriminator (round 839, whole tree).** Count the
+  67|contiguous differing runs between built and reference `.text` and look at their lengths.
+  68|Measured on the current tree: **610 runs over 8,634 bytes, median 5, mean 14.2, longest
+  69|189, and 254 of them exactly one byte.** That shape rules *out* a single early length
+  70|cascade — a cascade produces one long run from its start to the next realignment, not 254
+  71|scattered singletons — and rules *out* "one frame value per function", because a frame
+  72|value changes every `esp`-relative operand in that function at once.
+  73|
+  74|**Do not infer the cause from the most common short-run context.** The top of that list is
+  75|dominated by `mov eax,[esp+0x20]` vs `[esp+0x18]`, which reads as a frame-offset cascade.
+  76|Measured directly, the bytes attributable to an `[esp+disp8]` slot offset are **54 of
+  77|8,634** (0.6%). The frequent pattern was the most *visible* one, not the bulk — the same
+  78|mistake §4 records, one level down. Classify by counting, never by the top of a frequency
+  79|list.
+  80|
+  81|**Concentration is the other half.** The nine largest carriers hold **7,880 of 8,634 (91%)**
+  82|and the top two (`gm_AllocSpieler` 2,824, `CrashDump` 1,583) hold **4,407 (51%)**. So the
+  83|residue is simultaneously *fragmented in position* and *concentrated in cause*: many small
+  84|scattered differences, grouped into a handful of functions, each with its own documented
+  85|root. Any plan that treats the 610 runs as 610 problems is wrong; so is any plan that treats
+  86|the 8,634 as one cascade.
+  87|
+  88|## 5. Tool traps that produced wrong readings
+  89|
+  90|- `build/objtest/<name>.obj` is stale after `rebrew test`: disassembling it
+  91|  reads an earlier compile. The object a measurement actually wrote is the
+  92|  fresh `build/objtest/probe_*.obj` from `scripts/probe_function.py` (or the
+  93|  build tree object after a rebuild). One round nearly wrote up "the V2
+  94|  frame does not reproduce" from the stale file; the fresh object showed
+  95|  `sub esp,0x280`. (Also: `objdump -d file | head -6` truncates before the
+  96|  first instruction — the header lines eat the budget; use `head -12`.)
+  97|- `gaptrace`'s `size` argument must be the reference's *real body*, not the metadata size.
+  98|  `vfs_OpenStream` is 667 bytes of code inside a 701-byte real body inside a 704-byte window;
+  99|  the three choices read as "37 B long, 20 extra insns" / "3 B long" / aligned. The first
+ 100|  invents instructions by decoding our own table bytes. It now derives the window itself.
+ 101|- `gaptrace`'s instruction counts include cl's trailing alignment fill and read high; it now
+ 102|  prints the real code end and labels the counts.
+ 103|- **`rebrew test`/`verify` ignore the CMake per-file toolchain pin, so a pinned file's
+ 104|  per-function numbers describe a compile that does not ship (round 842).**
+ 105|  `CMakeLists.txt` pins three files to `/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp` and the link
+ 106|  honours it (visible in `build/CMakeFiles/server_dll.dir/build.make`), but `test`/`verify`
+ 107|  compile with the project default sp6. Measured on `gm_FindNextFilteredEntity`
+ 108|  (`spiel_dumpD.c`, pinned): verify reports `obj 342`, SIZE_MISMATCH, `delta 186`; the
+ 109|  shipped DLL measures **215/346** at that VA, and compiling with the pin gives `obj 346` —
+ 110|  the reference's exact size — at `match` 171/346. The whole-tree residue is safe because
+ 111|  it is measured on the shipped bytes; **per-function claims about the three pinned files
+ 112|  are not.** Check `CMakeLists.txt` before quoting a `verify` number for
+ 113|  `spiel_dumpD.c`, `ahm_ExAllocAlchemist.c` or `ls_LoadBuildingEntityState.c`.
+ 114|  Filed upstream in the rebrew ideas file.
+ 115|- `instr_diff` decoded without `skipdata` and halted on a stray byte, understating alignment
+ 116|  for the rest of a function (one function went 618 -> 646 once fixed).
+ 117|- `gaptrace` was once accused of comparing instruction offsets rather than bytes, and rebuilt;
+ 118|  the tool compares masked bytes and decodes both streams at the same base. The real defect
+ 119|  was the size argument. Verify a tool complaint before acting on it.
+ 120|

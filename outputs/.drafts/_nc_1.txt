@@ -1,0 +1,183 @@
+  38|### Europa1400Gold.exe (main game client)
+  39|
+  40|```
+  41|D:\develop\
+  42|  Units\
+  43|    d2.v1\GFX.C           -- 2D graphics
+  44|    d3\
+  45|      d3_d3d.c             -- Direct3D renderer
+  46|      d3_engine.c          -- 3D engine core
+  47|      d3_interface.c       -- 3D interface layer
+  48|      d3_sky.c             -- sky rendering
+  49|      ts_texture.c         -- texture system
+  50|    d3_tools\d3_tools.c    -- 3D tool utilities
+  51|    dd_vesa\Dd_vesa.c      -- DirectDraw / VESA fallback
+  52|    Msx\msx.c              -- music/sound (MSX)
+  53|    net\net.c              -- network layer
+  54|```
+  55|
+  56|### Europa1400Gold_TL.exe (Transform & Lighting GPU pipeline)
+  57|
+  58|```
+  59|D:\develop\
+  60|  DieGildeAddOnVc\         -- game logic (VC = Visual C++ project)
+  61|    Release\Europa1400Exp_TL.pdb   -- PDB debug symbols (!)
+  62|  d2_test\textures\        -- 2D test textures
+  63|  units\
+  64|    Msx\msx.c              -- music/sound (shared)
+  65|    net\net.c              -- network layer (shared)
+  66|```
+  67|
+  68|Note: TL.exe shares the same game logic as server.dll (the `cm_*`, `gm_*`
+  69|functions appear in both) but is built from `DieGildeAddOnVc\` instead of
+  70|`DieGildeAddOn\`. The `Units\` directory is shared across all three binaries.
+  71|
+  72|### Merged Source Tree (speculative)
+  73|
+  74|Combining all three binaries into a single view of the original development
+  75|tree. Entries marked with which binary references them.
+  76|
+  77|```
+  78|D:\Develop\
+  79|  DieGildeAddOn\                         -- game logic (server-side build)
+  80|    auxillary\
+  81|      plant.c                            [server.dll]
+  82|    command\
+  83|      command.c                          [server.dll]
+  84|      lobbycommands.c                    [server.dll]
+  85|    game\
+  86|      aemter.c                           [server.dll]
+  87|      alchemistry_logic.c               [server.dll]
+  88|      friedhof_logic.c                   [server.dll]
+  89|      sim.c                              [server.dll]
+  90|      spiel.c                            [server.dll]
+  91|    loadsave\
+  92|      loadsave.c                         [server.dll]
+  93|  DieGildeAddOnServer\                   -- dedicated server entry point
+  94|    server.c                             [server.dll]
+  95|  DieGildeAddOnVc\                       -- game logic (client-side build, T&L)
+  96|    Release\
+  97|      Europa1400Exp_TL.pdb               [TL.exe] PDB symbols
+  98|  Units\                                 -- shared engine / infrastructure
+  99|    d2.v1\
+ 100|      GFX.C                              [Gold.exe] 2D graphics
+ 101|    d2_test\
+ 102|      textures\                          [TL.exe] test textures
+ 103|    d3\
+ 104|      d3_d3d.c                           [Gold.exe] Direct3D renderer
+ 105|      d3_engine.c                        [Gold.exe] 3D engine core
+ 106|      d3_interface.c                     [Gold.exe] 3D interface layer
+ 107|      d3_sky.c                           [Gold.exe] sky rendering
+ 108|      ts_texture.c                       [Gold.exe] texture system
+ 109|    d3_tools\
+ 110|      d3_tools.c                         [Gold.exe] 3D tool utilities
+ 111|    dd_vesa\
+ 112|      Dd_vesa.c                          [Gold.exe] DirectDraw / VESA fallback
+ 113|    Error\
+ 114|      Error.c                            [server.dll] error handling
+ 115|    m_alloc\
+ 116|      m_alloc.c                          [server.dll] memory allocator
+ 117|    Msx\
+ 118|      msx.c                              [Gold.exe, TL.exe] music/sound
+ 119|    net\
+ 120|      broadcast.c                        [server.dll] network broadcast
+ 121|      net.c                              [Gold.exe, TL.exe] network layer
+ 122|    vfs\
+ 123|      vfs.c                              [server.dll] virtual file system
+ 124|```
+ 125|
+ 126|`DieGildeAddOn\` and `DieGildeAddOnVc\` likely contain the same game logic
+ 127|source files, compiled with different project settings. The server build
+ 128|(`DieGildeAddOn\`) produces `server.dll`. The client T&L build
+ 129|(`DieGildeAddOnVc\`) produces `Europa1400Gold_TL.exe`. The base client
+ 130|(`Europa1400Gold.exe`) links only the engine `Units\` — game logic may be
+ 131|compiled directly into it or loaded from a separate DLL not captured here.
+ 132|
+ 133|### File Naming Patterns
+ 134|
+ 135|- German nouns for gameplay concepts: `spiel` (game), `aemter` (offices),
+ 136|  `friedhof` (graveyard)
+ 137|- English for technical/infrastructure: `server`, `lobbycommands`, `loadsave`
+ 138|- Subsystem logic files get a `_logic` suffix: `alchemistry_logic`,
+ 139|  `friedhof_logic`
+ 140|- Shared library code lives under `Units\` with short module names:
+ 141|  `d3`, `net`, `vfs`, `Msx`, `m_alloc`
+ 142|
+ 143|## Module Prefix System
+ 144|
+ 145|Every exported/named function carries a **module prefix** identifying its
+ 146|subsystem:
+ 147|
+ 148|### Game Logic Modules
+ 149|
+ 150|| Prefix | Module       | Source File              | Domain                          |
+ 151||--------|--------------|--------------------------|---------------------------------|
+ 152|| `cm_`  | Command      | `command.c`              | Command validation & execution  |
+ 153|| `gm_`  | Game         | `spiel.c`                | Entity/object/building mgmt     |
+ 154|| `lb_`  | Lobby        | `lobbycommands.c`        | Network lobby layer             |
+ 155|| `ahm_` | Alchemy      | `alchemistry_logic.c`    | Alchemy subsystem               |
+ 156|| `gv_`  | Graveyard    | `friedhof_logic.c`       | Graveyard subsystem             |
+ 157|| `sim_` | Simulation   | `sim.c`                  | Citizen simulation              |
+ 158|| `amt_` | Offices      | `aemter.c`               | Office / election system        |
+ 159|| `ls_`  | LoadSave     | `loadsave.c`             | Save/load serialization         |
+ 160|| `plt_` | Plant        | `plant.c`                | Zone/record lookup, vegetation  |
+ 161|
+ 162|### Infrastructure Modules (`Units/`)
+ 163|
+ 164|| Prefix | Module       | Source File              | Domain                          |
+ 165||--------|--------------|--------------------------|---------------------------------|
+ 166|| `m_`   | Memory       | `m_alloc.c`              | Tracked heap alloc, pool alloc  |
+ 167|| `vfs_` | VFS          | `vfs.c`                  | Virtual file system, streams    |
+ 168|| `srv_` | Server       | `server.c`               | Server lifecycle, main loop     |
+ 169|
+ 170|Two units have **no attested prefix**: `Units/Error/Error.c` and
+ 171|`Units/net/broadcast.c`. The debug strings and the binary's own names for
+ 172|them are not recovered, so their functions keep descriptive unprefixed names
+ 173|(`LogMessageInternal`, `ReportFatalError`, `SendBroadcastPacket`) rather than
+ 174|an invented `err_`/`net_`. The string corpus confirms this: the only
+ 175|module-prefixed identifiers near `Error.c` (`0x10027144`) and `broadcast.c`
+ 176|(`0x10001130`) are asset names, and neither unit logs with a `err_*():` or
+ 177|`net_*():` prefix. Add a row here only when the original name is attested.
+ 178|
+ 179|File-scoped save/load helpers inside a module take a `fio_` (file I/O) infix:
+ 180|`amt_fio_LoadAemter`, `amt_fio_SaveAemter`. The prefix chain is
+ 181|`<module>_<role>_<VerbNoun>`, so `amt_fio_LoadAemter` is the `aemter.c`
+ 182|file-I/O loader.
+ 183|
+ 184|### Client-Only Modules (`Europa1400Gold*.exe`)
+ 185|
+ 186|The client binaries share the game logic (`cm_`, `gm_`, `amt_`, `ls_`, `gv_`,
+ 187|`ahm_`) but add engine subsystems that never appear in `server.dll`. These
+ 188|prefixes are attested by log strings in `Europa1400Gold_TL.exe` and
+ 189|`Europa1400Gold.exe` and are **out of scope for this repo's decompilation
+ 190|target**; they are recorded so names are not invented twice.
+ 191|
+ 192|| Prefix  | Module            | Domain                                   |
+ 193||---------|-------------------|------------------------------------------|
+ 194|| `ch_`   | Character         | Character/mesh/animation runtime         |
+ 195|| `ai_`   | AI                | Meister (master) AI decision routines    |
+ 196|| `he_`   | Handlungsereignis | Game events                              |
+ 197|| `cut_`  | Cutscene          | Cutscene control                         |
+ 198|| `d2_`   | Direct2D layer    | 2D UI/interface layer (`d2.v1`)          |
+ 199|| `d3_`   | Direct3D layer    | 3D renderer (`d3/`)                      |
+ 200|| `txt_`  | Text              | Text file parse/format                   |
+ 201|| `lc_`   | Location          | Building placement / jail queries        |
+ 202|| `rd_`   | Record            | Record / supermap lookup                 |
+ 203|| `sv_`   | Server view       | Client-side state sync                   |
+ 204|| `io_`   | I/O               | Generic file I/O                         |
+ 205|| `init_` | Init              | Startup / scene init                     |
+ 206|| `main_` | Main              | Client main loop / menus                 |
+ 207|| `nt_`   | Network           | Client network layer                     |
+ 208|| `ob_`   | Object            | Object behaviour on the client           |
+ 209|| `gs_`   | Court (Gericht)   | Evidence / trial system                  |
+ 210|| `am_`   | Method registry   | Engine method registration (`am_RegisterMethod`) |
+ 211|
+ 212|Assets, script commands, and config keys in the client also use `prefix_`
+ 213|spellings (`bau_`, `bk_`, `sp_`, `ub_`, `upgr_`, `riss_`, `prva_`, `snd_`,
+ 214|`sbs_`, …). Those are data identifiers, not function names; do not map them
+ 215|onto C symbols.
+ 216|
+ 217|### Standard Library Functions
+ 218|
+ 219|Standard CRT functions (`fopen`, `fread`, `putc`, `srand`, `rand`, etc.)
+ 220|are used directly with proper `#include` headers — no `extern` declarations

@@ -12,7 +12,9 @@ extern int g_sequence_counter;
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 extern int g_file_version; /* 0x1002d4ec */
+// GLOBAL: SERVER 0x101de560
 extern int g_recv_game_buffer;
+// GLOBAL: SERVER 0x101de460
 extern int g_save_info[2];
 extern int vfs_OpenStream(char*, char*, int);
 int ls_LoadSavegameHeader(int, char*);

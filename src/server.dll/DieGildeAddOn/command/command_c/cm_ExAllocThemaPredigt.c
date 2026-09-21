@@ -43,6 +43,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002d184
 extern char s_cm_ExAllocThemaPredigt____Execut_1002d184[];
 char* __cdecl gm_AllocObjekt(int, int, int);
 

@@ -19,6 +19,7 @@ extern unsigned int ls_ID2Ptr(void);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 
 extern int g_query_limit; /* 0x10035450 */
+// GLOBAL: SERVER 0x1003543c
 extern int g_active_player_count; /* 0x1003543c */
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
 
@@ -168,9 +169,11 @@ int g_query_filter_extra4[4] = {
 };
 /* Canonical definition lives in game/spiel_c/gm_NextEntityQueryMatch.c. */
 extern int g_query_filter_owner;
+// DATA: SERVER 0x10031500
 char g_str_10031500[1] = {
     0x67,
 };
+// DATA: SERVER 0x10031538
 char g_str_10031538[1] = {
     0x67,
 };

@@ -63,7 +63,9 @@
 
 uint __cdecl gm_AllocSpieler(uint, int, int, ushort, int, uint, uint, uint);
 
+// GLOBAL: SERVER 0x1002cb50
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_S_1002cb50[];
+// GLOBAL: SERVER 0x1002cb8c
 extern char s_cm_ExAllocSpieler___gm_AllocSpie_1002cb8c[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 

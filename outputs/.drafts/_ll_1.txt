@@ -1,0 +1,140 @@
+   1|# MSVC 6.0 LINK / PE layout: what decides the bytes outside `.text`
+   2|
+   3|`rebrew test` and `docs/msvc6-c-shapes.md` own `.text`. Everything else —
+   4|section geometry, the import layer, `.data`/`.rdata` content, and what
+   5|`rebrew postlink` is allowed to overwrite — is decided by the linker and by
+   6|the layout package, and it is what this file records.
+   7|
+   8|Every number here is measured, not inferred. The two binaries are
+   9|`original/Server/server.dll` (the reference) and the CMake build's
+  10|pre-postlink output (`.scratch/server.dll.prelayout`); reproduce any row with
+  11|the recipes in section 7.
+  12|
+  13|## 1. Section geometry: three rules, and the arithmetic that follows
+  14|
+  15|Both binaries: `SectionAlignment = FileAlignment = 0x1000`,
+  16|`SizeOfHeaders = 0x1000`.
+  17|
+  18|| reference | RVA        | VirtualSize | raw     | file offset |
+  19||-----------|------------|-------------|---------|-------------|
+  20|| `.text`   | `0x001000` | `0x022846`  | `0x23000` | `0x001000` |
+  21|| `.rdata`  | `0x024000` | `0x002e81`  | `0x03000` | `0x024000` |
+  22|| `.data`   | `0x027000` | `0x174059c` | `0x0e000` | `0x027000` |
+  23|| `.reloc`  | `0x1768000`| `0x010374`  | `0x11000` | `0x035000` |
+  24|
+  25|file size `0x46000` (286720).
+  26|
+  27|The rules the linker follows, each verified against both binaries:
+  28|
+  29|1. **`raw = align_up(content_end, FileAlignment)`.** Not `VirtualSize`. The
+  30|   reference's `.data` `VirtualSize` is `0x174059c` (the whole section,
+  31|   `.bss` included) while its raw is `0xe000`; its last non-zero initialized
+  32|   byte is at section offset `0xd60b`, so the raw is the page-round of a
+  33|   content end that lies in `(0xd000, 0xe000]`.
+  34|2. **`RVA(n+1) = align_up(RVA(n) + VirtualSize(n), SectionAlignment)`.**
+  35|   `.rdata` ends at `0x24000 + 0x2e81 = 0x26e81`, so `.data` starts at
+  36|   `0x27000` — a whole `0x1000` early of where a raw-sized accounting would
+  37|   put it.
+  38|3. **`file_offset(n+1) = file_offset(n) + raw(n)`.** This is the rule that
+  39|   makes a surplus section fatal rather than cosmetic: one extra `0x1000` of
+  40|   `.rdata` raw moves `.data`, `.reloc` and the end of the file by `0x1000`.
+  41|   Byte-identical output therefore reduces to four exact raw sizes, and to
+  42|   the content that decides them.
+  43|
+  44|The map file is the cheap way to read a section's *content* end: the linker
+  45|starts `.bss` where the initialized bytes stop.
+  46|
+  47|```
+  48|0002:000001a0 00002630H .rdata     DATA      <- IAT is [0, 0x1a0)
+  49|0003:00000030 0000f4d0H .data      DATA      <- .CRT$XCA..XTZ are [0, 0x30)
+  50|0003:0000f500 01735598H .bss       DATA      <- .data content ends at 0xf500
+  51|```
+  52|
+  53|So a section's content end is `bss_offset`, and the map's per-symbol offsets
+  54|are section-relative (add the section RVA for a VA).
+  55|
+  56|## 2. `.data`: the gap blob, and the one number that matters
+  57|
+  58|`crt_region/data_restore.c` is a single `unsigned char g_data_restore_gap[]`
+  59|whose bytes are a copy of the reference's `.data` raw. It is linked **first**
+  60|(after `crt_imports.c`), so in the linked image the section is laid out as
+  61|
+  62|```
+  63|[0x00, 0x30)        .CRT$XCA .. .CRT$XTZ (10 sections, 0x30 bytes)
+  64|[0x30, 0x30+B)      g_data_restore_gap          (size B)
+  65|[0x30+B, ...)       every other TU's .data, .bss
+  66|```
+  67|
+  68|**Only `B` matters.** `rebrew postlink`'s data fixer overwrites the built
+  69|`.data` wholesale with the layout package's `data.hex` (the reference's raw
+  70|bytes) and rewrites the header's raw size to `len(meta.data)` — the blob's
+  71|*content* never reaches the output. Its whole job is to make the section's
+  72|content end land in the band that rounds to the reference's raw size:
+  73|
+  74|```
+  75|own      = content_end(without blob) - 0x30      # measured: 0x44d0
+  76|B        = 0xe000 - 0x30 - own                    # 0xe000 exactly
+  77|band     = (0xd000, 0xe000]                       # any value in it -> raw 0xe000
+  78|```
+  79|
+  80|Measured:
+  81|
+  82|```
+  83|data_restore.c header          content end (.bss)   .data raw
+  84|[0x3000:0xe000]  B = 0xb000    0xf500               0x10000   <- 0x2000 too big
+  85|[0x4600:0xe000]  B = 0x9a00    0xdf00               0x0e000   <- matches the reference
+  86|```
+  87|
+  88|`B = 0x9a00` leaves `0x100` of headroom below `0xe000`, which is why it is
+  89|the chosen value rather than the exact `0x9b00`. The blob is regenerated with
+  90|
+  91|```sh
+  92|PYTHONPATH=$PWD/.scratch/rebrew-stable/src rebrew gen-layout --data-gap 0x4600
+  93|```
+  94|
+  95|where the argument is the **raw_start** (the reference `.data` offset the blob
+  96|starts at), so `B = reference_raw - raw_start`. Note that `--data-gap`'s help
+  97|text calls it `<raw-size>`; the code does `data[data_ro+raw_start : data_ro+data_raw]`.
+  98|
+  99|Measured content inventory of `.data` in the CMake build (map section 3):
+ 100|`0x30` CRT + `0x9a00` blob + `0x44d0` of TU data (game string literals
+ 101|`??_C@...`, `link_stubs.c.obj`'s `g_<va>` scaffold globals, LIBCMT `.data`)
+ 102|ends exactly at the reference's raw size. The map's `.bss` line is the
+ 103|boundary: every symbol above `0xdf00` there is uninitialized, so the
+ 104|surplus was blob + emitted literals, never an initialized global the layout
+ 105|could not place.
+ 106|
+ 107|### The prefix cannot be dodged by reordering: sections merge by name
+ 108|
+ 109|The sub-sections of image section 2 are merged in **section-name order**, not
+ 110|object order — the map always reads
+ 111|
+ 112|```
+ 113|0002:00000000 .idata$5   (IAT)
+ 114|0002:000001a0 .rdata     (every `.rdata`-named contribution, in object order)
+ 115|0002:000027d0 .idata$2   (import descriptors)
+ 116|0002:00002820 .idata$3
+ 117|0002:00002834 .idata$4
+ 118|0002:000029d4 .idata$6   (hint/name records + DLL names)
+ 119|0002:00002ff0 .edata
+ 120|```
+ 121|
+ 122|so no link-line change can put the import descriptors *before* the `.rdata`
+ 123|contributions: the gate's `0x2468` bytes are exactly that `.rdata` group, and
+ 124|satisfying it means making the group total `0x2468` **and** hold the
+ 125|reference's bytes.  The same rule fixes the `.idata$N` order, which is why
+ 126|postlink copies `bookkeeping.hex` (`0x828` bytes) over whatever sits at the
+ 127|built import directory instead of trying to move it.
+ 128|
+ 129|### Why `.data` is where the literals are
+ 130|
+ 131|Under `/O2 /Gd /MT` (and unchanged by `/Gf`, `/Gy`, `/GA` — measured), msvc6
+ 132|emits a **referenced string literal into `.data`**, as a `??_C@...` COMDAT,
+ 133|not into `.rdata`.  A literal that nothing references is **not emitted at
+ 134|all** — there is no unreferenced-literal section to restore.  Both facts show
+ 135|up in the map: the game's `??_C@...` symbols all have section `0003`, and the
+ 136|`runtime error` strings that a round-113 plan wanted to "re-emit from a TU"
+ 137|were already inside `rdata_restore.c`'s blob precisely because no TU of ours
+ 138|references them.
+ 139|
+ 140|The consequence for planning: a missing `.rdata` string cannot be fixed by

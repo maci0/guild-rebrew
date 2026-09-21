@@ -17,7 +17,9 @@ typedef struct copy_12_dwords {
 
 char* __cdecl gm_AllocGebaeude(uchar, uint);
 
+// GLOBAL: SERVER 0x1002cb34
 extern char s_gm_AllocGebaeude___failed_1002cb34[];
+// GLOBAL: SERVER 0x1002caf0
 extern char s_Invalid__GI_Id__for_cmdt_ALLOC_B_1002caf0[];
 
 /* Execution handler: allocates a new room/space (Raum) entity.

@@ -86,9 +86,12 @@ char __cdecl AnalyzeInstruction(int arg1, int arg2, int arg3, int* arg4)
  * Opens log files, sets up exception handlers, and configures
  * output severity filters. */
 
+// DATA: SERVER 0x1002733c
 char s_LogFile_has_been_deleted__1002733c[] = "LogFile has been deleted!\n";
+// DATA: SERVER 0x10027358
 unsigned char g_file_write_mode[3] = {
     0x77, 0x74, 0x00,
 };
+// DATA: SERVER 0x1002735c
 char s__________________________________1002735c[] = "* ------------------------------------------------------------ *\n[%s], Date: %s";
 

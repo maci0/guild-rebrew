@@ -6,6 +6,7 @@
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+// GLOBAL: SERVER 0x1002d4ec
 int g_file_version;
 // FUNCTION: SERVER 0x10010530
 // SIZE: 113

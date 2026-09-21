@@ -54,14 +54,14 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 	if (g_log_mode_flags & 1) {
 		string_cursor = (char*) 0x677948;
 		do {
-			sprintf(buf, (char*) 0x677ca8, (char*) 0x14ce620, string_cursor);
+			sprintf(buf, (char*) 0x677adc, (char*) 0x14ce620, string_cursor);
 			file = fopen(buf, "at");
 			if (file != 0) {
 				fseek(file, 0, 2);
 				if (ftell(file) > 0x10000) {
 					fclose(file);
 					file = fopen(buf, "wt");
-					fputs((char*) 0x677ad8, file);
+					fputs((char*) 0x677ca8, file);
 				}
 				fclose(file);
 			}
@@ -69,8 +69,8 @@ void __cdecl InitializeLogAndErrorHandler(int a, int b, unsigned int c, unsigned
 		} while ((int) string_cursor < 0x677ac8);
 	}
 	if (g_log_mode_flags & 8) {
-		((void (__stdcall*)(void)) *(void**) 0x006622d4)();
-		g_log_file_handle = ((int (__stdcall*)(int)) *(void**) 0x00662088)(-0xb);
+		((void (__stdcall*)(void)) *(void**) 0x0066208c)();
+		g_log_file_handle = ((int (__stdcall*)(int)) *(void**) 0x0066205c)(-0xb);
 	}
 	string_cursor = (char*) 0x677918;
 	do {

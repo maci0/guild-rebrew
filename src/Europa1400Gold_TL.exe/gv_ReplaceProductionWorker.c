@@ -6,7 +6,8 @@
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-extern unsigned short* g_entity_table_end; /* 0x1003546c */
+extern unsigned short* g_entity_table_end; /* TL 0x773da8 (server 0x1003546c) */
+extern unsigned char* g_entity_type_table; /* TL 0x868050 (server 0x100a8c30) */
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl gv_GetSlotEntry(void* worker, int worktype, unsigned char job);
@@ -28,7 +29,7 @@ int __cdecl gv_ReplaceProductionWorker(void* a)
 	gm_ResolveEntityById(&rec, 0, 0, *(int*) ((char*) a + 8));
 	if (rec == 0 ||
 	    *(unsigned short*) ((char*) rec + 0x27) == limit ||
-	    0x100358a0 + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
+	    0x7f4ca0 + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
 	        g_entity_table_end)
 		return -1;
 	type = *(unsigned char*) rec;

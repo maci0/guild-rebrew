@@ -34,6 +34,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002d3d4
 extern char s_cm_ExKillTransporter____invalid_t_1002d3d4[];
 
 /* Execution handler: removes a transporter entity. Resolves

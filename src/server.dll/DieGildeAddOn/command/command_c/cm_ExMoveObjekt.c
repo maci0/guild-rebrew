@@ -55,8 +55,11 @@
  */
 
 /* Round-534: ascending REF VA decl order (R521/R531/R532 mid-pocket lever). */
+// DATA: SERVER 0x1002cfc4
 char s_cm_ExMoveObjekt___Objekt_nicht_v_1002cfc4[] = "cm_ExMoveObjekt() Object not found at source";
+// DATA: SERVER 0x1002cff4
 char s_cm_ExMoveObjekt___Invalid__ziel__1002cff4[] = "cm_ExMoveObjekt() Invalid 'ziel_besitzer_id'";
+// DATA: SERVER 0x1002d024
 char s_cm_ExMoveObjekt___Invalid__quell_1002d024[] = "cm_ExMoveObjekt() Invalid 'quell_besitzer_id'";
 
 /* Execution handler: moves an object from one inventory slot

@@ -51,6 +51,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002d2ec
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);

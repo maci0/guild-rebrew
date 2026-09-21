@@ -1,0 +1,34 @@
+  27|- **Agents cannot link-test** (link measurement is serialized), so they rank candidates on the
+  28|  object metrics that mispredict. Every delivery needs a coordinator link test — the bottleneck
+  29|  is measurement, not agent count.
+  30|
+  31|## 2. Scope constraints that closed options
+  32|
+  33|- **C only, no `__asm`** except where the original had hand-written assembly. Directly forbade
+  34|  the largest measured lever (codegen-walls §6). One pre-existing `__asm` block-fill is
+  35|  admissible because the original contains a 24-byte hand-written fill prelude there.
+  36|- **Do not reverse zlib or LIBCMT** — they are linked in. (`rebrew lib-match` is the check;
+  37|  FLIRT finds only 9 of the 68 functions that turned out to be stock LIBCMT.)
+  38|- **Library code and the CRT region are out of scope**, so the crt-region objects' "LONG"
+  39|  reports and the split-symbol drift are not the objective.
+  40|- **Correctness versus the metric.** One real bug (swapped `AnalyzeInstruction` arguments on
+  41|  `CrashDump`, which made the callee dereference `nInstr - 5`) was fixed at a **deliberate cost
+  42|  of 1 linked byte**, because byte-identity bought with semantically wrong C is a false match.
+  43|  Conversely a `volatile` byte-fitting change was accepted despite a pass recommending against
+  44|  it, because `volatile` changes no observable behaviour — the line is semantics, not style.
+  45|
+  46|## 3. Errors made during this work, kept on the record
+  47|
+  48|Each cost real budget and each is the kind of mistake the next attempt would repeat.
+  49|
+  50|- **A wrong size rule was enforced for many rounds.** "The real body must equal the reference's"
+  51|  discarded admissible candidates; the true constraint is the padded COMDAT (measure-traps
+  52|  §7). Correcting it retracted recorded rejections.
+  53|- **A cascade framing was inferred from a ratio and was wrong.** High residue was read as "one
+  54|  early encoding shifts the tail", sent to two agents as a mission brief, and both refuted it
+  55|  with measurements — `CrashDump`'s first differing byte is a frame *value*, and
+  56|  `gm_AllocSpieler`'s gap returns to 0 repeatedly across 168 hunks. Two agent budgets were spent
+  57|  at a cliff that was not there.
+  58|- **A tool was blamed for what was my own invocation.** A `gaptrace` run with the metadata size
+  59|  produced "37 bytes too long, 20 extra instructions", reported as a finding before being
+  60|  recognised as an artefact of the truncated window.

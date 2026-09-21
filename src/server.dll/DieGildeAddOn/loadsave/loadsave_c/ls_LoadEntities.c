@@ -12,8 +12,11 @@ extern int g_file_version; /* 0x1002d4ec */
 int ls_LoadEntities(int);
 
 extern int g_citizen_count;
+// GLOBAL: SERVER 0x10035470
 extern int g_save_extra_70;
+// GLOBAL: SERVER 0x10035474
 extern int g_save_extra_74;
+// GLOBAL: SERVER 0x10035478
 extern int g_save_extra_field;
 
 /* Loads graveyard-specific data from a save file. Reads

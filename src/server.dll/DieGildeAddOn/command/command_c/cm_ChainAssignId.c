@@ -1,5 +1,6 @@
 /* cm_ChainAssignId - proper C */
 
+// GLOBAL: SERVER 0x1176408c
 extern int g_chain_id_start;
 
 /* Chain handler: assigns the next sequential chain ID to the command

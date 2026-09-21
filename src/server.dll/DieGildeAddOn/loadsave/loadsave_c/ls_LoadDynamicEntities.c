@@ -133,3 +133,6 @@ int __cdecl ls_LoadDynamicEntities(void* file)
 
     return 1;
 }
+
+// GLOBAL: SERVER 0x1009aca2
+extern char g_dynamic_entities[]; /* 0x1009aca2 */

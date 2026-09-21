@@ -6,30 +6,18 @@
 #include "rebrew_globals.h"
 
 void __cdecl DispatchLogOutput(const char* text, unsigned char output_mask, int severity);
+// GLOBAL: SERVER 0x10034610
 extern void (*g_panic_callback)(void);
 
 /* Dispatches a log message to the configured output handlers
  * (file, debugger, etc.). Routes based on severity level. */
 
-// FUNCTION: SERVER 0x10002640
-// DispatchLogOutput
-
-
-
-/* THREE ints, not twelve.  The reference gives this table 12 bytes
- * (0x10027078..0x10027084, where g_log_format_table begins) and DispatchLogOutput
- * only ever indexes [0..2].  The initialiser was written as the twelve BYTES
- * 01 00 00 00 02 00 00 00 08 00 00 00 but spelled `int[12]`, which emits 48
- * bytes -- a 36-byte surplus that pushed every later symbol in the section. */
+// DATA: SERVER 0x10027078
 int g_log_level_table[3] = {
     0x01, 0x02, 0x08,
 };
 
-/* Three 0x20-byte log-file names, not one.  InitializeLogAndErrorHandler walks
- * this table from 0x10027084 in 0x20 steps until 0x100270e4 and DispatchLogOutput
- * indexes it as `g_log_format_table + idx * 32`, and the reference has
- * "__server.log", "gilde_server.log" and "__dbg.log" there.  Declaring only the
- * first 13 bytes left the other two absent from the image entirely. */
+// DATA: SERVER 0x10027084
 char g_log_format_table[96] = {
     0x5f, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2e, 0x6c, 0x6f, 0x67,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -41,10 +29,6 @@ char g_log_format_table[96] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
-/* The log module's own literal pool copies (this TU's .data), used because
- * the same text occurs earlier in .rdata/.data and content-scan binding
- * would resolve to those copies instead of the ones this code targets. */
-
 // DATA: SERVER 0x100270e4
 char g_log_newline[2] = { 0x0a, 0x00, };
 
@@ -52,6 +36,27 @@ char g_log_newline[2] = { 0x0a, 0x00, };
 char g_log_default_name[13] = {
     0x5f, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2e, 0x6c, 0x6f, 0x67, 0x00,
 };
+
+// FUNCTION: SERVER 0x10002640
+// DispatchLogOutput
+
+
+
+/* THREE ints, not twelve.  The reference gives this table 12 bytes
+ * (0x10027078..0x10027084, where g_log_format_table begins) and DispatchLogOutput
+ * only ever indexes [0..2].  The initialiser was written as the twelve BYTES
+ * 01 00 00 00 02 00 00 00 08 00 00 00 but spelled `int[12]`, which emits 48
+ * bytes -- a 36-byte surplus that pushed every later symbol in the section. */
+
+/* Three 0x20-byte log-file names, not one.  InitializeLogAndErrorHandler walks
+ * this table from 0x10027084 in 0x20 steps until 0x100270e4 and DispatchLogOutput
+ * indexes it as `g_log_format_table + idx * 32`, and the reference has
+ * "__server.log", "gilde_server.log" and "__dbg.log" there.  Declaring only the
+ * first 13 bytes left the other two absent from the image entirely. */
+
+/* The log module's own literal pool copies (this TU's .data), used because
+ * the same text occurs earlier in .rdata/.data and content-scan binding
+ * would resolve to those copies instead of the ones this code targets. */
 
 void __cdecl DispatchLogOutput(const char* msg, unsigned char flags, int level)
 {

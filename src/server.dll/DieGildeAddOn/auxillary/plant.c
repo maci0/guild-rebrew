@@ -21,6 +21,10 @@ char* __cdecl lb_SearchRecordTable(int key)
 	return 0;
 }
 
+// GLOBAL: SERVER 0x1002d878
+extern int g_plant_info_table; /* 0x1002d878 */
+
+// GLOBAL: SERVER 0x1003540c
 extern int g_dynamic_count;
 
 /* Finds a record in a linked table by matching type fields.
@@ -125,8 +129,11 @@ int __cdecl plt_CheckZoneAvailability(int zone_table, unsigned int x, unsigned i
  * zone record with the specified plant type and coordinates.
  * Returns the record pointer on success. */
 
+// DATA: SERVER 0x1002d990
 char s_plt_SetPlantMap____Could_not_fin_1002d990[] = "plt_SetPlantMap(): Could not find map-entry!";
+// DATA: SERVER 0x1002d9c0
 char s_D__Develop_DieGildeAddOn_auxilla_1002d9c0[] = "D:\\Develop\\DieGildeAddOn\\auxillary\\plant.c";
+// DATA: SERVER 0x1002d9ec
 char s_plt_SetPlantMap____Map_is_not_al_1002d9ec[] = "plt_SetPlantMap(): Map is not alloced or PlantInfo not found...";
 
 // FUNCTION: SERVER 0x100150a0

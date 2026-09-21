@@ -668,3 +668,6 @@ int __cdecl cm_ProcessCommandQueue(void* a)
 	}
 	return 0;
 }
+
+// GLOBAL: SERVER 0x1002c3f8
+extern handler_func g_dispatch_table[]; /* 0x1002c3f8 */

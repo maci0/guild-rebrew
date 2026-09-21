@@ -5,6 +5,9 @@
  * two, so they cannot share an object.
  */
 
+// DATA: SERVER 0x10027488
+static int gz_magic[2] = {0x1f, 0x8b}; /* gzip magic header */
+
 // FUNCTION: SERVER 0x100036D0
 
 /* gzio.byte -- IO on .gz files
@@ -38,7 +41,6 @@ struct internal_state {int dummy;}; /* for buggy compilers */
 #define ALLOC(size) malloc(size)
 #define TRYFREE(p) {if (p) free(p);}
 
-static int gz_magic[2] = {0x1f, 0x8b}; /* gzip magic header */
 
 /* gzip flag byte */
 #define ASCII_FLAG   0x01 /* bit 0 set: file probably ascii text */
@@ -48,11 +50,8 @@ static int gz_magic[2] = {0x1f, 0x8b}; /* gzip magic header */
 #define COMMENT      0x10 /* bit 4 set: file comment present */
 #define RESERVED     0xE0 /* bits 5..7: reserved */
 
-
-local gzFile gz_open      OF((const char *path, const char *mode, int  fd));
-local int do_flush        OF((gzFile file, int flush));
-local int    destroy      OF((gz_stream *s));
-local void   putLong      OF((FILE *file, uLong x));
+/* Dead zlib forward decls removed: `local gzFile`/`local int`/`local void`
+ * OF((...)) lines parse as globals named gzFile/int/void (false inventory). */
 
 /* The shared VFS byte reader (0x10003820).  The reference's check_header
  * calls 0x10003820, not a TU-local helper; the signed int return keeps the

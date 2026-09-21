@@ -1,0 +1,292 @@
+ 220|are used directly with proper `#include` headers — no `extern` declarations
+ 221|needed.
+ 222|
+ 223|The compiler intrinsic `__ftol` (float-to-long) is statically linked and
+ 224|requires a forward declaration where used.
+ 225|
+ 226|Small static helpers within a module may omit the prefix (they were `static`
+ 227|in the original source and not visible across translation units).
+ 228|
+ 229|## Function Naming
+ 230|
+ 231|### Pattern: `prefix_VerbNoun`
+ 232|
+ 233|```
+ 234|cm_ExSellObjekt        -- cm  = command module
+ 235|                       -- Ex  = execute (action verb)
+ 236|                       -- Sell = English verb
+ 237|                       -- Objekt = German noun (object)
+ 238|
+ 239|cm_ChkMoveCredits      -- Chk = check / validate
+ 240|gm_AllocBuildingDefaults
+ 241|lb_ExPlayerlist
+ 242|ahm_ExAllocAlchemist
+ 243|gv_ExAllocGraveyardWorker
+ 244|sim_CreateCitizen
+ 245|```
+ 246|
+ 247|### Command Module Sub-Prefixes
+ 248|
+ 249|The `cm_` module uses a two-phase check-then-execute architecture.
+ 250|Each command type has up to two handler functions:
+ 251|
+ 252|| Sub-prefix    | Role        | Return semantics                     |
+ 253||---------------|-------------|--------------------------------------|
+ 254|| `cm_Chk*`     | Validate    | `0` = OK, `1` = invalid (reject)    |
+ 255|| `cm_Ex*`      | Execute     | `0` = OK, `1` = failed              |
+ 256|
+ 257|Both share the signature `int __cdecl func(void* cmd, void* result)`.
+ 258|
+ 259|Additional patterns seen in the binary:
+ 260|
+ 261|| Pattern           | Role                                          |
+ 262||-------------------|-----------------------------------------------|
+ 263|| `cm_Request*`     | Client-side command request (TL.exe only)     |
+ 264|| `cm_Dispatch*`    | Routes to a sub-handler                       |
+ 265|| `cm_Chain*`       | Linked command chain handler                  |
+ 266|| `cm_Init*`        | Initialization / default setup                |
+ 267|| `cm_Assign*`      | Assigns IDs or counters                       |
+ 268|| `cm_Get*`         | Read-only query                               |
+ 269|| `cm_Set*`         | Write a flag or field                         |
+ 270|| `Cmd*`            | Likely the compiled name for some cm_Ex       |
+ 271|
+ 272|### Verb Vocabulary
+ 273|
+ 274|Verbs are English. Nouns are German when they name game concepts:
+ 275|
+ 276|| Verb     | Meaning                                           |
+ 277||----------|---------------------------------------------------|
+ 278|| Alloc    | Allocate / create a new entity                    |
+ 279|| Free     | Deallocate / destroy                              |
+ 280|| Kill     | Destroy with side effects (player death, etc.)    |
+ 281|| Change   | Modify a numeric field (additive)                 |
+ 282|| Set      | Write a field (absolute)                          |
+ 283|| Move     | Transfer between containers                       |
+ 284|| Sell     | Trade transaction                                 |
+ 285|| Create   | Instantiate (buildings, objects)                  |
+ 286|| Employ   | Assign a worker to a building                     |
+ 287|| Prod     | Produce (manufacturing)                           |
+ 288|| Clear    | Reset / empty a slot                              |
+ 289|| Swap     | Exchange two values                               |
+ 290|| Validate | Check preconditions                               |
+ 291|| Dispatch | Route to sub-handler                              |
+ 292|| Remove   | Unlink / detach                                   |
+ 293|| eval     | Evaluate a predicate, no mutation (`gm_eval_SlotVoll`, `gm_eval_ObjektBesitzer`) |
+ 294|| Load     | Read from file/stream (`amt_fio_LoadAemter`, `ls_LoadCharacter`) |
+ 295|| Save     | Write to file/stream (`amt_fio_SaveAemter`)       |
+ 296|
+ 297|### German Noun Vocabulary
+ 298|
+ 299|| German          | Abbreviation | English          | Example                    |
+ 300||-----------------|-------------|------------------|----------------------------|
+ 301|| Spieler         |             | Player           | `cm_ExAllocSpieler`        |
+ 302|| Objekt          |             | Object           | `cm_ExSellObjekt`          |
+ 303|| Gebaeude        | Geb         | Building         | `cm_ExCreateGeb`           |
+ 304|| Raum            |             | Room             | `cm_ExAllocRaum`           |
+ 305|| Lagerslot       |             | Storage slot     | `cm_ExClearLagerslot`      |
+ 306|| Wohnsitz        |             | Residence        | `cm_ExSetWohnsitz`         |
+ 307|| Besitzer        |             | Owner            | `cm_ExSetGebBesitzer`      |
+ 308|| Predigt         |             | Sermon           | `cm_ExAllocThemaPredigt`   |
+ 309|| Thema           |             | Theme/topic      | `cm_ExAllocThemaPredigt`   |
+ 310|| Aemter          |             | Offices/roles    | `aemter.c`                 |
+ 311|| Friedhof        |             | Graveyard        | `friedhof_logic.c`         |
+ 312|| Rohstoff        |             | Raw material     | error: "Rohstoff verschwunden" |
+ 313|| Karren          |             | Cart             | error: "Karren in Spieler" |
+ 314|| Straftat        |             | Crime            | `cm_ExAddStraftat` (TL)    |
+ 315|| Handlungsereignis | HE        | Game event       | `cm_ExSetHE` (TL)          |
+ 316|| Bauplatz        |             | Building plot    | `cm_ExCreateGeb` (TL)      |
+ 317|
+ 318|## Variable Naming
+ 319|
+ 320|### Globals
+ 321|
+ 322|Globals use a `g_` prefix. When the original name is unknown, the convention
+ 323|in this project is `g_<hex_address>`:
+ 324|
+ 325|```c
+ 326|extern int g_next_object_id;              /* known purpose, partial name */
+ 327|extern char g_player_slot_0[];            /* known: player slot array */
+ 328|extern char g_slot_table[];/* known: static entity table */
+ 329|extern int g_entity_type_table;           /* known: entity type lookup */
+ 330|extern int g_1009b764;                    /* unknown: address-only name */
+ 331|```
+ 332|
+ 333|### String Constants
+ 334|
+ 335|Ghidra labels string constants as `s_<truncated_content>_<address>`:
+ 336|
+ 337|```c
+ 338|extern char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[];
+ 339|extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
+ 340|```
+ 341|
+ 342|The embedded content reveals original function names:
+ 343|`s_cm_ChkMoveCredits____...` means the string literal starts with
+ 344|`"cm_ChkMoveCredits(): ..."`.
+ 345|
+ 346|### Locals
+ 347|
+ 348|Original local variable names are lost. Ghidra assigns type-prefixed
+ 349|temporaries (`iVar1`, `puVar2`, `pcVar3`). During decompilation we replace
+ 350|these with descriptive names based on context:
+ 351|
+ 352|```c
+ 353|/* Ghidra output */
+ 354|int iVar1;
+ 355|ushort *puVar2;
+ 356|
+ 357|/* Reversed */
+ 358|int resolve_result;
+ 359|unsigned short *building_entity;
+ 360|```
+ 361|
+ 362|## Calling Convention
+ 363|
+ 364|| Code origin | Convention   | Default for             |
+ 365||-------------|-------------|-------------------------|
+ 366|| GAME        | `__cdecl`    | All cm_, gm_ functions  |
+ 367|| Win32 API   | `__stdcall`  | `__declspec(dllimport)` |
+ 368|| CRT         | `__cdecl`    | Standard library        |
+ 369|
+ 370|Symbol mangling: `__cdecl` functions get a leading underscore in the object
+ 371|file. Annotation `// SYMBOL: _cm_ExFree` reflects this.
+ 372|
+ 373|## Error Logging Convention
+ 374|
+ 375|Every important function logs errors through a central logger:
+ 376|
+ 377|```c
+ 378|LogMessageInternal(
+ 379|    s_D__Develop_DieGildeAddOn_command_1002c748,  /* __FILE__ */
+ 380|    0x2a21,                                        /* __LINE__ (hex) */
+ 381|    s_cm_ExFree____Can_t_free_Objects_1002cc3c,   /* message */
+ 382|    1                                              /* severity */
+ 383|);
+ 384|```
+ 385|
+ 386|The message string almost always starts with the function name:
+ 387|`"cm_ExFree(): Can't free Objects"`. This is how we recover original names.
+ 388|
+ 389|## Attested Names from Embedded Strings
+ 390|
+ 391|The shipped binaries embed the full string corpus. RevEng.AI's
+ 392|`GET /v2/analyses/{id}/functions/strings` returns every string with the
+ 393|function VA that references it. A string shaped `"<name>(): ..."` or
+ 394|`"<name>: ..."` names the owning function.
+ 395|
+ 396|Every name below was then **verified against the code**: the function at the
+ 397|stated VA is disassembled and confirmed to push the literal address of that
+ 398|string. RevEng's attribution alone is not trusted (it wrongly attached
+ 399|`_main_:` to `0x100068e0` and `lb_ExPlayerReadyStatus` to `0x100146c0`).
+ 400|
+ 401|Reproduce:
+ 402|
+ 403|```bash
+ 404|# list every string a function references; "(): " prefixes name the owner
+ 405|curl -s -H "Authorization: Bearer $REVENG_API_KEY" \
+ 406|  "https://api.reveng.ai/v2/analyses/1468081/functions/strings?page_size=2000" \
+ 407|  | jq -r '.data.strings[] | select(.value|test("^[A-Za-z_]+\\(\\):")) | "\(.functions[0].function_vaddr)\t\(.value)"'
+ 408|# then confirm the owner pushes the literal
+ 409|rebrew asm 0x<VA> --size <size> | grep 'push 0x100[23]'
+ 410|```
+ 411|
+ 412|### server.dll
+ 413|
+ 414|| VA | Attested name | Standing |
+ 415||----|---------------|----------|
+ 416|| `0x100068e0` | `m_init` | renamed from `m_InitPacketPool` |
+ 417|| `0x10006e30` | `m_pool_free` | renamed from `m_PoolFree` |
+ 418|| `0x1000a570` | `srv_LoadBuf` | renamed from `srv_ProcessReceiveData` |
+ 419|| `0x1000baf0` | `amt_fio_LoadAemter` | already correct |
+ 420|| `0x1000bdf0` | `ahm_ExAllocAlchemist` | already correct |
+ 421|| `0x1000c4d0` | `ahm_AllocAhmInfo` | already correct (mangled symbol `?ahm_AllocAhmInfo`) |
+ 422|| `0x1000d260` | `cm_ChkCutsceneReady` | already correct |
+ 423|| `0x1000f030` | `cm_ExKillSpieler` | already correct |
+ 424|| `0x1000fb30` | `cm_ExCreateGeb` | already correct |
+ 425|| `0x100109d0` | `gv_AllocGraveyardField` | renamed from `gv_AllocField` |
+ 426|| `0x10011bf0` | `gv_ExAllocGraveyardWorker` | already correct |
+ 427|| `0x10014070` | `ls_ID2Ptr` | already correct |
+ 428|| `0x10014260` | `srv_RecvGame` | already correct; the same body also logs `LoadGame():` and `ls_RecvGame():` |
+ 429|| `0x100147b0` | `lb_ExPlayerHasJoined` | renamed from `lb_HandleLobbyCommands` |
+ 430|| `0x10014db0` | `lb_ExLobbyServerCommand` | already correct |
+ 431|| `0x100150a0` | `plt_SetPlantMap` | already correct |
+ 432|| `0x10015500` | `sim_CreateCitizen` | already correct |
+ 433|| `0x100156c0` | `gm_InitObjektHersteller` | already correct |
+ 434|| `0x10015950` | `gm_Open` | already correct |
+ 435|| `0x10015f70` | `gm_ObjectsAvailble` | renamed from `gm_RefreshMarketAvailability` |
+ 436|| `0x10016460` | `gm_ff_Objekt` | renamed from `gm_StartEntityQuery` |
+ 437|| `0x10016760` | `gm_AllocObjekt` | already correct |
+ 438|| `0x10016cd0` | `gm_AddObjekt` | renamed from `gm_AddOrAccumulateObject` |
+ 439|| `0x10016de0` | `gm_SubObjekt` | already correct |
+ 440|| `0x10016ea0` | `gm_SubObjectNoKill` | renamed from `gm_SubObjektNoKill` |
+ 441|| `0x10017330` | `gm_AllocGebaeude` (log prefix only) | kept as `gm_AllocBuildingDefaults` |
+ 442|| `0x100174d0` | `gm_AllocGebaeude` | already correct |
+ 443|| `0x10017c40` | `gm_AllocRaum` | renamed from `gm_AllocBuildingContents` |
+ 444|| `0x10017fb0` | `gm_KillSpieler` | renamed from `gm_DeallocEntity` |
+ 445|| `0x10018850` | `gm_AllocSpieler` | renamed from `gm_CreateEntityFromParents` |
+ 446|| `0x10019d30` | `gm_eval_SlotVoll` | renamed from `gm_KannObjektHergestellt` |
+ 447|
+ 448|`0x10017330` and `0x100174d0` both push an `"gm_AllocGebaeude(): ..."`
+ 449|string. `0x100174d0` is the caller (`call 0x10017330` at `0x1001787f`), so it
+ 450|keeps the name; `0x10017330` is its static defaults helper that reuses the
+ 451|parent's log prefix.
+ 452|
+ 453|### Module case: `m_alloc` is snake_case
+ 454|
+ 455|The `Units/m_alloc` unit does not use the `m_VerbNoun` CamelCase of the game
+ 456|modules. Its recovered names are lower snake case:
+ 457|
+ 458|- `m_alloc` — the tracked allocator, called from every unit. In the original
+ 459|  this is a macro: the tracked implementation receives an extra
+ 460|  `__FILE__ ":" __LINE__` argument, so our `m_AllocTracked` stays as the
+ 461|  implementation name and only the macro was `m_alloc`.
+ 462|- `m_init` — sets the slot count and allocates the slot table;
+ 463|  `m_alloc` refuses to run before it.
+ 464|- `m_pool_free` — pool release.
+ 465|- `m_alloc_debug` — not a function: a block group name written by `sprintf`,
+ 466|  so it must not be turned into a symbol.
+ 467|
+ 468|### Original spellings to preserve
+ 469|
+ 470|Recovered names reproduce the original source exactly, including errors:
+ 471|
+ 472|- `gm_ObjectsAvailble` (not `Available`)
+ 473|- `gm_SubObjectNoKill` uses English `Object`, while `gm_SubObjekt` next to it
+ 474|  uses German `Objekt`
+ 475|- Umlauts are stripped in string literals: `Gebude` for `Gebäude`,
+ 476|  `berschritten` for `überschritten`
+ 477|- `erbaut`/`erhalb` fragments and similar truncated strings are continuations
+ 478|  of literals that the linker split, not standalone names
+ 479|
+ 480|### Client binaries
+ 481|
+ 482|`Europa1400Gold_TL.exe` and `Europa1400Gold.exe` expose the same corpus via
+ 483|the same endpoint (5128 and 4956 strings). Their function-name log prefixes
+ 484|are listed under Client-Only Modules above. Neither binary is decompiled
+ 485|here; the strings only constrain shared-code names and the prefix vocabulary.
+ 486|
+ 487|## Struct Naming
+ 488|
+ 489|Structs use `UPPER_CASE` names, often abbreviated:
+ 490|
+ 491|```c
+ 492|typedef struct DISPATCH_OBJ { ... } DISPATCH_OBJ;
+ 493|typedef struct SRC { ... } SRC;
+ 494|typedef struct TGT { ... } TGT;
+ 495|```
+ 496|
+ 497|Field naming appears to use lowercase with occasional camelCase. Struct
+ 498|definitions are local per translation unit (no shared headers for game
+ 499|structs in the decompiled code).
+ 500|
+ 501|## Enum / Constant Naming
+ 502|
+ 503|Constants seen in strings follow patterns:
+ 504|
+ 505|- Object types: `ob_LAGERFLAECHE_ALLGEMEIN`, `ob_MARKTSTAND`, `ob_NULL`
+ 506|- Command types: `cmdt_ALLOC_SPIELER`, `cmdt_ALLOC_OBJEKT`, `cmdt_FREE`
+ 507|- Player flags: `pef_GELIEBTE`
+ 508|- Seasons: `GM_WINTER`, `GM_SUMMER`, `GM_SPRING`, `GM_AUTUMN`
+ 509|- Sim events: `HE_SIM_EINWANDERUNG`, `HE_SIM_KRANKHEITEN`, `HE_SIM_PERSONAL`
+ 510|
+ 511|Pattern: `prefix_UPPER_SNAKE_CASE` where prefix is a short module/type tag.

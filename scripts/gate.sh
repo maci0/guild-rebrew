@@ -324,5 +324,33 @@ else
     rc=1
 fi
 
+# DirectX lib-match: the GOLDTL client statically links d3dx8.lib (DX8.1 SDK).
+# Its bodies sit in .text like game code; this check vetoes them so the
+# linker-supplied bytes are not reversed by mistake (the 0x63e931 case: D3DX8
+# _jpeg_calc_output_dimensions was reversed as m_AllocTracked before this).
+# The 907 known matches are LIBRARY-marked in library_d3dx8.h, so this finds
+# only NEW reversals that collide with d3dx8 bodies.  The lib is vendored under
+# references/ so a fresh clone reproduces the check.
+echo "== lib-match d3dx8 (GOLDTL)"
+if [ -f references/dxsdk8/lib/d3dx8.lib ]; then
+    lm=$(rebrew lib-match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe --json 2>&1)
+    lmrc=$?
+    cnt=$(echo "$lm" | python3 -c 'import json,sys
+try: print(len(json.load(sys.stdin).get("findings", [])))
+except Exception: print("ERR")' 2>/dev/null)
+    echo "d3dx8 lib-match findings: $cnt"
+    if [ "$cnt" != "0" ] && [ "$cnt" != "ERR" ]; then
+        echo "REGRESSION: $cnt GOLDTL function(s) are D3DX8 library code"
+        echo "$lm" | head -40
+        rc=1
+    elif [ "$cnt" = "ERR" ] || [ "$lmrc" -ge 2 ]; then
+        echo "REGRESSION: rebrew lib-match d3dx8 failed on GOLDTL"
+        echo "$lm" | head -40
+        rc=1
+    fi
+else
+    echo "d3dx8 lib not vendored -- skipped"
+fi
+
 [ "$rc" -eq 0 ] && echo "GATE: pass" || echo "GATE: FAIL"
 exit "$rc"

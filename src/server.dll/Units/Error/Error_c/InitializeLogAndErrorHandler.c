@@ -3,6 +3,12 @@
  * directory, and installs per-level log file handles. */
 
 extern unsigned char g_file_write_mode[3];
+// GLOBAL: SERVER 0x10034614
+extern void* g_crash_callback;
+
+// GLOBAL: SERVER 0x1003461c
+extern char g_crash_dump_all_frames;
+
 // FUNCTION: SERVER 0x10003320
 // InitializeLogAndErrorHandler
 // SIZE: 404
@@ -11,10 +17,8 @@ extern unsigned char g_file_write_mode[3];
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-extern int g_panic_callback;
-extern void* g_crash_callback;
+extern void (*g_panic_callback)(void);
 extern unsigned int g_log_mode_flags; /* 0x10034618 */
-extern char g_crash_dump_all_frames;
 extern int g_owner_window;
 extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 extern long __cdecl time(long* t);

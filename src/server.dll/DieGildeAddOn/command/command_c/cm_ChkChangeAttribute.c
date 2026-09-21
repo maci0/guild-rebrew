@@ -10,9 +10,13 @@
 #include "../../../Units/Error/error.h"
 
 /* Round-532: ascending REF VA decl order (R521/R531 mid-pocket lever; abuts ChkSellObjekt). */
+// DATA: SERVER 0x1002c90c
 char s_cm_ChkChangeAttribute___Target_obj_1002c90c[] = "cm_ChkChangeAttribute() Invalid action on player <<PartnerID already set>>";
+// DATA: SERVER 0x1002c958
 char s_cm_ChkChangeAttribute___Source_obj_1002c958[] = "cm_ChkChangeAttribute() Invalid action on player <<ID does not exist>>";
+// DATA: SERVER 0x1002c9a0
 char s_cm_ChkChangeAttribute___Error_i_1002c9a0[] = "cm_ChkChangeAttribute() Invalid action on player <<Change ID>>";
+// DATA: SERVER 0x1002c9e0
 char s_cm_ChkChangeAttribute___Invalid_I_1002c9e0[] = "cm_ChkChangeAttribute() Invalid Id";
 
 /* Validation handler: resolves entity by ID and validates each

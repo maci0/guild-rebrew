@@ -34,6 +34,7 @@
 
 #include "../command_internal.h"
 
+// GLOBAL: SERVER 0x100256a4
 extern float g_color_scale; /* 0x100256a4: stat upper bound, 252.0 */
 extern float g_const_0_0; /* 0x100256cc: stat lower bound, 0.0 */
 

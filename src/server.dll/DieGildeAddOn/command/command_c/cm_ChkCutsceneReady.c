@@ -40,6 +40,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002caa8
 extern char s_cm_ChkCutsceneReady____failed____1002caa8[];
 
 /* Validation handler: checks if up to 16 entities referenced

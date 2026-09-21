@@ -1,6 +1,15 @@
 /* Sends a broadcast packet to all connected clients via UDP.
  * Iterates player slots and transmits the packet data. */
 
+// DATA: SERVER 0x10027030
+unsigned int g_broadcast_ff_10027030 = 0xffffffff;
+
+// DATA: SERVER 0x10027034
+char s_broadcast_path_10027034[] = "D:\\Develop\\Units\\net\\broadcast.c";
+
+// DATA: SERVER 0x10027058
+char s_Sending_Broadcast_10027058[] = "Sending Broadcast";
+
 // FUNCTION: SERVER 0x10001130
 // SendBroadcastPacket
 
@@ -12,10 +21,6 @@
 /* REF 0x10027030: dword 0xffffffff then path then "Sending Broadcast".
  * Anonymous string COMDATs omitted the leading dword and shifted every later
  * .data symbol by -4 (need dictionary, crashdump blob, LogFile, …). */
-unsigned int g_broadcast_ff_10027030 = 0xffffffff;
-char s_broadcast_path_10027034[] = "D:\\Develop\\Units\\net\\broadcast.c";
-char s_Sending_Broadcast_10027058[] = "Sending Broadcast";
-
 // SIZE 0x10 — struct sockaddr_in (Winsock system struct)
 void __cdecl SendBroadcastPacket(int port, char* buf)
 {

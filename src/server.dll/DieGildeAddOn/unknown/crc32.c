@@ -34,3 +34,6 @@ unsigned int __cdecl crc32(unsigned int crc, unsigned char* buf, unsigned int le
 	}
 	return c ^ 0xffffffff;
 }
+
+// GLOBAL: SERVER 0x100241a0
+extern unsigned int g_crc_table_241a0[256];

@@ -8,9 +8,13 @@
 
 void __cdecl ReportFatalError(char*, unsigned int, char*); /* 0x10003520 */
 void __cdecl ReportMessage(char* msg); /* Single arg log? */
+// DATA: SERVER 0x10034628
 int g_stat1 = 0;
+// DATA: SERVER 0x1003462c
 int g_stat2 = 0;
+// DATA: SERVER 0x10034630
 int g_stat3 = 0;
+// DATA: SERVER 0x10034634
 int g_stat4 = 0;
 void __cdecl free(void* ptr);
 void __cdecl m_ReportGroupInfo(const char* toggle);
@@ -80,12 +84,12 @@ cleanup:
  * to HeapAlloc if the pool is exhausted. Thread-safe via
  * critical section. */
 
+// DATA: SERVER 0x10028b78
+// DATA: SERVER 0x10028b60
 // FUNCTION: SERVER 0x10006d20
 // m_PoolAlloc
 
-// DATA: SERVER 0x10028b78
 
-// DATA: SERVER 0x10028b60
 
 // SIZE 0x10
 struct BlockNode {

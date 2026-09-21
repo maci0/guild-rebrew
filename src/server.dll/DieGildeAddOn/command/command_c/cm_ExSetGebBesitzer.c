@@ -59,8 +59,11 @@
 
 void __cdecl gm_AssignBuildingOwner(char*, uint, uint);
 
+// GLOBAL: SERVER 0x1002d214
 extern char s_cm_ExSetGebBesitzer____Could_not_1002d214[];
+// GLOBAL: SERVER 0x1002d1e0
 extern char s_cm_ExSetGebBesitzer____Could_not_1002d1e0[];
+// GLOBAL: SERVER 0x1002d1a8
 extern char s_cm_ExSetGebBesitzer____Could_not_1002d1a8[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 

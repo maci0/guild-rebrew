@@ -1,0 +1,16 @@
+  24|| gm_AllocGebaeude | 0x100174d0 | 327 | Clean. Block-fill byte-identical zero-fill; all arms verified. | 292 |
+  25|| vfs_OpenStream | 0x10009020 | 245 | Clean. Mode arms, magic, setups, calls verified. | 293 |
+  26|| gm_FindNextFilteredEntity | 0x10016f80 | 226 | Clean. Filters, stride, exits verified VA-by-VA. | 296 |
+  27|| ahm_ExAllocAlchemist | 0x1000bdf0 | 201 | Clean. All 175 structural slots traced to codegen. | 297 |
+  28|| gm_CheckInventoryCapacity | 0x10019ed0 | 97 | Clean. Addressing, exits, capacity math verified. | 297 |
+  29|| m_AllocTracked | 0x10006580 | 93 | Clean. Full trace incl. Fatal-then-return-mem path. | 294 |
+  30|| srv_LoadBuf | 0x1000a570 | 49 | Clean. Masks bitwise-verified; log lines corrected. | 293 |
+  31|| gm_ObjectsAvailble | 0x10015f70 | 25 | Clean. Rotation confirmed register-only. | 294 |
+  32|| vfs_ReadCompressed | 0x10008a90 | 23 | Clean. Return protocol incl. dead-check both sides. | 295 |
+  33|| cm_ExProdObjekt | 0x1000e140 | 21 | Clean. Hunk-2 closed (mov ebx,eax precedes). | 295 |
+  34|| cm_ProcessCommandQueue | 0x1000aac0 | 15 | Clean. Join fold taken-edge-identical. | 296 |
+  35|| (outside functions) | 0x100092bc | 7 | OpenVfsStream +1-shifted jump table (net effect). | 287 |
+  36|
+  37|Score: clean-or-documented 19/19. Live-semantics work remaining: none —
+  38|the two Spieler bugs are recorded with revisit conditions; everything else
+  39|is codegen-shaped residue under documented walls.

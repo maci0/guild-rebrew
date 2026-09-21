@@ -22,6 +22,7 @@
 
 typedef unsigned long DWORD;
 
+// GLOBAL: SERVER 0x10030b70
 extern int g_entity_id_counter;
 __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 

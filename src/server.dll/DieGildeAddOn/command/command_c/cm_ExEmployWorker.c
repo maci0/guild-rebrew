@@ -13,7 +13,9 @@ int* __cdecl ahm_QueryEntityBuildingType(int);
 int __cdecl sim_PriorityUpdate(char*, char*);
 int __cdecl ahm_ResetEntityState(char*);
 
+// GLOBAL: SERVER 0x1002d33c
 extern char s_cm_ExEmployWorker____Illegal_geb_1002d33c[];
+// GLOBAL: SERVER 0x1002d318
 extern char s_cm_ExEmployWorker____Illegal_gw__1002d318[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);

@@ -50,7 +50,9 @@
 
 char* __cdecl gm_AllocGebaeude(unsigned char, unsigned short);
 
+// GLOBAL: SERVER 0x1002d41c
 extern char s_cm_ExCreateGeb____Could_not_find_1002d41c[];
+// GLOBAL: SERVER 0x1002d400
 extern char s_cm_ExCreateGeb____failed_1002d400[];
 
 #ifdef __clang__

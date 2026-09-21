@@ -16,7 +16,7 @@
 
 #pragma intrinsic(memcpy, memset)
 
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 
 double __cdecl gm_RandomFloat01(void);
 extern float g_const_0_0; /* 0x100256cc */
@@ -38,6 +38,7 @@ float __cdecl gm_RandomQuadratic(void)
 	}
 	return g_const_1_0 * rand_val * rand_val;
 }
+// GLOBAL: SERVER 0x1009acfc
 int g_some_limit;
 unsigned int g_1009b764;
 char* g_slot_array;

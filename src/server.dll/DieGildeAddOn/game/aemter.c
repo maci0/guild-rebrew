@@ -13,7 +13,9 @@
  * copy_12_dwords is byte-identical, this copy names the touched fields). */
 #include "game_structs.h"
 
+// GLOBAL: SERVER 0x101de5a0
 extern char g_office_slots[]; /* 0x101de5a0 */
+// GLOBAL: SERVER 0x10029bb8
 extern OFFICE_ROLE_TEMPLATE g_office_role_templates[];
 void* __cdecl gm_LookupEntityRecordById(int entityId);
 

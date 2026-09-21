@@ -7,7 +7,9 @@
 #define REBREW_GLOBALS_H
 
 /* .data */
+// GLOBAL: SERVER 0x10027078
 extern int g_log_level_table[3]; /* 0x10027078 */
+// GLOBAL: SERVER 0x10027084
 extern char g_log_format_table[96]; /* 0x10027084, three 0x20-byte names */
 extern char g_log_newline[2]; /* 0x100270E4 */
 extern char g_log_default_name[13]; /* 0x100270E8 */
@@ -19,9 +21,11 @@ extern char g_str_10028b04[1]; /* 0x10028B04 */
 extern char s_m_pool_alloc_tp_m_pool_10028b60[24]; /* 0x10028B60 */
 extern char s_m_pool_get_free_tp_m_pool_10028b78[27]; /* 0x10028B78 */
 extern unsigned char g_data_restore_gap[0xb000]; /* 0x1002A000 */
-extern char g_1002a0f8; /* 0x1002A0F8 */
+extern char s_ahm_AllocAhmInfo_1002a0f8[]; /* 0x1002A0F8 */
+// GLOBAL: SERVER 0x1002c3f4
 extern int g_game_speed_index; /* 0x1002C3F4 */
 extern int g_file_version; /* 0x1002D4EC */
+// GLOBAL: SERVER 0x1002d4f0
 extern struct SaveHeaderTail g_save_header_tail; /* 0x1002D4F0 */
 extern int g_producer_id_table; /* 0x1002DDE0 */
 extern unsigned char g_query_filter_state; /* 0x10030B9E */
@@ -30,6 +34,7 @@ extern char g_str_10031538[1]; /* 0x10031538 */
 extern void * _FPinit; /* 0x100317D8, first init fnptr */
 extern char g_lock_stream_table; /* 0x100317F8, stream lock-pointer table anchor (0x100317f8..0x10031a58, stride 0x20) */
 extern struct rterr_entry g_rterrlist[18]; /* 0x10033EF0, _NMSG_WRITE runtime-error table (0x1001fe31) */
+// GLOBAL: SERVER 0x10034618
 extern unsigned int g_log_mode_flags; /* 0x10034618 */
 extern int g_array_count; /* 0x10034624 */
 extern int g_stat1; /* 0x10034628 */
@@ -39,6 +44,7 @@ extern int g_stat4; /* 0x10034634 */
 extern int g_flag_3c; /* 0x1003463C */
 extern void* g_array_ptr; /* 0x10034640 */
 extern int g_connection_counter; /* 0x1003467C, connection counter */
+// GLOBAL: SERVER 0x10034680
 extern int g_handler_started; /* 0x10034680 */
 extern char g_query_active; /* 0x10035454 */
 extern int g_query_count; /* 0x10035458 */
@@ -47,12 +53,17 @@ extern char g_query_flag2; /* 0x1003545D */
 extern char g_query_flag3; /* 0x1003545E */
 extern unsigned short* g_query_cursor; /* 0x10035468 */
 extern int g_current_year; /* 0x10035880 */
+// GLOBAL: SERVER 0x10035884
 extern unsigned short g_current_hour; /* 0x10035884 */
+// GLOBAL: SERVER 0x10035888
 extern int g_clock_copy_mid; /* 0x10035888 */
+// GLOBAL: SERVER 0x1003588c
 extern short g_clock_copy_tail; /* 0x1003588C */
+// GLOBAL: SERVER 0x100358a4
 extern int g_entity_id_field; /* 0x100358A4 */
 extern int g_entity_ref_table; /* 0x100358FC */
 extern unsigned char g_entity_base[]; /* 0x1009ACA0 */
+// GLOBAL: SERVER 0x1009aca2
 extern char g_dynamic_entities[]; /* 0x1009ACA2 */
 extern int g_some_limit; /* 0x1009ACFC */
 extern char* g_slot_array; /* 0x1009B770 */
@@ -71,18 +82,22 @@ extern int g_net_socket; /* 0x101DEAEC, listen socket */
 extern unsigned char g_connections[]; /* 0x101DEB00, first player slot (stride 0x264264 bytes) */
 extern unsigned int g_player_slot_field; /* 0x101DEB14 */
 extern unsigned int g_player_slot_overflow; /* 0x114FFE20, overflow slot */
+// GLOBAL: SERVER 0x11764088
 extern int g_tick_rate; /* 0x11764088 */
 extern int g_list_head; /* 0x117640C4 */
 extern char g_log_buffer[256]; /* 0x11766100 */
 extern int g_log_file_handle; /* 0x11766204 */
 
 /* .rdata */
+// GLOBAL: SERVER 0x100241a0
 extern unsigned int g_crc_table_241a0[256]; /* 0x100241A0 */
 extern const unsigned char g_rdata_restore_252e8[]; /* 0x100252E8 */
 extern double g_dbl_const_688; /* 0x10025688 */
+// GLOBAL: SERVER 0x100256a4
 extern float g_color_scale; /* 0x100256A4 */
 extern float g_float_const_a8; /* 0x100256A8 */
 extern double g_dbl_const_6d0; /* 0x100256D0 */
+// GLOBAL: SERVER 0x10025718
 extern int g_game_speed_table[]; /* 0x10025718 */
 extern float g_const_42_0; /* 0x100257BC */
 extern float g_const_21_0; /* 0x100257C0 */
@@ -129,8 +144,11 @@ extern void (*g_100356e0)(void); /* 0x100356E0, _crt_runtime_error user hook (0x
 extern void * pfnMessageBoxA; /* 0x10035838, cached MessageBoxA proc (0x10022107) */
 extern void * pfnGetActiveWindow; /* 0x1003583C, cached GetActiveWindow proc (0x10022107) */
 extern void * pfnGetLastActivePopup; /* 0x10035840, cached GetLastActivePopup proc (0x10022107) */
+// GLOBAL: SERVER 0x11764084
 extern int g_max_players; /* 0x11764084 */
+// GLOBAL: SERVER 0x1176408c
 extern int g_chain_id_start; /* 0x1176408C */
+// GLOBAL: SERVER 0x11764094
 extern void * g_thread_handle; /* 0x11764094 */
 extern int __sbh_sizeHeaderList; /* 0x11766430, __sbh_sizeHeaderList - allocated header-list size */
 extern int __sbh_indGroupDefer; /* 0x11766434, __sbh_indGroupDefer - deferred group index */
@@ -151,3 +169,19 @@ extern int g_1176758c; /* 0x1176758C, __envp built flag */
 extern int g_11767590; /* 0x11767590, cmdline/env parsed flag */
 
 #endif /* REBREW_GLOBALS_H */
+// GLOBAL: SERVER 0x10034638
+extern int g_alloc_counter;
+// GLOBAL: SERVER 0x117640b4
+extern int g_alloc_root_count;
+// GLOBAL: SERVER 0x117640b0
+extern int g_alloc_root_size_total;
+// GLOBAL: SERVER 0x117640bc
+extern int g_alloc_root_count_max;
+// GLOBAL: SERVER 0x117640b8
+extern int g_alloc_root_size_max;
+// GLOBAL: SERVER 0x117640c0
+extern int g_alloc_root_field_20;
+// GLOBAL: SERVER 0x117640a0
+extern int g_alloc_root_name;
+// GLOBAL: SERVER 0x117640a4
+extern int g_alloc_root_name_4;

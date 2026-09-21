@@ -3,6 +3,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002d134
 extern char s_cm_ExChangeFloat___Invalid_Id_1002d134[];
 
 /* Execution handler: modifies a floating-point attribute on an

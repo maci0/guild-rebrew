@@ -69,6 +69,7 @@ srv_done:
 /* Creates the TCP listen socket for accepting client
  * connections. Calls WSAStartup, socket(), bind(), listen(). */
 
+// DATA: SERVER 0x101deb14
 // FUNCTION: SERVER 0x10009e60
 // srv_CreateListenSocket
 
@@ -77,7 +78,6 @@ srv_done:
 /* htons = 0x1002418c, bind = 0x10024190, listen = 0x10024160 */
 /* closesocket = 0x10024198, shutdown = 0x10024174 */
 
-// DATA: SERVER 0x101deb14
 
 // SIZE 0x10 — struct sockaddr_in (Winsock system struct)
 int __cdecl srv_CreateListenSocket(int port)
@@ -194,6 +194,17 @@ void __cdecl srv_CleanupSockets(void)
  * Assigns connected clients to player slots and configures
  * socket options (TCP_NODELAY, timeouts). */
 
+// DATA: SERVER 0x114ffe20
+// DATA: SERVER 0x1003467c
+// DATA: SERVER 0x100299c8
+char s_No_more_Slots_for_new_Connection_100299c8[] = "No more Slots for new Connections!\n";
+
+// DATA: SERVER 0x100298b0
+char s_D__Develop_DieGildeAddOnServer_s_100298b0[] = "D:\\Develop\\DieGildeAddOnServer\\server.c";
+
+// DATA: SERVER 0x100299a0
+char s_New_Connection_from__li__li__li__100299a0[] = "New Connection from %li.%li.%li.%li\n";
+
 // FUNCTION: SERVER 0x1000a080
 // srv_AcceptConnections
 
@@ -222,13 +233,8 @@ void __cdecl srv_CleanupSockets(void)
 
 
 
-// DATA: SERVER 0x114ffe20
 
-// DATA: SERVER 0x1003467c
 
-char s_No_more_Slots_for_new_Connection_100299c8[] = "No more Slots for new Connections!\n";
-char s_D__Develop_DieGildeAddOnServer_s_100298b0[] = "D:\\Develop\\DieGildeAddOnServer\\server.c";
-char s_New_Connection_from__li__li__li__100299a0[] = "New Connection from %li.%li.%li.%li\n";
 extern int __cdecl sprintf(char*, const char*, ...);
 
 int __cdecl srv_AcceptConnections(void)

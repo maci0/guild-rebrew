@@ -7,12 +7,15 @@ ushort __cdecl gm_AllocSpieler(uint, int, int, ushort, int, uint, uint, uint);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 extern int __cdecl rand(void);
-extern char g_entity_state_base[];
+extern char g_entity_state_base[2];
+// GLOBAL: SERVER 0x100358a4
 extern int g_entity_id_field; /* 0x100358A4 */
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
 /* Round-536: ascending REF VA decl order (R521/R531–R535 mid-pocket lever; 2-string cluster). */
+// DATA: SERVER 0x1002d364
 char s_cm_ExAllocCharacter___gm_AllocSp_1002d364[] = "cm_ExAllocCharacter():gm_AllocSpieler() failed";
+// DATA: SERVER 0x1002d394
 char s_Invalid__GI_Id__for_cmdt_ALLOC_C_1002d394[] = "Invalid 'GI_Id' for cmdt_ALLOC_CHARACTER in cm_ExecCommand()";
 
 /* Execution handler: creates a new citizen (Buerger) entity.

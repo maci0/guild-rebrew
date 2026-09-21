@@ -1,7 +1,25 @@
-# Goal — 100% Byte-Identical server.dll, Europa1400Gold_TL.exe, AND Europa1400Gold.exe (in this order or priority) Recompilation with rebuilt original shared source structure.
+# Goal — 100% Byte-Identical server.dll, Europa1400Gold_TL.exe, AND Europa1400Gold.exe Recompilation with a rebuilt unified source tree matching what the original devs most likely had.
 
-Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 11, 55/256 rounds).
+Tracked as goal `goal-dd7dd2dd-8cde-4e14-a043-8674d4ec5631` (revision 21, 65/256 rounds).
 This file is the durable copy: if the session goal state is ever lost, re-create it from here.
+
+## Priority and focus
+
+- **Priority order: server.dll first, then Europa1400Gold_TL.exe, then
+  Europa1400Gold.exe.** All three must reach 100% byte-identical, but the focus
+  of day-to-day reversing is GOLDTL — the TL client — not GOLD.
+- **The primary deliverable is the unified shared source tree** — the tree the
+  original developers most likely had, where shared game logic lives once and is
+  compiled into every target. Per-target .exe bytes are the scoreboard that
+  validates that tree; the tree itself is the goal.
+- **Exploit the GOLD ↔ GOLDTL code overlap.** Both are clients of the same game
+  engine: a large share of functions is byte-identical between the two, only at
+  different VAs. Every function matched in one client should be transferred to
+  the other via `rebrew cross-import --from <src> --target <dst>` (structural
+  match, no recompile), so the shared source file (one marker per target) covers
+  both. Never reverse the same function twice in both clients.
+- GOLD remains onboarded and verified, but after the shared-tree buildout it is a
+  validation target, not where new reversing effort is spent.
 
 ## Targets
 
@@ -10,16 +28,25 @@ This file is the durable copy: if the session goal state is ever lost, re-create
   .text VirtualSize 0x22846 with residue at or below RESIDUE_BASELINE and
   `rebrew verify --full` at or above its BASELINE.
 - Reproduce Europa1400Gold_TL.exe (PE, x86-32, MSVC6) from C source with 100%
-  byte-identical output: every function EXACT, every data byte matching.
-- Onboard Europa1400Gold.exe as a third rebrew target (binary present at
-  original/Europa1400Gold.exe): run the intake workflow (rebrew init target,
-  lib-match sweep, skeleton, test loop) and reproduce it from C source with 100%
-  byte-identical output: every function EXACT, every data byte matching.
-- Rebuild the original shared source structure: one shared source tree serving all
-  three targets, shared game logic lives once with per-build markers (one source
-  file carries one marker per build), target-specific code stays in target-specific
-  dirs, no duplicated shared sources drifting apart; placement follows module
-  prefixes and __FILE__/string evidence, recorded in docs/TODO.md session notes.
+  byte-identical output: every function EXACT, every data byte matching. This is
+  the active reversing focus.
+- Reproduce Europa1400Gold.exe (PE, x86-32, MSVC6; onboarded rebrew target,
+  binary at original/Europa1400Gold.exe) with 100% byte-identical output: every
+  function EXACT, every data byte matching. Feed it from the shared tree +
+  cross-import; do not reverse it in isolation.
+- Rebuild the unified shared source structure the original devs most likely had:
+  one shared source tree serving all three targets, shared game logic lives once
+  with per-build markers (one source file carries one marker per build),
+  target-specific code stays in target-specific dirs, no duplicated shared
+  sources drifting apart; placement follows module prefixes and
+  __FILE__/string evidence, recorded in docs/TODO.md session notes.
+- Overlapping functions across targets (same code, different VAs) stay in ONE
+  shared source file with one marker line per target in the same file where
+  rebrew supports it, or one thin file per target that includes the shared body;
+  the cross-import result must be verified against each destination before STATUS
+  promotion. Cross-target VA-keyed metadata collisions and shared-source marker
+  handling are rebrew multi-target shortcomings to fix upstream (see below), never
+  worked around in game source.
 
 ## Multi-target rebrew shortcomings
 

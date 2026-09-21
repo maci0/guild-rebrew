@@ -38,8 +38,11 @@ typedef struct player_slot {
 	char gap_0004[0x264260];
 } player_slot;
 
+// GLOBAL: SERVER 0x1002c3f4
 extern int g_game_speed_index;
+// GLOBAL: SERVER 0x1002c3f0
 extern int g_game_speed_value;
+// GLOBAL: SERVER 0x10025718
 extern int g_game_speed_table[];
 
 /* Execution handler: sets synchronization flags on a player slot.

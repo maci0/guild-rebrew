@@ -7,9 +7,12 @@
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
 
 void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
+// GLOBAL: SERVER 0x10034618
 extern unsigned int g_log_mode_flags;
+// GLOBAL: SERVER 0x117660e0
 extern int g_owner_window;
 extern void (*g_panic_callback)(void);
+// GLOBAL: SERVER 0x117640e0
 extern char g_log_message_buffer[];
 
 /* Dispatches a log message to the configured output handlers
@@ -19,14 +22,23 @@ extern char g_log_message_buffer[];
 
 
 /* REF 0x100273ac..0x10027488 — named emit; kill anonymous COMDATs in this TU. */
+// DATA: SERVER 0x100273ac
 char s_Error_Handler_closed__100273ac[] = "Error-Handler closed.\n";
+// DATA: SERVER 0x100273c4
 char s_Fatal_Error_Abort_Program_100273c4[] = "Fatal Error! Abort Program?";
+// DATA: SERVER 0x100273e0
 char s_FATAL_ERROR_s_lu_s_100273e0[] = "FATAL ERROR (%s:%lu):\n%s\n";
+// DATA: SERVER 0x100273fc
 char s_ERROR_Handler_has_not_been_100273fc[] = "ERROR-Handler has not been started...";
+// DATA: SERVER 0x10027424
 char s_Error_10027424[] = "Error!";
+// DATA: SERVER 0x1002742c
 char s_Message_1002742c[] = "Message:";
+// DATA: SERVER 0x10027438
 char s_MESSAGE_s_10027438[] = "MESSAGE: %s\n";
+// DATA: SERVER 0x10027448
 char s_tModule_s_Line_lu_s_10027448[] = "tModule '%s':\tLine:%lu:\t%s";
+// DATA: SERVER 0x10027464
 char s_Time_8lu_Module_s_Line_10027464[] = "Time:%8lu\tModule '%s':\tLine:%lu:\t%s";
 
 // FUNCTION: SERVER 0x100034c0

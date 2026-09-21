@@ -24,11 +24,13 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 // DATA: SERVER 0x100358a0
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 void __cdecl gm_NoopRet2(char* slot);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
+// GLOBAL: SERVER 0x10030b6c
 int g_next_object_id = 1;
 int g_current_year;
+// DATA: SERVER 0x10031004
 char s_D__Develop_DieGildeAddOn_game_sp_10031004[] = "D:\\Develop\\DieGildeAddOn\\game\\spiel.c";
 int __cdecl gm_GetBuildingTypeCategory(int);
 extern int g_citizen_count;

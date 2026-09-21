@@ -1,0 +1,112 @@
+ 120|moved a global load across two instructions, flipping a forward branch rel8 -> rel32 and
+ 121|realigning a 129-byte loop. The objective allows C only (except hand-written assembly the
+ 122|*original* contained), so it was reverted. Measured cost of honouring the constraint: removing
+ 123|just the barrier gives matched **377** (worse than HEAD) and a COMDAT of **1072** instead of
+ 124|1088 — which moves the jump table and breaks the composition. **The entire +147 rested on the
+ 125|barrier** (shapes §69). The same class of lever is unavailable everywhere.
+ 126|
+ 127|---
+ 128|
+ 129|## 6b. The inline-asm zero-fill/memcpy prelude: measured cost of the constraint
+ 130|
+ 131|Six sites in the tree (`server4.c`, `gm_AllocGebaeude.c`, `m_AllocTracked.c`, `m_alloc.c`,
+ 132|`m_alloc2.c`, `vfs_ReadData.c`) carry the same hand-written align-up block-fill:
+ 133|
+ 134|```
+ 135|lea ecx,[edi+edi*2] ; and ecx,3 ; sub ebx,ecx ; jle L
+ 136|rep stosb ; mov ecx,ebx ; and ebx,3 ; shr ecx,2 ; rep stosd ; L: add ecx,ebx ; rep stosb
+ 137|```
+ 138|
+ 139|**The shape is confirmed unreachable from C, re-derived 2026-09-17 rather than cited.** Compiling
+ 140|the exact call shape under `/O2`, `/Oi`, `/O2 /Oi`, `/Ox`, `/O2 /Ow`, `/O2 /Oa` and `/O1` gives
+ 141|`shr ecx,2; rep stosd; and ecx,3; rep stosb` in every case — never the align-up prelude. The
+ 142|reference at `0x1000b040` contains the prelude verbatim.
+ 143|
+ 144|**Measured cost of removing them, through `gate.sh` (round 889):**
+ 145|
+ 146|| metric | with asm (shipped) | asm removed |
+ 147||---|---|---|
+ 148|| verify passed | 281/283 | 277/283 |
+ 149|| byte-matched | 264 | 260 |
+ 150|| residue | 8,634 | **116,814** (+108,180) |
+ 151|| raw-link `.data` | 21,836 | 21,842 |
+ 152|
+ 153|**108,180 bytes is 12.5x the entire remaining residue.** Three functions go SIZE_MISMATCH (short):
+ 154|`srv_InitBuildingTypeTable` 372 to 358, `m_init` 162 to 143, `m_PoolAlloc` 270 to 248.
+ 155|
+ 156|**Judgement, marked as judgement.** The objective's asm clause permits asm "only when certain the
+ 157|original game source used raw asm at the same site," with "a code shape no MSVC6 C output can
+ 158|produce" as the example of positive evidence. That condition is satisfied here — measured, not
+ 159|assumed. But the *writer* was almost certainly the compiler vendor, not the game: the same 24-byte
+ 160|idiom at six independent call sites is a CRT `memset` expansion, and the enclosing function is not
+ 161|library code (`rebrew lib-match --stock-lib LIBCMT.LIB --va 0x1000b040` reports "Safe to reverse").
+ 162|So the strict reading of the clause and the byte objective pull apart, and the cost of choosing the
+ 163|strict reading is 108,180 bytes. Left in place pending the user's decision; both numbers recorded.
+ 164|
+ 165|---
+ 166|
+ 167|## 7. What would actually move the needle
+ 168|
+ 169|Ordered by what the evidence says is most likely to pay.
+ 170|
+ 171|1. **A way to steer the allocator.** This is the dominant obstacle (§1). Nothing in C has been
+ 172|   found that controls which slot or callee-saved register a live range receives, yet a
+ 173|   majority of the remaining bytes are exactly that choice. If a technique exists — a
+ 174|   compiler extension, a source idiom, or a post-pass — it would unlock many functions at once.
+ 175|   **The "source idiom" half is now measured empty**: see §8.
+ 176|2. **The original build's exact compiler or flag set.** ~~suggests our `/O2 /Gd` is not
+ 177|   precisely what produced the reference. `msvc6` SP6 is what is installed; the reference may
+ 178|   have been built with a different service pack or a different `/O` combination per file.~~
+ 179|   **CLOSED (rounds 458/163/503/842).** SP6 is confirmed (`rebrew toolchain detect`: profile
+ 180|   `msvc-6.0-sp6`, aligned true, and its "pre-6.0 constant-hoist" signal is a documented false
+ 181|   positive — 4 of the 5 sites reproduce under our own SP6 build and 3 are in zlib). The flag
+ 182|   axis is flat on 12 axes / ~120 compilations. The SP5/SP5++ per-file axis was swept over all
+ 183|   18 carrier rows with the population enumerated: **3 pins landed, 16 of 16 unpinned rows
+ 184|   worse**. No fourth pin. Do not re-open.
+ 185|3. **`CrashDumpUnhandledExceptionFilter`'s frame plus exact tables *together*.** ~~No candidate
+ 186|   achieved both...~~ **Re-measured (rounds 835/840): the register homes are a *consequence* of
+ 187|   the frame, not a lever on it.** The frame is the first divergence (byte 2), and the file
+ 188|   header records 8 declaration permutations, 11 flag combinations and two named lanes already
+ 189|   exhausted. Only 10 of its 595 mismatching instructions differ solely by `[esp+N]`; the other
+ 190|   585 are scheduling. Do not reopen as a register problem.
+ 191|4. **`gm_AllocSpieler`'s two live leads** (2,824 bytes, 33%). ~~the `add R,R` versus
+ 192|   `lea R,[R+R]` sites need a change in the *uses* of the value, and the 0xc slot-map
+ 193|   assignment itself.~~ **Both probed and closed.** The FPU-spill loop (the longest single
+ 194|   residue run, 189 bytes at `0x10018be0`) collapses under either `volatile` form —
+ 195|   `match` 1004 -> 570 and -> 553 (round 841). Its frame is confirmed correct
+ 196|   (`sub esp,0x41c`, prologue byte-identical for 48 bytes), so it is not a frame problem —
+ 197|   do not re-open it as one.
+ 198|
+ 199|## 8. The measured floor of this constraint set
+ 200|
+ 201|Established 2026-09-17 after rounds 833-843, by exhaustion with the population stated at each
+ 202|step rather than by assertion. **Under C89, MSVC6 SP6, `/O2 /Gd`, no asm, no naked, no `_emit`:
+ 203|the whole-tree `.text` residue floor for this binary is 8,634 bytes**, all inside 18 functions.
+ 204|
+ 205|The shape of that floor (round 840, whole tree): **610 contiguous differing runs, median 5,
+ 206|mean 14.2, longest 189, 254 of them exactly one byte**, with the nine largest carriers holding
+ 207|7,880 (91%) and the top two 4,407 (51%). Fragmented in position, concentrated in cause.
+ 208|
+ 209|Every axis that could move it has been measured shut:
+ 210|
+ 211|| axis | verdict | evidence |
+ 212||---|---|---|
+ 213|| source spelling (operand form, declaration type, loop shape, guard form) | inert | shapes §84 and throughout; lands once, as a *statement order* change |
+ 214|| statement/definition ORDER | the only lever that has ever landed | TODO rounds 254-431; round 841 |
+ 215|| flags | flat | 12 axes, ~120 compilations, 1 distinct score (round 458) |
+ 216|| `#pragma optimize` per function | inert | 7 forms byte-identical on the largest carrier, with a working control (round 843) |
+ 217|| service pack (sp5-pp per file) | closed | 18 rows enumerated, 3 pins, 16/16 unpinned worse (rounds 503/842) |
+ 218|| compiler build | SP6 confirmed | `rebrew toolchain detect` + the zlib cross-check (round 837) |
+ 219|| size gaps | net-negative to close | shapes §89 (5 bytes recovered, ~178 lost); §69 (4 bytes worth 327 matched) |
+ 220|| `.text` content post-pass | contradicts the objective | link-layout §6: postlink's `.text` content "is largely ours"; copying it makes the bytes copied, not compiled |
+ 221|
+ 222|The two mechanisms that *would* move it are both excluded by the constraints, not by effort:
+ 223|a **scheduling barrier** (`__asm`, shapes §69 — measured at +147 matched and off-limits by the
+ 224|C-only rule) and a **backend cross-jump / instruction-selection control** (the
+ 225|`cm_ExCopyEntityData` epilogue finding: 2 epilogues against the reference's 3, six probe
+ 226|passes and ~20 spellings all leaving it at 2).
+ 227|
+ 228|**Read this as a limit of the toolchain-plus-constraints, not of the source.** Every function
+ 229|compiles, links at the reference's exact VA, and the deliverable is byte-identical outside
+ 230|`.text` (8,634 of 8,634 differing bytes are inside `.text`; `.data`, `.rdata`, `.reloc`,
+ 231|headers all `differing 0x0`). Reaching zero needs a lever this constraint set forbids.

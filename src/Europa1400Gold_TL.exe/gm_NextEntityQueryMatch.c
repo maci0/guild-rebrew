@@ -2,13 +2,6 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-extern int g_query_limit; /* 0x10035450 */
-extern int g_query_filter_max_id; /* 0x10030b94 */
-extern int g_query_filter_owner; /* 0x10030b98 */
-extern unsigned short g_query_filter_type; /* 0x10030b9c */
-extern int g_dispatch_table_b[]; /* 0x101398a0 */
-extern int g_dispatch_table_a[]; /* 0x1013989c */
-
 // FUNCTION: GOLDTL 0x502850
 // SIZE: 464
 // gm_NextEntityQueryMatch
@@ -177,26 +170,3 @@ lab_43e:
     }
     return (void*)matched_ent;
 }
-
-unsigned short* g_query_cursor;
-int g_query_filter_owner = 0xffffffff;
-unsigned char g_query_filter_state = 255;
-char g_query_flag2;
-extern unsigned char g_entity_base[];
-int g_citizen_count;
-unsigned char g_current_season;
-int g_dynasty_field_44;
-char g_dynasty_field_48;
-char g_dynasty_field_49;
-int g_dynasty_field_4c;
-unsigned char* g_query_filter_base;
-int g_entity_table_end;
-int g_current_year;
-unsigned short g_current_hour;
-int g_clock_copy_mid;
-short g_clock_copy_tail;
-char* g_slot_table;
-char g_entity_state_base;
-int g_entity_ref_table;
-char g_entity_type_bytes;
-

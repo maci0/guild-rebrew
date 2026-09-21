@@ -18,7 +18,7 @@ int __cdecl gm_CleanupBuildingEntity(unsigned char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 int __cdecl gm_FreeObjectListRecursive(char**);
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;
@@ -212,9 +212,6 @@ void __cdecl gm_SetBuildingWorkerLimits(unsigned char* building)
  * building struct, sets type, initializes production and
  * storage, and links to the town. */
 
-// DATA: SERVER 0x10035884
-// DATA: SERVER 0x10035888
-// DATA: SERVER 0x1003588c
 
 #if 0 /* split to spiel_c/gm_AllocGebaeude.c */
 char* __cdecl gm_AllocGebaeude(int building_type, int location_id)

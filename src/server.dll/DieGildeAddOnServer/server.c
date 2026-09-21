@@ -10,6 +10,7 @@
 #include "server_internal.h"
 
 int __stdcall ServerMainThread(void* lpThreadParameter);
+// GLOBAL: SERVER 0x10034680
 extern int g_handler_started;
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
@@ -24,10 +25,11 @@ int __stdcall exit_handler(int a, int b, int c)
 /* Server initialization: creates the main server thread
  * and stores its handle in g_thread_handle. */
 
+// GLOBAL: SERVER 0x11764094
+void* g_thread_handle;
+
 // FUNCTION: SERVER 0x10009320
 // Init
-
-void* g_thread_handle;
 
 int __cdecl Init(LPVOID param)
 {

@@ -8,6 +8,7 @@
 #include "../../../Units/Error/error.h"
 #include "../command_internal.h"
 
+// GLOBAL: SERVER 0x1002d0d4
 extern char s_cm_ExSetAttribute___Invalid_Id_1002d0d4[];
 
 /* Command handler: applies attribute updates to a game entity.

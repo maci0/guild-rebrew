@@ -270,8 +270,8 @@ static char s_arr_overflow_10031604[] = "gm_AllocSpieler: array overflow...";
 static char s_bug_10031594[] = "gm_AllocSpieler: bug";
 static char s_family_overflow_100315ac[] =
     "gm_AllocSpieler(): gm_CurrentHumanFamilyCount overflow";
-static char s_file_spiel_c_10031004[] =
-    "D:\\Develop\\DieGildeAddOn\\game\\spiel.c";
+/* Same bytes as spiel.c s_D__Develop_...@0x10031004 — share that def. */
+extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[];
 
 unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int arg4, int location, int arg6, int arg7, int arg8)
 {
@@ -309,7 +309,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 		g_citizen_count--;
 	}
 	if (idx == 0x300) {
-		LogMessageInternal(s_file_spiel_c_10031004, 0x2614,
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x2614,
 		                   s_arr_overflow_10031604, 1);
 		return 0xffff;
 	}
@@ -371,7 +371,7 @@ unsigned short __cdecl gm_AllocSpieler(int type, int mother_id, int gender, int 
 	g_next_object_id++;
 	*(int*) (slot + 0x1e4) = 0x3f800000; /* 1.0f */
 	slot[0x164] = (char) arg6;
-	LogMessageInternal(s_file_spiel_c_10031004, 0x2637, work, 8);
+	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x2637, work, 8);
 	slot[0x218] = 1;
 	slot[8] = 0x64;
 	*(int*) (slot + 0x20c) = -1;
@@ -875,7 +875,7 @@ stat_modifiers:
 		 * the increment. */
 		n = *(int*) 0x10035430;
 		if (n >= 0x10) {
-			LogMessageInternal(s_file_spiel_c_10031004, 0x27f0,
+			LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x27f0,
 			                   s_family_overflow_100315ac, 1);
 			return 0xffff;
 		}
@@ -933,9 +933,9 @@ stat_modifiers:
 		slot[0x82 + rnd] =
 		    (char) (*(volatile char*) (slot + 0x82 + rnd) + 0x2a);
 	}
-	LogMessageInternal(s_file_spiel_c_10031004, 0x2888, work, 8);
+	LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x2888, work, 8);
 	if (idx == 0xffff) {
-		LogMessageInternal(s_file_spiel_c_10031004, 0x286c, s_bug_10031594,
+		LogMessageInternal(s_D__Develop_DieGildeAddOn_game_sp_10031004, 0x286c, s_bug_10031594,
 		                   1);
 	}
 	sprintf(work, s_fmt_playerid_10031570, g_next_object_id, slot + 0x30);

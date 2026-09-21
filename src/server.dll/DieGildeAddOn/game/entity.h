@@ -6,7 +6,7 @@
 
 /* Shared entity/slot globals — majority types across TUs (Round-558). */
 extern unsigned short* g_entity_table_end; /* 0x1003546c */
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 extern int g_stream_count;
 extern char g_relationship_matrix_primary[];
 extern char g_relationship_matrix_secondary[];
@@ -21,8 +21,8 @@ extern int g_query_state_a0c[];
 extern unsigned char g_byte_table_30861;
 extern unsigned char g_entity_base[];
 extern unsigned int g_entity_slot_table[];
-extern char g_entity_state_base[];
-extern unsigned char g_entity_type_bytes[];
+extern char g_entity_state_base[2];
+extern unsigned char g_entity_type_bytes[1];
 
 // SIZE 0x21c — 768 entries at g_slot_table (0x100358a0).
 //

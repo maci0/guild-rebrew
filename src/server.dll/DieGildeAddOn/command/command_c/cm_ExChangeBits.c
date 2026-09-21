@@ -3,6 +3,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002d114
 extern char s_cm_ExChangeBits___Invalid_Id_1002d114[];
 
 /* Execution handler: modifies a bit-field on an entity.  Resolves

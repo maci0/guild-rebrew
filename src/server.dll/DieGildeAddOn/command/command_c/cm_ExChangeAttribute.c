@@ -3,6 +3,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002d0b0
 extern char s_cm_ExChangeAttribute___Invalid_I_1002d0b0[];
 
 /* Execution handler: applies a batch of attribute deltas to an

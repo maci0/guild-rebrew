@@ -61,6 +61,7 @@ void __cdecl gv_UpgradeField(uchar*);
 void __cdecl gm_ObjectsAvailble(int);
 
 extern char s_cm_ExSetGebUpgrade____Could_not_f_1002d2ec[];
+// GLOBAL: SERVER 0x1002d2c0
 extern char s_cm_ExSetGebUpgrade____already_hi_1002d2c0[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 

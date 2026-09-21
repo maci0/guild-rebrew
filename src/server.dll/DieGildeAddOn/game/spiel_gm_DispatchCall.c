@@ -16,7 +16,7 @@
 extern int g_query_limit;
 
 
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 
 
 extern int g_next_object_id; /* defined in spiel.c */

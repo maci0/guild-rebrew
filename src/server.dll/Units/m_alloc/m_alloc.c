@@ -74,6 +74,30 @@ void __cdecl m_FreeTracked(void* ptr)
 	}
 }
 
+// GLOBAL: SERVER 0x117640b0
+extern int g_alloc_root_size_total;  /* 0x117640b0 */
+
+// GLOBAL: SERVER 0x117640b8
+extern int g_alloc_root_size_max;    /* 0x117640b8 */
+
+// GLOBAL: SERVER 0x117640a4
+extern int g_alloc_root_name_4;      /* 0x117640a4 */
+
+// GLOBAL: SERVER 0x117640a0
+extern int g_alloc_root_name;        /* 0x117640a0 */
+
+// GLOBAL: SERVER 0x117640c0
+extern int g_alloc_root_field_20;    /* 0x117640c0 */
+
+// GLOBAL: SERVER 0x117640bc
+extern int g_alloc_root_count_max;   /* 0x117640bc */
+
+// GLOBAL: SERVER 0x117640b4
+extern int g_alloc_root_count;       /* 0x117640b4 */
+
+// GLOBAL: SERVER 0x10034638
+extern int g_alloc_counter;          /* 0x10034638 */
+
 /* m_init — allocates and zeroes the packet pool (0x100068E0).
  * Target 162 bytes; compiled 146. Of the 16-byte size delta, 12 bytes are the
  * target's dest-alignment memset prelude and 4 are the length's register

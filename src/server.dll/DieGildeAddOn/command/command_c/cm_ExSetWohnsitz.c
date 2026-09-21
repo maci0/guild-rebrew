@@ -59,8 +59,11 @@
 
 void __cdecl plt_TableLookup(uint, ushort*);
 
+// GLOBAL: SERVER 0x1002d298
 extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d298[];
+// GLOBAL: SERVER 0x1002d268
 extern char s_cm_ExSetWohnsitz____Could_not_fi_1002d268[];
+// GLOBAL: SERVER 0x1002d240
 extern char s_cm_ExSetWohnsitz____Residence_is_1002d240[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 

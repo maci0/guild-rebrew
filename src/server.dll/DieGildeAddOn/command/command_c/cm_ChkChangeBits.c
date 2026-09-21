@@ -48,7 +48,9 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002ca54
 extern char s_cm_ChkChangeBits___Invalid_Id_1002ca54[];
+// GLOBAL: SERVER 0x1002ca04
 extern char s_cm_ChkChangeBits___Invalid_actio_1002ca04[];
 
 /* Validation handler: resolves entity by ID from the command

@@ -4,6 +4,7 @@
 
 #define _TOTAL_LOCKS 44
 
+// GLOBAL: SERVER 0x1002b374
 CRITICAL_SECTION* __locktable[_TOTAL_LOCKS];
 /* `locktable` is defined in crt_region/data_globals.c as
    `CRITICAL_SECTION* locktable[0x30]` (0x10031aac, 192 bytes), which is what the

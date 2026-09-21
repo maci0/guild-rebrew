@@ -47,6 +47,21 @@
 > check above compares whole function bodies against the library actually
 > being linked, ignoring relocation slots, which is why it finds all 68. It
 > also runs as a pre-commit hook over the whole tree.
+>
+> The LIBCMT hook covers the default (server) target only. **The `Europa1400Gold_TL.exe`
+> (GOLDTL) client statically links `d3dx8.lib` (DX8.1 SDK) too** — 907 functions
+> (~273 KB) in `.text` band `0x5e0000–0x64ffff` are linker-supplied D3DX8 bodies,
+> marked `// LIBRARY: D3DX8` in `src/Europa1400Gold_TL.exe/library_d3dx8.h`. Before
+> reversing any GOLDTL function in that band (or a `0x4b5xxx` `.text`-side D3DX8
+> string site), check both:
+>
+> ```
+> rebrew lib-match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe --va 0x<VA>
+> # 907 VAs already LIBRARY-marked -> lib-match returns nothing for them
+> ```
+>
+> `Europa1400Gold.exe` (GOLD) does NOT statically link DirectX — its DX is pure DLL
+> import (`DDRAW`/`DINPUT`/`mss32`), so no D3DX lib-match applies there.
 
 ## CLI Tools
 

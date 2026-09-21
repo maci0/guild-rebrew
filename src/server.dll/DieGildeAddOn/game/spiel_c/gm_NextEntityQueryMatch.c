@@ -2,11 +2,16 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
+// GLOBAL: SERVER 0x10035450
 extern int g_query_limit; /* 0x10035450 */
+// GLOBAL: SERVER 0x10030b94
 extern int g_query_filter_max_id; /* 0x10030b94 */
 extern int g_query_filter_owner; /* 0x10030b98 */
+// GLOBAL: SERVER 0x10030b9c
 extern unsigned short g_query_filter_type; /* 0x10030b9c */
+// GLOBAL: SERVER 0x101398a0
 extern int g_dispatch_table_b[]; /* 0x101398a0 */
+// GLOBAL: SERVER 0x1013989c
 extern int g_dispatch_table_a[]; /* 0x1013989c */
 
 // FUNCTION: SERVER 0x10016290
@@ -177,23 +182,39 @@ lab_43e:
     return (void*)matched_ent;
 }
 
+// GLOBAL: SERVER 0x10035468
 unsigned short* g_query_cursor;
+// GLOBAL: SERVER 0x10030b98
 int g_query_filter_owner = 0xffffffff;
+// GLOBAL: SERVER 0x10030b9e
 unsigned char g_query_filter_state = 255;
+// GLOBAL: SERVER 0x1003545d
 char g_query_flag2;
+// GLOBAL: SERVER 0x10035434
 int g_citizen_count;
+// GLOBAL: SERVER 0x10035439
 unsigned char g_current_season;
+// GLOBAL: SERVER 0x10035444
 int g_dynasty_field_44;
+// GLOBAL: SERVER 0x10035448
 char g_dynasty_field_48;
+// GLOBAL: SERVER 0x10035449
 char g_dynasty_field_49;
+// GLOBAL: SERVER 0x1003544c
 int g_dynasty_field_4c;
+// GLOBAL: SERVER 0x10035464
 unsigned char* g_query_filter_base;
 /* Round-558: same-size majority types that still emit BSS commons.
  * Incomplete [] does not emit; sized arrays broke .text layout. */
+// GLOBAL: SERVER 0x1003546c
 unsigned short* g_entity_table_end;
+// GLOBAL: SERVER 0x10035880
 int g_current_year;
+// GLOBAL: SERVER 0x10035884
 unsigned short g_current_hour;
+// GLOBAL: SERVER 0x10035888
 int g_clock_copy_mid;
+// GLOBAL: SERVER 0x1003588c
 short g_clock_copy_tail;
 /* 13 other TUs declare this `unsigned char g_slot_table[]` and the metadata
    records a 2-byte object at 0x100358a0; a pointer definition was the only
@@ -201,7 +222,9 @@ short g_clock_copy_tail;
 unsigned char g_slot_table[2];
 /* Indexed as `char g_entity_state_base[]` by cm_ExCreateCitizen.c and
    gm_Open.c; metadata records a 2-byte object at 0x100358a2 (round 925). */
+// GLOBAL: SERVER 0x100358a2
 char g_entity_state_base[2];
+// GLOBAL: SERVER 0x100358fc
 int g_entity_ref_table;
 /* Indexed as `unsigned char g_entity_type_bytes[]` by sim.c, spiel62.c and
    gm_Open.c; metadata: 1-byte object at 0x10035a04 (round 925). */

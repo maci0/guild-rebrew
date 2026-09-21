@@ -1,0 +1,141 @@
+ 140|The consequence for planning: a missing `.rdata` string cannot be fixed by
+ 141|writing the literal in a new C file — it will land in `.data` and shift every
+ 142|literal after it.  Literal content belongs in the blob that covers the
+ 143|reference's own bytes.
+ 144|
+ 145|## 3. `.rdata` (map section 2): the prefix contract
+ 146|
+ 147|Section 2 is the merged IAT + `.rdata` + import bookkeeping + export table:
+ 148|
+ 149|```
+ 150|[0x000, 0x1a0)   .idata$5   IAT (100 imports * 4, padded)
+ 151|[0x1a0, 0x1a0+P) .rdata     P bytes
+ 152|[        , +0x50).idata$2   import descriptors (4 DLLs + null)
+ 153|[        , +0x14).idata$3
+ 154|[        , +0x1a0).idata$4  OFT / name-pointer arrays
+ 155|[        ,       ).idata$6  hint/name records + DLL names
+ 156|[        , +0x51) .edata    export directory (Init, Exit)
+ 157|```
+ 158|
+ 159|`rebrew postlink` refuses to run unless the built bytes between the IAT and
+ 160|the import directory are **exactly** the reference's:
+ 161|
+ 162|```python
+ 163|prefix_lo = rva_to_offset(iat_rva + iat_size)   # 0x24000 + 0x1a0
+ 164|prefix_hi = rva_to_offset(import_rva)
+ 165|if prefix_hi - prefix_lo != len(meta.prefix): raise ValueError(...)
+ 166|if built[prefix_lo:prefix_hi] != meta.prefix:  raise ValueError(...)
+ 167|```
+ 168|
+ 169|`layout/server.dll/prefix.hex` is `0x2468` bytes — the reference's
+ 170|`.rdata[0x1a0:0x2608)`, i.e. the whole `.rdata` proper up to the import
+ 171|directory. Measured in the current build:
+ 172|
+ 173|```
+ 174|built prefix size  0x2630   (0x1a0 .. 0x27d0)
+ 175|reference          0x2468   (0x1a0 .. 0x2608)
+ 176|surplus            0x1c8
+ 177|```
+ 178|
+ 179|The surplus is one contiguous block **after** the `rdata_restore.c` blob
+ 180|(`g_rdata_restore_252e8`, `0x1320` bytes at `0x12e8`, ending at `0x2608`
+ 181|exactly like the reference). It is LIBCMT `.rdata` re-emitted by objects the
+ 182|link pulls for their *code*, whose `.rdata` the blob already carries inside
+ 183|its range:
+ 184|
+ 185|```
+ 186|0x2608  LIBCMT:testfdiv.obj   __real@8 reals + "IsProcessorFeaturePresent" + "KERNEL32"
+ 187|0x2690  LIBCMT:x10fout.obj    "1#QNAN" "1#INF" "1#IND" "1#SNAN"
+ 188|0x26b0  LIBCMT:output.obj     ___lookuptable, "(null)", wide "(null)"
+ 189|0x2740  LIBCMT:timeset.obj    ___dnames, ___mnames
+ 190|0x2780  LIBCMT:tzset.obj      "TZ"
+ 191|0x2784  LIBCMT:a_map.obj      "SunMonTue..." , "JanFeb..."
+ 192|0x27d0  __IMPORT_DESCRIPTOR_KERNEL32   <- import dir, 0x1c8 late
+ 193|```
+ 194|
+ 195|Two consequences worth keeping straight:
+ 196|
+ 197|* The block is a **duplicate**, not extra data: the reference has the same
+ 198|  bytes inside `[0x12e8, 0x2608)` — `"1#QNAN"` at `0x24a8`, `"(null)"` at
+ 199|  `0x2074`, `"TZ"` at `0x2458`, `"Monday"` at `0x25c0` all match at the same
+ 200|  offsets on both sides.
+ 201|* Because the offset error is one contiguous block, every later sub-section
+ 202|  keeps its internal size but moves `0x1c8` later, so `.edata` and the tail of
+ 203|  the hint/name table land past where the reference has them.
+ 204|  `crt0msg.obj`/`crtmbox.obj` were the first two members of this set and were
+ 205|  removed in round 115 by supplying `_NMSG_WRITE`/`_crtMessageBoxA` locally
+ 206|  (`0x33b1 -> 0x3041`); the six above are what is left.
+ 207|
+ 208|Shrinking the blob by `0x1c8` instead of removing the objects does **not**
+ 209|work: the block that would move up into `[0x2440, 0x2608)` is our own COMDAT
+ 210|order (testfdiv reals first), which matches only 53 of 456 bytes of the
+ 211|reference's window — and the prefix check compares bytes, not just length.
+ 212|
+ 213|### Discarding the duplicates instead: COMDAT folding by symbol name
+ 214|
+ 215|There is a third option, and it is the one that works: **the linker folds
+ 216|COMDAT sections by symbol name, keeping the first definition it sees.**  msvc6
+ 217|derives a string literal's `??_C@<length><hash>@<mangled-content>?$AA@` name
+ 218|from the literal's contents, so an object that references *the same literals*
+ 219|defines *the same COMDAT names*, and whatever the library emits for them is
+ 220|discarded.
+ 221|
+ 222|`crt_region/rdata_fold.c` does exactly that for the six objects' strings and
+ 223|carries no `.text` at all — the literals go to `.data` (referenced literals do
+ 224|not go to `.rdata`; see the section above), which costs nothing because
+ 225|postlink overwrites `.data` wholesale.  Measured on the CMake build:
+ 226|
+ 227|```
+ 228|                     .rdata VS   .rdata raw   libc string COMDATs in the map
+ 229|before                   0x3041       0x4000  8
+ 230|with rdata_fold.c        0x2ff1       0x3000  0 (all folded)
+ 231|```
+ 232|
+ 233|`0x3000` is the reference's raw size, and it moves `.data` to file offset
+ 234|`0x27000` and `.reloc` to `0x35000` — the reference's.  Two notes for extending
+ 235|it to the rest of the block:
+ 236|
+ 237|* A COMDAT folds against a definition of the same **name**, whatever the
+ 238|  container.  `__lookuptable`/`__dnames`/`__mnames` fold against a one-byte
+ 239|  `const` array each (COFF `___lookuptable` is C `__lookuptable`); the bytes do
+ 240|  not have to be ours, because the reference's are already inside the blob and
+ 241|  postlink rewrites the `.text` operands that point at them.
+ 242|* A `.bss` (uninitialized) definition defines the symbol but does **not** fold
+ 243|  the library's read-only COMDAT — measured, the library's copy stays in the
+ 244|  map.  The definition has to be an initialized constant to be a COMDAT.
+ 245|* **Not everything in the library is COMDAT.**  The string literals are
+ 246|  (`??_C@…`, 11 of them folded here, worth `0x70` of `.rdata` VirtualSize), but
+ 247|  `___lookuptable`, `___dnames` and `___mnames` are plain `.rdata` sections in
+ 248|  LIBCMT: a definition of ours — even `__declspec(selectany)`, which does make
+ 249|  it COMDAT — leaves *both* sections in the image, so the surplus grows by
+ 250|  whatever we define.  Those `0x9c` bytes can only be removed by not linking
+ 251|  the objects that carry them.  `__real@8@…` FP constants are COMDAT, but the
+ 252|  compiler emits them only from an expression, and adding a `.text` function to
+ 253|  get one defeats the purpose.
+ 254|
+ 255|## 4. The import layer
+ 256|
+ 257|* 100 imports across 4 DLLs (`KERNEL32`, `USER32`, `WS2_32`, `WINMM`), and
+ 258|  the **set** must be identical: `_fix_imports` raises
+ 259|  `import sets differ — refusing to copy bookkeeping` otherwise.
+ 260|* The IAT slot order is hash-driven and not forceable with `/include`, so
+ 261|  postlink copies `iat.hex` (`0x1a0` bytes) and `bookkeeping.hex` (`0x828`
+ 262|  bytes — descriptors, OFT arrays, hint/name records, DLL names) over the
+ 263|  built ones, and remaps `FF 15/25` operands in `.text` to the reference's
+ 264|  slots.
+ 265|* The hint/name table's **size depends on that order**, because records are
+ 266|  padded to alignment: the same 28 names cost `0x61a` in our build and
+ 267|  `0x624` in the reference. That is why postlink copies the whole
+ 268|  bookkeeping block rather than trying to reorder ours, and why the built
+ 269|  `.edata` can sit a few bytes earlier than the reference's.
+ 270|* A missing or extra import is the cheapest possible signal that the link
+ 271|  changed: compare the count (100) after any link change.
+ 272|
+ 273|## 5. Linker flags measured
+ 274|
+ 275|| flag | effect |
+ 276||------|--------|
+ 277|| `/OPT:NOREF` (current) | keeps every COMDAT of every linked object. Needed: our reversed `.text` is not all referenced, and `/OPT:REF` gutted it (`0x22256 -> 0x100c6`). |
+ 278|| `/OPT:REF` | drops unreferenced COMDATs: `.rdata 0x3041 -> 0x2f81` (raw `0x4000 -> 0x3000`!), `.data 0x1743498 -> 0x1742614`, and `.text` down to `0x100c6`. Not usable as-is, but it proves the surplus is unreferenced COMDATs. |
+ 279|| `/FORCE:MULTIPLE` | silences `LNK4006`; the warning is a finding (see AGENTS.md), not noise. |
+ 280|| `/INCLUDE:<sym>` | forces a LIBCMT object in for its *code* — `__ms_p5_mp_test_fdiv` is one of the eight here — and the object's `.data`/`.rdata` COMDATs come with it. |

@@ -16,7 +16,67 @@ extern float g_color_scale;
 extern int g_next_object_id;
 extern unsigned char g_current_season;
 extern float g_const_0_0;
+// GLOBAL: SERVER 0x100256d0
 extern double g_dbl_const_6d0; /* 0x100256d0 */
+// GLOBAL: SERVER 0x10025688
+extern double g_dbl_const_688; /* 0x10025688 */
+// GLOBAL: SERVER 0x100257d8
+extern double g_dbl_const_7d8; /* 0x100257d8 */
+// GLOBAL: SERVER 0x10025810
+extern double g_dbl_const_810; /* 0x10025810 */
+// GLOBAL: SERVER 0x10025f88
+extern float g_dbl_const_f88; /* 0x10025f88 */
+// GLOBAL: SERVER 0x10025f90
+extern double g_dbl_const_f90; /* 0x10025f90 */
+// GLOBAL: SERVER 0x10025f98
+extern double g_dbl_const_f98; /* 0x10025f98 */
+// GLOBAL: SERVER 0x10031604
+extern char s_arr_overflow_10031604[];
+// GLOBAL: SERVER 0x10031594
+extern char s_bug_10031594[];
+// GLOBAL: SERVER 0x1002cf1c
+extern char s_cm_ExProdObjekt___Cannot_produce___1002cf1c[];
+// GLOBAL: SERVER 0x1002cef4
+extern char s_cm_ExProdObjekt___Rohstoff_versc_1002cef4[];
+// GLOBAL: SERVER 0x1002ce90
+extern char s_cm_ExSellObjekt___Invalid__gm_ev_1002ce90[];
+// GLOBAL: SERVER 0x1002cec4
+extern char s_cm_ExSellObjekt___Invalid__quell_1002cec4[];
+// GLOBAL: SERVER 0x1002cdcc
+extern char s_cm_ExSellObjekt___Invalid__ziel__1002cdcc[];
+// GLOBAL: SERVER 0x1002cdac
+extern char s_cm_ExSellObjekt___Lager_voll_1002cdac[];
+// GLOBAL: SERVER 0x1002cd78
+extern char s_cm_ExSellObjekt___Not_enough_Cre_1002cd78[];
+// GLOBAL: SERVER 0x1002cdfc
+extern char s_cm_ExSellObjekt___Not_enough_Obj_1002cdfc[];
+// GLOBAL: SERVER 0x1002ce4c
+extern char s_cm_ExSellObjekt____Object_not_fo_1002ce4c[];
+// GLOBAL: SERVER 0x1002cce8
+extern char s_cm_ExSellObjekt____gm_AllocObjek_1002cce8[];
+// GLOBAL: SERVER 0x1002ccc0
+extern char s_cm_ExSellObjekt____gm_AllocRaum_f_1002ccc0[];
+// GLOBAL: SERVER 0x1002cf9c
+extern char s_cm_ExecProduction___Invalid__lager_1002cf9c[];
+// GLOBAL: SERVER 0x1002cf74
+extern char s_cm_ExecProduction___Lager_has_wron_1002cf74[];
+// GLOBAL: SERVER 0x1002cf48
+extern char s_cm_ExecProduction___Lager_hat_kein_1002cf48[];
+// GLOBAL: SERVER 0x100315ac
+extern char s_family_overflow_100315ac[];
+// GLOBAL: SERVER 0x10031570
+extern char s_fmt_playerid_10031570[];
+// GLOBAL: SERVER 0x100315e4
+extern char s_fmt_spid_100315e4[];
+// GLOBAL: SERVER 0x1002cd14
+extern char g_error_msg_sell_no_source[];
+// GLOBAL: SERVER 0x1002cc8c
+extern char g_error_msg_sell_no_dest[];
+// GLOBAL: SERVER 0x1002cd48
+extern char g_error_msg_sell_failed[];
+// GLOBAL: SERVER 0x101deb00
+extern unsigned char g_connections[];
+// GLOBAL: SERVER 0x1002c050
 extern int g_alchemy_entity_table[];
 int* __cdecl ahm_LookupEntityInTable(int);
 
@@ -250,9 +310,13 @@ void* __cdecl m_AllocTracked(unsigned int allocSize, const char* groupTag);
 // DATA: SERVER 0x1002a0f8
 char s_ahm_AllocAhmInfo_1002a0f8[] = "ahm_AllocAhmInfo";
 /* Round-522: REF 0x1002a10c..0x1002a19c — path + ExAlloc msgs missing from BLD. */
+// DATA: SERVER 0x1002a10c
 char s_D__Develop_DieGildeAddOn_game_al_1002a10c[] = "D:\\Develop\\DieGildeAddOn\\game\\alchemistry_logic.c";
+// DATA: SERVER 0x1002a140
 char s_ahm_ExAllocAlchemist__array_over_1002a140[] = "ahm_ExAllocAlchemist: array overflow...";
+// DATA: SERVER 0x1002a168
 char s_ahm_ExAllocAlchemist__wrong_type_1002a168[] = "ahm_ExAllocAlchemist: wrong type of target geb...";
+// DATA: SERVER 0x1002a19c
 char s_ahm_ExAllocAlchemist__cant_find_1002a19c[] = "ahm_ExAllocAlchemist: cant find target geb...";
 
 // FUNCTION: SERVER 0x1000c4d0

@@ -4,8 +4,11 @@ extern int __cdecl gm_GetFieldByType(char*, int);
 extern int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 extern int __cdecl gm_QueryEntitySum(int, unsigned char);
 extern void __cdecl LogMessageInternal(char*, int, char*, int);
+// GLOBAL: SERVER 0x1002c748
 extern char s_D__Develop_DieGildeAddOn_command_1002c748[];
+// GLOBAL: SERVER 0x1002c7a4
 extern char s_cm_ChkMoveCredits____Invalid__qu_1002c7a4[];
+// GLOBAL: SERVER 0x1002c774
 extern char s_cm_ChkMoveCredits____Not_enough_m_1002c774[];
 
 /* Validation handler: resolves the credit source entity and checks

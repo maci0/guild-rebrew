@@ -212,13 +212,22 @@ void __cdecl amt_UpdateEntityLinks(char* entity, int arg2)
  * holder assignments from a save file via VFS and populates
  * the runtime office tables. */
 
+// DATA: SERVER 0x10029f78
 char s_amt_fio_LoadAemter____Can_t_load_10029f78[] = "amt_fio_LoadAemter(): Can't load msetter";
+// DATA: SERVER 0x10029fa4
 char s_amt_fio_LoadAemter____Can_t_load_10029fa4[] = "amt_fio_LoadAemter(): Can't load status";
+// DATA: SERVER 0x10029fcc
 char s_amt_fio_LoadAemter____Can_t_load_10029fcc[] = "amt_fio_LoadAemter(): Can't load pcount";
+// DATA: SERVER 0x10029ff4
 char s_amt_fio_LoadAemter____Can_t_load_10029ff4[] = "amt_fio_LoadAemter(): Can't load mamt";
+// DATA: SERVER 0x1002a01c
 char s_amt_fio_LoadAemter____Can_t_load_1002a01c[] = "amt_fio_LoadAemter(): Can't load mplayerid";
+// DATA: SERVER 0x1002a048
 char s_amt_fio_LoadAemter____Can_t_load_1002a048[] = "amt_fio_LoadAemter(): Can't load id";
+// DATA: SERVER 0x1002a06c
 char s_amt_fio_LoadAemter____count_read_1002a06c[] = "amt_fio_LoadAemter(): count read is %i, expected %i";
+// DATA: SERVER 0x1002a0a0
 char s_D__Develop_DieGildeAddOn_game_ae_1002a0a0[] = "D:\\Develop\\DieGildeAddOn\\game\\aemter.c";
+// DATA: SERVER 0x1002a0c8
 char s_amt_fio_LoadAemter____Can_t_load_1002a0c8[] = "amt_fio_LoadAemter(): Can't load count";
 

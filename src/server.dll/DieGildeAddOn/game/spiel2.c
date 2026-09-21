@@ -12,7 +12,7 @@
 #pragma intrinsic(memcpy, memset)
 
 extern int g_query_limit;
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;
 extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; /* defined in spiel.c */
@@ -33,10 +33,10 @@ extern unsigned char g_current_season;
  * holding 0x55 slots of 0x80 bytes; returns the matching slot
  * pointer or NULL. */
 
+// DATA: SERVER 0x1009b770
 // FUNCTION: SERVER 0x10016240
 // gm_FindSlotById
 
-// DATA: SERVER 0x1009b770
 
 char* __cdecl gm_FindSlotById(int arg1, int arg2)
 {

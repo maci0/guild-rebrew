@@ -28,7 +28,9 @@
 #include "../../../Units/Error/error.h"
 
 int __cdecl gm_ChangePlayerIdentityImpl(int, int);
+// GLOBAL: SERVER 0x1002cc14
 extern char s_cm_ExChangePlayerIdentity___exec_1002cc14[];
+// GLOBAL: SERVER 0x1002cbf0
 extern char s_cm_ExChangePlayerIdentity___fail_1002cbf0[];
 
 /* Execution handler: changes a player's identity by delegating

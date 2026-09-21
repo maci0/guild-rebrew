@@ -26,6 +26,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002d154
 extern char s_cm_ExKillSpieler___Could_not_fin_1002d154[];
 
 /* Execution handler: removes/kills a player entity (Spieler).

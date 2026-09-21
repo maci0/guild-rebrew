@@ -13,7 +13,7 @@
 
 void __cdecl gm_InitEntitySlots(void);
 extern int g_query_limit;
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 int __cdecl gm_FreeObjectListRecursive(char**);
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;
@@ -21,6 +21,7 @@ extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; /* defined in spiel.c
 
 int __cdecl gm_GetBuildingTypeCategory(int);
 extern int g_citizen_count;
+// GLOBAL: SERVER 0x10035430
 extern int gm_CurrentHumanFamilyCount; /* 0x10035430 */
 int __cdecl gm_GetBuildingTypeCategory(int btype);
 int __cdecl gm_MapEntityStatRange(int);
@@ -141,6 +142,9 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 /* Initializes entity slots to default/empty values. Zeros
  * link fields and sets capacity counters. */
 
+// GLOBAL: SERVER 0x1003542c
+extern int g_dynasty_field_2c; /* 0x1003542c */
+
 // FUNCTION: SERVER 0x100180D0
 // gm_InitEntitySlots
 
@@ -225,11 +229,11 @@ int __cdecl gm_EntityClassCheck(int type)
 /* Checks if an entity's stat is at or above a threshold.
  * Used for skill/ability requirement checks. */
 
+// DATA: SERVER 0x10035a04
+extern unsigned char g_entity_type_bytes[1];
 // FUNCTION: SERVER 0x100181a0
 // gm_CheckStatLevel
 
-// DATA: SERVER 0x10035a04
-extern unsigned char g_entity_type_bytes[];
 
 int __cdecl gm_CheckStatLevel(int entity_idx, int stat_id)
 {

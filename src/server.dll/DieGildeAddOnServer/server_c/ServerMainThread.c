@@ -1,4 +1,6 @@
 // FUNCTION: SERVER 0x100093a0
+extern int g_tick_rate;    /* 0x11764088 */
+extern int g_max_players; /* 0x11764084 */
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
 
@@ -25,8 +27,6 @@ void __cdecl RecvGameSavegame(void);
 int __cdecl srv_Init(void);
 int __cdecl sim_AdvanceGameClock(int* clock_state, int a2, int a3, int a4);
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10);
-extern int g_max_players; /* 0x11764084 */
-extern int g_tick_rate;    /* 0x11764088 */
 
 /* ServerMainThread: the main server orchestration loop.
  * PHASE 0: read game.ini config, init logging/sockets/game data.
@@ -777,3 +777,8 @@ cleanup_and_exit:
 	srv_CleanupSockets();
 	return 0;
 }
+
+// GLOBAL: SERVER 0x11764084
+extern int g_max_players; /* 0x11764084 */
+// GLOBAL: SERVER 0x11764088
+extern int g_tick_rate;    /* 0x11764088 */

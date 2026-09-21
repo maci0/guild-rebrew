@@ -149,3 +149,9 @@ int __cdecl ls_LoadSavegameHeader(int stream, char* dest)
 	}
 	return 1;
 }
+
+// GLOBAL: SERVER 0x1002d4f0
+extern struct SaveHeaderTail g_save_header_tail; /* 0x1002d4f0 */
+
+// GLOBAL: SERVER 0x1002d4fc
+extern char s_ls_tmp_1002d4fc; /* 0x1002d4fc */

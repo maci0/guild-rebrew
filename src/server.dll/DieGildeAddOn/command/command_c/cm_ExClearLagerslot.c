@@ -3,7 +3,9 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002d088
 extern char s_cm_ExClearLagerslot___Invalid__L_1002d088[];
+// GLOBAL: SERVER 0x1002d054
 extern char s_cm_ExClearLagerslot___Lager_has_n_1002d054[];
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 int __cdecl gm_RemoveObjectByType(void**, unsigned int);

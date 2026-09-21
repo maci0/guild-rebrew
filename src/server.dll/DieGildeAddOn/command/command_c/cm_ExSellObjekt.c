@@ -6,8 +6,8 @@
 
 extern char* g_item_def_table; /* 0x101de450, attested in rebrew-data.toml */
 extern unsigned char g_current_season;
+extern unsigned char g_connections[]; /* 0x101deb00 */
 
-extern PlayerSlot g_player_slots_base[8];
 extern char g_error_msg_sell_no_source[];
 extern char g_error_msg_sell_no_dest[];
 extern char g_error_msg_sell_failed[];
@@ -553,7 +553,7 @@ uint cm_ExSellObjekt(char* cmd, uchar* result)
 				}
 			}
 		}
-		*(int*)(g_player_slots_base[(unsigned char)cmd[3]].data + 0x264200) = *(int*)(dest_object + 1);
+		*(int*)(((PlayerSlot*)g_connections)[(unsigned char)cmd[3]].data + 0x264200) = *(int*)(dest_object + 1);
 		if (*(int*)(cmd + 0x23) != 0 && dest_owner_entity != (short*)0) {
 			gm_SubObjekt(
 				*(void**)(dest_owner_entity + 2),

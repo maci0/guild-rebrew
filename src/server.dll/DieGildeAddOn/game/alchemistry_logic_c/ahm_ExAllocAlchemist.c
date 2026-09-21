@@ -18,7 +18,7 @@ extern int g_next_object_id;
 extern unsigned char g_current_season;
 
 extern int g_citizen_count;
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
 void* __cdecl m_AllocTracked(unsigned int size, const char* source);

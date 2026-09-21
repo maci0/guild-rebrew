@@ -29,6 +29,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// GLOBAL: SERVER 0x1002ca74
 extern char s_cm_ChkSetGebBesitzer___Invalid_I_1002ca74[];
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 

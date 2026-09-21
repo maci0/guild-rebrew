@@ -14,7 +14,7 @@
 extern int g_query_limit;
 void* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 extern int g_next_object_id; /* defined in spiel.c */
 int g_current_year;
 extern char s_D__Develop_DieGildeAddOn_game_sp_10031004[]; /* defined in spiel.c */

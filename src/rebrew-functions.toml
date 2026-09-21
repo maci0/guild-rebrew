@@ -1,6 +1,8 @@
 ["SERVER.0x10001130"]
 size = 179
 status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-20T17:59:28+00:00"
 
 ["SERVER.0x100011f0"]
 size = 309
@@ -10,6 +12,8 @@ status = "RELOC"
 size = 290
 status = "RELOC"
 analysis = "Core logging sink. Takes an output_mask bitfield: bit 0 writes to file (looking up the correct file name via severity in a global table), bit 2 writes to OutputDebugStringA (debugger), bit 3 writes to the allocated Win32 Console using WriteConsoleA."
+updated_by = "test"
+updated_at = "2026-09-20T18:15:38+00:00"
 
 ["SERVER.0x10002770"]
 size = 2115
@@ -231,41 +235,55 @@ status = "NEAR_MATCHING"
 analysis = "Core orchestration loop. Phase 1 (Lobby): Loops accepting connections until connected_players == g_max_players and every connected player has the 0x800 ready flag. Then transitions into Phase 2 (Transfer). | PHASE 0: Read game.ini config — server port (default 7531), game path, max players | Initialize server: thread priority, logging, packet pool, game data, listen socket | PHASE 1 — LOBBY: Wait for all players to connect and set ready flag (0x800). Broadcasts server info every 3 seconds. Processes network I/O. Handles disconnect requests (0x1000) and host disconnect (0x400 = terminate). | PHASE 3 — DATA RECEIVE: Wait for host to send savegame data (flag 0x08 cleared when done). Then call RecvGameSavegame to deserialize game state. | PHASE 5 — PLAYER ALLOCATION: Wait for each player to allocate their character entity (flag 0x10 set, cleared when cmd received). | PHASE 6 — GAME LOOP: Main simulation tick. Checks sync flags (0x40=sync data, 0x20=sync ready). Advances game clock, broadcasts sync packets (cmd 0x1E). Processes commands via ProcessAndBroadcastAllCommands. Speed controlled by g_game_speed_value. | PHASE 4 — DATA SEND: Stream savegame to all non-host clients in 128-byte chunks (cmd type 0x09). First sends total size (cmd type 0x08). Clears flag 0x04 when transfer complete per player."
 blocker = "already in reference order (16/16 log landmarks byte-identical, zero block reorderings); residual is 3 intra-block scheduling sites + register pairs; ndiff 592/627 in 25 hunks, cdiff 614/627 in 15 (round 186)"
 updated_by = "verify"
-updated_at = "2026-09-13T05:17:26+00:00"
+updated_at = "2026-09-20T18:12:11+00:00"
 blocker_delta = 515
 
 ["SERVER.0x10009d30"]
 size = 296
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-20T17:59:28+00:00"
 
 ["SERVER.0x10009e60"]
 size = 419
 status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-20T17:59:28+00:00"
 
 ["SERVER.0x1000a010"]
 size = 112
 status = "RELOC"
 analysis = "Initialize all player slots to disconnected state, then create TCP listen socket with SO_REUSEADDR, 128KB send/recv buffers, non-blocking mode, bind to port, and listen with backlog 5"
+updated_by = "verify"
+updated_at = "2026-09-20T17:59:28+00:00"
 
 ["SERVER.0x1000a080"]
 size = 600
 status = "RELOC"
 analysis = "Iterates over g_player_slots looking for an empty slot. If one is found, calls Ordinal_1 (accept()) to accept a new connection, configures the socket, initializes the slot structures (receive_buffer, send_buffer), and flags it as a newly connected player."
+updated_by = "verify"
+updated_at = "2026-09-20T17:59:28+00:00"
 
 ["SERVER.0x1000a2e0"]
 size = 96
 status = "RELOC"
 analysis = "Shutdown socket (SD_BOTH) | Close socket handle"
+updated_by = "verify"
+updated_at = "2026-09-20T17:59:28+00:00"
 
 ["SERVER.0x1000a340"]
 size = 336
 status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-20T17:59:28+00:00"
 
 ["SERVER.0x1000a490"]
 size = 211
 status = "RELOC"
 analysis = "Ingress parser boundary for per-player receive buffer. Validation behavior: handles recv==0 timeout via player_slot[0x54] deadline, treats recv==-1 + WSAEWOULDBLOCK as retry, closes connection on other socket errors. | Stage 1 ingress: ensure first 3 bytes of packet are present (1-byte opcode + 2-byte total length). | Length-driven read: remaining bytes = header.total_length - bytes_received so far. | 0x2733 matches WSAEWOULDBLOCK (non-fatal on nonblocking socket)."
+updated_by = "verify"
+updated_at = "2026-09-20T17:59:28+00:00"
 
 ["SERVER.0x1000a570"]
 size = 750
@@ -1010,8 +1028,8 @@ toolchain = "msvc-6.0-sp6"
 status = "RELOC"
 ghidra = "InitGameWorld"
 analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
-updated_by = "test"
-updated_at = "2026-09-17T08:51:38+00:00"
+updated_by = "verify"
+updated_at = "2026-09-20T20:44:53+00:00"
 
 ["SERVER.0x10015cb0"]
 size = 57
@@ -1845,9 +1863,9 @@ updated_by = "test"
 updated_at = "2026-09-20T15:55:11+00:00"
 
 ["GOLDTL.0x0041d6b0"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "test"
-updated_at = "2026-09-20T16:14:43+00:00"
+updated_at = "2026-09-21T03:32:55+00:00"
 size = 404
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/Error/Error_c"
 
@@ -1871,16 +1889,16 @@ updated_at = "2026-09-12T14:56:23+00:00"
 size = 14
 
 ["GOLDTL.0x00465350"]
-status = "SIZE_MISMATCH"
-updated_by = "test"
-updated_at = "2026-09-12T14:56:24+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-21T06:56:24+00:00"
 size = 496
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"
 
 ["GOLDTL.0x004c7400"]
 status = "NEAR_MATCHING"
-updated_by = "test"
-updated_at = "2026-09-12T14:56:15+00:00"
+updated_by = "verify"
+updated_at = "2026-09-21T06:58:19+00:00"
 size = 336
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
 
@@ -1892,30 +1910,30 @@ size = 320
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x004f18d0"]
-status = "SIZE_MISMATCH"
-updated_by = "test"
-updated_at = "2026-09-12T14:56:16+00:00"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:31:13+00:00"
 size = 320
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x004f2880"]
 status = "NEAR_MATCHING"
 updated_by = "test"
-updated_at = "2026-09-12T14:56:19+00:00"
+updated_at = "2026-09-21T12:05:03+00:00"
 size = 400
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x004f2a80"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "test"
-updated_at = "2026-09-12T14:56:20+00:00"
+updated_at = "2026-09-21T03:21:31+00:00"
 size = 288
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x004f2c00"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "test"
-updated_at = "2026-09-12T14:56:18+00:00"
+updated_at = "2026-09-21T03:17:37+00:00"
 size = 304
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
@@ -1927,11 +1945,11 @@ size = 240
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
 
 ["GOLDTL.0x00502850"]
-status = "SIZE_MISMATCH"
-updated_by = "test"
-updated_at = "2026-09-12T14:56:17+00:00"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:31:20+00:00"
 size = 464
-cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
 
 ["GOLDTL.0x00502e00"]
 status = "RELOC"
@@ -1964,8 +1982,8 @@ cflags = "/O2 /Gd /G6 /Oy- /I/home/maci/Desktop/Projects/relumea/guild-rebrew/sr
 size = 80
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/alchemistry_logic_c"
 status = "NEAR_MATCHING"
-updated_by = "test"
-updated_at = "2026-09-20T16:04:58+00:00"
+updated_by = "verify"
+updated_at = "2026-09-21T11:59:03+00:00"
 
 ["GOLDTL.0x004959f0"]
 size = 32
@@ -1976,6 +1994,10 @@ updated_at = "2026-09-20T15:58:06+00:00"
 
 ["GOLDTL.0x00430580"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"
+size = 296
+status = "STUB"
+updated_by = "test"
+updated_at = "2026-09-21T11:25:39+00:00"
 
 ["GOLDTL.0x00430cb0"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs/vfs_c"
@@ -1983,20 +2005,29 @@ cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.
 ["GOLDTL.0x0045f2c0"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"
 size = 192
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
 
 ["GOLDTL.0x004c4b00"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/loadsave"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:30:43+00:00"
 
 ["GOLDTL.0x004cc490"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
 size = 44
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-20T16:02:31+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
 
 ["GOLDTL.0x004f6520"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
 size = 128
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:25:44+00:00"
 
 ["GOLDTL.0x005027d0"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
@@ -2006,7 +2037,10 @@ updated_at = "2026-09-20T16:09:16+00:00"
 size = 80
 
 ["GOLDTL.0x00503e80"]
-cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:31:24+00:00"
 
 ["GOLDTL.0x00521eb0"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/loadsave/loadsave_c"
@@ -2016,6 +2050,10 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /I/home/maci/Desktop/Projects/relumea/gui
 
 ["GOLDTL.0x005c86b0"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/net"
+size = 191
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:31:54+00:00"
 
 ["SERVER.0x10010700"]
 size = 14
@@ -2274,3 +2312,2277 @@ size = 16
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-20T15:52:08+00:00"
+
+["GOLD.0x0044e6f0"]
+size = 8
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:33:39+00:00"
+
+["GOLD.0x00508da0"]
+size = 9
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:33:14+00:00"
+
+["GOLD.0x005775e0"]
+size = 9
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:45:37+00:00"
+
+["GOLD.0x005af310"]
+size = 16
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:35:12+00:00"
+
+["GOLD.0x004d8b30"]
+size = 17
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:35:15+00:00"
+
+["GOLD.0x00508620"]
+size = 17
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:35:35+00:00"
+
+["GOLD.0x00508640"]
+size = 17
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:36:48+00:00"
+
+["GOLD.0x005880b0"]
+size = 17
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:36:51+00:00"
+
+["GOLD.0x0040b6f0"]
+size = 18
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:45:45+00:00"
+
+["GOLD.0x0040ffc0"]
+size = 18
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:36:57+00:00"
+
+["GOLD.0x005dea38"]
+size = 17
+
+["GOLD.0x005dea49"]
+size = 17
+
+["GOLD.0x0040ffe0"]
+size = 18
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:38:23+00:00"
+
+["GOLD.0x004a8c00"]
+size = 1
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:38:26+00:00"
+
+["GOLD.0x00531be0"]
+size = 18
+
+["GOLD.0x004941a0"]
+size = 18
+
+["GOLD.0x00410130"]
+size = 20
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:40:29+00:00"
+
+["GOLD.0x005049c0"]
+size = 20
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:40:31+00:00"
+
+["GOLD.0x0040dd90"]
+size = 21
+
+["GOLD.0x0042ec20"]
+size = 22
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:40:36+00:00"
+
+["GOLD.0x0041e720"]
+size = 21
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:46:05+00:00"
+
+["GOLD.0x0041e740"]
+size = 21
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:46:08+00:00"
+
+["GOLD.0x004b39f0"]
+size = 22
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:43:08+00:00"
+
+["GOLD.0x004c6780"]
+size = 22
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:43:11+00:00"
+
+["GOLD.0x004c67a0"]
+size = 22
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:43:13+00:00"
+
+["GOLD.0x004d0cd0"]
+size = 22
+
+["GOLD.0x00401180"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:43:45+00:00"
+
+["GOLD.0x004011d0"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:43:48+00:00"
+
+["GOLD.0x004243d0"]
+size = 22
+
+["GOLD.0x00478860"]
+size = 22
+
+["GOLD.0x00427370"]
+size = 24
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:47:11+00:00"
+
+["GOLD.0x0043d840"]
+size = 24
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:47:14+00:00"
+
+["GOLD.0x0046c690"]
+size = 28
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:47:17+00:00"
+
+["GOLD.0x004a8630"]
+size = 24
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:47:20+00:00"
+
+["GOLD.0x004ef740"]
+size = 24
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:47:54+00:00"
+
+["GOLD.0x0052e1a0"]
+size = 24
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:48:08+00:00"
+
+["GOLD.0x0059c830"]
+size = 24
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:47:30+00:00"
+
+["GOLD.0x005a6ca0"]
+size = 24
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:49:45+00:00"
+
+["GOLD.0x005cfcb0"]
+size = 25
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:49:48+00:00"
+
+["GOLD.0x0042c380"]
+size = 25
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:49:51+00:00"
+
+["GOLD.0x004364f0"]
+size = 25
+
+["GOLD.0x00449d80"]
+size = 23
+
+["GOLD.0x0044c510"]
+size = 25
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:50:01+00:00"
+
+["GOLD.0x0045fb20"]
+size = 25
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:50:05+00:00"
+
+["GOLD.0x0040af90"]
+size = 26
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:51:17+00:00"
+
+["GOLD.0x00512500"]
+size = 26
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:51:20+00:00"
+
+["GOLD.0x00578410"]
+size = 26
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:51:46+00:00"
+
+["GOLD.0x0040eea0"]
+size = 27
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:51:27+00:00"
+
+["GOLD.0x00476c60"]
+size = 27
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:51:30+00:00"
+
+["GOLD.0x004acdc0"]
+size = 27
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T04:52:58+00:00"
+
+["GOLD.0x005deaf3"]
+size = 26
+
+["GOLD.0x004bda60"]
+size = 27
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T04:54:29+00:00"
+
+["GOLD.0x004bda80"]
+size = 27
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T04:53:43+00:00"
+
+["GOLD.0x004c8990"]
+size = 27
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:53:45+00:00"
+
+["GOLD.0x005a8600"]
+size = 27
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:53:48+00:00"
+
+["GOLD.0x005e3b08"]
+size = 27
+
+["GOLD.0x0044f740"]
+size = 28
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:56:35+00:00"
+
+["GOLD.0x0044f7c0"]
+size = 28
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:57:12+00:00"
+
+["GOLD.0x00453980"]
+size = 28
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:56:39+00:00"
+
+["GOLD.0x004d3ac0"]
+size = 28
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:56:42+00:00"
+
+["GOLD.0x004e33d0"]
+size = 28
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:56:44+00:00"
+
+["GOLD.0x00574490"]
+size = 28
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:57:10+00:00"
+
+["GOLD.0x00580070"]
+size = 28
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T04:56:49+00:00"
+
+["GOLD.0x00462c40"]
+size = 21
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:59:16+00:00"
+
+["GOLD.0x004adf20"]
+size = 18
+
+["GOLD.0x005e7f11"]
+size = 22
+
+["GOLD.0x005e7f27"]
+size = 22
+
+["GOLD.0x004011f0"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:59:39+00:00"
+
+["GOLD.0x00401320"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T04:59:42+00:00"
+
+["GOLD.0x005e7a7a"]
+size = 22
+
+["GOLD.0x00459f80"]
+size = 25
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:01:01+00:00"
+
+["GOLD.0x00476c80"]
+size = 25
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:01:04+00:00"
+
+["GOLD.0x00478950"]
+size = 25
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:01:07+00:00"
+
+["GOLD.0x004e65e0"]
+size = 25
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:01:09+00:00"
+
+["GOLD.0x005da160"]
+size = 25
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:01:12+00:00"
+
+["GOLD.0x005defef"]
+size = 25
+
+["GOLD.0x005e3a57"]
+size = 26
+
+["GOLD.0x00407690"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:03:00+00:00"
+
+["GOLD.0x0042c1c0"]
+size = 23
+
+["GOLD.0x0044f7a0"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:03:07+00:00"
+
+["GOLD.0x00476b60"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:03:10+00:00"
+
+["GOLD.0x00495760"]
+size = 23
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:03:14+00:00"
+
+["GOLD.0x004ac150"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:03:17+00:00"
+
+["GOLD.0x005e7cfd"]
+size = 27
+
+["GOLD.0x00401e50"]
+size = 28
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:04:39+00:00"
+
+["GOLD.0x00596140"]
+size = 28
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:04:41+00:00"
+
+["GOLD.0x005a4040"]
+size = 28
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:04:43+00:00"
+
+["GOLD.0x005a50a0"]
+size = 28
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:04:45+00:00"
+
+["GOLD.0x005a8a50"]
+size = 28
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:07:43+00:00"
+
+["GOLD.0x005e9b09"]
+size = 28
+
+["GOLD.0x004176f0"]
+size = 29
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:07:06+00:00"
+
+["GOLD.0x0044ecc0"]
+size = 29
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:07:09+00:00"
+
+["GOLD.0x0045db10"]
+size = 29
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:07:13+00:00"
+
+["GOLD.0x005e7cd6"]
+size = 27
+
+["GOLD.0x004f4d10"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:10:11+00:00"
+
+["GOLD.0x004fe330"]
+size = 23
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:10:13+00:00"
+
+["GOLD.0x00520ef0"]
+size = 23
+
+["GOLD.0x0058f700"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:10:09+00:00"
+
+["GOLD.0x005c0a00"]
+size = 23
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:09:40+00:00"
+
+["GOLD.0x005e3a71"]
+size = 23
+
+["GOLD.0x004bb840"]
+size = 29
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:12:07+00:00"
+
+["GOLD.0x004bd9e0"]
+size = 29
+
+["GOLD.0x004cef80"]
+size = 29
+
+["GOLD.0x004fdfb0"]
+size = 29
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:12:21+00:00"
+
+["GOLD.0x004fe310"]
+size = 29
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:11:35+00:00"
+
+["GOLD.0x005a8a70"]
+size = 29
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:11:37+00:00"
+
+["GOLD.0x00404e40"]
+size = 30
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:14:07+00:00"
+
+["GOLD.0x004bdac0"]
+size = 30
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:13:34+00:00"
+
+["GOLD.0x004ce270"]
+size = 30
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:13:36+00:00"
+
+["GOLD.0x004cefe0"]
+size = 30
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:14:05+00:00"
+
+["GOLD.0x005241f0"]
+size = 30
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:13:40+00:00"
+
+["GOLD.0x0053dd30"]
+size = 30
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:15:20+00:00"
+
+["GOLD.0x005ba750"]
+size = 30
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:15:22+00:00"
+
+["GOLD.0x005de784"]
+size = 30
+
+["GOLD.0x00413620"]
+size = 31
+
+["GOLD.0x00417150"]
+size = 31
+
+["GOLD.0x00417170"]
+size = 31
+
+["GOLD.0x004e7c40"]
+size = 31
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:17:45+00:00"
+
+["GOLD.0x004f36e0"]
+size = 31
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:20:12+00:00"
+
+["GOLD.0x005316a0"]
+size = 31
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:19:02+00:00"
+
+["GOLD.0x0053f100"]
+size = 31
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:19:45+00:00"
+
+["GOLD.0x005a89a0"]
+size = 31
+
+["GOLD.0x005e01e3"]
+size = 31
+
+["GOLD.0x00423720"]
+size = 32
+
+["GOLD.0x00426170"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:21:28+00:00"
+
+["GOLD.0x00447190"]
+size = 32
+
+["GOLD.0x00468610"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:21:33+00:00"
+
+["GOLD.0x0047cb60"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:21:35+00:00"
+
+["GOLD.0x0047dd60"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:22:01+00:00"
+
+["GOLD.0x00401090"]
+size = 32
+
+["GOLD.0x00495fc0"]
+size = 32
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:23:18+00:00"
+
+["GOLD.0x00496020"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:24:02+00:00"
+
+["GOLD.0x0049c160"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:23:50+00:00"
+
+["GOLD.0x0049c3b0"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:25:41+00:00"
+
+["GOLD.0x004ac1e0"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:26:42+00:00"
+
+["GOLD.0x004ad190"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:26:18+00:00"
+
+["GOLD.0x004c0210"]
+size = 32
+
+["GOLD.0x004c3b10"]
+size = 32
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:25:51+00:00"
+
+["GOLD.0x0042ec00"]
+size = 32
+
+["GOLD.0x004035f0"]
+size = 36
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:29:08+00:00"
+
+["GOLD.0x0040abd0"]
+size = 36
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:29:10+00:00"
+
+["GOLD.0x0040e4c0"]
+size = 36
+
+["GOLD.0x00479b50"]
+size = 36
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:29:37+00:00"
+
+["GOLD.0x0043b7f0"]
+size = 46
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:31:21+00:00"
+
+["GOLD.0x0043b920"]
+size = 46
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:30:49+00:00"
+
+["GOLD.0x00454030"]
+size = 46
+
+["GOLD.0x00465c80"]
+size = 46
+
+["GOLD.0x004feb30"]
+size = 46
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:30:55+00:00"
+
+["GOLD.0x00438780"]
+size = 44
+
+["GOLD.0x004c3600"]
+size = 44
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:32:29+00:00"
+
+["GOLD.0x004cb910"]
+size = 44
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:32:32+00:00"
+
+["GOLD.0x00520f10"]
+size = 44
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:32:34+00:00"
+
+["GOLD.0x0056b9f0"]
+size = 44
+
+["GOLD.0x0040cd70"]
+size = 42
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:34:49+00:00"
+
+["GOLD.0x005086b0"]
+size = 42
+
+["GOLD.0x00413d00"]
+size = 43
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:34:17+00:00"
+
+["GOLD.0x00422c60"]
+size = 43
+
+["GOLD.0x005024f0"]
+size = 42
+
+["GOLD.0x004ffc90"]
+size = 43
+
+["GOLD.0x0040b240"]
+size = 40
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:36:45+00:00"
+
+["GOLD.0x00476b30"]
+size = 40
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:36:47+00:00"
+
+["GOLD.0x0043d690"]
+size = 40
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:36:50+00:00"
+
+["GOLD.0x004b4590"]
+size = 40
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:37:50+00:00"
+
+["GOLD.0x004bb810"]
+size = 40
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:36:54+00:00"
+
+["GOLD.0x0052ae70"]
+size = 40
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:36:56+00:00"
+
+["GOLD.0x0042e940"]
+size = 41
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:39:00+00:00"
+
+["GOLD.0x0043b6b0"]
+size = 41
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:39:02+00:00"
+
+["GOLD.0x00476b00"]
+size = 41
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:39:05+00:00"
+
+["GOLD.0x00479f00"]
+size = 41
+
+["GOLD.0x0047cec0"]
+size = 41
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:39:37+00:00"
+
+["GOLD.0x004118a0"]
+size = 38
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:41:25+00:00"
+
+["GOLD.0x00411bb0"]
+size = 38
+
+["GOLD.0x00479ed0"]
+size = 38
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:40:56+00:00"
+
+["GOLD.0x0047da70"]
+size = 38
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:40:59+00:00"
+
+["GOLD.0x004cb7c0"]
+size = 38
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:41:01+00:00"
+
+["GOLD.0x0044eeb0"]
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T05:41:45+00:00"
+
+["GOLD.0x0044e570"]
+size = 34
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:42:54+00:00"
+
+["GOLD.0x004556a0"]
+size = 34
+
+["GOLD.0x00468850"]
+size = 34
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:43:35+00:00"
+
+["GOLD.0x0046bdc0"]
+size = 34
+
+["GOLD.0x004d8c40"]
+size = 34
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:43:02+00:00"
+
+["GOLD.0x004e33f0"]
+size = 34
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:43:04+00:00"
+
+["GOLD.0x0052e1c0"]
+size = 34
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:43:07+00:00"
+
+["GOLD.0x0040c1d0"]
+size = 60
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:45:03+00:00"
+
+["GOLD.0x004e3fe0"]
+size = 60
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:45:06+00:00"
+
+["GOLD.0x004e4020"]
+size = 60
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:45:08+00:00"
+
+["GOLD.0x0053d690"]
+size = 60
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:45:34+00:00"
+
+["GOLD.0x004b3bd0"]
+size = 56
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:46:45+00:00"
+
+["GOLD.0x004c3140"]
+size = 56
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:47:35+00:00"
+
+["GOLD.0x004c60b0"]
+size = 56
+
+["GOLD.0x005de62f"]
+size = 56
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T05:46:51+00:00"
+
+["GOLD.0x004539a0"]
+size = 57
+
+["GOLD.0x00401000"]
+size = 52
+
+["GOLD.0x0040dd50"]
+size = 52
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:48:48+00:00"
+
+["GOLD.0x0043b670"]
+size = 52
+
+["GOLD.0x00472a50"]
+size = 52
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:49:19+00:00"
+
+["GOLD.0x004cced0"]
+size = 52
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:48:55+00:00"
+
+["GOLD.0x005286a0"]
+size = 52
+
+["GOLD.0x004c47b0"]
+size = 41
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:50:36+00:00"
+
+["GOLD.0x004cec00"]
+size = 41
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:50:38+00:00"
+
+["GOLD.0x00501000"]
+size = 41
+
+["GOLD.0x005e995b"]
+size = 41
+
+["GOLD.0x004c6320"]
+size = 42
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T05:50:45+00:00"
+
+["GOLD.0x00401240"]
+size = 43
+
+["GOLD.0x0040d010"]
+size = 80
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:53:21+00:00"
+
+["GOLD.0x0040d080"]
+size = 80
+
+["GOLD.0x0040d220"]
+size = 80
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:53:25+00:00"
+
+["GOLD.0x0040edc0"]
+size = 80
+
+["GOLD.0x004c4920"]
+size = 61
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:59:07+00:00"
+
+["GOLD.0x004c4ac0"]
+size = 61
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:59:09+00:00"
+
+["GOLD.0x004c4f10"]
+size = 61
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-21T05:57:41+00:00"
+
+["GOLD.0x004c5010"]
+size = 61
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T05:59:11+00:00"
+
+["GOLD.0x0042c240"]
+size = 61
+
+["GOLD.0x004fe1e0"]
+size = 41
+
+["GOLD.0x00479cc0"]
+size = 43
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:02:01+00:00"
+
+["GOLD.0x005dc360"]
+size = 40
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T06:00:56+00:00"
+
+["GOLD.0x005e3d3d"]
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T06:02:14+00:00"
+
+["GOLD.0x004012b0"]
+size = 45
+
+["GOLD.0x00413b00"]
+size = 45
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:03:15+00:00"
+
+["GOLD.0x00438c30"]
+size = 45
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T06:03:17+00:00"
+
+["GOLD.0x00452e00"]
+size = 45
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:03:20+00:00"
+
+["GOLD.0x0045ab50"]
+size = 45
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:03:23+00:00"
+
+["GOLD.0x004c3f50"]
+size = 36
+
+["GOLD.0x004eea70"]
+size = 36
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:05:39+00:00"
+
+["GOLD.0x005743b0"]
+size = 36
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:05:08+00:00"
+
+["GOLD.0x005e0578"]
+size = 36
+
+["GOLD.0x005e0bc0"]
+size = 36
+
+["GOLD.0x004247e0"]
+size = 37
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:05:15+00:00"
+
+["GOLD.0x004e6f10"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:06:58+00:00"
+
+["GOLD.0x004ec2d0"]
+size = 32
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T06:07:00+00:00"
+
+["GOLD.0x00495f90"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:07:57+00:00"
+
+["GOLD.0x00495ff0"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:08:25+00:00"
+
+["GOLD.0x00496040"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:08:02+00:00"
+
+["GOLD.0x00496070"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:08:04+00:00"
+
+["GOLD.0x004e52a0"]
+size = 32
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:09:40+00:00"
+
+["GOLD.0x0045ab80"]
+size = 45
+
+["GOLD.0x004bd9b0"]
+size = 45
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:10:08+00:00"
+
+["GOLD.0x004bf410"]
+size = 45
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:10:10+00:00"
+
+["GOLD.0x0055ce60"]
+size = 45
+
+["GOLD.0x005dea0b"]
+size = 45
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:10:14+00:00"
+
+["GOLD.0x005e4fbc"]
+size = 43
+
+["GOLD.0x005e64f1"]
+size = 43
+
+["GOLD.0x00440140"]
+size = 47
+
+["GOLD.0x00461e60"]
+size = 47
+
+["GOLD.0x004d2650"]
+size = 47
+
+["GOLD.0x00402ac0"]
+size = 48
+
+["GOLD.0x0040c630"]
+size = 48
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:15:43+00:00"
+
+["GOLD.0x004118d0"]
+size = 48
+
+["GOLD.0x00417dd0"]
+size = 48
+
+["GOLD.0x0041bdd0"]
+size = 48
+
+["GOLD.0x0045c9e0"]
+size = 36
+
+["GOLD.0x004bf3e0"]
+size = 36
+
+["GOLD.0x00578020"]
+size = 36
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:17:53+00:00"
+
+["GOLD.0x0046c5f0"]
+size = 37
+
+["GOLD.0x0047ca00"]
+size = 37
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:17:50+00:00"
+
+["GOLD.0x004f39b0"]
+size = 34
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:21:14+00:00"
+
+["GOLD.0x00538010"]
+size = 34
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:21:17+00:00"
+
+["GOLD.0x0050d350"]
+size = 35
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:22:03+00:00"
+
+["GOLD.0x00453570"]
+size = 35
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:21:21+00:00"
+
+["GOLD.0x0050c310"]
+size = 35
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:21:23+00:00"
+
+["GOLD.0x004de610"]
+size = 37
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:23:20+00:00"
+
+["GOLD.0x0050d460"]
+size = 37
+
+["GOLD.0x00511840"]
+size = 37
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:23:51+00:00"
+
+["GOLD.0x004c3f20"]
+size = 37
+
+["GOLD.0x00505e30"]
+size = 37
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:23:29+00:00"
+
+["GOLD.0x004f97a0"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:25:26+00:00"
+
+["GOLD.0x00503f30"]
+size = 32
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:25:08+00:00"
+
+["GOLD.0x0051ad90"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:25:43+00:00"
+
+["GOLD.0x005e0021"]
+size = 44
+
+["GOLD.0x0046c250"]
+size = 45
+
+["GOLD.0x005e3b23"]
+size = 45
+
+["GOLD.0x0044f5f0"]
+size = 37
+
+["GOLD.0x004de5e0"]
+size = 37
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:30:53+00:00"
+
+["GOLD.0x0053f1b0"]
+size = 37
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:30:55+00:00"
+
+["GOLD.0x00545890"]
+size = 37
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:30:58+00:00"
+
+["GOLD.0x0052e360"]
+size = 32
+
+["GOLD.0x00576750"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:32:22+00:00"
+
+["GOLD.0x005768a0"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:32:25+00:00"
+
+["GOLD.0x005a84e0"]
+size = 32
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:32:27+00:00"
+
+["GOLD.0x005a8690"]
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:32:30+00:00"
+
+["GOLD.0x005a8a30"]
+size = 32
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:33:57+00:00"
+
+["GOLD.0x0040e640"]
+size = 33
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T06:34:00+00:00"
+
+["GOLD.0x00422d60"]
+size = 33
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T06:34:32+00:00"
+
+["GOLD.0x0044d1c0"]
+size = 33
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:45+00:00"
+
+["GOLD.0x005e5814"]
+size = 45
+
+["GOLDTL.0x004058d0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 30
+
+["GOLDTL.0x0040ba00"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 36
+
+["GOLDTL.0x0040c450"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 13
+
+["GOLDTL.0x0040dca0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:35:59+00:00"
+size = 42
+
+["GOLDTL.0x0040ec60"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T10:58:15+00:00"
+size = 52
+
+["GOLDTL.0x00411340"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:38:12+00:00"
+size = 12
+
+["GOLDTL.0x004116c0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 15
+
+["GOLDTL.0x00411740"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+size = 63
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T11:14:05+00:00"
+
+["GOLDTL.0x0041e620"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:20+00:00"
+size = 33
+
+["GOLDTL.0x0041fd30"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+size = 59
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T11:12:54+00:00"
+
+["GOLDTL.0x004225e0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:47:35+00:00"
+size = 32
+
+["GOLDTL.0x004238d0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:23+00:00"
+size = 24
+
+["GOLDTL.0x00425970"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 14
+
+["GOLDTL.0x0042d670"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+size = 60
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T12:17:17+00:00"
+
+["GOLDTL.0x0042e4a0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 10
+
+["GOLDTL.0x0044d8d0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:47:44+00:00"
+size = 8
+
+["GOLDTL.0x0045fa70"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+size = 32
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T11:13:19+00:00"
+
+["GOLDTL.0x00469610"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:26+00:00"
+size = 24
+
+["GOLDTL.0x00473320"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T10:58:45+00:00"
+size = 52
+
+["GOLDTL.0x00473660"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:30+00:00"
+size = 23
+
+["GOLDTL.0x00477070"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-21T10:40:02+00:00"
+size = 43
+
+["GOLDTL.0x0047cf30"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:32+00:00"
+size = 38
+
+["GOLDTL.0x0047d220"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:47:57+00:00"
+size = 32
+
+["GOLDTL.0x004937d0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+size = 18
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T11:03:43+00:00"
+
+["GOLDTL.0x004ac270"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 23
+
+["GOLDTL.0x004ac300"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:36+00:00"
+size = 32
+
+["GOLDTL.0x004ad2b0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:39+00:00"
+size = 32
+
+["GOLDTL.0x004b3b40"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:42+00:00"
+size = 22
+
+["GOLDTL.0x004b4700"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 40
+
+["GOLDTL.0x004be250"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 45
+
+["GOLDTL.0x004c4900"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+size = 50
+
+["GOLDTL.0x004cc450"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+size = 53
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T11:02:46+00:00"
+
+["GOLDTL.0x004cda50"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 52
+
+["GOLDTL.0x004ce080"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 13
+
+["GOLDTL.0x004cf0f0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:48:49+00:00"
+size = 30
+
+["GOLDTL.0x004dff20"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:46+00:00"
+size = 37
+
+["GOLDTL.0x004e4eb0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 15
+
+["GOLDTL.0x004e8ad0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:49+00:00"
+size = 32
+
+["GOLDTL.0x004f08d0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 36
+
+["GOLDTL.0x004f1820"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:48:58+00:00"
+size = 24
+
+["GOLDTL.0x004f5810"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:52+00:00"
+size = 31
+
+["GOLDTL.0x004f5da0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:55+00:00"
+size = 34
+
+["GOLDTL.0x004f7100"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 23
+
+["GOLDTL.0x004fbd20"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:37:57+00:00"
+size = 32
+
+["GOLDTL.0x00500c50"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+size = 41
+
+["GOLDTL.0x00500e00"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:49:09+00:00"
+size = 23
+
+["GOLDTL.0x00506df0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+size = 48
+
+["GOLDTL.0x00508e80"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:39:23+00:00"
+size = 37
+
+["GOLDTL.0x0050b780"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:39:25+00:00"
+size = 17
+
+["GOLDTL.0x0050b7a0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:39:28+00:00"
+size = 17
+
+["GOLDTL.0x0050bfe0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:49:20+00:00"
+size = 9
+
+["GOLDTL.0x00514f90"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:39:59+00:00"
+size = 37
+
+["GOLDTL.0x00515c40"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 26
+
+["GOLDTL.0x0051fd30"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:39:31+00:00"
+size = 32
+
+["GOLDTL.0x00525ee0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T10:39:55+00:00"
+size = 12
+
+["GOLDTL.0x005290b0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:49:29+00:00"
+size = 30
+
+["GOLDTL.0x005305a0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/auxillary"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T11:04:28+00:00"
+size = 40
+
+["GOLDTL.0x00538140"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+size = 31
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T11:01:02+00:00"
+
+["GOLDTL.0x00546ed0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:43:46+00:00"
+size = 31
+
+["GOLDTL.0x0054d810"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 37
+
+["GOLDTL.0x0057c8f0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T06:50:00+00:00"
+size = 36
+
+["GOLDTL.0x0057ecf0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:49:39+00:00"
+size = 32
+
+["GOLDTL.0x005886f0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T10:43:48+00:00"
+size = 28
+
+["GOLDTL.0x00597fd0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T10:45:16+00:00"
+size = 23
+
+["GOLDTL.0x005a59b0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:49:44+00:00"
+size = 24
+
+["GOLDTL.0x005b1eb0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T10:43:51+00:00"
+size = 32
+
+["GOLDTL.0x005c61c0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T10:43:53+00:00"
+size = 30
+
+["GOLDTL.0x005eb0d9"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
+size = 47
+
+["GOLDTL.0x0064e63d"]
+cflags = "/O1 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/crt_region"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T12:14:28+00:00"
+size = 45
+
+["GOLDTL.0x00404410"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:29:13+00:00"
+
+["GOLDTL.0x00404ca0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x00406510"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x00406560"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x0040ce80"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x0040f3d0"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T11:38:28+00:00"
+size = 36
+
+["GOLDTL.0x0040fcd0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x00419390"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+size = 48
+
+["GOLDTL.0x004193f0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x0041caa0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/Error"
+
+["GOLDTL.0x0041d4d0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/Error/Error_c"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:55:42+00:00"
+
+["GOLDTL.0x0041d8b0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/Error/Error_c"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:29:39+00:00"
+
+["GOLDTL.0x0041de50"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/m_alloc"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:29:41+00:00"
+
+["GOLDTL.0x0041e1d0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/m_alloc"
+
+["GOLDTL.0x0041fa00"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOnServer"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x00420700"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x00422150"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
+
+["GOLDTL.0x00427740"]
+cflags = "/O1 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/crt_region"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x004297c0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+
+["GOLDTL.0x0042e470"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-21T10:52:07+00:00"
+size = 48
+
+["GOLDTL.0x0043bf60"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x0044a120"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
+
+["GOLDTL.0x0044c460"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:30:04+00:00"
+
+["GOLDTL.0x0045b790"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/unknown"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T11:41:36+00:00"
+size = 66
+
+["GOLDTL.0x0045d600"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/unknown"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x0045dea0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOnServer"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x0045e520"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:30:12+00:00"
+
+["GOLDTL.0x0045ee00"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/crt_region"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T11:37:14+00:00"
+size = 21
+
+["GOLDTL.0x0045f380"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs/vfs_c"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x00460a40"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T11:21:55+00:00"
+size = 13
+
+["GOLDTL.0x00464a30"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/Units/vfs"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x00465750"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/alchemistry_logic_c"
+size = 64
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T12:02:18+00:00"
+
+["GOLDTL.0x00465840"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOnServer/server_c"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T10:44:52+00:00"
+size = 12
+
+["GOLDTL.0x00466330"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:30:29+00:00"
+
+["GOLDTL.0x00499a50"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:30:33+00:00"
+
+["GOLDTL.0x0049d640"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x004b0220"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:30:36+00:00"
+
+["GOLDTL.0x004bcb80"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/auxillary"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x004c35f0"]
+cflags = "/Ox /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x004c75e0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x004c7c50"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x004c9ff0"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x004cda90"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x004cef30"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T11:34:46+00:00"
+size = 64
+
+["GOLDTL.0x004dfef0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/loadsave/loadsave_c"
+size = 37
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T11:33:34+00:00"
+
+["GOLDTL.0x004e7600"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOnServer"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x004e7810"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOnServer"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x004e7f20"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:30:59+00:00"
+
+["GOLDTL.0x004e8940"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x004ee290"]
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/alchemistry_logic_c"
+
+["GOLDTL.0x004f1320"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x004f15d0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-21T06:57:14+00:00"
+
+["GOLDTL.0x004f2060"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+
+["GOLDTL.0x004f2ee0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
+size = 176
+
+["GOLDTL.0x004f2fe0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+
+["GOLDTL.0x004f3310"]
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
+
+["GOLDTL.0x004f3900"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/loadsave"
+
+["GOLDTL.0x004f9300"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command"
+
+["GOLDTL.0x00502cd0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
+
+["GOLDTL.0x00502f80"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x00504100"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x00504b30"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x00506000"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
+
+["GOLDTL.0x0050b7c0"]
+cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
+
+["GOLDTL.0x0051f480"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/loadsave/loadsave_c"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-21T10:31:38+00:00"
+
+["GOLDTL.0x00522390"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/loadsave"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-21T10:32:44+00:00"
+
+["GOLDTL.0x0054a210"]
+cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
+
+["GOLDTL.0x0057c7b0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x005974e0"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/spiel_c"
+
+["GOLDTL.0x005d6030"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game/friedhof_logic_c"
+
+["GOLDTL.0x0062e6bb"]
+cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/command/command_c"
+
+["GOLDTL.0x0064e761"]
+cflags = "/O1 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/crt_region"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T11:31:46+00:00"
+size = 26
+
+["GOLDTL.0x00506e10"]
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-21T11:10:34+00:00"

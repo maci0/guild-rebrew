@@ -205,23 +205,31 @@ extern int g_dynasty_field_44;
 char g_dynasty_field_48;
 extern char g_dynasty_field_49;
 extern int g_dynasty_field_4c;
+// GLOBAL: SERVER 0x10035454
 char g_query_active;
+// GLOBAL: SERVER 0x1003545c
 char g_query_flag1;
 char g_query_flag2;
+// GLOBAL: SERVER 0x1003545e
 char g_query_flag3;
 extern unsigned char* g_query_filter_base;
 unsigned short* g_query_cursor;
 extern unsigned short* g_entity_table_end;
-extern unsigned char g_slot_table[];
-extern char g_entity_state_base[];
-extern unsigned char g_entity_type_bytes[];
+extern unsigned char g_slot_table[2];
+extern char g_entity_state_base[2];
+extern unsigned char g_entity_type_bytes[1];
+// DATA: SERVER 0x10034624
 int g_array_count = 0;
 /* Canonical definitions live in Units/m_alloc/m_alloc2.c. */
+// DATA: SERVER 0x1003463c
 int g_flag_3c = 0;
+// DATA: SERVER 0x10034640
 void* g_array_ptr = 0;
+// GLOBAL: SERVER 0x10034670
 char g_stream_pool[1] = {
     0x00,
 };
+// DATA: SERVER 0x10034678
 int g_stream_count = 0; /* 0x10034678 */
 int g_connection_counter = 0;
 

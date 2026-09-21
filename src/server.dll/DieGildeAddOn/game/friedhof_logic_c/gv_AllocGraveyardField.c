@@ -1,12 +1,16 @@
 /* gv_AllocGraveyardField - proper C */
 
+// GLOBAL: SERVER 0x1002575c
+extern int g_field_worker_count[];
+
+// GLOBAL: SERVER 0x1002576c
+extern int g_field_entry_count[];
+
 // FUNCTION: SERVER 0x100109d0
 // SIZE: 832
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
-extern int g_field_worker_count[];
-extern int g_field_entry_count[];
 extern void* __cdecl m_AllocTracked(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);
 extern void* __cdecl memset(void* dest, int c, unsigned int count);

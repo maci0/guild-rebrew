@@ -33,6 +33,7 @@
 #include "../../../Units/Error/error.h"
 
 int __cdecl printf(const char*, ...);
+// GLOBAL: SERVER 0x1002cacc
 extern char s_Invalid_Commandtype_in_Execution_1002cacc[];
 
 /* Validation handler: checks that the first byte of the command
