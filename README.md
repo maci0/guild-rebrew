@@ -52,7 +52,7 @@ rebrew match src/server.dll/my_func.c --flag-sweep-only
 
 ```
 guild-rebrew/
-├── src/server.dll/       # Reversed C source files (561 functions)
+├── src/server.dll/       # Reversed C source files (283 annotated functions)
 ├── original/             # Target binaries (gitignored)
 ├── references/zlib/      # Reference source (zlib 1.1.3, submodule)
 ├── db/                   # Coverage data (gitignored)

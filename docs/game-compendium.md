@@ -59,8 +59,10 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
 | `original/Europa1400Gold.exe` | Base client | Validation target, 4638 discovered, 330 annotated |
 
 `server.dll` exports: `Init` (0x10009320), `Exit` (0x10009350). Image base
-0x10000000. Exactly 100 imports, 4 DLLs, no `.idata` (IAT at `.rdata` head).
-`.text` VirtualSize 0x22846. CRT static LIBCMT, zlib 1.1.3 vendored
+0x10000000. Exactly 100 imports, 4 DLLs (KERNEL32, USER32, WS2_32, WINMM),
+no `.idata` (IAT at `.rdata` head). `.text` VirtualSize 0x22846.
+Round-10 independent PE re-parse confirms: 4 sections (.text/.rdata/.data/.reloc),
+100 imports, base, both exports. CRT static LIBCMT, zlib 1.1.3 vendored
 (community origins:
 [zlib_functions.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/zlib_functions.md) —
 never reverse, links as stock).
