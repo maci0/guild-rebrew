@@ -142,10 +142,11 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   send retry, `TCP_NODELAY`, reset `ctx[0xE]` in game stream reader, Sleep(30)→1ms
   clamp) and prior
   [HookDLLs](https://github.com/europa1400-community/europa1400-hooks).
-- Packet IDs (community
-  [network.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/network.md),
-  unverified here): server→client 0x02/0x04/0x08/0x09/0x1E/0x20;
-  client→server 0x01/0x02/0x06/0x07/0x08/0x0D/0x0E/0x0F/0x11–0x13/0x1D/0x1E/0x5F–0x61.
+- Packet IDs: tree-verified server→client emissions in `ServerMainThread.c`:
+  0x04 + 0x20 (start commands), 0x08 (transfer total) + 0x09 (128-byte chunks),
+  0x1E (clock sync struct). Community
+  [network.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/network.md)
+  adds client→server IDs and names, unverified here.
 - Root-cause detail (per
   [problem-analysis](https://github.com/maci0/europa1400-networkfix/blob/main/docs/problem-analysis.md)):
   packet validator at server.dll RVA 0x3720 sets persistent `ctx[0xE]` error
