@@ -227,7 +227,20 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 - Savegame carries version-gated conditional blocks (community `handleLoad*Data`
   notes); quicksave slot 0 auto-writes daily 6:00, key Q (C.O.R.E. guide).
 
-## 9. Community ecosystem
+## 9. Assets and engine
+
+- Formats (ImHex patterns + Python construct parsers agree): ageb, aobj, baf,
+  bgf, cty, ed3, form, gfx, ogr, res, sbf, scr, txs.
+- Game data layout (per europa1400-tools `const.py`): `Data/` (`A_Geb.dat`,
+  `A_Obj.dat`, `character_names.dat`), `gfx/` (+`Bmp/`, `GroundPlans/`,
+  `Maps/`, `Gilde_add_on_german.gfx`), `Resources/` (`animations.bin`,
+  `groups.bin`, `objects.bin`, `scenes.bin`, `scripts.bin`,
+  `textbin_german.bin`), `Movie/`, `msx/`.
+- Renderer: Direct3D 8 (GOLD links d3dx8 statically — 907 LIBRARY functions;
+  DX8.1 SDK). Audio: Miles (mss32) — ASI scan only when audio init succeeds
+  (netfix harness finding). 2D fallback: DirectDraw/VESA (`dd_vesa`).
+
+## 10. Community ecosystem
 
 | Repo | What |
 |---|---|
@@ -253,7 +266,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [ghidra-cli](https://github.com/maci0/ghidra-cli) | Headless Ghidra automation (functions/symbols/strings/xrefs) for RE agents |
 | Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502) |
 
-## 10. Repo doc map (this checkout)
+## 11. Repo doc map (this checkout)
 
 - `docs/general-knowledge.md` build/game facts. `docs/naming_conventions.md`
   source tree + attested names. `docs/msvc6-c-shapes.md` C→bytes.
