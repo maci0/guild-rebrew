@@ -257,8 +257,11 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 
 ## 7. Network
 
-- TCP Winsock, non-blocking socket, `bind` + `listen` backlog 5. LAN discovery:
-  UDP broadcast 255.255.255.255 (`SendBroadcastPacket`, 0x10001130).
+- TCP Winsock, non-blocking socket (`ioctlsocket` FIONBIO 0x8004667E),
+  `bind` + `listen` backlog 5 (`srv_CreateListenSocket`, 0x10009e60; IAT map in
+  tree). Calls used: WSAStartup/WSACleanup, socket, setsockopt, ioctlsocket,
+  htons/htonl, bind, listen, accept, send/sendto, recv, closesocket, shutdown.
+  LAN discovery: UDP broadcast 255.255.255.255 (`SendBroadcastPacket`, 0x10001130).
   Host = slot with flag 0x400 (`host_slot_found` scan in `ServerMainThread.c`),
   not "first connected" — community `server.dll.md` says first-connected,
   unverified here.
