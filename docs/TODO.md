@@ -33359,3 +33359,13 @@ instruction in the wrong place" question.
   rotations (target uses edx for workers across gv_CheckSlotActive, esi for slot across gv_GetSlotEntry;
   mine picks different callee-saves) — multi-call register-allocator wall. Parked at 165.
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 109 (47 exact/62 reloc), lint err 0.
+
+### Round 1276 / session R219-227 (GOLDTL: ls_LoadDynamicEntities + gm_QueryEntitySum walls, flat)
+- **GOLDTL held at 109.** ls_LoadDynamicEntities (0x522ac0): 203/309 matched; ALL je diffs are uniform
+  +14 — a single branchless count-calc region. Target does `setge;dec;and -3;add 0x11` =
+  `(ver>=0x10046)?0x11:0x0e`; mine emits setl/and-3/add-0xe regardless of ternary direction or the
+  `0x0e+(>=?3:0)` arithmetic form — setcc-inversion allocator wall. Reverted to committed.
+- **gm_QueryEntitySum (0x50b7c0):** --size 77 doesn't promote (3 real structural: conditional edi-push
+  + epilogue order). gv_ValidateEntityAction / gv_UpdateProductionProgress parked at their NEAR states.
+- **Tooling:** TOML became r--r--r-- mid-session; restored via chmod u+w + git show redirect.
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 109 (47 exact/62 reloc), lint err 0, tree clean.
