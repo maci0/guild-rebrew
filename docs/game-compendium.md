@@ -362,6 +362,9 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 
 ## 13. Community ecosystem
 
+All 14 `europa1400-community` org repos covered below (round 83 audit; incl.
+`.github` profile = "reverse engineering and remake" mission statement).
+
 | Repo | What |
 |---|---|
 | [europa1400-database](https://github.com/europa1400-community/europa1400-database) | Editions/versions/patches/executables YAML + mkdocs sources (site URL 404 on fetch round 36 — see repo); Discord `discord.gg/jB9HYY8DpT` |
