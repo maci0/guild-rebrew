@@ -236,9 +236,11 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   `Maps/`, `Gilde_add_on_german.gfx`), `Resources/` (`animations.bin`,
   `groups.bin`, `objects.bin`, `scenes.bin`, `scripts.bin`,
   `textbin_german.bin`), `Movie/`, `msx/`.
-- Renderer: Direct3D 8 (GOLD links d3dx8 statically — 907 LIBRARY functions;
-  DX8.1 SDK). Audio: Miles (mss32) — ASI scan only when audio init succeeds
-  (netfix harness finding). 2D fallback: DirectDraw/VESA (`dd_vesa`).
+- Renderer: Direct3D 8 (GOLD links d3dx8 statically — 907 `LIBRARY: D3DX8`
+  markers in `library_d3dx8.h`, count re-verified round 39; DX8.1 SDK).
+  Imports: d3d8 (Direct3DCreate8), DDRAW, DINPUT8, mss32 (`_AIL_stream_*` —
+  Miles; ASI scan only when audio init succeeds per netfix harness).
+  2D fallback: DirectDraw/VESA (`dd_vesa`).
 
 ## 10. Community ecosystem
 
