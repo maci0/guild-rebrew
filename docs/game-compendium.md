@@ -2,8 +2,9 @@
 
 Canonical game facts, binary inventory, and community ecosystem. Binary-derived
 claims cite VA / string / doc. Community and press claims cite URLs. Speculative
-entries marked as such. Link health swept round 19: all URLs 200 except the
-private MCP repo (404 for non-members) and the wiki (502).
+entries marked as such. Link health swept round 19, re-swept round 57: all URLs
+200 except the private MCP repo (404 for non-members) and the wiki (502,
+still down).
 
 ## 1. Game identity
 
