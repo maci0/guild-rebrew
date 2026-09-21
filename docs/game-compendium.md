@@ -27,7 +27,8 @@ still down round 70).
   historian/archive consults). €100,000 loan; demo after 1 year; Infogrames deal
   collapsed after FR-office "chaos"; JoWooD signed winter 2001. RU publisher:
   Руссобит-М. Per [ru wiki](https://ru.wikipedia.org/wiki/Europa_1400:_The_Guild).
-- Ratings/media: USK 0, PEGI 3+. Languages: German + English. Media:
+- Ratings/media: USK 0, PEGI 3+, ESRB Teen (cs wiki). Languages: German +
+  English (Steam full audio; database lists en/de/ru editions). Media:
   CD-ROM/DVD-ROM/download. Controls: keyboard + mouse. Entry at MobyGames
   (bot-walled, 403 on fetch — search "Europa 1400: The Guild" there).
   Official sites (archived): [diegilde.de](https://web.archive.org/web/20161018162253/http://www.diegilde.de/),
