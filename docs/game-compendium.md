@@ -53,8 +53,8 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
 | Binary | Role | Status here |
 |---|---|---|
 | `original/Server/server.dll` | Dedicated server, game logic | Active reversing target, 283 annotated functions, 188 .c files |
-| `original/Europa1400Gold_TL.exe` | T&L client, shared game logic | Active focus, 6335 discovered, 181 annotated, 180 .c files |
-| `original/Europa1400Gold.exe` | Base client | Validation target, 4638 discovered, 324 annotated |
+| `original/Europa1400Gold_TL.exe` | T&L client, shared game logic | Active focus, 6335 discovered, 175 annotated |
+| `original/Europa1400Gold.exe` | Base client | Validation target, 4638 discovered, 330 annotated |
 
 `server.dll` exports: `Init` (0x10009320), `Exit` (0x10009350). Image base
 0x10000000. Exactly 100 imports, 4 DLLs, no `.idata` (IAT at `.rdata` head).
@@ -122,6 +122,16 @@ artefact).
   [network.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/network.md),
   unverified here): server→client 0x02/0x04/0x08/0x09/0x1E/0x20;
   client→server 0x01/0x02/0x06/0x07/0x08/0x0D/0x0E/0x0F/0x11–0x13/0x1D/0x1E/0x5F–0x61.
+- Root-cause detail (per
+  [problem-analysis](https://github.com/maci0/europa1400-networkfix/blob/main/docs/problem-analysis.md)):
+  packet validator at server.dll RVA 0x3720 sets persistent `ctx[0xE]` error
+  flags (-3 checksum, -1 stream) with no recovery; `GetTickCount` sync assumes
+  LAN timing; town-data transfer throttled by `Sleep(30)` pump
+  (`NETWORKFIX_FASTSYNC` clamps to 1 ms).
+- Config: `game.ini` `[Network]` `ServerPath` (fallback `Server\server.dll`),
+  port default 2303. Env toggles: `NETWORKFIX_NODELAY`,
+  `NETWORKFIX_FASTSYNC`. Version table (SHA256 + hook RVAs) in
+  [server-dll-versions](https://github.com/maci0/europa1400-networkfix/blob/main/docs/server-dll-versions.md).
 
 ## 8. Community ecosystem
 
@@ -130,7 +140,7 @@ artefact).
 | [europa1400-database](https://github.com/europa1400-community/europa1400-database) | Editions/versions/patches/executables YAML + mkdocs |
 | [europa1400-decompilation](https://github.com/europa1400-community/europa1400-decompilation) | server.dll outline, function table, network.md (confidence-scored, partly renamed) |
 | [Europa1400.Tools](https://github.com/europa1400-community/Europa1400.Tools) | .NET asset tools; structs Ageb Aobj Bgf Gfx Sbf Vector3 |
-| [europa1400-tools](https://github.com/europa1400-community/europa1400-tools) | Python asset decode/convert/export |
+| [europa1400-tools](https://github.com/europa1400-community/europa1400-tools) | Python asset decode/convert/export: formats ageb aobj baf bgf ed3 gfx ogr sbf txs; converters incl. bgf→gltf/wavefront |
 | [europa1400-imhex](https://github.com/europa1400-community/europa1400-imhex) | ImHex patterns: ageb aobj baf bgf cty ed3 form gfx ogr res sbf scr txs |
 | [europa1400-hooks](https://github.com/europa1400-community/europa1400-hooks) | HookDLL netfix predecessor (MinHook, Zig) |
 | [europa1400-manager](https://github.com/europa1400-community/europa1400-manager) | Manager/launcher (Python project scaffold) |
@@ -139,8 +149,8 @@ artefact).
 | [europa1400-memory-editor](https://github.com/europa1400-community/europa1400-memory-editor) | Memory editor (x86 C++ DLL injected via LordPE/Cheat Engine) |
 | [europa1400-ghidra-mcp](https://github.com/europa1400-community/europa1400-ghidra-mcp) | Ghidra MCP (private) |
 | [die-gulde](https://github.com/europa1400-community/die-gulde) | Unity remake homage |
-| [networkfix](https://github.com/maci0/europa1400-networkfix) | Supported netfix .asi, harness-tested 15 game-years |
-| [europa1400-lua](https://github.com/maci0/europa1400-lua) | In-process LuaJIT RE console: scan/valuescan/pointer/hook/game.call; catalog 4463 candidates, all unverified |
+| [networkfix](https://github.com/maci0/europa1400-networkfix) | Supported netfix .asi, harness-tested 15 game-years; docs: architecture, problem-analysis, server-dll-versions, configuration |
+| [europa1400-lua](https://github.com/maci0/europa1400-lua) | In-process LuaJIT RE console: scan/valuescan/pointer/hook/game.call; catalog 4463 candidates, all unverified; docs: API, USAGE, EXAMPLES, TROUBLESHOOTING |
 | [rebrew](https://github.com/maci0/rebrew) | This repo's decomp toolchain (MSVC6-in-Docker matching) |
 | Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502) |
 
