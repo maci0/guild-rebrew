@@ -87,6 +87,11 @@ still down).
   with de wiki's multiplayer verdict and §7 netcode.
 - Attributes (0–6 stars): Negotiation, Handicraft, Stealth/Guile, Combat,
   Rhetoric. Heir takes over at death (age 12+); childless death = game over.
+  Per [uk wiki](https://uk.wikipedia.org/wiki/Europa_1400:_The_Guild): exactly ONE heir;
+  school at 8 (profession), university at 12 (stats); market = supply/demand +
+  random events; low Handicraft → hire master (profit drops); titles unlock
+  residences/palaces/castles; mastery upgrade every 4 years. Cities (uk, 6):
+  Berlin, London, Madrid, Milan, Nuremberg, Paris. Release (uk): 25 Oct 2002.
   Time: one game day ages character one year (ru wiki). RU reviews: Igromania
   9.0/10, PlayGround 9.5/10, Absolute Games 75%, Strana Igr 7.0/10; MobyRank 77.
 - Action points ([cs wiki](https://cs.wikipedia.org/wiki/Europa_1400:_The_Guild)):
