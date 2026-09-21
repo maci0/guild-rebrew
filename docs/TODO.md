@@ -33239,3 +33239,13 @@ instruction in the wrong place" question.
   gap); wine load err=193; residue 8630 vs 8628; data-extent s_rb_1002944c char[] size=84
   crossing g_gzip_magic_1f (rebrew-data.toml entry predates, vfs4.c defines char[4]).
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 102 (46 exact/56 reloc), lint err 0.
+
+### Round 1259 / session R121 (GOLDTL: fcn_0053d690 SIZE -> NEAR 49/50)
+- **fcn_0053d690 (0x4c4900):** SIZE (obj 52) -> NEAR 49/50 (obj 50 exact). The index was a
+  wrong-factor scalar multiply; target does `mov ax,[0x774970](word); lea*3; lea*5; lea*9;
+  [eax*4+0x7f4ca4]` = word*135*4 = *540 buffer-index. Spelling `* (unsigned)word *135*4` emits
+  the lea chain exactly (26 easy->12 structural). Remaining wall: the store is `[esp+0x10]` in
+  mine vs `[esp+8]` — MSVC6 aligns buf to [esp+0x10] (frame 0x7c), target packs buf at [esp].
+  8 spellings (cast/no-cast/width/reverse/buf-size/buf[]-variants) all land the same slot;
+  franche allocator frame-layout wall. Registered for future RR leverage; obj is byte-exact-50.
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 102 (46 exact/56 reloc), lint err 0.
