@@ -23,7 +23,9 @@ entries marked as such.
 - Life sim + realtime + role-play + nonlinear. Full 3D engine, bird's-eye
   camera, zoom, interiors enterable. Left-click select, right-click deselect.
 - Self-created protagonist, 12 professions, missions or open-ended sim.
-- Dynasty to power/wealth in historic European cities. Multiplayer to 8 players.
+- Dynasty to power/wealth in historic European cities. Multiplayer to 8 players
+  (press claim; server binary defaults `g_max_players` 2, lobby enforces the
+  passed-in value).
 - Playable cities: London (easiest), Berlin, Madrid, Nuremberg, Paris, Milan
   (hardest). Game ends ~1800–1815 (end of feudal era framing).
 - Professions in three groups (per [C.O.R.E. guide](https://core-rpg.net/articles/the-guild-guide)):
@@ -134,8 +136,13 @@ artefact).
   flags (-3 checksum, -1 stream) with no recovery; `GetTickCount` sync assumes
   LAN timing; town-data transfer throttled by `Sleep(30)` pump
   (`NETWORKFIX_FASTSYNC` clamps to 1 ms).
-- Config: `game.ini` `[Network]` `ServerPath` (fallback `Server\server.dll`),
-  port default 2303. Env toggles: `NETWORKFIX_NODELAY`,
+- Config: server.dll itself reads `game.ini` keys `General`/`GamePath` and
+  `Config`/`Port` beside the module path (`GetPrivateProfileIntA/StringA` in
+  `ServerMainThread.c`); `g_max_players` defaults 2, overridable from the
+  startup block. The `[Network]` `ServerPath` key + port 2303 belong to the
+  networkfix plugin's
+  [configuration](https://github.com/maci0/europa1400-networkfix/blob/main/docs/configuration.md),
+  not the game binary. Env toggles: `NETWORKFIX_NODELAY`,
   `NETWORKFIX_FASTSYNC`. Version table (SHA256 + hook RVAs) in
   [server-dll-versions](https://github.com/maci0/europa1400-networkfix/blob/main/docs/server-dll-versions.md).
 
