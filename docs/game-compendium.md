@@ -155,12 +155,13 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | Repo | What |
 |---|---|
 | [europa1400-database](https://github.com/europa1400-community/europa1400-database) | Editions/versions/patches/executables YAML + mkdocs |
-| [europa1400-decompilation](https://github.com/europa1400-community/europa1400-decompilation) | server.dll outline, function table, network.md (confidence-scored, partly renamed) |
+| [europa1400-decompilation](https://github.com/europa1400-community/europa1400-decompilation) | server.dll outline, function table, network.md (confidence-scored, partly renamed); full `server.dll.c` pseudo-C dump (~1 MB) |
+| [fuse_file_access_monitor](https://github.com/europa1400-community/fuse_file_access_monitor) | FUSE file-access monitor prototype (fusers+iced), supports asset research |
 | [Europa1400.Tools](https://github.com/europa1400-community/Europa1400.Tools) | .NET asset tools; structs Ageb Aobj Bgf Gfx Sbf Vector3 |
 | [europa1400-tools](https://github.com/europa1400-community/europa1400-tools) | Python asset decode/convert/export: formats ageb aobj baf bgf ed3 gfx ogr sbf txs; converters incl. bgf→gltf/wavefront |
 | [europa1400-imhex](https://github.com/europa1400-community/europa1400-imhex) | ImHex patterns: ageb aobj baf bgf cty ed3 form gfx ogr res sbf scr txs |
 | [europa1400-hooks](https://github.com/europa1400-community/europa1400-hooks) | HookDLL netfix predecessor (MinHook, Zig) |
-| [europa1400-manager](https://github.com/europa1400-community/europa1400-manager) | Manager/launcher (Python project scaffold) |
+| [europa1400-manager](https://github.com/europa1400-community/europa1400-manager) | Manager/launcher (Python+GUI): modules config/info/license/overview/patch; patch types archive/simple; consumes europa1400-database YAMLs |
 | [europa1400-docker](https://github.com/europa1400-community/europa1400-docker) | Docker run env (empty repo) |
 | [europa1400-network-bridge](https://github.com/europa1400-community/europa1400-network-bridge) | Network bridge (Python spec + package) |
 | [europa1400-memory-editor](https://github.com/europa1400-community/europa1400-memory-editor) | Memory editor (x86 C++ DLL injected via LordPE/Cheat Engine) |
@@ -169,6 +170,10 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [networkfix](https://github.com/maci0/europa1400-networkfix) | Supported netfix .asi, harness-tested 15 game-years; docs: architecture, problem-analysis, server-dll-versions, configuration |
 | [europa1400-lua](https://github.com/maci0/europa1400-lua) | In-process LuaJIT RE console: 51 modules (memory/code/PE/domain/workflow); catalog candidates all `status="candidate"`, none with verified address; console is OEM code page (German needles = Latin-1 escapes); docs: API, USAGE, EXAMPLES, TROUBLESHOOTING |
 | [rebrew](https://github.com/maci0/rebrew) | This repo's decomp toolchain (MSVC6-in-Docker matching) |
+| [rebrew-toolchains](https://github.com/maci0/rebrew-toolchains) | Standalone legacy-compiler Docker images (MSVC 1.0–11.0, Borland, Watcom, Delphi); MSVC6 image is what `rebrew-cmake-cl` runs through |
+| [recoverage](https://github.com/maci0/recoverage) | Coverage dashboard for binary-matching decomp (per-byte .text/.data/.bss grid) |
+| [resembl](https://github.com/maci0/resembl) | Assembly similarity search |
+| [ghidra-cli](https://github.com/maci0/ghidra-cli) | Headless Ghidra automation (functions/symbols/strings/xrefs) for RE agents |
 | Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502) |
 
 ## 9. Repo doc map (this checkout)
