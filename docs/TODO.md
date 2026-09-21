@@ -33369,3 +33369,6 @@ instruction in the wrong place" question.
   + epilogue order). gv_ValidateEntityAction / gv_UpdateProductionProgress parked at their NEAR states.
 - **Tooling:** TOML became r--r--r-- mid-session; restored via chmod u+w + git show redirect.
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 109 (47 exact/62 reloc), lint err 0, tree clean.
+
+### Round 1277 / session R230-237 (flat)
+- GOLDTL held at 109. Padding walls (cm_ChkEntityLookup, cm_ChkJoinLeaveElection) not --size-promotable; fcn_0053d690 98% frame wall; CloseVfsStream big+protected. Gates server 281/2, GOLD 208/122, GOLDTL 109, lint 0, tree clean.
