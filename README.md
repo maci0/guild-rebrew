@@ -80,11 +80,12 @@ the `rebrew/msvc:6.0-sp6-win32` docker image (see `cmake/toolchain-msvc-6.0-sp6-
 
 | Target | Binary | Status |
 |--------|--------|--------|
-| `server.dll` | `original/Server/server.dll` | Active: 561 functions, 330 byte-exact, verify 278/280 |
-| `Europa1400Gold_TL.exe` | `original/Europa1400Gold_TL.exe` | Onboarded: 6335 functions discovered, 29 sources, 3 byte-exact |
+| `server.dll` | `original/Server/server.dll` | Active: 283 annotated functions, 188 .c files |
+| `Europa1400Gold_TL.exe` | `original/Europa1400Gold_TL.exe` | Active focus: 6335 discovered, 181 annotated |
+| `Europa1400Gold.exe` | `original/Europa1400Gold.exe` | Validation: 4638 discovered, 324 annotated |
 
-`original/Europa1400Gold.exe` appears in `reccmp-project.yml` but is not a
-rebrew target.
+Game knowledge: [docs/game-compendium.md](docs/game-compendium.md) — canonical
+compendium (game, binaries, tree, network, community ecosystem).
 
 ## License
 
