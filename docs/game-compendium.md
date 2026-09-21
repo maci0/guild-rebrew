@@ -52,7 +52,7 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
 
 | Binary | Role | Status here |
 |---|---|---|
-| `original/Server/server.dll` | Dedicated server, game logic | Active reversing target, 283 annotated functions, 188 .c files |
+| `original/Server/server.dll` | Dedicated server, game logic | Active reversing target, 283 annotated (of 543 discovered) |
 | `original/Europa1400Gold_TL.exe` | T&L client, shared game logic | Active focus, 6335 discovered, 175 annotated |
 | `original/Europa1400Gold.exe` | Base client | Validation target, 4638 discovered, 330 annotated |
 
@@ -150,7 +150,7 @@ artefact).
 | [europa1400-ghidra-mcp](https://github.com/europa1400-community/europa1400-ghidra-mcp) | Ghidra MCP (private) |
 | [die-gulde](https://github.com/europa1400-community/die-gulde) | Unity remake homage |
 | [networkfix](https://github.com/maci0/europa1400-networkfix) | Supported netfix .asi, harness-tested 15 game-years; docs: architecture, problem-analysis, server-dll-versions, configuration |
-| [europa1400-lua](https://github.com/maci0/europa1400-lua) | In-process LuaJIT RE console: scan/valuescan/pointer/hook/game.call; catalog 4463 candidates, all unverified; docs: API, USAGE, EXAMPLES, TROUBLESHOOTING |
+| [europa1400-lua](https://github.com/maci0/europa1400-lua) | In-process LuaJIT RE console: 51 modules (memory/code/PE/domain/workflow); catalog candidates all `status="candidate"`, none with verified address; console is OEM code page (German needles = Latin-1 escapes); docs: API, USAGE, EXAMPLES, TROUBLESHOOTING |
 | [rebrew](https://github.com/maci0/rebrew) | This repo's decomp toolchain (MSVC6-in-Docker matching) |
 | Wiki | [europa1400-wiki.eulenet.io](https://europa1400-wiki.eulenet.io/) (down 2026-09-21, HTTP 502) |
 
