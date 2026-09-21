@@ -8,6 +8,15 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 
 void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 
+extern void (*g_panic_callback)(void);
+extern unsigned int g_log_mode_flags;
+extern int g_owner_window;
+extern char g_log_message_buffer[];
+extern char s_ERROR_Handler_has_not_been_100273fc[];
+extern char s_Error_10027424[];
+extern char s_FATAL_ERROR_s_lu_s_100273e0[];
+extern char s_Fatal_Error_Abort_Program_100273c4[];
+
 // FUNCTION: GOLDTL 0x41d8b0
 // SIZE: 160
 // ReportFatalError

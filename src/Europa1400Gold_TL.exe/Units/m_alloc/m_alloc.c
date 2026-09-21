@@ -1,5 +1,23 @@
 /* m_FreeTracked — debug-heap tracked free (0x10006820). */
 
+extern int g_array_count;
+extern int g_stat1;
+extern int g_stat2;
+extern int g_stat3;
+extern int g_stat4;
+extern void *g_array_ptr;
+extern void *__cdecl malloc(unsigned int size);
+extern int g_alloc_root_name;
+extern int g_alloc_root_name_4;
+extern int g_default_group_name;
+extern int g_default_group_name_4;
+extern int g_alloc_root_count;
+extern int g_alloc_root_size_total;
+extern int g_alloc_root_count_max;
+extern int g_alloc_root_size_max;
+extern int g_alloc_root_field_20;
+extern int g_list_head;
+
 // FUNCTION: GOLDTL 0x41de50
 // SIZE: 162
 // m_init
