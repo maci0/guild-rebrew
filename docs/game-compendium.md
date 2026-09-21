@@ -173,6 +173,15 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   (`gv_ExAllocGraveyardWorker`, `gv_AllocGraveyardField`,
   `gv_SpawnEntities`, filter `gv_eval_SlotFrei`); `plt_` plant/zones
   (`plt_SetPlantMap`, `plt_FindRecord`, `plt_CheckZoneAvailability`).
+- Game core `gm_` (`spiel.c`, largest module): entity lifecycle
+  (`gm_AllocSpieler`, `gm_KillSpieler`, `gm_ChangePlayerIdentityImpl`),
+  buildings (`gm_AllocGebaeude`, `gm_AllocRaum`, `gm_CleanupBuildingEntity`,
+  `gm_GetBuildingTypeCategory`), objects (`gm_AllocObjekt`, `gm_AddObjekt`,
+  `gm_SubObjekt`, `gm_AllocateObjectSlot`, `gm_FreeObjectListRecursive`,
+  `gm_ObjectsAvailble`), queries (`gm_FindSlotById`, `gm_FindEntityByOwner`,
+  `gm_CheckEntityType`, `gm_CheckInventoryCapacity`, `gm_eval_SlotVoll`,
+  `gm_ff_Objekt`), random (`gm_RandomFloat01`, `gm_RandomQuadratic`,
+  `gm_RandomStatModifier`).
 - Lobby dispatch `lb_ExLobbyServerCommand` (0x10014db0): 7-way switch on
   `*(int*)(msg+0x10)`: 0 Playerlist, 1 LobbyConfig, 2 PlayerHasJoined,
   3 BroadcastStateChange, 4 PlayerRecordBroadcast, 5 EntitySync, 6 route to `cm_`.
