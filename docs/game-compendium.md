@@ -168,7 +168,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | Repo | What |
 |---|---|
 | [europa1400-database](https://github.com/europa1400-community/europa1400-database) | Editions/versions/patches/executables YAML + mkdocs |
-| [europa1400-decompilation](https://github.com/europa1400-community/europa1400-decompilation) | server.dll outline, function table, network.md (confidence-scored, partly renamed); full `server.dll.c` pseudo-C dump (~1 MB) |
+| [europa1400-decompilation](https://github.com/europa1400-community/europa1400-decompilation) | server.dll outline, function table (243 VAs), network.md (confidence-scored, partly renamed); full `server.dll.c` pseudo-C dump (~1 MB). VA reconciliation round 21: 127/243 overlap our tree; 31 community-only are zlib-band (stock, correctly absent here); 91 game-code VAs (0x10006xxx–0x1001bxxx incl. CRT/lobby/loadsave) not annotated here — candidate import list, names unverified |
 | [fuse_file_access_monitor](https://github.com/europa1400-community/fuse_file_access_monitor) | FUSE file-access monitor prototype (fusers+iced), supports asset research |
 | [Europa1400.Tools](https://github.com/europa1400-community/Europa1400.Tools) | .NET asset tools; structs cover Ageb (buildings/coords), Bgf (faces/polygons/skeleton/models), Gfx (graphics/shapebanks), Sbf (soundbanks), Aobj, Vector3 |
 | [europa1400-tools](https://github.com/europa1400-community/europa1400-tools) | Python asset decode/convert/export: formats ageb aobj baf bgf ed3 gfx ogr sbf txs; converters incl. bgf→gltf/wavefront |
