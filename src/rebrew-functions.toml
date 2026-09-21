@@ -1265,7 +1265,7 @@ size = 3689
 cflags = "/O2 /Gd /Oa /Ow"
 status = "STUB"
 note = "SIZE 3209/3689 (480B short): full C reconstruction of the 3689-byte target (slot scan, refs zeroing, record header init, debug log, type-0x10 citizen path, gender/class checks, parent resolution, stat interpolation, per-type finalization, id assignment). Candidate contains the full tail (diff nulls are aligner drift) but msvc6 codegen diverges structurally: 909 vs 1056 instructions, edge_sim 7.6% (near-diag STRUCTURAL 92%), FPU scheduling + branch layout differences throughout. prove path-explodes (no terminal states, LB 10/20). Status promoted STUB->SIZE_MISMATCH 2026-08-30 (was stale from the naked-asm era). Semantics verified identical by hand."
-blocker = "132 distributed schedule steps, no cliff; in-hunk clusters are parent-wins 344B, refs-scan 220B, no-parent trait 181B, record-header 140B; ndiff 731/1056 in 171 hunks, cdiff 808/1056 in 156 (round 186)"
+blocker = "GA_CEILING: Jev oracle 2026-09-21 (document_ceiling 0.83, fix_landable 0.37): known slot[9]=(char)arg8 fix unlandable (+184/+393 tail desync, measured twice); residual folded-cmp + two-arm stores + 132 distributed schedule steps, no cliff (round 186)"
 updated_by = "test"
 updated_at = "2026-09-13T18:49:57+00:00"
 blocker_delta = 2859
@@ -4506,9 +4506,10 @@ updated_at = "2026-09-21T10:32:44+00:00"
 
 ["GOLDTL.0x004e7f20"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"
-status = "COMPILE_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-21T10:30:59+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-21T16:03:11+00:00"
+size = 208
 
 ["GOLDTL.0x004e8940"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/server.dll/DieGildeAddOn/game"

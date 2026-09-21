@@ -13,6 +13,10 @@
  * copy_12_dwords is byte-identical, this copy names the touched fields). */
 #include "game_structs.h"
 
+extern char g_office_slots[];
+
+unsigned char *__cdecl fcn_00508e40(int id);
+
 // FUNCTION: GOLDTL 0x4e7f20
 // SIZE: 208
 
@@ -24,7 +28,7 @@ int __cdecl amt_ValidateOfficeCandidate(int* arg1)
 	OFFICE_SLOT* p;
 	int i;
 
-	rec = gm_LookupEntityRecordById(arg1[0]);
+	rec = fcn_00508e40(arg1[0]);
 	if (rec == 0 || rec[0x168] != 0)
 		return 0;
 
