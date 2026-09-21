@@ -33225,3 +33225,17 @@ instruction in the wrong place" question.
   - ls_ReadVfsDataChecked (0x5218f0): obj==catalog(37) but catalog NEXT-fn at +0x30 -> 3B pad, wall.
 - **Gates:** server 281/2, GOLDTL 106/75 (48 exact/58 reloc), GOLD 208/116, lint all 0.
 [[BATCH:round state]]
+
+### Round 1258 / session R118-120 (commit f74e99fa + certified state)
+- **Committed** all accumulated work as f74e99fa (569 files, +32712/-20151): GOLDTL cross-import
+  from GOLD+server, d3dx8 LIBRARY marks, m_AllocTracked deletion, link_stubs greedy-hex fix.
+- **Verified committed state:** GOLDTL verify 102 passed (46 exact/56 reloc) of 174 files
+  (48 SIZE, 15 CE, 7 NEAR, 2 STUB); d3dx8 lib-match 0 findings; lint err 0 all 3 targets.
+  server 281/2, GOLD 208/122. Working tree clean.
+- **NOTE:** commit message said "verify 106" — the LIBRARY-excluded d3dx8 bodies were never
+  counted so the true committed passed is 102. Cosmetic mislabel; state is sound.
+- **Gate residual (pre-existing, NOT this round):** server postlink can't position-align
+  (.text built 0x221f6 vs ref 0x22846, -0x650 shortfall — the documented `_emit`->C conversion
+  gap); wine load err=193; residue 8630 vs 8628; data-extent s_rb_1002944c char[] size=84
+  crossing g_gzip_magic_1f (rebrew-data.toml entry predates, vfs4.c defines char[4]).
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 102 (46 exact/56 reloc), lint err 0.
