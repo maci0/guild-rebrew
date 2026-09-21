@@ -176,7 +176,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 | [europa1400-docker](https://github.com/europa1400-community/europa1400-docker) | Docker run env (empty repo) |
 | [europa1400-network-bridge](https://github.com/europa1400-community/europa1400-network-bridge) | Asyncio TCP proxy bridge (server/client port-forward roles, GUI+config) |
 | [europa1400-memory-editor](https://github.com/europa1400-community/europa1400-memory-editor) | Memory editor (x86 C++ DLL injected via LordPE/Cheat Engine) |
-| [europa1400-ghidra-mcp](https://github.com/europa1400-community/europa1400-ghidra-mcp) | Ghidra MCP (private) |
+| [europa1400-ghidra-mcp](https://github.com/europa1400-community/europa1400-ghidra-mcp) | Ghidra MCP (private — link 404s for non-members) |
 | [die-gulde](https://github.com/europa1400-community/die-gulde) | Unity (6000.0.43f1) remake homage, early development, not yet playable |
 | [networkfix](https://github.com/maci0/europa1400-networkfix) | Supported netfix .asi, 15 game-years VPN-stable; headless harness (2 Wine containers, xdotool-driven, A/B baseline via `NETWORKFIX_DISABLE=1`); docs: architecture, problem-analysis, server-dll-versions, configuration |
 | [europa1400-lua](https://github.com/maci0/europa1400-lua) | In-process LuaJIT RE console: 51 modules (memory/code/PE/domain/workflow); catalog candidates all `status="candidate"`, none with verified address; console is OEM code page (German needles = Latin-1 escapes); docs: API, USAGE, EXAMPLES, TROUBLESHOOTING |
