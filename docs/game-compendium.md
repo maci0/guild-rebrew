@@ -111,7 +111,7 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
 
 | Binary | Role | Status here |
 |---|---|---|
-| `original/Server/server.dll` (286,720 bytes) | Dedicated server, game logic | Active reversing target, 283 annotated (of 543 discovered) |
+| `original/Server/server.dll` (286,720 bytes) | Dedicated server, game logic | Active reversing target, 283 annotated (of 543 discovered); verify round 55: 281 passed, 264 byte-matched (31 EXACT + 233 RELOC), 2 failed |
 | `original/Europa1400Gold_TL.exe` (2,850,888 bytes) | T&L client, shared game logic | Active focus, 6335 discovered, 174 annotated |
 | `original/Europa1400Gold.exe` (2,301,952 bytes) | Base client | Validation target, 4638 discovered, 330 annotated |
 
