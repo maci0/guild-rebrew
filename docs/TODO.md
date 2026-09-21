@@ -33269,3 +33269,12 @@ instruction in the wrong place" question.
   allocator data defined), ahm_AllocateEntitySlot (complex float builder), cm_ChkEntityLookup 0x4cc490
   (padding wall), CloseVfsStream/vfs_OpenStream STUBs (big flag-driven builders).
 - **Gates:** server 281/2, GOLD 208/122, GOLDTL 104 (46 exact/58 reloc), lint err 0.
+
+### Round 1262 / session R124 (GOLDTL: cm_MarkAndReturn EXACT 14/14 via --size)
+- **GOLDTL 104 -> 105.** cm_MarkAndReturn (0x4c75e0, cm_MarkAndReturn.c) -> EXACT 14/14. Byte-identical
+  body (`if(result) *result=1; return 0;`) stuck SIZE because source inline `// SIZE: 32` was stale
+  (real span 14). `rebrew test --size 14` -> EXACT; then corrected source SIZE header to 14.
+- **Confirmed lever:** for byte-perfect bodies stuck on stale metadata/inline size, `rebrew test --size <N>`
+  promotes (--fix-sizes alone does not handle wrong-size claims including a trailing pad). Applies to any
+  SIZE_MISMATCH with match==obj and 0 true diffs. gm_IsInRange was the first; this is the second.
+- **Gates:** server 281/2, GOLD 208/122, GOLDTL 105 (47 exact/58 reloc), lint err 0.

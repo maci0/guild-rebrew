@@ -18,7 +18,7 @@
  */
 
 // FUNCTION: GOLDTL 0x4c75e0
-// SIZE: 32
+// SIZE: 14
 int __cdecl cm_MarkAndReturn(int cmd, char* result)
 {
 	(void) cmd;
