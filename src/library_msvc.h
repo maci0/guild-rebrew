@@ -8,7 +8,7 @@
 // SIZE: 14
 
 // LIBRARY: SERVER 0x1001A18A
-// _fflush
+// _fclose
 
 // LIBRARY: SERVER 0x1001A1BB
 // __fclose_lk
@@ -85,7 +85,7 @@
 // SIZE: 215
 
 // LIBRARY: SERVER 0x1001AC9F
-// _fclose
+// __fflush_lk
 // SIZE: 46
 
 // LIBRARY: SERVER 0x1001ACCD

@@ -7,7 +7,7 @@ extern unsigned char g_file_write_mode[3];
 extern void* g_crash_callback;
 
 // GLOBAL: SERVER 0x1003461c
-int g_crash_dump_all_frames = 0;
+extern char g_crash_dump_all_frames; /* 0x117660e0 - byte access in this TU */
 
 // FUNCTION: SERVER 0x10003320
 // InitializeLogAndErrorHandler
