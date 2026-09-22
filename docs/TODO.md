@@ -34012,3 +34012,20 @@ instruction in the wrong place" question.
   (`edx`/`ecx` live across `call`), which MSVC only does for a callee it can analyse.
 - **Measured:** GOLDTL 249 -> **266** (exact 101, reloc 165), GOLD 213 and SERVER 281/264 unchanged,
   zero demotions/losses, lint 750/750.
+
+### Round 1307 / session R282 (GOLDTL +11 — eighth batch)
+- 11 more: `fcn_0040c430` (`rand() % *p` with a zero-check), `fcn_0041a950`/`fcn_0041f330` (range-guarded
+  table lookup, `p+0x114` getter), `fcn_0042e520` (conditional tail-call), `fcn_00442be0`
+  (null-guarded double call, `char` return), `fcn_0044c0c0` (`float` getter with a default from
+  `.rdata`), `fcn_00464a70` (null check returning -0x66 then two field copies), `fcn_0047a070`
+  (offset table + base), `fcn_0047b620` (count-guarded indexed load), `fcn_00495960`
+  (`a1 != 0 → 0`, else `a3 == 0 ? 6 : 0`), `fcn_00477500` (two `short` clears).
+- **Null-check polarity is the whole function.** `fcn_00442be0` and `fcn_0044c0c0` were 17/32 and 14/39
+  with `if (p == 0) return default;` and matched only after inverting to
+  `if (p != 0) { ... return x; } return default;` — MSVC lays the *then* block out as fallthrough, so
+  the branch polarity in the C decides whether the emitted test is `je` or `jne`.
+- **Parked:** `fcn_0041b1c0` (MSVC folds our `base + (i-0x14)*0xc` into one `lea`; the reference keeps
+  `3*(i-0x14)` then a scaled `lea`), `fcn_00468cd0` (same folding), `fcn_0041f9b0`, and the vtable-call
+  pair `fcn_004760c0`/`fcn_004774b0`.
+- **Measured:** GOLDTL 266 -> **277** (exact 108, reloc 169), GOLD 213 and SERVER 281/264 unchanged,
+  zero demotions/losses, lint 761/761.
