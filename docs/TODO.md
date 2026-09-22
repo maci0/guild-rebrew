@@ -35066,3 +35066,21 @@ instruction in the wrong place" question.
   explicit `p = base + b`, grows an extra 8 bytes, 10/54 for all four spellings), plus the earlier list.
 - **Measured:** GOLDTL 574 -> **576** byte-matched (exact 221, reloc 355, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1059/1059 (0 warnings).
+
+### Round 1349 / session R320 (GOLDTL +6 — fiftieth batch: packed 14-byte record copies, 0x52 / 0xb4 / 0x44)
+- Six EXACT, all one family: `fcn_00549b50`, `fcn_0054b420`, `fcn_005650d0` (global 0x7f4c00 → `a1+0x52`)
+  and `fcn_00561250`, `fcn_00564f90`, `fcn_00566920` (`a1+0xb4` / `a1+0x44` → `a1+0x52`).
+- **A struct whose last member makes the size non-multiple-of-4 must be `#pragma pack(1)`.** The record is
+  `{ int f0; int f4; int f8; unsigned short fc; }` — 0xe bytes. With the default pack, `sizeof` rounds to
+  0x10, so the copy compiles as **four** dword moves (`8b 49 0c` / `89 48 0c`) and misses the reference's
+  `mov cx,[ecx+0xc]` / `mov [eax+0xc],cx` (29/38). `#pragma pack(push, 1)` makes `sizeof` 0xe and the copy
+  becomes three dwords plus one word — EXACT for all three a1-relative copies (38/38, 35/35, 35/35).
+- **Copying *from an absolute address* as a struct makes MSVC materialise the source pointer**
+  (`mov ecx,0x7f4c00` at 37 bytes); copying field by field keeps the absolute addressing but folds the
+  destination offset into every store. **Modify the parameter instead of building a new pointer**: with
+  `a1 += 0x52;` MSVC emits the reference's `add eax,0x52` followed by bare `[eax]`/`[eax+4]`/`[eax+8]`/
+  `[eax+0xc]` stores (45/45). A local pointer (`p = a1 + 0x52;`, `int p = (int)a1 + 0x52;`) is folded into
+  `[eax+0x52]` and comes out 2 bytes short (11/45) every time — the parameter variable is the one MSVC
+  will keep live and mutate.
+- **Measured:** GOLDTL 576 -> **582** byte-matched (exact 227, reloc 355, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1065/1065 (0 warnings).
