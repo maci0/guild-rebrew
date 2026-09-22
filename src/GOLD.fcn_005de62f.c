@@ -1,5 +1,3 @@
-// FUNCTION: GOLDTL 0x459b80
-// SIZE: 53
 // FUNCTION: GOLD 0x005de62f
 // SIZE: 56
 // fcn_005de62f — init 7 function-pointer globals.

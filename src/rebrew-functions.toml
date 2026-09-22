@@ -2744,9 +2744,9 @@ updated_at = "2026-09-21T04:46:08+00:00"
 
 ["GOLD.0x004b39f0"]
 size = 22
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-21T04:43:08+00:00"
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T18:35:17+00:00"
 
 ["GOLD.0x004c6780"]
 size = 22
@@ -2783,9 +2783,9 @@ size = 22
 
 ["GOLD.0x00478860"]
 size = 22
-status = "EXACT"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T17:41:01+00:00"
+updated_at = "2026-09-22T18:35:17+00:00"
 
 ["GOLD.0x00427370"]
 size = 24
@@ -3903,9 +3903,9 @@ size = 36
 
 ["GOLD.0x004bf3e0"]
 size = 36
-status = "EXACT"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T17:41:01+00:00"
+updated_at = "2026-09-22T18:35:17+00:00"
 
 ["GOLD.0x00578020"]
 size = 36
@@ -5023,9 +5023,9 @@ updated_by = "test"
 updated_at = "2026-09-22T18:00:06+00:00"
 
 ["GOLDTL.0x00420760"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T18:23:33+00:00"
+updated_at = "2026-09-22T18:35:04+00:00"
 
 ["GOLDTL.0x0044cba0"]
 status = "EXACT"
@@ -5033,14 +5033,14 @@ updated_by = "verify"
 updated_at = "2026-09-22T18:23:33+00:00"
 
 ["GOLDTL.0x004b3b60"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T18:23:33+00:00"
+updated_at = "2026-09-22T18:35:04+00:00"
 
 ["GOLDTL.0x004bfc40"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T18:23:34+00:00"
+updated_at = "2026-09-22T18:35:04+00:00"
 
 ["GOLDTL.0x004d1d20"]
 status = "EXACT"
@@ -5048,9 +5048,10 @@ updated_by = "verify"
 updated_at = "2026-09-22T18:23:34+00:00"
 
 ["GOLDTL.0x004f0900"]
-status = "NEAR_MATCHING"
-updated_by = "verify"
-updated_at = "2026-09-22T18:23:34+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T18:33:18+00:00"
+size = 36
 
 ["GOLDTL.0x005079f0"]
 status = "RELOC"

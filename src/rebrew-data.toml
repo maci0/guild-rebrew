@@ -3206,3 +3206,27 @@ section = ".data"
 ["GOLDTL.0x00677acc"]
 name = "g_log_default_name"
 section = ".data"
+
+["GOLDTL.0x010069a0"]
+name = "g_10069a0"
+section = ".data"
+
+["GOLD.0x00f82320"]
+name = "g_10069a0"
+section = ".data"
+
+["GOLDTL.0x014cc360"]
+name = "g_14cc360"
+section = ".data"
+
+["GOLD.0x00f8aae0"]
+name = "g_14cc360"
+section = ".data"
+
+["GOLDTL.0x010058a0"]
+name = "g_10058a0"
+section = ".data"
+
+["GOLD.0x00f812a0"]
+name = "g_10058a0"
+section = ".data"

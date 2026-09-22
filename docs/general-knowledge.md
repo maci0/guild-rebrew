@@ -47,6 +47,11 @@ this file holds the rest.
   `0x4f1d20` (round 1291), `gm_StartFilteredEntitySearch` `0x502cd0` -> `0x503fe0` (round 1292). A bad
   VA also poisons every caller's REL32 validation, so a "wrong-callee" mismatch is often a wrong
   *catalogue* entry, not wrong C. Test a suspect file at both VAs before editing its body.
+- **A shared file can annotate one global once per target.** Two
+  `// GLOBAL: <marker> 0xVA` blocks each followed by the same declaration let one C body reference a
+  symbol whose address differs per binary; the compiler emits a relocation instead of a baked immediate
+  and both targets match. Used for `g_14cc360` (GOLDTL 0x14cc360 / GOLD 0xf8aae0), `g_10058a0`
+  (0x10058a0 / 0xf812a0) and `g_10069a0` (0x10069a0 / 0xf82320) in round 1294.
 - **Library code sits wherever the linker put it.** The T&L client's statically linked d3dx8.lib
   occupies `0x5e0000-0x64ffff` (~907 bodies) and is declared in `rebrew-project.toml` as
   `external_ranges`; the other static libs (CTLFW32, LUA50, MSS32, LIBCMT) have no contiguous band —

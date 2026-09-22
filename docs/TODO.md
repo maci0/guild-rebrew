@@ -33729,3 +33729,30 @@ instruction in the wrong place" question.
 - **Next:** the 11 unverified imports are real GOLDTL functions whose GOLD body differs (mostly
   1-2 instructions or a size delta) — each needs a twin or a per-target constant. Game VAs are
   0x420760, 0x427530, 0x459b80, 0x4b3b60, 0x4bfc40, 0x4e6ae0, 0x4f0900, 0x546fb0, 0x6508a3, 0x65c552.
+
+### Round 1294 / session R270 (GOLDTL +4; imported GOLD bodies de-baked; unverified stacks now withdrawn)
+- **The round-4 imports that were left unverified were noise, and the tool no longer writes them.** 12 of
+  the 14 added GOLDTL markers asserted that a GOLD body is the GOLDTL function at that VA while scoring
+  1/56-12/56 — those markers are gone, and `import_shared_function` now withdraws **every** failed
+  stack (not just ones colliding with an existing stub) and restores the pre-attempt cflags/status.
+  `cross-import` still reports what it tried.
+- **Baked GOLD addresses were the cause of three "near" imports, and symbols fix them.** A shared file
+  can hold the same global at two VAs with one `// GLOBAL:` block per target; the compile then emits a
+  relocation instead of an immediate and both binaries match:
+  - `fcn_00478860` (GOLDTL 0x420760 / GOLD 0x478860): buffer `0x14cc360` vs `0xf8aae0` — RELOC 22/22 both.
+  - `fcn_004bf3e0` (0x4bfc40 / 0x4bf3e0): table `0x10058a0` vs `0xf812a0` — RELOC 36/36 both.
+  - `fcn_004b39f0` (0x4b3b60 / 0x4b39f0): memset buffer `0x10069a0` vs `0xf82320` — RELOC 22/22 both.
+  Each new global carries `name` + `section = ".data"` in rebrew-data.toml (written through
+  `data_metadata.set_data_fields_batch`), so lint stays 0/0.
+- **`fcn_004eea70` was two client variants, not one.** GOLDTL 0x4f08d0 uses `x[0]=0x6154436e`,
+  0x4f0900 uses `x[0]=0x6454436e` — one byte apart, and the round-4 import had stacked the second
+  marker onto the first body (NEAR 35/36). Split: the shared file keeps 0x4f08d0 + GOLD 0x4eea70
+  (RELOC both), the new `GOLDTL.fcn_004f0900.c` holds the 0x6454436e variant (RELOC 36/36).
+- **Measured:** GOLDTL `verify --full` 130 -> **134** byte-matched (exact 54, reloc 80; tracked 194 ->
+  188 as the false claims left), GOLD 213 unchanged, SERVER 281/264 unchanged, zero demotions in either
+  client, lint 618/618.
+- **Next:** the remaining round-4 imports that stayed unverified are gone; the useful unverified GOLD
+  bodies still to look at are D3DX8-ish (`GOLD.fcn_005de62f` writes function pointers into the
+  0x62e3c8-0x62e3dc table — try `rebrew lib-match` before reversing it). Otherwise the near list is
+  `gv_UpgradeField` 99.8, `vfs_ReadCompressed` 94.1, `gm_StartFilteredEntitySearch` 94.0,
+  `cm_ChkEntityLookup` 93.2.
