@@ -34793,3 +34793,25 @@ instruction in the wrong place" question.
   roles in the inlined `memcpy`).
 - **Measured:** GOLDTL 530 -> **536** byte-matched (exact 183, reloc 353, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1019/1019 (0 warnings).
+
+### Round 1338 / session R310 (GOLDTL +5 — thirty-ninth batch: the 0x1052c60 / 0x68b400 record tables)
+- Five more, all EXACT: `fcn_0042df30`, `fcn_0042df70`, `fcn_004ce590`, `fcn_00508e40`,
+  `fcn_00531c00`.
+- **Search for the stride-lookup *shape*, not the address.** Filtering untracked functions for
+  `33c9 b8 <imm32>` + `39 10` (xor ecx,ecx; mov eax,base; cmp [eax],edx) found nine members of the
+  round-1337 family in one pass: the 0x1052c60 table (12-byte records, three setters/getters),
+  0x68b400 (92-byte records), 0x9a9660 (0x114 records with a live-flag byte at +0x30), 0x7f4ca0
+  (0x21c records with a `0xffff` guard word before the key) and 0x7e6068 (0x10c records, void setter).
+- **`jl` needs an `int` address; a `char*` walker gives `jb`.** `fcn_00508e40` was 46/56 with a
+  `char*` walker and EXACT once rewritten as `int a = 0x7f4ca4; for (; a < 0x85a0a4; a += 0x21c)`
+  with `*(unsigned short*)(a - 4)` for the pre-key guard word — the reference's loop pointer starts
+  *after* the guard, not at the record base.
+- **A void "finder + clear" needs no return value at all.** `fcn_00531c00`
+  (`for (...) if (*(int*)a == a1) { *(int*)(0x7e6068 + i * 268) = 0; return; }`) matches as `void`;
+  the reference's trailing `ret` simply leaves `eax` holding the address it was walking.
+- **Parked:** `fcn_0042def0` (the same 0x1052c60 setter as `fcn_0042df30`/`fcn_0042df70`, but the
+  found-path index lands in `ecx` where the reference has `eax`; every spelling of the store tried) and
+  `fcn_004e6a30` (0x114-record finder with a `+0x30` live-flag guard; ours is one `jne`/`je` polarity
+  off at byte 17).
+- **Measured:** GOLDTL 536 -> **541** byte-matched (exact 188, reloc 353, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1024/1024 (0 warnings).
