@@ -33461,3 +33461,19 @@ instruction in the wrong place" question.
   /tmp is a separate tmpfs no longer reachable by workspace writes). The committed marker fix + the
   postlink62.8% measurement are the round's verified results; the full `gate.sh` run could not complete.
   Truncated `build/split_poc.map` via the write tool to try to recover — did not free /tmp.
+- **/tmp recovered transiently; full `gate.sh` ran.** Result WITH the marker fix:
+  - PASS: build integrity, lint 0/0, compile 0 errors, verify 281/283 (264 byte-matched) baseline held,
+    data-extent clean (326), **imports match reference (100)** — build/server.dll now links far enough
+    to measure imports (was "not measured / no build/server.dll" in rounds 1282-1283).
+  - FAIL (newly quantified, the round-6 targets): **residue 12022 (0x2ef6, 8.50% of .text) vs baseline
+    8628**, **raw-link .data 25806 vs 21481**, **wine load err=193**. `.text` still 0x620 short
+    (0x22226 vs 0x22846).
+  - Reverting the mid-round external `ServerMainThread.c` volatile-removal edit changed NONE of these
+    (residue identical) — so the residue/.data regressions are NOT that edit; they reflect the
+    reorg'd tree measured on a *correctly ordered* link for the first time. Pre-reorg the residue
+    baseline 8628 was measured on the GOLDTL-scrambled order (rounds 3-4 could not measure at all —
+    no deliverable), so 12022 may be the *true* residue now revealed, not a fresh regression.
+- **Round-6 focus:** drive residue <= 8628 (byte-match the non-matching functions on correct order),
+  fix .data overage (likely `make_split_rsp.py` `_BLOB_AT_DATA=0x3400` blob placement now stale after
+  reordering — comment says re-sweep when object .data changes), and wine err=193 (likely follows
+  .data/import layout).
