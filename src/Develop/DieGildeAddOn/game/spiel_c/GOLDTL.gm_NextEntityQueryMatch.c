@@ -1,6 +1,12 @@
 #include <windows.h>
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+extern int g_dispatch_table_a[];
+extern int g_dispatch_table_b[];
+extern unsigned short g_query_filter_type;
+extern int g_query_limit;
+extern int g_query_filter_max_id;
+extern int g_query_filter_owner;
 
 // FUNCTION: GOLDTL 0x502850
 // SIZE: 464

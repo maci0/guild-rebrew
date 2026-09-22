@@ -8,6 +8,10 @@
 #include "rebrew_globals.h"
 extern int __cdecl gv_CheckSlotActive(void* slot, int type);
 extern int __cdecl cm_GetBuildingStatCount(unsigned char* entity);
+extern int g_field_worker_count_wt0[];
+extern int g_field_worker_count_wt1[];
+extern int g_field_worker_count_wt2[];
+extern int g_field_worker_count_wt3[];
 
 /* Scans a graveyard slot list for an entry matching the filter callback.
  * The slot list is selected by type (0..3) or derived from the building

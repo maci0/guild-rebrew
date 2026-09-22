@@ -2184,9 +2184,9 @@ updated_by = "test"
 updated_at = "2026-09-20T15:55:11+00:00"
 
 ["GOLDTL.0x0041d6b0"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-22T16:54:03+00:00"
 size = 404
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
@@ -2198,15 +2198,15 @@ size = 416
 cflags = "/O2 /Gd /Oy- /DREBREW_ALLOW_NAKED"
 
 ["GOLDTL.0x0042e450"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-22T16:54:03+00:00"
 size = 22
 
 ["GOLDTL.0x0042e4b0"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-22T16:54:03+00:00"
 size = 14
 
 ["GOLDTL.0x00465350"]
@@ -2229,9 +2229,9 @@ updated_at = "2026-09-12T14:56:20+00:00"
 size = 320
 
 ["GOLDTL.0x004f18d0"]
-status = "COMPILE_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-21T10:31:13+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-22T16:58:35+00:00"
 size = 320
 
 ["GOLDTL.0x004f2880"]
@@ -2259,9 +2259,9 @@ updated_at = "2026-09-12T14:56:21+00:00"
 size = 240
 
 ["GOLDTL.0x00502850"]
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:31:20+00:00"
+updated_at = "2026-09-22T17:00:31+00:00"
 size = 464
 
 ["GOLDTL.0x00502e00"]
@@ -3492,9 +3492,9 @@ size = 41
 
 ["GOLD.0x0047cec0"]
 size = 41
-status = "COMPILE_ERROR"
-updated_by = "verify"
-updated_at = "2026-09-22T08:05:33+00:00"
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T16:55:26+00:00"
 
 ["GOLD.0x004118a0"]
 size = 38
@@ -4370,9 +4370,9 @@ updated_at = "2026-09-21T10:37:57+00:00"
 size = 32
 
 ["GOLDTL.0x00500c50"]
-status = "COMPILE_ERROR"
+status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-22T16:55:40+00:00"
 size = 41
 
 ["GOLDTL.0x00500e00"]
@@ -4533,9 +4533,9 @@ size = 47
 
 ["GOLDTL.0x0064e63d"]
 cflags = "/O1 /Gd"
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-22T16:54:03+00:00"
 size = 45
 
 ["GOLDTL.0x00404410"]
@@ -4596,11 +4596,11 @@ updated_at = "2026-09-22T08:05:18+00:00"
 size = 160
 
 ["GOLDTL.0x0041de50"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-22T16:54:03+00:00"
 size = 162
-blocker = "inline-asm block: replace with proper C once a byte-identical spelling is found"
+blocker = "inline-asm block-fill prelude — Finding 19: no msvc6 C spelling emits it; RELOC 162/162"
 
 ["GOLDTL.0x0041e1d0"]
 blocker = "asm-dump placeholder: rewrite as C"
@@ -4686,9 +4686,9 @@ updated_at = "2026-09-21T11:21:55+00:00"
 size = 13
 
 ["GOLDTL.0x00464a30"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T08:05:18+00:00"
+updated_at = "2026-09-22T16:54:03+00:00"
 
 ["GOLDTL.0x00465750"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
@@ -4891,3 +4891,9 @@ size = 247
 status = "SIZE_MISMATCH"
 updated_by = "test"
 updated_at = "2026-09-22T00:19:20+00:00"
+
+["GOLDTL.0x0047cec0"]
+size = 41
+status = "STUB"
+updated_by = "test"
+updated_at = "2026-09-22T16:55:24+00:00"
