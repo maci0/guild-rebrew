@@ -30,6 +30,14 @@ this file holds the rest.
   (`[targets.X] compiler = { profile = "msvc-6.0-sp5-pp" }`): GOLDTL
   `verify --full` 115 -> 121 byte-matched (6 functions straight to RELOC 100%),
   GOLD 208 -> 213, server unchanged at 281.
+- **Shared files diverge in *data*, not only in code.** `cm_GetBuildingStatCount` has client
+  stat literals 0x10/0x18/0x20 (`+0x10`/`+8`) against the server's 0xc/0x12/0x18 (`+4`/`+2`), and
+  `DispatchLogOutput`'s level table has **12** severity bits (1..0x800) in the client against **3**
+  (1,2,8) in the server, with client log names `_error.log`, `_ai.log`, `_sim.log`, `_dbg.log`,
+  `_script.log`, `_cutscene.log`, `_meister.log`, `_d3.log`, `_stats.log`, `_msx.log`,
+  `___tracker.log`, `_meister2.log` (32 bytes each at GOLDTL 0x677948) against the server's
+  `__server.log`, `gilde_server.log`, `__dbg.log`. A shared marker therefore does **not** imply a
+  shared body: measure each marker before assuming (round 1291).
 - **CRT copies of LIBCMT keep the compiler that built LIBCMT, not the game's.**
   `src/Develop/crt_region/initterm.c` (GOLDTL `0x64e761`) is EXACT only under
   `msvc-6.0-sp6` and is pinned there per-file. Expect more crt_region pins;

@@ -3,7 +3,7 @@ extern int g_field_worker_count[];
 
 // GLOBAL: SERVER 0x1002576c
 extern int g_field_entry_count[];
-// FUNCTION: GOLDTL 0x45e520
+// FUNCTION: GOLDTL 0x4f1d20
 // SIZE: 832
 // FUNCTION: SERVER 0x100109d0
 // SIZE: 832

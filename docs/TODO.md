@@ -33631,3 +33631,36 @@ instruction in the wrong place" question.
   `lint` 615/615 and 0 warnings, `verify --full` **121/180 byte-matched** (exact 51, reloc 70).
 - **Next:** re-derive the 11 GOLDTL NEAR_MATCHING entries (four now ≥93%) under the correct compiler;
   re-check every existing EXACT GOLDTL/GOLD entry for other sp6-side crt_region pins.
+
+### Round 1291 / session R267 (GOLDTL +1; two tree VA/naming errors and a third rebrew marker bug)
+- **`cm_GetBuildingStatCount` is target-divergent, not shared.** The client's stat literals are
+  0x10/0x18/0x20 with `+0x10`/`+8`; the server's are 0xc/0x12/0x18 with `+4`/`+2` — same control
+  shape, different constants. Split: `GOLDTL.cm_GetBuildingStatCount.c` (new twin, GOLDTL marker,
+  RELOC 125/125) and the shared file reverted to the server constants (SERVER still RELOC 135/135).
+  **GOLDTL `verify --full` 121 -> 122.**
+- **Wrong GOLDTL VA on `gv_AllocGraveyardField` fixed** (`friedhof_logic_c/gv_AllocGraveyardField.c`:
+  `// FUNCTION: GOLDTL 0x45e520` -> `0x4f1d20`). Evidence: the same source measures **820/832 (98.6%)**
+  at 0x4f1d20 and **73/832 (8.9%)** at 0x45e520. The bad VA also poisoned `name_to_va` for every
+  caller of the allocator: `gv_UpgradeField`'s call was validated against 0x45e520 and false-failed.
+  0x45e520 stays unclaimed — a different function still to identify.
+- **`gv_UpgradeField` (99.1%) is blocked on a second copy of a helper, not on codegen.** Its two calls
+  go to 0x4f1d20 (`gv_AllocGraveyardField`, now resolved) and **0x4f2290**, a 66-byte variant of
+  `gv_Free3Fields` that frees `[esi+0x1c]` where the tracked 0x45b790 copy (RELOC 100%) frees
+  `[esi+0x24]`. Different body => not the same symbol, so the tree cannot point our call at it yet;
+  the file also needs `--size 556` (the reference's last 4 bytes are alignment NOPs). Parked until the
+  0x4f2290 variant is reconstructed; 0x4f2290 sits immediately after gv_UpgradeField in `.text`
+  (same TU).
+- **rebrew bug #3 (fixed upstream, `src/rebrew/test.py`):** single-file `rebrew test <file> --target X`
+  ignored the target when choosing the marker. `_run_test_impl` derived the VA from
+  `parse_source_metadata`, which is *first-block only*, so `rebrew test cm_MarkAndReturn.c --target
+  GOLDTL` compared SERVER `0x1000d330`'s bytes (and `--target server.dll` on a GOLDTL-first file did the
+  reverse). The target-filtered annotation from `_lint_preamble` now wins
+  (`_marker_va_from_annotation`), with unit tests in `tests/test_test_helpers.py`. This is the same
+  first-block blind spot as round 1290's catalog bug, in a second place — **check every other
+  `parse_source_metadata` consumer for it.**
+- **State:** GOLDTL 122/180 byte-matched (exact 51, reloc 71, size_mismatch 46), GOLD 213, SERVER 281
+  and 264 byte-matched — **no EXACT/RELOC regressions on any target**; lint 616/616, 0 warnings.
+- **Next:** `gv_UpgradeField` (needs the 0x4f2290 variant + `--size 556`); `DispatchLogOutput`
+  (client log module has 12 severity levels and `_error.log`/`_ai.log`/`_sim.log`… names, the server 3
+  levels and `__server.log`/`gilde_server.log`/`__dbg.log` — a twin file carries the client's data);
+  re-check `gv_AllocGraveyardField`'s remaining 12 byte diffs at its corrected VA.
