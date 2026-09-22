@@ -97,7 +97,7 @@ if(REBREW_BUILD_SERVER)
   # split_link.sh died at exit 157, and the fix was a re-configure.
   #
   # Unified tree: game logic shared by all three binaries lives once in
-  # src/shared (one // FUNCTION: marker per target). The source list is
+  # src/ (one // FUNCTION: marker per target). The source list is
   # marker-selected (rebrew cmake-sources), not globbed: a GOLD/GOLDTL-only
   # TU linked into server.dll is a composition break (foreign bytes at best,
   # duplicate symbols at worst).
@@ -169,24 +169,24 @@ if(REBREW_BUILD_SERVER)
   # import set or the .rdata size.
   list(FILTER SERVER_SOURCES EXCLUDE REGEX "/crt_region/")
   set(_CRT_REGION_KEEP
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/crt_imports.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/data_restore.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/data_globals.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/rdata_restore.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/dllmain.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/initterm.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/mlock.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/sbh_globals.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/sbh_pool.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/sbh_aliases.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/crt_heap.c"
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/amsg_exit.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/crt_imports.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/data_restore.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/data_globals.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/rdata_restore.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/dllmain.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/initterm.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/mlock.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/sbh_globals.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/sbh_pool.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/sbh_aliases.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/crt_heap.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/amsg_exit.c"
     # rdata_fold.c references the string literals six LIBCMT objects emit as
     # .rdata COMDATs a second time after rdata_restore.c's blob.  Same content
     # means the same `??_C@...` COMDAT name, so linking this first makes the
     # linker discard the library's copies: .rdata raw 0x4000 -> 0x3000, the
     # reference's.  It carries no .text.
-    "${PROJECT_SOURCE_DIR}/src/shared/crt_region/rdata_fold.c"
+    "${PROJECT_SOURCE_DIR}/src/crt_region/rdata_fold.c"
   )
   list(APPEND SERVER_SOURCES ${_CRT_REGION_KEEP})
 
@@ -257,23 +257,24 @@ if(REBREW_BUILD_SERVER)
   # the original binary's exact import order. If any other object's code
   # references an import earlier, the linker gives that import an earlier slot
   # and the whole IAT layout shifts (kernel32 @ 0x24000 must stay exact).
-  set(_CRT_IMPORTS "${PROJECT_SOURCE_DIR}/src/shared/crt_region/crt_imports.c")
+  set(_CRT_IMPORTS "${PROJECT_SOURCE_DIR}/src/crt_region/crt_imports.c")
   list(REMOVE_ITEM SERVER_SOURCES "${_CRT_IMPORTS}")
   list(INSERT SERVER_SOURCES 0 "${_CRT_IMPORTS}")
 
   # Link the .data gap TU next: it declares the raw .data bytes our game TUs
   # do not emit (original [0x3000:0xe000]), so the raw link's .data rsz reaches
   # 0xe000 and the section-derived header fields fall out of the link.
-  set(_DATA_GAP "${PROJECT_SOURCE_DIR}/src/shared/crt_region/data_restore.c")
+  set(_DATA_GAP "${PROJECT_SOURCE_DIR}/src/crt_region/data_restore.c")
   list(REMOVE_ITEM SERVER_SOURCES "${_DATA_GAP}")
   list(INSERT SERVER_SOURCES 1 "${_DATA_GAP}")
 
   add_library(server_dll SHARED ${SERVER_SOURCES} ${LINK_STUBS})
 
   target_include_directories(server_dll PRIVATE
-    # Unified tree: all sources live in src/shared (bare header includes
-    # resolve here); src/server.dll holds only server.def + crt link files.
-    "${PROJECT_SOURCE_DIR}/src/shared"
+    # Unified tree: src/Develop mirrors D:\Develop (game headers live at its
+    # root); src/ holds rebrew scaffolding (link_stubs.c, .def files).
+    "${PROJECT_SOURCE_DIR}/src/Develop"
+    "${PROJECT_SOURCE_DIR}/src"
     "${PROJECT_SOURCE_DIR}/references/zlib-1.1.3"
   )
 
@@ -309,7 +310,7 @@ if(REBREW_BUILD_SERVER)
   set_property(TARGET server_dll PROPERTY PREFIX "")
   set_property(TARGET server_dll PROPERTY SUFFIX ".dll")
 
-  target_sources(server_dll PRIVATE "${PROJECT_SOURCE_DIR}/src/server.dll/server.def")
+  target_sources(server_dll PRIVATE "${PROJECT_SOURCE_DIR}/src/server.def")
 
   # Per-file compiler pin.  msvc-6.0-sp5-pp reproduces gm_FindNextFilteredEntity
   # (0x10016f80) at the reference's exact object size where sp6 runs four bytes
@@ -323,7 +324,7 @@ if(REBREW_BUILD_SERVER)
   # toolchain via a COMPILE_FLAGS value that replaced them, compiled the file
   # unoptimised and cost 39% residue.  See docs/msvc6-c-shapes.md section 142.
   set_source_files_properties(
-    "${PROJECT_SOURCE_DIR}/src/shared/DieGildeAddOn/game/spiel_dumpD.c"
+    "${PROJECT_SOURCE_DIR}/src/DieGildeAddOn/game/spiel_dumpD.c"
     PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
 
   # Second sp5-pp pin, same rule (section 142): ahm_ExAllocAlchemist scores
@@ -331,7 +332,7 @@ if(REBREW_BUILD_SERVER)
   # size, and the file holds exactly one function, so there are no file-mates
   # to regress.
   set_source_files_properties(
-    "${PROJECT_SOURCE_DIR}/src/shared/DieGildeAddOn/game/alchemistry_logic_c/ahm_ExAllocAlchemist.c"
+    "${PROJECT_SOURCE_DIR}/src/DieGildeAddOn/game/alchemistry_logic_c/ahm_ExAllocAlchemist.c"
     PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
 
   # Round 941: /Ow on gv_ExAllocGraveyardWorker, measured 8,633 -> 8,628 (-5).
@@ -341,14 +342,14 @@ if(REBREW_BUILD_SERVER)
   # them without measuring one at a time.  CrashDump and ls_LoadBuildingEntityState
   # were already known inert from rounds 919-920.
   set_source_files_properties(
-    "${PROJECT_SOURCE_DIR}/src/shared/DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c"
+    "${PROJECT_SOURCE_DIR}/src/DieGildeAddOn/game/friedhof_logic_c/gv_ExAllocGraveyardWorker.c"
     PROPERTIES COMPILE_OPTIONS "/Ow")
 
   # Third sp5-pp pin, same rule (section 142): ls_LoadBuildingEntityState
   # scores 824/1463 under sp5-pp against 820/1463 under sp6 at an identical
   # object size of 1460, and the file holds exactly one function.
   set_source_files_properties(
-    "${PROJECT_SOURCE_DIR}/src/shared/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c"
+    "${PROJECT_SOURCE_DIR}/src/DieGildeAddOn/loadsave/loadsave_c/ls_LoadBuildingEntityState.c"
     PROPERTIES COMPILE_OPTIONS "/REBREW_TOOLCHAIN:msvc-6.0-sp5-pp")
 
   if(MSVC)
@@ -367,7 +368,7 @@ if(REBREW_BUILD_SERVER)
     endif()
   endif()
 
-  message(STATUS "server.dll: src/shared (${SERVER_SOURCES_COUNT} source files)")
+  message(STATUS "server.dll: src/ (${SERVER_SOURCES_COUNT} source files)")
   list(LENGTH SERVER_SOURCES SERVER_SOURCES_COUNT)
   message(STATUS "server.dll: found ${SERVER_SOURCES_COUNT} source files")
 
@@ -382,17 +383,29 @@ endif()
 # ---------------------------------------------------------------------------
 
 if(REBREW_BUILD_GOLD)
-  file(GLOB_RECURSE GOLD_SOURCES CONFIGURE_DEPENDS
-    "src/Europa1400Gold.exe/*.c"
-    "src/shared/*.c"
-  )
+  # Same rule as server.dll: marker-selected, never globbed. The shared tree
+  # holds SERVER/GOLDTL TUs that must not link into the GOLD client.
+  if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
+    set(_REBREW_GOLD_BIN "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
+  else()
+    find_program(_REBREW_GOLD_BIN rebrew REQUIRED)
+  endif()
+  execute_process(
+    COMMAND "${_REBREW_GOLD_BIN}" cmake-sources --target "Europa1400Gold.exe"
+            -o ${CMAKE_BINARY_DIR}/rebrew-sources-gold.cmake
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    RESULT_VARIABLE _REBREW_GOLD_RC)
+  if(NOT _REBREW_GOLD_RC EQUAL 0)
+    message(FATAL_ERROR "rebrew cmake-sources failed for Europa1400Gold.exe")
+  endif()
+  include(${CMAKE_BINARY_DIR}/rebrew-sources-gold.cmake)
+  set(GOLD_SOURCES ${REBREW_SOURCES})
 
   if(GOLD_SOURCES)
     add_executable(europa1400gold WIN32 ${GOLD_SOURCES})
 
     target_include_directories(europa1400gold PRIVATE
-      "${PROJECT_SOURCE_DIR}/src/Europa1400Gold"
-      "${PROJECT_SOURCE_DIR}/src/shared"
+      "${PROJECT_SOURCE_DIR}/src"
     )
 
     set_property(TARGET europa1400gold PROPERTY OUTPUT_NAME "Europa1400Gold")
@@ -400,7 +413,7 @@ if(REBREW_BUILD_GOLD)
 
     reccmp_add_target(europa1400gold ID GOLD)
   else()
-    message(STATUS "Europa1400Gold: no source files found in src/Europa1400Gold/ — skipping")
+    message(STATUS "Europa1400Gold: cmake-sources selected no TUs — skipping")
   endif()
 endif()
 
@@ -409,17 +422,28 @@ endif()
 # ---------------------------------------------------------------------------
 
 if(REBREW_BUILD_GOLDTL)
-  file(GLOB_RECURSE GOLDTL_SOURCES CONFIGURE_DEPENDS
-    "src/Europa1400Gold_TL.exe/*.c"
-    "src/shared/*.c"
-  )
+  # Same rule as server.dll: marker-selected, never globbed.
+  if(EXISTS "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
+    set(_REBREW_GOLDTL_BIN "${PROJECT_SOURCE_DIR}/.venv/bin/rebrew")
+  else()
+    find_program(_REBREW_GOLDTL_BIN rebrew REQUIRED)
+  endif()
+  execute_process(
+    COMMAND "${_REBREW_GOLDTL_BIN}" cmake-sources --target "Europa1400Gold_TL.exe"
+            -o ${CMAKE_BINARY_DIR}/rebrew-sources-goldtl.cmake
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    RESULT_VARIABLE _REBREW_GOLDTL_RC)
+  if(NOT _REBREW_GOLDTL_RC EQUAL 0)
+    message(FATAL_ERROR "rebrew cmake-sources failed for Europa1400Gold_TL.exe")
+  endif()
+  include(${CMAKE_BINARY_DIR}/rebrew-sources-goldtl.cmake)
+  set(GOLDTL_SOURCES ${REBREW_SOURCES})
 
   if(GOLDTL_SOURCES)
     add_executable(europa1400gold_tl WIN32 ${GOLDTL_SOURCES})
 
     target_include_directories(europa1400gold_tl PRIVATE
-      "${PROJECT_SOURCE_DIR}/src/Europa1400Gold_TL"
-      "${PROJECT_SOURCE_DIR}/src/shared"
+      "${PROJECT_SOURCE_DIR}/src"
     )
 
     set_property(TARGET europa1400gold_tl PROPERTY OUTPUT_NAME "Europa1400Gold_TL")
@@ -427,7 +451,7 @@ if(REBREW_BUILD_GOLDTL)
 
     reccmp_add_target(europa1400gold_tl ID GOLDTL)
   else()
-    message(STATUS "Europa1400Gold_TL: no source files found in src/Europa1400Gold_TL/ — skipping")
+    message(STATUS "Europa1400Gold_TL: cmake-sources selected no TUs — skipping")
   endif()
 endif()
 

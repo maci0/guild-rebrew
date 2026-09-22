@@ -10,8 +10,8 @@
 # missing was a step in the opening that forces the lookup.  This is that step.
 #
 #   scripts/preprobe.sh <carrier.c> [fault-address]
-#   scripts/preprobe.sh src/server.dll/.../gm_AllocSpieler.c
-#   scripts/preprobe.sh src/server.dll/.../gm_AllocSpieler.c 0x100188fa
+#   scripts/preprobe.sh src/Develop/.../gm_AllocSpieler.c
+#   scripts/preprobe.sh src/Develop/.../gm_AllocSpieler.c 0x100188fa
 set -uo pipefail
 cd "$(dirname "$0")/.."
 

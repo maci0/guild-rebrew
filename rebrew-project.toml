@@ -4,10 +4,11 @@ jobs = 8
 db_dir = "db"
 output_dir = "output"
 default_target = "server.dll"
-# Unified source tree: game logic shared by all three binaries lives once in
-# src/shared with one // FUNCTION: <marker> <va> block per target (rebrew
-# ADR-022). Target-specific code stays under src/<target>/.
-shared_dir = "src/shared"
+# Unified source tree: src/Develop mirrors D:\Develop. Every target scans
+# the whole tree; one // FUNCTION: <marker> <va> block per target selects
+# each binary's code (rebrew ADR-022). Divergent twins sit side by side as
+# <name>_tl.c / <name>_gold.c until ported to #ifdef or stacked markers.
+shared_dir = "src"
 
 [targets."server.dll"]
 ghidra_program_path = "/server.dll"
@@ -21,7 +22,7 @@ binary = "original/Server/server.dll"
 format = "pe"
 arch = "x86_32"
 marker = "SERVER"
-reversed_dir = "src/shared"
+reversed_dir = "src"
 inventory_file = "db/inventory-server.dll.json"
 bin_dir = "bin/server.dll"
 iat_thunks = [
@@ -35,7 +36,7 @@ layout = {target = "server.dll", link_options = ["/BASE:0x10000000"], image_base
 binary = "original/Europa1400Gold_TL.exe"
 format = "pe"
 arch = "x86_32"
-reversed_dir = "src/shared"
+reversed_dir = "src"
 inventory_file = "db/inventory-Europa1400Gold_TL.exe.json"
 bin_dir = "bin/Europa1400Gold_TL.exe"
 source_ext = ".c"
@@ -51,7 +52,7 @@ marker = "GOLD"
 binary = "original/Europa1400Gold.exe"
 format = "pe"
 arch = "x86_32"
-reversed_dir = "src/shared"
+reversed_dir = "src"
 inventory_file = "db/inventory-Europa1400Gold.exe.json"
 bin_dir = "bin/Europa1400Gold.exe"
 source_ext = ".c"
@@ -62,7 +63,7 @@ profile = "msvc-6.0-sp6"
 # standard rebrew runner); no host toolchain tree, so these legacy fields
 # are empty.
 command = ""
-includes = "src/shared"
+includes = "src/Develop"
 libs = ""
 cflags = "/O2 /Gd"
 base_cflags = "/nologo /c /MT /D \"_WIN32_WINNT=0x0400\" /Ireferences/zlib-1.1.3"

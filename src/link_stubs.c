@@ -346,7 +346,7 @@ float g_const_0_01 = 0.01f;
 /* Savegame header tail: the 9 bytes "Savegame\0" copied into the header at
  * +0x9c by ls_LoadSavegameHeader. Layout lives in
  * DieGildeAddOn/loadsave/save_header_tail.h. */
-#include "shared/DieGildeAddOn/loadsave/save_header_tail.h"
+#include "Develop/DieGildeAddOn/loadsave/save_header_tail.h"
 // DATA: SERVER 0x1002d4f0
 struct SaveHeaderTail g_save_header_tail = { 0x65766153, 0x656d6167, 0 };
 

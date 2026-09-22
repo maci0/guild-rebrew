@@ -83,7 +83,7 @@ for f in "$@"; do
     # agent says "file frozen".
     cmd=$(echo "$line" \
         | sed -e 's|$(C_DEFINES)|-DREBREW_ALLOW_NAKED=1 -Dserver_dll_EXPORTS|' \
-              -e "s|\$(C_INCLUDES)|-I$PWD/src/shared -I$PWD/references/zlib-1.1.3|" \
+              -e "s|\$(C_INCLUDES)|-I$PWD/src -I$PWD/references/zlib-1.1.3|" \
               -e 's|$(C_FLAGS)|/W3 /D "WIN32" /D "_WINDOWS" /D "_WIN32_WINNT=0x0400" /D "NDEBUG" -MT /W3|')
     if ! (cd build && eval "$cmd" >/dev/null 2>&1); then
         echo "compile FAILED: $rel" >&2
