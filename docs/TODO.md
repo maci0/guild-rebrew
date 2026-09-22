@@ -33961,3 +33961,19 @@ instruction in the wrong place" question.
   all deleted rather than left as false near-misses.
 - **Measured:** GOLDTL 207 -> **223** (exact 91, reloc 132), GOLD 213 and SERVER 281/264 unchanged,
   zero demotions/losses, lint 707/707.
+
+### Round 1304 / session R280 (GOLDTL +11 — fifth batch; operand order is a one-byte lever)
+- 11 more: `fcn_0040df90` (`strcpy` from `*p` into a fixed buffer, `return 1`),
+  `fcn_0040fdb0`/`fcn_004131c0`/`fcn_004456c60`-style call sequences, `fcn_004246c0` (list counter at
+  +0x38 then +0x104), `fcn_004737c0` (stride-0xc table init), `fcn_00478fa0` (`short` gathers from the
+  4th argument), `fcn_004c9530` (call + conditional byte store), `fcn_005b1a80` (list search on +0x48),
+  `fcn_00402320` (IAT call + handle clear), and `fcn_004be300`.
+- **`cmp edx,ecx` vs `cmp ecx,edx` is a byte.** `fcn_004be300` sat at 26/27 until the condition was
+  written `if (target == p)` instead of `if (p == target)` — MSVC emits the compare in source operand
+  order, so a structurally correct function can be one byte off on operand order alone. Worth trying
+  *before* declaring a one-byte mismatch a wall.
+- **Parked:** `fcn_004acee0` (two global loads whose order MSVC refuses to keep), `fcn_004be320`
+  (same body as 4be300 but the allocator colours the pointer into `eax` instead of `ecx`), the
+  vtable-call shape (`fcn_00452340`), and the `p->f70 == -1/-2 → tail jmp` guard (`fcn_0057c8d0`).
+- **Measured:** GOLDTL 223 -> **234** (exact 97, reloc 137), GOLD 213 and SERVER 281/264 unchanged,
+  zero demotions/losses, lint 718/718.
