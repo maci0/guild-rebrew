@@ -35330,3 +35330,30 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 590 -> **593** byte-matched (exact 233, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
   imports, GOLD 213; zero demotions/losses, lint 1075/1075 (0 warnings).
+
+### Round 1359 / session R330 (GOLDTL +2 — vtable slot calls need a struct, not a function-pointer cast)
+- Two EXACT: `fcn_00418640` (61B, releases the two globals 0x6b5cb4 / 0x6b5cb8 through vtable slot +8,
+  storing each result in 0x14ce728 and zeroing the global), `fcn_00418680` (64B, the same two globals
+  configured through vtable slot +0x5c with six arguments: `(obj, 0xa00, 0x208, 0x44, 0, 0x6b5cb4)` and
+  `(obj, 0x1500, 0x208, 0x144, 0, 0x6b5cb8)`).
+- **`call dword ptr [ecx+8]` needs a named vtable member, not an indexed function-pointer cast.** With
+  `(*(fn*)(((int*) p[0])[2]))(p)` MSVC loads the slot into a scratch register first
+  (`mov edx,[ecx+8]; call [edx]`, 17/65); declaring the vtable as a struct whose member sits at that
+  offset — `typedef struct { int (*f0)(void); int (*f1)(void); int (__stdcall* release)(void*); }
+  vtbl;` then `((vtbl*) p[0])->release(p)` — emits the reference's `mov ecx,[eax]; push eax;
+  call [ecx+8]` and the function is 61/61. Same for the 0x5c slot: a struct with `int (*pad[0x17]);`
+  before the member. Both typedefs need their own `// SIZE` marker (0xc and 0x60).
+- **Six-argument `__stdcall` slot call = no `add esp`.** The imported slot callers have no stack cleanup
+  after `call [reg+0x5c]`, so the member type must be `int (__stdcall*)(void*, int, int, int, int, int)`;
+  a cdecl typedef would add `add esp,0x18` and blow the size.
+- **Read the immediates off `rebrew asm`, not the raw hex.** The second call pushes `0x144`
+  (`68 44 01 00 00`), not `0x44` — the first call's `6a 44` is a different push two instructions
+  earlier; guessing from the hex string cost a round trip (45/64 -> 64/64).
+- **Parked:** `fcn_00405080` (first-free-record search over 0x194-stride records at `[0x6b5c20]`, 0x7d0 of
+  them, returning `base + (i-1)*0x194`; the reference loads the record dword into `esi`, then `inc`/`add`,
+  then tests it, with the base kept in `edx` for the found-address lea — our `do/while`, `for(;;)`,
+  temp-local and base+walker spellings all land 47..73 bytes against the 64-byte reference), plus the
+  earlier list.
+- **Measured:** GOLDTL 593 -> **595** byte-matched (exact 235, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
+  imports, GOLD 213; zero demotions/losses, lint 1077/1077 (0 warnings).
