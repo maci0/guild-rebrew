@@ -34694,3 +34694,26 @@ instruction in the wrong place" question.
   separate from the function's `// SIZE:`. Adding it took the tree back to 995/995, 0 warnings.
 - **Measured:** GOLDTL 507 -> **512** byte-matched (exact 168, reloc 344, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 995/995 (0 warnings).
+
+### Round 1334 / session R306b (GOLDTL +5 — thirty-fifth batch: the 0x662d18 field writers)
+- Five more, all RELOC: `fcn_0044d150`, `fcn_0044d190`, `fcn_0044d1d0`, `fcn_0044d210` (the
+  `5668182d66006a00` cluster) and `fcn_005c6270`.
+- **Arity comes from the push count, not the first `[esp+K]` you read.** Round 41 parked
+  `fcn_0044d150` as "52/53, the argument slot moved"; the real cause was the signature: the body pushes
+  `esi`, `0x662d18`, `0` and the first call's result before loading the struct pointer, so
+  `[esp+0x18]` is the *second* argument. Declaring `(int a1, char* p)` instead of
+  `(int a1, int a2, char* p)` made all four members match immediately. Count the pushes, then compute
+  the slot.
+- **The family shape:** `char v = (char) fcn_0064eeec(fcn_0064f026(0, (void*) 0x662d18));
+  *(char*)(*(int*)(p + 0x10) + *(int*)(p + 8) * 0xe0 + OFF) = v;` with `OFF` in
+  {0xc2, 0xc4, 0xc8} — the same 0xe0-stride record as the round-41 float writer at 0xcc.
+- **A forward-`je` guard chain needs nested `!= 0` tests and one trailing `return 0`.** `fcn_005c6270`
+  is `p = fcn_00502cd0(a1->f178, 1, 0, a2); if (p) { if (fcn_005c61e0(*(unsigned short*)p)) {
+  if (p->f21) return 1; } } return 0;` — the three-guard early-return spelling hoists `xor eax,eax`
+  above the first `test` and misses (47/71); the nested positive form gives the reference's
+  `test esi,esi; je <tail>` chain.
+- **Parked:** `fcn_0044d390`/`fcn_0044d500`/`fcn_0044d5a0`/`fcn_0044d5f0` (same `0x662d18` head but with
+  loops and nested branches) and `fcn_004b3d40` (`g_10069a8 = 0; sim_SetSyncParams(&g_10069a8, 0, 0, 0);`
+  — the reference schedules the four pushes *above* the three global stores).
+- **Measured:** GOLDTL 512 -> **517** byte-matched (exact 168, reloc 349, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1000/1000 (0 warnings).
