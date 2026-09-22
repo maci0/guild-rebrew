@@ -33899,3 +33899,26 @@ instruction in the wrong place" question.
   vtable-typed declaration.
 - **Measured:** GOLDTL `verify --full` 152 -> **178** byte-matched (exact 73, reloc 105); GOLD 213 and
   SERVER 281/264 unchanged; zero demotions/losses; lint 661/661.
+
+### Round 1301 / session R277 (GOLDTL +16 — second batch of small functions)
+- Same breadth play, 16 more small functions reconstructed from their disassembly:
+  call wrappers (`fcn_0040c610`, `fcn_00410ed0`, `fcn_00410ef0`, `fcn_00411040`, `fcn_00465820`),
+  list-length counter (`fcn_004be340`), IAT call through a function-pointer variable
+  (`fcn_005386c0` — `((FN)0x662274)(...)` emits `mov ecx,imm; call ecx`, so the slot needs
+  `extern int (__stdcall *g_662274)(...)` to emit `call dword ptr [0x662274]`), `call`+tail-`jmp`
+  (`fcn_0042e3b0`, span 19 B with the code only 10 B), signed `% 4` (`fcn_00500e20` — MSVC's
+  `and 0x80000003; jns; dec; or -4; inc` idiom), two-byte setter (`fcn_0043bc00`), vtable call
+  (`fcn_00461190`), guard + tail call (`fcn_004e4e90`), `(rand & 0xffff) + 0x639` pair
+  (`fcn_004ae040`/`fcn_004ae060`), `fcn_0040eca0`, and two `fcn_00425860`-style 5-arg wrappers.
+- **Three codegen lessons:** (1) `fcn_0040eca0` needed the *callee parameter* to be `char` — with an
+  `int` parameter MSVC emits `movzx`, with `char` it emits the reference's 2-byte `mov cl,[eax]`;
+  (2) a wrapper's object is 3 bytes short of the reference span when an `__stdcall` callee is declared
+  `__cdecl` (or vice versa) — the missing `add esp,0x14` is the tell; (3) `--size` must equal the
+  *object* size for padded spans (19 for `fcn_00544c30`, 18 for the earlier thunks).
+- **Parked:** the `mov [esp+4],eax; jmp callee` tail-call wrapper shape (`fcn_00418f90`, `fcn_0043bbd0`,
+  `fcn_0047ce50`) — MSVC reaches it from some spelling none of the six probed forms reproduce
+  (`if (p) return g(p); return 0;` gives a plain call at /O2 /Gd); and `fcn_00465800`'s
+  `mov edx,base; lea ecx,[eax*4]; sub edx,ecx` (MSVC folds our spellings into `mov eax,base;
+  sub eax,idx; mov eax,[eax*4]`).
+- **Measured:** GOLDTL 178 -> **194** (exact 77, reloc 117), GOLD 213 and SERVER 281/264 unchanged,
+  zero demotions/losses, lint 678/678.
