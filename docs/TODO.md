@@ -34375,3 +34375,31 @@ instruction in the wrong place" question.
   cannot be spelled from C).
 - **Measured:** GOLDTL 381 -> **390** byte-matched (exact 149, reloc 241, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 875/875.
+
+### Round 1321 / session R296 (GOLDTL +9 — twenty-second batch: table scans and sp5-pp float equality)
+- Nine more: `fcn_004a43e0`, `fcn_004b3c50`, `fcn_004b3c80`, `fcn_004b3cb0` (all EXACT) and
+  `fcn_00497000`, `fcn_004b4730`, `fcn_004bbd20`, `fcn_004b4830`, `fcn_004b4f00` (RELOC).
+- **`jl` vs `jb` decides the scan again — use `int` addresses.** `fcn_004b3c50` (48-record table at
+  0x680bd0, stride 0x1c, returns `base + i*0x1c`), `fcn_004b3c80` (0x10069a4..0x1007ba4 stride 0x24,
+  guarded by a "slot in use" flag at `p-4`) and `fcn_004b3cb0` (count matches over
+  0x680bd4..0x681114) were all 1 byte off (`jb` for `jl`) with `char*` walkers and all EXACT with
+  `int p = 0x...; for (...; p < 0x...; p += STRIDE)`. Third confirmation of the round-1311 rule.
+- **sp5-pp float *equality* is `test ah,0x44; jp` with the equal path falling through.**
+  `fcn_004b4f00` is `if (fcn_004fc3a0(buf) == 0.0f) return 1; return 0;`. Status-word bits: C0=AH.0,
+  C2=AH.2, C3=AH.6, so `ah & 0x44` is 0x40 only on equal (one bit → PF=0 → fall through to `return 1`)
+  and 0x00/0x44 for greater/less/unordered (PF=1 → `jp` to `return 0`). Contrast round 1318's `>`
+  idiom (`and eax,0x4100; jne`).
+- **`(x != 0) ? 10 : 0` is `neg/sbb/and`.** `fcn_00497000` guards on `*a2 == 0xa`, calls
+  `fcn_004e7d40(a1, *(int*)(a2+4))` and returns 0xa when that call is non-zero — the bytes are
+  `neg eax; sbb eax,eax; and eax,0xa`.
+- **A `this`-less 3-arg nested call reuses the leftover argument slot.** `fcn_004b3d80`
+  (`fcn_004b3e10(a1, fcn_004b3db0(a2, a3), a3)`) pushes `a3` first and lets the nested call's own
+  `add esp,4` leave it in place, so one `add esp,0xc` cleans all three args at the end.
+- **`fcn_0041db70(size, tag)` is the allocator entry.** `fcn_004bbd20`
+  (`p = fcn_0041db70(0x2480, (void*) 0x6813d0); g_7728e8 = p; g_7728e4 = 0; *p = 0;`) matches the
+  round-1320 `fcn_00456530` shape — first arg is the byte count, second the allocation tag.
+- **Parked:** `fcn_004b3d80` (the nested-call shape above: the reference hoists the `a1` load into `edx`
+  above `add esp,4`), `fcn_004bc060` (a `memset` + `(*(int*)0x7728e4)--` tail: the reference decrements
+  through `eax`, ours through `ecx`).
+- **Measured:** GOLDTL 390 -> **399** byte-matched (exact 153, reloc 246, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 884/884.
