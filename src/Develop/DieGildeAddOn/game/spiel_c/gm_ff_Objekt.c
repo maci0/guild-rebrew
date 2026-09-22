@@ -1,6 +1,6 @@
 /* gm_ff_Objekt — sets up an entity query from a vararg filter list. */
 
-/* NOTE: the entry allocation is order-sensitive. Each flag must be zeroed
+/* Order-sensitivity: the entry allocation is order-sensitive. Each flag must be zeroed
  * immediately before its own global store (flag1/g_query_flag1, then
  * flag2/g_query_flag2), after the filter stores; that keeps flag1 in dl and
  * flag2 in bl. Zeroing both flags up front commons the value into bl and

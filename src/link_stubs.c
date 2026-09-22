@@ -7,6 +7,13 @@
  *   python scripts/gen_link_stubs.py
  */
 
+// SUPPORT: SERVER placeholder data definitions keep the link closed while
+// TUs progressively claim their globals (owner TU extern-declares under its
+// own DATA/GLOBAL marker; this file holds the single definition meanwhile)
+
+// VA anchors live on the owner TUs by design — no VA markers here, so E013
+// (duplicate VA) and W021/W022 scaffolding noise stay silent.
+
 /* Global variable stubs */
 #include <time.h>
 
@@ -74,14 +81,11 @@ int g_dispatch_table_b[1] = {0};
 int g_dynamic_count = 0;
 int g_dynasty_field_2c = 0;
 int gm_CurrentHumanFamilyCount = 0;
-// DATA: SERVER 0x101de450
 char* g_item_def_table = 0;
 int g_entity_id_counter = 0;
 unsigned int g_query_state_a0c[768] = {0};
-// DATA: SERVER 0x1002d4ec
 int g_file_version = 0;
 float g_const_1_0 = 0;
-// DATA: SERVER 0x100256a8
 float g_const_neg_1_0 = 0;
 float g_const_0_0 = 0;
 int g_game_speed_value = 0;
@@ -93,7 +97,6 @@ int g_mem_pool_overflow_flag = 0;
 char g_msg_buf[1] = {0};
 int g_net_socket = 0;
 int g_object_count = 0;
-// DATA: SERVER 0x101de5a0
 char g_office_slots[0x3f0];
 int g_plant_info_table = 0;
 int g_query_filter_max_id = 0;
@@ -119,7 +122,6 @@ int vfs_WriteBufferLocked = 0;
  * struct offset) out of the postlink rewrite range and breaking byte
  * identity.  Real sparse layout (8 slots at 0x101deb00) is the data-restore
  * TU's job; sizes here just need to fit the .data VS and stay in range.) */
-// DATA: SERVER 0x101deb00
 char g_connections[0x264264] = {0};
 char g_player_slot_field[4] = {0};
 char g_player_slot_overflow[0x264264] = {0};
@@ -191,17 +193,12 @@ int g_download_received = 0;
 unsigned int g_download_buffer = 0;
 unsigned int g_download_total_size = 0;
 int g_download_slots = 0;
-// DATA: SERVER 0x1009aca0
 unsigned char g_entity_base[1] = {0};
 int g_entity_end = 0;
-// DATA: SERVER 0x1014d8c0
 unsigned char* g_entity_ptr = 0;
 /* Sell msgs: real .data strings (ExSell imm32); overlay GLOBAL on alchemistry_logic2.c */
-// DATA: SERVER 0x1002cd48
 char g_error_msg_sell_failed[] = "cm_ExSellObjekt() Verkaufslimit \xfc" "berschritten";
-// DATA: SERVER 0x1002cc8c
 char g_error_msg_sell_no_dest[] = "cm_ExSellObjekt(): Ziel-Besitzer ist kein Geb\xe4ude";
-// DATA: SERVER 0x1002cd14
 char g_error_msg_sell_no_source[] = "cm_ExSellObjekt(): Quell-Besitzer ist kein Geb\xe4ude";
 int g_log_buffer = 0;
 int g_log_file_handle = 0;
@@ -265,42 +262,23 @@ unsigned long __cdecl fcn_10020ff8(const char* s, char** e, int b, void* l) { re
 /* --- CRT malloc stub: satisfy _malloc without pulling crt_region/malloc.c
  * (__try SEH-cookie .rdata that inflates the IAT→IMPORT gap). Postlink
  * rewrites call sites to the reference VAs. --- */
-// DATA: SERVER 0x1176408c
 int g_chain_id_start = 0;
-// DATA: SERVER 0x11764084
 int g_max_players = 0;
-// DATA: SERVER 0x10025718
 int g_game_speed_table[5] = {0};
-// DATA: SERVER 0x1002c3f4
-int g_game_speed_index = 0;
-// DATA: SERVER 0x100256a4
 float g_color_scale = 0;
-// DATA: SERVER 0x100358a4
 int g_entity_id_field = 0;
-// DATA: SERVER 0x100a8c94
 unsigned short g_entity_slot_table[1] = {0};
-// DATA: SERVER 0x100241a0
 unsigned int g_crc_table_241a0[256] = {0};
-// DATA: SERVER 0x1009aca2
 unsigned char g_dynamic_entities[1] = {0};
-// DATA: SERVER 0x100a8c30
 char* g_entity_type_table = 0;
-// DATA: SERVER 0x100a8c34
 unsigned short* g_query_base = 0;
 
 int __cdecl putc(int ch, void* stream) { (void)ch; (void)stream; return ch; }
 
 
 int $T57600 = 0;
-// DATA: SERVER 0x10034618
-unsigned int g_log_mode_flags = 0;
-// DATA: SERVER 0x10034610
 void (*g_panic_callback)(void) = 0;
-// DATA: SERVER 0x11764094
 void* g_thread_handle = 0;
-
-// DATA: SERVER 0x10034680
-int g_handler_started = 0;
 
 /* --- .rdata float/double constants ---
  * Real operands of fmul/fadd/fsubr in the target, so a zero stub would
@@ -314,51 +292,33 @@ int g_handler_started = 0;
  * they land in .data, whose contents postlink replaces from the reference.
  *
  * `f88` is a dword fmul (float) in the target, unlike its qword neighbours. */
-// DATA: SERVER 0x10025688
 double g_dbl_const_688 = 2.0;
-// DATA: SERVER 0x100256d0
 double g_dbl_const_6d0 = 0.001;
-// DATA: SERVER 0x100257d0
 double g_const_half = 0.5;
-// DATA: SERVER 0x100257d8
 double g_dbl_const_7d8 = 1.0;
-// DATA: SERVER 0x10025810
 double g_dbl_const_810 = 0.2;
-// DATA: SERVER 0x10025f88
 float g_dbl_const_f88 = 0.6f;
-// DATA: SERVER 0x10025f90
 double g_dbl_const_f90 = 8.0;
-// DATA: SERVER 0x10025f98
 double g_dbl_const_f98 = 900.0;
-// DATA: SERVER 0x10025fa0
 double g_const_1_over_720 = 0.0013888888888888887;
-// DATA: SERVER 0x10025fa8
 float g_const_896_0 = 896.0f;
-// DATA: SERVER 0x10025fac
 float g_const_0_06875 = 0.06875f;
-// DATA: SERVER 0x10025fb0
 float g_const_2_2 = 2.2f;
-// DATA: SERVER 0x10025fb4
 float g_const_1_5 = 1.5f;
-// DATA: SERVER 0x10025fb8
 float g_const_0_01 = 0.01f;
 
 /* Savegame header tail: the 9 bytes "Savegame\0" copied into the header at
  * +0x9c by ls_LoadSavegameHeader. Layout lives in
  * DieGildeAddOn/loadsave/save_header_tail.h. */
 #include "Develop/DieGildeAddOn/loadsave/save_header_tail.h"
-// DATA: SERVER 0x1002d4f0
 struct SaveHeaderTail g_save_header_tail = { 0x65766153, 0x656d6167, 0 };
 
 /* Tick rate read from the server ini by ServerMainThread; the binary's
  * initial value is 0 and the profile read overwrites it at startup. */
-// DATA: SERVER 0x11764088
 int g_tick_rate = 0;
 
 /* Small-block-heap pool region list, zero-init .data (BSS) in the original. */
-// DATA: SERVER 0x11766440
 int __sbh_cntHeaderList = 0;
-// DATA: SERVER 0x11766444
 void* __sbh_pHeaderList = 0;
 
 /* Game's private toupper (0x1001b0c0), called by OpenVfsStream. Forwarded to
@@ -389,4 +349,3 @@ int __cdecl _crt_locked_call4a(void* a, int b, int c, void* d)
 	(void) d;
 	return 0;
 }
-

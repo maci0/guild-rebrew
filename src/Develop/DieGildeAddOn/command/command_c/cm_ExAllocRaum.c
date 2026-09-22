@@ -9,6 +9,7 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
+// SIZE 0x30
 typedef struct copy_12_dwords {
 	uint data[12];
 } copy_12_dwords;

@@ -1,6 +1,7 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
+// SIZE 0x10
 typedef struct coords_16 {
 	int data[4];
 } coords_16;
