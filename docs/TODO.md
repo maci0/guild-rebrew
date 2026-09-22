@@ -33416,3 +33416,25 @@ instruction in the wrong place" question.
   fn entries and orphaned vfs4/vfs_OpenStream/spiel5 markers (W016/W022). Reverted; see IDEAS-GUILD.
 - **Gates:** lint 0/0, compile 0 errors, verify 281, extent 326 clean, byte-matched 264 — all held.
   GATE FAIL only on deliverable (split_link).
+
+### Round 1283 / session R260 (split_link root cause: PAD step diverges a good 246-aligned composition)
+- **split_link first run (no map -> no pad) = 246/319 CRT-aligned, split-set .text +690 (0x22af8),
+  delta +0x0..+0x31c** — the RAW composition is healthy and matches the historical r591 good state (246).
+- **Second run (map present -> pad active) = 0/319, +2754 (0x23308), delta +0x810..+0xb2c.** The pad
+  step *diverges* a good composition to zero. Repeated runs grow the overflow (+2578 -> +3698 across
+  rounds; stateful — reads prior build/split_poc.map).
+- **Root cause (pad_short_functions.py):** `map_entries()` returns each object's *built* VA from the
+  /MAP file; `want = sum(function_sizes().get(built_va))` looks up REFERENCE-keyed metadata by that
+  *built* VA. On a not-perfectly-aligned map (delta range spans +0x0..+0x31c) most lookups miss or
+  hit a different symbol's entry -> `want` is wrong -> objects are padded to the wrong span ->
+  divergence. It only works when built==ref (never fully true). No per-object reference VA is available
+  from the map for game `.c.obj` (only split `<va>_section.obj` names carry ref VA).
+- **Fix (round5):** make pad resolve each object's REFERENCE VAs (from `// FUNCTION: SERVER 0x...`
+  source markers via object->source, or a name->refVA index) instead of trusting map built VAs.
+- **Not the only deliverable blocker:** postlink_residual.py separately fails on a `.rdata` prefix
+  mismatch (IAT/import-dir), unrelated to CRT alignment.
+- **Confirmed intentional:** zlib-1.1.3 is compiled from `references/zlib-1.1.3/*.c` (reference has it
+  statically linked) — not a stray compile; earlier "zlib overflow" numbers were phantom (built-VA
+  lookup, not real).
+- **Gates:** lint 0/0, compile 0, verify 281, extent clean, byte-matched 264 — all held. GATE FAIL only
+  on deliverable (split_link pad + postlink rdata).
