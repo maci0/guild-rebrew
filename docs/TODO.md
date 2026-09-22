@@ -34029,3 +34029,20 @@ instruction in the wrong place" question.
   pair `fcn_004760c0`/`fcn_004774b0`.
 - **Measured:** GOLDTL 266 -> **277** (exact 108, reloc 169), GOLD 213 and SERVER 281/264 unchanged,
   zero demotions/losses, lint 761/761.
+
+### Round 1308 / session R283 (GOLDTL +14 — ninth batch; `&&` and guard-thunk clusters)
+- 14 more: four `a1/a3`-guarded constant returns (`fcn_00495990` 7, `fcn_004959c0` 8, `fcn_00495a20` 2,
+  `fcn_00495a50` 3 — the same shape as round 16's `fcn_00495960`), `fcn_0049bba0`/`fcn_0049bdf0`
+  (`*a4 == 1 && a3 == N` → `0x23`/`0x24`), a seven-function **guard-thunk cluster** at 0x4e4a80-0x4e4b40
+  (`if (*(int*)0x772f3c != 0) return 0|1; return callee();` — the tail call compiles to `jmp`), and
+  `fcn_004e6c60` (store the arg, then `sprintf(buf, fmt, a1)` into a 0x40 stack buffer).
+- **`&&` beats two `if`s.** `fcn_0049bba0` compiled two separate `if (...) return 0;` statements into a
+  *branchless* `setne/dec/and` sequence; written as one `if (a == 1 && b == N) return K;` it emits the
+  two `jne` tests the reference has. When a reference shows two conditional jumps and ours shows none,
+  merge the conditions.
+- **Guard thunks are a cluster type.** A 17-byte function that loads one global, branches and tail-calls
+  a sibling is `if (g != 0) return N; return sib();` with *any* prototype for `sib` — declaring it
+  `int sib(void)` is enough for the bytes because the tail call is a `jmp` and the arguments the caller
+  left on the stack pass through untouched. Seven landed in one pass.
+- **Measured:** GOLDTL 277 -> **291** (exact 114, reloc 177), GOLD 213 and SERVER 281/264 unchanged,
+  zero demotions/losses, lint 775/775.
