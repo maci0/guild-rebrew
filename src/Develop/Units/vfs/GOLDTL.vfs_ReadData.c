@@ -314,8 +314,8 @@
  * `[edi+0x104]` addressing the target uses, and the esi/edi tie is unmoved.
  */
 
-// FUNCTION: GOLDTL 0x412f10
-// SIZE: 416
+// FUNCTION: GOLDTL 0x4306b0
+// SIZE: 448
 // vfs_ReadData
 
 #include <string.h>

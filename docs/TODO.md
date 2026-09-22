@@ -33756,3 +33756,25 @@ instruction in the wrong place" question.
   0x62e3c8-0x62e3dc table — try `rebrew lib-match` before reversing it). Otherwise the near list is
   `gv_UpgradeField` 99.8, `vfs_ReadCompressed` 94.1, `gm_StartFilteredEntitySearch` 94.0,
   `cm_ChkEntityLookup` 93.2.
+
+### Round 1295 / session R271 (GOLDTL +3: gv_UpgradeField closed, its client-only helper, ls_ReadVfsDataChecked)
+- **`gv_UpgradeField` (99.8%, 556 bytes) is RELOC.** Its two calls are now both resolved: the allocator
+  at 0x4f1d20 (round 1291's VA fix) and the free helper at **0x4f2290**. The blocker was never codegen —
+  it was that the client calls a *different* free helper than the server:
+  - new `friedhof_logic_c/GOLDTL.gv_FreeFieldAllocs.c` = **0x4f2290**, RELOC 66/66. It frees
+    `slot[7]` (+0x1c), `slot[8]` (+0x20) and the slot; the tracked `gv_Free3Fields` (0x45b790, RELOC
+    100%) frees +0x24/+0x28 — the field slot's own tables are the +0x1c/+0x20 pair that
+    `gv_AllocGraveyardField` allocates, so the two are different functions, not duplicates.
+  - the client body moved to `game/GOLDTL.gv_UpgradeField.c` (calls gv_FreeFieldAllocs); the shared
+    `gv_UpgradeField.c` keeps the SERVER marker only (still RELOC 570/570).
+- **`ls_ReadVfsDataChecked` RELOC 37/37 via a corrected VA.** Its one unresolved reloc pointed at
+  0x4306b0, while the tree's `vfs_ReadData` entry claimed 0x412f10 — where the same source scores
+  6.7% against 23% at 0x4306b0. Moved `GOLDTL.vfs_ReadData.c` to 0x4306b0 (SIZE 448): the *caller*
+  names the function, so the caller's call site is the better VA evidence. `vfs_ReadData` itself is
+  still a poor reconstruction (STUB 126/446) and needs real work.
+- **Measured:** GOLDTL `verify --full` 134 -> **137** byte-matched (exact 54, reloc 83); GOLD 213 and
+  SERVER 281/264 unchanged; **zero demotions on any target**; lint 620/620 (the `vfs_ReadData` inline
+  `// CFLAGS: /O2 /Gd /Oy-` moved to metadata by `rebrew lint --fix`).
+- **Tried and reverted:** `ahm_CheckFlag` (0x4ec850, 59/70) with an explicit `result` local — obj grew
+  and match fell to 8/70; reverted. `gv_ExtendProductionTime` is 116 structural diffs (register
+  scheduling), not a quick fix.

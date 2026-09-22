@@ -2280,9 +2280,9 @@ size = 991
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["GOLDTL.0x005218f0"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "test"
-updated_at = "2026-09-12T14:56:22+00:00"
+updated_at = "2026-09-22T18:42:36+00:00"
 size = 37
 
 ["GOLDTL.0x0063e931"]
@@ -4815,9 +4815,9 @@ updated_by = "verify"
 updated_at = "2026-09-21T06:57:14+00:00"
 
 ["GOLDTL.0x004f2060"]
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "verify"
-updated_at = "2026-09-22T17:40:26+00:00"
+updated_at = "2026-09-22T18:43:25+00:00"
 size = 560
 
 ["GOLDTL.0x004f2ee0"]
@@ -5062,3 +5062,13 @@ updated_at = "2026-09-22T18:23:51+00:00"
 status = "EXACT"
 updated_by = "verify"
 updated_at = "2026-09-22T18:23:34+00:00"
+
+["GOLDTL.0x004f2290"]
+size = 66
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T18:41:05+00:00"
+
+["GOLDTL.0x004306b0"]
+size = 448
+cflags = "/O2 /Gd /Oy-"
