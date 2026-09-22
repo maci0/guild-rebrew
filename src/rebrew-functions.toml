@@ -6390,3 +6390,57 @@ size = 48
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-22T20:33:02+00:00"
+
+["GOLDTL.0x00477480"]
+size = 31
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T20:37:21+00:00"
+
+["GOLDTL.0x00477520"]
+size = 39
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T20:37:22+00:00"
+
+["GOLDTL.0x00479890"]
+size = 36
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T20:37:23+00:00"
+
+["GOLDTL.0x0047a040"]
+size = 39
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T20:37:25+00:00"
+
+["GOLDTL.0x0047a280"]
+size = 35
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T20:37:26+00:00"
+
+["GOLDTL.0x0047c450"]
+size = 43
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T20:37:27+00:00"
+
+["GOLDTL.0x00495150"]
+size = 39
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T20:37:28+00:00"
+
+["GOLDTL.0x0047d1b0"]
+size = 39
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T20:37:29+00:00"
+
+["GOLDTL.0x004ad4d0"]
+size = 33
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T20:37:30+00:00"

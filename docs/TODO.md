@@ -34344,3 +34344,34 @@ instruction in the wrong place" question.
   because `e` is dead after it), and `fcn_00459cd0` (return zero materialised at the top).
 - **Measured:** GOLDTL 374 -> **381** byte-matched (exact 143, reloc 238, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 866/866.
+
+### Round 1320 / session R295 (GOLDTL +9 — twenty-first batch: MSVC6 library-call converts and global fills)
+- Nine more: `fcn_00477480`, `fcn_00477520`, `fcn_00479890`, `fcn_0047a040`, `fcn_0047a280`,
+  `fcn_0047c450` (all EXACT) and `fcn_00495150`, `fcn_0047d1b0`, `fcn_004ad4d0` (RELOC).
+- **A `double` multiply followed by `(int)` is a `_ftol` library call.** `fcn_0047d1b0` is
+  `v = (int)(*(float*)0x773d50 * *(double*)0x6640c0);` with a 5/0x10 clamp — the bytes are
+  `fld dword [g]; fmul qword [c]; call <_ftol>; cmp eax,5 ...`. The `call` is a relocation, so the
+  function lands RELOC; write the expression as a double product and cast, do not hand-roll `fistp`.
+- **Constant-size `memcpy` inlines to `rep movsd` + `rep movsb`.** `fcn_00479890`
+  (`memcpy(p + 0x445, src, 0x400)` behind a null guard, returning 1) compiles to exactly that with
+  `#pragma intrinsic(memcpy)`; `fcn_00477560` (variable size, `rep movsd` + `and 3` + `rep movsb`)
+  needed the zero-extending `mov cx,[mem]` the reference has, and its `xor ecx,ecx` lands one
+  instruction earlier than ours (parked below).
+- **`__stdcall` vtable slots keep paying.** `fcn_00477480` (`if (p) { g_14ce728 = vtbl[2](p);
+  p = 0; }` over `g_7725ec`) and `fcn_0047c450` (`return vtbl[0x17](obj, 0x2a000, 0x228, 0x144, 0,
+  0x772614) >= 0;`) both match exactly with a `__stdcall` function-pointer type — the `>= 0` comes out
+  `xor edx,edx; test eax,eax; setge dl; mov eax,edx`.
+- **Two globals copied through a pointer-of-pointer need the loads first.** `fcn_004acee0`
+  (`g_7728c4 = **g_67fbb0; g_7728cc = **g_67fbb4;`) — the reference loads *both* globals (`a1`-moffs for
+  the first, `8b 15` for the second) before either dereference; every local-variable spelling we tried
+  moves the first load into `ecx` (parked below).
+- **Parked:** `fcn_00493f50` (7-entry 0x10-stride table scan returning `0x664260 + i*0x10` — the
+  reference keeps the counter in `eax` and the pointer in `ecx`; the pointer-loop and comma-init forms
+  both give the opposite, 14/39), `fcn_004acee0` (above), `fcn_00477560` (zero-extend placement),
+  `fcn_0047a2b0` (five-dword fill: reference keeps the `a1*5` index in `edx` and stores the first dword
+  through `[edx*4+disp]`, ours folds index and base into one register), `fcn_0047b9f0` (the
+  `and ecx,0xff` before `shl ecx,24` is folded away by our backend — semantically dead, byte-visible),
+  and `fcn_004ac290` (a `jmp` tail call with `this` in `ecx` and one stack argument; `__thiscall`
+  cannot be spelled from C).
+- **Measured:** GOLDTL 381 -> **390** byte-matched (exact 149, reloc 241, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 875/875.
