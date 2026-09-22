@@ -33530,3 +33530,30 @@ instruction in the wrong place" question.
   knob, not `.data`.
 - **GATE now fails on only two:** `.data 23860>21481` (game `.data` content) and `residue 11735>8628`
   (PROVEN byte-matching). wine/imports/verify/lint/extent all green.
+
+### Round 1287 / session R264 (residue deep-diagnostic: all 19 carriers are CONTENT at documented faults — positional fix class eliminated)
+- Residue gate is the last server.dll blocker (11734 vs baseline 8628, need -3106). Fresh re-approach
+  after whathas-on-1st-diff-offsets proved the wrong VAs:
+- **Positional-vs-content shift-scan (NEW, reusable):** for every residue carrier, take its metadata
+  (start VA + size), extract the reference `.text` span, and scan built-vs-ref match over shifts -48..+48.
+  **All 19 came back `best_shift = +0`** — every carrier sits at its correct link position. => Residue is
+  **100% CONTENT mismatch, zero positional drift.** Rules out the whole "functions are linked at the wrong
+  offset" fix class for this build; do not re-chase it. Match fractions at shift0:
+  gm_AllocSpieler .22 (STUB) | CrashDump .25 | gm_FindNext .28 | cm_ExCopyEntity .46 | cm_ExSellObjekt .49 |
+  ls_LoadBuilding .52 | gv_ExAllocGrave .54 | gm_AllocGebaeude .69 | gm_CheckInventory .74 | ahm_ExAlloc .76 |
+  m_AllocTracked .80 | ServerMainThread .84 | srv_LoadBuf .87 | gm_CalcProd .92 | gm_ObjectsAvailble .92 |
+  cm_ProcessCmdQ .93 | cm_ExProdObjekt .95 | vfs_ReadCompressed .96.
+- **Fresh `scripts/fault_address.py`:** all 19 fault addresses still land on the documented §12c/§12d
+  table (CrashDump `sub esp,0x280`, cm_ExProdObjekt `mov edx,[0x101de450]`, gm_CalcProd `fxch st(1)`,
+  gm_AllocSpieler `lea edx,[edx+0x100358fc]`, ...). No fault moved => no new/undocumented defect; §12d's
+  re-scored coverage (CrashDump 34, cm_ExSellObjekt 32, cm_ExCopyEntity 21 real doc hits) still holds.
+- **Fresh whathas on the CLOSE tail (correct start VAs this time), all walls:** cm_ExProdObjekt (5
+  structural, sizes 993=993) -> §60 volatile-store position is a dependency fixed point + §61a "aliasing
+  lever is a wall when >1 transposition"; cm_ProcessCommandQueue -> §61 shared-guard fall-through;
+  gm_CalcProd -> round196 retired ("no C89 handle...5-byte floor"); CrashDump -> §117 "two tails are a
+  register-pressure artefact, not a source shape" + Finding52 declaration-order inert; vfs_ReadCompressed
+  -> §85 clamp order ("three walls, do not re-probe").
+- **No code change this round.** The residue is confirmed a pure content-grind against ~19 exhaustively
+  documented walls; the close tail (match .93-.96) only carries 17-25 residue bytes each (~100 total even
+  if all closed), so gate residue <=8628 requires actually breaking the big walls (gm_AllocSpieler STUB,
+  CrashDump frame/register, ls_LoadBuilding). Lint 0/0, verify 281/264, tree clean throughout.
