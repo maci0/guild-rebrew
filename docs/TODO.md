@@ -35532,3 +35532,31 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 604 -> **605** byte-matched (exact 245, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged, GOLD 213; zero demotions/losses (the accidental deletion
   was restored in-round), lint 1087/1087 (0 warnings).
+
+### Round 1367 / session R338 (GOLDTL +1 — 606; split a merged inventory span)
+- One EXACT: `fcn_005809f0` (14B) — `return *(int*) 0x774a14 == 0;` (`mov ecx,[g]; xor eax,eax;
+  test ecx,ecx; sete al`).
+- **A merged inventory span can still be tracked one function at a time — with the *true* byte size.**
+  The inventory lists `0x5809f0` as a 64-byte entry, but only its first 14 bytes are that function (the
+  rest is a second function at 0x5809fc). `rebrew test` reports `match_count 9 / total 14` with an *empty*
+  mismatch list when the `// SIZE:` marker is 9 — the "total" there is the **compiled instruction count**,
+  not the byte length; setting `// SIZE: 14` (equal to `obj_size`) gives 14/14 EXACT. Rule: when a diff has
+  no mismatching instruction but the status is `SIZE_MISMATCH`, set the marker to `obj_size` and re-test.
+- **Bigger parked family confirmed as register-pair/index walls this round** (all decoded, none landed):
+  `fcn_0057ed10` (the 0x868050 base+b table probe: reference `add edx,ecx` then `cmp [edx+eax*4],0x12`
+  with `eax = b*147`; our folded `[ecx+edx]` form is 2 bytes longer, 26/66), `fcn_004c44c0`
+  (0xfb5760 scan from `[0x100581c]` to `[0xaed204]`, returns -1/0/1; the reference emits *both* `je` and
+  `jae` at the loop head, we only get `jae`, 20/65), `fcn_0047a2b0` (five dwords zeroed at
+  `0x100e7a0 + a1*20`; the reference's first store is the indexed form and the rest go through a pointer),
+  `fcn_00462390` (four out-parameter stores; the reference takes `a1` into `eax` before loading the source
+  global, ours takes it into `ecx`).
+- **Identified fix for a tracked straggler:** `gm_StartFilteredEntitySearch` (GOLDTL 0x503fe0 / SERVER
+  0x100170e0, NEAR_MATCHING 267/284) declares ten filter globals with *server* addresses only
+  (`g_query_filter_base` 0x10035464, `g_query_filter_extra2` 0x10030b8c, …) and emits `mov [0],ax` for the
+  GOLDTL build. The reference's GOLDTL addresses are 0x69937c/0x699380/0x699384/0x699386/0x699388,
+  0x773d80/0x773d84/0x773d85/0x773d88/0x773da0 — the file needs paired
+  `// GLOBAL: SERVER <va>` / `// GLOBAL: GOLDTL <va>` annotations (the format exists:
+  `src/fcn_00401090.c` carries `// GLOBAL: GOLDTL 0x6b7fdc`). Mapping the ten symbols to their GOLDTL
+  addresses is the next step; it should convert a delta-17 row to RELOC/EXACT.
+- **Measured:** GOLDTL 605 -> **606** byte-matched (exact 246, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged, GOLD 213; zero demotions/losses, lint 1088/1088.

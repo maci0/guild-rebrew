@@ -7751,3 +7751,9 @@ size = 57
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-22T22:59:22+00:00"
+
+["GOLDTL.0x005809f0"]
+size = 14
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T23:03:25+00:00"
