@@ -230,6 +230,7 @@ if(REBREW_BUILD_SERVER)
   # --exclude list drops files absent from the original server.dll.
   execute_process(
     COMMAND rebrew order-sources ${SERVER_SOURCES} ${ZLIB_SOURCES}
+      --marker SERVER
       --first-va adler32.c=0x10001000
       --first-va crc32.c=0x100011f0
       --first-va deflate.c=0x10001330
