@@ -35155,3 +35155,27 @@ instruction in the wrong place" question.
   must never be reversed — they are `// LIBRARY: D3DX8`.
 - **Measured:** GOLDTL 585 -> **588** byte-matched (exact 231, reloc 357, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1071/1071 (0 warnings).
+
+### Round 1353 / session R324 (GOLDTL +1 — fifty-third batch: 0x5c61e0 index-built list walk)
+- One EXACT: `fcn_005c61e0` (58 bytes; the inventory's 64 includes 6 trailing nops).
+- **A list walk whose address is built from the index, with the match as a `return` inside the loop.**
+  The function scans 0x1c-stride records from `0x6abb08` while the record's first dword is non-zero and
+  returns `0x6abb08 + n*0x1c` for the record whose dword equals the argument. Four spellings, four
+  layouts:
+  - `p = base; while (p != a1) { ... }` (pointer compare) — wrong comparison entirely, 8/58;
+  - `while (v != 0) { if (v == a1) break; ... }` then `if (v != 0) return ...;` — right shape but the
+    extra post-loop `test/jne` survives, and `p = base` hoists *above* the entry test, 40/62;
+  - dropping `p` and rebuilding the address from `n` inside the loop gets the strength-reduced walker
+    `mov ecx,0x6abb08; ... mov eax,[ecx+0x1c]; add ecx,0x1c` placed *after* the guard, 40/62;
+  - `while (v != 0) { if (v == a1) return (char*)(0x6abb08 + n*0x1c); n++; v = *(int*)(0x6abb08 +
+    n*0x1c); } return 0;` — the `return` inside the loop lets MSVC sink the value computation to a block
+    *after* the shared zero return, so the entry `test je` and the loop fall-through land on the same
+    `xor eax,eax; pop esi; ret` — 58/58.
+  Lever: when the reference shows one shared exit block plus a computation block *after* it, the source
+  has `return` inside the loop, not `break`.
+- **Parked:** `fcn_005c69d0` (32 × 0x40-byte record init at 0x7774a0: header `{0, -1, -1, -1}` then six
+  `{-1, 0}` pairs; the reference keeps only `-1` in `esi` and stores the zeros as immediates, MSVC hoists
+  a second callee-saved zero register (`or edi,-1` / `xor esi,esi`) and the inner loop's `lea eax,[ecx+8]`
+  becomes `[ecx+0xc]`, 3/60), plus the earlier list.
+- **Measured:** GOLDTL 588 -> **589** byte-matched (exact 232, reloc 357, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1072/1072 (0 warnings).
