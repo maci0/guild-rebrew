@@ -34882,3 +34882,24 @@ instruction in the wrong place" question.
   `fcn_0042def0`, `fcn_00549b50`/`fcn_0054b420`/`fcn_005650d0`.
 - **Measured:** GOLDTL 548 -> **552** byte-matched (exact 198, reloc 354, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1035/1035 (0 warnings).
+
+### Round 1342 / session R313 (GOLDTL +4 — forty-third batch: flags, sizes and range checks)
+- Four more, all EXACT: `fcn_00438a80`, `fcn_0045bf70`, `fcn_00459d50`, `fcn_0046e750`.
+- **Branchless flag words:** `fcn_00438a80` is `p->f214 |= 4; if (a2) p->f216 &= 0xdf; p->f216 &= 0xbf;
+  return 1;` — the `|`/`&=` on bytes compile straight through.
+- **The `int r = 0; if (p != 0) { … } return r;` skeleton is now the default for null-guarded
+  computers.** `fcn_00459d50` (0x34 + n² for one flag + 28n² for another) was 9/58 as
+  `if (p == 0) return 0;` and EXACT once the zero was hoisted into a variable that the single trailing
+  `return` reads — same lever as rounds 26/1335.
+- **Duplicated identical branches survive into the binary.** `fcn_0045bf70` tests `p[0] == 0x2a` and
+  then runs the *same* vtable-release code in both arms (`g_14ce728 = vtbl[2](p->f50); p->f50 = 0;`);
+  writing the duplicated body out (rather than factoring it) reproduces the reference exactly.
+- **A six-argument interval test:** `fcn_0046e750` is
+  `if (a1 >= a3 && a1 <= a3 + a5 && a2 >= a4 && a2 <= a4 + a6) return 1; return 0;` — the reference
+  computes `a3 + a5` into `ecx` before the compare and reuses it.
+- **Parked:** `fcn_00472640` and `fcn_00450c70` (both address `[base + index + disp]` where the reference
+  has the SIB base/index roles swapped; the struct-array spelling and swapped expression order both
+  fold), `fcn_0043bf20` (nested 8×8 fill), `fcn_004752e0` (guarded `memset` + counter decrement) plus the
+  earlier list.
+- **Measured:** GOLDTL 552 -> **556** byte-matched (exact 202, reloc 354, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1039/1039 (0 warnings).
