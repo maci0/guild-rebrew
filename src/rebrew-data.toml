@@ -2274,7 +2274,7 @@ status = "VERIFIED"
 section = ".data"
 name = "s_rb_1002944c"
 type = "char[]"
-size = 84
+size = 4
 status = "VERIFIED"
 
 ["SERVER.0x100294a4"]
