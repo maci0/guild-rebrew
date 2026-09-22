@@ -5568,3 +5568,78 @@ updated_at = "2026-09-22T19:31:08+00:00"
 status = "EXACT"
 updated_by = "verify"
 updated_at = "2026-09-22T19:31:08+00:00"
+
+["GOLDTL.0x00411500"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x00418c60"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x0041a2a0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x0044d580"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x0044d8e0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x0044e070"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x0044e0f0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x004c5770"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x004d4ec0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x004e4c40"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x0057c9d0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x0059f320"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x005ad360"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x005b1ed0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"
+
+["GOLDTL.0x005ae3c0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:33:45+00:00"

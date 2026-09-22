@@ -33977,3 +33977,19 @@ instruction in the wrong place" question.
   vtable-call shape (`fcn_00452340`), and the `p->f70 == -1/-2 → tail jmp` guard (`fcn_0057c8d0`).
 - **Measured:** GOLDTL 223 -> **234** (exact 97, reloc 137), GOLD 213 and SERVER 281/264 unchanged,
   zero demotions/losses, lint 718/718.
+
+### Round 1305 / session R280b (GOLDTL +15 — sixth batch)
+- 15 more reconstructions, all RELOC on the first spelling: `fcn_00411500` (6-arg `__stdcall` IAT call
+  taking `&a3`), `fcn_0044d8e0`/`fcn_0044e0f0` (zeroed local passed by address), `fcn_0044e070`
+  (0x100-byte stack buffer handed to `fcn_004011a0`), `fcn_004c5770` (0x9c buffer with a leading byte),
+  `fcn_004d4ec0` (double indirection `*(p+0x17c)+0x184`), `fcn_004e4c40` (guard + store of a call's
+  result), `fcn_0057c9d0`, `fcn_0059f320`/`fcn_005ad360`/`fcn_005ae3c0` (self-address passed to a
+  retry loop — three copies that differ only in the immediate), `fcn_005b1ed0` (list search + store at
+  +0x44), `fcn_00418c60` (conditional free + clear), `fcn_0041a2a0` (`while (*(unsigned*)g > 0)` —
+  `jbe`/`ja` means the counter is unsigned), `fcn_0044d580`.
+- **Patterns that now pay off on sight:** `push <self VA>` = the function passes its own address;
+  `jbe`/`ja` = unsigned loop bound; `add esp,0xN` after the last call = the total cdecl argument bytes
+  (and a missing `add` means the callee is `__stdcall`); `lea eax,[esp+K]` right after the prologue =
+  the address of the (K/4)-th stack argument.
+- **Measured:** GOLDTL 234 -> **249** (exact 97, reloc 152), GOLD 213 and SERVER 281/264 unchanged,
+  zero demotions/losses, lint 733/733.
