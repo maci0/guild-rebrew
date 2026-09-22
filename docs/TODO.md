@@ -35626,3 +35626,26 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL **606** byte-matched unchanged (exact 246, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52), SERVER 281/283 / byte-matched 264 / 100 imports unchanged, GOLD 213; zero
   demotions/losses, lint 1088/1088 (0 warnings).
+
+### Round 1370 / session R341 (GOLDTL +1 — 607; loop-test order fixes the rotation)
+- One EXACT: `fcn_004e8af0` (0x4e8af0, 68B) — the byte-keyed lookup over the 0x18-stride record table at
+  0x9a9220 (scan `byte[a] == key` to 0x9a9610, reject `i >= 0x2a`, then `memcpy(dst, 0x9a9220 + i*24, 24)`
+  and return 1).
+- **Put the *bound* test first inside `for (;;)` and MSVC's loop rotation reproduces the reference.**
+  Three spellings of the same loop, three layouts:
+  - `if (byte[a] == key) break; …; if (a >= bound) return 0;` — MSVC rotates to `jge exit` + a `jne`
+    back-edge (18/69);
+  - the same with the two tests swapped, i.e. `for (;;) { if (a >= bound) return 0; if (byte[a] == key)
+    break; a += 0x18; i++; }` — gives the reference's bottom test exactly: `cmp [eax],dl; je found;
+    add eax,0x18; inc ecx; cmp eax,bound; jl L`, with the exhaustion falling straight through to
+    `xor eax,eax; ret` and the found block after it — **68/68 EXACT**. Same rule as the round-1358
+    bare-`ret` finding: write the loop the way the *back-edge* reads, not the way the prose reads.
+- **The int-key sibling `fcn_004e8a80` (0x4e8a80) stays parked** (44/78): its key is an `int` compared
+  against the byte (`mov dl,[eax]; cmp edx,esi`), and the reference parks that key in `esi` (pushing it)
+  while MSVC keeps it in a volatile register, so the prologue (`push esi; mov esi,[esp+8]; xor ecx,ecx;
+  mov eax,0x9a9228`) never matches.
+- **Also parked this round:** `fcn_00505370` (80B, the 0x868050 `base+b` probe with a 7-way byte compare
+  — same base+b addressing wall as `fcn_00505340`), `fcn_0050bec0` (100B, loop over the same table).
+- **Measured:** GOLDTL 606 -> **607** byte-matched (exact 247, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 / byte-matched 264 / 100 imports, GOLD 213;
+  zero demotions/losses, lint 1089/1089 (0 warnings).
