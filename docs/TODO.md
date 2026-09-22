@@ -34288,3 +34288,34 @@ instruction in the wrong place" question.
   a local `v`, and the post-increment spellings all give the same 6/43.
 - **Measured:** GOLDTL 353 -> **363** byte-matched (exact 137, reloc 226, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 848/848.
+
+### Round 1318 / session R293 (GOLDTL +11 — nineteenth batch: float compares, comma-inits, switch chains)
+- Eleven more: `fcn_00452340`, `fcn_00449600`, `fcn_00451120`, `fcn_0045de70`, `fcn_00465920`
+  (all EXACT) and `fcn_004550b0`, `fcn_00456530`, `fcn_00456560`, `fcn_0045a200`, `fcn_0045fb30`,
+  `fcn_0045d5d0` (RELOC).
+- **A three-way float compare uses `and eax,0x4100; jne` for *both* arms.** `fcn_00451120` is
+  `if (*a2 > *a1) return 1; if (*a1 > *a2) return -1; return 0;` — with the second written as
+  `*a1 <= *a2` MSVC switches idioms (`test ah,0x41; jp`) and the bytes differ. In the sp5-pp profile
+  `and eax,0x4100; jne` is the `>` form (C3|C0 clear = greater); keep both arms `>`.
+- **`switch` with three consecutive cases is a `dec/je` chain.** `fcn_00449600` (`case 1/2/3` returning
+  three globals, then a fourth) compiles to `dec eax; je ...; dec eax; je ...` — no jump table at this
+  case count, so the switch spelling is safe.
+- **Comma-form loop init/update fixes the `xor`/`add` order.** `fcn_00465920` needs
+  `for (i = 0, p = (char*)(g + 4); i < 0x3ff; i++, p += 0x2f4)` so the counter is zeroed before the
+  base is adjusted and `inc eax` precedes `add ecx,0x2f4`; writing the init as a separate statement and
+  `p += ...` inside the body emits both pairs in the opposite order.
+- **Argument evaluation order decides which push comes first.** `fcn_0045fb30` writes 4 little-endian
+  bytes through a helper; the reference pushes `a1` first, then the masked byte — i.e. the call is
+  `helper((a2 & 0xff), a1)`, not `helper(a1, byte)`. MSVC evaluates right-to-left, so the argument that
+  should be pushed first is the *second* parameter.
+- **Inventory spans keep over-reporting.** `fcn_0045d5d0`'s inventory entry is 48 B, but the real
+  function is 31 B (the following 16-byte `mov eax,0x662ed8; ret` accessor shares the span). The tell is
+  `obj_size` in `rebrew test --json`: 31 against a declared 30 reports `SIZE_MISMATCH` with an *empty*
+  mismatch list — fix the `// SIZE:` marker, do not chase a byte diff.
+- **Parked:** `fcn_00459cd0` (39 B) — `if (p == 0 || p[0x16a]) return 0; fcn_004346f0(p);
+  p[0x16a] = 1; return 0;`. The reference materialises the return zero **once at the top**
+  (`push esi; mov esi,[esp+8]; xor eax,eax; test esi,esi; je <tail>; ...`) and its tail is a bare
+  `pop esi; ret`; ours leaves `xor eax,eax` after the body and loads the flag into `al` instead of
+  `cl`. Combined-condition, two-return and single-return spellings all give 11/39.
+- **Measured:** GOLDTL 363 -> **374** byte-matched (exact 142, reloc 232, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 859/859.
