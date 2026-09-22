@@ -35505,3 +35505,30 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 603 -> **604** byte-matched (exact 244, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
   imports, GOLD 213; zero demotions/losses, lint 1086/1086 (0 warnings).
+
+### Round 1366 / session R337 (GOLDTL +1 — 605; file-name collision caught and restored)
+- One EXACT: `fcn_00460a50` (57B) — `p = c->alloc(c->pool, 1, 0x1c);` through the vtable slot at ctx+0x20
+  (struct-member call form again), then five field stores. The struct needs `char pad24[4]` between the
+  function pointer and `pool`, or the call's first argument reads `[eax+0x24]` instead of `[eax+0x28]`.
+- **CAUTION — the `fcn_<va>.c` filename is not unique across targets.** The GOLDTL inventory VA 0x47dd60
+  looks like it should live in `src/fcn_0047dd60.c`, but that path is already a *shared* file whose first
+  marker is the **GOLD** VA `0x0047dd60` (its GOLDTL marker is 0x47d220). `cat > src/fcn_0047dd60.c`
+  silently overwrote a matched reconstruction and the later cleanup deleted it; the verify dropped from
+  the expected 605 to 604 and the deletion surfaced as ` D src/fcn_0047dd60.c` in `git status`. Restored
+  with `git checkout --` (GOLDTL 0x47d220 back to EXACT, count back to 605). **Check `git ls-files` /
+  `git status` for the intended filename before writing any new `fcn_*.c`.**
+- **Wider table sweep.** Re-running the address-byte sweep for the other known tables found untried users:
+  0x9a3825 (`0x4f5bf0`), 0x9ba3a0 (`0x4ce000`, parked), 0x868050 (`0x505370`, `0x50bec0`, `0x50c4e0`,
+  `0x50c7d0`, `0x510170`, `0x57ed10`), 0x9a9220 (`0x4e8a80`, `0x4e8af0`), 0xfb5760 (`0x4c44c0`).
+- **Parked:** `fcn_004e8a80` (byte-keyed 0x18-stride scan from 0x9a9228 to 0x9a9618, then a 24-byte
+  `memcpy` of `0x9a9220 + i*24`; the reference pushes `esi` and orders `esi = a1` before `ecx = 0`/
+  `eax = const`, ours loads the constant first, 44/78), `fcn_004f5bf0` (0x9a3825 0x2d-stride key scan
+  returning `idx + i`; first instruction goes to `eax` instead of `ecx`, 4/77), `fcn_00452360`
+  (0x418680-style six-arg slot call, but `size = [0x6b8714] * [0x67bc4c]` loads the *right* operand first
+  in every spelling — `a * b`, `a; a *= b`, and a local copy — 49/55), `fcn_00471ee0` (0x2f4-stride fill
+  at `[0x1015ea0] + 0x38`, 9/59), and the GOLDTL 0x47dd60 guard chain (137B; the reference reuses `eax`
+  for the `[a+0x16c]` pointer and returns it with a bare `ret` on the null path, ours keeps `a` live in
+  `eax` and materialises `xor eax,eax`, 43/139 — decoded shape is in this round's scratch notes).
+- **Measured:** GOLDTL 604 -> **605** byte-matched (exact 245, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged, GOLD 213; zero demotions/losses (the accidental deletion
+  was restored in-round), lint 1087/1087 (0 warnings).
