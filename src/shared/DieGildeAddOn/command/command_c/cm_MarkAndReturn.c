@@ -10,4 +10,3 @@ int __cdecl cm_MarkAndReturn(int cmd, char* result)
 	}
 	return 0;
 }
-

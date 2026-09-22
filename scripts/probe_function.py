@@ -37,7 +37,7 @@ from split_coff import Coff  # noqa: E402
 
 REFERENCE = ROOT / "original/Server/server.dll"
 IMAGE_BASE = 0x10000000
-INCLUDES = ["-I" + str(ROOT / "src/server.dll"),
+INCLUDES = ["-I" + str(ROOT / "src/shared"),
             "-I" + str(ROOT / "references/zlib-1.1.3")]
 MD = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
 

@@ -11,7 +11,7 @@ import re, sys, struct, glob, collections, capstone
 
 BASE = 0x10000000
 REF = "original/Server/server.dll"
-OBJDIR = "build/CMakeFiles/server_dll.dir/src/server.dll"
+OBJDIR = "build/CMakeFiles/server_dll.dir/src/shared"
 MAP = "build/split_poc.map"
 
 

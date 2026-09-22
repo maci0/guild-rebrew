@@ -10,10 +10,10 @@ status = "RELOC"
 
 ["SERVER.0x10002640"]
 size = 290
-status = "RELOC"
+status = "NEAR_MATCHING"
 analysis = "Core logging sink. Takes an output_mask bitfield: bit 0 writes to file (looking up the correct file name via severity in a global table), bit 2 writes to OutputDebugStringA (debugger), bit 3 writes to the allocated Win32 Console using WriteConsoleA."
-updated_by = "test"
-updated_at = "2026-09-20T18:15:38+00:00"
+updated_by = "verify"
+updated_at = "2026-09-22T03:58:50+00:00"
 
 ["SERVER.0x10002770"]
 size = 2115
@@ -44,8 +44,10 @@ status = "EXACT"
 ["SERVER.0x10003320"]
 size = 404
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "RELOC"
+status = "SIZE_MISMATCH"
 ghidra = "DecodePotentialControlTransfer"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x100034c0"]
 size = 83
@@ -55,9 +57,11 @@ analysis = "Initialization routine for the server's telemetry. Registers the Cra
 
 ["SERVER.0x10003520"]
 size = 160
-status = "RELOC"
+status = "NEAR_MATCHING"
 note = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()"
 analysis = "Ghidra reports 160B but last 5 bytes are NOP alignment padding after noreturn _exit()"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x100035c0"]
 size = 119
@@ -76,11 +80,15 @@ updated_at = "2026-09-10T15:25:56+00:00"
 
 ["SERVER.0x10003820"]
 size = 114
-status = "RELOC"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x100038a0"]
 size = 177
-status = "RELOC"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x10003960"]
 size = 560
@@ -148,15 +156,17 @@ status = "RELOC"
 
 ["SERVER.0x100068e0"]
 size = 162
-status = "RELOC"
+status = "NEAR_MATCHING"
 analysis = "Frees memory allocated by m_AllocTracked. Decrements the counters in the tracking structure and asserts that the global memory counts don't underflow. Emits fatal error on double-free or wild pointer."
 updated_by = "verify"
-updated_at = "2026-09-10T07:05:33+00:00"
+updated_at = "2026-09-22T03:42:50+00:00"
 blocker = "partial __asm block reproduces the original's alignment-prefixed memset prelude, which pure C cannot emit (docs/msvc6-allocator.md); the function byte-matches with it"
 
 ["SERVER.0x10006990"]
 size = 612
-status = "RELOC"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x10006c00"]
 size = 283
@@ -199,14 +209,16 @@ status = "RELOC"
 
 ["SERVER.0x10008d10"]
 size = 301
-status = "RELOC"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x10008e40"]
 size = 472
 cflags = "/O2 /Gd /Oy-"
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-13T00:45:43+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 blocker = "partial __asm block reproduces the original's hand-written alignment-prefixed copy prelude (docs/msvc6-allocator.md Finding 19), which no pure-C memcpy spelling emits; the function byte-matches with it"
 
 ["SERVER.0x10009020"]
@@ -524,9 +536,9 @@ status = "RELOC"
 
 ["SERVER.0x1000d570"]
 size = 361
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-22T00:16:43+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x1000d570".prove_constraints.arg0]
 type = "pointer"
@@ -1045,11 +1057,11 @@ status = "RELOC"
 size = 861
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 toolchain = "msvc-6.0-sp6"
-status = "RELOC"
+status = "SIZE_MISMATCH"
 ghidra = "InitGameWorld"
 analysis = "InitGameWorld: Allocates and loads building prototypes from A_Geb.dat (88 entries x 0x24D stride), object prototypes from A_Obj.dat (732 entries x 0x41 stride). Zeroes dynamic/existing entity arrays, initializes player slot templates, sets up production table. Counts producible objects per building prototype. Returns 0 on success, negative error codes on failure."
 updated_by = "verify"
-updated_at = "2026-09-20T20:44:53+00:00"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x10015cb0"]
 size = 57
@@ -1090,8 +1102,10 @@ status = "EXACT"
 ["SERVER.0x10016290"]
 size = 464
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "RELOC"
+status = "SIZE_MISMATCH"
 analysis = "Apply active query filters (id/type/owner/group) to current candidate."
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x10016460"]
 size = 320
@@ -1370,9 +1384,9 @@ status = "RELOC"
 
 ["SERVER.0x1001a140"]
 size = 14
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-10T15:27:54+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x1001a18a"]
 size = 49
@@ -1512,7 +1526,9 @@ note = "prove: Z3 found a satisfying assignment where EAX differs (checked 4 x 5
 ["SERVER.0x1001b8fb"]
 size = 217
 cflags = "/O1 /Gd"
-status = "RELOC"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x1001b9d4"]
 size = 157
@@ -1584,7 +1600,9 @@ status = "RELOC"
 ["SERVER.0x1001d036"]
 size = 97
 cflags = "/O1 /Oy- /Gd"
-status = "RELOC"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x1001d097"]
 size = 21
@@ -1649,7 +1667,9 @@ status = "RELOC"
 ["SERVER.0x1001d540"]
 size = 809
 cflags = "/O1 /Gd"
-status = "RELOC"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x1001d869"]
 size = 777
@@ -1674,7 +1694,9 @@ status = "EXACT"
 ["SERVER.0x1001e014"]
 size = 324
 cflags = "/O1 /Gd"
-status = "RELOC"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x1001e158"]
 size = 86
@@ -1699,7 +1721,9 @@ status = "RELOC"
 ["SERVER.0x1001e30c"]
 size = 520
 cflags = "/O1 /Gd"
-status = "RELOC"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["SERVER.0x1001e514"]
 size = 292
@@ -2086,9 +2110,9 @@ updated_at = "2026-09-12T21:04:40+00:00"
 
 ["SERVER.0x1001a150"]
 size = 12
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-13T02:33:09+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T03:42:50+00:00"
 
 ["GOLD.0x00423e70"]
 size = 10

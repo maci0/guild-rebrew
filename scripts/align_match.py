@@ -100,10 +100,17 @@ def target_instrs(va: str, size: int) -> list[str]:
 
 def candidate_instrs(rel_path: str, cflags: str, symbol: str) -> list[str] | None:
     OBJ.parent.mkdir(parents=True, exist_ok=True)
+    # Unified tree: verify filepaths are shared-relative; fall back to the
+    # legacy per-target path for stale verify_results.json entries.
+    src = "src/shared/" + rel_path
+    if not (ROOT / src).is_file():
+        legacy = "src/server.dll/" + rel_path
+        if (ROOT / legacy).is_file():
+            src = legacy
     cmd = ["rebrew-cmake-cl", "/nologo", "/c", *cflags.split(),
            "/MT", "/D", "_WIN32_WINNT=0x0400",
-           "/I", "src/server.dll", "/I", "references/zlib-1.1.3",
-           "/Fo.scratch/asmprobe/align_match.obj", "src/server.dll/" + rel_path]
+           "/I", "src/shared", "/I", "references/zlib-1.1.3",
+           "/Fo.scratch/asmprobe/align_match.obj", src]
     subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=900)
     out = subprocess.run(["objdump", "-d", "-Mintel", str(OBJ)],
                          cwd=ROOT, capture_output=True, text=True).stdout

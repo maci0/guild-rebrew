@@ -16,7 +16,7 @@ import re, sys, capstone
 BASE = 0x10000000
 REF = "original/Server/server.dll"
 BLD = "build/server.dll"
-OBJDIR = "build/CMakeFiles/server_dll.dir/src/server.dll"
+OBJDIR = "build/CMakeFiles/server_dll.dir/src/shared"
 MAP = "build/split_poc.map"
 
 # the largest residue carriers, from the gate's own attribution

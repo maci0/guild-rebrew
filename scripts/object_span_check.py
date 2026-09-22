@@ -46,7 +46,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 BUILD = REPO / "build" / "CMakeFiles" / "server_dll.dir"
-SRC = REPO / "src" / "server.dll"
+SRC = REPO / "src" / "shared"
 
 
 def text_size(obj_path):
@@ -115,9 +115,9 @@ def main():
                 continue
             obj = Path(root) / f
             rel = obj.relative_to(BUILD)
-            # strip the leading src/server.dll/ to find the .c it came from
+            # strip the leading src/shared/ to find the .c it came from
             parts = list(rel.parts)
-            if parts[0] != "src" or parts[1] != "server.dll":
+            if parts[0] != "src" or parts[1] != "shared":
                 continue
             src = SRC.joinpath(*parts[2:])  # .../foo.c.obj -> .../foo.c
             src = src.with_suffix("")

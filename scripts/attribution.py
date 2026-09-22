@@ -61,7 +61,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 REFERENCE = ROOT / "original/Server/server.dll"
 DELIVERABLE = ROOT / "build/server.dll"
-INVENTORY = ROOT / "src/server.dll/function_structure.json"
+INVENTORY = ROOT / "db/inventory-server.dll.json"
 RESIDUAL = ROOT / "scripts"
 
 #: Registers a schedule/register difference is allowed to move between.  Used
