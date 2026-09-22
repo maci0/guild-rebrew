@@ -35560,3 +35560,35 @@ instruction in the wrong place" question.
   addresses is the next step; it should convert a delta-17 row to RELOC/EXACT.
 - **Measured:** GOLDTL 605 -> **606** byte-matched (exact 246, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged, GOLD 213; zero demotions/losses, lint 1088/1088.
+
+### Round 1368 / session R339 (GOLDTL +0 — global-annotation attempt reverted; W016 blocks it)
+- **No new byte-matched function.** Attempted the fix identified in round 1367 for
+  `gm_StartFilteredEntitySearch` (GOLDTL 0x503fe0 / SERVER 0x100170e0), then reverted it.
+- **The GOLDTL addresses are now known** (read off the reference, in source-store order):
+  `g_filter_extra5` 0x69937c, `g_query_filter_extra1` 0x699380, `g_query_filter_extra2` 0x699384,
+  `g_query_filter_extra3` 0x699386, `g_query_filter_extra4` 0x699388, `g_dynasty_field_44` 0x773d80,
+  `g_dynasty_field_48` 0x773d84, `g_dynasty_field_49` 0x773d85, `g_dynasty_field_4c` 0x773d88,
+  `g_query_filter_base` 0x773da0.
+- **Adding `// GLOBAL: GOLDTL <va>` above each extern works for name resolution but trips lint W016.**
+  `gm_StartFilteredEntitySearch.c:5: W016: [GOLDTL 0x773da0] GLOBAL marker missing // SECTION: (.data,
+  .rdata, .bss)` — ten warnings, one per global. `src/Develop/rebrew_globals.h` (auto-generated,
+  SERVER-only) and `plant.c`'s plain `// GLOBAL: SERVER …` + `extern` pairs do *not* warn, so the trigger
+  is specific to this file's block. Tried and **all still warn**: `// SECTION: .data` *after* the GLOBAL
+  line, *before* it, and blank-line separation between each `GLOBAL`/`extern` pair. The lint test is
+  `if marker in ("DATA","GLOBAL") and "SECTION" not in found_keys` (`rebrew/lint.py:_check_W016_section`),
+  so the SECTION key has to land in the same annotation's `found_keys` — the accepted spelling is still
+  unknown; find it before re-attempting.
+- **With the annotations in place the tool resolves the names** (`[g_filter_extra5]`, …) but the positional
+  count dips 267/284 -> 264/284 (scoreboard unchanged — the row was already failed). The remaining delta is
+  the init-store *order*: the reference emits extra5, extra4, arg-load, extra1, field_44, extra2, extra3,
+  field_49, field_4c, field_48, i.e. the 0xff pair coalesced and extra1/field_44 before the two shorts.
+  Reordering the source to that order made it *worse* (129/284, SIZE_MISMATCH) because MSVC then hoisted
+  the `arg_count` load to the top. Reverted to the committed source; SERVER side stays RELOC 296/296.
+- **Parked:** `fcn_0050dc90` (98B, the 0x21c-stride search over 0x7f4ca2: skip `byte[+0x162] == 0`,
+  match `dword[+0x16a] == key`, accept `byte[0]` in {6,7,1,2}, return `0x7f4ca0 + i*540`; the reference
+  pushes `edi` (the key) before `esi` (the counter), ours is the reverse — 13/91), `fcn_00580a00`
+  (the 39B function at 0x5809f0+14; MSVC folds `a1 != 5` into a `push 5` for the tail call and, when
+  declared with both args, rebuilds the argument slots instead of jumping — 19/45 and 19/51).
+- **Measured:** GOLDTL **606** byte-matched unchanged (exact 246, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52), SERVER unchanged 281/283 / byte-matched 264 / 100 imports, GOLD 213; tree clean,
+  zero demotions/losses, lint 1088/1088 (0 warnings).
