@@ -2731,3 +2731,12 @@
 
 // LIBRARY: D3DX8 0x00465840
 // _zcfree
+
+// LIBRARY: D3DX8 0x0045de70
+// _putShortMSB
+
+// LIBRARY: D3DX8 0x00461190
+// _inflate_codes_free
+
+// LIBRARY: D3DX8 0x00465820
+// _zcalloc
