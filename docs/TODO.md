@@ -35407,3 +35407,30 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 597 -> **599** byte-matched (exact 239, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
   imports, GOLD 213; zero demotions/losses, lint 1081/1081 (0 warnings).
+
+### Round 1362 / session R333 (GOLDTL +1 — 600; NaN-safe FPU equality needs the inverted condition)
+- One EXACT: `fcn_00459940` (55B) — **600 byte-matched** milestone.
+- **Write the *inverted* float condition to get the reference's `jnp` and block order.** The function is
+  `if (a1 != 0 && a2 != 0) { if (<float test>) *(float*)(a2+8) = a3 * K; else *(int*)(a2+8) = 0; }` with
+  `K = [0x662dc4]` and the compared constant `[0x6628a8]`. MSVC6-sp5-pp emits the NaN-safe
+  `fcomp mem; fnstsw ax; test ah,0x44` (ZF|PF), where the AND result has 0 bits for greater/less, one bit
+  for equal and two for unordered. Written as `if (a3 == C) { store 0 } else { multiply }` the compiler
+  emits `jp` over an inline store-0 and puts the multiply last (33/55); written as
+  `if (a3 != C) { multiply } else { store 0 }` it emits the reference's `jnp` (taken only on equality, so
+  *not* on unordered) with the multiply as the fall-through and the store-0 block at the end — 55/55.
+  Same rule as the `setcc` and bare-`ret` findings: spell the condition the way the reference's *branch*
+  reads, not the way the semantics read.
+- **New tool `.scratch/sib.py`: sibling clustering.** Groups the untracked call-free pool (412 functions,
+  16..200B, D3DX8 band excluded) by exact size and >=85% byte identity, so a shape only has to be decoded
+  once. Largest clusters found: an 80-byte triple (`0x57f130/0x57f180/0x57f1d0`, the 0x665f08 context
+  setter with `0x19/0x10e`, `0x19/0x110`, `0x1a/0x110` guards) and 80/96-byte pairs
+  (`0x4ae170/0x4ae1c0`, `0x506d50/0x506da0`, `0x4adf80/0x4adfe0`, `0x4fc280/0x4fc2e0`,
+  `0x42b1c0/0x42b200`, `0x42b240/0x42b280`).
+- **Parked:** the `0x57f130` triple (65/73 — all three stores match except the third, where the reference
+  reloads `eax = [0x665f08]` then `edx = [0x6b7fac]` while MSVC puts the pointer in `edx` and the value in
+  `eax`; the direct, `q = ptr + 0xc` and local-`p` spellings all swap the pair), the `0x506d50` pair
+  (19/66 with obj 65 vs 68 — the reference copies `a1` into a *second* register (`mov ecx,eax` /
+  `mov edx,eax`) before storing, every `dst = a1` local is copy-propagated away), plus the earlier list.
+- **Measured:** GOLDTL 599 -> **600** byte-matched (exact 240, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
+  imports, GOLD 213; zero demotions/losses, lint 1082/1082 (0 warnings).
