@@ -34743,3 +34743,27 @@ instruction in the wrong place" question.
   off with identical instruction lists).
 - **Measured:** GOLDTL 517 -> **525** byte-matched (exact 172, reloc 353, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1008/1008 (0 warnings).
+
+### Round 1336 / session R308 (GOLDTL +5 — thirty-seventh batch: call-free getters, wider size window)
+- Five more, all EXACT: `fcn_0050f950`, `fcn_00545580`, `fcn_004c4dc0`, `fcn_004f17f0`, `fcn_0050dfd0`.
+- **The call-free filter works up to 64 bytes too.** Widening the round-1335 filter (`no e8`, 12–64 bytes)
+  gave 165 candidates; the batch above came out of it.
+- **Negative immediates encode short.** `fcn_004c4dc0` compares an argument against 0xfe/0xfd/0xfc and the
+  reference uses `83 f8 fe`/`fd`/`fc` (sign-extended imm8) — i.e. the source compares against
+  **-2/-3/-4**, not 254/253/252, which would force the 5-byte `3d` form.
+- **Compare operand order decides the encoding.** `fcn_004f17f0`
+  (`*(unsigned short*)(a2+8) == *(unsigned short*)(a1+0x50)`) needs the *memory* operand on the left
+  (`66 39 41 08`); the flipped spelling gives `66 3b 41 08` and misses.
+- **SIB byte arithmetic:** `8d 04 80` is `lea eax,[eax+eax*4]` (**×5**), not `[eax+eax*2]` — `8d 04 40`
+  is ×3. `fcn_0050dfd0`'s `(n + 2) * 5` and `n * 20` were first written as ×3/×12 from a mis-read SIB and
+  missed by 2 bytes; fix the multiplier, not the shape.
+- **A stray NEAR_MATCHING file is a visible regression.** Leaving `fcn_0050df70` (a 35/48 near-miss) in
+  `src/` took the verify summary from `failed 53 / matching 6` to `failed 54 / matching 7` even though
+  `byte_matched` rose. Delete every unverified file in the same round it is judged.
+- **Parked:** `fcn_0050df70` (four `cmp ax` values sharing one return block; ours is one jump
+  displacement off), `fcn_005b3460` (bounded-append; the reference's `mov al,1`/`xor al,al` tails and
+  `jge <fail>` layout are not reproduced by either the `int` or `char` return spelling) and
+  `fcn_004ee080` (stride walk that zeroes `base + i*0x18`; our backend never materialises the `esi`
+  parameter).
+- **Measured:** GOLDTL 525 -> **530** byte-matched (exact 177, reloc 353, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1014/1014 (0 warnings).

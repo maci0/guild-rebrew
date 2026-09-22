@@ -7254,3 +7254,38 @@ size = 36
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-22T21:21:30+00:00"
+
+["GOLDTL.0x0050f950"]
+size = 48
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:24:14+00:00"
+
+["GOLDTL.0x00545580"]
+size = 48
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:24:15+00:00"
+
+["GOLDTL.0x004c4dc0"]
+size = 37
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:24:19+00:00"
+
+["GOLDTL.0x004f17f0"]
+size = 33
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:24:20+00:00"
+
+["GOLDTL.0x0050dfd0"]
+size = 39
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:24:21+00:00"
+
+["GOLDTL.0x0050df70"]
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T21:24:24+00:00"
