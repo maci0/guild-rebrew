@@ -4897,3 +4897,42 @@ size = 41
 status = "STUB"
 updated_by = "test"
 updated_at = "2026-09-22T16:55:24+00:00"
+
+["GOLDTL.0x00401180"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T17:09:29+00:00"
+
+["GOLDTL.0x004011d0"]
+size = 23
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T17:10:22+00:00"
+
+["GOLDTL.0x004011f0"]
+size = 23
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-22T17:10:25+00:00"
+
+["GOLDTL.0x00401320"]
+size = 23
+
+["GOLDTL.0x0040c630"]
+size = 48
+
+["GOLDTL.0x00479ed0"]
+size = 38
+
+["GOLDTL.0x0047cb60"]
+size = 32
+
+["GOLDTL.0x004cec00"]
+size = 41
+
+["GOLDTL.0x005af2f0"]
+size = 16
+
+["GOLDTL.0x005ba750"]
+size = 30
