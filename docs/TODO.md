@@ -35456,3 +35456,27 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 600 -> **602** byte-matched (exact 242, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
   imports, GOLD 213; zero demotions/losses, lint 1084/1084 (0 warnings).
+
+### Round 1364 / session R335 (GOLDTL +1 — 603; 0x65xxxx region opened)
+- One EXACT: `fcn_00652c85` (19B: two field stores, `[a1+0x50] = 0x6b4c70` — a vtable pointer — and
+  `[a1+0x14] = 1`).
+- **New region: the GOLDTL `0x650000-0x66ffff` band is game code, not library.** The pool scan finds
+  `lib-match --lib references/dxsdk8/lib/d3dx8.lib` clean for it (`0x00652851 is not in the given
+  libraries. Safe to reverse.`), no GOLDTL function above 0x65xxxx is tracked yet, and the region holds
+  families of tiny helpers (the twins sweep matched `0x652834/0x652841/0x652851` against the *server's*
+  `0x1001c97a/0x1001c987/0x1001c997`), so both targets can share the source once decoded.
+- **Parked: the stack-pop accessors `0x652834`/`0x652841`/`0x652851`.** All three are one-liners —
+  `*a1 += 4; return *(int*)(*a1 - 4);` (13B), the `__int64` twin `*a1 += 8; return *(__int64*)(*a1 - 8);`
+  (16B), `*a1 += 4; return *(unsigned short*)(*a1 - 4);` (14B) — and the reference uses the *memory*
+  read-modify-write `add dword ptr [eax], 4` followed by a reload (`mov eax,[eax]; mov eax,[eax-4]`),
+  while MSVC always materialises `mov ecx,[eax]; add ecx,4; mov [eax],ecx; mov ecx,[eax]` (17/18/22 bytes
+  vs 13/16/14). Same result through `int**` + `(*a1)++`, `int*` + `*a1 += 4`, and `__int64` spellings; the
+  RMW form appears to need the incremented value to be dead, which it cannot be here.
+- **Also parked:** the `0x4bbce0` LCG (`seed = seed*0x41c64e6d + 0x3039; return word[0x7728e2] % 0x7fff %
+  a1;` — the reference keeps both `div`s but schedules `mov esi,0x7fff` after the seed store where we
+  hoist it, 28/59) and the `0x4c2820` 0x114-stride null-terminated list scan (the reference keeps the key
+  in `ebx`, the record base in `esi`, the inner walker in `edx` *and* a second copy in `edi`; ours needs
+  only two registers and loses the extra pushes, 6/58).
+- **Measured:** GOLDTL 602 -> **603** byte-matched (exact 243, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
+  imports, GOLD 213; zero demotions/losses, lint 1085/1085 (0 warnings).

@@ -7733,3 +7733,9 @@ size = 70
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-22T22:50:35+00:00"
+
+["GOLDTL.0x00652c85"]
+size = 19
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T22:52:58+00:00"
