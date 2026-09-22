@@ -34064,3 +34064,30 @@ instruction in the wrong place" question.
   different register).
 - **Measured:** GOLDTL 291 -> **298** (exact 116, reloc 182), GOLD 213 and SERVER 281/264 unchanged,
   zero demotions/losses, lint 783/783.
+
+### Round 1310 / session R285 (GOLDTL +9 — eleventh small-function batch)
+- Nine 36-37-byte functions: `fcn_00510900` (EXACT 37/37), `fcn_00469510` (EXACT 37/37),
+  `fcn_00420b70` (EXACT 37/37), `fcn_00476c70` (EXACT 36/36), `fcn_0045d740` (RELOC 37/37, 8-arg
+  `__cdecl` tail call with the literal chain `(a1, a2, 8, 0xf, 8, 0, a3, a4)`), `fcn_004c4890`
+  (RELOC 37/37), `fcn_004c48c0` (RELOC 36/36), `fcn_004e4610` (RELOC 36/36), `fcn_00402340`
+  (RELOC 37/37).
+- **A `short` fill loop is `rep stosd` + `stosw`.** `for (i = 0; i < 17; i++) ((short*)0x7f3b00)[i] = -1;`
+  compiles to `mov ecx,8; or eax,-1; mov edi,imm; rep stosd; stosw` — the odd word is the loop's tail,
+  not a separate store. Writing the tail as `*(short*)0x7f3b20 = -1;` instead emits a 7-byte
+  `mov word ptr [imm],0xffff` and misses by 2 bytes. Use the element-count loop.
+- **`xor al,al` is a `char` return.** `fcn_00510900` ends `xor al,al` (upper `eax` still `0xffffff00`
+  from the fill's `or eax,-1`); declaring the function `char` and `return 0` reproduces it. A `void`
+  version is exactly 2 bytes short (`pop edi; ret` where the reference has `xor al,al; pop edi; ret`).
+- **Parked (GRA, not steerable from C this round):** `fcn_0044d550` + its byte-identical twin
+  `fcn_0044df20` — our instruction sequence is *instruction-for-instruction identical* to the reference
+  (load `+0x14`, load `+0x1c`, add, store, load `+0x24`, add, store, `xor ecx,ecx`, two stores, `ret`)
+  but MSVC sinks the `+0x2c` load *after* the first add, frees `ecx`, and so never needs `esi`; the
+  reference hoists that load before the add, which forces the third home into `esi`
+  (`push esi`/`pop esi`, 35 vs 37 bytes). Declaration order, a four-loads-first form, `c`-first
+  ordering, and both deref and local-variable statement forms all reproduce the 35-byte allocation.
+  `fcn_004c7600` is the same class: identical through 16 bytes, then `or ecx,eax` (reference) vs
+  `or eax,ecx` (ours) with the global store scheduled after the `test` in the reference and before the
+  arg-2 load in ours; the memory-deref form, a two-local form, the byte-first `|=` form and the
+  combined-expression form all give `or eax,ecx`.
+- **Measured:** GOLDTL 298 -> **307** byte-matched (exact 120, reloc 187, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 792/792.
