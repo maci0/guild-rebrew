@@ -33438,3 +33438,26 @@ instruction in the wrong place" question.
   lookup, not real).
 - **Gates:** lint 0/0, compile 0, verify 281, extent clean, byte-matched 264 — all held. GATE FAIL only
   on deliverable (split_link pad + postlink rdata).
+
+### Round 1284 / session R261 (ROOT CAUSE FOUND + FIXED: order-sources --marker SERVER; postlink 2% -> 62.8%)
+- **Root cause of the whole split_link/postlink collapse: `rebrew order-sources` had no `--marker SERVER`.**
+  The reorg flattened the tree so game files carry BOTH `// FUNCTION: SERVER` and `// FUNCTION: GOLDTL`
+  markers, and on shared files the GOLDTL marker often comes FIRST (plant.c: GOLDTL 0x4bcb80 on line22,
+  SERVER 0x10014F80 on line24). Without `--marker SERVER`, order-sources reads each file's *first* marker,
+  so it sorted shared sources by their **GOLDTL VA** — scrambling the SERVER link order. Direct proof:
+  `rebrew order-sources plant.c sim.c spiel62.c cm_ExKillSpieler.c` puts plant FIRST (GOLDTL 0x4bcb80);
+  the same with `--marker SERVER` puts cm_ExKillSpieler first, plant second (SERVER 0x10014F80).
+- **Fix = the `--marker SERVER` arg on order-sources in CMakeLists.txt** (was sitting uncommitted in the
+  working tree). After `cmake -S . -B build && cmake --build build`: **postlink layout coverage
+  148/7463 (2.0%) -> 4686/7463 (62.8%)** — a 31x jump; `objects1.rsp` reorders (plant.c.obj moves to
+  slot155, between cm_ExKillSpieler@86 and sim@156, matching SERVER-VA order). Committed as
+  `93155b34`.
+- **split_link now STABLE:** run1 = run2 = 246/319 CRT-aligned, split-set .text +690 — no more
+  246->0 divergence (round 1283's pad feedback loop is gone; correct objects1.rsp gives the pad
+  mostly-correct built-VA lookups). Remaining: .text still0x620 short (0x22226 vs0x22846) and
+  intra-object function order (plant.c defines find_zone before lb, but ref VAs are lb10014ee0 <
+  find_zone10014F80) — both cap alignment below the90% postlink threshold.
+- **Blocked mid-round by DISK FULL (ENOSPC):** `bash`/`glob` cannot launch (`mkdtemp /tmp/...` fails;
+  /tmp is a separate tmpfs no longer reachable by workspace writes). The committed marker fix + the
+  postlink62.8% measurement are the round's verified results; the full `gate.sh` run could not complete.
+  Truncated `build/split_poc.map` via the write tool to try to recover — did not free /tmp.
