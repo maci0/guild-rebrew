@@ -4948,7 +4948,10 @@ updated_by = "test"
 updated_at = "2026-09-22T17:17:16+00:00"
 
 ["GOLDTL.0x00401320"]
-size = 23
+size = 55
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T19:07:00+00:00"
 
 ["GOLDTL.0x0040c630"]
 size = 48
@@ -5131,3 +5134,19 @@ updated_at = "2026-09-22T19:04:58+00:00"
 status = "RELOC"
 updated_by = "verify"
 updated_at = "2026-09-22T19:04:58+00:00"
+
+["GOLDTL.0x00401000"]
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T19:05:53+00:00"
+
+["GOLDTL.0x00401040"]
+size = 67
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T19:06:29+00:00"
+
+["GOLDTL.0x004012b0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T19:07:42+00:00"

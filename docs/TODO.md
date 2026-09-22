@@ -33848,3 +33848,29 @@ instruction in the wrong place" question.
   because MSVC sees the loop as unbounded; parked with the decode recorded here.
 - **Measured:** GOLDTL `verify --full` 140 -> **148** (exact 55, reloc 93); GOLD 213 and SERVER 281/264
   unchanged; zero demotions/losses on any target; lint 629/629.
+
+### Round 1299 / session R275 (GOLDTL +4; three GOLD files clobbered and restored — always check before `cat >`)
+- **Four more start-function reconstructions** (+4 GOLDTL, 148 -> 152):
+  - **`fcn_00401040`** (0x401040, 67 B) RELOC 67/67: `q = strchr(path,'\\'); p = q + 1; if (!q)
+    p = path; if ((q = strchr(p,'/')) != 0) p = q + 1; if ((q = strchr(path,'.')) != 0) *q = 0;
+    return p;`. The first test is on the **pre-increment** pointer (`lea esi,[eax+1]` then
+    `test eax,eax`), which is why the naive `if (q) p++` spelling lands 2 bytes long.
+  - **`GOLDTL.fcn_00401000.c`** (0x401000, 52 B) RELOC 52/52 — crc32 over a 256-entry table. The
+    client table is at **0x6624a0** (GOLD's is 0x5eb380) and the client's loop shape is `while (n > 0)`
+    with a walking pointer; GOLD's `for (i = 0; i < n; i++)` spelling compiles 6 bytes long here.
+    `reloc` also proved it: `while (n != 0)` emits `je` where the reference emits `jbe`.
+  - **`GOLDTL.fcn_004012b0.c`** (0x4012b0, 53 B) RELOC 53/53 and **`GOLDTL.fcn_00401320.c`**
+    (0x401320, 55 B) RELOC 55/55 — client twins of GOLD's 45-byte / 23-byte bodies (the client calls
+    `fcn_004011d0` four times over consecutive fields, and `fcn_00401260` on four consecutive ints).
+- **Mistake, caught and repaired:** `cat > src/fcn_00401000.c`, `fcn_004012b0.c` and `fcn_00401320.c`
+  **overwrote existing GOLD files** — the todo list's `filename` column names a *neighbouring* file, not
+  a free slot. GOLD lost `fcn_00401320` (RELOC 23/23) until the originals were restored from HEAD and
+  the GOLDTL bodies moved to `GOLDTL.*` twins. **Check `git cat-file -e HEAD:<path>` (or `ls`) before
+  writing a reconstructed file; the twins are the correct home when the body differs per target.**
+- **Parked with decodes:** `fcn_004013b0` / `fcn_004013f0` (0x4013b0 / 0x4013f0, 60 B each) are
+  file-read wrappers: `fcn_004011f0(a1, &a1)`, then `fcn_0041db70(a1, const)` (the constant is
+  0x675040 for 0x4013f0, an argument for 0x4013b0), `*a2 = p`, then `vfs_ReadData(p, a1, 1, a1)` with
+  `add esp,0x20` covering two stdcall and one cdecl callee. Their argument-offset arithmetic is worked
+  out here; the first spelling tried compiled to the wrong frame and was dropped rather than guessed.
+- **Measured:** GOLDTL 152/203 byte-matched (exact 55, reloc 97), GOLD 213 and SERVER 281/264
+  unchanged, zero demotions/losses, lint 633/633.

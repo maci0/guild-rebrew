@@ -3238,3 +3238,7 @@ section = ".data"
 ["GOLDTL.0x014d0020"]
 name = "g_14d0020"
 section = ".data"
+
+["GOLDTL.0x006624a0"]
+name = "g_6624a0"
+section = ".rdata"
