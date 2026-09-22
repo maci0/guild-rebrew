@@ -34508,3 +34508,26 @@ instruction in the wrong place" question.
   57/61 — the reference loads the *second* parameter first).
 - **Measured:** GOLDTL 438 -> **453** byte-matched (exact 160, reloc 293, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 936/936.
+
+### Round 1326 / session R300b (GOLDTL +8 — twenty-seventh batch: remaining record-writer shapes)
+- Eight more `fcn_004c4330` family members, all RELOC: `fcn_004ce1d0`, `fcn_004ce3e0` (zero-fill then
+  tag), `fcn_004c4eb0`, `fcn_004c4ef0` (tag + `fcn_0064d530(buf+0x10, a1, 0x80)`), `fcn_004c5ed0`
+  (tag + byte at `+0x44` + a 3-arg call on `buf+0x14`), `fcn_004c6150` (`strcpy(buf+0x14, a2)` with the
+  intrinsic), `fcn_004c6190` (`memcpy(buf+0x11, a1, 0x80)` **at the odd offset `+0x11`**) and
+  `fcn_004c72e0` (`gm_StartFilteredEntitySearch(1, 1, a1[4])` then `test byte [p+0x5a], 2`).
+- **`strcpy` with the intrinsic reproduces the reference's unrolled copy.** `fcn_004c6150` copies the
+  second (string) parameter into `buf+0x14`; the bytes come out `sub edx,eax` + the `mov cl,[eax];
+  mov [edx+eax],cl; inc eax; test cl,cl; jne` loop only with `#pragma intrinsic(strcpy)`, same lever as
+  round 1312.
+- **Argument order is read off the push sequence, not the C signature.** `fcn_004c72e0` pushes
+  `[a1+0x10]` first and `1`, `1` after, so the call is `gm_StartFilteredEntitySearch(1, 1, a1[4])` — the
+  obvious `(a1[4], 1, 1)` spelling evaluates the arguments in the opposite order and mismatches at byte 4.
+- **Zero-fill writers store the tag *between* the `memset` and the fields.** `fcn_004ce3e0` is
+  `memset(buf+0x10, 0, 0x80); buf[0] = 0x5f; *(int*)(buf+0x10) = 5; *(int*)(buf+0x14) = a1;` — putting
+  the tag last moves it after the field stores and mismatches; `fcn_004ce1d0` is the reverse
+  (`memset`, redundant `*(int*)(buf+0x10) = 0`, then the tag, with no other fields).
+- **Parked:** `fcn_004c6900` (struct writer, 36/55: the reference stores field 0 *before* the `lea`/`push`
+  for `&buf` and reads fields 1 and 2 after; every C spelling we tried loads all three fields first) and
+  `fcn_004ce260`/`fcn_004ce210` (same ordering sensitivity with a global field).
+- **Measured:** GOLDTL 453 -> **461** byte-matched (exact 160, reloc 301, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 944/944.
