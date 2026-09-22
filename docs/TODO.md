@@ -33922,3 +33922,21 @@ instruction in the wrong place" question.
   sub eax,idx; mov eax,[eax*4]`).
 - **Measured:** GOLDTL 178 -> **194** (exact 77, reloc 117), GOLD 213 and SERVER 281/264 unchanged,
   zero demotions/losses, lint 678/678.
+
+### Round 1302 / session R278 (GOLDTL +13 — third batch of small functions)
+- 13 more reconstructed: `fcn_00475220` (`strcpy` into the fixed buffer at 0x100f8c0, EXACT),
+  `fcn_004c7310`/`fcn_004c7330` (`return callee(p+0x10) == 0;` — the `neg/sbb/inc` tail is `==0`, where
+  `neg/sbb/neg` is `!=0`), `fcn_00408220` (alloc 0x14 + store at +0x10), `fcn_0044e0d0`
+  (`vfs_ReadData(&a1, 4, 1, a1)`), `fcn_00470080` (`__stdcall` 5-arg, span 23 B), `fcn_00495120`
+  (append + bump), `fcn_005779c0` (`return callee(a) >= 0;` — `setge`), `fcn_004246e0` (list counter),
+  `fcn_00525e90` (`fild`/store 0/`fstp` — needs an explicit `float` local to order the FPU store after
+  the int store), `fcn_005ccbe0`/`fcn_00533880` (bulk zero loops), `fcn_004a8750`.
+- **Two codegen lessons:** (1) a pointer-walk `for` emits `jb` where the reference's int-address loop
+  emits `jl` — spell loops over absolute addresses with an `int` counter, not `int*`; (2) reordering a
+  global store around an FPU store needs an explicit local, since the scheduler otherwise floats the
+  `fstp` ahead of the int store.
+- **Also:** `__declspec`-free `__stdcall` *definitions* need named parameters (MSVC6 C2055 on an
+  unnamed list), and a global read-then-clear pair only matches when written load/store/store
+  (`v = *p; *p = 0; *q = v;`).
+- **Measured:** GOLDTL 194 -> **207** (exact 84, reloc 123), GOLD 213 and SERVER 281/264 unchanged,
+  zero demotions/losses, lint 691/691.
