@@ -33394,3 +33394,25 @@ instruction in the wrong place" question.
 - **GOLDTL 111 -> 112.** amt_ValidateOfficeCandidate (0x4e7f20): added `extern char g_office_slots[]` (was COMPILE_ERROR), then wrong-callee fix — target calls fcn_00508e40, not gm_LookupEntityRecordById. All 70 instructions exact, RELOC 205/205.
 - **Negative:** gv_AllocGraveyardField / ahm_ProcessEntityChain compile with bare externs but wrong-body (1/276, 1/46). Reverted.
 - **Gates:** GOLDTL 112 (47 exact/65 reloc), lint 0.
+
+### Round 1282 / session R259 (server.dll post-reorg: gate lint+extent cleared; split_link regression diagnosed)
+- **Gate now passes lint, compile, verify, data-extent** — only FAIL is missing `build/server.dll`:
+  - lint 2 warnings (W020 on m_init/vfs_ReadData justified-asm RELOCs) -> 0 via `rebrew blocker set`
+    (Finding-19 asm evidence). 
+  - data-extent REGRESSION (s_rb size=84 crosses g_gzip by 0x50) -> fixed. Root cause: source range
+    marker `/* DATA: SERVER 0x1002944c..0x100294a0` (=0x54=84) was parsed as s_rb's extent; binary
+    has s_rb='rb\0\0'=4 bytes, gzip 0x1f/0x8b at +4/+8. Set size=4 via `rebrew.data_metadata.set_data_field`
+    (atomic writer; no --set-size CLI exists).
+  - verify 281/283 baseline held (2 walled: ServerMainThread, gm_AllocSpieler).
+- **split_link regression (the reorg's real breakage):** position-alignment 246/319 -> 0/319,
+  split-set .text +642 -> +2578 (0x22ac8 -> 0x23258). Timeline: good through 2026-09-17 (r591),
+  broken by 2026-09-22 reorg commits (src/Develop mirror). 8 objects "too long" to pad drive the
+  cascade: infcodes +1056, inffast +800, inftrees +1824, m_AllocTracked +496 (672 vs want 176),
+  server3 +64, ahm_GetCommandPayloadSize +16, gv_ExtendProductionTime +240, ls_LoadTownData +1056.
+  split_link.sh itself unchanged since Round-454; the OBJECTS grew (reorg changed TU/object
+  composition). No postlink -> no deliverable -> residue/imports/wine unmeasured -> GATE FAIL.
+- **rebrew bug found:** `rebrew orphans --prune` wrongly deletes metadata for block-comment
+  `/* DATA: SERVER 0x... */` markers (parser misses that form): pruned 260 data lines + 3 GOLDTL
+  fn entries and orphaned vfs4/vfs_OpenStream/spiel5 markers (W016/W022). Reverted; see IDEAS-GUILD.
+- **Gates:** lint 0/0, compile 0 errors, verify 281, extent 326 clean, byte-matched 264 — all held.
+  GATE FAIL only on deliverable (split_link).
