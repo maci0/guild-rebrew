@@ -159,7 +159,7 @@ From [europa1400-database](https://github.com/europa1400-community/europa1400-da
 | Binary | Role | Status here |
 |---|---|---|
 | `original/Server/server.dll` (286,720 bytes) | Dedicated server, game logic | Active reversing target, 283 annotated (of 543 discovered); verify round 55: 281 passed, 264 byte-matched (31 EXACT + 233 RELOC), 2 failed; deliverable residue 8628 bytes, all in `.text` (round 56) |
-| `original/Europa1400Gold_TL.exe` (2,850,888 bytes) | T&L client, shared game logic | Active focus, 6335 discovered, 174 annotated |
+| `original/Europa1400Gold_TL.exe` (2,850,888 bytes) | T&L client, shared game logic | Active focus, 6335 discovered, 171 annotated |
 | `original/Europa1400Gold.exe` (2,301,952 bytes) | Base client | Validation target, 4638 discovered, 330 annotated |
 
 `server.dll` exports: `Init` (0x10009320), `Exit` (0x10009350). Image base
@@ -199,7 +199,11 @@ via NB10 debug header, `units\Msx\msx.c`, `units\net\net.c`). GOLD.exe embeds
 `Units\d3\ts_texture.c`, `Units\d3_tools\d3_tools.c`,
 `Units\dd_vesa\Dd_vesa.c`, `units\Msx\msx.c`, `units\net\net.c`.
 (`d2.v1\GFX.C` per naming doc reads as the truncated `Units\d2.v` hit.)
-This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
+Repo tree is unified: `src/Develop` mirrors `D:\Develop` for all targets
+(`shared_dir`, rebrew ADR-022); one `// FUNCTION: <marker> <va>` block per
+target selects each binary's code. Divergent twins sit side by side as
+`GOLDTL.<name>.c` / `GOLD.<name>.c`. The old `_c` split-TU suffixes are
+unattested working names, not original layout.
 
 ## 6. Architecture
 
@@ -209,7 +213,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   (Community
   [server.dll.md](https://github.com/europa1400-community/europa1400-decompilation/blob/main/server.dll.md)
   uses different names — `srv_GameLoop`, `srv_InitServer` — unverified here;
-  tree names above are what `src/server.dll` annotates.)
+  tree names above are what `src/Develop` annotates.)
 - Two-phase commands: `cm_Chk*` validate, `cm_Ex*` execute; handlers return int
   (0 OK, 1 reject/fail), typically `(cmd, result)` pointer pairs — exact
   parameter spellings vary per TU in the tree. 69 `cm_` handlers annotated in
@@ -221,7 +225,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   ElectionOrTrade), character (ChangeDesire/ChangeAttribute/ChangeBits/
   ChangeFloat/ModifyHealth/ModifyStamina/ModifyStat), system (SimCommand,
   WarEvent, ThemaPredigt, Cutscene, CopyEntityData, SetSyncFlags).
-- Subsystems (all in `src/server.dll/DieGildeAddOn/`): `sim_` citizen sim
+- Subsystems (all under `src/Develop/DieGildeAddOn/`): `sim_` citizen sim
   (`sim_AdvanceGameClock`, `sim_SetSyncParams`, `sim_PriorityUpdate`;
   `sim_CreateCitizen` 0x10015500); `amt_` offices/elections
   (`amt_ValidateOfficeCandidate`, `amt_ValidateAndAssignOffice`,
@@ -239,7 +243,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   `gm_CheckEntityType`, `gm_CheckInventoryCapacity`, `gm_eval_SlotVoll`,
   `gm_ff_Objekt`), random (`gm_RandomFloat01`, `gm_RandomQuadratic`,
   `gm_RandomStatModifier`).
-- Shared types (`src/server.dll/game_structs.h`, sizes compiler-verified):
+- Shared types (`src/Develop/game_structs.h`, sizes compiler-verified):
   `PlayerSlot` (0x264264: flags + id + data), `LinkedNode` (0x43 packed:
   type + entity_id + children + next), `OFFICE_SLOT` (0x18),
   `OFFICE_ROLE_TEMPLATE` (0x18), `EntityQueryRecord` (0xa9 packed, 0x100-entry
@@ -313,7 +317,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
 
 ## 8. Persistence (save/load)
 
-- Chain in `src/server.dll/DieGildeAddOn/loadsave/`: `ls_LoadSavegameHeader`
+- Chain in `src/Develop/DieGildeAddOn/loadsave/`: `ls_LoadSavegameHeader`
   (0x10012470) → `ls_ReadVfsDataChecked` (0x10012440) → `ls_LoadExistingEntities`
   (0x100127d0) → `ls_LoadBuildingEntityState` (0x100128f0) →
   `ls_LoadDynamicEntities` (0x10012eb0) → `ls_LoadEntities` (0x10013230) →
@@ -349,7 +353,7 @@ This repo's `_c` directory suffixes are NOT attested (split-TU artefact).
   `vfs_FlushAndClose`, `vfs_ReadData`, `vfs_ReadCompressed`, `vfs_GetByte`,
   `vfs_ReadUint32BE`, `vfs_CleanupObject`, `vfs_DestroyEntity`; zlib gzio
   wrappers (`gzread`, `check_header`); shared `gz_stream` (0x64) header lifted
-  to `Units/vfs/gz_stream.h`.
+  to `src/Develop/Units/vfs/gz_stream.h`.
 
 ## 12. Assets and engine
 
@@ -417,6 +421,6 @@ All 14 `europa1400-community` org repos covered below (round 83 audit; incl.
 - Community tables use own names/confidence; do not import names without
   confirmed-push string check (`rebrew asm` + literal push).
 - Maintenance: annotated counts drift with reversing churn — re-verify with
-  `grep -r "FUNCTION: <MARKER>" src/<target> --include="*.c" | wc -l` before
-  citing. Link health swept round 19, re-swept round 57 (press/store/reboot
-  green, wiki 502).
+  `grep -r "FUNCTION: <MARKER> " src --include="*.c" | wc -l` (trailing space;
+  bare `GOLD` also matches `GOLDTL`) before citing. Link health swept round 19,
+  re-swept round 57 (press/store/reboot green, wiki 502).
