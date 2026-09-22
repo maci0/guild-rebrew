@@ -34091,3 +34091,26 @@ instruction in the wrong place" question.
   combined-expression form all give `or eax,ecx`.
 - **Measured:** GOLDTL 298 -> **307** byte-matched (exact 120, reloc 187, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 792/792.
+
+### Round 1311 / session R286 (GOLDTL +5 — twelfth batch: guard-ret merges and int address loops)
+- Five more: `fcn_00546f80` (EXACT 37/37), `fcn_00413160` (EXACT 38/38), `fcn_00425940`
+  (EXACT 38/38), `fcn_004012e50` (RELOC 38/38), `fcn_00401230` (RELOC 35/35, `strlen(a2) + 1` with
+  the `repne scasb` inline).
+- **Signed pointer compare means `int` addresses.** `fcn_00546f80` and `fcn_00413160` both end their
+  loop with `jl`; written with `char*`/`signed char*` pointers and `p < end` the compiler emits `jb`
+  (one byte off per loop). Rewriting the walker as `for (a = 0x7dcae0; a < 0x7e1ae0; a += 0x50)` with
+  `*(int*)(a + 8)` field stores reproduces `jl` exactly. Same lever as round 1309's `jl` note.
+- **Two early `return 0;` do not merge; a single-exit `return count;` does.** `fcn_00425940` reads two
+  globals, bails twice, then counts a 0x30-stride walk. With two literal early returns MSVC emits an
+  inline `jne`-over-`ret` plus duplicated global reloads (58 bytes); with `count = 0`, nested
+  `if (base != 0) { if (i > 0) { ... } }` and one final `return count;` the two guard branches become
+  forward `je`/`jle` to the shared tail `ret` (38/38 EXACT). The `&&` form also merges but re-reads both
+  globals inside the body; the nested-if form with one load per global is the one that matches.
+- **Parked:** `fcn_004011a0` (34 B) — walk `a2 - 1`, call a 2-arg helper on `p + 1`, repeat while
+  `*p != 0`. Reference: `call; mov eax,esi; add esp,8; cmp byte[eax],0; jne`. Ours: `call; mov cl,[esi];
+  add esp,8; test cl,cl; mov eax,esi; jne` — the copy `p = q` is coalesced away (the byte is read
+  straight from `esi`). Two-variable `p`/`q`, `*(p = q)`, `while (1) { ... if (*q == 0) break; }`,
+  the expression-assignment form `f(a1, p = p + 1)` and a `char*` return all give the same 35-byte
+  allocation; only the pre-`dec` `do/while` form reaches 24/34.
+- **Measured:** GOLDTL 307 -> **312** byte-matched (exact 123, reloc 189, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 797/797.

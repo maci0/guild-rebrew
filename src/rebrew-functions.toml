@@ -5946,3 +5946,33 @@ size = 38
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-22T19:54:09+00:00"
+
+["GOLDTL.0x00401230"]
+size = 35
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T19:58:51+00:00"
+
+["GOLDTL.0x00546f80"]
+size = 37
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T19:58:53+00:00"
+
+["GOLDTL.0x00413160"]
+size = 38
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T19:58:54+00:00"
+
+["GOLDTL.0x00425940"]
+size = 38
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T19:58:55+00:00"
+
+["GOLDTL.0x00412e50"]
+size = 38
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T19:58:56+00:00"
