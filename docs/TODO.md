@@ -34858,3 +34858,27 @@ instruction in the wrong place" question.
   `fcn_00545970`, `fcn_004f6740`, `fcn_0042def0`, `fcn_00549b50`/`fcn_0054b420`/`fcn_005650d0`.
 - **Measured:** GOLDTL 545 -> **548** byte-matched (exact 194, reloc 354, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1031/1031 (0 warnings).
+
+### Round 1341 / session R312 (GOLDTL +4 — forty-second batch: table finders and bulk copies)
+- Four more, all EXACT: `fcn_0041e490`, `fcn_00426cc0`, `fcn_00420650`, `fcn_0041bd80`.
+- **Read a two-test guard off the *jump targets*, not the C you pick.** `fcn_00420650` (0x6b72b4 walk
+  by 0x128) has `test dl,dl; jne <loop update>` then `cmp byte [eax],0; jne <the FOUND block>` — the
+  second test branches to the *success* path, so the condition is
+  `*(char*)(a+2) == 0 && *(char*)a != 0` (the opposite of the natural reading). Both `== 0` spellings
+  produced the mirrored `je` and missed by one byte.
+- **A for-update list fixes increment order.** `fcn_00426cc0` (0x80-entry finder over
+  `*(int*)0x6b7e94`, stride 0xc98, key at +0x100) needed `for (i = 0, p = base + 0x100; i < 0x80;
+  i++, p += 0xc98)`: putting `p += 0xc98` in the body emits `add ecx` before `inc eax`.
+- **The "difference trick" copy loops compile from plain indexing.**
+  `fcn_0041bd80` is `for (i = 0; i < 0x100; i++) { p[i] = g_6b6008[i]; p[i+0x100] = g_6b6108[i];
+  p[i+0x200] = g_6b6208[i]; }` — the reference computes three `base - p` differences and walks `p` once;
+  the straightforward indexed form reproduces it exactly.
+- **Nested null-guarded field extraction:** `fcn_0041e490` reads up to three ints out of a
+  pointer-to-pointer (`a = b = c = 0; if (p) { q = *p; if (q) { a = q[0]; b = q[1]; c = q[2]; } }
+  if (o1) *o1 = a; ...`) — three locals pre-zeroed, three guarded stores.
+- **Parked:** `fcn_0042a030` (0x80-entry counter with a three-part `&&`; our last branch is `75` where
+  the reference has `74` at the same target), `fcn_00418dc0` (the `edi`/`esi` register roles are not
+  reproduced), `fcn_00450c70`, `fcn_004f6810`, `fcn_004e8b40`, `fcn_00545970`, `fcn_004f6740`,
+  `fcn_0042def0`, `fcn_00549b50`/`fcn_0054b420`/`fcn_005650d0`.
+- **Measured:** GOLDTL 548 -> **552** byte-matched (exact 198, reloc 354, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1035/1035 (0 warnings).
