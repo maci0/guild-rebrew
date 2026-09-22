@@ -2328,9 +2328,9 @@ updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x004cc490"]
 size = 44
-status = "NEAR_MATCHING"
-updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T22:32:00+00:00"
 
 ["GOLDTL.0x004f6520"]
 size = 128

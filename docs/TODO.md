@@ -35273,3 +35273,34 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL **589** byte-matched (exact 233, reloc 356, size_mismatch 45, matching 6, stub 2),
   SERVER unchanged 281/283 passed / 264 byte-matched / 17 PROVEN / 100 imports, GOLD 213; zero
   demotions of real work; lint 1072/1072.
+
+### Round 1357 / session R328 (GOLDTL +1 — VA-named callee masking unblocks call-only stragglers)
+- **New lever: naming an unresolved callee `fcn_<VA>` lets the reloc mask validate it.** `cm_ChkEntityLookup`
+  (GOLDTL 0x4cc490) sat at NEAR_MATCHING delta **3** with a single mismatching instruction — its only
+  call (`call 0x4f48e0`) — because the source declared the callee under a semantic name
+  (`gm_LookupEntityRecordById`) that maps to no tracked VA. Renaming the declaration (and call) to
+  `fcn_004f48e0` — the project's own VA-derived name for an unreversed function — takes it to
+  **RELOC 44/44**. The mask resolves the symbol by *name → VA*, so `fcn_XXXXXXXX` declarations work even
+  when that VA is untracked; a semantic alias for a not-yet-reversed callee silently costs the whole
+  function its byte match.
+- **Backlog this unblocks:** any tracked function whose diff is `e8 00000000` (candidate) against a real
+  `call <VA>` (target). Scanning the carriers found `gv_ExtendProductionTime` (0x4f2880) with two such
+  sites (`fcn_10016ea0` — a *SERVER*-style name in a GOLDTL file — and `gm_AddObjekt`); renaming them to
+  the reference's callee VAs (`fcn_00503930`, `fcn_005037c0`) moved the delta 30 -> 27 but the function
+  also carries structural drift, so it stayed NEAR_MATCHING and the rename was reverted. Use the lever
+  only where the call is the *whole* delta; check with `rebrew diff <va> --mismatches-only` first.
+- **`// GLOBAL:` annotations must sit *above* the `// FUNCTION:` markers.** Adding
+  `// GLOBAL: SERVER 0x101de450` next to the `extern char* g_item_def_table;` declaration in
+  `cm_ExProdObjekt.c` (line ~24) made `rebrew test` report every row `SKIPPED / No symbol (missing C
+  function definition)` — the annotation parser binds the leading block, and `plant.c` keeps all DATA/
+  GLOBAL rows above the FUNCTION rows for exactly this reason. Moved to the file head, both targets
+  resolve again. The annotation itself is status-neutral here (`cm_ExProdObjekt` stays PROVEN: its 17-byte
+  delta is 5 structural bytes — a scheduling swap around `mov edx,[0x101de450]` — and 33 *valid* relocs),
+  but the global's VA is now attested in-tree instead of only in a comment.
+- **Parked:** `fcn_004f48e0` (146-byte frame function 0x124: `fcn_004f4830(b, buf)` then the 0x7f4ca4
+  record check and the 0x68ff80 store; decoded fully but the reference keeps `a1` in `esi` and `b` in
+  `dl` across the call with no spill, MSVC spills `b` and takes `edi` for `a1`, frame 0x128 vs 0x124 —
+  19/154, file deleted), plus the earlier list.
+- **Measured:** GOLDTL 589 -> **590** byte-matched (exact 233, reloc 357, matching 5, size_mismatch 45,
+  stub 2; failed 53 -> 52), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100 imports,
+  GOLD 213; zero demotions of real work, lint 1072/1072 (0 warnings).

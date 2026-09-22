@@ -20,7 +20,7 @@
  *     param_2[8] = '\0';
  *     param_2[9] = '\0';
  *   }
- *   iVar1 = gm_LookupEntityRecordById(*(int *)(param_1 + 0x10));
+ *   iVar1 = fcn_004f48e0(*(int *)(param_1 + 0x10));
  *   return (uint)(iVar1 == 0);
  * }
  */
@@ -35,13 +35,13 @@
 
 // FUNCTION: GOLDTL 0x4cc490
 // SIZE: 44
-int __cdecl gm_LookupEntityRecordById(char* idPtr);
+int __cdecl fcn_004f48e0(char* idPtr);
 
 int __cdecl cm_ChkEntityLookup(int cmd, char* result)
 {
 	int found;
 
-	found = gm_LookupEntityRecordById((char*) cmd + 0x10);
+	found = fcn_004f48e0((char*) cmd + 0x10);
 	if (result != (char*) 0x0) {
 		result[1] = '\0';
 		*result = (char) ((found == 0) + 1);

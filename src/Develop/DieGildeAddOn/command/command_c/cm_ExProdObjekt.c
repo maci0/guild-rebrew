@@ -1,3 +1,6 @@
+// GLOBAL: SERVER 0x101de450
+extern char* g_item_def_table; /* 0x101de450, attested in rebrew-data.toml */
+
 // FUNCTION: GOLDTL 0x4c35f0
 // SIZE: 960
 // FUNCTION: SERVER 0x1000e140
@@ -21,7 +24,6 @@
 #include "../command_internal.h"
 #include "../../../Units/Error/error.h"
 
-extern char* g_item_def_table; /* 0x101de450, attested in rebrew-data.toml */
 extern unsigned char g_current_season;
 
 short* __cdecl gm_ResolveParentEntity(short*);
