@@ -35235,3 +35235,41 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 590 -> **592** byte-matched (exact 235, reloc 357, size_mismatch 45, matching 6,
   stub 2); SERVER unchanged at 281/283 passed, byte_matched 264 (exact 31, reloc 233), proven 17,
   matching 1, stub 1; GOLD 213 unchanged; zero demotions/losses, lint 1075/1075 (0 warnings).
+
+### Round 1356 / session R327 (GATE: d3dx8 lib-match 3 findings -> 0; server coverage 89.94 %, wine artifact)
+- **Fixed a real gate regression: 3 GOLDTL "game" sources were stock zlib.** `src/fcn_0045de70.c`
+  (`_putShortMSB`), `src/fcn_00461190.c` (`_inflate_codes_free`) and `src/fcn_00465820.c` (`_zcalloc`)
+  byte-match objects in `d3dx8.lib` (`deflate.c.obj`, `infcodes.c.obj`, `zutil.c.obj`) — D3DX8 statically
+  links zlib, so the linker supplies those bytes. `scripts/gate.sh`'s lib-match step vetoed them
+  (`d3dx8 lib-match findings: 3`). Both were added in the early GOLDTL batches (`aa051b0e`, `9ad698e1`),
+  long before the lib-match veto covered this band; nothing references them, so the three `.c` files are
+  deleted and their VAs added to `src/library_d3dx8.h` next to the existing zlib entries
+  (`_flush_pending` 0x45dea0, `_zcfree` 0x465840, `_crc32` 0x45d600).
+  `rebrew lib-match --lib references/dxsdk8/lib/d3dx8.lib --target Europa1400Gold_TL.exe` now reports
+  **0 findings**; gate step prints `d3dx8 lib-match findings: 0`. GOLDTL 592 -> **589** byte-matched
+  (tracked 645 -> 642) — correct accounting, the three were never our work.
+- **Current gate state (full `scripts/gate.sh`, two runs).** PASS: lint 1072/1072 (0 warnings), compile
+  0 errors, verify `281/283` and `byte-matched 264` baselines held, imports exactly 100, lib-match 0.
+  FAIL: raw-link `.data` **22749 > 21481**, residue **11735 (0x2dd7) of 0x22846 (8.30 %)** vs baseline
+  8628, wine load `err=193`.
+- **New measurement — the coverage gate is the wine blocker, and the link is *long*, not short.**
+  `postlink_residual` prints `WARNING: layout-map coverage 89.94% is below the 90% gate … output is an
+  intermediate artifact, not a runnable build` — that is why wine rejects the file (the fixers rewrite
+  operands by fixed offset, so a sub-90 % map is unsafe). Coverage is `(op_ok+call_ok)/(op_tot+call_tot)`
+  over the layout package's recorded operands and call sites (`rebrew/residue.py` + `postlink._map_coverage`),
+  so it is a *content* fraction, not a length one. Measured geometry: built `.text` VirtualSize
+  **0x22af8 (142072)** vs reference **0x22846 (141382)** = **+690**, and all 690 trailing bytes are
+  **zero padding** (0 non-pad bytes) — the older "`.text` still 0x620 short" note (round 1284) no longer
+  describes this tree. First built-vs-reference differing byte is at `.text+0x1772` (expected: postlink
+  operand patches).
+- **Carrier table re-run (`scripts/first_divergence.py`): all 19 unchanged** — `gm_AllocSpieler +0xaa`
+  (`lea edx,[edx+0x100358fc]` vs `mov word [ebp],bx`), `CrashDump +0x2` (`sub esp,0x280` vs `0x284`),
+  `cm_ExSellObjekt +0x2c`, `ls_LoadBuilding +0x3c`, `cm_ExCopyEntity +0x30`, `gv_ExAllocGrave +0x107`,
+  `ServerMainThread +0x3c7`, `gm_AllocGebaeude +0x60`, `vfs_OpenStream +0x36`, `gm_FindNext +0x6`,
+  `ahm_ExAllocAlchemist +0xcc`, `gm_CheckInventory +0x13`, `m_AllocTracked +0x11`, `srv_LoadBuf +0x50`,
+  `gm_ObjectsAvailble +0x10d`, `vfs_ReadCompressed +0x9a`, `cm_ExProdObjekt +0xcd`,
+  `cm_ProcessCmdQ +0x37`, `gm_CalcProd +0xe4`. Content mismatches at every carrier, so raising coverage
+  above 90 % means byte-matching carriers, not re-mapping offsets.
+- **Measured:** GOLDTL **589** byte-matched (exact 233, reloc 356, size_mismatch 45, matching 6, stub 2),
+  SERVER unchanged 281/283 passed / 264 byte-matched / 17 PROVEN / 100 imports, GOLD 213; zero
+  demotions of real work; lint 1072/1072.
