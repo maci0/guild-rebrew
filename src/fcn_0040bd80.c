@@ -1,0 +1,15 @@
+// FUNCTION: GOLDTL 0x40bd80
+// SIZE: 58
+
+void __cdecl fcn_004050c0(void*);
+
+void __cdecl fcn_0040bd80(char* a1)
+{
+	if (*(int*) (a1 + 0xc) == 0) {
+		*(int*) (a1 + 0x34) = *(int*) 0x6b7fac;
+	}
+	if (*(unsigned int*) 0x6b7fac > (unsigned int) (*(int*) (a1 + 0x34) + *(int*) (a1 + 0x30)) ||
+	    *(unsigned char*) (a1 + 0x190) != 0) {
+		fcn_004050c0(a1);
+	}
+}

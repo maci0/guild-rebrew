@@ -35304,3 +35304,29 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 589 -> **590** byte-matched (exact 233, reloc 357, matching 5, size_mismatch 45,
   stub 2; failed 53 -> 52), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100 imports,
   GOLD 213; zero demotions of real work, lint 1072/1072 (0 warnings).
+
+### Round 1358 / session R329 (GOLDTL +3 — bare shared `ret` via a single trailing `return r`)
+- Three RELOC: `fcn_00423850`, `fcn_00423890` (sibling setters: 0x6b7d7c gate → a1 != 0 → `a2` in
+  [0,0x7f] → `a1[0xa]`/`a1[9]` compare → store, then tail-call `fcn_0042a9a0`/`fcn_0042a920(a1[0], a2)`),
+  `fcn_0040bd80` (void: `if ([a1+0xc] == 0) [a1+0x34] = [0x6b7fac]; if ([0x6b7fac] > [a1+0x34]+[a1+0x30] ||
+  [a1+0x190] != 0) fcn_004050c0(a1);` — the tail `jmp` needs the *void* return type, and the unsigned
+  `ja` needs the operands read as unsigned).
+- **New lever: a single trailing `return r;` gives the reference's bare shared `ret`.** All four exits of
+  `fcn_00423850` land on one bare `ret` that reuses `eax` (the loaded 0x6b7d7c gate is already 0 on the
+  two zero paths, and `a2` on the two range paths). Three spellings, three layouts:
+  - `return 0;` twice → MSVC materialises a block (`xor eax,eax; ret`), obj 56 vs 54, every early-exit
+    `jl/jg/je` two bytes long (50/56);
+  - `return r;` inside both guards → obj 54 but the first exit inlines (`jne +1; ret`, 10/54);
+  - **positive nested guards + one `return r;` at the end** → one far `je 0x35` per exit to a bare `ret`,
+    obj 54, 54/54. Rule: when every exit of a function reuses a register the entry already holds, close
+    the body with a single `return <that variable>;` and guard with `if (r != 0) { if (a1 != 0) { ... } }`
+    rather than mirroring the reference's `if (!x) return 0;` chain.
+- **Call-only scan (round 1358):** ran `.scratch/callonly.py` over all 16 tracked rows with delta <= 80
+  (both targets) to find functions whose whole delta is an unmasked `e8 00000000` call. **None qualify** —
+  every carrier has structural drift as well, so the round-1357 VA-naming lever only pays for genuinely
+  call-only diffs. `gm_CalculateProductionValue` (delta 5) is a pure two-instruction scheduler swap
+  (`fxch st(1)` vs `cmp byte [esi],0x17`), still the closest carrier; `fcn_004f48e0` parked in 1357
+  (0x124 frame, ref keeps `a1` in `esi`/`b` in `dl` across the call, we spill).
+- **Measured:** GOLDTL 590 -> **593** byte-matched (exact 233, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
+  imports, GOLD 213; zero demotions/losses, lint 1075/1075 (0 warnings).

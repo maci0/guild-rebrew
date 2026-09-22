@@ -7661,3 +7661,21 @@ size = 58
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-22T22:17:15+00:00"
+
+["GOLDTL.0x00423850"]
+size = 54
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T22:39:26+00:00"
+
+["GOLDTL.0x00423890"]
+size = 54
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T22:39:31+00:00"
+
+["GOLDTL.0x0040bd80"]
+size = 58
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T22:39:32+00:00"
