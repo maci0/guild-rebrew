@@ -35199,3 +35199,39 @@ instruction in the wrong place" question.
   index loops give 39/49 and the pointer loop 2/49), plus the earlier list.
 - **Measured:** GOLDTL 589 -> **590** byte-matched (exact 233, reloc 357, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1073/1073 (0 warnings).
+
+### Round 1355 / session R326 (GOLDTL +2, SERVER audit — fifty-fifth batch: 0x4cef70 / 0x4b3bc0)
+- Two EXACT: `fcn_004cef70` (the 0x7f4ca0 record-address gate: `r = 0; if (*(int*)(a2+0x16c) ==
+  (int)(0x7f4ca0 + a1*540)) r = 0x800; if (*(int*)0x774800 != 0) r = 0x800; return r;`),
+  `fcn_004b3bc0` (128 × 0x24-byte records at **0x10069a0** returning the record whose `+4` field matches
+  `a1[1]` when its head is non-zero). Note the address literals: `b8 a4690001` is 0x010069a4 — reading it
+  as 0x100169a4 costs 6 mismatching bytes; always expand the mov-immediate bytes.
+- **SERVER audit (priority-1 target).** `db/inventory-server.dll.json` has 543 functions, 370 tracked and
+  196 untracked — but **176 of the 196 are library-marked** (`src/library_*.h`: zlib etc.), and of the 20
+  "game" entries, **15 are a rizin artifact**: `0x1000ad68 + k*0x20` (k = 0..14) are the switch-case
+  bodies *inside* `0x1000ad40` (`sub esp,0x100` + `jmp [edx*4+0x1000af98]`), each body being
+  `push 1; push <msg>; push <line>; push <file>; call LogMessageInternal; add esp,0x10; add esp,0x100;
+  ret` — a `ret`-terminated case body is not a function, and the trailing `add esp,0x100` proves the
+  0x100 frame belongs to the enclosing switch. `0x1000af48` is the same artifact. So SERVER's real
+  remaining game code is ~4 functions (`0x10018272` 190, `0x1001e7dc` 216, `0x10022ff1` 544,
+  `0x1002350a` 43), not 20 — **the server gap is the link residue (8628) and the `.text` shortfall, not
+  missing reconstructions.**
+- **Cross-import audit.** A byte-identity sweep (`.scratch/twins.py`, `.scratch/twins2.py`) finds 26
+  untracked SERVER functions with an identical GOLDTL twin and 9 untracked GOLDTL functions with an
+  identical *tracked*-SERVER twin — but almost all of them are library code (zlib in `library_zlib.h`,
+  the 0x5e0000-0x64ffff D3DX8 band, `crt_region/sbh_pool.c`), so `cross-import` there would re-reverse
+  linker-supplied bytes. The one genuinely shared game function found, `fcn_1002350a` (0x1002350a ↔
+  GOLDTL 0x6588c2, 43 bytes, bounded strlen: returns `p - a1` when the terminator is found within `a2`
+  steps, else `a2`), is the first *stacked-marker* file written: the layout must be
+  `// FUNCTION: GOLDTL <va>` / `// SIZE: n` / `// FUNCTION: SERVER <va>` (the SIZE binds to the
+  preceding marker, and `rebrew test --target` then resolves each side — a multi-marker file with two
+  SIZE lines errors with "Specify either target_bin or (VA and SIZE) …"). The body still resists
+  (`do { } while (i-- != 0)` and the `for`/`while` spellings all pull `p` into `esi` and the counter into
+  `edi` where the reference keeps `p` in `eax`, `i` in `ecx` and only the pre-decrement copy in `esi`,
+  4/47), so the static library file was deleted rather than left unmatched; shape:
+  `edx = a2; eax = a1; test edx,edx; push esi; ecx = edx-1; je L; L: cmp [eax],0; je L; inc eax;
+  mov esi,ecx; dec ecx; test esi,esi; jne L; L: cmp [eax],0; pop esi; jne ret_a2;
+  eax -= [esp+4]; ret; ret_a2: eax = edx; ret`.
+- **Measured:** GOLDTL 590 -> **592** byte-matched (exact 235, reloc 357, size_mismatch 45, matching 6,
+  stub 2); SERVER unchanged at 281/283 passed, byte_matched 264 (exact 31, reloc 233), proven 17,
+  matching 1, stub 1; GOLD 213 unchanged; zero demotions/losses, lint 1075/1075 (0 warnings).
