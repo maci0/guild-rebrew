@@ -34144,3 +34144,33 @@ instruction in the wrong place" question.
   split `u -= K` and `(char*)p - (char*)base` / `sizeof` forms all give the `eax` load.
 - **Measured:** GOLDTL 312 -> **321** byte-matched (exact 127, reloc 194, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 806/806.
+
+### Round 1313 / session R288 (GOLDTL +8 — fourteenth batch: null-check polarity and stdcall vtable calls)
+- Eight more: `fcn_0041bcb0` (EXACT 25/25), `fcn_0041b7c0` (EXACT 46/46), `fcn_00419370` (RELOC 25/25),
+  `fcn_004193d0` (RELOC 27/27), `fcn_0041e410` (RELOC 43/43), `fcn_0041e3e0` (RELOC 39/39),
+  `fcn_0041f490` (RELOC 38/38), `fcn_0041f5c0` (RELOC 36/36).
+- **Null-check polarity flips the zero block's *position*.** `fcn_0041f5c0` and `fcn_0041f490` both do
+  `node = lookup(a1); ...; return ...;` with a null guard. Written `if (node == 0) return 0; <body>`
+  MSVC emits `test; jne <body>` with the inline zero block *before* the body; written
+  `if (node != 0) { <body>; return X; } return 0;` it emits `test; je <tail>` with the zero block
+  **after** the body — which is the reference layout (the jump displacement differs by 1 byte either
+  way). Both functions flipped to RELOC on that change alone.
+- **`neg/sbb/inc` is `== 0`, not `!= 0`.** `fcn_0041f490` declares success as
+  `((m) vtbl[9])(obj) == 0`; written `!= 0` the same three instructions come out `neg/sbb/neg`
+  (`inc eax` vs `neg eax` in the last slot). The reference's `inc` settles the polarity.
+- **`__stdcall` typedef on a vtable slot removes the `add esp,4`.** `fcn_0041bcb0` calls
+  `vtbl[0xf](obj, 0, 0, g_14ce730, 0)` and `fcn_0041b7c0` calls `vtbl[9](p)` then
+  `g_14ce728 = vtbl[2](p)`. With a `__stdcall` function-pointer type both match exactly; a `__cdecl`
+  typedef leaves 4 bytes of cleanup per call that the reference does not have.
+- **A tail call whose argument was rewritten in place is a `return`.** `fcn_00419370`/`fcn_004193d0`
+  test `p` and `p->f34`, overwrite `[esp+4]` with `p->f34` and `jmp` the callee — i.e.
+  `return fcn_00423460(*(void**)(p + 0x34));` with the two guards returning 0.
+- **Parked:** `fcn_0041f9b0` (32 B) and its twin `fcn_0041f9d0` (34 B, compares `+0x114` instead of
+  `+0x8`) — the linked-list lookup `node = *(int**)0x6b6f84; while (node) { if (node[2] == key) return
+  node; node = node[1]; } return 0;`. The reference opens with `mov eax,<glob>; xor ecx,ecx; test
+  eax,eax; je <tail: mov eax,ecx; ret>` — the zero is materialized in `ecx` at entry instead of the
+  usual `xor eax,eax`. Ours emits `mov eax,<glob>; test eax,eax` (6/31). Adding a `found`/`zero`
+  variable at the top moves the *global* load into `ecx` (0/32), and a `do/while` with a pre-check
+  leaves the same 6/31.
+- **Measured:** GOLDTL 321 -> **329** byte-matched (exact 129, reloc 200, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 814/814.
