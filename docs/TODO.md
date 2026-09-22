@@ -34046,3 +34046,21 @@ instruction in the wrong place" question.
   left on the stack pass through untouched. Seven landed in one pass.
 - **Measured:** GOLDTL 277 -> **291** (exact 114, reloc 177), GOLD 213 and SERVER 281/264 unchanged,
   zero demotions/losses, lint 775/775.
+
+### Round 1309 / session R284 (GOLDTL +7 — tenth batch: a 0x114-stride slot table and its helpers)
+- The 0x114-byte-record slot table at 0x9a9660-0x9afde0 came in as a unit:
+  `fcn_004e6ab0` (find the first slot whose first dword is -1, EXACT 47/47),
+  `fcn_004e6ae0` (copy 0x114 bytes in, stamp `[0x699368]`, default `+0x31` to 8 when zero, RELOC 46/46),
+  `fcn_004e6b10` (zero a slot and set its first dword to -1, RELOC 39/39),
+  `fcn_004e6b40` (walk the table releasing every live slot, RELOC 38/38).
+- Also `fcn_004ee060` (range-guarded `base + i*24`), `fcn_00533a40` (`strcpy` into 0x7e5fc0 then copy a
+  global), `fcn_005b1960` (recursive free down `+0x48` then free self), `fcn_00477450` (7-arg call +
+  `return 1`).
+- **Two more encoding levers:** a constant-size `memcpy` needs `#pragma intrinsic(memcpy, memset)` to
+  emit `rep movsd` instead of a library call; and a 7-argument callee with no `add esp,N` after the call
+  is `__stdcall` (declaring it `__cdecl` leaves 0x1c bytes of cleanup that the reference does not have).
+- **Parked:** `fcn_00477420` (MSVC keeps our working copy in the parameter's register instead of copying
+  to `eax` as the reference does) and `fcn_0057eb80` (same class, second global load lands in a
+  different register).
+- **Measured:** GOLDTL 291 -> **298** (exact 116, reloc 182), GOLD 213 and SERVER 281/264 unchanged,
+  zero demotions/losses, lint 783/783.
