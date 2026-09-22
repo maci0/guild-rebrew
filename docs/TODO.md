@@ -34260,3 +34260,31 @@ instruction in the wrong place" question.
   29/39).
 - **Measured:** GOLDTL 344 -> **353** byte-matched (exact 133, reloc 220, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 838/838.
+
+### Round 1317 / session R292 (GOLDTL +10 — eighteenth batch: the two-assignment idiom pays off)
+- Ten more: `fcn_0042b7e0`, `fcn_00446ca0`, `fcn_0044d7b0`, `fcn_0043b550` (all EXACT) and
+  `fcn_0042a7c0`, `fcn_0042a7f0`, `fcn_0042ad60`, `fcn_0042af10`, `fcn_00444190`, `fcn_0044c440`
+  (RELOC).
+- **The `r = 0 / r = -1` if/else from round 26 carries a whole family.** `fcn_0042a7c0`,
+  `fcn_0042a7f0`, `fcn_0042ad60` are the same shape (guard `g_6b7f90`, a `fcn_0042b1c0`/`0042b200`
+  probe, a `__stdcall` indirect call through a fixed slot, `r = -1` on both failure paths) and all
+  three landed first try at 48/48 — the nested `else { r = -1; }` inside the outer `else { r = -1; }`
+  is what reproduces `push esi; xor esi,esi; ...; mov eax,esi`.
+- **Operand order decides a `cmp`, again.** `fcn_0043b550` (search a 0x24-stride table at 0x67a490,
+  return `0x67a470 + i*0x24`) and `fcn_0044d7b0` (scan a 3-dword-stride table for a value, stop on a
+  0x28 sentinel) both needed `if (a1 == *p)` — the `*p == a1` spelling emits `cmp [mem],reg` where the
+  reference has `cmp reg,[mem]`. `fcn_0044d7b0` also needed the loop update in the `for` clause
+  (`i++, p += 3`) so the `inc` precedes the `add`.
+- **An offset loop keeps the *offset* in the index register.** `fcn_0043b550`'s reference walks
+  `off` 0..0x120 by 0x24 (`add eax,0x24; inc ecx; cmp eax,0x120; jb`) while the return address is
+  computed from the *counter* (`lea eax,[ecx+ecx*8]; lea eax,[eax*4+0x67a470]`) — i.e. the source
+  keeps both an index and a byte offset (`for (off = 0; off < 0x120; off += 0x24, i++)`), not a
+  pointer walk.
+- **Signedness of the bound compare is a tell.** `jb` (unsigned) on the offset loop above vs the
+  pointer-walk form's `jl`.
+- **Parked:** `fcn_00450a00` (38 B, `g_6b86d4++ / if (g_6b8300) call / g_6b86d4--`) — the reference
+  hoists the `g_6b8300` load into `eax` *above* the increment and decrements the global with a direct
+  `dec dword ptr`, ours loads/increments in `eax` first and ends with a load/dec/store. `++`/`--`,
+  a local `v`, and the post-increment spellings all give the same 6/43.
+- **Measured:** GOLDTL 353 -> **363** byte-matched (exact 137, reloc 226, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 848/848.
