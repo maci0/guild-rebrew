@@ -35105,3 +35105,28 @@ instruction in the wrong place" question.
   no-cast spellings all keep the pair swapped, 26/44), plus the earlier list.
 - **Measured:** GOLDTL 582 -> **585** byte-matched (exact 228, reloc 357, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1068/1068 (0 warnings).
+
+### Round 1351 / session R322 (GOLDTL +0 — probe round: the 0x665f08 context-pointer wall)
+- No promotions; five candidates decoded in full and parked (files deleted, tree unchanged at 585).
+- **Chased:** `fcn_0057eb80` (`return *(int*)(*(int*)0x665f08 + 0x3c) == 2;` behind a `[0x774a14]`
+  guard), `fcn_00580960` (`[0xf100 dc]`-style three-way gate; note the reference address is
+  **0x100f1dc**, not 0xf100dc — an easy mis-read of `83 3d dc f1 00 01 ff`), `fcn_0057fb20` and
+  `fcn_0057fce0` (two `state == 0x29 / 0x26 && field == 0x155 / 0x1d0` gates that latch `[p+0x38]`),
+  `fcn_0057de50` (`0x7749f4 |= a1` / `&= ~a1`).
+- **New wall class — the context pointer must land in `ecx`.** All four live on the global *pointer*
+  variable at `0x665f08` (`p = *(int**)0x665f08;` — the reference loads the value, `mov ecx,[0x665f08]`,
+  then addresses `[ecx+0x38]` / `[ecx+0x3c]` / `[ecx+0x4c]`), and in every spelling MSVC loads that
+  global into **eax** instead (`a1 08 5f 66 00`), leaving a register short so the field value spills or
+  the code grows 2..5 bytes (8/52, 11/65, 7..12 of 28/49). Tried: direct expression, `int* p` local,
+  `int**`-derived local, struct-typed pointer, operand swap, `v = ...; return v == k;`, guard order
+  (the reference wants `if (v == 0) return 0;` first for `fcn_0057eb80` — that part now matches). The
+  `mov r32, moffs` base always picks `eax` in our build; the reference picks `ecx`, same as the
+  live-range flip documented in `docs/msvc6-allocator.md` Finding 2, but here it is a *single*
+  straight-line chain with no merge to blame.
+- **Also parked:** `fcn_0057de50` — MSVC hoists the `a1` load above the `a2` test
+  (`mov ecx,[esp+4]; test eax,eax`), the reference loads `a1` inside each arm
+  (`mov eax,[esp+4]` twice, `or ecx,eax` / `not ecx; and eax,ecx`); 4/46 for the `|=`/`&=` form, the
+  `a1 | g` / `~a1 & g` operand-first form, and explicit reload spellings.
+- **Measured:** GOLDTL **585** byte-matched unchanged (exact 228, reloc 357, size_mismatch 45,
+  matching 6, stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses,
+  lint 1068/1068 (0 warnings).
