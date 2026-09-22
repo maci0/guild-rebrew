@@ -34922,3 +34922,37 @@ instruction in the wrong place" question.
   `mov cl,[flag]` load lands one instruction late) plus the earlier list.
 - **Measured:** GOLDTL 556 -> **561** byte-matched (exact 206, reloc 355, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1044/1044 (0 warnings).
+
+### Round 1344 / session R315 (GOLDTL +5 — forty-fifth batch: 0x4fc460 defaults + 0x9a9220 byte-keyed table)
+- Five more: `fcn_004fc460`, `fcn_005338a0`, `fcn_00538110`, `fcn_004e9500`, `fcn_004eeb10` (all EXACT).
+- **`memcpy` from a fixed `.data` record into a caller struct, then a float first.** `fcn_004fc460(a1)`
+  is the "zero pointer means default" shape: `if (p == 0) return *(float*)0x6628a8;` then
+  `memcpy(p, (void*)0x99f5e0, 40); v = *(float*)(p + 0x24); *(int*)(p + 0x18) = *(int*)0x773d4c;
+  return v;` — the float load must be written **before** the dword store, or MSVC sinks it past the store.
+- **A store outside the `if` is the whole difference.** `fcn_005338a0` walks `0x7e46c0 .. 0x7e5fc0` in
+  0xc8 steps: `if (*(int*)a != 0) *(int*)(*(int*)a + 0x224) = 0;` **then** `*(int*)a = 0;` unconditionally.
+  Putting the second store inside the guard (the obvious reading) is one branch displacement off
+  (0x06 vs 0x08) — the reference clears the slot on every iteration.
+- **An init-once slot is a guard around the side effect, not an early return.**
+  `fcn_00538110` is `if (a1 != *(int*)0x774940) { if ((*(f*)(0x662284))(a1)) (*(g*)(0x6622f0))(a1, a2); }
+  return 1;` — the `a1 == G` case and the "call returned 0" case share one `mov eax,1` block, so the
+  source is a *nested if*, never `if (a1 == G) return 1;` (that spelling emits `jne`/an extra block).
+- **A byte-keyed record copy is an index loop, not a pointer walk.** `fcn_004e9500` copies
+  0x18-byte records out of a 256-entry table at 0x9a9220 selected by the **first byte** of each
+  destination record. `for (i = 0; i < count; i++) p[i] = table[*(unsigned char*)&p[i]];` gives the
+  reference's `mov cl,[eax]` + `rep movsd` with the count still in `edx`; the `do { } while (count--)`
+  spelling moves the counter into `ebx` (0/48).
+- **Hoisting a struct field kills the callee-saved register.** `fcn_004eeb10` scans six 8-byte records
+  at `a2+0xc` for `a1[2]` and on a hit stores `a1[4]` at `a2+0x10+i*8`. Reading `a1[4]` into a local
+  before the loop made `a1` dead early, so MSVC put it in `eax` (0x8b 0x44 0x24 0x04 first instruction,
+  16/51); leaving the read inline keeps `a1` live across the loop and pins it to `esi` (51/51).
+  Corollary, again: a too-small `// SIZE:` is the only thing between a full instruction match and EXACT
+  (the reference is 51 bytes, not the 50 an `asm` byte count suggests).
+- **Parked:** `fcn_004ecbe0` (12-byte-stride search returning `base + i*12` or 0; all 24 instructions
+  identical but MSVC pins `base` to `esi` and `key` to `edi` where the reference has `edi`/`esi` — the
+  `int*`-typed, index-loop and walker spellings all swap the same pair, 39/52) and `fcn_005356b0`
+  (scan `[0x774650]` slots at 0x7e35c0 stride 8 for a key and store `n - i`; the reference emits
+  `mov eax,ecx; test eax,eax` after the load where MSVC always emits `test ecx,ecx; mov eax,ecx` for the
+  `while`, `for`, `do/while` and outer-`if` spellings, 34/38), plus the earlier list.
+- **Measured:** GOLDTL 561 -> **566** byte-matched (exact 211, reloc 355, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1049/1049 (0 warnings).
