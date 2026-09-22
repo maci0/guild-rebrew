@@ -7,7 +7,10 @@ default_target = "server.dll"
 # Unified source tree: src/Develop mirrors D:\Develop. Every target scans
 # the whole tree; one // FUNCTION: <marker> <va> block per target selects
 # each binary's code (rebrew ADR-022). Divergent twins sit side by side as
-# <name>_tl.c / <name>_gold.c until ported to #ifdef or stacked markers.
+# GOLDTL.<name>.c / GOLD.<name>.c (module-first, like metadata keys) until
+# ported to #ifdef or stacked markers. Progress commands (status/todo)
+# scope to the active target's own module; library headers land in every
+# target's scan but count for none.
 shared_dir = "src"
 
 [targets."server.dll"]

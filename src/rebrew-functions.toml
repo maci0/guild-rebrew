@@ -92,9 +92,9 @@ updated_at = "2026-09-10T15:25:56+00:00"
 
 ["SERVER.0x10003820"]
 size = 114
-status = "NEAR_MATCHING"
-updated_by = "verify"
-updated_at = "2026-09-22T03:42:50+00:00"
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T08:06:07+00:00"
 
 ["SERVER.0x100038a0"]
 size = 177
@@ -2184,9 +2184,9 @@ updated_by = "test"
 updated_at = "2026-09-20T15:55:11+00:00"
 
 ["GOLDTL.0x0041d6b0"]
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-21T03:32:55+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T08:05:18+00:00"
 size = 404
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
@@ -2198,15 +2198,15 @@ size = 416
 cflags = "/O2 /Gd /Oy- /DREBREW_ALLOW_NAKED"
 
 ["GOLDTL.0x0042e450"]
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-12T14:56:18+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T08:05:18+00:00"
 size = 22
 
 ["GOLDTL.0x0042e4b0"]
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-12T14:56:23+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T08:05:18+00:00"
 size = 14
 
 ["GOLDTL.0x00465350"]
@@ -2315,14 +2315,14 @@ blocker = "STUB C body untested against TL binary; test and promote or rewrite"
 
 ["GOLDTL.0x0045f2c0"]
 size = 192
-status = "RELOC"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x004c4b00"]
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:30:43+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x004cc490"]
 size = 44
@@ -2344,9 +2344,9 @@ updated_at = "2026-09-20T16:09:16+00:00"
 size = 80
 
 ["GOLDTL.0x00503e80"]
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:31:24+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x00521eb0"]
 
@@ -2355,9 +2355,9 @@ cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
 
 ["GOLDTL.0x005c86b0"]
 size = 191
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:31:54+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["SERVER.0x10010700"]
 size = 14
@@ -3492,9 +3492,9 @@ size = 41
 
 ["GOLD.0x0047cec0"]
 size = 41
-status = "EXACT"
-updated_by = "test"
-updated_at = "2026-09-21T05:39:37+00:00"
+status = "COMPILE_ERROR"
+updated_by = "verify"
+updated_at = "2026-09-22T08:05:33+00:00"
 
 ["GOLD.0x004118a0"]
 size = 38
@@ -4370,9 +4370,9 @@ updated_at = "2026-09-21T10:37:57+00:00"
 size = 32
 
 ["GOLDTL.0x00500c50"]
-status = "EXACT"
+status = "COMPILE_ERROR"
 updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 size = 41
 
 ["GOLDTL.0x00500e00"]
@@ -4533,15 +4533,15 @@ size = 47
 
 ["GOLDTL.0x0064e63d"]
 cflags = "/O1 /Gd"
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-21T12:14:28+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T08:05:18+00:00"
 size = 45
 
 ["GOLDTL.0x00404410"]
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:29:13+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x00404ca0"]
 
@@ -4590,15 +4590,15 @@ updated_by = "verify"
 updated_at = "2026-09-21T06:55:42+00:00"
 
 ["GOLDTL.0x0041d8b0"]
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-21T16:00:00+00:00"
+status = "SIZE_MISMATCH"
+updated_by = "verify"
+updated_at = "2026-09-22T08:05:18+00:00"
 size = 160
 
 ["GOLDTL.0x0041de50"]
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-21T15:59:59+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T08:05:18+00:00"
 size = 162
 blocker = "inline-asm block: replace with proper C once a byte-identical spelling is found"
 
@@ -4642,9 +4642,9 @@ size = 48
 ["GOLDTL.0x0044a120"]
 
 ["GOLDTL.0x0044c460"]
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:30:04+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x0045b790"]
 status = "RELOC"
@@ -4663,9 +4663,9 @@ updated_by = "verify"
 updated_at = "2026-09-21T10:32:44+00:00"
 
 ["GOLDTL.0x0045e520"]
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:30:12+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x0045ee00"]
 status = "RELOC"
@@ -4686,9 +4686,9 @@ updated_at = "2026-09-21T11:21:55+00:00"
 size = 13
 
 ["GOLDTL.0x00464a30"]
-status = "RELOC"
+status = "NEAR_MATCHING"
 updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x00465750"]
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
@@ -4704,26 +4704,26 @@ updated_at = "2026-09-21T10:44:52+00:00"
 size = 12
 
 ["GOLDTL.0x00466330"]
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:30:29+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x00499a50"]
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:30:33+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x0049d640"]
 
 ["GOLDTL.0x004b0220"]
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:30:36+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x004bcb80"]
-status = "RELOC"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x004c35f0"]
 cflags = "/Ox /Gd"
@@ -4763,9 +4763,9 @@ updated_by = "verify"
 updated_at = "2026-09-21T10:32:44+00:00"
 
 ["GOLDTL.0x004e7810"]
-status = "RELOC"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x004e7f20"]
 status = "RELOC"
@@ -4836,9 +4836,9 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 
 ["GOLDTL.0x0051f480"]
-status = "COMPILE_ERROR"
+status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:31:38+00:00"
+updated_at = "2026-09-22T08:05:18+00:00"
 
 ["GOLDTL.0x00522390"]
 status = "RELOC"
