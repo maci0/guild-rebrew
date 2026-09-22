@@ -35480,3 +35480,28 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 602 -> **603** byte-matched (exact 243, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
   imports, GOLD 213; zero demotions/losses, lint 1085/1085 (0 warnings).
+
+### Round 1365 / session R336 (GOLDTL +1 — 604; 0x7f4ca0-table user sweep)
+- One EXACT: `fcn_004ae210` (65B) — the third predicate over the 540-byte 0x7f4ca0 table
+  (`word[+0] != 0xffff && byte[+8] > 0 && (byte[+2] == 6 || byte[+2] == 7)`), same nested-positive-guard
+  form as `fcn_004ae170`.
+- **New sweep: search the untracked pool for functions that reference a known table.** Grepping the
+  little-endian address bytes (`a0 4c 7f 00` for 0x7f4ca0, plus `a2/a4/a8 4c 7f 00` for its fields) over
+  the call-free untracked pool found 9 more users: `0x47dcf0/0x47dd60`, `0x4ae210`, `0x506e70/0x506ee0`,
+  `0x50dc90`, `0x50e600`, `0x4ff860`, `0x529000/0x529060`. This is a cheap, repeatable way to find work in
+  a family whose shape is already solved — worth rerunning for 0x868050, 0x9a3825 and 0x9ba3a0.
+- **Parked:** `fcn_00529060` (68B: clear the first matching of eight `[a2+0x8c+i*4]` dwords, compare
+  against the record's `+4` field) — only `lea ecx,[esi+0x8c]`'s *position* differs (reference emits it
+  after the record loads, we emit it before; a dead `lea ecx,[eax*4+0x7f4ca0]` in the reference's stream
+  comes from computing the record address), 13/61 with or without a local `rec` pointer.
+- **0x65xxxx region probes (all parked, none library):** `0x6509eb` (the C++ exception magic
+  `0xE06D7363` check with a tail `jmp` to 0x65a1ae; the reference keeps the argument in `eax` and
+  tail-jumps without rewriting `[esp+4]`, MSVC emits `call`+`ret` after restaging the argument, 15/26),
+  `0x651053` (flag→code map; reference loads the first constant with `push 0x10; pop eax`, we emit
+  `mov eax,0x10`), `0x65520b` (call-through-global; reference pushes the argument straight from
+  `[esp+4]`, we round-trip through `ecx`), `0x655226` (PE header probe; reference zeroes the out-param
+  with `and dword [esi],0`, we use `mov dword [esi],0`), `0x652af0` (four import calls; the reference
+  caches the import in `esi` first), `0x652834/41/51`, `0x4bbce0`, `0x4c2820`.
+- **Measured:** GOLDTL 603 -> **604** byte-matched (exact 244, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
+  imports, GOLD 213; zero demotions/losses, lint 1086/1086 (0 warnings).
