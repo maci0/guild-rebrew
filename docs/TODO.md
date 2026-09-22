@@ -34767,3 +34767,29 @@ instruction in the wrong place" question.
   parameter).
 - **Measured:** GOLDTL 525 -> **530** byte-matched (exact 177, reloc 353, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1014/1014 (0 warnings).
+
+### Round 1337 / session R309 (GOLDTL +6 — thirty-eighth batch: stride-table lookups)
+- Six more, all EXACT: `fcn_004fac80`, `fcn_004e6a70`, `fcn_004f0c90`, `fcn_004efd30`,
+  `fcn_005b1b10`, `fcn_004c75b0`.
+- **Stride-table lookup family:** `for (i = 0, a = BASE; a < END; a += STRIDE, i++) if (*(int*)a == key)
+  return BASE2 + i * STRIDE;` — `fcn_004e6a70` (0x9b0e30..0x9b43f0 step 0x35c, returns
+  0x9b0e20 + i*860), `fcn_004f0c90` (0x7731b8..0x773d38 step 0x170, returns base + i*368) and
+  `fcn_004efd30` (the same with a leading `if (a1 == -1) return 0;`). All three EXACT first try.
+- **Write the multiplier the way the reference computes it.** `fcn_004e6a70`'s address chain is
+  `lea eax,[ecx+ecx*2]` (3i) → `lea eax,[eax*8+eax]` (27i) → `shl 3` (216i) → `sub ecx` (215i) →
+  `lea eax,[eax*4+disp]` (860i): the source's `i * 860` reproduces it once the *constant* is right.
+- **Chain walk returning an interior pointer:** `fcn_005b1b10` is
+  `p = g_774a78; while (p) { if (*(int*)p == a1) return p + 0xc; p = *(char**)(p + 0x48); } return 0;`
+  — the trailing pointer bump is part of the return, not a field read.
+- **Byte tests chain with `&&`:** `fcn_004c75b0` is `c = *p; if (c != 0 && c != 5 && c != 6 && c != 7)
+  return 1; if (out) *out = 1; return 0;` — four `cmp/je` to one shared tail.
+- **`obj_size` again:** four of the six were declared with the listing's byte count and had to be
+  corrected to 41/53/31/42 from `rebrew test --json`.
+- **Stray-file check:** a parked `fcn_004f6740.c` left in `src/` showed up as `failed 54 /
+  size_mismatch 46` in verify even though all six new files were EXACT. Diffing the verify row sets
+  against the previous round's file is the reliable way to catch it.
+- **Parked:** `fcn_004f6740` (its `g_773d38 = 0` uses an immediate store; the reference materialises
+  `xor edx,edx` first), `fcn_004e7160` and `fcn_004f4830` (destination-address folding / register
+  roles in the inlined `memcpy`).
+- **Measured:** GOLDTL 530 -> **536** byte-matched (exact 183, reloc 353, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1019/1019 (0 warnings).

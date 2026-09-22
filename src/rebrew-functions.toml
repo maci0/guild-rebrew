@@ -7289,3 +7289,39 @@ updated_at = "2026-09-22T21:24:21+00:00"
 status = "NEAR_MATCHING"
 updated_by = "verify"
 updated_at = "2026-09-22T21:24:24+00:00"
+
+["GOLDTL.0x004fac80"]
+size = 41
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:27:01+00:00"
+
+["GOLDTL.0x004e6a70"]
+size = 50
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:27:03+00:00"
+
+["GOLDTL.0x004f0c90"]
+size = 48
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:27:04+00:00"
+
+["GOLDTL.0x004efd30"]
+size = 53
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:27:08+00:00"
+
+["GOLDTL.0x005b1b10"]
+size = 31
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:27:11+00:00"
+
+["GOLDTL.0x004c75b0"]
+size = 42
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:27:16+00:00"
