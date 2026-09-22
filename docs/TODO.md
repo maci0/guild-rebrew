@@ -34456,3 +34456,30 @@ instruction in the wrong place" question.
   all produce the SIB form.
 - **Measured:** GOLDTL 409 -> **421** byte-matched (exact 160, reloc 261, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 904/904.
+
+### Round 1324 / session R299 (GOLDTL +17 — twenty-fifth batch: byte-scanning the 0x9c-record family)
+- Seventeen more members of the `fcn_004c4330` 0x9c-record family, all RELOC: eight two-argument
+  writers (`fcn_004c50e0`, `fcn_004c57e0`, `fcn_004c5870`, `fcn_004c58b0`, `fcn_004c5a20`,
+  `fcn_004c5d20`, `fcn_004c6000`, `fcn_004c6ae0`), four `memcpy` writers (`fcn_004c5360`,
+  `fcn_004c53a0`, `fcn_004c53e0`, `fcn_004c6560`), three more `memcpy` writers with a parameter source
+  (`fcn_004c6c30`, `fcn_004c6c70`, `fcn_004c6cb0`), a dword+byte writer (`fcn_004c6470`) and a
+  two-field writer (`fcn_004c6db0`).
+- **Scan the binary, do not walk the inventory, for a family.** `sub esp,0x9c` (`81 ec 9c 00 00 00`)
+  followed by `call fcn_004c4330` identifies the family directly: 102 function starts use that frame
+  and 88 were untracked at the start of this round. Decoding each shape's bytes (tag from
+  `c6 44 24 00|04 XX`, argument stores into `buf+0x10` / `buf+0x14`, `b9 <count>` + `f3 a5`
+  (+`66 a5`/`a4`) for the `memcpy` variants) produced working C for 17 of them in one pass without
+  reading a single disassembly listing. Remaining shapes in the list: struct-field copies
+  (`8b08 894c2410`, `8b5004`, `66 8b4008` …) and zero-fill-then-tag (`f3 ab` + tag).
+- **`*(char*) buf = TAG` and `buf[0] = TAG` are not interchangeable when a `rep movsd` follows.**
+  For the `memcpy`-from-parameter writers the reference schedules `lea eax,[esp+8]` *before* the tag
+  store; with `buf[0] = TAG; memcpy(buf + 0x10, a1, N);` our build emits the tag store first and (for
+  some sizes) also moves the `rep movsd` after the `push`. `*(char*) buf = TAG;
+  memcpy(&buf[0x10], a1, N);` reproduces the reference for the 0x80-byte copy; the smaller copies
+  (0x15, 0x23) still put the `lea` second and were dropped.
+- **`memcpy` from a fixed global needs no parameter at all.** `fcn_004c5360`/`fcn_004c53a0`/
+  `fcn_004c53e0` are `void f(void) { char buf[0x9c]; buf[0] = TAG;
+  memcpy(buf + 0x10, (void*) 0xaed220, 0x7c); fcn_004c4330(buf); }` — the source is a constant global
+  and the count is the element count times 4.
+- **Measured:** GOLDTL 421 -> **438** byte-matched (exact 160, reloc 278, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 921/921.
