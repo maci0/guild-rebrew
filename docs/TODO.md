@@ -34319,3 +34319,28 @@ instruction in the wrong place" question.
   `cl`. Combined-condition, two-return and single-return spellings all give 11/39.
 - **Measured:** GOLDTL 363 -> **374** byte-matched (exact 142, reloc 232, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 859/859.
+
+### Round 1319 / session R294 (GOLDTL +7 — twentieth batch: strided tables and three-way compares)
+- Seven more: `fcn_00475780` (EXACT 48/48) and `fcn_00468b80`, `fcn_0045f5b0`, `fcn_0046b4f0`,
+  `fcn_0046f490`, `fcn_004732c0`, `fcn_004732f0` (RELOC).
+- **`&&` on three byte compares gives the reference's shared failure tail.** `fcn_00475780` is
+  `if (a1[0] == a2[0] && a1[1] == a2[1] && a1[2] == a2[2]) return 0; return 1;` — the bytes come out
+  `mov dl,[eax]; mov bl,[ecx]; cmp dl,bl; jne <return 1>` per pair, with the fall-through zero.
+- **The 0x2f4-stride record table at `*g_1015ea0` is a family.** `fcn_00468b80`
+  (`base + a1*0x2f4 + 0xa8` into a 3-arg call), `fcn_0046f490` (walk 0x10161d0..0x102ce50 by 0x3cc
+  calling `fcn_0046f280(i)`), `fcn_004732c0` (walk 0x1015ec0..0x1015f40 by 4, 2-arg call) and
+  `fcn_004732f0` (same walk, 1-arg call plus a zero store) all reproduce with a plain
+  `for (a = START; a < END; a += STRIDE)` over an **`int` address** (the `jl` the reference emits).
+- **A 7-argument call with no `add esp` is `__stdcall` — again.** `fcn_00477450`
+  (already tracked) and `fcn_0045f5b0` (`gzread(a1, &c, 1) == 1 ? c & 0xff : -1`, with the local in the
+  dead parameter slot) confirm the rule on the client: declare the callee `__stdcall` or 0x1c/0xc
+  bytes of cleanup appear that the reference does not have.
+- **Parked:** `fcn_00462390` (four out-params filled from two globals and two constant addresses; ours
+  interleaves the loads/stores in a different order), `fcn_00469110` (the table base lands in `edx`
+  and the argument in `esi`; the reference has `edx`=arg, `esi`=base), `fcn_00472740`/`fcn_00472770`
+  (identical `g[v].f88` → `*(int*)(0x102d2xx + v*352)` stores — MSVC factors ours into
+  `(v + 48188) * 352` and folds the displacement; `char (*p)[352]` and a separate offset variable do
+  not stop it), `fcn_00477420` (a `n < 0x18` shift loop that our backend constant-folds to `ecx = 0x18`
+  because `e` is dead after it), and `fcn_00459cd0` (return zero materialised at the top).
+- **Measured:** GOLDTL 374 -> **381** byte-matched (exact 143, reloc 238, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 866/866.
