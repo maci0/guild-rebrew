@@ -34670,3 +34670,27 @@ instruction in the wrong place" question.
   *(unsigned char*)p == a1 && *(int*)(p+0xc) == a2` — 27/74 on instruction order).
 - **Measured:** GOLDTL 504 -> **507** byte-matched (exact 164, reloc 343, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 990/990.
+
+### Round 1333 / session R306 (GOLDTL +5 — thirty-fourth batch: destructors and 0x6641a0 lookups)
+- Five more: `fcn_00459a90`, `fcn_00492950`, `fcn_00492990`, `fcn_00549330` (all EXACT) and
+  `fcn_00459b40` (RELOC).
+- **`fcn_00459a90` is the two-slot vtable releaser.** `q = p->f4; if (q) { g_14ce728 = vtbl[2](q);
+  p->f4 = 0; } q = *p; if (q) { g_14ce728 = vtbl[2](q); *p = 0; } p->f0c = -1;` with a `__stdcall`
+  function-pointer type (no `add esp` after either call) — the same lever as rounds 1312/1313.
+  `fcn_00459b40` then drains `p->f24` through `fcn_004597f0(p, ptr)` before calling it and
+  `fcn_0041ddd0(p)`.
+- **The 8-byte-pair table at 0x6641a0 spans 9 entries (0x6641a0..0x6641ec).** `fcn_00492990` selects a
+  slot (`p+0x28` when `a2 == p->f0c`, `p+0x4c` when `a2 == p->f30`), scans
+  `((E*)0x6641a0)[i].a / .b` for a match and writes `.b` back into the slot;
+  `fcn_00492950` is the boolean variant over the same table. Both need `extern`-style access with an
+  8-byte element (`typedef struct { int a; int b; }`) so the compiler emits `[eax*8 + disp]`.
+- **`jl` vs `jb` again:** `fcn_00492950` written with an `int*` walker came out `jb` and one byte off;
+  the `int e = 0x6641a4; for (; e < 0x6641ec; e += 8)` form gives the reference's signed `jl`
+  (round 1311's rule, now confirmed a fifth time).
+- **Guard polarity on an early-return pair.** `fcn_00549330` (`p->f8 = (word)a2; if (a2 == 0xffff)
+  p->f0c = -1; else p->f0c = table[a2 * 540];`) needs the *negated* spelling
+  (`if (a2 != 0xffff) { main; return; } -1;`) so the `je` jumps forward to the -1 block.
+- **Lint W007: a `typedef struct` needs its own `// SIZE 0xNN` marker** (no colon) on the line above,
+  separate from the function's `// SIZE:`. Adding it took the tree back to 995/995, 0 warnings.
+- **Measured:** GOLDTL 507 -> **512** byte-matched (exact 168, reloc 344, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 995/995 (0 warnings).
