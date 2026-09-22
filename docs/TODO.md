@@ -34602,3 +34602,25 @@ instruction in the wrong place" question.
   the reference spans exactly.
 - **Measured:** GOLDTL 473 -> **479** byte-matched (exact 161, reloc 318, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 962/962.
+
+### Round 1330 / session R303 (GOLDTL +20 — thirty-first batch: the dispatch family generated from bytes)
+- The whole remaining `g_6b7f90` cluster — 20 functions — matched in one pass: `fcn_0042a9a0`,
+  `fcn_0042a9e0`, `fcn_0042aa20`, `fcn_0042aa60`, `fcn_0042ab10`, `fcn_0042ab50`, `fcn_0042ab90`,
+  `fcn_0042ad90`, `fcn_0042add0`, `fcn_0042ae10`, `fcn_0042ae50`, `fcn_0042ae90`, `fcn_0042aed0`,
+  `fcn_0042af40`, `fcn_0042af80`, `fcn_0042afc0`, `fcn_0042b000`, `fcn_0042b0c0`, `fcn_0042b040`,
+  `fcn_0042b080` (all RELOC).
+- **Generator, not hand-work.** The family is regular enough to write from the bytes directly: parse
+  `a1907f6b005633f65785c0` + `8b7c240c 57 e8<rel32> 83c404 85c0 7c<rel>`, take the probe VA from the
+  `e8`, the call slot from the following `ff15`, the argument shape from the bytes between the `jl` and
+  the `ff15` (`57` = 1 arg, `8b442410 50 57` = 2 args, `8b442410 50 56 57` / `8b442410 56 50 57` =
+  3 args with the zero in the middle/first slot) and whether the tail stores the result to `*a2`
+  (`8b4c2410 5f 8901`). Everything else is the round-26 two-assignment skeleton. Two probes are in
+  play (0x42b1c0 for most, 0x42b120 for the pair at 0x42b040/0x42b080 — both already reversed).
+- **Pitfall in the generator:** the byte slice for the argument shape must start *after* the
+  `85c0 7c<rel>` test, not after the call — an off-by-8-bytes slice reports every member as `UNKNOWN`.
+  Worth the two minutes: 20 functions from one script.
+- **Parked:** `fcn_0042a4a0` (the one member of the cluster with the `fcn_0042b2c0()` probe and the
+  `if (probe() != 0 || g_6b7f94 != 0) *out = g_6b7f94;` body; 27/50 — the reference schedules the
+  `g_6b7f94` load between the two tests).
+- **Measured:** GOLDTL 479 -> **499** byte-matched (exact 161, reloc 338, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 982/982.
