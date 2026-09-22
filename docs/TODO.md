@@ -35016,3 +35016,29 @@ instruction in the wrong place" question.
   identical, 50/60), plus the earlier list.
 - **Measured:** GOLDTL 568 -> **571** byte-matched (exact 216, reloc 355, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1054/1054 (0 warnings).
+
+### Round 1347 / session R318 (GOLDTL +3 — forty-eighth batch: 0x4e7160 record setter, 0x4fa5b0 dispatch, 0x4fffb0 FPU range test)
+- Three EXACT: `fcn_004e7160`, `fcn_004fa5b0`, `fcn_004fffb0`.
+- **A record setter must keep a byte offset, not a pointer.** `fcn_004e7160` writes five fields of a
+  20-byte record at `0x9b0840 + idx*20` (dwords at +0/+4/+8/+0x10, a byte at +0xc, byte store last).
+  Written with a `fcn_004e7160_rec*` the compiler folds the array base into the pointer
+  (`lea eax,[eax*4+0x9b0840]`) and every store becomes `[eax+4]`/`[eax+8]` — 20/61 and 12 bytes short.
+  Keeping the multiply in a local (`o = idx * 20;`) and writing each store as
+  `*(int*)(0x9b0840 + o) = a2;` reproduces the reference's `lea eax,[eax+eax*4]; shl eax,2` followed by
+  absolute `[eax+0x9b0840]`-style displacements (61/61).
+- **Guard order again (third time this session): write the *rejecting* guard first.** `fcn_004fa5b0`
+  dispatches through `(*(int*)(0x690478 + a1*4))(a2, a3)` after two `0x40` rejects, and the byte test
+  must read `if (*(unsigned char*)(a2 + 2) >= 0xa) return 1;` — the mirror `if (... < 0xa) { call }`
+  puts the call inline and costs 34/58. Same rule as `fcn_004f4830` (round 1346) and `fcn_00538680`.
+- **`unsigned short` field load zero-extends through the low word, and the index must be masked first.**
+  `fcn_004fffb0` reads `word[0x7f4caa + i*540]`, widens it to `int`, and returns
+  `(int) w < *(float*)(0x7f4cc0 + i*540)` — MSVC turns that into `fild [esp+4]` + `fcomp`, with the
+  `test ah,5; jp` unordered-aware branch (fall-through = 1 = "below"). The index is masked
+  (`i = (unsigned int) a1 & 0xffff;`) *before* the multiply; letting the multiply come first emits
+  `lea` where the reference has `and eax,0xffff` and lands 6/55.
+- **Parked:** `fcn_004e8b40` (24-byte record copy with a 0x28 default fallback; the reference computes
+  `lea eax,[eax+eax*2]` then `lea esi,[eax*8+0x68da68]`, while MSVC folds the base through the shift —
+  `lea esi,[eax+eax*2+0xd1b4d]; shl esi,3` — 40/52 for the raw-offset, struct-array and pointer
+  spellings alike), plus the earlier list.
+- **Measured:** GOLDTL 571 -> **574** byte-matched (exact 219, reloc 355, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1057/1057 (0 warnings).

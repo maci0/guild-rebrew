@@ -7535,3 +7535,21 @@ size = 56
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-22T21:55:12+00:00"
+
+["GOLDTL.0x004e7160"]
+size = 61
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:56:55+00:00"
+
+["GOLDTL.0x004fa5b0"]
+size = 58
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:56:56+00:00"
+
+["GOLDTL.0x004fffb0"]
+size = 60
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T21:56:57+00:00"
