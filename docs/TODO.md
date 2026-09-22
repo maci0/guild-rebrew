@@ -34403,3 +34403,33 @@ instruction in the wrong place" question.
   through `eax`, ours through `ecx`).
 - **Measured:** GOLDTL 390 -> **399** byte-matched (exact 153, reloc 246, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 884/884.
+
+### Round 1322 / session R297 (GOLDTL +10 — twenty-third batch: record scans, ternaries and stack-record calls)
+- Ten more: `fcn_004c0a60`, `fcn_004be320`, `fcn_004bcc20`, `fcn_004c27f0`, `fcn_004bcc50`,
+  `fcn_004c2db0` (all EXACT) and `fcn_004bfc10`, `fcn_004c3f70`, `fcn_004c4e40`, `fcn_004c5120`
+  (RELOC).
+- **A pointer+counter scan needs the comma-init `for`.** `fcn_004bcc20`/`fcn_004bcc50` (0x40 records
+  of 0x18 bytes, first dword = key, flag byte at `+0xd`/-7, sentinel 0xff, return
+  `a1 + i*0x18` via `lea eax,[eax+eax*2]; lea eax,[esi+eax*8]`) only match as
+  `for (i = 0, p = ...; i < 0x40; i++, p += 0x18)`. Declaring `p` before the loop and incrementing it
+  in the body swaps the counter into `ecx` and the pointer into `eax` (the mirror image).
+- **A bottom-tested list walk is a `do/while` on a saved value.** `fcn_004c27f0` tests the flag byte
+  `p[0x112]`, then loads `*(int*)p`, increments the counter, advances `p`, and branches on the *loaded*
+  value — i.e. `do { if (p[0x112]) return i; v = *(int*)p; i++; p += 0x114; } while (v != 0);` with
+  `i = 0` and `p = base` before. Writing it as a `for (...; *(int*)p != 0; ...)` hoists the condition
+  load above the body and never matches.
+- **`div` means an unsigned modulo.** `fcn_004c2db0` is
+  `if (a2 == 1) return (a1 & 1) - 2; return (int)(a1 % 3) - 5;` with `a1` **unsigned** (`f7 f1` = `div
+  ecx`, not `idiv`); a signed parameter compiles to `idiv` and misses.
+- **0x9c-byte stack records passed to `fcn_004c4330` are a family.** `fcn_004c3f70` (tag 3 plus a dword
+  0xa03ef57c at `+0x10` and 0 at `+0x14`), `fcn_004c4e40` (tag 8, dword argument at `+0x10`) and
+  `fcn_004c5120` (tag 0xe, **word** argument at `+0x10`) are all `char buf[0x9c]; buf[0] = TAG;
+  *(T*)(buf + 0x10) = arg; fcn_004c4330(buf);` — the byte/word/dword store width follows the parameter
+  type.
+- **Parked:** `fcn_004bcab0` (`g[n] = fcn_0044c310(a1, a1); g_count = n + 1; return g[n];` — the
+  reference sinks the counter load *below* the call (`mov ecx,[g]` after the `call` + `add esp,8`),
+  ours hoists it into `esi`), `fcn_004c4480` (`0xfb5766 + a1*10` dword load: MSVC factors ours into
+  `lea eax,[eax+eax*4+0x7dabb3]` + `mov eax,[eax+eax]`, the reference keeps
+  `lea eax,[eax+eax*4]` + `mov eax,[eax*2+0xfb5766]`).
+- **Measured:** GOLDTL 399 -> **409** byte-matched (exact 159, reloc 250, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 894/894.
