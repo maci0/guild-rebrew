@@ -34903,3 +34903,22 @@ instruction in the wrong place" question.
   earlier list.
 - **Measured:** GOLDTL 552 -> **556** byte-matched (exact 202, reloc 354, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1039/1039 (0 warnings).
+
+### Round 1343 / session R314 (GOLDTL +5 — forty-fourth batch: 0x9baae0/0x7f4ca0 slot predicates)
+- Five more: `fcn_004cded0`, `fcn_004c47e0`, `fcn_004ae130`, `fcn_004ae260` (EXACT) and `fcn_004cdf00`
+  (RELOC).
+- **`<= 0` on an unsigned char is `jbe`, `!= 0` is `je`.** `fcn_004ae130`/`fcn_004ae260` test three
+  fields of the 0x7f4ca0 + i*540 record (`word != 0xffff`, a flag byte, a state byte) and were one branch
+  byte off until the flag test was written `*(unsigned char*)(0x7f4ca8 + o) > 0` — MSVC emits `jbe` for
+  the `<= 0` form and `je` for `!= 0`, and the reference has `jbe`.
+- **A not-found tail call into an already-EXACT finder:** `fcn_004cdf00` keys the same 0x9baae0 table as
+  `fcn_004cded0` (0x57 stride, 87-byte records) and its fall-through `jmp` targets
+  `fcn_004cded0` — `return fcn_004cded0();` reproduces it (RELOC because of the call).
+- **`memset` on a fixed address with an odd size:** `fcn_004c47e0` writes a byte flag, a dword, then
+  `rep stosd` (0x1d) + `stosw` + `stosb` = 119 bytes at 0xaed2a5 — `memset((void*)0xaed2a5, 0, 119)`
+  produces exactly that tail.
+- **Parked:** `fcn_004b3b80` (LCG `rand()`: `((seed >> 16) & 0xffff) % 0x7fff % a1`; our `%` chain
+  collapses to a shift where the reference keeps two `div`s), `fcn_004c4820` (ring-buffer append; the
+  `mov cl,[flag]` load lands one instruction late) plus the earlier list.
+- **Measured:** GOLDTL 556 -> **561** byte-matched (exact 206, reloc 355, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1044/1044 (0 warnings).
