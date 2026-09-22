@@ -2,8 +2,8 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
-// FUNCTION: GOLDTL 0x502cd0
-// SIZE: 304
+// FUNCTION: GOLDTL 0x503fe0
+// SIZE: 288
 // FUNCTION: SERVER 0x100170e0
 
 #pragma intrinsic(memcpy, memset, strcpy)

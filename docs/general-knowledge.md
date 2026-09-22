@@ -38,6 +38,20 @@ this file holds the rest.
   `___tracker.log`, `_meister2.log` (32 bytes each at GOLDTL 0x677948) against the server's
   `__server.log`, `gilde_server.log`, `__dbg.log`. A shared marker therefore does **not** imply a
   shared body: measure each marker before assuming (round 1291).
+- **The original source used string literals for allocation tags, not addresses.** `m_AllocTracked`
+  tags like `"gv_AllocGraveyardField"`, `"gv_Alloc:_all_graves"`, `"gv_Alloc:_all_zombies"` appear
+  verbatim in both binaries at each binary's own `.rdata`; a `(const char*) 0x1002d474` cast only
+  matches the binary whose address it names. 200 such casts remain in the tree (round 1292).
+- **Not every tracked VA is the right one.** Two GOLDTL markers pointed at VAs where the body scores
+  ~9-40% while the same source scores 94-99% elsewhere: `gv_AllocGraveyardField` `0x45e520` ->
+  `0x4f1d20` (round 1291), `gm_StartFilteredEntitySearch` `0x502cd0` -> `0x503fe0` (round 1292). A bad
+  VA also poisons every caller's REL32 validation, so a "wrong-callee" mismatch is often a wrong
+  *catalogue* entry, not wrong C. Test a suspect file at both VAs before editing its body.
+- **The client duplicates functions; one name can sit at two VAs.** `gv_Free3Fields` exists at
+  `0x45b790` (frees `[slot+0x24]`/`[slot+0x28]`) and `0x4f2290` (frees `[slot+0x1c]`/`[slot+0x20]`) —
+  different bodies, and both are called. `0x45e520` (an 832-byte function the shared allocator source
+  does not match) has **no callers at all**; `gm_LookupEntityRecordById` sits at `0x4cef30` while
+  `cm_ChkEntityLookup` calls the untracked `0x4f48e0`.
 - **CRT copies of LIBCMT keep the compiler that built LIBCMT, not the game's.**
   `src/Develop/crt_region/initterm.c` (GOLDTL `0x64e761`) is EXACT only under
   `msvc-6.0-sp6` and is pinned there per-file. Expect more crt_region pins;

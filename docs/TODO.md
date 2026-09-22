@@ -33664,3 +33664,38 @@ instruction in the wrong place" question.
   (client log module has 12 severity levels and `_error.log`/`_ai.log`/`_sim.log`… names, the server 3
   levels and `__server.log`/`gilde_server.log`/`__dbg.log` — a twin file carries the client's data);
   re-check `gv_AllocGraveyardField`'s remaining 12 byte diffs at its corrected VA.
+
+### Round 1292 / session R268 (GOLDTL +3: string-literal tags, two wrong GOLDTL VAs, client log twin; rebrew marker-scope extended)
+- **Hard-coded absolute addresses were hiding string literals.** `gv_AllocGraveyardField` pushed the
+  SERVER `.rdata` addresses `0x1002d474/0x1002d45c/0x1002d444` as `m_AllocTracked` tags; the same text
+  lives in the client at `0x68ff4c/0x68ff34/0x68ff1c` ("gv_AllocGraveyardField",
+  "gv_Alloc:_all_graves", "gv_Alloc:_all_zombies"). Replacing the casts with the literals moves both
+  targets to RELOC **832/832** (16 relocs) — the original source named its allocation sites, it did not
+  embed addresses. Rule of thumb: a `(const char*) 0x…` tag is almost always a literal; 200 such casts
+  remain in the tree and each one breaks the *other* target.
+- **Two more GOLDTL VAs were wrong** (same class as round 1291's GraveyardField fix):
+  `gm_StartFilteredEntitySearch`: `0x502cd0` -> **`0x503fe0`** (same source scores 40.7% at the old VA,
+  94% at the new; the SERVER twin at `0x100170e0` is RELOC 296/296). `cm_ChkJoinLeaveElection`'s two
+  calls to it false-failed REL32 validation; after the move it is **RELOC 333/333**.
+- **DispatchLogOutput: client twin landed** (`src/Develop/Units/Error/GOLDTL.Error.c`, RELOC 284/284).
+  The client log module has **12** severity levels and 12 per-module log files
+  (_error.log, _ai.log, _sim.log, _dbg.log, _script.log, _cutscene.log, _meister.log, _d3.log,
+  _stats.log, _msx.log, ___tracker.log, _meister2.log, 32 bytes each) where the server has 3 and
+  __server.log/gilde_server.log/__dbg.log; the loop bound is 12 vs 3. The twin declares its own
+  SERVER-sized tables (rebrew_globals.h is generated from the shared SERVER annotations and cannot
+  describe both) and its `// DATA: GOLDTL` blocks carry the client VAs; the shared Error.c keeps only
+  the SERVER marker (RELOC 290/290 unchanged).
+- **rebrew marker-scoping extended to the data half** (`src/rebrew/coff_reloc.py`): the rebrew-data.toml
+  overlay ignored the entry's module, and `scan_globals` read every `// GLOBAL:`/`// DATA:` marker
+  regardless of target. Both now skip another target's marker (`cfg.all_markers`), so a target's VA map
+  holds its own binary's addresses — GOLDTL previously resolved `g_log_level_table` to SERVER
+  `0x10027078`. Library-module markers (MSVCRT, ZLIB) are still kept. The lint W021 duplicate-global key
+  now carries the marker for the same reason (a per-target annotation pair is not a collision), and the
+  client DATA blocks carry `section = ".data"` in rebrew-data.toml (written with
+  `data_metadata.set_data_fields_batch`, the tool-owned store, not by hand).
+- **Measured:** GOLDTL `verify --full` 122 -> **125** byte-matched (reloc 71 -> 74, matching 11 -> 9),
+  **no EXACT/RELOC regressions**; SERVER 281 / 264 and GOLD 213 unchanged. Lint 617/617, 0 warnings.
+- **Next:** the remaining 5 GOLDTL near-misses ≥85% (`gv_UpgradeField` 99.8 blocked on the 0x4f2290
+  helper variant, `fcn_0053d690` 98.0, `vfs_ReadCompressed` 94.1, `cm_ChkEntityLookup` 93.2 blocked on
+  the untracked 0x4f48e0, `gm_AllocRaum` 93.0); identify 0x4f48e0 and the `(const char*) 0x…` tags in
+  `gm_AllocRaum`/`gm_AllocGebaeude` (both push SERVER addresses).

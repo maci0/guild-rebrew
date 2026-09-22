@@ -36,9 +36,8 @@ char g_log_default_name[13] = {
 extern void (*g_panic_callback)(void);
 
 /* Dispatches a log message to the configured output handlers
- * (file, debugger, etc.). Routes based on severity level. */
-// FUNCTION: GOLDTL 0x41caa0
-// SIZE: 284
+ * (file, debugger, etc.). Routes based on severity level.  The client build
+ * has 12 severity levels and 12 log-file names; its twin is GOLDTL.Error.c. */
 // FUNCTION: SERVER 0x10002640
 
 // DispatchLogOutput

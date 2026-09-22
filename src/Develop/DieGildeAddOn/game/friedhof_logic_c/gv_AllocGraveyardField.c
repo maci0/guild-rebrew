@@ -33,7 +33,7 @@ int __cdecl gv_AllocGraveyardField(unsigned char* field)
 	if (entry[0x247] < 1 || entry[0x247] > 3) {
 		return 0;
 	}
-	slot = m_AllocTracked(0x24, (const char*) 0x1002d474);
+	slot = m_AllocTracked(0x24, "gv_AllocGraveyardField");
 	if (!slot) {
 		return 0;
 	}
@@ -41,13 +41,13 @@ int __cdecl gv_AllocGraveyardField(unsigned char* field)
 	*(int*) slot = *(int*) (field + 1);
 	*(int*) ((char*) slot + 4) = entry[0x247];
 	*(void**) ((char*) slot + 0x1c) = (char*) m_AllocTracked(g_field_worker_count[entry[0x247]] * 20,
-	    (const char*) 0x1002d45c);
+	    "gv_Alloc:_all_graves");
 	if (!*(void**) ((char*) slot + 0x1c)) {
 		goto cleanup;
 	}
 	memset(*(void**) ((char*) slot + 0x1c), 0, g_field_worker_count[entry[0x247]] * 20);
 	*(void**) ((char*) slot + 0x20) = (char*) m_AllocTracked(g_field_entry_count[entry[0x247]] * 68,
-	    (const char*) 0x1002d444);
+	    "gv_Alloc:_all_zombies");
 	if (*(void**) ((char*) slot + 0x20) == 0) {
 cleanup:
 		if (*(void**) ((char*) slot + 0x1c)) {

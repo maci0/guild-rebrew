@@ -3190,3 +3190,19 @@ type = "char[]"
 size = 46
 section = ".data"
 status = "VERIFIED"
+
+["GOLDTL.0x00677918"]
+name = "g_log_level_table"
+section = ".data"
+
+["GOLDTL.0x00677948"]
+name = "g_log_format_table"
+section = ".data"
+
+["GOLDTL.0x00677ac8"]
+name = "g_log_newline"
+section = ".data"
+
+["GOLDTL.0x00677acc"]
+name = "g_log_default_name"
+section = ".data"
