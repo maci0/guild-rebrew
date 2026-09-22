@@ -35179,3 +35179,23 @@ instruction in the wrong place" question.
   becomes `[ecx+0xc]`, 3/60), plus the earlier list.
 - **Measured:** GOLDTL 588 -> **589** byte-matched (exact 232, reloc 357, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1072/1072 (0 warnings).
+
+### Round 1354 / session R325 (GOLDTL +1 — fifty-fourth batch: 0x4ce040 0x6c-stride cursor)
+- One EXACT: `fcn_004ce040` (the 0x9ba3a0 cursor advance: `n = [0x772e8c]; m = [0x9ba9f4]; if (n == m) return 0;
+  n++; [0x772e8c] = n; if (n == m) return 0; if (n == 0xf) { n = 0; [0x772e8c] = n; }
+  return (char*)(0x9ba3a0 + n * 108);`).
+- **Stride arithmetic: verify the lea chain by multiplying it out.** The record stride here is **108**
+  (`8d 04 40` ×3, `8d 04 c0` ×9, `[eax*4+disp]` ×4 → 108), not the 36 the `8d 04 40` alone suggests —
+  the reference has *three* chained leas, and a two-lea spelling (×9 then ×4 = 36) lands 3 bytes short
+  and 47/57. The twin `fcn_004ce000` is the same ×108 chain (`0x9ba3a0 + n * 108`).
+- **Parked:** `fcn_004c4450` / `fcn_004c4480` (the 0xfb5760 table with a **10-byte** stride — the reference
+  is `lea eax,[eax+eax*4]` then `[eax*2+0xfb5760]` / `[eax*2+0xfb5766]`; MSVC folds `a1*10` into
+  `lea ×5` + `[eax+eax*1+disp]` instead of the scaled-index form, same length and semantics, 32/34 and
+  22/29, for the `a1*10`, `a1*5*2` and 10-byte-struct spellings alike), `fcn_004ce000` (the ×108 cursor
+  *read*; every spelling loads 0x772e88 into `ecx` where the reference uses `edx`, and the reference's
+  `je` goes far to the end-of-function zero block, 30/52), `fcn_004ae0f0` (4 records × 0x44 bytes at
+  **0x1007bc4** — the inventory hex `ba c47b0001` is the 32-bit immediate 0x01007bc4, easy to mis-read as
+  0x17bc4; the reference walks the outer pointer in `edx` and re-derives the inner walker in `ecx`, our
+  index loops give 39/49 and the pointer loop 2/49), plus the earlier list.
+- **Measured:** GOLDTL 589 -> **590** byte-matched (exact 233, reloc 357, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1073/1073 (0 warnings).
