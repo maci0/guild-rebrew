@@ -35357,3 +35357,28 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 593 -> **595** byte-matched (exact 235, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
   imports, GOLD 213; zero demotions/losses, lint 1077/1077 (0 warnings).
+
+### Round 1360 / session R331 (GOLDTL +2 — Win32 six-arg API pair 0x411350 / 0x411390)
+- Two EXACT: `fcn_00411350` (53B) and `fcn_00411390` (64B), the same six-argument `__stdcall` import at
+  `0x662004` called as `(a1, a2, 0, 0, &a2, &local)` with `local = 4`:
+  - `fcn_00411350` returns `Api(...) == 0 ? a2 : 0` — the reference's branchless tail
+    `neg eax; sbb eax,eax; not eax; and eax,ecx` is exactly MSVC6's form for that ternary, so the
+    ternary must be written as an *expression* (`return Api(...) == 0 ? a2 : 0;`), not as an if/else.
+  - `fcn_00411390` takes a third parameter and writes it on success: `if (Api(...) == 0) { *a3 = a2;
+    return 1; } return 0;`.
+- **`&a2` on a parameter is load-bearing.** Both functions pass the *address of their own second
+  argument* as the API's fifth argument, which is why the reference does `lea ecx,[esp+0xc]` *before*
+  pushing anything (the caller's argument slot doubles as the out-parameter). Declaring the parameter
+  `int a2` and writing `&a2` reproduces it; a copy through a local would not.
+- **Six-arg `__stdcall` import typedef again:** no `add esp` after `call [0x662004]`, so the typedef must
+  be `int (__stdcall*)(int, int, int, int, int*, int*)`; the compiler also stages `local = 4` into
+  `[esp+0x18]` (the slot reserved by the leading `push ecx`) between the pushes.
+- **Parked:** `fcn_00411780` (two calls through the cached pointer `[0x6622fc]` on a 0x400 stack buffer;
+  the reference loads `esi = [0x6622fc]` once and reaches the second buffer with
+  `lea eax,[esp+eax+0x10]`, ours reloads the pointer through memory and loads the 4th argument first,
+  2/58), `fcn_0041dd90` (0x10-stride list scan at `[0x6b6f80]` with count `[0x6b6f64]`; only the
+  `n`/`p` register pair is swapped — reference keeps the count in `edx` and the walker in `ecx`, we get
+  the inverse for every declaration order and loop spelling, 46/60), plus the earlier list.
+- **Measured:** GOLDTL 595 -> **597** byte-matched (exact 237, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
+  imports, GOLD 213; zero demotions/losses, lint 1079/1079 (0 warnings).
