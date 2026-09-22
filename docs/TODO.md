@@ -33574,3 +33574,22 @@ instruction in the wrong place" question.
     possible (msvc6 generated the reference from some C) but is the deep allocator core.
 - The compiler argument holds: every reference byte sequence came from msvc6, so no carrier is
   impossible — only not-yet-reconstructed. Lint 0/0, verify 281/264, tree clean.
+
+### Round 1289 / session R265 (CrashDump frame: drop-space disproven; real driver = register coloring, ref ebp-heavy vs ours edi-heavy)
+- **Doc's round-109 lever re-tested and DISPROVEN on current code:** removing the `space` local
+  (decl + `space=' '` + `WriteFile(..., &space,...)` -> `" "` literal) leaves the frame at **0x284**
+  (unchanged) and drops match 643 -> 582. The header's "drop `space` -> 0x280 exactly" is stale (body
+  changed across rounds 110/129/180). Reverted; baseline is match **643/2115, obj 2115, frame 0x284**.
+  With round-1287's volatile-`nFrames` probe (also frame-unchanged), **every LOCAL-level lever now
+  fails**: decl order, CFLAGS, volatile, drop-space, szSep/szLine sizes. The +4 is not a local count.
+- **Frame driver = register coloring, freshly quantified** (operand-use counts on the aligned diff):
+  `ebp` target **34** vs candidate **22**; `edi` target **24** vs candidate **58**; `ebx` 22 vs 30;
+  `esi` 25 vs 28. The reference leans on **ebp as a general working register**; we lean on **edi**.
+  Symptoms: where ref does `push ebp` / `cmp ebp,-1`, we do `push edi` / `mov edi,eax; cmp edi,-1`;
+  we carry `mov ebx,[0]; call ebx` where ref calls through another reg. This coloring mismatch forces
+  our extra callee-saves (ref prologue `push ebp; push esi`, ours `push ebx; push ebp; push esi;
+  push edi`) and the +4 spill cascade (ours @48,88; ref @52,56).
+- **Next attempt:** stop tweaking locals — reconstruct the reference's *liveness shape* so values land
+  in ebp (not edi/ebx) across calls. Finding52 already says decl order is inert (allocator colours
+  over live ranges), so the fix is matching which values are live across which calls, top-down from
+  the reference disassembly. Lint 0/0, verify 281/283, tree clean (both probes reverted).
