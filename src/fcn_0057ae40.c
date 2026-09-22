@@ -1,0 +1,7 @@
+// FUNCTION: GOLDTL 0x57ae40
+// SIZE: 12
+
+void __cdecl fcn_0057ae40(char* p)
+{
+	*(int*) (p + 0x70) = 0;
+}

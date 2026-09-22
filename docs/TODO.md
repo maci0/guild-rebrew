@@ -33874,3 +33874,28 @@ instruction in the wrong place" question.
   out here; the first spelling tried compiled to the wrong frame and was dropped rather than guessed.
 - **Measured:** GOLDTL 152/203 byte-matched (exact 55, reloc 97), GOLD 213 and SERVER 281/264
   unchanged, zero demotions/losses, lint 633/633.
+
+### Round 1300 / session R276 (GOLDTL +26 — small untracked functions reconstructed in batches)
+- **The highest-yield move left is breadth, not depth.** 853 untracked functions in the game range
+  (0x401000-0x5dffff) are <= 72 bytes; most are getters, setters, initialisers, `memset` wrappers and
+  jump thunks that fall out of the disassembly in one pass. 26 landed this round:
+  | shape | examples |
+  |---|---|
+  | getter | `fcn_0057fbb0` `return *(int*)(*(int*)0x665f08 + 0x38);`, `fcn_004cf9f0` `return *(int*)(p+0x204);` |
+  | setter | `fcn_004b3b30` `*(int*)0x7728d8 = 1;`, `fcn_00473680` `*(short*)0x7725c4 = v;`, `fcn_0057ae40` `*(int*)(p+0x70) = 0;`, `fcn_00591c30` sets `+4`/`+8` to -1 |
+  | counter bump | `fcn_004c44a0` / `fcn_004c44b0` `*(int*)A = *(int*)0x1005768 + 1;` |
+  | mask | `fcn_0057de40` `return *(int*)0x7749f4 & v;` |
+  | `memset` wrapper | `fcn_0047a2e0` (0x3c0 B), `fcn_004da190` (0x40 B), `fcn_00590650` (0x4000 B) — all EXACT |
+  | call wrapper | `fcn_005ba8f0`/`fcn_005ba900` (`fcn_005ba910(p, 2|4)`), `fcn_00436fd0` (4-arg `__stdcall`), `fcn_004e4430`, `fcn_0050f900` |
+  | jump thunk | `fcn_00572760`, `fcn_005756f0` — `int f(void){ return g(); }` emits exactly `jmp rel32` at /O2 |
+- **Two size lessons:** a jump thunk's reference span is 17 B but the *code* is 5 B (12 NOPs of padding),
+  so `// SIZE: 5` is what matches; and `rebrew test` prefers a stale metadata SIZE over the inline
+  `// SIZE:` — `0x401320` had `size = 23` from an earlier file and needed `--size 55` to correct it.
+- **Return-type evidence comes from the flag idiom:** `fcn_004a8d10` emits `neg ax; sbb eax,eax; inc eax`
+  (`neg eax` when the callee is declared `int`), so the callee's prototype must return `short`.
+- **Still failing / parked:** `fcn_004013b0` and `fcn_004013f0` (60 B, structure fully decoded in round
+  1299) — the reference keeps arg1 in `esi` across calls while our spelling reloads it from the stack;
+  `fcn_0059c830`-style virtual call `fcn_0047c480` (`push this; mov ecx,[this]; call [ecx+8]`) needs a
+  vtable-typed declaration.
+- **Measured:** GOLDTL `verify --full` 152 -> **178** byte-matched (exact 73, reloc 105); GOLD 213 and
+  SERVER 281/264 unchanged; zero demotions/losses; lint 661/661.
