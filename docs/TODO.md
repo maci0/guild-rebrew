@@ -34624,3 +34624,28 @@ instruction in the wrong place" question.
   `g_6b7f94` load between the two tests).
 - **Measured:** GOLDTL 479 -> **499** byte-matched (exact 161, reloc 338, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 982/982.
+
+### Round 1331 / session R304 (GOLDTL +5 — thirty-second batch: pointer-of-pointer and 0x662d18 clusters)
+- Five more, all RELOC: `fcn_0040c740`, `fcn_0040c780`, `fcn_0040dad0` (the `8b4424048b0085c0`
+  cluster), `fcn_004162c0` (a two-level destructor) and `fcn_0044d250` (a `0x662d18` writer).
+- **The `8b4424048b0085c0` cluster (10 members) is a null-checked indirect call with a log tail.**
+  `fcn_0040c740` is `if (*pp == 0) { g = *(void**)0x6b7e98; fcn_00425bf0(g, *(int*)((char*)g + 0x118),
+  (void*) 0x675bbc); return 0; } ((int (__cdecl*)(int))*pp)(*pp2); return 1;` — the message address is a
+  string literal pushed as an immediate and can be written as an `int` constant (round 1315's lever).
+  `fcn_0040c780` takes two call arguments; `fcn_0040dad0` returns `((int*)*pp)[0x128/4] == 0`.
+  Remaining members return `(byte >> 4) & 1` (ours emits `mov al,[…]; shr eax,4` where the reference
+  zero-extends through `edx` first — parked), call `fcn_00445600` with four arguments, or tail-call a
+  sibling.
+- **`fcn_004162c0`** frees `p->f90` through `fcn_0045bfb0`, then `p->f38` through `fcn_0041ddd0` (and
+  clears the field), then `p` itself — the two-level destructor shape.
+- **The `0x662d18` cluster writes through a two-field index.** `fcn_0044d250` is
+  `*(float*)(*(int*)(p + 0x10) + *(int*)(p + 8) * 0xe0 + 0xcc) = fcn_0064d62e(fcn_0064f026(0,
+  (void*)0x662d18));` — `fcn_0064f026(0, tag)` then a getter whose result (int or float in `st(0)`)
+  lands in a 0xe0-stride record at `+0xc2`/`+0xcc`. `fcn_0044d150` is the byte variant and misses by one
+  byte (`[esp+0x18]` vs `[esp+0x1c]`, the argument slot moved by the call scheduling).
+- **Marker sizes again:** four of this batch were first written with the listing's byte count and
+  reported `SIZE_MISMATCH` with an empty diff; `obj_size` (57/64/55/58) is the authority.
+- **Parked:** the `>> 4 & 1` variants of the indirect-call cluster, `fcn_0041dd90` (a `0x6b6f64`
+  table scan; ours hoists the return-0 `xor eax,eax` above the null test) and `fcn_0044d150`.
+- **Measured:** GOLDTL 499 -> **504** byte-matched (exact 161, reloc 343, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 987/987.
