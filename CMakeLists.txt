@@ -298,13 +298,10 @@ if(REBREW_BUILD_SERVER)
   # .lib cannot be reproduced from a clean checkout and hides the very
   # duplication `rebrew lib-match` exists to catch; that check refuses to run
   # if the extracted copy differs from the toolchain image's.
-  target_link_libraries(server_dll PRIVATE
-    KERNEL32.lib
-    USER32.lib
-    WS2_32.lib
-    WINMM.lib
-    LIBCMT.lib
-  )
+  # External archives come from REBREW_EXTERNAL_LIBS in the generated source
+  # list (rebrew cmake-sources ← targets.<name>.external_libs): the stock
+  # .lib links at build time, in config order (static archives last).
+  target_link_libraries(server_dll PRIVATE ${REBREW_EXTERNAL_LIBS})
 
   set_property(TARGET server_dll PROPERTY OUTPUT_NAME "server")
   set_property(TARGET server_dll PROPERTY PREFIX "")
@@ -404,6 +401,8 @@ if(REBREW_BUILD_GOLD)
   if(GOLD_SOURCES)
     add_executable(europa1400gold WIN32 ${GOLD_SOURCES})
 
+    target_link_libraries(europa1400gold PRIVATE ${REBREW_EXTERNAL_LIBS})
+
     target_include_directories(europa1400gold PRIVATE
       "${PROJECT_SOURCE_DIR}/src"
     )
@@ -441,6 +440,8 @@ if(REBREW_BUILD_GOLDTL)
 
   if(GOLDTL_SOURCES)
     add_executable(europa1400gold_tl WIN32 ${GOLDTL_SOURCES})
+
+    target_link_libraries(europa1400gold_tl PRIVATE ${REBREW_EXTERNAL_LIBS})
 
     target_include_directories(europa1400gold_tl PRIVATE
       "${PROJECT_SOURCE_DIR}/src"
