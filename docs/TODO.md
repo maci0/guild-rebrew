@@ -33509,3 +33509,24 @@ instruction in the wrong place" question.
   position-alignment grind or the `_BLOB_AT_DATA` companion sweep; none is a safe quick fix. Much of
   the round was lost to a recurring **/tmp ENOSPC** (bash/glob/grep all failed to launch mid-round;
   recovered transiently). Lint 0/0, verify 281, extent clean throughout.
+
+### Round 1286 / session R263 (GAP fix landed: wine load FIXED, .data/residue/layout all improved)
+- **Root-caused and fixed the `.data` blob:** `split_link.sh` `GAP=0x74a0` (the ref-tail length copied
+  into `data_restore_split`) was stale. Derivation: `GAP =0xe000 - S` where `S` = total `.data` of
+  every object before the blob in `rsp.rsp`. Measured `S=0x7736` now (the reorg'd src/Develop
+  composition; `0x74a0` implied `S=0x6b60`). The stale value made raw `.data` `0xebd6` (wrong size)
+  and dropped the ref-tail blob `0xbd6` early. Set `GAP=0x68ca`. Committed `027c565e`.
+- **Measured against the gate (all improved):**
+  - **wine load + exports: err=193 -> OK.** The wrong raw-`.data` size produced an unloadable PE;
+    `0xe000` restored makes it load. This clears a gate check outright.
+  - raw-link `.data`: 25806 -> **23860** (baseline 21481, still over — residual is game `.data`
+    *content*, not offset, so GAP can't close it).
+  - `.text` residue: 12022 -> **11735** (baseline 8628, still over — the PROVEN grind of round 1285).
+  - postlink layout coverage: 88.20% -> **89.95%** (just under the 90% gate).
+  - lint 0/0, verify 281/264 baselines held, imports match (100).
+- **Also ruled out (tested):** `_BLOB_AT_DATA=0x3400` -> `0x4600` had **zero** effect on `.data`
+  (the actual `.data` blob is `data_restore_split.obj`, appended last, not the `data_restore.c.obj`
+  mid-cut that `_BLOB_AT_DATA` controls). Reverted; `_BLOB_AT_DATA` is the `.rdata`/`rdata_restore`
+  knob, not `.data`.
+- **GATE now fails on only two:** `.data 23860>21481` (game `.data` content) and `residue 11735>8628`
+  (PROVEN byte-matching). wine/imports/verify/lint/extent all green.
