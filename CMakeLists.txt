@@ -97,6 +97,10 @@ if(REBREW_BUILD_SERVER)
   # split_link.sh died at exit 157, and the fix was a re-configure.
   file(GLOB_RECURSE SERVER_SOURCES CONFIGURE_DEPENDS
     "src/server.dll/*.c"
+    # Unified tree: game logic shared by all three binaries lives once in
+    # src/shared (one // FUNCTION: marker per target). Each target links the
+    # shared TUs; per-target markers select the right VA at verify time.
+    "src/shared/*.c"
   )
 
   list(FILTER SERVER_SOURCES INCLUDE REGEX "\\.c$")
@@ -361,7 +365,8 @@ endif()
 
 if(REBREW_BUILD_GOLD)
   file(GLOB_RECURSE GOLD_SOURCES CONFIGURE_DEPENDS
-    "src/Europa1400Gold/*.c"
+    "src/Europa1400Gold.exe/*.c"
+    "src/shared/*.c"
   )
 
   if(GOLD_SOURCES)
@@ -386,7 +391,8 @@ endif()
 
 if(REBREW_BUILD_GOLDTL)
   file(GLOB_RECURSE GOLDTL_SOURCES CONFIGURE_DEPENDS
-    "src/Europa1400Gold_TL/*.c"
+    "src/Europa1400Gold_TL.exe/*.c"
+    "src/shared/*.c"
   )
 
   if(GOLDTL_SOURCES)

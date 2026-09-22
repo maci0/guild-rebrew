@@ -85,9 +85,9 @@ status = "RELOC"
 ["SERVER.0x10003960"]
 size = 560
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
-status = "RELOC"
-updated_by = "test"
-updated_at = "2026-09-12T18:22:33+00:00"
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T00:18:52+00:00"
 
 ["SERVER.0x10003b90"]
 size = 182
@@ -180,8 +180,10 @@ status = "EXACT"
 
 ["SERVER.0x10008a50"]
 size = 53
-status = "RELOC"
+status = "NEAR_MATCHING"
 ghidra = "cleanup_entity"
+updated_by = "verify"
+updated_at = "2026-09-22T00:18:52+00:00"
 
 ["SERVER.0x10008a90"]
 size = 492
@@ -394,10 +396,12 @@ status = "RELOC"
 ["SERVER.0x1000bdf0"]
 size = 1002
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "PROVEN"
+status = "NEAR_MATCHING"
 analysis = "Command handler for Allocating Alchemist/Building Entities. Resolves the parent town entity, scans the Static Entities Array (g_static_entities, size 768) for a free slot. Initializes building state including the next global entity id (g_next_entity_id), and links it to the world. Returns the static array index or logs an error."
 blocker = "4 faults: field-init phase shift (48%, shapes 86b-excluded), 5-iteration fill loop form (15%, lever real but both signs negative so shapes 41 blocks composition), float tail fstp st(0) vs the reference faddp (29%, OPEN -- see .c header), stride lea chain (1%, strength reducer). Body 1002 pads to 1008 with the reference's own 6 nops, so shapes 88 gives +6 bytes of genuine upward slack -- unlike its Graveyard sibling"
 blocker_delta = 177
+updated_by = "verify"
+updated_at = "2026-09-22T00:18:52+00:00"
 
 ["SERVER.0x1000c1e0"]
 size = 160
@@ -521,6 +525,8 @@ status = "RELOC"
 ["SERVER.0x1000d570"]
 size = 361
 status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T00:16:43+00:00"
 
 ["SERVER.0x1000d570".prove_constraints.arg0]
 type = "pointer"
@@ -544,6 +550,8 @@ status = "RELOC"
 ["SERVER.0x1000d8a0"]
 size = 144
 status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T00:16:48+00:00"
 
 ["SERVER.0x1000d930"]
 size = 2057
@@ -555,7 +563,9 @@ cflags = "/O2 /Gd /Ow"
 ["SERVER.0x1000e140"]
 size = 993
 cflags = "/Ox /Gd"
-status = "PROVEN"
+status = "NEAR_MATCHING"
+updated_by = "test"
+updated_at = "2026-09-22T00:16:50+00:00"
 
 ["SERVER.0x1000e530"]
 size = 352
@@ -632,6 +642,8 @@ status = "RELOC"
 size = 197
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T00:17:23+00:00"
 
 ["SERVER.0x1000f1a0"]
 size = 327
@@ -759,6 +771,8 @@ status = "RELOC"
 size = 135
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T00:18:52+00:00"
 
 ["SERVER.0x10010530"]
 size = 113
@@ -830,11 +844,13 @@ status = "RELOC"
 ["SERVER.0x10011bf0"]
 size = 1040
 cflags = "/DREBREW_ALLOW_NAKED /O2 /Gd"
-status = "PROVEN"
+status = "STUB"
 ghidra = "AllocGraveyardWorker"
 analysis = "Allocates a graveyard worker (type 0x1b or 0x1c). Validates parent building is graveyard type (0x1d), finds production entry matching requested job, allocates a free static entity slot, initializes all fields including skills (halved from template), name, relationships (random +/-32), and coordinates."
 blocker = "3 faults, all length-neutral: fail-epilogue merge (8B; no C89 construct sets a block's predecessor count), slot-init phase shift (shapes 86b excludes it -- source store order already matches, the delta is scheduler + a memset-destination fold), and neighbour-loop esi/edi roles + 16-bit zero-extend (95% of residue, shapes 85 wall). Body 1040 = ref exactly and 1040 is 16-aligned, so shapes 88 gives ZERO upward slack: nothing to buy, and +1 byte costs 16 of span"
 blocker_delta = 426
+updated_by = "verify"
+updated_at = "2026-09-22T00:18:52+00:00"
 
 ["SERVER.0x10012000"]
 size = 728
@@ -845,6 +861,8 @@ status = "RELOC"
 size = 346
 status = "RELOC"
 note = "SIZE 339/346 (7B short): loop-merge fixed point — target keeps p in a stack slot with [edi+esi+base] addressing (edi=off, esi=i, bl=0 zero-reg), ours strength-reduces the two table stores into one walking pointer. 4 C reshapings (2026-08-30: explicit off var, zero-reg var, dual pointers p/q, off++ inner) byte-identical or worse. prove path-explodes on the 0x300x0x300 rand_mod loop (no terminal states, LB 10/20). Semantics verified identical by hand + near-diag (6/6 blocks, 100% edge sim)."
+updated_by = "verify"
+updated_at = "2026-09-22T00:18:52+00:00"
 
 ["SERVER.0x10012440"]
 size = 37
@@ -917,6 +935,8 @@ status = "RELOC"
 ["SERVER.0x10014af0"]
 size = 247
 status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T00:19:26+00:00"
 
 ["SERVER.0x10014bf0"]
 size = 163
@@ -1194,6 +1214,8 @@ status = "RELOC"
 size = 742
 cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T00:17:56+00:00"
 
 ["SERVER.0x10017f30"]
 size = 35
@@ -4617,3 +4639,27 @@ size = 26
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-21T11:10:34+00:00"
+
+["GOLDTL.0x1000d330"]
+size = 14
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-22T00:12:11+00:00"
+
+["SERVER.0x0045f380"]
+size = 560
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-22T00:16:26+00:00"
+
+["SERVER.0x004c35f0"]
+size = 993
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-22T00:16:29+00:00"
+
+["SERVER.0x004f9300"]
+size = 247
+status = "SIZE_MISMATCH"
+updated_by = "test"
+updated_at = "2026-09-22T00:19:20+00:00"

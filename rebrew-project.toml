@@ -4,6 +4,10 @@ jobs = 8
 db_dir = "db"
 output_dir = "output"
 default_target = "server.dll"
+# Unified source tree: game logic shared by all three binaries lives once in
+# src/shared with one // FUNCTION: <marker> <va> block per target (rebrew
+# ADR-022). Target-specific code stays under src/<target>/.
+shared_dir = "src/shared"
 
 [targets."server.dll"]
 ghidra_program_path = "/server.dll"
