@@ -34649,3 +34649,24 @@ instruction in the wrong place" question.
   table scan; ours hoists the return-0 `xor eax,eax` above the null test) and `fcn_0044d150`.
 - **Measured:** GOLDTL 499 -> **504** byte-matched (exact 161, reloc 343, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 987/987.
+
+### Round 1332 / session R305 (GOLDTL +3 — thirty-third batch: `g_774a14` state predicates)
+- Three more, all EXACT: `fcn_0057ecc0` (40/40), `fcn_0057ec20` (73/73), `fcn_005809a0` (43/43).
+- **`g_774a14` guards a state-predicate family.** `fcn_0057ecc0` is
+  `if (g_774a14 == 0) return 1; p = *(int**)0x665f08; if (p[0xf] == 2 || *p == 5) return 0; return 1;`
+  — the `||` over the two `cmp/je` pairs is what the reference has (a `&&` spelling inverts one of
+  them). `fcn_0057ec20` extends the same head with `p = p[6]; if (p == 0) return 1;
+  if (g_6b7fc0 != 0) return 0; return (*(int*)((char*)p + 0x68) & a1) != 0;` and
+  `fcn_005809a0` is `if (g_774a14 == 0) return -4; p->f1c = a1; (*(int**)0x665f08)->f20 = -1;
+  return 0;` — note the reference *reloads* the global before the second store.
+- **A `mov ecx,[global]` in the reference is a scheduling artefact we cannot force.** `fcn_0057eb80`
+  (`return g_665f08->f3c == 2;` behind the `g_774a14` guard, reference `xor eax,eax; cmp [ecx+0x3c],2;
+  sete al`) and `fcn_00580960` (the `0x100f1dc != -1 && g_67d370 == g_665f08->f4c` conjunction) both put
+  the global in `eax` where the reference uses `ecx`, with or without a local pointer — parked.
+- **Parked:** `fcn_0057eb80`, `fcn_00580960`; the `8b44240483381975` group (`fcn_0057ee60` …
+  `fcn_0057f3e0`, tests `p[0] == 0x19`, dereferences `p[1]`, indexes the 0x868050 table by
+  `c * 589` and compares the byte with 0xf/2/0x12 — our `if` polarity comes out inverted at byte 7);
+  `fcn_004e69e0` (the 0x114-stride slot scan at 0x9a9668, 96 entries, `p[0x28] != 0 &&
+  *(unsigned char*)p == a1 && *(int*)(p+0xc) == a2` — 27/74 on instruction order).
+- **Measured:** GOLDTL 504 -> **507** byte-matched (exact 164, reloc 343, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 990/990.
