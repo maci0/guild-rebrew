@@ -34553,3 +34553,26 @@ instruction in the wrong place" question.
   sizes (the 0x80-byte copy `fcn_004c6560` does match).
 - **Measured:** GOLDTL 461 -> **467** byte-matched (exact 160, reloc 307, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 950/950.
+
+### Round 1328 / session R301 (GOLDTL +6 — twenty-ninth batch: slot tables and tail-call wrappers)
+- Six more: `fcn_004ce150` (EXACT 44/44) and `fcn_0042b100`, `fcn_004526d0`, `fcn_004cc340`,
+  `fcn_004cfa80`, `fcn_004da280` (RELOC).
+- **Slot-table sweeps come in four flavours and all are `int`-address loops.** `fcn_004cfa80`
+  (0x9ba2e0..0x9ba360 step 4, call `fcn_0046f280` when the slot is not -1, then store -1) and
+  `fcn_004da280` (0x9b0dc0..0x9b0e00 step 4, call when non-zero) follow the round-1319 pattern;
+  `fcn_0042b100` (first zero slot of `g_6b7ed0[0..0x10)`, else -1) needed the `extern int g_6b7ed0[]`
+  spelling for the absolute `[eax*4 + 0x6b7ed0]` compare (round 1325's lever).
+- **`memset` on a constant address is `rep stosd` with a dword count.** `fcn_004ce150` zeroes
+  0x9baa20 (9 dwords), 0x9baae0 (0xae dwords) and three single globals; `memset((void*)0x9baa20, 0, 36)`
+  + `memset((void*)0x9baae0, 0, 0x2b8)` reproduces the shared `xor eax,eax` and both `rep stosd` exactly.
+- **A tail call with one argument is `if (g) callee(a1);`, not a computed argument.**
+  `fcn_004526d0` rewrites the parameter slot with `p + 0xe8` before the `jmp`; `fcn_004cc340` calls
+  `fcn_004fb4e0(p + 0x10)` and then fills an out-parameter (`out[0] = 1; out[1] = 0; *(int*)(out+6) = 0;`)
+  returning 0.
+- **Parked:** `fcn_00465800` (`*(int*)(0x67d1d4 - a1*4)` — MSVC factors ours into
+  `(0x19f475 - a1) * 4`; the `int* p = 0x67d1d4; p -= a1; return *p;` spelling produces the same fold),
+  `fcn_004c2d90` (the reference rewrites the argument slot before its `jmp`; ours emits a redundant
+  `jmp`/`ret` pair and no store) and `fcn_004d1cf0` (reference schedules `g_772f08 = 0` between the
+  argument pushes and the `call`; either statement order misses).
+- **Measured:** GOLDTL 467 -> **473** byte-matched (exact 161, reloc 312, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 956/956.
