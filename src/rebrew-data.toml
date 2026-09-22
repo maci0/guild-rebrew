@@ -3242,3 +3242,34 @@ section = ".data"
 ["GOLDTL.0x006624a0"]
 name = "g_6624a0"
 section = ".rdata"
+
+["GOLDTL.0x0069937c"]
+type = "unsigned char"
+section = ".data"
+
+["GOLDTL.0x00773da0"]
+section = ".data"
+
+["GOLDTL.0x00699384"]
+section = ".data"
+
+["GOLDTL.0x00699386"]
+section = ".data"
+
+["GOLDTL.0x00699380"]
+section = ".data"
+
+["GOLDTL.0x00699388"]
+section = ".data"
+
+["GOLDTL.0x00773d80"]
+section = ".data"
+
+["GOLDTL.0x00773d85"]
+section = ".data"
+
+["GOLDTL.0x00773d88"]
+section = ".data"
+
+["GOLDTL.0x00773d84"]
+section = ".data"

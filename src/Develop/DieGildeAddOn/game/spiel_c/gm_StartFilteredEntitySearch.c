@@ -2,22 +2,33 @@
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
 
+// GLOBAL: GOLDTL 0x773da0
+extern unsigned char* g_query_filter_base; /* 0x10035464 */
+// GLOBAL: GOLDTL 0x699384
+extern short g_query_filter_extra2; /* 0x10030b8c */
+// GLOBAL: GOLDTL 0x699386
+extern short g_query_filter_extra3; /* 0x10030b8e */
+// GLOBAL: GOLDTL 0x69937c
+extern unsigned char g_filter_extra5; /* 0x10030b84 */
+// GLOBAL: GOLDTL 0x699380
+extern int g_query_filter_extra1; /* 0x10030b88 */
+// GLOBAL: GOLDTL 0x699388
+extern unsigned char g_query_filter_extra4; /* 0x10030b90 */
+// GLOBAL: GOLDTL 0x773d80
+extern int g_dynasty_field_44; /* 0x10035444 */
+// GLOBAL: GOLDTL 0x773d85
+extern char g_dynasty_field_49; /* 0x10035449 */
+// GLOBAL: GOLDTL 0x773d88
+extern int g_dynasty_field_4c; /* 0x1003544c */
+// GLOBAL: GOLDTL 0x773d84
+extern char g_dynasty_field_48; /* 0x10035448 */
+
 // FUNCTION: GOLDTL 0x503fe0
 // SIZE: 288
 // FUNCTION: SERVER 0x100170e0
 
 #pragma intrinsic(memcpy, memset, strcpy)
 
-extern unsigned char* g_query_filter_base; /* 0x10035464 */
-extern short g_query_filter_extra2; /* 0x10030b8c */
-extern short g_query_filter_extra3; /* 0x10030b8e */
-extern unsigned char g_filter_extra5; /* 0x10030b84 */
-extern int g_query_filter_extra1; /* 0x10030b88 */
-extern unsigned char g_query_filter_extra4; /* 0x10030b90 */
-extern int g_dynasty_field_44; /* 0x10035444 */
-extern char g_dynasty_field_49; /* 0x10035449 */
-extern int g_dynasty_field_4c; /* 0x1003544c */
-extern char g_dynasty_field_48; /* 0x10035448 */
 
 void* __cdecl gm_FindNextFilteredEntity(void);
 

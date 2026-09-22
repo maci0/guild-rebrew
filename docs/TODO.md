@@ -35592,3 +35592,37 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL **606** byte-matched unchanged (exact 246, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52), SERVER unchanged 281/283 / byte-matched 264 / 100 imports, GOLD 213; tree clean,
   zero demotions/losses, lint 1088/1088 (0 warnings).
+
+### Round 1369 / session R340 (upstream fix: `rebrew data --set-section`; GOLDTL globals attested, lint 0)
+- **Closed the round-1368 wall in the rebrew checkout, not in game source.** W016 fires for every
+  `// GLOBAL:`/`// DATA:` marker whose metadata has no SECTION, and `rebrew data --set-type` only writes
+  `type` — so a global that exists *only* through an annotation could not carry the marker without ten
+  warnings. Added `--set-section` mirroring the type setter:
+  - `src/rebrew/data_annotate.py`: `set_data_sections(cfg, specs, *, dry_run=False)` — `0xVA=SECTION`
+    specs, section validated against `(".data", ".rdata", ".bss")`, writes through
+    `set_data_fields_batch` (so the same metadata lock/ordering applies).
+  - `src/rebrew/data.py`: `--set-section` (repeatable) next to `--set-type`, honouring `--target`
+    (module comes from `target_marker(cfg)`), `--dry-run` and `--json`.
+  - `tests/test_data_extended.py`: `TestSetDataSection` — sets the field, dry-run writes nothing, rejects
+    an unknown section, rejects a spec without `=`.
+  - Rebrew commit **aab433c1**; `pytest tests/test_data_extended.py` 63 passed,
+    `tests/test_data.py tests/test_data_annotate.py` 50 passed, `tests/test_data_metadata.py` 24 passed;
+    pre-commit (ruff lint/format, mypy, import cycles) clean.
+- **Game tree now carries the GOLDTL annotations with zero lint warnings.**
+  `src/Develop/DieGildeAddOn/game/spiel_c/gm_StartFilteredEntitySearch.c` declares all ten filter globals
+  above the FUNCTION markers as
+  `// GLOBAL: GOLDTL <va>` + `extern …` (extra5 0x69937c, extra1 0x699380, extra2 0x699384, extra3
+  0x699386, extra4 0x699388, field_44 0x773d80, field_48 0x773d84, field_49 0x773d85, field_4c 0x773d88,
+  base 0x773da0), and `src/rebrew-data.toml` now has matching `["GOLDTL.0x00…"]` entries with
+  `section = ".data"` (written by the new tool; the toml was not hand-edited). `rebrew lint`: 1088/1088,
+  **0 warnings**.
+- **Status unchanged, and that is the honest read: GOLDTL 0x503fe0 is still NEAR_MATCHING 264/284**
+  (SERVER 0x100170e0 stays RELOC 296/296). The remaining 20 bytes are the init-store schedule: the
+  reference emits extra5, extra4, arg-load, extra1(dword -1), field_44(dword 0), extra2/extra3(shorts
+  sharing `ax = 0x7fff`), field_49, field_4c, field_48, while MSVC coalesces the two `0x7fff` shorts and
+  hoists them above extra1/field_44. Reordering the source does not move them (tried: 129/284 with the
+  argument load hoisted higher). Keep the annotations — they are what makes the reloc operands resolvable
+  at all — and re-attack the schedule with a different source shape later.
+- **Measured:** GOLDTL **606** byte-matched unchanged (exact 246, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52), SERVER 281/283 / byte-matched 264 / 100 imports unchanged, GOLD 213; zero
+  demotions/losses, lint 1088/1088 (0 warnings).
