@@ -18,8 +18,22 @@ this file holds the rest.
 ## Original build
 
 - Compiler: MSVC6. Flags: `/O2 /Gd` default project-wide. Per-file variance
-  was swept (codegen-walls §7 item 2, CLOSED): SP6 confirmed, flag axis
-  flat, three `sp5-pp` file pins remain. Do not re-open.
+  was swept (codegen-walls §7 item 2, CLOSED): SP6 confirmed **for
+  `server.dll`**, flag axis flat, three `sp5-pp` file pins remain. Do not
+  re-open *for the server*.
+- **The two clients are `msvc-6.0-sp5-pp`, not sp6** (round 1290). The client
+  `.text` uses the NaN-safe float comparison `fnstsw ax; test ah,5; jp`, which
+  no other available toolchain emits (`sp0`-`sp6` all emit `test ah,1; je`;
+  `/O1 /Ox /Op /Za /Gf /G6` flat). Census of that 2-byte-later idiom:
+  `Europa1400Gold.exe` 724, `Europa1400Gold_TL.exe` 809, `server.dll` **0**.
+  Expressed as a per-target profile in `rebrew-project.toml`
+  (`[targets.X] compiler = { profile = "msvc-6.0-sp5-pp" }`): GOLDTL
+  `verify --full` 115 -> 121 byte-matched (6 functions straight to RELOC 100%),
+  GOLD 208 -> 213, server unchanged at 281.
+- **CRT copies of LIBCMT keep the compiler that built LIBCMT, not the game's.**
+  `src/Develop/crt_region/initterm.c` (GOLDTL `0x64e761`) is EXACT only under
+  `msvc-6.0-sp6` and is pinned there per-file. Expect more crt_region pins;
+  check them before "fixing" a CRT-region mismatch under the target profile.
 - Image base `0x10000000`. Exports: `Init` (0x10009320), `Exit`
   (0x10009350). Imports: exactly 100, inside `.rdata`/`.data` (no `.idata`).
 - `.text` VirtualSize `0x22846`. CRT: LIBCMT static. Compression: zlib

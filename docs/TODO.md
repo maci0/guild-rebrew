@@ -33593,3 +33593,41 @@ instruction in the wrong place" question.
   in ebp (not edi/ebx) across calls. Finding52 already says decl order is inert (allocator colours
   over live ranges), so the fix is matching which values are live across which calls, top-down from
   the reference disassembly. Lint 0/0, verify 281/283, tree clean (both probes reverted).
+
+### Round 1290 / session R266 (ROOT CAUSE: the client binaries are msvc-6.0-sp5-pp, not sp6; +6 GOLDTL byte-matched)
+- **The two clients were built with a different compiler than the server.** The shipped client `.text`
+  is full of the NaN-safe float-compare idiom `fnstsw ax; test ah,5; jp`. Occurrence census by direct
+  scan: `Europa1400Gold.exe` 724, `Europa1400Gold_TL.exe` 809, `server.dll` **0**. A flag/toolchain
+  sweep on a probe (`if (x < c) return neg; return pos;`) shows only **`msvc-6.0-sp5-pp`** emits it:
+  `msvc-6.0`, `-sp1…-sp5`, `-sp6` all emit `test ah,1; je`; `/O1 /Ox /Op /Za /Gf /G6` are flat.
+  `docs/general-knowledge.md` "SP6 confirmed" is a **server.dll** finding and does not transfer.
+- **Landed per-target compiler profile** (`rebrew-project.toml`):
+  `[targets."Europa1400Gold_TL.exe"] compiler = { profile = "msvc-6.0-sp5-pp" }` and the same for
+  `Europa1400Gold.exe`. rebrew already supported `[targets.X.compiler]`; the merge
+  (`config.py:1210`) made it apply to `test`/`verify`.
+- **Measured (GOLDTL `verify --full`, same 180 files):** passed 115 -> **121**, byte-matched 115 -> 121
+  (+6), exact 51 -> 51, reloc 64 -> **70**, size_mismatch 54 -> 47. Six functions jumped straight to
+  **RELOC 100%**: `gm_RandomQuadratic`, `gzread`, `fcn_004edcd0`, `gm_NextEntityQueryMatch`,
+  `gm_QueryEntitySum`, `ls_LoadDynamicEntities`; four more crossed into high NEAR
+  (`DispatchLogOutput` 48->99.6, `cm_GetBuildingStatCount` 38->96.0, `gv_UpgradeField` 26->99.1,
+  `gm_AllocRaum` 39->93.0). An object-*size* fixed point can only move under a compiler change, which is
+  why the toolchain, not the spellings, was the driver.
+- **GOLD `verify --full`:** 208 -> **213** passed (exact 77 -> 81). **SERVER unchanged at 281 passed /
+  264 byte-matched** — the server profile is untouched.
+- **One deliberate pin:** `src/Develop/crt_region/initterm.c` (`GOLDTL 0x64e761`) went EXACT -> 27% under
+  sp5-pp and is EXACT again pinned to `msvc-6.0-sp6` (`rebrew test --toolchain msvc-6.0-sp6`). CRT copies
+  of LIBCMT were built by whoever built LIBCMT, not by the game build; expect more of these.
+- **rebrew bug found + fixed upstream** (`src/rebrew/coff_reloc.py`): `build_name_to_va` scanned source
+  files with `parse_c_file_multi(path)` and **no target filter**, so in a shared file with one marker per
+  target the last marker parsed won the symbol name. `gm_RandomFloat01` (GOLDTL 0x42e450, SERVER
+  0x1001a0f0) therefore resolved to the SERVER VA inside a GOLDTL compare and REL32 validation
+  false-failed, reporting a correct `call` as a 2-byte NEAR_MATCHING — exactly the cross-target VA-keyed
+  collision the goal predicts. Fixed by passing the active marker (`module_marker(cfg)`); regression test
+  `tests/test_coff_reloc.py::test_function_catalog_scan_is_marker_scoped`; reloc/verify/annotation suites
+  green (`uv run pytest`, 375 passed across the five verify files + 180 across annotation/catalog).
+- **Shared-tree fallout:** none needed. `gm_RandomFloat01` already had a GOLDTL twin
+  (`GOLDTL.gm_RandomFloat01.c`), so the marker-scope fix alone resolves the call. A stacked marker
+  added first was reverted (lint E013 duplicate VA `0x42e450`); GOLDTL stayed **RELOC 48/48** with
+  `lint` 615/615 and 0 warnings, `verify --full` **121/180 byte-matched** (exact 51, reloc 70).
+- **Next:** re-derive the 11 GOLDTL NEAR_MATCHING entries (four now ≥93%) under the correct compiler;
+  re-check every existing EXACT GOLDTL/GOLD entry for other sp6-side crt_region pins.

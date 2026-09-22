@@ -48,6 +48,11 @@ MSVCRT = ""
 LIBCMT = "LIBCMT.lib"
 
 [targets."Europa1400Gold_TL.exe"]
+# Client compiler differs from the server's: the shipped client .text uses the
+# NaN-safe float-compare idiom (`fnstsw ax; test ah,5; jp`), which only
+# msvc-6.0-sp5-pp emits. Server.dll has zero occurrences, the two clients
+# ~800 each. Evidence: docs/TODO.md round 1290, docs/general-knowledge.md.
+compiler = { profile = "msvc-6.0-sp5-pp" }
 binary = "original/Europa1400Gold_TL.exe"
 format = "pe"
 arch = "x86_32"
@@ -78,6 +83,8 @@ LIBCMT = "LIBCMT.lib"
 # d3_, nt_, ob_, gs_, am_) are out of scope for server symbols but in scope
 # here. Marker GOLD distinguishes its annotations from SERVER/GOLDTL.
 marker = "GOLD"
+# Same client compiler as the TL build (see that target's note above).
+compiler = { profile = "msvc-6.0-sp5-pp" }
 binary = "original/Europa1400Gold.exe"
 format = "pe"
 arch = "x86_32"
