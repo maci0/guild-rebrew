@@ -33993,3 +33993,22 @@ instruction in the wrong place" question.
   the address of the (K/4)-th stack argument.
 - **Measured:** GOLDTL 234 -> **249** (exact 97, reloc 152), GOLD 213 and SERVER 281/264 unchanged,
   zero demotions/losses, lint 733/733.
+
+### Round 1306 / session R281 (GOLDTL +17 — seventh batch)
+- 17 more: nine "conditional free/release + clear the slot" handlers (`fcn_00459bc0`, `fcn_004bbd50`,
+  `fcn_00500a20`, `fcn_005b1ef0`, `fcn_005c80d0`, `fcn_004be360`, `fcn_004d0050`, plus list-walk
+  `fcn_004be280` and `fcn_005b1960`), three stride-table initialisers (`fcn_004cfe00` stride 0x14,
+  `fcn_005bebc0` stride 0x38 with a negative offset), `fcn_00500de0` (5-arg wrapper dropping `a2`),
+  `fcn_00414c70` (`char` return, four `char` args from `a2[0..2]`), `fcn_004186f0`
+  (load + three stores), `fcn_00464330` (bit-reversal — the loop ORs then shifts and *undoes the last
+  shift* with a final `shr eax,1`), `fcn_004e99c0` (0x18-byte local read back at +8 through an int
+  load masked to 0xff), `fcn_00534c20` (two-way dispatch on a global, both arms tail-`jmp`),
+  `fcn_00545a80`.
+- **`je` target decides the `if` body.** `fcn_004d0050` sat at 29/30 because the clear was written
+  *after* the `if`; the reference's `je` lands on the `ret`, so the store belongs *inside* — the mirror
+  of `fcn_004be360`, whose `je` lands on the store (clear outside). Read where the branch lands, not
+  where the instruction sits in the listing.
+- **Parked:** `fcn_005b1e20` and `fcn_00477480` keep a value in a caller-saved register across a call
+  (`edx`/`ecx` live across `call`), which MSVC only does for a callee it can analyse.
+- **Measured:** GOLDTL 249 -> **266** (exact 101, reloc 165), GOLD 213 and SERVER 281/264 unchanged,
+  zero demotions/losses, lint 750/750.
