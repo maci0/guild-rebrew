@@ -35084,3 +35084,24 @@ instruction in the wrong place" question.
   will keep live and mutate.
 - **Measured:** GOLDTL 576 -> **582** byte-matched (exact 227, reloc 355, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1065/1065 (0 warnings).
+
+### Round 1350 / session R321 (GOLDTL +3 — fifty-first batch: 0x70 state gate, strcpy intrinsic)
+- Three byte-matched: `fcn_00550540` and `fcn_0057c8d0` (RELOC) and `fcn_0057ddc0` (EXACT).
+- **Two sentinel-valued state fields share one tail-called handler.** `fcn_00550540` is
+  `v = *(int*)(a1 + 0x70); if (v == -2 || v == 0) return fcn_00546190(a1); return v;` and `fcn_0057c8d0`
+  is the `v == -1 || v == -2` twin — both tail-`jmp fcn_00546190` with the pointer rewritten into the
+  outgoing argument slot (`mov [esp+4],ecx`), which `return fcn_00546190(a1);` reproduces (RELOC because
+  of the call). Note the OR'd `==` chain keeps the *value* in eax and returns it on the fall-through.
+- **`strcpy` to a fixed buffer is the `#pragma intrinsic(strcpy)` difference loop.**
+  `fcn_0057ddc0` copies the argument string to the global `0x77df20` and then calls the 4-argument
+  `__stdcall` import at `0x6620b0` (result stored in `[0x7749f4]`). A hand-written
+  `do { *d = *a1; d++; a1++; } while (...)` loop keeps **two** induction registers
+  (`mov dl,[eax]; mov [ecx],dl; inc ecx; inc eax`) and lands 40/50; `strcpy((char*)0x77df20, a1);` with
+  `#include <string.h>` + `#pragma intrinsic(strcpy)` emits the reference's single-induction form —
+  `edx = 0x77df20 - a1`, `cl = [eax]`, `[edx+eax] = cl`, `inc eax`, `test cl,cl`, `jne` — 50/50.
+- **Parked:** `fcn_00573de0` (ring append: `n = a2[0x41]; a2[n+1] = val; a2[0x41] = n + 1;
+  return n + 1 < 0x40;`; the reference loads the *second* parameter into `eax` and the count into `ecx`,
+  MSVC always puts the count in `eax` — the `char` return, `int*` / `char*` second parameter and
+  no-cast spellings all keep the pair swapped, 26/44), plus the earlier list.
+- **Measured:** GOLDTL 582 -> **585** byte-matched (exact 228, reloc 357, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1068/1068 (0 warnings).
