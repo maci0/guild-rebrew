@@ -4936,3 +4936,39 @@ size = 16
 
 ["GOLDTL.0x005ba750"]
 size = 30
+
+["GOLDTL.0x00420200"]
+size = 10
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T17:21:27+00:00"
+
+["GOLDTL.0x0043bbf0"]
+size = 10
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T17:21:30+00:00"
+
+["GOLDTL.0x004ad2d0"]
+size = 10
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T17:21:33+00:00"
+
+["GOLDTL.0x004b20d0"]
+size = 10
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T17:21:36+00:00"
+
+["GOLDTL.0x0042a070"]
+size = 11
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T17:21:39+00:00"
+
+["GOLDTL.0x0047c4a0"]
+size = 11
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-22T17:21:42+00:00"
