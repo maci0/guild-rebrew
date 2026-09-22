@@ -34483,3 +34483,28 @@ instruction in the wrong place" question.
   and the count is the element count times 4.
 - **Measured:** GOLDTL 421 -> **438** byte-matched (exact 160, reloc 278, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 921/921.
+
+### Round 1325 / session R300 (GOLDTL +15 — twenty-sixth batch: three- and four-argument record writers)
+- Fifteen more `fcn_004c4330` family members, all RELOC: ten standard three-argument writers
+  (`fcn_004c5290`, `fcn_004c5480`, `fcn_004c5a60`, `fcn_004c5d60`, `fcn_004c5f20`, `fcn_004c5f60`,
+  `fcn_004c6430`, `fcn_004c6880`, `fcn_004c6b20`, `fcn_004c6ba0`), two four-argument writers with a
+  `char` third parameter (`fcn_004c5150`, `fcn_004c51a0`), plus `fcn_004c6d70` (two struct pointers),
+  `fcn_004c5250` (int + word + dword at `+0x10/+0x14/+0x16`) and `fcn_004c52d0` (int + word).
+- **The three-argument shape is `buf+0x10/+0x14/+0x18`.** Bytes:
+  `8b8424a0000000 8b8c24a4000000 8b9424a8000000 89442410 8d442400 c6442400<TAG> 50 894c2418
+  8954241c e8` — one tag byte and three dwords, and the count in the scan above shows the whole
+  sub-family is 15 functions wide.
+- **Four-argument shape:** `8b8c24a4000000 8b8424a0000000 8a9424a8000000 894c2414 89442410
+  8b8424ac000000 8d4c2400 c6442400<TAG> 51 88542420 89442421 e8` — the stores are
+  `buf+0x10`/`+0x14` dwords, a byte at `+0x1c` and an unaligned dword at `+0x1d`.
+- **Header-marker typo costs a whole test cycle.** The `.format(va=...)` call passed `"0x4c6360"` into a
+  template that already had `0x`, producing `// FUNCTION: GOLDTL 0x0x4c6360`; `rebrew test` then reported
+  `SIZE_MISMATCH 0/0` with `"va": "0x00000000"` instead of a compile error. A `0/0` row means the
+  annotation failed to parse — check the marker before the code.
+- **Parked (folded into the next round's plan):** the struct-field writers `fcn_004c6360`,
+  `fcn_004c63a0`, `fcn_004c63f0`, `fcn_004c6900`, `fcn_004c6b60` (three to five fields read out of the
+  parameter struct at `+0`/`+4`/`+8`/`+0xc`/`+0xe` — the reference computes the *word* field before the
+  `push`, ours after, 36/57) and `fcn_004c58f0` (three-argument writer with the swapped load order,
+  57/61 — the reference loads the *second* parameter first).
+- **Measured:** GOLDTL 438 -> **453** byte-matched (exact 160, reloc 293, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 936/936.
