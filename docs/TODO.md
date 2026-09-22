@@ -35691,3 +35691,36 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 608 -> **611** byte-matched (exact 251, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 / byte-matched 264 / 100 imports, GOLD 213;
   zero demotions/losses, lint 1093/1093 (0 warnings).
+
+### Round 1373 / session R344 (GOLDTL +0 — probe round: API-wrapper staging wall + 0x7f4c00 copy family)
+- **No new byte-matched function.** Rounds 75-76 in one note (75 was interrupted mid-diff; nothing was
+  promoted and every scratch file is deleted again — tree at 611, lint 0).
+- **The import-wrapper wall: `push dword [esp+N]` is not reachable from these spellings.** The trio
+  `0x65e2ba` / `0x65e2d6` / `0x65e2f2` (28/28/24B, each `return Api(...) == 0;` through a `__stdcall`
+  import at 0x6621c4 / 0x66221c / 0x6621c0) compiles to the reference's `push esi; push 1; pop esi`
+  (materialise the result 1 in `esi` first) plus **direct memory argument pushes** (`push [esp+0xc]`
+  twice) — 28 bytes. MSVC always stages the arguments through registers
+  (`mov eax,[esp+4]; mov ecx,[esp+8]; push ecx; push eax; call`) and returns the flag with
+  `neg/sbb/not/and`, i.e. 22 bytes against the marker's 28, for **four** equivalent spellings:
+  `Api(a1,a2) == 0`, `Api(a1,a2) != 0 ? 0 : 1`, `!Api(a1,a2)`, and `r = 1; if (Api(a1,a2)) r = 0;`.
+  Same wall as round 1361's `fcn_0065520b` (`push [esp+4]` straight from the argument slot).
+- **The 0x7f4c00 record-copy family needs a *separate* pointer register that MSVC refuses to make.**
+  Six untracked users of the 14-byte record at 0x7f4c00: `0x554770` (78B), `0x555440` (76B),
+  `0x556e30` (78B), `0x55afb0` (100B), `0x569700` (87B), `0x570370` (59B). In `0x554770` the reference
+  does `mov edx,[0x7f4c00]; lea ecx,[eax+0x52]; mov [eax+0x52],edx; … mov [ecx+4],edx; mov [ecx+8],edx;
+  mov [ecx+0xc],dx` — first store **a1-relative**, the other three through the materialised pointer — and
+  then `xor ecx,ecx` + five zero stores. Our `p = (int*)(a1 + 0x52);` is copy-propagated away so every
+  store folds to `[eax+0x56]`/`[eax+0x5a]` (obj 75 vs 78, 14/78), and the expression-first and
+  pointer-first spellings both fold; a struct-typed pointer would move the *first* store to `[ecx]` too.
+  The family's simpler members 0x549b50/0x54b420/0x5650d0 landed in round 1349 because their reference
+  mutates the parameter (`add eax,0x52`, no separate register) — this subset does not.
+- **Also parked:** `fcn_004f1860` (44B, the `[p] != -1` scan sibling of the landed 0x4f1840/0x4f1850;
+  the reference takes `a2` into `ecx` while MSVC takes `eax`, 4/48 for both `char*` and `int*`
+  parameters), `fcn_004e7b70`/`0x4e7bf0` (the 0x68da68 double-copy pair, a1 in `edx` vs `ecx` plus an early
+  `push esi`, 16/122 — inlining the byte key made it 8/123).
+- **Checked and ruled out:** the tracked `SIZE_MISMATCH` rows are real code walls, not marker mistakes —
+  `fcn_004013b0` (marker 60, obj 58, 5/60 matched) differs structurally, so the round-1369 "set the marker
+  to obj_size" trick only applies to merged spans whose *first* function already matches.
+- **Measured:** GOLDTL **611** byte-matched unchanged (exact 251, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52), SERVER 281/283 / byte-matched 264 unchanged, GOLD 213; tree clean, zero
+  demotions/losses, lint 1093/1093 (0 warnings).
