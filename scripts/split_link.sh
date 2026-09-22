@@ -192,7 +192,11 @@ echo "== data gap for this composition"
 # the blob's LENGTH matters (docs/msvc6-link-layout.md section 2) - emit a
 # shorter one for this link and drop the CMake object.  Re-sweep the constant
 # when the composition's own `.data` changes.
-GAP=0x74a0
+# GAP =0xe000 - (total .data of every object before the blob in rsp.rsp).
+# The reorg'd src/Develop composition emits S=0x7736 before the blob (was0x6b60
+# when GAP was0x74a0); the stale0x74a0 placed the ref-tail blob0xbd6 early ->
+# .data 45% off.  Re-derive on every composition change: GAP=0xe000-S.
+GAP=0x68ca
 python3 - "$GAP" "$WORK/data_restore_split.c" <<'BLOB'
 import struct, sys
 from pathlib import Path
