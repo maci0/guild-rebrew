@@ -418,3 +418,4 @@ char* __cdecl gm_AllocGebaeude(int building_type, int location_id)
 /* Sets up an entity query with specific parameters. Configures
  * the query state machine for iterating filtered results. */
 
+unsigned char g_byte_table_30861 = 0;

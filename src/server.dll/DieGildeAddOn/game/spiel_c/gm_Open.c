@@ -233,3 +233,4 @@ char g_stream_pool[1] = {
 int g_stream_count = 0; /* 0x10034678 */
 int g_connection_counter = 0;
 
+int g_producer_id_table = 468;

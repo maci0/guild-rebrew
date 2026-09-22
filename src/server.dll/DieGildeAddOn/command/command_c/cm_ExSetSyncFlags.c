@@ -39,9 +39,9 @@ typedef struct player_slot {
 } player_slot;
 
 // GLOBAL: SERVER 0x1002c3f4
-extern int g_game_speed_index;
+int g_game_speed_index = 2;
 // GLOBAL: SERVER 0x1002c3f0
-extern int g_game_speed_value;
+int g_game_speed_value = 770;
 // GLOBAL: SERVER 0x10025718
 extern int g_game_speed_table[];
 

@@ -155,3 +155,5 @@ extern struct SaveHeaderTail g_save_header_tail; /* 0x1002d4f0 */
 
 // GLOBAL: SERVER 0x1002d4fc
 extern char s_ls_tmp_1002d4fc; /* 0x1002d4fc */
+struct SaveHeaderTail g_save_header_tail = 0x65766153;
+char s_ls_tmp_1002d4fc = 108;

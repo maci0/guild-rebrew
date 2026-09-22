@@ -11,7 +11,7 @@
 
 int __stdcall ServerMainThread(void* lpThreadParameter);
 // GLOBAL: SERVER 0x10034680
-extern int g_handler_started;
+int g_handler_started = 0;
 /* Console control handler for graceful shutdown.
  * Handles Ctrl+C and close events. Always returns 0. */
 

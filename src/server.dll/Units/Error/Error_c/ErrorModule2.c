@@ -8,7 +8,7 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 
 void __cdecl DispatchLogOutput(const char* text, int output_mask, int severity);
 // GLOBAL: SERVER 0x10034618
-extern unsigned int g_log_mode_flags;
+unsigned int g_log_mode_flags = 0;
 // GLOBAL: SERVER 0x117660e0
 extern int g_owner_window;
 extern void (*g_panic_callback)(void);

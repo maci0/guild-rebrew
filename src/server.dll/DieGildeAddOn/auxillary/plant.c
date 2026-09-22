@@ -212,3 +212,4 @@ int __cdecl plt_TableLookup(int index, int* out)
 	*(int*) ((char*) out + 4) = *(int*) (0x1002DA34 + index * 8);
 	return 1;
 }
+int g_plant_info_table = 0x415401b7;

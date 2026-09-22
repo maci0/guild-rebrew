@@ -64,7 +64,7 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 char __cdecl check_memory_protection(unsigned int);
 char __cdecl AnalyzeInstruction(int, int, int, int*);
 unsigned int __cdecl EmitCrashModuleLine(int*);
-extern void* g_crash_callback;
+int g_crash_callback = 0;
 
 // NOTE: semantically complete reconstruction rebuilt from the target disasm.
 // Exception dispatch converted from switch to the reference's if/else chain

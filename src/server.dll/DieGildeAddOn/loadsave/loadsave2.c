@@ -430,3 +430,4 @@ int __cdecl ls_LoadEntities(int arg1)
  * treasury, population, building counts, and political
  * state (offices, elections). */
 
+int g_file_version = 65626;

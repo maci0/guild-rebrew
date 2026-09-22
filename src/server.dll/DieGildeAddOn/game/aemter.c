@@ -217,3 +217,4 @@ int __cdecl amt_ValidateCommand(char* arg1)
 	}
 	return 1;
 }
+int g_office_role_templates = 0;

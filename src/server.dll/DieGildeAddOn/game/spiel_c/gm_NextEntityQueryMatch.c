@@ -230,3 +230,5 @@ int g_entity_ref_table;
    gm_Open.c; metadata: 1-byte object at 0x10035a04 (round 925). */
 unsigned char g_entity_type_bytes[1];
 
+int g_query_filter_max_id = 32767;
+short g_query_filter_type = 65535;

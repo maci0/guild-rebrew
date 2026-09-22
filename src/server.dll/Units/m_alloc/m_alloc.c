@@ -283,3 +283,4 @@ void __cdecl m_init(int n)
 	g_list_head = 0;
 }
 #pragma optimize("", on)
+int g_alloc_counter = 0;
