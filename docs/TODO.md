@@ -34174,3 +34174,31 @@ instruction in the wrong place" question.
   leaves the same 6/31.
 - **Measured:** GOLDTL 321 -> **329** byte-matched (exact 129, reloc 200, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 814/814.
+
+### Round 1314 / session R289 (GOLDTL +7 — fifteenth batch: chain walks and shared-return tails)
+- Seven more: `fcn_004239e0` (EXACT 42/42), `fcn_00422700` (RELOC 47/47), `fcn_00422730`
+  (RELOC 48/48), `fcn_004238f0` (RELOC 40/40), `fcn_00424760` (RELOC 43/43), `fcn_00424810`
+  (RELOC 43/43), `fcn_00425520` (RELOC 35/35).
+- **A chain walk written as a `while` condition keeps the base in `eax`.** `fcn_004239e0` walks a
+  `+0x104` chain to its last node. With two variables (`cur = result->f104; while (cur) { result = cur;
+  cur = result->f104; }`) the second load comes out `mov ecx,[ecx+0x104]` — the allocator coalesces
+  `result` and `cur`. Writing it as
+  `while (*(int**) ((char*) result + 0x104) != 0) result = *(int**) ((char*) result + 0x104);`
+  reproduces the reference's `mov eax,ecx; mov ecx,[eax+0x104]` (base register `eax`) and turns the
+  function EXACT. Same idiom in `fcn_00422aa0` (parked, below).
+- **Shared-return tails want `result` assigned only on the success path.** `fcn_00424760`/`fcn_00424810`
+  (`if (p) { n = p->f38|f3c; if (n) { call; ... } }` returning the node) only match with
+  `result = 0; if (p != 0) { n = ...; if (n != 0) { call(a1, n, a2); result = n; } } return result;`
+  — the `result = n` inside the inner `if` is what makes both guards jump *forward* to one
+  `mov eax,esi; ret` tail, with `pop esi` shared. Assigning `result = n` after the inner `if`, or using
+  `if (n) { call } return n;`, flips a guard to `jne` over an inline return.
+- **Parked:** `fcn_00424840` (39 B) and `fcn_00424790` (42 B) — the same three-argument shape over
+  `+0x3c`/`+0x104`. Everything matches except `push esi`, which the reference hoists *above* the
+  `test eax,eax; je` guard (`mov eax,[esp+4]; push esi; test eax,eax; je <ret>`); ours pushes it after
+  the guard, a 5-byte (push + jump displacement) difference. `result = p`, `result = 0`, `n = 0`
+  pre-init and plain `if (p == 0) return 0;` all reproduce the late push. Also `fcn_00422aa0`
+  (48 B): the reference loads `g_6b7d7c` into **ecx** (`8b 0d`) and `g_6b7d78` into **eax**
+  (`a1`); ours loads the first global into `eax` (`a1`) whether the source tests it before or after the
+  second load, via a local or as a direct dereference (2/48).
+- **Measured:** GOLDTL 329 -> **336** byte-matched (exact 130, reloc 206, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 821/821.
