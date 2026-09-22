@@ -34531,3 +34531,25 @@ instruction in the wrong place" question.
   `fcn_004ce260`/`fcn_004ce210` (same ordering sensitivity with a global field).
 - **Measured:** GOLDTL 453 -> **461** byte-matched (exact 160, reloc 301, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 944/944.
+
+### Round 1327 / session R300c (GOLDTL +6 — twenty-eighth batch: mixed record writers)
+- Six more `fcn_004c4330` family members, all RELOC: `fcn_004c5b50`/`fcn_004c6040` (four dwords at
+  `+0x10/+0x14/+0x18/+0x1c`), `fcn_004c6be0` (dword read at `a1+1`, then `memcpy(buf+0x18, a2, 0x1c)`),
+  `fcn_004c5310` (int + word at `+0x14` + `memcpy(buf+0x16, a3, 0x1f)`), `fcn_004c5530` (clears eight
+  dwords at `a1+0x38` that are zero to -1, then `fcn_004c4df0(0xf8, a1)`) and `fcn_004c5790`
+  (char at `+0x10`, conditional `memcpy(buf+0x11, a2, 0x7c)`).
+- **`66 a5` + `a4` means the size is `4n + 3`, not `4n + 2`.** `fcn_004c5310`'s `memcpy(buf+0x16, a3, …)`
+  is 0x1f bytes: 7 `rep movsd` + `movsw` + `movsb`. Our first pass read the hex prefix, saw `66 a5` and
+  no `a4` in the truncated slice, wrote 0x1e and missed by exactly one byte.
+- **A countdown loop is a `for (i = 8; i != 0; i--)`, not an ascending compare.** `fcn_004c5530`'s
+  8-iteration clear loop compiles to `dec ecx; jne` — an ascending `i < 8` form emits `cmp/jl`.
+- **Parked:** `fcn_004c5b00` (a struct-by-value third parameter `{short; char;}` at `[esp+0xa8]` /
+  `[esp+0xaa]`; the reference reads the word field *first* and the byte into `dl`, ours into `al`, and
+  reordering the stores only got us to 61/74), `fcn_004c5820` (a `memcpy(buf+0x10, a1, 0x2d)` followed by
+  a global load and two field stores; the reference schedules the `mov eax,[0x773d38]` between the
+  `rep movsd` and its trailing `movsb`, 64/80), plus the 8 `memcpy`-from-parameter writers
+  (`fcn_004c4e70`, `fcn_004c62c0`, `fcn_004c68c0`, `fcn_004c6a00`, `fcn_004c6aa0`, `fcn_004c6cf0`,
+  `fcn_004c6d30`, `fcn_004c6de0`) whose tag-store/`lea` order our backend will not reproduce at those
+  sizes (the 0x80-byte copy `fcn_004c6560` does match).
+- **Measured:** GOLDTL 461 -> **467** byte-matched (exact 160, reloc 307, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 950/950.
