@@ -34836,3 +34836,25 @@ instruction in the wrong place" question.
   dead `esi` computation), `fcn_00545970` (1-byte jump displacement) and `fcn_004f6740`.
 - **Measured:** GOLDTL 541 -> **545** byte-matched (exact 192, reloc 353, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1028/1028 (0 warnings).
+
+### Round 1340 / session R311 (GOLDTL +3 — forty-first batch: struct-field copies and tail-call reuse)
+- Three more: `fcn_00500db0` and `fcn_004d7d30` (EXACT) and `fcn_004e90d0` (RELOC).
+- **Mixed-width field copies:** `fcn_00500db0` is `*(int*)q = *(short*)(p+2) - 0x578;
+  *(unsigned short*)(q+4) = (unsigned short)*(char*)(p+4); *(int*)(q+6) = *(signed char*)(p+5);
+  *(int*)(q+0xa) = *(int*)(p+6);` — the sign-extending byte loads (`movsx dx, byte` then
+  `mov [q+4],dx`) need the exact source types (`unsigned short` destination for the first, `signed char`
+  for the second).
+- **Reusing an already-EXACT callee pays twice.** `fcn_004e90d0` (0x9a9228..0x9a9618, 0x18-byte
+  records whose first byte is the key) tail-calls `fcn_00508e40` — a function this session made EXACT in
+  round 1338; the argument comes from `((E*)0x9a9224)[i].a` with a 0x18-byte struct so the compiler
+  emits the `lea ecx,[ecx+ecx*2]; mov ecx,[eax*8 + disp]` chain. RELOC only because of the call.
+- **Guard polarity for an out-of-line tail:** `fcn_004d7d30` (`if (g_772ea8) { p->f354 = 0;
+  p->f358 = g_772eac; } else p->f354 = 1;`) needs the **`!= 0`** spelling so the `je` jumps forward to
+  the one-store path; `== 0` puts that path inline (21/51).
+- **Parked:** `fcn_00450c70` (loop over `g_6b86fc` calling `vtbl[0x2e](obj, i, 0)` then clearing
+  `g_6b870c + i*12 + 4`; the reference addresses `[edi + edx + 4]`, ours `[edx + edi + 4]` — same
+  address, one SIB byte different), `fcn_004f6810` (two-flag test with a shared `-4` return; the
+  reference's `xor eax,eax` prologue and out-of-line `-1` need the `int r = 0` skeleton), `fcn_004e8b40`,
+  `fcn_00545970`, `fcn_004f6740`, `fcn_0042def0`, `fcn_00549b50`/`fcn_0054b420`/`fcn_005650d0`.
+- **Measured:** GOLDTL 545 -> **548** byte-matched (exact 194, reloc 354, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1031/1031 (0 warnings).
