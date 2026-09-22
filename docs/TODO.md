@@ -35670,3 +35670,24 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 607 -> **608** byte-matched (exact 248, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 / byte-matched 264 / 100 imports, GOLD 213;
   zero demotions/losses, lint 1090/1090 (0 warnings).
+
+### Round 1372 / session R343 (GOLDTL +3 — 611; memset initializer + unused-parameter predicates)
+- Three EXACT: `fcn_004f1840`, `fcn_004f1850` (14B each) and `fcn_004fa690` (92B).
+- **A zero-initialiser is a run of `memset`s — nothing else.** `fcn_004fa690` is six
+  `memset(addr, 0, n)` calls in address order (0x99f5a0/36, 0x99f6a0/340, 0x99f620/104, 0x99ef80/1536,
+  0x99ec20/320, 0x99f5e0/40) followed by `*(int*) 0x99f5a0 = -1;` and `*(int*) 0x773d4c = 0;`. With
+  `#pragma intrinsic(memset)` each call expands to exactly the reference's `mov ecx,<n/4>; xor eax,eax;
+  mov edi,<addr>; rep stosd`, and the shared zero in `eax` rides through all six ✓ 92/92 first try. Same
+  rule as round 1346's `fcn_0044d550` family: never hand-roll the zero loop.
+- **An unused first parameter still has to be declared.** `fcn_004f1840`/`fcn_004f1850` read their *second*
+  argument (`mov ecx,[esp+8]`) and return `*(int*)(a2 + 4) == -1` / `!= -1` (`sete al` / `setne al` behind
+  a `xor eax,eax`). Declaring them `(int a1, char* a2)` with `a1` untouched reproduces the prologue — a
+  1-argument declaration would read `[esp+4]` and miss. Both are 14 bytes inside an 80-byte inventory
+  entry (the entry covers the sibling loop at 0x4f1860 as well), so the `// SIZE:` marker is the real
+  function length, per round 1367.
+- **Next up from the same sweep:** the loop sibling `0x4f1860` (scan `[a2+0x10]` records of 0x44 stride
+  for the first `[p] != -1`; count in `[a2]` indexes the 0x6652f8 length table) and the parked
+  0x4e7b70/0x4e7bf0 pair.
+- **Measured:** GOLDTL 608 -> **611** byte-matched (exact 251, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 / byte-matched 264 / 100 imports, GOLD 213;
+  zero demotions/losses, lint 1093/1093 (0 warnings).
