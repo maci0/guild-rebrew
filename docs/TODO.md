@@ -33477,3 +33477,35 @@ instruction in the wrong place" question.
   fix .data overage (likely `make_split_rsp.py` `_BLOB_AT_DATA=0x3400` blob placement now stale after
   reordering — comment says re-sweep when object .data changes), and wine err=193 (likely follows
   .data/import layout).
+
+### Round 1285 / session R262 (round-6 gate-target diagnosis: residue = PROVEN grind, not a reorg regression)
+- **Ruled out the leading hypothesis:** the top residue functions were **already PROVEN before the
+  reorg**, so the reorg did NOT demote EXACT->PROVEN. Checked each at pre-reorg commit `3483097f`:
+  CrashDump, ls_LoadBuilding, cm_ExSellObjekt, m_AllocTracked, gm_CalculateProductionValue,
+  cm_ExCopyEntity, gm_AllocGebaeude, gm_FindNext, vfs_OpenStream, cm_ProcessCommandQueue all
+  `status=PROVEN` pre-reorg too (ahm_ExAllocAlchemist NEAR->PROVEN, gv_ExAllocGraveyardWorker
+  STUB->PROVEN — both *improved*). So the residue is long-standing PROVEN byte-drift, not fresh damage.
+- **Residue = 19 non-EXACT functions** (from postlink_residual breakdown, total 12018):
+  gm_AllocSpieler 2825 (STUB 3689), CrashDump 1970 (PROVEN 2115), ls_LoadBuilding 1381 (PROVEN 1463),
+  cm_ExSellObjekt 966, ahm_ExAlloc 960, m_AllocTracked 773, gm_CalcProd 641, cm_ExCopyEntity 470,
+  gv_ExAllocGrave 456, ServerMainThread 369 (NEAR), gm_AllocGebaeude 336, gm_FindNext 257,
+  vfs_OpenStream 238, cm_ProcessCmdQ 117, + ~5 more. Cutting residue to <=8628 = byte-matching
+  PROVEN->EXACT (the core allocator/scheduling grind).
+- **CrashDump diff (biggest PROVEN):** size matches 2115==2115, summary exact134/reloc23/
+  structural572. First faults: `sub esp,0x280` vs `0x284` (frame +4) then callee-save set
+  (target pushes ebp,esi; candidate ebx,ebp,esi,edi) — a frame-size + register-allocation delta
+  (docs/msvc6-allocator.md territory), i.e. one more allocator-grind function, not a quick fix.
+- **.data 45% off (raw 0x64ce):** `make_split_rsp._BLOB_AT_DATA=0x3400` cuts `mid` where running
+  game-.data reaches 0x3400 and drops the restore blobs there. The marker fix reordered `mid`
+  (SERVER-VA), so the cut now spans a *different set* of .data-contributing objects than the value
+  was measured for -> .data content before the blob mismatches. This is a **companion fix to
+  93155b34**: re-sweep `_BLOB_AT_DATA` (and/or confirm reference .data order == .text order) for the
+  new object order. Likely cascades to wine (see below).
+- **wine err=193:** postlink_residual reports layout-map coverage **89.83% (split path)** — just under
+  the 90% gate; below it the fixers "rewrite operands by fixed offset" and can corrupt bytes, which
+  plausibly yields the unloadable image. Pushing layout coverage >=90% (position alignment: .text
+  0x620-short + intra-object order) is the pre-condition for wine loading, independent of .data.
+- **No code/build change landed this round** — every gate failure reduces to the core byte-matching /
+  position-alignment grind or the `_BLOB_AT_DATA` companion sweep; none is a safe quick fix. Much of
+  the round was lost to a recurring **/tmp ENOSPC** (bash/glob/grep all failed to launch mid-round;
+  recovered transiently). Lint 0/0, verify 281, extent clean throughout.
