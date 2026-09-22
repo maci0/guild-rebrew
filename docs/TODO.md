@@ -33800,3 +33800,28 @@ instruction in the wrong place" question.
   silent no-ops.
 - **Next:** `cm_ChkEntityLookup` needs `0x4f48e0` reversed (client-only, uses the `0x7f4ca4` table and
   `[0x774970]` that `fcn_0053d690` also reads); otherwise the 43 SIZE_MISMATCH entries are the field.
+
+### Round 1297 / session R273 (GOLDTL +2: two start-function reconstructions; the MSVC argument-offset shift documented)
+- **`fcn_00401090` (0x401090) RELOC 32/32.** `return fcn_0042f120(a, g_6b7fdc, &a) != 0;` — the `&a`
+  third argument is what the `lea eax,[esp+4]` before the pushes encodes, and the `neg/sbb/neg` tail is
+  MSVC's `!= 0` boolean idiom (not `setne`). New `src/fcn_00401090.c`, with `g_6b7fdc` recorded in
+  rebrew-data.toml (`section = ".data"`).
+- **`fcn_00401380` (0x401380) RELOC 37/37.** `fcn_00401360(a1, a2); fcn_00430910(a3, a2, 1, a1);` —
+  **three** parameters, not five: MSVC emits the post-call argument load with an offset that assumes
+  the pushes it is about to make are already done, so the emitted `[esp+0x1c]` is a *third* declared
+  parameter and a 5-parameter spelling emits `[esp+0x24]` for the same source. **Decode argument slots
+  from the emitted offset ladder (a_k lands 8 bytes above its true position once a call has been
+  scheduled in between), not from a naive `4*k+4`.**
+- **Tried and dropped:** `fcn_00401430` (0x401430) — the body is `fcn_00401360(a1,a3);
+  fcn_00401360(a1,a4); fcn_00430910(a8?,a4,a3,a1)` and reaches **47/49**, but MSVC schedules our
+  argument loads after the pushes (deltas +8 and +12) where the reference loads them before; the three
+  spellings tried (7-param, 8-param, hoisted locals) all land on the same two offsets. File deleted —
+  no verified value in keeping a near-miss claim. The reconstruction is recorded here for the next
+  attempt: `fcn_00401430`'s **first** call is `fcn_00401360(arg1, arg3)`, its **second**
+  `fcn_00401360(arg1, arg4)`, its tail `fcn_00430910(arg8, arg4, arg3, arg1)` (offsets E+4, E+0xc,
+  E+0x10, E+0x20).
+- **Also tried and reverted:** `cm_ExCutsceneUpdate` (0x406560, 37/90) — the reference keeps `ent` in
+  `ecx` across a call, which MSVC only does for a callee it can analyse; our spelling forces a
+  callee-saved `edi`. No source permutation found this round.
+- **Measured:** GOLDTL `verify --full` 138 -> **140**; GOLD 213 and SERVER 281/264 unchanged; zero lost
+  or demoted on any target; lint 621/621.
