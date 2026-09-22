@@ -1,0 +1,21 @@
+// FUNCTION: GOLDTL 0x42a660
+// SIZE: 56
+
+int __cdecl fcn_0042b120(int);
+typedef int (__stdcall* f)(int);
+
+int __cdecl fcn_0042a660(int* a1, int* a2)
+{
+	int r = 0;
+
+	if (*(int*) 0x6b7f90 != 0) {
+		if (fcn_0042b120((int) a1) >= 0) {
+			*a2 = (*(f*) 0x6623ec)(*a1);
+		} else {
+			r = -1;
+		}
+	} else {
+		r = -1;
+	}
+	return r;
+}

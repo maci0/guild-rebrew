@@ -34576,3 +34576,29 @@ instruction in the wrong place" question.
   argument pushes and the `call`; either statement order misses).
 - **Measured:** GOLDTL 467 -> **473** byte-matched (exact 161, reloc 312, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 956/956.
+
+### Round 1329 / session R302 (GOLDTL +6 — thirtieth batch: the `g_6b7f90` dispatch family)
+- Six members of the 27-function `mov eax,[0x6b7f90]; push esi; xor esi,esi; ...` cluster, all RELOC:
+  `fcn_0042a4d0`, `fcn_0042a620`, `fcn_0042a660`, `fcn_0042a8e0`, `fcn_0042a920`, `fcn_0042a960`.
+- **The cluster was found by grouping untracked functions by their first 8 bytes.** A prologue
+  histogram over every untracked 20–64-byte function in `.text` (the same trick that found the
+  `sub esp,0x9c` family, but applied to the whole inventory at once) shows 27 entries starting
+  `a1907f6b005633f6` — the `g_6b7f90` dispatch table. The next round should continue through it; the
+  other clusters are 7× `8b4424048b0085c0` (pointer-of-pointer readers), 5× `68182d66006a00e8` and
+  5× `81ec9c0000008b84` (the struct-field writers parked in round 1327).
+- **The shared skeleton:** `int r = 0; if (g != 0) { if (probe(args) >= 0) { <indirect call>; } else
+  r = -1; } else r = -1; return r;` — the round-26 two-assignment idiom, which is what produces the
+  `push esi; xor esi,esi` + `mov eax,esi` on the success path and the out-of-line `or eax,-1` on both
+  failure paths.
+- **Variants are just the probe and the call slot.** `fcn_0042a4d0`: probe `fcn_0042b2c0()` with the
+  *inverted* test (`cmp eax,1; jg fail`, i.e. `<= 1`), then `g_6b7f94 = a1; (*(f*)0x66244c)(1, a1)`.
+  The others all use `fcn_0042b1c0(a1) >= 0` (or `fcn_0042b120`) followed by a `__stdcall` indirect
+  call through 0x6623a0 / 0x6623d8 / 0x6623dc / 0x6623e0 — either discarding the result
+  (`fcn_0042a620`, `fcn_0042a920`) or storing it to an out-parameter
+  (`fcn_0042a660`, `fcn_0042a8e0`, `fcn_0042a960`).
+- **Marker sizes must come from `obj_size`, not from the disassembly length.** `fcn_0042a4d0` and
+  `fcn_0042a660` were first written with `// SIZE: 46` (the number of bytes the listing showed) and
+  reported `SIZE_MISMATCH` with an empty diff; the compiled objects were 49 and 56 bytes and matched
+  the reference spans exactly.
+- **Measured:** GOLDTL 473 -> **479** byte-matched (exact 161, reloc 318, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 962/962.
