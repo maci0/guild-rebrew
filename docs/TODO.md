@@ -35382,3 +35382,28 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 595 -> **597** byte-matched (exact 237, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
   imports, GOLD 213; zero demotions/losses, lint 1079/1079 (0 warnings).
+
+### Round 1361 / session R332 (GOLDTL +2 — float lerp + record fill; 599)
+- Two EXACT: `fcn_00451340` (57B) and `fcn_00460a00` (49B).
+- **The FPU operand order *is* the source order.** `fcn_00451340` is a 3-component lerp
+  `a4[i] = (a2[i] - a1[i]) * t + a1[i];` — the reference emits `fld [ecx]` (a2), `fsub [eax]` (a1),
+  `fmul [esp+0xc]` (t), `fadd [eax]` (a1), `fstp [edx]`, so writing the algebraically identical
+  `a1[i] + (a2[i] - a1[i]) * t` gives the same bytes *only* because `+` commutes at the FPU stack level
+  here; the subtraction and the two memory operands must keep that order. Note the parameter mapping the
+  reference implies: `(a1, a2, t, dst)` — `dst` is the *fourth* argument (`edx = [esp+0x10]`), and `t` is
+  the third (`fmul [esp+0xc]`).
+- **`memcpy` to a struct field plus two counter stores.** `fcn_00460a00` copies `a3` bytes from `a2` into
+  `*(char**)(a1+0x28)` with `#pragma intrinsic(memcpy)` (the reference expands to
+  `shr ecx,2; rep movsd; mov ecx,ebx; and ecx,3; rep movsb`), then stores `*(int*)(a1+0x34)` **and**
+  `*(int*)(a1+0x30)` — both hold `*(char**)(a1+0x28) + a3` (the second load of `[eax+0x28]` before the
+  add is what the reference does, not a reuse of the first pointer).
+- **Parked:** `fcn_00465800` (`((int*)0x67d1d4)[-a1]`; the reference keeps `a1` in `eax`, the base in
+  `edx` and the byte offset in `ecx` — `lea ecx,[eax*4]; sub edx,ecx; mov eax,[edx]` — while MSVC folds
+  the base through the scale (0x67d1d4>>2 = 0x19f475) into `sub eax,ecx; mov eax,[eax*4]`, 19 bytes vs 21
+  for the indexed, two-step-pointer and negative-index spellings alike), `fcn_00468cd0`
+  (0x2f4-stride record fill at `[0x1015ea0] + 0x98`; the reference loads the global into `edx` and the
+  second argument into `ecx` *after* the index math, ours takes a2 into `edx` and the global into `ecx` —
+  the same a2/global register swap as the parked `fcn_0041dd90`, 14/32), plus the earlier list.
+- **Measured:** GOLDTL 597 -> **599** byte-matched (exact 239, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
+  imports, GOLD 213; zero demotions/losses, lint 1081/1081 (0 warnings).
