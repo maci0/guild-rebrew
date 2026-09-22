@@ -196,7 +196,7 @@ echo "== data gap for this composition"
 # The reorg'd src/Develop composition emits S=0x7736 before the blob (was0x6b60
 # when GAP was0x74a0); the stale0x74a0 placed the ref-tail blob0xbd6 early ->
 # .data 45% off.  Re-derive on every composition change: GAP=0xe000-S.
-GAP=0x68ca
+GAP=0x6b8c
 python3 - "$GAP" "$WORK/data_restore_split.c" <<'BLOB'
 import struct, sys
 from pathlib import Path
