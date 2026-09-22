@@ -35649,3 +35649,24 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 606 -> **607** byte-matched (exact 247, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 / byte-matched 264 / 100 imports, GOLD 213;
   zero demotions/losses, lint 1089/1089 (0 warnings).
+
+### Round 1371 / session R342 (GOLDTL +1 — 608; list-lookup sibling of 0x5c61e0)
+- One EXACT: `fcn_005c6220` (0x5c6220, 68B) — the out-parameter twin of round-1353's `fcn_005c61e0`:
+  walk the 0x1c-stride chain from 0x6abb08 while the node's first dword is non-zero, and on a match store
+  the index into `*out` (when non-null) and return `0x6abb08 + index*0x1c`. The winning source shape is
+  the same one found in 1353 — `v = [0x6abb08]; n = 0; while (v != 0) { if (v == key) { … return …; }
+  n++; v = [0x6abb08 + n*0x1c]; } return 0;` — i.e. **build the address from the index inside the loop
+  and return from inside it**, never `break` with a post-loop `if`. 68/68 first try, which confirms that
+  lever generalises to the sibling.
+- **Known-table sweep round 2** (the same address-byte trick, tables from earlier rounds):
+  `0x68da68` -> `0x4e7b70`/`0x4e7bf0` (128B each), `0x6652f8` -> `0x4f1840` (parked sibling of 0x4f1890),
+  `0x99f5e0` -> `0x4fa690` (92B), `0x6abb08` -> `0x5c6220` (landed); `0x68ff68`, `0x9b0840` have no
+  untracked users left.
+- **Parked:** `fcn_004e7b70` (128B: three guards — null, `word[0] == 0xffff`, `byte[0x166] == 0` — then a
+  0x18-stride search for `[a1+4]` over 0x9a9224..0x9a94f4 and *two* 24-byte `memcpy`s, the second keyed by
+  the matched record's byte at +8 through the 0x68da68 table; the reference keeps `a1` in `ecx` and pushes
+  `esi` only after the guards, MSVC takes `edx` for `a1` and pushes `esi` at entry — 16/122, and inlining
+  the byte key through `k` made it 8/123), so its twin `0x4e7bf0` is parked with it.
+- **Measured:** GOLDTL 607 -> **608** byte-matched (exact 248, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 / byte-matched 264 / 100 imports, GOLD 213;
+  zero demotions/losses, lint 1090/1090 (0 warnings).
