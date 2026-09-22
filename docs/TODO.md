@@ -34202,3 +34202,33 @@ instruction in the wrong place" question.
   second load, via a local or as a direct dereference (2/48).
 - **Measured:** GOLDTL 329 -> **336** byte-matched (exact 130, reloc 206, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 821/821.
+
+### Round 1315 / session R290 (GOLDTL +8 — sixteenth batch: separator walkers and zero-across-call)
+- Eight more: `fcn_0042e540` and `fcn_0042e570` (EXACT 39/39 each — the `\`→`/` and `/`→`\` path
+  fixers), `fcn_0042e380` (RELOC 34/34), `fcn_00423d20` (RELOC 37/37), `fcn_00423f60` (RELOC 42/42),
+  `fcn_0042b120` (RELOC 25/25), `fcn_00438ac0` (RELOC 41/41), `fcn_00438ba0` (RELOC 46/46).
+- **A value that must survive a call forces the zero into a callee-saved register.**
+  `fcn_00423d20` is `int r = 0; p = fcn_00423c50(a1, a2); if (p) r = p[0x100/4]; return r;` — the
+  reference brackets the call with `push esi` / `xor esi,esi` / `mov eax,esi` on the null path.
+  Writing it as `if (p) return p[0x100/4]; return 0;` (two literal returns) allocates no `esi`.
+  Generalise: if the reference parks a constant in a callee-saved register, the source had a variable
+  holding it across the call.
+- **A constant table address needs an array symbol, not a cast.** `fcn_0042b120` searches
+  `0x6b7ed0[0..0x10)` for `a1`. `*(int*) (0x6b7ed0 + i * 4)` compiles to a pointer walk
+  (`mov ecx,0x6b7ed0; add ecx,4; cmp ecx,0x6b7f10`); `((int*) 0x6b7ed0)[i]` still materialises the base.
+  Only `extern int g_6b7ed0[16];` + `g_6b7ed0[i]` gives the reference's absolute
+  `cmp dword ptr [eax*4 + 0x6b7ed0], ecx` (the extern needs no `// GLOBAL:` marker — the relocation is
+  masked).
+- **String-literal addresses can be written as integer constants.** `fcn_00438ac0` pushes `0x438a80`
+  (a format string in `.rdata`) as an immediate into a 5-argument call; writing the literal address as
+  an `int` argument reproduces the bytes (RELOC).
+- **Parked:** `fcn_00423de0` (48 B) and `fcn_00424870` (40 B) — same zero-across-call shape as
+  `fcn_00423d20` (`g_6b7d68` guarded, then a `fcn_0064d530` call, then `return 0`), but here the
+  reference hoists `push esi` **and** `xor esi,esi` *above* the `test eax,eax; je -1` guard
+  (`mov eax,[g]; push esi; xor esi,esi; test eax,eax`). `int r = 0;`, `int r = 0;` as a declaration
+  initialiser, `r = 0;` after the guard, and a literal `return 0;` all sink the zero past the branch
+  (9/48 and 10/40). Also `fcn_00437890` (45 B): the reference loads both fields before testing either
+  (`mov ecx,[eax+0x1fc]; mov eax,[eax+0x1f4]; test ecx,ecx; jne; test eax,eax; je`); ours keeps the
+  parameter in `ecx` and `a` in `eax` instead (41/45).
+- **Measured:** GOLDTL 336 -> **344** byte-matched (exact 132, reloc 212, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 829/829.
