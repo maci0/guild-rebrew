@@ -34114,3 +34114,33 @@ instruction in the wrong place" question.
   allocation; only the pre-`dec` `do/while` form reaches 24/34.
 - **Measured:** GOLDTL 307 -> **312** byte-matched (exact 123, reloc 189, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 797/797.
+
+### Round 1312 / session R287 (GOLDTL +9 — thirteenth batch: indirect-call and intrinsic levers)
+- Nine more: `fcn_00411520` (EXACT 39/39), `fcn_0040fdd0` (EXACT 35/35), `fcn_004117c0` and
+  `fcn_004117f0` (EXACT 42/42 each, byte-identical twins over different globals), `fcn_0040c070`
+  (RELOC 40/40), `fcn_0040f550` (RELOC 33/33), `fcn_0040d550` (RELOC 35/35), `fcn_00412e80`
+  (RELOC 37/37), `fcn_004154e0` (RELOC 43/43).
+- **Indirect call through a fixed address is `(*(Fn*)0xNNNN)(args)`.** `fcn_00411520` calls a
+  `__stdcall` pointer stored at 0x662008. Casting the literal (`((Fn) 0x662008)(...)`) compiles to
+  `mov edx,0x662008; call edx`; dereferencing a pointer *at* that address
+  (`(*(fcn_00411520_fn*) 0x662008)(a1, a2, 0, 1, a3, strlen(a3) + 1)`) emits the reference's
+  `call dword ptr [0x662008]`. The `__stdcall` typedef also removes the `add esp,4` cleanup that a
+  `__cdecl` typedef leaves behind — same lever on the 0x4117c0/0x4117f0 vtable-call pair.
+- **`#pragma intrinsic(strcpy)` inlines the copy loop.** `fcn_0040fdd0` is
+  `if ((dst = *a1) == 0) return 0; strcpy(dst, *a2); return 1;` — a hand-written
+  `while ((*dst++ = *src++))` loop gets a different register assignment (dst↔src swapped) and never
+  matches; with the pragma MSVC emits the reference's five-instruction `rep`-less copy loop.
+- **Inventory sizes are advisory.** Six of this batch's spans are *smaller* than
+  `db/inventory-Europa1400Gold_TL.exe.json` claims (0x4117c0: 48 listed, 42 real; 0x40fdd0: 48
+  listed, 35 real; 0x40d550: 48 listed, 35 real). The compiled-size compare in `rebrew test` is the
+  authority; `rebrew asm --size N` past the end silently dumps the next function.
+- **Two spans merge an ILT thunk with its target — skip them.** 0x408240 (41 B) and 0x4186c0 (47 B)
+  each start with a 16-byte `jmp rel32` + 11 NOPs (incremental-link thunk) followed by the real
+  25/31-byte body. No single C function reproduces the pair.
+- **Parked:** `fcn_00413190` (39 B) — signed index clamp around an *unsigned* division by 988:
+  reference `mov ecx,[esp+4]; mov eax,0x953f391; sub ecx,0x10432c0; mul ecx; ...`; ours loads the
+  argument into `eax` and folds the bias into `lea ecx,[eax-0x10432c0]` (27/39). The `unsigned` vs
+  `int` dividend is settled (signed emits `imul` + 0x84a9f9c9); `int`, `unsigned`, single-expression,
+  split `u -= K` and `(char*)p - (char*)base` / `sizeof` forms all give the `eax` load.
+- **Measured:** GOLDTL 312 -> **321** byte-matched (exact 127, reloc 194, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 806/806.
