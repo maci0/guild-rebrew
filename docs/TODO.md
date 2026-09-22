@@ -35724,3 +35724,14 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL **611** byte-matched unchanged (exact 251, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52), SERVER 281/283 / byte-matched 264 unchanged, GOLD 213; tree clean, zero
   demotions/losses, lint 1093/1093 (0 warnings).
+
+### Round 1378 — cross-import tooling audit (start)
+
+- Promoted two call-bearing RELOCs found by the new `.scratch/calls.py` pool
+  (untracked functions whose `e8` targets are all in the inventory):
+  `src/fcn_0042e340.c` (RELOC 50/50, callee declared as `fcn_0042e260`) and
+  `src/fcn_004298e0.c` (RELOC 49/49, callee `fcn_00429d30`). GOLDTL verify
+  611 -> 613 byte-matched (exact 251, reloc 362), failed 52, tracked 665,
+  inventory 6335, lint 1095/1095 zero warnings. Zero demotions.
+- Parked `src/fcn_004514d0.c`: NEAR_MATCHING 37/38, one byte off (candidate
+  operand/condition-order wall, listed below).
