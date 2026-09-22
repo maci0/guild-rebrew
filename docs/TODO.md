@@ -35434,3 +35434,25 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL 599 -> **600** byte-matched (exact 240, reloc 360, matching 5, size_mismatch 45,
   stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
   imports, GOLD 213; zero demotions/losses, lint 1082/1082 (0 warnings).
+
+### Round 1363 / session R334 (GOLDTL +2 — 0x7f4ca0 record predicates, 602)
+- Two EXACT: `fcn_004ae170` (69B) and `fcn_004ae1c0` (69B), the paired predicates over the 540-byte
+  record table at 0x7f4ca0 (same table as the round-1347 `fcn_004fffb0`): mask the index to 16 bits, reject
+  the `word[+0] == 0xffff` hole and `byte[+8] <= 0` (`jbe` — the unsigned-char `<= 0` form again), then
+  branch on `byte[+2]`:
+  - `fcn_004ae170`: `f == 6 || f == 7 || f == 5` → 1, else 0;
+  - `fcn_004ae1c0`: `f < 0xa && f != 6 && f != 7` → 1, else 0 (the `jae` first, then the two `je`s).
+- **The same body, two guard styles, 5 bytes apart.** Written with early `if (bad) return 0;` rejects,
+  `fcn_004ae170` compiles to 75 bytes (33/75): every reject inlines `xor eax,eax; ret` behind a short
+  `jne`. Nesting the *positive* guards and closing with a single `return 0;` gives the reference's shared
+  zero block at the end (`je` far) and lands 69/69. `fcn_004ae1c0` — whose reject order is
+  `>= 0xa` then `== 6` then `== 7` — happens to compile to the reference from the flat `&&` chain, so
+  copy the *branch order* off the disassembly rather than assuming one style for both.
+- **Parked:** the `0x42b1c0/0x42b200/0x42b240/0x42b280` four-function family (two parallel pointer tables
+  0x6b7ed0 and 0x6b7f10/0x6b7f50 with the pairs differing in exactly one byte, offset 29/31: the two
+  offset-loops `o += 4` materialise the table base into a register (`be d0 7e 6b 00`) where the reference
+  keeps the offset in `esi` with an absolute displacement, and the two index-loops pull an extra `ebx`;
+  pointer-local and repeat-load spellings both fail, 1..16 of 59), plus the earlier list.
+- **Measured:** GOLDTL 600 -> **602** byte-matched (exact 242, reloc 360, matching 5, size_mismatch 45,
+  stub 2; failed 52 unchanged), SERVER unchanged 281/283 passed / byte-matched 264 / 17 PROVEN / 100
+  imports, GOLD 213; zero demotions/losses, lint 1084/1084 (0 warnings).
