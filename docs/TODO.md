@@ -34985,3 +34985,34 @@ instruction in the wrong place" question.
   cast — compiles to a compare chain instead, 3..16 of 48), plus the earlier list.
 - **Measured:** GOLDTL 566 -> **568** byte-matched (exact 213, reloc 355, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1051/1051 (0 warnings).
+
+### Round 1346 / session R317 (GOLDTL +3 — forty-seventh batch: 0x4e51a0 slot scan, 0x4f4830 record copy, 0x4eb220 state gate)
+- Three EXACT: `fcn_004e51a0`, `fcn_004f4830`, `fcn_004eb220`.
+- **Candidate mining is now a script, not a grep.** `.scratch/cf2.py <lo> <hi>` rebuilds the call-free
+  untracked list for a VA band (it needs the PE ImageBase — the inventory VAs are absolute, the section
+  table is RVA-based, so a naive `sva <= va` match silently reads nothing and every candidate looks
+  call-free). 289 call-free untracked functions at 12..64 bytes remain overall, 25 in 0x4e0000-0x545000.
+- **A backwards slot scan is a `for (i = a2 - 1; i > 0; i--)` with the address recomputed from `i`.**
+  `fcn_004e51a0` returns the first `i` whose `-1` sentinel is gone from `a1[0x34 + i*4]`, else 0; the
+  reference strength-reduces the address to `ecx = a1 + eax*4 + 0x34` and then `sub ecx,4`, which the
+  plain indexed spelling reproduces exactly (33/33, first try).
+- **`if (idx >= N) return 0; body; return 1;` is the guard order that keeps the zero block inline.**
+  `fcn_004f4830` copies a 36-byte record out of the 0x68ff68 table (`memcpy(dst, (void*)(0x68ff68 +
+  idx * 36), 36)`); writing the mirror `if (idx < 0x1d) { body; return 1; } return 0;` emits `jge` over
+  an inline zero and lands 9/43. With the guard first MSVC emits `cmp eax,0x1d; jl body; xor eax,eax;
+  ret`, which is the reference.
+- **The `setcc` idiom for a two-constant ternary keys off the *written* condition, not the values.**
+  `fcn_004eb220` gates a state byte (`c < 0x1e || c > 0x21` → 0), rejects a flag
+  (`[a1+0x1c8] & 0x4000000` → -1) and then returns `(r >= 3) ? 1 : -2` for `r = [a1+0x194]`. Written as
+  the ternary or as `if (r >= 3) return 1; return -2;` MSVC emits `setl al; and eax,3; add eax,-2`
+  (46/59); written as `if (r < 3) return -2; return 1;` it emits the reference's
+  `setge al; dec eax; and al,0xfd; inc eax` — same values, opposite setcc, because the *condition in the
+  source* is the negated one. Also: the reference is 56 bytes, not the 55 an offset count suggests.
+- **Parked:** `fcn_004ee080`, `fcn_004f57e0`, `fcn_004f5740` (three variants of the 0x2d-stride and
+  0x18-stride table walks at 0x9a3825 / 0x772f90; in each the reference keeps an index/offset counter
+  *and* a strength-reduced pointer while MSVC either collapses to a pure pointer walk or rotates the
+  counter pair — `eax`/`edx`/`ecx` land one slot off, 17..29 of 47/48/38) and `fcn_004f6810`
+  (a1/a2 in `ecx`/`edx` in the reference, `edx`/`ecx` in every spelling tried; all other instructions
+  identical, 50/60), plus the earlier list.
+- **Measured:** GOLDTL 568 -> **571** byte-matched (exact 216, reloc 355, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1054/1054 (0 warnings).
