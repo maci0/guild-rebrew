@@ -34433,3 +34433,26 @@ instruction in the wrong place" question.
   `lea eax,[eax+eax*4]` + `mov eax,[eax*2+0xfb5766]`).
 - **Measured:** GOLDTL 399 -> **409** byte-matched (exact 159, reloc 250, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 894/894.
+
+### Round 1323 / session R298 (GOLDTL +12 — twenty-fourth batch: the 0x9c-record family + two size-marker bugs)
+- Twelve more: ten members of the `fcn_004c4330` 0x9c-byte stack-record family (`fcn_004c5c80`,
+  `fcn_004c5fa0`, `fcn_004c5fd0`, `fcn_004c6300`, `fcn_004c6330`, `fcn_004c6530`, `fcn_004c6650`,
+  `fcn_004c6a40`, `fcn_004c6a70`, `fcn_004c6ea0` — all RELOC) plus two recovered by fixing stale
+  `// SIZE:` markers: `fcn_00533a40` (EXACT 32/32) and `fcn_00544c30` (RELOC 19/19).
+- **The 0x9c-record family has at least ten more members.** Every one is
+  `char buf[0x9c]; buf[0] = TAG; *(int*)(buf + 0x10) = ARG; fcn_004c4330(buf);` with TAG in
+  {0x31, 0x3a, 0x3b, 0x42, 0x43, 0x4a, 0x4d, 0x57, 0x58, 0x69}. `fcn_004c6ea0` shows the ARG need not
+  be the raw parameter: it passes `*(int*)(a1 + 2)` (an unaligned dword from a struct the caller owns).
+- **A stale `// SIZE:` marker masquerades as a codegen failure.** `fcn_00533a40` was recorded with
+  SIZE 48 (from the discoverer) while the real function is 32 bytes (`strcpy` + a dword copy) and the
+  object was already 32 — `rebrew test` reported `SIZE_MISMATCH 32/48` with an *empty* mismatch list.
+  Setting the marker to 32 promoted it straight to EXACT. `fcn_00544c30` the same (18 → 19 bytes).
+  Rule: for a SIZE_MISMATCH row, compare `obj_size` with the declared `size` first; if the matched
+  bytes equal the object size, it is the marker, not the code.
+- **Parked:** `fcn_004c4450` (byte load at `0xfb5760 + a1*10`, guard returning -1) and `fcn_004c4480`
+  (dword load at `0xfb5766 + a1*10`, guard returning 0) — the reference encodes
+  `mov cl, [eax*2 + 0xfb5760]` (scale-2 index, no base); ours emits `[eax + eax + 0xfb5760]` (SIB with
+  base+index). `char*`+`a1*10`, `short*`+`a1*5`, `(unsigned char (*)[2])` and a separate offset variable
+  all produce the SIB form.
+- **Measured:** GOLDTL 409 -> **421** byte-matched (exact 160, reloc 261, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 904/904.

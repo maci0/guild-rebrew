@@ -1,0 +1,13 @@
+// FUNCTION: GOLDTL 0x4c6a70
+// SIZE: 39
+
+void __cdecl fcn_004c4330(void*);
+
+void __cdecl fcn_004c6a70(int a1)
+{
+	char buf[0x9c];
+
+	buf[0] = 0x58;
+	*(int*) (buf + 0x10) = a1;
+	fcn_004c4330(buf);
+}
