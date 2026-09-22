@@ -34717,3 +34717,29 @@ instruction in the wrong place" question.
   — the reference schedules the four pushes *above* the three global stores).
 - **Measured:** GOLDTL 512 -> **517** byte-matched (exact 168, reloc 349, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1000/1000 (0 warnings).
+
+### Round 1335 / session R307 (GOLDTL +8 — thirty-sixth batch: call-free getters and vtable wrappers)
+- Eight more: `fcn_00473640`, `fcn_0047c480`, `fcn_004774b0`, `fcn_004239b0` (EXACT) and
+  `fcn_00418f90`, `fcn_0043bbd0`, `fcn_00461c70`, `fcn_0047ce50` (RELOC).
+- **Filter the inventory for *call-free* small functions.** Taking every untracked 12–40-byte function
+  whose bytes contain no `e8` produced 33 candidates that are all getters, setters, tail-call guards or
+  vtable wrappers — a much higher hit rate than size alone. Eight of them matched in one pass.
+- **Tail-call guard wrappers.** `fcn_00418f90`, `fcn_0043bbd0`, `fcn_0047ce50` are
+  `if (a1 == 0) return; <callee>(a1);` with the argument stored back into `[esp+4]` before the `jmp`;
+  `fcn_00461c70` is the guarded chain `p == 0 → -2; p->f1c == 0 → -2; v = p->f1c->f14;
+  v == 0 → -2; return fcn_00460a40(v);` (three guards, one shared `-2` return).
+- **`__stdcall` vtable slots, now routine.** `fcn_00473640` (`obj = g_6b5de0;
+  vtbl[0x10](obj, 0, 0, g_77250c + 0x24)`), `fcn_004774b0` (`if (g_7725ec) vtbl[8](g_7725ec);`) and
+  `fcn_0047c480` (`return vtbl[2](g_772614) == 0;` — the `neg/sbb/inc` tail from round 1313).
+- **Chain-walk register encoding again.** `fcn_004239b0` (`g_6b7d68 → +0x3c` chain) needed the
+  `while (*(void**)((char*)r + 0x3c) != 0) r = *(void**)((char*)r + 0x3c);` spelling so the load's base
+  is `eax`; the two-variable form emits `[ecx+0x3c]` and misses by one byte — the same lever as
+  round 24's `fcn_004239e0`.
+- **Marker sizes:** `fcn_004774b0`'s object is 16 bytes (declared 17 → `SIZE_MISMATCH` with an empty
+  diff).
+- **Parked:** `fcn_0041b1c0` (`0x662b68 + (a1*3 - 0x3c)*4`; MSVC folds ours into
+  `lea eax,[eax+eax*2+0x198a9e]; shl eax,2`), `fcn_004f57e0` (0x9a3825 + i*25 scan; ours
+  strength-reduces to a pointer walk), `fcn_004e51a0` and `fcn_005338a0` (both one jump displacement
+  off with identical instruction lists).
+- **Measured:** GOLDTL 517 -> **525** byte-matched (exact 172, reloc 353, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1008/1008 (0 warnings).
