@@ -34956,3 +34956,32 @@ instruction in the wrong place" question.
   `while`, `for`, `do/while` and outer-`if` spellings, 34/38), plus the earlier list.
 - **Measured:** GOLDTL 561 -> **566** byte-matched (exact 211, reloc 355, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1049/1049 (0 warnings).
+
+### Round 1345 / session R316 (GOLDTL +2 — forty-sixth batch: 0x500d20 packed record delta + 0x538680 mutex guard)
+- Two more EXACT: `fcn_00500d20`, `fcn_00538680`.
+- **`#pragma pack(1)` when a member sits at a non-natural offset.** `fcn_00500d20` is a weighted record
+  delta `((a2->f0 - a1->f0) * 24 - a1->f4 + a2->f4) * 60 - a1->f6 + a2->f6` whose `int f6` the reference
+  reads at **+6**, right after an `unsigned short` at +4. With the default pack the struct pads `f6` to
+  +8 and the two dword loads are `8b 72 08`/`8b 51 08` instead of `8b 72 06`/`8b 51 06` (56/58, the rest
+  byte-identical). `#pragma pack(push, 1)` around the typedef puts it at +6 and the whole function is
+  58/58. The struct still needs its own `// SIZE 0xa` marker inside the pragma block.
+- **Early-return layout: the constant return block sinks only for `if (cond) { body; return X; } return C;`.**
+  `fcn_00538680` is the Win32 single-instance guard: `h = CreateMutexA(0, 1, "name"); if (h != 0)
+  { *a1 = h; return GetLastError() == 0xb7; } return -1;`. Written as the "obvious"
+  `if (h == 0) return -1;` MSVC inlines the `or eax,-1; ret` block behind a short `jne` (18/48); the
+  inverted form with the body first emits `je` forward to a `-1` block *after* the main path's `ret`
+  (48/48). The import needs `__stdcall` typedefs, otherwise the compiler adds `add esp,0xc` after the
+  three pushes; with `__stdcall` the callee (WINAPI) pops them and `[esp+4]` is the parameter again.
+- **Parked:** `fcn_0051fd00` (`(a1 - [0x6b5c20]) / 404` with `if (a1 == 0) return -1`; the reference
+  accumulates the magic-division in `ecx` — `mov ecx,[esp+4]`, `mov eax,0x446f8657`, `mul ecx`,
+  `sub ecx,edx`, `shr ecx,1`, `add ecx,edx`, `shr ecx,8` — while MSVC always accumulates in `eax` and
+  keeps the dividend in `ecx` as the `mul` operand, for the `unsigned`, `int / 404u` and split-statement
+  spellings alike, 12/39), `fcn_00505340` (`base[byte * 0x24d] == 0xa` on the 0x868050 table; the
+  reference materializes `eax = base + b` and uses `edx = b*147` scaled by 4 as the displacement, MSVC
+  folds `b*589` into the index and keeps the base as the displacement, 20/44 — the two-step
+  `p = base + b; p[b * 0x24c]` spelling is worse, 4/55), `fcn_004f5cc0` (byte-indexed jump table
+  `mov dl,[ecx+0x4f5cf8]; jmp [edx*4+0x4f5cf0]` for `a2 - 1 <= 6` where case 1 is the only non-empty
+  arm; every `switch` spelling — empty arms, explicit `return 0` arms, `default`, `(unsigned char)`
+  cast — compiles to a compare chain instead, 3..16 of 48), plus the earlier list.
+- **Measured:** GOLDTL 566 -> **568** byte-matched (exact 213, reloc 355, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1051/1051 (0 warnings).
