@@ -33778,3 +33778,25 @@ instruction in the wrong place" question.
 - **Tried and reverted:** `ahm_CheckFlag` (0x4ec850, 59/70) with an explicit `result` local — obj grew
   and match fell to 8/70; reverted. `gv_ExtendProductionTime` is 116 structural diffs (register
   scheduling), not a quick fix.
+
+### Round 1296 / session R272 (GOLDTL +1; cross-import levers measured dry; the single-call class is empty)
+- **`fcn_00479cc0` (0x477070) is EXACT 43/43.** The tracked body had been decompiled wrong (it added
+  `(int) e` to `b`); the client stores `e[0x2c]=a; e[0x30]=b; e[0x34]=a+c; e[0x38]=b+d` while GOLD
+  stores the same four at `+0x24/+0x28/+0x2c/+0x30`, so `fcn_00479cc0.c` (GOLDTL) and
+  `GOLD.fcn_00479cc0.c` stay twins. Lint 620/620, no demotions on any target.
+- **The cross-import lever is now measured dry in every direction.** `--from server.dll --shared`
+  matched **70** GOLDTL destination VAs at score 95-100 and verified **0**: every candidate's compiled
+  server source differs in *size* from the client function (SIZE_MISMATCH), so the score measures the
+  two reference bodies being alike while the reconstruction is still poor. `--from Europa1400Gold.exe`
+  yields the 4 already taken (round 1294). Conclusion: transfers are exhausted; the remaining work is
+  per-function reconstruction.
+- **The "one unresolved call" class is empty.** A sweep of all 52 non-matched tracked files (single-file
+  `rebrew test` per file, reading `mismatches`) finds exactly one: `cm_ChkEntityLookup` (0x4cc490,
+  93.2%), whose callee `0x4f48e0` is a 160-byte function tracked in neither client and matched by
+  neither cross-import direction. Everything else is structural/size work.
+- **Reusable probe:** `rebrew test --all --json` does not emit `mismatches`; per-file `rebrew test
+  --json --no-promote` does, and the compile cache makes the 52-file sweep cheap. Watch the JSON row
+  shape — data rows have no `name`/`filepath`, so a strict `r["name"]` turns the whole sweep into
+  silent no-ops.
+- **Next:** `cm_ChkEntityLookup` needs `0x4f48e0` reversed (client-only, uses the `0x7f4ca4` table and
+  `[0x774970]` that `fcn_0053d690` also reads); otherwise the 43 SIZE_MISMATCH entries are the field.

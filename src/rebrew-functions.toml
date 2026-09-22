@@ -4220,9 +4220,9 @@ size = 23
 
 ["GOLDTL.0x00477070"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
-status = "SIZE_MISMATCH"
+status = "EXACT"
 updated_by = "verify"
-updated_at = "2026-09-22T18:23:51+00:00"
+updated_at = "2026-09-22T18:56:25+00:00"
 size = 43
 
 ["GOLDTL.0x0047cf30"]
@@ -4643,7 +4643,7 @@ cflags = "/O2 /Gd /DREBREW_ALLOW_NAKED"
 cflags = "/O1 /Gd"
 status = "SIZE_MISMATCH"
 updated_by = "verify"
-updated_at = "2026-09-21T10:32:44+00:00"
+updated_at = "2026-09-22T18:56:25+00:00"
 
 ["GOLDTL.0x004297c0"]
 size = 59
@@ -5072,3 +5072,11 @@ updated_at = "2026-09-22T18:41:05+00:00"
 ["GOLDTL.0x004306b0"]
 size = 448
 cflags = "/O2 /Gd /Oy-"
+
+["GOLDTL.0x004f13d0"]
+
+["GOLDTL.0x00504300"]
+
+["GOLDTL.0x00504e70"]
+
+["GOLDTL.0x005062d0"]
