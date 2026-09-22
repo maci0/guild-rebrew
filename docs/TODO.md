@@ -33553,7 +33553,24 @@ instruction in the wrong place" question.
   gm_CalcProd -> round196 retired ("no C89 handle...5-byte floor"); CrashDump -> §117 "two tails are a
   register-pressure artefact, not a source shape" + Finding52 declaration-order inert; vfs_ReadCompressed
   -> §85 clamp order ("three walls, do not re-probe").
-- **No code change this round.** The residue is confirmed a pure content-grind against ~19 exhaustively
-  documented walls; the close tail (match .93-.96) only carries 17-25 residue bytes each (~100 total even
-  if all closed), so gate residue <=8628 requires actually breaking the big walls (gm_AllocSpieler STUB,
-  CrashDump frame/register, ls_LoadBuilding). Lint 0/0, verify 281/264, tree clean throughout.
+- **No code change this round.** Residue is100% CONTENT (shift-scan stands), but my first pass
+  over-claimed "documented walls." CORRECTED after the fault-vs-symptom pass: **CrashDump's fault —
+  `sub esp,0x280` — is documented "Still open" (file header line131), and ~340 bytes of pure
+  `[esp+N]` frame-shift hang off it.** It is a spill-count/register-allocation cascade, NOT retired:
+  - Our frame spills at offsets **48,88**; the reference spills at **52,56** (we lack those) — the
+    scalar layout differs, so our `nFrames=0x800` lands spilled at `[esp+0x30]` where ref keeps it in
+    a register. The reference spills ~1 fewer 4-byte dword (0x284 -> 0x280).
+  - Doc's round-109 lever (drop `space` -> hits 0x280 exactly) is NOT clean: `space` is live —
+    `WriteFile(hCrashLog, &space, 1, ...)`. The right move is to un-spill the OTHER scalar (keep
+    `space`), i.e. match ref's register allocation, not delete a local.
+  - **Hypothesis TESTED this round and DISPROVEN:** `nFrames` is declared `volatile unsigned int`
+    (line 175) — a volatile local is forced to memory, so its `= 0x800` store spills at
+    `[esp+0x30]`, plausibly the extra dword. Removing `volatile` -> **frame stayed `0x284`**
+    (`rebrew test`: offset2 target `0x80` vs got `0x84`), obj 2111 vs target 2115, match 601/2115.
+    So the +4 is NOT nFrames' volatility; reverted. (The doc had dropped volatile from
+    instrType/szDateLen — not nFrames — so this was a genuinely new probe, now closed.)
+  - Declaration order/flags/CFLAGS all measured inert (Finding52: allocator colours over live
+    ranges) — so the fix is reconstructing the original's live-range shape from bytes, which IS
+    possible (msvc6 generated the reference from some C) but is the deep allocator core.
+- The compiler argument holds: every reference byte sequence came from msvc6, so no carrier is
+  impossible — only not-yet-reconstructed. Lint 0/0, verify 281/264, tree clean.
