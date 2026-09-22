@@ -35130,3 +35130,28 @@ instruction in the wrong place" question.
 - **Measured:** GOLDTL **585** byte-matched unchanged (exact 228, reloc 357, size_mismatch 45,
   matching 6, stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses,
   lint 1068/1068 (0 warnings).
+
+### Round 1352 / session R323 (GOLDTL +3 — fifty-second batch: 0x545970 slot scan, 0x5b3460 append, 0x589390 record init)
+- Three EXACT: `fcn_00545970`, `fcn_005b3460`, `fcn_00589390`.
+- **The 0x7f4ca2 record table (0x21c stride, 768 entries) counts as it scans.** `fcn_00545970` walks
+  `0x7f4ca2 + i*0x21c`, and when the byte there is `6` either returns the running count `n` (if `i == a1`)
+  or increments it; not found → `-1`. Written as a single `for (i = 0; i < 768; i++)` with the two
+  conditions nested inside the byte test it reproduces the reference exactly (44/44) — note the count
+  and the index are *separate* counters (`edx` walks the index, `ecx` the address).
+- **Append-with-char-return: the reject return sinks to the end only for the positive guard.**
+  `fcn_005b3460` is `n = [0x775280]; if (n < 0x80) { [0x778b20 + n*4] = a1; [0x775280] = n + 1;
+  return 1; } return 0;`. The mirror spelling (`if (n >= 0x80) return 0;` first) emits the zero inline
+  behind a `jl` and lands 11/35; the positive form emits `jge` forward to a `32 c0 c3` block at the end
+  (35/35). The return is `char` — the reference stores the flags with `b0 01` / `32 c0`, not `b8`.
+- **An int index loop beats a pointer loop even when the pointer form looks closer.**
+  `fcn_00589390` re-initialises three 0x38-byte records at 0x77dda0 (each: `int head = -1` plus three
+  0x10 sub-records `{int -1; float 100000.0f; int 0; int 0;}`). The pointer loop
+  (`for (p = base; p < base3; p++)`) lands 50/57: the reference induction is `base + 0xc` with the outer
+  store as `[edx-0xc]`, ours is `base` with `lea eax,[edx+0xc]`, and the bound is `jb` (pointer) where the
+  reference has `jl` (int). `for (i = 0; i < 3; i++)` with `base[i]` indexing gives the signed bound *and*
+  the +0xc induction for free — 57/57.
+- **Round-52 note:** `.scratch/cf2.py` now skips the D3DX8 external band `0x5e0000-0x64ffff`; the earlier
+  candidate list contained ~150 linker-supplied D3DX8 bodies (`0x5e8e50`, `0x5efa18`, `0x5f15d3`, …) that
+  must never be reversed — they are `// LIBRARY: D3DX8`.
+- **Measured:** GOLDTL 585 -> **588** byte-matched (exact 231, reloc 357, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1071/1071 (0 warnings).

@@ -7619,3 +7619,21 @@ size = 50
 status = "EXACT"
 updated_by = "test"
 updated_at = "2026-09-22T22:03:17+00:00"
+
+["GOLDTL.0x00545970"]
+size = 44
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T22:07:03+00:00"
+
+["GOLDTL.0x005b3460"]
+size = 48
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T22:07:04+00:00"
+
+["GOLDTL.0x00589390"]
+size = 57
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-22T22:07:05+00:00"
