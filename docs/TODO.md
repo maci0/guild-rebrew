@@ -33940,3 +33940,24 @@ instruction in the wrong place" question.
   (`v = *p; *p = 0; *q = v;`).
 - **Measured:** GOLDTL 194 -> **207** (exact 84, reloc 123), GOLD 213 and SERVER 281/264 unchanged,
   zero demotions/losses, lint 691/691.
+
+### Round 1303 / session R279 (GOLDTL +16 — fourth batch of small functions)
+- 16 more small functions reconstructed: `fcn_005b00d0`/`fcn_0040c3d0`/`fcn_004e81a0`/`fcn_0042e3d0`/
+  `fcn_0044d750`/`fcn_004616c0` (argument-shuffling wrappers — cdecl's last push is the *first*
+  argument, so read the push list right-to-left), `fcn_005dc1d0`, `fcn_00423590` (guarded store),
+  `fcn_0042b2c0` (non-zero count over a stride-4 table), `fcn_00445d00`
+  (`*(float*)(p+0x94) *= *q;` with a `char` return — the `mov al,1` gives the return width),
+  `fcn_00449aa0`/`fcn_0045bf50` (call + store result), `fcn_004737e0` (count != -1 over stride 0xc),
+  `fcn_004757b0` (three byte stores), `fcn_0040bdc0` (four global initialisers), `fcn_005809d0`
+  (two independent loads of the same global — MSVC did **not** CSE, so no `volatile` needed).
+- **Metadata beats the inline marker on SIZE.** `fcn_0040bdc0` and `fcn_0044d750` reported
+  `SIZE_MISMATCH 25/26 obj 26 size 25` with a correct 26-byte object; editing `// SIZE:` in the file
+  did nothing because `rebrew-functions.toml` already held 25. `rebrew test <file> --size 26` fixed
+  both. When the inline edit has no effect, pass `--size`.
+- **Parked (vtable-call and indexed-scan shapes).** `fcn_0041bcb0` / `fcn_00473640`
+  (`mov ecx,[obj]; call [ecx+0x3c]` with 5 pushed args) compile with the globals in the wrong
+  registers (target keeps the vtable in ecx, ours in edx), and `fcn_0042b120`/`fcn_0042b100`
+  (`cmp [eax*4+0x6b7ed0], ecx` indexed scan) compile as pointer walks however the loop is spelled;
+  all deleted rather than left as false near-misses.
+- **Measured:** GOLDTL 207 -> **223** (exact 91, reloc 132), GOLD 213 and SERVER 281/264 unchanged,
+  zero demotions/losses, lint 707/707.

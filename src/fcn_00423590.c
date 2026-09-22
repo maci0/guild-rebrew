@@ -1,0 +1,9 @@
+// FUNCTION: GOLDTL 0x423590
+// SIZE: 25
+
+void __cdecl fcn_00423590(int p, int v)
+{
+	if (*(int*) 0x6b7d7c != 0 && p != 0) {
+		*(int*) (p + 0x2c) = v;
+	}
+}

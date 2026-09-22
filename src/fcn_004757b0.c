@@ -1,0 +1,9 @@
+// FUNCTION: GOLDTL 0x4757b0
+// SIZE: 25
+
+void __cdecl fcn_004757b0(char* p, char a, char b, char c)
+{
+	p[0] = a;
+	p[1] = b;
+	p[2] = c;
+}
