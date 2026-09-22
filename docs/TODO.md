@@ -34232,3 +34232,31 @@ instruction in the wrong place" question.
   parameter in `ecx` and `a` in `eax` instead (41/45).
 - **Measured:** GOLDTL 336 -> **344** byte-matched (exact 132, reloc 212, size_mismatch 47, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 829/829.
+
+### Round 1316 / session R291 (GOLDTL +9 — seventeenth batch: the two-assignment zero idiom)
+- Nine more: `fcn_0042de60` (EXACT 41/41), `fcn_00430870` (RELOC 37/37), `fcn_00438c10` (RELOC 46/46),
+  `fcn_00438d70` (RELOC 46/46), `fcn_00439c60` (RELOC 42/42), `fcn_0043a5a0` (RELOC 40/40),
+  `fcn_0042a080` (RELOC 48/48), `fcn_0042a0b0` (RELOC 48/48), `fcn_00424870` (RELOC 40/40 — previously
+  parked, now matched).
+- **The two-assignment `if/else` is what keeps a zero in `esi` across calls.** Round 25 parked
+  `fcn_00424870` because the reference opens
+  `mov eax,[g]; push esi; xor esi,esi; test eax,eax; ...; mov eax,esi; pop esi; ret` and every
+  "return 0" spelling made MSVC fold the zero to `xor eax,eax` and drop `esi`. The source is a
+  variable with **two** assignments:
+  `int r = 0; if (g != 0) { <body with calls> } else { r = -1; } return r;` — the `r = -1` arm makes
+  `r` a real variable whose live range spans the calls, so the allocator parks it in the pushed `esi`
+  and the failure arm comes out as the reference's out-of-line `or eax,-1; pop esi; ret`.
+  `fcn_0042a080`/`fcn_0042a0b0` (same shape, no arguments) went from 13/48 and 17/48 to RELOC 48/48 on
+  this change alone; `fcn_00424870` (parked) to RELOC 40/40.
+- **Corollary — the guard's polarity inside that form is the reference's.** `fcn_0042a080` guards
+  `if (g == 0) { body } else { r = -1; }` (reference `jne` to the failure tail) while `fcn_0042a4a0`
+  needs `if (g != 0) { body } else { r = -1; }` (reference `je`). Pick the polarity whose *fall-through*
+  is the body.
+- **Still parked:** `fcn_00423de0` (48 B) — now at 24/48 with the same shape; the only remaining delta
+  is the success-path temp: reference `mov eax,[g_6b7d6c]; inc eax; mov [g_6b7d6c],eax; mov eax,esi`,
+  ours uses `edx` for the temp and schedules `mov eax,esi` first. Also `fcn_0042a4a0` (46 B, outer
+  polarity now right, inner `x == 0 && g == 0` chain still one instruction off) and `fcn_004265f0`
+  (39 B, bounded compare — the reference walks the *second* parameter in `ecx`, ours the first;
+  29/39).
+- **Measured:** GOLDTL 344 -> **353** byte-matched (exact 133, reloc 220, size_mismatch 47, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 838/838.
