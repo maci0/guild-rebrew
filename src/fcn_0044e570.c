@@ -1,3 +1,5 @@
+// FUNCTION: GOLDTL 0x44cba0
+// SIZE: 34
 // FUNCTION: GOLD 0x0044e570
 // SIZE: 34
 // fcn_0044e570 — (popcount32(a) == 1).

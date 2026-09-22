@@ -1,3 +1,5 @@
+// FUNCTION: GOLDTL 0x427530
+// SIZE: 51
 // FUNCTION: GOLD 0x004c3140
 // SIZE: 56
 // fcn_004c3140 — if([0x6f0b80]){ f(h,0); f(h,1); f(h); reset; }.

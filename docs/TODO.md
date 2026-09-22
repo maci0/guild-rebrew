@@ -33699,3 +33699,33 @@ instruction in the wrong place" question.
   helper variant, `fcn_0053d690` 98.0, `vfs_ReadCompressed` 94.1, `cm_ChkEntityLookup` 93.2 blocked on
   the untracked 0x4f48e0, `gm_AllocRaum` 93.0); identify 0x4f48e0 and the `(const char*) 0x…` tags in
   `gm_AllocRaum`/`gm_AllocGebaeude` (both push SERVER addresses).
+
+### Round 1293 / session R269 (GOLDTL +5; cross-import GOLD->GOLDTL used safely; three cross-import bugs fixed upstream)
+- **`cross-import` is the lever the goal names, and it now works on this tree.** GOLD -> GOLDTL with
+  `--shared` imported **4 byte-matched functions** (`fcn_0044e570` 0x44cba0 EXACT, `fcn_004d0cd0`
+  0x4d1d20 EXACT, `fcn_005768a0` 0x57ee40 EXACT, `fcn_005049c0` 0x5079f0 RELOC) plus 11 tracked
+  unverified imports, and GOLDTL `verify --full` went **125 -> 130** byte-matched (exact 54, reloc 76).
+  No regressions on any target: SERVER 281/264, GOLD 213 unchanged; lint 617/617.
+- **Why the earlier bulk attempt (round 1234) was destructive, and what changed:** `--shared` stacks
+  the destination marker instead of rewriting the source's, so a GOLD file keeps its GOLD marker and
+  gains a GOLDTL one (the goal's "one source file, one marker per build"). Three defects still had to
+  be fixed before the run was safe:
+  1. **Library code was importable.** The first attempt matched ~50 D3DX8 bodies (0x5e0000-0x64ffff)
+  plus assorted CRT rows against GOLD copies and stacked GOLDTL markers onto them. Fixed by
+  `_library_vas` (LIBRARY-marker rows + `external_libs` modules) and the new
+  `targets.<name>.external_ranges` config band, declared for GOLDTL as `["0x5e0000-0x64ffff"]`.
+  The documented D3DX8 band now lives in configuration rather than in prose.
+  2. **A failed stack left a duplicate VA.** When the destination already annotates the VA, an
+  unverified import used to leave both claims (lint E013); it now rolls the stack back
+  (`skipped-unverified-duplicate`) and the stub stays the sole owner.
+  3. **One source body, several destination VAs.** GOLD's `fcn_00520f40` was stacked at GOLDTL
+  0x659fbf *and* 0x6508a3 with 9- and 11-byte spans — one body cannot be two functions. Cross-import
+  now imports the best match per source file and reports the rest as needing a deliberate twin.
+  Also stopped writing a per-function `cflags` equal to the inherited default (25 redundant rows =
+  25 W029).
+- **`fcn_0053d690` (0x4c4900) RELOC 50/50:** the reference stores into `buf[0]`, not `buf+8` (the
+  `mov [esp+8],ecx` after two pushes is `buf`, not `buf+8`). Reversed from the reference disassembly,
+  not by guessing a layout.
+- **Next:** the 11 unverified imports are real GOLDTL functions whose GOLD body differs (mostly
+  1-2 instructions or a size delta) — each needs a twin or a per-target constant. Game VAs are
+  0x420760, 0x427530, 0x459b80, 0x4b3b60, 0x4bfc40, 0x4e6ae0, 0x4f0900, 0x546fb0, 0x6508a3, 0x65c552.

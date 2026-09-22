@@ -47,6 +47,11 @@ this file holds the rest.
   `0x4f1d20` (round 1291), `gm_StartFilteredEntitySearch` `0x502cd0` -> `0x503fe0` (round 1292). A bad
   VA also poisons every caller's REL32 validation, so a "wrong-callee" mismatch is often a wrong
   *catalogue* entry, not wrong C. Test a suspect file at both VAs before editing its body.
+- **Library code sits wherever the linker put it.** The T&L client's statically linked d3dx8.lib
+  occupies `0x5e0000-0x64ffff` (~907 bodies) and is declared in `rebrew-project.toml` as
+  `external_ranges`; the other static libs (CTLFW32, LUA50, MSS32, LIBCMT) have no contiguous band —
+  their VAs are the `// LIBRARY:` rows in `src/library_*.h` (CTLFW32 253, LUA50 59, MSS32 2, D3DX8 910
+  markers). Tools that enumerate "work left" must skip both. Evidence: round 1293.
 - **The client duplicates functions; one name can sit at two VAs.** `gv_Free3Fields` exists at
   `0x45b790` (frees `[slot+0x24]`/`[slot+0x28]`) and `0x4f2290` (frees `[slot+0x1c]`/`[slot+0x20]`) —
   different bodies, and both are called. `0x45e520` (an 832-byte function the shared allocator source

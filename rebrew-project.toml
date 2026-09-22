@@ -53,6 +53,11 @@ LIBCMT = "LIBCMT.lib"
 # msvc-6.0-sp5-pp emits. Server.dll has zero occurrences, the two clients
 # ~800 each. Evidence: docs/TODO.md round 1290, docs/general-knowledge.md.
 compiler = { profile = "msvc-6.0-sp5-pp" }
+# The T&L client statically links d3dx8.lib: 0x5e0000-0x64ffff holds ~907
+# linker-supplied D3DX8 bodies (~273 KB), not game source.  Declared so
+# "work left" tools (cross-import, todo) skip the band instead of treating it
+# as unreversed game code.  GOLD links DirectX by DLL import only.
+external_ranges = ["0x5e0000-0x64ffff"]
 binary = "original/Europa1400Gold_TL.exe"
 format = "pe"
 arch = "x86_32"

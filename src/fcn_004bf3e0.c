@@ -1,3 +1,5 @@
+// FUNCTION: GOLDTL 0x4bfc40
+// SIZE: 36
 // FUNCTION: GOLD 0x004bf3e0
 // SIZE: 36
 // fcn_004bf3e0 — first i with [0xf812a0+i*8]!=-1 && [0xf812a4+i*8]==a.

@@ -4221,8 +4221,8 @@ size = 23
 ["GOLDTL.0x00477070"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
 status = "SIZE_MISMATCH"
-updated_by = "test"
-updated_at = "2026-09-21T10:40:02+00:00"
+updated_by = "verify"
+updated_at = "2026-09-22T18:23:51+00:00"
 size = 43
 
 ["GOLDTL.0x0047cf30"]
@@ -4291,9 +4291,9 @@ size = 45
 ["GOLDTL.0x004c4900"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
 size = 50
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "test"
-updated_at = "2026-09-21T14:01:23+00:00"
+updated_at = "2026-09-22T18:23:39+00:00"
 
 ["GOLDTL.0x004cc450"]
 cflags = "/O2 /Gd /I/home/maci/Desktop/Projects/relumea/guild-rebrew/src/Europa1400Gold.exe"
@@ -5021,3 +5021,43 @@ size = 288
 status = "NEAR_MATCHING"
 updated_by = "test"
 updated_at = "2026-09-22T18:00:06+00:00"
+
+["GOLDTL.0x00420760"]
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T18:23:33+00:00"
+
+["GOLDTL.0x0044cba0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-22T18:23:33+00:00"
+
+["GOLDTL.0x004b3b60"]
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T18:23:33+00:00"
+
+["GOLDTL.0x004bfc40"]
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T18:23:34+00:00"
+
+["GOLDTL.0x004d1d20"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-22T18:23:34+00:00"
+
+["GOLDTL.0x004f0900"]
+status = "NEAR_MATCHING"
+updated_by = "verify"
+updated_at = "2026-09-22T18:23:34+00:00"
+
+["GOLDTL.0x005079f0"]
+status = "RELOC"
+updated_by = "verify"
+updated_at = "2026-09-22T18:23:51+00:00"
+
+["GOLDTL.0x0057ee40"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-22T18:23:34+00:00"
