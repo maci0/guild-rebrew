@@ -35042,3 +35042,27 @@ instruction in the wrong place" question.
   spellings alike), plus the earlier list.
 - **Measured:** GOLDTL 571 -> **574** byte-matched (exact 219, reloc 355, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1057/1057 (0 warnings).
+
+### Round 1348 / session R319 (GOLDTL +2 — forty-ninth batch: 0x507ed0 FPU ellipse term + 0x502820 double distance)
+- Two EXACT: `fcn_00507ed0`, `fcn_00502820`.
+- **Parenthesise the groups, not just the terms.** `fcn_00507ed0` is
+  `((a - b*b)*C1 + C2 + (a*a - b)*C2 + C1) * C3` with `C1 = [0x662d34]`, `C2 = [0x6628d8]`,
+  `C3 = [0x6628cc]`. Written flat the compiler re-associates and sinks the first `+ C2` past the second
+  chain (`fmul C1; fld a; ...; fadd C2` at the tail, 27/57); wrapping each term group in its own
+  parentheses — `(... * C1 + C2) + (... * C2 + C1)` — restores the reference's `fadd C2` *before* the
+  second `fld` and the closing `faddp` (57/57).
+- **Convert each operand, not the difference; and check for the float-rounding store to learn the
+  return type.** `fcn_00502820` is a distance helper: `dx = fabs((double)a1 - (double)a3);
+  dy = fabs((double)a2 - (double)a4); return sqrt(dx*dx + dy*dy) * *(double*)0x665b88;`. Collecting the
+  integers into one subtraction first (`(double)(a1 - a3)`) makes MSVC do the `mov`/`sub` in the ALU and
+  `fild` the result (8/63); `(double)a1 - (double)a3` emits the reference's `fild` + `fisub` pair.
+  There is **no** `fstp dword`/`fld dword` round-trip at the end and the two leftover x87 slots are
+  dropped with `fstp st(2); fstp st(0)`, so the function returns `double`, not `float` — declaring it
+  `float` would insert the rounding store. `sqrt`/`fabs` need `#include <math.h>` +
+  `#pragma intrinsic(fabs, sqrt)`.
+- **Parked:** `fcn_004ec7d0` (the 0x868050 byte-table gate again — same 589-stride probe as the parked
+  `fcn_00505340`, plus a tail `jmp fcn_00508e40(*(int*)*(int*)(a1+0x65))`; the reference materialises
+  `eax = base + b` and uses `edx = b*147` scaled by 4, MSVC folds `b*589` into the index or, with the
+  explicit `p = base + b`, grows an extra 8 bytes, 10/54 for all four spellings), plus the earlier list.
+- **Measured:** GOLDTL 574 -> **576** byte-matched (exact 221, reloc 355, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1059/1059 (0 warnings).
