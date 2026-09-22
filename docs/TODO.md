@@ -33825,3 +33825,26 @@ instruction in the wrong place" question.
   callee-saved `edi`. No source permutation found this round.
 - **Measured:** GOLDTL `verify --full` 138 -> **140**; GOLD 213 and SERVER 281/264 unchanged; zero lost
   or demoted on any target; lint 621/621.
+
+### Round 1298 / session R274 (GOLDTL +8: eight start-function reconstructions from the reference disassembly)
+- Eight untracked functions reversed and byte-matched, all from their reference bytes (no guessing):
+  - **`fcn_00401210` / `fcn_00401260` / `fcn_00401360`** (23 B each): `fcn_00430910(&b, N, 1, a)` with
+    N = 1, 4, 4. The `lea ecx,[esp+8]` in the prologue is the *second* parameter's **address**, so each
+    wrapper takes two parameters and passes `&b`. All three RELOC 23/23.
+  - **`fcn_00401280`** (43 B): `fcn_004011d0(a1, a2); fcn_004011d0(a1, a2+4); fcn_004011d0(a1, a2+8);`
+    — `a2` is a `char*` (`lea eax,[esi+4]`). RELOC 43/43.
+  - **`fcn_004012f0`** (45 B): `fcn_00401260(a1, a2[0..2])` with `a2` an `int*` (loads `[esi]`,
+    `[esi+4]`, `[esi+8]`). RELOC 45/45.
+  - **`fcn_00403300`** (48 B): table search over `g_14d0020[0..0x2ff]`, returning the entry whose
+    `+0x34` equals the key; the reference **re-loads** the table slot on the hit path, so the C returns
+    `g_14d0020[i]`, not the tested local. RELOC 42/42 (the span is 48 B incl. padding).
+  - **`fcn_00403b90`** (48 B): `p = fcn_00403200(); if (!fcn_00403880(p, a1, a2)) { fcn_004030e0(p);
+    return 0; } return p;`. RELOC 48/48.
+  - **`fcn_00403df0`** (36 B): frees `*(void**)(p+0x124)` then zeroes it. RELOC 36/36.
+- New globals recorded in rebrew-data.toml with `section = ".data"`: `g_14d0020` (0x14d0020).
+- **Loop-shaped functions**: `fcn_004011a0` (0x4011a0) is **not** an infinite loop — the `jne` at
+  0x4011bd targets 0x4011ab, which is `lea esi,[eax+1]`, so the pointer advances inside the loop body:
+  increment, call, test. Two spellings (do-while after `p++`, plain while) both compile to a 4-byte stub
+  because MSVC sees the loop as unbounded; parked with the decode recorded here.
+- **Measured:** GOLDTL `verify --full` 140 -> **148** (exact 55, reloc 93); GOLD 213 and SERVER 281/264
+  unchanged; zero demotions/losses on any target; lint 629/629.
