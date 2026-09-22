@@ -34815,3 +34815,24 @@ instruction in the wrong place" question.
   off at byte 17).
 - **Measured:** GOLDTL 536 -> **541** byte-matched (exact 188, reloc 353, size_mismatch 45, matching 6,
   stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1024/1024 (0 warnings).
+
+### Round 1339 / session R310b (GOLDTL +4 — fortieth batch: flag-guarded table walks and global-record copies)
+- Four more, all EXACT: `fcn_004e6a30`, `fcn_004f5a70`, `fcn_004f5bb0`, `fcn_00500c80`.
+- **Read the flag test's polarity off the `jcc`, not the C you assumed.** `fcn_004e6a30` (0x114-record
+  finder with a live byte at +0x30) took three tries: the reference is `test bl,bl; je <skip key cmp>`,
+  i.e. the key compare only runs when the flag is **non-zero** — the `== 0` reading (and the nested
+  `if`) both gave the mirrored `jne`. Parked at 58/60 → 59/60 → EXACT once the condition was
+  `*(char*)(a + 0x30) != 0 && *(int*)a == a1` **and** the loop used an `int` address (`jl`, not `jb`).
+- **Two instructions can share one `||`.** `fcn_004f5a70`/`fcn_004f5bb0` (identical twins) are
+  `if (*(char*)(a - 0x1e6) == 6 || *(char*)(a - 0x1e6) == 7) *(int*)a &= ~a1;` over the 0x21c-record
+  table — the reference loads the byte once and emits `cmp/je` twice; the loop pointer starts 0x1e6 past
+  the base so the flag byte needs the negative offset.
+- **A 16-byte global record copied into a struct:** `fcn_00500c80` is four stores (int, int, int,
+  unsigned short) read from 0x7f4c00..0x7f4c0c — no loop, no call, ~10 lines of C.
+- **Parked:** `fcn_00549b50`/`fcn_0054b420`/`fcn_005650d0` (the same 16-byte copy but into
+  `p + 0x52`: the reference computes `eax += 0x52` before the first store, our backend folds the offset
+  into every store displacement; `char* q`, `int q` and load-first spellings all fold),
+  `fcn_0042def0` (found-path index in `ecx` vs `eax`), `fcn_004e8b40` (six-dword table copy with a
+  dead `esi` computation), `fcn_00545970` (1-byte jump displacement) and `fcn_004f6740`.
+- **Measured:** GOLDTL 541 -> **545** byte-matched (exact 192, reloc 353, size_mismatch 45, matching 6,
+  stub 2), GOLD 213 and SERVER 281/264 unchanged, zero demotions/losses, lint 1028/1028 (0 warnings).

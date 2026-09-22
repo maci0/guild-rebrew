@@ -1,0 +1,13 @@
+// FUNCTION: GOLDTL 0x4f5a70
+// SIZE: 50
+
+void __cdecl fcn_004f5a70(int a1)
+{
+	int a;
+
+	for (a = 0x7f4e88; a < 0x85a288; a += 0x21c) {
+		if (*(char*) (a - 0x1e6) == 6 || *(char*) (a - 0x1e6) == 7) {
+			*(int*) a &= ~a1;
+		}
+	}
+}
