@@ -37027,3 +37027,31 @@ the address feeds a loop induction and the symbol form changes the codegen.
 GOLD **293 → 299** byte-matched (96 EXACT, 203 RELOC), NEAR_MATCHING back to its
 23-row baseline; GOLDTL unchanged at 671; server unchanged at 264.  Lint 1140
 files / 0 warnings.
+
+### Round 1418 — the SIZE_MISMATCH clusters are real (GOLD 300)
+
+Ran the annotation sweep over both clients' `SIZE_MISMATCH` rows — for each row,
+compile, and promote only when the tool says *all common bytes match* (i.e. the
+inline `// SIZE:` is the only problem):
+
+| target | rows | annotation-only |
+|--------|------|-----------------|
+| `Europa1400Gold.exe` | 70 | **1** (0x4adf20) |
+| `Europa1400Gold_TL.exe` | 45 | **0** |
+
+So the 115 failing rows are genuine size differences — the compiled body is a
+different length from the reference — not stale metadata.  The one hit needed
+its inline `// SIZE:` aligned by hand afterwards (`--fix-sizes` rewrote the
+metadata only, leaving W019).
+
+The round-1412 cross-import list was also regenerated from the current tree:
+52 candidates, of which the real run imported **0** (33 skipped-unverified, the
+rest already matched).  The GOLDTL→GOLD twin vein is therefore exhausted apart
+from the loop-induction class documented in rounds 1416/1417 — the candidates
+that remain are genuine body divergences between the two clients.
+
+`twin_marker.py` now also accepts `would-import-shared` rows, so a dry-run list
+can drive it without a real import first.
+
+GOLD **299 → 300** byte-matched (96 EXACT, 204 RELOC); GOLDTL unchanged at 671;
+server unchanged at 264.  Lint 1140 files / 0 warnings.

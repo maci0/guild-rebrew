@@ -2983,7 +2983,10 @@ updated_by = "test"
 updated_at = "2026-09-21T04:59:16+00:00"
 
 ["GOLD.0x004adf20"]
-size = 18
+size = 21
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T09:47:47+00:00"
 
 ["GOLD.0x005e7f11"]
 size = 22
@@ -8649,3 +8652,5 @@ updated_at = "2026-09-23T09:45:06+00:00"
 status = "NEAR_MATCHING"
 updated_by = "verify"
 updated_at = "2026-09-23T09:45:06+00:00"
+
+["GOLD.0x004ef470"]

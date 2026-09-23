@@ -28,7 +28,8 @@ import json, re, subprocess, sys, pathlib
 
 inv = {e['va']: e['size'] for e in json.load(open('db/inventory-Europa1400Gold.exe.json'))}
 d = json.load(open('.scratch/ci_gold.json'))
-rows = [r for r in d['results'] if r['action'] == 'skipped-unverified']
+rows = [r for r in d['results']
+        if r['action'] in ('skipped-unverified', 'would-import-shared')]
 def ndiff(r):
     m = re.search(r'(\d+) byte diffs', r.get('message') or '')
     return int(m.group(1)) if m else 999
