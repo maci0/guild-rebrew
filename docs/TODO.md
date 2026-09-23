@@ -38648,3 +38648,29 @@ otherwise (78 vs 82 instructions, 208 vs 219 bytes).  Tried: `char buf[0x204]`
 + index shift (fixed the frame, not the registers) and a `void* a = a1;` alias
 declaration (folded away, no change).  Register-colouring wall of the same class
 as the round-173/177 blocked list.
+
+Round 182 wall 3 (recorded, file reverted): GOLDTL 0x4b6f00 (216B) — decoded and
+**214/216 bytes**: `p = fcn_00508e40(*(int*)a1)`, `if (!p) return 1;`,
+`n = fcn_0042e410(3) & 0xffff`, `d = (double) n + *(double*) 0x6629c8`,
+`n = fcn_0050dac0(*(short*) p)` (a **narrow `short` parameter** is what suppresses
+the call-site `movzx`, giving the reference's bare `mov cx,[edi]`),
+`r = (int) (((double) n * d) * *(double*) 0x6640e8)` (the explicit inner parens
+are required: without them MSVC emits `(n * C) * d`), then
+`fcn_0051af00(buf, *(u16*)((char*)a1+4) + 0x12e7, r)`,
+`fcn_004c51a0(*(int*)a1, -1, *(unsigned char*) 0x773d75, r)` (the third parameter
+declared `unsigned char` suppresses the `xor ecx,ecx` the reference does not
+have), `len = strlen(buf + 8)` with `unsigned int len`, and
+`fcn_00545d40(*(int*)((char*)p+4), *(int*)((char*)p+4), buf + 8, 0x100 < len,
+0x603, 0)` — the unsigned comparison reproduces the reference's
+`mov eax,0x100; cmp eax,ecx; sbb ecx,ecx; neg ecx` instead of `setg`.
+
+The two surviving bytes are both stack displacements: `lea edi,[esp+0x3c]` /
+`lea eax,[esp+0x44]` in the reference against `[esp+0x44]` / `[esp+0x4c]` in
+ours, i.e. our frame carries 8 bytes (two pushes) more at that point while every
+instruction and the trailing `add esp,0x3c` match.  Not chased further.
+
+Also this round: the shared `rebrew` checkout at `~/Desktop/Projects/relumea/rebrew`
+was mid-edit by the co-running session and its CLI import broke
+(`ImportError: cannot import name 'console' from 'rebrew.cli'`), so no
+`rebrew test` / `lint` / `verify` could run after the last successful
+measurement.  Re-verify round 182's tree state once the co-session's edit lands.
