@@ -4090,3 +4090,30 @@ section = ".rdata"
 
 ["GOLDTL.0x0067bd2c"]
 section = ".data"
+
+["GOLDTL.0x0068d924"]
+section = ".data"
+
+["GOLDTL.0x01041d04"]
+section = ".data"
+
+["GOLDTL.0x006b8708"]
+section = ".data"
+
+["GOLDTL.0x006b8704"]
+section = ".data"
+
+["GOLDTL.0x006b870c"]
+section = ".data"
+
+["GOLDTL.0x006b8700"]
+section = ".data"
+
+["GOLDTL.0x006b86fc"]
+section = ".data"
+
+["GOLDTL.0x006b86d4"]
+section = ".data"
+
+["GOLDTL.0x00665e30"]
+section = ".rdata"

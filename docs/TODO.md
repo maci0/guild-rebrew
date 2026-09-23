@@ -37273,3 +37273,29 @@ files use bare externs).
 
 GOLDTL **687 → 692** byte-matched (230 EXACT, 462 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1161 files / 0 warnings.
+
+### Round 1425 — straight-line prospecting, third pass: GOLDTL +4 (696)
+
+| VA | shape |
+|----|-------|
+| 0x4e7550 | seven-arg message builder over five zero-extended bytes `0x80..0x84` |
+| 0x4f2f90 | packed 0x1c local: `{int;int;int;char;int;int;char[7]}` passed to `fcn_004c6c70` |
+| 0x450ad0 | zero five globals around two `fcn_0041ddd0` frees |
+| 0x579410 | 0x400 buffer: `f(buf, 0x40ff, *(unsigned short*)a2)` then a six-arg call |
+
+**Rule (0x4f2f90):** the frame size *is* the struct size.  The packed struct's
+fields end at 0x15, but the reference allocates `sub esp,0x1c`; with a 21-byte
+struct msvc allocates only 0x18 and **every later argument displacement is 4
+too small** (five diffs, 63/71).  Adding `char pad[7]` to reach 0x1c fixes all
+five at once.  When a near-miss's diffs are all `[esp+N]` off by the same
+constant, the local object is the wrong size, not the code.
+
+**Rule (0x450ad0):** with two frees interleaved with global clears, the order
+that reproduces the reference is per object — companions, `free(obj)`,
+`obj = 0` — not `free(obj); obj = 0; companions`.
+
+One near-miss deleted: `fcn_00573d90` (0x573d90) keeps `a1` in `esi` across the
+call where the reference reloads it from the stack (8/85).
+
+GOLDTL **692 → 696** byte-matched (230 EXACT, 466 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1165 files / 0 warnings.
