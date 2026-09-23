@@ -38156,3 +38156,26 @@ with the symbol→address mapping recorded in `rebrew-data.toml`, a bare
 `extern char g_7f4ca0[];` keeps the GOLD body matching, and dropping them clears
 W021 (duplicate annotation: g_7f4ca0 already lives in `fcn_004cef70.c`) and W016
 (0x773da8/0x6f1bf8 have no data section to name).  Lint back to 0 warnings.
+
+## Round 156 — the killed harvest's leftover markers were all wins (+5 GOLD = 316)
+
+`twin_marker.py` was interrupted mid-run (killed while re-running the candidate
+list), leaving six inserted `// FUNCTION: GOLD …` markers untested.  Testing them
+by hand: **five matched** and are promoted, one reverted.
+
+| GOLD VA | file | bytes |
+|---------|------|-------|
+| 0x402a70 | GOLDTL.fcn_004032b0.c | 68 |
+| 0x404810 | GOLDTL.fcn_00405130.c | 78 |
+| 0x404860 | GOLDTL.fcn_00405180.c | 68 — **EXACT** (the `__asm { int 3 }` validator's twin) |
+| 0x44f210 | GOLDTL.fcn_0044db40.c | 89 |
+| 0x468760 | GOLDTL.fcn_00465820.c | 19 |
+
+`GOLDTL.fcn_00492990.c` (GOLD 0x4933c0) differs at offset 68 — marker reverted.
+
+`rebrew cross-import --from … --dry-run --shared --json` no longer emits the
+`skipped-unverified`/`would-import-shared` actions the harvest script filters on
+(4288 rows, all `action = "skipped"`, `status = ""`), so `.scratch/ci_gold.json`
+was restored from its backup and the harvest list is not regenerable with that
+command line.  Next time, capture the exact `cross-import` invocation that
+produced the working candidates.
