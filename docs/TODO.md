@@ -37423,3 +37423,26 @@ server unchanged at 264.  Lint 1179 files / 0 warnings.
 
 GOLDTL **710 → 715** byte-matched (230 EXACT, 485 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1184 files / 0 warnings.
+
+### Round 1431 — branched prospecting, fifth pass: GOLDTL +5 (720)
+
+| VA | shape |
+|----|-------|
+| 0x4cbda0 | four field reads into one call, `b = 2` or `1` by the result, fill a 10-byte output |
+| 0x545390 | `f(buf, g_6a56d0, byte[a1], g_7f4cd0 + word[a1+8] * 0x21c)` |
+| 0x5453d0 | the same body with tag `0x6a5708` |
+| 0x555a40 | 14-byte packed struct copy (`a1+0x44` -> `a1+0x52`) then `rand16(6) & 0xffff` |
+| 0x43b320 | two calls and four global clears, `push 1` as the second call's 4th argument |
+
+**Rule:** count the pushes, not the parameters — `fcn_004cbda0` reads arg1 only
+(one parameter), `fcn_005453d0`/`fcn_00545390` take one, but `fcn_0043b320`'s
+`[esp+0x20]` resolved to the **third** argument, not the fifth: with the wrong
+arity the load comes out `[esp+0x28]` and the body is one byte off (58/59 ->
+59/59).  Work the displacement out from the entry esp, remembering every push
+the prologue has already made.
+
+Also: a 14-byte copy is a `#pragma pack(1)` struct of `{int;int;int;short}` —
+the unpacked spelling copies a 16th byte and overruns.
+
+GOLDTL **715 → 720** byte-matched (230 EXACT, 490 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1189 files / 0 warnings.
