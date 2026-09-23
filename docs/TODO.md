@@ -39169,3 +39169,46 @@ Next targets (open `fcn_0051af00` callers, no wall note yet): 0x4ce740 done;
 0x4b6f00-family leftovers (0x4b6740, 0x4b6a00, 0x4b6af0 — colour wall),
 0x4ba2e0, 0x4bb540, 0x4baf60, 0x4b8410, 0x4b8550, 0x4b7800, 0x4b6dc0,
 0x4e27b0 (colour wall), 0x4f7210, 0x4f7310, 0x4f5ab0-adjacent, 0x4da510 done.
+
+Round 211 wall (task-20): 0x4baf60 (GOLDTL, inventory 288, body 0x11a = 282B) — fully
+decoded, best **NEAR_MATCHING 277/282** (object size 282, the right one); the only
+5 mismatched bytes are the x87 operand order of one multiply.
+
+Decoded body — `int __cdecl fcn_004baf60(void* a1)`:
+
+* `n = fcn_0042e410(0x14) & 0xffff;` then
+  `f = (float) (((double) n + g_664e78) * g_6640e8);` (`fild [n]` / `fadd qword` /
+  `fmul qword` / `fstp dword [f]` — `f` and the dead `n` share the frame's first slot).
+* `p = fcn_00508e40(*(int*) a1);` `if (p == 0) return 1;`
+* then the three `0x400` guards **must be written as nested ifs**, not as three
+  sequential `if (...) return 0x400;`: with the nested form MSVC puts the single
+  `return 0x400` epilogue at the function end and points all three failure branches
+  at it (matching the reference); with three early returns it inlines the first
+  epilogue and jumps over it (that alone moved ~40 instructions).
+  `if (fcn_005c6270(p, 0x290) == 0) { if (fcn_004bac00(p, &v, f) != 0) {
+  e = fcn_00503fe0(1, 1, v); if (e != 0) { … } } } return 0x400;`
+* success tail: `r = (int) (f * g_662cf8);`
+  `fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, r, e);` — the
+  fourth argument is `e` (the verifier: `push esi` sits *before* the `__ftol` call,
+  i.e. right-to-left evaluation puts the 4th argument first),
+  `len = strlen(buf);` and
+  `fcn_00545e80(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf, 0x100 < len,
+  0x603, *(int*) ((char*) e + 1), -1, 0, 0);` then `return 0;`.
+
+Residual: the reference computes the float multiply as `fld dword [f]` /
+`fmul dword [0x662cf8]` (local first); our object emits `fld dword [0x662cf8]` /
+`fmul dword [esp+0xc]` (global first) — same two operands, same semantics, 5 bytes
+(mov D8/ModRM pairs).  ~6 spellings all canonicalise to the global-first order:
+`f * g_662cf8`, `g_662cf8 * f`, `(float) f * g`, `f * (float) g`,
+`*(float*) &f * *(float*) &g`, and declaring `g` as a one-element array.  Two
+qualifier levers were measured and rejected: `volatile float f;` **does** flip the
+multiply to local-first but makes every later use reload the float through the x87
+stack (`fld [f]; fstp [esp]` for the `fcn_004bac00` argument) — worse; a use-site
+cast `*(volatile float*) &f * g_662cf8` also flips the multiply but moves the
+`push esi` (4th argument) *after* the `__ftol` call, shifting the tail by 4 bytes.
+Not chased further (time-box: 2 runs).
+
+The GOLD twin is 0x4bab90 (delta -0x3d0): same body, per-target data
+g_664e78/0x5edbe0 and g_662cf8/0x5ebb40 (g_6640e8/0x5ece60 is already owned by
+GOLDTL.fcn_004b6f00.c), calls reloc-masked.  The 277/282 source is parked in
+`.scratch/t20_fcn_004baf60.c` (not committed).
