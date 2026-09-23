@@ -35849,3 +35849,15 @@ The code-generator difference is now enforced instead of documented:
 - Upstream commit: "feat(toolchain): detect VC6 code generator from
   game-code float compares" (rebrew `c29b4f10`), tests
   `test_toolchain_detect_codegen.py` / `test_toolchain_detect_version.py`.
+
+### Round 1379e — does the Processor Pack work for server.dll?
+
+Measured, 12 matched server functions x {sp5-pp, sp6} at identical flags:
+9 byte-identical under both, 3 broken by pp (0x1000c3c0 ahm_ClampFloatValue,
+0x100100a0 cm_ExModifyStat, 0x100151e0 sim_FindAndMatchParents), 0 pp-only.
+The three failures are exactly the functions whose own span contains the plain
+idiom (`fnstsw ax; test ah,0x01`, 2/3/2 sites); 0x1000e8d0 cm_ExSetAttribute
+has three such sites past its end and stays byte-identical under pp.  So pp is
+a per-file toolchain for the server (three CMake pins for near-miss gains) but
+not a target profile - which is what the new gate check refuses.  Recorded in
+docs/general-knowledge.md; no source change.

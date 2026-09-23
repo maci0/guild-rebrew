@@ -529,3 +529,29 @@ Consequences:
   "a plain, non-Processor-Pack VC6 code generator".  The three per-file
   `sp5-pp` pins in `CMakeLists.txt` are marginal partial-match wins (834 vs
   828 bytes, 824 vs 820), not evidence of a pp-built server.
+
+### Does the Processor Pack work for the SERVER target? (round 1379e)
+
+Partly — per file, never as the target profile.
+
+Same file, same flags, only `--toolchain` varies, 12 matched server functions
+(the 5 that carry a plain x87 compare plus 7 ordinary ones):
+
+| result | count | functions |
+|--------|-------|-----------|
+| byte-identical under sp5-pp AND sp6 | 9 | `cm_ExSetAttribute`, `cm_ExModifyHealth`, `cm_DispatchProduction`, `cm_ChkEntityLookup`, `InitializeLogAndErrorHandler`, `cm_ExSetWohnsitz`, `cm_ExCreateGeb`, `cm_ChainAssignId`, `cm_ChkSellObjekt` |
+| pp **breaks** it | 3 | `ahm_ClampFloatValue` 0x1000c3c0, `cm_ExModifyStat` 0x100100a0, `sim_FindAndMatchParents` 0x100151e0 |
+| pp-only (pp matches, plain does not) | 0 | — |
+
+The rule is exact: the three that break each contain the plain idiom
+(`fnstsw ax; test ah,0x01` — 2, 3 and 2 sites) **inside the compared
+function's own span**, and every function whose span contains none is
+generator-insensitive.  `cm_ExSetAttribute` 0x1000e8d0 has three such sites
+*after* its end and stays byte-identical under pp — the earlier inventory
+attribution had folded them into it.
+
+So `msvc-6.0-sp5-pp` is a legal **per-file** toolchain for the server (the
+build already pins three near-miss files to it in `CMakeLists.txt`) but not a
+legal target profile: setting `[targets."server.dll"].compiler.profile` to it
+demotes every FP-comparing function.  That is exactly what
+`rebrew toolchain detect` + `scripts/gate.sh` refuse.
