@@ -38713,3 +38713,30 @@ so it was left alone.
 
 GOLDTL 804 → 805, GOLD unchanged at 326; server unchanged at 264.  Lint 1275
 files / 0 warnings.
+
+Round 185: the 0x4b6f00 body is a **five-target** function.  Normalising both
+sides (strip addresses/jump targets) shows GOLDTL 0x4b6ce0 and GOLD 0x4b6b10,
+0x4b6ef0 are *byte-identical* to it, so three more markers went onto
+`src/GOLDTL.fcn_004b6f00.c`:
+
+| target | VA | status |
+|--------|----|--------|
+| GOLDTL | 0x4b6f00 | RELOC 216/216 |
+| GOLDTL | 0x4b6ce0 | RELOC 216/216 |
+| GOLD   | 0x4b6d30 | RELOC 216/216 |
+| GOLD   | 0x4b6b10 | RELOC 216/216 |
+| GOLD   | 0x4b6ef0 | RELOC 216/216 |
+
+Method that paid: `rebrew asm <VA> --size N --target T | sed 's/^  0x…:  //'`
+then `sed -E 's/0x[0-9a-f]+/HEX/g'` on both sides and `diff` — a zero-line diff
+means the body is reusable verbatim, and the remaining candidates can be ranked
+by diff size (0x4b6fd0/0x4b7100/0x4b7200/0x4b7310/0x4b7430 came back at 44-85
+lines, i.e. genuinely different bodies).  `0x4b6ce0` needed no source change at
+all; only its marker.
+
+The rest of the family is walled: 0x4b6740 / 0x4b6a00 / 0x4b6af0 keep the first
+lookup in `esi` where the reference uses `edi` (register colouring), and
+0x4b6bf0 passes `4` to the random helper and has an extra call arm.
+
+GOLDTL 805 → 806, GOLD 326 → 328; server unchanged at 264.  Lint 1275 files /
+0 warnings.
