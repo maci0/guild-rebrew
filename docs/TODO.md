@@ -37446,3 +37446,27 @@ the unpacked spelling copies a 16th byte and overruns.
 
 GOLDTL **715 → 720** byte-matched (230 EXACT, 490 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1189 files / 0 warnings.
+
+### Round 1432 — branched prospecting, sixth pass: GOLDTL +5 (725)
+
+| VA | shape |
+|----|-------|
+| 0x4d87b0 | 0x100 buffer: `f(a1[0])`, store the result in a global, `g(buf, 0x11b7, word[result])`, `h(buf)` |
+| 0x550da0 | 14-byte struct copy then `if ((short) f(2)) h(a1);` |
+| 0x5b2a00 | two calls, six literal/field arguments |
+| 0x40db10 | `if (a1[0] == 0) f(g_6b7e98, g_6b7e98->f118, s) else h(a1[0]);` |
+| 0x411550 | `f(buf, s, (double) float_arg)` then `h(a1, a2, buf)` |
+
+**Rule:** the pointer passed to the second call is not always `buf + N`.  On
+`fcn_004d87b0` the reference's `lea ecx,[esp+0x10]` looked like "4 bytes into the
+buffer", but `buf + 4` compiled to `[esp+0x14]` and the plain `buf` gave the
+reference exactly (60/61 -> 61/61).  Compute the offset from the compiled
+frame, not from the pushes you counted.
+
+One near-miss deleted: `fcn_0040df00` (0x40df00, 52/56) — the reference builds
+the `(byte >> 4) & 1` result as `xor edx,edx / mov dl,[..] / mov eax,edx /
+shr / and`, and neither the direct expression nor a named `unsigned int` local
+produces that zero-extend.
+
+GOLDTL **720 → 725** byte-matched (230 EXACT, 495 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1194 files / 0 warnings.
