@@ -36178,3 +36178,27 @@ their call sites byte-match), and switch them.  Each conversion removes one
 thunk from the tail.  Verify with `.text` VirtualSize and the map tail, and
 expect the linker to stop pulling `KERNEL32.lib` thunks at all once every
 reference is `__imp_`-based.
+
+### Round 1389 — the import thunks are LINK-synthesized for the split objects, not ours
+
+Round 1388 named the tail as 100 import thunks.  Traced where they come from:
+
+- A scan of every object under `build/CMakeFiles` and `build/split_poc` for
+  by-name import references (`_GetModuleHandleA@4`-shaped, i.e. not `__imp_`)
+  finds exactly **one** referencing object (`broadcast.c.obj`, the three socket
+  calls) and one definer (`import_thunks.obj`, the eight reference-VA thunks).
+- Suppressing the generated tail object
+  (`import_thunks_tail.obj`, ~97 thunks emitted by `emit_thunks.py`) does **not**
+  remove the tail: the link still reports **93 DLL-attributed thunks**
+  (KERNEL32 81, WS2_32 9, USER32 2, WINMM 1) and `.text` VirtualSize *grew* by
+  6 bytes (0x22ad8 -> 0x22ade), because LINK now places its own synthesized
+  thunks differently.  Probe reverted.
+
+So the by-name references that force the thunks live inside the **split
+objects** (the reference's own CRT/LIBCMT member bodies, which call imports by
+name) and are not rewritten to the reference's thunk VAs / IAT operands.  The
+lever is therefore in the split/label-resolution step
+(`scripts/resolve_static_labels.py --rewrite` and `split_coff.py`), not in the
+game sources and not in `emit_thunks.py`: the reference has only 11 `ff 25`
+thunks, so its members' import calls must already be rewritten to those VAs (or
+to `ff 15 [IAT]`) before the link.
