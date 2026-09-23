@@ -38360,3 +38360,12 @@ differs in three absolute addresses, two of them plain immediates:
 `0x6b71b0 + i * 296`.  The init is a `mov eax, imm32`, so the symbol form encodes
 identically and should fix bytes 3-5; the bound/return need their GOLD values read
 from the target's `cmp`/`lea` operands.  Not attempted — context budget.
+
+Round 167: applied the three-symbol rewrite to GOLD 0x4242c0 with the GOLD values
+read from the target (`0x6326d4`, `0x633264`, `0x6325d0`).  The **init** address
+fixed cleanly (`mov eax, offset g` encodes like the literal), but the **loop bound**
+did not: with `a < (int) g_6b7e44` the compiler emits a different sequence from byte
+26 on (`jne +5` where the reference has `cmp eax,0x633264; jl`), because a symbolic
+bound defeats the loop analysis the literal constant allowed.  So a hardcoded bound
+is only fixable when the *same* literal is also the init (0x4027b0 failed the same
+way); revert and leave such twins.
