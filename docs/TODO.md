@@ -35810,3 +35810,16 @@ Answer to the challenge: the clients are not *uniformly* pp-only in the sense
 that every function reproduces only under pp - most are generator-insensitive.
 But wherever the generator matters, the client bytes are pp and never plain,
 and the server is the exact mirror.  No game-repo change.
+
+### Round 1379c — game code only (library code excluded)
+
+User's point: D3DX8 and LIBCMT were compiled with Microsoft's own
+optimizations/settings, so they are not evidence about the game's build.
+Restricted the census to game code (inventory function, no LIBRARY row, not in
+external_ranges): GOLDTL 723 pp compares / 0 plain, GOLD 693 / 0, SERVER 0 pp /
+9 plain `0x01` (+6 `0x41`).  The client zeroes are classifier-independent
+(`fnstsw+0x40` occurs nowhere in either client; all 22 `fnstsw+0x01` sites sit
+in the D3DX8 band).  The swept 14 VAs carry no LIBRARY row, so the 11/3/0
+sweep is game code too.  Also noted: the Rich-header `comp.id` count is
+build-level (game + library objects), so the game-code claim rests on the
+reproduction matrix and the game-code census, not on the Rich header.

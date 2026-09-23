@@ -488,6 +488,34 @@ Three independent measurements, all agreeing:
    functions now tested where the generator matters, all pp-only; no
    counterexample exists in either direction.
 
+### Game code only (round 1379c)
+
+D3DX8, LIBCMT and the other Microsoft-built objects were compiled with
+Microsoft's own settings, so they say nothing about the game's build and are
+excluded.  Restricted to game code (inventory functions, no library mark, no
+`external_ranges` band), the compare-idiom census is:
+
+| binary | game-code pp compares (`fnstsw+0x44/0x05`) | game-code plain compares (`fnstsw+0x40/0x01`) |
+|--------|--------------------------------------------|-----------------------------------------------|
+| SERVER | **0** | 9 x `0x01` (+6 x `0x41`, a value both generators emit) |
+| GOLDTL | 723 (113 + 610) | **0** |
+| GOLD | 693 (97 + 596) | **0** |
+
+The two zeroes do not depend on my library classifier: `fnstsw ax; test
+ah,0x40` occurs **nowhere** in either client, and all 22 of GOLDTL's
+`fnstsw+0x01` sites lie inside the D3DX8 band.  The server's pp count is zero
+across its whole `.text`, game code included.
+
+The sweep of 14 matched GOLDTL functions (all game code — none carries a
+`LIBRARY:` row) is the same story: 11 reproduce under all three generators,
+3 reproduce only under the Processor Pack (`0x459940`, `0x4fffb0`, `0x492990`),
+0 only under the plain ones.
+
+The Rich-header `comp.id 0x00302354` count is a *build-level* record: it
+aggregates every object in the link, game and library alike, so it alone would
+not prove the game TUs are pp.  The proof for game code is the reproduction
+matrix plus the game-code census above.
+
 Consequences:
 
 - The SERVER↔client body overlap cannot be byte-identical wherever the changed
