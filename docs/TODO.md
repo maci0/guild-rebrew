@@ -37945,3 +37945,25 @@ Both are the same class as 0x5dd050/0x4fa530/0x4ea4b0/0x5b23e0: our CL and the
 reference build differ in a scheduling/allocator choice that no source spelling
 reaches.  Worth a dedicated look at the compiler image before more of these are
 attempted.
+
+## Round 147 — the 0x4fa530 pattern re-examined: not a service pack
+
+Re-opened 0x4fa530 with the *exact* reference shape (an early `return fcn_005dae70(a1,a2)`
+rather than assigning to `r`) and swept the declaration order, `int r = 2;` vs
+`r = 2;`, and inline vs local byte reads: our CL emits one identical body for all
+of them (`push esi; mov esi,[esp+0xc]; mov eax,[esi]; …`, `cl` for the byte, `r`
+constant-folded), while the reference is `push ebx; push esi; mov esi,[esp+0x10];
+mov eax,2; mov ecx,[esi]; … mov bl,[edx+0x166]; … mov bl,6; cmp [edx+2],bl` — the
+result materialised in a register and the byte variable in **bl**.
+
+Crucially, `msvc-6.0`, `-sp1`, `-sp2`, `-sp3`, `-sp4`, `-sp5`, `-sp5-pp` **and**
+`-sp6` all produce byte-identical objects for this source.  So the divergence is
+not a service pack, not the Processor Pack, not a flag (flag sweeps on two other
+instances), and not the language mode (`/TP` tested).  The reference build must
+differ in the front/back-end *image* itself, or the original source differs in a
+way none of the ~15 spellings we tried captures — most likely a wrapper macro or a
+different parameter type that changes the value's live range.
+
+Same for `fcn_00405080` (0x405080, 64B): the loop body and the `base + 404*(i-1)`
+return are exact, but the reference puts the base in `edx` and the field value in
+`esi`, ours swaps them (`esi`/`edx`) — no spelling moved it.
