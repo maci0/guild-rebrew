@@ -37993,3 +37993,30 @@ started one register later.  Swapping the two cases in the source (149/161), a
 `if (a1 == 0)` first form is already the reference's block order.  Candidate
 deleted; this is the same allocator-rotation family as the other blocked
 functions.
+
+## Round 149 — 0x4042b0: 66/80, and a `movzx` peephole at the end
+
+`fcn_004042b0` (0x4042b0, 80B) got to **66/80**.  Everything down to the last
+expression is exact, and three shapes each bought bytes:
+
+```c
+	p = *(void**) ((char*) a1 + 0x70);                    /* value kept in eax */
+	if (p == 0 && *(int*) ((char*) a1 + 0x80) == 0) return 1;   /* memory reads, not `p` */
+	if (p == 0) return 0;                                 /* -> test eax,eax; jne body; ret */
+	q = *(void**) ((char*) p + 0x68);
+	e = (*(int*) ((char*) q + 0x154) != -1)               /* inverted ternary, arms in this
+	    ? *(int*) ((char*) q + 0x154)                     order: `je` to the 0x148 arm,
+	    : *(int*) ((char*) q + 0x148);                    else-arm falls through */
+	if (*(int*) p >= e) return 1;
+	return (*(unsigned char*) ((char*) p + 0x6d) >> 5) & 1;
+```
+
+Four rules fell out: (1) reading the *field* in the two guard tests while the body
+uses the already-loaded value keeps `ecx` free, so `q` lands in `ecx` like the
+reference; (2) `pointer == 0` twice does **not** fold into `sete` when one test is
+on the memory expression and the other on the variable; (3) the ternary must be
+written with the *negated* condition and its arms in that order, else MSVC puts
+the arms the other way round; (4) the last 17 bytes stay blocked: the reference
+zero-extends the byte through `xor ecx,ecx; mov cl,[eax+0x6d]; mov eax,ecx`, ours
+peepholes it to `mov al,[eax+0x6d]` (11 bytes) — no spelling (`unsigned char b`,
+`int n`, direct) avoided the peephole.  Candidate deleted.
