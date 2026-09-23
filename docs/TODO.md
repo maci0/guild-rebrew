@@ -36425,3 +36425,33 @@ Parked, both with a measured reason:
 
 GOLDTL: 623 byte-matched (251 exact, 372 reloc), failed 52, lint 1105/1105 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1398 — GOLDTL 623 -> 624 (worker start; three parked shapes)
+
+| VA | shape | result |
+|----|-------|--------|
+| 0x4d1cf0 | `handle = *(int*)0x67a370; *(int*)0x772f08 = 0; fcn_004379a0(handle,0,0x100,0x4d1ad0,0);` | RELOC 39 |
+
+Shape note for `0x4d1cf0`: the reference stores `[0x772f08] = 0` *between* the
+argument pushes and the call.  Declaring the handle in a local and putting the
+store **before** the call in source order is what reproduces it; with the store
+after the call the scheduler sinks it past the call (NEAR_MATCHING at the same
+size).
+
+Parked with measured reasons:
+
+- `0x4514d0` (38B): NaN-safe float guard.  Reference `fcom [0x6628f8] / fnstsw
+  ax / test ah,5 / jp` — our `value != c` spelling gives NEAR_MATCHING at the
+  same size; the `test ah,5 / jp` form is the inverted `<=` shape (shapes
+  section on NaN-safe compares), so the C condition has to be written the other
+  way round.
+- `0x4bc060` (38B): `rep stosd` clear of 0x49 dwords then a load/dec/store on a
+  global.  Our 40 bytes against 38 — the clear needs the form msvc6 turns into
+  a single `rep stosd` with `ecx = 0x49`.
+- `0x459cd0` (39B): reference zeroes `eax` **before** the null test and reads the
+  flag byte into `cl`; `return 0;` and a `result` local both allocate `al` for
+  the byte (STUB at the right size).  The zero-before-test order is what selects
+  the register.
+
+GOLDTL: 624 byte-matched (251 exact, 373 reloc), failed 52, lint 1106/1106 zero
+warnings.  SERVER/GOLD untouched.
