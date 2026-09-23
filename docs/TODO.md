@@ -38674,3 +38674,22 @@ was mid-edit by the co-running session and its CLI import broke
 (`ImportError: cannot import name 'console' from 'rebrew.cli'`), so no
 `rebrew test` / `lint` / `verify` could run after the last successful
 measurement.  Re-verify round 182's tree state once the co-session's edit lands.
+
+Round 183: **round 182's 0x4b6f00 wall was not a stack-displacement problem at
+all** — the two differing bytes were the source's `buf + 8` against the
+reference's plain `buf`.  `len = strlen(buf)` and `fcn_00545d40(..., buf, ...)`
+make both `lea`s come out `[esp+0x3c]` / `[esp+0x44]` exactly; the esp values
+were identical all along (the "8 bytes more pending" reading was an artefact of
+comparing displacements whose base had silently shifted).  LESSON: when a
+`lea [esp+N]` is off by a constant, compute the *target address* for both, do
+not infer a stack difference.
+
+So `fcn_004b6f00` is **RELOC 216/216**, and the GOLD twin 0x4b6d30 (same prologue
+signature `81ec0c010000` + `53` + `8b9c2404010000`, found at a constant -0x1d0
+from the GOLDTL VA across the whole 0x4b6xxx family) shares the file through two
+per-target `double` globals, 0x6629c8/0x5eb928 and 0x6640e8/0x5ece60, plus the
+already-mapped `g_773d75` (0x773d75/0x6f1bc5).  **GOLDTL 0x4b6f00 and GOLD
+0x4b6d30 both RELOC 216/216.**
+
+GOLDTL 803 → 804, GOLD 325 → 326; server unchanged at 264.  Lint 1274 files /
+0 warnings.

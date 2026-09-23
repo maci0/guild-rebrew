@@ -9551,6 +9551,11 @@ updated_at = "2026-09-23T14:08:04+00:00"
 
 ["GOLDTL.0x004b6f00"]
 size = 216
-status = "NEAR_MATCHING"
+status = "RELOC"
 updated_by = "test"
-updated_at = "2026-09-23T14:15:57+00:00"
+updated_at = "2026-09-23T14:18:04+00:00"
+
+["GOLD.0x004b6d30"]
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T14:18:25+00:00"
