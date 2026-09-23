@@ -38307,3 +38307,11 @@ Two questions block the next stretch and are not source-level:
 2. **Cross-import candidate list.**  The command line that produced
    `.scratch/ci_gold.json` (34 usable rows, 8 GOLD matches harvested from it) now
    emits only `action = "skipped"`, so the twin vein cannot be refilled.
+
+Cross-import, follow-up: `--dry-run --candidates-only --json` exits 2 with
+`{"error": "no FUNCTION/LIBRARY/STUB marker found in source"}` for the GOLDTL→GOLD
+pair (the same as `--candidates-only` alone), while `--dry-run --shared --json`
+returns 4288 rows all `action = "skipped"` with `status = ""`.  The working
+`.scratch/ci_gold.json` (34 usable rows) therefore predates a CLI change in the
+shared rebrew checkout — recover the invocation from that checkout's history
+(`git log -p` on the cross-import module) rather than re-deriving the flags.
