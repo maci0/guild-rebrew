@@ -368,3 +368,48 @@ is no additional coverage to be had — the remainder is symbols the file format
 "`.text` VirtualSize exactly `0x22846`" is satisfied (`0x22846` in both). "Import table exactly 100" is
 satisfied. "residue at zero" and "all functions EXACT" are the two clauses that are not, and they are the same
 clause: the 8,628 bytes above.
+
+## Finding code we already reversed in another target: `rebrew cross-import`
+
+The three targets share one source tree and one codebase, so most of the work
+is already done somewhere else.  The question "is this GOLDTL function already
+reversed in GOLD or in SERVER, and in which file?" is answered by
+`cross-import` in **report mode** (round 1378):
+
+```
+rebrew cross-import --from server.dll --target Europa1400Gold_TL.exe \
+    --dry-run --candidates-only --json
+```
+
+`--from` is the SOURCE (searched for already-matched code: EXACT/RELOC/PROVEN),
+the target option is the DESTINATION (searched for not-yet-matched work).
+Matching is structural (mnemonic histogram + call/branch counts + size) over
+the **target bytes**, so no compilation is needed for the search.  Every result
+row names `dst_va`, `src_va`, `score`, `src_status`, `src_file` (the file that
+already holds the code) and `dst_file`; `--candidates-only` hides the thousands
+of "no match" rows and reports the count as `skipped_count`.
+
+Measured on the 2024 trees (round 1378): SERVER -> GOLDTL 68 candidates,
+GOLD -> GOLDTL 6, GOLDTL -> GOLD 118.  Default thresholds are `--min-score 95`
+and `--min-gap 5`.
+
+Importing is `--shared`: it stacks the destination marker onto the body that is
+already in the file (ADR-010, one body, one marker per target) and then
+compiles + verifies against the destination binary, promoting STATUS only on a
+real match, reverting otherwise.
+
+Read the score as "same structure", **not** "same bytes":
+
+- The two clients (GOLD, GOLDTL) share the `msvc-6.0-sp5-pp` profile, so a
+  shared body can verify byte-exact (`--from GOLDTL --target GOLD` round 1378
+  imported GOLD 0x421ed0 from GOLDTL 0x41d4d0, EXACT).
+- SERVER was built with the sp6 profile, so SERVER twins routinely compile to
+  9-135 differing bytes under the client profile even at score 100.  The import
+  is then reverted, not forced.
+- `--min-score 95` is a *recall* threshold: several 95-99 candidates are not
+  twins at all.  Always let the verify decide; never trust the score.
+
+Never use the copy path (no `--shared`) in this project: the destination path
+is the source file itself, and a whole-file copy would delete the co-resident
+functions.  `cross-import` refuses that case with `TARGET_CONFLICT` and tells
+you to use `--shared` (round 1378 fix).

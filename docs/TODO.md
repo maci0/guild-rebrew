@@ -35735,3 +35735,34 @@ instruction in the wrong place" question.
   inventory 6335, lint 1095/1095 zero warnings. Zero demotions.
 - Parked `src/fcn_004514d0.c`: NEAR_MATCHING 37/38, one byte off (candidate
   operand/condition-order wall, listed below).
+
+### Round 1378b — cross-binary reuse tooling hardened; GOLD +1
+
+The reuse question ("is this already reversed in another target, and where?")
+had no usable answer: `cross-import --dry-run --json` printed one row per
+destination function (4386 rows) and named the *destination* file, `src_file`
+was absent, and in this project's unified tree (`shared_dir = reversed_dir =
+src`) the copy path wrote one extracted function over the source file itself —
+deleting every co-resident function and duplicating the body.  Fixed upstream
+in `src/rebrew/cross_import.py`:
+
+- result rows now carry `src_file`, `src_status`, `dst_status`;
+  `--candidates-only` hides the matchless rows and reports `skipped_count`.
+- copy mode refuses (`TARGET_CONFLICT`) when the destination path already holds
+  the source body, another VA's block, or no marker for this VA — never a
+  whole-file overwrite; a source file missing the VA's block is `NO_MARKER`
+  instead of raising.
+- new `stack_marker_on_block()` moves the destination marker directly onto the
+  source VA's block (the unified-tree case) and drops the superseded claim;
+  `import_shared_function` uses it instead of the no-op idempotent stack.
+- `_name_for_va()` resolves the verified symbol from the SOURCE VA's block, not
+  the file's first definition: in a multi-function file the old code verified
+  the wrong function (reported as "Size 33B vs 235B" on ErrorModule.c).
+
+Measured: SERVER->GOLDTL 68 candidates (8 same-file marker moves), GOLD->GOLDTL
+6, GOLDTL->GOLD 118.  All SERVER->GOLDTL imports revert (sp6 vs sp5-pp codegen,
+9-135 byte diffs at score 100) — the tool reports that honestly instead of
+promoting.  One real win in the client pair: GOLD 0x421ed0 from GOLDTL
+0x41d4d0, `imported-shared` EXACT (file
+`src/Develop/Units/Error/Error_c/ErrorModule.c`).  GOLD 213 -> 214
+byte-matched; GOLDTL stays 613; lint 1095/1095 zero warnings.

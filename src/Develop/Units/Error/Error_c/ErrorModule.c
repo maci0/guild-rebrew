@@ -19,6 +19,8 @@ unsigned char g_file_write_mode[3] = {
 
 // DATA: SERVER 0x1002735c
 char s__________________________________1002735c[] = "* ------------------------------------------------------------ *\n[%s], Date: %s";
+// FUNCTION: GOLD 0x421ed0
+// SIZE: 48
 // FUNCTION: GOLDTL 0x41d4d0
 // SIZE: 48
 // FUNCTION: SERVER 0x10003140

@@ -7799,3 +7799,8 @@ size = 49
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-22T23:56:25+00:00"
+
+["GOLD.0x00421ed0"]
+status = "EXACT"
+updated_by = "verify"
+updated_at = "2026-09-23T00:04:47+00:00"
