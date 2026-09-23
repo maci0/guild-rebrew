@@ -39313,3 +39313,55 @@ nested form is *worse*: 84 ins / 240B, 41/251); `do {} while` vs `while (e != 0)
 initialiser; `r = f(…) | 2` vs `r = f(…); r |= 2;`; `else if` vs a separate
 second `if`; locals `void*` vs `int`; a `char*` alias for a1; parameter types
 `int*`/`char*`/`int` for a2; and swapping the 0x5c gate ahead of the type test.
+
+Round 241 (task-25): **WALL** — GOLDTL `0x4f7310` (201B body) stuck at
+**SIZE_MISMATCH 65/201** (obj 196B, 59 instructions against the reference's 66).
+One `rebrew test` run spent; best source parked (uncommitted) at
+`.scratch/t25_fcn_004f7310_best.c`, which is the no-local variant below.
+
+Decode (cdecl, `int fcn_004f7310(void* a1, void* a2)`; a2 holds the type/string
+record, a1 the object):
+
+```
+if (*(int*) a2 != 3 && *(int*) a2 != 1) return 1;
+r = 2;
+if (*(unsigned char*) ((char*) a1 + 0xd) >= 3) return 4;
+if (*(int*) a2 == 3 && *(char*) ((char*) a1 + 2) == 6) {
+    fcn_0051af00(buf, 0x1d34,
+        0x114 + (*(char*) ((char*) a1 + 9) != 0 ? 0xa : 0) + c);   /* c = byte a1+0xd */
+    fcn_004fa5f0(buf, 0, 0x657c7);
+    return r;
+}
+if (*(int*) a2 == 1 && *(char*) ((char*) a1 + 2) == 6)
+    fcn_0051af00((char*) a2 + 0x14, 0x679060, 0x1d33);
+return r;
+```
+
+Residual is the **same callee-saved colour under-allocation as 0x4f7210
+(round 239)** in smaller form: the object already reproduces the reference's
+register roles `esi` = a2, `edx` = a1, `ecx` = c (the field is CSE'd across both
+uses, giving the reference's `and ecx,0xff`), the frame (`sub esp,0x100`, no
+spill) and the immediate `cmp byte ptr [edx+2], 6`; it differs in exactly two
+places, worth 5 bytes:
+
+1. `r` gets no callee-saved register — the reference has `push edi` at entry,
+   `mov edi,2` / `mov edi,4` and `mov eax,edi` at three returns, while the object
+   constant-propagates it (`mov eax,2`, `mov eax,4`).  Forcing a single web for
+   `r` (one trailing `return r` with `if/else if`) does allocate a register but
+   moves a2 to `edi` and a1 to `edx`, i.e. it trades this defect for the 0x4f7210
+   colour swap (224B, 71 ins).
+2. the message id folds to `lea ecx,[eax+ecx+0x114]` where the reference emits
+   `add eax,0x114; add eax,ecx`.
+
+Rejected levers (all byte-identical): a named `unsigned char c` local (spills to
+`[esp+4]`, frame 0x104, and forces the `mov cl,6` / `cmp bl,cl` form of the char
+test); `r = 4; return r;` instead of `return 4;`; a single trailing `return r`
+with `if / else if` chains; nested `if` instead of `&&`; `6 == ...` and
+`unsigned char` forms of the +2 char test; four parenthesisations of the message
+id; `int x` statement split of the id arithmetic; `c` assignment before/after
+`r = 2`.
+
+Stop rule: when the object matches instruction-for-instruction except for the
+callee-saved assignment and the constant it refuses to keep in a register, the
+remaining gap is an allocator decision, not a spelling.  Both 0x4f7210 and
+0x4f7310 are this same wall.
