@@ -36375,3 +36375,29 @@ declaration — do not re-add the file until that shape is understood.
 GOLDTL: 613 -> **615** byte-matched (251 exact, 364 reloc), failed 52 (the
 non-matching file deleted before verify), lint 1097/1097 zero warnings.
 SERVER/GOLD untouched (the files carry GOLDTL markers only).
+
+### Round 1396 — GOLDTL 615 -> 620 (five more from the untracked pool)
+
+Same method as round 1395 (untracked, game-region, call-bearing, <=64 bytes):
+
+| VA | shape | result |
+|----|-------|--------|
+| 0x4e4c60 | `if (*(int*)0x772f3c == 0) { fcn_004154e0(*(int*)0x772f6c); *(int*)0x772f6c = 0; }` | RELOC 34 |
+| 0x4e7390 | pointer-table drain loop, `fcn_004e7310` per non-null entry | RELOC 34 |
+| 0x4e73c0 | `char buf[0x400]; fcn_0064d41a(buf, (char*)0x68d870, *(int*)0x7f4c00)` | RELOC 34 |
+| 0x4e77e0 | same with 0x68d968 | RELOC 34 |
+| 0x53f8f0 | pointer-table drain loop, `fcn_004230e0` | RELOC 34 |
+
+Two shape findings this round:
+
+- **New shape (docs/msvc6-c-shapes.md, section 141):** a pointer comparison
+  against a constant emits `jb`; casting the *comparison* to int
+  (`(int) entry < (int) end`) emits the reference's `jl`.  Both loop functions
+  went RELOC on that one byte.
+- **Parked:** `0x5b1e20` (31B).  Our C keeps `a1` across the inner call in a
+  callee-saved register (`push esi`, 33 bytes); the reference keeps it in
+  **edx**, which no cdecl declaration explains.  Do not re-add without
+  understanding that allocation.
+
+GOLDTL: 620 byte-matched (251 exact, 369 reloc), failed 52, lint 1102/1102 zero
+warnings.  SERVER/GOLD untouched.

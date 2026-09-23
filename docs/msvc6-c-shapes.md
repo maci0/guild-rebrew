@@ -7760,3 +7760,21 @@ treatment — recover the original's use structure, not permute our statements.
 spent ~20 probes across five carriers without finding this, because they varied *spellings of the whole
 function* and read the link delta; this varied *one structural property* and read the emitted instructions.
 The instrument choice was the difference.
+
+## 173. A pointer comparison against a constant is unsigned; an int cast makes it `jl`
+
+Measured on GOLDTL `fcn_004e7390` (0x4e7390) and `fcn_0053f8f0` (0x53f8f0), both
+pointer-table drain loops.  The reference's back edge is `cmp esi,<end> / jl`
+(**signed**), which a pointer-typed comparison cannot produce:
+
+```c
+int* entry;
+for (entry = (int*) 0x14d0020; entry < (int*) 0x14d0c20; entry++)  /* -> jb */
+for (entry = (int*) 0x14d0020; (int) entry < (int) 0x14d0c20; entry++)  /* -> jl */
+```
+
+One byte, and without it the function reports NEAR_MATCHING at an identical
+object size (the `72 e6` / `7c e6` opcode pair is the whole difference).  The
+same rule applies wherever the target shows a signed conditional on a loop
+bound that the source naturally spells as a pointer: cast the comparison, not
+the loop variable.
