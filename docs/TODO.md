@@ -37526,3 +37526,32 @@ server unchanged at 264.  Lint 1198 files / 0 warnings.
 
 GOLDTL **729 → 733** byte-matched (230 EXACT, 503 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1202 files / 0 warnings.
+
+### Round 1435 — branched prospecting, ninth pass: GOLDTL +3 (736)
+
+| VA | shape |
+|----|-------|
+| 0x4458a0 | two stack structs `b[0x10]`/`a[0xc]` filled by one five-arg call, then `f(a1,b)` and `g(a1,a)cm` |
+| 0x4f2540 | packed 0x20 message struct, five arguments, `return fcn_004c6c30(&m);` |
+| 0x4f2d30 | the same struct, four arguments, `a3` tested against -1, `return -1` on the guard |
+
+**Rules:**
+
+* the packed message struct is **0x20 bytes**: fields end at 0x17, and without
+  the trailing `char pad[9]` the frame comes out 0x18 and the local's
+  displacements shift (a 0x20 frame is what the reference allocates);
+* when the tail is `call … / add esp,N / ret` with no `eax` write, the source
+  is `return f(…)` — and the callee must be *declared* with a return type or cl
+  rejects the file (`'fcn_004c6c30' : function must return a value`);
+* read the guard's argument from the *displacement*: `0x4f2d30` tests
+  `[esp+0x2c]` = **arg3** against -1 and stores its byte at +0x10, while arg2
+  lands at +0xc — a two-argument reading put both in the wrong slots (34/94 ->
+  94/94).
+
+One near-miss deleted: `fcn_00498f50` (77/90) — the reference's branchless
+`(f(...) != 2) ? 0x100 : 0x16` ends `and al,0xea / add eax,0x16` where every
+spelling tried (both polarities, `int`, `unsigned char`, swapped constants)
+puts the mask on `eax`.
+
+GOLDTL **733 → 736** byte-matched (230 EXACT, 506 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1205 files / 0 warnings.
