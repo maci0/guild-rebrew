@@ -38455,3 +38455,22 @@ addresses are not, marker-placement and duplicate-marker rules) are written up a
 
 GOLDTL 797 → 798, GOLD 320 → 321; server unchanged at 264.  Lint 1268 files /
 0 warnings after `rebrew lint --fix --all-targets` backfilled two SECTIONs.
+
+Round 176: `fcn_004ea560` (0x4ea560, 179B) + GOLD twin 0x4e87e0, shared file, both
+RELOC 179/179.  The body is the 4-argument `fcn_0051af00` header
+(`log(buf, 0x1c21, id, a2 + (cond ? 0x27b : 0x253))` — the round-174 two-constant
+ternary idiom again, `and eax,0x28; add eax,0x253`) followed by a 0x300-entry
+stride-0x21c table walk that logs one of two messages per entry
+(`*p == 6 -> line 0x5fd`, `== 7 -> line 0x5fe`).
+
+The twin differs in the table start, the table end and one message buffer.  The
+end refused to be shared at first: a plain literal is not relocated, so the two
+targets' immediates are compared directly (6-byte mismatch at `mov esi,imm32` and
+`cmp esi,imm32`).  Fix: give the **start** a per-target `// GLOBAL:` pair and
+spell the bound as `(int) (g_7f4ca4 + 0x65400)` — the symbol+constant form keeps
+the immediate encoding and both targets match.  This narrows round 167's
+"symbolic bounds defeat the loop shape": only an *unrelated* symbol does.
+Written up as `docs/msvc6-c-shapes.md` section 184.
+
+GOLDTL 798 → 799, GOLD 321 → 322; server unchanged at 264.  Lint 1269 files /
+0 warnings.

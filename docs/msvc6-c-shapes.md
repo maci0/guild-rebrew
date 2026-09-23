@@ -8102,3 +8102,40 @@ Three practical rules, all hit this round:
 * new GLOBAL markers need their SECTION metadata or they add W016 warnings;
   `rebrew lint --fix --all-targets` backfills it into the read-only
   `src/rebrew-data.toml` (never hand-edit that file — it is mode 444).
+
+## 184. A bound spelled `base + constant` still encodes as one immediate
+
+Round 167 (TODO) recorded that replacing a literal loop bound with a **symbol**
+defeats the loop analysis and changes the shape, so address-differing twins whose
+bound is an immediate were left alone.  Measured again on the shared
+`fcn_004ea560` (GOLDTL 0x4ea560) / `fcn_004e87e0` (GOLD), where the loop walks
+0x300 entries of stride 0x21c and both the start and the end are immediates in
+the reference:
+
+```
+mov esi, 0x7f4ca4            ; GOLD: 0x770b84
+...
+cmp esi, 0x85a0a4            ; GOLD: 0x7d5f84  (= start + 0x65400)
+```
+
+Declaring the start as a per-target symbol and deriving the bound from it is
+byte-identical on **both** targets:
+
+```c
+extern char g_7f4ca4[];                    /* GOLDTL 0x7f4ca4 / GOLD 0x770b84 */
+...
+    p = g_7f4ca4;
+    ...
+} while ((int) p < (int) (g_7f4ca4 + 0x65400));
+```
+
+The `cmp` keeps its immediate form because `symbol + constant` is a relocatable
+expression the assembler folds into the fixup's addend; nothing is spilled to a
+register and the loop shape is unchanged.  What breaks (round 167) is a bound
+that is an **unrelated** symbol, not the start plus a constant.  Note also that a
+*plain literal* immediate carries no fixup at all, which is why the shared file
+must not use one: the two targets' literals differ and are not masked.
+
+The symbol may already be owned by another file (`g_7f4ca4` is annotated in
+`GOLDTL.fcn_00549330.c` for both targets) — declare a bare `extern` here and add
+no markers (section 183).
