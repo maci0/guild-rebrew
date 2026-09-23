@@ -37399,3 +37399,27 @@ server unchanged at 264.  Lint 1174 files / 0 warnings.
 
 GOLDTL **705 → 710** byte-matched (230 EXACT, 480 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1179 files / 0 warnings.
+
+### Round 1430 — branched prospecting, fourth pass: GOLDTL +5 (715)
+
+| VA | shape |
+|----|-------|
+| 0x4c7630 | size from `a1+0x10`, alloc, three globals written, optional `*a2 = 1` |
+| 0x4609c0 | three indirect calls through `[a2+0x24]` with `[a2+0x28]` as first arg |
+| 0x4da4d0 | `f(0x8c, (short)(0x44 - *(short*)(a2+0x2c) * 10), 0x4df, g)` then `*(int*)(a2+0x2c)++` |
+| 0x446c60 | saves/clears/restores `a1+0x1f4` around a call, returns 1 |
+| 0x4599d0 | `f(a1+0x1c)`, four-arg call, store result, free if non-zero |
+
+**Rules:**
+
+* **check which argument slot the prologue reads.**  `fcn_004da4d0` opened with
+  `push esi` then `mov esi,[esp+0xc]` = the *second* argument, so the first
+  parameter is unused; writing `void* a1` for it produced `[esp+8]` and one
+  wrong byte (56/57).  Same trap on `fcn_00446c60`, where the first two moves
+  load arg2 then arg1;
+* a repeated indirect call through a field needs a **typedef**
+  (`typedef void (__cdecl* Fn)(int,int);` then `(*(Fn*)(p + 0x24))(...)`) — the
+  inline cast spelling does not parse under cl 12.00.8804.
+
+GOLDTL **710 → 715** byte-matched (230 EXACT, 485 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1184 files / 0 warnings.
