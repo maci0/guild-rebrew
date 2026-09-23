@@ -273,7 +273,8 @@ unsigned char g_dynamic_entities[1] = {0};
 char* g_entity_type_table = 0;
 unsigned short* g_query_base = 0;
 
-int __cdecl putc(int ch, void* stream) { (void)ch; (void)stream; return ch; }
+/* removed round 1385: this stub displaced LIBCMT.lib(fputc.obj) at
+   0x10023890; the reference's _putc is the library body. */
 
 
 int $T57600 = 0;

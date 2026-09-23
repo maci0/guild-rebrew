@@ -36059,3 +36059,32 @@ set the flag at the point the file is added (`target_sources`) or via a
 
 Also confirmed this round: the 7 trailing stubs are not the whole +690 (they are
 ~0x90 bytes); the rest is per-object alignment in the game-object set.
+
+### Round 1385 — first `.text` VirtualSize reduction: the `_putc` stub
+
+Verified the mechanism round 1384 only hypothesized.  `link_stubs.c` defined
+`int __cdecl putc(int ch, void* stream)`, which beat `LIBCMT.lib(fputc.obj)`
+(the LNK4006 displacement) and was emitted at 0x10023890, past the reference
+`.text` end.
+
+Removing that one definition (nothing in the tree references `putc`):
+
+```
+.text VirtualSize  0x22af8 -> 0x22ae8   (reference 0x22846)
+map tail           _putc gone; last symbol 0x100238c0 -> 0x100238b0
+residue            11735 -> 11735  (unchanged: the stub sat past the end)
+link errors        none
+```
+
+So redundant stub definitions are removable one at a time, and each removal
+gives back its bytes plus alignment.  The tail still holds
+`_thread_proc@4` (0x10023850) and `__crt_locked_call4a` (0x100238b0), neither
+referenced anywhere in the tree — the next two candidates.  The other four
+(`_RecvGameSavegame`, `_fcn_1001af30`, `_fcn_10020ff8`, `_crt_toupper`) are
+referenced by `ServerMainThread.c`, `crt_heap.c` and `vfs_OpenStream.c`, so
+they stay until those callers resolve to the real library bodies.
+
+Also measured and reverted: `/Gy` on the stub TU is **inert** here — the flag
+does reach the compiler (the object gains six extra `.text` COMDATs) but the
+linker keeps every stub, so `.text` VirtualSize did not move.  Do not re-add it
+without a reason to think COMDAT discard applies.
