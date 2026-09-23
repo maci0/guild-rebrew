@@ -4,18 +4,28 @@
 
 ## Project
 
-- **Targets**: `server.dll` (pe, x86_32; the default; marker `SERVER`) and
-  `Europa1400Gold_TL.exe` (pe, x86_32; marker `GOLDTL`). They share the game
-  logic, so one source file can carry one marker per build. Commands aimed at
-  the second target need `--target Europa1400Gold_TL.exe`, otherwise they
+- **Targets**: `server.dll` (pe, x86_32; the default; marker `SERVER`),
+  `Europa1400Gold_TL.exe` (marker `GOLDTL`) and `Europa1400Gold.exe` (marker
+  `GOLD`). They share the game logic, so one source file can carry one marker
+  per build. Commands aimed at a client need `--target <name>`, otherwise they
   silently use the default target.
+- **Code generator lock**: all three binaries are MSVC 6.0 with the same
+  compiler version (cl 12.00.8804), but the two clients were built with the
+  **Processor Pack** code generator and the server with the **plain** one.
+  `rebrew toolchain detect --target <T>` reports `codegen` and refuses a
+  mismatched profile; `scripts/gate.sh` enforces it. Configure a client with a
+  plain profile (or the server with `msvc-6.0-sp5-pp`) and every FP-comparing
+  function silently stops matching. Evidence and the 3-way reproduction matrix:
+  `docs/general-knowledge.md`.
 - **Target status**: `server.dll` is the position-aligned CMake build.
   `Europa1400Gold_TL.exe` is onboarded: 6335 functions discovered, 29 sources
   (10 skeletons plus 19 imported from `server.dll`, of which 3 are byte-exact
   and 6 near-matching), no layout scaffolding yet.
-- **Compiler**: msvc6 (docker image `rebrew/msvc:6.0-win32` — wine inside; the
-  CMake build runs it through the `rebrew-cmake-{cl,link,lib}` console scripts
-  via `cmake/toolchain-msvc-6.0-sp6-docker.cmake`)
+- **Compiler**: `msvc-6.0-sp6` for the server (`rebrew/msvc:6.0-sp6-win32`),
+  `msvc-6.0-sp5-pp` for both clients (`rebrew/msvc:6.0-sp5-pp-win32`) — wine
+  inside each image; the CMake build runs CL through the
+  `rebrew-cmake-{cl,link,lib}` console scripts via
+  `cmake/toolchain-msvc-6.0-sp6-docker.cmake`
 - **Language**: C89 — follow compiler constraints below
 - **Config**: `rebrew-project.toml` (all tools read from here)
 - **Function inventory**: `src/<target>/function_structure.json` (`[{va, size, name}]`,
@@ -51,7 +61,7 @@
 > The LIBCMT hook covers the default (server) target only. **The `Europa1400Gold_TL.exe`
 > (GOLDTL) client statically links `d3dx8.lib` (DX8.1 SDK) too** — 907 functions
 > (~273 KB) in `.text` band `0x5e0000–0x64ffff` are linker-supplied D3DX8 bodies,
-> marked `// LIBRARY: D3DX8` in `src/Europa1400Gold_TL.exe/library_d3dx8.h`. Before
+> marked `// LIBRARY: D3DX8` in `src/library_d3dx8.h`. Before
 > reversing any GOLDTL function in that band (or a `0x4b5xxx` `.text`-side D3DX8
 > string site), check both:
 >
@@ -152,11 +162,13 @@ and `MISSING_SIZE` are stored when the object size disagrees with the binary.
 
 Build with `cmake -S . -B build -DREBREW_DEBUG_INFO=OFF && cmake --build build`.
 
-**Run `scripts/gate.sh` before committing.** It is the four checks that must
-pass: `rebrew lint`, the compile (the POST_BUILD postlink step is expected to
-fail until the tree is position-aligned, so only `error C####`/`error LNK####`
-count), `rebrew verify --full` against a baseline of 281 passed, and the
-linked `.text` residue against `RESIDUE_BASELINE`. A drop below either
+**Run `scripts/gate.sh` before committing.** It is the checks that must pass:
+`rebrew lint`, the compile (the POST_BUILD postlink step is expected to fail
+until the tree is position-aligned, so only `error C####`/`error LNK####`
+count), `rebrew verify --full` against a baseline of 281 passed, the linked
+`.text` residue against `RESIDUE_BASELINE`, and the per-target toolchain
+alignment check (`rebrew toolchain detect` — code-generator family vs
+configured profile). A drop below either
 baseline is a regression; lower `RESIDUE_BASELINE`, or raise `BASELINE`, only
 when a change improves the number.
 
