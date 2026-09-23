@@ -9336,3 +9336,9 @@ size = 253
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T12:16:52+00:00"
+
+["GOLDTL.0x00405180"]
+size = 68
+status = "EXACT"
+updated_by = "test"
+updated_at = "2026-09-23T12:52:58+00:00"

@@ -38059,3 +38059,30 @@ expression inside `fcn_00433ba0(...)` (the one shape that should force a single
 statement) made it worse (27/98: the compiler kept the pointer in `esi` and hoisted
 the calls).  So the reference defers the cleanup across statements — another
 backend-visible difference.  Candidate deleted.
+
+## Round 152 — `__asm { int 3 }` unblocks the assert helpers (+1 = 794)
+
+`fcn_00405180` (0x405180, 68B) is **EXACT** — the first assert-style function in the
+tree.  Its three `int3` sites are written as `__asm { int 3 }`, which compiles to a
+bare `0xCC` (the earlier `__emit(0xcc)` attempt produced `push 0xcc; call __emit`).
+The function validates a doubly-linked list:
+
+```c
+	if (a2 != *(void**) ((char*) a1 + 0x128)) {
+		if (*(int*) ((char*) a2 + 0x24) == 0) __asm { int 3 }
+		q = *(void**) ((char*) a2 + 0x28);
+		if (q != 0 && *(void**) ((char*) q + 0x24) != a2) __asm { int 3 }
+	}
+	p = *(void**) ((char*) a1 + 0x128);
+	while (p != 0) {
+		q = *(void**) ((char*) p + 0x28);
+		if (q != 0 && *(void**) ((char*) q + 0x14) != a1) __asm { int 3 }
+		p = *(void**) ((char*) p + 0x28);
+	}
+```
+
+An `int3` scan over every `start-function` todo item found no other assert body, so
+this unlocks the pattern rather than a batch.  `fcn_00405540` (0x405540, 94B, the
+`fcn_004355d0`/`fcn_00435630` pair behind a flag) reached 58/108 with the whole
+prologue exact; the branches differ (ours recomputes the `[a1+0x34]->[0x1ec]` chain
+instead of keeping the base in `edx` and re-adding 0xf4), candidate deleted.
