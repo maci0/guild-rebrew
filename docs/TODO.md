@@ -39212,3 +39212,26 @@ The GOLD twin is 0x4bab90 (delta -0x3d0): same body, per-target data
 g_664e78/0x5edbe0 and g_662cf8/0x5ebb40 (g_6640e8/0x5ece60 is already owned by
 GOLDTL.fcn_004b6f00.c), calls reloc-masked.  The 277/282 source is parked in
 `.scratch/t20_fcn_004baf60.c` (not committed).
+
+Round 235 (task-21): the round-211 x87 operand-order "wall" at 0x4baf60 is
+**CLOSED** — GOLDTL 0x4baf60 **RELOC 282/282** and GOLD twin 0x4bab90
+**RELOC 282/282** (commit `1d00a001`), verified by the Lead on both targets and
+by lint (0 warnings).  The wall note above is therefore superseded.
+
+New rule (documented here because it is the first measured case of its kind): for
+a floating-point product `x * y` MSVC6 loads the *global-ish* operand into ST(0)
+regardless of the written order — `f * g`, `g * f`, `(double) f * g`,
+`f * (double) g` and `f *= g` all emitted `fld [g]` / `fmul [local]` — so the
+reference's `fld [esp+0xc]` / `fmul [0x662cf8]` needs the product split through a
+temporary:
+
+```c
+	float t;
+	t = f;
+	r = (int) (t * g_662cf8);
+```
+
+A double temporary compiles like the float one but adds qword forms, so use the
+float.  This is the FP analogue of the two-constant-ternary rule (§182): when the
+memory operand of an x87 op is on the wrong side, split the expression rather
+than reordering it.
