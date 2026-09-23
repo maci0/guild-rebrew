@@ -36674,3 +36674,37 @@ list computed one step earlier.
 
 No new byte-matched this round: GOLDTL stays at 642 (251 exact, 391 reloc),
 lint 1123/1123 zero warnings, tree clean.
+
+### Round 1408 — a six-member message-builder family, blocked on `rep movsd`
+
+Found by shape (all 53 bytes, same skeleton): six functions that build a local
+message and call `fcn_004c4330`:
+
+```
+sub esp,0x9c / push esi / mov esi,[esp+0xa4] / push edi
+mov ecx, COUNT / lea edi,[esp+0x18] / lea eax,[esp+8]
+mov byte [esp+8], TAG / push eax / rep movsd / call fcn_004c4330
+pop edi / pop esi / add esp,0x9c / ret
+```
+
+| VA | COUNT | TAG |
+|----|-------|-----|
+| 0x4c4e70 | 0x20 | 9 |
+| 0x4c68c0 | 5 | 0x53 |
+| 0x4c6a00 | 0xa | 0x56 |
+| 0x4c6aa0 | 0x12 | 0x59 |
+| 0x4c6cf0 | 9 | 0x63 |
+| 0x4c6d30 | 6 | 0x64 |
+
+The struct is a 0x10-byte header (tag at +0) plus an `int body[COUNT]` at +0x10;
+the copy is a constant-size `rep movsd`.  Three spellings all fail the same way:
+`memcpy(msg.body, a1, sizeof msg.body)` — with and without
+`#pragma intrinsic(memcpy)` — and a `for`/`while` pointer copy.  For COUNT=0x20
+(128 bytes) the result is NEAR_MATCHING at the right size; for the small counts
+the object is 44 bytes because msvc6 **unrolls** a known-size copy into
+individual `mov`s instead of `rep movsd`.  The reference emits `rep movsd` even
+for 20 bytes (COUNT=5), so the original construct defeats unrolling — the size
+must reach the compiler as non-constant or through a type it cannot peel.  That
+is the next probe; nothing was promoted.
+
+GOLDTL unchanged at 642 byte-matched, lint clean, tree clean.
