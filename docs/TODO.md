@@ -38369,3 +38369,8 @@ did not: with `a < (int) g_6b7e44` the compiler emits a different sequence from 
 bound defeats the loop analysis the literal constant allowed.  So a hardcoded bound
 is only fixable when the *same* literal is also the init (0x4027b0 failed the same
 way); revert and leave such twins.
+
+Round 170: automated band run (`--min-score 90`, top 12 by score) — 9 candidates
+tested, all NEAR_MATCHING, none promotable.  The high-score end of the
+`would-import-shared` band is now exhausted; remaining rows are address-diff NEARs
+(fixable only per the memory-operand rule) or `would supersede` duplicates.
