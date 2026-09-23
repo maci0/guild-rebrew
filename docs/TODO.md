@@ -39568,3 +39568,40 @@ per target from the owner files' `// GLOBAL:` markers (here g_774a80, g_6b5c60
 are reused bare).  Also: map the GOLD twin by scanning the GOLD image for the
 prologue bytes, not by a VA delta — in the 0x4fa1xx-0x4fa4xx run and again at
 0x5b2900 the GOLD ordering differs from the GOLDTL one.
+
+Round 249 (task-35): **WALL** — GOLDTL `0x57c630` (236B body) stuck at
+**SIZE_MISMATCH 66/237** (obj 210B).  One `rebrew test` run; best source parked
+(uncommitted) at `.scratch/t35_fcn_0057c630_best.c`.
+
+Decode (cdecl, `void fcn_0057c630(void* a1, int a2)`; `char buf[0x200]`):
+
+```
+if (a2 < 2)        n = (fcn_0042e410(2) & 0xffff) + 2;
+else if (a2 == 2)  n = (fcn_0042e410(2) & 0xffff) + 3;
+else if (a2 == 3)  n = (fcn_0042e410(a2) & 0xffff) + a2;
+else if (a2 == 4)  n = (fcn_0042e410(4) & 0xffff) + 3;
+else               n = (fcn_0042e410(4) & 0xffff) + 4;
+if (*(int*) ((char*) a1 + 0x194) >= n) {
+    fcn_005100f0(*(int*) ((char*) a1 + 4), -n);
+    fcn_0051af00(buf, 0x41db, n);
+    fcn_00545d40(*(int*) ((char*) a1 + 4), -1, buf, 1, 0x5fa, g_6a80a4);
+} else {
+    fcn_0057bed0(a1, a1, a2);
+}
+```
+
+Residual: our CL proves `a2 == 3` inside the third arm, folds `+ a2` to `+ 3`,
+and then **shares** the `push ebx / call fcn_0042e410 / mov esi,eax / add esp,4
+/ and esi,0xffff / add esi,3` sequence with the second arm (73 instructions,
+210 bytes); the reference duplicates the whole per-arm sequence (80
+instructions, 237 bytes) and stores the random id with a 16-bit move
+(`mov si,ax`) that our build only emits when the local is 16-bit - which then
+moves every register home and is further away.  Same class as round 247: our CL
+optimises where the reference's code is literal.  Swept /O1 /Os /Ot /Ox /Ob0
+/Ob1 /Oa /Ow /Og /Oi- (best still 73/210) and the sp4/sp5/sp5-pp/sp6 toolchains.
+
+For the next attempt (all measured, no re-derivation needed): GOLD twin is
+`0x5740f0`, found by scanning the GOLD image for the prologue
+`81 ec 00 02 00 00 53 8b 9c 24 0c 02 00 00 56 83 fb 02`; the one per-target
+address is GOLDTL `0x6a80a4` / GOLD `0x629054`, which needs a
+`// GLOBAL:` pair in the source (no file owns it yet).
