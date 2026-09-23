@@ -7907,3 +7907,32 @@ to something the function does not touch.  Spelling each store as
 `*(int*) (buf + 0x17) = a2;` (etc.) reproduces the reference exactly.  When a
 struct copy's *only* difference is a constant displacement, stop adjusting the
 typedef and write the offsets.
+
+## 178. Locals whose only use is an escaping pointer are dead-store-eliminated — group them
+
+Measured on GOLDTL `fcn_00403040` (0x403040, 149B), which fills a three-float
+vector and passes its address to `fcn_00402ab0`:
+
+```c
+float x, y, z;                 /* 10/149 — the compiler keeps only x */
+x = ent->f4c + e->f54;
+y = ent->f50 + e->f58;
+z = ent->f54 + e->f5c;
+fcn_00402ab0(e, &x, 0);
+
+float v[4];                    /* 137/149 — all three stores survive */
+v[0] = ent->f4c + e->f54;
+v[1] = ent->f50 + e->f58;
+v[2] = ent->f54 + e->f5c;
+fcn_00402ab0(e, v, 0);
+```
+
+An individual scalar whose address is taken for one call is still a dead store
+to everything that is never read through a *different* name; the compiler
+drops `y` and `z` and the body comes out 34 bytes short.  The same three values
+written into **one aggregate** cannot be dropped, because the callee receives a
+pointer to the whole object.  When a reference computes several values and
+passes only the first, write them into an array (or struct) and pass that.
+
+The frame also settles: `float v[4]` gives the reference's `sub esp,0x10`
+(three floats plus padding) where `float v[3]` gives `sub esp,0xc`.

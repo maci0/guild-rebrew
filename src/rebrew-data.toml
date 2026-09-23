@@ -4048,3 +4048,12 @@ section = ".rdata"
 
 ["GOLDTL.0x0067534c"]
 section = ".rdata"
+
+["GOLDTL.0x00675058"]
+section = ".rdata"
+
+["GOLDTL.0x00675094"]
+section = ".rdata"
+
+["GOLDTL.0x006750ac"]
+section = ".rdata"

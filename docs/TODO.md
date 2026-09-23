@@ -37171,3 +37171,39 @@ parked.  They are the cheapest candidates left in the `start-function` lane:
 
 GOLDTL **680 → 681** byte-matched; GOLD unchanged at 300; server unchanged at
 264.  Lint 1150 files / 0 warnings.
+
+### Round 1422 — no byte gained, four walls mapped
+
+Eight `start-function` candidates and three near-misses, zero closed.  The
+round's value is in what it rules out:
+
+**Escaping-aggregate rule (new, shapes §178).**  `fcn_00403040` (0x403040) went
+10/149 → **137/149** purely by writing the three float results into
+`float v[4]` and passing the array: as three separate locals whose address is
+taken only for one call, the compiler dead-store-eliminates two of them and the
+body comes out 34 bytes short.  The remaining 12 bytes are the FPU operand
+order — the reference emits `fld [ecx+0x4c] / fadd [esi+0x54]`, this compiler
+always emits the pair swapped, and neither swapping the source operands,
+reversing the assignment order, naming the entity pointer,
+`v[0] = …; v[0] += …;`, nor `--flag-sweep-only` (best variant still 6
+structural diffs) changes it.
+
+**`__emit(0xcc)` is not the int3 spelling.**  `fcn_00405180` (0x405180) is an
+assert-guard walker with three bare `cc` bytes.  `__emit(0xcc)` as a statement
+compiles to `push 0xcc / call __emit` — msvc parses it as a function call, and
+the body comes out 108 bytes with calls instead of int3s.  Raw `int3` needs
+`__asm __emit 0xcc`, and no file in the tree uses inline asm yet: that is a
+project-policy decision, not something to slip in with one function.
+
+**Two more allocator walls** (both reverted, all first-try-obvious spellings
+tried): `fcn_00401470` / `fcn_00401500` (0x401470 / 0x401500, the twin loaders)
+— the reference caches `a1` in `esi` across two `fcn_004011f0` calls, this
+compiler reloads it from the stack each time; `fcn_00404180`-family
+`fcn_0042b0` — the assert/return-bool block resists every if/return spelling
+(`sete al` instead of `mov eax,1 / ret`).
+
+Also re-confirmed: a `--flag-sweep-only` run over a 112-byte near-miss takes
+~10 minutes and found no matching flag set for the memset operand order
+(`fcn_004050c0`, 98/110).
+
+GOLDTL stays at 681, GOLD at 300, server at 264.  Lint 1149 files / 0 warnings.
