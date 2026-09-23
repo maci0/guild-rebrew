@@ -38037,3 +38037,25 @@ all scheduling — the reference computes `&buf` and the tag before the last arg
 reuses `eax` for the tag where ours uses `ecx`, and emits `and eax,0xffff;
 lea eax,[eax+eax+4]; neg eax` where ours strength-reduces the negation to
 `mov ecx,-2; sub ecx,eax; add ecx,ecx`.  Candidate deleted.
+
+## Round 151 — 0x404560: stack-cleanup deferral
+
+`fcn_00404560` (0x404560, 89B) is a four-call helper:
+
+```c
+	if (*(int*) ((char*) a1 + 0x7c) == 0) return;
+	fcn_0064d41a(buf, (char*) 0x67553c, a1);          /* sprintf-like */
+	fcn_00435500((void*) (*(int*) ((char*) *(void**) ((char*) a1 + 0x34) + 0x1ec)
+	    + 0xf4), buf);
+	fcn_00434760(fcn_00433ba0(buf), 1);
+	*(int*) ((char*) a1 + 0x7c) = 0;
+```
+
+63/95: every instruction matches except the **stack cleanup**.  The reference keeps
+all eight argument pushes live and emits a single `add esp,0x20` at the end of the
+block; our CL emits `add esp,0x14` after the second call and per-statement cleanups
+for the rest, which also shifts the `lea ecx,[esp+N]` buffer offsets.  A comma
+expression inside `fcn_00433ba0(...)` (the one shape that should force a single
+statement) made it worse (27/98: the compiler kept the pointer in `esi` and hoisted
+the calls).  So the reference defers the cleanup across statements — another
+backend-visible difference.  Candidate deleted.
