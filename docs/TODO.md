@@ -38288,10 +38288,10 @@ byte for byte; the stores split differently around the two pushes (66/107 with
 |--------|--------------|-------|-------|------|
 | server.dll | 264 / 281 passed | 31 | 233 | 1 NEAR, 1 STUB, 0 compile errors |
 | Europa1400Gold_TL.exe | 795 | 231 | 564 | 45 SIZE_MISMATCH, 5 NEAR, 2 STUB |
-| Europa1400Gold.exe | 316 | 97 | 219 | 69 SIZE_MISMATCH, 22 NEAR, 10 STUB, 3 compile errors (foreign uncommitted files) |
+| Europa1400Gold.exe | 318 | 97 | 221 | 69 SIZE_MISMATCH, 22 NEAR, 10 STUB, 3 compile errors (foreign uncommitted files) |
 
 Session start was server 264 / GOLDTL 745 / GOLD 300, so this stretch added
-**+50 GOLDTL** and **+16 GOLD** functions, plus the docs in this file and
+**+50 GOLDTL** and **+18 GOLD** functions, plus the docs in this file and
 `msvc6-c-shapes.md` §179.
 
 Two questions block the next stretch and are not source-level:
