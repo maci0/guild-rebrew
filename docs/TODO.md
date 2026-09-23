@@ -37731,3 +37731,23 @@ C is clear (`v ∈ {1,3}`, `c = *(u8*)(a1+0x166)`, `c != 0 && c <= 0x1b`, then t
 spelling we tried makes MSVC either fold `r` to a constant or place it in a
 callee-saved register (`edi`), and it keeps the byte in `bl`.  Same class as
 0x5dd050: a register-restore/placement decision our CL build does not reproduce.
+
+## Round 140 — GOLDTL: table-lookup switch family and string blocks (+6 = 781)
+
+* `fcn_004bbab0` / `fcn_004bbb40` (0x4bbab0, 0x4bbb40, 131B each): byte-identical
+  twins.  `p = fcn_00508e40(*(int*)a1)`; bail with 1 when null; log
+  `buf` with tag `*(u16*)(a1+4) + 0x12e7`; inline `strlen(buf)` (`or ecx,-1;
+  xor eax,eax; repne scasb` — the /Oi intrinsic); UI call passes
+  `*(int*)(p+4)` **twice**, then `buf`, `len > 0x100`, `0x603`, `0`.
+  `len > 0x100` comes out as `cmp eax,ecx; sbb ecx,ecx; neg ecx` — the
+  unsigned-borrow form, so declare `len` unsigned.
+* `fcn_005b2e50` (0x5b2e50, 139B): `t == 6 || t == 7` then `switch
+  (fcn_0051e070())` sharing `case 0`/`case 2` and swapping the last two log
+  arguments in `case 1`.
+* `fcn_005b2cb0` / `fcn_005b2db0` (0x5b2cb0, 0x5b2db0, 159B each): the same switch
+  with six parameters — `(g, 0x414e, *(u16*)a2, a3, tbl[a4], a5, a6)` versus
+  `case 1`'s `(g, 0x414e, *(u16*)a2, tbl[a4], a3, a5, a6)`.  Twins differ only in
+  the tag (0x414e/0x414f) and the trailing global (0x6ab49c/0x6b5c60).
+* `fcn_004f74e0` (0x4f74e0, 153B): `fcn_005463a0(1, 0, 0x2c)` then
+  `while (p) { if (p->[0xac] == a1->[4]) return 1; p = fcn_005462a0(); }`,
+  then the `v == 3` / `v == 1 && t == 6` pair from the 0x4f73e0 family.
