@@ -36573,3 +36573,32 @@ Parked:
 
 GOLDTL: 633 byte-matched (251 exact, 382 reloc), failed 52, lint 1115/1115 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1404 — GOLDTL 633 -> 635, and a size-annotation trap
+
+| VA | shape | result |
+|----|-------|--------|
+| 0x4e8210 | `if (a2 == 0) return -1; return fcn_004e8240(a1, a2, 0, 1, a3);` | RELOC 36 |
+| 0x5490a0 | six subsystem-reset calls then a tail-called seventh (`fcn_005473a0`) | RELOC 35 |
+
+**Trap found while doing it (worth its own line):** the inventory's size for a
+function can include trailing padding, so a body that is byte-identical still
+reports `SIZE_MISMATCH` because the `// SIZE:` annotation is larger than the
+object.  `rebrew diff` shows it immediately — "Instructions: 14 exact, 1 reloc,
+0 structural" with the target slice sized to the *object* — and the fix is to
+set `// SIZE:` to the matched extent (36 and 35 here, against inventory sizes of
+48 and 49).  Check the structural count before believing a size mismatch is a
+body defect.
+
+Parked:
+
+- `0x5898f0` (inventory 49, body 40): guard + release call; STUB at the right
+  size, so the body shape is wrong, not the size.
+- `0x47cb60` (inventory 50): the reference reads its fourth argument
+  (`[esp+0x10]`) and passes `(a1, a2, a4, 1.0f, 0xc8, 0xc8, 0xc8)`; with that
+  signature our object is 50 bytes against the same recorded size and the diff
+  still shows a 32-byte comparison, so the recorded size and the real body
+  disagree for this one too — needs the size/`!= 0` shape resolved together.
+
+GOLDTL: 635 byte-matched (251 exact, 384 reloc), failed 52, lint 1116/1116 zero
+warnings.  SERVER/GOLD untouched.
