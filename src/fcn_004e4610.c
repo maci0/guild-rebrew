@@ -1,3 +1,9 @@
+// GLOBAL: GOLDTL 0x772f3c
+extern char g_772f3c[];
+// GLOBAL: GOLD 0x6f0d8c
+extern char g_772f3c[];
+// FUNCTION: GOLD 0x004e2d90
+// SIZE: 36
 // FUNCTION: GOLDTL 0x4e4610
 // SIZE: 36
 
@@ -8,7 +14,7 @@ void __cdecl fcn_004e4610(int a1)
 {
 	void* p;
 
-	if (*(int*) 0x772f3c != 0) {
+	if (*(int*) g_772f3c != 0) {
 		return;
 	}
 	p = (void*) fcn_00426cc0(a1);

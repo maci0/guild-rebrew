@@ -36940,17 +36940,20 @@ the fix was to delete it (the value was the target default) rather than reshuffl
 * `fcn_00413160` (GOLD 0x411bb0) — GOLD's loop runs `0xfd7f75…
   0xfe7775` (delta `0xf800`) with stride `0x3e0`, the source says
   `0x1043695…0x1052d95` (delta `0xf700`) with `0x3dc`: a real divergence.
-* `fcn_004e8af0` (GOLD 0x4e6f30) — **open tooling question.**  The GOLD
-  addresses are known (base `0x925120`, bound `0x925510`, both confirmed from
-  the target's `mov eax, imm32` / `cmp eax, imm32`), and both
-  `// GLOBAL: GOLD` markers were added with the right sections.  The compile
-  still emits `mov eax, 0` and a restructured loop, i.e. the *address-of* form
-  `a = g_9a9220;` is not resolving for the destination target, while every
-  memory-operand use of a paired global does.  Before the substitution the same
-  file scored NEAR_MATCHING 62/68 with **only** the six address bytes differing.
-  A later round should reproduce this in a two-line probe and fix it upstream
-  (or spell the base as a parenthesised array so the compiler keeps it an
-  operand).
+* `fcn_004e8af0` (GOLD 0x4e6f30) — **open codegen question.**  With the literal
+  `a = 0x9a9220;` the file scores NEAR_MATCHING 62/68 with **only** the six
+  address bytes differing, so the loop shape is right.  With the same address
+  reaching the compiler as a symbol (`g_9a9220`, declared as an array, as a
+  scalar taken with `&`, with or without an explicit `(int)` cast) msvc
+  **constant-folds the first loop iteration**: it emits
+  `mov bl, byte ptr [g_9a9220]` and compares that against `key` before the
+  loop, which the reference does not do — it keeps `mov eax, <imm32>` and
+  compares `[eax]`.  The GOLD addresses are known (base `0x925120`, bound
+  `0x925510`, read straight off the target's `mov eax, imm32` / `cmp eax,
+  imm32`), so this is purely a source-shape problem: the address must reach the
+  loop in a form msvc cannot fold (a non-constant helper, or a per-target file
+  with the literal).  A later round should find that form; the address pair is
+  recorded here so it does not have to be re-derived.
 
 `twin_marker.py` now carries a `SKIP` set of the four proven-unshippable VAs so
 later runs walk forward.
@@ -36958,3 +36961,49 @@ later runs walk forward.
 GOLD **265 → 281** byte-matched (96 EXACT, 185 RELOC); GOLDTL unchanged at 671
 (6 more rows EXACT → RELOC — literals becoming relocatable references);
 server unchanged at 264.  Lint 1140 files / 0 warnings.
+
+### Round 1416 — twin harvest, fourth pass: GOLD +12 byte-matched (293)
+
+Eleven twins closed (three shape A, eight shape B) and the shape-B analysis is
+now a script: `scripts/twin_fix.py`.
+
+**How `twin_fix.py` pairs the addresses.**  For a file that already carries the
+GOLD marker but does not match, it reads the differing byte runs and slides a
+4-byte window over each run (−4…+4, because a run start is often *inside* the
+`imm32`) taking:
+
+* the **candidate** value at that window — with the GOLDTL literal still in the
+  source there is no relocation, so the printed bytes are the real GOLDTL
+  address, and
+* the **target** value at the same window — the GOLD address.
+
+A window is accepted only when its candidate value is a literal that actually
+occurs in the source text, which is what stops an unrelated difference from
+being "fixed" into a wrong address.  It then substitutes `0x<src>` → `g_<src>`,
+adds the two GLOBAL markers (a repeat of an address another file already
+annotates gets a bare `extern`, lint W021), sets the sections and re-tests.
+A file that still does not match is reverted with `git checkout --`, so no
+unverified claim survives.
+
+Closed: 0x4c4d40 0x4c4e40 0x4c51b0 (shape A); 0x40bf60 0x43cbe0 0x453b30
+0x47dcf0 0x4c4450 0x4e2d90 0x4f9e00 0x5ba7b0 (shape B).
+
+**The class that does not work this way.**  When the address feeds a *loop
+induction* or a foldable first iteration, replacing the literal with a symbol
+changes the codegen and the substitution is worse than the literal:
+
+* `fcn_004e8af0` / `fcn_004e90d0` (GOLDTL 0x9a9220/0x9a9610, GOLD
+  0x925120/0x925510) — msvc folds the first iteration to a static byte load
+  under the symbol form;
+* `fcn_00420650` (0x6b72b4/0x6b7e44), `fcn_004cdf00`, `fcn_004efd30`,
+  `fcn_00576680` — same outcome, SIZE_MISMATCH after the substitution and
+  reverted.
+
+The addresses above are recorded so a later round does not re-derive them; the
+open question is a spelling that keeps the address an immediate msvc cannot
+fold (for example a `static` initialised pointer, or accepting a per-target
+file where the bodies are byte-identical but the literal differs).
+
+GOLD **281 → 293** byte-matched (96 EXACT, 197 RELOC); GOLDTL unchanged at 671
+(3 more rows EXACT → RELOC — literals becoming relocatable); server unchanged
+at 264.  Lint 1140 files / 0 warnings.
