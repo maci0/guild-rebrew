@@ -36113,3 +36113,38 @@ callers resolve to the real library bodies at their reference VAs
 Remaining overshoot after both removals: 0x292 (658) bytes.  The tail is now
 `_DllMain@12` (def_dllmain.obj_s0.obj) plus five referenced stubs, so the rest
 of the slack is per-object alignment in the game-object set, not stubs.
+
+### Round 1387 — the remaining tail stubs are load-bearing by NAME
+
+`link_stubs.c.obj` is only **96 bytes** of `.text`, so the tail is not "one big
+stub object"; the removal lever from rounds 1385/1386 was per-stub and is now
+exhausted by size:
+
+```
+.text VirtualSize  0x22ad8   (reference 0x22846)
+map tail           _DllMain@12 + 5 stubs, last symbol 0x100238a0
+link_stubs .text   96 bytes
+section end        0x10023ad8 -- 0x238 bytes past the last mapped symbol
+```
+
+The five remaining stubs cannot simply be deleted, because the tree calls them
+by their *placeholder* names while the composition already provides the real
+CRT bodies under their own names:
+
+| stub in the tree | real body in the composition |
+|------------------|------------------------------|
+| `fcn_1001af30` (returns 0) | `_strchr` at 0x1001af30 (`split/1001af30__strchr.obj`) |
+| `fcn_10020ff8` (returns 0) | `_strtoxl` at 0x10020ff8 (`split/10020ff8_.text.obj`) |
+| `_crt_locked_call4a` | 0x1001a931 (`split/1001a931_.text.obj`) |
+| `RecvGameSavegame` (returns 0) | no reversed body yet (caller: `ServerMainThread.c`) |
+| `crt_toupper` (real shim) | keeps `vfs_OpenStream`'s uppercase lookup correct |
+
+So the next step is a **rename, not a deletion**: point the callers in
+`crt_heap.c` (`fcn_1001af30`, `fcn_10020ff8`) and `vfs2.c`
+(`_crt_locked_call4a`) at the real symbols, then drop those stub definitions —
+which should both shrink the tail and make the calls target the real bodies the
+reference calls.  `RecvGameSavegame` stays until that function is reversed.
+
+Unaccounted tail: 0x238 bytes between the last mapped symbol (0x100238a0) and
+the section end (0x10023ad8) carry no map symbol — find what emits them (thunk
+blob / pad object) before assuming the stub path is the only lever.
