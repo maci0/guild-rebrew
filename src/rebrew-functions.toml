@@ -9731,3 +9731,14 @@ status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T17:05:09+00:00"
 
+["GOLDTL.0x004bb540"]
+size = 241
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T17:10:23+00:00"
+
+["GOLD.0x004bb150"]
+size = 241
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T17:10:35+00:00"
