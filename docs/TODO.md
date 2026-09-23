@@ -37695,3 +37695,19 @@ placement differently for this TU.
 (`push 3`), so they carry the same divergence.  Per the tree rule the candidate
 was **deleted**, not parked.  Revisit only with a pass-level explanation of
 why MSVC 6 declines to hoist the restore there.
+
+## Round 138 — GOLDTL caller family, third batch (+7 byte-matched = 773)
+
+| VA | size | shape |
+|----|------|-------|
+| 0x5b2880 | 119 | one-parameter `id = fcn_0042e410(2)` (callee returns `unsigned short`, local is `int`), `sprintf(buf, g_6ab44c, id+0x12)`, log `id+0x20cd`, then a 0x21c-stride table walk from 0x7f4ca4 to 0x85a0a4 |
+| 0x5b2150 | 123 | tag = 0x20b7, else `(*(int*)0x7f4c00 >= 0x75) ? 0x20b9 : 0x20b8`; seven-argument log call with `a3`/`a4`/`a5` in that order |
+| 0x5b2790 | 127 | `sprintf(buf, g_6ab430, id)` then the same table walk from 0x7f4ca2 to 0x85a0a2 checking `al == 6 \|\| al == 7` |
+| 0x579390 | 126 | four calls; `fcn_004c51a0(int,int,char,int)` takes the byte global 0x773d75, `fcn_004c5420(a2->[4],0x1cc,4,1,0)`, log with the `a2` word, then `fcn_00545d40` with `buf` as its **third** argument |
+| 0x4f6ce0 | 113 | `fcn_0050dac0` takes an **`unsigned short`** (`mov cx,[eax]`, no movzx); `n = (int)((float)v * g_6652c8)`; `switch (a2)` on cases 1 and 3 |
+| 0x4f73e0 | 123 | `r = 2;` + `else if` chain — an early `return r` makes the compiler fold `r` to a constant and drop the callee-saved register, so the `else if` form is required |
+| 0x4f7460 | 119 | `(double)*(int*)(a1+0x24) < *(double*)0x6653c8` (plain `test ah,5; jnp` x87 idiom even under the Processor Pack) OR `[a1+0x2c] & 0xfffffff0` |
+
+Recurring codegen rule this round: **a callee's parameter width is visible in the call
+site** — `mov cx,[eax]` (no zero-extension) means the parameter is `unsigned short`,
+and declaring it `int` changes both the register assignment and the byte count.
