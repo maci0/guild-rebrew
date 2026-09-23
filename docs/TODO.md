@@ -37250,3 +37250,26 @@ where a 32-bit one uses the same with `neg eax` (0x4937d0 vs 0x5079f0).
 
 GOLDTL **681 → 687** byte-matched (230 EXACT, 457 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1156 files / 0 warnings.
+
+### Round 1424 — straight-line prospecting, second pass: GOLDTL +5 (692)
+
+Five more from `scripts/straight_line.py`, all first try:
+
+| VA | shape |
+|----|-------|
+| 0x459b80 | six dword stores into one table `0x10405e0` (two constants reused in `ecx`/`eax`) |
+| 0x412cf0 | nine-argument call: `f(a1, a2->a, a2->b, a2->c, a3->a, a3->b, a3->c, a4, a5)` |
+| 0x4b3d40 | store arg2/arg1 into `0x10069a0/0x10069a4`, clear `0x10069a8`, call `sim_SetSyncParams(&g_10069a8, 0,0,0)` |
+| 0x4e46e0 | `char`-returning message builder over a 0x100 local, six args |
+| 0x455240 | `f(a1, (byte[a1+0x214] & 0x20) ? 0 : g_6b8014, 1, buf)` then `g(buf, a2)` |
+
+The masked-ternary idiom recurs: `and cl,0x20 / neg cl / sbb ecx,ecx / not ecx
+/ and ecx,edx` is `(byte & 0x20) ? 0 : g_6b8014`, not a boolean.  Written as
+the ternary the bytes fall out; written as an `if` they do not.
+
+New globals registered: `0x10405e0`, `0x68d538`, `0x14a5c6c`, `0x10405e0`'s
+neighbours, `0x6b8014`/`0x10069a0`-family (annotated elsewhere, so the new
+files use bare externs).
+
+GOLDTL **687 → 692** byte-matched (230 EXACT, 462 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1161 files / 0 warnings.
