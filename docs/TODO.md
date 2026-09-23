@@ -38611,3 +38611,24 @@ Two tool gotchas worth remembering:
   unresolved call is compared raw (`e800000000`).
 
 GOLDTL 803, GOLD 324, server unchanged at 264.  Lint 1273 files / 0 warnings.
+
+Round 181 wall (recorded, file reverted): GOLDTL 0x4f7a50 (196B) is fully
+decoded — `v = *a2; if (v != 3 && v != 1) return 1; if (byte[a1+0xd] < 5)
+return 1;` then two blocks `v == 3 && byte[a1+2] == 6` (logs via
+`fcn_0051af00(buf, 0x1d8b, (char[a1+9] ? 0x11e : 0x114) + byte[a1+0xd])` +
+`fcn_004fa5f0(buf, 0, 0x657c7)`, `return 2`) and `v == 1 && byte[a1+2] == 6`
+(`fcn_0051af00((char*)a2 + 0x14, 0x679060, 0x1d8a)`) — and compiles to **196
+bytes with a byte-identical instruction stream** except one branch target: the
+reference's second condition failure jumps back to the `cmp eax,1` test
+(`jne 0x4f7ae6`), ours jumps straight to the epilogue (`jne 0xb7`), because
+MSVC knows `eax == 3` there and jump-threads the dead `v == 1` test away.  One
+extra instruction vs the reference; 60 vs 60 instructions, same size.
+
+Tried and rejected: two independent `if`s, `else if`, nested
+`if (v == 3) { if (cond) }` + `if (v == 1) { if (cond) }`, explicit
+`goto check1` labels, `switch (v)` (MSVC lowers sparse cases to
+`dec/sub` range tests, a different shape), and the
+`if (v == 3 || v == 1) { ... }` guard form (restructures the early returns).
+The known-value jump threading is not defeatable from the source at /O2; treat
+"second test of a value already compared in the same block-chain" as a wall
+unless a receiver spelling is found.
