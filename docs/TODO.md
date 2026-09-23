@@ -36799,3 +36799,40 @@ New global: `GOLDTL 0x68ae64` (.data, the assert string).
 
 GOLDTL 671 byte-matched (251 EXACT, 420 RELOC), 52 failed, lint 1152 files /
 0 warnings, no demotions.
+
+### Round 1412 — GOLD absorbs the GOLDTL twins: +18 byte-matched (231)
+
+First cross-import run in the GOLD direction:
+
+```
+rebrew cross-import --from Europa1400Gold_TL.exe --target Europa1400Gold.exe \
+    --shared --min-score 100 --json
+```
+
+| outcome | count |
+|---------|-------|
+| `imported-shared` | 18 |
+| `skipped-unverified` NEAR_MATCHING (95–99) | 99 |
+| `skipped-unverified` STUB / EXTRACT_ERROR | 1 / 1 |
+
+The 18 stacked the GOLD marker onto the GOLDTL body in one file (one body, one
+marker per target) and superseded two GOLD stubs (`src/fcn_00449d80.c`,
+`src/fcn_004539a0.c`).  GOLD **213 → 231** byte-matched (96 EXACT, 135 RELOC);
+GOLDTL stayed 671 and server 264 — no demotions.
+
+**The 99 near-matching candidates are the useful residue**: the same C body
+scores 95–99 against the GOLD function at that VA, i.e. the two clients'
+bodies genuinely differ there (not a codegen difference — both use the
+Processor Pack).  Regenerate the list with
+`rebrew cross-import --from Europa1400Gold_TL.exe --target Europa1400Gold.exe --dry-run --shared --json`
+and read the `skipped-unverified` rows; each is a GOLD function whose GOLDTL
+source is close but not identical.  A later round should diff a few: the
+difference is either a TL-only change or a wrong function boundary in GOLD.
+
+**Rebrew fix this round** (upstream, `2b479626`): the import verified only the
+destination's *registry* size, so a stale `// SIZE:` from a superseded skeleton
+produced a false `EXACT MATCH` and the next `rebrew verify --full` flagged
+SIZE_MISMATCH — GOLD `0x00449d80` claimed 23 bytes while the body is 25.  The
+import now never claims less than the matched source body
+(`cross_import.import_size`, four new unit tests); rebrew suite 8070 passed,
+4 pre-existing/order-dependent failures.
