@@ -37097,3 +37097,38 @@ the annotated symbol.
 GOLDTL **671 → 674** byte-matched (230 EXACT, 444 RELOC); GOLD unchanged at 300
 (one candidate reverted); server unchanged at 264.  Lint 1143 files / 0
 warnings.
+
+### Round 1420 — the `start-function` lane: GOLDTL +6 (680)
+
+`rebrew todo --target Europa1400Gold_TL.exe` keeps a `start-function` lane of
+unreversed inventory functions with the best ROI (78/73/71).  Six of them went
+in first try this round:
+
+| VA | shape |
+|----|-------|
+| 0x402ab0 | teardown: field-0x34 call, then `f(a1,0)`, then two guarded cleanups |
+| 0x4056a0 | two stack locals passed to `f(a1,a2,b,a)`, then two `g_6b8014` calls |
+| 0x405130 | walk `*(a1+0x128)`, free field 0xf4 when `byte[e+9]==0x2d`, reload each turn |
+| 0x402ba0 | walk `g_14d0020[0..0x300]`, 247-stride table address, nested count |
+| 0x402c90 | same walk, `a1 == -1 \|\| a1 == g_6b8010`, three-way count condition |
+| 0x402c00 | same walk with four args and a `0x4c`-offset helper call |
+
+The lane is worth re-reading every round: the list **changes as functions
+close** (0x402ff0, 0x403270, 0x401430 left it last round and six new VAs
+appeared).
+
+Two shapes that repeat across the six, both now mechanical:
+
+* the `g_14d0020[0..0x300]` table walks are all **bottom-tested** — write
+  `p = g_14d0020; do { … p++; } while ((int) p < 0x14d0c20);` and the signed
+  `(int)` cast gives the reference's `jl`;
+* a `count` local incremented inside nested conditions lands in a **stack slot**
+  (`inc dword ptr [esp+0x10]`), not a register — the reserved `push ecx` in the
+  prologue is that slot, so do not fight it.
+
+New globals registered: `0x6b8010`, `0x10432c0`, `0x6b5c20`, `0x67536c`
+(`0x6b8014` is annotated in `fcn_00439c60.c`, so the new files use a bare
+`extern` — W021 counts a duplicate annotation).
+
+GOLDTL **674 → 680** byte-matched (230 EXACT, 450 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1149 files / 0 warnings.
