@@ -39365,3 +39365,77 @@ Stop rule: when the object matches instruction-for-instruction except for the
 callee-saved assignment and the constant it refuses to keep in a register, the
 remaining gap is an allocator decision, not a spelling.  Both 0x4f7210 and
 0x4f7310 are this same wall.
+
+Round 243 (task-26): **WALL (near miss)** — GOLDTL `0x4ba2e0` (389B body =
+0x4ba2e0..0x4ba465) stuck at **SIZE_MISMATCH 220/396**.  One `rebrew test` run;
+best source parked (uncommitted) at `.scratch/t26_fcn_004ba2e0_best.c`.
+
+Decode (cdecl, `int fcn_004ba2e0(void* a1)`; a1 = entity record, `*(int*) a1` =
+its search id):
+
+```
+p = fcn_00508e40(*(int*) a1);                    if (p == 0) return 1;
+e = fcn_00503fe0(1, 3, *(unsigned short*) p);
+if (e != 0) {
+    while (e != 0) {                             /* i >= 8 breaks out */
+        if (i >= 8) break;
+        v = fcn_00504bd0(*(unsigned char*) e);
+        if (v == 1 || v == 2) { arr[i] = e; i++; }
+        e = fcn_00503e80();                      /* gm_AddObjekt: next */
+    }
+    if (i != 0) {
+        m = 0;                                                   /* note: before the call */
+        t = arr[fcn_0042e410(i) & 0xffff];                       /* pick one */
+        for (q = g_7f4ca0; q < g_7f4ca0 + 800 * 540; q += 540) {
+            if (m >= 6) break;
+            if (*(char*) (q + 2) == 0 && *(int*) (q + 0x16c) == (int) t &&
+                *(char*) (q + 0x165) != 0) { arr[m] = (void*) q; m++; }
+        }
+        if (m > 1) b = arr[fcn_0042e410(m) & 0xffff];
+        if (t != 0) {
+            if (b != 0) {
+                id = 0x20d + (*(char*) ((char*) b + 9) != 0 ? 0x23 : 0) +
+                    *(unsigned char*) ((char*) b + 0x165);
+                fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7,
+                    id, *(unsigned short*) b, *(unsigned short*) b, id);
+                len = strlen(buf);
+                fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4),
+                    buf, 0x100 < len, 0x603, 0);
+                return 0;
+            }
+        }
+    }
+}
+return 0x400;
+```
+
+Locals: `void* arr[8]` at `[esp+0x10]`, `char buf[0x200]` at `[esp+0x30]`
+(frame `sub esp,0x220`, **not** 0x120 — the buffer is 0x200, which is why the
+frame is 0x220; a 0x100 buffer gives 0x120 and cannot match).
+
+Residual (two localized optimizer/allocator choices, everything else identical):
+instructions 0-71 and 108-141 are **byte-identical**, including `edi` = i/picked
+pointer, `esi` = e/m, `ebp` = p, `ebx` = b; the gap is
+
+1. the second loop's end test.  Reference `add eax,0x21c; cmp eax,0x85a20c; jl`
+   keeps the absolute pointer; the object strength-reduces it to
+   `lea edx,[eax-0x16c]; cmp edx,0x69780; jb` (+7 bytes, +1 instruction), i.e.
+   MSVC6 factors the base symbol out of the trip count.  This is what shifts the
+   whole tail and costs most of the 220/396.
+2. the message id: reference `mov cl,[ebx+9]; …; xor edx,edx; mov dl,[ebx+0x165];
+   and ecx,0x23; add ecx,0x20d; add ecx,edx` (byte in `dl`, cond in `ecx`); the
+   object swaps the two roles (`cl`/`eax`) and folds the two adds into
+   `lea ecx,[eax+ecx+0x20d]`.
+
+New lever that DID work (worth keeping): the reference emits `xor esi,esi`
+(m = 0) **before** the `fcn_0042e410` pick call; moving the source's `m = 0;`
+above `t = arr[…];` was the difference between posdiff 47 and 34 and is what
+aligned `edi`/`esi` to the reference for the whole first loop.
+
+Rejected levers (all byte-identical to the object above, 400B / 141 ins):
+element-base vs `+0x16c`-base loop, `char*` bound as a literal / a separate
+extern symbol / `g_7f4ca0 + 0x69780` / `800 * 540`, `for` vs `while` vs
+`do/while` with the update at the bottom, absolute-literal start+bound, separate
+start/end extern symbols, `q != end`; six spellings of the id expression
+(cond-first, byte-first, three statement splits, `id +=`); declaration order of
+`t`/`b`/`i`/`m`; reusing `e` for the pick and `i` for the second counter.
