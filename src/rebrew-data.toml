@@ -3273,3 +3273,10 @@ section = ".data"
 
 ["GOLDTL.0x00773d84"]
 section = ".data"
+
+["GOLDTL.0x009badd0"]
+type = "int"
+section = ".data"
+
+["GOLDTL.0x00773d38"]
+section = ".data"

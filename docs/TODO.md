@@ -36708,3 +36708,37 @@ must reach the compiler as non-constant or through a type it cannot peel.  That
 is the next probe; nothing was promoted.
 
 GOLDTL unchanged at 642 byte-matched, lint clean, tree clean.
+
+### Round 1409 — the message-builder family unblocked: +16 byte-matched (658)
+
+Round 1408 left a six-member `rep movsd` family blocked because `memcpy` of a
+constant size unrolls.  The answer is that the reference is a **struct
+assignment**, not `memcpy` — written up as section 174 of
+`docs/msvc6-c-shapes.md`.  Mining the shape (`sub esp,0x9c` + tag store +
+`call fcn_004c4330`, 37 untracked inventory functions) gave sixteen new
+byte-matched functions:
+
+| VA | shape | VA | shape |
+|----|-------|----|-------|
+| 0x4c4e70 | `int v[0x20]` struct assign | 0x4c6b60 | packed `{int,int,short}` |
+| 0x4c68c0 | `int v[5]` | 0x4c58f0 | 3 ints, 2nd stored first |
+| 0x4c6a00 | `int v[0xa]` | 0x4ce260 | `memset` 0x80 + 2 dwords |
+| 0x4c6aa0 | `int v[0x12]` | 0x4c5820 | `memcpy` 0x2d + global + inner call |
+| 0x4c6cf0 | `int v[9]` | 0x4ce320 | `memset` + `memcpy` 0x57 from `*a1` |
+| 0x4c6d30 | `int v[6]` | 0x4ce260's SIZE 63 | inventory padding, not code |
+| 0x4c6de0 | `int v[0x20]`, tag 0x67 | 0x4c62c0 | `memcpy` 0x3a (intrinsic rep movsd) |
+| 0x4c6900 | `{int,int,int}` | 0x4c6360 | packed `{int,short,char}` |
+| 0x4c63f0 | packed `{int,int,char}` | | |
+
+All sixteen are RELOC.  New globals: `GOLDTL 0x9badd0` (int, .data) and
+`GOLDTL 0x773d38` (int, .data), both registered with `rebrew data`.
+
+Two family members were tried and deleted rather than parked: **0x4c5b00** and
+**0x4ce210**.  Both have the exact reference instruction sequence and operands;
+the only difference is where msvc6 places the call's `push`, and no statement
+order tried reproduces it (separate scalar params, packed struct by value,
+field-wise stores, named value local).  Both are documented in section 174 and
+can be retried with a flag sweep.
+
+GOLDTL 658 byte-matched (251 EXACT, 407 RELOC), 52 failed, lint 1139 files /
+0 warnings, no demotions.

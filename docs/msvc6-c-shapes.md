@@ -7797,3 +7797,60 @@ their parity is even): the add runs when `st(0) < mem` **or** the comparison is
 unordered — i.e. the C is `if (value < c) value += k;`.  Both `!=` and `<=`
 produce `test ah,0x41 / jnp` instead (same size, NEAR_MATCHING).  Write the
 **less-than** direction, not the complement.
+
+## 174. A constant-size struct assignment is `rep movsd`; `memcpy` of the same size is not
+
+Round 105 of the goal session found a 40-member family of GOLDTL message
+builders, all of one shape:
+
+```asm
+sub  esp, 0x9c
+push esi / push edi
+mov  esi, [esp + 0xa4]          ; the payload pointer
+mov  ecx, COUNT                 ; constant
+lea  edi, [esp + 0x18]          ; buf + 0x10
+lea  eax, [esp + 8]             ; buf
+mov  byte [esp + 8], TAG
+push eax
+rep  movsd es:[edi], [esi]
+call fcn_004c4330
+```
+
+The C is a stack buffer plus two stores:
+
+```c
+char buf[0x9c];
+
+buf[0] = TAG;
+*(Body*) (buf + 0x10) = *a1;    /* struct assignment, NOT memcpy */
+fcn_004c4330(buf);
+```
+
+**`memcpy(buf + 0x10, a1, 20)` produces 44 bytes of unrolled `mov`s** (round
+1408 recorded the family as blocked on this).  The struct assignment of the
+same 20 bytes emits `mov ecx,5 / rep movsd` and matches.  The threshold runs
+the other way for larger counts: at 58 bytes (`memcpy(…, 0x3a)`) the intrinsic
+does emit `mov ecx,0xe / rep movsd / movsw`, so 0x4c62c0 needs `memcpy` while
+the small counts need the struct assignment.  When a `rep movsd` of a constant
+size shows up and `memcpy` unrolls, try a struct assignment; when the copy has
+an odd tail, try `memcpy` with the exact byte count.
+
+**Odd sizes need `#pragma pack(1)`.**  0x4c63f0 copies 9 bytes — a dword, a
+dword and a **byte** at +8 (`mov al,[eax+8] / mov [esp+0x1c],al`).  An
+unpacked `struct { int a; int b; char c; }` has sizeof 12 and msvc6 copies all
+three dwords; wrapping the typedef in `#pragma pack(push,1)` / `#pragma pack(pop)`
+gives sizeof 9 and the member-wise dword/dword/byte copy the reference has.
+Same for `{ int; int; short; }` (10, `0x4c6b60`) and `{ int; short; char; }`
+(7, `0x4c6360`).
+
+**Inventory sizes include trailing padding.**  0x4ce260's inventory entry says
+74 bytes; the body ends at 63 and the last two "target instructions" in
+`rebrew diff` are the next function's `nop` + `sub esp,0xe4`.  When `rebrew
+diff` reports *0 structural differences* and only "target instruction(s) not yet
+decompiled", set `// SIZE:` to the matched extent (the candidate's own size) —
+the file then promotes from SIZE_MISMATCH to RELOC with no code change.
+
+**Two of the family are scheduling-hard** and were left reversed: 0x4c5b00 and
+0x4ce210 have the right instructions and the right operands but the reference
+hoists the call's `push` later than msvc6 does for any statement order tried
+(struct param, `#pragma pack(1)` param, field-wise stores, named value local).
