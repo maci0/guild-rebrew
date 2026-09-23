@@ -38405,3 +38405,31 @@ player slots through `_gm_AllocSpieler`.
 GOLDTL 795 → 796, GOLD 318 → 319 byte-matched; server unchanged at 264.
 Lint 1265 files / 0 warnings.  `rebrew test` touched only these two entries in
 `src/rebrew-functions.toml`, so both are committed with their sources.
+
+Round 174: the next free `fcn_0051af00` caller, `fcn_005b24b0` (0x5b24b0, 162B) —
+the 7-argument variant of the family with a message-id computed from
+`*(char*)(a2+9)`.  The whole function hinges on one expression, now
+`docs/msvc6-c-shapes.md` section 182: the reference's
+`and ecx,3 / add ecx,0x1330 / add eax,ecx` is a **two-constant ternary**
+(`cond ? 0x1333 : 0x1330`), while the equivalent `0x1330 + (cond ? 3 : 0)` fuses
+into a three-term LEA (`lea edx,[eax+ecx+0x1330]`), one byte short, with the
+follow-on register assignment wrong as well.  Five alternative spellings
+(constant first, `(unsigned char)` condition, whole-sum cast, comma-operator
+temporary) all fuse or hoist; the ternary is the only one that matches.
+
+The GOLD twin is at 0x5a9030 and is byte-identical modulo three data addresses
+and three callees, so this round also exercised the **shared-file** mechanism:
+one file carrying `// FUNCTION: GOLDTL` + `// FUNCTION: GOLD` and, for each
+differing global, a pair of `// GLOBAL: GOLDTL 0x… / // GLOBAL: GOLD 0x…`
+markers under one symbol name (0x774a80/0x6f26c8, 0x773d75/0x6f1bc5,
+0x868060/0x7e3f40).  A dual marker alone is **not** enough: an absolute address
+in `mov r,[abs]` or `lea r,[…+abs]` is an instruction immediate with no
+relocation record, so the GOLDTL literal survives into the GOLD compare (6-byte
+mismatch at the first absolute load).  The per-target GLOBAL markers fix it and
+both targets come back RELOC 162/162 from the same source.  The markers cost 6
+W016 warnings until `rebrew lint --fix --all-targets` backfilled their SECTIONs
+in `src/rebrew-data.toml` (0 warnings after; the data file is read-only, which
+is why the tool, not a hand edit, has to do it).
+
+GOLDTL 796 → 797, GOLD 319 → 320; server unchanged at 264.  Lint 1267 files /
+0 warnings.

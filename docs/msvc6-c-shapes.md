@@ -8039,3 +8039,35 @@ order after the loop (`if (i < 0x300) { store; return p; } fail;`) is what keeps
 the found path inline and the failure epilogue out of line — the mirrored
 `if (i >= 0x300) { fail } store;` order inverts only that last compare's
 polarity (`jl` against `jge`) and no longer matches.
+
+## 182. `K + (c ? 3 : 0)` fuses into an LEA; `c ? K+3 : K` does not
+
+Measured on the GOLDTL/GOLD shared `fcn_005b24b0` / `fcn_005a9030` (162B), whose
+4th log argument is one of two adjacent message ids:
+
+```
+mov cl,[esi+9] / neg cl / sbb ecx,ecx / and ecx,3 / add ecx,0x1330 / add eax,ecx
+```
+
+The obvious spelling `(rand() & 0xffff) + (0x1330 + (cond ? 3 : 0))` does **not**
+produce it: MSVC folds the constant into a three-term LEA
+(`lea edx,[eax+ecx+0x1330]`), one byte short, and the follow-on register
+assignment then differs too (the sum lands in `edx` instead of `eax`, so the
+next word load picks `ecx`/`ax` instead of the zeroed `edx`).  All of these
+were tried and all fuse: the same sum with the constant first, with an explicit
+`(unsigned char)` condition, with an `(int)` cast around the whole sum, and with
+the condition materialised through the comma operator — the last one instead
+hoists the temporary into `edi` across the call.
+
+What reproduces the reference is writing the message id as a **two-constant
+ternary**:
+
+```c
+    (fcn_0042e410(3) & 0xffff) + (*(char*) ((char*) a2 + 9) ? 0x1333 : 0x1330)
+```
+
+MSVC lowers a constant-pair ternary whose difference is a small mask as
+`neg/sbb/and (K1-K2); add K2`, and that `add K2` is then a real instruction, not
+a displacement — so the outer sum stays `add eax,ecx`.  Rule: when a reference
+has `and reg,N; add reg,K; add acc,reg` for a condition-dependent constant, the
+source wrote the two full constants in a ternary, not `K + (c ? N : 0)`.
