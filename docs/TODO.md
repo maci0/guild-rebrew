@@ -38766,6 +38766,12 @@ symbol" case:
 GOLDTL unchanged at 806, GOLD 328 → 329; server unchanged at 264.  Lint 1275
 files / 0 warnings.
 
+Round 188: re-ran the same matcher with the destination size forced to the
+source file's SIZE (`--size <src>`), which removes the size-mismatch noise and
+leaves 37 hits; the first ten were tested and every one came back
+SIZE_MISMATCH/NEAR/STUB and was reverted.  The normalised-body method is
+**exhausted** — it only ever finds pairs whose differences are relocation slots.
+
 Round 187 (negative result, no source change): built `.scratch/dupbodies.py`,
 which capstone-disassembles every GOLDTL inventory function, normalises each to
 `mnemonic + operands with every 0x… token replaced by I`, and hashes it to find
