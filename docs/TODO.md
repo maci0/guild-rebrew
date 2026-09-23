@@ -37711,3 +37711,23 @@ why MSVC 6 declines to hoist the restore there.
 Recurring codegen rule this round: **a callee's parameter width is visible in the call
 site** — `mov cx,[eax]` (no zero-extension) means the parameter is `unsigned short`,
 and declaring it `int` changes both the register assignment and the byte count.
+
+## Round 139 — GOLDTL: switch-shared bodies and an inverted `||` disjunct (+2 = 775)
+
+* `fcn_005b2ee0` (0x5b2ee0, 124B): `switch (fcn_0051e070())` with `case 0:`/`case 2:`
+  sharing one body (both call `fcn_0042e410(3)` inside the argument list) and
+  `case 1:` passing the same two trailing arguments **swapped**.  MSVC shares the
+  common tail of the two calls and lands `case 1` in the middle of `case 0`'s
+  push sequence.
+* `fcn_005b2350` (0x5b2350, 133B): two `t`-guarded blocks.  `t == 6 || t == 7`
+  compiles to `cmp al,6; je BODY; cmp al,7; jne SKIP`, but the reference has
+  `je SKIP` — the second disjunct is **negated**, i.e. the source reads
+  `t == 6 || t != 7` (logically just `t != 7`).  One byte per block (2 in the
+  function); nothing else distinguishes the shapes.
+
+Also: `fcn_004fa530` (0x4fa530) was left unmatched and deleted — semantically the
+C is clear (`v ∈ {1,3}`, `c = *(u8*)(a1+0x166)`, `c != 0 && c <= 0x1b`, then the
+`v == 3 / v == 1` pair), but the reference holds `r = 2` in **eax** while every
+spelling we tried makes MSVC either fold `r` to a constant or place it in a
+callee-saved register (`edi`), and it keeps the byte in `bl`.  Same class as
+0x5dd050: a register-restore/placement decision our CL build does not reproduce.
