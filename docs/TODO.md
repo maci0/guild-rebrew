@@ -37920,3 +37920,28 @@ fcn_0051af00(buf, tag, *(unsigned short*) e, *(unsigned short*) e);
   while our CL pushes `0x400000` as an immediate and swaps the `&out1` register.
   Same constant-in-a-register divergence as 0x4fa530; the rest of the function
   (two out-parameter guards, the float ratio block, the tail) is exact.
+
+## Round 146 — two blocked shapes found in the todo list
+
+* `fcn_004f75f0` (0x4f75f0, 210B, new) — reached **209/210** and then stopped: the
+  body is the `v ∈ {1,3}` + `b = *(u8*)(a1+0xd)` triad (`b > 3 → 4`, `b < 3 → 1`,
+  `b == 3` body) with the log tag written as the two-constant ternary
+  `(a1[9] ? 0x11e : 0x114) + b` (that literal form is required — the `?0xa:0`
+  spelling folds into `lea`).  The single remaining byte is MSVC **jump
+  threading**: after `if (v == 3 && t == 6) { …; return 2; }` our CL jumps the
+  `t != 6` path straight to `return 2`, while the reference re-enters the
+  `if (v == 1 && t == 6)` test.  Nested `if`s, `else if`, mixed `char`/`unsigned
+  char` reads and a `volatile` read all thread identically;
+  `rebrew match --flag-sweep-only` reports every flag candidate at 1400.00
+  (100 % mnemonic match, one structural).  Candidate deleted.
+* `fcn_004011a0` (0x4011a0, 34B, new) — the reference keeps the loop variable in
+  **eax** (`mov eax,[esp+8]; dec eax;` then `lea esi,[eax+1] … mov eax,esi`), so
+  the parameter is the induction variable and is re-committed after the call;
+  every spelling (`a2--; do { f(a1, ++a2); } while (*a2)`, a `char* p = a2 - 1`,
+  `for (i = a2 - 1;;) { … break; }`, `while (1)`) puts it in `esi` instead.
+  34 bytes, one allocator decision.  Candidate deleted.
+
+Both are the same class as 0x5dd050/0x4fa530/0x4ea4b0/0x5b23e0: our CL and the
+reference build differ in a scheduling/allocator choice that no source spelling
+reaches.  Worth a dedicated look at the compiler image before more of these are
+attempted.
