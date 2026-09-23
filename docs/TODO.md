@@ -36148,3 +36148,33 @@ reference calls.  `RecvGameSavegame` stays until that function is reversed.
 Unaccounted tail: 0x238 bytes between the last mapped symbol (0x100238a0) and
 the section end (0x10023ad8) carry no map symbol — find what emits them (thunk
 blob / pad object) before assuming the stub path is the only lever.
+
+### Round 1388 — the `.text` tail is 100 linker-synthesized import thunks
+
+The 0x238 unaccounted bytes from round 1387 are **import thunks**: the map's
+tail entries at 0x10023a60..0x10023ad2 are not `*.obj` but
+`KERNEL32:KERNEL32.dll`, `USER32:USER32.dll`, `WS2_32:WS2_32.dll`,
+`WINMM:WINMM.dll` — one 6-byte `jmp dword ptr [IAT]` thunk per import,
+100 of them = ~600 bytes, appended after the stubs.
+
+The reference has only **11** `ff 25` thunks inside `.text`:
+
+```
+0x10015513, 0x1001a160, 0x1001a166, 0x1001a16c, 0x1001a172,
+0x1001a178, 0x1001a17e, 0x1001a184, 0x10021eda, 0x10021eef, 0x10023840
+```
+
+So the reference resolves its imports through the IAT (`call dword ptr
+[__imp_X]`, MSVC's `dllimport` form); our composition asks for the same symbols
+*by name* somewhere, and LINK synthesizes a thunk per symbol and appends them
+past the reference end.  That is what holds `.text` VirtualSize at 0x22ad8
+against the reference's 0x22846 — the stub path of rounds 1385-1386 was only
+ever the small part (32 bytes of 658).
+
+Next step: find which translation units reference the imports by name instead
+of through `__declspec(dllimport)` / the `__imp_` prefix (the CRT-region files
+are the likely callers; the game TUs already emit `ff 15` forms, which is why
+their call sites byte-match), and switch them.  Each conversion removes one
+thunk from the tail.  Verify with `.text` VirtualSize and the map tail, and
+expect the linker to stop pulling `KERNEL32.lib` thunks at all once every
+reference is `__imp_`-based.
