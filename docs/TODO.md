@@ -36401,3 +36401,27 @@ Two shape findings this round:
 
 GOLDTL: 620 byte-matched (251 exact, 369 reloc), failed 52, lint 1102/1102 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1397 — GOLDTL 620 -> 623 (three more from the pool)
+
+| VA | shape | result |
+|----|-------|--------|
+| 0x4dfef0 | `fcn_00508cf0(a1, 0x9afe00); *(int*)0x68bfc8 = a1; *(int*)0x772f60 = 0;` | RELOC 37 |
+| 0x50f750 | 7-argument dispatch: `fcn_00472c30(a1,a2,a3,a4,0x58,0x1f,0x14)` | RELOC 35 |
+| 0x5107f0 | `fcn_00546b80(a1); if (*(int*)0x773dd8) fcn_004550b0(a1, handle);` | RELOC 35 |
+
+Parked, both with a measured reason:
+
+- `0x450a00` (38B): the reference's trailing `dec dword [0x6b86d4]` is an RMW
+  even though a call sits between the load and the decrement; every spelling
+  tried (`--`, `-= 1`, with and without an intervening local) makes the compiler
+  reload into a register and store back (object 43).  The increment side is a
+  plain load/inc/store, so the two accesses are deliberately asymmetric — the
+  missing piece is what tells msvc6 the call cannot alias this global.
+- `0x4011a0` (34B): the reference is a bottom-tested call loop with the argument
+  pointer materialised through `dec eax / lea esi,[eax+1]`; `while (*p) call(p)`
+  compiles to 34 bytes but scores STUB, and `do { call(p); } while (*p)` collapses
+  to 29.  Needs the loop shape that produces that initial dec/lea pair.
+
+GOLDTL: 623 byte-matched (251 exact, 372 reloc), failed 52, lint 1105/1105 zero
+warnings.  SERVER/GOLD untouched.
