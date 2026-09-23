@@ -39626,3 +39626,35 @@ above (folded epilogue, conservative/shared callee-saved saves, slot inversion,
 loop-bound strength reduction, constant materialisation) plus unwritten
 functions; the delegation loop in the Handover section is the fastest known way
 to keep converting the fresh ones.
+
+Round 251 (task-36, second VA): **WALL** — GOLDTL `0x5b3000` (188B) stuck at
+**SIZE_MISMATCH 108/188** (obj 187B).  One `rebrew test` run; best source parked
+at `.scratch/t36_fcn_005b3000_best.c`.
+
+Decode (cdecl, `void fcn_005b3000(void* a1, void* a2, void* a3, int a4)`):
+
+```
+fcn_0051af00(g_774a80, 0x40ad, 0x40a3, *(unsigned short*) a2,
+    *(int*) ((char*) a2 + 0x16c), *(unsigned short*) a3);
+if (a4 != 0) {
+    id = 0x20d + (*(char*) ((char*) a2 + 9) != 0 ? 0x23 : 0) +
+        *(unsigned char*) ((char*) a2 + 0x165);
+    fcn_0051af00(g_774e80, 0x40ae, id);
+    strcat(g_774a80, g_774e80);          /* the repne scasb / rep movsd idiom */
+}
+fcn_00545d40(*(int*) ((char*) a1 + 4), -1, g_774a80, 0, 0x5fa, g_6ab50c);
+```
+
+Residual: **the round-241/245 message-id `lea` fold again.**  The reference
+emits `and ecx,0x23; add ecx,0x20d; add ecx,edx`; our build always folds the
+last two into `lea eax,[ecx+edx+0x20d]`, so the object is one instruction
+shorter from offset 0x4e on.  Tried `id = 0x20d + cond + c` in one statement,
+split over two and three statements, `cond` first, `c` first - the `lea`
+survives all of them.  Everything else (the 6-argument fcn_0051af00 with the
+`*(int*) ((char*) a2 + 0x16c)` argument, the `strcat` expansion, the
+fcn_00545d40 flush) matched.
+
+Also for the record: `0x5c1090` (122B) **closed** in this batch (commit
+`4852e671`, GOLD twin `0x5b5760` found by scanning for
+`8b 44 24 04 81 ec 90 00 00 00 85 c0 74`); its field-store order is
+offset 4, then 0x10, then the two globals - the plain order does not match.
