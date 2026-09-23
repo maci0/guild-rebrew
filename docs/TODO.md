@@ -37354,3 +37354,25 @@ where every spelling here reloads it), `fcn_004f5c40` (35/39, eax vs ecx in the
 
 GOLDTL **699 → 702** byte-matched (230 EXACT, 472 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1171 files / 0 warnings.
+
+### Round 1428 — branched prospecting, second pass: GOLDTL +3 (705)
+
+| VA | shape |
+|----|-------|
+| 0x525eb0 | `f(g_525e90, 0x47)` then two `memset`s of 0x300 and 0x100 at literal addresses |
+| 0x4f1a10 | guard `if (a2 == 0 \|\| *a2 == -1) return 0;` then a five-arg table search |
+| 0x545550 | three sequential checks, each `return 1` on success, last one `!= 0` |
+
+The `straight_line.py 160 2` pool (166 candidates) is now the main GOLDTL lane;
+these are the 42–48 byte members.  All three had inventory sizes 4–5 bytes
+longer than the real body — `rebrew test` reports the true extent anyway.
+
+One candidate deleted: `fcn_004bcab0` (0x4bcab0) — the reference stores into a
+global table and then *reloads the same slot* before incrementing the index, so
+the compiler must not fold `g[i] = r; return g[i];` into `return r;`.
+Declaring the table `volatile` stops the fold (right size) but the index is
+still hoisted into `esi` before the call where the reference loads it into
+`ecx` after.
+
+GOLDTL **702 → 705** byte-matched (230 EXACT, 475 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1174 files / 0 warnings.
