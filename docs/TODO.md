@@ -35889,3 +35889,25 @@ to a generator family the target's binary does not use, and the toolchain
 alignment check now reports `code generator=plain aligned=True` for the server.
 Pre-existing red items are unchanged (residue 11735 > 8628 baseline, raw-link
 .data 22749 > 21481, wine load err=193, 1 GOLDTL D3DX8 lib-match finding).
+
+### Round 1380 — server worklist cleared of phantoms; clients assessed as reference
+
+`rebrew todo` was lying about what is left: 11 of the server's top 20 items were
+`// LIBRARY:` rows from `library_msvc.h` (annotation-only markers, `#if 0`), and
+20 more were GOLDTL data symbols leaking through `_collect_start_data`, which
+iterated every module in the shared data metadata.  Both fixed upstream
+(`collect_all(..., exclude_vas=external_vas(...))`, marker-scoped start-data;
+tests in tests/test_todo.py).  The server's real worklist is now **2 function
+items** (`gm_AllocSpieler`, `ServerMainThread@4`) plus the 17 PROVEN carriers
+and the link shortfall.
+
+Assessed the clients as a reference for those carriers (docs/general-knowledge.md,
+"Using the two clients as a reference"):
+- 0 cross-import candidates above score 95 GOLDTL->server; the client twins of
+  the 19 carriers are themselves unmatched, so no client C can be stacked.
+- 6 carriers have same-named client markers; comparing reference sizes against
+  the profile-induced size delta shows at least three pairs are divergent
+  source, not divergent codegen (ahm_ExAllocAlchemist: server 1002 vs GOLDTL
+  1088 while the same body compiles to 1002 under both profiles).
+- Closest carrier measured precisely: `gm_CalculateProductionValue` is 2
+  structural diffs in 396 bytes (fxch/cmp scheduler order).

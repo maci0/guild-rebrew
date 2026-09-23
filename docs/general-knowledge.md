@@ -561,3 +561,58 @@ byte-matched, gate residue 11735, raw-link `.data` 22749 and imports 100 —
 identical to the pinned build.  `scripts/gate.sh` now fails if a pin of the
 other generator family appears, and `rebrew toolchain detect` refuses the pack
 profile for the server target.
+
+## Using the two clients as a reference for the remaining server work (round 1380)
+
+Where server.dll stands: 283 annotated functions, 264 byte-matched (31 EXACT,
+233 RELOC), 17 PROVEN, 1 NEAR (`ServerMainThread@4`), 1 STUB
+(`gm_AllocSpieler`), and the link is 0x620 bytes short of the reference
+`.text` (residue 11735).  `rebrew todo` now lists exactly two function items
+once library and other-target rows are filtered out of it.
+
+What the clients can and cannot give:
+
+1. **They do not carry the server's missing C.** `cross-import --from
+   GOLDTL --target server.dll` finds 0 candidates above score 95 (1 at score
+   83): for every server carrier the client twin is itself unmatched, so there
+   is no verified client body to stack.  Six carriers do have a same-named
+   client marker (below); none of those client bodies is byte-matched either.
+2. **Same-named client twins are not always the same function.** Compiling
+   the shared body under BOTH profiles gives the same object size for
+   `ahm_ExAllocAlchemist` (1002/1002), yet the two references differ by 86
+   bytes (server 1002, GOLDTL 1088) and there is no x87-compare delta to
+   explain it.  The TL client's copy of that function is built from different
+   source.  Compare reference sizes before trusting any twin:
+
+   | function | server VA | server ref | GOLDTL VA | GOLDTL ref | our obj sp6 / pp |
+   |----------|-----------|-----------|-----------|------------|------------------|
+   | `cm_ExProdObjekt` | 0x1000e140 | 993 | 0x4c35f0 | 960 | 993 / 991 |
+   | `vfs_ReadCompressed` | 0x10008a90 | 492 | 0x465350 | 496 | 492 / 492 |
+   | `vfs_OpenStream` | 0x10009020 | 667 | 0x430cb0 | 704 | 701 / 685 |
+   | `ahm_ExAllocAlchemist` | 0x1000bdf0 | 1002 | 0x4ee290 | 1088 | 1002 / 1002 |
+   | `gm_AllocGebaeude` | 0x100174d0 | 1088 | 0x5974e0 | 1113 | 1078 / 1074 |
+   | `gv_ExAllocGraveyardWorker` | 0x10011bf0 | 1040 | 0x4f3310 | 992 | 1040 / 1000 |
+
+   Three of the six pairs differ by more than the profile change can move the
+   same body, so they are divergent source, not divergent codegen.
+3. **The profiler that still pays is the server's own bytes plus the
+   documented levers.** Every one of the 19 carriers has a `docs/msvc6-*.md`
+   entry with the shapes already spent; the first divergence census is the
+   fastest triage:
+
+   ```
+   python3 scripts/first_divergence.py        # per carrier: first differing byte
+   python3 scripts/whathas.py 0x<VA>          # what is already recorded there
+   rebrew diff 0x<VA> --target server.dll     # structural vs reloc-only (`~~`)
+   ```
+
+   The closest carrier, `gm_CalculateProductionValue` (0x10019720), is down to
+   **2 structural diffs** in 396 bytes: the reference orders `fxch st(1)`
+   before an independent `cmp byte ptr [esi], 0x17`, our build after it — a
+   scheduler tie-break on already-correct C, and the file records six
+   reassociations that were tried and are worse.
+
+4. **Two tool bugs were hiding the real worklist** (fixed this round):
+   `rebrew todo` offered the `// LIBRARY:` rows in `library_msvc.h` as
+   "improve-match" items (11 of the top 20) and listed 20 GOLDTL data symbols
+   in the server's todo because one metadata file serves the unified tree.
