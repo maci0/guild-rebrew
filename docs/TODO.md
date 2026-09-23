@@ -38150,3 +38150,9 @@ GOLD verify: 311 byte-matched (was 308).  `cm_ChkCutsceneReady.c` (GOLD 0x4f4130
 was reverted: after the 0x7f4ca0 fix its loop bound `row < 0x9a3804` needed
 GOLD 0x91f6e4, but spelling it as a symbol changed the compare's encoding and the
 next diff moved to offset 60 — that one needs the literal/symbol form probed.
+
+Follow-up: the paired `// GLOBAL:` markers are **not** needed in the twin files —
+with the symbol→address mapping recorded in `rebrew-data.toml`, a bare
+`extern char g_7f4ca0[];` keeps the GOLD body matching, and dropping them clears
+W021 (duplicate annotation: g_7f4ca0 already lives in `fcn_004cef70.c`) and W016
+(0x773da8/0x6f1bf8 have no data section to name).  Lint back to 0 warnings.

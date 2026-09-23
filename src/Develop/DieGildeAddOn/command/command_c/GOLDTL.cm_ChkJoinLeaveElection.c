@@ -15,13 +15,9 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * in the election slots and an empty slot exists. For 'leav',
  * verifies the player is actually in a slot. */
 
-// GLOBAL: GOLDTL 0x773da8
 extern unsigned int g_773da8;
-// GLOBAL: GOLD 0x6f1bf8
 extern unsigned int g_773da8;
-// GLOBAL: GOLDTL 0x7f4ca0
 extern char g_7f4ca0[];
-// GLOBAL: GOLD 0x770b80
 extern char g_7f4ca0[];
 // FUNCTION: GOLD 0x4c6870
 // SIZE: 336

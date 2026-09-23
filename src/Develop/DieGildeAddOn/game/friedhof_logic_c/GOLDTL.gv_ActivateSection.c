@@ -1,8 +1,6 @@
 /* gv_ActivateSection - proper C */
 
-// GLOBAL: GOLDTL 0x7f4ca0
 extern char g_7f4ca0[];
-// GLOBAL: GOLD 0x770b80
 extern char g_7f4ca0[];
 // FUNCTION: GOLD 0x4f0af0
 // SIZE: 304
