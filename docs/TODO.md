@@ -39658,3 +39658,20 @@ Also for the record: `0x5c1090` (122B) **closed** in this batch (commit
 `4852e671`, GOLD twin `0x5b5760` found by scanning for
 `8b 44 24 04 81 ec 90 00 00 00 85 c0 74`); its field-store order is
 offset 4, then 0x10, then the two globals - the plain order does not match.
+
+Post-cap batch (task-36, verified by the Lead with `rebrew test` on both targets):
+
+* `4852e671` — GOLDTL 0x5c1090 **RELOC 122/122** + GOLD 0x5b5760 **RELOC 122/122**
+  (6 relocs).  Lever: field stores must be ordered offset 4, then 0x10, then the
+  globals at 8/0xc, with `g_666018`/`g_66601c`/`g_5c0d90` as symbols.
+* `d9b49a3c` — GOLDTL 0x577790 **RELOC 186/186** + GOLD 0x56f340 **RELOC 186/186**
+  (8 relocs), first draft byte-exact modulo relocs.
+* `3a41a2de` — wall: 0x5b3000 SIZE_MISMATCH 108/188, the **message-id `lea` fold**
+  again (reference `and ecx,0x23; add ecx,0x20d; add ecx,edx`; ours always folds
+  to `lea`).  Third case of this class (0x4f7310, 0x4b7800, now 0x5b3000); it is
+  the single highest-value remaining wall.  Parked source in `.scratch/`.
+
+Updated byte-matched totals: **GOLDTL 831**, **GOLD 352**, server 264; lint 0
+warnings.  Remaining docs-clean open callers (smallest first) reported by the
+teammate: 0x54f3b0, 0x57c530, 0x551050, 0x57c420, 0x58ff60, 0x576b40/0x578380,
+0x5df8f0/0x5dce00/0x57d9e0.
