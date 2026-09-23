@@ -39499,3 +39499,25 @@ int/unsigned/long/pointer/char/short types for the constants; literals (0, 0.0f,
 (float) 0), locals assigned 0/0x400000 (folded back to `push imm`), and
 assignment expressions in the call (`(v[0] = 0x400000)`, `(v[1] = 0)`) which add
 dead stores instead of register materialisation.
+
+Round 245 (task-27) reusable levers, recorded for the whole tree (the delegated
+teammate could not write docs):
+
+* **Two adjacent 4-byte locals must be one array.**  Declared separately, MSVC6
+  assigns their stack slots in *first-use* order, invariant to declaration order,
+  which reproduces the wrong offset.  `int v[2]` with `&v[0]` / `v[1]` / `&v[1]`
+  gives the reference's 0xc/0x10 slots exactly (0x4b7800).
+* **`char buf[0x200]`** is required (not 0x100) for a `sub esp,0x214` frame.
+* **`fcn_0050dac0` takes an `unsigned short`** parameter: that yields `mov cx`
+  without a preceding `xor`.
+* Hoisting a loop counter's `= 0` initialiser *before* the pick call realigned a
+  whole loop's register roles at 0x4ba2e0 (posdiff 47 → 34).
+
+Wall classes now measured (all "identical instructions, one optimizer choice"):
+folded epilogue (0x4ae2a0, 0x4ae3c0), callee-saved colour under-allocation
+(0x4e04f0, 0x4f7210, 0x4f7310, 0x5dd4e0), slot inversion (0x4af050), loop-bound
+strength reduction (0x4ba2e0), constant materialisation into registers before
+`push` (0x4b7800), x87 operand order (0x4baf60 — **closed** by a float temporary
+split).  Before spending runs on a new VA, skim these notes: several are
+systemic to the whole compiler-image, so the cheap path is to keep harvesting
+fresh families and leave the colour/strength-reduction VAs documented.
