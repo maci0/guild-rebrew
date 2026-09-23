@@ -37662,3 +37662,36 @@ arithmetic that cost most of this round — pending argument pushes must be
 counted, and two of these nine were wrong-parameter bugs, not codegen bugs.
 Lint: drop a `// GLOBAL:` marker for a VA that has no data section (W016); the
 0x6ab5xx family is string data, not globals.
+
+## Round 137 — GOLDTL 0x5dd050/0x5dd0c0/0x5dd130: unresolved epilogue divergence
+
+`fcn_005dd050` (0x5dd050) matched the reference byte for byte **except the
+`pop esi` placement**.  Reference (112B):
+
+```
+85c0        test eax,eax
+7418        je   <fail>
+... call fcn_005dcf40(r, 1)
+b801000000  mov eax,1
+5e          pop esi          <- pop in BOTH epilogues
+81c400010000 add esp,0x100
+c3          ret
+33c0        xor eax,eax
+5e          pop esi
+81c400010000 add esp,0x100
+c3          ret
+```
+
+Every spelling of the source produced the *hoisted* form instead
+(`test eax,eax; pop esi; je <fail>` with one pop, 107B): `if (r != 0) { … return
+1; } return 0;`, the `else` form, `if (r)`, `if (0 != r)`, `r` as `int`, `r`
+initialised at declaration, `goto`-free switch with `case 6`, dead extra
+pointer, local-order swap.  Flags do not explain it either: `/O1`, `/Os`,
+`/Ob0`, `/Ox`, `/G6`, `/G5`, `/GB` and the plain `msvc-6.0-sp5`/`sp6` profiles
+all hoist.  The reference's compiler build evidently ran its register-restore
+placement differently for this TU.
+
+`0x5dd0c0` and `0x5dd130` are the same shape with a different second argument
+(`push 3`), so they carry the same divergence.  Per the tree rule the candidate
+was **deleted**, not parked.  Revisit only with a pass-level explanation of
+why MSVC 6 declines to hoist the restore there.
