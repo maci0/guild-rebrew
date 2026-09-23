@@ -38315,3 +38315,15 @@ returns 4288 rows all `action = "skipped"` with `status = ""`.  The working
 `.scratch/ci_gold.json` (34 usable rows) therefore predates a CLI change in the
 shared rebrew checkout — recover the invocation from that checkout's history
 (`git log -p` on the cross-import module) rather than re-deriving the flags.
+
+Cross-import, SOLVED: the missing flag is **`--min-score 80`**.  With the default
+95 the GOLDTL→GOLD run reports `action = "skipped"` for every row (4283+4 rows,
+"no unambiguous match above threshold"); with `--min-score 80` it reports 90
+`would-import-shared` rows — exactly the classification
+`scripts/twin_marker.py` filters on.  The old 34-row list must have come from a
+score just under 95 (the higher scores are already-imported/identical bodies).
+
+Caveat measured with a 20-candidate batch: the 80-score band is mostly *structural*
+siblings, not byte twins — all 20 rows came back SIZE_MISMATCH/NEAR_MATCHING and
+were reverted.  The next pass should sweep the band (e.g. `--min-score 90`, 94) and
+run the marker script per band, promoting only RELOC/EXACT rows.
