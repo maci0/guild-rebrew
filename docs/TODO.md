@@ -37795,3 +37795,17 @@ source order tried — `f4,f10,f8,fc`, `f8,fc,f4,f10`, explicit `int a,b` tempor
 `/Os`, `/Ot` — puts the stores on the wrong side of the pushes (84–90 of 122 bytes).
 Candidate deleted, not parked.  Next attempt should probe the scheduler with the
 frame already fixed rather than re-deriving the layout.
+
+### 0x4ea4b0 — same allocator divergence, flags excluded
+
+`fcn_004ea4b0` (0x4ea4b0, 176B) is the table-walking family shape and reaches
+150/176: prologue, the three-way `t == 6 || t == 7 || t == 5` test, the whole loop
+and the epilogue are exact.  The only difference is where `a2` lives while the tag
+is built — the reference does `push esi; mov esi,[esp+0x20c]` and `add eax, 0x253;
+add eax, esi`, our CL keeps it in `edx` and folds the two adds into
+`lea eax,[eax+edx+0x253]`.  `rebrew match --flag-sweep-only` reports 38900.00 for
+every candidate (including `/G3`–`/G6`, `/Oy`, `/Op`): flags do not explain it.
+Three such cases now (0x5dd050 `pop` placement, 0x4fa530 `r` in `eax`, here `esi`
+for a parameter) — the reference build places register saves/restores and picks
+callee-saved registers differently in some TUs, and no source spelling we can write
+moves our CL.
