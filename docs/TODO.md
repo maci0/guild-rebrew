@@ -36602,3 +36602,23 @@ Parked:
 
 GOLDTL: 635 byte-matched (251 exact, 384 reloc), failed 52, lint 1116/1116 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1405 — GOLDTL 635 -> 638 (two float slots + the parked register)
+
+| VA | shape | result |
+|----|-------|--------|
+| 0x44d290 | `value = fcn_0064d62e(fcn_0064f026(0, 0x662d18)); base = *(char**)(a2+0x10); *(float*)(base + *(int*)(a2+8)*0xe0 + 0xd0) = value;` | RELOC 51 |
+| 0x44d2d0 | identical with the 0xd4 slot — the pair differs only in the last displacement | RELOC 51 |
+| 0x4d36b0 | the round-1403 parked register, **fixed by reading the table index into a local**: `index = *(int*)0x772f10; table[index] = a1; *(int*)0x772f10 = index + 1;` | RELOC 47 |
+
+The `0x4d36b0` fix is the useful result: the reference writes the index back
+with `mov [mem],eax` after `inc eax`, i.e. it holds the index in a register
+across the store.  Computing the address inline re-reads the global and costs 7
+bytes; a named `index` local makes the compiler keep the single load.
+
+`0x5355f0` (50B) parked: guard on `*(int*)0x6a2bf8 != -1`, release call, then
+three `= -1` stores.  Reject-first (`== -1 → return`) and the nested-positive
+guard both give STUB at the right size.
+
+GOLDTL: 638 byte-matched (251 exact, 387 reloc), failed 52, lint 1119/1119 zero
+warnings.  SERVER/GOLD untouched.
