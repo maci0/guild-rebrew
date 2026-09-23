@@ -38198,3 +38198,34 @@ addresses, one status flipped to `COMPILE_ERROR`).  They are not mine and were
 left untouched; with them in place GOLD verify reports 316 byte-matched (steady)
 but `compile_error = 3` and `matching` 23 → 22.  Whoever owns them needs to
 finish or revert before the gate is meaningful.
+
+## Round 158 — 0x58b9c0 (+1 GOLDTL = 795)
+
+`fcn_0058b9c0` (0x58b9c0, 90B — the inventory's 96 includes padding):
+
+```c
+void __cdecl fcn_0058b9c0(void* a1, void* a2)
+{
+	if (*(int*) ((char*) a1 + 0x2c) != 0) {
+		if (*(int*) ((char*) a1 + 0x38) == 0) {
+			fcn_0051af00(a2, 0x6a22d8, *(int*) ((char*) a1 + 0x2c) + 0x253,
+			    (char*) a1 + 4, (char*) a1 + 0x14);
+		} else {
+			fcn_0051af00(a2, 0x6a22d8, *(int*) ((char*) a1 + 0x2c) + 0x27b,
+			    (char*) a1 + 4, (char*) a1 + 0x14);
+		}
+	} else {
+		fcn_0051af00(a2, 0x68b3f8, (char*) a1 + 4, (char*) a1 + 0x14);
+	}
+}
+```
+
+Three shapes to land it: a `tag` local made MSVC emit `neg/sbb/and 0x28` (a
+branchless select), an inline two-constant ternary did the same; only **duplicating
+the call in both arms** (so the shared push/call tail merges and the two `add`
+constants stay in the branches) produced the reference.  Testing the **negated**
+condition `== 0` (with the arms in that order) then flipped the branch polarity to
+the reference's `jne` + fall-through.
+
+GOLDTL verify: 795 byte-matched.  No GOLD twin (0x58b9c0 is absent from the GOLD
+inventory).
