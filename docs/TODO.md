@@ -38259,3 +38259,9 @@ call result), `esi` = `a2`, `edi` = `a1`, and the `and`-masks are spelled
 `test ah,1` / `test ah,2` / `test eax,0x40000`, i.e. the source compares whole
 `int` fields against `0x100`/`0x200`/`0x40000`.  Not attempted this round (context
 budget); the shape is otherwise the familiar `v ∈ {1,3}` family.
+
+Round 160 follow-up: transcribed 0x4fa230 exactly as decoded and it reached 26/166 —
+the whole prologue differs because our CL assigns **a2→edi / a1→esi** while the
+reference has **a2→esi / a1→edi** (both load `*(int*)a2` first).  Same
+allocator-swap class as 0x526070/0x5b23e0/0x4ea4b0; candidate deleted, the decoded C
+stays in this file for a future pass.
