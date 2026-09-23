@@ -9681,3 +9681,17 @@ size = 195
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T16:37:35+00:00"
+
+["GOLDTL.0x004afa10"]
+size = 333
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T16:52:23+00:00"
+blocker = "hand-written alignment-prefixed zero-fill prelude: code shape no msvc6 C output produces (docs/msvc6-c-shapes.md 11, docs/codegen-walls.md 6b); reproduced with __asm as at the nine existing sites"
+
+["GOLD.0x004af8d0"]
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T16:52:29+00:00"
+blocker = "hand-written alignment-prefixed zero-fill prelude: code shape no msvc6 C output produces (docs/msvc6-c-shapes.md 11, docs/codegen-walls.md 6b); reproduced with __asm as at the nine existing sites"
+size = 333
