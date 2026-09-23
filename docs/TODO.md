@@ -36644,3 +36644,33 @@ four displacements 0xd0/0xd4/0xd8/0xdc — worth looking for more members of it.
 
 GOLDTL: 642 byte-matched (251 exact, 391 reloc), failed 52, lint 1123/1123 zero
 warnings.  SERVER/GOLD untouched.
+
+### Round 1407 — the float/byte slot family is exhausted (and a near-miss worth recording)
+
+Chased the family hinted at in round 1406 by searching the binary for the
+`push 0x662d18 / push 0 / call fcn_0064f026 / push eax / call ...` signature:
+**19 hits**, in two sub-families (float store `fstp [reg+reg+disp]`, byte store
+`mov byte [reg+reg+disp], al`).  Every one that is a function start is already
+reversed:
+
+```
+float: 0x44d250 0x44d290 0x44d2d0 0x44d310 0x44d350     (all tracked)
+byte:  0x44d150 0x44d190 0x44d1d0 0x44d210              (all tracked)
+other: 0x44d580 (dword store at +4)                      (tracked)
+```
+
+The remaining signature hits (0x44d391, 0x44d3f1, 0x44d488, 0x44d4b9,
+0x44d501, 0x44d5a1, 0x44d5f1, 0x44d703) are *inside* larger inventory functions
+(0x44d390 size 71, 0x44d3f0 size 256, …) that merely call the same helper — not
+family members.  So this avenue is closed.
+
+**Near-miss recorded on purpose:** those four byte-sub-family VAs came from a
+derived listing rather than a marker check, so the four files were rewritten —
+they already carried `// FUNCTION: GOLDTL 0x44d150` etc.  `git checkout --`
+restored them and the scoreboard never moved (694 rows / 642 byte-matched before
+and after).  Rule confirmed the hard way: before writing `src/fcn_<VA>.c`, look
+up **that VA's** marker status (`git ls-files`, then the marker line), never a
+list computed one step earlier.
+
+No new byte-matched this round: GOLDTL stays at 642 (251 exact, 391 reloc),
+lint 1123/1123 zero warnings, tree clean.
