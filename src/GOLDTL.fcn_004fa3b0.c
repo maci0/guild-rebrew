@@ -1,0 +1,40 @@
+/* Owned (both targets) by src/GOLDTL.fcn_004f7890.c. */
+extern char g_679060[];
+
+int  __cdecl fcn_005db6a0(void*, void*);
+void __cdecl fcn_0051af00(void*, int, ...);
+
+// FUNCTION: GOLDTL 0x4fa3b0
+// SIZE: 176
+// FUNCTION: GOLD 0x4f7fc0
+// SIZE: 176
+
+int __cdecl fcn_004fa3b0(void* a1, void* a2)
+{
+	int r;
+
+	r = 0;
+	*(char*) ((char*) a2 + 0x14) = 0;
+	if (*(int*) a2 != 3 && *(int*) a2 != 1) {
+		return 1;
+	}
+	if ((*(unsigned int*) ((char*) a1 + 0x1c8) & 0x100) != 0) {
+		return 1;
+	}
+	if ((*(unsigned int*) ((char*) a1 + 0x1cc) & 0x400) == 0) {
+		return 1;
+	}
+	if (*(char*) ((char*) a1 + 2) == 6) {
+		fcn_0051af00((char*) a2 + 0x14, (int) g_679060, 0x1e1c);
+	}
+	if ((*(unsigned int*) ((char*) a1 + 0x1c8) & 0x200) != 0) {
+		return 9;
+	}
+	if ((*(unsigned int*) ((char*) a1 + 0x1c8) & 0x40000) != 0) {
+		return 1;
+	}
+	if (*(int*) a2 == 3) {
+		r = fcn_005db6a0(a1, a2);
+	}
+	return r | 2;
+}
