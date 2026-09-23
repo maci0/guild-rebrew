@@ -9645,3 +9645,15 @@ status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T16:05:48+00:00"
 blocker = "hand-written alignment-prefixed zero-fill prelude: code shape no msvc6 C output produces (docs/msvc6-c-shapes.md 11, docs/codegen-walls.md 6b); reproduced with __asm as at the seven existing sites"
+
+["GOLDTL.0x004af400"]
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T16:21:16+00:00"
+blocker = "hand-written alignment-prefixed zero-fill prelude: code shape no msvc6 C output produces (docs/msvc6-c-shapes.md 11, docs/codegen-walls.md 6b); reproduced with __asm as at the eight existing sites"
+
+["GOLD.0x004af2c0"]
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T16:21:20+00:00"
+blocker = "hand-written alignment-prefixed zero-fill prelude: code shape no msvc6 C output produces (docs/msvc6-c-shapes.md 11, docs/codegen-walls.md 6b); reproduced with __asm as at the eight existing sites"
