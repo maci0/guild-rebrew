@@ -37555,3 +37555,35 @@ puts the mask on `eax`.
 
 GOLDTL **733 → 736** byte-matched (230 EXACT, 506 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1205 files / 0 warnings.
+
+### Round 1436 — callee-caller family search: GOLDTL +3 (739)
+
+Found the family by scanning the inventory for untracked functions whose bytes
+contain an `e8` whose `rel32` resolves to a **reversed callee**:
+
+```
+target = 0x4c6c30   # the message sender the last two rounds kept calling
+5 untracked callers: 0x4f22e0 0x4f2810 0x4f2a10 0x4f2ba0 0x4f2e80
+```
+
+Three closed first try — 0x4f2e80 (81B), 0x4f2810 (104B), 0x4f22e0 (101B) — all
+`return fcn_004c6c30(&m)` over the same packed 0x20 struct:
+
+| VA | tag `f0` | guard |
+|----|---------|-------|
+| 0x4f22e0 | 0 | `a1 == 0 \|\| a2 == 0 \|\| a4 == -1` |
+| 0x4f2810 | 2 | same, six arguments (`short a5`, `int a6` land at +0x14/+0x18) |
+| 0x4f2e80 | 6 | `a1 == 0` |
+
+Two deleted: `0x4f2a10` (28/106) and `0x4f2ba0` (23/98) — both build `f4` from
+`a1 ? a1->f4 : -1` and the reference's if/else-with-`or eax,-1` layout came out
+as a branch or a different `je`/`jne` polarity in every spelling tried (ternary
+both ways, store reordered, both hex halves).
+
+**Technique worth repeating:** a reversed callee is a family key.  Scan the
+inventory for `e8` displacements into it and you get its unreversed callers
+sorted by size — this is the same trick as the `sub esp,0x9c` message family,
+but keyed on the call target instead of the prologue.
+
+GOLDTL **736 → 739** byte-matched (230 EXACT, 509 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1208 files / 0 warnings.
