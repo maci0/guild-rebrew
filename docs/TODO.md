@@ -35949,3 +35949,45 @@ being rizin switch-case fragments (`case.0x1000ad61.*`, 18 x 32 B) plus
 `fcn.10022ff1` / `fcn.1001e7dc` / `fcn.1002350a`, i.e. a discoverer artifact
 rather than missing work.  Inter-function gaps inside `.text` total 1,028 B in
 96 runs (alignment padding).
+
+### Round 1382 — the server residue is exactly the 19 carriers
+
+`postlink_residual.py --built build/split_poc.dll` after a fresh
+`cmake --build` + `split_link.sh` attributes the linked residue completely:
+
+```
+.text differing 0x2dd7 of 0x22846 (8.30%)
+gm_AllocSpieler 2825 | CrashDump 1970 | ls_LoadBuildingEntityState 1331 |
+cm_ExSellObjekt 966 | ahm_ExAllocAlchemist 916 | m_AllocTracked 773 |
+gm_CalculateProductionValue 641 | cm_ExCopyEntityData 462 |
+gv_ExAllocGraveyardWorker 456 | ServerMainThread 371 | gm_AllocGebaeude 328 |
+vfs_OpenStream 238 | gm_FindNextFilteredEntity 226 | gm_CheckInventoryCapacity 97 |
+srv_LoadBuf 49 | gm_ObjectsAvailble 25 | vfs_ReadCompressed 23 |
+cm_ExProdObjekt 21 | cm_ProcessCommandQueue 17        total 11735
+"0x2dd7 of 0x2dd7 differing bytes are inside the 19 functions"
+```
+
+So there is no padding, layout or library residue to chase: the objective for
+server.dll is exactly these 19 functions.  The raw link is worse (0x43da) and
+the fixers recover it; non-.text sections are already identical.
+
+The linked number is inflated by *positional* displacement, not by real diffs:
+the object-level diffs of the 19 sum to ~8,116 bytes, so ~3,619 bytes are
+shift effects, and the per-function column exaggerates (e.g.
+`gm_CalculateProductionValue` shows 641 linked against **5** object bytes in a
+396-byte function).  Six carriers carry the size errors that shift everything
+after them: vfs_OpenStream +34, cm_ExCopyEntityData -7, gm_AllocGebaeude -10,
+gm_FindNextFilteredEntity -4, ls_LoadBuildingEntityState -3, cm_ExSellObjekt -1
+(net +9; the other 13 are exactly reference-sized).  Fixing sizes is therefore
+worth doing *before* byte-level work: it raises the layout-map coverage (89.94%,
+gate 90%) so postlink's fixed-offset rewrites land, and removes the inflation.
+
+Next probe, identified from the diff and unspent by the docs: `cm_ExSellObjekt`
+0x1000d930 opens with eight `= 0` local stores emitted in the order
+0x24,0x30,0x14,0x1c,0x28,0x2c,0x18,0x20 where the reference emits
+0x14,0x2c,0x18,0x20,0x28,0x30,0x1c,0x24 (same slot set, permuted).  Section 77
+regrouped the *season block* and section 78 the `'\x06'` guard; this store run
+was not part of either.  Store-order is 1-for-13 as a blind method, so measure
+it — the statement block is `source_owner_entity = 0;` … through
+`source_static_entity = 0;` at
+`src/Develop/DieGildeAddOn/command/command_c/cm_ExSellObjekt.c`.
