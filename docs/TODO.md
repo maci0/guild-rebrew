@@ -38803,3 +38803,16 @@ is the *pending* `r` argument for the same call, which is what made the
 normalised diff look like a separate call arm.
 
 GOLDTL 806 → 807, GOLD unchanged at 329; server unchanged at 264.
+
+Round 191/192 partial decode (GOLDTL 0x5dd4e0, 177B, not yet written):
+`sub esp,0x814`, then `fcn_00508cf0(&local[0], 5)` with the caller's a2 at
+`[esp+8]` already incremented (`*(int*)(a2+0x10) = 1` before the call), then a
+loop `for (i = 0; i < 5; i++) { e = slots[i]; if (*(unsigned char*)(e + a1 + 0x80)
+< 0xfc) { fcn_005dcf40(a1, e); v = slots[i]; n++; } if (n >= 1) break; }` where
+`slots[]` is the `fcn_00508cf0` output at `[esp+0x10]` and a1 is read after the
+pushes at `[esp+0x830]`.  Then, only when `*(char*)(a1+2) == 6`:
+`fcn_004c6330(*(int*)(a1+4))`, `fcn_0051af00(buf, 0xfe8,
+*(u16*)(*(int*)a2) * 2 + 0xd71, v + 0x16b7)` and `fcn_005dbe90(buf + ?)`;
+the epilogue is `pop esi; pop ebp; mov eax,1; pop ebx; add esp,0x814; ret`.
+Missing only the 8 bytes at 0x5dd57a-0x5dd581 (`add esp,?` + `pop edi`) — dump
+those first next time.
