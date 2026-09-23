@@ -35766,3 +35766,24 @@ promoting.  One real win in the client pair: GOLD 0x421ed0 from GOLDTL
 0x41d4d0, `imported-shared` EXACT (file
 `src/Develop/Units/Error/Error_c/ErrorModule.c`).  GOLD 213 -> 214
 byte-matched; GOLDTL stays 613; lint 1095/1095 zero warnings.
+
+### Round 1379 — toolchain of the three binaries, settled
+
+User challenged the "different version toolchains" framing.  Re-derived from
+scratch with three independent measurements (docs/general-knowledge.md, "one
+compiler version, two code generators"): (1) the Processor Pack image stamps
+`@comp.id = 0x00302354` (c2 13.00.9044) on every object and BOTH clients'
+Rich headers carry that exact record (154/157 objects), while SERVER has no
+Rich header at all; (2) a fixed FP-compare probe compiled with all 9
+registered VC6 code generators x 9 flag sets shows `test ah,0x44`/`test ah,5`
+is unique to the Processor Pack generator and `test ah,0x40` unique to the
+plain ones, flag-independent - in the shipped .text SERVER has 0 pp-only
+sites, GOLDTL 1011, GOLD 841; (3) a 4-row byte-reproduction matrix: GOLDTL
+0x42e470/0x4b4f00 are RELOC only under sp5-pp, SERVER 0x1000c3c0/0x100100a0
+only under plain sp5/sp6.
+
+Answer: one compiler version (cl 12.00.8804) everywhere; the clients used the
+VC6 Processor Pack code generator, the server a plain one.  SP5 vs SP6 output
+is byte-identical for the functions measured, so the server pins only to
+"plain VC6", not to a service pack.  No game-repo source change; the
+`rebrew-project.toml` comment and docs were corrected.

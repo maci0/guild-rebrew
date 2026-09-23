@@ -413,3 +413,71 @@ Never use the copy path (no `--shared`) in this project: the destination path
 is the source file itself, and a whole-file copy would delete the co-resident
 functions.  `cross-import` refuses that case with `TARGET_CONFLICT` and tells
 you to use `--shared` (round 1378 fix).
+
+## The three binaries: one compiler version, two code generators (round 1379, definitive)
+
+Earlier notes said "clients sp5-pp, server sp6".  Measured properly, the
+distinction is **not a compiler version** and not a service pack: all three
+binaries were built with the same compiler product and version —
+**MSVC 6.0, cl.exe 12.00.8804** — and differ only in the **code generator**
+(c2.dll):
+
+| binary | compiler version | code generator | `Rich` record | pp-only `test ah,X` sites |
+|--------|------------------|----------------|---------------|---------------------------|
+| SERVER | cl 12.00.8804 | stock VC6 c2 | **none** (no Rich header) | **0** |
+| GOLDTL | cl 12.00.8804 | **Processor Pack** c2 13.00.9044 | comp_id `0x00302354`, count 154 | 1011 |
+| GOLD | cl 12.00.8804 | **Processor Pack** c2 13.00.9044 | comp_id `0x00302354`, count 157 | 841 |
+
+Three independent measurements, all agreeing:
+
+1. **Compiler fingerprint (`@comp.id`).** The Processor Pack image
+   (`rebrew/msvc:6.0-sp5-pp-win32`) stamps every object with
+   `@comp.id = 3154772 = 0x00302354` — product `0x0030`, build `2354` = 9044,
+   i.e. c2.dll 13.00.9044.0.  Nine VC6 code generators are registered
+   (`6.0`, `sp1`-`sp6`, `win9x`, `sp5-pp`) and each stamps a different
+   `@comp.id`; only `sp5-pp` uses product `0x0030`.  Both clients' Rich headers
+   carry exactly that record (counts 154/157 objects); SERVER's file has no
+   Rich header at all (minimal 0x80 DOS stub), so nothing is recorded there.
+   Do not trust `diec`'s "compiler 13.00.9178" line for these clients: that
+   value comes from a non-compiler Rich entry (a statically linked SDK/MSS32
+   object); the compiler record is the `0x0030`/9044 one.
+
+2. **Code-generator fingerprint.** Compiling one fixed source (float and
+   double `==`, `!=`, `<`, `<=`, `>`, `>=`, branch and int-returning forms)
+   with `/Od`, `/O1`, `/O2`, `/Ox`, `/Os`, `/O2 /Op`, `/O2 /Oa`, `/O2 /Ot`,
+   `/O2 /Oy-`:
+   - `sp5-pp` emits `test ah,0x44` (+ `jp`) and `test ah,0x05`, and **never**
+     `test ah,0x40` — under all nine flag sets.
+   - All eight plain VC6 code generators emit `test ah,0x40` + `test ah,0x01`
+     + `test ah,0x41`, and **never** `0x44`/`0x05` — under all nine flag sets.
+   The idiom is therefore a code-generator signature, not a flag artefact.
+   In the shipped `.text`: SERVER has 0 sites of the pp-only pair (and 1 of the
+   plain `0x40`); GOLDTL 1011, GOLD 841 (≈426-440 per MB; SERVER's expected
+   count at that density would be ~60).
+
+3. **Byte-reproduction matrix** (same file, same CFLAGS, only `--toolchain`
+   varies; all four rows are matched functions that contain an FP compare):
+
+   | function | sp5-pp | sp6 | sp5 |
+   |----------|--------|-----|-----|
+   | GOLDTL `0x0042e470` `gm_RandomQuadratic` | **RELOC** | NEAR_MATCHING | NEAR_MATCHING |
+   | GOLDTL `0x004b4f00` | **RELOC** | NEAR_MATCHING | NEAR_MATCHING |
+   | SERVER `0x1000c3c0` `alchemistry_logic2` | SIZE_MISMATCH | **RELOC** | **RELOC** |
+   | SERVER `0x100100a0` `cm_ExModifyStat` | NEAR_MATCHING | **RELOC** | **RELOC** |
+
+   Client bytes are reproduced **only** by the Processor Pack generator; server
+   bytes **only** by the plain generators.
+
+Consequences:
+
+- The SERVER↔client body overlap cannot be byte-identical wherever the changed
+  generator touches the code (x87 compare idiom and the scheduling it drags
+  along). `rebrew cross-import --from server.dll` therefore reverts even at
+  score 100 — that is the tool being honest, not a match-quality bug.
+- GOLD and GOLDTL share the generator, so GOLDTL→GOLD marker moves do verify
+  (round 1378: GOLD `0x421ed0` from GOLDTL `0x41d4d0`, EXACT).
+- Plain VC6 SP5 and SP6 output is byte-identical for the functions measured
+  here, so the server cannot be pinned to a specific service pack — only to
+  "a plain, non-Processor-Pack VC6 code generator".  The three per-file
+  `sp5-pp` pins in `CMakeLists.txt` are marginal partial-match wins (834 vs
+  828 bytes, 824 vs 820), not evidence of a pp-built server.

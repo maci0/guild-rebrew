@@ -48,10 +48,14 @@ MSVCRT = ""
 LIBCMT = "LIBCMT.lib"
 
 [targets."Europa1400Gold_TL.exe"]
-# Client compiler differs from the server's: the shipped client .text uses the
-# NaN-safe float-compare idiom (`fnstsw ax; test ah,5; jp`), which only
-# msvc-6.0-sp5-pp emits. Server.dll has zero occurrences, the two clients
-# ~800 each. Evidence: docs/TODO.md round 1290, docs/general-knowledge.md.
+# Same compiler VERSION as the server (cl 12.00.8804), different CODE
+# GENERATOR: both clients carry the Processor Pack's `@comp.id` record
+# (0x00302354 = c2 13.00.9044) in their Rich headers, and their .text emits
+# `test ah,0x44`/`test ah,0x05` (1011 sites in GOLDTL) which no plain VC6
+# generator emits under any flag set. Server.dll has zero of those sites and
+# carries no Rich header; its FP-compare functions reproduce byte-exactly only
+# under the plain generators. Definitive measurements and the 3-way matrix:
+# docs/general-knowledge.md, "one compiler version, two code generators".
 compiler = { profile = "msvc-6.0-sp5-pp" }
 # The T&L client statically links d3dx8.lib: 0x5e0000-0x64ffff holds ~907
 # linker-supplied D3DX8 bodies (~273 KB), not game source.  Declared so
