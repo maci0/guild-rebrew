@@ -38834,3 +38834,14 @@ ModRM) where our object has 0xb4 (`esi`), and the second arm then diverges from
 offset 46.  So the function's remaining gap is the same colouring wall as
 0x4e27b0, not a shape problem — do not spend another round on spellings unless a
 way to pin `edi` is found.
+
+Round 197-200 (delegated to teammate `reverser`, task-1, aborted): 0x4e04f0
+(294B) was attempted by a fresh-context teammate.  It decoded enough to write a
+295-byte object but stalled at **210/295 SIZE_MISMATCH** and stopped editing, so
+the Lead interrupted it and executed the task's failure clause: source deleted,
+`src/rebrew-functions.toml` restored, and a stray compiler artifact (`vc60.pdb`)
+removed.  The teammate's partial source was not kept, so the only durable result
+is this note — 0x4e04f0 remains open and its call sequence is *not* recorded.
+Lesson for delegation: state a hard iteration budget (e.g. "at most 6 test runs")
+and require a status line after each, otherwise a teammate can spin without
+producing either a match or a usable decode.
