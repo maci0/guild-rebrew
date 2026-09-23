@@ -36307,3 +36307,22 @@ layout package — the delivered `.data` compares 0 differing bytes).  They are
 left as-is rather than raised: the project's rule is that a baseline only moves
 when a change improves the number, and redefining these two metrics is a
 separate decision from this round's structural lock-in.
+
+### Round 1393 — two walls re-confirmed with the new exact-layout measurement
+
+- `cm_ExProdObjekt` (0x1000e140): 5 structural diffs left in 993 bytes, and the
+  first is the one the file's own note already explains — the reference hoists
+  `mov edx,[g_item_def_table]` to the top of the block, and only
+  `msvc-6.0-sp5-pp` places it there; all eight plain 6.0 toolchains sink it.
+  The note's instruction ("do not re-probe without a new allocator-level
+  finding") stands: this is an allocator/scheduler divergence, not a C shape.
+- `gm_GetFieldByType` ported server -> GOLDTL (`cross-import --shared --va
+  0x499a50`, score 96.7): `skipped-unverified`, SIZE_MISMATCH 130B against the
+  reference's 125B, auto-reverted.  Same conclusion as round 78 for the other
+  candidates: a byte-exact SERVER body does not become a byte-exact GOLDTL body
+  because the two binaries' generators differ (round 1379), so the clients
+  cannot be filled from the server's matched set.
+
+Remaining for server.dll is unchanged and is entirely the 19 carriers'
+11,735 bytes; the deliverable passes every structural criterion (round 1391)
+and the gate now checks that fact (round 1392).
