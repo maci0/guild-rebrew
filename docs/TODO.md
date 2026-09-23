@@ -38971,3 +38971,23 @@ and the residue is a compiler-version artifact, not a misspelled source.
 Files: `src/GOLDTL.fcn_004f7bf0.c` deleted, `src/rebrew-functions.toml`
 restored to HEAD (its only working-tree change was the SIZE/NEAR_MATCHING hunk
 this round persisted).
+
+Round 207 (delegated, task-5): `fcn_004af2f0` (GOLDTL 0x4af2f0) **RELOC 264/264**
+plus GOLD twin 0x4af1b0 **RELOC 264/264** — commit `147181f9`, verified by the
+Lead with `rebrew test` on both targets; lint 1279 files / 0 warnings.  Two
+levers worth reusing: (1) the zero-fill prelude is an alignment-prefixed sequence
+no msvc6 C spelling emits, so it is spelled with an `__asm` block (W020 waived by
+a BLOCKER annotation — shapes §11 / walls §6b); (2) `w` stays in `edx` across the
+`fcn_004ae130` call **only when that callee's body is visible earlier in the same
+TU**, so the file defines a byte-identical copy `fcn_004ae130_tu` above the caller
+(without it the object is 267 instead of 264 bytes).
+
+FOLLOW-UP for a later round (faithful-tree cleanup): merge the real
+`src/GOLDTL.fcn_004ae130.c` body into `src/GOLDTL.fcn_004af2f0.c` — the original
+developer TU held both functions — which drops the `_tu` duplicate and keeps the
+same register allocation.
+
+Round 206 wall (task-4): 0x4f7bf0 best NEAR 215/216, one byte at offset 67 — the
+reference keeps a tautological `B != 0x12 || B <= 0x15` guard that every MSVC6
+service pack and the Processor Pack fold (4.2 keeps it, wrong allocation).  See
+commit `d9dc25fe` for the full decode.
