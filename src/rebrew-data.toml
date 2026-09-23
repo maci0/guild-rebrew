@@ -4360,3 +4360,12 @@ section = ".data"
 
 ["GOLD.0x00a68d2c"]
 section = ".data"
+
+["GOLDTL.0x00772f1c"]
+section = ".data"
+
+["GOLDTL.0x00772f18"]
+section = ".data"
+
+["GOLDTL.0x00772f20"]
+section = ".data"
