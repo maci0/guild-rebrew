@@ -1,0 +1,71 @@
+// GLOBAL: GOLDTL 0xaed32c
+extern int g_aed32c;
+// GLOBAL: GOLD 0xa68d2c
+extern int g_aed32c;
+/* Owned (both targets) by src/GOLDTL.fcn_004cef70.c. */
+extern char g_7f4ca0[];
+
+unsigned short __cdecl fcn_0042e410(int);
+void __cdecl fcn_004ce6e0(void*);
+void __cdecl fcn_004c4510(void*, int);
+void __cdecl fcn_004c4670(int, int, int, char*);
+void __cdecl fcn_004c5360(void);
+void* __cdecl fcn_004ce610(void*);
+void __cdecl fcn_0051af00(void*, int, ...);
+void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl fcn_004c5420(int, int, int, int, int);
+
+// FUNCTION: GOLDTL 0x4ce740
+// SIZE: 366
+// FUNCTION: GOLD 0x4cdb80
+// SIZE: 366
+
+char __cdecl fcn_004ce740(int a1)
+{
+	char buf[0x800];
+	char c;
+	signed char c0;
+	unsigned short idx;
+	void* e;
+	void* q;
+	char* p;
+	int r;
+
+	c = 1;
+	if (a1 == 0) {
+		return 0;
+	}
+	if ((*(int*) ((char*) a1 + 0x1c8) & 0x20000000) == 0) {
+		return 0;
+	}
+	c0 = *(signed char*) ((char*) a1 + 0x1c5);
+	if (fcn_0042e410(10) < (unsigned short) (unsigned char) c0) {
+		c = -c0;
+		fcn_004ce6e0((void*) a1);
+		fcn_004c4510((void*) a1, *(int*) ((char*) a1 + 4));
+		fcn_004c4670(1, 1, (int) ((char*) a1) - g_aed32c + 0x1c5, &c);
+		fcn_004c5360();
+		e = *(void**) ((char*) a1 + 0x16c);
+		if (e != 0) {
+			idx = *(unsigned short*) ((char*) e + 0x27);
+			if (idx != 0xffff) {
+				p = g_7f4ca0 + idx * 540;
+				if (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7) {
+					q = fcn_004ce610((void*) a1);
+					r = *(int*) q;
+					if (r != 0) {
+						fcn_0051af00(buf, 0x1bca, r * 2 + 0x9a8,
+						    *(unsigned short*) a1, *(int*) ((char*) a1 + 0x16c));
+						fcn_00545d40(*(int*) (p + 4), -1, buf, 0, 0x5f2, 0);
+					}
+				}
+			}
+		}
+		return 1;
+	}
+	fcn_004c4510((void*) a1, *(int*) ((char*) a1 + 4));
+	fcn_004c4670(1, 1, (int) ((char*) a1) - g_aed32c + 0x1c5, &c);
+	fcn_004c5360();
+	fcn_004c5420(*(int*) ((char*) a1 + 4), 0x1c8, 4, 0, 0x20000000);
+	return 0;
+}
