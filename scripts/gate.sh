@@ -430,5 +430,20 @@ except Exception: print("")')
     done <<< "$pins"
 fi
 
+# Objective structural criteria (round 1392): the delivered binary is checked
+# against the reference with NO project tooling -- file size, every section
+# VirtualSize, imports, exports, entry point, and that every differing byte is
+# inside .text.  The residue count is a baseline, not a verdict: this check is
+# red only when the DELIVERABLE regresses structurally (round 1391 proved the
+# three header/layout defects that used to hold it red).
+echo "== objective structural criteria"
+if timeout 900 python3 scripts/verify_objective.py > .scratch/gate-objective.log 2>&1; then
+    tail -2 .scratch/gate-objective.log
+else
+    echo "REGRESSION: objective structural criteria failed --"
+    cat .scratch/gate-objective.log
+    rc=1
+fi
+
 [ "$rc" -eq 0 ] && echo "GATE: pass" || echo "GATE: FAIL"
 exit "$rc"

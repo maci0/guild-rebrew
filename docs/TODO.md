@@ -36288,3 +36288,22 @@ file-size, relocation, import or export difference is left.  The round 1390
 "`.reloc` differs by 11,103 bytes" figure was an artefact of the +0x1000 file
 shift (the same reloc bytes at different file offsets); with the layout fixed,
 `.reloc` content compares equal.
+
+### Round 1392 — the objective's structural criteria are now a gate check
+
+`scripts/gate.sh` gained its sixth check: `python3 scripts/verify_objective.py`
+against the delivered `build/server.dll`.  It is deliberately *not* a residue
+check — the residue is an accepted baseline until the last byte lands — it is
+red only when the deliverable regresses structurally (file size, any section
+VirtualSize, imports, exports, entry point, "all differing bytes inside
+`.text`").  Green at 11,735 residual bytes, all inside the 19 carriers.
+
+Note while touching this: two gate baselines are stale measurements from an
+older composition and no longer describe the deliverable —
+`RESIDUE_BASELINE=8628` (the split set now reports 11,735 linked bytes, all of
+which are real object diffs in the carriers) and `DATA_BASELINE=21481` (the gate
+measures the RAW link's `.data`, which postlink replaces wholesale from the
+layout package — the delivered `.data` compares 0 differing bytes).  They are
+left as-is rather than raised: the project's rule is that a baseline only moves
+when a change improves the number, and redefining these two metrics is a
+separate decision from this round's structural lock-in.
