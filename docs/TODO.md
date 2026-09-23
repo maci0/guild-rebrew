@@ -37376,3 +37376,26 @@ still hoisted into `esi` before the call where the reference loads it into
 
 GOLDTL **702 → 705** byte-matched (230 EXACT, 475 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1174 files / 0 warnings.
+
+### Round 1429 — branched prospecting, third pass: GOLDTL +5 (710)
+
+| VA | shape |
+|----|-------|
+| 0x5898f0 | lookup, call if found, `return p == 0;` (`sete al` after `xor eax,eax`) |
+| 0x50dfa0 | early `return 0` / `return f(a1, r)` — two returns |
+| 0x45f790 | `return v == 1 ? 0 : v;` — branchless `dec/neg/sbb/and` |
+| 0x5355f0 | `if (g != -1) { free(g); g = -1; }` plus two companion clears |
+| 0x528fd0 | four sequential void calls, args from two globals |
+
+**Rules:**
+
+* a function with an early exit **and** a tail call must be written with two
+  `return` statements (`if (r == 0) return 0; return f(a1, r);`); as a single
+  `if (r != 0) { f(a1, r); }` the compiler shares one epilogue and the
+  reference's duplicated `pop esi / ret` never appears (32/44 -> 44/44);
+* `dec / neg / sbb / and reg` is `v == 1 ? 0 : v`, **not** `v > 1 ? v : 0` —
+  they agree for v in {0,1,2} and disagree for v < 0, and only the first
+  spelling produces the branchless form (36/49 -> 49/49).
+
+GOLDTL **705 → 710** byte-matched (230 EXACT, 480 RELOC); GOLD unchanged at 300;
+server unchanged at 264.  Lint 1179 files / 0 warnings.
