@@ -48,9 +48,10 @@ def main() -> int:
         t = open(f, encoding='utf-8', errors='ignore').read()
         for m in re.finditer(r'^// FUNCTION: GOLDTL 0x([0-9a-f]+)', t, re.M):
             claimed.add(int(m.group(1), 16))
-        b = os.path.basename(f)
-        if b.startswith('fcn_') and b.endswith('.c'):
-            claimed.add(int(b[4:12], 16))
+        # Either ``fcn_<va>.c`` or the per-target ``<TARGET>.fcn_<va>.c``.
+        m2 = re.search(r'fcn_([0-9a-fA-F]{8})\.c$', os.path.basename(f))
+        if m2:
+            claimed.add(int(m2.group(1), 16))
 
     inv = json.load(open(f'db/inventory-{TARGET}.json'))
     out = []
