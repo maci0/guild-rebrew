@@ -39253,3 +39253,63 @@ expression.
 Also: the Round-211 wall note for 0x4baf60 above is stale — that function is
 RELOC 282/282 as of round 235 (see the closure note).  The wall classes are
 closing one by one; retry a documented wall before treating it as permanent.
+
+Round 239 (task-24): **WALL** — GOLDTL `0x4f7210` (251B body) stuck at
+**SIZE_MISMATCH 104/251** (obj 246B, 92 instructions against the reference's 92).
+Two `rebrew test` runs spent; source parked (uncommitted) at
+`.scratch/t23_fcn_004f7210_best.c`.
+
+Decode (cdecl, `int fcn_004f7210(void* a1, void* a2)`; a2 holds the type/string
+record, a1 the object):
+
+```
+p = fcn_00508e40(*(int*) a1);            if (p == 0) return 1;
+if (fcn_005c6270(p, 0x290) != 0) return 0x400;
+d2 = 0x600c00;
+if (fcn_004a55c0(p, 1, &d2, 0.0f, 100.0f, &w1) == 0) return 0x400;
+if (*(int*) ((char*) a1 + 0x5c) != -1) {          /* gated lookup */
+    q = fcn_00508e40(*(int*) ((char*) a1 + 0x5c));
+    if (q == 0) return 1;
+    if (*(char*) ((char*) q + 8) != 0 && *(char*) ((char*) q + 2) != 0xf) return 1;
+}
+if (*(int*) a2 == 3) { r = fcn_005d3120(a1, a2) | 2; return r; }
+if (*(int*) a2 == 1 && *(char*) ((char*) a1 + 2) == 6) {
+    e = (void*) fcn_005463a0(1, 0, 0x41);          /* enumerator pair */
+    while (e != 0) {
+        if (*(int*) ((char*) e + 0xac) ==
+            *(int*) (g_7f4ca4 + 540 * *(unsigned short*) 0x774970)) {
+            q = fcn_00508e40(*(int*) ((char*) e + 0xb0));
+            fcn_0051af00((char*) a2 + 0x14, *(unsigned short*) q, 0x1ce2);
+            return r;
+        }
+        e = (void*) fcn_005462a0();
+    }
+    fcn_0051af00((char*) a2 + 0x14, 0x679060, 0x1ce1);
+}
+return r;                                          /* r = 2 */
+```
+
+Residual diagnosis: the object reproduces the reference's instruction sequence
+shape (92 instructions each, same call order, same message ids, same 0x600c00 /
+0.0f / 100.0f descriptor), but the callee-saved allocation is swapped and one
+value is not allocated at all:
+
+| | reference | object |
+|---|---|---|
+| the type/string record (arg 2) | `ebx` | `edi` |
+| `r` | `esi` (`mov esi,2` … `or esi,2`) | no register — the constant is rematerialised (`mov eax,2`) and `\| 2` folds to `or al,2` |
+| the object (arg 1) | `edi` | `esi` |
+| `return 1` epilogue | one tail block, all failures `jne/je 0x4f7302` | three inline copies, one per failure site |
+
+So the function needs three live callee-saved values (a1, a2, r) while the object
+allocates only two; `r` is constant-propagated into its uses and the third
+register is never claimed.  Known wall class (callee-saved colour swap), the one
+0x4bb540 escaped by statement order and 0x4af050 did not.
+
+Rejected levers (all byte-identical, 92 instructions / 256B, same colours):
+guard `if (x != 3 && x != 1) return 1;` vs nested `if (…) { … } return 1;` (the
+nested form is *worse*: 84 ins / 240B, 41/251); `do {} while` vs `while (e != 0)`;
+`r = 2;` as the first statement, after the 0x5c block, or as a declaration
+initialiser; `r = f(…) | 2` vs `r = f(…); r |= 2;`; `else if` vs a separate
+second `if`; locals `void*` vs `int`; a `char*` alias for a1; parameter types
+`int*`/`char*`/`int` for a2; and swapping the 0x5c gate ahead of the type test.
