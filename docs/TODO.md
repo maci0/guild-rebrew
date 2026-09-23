@@ -39439,3 +39439,63 @@ extern symbol / `g_7f4ca0 + 0x69780` / `800 * 540`, `for` vs `while` vs
 start/end extern symbols, `q != end`; six spellings of the id expression
 (cond-first, byte-first, three statement splits, `id +=`); declaration order of
 `t`/`b`/`i`/`m`; reusing `e` for the pick and `i` for the second counter.
+
+Round 245 (task-27): **WALL (near miss)** — GOLDTL `0x4b7800` (342B body) stuck at
+**SIZE_MISMATCH 137/342**; the object is the *same size* as the reference but
+differs from offset 0x4f on.  One `rebrew test` run; best source parked
+(uncommitted) at `.scratch/t27_fcn_004b7800_best.c`.
+
+Decode (cdecl, `int fcn_004b7800(void* a1)`; frame `sub esp,0x214`, locals
+`int n; int v[2]; double d; char buf[0x200]` at frame offsets 0 / 4-0xb /
+0xc / 0x14):
+
+```
+p = fcn_00508e40(*(int*) a1);                        if (p == 0) return 1;
+if (fcn_005c6270(p, 0x290) != 0) return 0x400;
+if (fcn_004a5e60(p, 6, 0x400000, 0, 0, 100.0f, &v[1]) == 0) return 0x400;
+if (fcn_005015e0(&v[0], 0, 0, v[1]) == 0) return 0x400;
+n = fcn_0042e410(3) & 0xffff;
+d = (double) n + g_6629c8;                            /* fild/fadd/fstp qword */
+r = (int) ((double) fcn_0050dac0(*(unsigned short*) p) * d * g_6640e8);
+fcn_0051af00(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, v[1], r);
+fcn_004c51a0(-1, *(int*) a1, g_773d75, r);
+len = strlen(buf);
+fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
+    0x100 < len, 0x603, 0);
+return 0;
+```
+
+`g_6629c8`/`g_6640e8` (doubles) are owned by `fcn_004b6f00.c`, `g_773d75`
+(`unsigned char`) by `fcn_005b24b0.c`; the FP sequence is the x87 form from
+round 235 (`fild n; fadd g; fstp qword` then `fild r; fmul d; fmul g`).
+
+Residual: instructions 0-26 match exactly, then the reference materialises two
+constants in registers for the 7-arg call -
+
+```
+lea edx,[esp+0x10] ; xor ecx,ecx ; push edx ; push 0x42c80000
+mov eax,0x400000 ; push ecx ; push ecx ; push eax ; push 6 ; push esi
+```
+
+while the object pushes the immediates (`lea ecx,...; push ecx; push
+0x42c80000; push 0; push 0; push 0x400000; ...`).  That one difference (~2 bytes,
+1 instruction, and it is what puts &v[1] in `edx` rather than `ecx`) shifts the
+whole tail; the remaining reads are the same code with the `ecx`/`edx`/`eax`
+roles permuted.  Reproducing `xor ecx,ecx; push ecx; push ecx` needs the argument
+to be a *value* the compiler keeps in a register rather than a literal: 25
+spellings failed to produce it.
+
+**New lever that did work (keep it):** two adjacent 4-byte locals.  Declaring
+them separately (`int x; int y;`) lets MSVC assign the frame slots in *first-use*
+order and is **invariant to declaration order**, which put the first call's
+pointer in the wrong slot; declaring them as one `int v[2]` and passing
+`&v[1]` / `v[1]` / `&v[0]` reproduces the reference's offsets (0xc/0x10) exactly.
+Same family as round 243's `char buf[0x200]` finding: the frame layout, not the
+statement order, is what the reference pins down.
+
+Other rejected levers (all byte-identical): `unsigned short` prototype for
+`fcn_0050dac0` (this one *was* needed for `mov cx` without a preceding `xor`);
+int/unsigned/long/pointer/char/short types for the constants; literals (0, 0.0f,
+(float) 0), locals assigned 0/0x400000 (folded back to `push imm`), and
+assignment expressions in the call (`(v[0] = 0x400000)`, `(v[1] = 0)`) which add
+dead stores instead of register materialisation.
