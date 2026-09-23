@@ -1,5 +1,11 @@
 /* gv_ReplaceProductionWorker - proper C */
 
+// GLOBAL: GOLDTL 0x7f4ca0
+extern char g_7f4ca0[];
+// GLOBAL: GOLD 0x770b80
+extern char g_7f4ca0[];
+// FUNCTION: GOLD 0x4f0970
+// SIZE: 288
 // FUNCTION: GOLDTL 0x4f2a80
 // SIZE: 288
 
@@ -29,7 +35,7 @@ int __cdecl gv_ReplaceProductionWorker(void* a)
 	gm_ResolveEntityById(&rec, 0, 0, *(int*) ((char*) a + 8));
 	if (rec == 0 ||
 	    *(unsigned short*) ((char*) rec + 0x27) == limit ||
-	    0x7f4ca0 + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
+	    g_7f4ca0 + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
 	        g_entity_table_end)
 		return -1;
 	type = *(unsigned char*) rec;

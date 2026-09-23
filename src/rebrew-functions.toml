@@ -9387,3 +9387,21 @@ size = 464
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T13:08:22+00:00"
+
+["GOLD.0x004f0af0"]
+size = 304
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:09:13+00:00"
+
+["GOLD.0x004f0970"]
+size = 288
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:09:42+00:00"
+
+["GOLD.0x004c6870"]
+size = 336
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T13:10:10+00:00"

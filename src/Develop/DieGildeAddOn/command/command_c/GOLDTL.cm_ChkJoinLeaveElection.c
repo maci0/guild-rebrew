@@ -6,7 +6,7 @@
 #pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
 #endif
 
-#define g_entity_table_end ((unsigned short*) *(unsigned int*) 0x773da8)
+#define g_entity_table_end ((unsigned short*) g_773da8)
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
@@ -15,6 +15,16 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
  * in the election slots and an empty slot exists. For 'leav',
  * verifies the player is actually in a slot. */
 
+// GLOBAL: GOLDTL 0x773da8
+extern unsigned int g_773da8;
+// GLOBAL: GOLD 0x6f1bf8
+extern unsigned int g_773da8;
+// GLOBAL: GOLDTL 0x7f4ca0
+extern char g_7f4ca0[];
+// GLOBAL: GOLD 0x770b80
+extern char g_7f4ca0[];
+// FUNCTION: GOLD 0x4c6870
+// SIZE: 336
 // FUNCTION: GOLDTL 0x4c7400
 // SIZE: 336
 // cm_ChkJoinLeaveElection
@@ -62,7 +72,7 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 		if (query_result == 0) return 1;
 		slot_index = *(unsigned short *) (query_result + 0x27);
 		if (slot_index != 0xffff) {
-			rec = (char *) (0x7f4ca0 + slot_index * 0x21c);
+			rec = (char *) (g_7f4ca0 + slot_index * 0x21c);
 			if (rec == 0) goto cler_query;
 			if (rec == (char *) g_entity_table_end) goto cler_query;
 			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;

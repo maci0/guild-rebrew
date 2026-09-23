@@ -38125,3 +38125,28 @@ The candidate list itself is only ~24 rows, so the vein is now exhausted except
 for the NEAR_MATCHING rows that are one absolute address off (`[71] 80/a0,
 [72] 0b/4c, [73] 77/7f`) — `scripts/twin_fix.py` classified its first pick
 MANUAL and reverted, so those four need the paired-GLOBAL rewrite by hand.
+
+## Round 155 — the paired-GLOBAL twin fix, by hand (+3 GOLD = 311)
+
+The four NEAR_MATCHING twins from the harvest are one or two hardcoded GOLDTL
+addresses away from the GOLD body.  The fix is a paired annotation plus using the
+symbol:
+
+```c
+// GLOBAL: GOLDTL 0x7f4ca0
+extern char g_7f4ca0[];
+// GLOBAL: GOLD 0x770b80
+extern char g_7f4ca0[];
+```
+and replace the literal (`(char*) 0x7f4ca0 + idx * 0x21c` → `g_7f4ca0 + idx * 0x21c`).
+
+| GOLD VA | file | bytes | fixed addresses |
+|---------|------|-------|-----------------|
+| 0x4f0af0 | gv_ActivateSection.c | 297 | 0x7f4ca0 → 0x770b80 |
+| 0x4f0970 | gv_ReplaceProductionWorker.c | 288 | 0x7f4ca0 → 0x770b80 |
+| 0x4c6870 | cm_ChkJoinLeaveElection.c | 333 | 0x7f4ca0 → 0x770b80, 0x773da8 → 0x6f1bf8 (a global read through a pointer, `#define g_entity_table_end ((unsigned short*) g_773da8)`) |
+
+GOLD verify: 311 byte-matched (was 308).  `cm_ChkCutsceneReady.c` (GOLD 0x4f4130)
+was reverted: after the 0x7f4ca0 fix its loop bound `row < 0x9a3804` needed
+GOLD 0x91f6e4, but spelling it as a symbol changed the compare's encoding and the
+next diff moved to offset 60 — that one needs the literal/symbol form probed.

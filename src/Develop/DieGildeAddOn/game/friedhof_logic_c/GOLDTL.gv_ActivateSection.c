@@ -1,5 +1,11 @@
 /* gv_ActivateSection - proper C */
 
+// GLOBAL: GOLDTL 0x7f4ca0
+extern char g_7f4ca0[];
+// GLOBAL: GOLD 0x770b80
+extern char g_7f4ca0[];
+// FUNCTION: GOLD 0x4f0af0
+// SIZE: 304
 // FUNCTION: GOLDTL 0x4f2c00
 // SIZE: 304
 
@@ -30,7 +36,7 @@ int __cdecl gv_ActivateSection(void* cmd)
 	if (entity) {
 		grave_id = *(unsigned short*) ((char*) entity + 0x27);
 		if (grave_id != 0xffff) {
-			if ((char*) 0x7f4ca0 + grave_id * 0x21c != (char*) g_entity_table_end) {
+			if (g_7f4ca0 + grave_id * 0x21c != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
 				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
 					return -2;
