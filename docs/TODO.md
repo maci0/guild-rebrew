@@ -35911,3 +35911,46 @@ Assessed the clients as a reference for those carriers (docs/general-knowledge.m
   1088 while the same body compiles to 1002 under both profiles).
 - Closest carrier measured precisely: `gm_CalculateProductionValue` is 2
   structural diffs in 396 bytes (fxch/cmp scheduler order).
+
+### Round 1381 — server `.text` shortfall localized
+
+Two compositions, measured this round and NOT the same thing (this distinction
+was previously implicit):
+
+| composition | .text | vs reference 0x22846 |
+|-------------|-------|----------------------|
+| CMake link (`build/server.dll`, pre-postlink) | 0x22226 | **-1568** |
+| split set (`split_poc/rsp*.rsp`, the deliverable path) | 0x22af8 | **+690** |
+
+`python3 scripts/link_drift.py` gives per-function placement drift: every game
+function up to `gm_GetMsgField` (0x10019cd0) sits at drift +0, and the whole
+CRT/LIBCMT band from `__CRT_INIT` (0x1001b8fb) drifts -12,797 with local
+excursions (`__CRT_INIT` +8332, `DllMain` -6189, `_mlock` -11696).  So the
+shortfall is entirely in the library band, not in the game code.
+
+`python3 scripts/map_libcmt.py --json` maps the reference's LIBCMT region to
+archive members: **244 reference functions, 228 matched, 36,527 bytes**.  Of
+those 228, seven (947 bytes) have no split object at their mapped VA:
+
+```
+0x1001f8e0 strcat                 224  mbscat.obj
+0x1001e7dc (exsup3 body)           216  exsup3.obj
+0x1001e704 seh_filter              206  exsup.obj
+0x1001e726 local_unwind2           172  exsup.obj
+0x1001e78e ValidateEH3RN            68  exsup.obj
+0x1001e7ba EH3_save_context         34  exsup.obj
+0x1001e899 seh_local_unwind_thunk   27  exsup3.obj
+```
+
+The split set does have objects at neighbouring VAs (e.g. `1001e7d4_.text.obj`
+for the map's 0x1001e7dc), so the next step is to check whether those bodies
+are present under the offset name or genuinely absent — the map itself
+(`.scratch/libcmt_map_u.json`, 233 entries) contains all seven VAs, so the loss
+is in `split_coff.py`'s member selection, not in the map.
+
+Game-code inventory coverage is complete: of 543 inventory functions, 275 are
+untracked, 255 of them library-marked (54,966 B) and 20 not (1,721 B) — and
+those 20 are rizin switch-case fragments (`case.0x1000ad61.*`, 18 x 32 B) plus
+`fcn.10022ff1`/`fcn.1001e7dc`/`fcn.1002350a`, i.e. a discoverer artifact, not
+missing work.  Inter-function gaps in `.text` total 1,028 B in 96 runs
+(alignment padding).
