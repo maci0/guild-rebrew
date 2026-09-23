@@ -38632,3 +38632,19 @@ Tried and rejected: two independent `if`s, `else if`, nested
 The known-value jump threading is not defeatable from the source at /O2; treat
 "second test of a value already compared in the same block-chain" as a wall
 unless a receiver spelling is found.
+
+Round 181 wall 2 (recorded, file reverted): GOLDTL 0x4e27b0 (219B) — three
+`fcn_00508e40` lookups off `a1+0x34`, `a1+0x38` and `p+0x5c`, an early
+`fcn_004c57e0(*(int*)(q+4), 1)` + `return 0` when the third lookup is missing or
+`byte[r+2] == 0xf`, then a `byte[p+2]` 6/7 gate, `fcn_0051af00(buf, 0x11c1)`,
+an inline `strcpy(buf + 8, *(char**) 0x14a9a28)` and
+`fcn_004e6240(p, a1, buf + 0xc, 0x6b5c60)`.  Fully decoded and the frame is
+`sub esp,0x204` with the buffer at `[esp+0x14]` (the 4-byte gap is real, spell
+the buffer `char buf[0x204]` and index it +4/+0xc/+0x10), but the register
+allocation will not line up: the reference keeps `a1` in **ebp**, `p` in ebx and
+`q` in esi (`push ebx; push ebp; push esi`), ours keeps `a1` in ebx, `p` in esi
+and `q` in edi (`push ebx; push esi; push edi`).  Same instruction stream
+otherwise (78 vs 82 instructions, 208 vs 219 bytes).  Tried: `char buf[0x204]`
++ index shift (fixed the frame, not the registers) and a `void* a = a1;` alias
+declaration (folded away, no change).  Register-colouring wall of the same class
+as the round-173/177 blocked list.
