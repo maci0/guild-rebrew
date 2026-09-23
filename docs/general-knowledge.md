@@ -451,9 +451,22 @@ Three independent measurements, all agreeing:
    - All eight plain VC6 code generators emit `test ah,0x40` + `test ah,0x01`
      + `test ah,0x41`, and **never** `0x44`/`0x05` — under all nine flag sets.
    The idiom is therefore a code-generator signature, not a flag artefact.
-   In the shipped `.text`: SERVER has 0 sites of the pp-only pair (and 1 of the
-   plain `0x40`); GOLDTL 1011, GOLD 841 (≈426-440 per MB; SERVER's expected
-   count at that density would be ~60).
+   **The `test ah,X` only counts as a compare idiom when `fnstsw ax` precedes
+   it** (`df e0 f6 c4 XX`): a bare `f6 c4 40` is usually the integer
+   strength-reduction `test eax,0x4000` -> `test ah,0x40`, which both
+   generators emit.  Counting properly, in the shipped `.text`:
+
+   | binary | fnstsw+0x44 | fnstsw+0x05 | fnstsw+0x40 | fnstsw+0x01 |
+   |--------|-------------|-------------|-------------|-------------|
+   | SERVER | 0 | 0 | 0 | 10 (game fns) |
+   | GOLDTL | 200 | 801 | 0 | 22 (**all** 22 inside the D3DX8 static-lib band `0x5e0000-0x64ffff`) |
+   | GOLD | 115 | 719 | 0 | 0 |
+
+   So the clients' game code carries 1001 / 834 pp-idiom compares and not one
+   plain one; the server is the mirror image; the server's own plain compares
+   (`fnstsw+0x01`) sit in the very functions the reproduction matrix below
+   shows compile correctly only under the plain generator.  GOLDTL's 22 plain
+   sites are Microsoft-built D3DX8 objects, not game source.
 
 3. **Byte-reproduction matrix** (same file, same CFLAGS, only `--toolchain`
    varies; all four rows are matched functions that contain an FP compare):
@@ -467,6 +480,13 @@ Three independent measurements, all agreeing:
 
    Client bytes are reproduced **only** by the Processor Pack generator; server
    bytes **only** by the plain generators.
+
+   This does NOT mean every client function needs the pp generator: a 14-file
+   sweep of matched GOLDTL functions (round 1379b) gives 11/14 byte-identical
+   under all three generators (no FP compare to rewrite), 3/14 pp-only
+   (`0x459940`, `0x4fffb0`, `0x492990`), and **0/14 plain-only**.  Five client
+   functions now tested where the generator matters, all pp-only; no
+   counterexample exists in either direction.
 
 Consequences:
 

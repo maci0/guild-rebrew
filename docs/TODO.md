@@ -35787,3 +35787,26 @@ VC6 Processor Pack code generator, the server a plain one.  SP5 vs SP6 output
 is byte-identical for the functions measured, so the server pins only to
 "plain VC6", not to a service pack.  No game-repo source change; the
 `rebrew-project.toml` comment and docs were corrected.
+
+### Round 1379b — "do the clients really need the Processor Pack?" — yes, with scope
+
+Follow-up to round 1379.  Two corrections/additions:
+
+1. **Counting slip in 1379.** A bare `f6 c4 40` is not a float compare: MSVC
+   emits `test ah,0x40` as the strength-reduced form of the integer
+   `test eax,0x4000`.  The compare idiom must be matched as `df e0 f6 c4 XX`
+   (`fnstsw ax` first).  Recounted: SERVER `fnstsw+{0x44,0x05,0x40}` = 0/0/0
+   and `fnstsw+0x01` = 10; GOLDTL 200/801/0, `0x01` = 22; GOLD 115/719/0,
+   `0x01` = 0.  All 22 of GOLDTL's plain `fnstsw+0x01` sites are inside the
+   D3DX8 static-lib band (Microsoft-built), none in game code.
+2. **Sweep, not anecdotes.** 14 matched GOLDTL functions compiled with
+   `--toolchain` sp5-pp / sp6 / sp5: 11 match under all three (generator does
+   not touch them), 3 match only under sp5-pp (0x459940, 0x4fffb0, 0x492990),
+   0 match only under the plain generators.  With the 4-row matrix from 1379
+   that is 5/5 pp-only among generator-sensitive client functions and zero
+   counterexamples.
+
+Answer to the challenge: the clients are not *uniformly* pp-only in the sense
+that every function reproduces only under pp - most are generator-insensitive.
+But wherever the generator matters, the client bytes are pp and never plain,
+and the server is the exact mirror.  No game-repo change.
