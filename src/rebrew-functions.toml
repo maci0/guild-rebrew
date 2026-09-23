@@ -9788,3 +9788,15 @@ size = 320
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T17:48:07+00:00"
+
+["GOLDTL.0x004fa160"]
+size = 208
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T18:03:29+00:00"
+
+["GOLD.0x004f7d70"]
+size = 208
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T18:03:30+00:00"
