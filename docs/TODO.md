@@ -37132,3 +37132,42 @@ New globals registered: `0x6b8010`, `0x10432c0`, `0x6b5c20`, `0x67536c`
 
 GOLDTL **674 → 680** byte-matched (230 EXACT, 450 RELOC); GOLD unchanged at 300;
 server unchanged at 264.  Lint 1149 files / 0 warnings.
+
+### Round 1421 — GOLDTL +1 (681), and three near-misses worth keeping
+
+`fcn_004032b0` closed (68B): walk `g_14d0020[0..0x300]`, break on the first
+element whose field-0x34 predicate returns 0, otherwise return 0.
+
+**Rule found:** the post-loop bound test takes its branch polarity from the
+*if* the source writes.  `if (i >= 0x300) return 0; return g_14d0020[i];`
+compiled to `jl` over a duplicated return-0 block; the inverted spelling
+
+```c
+	if (i < 0x300) {
+		return g_14d0020[i];
+	}
+	return 0;
+```
+
+gives the reference's `jge` into the shared return-0 block (56/73 -> 68/68).
+Same bytes, different statement order — the if-polarity decides the block
+layout.
+
+**Three near-misses, each down to a handful of bytes**, deleted rather than
+parked.  They are the cheapest candidates left in the `start-function` lane:
+
+* `fcn_004050c0` (0x4050c0, 112B) — 98/110.  Both `memset(e, 0, 0x194)` calls
+  are `b9 65000000 / 33 c0 / f3 ab` in the reference; the second one comes out
+  `33 c0 / b9 65000000 / f3 ab` here.  The count load and the fill-value clear
+  swap because of what is live in `ecx` on the fall-through path.
+* `fcn_00403200` (0x403200, 112B) — 66/112.  The reference's search loop tests
+  the bound at the top (`cmp esi,0x300 / jge`) and the loaded element at the
+  bottom (`mov eax,[esi*4+base+4] / inc esi / test / jne`); every spelling
+  tried (`while (a && b)`, `while (a) { if (…) break; }`, compound condition)
+  emits the element test first.
+* `fcn_00404560` (0x404560, 89B) — 63/95.  The reference accumulates all four
+  calls' arguments and cleans `add esp,0x20` once at the end; this
+  compiler cleans `add esp,0x14` after the second call and rebuilds.
+
+GOLDTL **680 → 681** byte-matched; GOLD unchanged at 300; server unchanged at
+264.  Lint 1150 files / 0 warnings.

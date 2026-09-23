@@ -8703,3 +8703,9 @@ size = 136
 status = "RELOC"
 updated_by = "test"
 updated_at = "2026-09-23T10:00:01+00:00"
+
+["GOLDTL.0x004032b0"]
+size = 80
+status = "RELOC"
+updated_by = "test"
+updated_at = "2026-09-23T10:01:56+00:00"
