@@ -4324,3 +4324,15 @@ section = ".data"
 
 ["GOLD.0x0091aaf0"]
 section = ".data"
+
+["GOLDTL.0x0068cfc0"]
+section = ".data"
+
+["GOLD.0x0060e340"]
+section = ".text"
+
+["GOLDTL.0x0068cfec"]
+section = ".data"
+
+["GOLD.0x0060e36c"]
+section = ".text"
