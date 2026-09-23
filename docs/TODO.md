@@ -39137,3 +39137,35 @@ marked function**: with them at the top of the file `rebrew test` associates the
 marker with the first C definition (the callee) and reports `Output (60B)` for a 278-byte
 target.  The working 270-byte source is parked in `.scratch/t15_fcn_004ae3c0.c` (not
 committed).
+
+## Handover — delegation loop (rounds 197-230)
+
+State at round 230: **GOLDTL 819 / GOLD 340 byte-matched** (server 264, untouched
+this stretch); lint 0 warnings.  Wins this stretch: 0x5b24b0+0x5a9030, 0x4ec660+
+0x4ea8e0, 0x5dd4e0(walled), 0x4ea560+0x4e87e0, 0x4b6f00-family (0x4b6ce0,
+0x4b6b10, 0x4b6ef0), 0x4b6bf0, 0x4b6fe0, 0x4f5110+0x4f2fe0, 0x4f5ab0, 0x4f5300,
+0x4f7890+0x4f54a0, 0x4f7970+0x4f5580, 0x4f7cd0+0x4f58e0, 0x4f7da0+0x4f59b0,
+0x4af2f0+0x4af1b0, 0x4af1d0+0x4af090, 0x4af400+0x4af2c0, 0x4afa10+0x4af8d0,
+0x4e1ea0+0x4e0580, 0x496ca0+0x4972c0, 0x4ce740+0x4cdb80, 0x4da510 (GOLDTL only),
+plus the 0x4ae130 TU merge.
+
+What works, in order:
+1. **One budgeted task per open `fcn_0051af00` caller.**  The team is at the
+   8-member limit, so cold-resume `reverser2` with `send_message`; do not spawn.
+   Every task on the board (task-1…task-18) follows the same template: claim,
+   ≤10 `rebrew test` runs with a status line after each, success = commit source
+   + metadata at RELOC/EXACT, failure = delete source + `git checkout --`
+   `src/rebrew-functions.toml` + a `Round <n> wall: 0x…` paragraph in this file.
+2. **Verify as Lead, never trust the report**: re-run `rebrew test` for *both*
+   targets, `rebrew lint --json`, and `git show --stat` on the commit.
+3. **Time-box at 3 runs** on the known wall classes: folded `return 0` epilogue
+   (0x4ae2a0, 0x4ae3c0), callee-saved colour swap (0x4e04f0, 0x4f7a50), slot
+   inversion (0x4af050), tautological-guard fold (0x4f7bf0).
+4. Levers that have closed real functions are listed in each round note above
+   and in `docs/msvc6-c-shapes.md` §180-185.
+
+Next targets (open `fcn_0051af00` callers, no wall note yet): 0x4ce740 done;
+0x4f75f0, 0x4f77b0, 0x4f7890-adjacent are done/walled; remaining include
+0x4b6f00-family leftovers (0x4b6740, 0x4b6a00, 0x4b6af0 — colour wall),
+0x4ba2e0, 0x4bb540, 0x4baf60, 0x4b8410, 0x4b8550, 0x4b7800, 0x4b6dc0,
+0x4e27b0 (colour wall), 0x4f7210, 0x4f7310, 0x4f5ab0-adjacent, 0x4da510 done.
