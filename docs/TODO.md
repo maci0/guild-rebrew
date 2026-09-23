@@ -38765,3 +38765,25 @@ symbol" case:
 
 GOLDTL unchanged at 806, GOLD 328 → 329; server unchanged at 264.  Lint 1275
 files / 0 warnings.
+
+Round 187 (negative result, no source change): built `.scratch/dupbodies.py`,
+which capstone-disassembles every GOLDTL inventory function, normalises each to
+`mnemonic + operands with every 0x… token replaced by I`, and hashes it to find
+*intra-binary* duplicates of already-reversed functions — the same trick that
+found 0x4b6ce0 == 0x4b6f00.  It reports 813 reversed VAs / 654 distinct bodies
+and 66 raw hits, of which 6 have equal inventory sizes:
+
+| candidate | source file | test |
+|-----------|-------------|------|
+| 0x40df00, 0x40e110 | GOLDTL.fcn_0040c740.c | SIZE_MISMATCH 37/57 |
+| 0x40ffd0 | GOLDTL.cm_ExKillSpieler.c | NEAR 63/65 |
+| 0x42def0 | GOLDTL.fcn_0042df30.c | NEAR 38/49 |
+| 0x4f13d0 | GOLDTL.cm_GetBuildingStatCount.c | NEAR 120/125 |
+| 0x57ec70 | GOLDTL.fcn_0057ec20.c | NEAR 72/73 |
+
+All reverted.  Conclusion: normalising **away** the addresses is too loose —
+the 0x4b6ce0 win worked because its only differences were `call` rel32
+relocation slots (masked by RELOC), while these bodies carry absolute addresses
+that are compared verbatim.  A useful next filter is *byte* comparison with the
+`e8`/`e9` displacement fields masked: only pairs whose differences all fall in
+4-byte call/push-immediate fields can be shared by adding a marker.
