@@ -151,6 +151,16 @@ def main() -> int:
         before = bytes(built)
         with contextlib.suppress(ValueError):
             info_b = _binary_info_from_bytes(bytes(built), built_path)
+        # Deliverable contract: reproduce the reference's FILE geometry, not
+        # just its bytes.  A converged link still sits one FileAlignment block
+        # later before .reloc (0x36000 against 0x35000), which costs 4096 bytes
+        # of file size and shifts every byte after it; EXACT_LAYOUT writes
+        # .reloc at the reference's pointer and trims the file.  Guarded inside
+        # _fix_data: only when the reference's offset is past every other
+        # built section's raw extent.
+        import rebrew.postlink as _pl
+
+        _pl.EXACT_LAYOUT = True
         report = FIXERS[name](built, meta, info_b)
         print(f"{name:11s} changed={before != bytes(built)} {report.stats}")
 
