@@ -36016,8 +36016,13 @@ shapes 91 (gm_FindNextFilteredEntity: "two early jcc 12 vs 4 = -8, extra3 arm
   -1, ls_LoadBuildingEntityState -3, gm_FindNextFilteredEntity -4,
   cm_ExCopyEntityData -7 — each opens on a `jcc` whose rel8/rel32 width is
   forced by the stub's position.
-- **Real body deltas** (worth working): vfs_OpenStream +34 (object 701 against
-  667) and gm_AllocGebaeude -10 (1078 against 1088).
+- **Real body deltas** (worth working): gm_AllocGebaeude -10 (1078 against
+  1088), and vfs_OpenStream +34 (701 against 667) — but check the file's own
+  entry first: its first cluster (`mov al,[eax]; test al,al` against the
+  reference's `cmp byte [eax],0`) is the `current_char` local, and shapes 52's
+  amendment records that dropping it fixes the entry test byte-exact while
+  recoloring the switch body into ~40 hunks at **linked +194**.  So the +34 is
+  not free either; probe its later clusters instead.
 
 Everything else about the objective is unchanged: 264/283 byte-matched, residue
 11735, all of it inside the 19 carriers (round 1382 ledger).
