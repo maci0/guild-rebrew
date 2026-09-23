@@ -37809,3 +37809,32 @@ Three such cases now (0x5dd050 `pop` placement, 0x4fa530 `r` in `eax`, here `esi
 for a parameter) — the reference build places register saves/restores and picks
 callee-saved registers differently in some TUs, and no source spelling we can write
 moves our CL.
+
+## Round 142 — GOLDTL table-walk twins with a ternary tag (+2 = 783)
+
+`fcn_005b2560` / `fcn_005b2620` (0x5b2560, 0x5b2620, 180B each) are twins: a 0x200
+buffer, `t = *(char*)(a2+2)`, `t == 6 || t == 7`, then
+
+```c
+fcn_0051af00(buf, fcn_0042e410(3) + 0x1340, *(unsigned short*) a1);
+fcn_0051af00(g_774a80, 0x1339, *(unsigned short*) a1,
+    fcn_0042e410(3) + (*(char*) ((char*) a2 + 9) != 0 ? 0x133d : 0x133a),
+    *(unsigned short*) a2, buf);
+fcn_00545d40(*(int*) ((char*) a2 + 4), -1, g_774a80, 1, 0x5ec, 0);
+```
+
+Codegen rule (cost one round's 51 mismatched bytes): write the tag as a
+**two-constant ternary** `base + (cond ? base+3 : base)`.  Spelling it
+`base + (cond ? 3 : 0) + 0x133a` makes MSVC fold the sum into
+`lea edx,[eax+ecx+0x133a]`, while the reference emits `and ecx,3; add ecx,0x133a;
+add eax,ecx`.  The two forms are the same arithmetic and differ only in the
+scheduler's folded-address mode.
+
+The twins differ only in three constants (0x1340/0x134a, 0x133a/0x1344,
+0x1339/0x1343).
+
+`fcn_005b23e0` (0x5b23e0, 201B) was dropped: the reference loads all three
+parameters into callee-saved registers in the prologue (`push ebx; push esi;
+mov esi,[esp+0x14]; mov ebx,[esp+0xc]; push edi; mov edi,[esp+0x14]`) while every
+source shape we tried keeps `a2` in `esi` and rematerialises `a1`/`a3` inside the
+branch — the same allocator divergence as 0x4fa530/0x4ea4b0.
