@@ -38892,3 +38892,82 @@ the roles flipped the remaining difference is a rotation of the caller-saved
 trio: ours {string, buf2} = `ecx`, id = `edx`, buf1 = `eax`; the reference has
 `eax`, `ecx`, `edx` respectively — the same exchange class as allocator Findings
 53/62, and `rebrew match` GA found no exact solution in a 25-minute run.
+
+## Round 202 wall: 0x4f7bf0
+
+GOLDTL 0x4f7bf0 is `int __cdecl fcn_004f7bf0(void* a1, void* a2)`.  The
+inventory size 224 is padded: the body is 216 bytes (the image ends 8 bytes
+before the next function at 0x4f7cd0).  The GOLD twin is at 0x4f5800 (216
+bytes, byte-identical stream; per-target data 0x770ce6 / 0x7d60e6, string
+0x5f8318), so the same wall applies to both.
+
+Decoded call sequence and arguments:
+
+1. `if (*(int*) a2 != 3 && *(int*) a2 != 1) return 1;`
+2. `if (*(unsigned char*) ((char*) a1 + 0xd) < 5) return 1;`
+3. table scan of the 0x300-entry, 0x21c-stride array whose word field sits at
+   0x7f4ca0 (`g_7f4ca0`, owned by `src/GOLDTL.fcn_004cef70.c`) and whose byte
+   field sits at 0x7f4e06 = `g_7f4ca0 + 0x166`:
+
+   ```c
+   for (i = 0, p = g_7f4ca0 + 0x166;
+        (int) p < (int) (g_7f4ca0 + 0x166 + 0x65400);
+        p += 0x21c, i++) {
+       if (*(unsigned short*) (p - 0x166) == 0xffff) continue;
+       if (*(unsigned char*) p == 0x12 || *(unsigned char*) p <= 0x15) break;
+   }
+   ```
+   (writing the base as `g_7f4ca0 + 0x166` folds both the start 0x7f4e06 and
+   the bound 0x85a206 into single immediates, per `msvc6-c-shapes.md` §184)
+4. `if (*(int*) ((char*) a1 + 0x5c) == -1) return 1;`
+   `if (i >= 0x300) return 1;`
+5. `e = fcn_00508e40(*(int*) ((char*) a1 + 0x5c)); if (e == 0) return 1;`
+   `if (*(char*) (e + 8) == 0) return 1;`
+6. `if (*(int*) a2 == 3) return fcn_005d52d0(a1, a2);`
+   `else if (*(int*) a2 == 1 && *(char*) ((char*) a1 + 2) == 6)`
+   `fcn_0051af00((char*) a2 + 0x14, (int) g_679060, 0x1d8e);`
+   `return 2;`
+
+Best score **215/216, NEAR_MATCHING**, object size exactly 216, six masked
+relocations; the only residue is **one opcode byte at offset 67**: the target
+has `75` (`jne`), our object `74` (`je`).
+
+Residual diagnosis.  The reference's loop keeps a *redundant* byte compare:
+
+```
+004f7c2e  8a08          mov cl, [eax]
+004f7c30  80f912        cmp cl, 0x12
+004f7c33  7512          jne 0x4f7c47        <- both branches share the target
+004f7c35  80f915        cmp cl, 0x15
+004f7c38  760d          jbe 0x4f7c47
+```
+
+Both jumps leave the loop, so the source condition can only have been
+`B != 0x12 || B <= 0x15` — a tautology for a byte.  MSVC6's equality-based
+range propagation does not preserve it: the false branch of `B != 0x12` pins
+`B == 0x12`, so `B <= 0x15` becomes unconditional and the whole guard collapses
+to the word test (object 208B, register roles esi/edi/ecx/edx).  Verified with
+msvc-6.0, sp1-sp6, sp5-pp, 5.0 (all 208B) and the flag axes `/O2 /Ox /O1 /Os
+/Ot /Od /Og- /Oa /Ob0 /Ob1 /Oi- /Op /Ow /J /TP /ML /MT /G3../G6 /GA../Gv /Zp*`
+— every one folds.  MSVC 4.2 *does* keep both compares (its range pass is
+weaker) but produces a wholly different function (243B, push ebx/esi/edi/ebp,
+counter in ebx), so it is not the producer of this binary.
+
+The one spelling that survives — `if (B == 0x12 || B <= 0x15) break;`
+(the first operand's false branch does not pin the byte) — reproduces the
+reference instruction-for-instruction: 93 instructions, 216 bytes, roles
+ebx=a1 / edi=a2 / edx=i / eax=p / ecx=byte temp.  Its first branch is taken on
+TRUE (`je`, 0x74); the reference takes it on FALSE (`jne`, 0x75).  ~40 spellings
+that emit `jne` there all fold the second compare: two separate `if`s, `||` with
+`!=` first, `!(A && B)`, `goto` with one or two labels, empty-then/`else`,
+`switch` with `default: goto out`, empty `__asm {}` barrier, cached and
+address-taken locals, pointer aliases, and masks/casts/`u`/`L` suffixes on
+either operand.  Two near-misses: `if (B & 0x12) ...` keeps the pair but emits
+`test cl,0x12` (224B), and the reversed source order `if (B <= 0x15) break; if
+(B != 0x12) break;` keeps `jbe`+`jne` but in the wrong order (224B).  This is
+the same class as the round-201 0x4e04f0 wall: the instruction stream is exact
+and the residue is a compiler-version artifact, not a misspelled source.
+
+Files: `src/GOLDTL.fcn_004f7bf0.c` deleted, `src/rebrew-functions.toml`
+restored to HEAD (its only working-tree change was the SIZE/NEAR_MATCHING hunk
+this round persisted).
